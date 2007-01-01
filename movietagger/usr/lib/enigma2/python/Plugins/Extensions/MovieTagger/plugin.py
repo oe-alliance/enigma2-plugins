@@ -3,9 +3,7 @@
 # 3c5x9, 3c5x9@gmx.de
 
 from enigma import *
-from skin import parseColor
 from Plugins.Plugin import PluginDescriptor
-from ServiceReference import ServiceReference
 from Screens.Screen import Screen
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -15,7 +13,7 @@ from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.GUIComponent import GUIComponent
 from Components.HTMLComponent import HTMLComponent
-from Components.MultiContent import RT_HALIGN_LEFT, MultiContentEntryText,MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
+from Components.MultiContent import RT_HALIGN_LEFT, MultiContentEntryText
 from enigma import eListboxPythonMultiContent
 
 from Tools.Directories import *
@@ -35,7 +33,6 @@ class MovieTagger(Screen):
 	pretagfile = "/etc/enigma2/movietags"
     
 	def __init__(self, session, service):
-		print "dont send this chrashlog to DMM, if you see this text in a chrashlog :-)"
 		self.session = session
 		self.service = service
 		self.serviceHandler = eServiceCenter.getInstance()
@@ -101,18 +98,16 @@ class MovieTagger(Screen):
 				e.append(i)
 		
 		taglist = []
-		bluePicture = loadPNG(plugin_path+"/blue.png")
-		redPicture = loadPNG(plugin_path+"/red.png")
-		yellowPicture = loadPNG(plugin_path+"/yellow.png")
 		for i in e:
 				res = [ i ]
-				res.append(MultiContentEntryText(pos=(5, 5), size=(500, 25), font=0, text=i))
+				res.append(MultiContentEntryText(pos=(5, 0), size=(500, 25), font=0, text=i))
 				if self.isUsedTag(i):
-					res.append(MultiContentEntryPixmap(pos=(160, 5),size=(61, 86), png=  yellowPicture))
-				if self.isPreTag(i):
-					res.append(MultiContentEntryPixmap(pos=(240, 5),size=(61, 86), png=  bluePicture))
+					res.append(MultiContentEntryText(pos=(220, 0),size=(61, 86), font=1,text="X",color=0x00FFFF00))
 				if self.isUserTag(i) :
-					res.append(MultiContentEntryPixmap(pos=(200, 5),size=(61, 86), png=  redPicture))
+					res.append(MultiContentEntryText(pos=(240, 0),size=(61, 86), font=1,text="X",color=0x00FF0000))#red
+				if self.isPreTag(i):
+					res.append(MultiContentEntryText(pos=(260, 0),size=(61, 86), font=1,text="X",color=0x000000FF))#blue
+				
 				taglist.append(res)
 			
 		taglist.sort()
@@ -281,6 +276,7 @@ class TagMenuList(MenuList, HTMLComponent, GUIComponent):
         self.list = list
         self.l.setList(list)
         self.l.setFont(0, gFont("Regular", 20))
+        self.l.setFont(1, gFont("Regular", 25))
         
     GUI_WIDGET = eListbox
 
@@ -289,9 +285,11 @@ class TagMenuList(MenuList, HTMLComponent, GUIComponent):
         instance.setItemHeight(25)
 		
 def main(session, service, **kwargs):
-	session.open(MovieTagger, service)
-
+	try:
+		session.open(MovieTagger, service)
+	except Exception,e:
+		print "dont send this chrashlog to DMM, if you see this text in a chrashlog :-)"
+		raise e
+	
 def Plugins(path,**kwargs):
-	global plugin_path
-	plugin_path = path
  	return PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
