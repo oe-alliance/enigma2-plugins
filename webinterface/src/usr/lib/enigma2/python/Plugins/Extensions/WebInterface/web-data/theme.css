@@ -1,0 +1,30 @@
+body { background-color:#445566; color:#FFCC99; }
+a:link { color:#FF9966; }
+a:visited { color:#FF9900; }
+a:active { color:#FFFFFF; }
+
+	/* allow room for 3 columns */
+ol
+{
+	width: 45em;
+}
+
+	/* float and allow room for the widest item */
+ol li
+{
+	float: left;
+	width: 15em;
+}
+
+/* stop the float */
+br
+{
+	clear: left;
+}
+
+	/* separate the list from subsequent markup */
+div.wrapper
+{
+	margin-bottom: 1em;
+}
+
