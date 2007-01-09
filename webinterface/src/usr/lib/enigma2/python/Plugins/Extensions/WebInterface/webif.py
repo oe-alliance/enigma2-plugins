@@ -15,14 +15,12 @@ from Tools.Import import my_import
 from Screens.InfoBarGenerics import InfoBarServiceName, InfoBarEvent, InfoBarTuner
 
 from Components.Sources.Clock import Clock
-#from Components.Sources.Config import Config
 from Components.Sources.ServiceList import ServiceList
 from Components.Sources.Volume import Volume
 from Components.Sources.EPG import EPG
 from Components.Sources.FrontendStatus import FrontendStatus
 
 from Components.Converter.Converter import Converter
-#from Components.config import config
 from Components.Converter.VolumeToText import VolumeToText 
 from Components.Converter.EPGToText import EPGToText 
 
@@ -66,11 +64,22 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen,Volume
 	def zapTo(self, reftozap):
 		self.session.nav.playService(reftozap)
 
+# TODO: (really.) put screens into own files.
 class Streaming(WebScreen):
 	def __init__(self, session):
 		WebScreen.__init__(self, session)
 		from Components.Sources.StreamService import StreamService
 		self["StreamService"] = StreamService(self.session.nav)
+
+class StreamingM3U(WebScreen):
+	def __init__(self, session):
+		WebScreen.__init__(self, session)
+		from Components.Sources.StaticText import StaticText
+		from Components.Sources.Config import Config
+		from Components.config import config
+		
+		self["ref"] = StaticText()
+		self["localip"] = Config(config.network.ip)
 
 # implements the 'render'-call.
 # this will act as a downstream_element, like a renderer.
