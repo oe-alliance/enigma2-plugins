@@ -12,12 +12,20 @@ from Screens.Screen import Screen
 from Tools.Import import my_import
 
 # for our testscreen
-from Screens.InfoBarGenerics import InfoBarServiceName, InfoBarEvent
+from Screens.InfoBarGenerics import InfoBarServiceName, InfoBarEvent, InfoBarTuner
+
 from Components.Sources.Clock import Clock
 #from Components.Sources.Config import Config
 from Components.Sources.ServiceList import ServiceList
+from Components.Sources.Volume import Volume
+from Components.Sources.EPG import EPG
+from Components.Sources.FrontendStatus import FrontendStatus
+
 from Components.Converter.Converter import Converter
 #from Components.config import config
+from Components.Converter.VolumeToText import VolumeToText 
+from Components.Converter.EPGToText import EPGToText 
+
 from Components.Element import Element
 
 from xml.sax import make_parser
@@ -34,19 +42,23 @@ class WebScreen(Screen):
 		self.stand_alone = True
 
 # a test screen
-class TestScreen(InfoBarServiceName, InfoBarEvent, WebScreen):
+class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen,Volume):
 	def __init__(self, session):
 		WebScreen.__init__(self, session)
 		InfoBarServiceName.__init__(self)
 		InfoBarEvent.__init__(self)
+		InfoBarTuner.__init__(self)
+		Volume.__init__(self,session);
 		self["CurrentTime"] = Clock()
 #		self["TVSystem"] = Config(config.av.tvsystem)
 #		self["OSDLanguage"] = Config(config.osd.language)
 #		self["FirstRun"] = Config(config.misc.firstrun)
 		from enigma import eServiceReference
-		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet')
-		self["ServiceList"] = ServiceList(fav, command_func = self.zapTo)
+		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
+		self["ServiceList"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
 		self["ServiceListBrowse"] = ServiceList(fav, command_func = self.browseTo)
+		self["Volume"] = Volume(session)
+		self["EPG"] = EPG(session)
 
 	def browseTo(self, reftobrowse):
 		self["ServiceListBrowse"].root = reftobrowse
