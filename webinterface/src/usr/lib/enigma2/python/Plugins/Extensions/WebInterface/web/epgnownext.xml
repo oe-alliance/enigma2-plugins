@@ -1,0 +1,1 @@
+<e2:screen name="TestScreen"><e2:element source="EPG" id="serviceRef"><e2:convert type="EPGToText">nownext</e2:convert></e2:element></e2:screen>

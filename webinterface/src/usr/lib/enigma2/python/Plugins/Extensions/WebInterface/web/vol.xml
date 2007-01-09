@@ -1,0 +1,5 @@
+<e2:screen name="TestScreen">
+<e2:element source="Volume" id="set">
+<e2:convert type="VolumeToText">CurrentVolume</e2:convert>
+</e2:element>
+</e2:screen>
