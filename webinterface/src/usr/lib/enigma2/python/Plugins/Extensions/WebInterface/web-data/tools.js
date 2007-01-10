@@ -385,9 +385,9 @@ function handleVolumeRequest(){
 						listerHtml += '</div></td>';
 						listerHtml += '<td><a onclick=\"new EPGList().getByServiceReference(this.id,$(\'BodyEPGPanel\'));setBodyMainContent(\'BodyEPGPanel\');\" id="';
 						listerHtml += x[i];
-				  		listerHtml += '" >EPG</div><div><a target=\"blank" href=\"stream.m3u?ref=';
+				  		listerHtml += '" >EPG</div><div><a href=\"stream.m3u?ref=';
 						listerHtml += x[i];
-				  		listerHtml += '\">s</a></div></td>';
+				  		listerHtml += '\">Stream</a></div></td>';
 						listerHtml += '</tr>';
 					}
 				}
