@@ -314,13 +314,18 @@ function handleVolumeRequest(){
 		
 	}
 	function incomingResult(){
-		if (t.readyState == 4) {
+		if((t.readyState == 4) && (t.status == 200)) {
     	// perfekt!
-			result = t.responseText;
-			x = result.split("\n");
+			var r = t.responseXML;
+			
+			var b = r.getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
+
 			bouquets = new Array();
-			for ( var i = 0 ; i < x.length ; i=i+2 ){
-				bu = new Array(x[i+1 ],x[i]);
+			for ( var i=0; i < b.length; i++){
+				bRef = b.item(i).getElementsByTagName('e2servicereference').item(0).firstChild.data;
+				bName = b.item(i).getElementsByTagName('e2servicename').item(0).firstChild.data;
+				
+				bu = new Array(bName,bRef);
 				bouquets.push(bu)
 			}
 			refreshSelect(bouquets);
@@ -370,26 +375,25 @@ function handleVolumeRequest(){
 		function incomingChannellist(){
 			if (w.readyState == 4) {
     		// alles in Ordnung, Antwort wurde empfangen
-				result = w.responseText;
-				x = result.split("\n");
-				
-				
+			if (w.responseXML != "no data"){	
+				var services = w.responseXML.getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
 				listerHtml = "<table id=\"ChannelSelect\" >";
-				for ( var i = 0 ; i < x.length ; i=i+2 ){
-					if(x[i].length>=1 && x[i+1]){
-						
-						listerHtml += '<tr bgcolor="gray"><td><div onclick=\"zap(this)\" id="';
-						listerHtml += x[i];
-				  		listerHtml += '">';
-						listerHtml += x[i+1];
-						listerHtml += '</div></td>';
-						listerHtml += '<td><a onclick=\"new EPGList().getByServiceReference(this.id,$(\'BodyEPGPanel\'));setBodyMainContent(\'BodyEPGPanel\');\" id="';
-						listerHtml += x[i];
-				  		listerHtml += '" >EPG</div><div><a href=\"stream.m3u?ref=';
-						listerHtml += x[i];
-				  		listerHtml += '\">Stream</a></div></td>';
-						listerHtml += '</tr>';
-					}
+			
+				for ( var i = 0; i < (services.length ); i++){
+					sRef = services.item(i).getElementsByTagName('e2servicereference').item(0).firstChild.data;
+					sName = services.item(i).getElementsByTagName('e2servicename').item(0).firstChild.data;
+
+					listerHtml += '<tr bgcolor="gray"><td><div onclick=\"zap(this)\" id="';
+					listerHtml += sRef;
+					listerHtml += '">';
+					listerHtml += sName;
+					listerHtml += '</div></td>';
+					listerHtml += '<td><a onclick=\"new EPGList().getByServiceReference(this.id,$(\'BodyEPGPanel\'));setBodyMainContent(\'BodyEPGPanel\');\" id="';
+					listerHtml += sRef;
+					listerHtml += '" >EPG</div><div><a target=\"blank" href=\"stream.m3u?ref=';
+					listerHtml += sRef;
+					listerHtml += '\">Stream</a></div></td>';
+					listerHtml += '</tr>';
 				}
 				listerHtml += "</table>";
 				document.getElementById("BodyContentChannellist").innerHTML = listerHtml;
@@ -399,6 +403,7 @@ function handleVolumeRequest(){
     		// die Antwort war z.B. 404 (nicht gefunden)
     		// oder 500 (interner Server-Fehler)
 			}
+		}	
 			
 	}
 
