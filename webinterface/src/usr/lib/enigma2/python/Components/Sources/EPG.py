@@ -4,54 +4,66 @@ from Source import Source
 from ServiceReference import ServiceReference
 
 class EPG( Source):
-    def __init__(self, navcore):
-        Source.__init__(self)
+    NOWNEXT=0
+    SERVICE=1
+    TITLE=2
+    
+    def __init__(self, navcore,func=NOWNEXT):
+        self.func = func
+        Source.__init__(self)        
         self.navcore = navcore
         self.epgcache = eEPGCache.getInstance()
+        
     def handleCommand(self,cmd):
-        print "EPG.handleCommand %s" %cmd   
         self.command = cmd
 
-    def getEPGNowNext(self):
-        print "getting EPG of Service ",self.command
-        events = self.epgcache.lookupEvent(['IBDTSERN',(self.command,0,0,-1)]);
-        if events:
-                return self.convertToDictonary(events[:2])
+    def do_func(self):
+        if self.func is self.TITLE:
+            func = self.searchEvent
+        elif self.func is self.SERVICE:
+            func = self.getEPGofService
         else:
-                return False
+            func = self.getEPGNowNext
+            
+        return func(self.command)
     
-    def getEPGofService(self):
-        print "getting EPG of Service ",self.command
-        events = self.epgcache.lookupEvent(['IBDTSERN',(self.command,0,-1,-1)]);
+    def getEPGNowNext(self,cmd):
+        print "getting EPG NOWNEXT", cmd
+        events = self.epgcache.lookupEvent(['IBDTSERN',(cmd,0,0,-1)]);
         if events:
-                return self.convertToDictonary(events)
+                return self.convert(events)
         else:
-                return False
+                return []
     
-    def searchEvent(self):
-        print "searchEvent",self.command
-        events = self.epgcache.search(('IBDTSERN',1024,eEPGCache.PARTIAL_TITLE_SEARCH,self.command,1));
+    def getEPGofService(self,cmd):
+        print "getting EPG of Service", cmd
+        events = self.epgcache.lookupEvent(['IBDTSERN',(cmd,0,-1,-1)]);
         if events:
-            return self.convertToDictonary(events)
+                return self.convert(events) 
         else:
-            return False
-    def convertToDictonary(self,EventList):
-        result=[]
-        for x in EventList:
-            row = {}                        
-            row['EventID']=self.convertIfEmpty(x[0])
-            row['TimeStart']=self.convertIfEmpty(x[1])
-            row['Duration']=self.convertIfEmpty(x[2])
-            row['Title']=self.convertIfEmpty(x[3])
-            row['Description']=self.convertIfEmpty(x[4])
-            row['DescriptionExtended']=self.convertIfEmpty(x[5])
-            row['ServiceReference']=self.convertIfEmpty(x[6])
-            row['ServiceName']=self.convertIfEmpty(x[7])
-            result.append(row)                                    
-        return result
-    def convertIfEmpty(self,string):
-        if string == "":
-            return "N/A"
+                return []
+    
+    def searchEvent(self,cmd):
+        print "getting EPG by title",cmd
+        events = self.epgcache.search(('IBDTSERN',1024,eEPGCache.PARTIAL_TITLE_SEARCH,cmd,1));
+        if events:
+            
+            return self.convert(events)
         else:
-            return string.__str__()
-    epg = property(searchEvent,getEPGofService,getEPGNowNext)    
+            return []
+    
+    def convert(self,input):
+        #this is not nice, but ",',<,> and & are controlchars in xml and must be replaced
+        output = []
+        for i in input:
+            o = []
+            for key in i:
+                o.append(str(key).replace("<","&lt;").replace(">","&gt;").replace("&","&amp;").replace("\"","&quot;").replace("'","&apos;"))
+            output.append(o)
+            
+        return output
+    
+    list = property(do_func)
+    lut = {"EventID": 0, "TimeStart": 1,"Duration": 2, "Title": 3, "Description": 4, "DescriptionExtended": 5, "ServiceReference": 6, "ServiceName": 7}
+
+    

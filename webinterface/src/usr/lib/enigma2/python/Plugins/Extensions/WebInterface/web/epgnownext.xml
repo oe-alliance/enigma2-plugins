@@ -1,1 +1,14 @@
-<e2:screen name="TestScreen"><e2:element source="EPG" id="serviceRef"><e2:convert type="EPGToText">nownext</e2:convert></e2:element></e2:screen>
+<e2:screen name="TestScreen">&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;e2eventlist><e2:element source="EPGNOWNEXT" id="ref"><e2:convert type="web:ListFiller" >
+	&lt;e2event>
+		&lt;e2eventid><e2:item name="EventID" /> &lt;/e2eventid>
+		&lt;e2eventstart><e2:item name="TimeStart"/> &lt;/e2eventstart>
+		&lt;e2eventduration><e2:item name="Duration"/> &lt;/e2eventduration>
+		&lt;e2eventtitle><e2:item name="Title"/> &lt;/e2eventtitle>
+		&lt;e2eventdescription><e2:item name="Description"/> &lt;/e2eventdescription>
+		&lt;e2eventdescriptionextended><e2:item name="DescriptionExtended"/> &lt;/e2eventdescriptionextended>
+		&lt;e2eventservicereference><e2:item name="ServiceReference"/> &lt;/e2eventservicereference>
+		&lt;e2eventservicename><e2:item name="ServiceName"/> &lt;/e2eventservicename>
+	&lt;/e2event></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+&lt;/e2eventlist>
+</e2:screen>

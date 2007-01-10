@@ -4,9 +4,9 @@ var url_volumeup = '/web/vol?set=up';
 var url_volumedown = '/web/vol?set=down';
 var url_volumemute = '/web/vol?set=mute';
 
-var url_epgservice = "/web/epgservice?serviceRef="; // plus serviceRev
+var url_epgservice = "/web/epgservice?ref="; // plus serviceRev
 var url_epgsearch = "/web/epgsearch?search="; // plus serviceRev
-var url_epgnownext = "/web/epgnownext?serviceRef="; // plus serviceRev
+var url_epgnownext = "/web/epgnownext?ref="; // plus serviceRev
 
 function debug(text){
 	//$('debug').innerHTML += "DEBUG: "+text+"<br>";
@@ -126,14 +126,14 @@ EPGList.prototype = {
 		{
 			if (originalRequest.responseXML!="no data")
 			{
-				var EPGItems = originalRequest.responseXML.getElementsByTagName("EPGList").item(0).getElementsByTagName("EPGEvent");
-				debug("have "+EPGItems.length+" EPGEvents");
+				var EPGItems = originalRequest.responseXML.getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
+				debug("have "+EPGItems.length+" e2events");
 				epglist = new Array();
 				for(var i=0;i<EPGItems.length;i++)
-				{
+				{	
 					epglist.push(new EPGEvent(EPGItems.item(i)));
 				}
-					EPGList.prototype.renderTable(epglist);
+				EPGList.prototype.renderTable(epglist);
 				
 			}				
 		}
@@ -143,14 +143,14 @@ EPGList.prototype = {
 
 function EPGEvent(element){	
 	// parsing values from xml-element
-	this.eventID= element.getElementsByTagName('EventID').item(0).firstChild.data;
-	this.startTime= element.getElementsByTagName('TimeStart').item(0).firstChild.data;
-	this.duration= element.getElementsByTagName('Duration').item(0).firstChild.data;
-	this.title= element.getElementsByTagName('Title').item(0).firstChild.data;
-	this.description= element.getElementsByTagName('Description').item(0).firstChild.data;
-	this.descriptionE= element.getElementsByTagName('DescriptionExtended').item(0).firstChild.data;
-	this.serviceRef= element.getElementsByTagName('ServiceReference').item(0).firstChild.data;
-	this.serviceName= element.getElementsByTagName('ServiceName').item(0).firstChild.data;
+	this.eventID= element.getElementsByTagName('e2eventid').item(0).firstChild.data;
+	this.startTime= element.getElementsByTagName('e2eventstart').item(0).firstChild.data;
+	this.duration= element.getElementsByTagName('e2eventduration').item(0).firstChild.data;
+	this.title= element.getElementsByTagName('e2eventtitle').item(0).firstChild.data;
+	this.description= element.getElementsByTagName('e2eventdescription').item(0).firstChild.data;
+	this.descriptionE= element.getElementsByTagName('e2eventdescriptionextended').item(0).firstChild.data;
+	this.serviceRef= element.getElementsByTagName('e2eventservicereference').item(0).firstChild.data;
+	this.serviceName= element.getElementsByTagName('e2eventservicename').item(0).firstChild.data;
 
 	this.getEventId = function ()
 	{

@@ -31,7 +31,7 @@ from xml.sax.handler import ContentHandler, feature_namespaces
 from twisted.python import util
 import sys
 import time
-
+ 
 # prototype of the new web frontend template system.
 
 class WebScreen(Screen):
@@ -56,7 +56,9 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen,Volume
 		self["ServiceList"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
 		self["ServiceListBrowse"] = ServiceList(fav, command_func = self.browseTo)
 		self["Volume"] = Volume(session)
-		self["EPG"] = EPG(session)
+		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
+		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
+		self["EPGNOWNEXT"] = EPG(session,func=EPG.NOWNEXT)
 
 	def browseTo(self, reftobrowse):
 		self["ServiceListBrowse"].root = reftobrowse
