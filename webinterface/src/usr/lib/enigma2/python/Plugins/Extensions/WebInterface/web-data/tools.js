@@ -174,8 +174,8 @@ function EPGEvent(element){
 	{
 		var Wochentag = new Array("So", "Mo", "Di", "Mi", "Do", "Fr", "Sa");
 		var wday = Wochentag[this.getTimeStart().getDay()];
-		var day = this.getTimeStart().getDay();
-		var month = this.getTimeStart().getMonth();
+		var day = this.getTimeStart().getDate();
+		var month = this.getTimeStart().getMonth()+1;
 		var year = this.getTimeStart().getFullYear();
 		
 		return wday+".&nbsp;"+day+"."+month+"."+year;
