@@ -22,7 +22,6 @@ from Components.Sources.FrontendStatus import FrontendStatus
 
 from Components.Converter.Converter import Converter
 from Components.Converter.VolumeToText import VolumeToText 
-from Components.Converter.EPGToText import EPGToText 
 
 from Components.Element import Element
 
