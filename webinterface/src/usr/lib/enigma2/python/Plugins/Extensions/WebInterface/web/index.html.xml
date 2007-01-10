@@ -59,9 +59,11 @@
 				<img src="/webdata/gfx/speak_on.png" id="speaker"  onclick="volumeMute()" />
 				</td>
 				<td>
-					<input type="text" id="searchText" />
-					<button onclick="new EPGList().getBySearchString($('searchText').value,$('BodyEPGPanel'));setBodyMainContent('BodyEPGPanel');" >EPG suchen</button></td>
-				</tr>
+					<form onSubmit="new EPGList().getBySearchString($('searchText').value,$('BodyEPGPanel')); setBodyMainContent('BodyEPGPanel'); return false;">
+						<input type="text" id="searchText" onfocus="this.value=''" value="EPG suchen"/>					
+					</form>
+				</td>					
+			</tr>
 		</table>
 		
 <!-- END SITE HEADER //-->
