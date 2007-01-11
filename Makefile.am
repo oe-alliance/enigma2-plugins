@@ -1,3 +1,2 @@
 AUTOMAKE_OPTIONS = gnu
-SUBDIRS = antiscrollbar
-# movietagger webinterface
+SUBDIRS = antiscrollbar movietagger webinterface

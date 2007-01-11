@@ -13,4 +13,13 @@ movietagger/Makefile
 movietagger/etc/Makefile
 movietagger/src/Makefile
 
+webinterface/Makefile
+webinterface/src/Makefile
+webinterface/src/web-data/Makefile
+webinterface/src/web-data/gfx/Makefile
+webinterface/src/web/Makefile
+webinterface/src/Components/Makefile
+webinterface/src/Components/Converter/Makefile
+webinterface/src/Components/Sources/Makefile
+
 ])
