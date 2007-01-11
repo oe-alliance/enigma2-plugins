@@ -1,6 +1,6 @@
 from enigma import *
 
-from Source import Source
+from Components.Sources.Source import Source
 from ServiceReference import ServiceReference
 
 class EPG( Source):

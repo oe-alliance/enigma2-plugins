@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/Components/
+installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/WebComponents/
 
 install_PYTHON = __init__.py
 
