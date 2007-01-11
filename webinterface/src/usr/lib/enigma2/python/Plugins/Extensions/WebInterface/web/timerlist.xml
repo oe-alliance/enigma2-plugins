@@ -1,0 +1,29 @@
+<e2:screen name="TestScreen">&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;e2timerlist><e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
+	&lt;e2timer>
+		&lt;e2servicereference><e2:item name="ServiceReference" />&lt;/e2servicereference>
+		&lt;e2servicename><e2:item name="ServiceName" />&lt;/e2servicename>
+		&lt;e2eit><e2:item name="EIT" />&lt;/e2eit>
+		&lt;e2name><e2:item name="Name" />&lt;/e2name>
+		&lt;e2description><e2:item name="Description" />&lt;/e2description>
+		&lt;e2disabled><e2:item name="Disabled" />&lt;/e2disabled>
+		&lt;e2timebegin><e2:item name="TimeBegin" />&lt;/e2timebegin>
+		&lt;e2timeend><e2:item name="TimeEnd" />&lt;/e2timeend>
+		&lt;e2duration><e2:item name="Duration" />&lt;/e2duration>
+		&lt;e2startprepare><e2:item name="startPrepare" />&lt;/e2startprepare>
+		&lt;e2justplay><e2:item name="justPlay" />&lt;/e2justplay>
+		&lt;e2afterevent><e2:item name="afterEvent" />&lt;/e2afterevent>
+		&lt;e2logentries><e2:item name="LogEntries" />&lt;/e2logentries>
+		&lt;e2filename><e2:item name="Filename" />&lt;/e2filename>
+		&lt;e2backoff><e2:item name="Backoff" />&lt;/e2backoff>
+		&lt;e2nextactivation><e2:item name="nextActivation" />&lt;/e2nextactivation>
+		&lt;e2firsttryprepare><e2:item name="firstTryPrepare" />&lt;/e2firsttryprepare>
+		&lt;e2state><e2:item name="State" />&lt;/e2state>
+		&lt;e2repeated><e2:item name="Repeated" />&lt;/e2repeated>
+		&lt;e2dontsave><e2:item name="dontSave" />&lt;/e2dontsave>
+		&lt;e2cancled><e2:item name="Cancled" />&lt;/e2cancled>
+	&lt;/e2timer>
+	</e2:convert>
+	<e2:convert type="web:TextToHTML" /></e2:element>
+&lt;/e2timerlist>
+</e2:screen>
