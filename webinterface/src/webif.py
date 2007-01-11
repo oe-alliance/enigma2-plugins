@@ -129,10 +129,23 @@ class StreamingElement(OneTimeElement):
 	def setStream(self, stream):
 		self.stream = stream
 
+def filter_none(string):
+	return string
+
+def filter_xml(s):
+	return s.replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;")
+
+def filter_javascript_escape(s):
+	return s.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"')
+
+def filter_uri(s):
+	return s.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+')
+
 # a to-be-filled list item
 class ListItem:
-	def __init__(self, name):
+	def __init__(self, name, filterfnc):
 		self.name = name
+		self.filterfnc = filterfnc
 
 class TextToHTML(Converter):
 	def __init__(self, arg):
@@ -149,15 +162,12 @@ class Null(Converter):
 	def getHTML(self, id):
 		return ""
 
-def escape(s):
-	return s.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"')
-
 class JavascriptUpdate(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
 
 	def getHTML(self, id):
-		return '<script>set("' + id + '", "' + escape(self.source.text) + '");</script>\n'
+		return '<script>set("' + id + '", "' + filter_javascript_escape(self.source.text) + '");</script>\n'
 
 # the performant 'listfiller'-engine (plfe)
 class ListFiller(Converter):
@@ -175,7 +185,7 @@ class ListFiller(Converter):
 			if isinstance(element, str):
 				lutlist.append(element)
 			elif isinstance(element, ListItem):
-				lutlist.append(lut[element.name])
+				lutlist.append((lut[element.name], element.filterfnc))
 		
 		# now, for the huge list, do:
 		res = ""
@@ -184,10 +194,10 @@ class ListFiller(Converter):
 				if isinstance(element, str):
 					res += element
 				else:
-					res += str(item[element])
+					res += str(element[1](item[element[0]]))
 		# (this will be done in c++ later!)
 		return res
-		
+
 	text = property(getText)
 
 class webifHandler(ContentHandler):
@@ -238,7 +248,12 @@ class webifHandler(ContentHandler):
 		elif self.mode == 3:
 			assert name == "e2:item", "found %s instead of e2:item!" % name
 			assert "name" in attrs, "e2:item must have a name= attribute!"
-			self.sub.append(ListItem(attrs["name"]))
+			
+			filter = {"": filter_none, "javascript_escape": filter_javascript_escape, "xml": filter_xml, "uri": filter_uri}[attrs.get("filter", "")]
+			
+			print "using filter", filter, attrs
+			
+			self.sub.append(ListItem(attrs["name"], filter))
 
 	def endElement(self, name):
 		if name == "e2:screen":

@@ -3,8 +3,8 @@
 <e2:element source="ServiceListBrowse">				
 	<e2:convert type="web:ListFiller">
 	&lt;e2service>
-		&lt;e2servicereference><e2:item name="Reference" />&lt;/e2servicereference>
-		&lt;e2servicename><e2:item name="Name"/>&lt;/e2servicename>
+		&lt;e2servicereference><e2:item name="Reference" filter="xml" />&lt;/e2servicereference>
+		&lt;e2servicename><e2:item name="Name" filter="xml" />&lt;/e2servicename>
 	&lt;/e2service>
 	</e2:convert>
 	<e2:convert type="web:TextToHTML" />			
