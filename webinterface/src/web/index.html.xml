@@ -1,227 +1,98 @@
-﻿<e2:screen name="TestScreen">&lt;html>
+<e2:screen name="TestScreen">&lt;html>
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
-	<title>Enigma2 Webinterface</title>
-	<script src="/webdata/prototype.js" type="text/javascript"/>
-    <script src="/webdata/rico.js" type="text/javascript"/>
-	<script src="/webdata/tools.js" type="text/javascript" />
-	<link  href="/webdata/theme.css" rel="stylesheet" type="text/css" />                                      
+	<title>Enigma 2 realtime OSD example </title>
+	<!--load everything for prototype and prototype window -->
+
+	<script type="text/javascript" src="/webdata/lib/prototype.js" />
+  	<script type="text/javascript" src="/webdata/lib/ptwindow/effects.js" />
+  	<script type="text/javascript" src="/webdata/lib/ptwindow/window.js" />
+	<!--script type="text/javascript" src="/webdata/lib/ptwindow/debug.js" /-->
+
+	<link href="/webdata/lib/ptwindow/themes/default.css" rel="stylesheet" type="text/css" />
+  	<link href="/webdata/lib/ptwindow/themes/alphacube.css" rel="stylesheet" type="text/css" />
+	
+	<!-- our stuff -->
+	<script type="text/javascript" src="/webdata/tools.js" />
+	
+	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
-<div id="debug"></div>
-
-<table id="htmlDesignTable"  width="100%" border="0">
-<tr><td>
-<!-- START SITE HEADER //-->
-		<table width="100%" border="0">
-			<tr>
-				<td width="10%"  rowspan="2">
-					<div id="Current_Channel_Box" class="roundme" >
-		  			<nobr><div id="CurrentService"  > </div></nobr>
-		  			<div id="CurrentServiceProvider" > </div>
-					</div>
-				</td>
-				<td width="80%">
-		  			<span id="Event_Now_Name"  onclick="setBodyMainContent('BodyContentEPGNow')"> </span>
-				</td>
-				<td width="150" rowspan="2">
-					<div id="Info_Box"  class="roundme">
-						<table width="100">
-							<tr><td colspan="2"><div id="CurrentTime"> </div></td></tr>
-							<tr><td>SNR:</td><td><div id="SNR"></div></td></tr>
-							<tr><td>BER:</td><td><div id="BER"></div></td></tr>
-							<tr><td>AGC:</td><td><div id="AGC"></div></td></tr>
-						</table>
-					</div>
-				</td>
-				</tr><tr>
-				
-				<td width="80%">
-						<span id="Event_Next_Name"  onclick="setBodyMainContent('BodyContentEPGNext')"> </span>
-				</td>
-			</tr>
-			<tr><td colspan="2">
-				Volume <span id="Volume_Current" >..</span>
-				<span onclick="volumeUp()" >++</span>
-				<span onclick="volumeDown()" >--</span>
-				<span onclick="volumeMute()" >xx</span>
-				<img src="/webdata/gfx/led_off.png" id="volume1" onclick="setVolume(10)"/>
-				<img src="/webdata/gfx/led_off.png" id="volume2" onclick="setVolume(20)"/>
-				<img src="/webdata/gfx/led_off.png" id="volume3" onclick="setVolume(30)"/>
-				<img src="/webdata/gfx/led_off.png" id="volume4" onclick="setVolume(40)"/>
-				<img src="/webdata/gfx/led_off.png" id="volume5" onclick="setVolume(50)"/>
-				<img src="/webdata/gfx/led_off.png" id="volume6" onclick="setVolume(60)"/>
-				<img src="/webdata/gfx/led_off.png" id="volume7" onclick="setVolume(70)"/>
-				<img src="/webdata/gfx/led_off.png" id="volume8" onclick="setVolume(80)"/>
-				<img src="/webdata/gfx/led_off.png" id="volume9" onclick="setVolume(90)"/>
-				<img src="/webdata/gfx/led_off.png" id="volume10" onclick="setVolume(100)"/>
-				<img src="/webdata/gfx/speak_on.png" id="speaker"  onclick="volumeMute()" />
-				</td>
-				<td>
-					<form onSubmit="new EPGList().getBySearchString($('searchText').value,$('BodyEPGPanel')); setBodyMainContent('BodyEPGPanel'); return false;">
-						<input type="text" id="searchText" onfocus="this.value=''" value="EPG suchen"/>					
-					</form>
-				</td>					
-			</tr>
-		</table>
+<div id="BodyContentDebugbox"></div>
+<div id="Main">
+	
+	<!--div id="Banner">Enigma2 Webinterface</div>
+	<div class="spacer10"></div-->
+	<div id="Nav">	
+			<div id="NavHd">NAVIGATION</div>
+			
+			<table cellpadding="0" cellspacing="0" id="navTable">
+				<tr>
+					<td class="NavEl"><a class="NavEl" href="#">Nav1</a></td>
+				</tr>
+				<tr>
+					<td class="NavEl"><a class="NavEl" href="#">Nav2</a></td>
+				</tr>
+			</table>
+	</div>
+	<div id="Content">
+		<div id="EventNowNext" class="bgMain">
+	    
+		    <div class="divblock">
+		      		<div id="CurrentService"></div>
+		      		<div id="CurrentTime"></div>
+		    </div>
+		    
+		    <div class="divblock">
+		      <div style="width:5%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Begin"></div>
+		      <div style="width:65%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Name"></div>
+		      <div style="width:30%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="eventRA" id="Event_Now_Remaining"></div>
+		    </div>
+		    
+		    <div class="divblock">
+		      <div class="eventExtDesc" id="Event_Now_Extended_Description"></div>
+		    </div>
+		    
+		    <div class="divblock" onclick="showhide('Event_Next_Extended_Description');">
+		      <div style="width:5%; float:left;" class="event" id="Event_Next_Begin"></div>
+		      <div style="width:65%; float:left;" class="event" id="Event_Next_Name"></div>
+		      <div style="width:30%; float:left;" class="eventRA" id="Event_Next_Remaining"></div>
+		    </div>
+		    
+		    <div class="divblock">
+		      <div style="display:none;" class="eventExtDesc" id="Event_Next_Extended_Description"></div>
+		    </div>
+		</div>
+		<hr />
 		
-<!-- END SITE HEADER //-->
-</td></tr>
-<tr><td>
-<!-- START SITE BODY //-->
-	<table id="htmlDesignTableBody"   width="100%" border="0">
-	<tr>
-		<td id="htmlDesignTableBodyMenue" width="150" valign="top">
-		<!-- START BODY MENUE //-->
-			<div id="accordionMenue">
-   			<div id="accordionMenueBouqetPanel">
-     			<div id="accordionMenueBouqetHeader">
-       			Bouquets
-      		</div>
-      		<div id="accordionMenueBouqetContent">
-      				
-      		</div>
-   			</div>
-   			<!--<div id="accordionMenueControlPanel">
-     			<div id="accordionMenueControlHeader">
-       			Control
-      		</div>
-      		<div id="accordionMenueControlContent">
-      			<table>
-       			<tr><td><a onclick="setBodyMainContent('BodyContentMessageform')">Nachricht</a></td></tr>
-       			<tr><td><a onclick="setBodyMainContent('BodyContentPower')">Shutdown</a></td></tr>
-       			<tr><td><a onclick="setBodyMainContent('BodyContentHDD')">HDD</a></td></tr>
-       			<tr><td><a onclick="setBodyMainContent('BodyContentDebugbox')">JscriptDebug</a></td></tr>
-       			</table>
-      		</div>
-   			</div>//-->
-			</div>
-		
-		<!-- END BODY MENUE //-->
-		</td>
-		<td id="htmlDesignTableBodyMain" valign="top" witdh="100%" >
-		<!-- START BODY MAIN //-->
-				<!-- START BodyContentEPGNext //-->       
-				<div id="BodyContentEPGNext" style="display:none;" >
-					<div id="Event_Next_Box">
-						<table id="Event_Table_Next"  width="100%" border="1">
-							<tr>
-								<td>
-									<span id="Event_Next_Begin"></span> bis <span id="Event_Next_End"></span>
-								</td>
-								<td>
-									<span id="Event_Next_Name"  onclick="setBodyMainContent('BodyContentEPGNext')"> </span>
-									<a href="javascript:imdb()">...</a>				
-								</td>
-								<td>
-									<span id="Event_Next_Remaining"> </span>
-								</td>
-							</tr>
-							<tr>	
-								<td colspan="3">
-									<div id="Event_Next_Description"> </div>
-								</td>
-							</tr>
-							<tr>	
-								<td colspan="3">
-									<div id="Event_Next_Extended_Description"> </div>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-				<!-- ENDE BodyContentEPGNext //-->       
-				<!-- START BodyContentEPGNow //-->       
-				<div id="BodyContentEPGNow" style="display:none;">
-					<div id="Event_Now_Box">
-						<table id="Event_Table_Now"  width="100%" border="1">
-							<tr>
-								<td>
-									<span id="Event_Now_Begin"></span> bis <span id="Event_Now_End"></span>
-								</td>
-								<td>
-									<span id="Event_Now_Name"  onclick="setBodyMainContent('BodyContentEPGNow')"> </span>
-									<a href="javascript:imdb()">...</a>				
-								</td>
-								<td>
-									<span id="Event_Now_Remaining"> </span>
-								</td>
-							</tr>
-							<tr>	
-								<td colspan="3">
-									<div id="Event_Now_Description"> </div>
-								</td>
-							</tr>
-							<tr>	
-								<td colspan="3">
-									<div id="Event_Now_Extended_Description"> </div>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-				<!-- END BodyContentEPGNow //-->       
-				<!-- START BodyContentChannellist //-->       
-					<div id="BodyContentChannellist" style="display:none;"></div>
-				<!-- END BodyContentChannellist //--> 
-				<!-- START BodyContentMessageform //-->       
-					<div id="BodyContentMessageform" style="display:none;">
-										BodyContentText BodyContentText BodyContentText BodyContentText
-					</div>
-				<!-- END BodyContentMessageform //-->       
-				<!-- START BodyContentPower //-->       
-					<div id="BodyContentPower" style="display:none;">
-						standby, Poweroff, E2restart
-					</div>
-				<!-- END BodyContentPower //-->       
-				<!-- START BodyContentHDD //-->       
-				<div id="BodyContentHDD" style="display:none;">
-					<iframe src="/hdd/" width="100%" height="400"/>
-				</div>
-				<!-- END BodyContentHDD //-->       
-				<!-- START BodyContentDebugbox //-->       
-				<div id="BodyContentDebugbox" style="display:none;">
-					
-				</div>
-				<!-- END BodyContentDebugbox //-->       
-				<!-- START BodyEPGPanel //-->       
-				<div id="BodyEPGPanel" style="display:none;">
-					
-				</div>
-				<!-- END BodyEPGPanel //-->       
-											
-				<!-- END CHANNELLIST //-->       
-		<!-- END BODY MAIN //--> 				
-		</td>
-	</tr>
-	</table>
-<!-- END SITE BODY //-->
-</td></tr>
-</table>
+		<div id="BodyContentChannellist" class="BodyContentChannellist"></div>
+		<div id="BodyContentMessageform" style="display:none;"></div>
+		<div id="BodyContentPower" style="display:none;"></div>
+		<div id="BodyContentHDD" style="display:none;">
+			<iframe src="/hdd/" width="100%" height="400"/>
+		</div>
 
-
+			
+	
+	</div>
+</div>
+<!--iframe onload="hide(this)" width="0" id="updates" height="0" src="updates.html" name="updates" scrolling="none" frameborder="0">no iframe support!</iframe-->
 <script type="text/javascript" >
-// HTML Effekts by wwwopenrico.org
-new Rico.Effect.Round('div','roundme' );
-new Rico.Effect.Round('div','button' );
-new Rico.Accordion( $('accordionMenue') );
-//
-getVolume();
-loadRootTVBouqet();
-//loadRootRadioBouqet();
-setBodyMainContent('BodyContentChannellist');
-function updatePage()
-{
-} 
+//loadRootTVBouqet();
 
+
+refreshChannellist('Favourites (TV)', '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet');
+setBodyMainContent('BodyContentChannellist');
 function imdb()
 {
 	w = window.open("http://www.imdb.com/find?s=all&amp;q=" + escape(document.getElementById("Event_Now_Name").innerHTML));
 	w.focus();
+	set("BodyContentChannellist", "TEST!!!");
 }
 
 </script>
+
 </body>
 &lt;div id="scriptzone">
 <!-- realtime updates follow -->
@@ -237,10 +108,6 @@ function imdb()
 	<e2:convert type="EventName">Name</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
-<e2:element source="Event_Now" id="Event_Now_Description" streaming="yes">
-	<e2:convert type="EventName">Description</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
 <e2:element source="Event_Now" id="Event_Now_Extended_Description" streaming="yes">
 	<e2:convert type="EventName">ExtendedDescription</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
@@ -250,11 +117,7 @@ function imdb()
   <e2:convert type="ClockToText">Default</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
-<e2:element source="Event_Now" id="Event_Now_End" streaming="yes">
-	<e2:convert type="EventTime">EndTime</e2:convert>
-  <e2:convert type="ClockToText">Default</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
+
 <e2:element source="Event_Now" id="Event_Now_Remaining" streaming="yes">
 	<e2:convert type="EventTime">Remaining</e2:convert>
 	<e2:convert type="RemainingToText">InMinutes</e2:convert>
@@ -271,11 +134,7 @@ function imdb()
 	<e2:convert type="ClockToText">Default</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
-<e2:element source="Event_Next" id="Event_Next_End" streaming="yes">
-	<e2:convert type="EventTime">EndTime</e2:convert>
-  <e2:convert type="ClockToText">Default</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
+
 <e2:element source="Event_Next" id="Event_Next_Remaining" streaming="yes">
   <e2:convert type="EventTime">Remaining</e2:convert>
   <e2:convert type="RemainingToText">InMinutes</e2:convert>
@@ -284,26 +143,6 @@ function imdb()
 <e2:element source="Event_Next" id="Event_Next_Extended_Description" streaming="yes">
 	<e2:convert type="EventName">ExtendedDescription</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-
-<e2:element source="FrontendStatus"  id="SNR" streaming="yes">
-	<e2:convert type="FrontendInfo">SNR</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-<e2:element source="FrontendStatus"  id="BER" streaming="yes">
-	<e2:convert type="FrontendInfo">BER</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-<e2:element source="FrontendStatus"  id="AGC" streaming="yes">
-	<e2:convert type="FrontendInfo">AGC</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-
-<e2:element source="CurrentService" id="CurrentServiceProvider" streaming="yes">
-	<e2:convert type="ServiceName">Provider</e2:convert>
-        <e2:convert type="web:JavascriptUpdate" />
 </e2:element>
                 
                 
