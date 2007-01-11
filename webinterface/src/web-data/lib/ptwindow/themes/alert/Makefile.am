@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/lib/ptwindow/alert/
+installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/lib/ptwindow/themes/alert/
 
 install_DATA = *.gif *.png
 
