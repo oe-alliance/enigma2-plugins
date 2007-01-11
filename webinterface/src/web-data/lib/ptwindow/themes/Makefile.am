@@ -2,4 +2,4 @@ installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/li
 
 install_DATA = *.css
 
-SUBDIRS = alert alphacube darkX default max_os_x nuncio spread theme1
+SUBDIRS = alert alphacube darkX default mac_os_x nuncio spread theme1
