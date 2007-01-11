@@ -16,13 +16,13 @@ from Screens.InfoBarGenerics import InfoBarServiceName, InfoBarEvent, InfoBarTun
 
 from Components.Sources.Clock import Clock
 from Components.Sources.ServiceList import ServiceList
-from Components.Sources.Volume import Volume
-from Components.Sources.EPG import EPG
-from Components.Sources.Timer import Timer
+from WebComponents.Sources.Volume import Volume
+from WebComponents.Sources.EPG import EPG
+from WebComponents.Sources.Timer import Timer
 from Components.Sources.FrontendStatus import FrontendStatus
 
 from Components.Converter.Converter import Converter
-from Components.Converter.VolumeToText import VolumeToText 
+from WebComponents.Converter.VolumeToText import VolumeToText 
 
 from Components.Element import Element
 
@@ -223,10 +223,15 @@ class webifHandler(ContentHandler):
 				assert name == "e2:convert"
 				
 				ctype = attrs["type"]
+				
+					# TODO: we need something better here
 				if ctype[:4] == "web:": # for now
 					self.converter = eval(ctype[4:])
 				else:
-					self.converter = my_import('.'.join(["Components", "Converter", ctype])).__dict__.get(ctype)
+					try:
+						self.converter = my_import('.'.join(["Components", "Converter", ctype])).__dict__.get(ctype)
+					except ImportError:
+						self.converter = my_import('.'.join(["Plugins", "Extensions", "WebInterface", "WebComponents", "Converter", ctype])).__dict__.get(ctype)
 				self.sub = [ ]
 			else:
 				self.sub.append(tag)

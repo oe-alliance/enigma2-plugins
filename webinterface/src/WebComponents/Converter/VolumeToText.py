@@ -1,5 +1,6 @@
 from Components.Converter.Converter import Converter
 from enigma import eDVBVolumecontrol #this is not nice
+from Components.config import config
 
 class VolumeToText(Converter, object):
     
