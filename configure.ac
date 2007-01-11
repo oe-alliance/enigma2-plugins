@@ -18,8 +18,8 @@ webinterface/src/Makefile
 webinterface/src/web-data/Makefile
 webinterface/src/web-data/gfx/Makefile
 webinterface/src/web/Makefile
-webinterface/src/Components/Makefile
-webinterface/src/Components/Converter/Makefile
-webinterface/src/Components/Sources/Makefile
+webinterface/src/WebComponents/Makefile
+webinterface/src/WebComponents/Converter/Makefile
+webinterface/src/WebComponents/Sources/Makefile
 
 ])
