@@ -138,22 +138,36 @@ EPGList.prototype = {
 			});
 		
 	},
+	
+	
 	renderTable: function(epglist){
 		debug("rendering Table with "+epglist.length+" events");
-		var html="<table width='100%'>";
+		var html='<table width="100%" border="0" cellspacing="1" cellpadding="0">';
 		for (var i=0; i < epglist.length; i++){
 			try{
 				var item = epglist[i];
-				html +="<tr  bgcolor='gray'>";
-				html +="<td>"+item.getTimeDay()+"</td>";
-				html +="<td>"+item.getTimeStartString()+"</td>";
-				html +="<td>"+item.getTimeEndString()+"</td>";
-				html +="<td>"+item.getTitle()+"</td>";
-				html +="<td>"+item.getDescription()+"</td>";
-				html +="<td>"+item.getDescriptionExtended()+"</td>";
-				html +="<td>"+(item.getDuration()/60000)+" min.</td>";
-				html +="<td>"+item.getServiceName()+"</td>";
-				html +="</tr>";
+				
+				html +='<tr style="background-color: #DDDDDD;">';
+				html +='<td width="10%">'+item.getTimeDay()+'</td>';
+				html +='<td width="30%">'+item.getServiceName()+'</td>';
+				html +='<td>'+item.getTitle()+'</td>';
+				html +='</tr>';
+				
+				html +='<tr style="background-color: #DDDDDD;">';
+				html +='<td>'+item.getTimeStartString()+'</td>';
+				html +='<td>'+(item.getDuration()/60000)+' min.</td>';
+				html +='<td>'+item.getDescription()+'</td>';
+				html +='</tr>';
+				
+				html +='<tr style="background-color: #DDDDDD;">';
+				html +='<td valign="top">'+item.getTimeEndString()+'</td>';
+				html +='<td colspan="2">'+item.getDescriptionExtended()+'</td>';
+				html +='</tr>';
+				
+				
+				html +='<tr style="background-color: #AAAAAA;">';
+				html +='<td colspan="3">&nbsp;</td>';
+				html +='</tr>';
 			} catch (blubb) {
 				//debug("Error rendering: "+blubb);
 			}
