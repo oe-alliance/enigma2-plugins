@@ -251,8 +251,6 @@ class webifHandler(ContentHandler):
 			
 			filter = {"": filter_none, "javascript_escape": filter_javascript_escape, "xml": filter_xml, "uri": filter_uri}[attrs.get("filter", "")]
 			
-			print "using filter", filter, attrs
-			
 			self.sub.append(ListItem(attrs["name"], filter))
 
 	def endElement(self, name):
