@@ -35,9 +35,9 @@ class AntiScrollMain(Screen):
           self.size = [profil["sizex"],profil["sizey"]]
           self.position = [profil["posx"],profil["posy"]]             
         except Exception:
-          config.setProfile("standart",[200,200],[200,200])
+          config.setProfile("standard",[200,200],[200,200])
           config = AntiScrollConfig()          
-          profil = config.getProfile("standart")
+          profil = config.getProfile("standard")
           
         self.size = [profil["sizex"],profil["sizey"]]
         self.position = [profil["posx"],profil["posy"]]           
@@ -231,4 +231,3 @@ def main(session, **kwargs):
   session.open(AntiScrollMain)
 def Plugins(**kwargs):
   return PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main)
-  
