@@ -150,7 +150,7 @@ EPGList.prototype = {
 				html +='<tr style="background-color: #DDDDDD;">';
 				html +='<td width="10%">'+item.getTimeDay()+'</td>';
 				html +='<td width="30%">'+item.getServiceName()+'</td>';
-				html +='<td>'+item.getTitle()+'</td>';
+				html +='<td>'+item.getTitle()+'&nbsp;<a target="_blank" href="/web/epgsearch.rss?search='+item.getTitle()+'" ><img src="/webdata/gfx/feed.png" title="RSS-Feed for this Title" border="0"></a></td>';
 				html +='</tr>';
 				
 				html +='<tr style="background-color: #DDDDDD;">';
@@ -465,6 +465,7 @@ function incomingChannellist(){
 		listerHtml += '<th style="text-align: right;" style="color: #FFFFFF;">'
 		listerHtml += '<form onSubmit="new EPGList().getBySearchString(document.getElementById(\'searchText\').value); return false;">';
 		listerHtml += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="EPG suchen"/>';
+		listerHtml += '<input type="image" src="/webdata/gfx/search.png" alt="suche starten">';
 		listerHtml += '</form>'
 		listerHtml += '</tr>\n';
 		listerHtml += '</thead>\n';

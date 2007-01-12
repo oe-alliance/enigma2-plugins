@@ -1,0 +1,19 @@
+<e2:screen name="TestScreen">&lt;?xml version="1.0"?>
+&lt;rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:admin="http://webns.net/mvcb/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+	&lt;channel>
+		&lt;title>Enigma2 Movielist&lt;/title>
+		&lt;description>Eine automatische Liste aller Enigma2 Aufnahmen&lt;/description>
+		&lt;generator>Enigma2 WebInterface&lt;/generator>		
+		<e2:element source="MovieList"><e2:convert type="web:ListFiller" >
+		&lt;item>
+			&lt;title><e2:item name="Title" filter="xml"/>&lt;/title>
+			&lt;description>Kanal: <e2:item name="ServiceName" filter="xml"/>
+				&lt;br/><e2:item name="Description" filter="xml"/>
+				&lt;br/>Tags: <e2:item name="Tags" filter="xml"/>
+				&lt;br/>ServiceReference<e2:item name="ServiceReference" filter="xml"/>
+				&lt;/description>
+			&lt;category>EPG<e2:item name="ServiceName" filter="xml"/> &lt;/category>
+		&lt;/item></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+	&lt;/channel>
+&lt;/rss>
+</e2:screen>

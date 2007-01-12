@@ -16,6 +16,10 @@
 	<script type="text/javascript" src="/webdata/tools.js" />
 	
 	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
+
+	<!-- Live RSS Feeds //-->
+	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss" />
+
 </head>
 
 <body>
