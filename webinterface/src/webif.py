@@ -23,7 +23,6 @@ from WebComponents.Sources.Movie import Movie
 from Components.Sources.FrontendStatus import FrontendStatus
 
 from Components.Converter.Converter import Converter
-from WebComponents.Converter.VolumeToText import VolumeToText 
 
 from Components.Element import Element
 
@@ -41,13 +40,12 @@ class WebScreen(Screen):
 		self.stand_alone = True
 
 # a test screen
-class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen,Volume):
+class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 	def __init__(self, session):
 		WebScreen.__init__(self, session)
 		InfoBarServiceName.__init__(self)
 		InfoBarEvent.__init__(self)
 		InfoBarTuner.__init__(self)
-		Volume.__init__(self,session);
 		self["CurrentTime"] = Clock()
 #		self["TVSystem"] = Config(config.av.tvsystem)
 #		self["OSDLanguage"] = Config(config.osd.language)
@@ -62,6 +60,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen,Volume
 		self["EPGNOWNEXT"] = EPG(session,func=EPG.NOWNEXT)
 		self["TimerList"] = Timer(session)
 		self["MovieList"] = Movie(session)
+		self["Volume"] = Volume(session)
 
 	def browseTo(self, reftobrowse):
 		self["ServiceListBrowse"].root = reftobrowse

@@ -317,33 +317,49 @@ function doRequest(url,readyFunction){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
+function initVolumePanel(){
+	$('VolumePanel').innerHTML += "<img onclick='volumeUp()' src='/webdata/gfx/arrow_up.png'>"; 
+	$('VolumePanel').innerHTML += "<img onclick='volumeDown()' src='/webdata/gfx/arrow_down.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='volume1' onclick='volumeSet(10)' src='/webdata/gfx/led_off.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='volume2' onclick='volumeSet(20)' src='/webdata/gfx/led_off.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='volume3' onclick='volumeSet(30)' src='/webdata/gfx/led_off.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='volume4' onclick='volumeSet(40)' src='/webdata/gfx/led_off.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='volume5' onclick='volumeSet(50)' src='/webdata/gfx/led_off.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='volume6' onclick='volumeSet(60)' src='/webdata/gfx/led_off.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='volume7' onclick='volumeSet(70)' src='/webdata/gfx/led_off.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='volume8' onclick='volumeSet(80)' src='/webdata/gfx/led_off.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='volume9' onclick='volumeSet(90)' src='/webdata/gfx/led_off.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='volume10' onclick='volumeSet(100)' src='/webdata/gfx/led_off.png'>"; 
+	$('VolumePanel').innerHTML += "<img id='speaker' onclick='volumeMute()' src='/webdata/gfx/speak_on.png'>";
+	getVolume(); 
+}
 function getVolume()
 {
 	doRequest(url_getvolume,handleVolumeRequest);
 }
-function setVolume(newvalue)
+function volumeSet(newvalue)
 {
-		doRequest(url_setvolume+newvalue,handleVolumeRequest);
+	doRequest(url_setvolume+newvalue,handleVolumeRequest);
 }
 function volumeUp()
 {
-		doRequest(url_volumeup,handleVolumeRequest);
+	doRequest(url_volumeup,handleVolumeRequest);
 }
 function volumeDown()
 {
-		doRequest(url_volumedown,handleVolumeRequest);	
+	doRequest(url_volumedown,handleVolumeRequest);	
 }
 function volumeMute()
 {
-		doRequest(url_volumemute,handleVolumeRequest);
+	doRequest(url_volumemute,handleVolumeRequest);
 }
 function handleVolumeRequest(){
 	if (http_request.readyState == 4) {
-		var a = http_request.responseText.split("\n");
-		var newvalue = a[1];
-		var mute=a[2];
-		set("Volume_Current",newvalue);
+		var b = getXML(http_request).getElementsByTagName("e2volume");
+		debug(b.item(0).getElementsByTagName('e2current').length); 
+		var newvalue = b.item(0).getElementsByTagName('e2current').item(0).firstChild.data;
+		var mute = b.item(0).getElementsByTagName('e2ismuted').item(0).firstChild.data;
+		//debug("volume"+newvalue+";"+mute);
 		for (var i = 1; i <= 10; i++)
 		{
 			if ( (newvalue/10)>=i){
@@ -352,7 +368,7 @@ function handleVolumeRequest(){
 				$("volume"+i).src = "/webdata/gfx/led_off.png";
 			}
 		}
-		if (mute == "notmuted"){
+		if (mute == "False"){
 			$("speaker").src = "/webdata/gfx/speak_on.png";
 		}else{
 			$("speaker").src = "/webdata/gfx/speak_off.png";

@@ -185,6 +185,19 @@ normal stylesheet-stuff******************
 	width:50%;
 	height:20px;
 }
+#VolumePanel { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:left;
+
+	background-color: #0066CC;
+	color: #FFFFFF;
+
+	width:25%;
+	height:20px;
+}
 
 #CurrentTime { 
 	font-family:Arial,sans-serif;
@@ -197,7 +210,7 @@ normal stylesheet-stuff******************
 	background-color: #0066CC;
 	color: #FFFFFF;
 	
-	width:50%;
+	width:25%;
 	height: 20px;
 }
 
