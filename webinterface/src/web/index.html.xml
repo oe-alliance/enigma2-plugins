@@ -1,7 +1,7 @@
 <e2:screen name="TestScreen">&lt;html>
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
-	<title>Enigma 2 realtime OSD example </title>
+	<title>Enigma 2 Webinterface (ALPHA)</title>
 	<!--load everything for prototype and prototype window -->
 
 	<script type="text/javascript" src="/webdata/lib/prototype.js" />
@@ -13,6 +13,7 @@
   	<link href="/webdata/lib/ptwindow/themes/alphacube.css" rel="stylesheet" type="text/css" />
 	
 	<!-- our stuff -->
+	<script type="text/javascript" src="/webdata/templates.js" />
 	<script type="text/javascript" src="/webdata/tools.js" />
 	
 	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
@@ -84,7 +85,7 @@
 </div>
 <!--iframe onload="hide(this)" width="0" id="updates" height="0" src="updates.html" name="updates" scrolling="none" frameborder="0">no iframe support!</iframe-->
 <script type="text/javascript" >
-
+if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow"); }
 initVolumePanel();
 
 refreshChannellist('Favourites (TV)', '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet');

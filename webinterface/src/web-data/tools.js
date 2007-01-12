@@ -8,6 +8,24 @@ var url_epgservice = "/web/epgservice?ref="; // plus serviceRev
 var url_epgsearch = "/web/epgsearch?search="; // plus serviceRev
 var url_epgnownext = "/web/epgnownext?ref="; // plus serviceRev
 
+var DBG = false;
+
+function openWindow(title, inner, width, height, id){
+			if(id == null) id = new Date().toUTCString();
+			
+			//debug(id);
+			var win = new Window(id, {className: "alphacube", title: title, width: width, height: height});
+			win.getContent().innerHTML = inner;
+			win.setDestroyOnClose();
+			win.showCenter();
+			debug("opening Window: "+title);
+			return win;
+}
+
+function messageBox(t, m){
+	Dialog.alert(m, {windowParameters: {title: t, className: "alphacube", width:200}, okLabel: "Close"});
+}
+
 function getHTTPObject( ){
     var xmlHttp = false;
             
@@ -46,10 +64,27 @@ function getHTTPObject( ){
     }
     return xmlHttp ;
 }
+//RND Template Function
+function RND(tmpl, ns) {
+	var fn = function(w, g) {
+	  g = g.split("|");
+	  var cnt = ns[g[0]];
 
+	  //Support for filter functions
+	  for(var i=1; i < g.length; i++) {
+		cnt = eval(g[i])(cnt);
+	  }
+	  return cnt || w;
+	};
+	return tmpl.replace(/%\(([A-Za-z0-9_|.]*)\)/g, fn);
+}
 
 function debug(text){
-//	document.getElementById('BodyContentDebugbox').innerHTML += "DEBUG: "+text+"<br>";
+	if(DBG){
+		try{
+			debugWin.getContent().innerHTML += "DEBUG: "+text+"<br>";
+		} catch (windowNotPresent) {}
+	}
 }
 
 function showhide(id){
@@ -96,20 +131,7 @@ function zap(li){
 		
 }
 
-function openWindow(t, inner, w, h){
-			id = new Date().toUTCString()
-			
-			//debug(id);
-			var win = new Window(id, {className: "alphacube", title: t, width:w, height:h});
-			win.getContent().innerHTML = inner;
-			win.setDestroyOnClose();
-			win.showCenter();
-			debug("opening Window: "+t);
-}
 
-function messageBox(t, m){
-	Dialog.alert(m, {windowParameters: {title: t, className: "alphacube", width:200}, okLabel: "Close"});
-}
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++ EPG functions                               ++++
@@ -147,33 +169,19 @@ EPGList.prototype = {
 			try{
 				var item = epglist[i];
 				
-				
-				html +='<tr style="background-color: #DDDDDD;">';
-				html +='<td width="10%">'+item.getTimeDay()+'</td>';
-				html +='<td width="30%">'+item.getServiceName()+'</td>';
-				html +='<td>'+item.getTitle()+'</td>';
-				html +='</tr>';
-				
-				html +='<tr style="background-color: #DDDDDD;">';
-				html +='<td>'+item.getTimeStartString()+'</td>';
-				html +='<td>'+(item.getDuration()/60000)+' min.</td>';
-				html +='<td>'+item.getDescription()+'</td>';
-				html +='</tr>';
-				
-				html +='<tr style="background-color: #DDDDDD;">';
-				html +='<td valign="top">'+item.getTimeEndString()+'</td>';
-				html +='<td colspan="2"rowspan="2">'+item.getDescriptionExtended()+'</td>';
-				html +='</tr>';
-				
-				html +='<tr style="background-color: #DDDDDD;"><td>';
-				html +='<a target="_blank" ><img src="/webdata/gfx/timer.png" title="add to Timers" border="0"></a><br/>';
-				html +='<a target="_blank" href="/web/epgsearch.rss?search='+item.getTitle()+'" ><img src="/webdata/gfx/feed.png" title="RSS-Feed for this Title" border="0"></a><br/>';
-				html +='<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q='+escape(item.getTitle())+'" ><img src="/webdata/gfx/world.png" title="search IMDb" border="0"></a><br/>';
-				html +='</td></tr>';
-				
-				html +='<tr style="background-color: #AAAAAA;">';
-				html +='<td colspan="3">&nbsp;</td>';
-				html +='</tr>';
+				//Create JSON Object for Template
+				var namespace = { 	'date': item.getTimeDay(), 
+									'servicename': item.getServiceName(), 
+									'title': item.getTitle(),
+									'titleESC': escape(item.getTitle()),
+									'starttime': item.getTimeStartString(), 
+									'duration': (item.getDuration()/60000), 
+									'description': item.getDescription(), 
+									'endtime': item.getTimeEndString(), 
+									'extdescription': item.getDescriptionExtended()
+								};
+				//Fill template with data and add id to our result
+				html += RND(tplEPGListItem, namespace);
 			} catch (blubb) {
 				//debug("Error rendering: "+blubb);
 			}
@@ -324,7 +332,8 @@ function doRequest(url,readyFunction){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 function initVolumePanel(){
-	$('VolumePanel').innerHTML += "<img onclick='volumeUp()' src='/webdata/gfx/arrow_up.png'>"; 
+	document.getElementById('VolumePanel').innerHTML = tplVolumePanel;
+/*	$('VolumePanel').innerHTML += "<img onclick='volumeUp()' src='/webdata/gfx/arrow_up.png'>"; 
 	$('VolumePanel').innerHTML += "<img onclick='volumeDown()' src='/webdata/gfx/arrow_down.png'>"; 
 	$('VolumePanel').innerHTML += "<img id='volume1' onclick='volumeSet(10)' src='/webdata/gfx/led_off.png'>"; 
 	$('VolumePanel').innerHTML += "<img id='volume2' onclick='volumeSet(20)' src='/webdata/gfx/led_off.png'>"; 
@@ -336,7 +345,7 @@ function initVolumePanel(){
 	$('VolumePanel').innerHTML += "<img id='volume8' onclick='volumeSet(80)' src='/webdata/gfx/led_off.png'>"; 
 	$('VolumePanel').innerHTML += "<img id='volume9' onclick='volumeSet(90)' src='/webdata/gfx/led_off.png'>"; 
 	$('VolumePanel').innerHTML += "<img id='volume10' onclick='volumeSet(100)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='speaker' onclick='volumeMute()' src='/webdata/gfx/speak_on.png'>";
+	$('VolumePanel').innerHTML += "<img id='speaker' onclick='volumeMute()' src='/webdata/gfx/speak_on.png'>"; */
 	getVolume(); 
 }
 function getVolume()
@@ -464,40 +473,24 @@ function incomingChannellist(){
 
 		services = getXML(w).getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
 		
-		listerHtml 	= '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
-		listerHtml += '<thead class="fixedHeader">\n';
-		listerHtml += '<tr>\n';
-		listerHtml += '<th colspan="2" style="color: #FFFFFF;">ServiceList</th>\n';
-		listerHtml += '<th style="text-align: right;" style="color: #FFFFFF;">'
-		listerHtml += '<form onSubmit="new EPGList().getBySearchString(document.getElementById(\'searchText\').value); return false;">';
-		listerHtml += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="EPG suchen"/>';
-		listerHtml += '<input type="image" src="/webdata/gfx/search.png" title="suche starten">';
-		listerHtml += '</form>'
-		listerHtml += '</tr>\n';
-		listerHtml += '</thead>\n';
-		listerHtml += '<tbody class="scrollContent">\n';
+		listerHtml 	= tplServiceListHeader;
 		
 		debug("got "+services.length+" Services");
 		
 		for ( var i = 0; i < (services.length ); i++){
 			sRef = services.item(i).getElementsByTagName('e2servicereference').item(0).firstChild.data;
 			sName = services.item(i).getElementsByTagName('e2servicename').item(0).firstChild.data;
-
-			listerHtml += '<tr><td onclick="zap(this)" id="';
-			listerHtml += sRef;
-			listerHtml += '">\n';
-			listerHtml += sName;
-			listerHtml += '</td>\n';
-			listerHtml += '<td ><img onclick="new EPGList().getByServiceReference(this.id);" id="';
-			listerHtml += sRef;
-			listerHtml += '"  src="/webdata/gfx/epg.png" title="view EPG">\n';
-			listerHtml += '&nbsp;<a target="blank" href="stream.m3u?ref=';
-			listerHtml += sRef;
-			listerHtml += '\"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></td>\n';
-			listerHtml += '</tr>\n';
+				
+			var namespace = { 	'serviceref': sRef,
+								'servicerefESC': escape(sRef), 
+								'servicename': sName 
+							};
+							
+			listerHtml += RND(tplServiceListItem, namespace);
+			
 		}
 		
-		listerHtml += "</tbody></table>\n";
+		listerHtml += tplServiceListFooter;
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
 	}
