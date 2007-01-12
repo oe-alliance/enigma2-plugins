@@ -22,8 +22,8 @@ class Timer( Source):
             timer.append(item.service_ref)
             timer.append(item.service_ref.getServiceName())
             timer.append(item.eit)
-            timer.append(self.convert(item.name))
-            timer.append(self.convert(item.description))
+            timer.append(item.name)
+            timer.append(item.description)
             timer.append(item.disabled)
             timer.append(item.begin)
             timer.append(item.end)
@@ -50,10 +50,6 @@ class Timer( Source):
             timerlist.append(timer) 
             
         return timerlist
-    
-    def convert(self,input):
-        #this is not nice, but ",',<,> and & are controlchars in xml and must be replaced
-        return input.replace("<","&lt;").replace(">","&gt;").replace("&","&amp;").replace("\"","&quot;").replace("'","&apos;")
         
     list = property(command)
     lut = {"ServiceReference": 0

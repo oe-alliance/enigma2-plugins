@@ -2,10 +2,10 @@
 &lt;e2timerlist><e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
 	&lt;e2timer>
 		&lt;e2servicereference><e2:item name="ServiceReference" />&lt;/e2servicereference>
-		&lt;e2servicename><e2:item name="ServiceName" />&lt;/e2servicename>
+		&lt;e2servicename><e2:item name="ServiceName" filter="xml"/>&lt;/e2servicename>
 		&lt;e2eit><e2:item name="EIT" />&lt;/e2eit>
-		&lt;e2name><e2:item name="Name" />&lt;/e2name>
-		&lt;e2description><e2:item name="Description" />&lt;/e2description>
+		&lt;e2name><e2:item name="Name" filter="xml"/>&lt;/e2name>
+		&lt;e2description><e2:item name="Description" filter="xml"/>&lt;/e2description>
 		&lt;e2disabled><e2:item name="Disabled" />&lt;/e2disabled>
 		&lt;e2timebegin><e2:item name="TimeBegin" />&lt;/e2timebegin>
 		&lt;e2timeend><e2:item name="TimeEnd" />&lt;/e2timeend>
@@ -14,7 +14,7 @@
 		&lt;e2justplay><e2:item name="justPlay" />&lt;/e2justplay>
 		&lt;e2afterevent><e2:item name="afterEvent" />&lt;/e2afterevent>
 		&lt;e2logentries><e2:item name="LogEntries" />&lt;/e2logentries>
-		&lt;e2filename><e2:item name="Filename" />&lt;/e2filename>
+		&lt;e2filename><e2:item name="Filename" filter="xml"/>&lt;/e2filename>
 		&lt;e2backoff><e2:item name="Backoff" />&lt;/e2backoff>
 		&lt;e2nextactivation><e2:item name="nextActivation" />&lt;/e2nextactivation>
 		&lt;e2firsttryprepare><e2:item name="firstTryPrepare" />&lt;/e2firsttryprepare>
