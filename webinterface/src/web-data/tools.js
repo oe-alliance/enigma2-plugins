@@ -142,15 +142,16 @@ EPGList.prototype = {
 	
 	renderTable: function(epglist){
 		debug("rendering Table with "+epglist.length+" events");
-		var html='<table width="100%" border="0" cellspacing="1" cellpadding="0">';
+		var html='<table width="100%" border="0" cellspacing="1" cellpadding="0" border="1">';
 		for (var i=0; i < epglist.length; i++){
 			try{
 				var item = epglist[i];
 				
+				
 				html +='<tr style="background-color: #DDDDDD;">';
 				html +='<td width="10%">'+item.getTimeDay()+'</td>';
 				html +='<td width="30%">'+item.getServiceName()+'</td>';
-				html +='<td>'+item.getTitle()+'&nbsp;<a target="_blank" href="/web/epgsearch.rss?search='+item.getTitle()+'" ><img src="/webdata/gfx/feed.png" title="RSS-Feed for this Title" border="0"></a></td>';
+				html +='<td>'+item.getTitle()+'</td>';
 				html +='</tr>';
 				
 				html +='<tr style="background-color: #DDDDDD;">';
@@ -161,9 +162,14 @@ EPGList.prototype = {
 				
 				html +='<tr style="background-color: #DDDDDD;">';
 				html +='<td valign="top">'+item.getTimeEndString()+'</td>';
-				html +='<td colspan="2">'+item.getDescriptionExtended()+'</td>';
+				html +='<td colspan="2"rowspan="2">'+item.getDescriptionExtended()+'</td>';
 				html +='</tr>';
 				
+				html +='<tr style="background-color: #DDDDDD;"><td>';
+				html +='<a target="_blank" ><img src="/webdata/gfx/timer.png" title="add to Timers" border="0"></a><br/>';
+				html +='<a target="_blank" href="/web/epgsearch.rss?search='+item.getTitle()+'" ><img src="/webdata/gfx/feed.png" title="RSS-Feed for this Title" border="0"></a><br/>';
+				html +='<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q='+escape(item.getTitle())+'" ><img src="/webdata/gfx/world.png" title="search IMDb" border="0"></a><br/>';
+				html +='</td></tr>';
 				
 				html +='<tr style="background-color: #AAAAAA;">';
 				html +='<td colspan="3">&nbsp;</td>';
@@ -465,7 +471,7 @@ function incomingChannellist(){
 		listerHtml += '<th style="text-align: right;" style="color: #FFFFFF;">'
 		listerHtml += '<form onSubmit="new EPGList().getBySearchString(document.getElementById(\'searchText\').value); return false;">';
 		listerHtml += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="EPG suchen"/>';
-		listerHtml += '<input type="image" src="/webdata/gfx/search.png" alt="suche starten">';
+		listerHtml += '<input type="image" src="/webdata/gfx/search.png" title="suche starten">';
 		listerHtml += '</form>'
 		listerHtml += '</tr>\n';
 		listerHtml += '</thead>\n';
@@ -482,12 +488,12 @@ function incomingChannellist(){
 			listerHtml += '">\n';
 			listerHtml += sName;
 			listerHtml += '</td>\n';
-			listerHtml += '<td onclick="new EPGList().getByServiceReference(this.id);" id="';
+			listerHtml += '<td ><img onclick="new EPGList().getByServiceReference(this.id);" id="';
 			listerHtml += sRef;
-			listerHtml += '" >EPG</td>\n';
-			listerHtml += '<td><a target="blank" href="stream.m3u?ref=';
+			listerHtml += '"  src="/webdata/gfx/epg.png" title="view EPG">\n';
+			listerHtml += '&nbsp;<a target="blank" href="stream.m3u?ref=';
 			listerHtml += sRef;
-			listerHtml += '\">Stream</a></td>\n';
+			listerHtml += '\"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></td>\n';
 			listerHtml += '</tr>\n';
 		}
 		
