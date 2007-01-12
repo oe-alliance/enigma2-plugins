@@ -333,19 +333,6 @@ function doRequest(url,readyFunction){
 
 function initVolumePanel(){
 	document.getElementById('VolumePanel').innerHTML = tplVolumePanel;
-/*	$('VolumePanel').innerHTML += "<img onclick='volumeUp()' src='/webdata/gfx/arrow_up.png'>"; 
-	$('VolumePanel').innerHTML += "<img onclick='volumeDown()' src='/webdata/gfx/arrow_down.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='volume1' onclick='volumeSet(10)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='volume2' onclick='volumeSet(20)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='volume3' onclick='volumeSet(30)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='volume4' onclick='volumeSet(40)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='volume5' onclick='volumeSet(50)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='volume6' onclick='volumeSet(60)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='volume7' onclick='volumeSet(70)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='volume8' onclick='volumeSet(80)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='volume9' onclick='volumeSet(90)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='volume10' onclick='volumeSet(100)' src='/webdata/gfx/led_off.png'>"; 
-	$('VolumePanel').innerHTML += "<img id='speaker' onclick='volumeMute()' src='/webdata/gfx/speak_on.png'>"; */
 	getVolume(); 
 }
 function getVolume()
