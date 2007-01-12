@@ -2,6 +2,10 @@ from Plugins.Plugin import PluginDescriptor
 
 sessions = [ ]
 
+# set DEBUG to True, if twisted should write logoutput to a file.
+DEBUG = False 
+DEBUGFILE= "/tmp/twisted.log"
+
 def startWebserver():
 	from twisted.internet import reactor
 	from twisted.web2 import server, channel, static, resource, stream, http_headers, responsecode, http
@@ -61,6 +65,17 @@ def autostart(reason, **kwargs):
 
 	if reason == 0:
 		try:
+			"""
+			 in normal console output, twisted will print only the first Traceback.
+			 is this a bug in twisted or a conflict with enigma2?
+			 with this option enabled, twisted will print all TB to the logfile
+			 use tail -f <file> to view this log
+			"""
+			if DEBUG:
+				from twisted.python.log import startLogging
+				print "start twisted logfile, writing to %s" % DEBUGFILE 
+				startLogging(open(DEBUGFILE,'w'))
+			
 			startWebserver()
 		except ImportError:
 			print "twisted not available, not starting web services"
