@@ -44,7 +44,7 @@
 				<div id="CurrentService"></div>
 				<div id="VolumePanel"></div>
 				<div id="CurrentTime"></div>
-		    </div>
+		      	<div id="SignalPanel"></div>		    </div>
 		    
 		    <div class="divblock">
 				<div style="width:5%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Begin"></div>
