@@ -405,14 +405,15 @@ function handleVolumeRequest(request){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 function initChannelList(){
 	debug("init ChannelList");	
+
 	//refreshChannellist('Favourites (TV)', '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet');
-	var url = url_fetchchannels+encodeURIComponent('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)  FROM BOUQUET &quot;bouquets.tv&quot; ORDER BY bouquet');
+	var url = url_fetchchannels+encodeURIComponent('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet');
 	doRequest(url, incomingTVBouqetList);
 
-	var url = url_fetchchannels+encodeURIComponent('1:7:2:0:0:0:0:0:0:0:(type == 2) FROM BOUQUET "bouquets.radio" ORDER BY bouquet');
+	var url = url_fetchchannels+encodeURIComponent('1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet');
 	doRequest(url, incomingRadioBouqetList);
 
-	var url = url_fetchchannels+encodeURIComponent('1:7:2:0:0:0:0:0:0:0: FROM PROVIDERS ORDER BY name');
+	var url = url_fetchchannels+encodeURIComponent('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name');
 	doRequest(url, incomingProviderBouqetList);
 }
 

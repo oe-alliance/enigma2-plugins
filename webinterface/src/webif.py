@@ -53,7 +53,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		from enigma import eServiceReference
 		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["ServiceList"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
-		self["ServiceListBrowse"] = ServiceList(fav, command_func = self.browseTo)
+		self["ServiceListBrowse"] = ServiceList(fav, command_func = self.browseTo, validate_commands=False)
 		self["Volume"] = Volume(session)
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
 		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
