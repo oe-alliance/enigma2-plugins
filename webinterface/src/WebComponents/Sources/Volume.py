@@ -22,6 +22,7 @@ class Volume(Source):
     def do_func(self):
         list = []
         if self.cmd == "state":
+            list.append(True)
             list.append("state")
         elif self.cmd == "up":
             self.actionmap.actions["volumeUp"]()
@@ -58,6 +59,7 @@ class Volume(Source):
             list.append("unknown Volume command %s" %self.cmd)
         list.append(self.volctrl.getVolume())
         list.append(self.volctrl.isMuted())
+        print "returning",[list]
         return [list]
     
     list = property(do_func)
