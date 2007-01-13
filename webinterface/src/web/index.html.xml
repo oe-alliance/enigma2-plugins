@@ -5,6 +5,7 @@
 	<!--load everything for prototype and prototype window -->
 
 	<script type="text/javascript" src="/webdata/lib/prototype.js" />
+	<script type="text/javascript" src="/webdata/lib/rico.js"/>
 	<script type="text/javascript" src="/webdata/lib/ptwindow/effects.js" />
 	<script type="text/javascript" src="/webdata/lib/ptwindow/window.js" />
 	<!--script type="text/javascript" src="/webdata/lib/ptwindow/debug.js" /-->
@@ -30,7 +31,25 @@
 		
 		<table cellpadding="0" cellspacing="0" id="navTable">
 			<tr>
-				<td class="NavEl"><a class="NavEl" href="#">Nav1</a></td>
+				<td class="NavEl">
+						<!-- START BODY MENUE //-->
+						<div id="accordionMenue">
+   							<div id="accordionMenueBouqetPanel">
+     							<div id="accordionMenueBouqetHeader">TV</div>
+      							<div id="accordionMenueBouqetContentTV">please wait, loading...</div>
+							</div>
+   							<div id="accordionMenueBouqetPanel">
+     							<div id="accordionMenueBouqetHeader">Radio</div>
+      							<div id="accordionMenueBouqetContentRadio">please wait, loading...</div>
+							</div>
+   							<div id="accordionMenueBouqetPanel">
+     							<div id="accordionMenueBouqetHeader">Provider</div>
+      							<div id="accordionMenueBouqetContentProvider">please wait, loading...</div>
+							</div>
+						</div>
+						<!-- END BODY MENUE //-->
+				
+				</td>
 			</tr>
 			<tr>
 				<td class="NavEl"><a class="NavEl" href="#">Nav2</a></td>
@@ -51,7 +70,7 @@
 				<div style="width:65%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Name"></div>
 				<div style="width:30%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="eventRA" id="Event_Now_Remaining"></div>
 		    </div>
-		    
+	    
 		    <div class="divblock">
 				<div class="eventExtDesc" id="Event_Now_Extended_Description"></div>
 		    </div>
@@ -75,11 +94,12 @@
 <!--iframe onload="hide(this)" width="0" id="updates" height="0" src="updates.html" name="updates" scrolling="none" frameborder="0">no iframe support!</iframe-->
 <script type="text/javascript" >
 if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow"); }
+
+new Rico.Accordion( $('accordionMenue') );
+
 initVolumePanel();
 initSignalPanel();
 initChannelList();
-
-refreshChannellist('Favourites (TV)', '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet');
 setBodyMainContent('BodyContentChannellist');
 function imdb()
 {

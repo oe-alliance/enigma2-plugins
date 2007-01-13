@@ -10,7 +10,7 @@ var url_epgnownext = "/web/epgnownext?ref="; // plus serviceRev
 
 var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded serviceref
 
-var DBG = true;
+var DBG = false;
 
 function openWindow(title, inner, width, height, id){
 			if(id == null) id = new Date().toUTCString();
@@ -417,27 +417,33 @@ function initChannelList(){
 	doRequest(url, incomingProviderBouqetList);
 }
 
-function loadBouquet(url){ //unused?
-	doRequest(url, incomingBouquet);
+function loadBouquet(servicereference){ 
+	debug("loading bouqet with "+servicereference);	
+	doRequest(url_fetchchannels+servicereference, incomingChannellist);
 }
+
 function incomingTVBouqetList(request){
 	if (request.readyState == 4) {
-		var listet = e2servicelistToArray(getXML(request));
-
-		debug("have "+listet.length+" TV Bouqet ");	
+		var list0 = e2servicelistToArray(getXML(request));
+		debug("have "+list0.length+" TV Bouqet ");	
+		$('accordionMenueBouqetContentTV').innerHTML = renderBouqetTable(list0,tplBouqetListItem);
+		
+		//loading first entry of TV Favorites as default for ServiceList
+		loadBouquet(list0[0][1]);
 	}
 }
 function incomingRadioBouqetList(request){
 	if (request.readyState == 4) {
-		var list = e2servicelistToArray(getXML(request));
-		debug("have "+list.length+" Radio Bouqet ");	
+		var list1 = e2servicelistToArray(getXML(request));
+		debug("have "+list1.length+" Radio Bouqet ");	
+		$('accordionMenueBouqetContentRadio').innerHTML = renderBouqetTable(list1,tplBouqetListItem);
 	}	
 }
 function incomingProviderBouqetList(request){
 	if (request.readyState == 4) {
-		var liste = e2servicelistToArray(getXML(request));
-		debug("have "+liste.length+" Provider Bouqet ");	
-		
+		var list2 = e2servicelistToArray(getXML(request));
+		debug("have "+list2.length+" Provider Bouqet ");	
+		$('accordionMenueBouqetContentProvider').innerHTML = renderBouqetTable(list2,tplBouqetListItem);
 	}	
 }
 
@@ -445,7 +451,7 @@ function e2servicelistToArray(xml){
 	var b = xml.getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
 	var list = new Array();
 	for ( var i=0; i < b.length; i++){
-		var bRef = b.item(i).getElementsByTagName('e2servicereference').item(0).firstChild.data;
+		var bRef = escape(b.item(i).getElementsByTagName('e2servicereference').item(0).firstChild.data.replace('&quot;', '"'));
 		var bName = b.item(i).getElementsByTagName('e2servicename').item(0).firstChild.data;
 		var listitem = new Array(bName,bRef);
 		list.push(listitem)
@@ -453,57 +459,25 @@ function e2servicelistToArray(xml){
 	return list
 }
 
-function incomingBouquet(request){
-	if((request.readyState == 4) && (t.status == 200)) {
-	// perfekt!
-		
-		var b = getXML(request).getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
-
-		bouquets = new Array();
-		for ( var i=0; i < b.length; i++){
-			bRef = b.item(i).getElementsByTagName('e2servicereference').item(0).firstChild.data;
-			bName = b.item(i).getElementsByTagName('e2servicename').item(0).firstChild.data;
+function renderBouqetTable(bouqet,template){
+	var html='<table width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';
+	for (var i=0; i < bouqet.length; i++){
+		try{
+			var item = bouqet[i];
 			
-			bu = new Array(bName,bRef);
-			bouquets.push(bu)
-		}
-		refreshSelect(bouquets);
-	}
-	
-}
-
-// to add the bouquetts to the list
-function refreshSelect(arraybouquet){
-	doRequest(url, incomingChannellist);
-	sel = document.getElementById("accordionMenuebouquetContent");
-	// options neu eintragen
-	html = "<table>";
-		for ( var i = 0 ; i < arraybouquet.length ; i++ ){
-		if(arraybouquet[i][0] && arraybouquet[i][1]){
-			html+="<tr><td>";
-			html+="<a  onclick=\"bouquetSelected(this); setBodyMainContent('BodyContentChannellist');\" id='";
-			html+= arraybouquet[i][1];
-			html+="'>";
-			html+= arraybouquet[i][0];
-			html+="</a>";
-			html+="</td></tr>";
-		}
-	}
-	html+="</table>";
-	sel.innerHTML=html;
-	refreshChannellist(arraybouquet[0][0],arraybouquet[0][1]);
-}
-
-//++++++++++++++++++++++
-function bouquetSelected(element){
-	refreshChannellist(element.value,element.id)
-}
-
-function refreshChannellist(bname, bref){
-	var url = '/web/fetchchannels?ServiceListBrowse='+escape(bref);
-	doRequest(url, incomingChannellist);
-}
+			//Create JSON Object for Template
+			var namespace = {
+				'bouqetname': item[0], 
+				'servicereference': item[1], 
+				};
 			
+			html += RND(template, namespace);
+		} catch (blubb) {}
+	}
+	html +="</table>";
+	return html;
+}	
+
 function incomingChannellist(request){
 	if(request.readyState == 4){
 

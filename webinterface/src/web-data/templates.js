@@ -52,6 +52,11 @@ var tplServiceListItem  = '<tr>\n';
 	
 var tplServiceListFooter = "</tbody></table>\n";
 
+// Bouqetlist Template
+var tplBouqetListItem  = '<tr>\n';
+	tplBouqetListItem += '<td><div id="%(servicereference)" onclick="loadBouquet(this.id);">%(bouqetname)</div></td>';
+	tplBouqetListItem += '</tr>\n';
+	
 //Volume Template
 var tplVolumePanel  = "<img onclick='volumeUp()' src='/webdata/gfx/arrow_up.png'>"; 
 	tplVolumePanel += "<img onclick='volumeDown()' src='/webdata/gfx/arrow_down.png'>"; 
@@ -75,3 +80,4 @@ var tplSignalPanel  = '<table width="100%" id="SignalPanelTable">';
 	tplSignalPanel += '</table>';
 	
 var tplSignalPanelButton = '<img src="/webdata/gfx/signal.png" title="show SignalInfoPanel" onclick="openSignalDialog();" title="view Signal Info">';
+
