@@ -8,7 +8,7 @@ var url_epgservice = "/web/epgservice?ref="; // plus serviceRev
 var url_epgsearch = "/web/epgsearch?search="; // plus serviceRev
 var url_epgnownext = "/web/epgnownext?ref="; // plus serviceRev
 
-var DBG = true;
+var DBG = false;
 
 function openWindow(title, inner, width, height, id){
 			if(id == null) id = new Date().toUTCString();
