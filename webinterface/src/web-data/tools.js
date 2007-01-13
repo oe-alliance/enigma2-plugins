@@ -103,14 +103,36 @@ function set(what, value){
 	}
 	//$('scriptzone').innerHTML = ""; // deleting set() from page, to keep the page short and to save memory
 }
+// requestindikator
+var requestcounter = 0;
+
+function requestIndicatorUpdate(){
+	debug(requestcounter+" open requests");
+	if(requestcounter>=1){
+		$('RequestIndicator').style.display = "inline";
+	}else{
+		$('RequestIndicator').style.display = "none";
+	}
+}
+function requestStarted(){
+	requestcounter +=1;
+	requestIndicatorUpdate();
+}
+function requestFinished(){
+	requestcounter -=1;
+	requestIndicatorUpdate();
+}
+// end requestindikator
 
 function doRequest(url, readyFunction){
 	//debug("requesting "+url);
+	requestStarted();
 	new Ajax.Request(url,
 		{
 			method: 'get',
 			requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
-			onSuccess: readyFunction
+			onSuccess: readyFunction,
+			onComplete: requestFinished 
 		});
 }
 
@@ -168,20 +190,11 @@ EPGList.prototype = {
 	},
 	getBySearchString: function(string){
 		debug("requesting "+ url_epgsearch+string);
-		new Ajax.Request( url_epgsearch+string,
-			{
-				method: 'get', 
-				onComplete: this.incomingEPGrequest
-			});
+		doRequest(url_epgsearch+string,this.incomingEPGrequest);
 		
 	},
 	getByServiceReference: function(serviceRef){
-		new Ajax.Request(url_epgservice+serviceRef,
-			{
-				method: 'get', 
-				onComplete: this.incomingEPGrequest
-			});
-		
+		doRequest(url_epgservice+serviceRef,this.incomingEPGrequest);
 	},
 	
 	
