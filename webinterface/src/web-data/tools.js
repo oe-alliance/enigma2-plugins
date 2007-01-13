@@ -106,7 +106,8 @@ function doRequest(url, readyFunction){
 
 	new Ajax.Request(url,
 		{
-			method: 'get', 
+			method: 'get',
+			requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
 			onSuccess: readyFunction
 		});
 }
