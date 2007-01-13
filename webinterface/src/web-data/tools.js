@@ -231,13 +231,20 @@ function EPGEvent(element){
 		this.startTime = element.getElementsByTagName('e2eventstart').item(0).firstChild.data;
 		this.duration = element.getElementsByTagName('e2eventduration').item(0).firstChild.data;
 		this.title = element.getElementsByTagName('e2eventtitle').item(0).firstChild.data;
-		this.description = element.getElementsByTagName('e2eventdescription').item(0).firstChild.data;
-		this.descriptionE = element.getElementsByTagName('e2eventdescriptionextended').item(0).firstChild.data;
 		this.serviceRef = element.getElementsByTagName('e2eventservicereference').item(0).firstChild.data;
 		this.serviceName = element.getElementsByTagName('e2eventservicename').item(0).firstChild.data;
-	} catch (bullshit) {
-		//debug("Bullshit is:"+bullshit);
-	}
+	} catch (e) {
+		debug("EPGEvent parsing Error");
+	}	
+	try{
+		this.description = element.getElementsByTagName('e2eventdescription').item(0).firstChild.data;
+	} catch (e) {	this.description= 'N/A';	}
+	
+	try{
+		this.descriptionE = element.getElementsByTagName('e2eventdescriptionextended').item(0).firstChild.data;
+	} catch (e) {	this.descriptionE = 'N/A';	}
+
+	
 	this.getEventId = function ()
 	{
 		return this.eventID;

@@ -1,10 +1,11 @@
+/*
 .rtop, .rbottom{display:block}
 .rtop *, .rbottom *{display: block; height: 1px; overflow: hidden}
 .r1{margin: 0 5px}
 .r2{margin: 0 3px}
 .r3{margin: 0 2px}
 .r4{margin: 0 1px; height: 2px}
-
+*/
 body { 	
 	text-align:left;
 	vertical-align: top;
@@ -41,8 +42,9 @@ div.BodyContentChannellist {
 	height: 450px;
 	overflow: auto;
 	margin: 0 9 0;
-	width: 780px;
+/*	width: 780px; */
 }
+
 
 /* Reset overflow value to hidden for all non-IE browsers. */
 html>body div.BodyContentChannellist {
@@ -53,7 +55,7 @@ html>body div.BodyContentChannellist {
 /* define width of table. IE browsers only                 */
 div.BodyContentChannellist table {
 	float: left;
-	width: 764px;
+	width: 760px;
 }
 
 /* define width of table. Add 16px to width for scrollbar.           */
@@ -125,28 +127,19 @@ tbody.scrollContent td, tbody.scrollContent tr.normalRow td {
 	border-top: 1px solid #DDD;
 	padding: 2px 3px 3px 4px
 }
-/*
-tbody.scrollContent tr.alternateRow td {
-	background: #EEE;
-	border-bottom: none;
-	border-left: none;
-	border-right: 1px solid #CCC;
-	border-top: 1px solid #DDD;
-	padding: 2px 3px 3px 4px
-}
-*/
+
 /* define width of TH elements: 1st, 2nd, and 3rd respectively.          */
 /* Add 16px to last TH for scrollbar padding. All other non-IE browsers. */
 /* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
 html>body thead.fixedHeader th {
-	width: 780px;
+	width: 780px; 
 }
 
 /* define width of TD elements: 1st, 2nd, and 3rd respectively.          */
 /* All other non-IE browsers.                                            */
 /* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
 html>body tbody.scrollContent td {
-	width: 764px;
+	width: 764px; 
 }
 
 /****************************************
@@ -156,7 +149,7 @@ normal stylesheet-stuff******************
 #Main{
 	padding: 0;
 	width:920px;
-	height:99%;
+	height:700px; 
 	text-align: left;
 	margin: 2 2 2;
 	vertical-align: top;
@@ -165,11 +158,11 @@ normal stylesheet-stuff******************
 
 #Content{
 	vertical-align: top;
-	border: 1px solid #006699;
+	border: 1px solid #006699; 
 	float: left;
 	background-color: #FFFFFF;
 	width: 800px;
-	height: 100%;	
+	height: 99%;	 
 }
 
 #CurrentService { 
@@ -178,7 +171,6 @@ normal stylesheet-stuff******************
 	font-weight:bold;
 	
 	float:left;
-
 	background-color: #0066CC;
 	color: #FFFFFF;
 
@@ -191,7 +183,6 @@ normal stylesheet-stuff******************
 	font-weight:bold;
 	
 	float:left;
-
 	background-color: #0066CC;
 	color: #FFFFFF;
 
@@ -206,12 +197,19 @@ normal stylesheet-stuff******************
 	
 	float:left;
 	text-align:right;
-	
 	background-color: #0066CC;
 	color: #FFFFFF;
 	
 	width:25%;
 	height: 20px;
+}
+#ServiceInfo{
+	width:800px;
+	float:none;
+	clear:both;
+	padding: 0 0 0;
+	margin: 0 0 0;
+	background-color: #0066CC;
 }
 
 #nav{
@@ -222,7 +220,7 @@ normal stylesheet-stuff******************
 	float: left;
 	padding: 0;
 	margin: 0;
-	height:100%;
+	height:99%;
 	width: 117px;
 }
 
@@ -276,55 +274,18 @@ a.navEl:hover{
 
 #EventNowNext{
 }
-#debug{
-	font-size: 8px;
-	width:100%;
-	display:none;
-}
+
 #updates{
 	visibility: hidden;
 }
 
-#ServiceLists{
-	z-index: 1;
-	position: relative;
-}
-#BouquetChanger{
-	z-index: 2;
-	position: absolute;
-	top: 1px;
-	left: 1px;
-	background-color: #FFFFFF;
-	padding: 2px;
-	border: 1px solid #000000;
-	float:left;
-}
-.bouquetChangerItem{
-	width: 100%;
-}
 
-.bouquetChangerItem:hover{
-	background-color: #BBBBBB;
-}
 .divblock{
 	width:100%;
 	float:none;
 	clear:both;
-	
 }
 
-.headerBlueBlock{
-	width:100%;
-	float:none;
-	clear:both;
-	background-color: #abcdef;
-}
-.eventBlock{
-	width:100%;
-	float:none;
-	clear:both;
-	cursor:help;
-}
 .event{
 	font-size:12px;
 	width:100%;
@@ -349,33 +310,42 @@ a.navEl:hover{
 	margin-bottom: 1px;
 	width:100%;
 }
-.nospace{
-	padding: 15px;
-	margin: 15px;
-}
 
 .bgMain{
 	background-color: #FFFFFF;
 	width: 100%;
 }
-.spacer5{
-	height:10px;
+.sListHeader{
+	float:left;
+	width:50%;
+}
+.sListSearch{
+	float:left;
+	width:50%;
+	text-align: right;
+}
+form.sListSearch{
+	text-align: right;
+}
+.sListSName{
+	float:left;
+	width:700px;
 }
 
-.spacer10{
-	height:10px;
-}
-.spacer15{
-	height:10px;
-}
-.spacer20{
-	height:10px;
+a.sListSLink{
+	display: block;
+	width:700px;
+	text-decoration: none;
 }
 
-.fullwidth{
-	width: 100%;
+a.sListSLink:hover{
+	background-color: #DDDDDD;
 }
-.small{
-	font-size: 12px;
-	font-weight: bold;
+
+.sListExt{
+	float:left;
+	width:55px;
+	text-align: right;
 }
+
+

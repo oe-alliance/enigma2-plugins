@@ -35,19 +35,19 @@ var tplEPGListFooter = "</table>";
 var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplServiceListHeader += '<thead class="fixedHeader">\n';
 	tplServiceListHeader += '<tr>\n';
-	tplServiceListHeader += '<th colspan="2" style="color: #FFFFFF;">ServiceList</th>\n';
-	tplServiceListHeader += '<th style="text-align: right;" style="color: #FFFFFF;">';
+	tplServiceListHeader += '<th><div class="sListHeader" style="color: #FFFFFF;">ServiceList</div>\n';
+	tplServiceListHeader += '<div class="sListSearch">';
 	tplServiceListHeader += '<form onSubmit="new EPGList().getBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplServiceListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="EPG suchen"/>';
-	tplServiceListHeader += '</form>';
+	tplServiceListHeader += '</form></div></th>';
 	tplServiceListHeader += '</tr>\n';
 	tplServiceListHeader += '</thead>\n';
 	tplServiceListHeader += '<tbody class="scrollContent">\n';
 
 var tplServiceListItem  = '<tr>\n';
-	tplServiceListItem += '<td onclick="zap(this)" id="%(serviceref)">%(servicename)</td>\n';
-	tplServiceListItem += '<td ><img onclick="new EPGList().getByServiceReference(this.id);" id="%(serviceref)" src="/webdata/gfx/epg.png"/>\n';
-	tplServiceListItem += '<a target="_blank" href="stream.m3u?ref=%(servicerefESC)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></td>\n';
+	tplServiceListItem += '<td><div class="sListSName"><a id="%(serviceref)" onclick="zap(this)" class="sListSLink" href="#">%(servicename)</a></div>';
+	tplServiceListItem += '<div class="sListExt"><a href="#"><img onclick="new EPGList().getByServiceReference(this.id);" id="%(serviceref)" src="/webdata/gfx/epg.png" border="0"/></a>\n';
+	tplServiceListItem += '<a target="_blank" href="stream.m3u?ref=%(servicerefESC)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
 	tplServiceListItem += '</tr>\n';
 	
 var tplServiceListFooter = "</tbody></table>\n";
