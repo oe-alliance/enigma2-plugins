@@ -8,7 +8,9 @@ var url_epgservice = "/web/epgservice?ref="; // plus serviceRev
 var url_epgsearch = "/web/epgsearch?search="; // plus serviceRev
 var url_epgnownext = "/web/epgnownext?ref="; // plus serviceRev
 
-var DBG = false;
+var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded serviceref
+
+var DBG = true;
 
 function openWindow(title, inner, width, height, id){
 			if(id == null) id = new Date().toUTCString();
@@ -103,7 +105,7 @@ function set(what, value){
 }
 
 function doRequest(url, readyFunction){
-
+	//debug("requesting "+url);
 	new Ajax.Request(url,
 		{
 			method: 'get',
@@ -377,8 +379,6 @@ function volumeMute()
 function handleVolumeRequest(request){
 	if (request.readyState == 4) {
 		var b = getXML(request).getElementsByTagName("e2volume");
-		debug(b.item(0).getElementsByTagName('e2current').length); 
-		
 		var newvalue = b.item(0).getElementsByTagName('e2current').item(0).firstChild.data;
 		var mute = b.item(0).getElementsByTagName('e2ismuted').item(0).firstChild.data;
 		debug("volume"+newvalue+";"+mute);
@@ -400,16 +400,56 @@ function handleVolumeRequest(request){
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//++++ bouquet managing functions                   ++++
+//++++ bouquet managing functions                  ++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
-function loadRootTVbouquet(){
-	url = '/web/fetchchannels?ServiceListBrowse='+escape('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)  FROM BOUQUET &quot;bouquets.tv&quot; ORDER BY bouquet');
-	loadBouquet(url);
+function initChannelList(){
+	debug("init ChannelList");	
+	//refreshChannellist('Favourites (TV)', '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet');
+	var url = url_fetchchannels+encodeURIComponent('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)  FROM BOUQUET &quot;bouquets.tv&quot; ORDER BY bouquet');
+	doRequest(url, incomingTVBouqetList);
+
+	var url = url_fetchchannels+encodeURIComponent('1:7:2:0:0:0:0:0:0:0:(type == 2) FROM BOUQUET "bouquets.radio" ORDER BY bouquet');
+	doRequest(url, incomingRadioBouqetList);
+
+	var url = url_fetchchannels+encodeURIComponent('1:7:2:0:0:0:0:0:0:0: FROM PROVIDERS ORDER BY name');
+	doRequest(url, incomingProviderBouqetList);
 }
 
-function loadBouquet(url){
+function loadBouquet(url){ //unused?
 	doRequest(url, incomingBouquet);
+}
+function incomingTVBouqetList(request){
+	if (request.readyState == 4) {
+		var listet = e2servicelistToArray(getXML(request));
+
+		debug("have "+listet.length+" TV Bouqet ");	
+	}
+}
+function incomingRadioBouqetList(request){
+	if (request.readyState == 4) {
+		var list = e2servicelistToArray(getXML(request));
+		debug("have "+list.length+" Radio Bouqet ");	
+	}	
+}
+function incomingProviderBouqetList(request){
+	if (request.readyState == 4) {
+		var liste = e2servicelistToArray(getXML(request));
+		debug("have "+liste.length+" Provider Bouqet ");	
+		
+	}	
+}
+
+function e2servicelistToArray(xml){
+	var b = xml.getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
+	var list = new Array();
+	for ( var i=0; i < b.length; i++){
+		var bRef = b.item(i).getElementsByTagName('e2servicereference').item(0).firstChild.data;
+		var bName = b.item(i).getElementsByTagName('e2servicename').item(0).firstChild.data;
+		var listitem = new Array(bName,bRef);
+		list.push(listitem)
+	}
+	return list
 }
 
 function incomingBouquet(request){
@@ -427,10 +467,6 @@ function incomingBouquet(request){
 			bouquets.push(bu)
 		}
 		refreshSelect(bouquets);
-	} else {
-	// die Anfrage enthielt Fehler;
-	// die Antwort war z.B. 404 (nicht gefunden)
-	// oder 500 (interner Server-Fehler)
 	}
 	
 }
