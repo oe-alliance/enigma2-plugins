@@ -45,7 +45,7 @@ class EPG( Source):
     
     def searchEvent(self,cmd):
         print "getting EPG by title",cmd
-        events = self.epgcache.search(('IBDTSERN',1024,eEPGCache.PARTIAL_TITLE_SEARCH,cmd,1));
+        events = self.epgcache.search(('IBDTSERN',256,eEPGCache.PARTIAL_TITLE_SEARCH,cmd,1));
         if events:
             return events
         else:
