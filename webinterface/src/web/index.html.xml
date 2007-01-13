@@ -5,83 +5,71 @@
 	<!--load everything for prototype and prototype window -->
 
 	<script type="text/javascript" src="/webdata/lib/prototype.js" />
-  	<script type="text/javascript" src="/webdata/lib/ptwindow/effects.js" />
-  	<script type="text/javascript" src="/webdata/lib/ptwindow/window.js" />
+	<script type="text/javascript" src="/webdata/lib/ptwindow/effects.js" />
+	<script type="text/javascript" src="/webdata/lib/ptwindow/window.js" />
 	<!--script type="text/javascript" src="/webdata/lib/ptwindow/debug.js" /-->
 
 	<link href="/webdata/lib/ptwindow/themes/default.css" rel="stylesheet" type="text/css" />
-  	<link href="/webdata/lib/ptwindow/themes/alphacube.css" rel="stylesheet" type="text/css" />
-	
+	<link href="/webdata/lib/ptwindow/themes/alphacube.css" rel="stylesheet" type="text/css" />
+
 	<!-- our stuff -->
 	<script type="text/javascript" src="/webdata/templates.js" />
 	<script type="text/javascript" src="/webdata/tools.js" />
-	
+
 	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
 
 	<!-- Live RSS Feeds //-->
 	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss" />
-
 </head>
 
 <body>
 <div id="BodyContentDebugbox"></div>
 <div id="Main">
-	
-	<!--div id="Banner">Enigma2 Webinterface</div>
-	<div class="spacer10"></div-->
-	<div id="Nav">	
-			<div id="NavHd">NAVIGATION</div>
-			
-			<table cellpadding="0" cellspacing="0" id="navTable">
-				<tr>
-					<td class="NavEl"><a class="NavEl" href="#">Nav1</a></td>
-				</tr>
-				<tr>
-					<td class="NavEl"><a class="NavEl" href="#">Nav2</a></td>
-				</tr>
-			</table>
+	<div id="nav">	
+		<div id="NavHd">NAVIGATION</div>
+		
+		<table cellpadding="0" cellspacing="0" id="navTable">
+			<tr>
+				<td class="NavEl"><a class="NavEl" href="#">Nav1</a></td>
+			</tr>
+			<tr>
+				<td class="NavEl"><a class="NavEl" href="#">Nav2</a></td>
+			</tr>
+		</table>
 	</div>
 	<div id="Content">
 		<div id="EventNowNext" class="bgMain">
-	    
-		    <div class="divblock">
-		      		<div id="CurrentService"></div>
-		      		<div id="VolumePanel"></div>
-		      		<div id="CurrentTime"></div>
-		      		<div id="SignalPanel"></div>
+
+		    <div id="ServiceInfo">
+				<div id="CurrentService"></div>
+				<div id="VolumePanel"></div>
+				<div id="CurrentTime"></div>
 		    </div>
 		    
 		    <div class="divblock">
-		      <div style="width:5%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Begin"></div>
-		      <div style="width:65%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Name"></div>
-		      <div style="width:30%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="eventRA" id="Event_Now_Remaining"></div>
+				<div style="width:5%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Begin"></div>
+				<div style="width:65%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Name"></div>
+				<div style="width:30%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="eventRA" id="Event_Now_Remaining"></div>
 		    </div>
 		    
 		    <div class="divblock">
-		      <div class="eventExtDesc" id="Event_Now_Extended_Description"></div>
+				<div class="eventExtDesc" id="Event_Now_Extended_Description"></div>
 		    </div>
 		    
 		    <div class="divblock" onclick="showhide('Event_Next_Extended_Description');">
-		      <div style="width:5%; float:left;" class="event" id="Event_Next_Begin"></div>
-		      <div style="width:65%; float:left;" class="event" id="Event_Next_Name"></div>
-		      <div style="width:30%; float:left;" class="eventRA" id="Event_Next_Remaining"></div>
+				<div style="width:5%; float:left;" class="event" id="Event_Next_Begin"></div>
+				<div style="width:65%; float:left;" class="event" id="Event_Next_Name"></div>
+				<div style="width:30%; float:left;" class="eventRA" id="Event_Next_Remaining"></div>
 		    </div>
 		    
 		    <div class="divblock">
-		      <div style="display:none;" class="eventExtDesc" id="Event_Next_Extended_Description"></div>
+				<div style="display:none;" class="eventExtDesc" id="Event_Next_Extended_Description"></div>
 		    </div>
 		</div>
 		<hr />
 		
 		<div id="BodyContentChannellist" class="BodyContentChannellist"></div>
-		<div id="BodyContentMessageform" style="display:none;"></div>
-		<div id="BodyContentPower" style="display:none;"></div>
-		<div id="BodyContentHDD" style="display:none;">
-			<iframe src="/hdd/" width="100%" height="400"/>
-		</div>
 
-			
-	
 	</div>
 </div>
 <!--iframe onload="hide(this)" width="0" id="updates" height="0" src="updates.html" name="updates" scrolling="none" frameborder="0">no iframe support!</iframe-->
@@ -105,24 +93,28 @@ function imdb()
 &lt;div id="scriptzone">
 <!-- realtime updates follow -->
 <e2:element source="CurrentTime" streaming="yes">
-  <e2:convert type="ClockToText">WithSeconds</e2:convert>
+	<e2:convert type="ClockToText">WithSeconds</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
+
 <e2:element source="CurrentService" streaming="yes">
-	<e2:convert type="ServiceName">Name</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
+<e2:convert type="ServiceName">Name</e2:convert>
+<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
+
 <e2:element source="Event_Now" id="Event_Now_Name" streaming="yes">
 	<e2:convert type="EventName">Name</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
+
 <e2:element source="Event_Now" id="Event_Now_Extended_Description" streaming="yes">
 	<e2:convert type="EventName">ExtendedDescription</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
+
 <e2:element source="Event_Now" id="Event_Now_Begin" streaming="yes">
 	<e2:convert type="EventTime">StartTime</e2:convert>
-  <e2:convert type="ClockToText">Default</e2:convert>
+	<e2:convert type="ClockToText">Default</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
 
@@ -132,11 +124,11 @@ function imdb()
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
 
-
 <e2:element source="Event_Next" id="Event_Next_Name" streaming="yes">
-  <e2:convert type="EventName">Name</e2:convert>
-  <e2:convert type="web:JavascriptUpdate" />
+	<e2:convert type="EventName">Name</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
+
 <e2:element source="Event_Next" id="Event_Next_Begin" streaming="yes">
 	<e2:convert type="EventTime">StartTime</e2:convert>
 	<e2:convert type="ClockToText">Default</e2:convert>
@@ -144,10 +136,11 @@ function imdb()
 </e2:element>
 
 <e2:element source="Event_Next" id="Event_Next_Remaining" streaming="yes">
-  <e2:convert type="EventTime">Remaining</e2:convert>
-  <e2:convert type="RemainingToText">InMinutes</e2:convert>
-  <e2:convert type="web:JavascriptUpdate" />
+	<e2:convert type="EventTime">Remaining</e2:convert>
+	<e2:convert type="RemainingToText">InMinutes</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
+
 <e2:element source="Event_Next" id="Event_Next_Extended_Description" streaming="yes">
 	<e2:convert type="EventName">ExtendedDescription</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
@@ -157,14 +150,15 @@ function imdb()
 	<e2:convert type="FrontendInfo">SNR</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
+
 <e2:element source="FrontendStatus"  id="BER" streaming="yes">
 	<e2:convert type="FrontendInfo">BER</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
+
 <e2:element source="FrontendStatus"  id="AGC" streaming="yes">
 	<e2:convert type="FrontendInfo">AGC</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>                
                 
-
 </e2:screen>
