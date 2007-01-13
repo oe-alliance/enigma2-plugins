@@ -200,9 +200,24 @@ normal stylesheet-stuff******************
 	background-color: #0066CC;
 	color: #FFFFFF;
 	
-	width:25%;
+	width:20%;
 	height: 20px;
 }
+#SignalPanel { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:left;
+
+	background-color: #0066CC;
+	color: #FFFFFF;
+
+	width:5%;
+	height:20px;
+}
+
+
 #ServiceInfo{
 	width:800px;
 	float:none;

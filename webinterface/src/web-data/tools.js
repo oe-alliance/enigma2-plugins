@@ -96,7 +96,9 @@ function showhide(id){
 function set(what, value){
 	//debug(what+"-"+value);
 	element = document.getElementById(what);
-	element.innerHTML = value;
+	if (element){
+		element.innerHTML = value;
+	}
 	//$('scriptzone').innerHTML = ""; // deleting set() from page, to keep the page short and to save memory
 }
 
@@ -137,7 +139,18 @@ function zap(li){
 			method: 'get' 				
 		});
 }
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++       SignalPanel                           ++++
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+function initSignalPanel(){
+	$('SignalPanel').innerHTML = tplSignalPanelButton;
+}
+function openSignalDialog(){
+	openWindow("Signal Info",tplSignalPanel,250,130);
+}
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -480,7 +493,6 @@ function incomingChannellist(request){
 		setBodyMainContent('BodyContentChannellist');
 	}
 }
-
 
 
 

@@ -48,6 +48,7 @@
 		      		<div id="CurrentService"></div>
 		      		<div id="VolumePanel"></div>
 		      		<div id="CurrentTime"></div>
+		      		<div id="SignalPanel"></div>
 		    </div>
 		    
 		    <div class="divblock">
@@ -87,6 +88,7 @@
 <script type="text/javascript" >
 if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow"); }
 initVolumePanel();
+initSignalPanel();
 
 refreshChannellist('Favourites (TV)', '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet');
 setBodyMainContent('BodyContentChannellist');
@@ -150,7 +152,19 @@ function imdb()
 	<e2:convert type="EventName">ExtendedDescription</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
-                
+
+<e2:element source="FrontendStatus"  id="SNR" streaming="yes">
+	<e2:convert type="FrontendInfo">SNR</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+<e2:element source="FrontendStatus"  id="BER" streaming="yes">
+	<e2:convert type="FrontendInfo">BER</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+<e2:element source="FrontendStatus"  id="AGC" streaming="yes">
+	<e2:convert type="FrontendInfo">AGC</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>                
                 
 
 </e2:screen>
