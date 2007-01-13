@@ -1,4 +1,4 @@
-var url_getvolume = '/web/vol?set=info'; 
+var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
 var url_volumeup = '/web/vol?set=up';
 var url_volumedown = '/web/vol?set=down';
@@ -8,7 +8,7 @@ var url_epgservice = "/web/epgservice?ref="; // plus serviceRev
 var url_epgsearch = "/web/epgsearch?search="; // plus serviceRev
 var url_epgnownext = "/web/epgnownext?ref="; // plus serviceRev
 
-var DBG = false;
+var DBG = true;
 
 function openWindow(title, inner, width, height, id){
 			if(id == null) id = new Date().toUTCString();
@@ -64,6 +64,7 @@ function getHTTPObject( ){
     }
     return xmlHttp ;
 }
+
 //RND Template Function
 function RND(tmpl, ns) {
 	var fn = function(w, g) {
@@ -99,6 +100,15 @@ function set(what, value){
 	//$('scriptzone').innerHTML = ""; // deleting set() from page, to keep the page short and to save memory
 }
 
+function doRequest(url, readyFunction){
+
+	new Ajax.Request(url,
+		{
+			method: 'get', 
+			onSuccess: readyFunction
+		});
+}
+
 function getXML(request){
 	if (document.implementation && document.implementation.createDocument){
 		debug("using responseXML");
@@ -120,15 +130,12 @@ function getXML(request){
 }
 
 function zap(li){
-	var request = getHTTPObject();
 	var url = "/web/zap?ZapTo=" + escape(li.id);
 	//debug("requesting "+url);
 	new Ajax.Request( url,
-			{
-				method: 'get' 
-				
-			});
-		
+		{
+			method: 'get' 				
+		});
 }
 
 
@@ -220,14 +227,14 @@ EPGList.prototype = {
 function EPGEvent(element){	
 	// parsing values from xml-element
 	try{
-		this.eventID= element.getElementsByTagName('e2eventid').item(0).firstChild.data;
-		this.startTime= element.getElementsByTagName('e2eventstart').item(0).firstChild.data;
-		this.duration= element.getElementsByTagName('e2eventduration').item(0).firstChild.data;
-		this.title= element.getElementsByTagName('e2eventtitle').item(0).firstChild.data;
-		this.description= element.getElementsByTagName('e2eventdescription').item(0).firstChild.data;
-		this.descriptionE= element.getElementsByTagName('e2eventdescriptionextended').item(0).firstChild.data;
-		this.serviceRef= element.getElementsByTagName('e2eventservicereference').item(0).firstChild.data;
-		this.serviceName= element.getElementsByTagName('e2eventservicename').item(0).firstChild.data;
+		this.eventID = element.getElementsByTagName('e2eventid').item(0).firstChild.data;
+		this.startTime = element.getElementsByTagName('e2eventstart').item(0).firstChild.data;
+		this.duration = element.getElementsByTagName('e2eventduration').item(0).firstChild.data;
+		this.title = element.getElementsByTagName('e2eventtitle').item(0).firstChild.data;
+		this.description = element.getElementsByTagName('e2eventdescription').item(0).firstChild.data;
+		this.descriptionE = element.getElementsByTagName('e2eventdescriptionextended').item(0).firstChild.data;
+		this.serviceRef = element.getElementsByTagName('e2eventservicereference').item(0).firstChild.data;
+		this.serviceName = element.getElementsByTagName('e2eventservicename').item(0).firstChild.data;
 	} catch (bullshit) {
 		//debug("Bullshit is:"+bullshit);
 	}
@@ -315,16 +322,7 @@ function setBodyMainContent(newelementname){
 	newelement.style.display = "";
 	currentBodyMainElement = newelement;
 }
-function doRequest(url,readyFunction){
-	
-	http_request =getHTTPObject();
-	if(readyFunction){
-		http_request.onreadystatechange = readyFunction;
-	}
-	http_request.open('GET', url, true);
-	http_request.send(null);
-	return http_request;
-}
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++ volume functions                            ++++
@@ -355,13 +353,15 @@ function volumeMute()
 {
 	doRequest(url_volumemute,handleVolumeRequest);
 }
-function handleVolumeRequest(){
-	if (http_request.readyState == 4) {
-		var b = getXML(http_request).getElementsByTagName("e2volume");
+function handleVolumeRequest(request){
+	if (request.readyState == 4) {
+		var b = getXML(request).getElementsByTagName("e2volume");
 		debug(b.item(0).getElementsByTagName('e2current').length); 
+		
 		var newvalue = b.item(0).getElementsByTagName('e2current').item(0).firstChild.data;
 		var mute = b.item(0).getElementsByTagName('e2ismuted').item(0).firstChild.data;
-		//debug("volume"+newvalue+";"+mute);
+		debug("volume"+newvalue+";"+mute);
+		
 		for (var i = 1; i <= 10; i++)
 		{
 			if ( (newvalue/10)>=i){
@@ -379,29 +379,23 @@ function handleVolumeRequest(){
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//++++ Bouqet managing functions                   ++++
+//++++ bouquet managing functions                   ++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
-function loadRootTVBouqet(){
-	//rootB = '/web/fetchchannels?ServiceListBrowse='+escape('1:7:1:0:0:0:0:0:0:0:(type == 1) FROM BOUQUET "bouquets.tv" ORDER BY bouquet');
-	rootB = '/web/fetchchannels?ServiceListBrowse='+escape('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)  FROM BOUQUET &quot;bouquets.tv&quot; ORDER BY bouquet');
-
-	loadRootBouqet(rootB);
-}
-function loadRootBouqet(rootB){
-	
-	t = getHTTPObject();
-	t.onreadystatechange = incomingResult;
-	t.open('GET', rootB, true);
-	t.send(null);
-	
+function loadRootTVbouquet(){
+	url = '/web/fetchchannels?ServiceListBrowse='+escape('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)  FROM BOUQUET &quot;bouquets.tv&quot; ORDER BY bouquet');
+	loadBouquet(url);
 }
 
-function incomingResult(){
-	if((t.readyState == 4) && (t.status == 200)) {
+function loadBouquet(url){
+	doRequest(url, incomingBouquet);
+}
+
+function incomingBouquet(request){
+	if((request.readyState == 4) && (t.status == 200)) {
 	// perfekt!
 		
-		var b = getXML(t).getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
+		var b = getXML(request).getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
 
 		bouquets = new Array();
 		for ( var i=0; i < b.length; i++){
@@ -420,45 +414,42 @@ function incomingResult(){
 	
 }
 
-// to add the bouqetts to the list
-function refreshSelect(arraybouqet){
-	
-	sel = document.getElementById("accordionMenueBouqetContent");
+// to add the bouquetts to the list
+function refreshSelect(arraybouquet){
+	doRequest(url, incomingChannellist);
+	sel = document.getElementById("accordionMenuebouquetContent");
 	// options neu eintragen
 	html = "<table>";
-		for ( var i = 0 ; i < arraybouqet.length ; i++ ){
-		if(arraybouqet[i][0] && arraybouqet[i][1]){
+		for ( var i = 0 ; i < arraybouquet.length ; i++ ){
+		if(arraybouquet[i][0] && arraybouquet[i][1]){
 			html+="<tr><td>";
-			html+="<a  onclick=\"bouqetSelected(this); setBodyMainContent('BodyContentChannellist');\" id='";
-			html+= arraybouqet[i][1];
+			html+="<a  onclick=\"bouquetSelected(this); setBodyMainContent('BodyContentChannellist');\" id='";
+			html+= arraybouquet[i][1];
 			html+="'>";
-			html+= arraybouqet[i][0];
+			html+= arraybouquet[i][0];
 			html+="</a>";
 			html+="</td></tr>";
 		}
 	}
 	html+="</table>";
 	sel.innerHTML=html;
-	refreshChannellist(arraybouqet[0][0],arraybouqet[0][1]);
+	refreshChannellist(arraybouquet[0][0],arraybouquet[0][1]);
 }
 
 //++++++++++++++++++++++
-function bouqetSelected(element){
+function bouquetSelected(element){
 	refreshChannellist(element.value,element.id)
 }
 
-function refreshChannellist(bname,bref){
-	urlx = '/web/fetchchannels?ServiceListBrowse='+escape(bref);
-	w =getHTTPObject();
-	w.onreadystatechange = incomingChannellist;
-	w.open('GET', urlx, true);
-	w.send(null);	
+function refreshChannellist(bname, bref){
+	var url = '/web/fetchchannels?ServiceListBrowse='+escape(bref);
+	doRequest(url, incomingChannellist);
 }
 			
-function incomingChannellist(){
-	if(w.readyState == 4){
+function incomingChannellist(request){
+	if(request.readyState == 4){
 
-		services = getXML(w).getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
+		services = getXML(request).getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
 		
 		listerHtml 	= tplServiceListHeader;
 		
