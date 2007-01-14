@@ -174,7 +174,7 @@ function initSignalPanel(){
 	$('SignalPanel').innerHTML = tplSignalPanelButton;
 }
 function openSignalDialog(){
-	openWindow("Signal Info",tplSignalPanel,250,130);
+	openWindow("Signal Info",tplSignalPanel, 215, 75);
 }
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
