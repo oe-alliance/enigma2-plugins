@@ -3,7 +3,6 @@
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 	<title>Enigma 2 Webinterface (ALPHA)</title>
 	<!--load everything for prototype and prototype window -->
-
 	<script type="text/javascript" src="/webdata/lib/prototype.js" />
 	<script type="text/javascript" src="/webdata/lib/rico.js"/>
 	<script type="text/javascript" src="/webdata/lib/ptwindow/effects.js" />
@@ -18,6 +17,7 @@
 	<script type="text/javascript" src="/webdata/tools.js" />
 
 	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
+	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico"/>
 
 	<!-- Live RSS Feeds //-->
 	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss" />
@@ -90,7 +90,11 @@
 
 	</div>
 </div>
-<!--iframe onload="hide(this)" width="0" id="updates" height="0" src="updates.html" name="updates" scrolling="none" frameborder="0">no iframe support!</iframe-->
+<div>
+<!-- START LIVEUPDATESTREAM  is used to enable the liveupdatestream in MS Internet Explorer //-->
+<div id="UpdateStreamReaderIEFixPanel"></div>
+<!-- END LIVEUPDATESTREAM//-->
+</div>
 <script type="text/javascript" >
 if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow"); }
 
@@ -111,89 +115,14 @@ var accordionOptions = {
 
 new Rico.Accordion( $('accordionMenue'), accordionOptions );
 
+// do things to do at startup
 initVolumePanel();
 initSignalPanel();
 initChannelList();
 setBodyMainContent('BodyContentChannellist');
-function imdb()
-{
-	w = window.open("http://www.imdb.com/find?s=all&amp;q=" + escape(document.getElementById("Event_Now_Name").innerHTML));
-	w.focus();
-	set("BodyContentChannellist", "TEST!!!");
-}
+UpdateStreamReaderStart();
 
 </script>
-
 </body>
-&lt;div id="scriptzone">
-<!-- realtime updates follow -->
-<e2:element source="CurrentTime" streaming="yes">
-	<e2:convert type="ClockToText">WithSeconds</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="CurrentService" streaming="yes">
-<e2:convert type="ServiceName">Name</e2:convert>
-<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="Event_Now" id="Event_Now_Name" streaming="yes">
-	<e2:convert type="EventName">Name</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="Event_Now" id="Event_Now_Extended_Description" streaming="yes">
-	<e2:convert type="EventName">ExtendedDescription</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="Event_Now" id="Event_Now_Begin" streaming="yes">
-	<e2:convert type="EventTime">StartTime</e2:convert>
-	<e2:convert type="ClockToText">Default</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="Event_Now" id="Event_Now_Remaining" streaming="yes">
-	<e2:convert type="EventTime">Remaining</e2:convert>
-	<e2:convert type="RemainingToText">InMinutes</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="Event_Next" id="Event_Next_Name" streaming="yes">
-	<e2:convert type="EventName">Name</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="Event_Next" id="Event_Next_Begin" streaming="yes">
-	<e2:convert type="EventTime">StartTime</e2:convert>
-	<e2:convert type="ClockToText">Default</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="Event_Next" id="Event_Next_Remaining" streaming="yes">
-	<e2:convert type="EventTime">Remaining</e2:convert>
-	<e2:convert type="RemainingToText">InMinutes</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="Event_Next" id="Event_Next_Extended_Description" streaming="yes">
-	<e2:convert type="EventName">ExtendedDescription</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="FrontendStatus"  id="SNR" streaming="yes">
-	<e2:convert type="FrontendInfo">SNR</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="FrontendStatus"  id="BER" streaming="yes">
-	<e2:convert type="FrontendInfo">BER</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>
-
-<e2:element source="FrontendStatus"  id="AGC" streaming="yes">
-	<e2:convert type="FrontendInfo">AGC</e2:convert>
-	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>                
-                
+&lt;/html>
 </e2:screen>

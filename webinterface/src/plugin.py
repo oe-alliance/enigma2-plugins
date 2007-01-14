@@ -3,7 +3,7 @@ from Plugins.Plugin import PluginDescriptor
 sessions = [ ]
 
 # set DEBUG to True, if twisted should write logoutput to a file.
-DEBUG = False 
+DEBUG = True 
 DEBUGFILE= "/tmp/twisted.log"
 
 def startWebserver():

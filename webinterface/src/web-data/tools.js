@@ -10,7 +10,82 @@ var url_epgnownext = "/web/epgnownext?ref="; // plus serviceRev
 
 var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded serviceref
 
-var DBG = true;
+var url_updates= "/web/updates";
+
+var DBG = false;
+
+// UpdateStreamReader
+var UpdateStreamReaderNextReadPos = 0;
+var UpdateStreamReaderPollTimer;
+UpdateStreamReaderRequest = null;
+function UpdateStreamReaderStart(){
+	var ua = navigator.userAgent;
+	if(navigator.userAgent.indexOf("MSIE") >=0) {
+		debug("UpdateStreamReader IE Fix *IE sucks*");
+		$('UpdateStreamReaderIEFixPanel').innerHTML = '<iframe id="UpdateStreamReaderIEFixIFrame" src="'+url_updates+'" height="0" width="0" scrolling="none" frameborder="0">no iframe support!</iframe>';
+	}else {
+		debug("UpdateStreamReader Start");
+		UpdateStreamReaderNextReadPos = 0;
+		allMessages = "";
+		UpdateStreamReaderRequest =new XMLHttpRequest();
+		UpdateStreamReaderRequest.onload = UpdateStreamReaderOnLoad;
+		UpdateStreamReaderRequest.onerror = UpdateStreamReaderOnError;
+		UpdateStreamReaderRequest.open("GET", url_updates, true);
+ 		//try{
+			UpdateStreamReaderRequest.send(null);
+		//}catch(e){ debug(e); /*strange errors :) */}
+		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 500);
+	}
+}
+  
+function UpdateStreamReaderLatestResponse() {
+	var allMessages = UpdateStreamReaderRequest.responseText;
+    do {
+      var unprocessed = allMessages.substring(UpdateStreamReaderNextReadPos);
+      var messageXMLEndIndex = unprocessed.indexOf("\n");
+      if (messageXMLEndIndex!=-1) {
+        var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
+        var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
+		//anUpdate = anUpdate.replace(/&lt;div id="scriptzone"\/>/,'');
+		anUpdate = anUpdate.replace(/<script>parent./, '');
+        anUpdate = anUpdate.replace(/<\/script>\n/, '');
+        eval(anUpdate);
+        UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
+      }
+    } while (messageXMLEndIndex != -1);
+}
+
+function UpdateStreamReaderOnLoad(request){
+	window.clearInterval(UpdateStreamReaderPollTimer);
+	debug("UpdateStreamReaderOnLoad");
+	Dialog.confirm(
+		"Live Update Stream ends!<br><br>You will not receive any Update from Enigma2.<br>Should I reconnect?"
+		, {windowParameters: {width:300, className: "alphacube"}
+			, okLabel: "reconnect"
+			, buttonClass: "myButtonClass"
+			, id: new Date().toUTCString()
+			, cancel:function(win) {debug("cancel confirm panel")}
+			, ok: function(win) {UpdateStreamReaderStart(); return true;}
+			}
+		);
+}
+function UpdateStreamReaderOnError(request){
+	// TODO: change this, because it will be called on 'PageUnload' while the request is still running
+	debug("UpdateStreamReaderOnError");
+	window.clearInterval(UpdateStreamReaderPollTimer);
+	Dialog.confirm(
+		"Live Update Stream has an Error!<br><br>You will not receive any Update from Enigma2.<br>Should I try to reconnect?"
+		, {windowParameters: {width:300, className: "alphacube"}
+			, okLabel: "reconnect"
+			, buttonClass: "myButtonClass"
+			, id:  new Date().toUTCString()
+			, cancel:function(win) {debug("cancel confirm panel")}
+			, ok: function(win) {UpdateStreamReaderStart(); return true;}
+			}
+		);
+}
+
+//end UpdateStreamReader
 
 function openWindow(title, inner, width, height, id){
 			if(id == null) id = new Date().toUTCString();
@@ -97,17 +172,22 @@ function showhide(id){
 
 function set(what, value){
 	//debug(what+"-"+value);
-	element = document.getElementById(what);
+	element = parent.document.getElementById(what);
 	if (element){
 		element.innerHTML = value;
 	}
-	//$('scriptzone').innerHTML = ""; // deleting set() from page, to keep the page short and to save memory
+	if(navigator.userAgent.indexOf("MSIE") >=0) {
+		elementscript= $('UpdateStreamReaderIEFixIFrame').document.getElementById('scriptzone');
+		if(elementscript){
+			elementscript.innerHTML = ""; // deleting set() from page, to keep the page short and to save memory			
+		}
+	}
 }
 // requestindikator
 var requestcounter = 0;
 
 function requestIndicatorUpdate(){
-	debug(requestcounter+" open requests");
+	//debug(requestcounter+" open requests");
 	if(requestcounter>=1){
 		$('RequestIndicator').style.display = "inline";
 	}else{
