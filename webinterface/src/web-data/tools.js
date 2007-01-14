@@ -31,9 +31,7 @@ function UpdateStreamReaderStart(){
 		UpdateStreamReaderRequest.onload = UpdateStreamReaderOnLoad;
 		UpdateStreamReaderRequest.onerror = UpdateStreamReaderOnError;
 		UpdateStreamReaderRequest.open("GET", url_updates, true);
- 		//try{
-			UpdateStreamReaderRequest.send(null);
-		//}catch(e){ debug(e); /*strange errors :) */}
+ 		UpdateStreamReaderRequest.send(null);
 		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 500);
 	}
 }
@@ -46,7 +44,7 @@ function UpdateStreamReaderLatestResponse() {
       if (messageXMLEndIndex!=-1) {
         var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
         var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
-		//anUpdate = anUpdate.replace(/&lt;div id="scriptzone"\/>/,'');
+		anUpdate = anUpdate.replace(/<div id="scriptzone"\/>/,'');
 		anUpdate = anUpdate.replace(/<script>parent./, '');
         anUpdate = anUpdate.replace(/<\/script>\n/, '');
         eval(anUpdate);
@@ -55,32 +53,30 @@ function UpdateStreamReaderLatestResponse() {
     } while (messageXMLEndIndex != -1);
 }
 
-function UpdateStreamReaderOnLoad(request){
+function UpdateStreamReaderOnLoad(){
 	window.clearInterval(UpdateStreamReaderPollTimer);
 	debug("UpdateStreamReaderOnLoad");
 	Dialog.confirm(
-		"Live Update Stream ends!<br><br>You will not receive any Update from Enigma2.<br>Should I reconnect?"
-		, {windowParameters: {width:300, className: "alphacube"}
-			, okLabel: "reconnect"
-			, buttonClass: "myButtonClass"
-			, id: new Date().toUTCString()
-			, cancel:function(win) {debug("cancel confirm panel")}
-			, ok: function(win) {UpdateStreamReaderStart(); return true;}
+		"Live Update Stream ends!<br><br>You will not receive any Update from Enigma2.<br>Should I reconnect?",
+		 {windowParameters: {width:300, className: "alphacube"},
+			okLabel: "reconnect",
+			buttonClass: "myButtonClass",
+			cancel: function(win) {debug("cancel confirm panel")},
+			ok: function(win) {UpdateStreamReaderStart(); return true;}
 			}
 		);
 }
-function UpdateStreamReaderOnError(request){
+function UpdateStreamReaderOnError(){
 	// TODO: change this, because it will be called on 'PageUnload' while the request is still running
 	debug("UpdateStreamReaderOnError");
 	window.clearInterval(UpdateStreamReaderPollTimer);
 	Dialog.confirm(
-		"Live Update Stream has an Error!<br><br>You will not receive any Update from Enigma2.<br>Should I try to reconnect?"
-		, {windowParameters: {width:300, className: "alphacube"}
-			, okLabel: "reconnect"
-			, buttonClass: "myButtonClass"
-			, id:  new Date().toUTCString()
-			, cancel:function(win) {debug("cancel confirm panel")}
-			, ok: function(win) {UpdateStreamReaderStart(); return true;}
+		"Live Update Stream has an Error!<br><br>You will not receive any Update from Enigma2.<br>Should I try to reconnect?",
+		 {windowParameters: {width:300, className: "alphacube"},
+			 okLabel: "reconnect",
+			 buttonClass: "myButtonClass",
+			 cancel: function(win) {debug("cancel confirm panel")},
+			 ok: function(win) {UpdateStreamReaderStart(); return true;}
 			}
 		);
 }
