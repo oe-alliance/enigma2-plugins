@@ -46,8 +46,8 @@ var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 	tplServiceListHeader += '<tbody class="scrollContent">\n';
 
 var tplServiceListItem  = '<tr>\n';
-	tplServiceListItem += '<td><div class="sListSName"><a id="%(serviceref)" onclick="zap(this)" class="sListSLink" href="#">%(servicename)</a></div>';
-	tplServiceListItem += '<div class="sListExt"><a href="#"><img onclick="new EPGList().getByServiceReference(this.id);" id="%(serviceref)" src="/webdata/gfx/epg.png" border="0"/></a>\n';
+	tplServiceListItem += '<td><div class="sListSName"><a id="%(serviceref)" onclick="zap(this)" class="sListSLink">%(servicename)</a></div>';
+	tplServiceListItem += '<div class="sListExt"><a onclick="new EPGList().getByServiceReference(this.id)" id="%(serviceref)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
 	tplServiceListItem += '<a target="_blank" href="stream.m3u?ref=%(servicerefESC)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
 	tplServiceListItem += '</tr>\n';
 	
