@@ -38,7 +38,8 @@ var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 	tplServiceListHeader += '<th><div class="sListHeader" style="color: #FFFFFF;">ServiceList</div>\n';
 	tplServiceListHeader += '<div class="sListSearch">';
 	tplServiceListHeader += '<form onSubmit="new EPGList().getBySearchString(document.getElementById(\'searchText\').value); return false;">';
-	tplServiceListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="EPG suchen"/>';
+	tplServiceListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
+	tplServiceListHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
 	tplServiceListHeader += '</form></div></th>';
 	tplServiceListHeader += '</tr>\n';
 	tplServiceListHeader += '</thead>\n';
