@@ -503,7 +503,10 @@ function initChannelList(){
 	doRequest(url, incomingRadioBouquetList);
 
 	var url = url_fetchchannels+encodeURIComponent('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name');
-	doRequest(url, incomingProviderBouquetList);
+	doRequest(url, incomingProviderTVBouquetList);
+
+	var url = url_fetchchannels+encodeURIComponent('1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name');
+	doRequest(url, incomingProviderRadioBouquetList);
 }
 
 function loadBouquet(servicereference){ 
@@ -528,11 +531,18 @@ function incomingRadioBouquetList(request){
 		$('accordionMenueBouquetContentRadio').innerHTML = renderBouquetTable(list1,tplBouquetListItem);
 	}	
 }
-function incomingProviderBouquetList(request){
+function incomingProviderTVBouquetList(request){
 	if (request.readyState == 4) {
 		var list2 = e2servicelistToArray(getXML(request));
-		debug("have "+list2.length+" Provider Bouquet ");	
-		$('accordionMenueBouquetContentProvider').innerHTML = renderBouquetTable(list2,tplBouquetListItem);
+		debug("have "+list2.length+" TV Provider Bouquet ");	
+		$('accordionMenueBouquetContentProviderTV').innerHTML = renderBouquetTable(list2,tplBouquetListItem);
+	}	
+}
+function incomingProviderRadioBouquetList(request){
+	if (request.readyState == 4) {
+		var list2 = e2servicelistToArray(getXML(request));
+		debug("have "+list2.length+" Radio Provider Bouquet ");	
+		$('accordionMenueBouquetContentProviderRadio').innerHTML = renderBouquetTable(list2,tplBouquetListItem);
 	}	
 }
 

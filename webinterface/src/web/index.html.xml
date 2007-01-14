@@ -42,9 +42,13 @@
      							<div class="navMenuHeader" id="accordionMenueBouquetHeaderRadio">Radio</div>
       							<div class="navMenuContent" id="accordionMenueBouquetContentRadio">please wait, loading...</div>
 							</div>
-   							<div class="navMenuPanel" id="accordionMenueBouquetPanelProvider">
-     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderProvider">Provider</div>
-      							<div class="navMenuContent" id="accordionMenueBouquetContentProvider">please wait, loading...</div>
+   							<div class="navMenuPanel" id="accordionMenueBouquetPanelProviderTV">
+     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderTV">Provider TV</div>
+      							<div class="navMenuContent" id="accordionMenueBouquetContentProviderTV">please wait, loading...</div>
+							</div>
+   							<div class="navMenuPanel" id="accordionMenueBouquetPanelProviderRadio">
+     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderRadio">Provider Radio</div>
+      							<div class="navMenuContent" id="accordionMenueBouquetContentProviderRadio">please wait, loading...</div>
 							</div>
 						</div>
 				</td>
