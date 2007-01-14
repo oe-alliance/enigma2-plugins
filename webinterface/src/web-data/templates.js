@@ -52,11 +52,14 @@ var tplServiceListItem  = '<tr>\n';
 	
 var tplServiceListFooter = "</tbody></table>\n";
 
-// Bouqetlist Template
-var tplBouqetListItem  = '<tr>\n';
-	tplBouqetListItem += '<td><div id="%(servicereference)" onclick="loadBouquet(this.id);">%(bouqetname)</div></td>';
-	tplBouqetListItem += '</tr>\n';
-	
+// Bouquetlist Template
+var tplBouquetListHeader = '<table id="BouquetList" width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';
+
+var tplBouquetListItem  = '<tr>\n';
+	tplBouquetListItem += '<td><div class="navMenuItem" id="%(servicereference)" onclick="loadBouquet(this.id);">%(bouquetname)</div></td>';
+	tplBouquetListItem += '</tr>\n';
+
+var tplBouquetListFooter = "</table>";
 //Volume Template
 var tplVolumePanel  = "<img onclick='volumeUp()' src='/webdata/gfx/arrow_up.png'>"; 
 	tplVolumePanel += "<img onclick='volumeDown()' src='/webdata/gfx/arrow_down.png'>"; 

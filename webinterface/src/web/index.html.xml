@@ -24,36 +24,34 @@
 </head>
 
 <body>
-<div id="BodyContentDebugbox"></div>
+
 <div id="Main">
 	<div id="nav">	
-		<div id="NavHd" ><div id="RequestIndicator" style="display:none;"><img  src="/webdata/gfx/progress.gif" /> loading...</div></div>
+		<div id="NavHd"><span id="RequestIndicator" style="display:none;"><img  src="/webdata/gfx/progress.gif" />loading...</span></div>
 		
 		<table cellpadding="0" cellspacing="0" id="navTable">
 			<tr>
 				<td class="NavEl">
 						<!-- START BODY MENUE //-->
 						<div id="accordionMenue">
-   							<div id="accordionMenueBouqetPanel">
-     							<div id="accordionMenueBouqetHeader">TV</div>
-      							<div id="accordionMenueBouqetContentTV">please wait, loading...</div>
+   							<div class="navMenuPanel" id="accordionMenueBouquetPanelTV">
+     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderTV">TV</div>
+      							<div class="navMenuContent" id="accordionMenueBouquetContentTV">please wait, loading...</div>
 							</div>
-   							<div id="accordionMenueBouqetPanel">
-     							<div id="accordionMenueBouqetHeader">Radio</div>
-      							<div id="accordionMenueBouqetContentRadio">please wait, loading...</div>
+   							<div class="navMenuPanel" id="accordionMenueBouquetPanelRadio">
+     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderRadio">Radio</div>
+      							<div class="navMenuContent" id="accordionMenueBouquetContentRadio">please wait, loading...</div>
 							</div>
-   							<div id="accordionMenueBouqetPanel">
-     							<div id="accordionMenueBouqetHeader">Provider</div>
-      							<div id="accordionMenueBouqetContentProvider">please wait, loading...</div>
+   							<div class="navMenuPanel" id="accordionMenueBouquetPanelProvider">
+     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderProvider">Provider</div>
+      							<div class="navMenuContent" id="accordionMenueBouquetContentProvider">please wait, loading...</div>
 							</div>
 						</div>
-						<!-- END BODY MENUE //-->
-				
 				</td>
 			</tr>
-			<tr>
+			<!--tr>
 				<td class="NavEl"><a class="NavEl" href="#">Nav2</a></td>
-			</tr>
+			</tr-->
 		</table>
 	</div>
 	<div id="Content">
@@ -63,7 +61,8 @@
 				<div id="CurrentService"></div>
 				<div id="VolumePanel"></div>
 				<div id="CurrentTime"></div>
-		      	<div id="SignalPanel"></div>		    </div>
+		      	<div id="SignalPanel"></div>		    
+			</div>
 		    
 		    <div class="divblock">
 				<div style="width:5%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Begin"></div>
@@ -95,7 +94,22 @@
 <script type="text/javascript" >
 if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow"); }
 
-new Rico.Accordion( $('accordionMenue') );
+
+var accordionOptions = {
+	expandedBg : 'transparent',
+	hoverBg : 'CCCCCC',
+	collapsedBg : 'transparent',
+	expandedTextColor : '#000000',
+	expandedFontWeight : 'bold',
+	hoverTextColor : '#000000',
+	collapsedTextColor : '#000000',
+	collapsedFontWeight : 'normal',
+	borderColor : '#FFFFFF',
+	border : '0',
+	panelHeight : 150,//370,//325
+}
+
+new Rico.Accordion( $('accordionMenue'), accordionOptions );
 
 initVolumePanel();
 initSignalPanel();

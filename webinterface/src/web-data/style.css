@@ -173,7 +173,7 @@ normal stylesheet-stuff******************
 	float:left;
 	background-color: #0066CC;
 	color: #FFFFFF;
-
+	
 	width:50%;
 	height:20px;
 }
@@ -185,7 +185,7 @@ normal stylesheet-stuff******************
 	float:left;
 	background-color: #0066CC;
 	color: #FFFFFF;
-
+	
 	width:25%;
 	height:20px;
 }
@@ -221,6 +221,8 @@ normal stylesheet-stuff******************
 
 #ServiceInfo{
 	width:800px;
+	height: 20px;
+	border-bottom: 1px solid #000000;
 	float:none;
 	clear:both;
 	padding: 0 0 0;
@@ -246,13 +248,12 @@ normal stylesheet-stuff******************
 	font-size: 14px;
 	font-weight: bold;
 	width: 100%;
-	margin:0px;
-	padding:0px;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
 }
 
 
 td.navEl{
-	border-bottom: 1px solid #000000;
 	height: 35px;
 	padding: 0px;
 	width:100%;
@@ -283,9 +284,17 @@ a.navEl:hover{
 #NavHd{
 	background-color: #0066CC;
 	color: #FFFFFF;
+	font-size:10px;
 	font-weight: bold;
 	height: 20px;
 	vertical-align: middle;
+}
+#RequestIndicator{
+	display: inline;
+	vertical-align: middle;
+	font-size:14px;
+	font-weight: bold;
+	height:20px;
 }
 
 #EventNowNext{
@@ -295,6 +304,23 @@ a.navEl:hover{
 	visibility: hidden;
 }
 
+.navMenuPanel{
+	background-color: #BBBBBB;
+}
+.navMenuHeader{
+	font-size: 14px;
+	border-top: 1px solid #000000;
+	height: 20px;
+}
+
+.navMenuContent{
+	font-size: 12px;
+	background-color: #EEEEEE;
+	border: 0px;
+}
+.navMenuItem{
+	font-size: 12px;
+}
 
 .divblock{
 	width:100%;

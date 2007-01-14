@@ -10,7 +10,7 @@ var url_epgnownext = "/web/epgnownext?ref="; // plus serviceRev
 
 var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded serviceref
 
-var DBG = false;
+var DBG = true;
 
 function openWindow(title, inner, width, height, id){
 			if(id == null) id = new Date().toUTCString();
@@ -200,7 +200,7 @@ EPGList.prototype = {
 	
 	renderTable: function(epglist){
 		debug("rendering Table with "+epglist.length+" events");
-		var html='<table width="100%" border="0" cellspacing="1" cellpadding="0" border="1">';
+		var html = tplEPGListHeader;
 		for (var i=0; i < epglist.length; i++){
 			try{
 				var item = epglist[i];
@@ -223,7 +223,7 @@ EPGList.prototype = {
 			}
 		}
 		
-		html +="</table>";
+		html += tplEPGListFooter;
 		//element.innerHTML = html;
 		openWindow("Electronic Program Guide", html, 900, 500);
 		
@@ -421,42 +421,42 @@ function initChannelList(){
 
 	//refreshChannellist('Favourites (TV)', '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet');
 	var url = url_fetchchannels+encodeURIComponent('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet');
-	doRequest(url, incomingTVBouqetList);
+	doRequest(url, incomingTVBouquetList);
 
 	var url = url_fetchchannels+encodeURIComponent('1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet');
-	doRequest(url, incomingRadioBouqetList);
+	doRequest(url, incomingRadioBouquetList);
 
 	var url = url_fetchchannels+encodeURIComponent('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name');
-	doRequest(url, incomingProviderBouqetList);
+	doRequest(url, incomingProviderBouquetList);
 }
 
 function loadBouquet(servicereference){ 
-	debug("loading bouqet with "+servicereference);	
+	debug("loading bouquet with "+servicereference);	
 	doRequest(url_fetchchannels+servicereference, incomingChannellist);
 }
 
-function incomingTVBouqetList(request){
+function incomingTVBouquetList(request){
 	if (request.readyState == 4) {
 		var list0 = e2servicelistToArray(getXML(request));
-		debug("have "+list0.length+" TV Bouqet ");	
-		$('accordionMenueBouqetContentTV').innerHTML = renderBouqetTable(list0,tplBouqetListItem);
+		debug("have "+list0.length+" TV Bouquet ");	
+		$('accordionMenueBouquetContentTV').innerHTML = renderBouquetTable(list0,tplBouquetListItem);
 		
 		//loading first entry of TV Favorites as default for ServiceList
 		loadBouquet(list0[0][1]);
 	}
 }
-function incomingRadioBouqetList(request){
+function incomingRadioBouquetList(request){
 	if (request.readyState == 4) {
 		var list1 = e2servicelistToArray(getXML(request));
-		debug("have "+list1.length+" Radio Bouqet ");	
-		$('accordionMenueBouqetContentRadio').innerHTML = renderBouqetTable(list1,tplBouqetListItem);
+		debug("have "+list1.length+" Radio Bouquet ");	
+		$('accordionMenueBouquetContentRadio').innerHTML = renderBouquetTable(list1,tplBouquetListItem);
 	}	
 }
-function incomingProviderBouqetList(request){
+function incomingProviderBouquetList(request){
 	if (request.readyState == 4) {
 		var list2 = e2servicelistToArray(getXML(request));
-		debug("have "+list2.length+" Provider Bouqet ");	
-		$('accordionMenueBouqetContentProvider').innerHTML = renderBouqetTable(list2,tplBouqetListItem);
+		debug("have "+list2.length+" Provider Bouquet ");	
+		$('accordionMenueBouquetContentProvider').innerHTML = renderBouquetTable(list2,tplBouquetListItem);
 	}	
 }
 
@@ -472,22 +472,22 @@ function e2servicelistToArray(xml){
 	return list
 }
 
-function renderBouqetTable(bouqet,template){
-	var html='<table width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';
-	for (var i=0; i < bouqet.length; i++){
+function renderBouquetTable(bouquet,template){
+	var html = tplBouquetListHeader;
+	for (var i=0; i < bouquet.length; i++){
 		try{
-			var item = bouqet[i];
+			var item = bouquet[i];
 			
 			//Create JSON Object for Template
 			var namespace = {
-				'bouqetname': item[0], 
+				'bouquetname': item[0], 
 				'servicereference': item[1], 
 				};
 			
 			html += RND(template, namespace);
 		} catch (blubb) {}
 	}
-	html +="</table>";
+	html += tplBouquetListFooter;
 	return html;
 }	
 
