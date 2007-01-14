@@ -481,7 +481,7 @@ function renderBouquetTable(bouquet,template){
 			//Create JSON Object for Template
 			var namespace = {
 				'bouquetname': item[0], 
-				'servicereference': item[1], 
+				'servicereference': item[1] 
 				};
 			
 			html += RND(template, namespace);
