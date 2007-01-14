@@ -104,7 +104,7 @@ var accordionOptions = {
 	hoverTextColor : '#000000',
 	collapsedTextColor : '#000000',
 	collapsedFontWeight : 'normal',
-	borderColor : '#FFFFFF',
+	borderColor : '#transparent',
 	border : '0',
 	panelHeight : 150,//370,//325
 }
