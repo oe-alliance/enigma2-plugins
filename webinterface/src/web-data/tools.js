@@ -107,22 +107,22 @@ function UpdateStreamReaderStart(){
   
 function UpdateStreamReaderLatestResponse() {
 	var allMessages = UpdateStreamReaderRequest.responseText;
-    do {
-      var unprocessed = allMessages.substring(UpdateStreamReaderNextReadPos);
-      var messageXMLEndIndex = unprocessed.indexOf("\n");
-      if (messageXMLEndIndex!=-1) {
-        var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
-        var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
-		anUpdate = anUpdate.replace(/<div id="scriptzone"\/>/,'');
-		anUpdate = anUpdate.replace(/<script>parent./, '');
-        anUpdate = anUpdate.replace(/<\/script>\n/, '');
-		anUpdate = Utf8.decode(anUpdate);
-		
-        //debug(Utf8.decode(anUpdate))
-		eval(anUpdate);
-        UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
-      }
-    } while (messageXMLEndIndex != -1);
+	do {
+		var unprocessed = allMessages.substring(UpdateStreamReaderNextReadPos);
+		var messageXMLEndIndex = unprocessed.indexOf("\n");
+		if (messageXMLEndIndex!=-1) {
+			var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
+			var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
+			anUpdate = anUpdate.replace(/<div id="scriptzone"\/>/,'');
+			anUpdate = anUpdate.replace(/<script>parent./, '');
+			anUpdate = anUpdate.replace(/<\/script>\n/, '');
+			anUpdate = Utf8.decode(anUpdate);
+
+			//debug(Utf8.decode(anUpdate))
+			eval(anUpdate);
+			UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
+		}
+	} while (messageXMLEndIndex != -1);
 }
 
 function UpdateStreamReaderOnLoad(){
