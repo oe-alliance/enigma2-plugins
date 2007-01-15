@@ -12,7 +12,7 @@ var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded
 
 var url_updates= "/web/updates";
 
-var DBG = true;
+var DBG = false;
 
 /**
 *
