@@ -46,12 +46,22 @@ var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 	tplServiceListHeader += '<tbody class="scrollContent">\n';
 
 var tplServiceListItem  = '<tr>\n';
-	tplServiceListItem += '<td><div class="sListSName"><a id="%(serviceref)" onclick="zap(this)" class="sListSLink">%(servicename)</a></div>';
-	tplServiceListItem += '<div class="sListExt"><a onclick="new EPGList().getByServiceReference(this.id)" id="%(serviceref)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
-	tplServiceListItem += '<a target="_blank" href="stream.m3u?ref=%(servicerefESC)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
+	tplServiceListItem += '<td><div class="sListSName"><a id="%(servicereference)" onclick="zap(this.id)" class="sListSLink">%(servicename)</a></div>';
+	tplServiceListItem += '<div class="sListExt"><a onclick="new EPGList().getByServiceReference(this.id)" id="%(servicereference)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
+	tplServiceListItem += '<a target="_blank" href="stream.m3u?ref=%(servicereference)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
+	tplServiceListItem += '</tr>\n';
+    tplServiceListItem += '<tr>\n';
+	tplServiceListItem += '<td colspan="2"><div name="%(servicereference)EPGNOW"></div></td>\n';
 	tplServiceListItem += '</tr>\n';
 	
 var tplServiceListFooter = "</tbody></table>\n";
+//
+
+var	tplServiceListEPGItem  = '<table border="0">\n';
+	tplServiceListEPGItem += '<tr><td><div class="sListEPGTime">%(starttime)</div></td><td><div class="sListEPGTitle">%(title)</div></td><td ><div class="sListEPGDuration">%(length)&nbsp;Min</div></td></tr>\n';
+	tplServiceListEPGItem += '</table>\n';
+
+
 
 // Bouquetlist Template
 var tplBouquetListHeader = '<table id="BouquetList" width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';
@@ -61,6 +71,7 @@ var tplBouquetListItem  = '<tr>\n';
 	tplBouquetListItem += '</tr>\n';
 
 var tplBouquetListFooter = "</table>";
+
 //Volume Template
 var tplVolumePanel  = "<img onclick='volumeUp()' src='/webdata/gfx/arrow_up.png'>"; 
 	tplVolumePanel += "<img onclick='volumeDown()' src='/webdata/gfx/arrow_down.png'>"; 

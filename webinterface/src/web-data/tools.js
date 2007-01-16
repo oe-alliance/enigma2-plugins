@@ -6,7 +6,7 @@ var url_volumemute = '/web/vol?set=mute';
 
 var url_epgservice = "/web/epgservice?ref="; // plus serviceRev
 var url_epgsearch = "/web/epgsearch?search="; // plus serviceRev
-var url_epgnownext = "/web/epgnownext?ref="; // plus serviceRev
+var url_epgnow = "/web/epgnow?bref="; // plus bouqetRev
 
 var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded serviceref
 
@@ -107,22 +107,20 @@ function UpdateStreamReaderStart(){
   
 function UpdateStreamReaderLatestResponse() {
 	var allMessages = UpdateStreamReaderRequest.responseText;
-	do {
-		var unprocessed = allMessages.substring(UpdateStreamReaderNextReadPos);
-		var messageXMLEndIndex = unprocessed.indexOf("\n");
-		if (messageXMLEndIndex!=-1) {
-			var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
-			var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
-			anUpdate = anUpdate.replace(/<div id="scriptzone"\/>/,'');
-			anUpdate = anUpdate.replace(/<script>parent./, '');
-			anUpdate = anUpdate.replace(/<\/script>\n/, '');
-			anUpdate = Utf8.decode(anUpdate);
-
-			//debug(Utf8.decode(anUpdate))
-			eval(anUpdate);
-			UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
-		}
-	} while (messageXMLEndIndex != -1);
+    do {
+      var unprocessed = allMessages.substring(UpdateStreamReaderNextReadPos);
+      var messageXMLEndIndex = unprocessed.indexOf("\n");
+      if (messageXMLEndIndex!=-1) {
+        var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
+        var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
+		anUpdate = anUpdate.replace(/<div id="scriptzone"\/>/,'');
+		anUpdate = anUpdate.replace(/<script>parent./, '');
+        anUpdate = anUpdate.replace(/<\/script>\n/, '');
+		anUpdate = Utf8.decode(anUpdate);
+        eval(anUpdate);
+        UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
+      }
+    } while (messageXMLEndIndex != -1);
 }
 
 function UpdateStreamReaderOnLoad(){
@@ -154,7 +152,6 @@ function UpdateStreamReaderOnError(){
 }
 
 //end UpdateStreamReader
-
 
 function openWindow(title, inner, width, height, id){
 			if(id == null) id = new Date().toUTCString();
@@ -274,7 +271,6 @@ function requestFinished(){
 // end requestindikator
 
 function doRequest(url, readyFunction){
-	//debug("requesting "+url);
 	requestStarted();
 	new Ajax.Request(url,
 		{
@@ -305,9 +301,9 @@ function getXML(request){
 	return xmlDoc;
 }
 
-function zap(li){
-	var url = "/web/zap?ZapTo=" + escape(li.id);
-	//debug("requesting "+url);
+function zap(servicereference){
+	var url = "/web/zap?ZapTo=" + servicereference;
+	debug("requesting "+url);
 	new Ajax.Request( url,
 		{
 			method: 'get' 				
@@ -342,18 +338,15 @@ EPGList.prototype = {
 		doRequest(url_epgsearch+string,this.incomingEPGrequest);
 		
 	},
-	getByServiceReference: function(serviceRef){
-		doRequest(url_epgservice+serviceRef,this.incomingEPGrequest);
+	getByServiceReference: function(servicereference){
+		doRequest(url_epgservice+servicereference,this.incomingEPGrequest);
 	},
-	
-	
 	renderTable: function(epglist){
 		debug("rendering Table with "+epglist.length+" events");
 		var html = tplEPGListHeader;
 		for (var i=0; i < epglist.length; i++){
 			try{
-				var item = epglist[i];
-				
+				var item = epglist[i];				
 				//Create JSON Object for Template
 				var namespace = { 	'date': item.getTimeDay(), 
 									'servicename': item.getServiceName(), 
@@ -370,10 +363,8 @@ EPGList.prototype = {
 			} catch (blubb) {
 				//debug("Error rendering: "+blubb);
 			}
-		}
-		
+		}		
 		html += tplEPGListFooter;
-		//element.innerHTML = html;
 		openWindow("Electronic Program Guide", html, 900, 500);
 		
 	},
@@ -381,11 +372,9 @@ EPGList.prototype = {
 		debug("incoming request" +request.readyState);		
 		if (request.readyState == 4)
 		{
-			var EPGItems = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
-			
+			var EPGItems = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");			
 			debug("have "+EPGItems.length+" e2events");
-			if(EPGItems.length > 0){
-			
+			if(EPGItems.length > 0){			
 				epglist = new Array();
 				for(var i=0; i < EPGItems.length; i++){		
 					epglist.push(new EPGEvent(EPGItems.item(i)));
@@ -401,101 +390,47 @@ EPGList.prototype = {
 	}
 	
 }
+/////////////////////////
 
-function EPGEvent(element){	
-	// parsing values from xml-element
-	try{
-		this.eventID = element.getElementsByTagName('e2eventid').item(0).firstChild.data;
-		this.startTime = element.getElementsByTagName('e2eventstart').item(0).firstChild.data;
-		this.duration = element.getElementsByTagName('e2eventduration').item(0).firstChild.data;
-		this.title = element.getElementsByTagName('e2eventtitle').item(0).firstChild.data;
-		this.serviceRef = element.getElementsByTagName('e2eventservicereference').item(0).firstChild.data;
-		this.serviceName = element.getElementsByTagName('e2eventservicename').item(0).firstChild.data;
-	} catch (e) {
-		debug("EPGEvent parsing Error");
-	}	
-	try{
-		this.description = element.getElementsByTagName('e2eventdescription').item(0).firstChild.data;
-	} catch (e) {	this.description= 'N/A';	}
-	
-	try{
-		this.descriptionE = element.getElementsByTagName('e2eventdescriptionextended').item(0).firstChild.data;
-	} catch (e) {	this.descriptionE = 'N/A';	}
+function loadServiceEPGNowNext(servicereference){
+	var url = url_epgnow+servicereference;
+	doRequest(url, incomingServiceEPGNowNext);	
+}
 
-	
-	this.getEventId = function ()
-	{
-		return this.eventID;
-	}
-	this.getTimeStart = function ()
-	{
-		var date = new Date(parseInt(this.startTime)*1000);
-		return date;
-	}
-	this.getTimeStartString = function ()
-	{
-		var h = this.getTimeStart().getHours();
-		var m = this.getTimeStart().getMinutes();
-		if (m < 10){
-			m="0"+m;
+function incomingServiceEPGNowNext(request){
+	if(request.readyState == 4){
+		var epgevents = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
+		for (var c =0; c < epgevents.length;c++){
+			var eventnow = new EPGEvent(epgevents.item(c));
+			
+			if (eventnow.getEventId() != 'None'){
+				buildServiceListEPGItem(eventnow,"NOW");
+			}
 		}
-		return h+":"+m;
 	}
-	this.getTimeDay = function ()
-	{
-		var Wochentag = new Array("So", "Mo", "Di", "Mi", "Do", "Fr", "Sa");
-		var wday = Wochentag[this.getTimeStart().getDay()];
-		var day = this.getTimeStart().getDate();
-		var month = this.getTimeStart().getMonth()+1;
-		var year = this.getTimeStart().getFullYear();
-		
-		return wday+".&nbsp;"+day+"."+month+"."+year;
+}
+function buildServiceListEPGItem(epgevent,nownext){
+	var elemente = document.getElementsByName(epgevent.getServiceReference()+'EPG'+nownext);
+	debug(elemente.length+" of items "+epgevent.getServiceReference()+'EPG'+nownext);
+	for (var c =0; c < elemente.length;c++){
+		try{
+			var namespace = { 	'starttime': epgevent.getTimeStartString(), 
+								'title': epgevent.getTitle(), 
+								'length': (epgevent.duration/60), 
+							};
+			elemente.item(c).innerHTML = RND(tplServiceListEPGItem, namespace);
+		} catch (blubb) {/*debug("Error rendering: "+blubb);*/}	
 	}
-	this.getTimeEnd = function ()
-	{
-		var date = new Date((parseInt(this.startTime)+parseInt(this.duration))*1000);
-		return date;
-	}
-	this.getTimeEndString = function ()
-	{
-		var h = this.getTimeEnd().getHours();
-		var m = this.getTimeEnd().getMinutes();
-		if (m < 10){
-			m="0"+m;
-		}
-		return h+":"+m;
-	}
-	this.getDuration = function ()
-	{
-		return  new Date(parseInt(this.duration)*1000);
-	}
-	this.getTitle = function ()
-	{
-		return this.title;
-	}
-	this.getDescription = function ()
-	{
-		return this.description;
-	}
-	this.getDescriptionExtended = function ()
-	{
-		return this.descriptionE;
-	}
-	this.getServiceReference = function ()
-	{
-		return this.serviceRef;
-	}
-	this.getServiceName = function ()
-	{
-		return this.serviceName.replace(" ","&nbsp;");
-	}
-}//END class EPGEvent
+}
+///////////////////
+
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++ GUI functions                               ++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 var currentBodyMainElement = null
 
 function setBodyMainContent(newelementname){
@@ -566,9 +501,8 @@ function handleVolumeRequest(request){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 function initChannelList(){
-	debug("init ChannelList");	
-
-	//refreshChannellist('Favourites (TV)', '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet');
+	//debug("init ChannelList");	
+	
 	var url = url_fetchchannels+encodeURIComponent('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet');
 	doRequest(url, incomingTVBouquetList);
 
@@ -583,66 +517,51 @@ function initChannelList(){
 }
 
 function loadBouquet(servicereference){ 
-	debug("loading bouquet with "+servicereference);	
+	debug("loading bouquet with "+servicereference);
+	$('ServiceListBouqetReference').innerHTML = servicereference;
 	doRequest(url_fetchchannels+servicereference, incomingChannellist);
 }
 
 function incomingTVBouquetList(request){
 	if (request.readyState == 4) {
-		var list0 = e2servicelistToArray(getXML(request));
+		var list0 = new ServiceList(getXML(request)).getArray();
 		debug("have "+list0.length+" TV Bouquet ");	
 		$('accordionMenueBouquetContentTV').innerHTML = renderBouquetTable(list0,tplBouquetListItem);
-		
 		//loading first entry of TV Favorites as default for ServiceList
-		loadBouquet(list0[0][1]);
+		loadBouquet(list0[0].getServiceReference());
 	}
 }
 function incomingRadioBouquetList(request){
 	if (request.readyState == 4) {
-		var list1 = e2servicelistToArray(getXML(request));
+		var list1 = new ServiceList(getXML(request)).getArray();
 		debug("have "+list1.length+" Radio Bouquet ");	
 		$('accordionMenueBouquetContentRadio').innerHTML = renderBouquetTable(list1,tplBouquetListItem);
 	}	
 }
 function incomingProviderTVBouquetList(request){
 	if (request.readyState == 4) {
-		var list2 = e2servicelistToArray(getXML(request));
+		var list2 = new ServiceList(getXML(request)).getArray();
 		debug("have "+list2.length+" TV Provider Bouquet ");	
 		$('accordionMenueBouquetContentProviderTV').innerHTML = renderBouquetTable(list2,tplBouquetListItem);
 	}	
 }
 function incomingProviderRadioBouquetList(request){
 	if (request.readyState == 4) {
-		var list2 = e2servicelistToArray(getXML(request));
+		var list2 = new ServiceList(getXML(request)).getArray();
 		debug("have "+list2.length+" Radio Provider Bouquet ");	
 		$('accordionMenueBouquetContentProviderRadio').innerHTML = renderBouquetTable(list2,tplBouquetListItem);
 	}	
 }
 
-function e2servicelistToArray(xml){
-	var b = xml.getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
-	var list = new Array();
-	for ( var i=0; i < b.length; i++){
-		var bRef = escape(b.item(i).getElementsByTagName('e2servicereference').item(0).firstChild.data.replace('&quot;', '"'));
-		var bName = b.item(i).getElementsByTagName('e2servicename').item(0).firstChild.data;
-		var listitem = new Array(bName,bRef);
-		list.push(listitem)
-	}
-	return list
-}
-
 function renderBouquetTable(bouquet,template){
+	debug("renderBouquetTable with "+bouquet.length+" Bouqet");	
 	var html = tplBouquetListHeader;
 	for (var i=0; i < bouquet.length; i++){
 		try{
-			var item = bouquet[i];
-			
-			//Create JSON Object for Template
 			var namespace = {
-				'bouquetname': item[0], 
-				'servicereference': item[1] 
+				'servicereference': bouquet[i].getServiceReference(), 
+				'bouquetname': bouquet[i].getServiceName(), 
 				};
-			
 			html += RND(template, namespace);
 		} catch (blubb) {}
 	}
@@ -652,32 +571,20 @@ function renderBouquetTable(bouquet,template){
 
 function incomingChannellist(request){
 	if(request.readyState == 4){
-
-		services = getXML(request).getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
-		
-		listerHtml 	= tplServiceListHeader;
-		
+		var services = new ServiceList(getXML(request)).getArray();
+		listerHtml 	= tplServiceListHeader;		
 		debug("got "+services.length+" Services");
-		
-		for ( var i = 0; i < (services.length ); i++){
-			sRef = services.item(i).getElementsByTagName('e2servicereference').item(0).firstChild.data;
-			sName = services.item(i).getElementsByTagName('e2servicename').item(0).firstChild.data;
-				
-			var namespace = { 	'serviceref': sRef,
-								'servicerefESC': escape(sRef), 
-								'servicename': sName 
+		for ( var i = 0; i < services.length ; i++){
+			var reference = services[i];
+			var namespace = { 	'servicereference': reference.getServiceReference(),
+								'servicename': reference.getServiceName() 
 							};
-							
 			listerHtml += RND(tplServiceListItem, namespace);
-			
-		}
-		
+		}		
 		listerHtml += tplServiceListFooter;
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
+		loadServiceEPGNowNext($('ServiceListBouqetReference').innerHTML);
 	}
 }
-
-
-
 

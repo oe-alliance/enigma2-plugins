@@ -361,4 +361,16 @@ a.sListSLink:hover{
 	text-align: right;
 }
 
-
+.sListEPGTime{
+	width:55px;
+	text-align: left;
+}
+.sListEPGTitle{
+	width:600px;
+	
+	text-align: left;
+}
+.sListEPGDuration{
+	width:55px;
+	text-align: right;
+}
