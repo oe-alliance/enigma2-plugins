@@ -57,9 +57,9 @@ var tplServiceListItem  = '<tr>\n';
 var tplServiceListFooter = "</tbody></table>\n";
 //
 
-var	tplServiceListEPGItem  = '<table border="0">\n';
-	tplServiceListEPGItem += '<tr><td><div class="sListEPGTime">%(starttime)</div></td><td><div class="sListEPGTitle">%(title)</div></td><td ><div class="sListEPGDuration">%(length)&nbsp;Min</div></td></tr>\n';
-	tplServiceListEPGItem += '</table>\n';
+var	tplServiceListEPGItem  = '<div class="sListEPGTime">%(starttime)</div>\n';
+	tplServiceListEPGItem += '<div class="sListEPGTitle">%(title)</div>\n';
+	tplServiceListEPGItem += '<div class="sListEPGDuration">%(length) Min.</div>\n';
 
 
 
