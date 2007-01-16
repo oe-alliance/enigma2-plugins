@@ -342,12 +342,12 @@ form.sListSearch{
 }
 .sListSName{
 	float:left;
-	width:690px;
+	width:661px;
 }
 
 a.sListSLink{
 	display: block;
-	width: 100%;
+	width: 656px;
 	height: 100%;
 	text-decoration: none;
 }
@@ -357,9 +357,10 @@ a.sListSLink:hover{
 }
 
 .sListExt{
+	border-left: 1px solid #CCC;
 	float:left;
-	width:50px;
-	text-align: middle;
+	width:75px;
+	text-align: center;
 }
 
 .sListEPGTime{
