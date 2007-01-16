@@ -14,6 +14,7 @@
 
 	<!-- our stuff -->
 	<script type="text/javascript" src="/webdata/templates.js" />
+	<script type="text/javascript" src="/webdata/objects.js" />
 	<script type="text/javascript" src="/webdata/tools.js" />
 
 	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
@@ -98,6 +99,8 @@
 <!-- START LIVEUPDATESTREAM  is used to enable the liveupdatestream in MS Internet Explorer //-->
 <div id="UpdateStreamReaderIEFixPanel"></div>
 <!-- END LIVEUPDATESTREAM//-->
+
+<div id="ServiceListBouqetReference"  style="display:none;" ></div>
 </div>
 <script type="text/javascript" >
 if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow"); }
@@ -123,7 +126,7 @@ new Rico.Accordion( $('accordionMenue'), accordionOptions );
 initVolumePanel();
 initSignalPanel();
 initChannelList();
-setBodyMainContent('BodyContentChannellist');
+//setBodyMainContent('BodyContentChannellist');
 UpdateStreamReaderStart();
 
 </script>
