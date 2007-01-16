@@ -29,7 +29,7 @@ class EPG( Source):
     
     def getEPGNowNext(self,serviceref):
         print "getting EPG NOWNEXT", serviceref
-        events = self.epgcache.lookupEvent( ['IBDTSERNn',(serviceref,0,0,-1),(serviceref,0,1,-1)]);
+        events = self.epgcache.lookupEvent( ['IBDTSERN',(serviceref,0,0,-1),(serviceref,0,1,-1)]);
         if events:
                 return events
         else:
@@ -37,7 +37,7 @@ class EPG( Source):
     
     def getEPGofService(self,cmd):
         print "getting EPG of Service", cmd
-        events = self.epgcache.lookupEvent(['IBDTSERNn',(cmd,0,-1,-1)]);
+        events = self.epgcache.lookupEvent(['IBDTSERN',(cmd,0,-1,-1)]);
         if events:
                 return events
         else:
@@ -45,13 +45,13 @@ class EPG( Source):
     
     def searchEvent(self,cmd):
         print "getting EPG by title",cmd
-        events = self.epgcache.search(('IBDTSERNn',256,eEPGCache.PARTIAL_TITLE_SEARCH,cmd,1));
+        events = self.epgcache.search(('IBDTSERN',256,eEPGCache.PARTIAL_TITLE_SEARCH,cmd,1));
         if events:
             return events
         else:
             return []
         
     list = property(do_func)
-    lut = {"EventID": 0, "TimeStart": 1,"Duration": 2, "Title": 3, "Description": 4, "DescriptionExtended": 5, "ServiceReference": 6, "ServiceName": 7,"ShortServiceName": 8}
+    lut = {"EventID": 0, "TimeStart": 1,"Duration": 2, "Title": 3, "Description": 4, "DescriptionExtended": 5, "ServiceReference": 6, "ServiceName": 7 }
 
     
