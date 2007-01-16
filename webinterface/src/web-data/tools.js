@@ -416,7 +416,7 @@ function buildServiceListEPGItem(epgevent,nownext){
 		try{
 			var namespace = { 	'starttime': epgevent.getTimeStartString(), 
 								'title': epgevent.getTitle(), 
-								'length': (epgevent.duration/60), 
+								'length': (epgevent.duration/60) 
 							};
 			elemente.item(c).innerHTML = RND(tplServiceListEPGItem, namespace);
 		} catch (blubb) {/*debug("Error rendering: "+blubb);*/}	
@@ -560,7 +560,7 @@ function renderBouquetTable(bouquet,template){
 		try{
 			var namespace = {
 				'servicereference': bouquet[i].getServiceReference(), 
-				'bouquetname': bouquet[i].getServiceName(), 
+				'bouquetname': bouquet[i].getServiceName()
 				};
 			html += RND(template, namespace);
 		} catch (blubb) {}
