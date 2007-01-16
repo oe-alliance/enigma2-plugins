@@ -11,6 +11,9 @@ var url_epgnow = "/web/epgnow?bref="; // plus bouqetRev
 var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded serviceref
 
 var url_updates= "/web/updates";
+
+var url_movielist= "/web/movielist";
+
 var windowStyle = "alphacube";
 var DBG = false;
 
