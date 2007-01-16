@@ -11,7 +11,7 @@ function EPGEvent(xml){
 		this.serviceRef = xml.getElementsByTagName('e2eventservicereference').item(0).firstChild.data;
 		this.serviceName = xml.getElementsByTagName('e2eventservicename').item(0).firstChild.data;
 	} catch (e) {
-		debug("EPGEvent parsing Error");
+		//debug("EPGEvent parsing Error");
 	}	
 	try{
 		this.description = xml.getElementsByTagName('e2eventdescription').item(0).firstChild.data;
@@ -100,7 +100,7 @@ function ServiceReference(xml){
 		this.servicename = xml.getElementsByTagName('e2servicename').item(0).firstChild.data;
 		
 	} catch (e) {
-		debug("Service parsing Error "+e);
+		//debug("Service parsing Error "+e);
 	}
 	
 	this.getServiceReference = function(){
@@ -118,11 +118,11 @@ function ServiceReference(xml){
 
 function ServiceList(xml){
 	// parsing values from xml-element
-	debug('init ServiceList'+xml)
+	//debug('init ServiceList'+xml);
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
 	} catch (e) {
-		debug("Service parsing Error");
+		//debug("Service parsing Error");
 	}
 	this.getArray = function(){
 		var listxy = new Array();
