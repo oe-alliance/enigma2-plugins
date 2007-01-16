@@ -94,9 +94,22 @@ class OneTimeElement(Element):
 
 	# CHECKME: is this ok performance-wise?
 	def handleCommand(self, args):
-		for c in args.get(self.source_id, []):
-			self.source.handleCommand(c)
-
+		if self.source_id.find(",") >=0:
+			paramlist = self.source_id.split(",")
+			list={}
+			for key in paramlist:
+				arg = args.get(key, [])
+				if len(arg) == 0:
+					list[key] = None	
+				elif len(arg) == 1:
+					list[key] = "".join(arg)	
+				elif len(arg) == 2:
+					list[key] = arg[0]
+			self.source.handleCommand(list)
+		else:
+			for c in args.get(self.source_id, []):
+				self.source.handleCommand(c)
+		
 	def render(self, stream):
 		t = self.source.getHTML(self.source_id)
 		if isinstance(t, unicode):
