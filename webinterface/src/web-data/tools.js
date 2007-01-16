@@ -11,7 +11,7 @@ var url_epgnow = "/web/epgnow?bref="; // plus bouqetRev
 var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded serviceref
 
 var url_updates= "/web/updates";
-
+var windowStyle = "alphacube";
 var DBG = false;
 
 /**
@@ -128,7 +128,7 @@ function UpdateStreamReaderOnLoad(){
 	debug("UpdateStreamReaderOnLoad");
 	Dialog.confirm(
 		"Live Update Stream ends!<br><br>You will not receive any Update from Enigma2.<br>Should I reconnect?",
-		 {windowParameters: {width:300, className: "alphacube"},
+		 {windowParameters: {width:300, className: windowStyle},
 			okLabel: "reconnect",
 			buttonClass: "myButtonClass",
 			cancel: function(win) {debug("cancel confirm panel")},
@@ -142,7 +142,7 @@ function UpdateStreamReaderOnError(){
 	window.clearInterval(UpdateStreamReaderPollTimer);
 	Dialog.confirm(
 		"Live Update Stream has an Error!<br><br>You will not receive any Update from Enigma2.<br>Should I try to reconnect?",
-		 {windowParameters: {width:300, className: "alphacube"},
+		 {windowParameters: {width:300, className: windowStyle},
 			 okLabel: "reconnect",
 			 buttonClass: "myButtonClass",
 			 cancel: function(win) {debug("cancel confirm panel")},
@@ -157,7 +157,7 @@ function openWindow(title, inner, width, height, id){
 			if(id == null) id = new Date().toUTCString();
 			
 			//debug(id);
-			var win = new Window(id, {className: "alphacube", title: title, width: width, height: height});
+			var win = new Window(id, {className: windowStyle, title: title, width: width, height: height});
 			win.getContent().innerHTML = inner;
 			win.setDestroyOnClose();
 			win.showCenter();
@@ -166,7 +166,7 @@ function openWindow(title, inner, width, height, id){
 }
 
 function messageBox(t, m){
-	Dialog.alert(m, {windowParameters: {title: t, className: "alphacube", width:200}, okLabel: "Close"});
+	Dialog.alert(m, {windowParameters: {title: t, className: windowStyle, width:200}, okLabel: "Close"});
 }
 
 function getHTTPObject( ){
