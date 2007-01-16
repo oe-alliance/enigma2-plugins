@@ -252,35 +252,6 @@ normal stylesheet-stuff******************
 	padding:0 0 0 0;
 }
 
-
-td.navEl{
-	height: 35px;
-	padding: 0px;
-	width:100%;
-	height:100%;	 
-}
-
-a.navEl:link { color:#444444; }
-a.navEl:visited { color:#444444; }
-a.navEl:active { color:#444444; }
-
-a.navEl{
-	text-decoration: none;
-	color: #999999;
-	display: block;
-	width:100%;
-	height:35px;
-	background-image: url(img/bg_nav_btn.png); 
-	background-repeat: repeat-x; 
-}
-
-a.navEl:hover{
-	color:#000000;
-	background-image: url(img/bg_nav_btn_hover.png); 
-	background-repeat: repeat-x; 
-}
-
-
 #NavHd{
 	background-color: #0066CC;
 	color: #FFFFFF;
