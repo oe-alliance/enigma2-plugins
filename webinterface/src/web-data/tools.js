@@ -410,17 +410,16 @@ function incomingServiceEPGNowNext(request){
 	}
 }
 function buildServiceListEPGItem(epgevent,nownext){
-	var elemente = document.getElementsByName(epgevent.getServiceReference()+'EPG'+nownext);
-	debug(elemente.length+" of items "+epgevent.getServiceReference()+'EPG'+nownext);
-	for (var c =0; c < elemente.length;c++){
+	var e = $(epgevent.getServiceReference()+'EPG'+nownext);
 		try{
 			var namespace = { 	'starttime': epgevent.getTimeStartString(), 
 								'title': epgevent.getTitle(), 
 								'length': (epgevent.duration/60) 
 							};
-			elemente.item(c).innerHTML = RND(tplServiceListEPGItem, namespace);
-		} catch (blubb) {/*debug("Error rendering: "+blubb);*/}	
-	}
+			e.innerHTML = RND(tplServiceListEPGItem, namespace);
+		} catch (blubb) {
+			debug("Error rendering: "+blubb);
+		}	
 }
 ///////////////////
 
@@ -515,10 +514,11 @@ function initChannelList(){
 	var url = url_fetchchannels+encodeURIComponent('1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name');
 	doRequest(url, incomingProviderRadioBouquetList);
 }
-
+var servicereftoloadepgnow="";
 function loadBouquet(servicereference){ 
 	debug("loading bouquet with "+servicereference);
-	$('ServiceListBouqetReference').innerHTML = servicereference;
+	//$('ServiceListBouqetReference').innerHTML =
+	servicereftoloadepgnow = servicereference;
 	doRequest(url_fetchchannels+servicereference, incomingChannellist);
 }
 
@@ -584,7 +584,8 @@ function incomingChannellist(request){
 		listerHtml += tplServiceListFooter;
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
-		loadServiceEPGNowNext($('ServiceListBouqetReference').innerHTML);
+		//loadServiceEPGNowNext($('ServiceListBouqetReference').innerHTML);
+		loadServiceEPGNowNext(servicereftoloadepgnow);
 	}
 }
 

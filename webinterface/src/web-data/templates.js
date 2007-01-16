@@ -51,7 +51,7 @@ var tplServiceListItem  = '<tr>\n';
 	tplServiceListItem += '<a target="_blank" href="stream.m3u?ref=%(servicereference)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
 	tplServiceListItem += '</tr>\n';
     tplServiceListItem += '<tr>\n';
-	tplServiceListItem += '<td colspan="2"><div name="%(servicereference)EPGNOW"></div></td>\n';
+	tplServiceListItem += '<td colspan="2"><div id="%(servicereference)EPGNOW"></div></td>\n';
 	tplServiceListItem += '</tr>\n';
 	
 var tplServiceListFooter = "</tbody></table>\n";
