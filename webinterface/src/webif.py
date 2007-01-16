@@ -57,7 +57,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["Volume"] = Volume(session)
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
 		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
-		self["EPGNOWNEXT"] = EPG(session,func=EPG.NOWNEXT)
+		self["EPGNOW"] = EPG(session,func=EPG.NOW)
 		self["TimerList"] = Timer(session)
 		self["MovieList"] = Movie(session)
 		self["Volume"] = Volume(session)
@@ -134,7 +134,11 @@ def filter_none(string):
 	return string
 
 def filter_xml(s):
-	return s.replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;")
+	try:
+		return s.replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;")
+	except AttributeError:
+		# if s is None
+		return s
 
 def filter_javascript_escape(s):
 	return s.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"')
