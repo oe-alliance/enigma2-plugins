@@ -61,7 +61,29 @@ var	tplServiceListEPGItem  = '<div class="sListEPGTime">%(starttime)</div>\n';
 	tplServiceListEPGItem += '<div class="sListEPGTitle">%(title)</div>\n';
 	tplServiceListEPGItem += '<div class="sListEPGDuration">%(length) Min.</div>\n';
 
+// MovieList Templates
+var tplMovieListHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
+	tplMovieListHeader += '<thead class="fixedHeader">\n';
+	tplMovieListHeader += '<tr>\n';
+	tplMovieListHeader += '<th><div class="sListHeader" style="color: #FFFFFF;">MovieList</div>\n';
+	tplMovieListHeader += '<div class="sListSearch">';
+	tplMovieListHeader += '<form onSubmit="new EPGList().getBySearchString(document.getElementById(\'searchText\').value); return false;">';
+	tplMovieListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
+	tplMovieListHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
+	tplMovieListHeader += '</form></div></th>';
+	tplMovieListHeader += '</tr>\n';
+	tplMovieListHeader += '</thead>\n';
+	tplMovieListHeader += '<tbody class="scrollContent">\n';
 
+var tplMovieListItem  = '<tr>\n';
+	tplMovieListItem += '<td><div class="sListSName" title="%(description)">%(title) (%(servicename))</div>';
+	tplMovieListItem += '<div class="sListExt">\n';
+	tplMovieListItem += '%(tags)\n';
+	tplMovieListItem += '</div>\n';
+	tplMovieListItem += '</tr>\n';
+	
+var tplMovieListFooter = "</tbody></table>\n";
+//
 
 // Bouquetlist Template
 var tplBouquetListHeader = '<table id="BouquetList" width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';

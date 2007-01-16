@@ -51,6 +51,14 @@
      							<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderRadio">Provider Radio</div>
       							<div class="navMenuContent" id="accordionMenueBouquetContentProviderRadio">please wait, loading...</div>
 							</div>
+   							<div class="navMenuPanel" id="accordionMenueBouquetPanelMovieTimer">
+     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderMovieTimer">Movie/Timer</div>
+      							<div class="navMenuContent" id="accordionMenueBouquetContentMovieTimer">
+									<div onclick="loadMovieList()">Movies</div><br/>
+									<div onclick="loadTimerList()">Timers</div><br/>
+									<div onclick="loadTimerForm()">add Timer</div><br/>
+								</div>
+							</div>
 						</div>
 				</td>
 			</tr>

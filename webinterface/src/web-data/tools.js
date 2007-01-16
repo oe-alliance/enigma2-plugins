@@ -588,4 +588,31 @@ function incomingChannellist(request){
 		loadServiceEPGNowNext(servicereftoloadepgnow);
 	}
 }
+// Movies
+function loadMovieList(){
+	debug("loading movies");
+	doRequest(url_movielist, incomingMovieList);	
+}
+
+function incomingMovieList(request){
+	if(request.readyState == 4){
+		var movies = new MovieList(getXML(request)).getArray();
+		debug("have "+movies.length+" movies");
+		listerHtml 	= tplMovieListHeader;		
+		for ( var i = 0; i <movies.length; i++){
+			var movie = movies[i];
+			var namespace = { 	'servicereference': movie.getServiceReference(),
+								'servicename': movie.getServiceName() ,
+								'title': movie.getTitle(), 
+								'description': movie.getDescription(), 
+								'tags': movie.getTags().join(', ') 
+							};
+			listerHtml += RND(tplMovieListItem, namespace);
+		}
+		listerHtml += tplMovieListFooter;
+		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
+		setBodyMainContent('BodyContentChannellist');
+		
+	}		
+}
 

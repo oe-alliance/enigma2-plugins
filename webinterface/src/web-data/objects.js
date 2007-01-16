@@ -115,7 +115,6 @@ function ServiceReference(xml){
 
 
 //START class ServiceList
-
 function ServiceList(xml){
 	// parsing values from xml-element
 	//debug('init ServiceList'+xml);
@@ -134,3 +133,72 @@ function ServiceList(xml){
 	}
 }
 //END class ServiceList
+
+
+//START class MovieList
+function MovieList(xml){
+	// parsing values from xml-element
+	debug('init MovieList'+xml);
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2movielist").item(0).getElementsByTagName("e2movie");
+	} catch (e) {
+		debug("MovieList parsing Error");
+	}
+	this.getArray = function(){
+		var listxy = new Array();
+		for(var i=0;i<this.xmlitems.length;i++){
+			//debug("parsing movie "+i+" of "+this.xmlitems.length);
+			var xv = new Movie(this.xmlitems.item(i));
+			listxy.push(xv);			
+		}
+		return listxy;
+	}
+}
+//END class MovieList
+
+//START class Movie
+function Movie(xml){	
+	// parsing values from xml-element
+	//debug('init Movie');
+	try{
+		this.servicereference = xml.getElementsByTagName('e2servicereference').item(0).firstChild.data;
+	} catch (e) {
+		this.servicereference = "N/A";
+	}
+	try{
+		this.servicename = xml.getElementsByTagName('e2servicename').item(0).firstChild.data;
+	} catch (e) {
+		this.servicename = "N/A";
+	}
+	try{
+		this.title = xml.getElementsByTagName('e2title').item(0).firstChild.data;
+	} catch (e) {
+		this.title = "N/A";
+	}
+	try{
+		this.description = xml.getElementsByTagName('e2description').item(0).firstChild.data;
+	} catch (e) {
+		this.description = "N/A";
+	}
+	try{
+		this.tags = xml.getElementsByTagName('e2tags').item(0).firstChild.data;
+	} catch (e) {
+		this.tags = "no&nbsp;tags"; // no whitespaces... tags will be splittet later
+	}
+	this.getServiceReference = function(){
+		return encodeURIComponent(this.servicereference);
+	}
+	this.getServiceName = function(){
+		return this.servicename.replace('&quot;', '"');
+	}	
+	this.getTitle = function(){
+		return this.title;
+	}	
+	this.getDescription = function(){
+		return this.description;
+	}	
+	this.getTags = function(){		
+		return this.tags.split(" ");
+	}	
+}	
+//END class Movie
