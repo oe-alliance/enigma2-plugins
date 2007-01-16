@@ -2,13 +2,14 @@ from enigma import *
 
 from Components.Sources.Source import Source
 from ServiceReference import ServiceReference
+from enigma import eServiceCenter, eServiceReference
 
 class EPG( Source):
-    NOWNEXT=0
+    NOW=0
     SERVICE=1
     TITLE=2
     
-    def __init__(self, navcore,func=NOWNEXT):
+    def __init__(self, navcore,func=NOW):
         self.func = func
         Source.__init__(self)        
         self.navcore = navcore
@@ -23,13 +24,19 @@ class EPG( Source):
         elif self.func is self.SERVICE:
             func = self.getEPGofService
         else:
-            func = self.getEPGNowNext
+            func = self.getEPGNow
             
         return func(self.command)
     
-    def getEPGNowNext(self,serviceref):
-        print "getting EPG NOWNEXT", serviceref
-        events = self.epgcache.lookupEvent( ['IBDTSERN',(serviceref,0,0,-1),(serviceref,0,1,-1)]);
+    def getEPGNow(self,bouqetref):
+        print "getting EPG NOW", bouqetref
+        serviceHandler = eServiceCenter.getInstance()
+        list = serviceHandler.list(eServiceReference(bouqetref))
+        services = list and list.getContent('S')
+        search = ['IBDTSERN']
+        for service in services:
+            search.append((service,0,-1))        
+        events = self.epgcache.lookupEvent(search);
         if events:
                 return events
         else:
