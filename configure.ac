@@ -21,7 +21,7 @@ webinterface/src/WebComponents/Converter/Makefile
 webinterface/src/WebComponents/Sources/Makefile
 
 webinterface/src/web-data/Makefile
-webinterface/src/web-data/img/Makefile
+webinterface/src/web-data/gfx/Makefile
 webinterface/src/web-data/lib/ptwindow/Makefile
 webinterface/src/web-data/lib/ptwindow/themes/spread/Makefile
 webinterface/src/web-data/lib/ptwindow/themes/alphacube/Makefile
