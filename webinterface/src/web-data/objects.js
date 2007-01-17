@@ -202,3 +202,223 @@ function Movie(xml){
 	}	
 }	
 //END class Movie
+
+//START class TimerList
+function TimerList(xml){
+	// parsing values from xml-element
+	debug('init TimerList'+xml);
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2timerlist").item(0).getElementsByTagName("e2timer");
+	} catch (e) {
+		debug("TimerList parsing Error");
+	}
+	this.getArray = function(){
+		var listxy = new Array();
+		for(var i=0;i<this.xmlitems.length;i++){
+			//debug("parsing timer "+i+" of "+this.xmlitems.length);
+			var xv = new Timer(this.xmlitems.item(i));
+			listxy.push(xv);			
+		}
+		return listxy;
+	}
+}
+//END class TimerList
+
+//START class Timer
+function Timer(xml){	
+	// parsing values from xml-element
+	//debug('init Timer');
+	try{
+		this.servicereference = xml.getElementsByTagName('e2servicereference').item(0).firstChild.data;
+	} catch (e) {
+		this.servicereference = "N/A";
+	}
+	try{
+		this.servicename = xml.getElementsByTagName('e2servicename').item(0).firstChild.data;
+	} catch (e) {
+		this.servicename = "N/A";
+	}
+	try{
+		this.eventid = xml.getElementsByTagName('e2eit').item(0).firstChild.data;
+	} catch (e) {
+		this.eventid = "N/A";
+	}
+	try{
+		this.name = xml.getElementsByTagName('e2name').item(0).firstChild.data;
+	} catch (e) {
+		this.name = "N/A";
+	}
+	try{
+		this.description = xml.getElementsByTagName('e2description').item(0).firstChild.data;
+	} catch (e) {
+		this.description = "N/A";
+	}
+	try{
+		this.disabled = xml.getElementsByTagName('e2disabled').item(0).firstChild.data;
+	} catch (e) {
+		this.disabled = "N/A";
+	}
+	try{
+		this.timeend = xml.getElementsByTagName('e2timeend').item(0).firstChild.data;
+	} catch (e) {
+		this.timeend = "N/A";
+	}
+	try{
+		this.duration = xml.getElementsByTagName('e2duration').item(0).firstChild.data;
+	} catch (e) {		
+		this.duration = "0";
+	}
+	try{
+		this.startprepare = xml.getElementsByTagName('e2startprepare').item(0).firstChild.data;
+	} catch (e) {
+		this.startprepare = "N/A";
+	}
+	try{
+		this.justplay = xml.getElementsByTagName('e2justplay').item(0).firstChild.data;
+	} catch (e) {
+		this.justplay = "N/A";
+	}
+	try{
+		this.afterevent = xml.getElementsByTagName('e2afterevent').item(0).firstChild.data;
+	} catch (e) {
+		this.afterevent = "N/A";
+	}
+	try{
+		this.logentries = xml.getElementsByTagName('e2logentries').item(0).firstChild.data;
+	} catch (e) {
+		this.logentries = "N/A";
+	}
+	try{
+		this.tfilename = xml.getElementsByTagName('e2filename').item(0).firstChild.data;
+	} catch (e) {
+		this.tfilename = "N/A";
+	}
+	try{
+		this.backoff = xml.getElementsByTagName('e2backoff').item(0).firstChild.data;
+	} catch (e) {
+		this.backoff = "N/A";
+	}
+	try{
+		this.nextactivation = xml.getElementsByTagName('e2nextactivation').item(0).firstChild.data;
+	} catch (e) {
+		this.nextactivation = "N/A";
+	}
+	try{
+		this.firsttryprepare = xml.getElementsByTagName('e2firsttryprepare').item(0).firstChild.data;
+	} catch (e) {
+		this.firsttryprepare = "N/A";
+	}
+	try{
+		this.state = xml.getElementsByTagName('e2state').item(0).firstChild.data;
+	} catch (e) {
+		this.state = "N/A";
+	}
+	try{
+		this.repeated = xml.getElementsByTagName('e2repeated').item(0).firstChild.data;
+	} catch (e) {
+		this.repeated = "N/A";
+	}
+	try{
+		this.dontsave = xml.getElementsByTagName('e2dontsave').item(0).firstChild.data;
+	} catch (e) {
+		this.dontsave = "N/A";
+	}
+	try{
+		this.cancled = xml.getElementsByTagName('e2cancled').item(0).firstChild.data;
+	} catch (e) {
+		this.cancled = "N/A";
+	}
+
+	this.getServiceReference = function(){
+		return encodeURIComponent(this.servicereference);
+	}
+	this.getServiceName = function(){
+		return this.servicename.replace('&quot;', '"');
+	}	
+	this.getEventID = function(){
+		return this.eventid;
+	}	
+	this.getName = function(){
+		return this.name;
+	}	
+	this.getDescription = function(){
+		return this.description;
+	}	
+	this.getDisabled = function(){
+		return this.tdisabled;
+	}	
+	this.getTimeEnd = function(){
+		return this.timeend;
+	}	
+	this.getDuration = function(){
+		return parseInt(this.duration);
+	}	
+	this.getStartPrepare = function(){
+		return this.startprepare;
+	}	
+	this.getJustplay = function(){
+		return this.justplay;
+	}	
+	this.getAfterevent = function(){
+		return this.afterevent;
+	}	
+	this.getAfterevent = function(){
+		return this.logentries;
+	}	
+	this.getFilename = function(){
+		return this.tfilename;
+	}	
+	this.getBackoff = function(){
+		return this.backoff;
+	}	
+	this.getNextActivation = function(){
+		return this.nextactivation;
+	}	
+	this.getFirsttryprepare = function(){
+		return this.firsttryprepare;
+	}	
+	this.getState = function(){
+		return this.state;
+	}	
+	this.getRepeated = function(){
+		return this.repeated;
+	}	
+	this.getDontSave = function(){
+		return this.dontsave;
+	}	
+	this.isCancled = function(){
+		return this.cancled;
+	}	
+}
+// START TimerAddResult
+function TimerAddResult(xml){
+	// parsing values from xml-element
+	debug('init TimerAddResult'+xml);
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2timeraddresult").item(0);
+	} catch (e) {
+		debug("TimerAddResult parsing e2timeraddresult"+e);
+	}
+	try{
+		this.state = this.xmlitems.getElementsByTagName("e2state").item(0).firstChild.data;
+	} catch (e) {
+		debug("TimerAddResult parsing e2state"+e);
+	}
+	try{
+		this.statetext = this.xmlitems.getElementsByTagName("e2statetext").item(0).firstChild.data;
+	} catch (e) {
+		debug("TimerAddResult parsing e2statetext"+e);
+	}
+	
+	this.getState = function(){
+		if(this.state == 'True'){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	this.getStateText = function(){
+			return this.statetext;
+	}
+}
+// END TimerAddResult

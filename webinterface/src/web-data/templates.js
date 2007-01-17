@@ -83,7 +83,29 @@ var tplMovieListItem  = '<tr>\n';
 	tplMovieListItem += '</tr>\n';
 	
 var tplMovieListFooter = "</tbody></table>\n";
-//
+
+// TimerList Templates
+var tplTimerListHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
+	tplTimerListHeader += '<thead class="fixedHeader">\n';
+	tplTimerListHeader += '<tr>\n';
+	tplTimerListHeader += '<th><div class="sListHeader" style="color: #FFFFFF;">TimerList</div>\n';
+	tplTimerListHeader += '<div class="sListSearch">';
+	tplTimerListHeader += '<form onSubmit="new EPGList().getBySearchString(document.getElementById(\'searchText\').value); return false;">';
+	tplTimerListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
+	tplTimerListHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
+	tplTimerListHeader += '</form></div></th>';
+	tplTimerListHeader += '</tr>\n';
+	tplTimerListHeader += '</thead>\n';
+	tplTimerListHeader += '<tbody class="scrollContent">\n';
+
+var tplTimerListItem  = '<tr>\n';
+	tplTimerListItem += '<td><div class="sListSName" title="%(description)">%(title) (%(servicename))</div>';
+	tplTimerListItem += '<div class="sListExt">\n';
+	tplTimerListItem += '%(duration)&nbsp;Min\n';
+	tplTimerListItem += '</div>\n';
+	tplTimerListItem += '</tr>\n';
+	
+var tplTimerListFooter = "</tbody></table>\n";
 
 // Bouquetlist Template
 var tplBouquetListHeader = '<table id="BouquetList" width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';

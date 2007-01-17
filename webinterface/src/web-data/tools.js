@@ -628,8 +628,43 @@ function incomingMovieList(request){
 // Timer
 function addTimerByID(serviceRef,eventID){
 	debug("adding timer by eventid="+eventID+" for "+serviceRef);
-	doRequest(url_timeraddbyeventid+"?serviceref="+serviceRef+"&eventid="+eventID, onTimerAdded);	
+	doRequest(url_timeraddbyeventid+"?serviceref="+serviceRef+"&eventid="+eventID, incomingTimerAddResult);	
 }
-function onTimerAdded(request){
-	debug("onTimerAdded");	
+function incomingTimerAddResult(request){
+	debug("onTimerAdded");
+	if(request.readyState == 4){
+		var addresult = new TimerAddResult(getXML(request));
+		if(addresult.getState()){
+			//timer was add
+			loadTimerList();
+		}else{
+			messageBox("Timer Error","your Timer could not be added!\nReason: "+addresult.getStateText());
+		}
+	}		
+}
+function loadTimerList(){
+	debug("loading timers");
+	doRequest(url_timerlist, incomingTimerList);	
+}
+
+function incomingTimerList(request){
+	if(request.readyState == 4){
+		var timers = new TimerList(getXML(request)).getArray();
+		debug("have "+timers.length+" timer");
+		listerHtml 	= tplTimerListHeader;		
+		for ( var i = 0; i <timers.length; i++){
+			var timer = timers[i];
+			var namespace = { 	'servicereference': timer.getServiceReference(),
+								'servicename': timer.getServiceName() ,
+								'title': timer.getName(), 
+								'description': timer.getDescription(), 
+								'duration': (timer.getDuration()/60) 
+							};
+			listerHtml += RND(tplTimerListItem, namespace);
+		}
+		listerHtml += tplTimerListFooter;
+		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
+		setBodyMainContent('BodyContentChannellist');
+		
+	}		
 }
