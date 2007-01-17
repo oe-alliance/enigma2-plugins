@@ -58,7 +58,9 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
 		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
 		self["EPGNOW"] = EPG(session,func=EPG.NOW)
-		self["TimerList"] = Timer(session)
+		self["TimerList"] = Timer(session,func = Timer.LIST)
+		self["TimerAddEventID"] = Timer(session,func = Timer.ADDBYID)
+		self["TimerAdd"] = Timer(session,func = Timer.ADD)
 		self["MovieList"] = Movie(session)
 		self["Volume"] = Volume(session)
 
