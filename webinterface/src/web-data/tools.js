@@ -14,6 +14,10 @@ var url_updates= "/web/updates";
 
 var url_movielist= "/web/movielist";
 
+var url_timerlist= "/web/timerlist";
+var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
+var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
+
 var windowStyle = "alphacube";
 var DBG = false;
 
@@ -352,6 +356,8 @@ EPGList.prototype = {
 				var item = epglist[i];				
 				//Create JSON Object for Template
 				var namespace = { 	'date': item.getTimeDay(), 
+									'eventid': item.getEventId(), 
+									'servicereference': item.getServiceReference(), 
 									'servicename': item.getServiceName(), 
 									'title': item.getTitle(),
 									'titleESC': escape(item.getTitle()),
@@ -619,3 +625,11 @@ function incomingMovieList(request){
 	}		
 }
 
+// Timer
+function addTimerByID(serviceRef,eventID){
+	debug("adding timer by eventid="+eventID+" for "+serviceRef);
+	doRequest(url_timeraddbyeventid+"?serviceref="+serviceRef+"&eventid="+eventID, onTimerAdded);	
+}
+function onTimerAdded(request){
+	debug("onTimerAdded");	
+}

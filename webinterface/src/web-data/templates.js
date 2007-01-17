@@ -20,7 +20,7 @@ var tplEPGListItem  = '<tr style="background-color: #DDDDDD;">';
 	tplEPGListItem += '</tr>';
 	
 	tplEPGListItem +='<tr style="background-color: #DDDDDD;"><td>';
-	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/timer.png" title="add to Timers" border="0"></a><br/>';
+	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/timer.png" title="add to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\');"></a><br/>';
 	tplEPGListItem +='<a target="_blank" href="/web/epgsearch.rss?search=%(title)" ><img src="/webdata/gfx/feed.png" title="RSS-Feed for this Title" border="0"></a><br/>';
 	tplEPGListItem +='<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=%(titleESC)" ><img src="/webdata/gfx/world.png" title="search IMDb" border="0"></a><br/>';
 	tplEPGListItem +='</td></tr>';
