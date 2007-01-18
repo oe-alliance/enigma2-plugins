@@ -1,0 +1,153 @@
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<title>Enigma 2 Streaminterface (ALPHA)</title>
+<!--load everything for prototype and prototype window -->
+<script type="text/javascript" src="/webdata/lib/prototype.js" ></script>
+<script type="text/javascript" src="/webdata/lib/rico.js" ></script>
+<script type="text/javascript" src="/webdata/lib/ptwindow/effects.js"></script>
+<script type="text/javascript" src="/webdata/lib/ptwindow/window.js" ></script>
+<!--script type="text/javascript" src="/webdata/lib/ptwindow/debug.js" /-->
+
+<link href="/webdata/lib/ptwindow/themes/default.css" rel="stylesheet" type="text/css" />
+<link href="/webdata/lib/ptwindow/themes/alphacube.css" rel="stylesheet" type="text/css" />
+
+<!-- our stuff -->
+<script type="text/javascript" src="/webdata/templates.js" ></script>
+	
+<script type="text/javascript" src="/webdata/objects.js" ></script>
+<script type="text/javascript" src="/webdata/tools.js" ></script>
+<script type="text/javascript" src="/webdata/vlcplayer.js" ></script>
+
+	
+
+<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
+<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico" />
+<style type="text/css">
+#currentServiceName { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:right;
+
+	background-color: #0066CC;
+	color: #FFFFFF;
+	text-align:left;
+
+	width:30%;
+	height:20px;
+}
+.currentServiceEPGStarttime { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:left;
+
+	background-color: #0066CC;
+	color: #FFFFFF;
+	text-align:left;
+
+	width:10%;
+	height:20px;
+}
+.currentServiceEPGTitle { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:left;
+
+	background-color: #0066CC;
+	color: #FFFFFF;
+	text-align:left;
+
+	width:50%;
+	height:20px;
+}
+.currentServiceEPGDuration { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:left;
+
+	background-color: #0066CC;
+	color: #FFFFFF;
+	text-align:left;
+
+	width:10%;
+	height:20px;
+}
+
+</style>
+
+</head>
+<body >
+<div id="Main">
+	<div id="nav">	
+		<div id="NavHd"><span id="RequestIndicator" style="display:none;"><img  src="/webdata/gfx/progress.gif" />loading...</span></div>
+		
+		<table cellpadding="0" cellspacing="0" id="navTable">
+			<tr>
+				<td class="NavEl">
+					<!-- START BODY MENUE //-->
+					<div id="accordionMenue" style="vertical-align: top;">
+						<div class="navMenuPanel" id="accordionMenueBouquetPanelTV">
+							<div class="navMenuHeader" id="accordionMenueBouquetHeaderTV">TV</div>
+							<div class="navMenuContent" id="accordionMenueBouquetContentTV">
+								please wait, loading...
+							</div>
+						</div>
+					<div class="navMenuPanel" id="accordionMenueBouquetPanelRadio">
+						<div class="navMenuHeader" id="accordionMenueBouquetHeaderRadio">Radio</div>
+							<div class="navMenuContent" id="accordionMenueBouquetContentRadio">
+								please wait, loading...
+							</div>
+						</div>						
+						<div class="navMenuPanel" id="accordionMenueBouquetPanelProviderTV">						
+							<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderTV">Provider TV</div>
+							<div class="navMenuContent" id="accordionMenueBouquetContentProviderTV">
+								please wait, loading...
+							</div>
+						</div>
+						<div class="navMenuPanel" id="accordionMenueBouquetPanelProviderRadio">
+							<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderRadio">Provider Radio</div>
+							<div class="navMenuContent" id="accordionMenueBouquetContentProviderRadio">
+								please wait, loading...
+							</div>
+						</div>
+					</div>
+					
+					<!-- END BODY MENUE //-->
+				</td>
+			</tr>
+			<tr>
+				<td class="NavEl"><div id="VLCChannellist"></div></td>
+			</tr>
+		</table>
+	</div>
+	<div id="Content">
+		<div id="EventNowNext" class="bgMain">
+
+		    <div id="ServiceInfo">
+				<div id="currentServiceName">no Servicename selected</div>
+				<div id="currentServiceEPG">no ServiceEPG selected</div>
+			</div>
+		    
+		    <div id="vlcbuttons" class="divblock">
+
+		    </div>
+		</div>
+		<hr />
+		
+		<div id="vlcplayer" class="BodyContentChannellist"></div>
+		
+	</div>
+</div>
+<script type="text/javascript" >
+onStart();
+</script>
+	</body>
+</html>
