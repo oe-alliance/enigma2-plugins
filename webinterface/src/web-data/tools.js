@@ -18,6 +18,11 @@ var url_timerlist= "/web/timerlist";
 var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
 
+var bouqet_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
+var bouqet_radio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
+var bouqet_provider_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name';
+var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
+
 var windowStyle = "alphacube";
 var DBG = false;
 
@@ -510,23 +515,21 @@ function handleVolumeRequest(request){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 function initChannelList(){
 	//debug("init ChannelList");	
-	
-	var url = url_fetchchannels+encodeURIComponent('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet');
+	var url = url_fetchchannels+encodeURIComponent(bouqet_tv);
 	doRequest(url, incomingTVBouquetList);
 
-	var url = url_fetchchannels+encodeURIComponent('1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet');
+	var url = url_fetchchannels+encodeURIComponent(bouqet_radio);
 	doRequest(url, incomingRadioBouquetList);
 
-	var url = url_fetchchannels+encodeURIComponent('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name');
+	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_tv);
 	doRequest(url, incomingProviderTVBouquetList);
 
-	var url = url_fetchchannels+encodeURIComponent('1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name');
+	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_radio);
 	doRequest(url, incomingProviderRadioBouquetList);
 }
 var servicereftoloadepgnow="";
 function loadBouquet(servicereference){ 
 	debug("loading bouquet with "+servicereference);
-	//$('ServiceListBouqetReference').innerHTML =
 	servicereftoloadepgnow = servicereference;
 	doRequest(url_fetchchannels+servicereference, incomingChannellist);
 }
@@ -535,7 +538,7 @@ function incomingTVBouquetList(request){
 	if (request.readyState == 4) {
 		var list0 = new ServiceList(getXML(request)).getArray();
 		debug("have "+list0.length+" TV Bouquet ");	
-		$('accordionMenueBouquetContentTV').innerHTML = renderBouquetTable(list0,tplBouquetListItem);
+		$('accordionMenueBouquetContentTV').innerHTML = renderBouquetTable(list0,tplBouquetListHeader,tplBouquetListItem,tplBouquetListFooter);
 		//loading first entry of TV Favorites as default for ServiceList
 		loadBouquet(list0[0].getServiceReference());
 	}
@@ -544,37 +547,37 @@ function incomingRadioBouquetList(request){
 	if (request.readyState == 4) {
 		var list1 = new ServiceList(getXML(request)).getArray();
 		debug("have "+list1.length+" Radio Bouquet ");	
-		$('accordionMenueBouquetContentRadio').innerHTML = renderBouquetTable(list1,tplBouquetListItem);
+		$('accordionMenueBouquetContentRadio').innerHTML = renderBouquetTable(list1,tplBouquetListHeader,tplBouquetListItem,tplBouquetListFooter);
 	}	
 }
 function incomingProviderTVBouquetList(request){
 	if (request.readyState == 4) {
 		var list2 = new ServiceList(getXML(request)).getArray();
 		debug("have "+list2.length+" TV Provider Bouquet ");	
-		$('accordionMenueBouquetContentProviderTV').innerHTML = renderBouquetTable(list2,tplBouquetListItem);
+		$('accordionMenueBouquetContentProviderTV').innerHTML = renderBouquetTable(list2,tplBouquetListHeader,tplBouquetListItem,tplBouquetListFooter);
 	}	
 }
 function incomingProviderRadioBouquetList(request){
 	if (request.readyState == 4) {
 		var list2 = new ServiceList(getXML(request)).getArray();
 		debug("have "+list2.length+" Radio Provider Bouquet ");	
-		$('accordionMenueBouquetContentProviderRadio').innerHTML = renderBouquetTable(list2,tplBouquetListItem);
+		$('accordionMenueBouquetContentProviderRadio').innerHTML = renderBouquetTable(list2,tplBouquetListHeader,tplBouquetListItem,tplBouquetListFooter);
 	}	
 }
 
-function renderBouquetTable(bouquet,template){
+function renderBouquetTable(bouquet,templateHeader,templateItem,templateFooter){
 	debug("renderBouquetTable with "+bouquet.length+" Bouqet");	
-	var html = tplBouquetListHeader;
+	var html = templateHeader;
 	for (var i=0; i < bouquet.length; i++){
 		try{
 			var namespace = {
 				'servicereference': bouquet[i].getServiceReference(), 
 				'bouquetname': bouquet[i].getServiceName()
 				};
-			html += RND(template, namespace);
+			html += RND(templateItem, namespace);
 		} catch (blubb) {}
 	}
-	html += tplBouquetListFooter;
+	html += templateFooter;
 	return html;
 }	
 
@@ -593,7 +596,6 @@ function incomingChannellist(request){
 		listerHtml += tplServiceListFooter;
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
-		//loadServiceEPGNowNext($('ServiceListBouqetReference').innerHTML);
 		loadServiceEPGNowNext(servicereftoloadepgnow);
 	}
 }
