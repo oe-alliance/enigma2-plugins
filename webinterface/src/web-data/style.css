@@ -33,7 +33,7 @@ div.BodyContentChannellist {
 	border: 1px solid #000;
 	height: 450px;
 	overflow: auto;
-	margin: 0 9 0;
+	margin: 0px 9px 0px;
 /*	width: 780px; */
 }
 
@@ -146,7 +146,7 @@ normal stylesheet-stuff******************
 	width:920px;
 	height:700px; 
 	text-align: left;
-	margin: 2 2 2;
+	margin: 2px 2px 2px;
 	vertical-align: top;
 	cursor: default;
 }
@@ -359,7 +359,7 @@ a.sListSLink:hover{
 	border-left: 1px solid #CCC;
 	float:left;
 	width:75px;
-	text-align: center;
+	text-align: right;
 }
 
 .sListEPGTime{

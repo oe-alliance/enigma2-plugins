@@ -24,7 +24,8 @@ var bouqet_provider_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (ty
 var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
 
 var windowStyle = "alphacube";
-var DBG = false;
+var DBG = true;
+
 
 /**
 *
@@ -139,6 +140,12 @@ function UpdateStreamReaderLatestResponse() {
 						
 			eval(anUpdate);
 			UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
+		}
+		if(UpdateStreamReaderNextReadPos > 65000){
+			debug(new Date().toLocaleString()+": Resetting StreamReader NOW!");
+			UpdateStreamReaderRequest.abort();
+			UpdateStreamReaderStart();
+			messageXMLEndIndex = -1;
 		}
 	} while (messageXMLEndIndex != -1);
 }
@@ -376,7 +383,7 @@ EPGList.prototype = {
 					'description': item.getDescription(), 
 					'endtime': item.getTimeEndString(), 
 					'extdescription': item.getDescriptionExtended()
-				};
+				}; Math.cei
 				//Fill template with data and add id to our result
 				html += RND(tplEPGListItem, namespace);
 			} catch (blubb) {
