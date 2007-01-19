@@ -1,17 +1,9 @@
-/*
-.rtop, .rbottom{display:block}
-.rtop *, .rbottom *{display: block; height: 1px; overflow: hidden}
-.r1{margin: 0 5px}
-.r2{margin: 0 3px}
-.r3{margin: 0 2px}
-.r4{margin: 0 1px; height: 2px}
-*/
 body { 	
 	text-align:left;
 	vertical-align: top;
 	margin:0px; 
 	font-family:Arial,sans-serif;
-	font-size: 14px;
+	font-size: 12px;
 	background-color:#EEEEEE;
 	color:#444444;
 	cursor: default;
@@ -45,6 +37,9 @@ div.BodyContentChannellist {
 /*	width: 780px; */
 }
 
+.BodyContentChannellist{
+	font-size: 12px;
+}
 
 /* Reset overflow value to hidden for all non-IE browsers. */
 html>body div.BodyContentChannellist {
@@ -329,10 +324,12 @@ normal stylesheet-stuff******************
 	width: 100%;
 }
 .sListHeader{
+	font-size: 14px;
 	float:left;
 	width:50%;
 }
 .sListSearch{
+	font-size: 14px;
 	float:left;
 	width:50%;
 	text-align: right;
@@ -341,6 +338,8 @@ form.sListSearch{
 	text-align: right;
 }
 .sListSName{
+	font-size: 14px;
+	font-weight: bold;
 	float:left;
 	width:661px;
 }
@@ -370,12 +369,12 @@ a.sListSLink:hover{
 }
 .sListEPGTitle{
 	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
 	float: left;
 	width:600px; 
 	text-align: left;
 }
 .sListEPGDuration{
-	border-left: 1px solid #CCC;
 	float:left;
 	width:75px;
 	text-align: right;

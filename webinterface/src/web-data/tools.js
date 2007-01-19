@@ -102,10 +102,14 @@ UpdateStreamReaderRequest = null;
 function UpdateStreamReaderStart(){
 	var ua = navigator.userAgent;
 	if(navigator.userAgent.indexOf("MSIE") >=0) {
-		debug("UpdateStreamReader IE Fix *IE sucks*");
-		$('UpdateStreamReaderIEFixPanel').innerHTML = '<iframe id="UpdateStreamReaderIEFixIFrame" src="'+url_updates+'" height="0" width="0" scrolling="none" frameborder="0">no iframe support!</iframe>';
+		debug("UpdateStreamReader IE Fix");
+
+		var namespace = { 	
+					'url_updates': url_updates
+		};
+		$('UpdateStreamReaderIEFixPanel').innerHTML = RND(tplUpdateStreamReaderIE, namespace);
+		
 	}else {
-		debug("UpdateStreamReader Start");
 		UpdateStreamReaderNextReadPos = 0;
 		allMessages = "";
 		UpdateStreamReaderRequest =new XMLHttpRequest();
@@ -125,13 +129,15 @@ function UpdateStreamReaderLatestResponse() {
       if (messageXMLEndIndex!=-1) {
         var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
         var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
+//		anUpdate = Utf8.decode(anUpdate);
 		anUpdate = anUpdate.replace(/<div id="scriptzone"\/>/,'');
 		anUpdate = anUpdate.replace(/<script>parent./, '');
         anUpdate = anUpdate.replace(/<\/script>\n/, '');
-		anUpdate = Utf8.decode(anUpdate);
+		
         eval(anUpdate);
         UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
-      }
+      } else {
+	}
     } while (messageXMLEndIndex != -1);
 }
 
@@ -295,11 +301,9 @@ function doRequest(url, readyFunction){
 
 function getXML(request){
 	if (document.implementation && document.implementation.createDocument){
-		debug("using responseXML");
 		var xmlDoc = request.responseXML
 	}
 	else if (window.ActiveXObject){
-		debug("Creating XML for IE");
 		var xmlInsert = document.createElement('xml');
 
 		xmlInsert.setAttribute('innerHTML',request.responseText);
@@ -315,7 +319,6 @@ function getXML(request){
 
 function zap(servicereference){
 	var url = "/web/zap?ZapTo=" + servicereference;
-	debug("requesting "+url);
 	new Ajax.Request( url,
 		{
 			method: 'get' 				

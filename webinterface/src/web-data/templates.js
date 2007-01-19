@@ -1,5 +1,5 @@
 // EPG Templates
-
+var tplUpdateStreamReaderIE = '<iframe id="UpdateStreamReaderIEFixIFrame" src="%(url_updates)" height="0" width="0" scrolling="none" frameborder="0">no iframe support!</iframe>';
 var tplEPGListHeader = '<table width="100%" border="0" cellspacing="1" cellpadding="0">';
 
 var tplEPGListItem  = '<tr style="background-color: #DDDDDD;">';
