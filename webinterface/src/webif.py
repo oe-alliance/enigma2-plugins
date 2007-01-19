@@ -189,7 +189,7 @@ class JavascriptUpdate(Converter):
 	def getHTML(self, id):
 		# 3c5x9, added parent. , this is because the ie loads this in a iframe. an the set is in index.html.xml
 		#		 all other will replace this in JS
-		return '<script>parent.set("' + id + '", "' + filter_javascript_escape(self.source.text.decode("utf-8")) + '");</script>\n'
+		return '<script>parent.set("' + id + '", "' + filter_javascript_escape(self.source.text) + '");</script>\n'
 	
 # the performant 'listfiller'-engine (plfe)
 class ListFiller(Converter):

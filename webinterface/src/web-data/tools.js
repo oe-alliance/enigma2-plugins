@@ -35,63 +35,63 @@ var DBG = false;
 
 var Utf8 = {
 
-    // public method for url encoding
-    encode : function (string) {
-        string = string.replace(/\r\n/g,"\n");
-        var utftext = "";
+	// public method for url encoding
+	encode : function (string) {
+	string = string.replace(/\r\n/g,"\n");
+	var utftext = "";
 
-        for (var n = 0; n < string.length; n++) {
+	for (var n = 0; n < string.length; n++) {
 
-            var c = string.charCodeAt(n);
+	var c = string.charCodeAt(n);
 
-            if (c < 128) {
-                utftext += String.fromCharCode(c);
-            }
-            else if((c > 127) && (c < 2048)) {
-                utftext += String.fromCharCode((c >> 6) | 192);
-                utftext += String.fromCharCode((c & 63) | 128);
-            }
-            else {
-                utftext += String.fromCharCode((c >> 12) | 224);
-                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-                utftext += String.fromCharCode((c & 63) | 128);
-            }
+	if (c < 128) {
+		utftext += String.fromCharCode(c);
+	}
+	else if((c > 127) && (c < 2048)) {
+		utftext += String.fromCharCode((c >> 6) | 192);
+		utftext += String.fromCharCode((c & 63) | 128);
+	}
+	else {
+		utftext += String.fromCharCode((c >> 12) | 224);
+		utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+		utftext += String.fromCharCode((c & 63) | 128);
+	}
 
-        }
+	}
+	
+	return utftext;
+	},
 
-        return utftext;
-    },
+	// public method for url decoding
+	decode : function (utftext) {
+		var string = "";
+		var i = 0;
+		var c = c1 = c2 = 0;
 
-    // public method for url decoding
-    decode : function (utftext) {
-        var string = "";
-        var i = 0;
-        var c = c1 = c2 = 0;
+		while ( i < utftext.length ) {
 
-        while ( i < utftext.length ) {
+			c = utftext.charCodeAt(i);
 
-            c = utftext.charCodeAt(i);
+			if (c < 128) {
+				string += String.fromCharCode(c);
+				i++;
+			}
+			else if((c > 191) && (c < 224)) {
+				c2 = utftext.charCodeAt(i+1);
+				string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+				i += 2;
+			}
+			else {
+				c2 = utftext.charCodeAt(i+1);
+				c3 = utftext.charCodeAt(i+2);
+				string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+				i += 3;
+			}
 
-            if (c < 128) {
-                string += String.fromCharCode(c);
-                i++;
-            }
-            else if((c > 191) && (c < 224)) {
-                c2 = utftext.charCodeAt(i+1);
-                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-                i += 2;
-            }
-            else {
-                c2 = utftext.charCodeAt(i+1);
-                c3 = utftext.charCodeAt(i+2);
-                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-                i += 3;
-            }
-
-        }
-
-        return string;
-    }
+		}
+		
+		return string;
+	}
 
 }
 
@@ -123,22 +123,24 @@ function UpdateStreamReaderStart(){
   
 function UpdateStreamReaderLatestResponse() {
 	var allMessages = UpdateStreamReaderRequest.responseText;
-    do {
-      var unprocessed = allMessages.substring(UpdateStreamReaderNextReadPos);
-      var messageXMLEndIndex = unprocessed.indexOf("\n");
-      if (messageXMLEndIndex!=-1) {
-        var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
-        var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
-//		anUpdate = Utf8.decode(anUpdate);
-		anUpdate = anUpdate.replace(/<div id="scriptzone"\/>/,'');
-		anUpdate = anUpdate.replace(/<script>parent./, '');
-        anUpdate = anUpdate.replace(/<\/script>\n/, '');
+	do {
+		var unprocessed = allMessages.substring(UpdateStreamReaderNextReadPos);
+		var messageXMLEndIndex = unprocessed.indexOf("\n");
 		
-        eval(anUpdate);
-        UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
-      } else {
-	}
-    } while (messageXMLEndIndex != -1);
+		if (messageXMLEndIndex!=-1) {
+			var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
+			var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
+
+			anUpdate = anUpdate.replace(/<div id="scriptzone"\/>/,'');
+			anUpdate = anUpdate.replace(/<script>parent./, '');
+			anUpdate = anUpdate.replace(/<\/script>\n/, '');
+			
+			anUpdate = Utf8.decode(anUpdate);
+						
+			eval(anUpdate);
+			UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
+		}
+	} while (messageXMLEndIndex != -1);
 }
 
 function UpdateStreamReaderOnLoad(){
@@ -188,55 +190,54 @@ function messageBox(t, m){
 }
 
 function getHTTPObject( ){
-    var xmlHttp = false;
-            
-    // try to create a new instance of the xmlhttprequest object        
-    try{
-        // Internet Explorer
-        if( window.ActiveXObject ){
-            for( var i = 5; i; i-- ){
-                try{
-                    // loading of a newer version of msxml dll (msxml3 - msxml5) failed
-                    // use fallback solution
-                    // old style msxml version independent, deprecated
-                    if( i == 2 ){
-                        xmlHttp = new ActiveXObject( "Microsoft.XMLHTTP" );    
-                    }
-                    // try to use the latest msxml dll
-                    else{
-                        
-                        xmlHttp = new ActiveXObject( "Msxml2.XMLHTTP." + i + ".0" );
-                    }
-                    break;
-                }
-                catch( excNotLoadable ){                        
-                    xmlHttp = false;
-                }
-            }
-        }
-        // Mozilla, Opera und Safari
-        else if( window.XMLHttpRequest ){
-            xmlHttp = new XMLHttpRequest();
-        }
-    }
-    // loading of xmlhttp object failed
-    catch( excNotLoadable ){
-        xmlHttp = false;
-    }
-    return xmlHttp ;
+	var xmlHttp = false;
+
+	// try to create a new instance of the xmlhttprequest object
+	try{
+		// Internet Explorer
+		if( window.ActiveXObject ){
+			for( var i = 5; i; i-- ){
+				try{
+					// loading of a newer version of msxml dll (msxml3 - msxml5) failed
+					// use fallback solution
+					// old style msxml version independent, deprecated
+					if( i == 2 ){
+						xmlHttp = new ActiveXObject( "Microsoft.XMLHTTP" );
+					}
+					// try to use the latest msxml dll
+					else{
+						xmlHttp = new ActiveXObject( "Msxml2.XMLHTTP." + i + ".0" );
+					}
+					break;
+				}
+				catch( excNotLoadable ){
+				    xmlHttp = false;
+				}
+			}
+		}
+		// Mozilla, Opera und Safari
+		else if( window.XMLHttpRequest ){
+			xmlHttp = new XMLHttpRequest();
+		}
+	}
+	// loading of xmlhttp object failed
+	catch( excNotLoadable ){
+		xmlHttp = false;
+	}
+	return xmlHttp ;
 }
 
 //RND Template Function
 function RND(tmpl, ns) {
 	var fn = function(w, g) {
-	  g = g.split("|");
-	  var cnt = ns[g[0]];
+		g = g.split("|");
+		var cnt = ns[g[0]];
 
-	  //Support for filter functions
-	  for(var i=1; i < g.length; i++) {
-		cnt = eval(g[i])(cnt);
-	  }
-	  return cnt || w;
+		//Support for filter functions
+		for(var i=1; i < g.length; i++) {
+			cnt = eval(g[i])(cnt);
+		}
+		return cnt || w;
 	};
 	return tmpl.replace(/%\(([A-Za-z0-9_|.]*)\)/g, fn);
 }
@@ -363,18 +364,19 @@ EPGList.prototype = {
 			try{
 				var item = epglist[i];				
 				//Create JSON Object for Template
-				var namespace = { 	'date': item.getTimeDay(), 
-									'eventid': item.getEventId(), 
-									'servicereference': item.getServiceReference(), 
-									'servicename': item.getServiceName(), 
-									'title': item.getTitle(),
-									'titleESC': escape(item.getTitle()),
-									'starttime': item.getTimeStartString(), 
-									'duration': (item.getDuration()/60000), 
-									'description': item.getDescription(), 
-									'endtime': item.getTimeEndString(), 
-									'extdescription': item.getDescriptionExtended()
-								};
+				var namespace = { 	
+					'date': item.getTimeDay(), 
+					'eventid': item.getEventId(), 
+					'servicereference': item.getServiceReference(), 
+					'servicename': item.getServiceName(), 
+					'title': item.getTitle(),
+					'titleESC': escape(item.getTitle()),
+					'starttime': item.getTimeStartString(), 
+					'duration': (item.getDuration()/60000), 
+					'description': item.getDescription(), 
+					'endtime': item.getTimeEndString(), 
+					'extdescription': item.getDescriptionExtended()
+				};
 				//Fill template with data and add id to our result
 				html += RND(tplEPGListItem, namespace);
 			} catch (blubb) {
@@ -429,10 +431,11 @@ function incomingServiceEPGNowNext(request){
 function buildServiceListEPGItem(epgevent,nownext){
 	var e = $(epgevent.getServiceReference()+'EPG'+nownext);
 		try{
-			var namespace = { 	'starttime': epgevent.getTimeStartString(), 
-								'title': epgevent.getTitle(), 
-								'length': (epgevent.duration/60) 
-							};
+			var namespace = { 	
+				'starttime': epgevent.getTimeStartString(), 
+				'title': epgevent.getTitle(), 
+				'length': (epgevent.duration/60) 
+			};
 			e.innerHTML = RND(tplServiceListEPGItem, namespace);
 		} catch (blubb) {
 			debug("Error rendering: "+blubb);
@@ -576,7 +579,7 @@ function renderBouquetTable(bouquet,templateHeader,templateItem,templateFooter){
 			var namespace = {
 				'servicereference': bouquet[i].getServiceReference(), 
 				'bouquetname': bouquet[i].getServiceName()
-				};
+			};
 			html += RND(templateItem, namespace);
 		} catch (blubb) {}
 	}
@@ -591,9 +594,10 @@ function incomingChannellist(request){
 		debug("got "+services.length+" Services");
 		for ( var i = 0; i < services.length ; i++){
 			var reference = services[i];
-			var namespace = { 	'servicereference': reference.getServiceReference(),
-								'servicename': reference.getServiceName() 
-							};
+			var namespace = { 	
+				'servicereference': reference.getServiceReference(),
+				'servicename': reference.getServiceName() 
+			};
 			listerHtml += RND(tplServiceListItem, namespace);
 		}		
 		listerHtml += tplServiceListFooter;
@@ -615,12 +619,13 @@ function incomingMovieList(request){
 		listerHtml 	= tplMovieListHeader;		
 		for ( var i = 0; i <movies.length; i++){
 			var movie = movies[i];
-			var namespace = { 	'servicereference': movie.getServiceReference(),
-								'servicename': movie.getServiceName() ,
-								'title': movie.getTitle(), 
-								'description': movie.getDescription(), 
-								'tags': movie.getTags().join(', ') 
-							};
+			var namespace = { 	
+				'servicereference': movie.getServiceReference(),
+				'servicename': movie.getServiceName() ,
+				'title': movie.getTitle(), 
+				'description': movie.getDescription(), 
+				'tags': movie.getTags().join(', ') 
+			};
 			listerHtml += RND(tplMovieListItem, namespace);
 		}
 		listerHtml += tplMovieListFooter;
@@ -659,17 +664,18 @@ function incomingTimerList(request){
 		listerHtml 	= tplTimerListHeader;		
 		for ( var i = 0; i <timers.length; i++){
 			var timer = timers[i];
-			var namespace = { 	'servicereference': timer.getServiceReference(),
-								'servicename': timer.getServiceName() ,
-								'title': timer.getName(), 
-								'description': timer.getDescription(), 
-								'duration': (timer.getDuration()/60) 
-							};
+			var namespace = { 	
+				'servicereference': timer.getServiceReference(),
+				'servicename': timer.getServiceName() ,
+				'title': timer.getName(), 
+				'description': timer.getDescription(), 
+				'duration': (timer.getDuration()/60) 
+			};
 			listerHtml += RND(tplTimerListItem, namespace);
 		}
 		listerHtml += tplTimerListFooter;
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
 		
-	}		
+	}
 }
