@@ -372,7 +372,7 @@ EPGList.prototype = {
 					'title': item.getTitle(),
 					'titleESC': escape(item.getTitle()),
 					'starttime': item.getTimeStartString(), 
-					'duration': (item.getDuration()/60000), 
+					'duration': Math.ceil(item.getDuration()/60000), 
 					'description': item.getDescription(), 
 					'endtime': item.getTimeEndString(), 
 					'extdescription': item.getDescriptionExtended()
@@ -434,7 +434,7 @@ function buildServiceListEPGItem(epgevent,nownext){
 			var namespace = { 	
 				'starttime': epgevent.getTimeStartString(), 
 				'title': epgevent.getTitle(), 
-				'length': (epgevent.duration/60) 
+				'length': Math.ceil(epgevent.duration/60) 
 			};
 			e.innerHTML = RND(tplServiceListEPGItem, namespace);
 		} catch (blubb) {
