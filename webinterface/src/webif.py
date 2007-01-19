@@ -145,27 +145,11 @@ class StreamingElement(OneTimeElement):
 	def setStream(self, stream):
 		self.stream = stream
 
-def filter_none(string):
-	return string
-
-def filter_xml(s):
-	try:
-		return s.replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;")
-	except AttributeError:
-		# if s is None
-		return s
-
-def filter_javascript_escape(s):
-	return s.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"')
-
-def filter_uri(s):
-	return s.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+')
-
 # a to-be-filled list item
 class ListItem:
-	def __init__(self, name, filterfnc):
+	def __init__(self, name, filternum):
 		self.name = name
-		self.filterfnc = filterfnc
+		self.filternum = filternum
 
 class TextToHTML(Converter):
 	def __init__(self, arg):
@@ -189,8 +173,8 @@ class JavascriptUpdate(Converter):
 	def getHTML(self, id):
 		# 3c5x9, added parent. , this is because the ie loads this in a iframe. an the set is in index.html.xml
 		#		 all other will replace this in JS
-		return '<script>parent.set("' + id + '", "' + filter_javascript_escape(self.source.text) + '");</script>\n'
-	
+		return '<script>parent.set("%s", "%s");</script>\n'%(id, self.source.text.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
+
 # the performant 'listfiller'-engine (plfe)
 class ListFiller(Converter):
 	def __init__(self, arg):
@@ -199,24 +183,34 @@ class ListFiller(Converter):
 	def getText(self):
 		l = self.source.list
 		lut = self.source.lut
-		
-		# now build a ["string", 1, "string", 2]-styled list, with indices into the 
+		conv_args = self.converter_arguments
+
+		# now build a ["string", 1, "string", 2]-styled list, with indices into the
 		# list to avoid lookup of item name for each entry
-		lutlist = []
-		for element in self.converter_arguments:
+		lutlist = [ ]
+		append = lutlist.append
+		for element in conv_args:
 			if isinstance(element, str):
-				lutlist.append(element)
-			elif isinstance(element, ListItem):
-				lutlist.append((lut[element.name], element.filterfnc))
-		
+				append((element, None))
+			else:
+				append((lut[element.name], element.filternum))
+
 		# now, for the huge list, do:
-		res = ""
+		strlist = [ ]
+		append = strlist.append
 		for item in l:
-			for element in lutlist:
-				if isinstance(element, str):
-					res += element
+			for (element, filternum) in lutlist:
+				if not filternum:
+					append(element)
+				elif filternum == 2:
+					append(str(item[element]).replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
+				elif filternum == 3:
+					append(str(item[element]).replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;"))
+				elif filternum == 4:
+					append(str(item[element]).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				else:
-					res += str(element[1](item[element[0]]))
+					append(str(item[element]))
+		res = "".join(strlist)
 		# (this will be done in c++ later!)
 		return res
 
@@ -238,10 +232,13 @@ class webifHandler(ContentHandler):
 	
 		if name[:3] == "e2:":
 			self.mode += 1
-		
-		tag = "<" + name + ''.join([' ' + key + '="' + val + '"' for (key, val) in attrs.items()]) + ">"
-		tag = tag.encode("UTF-8")
-		
+
+		tag = [' %s="%s"' %(key,val) for (key, val) in attrs.items()]
+		tag.insert(0, name)
+		tag.insert(0, '<')
+		tag.append('>')
+		tag = ''.join(tag).encode("UTF-8")
+
 		if self.mode == 0:
 			self.res.append(tag)
 		elif self.mode == 1: # expect "<e2:element>"
@@ -270,9 +267,7 @@ class webifHandler(ContentHandler):
 		elif self.mode == 3:
 			assert name == "e2:item", "found %s instead of e2:item!" % name
 			assert "name" in attrs, "e2:item must have a name= attribute!"
-			
-			filter = {"": filter_none, "javascript_escape": filter_javascript_escape, "xml": filter_xml, "uri": filter_uri}[attrs.get("filter", "")]
-			
+			filter = {"": 1, "javascript_escape": 2, "xml": 3, "uri": 4}[attrs.get("filter", "")]
 			self.sub.append(ListItem(attrs["name"], filter))
 
 	def endElement(self, name):
