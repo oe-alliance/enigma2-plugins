@@ -17,6 +17,7 @@ var url_movielist= "/web/movielist";
 var url_timerlist= "/web/timerlist";
 var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
+var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
 
 var bouqet_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
 var bouqet_radio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
@@ -24,7 +25,7 @@ var bouqet_provider_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (ty
 var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
 
 var windowStyle = "alphacube";
-var DBG = false;
+var DBG = true;
 
 
 /**
@@ -676,6 +677,9 @@ function incomingTimerList(request){
 				'servicename': timer.getServiceName() ,
 				'title': timer.getName(), 
 				'description': timer.getDescription(), 
+				'begin': timer.getTimeBegin(), 
+				'end': timer.getTimeEnd(), 
+				'state': timer.getState(),
 				'duration': (timer.getDuration()/60) 
 			};
 			listerHtml += RND(tplTimerListItem, namespace);
@@ -685,4 +689,19 @@ function incomingTimerList(request){
 		setBodyMainContent('BodyContentChannellist');
 		
 	}
+}
+function delTimer(serviceRef,begin,end){
+	debug("deleting timer with serviceRef="+serviceRef+" and start="+begin+"end="+end );
+	debug(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end);
+	doRequest(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end, incomingTimerDelResult);	
+}
+
+function incomingTimerDelResult(request){
+	debug("onTimerDeleted");
+	debug(request.readyState);
+	if(request.readyState == 4){
+		var delresult = new TimerAddResult(getXML(request));
+		debug("Lade liste");
+		loadTimerList();
+	}		
 }

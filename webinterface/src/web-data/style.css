@@ -379,3 +379,18 @@ a.sListSLink:hover{
 	width:75px;
 	text-align: right;
 }
+#TimerColor0 {
+	color: #000000;
+}
+#TimerColor1 {
+	color: #00BCBC;
+	background-color: #DDDDDD;
+}
+#TimerColor2 {
+	color: #9F1919;
+	background-color: #DDDDDD;
+}
+#TimerColor3 {
+	color: #00BCBC;
+	background-color: #DDDDDD;
+}

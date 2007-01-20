@@ -11,6 +11,8 @@ class Timer( Source):
     LIST = 0
     ADDBYID = 1
     ADD = 2
+    DEL = 3
+    
     def __init__(self, session,func = LIST):
         self.func = func
         Source.__init__(self)        
@@ -22,8 +24,43 @@ class Timer( Source):
             self.result = self.addTimerByEventID(cmd)
         elif self.func is self.ADD:
             self.result = self.addTimer(cmd)
+        elif self.func is self.DEL:
+            self.result = self.delTimer(cmd)
         else:
             self.result = False,"unknown command"
+
+    def delTimer(self,param):
+        # is there an easier and better way? :\ 
+        print "delTimer",param
+        
+        if param['serviceref'] is None:
+            return False,"ServiceReference missing"
+        else: 
+            serviceref = ServiceReference(param['serviceref'])
+        
+        if param['begin'] is None:
+           return False,"begin missing"
+        else:
+            begin = float(param['begin'])
+        
+        if param['end'] is None:
+            return False,"end missing"
+        else:
+        	end = float(param['end'])
+             
+        toDelete = None
+        for x in self.session.nav.RecordTimer.timer_list+self.session.nav.RecordTimer.processed_timers:
+        	if str(x.service_ref) == str(serviceref) and float(x.begin) == begin and float(x.end) == end:
+	        	toDelete = x
+            
+        if toDelete is not None:
+        	self.session.nav.RecordTimer.removeEntry(toDelete)
+        	return True,"Timer removed"
+        else:
+        	return False,"Timer not found"
+        	print "Timer not found"
+        
+        #self.session.nav.RecordTimer.saveTimer()
     
     def addTimer(self,param):
         # is there an easier and better way? :\ 

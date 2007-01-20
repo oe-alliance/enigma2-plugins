@@ -50,6 +50,9 @@ function EPGEvent(xml){
 		
 		return wday+".&nbsp;"+day+"."+month+"."+year;
 	}
+	this.getTimeBegin = function(){
+		return this.timebegin;
+	}
 	this.getTimeEnd = function ()
 	{
 		var date = new Date((parseInt(this.startTime)+parseInt(this.duration))*1000);
@@ -257,6 +260,11 @@ function Timer(xml){
 		this.disabled = xml.getElementsByTagName('e2disabled').item(0).firstChild.data;
 	} catch (e) {
 		this.disabled = "N/A";
+	}
+	try{
+		this.timebegin = xml.getElementsByTagName('e2timebegin').item(0).firstChild.data;
+	} catch (e) {
+		this.timebegin = "N/A";
 	}
 	try{
 		this.timeend = xml.getElementsByTagName('e2timeend').item(0).firstChild.data;
