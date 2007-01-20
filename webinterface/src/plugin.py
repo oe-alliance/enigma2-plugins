@@ -4,6 +4,7 @@ from twisted.internet import reactor
 from twisted.web2 import server, channel, static, resource, stream, http_headers, responsecode, http
 from twisted.python import util
 import webif
+import os
 
 sessions = [ ]
 
@@ -37,7 +38,7 @@ def startWebserver():
 		def render(self, req):
 			global sessions
 			if sessions == [ ]:
-				return http.Response(200, stream="please wait until enigma has booted")
+				return http.Response(responsecode.OK, stream="please wait until enigma has booted")
 
 			class myProducerStream(stream.ProducerStream):
 				closed_callback = None
@@ -47,30 +48,32 @@ def startWebserver():
 						self.closed_callback()
 					stream.ProducerStream.close(self)
 
-			s = myProducerStream()
-			webif.renderPage(s, self.path, req, sessions[0])  # login?
-
-			return http.Response(stream=s)
-
+			if os.path.isfile(self.path):
+				s=myProducerStream()
+				webif.renderPage(s, self.path, req, sessions[0])  # login?
+				return http.Response(responsecode.OK,stream=s)
+			else:
+				return http.Response(responsecode.NOT_FOUND)
+			
 		def locateChild(self, request, segments):
-			path = '/'.join(["web"] + segments)
+			path = self.path+'/'+'/'.join(segments)
 			if path[-1:] == "/":
 				path += "index.html"
-
-			path += ".xml"
 			return ScreenPage(path), ()
-
+ 		
 	class Toplevel(resource.Resource):
 		addSlash = True
 
 		def render(self, req):
-			return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},
-				stream='Hello! You want go to <a href="/web/">OSD</a> instead.')
+			fp = open(util.sibpath(__file__, "web-data")+"/index.html")
+			s = fp.read()
+			fp.close()
+			return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
 
-		child_web = ScreenPage("/") # "/web"
-		child_hdd = static.File("/hdd")
+		child_web = ScreenPage(util.sibpath(__file__, "web")) # "/web/*"
 		child_webdata = static.File(util.sibpath(__file__, "web-data")) # FIXME: web-data appears as webdata
-
+		child_hdd = static.File("/hdd")
+		
 	if PASSWORDPROTECTION is False:
 		site = server.Site(Toplevel())
 	else:
