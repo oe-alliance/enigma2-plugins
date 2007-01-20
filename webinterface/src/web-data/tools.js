@@ -278,7 +278,7 @@ EPGList.prototype = {
 					'description': item.getDescription(), 
 					'endtime': item.getTimeEndString(), 
 					'extdescription': item.getDescriptionExtended()
-				}; Math.cei
+				};
 				//Fill template with data and add id to our result
 				html += RND(tplEPGListItem, namespace);
 			} catch (blubb) {
