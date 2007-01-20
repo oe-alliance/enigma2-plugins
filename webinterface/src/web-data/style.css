@@ -358,10 +358,9 @@ a.sListSLink:hover{
 .sListExt{
 	border-left: 1px solid #CCC;
 	float:left;
-	width:75px;
+	width:90px;
 	text-align: right;
 }
-
 .sListEPGTime{
 	float:left;
 	width:60px;
