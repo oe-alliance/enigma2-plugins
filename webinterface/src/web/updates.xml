@@ -1,5 +1,4 @@
 <e2:screen name="TestScreen">
-&lt;div id="scriptzone"/>
 <e2:element source="CurrentTime" streaming="yes">
 	<e2:convert type="ClockToText">WithSeconds</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />

@@ -27,75 +27,69 @@ var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER
 var windowStyle = "alphacube";
 var DBG = false;
 
-
-/**
-*
-*  UTF-8 data encode / decode
-*  http://www.webtoolkit.info/
-*
-**/
-
 var Utf8 = {
 
-	// public method for url encoding
-	encode : function (string) {
-	string = string.replace(/\r\n/g,"\n");
-	var utftext = "";
+    // public method for url encoding
+    encode : function (string) {
+        string = string.replace(/\r\n/g,"\n");
+        var utftext = "";
 
-	for (var n = 0; n < string.length; n++) {
+        for (var n = 0; n < string.length; n++) {
 
-	var c = string.charCodeAt(n);
+            var c = string.charCodeAt(n);
 
-	if (c < 128) {
-		utftext += String.fromCharCode(c);
-	}
-	else if((c > 127) && (c < 2048)) {
-		utftext += String.fromCharCode((c >> 6) | 192);
-		utftext += String.fromCharCode((c & 63) | 128);
-	}
-	else {
-		utftext += String.fromCharCode((c >> 12) | 224);
-		utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-		utftext += String.fromCharCode((c & 63) | 128);
-	}
+            if (c < 128) {
+                utftext += String.fromCharCode(c);
+            }
+            else if((c > 127) && (c < 2048)) {
+                utftext += String.fromCharCode((c >> 6) | 192);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+            else {
+                utftext += String.fromCharCode((c >> 12) | 224);
+                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
 
-	}
-	
-	return utftext;
-	},
+        }
 
-	// public method for url decoding
-	decode : function (utftext) {
-		var string = "";
-		var i = 0;
-		var c = c1 = c2 = 0;
+        return utftext;
+    },
 
-		while ( i < utftext.length ) {
+    // public method for url decoding
+    decode : function (utftext) {
+        var string = "";
+        var i = 0;
+        var c = c1 = c2 = 0;
 
-			c = utftext.charCodeAt(i);
+        while ( i < utftext.length ) {
 
-			if (c < 128) {
-				string += String.fromCharCode(c);
-				i++;
-			}
-			else if((c > 191) && (c < 224)) {
-				c2 = utftext.charCodeAt(i+1);
-				string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-				i += 2;
-			}
-			else {
-				c2 = utftext.charCodeAt(i+1);
-				c3 = utftext.charCodeAt(i+2);
-				string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-				i += 3;
-			}
+            c = utftext.charCodeAt(i);
 
-		}
-		
-		return string;
-	}
+            if (c < 128) {
+                string += String.fromCharCode(c);
+                i++;
+            }
+            else if((c > 191) && (c < 224)) {
+                c2 = utftext.charCodeAt(i+1);
+                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                i += 2;
+            }
+            else {
+                c2 = utftext.charCodeAt(i+1);
+                c3 = utftext.charCodeAt(i+2);
+                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                i += 3;
+            }
+
+        }
+
+        return string;
+    }
 
 }
+
+
 
 // UpdateStreamReader
 var UpdateStreamReaderNextReadPos = 0;
@@ -114,7 +108,7 @@ function UpdateStreamReaderStart(){
 	}else {
 		UpdateStreamReaderNextReadPos = 0;
 		allMessages = "";
-		UpdateStreamReaderRequest =new XMLHttpRequest();
+		UpdateStreamReaderRequest = new XMLHttpRequest();
 		UpdateStreamReaderRequest.onload = UpdateStreamReaderOnLoad;
 		UpdateStreamReaderRequest.onerror = UpdateStreamReaderOnError;
 		UpdateStreamReaderRequest.open("GET", url_updates, true);
@@ -132,18 +126,19 @@ function UpdateStreamReaderLatestResponse() {
 		if (messageXMLEndIndex!=-1) {
 			var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
 			var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
+	
+			var re = new RegExp("<script>parent\.(.*)</script>");
+			anUpdate = re.exec(anUpdate);
 
-			anUpdate = anUpdate.replace(/<div id="scriptzone"\/>/,'');
-			anUpdate = anUpdate.replace(/<script>parent./, '');
-			anUpdate = anUpdate.replace(/<\/script>\n/, '');
+			if(anUpdate != null){
+				if (anUpdate.length == 2){
+					eval(anUpdate[1]);
+				}
+			}
 			
-			anUpdate = Utf8.decode(anUpdate);
-						
-			eval(anUpdate);
 			UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
 		}
 		if(UpdateStreamReaderNextReadPos > 65000){
-			debug(new Date().toLocaleString()+": Resetting StreamReader NOW!");
 			UpdateStreamReaderRequest.abort();
 			UpdateStreamReaderStart();
 			messageXMLEndIndex = -1;
@@ -197,45 +192,8 @@ function messageBox(t, m){
 	Dialog.alert(m, {windowParameters: {title: t, className: windowStyle, width:200}, okLabel: "Close"});
 }
 
-function getHTTPObject( ){
-	var xmlHttp = false;
+//RND Template Function (http://www.amix.dk)
 
-	// try to create a new instance of the xmlhttprequest object
-	try{
-		// Internet Explorer
-		if( window.ActiveXObject ){
-			for( var i = 5; i; i-- ){
-				try{
-					// loading of a newer version of msxml dll (msxml3 - msxml5) failed
-					// use fallback solution
-					// old style msxml version independent, deprecated
-					if( i == 2 ){
-						xmlHttp = new ActiveXObject( "Microsoft.XMLHTTP" );
-					}
-					// try to use the latest msxml dll
-					else{
-						xmlHttp = new ActiveXObject( "Msxml2.XMLHTTP." + i + ".0" );
-					}
-					break;
-				}
-				catch( excNotLoadable ){
-				    xmlHttp = false;
-				}
-			}
-		}
-		// Mozilla, Opera und Safari
-		else if( window.XMLHttpRequest ){
-			xmlHttp = new XMLHttpRequest();
-		}
-	}
-	// loading of xmlhttp object failed
-	catch( excNotLoadable ){
-		xmlHttp = false;
-	}
-	return xmlHttp ;
-}
-
-//RND Template Function
 function RND(tmpl, ns) {
 	var fn = function(w, g) {
 		g = g.split("|");
