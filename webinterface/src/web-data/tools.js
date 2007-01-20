@@ -681,7 +681,7 @@ function incomingTimerList(request){
 				'begin': timer.getTimeBegin(), 
 				'end': timer.getTimeEnd(), 
 				'state': timer.getState(),
-				'duration': (timer.getDuration()/60) 
+				'duration': Math.ceil((timer.getDuration()/60))
 			};
 			listerHtml += RND(tplTimerListItem, namespace);
 		}
