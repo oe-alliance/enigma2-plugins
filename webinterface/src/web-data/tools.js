@@ -25,7 +25,7 @@ var bouqet_provider_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (ty
 var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
 
 var windowStyle = "alphacube";
-var DBG = true;
+var DBG = false;
 
 
 /**
@@ -634,6 +634,7 @@ function incomingMovieList(request){
 				'description': movie.getDescription(), 
 				'tags': movie.getTags().join(', ') 
 			};
+			debug(movie.getServiceReference());
 			listerHtml += RND(tplMovieListItem, namespace);
 		}
 		listerHtml += tplMovieListFooter;
@@ -704,4 +705,9 @@ function incomingTimerDelResult(request){
 		debug("Lade liste");
 		loadTimerList();
 	}		
+}
+function loadTimerForm() {
+	debug("timers form");
+	debug("there is still work to do here");
+//	doRequest(url_timerlist, incomingTimerList);	
 }
