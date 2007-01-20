@@ -354,6 +354,9 @@ function Timer(xml){
 	}	
 	this.getDisabled = function(){
 		return this.tdisabled;
+	}
+	this.getTimeBegin = function(){
+		return this.timebegin;
 	}	
 	this.getTimeEnd = function(){
 		return this.timeend;
