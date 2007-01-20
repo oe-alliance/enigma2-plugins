@@ -35,6 +35,7 @@ def startWebserver():
 		def __init__(self, path):
 			self.path = path
 			
+			
 		def render(self, req):
 			global sessions
 			if sessions == [ ]:
@@ -59,6 +60,7 @@ def startWebserver():
 			path = self.path+'/'+'/'.join(segments)
 			if path[-1:] == "/":
 				path += "index.html"
+			path +=".xml"
 			return ScreenPage(path), ()
  		
 	class Toplevel(resource.Resource):

@@ -1,23 +1,23 @@
-var url_getvolume = '/web/vol.xml?set=state'; 
-var url_setvolume = '/web/vol.xml?set=set'; // plus new value eq. set=set15
-var url_volumeup = '/web/vol.xml?set=up';
-var url_volumedown = '/web/vol.xml?set=down';
-var url_volumemute = '/web/vol.xml?set=mute';
+var url_getvolume = '/web/vol?set=state'; 
+var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
+var url_volumeup = '/web/vol?set=up';
+var url_volumedown = '/web/vol?set=down';
+var url_volumemute = '/web/vol?set=mute';
 
-var url_epgservice = "/web/epgservice.xml?ref="; // plus serviceRev
-var url_epgsearch = "/web/epgsearch.xml?search="; // plus serviceRev
-var url_epgnow = "/web/epgnow.xml?bref="; // plus bouqetRev
+var url_epgservice = "/web/epgservice?ref="; // plus serviceRev
+var url_epgsearch = "/web/epgsearch?search="; // plus serviceRev
+var url_epgnow = "/web/epgnow?bref="; // plus bouqetRev
 
-var url_fetchchannels = "/web/fetchchannels.xml?ServiceListBrowse="; // plus encoded serviceref
+var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded serviceref
 
-var url_updates= "/web/updates.xml";
+var url_updates= "/web/updates";
 
-var url_movielist= "/web/movielist.xml";
+var url_movielist= "/web/movielist";
 
-var url_timerlist= "/web/timerlist.xml";
-var url_timeradd= "/web/timeradd.xml"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
-var url_timeraddbyeventid= "/web/timeraddbyeventid.xml"; // plus serviceref,eventid
-var url_timerdelete= "/web/timerdelete.xml"; // plus serviceref,bedin,end
+var url_timerlist= "/web/timerlist";
+var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
+var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
+var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
 
 var bouqet_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
 var bouqet_radio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
