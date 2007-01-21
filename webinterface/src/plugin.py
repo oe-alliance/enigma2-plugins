@@ -4,7 +4,16 @@ from twisted.internet import reactor
 from twisted.web2 import server, channel, static, resource, stream, http_headers, responsecode, http
 from twisted.python import util
 import webif
+import WebIfConfig  
 import os
+
+
+from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo
+
+config.plugins.Webinterface = ConfigSubsection()
+config.plugins.Webinterface.enable = ConfigYesNo(default = False)
+config.plugins.Webinterface.port = ConfigInteger(80,limits = (1, 999))
+
 
 sessions = [ ]
 
@@ -104,7 +113,8 @@ def startWebserver():
                                         (basic.BasicCredentialFactory('DM7025'),digest.DigestCredentialFactory(PASSWORDPROTECTION_mode,'DM7025')),
                                         portal, (IHTTPUser,))
 		site = server.Site(root)
-	reactor.listenTCP(80, channel.HTTPFactory(site))
+	print "starting Webinterface on port",config.plugins.Webinterface.port.value
+	reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site))
 
 # start classes for PASSWORDPROTECTION
 # end  classes for PASSWORDPROTECTION
@@ -128,9 +138,16 @@ def autostart(reason, **kwargs):
 				print "start twisted logfile, writing to %s" % DEBUGFILE 
 				startLogging(open(DEBUGFILE,'w'))
 			
-			startWebserver()
+			if config.plugins.Webinterface.enable.value:
+				startWebserver()
+			else:
+				print "not starting Webinterface"
 		except ImportError:
 			print "twisted not available, not starting web services"
+			
+def openconfig(session, **kwargs):
+	session.open(WebIfConfig.WebIfConfigScreen)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)
+	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
+		    PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),where = [PluginDescriptor.WHERE_PLUGINMENU], fnc = openconfig)]
