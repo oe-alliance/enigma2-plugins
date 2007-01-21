@@ -115,8 +115,6 @@ class OneTimeElement(Element):
 		
 	def render(self, stream):
 		t = self.source.getHTML(self.source_id)
-		if isinstance(t, unicode):
-			t = t.encode("utf-8")
 		stream.write(t)
 
 	def execBegin(self):
@@ -238,7 +236,7 @@ class webifHandler(ContentHandler):
 		tag.insert(0, name)
 		tag.insert(0, '<')
 		tag.append('>')
-		tag = ''.join(tag).encode("UTF-8")
+		tag = ''.join(tag)
 
 		if self.mode == 0:
 			self.res.append(tag)
@@ -309,7 +307,7 @@ class webifHandler(ContentHandler):
 		self.res.append('<?' + target + ' ' + data + '>')
 	
 	def characters(self, ch):
-		ch = ch.encode("UTF-8")
+		ch = ch.encode('utf-8')
 		if self.mode == 0:
 			self.res.append(ch)
 		elif self.mode == 2:
@@ -334,9 +332,7 @@ def lreduce(list):
 	res = [ ]
 	string = None
 	for x in list:
-		if isinstance(x, str) or isinstance(x, unicode):
-			if isinstance(x, unicode):
-				x = x.encode("UTF-8")
+		if isinstance(x, str):
 			if string is None:
 				string = x
 			else:
