@@ -37,7 +37,7 @@ var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 	tplServiceListHeader += '<tr>\n';
 	tplServiceListHeader += '<th><div class="sListHeader" style="color: #FFFFFF;">ServiceList</div>\n';
 	tplServiceListHeader += '<div class="sListSearch">';
-	tplServiceListHeader += '<form onSubmit="new EPGList().getBySearchString(document.getElementById(\'searchText\').value); return false;">';
+	tplServiceListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplServiceListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
 	tplServiceListHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
 	tplServiceListHeader += '</form></div></th>';
@@ -47,7 +47,7 @@ var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 
 var tplServiceListItem  = '<tr>\n';
 	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><a id="%(servicereference)" onclick="zap(this.id)" class="sListSLink">%(servicename)</a></div>';
-	tplServiceListItem += '<div class="sListExt"><a onclick="new EPGList().getByServiceReference(this.id)" id="%(servicereference)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
+	tplServiceListItem += '<div class="sListExt"><a onclick="loadEPGByServiceReference(this.id)" id="%(servicereference)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
 	tplServiceListItem += '<a target="_blank" href="/web/stream.m3u?ref=%(servicereference)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
 	tplServiceListItem += '</tr>\n';
     tplServiceListItem += '<tr>\n';
@@ -67,7 +67,7 @@ var tplMovieListHeader  = '<table border="0" cellpadding="0" cellspacing="0" cla
 	tplMovieListHeader += '<tr>\n';
 	tplMovieListHeader += '<th><div class="sListHeader" style="color: #FFFFFF;">MovieList</div>\n';
 	tplMovieListHeader += '<div class="sListSearch">';
-	tplMovieListHeader += '<form onSubmit="new EPGList().getBySearchString(document.getElementById(\'searchText\').value); return false;">';
+	tplMovieListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplMovieListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
 	tplMovieListHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
 	tplMovieListHeader += '</form></div></th>';
@@ -90,7 +90,7 @@ var tplTimerListHeader  = '<table border="0" cellpadding="0" cellspacing="0" cla
 	tplTimerListHeader += '<tr>\n';
 	tplTimerListHeader += '<th><div class="sListHeader" style="color: #FFFFFF;">TimerList</div>\n';
 	tplTimerListHeader += '<div class="sListSearch">';
-	tplTimerListHeader += '<form onSubmit="new EPGList().getBySearchString(document.getElementById(\'searchText\').value); return false;">';
+	tplTimerListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplTimerListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
 	tplTimerListHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
 	tplTimerListHeader += '</form></div></th>';

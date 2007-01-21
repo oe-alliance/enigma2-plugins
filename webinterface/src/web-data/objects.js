@@ -1,5 +1,42 @@
 // store all objects here
 
+//START class EPGList
+function EPGList(xml){
+	// parsing values from xml-element
+	//debug('init EPGList'+xml);
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
+	} catch (e) { debug("EPGList parsing Error");}
+	
+	this.getArray = function(sortbytime){
+		debug("sort EPGList by time "+sortbytime);
+		if (sortbytime = true){
+			var sort1 = new Array();
+			for(var i=0;i<this.xmlitems.length;i++){
+				var xv = new EPGEvent(this.xmlitems.item(i));
+				sort1.push(new Array(xv.startTime,xv));
+			}
+			sort1.sort(this.sortFunction);
+			var sort2 = new Array();
+			for(var i=0;i<sort1.length;i++){
+				sort2.push(sort1[i][1]);
+			}
+			return sort2;
+		}else{
+			var listxy = new Array();
+			for (var i=0;i<this.xmlitems.length;i++){
+				var xv = new EPGEvent(this.xmlitems.item(i));
+				listxy.push(xv);			
+			}
+			return listxy;
+		}
+	}
+	this.sortFunction = function(a,b){
+	  return a[0] - b[0];
+	}
+}
+//END class EPGList
+
 //START class EPGEvent
 function EPGEvent(xml){	
 	// parsing values from xml-element

@@ -245,72 +245,49 @@ function openSignalDialog(){
 //++++ EPG functions                               ++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
-var EPGList = Class.create();
-EPGList.prototype = {
-	//contructor
-	initialize: function(){
-		debug("init class EPGList");
-	},
-	getBySearchString: function(string){
-		debug("requesting "+ url_epgsearch+string);
-		doRequest(url_epgsearch+string,this.incomingEPGrequest);
-		
-	},
-	getByServiceReference: function(servicereference){
-		doRequest(url_epgservice+servicereference,this.incomingEPGrequest);
-	},
-	renderTable: function(epglist){
-		debug("rendering Table with "+epglist.length+" events");
-		var html = tplEPGListHeader;
-		for (var i=0; i < epglist.length; i++){
-			try{
-				var item = epglist[i];				
-				//Create JSON Object for Template
-				var namespace = { 	
-					'date': item.getTimeDay(), 
-					'eventid': item.getEventId(), 
-					'servicereference': item.getServiceReference(), 
-					'servicename': item.getServiceName(), 
-					'title': item.getTitle(),
-					'titleESC': escape(item.getTitle()),
-					'starttime': item.getTimeStartString(), 
-					'duration': Math.ceil(item.getDuration()/60000), 
-					'description': item.getDescription(), 
-					'endtime': item.getTimeEndString(), 
-					'extdescription': item.getDescriptionExtended()
-				};
-				//Fill template with data and add id to our result
-				html += RND(tplEPGListItem, namespace);
-			} catch (blubb) {
-				//debug("Error rendering: "+blubb);
-			}
-		}		
-		html += tplEPGListFooter;
-		openWindow("Electronic Program Guide", html, 900, 500);
-		
-	},
-	incomingEPGrequest: function(request){
-		debug("incoming request" +request.readyState);		
-		if (request.readyState == 4)
-		{
-			var EPGItems = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");			
-			debug("have "+EPGItems.length+" e2events");
-			if(EPGItems.length > 0){			
-				epglist = new Array();
-				for(var i=0; i < EPGItems.length; i++){		
-					epglist.push(new EPGEvent(EPGItems.item(i)));
-				}
-				debug("Calling prototype.renderTable(epglist)");
-				EPGList.prototype.renderTable(epglist);
-				
-			} else {
-				messageBox('No Items found!', 'Sorry but i could not find any EPG Content containing your search value');
-			}
-			
+function loadEPGBySearchString(string){
+		doRequest(url_epgsearch+string,incomingEPGrequest);
+}
+function loadEPGByServiceReference(servicereference){
+		doRequest(url_epgservice+servicereference,incomingEPGrequest);
+}
+function incomingEPGrequest(request){
+	debug("incoming request" +request.readyState);		
+	if (request.readyState == 4){
+		var EPGItems = new EPGList(getXML(request)).getArray(true);
+		debug("have "+EPGItems.length+" e2events");
+		if(EPGItems.length > 0){			
+			var html = tplEPGListHeader;
+			for (var i=0; i < EPGItems.length; i++){
+				try{
+					var item = EPGItems[i];				
+					//Create JSON Object for Template
+					var namespace = { 	
+							'date': item.getTimeDay(), 
+							'eventid': item.getEventId(), 
+							'servicereference': item.getServiceReference(), 
+							'servicename': item.getServiceName(), 
+							'title': item.getTitle(),
+							'titleESC': escape(item.getTitle()),
+							'starttime': item.getTimeStartString(), 
+							'duration': Math.ceil(item.getDuration()/60000), 
+							'description': item.getDescription(), 
+							'endtime': item.getTimeEndString(), 
+							'extdescription': item.getDescriptionExtended()
+						};
+					//Fill template with data and add id to our result
+					html += RND(tplEPGListItem, namespace);
+				} catch (blubb) { debug("Error rendering: "+blubb);	}
+			}		
+			html += tplEPGListFooter;
+			openWindow("Electronic Program Guide", html, 900, 500);
+		} else {
+			messageBox('No Items found!', 'Sorry but i could not find any EPG Content containing your search value');
 		}
 	}
-	
 }
+	
+
 /////////////////////////
 
 function loadServiceEPGNowNext(servicereference){
