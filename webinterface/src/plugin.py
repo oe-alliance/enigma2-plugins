@@ -13,7 +13,7 @@ from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesN
 config.plugins.Webinterface = ConfigSubsection()
 config.plugins.Webinterface.enable = ConfigYesNo(default = False)
 config.plugins.Webinterface.port = ConfigInteger(80,limits = (1, 999))
-
+config.plugins.Webinterface.includehdd = ConfigYesNo(default = False)
 
 sessions = [ ]
 
@@ -83,10 +83,13 @@ def startWebserver():
 
 		child_web = ScreenPage(util.sibpath(__file__, "web")) # "/web/*"
 		child_webdata = static.File(util.sibpath(__file__, "web-data")) # FIXME: web-data appears as webdata
-		child_hdd = static.File("/hdd")
-		
+
+	toplevel = Toplevel()
+	if config.plugins.Webinterface.includehdd.value:
+		toplevel.putChild("hdd",static.File("/hdd"))
+	
 	if PASSWORDPROTECTION is False:
-		site = server.Site(Toplevel())
+		site = server.Site(toplevel)
 	else:
 		from twisted.cred.portal import Portal
 		from twisted.cred import checkers
@@ -109,15 +112,13 @@ def startWebserver():
 		portal = Portal(HTTPAuthRealm())
 		checker = checkers.InMemoryUsernamePasswordDatabaseDontUse(root=PASSWORDPROTECTION_pwd)
 		portal.registerChecker(checker)
-		root = wrapper.HTTPAuthResource(Toplevel(),
+		root = wrapper.HTTPAuthResource(toplevel,
                                         (basic.BasicCredentialFactory('DM7025'),digest.DigestCredentialFactory(PASSWORDPROTECTION_mode,'DM7025')),
                                         portal, (IHTTPUser,))
 		site = server.Site(root)
 	print "starting Webinterface on port",config.plugins.Webinterface.port.value
 	reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site))
 
-# start classes for PASSWORDPROTECTION
-# end  classes for PASSWORDPROTECTION
 
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
