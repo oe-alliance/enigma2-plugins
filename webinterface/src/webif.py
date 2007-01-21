@@ -186,13 +186,7 @@ class ListFiller(Converter):
 
 		# now build a ["string", 1, "string", 2]-styled list, with indices into the
 		# list to avoid lookup of item name for each entry
-		lutlist = [ ]
-		append = lutlist.append
-		for element in conv_args:
-			if isinstance(element, str):
-				append((element, None))
-			else:
-				append((lut[element.name], element.filternum))
+		lutlist = [ isinstance(element, basestring) and (element, None) or (lut[element.name], element.filternum) for element in conv_args ]
 
 		# now, for the huge list, do:
 		strlist = [ ]
@@ -209,9 +203,8 @@ class ListFiller(Converter):
 					append(str(item[element]).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				else:
 					append(str(item[element]))
-		res = "".join(strlist)
 		# (this will be done in c++ later!)
-		return res
+		return ''.join(strlist)
 
 	text = property(getText)
 
@@ -236,7 +229,7 @@ class webifHandler(ContentHandler):
 		tag.insert(0, name)
 		tag.insert(0, '<')
 		tag.append('>')
-		tag = ''.join(tag)
+		tag = ''.join(tag)#.encode('utf-8')
 
 		if self.mode == 0:
 			self.res.append(tag)
@@ -280,13 +273,11 @@ class webifHandler(ContentHandler):
 		elif self.mode == 2 and name[:3] != "e2:":
 			self.sub.append(tag)
 		elif self.mode == 2: # closed 'convert' -> sub
-			self.sub = lreduce(self.sub)
 			if len(self.sub) == 1:
 				self.sub = self.sub[0]
 			c = self.converter(self.sub)
 			c.connect(self.source)
 			self.source = c
-			
 			del self.sub
 		elif self.mode == 1: # closed 'element'
 			# instatiate either a StreamingElement or a OneTimeElement, depending on what's required.
@@ -327,26 +318,6 @@ class webifHandler(ContentHandler):
 			screen.doClose()
 		self.screens = [ ]
 
-def lreduce(list):
-	# ouch, can be made better
-	res = [ ]
-	string = None
-	for x in list:
-		if isinstance(x, str):
-			if string is None:
-				string = x
-			else:
-				string += x
-		else:
-			if string is not None:
-				res.append(string)
-				string = None
-			res.append(x)
-	if string is not None:
-		res.append(string)
-		string = None
-	return res
-
 def renderPage(stream, path, req, session):
 	
 	# read in the template, create required screens
@@ -371,7 +342,7 @@ def renderPage(stream, path, req, session):
 	# now, we have a list with static texts mixed
 	# with non-static Elements.
 	# flatten this list, write into the stream.
-	for x in lreduce(handler.res):
+	for x in handler.res:
 		if isinstance(x, Element):
 			if isinstance(x, StreamingElement):
 				finish = False
