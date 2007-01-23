@@ -20,6 +20,7 @@ from WebComponents.Sources.Volume import Volume
 from WebComponents.Sources.EPG import EPG
 from WebComponents.Sources.Timer import Timer
 from WebComponents.Sources.Movie import Movie
+from WebComponents.Sources.Message import Message
 from Components.Sources.FrontendStatus import FrontendStatus
 
 from Components.Converter.Converter import Converter
@@ -64,6 +65,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["TimerDel"] = Timer(session,func = Timer.DEL)
 		self["MovieList"] = Movie(session)
 		self["Volume"] = Volume(session)
+		self["Message"] = Message(session)
 
 	def browseTo(self, reftobrowse):
 		self["ServiceListBrowse"].root = reftobrowse

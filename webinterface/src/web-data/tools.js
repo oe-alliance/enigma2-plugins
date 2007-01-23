@@ -19,6 +19,8 @@ var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
 var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
 
+var url_message = "/web/message"; // plus text,type,timeout
+
 var bouqet_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
 var bouqet_radio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
 var bouqet_provider_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name';
@@ -580,4 +582,36 @@ function incomingTimerDelResult(request){
 function loadTimerForm() {
 	debug("timers form");
 	debug("there is still work to do here");
+}
+
+// send Messages
+function showMessageSendForm(){
+		document.getElementById('BodyContentChannellist').innerHTML = tplMessageSendForm;
+}
+function sendMessage(messagetext,messagetype,messagetimeout){
+	if(!messagetext){
+		messagetext = $('MessageSendFormText').value;
+	}	
+	if(!messagetimeout){
+		messagetimeout = $('MessageSendFormTimeout').value;
+	}	
+	if(!messagetype){
+		var index = $('MessageSendFormType').selectedIndex;
+		messagetype = $('MessageSendFormType').options[index].value;
+	}	
+	doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult);
+}
+function incomingMessageResult(request){
+	if(request.readyState == 4){
+		var b = getXML(request).getElementsByTagName("e2message");
+		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
+		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
+		if (result=="True"){
+			messageBox('message send','message send successfully! it appears on TV-Screen');
+		}else{
+			messageBox('message send failed',resulttext);
+		}
+	}		
+
+	
 }

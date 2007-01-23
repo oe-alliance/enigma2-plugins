@@ -141,3 +141,16 @@ var tplSignalPanel  = '<table width="100%" id="SignalPanelTable">';
 	
 var tplSignalPanelButton = '<img src="/webdata/gfx/signal.png" title="show SignalInfoPanel" onclick="openSignalDialog();" title="view Signal Info">';
 
+// Message send
+var tplMessageSendForm = ""
+	tplMessageSendForm += '<table id="MessageSendForm" width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';
+	tplMessageSendForm += '<tr><td>Text</td><td><input type="text" id="MessageSendFormText" value=""></td></tr>\n';
+	tplMessageSendForm += '<tr><td>Timeout</td><td><input type="text" id="MessageSendFormTimeout" value=""></td></tr>\n';
+	tplMessageSendForm += '<tr><td>Typ</td><td><select id="MessageSendFormType">';
+	tplMessageSendForm += '<option value="1">Info</option>';
+	tplMessageSendForm += '<option value="0">YesNo</option>';
+	tplMessageSendForm += '<option value="2">Warning</option>';
+	tplMessageSendForm += '<option value="3">Error</option>';
+	tplMessageSendForm += '</select></td></tr>\n';
+	tplMessageSendForm += '<tr><td colspan="2"><button onclick="sendMessage()">send Message</button></td></tr>\n';
+	tplMessageSendForm += "</table></form>\n";
