@@ -21,18 +21,21 @@ class Movie( Source):
             movie.append(serviceref.toString())
             movie.append(ServiceReference(serviceref).getServiceName())
             movie.append(info.getInfoString(serviceref, iServiceInformation.sDescription))
-            #movie.append("eventdaten")#info.getEvent(serviceref).getExtendedDescription())
             
             sourceERef =info.getInfoString(serviceref, iServiceInformation.sServiceref)
             sourceRef= ServiceReference(sourceERef)
-            #sourceInfo= sourceRef and sourceRef.info()
             
             movie.append(sourceRef.getServiceName())
-            #movie.append("")#sourceInfo.getInfo(sourceRef,iServiceInformation.sProvider))
-            
-            #movie.append("x")
-            #movie.append("y")
             movie.append(info.getInfoString(serviceref, iServiceInformation.sTags))
+            event = info.getEvent(serviceref)
+            if event is not None:
+                text = event.getEventName()
+                short = event.getShortDescription()
+                ext = event.getExtendedDescription()
+                print text,short,ext
+                movie.append(ext)
+            else:
+                movie.append("")
             list.append(movie)
         print "tags",self.movielist.tags
         return list
@@ -43,5 +46,6 @@ class Movie( Source):
            ,"Description": 2
            ,"ServiceName": 3
            ,"Tags": 4
+           ,"DescriptionExtended": 5
            }
 

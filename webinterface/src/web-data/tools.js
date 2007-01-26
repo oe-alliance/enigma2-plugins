@@ -505,6 +505,7 @@ function incomingMovieList(request){
 				'servicename': movie.getServiceName() ,
 				'title': movie.getTitle(), 
 				'description': movie.getDescription(), 
+				'descriptionextended': movie.getDescriptionExtended(), 
 				'tags': movie.getTags().join(', ') 
 			};
 			debug(movie.getServiceReference());

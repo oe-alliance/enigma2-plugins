@@ -216,6 +216,11 @@ function Movie(xml){
 		this.title = "N/A";
 	}
 	try{
+		this.descriptionextended = xml.getElementsByTagName('e2descriptionextended').item(0).firstChild.data;
+	} catch (e) {
+		this.descriptionextended = "N/A";
+	}
+	try{
 		this.description = xml.getElementsByTagName('e2description').item(0).firstChild.data;
 	} catch (e) {
 		this.description = "N/A";
@@ -236,6 +241,9 @@ function Movie(xml){
 	}	
 	this.getDescription = function(){
 		return this.description;
+	}	
+	this.getDescriptionExtended = function(){
+		return this.descriptionextended;
 	}	
 	this.getTags = function(){		
 		return this.tags.split(" ");

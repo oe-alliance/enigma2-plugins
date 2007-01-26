@@ -76,7 +76,7 @@ var tplMovieListHeader  = '<table border="0" cellpadding="0" cellspacing="0" cla
 	tplMovieListHeader += '<tbody class="scrollContent">\n';
 
 var tplMovieListItem  = '<tr>\n';
-	tplMovieListItem += '<td><div class="sListSName" title="%(description)">%(title) (%(servicename))</div>';
+	tplMovieListItem += '<td><div class="sListSName" title="%(description), %(descriptionextended)">%(title) (%(servicename))</div>';
 	tplMovieListItem += '<div class="sListExt">\n';
 	tplMovieListItem += '%(tags)\n';
 	tplMovieListItem += '</div>\n';
