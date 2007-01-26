@@ -3,10 +3,11 @@ from Plugins.Plugin import PluginDescriptor
 from twisted.internet import reactor
 from twisted.web2 import server, channel, static, resource, stream, http_headers, responsecode, http
 from twisted.python import util
+from twisted.python.log import startLogging,discardLogs
+
 import webif
 import WebIfConfig  
 import os
-
 
 from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo
 
@@ -17,8 +18,16 @@ config.plugins.Webinterface.includehdd = ConfigYesNo(default = False)
 
 sessions = [ ]
 
-# set DEBUG to True, if twisted should write logoutput to a file.
-DEBUG = False 
+ 
+"""
+ set DEBUG to True, if twisted should write logoutput to a file.
+ in normal console output, twisted will print only the first Traceback.
+ is this a bug in twisted or a conflict with enigma2?
+ with this option enabled, twisted will print all TB to the logfile
+ use tail -f <file> to view this log
+"""
+			
+DEBUG = False
 DEBUGFILE= "/tmp/twisted.log"
 
 # Passwordprotection Test
@@ -40,6 +49,15 @@ PASSWORDPROTECTION_mode = "sha";
 # md5 same as md5-sess 
 
 def startWebserver():
+	if config.plugins.Webinterface.enable.value is not True:
+		print "not starting Werbinterface"
+		return False
+	if DEBUG:
+		print "start twisted logfile, writing to %s" % DEBUGFILE 
+		import sys
+		startLogging(sys.stdout,0)
+		#startLogging(open(DEBUGFILE,'w'))
+
 	class ScreenPage(resource.Resource):
 		def __init__(self, path):
 			self.path = path
@@ -116,38 +134,31 @@ def startWebserver():
                                         (basic.BasicCredentialFactory('DM7025'),digest.DigestCredentialFactory(PASSWORDPROTECTION_mode,'DM7025')),
                                         portal, (IHTTPUser,))
 		site = server.Site(root)
-	print "starting Webinterface on port",config.plugins.Webinterface.port.value
+	print "[WebIf] starting Webinterface on port",config.plugins.Webinterface.port.value
 	reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site))
 
-
+	
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
 		global sessions
 		sessions.append(kwargs["session"])
 		return
-
 	if reason == 0:
 		try:
-			"""
-			 in normal console output, twisted will print only the first Traceback.
-			 is this a bug in twisted or a conflict with enigma2?
-			 with this option enabled, twisted will print all TB to the logfile
-			 use tail -f <file> to view this log
-			"""
-			if DEBUG:
-				from twisted.python.log import startLogging
-				print "start twisted logfile, writing to %s" % DEBUGFILE 
-				startLogging(open(DEBUGFILE,'w'))
-			
-			if config.plugins.Webinterface.enable.value:
-				startWebserver()
-			else:
-				print "not starting Webinterface"
+			startWebserver()
 		except ImportError:
-			print "twisted not available, not starting web services"
+			print "[WebIf] twisted not available, not starting web services"
 			
 def openconfig(session, **kwargs):
-	session.open(WebIfConfig.WebIfConfigScreen)
+	session.openWithCallback(configCB,WebIfConfig.WebIfConfigScreen)
+
+def configCB(result):
+	if result is True:
+		print "[WebIf] config changed"
+		# add some code here to restart twisted. ut you are warned, this ist not easy, i´ve tried it ;)
+	else:
+		print "[WebIf] config not changed"
+		
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
