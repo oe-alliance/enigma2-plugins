@@ -294,6 +294,11 @@ function Timer(xml){
 		this.description = "N/A";
 	}
 	try{
+		this.descriptionextended = xml.getElementsByTagName('e2descriptionextended').item(0).firstChild.data;
+	} catch (e) {
+		this.descriptionextended = "N/A";
+	}
+	try{
 		this.disabled = xml.getElementsByTagName('e2disabled').item(0).firstChild.data;
 	} catch (e) {
 		this.disabled = "N/A";
@@ -388,6 +393,9 @@ function Timer(xml){
 	}	
 	this.getDescription = function(){
 		return this.description;
+	}	
+	this.getDescriptionExtended = function(){
+		return this.descriptionextended;
 	}	
 	this.getDisabled = function(){
 		return this.tdisabled;

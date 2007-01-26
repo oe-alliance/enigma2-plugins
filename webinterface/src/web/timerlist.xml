@@ -6,6 +6,7 @@
 		&lt;e2eit><e2:item name="EIT" />&lt;/e2eit>
 		&lt;e2name><e2:item name="Name" filter="xml"/>&lt;/e2name>
 		&lt;e2description><e2:item name="Description" filter="xml"/>&lt;/e2description>
+		&lt;e2descriptionextended><e2:item name="DescriptionExtended" filter="xml"/>&lt;/e2descriptionextended>
 		&lt;e2disabled><e2:item name="Disabled" />&lt;/e2disabled>
 		&lt;e2timebegin><e2:item name="TimeBegin" />&lt;/e2timebegin>
 		&lt;e2timeend><e2:item name="TimeEnd" />&lt;/e2timeend>

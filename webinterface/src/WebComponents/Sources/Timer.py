@@ -1,5 +1,6 @@
 from enigma import *
 from enigma import eServiceReference 
+from enigma import eServiceCenter
 
 from Components.Sources.Source import Source
 from ServiceReference import ServiceReference
@@ -18,7 +19,8 @@ class Timer( Source):
         Source.__init__(self)        
         self.session = session
         self.recordtimer = session.nav.RecordTimer
-        
+        self.epgcache = eEPGCache.getInstance()
+
     def handleCommand(self,cmd):
         if self.func is self.ADDBYID:
             self.result = self.addTimerByEventID(cmd)
@@ -185,6 +187,13 @@ class Timer( Source):
             timer.append(item.repeated)
             timer.append(item.dontSave)
             timer.append(item.cancelled)
+            
+            event = self.epgcache.lookupEvent(['E',("%s"%item.service_ref,2,item.eit)])
+            if event[0][0] is not None:
+                timer.append(event[0][0])
+            else:
+                timer.append("N/A")
+                
             timerlist.append(timer) 
             
         return timerlist
@@ -211,5 +220,6 @@ class Timer( Source):
            ,"Repeated":18
            ,"dontSave":19
            ,"Cancled":20
+           ,"DescriptionExtended":21
            }
 

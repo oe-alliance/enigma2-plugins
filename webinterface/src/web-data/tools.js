@@ -551,6 +551,7 @@ function incomingTimerList(request){
 				'servicename': timer.getServiceName() ,
 				'title': timer.getName(), 
 				'description': timer.getDescription(), 
+				'descriptionextended': timer.getDescriptionExtended(), 
 				'begin': timer.getTimeBegin(), 
 				'end': timer.getTimeEnd(), 
 				'state': timer.getState(),

@@ -99,7 +99,7 @@ var tplTimerListHeader  = '<table border="0" cellpadding="0" cellspacing="0" cla
 	tplTimerListHeader += '<tbody class="scrollContent">\n';
 
 var tplTimerListItem  = '<tr>\n';
-	tplTimerListItem += '<td><div class="sListSName" id="TimerColor%(state)" title="%(description)">%(title) (%(servicename))</div>';
+	tplTimerListItem += '<td><div class="sListSName" id="TimerColor%(state)" title="%(description), %(descriptionextended)">%(title) (%(servicename))</div>';
 	tplTimerListItem += '<div class="sListExt" id="TimerColor%(state)">\n';
 	tplTimerListItem += '%(duration)&nbsp;Min\n';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" width="20" height="20" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\');"></a><br/>';
