@@ -8,8 +8,7 @@ from Components.ActionMap import ActionMap
 class WebIfConfigScreen(ConfigListScreen,Screen):
     skin = """
         <screen position="100,100" size="550,400" title="Webinterface Setup" >
-        <widget name="config" position="0,0" size="550,300" scrollbarMode="showOnDemand" />
-        <widget name="label" position="10,300" size="550,60" valign="center" halign="center" foregroundColor="white" font="Regular;18"/> 
+        <widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
         <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
         <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
         </screen>"""
@@ -21,7 +20,6 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
         self.list.append(getConfigListEntry(_("use Port"), config.plugins.Webinterface.port))
         self.list.append(getConfigListEntry(_("enable /hdd"), config.plugins.Webinterface.includehdd))
         ConfigListScreen.__init__(self, self.list)
-        self["label"] = Label(_("changes will only affect if you restart Enigma"))
         self["buttonred"] = Label(_("cancel"))
         self["buttongreen"] = Label(_("ok"))
         self["setupActions"] = ActionMap(["SetupActions"],

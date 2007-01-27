@@ -12,7 +12,7 @@ import os
 from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo
 
 config.plugins.Webinterface = ConfigSubsection()
-config.plugins.Webinterface.enable = ConfigYesNo(default = False)
+config.plugins.Webinterface.enable = ConfigYesNo(default = True)
 config.plugins.Webinterface.port = ConfigInteger(80,limits = (1, 999))
 config.plugins.Webinterface.includehdd = ConfigYesNo(default = False)
 
@@ -48,6 +48,13 @@ PASSWORDPROTECTION_mode = "sha";
 # md5-sess, firefox=not ok, opera=not ok,wget=ok, ie=not ok
 # md5 same as md5-sess 
 
+def stopWebserver():
+	reactor.disconnectAll()
+
+def restartWebserver():
+	stopWebserver()
+	startWebserver()
+
 def startWebserver():
 	if config.plugins.Webinterface.enable.value is not True:
 		print "not starting Werbinterface"
@@ -55,8 +62,7 @@ def startWebserver():
 	if DEBUG:
 		print "start twisted logfile, writing to %s" % DEBUGFILE 
 		import sys
-		startLogging(sys.stdout,0)
-		#startLogging(open(DEBUGFILE,'w'))
+		startLogging(open(DEBUGFILE,'w'))
 
 	class ScreenPage(resource.Resource):
 		def __init__(self, path):
@@ -89,7 +95,7 @@ def startWebserver():
 				path += "index.html"
 			path +=".xml"
 			return ScreenPage(path), ()
- 		
+ 			
 	class Toplevel(resource.Resource):
 		addSlash = True
 
@@ -146,8 +152,8 @@ def autostart(reason, **kwargs):
 	if reason == 0:
 		try:
 			startWebserver()
-		except ImportError:
-			print "[WebIf] twisted not available, not starting web services"
+		except ImportError,e:
+			print "[WebIf] twisted not available, not starting web services",e
 			
 def openconfig(session, **kwargs):
 	session.openWithCallback(configCB,WebIfConfig.WebIfConfigScreen)
@@ -155,7 +161,7 @@ def openconfig(session, **kwargs):
 def configCB(result):
 	if result is True:
 		print "[WebIf] config changed"
-		# add some code here to restart twisted. ut you are warned, this ist not easy, i´ve tried it ;)
+		restartWebserver()
 	else:
 		print "[WebIf] config not changed"
 		
