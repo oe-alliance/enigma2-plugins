@@ -85,6 +85,7 @@ def startWebserver():
 			if os.path.isfile(self.path):
 				s=myProducerStream()
 				webif.renderPage(s, self.path, req, sessions[0])  # login?
+				#return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'xhtml+xml')},stream=s)
 				return http.Response(responsecode.OK,stream=s)
 			else:
 				return http.Response(responsecode.NOT_FOUND)
