@@ -230,6 +230,11 @@ function Movie(xml){
 	} catch (e) {
 		this.tags = "no&nbsp;tags"; // no whitespaces... tags will be splittet later
 	}
+	try{
+		this.filename = xml.getElementsByTagName('e2filename').item(0).firstChild.data;
+	} catch (e) {
+		this.filename = "n/a";
+	}
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
 	}
@@ -247,6 +252,10 @@ function Movie(xml){
 	}	
 	this.getTags = function(){		
 		return this.tags.split(" ");
+	}	
+	this.getFilename = function(){		
+		return encodeURIComponent(this.filename);
+		
 	}	
 }	
 //END class Movie

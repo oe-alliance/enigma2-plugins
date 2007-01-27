@@ -32,10 +32,11 @@ class Movie( Source):
                 text = event.getEventName()
                 short = event.getShortDescription()
                 ext = event.getExtendedDescription()
-                print text,short,ext
                 movie.append(ext)
             else:
                 movie.append("")
+            filename = "/"+"/".join(serviceref.toString().split("/")[1:])
+            movie.append(filename)
             list.append(movie)
         print "tags",self.movielist.tags
         return list
@@ -47,5 +48,6 @@ class Movie( Source):
            ,"ServiceName": 3
            ,"Tags": 4
            ,"DescriptionExtended": 5
+           ,"Filename": 6
            }
 
