@@ -33,7 +33,7 @@ files_to_send_normal_http_headers = ['stream.m3u.xml',]
  use tail -f <file> to view this log
 """
 			
-DEBUG = False
+DEBUG = True
 DEBUGFILE= "/tmp/twisted.log"
 
 from twisted.cred.portal import Portal
@@ -108,16 +108,16 @@ def startWebserver():
 			fp.close()
 			return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
 
-
+	toplevel = Toplevel()
 	if config.plugins.Webinterface.includehdd.value:
 		toplevel.putChild("hdd",static.File("/hdd"))
 	
 	if config.plugins.Webinterface.useauth.value is False:
-		site = server.Site(Toplevel())
+		site = server.Site(toplevel)
 	else:
 		portal = Portal(HTTPAuthRealm())
 		portal.registerChecker(PasswordDatabase())
-		root = ModifiedHTTPAuthResource(Toplevel(),(basic.BasicCredentialFactory('DM7025'),),portal, (IHTTPUser,))
+		root = ModifiedHTTPAuthResource(toplevel,(basic.BasicCredentialFactory('DM7025'),),portal, (IHTTPUser,))
 		site = server.Site(root)
 	print "[WebIf] starting Webinterface on port",config.plugins.Webinterface.port.value
 	reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site))
