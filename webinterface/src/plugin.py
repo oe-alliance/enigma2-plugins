@@ -28,7 +28,7 @@ sessions = [ ]
  use tail -f <file> to view this log
 """
 			
-DEBUG = True
+DEBUG = False
 DEBUGFILE= "/tmp/twisted.log"
 
 from twisted.cred.portal import Portal
@@ -167,13 +167,10 @@ class PasswordDatabase:
             return failure.Failure(error.UnauthorizedLogin())
 
     def requestAvatarId(self, credentials):	
-    	try:
-    		if check_passwd(credentials.username,credentials.password,self.passwordfile) is True:
-    			return defer.maybeDeferred(credentials.checkPassword,credentials.password).addCallback(self._cbPasswordMatch, str(credentials.username))
-    		else:
-    			return defer.fail(error.UnauthorizedLogin())
-    	except Exception,e:
-    		print e
+    	if check_passwd(credentials.username,credentials.password,self.passwordfile) is True:
+    		return defer.maybeDeferred(credentials.checkPassword,credentials.password).addCallback(self._cbPasswordMatch, str(credentials.username))
+    	else:
+    		return defer.fail(error.UnauthorizedLogin())
 
 class IHTTPUser(Interface):
 	pass
