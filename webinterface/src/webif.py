@@ -21,6 +21,7 @@ from WebComponents.Sources.EPG import EPG
 from WebComponents.Sources.Timer import Timer
 from WebComponents.Sources.Movie import Movie
 from WebComponents.Sources.Message import Message
+from WebComponents.Sources.RequestData import RequestData
 from Components.Sources.FrontendStatus import FrontendStatus
 
 from Components.Converter.Converter import Converter
@@ -36,14 +37,14 @@ import time
 # prototype of the new web frontend template system.
 
 class WebScreen(Screen):
-	def __init__(self, session):
+	def __init__(self, session,request):
 		Screen.__init__(self, session)
 		self.stand_alone = True
-
+		self.request = request
 # a test screen
 class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
-	def __init__(self, session):
-		WebScreen.__init__(self, session)
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
 		InfoBarServiceName.__init__(self)
 		InfoBarEvent.__init__(self)
 		InfoBarTuner.__init__(self)
@@ -75,20 +76,19 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 
 # TODO: (really.) put screens into own files.
 class Streaming(WebScreen):
-	def __init__(self, session):
-		WebScreen.__init__(self, session)
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
 		from Components.Sources.StreamService import StreamService
 		self["StreamService"] = StreamService(self.session.nav)
 
 class StreamingM3U(WebScreen):
-	def __init__(self, session):
-		WebScreen.__init__(self, session)
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
 		from Components.Sources.StaticText import StaticText
 		from Components.Sources.Config import Config
 		from Components.config import config
-		
 		self["ref"] = StaticText()
-		self["localip"] = Config(config.network.ip)
+		self["localip"] = RequestData(request,what=RequestData.HOST)
 
 # implements the 'render'-call.
 # this will act as a downstream_element, like a renderer.
@@ -151,7 +151,7 @@ class ListItem:
 	def __init__(self, name, filternum):
 		self.name = name
 		self.filternum = filternum
-
+	
 class TextToHTML(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
@@ -211,16 +211,17 @@ class ListFiller(Converter):
 	text = property(getText)
 
 class webifHandler(ContentHandler):
-	def __init__(self, session):
+	def __init__(self, session,request):
 		self.res = [ ]
 		self.mode = 0
 		self.screen = None
 		self.session = session
 		self.screens = [ ]
+		self.request = request
 	
 	def startElement(self, name, attrs):
 		if name == "e2:screen":
-			self.screen = eval(attrs["name"])(self.session) # fixme
+			self.screen = eval(attrs["name"])(self.session,self.request) # fixme
 			self.screens.append(self.screen)
 			return
 	
@@ -325,7 +326,7 @@ def renderPage(stream, path, req, session):
 	# read in the template, create required screens
 	# we don't have persistense yet.
 	# if we had, this first part would only be done once.
-	handler = webifHandler(session)
+	handler = webifHandler(session,req)
 	parser = make_parser()
 	parser.setFeature(feature_namespaces, 0)
 	parser.setContentHandler(handler)
