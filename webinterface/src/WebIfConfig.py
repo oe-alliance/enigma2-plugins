@@ -17,6 +17,7 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
         Screen.__init__(self, session)
         self.list = []
         self.list.append(getConfigListEntry(_("start Webinterface"), config.plugins.Webinterface.enable))
+        self.list.append(getConfigListEntry(_("use Authorization"), config.plugins.Webinterface.useauth))
         self.list.append(getConfigListEntry(_("use Port"), config.plugins.Webinterface.port))
         self.list.append(getConfigListEntry(_("enable /hdd"), config.plugins.Webinterface.includehdd))
         ConfigListScreen.__init__(self, self.list)
