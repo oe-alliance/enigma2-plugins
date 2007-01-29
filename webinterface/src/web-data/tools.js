@@ -525,9 +525,9 @@ function incomingMovieList(request){
 }
 
 // Timer
-function addTimerByID(serviceRef,eventID){
-	debug("adding timer by eventid="+eventID+" for "+serviceRef);
-	doRequest(url_timeraddbyeventid+"?serviceref="+serviceRef+"&eventid="+eventID, incomingTimerAddResult);	
+function addTimerByID(serviceRef,eventID,justplay){
+	debug("adding timer by eventid="+eventID+" for "+serviceRef);justplay
+	doRequest(url_timeraddbyeventid+"?serviceref="+serviceRef+"&eventid="+eventID+"&justplay="+justplay, incomingTimerAddResult);	
 }
 function incomingTimerAddResult(request){
 	debug("onTimerAdded");

@@ -136,7 +136,11 @@ class Timer( Source):
         if event is None:
             return False,"Eventid not found"
         (begin, end, name, description, eit) =parseEvent(event)
-        newtimer = RecordTimerEntry(ServiceReference(param['serviceref']), begin, end, name, description, eit, False, False, AFTEREVENT.NONE)
+        justplay = False
+        if param['justplay'] is None and param['justplay'] == "True":
+            justplay = True
+        
+        newtimer = RecordTimerEntry(ServiceReference(param['serviceref']), begin, end, name, description, eit, False, justplay, AFTEREVENT.NONE)
         self.session.nav.RecordTimer.record(newtimer)
         return True,"Timer added"    
             

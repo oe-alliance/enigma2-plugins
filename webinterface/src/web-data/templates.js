@@ -20,7 +20,8 @@ var tplEPGListItem  = '<tr style="background-color: #DDDDDD;">';
 	tplEPGListItem += '</tr>';
 	
 	tplEPGListItem +='<tr style="background-color: #DDDDDD;"><td>';
-	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/timer.png" title="add to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\');"></a><br/>';
+	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/timer.png" title="add to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'False\');"></a>&nbsp;&nbsp;';
+	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/zap.png" title="add zap to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'True\');"></a><br/>';
 	tplEPGListItem +='<a target="_blank" href="/web/epgsearch.rss?search=%(title)" ><img src="/webdata/gfx/feed.png" title="RSS-Feed for this Title" border="0"></a><br/>';
 	tplEPGListItem +='<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=%(titleESC)" ><img src="/webdata/gfx/world.png" title="search IMDb" border="0"></a><br/>';
 	tplEPGListItem +='</td></tr>';
@@ -162,13 +163,13 @@ var tplMessageSendForm = ""
 //	tplPasswordSendForm += '<tr><td>Repeat new password</td><td><input type="password" id="PasswordSendFormNewPasswordSecond" value=""></td></tr>\n';
 //	tplPasswordSendForm += '<tr><td colspan="2"><button onclick="sendPasswords()">change password for user dreambox</button></td></tr>\n';
 //	tplPasswordSendForm += "</table></form>\n";
-	
 var tplPowerStateSendForm = '';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(' + "'poweroff'" + ')">Poweroff Dreambox</button></center></p>';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(' + "'rebootdreambox'" + ')">Reboot Dreambox</button></center></p>';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(1)">Deepstandby Dreambox</button></center></p>';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(2)">Reboot Dreambox</button></center></p>';
     tplPowerStateSendForm += '<hr>';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(' + "'standby'" + ')">Standby Dreambox</button></center></p>';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(' + "'rebootenigma'" + ')">Reboot Enigma2</button></center></p>';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(3)">Reboot Enigma2</button></center></p>';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(4)">Standby Dreambox</button></center></p>';
+    
 
 var tplRemoteControlForm = '';
 	tplRemoteControlForm += '<map name="remotecontrol">';
