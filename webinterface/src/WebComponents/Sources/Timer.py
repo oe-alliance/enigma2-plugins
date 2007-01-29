@@ -174,13 +174,15 @@ class Timer( Source):
             timer.append(item.log_entries)
             try: 
                 timer.append(item.Filename)
-            except AttributeError:
+            #except AttributeError:
+            except:
                 timer.append("")
             
             timer.append(item.backoff)       
             try:
                 timer.append(item.next_activation)
-            except AttributeError:
+            #except AttributeError:
+            except:
                 timer.append("")
             timer.append(item.first_try_prepare)  
             timer.append(item.state)  

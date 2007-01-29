@@ -21,7 +21,8 @@ var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
 
 var url_message = "/web/message"; // plus text,type,timeout
 
-var url_powerstate = "/web/powerstate"; // plus new and oldPassword
+var url_powerstate = "/web/powerstate"; // plus new powerstate
+var url_remotecontrol = "/web/remotecontrol"; // plus command
 
 var bouqet_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
 var bouqet_radio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
@@ -633,12 +634,31 @@ function sendPowerState(newState){
 function incomingPowerStateResult(request){
 	debug(request.readyState);
 	if(request.readyState == 4){
-		var b = getXML(request).getElementsByTagName("e2password");
+		var b = getXML(request).getElementsByTagName("e2powerstate");
 		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
 		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
 		var tplPowerStateSendForm2 = '<h1>PowerState is changing to:'+resulttext+ '</h1>' + tplPowerStateSendForm;
 		document.getElementById('BodyContentChannellist').innerHTML = tplPowerStateSendForm2;
 	} else {
 		document.getElementById('BodyContentChannellist').innerHTML = "<h1>some unknown error</h1>" + tplPasswordSendForm;
+	}
+}
+
+// RemoteControl Code
+function showRemoteControllSendForm(){
+		document.getElementById('BodyContentChannellist').innerHTML = tplRemoteControlForm;
+}
+function sendRemoteControlRequest(command){
+	doRequest(url_remotecontrol+'?command='+command, incomingRemoteControlResult);
+}
+function incomingRemoteControlResult(request){
+	debug(request.readyState);
+	if(request.readyState == 4){
+		var b = getXML(request).getElementsByTagName("e2remotecontrol");
+		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
+		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
+		showRemoteControllSendForm();
+	} else {
+		document.getElementById('BodyContentChannellist').innerHTML = "<h1>some unknown error</h1>" + tplRemoteControlForm;
 	}
 }

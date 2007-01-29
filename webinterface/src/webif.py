@@ -21,7 +21,9 @@ from WebComponents.Sources.EPG import EPG
 from WebComponents.Sources.Timer import Timer
 from WebComponents.Sources.Movie import Movie
 from WebComponents.Sources.Message import Message
-from WebComponents.Sources.PowerState import PowerState 
+from WebComponents.Sources.PowerState import PowerState
+from WebComponents.Sources.RemoteControl import RemoteControl
+
 from WebComponents.Sources.RequestData import RequestData
 from Components.Sources.FrontendStatus import FrontendStatus
 
@@ -69,6 +71,8 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["Volume"] = Volume(session)
 		self["Message"] = Message(session)
 		self["PowerState"] = PowerState(session)
+		self["RemoteControl"] = RemoteControl(session)
+		
 
 	def browseTo(self, reftobrowse):
 		self["ServiceListBrowse"].root = reftobrowse
