@@ -21,13 +21,15 @@ var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
 
 var url_message = "/web/message"; // plus text,type,timeout
 
+var url_powerstate = "/web/powerstate"; // plus new and oldPassword
+
 var bouqet_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
 var bouqet_radio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
 var bouqet_provider_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name';
 var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
 
 var windowStyle = "alphacube";
-var DBG = false;
+var DBG = true;
 
 // UpdateStreamReader
 var UpdateStreamReaderNextReadPos = 0;
@@ -195,6 +197,9 @@ function requestFinished(){
 
 function doRequest(url, readyFunction){
 	requestStarted();
+	//var password = "";
+	//var username = "";
+	debug(url);
 	new Ajax.Request(url,
 		{
 			method: 'get',
@@ -541,6 +546,7 @@ function loadTimerList(){
 }
 
 function incomingTimerList(request){
+	debug(request.readyState);
 	if(request.readyState == 4){
 		var timers = new TimerList(getXML(request)).getArray();
 		debug("have "+timers.length+" timer");
@@ -604,7 +610,8 @@ function sendMessage(messagetext,messagetype,messagetimeout){
 	doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult);
 }
 function incomingMessageResult(request){
-	if(request.readyState == 4){
+
+	if(request.readyState== 4){
 		var b = getXML(request).getElementsByTagName("e2message");
 		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
 		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
@@ -614,6 +621,24 @@ function incomingMessageResult(request){
 			messageBox('message send failed',resulttext);
 		}
 	}		
+}
 
-	
+// PowerState Code
+function showPowerStateSendForm(){
+		document.getElementById('BodyContentChannellist').innerHTML = tplPowerStateSendForm;
+}
+function sendPowerState(newState){
+	doRequest(url_powerstate+'?newstate='+newState, incomingPowerStateResult);
+}
+function incomingPowerStateResult(request){
+	debug(request.readyState);
+	if(request.readyState == 4){
+		var b = getXML(request).getElementsByTagName("e2password");
+		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
+		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
+		var tplPowerStateSendForm2 = '<h1>PowerState is changing to:'+resulttext+ '</h1>' + tplPowerStateSendForm;
+		document.getElementById('BodyContentChannellist').innerHTML = tplPowerStateSendForm2;
+	} else {
+		document.getElementById('BodyContentChannellist').innerHTML = "<h1>some unknown error</h1>" + tplPasswordSendForm;
+	}
 }

@@ -154,3 +154,18 @@ var tplMessageSendForm = ""
 	tplMessageSendForm += '</select></td></tr>\n';
 	tplMessageSendForm += '<tr><td colspan="2"><button onclick="sendMessage()">send Message</button></td></tr>\n';
 	tplMessageSendForm += "</table></form>\n";
+
+//var tplPasswordSendForm = ""
+//	tplPasswordSendForm += '<table id="PasswordSendForm" width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';
+//	tplPasswordSendForm += '<tr><td>Old password</td><td><input type="password" id="PasswordSendFormOldPassword" value=""></td></tr>\n';
+//	tplPasswordSendForm += '<tr><td>New password</td><td><input type="password" id="PasswordSendFormNewPassword" value=""></td></tr>\n';
+//	tplPasswordSendForm += '<tr><td>Repeat new password</td><td><input type="password" id="PasswordSendFormNewPasswordSecond" value=""></td></tr>\n';
+//	tplPasswordSendForm += '<tr><td colspan="2"><button onclick="sendPasswords()">change password for user dreambox</button></td></tr>\n';
+//	tplPasswordSendForm += "</table></form>\n";
+	
+var tplPowerStateSendForm = '';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(' + "'poweroff'" + ')">Poweroff Dreambox</button></center></p>';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(' + "'rebootdreambox'" + ')">Reboot Dreambox</button></center></p>';
+    tplPowerStateSendForm += '<hr>';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(' + "'standby'" + ')">Standby Dreambox</button></center></p>';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(' + "'rebootenigma'" + ')">Reboot Enigma2</button></center></p>';
