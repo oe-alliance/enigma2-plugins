@@ -65,19 +65,21 @@ def startWebserver():
 	class ScreenPage(resource.Resource):
 		def __init__(self, path):
 			self.path = path
-			
-			
+
 		def render(self, req):
 			global sessions
 			if sessions == [ ]:
 				return http.Response(responsecode.OK, stream="please wait until enigma has booted")
 
 			class myProducerStream(stream.ProducerStream):
-				closed_callback = None
+				def __init__(self):
+					stream.ProducerStream.__init__(self)
+					self.closed_callback = None
 
 				def close(self):
 					if self.closed_callback:
 						self.closed_callback()
+						self.closed_callback = None
 					stream.ProducerStream.close(self)
 
 			if os.path.isfile(self.path):
@@ -89,14 +91,14 @@ def startWebserver():
 					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'xhtml+xml', (('charset', 'UTF-8'),))},stream=s)
 			else:
 				return http.Response(responsecode.NOT_FOUND)
-			
+
 		def locateChild(self, request, segments):
 			path = self.path+'/'+'/'.join(segments)
 			if path[-1:] == "/":
 				path += "index.html"
 			path +=".xml"
 			return ScreenPage(path), ()
- 			
+
 	class Toplevel(resource.Resource):
 		addSlash = True
 		child_web = ScreenPage(util.sibpath(__file__, "web")) # "/web/*"
