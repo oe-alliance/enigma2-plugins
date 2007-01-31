@@ -67,6 +67,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["TimerAddEventID"] = Timer(session,func = Timer.ADDBYID)
 		self["TimerAdd"] = Timer(session,func = Timer.ADD)
 		self["TimerDel"] = Timer(session,func = Timer.DEL)
+		self["TVBrowser"] = Timer(session,func = Timer.TVBROWSER)
 		self["MovieList"] = Movie(session)
 		self["Volume"] = Volume(session)
 		self["Message"] = Message(session)

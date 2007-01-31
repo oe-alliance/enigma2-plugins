@@ -6,13 +6,14 @@ from Components.Sources.Source import Source
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT,parseEvent
 
-import time
+import time, string
 
 class Timer( Source):
     LIST = 0
     ADDBYID = 1
     ADD = 2
     DEL = 3
+    TVBROWSER = 4
     
     def __init__(self, session,func = LIST):
         self.func = func
@@ -26,6 +27,8 @@ class Timer( Source):
             self.result = self.addTimerByEventID(cmd)
         elif self.func is self.ADD:
             self.result = self.addTimer(cmd)
+        elif self.func is self.TVBROWSER:
+            self.result = self.tvBrowser(cmd)
         elif self.func is self.DEL:
             self.result = self.delTimer(cmd)
         else:
@@ -51,9 +54,15 @@ class Timer( Source):
         	end = float(param['end'])
              
         toDelete = None
-        for x in self.session.nav.RecordTimer.timer_list+self.session.nav.RecordTimer.processed_timers:
-        	if str(x.service_ref) == str(serviceref) and float(x.begin) == begin and float(x.end) == end:
-	        	toDelete = x
+        try:
+            print self.recordtimer.timer_list
+            print self.recordtimer.processed_timers
+            for x in self.session.nav.RecordTimer.timer_list + self.recordtimer.processed_timers:
+                print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (x.begin, x.end, x.service_ref)
+                if str(x.service_ref) == str(serviceref) and float(x.begin) == begin and float(x.end) == end:
+	        	          toDelete = x
+        except:
+            print "Fehler\n"
             
         if toDelete is not None:
         	self.session.nav.RecordTimer.removeEntry(toDelete)
@@ -63,10 +72,90 @@ class Timer( Source):
         	print "Timer not found"
         
         #self.session.nav.RecordTimer.saveTimer()
-    
+    def tvBrowser(self,param):
+        print "addTimerByEventID",param
+        
+        syear = 0
+        if param['syear'] is None:
+           return False,"syear missing"
+        else:
+            syear = int(param['syear'])
+        
+        smonth = 0
+        if param['smonth'] is None:
+           return False,"smonth missing"
+        else:
+            smonth = int(param['smonth'])
+        
+        sday = 0
+        if param['sday'] is None:
+           return False,"sday missing"
+        else:
+            sday = int(param['sday'])
+        
+        shour = 0
+        if param['shour'] is None:
+           return False,"shour missing"
+        else:
+            shour = int(param['shour'])
+        
+        smin = 0
+        if param['smin'] is None:
+           return False,"smin missing"
+        else:
+            smin = int(param['smin'])
+            
+        eyear = 0
+        if param['eyear'] is None:
+           return False,"eyear missing"
+        else:
+            eyear = int(param['eyear'])
+        
+        emonth = 0
+        if param['emonth'] is None:
+           return False,"emonth missing"
+        else:
+            emonth = int(param['emonth'])
+        
+        eday = 0
+        if param['eday'] is None:
+           return False,"eday missing"
+        else:
+            eday = int(param['eday'])
+        
+        ehour = 0
+        if param['ehour'] is None:
+           return False,"ehour missing"
+        else:
+            ehour = int(param['ehour'])
+        
+        emin = 0
+        if param['emin'] is None:
+           return False,"emin missing"
+        else:
+            emin = int(param['emin'])
+        
+        # for compatibility reasons
+        if param['serviceref'] is None:
+            return False,"ServiceReference missing"
+        else:
+            takeApart = string.split(param['serviceref'], '|')
+            if len(takeApart) > 1:
+                param['serviceref'] = takeApart[1]
+
+        param['begin'] = int( time.strftime("%s",  time.localtime(time.mktime( (syear, smonth, sday, shour, smin, 0, 0, 0, 0) ) ) ) )
+        param['end']   = int( time.strftime("%s",  time.localtime(time.mktime( (eyear, emonth, eday, ehour, emin, 0, 0, 0, 0) ) ) ) )
+        
+        if param['command'] == "add":
+            return self.addTimer(param)
+        elif param['command'] == "del":
+            return self.delTimer(param)
+        else:
+            return False,"command missing"
+        
     def addTimer(self,param):
         # is there an easier and better way? :\ 
-        print "addTimerByEventID",param
+        print "addTimer",param
         if param['serviceref'] is None:
             return False,"ServiceReference missing"
         else: 
@@ -161,7 +250,9 @@ class Timer( Source):
     ## part for listfiller requests
     def command(self):
         timerlist = []
-        for item in self.recordtimer.timer_list+self.recordtimer.processed_timers:
+        print self.recordtimer.timer_list
+#        for item in self.recordtimer.processed_timers:
+        for item in self.recordtimer.processed_timers+self.recordtimer.timer_list:
             timer = []
             timer.append(item.service_ref)
             timer.append(item.service_ref.getServiceName())
@@ -200,8 +291,7 @@ class Timer( Source):
             else:
                 timer.append("N/A")
                 
-            timerlist.append(timer) 
-            
+            timerlist.append(timer)
         return timerlist
     
     list = property(command)
