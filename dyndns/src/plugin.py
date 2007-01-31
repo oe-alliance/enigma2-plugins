@@ -14,7 +14,6 @@ import os
 import urllib2
 import base64
 
-import apihelper
 global sessions
 from twisted.internet import reactor
 
