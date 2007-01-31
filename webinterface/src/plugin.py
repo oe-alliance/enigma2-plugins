@@ -33,7 +33,7 @@ files_to_send_normal_http_headers = ['stream.m3u.xml',]
  use tail -f <file> to view this log
 """
 			
-DEBUG = True
+DEBUG = False
 DEBUGFILE= "/tmp/twisted.log"
 
 from twisted.cred.portal import Portal
