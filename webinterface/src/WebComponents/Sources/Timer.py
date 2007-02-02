@@ -251,9 +251,9 @@ class Timer( Source):
     ## part for listfiller requests
     def command(self):
         timerlist = []
-        print "len(self.recordtimer.timer_list) ", len(self.recordtimer.timer_list)
-        print "timer_list ", self.recordtimer.timer_list
-        print "processed_timers", self.recordtimer.processed_timers
+#        print "len(self.recordtimer.timer_list) ", len(self.recordtimer.timer_list)
+ #       print "timer_list ", self.recordtimer.timer_list
+  #      print "processed_timers", self.recordtimer.processed_timers
 #        try:
         for item in self.recordtimer.timer_list + self.recordtimer.processed_timers:
             timer = []
@@ -268,14 +268,16 @@ class Timer( Source):
             timer.append(item.end - item.begin)
             timer.append(item.start_prepare)
             timer.append(item.justplay)
-            
+            timer.append(item.afterEvent)
             timer.append(item.log_entries)
-            try: 
+            
+            try:
                 timer.append(item.Filename)
             except:
                 timer.append("")
             
             timer.append(item.backoff)       
+            
             try:
                 timer.append(item.next_activation)
             except:
@@ -305,7 +307,7 @@ class Timer( Source):
         return timerlist
     
     list = property(command)
-    lut = {"ServiceReference": 0
+    lut = {"ServiceReference":0
            ,"ServiceName": 1
            ,"EIT":2
            ,"Name":3
