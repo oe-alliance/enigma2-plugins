@@ -7,6 +7,7 @@ from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT,parseEvent
 
 import time, string
+# import sys, traceback
 
 class Timer( Source):
     LIST = 0
@@ -55,9 +56,9 @@ class Timer( Source):
              
         toDelete = None
         try:
-            print self.recordtimer.timer_list
-            print self.recordtimer.processed_timers
-            for x in self.session.nav.RecordTimer.timer_list + self.recordtimer.processed_timers:
+            print "timer_list ", self.recordtimer.timer_list
+            print "processed_timers", self.recordtimer.processed_timers
+            for x in self.recordtimer.timer_list + self.recordtimer.processed_timers:
                 print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (x.begin, x.end, x.service_ref)
                 if str(x.service_ref) == str(serviceref) and float(x.begin) == begin and float(x.end) == end:
 	        	          toDelete = x
@@ -65,7 +66,7 @@ class Timer( Source):
             print "Fehler\n"
             
         if toDelete is not None:
-        	self.session.nav.RecordTimer.removeEntry(toDelete)
+        	self.recordtimer.removeEntry(toDelete)
         	return True,"Timer removed"
         else:
         	return False,"Timer not found"
@@ -210,7 +211,7 @@ class Timer( Source):
             return False,"afterevent incorrect"
             
         newtimer = RecordTimerEntry(serviceref, begin, end, name, description, 0, disabled, justplay, afterevent)
-        self.session.nav.RecordTimer.record(newtimer)
+        self.recordtimer.record(newtimer)
         #self.session.nav.RecordTimer.saveTimer()
         return True,"Timer added"        
 
@@ -230,7 +231,7 @@ class Timer( Source):
             justplay = True
         
         newtimer = RecordTimerEntry(ServiceReference(param['serviceref']), begin, end, name, description, eit, False, justplay, AFTEREVENT.NONE)
-        self.session.nav.RecordTimer.record(newtimer)
+        self.recordtimer.record(newtimer)
         return True,"Timer added"    
             
     def getText(self):    
@@ -250,9 +251,11 @@ class Timer( Source):
     ## part for listfiller requests
     def command(self):
         timerlist = []
-        print self.recordtimer.timer_list
-#        for item in self.recordtimer.processed_timers:
-        for item in self.recordtimer.processed_timers+self.recordtimer.timer_list:
+        print "len(self.recordtimer.timer_list) ", len(self.recordtimer.timer_list)
+        print "timer_list ", self.recordtimer.timer_list
+        print "processed_timers", self.recordtimer.processed_timers
+#        try:
+        for item in self.recordtimer.timer_list + self.recordtimer.processed_timers:
             timer = []
             timer.append(item.service_ref)
             timer.append(item.service_ref.getServiceName())
@@ -262,36 +265,43 @@ class Timer( Source):
             timer.append(item.disabled)
             timer.append(item.begin)
             timer.append(item.end)
-            timer.append(item.end-item.begin)
+            timer.append(item.end - item.begin)
             timer.append(item.start_prepare)
             timer.append(item.justplay)
-            timer.append(item.afterEvent)
+            
             timer.append(item.log_entries)
             try: 
                 timer.append(item.Filename)
-            #except AttributeError:
             except:
                 timer.append("")
             
             timer.append(item.backoff)       
             try:
                 timer.append(item.next_activation)
-            #except AttributeError:
             except:
                 timer.append("")
+                
             timer.append(item.first_try_prepare)  
-            timer.append(item.state)  
+            timer.append(item.state)
             timer.append(item.repeated)
             timer.append(item.dontSave)
             timer.append(item.cancelled)
             
-            event = self.epgcache.lookupEvent(['E',("%s"%item.service_ref,2,item.eit)])
-            if event[0][0] is not None:
-                timer.append(event[0][0])
+            if item.eit is not None:
+                self.epgcache.lookupEvent(['E',("%s" % item.service_ref ,2,item.eit)])
+                if event[0][0] is not None:
+                    timer.append(event[0][0])
+                else:
+                    timer.append("N/A")
             else:
                 timer.append("N/A")
                 
             timerlist.append(timer)
+#        except:
+#            print sys.exc_info()[0]
+#            print sys.exc_info()[1]
+#            print traceback.extract_tb(sys.exc_info()[2])
+            
         return timerlist
     
     list = property(command)
