@@ -33,7 +33,7 @@ AppTextHeaderFiles = ['stream.m3u.xml',]
  use tail -f <file> to view this log
 """
 			
-DEBUG = False
+DEBUG = True
 DEBUGFILE= "/tmp/twisted.log"
 
 from twisted.cred.portal import Portal
@@ -221,12 +221,12 @@ def getpwnam(name, pwfile=None):
 def passcrypt(passwd, salt=None, method='des', magic='$1$'):
     """Encrypt a string according to rules in crypt(3)."""
     if method.lower() == 'des':
-	    if not salt:
-	    	salt = str(whrandom.choice(DES_SALT)) + str(whrandom.choice(DES_SALT))
 	    return crypt.crypt(passwd, salt)
     elif method.lower() == 'md5':
-	    return passcrypt_md5(passwd, salt, magic)
+    	print passcrypt_md5(passwd, salt, magic)
+    	return passcrypt_md5(passwd, salt, magic)
     elif method.lower() == 'clear':
+        print passwd
         return passwd
 
 def check_passwd(name, passwd, pwfile=None):
@@ -239,13 +239,15 @@ def check_passwd(name, passwd, pwfile=None):
 
     try:
         enc_passwd = getuser(name)
+        print enc_passwd
     except (KeyError, IOError):
         return 0
     if not enc_passwd:
         return 0
     elif len(enc_passwd) >= 3 and enc_passwd[:3] == '$1$':
         salt = enc_passwd[3:string.find(enc_passwd, '$', 3)]
-        return enc_passwd == passcrypt(passwd, salt=salt, method='md5')
+        return enc_passwd == passcrypt(passwd, salt, 'md5')
+       
     else:
         return enc_passwd == passcrypt(passwd, enc_passwd[:2])
 
@@ -261,7 +263,7 @@ def passcrypt_md5(passwd, salt=None, magic='$1$'):
     """Encrypt passwd with MD5 algorithm."""
     
     if not salt:
-	salt = repr(int(time.time()))[-8:]
+    	pass
     elif salt[:len(magic)] == magic:
         # remove magic from salt if present
         salt = salt[len(magic):]
