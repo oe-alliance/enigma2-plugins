@@ -23,7 +23,7 @@ sessions = [ ]
 	define all files in /web to send no  XML-HTTP-Headers here
 	all files not listed here will get an Content-Type: application/xhtml+xml charset: UTF-8
 """
-files_to_send_normal_http_headers = ['stream.m3u.xml',] 
+AppTextHeaderFiles = ['stream.m3u.xml',] 
  
 """
  set DEBUG to True, if twisted should write logoutput to a file.
@@ -85,8 +85,8 @@ def startWebserver():
 			if os.path.isfile(self.path):
 				s=myProducerStream()
 				webif.renderPage(s, self.path, req, sessions[0])  # login?
-				if self.path.split("/")[-1] in files_to_send_normal_http_headers:
-					return http.Response(responsecode.OK,stream=s)
+				if self.path.split("/")[-1] in AppTextHeaderFiles:
+					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'text', (('charset', 'UTF-8'),))},stream=s)
 				else:
 					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'xhtml+xml', (('charset', 'UTF-8'),))},stream=s)
 			else:
