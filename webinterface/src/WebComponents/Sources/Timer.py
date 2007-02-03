@@ -290,7 +290,7 @@ class Timer( Source):
             timer.append(item.cancelled)
             
             if item.eit is not None:
-                self.epgcache.lookupEvent(['E',("%s" % item.service_ref ,2,item.eit)])
+                event = self.epgcache.lookupEvent(['E',("%s" % item.service_ref ,2,item.eit)])
                 if event[0][0] is not None:
                     timer.append(event[0][0])
                 else:
