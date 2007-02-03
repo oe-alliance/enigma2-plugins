@@ -223,10 +223,8 @@ def passcrypt(passwd, salt=None, method='des', magic='$1$'):
     if method.lower() == 'des':
 	    return crypt.crypt(passwd, salt)
     elif method.lower() == 'md5':
-    	print passcrypt_md5(passwd, salt, magic)
     	return passcrypt_md5(passwd, salt, magic)
     elif method.lower() == 'clear':
-        print passwd
         return passwd
 
 def check_passwd(name, passwd, pwfile=None):
@@ -239,7 +237,6 @@ def check_passwd(name, passwd, pwfile=None):
 
     try:
         enc_passwd = getuser(name)
-        print enc_passwd
     except (KeyError, IOError):
         return 0
     if not enc_passwd:
