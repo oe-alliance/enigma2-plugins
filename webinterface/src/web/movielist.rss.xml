@@ -9,10 +9,12 @@
 			&lt;title><e2:item name="Title" filter="xml"/>&lt;/title>
 			&lt;description>Kanal: <e2:item name="ServiceName" filter="xml"/>
 				&lt;br/><e2:item name="Description" filter="xml"/>
+				&lt;br/><e2:item name="DescriptionExtended" filter="xml"/>
+				&lt;br/><e2:item name="Filename"  filter="xml"/>
 				&lt;br/>Tags: <e2:item name="Tags" filter="xml"/>
 				&lt;br/>ServiceReference<e2:item name="ServiceReference" filter="xml"/>
-				&lt;/description>
-			&lt;category>EPG<e2:item name="ServiceName" filter="xml"/> &lt;/category>
+			&lt;/description>
+			&lt;category><e2:item name="ServiceName" filter="xml"/>&lt;/category>
 		&lt;/item></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
 	&lt;/channel>
 &lt;/rss>
