@@ -1,3 +1,5 @@
+var DBG = true;
+
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
 var url_volumeup = '/web/vol?set=up';
@@ -30,7 +32,6 @@ var bouqet_provider_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (ty
 var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
 
 var windowStyle = "alphacube";
-var DBG = false;
 
 // UpdateStreamReader
 var UpdateStreamReaderNextReadPos = 0;
@@ -563,14 +564,26 @@ function incomingTimerList(request){
 				'begin': timer.getTimeBegin(), 
 				'end': timer.getTimeEnd(), 
 				'state': timer.getState(),
-				'duration': Math.ceil((timer.getDuration()/60))
+				'duration': Math.ceil((timer.getDuration()/60)),
+				'color': colorTimerListEntry( timer.getState() )
 			};
 			listerHtml += RND(tplTimerListItem, namespace);
 		}
 		listerHtml += tplTimerListFooter;
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
-		
+	}
+}
+
+function colorTimerListEntry (state) {
+	if (state == 0) {
+		return "000000";
+	} else if(state == 1) {
+		return "00BCBC";
+	} else if(state == 2) {
+		return "9F1919";
+	} else {
+		return "00BCBC";
 	}
 }
 function delTimer(serviceRef,begin,end){
@@ -587,10 +600,6 @@ function incomingTimerDelResult(request){
 		debug("Lade liste");
 		loadTimerList();
 	}		
-}
-function loadTimerForm() {
-	debug("timers form");
-	debug("there is still work to do here");
 }
 
 // send Messages
@@ -661,4 +670,321 @@ function incomingRemoteControlResult(request){
 	} else {
 		document.getElementById('BodyContentChannellist').innerHTML = "<h1>some unknown error</h1>" + tplRemoteControlForm;
 	}
+}
+var addTimerEditFormObject = new Object();
+
+function loadTimerFormNow() {
+	var now = new Date();
+	addTimerEditFormObject["syear"] = now.getFullYear();
+	addTimerEditFormObject["smonth"] = now.getMonth() + 1;
+	addTimerEditFormObject["sday"] = now.getDate();
+	addTimerEditFormObject["shour"] = now.getHours();
+	addTimerEditFormObject["smin"] = now.getMinutes();
+
+	var	plusTwoHours = new Date(now.getTime() + ((120 *60)*1000) );
+	addTimerEditFormObject["eyear"] = plusTwoHours.getFullYear();
+	addTimerEditFormObject["emonth"] = plusTwoHours.getMonth() + 1;
+	addTimerEditFormObject["eday"] = plusTwoHours.getDate();
+	addTimerEditFormObject["ehour"] = plusTwoHours.getHours();
+	addTimerEditFormObject["emin"] = plusTwoHours.getMinutes();
+		
+	addTimerEditFormObject["record"] = "record";
+	addTimerEditFormObject["channel"] = "";
+	addTimerEditFormObject["channelSort"] = "tv";
+	addTimerEditFormObject["name"] = "";
+	addTimerEditFormObject["description"] = "";
+	addTimerEditFormObject["repeated"] = 127;
+	addTimerEditFormObject["afterEvent"] = "nothing";
+	
+	loadTimerFormChannels();
+}
+
+function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description,afterEvent) {
+	
+	var start = new Date(Number(begin)*1000);
+	addTimerEditFormObject["syear"] = start.getFullYear();
+	addTimerEditFormObject["smonth"] = start.getMonth() + 1;
+	addTimerEditFormObject["sday"] = start.getDate();
+	addTimerEditFormObject["shour"] = start.getHours();
+	addTimerEditFormObject["smin"] = start.getMinutes();
+	
+	
+	var	stopp = new Date(Number(end)*1000);
+//	var test = stopp.getMonth();
+
+	addTimerEditFormObject["eyear"] = stopp.getFullYear();
+	addTimerEditFormObject["emonth"] = stopp.getMonth() + 1;
+	addTimerEditFormObject["eday"] = stopp.getDate();
+	addTimerEditFormObject["ehour"] = stopp.getHours();
+	addTimerEditFormObject["emin"] = stopp.getMinutes();
+	
+	addTimerEditFormObject["record"] = "record";
+	addTimerEditFormObject["channel"] = "";
+	addTimerEditFormObject["channelSort"] = "";
+	addTimerEditFormObject["name"] = "";
+	addTimerEditFormObject["description"] = "";
+	addTimerEditFormObject["repeated"] = Number(repeated);
+	addTimerEditFormObject["afterEvent"] = "nothing";
+	
+	loadTimerFormChannels();
+}
+
+// startin to load for TV
+function loadTimerFormChannels() {
+	if(addTimerEditFormObject["TVListFilled"]) {
+		// do nothing
+	} else {
+		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.tv%22%20ORDER%20BY%20bouquet'
+//		var url = url_fetchchannels+encodeURIComponent(bouqet_tv);
+		doRequest(url_fetchchannels+favorites, addTimerListFormatTV);
+	}
+}
+
+function addTimerListFormatTV(request) {
+	if(request.readyState == 4){
+		var services = new ServiceList(getXML(request)).getArray();
+		debug("addTimerListFormatTV got "+services.length+" Services");
+		var tv = new Object();
+		for ( var i = 0; i < services.length ; i++){
+			var reference = services[i];
+			tv[reference.servicereference] = reference.servicename;
+		}
+		addTimerEditFormObject["TVListFilled"] = true;
+		addTimerEditFormObject["TVList"] = tv;
+	}
+	if(addTimerEditFormObject["RadioListFilled"]) {
+		// do nothing
+	} else {
+		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.radio%22%20ORDER%20BY%20bouquet';
+//		var url = url_fetchchannels+encodeURIComponent(bouqet_radio);
+		doRequest(url_fetchchannels+favorites, addTimerListFormatRadio);
+	}
+}
+function addTimerListFormatRadio(request) {
+	if(request.readyState == 4){
+		var services = new ServiceList(getXML(request)).getArray();
+		debug("addTimerListFormatRadio got "+services.length+" Services");
+		var radio = new Object();
+		for ( var i = 0; i < services.length ; i++){
+			var reference = services[i];
+			radio[reference.servicereference] = reference.servicename;
+		}
+		addTimerEditFormObject["RadioListFilled"] = true;
+		addTimerEditFormObject["RadioList"] = radio;
+	}
+	loadTimerForm();
+}
+
+function loadTimerForm(){
+//action,syear,smonth,sday,shour,smin,eyear,emonth,eday,ehour,emin,repeated,channel,name,description,afterEvent	
+	var Action = new Object();
+	Action["record"] = "Record";
+	Action["zap"] = "Zap";
+	
+	var Repeated = new Object();
+	Repeated["1"] =  "mo";
+	Repeated["2"] = "tu";
+	Repeated["4"] =  "we";
+	Repeated["8"] =  "th";
+	Repeated["16"] = "fr";
+	Repeated["32"] = "sa";
+	Repeated["64"] = "su";
+	Repeated["31"] = "mf";
+	Repeated["127"] ="ms";
+	
+	var AfterEvent = new Object();
+	AfterEvent["0"] = "Nothing";
+	AfterEvent["1"] = "Standby";
+	AfterEvent["2"] = "Deepstandby/Shutdown";
+	
+	addTimerEditFormObject["name"] = (typeof(addTimerEditFormObject["name"]) != "undefined") ? addTimerEditFormObject["name"] : "";
+	addTimerEditFormObject["name"] = (addTimerEditFormObject["name"] == "") ? " " : addTimerEditFormObject["name"];
+
+	addTimerEditFormObject["description"] = (typeof(addTimerEditFormObject["description"]) != "undefined") ? addTimerEditFormObject["description"] : "";
+	addTimerEditFormObject["description"] = (addTimerEditFormObject["description"] == "") ? " " : addTimerEditFormObject["description"];
+
+	var channelObject = addTimerEditFormObject["TVList"];
+	if(	addTimerEditFormObject["channelSort"] == "tv") {
+		// already set
+	} else if( addTimerEditFormObject["channelSort"] == "radio") {
+		channelObject = addTimerEditFormObject["RadioList"];
+	} else {
+		var found = 0;
+		for( element in addTimerEditFormObject["TVList"]) {
+			if( element = addTimerEditFormObject["channel"]) {
+				// already set
+				found = 1;
+				break;
+			}
+		}
+		if(found == 0) {
+			for( element in addTimerEditFormObject["RadioList"]) {
+				if( element = addTimerEditFormObject["channel"]) {
+					channelObject = addTimerEditFormObject["RadioList"];
+					found = 1;
+					break;
+				}
+			}
+		}
+		if(found == 0) {
+			addTimerEditFormObject["TVList"][addTimerEditFormObject["channel"]] = "Unknown selected Channel";
+		}
+	}
+
+	var namespace = { 	
+				'action': addTimerFormCreateOptionList(Action, addTimerEditFormObject["action"]),
+				'syear': addTimerFormCreateOptions(2007,2010,addTimerEditFormObject["syear"]),
+				'smonth': addTimerFormCreateOptions(1,12,addTimerEditFormObject["smonth"]),
+				'sday': addTimerFormCreateOptions(1,31,addTimerEditFormObject["sday"]),
+				'shour': addTimerFormCreateOptions(0,23,addTimerEditFormObject["shour"]),
+				'smin': addTimerFormCreateOptions(0,59,addTimerEditFormObject["smin"]),
+				'eyear': addTimerFormCreateOptions(2007,2010,addTimerEditFormObject["eyear"]),
+				'emonth': addTimerFormCreateOptions(1,12,addTimerEditFormObject["emonth"]),
+				'eday': addTimerFormCreateOptions(1,31,addTimerEditFormObject["eday"]),
+				'ehour': addTimerFormCreateOptions(0,23,addTimerEditFormObject["ehour"]),
+				'emin': addTimerFormCreateOptions(0,59,addTimerEditFormObject["emin"]),
+				'channel': addTimerFormCreateOptionList(channelObject, addTimerEditFormObject["channel"]),
+				'name': addTimerEditFormObject["name"],
+				'description': addTimerEditFormObject["description"],
+				'repeated': addTimerFormCreateOptionListRepeated(Repeated, addTimerEditFormObject["repeated"]),
+				'afterEvent': addTimerFormCreateOptionList(AfterEvent, addTimerEditFormObject["afterEvent"])
+		};
+		//.concat(addTimerRadioList)
+	var listerHtml = RND(tplAddTimerForm, namespace);
+	document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
+//	setBodyMainContent('BodyContentChannellist');
+}
+
+function addTimerFormCreateOptions(start,end,number) {
+	var html = '';
+	for(i = start; i <= end; i++) {
+		var txt = (String(i).length == 1) ? "0" + String(i) : String(i);
+		if (i == Number(number)) {
+			html += '<option value="'+ i +'" selected>'+ txt + '</option>';
+		} else {
+			html += '<option value="'+ i +'">'+ txt + '</option>';
+		}
+	}
+	alert(html + number);
+	return html;
+}
+function addTimerFormCreateOptionList(object,selected) {
+	html = '';
+	for(var element in object) {
+		var txt = String(object[element]);
+		if(element == selected) {
+//			var txt = (len( String(object[element]) ) == 1) ? "0"+String(object[element]) : String(object[element]);
+			html += '<option value="'+ element +'" selected>'+ txt + '</option>';
+		} else if(element == "extend") {
+		// do nothing.
+		}else {
+//			var txt = (len( String(object[element]) ) == 1) ? "0"+String(object[element]) : String(object[element]);
+			html += '<option value="'+ element +'">'+ txt + '</option>';
+		}
+	}
+	return html;
+}
+
+function addTimerFormChangeTime(type) {
+	var start = new Date( $('syear').value, $('smonth').value, $('sday').value, $('shour').value, $('smin').value, 0);
+	var end = new Date($('eyear').value, $('emonth').value, $('eday').value, $('ehour').value, $('emin').value, 0);
+	if(start.getTime() > end.getTime()) {
+		if(type == 's') {
+			$('eyear').value = $('syear').value;
+			$('emonth').value = $('smonth').value;
+			$('eday').value = $('sday').value;
+			$('ehour').value = $('shour').value;
+			$('emin').value = $('smin').value;
+		} else {
+			$('syear').value = $('eyear').value;
+			$('smonth').value = $('emonth').value;
+			$('sday').value = $('eday').value;
+			$('shour').value = $('ehour').value;
+			$('smin').value = $('emin').value;
+		}
+	}
+}
+function addTimerFormChangeType() {
+	var selected = ($('tvradio').checked == true) ? addTimerEditFormObject["TVList"]: addTimerEditFormObject["RadioList"];
+	for (i = $('channel').options.length; i != 0; i--) {
+		$('channel').options[i - 1] = null;
+	}
+	var i = -1;
+	for(element in selected) {
+		if(element != "extend") {
+			i++;
+			$('channel').options[i] = new Option(selected[element]);
+			$('channel').options[i].value = element;
+		}
+	}
+}
+function addTimerFormCreateOptionListRepeated(Repeated,repeated) {
+	var num = Number(repeated);
+	var html = "";
+	var html2 = "";
+	var list = new Array(127, 64, 32, 31, 16, 8, 4, 2, 1);
+	for(i = 0; i < list.length; i++) {
+		var txt = String(Repeated[String(list[i])]);
+		if( String(Repeated[String(list[i])]) == "mf") {
+			txt = "Mo-Fr";
+		} else if( String(Repeated[String(list[i])]) == "ms") {
+			txt = "Mo-Su";
+		} else {
+			txt = txt.substr(0,1).toUpperCase() + txt.substr(1,1);
+		}
+		if(num >=  list[i]) {
+			num -= list[i];
+			if(String(Repeated[String(list[i])]) == "mf" || String(Repeated[String(list[i])]) == "ms") {
+				html2 = '<input type="checkbox" id="'+ Repeated[String(list[i])] +'" name="'+ Repeated[String(list[i])] +'" value="'+ list[i] +'" checked>&nbsp;'+ txt +'&nbsp;&nbsp;' + html2;
+			} else {
+				html = '<input type="checkbox" id="'+ Repeated[String(list[i])] +'" name="'+ Repeated[String(list[i])] +'" value="'+ list[i] +'" checked>&nbsp;'+ txt +'&nbsp;&nbsp;' + html;
+			}
+		} else {
+			if(String(Repeated[String(list[i])]) == "mf" || String(Repeated[String(list[i])]) == "ms") {
+				html2 = '<input type="checkbox" id="'+ Repeated[String(list[i])] +'" name="'+ Repeated[String(list[i])] +'" value="'+ list[i] +'">&nbsp;'+ txt +'&nbsp;&nbsp;' + html2;
+			} else {
+				html = '<input type="checkbox" id="'+ Repeated[String(list[i])] +'" name="'+ Repeated[String(list[i])] +'" value="'+ list[i] +'">&nbsp;'+ txt +'&nbsp;&nbsp;'  + html;
+			}
+		}
+	}
+	return html + html2;
+}
+function sendAddTimer() {
+//action,begin,end,repeated,channel,name,description,afterEvent
+	var beginD = new Date(Number($('syear').value), Number($('smonth').value), Number($('sday').value), Number($('shour').value), Number($('smin').value));
+	var begin = beginD.getTime()/1000;
+	
+	var endD = new Date(Number($('eyear').value), Number($('emonth').value), Number($('eday').value), Number($('ehour').value), Number($('emin').value));
+	var end = endD.getTime()/1000;
+
+	var repeated = 0;
+	if( $('ms').checked ) {
+		repeated = 127;
+	} else if($('mf').checked) {
+		repeated = 31;
+		if($('sa').checked) {
+			repeated += Number($('sa').value);
+		}
+		if($('su').checked) {
+			repeated += Number($('su').value);
+		}
+	} else {
+		var check = new Array('mo', 'tu', 'we', 'th', 'fr');
+		for(i = 0; i < check.length; i++) {
+			if($(check[i]).cheked) {
+				repeated += Number($(check[i]).value);
+			}
+		}
+	}
+
+	justplay = 0;
+	if($('action').value == "zap") {
+		justplay = 1;
+	}
+	//serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
+//	doRequest(url_timeradd+"?serviceref="+$('channel').value+"&begin="+begin+"&end="+end+"&name="+$('name').value+"&description="+$('description').value+"&afterevent="+$('after_event').value+"&eit=0&disabled=0&justplay="+justplay, incomingTimerAddResult);
+	doRequest(url_timeradd+"?"+"serviceref="+$('channel').value+"&begin="+begin
+	 +"&end="+end+"&name="+$('name').value+"&description="+$('descr').value
+	 +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
+	 +"&justplay="+justplay, incomingTimerAddResult);
 }
