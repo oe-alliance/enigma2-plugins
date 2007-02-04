@@ -865,7 +865,6 @@ function addTimerFormCreateOptions(start,end,number) {
 			html += '<option value="'+ i +'">'+ txt + '</option>';
 		}
 	}
-	alert(html + number);
 	return html;
 }
 function addTimerFormCreateOptionList(object,selected) {
