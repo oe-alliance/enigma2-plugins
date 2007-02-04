@@ -23,7 +23,7 @@ sessions = [ ]
 	define all files in /web to send no  XML-HTTP-Headers here
 	all files not listed here will get an Content-Type: application/xhtml+xml charset: UTF-8
 """
-AppTextHeaderFiles = ['stream.m3u.xml',] 
+AppTextHeaderFiles = ['stream.m3u.xml','getpid.xml',] 
  
 """
  set DEBUG to True, if twisted should write logoutput to a file.
