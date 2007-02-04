@@ -103,7 +103,8 @@ var tplTimerListItem  = '<tr>\n';
 	tplTimerListItem += '<td><div style="color: #%(color);" class="sListSName" title="%(description), %(descriptionextended)">%(title) (%(servicename))</div>';
 	tplTimerListItem += '<div class="sListExt" style="color: #%(color);">\n';
 	tplTimerListItem += '%(duration)&nbsp;Min\n';
-	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" width="20" height="20" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\');"></a><br/>';
+	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\');"></a>';
+	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',0);"></a><br/>';
 	tplTimerListItem += '</div>\n';
 	tplTimerListItem += '</tr>\n';
 	

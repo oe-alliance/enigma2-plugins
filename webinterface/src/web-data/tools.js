@@ -1,4 +1,4 @@
-var DBG = true;
+var DBG = false;
 
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
@@ -565,6 +565,8 @@ function incomingTimerList(request){
 				'end': timer.getTimeEnd(), 
 				'state': timer.getState(),
 				'duration': Math.ceil((timer.getDuration()/60)),
+				'repeated': timer.getRepeated(),
+				'justplay': timer.getJustplay(),
 				'color': colorTimerListEntry( timer.getState() )
 			};
 			listerHtml += RND(tplTimerListItem, namespace);
@@ -672,6 +674,7 @@ function incomingRemoteControlResult(request){
 	}
 }
 var addTimerEditFormObject = new Object();
+addTimerEditFormObject["deleteOldOnSave"] = 0;
 
 function loadTimerFormNow() {
 	var now = new Date();
@@ -693,14 +696,13 @@ function loadTimerFormNow() {
 	addTimerEditFormObject["channelSort"] = "tv";
 	addTimerEditFormObject["name"] = "";
 	addTimerEditFormObject["description"] = "";
-	addTimerEditFormObject["repeated"] = 127;
-	addTimerEditFormObject["afterEvent"] = "nothing";
+	addTimerEditFormObject["repeated"] = 0;
+	addTimerEditFormObject["afterEvent"] = "0";
 	
 	loadTimerFormChannels();
 }
 
-function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description,afterEvent) {
-	
+function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description,afterEvent,deleteOldOnSave) {
 	var start = new Date(Number(begin)*1000);
 	addTimerEditFormObject["syear"] = start.getFullYear();
 	addTimerEditFormObject["smonth"] = start.getMonth() + 1;
@@ -708,23 +710,23 @@ function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description
 	addTimerEditFormObject["shour"] = start.getHours();
 	addTimerEditFormObject["smin"] = start.getMinutes();
 	
-	
 	var	stopp = new Date(Number(end)*1000);
-//	var test = stopp.getMonth();
-
 	addTimerEditFormObject["eyear"] = stopp.getFullYear();
 	addTimerEditFormObject["emonth"] = stopp.getMonth() + 1;
 	addTimerEditFormObject["eday"] = stopp.getDate();
 	addTimerEditFormObject["ehour"] = stopp.getHours();
 	addTimerEditFormObject["emin"] = stopp.getMinutes();
 	
-	addTimerEditFormObject["record"] = "record";
-	addTimerEditFormObject["channel"] = "";
+	debug(action+"|"+begin+"|"+end+"|"+repeated+"|"+channel+"|"+name+"|"+description+"|"+afterEvent);
+	addTimerEditFormObject["record"] = String(action);
+	addTimerEditFormObject["channel"] = decodeURIComponent(String(channel));
 	addTimerEditFormObject["channelSort"] = "";
-	addTimerEditFormObject["name"] = "";
-	addTimerEditFormObject["description"] = "";
+	addTimerEditFormObject["name"] = String(name);
+	addTimerEditFormObject["description"] = String(description);
 	addTimerEditFormObject["repeated"] = Number(repeated);
-	addTimerEditFormObject["afterEvent"] = "nothing";
+	addTimerEditFormObject["afterEvent"] = String(afterEvent);
+
+	addTimerEditFormObject["deleteOldOnSave"] = deleteOldOnSave;
 	
 	loadTimerFormChannels();
 }
@@ -986,4 +988,8 @@ function sendAddTimer() {
 	 +"&end="+end+"&name="+$('name').value+"&description="+$('descr').value
 	 +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
 	 +"&justplay="+justplay, incomingTimerAddResult);
+	
+	if(addTimerEditFormObject["deleteOldOnSave"] == 1) {
+		delTimer($('channel').value,begin,end);
+	}
 }

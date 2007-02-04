@@ -343,12 +343,12 @@ function Timer(xml){
 	try{
 		this.justplay = xml.getElementsByTagName('e2justplay').item(0).firstChild.data;
 	} catch (e) {
-		this.justplay = "N/A";
+		this.justplay = "";
 	}
 	try{
 		this.afterevent = xml.getElementsByTagName('e2afterevent').item(0).firstChild.data;
 	} catch (e) {
-		this.afterevent = "N/A";
+		this.afterevent = "0";
 	}
 	try{
 		this.logentries = xml.getElementsByTagName('e2logentries').item(0).firstChild.data;
@@ -383,7 +383,7 @@ function Timer(xml){
 	try{
 		this.repeated = xml.getElementsByTagName('e2repeated').item(0).firstChild.data;
 	} catch (e) {
-		this.repeated = "N/A";
+		this.repeated = "0";
 	}
 	try{
 		this.dontsave = xml.getElementsByTagName('e2dontsave').item(0).firstChild.data;
