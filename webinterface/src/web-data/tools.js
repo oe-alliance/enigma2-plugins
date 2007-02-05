@@ -723,7 +723,6 @@ function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description
 	addTimerEditFormObject["ehour"] = stopp.getHours();
 	addTimerEditFormObject["emin"] = stopp.getMinutes();
 	
-	debug(action+"|"+begin+"|"+end+"|"+repeated+"|"+channel+"|"+name+"|"+description+"|"+afterEvent);
 	addTimerEditFormObject["record"] = String(action);
 	addTimerEditFormObject["channel"] = decodeURIComponent(String(channel));
 	addTimerEditFormObject["channelSort"] = "";
@@ -731,6 +730,8 @@ function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description
 	addTimerEditFormObject["description"] = String(description);
 	addTimerEditFormObject["repeated"] = Number(repeated);
 	addTimerEditFormObject["afterEvent"] = Number(afterEvent);
+	
+	debug(action+"|"+begin+"|"+end+"|"+repeated+"|"+channel+"|"+name+"|"+description+"|"+afterEvent);
 
 	addTimerEditFormObject["deleteOldOnSave"] = Number(deleteOldOnSave);
 	addTimerEditFormObject["beginOld"] = Number(begin);
@@ -883,11 +884,12 @@ function addTimerFormCreateOptions(start,end,number) {
 	var html = '';
 	for(i = start; i <= end; i++) {
 		var txt = (String(i).length == 1) ? "0" + String(i) : String(i);
-		if (i == Number(number)) {
-			html += '<option value="'+ i +'" selected>'+ txt + '</option>';
-		} else {
-			html += '<option value="'+ i +'">'+ txt + '</option>';
-		}
+		var selected = 	(i == Number(number)) ? "selected" : "";
+		var namespace = {
+			'value': i,
+			'txt': txt,
+			'selected': selected };
+		html += RND(tplAddTimerFormOptions, namespace);
 	}
 	return html;
 }
@@ -895,34 +897,24 @@ function addTimerFormCreateOptionList(object,selected) {
 	html = '';
 	for(var element in object) {
 		var txt = String(object[element]);
-		if(element == selected) {
-			html += '<option value="'+ element +'" selected>'+ txt + '</option>';
-		} else if(element == "extend") {
-		// do nothing.
-		}else {
-			html += '<option value="'+ element +'">'+ txt + '</option>';
+		var sel = (element == selected) ? "selected" : "";
+		var namespace = {
+			'value': element,
+			'txt': txt,
+			'selected': sel };
+		if(element != "extend") {
+			html += RND(tplAddTimerFormOptions, namespace);
 		}
 	}
 	return html;
 }
 
-function addTimerFormChangeTime(type) {
+function addTimerFormChangeTime(which) {
 	var start = new Date( $('syear').value, $('smonth').value, $('sday').value, $('shour').value, $('smin').value, 0);
 	var end = new Date($('eyear').value, $('emonth').value, $('eday').value, $('ehour').value, $('emin').value, 0);
 	if(start.getTime() > end.getTime()) {
-		if(type == 's') {
-			$('eyear').value = $('syear').value;
-			$('emonth').value = $('smonth').value;
-			$('eday').value = $('sday').value;
-			$('ehour').value = $('shour').value;
-			$('emin').value = $('smin').value;
-		} else {
-			$('syear').value = $('eyear').value;
-			$('smonth').value = $('emonth').value;
-			$('sday').value = $('eday').value;
-			$('shour').value = $('ehour').value;
-			$('smin').value = $('emin').value;
-		}
+		opponent = (which.substr(0,1) == 's') ? 'e' +  which.substr(1, which.length -1) : 's' +  which.substr(1, which.length -1) ;
+		$(opponent).value = $(which).value;
 	}
 }
 function addTimerFormChangeType() {
