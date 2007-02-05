@@ -104,7 +104,7 @@ var tplTimerListItem  = '<tr>\n';
 	tplTimerListItem += '<div class="sListExt" style="color: #%(color);">\n';
 	tplTimerListItem += '%(duration)&nbsp;Min\n';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\');"></a>';
-	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',0);"></a><br/>';
+	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a><br/>';
 	tplTimerListItem += '</div>\n';
 	tplTimerListItem += '</tr>\n';
 	
@@ -250,5 +250,9 @@ var tplAddTimerForm = '';
 	tplAddTimerForm += '<tr><td colspan="3">After event do:</td>';
 	tplAddTimerForm += '<td colspan="3"><select id="after_event" name="after_event" size="1">%(afterEvent)</select></td></tr>';
 	tplAddTimerForm += '<tr>&nbsp;&nbsp;</tr>';
-	tplAddTimerForm += '<tr><td colspan="3">&nbsp;</td><td colspan="3">'
+	tplAddTimerForm += '<tr><td colspan="3">&nbsp;</td><td colspan="3">';
+	tplAddTimerForm += '<input name="deleteOldOnSave" id="deleteOldOnSave" type="hidden" value="%(deleteOldOnSave)">';
+	tplAddTimerForm += '<input name="channelOld" id="channelOld" type="hidden" value="%(channelOld)">';
+	tplAddTimerForm += '<input name="beginOld" id="beginOld" type="hidden" value="%(beginOld)">';
+	tplAddTimerForm += '<input name="endOld" id="endOld" type="hidden" value="%(endOld)">';
 	tplAddTimerForm += 	'<button onclick="sendAddTimer()">Add/Save</button></td></tr></table>';

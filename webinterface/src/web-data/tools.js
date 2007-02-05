@@ -548,7 +548,6 @@ function loadTimerList(){
 }
 
 function incomingTimerList(request){
-	debug(request.readyState);
 	if(request.readyState == 4){
 		var timers = new TimerList(getXML(request)).getArray();
 		debug("have "+timers.length+" timer");
@@ -567,6 +566,7 @@ function incomingTimerList(request){
 				'duration': Math.ceil((timer.getDuration()/60)),
 				'repeated': timer.getRepeated(),
 				'justplay': timer.getJustplay(),
+				'afterevent': timer.getAfterevent(),
 				'color': colorTimerListEntry( timer.getState() )
 			};
 			listerHtml += RND(tplTimerListItem, namespace);
@@ -589,14 +589,12 @@ function colorTimerListEntry (state) {
 	}
 }
 function delTimer(serviceRef,begin,end){
-	debug("deleting timer with serviceRef="+serviceRef+" and start="+begin+"end="+end );
 	debug(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end);
 	doRequest(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end, incomingTimerDelResult);	
 }
 
 function incomingTimerDelResult(request){
 	debug("onTimerDeleted");
-	debug(request.readyState);
 	if(request.readyState == 4){
 		var delresult = new TimerAddResult(getXML(request));
 		debug("Lade liste");
@@ -663,7 +661,6 @@ function sendRemoteControlRequest(command){
 	doRequest(url_remotecontrol+'?command='+command, incomingRemoteControlResult);
 }
 function incomingRemoteControlResult(request){
-	debug(request.readyState);
 	if(request.readyState == 4){
 		var b = getXML(request).getElementsByTagName("e2remotecontrol");
 		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
@@ -674,9 +671,12 @@ function incomingRemoteControlResult(request){
 	}
 }
 var addTimerEditFormObject = new Object();
+addTimerEditFormObject["TVListFilled"] = 0;
+addTimerEditFormObject["RadioListFilled"] = 0;
 addTimerEditFormObject["deleteOldOnSave"] = 0;
 
 function loadTimerFormNow() {
+	debug("loadTimerFormNow 1");
 	var now = new Date();
 	addTimerEditFormObject["syear"] = now.getFullYear();
 	addTimerEditFormObject["smonth"] = now.getMonth() + 1;
@@ -698,7 +698,13 @@ function loadTimerFormNow() {
 	addTimerEditFormObject["description"] = "";
 	addTimerEditFormObject["repeated"] = 0;
 	addTimerEditFormObject["afterEvent"] = "0";
+	addTimerEditFormObject["deleteOldOnSave"] = 0;
 	
+	addTimerEditFormObject["beginOld"] = 0;
+	addTimerEditFormObject["endOld"] = 0;
+	
+	
+	debug("loadTimerFormNow 2");
 	loadTimerFormChannels();
 }
 
@@ -724,41 +730,45 @@ function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description
 	addTimerEditFormObject["name"] = String(name);
 	addTimerEditFormObject["description"] = String(description);
 	addTimerEditFormObject["repeated"] = Number(repeated);
-	addTimerEditFormObject["afterEvent"] = String(afterEvent);
+	addTimerEditFormObject["afterEvent"] = Number(afterEvent);
 
-	addTimerEditFormObject["deleteOldOnSave"] = deleteOldOnSave;
+	addTimerEditFormObject["deleteOldOnSave"] = Number(deleteOldOnSave);
+	addTimerEditFormObject["beginOld"] = Number(begin);
+	addTimerEditFormObject["endOld"] = Number(end);
 	
 	loadTimerFormChannels();
 }
 
 // startin to load for TV
 function loadTimerFormChannels() {
-	if(addTimerEditFormObject["TVListFilled"]) {
-		// do nothing
+	if(addTimerEditFormObject["TVListFilled"] == 1 && addTimerEditFormObject["RadioListFilled"] == 1) {
+		loadTimerForm();
+	} else if(addTimerEditFormObject["TVListFilled"] == 1 && addTimerEditFormObject["RadioListFilled"] == 0) {
+		addTimerListFormatTV();
 	} else {
 		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.tv%22%20ORDER%20BY%20bouquet'
-//		var url = url_fetchchannels+encodeURIComponent(bouqet_tv);
 		doRequest(url_fetchchannels+favorites, addTimerListFormatTV);
 	}
 }
 
 function addTimerListFormatTV(request) {
-	if(request.readyState == 4){
-		var services = new ServiceList(getXML(request)).getArray();
-		debug("addTimerListFormatTV got "+services.length+" Services");
-		var tv = new Object();
-		for ( var i = 0; i < services.length ; i++){
-			var reference = services[i];
-			tv[reference.servicereference] = reference.servicename;
+	if(addTimerEditFormObject["RadioListFilled"] == 0) {
+		if(request.readyState == 4){
+			var services = new ServiceList(getXML(request)).getArray();
+			debug("addTimerListFormatTV got "+services.length+" Services");
+			var tv = new Object();
+			for ( var i = 0; i < services.length ; i++){
+				var reference = services[i];
+				tv[reference.servicereference] = reference.servicename;
+			}
+			addTimerEditFormObject["TVListFilled"] = 1;
+			addTimerEditFormObject["TVList"] = tv;
 		}
-		addTimerEditFormObject["TVListFilled"] = true;
-		addTimerEditFormObject["TVList"] = tv;
 	}
-	if(addTimerEditFormObject["RadioListFilled"]) {
-		// do nothing
+	if(addTimerEditFormObject["RadioListFilled"] == 1) {
+		loadTimerForm()
 	} else {
 		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.radio%22%20ORDER%20BY%20bouquet';
-//		var url = url_fetchchannels+encodeURIComponent(bouqet_radio);
 		doRequest(url_fetchchannels+favorites, addTimerListFormatRadio);
 	}
 }
@@ -771,14 +781,14 @@ function addTimerListFormatRadio(request) {
 			var reference = services[i];
 			radio[reference.servicereference] = reference.servicename;
 		}
-		addTimerEditFormObject["RadioListFilled"] = true;
+		addTimerEditFormObject["RadioListFilled"] = 1;
 		addTimerEditFormObject["RadioList"] = radio;
 	}
 	loadTimerForm();
 }
 
 function loadTimerForm(){
-//action,syear,smonth,sday,shour,smin,eyear,emonth,eday,ehour,emin,repeated,channel,name,description,afterEvent	
+
 	var Action = new Object();
 	Action["record"] = "Record";
 	Action["zap"] = "Zap";
@@ -849,12 +859,24 @@ function loadTimerForm(){
 				'name': addTimerEditFormObject["name"],
 				'description': addTimerEditFormObject["description"],
 				'repeated': addTimerFormCreateOptionListRepeated(Repeated, addTimerEditFormObject["repeated"]),
+				'deleteOldOnSave': addTimerEditFormObject["deleteOldOnSave"],
+				'channelOld': addTimerEditFormObject["channel"],
+				'beginOld': addTimerEditFormObject["beginOld"],
+				'endOld': addTimerEditFormObject["endOld"],
 				'afterEvent': addTimerFormCreateOptionList(AfterEvent, addTimerEditFormObject["afterEvent"])
 		};
-		//.concat(addTimerRadioList)
 	var listerHtml = RND(tplAddTimerForm, namespace);
 	document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
-//	setBodyMainContent('BodyContentChannellist');
+
+	// Empty some stuff, but keep others to have the performance
+	var tmp1 = addTimerEditFormObject["RadioList"];
+	var tmp2 = addTimerEditFormObject["TVList"];
+	addTimerEditFormObject = new Object();
+	addTimerEditFormObject["deleteOldOnSave"] = 0;
+	addTimerEditFormObject["RadioList"] = tmp1;
+	addTimerEditFormObject["TVList"] = tmp2;
+	addTimerEditFormObject["TVListFilled"] = 1;
+	addTimerEditFormObject["RadioListFilled"] = 1;
 }
 
 function addTimerFormCreateOptions(start,end,number) {
@@ -874,12 +896,10 @@ function addTimerFormCreateOptionList(object,selected) {
 	for(var element in object) {
 		var txt = String(object[element]);
 		if(element == selected) {
-//			var txt = (len( String(object[element]) ) == 1) ? "0"+String(object[element]) : String(object[element]);
 			html += '<option value="'+ element +'" selected>'+ txt + '</option>';
 		} else if(element == "extend") {
 		// do nothing.
 		}else {
-//			var txt = (len( String(object[element]) ) == 1) ? "0"+String(object[element]) : String(object[element]);
 			html += '<option value="'+ element +'">'+ txt + '</option>';
 		}
 	}
@@ -982,14 +1002,12 @@ function sendAddTimer() {
 	if($('action').value == "zap") {
 		justplay = 1;
 	}
-	//serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
-//	doRequest(url_timeradd+"?serviceref="+$('channel').value+"&begin="+begin+"&end="+end+"&name="+$('name').value+"&description="+$('description').value+"&afterevent="+$('after_event').value+"&eit=0&disabled=0&justplay="+justplay, incomingTimerAddResult);
 	doRequest(url_timeradd+"?"+"serviceref="+$('channel').value+"&begin="+begin
 	 +"&end="+end+"&name="+$('name').value+"&description="+$('descr').value
 	 +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
 	 +"&justplay="+justplay, incomingTimerAddResult);
 	
-	if(addTimerEditFormObject["deleteOldOnSave"] == 1) {
-		delTimer($('channel').value,begin,end);
+	if(Number($('deleteOldOnSave').value) == 1) {
+		delTimer($('channelOld').value,$('beginOld').value,$('endOld').value);
 	}
 }

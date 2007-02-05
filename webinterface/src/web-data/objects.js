@@ -435,7 +435,7 @@ function Timer(xml){
 	this.getAfterevent = function(){
 		return this.afterevent;
 	}	
-	this.getAfterevent = function(){
+	this.getLogentries = function(){
 		return this.logentries;
 	}	
 	this.getFilename = function(){
