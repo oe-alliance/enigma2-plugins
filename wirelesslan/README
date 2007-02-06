@@ -1,0 +1,30 @@
+To Use this Tools "pythonwifi" needs to be present on your dreambox!
+You can get pythonwifi as a tar Archive from 
+http://www.reichholf.net/files/dreambox/7025/libs/pythonwifi.tar
+(originally from http://www.romanofski.de/downloads/pywifi).
+
+Simply copy the contained folder to /usr/lib/python2.4/site-packages 
+and install the plugin with -force-depends.
+
+I will provide an ipkg for pythonwifi soon (or include it into an provided ipkg of the plugin).
+You will also need to build and install wpa-supplicant and wireless-tools, 
+which both come with Openembedded and work fine by default.
+
+Besides this Tools installed the Plugin requires the wlan-interface 
+to be up and running for doing a scan.
+This means the Driver has to be loaded correctly and an ifup wlan0
+(or whatever the interface has been named) has to be done.
+
+Later on there will be some start-scripts or something like that
+created the plugin doing at least the ifup for you, but for no you 
+have to do it manually!
+
+
+Wireless Device-Drivers:
+
+Please do NOT even think about asking me for drivers for your wireless device!
+
+I've tested and developed this tool on a zd1211 based wireless usb stick 
+and it worked quite fine for me (even with wpa).
+You can find the zd1211 and zd1211b drivers in Openembedded 
+(for the b version you need to modify the makefile-patch).

@@ -6,9 +6,8 @@ from Components.HTMLComponent import HTMLComponent
 from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigSubsection, ConfigMAC, ConfigEnableDisable, ConfigText, ConfigSelection
 
 from pythonwifi import iwlibs
-from socket import *
 
-import sys, signal, time, string, os
+import os
 
 
 list = []
