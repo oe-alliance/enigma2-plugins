@@ -1,4 +1,4 @@
-var DBG = false;
+var DBG = true;
 
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
@@ -16,6 +16,8 @@ var url_updates= "/web/updates.html";
 
 var url_movielist= "/web/movielist";
 
+var url_settings= "/web/settings";
+
 var url_timerlist= "/web/timerlist";
 var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
@@ -32,6 +34,10 @@ var bouqet_provider_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (ty
 var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
 
 var windowStyle = "alphacube";
+
+// Get Settings
+var settings;
+getSettings();
 
 // UpdateStreamReader
 var UpdateStreamReaderNextReadPos = 0;
@@ -421,6 +427,7 @@ function initChannelList(){
 	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_radio);
 	doRequest(url, incomingProviderRadioBouquetList);
 }
+
 var servicereftoloadepgnow="";
 function loadBouquet(servicereference){ 
 	debug("loading bouquet with "+servicereference);
@@ -878,6 +885,8 @@ function loadTimerForm(){
 	addTimerEditFormObject["TVList"] = tmp2;
 	addTimerEditFormObject["TVListFilled"] = 1;
 	addTimerEditFormObject["RadioListFilled"] = 1;
+	
+	getSettings();
 }
 
 function addTimerFormCreateOptions(start,end,number) {
@@ -1002,4 +1011,19 @@ function sendAddTimer() {
 	if(Number($('deleteOldOnSave').value) == 1) {
 		delTimer($('channelOld').value,$('beginOld').value,$('endOld').value);
 	}
+}
+
+function getSettings(){
+	doRequest(url_settings, incomingGetSettings);
+}
+
+function incomingGetSettings(request){
+	if(request.readyState == 4){
+		settings = new Settings(getXML(request)).getArray();
+/*		for ( var i = 0; i <settings.length; i++){
+			var setting = settings[i];
+			debug(setting.getSettingValue() +":" + setting.getSettingName());
+		}*/
+		
+	}		
 }

@@ -495,3 +495,46 @@ function TimerAddResult(xml){
 	}
 }
 // END TimerAddResult
+
+//START class Settings
+function Settings(xml){
+	// parsing values from xml-element
+	//debug('init ServiceList'+xml);
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2settings").item(0).getElementsByTagName("e2setting");
+		debug(this.xmlitems);
+	} catch (e) {
+		//debug("Service parsing Error");
+	}
+	this.getArray = function(){
+		var listxy = new Array();
+		for (var i=0;i<this.xmlitems.length;i++){
+			var xv = new Setting(this.xmlitems.item(i));
+			listxy.push(xv);			
+		}
+		return listxy;
+	}
+}
+//END class Settings
+
+//START class Setting
+function Setting(xml){	
+	// parsing values from xml-element
+	//debug('init ServiceReference'+xml);
+	try{
+		this.settingvalue = xml.getElementsByTagName('e2settingvalue').item(0).firstChild.data;
+		this.settingname = xml.getElementsByTagName('e2settingname').item(0).firstChild.data;
+		
+	} catch (e) {
+		//debug("Service parsing Error "+e);
+	}
+	
+	this.getSettingValue = function(){
+		return this.settingvalue;
+	}
+		
+	this.getSettingName = function(){
+		return this.settingname;
+	}	
+}	
+//END class Setting
