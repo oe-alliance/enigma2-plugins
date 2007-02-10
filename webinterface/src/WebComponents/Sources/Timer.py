@@ -5,6 +5,7 @@ from enigma import eServiceCenter
 from Components.Sources.Source import Source
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT,parseEvent
+from Components.config import config
 
 import time, string
 # import sys, traceback
@@ -241,7 +242,7 @@ class Timer( Source):
         if param['justplay'] is None and param['justplay'] == "True":
             justplay = True
         
-        newtimer = RecordTimerEntry(ServiceReference(param['serviceref']), begin, end, name, description, eit, False, justplay, AFTEREVENT.NONE)
+        newtimer = RecordTimerEntry(ServiceReference(param['serviceref']), (begin - (int(config.recording.margin_before.value)*60)), (end + (int(config.recording.margin_after.value)*60)), name, description, eit, False, justplay, AFTEREVENT.NONE)
         self.recordtimer.record(newtimer)
         return True,"Timer added"    
             
