@@ -73,8 +73,19 @@ class Timer( Source):
         	print "Timer not found"
         
         #self.session.nav.RecordTimer.saveTimer()
+    
     def tvBrowser(self,param):
-        print "addTimerByEventID",param
+        print "tvbrowser",param
+        
+        """ Therefor the URL's for the tvBrowser-Capture-Driver are:
+        
+            http://dreambox/web/tvbrowser? +
+            
+        To add something:
+            &command=add&action=0&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0
+        to delete something:
+            &command=del&action=0&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0
+        """
         
         syear = 0
         if param['syear'] is None:
