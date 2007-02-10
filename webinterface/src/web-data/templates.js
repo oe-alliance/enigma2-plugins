@@ -98,14 +98,28 @@ var tplTimerListHeader  = '<table border="0" cellpadding="0" cellspacing="0" cla
 	tplTimerListHeader += '</tr>\n';
 	tplTimerListHeader += '</thead>\n';
 	tplTimerListHeader += '<tbody class="scrollContent">\n';
+	tplTimerListHeader += '<tr><td><font color="#000011"><b>Channel</b></font></td><td><font color="#000011"><b>Name</b></font></td><td><font color="#000011"><b>Description</b></font></td><td><font color="#000011"><b>Repeated</b></font></td><td><font color="#000011"><b>Time running</b></font></td><td><font color="#000011"><b>Start time</b></font></td><td><font color="#000011"><b>End time</b></font></td><td><font color="#000011"><b>After event</b></font></td><td align="center"><font color="#000011"><b>Options</b></font></td></tr>\n';
 
-var tplTimerListItem  = '<tr>\n';
-	tplTimerListItem += '<td><div style="color: #%(color);" class="sListSName" title="%(description), %(descriptionextended)">%(title) (%(servicename))</div>';
+var tplTimerListItem  = '';
+    tplTimerListItem += '<tr>\n';
+/*	tplTimerListItem += '<td><div style="color: #%(color);" class="sListSName" title="%(description), %(descriptionextended)">%(title) (%(servicename))</div>';
 	tplTimerListItem += '<div class="sListExt" style="color: #%(color);">\n';
 	tplTimerListItem += '%(duration)&nbsp;Min\n';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\');"></a>';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a><br/>';
 	tplTimerListItem += '</div>\n';
+	tplTimerListItem += '</tr>\n';*/
+	// i'm not getting this div stuff. until Reichi gets it nices done, i will insert this :) :
+	tplTimerListItem += '<td><font color="#%(color)">%(servicename)</font></td>\n';
+	tplTimerListItem += '<td><font color="#%(color)">%(title)</font></td>\n';
+	tplTimerListItem += '<td><font color="#%(color)">%(description)</font></td>\n';
+	tplTimerListItem += '<td><font color="#%(color)">%(repeatedReadable)</font></td>\n';
+	tplTimerListItem += '<td><font color="#%(color)">%(duration)</font></td>\n';
+	tplTimerListItem += '<td><font color="#%(color)">%(beginDate)</font></td>\n';
+	tplTimerListItem += '<td><font color="#%(color)">%(endDate)</font></td>\n';
+	tplTimerListItem += '<td><font color="#%(color)">%(aftereventReadable),%(justplayReadable)</font></td>\n';
+	tplTimerListItem += '<td><a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\');"></a>\n';
+	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a></td>\n';
 	tplTimerListItem += '</tr>\n';
 	
 var tplTimerListFooter = "</tbody></table>\n";

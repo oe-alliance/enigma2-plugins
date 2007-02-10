@@ -558,22 +558,33 @@ function incomingTimerList(request){
 	if(request.readyState == 4){
 		var timers = new TimerList(getXML(request)).getArray();
 		debug("have "+timers.length+" timer");
-		listerHtml 	= tplTimerListHeader;		
+		listerHtml 	= tplTimerListHeader;
+		
+		var aftereventReadable = new Array ('Nothing', 'Standby', 'Deepstandby/Shutdown');
+		var justplayReadable = new Array('record', 'zap');
 		for ( var i = 0; i <timers.length; i++){
 			var timer = timers[i];
+			var beginDate = new Date(Number(timer.getTimeBegin())*1000);
+			var endDate = new Date(Number(timer.getTimeEnd())*1000);
+
 			var namespace = { 	
 				'servicereference': timer.getServiceReference(),
 				'servicename': timer.getServiceName() ,
 				'title': timer.getName(), 
 				'description': timer.getDescription(), 
 				'descriptionextended': timer.getDescriptionExtended(), 
-				'begin': timer.getTimeBegin(), 
-				'end': timer.getTimeEnd(), 
+				'begin': timer.getTimeBegin(),
+				'beginDate': beginDate.toLocaleString(),
+				'end': timer.getTimeEnd(),
+				'endDate': endDate.toLocaleString(),
 				'state': timer.getState(),
 				'duration': Math.ceil((timer.getDuration()/60)),
 				'repeated': timer.getRepeated(),
+				'repeatedReadable': repeatedReadable(timer.getRepeated()),
 				'justplay': timer.getJustplay(),
+				'justplayReadable': justplayReadable[Number(timer.getJustplay())],
 				'afterevent': timer.getAfterevent(),
+				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
 				'color': colorTimerListEntry( timer.getState() )
 			};
 			listerHtml += RND(tplTimerListItem, namespace);
@@ -582,6 +593,41 @@ function incomingTimerList(request){
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
 	}
+}
+function repeatedReadable(num) {
+	num = Number(num);
+	
+	if(num == 0) {
+		return "One Time";
+	}
+	
+	var html = "";
+	
+	var Repeated = new Object();
+	Repeated["Mo-Su"] =127;
+	Repeated["Su"] =    64;
+	Repeated["Sa"] =    32;
+	Repeated["Mo-Fr"] = 31;
+	Repeated["Fr"] =    16;
+	Repeated["Th"] =     8;
+	Repeated["We"] =     4;
+	Repeated["Tu"] =     2;
+	Repeated["Mo"] =     1;
+	
+	for(rep in Repeated) {
+		if(rep.toString() != "extend") {
+			var check = Number(Repeated[rep]);
+			if(check <= num) {
+				num -= check;
+				if(html == "") {
+					html += rep.toString();
+				} else {
+					html += "," + rep.toString();
+				}
+			}
+		}
+	}
+	return html;
 }
 
 function colorTimerListEntry (state) {
