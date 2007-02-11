@@ -1044,6 +1044,11 @@ function sendAddTimer() {
 			}
 		}
 	}
+	
+	if(Number($('deleteOldOnSave').value) == 1) {
+		delTimer($('channelOld').value,$('beginOld').value,$('endOld').value);
+	}
+	
 
 	justplay = 0;
 	if($('action').value == "zap") {
@@ -1054,9 +1059,6 @@ function sendAddTimer() {
 	 +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
 	 +"&justplay="+justplay, incomingTimerAddResult);
 	
-	if(Number($('deleteOldOnSave').value) == 1) {
-		delTimer($('channelOld').value,$('beginOld').value,$('endOld').value);
-	}
 }
 
 function getSettings(){
