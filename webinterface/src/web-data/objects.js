@@ -318,7 +318,7 @@ function Timer(xml){
 	try{
 		this.disabled = xml.getElementsByTagName('e2disabled').item(0).firstChild.data;
 	} catch (e) {
-		this.disabled = "N/A";
+		this.disabled = "0";
 	}
 	try{
 		this.timebegin = xml.getElementsByTagName('e2timebegin').item(0).firstChild.data;

@@ -569,11 +569,12 @@ function incomingTimerList(request){
 		
 		var aftereventReadable = new Array ('Nothing', 'Standby', 'Deepstandby/Shutdown');
 		var justplayReadable = new Array('record', 'zap');
+
 		for ( var i = 0; i <timers.length; i++){
 			var timer = timers[i];
 			var beginDate = new Date(Number(timer.getTimeBegin())*1000);
 			var endDate = new Date(Number(timer.getTimeEnd())*1000);
-
+			debug("justplay("+timer.getJustplay()+")");
 			var namespace = { 	
 				'servicereference': timer.getServiceReference(),
 				'servicename': timer.getServiceName() ,
@@ -746,7 +747,7 @@ function loadTimerFormNow() {
 	addTimerEditFormObject["ehour"] = plusTwoHours.getHours();
 	addTimerEditFormObject["emin"] = plusTwoHours.getMinutes();
 		
-	addTimerEditFormObject["record"] = "record";
+	addTimerEditFormObject["justplay"] = "record";
 	addTimerEditFormObject["channel"] = "";
 	addTimerEditFormObject["channelSort"] = "tv";
 	addTimerEditFormObject["name"] = "";
@@ -763,10 +764,9 @@ function loadTimerFormNow() {
 	loadTimerFormChannels();
 }
 
-function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description,afterEvent,deleteOldOnSave) {
-	alert(action+")("+begin+")("+end+")("+repeated+")("+channel+")("+name+")("+description+")("+afterEvent+")("+deleteOldOnSave);
+function loadTimerFormSeconds(justplay,begin,end,repeated,channel,name,description,afterEvent,deleteOldOnSave) {
+
 	var start = new Date(Number(begin)*1000);
-	alert(start);
 	addTimerEditFormObject["syear"] = start.getFullYear();
 	addTimerEditFormObject["smonth"] = start.getMonth() + 1;
 	addTimerEditFormObject["sday"] = start.getDate();
@@ -780,7 +780,7 @@ function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description
 	addTimerEditFormObject["ehour"] = stopp.getHours();
 	addTimerEditFormObject["emin"] = stopp.getMinutes();
 	
-	addTimerEditFormObject["record"] = String(action);
+	addTimerEditFormObject["justplay"] = String(justplay);
 	addTimerEditFormObject["channel"] = decodeURIComponent(String(channel));
 	addTimerEditFormObject["channelSort"] = "";
 	addTimerEditFormObject["name"] = String(name);
@@ -788,7 +788,7 @@ function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description
 	addTimerEditFormObject["repeated"] = Number(repeated);
 	addTimerEditFormObject["afterEvent"] = Number(afterEvent);
 	
-	debug(action+"|"+begin+"|"+end+"|"+repeated+"|"+channel+"|"+name+"|"+description+"|"+afterEvent);
+	debug(justplay+"|"+begin+"|"+end+"|"+repeated+"|"+channel+"|"+name+"|"+description+"|"+afterEvent);
 
 	addTimerEditFormObject["deleteOldOnSave"] = Number(deleteOldOnSave);
 	addTimerEditFormObject["beginOld"] = Number(begin);
@@ -846,8 +846,8 @@ function addTimerListFormatRadio(request) {
 function loadTimerForm(){
 
 	var Action = new Object();
-	Action["record"] = "Record";
-	Action["zap"] = "Zap";
+	Action["0"] = "Record";
+	Action["1"] = "Zap";
 	
 	var Repeated = new Object();
 	Repeated["1"] =  "mo";
@@ -900,7 +900,7 @@ function loadTimerForm(){
 	}
 
 	var namespace = { 	
-				'action': addTimerFormCreateOptionList(Action, addTimerEditFormObject["action"]),
+				'justplay': addTimerFormCreateOptionList(Action, addTimerEditFormObject["justplay"]),
 				'syear': addTimerFormCreateOptions(2007,2010,addTimerEditFormObject["syear"]),
 				'smonth': addTimerFormCreateOptions(1,12,addTimerEditFormObject["smonth"]),
 				'sday': addTimerFormCreateOptions(1,31,addTimerEditFormObject["sday"]),
@@ -967,9 +967,18 @@ function addTimerFormCreateOptionList(object,selected) {
 function addTimerFormChangeTime(which) {
 	var start = new Date( $('syear').value, $('smonth').value, $('sday').value, $('shour').value, $('smin').value, 0);
 	var end = new Date($('eyear').value, $('emonth').value, $('eday').value, $('ehour').value, $('emin').value, 0);
+//	debug("("+start+")(" + end+")");
+
 	if(start.getTime() > end.getTime()) {
 		opponent = (which.substr(0,1) == 's') ? 'e' +  which.substr(1, which.length -1) : 's' +  which.substr(1, which.length -1) ;
 		$(opponent).value = $(which).value;
+	}
+	var all = new Array('year','month','day','hour','min');
+	for(i=0; i < all.length; i++) {
+		if(which.substr(1, which.length -1) == all[i]) {
+			addTimerFormChangeTime(which.substr(0,1) + all[i+1] );
+			break;
+		}
 	}
 }
 function addTimerFormChangeType() {
@@ -1018,11 +1027,10 @@ function addTimerFormCreateOptionListRepeated(Repeated,repeated) {
 	return html + html2;
 }
 function sendAddTimer() {
-//action,begin,end,repeated,channel,name,description,afterEvent
-	var beginD = new Date(Number($('syear').value), Number($('smonth').value), Number($('sday').value), Number($('shour').value), Number($('smin').value));
+	var beginD = new Date(ownLazyNumber($('syear').value), ownLazyNumber($('smonth').value), ownLazyNumber($('sday').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
 	var begin = beginD.getTime()/1000;
 	
-	var endD = new Date(Number($('eyear').value), Number($('emonth').value), Number($('eday').value), Number($('ehour').value), Number($('emin').value));
+	var endD = new Date(ownLazyNumber($('eyear').value), ownLazyNumber($('emonth').value), ownLazyNumber($('eday').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
 	var end = endD.getTime()/1000;
 
 	var repeated = 0;
@@ -1031,10 +1039,10 @@ function sendAddTimer() {
 	} else if($('mf').checked) {
 		repeated = 31;
 		if($('sa').checked) {
-			repeated += Number($('sa').value);
+			repeated += ownLazyNumber($('sa').value);
 		}
 		if($('su').checked) {
-			repeated += Number($('su').value);
+			repeated += ownLazyNumber($('su').value);
 		}
 	} else {
 		var check = new Array('mo', 'tu', 'we', 'th', 'fr');
@@ -1045,19 +1053,16 @@ function sendAddTimer() {
 		}
 	}
 	
-	if(Number($('deleteOldOnSave').value) == 1) {
+	if(ownLazyNumber($('deleteOldOnSave').value) == 1) {
 		delTimer($('channelOld').value,$('beginOld').value,$('endOld').value);
 	}
+	var descriptionClean = ($('descr').value == " ") ? "" : $('descr').value;
+	var nameClean = ($('name').value == " ") ? "" : $('name').value;
 	
-
-	justplay = 0;
-	if($('action').value == "zap") {
-		justplay = 1;
-	}
 	doRequest(url_timeradd+"?"+"serviceref="+$('channel').value+"&begin="+begin
-	 +"&end="+end+"&name="+$('name').value+"&description="+$('descr').value
+	 +"&end="+end+"&name="+nameClean+"&description="+descriptionClean
 	 +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
-	 +"&justplay="+justplay, incomingTimerAddResult);
+	 +"&justplay="+ownLazyNumber($('justplay').value), incomingTimerAddResult);
 	
 }
 
@@ -1074,4 +1079,11 @@ function incomingGetSettings(request){
 		}*/
 		
 	}		
+}
+function ownLazyNumber(num) {
+	if(isNaN(num)){
+		return 0;
+	} else {
+		return Number(num);
+	}
 }

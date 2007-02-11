@@ -83,9 +83,13 @@ class Timer( Source):
             http://dreambox/web/tvbrowser? +
             
         To add something:
-            &command=add&action=0&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0
+            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0
+        
+        to zap for some time:
+            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=1
+        
         to delete something:
-            &command=del&action=0&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0
+            &command=del&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0
         """
         
         syear = 0
@@ -274,12 +278,19 @@ class Timer( Source):
             timer.append(item.eit)
             timer.append(item.name)
             timer.append(item.description)
-            timer.append(item.disabled)
+            if item.disabled is True:
+                timer.append(1)
+            else:
+                timer.append(0)
             timer.append(item.begin)
             timer.append(item.end)
             timer.append(item.end - item.begin)
             timer.append(item.start_prepare)
-            timer.append(item.justplay)
+            if item.justplay is True:
+                timer.append(1)
+            else:
+                timer.append(0)
+
             timer.append(item.afterEvent)
             timer.append(item.log_entries)
             
