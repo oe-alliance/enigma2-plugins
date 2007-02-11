@@ -98,6 +98,21 @@ class StreamingM3U(WebScreen):
 		from Components.config import config
 		self["ref"] = StaticText()
 		self["localip"] = RequestData(request,what=RequestData.HOST)
+		
+class GetPid(WebScreen):
+      def __init__(self, session,request):
+         WebScreen.__init__(self, session,request)
+         from Components.Sources.StaticText import StaticText
+         from enigma import iServiceInformation
+         pids = self.session.nav.getCurrentService()
+         if pids is not None:
+                 pidinfo = pids.info()
+                 VPID = hex(pidinfo.getInfo(iServiceInformation.sVideoPID))
+                 APID = hex(pidinfo.getInfo(iServiceInformation.sAudioPID))
+                 PPID = hex(pidinfo.getInfo(iServiceInformation.sPMTPID))
+         self["pids"] = StaticText("%s,%s,%s"%(PPID.lstrip("0x"),VPID.lstrip("0x"),APID.lstrip("0x")))
+         self["localip"] = RequestData(request,what=RequestData.HOST)
+
 
 # implements the 'render'-call.
 # this will act as a downstream_element, like a renderer.

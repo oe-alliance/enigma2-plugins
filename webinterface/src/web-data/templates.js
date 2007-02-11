@@ -179,18 +179,20 @@ var tplMessageSendForm = ""
 //	tplPasswordSendForm += '<tr><td colspan="2"><button onclick="sendPasswords()">change password for user dreambox</button></td></tr>\n';
 //	tplPasswordSendForm += "</table></form>\n";
 var tplPowerStateSendForm = '';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(1)">Deepstandby Dreambox</button></center></p>';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(2)">Reboot Dreambox</button></center></p>';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(1)">deepstandby Dreambox</button></center></p>';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(2)">reboot Dreambox</button></center></p>';
     tplPowerStateSendForm += '<hr>';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(3)">Reboot Enigma2</button></center></p>';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(4)">Standby Dreambox</button></center></p>';
+    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(3)">restart Enigma2</button></center></p>';
+//Something is not working here, so I will do a quickhack
+//    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(4)">standby Enigma2</button></center></p>';
+	tplPowerStateSendForm += '<p><center><button onclick="sendRemoteControlRequest(116)">toggle standby Enigma2</button></center></p>';
 
 // Template for the RemoteControl Window
 var tplRemoteControlForm = '';
 	tplRemoteControlForm += '<map name="remotecontrol">';
 	tplRemoteControlForm += '<area shape="circle" coords="129, 54, 10" href="#" onclick="sendRemoteControlRequest(116)" alt="Power">';
-	tplRemoteControlForm += '<area shape="circle" coords="72, 95, 15" href="#" alt="Dream message">';
-	tplRemoteControlForm += '<area shape="circle" coords="130, 95, 15" href="remote?cmd=osdshot)" alt="TV Screenshot">';
+//	tplRemoteControlForm += '<area shape="circle" coords="72, 95, 15" href="#" alt="Dream message">';
+//	tplRemoteControlForm += '<area shape="circle" coords="130, 95, 15" href="#" alt="TV Screenshot">';
 	tplRemoteControlForm += '<area shape="circle" coords="63, 123, 10" href="#" onclick="sendRemoteControlRequest(2)" alt="1">';
 	tplRemoteControlForm += '<area shape="circle" coords="109, 123, 10" href="#" onclick="sendRemoteControlRequest(3)" alt="2">';
 	tplRemoteControlForm += '<area shape="circle" coords="153, 123, 10" href="#" onclick="sendRemoteControlRequest(4)" alt="3">';

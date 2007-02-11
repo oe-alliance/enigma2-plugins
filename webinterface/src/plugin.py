@@ -23,7 +23,13 @@ sessions = [ ]
 	define all files in /web to send no  XML-HTTP-Headers here
 	all files not listed here will get an Content-Type: application/xhtml+xml charset: UTF-8
 """
-AppTextHeaderFiles = ['stream.m3u.xml','getpid.xml',] 
+AppTextHeaderFiles = ['stream.m3u.xml',] 
+
+"""
+	define all files in /web to send no  XML-HTTP-Headers here
+	all files not listed here will get an Content-Type: text/html charset: UTF-8
+"""
+NoExplicitHeaderFiles = ['getpid.xml','tvbrowser.xml',] 
  
 """
  set DEBUG to True, if twisted should write logoutput to a file.
@@ -34,6 +40,7 @@ AppTextHeaderFiles = ['stream.m3u.xml','getpid.xml',]
 """
 			
 DEBUG = False
+#DEBUG = True
 DEBUGFILE= "/tmp/twisted.log"
 
 from twisted.cred.portal import Portal
@@ -87,6 +94,8 @@ def startWebserver():
 				webif.renderPage(s, self.path, req, sessions[0])  # login?
 				if self.path.split("/")[-1] in AppTextHeaderFiles:
 					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'text', (('charset', 'UTF-8'),))},stream=s)
+				elif self.path.split("/")[-1] in NoExplicitHeaderFiles:
+					return http.Response(responsecode.OK,stream=s)
 				else:
 					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'xhtml+xml', (('charset', 'UTF-8'),))},stream=s)
 			else:
