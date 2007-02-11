@@ -965,8 +965,8 @@ function addTimerFormCreateOptionList(object,selected) {
 }
 
 function addTimerFormChangeTime(which) {
-	var start = new Date( $('syear').value, $('smonth').value, $('sday').value, $('shour').value, $('smin').value, 0);
-	var end = new Date($('eyear').value, $('emonth').value, $('eday').value, $('ehour').value, $('emin').value, 0);
+	var start = new Date( $('syear').value, ($('smonth').value -1), $('sday').value, $('shour').value, $('smin').value, 0);
+	var end = new Date($('eyear').value, ($('emonth').value -1), $('eday').value, $('ehour').value, $('emin').value, 0);
 //	debug("("+start+")(" + end+")");
 
 	if(start.getTime() > end.getTime()) {
@@ -1027,10 +1027,10 @@ function addTimerFormCreateOptionListRepeated(Repeated,repeated) {
 	return html + html2;
 }
 function sendAddTimer() {
-	var beginD = new Date(ownLazyNumber($('syear').value), ownLazyNumber($('smonth').value), ownLazyNumber($('sday').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
+	var beginD = new Date(ownLazyNumber($('syear').value), (ownLazyNumber($('smonth').value) - 1), ownLazyNumber($('sday').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
 	var begin = beginD.getTime()/1000;
 	
-	var endD = new Date(ownLazyNumber($('eyear').value), ownLazyNumber($('emonth').value), ownLazyNumber($('eday').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
+	var endD = new Date(ownLazyNumber($('eyear').value), (ownLazyNumber($('emonth').value) - 1), ownLazyNumber($('eday').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
 	var end = endD.getTime()/1000;
 
 	var repeated = 0;
