@@ -35,9 +35,14 @@ var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER
 
 var windowStyle = "alphacube";
 
+// TimerEdit variables:
+var addTimerEditFormObject = new Object();
+addTimerEditFormObject["TVListFilled"] = 0;
+addTimerEditFormObject["RadioListFilled"] = 0;
+addTimerEditFormObject["deleteOldOnSave"] = 0;
+
 // Get Settings
 var settings;
-getSettings();
 
 // UpdateStreamReader
 var UpdateStreamReaderNextReadPos = 0;
@@ -426,6 +431,8 @@ function initChannelList(){
 
 	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_radio);
 	doRequest(url, incomingProviderRadioBouquetList);
+	
+	//getSettings();
 }
 
 var servicereftoloadepgnow="";
@@ -723,13 +730,8 @@ function incomingRemoteControlResult(request){
 		document.getElementById('BodyContentChannellist').innerHTML = "<h1>some unknown error</h1>" + tplRemoteControlForm;
 	}
 }
-var addTimerEditFormObject = new Object();
-addTimerEditFormObject["TVListFilled"] = 0;
-addTimerEditFormObject["RadioListFilled"] = 0;
-addTimerEditFormObject["deleteOldOnSave"] = 0;
 
 function loadTimerFormNow() {
-	debug("loadTimerFormNow 1");
 	var now = new Date();
 	addTimerEditFormObject["syear"] = now.getFullYear();
 	addTimerEditFormObject["smonth"] = now.getMonth() + 1;
@@ -762,7 +764,9 @@ function loadTimerFormNow() {
 }
 
 function loadTimerFormSeconds(action,begin,end,repeated,channel,name,description,afterEvent,deleteOldOnSave) {
+	alert(action+")("+begin+")("+end+")("+repeated+")("+channel+")("+name+")("+description+")("+afterEvent+")("+deleteOldOnSave);
 	var start = new Date(Number(begin)*1000);
+	alert(start);
 	addTimerEditFormObject["syear"] = start.getFullYear();
 	addTimerEditFormObject["smonth"] = start.getMonth() + 1;
 	addTimerEditFormObject["sday"] = start.getDate();
@@ -809,7 +813,6 @@ function addTimerListFormatTV(request) {
 	if(addTimerEditFormObject["RadioListFilled"] == 0) {
 		if(request.readyState == 4){
 			var services = new ServiceList(getXML(request)).getArray();
-			debug("addTimerListFormatTV got "+services.length+" Services");
 			var tv = new Object();
 			for ( var i = 0; i < services.length ; i++){
 				var reference = services[i];
@@ -829,7 +832,6 @@ function addTimerListFormatTV(request) {
 function addTimerListFormatRadio(request) {
 	if(request.readyState == 4){
 		var services = new ServiceList(getXML(request)).getArray();
-		debug("addTimerListFormatRadio got "+services.length+" Services");
 		var radio = new Object();
 		for ( var i = 0; i < services.length ; i++){
 			var reference = services[i];
@@ -931,8 +933,6 @@ function loadTimerForm(){
 	addTimerEditFormObject["TVList"] = tmp2;
 	addTimerEditFormObject["TVListFilled"] = 1;
 	addTimerEditFormObject["RadioListFilled"] = 1;
-	
-	getSettings();
 }
 
 function addTimerFormCreateOptions(start,end,number) {
