@@ -23,6 +23,7 @@ var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description
 var url_timerchange= "/web/timerchange"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
 var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
+var url_timertoggleOnOff= "/web/timeronoff"; // plus serviceref,bedin,end
 
 var url_message = "/web/message"; // plus text,type,timeout
 
@@ -570,12 +571,14 @@ function incomingTimerList(request){
 		
 		var aftereventReadable = new Array ('Nothing', 'Standby', 'Deepstandby/Shutdown');
 		var justplayReadable = new Array('record', 'zap');
+		var OnOff = new Array('on', 'off');
 
 		for ( var i = 0; i <timers.length; i++){
 			var timer = timers[i];
 			var beginDate = new Date(Number(timer.getTimeBegin())*1000);
 			var endDate = new Date(Number(timer.getTimeEnd())*1000);
-			debug("justplay("+timer.getJustplay()+")");
+			debug(timer.getDisabled());
+			debug(OnOff[Number(timer.getDisabled())]);
 			var namespace = { 	
 				'servicereference': timer.getServiceReference(),
 				'servicename': timer.getServiceName() ,
@@ -594,6 +597,8 @@ function incomingTimerList(request){
 				'justplayReadable': justplayReadable[Number(timer.getJustplay())],
 				'afterevent': timer.getAfterevent(),
 				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
+				'disabled': timer.getDisabled(),
+				'onOff': OnOff[Number(timer.getDisabled())],
 				'color': colorTimerListEntry( timer.getState() )
 			};
 			listerHtml += RND(tplTimerListItem, namespace);
@@ -1120,6 +1125,20 @@ function incomingGetSettings(request){
 		}*/
 		
 	}		
+}
+function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,description,afterEvent,disabled){
+	disabled = (ownLazyNumber(disabled) == 0) ? 1 : 0;
+	
+	var descriptionClean = (description == " " || description == "N/A") ? "" : description;
+	var nameClean = (name == " " || name == "N/A") ? "" : name;
+
+	doRequest(url_timerchange+"?"+"serviceref="+channel+"&begin="+begin
+	 +"&end="+end+"&name="+nameClean+"&description="+descriptionClean
+	 +"&afterevent="+afterEvent+"&eit=0&disabled="+disabled
+	 +"&justplay="+justplay+"&repeated="+repeated
+	 +"&channelOld="+channel
+	 +"&beginOld="+begin+"&endOld="+end
+	 +"&deleteOldOnSave=1", incomingTimerAddResult);
 }
 function ownLazyNumber(num) {
 	if(isNaN(num)){

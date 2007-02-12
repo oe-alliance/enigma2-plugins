@@ -415,7 +415,7 @@ function Timer(xml){
 		return this.descriptionextended;
 	}	
 	this.getDisabled = function(){
-		return this.tdisabled;
+		return this.disabled;
 	}
 	this.getTimeBegin = function(){
 		return this.timebegin;

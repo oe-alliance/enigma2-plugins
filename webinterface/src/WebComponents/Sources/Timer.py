@@ -339,8 +339,8 @@ class Timer( Source):
             toChange = None
             try:
                 for x in self.recordtimer.timer_list + self.recordtimer.processed_timers:
-                    print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (x.begin, x.end, x.service_ref)
-                    print "beginOld(%s), endOld(%s), channelOld(%s)" % (beginOld, endOld, channelOld)
+                    #print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (x.begin, x.end, x.service_ref)
+                    #print "beginOld(%s), endOld(%s), channelOld(%s)" % (beginOld, endOld, channelOld)
                     if str(x.service_ref) == str(channelOld) and float(x.begin) == beginOld and float(x.end) == endOld:
                         toChange = x
                         toChange.service_ref = ServiceReference(param['serviceref'])
@@ -352,6 +352,10 @@ class Timer( Source):
                         toChange.justplay = justplay
                         toChange.afterEvent = afterevent
                         toChange.repeated = repeated
+                        if disabled is True:
+                            toChange.state = 3
+                        else:
+                            toChange.state = 0
                         print "Timer changed"
                         return True,"Timer changed"
                         break
@@ -392,7 +396,11 @@ class Timer( Source):
             timer.append(item.eit)
             timer.append(item.name)
             timer.append(item.description)
-            timer.append(item.disabled)
+            if item.disabled is True:
+                timer.append("1")
+            else:
+                timer.append("0")
+            #timer.append(item.disabled)
 
             timer.append(item.begin)
             timer.append(item.end)
@@ -405,7 +413,17 @@ class Timer( Source):
                 timer.append(0)
 
             timer.append(item.afterEvent)
-            timer.append(item.log_entries)
+            
+            """
+No passing Logevents, because of error:
+XML-Verarbeitungsfehler: nicht wohlgeformt
+Adresse: http://dreambox/web/timerlist
+Zeile Nr. 374, Spalte 259:        <e2logentries>[(1171275272, 15, 'record time changed, start prepare is now: Mon Feb 12 12:29:40 2007'), (1171279780, 5, 'activating state 1'), (1171279780, 0, "Filename calculated as: '/hdd/movie/20070212 1230 - DISNEY CHANNEL - Quack Pack - Onkel Donald & Die Boys'"), (1171279780, 3, 'prepare ok, writing meta information to /hdd/movie/20070212 1230 - DISNEY CHANNEL - Quack Pack - Onkel Donald & Die Boys'), (1171279780, 6, 'prepare ok, waiting for begin'), (1171279800, 5, 'activating state 2'), (1171279800, 11, 'start recording'), (1171281900, 5, 'activating state 3'), (1171281900, 12, 'stop recording')]</e2logentries>
+------------------------------------------------------------------------------------------------------------
+No clue, what it could be.
+            """
+            #timer.append(item.log_entries)
+            timer.append("")
             
             try:
                 timer.append(item.Filename)

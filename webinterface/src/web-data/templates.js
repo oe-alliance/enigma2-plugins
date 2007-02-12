@@ -119,6 +119,7 @@ var tplTimerListItem  = '';
 	tplTimerListItem += '<td><font color="#%(color)">%(endDate)</font></td>\n';
 	tplTimerListItem += '<td><font color="#%(color)">%(aftereventReadable),%(justplayReadable)</font></td>\n';
 	tplTimerListItem += '<td><a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\');"></a>\n';
+	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/%(onOff).png" title="toggle On/Off" border="0" onclick="sendToggleTimerDisable(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',\'%(disabled)\' );"></a>\n';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a></td>\n';
 	tplTimerListItem += '</tr>\n';
 	
