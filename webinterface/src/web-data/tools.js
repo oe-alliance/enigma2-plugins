@@ -20,6 +20,7 @@ var url_settings= "/web/settings";
 
 var url_timerlist= "/web/timerlist";
 var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
+var url_timerchange= "/web/timerchange"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
 var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
 
@@ -939,7 +940,7 @@ function addTimerFormCreateOptions(start,end,number) {
 	var html = '';
 	for(i = start; i <= end; i++) {
 		var txt = (String(i).length == 1) ? "0" + String(i) : String(i);
-		var selected = 	(i == Number(number)) ? "selected" : "";
+		var selected = 	(i == Number(number)) ? "selected" : " ";
 		var namespace = {
 			'value': i,
 			'txt': txt,
@@ -952,7 +953,7 @@ function addTimerFormCreateOptionList(object,selected) {
 	html = '';
 	for(var element in object) {
 		var txt = String(object[element]);
-		var sel = (element == selected) ? "selected" : "";
+		var sel = (element == selected) ? "selected" : " ";
 		var namespace = {
 			'value': element,
 			'txt': txt,
@@ -1009,19 +1010,21 @@ function addTimerFormCreateOptionListRepeated(Repeated,repeated) {
 		} else {
 			txt = txt.substr(0,1).toUpperCase() + txt.substr(1,1);
 		}
+		var checked = " ";
 		if(num >=  list[i]) {
 			num -= list[i];
-			if(String(Repeated[String(list[i])]) == "mf" || String(Repeated[String(list[i])]) == "ms") {
-				html2 = '<input type="checkbox" id="'+ Repeated[String(list[i])] +'" name="'+ Repeated[String(list[i])] +'" value="'+ list[i] +'" checked>&nbsp;'+ txt +'&nbsp;&nbsp;' + html2;
-			} else {
-				html = '<input type="checkbox" id="'+ Repeated[String(list[i])] +'" name="'+ Repeated[String(list[i])] +'" value="'+ list[i] +'" checked>&nbsp;'+ txt +'&nbsp;&nbsp;' + html;
-			}
+			checked = "checked";
+		}
+		var namespace = {
+			'id': Repeated[String(list[i])],
+			'name': Repeated[String(list[i])],
+			'value': list[i],
+			'txt': txt,
+			'checked': checked };
+		if(String(Repeated[String(list[i])]) == "mf" || String(Repeated[String(list[i])]) == "ms") {
+			html2 = RND(tplAddTimerFormCheckbox, namespace) + html2;
 		} else {
-			if(String(Repeated[String(list[i])]) == "mf" || String(Repeated[String(list[i])]) == "ms") {
-				html2 = '<input type="checkbox" id="'+ Repeated[String(list[i])] +'" name="'+ Repeated[String(list[i])] +'" value="'+ list[i] +'">&nbsp;'+ txt +'&nbsp;&nbsp;' + html2;
-			} else {
-				html = '<input type="checkbox" id="'+ Repeated[String(list[i])] +'" name="'+ Repeated[String(list[i])] +'" value="'+ list[i] +'">&nbsp;'+ txt +'&nbsp;&nbsp;'  + html;
-			}
+			html = RND(tplAddTimerFormCheckbox, namespace) + html;
 		}
 	}
 	return html + html2;
@@ -1053,16 +1056,54 @@ function sendAddTimer() {
 		}
 	}
 	
-	if(ownLazyNumber($('deleteOldOnSave').value) == 1) {
+	/*if(ownLazyNumber($('deleteOldOnSave').value) == 1) {
 		delTimer($('channelOld').value,$('beginOld').value,$('endOld').value);
-	}
-	var descriptionClean = ($('descr').value == " ") ? "" : $('descr').value;
-	var nameClean = ($('name').value == " ") ? "" : $('name').value;
+	}*/
+	var descriptionClean = ($('descr').value == " " || $('descr').value == "N/A") ? "" : $('descr').value;
+	var nameClean = ($('name').value == " " || $('name').value == "N/A") ? "" : $('name').value;
 	
-	doRequest(url_timeradd+"?"+"serviceref="+$('channel').value+"&begin="+begin
+	var repeated = 0;
+	if($('ms').checked) {
+		repeated = ownLazyNumber($('ms').value);
+	} else if($('mf').checked) {
+		repeated = ownLazyNumber($('mf').value);
+		if($('su').checked) {
+			repeated += ownLazyNumber($('su').value);
+		}
+		if($('sa').checked) {
+			repeated += ownLazyNumber($('sa').value);
+		}
+	} else {
+		if($('mo').checked) {
+			repeated += ownLazyNumber($('mo').value);
+		}
+		if($('tu').checked) {
+			repeated += ownLazyNumber($('tu').value);
+		}
+		if($('we').checked) {
+			repeated += ownLazyNumber($('we').value);
+		}
+		if($('th').checked) {
+			repeated += ownLazyNumber($('th').value);
+		}
+		if($('fr').checked) {
+			repeated += ownLazyNumber($('fr').value);
+		}
+		if($('sa').checked) {
+			repeated += ownLazyNumber($('sa').value);
+		}
+		if($('su').checked) {
+			repeated += ownLazyNumber($('su').value);
+		}
+	}
+	debug(repeated);
+	doRequest(url_timerchange+"?"+"serviceref="+$('channel').value+"&begin="+begin
 	 +"&end="+end+"&name="+nameClean+"&description="+descriptionClean
 	 +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
-	 +"&justplay="+ownLazyNumber($('justplay').value), incomingTimerAddResult);
+	 +"&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated
+	 +"&channelOld="+$('channelOld').value
+	 +"&beginOld="+$('beginOld').value+"&endOld="+$('endOld').value
+	 +"&deleteOldOnSave="+ownLazyNumber($('deleteOldOnSave').value), incomingTimerAddResult);
 	
 }
 

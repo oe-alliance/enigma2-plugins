@@ -16,6 +16,7 @@ class Timer( Source):
     ADD = 2
     DEL = 3
     TVBROWSER = 4
+    CHANGE = 5
     
     def __init__(self, session,func = LIST):
         self.func = func
@@ -33,6 +34,8 @@ class Timer( Source):
             self.result = self.tvBrowser(cmd)
         elif self.func is self.DEL:
             self.result = self.delTimer(cmd)
+        elif self.func is self.CHANGE:
+            self.result = self.changeTimer(cmd)
         else:
             self.result = False,"unknown command"
 
@@ -184,7 +187,6 @@ class Timer( Source):
             begin = float(param['begin'])
         else:
             return False,"incorrect time begin"
-            
         
         if param['end'] is None:
             return False,"end missing"
@@ -225,8 +227,14 @@ class Timer( Source):
             afterevent = 2
         else:
             return False,"afterevent incorrect"
+        
+        if param['repeated'] is not None:
+            repeated = int(param['repeated'])
+        else: 
+            repeated = 0
             
         newtimer = RecordTimerEntry(serviceref, begin, end, name, description, 0, disabled, justplay, afterevent)
+        newtimer.repeated = repeated
         self.recordtimer.record(newtimer)
         #self.session.nav.RecordTimer.saveTimer()
         return True,"Timer added"        
@@ -243,14 +251,120 @@ class Timer( Source):
             return False,"Eventid not found"
         (begin, end, name, description, eit) =parseEvent(event)
         justplay = False
-        if param['justplay'] is None and param['justplay'] == "True":
+        if param['justplay'] is None and param['justplay'] == "1":
             justplay = True
         
         newtimer = RecordTimerEntry(ServiceReference(param['serviceref']), (begin - (int(config.recording.margin_before.value)*60)), (end + (int(config.recording.margin_after.value)*60)), name, description, eit, False, justplay, AFTEREVENT.NONE)
         self.recordtimer.record(newtimer)
         return True,"Timer added"    
             
-    def getText(self):    
+    def changeTimer(self,param):
+        
+        print "changeTimer ",param
+        
+        if int(param['deleteOldOnSave']) == 1:
+            
+            if param['serviceref'] is None:
+                return False,"ServiceReference missing"
+            else: 
+                serviceref = ServiceReference(param['serviceref'])
+            
+            if param['begin'] is None:
+                return False,"begin missing"
+            elif time.time() <= float(param['begin']):
+                begin = float(param['begin'])
+            else:
+                return False,"incorrect time begin"
+        
+            if param['end'] is None:
+                return False,"end missing"
+            elif begin < float(param['end']):
+                end = float(param['end'])
+            else:
+                return False,"incorrect time end"
+                
+            if param['name'] is None:
+                return False,"name is missing"
+            else:
+                name = param['name']
+            
+            if param['description'] is not None:
+                description = param['description']
+            else: 
+                description = ""
+
+            if param['repeated'] is not None:
+                repeated = int(param['repeated'])
+            else: 
+                repeated = 0
+
+            if param['disabled'] =="0":
+                disabled = False
+            elif param['disabled'] =="1":
+                disabled = True
+            else:
+                return False,"disabled incorrect"
+        
+            if param['justplay'] == "0":
+                justplay = False
+            elif param['justplay'] == "1":
+                justplay = True
+            else:
+                return False,"justplay incorrect"
+            
+            if param['afterevent'] == "0":
+                afterevent = 0
+            elif param['afterevent'] == "1":
+                afterevent = 1
+            elif param['afterevent'] == "2":
+                afterevent = 2
+            else:
+                return False,"afterevent incorrect"
+        
+            if param['channelOld'] is None:
+                return False,"channelOld missing"
+            else: 
+                channelOld = ServiceReference(param['channelOld'])
+            
+            if param['beginOld'] is None:
+                return False,"beginOld missing"
+            else:
+                beginOld = float(param['beginOld'])
+            
+            if param['endOld'] is None:
+                return False,"endOld missing"
+            else:
+                endOld = float(param['endOld'])
+                
+            toChange = None
+            try:
+                for x in self.recordtimer.timer_list + self.recordtimer.processed_timers:
+                    print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (x.begin, x.end, x.service_ref)
+                    print "beginOld(%s), endOld(%s), channelOld(%s)" % (beginOld, endOld, channelOld)
+                    if str(x.service_ref) == str(channelOld) and float(x.begin) == beginOld and float(x.end) == endOld:
+                        toChange = x
+                        toChange.service_ref = ServiceReference(param['serviceref'])
+                        toChange.begin = begin
+                        toChange.end = end
+                        toChange.name = name
+                        toChange.description = description
+                        toChange.disabled = disabled
+                        toChange.justplay = justplay
+                        toChange.afterEvent = afterevent
+                        toChange.repeated = repeated
+                        print "Timer changed"
+                        return True,"Timer changed"
+                        break
+            except:
+                return False,"error searching for old Timer"
+            
+            if toChange is None:
+                return False,"Timer not found"
+                print "Timer not found"
+        else:
+            return self.addTimer(param)
+            
+    def getText(self):
         (result,text) = self.result
         xml = "<?xml version=\"1.0\"?>\n"
         xml  += "<e2timeraddresult>\n"
@@ -278,14 +392,13 @@ class Timer( Source):
             timer.append(item.eit)
             timer.append(item.name)
             timer.append(item.description)
-            if item.disabled is True:
-                timer.append(1)
-            else:
-                timer.append(0)
+            timer.append(item.disabled)
+
             timer.append(item.begin)
             timer.append(item.end)
             timer.append(item.end - item.begin)
             timer.append(item.start_prepare)
+            
             if item.justplay is True:
                 timer.append(1)
             else:

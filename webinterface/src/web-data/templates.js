@@ -275,3 +275,8 @@ var tplAddTimerForm = '';
 
 var tplAddTimerFormOptions = '';
 	tplAddTimerFormOptions += '<option value="%(value)" %(selected)>%(txt)</option>';
+	
+var tplAddTimerFormCheckbox = '';
+	tplAddTimerFormCheckbox += '<input type="checkbox" id="%(id)" name="%(name)" value="%(value)" %(checked)>&nbsp;%(txt)&nbsp;&nbsp;';
+
+//	<input type="checkbox" id="'+ Repeated[String(list[i])] +'" name="'+ Repeated[String(list[i])] +'" value="'+ list[i] +'" checked>&nbsp;'+ txt +'&nbsp;&nbsp;' + html2;
