@@ -86,13 +86,13 @@ class Timer( Source):
             http://dreambox/web/tvbrowser? +
             
         To add something:
-            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0
+            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
         
         to zap for some time:
-            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=1
+            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=1&repeated=0
         
         to delete something:
-            &command=del&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0
+            &command=del&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
         """
         
         syear = 0
