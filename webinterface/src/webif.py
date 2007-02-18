@@ -24,6 +24,7 @@ from WebComponents.Sources.Message import Message
 from WebComponents.Sources.PowerState import PowerState
 from WebComponents.Sources.RemoteControl import RemoteControl
 from WebComponents.Sources.Settings import Settings
+from WebComponents.Sources.SubServices import SubServices
 
 from WebComponents.Sources.RequestData import RequestData
 from Components.Sources.FrontendStatus import FrontendStatus
@@ -60,6 +61,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["ServiceList"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
 		self["ServiceListBrowse"] = ServiceList(fav, command_func = self.browseTo, validate_commands=False)
+		self["SubServices"] = SubServices(session)
 		self["Volume"] = Volume(session)
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
 		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
@@ -183,6 +185,13 @@ class TextToHTML(Converter):
 
 	def getHTML(self, id):
 		return self.source.text # encode & etc. here!
+
+class ReturnEmptyXML(Converter):
+	def __init__(self, arg):
+		Converter.__init__(self, arg)
+		
+	def getHTML(self, id):
+		return "<rooElement></rooElement>"
 
 # a null-output. Useful if you only want to issue a command.
 class Null(Converter):
