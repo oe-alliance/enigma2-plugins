@@ -191,7 +191,7 @@ class ReturnEmptyXML(Converter):
 		Converter.__init__(self, arg)
 		
 	def getHTML(self, id):
-		return "<rooElement></rooElement>"
+		return "<rootElement></rootElement>"
 
 # a null-output. Useful if you only want to issue a command.
 class Null(Converter):
