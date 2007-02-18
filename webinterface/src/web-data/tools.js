@@ -1,4 +1,4 @@
-var DBG = false;
+var DBG = true;
 
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
@@ -50,6 +50,7 @@ var settings;
 // UpdateStreamReader
 var UpdateStreamReaderNextReadPos = 0;
 var UpdateStreamReaderPollTimer;
+var UpdateStreamReaderPollTimerCounter = 0;
 UpdateStreamReaderRequest = null;
 function UpdateStreamReaderStart(){
 	var ua = navigator.userAgent;
@@ -69,11 +70,24 @@ function UpdateStreamReaderStart(){
 		UpdateStreamReaderRequest.onerror = UpdateStreamReaderOnError;
 		UpdateStreamReaderRequest.open("GET", url_updates, true);
  		UpdateStreamReaderRequest.send(null);
-		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 500);
+		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 1000);
 	}
 }
   
 function UpdateStreamReaderLatestResponse() {
+// Quickhack jjbig start
+// Its not great, but the best I could come up with to solve the 
+// problem with the memory leak
+	UpdateStreamReaderPollTimerCounter++;
+	if(UpdateStreamReaderPollTimerCounter > 20) {
+		clearInterval(UpdateStreamReaderPollTimer);
+		UpdateStreamReaderRequest.abort();
+		UpdateStreamReaderRequest = null;
+		UpdateStreamReaderPollTimerCounter = 0;
+		UpdateStreamReaderStart();
+		return;
+	}
+// Quickhack jjbig end
 	var allMessages = UpdateStreamReaderRequest.responseText;
 	do {
 		var unprocessed = allMessages.substring(UpdateStreamReaderNextReadPos);
@@ -96,6 +110,8 @@ function UpdateStreamReaderLatestResponse() {
 		}
 		if(UpdateStreamReaderNextReadPos > 65000){
 			UpdateStreamReaderRequest.abort();
+			UpdateStreamReaderRequest = null;
+			UpdateStreamReaderPollTimerCounter = 0;
 			UpdateStreamReaderStart();
 			messageXMLEndIndex = -1;
 		}
@@ -246,7 +262,6 @@ function getXML(request){
 function zap(servicereference){
 	var url = "/web/zap?ZapTo=" + servicereference;
 	new Ajax.Request( url, { method: 'get', requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'] });
-	// Now check wether there are any SubServices
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
