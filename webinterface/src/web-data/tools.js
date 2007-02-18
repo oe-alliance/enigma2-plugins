@@ -1,4 +1,4 @@
-var DBG = true;
+var DBG = false;
 
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
