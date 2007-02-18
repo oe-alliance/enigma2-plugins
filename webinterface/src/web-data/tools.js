@@ -11,6 +11,7 @@ var url_epgsearch = "/web/epgsearch?search="; // plus serviceRev
 var url_epgnow = "/web/epgnow?bref="; // plus bouqetRev
 
 var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded serviceref
+var url_subservices = "/web/subservices"; // subservices for current service
 
 var url_updates= "/web/updates.html";
 
@@ -244,10 +245,8 @@ function getXML(request){
 
 function zap(servicereference){
 	var url = "/web/zap?ZapTo=" + servicereference;
-	new Ajax.Request( url,
-		{
-			method: 'get' 				
-		});
+	new Ajax.Request( url, { method: 'get', requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'] });
+	// Now check wether there are any SubServices
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -500,7 +499,7 @@ function incomingChannellist(request){
 			var reference = services[i];
 			var namespace = { 	
 				'servicereference': reference.getServiceReference(),
-				'servicename': reference.getServiceName() 
+				'servicename': reference.getServiceName()
 			};
 			listerHtml += RND(tplServiceListItem, namespace);
 		}		
@@ -1145,5 +1144,43 @@ function ownLazyNumber(num) {
 		return 0;
 	} else {
 		return Number(num);
+	}
+}
+
+var subServicesInsertedList = new Object();
+
+function getSubServices(servicereference) {
+		doRequest(url_subservices,incomingSubServiceRequest);
+}
+function incomingSubServiceRequest(request){
+	if(request.readyState == 4){
+		var services = new ServiceList(getXML(request)).getArray();
+		listerHtml 	= '';		
+		debug("got "+services.length+" Services");
+		if(services.length > 1) {
+
+			first = services[0];
+
+			if(typeof(subServicesInsertedList[String(first.getServiceReference())]) != "undefined") {
+				for ( var i = 1; i < subServicesInsertedList[String(first.getServiceReference())].length ; i++){
+					var reference = subServicesInsertedList[String(first.getServiceReference())][i];
+					document.getElementById(reference.getServiceReference()+'extend').innerHTML = "";
+				}
+				debug("getSubServices deleted old entries");
+			}
+
+			debug("getSubServices creating html");
+			for ( var i = 0; i < services.length ; i++){
+				var reference = services[i];
+				var namespace = { 	
+					'servicereference': reference.getServiceReference(),
+					'servicename': reference.getServiceName()
+				};
+				listerHtml += RND(tplServiceListItem, namespace);
+			}
+
+			document.getElementById(first.getServiceReference()+'extend').innerHTML = listerHtml;
+			subServicesInsertedList[String(first.getServiceReference())] = services;
+		}
 	}
 }

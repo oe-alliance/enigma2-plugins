@@ -138,7 +138,6 @@ function ServiceReference(xml){
 	try{
 		this.servicereference = xml.getElementsByTagName('e2servicereference').item(0).firstChild.data;
 		this.servicename = xml.getElementsByTagName('e2servicename').item(0).firstChild.data;
-		
 	} catch (e) {
 		//debug("Service parsing Error "+e);
 	}
@@ -152,7 +151,6 @@ function ServiceReference(xml){
 	}	
 }	
 //END class Service
-
 
 //START class ServiceList
 function ServiceList(xml){
@@ -173,7 +171,6 @@ function ServiceList(xml){
 	}
 }
 //END class ServiceList
-
 
 //START class MovieList
 function MovieList(xml){
