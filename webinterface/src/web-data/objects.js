@@ -148,7 +148,14 @@ function ServiceReference(xml){
 		
 	this.getServiceName = function(){
 		return this.servicename.replace('&quot;', '"');
-	}	
+	}
+	this.setServiceReference = function(toInsert){
+		this.servicereference = toInsert;
+	}
+		
+	this.setServiceName = function(toInsert){
+		this.servicename = toInsert.replace('&quot;', '"');
+	}
 }	
 //END class Service
 

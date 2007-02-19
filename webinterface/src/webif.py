@@ -392,7 +392,11 @@ def renderPage(stream, path, req, session):
 		from twisted.internet import reactor
 		s.write("\n");
 		reactor.callLater(3, ping, s)
-
+	
+	# A few test from jjbig:
+	#stream, path, req, session
+	print "renderPage stream(%s) path(%s) req(%s) session(%s)" % (stream,path,req,session)
+	
 	# if we met a "StreamingElement", there is at least one
 	# element which wants to output data more than once,
 	# i.e. on host-originated changes.

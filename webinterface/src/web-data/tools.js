@@ -196,6 +196,22 @@ function showhide(id){
 function set(what, value){
 	//debug(what+"-"+value);
 	element = parent.document.getElementById(what);
+	if(value.length > 550) {
+		value = value.substr(0,550) + "[...]";
+	}
+	if (element){
+		element.innerHTML = value;
+	}
+	if(navigator.userAgent.indexOf("MSIE") >=0) {
+		elementscript= $('UpdateStreamReaderIEFixIFrame').document.getElementById('scriptzone');
+		if(elementscript){
+			elementscript.innerHTML = ""; // deleting set() from page, to keep the page short and to save memory			
+		}
+	}
+}
+function setComplete(what, value){
+	//debug(what+"-"+value);
+	element = parent.document.getElementById(what);
 	if (element){
 		element.innerHTML = value;
 	}
@@ -298,7 +314,7 @@ function incomingEPGrequest(request){
 				try{
 					var item = EPGItems[i];				
 					//Create JSON Object for Template
-					var namespace = { 	
+					var namespace = {	
 							'date': item.getTimeDay(), 
 							'eventid': item.getEventId(), 
 							'servicereference': item.getServiceReference(), 
@@ -309,7 +325,9 @@ function incomingEPGrequest(request){
 							'duration': Math.ceil(item.getDuration()/60000), 
 							'description': item.getDescription(), 
 							'endtime': item.getTimeEndString(), 
-							'extdescription': item.getDescriptionExtended()
+							'extdescription': item.getDescriptionExtended(),
+							'number': String(i),
+							'extdescriptionSmall': extdescriptionSmall(item.getDescriptionExtended(),String(i))
 						};
 					//Fill template with data and add id to our result
 					html += RND(tplEPGListItem, namespace);
@@ -322,7 +340,19 @@ function incomingEPGrequest(request){
 		}
 	}
 }
-	
+function extdescriptionSmall(txt,num) {
+	if(txt.length > 410) {
+		var shortTxt = txt.substr(0,410);
+		txt = txt.replace(/\'\'/g, '&quot;');
+		txt = txt.replace(/\\/g, '\\\\');
+		txt = txt.replace(/\'/g, '\\\'');
+		txt = txt.replace(/\"/g, '&quot;');
+		var smallNamespace = { 'txt':txt,'number':num, 'shortTxt':shortTxt};
+		return RND(tplEPGListItemExtend, smallNamespace);
+	} else {
+		return txt;
+	}
+}	
 
 /////////////////////////
 
@@ -452,10 +482,16 @@ function initChannelList(){
 }
 
 var servicereftoloadepgnow="";
+var loadedChannellist = new Object();
 function loadBouquet(servicereference){ 
 	debug("loading bouquet with "+servicereference);
 	servicereftoloadepgnow = servicereference;
-	doRequest(url_fetchchannels+servicereference, incomingChannellist);
+	debug("loadBouquet " + typeof(loadedChannellist[servicereftoloadepgnow]));
+	if(typeof(loadedChannellist[servicereftoloadepgnow]) == "undefined") {
+		doRequest(url_fetchchannels+servicereference, incomingChannellist);
+	} else {
+		incomingChannellist();
+	}
 }
 
 function incomingTVBouquetList(request){
@@ -506,10 +542,17 @@ function renderBouquetTable(bouquet,templateHeader,templateItem,templateFooter){
 }	
 
 function incomingChannellist(request){
-	if(request.readyState == 4){
-		var services = new ServiceList(getXML(request)).getArray();
-		listerHtml 	= tplServiceListHeader;		
+	var services = null;
+	if(typeof(loadedChannellist[servicereftoloadepgnow]) != "undefined"){
+		services = loadedChannellist[servicereftoloadepgnow];
+	} else if(request.readyState == 4) {
+		services = new ServiceList(getXML(request)).getArray();
+		loadedChannellist[servicereftoloadepgnow] = services;
 		debug("got "+services.length+" Services");
+	}
+	if(services != null) {
+		var smallNamespace = {'mainServiceRef': servicereftoloadepgnow };
+		listerHtml = RND(tplServiceListHeader, smallNamespace);
 		for ( var i = 0; i < services.length ; i++){
 			var reference = services[i];
 			var namespace = { 	
@@ -522,6 +565,7 @@ function incomingChannellist(request){
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
 		loadServiceEPGNowNext(servicereftoloadepgnow);
+		debug("incomingChannellist " + typeof(loadedChannellist[servicereftoloadepgnow]));
 	}
 }
 // Movies
@@ -1171,20 +1215,30 @@ function incomingSubServiceRequest(request){
 	if(request.readyState == 4){
 		var services = new ServiceList(getXML(request)).getArray();
 		listerHtml 	= '';		
-		debug("got "+services.length+" Services");
+		debug("got "+services.length+" SubServices");
 		if(services.length > 1) {
 
 			first = services[0];
-
+			var mainChannellist = loadedChannellist[String($('mainServiceRef').value)];
+			
+			var oldEntryPosition = -1;
+			for(i = 0; i < mainChannellist.length; i++) {
+				var service = mainChannellist[i];
+				if(String(service.getServiceReference()) == String(first.getServiceReference())) {
+					oldEntryPosition = i + 1;
+					break;
+				}
+			}
 			if(typeof(subServicesInsertedList[String(first.getServiceReference())]) != "undefined") {
 				for ( var i = 1; i < subServicesInsertedList[String(first.getServiceReference())].length ; i++){
 					var reference = subServicesInsertedList[String(first.getServiceReference())][i];
 					document.getElementById(reference.getServiceReference()+'extend').innerHTML = "";
 				}
-				debug("getSubServices deleted old entries");
+				for(i = oldEntryPosition; i < oldEntryPosition + subServicesInsertedList[String(first.getServiceReference())].length; i++) {
+					mainChannellist.splice(i);
+				}
 			}
 
-			debug("getSubServices creating html");
 			for ( var i = 0; i < services.length ; i++){
 				var reference = services[i];
 				var namespace = { 	
@@ -1192,10 +1246,33 @@ function incomingSubServiceRequest(request){
 					'servicename': reference.getServiceName()
 				};
 				listerHtml += RND(tplServiceListItem, namespace);
+				if(oldEntryPosition > -1) {
+					mainChannellist = mainChannellist.insert(oldEntryPosition++, reference);
+				}
 			}
 
 			document.getElementById(first.getServiceReference()+'extend').innerHTML = listerHtml;
 			subServicesInsertedList[String(first.getServiceReference())] = services;
+			loadedChannellist[$('mainServiceRef').value] = mainChannellist;
 		}
 	}
+}
+// Array.insert( index, value ) - Insert value at index, without overwriting existing keys
+Array.prototype.insert = function( j, v ) {
+ if( j>=0 ) {
+  var a = this.slice(), b = a.splice( j );
+  a[j] = v;
+  return a.concat( b );
+ }
+}
+// Array.splice() - Remove or replace several elements and return any deleted elements
+if( typeof Array.prototype.splice==='undefined' ) {
+ Array.prototype.splice = function( a, c ) {
+  var i = 0, e = arguments, d = this.copy(), f = a, l = this.length;
+  if( !c ) { c = l - a; }
+  for( i; i < e.length - 2; i++ ) { this[a + i] = e[i + 2]; }
+  for( a; a < l - c; a++ ) { this[a + e.length - 2] = d[a - c]; }
+  this.length -= c - e.length + 2;
+  return d.slice( f, f + c );
+ };
 }

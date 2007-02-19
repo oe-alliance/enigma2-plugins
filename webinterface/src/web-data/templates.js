@@ -16,7 +16,7 @@ var tplEPGListItem  = '<tr style="background-color: #DDDDDD;">';
 	
 	tplEPGListItem += '<tr style="background-color: #DDDDDD;">';
 	tplEPGListItem += '<td valign="top">%(endtime)</td>';
-	tplEPGListItem += '<td colspan="2"rowspan="2">%(extdescription)</td>';
+	tplEPGListItem += '<td colspan="2"rowspan="2" id="extdescription%(number)">%(extdescriptionSmall)</td>';
 	tplEPGListItem += '</tr>';
 	
 	tplEPGListItem +='<tr style="background-color: #DDDDDD;"><td>';
@@ -29,6 +29,8 @@ var tplEPGListItem  = '<tr style="background-color: #DDDDDD;">';
 	tplEPGListItem += '<tr style="background-color: #AAAAAA;">';
 	tplEPGListItem += '<td colspan="3">&nbsp;</td>';
 	tplEPGListItem += '</tr>';
+
+var tplEPGListItemExtend  = '%(shortTxt) ...<a href="#" onclick="setComplete(\'extdescription%(number)\',\'%(txt)\');">more</a>';
 	
 var tplEPGListFooter = "</table>";
 	
@@ -45,6 +47,7 @@ var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 	tplServiceListHeader += '</tr>\n';
 	tplServiceListHeader += '</thead>\n';
 	tplServiceListHeader += '<tbody class="scrollContent">\n';
+	tplServiceListHeader += '<input type="hidden" id="mainServiceRef" name="mainServiceRef" value="%(mainServiceRef)">\n';
 
 var tplServiceListItem  = '<tr id="%(servicereference)extend">\n';
 	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><a id="%(servicereference)" onclick="zap(this.id); getSubServices(this.id);" class="sListSLink">%(servicename)</a></div>';
