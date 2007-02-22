@@ -95,8 +95,8 @@ def startWebserver():
 				webif.renderPage(s, self.path, req, sessions[0])  # login?
 				if self.path.split("/")[-1] in AppTextHeaderFiles:
 					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'text', (('charset', 'UTF-8'),))},stream=s)
-				elif self.path.split("/")[-1] in TextHtmlHeaderFiles:
-					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('text', 'html', (('charset', 'UTF-8'),))},stream=s)
+#				elif self.path.split("/")[-1] in TextHtmlHeaderFiles:
+#					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('text', 'html', (('charset', 'UTF-8'),))},stream=s)
 				elif self.path.split("/")[-1] in NoExplicitHeaderFiles:
 					return http.Response(responsecode.OK,stream=s)
 				else:
