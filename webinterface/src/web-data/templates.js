@@ -50,7 +50,7 @@ var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 	tplServiceListHeader += '<input type="hidden" id="mainServiceRef" name="mainServiceRef" value="%(mainServiceRef)">\n';
 
 var tplServiceListItem  = '<tr id="%(servicereference)extend">\n';
-	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><a id="%(servicereference)" onclick="zap(this.id); getSubServices(this.id);" class="sListSLink">%(servicename)</a></div>';
+	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><a id="%(servicereference)" onclick="zap(this.id);" class="sListSLink">%(servicename)</a></div>';
 	tplServiceListItem += '<div class="sListExt"><a onclick="loadEPGByServiceReference(this.id)" id="%(servicereference)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
 	tplServiceListItem += '<a target="_blank" href="/web/stream.m3u?ref=%(servicereference)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
 	tplServiceListItem += '</tr>\n';

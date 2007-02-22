@@ -276,8 +276,8 @@ function getXML(request){
 }
 
 function zap(servicereference){
-	var url = "/web/zap?ZapTo=" + servicereference;
-	new Ajax.Request( url, { method: 'get', requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'] });
+	new Ajax.Request( "/web/zap?ZapTo=" + servicereference, { method: 'get' });
+	getSubServices(servicereference);
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
