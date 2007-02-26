@@ -21,7 +21,8 @@ var tplEPGListItem  = '<tr style="background-color: #DDDDDD;">';
 	
 	tplEPGListItem +='<tr style="background-color: #DDDDDD;"><td>';
 	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/timer.png" title="add to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'False\');"></a>&nbsp;&nbsp;';
-	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/zap.png" title="add zap to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'True\');"></a><br/>';
+	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/zap.png" title="add zap to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'True\');"></a>&nbsp;&nbsp;';
+	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit and add timer" border="0" onclick="loadTimerFormSeconds(0,\'%(start)\',\'%(end)\',0,\'%(servicereference)\',\'%(title)\',\'%(description)\',\'0\',0);"></a><br/>';
 	tplEPGListItem +='<a target="_blank" href="/web/epgsearch.rss?search=%(title)" ><img src="/webdata/gfx/feed.png" title="RSS-Feed for this Title" border="0"></a><br/>';
 	tplEPGListItem +='<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=%(titleESC)" ><img src="/webdata/gfx/world.png" title="search IMDb" border="0"></a><br/>';
 	tplEPGListItem +='</td></tr>';

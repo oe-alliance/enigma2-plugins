@@ -1,3 +1,4 @@
+
 // store all objects here
 
 //START class EPGList
@@ -88,17 +89,18 @@ function EPGEvent(xml){
 		return wday+".&nbsp;"+day+"."+month+"."+year;
 	}
 	this.getTimeBegin = function(){
-		return this.timebegin;
+		return this.getTimeStart().getTime()/1000
 	}
 	this.getTimeEnd = function ()
 	{
 		var date = new Date((parseInt(this.startTime)+parseInt(this.duration))*1000);
-		return date;
+		return date.getTime()/1000
 	}
 	this.getTimeEndString = function ()
 	{
-		var h = this.getTimeEnd().getHours();
-		var m = this.getTimeEnd().getMinutes();
+		var date = new Date((parseInt(this.startTime)+parseInt(this.duration))*1000);
+		var h = date.getHours();
+		var m = date.getMinutes();
 		if (m < 10){
 			m="0"+m;
 		}

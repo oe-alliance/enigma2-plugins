@@ -327,10 +327,13 @@ function incomingEPGrequest(request){
 							'endtime': item.getTimeEndString(), 
 							'extdescription': item.getDescriptionExtended(),
 							'number': String(i),
-							'extdescriptionSmall': extdescriptionSmall(item.getDescriptionExtended(),String(i))
+							'extdescriptionSmall': extdescriptionSmall(item.getDescriptionExtended(),String(i)),
+							'start': item.getTimeBegin(),
+							'end': item.getTimeEnd()
 						};
 					//Fill template with data and add id to our result
 					html += RND(tplEPGListItem, namespace);
+//					alert(RND(tplEPGListItem, namespace));
 				} catch (blubb) { debug("Error rendering: "+blubb);	}
 			}		
 			html += tplEPGListFooter;
@@ -829,7 +832,7 @@ function loadTimerFormNow() {
 }
 
 function loadTimerFormSeconds(justplay,begin,end,repeated,channel,name,description,afterEvent,deleteOldOnSave) {
-
+	debug('justplay:'+justplay+' begin:'+begin+' end:'+end+' repeated:'+repeated+' channel:'+channel+' name:'+name+' description:'+description+' afterEvent:'+afterEvent+' deleteOldOnSave:'+deleteOldOnSave);
 	var start = new Date(Number(begin)*1000);
 	addTimerEditFormObject["syear"] = start.getFullYear();
 	addTimerEditFormObject["smonth"] = start.getMonth() + 1;
