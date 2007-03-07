@@ -1,3 +1,4 @@
+//var DBG = true;
 var DBG = false;
 
 var url_getvolume = '/web/vol?set=state'; 
@@ -24,6 +25,7 @@ var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description
 var url_timerchange= "/web/timerchange"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
 var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
+var url_timerlistwrite="/web/timerlistwrite?write=saveWriteNow";
 var url_timertoggleOnOff= "/web/timeronoff"; // plus serviceref,bedin,end
 
 var url_message = "/web/message"; // plus text,type,timeout
@@ -665,6 +667,7 @@ function incomingTimerList(request){
 			listerHtml += RND(tplTimerListItem, namespace);
 		}
 		listerHtml += tplTimerListFooter;
+		alert(listerHtml);
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
 	}
@@ -816,6 +819,7 @@ function loadTimerFormNow() {
 		
 	addTimerEditFormObject["justplay"] = "record";
 	addTimerEditFormObject["channel"] = "";
+	addTimerEditFormObject["channelName"] = "";
 	addTimerEditFormObject["channelSort"] = "tv";
 	addTimerEditFormObject["name"] = "";
 	addTimerEditFormObject["description"] = "";
@@ -831,7 +835,7 @@ function loadTimerFormNow() {
 	loadTimerFormChannels();
 }
 
-function loadTimerFormSeconds(justplay,begin,end,repeated,channel,name,description,afterEvent,deleteOldOnSave) {
+function loadTimerFormSeconds(justplay,begin,end,repeated,channel,channelName,name,description,afterEvent,deleteOldOnSave) {
 	debug('justplay:'+justplay+' begin:'+begin+' end:'+end+' repeated:'+repeated+' channel:'+channel+' name:'+name+' description:'+description+' afterEvent:'+afterEvent+' deleteOldOnSave:'+deleteOldOnSave);
 	var start = new Date(Number(begin)*1000);
 	addTimerEditFormObject["syear"] = start.getFullYear();
@@ -849,6 +853,7 @@ function loadTimerFormSeconds(justplay,begin,end,repeated,channel,name,descripti
 	
 	addTimerEditFormObject["justplay"] = String(justplay);
 	addTimerEditFormObject["channel"] = decodeURIComponent(String(channel));
+	addTimerEditFormObject["channelName"] = String(channelName);
 	addTimerEditFormObject["channelSort"] = "";
 	addTimerEditFormObject["name"] = String(name);
 	addTimerEditFormObject["description"] = String(description);
@@ -946,15 +951,14 @@ function loadTimerForm(){
 	} else {
 		var found = 0;
 		for( element in addTimerEditFormObject["TVList"]) {
-			if( element = addTimerEditFormObject["channel"]) {
-				// already set
+			if( element == addTimerEditFormObject["channel"]) {
 				found = 1;
 				break;
 			}
 		}
 		if(found == 0) {
 			for( element in addTimerEditFormObject["RadioList"]) {
-				if( element = addTimerEditFormObject["channel"]) {
+				if( element == addTimerEditFormObject["channel"]) {
 					channelObject = addTimerEditFormObject["RadioList"];
 					found = 1;
 					break;
@@ -962,7 +966,7 @@ function loadTimerForm(){
 			}
 		}
 		if(found == 0) {
-			addTimerEditFormObject["TVList"][addTimerEditFormObject["channel"]] = "Unknown selected Channel";
+			addTimerEditFormObject["TVList"][addTimerEditFormObject["channel"]] = addTimerEditFormObject["channelName"];
 		}
 	}
 
@@ -1017,9 +1021,14 @@ function addTimerFormCreateOptions(start,end,number) {
 }
 function addTimerFormCreateOptionList(object,selected) {
 	html = '';
+	var found = 0;
 	for(var element in object) {
 		var txt = String(object[element]);
-		var sel = (element == selected) ? "selected" : " ";
+		var sel = " ";
+		if(element == selected) {
+			found = 1;
+			sel = "selected";
+		}
 		var namespace = {
 			'value': element,
 			'txt': txt,
@@ -1027,6 +1036,12 @@ function addTimerFormCreateOptionList(object,selected) {
 		if(element != "extend") {
 			html += RND(tplAddTimerFormOptions, namespace);
 		}
+	}
+	if(found == 0) {
+		var namespace = {
+			'value': element,
+			'txt': txt,
+			'selected': sel };
 	}
 	return html;
 }
@@ -1278,4 +1293,7 @@ if( typeof Array.prototype.splice==='undefined' ) {
   this.length -= c - e.length + 2;
   return d.slice( f, f + c );
  };
+}
+function writeTimerListNow() {
+	new Ajax.Request( url_timerlistwrite, { method: 'get' });
 }

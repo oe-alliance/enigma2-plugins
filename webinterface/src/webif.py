@@ -71,6 +71,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["TimerAdd"] = Timer(session,func = Timer.ADD)
 		self["TimerDel"] = Timer(session,func = Timer.DEL)
 		self["TimerChange"] = Timer(session,func = Timer.CHANGE)
+		self["TimerListWrite"] = Timer(session,func = Timer.WRITE)
 		self["TVBrowser"] = Timer(session,func = Timer.TVBROWSER)
 		self["MovieList"] = Movie(session)
 		self["Volume"] = Volume(session)
@@ -392,10 +393,6 @@ def renderPage(stream, path, req, session):
 		from twisted.internet import reactor
 		s.write("\n");
 		reactor.callLater(3, ping, s)
-	
-	# A few test from jjbig:
-	#stream, path, req, session
-	print "renderPage stream(%s) path(%s) req(%s) session(%s)" % (stream,path,req,session)
 	
 	# if we met a "StreamingElement", there is at least one
 	# element which wants to output data more than once,

@@ -17,6 +17,7 @@ class Timer( Source):
     DEL = 3
     TVBROWSER = 4
     CHANGE = 5
+    WRITE = 6
     
     def __init__(self, session,func = LIST):
         self.func = func
@@ -36,6 +37,8 @@ class Timer( Source):
             self.result = self.delTimer(cmd)
         elif self.func is self.CHANGE:
             self.result = self.changeTimer(cmd)
+        elif self.func is self.WRITE:
+            self.result = self.writeTimerList(cmd)
         else:
             self.result = False,"unknown command"
 
@@ -367,6 +370,13 @@ class Timer( Source):
                 print "Timer not found"
         else:
             return self.addTimer(param)
+    
+    def writeTimerList(self,param):
+        # is there an easier and better way? :\ 
+        print "saveTimerList",param
+        self.session.nav.RecordTimer.saveTimer()
+        
+        return True,"TimerList was saved "
             
     def getText(self):
         (result,text) = self.result
