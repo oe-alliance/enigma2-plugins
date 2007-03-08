@@ -335,7 +335,6 @@ function incomingEPGrequest(request){
 						};
 					//Fill template with data and add id to our result
 					html += RND(tplEPGListItem, namespace);
-//					alert(RND(tplEPGListItem, namespace));
 				} catch (blubb) { debug("Error rendering: "+blubb);	}
 			}		
 			html += tplEPGListFooter;
@@ -667,7 +666,6 @@ function incomingTimerList(request){
 			listerHtml += RND(tplTimerListItem, namespace);
 		}
 		listerHtml += tplTimerListFooter;
-		alert(listerHtml);
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
 	}
