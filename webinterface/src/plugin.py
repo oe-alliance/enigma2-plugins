@@ -23,8 +23,13 @@ sessions = [ ]
 	define all files in /web to send no  XML-HTTP-Headers here
 	all files not listed here will get an Content-Type: application/xhtml+xml charset: UTF-8
 """
-AppTextHeaderFiles = ['stream.m3u.xml',] 
-TextHtmlHeaderFiles = ['updates.html.xml',] 
+AppTextHeaderFiles = ['stream.m3u.xml','ts.m3u.xml',] 
+
+"""
+ Actualle, the TextHtmlHeaderFiles should contain the updates.html.xml, but the IE then
+ has problems with unicode-characters
+"""
+TextHtmlHeaderFiles = [] 
 
 """
 	define all files in /web to send no  XML-HTTP-Headers here

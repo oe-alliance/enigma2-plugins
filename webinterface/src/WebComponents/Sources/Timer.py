@@ -381,16 +381,16 @@ class Timer( Source):
     def getText(self):
         (result,text) = self.result
         xml = "<?xml version=\"1.0\"?>\n"
-        xml  += "<e2timeraddresult>\n"
+        xml  += "<e2simplexmlresult>\n"
         if result:
             xml += "<e2state>True</e2state>\n"
         else:
             xml += "<e2state>False</e2state>\n"            
-        xml += "<e2statetext>%s</e2statetext>\n"%text
-        xml += "</e2timeraddresult>\n"
+        xml += "<e2statetext>%s</e2statetext>\n" % text
+        xml += "</e2simplexmlresult>\n"
         return xml
     
-    text = property(getText)    
+    text = property(getText)
     
     ## part for listfiller requests
     def command(self):

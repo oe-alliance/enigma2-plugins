@@ -20,6 +20,8 @@ var url_movielist= "/web/movielist";
 
 var url_settings= "/web/settings";
 
+var url_moviefiledelete= "/web/moviefiledelete"; // plus serviceref,eventid
+
 var url_timerlist= "/web/timerlist";
 var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
 var url_timerchange= "/web/timerchange"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
@@ -45,6 +47,8 @@ var addTimerEditFormObject = new Object();
 addTimerEditFormObject["TVListFilled"] = 0;
 addTimerEditFormObject["RadioListFilled"] = 0;
 addTimerEditFormObject["deleteOldOnSave"] = 0;
+
+var doRequestMemory = new Object();
 
 // Get Settings
 var settings;
@@ -72,7 +76,7 @@ function UpdateStreamReaderStart(){
 		UpdateStreamReaderRequest.onerror = UpdateStreamReaderOnError;
 		UpdateStreamReaderRequest.open("GET", url_updates, true);
  		UpdateStreamReaderRequest.send(null);
-		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 1000);
+		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 1500);
 	}
 }
   
@@ -152,8 +156,6 @@ function UpdateStreamReaderOnError(){
 
 function openWindow(title, inner, width, height, id){
 			if(id == null) id = new Date().toUTCString();
-			
-			//debug(id);
 			var win = new Window(id, {className: windowStyle, title: title, width: width, height: height});
 			win.getContent().innerHTML = inner;
 			win.setDestroyOnClose();
@@ -244,19 +246,26 @@ function requestFinished(){
 	requestIndicatorUpdate();
 }
 // end requestindikator
-
-function doRequest(url, readyFunction){
+function doRequest(url, readyFunction, save){
 	requestStarted();
 	//var password = "";
 	//var username = "";
+	//doRequestMemory
 	debug(url);
-	new Ajax.Request(url,
-		{
-			method: 'get',
-			requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
-			onSuccess: readyFunction,
-			onComplete: requestFinished 
-		});
+	if(save == true && typeof(doRequestMemory[url]) != "undefined") {
+		debug("not loading");
+		readyFunction(doRequestMemory[url]);
+	} else {
+		debug("loading");
+		new Ajax.Request(url,
+			{
+				method: 'get',
+				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
+				onSuccess: function (transport, json) { if(save == true) { doRequestMemory[url] = transport; }
+															 readyFunction(transport);},
+				onComplete: requestFinished 
+			});
+	}
 }
 
 function getXML(request){
@@ -300,10 +309,10 @@ function openSignalDialog(){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 function loadEPGBySearchString(string){
-		doRequest(url_epgsearch+string,incomingEPGrequest);
+		doRequest(url_epgsearch+string,incomingEPGrequest, false);
 }
 function loadEPGByServiceReference(servicereference){
-		doRequest(url_epgservice+servicereference,incomingEPGrequest);
+		doRequest(url_epgservice+servicereference,incomingEPGrequest, false);
 }
 function incomingEPGrequest(request){
 	debug("incoming request" +request.readyState);		
@@ -362,7 +371,7 @@ function extdescriptionSmall(txt,num) {
 
 function loadServiceEPGNowNext(servicereference){
 	var url = url_epgnow+servicereference;
-	doRequest(url, incomingServiceEPGNowNext);	
+	doRequest(url, incomingServiceEPGNowNext, false);	
 }
 
 function incomingServiceEPGNowNext(request){
@@ -421,25 +430,20 @@ function initVolumePanel(){
 	document.getElementById('VolumePanel').innerHTML = tplVolumePanel;
 	getVolume(); 
 }
-function getVolume()
-{
-	doRequest(url_getvolume,handleVolumeRequest);
+function getVolume(){
+	doRequest(url_getvolume,handleVolumeRequest, false);
 }
-function volumeSet(newvalue)
-{
-	doRequest(url_setvolume+newvalue,handleVolumeRequest);
+function volumeSet(newvalue){
+	doRequest(url_setvolume+newvalue,handleVolumeRequest, false);
 }
-function volumeUp()
-{
-	doRequest(url_volumeup,handleVolumeRequest);
+function volumeUp(){
+	doRequest(url_volumeup,handleVolumeRequest, false);
 }
-function volumeDown()
-{
-	doRequest(url_volumedown,handleVolumeRequest);	
+function volumeDown(){
+	doRequest(url_volumedown,handleVolumeRequest, false);	
 }
-function volumeMute()
-{
-	doRequest(url_volumemute,handleVolumeRequest);
+function volumeMute(){
+	doRequest(url_volumemute,handleVolumeRequest, false);
 }
 function handleVolumeRequest(request){
 	if (request.readyState == 4) {
@@ -448,8 +452,7 @@ function handleVolumeRequest(request){
 		var mute = b.item(0).getElementsByTagName('e2ismuted').item(0).firstChild.data;
 		debug("volume"+newvalue+";"+mute);
 		
-		for (var i = 1; i <= 10; i++)
-		{
+		for (var i = 1; i <= 10; i++)		{
 			if ( (newvalue/10)>=i){
 				$("volume"+i).src = "/webdata/gfx/led_on.png";
 			}else{
@@ -463,36 +466,34 @@ function handleVolumeRequest(request){
 		}
 	}    	
 }
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//++++ bouquet managing functions                  ++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+var bouqetsMemory = new Object();
+
 function initChannelList(){
 	//debug("init ChannelList");	
 	var url = url_fetchchannels+encodeURIComponent(bouqet_tv);
-	doRequest(url, incomingTVBouquetList);
+	doRequest(url, incomingTVBouquetList, true);
 
 	var url = url_fetchchannels+encodeURIComponent(bouqet_radio);
-	doRequest(url, incomingRadioBouquetList);
+	doRequest(url, incomingRadioBouquetList, true);
 
 	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_tv);
-	doRequest(url, incomingProviderTVBouquetList);
+	doRequest(url, incomingProviderTVBouquetList, true);
 
 	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_radio);
-	doRequest(url, incomingProviderRadioBouquetList);
+	doRequest(url, incomingProviderRadioBouquetList, true);
 	
 	//getSettings();
 }
 
-var servicereftoloadepgnow="";
+var servicereftoloadepgnow = "";
 var loadedChannellist = new Object();
 function loadBouquet(servicereference){ 
 	debug("loading bouquet with "+servicereference);
 	servicereftoloadepgnow = servicereference;
 	debug("loadBouquet " + typeof(loadedChannellist[servicereftoloadepgnow]));
 	if(typeof(loadedChannellist[servicereftoloadepgnow]) == "undefined") {
-		doRequest(url_fetchchannels+servicereference, incomingChannellist);
+		doRequest(url_fetchchannels+servicereference, incomingChannellist, true);
 	} else {
 		incomingChannellist();
 	}
@@ -505,6 +506,7 @@ function incomingTVBouquetList(request){
 		$('accordionMenueBouquetContentTV').innerHTML = renderBouquetTable(list0,tplBouquetListHeader,tplBouquetListItem,tplBouquetListFooter);
 		//loading first entry of TV Favorites as default for ServiceList
 		loadBouquet(list0[0].getServiceReference());
+		bouqetsMemory["bouqet_tv"] = list0;
 	}
 }
 function incomingRadioBouquetList(request){
@@ -590,10 +592,11 @@ function incomingMovieList(request){
 				'servicename': movie.getServiceName() ,
 				'title': movie.getTitle(), 
 				'description': movie.getDescription(), 
-				'descriptionextended': movie.getDescriptionExtended(), 
+				'descriptionextended': movie.getDescriptionExtended(),
+				'filelink': String(movie.getFilename()).substr(17,movie.getFilename().length),
+				'filename': String(movie.getFilename()),
 				'tags': movie.getTags().join(', ') 
 			};
-			debug(movie.getServiceReference());
 			listerHtml += RND(tplMovieListItem, namespace);
 		}
 		listerHtml += tplMovieListFooter;
@@ -602,16 +605,28 @@ function incomingMovieList(request){
 		
 	}		
 }
-
+function delMovieFile(file) {
+		doRequest(url_moviefiledelete+"?filename="+file, incomingDelMovieFileResult, false);	
+}
+function incomingDelMovieFileResult(request) {
+	debug("incomingDelMovieFileResult");
+	if(request.readyState == 4){
+		var delresult = new SimpleXMLResult(getXML(request));
+		if(delresult.getState()){
+			loadMovieList();
+		}else{
+			messageBox("Deletion Error","Reason: "+delresult.getStateText());
+		}
+	}		
+}
 // Timer
 function addTimerByID(serviceRef,eventID,justplay){
-	debug("adding timer by eventid="+eventID+" for "+serviceRef);justplay
-	doRequest(url_timeraddbyeventid+"?serviceref="+serviceRef+"&eventid="+eventID+"&justplay="+justplay, incomingTimerAddResult);	
+	doRequest(url_timeraddbyeventid+"?serviceref="+serviceRef+"&eventid="+eventID+"&justplay="+justplay, incomingTimerAddResult, false);	
 }
 function incomingTimerAddResult(request){
 	debug("onTimerAdded");
 	if(request.readyState == 4){
-		var addresult = new TimerAddResult(getXML(request));
+		var addresult = new SimpleXMLResult(getXML(request));
 		if(addresult.getState()){
 			//timer was add
 			loadTimerList();
@@ -621,8 +636,7 @@ function incomingTimerAddResult(request){
 	}		
 }
 function loadTimerList(){
-	debug("loading timers");
-	doRequest(url_timerlist, incomingTimerList);	
+	doRequest(url_timerlist, incomingTimerList, false);	
 }
 
 function incomingTimerList(request){
@@ -719,13 +733,13 @@ function colorTimerListEntry (state) {
 }
 function delTimer(serviceRef,begin,end){
 	debug(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end);
-	doRequest(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end, incomingTimerDelResult);	
+	doRequest(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end, incomingTimerDelResult, false);
 }
 
 function incomingTimerDelResult(request){
 	debug("onTimerDeleted");
 	if(request.readyState == 4){
-		var delresult = new TimerAddResult(getXML(request));
+		var delresult = new SimpleXMLResult(getXML(request));
 		debug("Lade liste");
 		loadTimerList();
 	}		
@@ -746,7 +760,7 @@ function sendMessage(messagetext,messagetype,messagetimeout){
 		var index = $('MessageSendFormType').selectedIndex;
 		messagetype = $('MessageSendFormType').options[index].value;
 	}	
-	doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult);
+	doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult, false);
 }
 function incomingMessageResult(request){
 
@@ -767,7 +781,7 @@ function showPowerStateSendForm(){
 		document.getElementById('BodyContentChannellist').innerHTML = tplPowerStateSendForm;
 }
 function sendPowerState(newState){
-	doRequest(url_powerstate+'?newstate='+newState, incomingPowerStateResult);
+	doRequest(url_powerstate+'?newstate='+newState, incomingPowerStateResult, false);
 }
 function incomingPowerStateResult(request){
 	debug(request.readyState);
@@ -787,7 +801,7 @@ function showRemoteControllSendForm(){
 		document.getElementById('BodyContentChannellist').innerHTML = tplRemoteControlForm;
 }
 function sendRemoteControlRequest(command){
-	doRequest(url_remotecontrol+'?command='+command, incomingRemoteControlResult);
+	doRequest(url_remotecontrol+'?command='+command, incomingRemoteControlResult, false);
 }
 function incomingRemoteControlResult(request){
 	if(request.readyState == 4){
@@ -875,7 +889,7 @@ function loadTimerFormChannels() {
 		addTimerListFormatTV();
 	} else {
 		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.tv%22%20ORDER%20BY%20bouquet'
-		doRequest(url_fetchchannels+favorites, addTimerListFormatTV);
+		doRequest(url_fetchchannels+favorites, addTimerListFormatTV, false);
 	}
 }
 
@@ -896,7 +910,7 @@ function addTimerListFormatTV(request) {
 		loadTimerForm()
 	} else {
 		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.radio%22%20ORDER%20BY%20bouquet';
-		doRequest(url_fetchchannels+favorites, addTimerListFormatRadio);
+		doRequest(url_fetchchannels+favorites, addTimerListFormatRadio, false);
 	}
 }
 function addTimerListFormatRadio(request) {
@@ -967,7 +981,20 @@ function loadTimerForm(){
 			addTimerEditFormObject["TVList"][addTimerEditFormObject["channel"]] = addTimerEditFormObject["channelName"];
 		}
 	}
-
+	var dashString = "------";
+	channelObject[dashString] = "- Bouquets -";
+	var listeNeu = new ServiceList(getXML(doRequestMemory[url_fetchchannels+encodeURIComponent(bouqet_tv)])).getArray();
+	if(addTimerEditFormObject["channelSort"] == "radio") {
+		debug("weiter");
+		listeNeu = new ServiceList(getXML(doRequestMemory[url_fetchchannels+encodeURIComponent(bouqet_radio)])).getArray();
+	}
+	debug("hier" + listeNeu.length);
+	for (i = 1; i < listeNeu.length; i++) {
+		var element = listeNeu[i];
+		channelObject[String(dashString+i)] = "---";
+		channelObject[element.getServiceReference()] = element.getServiceName();
+	}
+	debug("geklappt" + channelObject.length);
 	var namespace = { 	
 				'justplay': addTimerFormCreateOptionList(Action, addTimerEditFormObject["justplay"]),
 				'syear': addTimerFormCreateOptions(2007,2010,addTimerEditFormObject["syear"]),
@@ -1043,6 +1070,75 @@ function addTimerFormCreateOptionList(object,selected) {
 	}
 	return html;
 }
+
+function timerFormExtendChannellist(bouqet) {
+	var listeTV = new ServiceList(getXML(doRequestMemory[url_fetchchannels+encodeURIComponent(bouqet_tv)])).getArray();
+	var listeRadio = new ServiceList(getXML(doRequestMemory[url_fetchchannels+encodeURIComponent(bouqet_radio)])).getArray();
+	found = 0;
+	for(i = 0; i < listeTV.length; i++) {
+		var element = listeTV[i];
+		if(String(element.getServiceReference()) == bouqet) {
+			found = 1;
+			break;
+		}
+	}
+	if(found == 0) {
+		for(i = 0; i < listeRadio.length; i++) {
+			var element = listeTV[i];
+			if(String(element.getServiceReference()) == bouqet) {
+				found = 1;
+				break;
+			}
+		}
+	}
+	if(found == 1) {
+		servicereftoloadepgnow = bouqet;
+		if(typeof(loadedChannellist[servicereftoloadepgnow]) == "undefined") {	
+			doRequest(url_fetchchannels+servicereftoloadepgnow, incomingTimerFormExtendChannellist, true);
+		} else {
+			incomingTimerFormExtendChannellist();
+		}
+	}
+}
+function incomingTimerFormExtendChannellist(request) {
+	var services = null;
+	if(typeof(loadedChannellist[servicereftoloadepgnow]) != "undefined"){
+		services = loadedChannellist[servicereftoloadepgnow];
+	} else if(request.readyState == 4) {
+		services = new ServiceList(getXML(request)).getArray();
+		loadedChannellist[servicereftoloadepgnow] = services;
+		debug("got "+services.length+" Services");
+	}
+	var attachLater = new Object();
+	if(services != null) {
+		debug("incomingTimerFormExtendChannellist " + services.length);
+		var selected = $('channel').selectedIndex;
+		for(j = selected; j < $('channel').options.length; j++) {
+			if($('channel').options[j].value == servicereftoloadepgnow) {
+				j++;
+				for(var i = 0; i < services.length ; i++) {
+					var reference = services[i];
+					var newEntry = new Option(reference.getServiceName(), reference.getServiceReference(), false, true);
+					if(typeof($('channel').options[j]) != "undefined") {
+						attachLater[String($('channel').options[j].value)] = $('channel').options[j].text;
+					}
+					$('channel').options[j] = newEntry;
+					j++;
+				}
+			}
+			break;
+		}
+		for(x in attachLater) {
+			var newEntry = new Option(attachLater[x], x, false, true);
+			if(x != "extend") {
+				$('channel').options[$('channel').options.length] = newEntry;
+			}
+		}
+		$('channel').options[selected].selected = true;
+		
+	}
+}
+//doRequest(url_fetchchannels+servicereference, incomingChannellist, true);
 
 function addTimerFormChangeTime(which) {
 	var start = new Date( $('syear').value, ($('smonth').value -1), $('sday').value, $('shour').value, $('smin').value, 0);
@@ -1182,12 +1278,12 @@ function sendAddTimer() {
 	 +"&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated
 	 +"&channelOld="+$('channelOld').value
 	 +"&beginOld="+$('beginOld').value+"&endOld="+$('endOld').value
-	 +"&deleteOldOnSave="+ownLazyNumber($('deleteOldOnSave').value), incomingTimerAddResult);
+	 +"&deleteOldOnSave="+ownLazyNumber($('deleteOldOnSave').value), incomingTimerAddResult, false);
 	
 }
 
 function getSettings(){
-	doRequest(url_settings, incomingGetSettings);
+	doRequest(url_settings, incomingGetSettings, false);
 }
 
 function incomingGetSettings(request){
@@ -1212,7 +1308,7 @@ function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,descrip
 	 +"&justplay="+justplay+"&repeated="+repeated
 	 +"&channelOld="+channel
 	 +"&beginOld="+begin+"&endOld="+end
-	 +"&deleteOldOnSave=1", incomingTimerAddResult);
+	 +"&deleteOldOnSave=1", incomingTimerAddResult, false);
 }
 function ownLazyNumber(num) {
 	if(isNaN(num)){
@@ -1225,7 +1321,7 @@ function ownLazyNumber(num) {
 var subServicesInsertedList = new Object();
 
 function getSubServices(servicereference) {
-		doRequest(url_subservices,incomingSubServiceRequest);
+		doRequest(url_subservices,incomingSubServiceRequest, false);
 }
 function incomingSubServiceRequest(request){
 	if(request.readyState == 4){

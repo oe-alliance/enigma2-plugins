@@ -48,6 +48,7 @@ function EPGEvent(xml){
 		this.title = xml.getElementsByTagName('e2eventtitle').item(0).firstChild.data;
 		this.serviceRef = xml.getElementsByTagName('e2eventservicereference').item(0).firstChild.data;
 		this.serviceName = xml.getElementsByTagName('e2eventservicename').item(0).firstChild.data;
+		this.fileName = xml.getElementsByTagName('e2filename').item(0).firstChild.data;
 	} catch (e) {
 		//debug("EPGEvent parsing Error");
 	}	
@@ -59,7 +60,10 @@ function EPGEvent(xml){
 		this.descriptionE = xml.getElementsByTagName('e2eventdescriptionextended').item(0).firstChild.data;
 	} catch (e) {	this.descriptionE = 'N/A';	}
 
-	
+	this.getFilename = function ()
+	{
+		return this.fileName;
+	}
 	this.getEventId = function ()
 	{
 		return this.eventID;
@@ -469,24 +473,24 @@ function Timer(xml){
 		return this.cancled;
 	}	
 }
-// START TimerAddResult
-function TimerAddResult(xml){
+// START SimpleXMLResult ehemals TimerAddResult
+function SimpleXMLResult(xml){
 	// parsing values from xml-element
-	debug('init TimerAddResult'+xml);
+	debug('init SimpleXMLResult'+xml);
 	try{
-		this.xmlitems = xml.getElementsByTagName("e2timeraddresult").item(0);
+		this.xmlitems = xml.getElementsByTagName("e2simplexmlresult").item(0);
 	} catch (e) {
-		debug("TimerAddResult parsing e2timeraddresult"+e);
+		debug("SimpleXMLResult parsing e2simplexmlresult"+e);
 	}
 	try{
 		this.state = this.xmlitems.getElementsByTagName("e2state").item(0).firstChild.data;
 	} catch (e) {
-		debug("TimerAddResult parsing e2state"+e);
+		debug("SimpleXMLResult parsing e2state"+e);
 	}
 	try{
 		this.statetext = this.xmlitems.getElementsByTagName("e2statetext").item(0).firstChild.data;
 	} catch (e) {
-		debug("TimerAddResult parsing e2statetext"+e);
+		debug("SimpleXMLResult parsing e2statetext"+e);
 	}
 	
 	this.getState = function(){
@@ -500,7 +504,7 @@ function TimerAddResult(xml){
 			return this.statetext;
 	}
 }
-// END TimerAddResult
+// END SimpleXMLResult
 
 //START class Settings
 function Settings(xml){

@@ -75,8 +75,8 @@ var tplMovieListHeader  = '<table border="0" cellpadding="0" cellspacing="0" cla
 	tplMovieListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplMovieListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
 	tplMovieListHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
-	tplMovieListHeader += '</form></div></th>';
-	tplMovieListHeader += '</tr>\n';
+	tplMovieListHeader += '</form>';
+	tplMovieListHeader += '</div></th></tr>\n';
 	tplMovieListHeader += '</thead>\n';
 	tplMovieListHeader += '<tbody class="scrollContent">\n';
 
@@ -84,6 +84,8 @@ var tplMovieListItem  = '<tr>\n';
 	tplMovieListItem += '<td><div class="sListSName" title="%(description), %(descriptionextended)">%(title) (%(servicename))</div>';
 	tplMovieListItem += '<div class="sListExt">\n';
 	tplMovieListItem += '%(tags)\n';
+	tplMovieListItem += '<a target="_blank" href="/web/ts.m3u?file=%(filelink)"><img src="/webdata/gfx/screen.png" title="play file" border="0"></a>\n';
+	tplMovieListItem += '&nbsp;&nbsp;<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete files" border="0" onclick="delMovieFile(\'%(filename)\');"></a>\n';
 	tplMovieListItem += '</div>\n';
 	tplMovieListItem += '</tr>\n';
 	
@@ -264,7 +266,7 @@ var tplAddTimerForm = '';
 	tplAddTimerForm += '<p><input type="radio" id="tvradio" name="tvradio" value="tv" checked onchange="javascript:addTimerFormChangeType();"">TV</p>';
 	tplAddTimerForm += '<p><input type="radio" name="tvradio" value="radio" onchange="javascript:addTimerFormChangeType();">Radio</p><td>';
 	tplAddTimerForm += '<p>Channel:</p>';
-	tplAddTimerForm += '<select name="channel" id="channel" size="1">%(channel)</select></td></tr>';
+	tplAddTimerForm += '<select name="channel" id="channel" size="1" onchange="timerFormExtendChannellist($(\'channel\').options[$(\'channel\').selectedIndex].value)">%(channel)</select></td></tr>';
 	tplAddTimerForm += '<tr><td colspan="3">Name:</td>';
 	tplAddTimerForm += '<td colspan="3"><input name="name" id="name" type="text" size="100" maxlength="100" style="color: #000000;" value="%(name)"></td></tr>';
 	tplAddTimerForm += '<tr><td colspan="3">Description:</td>';

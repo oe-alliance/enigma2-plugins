@@ -73,7 +73,8 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["TimerChange"] = Timer(session,func = Timer.CHANGE)
 		self["TimerListWrite"] = Timer(session,func = Timer.WRITE)
 		self["TVBrowser"] = Timer(session,func = Timer.TVBROWSER)
-		self["MovieList"] = Movie(session)
+		self["MovieList"] = Movie(session,func = Movie.LIST)
+		self["MovieFileDel"] = Movie(session,func = Movie.DEL)
 		self["Volume"] = Volume(session)
 		self["Message"] = Message(session)
 		self["PowerState"] = PowerState(session)
@@ -101,6 +102,15 @@ class StreamingM3U(WebScreen):
 		from Components.Sources.Config import Config
 		from Components.config import config
 		self["ref"] = StaticText()
+		self["localip"] = RequestData(request,what=RequestData.HOST)
+
+class TsM3U(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		from Components.Sources.StaticText import StaticText
+		from Components.Sources.Config import Config
+		from Components.config import config
+		self["file"] = StaticText()
 		self["localip"] = RequestData(request,what=RequestData.HOST)
 		
 class GetPid(WebScreen):
@@ -209,7 +219,8 @@ class JavascriptUpdate(Converter):
 	def getHTML(self, id):
 		# 3c5x9, added parent. , this is because the ie loads this in a iframe. an the set is in index.html.xml
 		#		 all other will replace this in JS
-		return '<script>parent.set("%s", "%s");</script>\n'%(id, self.source.text.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
+		print  '<script>parent.set("%s", "%s");</script>\n'%(id, self.source.text.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"').replace('\xb0', '&deg;'))
+		return '<script>parent.set("%s", "%s");</script>\n'%(id, self.source.text.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"').replace('\xb0', '&deg;'))
 
 # the performant 'listfiller'-engine (plfe)
 class ListFiller(Converter):
