@@ -25,6 +25,7 @@ from WebComponents.Sources.PowerState import PowerState
 from WebComponents.Sources.RemoteControl import RemoteControl
 from WebComponents.Sources.Settings import Settings
 from WebComponents.Sources.SubServices import SubServices
+from WebComponents.Sources.ParentControl import ParentControl
 
 from WebComponents.Sources.RequestData import RequestData
 from Components.Sources.FrontendStatus import FrontendStatus
@@ -61,6 +62,8 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["ServiceList"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
 		self["ServiceListBrowse"] = ServiceList(fav, command_func = self.browseTo, validate_commands=False)
+
+		self["ParentControlList"] = ParentControl(session)
 		self["SubServices"] = SubServices(session)
 		self["Volume"] = Volume(session)
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
@@ -81,12 +84,21 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["RemoteControl"] = RemoteControl(session)
 		self["Settings"] = Settings(session)
 		
-
 	def browseTo(self, reftobrowse):
 		self["ServiceListBrowse"].root = reftobrowse
 
 	def zapTo(self, reftozap):
+		from Components.config import config
+		pc = config.ParentalControl.configured.value
+		if pc:
+			config.ParentalControl.configured.value = False
 		self.session.nav.playService(reftozap)
+		if pc:
+			config.ParentalControl.configured.value = pc
+		"""
+		switsching config.ParentalControl.configured.value
+		ugly, but necessary :(
+		"""
 
 # TODO: (really.) put screens into own files.
 class Streaming(WebScreen):
@@ -112,6 +124,12 @@ class TsM3U(WebScreen):
 		from Components.config import config
 		self["file"] = StaticText()
 		self["localip"] = RequestData(request,what=RequestData.HOST)
+		
+class RestartTwisted(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		import plugin
+		plugin.restartWebserver()
 		
 class GetPid(WebScreen):
       def __init__(self, session,request):

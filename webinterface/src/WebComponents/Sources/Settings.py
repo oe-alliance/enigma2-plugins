@@ -21,15 +21,17 @@ class Settings( Source):
     def do_func(self):
         list = []
         
-        print "Settings wurde aufgerufen ",self.cmd
-        #list.append([config.plugins.Webinterface.enable.value, 'config.plugins.Webinterface.enable'])
-        #list.append([config.plugins.Webinterface.password.value, 'config.plugins.Webinterface.password'])
-        #list.append([config.plugins.Webinterface.includehdd.value, 'config.plugins.Webinterface.includehdd'])
         list.append([config.recording.margin_before.value, 'config.recording.margin_before'])
         list.append([config.recording.margin_after.value, 'config.recording.margin_after'])
         
+        list.append([config.ParentalControl.servicepinactive.value, 'config.ParentalControl.servicepinactive'])
+        list.append([config.ParentalControl.setuppin.value, 'config.ParentalControl.setuppin'])
+        list.append([config.ParentalControl.servicepin[0].value, 'config.ParentalControl.servicepin.0'])
+        list.append([config.ParentalControl.configured.value, 'config.ParentalControl.configured'])
+        list.append([config.ParentalControl.setuppinactive.value, 'config.ParentalControl.setuppinactive'])
+        list.append([config.ParentalControl.type.value, 'config.ParentalControl.type'])
+
         print "Settings was was sent (%s)" % type
-        print list
         return list
 
 

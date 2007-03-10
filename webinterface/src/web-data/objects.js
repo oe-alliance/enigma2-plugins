@@ -151,6 +151,9 @@ function ServiceReference(xml){
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
 	}
+	this.getClearServiceReference = function(){
+		return this.servicereference;
+	}
 		
 	this.getServiceName = function(){
 		return this.servicename.replace('&quot;', '"');
@@ -545,6 +548,6 @@ function Setting(xml){
 		
 	this.getSettingName = function(){
 		return this.settingname;
-	}	
-}	
-//END class Setting
+	}
+	
+}

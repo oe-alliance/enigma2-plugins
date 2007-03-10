@@ -20,6 +20,8 @@ var url_movielist= "/web/movielist";
 
 var url_settings= "/web/settings";
 
+var url_parentcontrol= "/web/parentcontrollist";
+
 var url_moviefiledelete= "/web/moviefiledelete"; // plus serviceref,eventid
 
 var url_timerlist= "/web/timerlist";
@@ -51,12 +53,14 @@ addTimerEditFormObject["deleteOldOnSave"] = 0;
 var doRequestMemory = new Object();
 
 // Get Settings
-var settings;
+var settings = null;
+var parentControlList = null;
 
 // UpdateStreamReader
 var UpdateStreamReaderNextReadPos = 0;
 var UpdateStreamReaderPollTimer;
 var UpdateStreamReaderPollTimerCounter = 0;
+var UpdateStreamReaderPollTimerCounterTwisted = 0;
 UpdateStreamReaderRequest = null;
 function UpdateStreamReaderStart(){
 	var ua = navigator.userAgent;
@@ -76,7 +80,7 @@ function UpdateStreamReaderStart(){
 		UpdateStreamReaderRequest.onerror = UpdateStreamReaderOnError;
 		UpdateStreamReaderRequest.open("GET", url_updates, true);
  		UpdateStreamReaderRequest.send(null);
-		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 1500);
+		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 10000);
 	}
 }
   
@@ -85,12 +89,21 @@ function UpdateStreamReaderLatestResponse() {
 // Its not great, but the best I could come up with to solve the 
 // problem with the memory leak
 	UpdateStreamReaderPollTimerCounter++;
-	if(UpdateStreamReaderPollTimerCounter > 20) {
+	debug(UpdateStreamReaderPollTimerCounter);
+	if(UpdateStreamReaderPollTimerCounter > 6) {
 		clearInterval(UpdateStreamReaderPollTimer);
 		UpdateStreamReaderRequest.abort();
 		UpdateStreamReaderRequest = null;
 		UpdateStreamReaderPollTimerCounter = 0;
 		UpdateStreamReaderStart();
+		
+		UpdateStreamReaderPollTimerCounterTwisted++;
+		if(UpdateStreamReaderPollTimerCounterTwisted > 5) {
+			UpdateStreamReaderPollTimerCounterTwisted = 0;
+			debug("restarting twisted");
+			debug(new Ajax.Request( "/web/restarttwisted", { method: 'get' }));
+			debug("...twisted restart");
+		}
 		return;
 	}
 // Quickhack jjbig end
@@ -228,7 +241,6 @@ function setComplete(what, value){
 }
 // requestindikator
 var requestcounter = 0;
-
 function requestIndicatorUpdate(){
 	//debug(requestcounter+" open requests");
 	if(requestcounter>=1){
@@ -250,7 +262,6 @@ function doRequest(url, readyFunction, save){
 	requestStarted();
 	//var password = "";
 	//var username = "";
-	//doRequestMemory
 	debug(url);
 	if(save == true && typeof(doRequestMemory[url]) != "undefined") {
 		debug("not loading");
@@ -285,17 +296,62 @@ function getXML(request){
 	}
 	return xmlDoc;
 }
-
-function zap(servicereference){
-	new Ajax.Request( "/web/zap?ZapTo=" + servicereference, { method: 'get' });
-	getSubServices(servicereference);
+function parentPin(servicereference) {
+	servicereference = decodeURIComponent(servicereference);
+	debug("parentPin " + parentControlList.length);
+	if(parentControlList == null || String(getSettingByName("config.ParentalControl.configured")) != "True") {
+		return true;
+	}
+	if(getParentControlByRef(servicereference) == servicereference) {
+		if(String(getSettingByName("config.ParentalControl.type.value")) == "whitelist") {
+			debug("leaving here 1");
+			return true;
+		}
+	} else {
+		debug("leaving here 2");
+		return true;
+	}
+	debug("going to ask for PIN");
+/*
+ * The Ajax Dialog didn't work, because auf the asycnonity :(
+	Dialog.confirm(
+		"ParentControll was switch on.<br> Please enter PIN?<br>"+
+			'<input type="text" id="pin" name="pin" value="">',
+		 {windowParameters: {width:300, className: windowStyle},
+			okLabel: "OK",
+			buttonClass: "myButtonClass",
+			cancel: function(win) { return false; },
+			ok: function(win) {
+				   if(String($('pin').value) == String(getSettingByName("config.ParentalControl.servicepin.0")) ) {
+				      return true;
+				   } else {
+				   	  return parentPin(servicereference);
+				   }
+      			}
+			}
+		);
+		*/
+	var userInput = prompt('ParentControll was switch on.<br> Please enter PIN','PIN');
+	if (userInput != '' && userInput != null) {
+		if(String(userInput) == String(getSettingByName("config.ParentalControl.servicepin.0")) ) {
+			return true;
+		} else {
+			return parentPin(servicereference);
+		}
+	} else {
+		return false;
+	}
 }
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//++++       SignalPanel                           ++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
+function zap(servicereference){
+	var test = parentPin(servicereference);
+	alert(test);
+	if(test) {
+		new Ajax.Request( "/web/zap?ZapTo=" + servicereference, { method: 'get' });
+		getSubServices(servicereference);
+	}
+}
 
+//++++       SignalPanel                           ++++
 function initSignalPanel(){
 	$('SignalPanel').innerHTML = tplSignalPanelButton;
 }
@@ -303,11 +359,8 @@ function openSignalDialog(){
 	openWindow("Signal Info",tplSignalPanel, 215, 75);
 }
 
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 //++++ EPG functions                               ++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
 function loadEPGBySearchString(string){
 		doRequest(url_epgsearch+string,incomingEPGrequest, false);
 }
@@ -483,7 +536,7 @@ function initChannelList(){
 	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_radio);
 	doRequest(url, incomingProviderRadioBouquetList, true);
 	
-	//getSettings();
+	getSettings();
 }
 
 var servicereftoloadepgnow = "";
@@ -621,7 +674,9 @@ function incomingDelMovieFileResult(request) {
 }
 // Timer
 function addTimerByID(serviceRef,eventID,justplay){
-	doRequest(url_timeraddbyeventid+"?serviceref="+serviceRef+"&eventid="+eventID+"&justplay="+justplay, incomingTimerAddResult, false);	
+	if(parentPin(serviceRef)) {
+		doRequest(url_timeraddbyeventid+"?serviceref="+serviceRef+"&eventid="+eventID+"&justplay="+justplay, incomingTimerAddResult, false);	
+	}
 }
 function incomingTimerAddResult(request){
 	debug("onTimerAdded");
@@ -1205,83 +1260,80 @@ function addTimerFormCreateOptionListRepeated(Repeated,repeated) {
 	return html + html2;
 }
 function sendAddTimer() {
-	var beginD = new Date(ownLazyNumber($('syear').value), (ownLazyNumber($('smonth').value) - 1), ownLazyNumber($('sday').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
-	var begin = beginD.getTime()/1000;
+	if(parentPin($('channel').value)) {
+		var beginD = new Date(ownLazyNumber($('syear').value), (ownLazyNumber($('smonth').value) - 1), ownLazyNumber($('sday').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
+		var begin = beginD.getTime()/1000;
 	
-	var endD = new Date(ownLazyNumber($('eyear').value), (ownLazyNumber($('emonth').value) - 1), ownLazyNumber($('eday').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
-	var end = endD.getTime()/1000;
+		var endD = new Date(ownLazyNumber($('eyear').value), (ownLazyNumber($('emonth').value) - 1), ownLazyNumber($('eday').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
+		var end = endD.getTime()/1000;
 
-	var repeated = 0;
-	if( $('ms').checked ) {
-		repeated = 127;
-	} else if($('mf').checked) {
-		repeated = 31;
-		if($('sa').checked) {
-			repeated += ownLazyNumber($('sa').value);
-		}
-		if($('su').checked) {
-			repeated += ownLazyNumber($('su').value);
-		}
-	} else {
-		var check = new Array('mo', 'tu', 'we', 'th', 'fr');
-		for(i = 0; i < check.length; i++) {
-			if($(check[i]).cheked) {
-				repeated += Number($(check[i]).value);
+		var repeated = 0;
+		if( $('ms').checked ) {
+			repeated = 127;
+		} else if($('mf').checked) {
+			repeated = 31;
+			if($('sa').checked) {
+				repeated += ownLazyNumber($('sa').value);
+			}
+			if($('su').checked) {
+				repeated += ownLazyNumber($('su').value);
+			}
+		} else {
+			var check = new Array('mo', 'tu', 'we', 'th', 'fr');
+			for(i = 0; i < check.length; i++) {
+				if($(check[i]).cheked) {
+					repeated += Number($(check[i]).value);
+				}
 			}
 		}
+	
+		var descriptionClean = ($('descr').value == " " || $('descr').value == "N/A") ? "" : $('descr').value;
+		var nameClean = ($('name').value == " " || $('name').value == "N/A") ? "" : $('name').value;
+	
+		var repeated = 0;
+		if($('ms').checked) {
+			repeated = ownLazyNumber($('ms').value);
+		} else if($('mf').checked) {
+			repeated = ownLazyNumber($('mf').value);
+			if($('su').checked) {
+				repeated += ownLazyNumber($('su').value);
+			}
+			if($('sa').checked) {
+				repeated += ownLazyNumber($('sa').value);
+			}
+		} else {
+			if($('mo').checked) {
+				repeated += ownLazyNumber($('mo').value);
+			}
+			if($('tu').checked) {
+				repeated += ownLazyNumber($('tu').value);
+			}
+			if($('we').checked) {
+				repeated += ownLazyNumber($('we').value);
+			}
+			if($('th').checked) {
+				repeated += ownLazyNumber($('th').value);
+			}
+			if($('fr').checked) {
+				repeated += ownLazyNumber($('fr').value);
+			}
+			if($('sa').checked) {
+				repeated += ownLazyNumber($('sa').value);
+			}
+			if($('su').checked) {
+				repeated += ownLazyNumber($('su').value);
+			}
+		}
+		debug(repeated);
+		doRequest(url_timerchange+"?"+"serviceref="+$('channel').value+"&begin="+begin
+		  +"&end="+end+"&name="+nameClean+"&description="+descriptionClean
+		  +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
+		  +"&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated
+		  +"&channelOld="+$('channelOld').value
+		  +"&beginOld="+$('beginOld').value+"&endOld="+$('endOld').value
+		  +"&deleteOldOnSave="+ownLazyNumber($('deleteOldOnSave').value), incomingTimerAddResult, false);	
 	}
-	
-	/*if(ownLazyNumber($('deleteOldOnSave').value) == 1) {
-		delTimer($('channelOld').value,$('beginOld').value,$('endOld').value);
-	}*/
-	var descriptionClean = ($('descr').value == " " || $('descr').value == "N/A") ? "" : $('descr').value;
-	var nameClean = ($('name').value == " " || $('name').value == "N/A") ? "" : $('name').value;
-	
-	var repeated = 0;
-	if($('ms').checked) {
-		repeated = ownLazyNumber($('ms').value);
-	} else if($('mf').checked) {
-		repeated = ownLazyNumber($('mf').value);
-		if($('su').checked) {
-			repeated += ownLazyNumber($('su').value);
-		}
-		if($('sa').checked) {
-			repeated += ownLazyNumber($('sa').value);
-		}
-	} else {
-		if($('mo').checked) {
-			repeated += ownLazyNumber($('mo').value);
-		}
-		if($('tu').checked) {
-			repeated += ownLazyNumber($('tu').value);
-		}
-		if($('we').checked) {
-			repeated += ownLazyNumber($('we').value);
-		}
-		if($('th').checked) {
-			repeated += ownLazyNumber($('th').value);
-		}
-		if($('fr').checked) {
-			repeated += ownLazyNumber($('fr').value);
-		}
-		if($('sa').checked) {
-			repeated += ownLazyNumber($('sa').value);
-		}
-		if($('su').checked) {
-			repeated += ownLazyNumber($('su').value);
-		}
-	}
-	debug(repeated);
-	doRequest(url_timerchange+"?"+"serviceref="+$('channel').value+"&begin="+begin
-	 +"&end="+end+"&name="+nameClean+"&description="+descriptionClean
-	 +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
-	 +"&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated
-	 +"&channelOld="+$('channelOld').value
-	 +"&beginOld="+$('beginOld').value+"&endOld="+$('endOld').value
-	 +"&deleteOldOnSave="+ownLazyNumber($('deleteOldOnSave').value), incomingTimerAddResult, false);
-	
 }
-
 function getSettings(){
 	doRequest(url_settings, incomingGetSettings, false);
 }
@@ -1289,12 +1341,39 @@ function getSettings(){
 function incomingGetSettings(request){
 	if(request.readyState == 4){
 		settings = new Settings(getXML(request)).getArray();
-/*		for ( var i = 0; i <settings.length; i++){
-			var setting = settings[i];
-			debug(setting.getSettingValue() +":" + setting.getSettingName());
-		}*/
-		
-	}		
+	}
+	if(String(getSettingByName("config.ParentalControl.configured")) == "True") {
+		getParentControl();
+	}
+}
+function getSettingByName(txt) {
+	debug("getSettingByName ("+txt+")");
+	for(i = 0; i < settings.length; i++) {
+		debug("("+settings[i].getSettingName()+") (" +settings[i].getSettingValue()+")");
+		if(String(settings[i].getSettingName()) == String(txt)) {
+			return settings[i].getSettingValue();
+		} 
+	}
+	return "";
+}
+function getParentControl() {
+	doRequest(url_parentcontrol, incomingParentControl, false);
+}
+function incomingParentControl(request) {
+	if(request.readyState == 4){
+		parentControlList = new ServiceList(getXML(request)).getArray();
+		debug("parentControlList got "+parentControlList.length + " services");
+	}
+}
+function getParentControlByRef(txt) {
+	debug("getParentControlByRef ("+txt+")");
+	for(i = 0; i < parentControlList.length; i++) {
+		debug("("+parentControlList[i].getClearServiceReference()+")");
+		if(String(parentControlList[i].getClearServiceReference()) == String(txt)) {
+			return parentControlList[i].getClearServiceReference();
+		} 
+	}
+	return "";
 }
 function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,description,afterEvent,disabled){
 	disabled = (ownLazyNumber(disabled) == 0) ? 1 : 0;
