@@ -195,7 +195,7 @@ normal stylesheet-stuff******************
 	background-color: #0066CC;
 	color: #FFFFFF;
 	
-	width:20%;
+	width:15%;
 	height: 20px;
 }
 #SignalPanel { 
@@ -212,7 +212,20 @@ normal stylesheet-stuff******************
 	width:5%;
 	height:20px;
 }
+#RcordButton { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:left;
 
+	background-color: #0066CC;
+	color: #FFFFFF;
+	text-align:right;
+
+	width:5%;
+	height:20px;
+}
 
 #ServiceInfo{
 	width:800px;
