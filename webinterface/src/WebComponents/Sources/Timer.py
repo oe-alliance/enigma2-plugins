@@ -186,14 +186,12 @@ class Timer( Source):
         
         if param['begin'] is None:
            return False,"begin missing"
-        elif time.time() <= float(param['begin']):
-            begin = float(param['begin'])
         else:
             return False,"incorrect time begin"
         
         if param['end'] is None:
             return False,"end missing"
-        elif begin < float(param['end']):
+        elif end < float(param['end']):
             end = float(param['end'])
         else:
              return False,"incorrect time end"
