@@ -1327,7 +1327,7 @@ function sendAddTimer() {
 			}
 		}
 		doRequest(url_timerchange+"?"+"serviceref="+$('channel').value+"&begin="+begin
-		  +"&end="+end+"&name="+nameClean+"&description="+descriptionClean
+		  +"&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean)
 		  +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
 		  +"&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated
 		  +"&channelOld="+$('channelOld').value
@@ -1383,7 +1383,7 @@ function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,descrip
 	var nameClean = (name == " " || name == "N/A") ? "" : name;
 
 	doRequest(url_timerchange+"?"+"serviceref="+channel+"&begin="+begin
-	 +"&end="+end+"&name="+nameClean+"&description="+descriptionClean
+	 +"&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean)
 	 +"&afterevent="+afterEvent+"&eit=0&disabled="+disabled
 	 +"&justplay="+justplay+"&repeated="+repeated
 	 +"&channelOld="+channel
