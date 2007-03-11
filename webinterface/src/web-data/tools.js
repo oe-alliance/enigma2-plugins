@@ -1,5 +1,5 @@
 var DBG = true;
-//DBG = false;
+DBG = false;
 
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
@@ -1266,8 +1266,6 @@ function sendAddTimer() {
 		var beginD = new Date(ownLazyNumber($('syear').value), (ownLazyNumber($('smonth').value) - 1), ownLazyNumber($('sday').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
 		var begin = beginD.getTime()/1000;
 		
-		alert(parentPin($('channel').value));
-	
 		var endD = new Date(ownLazyNumber($('eyear').value), (ownLazyNumber($('emonth').value) - 1), ownLazyNumber($('eday').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
 		var end = endD.getTime()/1000;
 
