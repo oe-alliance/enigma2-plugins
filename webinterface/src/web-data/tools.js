@@ -362,7 +362,7 @@ function openSignalDialog(){
 
 //++++ EPG functions                               ++++
 function loadEPGBySearchString(string){
-		doRequest(url_epgsearch+string,incomingEPGrequest, false);
+		doRequest(url_epgsearch+escape(string),incomingEPGrequest, false);
 }
 function loadEPGByServiceReference(servicereference){
 		doRequest(url_epgservice+servicereference,incomingEPGrequest, false);
