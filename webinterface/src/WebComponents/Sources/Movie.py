@@ -6,6 +6,7 @@ from Components.MovieList import MovieList
 from Tools.Directories import *
 
 import os
+#import sys, traceback
 
 class Movie( Source):
     LIST = 0
@@ -33,12 +34,26 @@ class Movie( Source):
         
         #os.system("rm -f %s*" % param)
         try:
-            os.system("rm -f %s*" % param)
+            os.system('rm -f "%s"' % param)
+            #.ap .cuts .meta
+            if os.path.exists("%s.ap" % param):
+                os.system('rm -f "%s.ap"' % param)
+            
+            if os.path.exists("%s.cuts" % param):
+                os.system('rm -f "%s.cuts"' % param)
+            
+            if os.path.exists("%s.meta" % param):
+                os.system('rm -f "%s.meta"' % param)
         except OSError:
-            print False,"Some error occurred while deleting file"
+            return False,"OSErrorSome error occurred while deleting file"
+#        except:
+#             print sys.exc_info()[0]
+#             print sys.exc_info()[1]
+#             print traceback.extract_tb(sys.exc_info()[2])
+
         
         if os.path.exists(param):
-            print False,"Some error occurred while deleting file"
+            return False,"Some error occurred while deleting file"
         else:
             return True,"File deleted"
    
