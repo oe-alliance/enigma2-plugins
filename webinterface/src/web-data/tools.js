@@ -1,5 +1,5 @@
-//var DBG = true;
-var DBG = false;
+var DBG = true;
+//DBG = false;
 
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
@@ -298,10 +298,10 @@ function getXML(request){
 }
 function parentPin(servicereference) {
 	servicereference = decodeURIComponent(servicereference);
-	debug("parentPin " + parentControlList.length);
 	if(parentControlList == null || String(getSettingByName("config.ParentalControl.configured")) != "True") {
 		return true;
 	}
+	debug("parentPin " + parentControlList.length);
 	if(getParentControlByRef(servicereference) == servicereference) {
 		if(String(getSettingByName("config.ParentalControl.type.value")) == "whitelist") {
 			debug("leaving here 1");
@@ -1260,9 +1260,13 @@ function addTimerFormCreateOptionListRepeated(Repeated,repeated) {
 	return html + html2;
 }
 function sendAddTimer() {
+	debug("sendAddTimer" + "parentChannel:" +$('channel').value);
+	
 	if(parentPin($('channel').value)) {
 		var beginD = new Date(ownLazyNumber($('syear').value), (ownLazyNumber($('smonth').value) - 1), ownLazyNumber($('sday').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
 		var begin = beginD.getTime()/1000;
+		
+		alert(parentPin($('channel').value));
 	
 		var endD = new Date(ownLazyNumber($('eyear').value), (ownLazyNumber($('emonth').value) - 1), ownLazyNumber($('eday').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
 		var end = endD.getTime()/1000;
@@ -1324,7 +1328,6 @@ function sendAddTimer() {
 				repeated += ownLazyNumber($('su').value);
 			}
 		}
-		debug(repeated);
 		doRequest(url_timerchange+"?"+"serviceref="+$('channel').value+"&begin="+begin
 		  +"&end="+end+"&name="+nameClean+"&description="+descriptionClean
 		  +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
@@ -1469,4 +1472,7 @@ if( typeof Array.prototype.splice==='undefined' ) {
 }
 function writeTimerListNow() {
 	new Ajax.Request( url_timerlistwrite, { method: 'get' });
+}
+function recordingPushed() {
+	
 }
