@@ -76,6 +76,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["TimerChange"] = Timer(session,func = Timer.CHANGE)
 		self["TimerListWrite"] = Timer(session,func = Timer.WRITE)
 		self["TVBrowser"] = Timer(session,func = Timer.TVBROWSER)
+		self["RecordNow"] = Timer(session,func = Timer.RECNOW)
 		self["MovieList"] = Movie(session,func = Movie.LIST)
 		self["MovieFileDel"] = Movie(session,func = Movie.DEL)
 		self["Volume"] = Volume(session)
@@ -237,7 +238,6 @@ class JavascriptUpdate(Converter):
 	def getHTML(self, id):
 		# 3c5x9, added parent. , this is because the ie loads this in a iframe. an the set is in index.html.xml
 		#		 all other will replace this in JS
-		print  '<script>parent.set("%s", "%s");</script>\n'%(id, self.source.text.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"').replace('\xb0', '&deg;'))
 		return '<script>parent.set("%s", "%s");</script>\n'%(id, self.source.text.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"').replace('\xb0', '&deg;'))
 
 # the performant 'listfiller'-engine (plfe)

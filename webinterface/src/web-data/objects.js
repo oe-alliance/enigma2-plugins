@@ -276,7 +276,6 @@ function Movie(xml){
 //START class TimerList
 function TimerList(xml){
 	// parsing values from xml-element
-	debug('init TimerList'+xml);
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2timerlist").item(0).getElementsByTagName("e2timer");
 	} catch (e) {

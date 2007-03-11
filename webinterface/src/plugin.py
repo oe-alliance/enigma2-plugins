@@ -45,8 +45,9 @@ NoExplicitHeaderFiles = ['getpid.xml','tvbrowser.xml',]
  use tail -f <file> to view this log
 """
 			
-DEBUG = False
-#DEBUG = True
+
+DEBUG = True
+#DEBUG = False
 DEBUGFILE= "/tmp/twisted.log"
 
 from twisted.cred.portal import Portal

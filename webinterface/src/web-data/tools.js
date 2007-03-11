@@ -1,5 +1,5 @@
 var DBG = true;
-DBG = false;
+//DBG = false;
 
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
@@ -25,6 +25,7 @@ var url_parentcontrol= "/web/parentcontrollist";
 var url_moviefiledelete= "/web/moviefiledelete"; // plus serviceref,eventid
 
 var url_timerlist= "/web/timerlist";
+var url_recordnow= "/web/recordnow";
 var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
 var url_timerchange= "/web/timerchange"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
@@ -1472,5 +1473,97 @@ function writeTimerListNow() {
 	new Ajax.Request( url_timerlistwrite, { method: 'get' });
 }
 function recordingPushed() {
+	doRequest(url_timerlist, incomingRecordingPushed, false);	
+}
+function incomingRecordingPushed(request) {
+	if(request.readyState == 4){
+		var timers = new TimerList(getXML(request)).getArray();
+		debug("have "+timers.length+" timer");
+		
+		var aftereventReadable = new Array ('Nothing', 'Standby', 'Deepstandby/Shutdown');
+		var justplayReadable = new Array('record', 'zap');
+		var OnOff = new Array('on', 'off');
+		
+		listerHtml = '';
+		
+		for ( var i = 0; i <timers.length; i++){
+			var timer = timers[i];
+
+			if(ownLazyNumber(timer.getDontSave()) == 1) {
+				var beginDate = new Date(Number(timer.getTimeBegin())*1000);
+				var endDate = new Date(Number(timer.getTimeEnd())*1000);
+				var namespace = {
+				'servicereference': timer.getServiceReference(),
+				'servicename': timer.getServiceName() ,
+				'title': timer.getName(), 
+				'description': timer.getDescription(), 
+				'descriptionextended': timer.getDescriptionExtended(), 
+				'begin': timer.getTimeBegin(),
+				'beginDate': beginDate.toLocaleString(),
+				'end': timer.getTimeEnd(),
+				'endDate': endDate.toLocaleString(),
+				'state': timer.getState(),
+				'duration': Math.ceil((timer.getDuration()/60)),
+				'repeated': timer.getRepeated(),
+				'repeatedReadable': repeatedReadable(timer.getRepeated()),
+				'justplay': timer.getJustplay(),
+				'justplayReadable': justplayReadable[Number(timer.getJustplay())],
+				'afterevent': timer.getAfterevent(),
+				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
+				'disabled': timer.getDisabled(),
+				'onOff': OnOff[Number(timer.getDisabled())],
+				'color': colorTimerListEntry( timer.getState() )
+				};
+				listerHtml += RND(tplTimerListItem, namespace);
+			}
+		}
+		openWindow("Record Now", listerHtml+tplRecordingFooter, 900, 500, "Record now window");
+	}
+}
+function inserteSizes() {
+/*	var screenW = 640, screenH = 480;
+	if (parseInt(navigator.appVersion)>3) {	
+		screenW = screen.width;
+		screenH = screen.height;
+	} else if (navigator.appName == "Netscape"
+	   && parseInt(navigator.appVersion)==3
+	   && navigator.javaEnabled() ) {
+		var jToolkit = java.awt.Toolkit.getDefaultToolkit();
+		var jScreenSize = jToolkit.getScreenSize();
+		screenW = jScreenSize.width;
+		screenH = jScreenSize.height;
+	}
+	debug("screenW:"+screenW+" screenH:"+screenH);
+	/* 640x480
+	 * 800x600
+	 * 1024x768
+	 * 1280x1024
+	 * 1600x1280
+	if(screenH == 800) {
+		debug("size 1");
+		document.getElementById("BodyContentChannellist").style.height = '20%';
+	} else if(screenH == 1024) {
+		debug("1024")
+		document.getElementById("BodyContentChannellist").style.height = '760px';
+		
+	} else {
+		alert("unsupported screensize");
+	}*/
 	
+}
+function recordingPushedDecision(recordNowNothing,recordNowUndefinitely,recordNowCurrent) {
+	var recordNow = recordNowNothing;
+	recordNow = (recordNow == "") ? recordNowUndefinitely: recordNow;
+	recordNow = (recordNow == "") ? recordNowCurrent: recordNow;
+	if(recordNow != "nothing" && recordNow != "") {
+		doRequest(url_recordnow+"?recordnow="+recordNow, incomingTimerAddResult, false);
+	}
+}
+
+function ifChecked(rObj) {
+	if(rObj.checked) {
+		return rObj.value;
+	} else {
+		return "";
+	}
 }

@@ -32,14 +32,14 @@ var tplEPGListItem  = '<tr style="background-color: #DDDDDD;">';
 	tplEPGListItem += '</tr>';
 
 var tplEPGListItemExtend  = '%(shortTxt) ...<a href="#" onclick="setComplete(\'extdescription%(number)\',\'%(txt)\');">more</a>';
-	
+
 var tplEPGListFooter = "</table>";
 	
 // ServiceList Templates
 var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplServiceListHeader += '<thead class="fixedHeader">\n';
 	tplServiceListHeader += '<tr>\n';
-	tplServiceListHeader += '<th><div class="sListHeader" style="color: #FFFFFF;">ServiceList</div>\n';
+	tplServiceListHeader += '<th><div class="sListHeader" style="color: #000000;">ServiceList</div>\n';
 	tplServiceListHeader += '<div class="sListSearch">';
 	tplServiceListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplServiceListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
@@ -48,7 +48,6 @@ var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 	tplServiceListHeader += '</tr>\n';
 	tplServiceListHeader += '</thead>\n';
 	tplServiceListHeader += '<tbody class="scrollContent">\n';
-	tplServiceListHeader += '<input type="hidden" id="mainServiceRef" name="mainServiceRef" value="%(mainServiceRef)">\n';
 
 var tplServiceListItem  = '<tr id="%(servicereference)extend">\n';
 	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><a id="%(servicereference)" onclick="zap(this.id);" class="sListSLink">%(servicename)</a></div>';
@@ -70,13 +69,13 @@ var	tplServiceListEPGItem  = '<div class="sListEPGTime">%(starttime)</div>\n';
 var tplMovieListHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplMovieListHeader += '<thead class="fixedHeader">\n';
 	tplMovieListHeader += '<tr>\n';
-	tplMovieListHeader += '<th><div class="sListHeader" style="color: #FFFFFF;">MovieList</div>\n';
+	tplMovieListHeader += '<th><div class="sListHeader" style="color: #000000;">MovieList</div>\n';
 	tplMovieListHeader += '<div class="sListSearch">';
 	tplMovieListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplMovieListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
 	tplMovieListHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
-	tplMovieListHeader += '</form>';
-	tplMovieListHeader += '</div></th></tr>\n';
+	tplMovieListHeader += '</form></div></th>';
+	tplMovieListHeader += '</tr>\n';
 	tplMovieListHeader += '</thead>\n';
 	tplMovieListHeader += '<tbody class="scrollContent">\n';
 
@@ -92,10 +91,10 @@ var tplMovieListItem  = '<tr>\n';
 var tplMovieListFooter = "</tbody></table>\n";
 
 // TimerList Templates
-var tplTimerListHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
+var tplTimerListHeader  = '<table border="0" height="100%" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplTimerListHeader += '<thead class="fixedHeader">\n';
 	tplTimerListHeader += '<tr>\n';
-	tplTimerListHeader += '<th><div class="sListHeader" style="color: #FFFFFF;">TimerList</div>\n';
+	tplTimerListHeader += '<th><div class="sListHeader" style="color: #000000;">TimerList</div>\n';
 	tplTimerListHeader += '<div class="sListSearch">';
 	tplTimerListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplTimerListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
@@ -103,34 +102,55 @@ var tplTimerListHeader  = '<table border="0" cellpadding="0" cellspacing="0" cla
 	tplTimerListHeader += '</form></div></th>';
 	tplTimerListHeader += '</tr>\n';
 	tplTimerListHeader += '</thead>\n';
-	tplTimerListHeader += '<tbody class="scrollContent">\n';
-	tplTimerListHeader += '<tr><td><font color="#000011"><b>Channel</b></font></td><td><font color="#000011"><b>Name</b></font></td><td><font color="#000011"><b>Description</b></font></td><td><font color="#000011"><b>Repeated</b></font></td><td><font color="#000011"><b>Time running</b></font></td><td><font color="#000011"><b>Start time</b></font></td><td><font color="#000011"><b>End time</b></font></td><td><font color="#000011"><b>After event</b></font></td><td align="center"><font color="#000011"><b>Options</b></font></td></tr>\n';
+	tplTimerListHeader += '<tbody class="scrollContent" height="100%">\n';
+	tplTimerListHeader += '<tr>';
+	tplTimerListHeader += '<td><div style="color: #%(color);" class="tListSName"><b>Channel</b><br/>Name</div></td>';
+/*	tplTimerListHeader += '<td><div style="color: #%(color);" class="tListTitle"><b>Name</b></div></td>';*/
+/*	tplTimerListHeader += '<td><div style="color: #%(color);" class="tListDescr"><b>Description</b></div></td>';*/
+	tplTimerListHeader += '<td><div style="color: #%(color);" class="tListRepeat"><b>Repeated</b></div></td>';
+	tplTimerListHeader += '<td><div style="color: #%(color);" class="tListDuration"><b>Time running</b></div></td>';
+	tplTimerListHeader += '<td><div style="color: #%(color);" class="tListBegin"><b>Start time</b></div></td>';
+	tplTimerListHeader += '<td><div style="color: #%(color);" class="tListEnd"><b>End time</b></div></td>';
+	tplTimerListHeader += '<td><div style="color: #%(color);" class="tListAfter"><b>Event</b><br/>After event</div></td>';
+	tplTimerListHeader += '<td><div style="color: #%(color);" class="tListOption"><b>Options</b></div></td></tr>\n';
 
-var tplTimerListItem  = '';
-    tplTimerListItem += '<tr>\n';
-/*	tplTimerListItem += '<td><div style="color: #%(color);" class="sListSName" title="%(description), %(descriptionextended)">%(title) (%(servicename))</div>';
-	tplTimerListItem += '<div class="sListExt" style="color: #%(color);">\n';
-	tplTimerListItem += '%(duration)&nbsp;Min\n';
-	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\');"></a>';
-	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a><br/>';
-	tplTimerListItem += '</div>\n';
-	tplTimerListItem += '</tr>\n';*/
-	// i'm not getting this div stuff. until Reichi gets it nices done, i will insert this :) :
-	tplTimerListItem += '<td><font color="#%(color)">%(servicename)</font></td>\n';
-	tplTimerListItem += '<td><font color="#%(color)">%(title)</font></td>\n';
-	tplTimerListItem += '<td><font color="#%(color)">%(description)</font></td>\n';
-	tplTimerListItem += '<td><font color="#%(color)">%(repeatedReadable)</font></td>\n';
-	tplTimerListItem += '<td><font color="#%(color)">%(duration)</font></td>\n';
-	tplTimerListItem += '<td><font color="#%(color)">%(beginDate)</font></td>\n';
-	tplTimerListItem += '<td><font color="#%(color)">%(endDate)</font></td>\n';
-	tplTimerListItem += '<td><font color="#%(color)">%(aftereventReadable),%(justplayReadable)</font></td>\n';
-	tplTimerListItem += '<td><a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\');"></a>\n';
+var tplTimerListItem  = '<tr width="99%">\n';
+	tplTimerListItem += '<td><div style="color: #%(color);" class="tListSName" title="%(description), %(descriptionextended)"><b>%(servicename)</b> <br/><br/> %(title)</div></td>\n';
+	tplTimerListItem += '<td><div style="color: #%(color);" class="tListRepeat">%(repeatedReadable)</div></td>\n';
+	tplTimerListItem += '<td><div style="color: #%(color);" class="tListDuration">%(duration)&nbsp;Min</div></td>\n';
+	tplTimerListItem += '<td><div style="color: #%(color);" class="tListBegin">%(beginDate)</div></td>\n';
+	tplTimerListItem += '<td><div style="color: #%(color);" class="tListEnd">%(endDate)</div></td>\n';
+	tplTimerListItem += '<td><div style="color: #%(color);" class="tListAfter"><b>%(justplayReadable)</b> <br/><br/> %(aftereventReadable)</div></td>\n';
+	tplTimerListItem += '<td><div style="color: #%(color);" class="tListOption"><a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\');"></a>\n';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/%(onOff).png" title="toggle On/Off" border="0" onclick="sendToggleTimerDisable(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',\'%(disabled)\' );"></a>\n';
-	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(servicename)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a></td>\n';
+	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a></div></td>\n';
 	tplTimerListItem += '</tr>\n';
-	
+
 var tplTimerListFooter  = '<tr><button onclick="writeTimerListNow()">write TimerList to memory now</button></tr>\n';
     tplTimerListFooter += '</tbody></table>\n';
+
+var tplRecordingFooter   = '<hr><br><table style="text-align: left; width: 100%; height: 178px;" border="0" cellpadding="2" cellspacing="2"><tbody>';
+    tplRecordingFooter  += '<tr><td style="vertical-align: top;">';
+    tplRecordingFooter  += '<input type="radio" id="recordNowNothing" name="recordNow" value="nothing" checked>';
+    tplRecordingFooter  += '</td><td style="vertical-align: top;">';
+    tplRecordingFooter  += 'Do nothing';
+    tplRecordingFooter  += '</td></tr>';
+    tplRecordingFooter  += '<tr><td style="vertical-align: top;">';
+    tplRecordingFooter  += '<input type="radio" id="recordNowUndefinitely" name="recordNow" value="undefinitely">';
+    tplRecordingFooter  += '</td><td style="vertical-align: top;">';
+    tplRecordingFooter  += 'record current playing undefinitely';
+    tplRecordingFooter  += '</td></tr>';
+    tplRecordingFooter  += '<tr><td style="vertical-align: top;">';
+    tplRecordingFooter  += '<input type="radio" id="recordNowCurrent" name="recordNow" value="recordCurrentEvent">';
+    tplRecordingFooter  += '</td><td style="vertical-align: top;">';
+    tplRecordingFooter  += 'record current event';
+    tplRecordingFooter  += '</td></tr>';
+	tplRecordingFooter  += '<tr><td style="vertical-align: top;">';
+	tplRecordingFooter  += '&nbsp;';
+    tplRecordingFooter  += '</td><td style="vertical-align: top;">';
+    tplRecordingFooter  += '<img src="/webdata/gfx/ok.jpg" title="OK" border="0" onclick="recordingPushedDecision(ifChecked($(\'recordNowNothing\')), ifChecked($(\'recordNowUndefinitely\')), ifChecked($(\'recordNowCurrent\')) );window.close()">';
+    tplRecordingFooter  += '</td></tr>';
+    tplRecordingFooter  += '</tbody></table>';
 
 // Bouquetlist Template
 var tplBouquetListHeader = '<table id="BouquetList" width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';
@@ -179,14 +199,8 @@ var tplMessageSendForm = ""
 	tplMessageSendForm += '<tr><td colspan="2"><button onclick="sendMessage()">send Message</button></td></tr>\n';
 	tplMessageSendForm += "</table></form>\n";
 
-//var tplPasswordSendForm = ""
-//	tplPasswordSendForm += '<table id="PasswordSendForm" width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';
-//	tplPasswordSendForm += '<tr><td>Old password</td><td><input type="password" id="PasswordSendFormOldPassword" value=""></td></tr>\n';
-//	tplPasswordSendForm += '<tr><td>New password</td><td><input type="password" id="PasswordSendFormNewPassword" value=""></td></tr>\n';
-//	tplPasswordSendForm += '<tr><td>Repeat new password</td><td><input type="password" id="PasswordSendFormNewPasswordSecond" value=""></td></tr>\n';
-//	tplPasswordSendForm += '<tr><td colspan="2"><button onclick="sendPasswords()">change password for user dreambox</button></td></tr>\n';
-//	tplPasswordSendForm += "</table></form>\n";
 var tplPowerStateSendForm = '';
+    tplPowerStateSendForm += '<hr>';
     tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(1)">deepstandby Dreambox</button></center></p>';
     tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(2)">reboot Dreambox</button></center></p>';
     tplPowerStateSendForm += '<hr>';

@@ -18,6 +18,7 @@ class Timer( Source):
     TVBROWSER = 4
     CHANGE = 5
     WRITE = 6
+    RECNOW = 7
     
     def __init__(self, session,func = LIST):
         self.func = func
@@ -25,6 +26,7 @@ class Timer( Source):
         self.session = session
         self.recordtimer = session.nav.RecordTimer
         self.epgcache = eEPGCache.getInstance()
+        self.result = False,"unknown command"
 
     def handleCommand(self,cmd):
         if self.func is self.ADDBYID:
@@ -39,8 +41,11 @@ class Timer( Source):
             self.result = self.changeTimer(cmd)
         elif self.func is self.WRITE:
             self.result = self.writeTimerList(cmd)
+        elif self.func is self.RECNOW:
+            print "RECNOW"
+            self.result = self.recordNow(cmd)
         else:
-            self.result = False,"unknown command"
+            self.result = False,"unknown command cmd(%s) self.func(%s)" % (cmd, self.func)
 
     def delTimer(self,param):
         # is there an easier and better way? :\ 
@@ -175,6 +180,51 @@ class Timer( Source):
             return self.delTimer(param)
         else:
             return False,"command missing"
+    
+    def recordNow(self,param):
+        print "recordNow ",param
+        
+        limitEvent = True
+        if param == "undefinitely":
+            limitEvent = False
+        
+        serviceref = self.session.nav.getCurrentlyPlayingServiceReference()
+        print serviceref
+        #assert isinstance(serviceref, ServiceReference)
+        serviceref = ServiceReference(serviceref.toString())
+        event = None
+        try:
+            service = self.session.nav.getCurrentService()
+            event = self.epgcache.lookupEventTime(serviceref, -1, 0)
+            if event is None:
+                info = service.info()
+                ev = info.getEvent(0)
+                event = ev
+        except:
+            pass
+
+        begin = time.time()
+        end = begin + 3600 * 10
+        name = "instant record"
+        description = ""
+        eventid = 0
+
+        if event is not None:
+            curEvent = parseEvent(event)
+            name = curEvent[2]
+            description = curEvent[3]
+            eventid = curEvent[4]
+            if limitEvent:
+                end = curEvent[1]
+        else:
+            if limitEvent:
+                return False, "No event found, started recording undefinitely"
+
+        newtimer = RecordTimerEntry(serviceref, begin, end, name, description, eventid, False, False, 0)
+        newtimer.dontSave = True
+        self.recordtimer.record(newtimer)
+
+        return True,"recording was startet"
         
     def addTimer(self,param):
         # is there an easier and better way? :\ 
@@ -187,14 +237,14 @@ class Timer( Source):
         if param['begin'] is None:
            return False,"begin missing"
         else:
-            return False,"incorrect time begin"
+            begin = float(param['begin'])
         
         if param['end'] is None:
             return False,"end missing"
-        elif end < float(param['end']):
+        elif float(param['end']) > time.time():
             end = float(param['end'])
         else:
-             return False,"incorrect time end"
+             return False,"end is in the past"
                 
         if param['name'] is None:
             return False,"name is missing"
@@ -377,6 +427,7 @@ class Timer( Source):
         return True,"TimerList was saved "
             
     def getText(self):
+        print self.result
         (result,text) = self.result
         xml = "<?xml version=\"1.0\"?>\n"
         xml  += "<e2simplexmlresult>\n"
@@ -393,10 +444,7 @@ class Timer( Source):
     ## part for listfiller requests
     def command(self):
         timerlist = []
-#        print "len(self.recordtimer.timer_list) ", len(self.recordtimer.timer_list)
- #       print "timer_list ", self.recordtimer.timer_list
-  #      print "processed_timers", self.recordtimer.processed_timers
-#        try:
+
         for item in self.recordtimer.timer_list + self.recordtimer.processed_timers:
             timer = []
             timer.append(item.service_ref)
@@ -448,7 +496,13 @@ No clue, what it could be.
             timer.append(item.first_try_prepare)  
             timer.append(item.state)
             timer.append(item.repeated)
-            timer.append(item.dontSave)
+            
+            if item.dontSave is True:
+                timer.append(1)
+            else:
+                timer.append(0)
+#            timer.append(item.dontSave)
+
             timer.append(item.cancelled)
             
             if item.eit is not None:
