@@ -302,3 +302,26 @@ var tplAddTimerFormCheckbox = '';
 	tplAddTimerFormCheckbox += '<input type="checkbox" id="%(id)" name="%(name)" value="%(value)" %(checked)>&nbsp;%(txt)&nbsp;&nbsp;';
 
 //	<input type="checkbox" id="'+ Repeated[String(list[i])] +'" name="'+ Repeated[String(list[i])] +'" value="'+ list[i] +'" checked>&nbsp;'+ txt +'&nbsp;&nbsp;' + html2;
+
+var tplEMUPageHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
+	tplEMUPageHeader += '<thead class="fixedHeader">\n';
+	tplEMUPageHeader += '<tr>\n';
+	tplEMUPageHeader += '<th><div class="sListHeader" style="color: #000000;">EMU Overview</div>\n';
+	tplEMUPageHeader += '<div class="sListSearch">';
+	tplEMUPageHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
+	tplEMUPageHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
+	tplEMUPageHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
+	tplEMUPageHeader += '</form></div></th>';
+	tplEMUPageHeader += '</tr>\n';
+	tplEMUPageHeader += '</thead>\n';
+	tplEMUPageHeader += '<tbody class="scrollContent">\n';
+
+var tplEMUPageItem  = '<tr width="99%">\n';
+	tplEMUPageItem += '<td><divclass="tListSName" title="%(status), %(file)"><b>%(name)</b></div></td>\n';
+	tplEMUPageItem += '<td><div class="tListAfter"></div>%(action)</td>\n';
+	tplEMUPageItem += '<td><div class="tListOption"></div></td>\n';
+	tplEMUPageItem += '</tr>\n';
+
+var tplEMUPageOnOff = '<img src="/webdata/gfx/%(onOff).png" title="toggle On/Off" border="0" onclick="emuChangeStatus(\'%(onOff)\',\'%(file)\');"> / <a onclick="emuChangeStatus(\'restart\',\'%(file)\');">Restart</a>\n';
+
+var tplEMUPageFooter = "</tbody></table>\n";

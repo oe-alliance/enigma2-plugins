@@ -24,6 +24,9 @@ var url_parentcontrol= "/web/parentcontrollist";
 
 var url_moviefiledelete= "/web/moviefiledelete"; // plus serviceref,eventid
 
+var url_emulist= "/web/emulist";
+var url_emuchangestate= "/web/emuchangestate";
+
 var url_timerlist= "/web/timerlist";
 var url_recordnow= "/web/recordnow";
 var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
@@ -1474,7 +1477,7 @@ function writeTimerListNow() {
 	new Ajax.Request( url_timerlistwrite, { method: 'get' });
 }
 function recordingPushed() {
-	doRequest(url_timerlist, incomingRecordingPushed, false);	
+	doRequest(url_timerlist, incomingRecordingPushed, false);
 }
 function incomingRecordingPushed(request) {
 	if(request.readyState == 4){
@@ -1567,4 +1570,49 @@ function ifChecked(rObj) {
 	} else {
 		return "";
 	}
+}
+function showEmuConfig() {
+	doRequest(url_emulist, incomingEMUList, false);
+}
+function incomingEMUList(request) {
+	if(request.readyState == 4){
+		var emuList = new EMUList(getXML(request)).getArray();
+		
+		debug("got " + emuList.length + " emus");
+
+		listerHtml = tplEMUPageHeader;
+		var smallNamespace = { 'name': "EMU-name", 'file': " ", 'status': "Status", 'link': " ", 'action': "On-Off/Restart"};
+		listerHtml += RND(tplEMUPageItem, smallNamespace);
+		smallNamespace = { 'name': " ", 'file': " ", 'status': " ", 'link': " ", 'action': " "};
+		listerHtml += RND(tplEMUPageItem, smallNamespace);
+		
+		var OnOff = new Array('on', 'off');
+		
+		for( i = 0; i < emuList.length; i++) {
+			var emu = emuList[i];
+
+			var statusEmu = 0;
+			if(emu.getStatus() == "running") {
+				statusEmu = 1;
+			}
+			debug("status:"+statusEmu+emu.getStatus());
+			
+			var action = RND(tplEMUPageOnOff, {'onOff': OnOff[statusEmu], 'file': emu.getFile()});
+			var namespace = {
+				'name': emu.getName(),
+				'file': emu.getFile(),
+				'link': emu.getLink(),
+				'status': emu.getStatus(),
+				'action':  action
+				};
+			listerHtml += RND(tplEMUPageItem, namespace);
+		}
+		listerHtml += tplEMUPageFooter;
+		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
+		setBodyMainContent('BodyContentChannellist');
+		
+	}
+}
+function emuChangeStatus(state,file) {
+	new Ajax.Request(url_emuchangestate+"?state="+state+"&file="+file, { method: 'get' });
 }
