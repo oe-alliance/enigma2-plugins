@@ -1,5 +1,5 @@
 var DBG = true;
-//DBG = false;
+DBG = false;
 
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
@@ -344,9 +344,7 @@ function parentPin(servicereference) {
 	}
 }
 function zap(servicereference){
-	var test = parentPin(servicereference);
-	alert(test);
-	if(test) {
+	if(parentPin(servicereference)) {
 		new Ajax.Request( "/web/zap?ZapTo=" + servicereference, { method: 'get' });
 		getSubServices(servicereference);
 	}
