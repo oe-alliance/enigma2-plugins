@@ -44,6 +44,9 @@ class Movie( Source):
             
             if os.path.exists("%s.meta" % param):
                 os.system('rm -f "%s.meta"' % param)
+            
+            if os.path.exists("%s.eit" % param):
+                os.system('rm -f "%s.eit"' % param)
         except OSError:
             return False,"OSErrorSome error occurred while deleting file"
 #        except:
