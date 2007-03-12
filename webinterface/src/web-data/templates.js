@@ -326,3 +326,42 @@ var tplEMUPageOnOff = '<img src="/webdata/gfx/%(onOff).png" title="toggle On/Off
 var tplEMUPageNameLink = '<a target="_blank" href="%(link)">%(name)</a>\n';
 
 var tplEMUPageFooter = "</tbody></table>\n";
+
+var tplAbout  = '<table align="center" border="0" width="80%">';
+    tplAbout += '<tr><td align="left" width="50%" valign="top">';
+    tplAbout += '<table align="center" border="0" width="100%">';
+    tplAbout += '<tr><td align="left"></br></td></tr>';
+    tplAbout += '<tr><td align="left"><b>Box Info:</b></td></tr>';
+    tplAbout += '<tr><td align="left">%(enigmaVersion)</td></tr>';
+    tplAbout += '<tr><td align="left">%(fpVersion)</td></tr>';
+    tplAbout += '<tr><td align="left"></br></td></tr>';
+    tplAbout += '<tr><td align="left">%(tunerInfo)</td></tr>';
+    tplAbout += '<tr><td align="left"></br></td></tr>';
+    tplAbout += '<tr><td align="left">%(hddInfo)</td></tr>';
+    tplAbout += '<tr><td align="left"></br></td></tr>';
+    tplAbout += '<tr><td align="left"><b>LAN Info:</b></td></tr>';
+    tplAbout += '<tr><td align="left">%(lanDHCP)</td></tr>';
+    tplAbout += '<tr><td align="left">%(lanIP)</td></tr>';
+    tplAbout += '<tr><td align="left">%(lanMask)</td></tr>';
+    tplAbout += '<tr><td align="left">%(lanGW)</td></tr>';
+    tplAbout += '<tr><td align="left">%(lanDNS)</td></tr>\n';
+    tplAbout += '</table></td>\n';
+    tplAbout += '<td align="left" width="50%" valign="top">';
+    tplAbout += '<table align="center" border="0" width="100%">';
+    tplAbout += '<tr><td align="left"></br></td></tr>\n';
+    tplAbout += '<tr><td align="left"><b>Service Info:</b></td></tr>\n';
+    tplAbout += '<tr><td align="left">Name: %(serviceName)</td></tr>\n';
+    tplAbout += '<tr><td align="left">Provider: %(serviceProvider)</td></tr>\n';
+    tplAbout += '<tr><td align="left">Videoformat: %(serviceAspect)</td></tr>\n';
+    tplAbout += '<tr><td align="left">Namespace: %(serviceNamespace)</td></tr>\n';
+    tplAbout += '<tr><td align="left"></br></td></tr>\n';
+    tplAbout += '<tr><td align="left"><b>PIDs:</b></td></tr>\n';
+    tplAbout += '<tr><td align="left">VideoPID: %(vPIDh) (%(vPID)d)</td></tr>\n';
+    tplAbout += '<tr><td align="left">AudioPID: %(aPIDh) (%(aPID)d)</td></tr>\n';
+    tplAbout += '<tr><td align="left">PCRPID: %(pcrIDh) (%(pcrID)d)</td></tr>\n';
+    tplAbout += '<tr><td align="left">PMTPID: %(pmtPIDh) (%(pmtPID)d)</td></tr>\n';
+    tplAbout += '<tr><td align="left">TXTPID: %(txtPIDh) (%(txtPID)d)</td></tr>\n';
+    tplAbout += '<tr><td align="left">TSID: %(tsIDh) (%(tsID)d)</td></tr>\n';
+    tplAbout += '<tr><td align="left">ONID: %(onIDh) (%(onID)d)</td></tr>\n';
+    tplAbout += '<tr><td align="left">SID: %(sidh) (%(sid)d)</td></tr>\n';
+    tplAbout += '</table>'

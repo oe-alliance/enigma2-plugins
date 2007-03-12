@@ -18,6 +18,8 @@ var url_updates= "/web/updates.html";
 
 var url_movielist= "/web/movielist";
 
+var url_about= "/web/about";
+
 var url_settings= "/web/settings";
 
 var url_parentcontrol= "/web/parentcontrollist";
@@ -1619,4 +1621,55 @@ function incomingEMUList(request) {
 }
 function emuChangeStatus(state,file) {
 	new Ajax.Request(url_emuchangestate+"?state="+state+"&file="+file, { method: 'get' });
+}
+function showAbout() {
+	doRequest(url_about, incomingAbout, false);
+}
+function incomingAbout(request) {
+	if(request.readyState == 4){
+		var aboutEntries = getXML(request).getElementsByTagName("e2abouts").item(0).getElementsByTagName("e2about");
+		for (var c =0; c < aboutEntries.length;c++){
+			var xml = aboutEntries.item(c);
+			try{
+				var namespace = {
+					'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data
+					,'lanDHCP': xml.getElementsByTagName('e2landhcp').item(0).firstChild.data
+					,'lanIP': xml.getElementsByTagName('e2lanip').item(0).firstChild.data
+					,'lanMask': xml.getElementsByTagName('e2lanmask').item(0).firstChild.data
+					,'lanGW': xml.getElementsByTagName('e2langw').item(0).firstChild.data
+					,'lanDNS': xml.getElementsByTagName('e2landns').item(0).firstChild.data
+					,'fpVersion': xml.getElementsByTagName('e2fpversion').item(0).firstChild.data
+					,'tunerInfo': xml.getElementsByTagName('e2tunerinfo').item(0).firstChild.data
+					,'hddInfo': xml.getElementsByTagName('e2hddinfo').item(0).firstChild.data
+					,'serviceName': xml.getElementsByTagName('e2servicename').item(0).firstChild.data
+					,'serviceProvider': xml.getElementsByTagName('e2serviceprovider').item(0).firstChild.data
+					,'serviceAspect': xml.getElementsByTagName('e2serviceaspect').item(0).firstChild.data
+					,'serviceNamespace': xml.getElementsByTagName('e2servicenamespace').item(0).firstChild.data
+					,'vPID': xml.getElementsByTagName('e2vpid').item(0).firstChild.data
+					 ,'vPIDh': parseInt(xml.getElementsByTagName('e2vpid').item(0).firstChild.data,16)
+					,'aPID': xml.getElementsByTagName('e2apid').item(0).firstChild.data
+					 ,'aPIDh': parseInt(xml.getElementsByTagName('e2apid').item(0).firstChild.data,16)
+					,'pcrID': xml.getElementsByTagName('e2pcrid').item(0).firstChild.data
+ 					 ,'pcrIDh': parseInt(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data,16)
+					,'pmtPID': xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data
+					 ,'pmtPIDh': parseInt(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data,16)
+					,'txtPID': xml.getElementsByTagName('e2txtpid').item(0).firstChild.data
+					 ,'txtPIDh': parseInt(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data,16)
+					,'tsID': xml.getElementsByTagName('e2tsid').item(0).firstChild.data
+					 ,'tsIDh': parseInt(xml.getElementsByTagName('e2tsid').item(0).firstChild.data,16)
+					,'onID': xml.getElementsByTagName('e2onid').item(0).firstChild.data
+					 ,'onIDh': parseInt(xml.getElementsByTagName('e2onid').item(0).firstChild.data,16)
+					,'sid': xml.getElementsByTagName('e2sid').item(0).firstChild.data
+					 ,'sidh': parseInt(xml.getElementsByTagName('e2sid').item(0).firstChild.data,16)
+				  };
+				document.getElementById('BodyContentChannellist').innerHTML = RND(tplAbout, namespace);;
+				setBodyMainContent('BodyContentChannellist');
+			} catch (e) {
+				debug("About parsing Error");
+			}	
+		}
+		
+	}
+		
+	
 }
