@@ -623,6 +623,9 @@ function incomingChannellist(request){
 		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
 		setBodyMainContent('BodyContentChannellist');
 		loadServiceEPGNowNext(servicereftoloadepgnow);
+/*		alert(document.getElementById('scrollContent').style.height);
+		document.getElementById('scrollContent').style.height = '14.5%';
+				alert(document.getElementById('scrollContent').style.height);*/
 		debug("incomingChannellist " + typeof(loadedChannellist[servicereftoloadepgnow]));
 	}
 }

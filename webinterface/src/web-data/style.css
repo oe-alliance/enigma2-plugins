@@ -31,7 +31,7 @@ Make the ServiceList Table scrollable**************************
 div.BodyContentChannellist {
 	clear: both;
 	border: 1px solid #000;
-	height: 80%;
+	height: 79%;
 	overflow: auto;
 	margin: 0px 9px 0px;
 /*	width: 780px; */
@@ -108,7 +108,7 @@ thead.fixedHeader a:hover {
 /* induced side effect is that child TDs no longer accept width: auto                     */
 html>body tbody.scrollContent {
 	display: block;
-	height: 14.5%;
+	height: 600px;
 	overflow: auto;
 	width: 99%;
 }
