@@ -1598,8 +1598,12 @@ function incomingEMUList(request) {
 			debug("status:"+statusEmu+emu.getStatus());
 			
 			var action = RND(tplEMUPageOnOff, {'onOff': OnOff[statusEmu], 'file': emu.getFile()});
+			var emuName =  emu.getName();
+			if(emu.getLink() != "" && emu.getLink() != " ") {
+				emuName =  RND(tplEMUPageNameLink, {'name': emu.getName(), 'link': emu.getLink()});
+			}
 			var namespace = {
-				'name': emu.getName(),
+				'name': emuName,
 				'file': emu.getFile(),
 				'link': emu.getLink(),
 				'status': emu.getStatus(),

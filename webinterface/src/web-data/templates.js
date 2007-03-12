@@ -323,5 +323,6 @@ var tplEMUPageItem  = '<tr width="99%">\n';
 	tplEMUPageItem += '</tr>\n';
 
 var tplEMUPageOnOff = '<img src="/webdata/gfx/%(onOff).png" title="toggle On/Off" border="0" onclick="emuChangeStatus(\'%(onOff)\',\'%(file)\');"> / <a onclick="emuChangeStatus(\'restart\',\'%(file)\');">Restart</a>\n';
+var tplEMUPageNameLink = '<a target="_blank" href="%(link)">%(name)</a>\n';
 
 var tplEMUPageFooter = "</tbody></table>\n";
