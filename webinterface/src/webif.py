@@ -26,7 +26,6 @@ from WebComponents.Sources.RemoteControl import RemoteControl
 from WebComponents.Sources.Settings import Settings
 from WebComponents.Sources.SubServices import SubServices
 from WebComponents.Sources.ParentControl import ParentControl
-from WebComponents.Sources.EMUs import EMUs
 from WebComponents.Sources.About import About
 
 from WebComponents.Sources.RequestData import RequestData
@@ -88,9 +87,6 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["Settings"] = Settings(session)
 		
 		self["About"] = About(session)
-		
-		self["EMUsList"] = EMUs(session,func = EMUs.LIST)
-		self["EMUsStartStop"] = EMUs(session,func = EMUs.STARTSTOP)
 		
 	def browseTo(self, reftobrowse):
 		self["ServiceListBrowse"].root = reftobrowse

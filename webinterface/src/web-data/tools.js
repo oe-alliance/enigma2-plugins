@@ -1573,55 +1573,6 @@ function ifChecked(rObj) {
 		return "";
 	}
 }
-function showEmuConfig() {
-	doRequest(url_emulist, incomingEMUList, false);
-}
-function incomingEMUList(request) {
-	if(request.readyState == 4){
-		var emuList = new EMUList(getXML(request)).getArray();
-		
-		debug("got " + emuList.length + " emus");
-
-		listerHtml = tplEMUPageHeader;
-		var smallNamespace = { 'name': "EMU-name", 'file': " ", 'status': "Status", 'link': " ", 'action': "On-Off/Restart"};
-		listerHtml += RND(tplEMUPageItem, smallNamespace);
-		smallNamespace = { 'name': " ", 'file': " ", 'status': " ", 'link': " ", 'action': " "};
-		listerHtml += RND(tplEMUPageItem, smallNamespace);
-		
-		var OnOff = new Array('on', 'off');
-		
-		for( i = 0; i < emuList.length; i++) {
-			var emu = emuList[i];
-
-			var statusEmu = 0;
-			if(emu.getStatus() == "running") {
-				statusEmu = 1;
-			}
-			debug("status:"+statusEmu+emu.getStatus());
-			
-			var action = RND(tplEMUPageOnOff, {'onOff': OnOff[statusEmu], 'file': emu.getFile()});
-			var emuName =  emu.getName();
-			if(emu.getLink() != "" && emu.getLink() != " ") {
-				emuName =  RND(tplEMUPageNameLink, {'name': emu.getName(), 'link': emu.getLink()});
-			}
-			var namespace = {
-				'name': emuName,
-				'file': emu.getFile(),
-				'link': emu.getLink(),
-				'status': emu.getStatus(),
-				'action':  action
-				};
-			listerHtml += RND(tplEMUPageItem, namespace);
-		}
-		listerHtml += tplEMUPageFooter;
-		document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
-		setBodyMainContent('BodyContentChannellist');
-		
-	}
-}
-function emuChangeStatus(state,file) {
-	new Ajax.Request(url_emuchangestate+"?state="+state+"&file="+file, { method: 'get' });
-}
 function showAbout() {
 	doRequest(url_about, incomingAbout, false);
 }
