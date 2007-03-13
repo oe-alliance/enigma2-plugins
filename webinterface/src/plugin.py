@@ -46,7 +46,7 @@ NoExplicitHeaderFiles = ['getpid.xml','tvbrowser.xml',]
 """
 			
 
-#DEBUG = True
+DEBUG = True
 DEBUG = False
 DEBUGFILE= "/tmp/twisted.log"
 
@@ -121,6 +121,7 @@ def startWebserver():
 		addSlash = True
 		child_web = ScreenPage(util.sibpath(__file__, "web")) # "/web/*"
 		child_webdata = static.File(util.sibpath(__file__, "web-data")) # FIXME: web-data appears as webdata
+		child_wap = static.File(util.sibpath(__file__, "wap")) # static pages for wap
 
 		def render(self, req):
 			fp = open(util.sibpath(__file__, "web-data")+"/index.html")
