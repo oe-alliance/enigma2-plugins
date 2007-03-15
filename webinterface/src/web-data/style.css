@@ -104,7 +104,7 @@ thead.fixedHeader a:hover {
 /* induced side effect is that child TDs no longer accept width: auto                     */
 html>body tbody.scrollContent {
 	display: block;
-	height: 600px;
+	height: 422px;
 	overflow: auto;
 	width: 100%;
 }
