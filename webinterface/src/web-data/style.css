@@ -4,15 +4,15 @@ body {
 	margin:0px; 
 	font-family:Arial,sans-serif;
 	font-size: 12px;
-	background-color:#EEEEEE;
-	color:#444444;
+	background-color:#EEE;
+	color:#444;
 }
 
-a:link { color:#444444; }
-a:visited { color:#444444; }
-a:active { color:#444444; }
+a:link { color:#444; }
+a:visited { color:#444; }
+a:active { color:#444; }
 
-hr{ border: 1px solid #BBBBBB; 
+hr{ border: 1px solid #BBB; 
 	margin-left: 3px;
 	margin-right: 3px;
 }
@@ -149,15 +149,17 @@ normal stylesheet-stuff******************
 	overflow: auto;
 	vertical-align: top;
 	cursor: default;
-	border: 1px solid #000000; 
+	border: 1px solid #000; 
 }
 
 #Content{
 	vertical-align: middle;  
 	float: left;
-	background-color: #FFFFFF;
+	background-color: #FFF;
 	width: 800px;
-	padding-bottom: 10px;	 
+	padding-bottom: 10px;
+	border-right: 1px solid #000;
+	border-left: 1px solid #000;
 }
 
 #CurrentService { 
@@ -165,7 +167,6 @@ normal stylesheet-stuff******************
 	font-size: 14px;
 	font-weight: bold;
 /*	vertical-align: middle;  */
-	
 	float: left;
 	background-color: #0066CC;
 	color: #FFFFFF;
@@ -225,7 +226,7 @@ normal stylesheet-stuff******************
 #ServiceInfo{
 	width:800px;
 	height: 20px;
-	border-bottom: 1px solid #000000;
+	border-bottom: 1px solid #000;
 	float:none;
 	clear:both;
 	padding: 0 0 0;
@@ -241,7 +242,7 @@ normal stylesheet-stuff******************
 }
 
 #navTable{
-	background-color: #EEEEEE;
+	background-color: #EEE;
 	vertical-align: middle;
 	font-size: 14px;
 	font-weight: bold;
@@ -274,18 +275,18 @@ normal stylesheet-stuff******************
 }
 
 .navMenuPanel{
-	background-color: #BBBBBB;
+	background-color: #BBB;
 }
 .navMenuHeader{
 	font-size: 14px;
-	border-top: 1px solid #000000;
+	border-top: 1px solid #000;
 	height: 20px;
 }
 
 .navMenuContent{
 	font-size: 12px;
 	font-weight: normal;
-	background-color: #EEEEEE;
+	background-color: #EEE;
 	border: 0px;
 }
 .navMenuItem{
@@ -317,21 +318,21 @@ normal stylesheet-stuff******************
 }
 
 .eventExtDesc{
-	color: #777777;
-	background-color: #FFFFFF;
+	color: #777;
+	background-color: #FFF;
 	font-size:12px;
 	margin-bottom: 1px;
 	width:100%;
 }
 
 .bgMain{
-	background-color: #FFFFFF;
+	background-color: #FFF;
 	width: 100%;
 }
 .sListHeader{
 	font-size: 14px;
 	font-weight: bold;
-	color: #FFFFFF;
+	color: #FFF;
 	float:left;
 	width:50%;
 }
@@ -359,7 +360,7 @@ a.sListSLink{
 }
 
 a.sListSLink:hover{
-	background-color: #DDDDDD;
+	background-color: #DDD;
 }
 
 .sListExt{
@@ -435,13 +436,13 @@ a.sListSLink:hover{
 }
 #TimerColor1 {
 	color: #00BCBC;
-	background-color: #DDDDDD;
+	background-color: #DDD;
 }
 #TimerColor2 {
 	color: #9F1919;
-	background-color: #DDDDDD;
+	background-color: #DDD;
 }
 #TimerColor3 {
 	color: #00BCBC;
-	background-color: #DDDDDD;
+	background-color: #DDD;
 }
