@@ -350,8 +350,13 @@ function parentPin(servicereference) {
 }
 function zap(servicereference){
 	if(parentPin(servicereference)) {
-		new Ajax.Request( "/web/zap?ZapTo=" + servicereference, { method: 'get' });
-		getSubServices(servicereference);
+		new Ajax.Request( "/web/zap?ZapTo=" + servicereference, 
+							{
+								 method: 'get',
+								 onComplete: getSubServices(servicereference)
+							}
+						);
+//		getSubServices(servicereference);
 	}
 }
 

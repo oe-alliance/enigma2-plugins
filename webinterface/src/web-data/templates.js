@@ -39,7 +39,7 @@ var tplEPGListFooter = "</table>";
 var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplServiceListHeader += '<thead class="fixedHeader">\n';
 	tplServiceListHeader += '<tr>\n';
-	tplServiceListHeader += '<th><div class="sListHeader" style="color: #000000;">ServiceList</div>\n';
+	tplServiceListHeader += '<th><div class="sListHeader">ServiceList</div>\n';
 	tplServiceListHeader += '<div class="sListSearch">';
 	tplServiceListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplServiceListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';

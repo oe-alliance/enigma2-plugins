@@ -1,6 +1,7 @@
 <html>
 <head>
-	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type"></meta>
 	<title>Enigma 2 Webinterface (ALPHA)</title>
 	<!-- load everything for prototype and prototype window //-->
 	<script type="text/javascript" src="/webdata/lib/prototype.js" ></script>
@@ -9,82 +10,82 @@
 	<script type="text/javascript" src="/webdata/lib/ptwindow/window.js" ></script>
 	<!-- script type="text/javascript" src="/webdata/lib/ptwindow/debug.js" //-->
 
-	<link href="/webdata/lib/ptwindow/themes/default.css" rel="stylesheet" type="text/css" >
-	<link href="/webdata/lib/ptwindow/themes/alphacube.css" rel="stylesheet" type="text/css" >
+	<link href="/webdata/lib/ptwindow/themes/default.css" rel="stylesheet" type="text/css" ></link>
+	<link href="/webdata/lib/ptwindow/themes/alphacube.css" rel="stylesheet" type="text/css" ></link>
 
 	<!-- our stuff //-->
 	<script type="text/javascript" src="/webdata/templates.js" ></script>
 	<script type="text/javascript" src="/webdata/objects.js" ></script>
 	<script type="text/javascript" src="/webdata/tools.js" ></script>
 
-	<link href="/webdata/style.css" type="text/css" rel="stylesheet" >
-	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico">
+	<link href="/webdata/style.css" type="text/css" rel="stylesheet" ></link>
+	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico"></link>
 
 	<!-- Live RSS Feeds //-->
-	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss" >
+	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss" ></link>
 </head>
 
 <body>
-
 <div id="Main">
 	<div id="nav">	
-		<div id="NavHd"><span id="RequestIndicator" style="display:none;"><img  src="/webdata/gfx/progress.gif" />loading... </span></div>
+		<div id="NavHd"><span id="RequestIndicator" style="display:none;"><img alt="R" src="/webdata/gfx/progress.gif" />loading... </span></div>
 		
-		<table cellpadding="0" cellspacing="0" id="navTable">
-			<tr>
-				<td class="NavEl">
-						<!-- START BODY MENUE //-->
-						<div id="accordionMenue">
-   							<div class="navMenuPanel" id="accordionMenueBouquetPanelTV">
-     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderTV">TV</div>
-      							<div class="navMenuContent" id="accordionMenueBouquetContentTV">please wait, loading...</div>
-							</div>
-   							<div class="navMenuPanel" id="accordionMenueBouquetPanelRadio">
-     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderRadio">Radio</div>
-      							<div class="navMenuContent" id="accordionMenueBouquetContentRadio">please wait, loading...</div>
-							</div>
-   							<div class="navMenuPanel" id="accordionMenueBouquetPanelProviderTV">
-     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderTV">Provider TV</div>
-      							<div class="navMenuContent" id="accordionMenueBouquetContentProviderTV">please wait, loading...</div>
-							</div>
-   							<div class="navMenuPanel" id="accordionMenueBouquetPanelProviderRadio">
-     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderRadio">Provider Radio</div>
-      							<div class="navMenuContent" id="accordionMenueBouquetContentProviderRadio">please wait, loading...</div>
-							</div>
-   							<div class="navMenuPanel" id="accordionMenueBouquetPanelMovieTimer">
-     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderMovieTimer">Movie/Timer</div>
-      							<div class="navMenuContent" id="accordionMenueBouquetContentMovieTimer">
-									<div onclick="loadMovieList()">Movies</div><br/>
-									<div onclick="loadTimerList()">Timers</div><br/>
-									<div onclick="loadTimerFormNow()">add Timer</div><br/>
-								</div>
-							</div>
-   							<div class="navMenuPanel" id="accordionMenueBouquetPanelExtras">
-     							<div class="navMenuHeader" id="accordionMenueBouquetHeaderExtras">Extras</div>
-      							<div class="navMenuContent" id="accordionMenueBouquetContentExtras">
-									<div onclick="showMessageSendForm()">Message</div><br/>
-									<div onclick="showRemoteControllSendForm()">Remote Control</div><br/>
-									<div onclick="showPowerStateSendForm()">Power</div><br/>
-									<div onclick="showAbout()">About</div><br/>
-								</div>
-							</div>
+		<div id="navTable">
+			<div class="NavEl">
+				<!-- START BODY MENUE //-->
+				<div id="accordionMenue">
+					<div class="navMenuPanel" id="accordionMenueBouquetPanelTV">
+						<div class="navMenuHeader" id="accordionMenueBouquetHeaderTV">TV</div>
+						<div class="navMenuContent" id="accordionMenueBouquetContentTV">please wait, loading...</div>
+					</div>
+					
+					<div class="navMenuPanel" id="accordionMenueBouquetPanelRadio">
+						<div class="navMenuHeader" id="accordionMenueBouquetHeaderRadio">Radio</div>
+						<div class="navMenuContent" id="accordionMenueBouquetContentRadio">please wait, loading...</div>
+					</div>
+					
+					<div class="navMenuPanel" id="accordionMenueBouquetPanelProviderTV">
+						<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderTV">Provider TV</div>
+						<div class="navMenuContent" id="accordionMenueBouquetContentProviderTV">please wait, loading...</div>
+					</div>
+					
+					<div class="navMenuPanel" id="accordionMenueBouquetPanelProviderRadio">
+						<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderRadio">Provider Radio</div>
+						<div class="navMenuContent" id="accordionMenueBouquetContentProviderRadio">please wait, loading...</div>
+					</div>
+					
+					<div class="navMenuPanel" id="accordionMenueBouquetPanelMovieTimer">
+						<div class="navMenuHeader" id="accordionMenueBouquetHeaderMovieTimer">Movie/Timer</div>
+						<div class="navMenuContent" id="accordionMenueBouquetContentMovieTimer">
+							<div onclick="loadMovieList()">Movies</div>
+							<div onclick="loadTimerList()">Timers</div>
+							<div onclick="loadTimerFormNow()">add Timer</div>
 						</div>
-				</td>
-			</tr>
-			<!--tr>
-				<td class="NavEl"><a class="NavEl" href="#">Nav2</a></td>
-			</tr-->
-		</table>
+					</div>
+						
+					<div class="navMenuPanel" id="accordionMenueBouquetPanelExtras">
+						<div class="navMenuHeader" id="accordionMenueBouquetHeaderExtras">Extras</div>
+						<div class="navMenuContent" id="accordionMenueBouquetContentExtras">
+							<div onclick="showMessageSendForm()">Message</div>
+							<div onclick="showRemoteControllSendForm()">Remote Control</div>
+							<div onclick="showPowerStateSendForm()">Power</div>
+							<div onclick="showAbout()">About</div>
+						</div>
+					</div>		
+				</div>
+			</div>
+		</div>
 	</div>
+	
 	<div id="Content">
 		<div id="EventNowNext" class="bgMain">
 
 		    <div id="ServiceInfo">
 				<div id="CurrentService"></div>
 				<div id="VolumePanel"></div>
-				<div id="CurrentTime"></div>
-				<div id="RcordButton"><img src="/webdata/gfx/record.gif" onclick="recordingPushed();" /></div>
+				<div id="RecordButton"><img alt="Record" src="/webdata/gfx/record.gif" onclick="recordingPushed();" /></div>
 		      	<div id="SignalPanel"></div>
+				<div id="CurrentTime"></div>
 			</div>
 		    
 		    <div class="divblock">
@@ -112,6 +113,7 @@
 		<div id="BodyContentChannellist" class="BodyContentChannellist"></div>
 
 	</div>
+	<div></div>
 </div>
 <div>
 <!-- START LIVEUPDATESTREAM  is used to enable the liveupdatestream in MS Internet Explorer //-->
