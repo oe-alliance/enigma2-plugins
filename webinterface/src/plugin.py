@@ -23,7 +23,7 @@ sessions = [ ]
 	define all files in /web to send no  XML-HTTP-Headers here
 	all files not listed here will get an Content-Type: application/xhtml+xml charset: UTF-8
 """
-AppTextHeaderFiles = ['stream.m3u.xml','ts.m3u.xml',] 
+AppTextHeaderFiles = ['stream.m3u.xml','ts.m3u.xml','wapwrapper.xml',] 
 
 """
  Actualle, the TextHtmlHeaderFiles should contain the updates.html.xml, but the IE then
@@ -36,7 +36,7 @@ TextHtmlHeaderFiles = []
 	all files not listed here will get an Content-Type: text/html charset: UTF-8
 """
 NoExplicitHeaderFiles = ['getpid.xml','tvbrowser.xml',] 
- 
+
 """
  set DEBUG to True, if twisted should write logoutput to a file.
  in normal console output, twisted will print only the first Traceback.
@@ -47,7 +47,7 @@ NoExplicitHeaderFiles = ['getpid.xml','tvbrowser.xml',]
 			
 
 DEBUG = True
-DEBUG = False
+#DEBUG = False
 DEBUGFILE= "/tmp/twisted.log"
 
 from twisted.cred.portal import Portal
@@ -101,8 +101,8 @@ def startWebserver():
 				webif.renderPage(s, self.path, req, sessions[0])  # login?
 				if self.path.split("/")[-1] in AppTextHeaderFiles:
 					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'text', (('charset', 'UTF-8'),))},stream=s)
-#				elif self.path.split("/")[-1] in TextHtmlHeaderFiles:
-#					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('text', 'html', (('charset', 'UTF-8'),))},stream=s)
+				elif self.path.split("/")[-1] in TextHtmlHeaderFiles:
+					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('text', 'html', (('charset', 'UTF-8'),))},stream=s)
 				elif self.path.split("/")[-1] in NoExplicitHeaderFiles:
 					return http.Response(responsecode.OK,stream=s)
 				else:

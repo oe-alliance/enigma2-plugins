@@ -128,7 +128,18 @@ class TsM3U(WebScreen):
 		from Components.config import config
 		self["file"] = StaticText()
 		self["localip"] = RequestData(request,what=RequestData.HOST)
+
+class WAPwrapper(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		from Components.Sources.Config import Config
 		
+		from Components.Sources.StaticText import StaticText
+		self["redirect"] = StaticText()
+		print "request",request
+		for eachKey in self:
+			print "eachKey",eachKey
+				
 class RestartTwisted(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
@@ -397,6 +408,8 @@ def renderPage(stream, path, req, session):
 	parser = make_parser()
 	parser.setFeature(feature_namespaces, 0)
 	parser.setContentHandler(handler)
+	print "__file__: ",__file__
+	print "path: ",path
 	parser.parse(open(util.sibpath(__file__, path)))
 	
 	# by default, we have non-streaming pages

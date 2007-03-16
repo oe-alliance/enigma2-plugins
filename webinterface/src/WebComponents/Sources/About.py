@@ -78,19 +78,33 @@ class About( Source):
             svfeinfo = None
 
         # Get Service Info
-        list.append(svinfo.getInfoString(iServiceInformation.sProvider))
-        list.append(svinfo.getInfo(iServiceInformation.sAspect))
-        list.append(hex(svinfo.getInfo(iServiceInformation.sNamespace)))
+        if svinfo is not None:
+            list.append(svinfo.getInfoString(iServiceInformation.sProvider))
+            list.append(svinfo.getInfo(iServiceInformation.sAspect))
+            list.append(hex(svinfo.getInfo(iServiceInformation.sNamespace)))
 
-        # Get PIDs
-        list.append(svinfo.getInfo(iServiceInformation.sVideoPID))
-        list.append(svinfo.getInfo(iServiceInformation.sAudioPID))
-        list.append(svinfo.getInfo(iServiceInformation.sPCRPID))
-        list.append(svinfo.getInfo(iServiceInformation.sPMTPID))
-        list.append(svinfo.getInfo(iServiceInformation.sTXTPID))
-        list.append(svinfo.getInfo(iServiceInformation.sTSID))
-        list.append(svinfo.getInfo(iServiceInformation.sONID))
-        list.append(svinfo.getInfo(iServiceInformation.sSID))
+            # Get PIDs
+            list.append(svinfo.getInfo(iServiceInformation.sVideoPID))
+            list.append(svinfo.getInfo(iServiceInformation.sAudioPID))
+            list.append(svinfo.getInfo(iServiceInformation.sPCRPID))
+            list.append(svinfo.getInfo(iServiceInformation.sPMTPID))
+            list.append(svinfo.getInfo(iServiceInformation.sTXTPID))
+            list.append(svinfo.getInfo(iServiceInformation.sTSID))
+            list.append(svinfo.getInfo(iServiceInformation.sONID))
+            list.append(svinfo.getInfo(iServiceInformation.sSID))
+        else:
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            
         print list
         
         listR = []

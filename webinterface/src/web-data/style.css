@@ -105,6 +105,7 @@ thead.fixedHeader a:hover {
 html>body tbody.scrollContent {
 	display: block;
 	height: 422px;
+	// This is realy bad for resolution below 1280x1024
 	overflow: auto;
 	width: 100%;
 }

@@ -1,5 +1,5 @@
 var DBG = true;
-DBG = false;
+//DBG = false;
 
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
@@ -1582,6 +1582,7 @@ function showAbout() {
 }
 function incomingAbout(request) {
 	if(request.readyState == 4){
+		debug("incomingAbout returned");
 		var aboutEntries = getXML(request).getElementsByTagName("e2abouts").item(0).getElementsByTagName("e2about");
 		for (var c =0; c < aboutEntries.length;c++){
 			var xml = aboutEntries.item(c);
@@ -1601,30 +1602,28 @@ function incomingAbout(request) {
 					,'serviceAspect': xml.getElementsByTagName('e2serviceaspect').item(0).firstChild.data
 					,'serviceNamespace': xml.getElementsByTagName('e2servicenamespace').item(0).firstChild.data
 					,'vPID': xml.getElementsByTagName('e2vpid').item(0).firstChild.data
-					 ,'vPIDh': parseInt(xml.getElementsByTagName('e2vpid').item(0).firstChild.data,16)
-					,'aPID': xml.getElementsByTagName('e2apid').item(0).firstChild.data
-					 ,'aPIDh': parseInt(xml.getElementsByTagName('e2apid').item(0).firstChild.data,16)
+					 ,'vPIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2vpid').item(0).firstChild.data),16)+" "
+					,'aPID': xml.getElementsByTagName('e2apid').item(0).firstChild.data+" "
+					 ,'aPIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2apid').item(0).firstChild.data),16)+" "
 					,'pcrID': xml.getElementsByTagName('e2pcrid').item(0).firstChild.data
- 					 ,'pcrIDh': parseInt(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data,16)
+ 					 ,'pcrIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data),16)+" "
 					,'pmtPID': xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data
-					 ,'pmtPIDh': parseInt(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data,16)
+					 ,'pmtPIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data),16)+" "
 					,'txtPID': xml.getElementsByTagName('e2txtpid').item(0).firstChild.data
-					 ,'txtPIDh': parseInt(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data,16)
+					 ,'txtPIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data),16)+" "
 					,'tsID': xml.getElementsByTagName('e2tsid').item(0).firstChild.data
-					 ,'tsIDh': parseInt(xml.getElementsByTagName('e2tsid').item(0).firstChild.data,16)
+					 ,'tsIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2tsid').item(0).firstChild.data),16)+" "
 					,'onID': xml.getElementsByTagName('e2onid').item(0).firstChild.data
-					 ,'onIDh': parseInt(xml.getElementsByTagName('e2onid').item(0).firstChild.data,16)
+					 ,'onIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2onid').item(0).firstChild.data),16)+" "
 					,'sid': xml.getElementsByTagName('e2sid').item(0).firstChild.data
-					 ,'sidh': parseInt(xml.getElementsByTagName('e2sid').item(0).firstChild.data,16)
+					 ,'sidh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2sid').item(0).firstChild.data),16)+" "
 				  };
 				document.getElementById('BodyContentChannellist').innerHTML = RND(tplAbout, namespace);;
 				setBodyMainContent('BodyContentChannellist');
+				
 			} catch (e) {
-				debug("About parsing Error");
+				debug("About parsing Error" + e);
 			}	
 		}
-		
 	}
-		
-	
 }
