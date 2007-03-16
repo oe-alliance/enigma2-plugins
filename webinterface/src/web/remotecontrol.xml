@@ -4,5 +4,5 @@
 	&lt;e2result><e2:item name="Result" filter="xml"/>&lt;/e2result>
 	&lt;e2resulttext><e2:item name="ResultText" filter="xml"/>&lt;/e2resulttext>
 	</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
-&lt;/e2message>
+&lt;/e2remotecontrol>
 </e2:screen>
