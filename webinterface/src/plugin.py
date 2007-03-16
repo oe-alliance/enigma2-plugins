@@ -47,7 +47,7 @@ NoExplicitHeaderFiles = ['getpid.xml','tvbrowser.xml',]
 			
 
 DEBUG = True
-#DEBUG = False
+DEBUG = False
 DEBUGFILE= "/tmp/twisted.log"
 
 from twisted.cred.portal import Portal
