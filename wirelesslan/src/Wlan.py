@@ -7,7 +7,7 @@ from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigSubse
 
 from pythonwifi import iwlibs
 
-import os
+import os, string
 
 
 list = []

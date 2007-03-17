@@ -5,9 +5,12 @@ from Screens.MessageBox import MessageBox
 
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Pixmap import Pixmap
+from Components.Label import Label
 from Components.GUIComponent import *
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
+
+
 from Components.config import config, getConfigListEntry
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Network import Network
@@ -16,10 +19,19 @@ from Plugins.Plugin import PluginDescriptor
 
 from Wlan import WlanList, InitNetwork, wpaSupplicant
 
+plugin_path = "/usr/lib/enigma2/python/Plugins/Extensions/WirelessLAN"
+
 class WlanSelection(Screen):
 	skin = """
 	<screen position="76,138" size="600,300" title="Choose a Wireless Network" >
 		<widget name="list" position="10,10" size="580,200" scrollbarMode="showOnDemand" />
+		<widget name="select" position="85,255" size="140,40" pixmap="~/key-green.png" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="skip" position="235,255" size="140,40" pixmap="~/key-yellow.png" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="cancel" position="385,255" size="140,40" pixmap="~/key-red.png" zPosition="1" transparent="1" alphatest="on" />		
+		
+		<widget name="selecttext" position="85,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
+		<widget name="skiptext" position="235,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
+		<widget name="canceltext" position="385,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 	</screen>
 	"""
 		#<widget name="Explanation" position="10,340" size="580,100" />	
@@ -32,14 +44,31 @@ class WlanSelection(Screen):
 		self.list = []
 				
 		self["list"] = WlanList(None)
+		self.skin_path = plugin_path
+		
+		self["select"] = Pixmap()
+		self["skip"] = Pixmap()
+		self["cancel"] = Pixmap()
+		
+		self["selecttext"] = Label(_("Select"))
+		self["skiptext"] = Label(_("Skip"))
+		self["canceltext"] = Label(_("Cancel"))
+		
 		
 		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
 		{
-			"ok": self.ok,
-			"back": self.back,
+			"ok": self.select,
+			"back": self.exit,
 			"up": self.up,
 			"down": self.down,
 		}, -1)
+		
+		self["shortcuts"] = ActionMap(["ShortcutActions"],
+		{
+			"green": self.select,
+			"yellow": self.skip,
+			"red": self.exit,
+		})
 
 	def up(self):
 		print "up"
@@ -47,7 +76,7 @@ class WlanSelection(Screen):
 	def down(self):
 		print "down"
 	
-	def ok(self):
+	def select(self):
 		cur = self["list"].getCurrent()
 		if cur:
 			ret = (self.session, cur)
@@ -55,19 +84,25 @@ class WlanSelection(Screen):
 			ret = (self.session, None)
 		self.close(ret)
 	
-	def back(self):
+	def skip(self):
 		self.close( (self.session, None) )
+	
+	def exit(self):
+		self.close( (None ,) )
 
 class WlanConfiguration(ConfigListScreen, Screen):
 	skin = """
 		<screen position="76,138" size="600,300" title="Wireless Network Configuration" >
-			<widget name="config" position="10,10" size="580,200" scrollbarMode="showOnDemand" />	
+			<widget name="config" position="10,10" size="580,200" scrollbarMode="showOnDemand" />
+			<widget name="introduction" position="100,260" size="400,30" font="Regular;23" valign="center" halign="center" />	
 		</screen>
 	"""
 	
 	def __init__(self, session, essid = None, encrypted = False, iface = "wlan1"):
 		
 		Screen.__init__(self, session)		
+
+		self["introduction"] = Label(_("Press OK to activate the settings."))
 
 		self.ws = wpaSupplicant()
 		
