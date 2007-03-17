@@ -45,7 +45,7 @@ class WlanList(HTMLComponent, GUIComponent):
 		
 		self.asciitrans = string.maketrans(a, b)
 		
-		self.aps = {}
+		self.aps = None
 		self.l = None
 		self.l = eListboxPythonMultiContent()
 		
@@ -60,7 +60,7 @@ class WlanList(HTMLComponent, GUIComponent):
 		return str.translate(self.asciitrans)
 
 	def getNetworkList(self):
-		
+		iwifaces = None
 		try:
 			iwifaces = iwlibs.getNICnames()
 		except:
@@ -83,7 +83,8 @@ class WlanList(HTMLComponent, GUIComponent):
 					scanresults = None
 					print "[Wlan.py] No Wireless Networks could be found"
 				
-				if scanresults:
+				if scanresults is not None:
+					self.aps = {}
 					for result in scanresults:
 						
 							bssid = result.bssid
@@ -128,15 +129,16 @@ class WlanList(HTMLComponent, GUIComponent):
 	def reload(self):
 		self.getNetworkList()
 		list = []
-		
-		if self.aps:
+		if self.aps is not None:
+			print "[Wlan.py] got Accespoints!"
 			for ap in self.aps:
 				a = self.aps[ap]
 				if a['active']:
 					list.append((a['essid'], a['bssid'], a['encrypted'], a['iface'], a['maxrate']))
 		
+		self.l.setList([])
 		self.l.setList(list)
-			
+		 	
 	GUI_WIDGET = eListbox
 
 	def getCurrent(self):
