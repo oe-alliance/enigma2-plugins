@@ -87,33 +87,33 @@ class WlanList(HTMLComponent, GUIComponent):
 					self.aps = {}
 					for result in scanresults:
 						
-							bssid = result.bssid
-	
-							encryption = map(lambda x: hex(ord(x)), result.encode)
-	
-							if encryption[-1] == "0x8":
-								encryption = True
-							else:
-								encryption = False
-	
-							extra = []
-							for element in result.custom:
-								element = element.encode()
-								extra.append( string.strip(self.asciify(element)) )
-	
-							self.aps[bssid] = {
-								'active' : True,
-								'bssid': result.bssid,
-								'channel': result.frequency.getChannel(result.frequency.getFrequency(), result.range),
-								'encrypted': encryption,
-								'essid': string.strip(self.asciify(result.essid)),
-								'iface': iface,
-								'maxrate' : result.rate[-1],
-								'noise' : result.quality.getNoiselevel(),
-								'quality' : result.quality.quality,
-								'signal' : result.quality.getSignallevel(),
-								'custom' : extra,
-							}
+						bssid = result.bssid
+
+						encryption = map(lambda x: hex(ord(x)), result.encode)
+
+						if encryption[-1] == "0x8":
+							encryption = True
+						else:
+							encryption = False
+
+						extra = []
+						for element in result.custom:
+							element = element.encode()
+							extra.append( string.strip(self.asciify(element)) )
+
+						self.aps[bssid] = {
+							'active' : True,
+							'bssid': result.bssid,
+							'channel': result.frequency.getChannel(result.frequency.getFrequency(), result.range),
+							'encrypted': encryption,
+							'essid': string.strip(self.asciify(result.essid)),
+							'iface': iface,
+							'maxrate' : result.rate[-1],
+							'noise' : result.quality.getNoiselevel(),
+							'quality' : result.quality.quality,
+							'signal' : result.quality.getSignallevel(),
+							'custom' : extra,
+						}
 		
 	
 	def buildWlanListEntry(self, essid, bssid, encrypted, iface, maxrate):                                                                                                 
