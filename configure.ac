@@ -13,6 +13,9 @@ movietagger/Makefile
 movietagger/etc/Makefile
 movietagger/src/Makefile
 
+pythonwifi/Makefile
+pythonwifi/src/Makefile
+
 webinterface/Makefile
 webinterface/src/Makefile
 webinterface/src/web/Makefile
@@ -33,5 +36,8 @@ webinterface/src/web-data/lib/ptwindow/themes/Makefile
 webinterface/src/web-data/lib/ptwindow/themes/default/Makefile
 webinterface/src/web-data/lib/ptwindow/themes/nuncio/Makefile
 webinterface/src/web-data/lib/Makefile
+
+wirelesslan/Makefile
+wirelesslan/src/Makefile
 
 ])
