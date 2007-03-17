@@ -1,3 +1,3 @@
 installdir = /usr/lib/enigma2/python/Plugins/Extensions/WirelessLan/
 
-install_PYTHON = __init__.py plugin.py Wlan.py LICENSE
+install_PYTHON = __init__.py plugin.py Wlan.py LICENSE *.png
