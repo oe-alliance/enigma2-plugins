@@ -23,15 +23,18 @@ plugin_path = "/usr/lib/enigma2/python/Plugins/Extensions/WirelessLAN"
 
 class WlanSelection(Screen):
 	skin = """
-	<screen position="76,138" size="600,300" title="Choose a Wireless Network" >
+	<screen position="70,138" size="610,300" title="Choose a Wireless Network" >
 		<widget name="list" position="10,10" size="580,200" scrollbarMode="showOnDemand" />
-		<widget name="select" position="85,255" size="140,40" pixmap="~/key-green.png" zPosition="1" transparent="1" alphatest="on" />
-		<widget name="skip" position="235,255" size="140,40" pixmap="~/key-yellow.png" zPosition="1" transparent="1" alphatest="on" />
-		<widget name="cancel" position="385,255" size="140,40" pixmap="~/key-red.png" zPosition="1" transparent="1" alphatest="on" />		
 		
-		<widget name="selecttext" position="85,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
-		<widget name="skiptext" position="235,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
-		<widget name="canceltext" position="385,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="cancel" position="10,255" size="140,40" pixmap="~/key-red.png" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="select" position="160,255" size="140,40" pixmap="~/key-green.png" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="rescan" position="310,255" size="140,40" pixmap="~/key-yellow.png" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="skip" position="460,255" size="140,40" pixmap="~/key-blue.png" zPosition="1" transparent="1" alphatest="on" />
+		
+		<widget name="canceltext" position="10,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />		
+		<widget name="selecttext" position="160,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
+		<widget name="rescantext" position="310,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
+		<widget name="skiptext" position="460,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 	</screen>
 	"""
 		#<widget name="Explanation" position="10,340" size="580,100" />	
@@ -43,16 +46,20 @@ class WlanSelection(Screen):
 		
 		self.list = []
 				
-		self["list"] = WlanList(None)
+		self["list"] = WlanList(self.session)
 		self.skin_path = plugin_path
 		
-		self["select"] = Pixmap()
-		self["skip"] = Pixmap()
 		self["cancel"] = Pixmap()
+		self["select"] = Pixmap()
+		self["rescan"] = Pixmap()
+		self["skip"] = Pixmap()
 		
-		self["selecttext"] = Label(_("Select"))
-		self["skiptext"] = Label(_("Skip"))
+		
 		self["canceltext"] = Label(_("Cancel"))
+		self["selecttext"] = Label(_("Select"))
+		self["rescantext"] = Label(_("Rescan"))
+		self["skiptext"] = Label(_("Skip"))
+		
 		
 		
 		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
@@ -65,9 +72,10 @@ class WlanSelection(Screen):
 		
 		self["shortcuts"] = ActionMap(["ShortcutActions"],
 		{
+		 	"red": self.exit,
 			"green": self.select,
-			"yellow": self.skip,
-			"red": self.exit,
+			"yellow": self.rescan,
+			"blue": self.skip,
 		})
 
 	def up(self):
@@ -83,6 +91,9 @@ class WlanSelection(Screen):
 		else:
 			ret = (self.session, None)
 		self.close(ret)
+	
+	def rescan(self):
+		self["list"].reload()
 	
 	def skip(self):
 		self.close( (self.session, None) )
@@ -182,7 +193,7 @@ class WlanConfiguration(ConfigListScreen, Screen):
 	def cancel(self):
 		self.close()
 
-def EntryChoosed(parms):
+def EntryChosen(parms):
 	if parms[0]:
 		session = parms[0]
 		if parms[1] is not None:
@@ -195,7 +206,7 @@ def EntryChoosed(parms):
 			session.open(WlanConfiguration)
 
 def WlanSelectionMain(session, **kwargs):
-	session.openWithCallback(EntryChoosed, WlanSelection)
+	session.openWithCallback(EntryChosen, WlanSelection)
 
 def WlanConfigurationMain(session, **kwargs):
 	session.open(WlanConfiguration)

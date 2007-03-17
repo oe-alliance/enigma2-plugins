@@ -46,7 +46,7 @@ class WlanList(HTMLComponent, GUIComponent):
 		self.asciitrans = string.maketrans(a, b)
 		
 		self.aps = {}
-		
+		self.l = None
 		self.l = eListboxPythonMultiContent()
 		
 		self.l.setFont(0, gFont("Regular", 32))
@@ -72,7 +72,7 @@ class WlanList(HTMLComponent, GUIComponent):
 			for iface in iwlibs.getNICnames():
 	
 				ifobj = iwlibs.Wireless(iface) # a Wireless NIC Object
-	
+
 				#Association mappings
 				stats, quality, discard, missed_beacon = ifobj.getStatistics()
 				snr = quality.signallevel - quality.noiselevel
@@ -127,15 +127,15 @@ class WlanList(HTMLComponent, GUIComponent):
 			
 	def reload(self):
 		self.getNetworkList()
+		list = []
 		
 		if self.aps:
 			for ap in self.aps:
-				list = []
 				a = self.aps[ap]
 				if a['active']:
 					list.append((a['essid'], a['bssid'], a['encrypted'], a['iface'], a['maxrate']))
-			self.l.setList(list)
 		
+		self.l.setList(list)
 			
 	GUI_WIDGET = eListbox
 
