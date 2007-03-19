@@ -15,9 +15,7 @@ list.append(_("WEP"))
 list.append(_("WPA"))
 list.append(_("WPA2"))
 
-config.plugins = ConfigSubsection()
 config.plugins.wlan = ConfigSubsection()
-
 
 config.plugins.wlan.enabled = ConfigEnableDisable(default = False)
 config.plugins.wlan.interface = ConfigText(default = "wlan0", fixed_size = False)
