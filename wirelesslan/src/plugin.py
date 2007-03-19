@@ -13,7 +13,7 @@ from Components.MultiContent import MultiContentEntryText
 
 from Components.config import config, getConfigListEntry
 from Components.ConfigList import ConfigList, ConfigListScreen
-from Network import Network
+from Components.Network import Network
 
 from Plugins.Plugin import PluginDescriptor
 
@@ -109,7 +109,7 @@ class WlanConfiguration(ConfigListScreen, Screen):
 		</screen>
 	"""
 	
-	def __init__(self, session, essid = None, encrypted = False, iface = "wlan1"):
+	def __init__(self, session, essid = None, encrypted = False, iface = "wlan0"):
 		
 		Screen.__init__(self, session)		
 
