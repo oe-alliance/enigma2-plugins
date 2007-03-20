@@ -183,8 +183,8 @@ def callFunction(iface):
 	else:
 		return None
 
-def configStrings():
-	pass
+def configStrings(iface):
+	return "#Custom Configstring for "+iface
 	
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "menuEntryName": "Wlan Configuartion Utility"})
