@@ -1,5 +1,3 @@
-from enigma import *
-
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 
@@ -17,7 +15,7 @@ from Components.Network import Network
 
 from Plugins.Plugin import PluginDescriptor
 
-from Wlan import WlanList, InitNetwork, wpaSupplicant
+from Wlan import Wlan, WlanList, wpaSupplicant
 
 plugin_path = "/usr/lib/enigma2/python/Plugins/Extensions/WirelessLAN"
 
@@ -37,7 +35,6 @@ class WlanSelection(Screen):
 		<widget name="skiptext" position="460,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 	</screen>
 	"""
-		#<widget name="Explanation" position="10,340" size="580,100" />	
 	def __init__(self, session, args = None):
 	
 		self.skin = WlanSelection.skin
@@ -59,15 +56,13 @@ class WlanSelection(Screen):
 		self["selecttext"] = Label(_("Select"))
 		self["rescantext"] = Label(_("Rescan"))
 		self["skiptext"] = Label(_("Skip"))
-		
-		
-		
+			
 		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
 		{
 			"ok": self.select,
 			"back": self.exit,
-			"up": self.up,
-			"down": self.down,
+#			"up": self.up,
+#			"down": self.down,
 		}, -1)
 		
 		self["shortcuts"] = ActionMap(["ShortcutActions"],
@@ -77,12 +72,6 @@ class WlanSelection(Screen):
 			"yellow": self.rescan,
 			"blue": self.skip,
 		})
-
-	def up(self):
-		print "up"
-	
-	def down(self):
-		print "down"
 	
 	def select(self):
 		cur = self["list"].getCurrent()
@@ -104,7 +93,8 @@ class WlanSelection(Screen):
 class WlanConfiguration(ConfigListScreen, Screen):
 	skin = """
 		<screen position="76,138" size="600,300" title="Wireless Network Configuration" >
-			<widget name="config" position="10,10" size="580,200" scrollbarMode="showOnDemand" />
+			<widget name="interface" position="10,10" size="580,30" font="Regular;24" valign="center" />
+			<widget name="config" position="10,60" size="580,150" scrollbarMode="showOnDemand" />
 			<widget name="introduction" position="100,260" size="400,30" font="Regular;23" valign="center" halign="center" />	
 		</screen>
 	"""
@@ -112,17 +102,19 @@ class WlanConfiguration(ConfigListScreen, Screen):
 	def __init__(self, session, essid = None, encrypted = False, iface = "wlan0"):
 		
 		Screen.__init__(self, session)		
-
-		self["introduction"] = Label(_("Press OK to activate the settings."))
-
+		self.skin = WlanConfiguration.skin
+		
+		self.iface = iface
+		self.list = []
 		self.ws = wpaSupplicant()
+		
+		self["introduction"] = Label(_("Press OK to activate the settings."))
+		self["interface"] = Label(_("Interface: ")+self.iface)
 		
 		if essid is None:
 			self.ws.loadConfig()
 		
 		else:
-			config.plugins.wlan.enabled.value = True
-			config.plugins.wlan.interface.value = iface
 			config.plugins.wlan.essid.value = essid
 			config.plugins.wlan.encryption.enabled.value = True
 			
@@ -132,48 +124,23 @@ class WlanConfiguration(ConfigListScreen, Screen):
 			"cancel": self.cancel,
 		}, -2)
 		
-		self.skin = WlanConfiguration.skin
-		
-		self.list = []
-		self.iface = iface
-		
 		ConfigListScreen.__init__(self, self.list)
 		self.createSetup()
 	
 	def createSetup(self):
-		#InitNetwork()
-		n = Network(self.iface)
-		n.loadNetworkConfig()
-	
+
 		self.list = [ ]
+						
+		self.list.append(getConfigListEntry(_("Network SSID"), config.plugins.wlan.essid))
+		self.list.append(getConfigListEntry(_("Encryption"), config.plugins.wlan.encryption.enabled))
 		
-		self.list.append(getConfigListEntry(_("Wireless Network Adapter"), config.plugins.wlan.enabled))
-		if config.plugins.wlan.enabled.value:
-			
-			self.list.append(getConfigListEntry(_("Interface"), config.plugins.wlan.interface))			
-			self.list.append(getConfigListEntry(_("Network SSID"), config.plugins.wlan.essid))
-			self.list.append(getConfigListEntry(_("Encryption"), config.plugins.wlan.encryption.enabled))
-			if config.plugins.wlan.encryption.enabled.value:
-				self.list.append(getConfigListEntry(_("Encryption Type"), config.plugins.wlan.encryption.type))
-				self.list.append(getConfigListEntry(_("Encryption Key"), config.plugins.wlan.encryption.psk))
-			
-			self.dhcpEntry = getConfigListEntry(_("Use DHCP"), config.network.dhcp)
-			self.list.append(self.dhcpEntry)
-			
-			if not config.network.dhcp.value:
-				self.list.append(getConfigListEntry(_("IP Address"), config.network.ip))
-				self.list.append(getConfigListEntry(_("Netmask"), config.network.netmask))
-				self.list.append(getConfigListEntry(_("Nameserver"), config.network.dns))
-				self.list.append(getConfigListEntry(_("Gateway"), config.network.gateway))
+		if config.plugins.wlan.encryption.enabled.value:
+			self.list.append(getConfigListEntry(_("Encryption Type"), config.plugins.wlan.encryption.type))
+			self.list.append(getConfigListEntry(_("Encryption Key"), config.plugins.wlan.encryption.psk))
 		
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 	
-	def newConfig(self):
-		print self["config"].getCurrent()
-		if self["config"].getCurrent() == self.dhcpEntry:
-			self.createSetup()
-
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
 		self.createSetup()
@@ -185,9 +152,6 @@ class WlanConfiguration(ConfigListScreen, Screen):
 	def ok(self):
 		self.ws.writeConfig()
 		self.ws.restart(self.iface)
-		n = Network(self.iface)
-		n.writeNetworkConfig()
-		n.activateNetworkConfig()
 		self.close()
 
 	def cancel(self):
@@ -205,12 +169,23 @@ def EntryChosen(parms):
 		else:
 			session.open(WlanConfiguration)
 
-def WlanSelectionMain(session, **kwargs):
+def WlanSelectionMain(session, iface):
 	session.openWithCallback(EntryChosen, WlanSelection)
 
 def WlanConfigurationMain(session, **kwargs):
 	session.open(WlanConfiguration)
+
+def callFunction(iface):
+	w = Wlan()
+
+	if iface in w.getWirelessInterfaces():
+		return WlanSelectionMain	
+	else:
+		return None
+
+def configStrings():
+	pass
 	
 def Plugins(**kwargs):
-	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=WlanSelectionMain)
+	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "menuEntryName": "Wlan Configuartion Utility"})
 	

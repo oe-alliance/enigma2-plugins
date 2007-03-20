@@ -16,24 +16,17 @@ list.append(_("WPA"))
 list.append(_("WPA2"))
 
 config.plugins.wlan = ConfigSubsection()
-
-config.plugins.wlan.enabled = ConfigEnableDisable(default = False)
-config.plugins.wlan.interface = ConfigText(default = "wlan0", fixed_size = False)
 config.plugins.wlan.essid = NoSave(ConfigText(default = "home", fixed_size = False))
 
 config.plugins.wlan.encryption = ConfigSubsection()
-
 config.plugins.wlan.encryption.enabled = NoSave(ConfigYesNo(default = False))
 config.plugins.wlan.encryption.type = NoSave(ConfigSelection(list, default = _("WPA")))
 config.plugins.wlan.encryption.psk = NoSave(ConfigText(default = "mysecurewlan", fixed_size = False))
 
-class WlanList(HTMLComponent, GUIComponent):
-	
-	def __init__(self, session):
-		
-		GUIComponent.__init__(self)
-
+class Wlan:
+	def __init__(self):
 		a = ''; b = ''
+		
 		for i in range(0, 255):
 		    a = a + chr(i)
 		    if i < 32 or i > 127:
@@ -42,8 +35,77 @@ class WlanList(HTMLComponent, GUIComponent):
 			b = b + chr(i)
 		
 		self.asciitrans = string.maketrans(a, b)
+
+	def asciify(self, str):
+		return str.translate(self.asciitrans)
+	
+	def getWirelessInterfaces(self):
+		iwifaces = None
+		try:
+			iwifaces = iwlibs.getNICnames()
+		except:
+			iwifaces = None
+			"[Wlan.py] No Wireless Networkcards could be found"
 		
-		self.aps = None
+		return iwifaces
+	
+	def getNetworkList(self, iface):
+
+		ifobj = iwlibs.Wireless(iface) # a Wireless NIC Object
+		
+		#Association mappings
+		stats, quality, discard, missed_beacon = ifobj.getStatistics()
+		snr = quality.signallevel - quality.noiselevel
+		
+		try:
+			scanresults = ifobj.scan()
+		except:
+			scanresults = None
+			print "[Wlan.py] No Wireless Networks could be found"
+		
+		if scanresults is not None:
+			aps = {}
+			for result in scanresults:
+				
+				bssid = result.bssid
+		
+				encryption = map(lambda x: hex(ord(x)), result.encode)
+		
+				if encryption[-1] == "0x8":
+					encryption = True
+				else:
+					encryption = False
+		
+				extra = []
+				for element in result.custom:
+					element = element.encode()
+					extra.append( string.strip(self.asciify(element)) )
+		
+				aps[bssid] = {
+					'active' : True,
+					'bssid': result.bssid,
+					'channel': result.frequency.getChannel(result.frequency.getFrequency(), result.range),
+					'encrypted': encryption,
+					'essid': string.strip(self.asciify(result.essid)),
+					'iface': iface,
+					'maxrate' : result.rate[-1],
+					'noise' : result.quality.getNoiselevel(),
+					'quality' : result.quality.quality,
+					'signal' : result.quality.getSignallevel(),
+					'custom' : extra,
+				}
+				
+			return aps
+				
+
+class WlanList(HTMLComponent, GUIComponent):
+	
+	def __init__(self, session, iface = 'wlan0'):
+		
+		GUIComponent.__init__(self)
+		self.w = Wlan()
+		self.iface = iface
+		
 		self.l = None
 		self.l = eListboxPythonMultiContent()
 		
@@ -53,66 +115,6 @@ class WlanList(HTMLComponent, GUIComponent):
 		self.l.setBuildFunc(self.buildWlanListEntry)		
 				
 		self.reload()
-	
-	def asciify(self, str):
-		return str.translate(self.asciitrans)
-
-	def getNetworkList(self):
-		iwifaces = None
-		try:
-			iwifaces = iwlibs.getNICnames()
-		except:
-			iwifaces = None
-			"[Wlan.py] No Wireless Networkcards could be found"
-		
-		if iwifaces:
-	
-			for iface in iwlibs.getNICnames():
-	
-				ifobj = iwlibs.Wireless(iface) # a Wireless NIC Object
-
-				#Association mappings
-				stats, quality, discard, missed_beacon = ifobj.getStatistics()
-				snr = quality.signallevel - quality.noiselevel
-				
-				try:
-					scanresults = ifobj.scan()
-				except:
-					scanresults = None
-					print "[Wlan.py] No Wireless Networks could be found"
-				
-				if scanresults is not None:
-					self.aps = {}
-					for result in scanresults:
-						
-						bssid = result.bssid
-
-						encryption = map(lambda x: hex(ord(x)), result.encode)
-
-						if encryption[-1] == "0x8":
-							encryption = True
-						else:
-							encryption = False
-
-						extra = []
-						for element in result.custom:
-							element = element.encode()
-							extra.append( string.strip(self.asciify(element)) )
-
-						self.aps[bssid] = {
-							'active' : True,
-							'bssid': result.bssid,
-							'channel': result.frequency.getChannel(result.frequency.getFrequency(), result.range),
-							'encrypted': encryption,
-							'essid': string.strip(self.asciify(result.essid)),
-							'iface': iface,
-							'maxrate' : result.rate[-1],
-							'noise' : result.quality.getNoiselevel(),
-							'quality' : result.quality.quality,
-							'signal' : result.quality.getSignallevel(),
-							'custom' : extra,
-						}
-		
 	
 	def buildWlanListEntry(self, essid, bssid, encrypted, iface, maxrate):                                                                                                 
 		
@@ -125,12 +127,12 @@ class WlanList(HTMLComponent, GUIComponent):
 		return res
 			
 	def reload(self):
-		self.getNetworkList()
+		aps = self.w.getNetworkList(self.iface)
 		list = []
-		if self.aps is not None:
+		if aps is not None:
 			print "[Wlan.py] got Accespoints!"
-			for ap in self.aps:
-				a = self.aps[ap]
+			for ap in aps:
+				a = aps[ap]
 				if a['active']:
 					list.append((a['essid'], a['bssid'], a['encrypted'], a['iface'], a['maxrate']))
 		
@@ -146,12 +148,12 @@ class WlanList(HTMLComponent, GUIComponent):
 		instance.setContent(self.l)
 		instance.setItemHeight(60)
 
+
 class wpaSupplicant:
 	def __init__(self):
 		pass
 		
 	def writeConfig(self):	
-		if config.plugins.wlan.enabled.value:
 			
 			essid = config.plugins.wlan.essid.value
 			encrypted = config.plugins.wlan.encryption.enabled.value
@@ -202,18 +204,20 @@ class wpaSupplicant:
 				split = s.strip().split('=')
 				if split[0] == 'ssid':
 					print "[Wlan.py] Got SSID "+split[1][1:-1]
-					config.plugins.wlan.enabled.value = True
 					config.plugins.wlan.essid.value = split[1][1:-1]
+					
 				elif split[0] == 'proto':
 					config.plugins.wlan.encryption.enabled.value = True
 					if split[1] == "WPA RSN" : split[1] = 'WPA2'
 					config.plugins.wlan.encryption.type.value = split[1]
 					print "[Wlan.py] Got Encryption "+split[1]
+				
 				elif split[0] == 'psk':
 					config.plugins.wlan.encryption.psk.value = split[1][1:-1]
 					print "[Wlan.py] Got PSK "+split[1][1:-1]
 				else:
 					pass
+				
 		except:
 			print "[Wlan.py] Error parsing /etc/wpa_supplicant.conf"
 	
@@ -221,12 +225,3 @@ class wpaSupplicant:
 		import os
 		os.system("start-stop-daemon -K -x /usr/sbin/wpa_supplicant")
 		os.system("start-stop-daemon -S -x /usr/sbin/wpa_supplicant -- -B -i"+iface+" -c/etc/wpa_supplicant.conf")
-	
-def InitNetwork():
-	config.network = ConfigSubsection()
-	config.network.dhcp = NoSave(ConfigYesNo(default=True))
-	config.network.ip = NoSave(ConfigIP(default=[192,168,1,1]))
-	config.network.netmask = NoSave(ConfigIP(default=[255,255,255,0]))
-	config.network.gateway = NoSave(ConfigIP(default=[192,168,1,3]))
-	config.network.dns = NoSave(ConfigIP(default=[192,168,1,3]))
-	config.network.mac = NoSave(ConfigMAC(default=[00,11,22,33,44,55]))
