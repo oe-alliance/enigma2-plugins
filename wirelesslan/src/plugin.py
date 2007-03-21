@@ -17,7 +17,7 @@ from Plugins.Plugin import PluginDescriptor
 
 from Wlan import Wlan, WlanList, wpaSupplicant
 
-plugin_path = "/usr/lib/enigma2/python/Plugins/Extensions/WirelessLAN"
+plugin_path = "/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan"
 
 class WlanSelection(Screen):
 	skin = """
@@ -35,7 +35,7 @@ class WlanSelection(Screen):
 		<widget name="skiptext" position="460,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 	</screen>
 	"""
-	def __init__(self, session, args = None):
+	def __init__(self, session, iface):
 	
 		self.skin = WlanSelection.skin
 		self.session = session
@@ -43,7 +43,7 @@ class WlanSelection(Screen):
 		
 		self.list = []
 				
-		self["list"] = WlanList(self.session)
+		self["list"] = WlanList(self.session, iface)
 		self.skin_path = plugin_path
 		
 		self["cancel"] = Pixmap()
@@ -170,7 +170,7 @@ def EntryChosen(parms):
 			session.open(WlanConfiguration)
 
 def WlanSelectionMain(session, iface):
-	session.openWithCallback(EntryChosen, WlanSelection)
+	session.openWithCallback(EntryChosen, WlanSelection, iface)
 
 def WlanConfigurationMain(session, **kwargs):
 	session.open(WlanConfiguration)
@@ -184,7 +184,7 @@ def callFunction(iface):
 		return None
 
 def configStrings(iface):
-	return "#Custom Configstring for "+iface
+	return "pre-up /usr/sbin/wpa_supplicant -B -i"+iface+" -c/etc/wpa_supplicant.conf"
 	
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "menuEntryName": "Wlan Configuartion Utility"})

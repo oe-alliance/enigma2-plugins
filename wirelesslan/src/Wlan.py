@@ -52,10 +52,12 @@ class Wlan:
 	def getNetworkList(self, iface):
 
 		ifobj = iwlibs.Wireless(iface) # a Wireless NIC Object
+		print "ifobj.getStatistics(): ", ifobj.getStatistics()
 		
 		#Association mappings
 		stats, quality, discard, missed_beacon = ifobj.getStatistics()
 		snr = quality.signallevel - quality.noiselevel
+		os.system("ifconfig "+iface+" up")
 		
 		try:
 			scanresults = ifobj.scan()
@@ -100,7 +102,7 @@ class Wlan:
 
 class WlanList(HTMLComponent, GUIComponent):
 	
-	def __init__(self, session, iface = 'wlan0'):
+	def __init__(self, session, iface):
 		
 		GUIComponent.__init__(self)
 		self.w = Wlan()
