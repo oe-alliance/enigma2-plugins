@@ -1,10 +1,10 @@
 Package: enigma2-plugin-extensions-wirelesslan
-Version: 1.0-20070206-r0
+Version: 1.05-20070320-r0
 Description: Wireless LAN Configuration Tool
 Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: Stephan Reichholf <stephan@reichholf.net>
 Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net
-Depends: enigma2(>1.0cvs20061101), wpa-supplicant, wireless-tools, pythonwifi
+Depends: enigma2(>1.0cvs20070321), wpa-supplicant, wireless-tools, pythonwifi
 Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
