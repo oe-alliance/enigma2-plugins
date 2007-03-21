@@ -1,4 +1,4 @@
-Package: python-wifi
+Package: pythonwifi
 Version: 0.5-20071703-r0
 Description: Wireless Extension for Python
 Architecture: mipsel
