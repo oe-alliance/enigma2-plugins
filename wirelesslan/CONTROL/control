@@ -1,4 +1,4 @@
-Package: enigma2-plugin-extensions-wirelesslan
+Package: enigma2-plugin-systemplugins-wirelesslan
 Version: 1.05-20070320-r0
 Description: Wireless LAN Configuration Tool
 Architecture: mipsel

@@ -187,5 +187,5 @@ def configStrings(iface):
 	return "pre-up /usr/sbin/wpa_supplicant -B -i"+iface+" -c/etc/wpa_supplicant.conf"
 	
 def Plugins(**kwargs):
-	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "menuEntryName": "Wlan Configuartion Utility"})
+	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "menuEntryName": lambda x: "Wireless Network Configuartion..."})
 	
