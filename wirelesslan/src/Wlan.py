@@ -82,7 +82,7 @@ class Wlan:
 				for element in result.custom:
 					element = element.encode()
 					extra.append( string.strip(self.asciify(element)) )
-		
+
 				aps[bssid] = {
 					'active' : True,
 					'bssid': result.bssid,
@@ -108,6 +108,8 @@ class WlanList(HTMLComponent, GUIComponent):
 		self.w = Wlan()
 		self.iface = iface
 		
+		self.length = 0
+		
 		self.l = None
 		self.l = eListboxPythonMultiContent()
 		
@@ -121,6 +123,10 @@ class WlanList(HTMLComponent, GUIComponent):
 	def buildWlanListEntry(self, essid, bssid, encrypted, iface, maxrate):                                                                                                 
 		
 		res = [ (essid, encrypted, iface) ]
+		
+		if essid == "":
+			essid = bssid
+		
 		e = encrypted and _("Yes") or _("No")
 		res.append( MultiContentEntryText(pos=(0, 0), size=(570, 35), font=0, flags=RT_HALIGN_LEFT, text=essid) )
 		res.append( MultiContentEntryText(pos=(0, 40), size=(180, 20), font=1, flags=RT_HALIGN_LEFT, text=_("Max. Bitrate: ")+maxrate) )
@@ -138,6 +144,7 @@ class WlanList(HTMLComponent, GUIComponent):
 				if a['active']:
 					list.append((a['essid'], a['bssid'], a['encrypted'], a['iface'], a['maxrate']))
 		
+		self.length = len(list)
 		self.l.setList([])
 		self.l.setList(list)
 		 	
@@ -149,7 +156,9 @@ class WlanList(HTMLComponent, GUIComponent):
 	def postWidgetCreate(self, instance):
 		instance.setContent(self.l)
 		instance.setItemHeight(60)
-
+	
+	def getLength(self):
+		return self.length
 
 class wpaSupplicant:
 	def __init__(self):

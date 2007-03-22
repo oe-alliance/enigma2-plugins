@@ -22,7 +22,8 @@ plugin_path = "/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan"
 class WlanSelection(Screen):
 	skin = """
 	<screen position="70,138" size="610,300" title="Choose a Wireless Network" >
-		<widget name="list" position="10,10" size="580,200" scrollbarMode="showOnDemand" />
+		<widget name="info" position="10,10" size="580,30" font="Regular;24" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="list" position="10,60" size="580,200" scrollbarMode="showOnDemand" />
 		
 		<widget name="cancel" position="10,255" size="140,40" pixmap="~/key-red.png" zPosition="1" transparent="1" alphatest="on" />
 		<widget name="select" position="160,255" size="140,40" pixmap="~/key-green.png" zPosition="1" transparent="1" alphatest="on" />
@@ -37,20 +38,23 @@ class WlanSelection(Screen):
 	"""
 	def __init__(self, session, iface):
 	
-		self.skin = WlanSelection.skin
-		self.session = session
 		Screen.__init__(self, session)
+		self.session = session
 		
-		self.list = []
-				
+		self.skin = WlanSelection.skin
+		self.skin_path = plugin_path 
+		
+		
+		self["info"] = Label()
+		
+		self.list = []	
 		self["list"] = WlanList(self.session, iface)
-		self.skin_path = plugin_path
-		
 		self["cancel"] = Pixmap()
 		self["select"] = Pixmap()
 		self["rescan"] = Pixmap()
 		self["skip"] = Pixmap()
 		
+		self.setInfo()
 		
 		self["canceltext"] = Label(_("Cancel"))
 		self["selecttext"] = Label(_("Select"))
@@ -83,13 +87,21 @@ class WlanSelection(Screen):
 	
 	def rescan(self):
 		self["list"].reload()
+		self.setInfo()
 	
 	def skip(self):
 		self.close( (self.session, None) )
 	
 	def exit(self):
 		self.close( (None ,) )
-
+	
+	def setInfo(self):
+		length = self["list"].getLength()
+		
+		if length == 0:
+			length = "No" 
+		self["info"].setText(str(length)+_(" Wireless Network(s) found!"))	
+	
 class WlanConfiguration(ConfigListScreen, Screen):
 	skin = """
 		<screen position="76,138" size="600,300" title="Wireless Network Configuration" >
