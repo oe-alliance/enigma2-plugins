@@ -1,0 +1,10 @@
+Package: netcaster
+Version: 0.1-20072203-r0
+Description: Player for Network and Internet Streams
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: 3c5x9 <3c5x9@gmx.net>
+Homepage: 
+Depends: enigma2(>= 1.0cvs20071803), gst-plugin-neonhttpsrc (>= 0.10.4)
+Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
