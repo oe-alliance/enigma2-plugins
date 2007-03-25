@@ -1,5 +1,5 @@
 from enigma import eServiceReference
-
+import os
 class StreamPlayer:
     is_playing = False
     
@@ -21,10 +21,14 @@ class StreamPlayer:
             if stream.getURL().startswith("/") is not True:
                 print "playing remote stream",stream.getURL()
                 self.session.nav.stopService()
-                sref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%stream.getURL().replace(":","&colon;"))
-                self.session.nav.playService(sref)
+#                sref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%stream.getURL().replace(":","&colon;"))
+#                self.session.nav.playService(sref)
+                self.targetfile = "/tmp/streamtarget."+stream.getType().lower() 
+                os.system("mknod %s p" %self.targetfile)
+                os.system("wget %s -O- > %s&" %(stream.getURL(),self.targetfile))
+                self.session.nav.playService(eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%self.targetfile))
             else:
-                print "playing lokal stream",stream.getURL()
+                print "playing local stream",stream.getURL()
                 esref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%stream.getURL())
                 self.session.nav.playService(esref)
             self.is_playing = True
@@ -35,6 +39,8 @@ class StreamPlayer:
             try:
                 
                 self.session.nav.stopService()
+                os.system("killall -9 wget")
+                os.system("rm %s" %self.targetfile)
                 self.session.nav.playService(self.oldService)
                 self.is_playing = False
             except TypeError,e:
