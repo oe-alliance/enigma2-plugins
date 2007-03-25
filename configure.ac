@@ -41,4 +41,10 @@ webinterface/src/web-data/lib/Makefile
 wirelesslan/Makefile
 wirelesslan/src/Makefile
 
+netcaster/Makefile
+netcaster/src/Makefile
+netcaster/src/etc/Makefile
+netcaster/src/bin/Makefile
+netcaster/src/bin/interface/Makefile
+
 ])
