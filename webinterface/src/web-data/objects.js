@@ -550,4 +550,3 @@ function Setting(xml){
 	}
 	
 }
-//START class EMUList

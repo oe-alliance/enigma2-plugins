@@ -26,9 +26,6 @@ var url_parentcontrol= "/web/parentcontrollist";
 
 var url_moviefiledelete= "/web/moviefiledelete"; // plus serviceref,eventid
 
-var url_emulist= "/web/emulist";
-var url_emuchangestate= "/web/emuchangestate";
-
 var url_timerlist= "/web/timerlist";
 var url_recordnow= "/web/recordnow";
 var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
