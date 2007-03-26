@@ -338,4 +338,4 @@ var tplAbout  = '<table align="center" border="0" width="80%">';
     tplAbout += '<tr><td align="left">TSID: %(tsIDh) (%(tsID)d)</td></tr>\n';
     tplAbout += '<tr><td align="left">ONID: %(onIDh) (%(onID)d)</td></tr>\n';
     tplAbout += '<tr><td align="left">SID: %(sidh) (%(sid)d)</td></tr>\n';
-    tplAbout += '</table>'
+    tplAbout += '</table>';
