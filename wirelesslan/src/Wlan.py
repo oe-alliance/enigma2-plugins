@@ -5,7 +5,7 @@ from Components.GUIComponent import GUIComponent
 from Components.HTMLComponent import HTMLComponent
 from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigSubsection, ConfigMAC, ConfigEnableDisable, ConfigText, ConfigSelection
 
-from pythonwifi import iwlibs
+import iwlibs
 
 import os, string
 
@@ -44,8 +44,7 @@ class Wlan:
 		try:
 			iwifaces = iwlibs.getNICnames()
 		except:
-			iwifaces = None
-			"[Wlan.py] No Wireless Networkcards could be found"
+			print "[Wlan.py] No Wireless Networkcards could be found"
 		
 		return iwifaces
 	

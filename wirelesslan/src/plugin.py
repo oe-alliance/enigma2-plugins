@@ -188,12 +188,14 @@ def WlanConfigurationMain(session, **kwargs):
 	session.open(WlanConfiguration)
 
 def callFunction(iface):
+	
 	w = Wlan()
-
-	if iface in w.getWirelessInterfaces():
-		return WlanSelectionMain	
-	else:
-		return None
+	i = w.getWirelessInterfaces()
+	if i:
+		if iface in i:
+			return WlanSelectionMain	
+	
+	return None
 
 def configStrings(iface):
 	return "pre-up /usr/sbin/wpa_supplicant -B -i"+iface+" -c/etc/wpa_supplicant.conf"
