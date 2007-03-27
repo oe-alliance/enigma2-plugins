@@ -13,9 +13,6 @@ movietagger/Makefile
 movietagger/etc/Makefile
 movietagger/src/Makefile
 
-pythonwifi/Makefile
-pythonwifi/src/Makefile
-
 webinterface/Makefile
 webinterface/src/Makefile
 webinterface/src/web/Makefile

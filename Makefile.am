@@ -1,2 +1,2 @@
 AUTOMAKE_OPTIONS = gnu
-SUBDIRS = antiscrollbar movietagger webinterface wirelesslan pythonwifi netcaster
+SUBDIRS = antiscrollbar movietagger webinterface wirelesslan netcaster
