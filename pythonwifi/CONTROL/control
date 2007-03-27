@@ -1,4 +1,4 @@
-Package: pythonwifi
+Package: enigma2-plugin-systemplugins-pythonwifi
 Version: 0.5-20071703-r0
 Description: Wireless Extension for Python
 Architecture: mipsel
