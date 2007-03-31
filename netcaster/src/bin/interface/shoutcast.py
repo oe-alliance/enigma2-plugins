@@ -6,199 +6,256 @@ from Screens.ChoiceBox import ChoiceBox
 
 import urllib,re
 
-####
-genres = [
-    "TopTen",
-    "Alternative",
-    "College",
-    "Industrial",
-    "Punk",
-    "Hardcore",
-    "Ska",
-    "Americana",
-    "Blues",
-    "Folk",
-    "Cajun",
-    "Bluegrass",
-    "Classical",
-    "Opera",
-    "Symphonic",
-    "Western Swing",
-    "New Country",
-    "Electronic",
-    "Ambient",
-    "Drum and Bass",
-    "Trance",
-    "Techno",
-    "House",
-    "Downtempo",
-    "Breakbeat",
-    "Acid Jazz",
-    "Hip Hop",
-    "Turntablism",
-    "Old School",
-    "New School",
-    "Jazz",
-    "Swing",
-    "Big Band",
-    "Smooth",
-    "Pop/Rock",
-    "Oldies",
-    "80s",
-    "Top 40",
-    "Metal",
-    "Rock",
-    "R&B/Soul",
-    "Contemporary",
-    "Classic",
-    "Funk",
-    "Urban",
-    "Spiritual",
-    "Pop",
-    "Gospel",
-    "Country",
-    "Spoken",
-    "Talk",
-    "Comedy",
-    "Spoken Word",
-    "World",
-    "Reggae",
-    "African",
-    "Latin",
-    "European",
-    "Middle Eastern",
-    "Asian",
-    "Other/Mixed",
-    "Eclectic",
-    "Film",
-    "Instrumental"]
-
-
 
 class Interface(StreamInterface):
     name= "listen to SHOUTcast Streams"
     nameshort = "SHOUTcast"
     description = "This is a Plugin to browse www.shoutcast.com and listen to webradios listed there."
+    def __init__(self,session,cbListLoaded=None):
+        StreamInterface.__init__(self,session,cbListLoaded=cbListLoaded)
+        self.genrefeed= GenreFeed()
     
     def getList(self):
+        
         glist=[]
-        for i in SHOUTcastRipper().getGenreList():
-            glist.append((i,i))
+        #self.genrefeed.fetch_genres()
+        self.genrefeed.parse_genres()
+        for i in self.genrefeed.genre_list:            
+            glist.append((str(i),i))
         self.session.openWithCallback(self.GenreSelected,ChoiceBox,_("select Genre to search for streams"),glist)
 
     def GenreSelected(self,selectedGenre):
         if selectedGenre is not None:
-            streams = SHOUTcastRipper().getGenre(selectedGenre[1])
-            print "["+myname+"] found ",len(streams),"in Genre ",selectedGenre[1]
-            listnew=[]
-            for i in streams:
-                stream = Stream(i.getTitle(),"Bitrate: "+i.getBitrate()+", Type: "+i.getType(),i.getPlaylist(),type="pls")
-                listnew.append(stream)
-            
-            self.list = listnew
+            feed = ShoutcastFeed(selectedGenre[1])
+            #feed.fetch_stations()
+            feed.parse_stations()
+            self.list=[]
+            for station in feed.station_list:
+                print station
+                stream = Stream(str(station['Name']),"Bitrate: "+str(station['Bitrate'])+", Type: "+str(station['MimeType']),str(station['PLS_URL']),type="pls")
+                self.list.append(stream)
         self.OnListLoaded()
 
 
-##########################################################################    
+    
+###################################################
+# API following
+####################################################
+####################################################
+####################################################
+# feeds.py - Gets the current listings of Shoutcast stations
+# $Id$
+# Copyright (C) 2005-2006 Matthew Schick <matt@excentral.org>
 
-class SHOUTcastRipper:
-    def __init__(self):
-        pass
-    def getTopTen(self):
-        return self.getGenre("TopTen")
-    def getGenreList(self):
-        genres.sort()
-        return genres
-    def getGenre(self,genre):
-        genre = genre.replace(" ","%20")
-        genre = genre.replace("&","%26")
-        return self.read_doc("http://www.shoutcast.com/directory/?orderby=bitrate&s=%s"%genre)
-    
-    def read_doc(self,url):
-        print "["+myname+"] loading url",url
-        fp = urllib.urlopen(url)
-        html = fp.read()
-        streams=[]
-        trs = html.split("<tr")
-        for tr in trs:
-            if tr.find("&file=filename.pls") is not -1:
-                stream = self.parse_item(tr)
-                if self.isValiteStream(stream):
-                    streams.append(stream)
-        fp.close()
-        return streams
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
 
-    def isValiteStream(self,stream):
-        for type in valid_types:
-            if stream.getType().lower().startswith(type.lower()):
-                return True
-            else:
-                return False
-    def parse_item(self,item):
-        
-        x = item.splitlines()
-        if item.find("Now Playing:") is not -1:
-            offset = 0
-        else:
-            offset = -1
-        stream = SHOUTcastStream()
-        stream.setPlaylist(self.parse_pls(x[3]))
-        stream.setTitle(self.parse_title(x[5]))
-        stream.setBitrate(self.parse_Bitrate(x[11+offset]))
-        stream.setType(self.parse_type(x[16+offset]))
-        
-        return stream
-    
-    def parse_Bitrate(self,item):
-        item = re.sub(r'<(.*?)>(?uism)', '', "<td"+item)
-        item = item.replace("\n","")
-        item = item.rstrip().strip()
-        return item
-    
-    def parse_type(self,item):
-        item = re.sub(r'<(.*?)>(?uism)', '',item)
-        item = item.replace("\n","")
-        item = item.rstrip().strip()
-        return item
-    def parse_pls(self,item):
-        print "+",item
-        istart = item.find("<a href=\"")
-        istop = item.find("\">",istart)
-        item = item[(istart+9):istop]
-        print "*",item
-        return "http://www.shoutcast.com"+item
-    
-    def parse_title(self,item):
-        istart = item.find("<a id=\"listlinks\"")
-        istop = item.find("</a>",istart)
-        item = item[istart:(istop+4)]
-        item = re.sub(r'<(.*?)>(?uism)', '',item)    
-        return item
-    
-##########################################################################    
-class SHOUTcastStream:
-    title= ""
-    playlist= ""
-    bitrate= ""
-    type=""
-    def __init__(self):
-        pass
-    def setTitle(self,title):
-        self.title= title
-    def getTitle(self):
-        return self.title
-    def setPlaylist(self,url):
-        self.playlist = url
-    def getPlaylist(self):
-        return self.playlist
-    def setBitrate(self,bitrate):
-        self.bitrate = bitrate
-    def getBitrate(self):
-        return self.bitrate
-    def setType(self,type):
-        self.type = type
-    def getType(self):
-        return self.type
-    def toString(self):
-        return "SHOUTcastStream ("+self.getTitle()+", "+self.getPlaylist()+", "+self.getBitrate()+", "+self.getType()+")\n"
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
 
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+import cPickle
+from urllib import FancyURLopener
+from xml.sax import make_parser,parseString
+from xml.sax.handler import ContentHandler
+from os import stat,mkdir
+from os.path import dirname,isdir,isfile
+from time import time
+from stat import *
+from sys import exit
+
+tmpxml='shout.xml'
+DEBUG=0
+
+def write_cache(cache_file, cache_data):
+    """
+    Does a cPickle dump
+    """
+    if not isdir( dirname(cache_file) ):
+        try:
+            mkdir( dirname(cache_file) )
+        except OSError:
+            print dirname(cache_file), 'is a file'
+    fd = open(cache_file, 'w')
+    cPickle.dump(cache_data, fd, -1)
+    fd.close()
+
+def valid_cache(cache_file, cache_ttl):
+    """
+    See if the cache file exists and is still living
+    """
+    try:
+        mtime = stat(cache_file)[ST_MTIME]
+    except:
+        return 0
+    curr_time = time()
+    if (curr_time - mtime) > cache_ttl:
+        return 0
+    else:
+        return 1
+
+def load_cache(cache_file):
+    """
+    Does a cPickle load
+    """
+    fd = open(cache_file)
+    cache_data = cPickle.load(fd)
+    fd.close()
+    return cache_data
+
+class StationParser(ContentHandler):
+    """
+    SAX handler for xml feed, not for public consumption
+    """
+    def __init__(self,min_bitrate):
+        self.isStationList = False
+        self.isTuneIn = False
+        self.isStation = False
+        self.station_list = []
+        self.min_bitrate = min_bitrate
+        self.mimeType = ''
+        self.Id = ''
+        self.Name = ''
+        self.Bitrate = ''
+        self.nowPlaying = ''
+        self.Listeners = ''
+        self.stationUrl = ''
+        self.Genre = ''
+        self.count = 0
+        self.shoutUrl = 'http://www.shoutcast.com'
+    def startElement(self, name, attrs):
+        if name == 'stationlist':
+            self.isStationList = True
+        if name == 'tunein':
+            self.isTuneIn = True
+            self.baseUrl = attrs.get('base', None)
+        if name == 'station':
+            self.isStation = True
+            self.Name = attrs.get('name', None)
+            self.mimeType = attrs.get('mt', None)
+            self.Id = attrs.get('id', None)
+            self.Bitrate = attrs.get('br', None)
+            self.nowPlaying = attrs.get('ct', None)
+            self.Listeners = attrs.get('lc', None)
+            self.Genre = attrs.get('genre', None)
+    def endElement(self,name):
+        if name == 'station':
+            self.isStation = False
+        if name == 'tunein':
+            self.isTuneIn = False
+        if name == 'station':
+            self.isStation = False
+            if int(self.Bitrate) >= self.min_bitrate:
+                self.stationUrl = self.shoutUrl + self.baseUrl + '?id=' + self.Id
+                self.station_list.append({'Name':self.Name.encode("utf-8"), 'PLS_URL':self.stationUrl.encode("utf-8"), 'NowPlaying':self.nowPlaying.encode("utf-8"), 'Listeners':self.Listeners.encode("utf-8"), 'Bitrate':self.Bitrate.encode("utf-8"), 'MimeType':self.mimeType.encode("utf-8"), 'Genres': self.Genre.encode("utf-8")})
+                self.count += 1
+        if name == 'stationlist':
+            self.isStationList = False
+            if DEBUG == 1:
+                print 'Parsed ', self.count, ' stations'
+
+class GenreParse(ContentHandler):
+    def __init__( self ):
+        self.isGenre = False
+        self.isGenreList = False
+        self.genreList = []
+    def startElement( self, name, attrs ):
+        if name == 'genrelist':
+            self.isGenreList = True
+        if name == 'genre':
+            self.isGenre == True
+            self.genre_name = attrs.get( 'name', None )
+    def endElement( self, name ):
+        if name == 'genre':
+            self.isGenre = False
+            self.genreList.append( self.genre_name.encode("utf-8") )
+        if name == 'genrelist':
+            self.isGenreList = False
+
+class GenreFeed:
+    def __init__(self, cache_ttl=3600, cache_dir = '/tmp/pyshout_cache'):
+        self.cache_ttl = cache_ttl
+        self.cache_file = cache_dir + '/genres.cache'
+    def fetch_genres(self):
+        """
+        Grabs genres and returns tuple of genres
+        """
+        self.genre_url = 'http://www.shoutcast.com/sbin/newxml.phtml'
+        self.urlhandler = FancyURLopener()
+        self.fd = self.urlhandler.open(self.genre_url)
+        self.genre = self.fd.read()
+        self.fd.close()
+        return self.genre
+
+    def parse_genres(self):
+        self.inv_cache = 0
+        self.vc = valid_cache(self.cache_file, self.cache_ttl)
+        if self.cache_ttl > 0 and self.vc != 0:
+            if DEBUG == 1:
+                print 'Loading cache from ',self.cache_file
+            try:
+                self.genre_list = load_cache(self.cache_file)
+            except:
+                self.inv_cache = 1
+        if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
+            if DEBUG == 1:
+                print 'Getting fresh feed'
+            parseXML = GenreParse()
+            self.genres = self.fetch_genres()
+            parseString( self.genres, parseXML )
+            self.genre_list = parseXML.genreList
+            write_cache(self.cache_file, self.genre_list)
+        return self.genre_list
+
+class ShoutcastFeed:
+    def __init__(self, genre, min_bitrate=128, cache_ttl=600, cache_dir='/tmp/pyshout_cache'):
+        """
+        Parses the xml feed and spits out a list of dictionaries with the station info
+        keyed by genre. Params are as follows:
+        min_bitrate - 128 default, Minimum bitrate filter
+        cache_ttl - 600 default, 0 disables, Seconds cache is considered valid
+        cache_dir - /tmp/pyshout_cache default, Path to cache directory
+        """
+        self.min_bitrate = min_bitrate
+        self.cache_ttl = cache_ttl
+        self.genre = genre
+        self.cache_file = cache_dir + '/' + self.genre + '.pickle'
+        self.station_list = []
+
+    def fetch_stations(self):
+        """
+        Grabs the xml list of stations from the shoutcast server
+        """
+        self.shout_url='http://www.shoutcast.com/sbin/newxml.phtml?genre=' + self.genre
+        self.urlhandler = FancyURLopener()
+        self.fd = self.urlhandler.open(self.shout_url)
+        self.stations = self.fd.read()
+        self.fd.close()
+        return self.stations
+
+    def parse_stations(self):
+        self.inv_cache = 0
+        self.vc = valid_cache(self.cache_file, self.cache_ttl)
+        if self.cache_ttl > 0 and self.vc != 0:
+            if DEBUG == 1:
+                print 'Loading cache from ', self.cache_file
+            try:
+                self.station_list = load_cache(self.cache_file)
+            except:
+                self.inv_cache = 1
+        if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
+            if DEBUG == 1:
+                print 'Getting fresh feed'
+            parseXML = StationParser(self.min_bitrate)
+            self.stations = self.fetch_stations()
+            parseString(self.stations, parseXML)
+            self.station_list = parseXML.station_list
+            write_cache(self.cache_file, self.station_list)
+        return self.station_list
