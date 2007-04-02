@@ -345,6 +345,9 @@ function parentPin(servicereference) {
 		return false;
 	}
 }
+var SubServicePoller;
+var SubServicePollerCounter = 0;
+var SubServicePollerRef = null;
 function zap(servicereference){
 	if(parentPin(servicereference)) {
 		new Ajax.Request( "/web/zap?ZapTo=" + servicereference, 
@@ -352,7 +355,13 @@ function zap(servicereference){
 								 method: 'get'
 							}
 						);
-		//getSubServices(servicereference);
+		if(SubServicePoller != 0){
+			clearInterval(SubServicePoller);
+			SubServicePollerCounter = 0;
+		}
+		SubServicePollerRef = servicereference;
+		SubServicePoller = setInterval(getSubServices, 10000);
+		SubServicePollerCounter = 1;
 	}
 }
 
@@ -1409,7 +1418,9 @@ function ownLazyNumber(num) {
 var subServicesInsertedList = new Object();
 
 function getSubServices(servicereference) {
-		doRequest(url_subservices,incomingSubServiceRequest, false);
+	clearInterval(SubServicePoller);
+	SubServicePollerCounter = 0;
+	doRequest(url_subservices,incomingSubServiceRequest, false);
 }
 function incomingSubServiceRequest(request){
 	if(request.readyState == 4){
@@ -1417,7 +1428,7 @@ function incomingSubServiceRequest(request){
 		listerHtml 	= '';		
 		debug("got "+services.length+" SubServices");
 		if(services.length > 1) {
-
+			
 			first = services[0];
 			var mainChannellist = loadedChannellist[String($('mainServiceRef').value)];
 			
@@ -1438,7 +1449,6 @@ function incomingSubServiceRequest(request){
 					mainChannellist.splice(i);
 				}
 			}
-
 			for ( var i = 0; i < services.length ; i++){
 				var reference = services[i];
 				var namespace = { 	
@@ -1450,7 +1460,6 @@ function incomingSubServiceRequest(request){
 					mainChannellist = mainChannellist.insert(oldEntryPosition++, reference);
 				}
 			}
-
 			document.getElementById(first.getServiceReference()+'extend').innerHTML = listerHtml;
 			subServicesInsertedList[String(first.getServiceReference())] = services;
 			loadedChannellist[$('mainServiceRef').value] = mainChannellist;

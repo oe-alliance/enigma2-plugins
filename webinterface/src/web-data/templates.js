@@ -48,6 +48,7 @@ var tplServiceListHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 	tplServiceListHeader += '</tr>\n';
 	tplServiceListHeader += '</thead>\n';
 	tplServiceListHeader += '<tbody class="scrollContent">\n';
+	tplServiceListHeader += '<input type="hidden" id="mainServiceRef" name="mainServiceRef" value="%(mainServiceRef)">\n';
 
 var tplServiceListItem  = '<tr id="%(servicereference)extend">\n';
 	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><a id="%(servicereference)" onclick="zap(this.id);" class="sListSLink">%(servicename)</a></div>';
