@@ -16,6 +16,7 @@ from Screens.InfoBarGenerics import InfoBarServiceName, InfoBarEvent, InfoBarTun
 
 from Components.Sources.Clock import Clock
 from Components.Sources.ServiceList import ServiceList
+
 from WebComponents.Sources.Volume import Volume
 from WebComponents.Sources.EPG import EPG
 from WebComponents.Sources.Timer import Timer
@@ -27,8 +28,8 @@ from WebComponents.Sources.Settings import Settings
 from WebComponents.Sources.SubServices import SubServices
 from WebComponents.Sources.ParentControl import ParentControl
 from WebComponents.Sources.About import About
-
 from WebComponents.Sources.RequestData import RequestData
+
 from Components.Sources.FrontendStatus import FrontendStatus
 
 from Components.Converter.Converter import Converter
@@ -37,14 +38,16 @@ from Components.Element import Element
 
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler, feature_namespaces
+
 from twisted.python import util
+
 import sys
 import time
  
 # prototype of the new web frontend template system.
 
 class WebScreen(Screen):
-	def __init__(self, session,request):
+	def __init__(self, session, request):
 		Screen.__init__(self, session)
 		self.stand_alone = True
 		self.request = request

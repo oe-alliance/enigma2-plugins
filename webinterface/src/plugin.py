@@ -1,9 +1,17 @@
 from Plugins.Plugin import PluginDescriptor
 
-from twisted.internet import reactor
+from twisted.internet import reactor, defer
+
 from twisted.web2 import server, channel, static, resource, stream, http_headers, responsecode, http
+from twisted.web2.auth import digest, basic, wrapper
+
 from twisted.python import util
 from twisted.python.log import startLogging,discardLogs
+
+from twisted.cred.portal import Portal, IRealm
+from twisted.cred import checkers, credentials, error
+
+from zope.interface import Interface, implements
 
 import webif
 import WebIfConfig  
@@ -49,16 +57,6 @@ NoExplicitHeaderFiles = ['getpid.xml','tvbrowser.xml',]
 DEBUG = True
 DEBUG = False
 DEBUGFILE= "/tmp/twisted.log"
-
-from twisted.cred.portal import Portal
-from twisted.cred import checkers
-from twisted.web2.auth import digest, basic, wrapper
-from zope.interface import Interface, implements
-from twisted.cred import portal
-from twisted.cred import credentials, error
-from twisted.internet import defer
-from zope import interface
-
 
 def stopWebserver():
 	reactor.disconnectAll()
@@ -186,7 +184,7 @@ class PasswordDatabase:
     	this checks webiflogins agains /etc/passwd
     """
     passwordfile = "/etc/passwd"
-    interface.implements(checkers.ICredentialsChecker)
+    implements(checkers.ICredentialsChecker)
     credentialInterfaces = (credentials.IUsernamePassword,credentials.IUsernameHashedPassword)
 
     def _cbPasswordMatch(self, matched, username):
@@ -208,7 +206,7 @@ class HTTPUser(object):
 	implements(IHTTPUser)
 
 class HTTPAuthRealm(object):
-	implements(portal.IRealm)
+	implements(IRealm)
 	def requestAvatar(self, avatarId, mind, *interfaces):
 		if IHTTPUser in interfaces:
 			return IHTTPUser, HTTPUser()

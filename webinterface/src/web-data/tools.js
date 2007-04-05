@@ -101,12 +101,14 @@ function UpdateStreamReaderLatestResponse() {
 		UpdateStreamReaderStart();
 		
 		UpdateStreamReaderPollTimerCounterTwisted++;
-		if(UpdateStreamReaderPollTimerCounterTwisted > 5) {
+/*
+ 		if(UpdateStreamReaderPollTimerCounterTwisted > 5) {
 			UpdateStreamReaderPollTimerCounterTwisted = 0;
 			debug("restarting twisted");
 			debug(new Ajax.Request( "/web/restarttwisted", { method: 'get' }));
 			debug("...twisted restart");
 		}
+*/
 		return;
 	}
 // Quickhack jjbig end
