@@ -395,17 +395,17 @@ function incomingEPGrequest(request){
 					var item = EPGItems[i];				
 					//Create JSON Object for Template
 					var namespace = {	
-							'date': item.getTimeDay(), 
-							'eventid': item.getEventId(), 
-							'servicereference': item.getServiceReference(), 
-							'servicename': item.getServiceName(), 
-							'title': item.getTitle(),
+							'date': item.getTimeDay(),
+							'eventid': item.getEventId(),
+							'servicereference': item.getServiceReference(),
+							'servicename': quotes2html(item.getServiceName()),
+							'title': quotes2html(item.getTitle()),
 							'titleESC': escape(item.getTitle()),
 							'starttime': item.getTimeStartString(), 
 							'duration': Math.ceil(item.getDuration()/60000), 
-							'description': item.getDescription(), 
+							'description': quotes2html(item.getDescription()),
 							'endtime': item.getTimeEndString(), 
-							'extdescription': item.getDescriptionExtended(),
+							'extdescription': quotes2html(item.getDescriptionExtended()),
 							'number': String(i),
 							'extdescriptionSmall': extdescriptionSmall(item.getDescriptionExtended(),String(i)),
 							'start': item.getTimeBegin(),
@@ -677,8 +677,22 @@ function incomingMovieList(request){
 		
 	}		
 }
-function delMovieFile(file) {
-		doRequest(url_moviefiledelete+"?filename="+file, incomingDelMovieFileResult, false);	
+function delMovieFile(file,servicename,title,description) {
+	debug("delMovieFile: file("+file+"),servicename("+servicename+"),title("+title+"),description("+description+")");
+	Dialog.confirm(
+		"Selected timer:<br>"
+		+"Servicename: "+servicename+"<br>"
+		+"Title: "+title+"<br>"
+		+"Description: "+description+"<br>"
+		+"Are you sure that you want to delete the Timer?",
+		 {windowParameters: {width:300, className: windowStyle},
+			okLabel: "delete",
+			buttonClass: "myButtonClass",
+			cancel: function(win) {debug("delMovieFile cancel confirm panel")},
+			ok: function(win) { debug("delMovieFile ok confirm panel"); doRequest(url_moviefiledelete+"?filename="+file, incomingDelMovieFileResult, false); return true; }
+			}
+	);
+	
 }
 function incomingDelMovieFileResult(request) {
 	debug("incomingDelMovieFileResult");
@@ -805,11 +819,22 @@ function colorTimerListEntry (state) {
 		return "00BCBC";
 	}
 }
-function delTimer(serviceRef,begin,end){
-	debug(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end);
-	doRequest(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end, incomingTimerDelResult, false);
+function delTimer(serviceRef,begin,end,servicename,title,description){
+	debug("delTimer: serviceRef("+serviceRef+"),begin("+begin+"),end("+end+"),servicename("+servicename+"),title("+title+"),description("+description+")");
+	Dialog.confirm(
+		"Selected timer:<br>"
+		+"Channel: "+servicename+"<br>"
+		+"Title: "+title+"<br>"
+		+"Description: "+description+"<br>"
+		+"Are you sure that you want to delete the Timer?",
+		 {windowParameters: {width:300, className: windowStyle},
+			okLabel: "delete",
+			buttonClass: "myButtonClass",
+			cancel: function(win) {debug("delTimer cancel confirm panel")},
+			ok: function(win) { debug("delTimer ok confirm panel"); doRequest(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end, incomingTimerDelResult, false); return true; }
+			}
+	);
 }
-
 function incomingTimerDelResult(request){
 	debug("onTimerDeleted");
 	if(request.readyState == 4){
@@ -1634,4 +1659,8 @@ function incomingAbout(request) {
 			}	
 		}
 	}
+}
+function quotes2html(txt) {
+	txt = txt.replace(/"/g, '&quot;');
+	return txt.replace(/'/g, '&#39;');
 }
