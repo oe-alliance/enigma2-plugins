@@ -1,6 +1,7 @@
 #from enigma import *
 from enigma import eTimer
 from enigma import eConsoleAppContainer
+from enigma import loadPic
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -23,6 +24,7 @@ from LastFMConfig import LastFMConfigScreen
 from LastFM import LastFM
 
 import os
+import urllib
 ###############################################################################        
 myname = "Last.FM"     
 myversion = "0.1"
@@ -277,12 +279,11 @@ class LastFMScreenMain(Screen,HelpableScreen):
             self["info_album"].setText("N/A")
             self["info_track"].setText("N/A")
             
-    def setCoverArt(self,filename=None):
-        #print "coverart from file",filename
-        if filename is None or os.path.isfile(filename) is False:
+    def setCoverArt(self,pixmap=None):
+        if pixmap is None:
             self["info_cover"].instance.setPixmapFromFile(self.noCoverArtPNG)            
         else:
-            self["info_cover"].instance.setPixmapFromFile(filename)
+            self["info_cover"].instance.setPixmap(pixmap.__deref__())
     
     def initLastFM(self):
         self.setInfoLabel("loggin into last.fm")
@@ -290,8 +291,6 @@ class LastFMScreenMain(Screen,HelpableScreen):
         if result is False:
             self.setInfoLabel("login failed")
             Notifications.AddPopup("Login to Last.FM failed!", resulttext,MessageBox.TYPE_INFO, 5)        
-#            if self.shown:
-#                self.session.open(MessageBox, resulttext, MessageBox.TYPE_ERROR)
         else:
             self.setInfoLabel("login successful",timeout=True)      
 
@@ -375,32 +374,30 @@ class LastFMScreenMain(Screen,HelpableScreen):
 
 class ImageConverter:
     
-    targetfile= "/tmp/coverart.png"
+    targetfile= "/tmp/coverart"
     lastURL =""
 
     def __init__(self,callBack):
         self.callBack = callBack
-        self.container = eConsoleAppContainer()
-        self.container.appClosed.get().append(self.appClosed)
-        self.container.dataAvail.get().append(self.dataAvail)
-    
-    def dataAvail(self,text):
-        print "imageconverter:",text
 
     def convert(self,sourceURL):
-        #print "start converting coverart",sourceURL
-        try: # this is not nice... i have to implement a function to check it while activating CoverArts
-            import Image
-        except:
-            pass
-        
         if self.lastURL == sourceURL:
-            pass #self.callBack(filename=self.targetfile)
+            print "imageurl not changed, skipped"
         else:
-            cmd = "/usr/bin/python "+plugin_path+"/imageconverter.py '"+sourceURL+"' '"+self.targetfile+"' "
-            self.container.execute(cmd)
+            extension = sourceURL.split(".")[-1]
+            tmpfile = self.targetfile+"."+extension
+            
+            fpurl = urllib.urlopen(sourceURL)
+            raw = fpurl.read()
+            fpurl.close()
+            
+            fp = open(tmpfile,"w")
+            fp.write(raw)
+            fp.close()
+            
+            self.currPic = loadPic(tfile, 116, 116, 1, 1, 0,1)
+            
+            os.remove(tfile)
+            
+            self.callBack(pixmap=self.currPic)
             self.lastURL = sourceURL
-        
-    def appClosed(self,text):
-        #print "appClosed",text
-        self.callBack(filename=self.targetfile)
