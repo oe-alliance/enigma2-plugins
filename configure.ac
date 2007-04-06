@@ -44,4 +44,7 @@ netcaster/src/etc/Makefile
 netcaster/src/bin/Makefile
 netcaster/src/bin/interface/Makefile
 
+lastfm/Makefile
+lastfm/src/Makefile
+
 ])
