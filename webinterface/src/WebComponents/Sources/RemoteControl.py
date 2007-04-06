@@ -19,7 +19,7 @@ class RemoteControl( Source):
     def do_func(self):
         list = []
         
-        print "RemoteControl wurde aufgerufen"
+        print "RemoteControl wurde aufgerufen ",self.cmd
         
         if self.cmd == "" or self.cmd is None:
             print "the RemoteControl was not defined (%s)" % self.cmd

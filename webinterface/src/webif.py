@@ -132,17 +132,6 @@ class TsM3U(WebScreen):
 		self["file"] = StaticText()
 		self["localip"] = RequestData(request,what=RequestData.HOST)
 
-class WAPwrapper(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
-		from Components.Sources.Config import Config
-		
-		from Components.Sources.StaticText import StaticText
-		self["redirect"] = StaticText()
-		print "request",request
-		for eachKey in self:
-			print "eachKey",eachKey
-				
 class RestartTwisted(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)

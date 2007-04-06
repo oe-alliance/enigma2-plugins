@@ -339,3 +339,9 @@ var tplAbout  = '<table align="center" border="0" width="80%">';
     tplAbout += '<tr><td align="left">ONID: %(onIDh) (%(onID)d)</td></tr>\n';
     tplAbout += '<tr><td align="left">SID: %(sidh) (%(sid)d)</td></tr>\n';
     tplAbout += '</table>';
+
+var tplExtraHiddenFunctions  = '<table width="100%" id="SignalPanelTable">';
+	tplExtraHiddenFunctions += '<tr><td style="background-color: #DDDDDD;"><div onlick="new Ajax.Request( "/web/restarttwisted", { method: "get" })">Restart Twisted</div></td></tr>';
+	tplExtraHiddenFunctions += '<tr><td style="background-color: #DDDDDD;"><div onlick="clearInterval(UpdateStreamReaderPollTimer);">Stop Time/Signal/Current-Channel -Updates</div></td></tr>';
+	tplExtraHiddenFunctions += '<tr><td style="background-color: #DDDDDD;"><div onlick="restartUpdateStream();">Restart Time/Signal/Current-Channel -Updates</div></td></tr>';
+	tplExtraHiddenFunctions += '</table>';

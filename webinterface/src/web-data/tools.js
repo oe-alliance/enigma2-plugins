@@ -1664,3 +1664,14 @@ function quotes2html(txt) {
 	txt = txt.replace(/"/g, '&quot;');
 	return txt.replace(/'/g, '&#39;');
 }
+
+function openHiddenFunctions(){
+	openWindow("Extra Hidden Functions",tplExtraHiddenFunctions, 300, 100);
+}
+function restartUpdateStream() {
+	clearInterval(UpdateStreamReaderPollTimer);
+	UpdateStreamReaderRequest.abort();
+	UpdateStreamReaderRequest = null;
+	UpdateStreamReaderPollTimerCounter = 0;
+	UpdateStreamReaderStart();
+}
