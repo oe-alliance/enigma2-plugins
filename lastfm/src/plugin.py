@@ -1,4 +1,3 @@
-#from enigma import *
 from enigma import eTimer
 from enigma import eConsoleAppContainer
 from enigma import loadPic
@@ -27,8 +26,6 @@ import os
 import urllib
 ###############################################################################        
 myname = "Last.FM"     
-myversion = "0.1"
-
 plugin_path = ""
 
 ###############################################################################        
