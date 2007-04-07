@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-lastfm
-Version: 0.1-20070406-r0
+Version: 0.2-20070406-r0
 Description: a client to use last.fm, the social music revolution 
 Architecture: mipsel
 Section: extra
