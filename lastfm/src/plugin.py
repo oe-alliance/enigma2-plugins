@@ -395,9 +395,9 @@ class ImageConverter:
             fp.write(raw)
             fp.close()
             
-            self.currPic = loadPic(tfile, 116, 116, 1, 1, 0,1)
+            self.currPic = loadPic(tmpfile, 116, 116, 1, 1, 0,1)
             
-            os.remove(tfile)
+            os.remove(tmpfile)
             
             self.callBack(pixmap=self.currPic)
             self.lastURL = sourceURL
