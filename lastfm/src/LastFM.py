@@ -5,7 +5,6 @@ import md5 # to encode password
 import string
 import time
 import urllib
-import Image
 import xml.dom.minidom
 
 
