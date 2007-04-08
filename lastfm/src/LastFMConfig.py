@@ -23,6 +23,13 @@ class LastFMConfigScreen(ConfigListScreen,Screen):
         self.list.append(getConfigListEntry(_("Timeout Statustext (Seconds)"), config.plugins.LastFM.timeoutstatustext))
         self.list.append(getConfigListEntry(_("Timeout to select a Tab (Seconds)"), config.plugins.LastFM.timeouttabselect))
         self.list.append(getConfigListEntry(_("Interval to refresh Metadata (Seconds)"), config.plugins.LastFM.metadatarefreshinterval))
+
+        self.list.append(getConfigListEntry(_("use Screensaver"), config.plugins.LastFM.sreensaver.use))
+        self.list.append(getConfigListEntry(_("wait before Screensaver"), config.plugins.LastFM.sreensaver.wait))
+        self.list.append(getConfigListEntry(_("show Coverart in Screensaver"), config.plugins.LastFM.sreensaver.showcoverart))
+        self.list.append(getConfigListEntry(_("do Coverartanimation in Screensaver"), config.plugins.LastFM.sreensaver.coverartanimation))
+        self.list.append(getConfigListEntry(_("Speed for Coverartanimation"), config.plugins.LastFM.sreensaver.coverartspeed))
+        self.list.append(getConfigListEntry(_("Interval for Coverartanimation"), config.plugins.LastFM.sreensaver.coverartinterval))
         
         ConfigListScreen.__init__(self, self.list)
         self["buttonred"] = Label(_("cancel"))

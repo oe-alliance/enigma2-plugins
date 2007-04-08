@@ -31,7 +31,7 @@ class StreamPlayer:
 #                sref = eServiceReference(4097,0,stream )
 #                sref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%stream.replace(":","&colon;"))
 #                self.session.nav.playService(sref)
-                self.targetfile = "/tmp/streamtarget.mp3"
+                self.targetfile = "/tmp/lastfm.mp3"
                 os.system("mknod %s p" %self.targetfile)
                 os.system("wget %s -O- > %s&" %(stream,self.targetfile))
                 self.session.nav.playService(eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%self.targetfile))

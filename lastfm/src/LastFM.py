@@ -7,6 +7,24 @@ import time
 import urllib
 import xml.dom.minidom
 
+
+
+class LastFMEventRegister:
+    def __init__(self):
+        self.onMetadataChangedList = []
+    
+    def addOnMetadataChanged(self,callback):
+        self.onMetadataChangedList.append(callback)
+
+    def removeOnMetadataChanged(self,callback):
+        self.onMetadataChangedList.remove(callback)
+    
+    def onMetadataChanged(self,metad):
+        for i in self.onMetadataChangedList:
+            i(metadata=metad)
+
+lastfm_event_register = LastFMEventRegister()
+            
 class LastFMHandler:
     def __init__(self):
         pass
@@ -143,6 +161,7 @@ class LastFM(LastFMHandler):
                 self.metadatatime = time.time()
                 self.metadataage = str(int(time.time() - self.metadatatime))
                 self.onMetadataLoaded(self.metadata)
+                lastfm_event_register.onMetadataChanged(self.metadata)
         else:
             self.onCommandFailed("Error while parsing Metadata")
 
@@ -165,7 +184,7 @@ class LastFM(LastFMHandler):
     def onTrackBanedCB(self,response):
         res = self._parselines(response)
         if res["response"] == "OK":
-            self.onTrackLoved("Track baned")
+            self.onTrackBanned("Track baned")
         else:
             self.onCommandFailed("Server returned FALSE")
 
