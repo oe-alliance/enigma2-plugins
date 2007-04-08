@@ -21,7 +21,7 @@ from Plugins.Plugin import PluginDescriptor
 from StreamPlayer import StreamPlayer
 from LastFMConfig import LastFMConfigScreen
 from LastFM import LastFM
-
+import httpclient
 import os
 import urllib
 ###############################################################################        
@@ -402,19 +402,15 @@ class ImageConverter:
     def convert(self,sourceURL):
         if self.lastURL != sourceURL:
             extension = sourceURL.split(".")[-1]
-            tmpfile = self.targetfile+"."+extension
-            
-            fpurl = urllib.urlopen(sourceURL)
-            raw = fpurl.read()
-            fpurl.close()
-            
-            fp = open(tmpfile,"w")
-            fp.write(raw)
-            fp.close()
-            
-            self.currPic = loadPic(tmpfile, 116, 116, 0,0, 0,1)
-            
-            os.remove(tmpfile)
-            
-            self.callBack(pixmap=self.currPic)
+            self.tmpfile = self.targetfile+"."+extension
+            host = sourceURL.split("/")[2]
+            path = "/"+"/".join(sourceURL.split("/")[3:])
+            print host,path
+            httpclient.getFile(self.tmpfile,host,80,path,callback=self.onImageLoaded)
             self.lastURL = sourceURL
+
+    def onImageLoaded(self):
+            self.currPic = loadPic(self.tmpfile, 116, 116, 0,0, 0,1)
+            os.remove(self.tmpfile)
+            self.callBack(pixmap=self.currPic)
+            
