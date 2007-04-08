@@ -7,9 +7,41 @@ import time
 import urllib
 import xml.dom.minidom
 
+class LastFMHandler:
+    def __init__(self):
+        pass
+    def onConnectSuccessful(self,reason):
+        pass
+    def onConnectFailed(self,reason):
+        pass
+    def onCommandFailed(self,reason):
+        pass
+    def onTrackSkiped(self,reason):
+        pass
+    def onTrackLoved(self,reason):
+        pass
+    def onTrackBaned(self,reason):
+        pass
+    def onGlobalTagsLoaded(self,tags):
+        pass
+    def onTopTracksLoaded(self,tracks):
+        pass
+    def onRecentTracksLoaded(self,tracks):
+        pass
+    def onRecentBannedTracksLoaded(self,tracks):
+        pass
+    def onRecentLovedTracksLoaded(self,tracks):
+        pass
+    def onNeighboursLoaded(self,user):
+        pass
+    def onFriendsLoaded(self,user):
+        pass
+    def onStationChanged(self,reason):
+        pass    
+    def onMetadataLoaded(self,metadata):
+        pass
 
-
-class LastFM:
+class LastFM(LastFMHandler):
     DEFAULT_NAMESPACES = (
         None, # RSS 0.91, 0.92, 0.93, 0.94, 2.0
         'http://purl.org/rss/1.0/', # RSS 1.0
@@ -26,19 +58,20 @@ class LastFM:
     cache_toptags= "/tmp/toptags"
     
     def __init__(self):
+        LastFMHandler.__init__(self)
         self.state = False # if logged in
-    
-    def _loadURL(self,url):
-        s = httpclient.httpclient(self.host, self.port)
-        s.req(url)
-        return s.response
-    
+                    
     def connect(self,username,password):
-        self.info = self.parselines(self._loadURL("/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5.md5(password).digest())))
+        httpclient.testConn(self.host,self.port
+                            ,"/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5.md5(password).digest())
+                            ,callback=self.connectCB,errorback=self.onConnectFailed)
+    
+    def connectCB(self,data):
+        self.info = self._parselines(data)
         if self.info.has_key("session"):
-            self.session = self.info["session"]
-            if self.session.startswith("FAILED"):
-                return False,self.info["msg"]
+            self.lastfmsession = self.info["session"]
+            if self.lastfmsession.startswith("FAILED"):
+                self.onConnectFailed(self.info["msg"])
             else:
                 self.streamurl = self.info["stream_url"]
                 self.baseurl = self.info["base_url"]
@@ -46,11 +79,11 @@ class LastFM:
                 self.subscriber = self.info["subscriber"]
                 self.framehack = self.info["base_path"]
                 self.state = True
-                return True,"loggedin"
+                self.onConnectSuccessful("loggedin")
         else:
-            return False,"Could not login, wrong username or password?"
+            self.onConnectFailed("login failed")
         
-    def parselines(self, str):
+    def _parselines(self, str):
         res = {}
         vars = string.split(str, "\n")
         for v in vars:
@@ -88,61 +121,75 @@ class LastFM:
         else:
             return "lastfm://group/%s"%artist.replace(" ","%20")
     
-    def getmetadata(self):
+    def getMetadata(self):
         if self.state is not True:
-            return False
+            self.onCommandFailed("not logged in")
         else:
-            s = httpclient.httpclient(self.info["base_url"], 80)
-            s.req(self.info["base_path"] + "/np.php?session=" + self.info["session"])
-            tmp = self.parselines(s.response)
-            if tmp.has_key('\xef\xbb\xbfstreaming'):
-                tmp["streaming"] = tmp['\xef\xbb\xbfstreaming']
-    
-            if tmp.has_key("streaming"):
-                if tmp["streaming"] == "false" or (tmp["streaming"] == "true" and tmp.has_key("artist") and tmp.has_key("track") and tmp.has_key("trackduration")):
-                    if not tmp.has_key("album"):
-                        tmp["album"] = ""
-                        tmp["album_url"] = ""
-                    self.metadata = tmp
-                    self.metadatatime = time.time()
-                    self.metadataage = str(int(time.time() - self.metadatatime))
-                    #print self.metadata
-                    #print self.metadatatime
-                    #print "age",self.metadataage
-                    return True
-            return False
+            httpclient.testConn(self.info["base_url"],80
+                            ,self.info["base_path"] + "/np.php?session=" + self.info["session"]
+                            ,callback=self.getMetadataCB,errorback=self.onCommandFailed)
 
-    def command(self, cmd):
-        if self.state is not True:
-            return False
+    def getMetadataCB(self,result):
+        tmp = self._parselines(result)
+        if tmp.has_key('\xef\xbb\xbfstreaming'):
+            tmp["streaming"] = tmp['\xef\xbb\xbfstreaming']
+
+        if tmp.has_key("streaming"):
+            if tmp["streaming"] == "false" or (tmp["streaming"] == "true" and tmp.has_key("artist") and tmp.has_key("track") and tmp.has_key("trackduration")):
+                if not tmp.has_key("album"):
+                    tmp["album"] = ""
+                    tmp["album_url"] = ""
+                self.metadata = tmp
+                self.metadatatime = time.time()
+                self.metadataage = str(int(time.time() - self.metadatatime))
+                self.onMetadataLoaded(self.metadata)
         else:
-            try:
-                # commands = skip, love, ban, rtp, nortp
-                s = httpclient.httpclient(self.info["base_url"], 80)
-                s.req(self.info["base_path"] + "/control.php?command=" + cmd + "&session=" + self.info["session"])
-                res = self.parselines(s.response)
-                if res["response"] != "OK":
-                    return True
-                else:
-                    return False
-            except Exception,e:
-                print "Error",e
-                return False
+            self.onCommandFailed("Error while parsing Metadata")
+
+    def command(self, cmd,callback):
+        # commands = skip, love, ban, rtp, nortp
+        if self.state is not True:
+            self.onCommandFailed("not logged in")
+        else:
+            httpclient.testConn(self.info["base_url"],80
+                            ,self.info["base_path"] + "/control.php?command=" + cmd + "&session=" + self.info["session"]
+                            ,callback=callback,errorback=self.onCommandFailed)
+
+    def onTrackLovedCB(self,response):
+        res = self._parselines(response)
+        if res["response"] == "OK":
+            self.onTrackLoved("Track loved")
+        else:
+            self.onCommandFailed("Server returned FALSE")
+
+    def onTrackBanedCB(self,response):
+        res = self._parselines(response)
+        if res["response"] == "OK":
+            self.onTrackLoved("Track baned")
+        else:
+            self.onCommandFailed("Server returned FALSE")
+
+    def onTrackSkipedCB(self,response):
+        res = self._parselines(response)
+        if res["response"] == "OK":
+            self.onTrackSkiped("Track skiped")
+        else:
+            self.onCommandFailed("Server returned FALSE")
+                        
+    def love(self):
+        return self.command("love",self.onTrackLovedCB)
+
+    def ban(self):
+        return self.command("ban",self.onTrackBanedCB)
+
+    def skip(self):
+        return self.command("skip",self.onTrackSkipedCB)
     
     def hexify(self,s):
         result = ""
         for c in s:
             result = result + ("%02x" % ord(c))
         return result
-    
-    def love(self):
-        return self.command("love")
-
-    def ban(self):
-        return self.command("ban")
-
-    def skip(self):
-        return self.command("skip")
     
 
     def XMLgetElementsByTagName( self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES ):
@@ -161,65 +208,86 @@ class LastFM:
 
     def getGlobalTags( self ,force_reload=False):
         if self.state is not True:
-            return []
+            self.onGlobalTagsFailed("not logged in")
         else:
-            #TODO IOError
-            try: 
-                if os.path.isfile(self.cache_toptags) is False or force_reload is True :
-                    s = httpclient.httpclient(self.info["base_url"], 80)
-                    s.req("/1.0/tag/toptags.xml")
-                    xmlsrc = s.response
-                    fp = open(self.cache_toptags,"w")
-                    fp.write(xmlsrc)
-                    fp.close()
-                else:
-                    fp = open(self.cache_toptags)
-                    xmlsrc = fp.read()
-                    fp.close()
-                rssDocument = xml.dom.minidom.parseString(xmlsrc)
-                data =[]
-                for node in self.XMLgetElementsByTagName(rssDocument, 'tag'):
-                    nodex={}
-                    nodex['_display'] = nodex['name'] = node.getAttribute("name").encode("utf-8")
-                    nodex['count'] =  node.getAttribute("count").encode("utf-8")
-                    nodex['stationurl'] = "lastfm://globaltags/"+node.getAttribute("name").encode("utf-8").replace(" ","%20")
-                    nodex['url'] =  node.getAttribute("url").encode("utf-8")
-                    data.append(nodex)
-                return data
-            except xml.parsers.expat.ExpatError,e:
-                print e
-                return []
+            httpclient.testConn(self.info["base_url"],80
+                            ,"/1.0/tag/toptags.xml"
+                            ,callback=self.getGlobalTagsCB,errorback=self.onCommandFailed)
+
+    def getGlobalTagsCB(self,result):
+        try:
+            rssDocument = xml.dom.minidom.parseString(result)
+            data =[]
+            for node in self.XMLgetElementsByTagName(rssDocument, 'tag'):
+                nodex={}
+                nodex['_display'] = nodex['name'] = node.getAttribute("name").encode("utf-8")
+                nodex['count'] =  node.getAttribute("count").encode("utf-8")
+                nodex['stationurl'] = "lastfm://globaltags/"+node.getAttribute("name").encode("utf-8").replace(" ","%20")
+                nodex['url'] =  node.getAttribute("url").encode("utf-8")
+                data.append(nodex)
+            self.onGlobalTagsLoaded(data)
+        except xml.parsers.expat.ExpatError,e:
+            self.onCommandFailed(e)
 
     def getTopTracks(self,username):
         if self.state is not True:
-            return []
+            self.onCommandFailed("not logged in")
         else:
-            s = httpclient.httpclient(self.info["base_url"], 80)
-            s.req("/1.0/user/%s/toptracks.xml"%username)
-            return self._parseTracks(s.response)
-
+            httpclient.testConn(self.info["base_url"],80
+                            ,"/1.0/user/%s/toptracks.xml"%username
+                            ,callback=self.getTopTracksCB,errorback=self.onCommandFailed)
+           
+    def getTopTracksCB(self,result):
+        re,rdata = self._parseTracks(result)
+        if re:
+            self.onTopTracksLoaded(rdata)
+        else:
+            self.onCommandFailed(rdata)
+            
     def getRecentTracks(self,username):
         if self.state is not True:
-            return []
+            self.onCommandFailed("not logged in")
         else:
-            s = httpclient.httpclient(self.info["base_url"], 80)
-            s.req("/1.0/user/%s/recenttracks.xml"%username)
-            return self._parseTracks(s.response)
+            httpclient.testConn(self.info["base_url"],80
+                            ,"/1.0/user/%s/recenttracks.xml"%username
+                            ,callback=self.getRecentTracksCB,errorback=self.onCommandFailed)
+           
+    def getRecentTracksCB(self,result):
+        re,rdata = self._parseTracks(result)
+        if re:
+            self.onRecentTracksLoaded(rdata)
+        else:
+            self.onCommandFailed(rdata)
+    
     def getRecentLovedTracks(self,username):
         if self.state is not True:
-            return []
+            self.onCommandFailed("not logged in")
         else:
-            s = httpclient.httpclient(self.info["base_url"], 80)
-            s.req("/1.0/user/%s/recentlovedtracks.xml"%username)
-            return self._parseTracks(s.response)
+            httpclient.testConn(self.info["base_url"],80
+                            ,"/1.0/user/%s/recentlovedtracks.xml"%username
+                            ,callback=self.getRecentLovedTracksCB,errorback=self.onCommandFailed)
+           
+    def getRecentLovedTracksCB(self,result):
+        re,rdata = self._parseTracks(result)
+        if re:
+            self.onRecentLovedTracksLoaded(rdata)
+        else:
+            self.onCommandFailed(rdata)
 
     def getRecentBannedTracks(self,username):
         if self.state is not True:
-            return []
+            self.onCommandFailed("not logged in")
         else:
-            s = httpclient.httpclient(self.info["base_url"], 80)
-            s.req("/1.0/user/%s/recentbannedtracks.xml"%username)
-            return self._parseTracks(s.response)
+            httpclient.testConn(self.info["base_url"],80
+                            ,"/1.0/user/%s/recentbannedtracks.xml"%username
+                            ,callback=self.getRecentBannedTracksCB,errorback=self.onCommandFailed)
+           
+    def getRecentBannedTracksCB(self,result):
+        re,rdata = self._parseTracks(result)
+        if re:
+            self.onRecentBannedTracksLoaded(rdata)
+        else:
+            self.onCommandFailed(rdata)
 
     def _parseTracks(self,xmlrawdata):
         #print xmlrawdata
@@ -235,26 +303,41 @@ class LastFM:
                 nodex['url'] =  self.XMLget_txt(node, "url", "N/A" )
                 nodex['_display'] = nodex['artist']+" - "+nodex['name']
                 data.append(nodex)
-            return data
+            return True,data
         except xml.parsers.expat.ExpatError,e:
             print e
-            return []
+            return False,e
 
     def getNeighbours(self,username):
         if self.state is not True:
-            return []
+            self.onCommandFailed("not logged in")
         else:
-            s = httpclient.httpclient(self.info["base_url"], 80)
-            s.req("/1.0/user/%s/neighbours.xml"%username)
-            return self._parseUser(s.response)
+            httpclient.testConn(self.info["base_url"],80
+                            ,"/1.0/user/%s/neighbours.xml"%username
+                            ,callback=self.getNeighboursCB,errorback=self.onCommandFailed)
+           
+    def getNeighboursCB(self,result):
+        re,rdata = self._parseUser(result)
+        if re:
+            self.onNeighboursLoaded(rdata)
+        else:
+            self.onCommandFailed(rdata)
 
     def getFriends(self,username):
         if self.state is not True:
-            return []
+            self.onCommandFailed("not logged in")
         else:
-            s = httpclient.httpclient(self.info["base_url"], 80)
-            s.req("/1.0/user/%s/friends.xml"%username)
-            return self._parseUser(s.response)
+            httpclient.testConn(self.info["base_url"],80
+                            ,"/1.0/user/%s/friends.xml"%username
+                            ,callback=self.getFriendsCB,errorback=self.onCommandFailed)
+           
+    def getFriendsCB(self,result):
+        re,rdata = self._parseUser(result)
+        if re:
+            self.onFriendsLoaded(rdata)
+        else:
+            self.onCommandFailed(rdata)
+
 
     def _parseUser(self,xmlrawdata):
         print xmlrawdata
@@ -268,19 +351,23 @@ class LastFM:
                 nodex['stationurl'] =  "lastfm://user/"+nodex['name']+"/personal"
                 nodex['_display'] = nodex['name']
                 data.append(nodex)
-            return data
+            return True,data
         except xml.parsers.expat.ExpatError,e:
             print e
-            return []
+            return False,e
 
-    def changestation(self, url):
-        print "#"*20,self.state
+    def changeStation(self,url):
         if self.state is not True:
-            return False
+            self.onCommandFailed("not logged in")
         else:
-            s = httpclient.httpclient(self.info["base_url"], 80)
-            s.req(self.info["base_path"] + "/adjust.php?session=" + self.info["session"] + "&url=" + url)
-            res = self.parselines(s.response)
-            if res["response"] != "OK":
-                print "station " + url + " returned:", res
-            return res
+            httpclient.testConn(self.info["base_url"],80
+                            ,self.info["base_path"] + "/adjust.php?session=" + self.info["session"] + "&url=" + url
+                            ,callback=self.changeStationCB,errorback=self.onCommandFailed)
+           
+    def changeStationCB(self,result):
+        res = self._parselines(result)
+        if res["response"] == "OK":
+            self.onStationChanged("Station changed")
+        else:
+            self.onCommandFailed("Server returned "+res["response"])
+
