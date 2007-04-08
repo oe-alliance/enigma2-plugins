@@ -62,7 +62,7 @@ class LastFM(LastFMHandler):
         self.state = False # if logged in
                     
     def connect(self,username,password):
-        httpclient.testConn(self.host,self.port
+        httpclient.getPage(self.host,self.port
                             ,"/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5.md5(password).digest())
                             ,callback=self.connectCB,errorback=self.onConnectFailed)
     
@@ -125,7 +125,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.testConn(self.info["base_url"],80
+            httpclient.getPage(self.info["base_url"],80
                             ,self.info["base_path"] + "/np.php?session=" + self.info["session"]
                             ,callback=self.getMetadataCB,errorback=self.onCommandFailed)
 
@@ -151,7 +151,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.testConn(self.info["base_url"],80
+            httpclient.getPage(self.info["base_url"],80
                             ,self.info["base_path"] + "/control.php?command=" + cmd + "&session=" + self.info["session"]
                             ,callback=callback,errorback=self.onCommandFailed)
 
@@ -210,7 +210,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onGlobalTagsFailed("not logged in")
         else:
-            httpclient.testConn(self.info["base_url"],80
+            httpclient.getPage(self.info["base_url"],80
                             ,"/1.0/tag/toptags.xml"
                             ,callback=self.getGlobalTagsCB,errorback=self.onCommandFailed)
 
@@ -233,7 +233,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.testConn(self.info["base_url"],80
+            httpclient.getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/toptracks.xml"%username
                             ,callback=self.getTopTracksCB,errorback=self.onCommandFailed)
            
@@ -248,7 +248,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.testConn(self.info["base_url"],80
+            httpclient.getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/recenttracks.xml"%username
                             ,callback=self.getRecentTracksCB,errorback=self.onCommandFailed)
            
@@ -263,7 +263,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.testConn(self.info["base_url"],80
+            httpclient.getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/recentlovedtracks.xml"%username
                             ,callback=self.getRecentLovedTracksCB,errorback=self.onCommandFailed)
            
@@ -278,7 +278,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.testConn(self.info["base_url"],80
+            httpclient.getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/recentbannedtracks.xml"%username
                             ,callback=self.getRecentBannedTracksCB,errorback=self.onCommandFailed)
            
@@ -312,7 +312,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.testConn(self.info["base_url"],80
+            httpclient.getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/neighbours.xml"%username
                             ,callback=self.getNeighboursCB,errorback=self.onCommandFailed)
            
@@ -327,7 +327,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.testConn(self.info["base_url"],80
+            httpclient.getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/friends.xml"%username
                             ,callback=self.getFriendsCB,errorback=self.onCommandFailed)
            
@@ -360,7 +360,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.testConn(self.info["base_url"],80
+            httpclient.getPage(self.info["base_url"],80
                             ,self.info["base_path"] + "/adjust.php?session=" + self.info["session"] + "&url=" + url
                             ,callback=self.changeStationCB,errorback=self.onCommandFailed)
            
