@@ -51,6 +51,7 @@ class myClientFactory(ClientFactory):
         
     def startedConnecting(self, connector):
         pass
+    
     def buildProtocol(self, addr):
         return self.protocol
 
@@ -63,14 +64,34 @@ class myClientFactory(ClientFactory):
         ClientFactory.clientConnectionFailed(self, connector, reason)
 
 
-class testConn:
-    def __init__(self,hostname,port,path,method="GET",callback=None,errorback=None):
+def getPage(hostname,port,path,method="GET",callback=None,errorback=None):
         f = myClientFactory(hostname,path,method,callback,errorback)
         try:
             hostname = socket.gethostbyname(hostname)
-        except socket.error:
-            msg = "address %r not found" % (hostname,)
+        except socket.error,e:
+            msg = "address %r not found! %s" % (hostname,e)
             if errorback is not None:
                 errorback(msg)
-        
         reactor.connectTCP(hostname, port, f)
+
+def getFile(filename,hostname,port,path,method="GET",callback=None,errorback=None):
+        def save(data):
+            try:
+                fp = open(filename,"w")
+                fp.write(data)
+                fp.close()
+                callback()
+            except Exception,e:
+                print e
+                if errorback is not None:
+                    errorback(e)
+                
+        f = myClientFactory(hostname,path,method,save,errorback)
+        try:
+            hostname = socket.gethostbyname(hostname)
+        except socket.error,e:
+            msg = "address %r not found! %s" % (hostname,e)
+            if errorback is not None:
+                errorback(msg)
+        reactor.connectTCP(hostname, port, f)
+
