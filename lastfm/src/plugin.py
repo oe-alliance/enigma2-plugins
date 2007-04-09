@@ -304,13 +304,14 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self["infolabel"].setText("")
         
     def updateGUI(self):
-        if self.streamplayer.is_playing is not True or self.shown is not True:
-            return None
         print "updateGUI"
-        if self.streamplayer.is_playing:
+        if self.streamplayer.is_playing is True:
             self["button_red"].setText(_("stop"))
         else:
             self["button_red"].setText(_("play"))            
+        
+        if self.streamplayer.is_playing is not True or self.shown is not True:
+            return None
             
         if self.metadata.has_key("station"):
             self.setTitle("Last.FM: "+self.metadata["station"])
