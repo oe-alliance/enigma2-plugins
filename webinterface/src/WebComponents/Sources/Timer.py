@@ -6,8 +6,11 @@ from Components.Sources.Source import Source
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT,parseEvent
 from Components.config import config
+from xml.sax.saxutils import unescape
 
-import time, string
+import time, string, cgi
+#import codecs
+#codecs.BOM_LE
 # import sys, traceback
 
 class Timer( Source):
@@ -97,7 +100,7 @@ class Timer( Source):
             &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
         
         to zap for some time:
-            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=1&repeated=0
+            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, afterevent=0&eit=&disabled=0&justplay=1&repeated=0
         
         to delete something:
             &command=del&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
@@ -249,10 +252,15 @@ class Timer( Source):
         if param['name'] is None:
             return False,"name is missing"
         else:
-            name = param['name']
+            print "name1 ",param['name']
+            name = unescape(param['name'])#.encode("UTF-16LE")#.decode('utf-8')
+            print "name2 ",name
+            #).decode('utf_8')
             
         if param['description'] is not None:
-            description = param['description']
+            print "description1 ",param['description']
+            description = unescape(param['description'])#.encode("UTF-16LE")#.decode('utf-8')
+            print "description2 ",description
         else: 
             description = ""
             
@@ -546,4 +554,4 @@ No clue, what it could be.
            ,"Cancled":20
            ,"DescriptionExtended":21
            }
-
+       

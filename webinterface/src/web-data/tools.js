@@ -52,6 +52,7 @@ var addTimerEditFormObject = new Object();
 addTimerEditFormObject["TVListFilled"] = 0;
 addTimerEditFormObject["RadioListFilled"] = 0;
 addTimerEditFormObject["deleteOldOnSave"] = 0;
+addTimerEditFormObject["eventID"] = 0;
 
 var doRequestMemory = new Object();
 
@@ -88,9 +89,6 @@ function UpdateStreamReaderStart(){
 }
   
 function UpdateStreamReaderLatestResponse() {
-// Quickhack jjbig start
-// Its not great, but the best I could come up with to solve the 
-// problem with the memory leak
 	UpdateStreamReaderPollTimerCounter++;
 	debug(UpdateStreamReaderPollTimerCounter);
 	if(UpdateStreamReaderPollTimerCounter > 6) {
@@ -102,16 +100,20 @@ function UpdateStreamReaderLatestResponse() {
 		
 		UpdateStreamReaderPollTimerCounterTwisted++;
 /*
+// Quickhack jjbig start
+// Its not great, but the best I could come up with to solve the 
+// problem with the memory leak
+
  		if(UpdateStreamReaderPollTimerCounterTwisted > 5) {
 			UpdateStreamReaderPollTimerCounterTwisted = 0;
 			debug("restarting twisted");
 			debug(new Ajax.Request( "/web/restarttwisted", { method: 'get' }));
 			debug("...twisted restart");
 		}
+		* // Quickhack jjbig end
 */
 		return;
 	}
-// Quickhack jjbig end
 	var allMessages = UpdateStreamReaderRequest.responseText;
 	do {
 		var unprocessed = allMessages.substring(UpdateStreamReaderNextReadPos);
@@ -169,7 +171,6 @@ function UpdateStreamReaderOnError(){
 			}
 		);
 }
-
 //end UpdateStreamReader
 
 function openWindow(title, inner, width, height, id){
@@ -181,18 +182,15 @@ function openWindow(title, inner, width, height, id){
 			debug("opening Window: "+title);
 			return win;
 }
-
 function messageBox(t, m){
 	Dialog.alert(m, {windowParameters: {title: t, className: windowStyle, width:200}, okLabel: "Close"});
 }
 
 //RND Template Function (http://www.amix.dk)
-
 function RND(tmpl, ns) {
 	var fn = function(w, g) {
 		g = g.split("|");
 		var cnt = ns[g[0]];
-
 		//Support for filter functions
 		for(var i=1; i < g.length; i++) {
 			cnt = eval(g[i])(cnt);
@@ -201,7 +199,6 @@ function RND(tmpl, ns) {
 	};
 	return tmpl.replace(/%\(([A-Za-z0-9_|.]*)\)/g, fn);
 }
-
 function debug(text){
 	if(DBG){
 		try{
@@ -209,12 +206,10 @@ function debug(text){
 		} catch (windowNotPresent) {}
 	}
 }
-
 function showhide(id){
  	o = document.getElementById(id).style;
  	o.display = (o.display!="none")? "none":"";
 }
-
 function set(what, value){
 	//debug(what+"-"+value);
 	element = parent.document.getElementById(what);
@@ -393,7 +388,6 @@ function incomingEPGrequest(request){
 			for (var i=0; i < EPGItems.length; i++){
 				try{
 					var item = EPGItems[i];				
-					//Create JSON Object for Template
 					var namespace = {	
 							'date': item.getTimeDay(),
 							'eventid': item.getEventId(),
@@ -414,7 +408,7 @@ function incomingEPGrequest(request){
 					//Fill template with data and add id to our result
 					html += RND(tplEPGListItem, namespace);
 				} catch (blubb) { debug("Error rendering: "+blubb);	}
-			}		
+			}
 			html += tplEPGListFooter;
 			openWindow("Electronic Program Guide", html, 900, 500);
 		} else {
@@ -732,23 +726,19 @@ function incomingTimerList(request){
 		var timers = new TimerList(getXML(request)).getArray();
 		debug("have "+timers.length+" timer");
 		listerHtml 	= tplTimerListHeader;
-		
 		var aftereventReadable = new Array ('Nothing', 'Standby', 'Deepstandby/Shutdown');
 		var justplayReadable = new Array('record', 'zap');
 		var OnOff = new Array('on', 'off');
-
 		for ( var i = 0; i <timers.length; i++){
 			var timer = timers[i];
 			var beginDate = new Date(Number(timer.getTimeBegin())*1000);
 			var endDate = new Date(Number(timer.getTimeEnd())*1000);
-			debug(timer.getDisabled());
-			debug(OnOff[Number(timer.getDisabled())]);
 			var namespace = { 	
 				'servicereference': timer.getServiceReference(),
-				'servicename': timer.getServiceName() ,
-				'title': timer.getName(), 
-				'description': timer.getDescription(), 
-				'descriptionextended': timer.getDescriptionExtended(), 
+				'servicename': quotes2html(timer.getServiceName()),
+				'title': quotes2html(timer.getName()),
+				'description': quotes2html(timer.getDescription()),
+				'descriptionextended': quotes2html(timer.getDescriptionExtended()),
 				'begin': timer.getTimeBegin(),
 				'beginDate': beginDate.toLocaleString(),
 				'end': timer.getTimeEnd(),
@@ -774,13 +764,11 @@ function incomingTimerList(request){
 }
 function repeatedReadable(num) {
 	num = Number(num);
-	
 	if(num == 0) {
 		return "One Time";
 	}
 	
 	var html = "";
-	
 	var Repeated = new Object();
 	Repeated["Mo-Su"] =127;
 	Repeated["Su"] =    64;
@@ -946,7 +934,7 @@ function loadTimerFormNow() {
 	loadTimerFormChannels();
 }
 
-function loadTimerFormSeconds(justplay,begin,end,repeated,channel,channelName,name,description,afterEvent,deleteOldOnSave) {
+function loadTimerFormSeconds(justplay,begin,end,repeated,channel,channelName,name,description,afterEvent,deleteOldOnSave,eit) {
 	debug('justplay:'+justplay+' begin:'+begin+' end:'+end+' repeated:'+repeated+' channel:'+channel+' name:'+name+' description:'+description+' afterEvent:'+afterEvent+' deleteOldOnSave:'+deleteOldOnSave);
 	var start = new Date(Number(begin)*1000);
 	addTimerEditFormObject["syear"] = start.getFullYear();
@@ -976,6 +964,8 @@ function loadTimerFormSeconds(justplay,begin,end,repeated,channel,channelName,na
 	addTimerEditFormObject["deleteOldOnSave"] = Number(deleteOldOnSave);
 	addTimerEditFormObject["beginOld"] = Number(begin);
 	addTimerEditFormObject["endOld"] = Number(end);
+	
+	addTimerEditFormObject["eventID"] = Number(eit);
 	
 	loadTimerFormChannels();
 }
@@ -1114,7 +1104,8 @@ function loadTimerForm(){
 				'channelOld': addTimerEditFormObject["channel"],
 				'beginOld': addTimerEditFormObject["beginOld"],
 				'endOld': addTimerEditFormObject["endOld"],
-				'afterEvent': addTimerFormCreateOptionList(AfterEvent, addTimerEditFormObject["afterEvent"])
+				'afterEvent': addTimerFormCreateOptionList(AfterEvent, addTimerEditFormObject["afterEvent"]),
+				'eventID': addTimerEditFormObject["eventID"]
 		};
 	var listerHtml = RND(tplAddTimerForm, namespace);
 	document.getElementById('BodyContentChannellist').innerHTML = listerHtml;
@@ -1370,13 +1361,15 @@ function sendAddTimer() {
 				repeated += ownLazyNumber($('su').value);
 			}
 		}
-		doRequest(url_timerchange+"?"+"serviceref="+$('channel').value+"&begin="+begin
+		//addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'False\');
+		doRequest(url_timerchange+"?"+"serviceref="+($('channel').value).replace("&quot;", '"')+"&begin="+begin
 		  +"&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean)
 		  +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
 		  +"&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated
 		  +"&channelOld="+$('channelOld').value
 		  +"&beginOld="+$('beginOld').value+"&endOld="+$('endOld').value
-		  +"&deleteOldOnSave="+ownLazyNumber($('deleteOldOnSave').value), incomingTimerAddResult, false);	
+		  +"&eventID"+$('eventID').value
+		  +"&deleteOldOnSave="+ownLazyNumber($('deleteOldOnSave').value), incomingTimerAddResult, false);
 	}
 }
 function getSettings(){
@@ -1426,7 +1419,7 @@ function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,descrip
 	var descriptionClean = (description == " " || description == "N/A") ? "" : description;
 	var nameClean = (name == " " || name == "N/A") ? "" : name;
 
-	doRequest(url_timerchange+"?"+"serviceref="+channel+"&begin="+begin
+	doRequest(url_timerchange+"?"+"serviceref="+channel.replace("&quot;", '"')+"&begin="+begin
 	 +"&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean)
 	 +"&afterevent="+afterEvent+"&eit=0&disabled="+disabled
 	 +"&justplay="+justplay+"&repeated="+repeated
@@ -1664,9 +1657,8 @@ function quotes2html(txt) {
 	txt = txt.replace(/"/g, '&quot;');
 	return txt.replace(/'/g, '&#39;');
 }
-
 function openHiddenFunctions(){
-	openWindow("Extra Hidden Functions",tplExtraHiddenFunctions, 300, 100);
+	openWindow("Extra Hidden Functions",tplExtraHiddenFunctions,300,100);
 }
 function restartUpdateStream() {
 	clearInterval(UpdateStreamReaderPollTimer);
