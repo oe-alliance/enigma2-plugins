@@ -19,7 +19,13 @@ class Enigma2HTTPRequest:
         self.onHeaderLoaded = []
         
         self.data=""
+        self.readsize = 0
+        self.headers= {}
         
+    def _DataRecived(self,data):
+        self.readsize += len(data)
+        self.data += data
+            
     def getIPAdress(self):
         """    
             socket.gethostbyname() is syncron
@@ -30,17 +36,20 @@ class Enigma2HTTPRequest:
     def HeaderLoaded(self,headers):
         self.headers = headers
         for i in self.onHeaderLoaded:
-            i(headers)
+            if i is not None:
+                i(headers)
         self.onHeaderLoaded=[]
         
     def RequestError(self,error):
         for i in self.onRequestError:
-            i(error)
+            if i is not None:
+                i(error)
         self.onRequestError = []
         
     def RequestFinished(self,data):
         for i in self.onRequestFinished:
-            i(data)
+            if i is not None:
+                i(data)
        
 class Enigma2URLHTTPRequest(Enigma2HTTPRequest):
     def __init__(self,url,method="GET",headerfields={}):
@@ -54,21 +63,37 @@ class Enigma2URLHTTPRequest(Enigma2HTTPRequest):
             port = 80
         path=x[2]
         Enigma2HTTPRequest.__init__(self,hostname,path,port,method=method,headerfields=headerfields)
+
+class Enigma2FileHTTPRequest(Enigma2URLHTTPRequest):
+    def __init__(self,targetfile,url,method="GET",headerfields={}):
+        Enigma2URLHTTPRequest.__init__(self,url,method=method,headerfields=headerfields)
+        self.filehandle = open(targetfile,"w")
+        self.onRequestFinished.append(self.close)
+        self.onRequestError.append(self.close)
+    def close(self,dummy):
+        self.filehandle.close()
     
+    def _DataRecived(self,data):
+        self.readsize += len(data)
+        self.filehandle.write(data)
+        
+            
+        
+        
 class Enigma2HTTPProtocol(HTTPClientProtocol):
-    headers={}
-    headerread=False
-    responseFirstLine = True # to indikate, that first line of responseheader was read
 
     def __init__(self,request):
         self.request = request
+        self.headers={}
+        self.headerread=False
+        self.responseFirstLine = True # to indikate, that first line of responseheader was read
         HTTPClientProtocol.__init__(self)
         self.setRawMode()
         
     def rawDataReceived(self,line):
         for l in line.split(self.delimiter): 
             if self.headerread:
-                self.request.data +=l
+                self.request._DataRecived(l)
             else:
                 if l == "":
                     self.headerread = True
@@ -131,20 +156,23 @@ def getURL(url,callback=None,errorback=None,headercallback=None,method="GET",hea
     """
     req = Enigma2URLHTTPRequest(url,method=method,headerfields=headers)
     req.onRequestError.append(errorback)
+    req.onHeaderLoaded.append(headercallback)
     req.onRequestFinished.append(callback)
     reactor.connectTCP(req.getIPAdress(),req.port, Enigma2HTTPClientFactory(req))
+    return req
 
-def getPage(hostname,port,path,method="GET",callback=None,errorback=None):#,headercallback=None,headers={}):
+def getPage(hostname,port,path,method="GET",callback=None,errorback=None,headercallback=None,headers={}):
     """ 
         this will is called with separte hostname,port,path
         hostname = www.hostna.me <string>
         port = 80 <int>
         path= /somewhere/on/the/server <string>
     """
-    req = Enigma2HTTPRequest(hostname,path,port,method=method)#,headerfields=headers)
+    req = Enigma2HTTPRequest(hostname,path,port,method=method,headerfields=headers)
     req.onRequestError.append(errorback)
     req.onRequestFinished.append(callback)
     reactor.connectTCP(req.getIPAdress(),req.port, Enigma2HTTPClientFactory(req))
+    return req
 
 def getFile(filename,url,method="GET",callback=None,errorback=None,headercallback=None,headers={}):
     """ 
@@ -152,14 +180,9 @@ def getFile(filename,url,method="GET",callback=None,errorback=None,headercallbac
         fimename = /tmp/target.jpg 
         url = http://www.hostna.me/somewhere/on/the/server.jpg <string>
     """
-    def save(data):
-        try:
-            fp = open(filename,"w")
-            fp.write(data)
-            fp.close()
-            if callback is not None:
-                callback()
-        except Exception,e:
-            if errorback is not None:
-                errorback(e)
-    getURL(url,method=method,callback=save,errorback=errorback,headercallback=headercallback,headers=headers)
+    req = Enigma2FileHTTPRequest(filename,url,method=method,headerfields=headers)
+    req.onRequestError.append(errorback)
+    req.onHeaderLoaded.append(headercallback)
+    req.onRequestFinished.append(callback)
+    reactor.connectTCP(req.getIPAdress(),req.port, Enigma2HTTPClientFactory(req))
+    return req
