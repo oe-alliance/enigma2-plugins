@@ -512,9 +512,7 @@ class ImageConverter:
         if self.lastURL != sourceURL:
             extension = sourceURL.split(".")[-1]
             self.tmpfile = self.targetfile+"."+extension
-            host = sourceURL.split("/")[2]
-            path = "/"+"/".join(sourceURL.split("/")[3:])
-            httpclient.getFile(self.tmpfile,host,80,path,callback=self.onImageLoaded)
+            httpclient.getFile(self.tmpfile,sourceURL,callback=self.onImageLoaded)
             self.lastURL = sourceURL
 
     def onImageLoaded(self):
