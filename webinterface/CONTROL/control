@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-webinterface
-Version: cvs
+Version: 0.5beta
 Description: Enigma2 Plugin: extensions-webinterface
 Section: base
 Priority: optional
