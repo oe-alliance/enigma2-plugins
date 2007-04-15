@@ -107,7 +107,7 @@ class LastFM(LastFMHandler):
         for v in vars:
             x = string.split(string.rstrip(v), "=", 1)
             if len(x) == 2:
-                res[x[0]] = x[1]
+                res[x[0]] = x[1].encode("utf-8")
             elif x != [""]:
                 print "(urk?", x, ")"
         return res
@@ -227,7 +227,7 @@ class LastFM(LastFMHandler):
 
     def getGlobalTags( self ,force_reload=False):
         if self.state is not True:
-            self.onGlobalTagsFailed("not logged in")
+            self.onCommandFailed("not logged in")
         else:
             httpclient.getPage(self.info["base_url"],80
                             ,"/1.0/tag/toptags.xml"
@@ -359,7 +359,7 @@ class LastFM(LastFMHandler):
 
 
     def _parseUser(self,xmlrawdata):
-        print xmlrawdata
+        #print xmlrawdata
         try:
             rssDocument = xml.dom.minidom.parseString(xmlrawdata)
             data =[]
