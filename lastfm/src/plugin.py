@@ -515,7 +515,7 @@ class ImageConverter:
             httpclient.getFile(self.tmpfile,sourceURL,callback=self.onImageLoaded)
             self.lastURL = sourceURL
 
-    def onImageLoaded(self):
+    def onImageLoaded(self,dummy):
             self.currPic = loadPic(self.tmpfile, self.width, self.height, 0,1, 0,1)
             os.remove(self.tmpfile)
             self.callBack(pixmap=self.currPic)
