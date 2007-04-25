@@ -3,21 +3,27 @@
 
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type"></meta>
 	<title>Enigma 2 Webinterface (Beta 0.5)</title>
+	
 	<!-- load everything for prototype and prototype window //-->
-	<script type="text/javascript" src="/webdata/lib/prototype.js" ></script>
+	<script type="text/javascript" src="/webdata/lib/ptwindow/javascripts/prototype.js" ></script>
+	<script type="text/javascript" src="/webdata/lib/ptwindow/javascripts/effects.js" ></script>
+	<script type="text/javascript" src="/webdata/lib/ptwindow/javascripts/window.js" ></script>
+	<script type="text/javascript" src="/webdata/lib/ptwindow/javascripts/debug.js"> </script>
+
 	<script type="text/javascript" src="/webdata/lib/rico.js"></script>
-	<script type="text/javascript" src="/webdata/lib/ptwindow/effects.js" ></script>
-	<script type="text/javascript" src="/webdata/lib/ptwindow/window.js" ></script>
-	<!-- script type="text/javascript" src="/webdata/lib/ptwindow/debug.js" //-->
 
 	<link href="/webdata/lib/ptwindow/themes/default.css" rel="stylesheet" type="text/css" ></link>
 	<link href="/webdata/lib/ptwindow/themes/alphacube.css" rel="stylesheet" type="text/css" ></link>
-
+	
+	<!-- link href="/webdata/lib/ptwindow/themes/debug.css" rel="stylesheet" type="text/css" ></link -->
+	
 	<!-- our stuff //-->
 	<script type="text/javascript" src="/webdata/templates.js" ></script>
 	<script type="text/javascript" src="/webdata/objects.js" ></script>
+	<script type="text/javascript" src="/webdata/config.js" ></script>
 	<script type="text/javascript" src="/webdata/tools.js" ></script>
-
+	<script type="text/javascript" src="/webdata/timer.js" ></script>
+	
 	<link href="/webdata/style.css" type="text/css" rel="stylesheet" ></link>
 	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico"></link>
 
@@ -123,6 +129,7 @@
 <div id="ServiceListBouqetReference"  style="display:none;" ></div>
 </div>
 <script type="text/javascript" >
+
 if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow"); }
 
 

@@ -1,5 +1,5 @@
 installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/lib/ptwindow/themes/
 
-install_DATA = *.css
+install_DATA = *.css behavior.htc
 
-SUBDIRS = alert alphacube darkX default mac_os_x nuncio spread theme1
+SUBDIRS = alert alphacube default theme1
