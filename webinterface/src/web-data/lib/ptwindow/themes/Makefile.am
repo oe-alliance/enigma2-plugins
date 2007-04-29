@@ -2,4 +2,4 @@ installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/li
 
 install_DATA = *.css behavior.htc
 
-SUBDIRS = alert alphacube default theme1
+SUBDIRS = alert alphacube default iefix
