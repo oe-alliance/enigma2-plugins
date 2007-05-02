@@ -314,12 +314,14 @@ var tplAbout  = '<table align="center" border="0" width="80%">';
     tplAbout += '<tr><td align="left"></br></td></tr>';
     tplAbout += '<tr><td align="left">%(hddInfo)</td></tr>';
     tplAbout += '<tr><td align="left"></br></td></tr>';
+/*
     tplAbout += '<tr><td align="left"><b>LAN Info:</b></td></tr>';
     tplAbout += '<tr><td align="left">%(lanDHCP)</td></tr>';
     tplAbout += '<tr><td align="left">%(lanIP)</td></tr>';
     tplAbout += '<tr><td align="left">%(lanMask)</td></tr>';
     tplAbout += '<tr><td align="left">%(lanGW)</td></tr>';
     tplAbout += '<tr><td align="left">%(lanDNS)</td></tr>\n';
+*/
     tplAbout += '</table></td>\n';
     tplAbout += '<td align="left" width="50%" valign="top">';
     tplAbout += '<table align="center" border="0" width="100%">';

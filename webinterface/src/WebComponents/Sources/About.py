@@ -26,18 +26,20 @@ class About( Source):
         list = []
         list.append(_("Enigma v%s") % about.getVersionString()) 
 
-        #Get Network Info
-        def ConvertIP(AddStr):
-            retstr = AddStr.replace(', ','.')
-            retstr = retstr.replace('[','')
-            retstr = retstr.replace(']','')
-            return retstr
-
-        list.append(_("Use DHCP %s") % config.network.dhcp.value)
-        list.append(ConvertIP(_("IP Address %s") % config.network.ip.value))
-        list.append(ConvertIP(_("Netmask %s") % config.network.netmask.value))
-        list.append(ConvertIP(_("Gateway %s") % config.network.gateway.value))
-        list.append(ConvertIP(_("Nameserver %s") % config.network.dns.value))
+#===============================================================================
+#        #Get Network Info
+#        def ConvertIP(AddStr):
+#            retstr = AddStr.replace(', ','.')
+#            retstr = retstr.replace('[','')
+#            retstr = retstr.replace(']','')
+#            return retstr
+# 
+#        list.append(_("Use DHCP %s") % config.network.dhcp.value)
+#        list.append(ConvertIP(_("IP Address %s") % config.network.ip.value))
+#        list.append(ConvertIP(_("Netmask %s") % config.network.netmask.value))
+#        list.append(ConvertIP(_("Gateway %s") % config.network.gateway.value))
+#        list.append(ConvertIP(_("Nameserver %s") % config.network.dns.value))
+#===============================================================================
 
         #Get FrontProcessor Version
         fp_version = getFPVersion()
@@ -115,25 +117,25 @@ class About( Source):
     
     list = property(command)
     lut = {"enigmaVersion": 0
-           ,"lanDHCP": 1
-           ,"lanIP": 2
-           ,"lanMask": 3
-           ,"lanGW": 4
-           ,"lanDNS": 5
-           ,"fpVersion": 6
-           ,"tunerInfo": 7
-           ,"hddInfo": 8
-           ,"serviceName": 9
-           ,"serviceProvider": 10
-           ,"serviceAspect": 11
-           ,"serviceNamespace": 12
-           ,"vPID": 13
-           ,"aPID": 14
-           ,"pcrID": 15
-           ,"pmtPID": 16
-           ,"txtPID": 17
-           ,"tsID": 18
-           ,"onID": 19
-           ,"sid": 20
+#           ,"lanDHCP": 1
+ #          ,"lanIP": 2
+  #         ,"lanMask": 3
+   #        ,"lanGW": 4
+    #       ,"lanDNS": 5
+           ,"fpVersion": 1
+           ,"tunerInfo": 2
+           ,"hddInfo": 3
+           ,"serviceName": 4
+           ,"serviceProvider": 5
+           ,"serviceAspect": 6
+           ,"serviceNamespace": 7
+           ,"vPID": 8
+           ,"aPID": 9
+           ,"pcrID": 10
+           ,"pmtPID": 11
+           ,"txtPID": 12
+           ,"tsID": 13
+           ,"onID": 14
+           ,"sid": 15
            }
 

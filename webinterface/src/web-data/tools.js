@@ -942,11 +942,13 @@ function incomingAbout(request) {
 			try{
 				var namespace = {
 					'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data
+/*
 					,'lanDHCP': xml.getElementsByTagName('e2landhcp').item(0).firstChild.data
 					,'lanIP': xml.getElementsByTagName('e2lanip').item(0).firstChild.data
 					,'lanMask': xml.getElementsByTagName('e2lanmask').item(0).firstChild.data
 					,'lanGW': xml.getElementsByTagName('e2langw').item(0).firstChild.data
 					,'lanDNS': xml.getElementsByTagName('e2landns').item(0).firstChild.data
+*/
 					,'fpVersion': xml.getElementsByTagName('e2fpversion').item(0).firstChild.data
 					,'tunerInfo': xml.getElementsByTagName('e2tunerinfo').item(0).firstChild.data
 					,'hddInfo': xml.getElementsByTagName('e2hddinfo').item(0).firstChild.data
