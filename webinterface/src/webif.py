@@ -51,6 +51,8 @@ class WebScreen(Screen):
 		Screen.__init__(self, session)
 		self.stand_alone = True
 		self.request = request
+		self.instance = None
+		
 # a test screen
 class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 	def __init__(self, session,request):
