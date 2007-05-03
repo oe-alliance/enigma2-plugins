@@ -123,7 +123,7 @@ class Wireless(object):
                                              SIOCGIWAP,
                                              data=s)
         if i > 0:
-            return (i, result)
+            return result
 
         return self.iwstruct.getMAC(result)
    
@@ -138,7 +138,7 @@ class Wireless(object):
         i, result = self.iwstruct.iw_get_ext(self.ifname, 
                                             SIOCGIWRATE)
         if i > 0:
-            return (i, result)
+            return result
         iwfreq = Iwfreq(result)
         return iwfreq.getBitrate()
     
@@ -185,7 +185,7 @@ class Wireless(object):
                                              SIOCGIWESSID, 
                                              data=s)
         if i > 0:
-            return (i, result)
+            return result
         str = buff.tostring()
         return str.strip('\x00')
 
@@ -199,7 +199,7 @@ class Wireless(object):
                                              SIOCSIWESSID, 
                                              data=s)
         if i > 0:
-            return (i, result)
+            return result
 
     def getEncryption(self):
         """get encryption information which is probably a string of '*',
@@ -261,7 +261,7 @@ class Wireless(object):
         i, result = self.iwstruct.iw_get_ext(self.ifname, 
                                              SIOCGIWMODE)
         if i > 0:
-            return (i, result)
+            return result
         mode = self.iwstruct.unpack('i', result[:4])[0]
         return modes[mode]
 
@@ -279,7 +279,7 @@ class Wireless(object):
                                              SIOCSIWMODE, 
                                              data=s)
         if i > 0:
-            return (i, result)
+            return result
     
     def getWirelessName(self):
         """ returns wireless name 
@@ -292,7 +292,7 @@ class Wireless(object):
         i, result = self.iwstruct.iw_get_ext(self.ifname, 
                                              SIOCGIWNAME)
         if i > 0:
-            return (i, result)
+            return result
         return result.split('\0')[0]
     
     def getPowermanagement(self):
@@ -621,20 +621,34 @@ class Iwfreq(object):
         # m and don't needs to be recalculated
         return "%i dBm" %self.mw2dbm(self.frequency/10)
     
-    def getChannel(self, freq, iwrange):
+    def getChannel(self, freq):
         """returns channel information given by frequency
            
            returns None if frequency can't be converted
            freq = frequency to convert (int)
            iwrange = Iwrange object
         """
-        if freq < KILO:
+        
+        try:
+            freq = float(freq)
+        except:
             return None
         
-        # XXX
-        # for frequency in iwrange.frequencies
-
+        lut = {}
+        #13 Channels beginning at 2.412GHz and inreasing by 0,005 GHz steps
+        for i in range(0,12):
+            cur = float( 2.412 + ( i * 0.005 ) )
+            lut[str(cur)] = i+1
+        # Channel 14 need special actions ;)
+        lut['2.484'] = 14
         
+        
+        if str(freq) in lut.keys():
+                return lut[str(freq)]
+        
+        return None
+    
+          
     def mw2dbm(self, mwatt):
         """ converts mw to dbm(float) """
         return math.ceil(10.0 * math.log10(mwatt))

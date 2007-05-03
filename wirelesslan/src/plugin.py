@@ -1,3 +1,5 @@
+from enigma import eTimer
+
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 
@@ -19,21 +21,137 @@ from Wlan import Wlan, WlanList, wpaSupplicant
 
 plugin_path = "/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan"
 
-class WlanSelection(Screen):
+class WlanSelectScreen(Screen):
+	skin = """
+	<screen position="185,238" size="350,100" title="Wireless Network Tools" >
+		<widget name="menu" position="10,10" size="330,80" scrollbarMode="showOnDemand" />
+	</screen>
+	"""
+	
+	def __init__(self, session, iface):
+		Screen.__init__(self, session)
+		self.session = session
+		
+		self.skin = WlanSelectScreen.skin
+		self.skin_path = plugin_path 		
+		
+		self.iface = iface
+		
+		list = []
+		list.append(_("Scan for Wireless Networks")) 
+		list.append(_("Show WLAN Status"))
+		list.append(_("Edit Wireless Settings"))
+		
+		
+		self["menu"] = MenuList(list)
+		
+		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
+		{
+			"ok": self.ok,
+			"back": self.exit,
+		}, -1)
+		
+	def ok(self):
+		idx = self["menu"].getSelectedIndex()
+		if idx is 0:
+			self.session.openWithCallback(EntryChosen, WlanScan, self.iface)
+			print "[plugin.py:Wireless] Starting WlanScan"
+		elif idx is 1:
+			self.session.open(WlanStatus, self.iface)
+			print "[plugin.py:Wireless] Starting WlanStatus"
+
+		elif idx is 2:
+			self.session.open(WlanConfiguration, self.iface)
+			print "[plugin.py:Wireless] Starting Manual Configuration"
+
+		else:
+			print "[plugin.py:Wireless] Unkown Menupoint"
+				
+	def exit(self):
+		self.close()
+		
+			
+class WlanStatus(Screen):
+	skin = """
+	<screen position="185,188" size="350,223" title="Wireless Network Status" >
+		<widget name="LabelBSSID" position="10,10" size="150,25" valign="left" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelESSID" position="10,38" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelQuality" position="10,66" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelSignal" position="10,94" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelBitrate" position="10,122" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelChannel" position="10,150" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		
+		<widget name="BSSID" position="170,10" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="ESSID" position="170,38" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="quality" position="170,66" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="signal" position="170,94" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="bitrate" position="170,122" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="channel" position="170,150" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+	</screen>
+	"""
+	
+	def __init__(self, session, iface):
+		
+		Screen.__init__(self, session)
+		
+		self.session = session
+		self.iface = iface
+		self.skin = WlanStatus.skin
+		
+		self.timer = eTimer()
+		self.timer.timeout.get().append(self.resetList) 
+		self.onShown.append(lambda: self.timer.start(5000))
+						    
+		self["LabelBSSID"] = Label(_('Accesspoint:'))
+		self["LabelESSID"] = Label(_('SSID:'))
+		self["LabelQuality"] = Label(_('Link Quality:'))
+		self["LabelSignal"] = Label(_('Signal Strength:'))
+		self["LabelBitrate"] = Label(_('Bitrate:'))
+		self["LabelChannel"] = Label(_('Channel:'))
+			
+		self["BSSID"] = Label()
+		self["ESSID"] = Label()
+		self["quality"] = Label()
+		self["signal"] = Label()
+		self["bitrate"] = Label()
+		self["channel"] = Label()
+		
+		self.resetList()
+		
+		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
+		{
+			"ok": self.exit,
+			"back": self.exit,
+		}, -1)
+		
+	def resetList(self):
+		w = Wlan(self.iface)
+		stats = w.getStatus()
+		 
+		self["BSSID"].setText(stats['BSSID'])
+		self["ESSID"].setText(stats['ESSID'])
+		self["quality"].setText(stats['quality']+"%")
+		self["signal"].setText(stats['signal']+"%")
+		self["bitrate"].setText(stats['bitrate'])
+		self["channel"].setText(stats['channel'])
+			
+	def exit(self):
+		self.timer.stop()
+		self.close()	
+
+class WlanScan(Screen):
 	skin = """
 	<screen position="70,138" size="610,300" title="Choose a Wireless Network" >
 		<widget name="info" position="10,10" size="580,30" font="Regular;24" transparent="1" foregroundColor="#FFFFFF" />
 		<widget name="list" position="10,60" size="580,200" scrollbarMode="showOnDemand" />
 		
-		<widget name="cancel" position="10,255" size="140,40" pixmap="~/key-red.png" zPosition="1" transparent="1" alphatest="on" />
-		<widget name="select" position="160,255" size="140,40" pixmap="~/key-green.png" zPosition="1" transparent="1" alphatest="on" />
-		<widget name="rescan" position="310,255" size="140,40" pixmap="~/key-yellow.png" zPosition="1" transparent="1" alphatest="on" />
-		<widget name="skip" position="460,255" size="140,40" pixmap="~/key-blue.png" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="cancel" position="80,255" size="140,40" pixmap="~/key-red.png" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="select" position="230,255" size="140,40" pixmap="~/key-green.png" zPosition="1" transparent="1" alphatest="on" />
+		<widget name="rescan" position="380,255" size="140,40" pixmap="~/key-yellow.png" zPosition="1" transparent="1" alphatest="on" />
 		
-		<widget name="canceltext" position="10,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />		
-		<widget name="selecttext" position="160,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
-		<widget name="rescantext" position="310,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
-		<widget name="skiptext" position="460,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="canceltext" position="80,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />		
+		<widget name="selecttext" position="230,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
+		<widget name="rescantext" position="380,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
 	</screen>
 	"""
 	def __init__(self, session, iface):
@@ -41,7 +159,7 @@ class WlanSelection(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		
-		self.skin = WlanSelection.skin
+		self.skin = WlanScan.skin
 		self.skin_path = plugin_path 
 		
 		
@@ -52,13 +170,12 @@ class WlanSelection(Screen):
 		self["cancel"] = Pixmap()
 		self["select"] = Pixmap()
 		self["rescan"] = Pixmap()
-		self["skip"] = Pixmap()
 		
 		self.setInfo()
 		
 		self["canceltext"] = Label(_("Cancel"))
-		self["selecttext"] = Label(_("Select"))
-		self["rescantext"] = Label(_("Rescan"))
+		self["selecttext"] = Label(_("OK"))
+		self["rescantext"] = Label(_("Refresh"))
 		self["skiptext"] = Label(_("Skip"))
 			
 		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
@@ -74,7 +191,6 @@ class WlanSelection(Screen):
 		 	"red": self.exit,
 			"green": self.select,
 			"yellow": self.rescan,
-			"blue": self.skip,
 		})
 	
 	def select(self):
@@ -88,9 +204,6 @@ class WlanSelection(Screen):
 	def rescan(self):
 		self["list"].reload()
 		self.setInfo()
-	
-	def skip(self):
-		self.close( (self.session, None) )
 	
 	def exit(self):
 		self.close( (None ,) )
@@ -111,7 +224,7 @@ class WlanConfiguration(ConfigListScreen, Screen):
 		</screen>
 	"""
 	
-	def __init__(self, session, essid = None, encrypted = False, iface = "wlan0"):
+	def __init__(self, session, iface = "wlan0", essid = None, encrypted = False):
 		
 		Screen.__init__(self, session)		
 		self.skin = WlanConfiguration.skin
@@ -177,23 +290,23 @@ def EntryChosen(parms):
 			essid = val[0]
 			encrypted = val[2]
 			iface = val[3]
-			session.open(WlanConfiguration, essid, encrypted, iface)
+			session.open(WlanConfiguration, iface, essid, encrypted)
 		else:
 			session.open(WlanConfiguration)
 
-def WlanSelectionMain(session, iface):
-	session.openWithCallback(EntryChosen, WlanSelection, iface)
+def WlanSelectScreenMain(session, iface):
+	session.open(WlanSelectScreen, iface)
 
-def WlanConfigurationMain(session, **kwargs):
-	session.open(WlanConfiguration)
+def WlanScanMain(session, iface):
+	session.openWithCallback(EntryChosen, WlanScan, iface)
 
 def callFunction(iface):
 	
-	w = Wlan()
+	w = Wlan(iface)
 	i = w.getWirelessInterfaces()
 	if i:
 		if iface in i:
-			return WlanSelectionMain	
+			return WlanSelectScreenMain	
 	
 	return None
 
