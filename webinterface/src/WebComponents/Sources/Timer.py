@@ -1,3 +1,5 @@
+Version = '$Header$';
+
 from enigma import *
 from enigma import eServiceReference 
 from enigma import eServiceCenter
@@ -299,21 +301,27 @@ class Timer( Source):
         return True,"Timer added"        
 
     def addTimerByEventID(self,param):
-        print "addTimerByEventID",param['serviceref'],param['eventid']
+        print "addTimerByEventID",param
         if param['serviceref'] is None:
             return False,"ServiceReference not set"
         if param['eventid'] is None:
             return False,"Eventid not set"
+        
+        justplay = False
+        if param['justplay'] is not None:
+            if param['justplay'] == "1":
+                justplay = True
+
         epgcache = eEPGCache.getInstance()
         event = epgcache.lookupEventId(eServiceReference(param['serviceref']),int(param['eventid']))
         if event is None:
             return False,"Eventid not found"
         (begin, end, name, description, eit) =parseEvent(event)
-        justplay = False
-        if param['justplay'] is None and param['justplay'] == "1":
-            justplay = True
         
+        print "addTimerByEventID newtimer ",param['serviceref'], (begin - (int(config.recording.margin_before.value)*60)), (end + (int(config.recording.margin_after.value)*60)), name, description, eit, False, justplay
         newtimer = RecordTimerEntry(ServiceReference(param['serviceref']), (begin - (int(config.recording.margin_before.value)*60)), (end + (int(config.recording.margin_after.value)*60)), name, description, eit, False, justplay, AFTEREVENT.NONE)
+                        #RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent)
+                
         self.recordtimer.record(newtimer)
         return True,"Timer added"    
             
