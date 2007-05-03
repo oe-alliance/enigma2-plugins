@@ -1,4 +1,7 @@
+Version = '$Header$';
+
 var doRequestMemory = new Object();
+var doRequestMemorySave = new Object();
 
 // Get Settings
 var settings = null;
@@ -43,19 +46,6 @@ function UpdateStreamReaderLatestResponse() {
 		UpdateStreamReaderStart();
 		
 		UpdateStreamReaderPollTimerCounterTwisted++;
-/*
-// Quickhack jjbig start
-// Its not great, but the best I could come up with to solve the 
-// problem with the memory leak
-
- 		if(UpdateStreamReaderPollTimerCounterTwisted > 5) {
-			UpdateStreamReaderPollTimerCounterTwisted = 0;
-			debug("restarting twisted");
-			debug(new Ajax.Request( "/web/restarttwisted", { method: 'get' }));
-			debug("...twisted restart");
-		}
-		* // Quickhack jjbig end
-*/
 		return;
 	}
 	var allMessages = UpdateStreamReaderRequest.responseText;
@@ -204,22 +194,25 @@ function requestFinished(){
 // end requestindikator
 function doRequest(url, readyFunction, save){
 	requestStarted();
-	//var password = "";
-	//var username = "";
-	debug("Requesting: "+url);
+	doRequestMemorySave[url] = save;
+	debug("doRequest: Requesting: "+url);
 	if(save == true && typeof(doRequestMemory[url]) != "undefined") {
-		debug("not loading");
 		readyFunction(doRequestMemory[url]);
 	} else {
-		debug("loading");
+		debug("doRequest: loading");
 		new Ajax.Request(url,
 			{
 				asynchronous: true,
 				method: 'GET',
 				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
 				onException: function(o,e){ throw(e); },				
-				onSuccess: function (transport, json) { 
-							if(save == true) { doRequestMemory[url] = transport; }
+				onSuccess: function (transport, json) {
+							if(typeof(doRequestMemorySave[url]) != "undefined") {
+								if(doRequestMemorySave[url]) {
+									debug("doRequest: saving request"); 
+									doRequestMemory[url] = transport;
+								}
+							}
 							readyFunction(transport);
 						},
 				onComplete: requestFinished 
@@ -986,6 +979,8 @@ function quotes2html(txt) {
 	txt = txt.replace(/"/g, '&quot;');
 	return txt.replace(/'/g, '&#39;');
 }
+
+// Spezial functions, mostly for testing purpose
 function openHiddenFunctions(){
 	openWindow("Extra Hidden Functions",tplExtraHiddenFunctions,300,100);
 }
@@ -995,4 +990,11 @@ function restartUpdateStream() {
 	UpdateStreamReaderRequest = null;
 	UpdateStreamReaderPollTimerCounter = 0;
 	UpdateStreamReaderStart();
+}
+function startDebugWindow() {
+	DBG = true;
+	debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow");
+}
+function restartTwisted() {
+	new Ajax.Request( "/web/restarttwisted", { asynchronous: true, method: "get" })
 }

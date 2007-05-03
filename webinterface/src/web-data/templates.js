@@ -1,3 +1,4 @@
+Version = '$Header$';
 // EPG Templates
 var tplUpdateStreamReaderIE = '<iframe id="UpdateStreamReaderIEFixIFrame" src="%(url_updates)" height="0" width="0" scrolling="none" frameborder="0">no iframe support!</iframe>';
 var tplEPGListHeader = '<table width="100%" border="0" cellspacing="1" cellpadding="0">';
@@ -121,12 +122,13 @@ var tplTimerListItem  = '<tr width="99%">\n';
 	tplTimerListItem += '<td><div style="color: #%(color);" class="tListBegin">%(beginDate)</div></td>\n';
 	tplTimerListItem += '<td><div style="color: #%(color);" class="tListEnd">%(endDate)</div></td>\n';
 	tplTimerListItem += '<td><div style="color: #%(color);" class="tListAfter"><b>%(justplayReadable)</b> <br/><br/> %(aftereventReadable)</div></td>\n';
-	tplTimerListItem += '<td><div style="color: #%(color);" class="tListOption"><a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\',\'%(servicename)\',\'%(title)\',\'%(description)\');"></a>\n';
+	tplTimerListItem += '<td><div style="color: #%(color);" class="tListOption"><a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\',\'%(servicename)\',\'%(title)\',\'%(description)\',incomingTimerDelResult);"></a>\n';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/%(onOff).png" title="toggle On/Off" border="0" onclick="sendToggleTimerDisable(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',\'%(disabled)\' );"></a>\n';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(servicename)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a></div></td>\n';
 	tplTimerListItem += '</tr>\n';
 
 var tplTimerListFooter  = '<tr><button onclick="writeTimerListNow()">write TimerList to memory now</button></tr>\n';
+	tplTimerListFooter += '<tr><button onclick="cleanTimerListNow()">clean List from non-aktiv entries</button></tr>\n';
     tplTimerListFooter += '</tbody></table>\n';
 
 var tplRecordingFooter   = '<hr><br><table style="text-align: left; width: 100%; height: 178px;" border="0" cellpadding="2" cellspacing="2"><tbody>';
@@ -343,8 +345,10 @@ var tplAbout  = '<table align="center" border="0" width="80%">';
     tplAbout += '<tr><td align="left">SID: %(sidh) (%(sid)d)</td></tr>\n';
     tplAbout += '</table>';
 
-var tplExtraHiddenFunctions  = '<table width="100%" id="SignalPanelTable">';
-	tplExtraHiddenFunctions += '<tr><td style="background-color: #DDDDDD;"><div onlick="new Ajax.Request( "/web/restarttwisted", { method: "get" })">Restart Twisted</div></td></tr>';
-	tplExtraHiddenFunctions += '<tr><td style="background-color: #DDDDDD;"><div onlick="clearInterval(UpdateStreamReaderPollTimer);">Stop Time/Signal/Current-Channel -Updates</div></td></tr>';
-	tplExtraHiddenFunctions += '<tr><td style="background-color: #DDDDDD;"><div onlick="restartUpdateStream();">Restart Time/Signal/Current-Channel -Updates</div></td></tr>';
-	tplExtraHiddenFunctions += '</table>';
+var tplExtraHiddenFunctions  = '<ul style="list-style-type:disc">';
+	tplExtraHiddenFunctions += '<li><div onclick="restartTwisted()">Restart Twisted</div></li>';
+	tplExtraHiddenFunctions += '<li><div onclick="clearInterval(UpdateStreamReaderPollTimer);">Stop Time/Signal/Current-Channel -Updates</div></li>';
+	tplExtraHiddenFunctions += '<li><div onclick="restartUpdateStream();">Restart Time/Signal/Current-Channel -Updates</div></li>';
+	tplExtraHiddenFunctions += '<li><div onclick="startDebugWindow();">Start Debug-Window</div></li>';
+	tplExtraHiddenFunctions += '</ul>'
+	

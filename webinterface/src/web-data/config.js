@@ -1,3 +1,5 @@
+Version = '$Header$';
+
 var DBG = true;
 DBG = false;
 

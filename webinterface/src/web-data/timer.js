@@ -1,3 +1,6 @@
+// Versioning
+Version = '$Header$';
+
 // TimerEdit variables:
 var addTimerEditFormObject = new Object();
 addTimerEditFormObject["TVListFilled"] = 0;
@@ -122,7 +125,7 @@ function colorTimerListEntry (state) {
 		return "00BCBC";
 	}
 }
-function delTimer(serviceRef,begin,end,servicename,title,description){
+function delTimer(serviceRef,begin,end,servicename,title,description,readyFunction){
 	debug("delTimer: serviceRef("+serviceRef+"),begin("+begin+"),end("+end+"),servicename("+servicename+"),title("+title+"),description("+description+")");
 	Dialog.confirm(
 		"Selected timer:<br>"
@@ -134,7 +137,11 @@ function delTimer(serviceRef,begin,end,servicename,title,description){
 			okLabel: "delete",
 			buttonClass: "myButtonClass",
 			cancel: function(win) {debug("delTimer cancel confirm panel")},
-			ok: function(win) { debug("delTimer ok confirm panel"); doRequest(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end, incomingTimerDelResult, false); return true; }
+			ok: function(win) { 
+							    debug("delTimer ok confirm panel"); 
+							    doRequest(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end, readyFunction, false);
+							    return true;
+							  }
 			}
 	);
 }
@@ -147,7 +154,6 @@ function incomingTimerDelResult(request){
 		loadTimerList();
 	}		
 }
-
 function loadTimerFormNow() {
 	var now = new Date();
 	addTimerEditFormObject["syear"] = now.getFullYear();
@@ -330,7 +336,6 @@ function loadTimerForm(){
 		channelObject[String(dashString+i)] = "---";
 		channelObject[element.getServiceReference()] = element.getServiceName();
 	}
-	debug("geklappt" + channelObject.length);
 	var namespace = { 	
 				'justplay': addTimerFormCreateOptionList(Action, addTimerEditFormObject["justplay"]),
 				'syear': addTimerFormCreateOptions(2007,2010,addTimerEditFormObject["syear"]),
@@ -601,4 +606,26 @@ function sendAddTimer() {
 		  +"&eventID"+$('eventID').value
 		  +"&deleteOldOnSave="+ownLazyNumber($('deleteOldOnSave').value), incomingTimerAddResult, false);
 	}
+}
+
+function cleanTimerListNow(){
+	debug("cleanTimerListNow pushed");
+	doRequest(url_timerlist, incomingCleanTimerListNow, false);	
+}
+function incomingCleanTimerListNow(request) {
+	if(request.readyState == 4){
+		var timers = new TimerList(getXML(request)).getArray();
+		debug("have "+timers.length+" timer");
+		for ( var i = 0; i <timers.length; i++){
+			var timer = timers[i];
+			debug(timer.getState() + " " + quotes2html(timer.getName()));
+			if(timer.getState() != 0) {
+				delTimer(timer.getServiceReference(),timer.getTimeBegin(),timer.getTimeEnd()
+					,quotes2html(timer.getServiceName()),quotes2html(timer.getName()),quotes2html(timer.getDescription()),incomingJustDoNothing);
+			}
+		}
+	}
+}
+function incomingJustDoNothing(request){
+	debug("just do nothing");
 }
