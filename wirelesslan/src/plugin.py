@@ -21,12 +21,15 @@ from Wlan import Wlan, WlanList, wpaSupplicant
 
 plugin_path = "/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan"
 
+
+
 class WlanSelectScreen(Screen):
 	skin = """
 	<screen position="185,238" size="350,100" title="Wireless Network Tools" >
 		<widget name="menu" position="10,10" size="330,80" scrollbarMode="showOnDemand" />
 	</screen>
 	"""
+	
 	
 	def __init__(self, session, iface):
 		Screen.__init__(self, session)
@@ -50,7 +53,8 @@ class WlanSelectScreen(Screen):
 			"ok": self.ok,
 			"back": self.exit,
 		}, -1)
-		
+
+
 	def ok(self):
 		idx = self["menu"].getSelectedIndex()
 		if idx is 0:
@@ -67,10 +71,12 @@ class WlanSelectScreen(Screen):
 		else:
 			print "[plugin.py:Wireless] Unkown Menupoint"
 				
+	
 	def exit(self):
 		self.close()
-		
-			
+
+
+
 class WlanStatus(Screen):
 	skin = """
 	<screen position="185,188" size="350,223" title="Wireless Network Status" >
@@ -89,6 +95,7 @@ class WlanStatus(Screen):
 		<widget name="channel" position="170,150" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 	</screen>
 	"""
+	
 	
 	def __init__(self, session, iface):
 		
@@ -124,20 +131,25 @@ class WlanStatus(Screen):
 			"back": self.exit,
 		}, -1)
 		
+	
 	def resetList(self):
 		w = Wlan(self.iface)
 		stats = w.getStatus()
-		 
+		if stats['BSSID'] == "00:00:00:00:00:00":
+			stats['BSSID'] = _("No Connection!")
 		self["BSSID"].setText(stats['BSSID'])
 		self["ESSID"].setText(stats['ESSID'])
 		self["quality"].setText(stats['quality']+"%")
 		self["signal"].setText(stats['signal']+"%")
 		self["bitrate"].setText(stats['bitrate'])
 		self["channel"].setText(stats['channel'])
-			
+		
+	
 	def exit(self):
 		self.timer.stop()
 		self.close()	
+
+
 
 class WlanScan(Screen):
 	skin = """
@@ -154,6 +166,8 @@ class WlanScan(Screen):
 		<widget name="rescantext" position="380,255" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1"  foregroundColor="#FFFFFF" />
 	</screen>
 	"""
+
+	
 	def __init__(self, session, iface):
 	
 		Screen.__init__(self, session)
@@ -182,8 +196,6 @@ class WlanScan(Screen):
 		{
 			"ok": self.select,
 			"back": self.exit,
-#			"up": self.up,
-#			"down": self.down,
 		}, -1)
 		
 		self["shortcuts"] = ActionMap(["ShortcutActions"],
@@ -192,6 +204,7 @@ class WlanScan(Screen):
 			"green": self.select,
 			"yellow": self.rescan,
 		})
+
 	
 	def select(self):
 		cur = self["list"].getCurrent()
@@ -200,13 +213,16 @@ class WlanScan(Screen):
 		else:
 			ret = (self.session, None)
 		self.close(ret)
+
 	
 	def rescan(self):
 		self["list"].reload()
 		self.setInfo()
+
 	
 	def exit(self):
 		self.close( (None ,) )
+
 	
 	def setInfo(self):
 		length = self["list"].getLength()
@@ -214,6 +230,8 @@ class WlanScan(Screen):
 		if length == 0:
 			length = "No" 
 		self["info"].setText(str(length)+_(" Wireless Network(s) found!"))	
+
+
 	
 class WlanConfiguration(ConfigListScreen, Screen):
 	skin = """
@@ -224,8 +242,7 @@ class WlanConfiguration(ConfigListScreen, Screen):
 		</screen>
 	"""
 	
-	def __init__(self, session, iface = "wlan0", essid = None, encrypted = False):
-		
+	def __init__(self, session, iface = "wlan0", essid = None, encrypted = False):		
 		Screen.__init__(self, session)		
 		self.skin = WlanConfiguration.skin
 		
@@ -251,9 +268,9 @@ class WlanConfiguration(ConfigListScreen, Screen):
 		
 		ConfigListScreen.__init__(self, self.list)
 		self.createSetup()
+
 	
 	def createSetup(self):
-
 		self.list = [ ]
 						
 		self.list.append(getConfigListEntry(_("Network SSID"), config.plugins.wlan.essid))
@@ -266,14 +283,17 @@ class WlanConfiguration(ConfigListScreen, Screen):
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 	
+	
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
 		self.createSetup()
 
+	
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		self.createSetup()
 
+	
 	def ok(self):
 		self.ws.writeConfig()
 		self.ws.restart(self.iface)
@@ -281,6 +301,8 @@ class WlanConfiguration(ConfigListScreen, Screen):
 
 	def cancel(self):
 		self.close()
+
+
 
 def EntryChosen(parms):
 	if parms[0]:
@@ -294,11 +316,10 @@ def EntryChosen(parms):
 		else:
 			session.open(WlanConfiguration)
 
+
 def WlanSelectScreenMain(session, iface):
 	session.open(WlanSelectScreen, iface)
 
-def WlanScanMain(session, iface):
-	session.openWithCallback(EntryChosen, WlanScan, iface)
 
 def callFunction(iface):
 	
@@ -310,9 +331,11 @@ def callFunction(iface):
 	
 	return None
 
+
 def configStrings(iface):
 	return "pre-up /usr/sbin/wpa_supplicant -B -i"+iface+" -c/etc/wpa_supplicant.conf"
 	
+
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "menuEntryName": lambda x: "Wireless Network Configuartion..."})
 	

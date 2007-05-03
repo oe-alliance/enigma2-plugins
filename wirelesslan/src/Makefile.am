@@ -1,4 +1,4 @@
 installdir = /usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan/
 
 install_PYTHON = __init__.py plugin.py Wlan.py flags.py iwlibs.py
-install_DATA = *.png
+install_DATA = key-red.png key-green.png key-yellow.png

@@ -25,8 +25,9 @@ config.plugins.wlan.encryption.enabled = NoSave(ConfigYesNo(default = False))
 config.plugins.wlan.encryption.type = NoSave(ConfigSelection(list, default = _("WPA")))
 config.plugins.wlan.encryption.psk = NoSave(ConfigText(default = "mysecurewlan", fixed_size = False))
 
-class Wlan:
 
+
+class Wlan:
 	def __init__(self, iface):
 		a = ''; b = ''
 		
@@ -40,6 +41,7 @@ class Wlan:
 		self.iface = iface
 		self.asciitrans = string.maketrans(a, b)
 
+	
 	def asciify(self, str):
 		return str.translate(self.asciitrans)
 
@@ -55,7 +57,6 @@ class Wlan:
 
 	
 	def getNetworkList(self):
-
 		ifobj = iwlibs.Wireless(self.iface) # a Wireless NIC Object
 		print "ifobj.getStatistics(): ", ifobj.getStatistics()
 		
@@ -148,7 +149,6 @@ class Wlan:
 
 
 class WlanList(HTMLComponent, GUIComponent):
-	
 	def __init__(self, session, iface):
 		
 		GUIComponent.__init__(self)
@@ -259,7 +259,6 @@ class wpaSupplicant:
 					
 			
 	def loadConfig(self):
-
 		try:
 			#parse the wpasupplicant configfile
 			fp = file('/etc/wpa_supplicant.conf', 'r')
@@ -277,17 +276,17 @@ class wpaSupplicant:
 					config.plugins.wlan.encryption.enabled.value = True
 					if split[1] == "WPA RSN" : split[1] = 'WPA2'
 					config.plugins.wlan.encryption.type.value = split[1]
-					print "[Wlan.py] Got Encryption "+split[1]
+					print "[Wlan.py] Got Encryption: "+split[1]
 					
 				elif split[0] == 'wep_key0':
 					config.plugins.wlan.encryption.enabled.value = True
 					config.plugins.wlan.encryption.type.value = 'WEP'
 					config.plugins.wlan.encryption.psk.value = split[1][1:-1]
-					print "[Wlan.py] Got Encryption WEP key0 is: "+split[1][1:-1]
+					print "[Wlan.py] Got Encryption: WEP - key0 is: "+split[1][1:-1]
 					
 				elif split[0] == 'psk':
 					config.plugins.wlan.encryption.psk.value = split[1][1:-1]
-					print "[Wlan.py] Got PSK "+split[1][1:-1]
+					print "[Wlan.py] Got PSK: "+split[1][1:-1]
 				else:
 					pass
 				
@@ -296,6 +295,5 @@ class wpaSupplicant:
 	
 	
 	def restart(self, iface):
-		import os
 		os.system("start-stop-daemon -K -x /usr/sbin/wpa_supplicant")
 		os.system("start-stop-daemon -S -x /usr/sbin/wpa_supplicant -- -B -i"+iface+" -c/etc/wpa_supplicant.conf")

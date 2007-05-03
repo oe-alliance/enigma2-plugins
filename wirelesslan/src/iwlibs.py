@@ -1110,20 +1110,3 @@ class Iwscanresult(object):
             #print "Cmd:", cmd
             return False
         return True
-
-    def display(self):
-        print "ESSID:", self.essid
-        print "Access point:", self.bssid
-        print "Mode:", self.mode
-        if len(self.rate) > 0:
-            print "Highest Bitrate:", self.rate[len(self.rate)-1]
-        print "Quality: Quality ", self.quality.quality, "Signal ", self.quality.getSignallevel(), " Noise ", self.quality.getNoiselevel()
-        print "Encryption:", map(lambda x: hex(ord(x)), self.encode)
-        # XXX
-        # print "Frequency:", self.frequency.getFrequency(), "(Channel", self.frequency.getChannel(self.range), ")"
-        for custom in self.custom:
-            print "Custom:", custom
-        print ""
-
-#$LastChangedDated$
-#$Rev: 37 $
