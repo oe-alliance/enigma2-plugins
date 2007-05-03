@@ -1,3 +1,5 @@
+Version = '$Header$';
+
 from enigma import *
 from Screens.Screen import Screen
 from Components.config import config, getConfigListEntry

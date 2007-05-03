@@ -1,4 +1,5 @@
-#
+Version = '$Header$';
+
 # OK, this is more than a proof of concept
 # things to improve:
 #  - nicer code

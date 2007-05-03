@@ -1,3 +1,5 @@
+Version = '$Header$';
+
 from Plugins.Plugin import PluginDescriptor
 
 from twisted.internet import reactor, defer
