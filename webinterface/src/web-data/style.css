@@ -167,7 +167,6 @@ normal stylesheet-stuff******************
 	font-family: Arial,sans-serif;
 	font-size: 14px;
 	font-weight: bold;
-/*	vertical-align: middle;  */
 	float: left;
 	background-color: #0066CC;
 	color: #FFFFFF;
@@ -175,6 +174,19 @@ normal stylesheet-stuff******************
 	width: 55%;
 	height: 20px;
 }
+
+#CurrentEvent { 
+	font-family: Arial,sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	float: left;
+	background-color: #0066CC;
+	color: #FFFFFF;
+	text-align: right;
+	width: 45%;
+	height: 20px;
+}
+
 #VolumePanel { 
 	font-family:Arial,sans-serif;
 	font-size:14px;

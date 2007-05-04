@@ -6,9 +6,8 @@ var list_provider_radio_loaded = false;
 
 // Bouquetlist Template
 var tplVLCBouquetListHeader = '<table id="BouquetList" width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';
-
 var tplVLCBouquetListItem  = '<tr>\n';
-	tplVLCBouquetListItem += '<td><div class="navMenuItem"  id="%(servicereference)" onclick="loadVLCBouquet(this.id);">%(bouquetname)</div></td>';
+	tplVLCBouquetListItem += '<td><div class="navMenuItem" id="%(servicereference)" onclick="loadVLCBouquet(this.id);">%(bouquetname)</div></td>';
 	tplVLCBouquetListItem += '</tr>\n';
 
 var tplVLCBouquetListFooter = "</table>";
@@ -68,6 +67,7 @@ function plugintype(){
 }
 function onStart(){
 	DBG = true;
+	DBG = false
 	if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow"); }
 	debug("startup");
 
@@ -107,7 +107,7 @@ new Rico.Accordion( $('accordionMenue'), accordionOptions );
 function onServiceSelected(){
 	var index = $('channelselect').selectedIndex;
 	var servicereference = $('channelselect').options[index].id;
-	$('currentServiceName').innerHTML = $('channelselect').options[index].text;
+	$('CurrentService').innerHTML = $('channelselect').options[index].text;
 	loadEPG(servicereference);
 	setStreamTarget(servicereference);
 }
@@ -124,7 +124,7 @@ function incomingVLCServiceEPG(request){
 				'starttime': epg_current.getTimeStartString(),
 				'duration': (parseInt(epg_current.duration)/60)				
 				};
-		$('currentServiceEPG').innerHTML =  RND(tplVLCEPGItem, namespace);
+		$('CurrentEvent').innerHTML =  RND(tplVLCEPGItem, namespace);
 		
 	}
 }
@@ -223,6 +223,7 @@ function buildButtons(){
 		htmlbuttons += '<button onClick="volumeUpVLC()">Vol+</button>';
 		htmlbuttons += '<button onClick="muteVLC()">Mute</button>';
 		htmlbuttons += '<button onClick="volumeDownVLC()">Vol-</button>';
+		htmlbuttons += '<div id="VLCChannellist"></div>';
 
 	$('vlcbuttons').innerHTML = htmlbuttons;
 }
