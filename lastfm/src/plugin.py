@@ -278,7 +278,9 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
 
     def action_ok(self):
         x = self["streamlist"].l.getCurrentSelection()
-        if len(x) >1:
+        if x is None:
+            pass
+        elif len(x) >1:
             self.changeStation(x[1])
             self.resetScreensaverTimer()
 
