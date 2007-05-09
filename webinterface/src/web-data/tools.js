@@ -270,7 +270,7 @@ var SubServicePollerCounter = 0;
 var SubServicePollerRef = null;
 function zap(servicereference){
 	if(parentPin(servicereference)) {
-		new Ajax.Request( "/web/zap?ZapTo=" + servicereference, 
+		new Ajax.Request( "/web/zap?sRef=" + servicereference, 
 							{
 								asynchronous: true,
 								method: 'get'
@@ -458,16 +458,16 @@ var bouqetsMemory = new Object();
 
 function initChannelList(){
 	//debug("init ChannelList");	
-	var url = url_fetchchannels+encodeURIComponent(bouqet_tv);
+	var url = url_getServices+encodeURIComponent(bouqet_tv);
 	doRequest(url, incomingTVBouquetList, true);
 
-	var url = url_fetchchannels+encodeURIComponent(bouqet_radio);
+	var url = url_getServices+encodeURIComponent(bouqet_radio);
 	doRequest(url, incomingRadioBouquetList, true);
 
-	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_tv);
+	var url = url_getServices+encodeURIComponent(bouqet_provider_tv);
 	doRequest(url, incomingProviderTVBouquetList, true);
 
-	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_radio);
+	var url = url_getServices+encodeURIComponent(bouqet_provider_radio);
 	doRequest(url, incomingProviderRadioBouquetList, true);
 	
 	getSettings();
@@ -480,7 +480,7 @@ function loadBouquet(servicereference){
 	servicereftoloadepgnow = servicereference;
 	debug("loadBouquet " + typeof(loadedChannellist[servicereftoloadepgnow]));
 	if(typeof(loadedChannellist[servicereftoloadepgnow]) == "undefined") {
-		doRequest(url_fetchchannels+servicereference, incomingChannellist, true);
+		doRequest(url_getServices+servicereference, incomingChannellist, true);
 	} else {
 		incomingChannellist();
 	}

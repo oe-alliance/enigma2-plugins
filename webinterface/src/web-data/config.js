@@ -9,11 +9,11 @@ var url_volumeup = '/web/vol?set=up';
 var url_volumedown = '/web/vol?set=down';
 var url_volumemute = '/web/vol?set=mute';
 
-var url_epgservice = "/web/epgservice?ref="; // plus serviceRev
+var url_epgservice = "/web/epgservice?sRef="; // plus serviceRev
 var url_epgsearch = "/web/epgsearch?search="; // plus serviceRev
-var url_epgnow = "/web/epgnow?bref="; // plus bouqetRev
+var url_epgnow = "/web/epgnow?bRef="; // plus bouqetRev
 
-var url_fetchchannels = "/web/fetchchannels?ServiceListBrowse="; // plus encoded serviceref
+var url_getServices = "/web/getservices?sRef="; // plus encoded serviceref
 var url_subservices = "/web/subservices"; // subservices for current service
 
 var url_updates= "/web/updates.html";

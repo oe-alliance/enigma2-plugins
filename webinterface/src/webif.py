@@ -67,8 +67,8 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 #		self["FirstRun"] = Config(config.misc.firstrun)
 		from enigma import eServiceReference
 		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
-		self["ServiceList"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
-		self["ServiceListBrowse"] = ServiceList(fav, command_func = self.browseTo, validate_commands=False)
+		self["SwitchService"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
+		self["ServiceList"] = ServiceList(fav, command_func = self.getServiceList, validate_commands=False)
 
 		self["ParentControlList"] = ParentControl(session)
 		self["SubServices"] = SubServices(session)
@@ -94,8 +94,8 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		
 		self["About"] = About(session)
 		
-	def browseTo(self, reftobrowse):
-		self["ServiceListBrowse"].root = reftobrowse
+	def getServiceList(self, sRef):
+		self["ServiceList"].root = sRef
 
 	def zapTo(self, reftozap):
 		from Components.config import config
@@ -106,7 +106,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		if pc:
 			config.ParentalControl.configured.value = pc
 		"""
-		switsching config.ParentalControl.configured.value
+		switching config.ParentalControl.configured.value
 		ugly, but necessary :(
 		"""
 
