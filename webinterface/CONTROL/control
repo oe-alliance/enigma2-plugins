@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-webinterface
-Version: 0.5beta
+Version: 0.5.2beta
 Description: Enigma2 Plugin: extensions-webinterface
 Section: base
 Priority: optional

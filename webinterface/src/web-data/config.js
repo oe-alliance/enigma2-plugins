@@ -4,16 +4,16 @@ var DBG = true;
 DBG = false;
 
 var url_getvolume = '/web/vol?set=state'; 
-var url_setvolume = '/web/vol?set=set'; // plus new value eq. set=set15
+var url_setvolume = '/web/vol?set=set'; // plus new value eg: set=set15
 var url_volumeup = '/web/vol?set=up';
 var url_volumedown = '/web/vol?set=down';
 var url_volumemute = '/web/vol?set=mute';
 
-var url_epgservice = "/web/epgservice?sRef="; // plus serviceRev
-var url_epgsearch = "/web/epgsearch?search="; // plus serviceRev
+var url_epgservice = "/web/epgservice?sRef="; // plus serviceRef
+var url_epgsearch = "/web/epgsearch?search="; // plus serviceRef
 var url_epgnow = "/web/epgnow?bRef="; // plus bouqetRev
 
-var url_getServices = "/web/getservices?sRef="; // plus encoded serviceref
+var url_getServices = "/web/getservices?sRef="; // plus serviceref
 var url_subservices = "/web/subservices"; // subservices for current service
 
 var url_updates= "/web/updates.html";
