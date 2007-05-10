@@ -17,10 +17,10 @@ days[5] = 'sa';
 days[6] = 'su';
 
 // Timer
-function addTimerByID(serviceRef,eventID,justplay){
-	if(parentPin(serviceRef)) {
+function addTimerByID(sRef,eventID,justplay){
+	if(parentPin(sRef)) {
 		debug("addTimerByID\neventID: "+eventID);
-		doRequest(url_timeraddbyeventid+"?serviceref="+serviceRef+"&eventid="+eventID+"&justplay="+justplay, incomingTimerAddResult, false);	
+		doRequest(url_timeraddbyeventid+"?sRef="+sRef+"&eventid="+eventID+"&justplay="+justplay, incomingTimerAddResult, false);	
 	}
 }
 function incomingTimerAddResult(request){
@@ -125,8 +125,8 @@ function colorTimerListEntry (state) {
 		return "00BCBC";
 	}
 }
-function delTimer(serviceRef,begin,end,servicename,title,description,readyFunction){
-	debug("delTimer: serviceRef("+serviceRef+"),begin("+begin+"),end("+end+"),servicename("+servicename+"),title("+title+"),description("+description+")");
+function delTimer(sRef,begin,end,servicename,title,description,readyFunction){
+	debug("delTimer: sRef("+sRef+"),begin("+begin+"),end("+end+"),servicename("+servicename+"),title("+title+"),description("+description+")");
 	Dialog.confirm(
 		"Selected timer:<br>"
 		+"Channel: "+servicename+"<br>"
@@ -139,7 +139,7 @@ function delTimer(serviceRef,begin,end,servicename,title,description,readyFuncti
 			cancel: function(win) {debug("delTimer cancel confirm panel")},
 			ok: function(win) { 
 							    debug("delTimer ok confirm panel"); 
-							    doRequest(url_timerdelete+"?serviceref="+serviceRef+"&begin="+begin+"&end="+end, readyFunction, false);
+							    doRequest(url_timerdelete+"?sRef="+sRef+"&begin="+begin+"&end="+end, readyFunction, false);
 							    return true;
 							  }
 			}
@@ -231,7 +231,7 @@ function loadTimerFormChannels() {
 		addTimerListFormatTV();
 	} else {
 		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.tv%22%20ORDER%20BY%20bouquet'
-		doRequest(url_fetchchannels+favorites, addTimerListFormatTV, false);
+		doRequest(url_getServices+favorites, addTimerListFormatTV, false);
 	}
 }
 
@@ -252,7 +252,7 @@ function addTimerListFormatTV(request) {
 		loadTimerForm()
 	} else {
 		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.radio%22%20ORDER%20BY%20bouquet';
-		doRequest(url_fetchchannels+favorites, addTimerListFormatRadio, false);
+		doRequest(url_getServices+favorites, addTimerListFormatRadio, false);
 	}
 }
 function addTimerListFormatRadio(request) {
@@ -325,10 +325,10 @@ function loadTimerForm(){
 	}
 	var dashString = "------";
 	channelObject[dashString] = "- Bouquets -";
-	var listeNeu = new ServiceList(getXML(doRequestMemory[url_fetchchannels+encodeURIComponent(bouqet_tv)])).getArray();
+	var listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_tv)])).getArray();
 	if(addTimerEditFormObject["channelSort"] == "radio") {
 		debug("weiter");
-		listeNeu = new ServiceList(getXML(doRequestMemory[url_fetchchannels+encodeURIComponent(bouqet_radio)])).getArray();
+		listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_radio)])).getArray();
 	}
 	debug("hier" + listeNeu.length);
 	for (i = 1; i < listeNeu.length; i++) {
@@ -414,8 +414,8 @@ function addTimerFormCreateOptionList(object,selected) {
 }
 
 function timerFormExtendChannellist(bouqet) {
-	var listeTV = new ServiceList(getXML(doRequestMemory[url_fetchchannels+encodeURIComponent(bouqet_tv)])).getArray();
-	var listeRadio = new ServiceList(getXML(doRequestMemory[url_fetchchannels+encodeURIComponent(bouqet_radio)])).getArray();
+	var listeTV = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_tv)])).getArray();
+	var listeRadio = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_radio)])).getArray();
 	found = 0;
 	for(i = 0; i < listeTV.length; i++) {
 		var element = listeTV[i];
@@ -436,7 +436,7 @@ function timerFormExtendChannellist(bouqet) {
 	if(found == 1) {
 		servicereftoloadepgnow = bouqet;
 		if(typeof(loadedChannellist[servicereftoloadepgnow]) == "undefined") {	
-			doRequest(url_fetchchannels+servicereftoloadepgnow, incomingTimerFormExtendChannellist, true);
+			doRequest(url_getServices+servicereftoloadepgnow, incomingTimerFormExtendChannellist, true);
 		} else {
 			incomingTimerFormExtendChannellist();
 		}
@@ -597,7 +597,7 @@ function sendAddTimer() {
 			}
 		}
 		//addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'False\');
-		doRequest(url_timerchange+"?"+"serviceref="+($('channel').value).replace("&quot;", '"')+"&begin="+begin
+		doRequest(url_timerchange+"?"+"sRef="+($('channel').value).replace("&quot;", '"')+"&begin="+begin
 		  +"&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean)
 		  +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
 		  +"&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated

@@ -481,6 +481,7 @@ function SimpleXMLResult(xml){
 	debug('init SimpleXMLResult'+xml);
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2simplexmlresult").item(0);
+		debug(xml.getElementsByTagName("e2simplexmlresult").length);
 	} catch (e) {
 		debug("SimpleXMLResult parsing e2simplexmlresult"+e);
 	}

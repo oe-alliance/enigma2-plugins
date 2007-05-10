@@ -56,10 +56,10 @@ class Timer( Source):
         # is there an easier and better way? :\ 
         print "delTimer",param
         
-        if param['serviceref'] is None:
+        if param['sRef'] is None:
             return False,"ServiceReference missing"
         else: 
-            serviceref = ServiceReference(param['serviceref'])
+            serviceref = ServiceReference(param['sRef'])
         
         if param['begin'] is None:
            return False,"begin missing"
@@ -169,12 +169,12 @@ class Timer( Source):
             emin = int(param['emin'])
         
         # for compatibility reasons
-        if param['serviceref'] is None:
+        if param['sRef'] is None:
             return False,"ServiceReference missing"
         else:
-            takeApart = string.split(param['serviceref'], '|')
+            takeApart = string.split(param['sRef'], '|')
             if len(takeApart) > 1:
-                param['serviceref'] = takeApart[1]
+                param['sRef'] = takeApart[1]
 
         param['begin'] = int( time.strftime("%s",  time.localtime(time.mktime( (syear, smonth, sday, shour, smin, 0, 0, 0, 0) ) ) ) )
         param['end']   = int( time.strftime("%s",  time.localtime(time.mktime( (eyear, emonth, eday, ehour, emin, 0, 0, 0, 0) ) ) ) )
@@ -234,10 +234,10 @@ class Timer( Source):
     def addTimer(self,param):
         # is there an easier and better way? :\ 
         print "addTimer",param
-        if param['serviceref'] is None:
+        if param['sRef'] is None:
             return False,"ServiceReference missing"
         else: 
-            serviceref = ServiceReference(param['serviceref'])
+            serviceref = ServiceReference(param['sRef'])
         
         if param['begin'] is None:
            return False,"begin missing"
@@ -302,7 +302,7 @@ class Timer( Source):
 
     def addTimerByEventID(self,param):
         print "addTimerByEventID",param
-        if param['serviceref'] is None:
+        if param['sRef'] is None:
             return False,"ServiceReference not set"
         if param['eventid'] is None:
             return False,"Eventid not set"
@@ -313,13 +313,13 @@ class Timer( Source):
                 justplay = True
 
         epgcache = eEPGCache.getInstance()
-        event = epgcache.lookupEventId(eServiceReference(param['serviceref']),int(param['eventid']))
+        event = epgcache.lookupEventId(eServiceReference(param['sRef']),int(param['eventid']))
         if event is None:
             return False,"Eventid not found"
         (begin, end, name, description, eit) =parseEvent(event)
         
-        print "addTimerByEventID newtimer ",param['serviceref'], (begin - (int(config.recording.margin_before.value)*60)), (end + (int(config.recording.margin_after.value)*60)), name, description, eit, False, justplay
-        newtimer = RecordTimerEntry(ServiceReference(param['serviceref']), (begin - (int(config.recording.margin_before.value)*60)), (end + (int(config.recording.margin_after.value)*60)), name, description, eit, False, justplay, AFTEREVENT.NONE)
+        print "addTimerByEventID newtimer ",param['sRef'], (begin - (int(config.recording.margin_before.value)*60)), (end + (int(config.recording.margin_after.value)*60)), name, description, eit, False, justplay
+        newtimer = RecordTimerEntry(ServiceReference(param['sRef']), (begin - (int(config.recording.margin_before.value)*60)), (end + (int(config.recording.margin_after.value)*60)), name, description, eit, False, justplay, AFTEREVENT.NONE)
                         #RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent)
                 
         self.recordtimer.record(newtimer)
@@ -331,10 +331,10 @@ class Timer( Source):
         
         if int(param['deleteOldOnSave']) == 1:
             
-            if param['serviceref'] is None:
+            if param['sRef'] is None:
                 return False,"ServiceReference missing"
             else: 
-                serviceref = ServiceReference(param['serviceref'])
+                serviceref = ServiceReference(param['sRef'])
             
             if param['begin'] is None:
                 return False,"begin missing"
@@ -410,7 +410,7 @@ class Timer( Source):
                     #print "beginOld(%s), endOld(%s), channelOld(%s)" % (beginOld, endOld, channelOld)
                     if str(x.service_ref) == str(channelOld) and float(x.begin) == beginOld and float(x.end) == endOld:
                         toChange = x
-                        toChange.service_ref = ServiceReference(param['serviceref'])
+                        toChange.service_ref = ServiceReference(param['sRef'])
                         toChange.begin = begin
                         toChange.end = end
                         toChange.name = name
@@ -445,8 +445,7 @@ class Timer( Source):
     def getText(self):
         print self.result
         (result,text) = self.result
-        xml = "<?xml version=\"1.0\"?>\n"
-        xml  += "<e2simplexmlresult>\n"
+        xml  = "<e2simplexmlresult>\n"
         if result:
             xml += "<e2state>True</e2state>\n"
         else:
