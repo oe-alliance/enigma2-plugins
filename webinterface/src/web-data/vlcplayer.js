@@ -87,16 +87,16 @@ var accordionOptions = {
 
 new Rico.Accordion( $('accordionMenue'), accordionOptions );
 	
-	var url = url_fetchchannels+encodeURIComponent(bouqet_tv);
+	var url = url_getServices+encodeURIComponent(bouqet_tv);
 	doRequest(url, incomingVLCTVBouquetList);
 
-	var url = url_fetchchannels+encodeURIComponent(bouqet_radio);
+	var url = url_getServices+encodeURIComponent(bouqet_radio);
 	doRequest(url, incomingVLCRadioBouquetList);
 
-	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_tv);
+	var url = url_getServices+encodeURIComponent(bouqet_provider_tv);
 	doRequest(url, incomingVLCProviderTVBouquetList);
 
-	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_radio);
+	var url = url_getServices+encodeURIComponent(bouqet_provider_radio);
 	doRequest(url, incomingVLCProviderRadioBouquetList);
 	buildButtons();
 	buildplayer(550,412);
@@ -160,7 +160,7 @@ function incomingVLCProviderRadioBouquetList(request){
 function loadVLCBouquet(servicereference){ 
 	debug("loading bouquet with "+servicereference);
 	servicereftoloadepgnow = servicereference;
-	doRequest(url_fetchchannels+servicereference, incomingVLCChannellist);
+	doRequest(url_getServices+servicereference, incomingVLCChannellist);
 }
 function incomingVLCChannellist(request){
 	if(request.readyState == 4){
