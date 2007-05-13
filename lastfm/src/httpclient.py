@@ -31,8 +31,11 @@ class Enigma2HTTPRequest:
             socket.gethostbyname() is syncron
             Enigma2 is blocked while process is running    
         """
-        return socket.gethostbyname(self.hostname)
-
+        try:
+            return socket.gethostbyname(self.hostname)
+        except:
+            return False
+        
     def HeaderLoaded(self,headers):
         self.headers = headers
         for i in self.onHeaderLoaded:
@@ -158,8 +161,13 @@ def getURL(url,callback=None,errorback=None,headercallback=None,method="GET",hea
     req.onRequestError.append(errorback)
     req.onHeaderLoaded.append(headercallback)
     req.onRequestFinished.append(callback)
-    reactor.connectTCP(req.getIPAdress(),req.port, Enigma2HTTPClientFactory(req))
-    return req
+    ipadress = req.getIPAdress()
+    if ipadress is not False:
+        reactor.connectTCP(ipadress,req.port, Enigma2HTTPClientFactory(req))
+        return req
+    else:
+        if errorback is not None:
+            errorback("Error while resolve Hostname")
 
 def getPage(hostname,port,path,method="GET",callback=None,errorback=None,headercallback=None,headers={}):
     """ 
@@ -171,8 +179,13 @@ def getPage(hostname,port,path,method="GET",callback=None,errorback=None,headerc
     req = Enigma2HTTPRequest(hostname,path,port,method=method,headerfields=headers)
     req.onRequestError.append(errorback)
     req.onRequestFinished.append(callback)
-    reactor.connectTCP(req.getIPAdress(),req.port, Enigma2HTTPClientFactory(req))
-    return req
+    ipadress = req.getIPAdress()
+    if ipadress is not False:
+        reactor.connectTCP(ipadress,req.port, Enigma2HTTPClientFactory(req))
+        return req
+    else:
+        if errorback is not None:
+            errorback("Error while resolve Hostname")
 
 def getFile(filename,url,method="GET",callback=None,errorback=None,headercallback=None,headers={}):
     """ 
@@ -184,5 +197,11 @@ def getFile(filename,url,method="GET",callback=None,errorback=None,headercallbac
     req.onRequestError.append(errorback)
     req.onHeaderLoaded.append(headercallback)
     req.onRequestFinished.append(callback)
-    reactor.connectTCP(req.getIPAdress(),req.port, Enigma2HTTPClientFactory(req))
-    return req
+    ipadress = req.getIPAdress()
+    if ipadress is not False:
+        reactor.connectTCP(ipadress,req.port, Enigma2HTTPClientFactory(req))
+        return req
+    else:
+        if errorback is not None:
+            errorback("Error while resolve Hostname")
+
