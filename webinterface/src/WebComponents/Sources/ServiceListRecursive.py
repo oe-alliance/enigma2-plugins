@@ -37,7 +37,7 @@ class ServiceListRecursive( Source ):
             sub = self.servicelist.getServicesAsList()
             
             if len(sub) > 0:
-                list[index] = ( item[0] , item[1], sub )
+                # list[index] = ( item[0] , item[1], sub )
                 self.xml += "\t<e2bouquet>\n"
                 bouquet = True
                 
@@ -61,8 +61,7 @@ class ServiceListRecursive( Source ):
             else:
                 self.xml += "\t</e2service>\n"
         
-        #print "_XML is: \n%s" %(self.xml)
-        return self.getText()
+        return self.xml
     
     def filterXML(self, item):
         item = item.replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;")
@@ -70,10 +69,7 @@ class ServiceListRecursive( Source ):
     
     def getServiceList(self, ref):
         self.servicelist.root = ref
-        
-    def getText(self):
-        return self.xml
-    
+            
     text = property(do_func)
         
 #    list = property(do_func)
