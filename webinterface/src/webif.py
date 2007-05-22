@@ -18,6 +18,7 @@ from Screens.InfoBarGenerics import InfoBarServiceName, InfoBarEvent, InfoBarTun
 from Components.Sources.Clock import Clock
 from Components.Sources.ServiceList import ServiceList
 
+from WebComponents.Sources.ServiceListRecursive import ServiceListRecursive
 from WebComponents.Sources.Volume import Volume
 from WebComponents.Sources.EPG import EPG
 from WebComponents.Sources.Timer import Timer
@@ -69,7 +70,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["SwitchService"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
 		self["ServiceList"] = ServiceList(fav, command_func = self.getServiceList, validate_commands=False)
-
+		self["ServiceListRecursive"] = ServiceListRecursive(session, func=ServiceListRecursive.FETCH)
 		self["ParentControlList"] = ParentControl(session)
 		self["SubServices"] = SubServices(session)
 		self["Volume"] = Volume(session)
