@@ -1,8 +1,6 @@
 from Components.Sources.Source import Source
 from Components.Sources.ServiceList import ServiceList
 from enigma import eServiceReference
-from pprint import pprint
-
 
 class ServiceListRecursive( Source ):
     FETCH = 0
