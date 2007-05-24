@@ -51,8 +51,8 @@ class About( Source):
 
         #Get Tuner Info
         nims = nimmanager.nimList()
-        tunerA = nims[0][0]
-        tunerB = nims[1][0]
+        tunerA = nims[0]
+        tunerB = nims[1]
         list.append(_("Detected NIMs: </br>%s</br>%s") % (tunerA,tunerB))
 
         #Get HDD Info
