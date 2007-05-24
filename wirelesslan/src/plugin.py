@@ -333,7 +333,7 @@ def callFunction(iface):
 
 
 def configStrings(iface):
-	return "pre-up /usr/sbin/wpa_supplicant -B -i"+iface+" -c/etc/wpa_supplicant.conf"
+	return "\tpre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B"
 	
 
 def Plugins(**kwargs):

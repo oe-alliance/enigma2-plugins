@@ -2,9 +2,9 @@ SUBDIRS = src
 
 PWD=$(shell pwd)
 
-ipkg: enigma2-plugin-extensions-wirelesslan.ipk
+ipkg: enigma2-plugin-systemplugins-wirelesslan.ipk
 
-enigma2-plugin-extensions-wirelesslan.ipk:
+enigma2-plugin-systemplugins-wirelesslan.ipk:
 	make install DESTDIR=${PWD}/ipkg/INSTALL
 	tar czf ipkg/data.tar.gz -C ipkg/INSTALL/ .
 	echo 2.0 > ipkg/debian-binary
