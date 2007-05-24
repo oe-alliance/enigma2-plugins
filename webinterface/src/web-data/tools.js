@@ -739,7 +739,7 @@ function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,descrip
 	var descriptionClean = (description == " " || description == "N/A") ? "" : description;
 	var nameClean = (name == " " || name == "N/A") ? "" : name;
 
-	doRequest(url_timerchange+"?"+"serviceref="+channel.replace("&quot;", '"')+"&begin="+begin
+	doRequest(url_timerchange+"?"+"sRef="+channel.replace("&quot;", '"')+"&begin="+begin
 	 +"&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean)
 	 +"&afterevent="+afterEvent+"&eit=0&disabled="+disabled
 	 +"&justplay="+justplay+"&repeated="+repeated

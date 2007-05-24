@@ -411,24 +411,20 @@ class Timer( Source):
                     if str(x.service_ref) == str(channelOld) and float(x.begin) == beginOld and float(x.end) == endOld:
                         toChange = x
                         toChange.service_ref = ServiceReference(param['sRef'])
-                        toChange.begin = begin
-                        toChange.end = end
+                        toChange.begin = int(begin)
+                        toChange.end = int(end)
                         toChange.name = name
                         toChange.description = description
                         toChange.disabled = disabled
                         toChange.justplay = justplay
                         toChange.afterEvent = afterevent
                         toChange.repeated = repeated
-                        if disabled is True:
-                            toChange.state = 3
-                        else:
-                            toChange.state = 0
+                        self.session.nav.RecordTimer.timeChanged(toChange)
                         print "Timer changed"
                         return True,"Timer changed"
                         break
             except:
-                return False,"error searching for old Timer"
-            
+                return False,"error searching for old Timer"            
             if toChange is None:
                 return False,"Timer not found"
                 print "Timer not found"
