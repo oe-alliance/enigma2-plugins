@@ -24,7 +24,7 @@ class About( Source):
         
     def command(self):
         list = []
-        list.append(_("Enigma v%s") % about.getVersionString()) 
+        list.append(about.getVersionString()) 
 
 #===============================================================================
 #        #Get Network Info
@@ -46,21 +46,24 @@ class About( Source):
         if fp_version is None:
             fp_version = "?"
         else:
-            fp_version = _("Frontprocessor version: %d") % fp_version
+            fp_version = str(fp_version)
         list.append(fp_version)
 
         #Get Tuner Info
-        nims = nimmanager.nimList()
-        tunerA = nims[0]
-        tunerB = nims[1]
-        list.append(_("Detected NIMs: </br>%s</br>%s") % (tunerA,tunerB))
+        niminfo = ""
+        for nim in nimmanager.nimList():
+            niminfo += "<e2nim>"+nim[0]+"</e2nim>"
+        list.append(niminfo)
 
         #Get HDD Info
         hdddata = Harddisk(0)
         if hdddata.model() != "":
-            hddinfo = _("Detected HDD: </br>%s (%s, %d MB free)") % (hdddata.model(), hdddata.capacity(),hdddata.free())
+            hddinfo = "<model>"+hdddata.model()+"</model>"
+            hddinfo += "<capacity>"+hdddata.capacity()+"</capacity>"
+            hddinfo += "<free>"+str(hdddata.free())+" MB</free>"
+            
         else:            
-            hddinfo = "None"
+            hddinfo = "no harddisc detected"
         list.append(hddinfo)
 
         #Get Service Info
@@ -107,7 +110,7 @@ class About( Source):
             list.append("N/A")
             list.append("N/A")
             
-        print list
+        #please remove unneeded debugoutpu while commiting #print list
         
         listR = []
         listR.append(list)
