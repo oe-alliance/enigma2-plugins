@@ -933,6 +933,24 @@ function incomingAbout(request) {
 		for (var c =0; c < aboutEntries.length;c++){
 			var xml = aboutEntries.item(c);
 			try{
+				var fptext = "V"+xml.getElementsByTagName('e2fpversion').item(0).firstChild.data;
+				var tunerinfo = "";
+				
+				var nims = xml.getElementsByTagName('e2tunerinfo').item(0).getElementsByTagName("e2nim");
+				for(var i=0;i< nims.length;i++){
+					tunerinfo += nims.item(i).firstChild.data+"<br>";
+				}
+				
+				var hdddata = xml.getElementsByTagName('e2hddinfo').item(0);
+				var hddinfo = "";
+				if(hdddata.firstChild.data != "None"){
+					hddinfo += "Model: "+hdddata.getElementsByTagName("model").item(0).firstChild.data;
+					hddinfo += "<br>Capacity: "+hdddata.getElementsByTagName("capacity").item(0).firstChild.data;
+					hddinfo += "<br>Free: "+hdddata.getElementsByTagName("free").item(0).firstChild.data;
+				}else{
+					hddinfo +="no Harddisc";
+				}
+
 				var namespace = {
 					'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data
 /*
@@ -942,9 +960,9 @@ function incomingAbout(request) {
 					,'lanGW': xml.getElementsByTagName('e2langw').item(0).firstChild.data
 					,'lanDNS': xml.getElementsByTagName('e2landns').item(0).firstChild.data
 */
-					,'fpVersion': xml.getElementsByTagName('e2fpversion').item(0).firstChild.data
-					,'tunerInfo': xml.getElementsByTagName('e2tunerinfo').item(0).firstChild.data
-					,'hddInfo': xml.getElementsByTagName('e2hddinfo').item(0).firstChild.data
+					,'fpVersion': fptext
+					,'tunerInfo': tunerinfo
+					,'hddInfo': hddinfo
 					,'serviceName': xml.getElementsByTagName('e2servicename').item(0).firstChild.data
 					,'serviceProvider': xml.getElementsByTagName('e2serviceprovider').item(0).firstChild.data
 					,'serviceAspect': xml.getElementsByTagName('e2serviceaspect').item(0).firstChild.data

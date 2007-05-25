@@ -309,12 +309,12 @@ var tplAbout  = '<table align="center" border="0" width="80%">';
     tplAbout += '<table align="center" border="0" width="100%">';
     tplAbout += '<tr><td align="left"></br></td></tr>';
     tplAbout += '<tr><td align="left"><b>Box Info:</b></td></tr>';
-    tplAbout += '<tr><td align="left">%(enigmaVersion)</td></tr>';
-    tplAbout += '<tr><td align="left">%(fpVersion)</td></tr>';
+    tplAbout += '<tr><td align="left"><b>Enigma Version: </b>%(enigmaVersion)</td></tr>';
+    tplAbout += '<tr><td align="left"><b>Frontprozessor Version: </b>%(fpVersion)</td></tr>';
     tplAbout += '<tr><td align="left"></br></td></tr>';
-    tplAbout += '<tr><td align="left">%(tunerInfo)</td></tr>';
+    tplAbout += '<tr><td align="left"><b>detected Tuner:<br></b>%(tunerInfo)</td></tr>';
     tplAbout += '<tr><td align="left"></br></td></tr>';
-    tplAbout += '<tr><td align="left">%(hddInfo)</td></tr>';
+    tplAbout += '<tr><td align="left"><b>Harddisc Details:<br></b>%(hddInfo)</td></tr>';
     tplAbout += '<tr><td align="left"></br></td></tr>';
 /*
     tplAbout += '<tr><td align="left"><b>LAN Info:</b></td></tr>';
