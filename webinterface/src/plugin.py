@@ -1,5 +1,5 @@
 Version = '$Header$';
-
+__version__ = "Beta 0.5"
 from Plugins.Plugin import PluginDescriptor
 
 from twisted.internet import reactor, defer
@@ -19,7 +19,7 @@ import webif
 import WebIfConfig  
 import os
 
-from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo
+from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo,ConfigText
 
 config.plugins.Webinterface = ConfigSubsection()
 config.plugins.Webinterface.enable = ConfigYesNo(default = True)
@@ -27,7 +27,8 @@ config.plugins.Webinterface.port = ConfigInteger(80,limits = (1, 65536))
 config.plugins.Webinterface.includehdd = ConfigYesNo(default = False)
 config.plugins.Webinterface.useauth = ConfigYesNo(default = False) # False, because a std. images hasnt a rootpasswd set and so no login. and a login with a empty pwd makes no sense
 config.plugins.Webinterface.debug = ConfigYesNo(default = False) # False by default, not confgurable in GUI. Edit settingsfile directly if needed
-
+config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI. 
+ 
 sessions = [ ]
 
 """

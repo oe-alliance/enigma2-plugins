@@ -110,10 +110,14 @@ class About( Source):
             list.append("N/A")
             list.append("N/A")
             
+        ## webifversion
+        list.append(config.plugins.Webinterface.version.value)
+        
         #please remove unneeded debugoutpu while commiting #print list
         
         listR = []
         listR.append(list)
+        
         return listR
 
     text = property(command)        
@@ -140,5 +144,6 @@ class About( Source):
            ,"tsID": 13
            ,"onID": 14
            ,"sid": 15
+           ,"WebIfVersion": 16
            }
 
