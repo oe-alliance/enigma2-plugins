@@ -311,6 +311,7 @@ var tplAbout  = '<table align="center" border="0" width="80%">';
     tplAbout += '<tr><td align="left"><b>Box Info:</b></td></tr>';
     tplAbout += '<tr><td align="left"><b>Enigma Version: </b>%(enigmaVersion)</td></tr>';
     tplAbout += '<tr><td align="left"><b>Frontprozessor Version: </b>%(fpVersion)</td></tr>';
+    tplAbout += '<tr><td align="left"><b>Webinterface Version: </b>%(webifversion)</td></tr>';
     tplAbout += '<tr><td align="left"></br></td></tr>';
     tplAbout += '<tr><td align="left"><b>detected Tuner:<br></b>%(tunerInfo)</td></tr>';
     tplAbout += '<tr><td align="left"></br></td></tr>';

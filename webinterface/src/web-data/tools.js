@@ -961,6 +961,7 @@ function incomingAbout(request) {
 					,'lanDNS': xml.getElementsByTagName('e2landns').item(0).firstChild.data
 */
 					,'fpVersion': fptext
+					,'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data
 					,'tunerInfo': tunerinfo
 					,'hddInfo': hddinfo
 					,'serviceName': xml.getElementsByTagName('e2servicename').item(0).firstChild.data
