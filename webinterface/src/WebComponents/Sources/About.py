@@ -52,7 +52,7 @@ class About( Source):
         #Get Tuner Info
         niminfo = ""
         for nim in nimmanager.nimList():
-            niminfo += "<e2nim>"+nim[0]+"</e2nim>"
+            niminfo += "<e2nim>"+nim+"</e2nim>"
         list.append(niminfo)
 
         #Get HDD Info
