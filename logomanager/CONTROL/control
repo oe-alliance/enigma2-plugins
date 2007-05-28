@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-logomanager
+Version: 0.1
+Description: manage logos to display at boottime or radiomode
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: 3c5x9 <3c5x9 at gmx.net>
+Homepage: n/a
+Depends: enigma2(>1.0cvs20070401)
+Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
