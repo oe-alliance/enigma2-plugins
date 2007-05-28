@@ -46,4 +46,8 @@ netcaster/src/bin/interface/Makefile
 lastfm/Makefile
 lastfm/src/Makefile
 
+logomanager/Makefile
+logomanager/src/Makefile
+logomanager/logodir_hdd/Makefile
+
 ])
