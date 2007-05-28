@@ -1,3 +1,3 @@
-installdir = /media/hdd/bootlogos/
+installdir = /media/hdd/bootlogos
 
 install_DATA = moon_radio.mvi 
