@@ -171,7 +171,7 @@ class  AntiScrollMenu(Screen):
                           
 ##############################
 class AntiScrollConfig:
-    configfile = "/etc/AntiScrollbar.conf"
+    configfile = "/etc/enigma2/AntiScrollbar.conf"
     
     def __init__(self):
         self.configparser = ConfigParser.ConfigParser()
@@ -230,4 +230,5 @@ class AntiScrollConfig:
 def main(session, **kwargs):
   session.open(AntiScrollMain)
 def Plugins(**kwargs):
-  return PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main)
+  return [PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main),
+          PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_EXTENSIONSMENU,fnc = main)]
