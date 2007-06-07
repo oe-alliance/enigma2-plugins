@@ -40,6 +40,7 @@ config.plugins.LastFM.timeoutstatustext = ConfigInteger(3,limits = (0, 10))
 config.plugins.LastFM.timeouttabselect = ConfigInteger(2,limits = (0, 10))
 config.plugins.LastFM.metadatarefreshinterval = ConfigInteger(5,limits = (0, 100))
 config.plugins.LastFM.recommendedlevel = ConfigInteger(3,limits = (0, 100))
+config.plugins.LastFM.sendSubmissions = ConfigYesNo(default = False)
 
 config.plugins.LastFM.sreensaver = ConfigSubsection()
 config.plugins.LastFM.sreensaver.use = ConfigYesNo(default = True)
@@ -53,15 +54,23 @@ config.plugins.LastFM.sreensaver.coverartinterval = ConfigInteger(10,limits = (0
 def main(session,**kwargs):
     session.open(LastFMScreenMain)    
         
+def startScrobbler(reason, **kwargs):
+    if "session" in kwargs and config.plugins.LastFM.sendSubmissions.value:
+        from scrobbler import EventListener
+        evl = EventListener(kwargs["session"])
+        evl.startListenToEvents()
+        
 def Plugins(path,**kwargs):
     global plugin_path
     plugin_path = path
-    return PluginDescriptor(
+    return [PluginDescriptor(
         name="Last.FM", 
         description="the social music revolution", 
         where = PluginDescriptor.WHERE_PLUGINMENU,
         fnc = main
-        )
+        ),
+        PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = startScrobbler)
+        ]
 ############################################################################### 
 class LastFMScreenMain(Screen,HelpableScreen,LastFM):
     skin = """
