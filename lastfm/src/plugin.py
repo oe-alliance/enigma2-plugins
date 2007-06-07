@@ -283,6 +283,8 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.screensavertimer.stop()
         self.guiupdatetimer.stop()
         self.streamplayer.stop()
+        self.streamplayer.onStateChanged=[]
+        
         self.close()
 
     def action_ok(self):
