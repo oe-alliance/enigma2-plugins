@@ -102,7 +102,7 @@ class Track(object):
         self.date = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         
     def __repr__(self):
-        return "'"+self.name+"' by '"+self.artist+"' from '"+self.album+"' with length of "+str(self.length)+" sec."
+        return "'"+self.name+"' by '"+self.artist+"' from '"+self.album+"'"
 
     def urlencoded(self,num):
         encode = ""
