@@ -24,9 +24,6 @@ class AudioTracks( Source ):
                 language = i.getLanguage()
                 description = i.getDescription()
                 
-                from pprint import pprint
-                pprint(x)
-                
                 if LanguageCodes.has_key(language):
                     language = LanguageCodes[language][0]
                 
