@@ -2,10 +2,13 @@ from twisted.internet import reactor
 from twisted.internet.protocol import ClientFactory,connectionDone
 from twisted.web2.client.http import HTTPClientProtocol
 from twisted.internet import error 
-import urlparse
+import urlparse, urllib
 
 import socket
 
+global HTTPCLIENT_requestCount
+HTTPCLIENT_requestCount = 0 # counts requests
+    
 class Enigma2HTTPRequest:
         
     def __init__(self,hostname,path,port,method="GET",headerfields={}):
@@ -84,9 +87,11 @@ class Enigma2FileHTTPRequest(Enigma2URLHTTPRequest):
         
         
 class Enigma2HTTPProtocol(HTTPClientProtocol):
-
-    def __init__(self,request):
+    DEBUG = False
+    
+    def __init__(self,request,requestCount):
         self.request = request
+        self.requestCount = requestCount
         self.headers={}
         self.headerread=False
         self.responseFirstLine = True # to indikate, that first line of responseheader was read
@@ -98,6 +103,8 @@ class Enigma2HTTPProtocol(HTTPClientProtocol):
             if self.headerread:
                 self.request._DataRecived(l)
             else:
+                if self.DEBUG:
+                    print "HTTP "+self.requestCount+" <<==",l
                 if l == "":
                     self.headerread = True
                     self.request.HeaderLoaded(self.headers)
@@ -106,7 +113,11 @@ class Enigma2HTTPProtocol(HTTPClientProtocol):
     
     def parseHeaderLine(self,line):
         if self.responseFirstLine is  True:
-            (protocoll,responsecode,statuscode) = line.split(" ")
+            #print "parseHeaderLine",line.split(" ")
+            fields = line.split(" ")
+            protocoll = fields[0]
+            responsecode  = fields[1]
+            statuscode = " ".join(fields[2:])
             self.headers["protocoll"] = protocoll
             self.headers["responsecode"] = responsecode
             self.headers["statuscode"] = statuscode
@@ -120,18 +131,31 @@ class Enigma2HTTPProtocol(HTTPClientProtocol):
             print "unknown headerline",line
 
     def connectionMade(self):
-        self.sendLine("%s %s HTTP/1.0"%(self.request.method,self.request.path))
+        if self.request.method == "POST":
+            (path,params ) = self.request.path.split("?")
+        elif self.request.method == "GET":
+            path = self.request.path
+        self.sendLine("%s %s HTTP/1.0"%(self.request.method,path))
         self.sendLine("Host: %s"%self.request.hostname)
         for i in self.request.headerfields:
             self.sendLine(i+": "+self.request.headerfields[i])
+        if self.request.method == "POST":
+            self.sendLine("Content-Type: application/x-www-form-urlencoded")
+            self.sendLine("Content-Length: "+str(len(params)))
+        
         self.sendLine("")
-
+        if self.request.method == "POST":
+            self.sendLine(params)
+    
+    def sendLine(self,data):
+        if self.DEBUG:
+            print "HTTP "+self.requestCount+" ==>>",data
+        HTTPClientProtocol.sendLine(self,data)
         
 class Enigma2HTTPClientFactory(ClientFactory):
 
     initialDelay = 20
     maxDelay = 500
-    
     def __init__(self,request):
         self.hangup_ok = False
         self.request = request
@@ -140,7 +164,9 @@ class Enigma2HTTPClientFactory(ClientFactory):
         pass
     
     def buildProtocol(self, addr):
-        return Enigma2HTTPProtocol(self.request)
+        global HTTPCLIENT_requestCount
+        HTTPCLIENT_requestCount = HTTPCLIENT_requestCount + 1
+        return Enigma2HTTPProtocol(self.request,str(HTTPCLIENT_requestCount))
 
     def clientConnectionLost(self, connector, reason):
         if not self.hangup_ok:
@@ -151,6 +177,12 @@ class Enigma2HTTPClientFactory(ClientFactory):
         if self.errorback is not None:
             self.request.RequestError(reason.getErrorMessage())
         ClientFactory.clientConnectionFailed(self, connector, reason)
+
+def urlencode(dict):
+    return urllib.urlencode(dict)
+
+def quote_plus(data):
+    return urllib.quote_plus(data)
 
 def getURL(url,callback=None,errorback=None,headercallback=None,method="GET",headers={}):
     """ 
