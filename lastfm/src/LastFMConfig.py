@@ -18,6 +18,7 @@ class LastFMConfigScreen(ConfigListScreen,Screen):
         self.list = []
         self.list.append(getConfigListEntry(_("Last.FM Username"), config.plugins.LastFM.username))
         self.list.append(getConfigListEntry(_("Password"), config.plugins.LastFM.password))
+        self.list.append(getConfigListEntry(_("send now playing Audio Tracks"), config.plugins.LastFM.sendSubmissions))
         self.list.append(getConfigListEntry(_("Recommentation Level"), config.plugins.LastFM.recommendedlevel))
         self.list.append(getConfigListEntry(_("show Coverart"), config.plugins.LastFM.showcoverart))
         self.list.append(getConfigListEntry(_("Timeout Statustext (Seconds)"), config.plugins.LastFM.timeoutstatustext))
