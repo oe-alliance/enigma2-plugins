@@ -107,12 +107,15 @@ function UpdateStreamReaderOnError(){
 }
 //end UpdateStreamReader
 
-function openWindow(title, inner, width, height, id){
+function openWindow(title, inner, width, height, x, y, id){
 			if(id == null) id = new Date().toUTCString();
-			var win = new Window(id, {className: windowStyle, title: title, width: width, height: height });
+			if(x == null) x = 460;
+			if(y == null) y = 400;
+			var win = new Window(id, {className: windowStyle, title: title, width: width, height: height});
 			win.getContent().innerHTML = inner;
 			win.setDestroyOnClose();
 			win.showCenter();
+			win.setLocation(y,x);//y=top,x=left
 			debug("opening Window: "+title);
 			return win;
 }
@@ -291,7 +294,7 @@ function initSignalPanel(){
 	$('SignalPanel').innerHTML = tplSignalPanelButton;
 }
 function openSignalDialog(){
-	openWindow("Signal Info",tplSignalPanel, 215, 75);
+	openWindow("Signal Info",tplSignalPanel, 215, 75,620,40);
 }
 
 
@@ -334,7 +337,7 @@ function incomingEPGrequest(request){
 				} catch (blubb) { debug("Error rendering: "+blubb);	}
 			}
 			html += tplEPGListFooter;
-			openWindow("Electronic Program Guide", html, 900, 500);
+			openWindow("Electronic Program Guide", html, 900, 500,50,60);
 		} else {
 			messageBox('No Items found!', 'Sorry but i could not find any EPG Content containing your search value');
 		}
@@ -676,25 +679,30 @@ function incomingPowerStateResult(request){
 // RemoteControl Code
 function showRemoteControllSendForm(){
 	if(! $('rcWindow')){
-		openWindow("Remote", tplRemoteControlForm, 220, 642, "rcWindow");
+		openWindow("Remote", tplRemoteControlForm, 220, 642, 920,0, "rcWindow");
 	}
 }
 function sendRemoteControlRequest(command){
 	doRequest(url_remotecontrol+'?command='+command, incomingRemoteControlResult, false);
 	if($('getScreen').checked) {
-		$('BodyContentChannellist').innerHTML = tplRCGrab;
-
-		var buffer = new Image();
-		var downloadStart;
-		var img = '/grab?';
-
-		buffer.onload = function () { debug("image zugewiesen"); $('grabPageIMG').src = buffer.src; return true;};
-		buffer.onerror = function (meldung) { debug("reload grab image failed"); return true;};
-
-		downloadStart = new Date().getTime();
-		buffer.src = img + downloadStart;
-		buffer.height(400);
+		openGrabPicture();
 	}
+}
+function openGrabPicture() {
+	if($('BodyContentChannellist').innerHTML != tplRCGrab) {
+		$('BodyContentChannellist').innerHTML = tplRCGrab;
+	}
+	debug("openGrabPicture");
+	var buffer = new Image();
+	var downloadStart;
+
+	buffer.onload = function () { debug("image zugewiesen"); $('grabPageIMG').src = buffer.src; return true;};
+	buffer.onerror = function (meldung) { debug("reload grab image failed"); return true;};
+
+	downloadStart = new Date().getTime();
+	buffer.src = '/grab?' + downloadStart;
+//	buffer.height(400);
+	tplRCGrab = $('BodyContentChannellist').innerHTML;
 }
 function incomingRemoteControlResult(request){
 	if(request.readyState == 4){
@@ -999,6 +1007,7 @@ function incomingAbout(request) {
 					,'sid': xml.getElementsByTagName('e2sid').item(0).firstChild.data
 					 ,'sidh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2sid').item(0).firstChild.data),16)+" "
 				  };
+				  alert( RND(tplAbout, namespace));
 				$('BodyContentChannellist').innerHTML = RND(tplAbout, namespace);;
 				setBodyMainContent('BodyContentChannellist');
 				
@@ -1015,7 +1024,7 @@ function quotes2html(txt) {
 
 // Spezial functions, mostly for testing purpose
 function openHiddenFunctions(){
-	openWindow("Extra Hidden Functions",tplExtraHiddenFunctions,300,100);
+	openWindow("Extra Hidden Functions",tplExtraHiddenFunctions,300,100,920,0);
 }
 function restartUpdateStream() {
 	clearInterval(UpdateStreamReaderPollTimer);
@@ -1026,7 +1035,7 @@ function restartUpdateStream() {
 }
 function startDebugWindow() {
 	DBG = true;
-	debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow");
+	debugWin = openWindow("DEBUG", "", 300, 300,920,140, "debugWindow");
 }
 function restartTwisted() {
 	new Ajax.Request( "/web/restarttwisted", { asynchronous: true, method: "get" })
