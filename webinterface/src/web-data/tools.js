@@ -701,7 +701,7 @@ function openGrabPicture() {
 
 	downloadStart = new Date().getTime();
 	buffer.src = '/grab?' + downloadStart;
-//	buffer.height(400);
+	$('grabPageIMG').height(400);
 	tplRCGrab = $('BodyContentChannellist').innerHTML;
 }
 function incomingRemoteControlResult(request){
