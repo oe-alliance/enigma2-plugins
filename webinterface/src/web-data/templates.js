@@ -212,7 +212,7 @@ var tplPowerStateSendForm = '';
 	tplPowerStateSendForm += '<p><center><button onclick="sendRemoteControlRequest(116)">toggle standby Enigma2</button></center></p>';
 
 // Template for the RemoteControl Window
-var tplRemoteControlForm = '';
+var tplRemoteControlForm = '<center><input type="checkbox" id="getScreen" name="getScreen" checked>&nbsp;get Screen</center><br>';
 	tplRemoteControlForm += '<map name="remotecontrol">';
 	tplRemoteControlForm += '<area shape="circle" coords="129, 54, 10" nohref onclick="sendRemoteControlRequest(116)" alt="Power">';
 //	tplRemoteControlForm += '<area shape="circle" coords="72, 95, 15" nohref alt="Dream message">';
@@ -353,3 +353,4 @@ var tplExtraHiddenFunctions  = '<ul style="list-style-type:disc">';
 	tplExtraHiddenFunctions += '<li><div onclick="startDebugWindow();">Start Debug-Window</div></li>';
 	tplExtraHiddenFunctions += '</ul>'
 	
+var tplRCGrab  = '<IMG id="grabPageIMG" src=""/ height="400" alt="loading image">';

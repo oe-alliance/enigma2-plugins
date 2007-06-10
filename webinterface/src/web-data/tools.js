@@ -676,11 +676,25 @@ function incomingPowerStateResult(request){
 // RemoteControl Code
 function showRemoteControllSendForm(){
 	if(! $('rcWindow')){
-		openWindow("Remote", tplRemoteControlForm, 220, 615, "rcWindow");
+		openWindow("Remote", tplRemoteControlForm, 220, 642, "rcWindow");
 	}
 }
 function sendRemoteControlRequest(command){
 	doRequest(url_remotecontrol+'?command='+command, incomingRemoteControlResult, false);
+	if($('getScreen').checked) {
+		$('BodyContentChannellist').innerHTML = tplRCGrab;
+
+		var buffer = new Image();
+		var downloadStart;
+		var img = '/grab?';
+
+		buffer.onload = function () { debug("image zugewiesen"); $('grabPageIMG').src = buffer.src; return true;};
+		buffer.onerror = function (meldung) { debug("reload grab image failed"); return true;};
+
+		downloadStart = new Date().getTime();
+		buffer.src = img + downloadStart;
+		buffer.height(400);
+	}
 }
 function incomingRemoteControlResult(request){
 	if(request.readyState == 4){
