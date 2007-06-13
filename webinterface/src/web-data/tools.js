@@ -1006,9 +1006,8 @@ function incomingAbout(request) {
 					 ,'onIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2onid').item(0).firstChild.data),16)+" "
 					,'sid': xml.getElementsByTagName('e2sid').item(0).firstChild.data
 					 ,'sidh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2sid').item(0).firstChild.data),16)+" "
-				  };
-				  alert( RND(tplAbout, namespace));
-				$('BodyContentChannellist').innerHTML = RND(tplAbout, namespace);;
+				  };				  
+				$('BodyContentChannellist').innerHTML = RND(tplAbout, namespace);
 				setBodyMainContent('BodyContentChannellist');
 				
 			} catch (e) {
