@@ -174,8 +174,7 @@ class Enigma2HTTPClientFactory(ClientFactory):
         ClientFactory.clientConnectionLost(self, connector, reason)
         
     def clientConnectionFailed(self, connector, reason):
-        if self.errorback is not None:
-            self.request.RequestError(reason.getErrorMessage())
+        self.request.RequestError(reason.getErrorMessage())
         ClientFactory.clientConnectionFailed(self, connector, reason)
 
 def urlencode(dict):
