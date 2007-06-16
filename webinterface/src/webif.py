@@ -413,8 +413,6 @@ def renderPage(stream, path, req, session):
 	parser = make_parser()
 	parser.setFeature(feature_namespaces, 0)
 	parser.setContentHandler(handler)
-	print "__file__: ",__file__
-	print "path: ",path
 	parser.parse(open(util.sibpath(__file__, path)))
 	
 	# by default, we have non-streaming pages
