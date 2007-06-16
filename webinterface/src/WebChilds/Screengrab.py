@@ -27,12 +27,17 @@ class GrabResource(resource.Resource):
 
             def cmdFinished(self,data):
                 if int(data) is 0 and self.target is not None:
-                    fp = open(self.target)
-                    self.write(fp.read())
-                    fp.close()
-                    if self.save is False:
-                        os.remove(self.target)
+                    try:
+                        fp = open(self.target)
+                        self.write(fp.read())
+                        fp.close()
+                        if self.save is False:
+                            os.remove(self.target)
+                    except Exception,e:
+                        self.write("internal error while reading target file")                        
                 elif int(data) is 0 and self.target is None:
+                    self.write(self.output)
+                elif int(data) is 1:
                     self.write(self.output)
                 else:
                     self.write("internal error")
