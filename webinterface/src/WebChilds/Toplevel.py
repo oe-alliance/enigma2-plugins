@@ -7,6 +7,7 @@ from Plugins.Extensions import WebInterface
 from Screenpage import ScreenPage
 from MovieStreamer import MovieStreamer
 from Screengrab import GrabResource
+from IPKG import IPKGResource
 
 class Toplevel(resource.Resource):
     addSlash = True
@@ -19,6 +20,7 @@ class Toplevel(resource.Resource):
         self.putChild("wap",static.File(util.sibpath(WebInterface.__file__, "wap"))) # static pages for wap
         self.putChild("movie",MovieStreamer())
         self.putChild("grab",GrabResource())
+        self.putChild("ipkg",IPKGResource())
         
         if config.plugins.Webinterface.includehdd.value:
             self.putChild("hdd",static.File("/hdd"))
