@@ -1,0 +1,21 @@
+<e2:screen name="TestScreen">
+<html>
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+	<title>Enigma 2 Webinterface (ALPHA)</title>
+
+	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
+	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico"/>
+</head>
+<body>
+<h1 style="text-align: center;"><big>Dreambox 7025</big></h1>
+<h1 style="text-align: center;">Static/WAP</h1>
+<h1 style="text-align: center;"><small>Interface</small></h1>
+<br/>
+<div style="text-align: center;">
+<a href="/web/wap/wapremote.html?command=0">Remote Control</a><br/>
+<a href="/web/wap/timerlist.html">Timerlist</a><br/>
+</div>
+</body>
+</html>
+</e2:screen>

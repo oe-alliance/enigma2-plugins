@@ -48,7 +48,7 @@ class ScreenPage(resource.Resource):
             webif.renderPage(s, self.path, req, self.session)  # login?
             if self.path.split("/")[-1] in AppTextHeaderFiles:
                 return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'text', (('charset', 'UTF-8'),))},stream=s)
-            elif self.path.split("/")[-1] in TextHtmlHeaderFiles:
+            elif self.path.split("/")[-1] in TextHtmlHeaderFiles or self.path.endswith(".html.xml"):
                 return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('text', 'html', (('charset', 'UTF-8'),))},stream=s)
             elif self.path.split("/")[-1] in NoExplicitHeaderFiles:
                 return http.Response(responsecode.OK,stream=s)

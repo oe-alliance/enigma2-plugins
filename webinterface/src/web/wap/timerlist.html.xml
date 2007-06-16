@@ -1,0 +1,26 @@
+<e2:screen name="TestScreen">&lt;html>
+&lt;head>
+	&lt;meta content="text/html; charset=UTF-8" http-equiv="content-type">
+	&lt;title>Enigma 2 Webinterface (ALPHA)&lt;/title>
+
+	&lt;link href="/webdata/style.css" type="text/css" rel="stylesheet" >
+	&lt;link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico">
+&lt;/head>
+
+&lt;body>
+&lt;div style="text-align: center;">
+&lt;table border="1">
+	<e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
+		&lt;tr>
+		&lt;td><e2:item name="ServiceName"/> &lt;/td>
+		&lt;td><e2:item name="Name"/> &lt;/td>
+		&lt;td><e2:item name="Description"/> &lt;/td>
+		&lt;/tr>
+	</e2:convert>
+	<e2:convert type="web:TextToHTML" /></e2:element>
+&lt;/table>
+
+&lt;/div>
+&lt;/body>
+&lt;/html>
+</e2:screen>
