@@ -15,7 +15,6 @@ from zope.interface import Interface, implements
 import webif
 import WebIfConfig  
 import os
-#print "WEEE"*20,__module__
 
 from WebChilds.Toplevel import Toplevel
 config.plugins.Webinterface = ConfigSubsection()
@@ -46,7 +45,6 @@ def restartWebserver(session):
 	startWebserver(session)
 
 def startWebserver(session):
-	print "SESSION"*10,session
 	if config.plugins.Webinterface.enable.value is not True:
 		print "not starting Werbinterface"
 		return False
