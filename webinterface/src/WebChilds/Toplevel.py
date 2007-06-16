@@ -28,3 +28,6 @@ class Toplevel(resource.Resource):
         s = fp.read()
         fp.close()
         return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
+    def locateChild(self, request, segments):
+        print "[WebIf]",request.remoteAddr.host,request.method,request.path,request.args
+        return resource.Resource.locateChild(self, request, segments)
