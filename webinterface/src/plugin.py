@@ -1,5 +1,5 @@
 Version = '$Header$';
-__version__ = "Beta 0.5"
+__version__ = "Beta 0.6a"
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo,ConfigText
 
