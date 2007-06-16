@@ -16,7 +16,7 @@ movietagger/src/Makefile
 webinterface/Makefile
 webinterface/src/Makefile
 webinterface/src/web/Makefile
-webinterface/src/wap/Makefile
+webinterface/src/web/wap/Makefile
 webinterface/src/WebChilds/Makefile
 webinterface/src/WebComponents/Makefile
 webinterface/src/WebComponents/Converter/Makefile
