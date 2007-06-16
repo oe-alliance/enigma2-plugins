@@ -18,6 +18,7 @@ webinterface/src/Makefile
 webinterface/src/web/Makefile
 webinterface/src/wap/Makefile
 webinterface/src/WebComponents/Makefile
+webinterface/src/WebChilds/Makefile
 webinterface/src/WebComponents/Converter/Makefile
 webinterface/src/WebComponents/Sources/Makefile
 
