@@ -228,6 +228,13 @@ class TextToHTML(Converter):
 	def getHTML(self, id):
 		return self.source.text # encode & etc. here!
 
+class TextToURL(Converter):
+	def __init__(self, arg):
+		Converter.__init__(self, arg)
+
+	def getHTML(self, id):
+		return self.source.text.replace(" ","%20")
+
 class ReturnEmptyXML(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
