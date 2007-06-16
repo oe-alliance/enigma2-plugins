@@ -39,10 +39,10 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
         print "saving"
         for x in self["config"].list:
             x[1].save()
-        self.close(True)
+        self.close(True,self.session)
 
     def cancel(self):
         print "cancel"
         for x in self["config"].list:
             x[1].cancel()
-        self.close(False)
+        self.close(False,self.session)

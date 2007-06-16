@@ -1,28 +1,23 @@
 Version = '$Header$';
 __version__ = "Beta 0.5"
 from Plugins.Plugin import PluginDescriptor
+from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo,ConfigText
 
 from twisted.internet import reactor, defer
-
 from twisted.web2 import server, channel, static, resource, stream, http_headers, responsecode, http
 from twisted.web2.auth import digest, basic, wrapper
-
-from twisted.python import util
+#from twisted.python import util
 from twisted.python.log import startLogging,discardLogs
-
 from twisted.cred.portal import Portal, IRealm
 from twisted.cred import checkers, credentials, error
-
 from zope.interface import Interface, implements
 
 import webif
 import WebIfConfig  
 import os
+#print "WEEE"*20,__module__
 
-from enigma import eConsoleAppContainer
-
-from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo,ConfigText
-
+from WebChilds.Toplevel import Toplevel
 config.plugins.Webinterface = ConfigSubsection()
 config.plugins.Webinterface.enable = ConfigYesNo(default = True)
 config.plugins.Webinterface.port = ConfigInteger(80,limits = (1, 65536))
@@ -31,25 +26,6 @@ config.plugins.Webinterface.useauth = ConfigYesNo(default = False) # False, beca
 config.plugins.Webinterface.debug = ConfigYesNo(default = False) # False by default, not confgurable in GUI. Edit settingsfile directly if needed
 config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI. 
  
-sessions = [ ]
-
-"""
-	define all files in /web to send no  XML-HTTP-Headers here
-	all files listed here will get an Content-Type: application/xhtml+xml charset: UTF-8
-"""
-AppTextHeaderFiles = ['stream.m3u.xml','ts.m3u.xml',] 
-
-"""
- Actualy, the TextHtmlHeaderFiles should contain the updates.html.xml, but the IE then
- has problems with unicode-characters
-"""
-TextHtmlHeaderFiles = ['wapremote.xml','stream.xml',] 
-
-"""
-	define all files in /web to send no  XML-HTTP-Headers here
-	all files listed here will get an Content-Type: text/html charset: UTF-8
-"""
-NoExplicitHeaderFiles = ['getpid.xml','tvbrowser.xml',] 
 
 """
  set DEBUG to True, if twisted should write logoutput to a file.
@@ -65,11 +41,12 @@ DEBUGFILE= "/tmp/twisted.log"
 def stopWebserver():
 	reactor.disconnectAll()
 
-def restartWebserver():
+def restartWebserver(session):
 	stopWebserver()
-	startWebserver()
+	startWebserver(session)
 
-def startWebserver():
+def startWebserver(session):
+	print "SESSION"*10,session
 	if config.plugins.Webinterface.enable.value is not True:
 		print "not starting Werbinterface"
 		return False
@@ -78,65 +55,7 @@ def startWebserver():
 		import sys
 		startLogging(open(DEBUGFILE,'w'))
 
-	class ScreenPage(resource.Resource):
-		def __init__(self, path):
-			self.path = path
-
-		def render(self, req):
-			global sessions
-			if sessions == [ ]:
-				return http.Response(responsecode.OK, stream="please wait until enigma has booted")
-
-			class myProducerStream(stream.ProducerStream):
-				def __init__(self):
-					stream.ProducerStream.__init__(self)
-					self.closed_callback = None
-
-				def close(self):
-					if self.closed_callback:
-						self.closed_callback()
-						self.closed_callback = None
-					stream.ProducerStream.close(self)
-
-			if os.path.isfile(self.path):
-				s=myProducerStream()
-				webif.renderPage(s, self.path, req, sessions[0])  # login?
-				if self.path.split("/")[-1] in AppTextHeaderFiles:
-					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'text', (('charset', 'UTF-8'),))},stream=s)
-				elif self.path.split("/")[-1] in TextHtmlHeaderFiles:
-					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('text', 'html', (('charset', 'UTF-8'),))},stream=s)
-				elif self.path.split("/")[-1] in NoExplicitHeaderFiles:
-					return http.Response(responsecode.OK,stream=s)
-				else:
-					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'xhtml+xml', (('charset', 'UTF-8'),))},stream=s)
-			else:
-				return http.Response(responsecode.NOT_FOUND)
-
-		def locateChild(self, request, segments):
-			path = self.path+'/'+'/'.join(segments)
-			if path[-1:] == "/":
-				path += "index.html"
-			path +=".xml"
-			return ScreenPage(path), ()
-
-	class Toplevel(resource.Resource):
-		addSlash = True
-		child_web = ScreenPage(util.sibpath(__file__, "web")) # "/web/*"
-		child_webdata = static.File(util.sibpath(__file__, "web-data")) # FIXME: web-data appears as webdata
-		child_wap = static.File(util.sibpath(__file__, "wap")) # static pages for wap
-		child_movie = MovieStreamer()
-		child_grab = GrabResource()
-		def render(self, req):
-			fp = open(util.sibpath(__file__, "web-data")+"/index.html")
-			s = fp.read()
-			fp.close()
-			return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
-
-
-	toplevel = Toplevel()
-	if config.plugins.Webinterface.includehdd.value:
-		toplevel.putChild("hdd",static.File("/hdd"))
-	
+	toplevel = Toplevel(session)
 	if config.plugins.Webinterface.useauth.value is False:
 		site = server.Site(toplevel)
 	else:
@@ -147,159 +66,22 @@ def startWebserver():
 	print "[WebIf] starting Webinterface on port",config.plugins.Webinterface.port.value
 	reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site))
 
-class MovieStreamer(resource.Resource):
-	addSlash = True
-	
-	def render(self, req):
-		class myFileStream(stream.FileStream):
-		    """
-		    	because os.fstat(f.fileno()).st_size returns negative values on 
-		    	large file, we set read() to a fix value
-		    """
-		    readsize = 10000    
-		    
-		    def read(self, sendfile=False):
-		    	if self.f is None:
-		            return None
-		
-		        length = self.length
-		        if length == 0:
-		            self.f = None
-		            return None
-		
-		        if sendfile and length > SENDFILE_THRESHOLD:
-		            # XXX: Yay using non-existent sendfile support!
-		            # FIXME: if we return a SendfileBuffer, and then sendfile
-		            #        fails, then what? Or, what if file is too short?
-		            readSize = min(length, SENDFILE_LIMIT)
-		            res = SendfileBuffer(self.f, self.start, readSize)
-		            self.length -= readSize
-		            self.start += readSize
-		            return res
-		
-		        if self.useMMap and length > MMAP_THRESHOLD:
-		            readSize = min(length, MMAP_LIMIT)
-		            try:
-		                res = mmapwrapper(self.f.fileno(), readSize,
-		                                  access=mmap.ACCESS_READ, offset=self.start)
-		                #madvise(res, MADV_SEQUENTIAL)
-		                self.length -= readSize
-		                self.start += readSize
-		                return res
-		            except mmap.error:
-		                pass
-		        # Fall back to standard read.
-		        readSize = self.readsize #this is the only changed line :} 3c5x9 #min(length, self.CHUNK_SIZE)
-		        
-		        self.f.seek(self.start)
-		        b = self.f.read(readSize)
-		        bytesRead = len(b)
-		        if not bytesRead:
-		            raise RuntimeError("Ran out of data reading file %r, expected %d more bytes" % (self.f, length))
-		        else:
-		            self.length -= bytesRead
-		            self.start += bytesRead
-		            return b
-		try:
-			w1 = req.uri.split("?")[1]
-			w2 = w1.split("&")
-			parts= {}
-			for i in w2:
-				w3 = i.split("=")
-				parts[w3[0]] = w3[1]
-		except:
-			return http.Response(responsecode.OK, stream="no file given with file=???")			
-		if parts.has_key("file"):
-			path = "/hdd/movie/"+parts["file"].replace("%20"," ").replace("+"," ")
-			if os.path.exists(path):
-				self.filehandler = open(path,"r")
-				s = myFileStream(self.filehandler)
-				return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
-			else:
-				return http.Response(responsecode.OK, stream="file was not found in /media/hdd/movie/")			
-		else:
-			return http.Response(responsecode.OK, stream="no file given with file=???")			
-#### 
-class GrabResource(resource.Resource):
-	"""
-		this is a interface to Seddis AiO Dreambox Screengrabber
-	"""
-	grab_bin = "/usr/bin/grab" 
-	grab_target = "/tmp/screenshot.bmp"
-	
-	def render(self, req):
-		class GrabStream(stream.ProducerStream):
-			def __init__(self,cmd,target=None,save=False):
-				self.cmd = cmd
-				self.target = target
-				self.save = save
-				self.output = ""
-				stream.ProducerStream.__init__(self)
-				
-				self.container = eConsoleAppContainer()
-				self.container.appClosed.get().append(self.cmdFinished)
-				self.container.dataAvail.get().append(self.dataAvail)
-				self.container.execute(cmd)
 
-			def cmdFinished(self,data):
-				if int(data) is 0 and self.target is not None:
-					fp = open(self.target)
-					self.write(fp.read())
-					fp.close()
-					if self.save is False:
-						os.remove(self.target)
-				elif int(data) is 0 and self.target is None:
-					self.write(self.output)
-				else:
-					self.write("internal error")
-				self.finish()	
-					
-			def dataAvail(self,data):
-				self.output += data
-			
-		if req.args.has_key("filename"):
-			filetarget = req.args['filename'][0]
-		else:
-			filetarget = self.grab_target
-		
-		if req.args.has_key("save"):
-			save_image = True
-		else:
-			save_image = False
-		
-		if os.path.exists(self.grab_bin) is not True:
-			return	http.Response(responsecode.OK,stream="grab is not installed at '%s'. go and fix it."%self.grab_bin)
-		elif req.args.has_key("command"): 
-			cmd = req.args['command'][0].replace("-","")
-			if cmd == "o":
-				return http.Response(responsecode.OK,stream=GrabStream(self.grab_bin+" -o "+filetarget,target=filetarget,save=save_image))
-			elif cmd == "v":
-				return http.Response(responsecode.OK,stream=GrabStream(self.grab_bin+" -v "+filetarget,target=filetarget,save=save_image))
-			elif cmd == "":
-				return http.Response(responsecode.OK,stream=GrabStream(self.grab_bin+" "+filetarget,target=filetarget,save=save_image))
-			else:
-				return http.Response(responsecode.OK,stream=GrabStream(self.grab_bin+" -h"))
-		else:
-			return http.Response(responsecode.OK,stream=GrabStream(self.grab_bin+" "+filetarget,target=filetarget,save=save_image))
 ####		
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
-		global sessions
-		sessions.append(kwargs["session"])
-		return
-	if reason == 0:
 		try:
-			startWebserver()
+			startWebserver(kwargs["session"])
 		except ImportError,e:
 			print "[WebIf] twisted not available, not starting web services",e
 			
 def openconfig(session, **kwargs):
 	session.openWithCallback(configCB,WebIfConfig.WebIfConfigScreen)
 
-def configCB(result):
+def configCB(result,session):
 	if result is True:
 		print "[WebIf] config changed"
-		restartWebserver()
+		restartWebserver(session)
 	else:
 		print "[WebIf] config not changed"
 		
