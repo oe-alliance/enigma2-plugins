@@ -577,7 +577,14 @@ function sendAddTimer() {
 	
 		var descriptionClean = ($('descr').value == " " || $('descr').value == "N/A") ? "" : $('descr').value;
 		var nameClean = ($('name').value == " " || $('name').value == "N/A") ? "" : $('name').value;
-	
+		
+		var neverString = "[0-9a-zA-Z\-_\.\!\(\)&=\+$,;\?/:\\\ ]*";
+		if(descriptionClean != descriptionClean.match(neverString) ||
+			nameClean != nameClean.match(neverString)) {
+			alert("Please only use "+neverString+" in the name and the description field");
+			return;
+		}
+
 		var repeated = 0;
 		if($('ms').checked) {
 			repeated = ownLazyNumber($('ms').value);
