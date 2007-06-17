@@ -2,6 +2,7 @@ Version = '$Header$';
 __version__ = "Beta 0.6a"
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo,ConfigText
+from Components.Network import Network
 
 from twisted.internet import reactor, defer
 from twisted.web2 import server, channel, static, resource, stream, http_headers, responsecode, http
@@ -61,10 +62,25 @@ def startWebserver(session):
 		portal.registerChecker(PasswordDatabase())
 		root = ModifiedHTTPAuthResource(toplevel,(basic.BasicCredentialFactory('DM7025'),),portal, (IHTTPUser,))
 		site = server.Site(root)
-	print "[WebIf] starting Webinterface on port",config.plugins.Webinterface.port.value
-	reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site))
-
-
+	
+	# here we start the Toplevel without any username or password
+	# this allows access to all request over the iface 127.0.0.1 without any auth
+	localsite = server.Site(toplevel)
+	reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(localsite),interface='127.0.0.1')
+	
+	# and here we make the Toplevel public to our external ifaces
+	# it depends on the config, if this is with auth support
+	# keep in mind, if we have a second external ip (like a wlan device), we have to do it in the same way for this iface too
+	nw = Network()
+	for adaptername in nw.ifaces:
+		extip = nw.ifaces[adaptername]['ip']
+		if nw.ifaces[adaptername]['up'] is True:
+			extip = "%i.%i.%i.%i"%(extip[0],extip[1],extip[2],extip[3])
+			print "[WebIf] starting Webinterface on port %s on interface %s with address %s"%(str(config.plugins.Webinterface.port.value),adaptername,extip)
+			reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site),interface=extip)
+		else:
+			print "[WebIf] found configured interface %s, but it is not running. so not starting a server on it ..." % adaptername
+	
 ####		
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
