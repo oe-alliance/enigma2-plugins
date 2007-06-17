@@ -20,6 +20,7 @@ class Toplevel(resource.Resource):
         self.putChild("movie",MovieStreamer())
         self.putChild("grab",GrabResource())
         self.putChild("ipkg",IPKGResource())
+        self.putChild("wap",RedirectorResource("/web/wap/"))# shorten and simplify url to wap-pages
         
         if config.plugins.Webinterface.includehdd.value:
             self.putChild("hdd",static.File("/hdd"))
@@ -29,6 +30,18 @@ class Toplevel(resource.Resource):
         s = fp.read()
         fp.close()
         return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
+
     def locateChild(self, request, segments):
         print "[WebIf]",request.remoteAddr.host,request.method,request.path,request.args
         return resource.Resource.locateChild(self, request, segments)
+
+class RedirectorResource(resource.Resource):
+    """ 
+        this class can be used to redirect a request to a specified uri
+    """
+    def __init__(self,uri):
+        self.uri = uri
+        resource.Resource.__init__(self)
+    def render(self, req):
+        return http.RedirectResponse(self.uri)
+
