@@ -91,8 +91,7 @@ class Movie( Source):
     def getText(self):
         print self.result
         (result,text) = self.result
-        xml = "<?xml version=\"1.0\"?>\n"
-        xml  += "<e2simplexmlresult>\n"
+        xml  = "<e2simplexmlresult>\n"
         if result:
             xml += "<e2state>True</e2state>\n"
         else:
