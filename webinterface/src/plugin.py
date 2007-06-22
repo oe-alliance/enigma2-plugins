@@ -77,7 +77,10 @@ def startWebserver(session):
 		if nw.ifaces[adaptername]['up'] is True:
 			extip = "%i.%i.%i.%i"%(extip[0],extip[1],extip[2],extip[3])
 			print "[WebIf] starting Webinterface on port %s on interface %s with address %s"%(str(config.plugins.Webinterface.port.value),adaptername,extip)
-			reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site),interface=extip)
+			try:
+				reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site),interface=extip)
+			except Exception,e:
+				print "[WebIf] Error starting Webinterface on port %s on interface %s with address %s,because \n%s"%(str(config.plugins.Webinterface.port.value),adaptername,extip,e)
 		else:
 			print "[WebIf] found configured interface %s, but it is not running. so not starting a server on it ..." % adaptername
 	
