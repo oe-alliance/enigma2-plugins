@@ -565,9 +565,9 @@ function incomingChannellist(request){
 	}
 }
 // Movies
-function loadMovieList(){
-	debug("loading movies");
-	doRequest(url_movielist, incomingMovieList);	
+function loadMovieList(tag){
+	debug("loading movies by tag '"+tag+"'");
+	doRequest(url_movielist+tag, incomingMovieList);	
 }
 
 function incomingMovieList(request){
@@ -617,7 +617,7 @@ function incomingDelMovieFileResult(request) {
 	if(request.readyState == 4){
 		var delresult = new SimpleXMLResult(getXML(request));
 		if(delresult.getState()){
-			loadMovieList();
+			loadMovieList('');
 		}else{
 			messageBox("Deletion Error","Reason: "+delresult.getStateText());
 		}

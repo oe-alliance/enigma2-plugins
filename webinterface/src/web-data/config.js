@@ -18,7 +18,7 @@ var url_subservices = "/web/subservices"; // subservices for current service
 
 var url_updates= "/web/updates.html";
 
-var url_movielist= "/web/movielist";
+var url_movielist= "/web/movielist?tag="; // plus tag as string
 
 var url_about= "/web/about";
 

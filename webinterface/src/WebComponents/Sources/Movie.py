@@ -22,6 +22,7 @@ class Movie( Source):
         self.movielist.load(self.root,None)
     
     def handleCommand(self,cmd):
+        self.cmd = cmd
         if self.func is self.DEL:
             self.result = self.delMovieFiles(cmd)
         else:
@@ -81,7 +82,9 @@ class Movie( Source):
                 movie.append("")
             filename = "/"+"/".join(serviceref.toString().split("/")[1:])
             movie.append(filename)
-            list.append(movie)
+            if info.getInfoString(serviceref, iServiceInformation.sTags).lower().find(self.cmd.lower())>=0:
+                """ add movie only to list, if a givven tag is applied to the movie """
+                list.append(movie)
         return list
 
     def getText(self):

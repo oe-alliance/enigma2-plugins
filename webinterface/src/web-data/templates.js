@@ -72,8 +72,8 @@ var tplMovieListHeader  = '<table border="0" cellpadding="0" cellspacing="0" cla
 	tplMovieListHeader += '<tr>\n';
 	tplMovieListHeader += '<th><div class="sListHeader" style="color: #000000;">MovieList</div>\n';
 	tplMovieListHeader += '<div class="sListSearch">';
-	tplMovieListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
-	tplMovieListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
+	tplMovieListHeader += '<form onSubmit="loadMovieList(document.getElementById(\'filterMovietag\').value); return false;">';
+	tplMovieListHeader += '<input type="text" id="filterMovietag" onfocus="this.value=\'\'" value="filter by Tag"/>';
 	tplMovieListHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
 	tplMovieListHeader += '</form></div></th>';
 	tplMovieListHeader += '</tr>\n';
