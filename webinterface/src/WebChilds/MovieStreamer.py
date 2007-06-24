@@ -64,12 +64,28 @@ class MovieStreamer(resource.Resource):
         except:
             return http.Response(responsecode.OK, stream="no file given with file=???")            
         if parts.has_key("file"):
-            path = "/hdd/movie/"+parts["file"].replace("%20"," ").replace("+"," ")
+            path = "/hdd/movie/"+self.decodeURI(parts["file"])
             if os.path.exists(path):
                 self.filehandler = open(path,"r")
                 s = myFileStream(self.filehandler)
-                return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
+                return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('video', 'ts')},stream=s)
             else:
-                return http.Response(responsecode.OK, stream="file was not found in /media/hdd/movie/")            
+                return http.Response(responsecode.OK, stream="file '%s' was not found in /media/hdd/movie/"%self.decodeURI(parts["file"]))            
         else:
             return http.Response(responsecode.OK, stream="no file given with file=???")            
+    
+    def decodeURI(self,uri):
+        """
+        i dont have found a function that will do it in a clean way, so i do it like this
+        change it, if you have foound one    
+        """
+        new = uri.encode("UTF-8").replace("%20"," ").replace("+"," ")
+        new = new.replace("%C3%B6","ö")
+        new = new.replace("%C3%96","Ö")
+        new = new.replace("%C3%A4'","ä")
+        new = new.replace("%C3%84'","Ä")
+        new = new.replace("%C3%BC","ü")
+        new = new.replace("%C3%9C","Ü")
+        new = new.replace("%C3%9F","ß")
+        
+        return new

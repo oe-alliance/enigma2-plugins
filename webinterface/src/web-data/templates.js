@@ -85,6 +85,7 @@ var tplMovieListItem  = '<tr>\n';
 	tplMovieListItem += '<div class="sListExt">\n';
 	tplMovieListItem += '%(tags)\n';
 	tplMovieListItem += '<a target="_blank" href="/web/ts.m3u?file=%(filelink)"><img src="/webdata/gfx/screen.png" title="play file" border="0"></a>\n';
+	tplMovieListItem += '<a target="_blank" href="/movie/?file=%(filelink)"><img src="/webdata/gfx/save.png" title="download Movie" border="0"></a>\n';
 	tplMovieListItem += '&nbsp;&nbsp;<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete files" border="0" onclick="delMovieFile(\'%(filename)\',\'%(servicename)\',\'%(title)\',\'%(description)\');"></a>\n';
 	tplMovieListItem += '</div>\n';
 	tplMovieListItem += '</tr>\n';
