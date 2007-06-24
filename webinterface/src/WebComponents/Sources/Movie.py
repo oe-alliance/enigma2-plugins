@@ -11,6 +11,7 @@ import os
 class Movie( Source):
     LIST = 0
     DEL = 1
+    TAGS = 2
     
     def __init__(self, session,func = LIST):
         Source.__init__(self)
@@ -25,7 +26,8 @@ class Movie( Source):
             self.result = self.delMovieFiles(cmd)
         else:
             self.result = False,"unknown command"
-        
+
+           
     def delMovieFiles(self,param):
         print "delMovieFiles:",param
         
@@ -49,11 +51,6 @@ class Movie( Source):
                 os.system('rm -f "%s.eit"' % param)
         except OSError:
             return False,"OSErrorSome error occurred while deleting file"
-#        except:
-#             print sys.exc_info()[0]
-#             print sys.exc_info()[1]
-#             print traceback.extract_tb(sys.exc_info()[2])
-
         
         if os.path.exists(param):
             return False,"Some error occurred while deleting file"
@@ -85,21 +82,26 @@ class Movie( Source):
             filename = "/"+"/".join(serviceref.toString().split("/")[1:])
             movie.append(filename)
             list.append(movie)
-        print "tags",self.movielist.tags
         return list
 
     def getText(self):
-        print self.result
-        (result,text) = self.result
-        xml  = "<e2simplexmlresult>\n"
-        if result:
-            xml += "<e2state>True</e2state>\n"
-        else:
-            xml += "<e2state>False</e2state>\n"            
-        xml += "<e2statetext>%s</e2statetext>\n" % text
-        xml += "</e2simplexmlresult>\n"
-        return xml
-    
+        if self.func is self.DEL: 
+            (result,text) = self.result
+            xml  = "<e2simplexmlresult>\n"
+            if result:
+                xml += "<e2state>True</e2state>\n"
+            else:
+                xml += "<e2state>False</e2state>\n"            
+            xml += "<e2statetext>%s</e2statetext>\n" % text
+            xml += "</e2simplexmlresult>\n"
+            return xml
+        elif self.func is self.TAGS:
+            xml = "<e2movietags>\n"
+            for tag in self.movielist.tags:
+                xml += "<e2movietag>%s</e2movietag>\n"%tag
+            xml += "</e2movietags>\n"
+            return xml
+            
     text = property(getText)        
     
     list = property(command)

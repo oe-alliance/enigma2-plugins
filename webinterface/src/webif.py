@@ -88,6 +88,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["RecordNow"] = Timer(session,func = Timer.RECNOW)
 		self["MovieList"] = Movie(session,func = Movie.LIST)
 		self["MovieFileDel"] = Movie(session,func = Movie.DEL)
+		self["MovieTags"] = Movie(session,func = Movie.TAGS)
 		self["Volume"] = Volume(session)
 		self["Message"] = Message(session)
 		self["PowerState"] = PowerState(session)
