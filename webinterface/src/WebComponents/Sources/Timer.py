@@ -524,12 +524,24 @@ No clue, what it could be.
                     timer.append("N/A")
             else:
                 timer.append("N/A")
-                
+            
+            if item.state == 0:
+                timer.append("000000")
+            elif item.state == 1:
+                timer.append("00BCBC")
+            elif item.state == 2:
+                timer.append("9F1919")
+            else:
+                timer.append("00BCBC")
+            #toggleDisabled
+            if item.disabled is True:
+                timer.append("0")
+                timer.append("on")
+            else:
+                timer.append("1")
+                timer.append("off")
+
             timerlist.append(timer)
-#        except:
-#            print sys.exc_info()[0]
-#            print sys.exc_info()[1]
-#            print traceback.extract_tb(sys.exc_info()[2])
             
         return timerlist
     
@@ -556,5 +568,7 @@ No clue, what it could be.
            ,"dontSave":19
            ,"Cancled":20
            ,"DescriptionExtended":21
-           }
-       
+           ,"Color":22
+           ,"toggleDisabled":23
+           ,"toggleDisabledIMG":24
+           }       

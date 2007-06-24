@@ -10,11 +10,20 @@
 &lt;body>
 &lt;div style="text-align: center;">
 &lt;table border="1">
-	<e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
 		&lt;tr>
-		&lt;td><e2:item name="ServiceName"/> &lt;/td>
-		&lt;td><e2:item name="Name"/> &lt;/td>
-		&lt;td><e2:item name="Description"/> &lt;/td>
+		&lt;td>Channel&lt;/td>
+		&lt;td>Name&lt;/td>
+		&lt;td>Description&lt;/td>
+		&lt;td>Action&lt;/td>
+		&lt;/tr>
+		&lt;tr>
+		<e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
+		&lt;td>&lt;font color=#<e2:item name="Color"/>><e2:item name="ServiceName"/> &lt;/font>&lt;/td>
+		&lt;td>&lt;font color=#<e2:item name="Color"/>><e2:item name="Name"/> &lt;/font>&lt;/td>
+		&lt;td>&lt;font color=#<e2:item name="Color"/>><e2:item name="Description"/> &lt;/font>&lt;/td>
+		&lt;td>&lt;a href=&quot;/web/timerdelete?sRef=<e2:item name="ServiceReference"/>&amp;begin=<e2:item name="TimeBegin"/>&amp;end=<e2:item name="TimeEnd"/>&quot;>&lt;img src=/webdata/gfx/trash.gif title=delete_timer_entry border=0>&lt;/a>
+		&lt;a href=&quot;/web/wap/timerchange.html?sRef=<e2:item name="ServiceReference"/>&amp;begin=<e2:item name="TimeBegin"/>&amp;end=<e2:item name="TimeEnd"/>&amp;name=<e2:item name="Name"/>&amp;description=<e2:item name="Description"/>&amp;afterevent=<e2:item name="afterEvent"/>&amp;disabled=<e2:item name="toggleDisabled"/>&amp;justplay=<e2:item name="justPlay"/>&amp;repeated=<e2:item name="Repeated"/>&amp;disabled=<e2:item name="toggleDisabled"/>&amp;channelOld=<e2:item name="ServiceReference"/>&amp;beginOld=<e2:item name="TimeBegin"/>&amp;endOld=<e2:item name="TimeEnd"/>&amp;deleteOldOnSave=1&quot;>&lt;img src=/webdata/gfx/<e2:item name="toggleDisabledIMG"/>.png title=toggleOnOff border=0>&lt;/a>
+			&lt;/td>
 		&lt;/tr>
 	</e2:convert>
 	<e2:convert type="web:TextToHTML" /></e2:element>

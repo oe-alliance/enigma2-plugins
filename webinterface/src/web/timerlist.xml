@@ -23,6 +23,9 @@
 		&lt;e2repeated><e2:item name="Repeated" />&lt;/e2repeated>
 		&lt;e2dontsave><e2:item name="dontSave" />&lt;/e2dontsave>
 		&lt;e2cancled><e2:item name="Cancled" />&lt;/e2cancled>
+		&lt;e2color><e2:item name="Color" />&lt;/e2color>
+		&lt;e2toggledisabled><e2:item name="toggleDisabled" />&lt;/e2toggledisabled>
+		&lt;e2toggledisabledimg><e2:item name="toggleDisabledIMG" />&lt;/e2toggledisabledimg>
 	&lt;/e2timer>
 	</e2:convert>
 	<e2:convert type="web:TextToHTML" /></e2:element>

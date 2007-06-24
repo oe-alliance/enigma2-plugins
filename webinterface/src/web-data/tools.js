@@ -755,20 +755,6 @@ function getParentControlByRef(txt) {
 	}
 	return "";
 }
-function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,description,afterEvent,disabled){
-	disabled = (ownLazyNumber(disabled) == 0) ? 1 : 0;
-	
-	var descriptionClean = (description == " " || description == "N/A") ? "" : description;
-	var nameClean = (name == " " || name == "N/A") ? "" : name;
-
-	doRequest(url_timerchange+"?"+"sRef="+channel.replace("&quot;", '"')+"&begin="+begin
-	 +"&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean)
-	 +"&afterevent="+afterEvent+"&eit=0&disabled="+disabled
-	 +"&justplay="+justplay+"&repeated="+repeated
-	 +"&channelOld="+channel
-	 +"&beginOld="+begin+"&endOld="+end
-	 +"&deleteOldOnSave=1", incomingTimerAddResult, false);
-}
 function ownLazyNumber(num) {
 	if(isNaN(num)){
 		return 0;
@@ -778,7 +764,6 @@ function ownLazyNumber(num) {
 }
 
 var subServicesInsertedList = new Object();
-
 function getSubServices(servicereference) {
 	clearInterval(SubServicePoller);
 	SubServicePollerCounter = 0;

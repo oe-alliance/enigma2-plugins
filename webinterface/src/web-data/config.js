@@ -35,7 +35,6 @@ var url_timerchange= "/web/timerchange"; // plus serviceref,begin,end,name,descr
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
 var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
 var url_timerlistwrite="/web/timerlistwrite?write=saveWriteNow";
-var url_timertoggleOnOff= "/web/timeronoff"; // plus serviceref,bedin,end
 
 var url_message = "/web/message"; // plus text,type,timeout
 

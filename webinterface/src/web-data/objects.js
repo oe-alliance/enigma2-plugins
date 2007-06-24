@@ -407,7 +407,32 @@ function Timer(xml){
 	} catch (e) {
 		this.cancled = "N/A";
 	}
+	try{
+		this.color = xml.getElementsByTagName('e2color').item(0).firstChild.data;
+	} catch (e) {
+		this.color = "N/A";
+	}
+	try{
+		this.toggledisabled = xml.getElementsByTagName('e2toggledisabled').item(0).firstChild.data;
+	} catch (e) {
+		this.toggledisabled = "N/A";
+	}
+	try{
+		this.toggledisabledimg = xml.getElementsByTagName('e2toggledisabledimg').item(0).firstChild.data;
+	} catch (e) {
+		this.toggledisabledimg = "N/A";
+	}
 
+	this.getColor = function(){
+		return this.color;
+	}
+	this.getToggleDisabled = function(){
+		return this.toggledisabled;
+	}
+	this.getToggleDisabledIMG = function(){
+		return this.toggledisabledimg;
+	}
+	
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
 	}
