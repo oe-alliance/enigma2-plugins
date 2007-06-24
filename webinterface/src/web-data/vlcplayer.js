@@ -67,7 +67,7 @@ function plugintype(){
 }
 function onStart(){
 	DBG = true;
-	DBG = false
+	DBG = false;
 	if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow"); }
 	debug("startup");
 
