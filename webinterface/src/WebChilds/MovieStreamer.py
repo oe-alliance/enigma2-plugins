@@ -68,7 +68,9 @@ class MovieStreamer(resource.Resource):
             if os.path.exists(path):
                 self.filehandler = open(path,"r")
                 s = myFileStream(self.filehandler)
-                return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('video', 'ts')},stream=s)
+                resp =  http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('video', 'ts')},stream=s)
+                resp.headers.addRawHeader('Content-Disposition','attachment; filename="%s"'%self.decodeURI(parts["file"]))
+                return resp
             else:
                 return http.Response(responsecode.OK, stream="file '%s' was not found in /media/hdd/movie/"%self.decodeURI(parts["file"]))            
         else:
