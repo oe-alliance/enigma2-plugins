@@ -14,7 +14,7 @@
 <br/>
 <div style="text-align: center;">
 <a href="/web/wap/wapremote.html?command=0">Remote Control</a><br/>
-<a href="/web/wap/timerlist.html">Timerlist</a><br/>
+<!--<a href="/web/wap/timerlist.html">Timerlist</a><br/>-->
 <a href="/web/wap/power.html">PowerState</a><br/>
 </div>
 </body>
