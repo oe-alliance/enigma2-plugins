@@ -1,4 +1,4 @@
-Version = '$Header$';
+
 
 # OK, this is more than a proof of concept
 # things to improve:
@@ -32,6 +32,7 @@ from WebComponents.Sources.ParentControl import ParentControl
 from WebComponents.Sources.About import About
 from WebComponents.Sources.RequestData import RequestData
 from WebComponents.Sources.AudioTracks import AudioTracks
+from WebComponents.Sources.WAPfunctions import WAPfunctions
 
 from Components.Sources.FrontendStatus import FrontendStatus
 
@@ -97,6 +98,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["AudioTracks"] = AudioTracks(session)
 		
 		self["About"] = About(session)
+		self["WAPFillOptionList"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
 		
 	def getServiceList(self, sRef):
 		self["ServiceList"].root = sRef

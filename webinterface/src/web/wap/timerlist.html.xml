@@ -1,5 +1,8 @@
 <e2:screen name="TestScreen">&lt;html>
 &lt;head>
+<!--
+Version = '$Header$';
+-->
 	&lt;meta content="text/html; charset=UTF-8" http-equiv="content-type">
 	&lt;title>Enigma 2 Webinterface (ALPHA)&lt;/title>
 
@@ -11,10 +14,10 @@
 &lt;div style="text-align: center;">
 &lt;table border="1">
 		&lt;tr>
-		&lt;td>Channel&lt;/td>
-		&lt;td>Name&lt;/td>
-		&lt;td>Description&lt;/td>
-		&lt;td>Action&lt;/td>
+		&lt;td>&lt;b>Channel&lt;/b>&lt;/td>
+		&lt;td>&lt;b>Name&lt;/b>&lt;/td>
+		&lt;td>&lt;b>Description&lt;/b>&lt;/td>
+		&lt;td>&lt;b>Action&lt;/b>&lt;/td>
 		&lt;/tr>
 		&lt;tr>
 		<e2:element source="TimerList" ><e2:convert type="web:ListFiller" >

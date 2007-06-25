@@ -14,7 +14,7 @@
 <br/>
 <div style="text-align: center;">
 <a href="/web/wap/wapremote.html?command=0">Remote Control</a><br/>
-<!--<a href="/web/wap/timerlist.html">Timerlist</a><br/>-->
+<!--<a href="/web/wap/timeredit.html?ehour=1&shour=2&emin=4&smin=5&sday=1&eday=1&smonth=1&emonth=1&syear=1&eyear=1&sRef=1:7:1:0:0:0:0:0:0:0:FROM%20BOUQUET%20%22userbouquet.favourites.tv%22%20ORDER%20BY%20bouquet">Timerlist</a><br/>-->
 <a href="/web/wap/power.html">PowerState</a><br/>
 </div>
 </body>

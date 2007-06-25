@@ -1,0 +1,132 @@
+<e2:screen name="TestScreen"><html>
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+	<title>Enigma 2 Webinterface (ALPHA)</title>
+
+	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
+	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico"/>
+</head>
+<body>
+<form cgi="/wep/wap/timeradd">
+<table>
+<tr>
+	<td colspan="3">Action:</td>
+	<td colspan="3"><select name="justplay" id="justplay" size="1">
+		<option value="0">Record</option>
+		<option value="1">Zap</option>
+	</select>
+	</td>
+</tr><tr>
+	<td colspan="3"></td>
+	<td colspan="3">Note: For recurring events start/end day/month are not required.</td>
+</tr><tr>
+	<td colspan="3">Start:</td><td colspan="3">
+	<select name="syear" size="1">
+		<e2:element source="WAPFillOptionList" id="syear,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+	</select>.
+	<select name="smonth" id="smonth" size="1">
+		<e2:element source="WAPFillOptionList" id="smonth,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+	</select>.
+	<select name="sday" id="sday" size="1">
+		<e2:element source="WAPFillOptionList" id="sday,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+</select>---
+	<select name="shour" id="shour" size="1">
+		<e2:element source="WAPFillOptionList" id="shour,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+</select>:
+	<select name="smin" id="smin" size="1">
+		<e2:element source="WAPFillOptionList" id="smin,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+	</select></td>
+</tr><tr>
+	<td colspan="3">End:</td><td colspan="3"><select name="eyear" id="eyear" size="1">
+		<e2:element source="WAPFillOptionList" id="eyear,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+</select>.
+	<select name="emonth" id="emonth" size="1">
+		<e2:element source="WAPFillOptionList" id="emonth,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+</select>.
+	<select name="eday" id="eday" size="1">
+		<e2:element source="WAPFillOptionList" id="eday,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+</select>---
+	<select name="ehour" id="ehour" size="1">
+		<e2:element source="WAPFillOptionList" id="ehour,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+</select>:
+	<select name="emin" id="emin" size="1">
+		<e2:element source="WAPFillOptionList" id="emin,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+</select>
+	</td>
+</tr><tr>
+	<td colspan="3"></td><td colspan="3">Note: For one-time events the "days" field doesn't have to be specified.</td>
+</tr><tr>
+	<td colspan="3">Days:</td><td colspan="3">
+		<input type="checkbox" id="mo" name="mo" value="1"/>Mo
+		<input type="checkbox" id="tu" name="tu" value="2"/>Tu
+		<input type="checkbox" id="we" name="we" value="4"/>We
+		<input type="checkbox" id="th" name="th" value="8"/>Th
+		<input type="checkbox" id="fr" name="fr" value="16"/>Fr
+		<input type="checkbox" id="sa" name="sa" value="32"/>Sa
+		<input type="checkbox" id="su" name="su" value="64"/>Su
+		<input type="checkbox" id="mf" name="mf" value="31"/>Mo-Fr
+		<input type="checkbox" id="ms" name="ms" value="127"/>Mo-Su</td>
+</tr><tr>
+	<td colspan="3">Channel:</td>
+	<td><p><input type="radio" id="tvradio" name="tvradio" value="tv"/>TV</p>
+	<p><input type="radio" name="tvradio" value="radio"/>Radio</p></td>
+	<td><p>Channel:</p>
+	<select name="channel" id="channel" size="1">
+	<e2:element source="ServiceList" id="sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Reference"/>&quot;><e2:item name="Name"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+	</select>
+	</td>
+</tr><tr>
+	<td colspan="3">Name:</td><td colspan="3">
+	<input name="name" id="name" type="text" size="100" maxlength="100" style="color: #000000;" value=" "/></td>
+</tr><tr>
+	<td colspan="3">Description:</td><td colspan="3">
+	<input name="descr" id="descr" type="text" size="100" maxlength="100" style="color: #000000;" value=" "/></td>
+</tr><tr>
+	<td colspan="3">After event do:</td><td colspan="3"><select id="after_event" name="after_event" size="1">
+		<option value="0">Nothing</option><option value="1">Standby</option>
+		<option value="2">Deepstandby/Shutdown</option></select>
+</td>
+</tr><tr></tr><tr>
+	<td colspan="3"></td>
+	<td colspan="3">
+	<input name="deleteOldOnSave" id="deleteOldOnSave" type="hidden" value="0"/>
+	<input name="eventID" id="eventID" type="hidden" value="0"/>
+	<input type="button" name="save" value="Add/Save"/>
+</td></tr>
+</table></form>
+</body>
+</html>	
+</e2:screen>
