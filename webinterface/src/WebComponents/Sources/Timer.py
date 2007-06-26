@@ -176,8 +176,8 @@ class Timer( Source):
             if len(takeApart) > 1:
                 param['sRef'] = takeApart[1]
 
-        param['begin'] = int( time.strftime("%s",  time.localtime(time.mktime( (syear, smonth, sday, shour, smin, 0, 0, 0, -1) ) ) ) )
-        param['end']   = int( time.strftime("%s",  time.localtime(time.mktime( (eyear, emonth, eday, ehour, emin, 0, 0, 0, -1) ) ) ) )
+        param['begin'] = int( time.strftime("%s",  time.localtime(time.mktime( (syear, smonth, sday, shour, smin, 0, 0, 0, 0) ) ) ) )
+        param['end']   = int( time.strftime("%s",  time.localtime(time.mktime( (eyear, emonth, eday, ehour, emin, 0, 0, 0, 0) ) ) ) )
         
         if param['command'] == "add":
             return self.addTimer(param)
