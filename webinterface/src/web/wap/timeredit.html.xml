@@ -22,62 +22,62 @@
 </tr><tr>
 	<td colspan="3">Start:</td><td colspan="3">
 	<select name="syear" size="1">
-		<e2:element source="WAPFillOptionList" id="syear,sRef"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListSyear" id="syear,sRef"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 	</select>.
 	<select name="smonth" id="smonth" size="1">
-		<e2:element source="WAPFillOptionList" id="smonth,sRef"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListSmonth" id="smonth,sRef"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 	</select>.
 	<select name="sday" id="sday" size="1">
-		<e2:element source="WAPFillOptionList" id="sday,sRef"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListSday" id="sday,sRef"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>---
 	<select name="shour" id="shour" size="1">
-		<e2:element source="WAPFillOptionList" id="shour,sRef"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListShour" id="shour,sRef"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>:
 	<select name="smin" id="smin" size="1">
-		<e2:element source="WAPFillOptionList" id="smin,sRef"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListSmin" id="smin,sRef"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 	</select></td>
 </tr><tr>
 	<td colspan="3">End:</td><td colspan="3"><select name="eyear" id="eyear" size="1">
-		<e2:element source="WAPFillOptionList" id="eyear,sRef"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListEyear" id="eyear,sRef"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>.
 	<select name="emonth" id="emonth" size="1">
-		<e2:element source="WAPFillOptionList" id="emonth,sRef"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListEmonth" id="emonth,sRef"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>.
 	<select name="eday" id="eday" size="1">
-		<e2:element source="WAPFillOptionList" id="eday,sRef"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListEday" id="eday,sRef"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>---
 	<select name="ehour" id="ehour" size="1">
-		<e2:element source="WAPFillOptionList" id="ehour,sRef"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListEhour" id="ehour,sRef"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>:
 	<select name="emin" id="emin" size="1">
-		<e2:element source="WAPFillOptionList" id="emin,sRef"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListEmin" id="emin,sRef"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
@@ -87,15 +87,11 @@
 	<td colspan="3"></td><td colspan="3">Note: For one-time events the "days" field doesn't have to be specified.</td>
 </tr><tr>
 	<td colspan="3">Days:</td><td colspan="3">
-		<input type="checkbox" id="mo" name="mo" value="1"/>Mo
-		<input type="checkbox" id="tu" name="tu" value="2"/>Tu
-		<input type="checkbox" id="we" name="we" value="4"/>We
-		<input type="checkbox" id="th" name="th" value="8"/>Th
-		<input type="checkbox" id="fr" name="fr" value="16"/>Fr
-		<input type="checkbox" id="sa" name="sa" value="32"/>Sa
-		<input type="checkbox" id="su" name="su" value="64"/>Su
-		<input type="checkbox" id="mf" name="mf" value="31"/>Mo-Fr
-		<input type="checkbox" id="ms" name="ms" value="127"/>Mo-Su</td>
+		<e2:element source="WAPFillOptionListRepeated" id="repeated"><e2:convert type="web:ListFiller" >
+			&lt;input type="checkbox" name=&quot;<e2:item name="Name"/>&quot; value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>/><e2:item name="Description"/>
+			</e2:convert>
+		<e2:convert type="web:TextToHTML"/></e2:element>
+	</td>
 </tr><tr>
 	<td colspan="3">Channel:</td>
 	<td><p><input type="radio" id="tvradio" name="tvradio" value="tv"/>TV</p>

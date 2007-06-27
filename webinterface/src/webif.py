@@ -98,7 +98,22 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["AudioTracks"] = AudioTracks(session)
 		
 		self["About"] = About(session)
-		self["WAPFillOptionList"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+
+		self["WAPFillOptionListSyear"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListSday"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListSmonth"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListShour"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListSmin"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		
+		self["WAPFillOptionListEyear"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListEday"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListEmonth"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListEhour"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListEmin"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+
+		self["WAPFillOptionListRepeated"] = WAPfunctions(session,func = WAPfunctions.REPEATED)
+		self["WAPServiceList"] = WAPfunctions(session,func = WAPfunctions.SERVICELIST)
+		#ServiceList
 		
 	def getServiceList(self, sRef):
 		self["ServiceList"].root = sRef
@@ -266,6 +281,7 @@ class JavascriptUpdate(Converter):
 class ListFiller(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
+		print "ListFiller-arg: ",arg
 
 	def getText(self):
 		l = self.source.list
