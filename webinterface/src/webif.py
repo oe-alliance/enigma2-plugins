@@ -1,4 +1,4 @@
-
+Version = '$Header$';
 
 # OK, this is more than a proof of concept
 # things to improve:
@@ -112,8 +112,7 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		self["WAPFillOptionListEmin"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
 
 		self["WAPFillOptionListRepeated"] = WAPfunctions(session,func = WAPfunctions.REPEATED)
-		self["WAPServiceList"] = WAPfunctions(session,func = WAPfunctions.SERVICELIST)
-		#ServiceList
+		self["WAPServiceList"] = WAPfunctions(session, func = WAPfunctions.SERVICELIST)
 		
 	def getServiceList(self, sRef):
 		self["ServiceList"].root = sRef

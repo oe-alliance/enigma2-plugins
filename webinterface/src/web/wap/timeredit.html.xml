@@ -98,8 +98,8 @@
 	<p><input type="radio" name="tvradio" value="radio"/>Radio</p></td>
 	<td><p>Channel:</p>
 	<select name="channel" id="channel" size="1">
-	<e2:element source="ServiceList" id="sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Reference"/>&quot;><e2:item name="Name"/>&lt;/option>
+	<e2:element source="WAPServiceList" id="sRef,bouquet"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 	</select>

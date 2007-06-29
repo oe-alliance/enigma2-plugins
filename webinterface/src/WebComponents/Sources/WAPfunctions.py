@@ -1,7 +1,10 @@
 Version = '$Header$';
 
-from enigma import *
 from Components.Sources.Source import Source
+from Components.Sources.Source import Source
+from Components.Sources.ServiceList import ServiceList
+from enigma import eServiceReference
+
 
 import time, re
 
@@ -19,10 +22,10 @@ class WAPfunctions( Source):
         self.func = func
         Source.__init__(self)        
         self.session = session
-        self.result = ["unknown command"]
+        self.result = ["unknown command (%s)"  % self.func]
 
     def handleCommand(self,cmd):
-        print "WAPfunctions: handleCommand"
+        print "WAPfunctions: handleCommand", cmd
         if self.func is self.FILLOPTIONLIST:
             self.result = self.fillOptionList(cmd)
         elif self.func is self.REPEATED:
@@ -119,83 +122,64 @@ class WAPfunctions( Source):
           ,"Selected":3
           }
         
-        mo = []
-        mo.append("mo")
-        mo.append(1)
-        mo.append("Monday")
-        tu = []
-        tu.append("tu")
-        tu.append(2)
-        tu.append("Tuesday")
-        we = []
-        we.append("we")
-        we.append(4)
-        we.append("Wednesday")
-        th = []
-        th.append("th")
-        th.append(8)
-        th.append("Thursday")
-        fr = []
-        fr.append("fr")
-        fr.append(16)
-        fr.append("Friday")
-        sa = []
-        sa.append("sa")
-        sa.append(32)
-        sa.append("Saturday")
-        su = []
-        su.append("su")
-        su.append(64)
-        su.append("Sunday")
-        mf = []
-        mf.append("mf")
-        mf.append(31)
-        mf.append("Mo-Fr")
-        ms = []
-        ms.append("ms")
-        ms.append(127)
-        ms.append("Mo-Su")
+        mo = ["mo",   1, "Monday"]
+        tu = ["tu",   2, "Tuesday"]
+        we = ["we",   4, "Wednesday"]
+        th = ["th",   8, "Thursday"]
+        fr = ["fr",  16, "Friday"]
+        sa = ["sa",  32, "Saturday"]
+        su = ["su",  64, "Sunday"]
+        mf = ["mf",  31, "Mo-Fr"]
+        ms = ["ms", 127, "Mo-Su"]
         
         if repeated == 127:
             repeated = repeated - 127
             ms.append("checked")
         else:
             ms.append("")
+        
         if repeated >= 64:
             repeated = repeated - 64
             su.append("checked")
         else:
             su.append("")
-        if repeated == 31:
-            repeated = repeated - 31
-            mf.append("checked")
-        else:
-            mf.append("")
+        
         if repeated >= 32:
             repeated = repeated - 32
             sa.append("checked")
         else:
             sa.append("")
+        
+        if repeated == 31:
+            repeated = repeated - 31
+            mf.append("checked")
+        else:
+            mf.append("")
+
         if repeated >= 16:
             repeated = repeated - 16
             fr.append("checked")
         else:
             fr.append("")
+
         if repeated >= 8:
             repeated = repeated - 8
             th.append("checked")
         else:
             th.append("")
+        
         if repeated >= 4:
             repeated = repeated - 4
             we.append("checked")
         else:
             we.append("")
+        
         if repeated >= 2:
             repeated = repeated - 2
             tu.append("checked")
         else:
             tu.append("")
+        
         if repeated == 1:
             repeated = repeated - 1
             mo.append("checked")
@@ -215,19 +199,46 @@ class WAPfunctions( Source):
 
         return returnList
     
-    def getServiceList(self, sRef):
-        self["ServiceList"].root = sRef
     def serviceList(self,param):
-        from Components.Sources.ServiceList import ServiceList
-        self["ServiceList"] = ServiceList(param, command_func = self.getServiceList, validate_commands=False)
-        print self["ServiceList"]
-        return self["ServiceList"]
+        print "serviceList: ",param
+        sRef = str(param["sRef"])
+        bouquet = str(param["bouquet"])
+        returnList = []
+        sRefFound = 0
+        
+        ref = eServiceReference(bouquet)
+        self.servicelist = ServiceList(ref, command_func = self.getServiceList, validate_commands=False)
+        self.servicelist.setRoot(ref)
+        for (ref2, name) in self.servicelist.getServicesAsList():
+            print "ref2: (",ref2, ") name: (",name,")"
+            returnListPart = []
+            returnListPart.append(name)
+            returnListPart.append(ref2)
+            if ref2 == str(sRef):
+                returnListPart.append("selected")
+                sRefFound = 1
+            else:
+                returnListPart.append("")
+            returnList.append(returnListPart)
+
+        if sRefFound == 0:
+            returnListPart = ["Inserted", sRef, "selected"]
+            returnList.append(returnListPart)
+        print returnList
+        return returnList
     
+    def getServiceList(self, ref):
+        self.servicelist.root = ref
+        
     def getText(self):
         print self.result
         (result,text) = self.result
         return text
     
+    def filterXML(self, item):
+        item = item.replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;")
+        return item
+
     def getList(self):
         print self.result
         return self.result
