@@ -157,10 +157,13 @@ function set(element, value){
 		element.innerHTML = value;
 	}
 	if(navigator.userAgent.indexOf("MSIE") >=0) {
-		elementscript= $('UpdateStreamReaderIEFixIFrame').$('scriptzone');
-		if(elementscript){
-			elementscript.innerHTML = ""; // deleting set() from page, to keep the page short and to save memory			
+		try{
+			elementscript= $('UpdateStreamReaderIEFixIFrame').$('scriptzone');
+			if(elementscript){
+				elementscript.innerHTML = ""; // deleting set() from page, to keep the page short and to save memory			
+			}
 		}
+		catch(e){}
 	}
 }
 function setComplete(element, value){
