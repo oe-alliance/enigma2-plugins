@@ -298,12 +298,17 @@ class Timer( Source):
                 return False,"ServiceReference missing"
             else: 
                 serviceref = ServiceReference(param['sRef'])
+
+            if param['repeated'] is not None:
+                repeated = int(param['repeated'])
+            else: 
+                repeated = 0
             
             if param['begin'] is None:
                 return False,"begin missing"
             elif time.time() <= float(param['begin']):
                 begin = float(param['begin'])
-            elif time.time() > float(param['begin']):
+            elif time.time() > float(param['begin']) and repeated == 1:
                 begin = time.time()
             else:
                 return False,"incorrect time begin"
