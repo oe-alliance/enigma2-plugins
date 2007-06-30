@@ -293,9 +293,7 @@ function zap(servicereference){
 }
 
 //++++       SignalPanel                           ++++
-function initSignalPanel(){
-	$('SignalPanel').innerHTML = tplSignalPanelButton;
-}
+
 function openSignalDialog(){
 	openWindow("Signal Info",tplSignalPanel, 215, 75,620,40);
 }

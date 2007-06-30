@@ -186,7 +186,6 @@ var tplSignalPanel  = '<table width="100%" id="SignalPanelTable">';
 	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">BER</td><td width="50" style="background-color: #DDDDDD;"><div id="BER">N/A</div></td></tr>';
 	tplSignalPanel += '</table>';
 	
-var tplSignalPanelButton = '<img src="/webdata/gfx/signal.png" title="show SignalInfoPanel" onclick="openSignalDialog();" title="view Signal Info">';
 
 // Message send
 var tplMessageSendForm = ""
