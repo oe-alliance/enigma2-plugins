@@ -64,15 +64,15 @@ class MovieStreamer(resource.Resource):
         except:
             return http.Response(responsecode.OK, stream="no file given with file=???")            
         if parts.has_key("file"):
-            path = "/hdd/movie/"+parts["file"]
+            path = "/hdd/movie/"+parts["file"].replace("%20"," ")
             if os.path.exists(path):
                 self.filehandler = open(path,"r")
                 s = myFileStream(self.filehandler)
                 resp =  http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('video', 'ts')},stream=s)
-                resp.headers.addRawHeader('Content-Disposition','attachment; filename="%s"'%parts["file"])
+                resp.headers.addRawHeader('Content-Disposition','attachment; filename="%s"'%path)
                 return resp
             else:
-                return http.Response(responsecode.OK, stream="file '%s' was not found in /media/hdd/movie/"%parts["file"])            
+                return http.Response(responsecode.OK, stream="file '%s' was not found"%path)            
         else:
             return http.Response(responsecode.OK, stream="no file given with file=???")            
     
