@@ -2,18 +2,19 @@
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 	<title>Enigma 2 Webinterface (ALPHA)</title>
-
-	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
+<!--	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />-->
 	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico"/>
 </head>
 <body>
-<form cgi="/wep/wap/timeradd">
+<form action="/web/wap/timeradd" method="get">
 <table>
 <tr>
 	<td colspan="3">Action:</td>
 	<td colspan="3"><select name="justplay" id="justplay" size="1">
-		<option value="0">Record</option>
-		<option value="1">Zap</option>
+		<e2:element source="WAPFillOptionListRecord" id="justplay,sRef"><e2:convert type="web:ListFiller">
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
+		</e2:convert>
+		<e2:convert type="web:TextToHTML"/></e2:element>
 	</select>
 	</td>
 </tr><tr>
@@ -23,64 +24,64 @@
 	<td colspan="3">Start:</td><td colspan="3">
 	<select name="syear" size="1">
 		<e2:element source="WAPFillOptionListSyear" id="syear,sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 	</select>.
 	<select name="smonth" id="smonth" size="1">
 		<e2:element source="WAPFillOptionListSmonth" id="smonth,sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 	</select>.
 	<select name="sday" id="sday" size="1">
 		<e2:element source="WAPFillOptionListSday" id="sday,sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>---
 	<select name="shour" id="shour" size="1">
 		<e2:element source="WAPFillOptionListShour" id="shour,sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>:
 	<select name="smin" id="smin" size="1">
 		<e2:element source="WAPFillOptionListSmin" id="smin,sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 	</select></td>
 </tr><tr>
 	<td colspan="3">End:</td><td colspan="3"><select name="eyear" id="eyear" size="1">
 		<e2:element source="WAPFillOptionListEyear" id="eyear,sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>.
 	<select name="emonth" id="emonth" size="1">
 		<e2:element source="WAPFillOptionListEmonth" id="emonth,sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>.
 	<select name="eday" id="eday" size="1">
 		<e2:element source="WAPFillOptionListEday" id="eday,sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>---
 	<select name="ehour" id="ehour" size="1">
 		<e2:element source="WAPFillOptionListEhour" id="ehour,sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 </select>:
 	<select name="emin" id="emin" size="1">
 		<e2:element source="WAPFillOptionListEmin" id="emin,sRef"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Value"/>&lt;/option>
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
-	<e2:convert type="web:TextToHTML"/></e2:element>
+		<e2:convert type="web:TextToHTML"/></e2:element>
 </select>
 	</td>
 </tr><tr>
@@ -97,7 +98,7 @@
 	<td><p><input type="radio" id="tvradio" name="tvradio" value="tv"/>TV</p>
 	<p><input type="radio" name="tvradio" value="radio"/>Radio</p></td>
 	<td><p>Channel:</p>
-	<select name="channel" id="channel" size="1">
+	<select name="channel" id="sRef" size="1">
 	<e2:element source="WAPServiceList" id="sRef,bouquet"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
@@ -106,21 +107,32 @@
 	</td>
 </tr><tr>
 	<td colspan="3">Name:</td><td colspan="3">
-	<input name="name" id="name" type="text" size="100" maxlength="100" style="color: #000000;" value=" "/></td>
+	<e2:element source="WAPFillValueName" id="name"><e2:convert type="web:ListFiller" >
+		&lt;input name=name type=text size=60 maxlength=60 value=&quot;<e2:item name="Value"/>&quot;>
+		</e2:convert>
+		<e2:convert type="web:TextToHTML"/></e2:element>
+	</td>
 </tr><tr>
 	<td colspan="3">Description:</td><td colspan="3">
-	<input name="descr" id="descr" type="text" size="100" maxlength="100" style="color: #000000;" value=" "/></td>
+	<e2:element source="WAPFillValueDescr" id="description"><e2:convert type="web:ListFiller" >
+		&lt;input name=descr type=text size=60 maxlength=60 value=&quot;<e2:item name="Value"/>&quot;>
+		</e2:convert>
+		<e2:convert type="web:TextToHTML"/></e2:element>
+	</td>
 </tr><tr>
-	<td colspan="3">After event do:</td><td colspan="3"><select id="after_event" name="after_event" size="1">
-		<option value="0">Nothing</option><option value="1">Standby</option>
-		<option value="2">Deepstandby/Shutdown</option></select>
+	<td colspan="3">After event do:</td><td colspan="3"><select id="afterevent" name="after_event" size="1">
+		<e2:element source="WAPFillOptionListAfterEvent" id="afterevent,sRef"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
+		</e2:convert>
+		<e2:convert type="web:TextToHTML"/></e2:element>
+</select>
 </td>
 </tr><tr></tr><tr>
 	<td colspan="3"></td>
 	<td colspan="3">
-	<input name="deleteOldOnSave" id="deleteOldOnSave" type="hidden" value="0"/>
-	<input name="eventID" id="eventID" type="hidden" value="0"/>
-	<input type="button" name="save" value="Add/Save"/>
+	<input name="disabled" type="hidden" value="0"/>
+	<input name="eit" type="hidden" value="0"/>
+	<input type="submit" name="save" value="Add/Save"/>
 </td></tr>
 </table></form>
 </body>

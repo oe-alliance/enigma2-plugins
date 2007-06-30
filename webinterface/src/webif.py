@@ -177,17 +177,23 @@ class ParentControlWebScreen(WebScreen):
 class WAPWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
-		self["WAPFillOptionListSyear"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListSday"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListSmonth"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListShour"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListSmin"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListSyear"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListSday"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListSmonth"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListShour"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListSmin"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		
-		self["WAPFillOptionListEyear"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListEday"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListEmonth"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListEhour"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListEmin"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListEyear"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListEday"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListEmonth"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListEhour"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListEmin"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		
+		self["WAPFillOptionListRecord"] = WAPfunctions(session,func = WAPfunctions.OPTIONLIST)
+		self["WAPFillOptionListAfterEvent"] = WAPfunctions(session,func = WAPfunctions.OPTIONLIST)
+		
+		self["WAPFillValueName"] = WAPfunctions(session,func = WAPfunctions.FILLVALUE)
+		self["WAPFillValueDescr"] = WAPfunctions(session,func = WAPfunctions.FILLVALUE)
 
 		self["WAPFillOptionListRepeated"] = WAPfunctions(session,func = WAPfunctions.REPEATED)
 		self["WAPServiceList"] = WAPfunctions(session, func = WAPfunctions.SERVICELIST)
