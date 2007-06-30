@@ -303,6 +303,8 @@ class Timer( Source):
                 return False,"begin missing"
             elif time.time() <= float(param['begin']):
                 begin = float(param['begin'])
+            elif time.time() > float(param['begin']):
+                begin = time.time()
             else:
                 return False,"incorrect time begin"
         
