@@ -114,8 +114,8 @@ class Timer( Source):
                 return False,"%s missing"%element
             else:
                 param[element] = int(param[element])
-        param['begin'] = int( time.strftime("%s",  time.localtime(time.mktime( (param['syear'], param['smonth'], param['sday'], param['shour'], param['smin'], 0, 0, 0, 0) ) ) ) )
-        param['end']   = int( time.strftime("%s",  time.localtime(time.mktime( (param['eyear'], param['emonth'], param['eday'], param['ehour'], param['emin'], 0, 0, 0, 0) ) ) ) )
+        param['begin'] = int( time.strftime("%s",  time.localtime(time.mktime( (param['syear'], param['smonth'], param['sday'], param['shour'], param['smin'], 0, 0, 0, -1) ) ) ) )
+        param['end']   = int( time.strftime("%s",  time.localtime(time.mktime( (param['eyear'], param['emonth'], param['eday'], param['ehour'], param['emin'], 0, 0, 0, -1) ) ) ) )
         
         for element in listDate:
             del param[element]
