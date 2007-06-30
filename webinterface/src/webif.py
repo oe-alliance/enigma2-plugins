@@ -8,11 +8,11 @@ Version = '$Header$';
 #  - more components, like the channellist
 #  - better error handling
 #  - use namespace parser
+from enigma import eServiceReference
 
 from Screens.Screen import Screen
 from Tools.Import import my_import
 
-# for our testscreen
 from Screens.InfoBarGenerics import InfoBarServiceName, InfoBarEvent, InfoBarTuner
 
 from Components.Sources.Clock import Clock
@@ -57,63 +57,62 @@ class WebScreen(Screen):
 		self.request = request
 		self.instance = None
 		
-# a test screen
-class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
+class DummyWebScreen(WebScreen):
+	#use it, if you dont need any source, just to can do a static file with an xml-file
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+
+class UpdateWebScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner,WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
 		InfoBarServiceName.__init__(self)
 		InfoBarEvent.__init__(self)
 		InfoBarTuner.__init__(self)
 		self["CurrentTime"] = Clock()
-#		self["TVSystem"] = Config(config.av.tvsystem)
-#		self["OSDLanguage"] = Config(config.osd.language)
-#		self["FirstRun"] = Config(config.misc.firstrun)
-		from enigma import eServiceReference
+		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
+		#CurrentService
+		#Event_Now
+		#Event_Next
+		#FrontendStatus
+		
+class MessageWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["Message"] = Message(session)
+
+class AudioWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["AudioTracks"] = AudioTracks(session)		
+
+class AboutWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["About"] = About(session)
+		
+class VolumeWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["Volume"] = Volume(session)
+
+class SettingsWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["Settings"] = Settings(session)
+
+class SubServiceWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["SubServices"] = SubServices(session)
+
+class ServiceWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
 		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["SwitchService"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
 		self["ServiceList"] = ServiceList(fav, command_func = self.getServiceList, validate_commands=False)
 		self["ServiceListRecursive"] = ServiceListRecursive(session, func=ServiceListRecursive.FETCH)
-		self["ParentControlList"] = ParentControl(session)
-		self["SubServices"] = SubServices(session)
-		self["Volume"] = Volume(session)
-		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
-		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
-		self["EPGNOW"] = EPG(session,func=EPG.NOW)
-		self["TimerList"] = Timer(session,func = Timer.LIST)
-		self["TimerAddEventID"] = Timer(session,func = Timer.ADDBYID)
-		self["TimerAdd"] = Timer(session,func = Timer.ADD)
-		self["TimerDel"] = Timer(session,func = Timer.DEL)
-		self["TimerChange"] = Timer(session,func = Timer.CHANGE)
-		self["TimerListWrite"] = Timer(session,func = Timer.WRITE)
-		self["TVBrowser"] = Timer(session,func = Timer.TVBROWSER)
-		self["RecordNow"] = Timer(session,func = Timer.RECNOW)
-		self["MovieList"] = Movie(session,func = Movie.LIST)
-		self["MovieFileDel"] = Movie(session,func = Movie.DEL)
-		self["MovieTags"] = Movie(session,func = Movie.TAGS)
-		self["Volume"] = Volume(session)
-		self["Message"] = Message(session)
-		self["PowerState"] = PowerState(session)
-		self["RemoteControl"] = RemoteControl(session)
-		self["Settings"] = Settings(session)
-		self["AudioTracks"] = AudioTracks(session)
-		
-		self["About"] = About(session)
 
-		self["WAPFillOptionListSyear"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListSday"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListSmonth"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListShour"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListSmin"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		
-		self["WAPFillOptionListEyear"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListEday"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListEmonth"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListEhour"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-		self["WAPFillOptionListEmin"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
-
-		self["WAPFillOptionListRepeated"] = WAPfunctions(session,func = WAPfunctions.REPEATED)
-		self["WAPServiceList"] = WAPfunctions(session, func = WAPfunctions.SERVICELIST)
-		
 	def getServiceList(self, sRef):
 		self["ServiceList"].root = sRef
 
@@ -130,14 +129,76 @@ class TestScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner, WebScreen):
 		ugly, but necessary :(
 		"""
 
-# TODO: (really.) put screens into own files.
-class Streaming(WebScreen):
+class EPGWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
+		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
+		self["EPGNOW"] = EPG(session,func=EPG.NOW)
+
+class MovieWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		from Components.MovieList import MovieList
+		from Tools.Directories import resolveFilename,SCOPE_HDD
+		movielist = MovieList(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD)))
+		self["MovieList"] = Movie(session,movielist,func = Movie.LIST)
+		self["MovieFileDel"] = Movie(session,movielist,func = Movie.DEL)
+		self["MovieTags"] = Movie(session,movielist,func = Movie.TAGS)
+
+		
+class TimerWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["TimerList"] = Timer(session,func = Timer.LIST)
+		self["TimerAddEventID"] = Timer(session,func = Timer.ADDBYID)
+		self["TimerAdd"] = Timer(session,func = Timer.ADD)
+		self["TimerDel"] = Timer(session,func = Timer.DEL)
+		self["TimerChange"] = Timer(session,func = Timer.CHANGE)
+		self["TimerListWrite"] = Timer(session,func = Timer.WRITE)
+		self["TVBrowser"] = Timer(session,func = Timer.TVBROWSER)
+		self["RecordNow"] = Timer(session,func = Timer.RECNOW)
+
+class RemoteWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["RemoteControl"] = RemoteControl(session)
+
+class PowerWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["PowerState"] = PowerState(session)
+
+class ParentControlWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["ParentControlList"] = ParentControl(session)
+				
+class WAPWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["WAPFillOptionListSyear"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListSday"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListSmonth"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListShour"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListSmin"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		
+		self["WAPFillOptionListEyear"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListEday"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListEmonth"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListEhour"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+		self["WAPFillOptionListEmin"] = WAPfunctions(session,func = WAPfunctions.FILLOPTIONLIST)
+
+		self["WAPFillOptionListRepeated"] = WAPfunctions(session,func = WAPfunctions.REPEATED)
+		self["WAPServiceList"] = WAPfunctions(session, func = WAPfunctions.SERVICELIST)
+	
+class StreamingWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
 		from Components.Sources.StreamService import StreamService
 		self["StreamService"] = StreamService(self.session.nav)
 
-class StreamingM3U(WebScreen):
+class M3UStreamingWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
 		from Components.Sources.StaticText import StaticText
@@ -155,7 +216,7 @@ class TsM3U(WebScreen):
 		self["file"] = StaticText()
 		self["localip"] = RequestData(request,what=RequestData.HOST)
 
-class RestartTwisted(WebScreen):
+class RestartWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
 		import plugin
@@ -280,7 +341,7 @@ class JavascriptUpdate(Converter):
 class ListFiller(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
-		print "ListFiller-arg: ",arg
+#		print "ListFiller-arg: ",arg
 
 	def getText(self):
 		l = self.source.list

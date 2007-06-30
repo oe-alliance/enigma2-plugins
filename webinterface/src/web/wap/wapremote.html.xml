@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">&lt;html>
+<e2:screen name="RemoteWebScreen">&lt;html>
 &lt;head>
 	&lt;meta content="text/html; charset=UTF-8" http-equiv="content-type">
 	&lt;title>Enigma 2 Webinterface (ALPHA)&lt;/title>

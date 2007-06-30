@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">
+<e2:screen name="MovieWebScreen">
 	<e2:element source="MovieTags" >
 		<e2:convert type="web:TextToHTML" />
 	</e2:element>

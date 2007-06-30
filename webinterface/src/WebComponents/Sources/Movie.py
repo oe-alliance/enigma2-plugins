@@ -2,8 +2,8 @@ from enigma import *
 from enigma import eServiceReference, iServiceInformation
 from Components.Sources.Source import Source
 from ServiceReference import ServiceReference,eServiceCenter
-from Components.MovieList import MovieList
-from Tools.Directories import *
+#from Components.MovieList import MovieList
+from Tools.Directories import resolveFilename,SCOPE_HDD
 
 import os
 #import sys, traceback
@@ -13,12 +13,12 @@ class Movie( Source):
     DEL = 1
     TAGS = 2
     
-    def __init__(self, session,func = LIST):
+    def __init__(self, session,movielist,func = LIST):
         Source.__init__(self)
         self.func = func
         self.session = session
         self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
-        self.movielist = MovieList(self.root)
+        self.movielist = movielist#MovieList(self.root)
         self.movielist.load(self.root,None)
     
     def handleCommand(self,cmd):

@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="TimerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 	<e2:element source="TimerAddEventID" id="sRef,eventid,justplay">
 		<e2:convert type="web:TextToHTML" />
 	</e2:element>

@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="VolumeWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;e2volume><e2:element source="Volume" id="set"><e2:convert type="web:ListFiller" >
 		&lt;e2result><e2:item name="Result"/>&lt;/e2result>
 		&lt;e2resulttext><e2:item name="ResultText"/>&lt;/e2resulttext>

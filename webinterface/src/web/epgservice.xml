@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="ServiceWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;e2eventlist><e2:element source="EPGSERVICE" id="sRef"><e2:convert type="web:ListFiller" >
 	&lt;e2event>
 		&lt;e2eventid><e2:item name="EventID"/>&lt;/e2eventid>

@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">
+<e2:screen name="UpdateWebScreen">
 <e2:element source="CurrentTime" streaming="yes">
 	<e2:convert type="ClockToText"></e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />

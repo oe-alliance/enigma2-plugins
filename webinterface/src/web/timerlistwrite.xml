@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">
+<e2:screen name="TimerWebScreen">
 	<e2:element source="TimerListWrite" id="write">
 		<e2:convert type="web:TextToHTML" />
 	</e2:element>

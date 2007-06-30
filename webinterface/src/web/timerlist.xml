@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="TimerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;e2timerlist><e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
 	&lt;e2timer>
 		&lt;e2servicereference><e2:item name="ServiceReference" />&lt;/e2servicereference>

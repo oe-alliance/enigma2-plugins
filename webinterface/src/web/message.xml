@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="MessageWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;e2message>
 	<e2:element source="Message" id="text,type,timeout"><e2:convert type="web:ListFiller" >
 	&lt;e2result><e2:item name="Result" filter="xml"/>&lt;/e2result>

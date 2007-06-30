@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="SettingsWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 <e2settings>
 <e2:element source="Settings">				
 	<e2:convert type="web:ListFiller">

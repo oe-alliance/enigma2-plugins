@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="EPGWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;e2eventlist><e2:element source="EPGNOW" id="bRef">
 	<e2:convert type="web:ListFiller" >
 	&lt;e2event>

@@ -1,4 +1,4 @@
-<e2:screen name="TestScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="AboutWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;e2abouts><e2:element source="About" ><e2:convert type="web:ListFiller" >
 	&lt;e2about>
 		&lt;e2enigmaversion><e2:item name="enigmaVersion"  filter="xml"/>&lt;/e2enigmaversion>

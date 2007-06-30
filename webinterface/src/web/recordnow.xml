@@ -1,1 +1,1 @@
-<e2:screen name="TestScreen"><e2:element source="RecordNow" id="recordnow"><e2:convert type="web:TextToHTML" /></e2:element></e2:screen>
+<e2:screen name="TimerWebScreen"><e2:element source="RecordNow" id="recordnow"><e2:convert type="web:TextToHTML" /></e2:element></e2:screen>
