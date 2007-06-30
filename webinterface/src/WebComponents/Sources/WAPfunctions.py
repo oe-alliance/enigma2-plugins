@@ -9,16 +9,18 @@ from enigma import eServiceReference
 import time, re
 
 class WAPfunctions( Source):
-    FILLOPTIONLIST = 0
+    LISTTIME = 0
     REPEATED = 1
     SERVICELIST = 2
+    OPTIONLIST = 3
+    FILLVALUE = 4
     
     lut = {"Name":0
           ,"Value":1
           ,"Selected":2
           }
     
-    def __init__(self, session,func = FILLOPTIONLIST):
+    def __init__(self, session,func = LISTTIME):
         self.func = func
         Source.__init__(self)        
         self.session = session
@@ -26,18 +28,22 @@ class WAPfunctions( Source):
 
     def handleCommand(self,cmd):
         print "WAPfunctions: handleCommand", cmd
-        if self.func is self.FILLOPTIONLIST:
-            self.result = self.fillOptionList(cmd)
+        if self.func is self.LISTTIME:
+            self.result = self.fillListTime(cmd)
         elif self.func is self.REPEATED:
             self.result = self.fillRepeated(cmd)
         elif self.func is self.SERVICELIST:
             self.result = self.serviceList(cmd)
+        elif self.func is self.OPTIONLIST:
+            self.result = self.fillOptionList(cmd)
+        elif self.func is self.FILLVALUE:
+            self.result = self.fillValue(cmd)
         else:
             self.result = ["unknown command cmd(%s) self.func(%s)" % (cmd, self.func)]
 
-    def fillOptionList(self,param):
+    def fillListTime(self,param):
         # is there an easier and better way? :\ 
-        print "fillOptionList",param
+        print "fillListTime",param
         #del param["sRef"]
 
         input = 0
@@ -51,13 +57,13 @@ class WAPfunctions( Source):
         t["sday"]=time.strftime("%d", time.localtime(timeNow))
         t["smonth"]=time.strftime("%m", time.localtime(timeNow))
         t["syear"]=time.strftime("%Y", time.localtime(timeNow))
-        t["sminute"]=time.strftime("%M", time.localtime(timeNow))
+        t["smin"]=time.strftime("%M", time.localtime(timeNow))
         t["shour"]=time.strftime("%H", time.localtime(timeNow))
         
         t["eday"]=time.strftime("%d", time.localtime(timePlusTwo))
         t["emonth"]=time.strftime("%m", time.localtime(timePlusTwo))
         t["eyear"]=time.strftime("%Y", time.localtime(timePlusTwo))
-        t["eminute"]=time.strftime("%M", time.localtime(timePlusTwo))
+        t["emin"]=time.strftime("%M", time.localtime(timePlusTwo))
         t["ehour"]=time.strftime("%H", time.localtime(timePlusTwo))
         
         key = ""
@@ -206,6 +212,8 @@ class WAPfunctions( Source):
         returnList = []
         sRefFound = 0
         
+        if bouquet == '':
+            bouquet = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'
         ref = eServiceReference(bouquet)
         self.servicelist = ServiceList(ref, command_func = self.getServiceList, validate_commands=False)
         self.servicelist.setRoot(ref)
@@ -221,15 +229,50 @@ class WAPfunctions( Source):
                 returnListPart.append("")
             returnList.append(returnListPart)
 
-        if sRefFound == 0:
+        if sRefFound == 0 and sRef != '':
             returnListPart = ["Inserted", sRef, "selected"]
             returnList.append(returnListPart)
         print returnList
         return returnList
-    
+
     def getServiceList(self, ref):
         self.servicelist.root = ref
+    
+    def fillOptionList(self,param):
+        # is there an easier and better way? :\ 
+        print "fillOptionList",param
+        returnList = []
+        if param.has_key("justplay"):
+            number = param["justplay"] or 0
+            number = int(number)
+            if number == 1:
+                returnList.append(["Record",0,""])
+                returnList.append(["Zap",1,"selected"])
+            else:
+                returnList.append(["Record",0,"selected"])
+                returnList.append(["Zap",1,""])
+        elif param.has_key("afterevent"):
+            number = param["afterevent"] or 0
+            number = int(number)
+            if number == 2:
+                returnList.append(["Nothing",0,""])
+                returnList.append(["Standby",1,""])
+                returnList.append(["Deepstandby/Shutdown",2,"selected"])
+            elif number == 1:
+                returnList.append(["Nothing",0,""])
+                returnList.append(["Standby",1,"selected"])
+                returnList.append(["Deepstandby/Shutdown",2,""])
+            else:
+                returnList.append(["Nothing",0,"selected"])
+                returnList.append(["Standby",1,""])
+                returnList.append(["Deepstandby/Shutdown",2,""])
         
+        return returnList
+    
+    def fillValue(self,param):
+        print "fillValue: ",param
+        return [["",param,""]]
+
     def getText(self):
         print self.result
         (result,text) = self.result

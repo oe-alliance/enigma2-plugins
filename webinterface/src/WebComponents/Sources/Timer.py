@@ -99,89 +99,53 @@ class Timer( Source):
             http://dreambox/web/tvbrowser? +
             
         To add something:
-            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
+            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&sRef={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
         
         to zap for some time:
-            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, afterevent=0&eit=&disabled=0&justplay=1&repeated=0
+            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&sRef={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, afterevent=0&eit=&disabled=0&justplay=1&repeated=0
         
         to delete something:
-            &command=del&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&serviceref={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
+            &command=del&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&sRef={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
         """
         
-        syear = 0
-        if param['syear'] is None:
-           return False,"syear missing"
-        else:
-            syear = int(param['syear'])
+        listDate = ['syear','smonth','sday','shour','smin','eyear','emonth','eday','ehour','emin']
+        for element in listDate:
+            if param[element] is None:
+                return False,"%s missing"%element
+            else:
+                param[element] = int(param[element])
+        param['begin'] = int( time.strftime("%s",  time.localtime(time.mktime( (param['syear'], param['smonth'], param['sday'], param['shour'], param['smin'], 0, 0, 0, 0) ) ) ) )
+        param['end']   = int( time.strftime("%s",  time.localtime(time.mktime( (param['eyear'], param['emonth'], param['eday'], param['ehour'], param['emin'], 0, 0, 0, 0) ) ) ) )
         
-        smonth = 0
-        if param['smonth'] is None:
-           return False,"smonth missing"
-        else:
-            smonth = int(param['smonth'])
+        for element in listDate:
+            del param[element]
         
-        sday = 0
-        if param['sday'] is None:
-           return False,"sday missing"
-        else:
-            sday = int(param['sday'])
-        
-        shour = 0
-        if param['shour'] is None:
-           return False,"shour missing"
-        else:
-            shour = int(param['shour'])
-        
-        smin = 0
-        if param['smin'] is None:
-           return False,"smin missing"
-        else:
-            smin = int(param['smin'])
-            
-        eyear = 0
-        if param['eyear'] is None:
-           return False,"eyear missing"
-        else:
-            eyear = int(param['eyear'])
-        
-        emonth = 0
-        if param['emonth'] is None:
-           return False,"emonth missing"
-        else:
-            emonth = int(param['emonth'])
-        
-        eday = 0
-        if param['eday'] is None:
-           return False,"eday missing"
-        else:
-            eday = int(param['eday'])
-        
-        ehour = 0
-        if param['ehour'] is None:
-           return False,"ehour missing"
-        else:
-            ehour = int(param['ehour'])
-        
-        emin = 0
-        if param['emin'] is None:
-           return False,"emin missing"
-        else:
-            emin = int(param['emin'])
-        
-        # for compatibility reasons
         if param['sRef'] is None:
-            return False,"ServiceReference missing"
+            return False,"sRef missing"
         else:
             takeApart = string.split(param['sRef'], '|')
             if len(takeApart) > 1:
                 param['sRef'] = takeApart[1]
-
-        param['begin'] = int( time.strftime("%s",  time.localtime(time.mktime( (syear, smonth, sday, shour, smin, 0, 0, 0, 0) ) ) ) )
-        param['end']   = int( time.strftime("%s",  time.localtime(time.mktime( (eyear, emonth, eday, ehour, emin, 0, 0, 0, 0) ) ) ) )
         
+        repeated = 0
+        if param.has_key('repeated'):
+            repeated = int(param['repeated'])
+        if repeated == 0:
+            list = ["mo","tu","we","th","fr","sa","su","ms","mf"]
+            for element in list:
+                if param.has_key(element):
+                    number = param[element] or 0
+                    del param[element]
+                    repeated = repeated + int(number)
+            if repeated > 127:
+                repeated = 127
+        param['repeated'] = repeated
+
         if param['command'] == "add":
+            del param['command']
             return self.addTimer(param)
         elif param['command'] == "del":
+            del param['command']
             return self.delTimer(param)
         else:
             return False,"command missing"
@@ -289,11 +253,10 @@ class Timer( Source):
         else:
             return False,"afterevent incorrect"
         
-        if param['repeated'] is not None:
+        repeated = 0
+        if param.has_key('repeated'):
             repeated = int(param['repeated'])
-        else: 
-            repeated = 0
-            
+        
         newtimer = RecordTimerEntry(serviceref, begin, end, name, description, 0, disabled, justplay, afterevent)
         newtimer.repeated = repeated
         self.recordtimer.record(newtimer)
