@@ -1006,7 +1006,7 @@ function incomingAbout(request) {
 }
 function quotes2html(txt) {
 	txt = txt.replace(/"/g, '&quot;');
-	return txt.replace(/'/g, '&#39;');
+	return txt.replace(/'/g, "\\\'");
 }
 
 // Spezial functions, mostly for testing purpose
