@@ -15,7 +15,7 @@
 <div style="text-align: center;">
 <a href="/web/wap/wapremote.html?command=0">Remote Control</a><br/>
 <a href="/web/wap/timerlist.html">Timerlist</a><br/>
-<a href="/web/wap/timeredit.html?name=&amp;description=&amp;justplay=&amp;afterevent=&amp;repeated=&amp;bouquet=&amp;sRef=&amp;ehour=now&amp;shour=now&amp;emin=now&amp;smin=now&amp;sday=now&amp;eday=now&amp;smonth=now&amp;emonth=now&amp;syear=now&amp;eyear=now">Add Timer</a><br/>
+<a href="/web/wap/timeredit.html?name=&amp;description=&amp;justplay=&amp;afterevent=&amp;repeated=&amp;bouquet=&amp;sRef=&amp;ehour=now&amp;shour=now&amp;emin=now&amp;smin=now&amp;sday=now&amp;eday=now&amp;smonth=now&amp;emonth=now&amp;syear=now&amp;eyear=now&amp;end=&amp;begin=&amp;deleteOldOnSave=0&amp;command=add">Add Timer</a><br/>
 <a href="/web/wap/power.html">PowerState</a><br/>
 </div>
 </body>

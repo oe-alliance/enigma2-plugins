@@ -14,6 +14,7 @@ class WAPfunctions( Source):
     SERVICELIST = 2
     OPTIONLIST = 3
     FILLVALUE = 4
+    DELETEOLD = 5
     
     lut = {"Name":0
           ,"Value":1
@@ -38,20 +39,33 @@ class WAPfunctions( Source):
             self.result = self.fillOptionList(cmd)
         elif self.func is self.FILLVALUE:
             self.result = self.fillValue(cmd)
+        elif self.func is self.DELETEOLD:
+            self.result = self.deleteOldSaved(cmd)
         else:
             self.result = ["unknown command cmd(%s) self.func(%s)" % (cmd, self.func)]
 
     def fillListTime(self,param):
-        # is there an easier and better way? :\ 
         print "fillListTime",param
-        #del param["sRef"]
-
+        
         input = 0
         start = 1
         end = 1
         
         timeNow = time.time()
         timePlusTwo = timeNow + 7200
+
+        if param.has_key('begin'):
+            begin = param['begin'] or 0
+            begin = int(begin)
+            del param['begin']
+            if begin > 0:
+                timeNow = begin
+        if param.has_key('end'):
+            end = param['end'] or 0
+            end = int(end)
+            del param['end']
+            if end > 0:
+                timePlusTwo = end
         
         t = {}
         t["sday"]=time.strftime("%d", time.localtime(timeNow))
@@ -90,11 +104,12 @@ class WAPfunctions( Source):
             start = int(t[key])
             end = int(t[key])+2
         
-        if(param[key] == "now"):
+        if param[key] == "now" or param[key] == "end" or param[key] == "begin":
             input = int(t[key])
         else:
             input = param[key] or 0
             input = int(input)
+        #print cutKey,param[key],input
         
         self.result = self.fillOptionListAny(input,start,end)
         return self.result
@@ -116,9 +131,7 @@ class WAPfunctions( Source):
         return returnList
         
     def fillRepeated(self,param):
-        # is there an easier and better way? :\ 
         print "fillRepeated",param
-        #del param["sRef"]
         repeated = param or 0
         repeated = int(repeated)
         
@@ -128,13 +141,13 @@ class WAPfunctions( Source):
           ,"Selected":3
           }
         
-        mo = ["mo",   1, "Monday"]
-        tu = ["tu",   2, "Tuesday"]
-        we = ["we",   4, "Wednesday"]
-        th = ["th",   8, "Thursday"]
-        fr = ["fr",  16, "Friday"]
-        sa = ["sa",  32, "Saturday"]
-        su = ["su",  64, "Sunday"]
+        mo = ["mo",   1, "Mo "]#"Monday"]
+        tu = ["tu",   2, "Tu "]#"Tuesday"]
+        we = ["we",   4, "We "]#"Wednesday"]
+        th = ["th",   8, "Th "]#"Thursday"]
+        fr = ["fr",  16, "Fr "]#"Friday"]
+        sa = ["sa",  32, "Sa "]#"Saturday"]
+        su = ["su",  64, "Su "]#"Sunday"]
         mf = ["mf",  31, "Mo-Fr"]
         ms = ["ms", 127, "Mo-Su"]
         
@@ -232,14 +245,14 @@ class WAPfunctions( Source):
         if sRefFound == 0 and sRef != '':
             returnListPart = ["Inserted", sRef, "selected"]
             returnList.append(returnListPart)
-        print returnList
+        #print returnList
         return returnList
 
     def getServiceList(self, ref):
         self.servicelist.root = ref
     
     def fillOptionList(self,param):
-        # is there an easier and better way? :\ 
+         
         print "fillOptionList",param
         returnList = []
         if param.has_key("justplay"):
@@ -269,12 +282,23 @@ class WAPfunctions( Source):
         
         return returnList
     
+    def deleteOldSaved(self,param):
+        print "deleteOldSaved",param
+        returnList = []
+        returnList.append(["deleteOldOnSave",param["deleteOldOnSave"],""])
+        returnList.append(["command",param["command"],""])
+        if int(param["deleteOldOnSave"]) == 1:
+            returnList.append(["channelOld",param["sRef"],""])
+            returnList.append(["beginOld",param["begin"],""])
+            returnList.append(["endOld",param["end"],""])
+        return returnList
+            
+    
     def fillValue(self,param):
         print "fillValue: ",param
         return [["",param,""]]
 
     def getText(self):
-        print self.result
         (result,text) = self.result
         return text
     
@@ -283,7 +307,6 @@ class WAPfunctions( Source):
         return item
 
     def getList(self):
-        print self.result
         return self.result
 
     ## part for listfiller requests

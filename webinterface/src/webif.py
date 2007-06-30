@@ -197,6 +197,8 @@ class WAPWebScreen(WebScreen):
 
 		self["WAPFillOptionListRepeated"] = WAPfunctions(session,func = WAPfunctions.REPEATED)
 		self["WAPServiceList"] = WAPfunctions(session, func = WAPfunctions.SERVICELIST)
+
+		self["WAPdeleteOldOnSave"] = WAPfunctions(session,func = WAPfunctions.DELETEOLD)
 	
 class StreamingWebScreen(WebScreen):
 	def __init__(self, session,request):

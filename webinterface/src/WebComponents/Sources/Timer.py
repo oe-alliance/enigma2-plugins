@@ -76,7 +76,7 @@ class Timer( Source):
             print "timer_list ", self.recordtimer.timer_list
             print "processed_timers", self.recordtimer.processed_timers
             for x in self.recordtimer.timer_list + self.recordtimer.processed_timers:
-                print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (x.begin, x.end, x.service_ref)
+                #print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (x.begin, x.end, x.service_ref)
                 if str(x.service_ref) == str(serviceref) and float(x.begin) == begin and float(x.end) == end:
 	        	          toDelete = x
         except:
@@ -147,6 +147,9 @@ class Timer( Source):
         elif param['command'] == "del":
             del param['command']
             return self.delTimer(param)
+        elif param['command'] == "change":
+            del param['command']
+            return self.changeTimer(param)
         else:
             return False,"command missing"
     
@@ -375,10 +378,11 @@ class Timer( Source):
                 
             toChange = None
             try:
+                #print "beginOld(%s), endOld(%s), channelOld(%s)" % (beginOld, endOld, channelOld)
                 for x in self.recordtimer.timer_list + self.recordtimer.processed_timers:
-                    #print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (x.begin, x.end, x.service_ref)
-                    #print "beginOld(%s), endOld(%s), channelOld(%s)" % (beginOld, endOld, channelOld)
+                    #print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (float(x.begin), float(x.end), x.service_ref)
                     if str(x.service_ref) == str(channelOld) and float(x.begin) == beginOld and float(x.end) == endOld:
+                        #print "one found"
                         toChange = x
                         toChange.service_ref = ServiceReference(param['sRef'])
                         toChange.begin = int(begin)
@@ -397,7 +401,6 @@ class Timer( Source):
                 return False,"error searching for old Timer"            
             if toChange is None:
                 return False,"Timer not found"
-                print "Timer not found"
         else:
             return self.addTimer(param)
     
