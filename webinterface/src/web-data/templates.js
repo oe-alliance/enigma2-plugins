@@ -68,10 +68,11 @@ var	tplServiceListEPGItem  = '<div class="sListEPGTime">%(starttime)</div>\n';
 	tplServiceListEPGItem += '<div class="sListEPGDuration">%(length) Min.</div>\n';
 
 // MovieList Templates
-var tplMovieListHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
+var tplMovieListHeader  = '<div class="BodyContentChannellist">\n';
+	tplMovieListHeader += '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplMovieListHeader += '<thead class="fixedHeader">\n';
 	tplMovieListHeader += '<tr>\n';
-	tplMovieListHeader += '<th><div class="sListHeader" style="color: #000000;">MovieList</div>\n';
+	tplMovieListHeader += '<th colspan="2"><div class="sListHeader">MovieList</div>\n';
 	tplMovieListHeader += '<div class="sListSearch">';
 	tplMovieListHeader += '<form onSubmit="loadMovieList(document.getElementById(\'filterMovietag\').value); return false;">';
 	tplMovieListHeader += '<input type="text" id="filterMovietag" onfocus="this.value=\'\'" value="filter by Tag"/>';
@@ -91,13 +92,14 @@ var tplMovieListItem  = '<tr>\n';
 	tplMovieListItem += '</div>\n';
 	tplMovieListItem += '</tr>\n';
 	
-var tplMovieListFooter = "</tbody></table>\n";
+var tplMovieListFooter = "</tbody></table>\n</div>\n";
 
 // TimerList Templates
-var tplTimerListHeader  = '<table border="0" height="100%" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
+var tplTimerListHeader  = '<div class="BodyContentChannellist">\n';
+	tplTimerListHeader += '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplTimerListHeader += '<thead class="fixedHeader">\n';
 	tplTimerListHeader += '<tr>\n';
-	tplTimerListHeader += '<th><div class="sListHeader" style="color: #000000;">TimerList</div>\n';
+	tplTimerListHeader += '<th colspan="7"><div class="sListHeader">TimerList</div>\n';
 	tplTimerListHeader += '<div class="sListSearch">';
 	tplTimerListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplTimerListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
@@ -129,9 +131,9 @@ var tplTimerListItem  = '<tr width="99%">\n';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(servicename)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a></div></td>\n';
 	tplTimerListItem += '</tr>\n';
 
-var tplTimerListFooter  = '<tr><button onclick="writeTimerListNow()">write TimerList to memory now</button></tr>\n';
-	tplTimerListFooter += '<tr><button onclick="cleanTimerListNow()">clean List from non-aktiv entries</button></tr>\n';
-    tplTimerListFooter += '</tbody></table>\n';
+var tplTimerListFooter  = '<tr><td colspan="7"><button onclick="writeTimerListNow()">write TimerList to memory now</button></td></tr>\n';
+	tplTimerListFooter += '<tr><td colspan="7"><button onclick="cleanTimerListNow()">clean List from non-aktiv entries</button></td></tr>\n';
+    tplTimerListFooter += '</tbody></table>\n</div>\n';
 
 var tplRecordingFooter   = '<hr><br><table style="text-align: left; width: 100%; height: 178px;" border="0" cellpadding="2" cellspacing="2"><tbody>';
     tplRecordingFooter  += '<tr><td style="vertical-align: top;">';
@@ -457,7 +459,7 @@ var tplRCGrab  = '<IMG id="grabPageIMG" src=""/ height="400" alt="loading image"
 var tplMediaPlayerHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplMediaPlayerHeader += '<thead class="fixedHeader">\n';
 	tplMediaPlayerHeader += '<tr>\n';
-	tplMediaPlayerHeader += '<th><div class="sListHeader" style="color: #000000;">MediaPlayer</div>\n';
+	tplMediaPlayerHeader += '<th><div class="sListHeader">MediaPlayer</div>\n';
 	tplMediaPlayerHeader += '<div class="sListSearch">';
 	tplMediaPlayerHeader += '<form onSubmit="loadMovieList(document.getElementById(\'filterMovietag\').value); return false;">';
 	tplMediaPlayerHeader += '<input type="text" id="filterMovietag" onfocus="this.value=\'\'" value="filter by Tag"/>';
