@@ -1025,3 +1025,49 @@ function startDebugWindow() {
 function restartTwisted() {
 	new Ajax.Request( "/web/restarttwisted", { asynchronous: true, method: "get" })
 }
+//MediaPlayer
+function loadMediaPlayer(directory){
+	debug("loading loadMediaPlayer");
+	doRequest(url_mediaplayerlist+directory, incomingMediaPlayer);	
+}
+function incomingMediaPlayer(request){
+	if(request.readyState == 4){
+		var files = new FileList(getXML(request)).getArray();
+		debug("have "+files.length+" movies");
+		listerHtml 	= tplMediaPlayerHeader;		
+		for ( var i = 0; i <files.length; i++){
+			var file = files[i];
+			
+			var exec = 'loadMediaPlayer';
+			var exec_description = 'change to directory' + file.getServiceReference();
+			var color = '000000';
+			if (file.getIsDirectory() == "False") {
+				exec = 'playFile';
+				exec_description = 'play file';
+				color = '00BCBC';
+			}
+			var namespace = { 	
+				'servicereference': file.getServiceReference()
+				,'exec': exec
+				,'exec_description': exec_description
+				,'color': color
+				,'root': file.getRoot()
+				,'filename': file.getFileName()
+				,'fullpath': file.getFullPath()
+			};
+			listerHtml += tplMediaPlayerItemHead;
+			listerHtml += RND(tplMediaPlayerItemBody, namespace);
+			if (file.getIsDirectory() == "False") {
+				listerHtml += RND(tplMediaPlayerItemIMG, namespace);
+			}
+			listerHtml += tplMediaPlayerItemFooter;
+		}
+		listerHtml += tplMediaPlayerFooter;
+		$('BodyContentChannellist').innerHTML = listerHtml;
+		setBodyMainContent('BodyContentChannellist');
+	}		
+}
+function playFile(file,root) {
+	debug("loading playFile");
+	doRequest(url_mediaplayerplay+file+"&root="+root, incomingMediaPlayer);
+}

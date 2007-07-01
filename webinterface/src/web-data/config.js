@@ -28,6 +28,9 @@ var url_parentcontrol= "/web/parentcontrollist";
 
 var url_moviefiledelete= "/web/moviefiledelete"; // plus serviceref,eventid
 
+var url_mediaplayerlist= "/web/mediaplayerlist?path="; // plus full qualified path
+var url_mediaplayerplay= "/web/mediaplayerplay?file="; // plus file-serviceref
+
 var url_timerlist= "/web/timerlist";
 var url_recordnow= "/web/recordnow";
 var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent

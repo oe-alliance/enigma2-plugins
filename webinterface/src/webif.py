@@ -33,6 +33,7 @@ from WebComponents.Sources.About import About
 from WebComponents.Sources.RequestData import RequestData
 from WebComponents.Sources.AudioTracks import AudioTracks
 from WebComponents.Sources.WAPfunctions import WAPfunctions
+from WebComponents.Sources.MP import MP
 
 from Components.Sources.FrontendStatus import FrontendStatus
 
@@ -146,6 +147,12 @@ class MovieWebScreen(WebScreen):
 		self["MovieFileDel"] = Movie(session,movielist,func = Movie.DEL)
 		self["MovieTags"] = Movie(session,movielist,func = Movie.TAGS)
 
+class MediaPlayerWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["FileList"] = MP(session,func = MP.LIST)
+		self["PlayFile"] = MP(session,func = MP.PLAY)
+		
 		
 class TimerWebScreen(WebScreen):
 	def __init__(self, session,request):

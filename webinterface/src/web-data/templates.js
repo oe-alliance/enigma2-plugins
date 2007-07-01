@@ -345,3 +345,26 @@ var tplExtraHiddenFunctions  = '<ul style="list-style-type:disc">';
 	tplExtraHiddenFunctions += '</ul>'
 	
 var tplRCGrab  = '<IMG id="grabPageIMG" src=""/ height="400" alt="loading image">';
+
+var tplMediaPlayerHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
+	tplMediaPlayerHeader += '<thead class="fixedHeader">\n';
+	tplMediaPlayerHeader += '<tr>\n';
+	tplMediaPlayerHeader += '<th><div class="sListHeader" style="color: #000000;">MediaPlayer</div>\n';
+	tplMediaPlayerHeader += '<div class="sListSearch">';
+	tplMediaPlayerHeader += '<form onSubmit="loadMovieList(document.getElementById(\'filterMovietag\').value); return false;">';
+	tplMediaPlayerHeader += '<input type="text" id="filterMovietag" onfocus="this.value=\'\'" value="filter by Tag"/>';
+	tplMediaPlayerHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
+	tplMediaPlayerHeader += '</form></div></th>';
+	tplMediaPlayerHeader += '</tr>\n';
+	tplMediaPlayerHeader += '</thead>\n';
+	tplMediaPlayerHeader += '<tbody class="scrollContent">\n';
+
+var tplMediaPlayerItemHead = '<tr>\n';
+var tplMediaPlayerItemBody = '<td><div style="color: #%(color);" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" class="sListSName" title="%(servicereference)">%(fullpath)</div>';
+var	tplMediaPlayerItemIMG  = '<div class="sListExt">\n';
+	tplMediaPlayerItemIMG += '<img src="/webdata/gfx/screen.png" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" title="%(exec_description)" border="0">\n';
+	tplMediaPlayerItemIMG += '<a target="_blank" href="/movie/?file=%(filename)"><img src="/webdata/gfx/save.png" title="download File" border="0"></a>\n';
+	tplMediaPlayerItemIMG += '</div>\n';
+var tplMediaPlayerItemFooter = '</tr>\n';
+
+var tplMediaPlayerFooter = "</tbody></table>\n";

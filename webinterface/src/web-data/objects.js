@@ -576,3 +576,65 @@ function Setting(xml){
 	}
 	
 }
+//START class FileList
+function FileList(xml){
+	// parsing values from xml-element
+	debug('init FileList'+xml);
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2filelist").item(0).getElementsByTagName("e2file");
+	} catch (e) {
+		debug("FileList parsing Error");
+	}
+	this.getArray = function(){
+		var listxy = new Array();
+		for(var i=0;i<this.xmlitems.length;i++){
+			//debug("parsing File "+i+" of "+this.xmlitems.length);
+			var xv = new File(this.xmlitems.item(i));
+			listxy.push(xv);			
+		}
+		return listxy;
+	}
+}
+//END class FileList
+
+//START class File
+function File(xml){	
+	// parsing values from xml-element
+	//debug('init Movie');
+	try{
+		this.servicereference = xml.getElementsByTagName('e2servicereference').item(0).firstChild.data;
+	} catch (e) {
+		this.servicereference = "N/A";
+	}
+	this.getServiceReference = function(){
+		return this.servicereference;
+	}
+	this.getFileName = function(){
+		return this.servicereference.replace(/.*:\//,'/');
+	}
+	this.getFullPath = function(){
+		var pattern = '/.*'+this.root+'/';
+		if(this.isdirectory == "True") {
+			return this.servicereference;
+		} else {
+			return this.servicereference.replace(/.*\//,'');
+		}
+	}
+	try{
+		this.isdirectory = xml.getElementsByTagName('e2isdirectory').item(0).firstChild.data;
+	} catch (e) {
+		this.isdirectory = "N/A";
+	}
+	this.getIsDirectory = function(){
+		return this.isdirectory;
+	}
+	try{
+		this.root = xml.getElementsByTagName('e2root').item(0).firstChild.data;
+	} catch (e) {
+		this.root = "N/A";
+	}
+	this.getRoot = function(){
+		return this.root;
+	}
+}	
+//END class File

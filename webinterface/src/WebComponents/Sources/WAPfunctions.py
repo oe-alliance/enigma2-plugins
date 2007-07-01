@@ -309,11 +309,5 @@ class WAPfunctions( Source):
     def getList(self):
         return self.result
 
-    ## part for listfiller requests
-    def command(self):
-        timerlist = []
-
-        return timerlist
-    
     text = property(getText)
     list = property(getList)
