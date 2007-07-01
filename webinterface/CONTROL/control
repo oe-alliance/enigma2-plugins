@@ -1,9 +1,9 @@
 Package: enigma2-plugin-extensions-webinterface
-Version: 0.5.2beta
+Version: 0.95.1
 Description: Enigma2 Plugin: extensions-webinterface
 Section: base
 Priority: optional
 Maintainer: Felix Domke <tmbinc@elitedvb.net>
 Architecture: noarch
 Homepage: unknown
-Depends: enigma2(>20070430), twisted-web2
+Depends: enigma2(>20070601), twisted-web2
