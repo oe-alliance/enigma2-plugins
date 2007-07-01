@@ -1,5 +1,5 @@
 <e2:screen name="UpdateWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-																														
+<e2currentserviceinformation>																														
 &lt;e2service>
 	&lt;e2servicereference><e2:element source="CurrentService"><e2:convert type="ServiceName" filter="xml">Reference</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>&lt;/e2servicereference>
 	&lt;e2servicename><e2:element source="CurrentService"><e2:convert type="ServiceName" filter="xml">Name</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>&lt;/e2servicename>
