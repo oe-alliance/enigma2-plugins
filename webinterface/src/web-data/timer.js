@@ -75,8 +75,8 @@ function incomingTimerList(request){
 			listerHtml += RND(tplTimerListItem, namespace);
 		}
 		listerHtml += tplTimerListFooter;
-		$('BodyContentChannellist').innerHTML = listerHtml;
-		setBodyMainContent('BodyContentChannellist');
+		$('BodyContent').innerHTML = listerHtml;
+		setBodyMainContent('BodyContent');
 	}
 }
 function repeatedReadable(num) {
@@ -359,7 +359,7 @@ function loadTimerForm(){
 				'eventID': addTimerEditFormObject["eventID"]
 		};
 	var listerHtml = RND(tplAddTimerForm, namespace);
-	$('BodyContentChannellist').innerHTML = listerHtml;
+	$('BodyContent').innerHTML = listerHtml;
 
 	// Empty some stuff, but keep others to have the performance
 	var tmp1 = addTimerEditFormObject["RadioList"];

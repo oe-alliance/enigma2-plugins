@@ -52,18 +52,26 @@ class About( Source):
         #Get Tuner Info
         niminfo = ""
         for nim in nimmanager.nimList():
-            niminfo += "<e2nim>"+nim+"</e2nim>"
+            info = nim.split(":")
+            
+            niminfo += "\n\t\t\t<e2nim>\n"
+            niminfo += "\t\t\t\t<name>%s</name>\n" %(info[0])
+            niminfo += "\t\t\t\t<type>%s</type>\n" %(info[1])
+            niminfo += "\t\t\t</e2nim>"
+            
         list.append(niminfo)
 
         #Get HDD Info
         hdddata = Harddisk(0)
         if hdddata.model() != "":
-            hddinfo = "<model>"+hdddata.model()+"</model>"
-            hddinfo += "<capacity>"+hdddata.capacity()+"</capacity>"
-            hddinfo += "<free>"+str(hdddata.free())+" MB</free>"
+            hddinfo = "\n\t\t\t<model>"+hdddata.model()+"</model>\n"
+            hddinfo += "\t\t\t<capacity>"+hdddata.capacity()+"</capacity>\n"
+            hddinfo += "\t\t\t<free>"+str(hdddata.free())+" MB</free>"
             
         else:            
-            hddinfo = "no harddisc detected"
+            hddinfo = "\n\t\t\t<model>N/A</model>\n"
+            hddinfo += "\t\t\t<capacity>-</capacity>\n"
+            hddinfo += "\t\t\t<free>-</free>"
         list.append(hddinfo)
 
         #Get Service Info

@@ -559,8 +559,8 @@ function incomingChannellist(request){
 			listerHtml += RND(tplServiceListItem, namespace);
 		}		
 		listerHtml += tplServiceListFooter;
-		$('BodyContentChannellist').innerHTML = listerHtml;
-		setBodyMainContent('BodyContentChannellist');
+		$('BodyContent').innerHTML = listerHtml;
+		setBodyMainContent('BodyContent');
 		loadServiceEPGNowNext(servicereftoloadepgnow);
 		debug("incomingChannellist " + typeof(loadedChannellist[servicereftoloadepgnow]));
 	}
@@ -591,8 +591,8 @@ function incomingMovieList(request){
 			listerHtml += RND(tplMovieListItem, namespace);
 		}
 		listerHtml += tplMovieListFooter;
-		$('BodyContentChannellist').innerHTML = listerHtml;
-		setBodyMainContent('BodyContentChannellist');
+		$('BodyContent').innerHTML = listerHtml;
+		setBodyMainContent('BodyContent');
 		
 	}		
 }
@@ -628,7 +628,7 @@ function incomingDelMovieFileResult(request) {
 
 // send Messages
 function showMessageSendForm(){
-		$('BodyContentChannellist').innerHTML = tplMessageSendForm;
+		$('BodyContent').innerHTML = tplMessageSendForm;
 }
 function sendMessage(messagetext,messagetype,messagetimeout){
 	if(!messagetext){
@@ -659,7 +659,7 @@ function incomingMessageResult(request){
 
 // PowerState Code
 function showPowerStateSendForm(){
-		$('BodyContentChannellist').innerHTML = tplPowerStateSendForm;
+		$('BodyContent').innerHTML = tplPowerStateSendForm;
 }
 function sendPowerState(newState){
 	doRequest(url_powerstate+'?newstate='+newState, incomingPowerStateResult, false);
@@ -671,9 +671,9 @@ function incomingPowerStateResult(request){
 		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
 		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
 		var tplPowerStateSendForm2 = '<h1>PowerState is changing to:'+resulttext+ '</h1>' + tplPowerStateSendForm;
-		$('BodyContentChannellist').innerHTML = tplPowerStateSendForm2;
+		$('BodyContent').innerHTML = tplPowerStateSendForm2;
 	} else {
-		$('BodyContentChannellist').innerHTML = "<h1>some unknown error</h1>" + tplPasswordSendForm;
+		$('BodyContent').innerHTML = "<h1>some unknown error</h1>" + tplPasswordSendForm;
 	}
 }
 
@@ -690,8 +690,8 @@ function sendRemoteControlRequest(command){
 	}
 }
 function openGrabPicture() {
-	if($('BodyContentChannellist').innerHTML != tplRCGrab) {
-		$('BodyContentChannellist').innerHTML = tplRCGrab;
+	if($('BodyContent').innerHTML != tplRCGrab) {
+		$('BodyContent').innerHTML = tplRCGrab;
 	}
 	debug("openGrabPicture");
 	var buffer = new Image();
@@ -703,7 +703,7 @@ function openGrabPicture() {
 	downloadStart = new Date().getTime();
 	buffer.src = '/grab?' + downloadStart;
 	$('grabPageIMG').height(400);
-	tplRCGrab = $('BodyContentChannellist').innerHTML;
+	tplRCGrab = $('BodyContent').innerHTML;
 }
 function incomingRemoteControlResult(request){
 	if(request.readyState == 4){
@@ -905,10 +905,10 @@ function inserteSizes() {
 	 * 1600x1280
 	if(screenH == 800) {
 		debug("size 1");
-		$("BodyContentChannellist").style.height = '20%';
+		$("BodyContent").style.height = '20%';
 	} else if(screenH == 1024) {
 		debug("1024")
-		$("BodyContentChannellist").style.height = '760px';
+		$("BodyContent").style.height = '760px';
 		
 	} else {
 		alert("unsupported screensize");
@@ -945,19 +945,23 @@ function incomingAbout(request) {
 				var tunerinfo = "";
 				
 				var nims = xml.getElementsByTagName('e2tunerinfo').item(0).getElementsByTagName("e2nim");
+				debug("nims: "+nims.length);
 				for(var i=0;i< nims.length;i++){
-					tunerinfo += nims.item(i).firstChild.data+"<br>";
+					
+					name = nims.item(i).getElementsByTagName("name").item(0).firstChild.data;
+					type = nims.item(i).getElementsByTagName("type").item(0).firstChild.data;
+					debug(name);
+					debug(type);
+					var ns = { 'name' : name, 'type' : type};
+					tunerinfo += RND(tplAboutTuner, ns);
+					
 				}
 				
 				var hdddata = xml.getElementsByTagName('e2hddinfo').item(0);
-				var hddinfo = "";
-				if(hdddata.firstChild.data != "None"){
-					hddinfo += "Model: "+hdddata.getElementsByTagName("model").item(0).firstChild.data;
-					hddinfo += "<br>Capacity: "+hdddata.getElementsByTagName("capacity").item(0).firstChild.data;
-					hddinfo += "<br>Free: "+hdddata.getElementsByTagName("free").item(0).firstChild.data;
-				}else{
-					hddinfo +="no Harddisc";
-				}
+				
+				var hddmodel 	= hdddata.getElementsByTagName("model").item(0).firstChild.data;
+				var hddcapacity = hdddata.getElementsByTagName("capacity").item(0).firstChild.data;
+				var hddfree		= hdddata.getElementsByTagName("free").item(0).firstChild.data;
 
 				var namespace = {
 					'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data
@@ -971,7 +975,9 @@ function incomingAbout(request) {
 					,'fpVersion': fptext
 					,'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data
 					,'tunerInfo': tunerinfo
-					,'hddInfo': hddinfo
+					,'hddmodel': hddmodel
+					,'hddcapacity': hddcapacity
+					,'hddfree': hddfree
 					,'serviceName': xml.getElementsByTagName('e2servicename').item(0).firstChild.data
 					,'serviceProvider': xml.getElementsByTagName('e2serviceprovider').item(0).firstChild.data
 					,'serviceAspect': xml.getElementsByTagName('e2serviceaspect').item(0).firstChild.data
@@ -993,8 +999,8 @@ function incomingAbout(request) {
 					,'sid': xml.getElementsByTagName('e2sid').item(0).firstChild.data
 					 ,'sidh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2sid').item(0).firstChild.data),16)+" "
 				  };				  
-				$('BodyContentChannellist').innerHTML = RND(tplAbout, namespace);
-				setBodyMainContent('BodyContentChannellist');
+				$('BodyContent').innerHTML = RND(tplAbout, namespace);
+				setBodyMainContent('BodyContent');
 				
 			} catch (e) {
 				debug("About parsing Error" + e);

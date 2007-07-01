@@ -91,9 +91,9 @@ class Wlan:
 				
 				print result.quality.getSignallevel()
 				
-				if result.quality.sl is 0:
+				if result.quality.sl is 0 and len(extra) > 0:
 					begin = extra[0].find('SignalStrength=')+15
-										
+									
 					done = False
 					end = begin+1
 					
@@ -177,10 +177,10 @@ class WlanList(HTMLComponent, GUIComponent):
 		
 		e = encrypted and _("Yes") or _("No")
 		res.append( MultiContentEntryText(pos=(0, 0), size=(470, 35), font=0, flags=RT_HALIGN_LEFT, text=essid) )
-		res.append( MultiContentEntryText(pos=(480, 0), size=(90, 35), font=0, flags=RT_HALIGN_RIGHT, text=signal+"%") )
-		res.append( MultiContentEntryText(pos=(0, 40), size=(180, 20), font=1, flags=RT_HALIGN_LEFT, text=_("Max. Bitrate: ")+maxrate) )
-		res.append( MultiContentEntryText(pos=(190, 40), size=(180, 20), font=1, flags=RT_HALIGN_CENTER, text=_("Encrypted: ")+e) )
-		res.append( MultiContentEntryText(pos=(380, 40), size=(190, 20), font=1, flags=RT_HALIGN_RIGHT, text=_("Interface: ")+iface) )
+		res.append( MultiContentEntryText(pos=(480, 0), size=(90, 35), font=0, flags=RT_HALIGN_RIGHT, text="%s%" %signal))
+		res.append( MultiContentEntryText(pos=(0, 40), size=(180, 20), font=1, flags=RT_HALIGN_LEFT, text=_("Max. Bitrate: %s") %maxrate ))
+		res.append( MultiContentEntryText(pos=(190, 40), size=(180, 20), font=1, flags=RT_HALIGN_CENTER, text=_("Encrypted: %s") %e ))
+		res.append( MultiContentEntryText(pos=(380, 40), size=(190, 20), font=1, flags=RT_HALIGN_RIGHT, text=_("Interface: %s") %iface ))
 		return res
 		
 			

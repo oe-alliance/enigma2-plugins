@@ -27,12 +27,18 @@ Make the ServiceList Table scrollable**************************
 ***************************************************************/
 
 /* define height and width of scrollable area. Add 16px to width for scrollbar          */
-div.BodyContentChannellist {
-	clear: both;
+div.BodyContent {
 	border: 1px solid #000;
-	height: 450px;
+	height: 455px;
 	overflow: auto;
 	margin: 0px 9px 0px;
+	font-size: 12px;
+}
+
+div.BodyContentChannellist {
+	clear: both;
+	height: 450px;
+	overflow: auto;
 /*	width: 780px; */
 }
 
@@ -50,6 +56,7 @@ html>body div.BodyContentChannellist {
 div.BodyContentChannellist table {
 	float: left;
 	width: 760px;
+	height: 450px;
 }
 
 /* define width of table. Add 16px to width for scrollbar.           */
@@ -473,4 +480,55 @@ a.sListSLink:hover{
 #TimerColor3 {
 	color: #00BCBC;
 	background-color: #DDD;
+}
+
+.pageHeader {
+	width:100%;
+	background-color: #0066CC;
+	color: #FFF;
+	font-weight:bold;
+}
+
+.aboutHeader {
+	width:100%;
+	color:#444444;
+	font-weight:bold;
+	background-color:#DDEEFF;
+}
+
+.about {
+	border: 1px solid #AAA;
+	width: 100%;
+}
+
+.fullwidth {
+	width: 100%;
+}
+
+.aboutSection{
+	width:100%;
+}
+
+.aboutSectionLeft{
+	width:50%;
+	vertical-align: top;
+}
+
+.aboutSectionRight{
+	width:50%;
+	vertical-align: top;
+}
+
+.aboutElement{
+	float: none;
+}
+
+.aboutElementLeft{
+	font-weight:bold;
+	width: 45%;
+	text-align: left;
+}
+
+.aboutElementRight{
+	width: 55%;
 }
