@@ -21,6 +21,7 @@ class Toplevel(resource.Resource):
         self.putChild("movie",MovieStreamer())
         self.putChild("grab",GrabResource())
         self.putChild("ipkg",IPKGResource())
+        self.putChild("play",ServiceplayerResource(self.session))
         self.putChild("wap",RedirectorResource("/web/wap/"))# shorten and simplify url to wap-pages
         
         if config.plugins.Webinterface.includehdd.value:
