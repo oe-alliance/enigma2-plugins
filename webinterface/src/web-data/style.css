@@ -499,6 +499,7 @@ a.sListSLink:hover{
 .about {
 	border: 1px solid #AAA;
 	width: 100%;
+	font-size: 12px;
 }
 
 .fullwidth {
@@ -507,6 +508,7 @@ a.sListSLink:hover{
 
 .aboutSection{
 	width:100%;
+	margin: 0 0 0 0;
 }
 
 .aboutSectionLeft{
@@ -525,10 +527,10 @@ a.sListSLink:hover{
 
 .aboutElementLeft{
 	font-weight:bold;
-	width: 45%;
+	width: 50%;
 	text-align: left;
 }
 
 .aboutElementRight{
-	width: 55%;
+	width: 50%;
 }
