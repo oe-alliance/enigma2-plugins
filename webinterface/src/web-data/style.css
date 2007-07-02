@@ -1,3 +1,7 @@
+button, span { 
+	behavior: url(webdata/IEFixes.htc);
+}
+
 body { 	
 	text-align:left;
 	vertical-align: top;
@@ -20,6 +24,15 @@ hr{ border: 1px solid #BBB;
 form{
 	margin: 0px;
 	padding: 0px;
+}
+
+#searchText{
+	border: 1px solid #000;
+	margin: 0 0 0 0;
+}
+#filterMovietag{
+	border: 1px solid #000;
+	margin: 0 0 0 0;
 }
 
 /**************************************************************
@@ -376,6 +389,7 @@ normal stylesheet-stuff******************
 	float:left;
 	width:50%;
 	text-align: right;
+	margin: 0 0 0 0;
 }
 form.sListSearch{
 	text-align: right;
@@ -387,14 +401,14 @@ form.sListSearch{
 	width:661px;
 }
 
-a.sListSLink{
+span.sListSLink{
 	display: block;
 	width: 656px;
 	height: 100%;
 	text-decoration: none;
 }
 
-a.sListSLink:hover{
+span.sListSLink:hover, span.sListSLink.hover{
 	background-color: #DDD;
 }
 
@@ -533,4 +547,15 @@ a.sListSLink:hover{
 
 .aboutElementRight{
 	width: 50%;
+}
+
+button {
+	background-image: url('gfx/button.png');
+	height: 30px;
+	width: 150px;
+	display: block;
+	border: 1px solid #AAA;
+}
+button:hover, button.hover {
+	border: 1px solid #000;
 }

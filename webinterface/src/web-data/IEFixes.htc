@@ -1,0 +1,21 @@
+<PUBLIC:ATTACH EVENT="onmouseover" ONEVENT="DoHover()" />
+<PUBLIC:ATTACH EVENT="onmouseout"  ONEVENT="RestoreHover()" />
+<PUBLIC:ATTACH EVENT="onmousedown" ONEVENT="DoActive()" />
+<PUBLIC:ATTACH EVENT="onmouseup"   ONEVENT="RestoreActive()" />
+<SCRIPT LANGUAGE="JScript">
+function DoHover()
+  { element.className += ' hover';
+  }
+
+function DoActive()
+  { element.className += ' active';
+  }
+
+function RestoreHover()
+  { element.className = element.className.replace(/\bhover\b/,'');
+  }
+
+function RestoreActive()
+  { element.className = element.className.replace(/\bactive\b/,'');
+  }
+</SCRIPT>

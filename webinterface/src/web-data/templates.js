@@ -52,7 +52,7 @@ var tplServiceListHeader  = '<div class="BodyContentChannellist">\n';
 	tplServiceListHeader += '<input type="hidden" id="mainServiceRef" name="mainServiceRef" value="%(mainServiceRef)">\n';
 
 var tplServiceListItem  = '<tr id="%(servicereference)extend">\n';
-	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><a id="%(servicereference)" onclick="zap(this.id);" class="sListSLink">%(servicename)</a></div>';
+	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><span id="%(servicereference)" onclick="zap(this.id);" class="sListSLink">%(servicename)</span></div>';
 	tplServiceListItem += '<div class="sListExt"><a onclick="loadEPGByServiceReference(this.id)" id="%(servicereference)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
 	tplServiceListItem += '<a target="_blank" href="/web/stream.m3u?ref=%(servicereference)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
 	tplServiceListItem += '</tr>\n';
@@ -131,8 +131,8 @@ var tplTimerListItem  = '<tr width="99%">\n';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(servicename)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a></div></td>\n';
 	tplTimerListItem += '</tr>\n';
 
-var tplTimerListFooter  = '<tr><td colspan="7"><button onclick="writeTimerListNow()">write TimerList to memory now</button></td></tr>\n';
-	tplTimerListFooter += '<tr><td colspan="7"><button onclick="cleanTimerListNow()">clean List from non-aktiv entries</button></td></tr>\n';
+var tplTimerListFooter  = '<tr><td colspan="7"><button onclick="writeTimerListNow()">Write To Memory</button></td></tr>\n';
+	tplTimerListFooter += '<tr><td colspan="7"><button onclick="cleanTimerListNow()">Cleanup</button></td></tr>\n';
     tplTimerListFooter += '</tbody></table>\n</div>\n';
 
 var tplRecordingFooter   = '<hr><br><table style="text-align: left; width: 100%; height: 178px;" border="0" cellpadding="2" cellspacing="2"><tbody>';
@@ -205,14 +205,16 @@ var tplMessageSendForm = ""
 	tplMessageSendForm += "</table></form>\n";
 
 var tplPowerStateSendForm = '';
-    tplPowerStateSendForm += '<hr>';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(1)">deepstandby Dreambox</button></center></p>';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(2)">reboot Dreambox</button></center></p>';
-    tplPowerStateSendForm += '<hr>';
-    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(3)">restart Enigma2</button></center></p>';
-//Something is not working here, so I will do a quickhack
-//    tplPowerStateSendForm += '<p><center><button onclick="sendPowerState(4)">standby Enigma2</button></center></p>';
-	tplPowerStateSendForm += '<p><center><button onclick="sendRemoteControlRequest(116)">toggle standby Enigma2</button></center></p>';
+var tplPowerStateSendForm  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n';
+	tplPowerStateSendForm += '<tr>\n';
+	tplPowerStateSendForm += '<th class="pageHeader">Powercontrol</th>\n';
+	tplPowerStateSendForm += '</tr>\n';
+	tplPowerStateSendForm += '<table style="width: 100%; text-align: center">\n';
+	tplPowerStateSendForm += '<tr><td><center><button onclick="sendRemoteControlRequest(116)">Toggle Standby</button></center></td></tr>\n';
+    tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(1)">Deepstandby</button></center></td></tr>\n';
+    tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(2)">Reboot</button></center></td></tr>\n';
+	tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(3)">Restart Enigma2</button></center></td></tr>\n';
+	tplPowerStateSendForm += '</table>\n</table>\n';
 
 // Template for the RemoteControl Window
 var tplRemoteControlForm = '<center><input type="checkbox" id="getScreen" name="getScreen" checked>&nbsp;get Screen</center><br>';
