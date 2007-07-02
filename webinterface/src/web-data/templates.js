@@ -191,8 +191,12 @@ var tplSignalPanel  = '<table width="100%" id="SignalPanelTable">';
 	
 
 // Message send
-var tplMessageSendForm = ""
-	tplMessageSendForm += '<table id="MessageSendForm" width="100%" border="0" cellspacing="1" cellpadding="0" border="0">';
+var tplMessageSendForm  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n';
+	tplMessageSendForm += '<tr>\n';
+	tplMessageSendForm += '<th class="pageHeader">Send Message</th>\n';
+	tplMessageSendForm += '</tr>\n';
+	tplMessageSendForm += '<tr><td>\n';
+	tplMessageSendForm += '<table style="width: 100%;">\n';
 	tplMessageSendForm += '<tr><td>Text</td><td><input type="text" id="MessageSendFormText" value=""></td></tr>\n';
 	tplMessageSendForm += '<tr><td>Timeout</td><td><input type="text" id="MessageSendFormTimeout" value=""></td></tr>\n';
 	tplMessageSendForm += '<tr><td>Typ</td><td><select id="MessageSendFormType">';
@@ -202,19 +206,19 @@ var tplMessageSendForm = ""
 	tplMessageSendForm += '<option value="3">Error</option>';
 	tplMessageSendForm += '</select></td></tr>\n';
 	tplMessageSendForm += '<tr><td colspan="2"><button onclick="sendMessage()">Send Message</button></td></tr>\n';
-	tplMessageSendForm += "</table></form>\n";
+	tplMessageSendForm += "</tr></td></table></form>\n";
 
-var tplPowerStateSendForm = '';
 var tplPowerStateSendForm  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n';
 	tplPowerStateSendForm += '<tr>\n';
 	tplPowerStateSendForm += '<th class="pageHeader">Powercontrol</th>\n';
 	tplPowerStateSendForm += '</tr>\n';
+	tplPowerStateSendForm += '<tr><td>\n';
 	tplPowerStateSendForm += '<table style="width: 100%; text-align: center">\n';
 	tplPowerStateSendForm += '<tr><td><center><button onclick="sendRemoteControlRequest(116)">Toggle Standby</button></center></td></tr>\n';
     tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(1)">Deepstandby</button></center></td></tr>\n';
     tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(2)">Reboot</button></center></td></tr>\n';
 	tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(3)">Restart Enigma2</button></center></td></tr>\n';
-	tplPowerStateSendForm += '</table>\n</table>\n';
+	tplPowerStateSendForm += '</tr></td></table>\n</table>\n';
 
 // Template for the RemoteControl Window
 var tplRemoteControlForm = '<center><input type="checkbox" id="getScreen" name="getScreen" checked>&nbsp;get Screen</center><br>';
