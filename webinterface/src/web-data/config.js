@@ -30,6 +30,7 @@ var url_moviefiledelete= "/web/moviefiledelete"; // plus serviceref,eventid
 
 var url_mediaplayerlist= "/web/mediaplayerlist?path="; // plus full qualified path
 var url_mediaplayerplay= "/web/mediaplayerplay?file="; // plus file-serviceref
+var url_mediaplayercmd= "/web/mediaplayercmd?command="; // plus command
 
 var url_timerlist= "/web/timerlist";
 var url_recordnow= "/web/recordnow";

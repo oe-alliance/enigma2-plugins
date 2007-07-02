@@ -10,6 +10,7 @@ from Components.FileList import FileList#, FileEntryComponent
 class MP( Source):
     LIST = 0
     PLAY = 1
+    COMMAND= 3
     
     def __init__(self, session,func = LIST):
         Source.__init__(self)
@@ -19,11 +20,21 @@ class MP( Source):
         self.result = [[error,error,error]]
     
     def handleCommand(self,cmd):
+        
+        from Screens.MediaPlayer import MediaPlayer
+        from Components.MediaPlayer import PlayList, PlaylistEntryComponent
+        if self.session.mediaplayer is None:
+            self.session.mediaplayer = self.session.open(MediaPlayer)
+            self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
+            self.session.mediaplayer.playlist = PlayList()
+            
         self.cmd = cmd
         if self.func is self.LIST:
             self.result = self.getFileList(cmd)
         elif self.func is self.PLAY:
             self.result = self.playFile(cmd)
+        elif self.func is self.COMMAND:
+            self.result = self.command(cmd)
            
     def getFileList(self,param):
         print "getFileList:",param
@@ -44,31 +55,33 @@ class MP( Source):
         root = param["root"]
         file = param["file"]
 
-        returnList = []
-        from Screens.MediaPlayer import MediaPlayer
-        from Components.MediaPlayer import PlayList, PlaylistEntryComponent
-        mp = self.session.open(MediaPlayer)
-     
-        #index = 0
-        #counter = -1
-        mp.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
-        #for x in mp.filelist.getFileList():
-        #    counter = counter +1
-        #    if x[0][1] == False: #isDir
-        #        if x[0][0].toString() == str(file):
-        #            index = counter
-        #        mp.playlist.addFile(x[0][0])
-        print mp.playlist
-        mp.playlist = PlayList()
-        mp.playlist.addFile(eServiceReference(file))
-        print mp.playlist
+        mp = self.session.mediaplayer
+        ref = eServiceReference(file)
+        mp.playlist.addFile(ref)
         mp.playlist.updateList()
-        mp.changeEntry(0)
-        mp.playEntry()
-        
-        returnList.append(["started","started","started"])
-        return returnList
 
+        mp.playServiceRefEntry(ref)
+        return
+        
+    def command(self,param):
+        print "command: ",param
+        param = int(param)
+        mp = self.session.mediaplayer
+        
+        if param == 0:
+            mp.previousEntry()
+        elif param == 1:
+            mp.playEntry()
+        elif param == 2:
+            mp.pauseEntry()
+        elif param == 3:
+            mp.nextEntry()
+        elif param == 4:
+            mp.stopEntry()
+        elif param == 5:
+            mp.exit()
+        
+        return
     
     def getList(self):
         return self.result

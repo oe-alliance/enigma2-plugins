@@ -3,6 +3,8 @@ Version = '$Header$';
 var doRequestMemory = new Object();
 var doRequestMemorySave = new Object();
 
+var mediaPlayerStarted = false;
+
 // Get Settings
 var settings = null;
 var parentControlList = null;
@@ -402,6 +404,10 @@ function buildServiceListEPGItem(epgevent,nownext){
 var currentBodyMainElement = null
 
 function setBodyMainContent(newelementname){
+	if(mediaPlayerStarted) {
+		mediaPlayerStarted = false;
+		sendMediaPlayer(5);
+	}
 	newelement =$(newelementname);
 	if(currentBodyMainElement != null){
 		currentBodyMainElement.style.display = "none";
@@ -1069,11 +1075,25 @@ function incomingMediaPlayer(request){
 			listerHtml += tplMediaPlayerItemFooter;
 		}
 		listerHtml += tplMediaPlayerFooter;
-		$('BodyContentChannellist').innerHTML = listerHtml;
-		setBodyMainContent('BodyContentChannellist');
+		$('BodyContent').innerHTML = listerHtml;
+		sendMediaPlayer = false;
+		setBodyMainContent('BodyContent');
+		sendMediaPlayer = true;
 	}		
 }
 function playFile(file,root) {
 	debug("loading playFile");
-	doRequest(url_mediaplayerplay+file+"&root="+root, incomingMediaPlayer);
+	mediaPlayerStarted = true;
+	new Ajax.Request( url_mediaplayerplay+file+"&root="+root, 
+							{
+								asynchronous: true,
+								method: 'get'
+							}
+						);
+}
+function sendMediaPlayer(command) {
+	debug("loading sendMediaPlayer");
+	new Ajax.Request( url_mediaplayercmd+command, {
+								asynchronous: true,
+								method: 'get' });
 }

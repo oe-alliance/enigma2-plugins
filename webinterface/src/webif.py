@@ -152,6 +152,8 @@ class MediaPlayerWebScreen(WebScreen):
 		WebScreen.__init__(self, session,request)
 		self["FileList"] = MP(session,func = MP.LIST)
 		self["PlayFile"] = MP(session,func = MP.PLAY)
+		self["Command"] = MP(session,func = MP.COMMAND)
+		
 		
 		
 class TimerWebScreen(WebScreen):

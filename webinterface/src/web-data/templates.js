@@ -459,7 +459,14 @@ var tplRCGrab  = '<IMG id="grabPageIMG" src=""/ height="400" alt="loading image"
 var tplMediaPlayerHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplMediaPlayerHeader += '<thead class="fixedHeader">\n';
 	tplMediaPlayerHeader += '<tr>\n';
-	tplMediaPlayerHeader += '<th><div class="sListHeader">MediaPlayer</div>\n';
+	tplMediaPlayerHeader += '<th><div class="sListHeader">MediaPlayer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+	tplMediaPlayerHeader += '<map name="mpcontrols">';
+	tplMediaPlayerHeader += '<area shape="circle" coords="17, 17, 14" nohref onclick="sendMediaPlayer(0)" alt="jump back">';
+	tplMediaPlayerHeader += '<area shape="circle" coords="54, 17, 14" nohref onclick="sendMediaPlayer(1)" alt="play">';
+	tplMediaPlayerHeader += '<area shape="circle" coords="88, 17, 14" nohref onclick="sendMediaPlayer(2)" alt="pause">';
+	tplMediaPlayerHeader += '<area shape="circle" coords="125, 17, 14" nohref onclick="sendMediaPlayer(3)" alt="jump forward">';
+	tplMediaPlayerHeader += '<area shape="circle" coords="161, 17, 14" nohref onclick="sendMediaPlayer(4)" alt="stop">';
+	tplMediaPlayerHeader += '</map><img src="/webdata/gfx/dvr-buttons-small-fs8.png" title="add to Timers" border="0" usemap="#mpcontrols"></div>\n';
 	tplMediaPlayerHeader += '<div class="sListSearch">';
 	tplMediaPlayerHeader += '<form onSubmit="loadMovieList(document.getElementById(\'filterMovietag\').value); return false;">';
 	tplMediaPlayerHeader += '<input type="text" id="filterMovietag" onfocus="this.value=\'\'" value="filter by Tag"/>';

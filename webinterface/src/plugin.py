@@ -46,6 +46,7 @@ def restartWebserver(session):
 	startWebserver(session)
 
 def startWebserver(session):
+	session.mediaplayer = None
 	if config.plugins.Webinterface.enable.value is not True:
 		print "not starting Werbinterface"
 		return False

@@ -1,5 +1,5 @@
 <e2:screen name="MediaPlayerWebScreen">
-	<e2:element source="PlayFile" id="root,file">
+	<e2:element source="Command" id="command">
 		<e2:convert type="web:ReturnEmptyXML" />
 	</e2:element>
 </e2:screen>
