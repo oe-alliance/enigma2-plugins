@@ -201,7 +201,7 @@ var tplMessageSendForm = ""
 	tplMessageSendForm += '<option value="2">Warning</option>';
 	tplMessageSendForm += '<option value="3">Error</option>';
 	tplMessageSendForm += '</select></td></tr>\n';
-	tplMessageSendForm += '<tr><td colspan="2"><button onclick="sendMessage()">send Message</button></td></tr>\n';
+	tplMessageSendForm += '<tr><td colspan="2"><button onclick="sendMessage()">Send Message</button></td></tr>\n';
 	tplMessageSendForm += "</table></form>\n";
 
 var tplPowerStateSendForm = '';

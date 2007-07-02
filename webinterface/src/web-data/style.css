@@ -553,9 +553,10 @@ button {
 	background-image: url('gfx/button.png');
 	height: 30px;
 	width: 150px;
-	display: block;
 	border: 1px solid #AAA;
+	font-weight:bold;
 }
+
 button:hover, button.hover {
 	border: 1px solid #000;
 }
