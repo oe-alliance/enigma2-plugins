@@ -83,7 +83,9 @@ html>body div.BodyContentChannellist table {
 /* an element that has an overflow property set, the relative value translates into fixed.    */
 /* Ex: parent element DIV with a class of tableContainer has an overflow property set to auto */
 thead.fixedHeader tr {
-	position: relative
+	position: relative;
+	height: 30px;
+	background: url(gfx/banner_30.png);	
 }
 
 /* set THEAD element to have block level attributes. All other non-IE browsers            */
@@ -94,7 +96,7 @@ html>body thead.fixedHeader tr {
 
 /* make the TH elements pretty */
 thead.fixedHeader th {
-	background: #0066CC;
+	/*background: #0066CC;*/
 	border: 0px;
 	font-weight: normal;
 	padding: 4px 3px;
@@ -188,7 +190,6 @@ normal stylesheet-stuff******************
 	font-size: 14px;
 	font-weight: bold;
 	float: left;
-	background-color: #0066CC;
 	color: #FFFFFF;
 	
 	width: 55%;
@@ -213,7 +214,6 @@ normal stylesheet-stuff******************
 	font-weight:bold;
 	
 	float:left;
-	background-color: #0066CC;
 	color: #FFFFFF;
 	
 	width:25%;
@@ -227,7 +227,6 @@ normal stylesheet-stuff******************
 	
 	float:left;
 	text-align:right;
-	background-color: #0066CC;
 	color: #FFFFFF;
 	
 	width: 11%;
@@ -241,7 +240,6 @@ normal stylesheet-stuff******************
 	
 	float:left;
 
-	background-color: #0066CC;
 	color: #FFFFFF;
 	text-align:right;
 
@@ -255,7 +253,6 @@ normal stylesheet-stuff******************
 	
 	float:left;
 
-	background-color: #0066CC;
 	color: #FFFFFF;
 	text-align:right;
 
@@ -266,7 +263,6 @@ normal stylesheet-stuff******************
 
 #RecordButton { 
 	float:left;
-	background-color: #0066CC;
 	width:20px;
 	height:20px;
 }
@@ -279,7 +275,8 @@ normal stylesheet-stuff******************
 	clear:both;
 	padding: 0 0 0;
 	margin: 0 0 0;
-	background-color: #0066CC;
+	vertical-align: middle;
+	background: url(gfx/banner.png);
 	color: #FFFFFF;
 }
 
@@ -300,7 +297,8 @@ normal stylesheet-stuff******************
 }
 
 #NavHd{
-	background-color: #0066CC;
+	background: url(gfx/banner.png);
+	/* background-color: #0066CC; */
 	color: #FFFFFF;
 	font-size:10px;
 	font-weight: bold;
@@ -391,6 +389,13 @@ normal stylesheet-stuff******************
 	text-align: right;
 	margin: 0 0 0 0;
 }
+
+.sListTh{
+	height: 30px;
+	background: url(gfx/banner_30.png);	
+	vertical-align: middle;
+}
+
 form.sListSearch{
 	text-align: right;
 }
@@ -498,7 +503,8 @@ span.sListSLink:hover, span.sListSLink.hover{
 
 .pageHeader {
 	width:100%;
-	background-color: #0066CC;
+	height: 30px;
+	background: url(gfx/banner_30.png);
 	color: #FFF;
 	font-weight:bold;
 }
