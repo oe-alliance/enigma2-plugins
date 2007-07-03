@@ -551,10 +551,9 @@ span.sListSLink:hover, span.sListSLink.hover{
 
 button {
 	background-image: url('gfx/button.png');
-	height: 30px;
-	width: 150px;
+	height: 20px;
+	width: 140px;
 	border: 1px solid #AAA;
-	font-weight:bold;
 }
 
 button:hover, button.hover {
