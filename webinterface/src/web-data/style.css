@@ -298,7 +298,6 @@ normal stylesheet-stuff******************
 
 #NavHd{
 	background: url(gfx/banner.png);
-	/* background-color: #0066CC; */
 	color: #FFFFFF;
 	font-size:10px;
 	font-weight: bold;
@@ -441,47 +440,38 @@ span.sListSLink:hover, span.sListSLink.hover{
 	text-align: right;
 }
 .tListSName{
-/*	float:left;*/
 	width: 180px;
 	text-align: left;
 }
 .tListTitle{
-/*	float:left;*/
 	width: 150px;
 	text-align: left;
 }
 .tListDescr{
-/*	float:left;*/
 	width: 150px;
 	text-align: left;
 }
 .tListRepeat{
-/*	float:left;*/
 	width: 70px;
 	text-align: left;
 }
 .tListDuration{
-/*	float:left;*/
 	width: 70px;
 	text-align: left;
 }
 .tListBegin{
-/*	float:left;*/
 	width: 100px;
 	text-align: left;
 }
 .tListEnd{
-/*	float:left;*/
 	width: 100px;
 	text-align: left;
 }
 .tListAfter{
-/*	float:left;*/
 	width: 85px;
 	text-align: left;
 }
 .tListOption{
-/*	float:left;*/
 	width: 80px;
 	text-align: center;
 }
