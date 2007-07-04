@@ -5,6 +5,7 @@ from enigma import eServiceReference
 from enigma import eServiceCenter
 
 from Components.Sources.Source import Source
+from Components.config import config
 from ServiceReference import ServiceReference
 from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT,parseEvent
 from Components.config import config
@@ -36,16 +37,21 @@ class Timer( Source):
     def handleCommand(self,cmd):
         if self.func is self.ADDBYID:
             self.result = self.addTimerByEventID(cmd)
+            self.writeTimerList()
         elif self.func is self.ADD:
             self.result = self.addTimer(cmd)
+            self.writeTimerList()
         elif self.func is self.TVBROWSER:
             self.result = self.tvBrowser(cmd)
+            self.writeTimerList()
         elif self.func is self.DEL:
             self.result = self.delTimer(cmd)
+            self.writeTimerList()
         elif self.func is self.CHANGE:
             self.result = self.changeTimer(cmd)
+            self.writeTimerList()
         elif self.func is self.WRITE:
-            self.result = self.writeTimerList(cmd)
+            self.result = self.writeTimerList(force=True)
         elif self.func is self.RECNOW:
             print "RECNOW"
             self.result = self.recordNow(cmd)
@@ -404,13 +410,15 @@ class Timer( Source):
         else:
             return self.addTimer(param)
     
-    def writeTimerList(self,param):
-        # is there an easier and better way? :\ 
-        print "saveTimerList",param
-        self.session.nav.RecordTimer.saveTimer()
-        
-        return True,"TimerList was saved "
-            
+    def writeTimerList(self,force=False):
+        # is there an easier and better way? :\
+        if config.plugins.Webinterface.autowritetimer.value or force: 
+            print "Timer.py writing timer to flash"
+            self.session.nav.RecordTimer.saveTimer()
+            return True,"TimerList was saved "
+        else:
+            return False,"TimerList was not saved "    
+
     def getText(self):
         print self.result
         (result,text) = self.result

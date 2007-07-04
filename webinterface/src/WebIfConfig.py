@@ -23,6 +23,7 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
         self.list.append(getConfigListEntry(_("use Port"), config.plugins.Webinterface.port))
         self.list.append(getConfigListEntry(_("enable /hdd"), config.plugins.Webinterface.includehdd))
         self.list.append(getConfigListEntry(_("write debug-file"), config.plugins.Webinterface.debug))
+        self.list.append(getConfigListEntry(_("autowrite timer"), config.plugins.Webinterface.autowritetimer))
         ConfigListScreen.__init__(self, self.list)
         self["buttonred"] = Label(_("cancel"))
         self["buttongreen"] = Label(_("ok"))
