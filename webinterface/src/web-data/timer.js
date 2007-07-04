@@ -105,7 +105,7 @@ function repeatedReadable(num) {
 				if(html == "") {
 					html += rep.toString();
 				} else {
-					html += "," + rep.toString();
+					html = rep.toString()+","+html;
 				}
 			}
 		}
