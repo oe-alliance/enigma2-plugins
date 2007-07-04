@@ -11,10 +11,7 @@ class PowerState( Source):
 
     def handleCommand(self, cmd):
         self.cmd = cmd
-        
-    def do_func(self):
-        list = []
-        
+        print "PowerState:",self.cmd
         if self.cmd == "" or self.cmd is None:
             print "the PowerState was not defined (%s)" % self.cmd
             return [[False,"the PowerState was not defined"]]
@@ -25,15 +22,15 @@ class PowerState( Source):
         # 4: standby
         
         type = int(self.cmd)
-        if type < 0 or type > 4:
+        if type == 0:
+            print "Standby if"
+            from Screens.Standby import Standby
+            self.session.open(Standby)
+        elif type < 4:
+            print "TryQuitMainloop if"
+            from Screens.Standby import TryQuitMainloop
+            self.session.open(TryQuitMainloop, type)
+        else:
             print "PowerState was not defined correctly (%s)" % type
-            return [[False,"PowerState was not defined correctly"]]
-        
-        quitMainloop(type)
-        
-        return [[True,"PowerState was changed"]]
-        
-    list = property(do_func)
-    lut = {"Result": 0
-           ,"ResultText": 1
-           }
+
+        #quitMainloop(type)
