@@ -26,6 +26,69 @@ form{
 	padding: 0px;
 }
 
+button {
+	background-image: url('gfx/button.png');
+	height: 20px;
+	width: 140px;
+	border: 1px solid #AAA;
+}
+
+button:hover, button.hover {
+	border: 1px solid #000;
+}
+
+#currentServiceName { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:right;
+
+	color: #FFFFFF;
+	text-align:left;
+
+	width:30%;
+	height:20px;
+}
+.currentServiceEPGStarttime { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:left;
+
+	color: #FFFFFF;
+	text-align:left;
+
+	width:40px;
+	height:20px;
+}
+.currentServiceEPGTitle { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:left;
+
+	color: #FFFFFF;
+	text-align:left;
+
+	width:240px;
+	height:20px;
+}
+.currentServiceEPGDuration { 
+	font-family:Arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	
+	float:left;
+	color: #FFFFFF;
+	text-align:right;
+
+	width:70px;
+	height:20px;
+}
+
 #searchText{
 	border: 1px solid #000;
 	margin: 0 0 0 0;
@@ -96,7 +159,6 @@ html>body thead.fixedHeader tr {
 
 /* make the TH elements pretty */
 thead.fixedHeader th {
-	/*background: #0066CC;*/
 	border: 0px;
 	font-weight: normal;
 	padding: 4px 3px;
@@ -201,7 +263,6 @@ normal stylesheet-stuff******************
 	font-size: 14px;
 	font-weight: bold;
 	float: left;
-	background-color: #0066CC;
 	color: #FFFFFF;
 	text-align: right;
 	width: 45%;
@@ -545,7 +606,7 @@ span.sListSLink:hover, span.sListSLink.hover{
 	width: 50%;
 }
 
-# movielist
+/* movielist */
 .movieDetails {
 	border: 1px solid #AAA;
 	width: 100%;
@@ -560,15 +621,4 @@ span.sListSLink:hover, span.sListSLink.hover{
 	font-weight:bold;
 	width: 99%;
 	text-align: left;
-}
-
-button {
-	background-image: url('gfx/button.png');
-	height: 20px;
-	width: 140px;
-	border: 1px solid #AAA;
-}
-
-button:hover, button.hover {
-	border: 1px solid #000;
 }
