@@ -79,7 +79,8 @@ class UpdateWebScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner,WebScreen):
 class MessageWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
-		self["Message"] = Message(session)
+		self["Message"] = Message(session,func = Message.PRINT)
+		self["GetAnswer"] = Message(session,func = Message.ANSWER)
 
 class AudioWebScreen(WebScreen):
 	def __init__(self, session,request):

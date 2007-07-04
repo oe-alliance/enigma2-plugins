@@ -1,8 +1,5 @@
-<e2:screen name="PowerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;e2powerstate>
-	<e2:element source="PowerState" id="newstate"><e2:convert type="web:ListFiller" >
-	&lt;e2result><e2:item name="Result" filter="xml"/>&lt;/e2result>
-	&lt;e2resulttext><e2:item name="ResultText" filter="xml"/>&lt;/e2resulttext>
-	</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
-&lt;/e2message>
+<e2:screen name="PowerWebScreen">
+	<e2:element source="PowerState" id="newstate">
+		<e2:convert type="web:ReturnEmptyXML" />
+	</e2:element>
 </e2:screen>

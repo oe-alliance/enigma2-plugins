@@ -41,6 +41,7 @@ var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
 var url_timerlistwrite="/web/timerlistwrite?write=saveWriteNow";
 
 var url_message = "/web/message"; // plus text,type,timeout
+var url_messageanswer = "/web/messageanswer?getanswer=now"; 
 
 var url_powerstate = "/web/powerstate"; // plus new powerstate
 var url_remotecontrol = "/web/remotecontrol"; // plus command

@@ -215,6 +215,7 @@ var tplPowerStateSendForm  = '<table cellspacing="0" cellpadding="0" class="abou
 	tplPowerStateSendForm += '<tr><td>\n';
 	tplPowerStateSendForm += '<table style="width: 100%; text-align: center">\n';
 	tplPowerStateSendForm += '<tr><td><center><button onclick="sendRemoteControlRequest(116)">Toggle Standby</button></center></td></tr>\n';
+	tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(0)">Standby</button></center></td></tr>\n';
     tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(1)">Deepstandby</button></center></td></tr>\n';
     tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(2)">Reboot</button></center></td></tr>\n';
 	tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(3)">Restart Enigma2</button></center></td></tr>\n';
@@ -264,8 +265,7 @@ var tplRemoteControlForm = '<center><input type="checkbox" id="getScreen" name="
     tplRemoteControlForm += '</map>';
 	tplRemoteControlForm += '<img src="/webdata/gfx/remotecontrol.jpg" height="607" width="220" border="0)" alt="Remote Control" usemap="#remotecontrol">';
 	
-var tplAddTimerForm = '';
-	tplAddTimerForm += '<table border=0 cellpadding=0 cellspacing=10>';
+var tplAddTimerForm  = '<table border=0 cellpadding=0 cellspacing=10>';
 	tplAddTimerForm += '<tr><td colspan="3">Action:</td>';
 	tplAddTimerForm += '<td colspan="3">';
 	tplAddTimerForm += '<select name="justplay" id="justplay" size="1">';
@@ -307,11 +307,9 @@ var tplAddTimerForm = '';
 	tplAddTimerForm += '<input name="eventID" id="eventID" type="hidden" value="%(eventID)">';
 	tplAddTimerForm += 	'<button onclick="sendAddTimer()">Add/Save</button></td></tr></table>';
 
-var tplAddTimerFormOptions = '';
-	tplAddTimerFormOptions += '<option value="%(value)" %(selected)>%(txt)</option>';
+var tplAddTimerFormOptions = '<option value="%(value)" %(selected)>%(txt)</option>';
 	
-var tplAddTimerFormCheckbox = '';
-	tplAddTimerFormCheckbox += '<input type="checkbox" id="%(id)" name="%(name)" value="%(value)" %(checked)>&nbsp;%(txt)&nbsp;&nbsp;';
+var tplAddTimerFormCheckbox = '<input type="checkbox" id="%(id)" name="%(name)" value="%(value)" %(checked)>&nbsp;%(txt)&nbsp;&nbsp;';
 
 var tplAbout  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n';
 	tplAbout += '<tr>\n';

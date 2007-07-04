@@ -40,13 +40,18 @@ DEBUGFILE= "/tmp/twisted.log"
 
 def stopWebserver():
 	reactor.disconnectAll()
+	del session.mediaplayer
+	#del session.messageboxanswer
 
 def restartWebserver(session):
 	stopWebserver()
 	startWebserver(session)
 
 def startWebserver(session):
+	# variables, that are needed in the process
 	session.mediaplayer = None
+	#session.messageboxanswer = None
+	
 	if config.plugins.Webinterface.enable.value is not True:
 		print "not starting Werbinterface"
 		return False

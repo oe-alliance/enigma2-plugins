@@ -636,6 +636,7 @@ function incomingDelMovieFileResult(request) {
 function showMessageSendForm(){
 		$('BodyContent').innerHTML = tplMessageSendForm;
 }
+var MessageAnswerPolling;
 function sendMessage(messagetext,messagetype,messagetimeout){
 	if(!messagetext){
 		messagetext = $('MessageSendFormText').value;
@@ -647,7 +648,12 @@ function sendMessage(messagetext,messagetype,messagetimeout){
 		var index = $('MessageSendFormType').selectedIndex;
 		messagetype = $('MessageSendFormType').options[index].value;
 	}	
-	doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult, false);
+	if(ownLazyNumber(messagetype) == 0){
+		new Ajax.Request(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, { asynchronous: true, method: 'get' });
+		MessageAnswerPolling = setInterval(getMessageAnswer, ownLazyNumber(messagetimeout)*1000);
+	} else {
+		doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult, false);
+	}
 }
 function incomingMessageResult(request){
 
@@ -656,33 +662,16 @@ function incomingMessageResult(request){
 		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
 		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
 		if (result=="True"){
-			messageBox('message send','message send successfully! it appears on TV-Screen');
+			messageBox('message send',resulttext);//'message send successfully! it appears on TV-Screen');
 		}else{
 			messageBox('message send failed',resulttext);
 		}
 	}		
 }
-
-// PowerState Code
-function showPowerStateSendForm(){
-		$('BodyContent').innerHTML = tplPowerStateSendForm;
+function getMessageAnswer() {
+	doRequest(url_messageanswer, incomingMessageResult, false);
+	clearInterval(MessageAnswerPolling);
 }
-function sendPowerState(newState){
-	doRequest(url_powerstate+'?newstate='+newState, incomingPowerStateResult, false);
-}
-function incomingPowerStateResult(request){
-	debug(request.readyState);
-	if(request.readyState == 4){
-		var b = getXML(request).getElementsByTagName("e2powerstate");
-		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
-		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
-		var tplPowerStateSendForm2 = '<h1>PowerState is changing to:'+resulttext+ '</h1>' + tplPowerStateSendForm;
-		$('BodyContent').innerHTML = tplPowerStateSendForm2;
-	} else {
-		$('BodyContent').innerHTML = "<h1>some unknown error</h1>" + tplPasswordSendForm;
-	}
-}
-
 // RemoteControl Code
 function showRemoteControllSendForm(){
 	if(! $('rcWindow')){
@@ -1076,24 +1065,24 @@ function incomingMediaPlayer(request){
 		}
 		listerHtml += tplMediaPlayerFooter;
 		$('BodyContent').innerHTML = listerHtml;
+		var sendMediaPlayerTMP = sendMediaPlayer;
 		sendMediaPlayer = false;
 		setBodyMainContent('BodyContent');
-		sendMediaPlayer = true;
+		sendMediaPlayer = sendMediaPlayerTMP;
 	}		
 }
 function playFile(file,root) {
 	debug("loading playFile");
 	mediaPlayerStarted = true;
-	new Ajax.Request( url_mediaplayerplay+file+"&root="+root, 
-							{
-								asynchronous: true,
-								method: 'get'
-							}
-						);
+	new Ajax.Request( url_mediaplayerplay+file+"&root="+root, { asynchronous: true, method: 'get' });
 }
 function sendMediaPlayer(command) {
 	debug("loading sendMediaPlayer");
-	new Ajax.Request( url_mediaplayercmd+command, {
-								asynchronous: true,
-								method: 'get' });
+	new Ajax.Request( url_mediaplayercmd+command, { asynchronous: true, method: 'get' });
+}
+function showPowerStateSendForm(){
+		$('BodyContent').innerHTML = tplPowerStateSendForm;
+}
+function sendPowerState(newState){
+	new Ajax.Request( url_powerstate+'?newstate='+newState, { asynchronous: true, method: 'get' });
 }
