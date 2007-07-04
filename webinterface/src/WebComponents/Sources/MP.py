@@ -25,9 +25,16 @@ class MP( Source):
         from Components.MediaPlayer import PlayList, PlaylistEntryComponent
         if self.session.mediaplayer is None:
             self.session.mediaplayer = self.session.open(MediaPlayer)
-            self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
+            #self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
             self.session.mediaplayer.playlist = PlayList()
-            
+        try:
+            test = len(self.session.mediaplayer.playlist)
+            #Just a test, wether the link is still active.
+        except:
+            self.session.mediaplayer = self.session.open(MediaPlayer)
+            #self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
+            self.session.mediaplayer.playlist = PlayList()
+
         self.cmd = cmd
         if self.func is self.LIST:
             self.result = self.getFileList(cmd)

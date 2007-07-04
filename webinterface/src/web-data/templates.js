@@ -482,7 +482,7 @@ var tplRCGrab  = '<IMG id="grabPageIMG" src=""/ height="400" alt="loading image"
 var tplMediaPlayerHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplMediaPlayerHeader += '<thead class="fixedHeader">\n';
 	tplMediaPlayerHeader += '<tr>\n';
-	tplMediaPlayerHeader += '<th><div class="sListHeader">MediaPlayer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+	tplMediaPlayerHeader += '<th><div class="sListHeader">MediaPlayer %(root)';
 	tplMediaPlayerHeader += '<map name="mpcontrols">';
 	tplMediaPlayerHeader += '<area shape="circle" coords="17, 17, 14" nohref onclick="sendMediaPlayer(0)" alt="jump back">';
 	tplMediaPlayerHeader += '<area shape="circle" coords="54, 17, 14" nohref onclick="sendMediaPlayer(1)" alt="play">';
@@ -503,7 +503,7 @@ var tplMediaPlayerItemHead = '<tr>\n';
 var tplMediaPlayerItemBody = '<td><div style="color: #%(color);" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" class="sListSName" title="%(servicereference)">%(fullpath)</div>';
 var	tplMediaPlayerItemIMG  = '<div class="sListExt">\n';
 	tplMediaPlayerItemIMG += '<img src="/webdata/gfx/screen.png" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" title="%(exec_description)" border="0">\n';
-	tplMediaPlayerItemIMG += '<a target="_blank" href="/movie/?file=%(filename)"><img src="/webdata/gfx/save.png" title="download File" border="0"></a>\n';
+//	tplMediaPlayerItemIMG += '<a target="_blank" href="/movie/?file=%(filename)"><img src="/webdata/gfx/save.png" title="download File" border="0"></a>\n';
 	tplMediaPlayerItemIMG += '</div>\n';
 var tplMediaPlayerItemFooter = '</tr>\n';
 

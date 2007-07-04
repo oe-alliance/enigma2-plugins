@@ -650,11 +650,10 @@ function File(xml){
 		return this.servicereference.replace(/.*:\//,'/');
 	}
 	this.getFullPath = function(){
-		var pattern = '/.*'+this.root+'/';
-		if(this.isdirectory == "True") {
+		if(this.root == '/') {
 			return this.servicereference;
 		} else {
-			return this.servicereference.replace(/.*\//,'');
+			return this.servicereference.replace(new RegExp('.*'+this.root, "i"), '');
 		}
 	}
 	try{

@@ -1035,11 +1035,33 @@ function loadMediaPlayer(directory){
 function incomingMediaPlayer(request){
 	if(request.readyState == 4){
 		var files = new FileList(getXML(request)).getArray();
-		debug("have "+files.length+" movies");
-		listerHtml 	= tplMediaPlayerHeader;		
+		debug(getXML(request));
+		debug("have "+files.length+" entry in filelist");
+		listerHtml 	= tplMediaPlayerHeader;
+		root = files[0].getRoot();
+		listerHtml 	= RND(tplMediaPlayerHeader, {'root': root});
+		if(root != '/') {
+			re = new RegExp(/(.*)\/(.*)\/$/);
+			re.exec(root);
+			newroot = RegExp.$1+'/';
+			if(newroot == '//') {
+				newroot = '/';
+			}
+			listerHtml += RND(tplMediaPlayerItemBody, 
+				{'root': root
+				, 'servicereference': newroot
+				,'exec': 'loadMediaPlayer'
+				,'exec_description': 'change to directory ../'
+				,'color': '000000'
+				,'root': newroot
+				,'filename': newroot
+				,'fullpath': '..'});
+		}
 		for ( var i = 0; i <files.length; i++){
 			var file = files[i];
-			
+			if(file.getFullPath() == 'None') {
+				continue;
+			}
 			var exec = 'loadMediaPlayer';
 			var exec_description = 'change to directory' + file.getServiceReference();
 			var color = '000000';
@@ -1048,7 +1070,7 @@ function incomingMediaPlayer(request){
 				exec_description = 'play file';
 				color = '00BCBC';
 			}
-			var namespace = { 	
+			var namespace = {
 				'servicereference': file.getServiceReference()
 				,'exec': exec
 				,'exec_description': exec_description
