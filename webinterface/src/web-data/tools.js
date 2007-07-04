@@ -592,7 +592,8 @@ function incomingMovieList(request){
 				'descriptionextended': movie.getDescriptionExtended(),
 				'filelink': String(movie.getFilename()).substr(17,movie.getFilename().length),
 				'filename': String(movie.getFilename()),
-				'tags': movie.getTags().join(', ') 
+				'tags': movie.getTags().join(', ') ,
+				'time': movie.getTimeDay()+"&nbsp;"+ movie.getTimeStartString()
 			};
 			listerHtml += RND(tplMovieListItem, namespace);
 		}

@@ -179,10 +179,13 @@ function ServiceList(xml){
 	}
 	this.getArray = function(){
 		var listxy = new Array();
-		for (var i=0;i<this.xmlitems.length;i++){
-			var xv = new ServiceReference(this.xmlitems.item(i));
-			listxy.push(xv);			
-		}
+		try{
+			for (var i=0;i<this.xmlitems.length;i++){
+				var xv = new ServiceReference(this.xmlitems.item(i));
+				listxy.push(xv);
+			}			
+		}catch (e){}
+		
 		return listxy;
 	}
 }
@@ -248,6 +251,40 @@ function Movie(xml){
 	} catch (e) {
 		this.filename = "n/a";
 	}
+	try{
+		this.startTime = xml.getElementsByTagName('e2time').item(0).firstChild.data;
+	} catch (e) {
+		this.startTime = "0";
+	}
+	
+		
+	
+
+	this.getTimeStart = function ()
+	{
+		var date = new Date(parseInt(this.startTime)*1000);
+		return date;
+	}
+	this.getTimeStartString = function ()
+	{
+		var h = this.getTimeStart().getHours();
+		var m = this.getTimeStart().getMinutes();
+		if (m < 10){
+			m="0"+m;
+		}
+		return h+":"+m;
+	}
+	this.getTimeDay = function ()
+	{
+		var Wochentag = new Array("So", "Mo", "Di", "Mi", "Do", "Fr", "Sa");
+		var wday = Wochentag[this.getTimeStart().getDay()];
+		var day = this.getTimeStart().getDate();
+		var month = this.getTimeStart().getMonth()+1;
+		var year = this.getTimeStart().getFullYear();
+		
+		return wday+".&nbsp;"+day+"."+month+"."+year;
+	}
+
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
 	}

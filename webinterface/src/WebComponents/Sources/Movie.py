@@ -59,13 +59,15 @@ class Movie( Source):
             return True,"File deleted"
    
     def command(self):
-        self.movielist.reload(root=self.root)
+        #self.movielist.reload(root=self.root)
         list=[]
         for (serviceref, info, begin,unknown) in self.movielist.list:
             movie = []
             movie.append(serviceref.toString())
             movie.append(ServiceReference(serviceref).getServiceName())
             movie.append(info.getInfoString(serviceref, iServiceInformation.sDescription))
+            movie.append(info.getInfo(serviceref, iServiceInformation.sTimeCreate))
+             
             
             sourceERef =info.getInfoString(serviceref, iServiceInformation.sServiceref)
             sourceRef= ServiceReference(sourceERef)
@@ -111,9 +113,10 @@ class Movie( Source):
     lut = {"ServiceReference": 0
            ,"Title": 1
            ,"Description": 2
-           ,"ServiceName": 3
-           ,"Tags": 4
-           ,"DescriptionExtended": 5
-           ,"Filename": 6
+           ,"Time": 3
+           ,"ServiceName": 4
+           ,"Tags": 5
+           ,"DescriptionExtended": 6
+           ,"Filename": 7
            }
 
