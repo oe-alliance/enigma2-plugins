@@ -83,13 +83,35 @@ var tplMovieListHeader  = '<div class="BodyContentChannellist">\n';
 	tplMovieListHeader += '<tbody class="scrollContent">\n';
 
 var tplMovieListItem  = '<tr>\n';
-	tplMovieListItem += '<td><div class="sListSName" title="%(description), %(descriptionextended)">%(title) (%(servicename))</div>';
+	tplMovieListItem += '<td><div class="sListSName" title="%(description), %(descriptionextended)" onClick="$(\'moviedetails_%(servicereference)\').toggle();">%(title) (%(servicename))</div>';
 	tplMovieListItem += '<div class="sListExt">\n';
-	tplMovieListItem += '%(tags)\n';
 	tplMovieListItem += '<a target="_blank" href="/web/ts.m3u?file=%(filelink)"><img src="/webdata/gfx/screen.png" title="play file" border="0"></a>\n';
-	tplMovieListItem += '<a target="_blank" href="/movie/?file=%(filelink)"><img src="/webdata/gfx/save.png" title="download Movie" border="0"></a>\n';
-	tplMovieListItem += '&nbsp;&nbsp;<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete files" border="0" onclick="delMovieFile(\'%(filename)\',\'%(servicename)\',\'%(title)\',\'%(description)\');"></a>\n';
+	tplMovieListItem += '&nbsp;<a target="_blank" href="/movie/?file=%(filelink)"><img src="/webdata/gfx/save.png" title="download Movie" border="0"></a>\n';
+	tplMovieListItem += '&nbsp;<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete files" border="0" onclick="delMovieFile(\'%(filename)\',\'%(servicename)\',\'%(title)\',\'%(description)\');"></a>\n';
 	tplMovieListItem += '</div>\n';
+
+	tplMovieListItem += '<div id="moviedetails_%(servicereference)"  style="display:none;">\n';
+		tplMovieListItem += '<table class="movieDetails">\n';
+		tplMovieListItem += '<tr>\n';
+		tplMovieListItem += '<td class="movieElementLeft">Beschreibung:</td>\n';
+		tplMovieListItem += '<td class="movieElementRight">%(description)&nbsp;</td>\n';
+		tplMovieListItem += '</tr>\n';
+		tplMovieListItem += '<tr>\n';
+		tplMovieListItem += '<td class="movieElementLeft">Erweitert:</td>\n';
+		tplMovieListItem += '<td class="movieElementRight">%(descriptionextended)&nbsp;</td>\n';
+		tplMovieListItem += '</tr>\n';
+		tplMovieListItem += '<tr>\n';
+		tplMovieListItem += '<td class="movieElementLeft">Datum/Zeit:</td>\n';
+		tplMovieListItem += '<td class="movieElementRight">%(time)&nbsp;</td>\n';
+		tplMovieListItem += '</tr>\n';
+		tplMovieListItem += '<tr>\n';
+		tplMovieListItem += '<td class="movieElementLeft">Tags:</td>\n';
+		tplMovieListItem += '<td class="movieElementRight">%(tags)&nbsp;</td>\n';
+		tplMovieListItem += '</tr>\n';
+		tplMovieListItem += '</table>\n';
+	tplMovieListItem += '</div>\n';
+
+
 	tplMovieListItem += '</tr>\n';
 	
 var tplMovieListFooter = "</tbody></table>\n</div>\n";
