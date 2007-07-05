@@ -41,9 +41,11 @@ DEBUGFILE= "/tmp/twisted.log"
 
 def stopWebserver(session):
 	reactor.disconnectAll()
-	del session.mediaplayer
-	del session.messageboxanswer
-
+	try:# got BS with "global name session is not defined" so i catched it, but please make it safe if you use globals! thx
+		del session.mediaplayer
+		del session.messageboxanswer
+	except NameError:
+		pass
 def restartWebserver(session):
 	stopWebserver(session)
 	startWebserver(session)
