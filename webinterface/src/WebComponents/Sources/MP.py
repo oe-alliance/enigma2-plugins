@@ -21,20 +21,6 @@ class MP( Source):
     
     def handleCommand(self,cmd):
         
-        from Screens.MediaPlayer import MediaPlayer
-        from Components.MediaPlayer import PlayList, PlaylistEntryComponent
-        if self.session.mediaplayer is None:
-            self.session.mediaplayer = self.session.open(MediaPlayer)
-            #self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
-            self.session.mediaplayer.playlist = PlayList()
-        try:
-            test = len(self.session.mediaplayer.playlist)
-            #Just a test, wether the link is still active.
-        except:
-            self.session.mediaplayer = self.session.open(MediaPlayer)
-            #self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
-            self.session.mediaplayer.playlist = PlayList()
-
         self.cmd = cmd
         if self.func is self.LIST:
             self.result = self.getFileList(cmd)
@@ -59,6 +45,20 @@ class MP( Source):
 
     def playFile(self,param):
         print "playFile: ",param
+        
+        from Screens.MediaPlayer import MediaPlayer
+        from Components.MediaPlayer import PlayList, PlaylistEntryComponent
+        if self.session.mediaplayer is None:
+            self.session.mediaplayer = self.session.open(MediaPlayer)
+            self.session.mediaplayer.playlist = PlayList()
+        try:
+            test = len(self.session.mediaplayer.playlist)
+            #Just a test, wether the link is still active.
+        except:
+            self.session.mediaplayer = self.session.open(MediaPlayer)
+            #self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
+            self.session.mediaplayer.playlist = PlayList()
+
         root = param["root"]
         file = param["file"]
 
@@ -73,6 +73,15 @@ class MP( Source):
     def command(self,param):
         print "command: ",param
         param = int(param)
+        
+        from Screens.MediaPlayer import MediaPlayer
+        from Components.MediaPlayer import PlayList, PlaylistEntryComponent
+        try:
+            test = len(self.session.mediaplayer.playlist)
+            #Just a test, wether the link is still active.
+        except:
+            self.session.mediaplayer = self.session.open(MediaPlayer)
+        
         mp = self.session.mediaplayer
         
         if param == 0:

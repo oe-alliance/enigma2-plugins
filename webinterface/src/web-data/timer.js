@@ -329,7 +329,6 @@ function loadTimerForm(){
 		debug("weiter");
 		listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_radio)])).getArray();
 	}
-	debug("hier" + listeNeu.length);
 	for (i = 1; i < listeNeu.length; i++) {
 		var element = listeNeu[i];
 		channelObject[String(dashString+i)] = "---";

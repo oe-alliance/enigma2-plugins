@@ -404,10 +404,12 @@ function buildServiceListEPGItem(epgevent,nownext){
 var currentBodyMainElement = null
 
 function setBodyMainContent(newelementname){
+/*	debug("mediaPlayerStarted 1: " + mediaPlayerStarted);
 	if(mediaPlayerStarted) {
 		mediaPlayerStarted = false;
 		sendMediaPlayer(5);
 	}
+	debug("mediaPlayerStarted 2: " + mediaPlayerStarted);*/
 	newelement =$(newelementname);
 	if(currentBodyMainElement != null){
 		currentBodyMainElement.style.display = "none";
