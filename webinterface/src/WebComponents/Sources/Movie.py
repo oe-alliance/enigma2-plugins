@@ -1,6 +1,7 @@
 from enigma import *
 from enigma import eServiceReference, iServiceInformation
 from Components.Sources.Source import Source
+from Components.config import config
 from ServiceReference import ServiceReference,eServiceCenter
 #from Components.MovieList import MovieList
 from Tools.Directories import resolveFilename,SCOPE_HDD
@@ -67,7 +68,16 @@ class Movie( Source):
             movie.append(ServiceReference(serviceref).getServiceName())
             movie.append(info.getInfoString(serviceref, iServiceInformation.sDescription))
             movie.append(info.getInfo(serviceref, iServiceInformation.sTimeCreate))
-             
+            
+            if config.plugins.Webinterface.loadmovielength.value:
+                len =  info.getLength(serviceref)
+                if len > 0:
+                    len = "%d:%02d" % (len / 60, len % 60)
+                else:
+                    len = "?:??"
+            else:
+                len="disabled"
+            movie.append(len)
             
             sourceERef =info.getInfoString(serviceref, iServiceInformation.sServiceref)
             sourceRef= ServiceReference(sourceERef)
@@ -114,9 +124,10 @@ class Movie( Source):
            ,"Title": 1
            ,"Description": 2
            ,"Time": 3
-           ,"ServiceName": 4
-           ,"Tags": 5
-           ,"DescriptionExtended": 6
-           ,"Filename": 7
+           ,"Length": 4
+           ,"ServiceName": 5
+           ,"Tags": 6
+           ,"DescriptionExtended": 7
+           ,"Filename": 8
            }
 

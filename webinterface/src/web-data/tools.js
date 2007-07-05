@@ -593,6 +593,7 @@ function incomingMovieList(request){
 				'filelink': String(movie.getFilename()).substr(17,movie.getFilename().length),
 				'filename': String(movie.getFilename()),
 				'tags': movie.getTags().join(', ') ,
+				'length': movie.getLength() ,
 				'time': movie.getTimeDay()+"&nbsp;"+ movie.getTimeStartString()
 			};
 			listerHtml += RND(tplMovieListItem, namespace);

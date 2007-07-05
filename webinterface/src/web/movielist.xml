@@ -7,6 +7,7 @@
 		&lt;e2descriptionextended><e2:item name="DescriptionExtended" filter="xml"/>&lt;/e2descriptionextended>
 		&lt;e2servicename><e2:item name="ServiceName"  filter="xml"/>&lt;/e2servicename>
 		&lt;e2time><e2:item name="Time"  filter="xml"/>&lt;/e2time>
+		&lt;e2length><e2:item name="Length"  filter="xml"/>&lt;/e2length>
 		&lt;e2tags><e2:item name="Tags"  filter="xml"/>&lt;/e2tags>
 		&lt;e2filename><e2:item name="Filename"  filter="xml"/>&lt;/e2filename>
 	&lt;/e2movie>
