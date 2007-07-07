@@ -493,12 +493,9 @@ var tplMediaPlayerHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 	tplMediaPlayerHeader += '<area shape="circle" coords="88, 17, 14" nohref onclick="sendMediaPlayer(2)" alt="pause">';
 	tplMediaPlayerHeader += '<area shape="circle" coords="125, 17, 14" nohref onclick="sendMediaPlayer(3)" alt="jump forward">';
 	tplMediaPlayerHeader += '<area shape="circle" coords="161, 17, 14" nohref onclick="sendMediaPlayer(4)" alt="stop">';
-	tplMediaPlayerHeader += '</map><img src="/webdata/gfx/dvr-buttons-small-fs8.png" title="add to Timers" border="0" usemap="#mpcontrols"></div>\n';
+	tplMediaPlayerHeader += '</map><img src="/webdata/gfx/dvr-buttons-small-fs8.png" align="top" title="Control MediaPlayer" border="0" usemap="#mpcontrols"></div>\n';
 	tplMediaPlayerHeader += '<div class="sListSearch">';
-	tplMediaPlayerHeader += '<form onSubmit="loadMovieList(document.getElementById(\'filterMovietag\').value); return false;">';
-	tplMediaPlayerHeader += '<input type="text" id="filterMovietag" onfocus="this.value=\'\'" value="filter by Tag"/>';
-	tplMediaPlayerHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
-	tplMediaPlayerHeader += '</form></div></th>';
+	tplMediaPlayerHeader += '<img src="/webdata/gfx/nok.png" align="top" title="close MediaPlayer" border="0" onclick="sendMediaPlayer(5)"></div></th>';
 	tplMediaPlayerHeader += '</tr>\n';
 	tplMediaPlayerHeader += '</thead>\n';
 	tplMediaPlayerHeader += '<tbody class="scrollContent">\n';
@@ -506,7 +503,7 @@ var tplMediaPlayerHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 var tplMediaPlayerItemHead = '<tr>\n';
 var tplMediaPlayerItemBody = '<td><div style="color: #%(color);" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" class="sListSName" title="%(servicereference)">%(fullpath)</div>';
 var	tplMediaPlayerItemIMG  = '<div class="sListExt">\n';
-	tplMediaPlayerItemIMG += '<img src="/webdata/gfx/screen.png" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" title="%(exec_description)" border="0">\n';
+	tplMediaPlayerItemIMG += '<img src="/webdata/gfx/play.png" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" title="%(exec_description)" border="0">\n';
 	tplMediaPlayerItemIMG += '<a target="_blank" href="/file/?file=%(fullpath)&root=%(root)"><img src="/webdata/gfx/save.png" title="download File" border="0"></a>\n';
 	tplMediaPlayerItemIMG += '</div>\n';
 var tplMediaPlayerItemFooter = '</tr>\n';

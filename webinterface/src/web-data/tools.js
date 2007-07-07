@@ -151,6 +151,12 @@ function showhide(id){
 }
 function set(element, value){
 	//debug(element+"-"+value);
+//	MP3 File: /media/hdd/13-Placebo_Song_To_Say_Goodbye-Meds.mp3
+	if(element == "CurrentService") {
+		if(value.search(/^MP3 File:/) != -1) {
+			value = value.replace(/.*\//, '');
+		}
+	}
 	element = parent.$(element);
 	if(value.length > 550) {
 		value = value.substr(0,550) + "[...]";
