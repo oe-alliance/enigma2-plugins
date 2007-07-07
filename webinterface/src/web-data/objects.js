@@ -256,10 +256,19 @@ function Movie(xml){
 	} catch (e) {
 		this.startTime = "0";
 	}
+	try{
+		this.length = xml.getElementsByTagName('e2length').item(0).firstChild.data;
+	} catch (e) {
+		this.length = "0";
+	}
 	
 		
 	
 
+	this.getLength = function ()
+	{
+		return this.length;
+	}
 	this.getTimeStart = function ()
 	{
 		var date = new Date(parseInt(this.startTime)*1000);
