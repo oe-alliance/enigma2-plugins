@@ -50,14 +50,14 @@ class UploadResource(resource.PostableResource):
         """
                 <form method="POST" enctype="multipart/form-data">
                 <table>
-                <tr><td>Path to save</td><td><input name="path"></td></tr>
+                <tr><td>Path to save (default is '%s')</td><td><input name="path"></td></tr>
                 <tr><td>File to upload</td><td><input name="file" type="file"></td></tr>
                 <tr><td colspan="2">Filesize must not be greather than %dMB! /tmp/ has not more free space!</td></tr>
                 <tr><td colspan="2"><input type="submit"></td><tr>
                 </table>
                 </form>
                 
-        """%freespace)
+        """%(self.default_uploaddir,freespace))
 
     def getArg(self,key):
         if self.args.has_key(key):
