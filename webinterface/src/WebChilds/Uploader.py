@@ -34,7 +34,7 @@ class UploadResource(resource.PostableResource):
                 return http.Response(responsecode.OK,{'content-type': http_headers.MimeType('text', 'html')},"filesize was 0, not uploaded")                
             else:
                 os.system("mv '%s' '%s' " %(filehandler.name,uploaddir+filename))
-                os.chmod(uploaddir+filename, 0775)
+                os.chmod(uploaddir+filename, 0755)
                 return http.Response(responsecode.OK,{'content-type': http_headers.MimeType('text', 'html')},"uploaded to %s"%uploaddir+filename)
     
     def do_indexpage(self,req):
