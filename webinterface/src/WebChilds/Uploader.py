@@ -1,5 +1,7 @@
 import os
+from os import statvfs
 from twisted.web2 import resource, responsecode, http,http_headers
+from Components.DiskInfo import DiskInfo
 
 class UploadResource(resource.PostableResource):
     default_uploaddir = "/tmp/"
@@ -32,9 +34,17 @@ class UploadResource(resource.PostableResource):
                 return http.Response(responsecode.OK,{'content-type': http_headers.MimeType('text', 'html')},"filesize was 0, not uploaded")                
             else:
                 os.system("mv '%s' '%s' " %(filehandler.name,uploaddir+filename))
+                os.chmod(uploaddir+filename, 0775)
                 return http.Response(responsecode.OK,{'content-type': http_headers.MimeType('text', 'html')},"uploaded to %s"%uploaddir+filename)
     
-    def do_indexpage(self,req):    
+    def do_indexpage(self,req):
+        try:
+            stat = statvfs("/tmp/")
+        except OSError:
+            return -1
+        
+        freespace = stat.f_bfree / 1000 * stat.f_bsize / 1000
+        
         return http.Response(responsecode.OK,
                              {'content-type': http_headers.MimeType('text', 'html')},
         """
@@ -42,11 +52,12 @@ class UploadResource(resource.PostableResource):
                 <table>
                 <tr><td>Path to save</td><td><input name="path"></td></tr>
                 <tr><td>File to upload</td><td><input name="file" type="file"></td></tr>
+                <tr><td colspan="2">Filesize must not be greather than %dMB! /tmp/ has not more free space!</td></tr>
                 <tr><td colspan="2"><input type="submit"></td><tr>
                 </table>
                 </form>
                 
-        """)
+        """%freespace)
 
     def getArg(self,key):
         if self.args.has_key(key):
