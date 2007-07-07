@@ -1063,12 +1063,11 @@ function incomingMediaPlayer(request){
 				,'exec_description': 'change to directory ../'
 				,'color': '000000'
 				,'root': newroot
-				,'filename': newroot
-				,'fullpath': '..'});
+				,'name': '..'});
 		}
 		for ( var i = 0; i <files.length; i++){
 			var file = files[i];
-			if(file.getFullPath() == 'None') {
+			if(file.getNameOnly() == 'None') {
 				continue;
 			}
 			var exec = 'loadMediaPlayer';
@@ -1085,8 +1084,7 @@ function incomingMediaPlayer(request){
 				,'exec_description': exec_description
 				,'color': color
 				,'root': file.getRoot()
-				,'filename': file.getFileName()
-				,'fullpath': file.getFullPath()
+				,'name': file.getNameOnly()
 			};
 			listerHtml += tplMediaPlayerItemHead;
 			listerHtml += RND(tplMediaPlayerItemBody, namespace);
@@ -1117,6 +1115,70 @@ function showPowerStateSendForm(){
 }
 function sendPowerState(newState){
 	new Ajax.Request( url_powerstate+'?newstate='+newState, { asynchronous: true, method: 'get' });
+}
+function loadFileBrowser(directory){
+	debug("loading loadFileBrowser");
+	doRequest(url_filelist+directory, incomingFileBrowser);	
+}
+function incomingFileBrowser(request){
+	if(request.readyState == 4){
+		var files = new FileList(getXML(request)).getArray();
+		debug(getXML(request));
+		debug("have "+files.length+" entry in filelist");
+		listerHtml 	= tplFileBrowserHeader;
+		root = files[0].getRoot();
+		listerHtml 	= RND(tplFileBrowserHeader, {'root': root});
+		if(root != '/') {
+			re = new RegExp(/(.*)\/(.*)\/$/);
+			re.exec(root);
+			newroot = RegExp.$1+'/';
+			if(newroot == '//') {
+				newroot = '/';
+			}
+			listerHtml += RND(tplFileBrowserItemBody, 
+				{'root': root
+				, 'servicereference': newroot
+				,'exec': 'loadFileBrowser'
+				,'exec_description': 'change to directory ../'
+				,'color': '000000'
+				,'root': newroot
+				,'name': '..'});
+		}
+		for ( var i = 0; i <files.length; i++){
+			var file = files[i];
+			if(file.getNameOnly() == 'None') {
+				continue;
+			}
+			var exec = 'loadFileBrowser';
+			var exec_description = 'change to directory' + file.getServiceReference();
+			var color = '000000';
+			if (file.getIsDirectory() == "False") {
+				exec = '';
+				exec_description = 'do Nothing';
+				color = '00BCBC';
+			}
+			var namespace = {
+				'servicereference': file.getServiceReference()
+				,'exec': exec
+				,'exec_description': exec_description
+				,'color': color
+				,'root': file.getRoot()
+				,'name': file.getNameOnly()
+			};
+			listerHtml += tplFileBrowserItemHead;
+			listerHtml += RND(tplFileBrowserItemBody, namespace);
+			if (file.getIsDirectory() == "False") {
+				listerHtml += RND(tplFileBrowserItemIMG, namespace);
+			}
+			listerHtml += tplFileBrowserItemFooter;
+		}
+		listerHtml += RND(tplFileBrowserFooter, {'root': root});
+		$('BodyContent').innerHTML = listerHtml;
+		var sendMediaPlayerTMP = sendMediaPlayer;
+		sendMediaPlayer = false;
+		setBodyMainContent('BodyContent');
+		sendMediaPlayer = sendMediaPlayerTMP;
+	}		
 }
 
 

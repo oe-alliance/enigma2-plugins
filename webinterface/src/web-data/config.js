@@ -28,9 +28,11 @@ var url_parentcontrol= "/web/parentcontrollist";
 
 var url_moviefiledelete= "/web/moviefiledelete"; // plus serviceref,eventid
 
-var url_mediaplayerlist= "/web/mediaplayerlist?path="; // plus full qualified path
+var url_mediaplayerlist= "/web/mediaplayerlist?types=mp&path="; // plus full qualified path
 var url_mediaplayerplay= "/web/mediaplayerplay?file="; // plus file-serviceref
 var url_mediaplayercmd= "/web/mediaplayercmd?command="; // plus command
+
+var url_filelist = "/web/mediaplayerlist?types=all&path="; // plus full qualified path
 
 var url_timerlist= "/web/timerlist";
 var url_recordnow= "/web/recordnow";

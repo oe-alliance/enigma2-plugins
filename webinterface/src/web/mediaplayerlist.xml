@@ -1,5 +1,5 @@
 <e2:screen name="MediaPlayerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;e2filelist><e2:element source="FileList" id="path"><e2:convert type="web:ListFiller" >
+&lt;e2filelist><e2:element source="FileList" id="path,types"><e2:convert type="web:ListFiller" >
 	&lt;e2file>
 		&lt;e2servicereference><e2:item name="ServiceReference"  filter="xml"/>&lt;/e2servicereference>
 		&lt;e2isdirectory><e2:item name="IsDirectory"  filter="xml"/>&lt;/e2isdirectory>

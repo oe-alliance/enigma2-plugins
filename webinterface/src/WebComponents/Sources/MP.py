@@ -34,13 +34,20 @@ class MP( Source):
         
         returnList = []
         
-        filelist = FileList(param, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
+        matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)" #MediaPlayer-Match
+        if param["types"] == "audio":
+            matchingPattern = "(?i)^.*\.(mp3|ogg|wav|wave|m3u|pls|e2pls)"
+        elif param["types"] == "video":
+            matchingPattern = "(?i)^.*\.(ts|avi|mpeg|m3u|pls|e2pls|mpg|vob)"
+        elif param["types"] == "any":
+            matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)"
+        filelist = FileList(param["path"], matchingPattern, useServiceRef = True)
         list = filelist.getFileList()
         for x in list:
             if x[0][1] == False: #isDir
-                returnList.append([x[0][0].toString(),x[0][1],param])
+                returnList.append([x[0][0].toString(),x[0][1],param["path"]])
             else:
-                returnList.append([x[0][0],x[0][1],param])
+                returnList.append([x[0][0],x[0][1],param["path"]])
         return returnList
 
     def playFile(self,param):

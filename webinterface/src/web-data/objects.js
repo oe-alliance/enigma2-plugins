@@ -655,10 +655,7 @@ function File(xml){
 	this.getServiceReference = function(){
 		return this.servicereference;
 	}
-	this.getFileName = function(){
-		return this.servicereference.replace(/.*:\//,'/');
-	}
-	this.getFullPath = function(){
+	this.getNameOnly = function(){
 		if(this.root == '/') {
 			return this.servicereference;
 		} else {

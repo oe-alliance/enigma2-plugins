@@ -501,10 +501,10 @@ var tplMediaPlayerHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
 	tplMediaPlayerHeader += '<tbody class="scrollContent">\n';
 
 var tplMediaPlayerItemHead = '<tr>\n';
-var tplMediaPlayerItemBody = '<td><div style="color: #%(color);" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" class="sListSName" title="%(servicereference)">%(fullpath)</div>';
+var tplMediaPlayerItemBody = '<td><div style="color: #%(color);" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" class="sListSName" title="%(servicereference)">%(name)</div>';
 var	tplMediaPlayerItemIMG  = '<div class="sListExt">\n';
 	tplMediaPlayerItemIMG += '<img src="/webdata/gfx/play.png" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" title="%(exec_description)" border="0">\n';
-	tplMediaPlayerItemIMG += '<a target="_blank" href="/file/?file=%(fullpath)&root=%(root)"><img src="/webdata/gfx/save.png" title="download File" border="0"></a>\n';
+	tplMediaPlayerItemIMG += '<a target="_blank" href="/file/?file=%(name)&root=%(root)"><img src="/webdata/gfx/save.png" title="download File" border="0"></a>\n';
 	tplMediaPlayerItemIMG += '</div>\n';
 var tplMediaPlayerItemFooter = '</tr>\n';
 
@@ -547,3 +547,28 @@ var tplNote  = '<form id="note_%(name)"><input type="hidden" id="note_%(name)_na
 	tplNote += '<td colspan="2"><input type="button"  onclick="saveNote(\'note_%(name)\');" value="save"><input type="button"  onclick="$(\'note_%(name)\').reset();" value="reset"></td>';
 	tplNote += '</tr>';
 	tplNote += '</table></form>';
+	
+
+var tplFileBrowserHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
+    tplFileBrowserHeader += '<thead class="fixedHeader">\n';
+    tplFileBrowserHeader += '<tr>\n';
+    tplFileBrowserHeader += '<th><div class="sListHeader">FileBrowser %(root)</div>\n';
+    tplFileBrowserHeader += '<div class="sListSearch">';
+    tplFileBrowserHeader += '<!-- insert filesearch-function here--></div></th>';
+    tplFileBrowserHeader += '</tr>\n';
+    tplFileBrowserHeader += '</thead>\n';
+    tplFileBrowserHeader += '<tbody class="scrollContent">\n';
+
+var tplFileBrowserItemHead = '<tr>\n';
+var tplFileBrowserItemBody = '<td><div style="color: #%(color);" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" class="sListSName" title="%(servicereference)">%(name)</div>';
+var tplFileBrowserItemIMG  = '<div class="sListExt">\n';
+    tplFileBrowserItemIMG += '<img src="/webdata/gfx/play.png" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" title="%(exec_description)" border="0">\n';
+    tplFileBrowserItemIMG += '<a target="_blank" href="/file/?file=%(name)&root=%(root)"><img src="/webdata/gfx/save.png" title="download File" border="0"></a>\n';
+    tplFileBrowserItemIMG += '</div>\n';
+var tplFileBrowserItemFooter = '</tr>\n';
+
+var tplFileBrowserFooter  = '</tbody></table>\n';
+    tplFileBrowserFooter += '<form action="/upload" method="POST" enctype="multipart/form-data"><input type="hidden" name="path" value="%(root)">';
+	tplFileBrowserFooter += '<input type="file" name="file"';
+	tplFileBrowserFooter += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/save.png" alt="upload">';
+	tplFileBrowserFooter += '</form>';
