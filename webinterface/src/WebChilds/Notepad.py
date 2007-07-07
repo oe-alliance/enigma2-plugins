@@ -14,6 +14,10 @@ class NotepadResource(resource.Resource):
         
         if self.getArg("show"):
             return self.do_show(self.getArg("show"))
+        elif self.getArg("save"):
+            return self.do_save()
+        elif self.getArg("create"):
+            return self.do_create()
         else:
             return self.do_index()
             
@@ -37,19 +41,22 @@ class NotepadResource(resource.Resource):
         content += "</e2noteslist>"
         return self.send(content)
 
-    def do_show(self,filename):
-        content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+    def do_show(self,filename,was_saved=False,oldfilename=False):
+
         if os.path.exists(self.DIR+filename) is not True:
-            content += "<e2note>\n"
-            content += "<e2result>False</e2result>\n"
-            content += "<e2resulttext>File '%s' not found</e2resulttext>\n" % (self.DIR+filename)
-            content += "</e2note>\n"
+            return self.errorFileNotFound(self.DIR+filename)
         else:    
             details = self.getNotesDetails(filename)
             fp = open(self.DIR+filename)
             con = fp.read()
             fp.close()
+            content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             content += "<e2notedetails>\n"
+            if was_saved:
+                content += "<e2notesaved>True</e2notesaved>\n"
+            if oldfilename is not False:
+                content += "<e2notenameold>%s</e2notenameold>\n"%oldfilename
+                    
             content += "<e2notename>%s</e2notename>\n"%details[0]
             content += "<e2notesize>%s</e2notesize>\n"%details[1]
             content += "<e2notemtime>%s</e2notemtime>\n"%details[2]
@@ -58,6 +65,31 @@ class NotepadResource(resource.Resource):
             content += "</e2notedetails>"
         return self.send(content)
     
+    def do_save(self):
+        filename = self.getArg("save")
+        filenamenew = self.getArg("namenew")
+        content = self.getArg("content")
+        if os.path.exists(self.DIR+filename) is not True:
+            return self.errorFileNotFound(self.DIR+self.getArg("save"))
+        else:  
+            newname = False  
+            if filename != filenamenew:
+                os.system("mv '%s' '%s' " %(self.DIR+filename,self.DIR+filenamenew))
+                newname = filename
+                filename = filenamenew
+                
+            fp = open(self.DIR+filename,"w")
+            fp.write(content)
+            fp.close()
+            return self.do_show(filename,was_saved=True,oldfilename=newname)
+    def do_create(self):
+        import random
+        r = str(random.randrange(100000,999999))
+        fp = open(self.DIR+'note_'+r,"w")
+        fp.write("")
+        fp.close()
+        return self.send("file created")
+
     def getNotes(self):
         list = []
         if self.check_dir(force_create=True):
@@ -86,3 +118,11 @@ class NotepadResource(resource.Resource):
             return self.args[key][0]
         else:
             return False
+
+    def errorFileNotFound(self,filename):
+        content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"        
+        content += "<e2note>\n"
+        content += "<e2result>False</e2result>\n"
+        content += "<e2resulttext>File '%s' not found</e2resulttext>\n" % (filename)
+        content += "</e2note>\n"
+        return self.send(content)
