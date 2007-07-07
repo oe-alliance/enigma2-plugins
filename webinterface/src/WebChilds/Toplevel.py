@@ -5,7 +5,7 @@ from Components.config import config
 
 from Plugins.Extensions import WebInterface
 from Screenpage import ScreenPage
-from MovieStreamer import MovieStreamer
+from FileStreamer import FileStreamer
 from Screengrab import GrabResource
 from IPKG import IPKGResource
 from PlayService import ServiceplayerResource
@@ -19,7 +19,7 @@ class Toplevel(resource.Resource):
         
         self.putChild("web",ScreenPage(self.session,util.sibpath(WebInterface.__file__, "web"))) # "/web/*"
         self.putChild("webdata",static.File(util.sibpath(WebInterface.__file__, "web-data"))) # FIXME: web-data appears as webdata
-        self.putChild("movie",MovieStreamer())
+        self.putChild("file",FileStreamer())
         self.putChild("grab",GrabResource())
         self.putChild("ipkg",IPKGResource())
         self.putChild("play",ServiceplayerResource(self.session))

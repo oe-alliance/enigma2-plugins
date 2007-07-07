@@ -86,7 +86,7 @@ var tplMovieListItem  = '<tr>\n';
 	tplMovieListItem += '<td><div class="sListSName" title="%(description), %(descriptionextended)" onClick="$(\'moviedetails_%(servicereference)\').toggle();">%(title) (%(servicename))</div>';
 	tplMovieListItem += '<div class="sListExt">\n';
 	tplMovieListItem += '<a target="_blank" href="/web/ts.m3u?file=%(filelink)"><img src="/webdata/gfx/screen.png" title="play file" border="0"></a>\n';
-	tplMovieListItem += '&nbsp;<a target="_blank" href="/movie/?file=%(filelink)"><img src="/webdata/gfx/save.png" title="download Movie" border="0"></a>\n';
+	tplMovieListItem += '&nbsp;<a target="_blank" href="/file/?file=%(filelink)&root=/hdd/movie/"><img src="/webdata/gfx/save.png" title="download Movie" border="0"></a>\n';
 	tplMovieListItem += '&nbsp;<a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete files" border="0" onclick="delMovieFile(\'%(filename)\',\'%(servicename)\',\'%(title)\',\'%(description)\');"></a>\n';
 	tplMovieListItem += '</div>\n';
 	tplMovieListItem += '<div id="moviedetails_%(servicereference)"  style="display:none;">\n';
@@ -507,7 +507,7 @@ var tplMediaPlayerItemHead = '<tr>\n';
 var tplMediaPlayerItemBody = '<td><div style="color: #%(color);" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" class="sListSName" title="%(servicereference)">%(fullpath)</div>';
 var	tplMediaPlayerItemIMG  = '<div class="sListExt">\n';
 	tplMediaPlayerItemIMG += '<img src="/webdata/gfx/screen.png" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" title="%(exec_description)" border="0">\n';
-//	tplMediaPlayerItemIMG += '<a target="_blank" href="/movie/?file=%(filename)"><img src="/webdata/gfx/save.png" title="download File" border="0"></a>\n';
+	tplMediaPlayerItemIMG += '<a target="_blank" href="/file/?file=%(fullpath)&root=%(root)"><img src="/webdata/gfx/save.png" title="download File" border="0"></a>\n';
 	tplMediaPlayerItemIMG += '</div>\n';
 var tplMediaPlayerItemFooter = '</tr>\n';
 

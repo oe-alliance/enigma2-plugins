@@ -1,7 +1,7 @@
 from twisted.web2 import resource, stream, responsecode, http, http_headers
 import os
 
-class MovieStreamer(resource.Resource):
+class FileStreamer(resource.Resource):
     addSlash = True
     
     def render(self, req):
@@ -62,14 +62,27 @@ class MovieStreamer(resource.Resource):
                 w3 = i.split("=")
                 parts[w3[0]] = w3[1]
         except:
-            return http.Response(responsecode.OK, stream="no file given with file=???")            
+            return http.Response(responsecode.OK, stream="no file given with file=???")
+        root = "/hdd/movie/"
+        if parts.has_key("root"):
+            root = parts["root"].replace("%20"," ")
         if parts.has_key("file"):
-            path = "/hdd/movie/"+parts["file"].replace("%20"," ")
+            filename = parts["file"].replace("%20"," ")
+            path = root+filename
             if os.path.exists(path):
                 self.filehandler = open(path,"r")
                 s = myFileStream(self.filehandler)
-                resp =  http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('video', 'ts')},stream=s)
-                resp.headers.addRawHeader('Content-Disposition','attachment; filename="%s"'%path)
+                type = path.split(".")[-1]
+                header = http_headers.MimeType('video', 'ts')
+                if type == "mp3" or type == "ogg" or type == "wav":
+                    header = http_headers.MimeType('audio', 'x-mpeg')
+                elif type == "avi" or type == "mpg":
+                    header = http_headers.MimeType('video', 'x-msvideo')
+                elif type == "jpg" or type == "jpeg" or type == "jpe":
+                    header = http_headers.MimeType('image', 'jpeg')
+                
+                resp =  http.Response(responsecode.OK, {'Content-type': header},stream=s)
+                resp.headers.addRawHeader('Content-Disposition','attachment; filename="%s"'%filename)
                 return resp
             else:
                 return http.Response(responsecode.OK, stream="file '%s' was not found"%path)            
