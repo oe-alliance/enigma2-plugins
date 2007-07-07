@@ -10,6 +10,7 @@ from Screengrab import GrabResource
 from IPKG import IPKGResource
 from PlayService import ServiceplayerResource
 from Uploader import UploadResource
+from Notepad import NotepadResource
 
 class Toplevel(resource.Resource):
     addSlash = True
@@ -25,6 +26,7 @@ class Toplevel(resource.Resource):
         self.putChild("play",ServiceplayerResource(self.session))
         self.putChild("wap",RedirectorResource("/web/wap/"))# shorten and simplify url to wap-pages
         self.putChild("upload",UploadResource())
+        self.putChild("notes",NotepadResource())
         
         if config.plugins.Webinterface.includehdd.value:
             self.putChild("hdd",static.File("/hdd"))
