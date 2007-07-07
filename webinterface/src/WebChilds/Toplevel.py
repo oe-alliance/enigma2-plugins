@@ -9,6 +9,7 @@ from MovieStreamer import MovieStreamer
 from Screengrab import GrabResource
 from IPKG import IPKGResource
 from PlayService import ServiceplayerResource
+from Uploader import UploadResource
 
 class Toplevel(resource.Resource):
     addSlash = True
@@ -23,6 +24,7 @@ class Toplevel(resource.Resource):
         self.putChild("ipkg",IPKGResource())
         self.putChild("play",ServiceplayerResource(self.session))
         self.putChild("wap",RedirectorResource("/web/wap/"))# shorten and simplify url to wap-pages
+        self.putChild("upload",UploadResource())
         
         if config.plugins.Webinterface.includehdd.value:
             self.putChild("hdd",static.File("/hdd"))
@@ -46,4 +48,5 @@ class RedirectorResource(resource.Resource):
         resource.Resource.__init__(self)
     def render(self, req):
         return http.RedirectResponse(self.uri)
+
 
