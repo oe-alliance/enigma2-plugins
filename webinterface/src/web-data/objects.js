@@ -683,3 +683,83 @@ function File(xml){
 	}
 }	
 //END class File
+
+
+
+//START class NoteList
+function NoteList(xml){
+	// parsing values from xml-element
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2noteslist").item(0).getElementsByTagName("e2note");
+	} catch (e) {
+		debug("NoteList parsing Error");
+	}
+	this.getArray = function(){
+		var listxy = new Array();
+		for(var i=0;i<this.xmlitems.length;i++){
+			var xv = new Note(this.xmlitems.item(i));
+			listxy.push(xv);			
+		}
+		return listxy;
+	}
+}
+//END class NoteList
+
+//START class Note
+function Note(xml){	
+	try{
+		this.filename = xml.getElementsByTagName('e2notename').item(0).firstChild.data;
+	} catch (e) {
+		this.filename = "N/A";
+	}
+	try{
+		this.saved = xml.getElementsByTagName('e2notesaved').item(0).firstChild.data;
+	} catch (e) {
+		this.saved = "N/A";
+	}
+	try{
+		this.nameold = xml.getElementsByTagName('e2notenameold').item(0).firstChild.data;
+	} catch (e) {
+		this.nameold = "False";
+	}
+	try{
+		this.content = xml.getElementsByTagName('e2notecontent').item(0).firstChild.data;
+	} catch (e) {
+		this.content = " ";
+	}
+	try{
+		this.size = xml.getElementsByTagName('e2notesize').item(0).firstChild.data;
+	} catch (e) {
+		this.size = "N/A";
+	}
+	try{
+		this.mtime = new Date(parseInt(xml.getElementsByTagName('e2notemtime').item(0).firstChild.data)*1000);
+	} catch (e) {
+		this.mtime = "N/A";
+	}
+	try{
+		this.ctime = new Date(parseInt(xml.getElementsByTagName('e2notectime').item(0).firstChild.data)*1000);
+	} catch (e) {
+		this.ctime = "N/A";
+	}
+
+	this.getMTime = function()
+	{
+		var Wochentag = new Array("So", "Mo", "Di", "Mi", "Do", "Fr", "Sa");
+		var wday = Wochentag[this.mtime.getDay()];
+		var day = this.mtime.getDate();
+		var month = this.mtime.getMonth()+1;
+		var year = this.mtime.getFullYear();
+		return wday+".&nbsp;"+day+"."+month+"."+year+" "+this.mtime.getHours()+":"+this.mtime.getMinutes();
+	}
+	this.getCTime = function()
+	{
+		var Wochentag = new Array("So", "Mo", "Di", "Mi", "Do", "Fr", "Sa");
+		var wday = Wochentag[this.ctime.getDay()];
+		var day = this.ctime.getDate();
+		var month = this.ctime.getMonth()+1;
+		var year = this.ctime.getFullYear();
+		return wday+".&nbsp;"+day+"."+month+"."+year+" "+this.ctime.getHours()+":"+this.ctime.getMinutes();
+	}
+}
+//END class NoteList

@@ -46,6 +46,9 @@ var url_messageanswer = "/web/messageanswer?getanswer=now";
 var url_powerstate = "/web/powerstate"; // plus new powerstate
 var url_remotecontrol = "/web/remotecontrol"; // plus command
 
+var url_notelist = "/notes";
+var url_note = "/notes?show="; //plus filename
+
 var bouqet_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
 var bouqet_radio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
 var bouqet_provider_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name';

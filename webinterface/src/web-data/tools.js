@@ -113,7 +113,7 @@ function openWindow(title, inner, width, height, x, y, id){
 			if(id == null) id = new Date().toUTCString();
 			if(x == null) x = 460;
 			if(y == null) y = 400;
-			var win = new Window(id, {className: windowStyle, title: title, width: width, height: height});
+			var win = new Window(id, {className: windowStyle, title: title, width: width, height: height,wiredDrag: true});
 			win.getContent().innerHTML = inner;
 			win.setDestroyOnClose();
 			win.showCenter();
@@ -1117,4 +1117,80 @@ function showPowerStateSendForm(){
 }
 function sendPowerState(newState){
 	new Ajax.Request( url_powerstate+'?newstate='+newState, { asynchronous: true, method: 'get' });
+}
+
+
+
+// Notes
+function showNotes(){
+	debug("loading notes");
+	doRequest(url_notelist, incomingNoteList);	
+}
+
+function incomingNoteList(request){
+	if(request.readyState == 4){
+		var notes = new NoteList(getXML(request)).getArray();
+		debug("have "+notes.length+" movies");
+		listerHtml 	= tplNotesListHeader;		
+		for ( var i = 0; i <notes.length; i++){
+			var note = notes[i];
+			var namespace = { 	
+				'name': note.filename,
+				'size': note.size,
+				'ctime': note.getCTime(),
+				'mtime': note.getMTime(),
+			};
+			listerHtml += RND(tplNotesListItem, namespace);
+		}
+		listerHtml += tplNotesListFooter;
+		$('BodyContent').innerHTML = listerHtml;
+		setBodyMainContent('BodyContent');
+		
+	}		
+}
+function showNote(name){
+	debug("loading note "+name);
+	doRequest(url_note+name, incomingNote);	
+}
+
+function incomingNote(request){
+	if(request.readyState == 4){
+		var note = new Note(getXML(request));
+		var namespace = { 	
+				'name': note.filename,
+				'size': note.size,
+				'content': note.content,
+				'ctime': note.getCTime(),
+				'mtime': note.getMTime()
+			};
+		var html = RND(tplNote, namespace);
+		openWindow("Note '"+note.filename+"'", html, 400, 300,50,60);
+	}		
+}
+function saveNote(formid){
+	var nameold = $(formid+'_name').value;
+	var namenew = $(formid+'_namenew').value;
+	var content = $(formid+'_content').value;
+	debug("loading notes"+nameold+namenew+content);
+	doRequest(url_notelist+"?save="+nameold+"&namenew="+namenew+"&content="+content, incomingNoteSavedResult);	
+	Windows.closeAll();
+	
+}
+function incomingNoteSavedResult(request){
+	if(request.readyState == 4){
+		var note = new Note(getXML(request));
+		if (note.saved == "True"){
+			showNote(note.filename);
+			showNotes();
+		}
+	}
+}
+function createNote(){
+		doRequest(url_notelist+"?create=new", incomingNoteCreateResult);	
+}
+
+function incomingNoteCreateResult(request){
+	if(request.readyState == 4){
+		showNotes();
+	}
 }

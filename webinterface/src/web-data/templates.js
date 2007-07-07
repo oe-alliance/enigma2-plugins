@@ -509,3 +509,41 @@ var	tplMediaPlayerItemIMG  = '<div class="sListExt">\n';
 var tplMediaPlayerItemFooter = '</tr>\n';
 
 var tplMediaPlayerFooter = "</tbody></table>\n";
+
+
+//Note Template
+var tplNotesListHeader  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n';
+	tplNotesListHeader += '<tr>\n';
+	tplNotesListHeader += '<th class="pageHeader">Notes</th>\n';
+	tplNotesListHeader += '<tbody class="scrollContent">\n';
+	tplNotesListHeader += '<button onclick="createNote()">create new Note</button>\n';
+
+var	tplNotesListFooter  = '</tbody></table>\n';
+
+var tplNotesListItem  = '<tr><td onclick="showNote(\'%(name)\');">%(name)</td><td>%(ctime)</td><td>%(size)</td></tr>';
+
+var tplNote  = '<form id="note_%(name)"><input type="hidden" id="note_%(name)_name" value="%(name)">';
+	tplNote += '<table width="100%">';
+	tplNote += '<tr style="background-color: #DDDDDD;">';
+	tplNote += '<td>Name:</td>';
+	tplNote += '<td><input type="text" value="%(name)" id="note_%(name)_namenew" size="30"></td>';
+	tplNote += '</tr>';
+	tplNote += '<tr style="background-color: #DDDDDD;">';
+	tplNote += '<td>Creationdate:</td>';
+	tplNote += '<td id="note_%(name)_ctime">%(ctime)</td>';
+	tplNote += '</tr>';
+	tplNote += '<tr style="background-color: #DDDDDD;">';
+	tplNote += '<td>Modified</td>';
+	tplNote += '<td id="note_%(name)_mtime">%(mtime)</td>';
+	tplNote += '</tr>';
+	tplNote += '<tr style="background-color: #DDDDDD;">';
+	tplNote += '<td>Size:</td>';
+	tplNote += '<td>%(size)</td>';
+	tplNote += '</tr>';
+	tplNote += '<tr style="background-color: #DDDDDD;">';
+	tplNote += '<td colspan="2"><textarea cols="50" rows="10"  id="note_%(name)_content">%(content)</textarea></td>';
+	tplNote += '</tr>';
+	tplNote += '<tr style="background-color: #DDDDDD;">';
+	tplNote += '<td colspan="2"><input type="button"  onclick="saveNote(\'note_%(name)\');" value="save"><input type="button"  onclick="$(\'note_%(name)\').reset();" value="reset"></td>';
+	tplNote += '</tr>';
+	tplNote += '</table></form>';
