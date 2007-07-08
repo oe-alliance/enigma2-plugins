@@ -552,8 +552,8 @@ var tplNote  = '<form id="note_%(name)"><input type="hidden" id="note_%(name)_na
 var tplFileBrowserHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
     tplFileBrowserHeader += '<thead class="fixedHeader">\n';
     tplFileBrowserHeader += '<tr>\n';
-    tplFileBrowserHeader += '<th><div class="sListHeader">FileBrowser %(root)</div>\n';
-    tplFileBrowserHeader += '<div class="sListSearch">';
+    tplFileBrowserHeader += '<th><div class="sListHeader">FileBrowser %(root)</div></th>\n';
+    tplFileBrowserHeader += '<th><div class="sListSearch">';
 	tplFileBrowserHeader += '<form onSubmit="loadFileBrowser(\'%(root)\', document.getElementById(\'searchText\').value); return false;">';
 	tplFileBrowserHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search Pattern"/>';
 	tplFileBrowserHeader += '<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search...">';
@@ -561,13 +561,15 @@ var tplFileBrowserHeader  = '<table border="0" cellpadding="0" cellspacing="0" c
     tplFileBrowserHeader += '</tr>\n';
     tplFileBrowserHeader += '</thead>\n';
     tplFileBrowserHeader += '<tbody class="scrollContent">\n';
+    tplFileBrowserHeader += '<tr width="80%"><td>File/Directory</td>\n';
+    tplFileBrowserHeader += '<td>Action</td>\n</tr>\n';
 
-var tplFileBrowserItemHead = '<tr>\n';
-var tplFileBrowserItemBody = '<td><div style="color: #%(color);" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" class="sListSName" title="%(servicereference)">%(name)</div>';
-var tplFileBrowserItemIMG  = '<div class="sListExt">\n';
+var tplFileBrowserItemHead = '<tr width="80%">\n';
+var tplFileBrowserItemBody = '<td><div style="color: #%(color);" onclick="%(exec)(\'%(servicereference)\',\'%(root)\');" class="sListSName" title="%(servicereference)">%(name)</div></td>';
+var tplFileBrowserItemIMG  = '<td><div class="sListExt">\n';
     tplFileBrowserItemIMG += '<img src="/webdata/gfx/trash.gif" onclick="delFile(\'%(name)\',\'%(root)\');" title="delete File" border="0">\n';
     tplFileBrowserItemIMG += '<a target="_blank" href="/file/?file=%(name)&root=%(root)"><img src="/webdata/gfx/save.png" title="download File" border="0"></a>\n';
-    tplFileBrowserItemIMG += '</div>\n';
+    tplFileBrowserItemIMG += '</div></td>\n';
 var tplFileBrowserItemFooter = '</tr>\n';
 
 var tplFileBrowserFooter  = '</tbody></table>\n';

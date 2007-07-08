@@ -1173,6 +1173,7 @@ function incomingFileBrowser(request){
 			listerHtml += tplFileBrowserItemFooter;
 		}
 		listerHtml += RND(tplFileBrowserFooter, {'root': root});
+		alert(listerHtml);
 		$('BodyContent').innerHTML = listerHtml;
 		setBodyMainContent('BodyContent');
 	}		
@@ -1210,7 +1211,7 @@ function incomingNoteList(request){
 				'name': note.filename,
 				'size': note.size,
 				'ctime': note.getCTime(),
-				'mtime': note.getMTime(),
+				'mtime': note.getMTime()
 			};
 			listerHtml += RND(tplNotesListItem, namespace);
 		}
