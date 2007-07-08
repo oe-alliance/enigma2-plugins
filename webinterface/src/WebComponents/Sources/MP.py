@@ -3,7 +3,7 @@ from enigma import eServiceReference#, iServiceInformation
 from Components.Sources.Source import Source
 from ServiceReference import ServiceReference,eServiceCenter
 #from Tools.Directories import resolveFilename,SCOPE_HDD
-from Components.FileList import FileList#, FileEntryComponent
+from Components.FileList import FileList, FileEntryComponent
 
 #import os
 
@@ -34,20 +34,35 @@ class MP( Source):
         
         returnList = []
         
+        from os import path as os_path, listdir
         matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)" #MediaPlayer-Match
+        useServiceRef = False
         if param["types"] == "audio":
             matchingPattern = "(?i)^.*\.(mp3|ogg|wav|wave|m3u|pls|e2pls)"
+            useServiceRef = True
         elif param["types"] == "video":
             matchingPattern = "(?i)^.*\.(ts|avi|mpeg|m3u|pls|e2pls|mpg|vob)"
+            useServiceRef = True
         elif param["types"] == "any":
-            matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)"
-        filelist = FileList(param["path"], matchingPattern, useServiceRef = True)
+            matchingPattern = ".*"
+        else:
+            matchingPattern = param["types"]
+        
+        #__init__(self, directory, showDirectories = True, showFiles = True, matchingPattern = None, useServiceRef = False, isTop = False):
+        filelist = FileList(param["path"], True, True, matchingPattern, useServiceRef, False)
         list = filelist.getFileList()
         for x in list:
-            if x[0][1] == False: #isDir
-                returnList.append([x[0][0].toString(),x[0][1],param["path"]])
+            if useServiceRef == True:
+                if x[0][1] == False: #isDir
+                    returnList.append([x[0][0].toString(),x[0][1],param["path"]])
+                else:
+                    returnList.append([x[0][0],x[0][1],param["path"]])
             else:
-                returnList.append([x[0][0],x[0][1],param["path"]])
+                if x[0][1] == False: #isDir
+                    returnList.append([param["path"]+x[0][0],x[0][1],param["path"]])
+                else:
+                    returnList.append([x[0][0],x[0][1],param["path"]])
+
         return returnList
 
     def playFile(self,param):

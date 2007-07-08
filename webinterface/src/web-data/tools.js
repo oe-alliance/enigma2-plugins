@@ -370,7 +370,7 @@ function extdescriptionSmall(txt,num) {
 
 function loadServiceEPGNowNext(servicereference){
 	var url = url_epgnow+servicereference;
-	doRequest(url, incomingServiceEPGNowNext, false);	
+	doRequest(url, incomingServiceEPGNowNext, false);
 }
 
 function incomingServiceEPGNowNext(request){
@@ -445,7 +445,7 @@ function volumeUp(){
 	doRequest(url_volumeup,handleVolumeRequest, false);
 }
 function volumeDown(){
-	doRequest(url_volumedown,handleVolumeRequest, false);	
+	doRequest(url_volumedown,handleVolumeRequest, false);
 }
 function volumeMute(){
 	doRequest(url_volumemute,handleVolumeRequest, false);
@@ -582,7 +582,7 @@ function incomingChannellist(request){
 // Movies
 function loadMovieList(tag){
 	debug("loading movies by tag '"+tag+"'");
-	doRequest(url_movielist+tag, incomingMovieList);	
+	doRequest(url_movielist+tag, incomingMovieList, false);
 }
 
 function incomingMovieList(request){
@@ -1039,7 +1039,7 @@ function restartTwisted() {
 //MediaPlayer
 function loadMediaPlayer(directory){
 	debug("loading loadMediaPlayer");
-	doRequest(url_mediaplayerlist+directory, incomingMediaPlayer);	
+	doRequest(url_mediaplayerlist+directory, incomingMediaPlayer, false);
 }
 function incomingMediaPlayer(request){
 	if(request.readyState == 4){
@@ -1116,9 +1116,9 @@ function showPowerStateSendForm(){
 function sendPowerState(newState){
 	new Ajax.Request( url_powerstate+'?newstate='+newState, { asynchronous: true, method: 'get' });
 }
-function loadFileBrowser(directory){
+function loadFileBrowser(directory,types){
 	debug("loading loadFileBrowser");
-	doRequest(url_filelist+directory, incomingFileBrowser);	
+	doRequest(url_filelist+directory+"&types="+types, incomingFileBrowser, false);	
 }
 function incomingFileBrowser(request){
 	if(request.readyState == 4){
@@ -1174,19 +1174,29 @@ function incomingFileBrowser(request){
 		}
 		listerHtml += RND(tplFileBrowserFooter, {'root': root});
 		$('BodyContent').innerHTML = listerHtml;
-		var sendMediaPlayerTMP = sendMediaPlayer;
-		sendMediaPlayer = false;
 		setBodyMainContent('BodyContent');
-		sendMediaPlayer = sendMediaPlayerTMP;
 	}		
 }
-
-
+function delFile(file,root) {
+	debug("loading loadMediaPlayer");
+	doRequest(url_delfile+root+file, incomingDelFileResult, false);
+}
+function incomingDelFileResult(request) {
+	debug("incomingDelFileResult");
+	if(request.readyState == 4){
+		var delresult = new SimpleXMLResult(getXML(request));
+		if(delresult.getState()){
+			loadFileBrowser($('path').value);
+		}else{
+			messageBox("Deletion Error","Reason: "+delresult.getStateText());
+		}
+	}		
+}
 
 // Notes
 function showNotes(){
 	debug("loading notes");
-	doRequest(url_notelist, incomingNoteList);	
+	doRequest(url_notelist, incomingNoteList, false);
 }
 
 function incomingNoteList(request){
@@ -1212,7 +1222,7 @@ function incomingNoteList(request){
 }
 function showNote(name){
 	debug("loading note "+name);
-	doRequest(url_note+name, incomingNote);	
+	doRequest(url_note+name, incomingNote, false);
 }
 
 function incomingNote(request){
@@ -1234,7 +1244,7 @@ function saveNote(formid){
 	var namenew = $(formid+'_namenew').value;
 	var content = $(formid+'_content').value;
 	debug("loading notes"+nameold+namenew+content);
-	doRequest(url_notelist+"?save="+nameold+"&namenew="+namenew+"&content="+content, incomingNoteSavedResult);	
+	doRequest(url_notelist+"?save="+nameold+"&namenew="+namenew+"&content="+content, incomingNoteSavedResult, false);	
 	Windows.closeAll();
 	
 }
@@ -1248,7 +1258,7 @@ function incomingNoteSavedResult(request){
 	}
 }
 function createNote(){
-		doRequest(url_notelist+"?create=new", incomingNoteCreateResult);	
+		doRequest(url_notelist+"?create=new", incomingNoteCreateResult, false);
 }
 
 function incomingNoteCreateResult(request){
