@@ -1173,7 +1173,6 @@ function incomingFileBrowser(request){
 			listerHtml += tplFileBrowserItemFooter;
 		}
 		listerHtml += RND(tplFileBrowserFooter, {'root': root});
-		alert(listerHtml);
 		$('BodyContent').innerHTML = listerHtml;
 		setBodyMainContent('BodyContent');
 	}		
