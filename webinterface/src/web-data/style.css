@@ -607,6 +607,20 @@ span.sListSLink:hover, span.sListSLink.hover{
 }
 
 /* movielist */
+.movieListName{
+	font-size: 14px;
+	font-weight: bold;
+	float:left;
+	width:661px;
+	cursor:help;
+}
+.movieListExt{
+	border-left: 1px solid #CCC;
+	float:left;
+	width:90px;
+	text-align: right;
+}
+
 .movieDetails {
 	border: 1px solid #AAA;
 	width: 100%;
