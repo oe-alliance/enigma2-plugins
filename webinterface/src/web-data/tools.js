@@ -600,6 +600,7 @@ function incomingMovieList(request){
 				'descriptionextended': movie.getDescriptionExtended(),
 				'filelink': String(movie.getFilename()).substr(17,movie.getFilename().length),
 				'filename': String(movie.getFilename()),
+				'filesize': movie.getFilesizeMB(),
 				'tags': movie.getTags().join(', ') ,
 				'length': movie.getLength() ,
 				'time': movie.getTimeDay()+"&nbsp;"+ movie.getTimeStartString()

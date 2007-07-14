@@ -10,6 +10,7 @@
 		&lt;e2length><e2:item name="Length"  filter="xml"/>&lt;/e2length>
 		&lt;e2tags><e2:item name="Tags"  filter="xml"/>&lt;/e2tags>
 		&lt;e2filename><e2:item name="Filename"  filter="xml"/>&lt;/e2filename>
+		&lt;e2filesize><e2:item name="Filesize"  filter="xml"/>&lt;/e2filesize>
 	&lt;/e2movie>
 	</e2:convert>
 	<e2:convert type="web:TextToHTML" /></e2:element>

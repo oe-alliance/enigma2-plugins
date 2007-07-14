@@ -252,6 +252,11 @@ function Movie(xml){
 		this.filename = "n/a";
 	}
 	try{
+		this.filesize = xml.getElementsByTagName('e2filesize').item(0).firstChild.data;
+	} catch (e) {
+		this.filesize = 0;
+	}
+	try{
 		this.startTime = xml.getElementsByTagName('e2time').item(0).firstChild.data;
 	} catch (e) {
 		this.startTime = "0";
@@ -314,6 +319,10 @@ function Movie(xml){
 	}	
 	this.getFilename = function(){		
 		return encodeURIComponent(this.filename);
+		
+	}	
+	this.getFilesizeMB = function(){		
+		return Math.floor(parseInt(this.filesize)/100000)+"MB";
 		
 	}	
 }	

@@ -7,7 +7,6 @@ from ServiceReference import ServiceReference,eServiceCenter
 from Tools.Directories import resolveFilename,SCOPE_HDD
 
 import os
-#import sys, traceback
 
 class Movie( Source):
     LIST = 0
@@ -94,6 +93,7 @@ class Movie( Source):
                 movie.append("")
             filename = "/"+"/".join(serviceref.toString().split("/")[1:])
             movie.append(filename)
+            movie.append(os.stat(filename)[6])
             if info.getInfoString(serviceref, iServiceInformation.sTags).lower().find(self.cmd.lower())>=0:
                 """ add movie only to list, if a givven tag is applied to the movie """
                 list.append(movie)
@@ -129,5 +129,6 @@ class Movie( Source):
            ,"Tags": 6
            ,"DescriptionExtended": 7
            ,"Filename": 8
+           ,"Filesize": 9
            }
 
