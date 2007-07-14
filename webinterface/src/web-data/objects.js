@@ -322,7 +322,7 @@ function Movie(xml){
 		
 	}	
 	this.getFilesizeMB = function(){		
-		return Math.floor(parseInt(this.filesize)/100000)+"MB";
+		return Math.round((parseInt(this.filesize)/1024)/1024)+"MB";
 		
 	}	
 }	
