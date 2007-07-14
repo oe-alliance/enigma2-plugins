@@ -61,7 +61,6 @@ var tplServiceListItem  = '<tr id="%(servicereference)extend">\n';
 	tplServiceListItem += '</tr>\n';
 	
 var tplServiceListFooter = "</tbody>\n</table>\n</div>\n";
-//
 
 var	tplServiceListEPGItem  = '<div class="sListEPGTime">%(starttime)</div>\n';
 	tplServiceListEPGItem += '<div class="sListEPGTitle">%(title)</div>\n';
@@ -483,7 +482,7 @@ var tplExtraHiddenFunctions  = '<ul style="list-style-type:disc">';
 	
 var tplRCGrab  = '<IMG id="grabPageIMG" src=""/ height="400" alt="loading image">';
 
-var tplMediaPlayerHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
+var tplMediaPlayerHeader  = '<div class="BodyContentChannellist">\n<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplMediaPlayerHeader += '<thead class="fixedHeader">\n';
 	tplMediaPlayerHeader += '<tr>\n';
 	tplMediaPlayerHeader += '<th><div class="sListHeader">MediaPlayer %(root)';
@@ -549,7 +548,7 @@ var tplNote  = '<form id="note_%(name)"><input type="hidden" id="note_%(name)_na
 	tplNote += '</table></form>';
 	
 
-var tplFileBrowserHeader  = '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
+var tplFileBrowserHeader  = '<div class="BodyContentChannellist">\n<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
     tplFileBrowserHeader += '<thead class="fixedHeader">\n';
     tplFileBrowserHeader += '<tr>\n';
     tplFileBrowserHeader += '<th><div class="sListHeader">FileBrowser %(root)</div></th>\n';
