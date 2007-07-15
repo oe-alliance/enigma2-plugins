@@ -241,7 +241,7 @@ var tplPowerStateSendForm  = '<table cellspacing="0" cellpadding="0" class="abou
 	tplPowerStateSendForm += '<tr><td>\n';
 	tplPowerStateSendForm += '<table style="width: 100%; text-align: center">\n';
 	tplPowerStateSendForm += '<tr><td><center><button onclick="sendRemoteControlRequest(116)">Toggle Standby</button></center></td></tr>\n';
-	tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(0)">Standby</button></center></td></tr>\n';
+//	tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(0)">Standby</button></center></td></tr>\n';
     tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(1)">Deepstandby</button></center></td></tr>\n';
     tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(2)">Reboot</button></center></td></tr>\n';
 	tplPowerStateSendForm += '<tr><td><center><button onclick="sendPowerState(3)">Restart Enigma2</button></center></td></tr>\n';
