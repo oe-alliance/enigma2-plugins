@@ -8,18 +8,18 @@ var tplEPGListItem  = '<tr style="background-color: #DDDDDD;">';
 	tplEPGListItem += '<td width="30%">%(servicename)</td>';
 	tplEPGListItem += '<td>%(title)</td>';
 	tplEPGListItem += '</tr>';
-	
+
 	tplEPGListItem += '<tr style="background-color: #DDDDDD;">';
 	tplEPGListItem += '<td>%(starttime)</td>';
 	tplEPGListItem += '<td>%(duration) min.</td>';
 	tplEPGListItem += '<td>%(description)</td>';
 	tplEPGListItem += '</tr>';
-	
+
 	tplEPGListItem += '<tr style="background-color: #DDDDDD;">';
 	tplEPGListItem += '<td valign="top">%(endtime)</td>';
 	tplEPGListItem += '<td colspan="2"rowspan="2" id="extdescription%(number)">%(extdescriptionSmall)</td>';
 	tplEPGListItem += '</tr>';
-	
+
 	tplEPGListItem +='<tr style="background-color: #DDDDDD;"><td>';
 	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/timer.png" title="add to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'0\');"></a>&nbsp;&nbsp;';
 	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/zap.png" title="add zap to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'1\');"></a>&nbsp;&nbsp;';
@@ -34,7 +34,7 @@ var tplEPGListItem  = '<tr style="background-color: #DDDDDD;">';
 var tplEPGListItemExtend  = '%(shortTxt) ...<a nohref onclick="setComplete(\'extdescription%(number)\',\'%(txt)\');">more</a>';
 
 var tplEPGListFooter = "</table>";
-	
+
 // ServiceList Templates
 var tplServiceListHeader  = '<div class="BodyContentChannellist">\n';
 	tplServiceListHeader += '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
@@ -59,7 +59,7 @@ var tplServiceListItem  = '<tr id="%(servicereference)extend">\n';
     tplServiceListItem += '<tr>\n';
 	tplServiceListItem += '<td colspan="2"><div id="%(servicereference)EPGNOW"></div></td>\n';
 	tplServiceListItem += '</tr>\n';
-	
+
 var tplServiceListFooter = "</tbody>\n</table>\n</div>\n";
 
 var	tplServiceListEPGItem  = '<div class="sListEPGTime">%(starttime)</div>\n';
@@ -117,7 +117,7 @@ var tplMovieListItem  = '<tr>\n';
 		tplMovieListItem += '</table>\n';
 	tplMovieListItem += '</div>\n';
 	tplMovieListItem += '</tr>\n';
-	
+
 var tplMovieListFooter = "</tbody></table>\n</div>\n";
 
 // TimerList Templates
@@ -194,27 +194,28 @@ var tplBouquetListItem  = '<tr>\n';
 var tplBouquetListFooter = "</table>";
 
 //Volume Template
-var tplVolumePanel  = "<img onclick='volumeUp()' src='/webdata/gfx/arrow_up.png'>"; 
-	tplVolumePanel += "<img onclick='volumeDown()' src='/webdata/gfx/arrow_down.png'>"; 
-	tplVolumePanel += "<img id='volume1' onclick='volumeSet(10)' src='/webdata/gfx/led_off.png'>"; 
-	tplVolumePanel += "<img id='volume2' onclick='volumeSet(20)' src='/webdata/gfx/led_off.png'>"; 
-	tplVolumePanel += "<img id='volume3' onclick='volumeSet(30)' src='/webdata/gfx/led_off.png'>"; 
-	tplVolumePanel += "<img id='volume4' onclick='volumeSet(40)' src='/webdata/gfx/led_off.png'>"; 
-	tplVolumePanel += "<img id='volume5' onclick='volumeSet(50)' src='/webdata/gfx/led_off.png'>"; 
-	tplVolumePanel += "<img id='volume6' onclick='volumeSet(60)' src='/webdata/gfx/led_off.png'>"; 
-	tplVolumePanel += "<img id='volume7' onclick='volumeSet(70)' src='/webdata/gfx/led_off.png'>"; 
-	tplVolumePanel += "<img id='volume8' onclick='volumeSet(80)' src='/webdata/gfx/led_off.png'>"; 
-	tplVolumePanel += "<img id='volume9' onclick='volumeSet(90)' src='/webdata/gfx/led_off.png'>"; 
-	tplVolumePanel += "<img id='volume10' onclick='volumeSet(100)' src='/webdata/gfx/led_off.png'>"; 
+var tplVolumePanel  = "<img onclick='volumeUp()' src='/webdata/gfx/arrow_up.png'>";
+	tplVolumePanel += "<img onclick='volumeDown()' src='/webdata/gfx/arrow_down.png'>";
+	tplVolumePanel += "<img id='volume1' onclick='volumeSet(10)' src='/webdata/gfx/led_off.png'>";
+	tplVolumePanel += "<img id='volume2' onclick='volumeSet(20)' src='/webdata/gfx/led_off.png'>";
+	tplVolumePanel += "<img id='volume3' onclick='volumeSet(30)' src='/webdata/gfx/led_off.png'>";
+	tplVolumePanel += "<img id='volume4' onclick='volumeSet(40)' src='/webdata/gfx/led_off.png'>";
+	tplVolumePanel += "<img id='volume5' onclick='volumeSet(50)' src='/webdata/gfx/led_off.png'>";
+	tplVolumePanel += "<img id='volume6' onclick='volumeSet(60)' src='/webdata/gfx/led_off.png'>";
+	tplVolumePanel += "<img id='volume7' onclick='volumeSet(70)' src='/webdata/gfx/led_off.png'>";
+	tplVolumePanel += "<img id='volume8' onclick='volumeSet(80)' src='/webdata/gfx/led_off.png'>";
+	tplVolumePanel += "<img id='volume9' onclick='volumeSet(90)' src='/webdata/gfx/led_off.png'>";
+	tplVolumePanel += "<img id='volume10' onclick='volumeSet(100)' src='/webdata/gfx/led_off.png'>";
 	tplVolumePanel += "<img id='speaker' onclick='volumeMute()' src='/webdata/gfx/speak_on.png'>";
-	
+
 //Signal Template
 var tplSignalPanel  = '<table width="100%" id="SignalPanelTable">';
+	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">dB</td><td width="50" style="background-color: #DDDDDD;"><div id="SNRdB">N/A</div></td></tr>';
 	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">SNR</td><td width="50" style="background-color: #DDDDDD;"><div id="SNR">N/A</div></td></tr>';
 	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">AGC</td><td width="50" style="background-color: #DDDDDD;"><div id="AGC">N/A</div></td></tr>';
 	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">BER</td><td width="50" style="background-color: #DDDDDD;"><div id="BER">N/A</div></td></tr>';
 	tplSignalPanel += '</table>';
-	
+
 
 // Message send
 var tplMessageSendForm  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n';
@@ -290,7 +291,7 @@ var tplRemoteControlForm = '<center><input type="checkbox" id="getScreen" name="
 	tplRemoteControlForm += '<area shape="circle" coords="153, 460, 10" nohref onclick="sendRemoteControlRequest(138)" alt="help">';
     tplRemoteControlForm += '</map>';
 	tplRemoteControlForm += '<img src="/webdata/gfx/remotecontrol.jpg" height="607" width="220" border="0)" alt="Remote Control" usemap="#remotecontrol">';
-	
+
 var tplAddTimerForm  = '<table border=0 cellpadding=0 cellspacing=10>';
 	tplAddTimerForm += '<tr><td colspan="3">Action:</td>';
 	tplAddTimerForm += '<td colspan="3">';
@@ -334,14 +335,14 @@ var tplAddTimerForm  = '<table border=0 cellpadding=0 cellspacing=10>';
 	tplAddTimerForm += 	'<button onclick="sendAddTimer()">Add/Save</button></td></tr></table>';
 
 var tplAddTimerFormOptions = '<option value="%(value)" %(selected)>%(txt)</option>';
-	
+
 var tplAddTimerFormCheckbox = '<input type="checkbox" id="%(id)" name="%(name)" value="%(value)" %(checked)>&nbsp;%(txt)&nbsp;&nbsp;';
 
 var tplAbout  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n';
 	tplAbout += '<tr>\n';
 	tplAbout += '<th colspan="2" class="pageHeader">About</th>\n';
 	tplAbout += '</tr>\n';
-	tplAbout += '<tr>\n'; 
+	tplAbout += '<tr>\n';
 	tplAbout += '<td class="aboutSectionLeft">\n';
 	tplAbout += '<table class="fullwidth">\n';
 	tplAbout += '<tr>\n';
@@ -389,7 +390,7 @@ var tplAbout  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n'
 	tplAbout += '<td class="aboutElementLeft">Capacity</td>\n';
 	tplAbout += '<td class="aboutElementRight">%(hddcapacity)</td>\n';
 	tplAbout += '</tr>\n';
-	tplAbout += '<tr>\n';						
+	tplAbout += '<tr>\n';
 	tplAbout += '<td class="aboutElementLeft">Free</td>\n';
 	tplAbout += '<td class="aboutElementRight">%(hddfree)</td>\n';
 	tplAbout += '</tr>\n';
@@ -410,7 +411,7 @@ var tplAbout  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n'
 	tplAbout += '<td class="aboutElementLeft">Name:</td>\n';
 	tplAbout += '<td class="aboutElementRight">%(serviceName)</td>\n';
 	tplAbout += '</tr>\n';
-	tplAbout += '<tr>\n';	
+	tplAbout += '<tr>\n';
 	tplAbout += '<td class="aboutElementLeft">Provider:</td>\n';
 	tplAbout += '<td class="aboutElementRight">%(serviceProvider)</td>\n';
 	tplAbout += '</tr>\n';
@@ -454,15 +455,15 @@ var tplAbout  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n'
 	tplAbout += '<tr>\n';
 	tplAbout += '<td class="aboutElementLeft">TSID:</td>\n';
 	tplAbout += '<td class="aboutElementRight">%(tsIDh) (%(tsID))</td>\n';
-	tplAbout += '</tr>\n';	
+	tplAbout += '</tr>\n';
 	tplAbout += '<tr>\n';
 	tplAbout += '<td class="aboutElementLeft">ONID:</td>\n';
 	tplAbout += '<td class="aboutElementRight">%(onIDh) (%(onID))</td>\n';
-	tplAbout += '</tr>\n';	
+	tplAbout += '</tr>\n';
 	tplAbout += '<tr>\n';
 	tplAbout += '<td class="aboutElementLeft">SID:</td>\n';
 	tplAbout += '<td class="aboutElementRight">%(sidh) (%(sid))</td>\n';
-	tplAbout += '</tr>\n';									
+	tplAbout += '</tr>\n';
 	tplAbout += '</table>\n';
 	tplAbout += '</td>\n';
 	tplAbout += '</tr>\n';
@@ -475,7 +476,7 @@ var tplAboutTuner  = '<tr>\n';
 	tplAboutTuner += '<td class="aboutElementLeft">%(name)</td>\n';
 	tplAboutTuner += '<td class="aboutElementRight">%(type)</td>\n';
 	tplAboutTuner += '</tr>\n';
-	
+
 
 var tplExtraHiddenFunctions  = '<ul style="list-style-type:disc">';
 	tplExtraHiddenFunctions += '<li><div onclick="restartTwisted()">Restart Twisted</div></li>';
@@ -483,7 +484,7 @@ var tplExtraHiddenFunctions  = '<ul style="list-style-type:disc">';
 	tplExtraHiddenFunctions += '<li><div onclick="restartUpdateStream();">Restart Time/Signal/Current-Channel -Updates</div></li>';
 	tplExtraHiddenFunctions += '<li><div onclick="startDebugWindow();">Start Debug-Window</div></li>';
 	tplExtraHiddenFunctions += '</ul>'
-	
+
 var tplRCGrab  = '<IMG id="grabPageIMG" src=""/ height="400" alt="loading image">';
 
 var tplMediaPlayerHeader  = '<div class="BodyContentChannellist">\n<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
@@ -550,7 +551,7 @@ var tplNote  = '<form id="note_%(name)"><input type="hidden" id="note_%(name)_na
 	tplNote += '<td colspan="2"><input type="button"  onclick="saveNote(\'note_%(name)\');" value="save"><input type="button"  onclick="$(\'note_%(name)\').reset();" value="reset"></td>';
 	tplNote += '</tr>';
 	tplNote += '</table></form>';
-	
+
 
 var tplFileBrowserHeader  = '<div class="BodyContentChannellist">\n<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
     tplFileBrowserHeader += '<thead class="fixedHeader">\n';

@@ -53,6 +53,11 @@
 	<e2:convert type="web:JavascriptUpdate" />
 </e2:element>
 
+<e2:element source="FrontendStatus"  id="SNRdB" streaming="yes">
+	<e2:convert type="FrontendInfo">SNRdB</e2:convert>
+	<e2:convert type="web:JavascriptUpdate" />
+</e2:element>
+
 <e2:element source="FrontendStatus"  id="SNR" streaming="yes">
 	<e2:convert type="FrontendInfo">SNR</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
@@ -66,6 +71,6 @@
 <e2:element source="FrontendStatus"  id="AGC" streaming="yes">
 	<e2:convert type="FrontendInfo">AGC</e2:convert>
 	<e2:convert type="web:JavascriptUpdate" />
-</e2:element>                
-                
+</e2:element>
+
 </e2:screen>
