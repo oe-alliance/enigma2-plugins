@@ -303,7 +303,7 @@ function zap(servicereference){
 //++++       SignalPanel                           ++++
 
 function openSignalDialog(){
-	openWindow("Signal Info",tplSignalPanel, 215, 75,620,40);
+	openWindow("Signal Info",tplSignalPanel, 215, 100,620,40);
 }
 
 

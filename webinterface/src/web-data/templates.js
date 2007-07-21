@@ -210,10 +210,10 @@ var tplVolumePanel  = "<img onclick='volumeUp()' src='/webdata/gfx/arrow_up.png'
 
 //Signal Template
 var tplSignalPanel  = '<table width="100%" id="SignalPanelTable">';
-	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">dB</td><td width="50" style="background-color: #DDDDDD;"><div id="SNRdB">N/A</div></td></tr>';
-	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">SNR</td><td width="50" style="background-color: #DDDDDD;"><div id="SNR">N/A</div></td></tr>';
-	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">AGC</td><td width="50" style="background-color: #DDDDDD;"><div id="AGC">N/A</div></td></tr>';
-	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">BER</td><td width="50" style="background-color: #DDDDDD;"><div id="BER">N/A</div></td></tr>';
+	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">dB</td><td style="background-color: #DDDDDD;"><div id="SNRdB">N/A</div></td></tr>';
+	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">SNR</td><td style="background-color: #DDDDDD;"><div id="SNR">N/A</div></td></tr>';
+	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">AGC</td><td style="background-color: #DDDDDD;"><div id="AGC">N/A</div></td></tr>';
+	tplSignalPanel += '<tr><td style="background-color: #DDDDDD;">BER</td><td style="background-color: #DDDDDD;"><div id="BER">N/A</div></td></tr>';
 	tplSignalPanel += '</table>';
 
 
