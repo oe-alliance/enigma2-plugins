@@ -1,4 +1,8 @@
-import os
+from os import path as os_path \
+	listdir as os_listdir \
+	system as os_system \
+	stat as os_stat \
+	mkdir as os_mkdir
 from twisted.web2 import resource, responsecode, http,http_headers
 
 class NotepadResource(resource.Resource):
@@ -43,7 +47,7 @@ class NotepadResource(resource.Resource):
 
     def do_show(self,filename,was_saved=False,oldfilename=False):
 
-        if os.path.exists(self.DIR+filename) is not True:
+        if os_path.exists(self.DIR+filename) is not True:
             return self.errorFileNotFound(self.DIR+filename)
         else:    
             details = self.getNotesDetails(filename)
@@ -69,12 +73,12 @@ class NotepadResource(resource.Resource):
         filename = self.getArg("save")
         filenamenew = self.getArg("namenew")
         content = self.getArg("content")
-        if os.path.exists(self.DIR+filename) is not True:
+        if os_path.exists(self.DIR+filename) is not True:
             return self.errorFileNotFound(self.DIR+self.getArg("save"))
         else:  
             newname = False  
             if filename != filenamenew:
-                os.system("mv '%s' '%s' " %(self.DIR+filename,self.DIR+filenamenew))
+                os_system("mv '%s' '%s' " %(self.DIR+filename,self.DIR+filenamenew))
                 newname = filename
                 filename = filenamenew
                 
@@ -93,22 +97,22 @@ class NotepadResource(resource.Resource):
     def getNotes(self):
         list = []
         if self.check_dir(force_create=True):
-            for i in os.listdir(self.DIR):
+            for i in os_listdir(self.DIR):
                 list.append(self.getNotesDetails(i))
         return list
 
     def getNotesDetails(self,file):
-        fstat = os.stat(self.DIR+file)
+        fstat = os_stat(self.DIR+file)
         size = fstat[-4]
         mtime = fstat[-3]
         ctime = fstat[-1]
         return (file,size,mtime,ctime)
     
     def check_dir(self,force_create=False):
-        if os.path.isdir(self.DIR):
+        if os_path.isdir(self.DIR):
             return True
-        elif os.path.isdir(self.DIR) is False and force_create is True:
-            return os.mkdir(self.DIR)
+        elif os_path.isdir(self.DIR) is False and force_create is True:
+            return os_mkdir(self.DIR)
         else:
             return False
     

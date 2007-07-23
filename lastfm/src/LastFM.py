@@ -1,11 +1,10 @@
-import httpclient
+from httpclient import getPage
 
-import os
-import md5 # to encode password
-import string
-import time
-import urllib
-import xml.dom.minidom
+from md5 import md5 # to encode password
+from string import split, rstrip
+
+from time import time
+import xml.dom.minidom import parseString
 
 
 
@@ -80,8 +79,8 @@ class LastFM(LastFMHandler):
         self.state = False # if logged in
                     
     def connect(self,username,password):
-        httpclient.getPage(self.host,self.port
-                            ,"/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5.md5(password).digest())
+        getPage(self.host,self.port
+                            ,"/radio/handshake.php?version=" + self.version + "&platform=" + self.platform + "&username=" + username + "&passwordmd5=" + self.hexify(md5(password).digest())
                             ,callback=self.connectCB,errorback=self.onConnectFailed)
     
     def connectCB(self,data):
@@ -103,9 +102,9 @@ class LastFM(LastFMHandler):
         
     def _parselines(self, str):
         res = {}
-        vars = string.split(str, "\n")
+        vars = split(str, "\n")
         for v in vars:
-            x = string.split(string.rstrip(v), "=", 1)
+            x = split(rstrip(v), "=", 1)
             if len(x) == 2:
                 res[x[0]] = x[1].encode("utf-8")
             elif x != [""]:
@@ -143,7 +142,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.getPage(self.info["base_url"],80
+            getPage(self.info["base_url"],80
                             ,self.info["base_path"] + "/np.php?session=" + self.info["session"]
                             ,callback=self.getMetadataCB,errorback=self.onCommandFailed)
 
@@ -158,8 +157,8 @@ class LastFM(LastFMHandler):
                     tmp["album"] = ""
                     tmp["album_url"] = ""
                 self.metadata = tmp
-                self.metadatatime = time.time()
-                self.metadataage = str(int(time.time() - self.metadatatime))
+                self.metadatatime = time()
+                self.metadataage = str(int(time() - self.metadatatime))
                 self.onMetadataLoaded(self.metadata)
                 lastfm_event_register.onMetadataChanged(self.metadata)
         else:
@@ -170,7 +169,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.getPage(self.info["base_url"],80
+            getPage(self.info["base_url"],80
                             ,self.info["base_path"] + "/control.php?command=" + cmd + "&session=" + self.info["session"]
                             ,callback=callback,errorback=self.onCommandFailed)
 
@@ -229,13 +228,13 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.getPage(self.info["base_url"],80
+            getPage(self.info["base_url"],80
                             ,"/1.0/tag/toptags.xml"
                             ,callback=self.getGlobalTagsCB,errorback=self.onCommandFailed)
 
     def getGlobalTagsCB(self,result):
         try:
-            rssDocument = xml.dom.minidom.parseString(result)
+            rssDocument = parseString(result)
             data =[]
             for node in self.XMLgetElementsByTagName(rssDocument, 'tag'):
                 nodex={}
@@ -252,7 +251,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.getPage(self.info["base_url"],80
+            getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/toptracks.xml"%username
                             ,callback=self.getTopTracksCB,errorback=self.onCommandFailed)
            
@@ -267,7 +266,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.getPage(self.info["base_url"],80
+            getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/recenttracks.xml"%username
                             ,callback=self.getRecentTracksCB,errorback=self.onCommandFailed)
            
@@ -282,7 +281,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.getPage(self.info["base_url"],80
+            getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/recentlovedtracks.xml"%username
                             ,callback=self.getRecentLovedTracksCB,errorback=self.onCommandFailed)
            
@@ -297,7 +296,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.getPage(self.info["base_url"],80
+            getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/recentbannedtracks.xml"%username
                             ,callback=self.getRecentBannedTracksCB,errorback=self.onCommandFailed)
            
@@ -311,7 +310,7 @@ class LastFM(LastFMHandler):
     def _parseTracks(self,xmlrawdata):
         #print xmlrawdata
         try:
-            rssDocument = xml.dom.minidom.parseString(xmlrawdata)
+            rssDocument = parseString(xmlrawdata)
             data =[]
             for node in self.XMLgetElementsByTagName(rssDocument, 'track'):
                 nodex={}
@@ -331,7 +330,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.getPage(self.info["base_url"],80
+            getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/neighbours.xml"%username
                             ,callback=self.getNeighboursCB,errorback=self.onCommandFailed)
            
@@ -346,7 +345,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.getPage(self.info["base_url"],80
+            getPage(self.info["base_url"],80
                             ,"/1.0/user/%s/friends.xml"%username
                             ,callback=self.getFriendsCB,errorback=self.onCommandFailed)
            
@@ -361,7 +360,7 @@ class LastFM(LastFMHandler):
     def _parseUser(self,xmlrawdata):
         #print xmlrawdata
         try:
-            rssDocument = xml.dom.minidom.parseString(xmlrawdata)
+            rssDocument = parseString(xmlrawdata)
             data =[]
             for node in self.XMLgetElementsByTagName(rssDocument, 'user'):
                 nodex={}
@@ -379,7 +378,7 @@ class LastFM(LastFMHandler):
         if self.state is not True:
             self.onCommandFailed("not logged in")
         else:
-            httpclient.getPage(self.info["base_url"],80
+            getPage(self.info["base_url"],80
                             ,self.info["base_path"] + "/adjust.php?session=" + self.info["session"] + "&url=" + url
                             ,callback=self.changeStationCB,errorback=self.onCommandFailed)
            

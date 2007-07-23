@@ -1,31 +1,19 @@
-from enigma import eTimer
-from enigma import eConsoleAppContainer
-from enigma import loadPic
-
+from enigma import eTimer, loadPic
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-from Screens.HelpMenu import HelpableScreen , HelpMenu              
-
-from Components.Pixmap import Pixmap,MovingPixmap
+from Screens.HelpMenu import HelpableScreen
+from Components.Pixmap import Pixmap, MovingPixmap
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.config import config, ConfigSubsection, ConfigSlider,ConfigInteger,ConfigYesNo, ConfigText
-from Components.HelpMenuList import HelpMenuList
-
-
-from Tools import Notifications
-
+from Components.ActionMap import ActionMap
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
 from Plugins.Plugin import PluginDescriptor
 
 from StreamPlayer import StreamPlayer
 from LastFMConfig import LastFMConfigScreen
 from LastFM import LastFM, lastfm_event_register
-import httpclient
-import os
-import urllib
-
-import random
+from httpclient import getFile
+from os import remove as os_remove
+from random import randrange
 
 ###############################################################################        
 plugin_path = ""
@@ -504,8 +492,8 @@ class LastFMSaveScreen(Screen):
 
     def movePixmap(self):
         self.startmovingtimer.stop() 
-        newX = random.randrange(720-self.coverartsize[0]-1)
-        newY = random.randrange(576-self.coverartsize[1]-1)
+        newX = randrange(720-self.coverartsize[0]-1)
+        newY = randrange(576-self.coverartsize[1]-1)
         self["cover"].moveTo(newX, newY, time = config.plugins.LastFM.sreensaver.coverartspeed.value)
         self["cover"].startMoving()
         self.startmovingtimer.start(config.plugins.LastFM.sreensaver.coverartinterval.value*1000)
@@ -518,18 +506,18 @@ class ImageConverter:
         self.callBack = callBack
         self.width = width
         self.height = height
-        self.targetfile= "/tmp/coverart"+str(random.randrange(5000))
+        self.targetfile= "/tmp/coverart"+str(randrange(5000))
     
         
     def convert(self,sourceURL):
         if self.lastURL != sourceURL:
             extension = sourceURL.split(".")[-1]
             self.tmpfile = self.targetfile+"."+extension
-            httpclient.getFile(self.tmpfile,sourceURL,callback=self.onImageLoaded)
+            getFile(self.tmpfile,sourceURL,callback=self.onImageLoaded)
             self.lastURL = sourceURL
 
     def onImageLoaded(self,dummy):
             self.currPic = loadPic(self.tmpfile, self.width, self.height, 0,1, 0,1)
-            os.remove(self.tmpfile)
+            os_remove(self.tmpfile)
             self.callBack(pixmap=self.currPic)
             

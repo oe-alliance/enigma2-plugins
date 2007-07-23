@@ -1,5 +1,5 @@
 from twisted.web2 import resource, stream, responsecode, http, http_headers
-import os
+from os import path as os_path
 
 class FileStreamer(resource.Resource):
     addSlash = True
@@ -20,7 +20,7 @@ class FileStreamer(resource.Resource):
         if parts.has_key("file"):
             filename = parts["file"].replace("%20"," ")
             path = root+filename
-            if os.path.exists(path):
+            if os_path.exists(path):
                 s = stream.FileStream(open(path,"r"))
                 type = path.split(".")[-1]
                 header = http_headers.MimeType('video', 'ts')

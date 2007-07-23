@@ -1,6 +1,4 @@
-from enigma import *
 from Components.Sources.Source import Source
-
 from Components.ParentalControl import parentalControl
 from Components.config import config
 from ServiceReference import ServiceReference

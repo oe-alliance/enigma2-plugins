@@ -1,10 +1,6 @@
 from enigma import eDVBVolumecontrol #this is not nice
-
-from Components.config import config
 from Components.Sources.Source import Source
-
 from GlobalActions import globalActionMap
-
 from mytest import VolumeControl
 
 class Volume(Source):

@@ -1,7 +1,6 @@
-from enigma import *
 from Screens.Screen import Screen
 from Components.config import config, getConfigListEntry
-from Components.ConfigList import *
+from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
        

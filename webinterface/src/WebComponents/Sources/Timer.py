@@ -1,20 +1,14 @@
 Version = '$Header$';
 
-from enigma import *
-from enigma import eServiceReference 
-from enigma import eServiceCenter
-
+from enigma import eServiceReference, eEPGCache
 from Components.Sources.Source import Source
 from Components.config import config
 from ServiceReference import ServiceReference
-from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT,parseEvent
+from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT, parseEvent
 from Components.config import config
 from xml.sax.saxutils import unescape
-
-import time, string, cgi
-#import codecs
-#codecs.BOM_LE
-# import sys, traceback
+from time import time, strftime, localtime, mktime
+from string import split
 
 class Timer( Source):
     LIST = 0
@@ -120,8 +114,8 @@ class Timer( Source):
                 return False,"%s missing"%element
             else:
                 param[element] = int(param[element])
-        param['begin'] = int( time.strftime("%s",  time.localtime(time.mktime( (param['syear'], param['smonth'], param['sday'], param['shour'], param['smin'], 0, 0, 0, -1) ) ) ) )
-        param['end']   = int( time.strftime("%s",  time.localtime(time.mktime( (param['eyear'], param['emonth'], param['eday'], param['ehour'], param['emin'], 0, 0, 0, -1) ) ) ) )
+        param['begin'] = int( strftime("%s",  localtime(mktime( (param['syear'], param['smonth'], param['sday'], param['shour'], param['smin'], 0, 0, 0, -1) ) ) ) )
+        param['end']   = int( strftime("%s",  localtime(mktime( (param['eyear'], param['emonth'], param['eday'], param['ehour'], param['emin'], 0, 0, 0, -1) ) ) ) )
         
         for element in listDate:
             del param[element]
@@ -129,7 +123,7 @@ class Timer( Source):
         if param['sRef'] is None:
             return False,"sRef missing"
         else:
-            takeApart = string.split(param['sRef'], '|')
+            takeApart = split(param['sRef'], '|')
             if len(takeApart) > 1:
                 param['sRef'] = takeApart[1]
         
@@ -181,7 +175,7 @@ class Timer( Source):
         except:
             pass
 
-        begin = time.time()
+        begin = time()
         end = begin + 3600 * 10
         name = "instant record"
         description = ""
@@ -219,7 +213,7 @@ class Timer( Source):
         
         if param['end'] is None:
             return False,"end missing"
-        elif float(param['end']) > time.time():
+        elif float(param['end']) > time():
             end = float(param['end'])
         else:
              return False,"end is in the past"
@@ -315,10 +309,10 @@ class Timer( Source):
             
             if param['begin'] is None:
                 return False,"begin missing"
-            elif time.time() <= float(param['begin']):
+            elif time() <= float(param['begin']):
                 begin = float(param['begin'])
-            elif time.time() > float(param['begin']) and repeated == 1:
-                begin = time.time()
+            elif time() > float(param['begin']) and repeated == 1:
+                begin = time()
             else:
                 return False,"incorrect time begin"
         

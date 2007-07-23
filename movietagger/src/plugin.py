@@ -2,7 +2,6 @@
 # but dont remove these three lines and dont publish only .pyc-files of these files!
 # 3c5x9, 3c5x9@gmx.de
 
-from enigma import *
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.Label import Label
@@ -10,11 +9,11 @@ from Components.MenuList import MenuList
 from Components.MovieList import MovieList
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.GUIComponent import GUIComponent
 from Components.HTMLComponent import HTMLComponent
-from Components.MultiContent import RT_HALIGN_LEFT, MultiContentEntryText
-from enigma import eListboxPythonMultiContent
+from Components.MultiContent import MultiContentEntryText
+from enigma import eListboxPythonMultiContent, eListbox, eServiceCenter
 
 from Tools.Directories import *
 

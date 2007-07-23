@@ -1,7 +1,5 @@
-from enigma import *
 from Components.Sources.Source import Source
-
-import os
+from os import path, system
 
 class Files( Source):
     DEL = 0
@@ -23,9 +21,9 @@ class Files( Source):
         
         returnList = ["False", "Some error occurred deleting %s" % param]
         
-        if os.path.exists(param):
-            os.system('rm -f "%s"' % param)
-        if os.path.exists(param):
+        if path.exists(param):
+            system('rm -f "%s"' % param)
+        if path.exists(param):
             returnList = ["True","File (%s) was deleted"% param]
         
         return returnList

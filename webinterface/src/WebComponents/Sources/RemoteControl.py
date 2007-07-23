@@ -1,9 +1,4 @@
-from enigma import *
-
-import os
-import struct
-from struct import *
-
+from struct import pack
 from Components.Sources.Source import Source
 
 class RemoteControl( Source):
@@ -30,8 +25,8 @@ class RemoteControl( Source):
             print "the command was not greater 0 (%s)" % type
             return [[False,"the command was not greater 0"]]
         
-        dataon  = struct.pack('iiHHi',0,0,1,type,1)
-        dataoff  = struct.pack('iiHHi',0,0,1,type,0)
+        dataon  = pack('iiHHi',0,0,1,type,1)
+        dataoff  = pack('iiHHi',0,0,1,type,0)
         
         fp=open("/dev/input/event1", 'wb')
         

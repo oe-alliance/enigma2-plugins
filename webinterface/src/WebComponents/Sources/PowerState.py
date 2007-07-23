@@ -1,8 +1,6 @@
-from enigma import *
 from Components.Sources.Source import Source
 
-
-class PowerState( Source):
+class PowerState(Source):
         
     def __init__(self,session):
         self.cmd = []

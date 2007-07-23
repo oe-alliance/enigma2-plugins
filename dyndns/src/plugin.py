@@ -1,19 +1,12 @@
-
-from enigma import *
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.Label import Label
-from Components.ActionMap import ActionMap, NumberActionMap
-
+from Components.ActionMap import ActionMap
 from enigma import eTimer
-
-from Components.ConfigList import *
-from Components.config import config, getConfigListEntry,ConfigText, ConfigSelection, ConfigSubsection, ConfigInteger,ConfigYesNo
-
-import os
-import urllib2
-import base64
-
+from Components.ConfigList import ConfigListScreen
+from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigSubsection, ConfigYesNo
+from urllib2 import Request, urlopen
+from base64 import encodestring
 global sessions
 from twisted.internet import reactor
 
@@ -113,10 +106,10 @@ class DynDNSService:
 			print "[DynDNS] ip was not changed",e
 			
 	def getURL(self,url):
-		request =  urllib2.Request(url)
-   		base64string = base64.encodestring('%s:%s' % (config.plugins.DynDNS.user.value,config.plugins.DynDNS.password.value))[:-1]
+		request =  Request(url)
+   		base64string = encodestring('%s:%s' % (config.plugins.DynDNS.user.value,config.plugins.DynDNS.password.value))[:-1]
    		request.add_header("Authorization", "Basic %s" % base64string)
-   		htmlFile = urllib2.urlopen(request)
+   		htmlFile = urlopen(request)
    		htmlData = htmlFile.read()
    		htmlFile.close()
    		return htmlData

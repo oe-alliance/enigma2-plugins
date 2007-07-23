@@ -5,17 +5,15 @@ from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesN
 from Components.Network import Network
 
 from twisted.internet import reactor, defer
-from twisted.web2 import server, channel, static, resource, stream, http_headers, responsecode, http
+from twisted.web2 import server, channel, http
 from twisted.web2.auth import digest, basic, wrapper
 #from twisted.python import util
-from twisted.python.log import startLogging,discardLogs
+from twisted.python.log import startLogging
 from twisted.cred.portal import Portal, IRealm
 from twisted.cred import checkers, credentials, error
 from zope.interface import Interface, implements
 
-import webif
-import WebIfConfig  
-import os
+from WebIfConfig import WebIfConfigScreen
 
 from WebChilds.Toplevel import Toplevel
 config.plugins.Webinterface = ConfigSubsection()
@@ -62,7 +60,6 @@ def startWebserver(session):
 		return False
 	if config.plugins.Webinterface.debug.value:
 		print "start twisted logfile, writing to %s" % DEBUGFILE 
-		import sys
 		startLogging(open(DEBUGFILE,'w'))
 
 	toplevel = Toplevel(session)
@@ -104,7 +101,7 @@ def autostart(reason, **kwargs):
 			print "[WebIf] twisted not available, not starting web services",e
 			
 def openconfig(session, **kwargs):
-	session.openWithCallback(configCB,WebIfConfig.WebIfConfigScreen)
+	session.openWithCallback(configCB,WebIfConfigScreen)
 
 def configCB(result,session):
 	if result is True:
@@ -162,8 +159,11 @@ class HTTPAuthRealm(object):
 			return IHTTPUser, HTTPUser()
 		raise NotImplementedError("Only IHTTPUser interface is supported")
 
-	
-import md5,time,string,crypt
+
+from string import find, split	
+from md5 import new as md5_new
+from crypt import crypt
+
 DES_SALT = list('./0123456789' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz') 
 def getpwnam(name, pwfile=None):
     """Return pasword database entry for the given user name.
@@ -188,7 +188,7 @@ def getpwnam(name, pwfile=None):
 def passcrypt(passwd, salt=None, method='des', magic='$1$'):
     """Encrypt a string according to rules in crypt(3)."""
     if method.lower() == 'des':
-	    return crypt.crypt(passwd, salt)
+	    return crypt(passwd, salt)
     elif method.lower() == 'md5':
     	return passcrypt_md5(passwd, salt, magic)
     elif method.lower() == 'clear':
@@ -209,7 +209,7 @@ def check_passwd(name, passwd, pwfile=None):
     if not enc_passwd:
         return 0
     elif len(enc_passwd) >= 3 and enc_passwd[:3] == '$1$':
-        salt = enc_passwd[3:string.find(enc_passwd, '$', 3)]
+        salt = enc_passwd[3:find(enc_passwd, '$', 3)]
         return enc_passwd == passcrypt(passwd, salt, 'md5')
        
     else:
@@ -233,15 +233,15 @@ def passcrypt_md5(passwd, salt=None, magic='$1$'):
         salt = salt[len(magic):]
 
     # salt only goes up to first '$'
-    salt = string.split(salt, '$')[0]
+    salt = split(salt, '$')[0]
     # limit length of salt to 8
     salt = salt[:8]
 
-    ctx = md5.new(passwd)
+    ctx = md5_new(passwd)
     ctx.update(magic)
     ctx.update(salt)
     
-    ctx1 = md5.new(passwd)
+    ctx1 = md5_new(passwd)
     ctx1.update(salt)
     ctx1.update(passwd)
     
@@ -263,7 +263,7 @@ def passcrypt_md5(passwd, salt=None, magic='$1$'):
     final = ctx.digest()
     
     for i in range(1000):
-	ctx1 = md5.new()
+	ctx1 = md5_new()
 	if i & 1:
 	    ctx1.update(passwd)
 	else:

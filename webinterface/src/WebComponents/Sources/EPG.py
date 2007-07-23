@@ -1,8 +1,6 @@
-from enigma import *
-
 from Components.Sources.Source import Source
 from ServiceReference import ServiceReference
-from enigma import eServiceCenter, eServiceReference
+from enigma import eServiceCenter, eServiceReference, eEPGCache
 
 class EPG( Source):
     NOW=0

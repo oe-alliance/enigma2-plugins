@@ -1,16 +1,12 @@
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER
-
 from Components.MultiContent import MultiContentEntryText
 from Components.GUIComponent import GUIComponent
 from Components.HTMLComponent import HTMLComponent
-from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigSubsection, ConfigMAC, ConfigEnableDisable, ConfigText, ConfigSelection
+from Components.config import config, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, ConfigSelection
 
-from types import *
-
-import iwlibs
-
-import os, string
-
+from os import system
+from string import maketrans, strip
+from iwlibs import getNICnames, Wireless, Iwfreq
 
 list = []
 list.append(_("WEP"))
@@ -25,8 +21,6 @@ config.plugins.wlan.encryption.enabled = NoSave(ConfigYesNo(default = False))
 config.plugins.wlan.encryption.type = NoSave(ConfigSelection(list, default = _("WPA")))
 config.plugins.wlan.encryption.psk = NoSave(ConfigText(default = "mysecurewlan", fixed_size = False))
 
-
-
 class Wlan:
 	def __init__(self, iface):
 		a = ''; b = ''
@@ -39,7 +33,7 @@ class Wlan:
 			b = b + chr(i)
 		
 		self.iface = iface
-		self.asciitrans = string.maketrans(a, b)
+		self.asciitrans = maketrans(a, b)
 
 	
 	def asciify(self, str):
@@ -49,7 +43,7 @@ class Wlan:
 	def getWirelessInterfaces(self):
 		iwifaces = None
 		try:
-			iwifaces = iwlibs.getNICnames()
+			iwifaces = getNICnames()
 		except:
 			print "[Wlan.py] No Wireless Networkcards could be found"
 		
@@ -57,13 +51,13 @@ class Wlan:
 
 	
 	def getNetworkList(self):
-		ifobj = iwlibs.Wireless(self.iface) # a Wireless NIC Object
+		ifobj = Wireless(self.iface) # a Wireless NIC Object
 		print "ifobj.getStatistics(): ", ifobj.getStatistics()
 		
 		#Association mappings
 		stats, quality, discard, missed_beacon = ifobj.getStatistics()
 		snr = quality.signallevel - quality.noiselevel
-		os.system("ifconfig "+self.iface+" up")
+		system("ifconfig "+self.iface+" up")
 		
 		try:
 			scanresults = ifobj.scan()
@@ -87,7 +81,7 @@ class Wlan:
 				extra = []
 				for element in result.custom:
 					element = element.encode()
-					extra.append( string.strip(self.asciify(element)) )
+					extra.append( strip(self.asciify(element)) )
 				
 				print result.quality.getSignallevel()
 				
@@ -115,7 +109,7 @@ class Wlan:
 					'bssid': result.bssid,
 					'channel': result.frequency.getChannel(result.frequency.getFrequency()),
 					'encrypted': encryption,
-					'essid': string.strip(self.asciify(result.essid)),
+					'essid': strip(self.asciify(result.essid)),
 					'iface': self.iface,
 					'maxrate' : result.rate[-1],
 					'noise' : result.quality.getNoiselevel(),
@@ -128,8 +122,8 @@ class Wlan:
 
 		
 	def getStatus(self):
-		ifobj = iwlibs.Wireless(self.iface)
-		fq = iwlibs.Iwfreq()
+		ifobj = Wireless(self.iface)
+		fq = Iwfreq()
 		
 		status = {
 				  'BSSID': str(ifobj.getAPaddr()),
@@ -295,5 +289,5 @@ class wpaSupplicant:
 	
 	
 	def restart(self, iface):
-		os.system("start-stop-daemon -K -x /usr/sbin/wpa_supplicant")
-		os.system("start-stop-daemon -S -x /usr/sbin/wpa_supplicant -- -B -i"+iface+" -c/etc/wpa_supplicant.conf")
+		system("start-stop-daemon -K -x /usr/sbin/wpa_supplicant")
+		system("start-stop-daemon -S -x /usr/sbin/wpa_supplicant -- -B -i"+iface+" -c/etc/wpa_supplicant.conf")

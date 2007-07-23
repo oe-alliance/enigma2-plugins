@@ -2,7 +2,7 @@ from enigma import eConsoleAppContainer
 
 from twisted.web2 import resource, stream, responsecode, http
 
-import os
+from os import path as os_path, remove as os_remove
 
 class GrabResource(resource.Resource):
     """
@@ -32,7 +32,7 @@ class GrabResource(resource.Resource):
                         self.write(fp.read())
                         fp.close()
                         if self.save is False:
-                            os.remove(self.target)
+                            os_remove(self.target)
                     except Exception,e:
                         self.write("internal error while reading target file")                        
                 elif int(data) is 0 and self.target is None:
@@ -56,7 +56,7 @@ class GrabResource(resource.Resource):
         else:
             save_image = False
         
-        if os.path.exists(self.grab_bin) is not True:
+        if os_path.exists(self.grab_bin) is not True:
             return    http.Response(responsecode.OK,stream="grab is not installed at '%s'. go and fix it."%self.grab_bin)
         elif req.args.has_key("command"): 
             cmd = req.args['command'][0].replace("-","")

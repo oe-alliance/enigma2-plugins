@@ -1,6 +1,4 @@
 # Parts of Code and idea  by Homey
-from enigma import *
-
 from Components.Sources.Source import Source
 from Components.Harddisk import Harddisk
 from Components.NimManager import nimmanager
@@ -11,7 +9,7 @@ from Tools.DreamboxHardware import getFPVersion
 from ServiceReference import ServiceReference
 from enigma import iServiceInformation
 
-from Components.config import config, getConfigListEntry
+from Components.config import config
 
 class About( Source):
     

@@ -1,14 +1,7 @@
-from enigma import *
-from Components import config as config_mod
 from Components.config import config
-
-import os
-import struct
-from struct import *
-
 from Components.Sources.Source import Source
 
-class Settings( Source):
+class Settings(Source):
         
     def __init__(self,session):
         self.cmd = []

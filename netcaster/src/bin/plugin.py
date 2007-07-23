@@ -1,37 +1,21 @@
-from enigma import *
-from enigma import eConsoleAppContainer
-from enigma import eServiceReference
-from enigma import eTimer, iPlayableService, eServiceCenter, iServiceInformation, eSize
 from Screens.Screen import Screen
-from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Label import Label
-from Components.GUIComponent import *
+from Components.GUIComponent import GUIComponent
 from Components.MenuList import MenuList
-from Components.Input import Input
-from Components.Pixmap import *
-from Components.Pixmap import Pixmap
-
-###multicontent
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
-from Components.MultiContent import RT_HALIGN_LEFT, MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Components.MultiContent import MultiContentEntryText
 from enigma import eListboxPythonMultiContent
 
-###
 from Plugins.Plugin import PluginDescriptor
-###
-import os,sys,urllib
-###
-
-from StreamPlayer import *
-
-from StreamInterface import Stream
-
+from os import path as os_path, listdir as os_listdir
+from StreamPlayer import StreamPlayer
 from Tools.Import import my_import
+
 ###############################################################################        
 myname = "NETcaster"     
 myversion = "0.2"
@@ -97,7 +81,7 @@ class NETcasterScreenBrowser(Screen):
         self.pluginlist = []
         global plugin_path,myname
         interfacepath = plugin_path+"/interface"
-        for iface in os.listdir(interfacepath):
+        for iface in os_listdir(interfacepath):
             if iface.endswith(".py") and iface != "__init__.py":
                 pluginp = '.'.join(["Plugins", "Extensions", myname, "interface",iface.replace(".py","")])
                 plugin = my_import(pluginp)
@@ -186,7 +170,7 @@ class NETcasterScreenHelp(Screen):
         Screen.__init__(self, session)
         global plugin_path
         readme = plugin_path+"/readme.txt"
-        if os.path.exists(readme):
+        if os_path.exists(readme):
             fp = open(readme)
             text = fp.read()
             fp.close()

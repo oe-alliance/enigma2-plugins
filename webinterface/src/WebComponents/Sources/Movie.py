@@ -1,12 +1,10 @@
-from enigma import *
 from enigma import eServiceReference, iServiceInformation
 from Components.Sources.Source import Source
 from Components.config import config
-from ServiceReference import ServiceReference,eServiceCenter
-#from Components.MovieList import MovieList
-from Tools.Directories import resolveFilename,SCOPE_HDD
+from ServiceReference import ServiceReference
+from Tools.Directories import resolveFilename, SCOPE_HDD
 
-import os
+from os import path as os_path, stat as os_stat, system as os_system
 
 class Movie( Source):
     LIST = 0
@@ -35,25 +33,25 @@ class Movie( Source):
         if param is None:
             return False,"title missing"
         
-        #os.system("rm -f %s*" % param)
+        #os_system("rm -f %s*" % param)
         try:
-            os.system('rm -f "%s"' % param)
+            os_system('rm -f "%s"' % param)
             #.ap .cuts .meta
-            if os.path.exists("%s.ap" % param):
-                os.system('rm -f "%s.ap"' % param)
+            if os_path.exists("%s.ap" % param):
+                os_system('rm -f "%s.ap"' % param)
             
-            if os.path.exists("%s.cuts" % param):
-                os.system('rm -f "%s.cuts"' % param)
+            if os_path.exists("%s.cuts" % param):
+                os_system('rm -f "%s.cuts"' % param)
             
-            if os.path.exists("%s.meta" % param):
-                os.system('rm -f "%s.meta"' % param)
+            if os_path.exists("%s.meta" % param):
+                os_system('rm -f "%s.meta"' % param)
             
-            if os.path.exists("%s.eit" % param):
-                os.system('rm -f "%s.eit"' % param)
+            if os_path.exists("%s.eit" % param):
+                os_system('rm -f "%s.eit"' % param)
         except OSError:
             return False,"OSErrorSome error occurred while deleting file"
         
-        if os.path.exists(param):
+        if os_path.exists(param):
             return False,"Some error occurred while deleting file"
         else:
             return True,"File deleted"
@@ -93,7 +91,7 @@ class Movie( Source):
                 movie.append("")
             filename = "/"+"/".join(serviceref.toString().split("/")[1:])
             movie.append(filename)
-            movie.append(os.stat(filename)[6])
+            movie.append(os_stat(filename)[6])
             if info.getInfoString(serviceref, iServiceInformation.sTags).lower().find(self.cmd.lower())>=0:
                 """ add movie only to list, if a givven tag is applied to the movie """
                 list.append(movie)

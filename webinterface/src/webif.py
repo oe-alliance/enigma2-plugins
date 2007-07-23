@@ -47,9 +47,6 @@ from xml.sax.handler import ContentHandler, feature_namespaces
 
 from twisted.python import util
 
-import sys
-import time
- 
 # prototype of the new web frontend template system.
 
 class WebScreen(Screen):

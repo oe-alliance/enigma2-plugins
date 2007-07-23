@@ -1,11 +1,8 @@
-from enigma import *
 from Components.Sources.Source import Source
-from enigma import eServiceReference, iServiceInformation
-
 from ServiceReference import ServiceReference
-import time
+from time import sleep
 
-class SubServices( Source):
+class SubServices(Source):
     
     def __init__(self, session):
         Source.__init__(self)        
@@ -15,7 +12,7 @@ class SubServices( Source):
         print "SubServices was called"
         list = []
         
-        time.sleep(5)
+        sleep(5) # FIXMEEEEE very ugly code !! 
         
         list0 = []
         currentService = self.session.nav.getCurrentlyPlayingServiceReference()

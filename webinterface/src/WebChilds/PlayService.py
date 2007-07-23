@@ -1,6 +1,6 @@
 from enigma import eServiceReference
 from twisted.web2 import resource, stream, responsecode, http
-import os
+from os import path as os_path
 
 class ServiceplayerResource(resource.Resource):
     def __init__(self,session):
@@ -21,7 +21,7 @@ class ServiceplayerResource(resource.Resource):
     
     def playFile(self,path):
         print "[ServiceplayerResource] playing file",path
-        if os.path.exists(path) is not True:
+        if os_path.exists(path) is not True:
             return False,"given path is not existing, %s"%path
         else:
             sref = "4097:0:0:0:0:0:0:0:0:0:%s"%path

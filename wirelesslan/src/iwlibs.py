@@ -20,15 +20,18 @@
 #    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 #    USA 
 
-import struct
-import array
-import math
-import fcntl
-import socket
-import time
-import re
+from import struct import pack as struct_pack, \
+	unpack as struct_unpack, \
+	calcsize as struct_calcsize, \
+	parse_data as struct_parse_data
 
-from types import StringType
+from array import array
+from math import ceil, log10
+from fcntl import ioctl
+from socket import AF_INET, SOCK_DGRAM, socket
+from time import sleep
+from re import compile
+
 from flags import *    
 
 def getNICnames():
@@ -39,7 +42,7 @@ def getNICnames():
         >>> getNICnames()
         ['eth1', 'wifi0']
     """
-    device = re.compile('[a-z]+[0-9]+')
+    device = compile('[a-z]+[0-9]+')
     ifnames = []
     
     f = open('/proc/net/wireless', 'r')
@@ -63,7 +66,7 @@ def getConfiguredNICnames():
     """
     iwstruct = Iwstruct()
     ifnames = []
-    buff = array.array('c', '\0'*1024)
+    buff = array('c', '\0'*1024)
     caddr_t, length = buff.buffer_info()
     s = iwstruct.pack('iP', length, caddr_t)
     try:
@@ -74,7 +77,7 @@ def getConfiguredNICnames():
     # get the interface names out of the buffer
     for i in range(0, 1024, 32):
         ifname = buff.tostring()[i:i+32]
-        ifname = struct.unpack('32s', ifname)[0]
+        ifname = struct_unpack('32s', ifname)[0]
         ifname = ifname.split('\0', 1)[0]
         if ifname:
             # verify if ifnames are really wifi devices
@@ -93,7 +96,7 @@ class Wireless(object):
     """Access to wireless interfaces"""
     
     def __init__(self, ifname):
-        self.sockfd = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sockfd = socket(AF_INET, SOCK_DGRAM)
         self.ifname = ifname
         self.iwstruct = Iwstruct()
     
@@ -408,16 +411,16 @@ class Iwstruct(object):
     
     def __init__(self):
         self.idx = 0
-        self.sockfd = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sockfd = socket(AF_INET, SOCK_DGRAM)
 
     def parse_data(self, fmt, data):
         """ unpacks raw C data """
-        size = struct.calcsize(fmt)
+        size = struct_calcsize(fmt)
         idx = self.idx
 
         str = data[idx:idx + size]
         self.idx = idx+size
-        value = struct.unpack(fmt, str)
+        value = struct_unpack(fmt, str)
 
         # take care of a tuple like (int, )
         if len(value) == 1:
@@ -426,8 +429,8 @@ class Iwstruct(object):
             return value
     
     def pack(self, fmt, *args):
-        """ calls struct.pack and returns the result """
-        return struct.pack(fmt, *args)
+        """ calls struct_pack and returns the result """
+        return struct_pack(fmt, *args)
 
     def pack_wrq(self, buffsize):
         """ packs wireless request data for sending it to the kernel """
@@ -436,25 +439,25 @@ class Iwstruct(object):
         # ioctl itself looks for the pointer to the address in our
         # memory and the size of it.
         # Dont change the order how the structure is packed!!!
-        buff = array.array('c', '\0'*buffsize)
+        buff = array('c', '\0'*buffsize)
         caddr_t, length = buff.buffer_info()
-        s = struct.pack('Pi', caddr_t, length)
+        s = struct_pack('Pi', caddr_t, length)
         return buff, s
     
     def pack_test(self, string, buffsize):
         """ packs wireless request data for sending it to the kernel """
         buffsize = buffsize - len(string)
-        buff = array.array('c', string+'\0'*buffsize)
+        buff = array('c', string+'\0'*buffsize)
         caddr_t, length = buff.buffer_info()
-        s = struct.pack('Pii', caddr_t, length, 1)
+        s = struct_pack('Pii', caddr_t, length, 1)
         return buff, s
 
     def unpack(self, fmt, packed_data):
         """ unpacks data with given format """
-        return struct.unpack(fmt, packed_data)
+        return struct_unpack(fmt, packed_data)
 
     def _fcntl(self, request, args):
-        return fcntl.ioctl(self.sockfd.fileno(), request, args)
+        return ioctl(self.sockfd.fileno(), request, args)
     
     def iw_get_ext(self, ifname, request, data=None):
         """ read information from ifname """
@@ -475,7 +478,7 @@ class Iwstruct(object):
 
     def getMAC(self, packed_data):
         """ extracts mac addr from packed data and returns it as str """
-        mac_addr = struct.unpack('xxBBBBBB', packed_data[:8])
+        mac_addr = struct_unpack('xxBBBBBB', packed_data[:8])
         return "%02X:%02X:%02X:%02X:%02X:%02X" % mac_addr
 
 class Iwparam(object):
@@ -574,8 +577,8 @@ class Iwfreq(object):
     def parse(self, data):
         """ unpacks iwparam"""
         
-        size = struct.calcsize(self.fmt)
-        m, e, i, pad = struct.unpack(self.fmt, data[:size])
+        size = struct_calcsize(self.fmt)
+        m, e, i, pad = struct_unpack(self.fmt, data[:size])
         # XXX well, its not *the* frequency - we need a better name
         if e == 0:
             return m
@@ -651,7 +654,7 @@ class Iwfreq(object):
           
     def mw2dbm(self, mwatt):
         """ converts mw to dbm(float) """
-        return math.ceil(10.0 * math.log10(mwatt))
+        return ceil(10.0 * log10(mwatt))
         
     def _setFrequency(self, list):
         """sets self.frequency by given list 
@@ -695,7 +698,7 @@ class Iwstats(object):
         """ unpacks iwstruct data """
         struct = Iwstruct()
         iwqual = Iwquality()
-        iwstats_data = struct.parse_data(self.fmt, data)
+        iwstats_data = struct_parse_data(self.fmt, data)
         
         self.status = iwstats_data[0:2]
         self.qual.quality, self.qual.sl, self.qual.nl,\
@@ -718,7 +721,7 @@ class Iwquality(object):
     def parse(self, data):
         """ unpacks iwquality data """
         struct = Iwstruct()
-        qual, sl, nl, flags = struct.parse_data(self.fmt, data)
+        qual, sl, nl, flags = struct_parse_data(self.fmt, data)
 
         # compute signal and noise level
         self.signal_level = sl
@@ -880,7 +883,7 @@ class Iwrange(object):
         
     def _parse(self, data):
         struct = Iwstruct()
-        result = struct.parse_data(self.fmt, data)
+        result = struct_parse_data(self.fmt, data)
         
         # XXX there is maybe a much more elegant way to do this
         self.throughput, self.min_nwid, self.max_nwid = result[0:3]
@@ -957,7 +960,7 @@ class Iwscan(object):
                 result = 250
         
         while (result > 0):
-            time.sleep(result/1000)
+            sleep(result/1000)
             result = self.getScan()
         
         if result < 0 or self.errorflag != 0:
@@ -1060,7 +1063,7 @@ class Iwscanresult(object):
         """Initialize the scan result with the access point data"""
         self.iwstruct = Iwstruct()
         self.range = range
-        self.bssid = "%02X:%02X:%02X:%02X:%02X:%02X" % struct.unpack('BBBBBB', data[2:8])
+        self.bssid = "%02X:%02X:%02X:%02X:%02X:%02X" % struct_unpack('BBBBBB', data[2:8])
         self.essid = None
         self.mode = None
         self.rate = []
@@ -1091,7 +1094,7 @@ class Iwscanresult(object):
             self.mode = modes[self.iwstruct.unpack('i', data[:4])[0]]
         elif cmd == SIOCGIWRATE:
             # TODO, deal with multiple rates, or at least the highest rate
-            freqsize = struct.calcsize("ihbb")
+            freqsize = struct_calcsize("ihbb")
             while len(data) >= freqsize:
                 iwfreq = Iwfreq(data)
                 self.rate.append(iwfreq.getBitrate())

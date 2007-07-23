@@ -1,10 +1,8 @@
-from twisted.internet import reactor
-from twisted.internet.protocol import ClientFactory,connectionDone
+from twisted.internet.protocol import ClientFactory
 from twisted.web2.client.http import HTTPClientProtocol
 from twisted.internet import error 
-import urlparse, urllib
-
-import socket
+from urlparse import urlsplit
+from socket import gethostbyname
 
 global HTTPCLIENT_requestCount
 HTTPCLIENT_requestCount = 0 # counts requests
@@ -35,7 +33,7 @@ class Enigma2HTTPRequest:
             Enigma2 is blocked while process is running    
         """
         try:
-            return socket.gethostbyname(self.hostname)
+            return gethostbyname(self.hostname)
         except:
             return False
         
@@ -59,7 +57,7 @@ class Enigma2HTTPRequest:
        
 class Enigma2URLHTTPRequest(Enigma2HTTPRequest):
     def __init__(self,url,method="GET",headerfields={}):
-        x= urlparse.urlsplit(url)
+        x= urlsplit(url)
         if x[1].rfind(":")>0:
             y = x[1].split(":")
             hostname = y[0]
@@ -176,12 +174,6 @@ class Enigma2HTTPClientFactory(ClientFactory):
     def clientConnectionFailed(self, connector, reason):
         self.request.RequestError(reason.getErrorMessage())
         ClientFactory.clientConnectionFailed(self, connector, reason)
-
-def urlencode(dict):
-    return urllib.urlencode(dict)
-
-def quote_plus(data):
-    return urllib.quote_plus(data)
 
 def getURL(url,callback=None,errorback=None,headercallback=None,method="GET",headers={}):
     """ 

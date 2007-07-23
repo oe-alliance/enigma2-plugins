@@ -1,7 +1,7 @@
 from Plugins.Extensions.NETcaster.StreamInterface import StreamInterface
 from Plugins.Extensions.NETcaster.StreamInterface import Stream
 from Plugins.Extensions.NETcaster.plugin import myname
-import ConfigParser
+from ConfigParser import ConfigParser, DuplicateSectionError
 
 
 ####################################################################
@@ -44,7 +44,7 @@ class Interface(StreamInterface):
 class SHOUTcasterFavorites:
     configfile = "/etc/NETcaster.conf"
     def __init__(self):
-        self.configparser = ConfigParser.ConfigParser()
+        self.configparser = ConfigParser()
         self.configparser.read(self.configfile)
     def getStreams(self):
         streams=[]
@@ -81,7 +81,7 @@ class SHOUTcasterFavorites:
             self.configparser.set(stream.getName(), "type", stream.getType())
             self.writeConfig()
             return True,"Stream added"
-        except ConfigParser.DuplicateSectionError,e:
+        except DuplicateSectionError,e:
             print "["+myname+"] error while adding stream to config:",e
             return False,e
 

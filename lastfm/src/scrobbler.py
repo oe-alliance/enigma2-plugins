@@ -1,11 +1,11 @@
-import re,datetime,md5
+from re import sub
+from datetime import datetime
+from md5 import md5
 from twisted.internet import reactor
-
-from enigma import iServiceInformation,iPlayableService
+from enigma import iServiceInformation, iPlayableService
 from Components.config import config
 
-import httpclient
-
+from httpclient import quote_plus, urlencode, getPage
 
 class LastFMScrobbler(object):
     client     = "tst" # this must be changed to a own ID
@@ -27,14 +27,14 @@ class LastFMScrobbler(object):
         
     def handshake(self):
         print "[LastFMScrobbler] try logging into lastfm-submission-server"
-        url = "http://"+self.host+":"+str(self.port)+"?"+httpclient.urlencode({
+        url = "http://"+self.host+":"+str(self.port)+"?"+urlencode({
             "hs":"true",
             "p":"1.1",
             "c":self.client,
             "v":self.version,
             "u":self.user
             })
-        httpclient.getPage(self.host,self.port,url,method="GET",callback=self.handshakeCB,errorback=self.handshakeCBError)
+        getPage(self.host,self.port,url,method="GET",callback=self.handshakeCB,errorback=self.handshakeCBError)
     
     def handshakeCBError(self,data): 
         self.failed(data.split("\n"))
@@ -49,8 +49,8 @@ class LastFMScrobbler(object):
             return self.failed(result)
 
     def uptodate(self,lines):
-        self.md5 = re.sub("\n$","",lines[0])
-        self.submiturl = re.sub("\n$","",lines[1])
+        self.md5 = sub("\n$","",lines[0])
+        self.submiturl = sub("\n$","",lines[1])
         self.loggedin = True
         
     def baduser(self,lines):
@@ -65,7 +65,7 @@ class LastFMScrobbler(object):
             return False
         tracks = self.tracks2Submit
         print "[LastFMScrobbler] Submitting ",len(tracks)," tracks"
-        md5response = md5.md5(md5.md5(self.password).hexdigest()+self.md5).hexdigest()
+        md5response = md5(md5(self.password).hexdigest()+self.md5).hexdigest()
         post = "u="+self.user+"&s="+md5response
         count = 0
         for track in tracks:
@@ -74,7 +74,7 @@ class LastFMScrobbler(object):
             count += 1
         (host,port) = self.submiturl.split("/")[2].split(":")
         url = "/"+"/".join(self.submiturl.split("/")[3:])+"?"+post
-        httpclient.getPage(host,int(port),url,method="POST",callback=self.submitCB,errorback=self.submitCBError)
+        getPage(host,int(port),url,method="POST",callback=self.submitCB,errorback=self.submitCBError)
         
     def submitCBError(self,data):
         self.failed(data.split("\n"))
@@ -99,25 +99,25 @@ class Track(object):
         self.length = length
         self.mbid = mbid
         self.tracktime = tracktime
-        self.date = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+        self.date = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         
     def __repr__(self):
         return "'"+self.name+"' by '"+self.artist+"' from '"+self.album+"'"
 
     def urlencoded(self,num):
         encode = ""
-        encode += "a["+str(num)+"]="+httpclient.quote_plus(self.artist)
-        encode += "&t["+str(num)+"]="+httpclient.quote_plus(self.name)
+        encode += "a["+str(num)+"]="+quote_plus(self.artist)
+        encode += "&t["+str(num)+"]="+quote_plus(self.name)
         if self.length is not None:
-            encode += "&l["+str(num)+"]="+httpclient.quote_plus(str(self.length))
+            encode += "&l["+str(num)+"]="+quote_plus(str(self.length))
         else:
             encode += "&l["+str(num)+"]="            
-        encode += "&i["+str(num)+"]="+httpclient.quote_plus(self.date)
+        encode += "&i["+str(num)+"]="+quote_plus(self.date)
         if self.mbid is not None:
-            encode += "&m["+str(num)+"]="+httpclient.quote_plus(self.mbid)
+            encode += "&m["+str(num)+"]="+quote_plus(self.mbid)
         else:
             encode += "&m["+str(num)+"]="
-        encode += "&b["+str(num)+"]="+httpclient.quote_plus(self.album)
+        encode += "&b["+str(num)+"]="+quote_plus(self.album)
         return encode
 ##########
 class EventListener:

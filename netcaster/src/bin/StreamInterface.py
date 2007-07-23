@@ -1,4 +1,4 @@
-import urllib
+from urllib import urlopen
 
 valid_types = ("MP3","PLS") #list of playable mediatypes
 
@@ -54,7 +54,7 @@ class Stream:
         print "loading PLS of stream ",self.name,self.url
         url = None
         try:
-            fp = urllib.urlopen(self.url)
+            fp = urlopen(self.url)
             plslines = fp.read()
             fp.close()
             print plslines

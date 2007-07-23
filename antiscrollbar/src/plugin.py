@@ -1,26 +1,18 @@
 # (c) 2006 3c5x9, dream@3c5x9.de
 # This Software is Free, use it where you want, when you want for whatever you want and modify it if you want. but don't remove my copyright!
 
-from enigma import *
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
 from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.ScrollLabel import ScrollLabel
+from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.GUIComponent import *
 from Components.MenuList import MenuList
 from Components.Input import Input
-from Screens.Console import Console
-from Plugins.Plugin import PluginDescriptor
-from Screens.ImageWizard import ImageWizard
-import os,sys
 from Plugins.Plugin import PluginDescriptor
 #############
-from enigma import ePoint, eSize, eServiceCenter
+from enigma import ePoint, eSize
 #############
-import ConfigParser
+from ConfigParser import ConfigParser, DEFAULTSECT, DuplicateSectionError
 
 ###############################################################################        
 myname = "AntiScrollbar"     
@@ -174,13 +166,13 @@ class AntiScrollConfig:
     configfile = "/etc/enigma2/AntiScrollbar.conf"
     
     def __init__(self):
-        self.configparser = ConfigParser.ConfigParser()
+        self.configparser = ConfigParser()
         self.configparser.read(self.configfile)
     def setLastProfile(self,name):
-        self.configparser.set(ConfigParser.DEFAULTSECT,"lastprofile",name)
+        self.configparser.set(DEFAULTSECT,"lastprofile",name)
         self.writeConfig()
     def getLastProfile(self):
-        last = self.configparser.get(ConfigParser.DEFAULTSECT,"lastprofile")    
+        last = self.configparser.get(DEFAULTSECT,"lastprofile")    
         return self.getProfile(last)
     def getProfiles(self):
         profiles=[]
@@ -211,7 +203,7 @@ class AntiScrollConfig:
           self.configparser.set(name, "position_y",position[1])
           self.writeConfig()
           return True
-        except ConfigParser.DuplicateSectionError:
+        except DuplicateSectionError:
           self.deleteProfile(name)
           self.setProfile(name,size,position)
                                                                                                     

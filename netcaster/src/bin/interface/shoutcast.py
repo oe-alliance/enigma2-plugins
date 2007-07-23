@@ -1,11 +1,6 @@
 from Plugins.Extensions.NETcaster.StreamInterface import StreamInterface
 from Plugins.Extensions.NETcaster.StreamInterface import Stream
-from Plugins.Extensions.NETcaster.StreamInterface import valid_types
-from Plugins.Extensions.NETcaster.plugin import myname
 from Screens.ChoiceBox import ChoiceBox
-
-import urllib,re
-
 
 class Interface(StreamInterface):
     name= "listen to SHOUTcast Streams"
@@ -61,15 +56,14 @@ class Interface(StreamInterface):
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import cPickle
+from cPickle import dump, load
 from urllib import FancyURLopener
-from xml.sax import make_parser,parseString
+from xml.sax import parseString
 from xml.sax.handler import ContentHandler
-from os import stat,mkdir
-from os.path import dirname,isdir,isfile
+from os import stat, mkdir
+from os.path import dirname,isdir
 from time import time
-from stat import *
-from sys import exit
+from stat import ST_MTIME
 
 tmpxml='shout.xml'
 DEBUG=0
@@ -84,7 +78,7 @@ def write_cache(cache_file, cache_data):
         except OSError:
             print dirname(cache_file), 'is a file'
     fd = open(cache_file, 'w')
-    cPickle.dump(cache_data, fd, -1)
+    dump(cache_data, fd, -1)
     fd.close()
 
 def valid_cache(cache_file, cache_ttl):
@@ -106,7 +100,7 @@ def load_cache(cache_file):
     Does a cPickle load
     """
     fd = open(cache_file)
-    cache_data = cPickle.load(fd)
+    cache_data = load(fd)
     fd.close()
     return cache_data
 

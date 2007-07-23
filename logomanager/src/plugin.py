@@ -1,24 +1,19 @@
-from enigma import *
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
-from Screens.MessageBox import MessageBox
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Components.Pixmap import Pixmap
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.config import config,ConfigSubsection,ConfigSelection, getConfigListEntry
-from Components.ConfigList import *
+from Components.ConfigList import ConfigListScreen
 
-import os
+from os import path as os_path, listdir as os_listdir, system as os_system, remove as os_remove
 ###############################################################################        
 config.plugins.logomanager = ConfigSubsection()
 config.plugins.logomanager.path = ConfigSelection([("/media/cf/bootlogos/",_("CF Drive")),("/media/hdd/bootlogos/",_("Harddisk"))],default="/media/hdd/bootlogos/")
-
-     
     
 def main(session,**kwargs):
-    if os.path.isdir(config.plugins.logomanager.path.value) is not True:
+    if os_path.isdir(config.plugins.logomanager.path.value) is not True:
         session.open(LogoManagerConfigScreen)
     else:    
         session.open(LogoManagerScreen)
@@ -75,18 +70,18 @@ class LogoManagerScreen(Screen):
         global plugin_path
         for target in self.targets:
             file = target[1].split("/")[-1]
-            if os.path.isfile(plugin_path+file) is not True:
+            if os_path.isfile(plugin_path+file) is not True:
                 print "backing up original ",target[0]," from ",file
-                os.system("cp '%s' '%s'" %(target[1],plugin_path+"/"+file))
+                os_system("cp '%s' '%s'" %(target[1],plugin_path+"/"+file))
                 
     def restoreOriginal(self):
         """ restoring original mvis from the backuped mvi in the plugindir"""
         global plugin_path
         for target in self.targets:
             file = target[1].split("/")[-1]
-            if os.path.isfile(plugin_path+"/"+file) is True:
+            if os_path.isfile(plugin_path+"/"+file) is True:
                 print "restoring original ",target[0]," from ",plugin_path+"/"+file,"to",target[1]
-                os.system("cp '%s' '%s'" %(plugin_path+"/"+file,target[1]))
+                os_system("cp '%s' '%s'" %(plugin_path+"/"+file,target[1]))
                 
     def exit(self):
         """ quit me """
@@ -128,7 +123,7 @@ class LogoManagerScreen(Screen):
     def setlist_to_avaiable(self):
         """ fills the list with all found new MVIs"""
         filelist =[]
-        for i in os.listdir(config.plugins.logomanager.path.value):
+        for i in os_listdir(config.plugins.logomanager.path.value):
             if i.endswith(".mvi"):
                 filelist.append(config.plugins.logomanager.path.value+i)
         filelist.sort()
@@ -154,22 +149,22 @@ class LogoManagerScreen(Screen):
     def showMVI(self,mvifile):
         """ shows a mvi """
         print "playing MVI",mvifile
-        os.system("/usr/bin/showiframe '%s'" % mvifile)
+        os_system("/usr/bin/showiframe '%s'" % mvifile)
     
     def installMVI(self,target,sourcefile):
         """ installs a mvi by overwriting the target with a source mvi """
         print "installing %s as %s on %s" %(sourcefile,target[0],target[1])
-        if os.path.isfile(target[1]):
-            os.remove(target[1])
-        os.system("cp '%s' '%s'"%(sourcefile,target[1]))
+        if os_path.isfile(target[1]):
+            os_remove(target[1])
+        os_system("cp '%s' '%s'"%(sourcefile,target[1]))
     
     def makeBootWritable(self):
         """ because /boot isnt writeable by default, we will change that here """
-        os.system("mount -o rw,remount /boot")
+        os_system("mount -o rw,remount /boot")
     
     def makeBootReadonly(self):
         """ make /boot writeprotected back again """
-        os.system("mount -o r,remount /boot")
+        os_system("mount -o r,remount /boot")
         
 class LogoManagerConfigScreen(ConfigListScreen,Screen):
     skin = """

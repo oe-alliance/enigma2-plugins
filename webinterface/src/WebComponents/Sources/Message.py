@@ -1,8 +1,6 @@
-from enigma import *
 from Components.Sources.Source import Source
 from Screens.MessageBox import MessageBox
-
-import os
+from os import system
 
 class Message( Source):
     PRINT = 0
@@ -72,7 +70,7 @@ class Message( Source):
         if not confirmed:
             cmdstr = "/bin/echo -n no > %s" % yesnoFile
 
-        os.system(cmdstr)
+        system(cmdstr)
     
     def getYesNoAnswer(self,param):
         print "getYesNoAnswer"#,self.session.messageboxanswer
@@ -82,7 +80,7 @@ class Message( Source):
             lines = file.readlines()
             file.close()
             cmdstr = "rm %s" % yesnoFile
-            os.system(cmdstr)
+            system(cmdstr)
             print "Answer: (%s)"%lines[0]
             if lines[0] == "yes":
                 return [[True,"Answer is YES!"]]

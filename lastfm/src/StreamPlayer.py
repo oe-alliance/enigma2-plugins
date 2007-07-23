@@ -1,5 +1,6 @@
 from enigma import eServiceReference
-import os
+from os import system
+
 class StreamPlayer:
     is_playing = False
     
@@ -32,8 +33,8 @@ class StreamPlayer:
 #                sref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%stream.replace(":","&colon;"))
 #                self.session.nav.playService(sref)
                 self.targetfile = "/tmp/lastfm.mp3"
-                os.system("mknod %s p" %self.targetfile)
-                os.system("wget %s -O- > %s&" %(stream,self.targetfile))
+                system("mknod %s p" %self.targetfile)
+                system("wget %s -O- > %s&" %(stream,self.targetfile))
                 self.session.nav.playService(eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%self.targetfile))
             else:
                 print "playing local stream",stream
@@ -46,8 +47,8 @@ class StreamPlayer:
         if self.is_playing is True:
             print " stop streaming",text
             self.session.nav.stopService()
-            os.system("killall -9 wget")
-            os.system("rm %s" %self.targetfile)
+            system("killall -9 wget")
+            system("rm %s" %self.targetfile)
             self.session.nav.playService(self.oldService)
         self.is_playing = False
         self.stateChanged()

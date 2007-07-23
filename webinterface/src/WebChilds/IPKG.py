@@ -2,8 +2,6 @@ from enigma import eConsoleAppContainer
 
 from twisted.web2 import resource, stream, responsecode, http
 
-import os
-
 class IPKGResource(resource.Resource):
     def render(self, req):
        self.args = req.args

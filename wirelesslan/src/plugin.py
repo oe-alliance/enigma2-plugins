@@ -1,27 +1,17 @@
 from enigma import eTimer
-
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
-from Components.GUIComponent import *
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText
-
-
 from Components.config import config, getConfigListEntry
-from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.ConfigList import ConfigListScreen
 from Components.Network import Network
-
 from Plugins.Plugin import PluginDescriptor
 
 from Wlan import Wlan, WlanList, wpaSupplicant
 
 plugin_path = "/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan"
-
-
 
 class WlanSelectScreen(Screen):
 	skin = """

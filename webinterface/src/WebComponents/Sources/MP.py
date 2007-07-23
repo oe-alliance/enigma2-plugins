@@ -1,11 +1,10 @@
-from enigma import *
-from enigma import eServiceReference#, iServiceInformation
+from enigma import eServiceReference
+from Screens.MediaPlayer import MediaPlayer
+from Components.MediaPlayer import PlayList
 from Components.Sources.Source import Source
-from ServiceReference import ServiceReference,eServiceCenter
-#from Tools.Directories import resolveFilename,SCOPE_HDD
-from Components.FileList import FileList, FileEntryComponent
-
-#import os
+from ServiceReference import ServiceReference
+from Components.FileList import FileList
+from os import path as os_path
 
 class MP( Source):
     LIST = 0
@@ -34,7 +33,6 @@ class MP( Source):
         
         returnList = []
         
-        from os import path as os_path, listdir
         matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)" #MediaPlayer-Match
         useServiceRef = False
         if param["types"] == "audio":
@@ -68,8 +66,6 @@ class MP( Source):
     def playFile(self,param):
         print "playFile: ",param
         
-        from Screens.MediaPlayer import MediaPlayer
-        from Components.MediaPlayer import PlayList, PlaylistEntryComponent
         if self.session.mediaplayer is None:
             self.session.mediaplayer = self.session.open(MediaPlayer)
             self.session.mediaplayer.playlist = PlayList()
@@ -96,8 +92,6 @@ class MP( Source):
         print "command: ",param
         param = int(param)
         
-        from Screens.MediaPlayer import MediaPlayer
-        from Components.MediaPlayer import PlayList, PlaylistEntryComponent
         try:
             test = len(self.session.mediaplayer.playlist)
             #Just a test, wether the link is still active.

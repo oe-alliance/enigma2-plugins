@@ -5,8 +5,8 @@ from Components.Sources.Source import Source
 from Components.Sources.ServiceList import ServiceList
 from enigma import eServiceReference
 
-
-import time, re
+from re import sub
+from time import strftime, localtime, time
 
 class WAPfunctions( Source):
     LISTTIME = 0
@@ -51,7 +51,7 @@ class WAPfunctions( Source):
         start = 1
         end = 1
         
-        timeNow = time.time()
+        timeNow = time()
         timePlusTwo = timeNow + 7200
 
         if param.has_key('begin'):
@@ -68,17 +68,17 @@ class WAPfunctions( Source):
                 timePlusTwo = end
         
         t = {}
-        t["sday"]=time.strftime("%d", time.localtime(timeNow))
-        t["smonth"]=time.strftime("%m", time.localtime(timeNow))
-        t["syear"]=time.strftime("%Y", time.localtime(timeNow))
-        t["smin"]=time.strftime("%M", time.localtime(timeNow))
-        t["shour"]=time.strftime("%H", time.localtime(timeNow))
+        t["sday"]=strftime("%d", localtime(timeNow))
+        t["smonth"]=strftime("%m", localtime(timeNow))
+        t["syear"]=strftime("%Y", localtime(timeNow))
+        t["smin"]=strftime("%M", localtime(timeNow))
+        t["shour"]=strftime("%H", localtime(timeNow))
         
-        t["eday"]=time.strftime("%d", time.localtime(timePlusTwo))
-        t["emonth"]=time.strftime("%m", time.localtime(timePlusTwo))
-        t["eyear"]=time.strftime("%Y", time.localtime(timePlusTwo))
-        t["emin"]=time.strftime("%M", time.localtime(timePlusTwo))
-        t["ehour"]=time.strftime("%H", time.localtime(timePlusTwo))
+        t["eday"]=strftime("%d", localtime(timePlusTwo))
+        t["emonth"]=strftime("%m", localtime(timePlusTwo))
+        t["eyear"]=strftime("%Y", localtime(timePlusTwo))
+        t["emin"]=strftime("%M", localtime(timePlusTwo))
+        t["ehour"]=strftime("%H", localtime(timePlusTwo))
         
         key = ""
         for i in param:
@@ -86,7 +86,7 @@ class WAPfunctions( Source):
             if p != "sRef":
                 key = p
 
-        cutKey = re.sub("^[es]", "", key, 1)
+        cutKey = sub("^[es]", "", key, 1)
         
         if cutKey == "min":
             start = 0
