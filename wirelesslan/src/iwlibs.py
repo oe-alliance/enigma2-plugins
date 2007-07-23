@@ -20,7 +20,7 @@
 #    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 #    USA 
 
-from struct import parse_data, pack as struct_pack, \
+from struct import pack as struct_pack, \
 	unpack as struct_unpack, \
 	calcsize as struct_calcsize
 
@@ -697,7 +697,7 @@ class Iwstats(object):
         """ unpacks iwstruct data """
         struct = Iwstruct()
         iwqual = Iwquality()
-        iwstats_data = parse_data(self.fmt, data)
+        iwstats_data = struct.parse_data(self.fmt, data)
         
         self.status = iwstats_data[0:2]
         self.qual.quality, self.qual.sl, self.qual.nl,\
@@ -720,7 +720,7 @@ class Iwquality(object):
     def parse(self, data):
         """ unpacks iwquality data """
         struct = Iwstruct()
-        qual, sl, nl, flags = parse_data(self.fmt, data)
+        qual, sl, nl, flags = struct.parse_data(self.fmt, data)
 
         # compute signal and noise level
         self.signal_level = sl
@@ -882,7 +882,7 @@ class Iwrange(object):
         
     def _parse(self, data):
         struct = Iwstruct()
-        result = parse_data(self.fmt, data)
+        result = struct.parse_data(self.fmt, data)
         
         # XXX there is maybe a much more elegant way to do this
         self.throughput, self.min_nwid, self.max_nwid = result[0:3]
