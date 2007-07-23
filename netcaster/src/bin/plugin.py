@@ -9,7 +9,7 @@ from Components.MenuList import MenuList
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
 from Components.MultiContent import MultiContentEntryText
-from enigma import eListboxPythonMultiContent
+from enigma import eListboxPythonMultiContent, eListbox, gFont
 
 from Plugins.Plugin import PluginDescriptor
 from os import path as os_path, listdir as os_listdir

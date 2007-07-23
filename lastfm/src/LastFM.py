@@ -4,7 +4,7 @@ from md5 import md5 # to encode password
 from string import split, rstrip
 
 from time import time
-import xml.dom.minidom import parseString
+from xml.dom.minidom import parseString
 
 
 
