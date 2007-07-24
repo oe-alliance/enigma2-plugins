@@ -1,6 +1,6 @@
 from twisted.internet.protocol import ClientFactory
 from twisted.web2.client.http import HTTPClientProtocol
-from twisted.internet import error 
+from twisted.internet import reactor, error
 from urlparse import urlsplit
 from socket import gethostbyname
 
