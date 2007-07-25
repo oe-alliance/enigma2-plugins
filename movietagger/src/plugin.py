@@ -13,7 +13,7 @@ from Components.ActionMap import ActionMap
 from Components.GUIComponent import GUIComponent
 from Components.HTMLComponent import HTMLComponent
 from Components.MultiContent import MultiContentEntryText
-from enigma import eListboxPythonMultiContent, eListbox, eServiceCenter, gFont
+from enigma import eListboxPythonMultiContent, eListbox, eServiceCenter, gFont, iServiceInformation
 
 from Tools.Directories import *
 
