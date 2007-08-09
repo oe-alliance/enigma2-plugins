@@ -11,12 +11,17 @@ var parentControlList = null;
 
 // UpdateStreamReader
 var UpdateStreamReaderNextReadPos = 0;
-var UpdateStreamReaderPollTimer;
+var UpdateStreamReaderPollTimer = null;
 var UpdateStreamReaderPollTimerCounter = 0;
-var UpdateStreamReaderPollTimerCounterTwisted = 0;
-UpdateStreamReaderRequest = null;
+var UpdateStreamReaderRetryCounter = 0;
+var UpdateStreamReaderRetryLimit = 10
+var UpdateStreamReaderRequest = null;
+
+//var UpdateStreamReaderPollTimerCounterTwisted = 0;
+
 function UpdateStreamReaderStart(){
 	var ua = navigator.userAgent;
+	
 	if(navigator.userAgent.indexOf("MSIE") >=0) {
 		debug("UpdateStreamReader IE Fix");
 
@@ -29,17 +34,16 @@ function UpdateStreamReaderStart(){
 		UpdateStreamReaderNextReadPos = 0;
 		allMessages = "";
 		UpdateStreamReaderRequest = new XMLHttpRequest();
-		UpdateStreamReaderRequest.onload = UpdateStreamReaderOnLoad;
 		UpdateStreamReaderRequest.onerror = UpdateStreamReaderOnError;
 		UpdateStreamReaderRequest.open("GET", url_updates, true);
  		UpdateStreamReaderRequest.send(null);
-		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 10000);
+		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 1500);
 	}
 }
   
 function UpdateStreamReaderLatestResponse() {
 	UpdateStreamReaderPollTimerCounter++;
-	debug(UpdateStreamReaderPollTimerCounter);
+	
 	if(UpdateStreamReaderPollTimerCounter > 6) {
 		clearInterval(UpdateStreamReaderPollTimer);
 		UpdateStreamReaderRequest.abort();
@@ -47,7 +51,7 @@ function UpdateStreamReaderLatestResponse() {
 		UpdateStreamReaderPollTimerCounter = 0;
 		UpdateStreamReaderStart();
 		
-		UpdateStreamReaderPollTimerCounterTwisted++;
+//		UpdateStreamReaderPollTimerCounterTwisted++;
 		return;
 	}
 	var allMessages = UpdateStreamReaderRequest.responseText;
@@ -56,6 +60,9 @@ function UpdateStreamReaderLatestResponse() {
 		var messageXMLEndIndex = unprocessed.indexOf("\n");
 		
 		if (messageXMLEndIndex!=-1) {
+			//reset RetryCounter, if it was a reconnect, it succeeded!
+			UpdateStreamReaderRetryCounter = 0;
+			
 			var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
 			var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
 	
@@ -80,32 +87,30 @@ function UpdateStreamReaderLatestResponse() {
 	} while (messageXMLEndIndex != -1);
 }
 
-function UpdateStreamReaderOnLoad(){
-	window.clearInterval(UpdateStreamReaderPollTimer);
-	debug("UpdateStreamReaderOnLoad");
-	Dialog.confirm(
-		"Live Update Stream ends!<br><br>You will not receive any Update from Enigma2.<br>Should I reconnect?",
-		 {windowParameters: {width:300, className: windowStyle},
-			okLabel: "reconnect",
-			buttonClass: "myButtonClass",
-			cancel: function(win) {debug("cancel confirm panel")},
-			ok: function(win) {UpdateStreamReaderStart(); return true;}
-			}
-		);
-}
 function UpdateStreamReaderOnError(){
-	// TODO: change this, because it will be called on 'PageUnload' while the request is still running
-	debug("UpdateStreamReaderOnError");
 	window.clearInterval(UpdateStreamReaderPollTimer);
-	Dialog.confirm(
-		"Live Update Stream has an Error!<br><br>You will not receive any Update from Enigma2.<br>Should I try to reconnect?",
-		 {windowParameters: {width:300, className: windowStyle},
-			 okLabel: "reconnect",
-			 buttonClass: "myButtonClass",
-			 cancel: function(win) {debug("cancel confirm panel")},
-			 ok: function(win) {UpdateStreamReaderStart(); return true;}
+	UpdateStreamReaderRetryCounter += 1;
+	
+	debug("UpdateStreamReaderOnError: ErrorCount "+UpdateStreamReaderRetryCounter);
+	
+	if(UpdateStreamReaderRetryCounter >= UpdateStreamReaderRetryLimit){
+		debug("UpdateStreamReaderOnError: RetryLimit reached!");
+		
+		UpdateStreamReaderRetryCounter = 0;
+		
+		Dialog.confirm(
+			"Live Update Stream has an Error!<br><br>You will not receive any Updates from Enigma2.<br>Should I try to reconnect?",
+			{	
+				windowParameters: {width:300, className: windowStyle},
+				okLabel: "reconnect",
+				buttonClass: "myButtonClass",
+				cancel: function(win) {debug("cancel confirm panel")},
+				ok: function(win) {UpdateStreamReaderStart(); return true;}
 			}
 		);
+	} else {
+		setTimeout("UpdateStreamReaderStart()", 5000);
+	}
 }
 //end UpdateStreamReader
 
@@ -279,9 +284,7 @@ function parentPin(servicereference) {
 		return false;
 	}
 }
-var SubServicePoller;
-var SubServicePollerCounter = 0;
-var SubServicePollerRef = null;
+
 function zap(servicereference){
 	if(parentPin(servicereference)) {
 		new Ajax.Request( "/web/zap?sRef=" + servicereference, 
@@ -290,15 +293,11 @@ function zap(servicereference){
 								method: 'get'
 							}
 						);
-		if(SubServicePoller != 0){
-			clearInterval(SubServicePoller);
-			SubServicePollerCounter = 0;
-		}
-		SubServicePollerRef = servicereference;
-		SubServicePoller = setInterval(getSubServices, 10000);
-		SubServicePollerCounter = 1;
+		setTimeout("getSubServices()", 3000);
 	}
+	
 }
+
 
 //++++       SignalPanel                           ++++
 
@@ -770,12 +769,13 @@ function ownLazyNumber(num) {
 	}
 }
 
-var subServicesInsertedList = new Object();
-function getSubServices(servicereference) {
-	clearInterval(SubServicePoller);
-	SubServicePollerCounter = 0;
+function getSubServices() {
 	doRequest(url_subservices,incomingSubServiceRequest, false);
 }
+
+var SubServicePoller = setInterval(getSubServices, 15000);
+var subServicesInsertedList = new Object();
+
 function incomingSubServiceRequest(request){
 	if(request.readyState == 4){
 		var services = new ServiceList(getXML(request)).getArray();
@@ -785,36 +785,29 @@ function incomingSubServiceRequest(request){
 			
 			first = services[0];
 			var mainChannellist = loadedChannellist[String($('mainServiceRef').value)];
-			
-			var oldEntryPosition = -1;
-			for(i = 0; i < mainChannellist.length; i++) {
-				var service = mainChannellist[i];
-				if(String(service.getServiceReference()) == String(first.getServiceReference())) {
-					oldEntryPosition = i + 1;
-					break;
-				}
-			}
-			if(typeof(subServicesInsertedList[String(first.getServiceReference())]) != "undefined") {
-				for ( var i = 1; i < subServicesInsertedList[String(first.getServiceReference())].length ; i++){
-					var reference = subServicesInsertedList[String(first.getServiceReference())][i];
-					$(reference.getServiceReference()+'extend').innerHTML = "";
-				}
-				for(i = oldEntryPosition; i < oldEntryPosition + subServicesInsertedList[String(first.getServiceReference())].length; i++) {
-					mainChannellist.splice(i);
-				}
-			}
+
+			last = false
 			for ( var i = 0; i < services.length ; i++){
 				var reference = services[i];
 				var namespace = { 	
 					'servicereference': reference.getServiceReference(),
 					'servicename': reference.getServiceName()
 				};
-				listerHtml += RND(tplServiceListItem, namespace);
-				if(oldEntryPosition > -1) {
-					mainChannellist = mainChannellist.insert(oldEntryPosition++, reference);
+				
+				if(i != 0){
+					listerHtml += RND(tplSubServiceListItem, namespace);
 				}
+				
+				if(last == false){
+					last = reference.getServiceReference();
+				}
+				
+				last = reference.getServiceReference();
+
 			}
-			$(first.getServiceReference()+'extend').innerHTML = listerHtml;
+			//listerHtml += tplSubServiceListFooter;
+			$(first.getServiceReference()+'sub').innerHTML = listerHtml;
+			
 			subServicesInsertedList[String(first.getServiceReference())] = services;
 			loadedChannellist[$('mainServiceRef').value] = mainChannellist;
 		}

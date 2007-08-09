@@ -51,20 +51,26 @@ var tplServiceListHeader  = '<div class="BodyContentChannellist">\n';
 	tplServiceListHeader += '<tbody class="scrollContent">\n';
 	tplServiceListHeader += '<input type="hidden" id="mainServiceRef" name="mainServiceRef" value="%(mainServiceRef)">\n';
 
-var tplServiceListItem  = '<tr id="%(servicereference)extend">\n';
+var tplServiceListItem  = '<tr>\n';
 	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><span id="%(servicereference)" onclick="zap(this.id);" class="sListSLink">%(servicename)</span></div>';
 	tplServiceListItem += '<div class="sListExt"><a onclick="loadEPGByServiceReference(this.id)" id="%(servicereference)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
 	tplServiceListItem += '<a target="_blank" href="/web/stream.m3u?ref=%(servicereference)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
-	tplServiceListItem += '</tr>\n';
+	tplServiceListItem += '</td></tr>\n';
+	tplServiceListItem += '<tr><td id="%(servicereference)sub"></td></tr>';
     tplServiceListItem += '<tr>\n';
 	tplServiceListItem += '<td colspan="2"><div id="%(servicereference)EPGNOW"></div></td>\n';
 	tplServiceListItem += '</tr>\n';
 
 var tplServiceListFooter = "</tbody>\n</table>\n</div>\n";
 
+//Subservice Templates
 var	tplServiceListEPGItem  = '<div class="sListEPGTime">%(starttime)</div>\n';
 	tplServiceListEPGItem += '<div class="sListEPGTitle">%(title)</div>\n';
-	tplServiceListEPGItem += '<div class="sListEPGDuration">%(length) Min.</div>\n';
+	tplServiceListEPGItem += '<div class="sListEPGDuration">%(length) min.</div>\n';
+
+var	tplSubServiceListItem  = '<div class="sListSName"><span id="%(servicereference)" onclick="zap(this.id);" class="sListSLink">%(servicename)</span></div>\n';
+	tplSubServiceListItem += '<div class="sListExt"><a onclick="loadEPGByServiceReference(this.id)" id="%(servicereference)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
+	tplSubServiceListItem += '<a target="_blank" href="/web/stream.m3u?ref=%(servicereference)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
 
 // MovieList Templates
 var tplMovieListHeader  = '<div class="BodyContentChannellist">\n';
