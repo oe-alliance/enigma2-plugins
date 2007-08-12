@@ -1,0 +1,9 @@
+Package: enigma2-plugin-extensions-vlcplayer
+Version: 0.1
+Description: play and transcode movies from your pc
+Section: base
+Priority: optional
+Maintainer: Felix Domke <tmbinc@elitedvb.net>
+Architecture: noarch
+Homepage: unknown
+Depends: enigma2(>20070701)
