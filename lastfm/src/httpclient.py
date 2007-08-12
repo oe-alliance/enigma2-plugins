@@ -3,7 +3,7 @@ from twisted.web2.client.http import HTTPClientProtocol
 from twisted.internet import reactor, error
 from urlparse import urlsplit
 from socket import gethostbyname
-from urllib import urlencode as urllib_urlencode, quote_plus as urllib_quote_plus
+from urllib import urlencode as urllib_urlencode,unquote_plus as urllib_unquote_plus, quote_plus as urllib_quote_plus
 
 global HTTPCLIENT_requestCount
 HTTPCLIENT_requestCount = 0 # counts requests
@@ -176,8 +176,11 @@ class Enigma2HTTPClientFactory(ClientFactory):
         self.request.RequestError(reason.getErrorMessage())
         ClientFactory.clientConnectionFailed(self, connector, reason)
 
+def unquote_plus(string):
+    return urllib_unquote_plus(string)
+
 def urlencode(dict):
-	return urllib_urlencode(dict)
+    return urllib_urlencode(dict)
 	
 def quote_plus(data):
 	return urllib_quote_plus(data)
