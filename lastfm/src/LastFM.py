@@ -338,7 +338,7 @@ class LastFM(LastFMHandler):
                 nodex['name'] = self.XMLget_txt(node, "name", "N/A" )
                 nodex['artist'] =  self.XMLget_txt(node, "artist", "N/A" )
                 nodex['playcount'] = self.XMLget_txt(node, "playcount", "N/A" )
-                nodex['stationurl'] =  "lastfm://artist/"+nodex['artist'].replace(" ","%20")+"/"+nodex['name'].replace(" ","%20")
+                nodex['stationurl'] =  "lastfm://artist/"+nodex['artist'].replace(" ","%20")+"/similarartists"#+nodex['name'].replace(" ","%20")
                 nodex['url'] =  self.XMLget_txt(node, "url", "N/A" )
                 nodex['_display'] = nodex['artist']+" - "+nodex['name']
                 data.append(nodex)
