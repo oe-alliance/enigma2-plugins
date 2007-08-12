@@ -26,7 +26,7 @@ config.plugins.LastFM.username = ConfigText("user",fixed_size=False)
 config.plugins.LastFM.password = ConfigText("passwd",fixed_size=False)
 config.plugins.LastFM.timeoutstatustext = ConfigInteger(3,limits = (0, 10))
 config.plugins.LastFM.timeouttabselect = ConfigInteger(2,limits = (0, 10))
-config.plugins.LastFM.metadatarefreshinterval = ConfigInteger(5,limits = (0, 100))
+config.plugins.LastFM.metadatarefreshinterval = ConfigInteger(1,limits = (0, 100))
 config.plugins.LastFM.recommendedlevel = ConfigInteger(3,limits = (0, 100))
 config.plugins.LastFM.sendSubmissions = ConfigYesNo(default = False)
 
@@ -68,12 +68,13 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
             <widget name="album" position="0,40" size="70,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
             <widget name="track" position="0,80" size="70,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
             
-            <widget name="info_artist" position="70,0" size="344,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
+            <widget name="info_artist" position="70,0" size="284,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
+            <widget name="duration" position="354,0" size="60,30" valign=\"center\" halign=\"right\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
             <widget name="info_album" position="70,40" size="344,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
             <widget name="info_track" position="70,80" size="344,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
             <widget name="info_cover" position="414,0" size="116,116" />          
             
-            <widget name="tablist" position="0,120" size="150,260" scrollbarMode="showOnDemand" />            
+            <widget name="tablist" position="0,120" size="150,260" scrollbarMode="showOnDemand" backgroundColor="#55cccccc"/>            
             <widget name="streamlist" position="150,120" size="380,260" scrollbarMode="showOnDemand" />            
             
             <widget name="button_red" position="10,400" size="60,30" backgroundColor=\"red\" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
@@ -92,7 +93,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         LastFM.__init__(self)
         self.session = session
         self.streamplayer = StreamPlayer(session)
-        self.streamplayer.onStateChanged.append(self.updateGUI)
+        self.streamplayer.onStateChanged.append(self.onStreamplayerStateChanged)
         self.imageconverter = ImageConverter(116,116,self.setCoverArt)
         Screen.__init__(self, session)
         
@@ -112,6 +113,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.tablist.onSelectionChanged.append(self.action_TabChanged)
         
         self["artist"] = Label(_("Artist")+":")
+        self["duration"] = Label("-00:00")
         self["album"] = Label(_("Album")+":")
         self["track"] = Label(_("Track")+":")
         
@@ -134,9 +136,9 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
              "ok": self.action_ok,
              "back": self.action_exit,
              "red": self.action_startstop,
-             "green": self.skip,
+             "green": self.skipTrack,
              "yellow": self.love,
-             "blue": self.ban ,
+             "blue": self.banTrack ,
              "historyNext": self.action_nextTab,
              "historyBack": self.action_prevTab,
              
@@ -176,7 +178,12 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
     def initLastFM(self):
         self.setInfoLabel("loggin into last.fm")
         self.connect(config.plugins.LastFM.username.value,config.plugins.LastFM.password.value)
-    
+        
+    def onStreamplayerStateChanged(self,reason):
+        if reason is self.streamplayer.STATE_PLAYLISTENDS:
+            self.loadPlaylist()
+        else:
+            pass
     def onConnectSuccessful(self,text):
         self.setInfoLabel("login successful")      
     
@@ -189,8 +196,9 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
     def onTrackLoved(self,reason):
         self.setInfoLabel("Track loved")
     
-    def onTrackBaned(self,reason):
+    def onTrackBanned(self,reason):
         self.setInfoLabel("Track baned")
+        
     
     def onCommandFailed(self,reason):
         self.setInfoLabel(reason)
@@ -224,19 +232,32 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.buildMenuList(user)
     
     def onStationChanged(self,reason):
-        self.setInfoLabel(reason)    
+        self.setInfoLabel(reason) 
+        self.loadPlaylist() 
         
     def onMetadataLoaded(self,metadata):
         self.updateGUI()
         self.guiupdatetimer.start(config.plugins.LastFM.metadatarefreshinterval.value*1000)
+    
+    def onPlaylistLoaded(self,reason):
+        self.streamplayer.setPlaylist(self.playlist)
+        self.streamplayer.play()
 
+    def skipTrack(self):
+        self.streamplayer.skip()
+        self.updateGUI()
+        
+    def banTrack(self):
+        self.ban()
+        self.streamplayer.skip()
+        self.updateGUI()
+        
     def action_TabChanged(self):
         self.tabchangetimer.stop()
         self.tabchangetimer.start(config.plugins.LastFM.timeouttabselect.value*1000)
         
     def guiupdatetimerFired(self):
-        if self.streamplayer.is_playing:
-            self.getMetadata()
+        self.updateGUI()
         self.guiupdatetimer.start(config.plugins.LastFM.metadatarefreshinterval.value*1000)
         
     def tabchangedtimerFired(self):
@@ -253,7 +274,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         
     def startScreensaver(self):
         self.screensavertimer.stop()
-        self.session.openWithCallback(self.updateGUI, LastFMSaveScreen,self.metadata)
+        self.session.openWithCallback(self.updateGUI, LastFMSaveScreen,self.streamplayer)
            
     def action_nextTab(self):
         self.tablist.down()
@@ -270,7 +291,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
     def action_exit(self):
         self.screensavertimer.stop()
         self.guiupdatetimer.stop()
-        self.streamplayer.stop()
+        self.streamplayer.stop(force=True)
         self.streamplayer.onStateChanged=[]
         
         self.close()
@@ -282,19 +303,17 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         elif len(x) >1:
             self.changeStation(x[1])
             self.resetScreensaverTimer()
-
+                
     def action_startstop(self):
         self.resetScreensaverTimer()
         if self.streamplayer.is_playing:
-            self.streamplayer.stop()
-            self.metadata = {}
+            self.streamplayer.stop(force=True)
             self.setInfoLabel("stream stopped")
-        
         else:
             self.setInfoLabel("starting stream",timeout=True)
-            if self.info.has_key("stream_url"):
-                self.streamplayer.play(self.info["stream_url"])
-                self.guiupdatetimer.start(config.plugins.LastFM.metadatarefreshinterval.value*1000)
+            self.loadPlaylist()
+            self.updateGUI() #forcing guiupdate, so we dont wait till guiupdatetimer fired
+            self.guiupdatetimer.start(config.plugins.LastFM.metadatarefreshinterval.value*1000)
 
     def setInfoLabel(self,text,timeout=True):
         self.infolabelcleartimer.stop() 
@@ -306,7 +325,12 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self["infolabel"].setText("")
         
     def updateGUI(self):
-        print "updateGUI"
+        if self.streamplayer.is_playing is True:
+            self["duration"].setText(self.streamplayer.getRemaining())
+        else:
+            self["duration"].setText("00:00")
+            
+        
         if self.streamplayer.is_playing is True:
             self["button_red"].setText(_("stop"))
         else:
@@ -315,32 +339,28 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         if self.streamplayer.is_playing is not True or self.shown is not True:
             return None
             
-        if self.metadata.has_key("station"):
-            self.setTitle("Last.FM: "+self.metadata["station"])
+        if self.streamplayer.is_playing is True:
+            self.setTitle("Last.FM: "+self.streamplayer.getMetadata("station"))
         else:
             self.setTitle("Last.FM")
 
-        if self.metadata.has_key("artist"):
-            self["info_artist"].setText(self.metadata["artist"])
+        if self.streamplayer.is_playing is True:
+            self["info_artist"].setText(self.streamplayer.getMetadata("creator"))
         else:
             self["info_artist"].setText("N/A")
 
-        if self.metadata.has_key("album"):
-            self["info_album"].setText(self.metadata["album"])
+        if self.streamplayer.is_playing is True:
+            self["info_album"].setText(self.streamplayer.getMetadata("album"))
         else:
             self["info_album"].setText("N/A")
 
-        if self.metadata.has_key("track"):
-            self["info_track"].setText(self.metadata["track"])
+        if self.streamplayer.is_playing is True:
+            self["info_track"].setText(self.streamplayer.getMetadata("title"))
         else:
             self["info_track"].setText("N/A")
         
-        if self.metadata.has_key("albumcover_large") and config.plugins.LastFM.showcoverart.value:
-            self.imageconverter.convert(self.metadata["albumcover_large"])
-        elif self.metadata.has_key("albumcover_medium") and config.plugins.LastFM.showcoverart.value:
-            self.imageconverter.convert(self.metadata["albumcover_medium"])
-        elif self.metadata.has_key("albumcover_small") and config.plugins.LastFM.showcoverart.value:
-            self.imageconverter.convert(self.metadata["albumcover_small"],self.setCoverArt)
+        if self.streamplayer.getMetadata("image").startswith("http") and config.plugins.LastFM.showcoverart.value:
+            self.imageconverter.convert(self.streamplayer.getMetadata("image"))
         else:
             self.setCoverArt()
         
@@ -375,20 +395,21 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         x["stationurl"] = self.getLovedURL(config.plugins.LastFM.username.value)
         tags.append(x)
         
-        if self.metadata.has_key("artist"):
+        creator = self.streamplayer.getMetadata("creator")
+        if creator != "no creator" and creator != "N/A":
             x= {}
-            x["_display"] = "similar Tracks of current Artist"
-            x["stationurl"] = self.getSimilarArtistsURL()
+            x["_display"] = "Tracks similar to "+self.streamplayer.getMetadata("creator")
+            x["stationurl"] = self.getSimilarArtistsURL(artist=creator)
             tags.append(x)
             
             x= {}
-            x["_display"] = "Tracks liked by Fans of current Track"
-            x["stationurl"] = self.getArtistsLikedByFans()
+            x["_display"] = "Tracks liked by Fans of "+self.streamplayer.getMetadata("creator")
+            x["stationurl"] = self.getArtistsLikedByFans(artist=creator)
             tags.append(x)
 
             x= {}
-            x["_display"] = "Group of Artist of current Track"
-            x["stationurl"] = self.getArtistGroup()
+            x["_display"] = "Group of "+self.streamplayer.getMetadata("creator")
+            x["stationurl"] = self.getArtistGroup(artist=creator)
             tags.append(x)
         
         self.buildMenuList(tags)
@@ -433,7 +454,8 @@ class LastFMSaveScreen(Screen):
               </screen>"""
     noCoverArtPNG = "/usr/share/enigma2/no_coverArt.png"
     coverartsize= [200,200]
-    def __init__(self,session,initialMetadata):
+    lastcreator=""
+    def __init__(self,session,streamplayer):
         self.skin = """<screen position="0,0" size="720,576" flags="wfNoBorder" title="LastFMSaveScreen" >
                 <widget name="cover" position="50,50" size="%i,%i" />          
               </screen>"""%(self.coverartsize[0],self.coverartsize[1])
@@ -441,7 +463,7 @@ class LastFMSaveScreen(Screen):
         Screen.__init__(self,session)
         self.imageconverter = ImageConverter(self.coverartsize[0],self.coverartsize[1],self.setCoverArt)
         self.session = session
-        self.initialMetadata = initialMetadata
+        self.streamplayer = streamplayer
         self["cover"] = MovingPixmap()
         self["actions"] = ActionMap(["InfobarChannelSelection","WizardActions", "DirectionActions","MenuActions","ShortcutActions","GlobalActions","HelpActions"], 
             {
@@ -450,8 +472,10 @@ class LastFMSaveScreen(Screen):
              }, -1)
         
         self.onLayoutFinish.append(self.update)
-        self.onLayoutFinish.append(self.registerToMetadataUpdates)
-        
+        self.updatetimer = eTimer()
+        self.updatetimer.timeout.get().append(self.update)
+        self.updatetimer.start(1000)
+            
         if config.plugins.LastFM.sreensaver.coverartanimation.value:
             self.startmovingtimer = eTimer()
             self.startmovingtimer.timeout.get().append(self.movePixmap)
@@ -461,35 +485,27 @@ class LastFMSaveScreen(Screen):
         pass
     
     def action_exit(self):
-        lastfm_event_register.removeOnMetadataChanged(self.update)
         self.close()
         
     def setCoverArt(self,pixmap=None):
         if pixmap is None:
             self["cover"].instance.setPixmapFromFile(self.noCoverArtPNG)            
         else:
-            self["cover"].instance.setPixmap(pixmap.__deref__())
-            
-    def registerToMetadataUpdates(self):
-        lastfm_event_register.addOnMetadataChanged(self.update)#added here, to make shure that is called after onLayoutFinished
-        
+            self["cover"].instance.setPixmap(pixmap.__deref__())        
     
-    def update(self,metadata=None):
-        
-        if metadata is None:
-            metadata = self.initialMetadata
-            
-        if config.plugins.LastFM.sreensaver.showcoverart.value is not True:
-            pass#do nothing
-        elif metadata.has_key("albumcover_large") and config.plugins.LastFM.showcoverart.value:
-            self.imageconverter.convert(metadata["albumcover_large"])
-        elif metadata.has_key("albumcover_medium") and config.plugins.LastFM.showcoverart.value:
-            self.imageconverter.convert(metadata["albumcover_medium"])
-        elif metadata.has_key("albumcover_small") and config.plugins.LastFM.showcoverart.value:
-            self.imageconverter.convert(metadata["albumcover_small"],self.setCoverArt)
+    def update(self):
+        if self.streamplayer.getMetadata("creator") == self.lastcreator:
+            pass
         else:
-            self.setCoverArt()
-
+            self.lastcreator = self.streamplayer.getMetadata("creator")
+            if config.plugins.LastFM.sreensaver.showcoverart.value is not True:
+                pass#do nothing
+            elif self.streamplayer.getMetadata("image").startswith("http") and config.plugins.LastFM.showcoverart.value:
+                self.imageconverter.convert(self.streamplayer.getMetadata("image"))
+            else:
+                self.setCoverArt()
+        self.updatetimer.start(1000)
+        
     def movePixmap(self):
         self.startmovingtimer.stop() 
         newX = randrange(720-self.coverartsize[0]-1)

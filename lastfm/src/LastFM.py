@@ -1,4 +1,4 @@
-from httpclient import getPage
+from httpclient import getPage,unquote_plus
 
 from md5 import md5 # to encode password
 from string import split, rstrip
@@ -27,6 +27,8 @@ lastfm_event_register = LastFMEventRegister()
 class LastFMHandler:
     def __init__(self):
         pass
+    def onPlaylistLoaded(self,reason):
+        pass
     def onConnectSuccessful(self,reason):
         pass
     def onConnectFailed(self,reason):
@@ -37,7 +39,7 @@ class LastFMHandler:
         pass
     def onTrackLoved(self,reason):
         pass
-    def onTrackBaned(self,reason):
+    def onTrackBanned(self,reason):
         pass
     def onGlobalTagsLoaded(self,tags):
         pass
@@ -73,6 +75,7 @@ class LastFM(LastFMHandler):
     metadata = {}
     info={}
     cache_toptags= "/tmp/toptags"
+    playlist = None
     
     def __init__(self):
         LastFMHandler.__init__(self)
@@ -97,6 +100,7 @@ class LastFM(LastFMHandler):
                 self.framehack = self.info["base_path"]
                 self.state = True
                 self.onConnectSuccessful("loggedin")
+                
         else:
             self.onConnectFailed("login failed")
         
@@ -106,10 +110,26 @@ class LastFM(LastFMHandler):
         for v in vars:
             x = split(rstrip(v), "=", 1)
             if len(x) == 2:
-                res[x[0]] = x[1].encode("utf-8")
+                try:
+                    res[x[0]] = x[1].encode("utf-8")
+                except UnicodeDecodeError:
+                    res[x[0]] = "unicodeproblem"
             elif x != [""]:
                 print "(urk?", x, ")"
         return res
+
+    def loadPlaylist(self):
+        print "LOADING PLAYLIST"
+        if self.state is not True:
+            self.onCommandFailed("not logged in")
+        else:
+            getPage(self.info["base_url"],80
+                            ,self.info["base_path"] + "/xspf.php?sk=" + self.info["session"]+"&discovery=0&desktop=1.3.1.1"
+                            ,callback=self.loadPlaylistCB,errorback=self.onCommandFailed)
+            
+    def loadPlaylistCB(self,xmlsource):
+        self.playlist = LastFMPlaylist(xmlsource)
+        self.onPlaylistLoaded("playlist loaded")
     
     def getPersonalURL(self,username,level=50):
         return "lastfm://user/%s/recommended/32"%username
@@ -137,7 +157,7 @@ class LastFM(LastFMHandler):
             return "lastfm://group/%s"%self.metadata['artist'].replace(" ","%20")
         else:
             return "lastfm://group/%s"%artist.replace(" ","%20")
-    
+    """
     def getMetadata(self):
         if self.state is not True:
             self.onCommandFailed("not logged in")
@@ -163,7 +183,7 @@ class LastFM(LastFMHandler):
                 lastfm_event_register.onMetadataChanged(self.metadata)
         else:
             self.onCommandFailed("Error while parsing Metadata")
-
+    """
     def command(self, cmd,callback):
         # commands = skip, love, ban, rtp, nortp
         if self.state is not True:
@@ -198,9 +218,10 @@ class LastFM(LastFMHandler):
         return self.command("love",self.onTrackLovedCB)
 
     def ban(self):
-        return self.command("ban",self.onTrackBanedCB)
+        return self.command("ban",self.onTrackBannedCB)
 
     def skip(self):
+        """unneeded"""
         return self.command("skip",self.onTrackSkipedCB)
     
     def hexify(self,s):
@@ -389,3 +410,60 @@ class LastFM(LastFMHandler):
         else:
             self.onCommandFailed("Server returned "+res["response"])
 
+############
+class LastFMPlaylist:
+    """
+        this is the new way last.fm handles streams with metadata
+    """
+    DEFAULT_NAMESPACES = (None,)
+    DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',) #why do i need this?
+    
+    name = "N/A"
+    creator = "N/A"
+    tracks = []
+    length = 0
+    
+    def __init__(self,xmlsource):
+        self.xmldoc = parseString(xmlsource)
+        self.name = unquote_plus(self._get_txt( self.xmldoc, "title", "no playlistname" ))
+        self.creator =self._get_txt( self.xmldoc, "creator", "no playlistcreator" )
+        self.parseTracks()
+
+    def getTracks(self):
+        return self.tracks
+
+    def getTrack(self,tracknumber):
+        return self.tracks[tracknumber]
+    
+    def parseTracks(self):
+        try:
+            self.tracks = []
+            for node in self._getElementsByTagName(self.xmldoc, 'track'):
+                nodex={}
+                nodex['station'] =  self.name
+                nodex['location'] =  self._get_txt( node, "location", "no location" )
+                nodex['title'] =  self._get_txt( node, "title", "no title" )
+                nodex['id'] =  self._get_txt( node, "id", "no id" )
+                nodex['album'] =  self._get_txt( node, "album", "no album" )
+                nodex['creator'] =  self._get_txt( node, "creator", "no creator" )
+                nodex['duration'] =  int(self._get_txt( node, "duration", "0" ))
+                nodex['image'] =  self._get_txt( node, "image", "no image" )
+                self.tracks.append(nodex)
+            self.length = len(self.tracks)
+            return True
+        except:
+            return False
+    
+    def _getElementsByTagName( self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES ):
+        for namespace in possibleNamespaces:
+            children = node.getElementsByTagNameNS(namespace, tagName)
+            if len(children): return children
+        return []
+
+    def _node_data( self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):
+        children = self._getElementsByTagName(node, tagName, possibleNamespaces)
+        node = len(children) and children[0] or None
+        return node and "".join([child.data.encode("utf-8") for child in node.childNodes]) or None
+
+    def _get_txt( self, node, tagName, default_txt="" ):
+        return self._node_data( node, tagName ) or self._node_data( node, tagName, self.DUBLIN_CORE ) or default_txt
