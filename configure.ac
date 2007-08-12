@@ -51,4 +51,7 @@ logomanager/Makefile
 logomanager/src/Makefile
 logomanager/logodir_hdd/Makefile
 
+vlcplayer/Makefile
+vlcplayer/src/Makefile
+
 ])
