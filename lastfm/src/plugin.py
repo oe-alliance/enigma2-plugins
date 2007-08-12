@@ -265,16 +265,16 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.tabchangetimer.stop()
 
     def startScreensaverTimer(self):
-        if config.plugins.LastFM.sreensaver.use.value:
-            self.screensavertimer.start(config.plugins.LastFM.sreensaver.wait.value*1000)
+        self.screensavertimer.start(config.plugins.LastFM.sreensaver.wait.value*1000)
 
     def resetScreensaverTimer(self):
         self.screensavertimer.stop()
         self.screensavertimer.start(config.plugins.LastFM.sreensaver.wait.value*1000)
         
     def startScreensaver(self):
-        self.screensavertimer.stop()
-        self.session.openWithCallback(self.updateGUI, LastFMSaveScreen,self.streamplayer)
+        if config.plugins.LastFM.sreensaver.use.value:
+            self.screensavertimer.stop()
+            self.session.openWithCallback(self.updateGUI, LastFMSaveScreen,self.streamplayer)
            
     def action_nextTab(self):
         self.tablist.down()
