@@ -157,33 +157,6 @@ class LastFM(LastFMHandler):
             return "lastfm://group/%s"%self.metadata['artist'].replace(" ","%20")
         else:
             return "lastfm://group/%s"%artist.replace(" ","%20")
-    """
-    def getMetadata(self):
-        if self.state is not True:
-            self.onCommandFailed("not logged in")
-        else:
-            getPage(self.info["base_url"],80
-                            ,self.info["base_path"] + "/np.php?session=" + self.info["session"]
-                            ,callback=self.getMetadataCB,errorback=self.onCommandFailed)
-
-    def getMetadataCB(self,result):
-        tmp = self._parselines(result)
-        if tmp.has_key('\xef\xbb\xbfstreaming'):
-            tmp["streaming"] = tmp['\xef\xbb\xbfstreaming']
-
-        if tmp.has_key("streaming"):
-            if tmp["streaming"] == "false" or (tmp["streaming"] == "true" and tmp.has_key("artist") and tmp.has_key("track") and tmp.has_key("trackduration")):
-                if not tmp.has_key("album"):
-                    tmp["album"] = ""
-                    tmp["album_url"] = ""
-                self.metadata = tmp
-                self.metadatatime = time()
-                self.metadataage = str(int(time() - self.metadatatime))
-                self.onMetadataLoaded(self.metadata)
-                lastfm_event_register.onMetadataChanged(self.metadata)
-        else:
-            self.onCommandFailed("Error while parsing Metadata")
-    """
     def command(self, cmd,callback):
         # commands = skip, love, ban, rtp, nortp
         if self.state is not True:
@@ -200,7 +173,7 @@ class LastFM(LastFMHandler):
         else:
             self.onCommandFailed("Server returned FALSE")
 
-    def onTrackBanedCB(self,response):
+    def onTrackBannedCB(self,response):
         res = self._parselines(response)
         if res["response"] == "OK":
             self.onTrackBanned("Track baned")
