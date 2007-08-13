@@ -37,14 +37,14 @@ function UpdateStreamReaderStart(){
 		UpdateStreamReaderRequest.onerror = UpdateStreamReaderOnError;
 		UpdateStreamReaderRequest.open("GET", url_updates, true);
  		UpdateStreamReaderRequest.send(null);
-		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 1500);
+		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 1000);
 	}
 }
   
 function UpdateStreamReaderLatestResponse() {
 	UpdateStreamReaderPollTimerCounter++;
 	
-	if(UpdateStreamReaderPollTimerCounter > 6) {
+	if(UpdateStreamReaderPollTimerCounter > 30) {
 		clearInterval(UpdateStreamReaderPollTimer);
 		UpdateStreamReaderRequest.abort();
 		UpdateStreamReaderRequest = null;
@@ -293,7 +293,7 @@ function zap(servicereference){
 								method: 'get'
 							}
 						);
-		setTimeout("getSubServices()", 3000);
+		setTimeout("getSubServices()", 5000);
 	}
 	
 }
@@ -574,7 +574,9 @@ function incomingChannellist(request){
 		listerHtml += tplServiceListFooter;
 		$('BodyContent').innerHTML = listerHtml;
 		setBodyMainContent('BodyContent');
+		setTimeout("getSubServices()", 5000);
 		loadServiceEPGNowNext(servicereftoloadepgnow);
+		
 		debug("incomingChannellist " + typeof(loadedChannellist[servicereftoloadepgnow]));
 	}
 }
@@ -773,7 +775,7 @@ function getSubServices() {
 	doRequest(url_subservices,incomingSubServiceRequest, false);
 }
 
-var SubServicePoller = setInterval(getSubServices, 15000);
+//var SubServicePoller = setInterval(getSubServices, 15000);
 var subServicesInsertedList = new Object();
 
 function incomingSubServiceRequest(request){
