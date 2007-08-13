@@ -68,7 +68,10 @@ class StreamPlayer:
         self.stop()
                 
     def stop(self,text="",force=False):
-        if force is False and self.playlist.length > 0 and (self.playlist.length-1) > self.currentplaylistitemnumber:
+        if self.playlist is None:
+            self.is_playing = False
+            self.stateChanged(self.STATE_STOP)
+        elif force is False and self.playlist.length > 0 and (self.playlist.length-1) > self.currentplaylistitemnumber:
             self.play(tracknumber=self.currentplaylistitemnumber+1)
             self.stateChanged(self.STATE_PLAYINGSTARTED)
         elif self.is_playing is True and force is True:
