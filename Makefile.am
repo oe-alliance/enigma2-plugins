@@ -1,2 +1,2 @@
 AUTOMAKE_OPTIONS = gnu
-SUBDIRS = antiscrollbar movietagger webinterface wirelesslan netcaster lastfm logomanager vlcplayer
+SUBDIRS = antiscrollbar movietagger webinterface wirelesslan netcaster lastfm logomanager vlcplayer simplerss
