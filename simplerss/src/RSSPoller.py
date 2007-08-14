@@ -3,6 +3,7 @@ from Components.config import config
 from enigma import eTimer
 
 from SimpleRSSScreens import SimpleRSSFeed
+from TagStrip import TagStrip
 from Feed import Feed
 
 from httpclient import getPage
@@ -15,6 +16,8 @@ class RSSPoller:
 		self.poll_timer.timeout.get().append(self.poll)
 		self.poll_timer.start(0, 1)
 
+		self.stripper = TagStrip()
+
 		self.update_callbacks = [ ]
 		self.session = session
 		self.dialog = None
@@ -22,7 +25,7 @@ class RSSPoller:
 	
 		self.feeds = [ ]
 		for i in range(0, config.plugins.simpleRSS.feedcount.value):
-			self.feeds.append(Feed(config.plugins.simpleRSS.feed[i].uri.value, config.plugins.simpleRSS.feed[i].autoupdate.value))
+			self.feeds.append(Feed(config.plugins.simpleRSS.feed[i].uri.value, config.plugins.simpleRSS.feed[i].autoupdate.value, self.stripper))
 		self.new_items = [ ]
 		self.current_feed = 0
 
@@ -164,7 +167,7 @@ class RSSPoller:
 		# TODO: Fix this evil way of updating feeds
 		newfeeds = []
 		for i in range(0, config.plugins.simpleRSS.feedcount.value):
-			newfeeds.append(Feed(config.plugins.simpleRSS.feed[i].uri.value, config.plugins.simpleRSS.feed[i].autoupdate.value))
+			newfeeds.append(Feed(config.plugins.simpleRSS.feed[i].uri.value, config.plugins.simpleRSS.feed[i].autoupdate.value, self.stripper))
 
 		self.feeds = newfeeds
 

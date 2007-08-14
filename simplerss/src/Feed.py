@@ -3,12 +3,13 @@ from sets import Set
 class Feed:
 	MAX_HISTORY_ELEMENTS = 100
 
-	def __init__(self, uri, autoupdate):
+	def __init__(self, uri, autoupdate, stripper):
 		self.uri = uri
 		self.autoupdate = autoupdate
 		self.type = None
 		self.title = uri.encode("UTF-8")
 		self.description = ""
+		self.stripper = stripper
 		self.last_update = None
 		self.last_ids = set()
 		self.history = []
@@ -19,28 +20,30 @@ class Feed:
 			if dom.documentElement.getAttribute("version") in ["2.0", "0.94", "0.93", "0.92", "0.91"]:
 				self.type = "rss"
 				try:
-					self.title = dom.getElementsByTagName("channel")[0].getElementsByTagName("title")[0].childNodes[0].data.encode("UTF-8")
-					self.description = dom.getElementsByTagName("channel")[0].getElementsByTagName("description")[0].childNodes[0].data.encode("UTF-8")
+					self.title = dom.getElementsByTagName("channel")[0].getElementsByTagName("title")[0].childNodes[0].data
+					self.description = dom.getElementsByTagName("channel")[0].getElementsByTagName("description")[0].childNodes[0].data
 				except:
 					pass
 			# RSS 1.0 (NS: http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 			elif dom.documentElement.localName == "RDF":
 				self.type = "rss"
 				try:
-					self.title = dom.getElementsByTagName("channel")[0].getElementsByTagName("title")[0].childNodes[0].data.encode("UTF-8")
-					self.description = dom.getElementsByTagName("channel")[0].getElementsByTagName("description")[0].childNodes[0].data.encode("UTF-8")
+					self.title = dom.getElementsByTagName("channel")[0].getElementsByTagName("title")[0].childNodes[0].data
+					self.description = dom.getElementsByTagName("channel")[0].getElementsByTagName("description")[0].childNodes[0].data
 				except:
 					pass
 			# Atom (NS: http://www.w3.org/2005/Atom)
 			elif dom.documentElement.localName == "feed":
 				self.type = "atom"
 				try:
-					self.title = dom.getElementsByTagName("title")[0].childNodes[0].data.encode("UTF-8")
-					self.description = dom.getElementsByTagName("subtitle")[0].childNodes[0].data.encode("UTF-8")
+					self.title = dom.getElementsByTagName("title")[0].childNodes[0].data
+					self.description = dom.getElementsByTagName("subtitle")[0].childNodes[0].data
 				except:
 					pass
 			else:
 				raise NotImplementedError, 'Unsupported Feed: %s' % dom.documentElement.localName
+			self.title = self.stripper.strip(self.title).encode("UTF-8")
+			self.description = self.stripper.strip(self.description).encode("UTF-8")
 		if self.type == "rss":
 			print "[SimpleRSS] type is rss"
 			return self.gotRSSDom(dom)
@@ -52,13 +55,12 @@ class Feed:
 		# Try to read when feed was last updated, if time equals return empty list. else fetch new items
 		try:
 			updated = dom.getElementsByTagName("lastBuildDate")[0].childNodes[0].data
-			if not self.last_update == updated:
-				self.last_update = updated
-				return self.parseRSS(dom.getElementsByTagName("item"))
-			else:
+			if self.last_update == updated:
 				return [ ]
+			self.last_update = updated
 		except:
-			return self.parseRSS(dom.getElementsByTagName("item"))
+			pass
+		return self.parseRSS(dom.getElementsByTagName("item"))
 
 	def parseRSS(self, items):
 		new_items = []
@@ -67,7 +69,7 @@ class Feed:
 
 			# Try to read title, continue if none found
 			try:
-				title = item.getElementsByTagName("title")[0].childNodes[0].data
+				title = self.stripper.strip(item.getElementsByTagName("title")[0].childNodes[0].data)
 			except:
 				continue
 
@@ -89,7 +91,7 @@ class Feed:
 
 			# Try to read summary (description element), empty if none
 			try:
-				summary = item.getElementsByTagName("description")[0].childNodes[0].data
+				summary = self.stripper.strip(item.getElementsByTagName("description")[0].childNodes[0].data)
 			except:
 				summary = ""
 
@@ -98,7 +100,7 @@ class Feed:
 				enclosure.append((current.getAttribute("url").encode("UTF-8"), current.getAttribute("type").encode("UTF-8")))
 
 			# Update Lists
-			new_items.append((title.encode("UTF-8").strip(), link.encode("UTF-8").strip(), summary.encode("UTF-8").strip(), enclosure))
+			new_items.append((title.encode("UTF-8"), link.encode("UTF-8"), summary.encode("UTF-8"), enclosure))
 			self.last_ids.add(guid)
 
 		# Append known Items to new Items and evenentually cut it
@@ -111,13 +113,12 @@ class Feed:
 		try:
 			# Try to read when feed was last updated, if time equals return empty list. else fetch new items
 			updated = dom.getElementsByTagName("updated")[0].childNodes[0].data
-			if not self.last_update == updated:
-				self.last_update = updated
-				return self.parseAtom(dom.getElementsByTagName("entry"))
-			else:
+			if self.last_update == updated:
 				return [ ]
+			self.last_update = updated
 		except:
-			return self.parseAtom(dom.getElementsByTagName("entry"))
+			pass
+		return self.parseAtom(dom.getElementsByTagName("entry"))
 
 	def parseAtom(self, items):
 		new_items = []
@@ -127,7 +128,7 @@ class Feed:
 			
 			# Try to read title, continue if none found
 			try:
-				title = item.getElementsByTagName("title")[0].childNodes[0].data
+				title = self.stripper.strip(item.getElementsByTagName("title")[0].childNodes[0].data)
 			except:
 				continue
 
@@ -150,12 +151,12 @@ class Feed:
 			
 			# Try to read summary, empty if none
 			try:
-				summary = item.getElementsByTagName("summary")[0].childNodes[0].data
+				summary = self.stripper.strip(item.getElementsByTagName("summary")[0].childNodes[0].data)
 			except:
 				summary = ""
 
 			# Update Lists
-			new_items.append((title.encode("UTF-8").strip(), link.encode("UTF-8").strip(), summary.encode("UTF-8").strip(), enclosure))
+			new_items.append((title.encode("UTF-8"), link.encode("UTF-8"), summary.encode("UTF-8"), enclosure))
 			self.last_ids.add(id)
 
 		 # Append known Items to new Items and evenentually cut it
