@@ -2,6 +2,8 @@
 
 import re
 
+# Why no sgmllib ?!
+
 class TagStrip():
 	convertables = {
 		"&#228;": u"ä",
@@ -31,13 +33,11 @@ class TagStrip():
 	}
 
 	def strip(self, html):
+		# Strip enclosed tags
+		html = re.sub('<(.*?)>', '', html)
+
 		# Convert htmlspecialchars
 		for escaped, unescaped in self.convertables.iteritems():
 			html = html.replace(escaped, unescaped)
 
-		# Strip everything of form <a>CONTENT</a>, but keep CONTENT (elements with content)
-		html = re.sub('<(?P<tag>.*?)>(?P<content>.*?)</(?P=tag)>', '\g<content>', html)
-
-		# Strip everything of form <a /> (elements without conent)
-		html = re.sub('<(.*?) />', '', html)
 		return html
