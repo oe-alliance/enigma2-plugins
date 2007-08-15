@@ -1,6 +1,6 @@
 from enigma import eConsoleAppContainer
 
-from twisted.web2 import resource, stream, responsecode, http
+from twisted.web2 import resource, stream, responsecode, http, http_headers
 
 from os import path as os_path, remove as os_remove
 
@@ -56,17 +56,21 @@ class GrabResource(resource.Resource):
         else:
             save_image = False
         
+        headers = http_headers.Headers()
+        headers.addRawHeader('Content-Disposition', 'inline; filename=screenshot.bmp;')
+        headers.addRawHeader('Content-Type','image/bmp')
+        
         if os_path.exists(self.grab_bin) is not True:
             return    http.Response(responsecode.OK,stream="grab is not installed at '%s'. go and fix it."%self.grab_bin)
         elif req.args.has_key("command"): 
             cmd = req.args['command'][0].replace("-","")
             if cmd == "o":
-                return http.Response(responsecode.OK,stream=GrabStream(self.grab_bin+" -o "+filetarget,target=filetarget,save=save_image))
+                return http.Response(responsecode.OK,headers,stream=GrabStream(self.grab_bin+" -o "+filetarget,target=filetarget,save=save_image))
             elif cmd == "v":
-                return http.Response(responsecode.OK,stream=GrabStream(self.grab_bin+" -v "+filetarget,target=filetarget,save=save_image))
+                return http.Response(responsecode.OK,headers,stream=GrabStream(self.grab_bin+" -v "+filetarget,target=filetarget,save=save_image))
             elif cmd == "":
-                return http.Response(responsecode.OK,stream=GrabStream(self.grab_bin+" "+filetarget,target=filetarget,save=save_image))
+                return http.Response(responsecode.OK,headers,stream=GrabStream(self.grab_bin+" "+filetarget,target=filetarget,save=save_image))
             else:
-                return http.Response(responsecode.OK,stream=GrabStream(self.grab_bin+" -h"))
+                return http.Response(responsecode.OK,headers,stream=GrabStream(self.grab_bin+" -h"))
         else:
-            return http.Response(responsecode.OK,stream=GrabStream(self.grab_bin+" "+filetarget,target=filetarget,save=save_image))
+            return http.Response(responsecode.OK,headers,stream=GrabStream(self.grab_bin+" "+filetarget,target=filetarget,save=save_image))
