@@ -1,7 +1,11 @@
 from enigma import eServiceReference
 from os import system
+from os.path import isfile as os_path_isfile
 from math import ceil
 import time 
+from httpclient import quote_plus
+from Components.config import config
+
 class StreamPlayer:
     STATE_PLAYINGSTARTED = 0
     STATE_STOP = 1
@@ -60,7 +64,17 @@ class StreamPlayer:
             self.session.nav.stopService()
             self.targetfile = "/tmp/lastfm.mp3"
             system("mknod %s p" %self.targetfile)
-            system("wget %s -O- > %s&" %(track['location'],self.targetfile))
+            url = track['location']
+            cmdstring = ""
+            if config.plugins.LastFM.useproxy.value:
+                if os_path_isfile("/tmp/lastfmproxy"):
+                    url += "?savetrack=true&artist=%s&album=%s&title=%s&image=%s"%(quote_plus(track["creator"]),quote_plus(track["album"]),quote_plus(track["title"]),quote_plus(track["image"]))
+                    cmdstring += ("export http_proxy=\"http://localhost:%i\"; "%config.plugins.LastFM.proxyport.value)+cmdstring
+                else:
+                    print "lastfmproxy seem not running, not using it"
+            cmdstring += "wget  '%s' -Y on -O- > '%s'&" %(url,self.targetfile)
+            
+            system(cmdstring)
             self.session.nav.playService(eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s"%self.targetfile))
         self.is_playing = True
 

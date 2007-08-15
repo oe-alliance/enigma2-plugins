@@ -1,7 +1,7 @@
 from twisted.internet.protocol import ClientFactory
 from twisted.web2.client.http import HTTPClientProtocol
 from twisted.internet import reactor, error
-from urlparse import urlsplit
+from urlparse import urlsplit,urlparse as urlparse_urlparse,urlunparse as urlparse_urlunparse
 from socket import gethostbyname
 from urllib import urlencode as urllib_urlencode,unquote_plus as urllib_unquote_plus, quote_plus as urllib_quote_plus
 
@@ -175,6 +175,11 @@ class Enigma2HTTPClientFactory(ClientFactory):
     def clientConnectionFailed(self, connector, reason):
         self.request.RequestError(reason.getErrorMessage())
         ClientFactory.clientConnectionFailed(self, connector, reason)
+
+def urlparse(url):
+    return urlparse_urlparse(url)
+def urlunparse(url):
+    return urlparse_urlunparse(url)
 
 def unquote_plus(string):
     return urllib_unquote_plus(string)

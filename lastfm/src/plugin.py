@@ -12,12 +12,11 @@ from StreamPlayer import StreamPlayer
 from LastFMConfig import LastFMConfigScreen
 from LastFM import LastFM, lastfm_event_register
 from httpclient import getFile
-from os import remove as os_remove
+from os import remove as os_remove, system as os_system
 from random import randrange
 
 ###############################################################################        
 plugin_path = ""
-
 ###############################################################################        
 
 config.plugins.LastFM = ConfigSubsection()
@@ -30,6 +29,9 @@ config.plugins.LastFM.metadatarefreshinterval = ConfigInteger(1,limits = (0, 100
 config.plugins.LastFM.recommendedlevel = ConfigInteger(3,limits = (0, 100))
 config.plugins.LastFM.sendSubmissions = ConfigYesNo(default = False)
 
+config.plugins.LastFM.useproxy = ConfigYesNo(default = False)
+config.plugins.LastFM.proxyport = ConfigInteger(6676,limits = (1, 65536))
+
 config.plugins.LastFM.sreensaver = ConfigSubsection()
 config.plugins.LastFM.sreensaver.use = ConfigYesNo(default = True)
 config.plugins.LastFM.sreensaver.wait = ConfigInteger(30,limits = (0, 1000))
@@ -39,9 +41,26 @@ config.plugins.LastFM.sreensaver.coverartspeed = ConfigInteger(10,limits = (0, 1
 config.plugins.LastFM.sreensaver.coverartinterval = ConfigInteger(10,limits = (0, 100))
 
 ###############################################################################        
+try:
+    from LastFMproxyStarter import ProxyStarter
+    global proxy
+    proxy = ProxyStarter()
+except:
+    proxy = False
+    
 def main(session,**kwargs):
-    session.open(LastFMScreenMain)    
-        
+    global proxy
+    if proxy is not False:
+        proxy.start()
+    session.openWithCallback(LastFMScreenMainCB,LastFMScreenMain)    
+
+def LastFMScreenMainCB():
+    global proxy
+    if proxy is not False:
+        proxy.stop()
+        del proxy
+        proxy = ProxyStarter()
+
 def startScrobbler(reason, **kwargs):
     if "session" in kwargs and config.plugins.LastFM.sendSubmissions.value:
         from scrobbler import EventListener
@@ -174,6 +193,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.screensavertimer = eTimer()
         self.screensavertimer.timeout.get().append(self.startScreensaver)
         self.onShown.append(self.startScreensaverTimer)
+        
 
     def initLastFM(self):
         self.setInfoLabel("loggin into last.fm")
