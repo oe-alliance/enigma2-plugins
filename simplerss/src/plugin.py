@@ -1,18 +1,12 @@
-# warning, this is work in progress.
-# plus, the error handling sucks.
-#
-# TODO:
-#  - inline todos
-#  - all that stuff I forgot...
-#
 from Plugins.Plugin import PluginDescriptor
 
-from SimpleRSSSetup import SimpleRSSSetup
-from SimpleRSSScreens import SimpleRSS
+from RSSSetup import RSSSetup
+from RSSScreens import RSSOverview
 from RSSPoller import RSSPoller
 
 from Components.config import config, ConfigSubsection, ConfigSubList, ConfigEnableDisable, ConfigInteger, ConfigText
 
+# Initialize Configuration
 config.plugins.simpleRSS = ConfigSubsection()
 config.plugins.simpleRSS.show_new = ConfigEnableDisable(default=True)
 config.plugins.simpleRSS.interval = ConfigInteger(default=10, limits=(5, 300))
@@ -25,11 +19,12 @@ for i in range(0, config.plugins.simpleRSS.feedcount.value):
 
 rssPoller = None
 
+# Setup
 def main(session, **kwargs):
-	print "[SimpleRSS] Displaying SimpleRSS-Setup"
 	global rssPoller
-	session.open(SimpleRSSSetup, rssPoller)
+	session.open(RSSSetup, rssPoller)
 
+# Autostart
 def autostart(reason, **kwargs):
 	global rssPoller
 
@@ -40,11 +35,12 @@ def autostart(reason, **kwargs):
 		rssPoller.shutdown()
 		rssPoller = None
 
+# Show Overview
 def showCurrent(session, **kwargs):
 	global rssPoller
 	if rssPoller is None:
 		return
-	session.open(SimpleRSS, rssPoller)
+	session.open(RSSOverview, rssPoller)
 
 def Plugins(**kwargs):
  	return [ PluginDescriptor(name="RSS Reader", description="A simple to use RSS reader", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),

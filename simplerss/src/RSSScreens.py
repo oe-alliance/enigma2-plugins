@@ -6,24 +6,50 @@ from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 
 from RSSList import RSSList
-from SimpleRSSSetup import SimpleRSSSetup
+from RSSSetup import RSSSetup
 
-class SimpleRSSBase(Screen):
+class RSSBaseView(Screen):
+	"""Base Screen for all Screens used in SimpleRSS"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-	def selectEnclosure(self, enclosures):
-		if enclosures is None: # empty list
-			return
+	def errorPolling(self):
+		self.session.open(
+			MessageBox,
+			"Error while parsing Feed, this usually means there is something wrong with it.",
+			type = MessageBox.TYPE_ERROR,
+			timeout = 5
+		)
 
+	def singleUpdate(self, feedid, errback = None):
+		# Default errorback to self.errorPolling
+		# If an empty errorback is wanted the Screen needs to provide it
+		if errback is None:
+			errback = self.errorPolling
+		self.rssPoller.singlePoll(feedid, callback=True, errorback=errback)
+		self.session.open(
+			MessageBox,
+			"Update is being done in Background.\nContents will automatically be updated when it's done.",
+			type = MessageBox.TYPE_INFO,
+			timeout = 5
+		)
+
+	def selectEnclosure(self, enclosures):
+		# Empty List
+		if enclosures is None:
+			return
 		# Select stream in ChoiceBox if more than one present
-		if len(enclosures) > 1:
-			# TODO: beautify
-			self.session.openWithCallback(self.enclosureSelected, ChoiceBox, "Select enclosure to play", [(x[0][x[0].rfind("/")+1:], x) for x in enclosures])
+		elif len(enclosures) > 1:
+			self.session.openWithCallback(
+				self.enclosureSelected,
+				ChoiceBox,
+				"Select enclosure to play",
+				[(x[0][x[0].rfind("/")+1:].replace('%20', ' '), x) for x in enclosures]
+			)
 		# Play if one present
-		elif len(enclosures):
+		else:
 			self.enclosureSelected((None, enclosures[0]))
-		# Nothing if none present
 
 	def enclosureSelected(self, enclosure):
 		if enclosure:
@@ -37,14 +63,15 @@ class SimpleRSSBase(Screen):
 				from enigma import eServiceReference
 				self.session.nav.playService(eServiceReference(4097, 0, url))
 
-class SimpleRSSEntry(SimpleRSSBase):
+class RSSEntryView(RSSBaseView):
+	"""Shows a RSS Item"""
 	skin = """
 		<screen position="100,100" size="460,400" title="Simple RSS Reader" >
 			<widget name="content" position="0,0" size="460,400" font="Regular; 22" />
 		</screen>"""
 
 	def __init__(self, session, data, feedTitle="", nextEntryCB=None, previousEntryCB=None, nextFeedCB=None, previousFeedCB=None):
-		SimpleRSSBase.__init__(self, session)
+		RSSBaseView.__init__(self, session)
 
 		self.data = data
 		self.feedTitle = feedTitle
@@ -124,9 +151,10 @@ class SimpleRSSEntry(SimpleRSSBase):
 
 	def selectEnclosure(self):
 		if self.data is not None:
-			SimpleRSSBase.selectEnclosure(self, self.data[3])
+			RSSBaseView.selectEnclosure(self, self.data[3])
 
-class SimpleRSSFeed(SimpleRSSBase):
+class RSSFeedView(RSSBaseView):
+	"""Shows a RSS-Feed"""
 	skin = """
 		<screen position="100,100" size="460,400" title="Simple RSS Reader" >
 			<widget name="content" position="0,0" size="460,304" scrollbarMode="showOnDemand" />
@@ -134,7 +162,7 @@ class SimpleRSSFeed(SimpleRSSBase):
 		</screen>"""
 
 	def __init__(self, session, data, feedTitle = "", newItems=False, nextFeedCB=None, previousFeedCB=None, rssPoller=None, id = None):
-		SimpleRSSBase.__init__(self, session)
+		RSSBaseView.__init__(self, session)
 
 		self.data = data
 		self.feedTitle = feedTitle
@@ -144,12 +172,8 @@ class SimpleRSSFeed(SimpleRSSBase):
 		self.previousFeedCB=previousFeedCB
 		self.rssPoller=rssPoller
 
-		if len(data):
-			self["content"] = RSSList(data)
-			self["summary"] = Label(data[0][2])
-		else:
-			self["content"] = RSSList([])
-			self["summary"] = Label("Feed is empty.")
+		self["content"] = RSSList(data)
+		self["summary"] = Label()
 
 		if not newItems:
 			self["actions"] = ActionMap([ "OkCancelActions", "ChannelSelectBaseActions", "MenuActions", "ColorActions" ], 
@@ -165,7 +189,7 @@ class SimpleRSSFeed(SimpleRSSBase):
 			self.onClose.append(self.__close)
 		
 		self["content"].connectSelChanged(self.updateSummary)
-		self.onLayoutFinish.append(self.setConditionalTitle)
+		self.onLayoutFinish.extend([self.setConditionalTitle, self.updateSummary])
 
 	def __show(self):
 		self.rssPoller.addCallback(self.pollCallback)
@@ -177,14 +201,17 @@ class SimpleRSSFeed(SimpleRSSBase):
 		print "[SimpleRSS] SimpleRSSFeed called back"
 		current_entry = self["content"].getCurrentEntry()
 
-		if id is not None and self.id == id:
+		if id is not None and self.id == id+1:
 			print "[SimpleRSS] pollCallback recieved local feed", self.id
 			self.feedTitle = self.rssPoller.feeds[id].title
 			self.data = self.rssPoller.feeds[id].history
+		elif self.id == 0:
+			print "[SimpleRSS] pollCallback recieved all or non-local feed, updating active view (new_items)"
+			self.data = self.rssPoller.new_items
 		else:
-			print "[SimpleRSS] pollCallback recieved all feeds, updating", self.id
-			self.feedTitle = self.rssPoller.feeds[id].title
-			self.data = self.rssPoller.feeds[id].history
+			print "[SimpleRSS] pollCallback recieved all or non-local feed, updating", self.id
+			self.feedTitle = self.rssPoller.feeds[self.id-1].title
+			self.data = self.rssPoller.feeds[self-id-1].history
 
 		self["content"].l.setList(self.data)
 		self["content"].moveToEntry(current_entry)
@@ -205,12 +232,9 @@ class SimpleRSSFeed(SimpleRSSBase):
 		else:
 			self["summary"].setText("Feed is empty.")
 
-	def errorPolling(self):
-		self.session.open(MessageBox, "Error while parsing Feed, this usually means there is something wrong with it.", type = MessageBox.TYPE_ERROR, timeout = 5)
-
 	def menu(self):
-		self.rssPoller.singlePoll(self.id, callback=True, errorback=self.errorPolling)
-		self.session.open(MessageBox, "Update is being done in Background.\nContents will automatically be updated when it's done.", type = MessageBox.TYPE_INFO, timeout = 5)
+		if self.id > 0:
+			self.singleUpdate(self.id-1)
 
 	def nextEntryCB(self):
 		self["content"].moveDown()
@@ -251,16 +275,26 @@ class SimpleRSSFeed(SimpleRSSBase):
 		if current_entry is None: # empty list
 			return
 
-		self.session.openWithCallback(self.updateSummary, SimpleRSSEntry, current_entry, feedTitle=self.feedTitle, nextEntryCB=self.nextEntryCB, previousEntryCB=self.previousEntryCB, nextFeedCB=self.next, previousFeedCB=self.previous)
+		self.session.openWithCallback(
+			self.updateSummary,
+			RSSEntryView,
+			current_entry,
+			feedTitle=self.feedTitle,
+			nextEntryCB=self.nextEntryCB,
+			previousEntryCB=self.previousEntryCB,
+			nextFeedCB=self.next,
+			previousFeedCB=self.previous
+		)
 
 	def selectEnclosure(self):
 		current_entry = self["content"].getCurrentEntry()
 		if current_entry is None: # empty list
 			return
 
-		SimpleRSSBase.selectEnclosure(self, current_entry[3])
+		RSSBaseView.selectEnclosure(self, current_entry[3])
 
-class SimpleRSS(SimpleRSSBase):
+class RSSOverview(RSSBaseView):
+	"""Shows an Overview over all RSS-Feeds known to rssPoller"""
 	skin = """
 		<screen position="100,100" size="460,400" title="Simple RSS Reader" >
 			<widget name="content" position="0,0" size="460,304" scrollbarMode="showOnDemand" />
@@ -268,7 +302,7 @@ class SimpleRSS(SimpleRSSBase):
 		</screen>"""
 
 	def __init__(self, session, poller):
-		SimpleRSSBase.__init__(self, session)
+		RSSBaseView.__init__(self, session)
 
 		self.rssPoller = poller
 		
@@ -280,13 +314,11 @@ class SimpleRSS(SimpleRSSBase):
 			"yellow": self.selectEnclosure,
 		})
 
-		self.feeds = ([(feed.title, feed.description, ' '.join([str(len(feed.history)), "Entries"]), feed.history) for feed in self.rssPoller.feeds])
-		if len(self.feeds):
-			self["content"] = RSSList(self.feeds)
-			self["summary"] = Label(self.feeds[0][2])
-		else:
-			self["content"] = RSSList(self.feeds)
-			self["summary"] = Label("")
+		self.fillFeeds()
+
+		# We always have at least "New Items"-Feed
+		self["content"] = RSSList(self.feeds)
+		self["summary"] = Label(self.feeds[0][2])
 
 		self["content"].connectSelChanged(self.updateSummary)
 		self.onShown.append(self.__show)
@@ -298,16 +330,38 @@ class SimpleRSS(SimpleRSSBase):
 	def __close(self):
 		self.rssPoller.removeCallback(self.pollCallback)
 
+	def fillFeeds(self):
+		self.feeds = [(
+			"New Items",
+			"New Items since last Auto-Update",
+			' '.join([str(len(self.rssPoller.new_items)), "Entries"]),
+			self.rssPoller.new_items
+		)]
+		self.feeds.extend([
+			(
+				feed.title,
+				feed.description,
+				' '.join([str(len(feed.history)), "Entries"]),
+				feed.history
+			)
+				for feed in self.rssPoller.feeds
+		])
+
 	def pollCallback(self, id = None):
 		print "[SimpleRSS] SimpleRSS called back"
 		current_entry = self["content"].getCurrentEntry()
 
 		if id is not None:
 			print "[SimpleRSS] pollCallback updating feed", id
-			self.feeds[id] = (self.rssPoller.feeds[id].title, self.rssPoller.feeds[id].description, ' '.join([str(len(self.rssPoller.feeds[id].history)), "Entries"]), self.rssPoller.feeds[id].history)
+			self.feeds[id+1] = (
+				self.rssPoller.feeds[id].title,
+				self.rssPoller.feeds[id].description,
+				' '.join([str(len(self.rssPoller.feeds[id].history)), "Entries"]),
+				self.rssPoller.feeds[id].history
+			)
 		else:
 			print "[SimpleRSS] pollCallback updating all feeds"
-			self.feeds = ([(feed.title, feed.description, ' '.join([str(len(feed.history)), "Entries"]), feed.history) for feed in self.rssPoller.feeds])
+			self.fillFeeds()
 
 		self["content"].l.setList(self.feeds)
 		self["content"].moveToEntry(current_entry)
@@ -321,40 +375,45 @@ class SimpleRSS(SimpleRSSBase):
 		else:
 			self["summary"].setText("")
 
-	def errorPolling(self):
-		self.session.open(MessageBox, "Error while parsing Feed, this usually means there is something wrong with it.", type = MessageBox.TYPE_ERROR, timeout = 5)
-
 	def menu(self):
-		self.session.openWithCallback(self.menuChoice, ChoiceBox, "What to do?", [(_("Update Feed"), "update"), (_("Setup"), "setup"), (_("Close"), "close")])
+		cur_idx = self["content"].getCurrentIndex()
+		if cur_idx > 0:
+			possible_actions = [
+				(_("Update Feed"), "update"),
+				(_("Setup"), "setup"),
+				(_("Close"), "close")
+			]
+		else:
+			possible_actions = [
+				(_("Setup"), "setup"),
+				(_("Close"), "close")
+			]
+		self.session.openWithCallback(
+			self.menuChoice,
+			ChoiceBox,
+			"What to do?",
+			possible_actions
+		)
 
 	def menuChoice(self, result):
 		if result:
 			if result[1] == "update":
-				self.rssPoller.singlePoll(self["content"].getCurrentIndex(), callback=True, errorback=self.errorPolling)
-				self.session.open(MessageBox, "Update is being done in Background.\nContents will automatically be updated when it's done.", type = MessageBox.TYPE_INFO, timeout = 5)
+				cur_idx = self["content"].getCurrentIndex()
+				if cur_idx > 0:
+					self.singleUpdate(cur_idx-1)
 			elif result[1] == "setup":
-				self.session.openWithCallback(self.menuClosed, SimpleRSSSetup, rssPoller=self.rssPoller)
+				self.session.openWithCallback(self.refresh, RSSSetup, rssPoller=self.rssPoller)
 			elif result[1] == "close":
 				self.close()
 
-	def menuClosed(self):
-		current_entry = self["content"].getCurrentEntry()
-
-		self.rssPoller.triggerReload()
-
-		self.feeds = ([(feed.title, feed.description, ' '.join([str(len(feed.history)), " Entries"]), feed.history) for feed in self.rssPoller.feeds])
-		self["content"].l.setList(self.feeds)
-
-		self["content"].moveToEntry(current_entry)
-	
-	# Same as menuClosed but without triggering a reload
 	def refresh(self):
 		current_entry = self["content"].getCurrentEntry()
 
-		self.feeds = ([(feed.title, feed.description, ' '.join([str(len(feed.history)), " Entries"]), feed.history) for feed in self.rssPoller.feeds])
+		self.fillFeeds()
 		self["content"].l.setList(self.feeds)
 
 		self["content"].moveToEntry(current_entry)
+		self.updateSummary()
 
 	def nextFeedCB(self):
 		self["content"].moveUp()
@@ -371,7 +430,16 @@ class SimpleRSS(SimpleRSSBase):
 		if current_entry is None: # empty list
 			return
 
-		self.session.openWithCallback(self.refresh, SimpleRSSFeed, current_entry[3], feedTitle=current_entry[0], nextFeedCB=self.nextFeedCB, previousFeedCB=self.previousFeedCB, rssPoller=self.rssPoller, id=self["content"].getCurrentIndex())
+		self.session.openWithCallback(
+			self.refresh,
+			RSSFeedView,
+			current_entry[3],
+			feedTitle=current_entry[0],
+			nextFeedCB=self.nextFeedCB,
+			previousFeedCB=self.previousFeedCB,
+			rssPoller=self.rssPoller,
+			id=self["content"].getCurrentIndex()
+		)
 
 	def selectEnclosure(self):
 		current_entry = self["content"].getCurrentEntry()
@@ -382,4 +450,4 @@ class SimpleRSS(SimpleRSSBase):
 		enclosures = []
 		for entry in current_entry[3]:
 				enclosures.extend(entry[3])
-		SimpleRSSBase.selectEnclosure(self, enclosures)
+		RSSBaseView.selectEnclosure(self, enclosures)

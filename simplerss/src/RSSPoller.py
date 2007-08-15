@@ -2,15 +2,15 @@ from Screens.MessageBox import MessageBox
 from Components.config import config
 from enigma import eTimer
 
-from SimpleRSSScreens import SimpleRSSFeed
+from RSSScreens import RSSFeedView
 from TagStrip import TagStrip
-from Feed import Feed
+from RSSFeed import UniversalFeed
 
 from httpclient import getPage
-from urlparse import urlsplit
 from xml.dom.minidom import parseString as minidom_parseString
 
 class RSSPoller:
+	"""Keeps all Feed and takes care of (automatic) updates"""
 	def __init__(self, session):
 		self.poll_timer = eTimer()
 		self.poll_timer.timeout.get().append(self.poll)
@@ -22,10 +22,16 @@ class RSSPoller:
 		self.session = session
 		self.dialog = None
 		self.reloading = False
-	
-		self.feeds = [ ]
-		for i in range(0, config.plugins.simpleRSS.feedcount.value):
-			self.feeds.append(Feed(config.plugins.simpleRSS.feed[i].uri.value, config.plugins.simpleRSS.feed[i].autoupdate.value, self.stripper))
+
+		self.feeds = [
+			UniversalFeed(
+				config.plugins.simpleRSS.feed[i].uri.value,
+				config.plugins.simpleRSS.feed[i].autoupdate.value,
+				self.stripper
+			)
+				for i in range(0, config.plugins.simpleRSS.feedcount.value)
+		]
+
 		self.new_items = [ ]
 		self.current_feed = 0
 
@@ -52,7 +58,12 @@ class RSSPoller:
 		if not self.session:
 			print "[SimpleRSS] error polling"
 		else:
-			self.session.open(MessageBox, "Sorry, failed to fetch feed.\n" + error, type = MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(
+				MessageBox,
+				"Sorry, failed to fetch feed.\n" + error,
+				type = MessageBox.TYPE_INFO,
+				timeout = 5
+			)
 			# Assume its just a temporary failure and jump over to next feed                          
 			self.current_feed += 1                     
 			self.poll_timer.start(1000, 1)
@@ -65,7 +76,12 @@ class RSSPoller:
 				self.doCallback(id)
 		except NotImplementedError, errmsg:
 			# TODO: Annoying with Multifeed?
-			self.session.open(MessageBox, "Sorry, this type of feed is unsupported.\n"+ str(errmsg), type = MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(
+				MessageBox,
+				"Sorry, this type of feed is unsupported.\n"+ str(errmsg),
+				type = MessageBox.TYPE_INFO,
+				timeout = 5
+			)
 		except:
 			import traceback, sys
 			traceback.print_exc(file=sys.stdout)
@@ -104,13 +120,13 @@ class RSSPoller:
 
 	def singlePoll(self, id, callback = False, errorback = None):
 		from Tools.BoundFunction import boundFunction
-		remote = urlsplit(self.feeds[id].uri)
-		print "[SimpleRSS] updating", remote.geturl()
-		hostname = remote.hostname
-		port = remote.port or 80
-		path = '?'.join([remote.path, remote.query])
-		print "[SimpleRSS] hostname:", hostname, ", port:", port, ", path:", path
-		getPage(hostname, port, path, callback=boundFunction(self._gotSinglePage, id, callback, errorback), errorback=errorback)
+		getPage(
+			self.feeds[id].hostname,
+			self.feeds[id].port,
+			self.feeds[id].path,
+			callback=boundFunction(self._gotSinglePage, id, callback, errorback),
+			errorback=errorback
+		)
 
 	def poll(self):
 		# Reloading, reschedule
@@ -122,7 +138,6 @@ class RSSPoller:
 			print "[SimpleRSS] hiding"
 			self.dialog.hide()
 			self.dialog = None
-			self.new_items = [ ]
 			self.current_feed = 0
 			self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value*60)
 		# End of List
@@ -134,28 +149,33 @@ class RSSPoller:
 				self.doCallback()
 				# Inform User
 				if config.plugins.simpleRSS.show_new.value:
-					self.dialog = self.session.instantiateDialog(SimpleRSSFeed, self.new_items, newItems=True)
+					self.dialog = self.session.instantiateDialog(RSSFeedView, self.new_items, newItems=True)
 					self.dialog.show()
 					self.poll_timer.startLongTimer(5)
 			# No new Items
 			else:
 				print "[SimpleRSS] no new items"
-				self.new_items = [ ]
 				self.current_feed = 0
 				self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value*60)
-		# Feed is supposed to auto-update
-		elif self.feeds[self.current_feed].autoupdate:
-			remote = urlsplit(self.feeds[self.current_feed].uri)
-			hostname = remote.hostname
-			port = remote.port or 80
-			path = '?'.join([remote.path, remote.query])
-			print "[SimpleRSS] hostname:", hostname, ", port:", port, ", path:", path
-			self.d = getPage(hostname, port, path, callback=self._gotPage, errorback=self.error)
-		# Go to next feed in 100ms
+		# It's updating-time
 		else:
-			print "[SimpleRSS] passing feed"
-			self.current_feed += 1
-			self.poll_timer.start(100, 1)
+			# Id is 0 -> empty out new items
+			if self.current_feed == 0:
+				self.new_items = [ ]
+			# Feed supposed to autoupdate
+			if self.feeds[self.current_feed].autoupdate:
+				self.d = getPage(
+					self.feeds[self.current_feed].hostname,
+					self.feeds[self.current_feed].port,
+					self.feeds[self.current_feed].path,
+					callback=self._gotPage,
+					errorback=self.error
+				)
+			# Go to next feed in 100ms
+			else:
+				print "[SimpleRSS] passing feed"
+				self.current_feed += 1
+				self.poll_timer.start(100, 1)
 
 	def shutdown(self):
 		self.poll_timer.timeout.get().remove(self.poll)
@@ -164,10 +184,25 @@ class RSSPoller:
 	def triggerReload(self):
 		self.reloading = True
 
-		# TODO: Fix this evil way of updating feeds
 		newfeeds = []
+		found = False
 		for i in range(0, config.plugins.simpleRSS.feedcount.value):
-			newfeeds.append(Feed(config.plugins.simpleRSS.feed[i].uri.value, config.plugins.simpleRSS.feed[i].autoupdate.value, self.stripper))
+			for feed in self.feeds:
+				if config.plugins.simpleRSS.feed[i].uri.value == feed.uri:
+					# Update possibly different autoupdate value
+					feed.autoupdate = config.plugins.simpleRSS.feed[i].autoupdate.value
+					newfeeds.append(feed) # Append to new Feeds
+					self.feeds.remove(feed) # Remove from old Feeds
+					found = True
+					break
+			if not found:
+				newfeeds.append(
+					UniversalFeed(
+						config.plugins.simpleRSS.feed[i].uri.value,
+						config.plugins.simpleRSS.feed[i].autoupdate.value,
+						self.stripper
+				))
+			found = False
 
 		self.feeds = newfeeds
 

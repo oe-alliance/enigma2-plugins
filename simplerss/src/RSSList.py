@@ -3,6 +3,7 @@ from Components.MultiContent import MultiContentEntryText
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_WRAP
 
 class RSSList(GUIComponent):
+	"""Simple List Component used for RSS-Feeds. Displays first two Elements of a 4-Tupel."""
 	def __init__(self, entries):
 		GUIComponent.__init__(self)
 		self.list = entries
@@ -11,7 +12,7 @@ class RSSList(GUIComponent):
 		self.l.setFont(1, gFont("Regular", 18))
 		self.l.setBuildFunc(self.buildListboxEntry)
 		self.l.setList(entries)
-		
+
 		self.onSelectionChanged = [ ]
 		
 	def connectSelChanged(self, fnc):

@@ -4,9 +4,10 @@ from Components.ConfigList import ConfigListScreen
 from Components.Button import Button
 from Components.ActionMap import ActionMap
 
-class SimpleRSSFeedEdit(ConfigListScreen, Screen):
+class RSSFeedEdit(ConfigListScreen, Screen):
+	"""Edit an RSS-Feed"""
 	skin = """
-		<screen name="SimpleRSSFeedEdit" position="100,100" size="550,120" title="Simple RSS Reader Setup" >
+		<screen name="RSSFeedEdit" position="100,100" size="550,120" title="Simple RSS Reader Setup" >
 			<widget name="config" position="20,10" size="510,75" scrollbarMode="showOnDemand" />
 			<ePixmap name="red"    position="0,75"   zPosition="4" size="140,40" pixmap="key_red-fs8.png" transparent="1" alphatest="on" />
 			<ePixmap name="green"  position="140,75" zPosition="4" size="140,40" pixmap="key_green-fs8.png" transparent="1" alphatest="on" />
@@ -17,7 +18,10 @@ class SimpleRSSFeedEdit(ConfigListScreen, Screen):
 	def __init__(self, session, id):
 		Screen.__init__(self, session)
 
-		self.list = [ getConfigListEntry(_("Autoupdate: "), config.plugins.simpleRSS.feed[id].autoupdate), getConfigListEntry(_("Feed URI: "), config.plugins.simpleRSS.feed[id].uri) ]
+		self.list = [
+			getConfigListEntry(_("Autoupdate: "), config.plugins.simpleRSS.feed[id].autoupdate),
+			getConfigListEntry(_("Feed URI: "), config.plugins.simpleRSS.feed[id].uri)
+		]
 
 		ConfigListScreen.__init__(self, self.list, session)
 
@@ -37,9 +41,10 @@ class SimpleRSSFeedEdit(ConfigListScreen, Screen):
 		config.plugins.simpleRSS.feed.save()
 		self.close()
 
-class SimpleRSSSetup(ConfigListScreen, Screen):
+class RSSSetup(ConfigListScreen, Screen):
+	"""Setup for SimpleRSS, quick-edit for Feed-URIs and settings present."""
 	skin = """
-		<screen name="SimpleRSSSetup" position="100,100" size="550,400" title="Simple RSS Reader Setup" >
+		<screen name="RSSSetup" position="100,100" size="550,400" title="Simple RSS Reader Setup" >
 			<widget name="config"  position="20,10" size="510,350" scrollbarMode="showOnDemand" />
 			<ePixmap name="red"    position="0,360"   zPosition="4" size="140,40" pixmap="key_red-fs8.png" transparent="1" alphatest="on" />
 			<ePixmap name="green"  position="140,360" zPosition="4" size="140,40" pixmap="key_green-fs8.png" transparent="1" alphatest="on" />
@@ -59,10 +64,10 @@ class SimpleRSSSetup(ConfigListScreen, Screen):
 		self.rssPoller = rssPoller
 
 		# nun erzeugen wir eine liste von elementen fuer die menu liste.
-		self.list = [ ]
-		for i in range(0, config.plugins.simpleRSS.feedcount.value):
-			self.list.append(getConfigListEntry(_("Feed: "), config.plugins.simpleRSS.feed[i].uri))
-
+		self.list = [
+			getConfigListEntry(_("Feed: "), config.plugins.simpleRSS.feed[i].uri)
+				for i in range(0, config.plugins.simpleRSS.feedcount.value)
+		]
 		self.list.append(getConfigListEntry(_("Show new Messages: "), config.plugins.simpleRSS.show_new))
 		self.list.append(getConfigListEntry(_("Update Interval (min): "), config.plugins.simpleRSS.interval))
 
@@ -97,7 +102,7 @@ class SimpleRSSSetup(ConfigListScreen, Screen):
 
 	def ok(self):
 		id = self["config"].instance.getCurrentIndex()
-		self.session.openWithCallback(self.refresh, SimpleRSSFeedEdit, id)
+		self.session.openWithCallback(self.refresh, RSSFeedEdit, id)
 
 	def refresh(self):
 		# TODO: anything to be done here?
@@ -108,7 +113,7 @@ class SimpleRSSSetup(ConfigListScreen, Screen):
 		config.plugins.simpleRSS.feed.append(ConfigSubsection())
 		config.plugins.simpleRSS.feed[id].uri = ConfigText(default="http://", fixed_size = False)
 		config.plugins.simpleRSS.feed[id].autoupdate = ConfigEnableDisable(default=True)
-		self.session.openWithCallback(self.conditionalNew, SimpleRSSFeedEdit, id)
+		self.session.openWithCallback(self.conditionalNew, RSSFeedEdit, id)
 
 	def conditionalNew(self):
 		id = len(config.plugins.simpleRSS.feed)-1
