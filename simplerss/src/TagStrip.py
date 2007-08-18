@@ -36,10 +36,21 @@ class TagStrip():
 		("&quot;", u"\""),
 	]
 
-	def strip(self, html):
+	def strip_readable(self, html):
 		# Replace <p> and </p> with newline
 		html = sub('</?p>', u"\n", html)
+		
+		# Replace multiple whitespaces
+		hrml = sub('\s\s+', u' ', html)
 
+		# Replace <li> by - and </li> by newline
+		html = html.replace('<li>', u"-")
+		html = html.replace('</li>', u"\n")
+
+		# And 'normal' stripping
+		return self.strip(html)
+
+	def strip(self, html):
 		# Strip enclosed tags
 		html = sub('<(.*?)>', '', html)
 

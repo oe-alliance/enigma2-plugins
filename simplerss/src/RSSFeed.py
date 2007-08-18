@@ -77,7 +77,7 @@ class AtomFeed(BaseFeed):
 			
 			# Try to read summary, empty if none
 			try:
-				summary = self.stripper.strip(item.getElementsByTagName("summary")[0].childNodes[0].data)
+				summary = self.stripper.strip_readable(item.getElementsByTagName("summary")[0].childNodes[0].data)
 			except:
 				summary = ""
 
@@ -138,7 +138,7 @@ class RSSFeed(BaseFeed):
 
 			# Try to read summary (description element), empty if none
 			try:
-				summary = self.stripper.strip(item.getElementsByTagName("description")[0].childNodes[0].data)
+				summary = self.stripper.strip_readable(item.getElementsByTagName("description")[0].childNodes[0].data)
 			except:
 				summary = ""
 
@@ -200,7 +200,7 @@ class UniversalFeed(BaseFeed, RSSFeed, AtomFeed):
 			else:
 				raise NotImplementedError, 'Unsupported Feed: %s' % dom.documentElement.localName
 			self.title = self.stripper.strip(self.title).encode("UTF-8")
-			self.description = self.stripper.strip(self.description).encode("UTF-8")
+			self.description = self.stripper.strip_readable(self.description).encode("UTF-8")
 		if self.type == "rss":
 			print "[SimpleRSS] type is rss"
 			return RSSFeed.gotDom(self, dom)
