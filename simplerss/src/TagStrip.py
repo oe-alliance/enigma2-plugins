@@ -41,7 +41,7 @@ class TagStrip():
 		html = sub('</?p>', u"\n", html)
 		
 		# Replace multiple whitespaces
-		hrml = sub('\s\s+', u' ', html)
+		html = sub('\s\s+', u' ', html)
 
 		# Replace <li> by - and </li> by newline
 		html = html.replace('<li>', u"-")
