@@ -503,7 +503,10 @@ var tplMediaPlayerHeader  = '<div class="BodyContentChannellist">\n<table border
 	tplMediaPlayerHeader += '<area shape="circle" coords="88, 17, 14" nohref onclick="sendMediaPlayer(2)" alt="pause">';
 	tplMediaPlayerHeader += '<area shape="circle" coords="125, 17, 14" nohref onclick="sendMediaPlayer(3)" alt="jump forward">';
 	tplMediaPlayerHeader += '<area shape="circle" coords="161, 17, 14" nohref onclick="sendMediaPlayer(4)" alt="stop">';
-	tplMediaPlayerHeader += '</map><img src="/webdata/gfx/dvr-buttons-small-fs8.png" align="top" title="Control MediaPlayer" border="0" usemap="#mpcontrols"></div>\n';
+	tplMediaPlayerHeader += '</map><img src="/webdata/gfx/dvr-buttons-small-fs8.png" align="top" title="Control MediaPlayer" border="0" usemap="#mpcontrols">\n'
+//	tplMediaPlayerHeader += '<img src="/webdata/gfx/edit.gif" onclick="openMediaPlayerPlaylist()">';
+// still need some work for editing.
+	tplMediaPlayerHeader += '</div>\n';
 	tplMediaPlayerHeader += '<div class="sListSearch">';
 	tplMediaPlayerHeader += '<img src="/webdata/gfx/nok.png" align="top" title="close MediaPlayer" border="0" onclick="sendMediaPlayer(5)"></div></th>';
 	tplMediaPlayerHeader += '</tr>\n';
@@ -518,6 +521,7 @@ var	tplMediaPlayerItemIMG  = '<div class="sListExt">\n';
 	tplMediaPlayerItemIMG += '</div>\n';
 var tplMediaPlayerItemFooter = '</tr>\n';
 
+var tplMediaPlayerFooterPlaylist  = '<tr><td colspan="7"><button onclick="writePlaylist()">Write Playlist</button></td></tr>\n';
 var tplMediaPlayerFooter = "</tbody></table>\n";
 
 

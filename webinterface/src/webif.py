@@ -152,6 +152,7 @@ class MediaPlayerWebScreen(WebScreen):
 		self["FileList"] = MP(session,func = MP.LIST)
 		self["PlayFile"] = MP(session,func = MP.PLAY)
 		self["Command"] = MP(session,func = MP.COMMAND)
+		self["WritePlaylist"] = MP(session,func = MP.WRITEPLAYLIST)
 		
 class FilesWebScreen(WebScreen):
 	def __init__(self, session,request):

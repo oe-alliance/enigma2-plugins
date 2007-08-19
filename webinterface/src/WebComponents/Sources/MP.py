@@ -1,4 +1,4 @@
-from enigma import eServiceReference
+from enigma import eServiceReference, iServiceInformation, eServiceCenter
 from Screens.MediaPlayer import MediaPlayer
 from Components.MediaPlayer import PlayList
 from Components.Sources.Source import Source
@@ -9,7 +9,8 @@ from os import path as os_path
 class MP( Source):
     LIST = 0
     PLAY = 1
-    COMMAND= 3
+    COMMAND = 3
+    WRITEPLAYLIST = 4
     
     def __init__(self, session,func = LIST):
         Source.__init__(self)
@@ -27,12 +28,36 @@ class MP( Source):
             self.result = self.playFile(cmd)
         elif self.func is self.COMMAND:
             self.result = self.command(cmd)
+        elif self.func is self.WRITEPLAYLIST:
+            self.result = self.writePlaylist(cmd)
            
     def getFileList(self,param):
         print "getFileList:",param
         
         returnList = []
         
+        if param["path"] == "playlist":
+            if self.session.mediaplayer is None:
+                self.session.mediaplayer = self.session.open(MediaPlayer)
+                self.session.mediaplayer.playlist = PlayList()
+                try:
+                    test = len(self.session.mediaplayer.playlist)
+                    #Just a test, wether the link is still active.
+                except:
+                    self.session.mediaplayer = self.session.open(MediaPlayer)
+                    #self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
+                    self.session.mediaplayer.playlist = PlayList()
+            
+            mp = self.session.mediaplayer
+            if len(mp.playlist) != 0:
+                serviceRefList = mp.playlist.getServiceRefList()
+                for count in range(len(serviceRefList)):
+                    returnList.append([serviceRefList[count].toString(),"True","playlist"])
+            else:
+                returnList.append(["empty","True","playlist"])
+            
+            return returnList
+
         matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)" #MediaPlayer-Match
         useServiceRef = False
         if param["types"] == "audio":
@@ -82,11 +107,49 @@ class MP( Source):
 
         mp = self.session.mediaplayer
         ref = eServiceReference(file)
+        
+        mp.switchToPlayList()
+        
+        if len(mp.playlist) == 1:
+                mp.changeEntry(0)
+        
         mp.playlist.addFile(ref)
-        mp.playlist.updateList()
 
-        mp.playServiceRefEntry(ref)
+        #mp.playServiceRefEntry(ref)
+        print "len len(mp.playlist.getServiceRefList()): ",len(mp.playlist.getServiceRefList())
+        if len(mp.playlist.getServiceRefList()):
+            lastEntry = len(mp.playlist.getServiceRefList()) -1
+            currref = mp.playlist.getServiceRefList()[lastEntry]
+            if self.session.nav.getCurrentlyPlayingServiceReference() is None or currref != self.session.nav.getCurrentlyPlayingServiceReference():
+                self.session.nav.playService(mp.playlist.getServiceRefList()[lastEntry])
+                info = eServiceCenter.getInstance().info(currref)
+                description = info and info.getInfoString(currref, iServiceInformation.sDescription) or ""
+                mp["title"].setText(description)
+            mp.unPauseService()
+            #mp.playEntry(len(self.playlist.getServiceRefList()))
+        
+        mp.playlist.updateList()
+        mp.infoTimerFire()
         return
+    #
+    def writePlaylist(self,param):
+        print "writePlaylist: ",param
+        filename = "playlist/%s.e2pls" % param
+        from Tools.Directories import resolveFilename, SCOPE_CONFIG
+        
+        if self.session.mediaplayer is None:
+            self.session.mediaplayer = self.session.open(MediaPlayer)
+            self.session.mediaplayer.playlist = PlayList()
+        try:
+            test = len(self.session.mediaplayer.playlist)
+            #Just a test, wether the link is still active.
+        except:
+            self.session.mediaplayer = self.session.open(MediaPlayer)
+            #self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
+            self.session.mediaplayer.playlist = PlayList()
+        
+        mp = self.session.mediaplayer
+        mp.playlistIOInternal.save(resolveFilename(SCOPE_CONFIG, filename))
         
     def command(self,param):
         print "command: ",param

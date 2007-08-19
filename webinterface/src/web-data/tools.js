@@ -1041,25 +1041,28 @@ function incomingMediaPlayer(request){
 	if(request.readyState == 4){
 		var files = new FileList(getXML(request)).getArray();
 		debug(getXML(request));
-		debug("have "+files.length+" entry in filelist");
+		debug("have "+files.length+" entry in mediaplayer filelist");
 		listerHtml 	= tplMediaPlayerHeader;
+
 		root = files[0].getRoot();
-		listerHtml 	= RND(tplMediaPlayerHeader, {'root': root});
-		if(root != '/') {
-			re = new RegExp(/(.*)\/(.*)\/$/);
-			re.exec(root);
-			newroot = RegExp.$1+'/';
-			if(newroot == '//') {
-				newroot = '/';
+		if (root != "playlist") {
+			listerHtml 	= RND(tplMediaPlayerHeader, {'root': root});
+			if(root != '/') {
+				re = new RegExp(/(.*)\/(.*)\/$/);
+				re.exec(root);
+				newroot = RegExp.$1+'/';
+				if(newroot == '//') {
+					newroot = '/';
+				}
+				listerHtml += RND(tplMediaPlayerItemBody, 
+					{'root': root
+					, 'servicereference': newroot
+					,'exec': 'loadMediaPlayer'
+					,'exec_description': 'change to directory ../'
+					,'color': '000000'
+					,'root': newroot
+					,'name': '..'});
 			}
-			listerHtml += RND(tplMediaPlayerItemBody, 
-				{'root': root
-				, 'servicereference': newroot
-				,'exec': 'loadMediaPlayer'
-				,'exec_description': 'change to directory ../'
-				,'color': '000000'
-				,'root': newroot
-				,'name': '..'});
 		}
 		for ( var i = 0; i <files.length; i++){
 			var file = files[i];
@@ -1089,6 +1092,9 @@ function incomingMediaPlayer(request){
 			}
 			listerHtml += tplMediaPlayerItemFooter;
 		}
+		if (root == "playlist") {
+			listerHtml += tplMediaPlayerFooterPlaylist;
+		}
 		listerHtml += tplMediaPlayerFooter;
 		$('BodyContent').innerHTML = listerHtml;
 		var sendMediaPlayerTMP = sendMediaPlayer;
@@ -1105,6 +1111,17 @@ function playFile(file,root) {
 function sendMediaPlayer(command) {
 	debug("loading sendMediaPlayer");
 	new Ajax.Request( url_mediaplayercmd+command, { asynchronous: true, method: 'get' });
+}
+function openMediaPlayerPlaylist() {
+	debug("loading openMediaPlayerPlaylist");
+	doRequest(url_mediaplayerlist+"playlist", incomingMediaPlayer, false);
+}
+function writePlaylist() {
+	debug("loading writePlaylist");
+	filename = prompt("Please enter a name for the playlist", "");
+	if(filename != "") {
+		new Ajax.Request( url_mediaplayerwrite+filename, { asynchronous: true, method: 'get' });
+	}
 }
 function showPowerStateSendForm(){
 		$('BodyContent').innerHTML = tplPowerStateSendForm;

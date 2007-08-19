@@ -1,0 +1,5 @@
+<e2:screen name="MediaPlayerWebScreen">
+	<e2:element source="WritePlaylist" id="filename">
+		<e2:convert type="web:ReturnEmptyXML" />
+	</e2:element>
+</e2:screen>
