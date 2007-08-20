@@ -5,7 +5,7 @@ from re import sub
 class TagStrip():
 	"""Simple class to Strip HTML-Tags and convert common entities."""
 	# Entities to be converted
-	convertables = [
+	entities = [
 		# ISO-8895-1 (most common)
 		("&#228;", u"ä"),
 		("&auml;", u"ä"),
@@ -26,7 +26,11 @@ class TagStrip():
 		("&#8230;", u"..."),
 		("&#8211;", u"-"),
 		("&#160;", u" "),
-		("&#038;", u"&"),
+		("&#34;", u"\""),
+		("&#38;", u"&"),
+		("&#39;", u"'"),
+		("&#60;", u"<"),
+		("&#62;", u">"),
 
     	# Common entities
 		("&lt;", u"<"),
@@ -34,18 +38,25 @@ class TagStrip():
 		("&nbsp;", u" "),
 		("&amp;", u"&"),
 		("&quot;", u"\""),
+		("&apos;", u"'"),
 	]
 
 	def strip_readable(self, html):
-		# Replace <p> and </p> with newline
-		html = sub('</?p>', u"\n", html)
-		
-		# Replace multiple whitespaces
-		html = sub('\s\s+', u' ', html)
+		# Newlines are rendered as whitespace in html
+		html = html.replace('\n', ' ')
+
+		# Multiple whitespaces are rendered as a single one
+		html = sub('\s\s+', ' ', html)
+
+		# Replace <br> by newlines
+		html = sub('<br(\s+/)?>', '\n', html)
+
+		# Replace <p>, <ul>, <ol> and end of these tags by newline
+		html = sub('</?(p|ul|ol)(\s+.*?)?>', '\n', html)
 
 		# Replace <li> by - and </li> by newline
-		html = html.replace('<li>', u"-")
-		html = html.replace('</li>', u"\n")
+		html = sub('<li(\s+.*?)?>', '-', html)
+		html = html.replace('</li>', '\n')
 
 		# And 'normal' stripping
 		return self.strip(html)
@@ -55,7 +66,7 @@ class TagStrip():
 		html = sub('<(.*?)>', '', html)
 
 		# Convert html entities
-		for escaped, unescaped in self.convertables:
+		for escaped, unescaped in self.entities:
 			html = html.replace(escaped, unescaped)
 
 		# Return result with leading/trailing whitespaces removed

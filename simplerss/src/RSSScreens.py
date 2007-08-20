@@ -4,9 +4,62 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
+from Components.Pixmap import Pixmap
 
 from RSSList import RSSList
 from RSSSetup import RSSSetup
+
+class PictureView(Screen):
+	"""Downloads a Picture, shows it and delete the temporary file"""
+
+	skin = """
+		<screen position="100,100" size="460,400" title="Simple RSS Reader" >
+			<widget name="content" position="0,0" size="460,400" alphatest="on"/>
+		</screen>"""
+
+	filename = '/tmp/simplerss_enclosure'
+
+	def __init__(self, session, url):
+		Screen.__init__(self, session)
+
+		self.url = url
+
+		self["actions"] = ActionMap([ "OkCancelActions" ], 
+		{
+			"ok": self.close,
+			"cancel": self.close,
+		})
+
+		self["content"] = Pixmap()
+
+		self.onLayoutFinish.append(self.fetchFile)
+
+	def fetchFile(self):
+		# Fetch file
+		from httpclient import getFile
+		getFile(self.filename, self.url, callback=self.gotFile, errorback=self.error)
+
+	def gotFile(self, data = ""):
+		# Determine Aspect
+		from Components.AVSwitch import AVSwitch
+		aspect = AVSwitch().getAspectRatioSetting()/2
+		# Load Picture
+		from enigma import loadPic
+		ptr = loadPic(self.filename, 460, 400, aspect)
+		# Show Picture
+		self["content"].instance.setPixmap(ptr)
+		# Remove Temporary File
+		from os import unlink
+		unlink(self.filename)
+
+	def error(self):
+		self.session.open(
+			MessageBox,
+			"Error while loading Picture.",
+			type = MessageBox.TYPE_ERROR,
+			timeout = 3
+		)
+		self.close()
 
 class RSSBaseView(Screen):
 	"""Base Screen for all Screens used in SimpleRSS"""
@@ -14,12 +67,12 @@ class RSSBaseView(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-	def errorPolling(self):
+	def errorPolling(self, errmsg = ""):
 		self.session.open(
 			MessageBox,
 			"Error while parsing Feed, this usually means there is something wrong with it.",
 			type = MessageBox.TYPE_ERROR,
-			timeout = 5
+			timeout = 3
 		)
 
 	def singleUpdate(self, feedid, errback = None):
@@ -39,8 +92,10 @@ class RSSBaseView(Screen):
 		# Empty List
 		if enclosures is None:
 			return
+
+		count = len(enclosures)
 		# Select stream in ChoiceBox if more than one present
-		elif len(enclosures) > 1:
+		if count > 1:
 			self.session.openWithCallback(
 				self.enclosureSelected,
 				ChoiceBox,
@@ -48,7 +103,7 @@ class RSSBaseView(Screen):
 				[(x[0][x[0].rfind("/")+1:].replace('%20', ' '), x) for x in enclosures]
 			)
 		# Play if one present
-		else:
+		elif count:
 			self.enclosureSelected((None, enclosures[0]))
 
 	def enclosureSelected(self, enclosure):
@@ -57,11 +112,12 @@ class RSSBaseView(Screen):
 
 			print "[SimpleRSS] Trying to play back enclosure: url=%s, type=%s" % (url, type)
 
-			# TODO: other types? (showing images wouldn't be hard if the source was local)
 			if type in ["video/mpeg", "audio/mpeg"]:
 				# We should launch a Player here, but the MediaPlayer gets angry about our non-local sources
 				from enigma import eServiceReference
 				self.session.nav.playService(eServiceReference(4097, 0, url))
+			elif type in ["image/jpeg", "image/png", "image/gif", "image/bmp"]:
+				self.session.open(PictureView, url)
 
 class RSSEntryView(RSSBaseView):
 	"""Shows a RSS Item"""
@@ -325,9 +381,10 @@ class RSSFeedView(RSSBaseView):
 class RSSOverview(RSSBaseView):
 	"""Shows an Overview over all RSS-Feeds known to rssPoller"""
 	skin = """
-		<screen position="100,100" size="460,400" title="Simple RSS Reader" >
-			<widget name="content" position="0,0" size="460,304" scrollbarMode="showOnDemand" />
-			<widget name="summary" position="0,305" size="460,95" font="Regular;16" />
+		<screen position="100,100" size="460,420" title="Simple RSS Reader" >
+			<widget name="info" position="0,0" size="460,20" halign="right" font="Regular; 18" />
+			<widget name="content" position="0,20" size="460,304" scrollbarMode="showOnDemand" />
+			<widget name="summary" position="0,325" size="460,95" font="Regular;16" />
 		</screen>"""
 
 	def __init__(self, session, poller):
@@ -348,8 +405,9 @@ class RSSOverview(RSSBaseView):
 		# We always have at least "New Items"-Feed
 		self["content"] = RSSList(self.feeds)
 		self["summary"] = Label(self.feeds[0][2])
+		self["info"] = Label("Feed 1/%s" % len(self.feeds))
 
-		self["content"].connectSelChanged(self.updateSummary)
+		self["content"].connectSelChanged(self.updateInfo)
 		self.onShown.append(self.__show)
 		self.onClose.append(self.__close)
 
@@ -395,14 +453,17 @@ class RSSOverview(RSSBaseView):
 		self["content"].l.setList(self.feeds)
 		self["content"].moveToEntry(current_entry)
 
-		self.updateSummary()
+		self.updateInfo()
 
-	def updateSummary(self):
+	def updateInfo(self):
 		current_entry = self["content"].getCurrentEntry()
 		if current_entry:
 			self["summary"].setText(current_entry[2])
+			self["info"].setText("Feed %s/%s" % (self["content"].getCurrentIndex()+1, len(self.feeds)))
+		# Should never happen
 		else:
 			self["summary"].setText("")
+			self["info"].setText("")
 
 	def menu(self):
 		cur_idx = self["content"].getCurrentIndex()
@@ -442,7 +503,7 @@ class RSSOverview(RSSBaseView):
 		self["content"].l.setList(self.feeds)
 
 		self["content"].moveToEntry(current_entry)
-		self.updateSummary()
+		self.updateInfo()
 
 	def nextFeedCB(self):
 		self["content"].moveUp()
