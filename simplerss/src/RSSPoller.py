@@ -12,17 +12,23 @@ from xml.dom.minidom import parseString as minidom_parseString
 class RSSPoller:
 	"""Keeps all Feed and takes care of (automatic) updates"""
 	def __init__(self, session):
+		# Timer
 		self.poll_timer = eTimer()
 		self.poll_timer.timeout.get().append(self.poll)
 		self.poll_timer.start(0, 1)
 
+		# Stripper
 		self.stripper = TagStrip()
 
+		# Functions to call when updates happened
 		self.update_callbacks = [ ]
+
+		# Save Session, Initialize Vars for Dialog and triggered Reload
 		self.session = session
 		self.dialog = None
 		self.reloading = False
 
+		# Generate Feeds
 		self.feeds = [
 			UniversalFeed(
 				config.plugins.simpleRSS.feed[i].uri.value,
@@ -32,6 +38,7 @@ class RSSPoller:
 				for i in range(0, config.plugins.simpleRSS.feedcount.value)
 		]
 
+		# Initialize Vars
 		self.new_items = [ ]
 		self.current_feed = 0
 
@@ -106,8 +113,8 @@ class RSSPoller:
 			self.feeds[id].gotDom(dom)
 			print "[SimpleRSS] single feed parsed.."
 			return
-		else:
-			new_items = self.feeds[self.current_feed].gotDom(dom)
+
+		new_items = self.feeds[self.current_feed].gotDom(dom)
 
 		print "[SimpleRSS] feed parsed.."
 

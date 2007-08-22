@@ -11,10 +11,10 @@ class RSSList(GUIComponent):
 		self.l.setFont(0, gFont("Regular", 22))
 		self.l.setFont(1, gFont("Regular", 18))
 		self.l.setBuildFunc(self.buildListboxEntry)
-		self.l.setList(entries)
+		self.l.setList(self.list)
 
 		self.onSelectionChanged = [ ]
-		
+
 	def connectSelChanged(self, fnc):
 		if not fnc in self.onSelectionChanged:
 			self.onSelectionChanged.append(fnc)
@@ -25,7 +25,10 @@ class RSSList(GUIComponent):
 
 	def selectionChanged(self):
 		for x in self.onSelectionChanged:
-			x()
+			try:
+				x()
+			except:
+				pass
 
 	GUI_WIDGET = eListbox
 
