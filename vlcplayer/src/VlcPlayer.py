@@ -1,5 +1,5 @@
 from enigma import iPlayableServicePtr
-import time
+from time import time
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.config import config
@@ -37,7 +37,7 @@ class VlcService(Source, iPlayableServicePtr):
 		self.vlccontrol = None
 		self.service = self
 		self.player = player
-		self.lastrefresh = time.time()
+		self.lastrefresh = time()
 		self.stats = None
 		self.refreshTimer = eTimer()
 		self.refreshTimer.timeout.get().append(self.__onRefresh)
@@ -61,7 +61,7 @@ class VlcService(Source, iPlayableServicePtr):
 			self.stats = None
 			return
 		print "[VLC] refresh"
-		self.lastrefresh = time.time()
+		self.lastrefresh = time()
 		self.stats = self.vlccontrol.status()
 	
 	def refresh(self):
@@ -77,7 +77,7 @@ class VlcService(Source, iPlayableServicePtr):
 		if self.stats and self.stats.has_key("time"):
 			pos = float(self.stats["time"])
 			if self.player.state == VlcPlayer.STATE_PLAYING:
-				pos += time.time() - self.lastrefresh
+				pos += time() - self.lastrefresh
 			return (False, int(pos*90000))
 		else:
 			return (True, 0)

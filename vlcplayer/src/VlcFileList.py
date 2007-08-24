@@ -3,11 +3,11 @@ from Components.FileList import FileList
 from Components.config import config
 from urllib import urlencode
 from urllib import urlopen
-import re
-import xml.sax
+from re import compile
+from xml.sax import ContentHandler, parse
 import os.path
 
-class vlcBrowseXmlHandler(xml.sax.ContentHandler):
+class vlcBrowseXmlHandler(ContentHandler):
 	
 	def __init__(self, host, regex = None):
 		self.host = host
@@ -56,7 +56,7 @@ class VlcFileList(FileList):
 		if req is None:
 			raise IOError, "No response from server"
 		handler = vlcBrowseXmlHandler(str(servernum), regex)
-		xml.sax.parse(req, handler)
+		parse(req, handler)
 		return (handler.files, handler.directories)
 	
 	def initServerlist(self):
@@ -89,7 +89,7 @@ class VlcFileList(FileList):
 			path = "/"
 
 		if self.matchingPattern is not None:
-			regex = re.compile(self.matchingPattern)
+			regex = compile(self.matchingPattern)
 		else:
 			regex = None
 

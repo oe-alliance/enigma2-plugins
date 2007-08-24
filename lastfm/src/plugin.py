@@ -10,7 +10,7 @@ from Plugins.Plugin import PluginDescriptor
 
 from StreamPlayer import StreamPlayer
 from LastFMConfig import LastFMConfigScreen
-from LastFM import LastFM, lastfm_event_register
+from LastFM import LastFM
 from httpclient import getFile
 from os import remove as os_remove, system as os_system
 from random import randrange

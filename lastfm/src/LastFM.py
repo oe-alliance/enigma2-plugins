@@ -3,7 +3,6 @@ from httpclient import getPage,unquote_plus
 from md5 import md5 # to encode password
 from string import split, rstrip
 
-from time import time
 from xml.dom.minidom import parseString
 
 

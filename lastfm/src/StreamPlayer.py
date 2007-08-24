@@ -2,7 +2,7 @@ from enigma import eServiceReference
 from os import system
 from os.path import isfile as os_path_isfile
 from math import ceil
-import time 
+from time import time
 from httpclient import quote_plus
 from Components.config import config
 
@@ -36,10 +36,10 @@ class StreamPlayer:
         if ev == 6:
             self.stop("got EVENT 6, GST stopped")
         if ev == 4:
-            self.trackstarttime = time.time()
+            self.trackstarttime = time()
 
     def getRemaining(self):
-        remaining = int((self.playlist.getTrack(self.currentplaylistitemnumber)["duration"]/1000) - (time.time() - self.trackstarttime))
+        remaining = int((self.playlist.getTrack(self.currentplaylistitemnumber)["duration"]/1000) - (time() - self.trackstarttime))
         minutes = int(remaining/60)
         seconds = int(remaining-(minutes*60))
         def shiftchars(integer,char):

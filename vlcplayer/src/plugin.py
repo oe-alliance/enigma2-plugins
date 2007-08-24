@@ -1,4 +1,3 @@
-from datetime import datetime
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
 from Components.Label import Label

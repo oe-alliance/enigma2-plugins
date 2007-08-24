@@ -1,5 +1,5 @@
 from Screens.Screen import Screen
-from Components.config import config, ConfigSubsection, ConfigSubList, ConfigEnableDisable, ConfigInteger, ConfigText, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigEnableDisable, ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Button import Button
 from Components.ActionMap import ActionMap

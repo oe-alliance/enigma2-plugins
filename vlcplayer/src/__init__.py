@@ -1,12 +1,4 @@
-import Plugins.Plugin
-from Components.config import config
-from Components.config import ConfigSubsection
-from Components.config import ConfigSelection
-from Components.config import ConfigInteger
-from Components.config import ConfigSubList
-from Components.config import ConfigSubDict
-from Components.config import ConfigText
-from Components.config import configfile
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigInteger, ConfigSubList, ConfigText
 
 config.plugins.vlcplayer = ConfigSubsection()
 config.plugins.vlcplayer.vcodec = ConfigSelection({"mp1v": "MPEG1", "mp2v": "MPEG2"}, "mp2v")
