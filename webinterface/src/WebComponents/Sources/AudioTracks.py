@@ -23,6 +23,7 @@ class AudioTracks( Source ):
                     print getattr(i, name)
                 language = i.getLanguage()
                 description = i.getDescription()
+                pid = i.getPid()
                 
                 if LanguageCodes.has_key(language):
                     language = LanguageCodes[language][0]
@@ -32,9 +33,9 @@ class AudioTracks( Source ):
                 else:
                     description = language
                 
-                tlist.append((description, x))
+                tlist.append((description, x, pid))
         
         return tlist
     
     list = property(getList)
-    lut = {"Description": 0, "Id": 1 }
+    lut = {"Description": 0, "Id": 1, "Pid": 2}
