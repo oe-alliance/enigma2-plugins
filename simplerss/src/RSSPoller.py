@@ -23,9 +23,8 @@ class RSSPoller:
 		# Functions to call when updates happened
 		self.update_callbacks = [ ]
 
-		# Save Session, Initialize Vars for Dialog and triggered Reload
+		# Save Session, Initialize Var to identify triggered Reload
 		self.session = session
-		self.dialog = None
 		self.reloading = False
 
 		# Generate Feeds
@@ -72,8 +71,7 @@ class RSSPoller:
 				timeout = 5
 			)
 			# Assume its just a temporary failure and jump over to next feed                          
-			self.current_feed += 1                     
-			self.poll_timer.start(1000, 1)
+			self.next_feed()
 
 	def _gotPage(self, data, id = None, callback = False, errorback = None):
 		# workaround: exceptions in gotPage-callback were ignored
@@ -97,8 +95,7 @@ class RSSPoller:
 				errorback()
 				return
 			# Assume its just a temporary failure and jump over to next feed                          
-			self.current_feed += 1                     
-			self.poll_timer.start(1000, 1)
+			self.next_feed()
 	
 	def gotPage(self, data, id = None):
 		print "[SimpleRSS] parsing.."
@@ -122,8 +119,7 @@ class RSSPoller:
 		self.new_items.extend(new_items)
 
 		# Start Timer so we can either fetch next feed or show new_items
-		self.current_feed += 1
-		self.poll_timer.start(1000, 1)
+		self.next_feed()
 
 	def singlePoll(self, id, callback = False, errorback = None):
 		from Tools.BoundFunction import boundFunction
@@ -140,13 +136,6 @@ class RSSPoller:
 		if self.reloading:
 			print "[SimpleRSS] timer triggered while reloading, rescheduling"
 			self.poll_timer.start(10000, 1)
-		# Dialog shown, hide
-		elif self.dialog:
-			print "[SimpleRSS] hiding"
-			self.dialog.hide()
-			self.dialog = None
-			self.current_feed = 0
-			self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value*60)
 		# End of List
 		elif len(self.feeds) <= self.current_feed:
 			# New Items
@@ -156,33 +145,35 @@ class RSSPoller:
 				self.doCallback()
 				# Inform User
 				if config.plugins.simpleRSS.show_new.value:
-					self.dialog = self.session.instantiateDialog(RSSFeedView, self.new_items, newItems=True)
-					self.dialog.show()
-					self.poll_timer.startLongTimer(5)
+					self.session.open(RSSFeedView, self.new_items, newItems=True)
 			# No new Items
 			else:
 				print "[SimpleRSS] no new items"
-				self.current_feed = 0
-				self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value*60)
+			self.current_feed = 0
+			self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value*60)
 		# It's updating-time
 		else:
 			# Id is 0 -> empty out new items
 			if self.current_feed == 0:
 				self.new_items = [ ]
 			# Feed supposed to autoupdate
-			if self.feeds[self.current_feed].autoupdate:
-				self.d = getPage(
-					self.feeds[self.current_feed].hostname,
-					self.feeds[self.current_feed].port,
-					self.feeds[self.current_feed].path,
+			feed = self.feeds[self.current_feed]
+			if feed.autoupdate:
+				getPage(
+					feed.hostname,
+					feed.port,
+					feed.path,
 					callback=self._gotPage,
 					errorback=self.error
 				)
-			# Go to next feed in 100ms
+			# Go to next feed
 			else:
 				print "[SimpleRSS] passing feed"
-				self.current_feed += 1
-				self.poll_timer.start(100, 1)
+				self.next_feed()
+
+	def next_feed(self):
+		self.current_feed += 1
+		self.poll_timer.start(1000, 1)
 
 	def shutdown(self):
 		self.poll_timer.timeout.get().remove(self.poll)

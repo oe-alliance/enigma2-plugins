@@ -1,3 +1,5 @@
+from enigma import eTimer
+
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
@@ -103,7 +105,7 @@ class RSSBaseView(Screen):
 				self.enclosureSelected,
 				ChoiceBox,
 				"Select enclosure to play",
-				[(x[0][x[0].rfind("/")+1:].replace('%20', ' '), x) for x in enclosures]
+				[(x[0][x[0].rfind("/")+1:].replace('%20', ' ').replace('%5F', '_').replace('%2D', '-'), x) for x in enclosures]
 			)
 		# Play if one present
 		elif count:
@@ -266,9 +268,21 @@ class RSSFeedView(RSSBaseView):
 			})
 			self.onShown.append(self.__show)
 			self.onClose.append(self.__close)
+		else:
+			self.timer = eTimer()
+			self.timer.timeout.get().append(self.timerTick)
+			self.onExecBegin.append(self.startTimer)
 		
 		self["content"].connectSelChanged(self.updateInfo)
 		self.onLayoutFinish.extend([self.updateInfo, self.setConditionalTitle])
+
+	def startTimer(self):
+		self.timer.startLongTimer(5)
+
+	def timerTick(self):
+		self.timer.timeout.get().remove(self.timerTick)
+		self.timer = None
+		self.close()
 
 	def __show(self):
 		self.rssPoller.addCallback(self.pollCallback)
