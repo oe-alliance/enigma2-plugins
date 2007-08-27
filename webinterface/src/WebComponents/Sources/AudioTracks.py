@@ -12,8 +12,7 @@ class AudioTracks( Source ):
         audio = service and service.audioTracks()
         n = audio and audio.getNumberOfTracks() or 0
         tlist = []
-        for name in dir(audio):
-            print getattr(audio, name)
+
         if n > 0:
             print "[AudioTracks.py] got %s Audiotracks!" %(n)
             
