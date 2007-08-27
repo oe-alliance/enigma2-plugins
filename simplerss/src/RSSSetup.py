@@ -68,6 +68,8 @@ class RSSSetup(ConfigListScreen, Screen):
 			getConfigListEntry(_("Feed: "), config.plugins.simpleRSS.feed[i].uri)
 				for i in range(0, config.plugins.simpleRSS.feedcount.value)
 		]
+		self.list.append(getConfigListEntry(_("Start automatically with Enigma2: "), config.plugins.simpleRSS.autostart))
+		self.list.append(getConfigListEntry(_("Keep running in background: "), config.plugins.simpleRSS.keep_running))
 		self.list.append(getConfigListEntry(_("Show new Messages: "), config.plugins.simpleRSS.show_new))
 		self.list.append(getConfigListEntry(_("Update Interval (min): "), config.plugins.simpleRSS.interval))
 

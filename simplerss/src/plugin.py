@@ -11,6 +11,8 @@ config.plugins.simpleRSS = ConfigSubsection()
 config.plugins.simpleRSS.show_new = ConfigEnableDisable(default=True)
 config.plugins.simpleRSS.interval = ConfigInteger(default=10, limits=(5, 300))
 config.plugins.simpleRSS.feedcount = ConfigInteger(default=0)
+config.plugins.simpleRSS.autostart = ConfigEnableDisable(default=False)
+config.plugins.simpleRSS.keep_running = ConfigEnableDisable(default=True)
 config.plugins.simpleRSS.feed = ConfigSubList()
 for i in range(0, config.plugins.simpleRSS.feedcount.value):
 	config.plugins.simpleRSS.feed.append(ConfigSubsection())
@@ -25,27 +27,38 @@ def main(session, **kwargs):
 	# Get Global rssPoller-Object
 	global rssPoller
 
-	# Return if it's empty (should never happen)
+	# Create one if we have none (no autostart)
 	if rssPoller is None:
-		return
+		rssPoller = RSSPoller(session)
 
 	# Show Overview when we have feeds
 	if len(rssPoller.feeds):
-		session.open(RSSOverview, rssPoller)
+		session.openWithCallback(closed, RSSOverview, rssPoller)
 	# Show Setup otherwise
 	else:
-		session.open(RSSSetup, rssPoller)
+		session.openWithCallback(closed, RSSSetup, rssPoller)
+
+# Plugin window has been closed
+def closed():
+	# If SimpleRSS should not run in Background: shutdown
+	if not config.plugins.simpleRSS.keep_running.value:
+		# Get Global rssPoller-Object
+		global rssPoller
+		
+		rssPoller.shutdown()
+		rssPoller = None
 
 # Autostart
 def autostart(reason, **kwargs):
 	global rssPoller
 
-	# not nice (?), but works
-	if kwargs.has_key("session") and reason == 0:
+	# Instanciate when autostarting active, session present and enigma2 is launching
+	if config.plugins.simpleRSS.autostart.value and kwargs.has_key("session") and reason == 0:
 		rssPoller = RSSPoller(kwargs["session"])
 	elif reason == 1:
-		rssPoller.shutdown()
-		rssPoller = None
+		if rssPoller is not None:
+			rssPoller.shutdown()
+			rssPoller = None
 
 def Plugins(**kwargs):
  	return [ PluginDescriptor(name="RSS Reader", description="A simple to use RSS reader", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),

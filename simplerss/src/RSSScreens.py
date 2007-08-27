@@ -43,11 +43,14 @@ class PictureView(Screen):
 		# Determine Aspect
 		from Components.AVSwitch import AVSwitch
 		aspect = AVSwitch().getAspectRatioSetting()/2
+
 		# Load Picture
 		from enigma import loadPic
 		ptr = loadPic(self.filename, 460, 400, aspect)
+
 		# Show Picture
 		self["content"].instance.setPixmap(ptr)
+
 		# Remove Temporary File
 		from os import unlink
 		unlink(self.filename)
