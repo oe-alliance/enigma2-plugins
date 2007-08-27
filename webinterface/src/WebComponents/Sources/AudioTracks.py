@@ -23,7 +23,7 @@ class AudioTracks( Source ):
                     print getattr(i, name)
                 language = i.getLanguage()
                 description = i.getDescription()
-                pid = i.getPid()
+                pid = i.getPID()
                 
                 if LanguageCodes.has_key(language):
                     language = LanguageCodes[language][0]
