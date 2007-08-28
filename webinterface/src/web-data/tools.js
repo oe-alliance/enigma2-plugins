@@ -997,6 +997,7 @@ function incomingAbout(request) {
 					,'serviceName': xml.getElementsByTagName('e2servicename').item(0).firstChild.data
 					,'serviceProvider': xml.getElementsByTagName('e2serviceprovider').item(0).firstChild.data
 					,'serviceAspect': xml.getElementsByTagName('e2serviceaspect').item(0).firstChild.data
+					,'serviceVideosize': xml.getElementsByTagName('e2servicevideosize').item(0).firstChild.data
 					,'serviceNamespace': xml.getElementsByTagName('e2servicenamespace').item(0).firstChild.data
 					,'vPIDh': '0x'+d2h(xml.getElementsByTagName('e2vpid').item(0).firstChild.data, 4)
 					 ,'vPID': ownLazyNumber(xml.getElementsByTagName('e2vpid').item(0).firstChild.data)

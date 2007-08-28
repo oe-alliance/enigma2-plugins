@@ -426,6 +426,10 @@ var tplAbout  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n'
 	tplAbout += '<td class="aboutElementRight">%(serviceAspect)</td>\n';
 	tplAbout += '</tr>\n';
 	tplAbout += '<tr>\n';
+	tplAbout += '<td class="aboutElementLeft">Videosize:</td>\n';
+	tplAbout += '<td class="aboutElementRight">%(serviceVideosize)</td>\n';
+	tplAbout += '</tr>\n';
+	tplAbout += '<tr>\n';
 	tplAbout += '<td class="aboutElementLeft">Namespace:</td>\n';
 	tplAbout += '<td class="aboutElementRight">%(serviceNamespace)</td>\n';
 	tplAbout += '</tr>\n';

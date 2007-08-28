@@ -18,6 +18,7 @@
 		&lt;e2servicename><e2:item name="serviceName"  filter="xml"/>&lt;/e2servicename>
 		&lt;e2serviceprovider><e2:item name="serviceProvider"  filter="xml"/>  &lt;/e2serviceprovider>
 		&lt;e2serviceaspect><e2:item name="serviceAspect"  filter="xml"/>&lt;/e2serviceaspect>
+		&lt;e2servicevideosize><e2:item name="serviceVideosize"  filter="xml"/>&lt;/e2servicevideosize>
 		&lt;e2servicenamespace><e2:item name="serviceNamespace"  filter="xml"/>&lt;/e2servicenamespace>
 		&lt;e2vpid><e2:item name="vPID"  filter="xml"/>&lt;/e2vpid>
 		&lt;e2apid><e2:item name="aPID"  filter="xml"/>&lt;/e2apid>

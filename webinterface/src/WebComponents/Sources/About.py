@@ -91,7 +91,19 @@ class About( Source):
         # Get Service Info
         if svinfo is not None:
             list.append(svinfo.getInfoString(iServiceInformation.sProvider))
-            list.append(svinfo.getInfo(iServiceInformation.sAspect))
+            
+            aspect = svinfo.getInfo(iServiceInformation.sAspect)
+            if aspect in ( 1, 2, 5, 6, 9, 0xA, 0xD, 0xE ):
+                aspect = "4:3"
+            else:
+                aspect = "16:9"
+            list.append(aspect)
+
+            width = svinfo and svinfo.getInfo(iServiceInformation.sVideoWidth) or -1
+            height = svinfo and svinfo.getInfo(iServiceInformation.sVideoHeight) or -1
+            videosize = "%dx%d" %(width, height)
+            list.append(videosize)
+            
             list.append(hex(svinfo.getInfo(iServiceInformation.sNamespace)))
 
             # Get PIDs
@@ -141,15 +153,15 @@ class About( Source):
            ,"serviceName": 4
            ,"serviceProvider": 5
            ,"serviceAspect": 6
-           ,"serviceNamespace": 7
-           ,"vPID": 8
-           ,"aPID": 9
-           ,"pcrID": 10
-           ,"pmtPID": 11
-           ,"txtPID": 12
-           ,"tsID": 13
-           ,"onID": 14
-           ,"sid": 15
-           ,"WebIfVersion": 16
+           ,"serviceVideosize": 7
+           ,"serviceNamespace": 8
+           ,"vPID": 9
+           ,"aPID": 10
+           ,"pcrID": 11
+           ,"pmtPID": 12
+           ,"txtPID": 13
+           ,"tsID": 14
+           ,"onID": 15
+           ,"sid": 16
+           ,"WebIfVersion": 17
            }
-
