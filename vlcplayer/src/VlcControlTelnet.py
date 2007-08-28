@@ -1,4 +1,15 @@
+# -*- coding: ISO-8859-1 -*-
+#===============================================================================
+# VLC Player Plugin by A. L�tsch 2007
+#
+# This is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2, or (at your option) any later
+# version.
+#===============================================================================
+
 from Components.config import config
+from VlcControlHttp import getLocalHostIP
 import socket
 
 def vlctime2sec(t):
@@ -8,7 +19,7 @@ def vlctime2sec(t):
 	return t/1000000
 
 class VlcControlTelnet:
-	defaultStreamName = "dreambox"
+	defaultStreamName = None
 	
 	def __init__(self, servernum):
 		cfg = config.plugins.vlcplayer.servers[servernum]
@@ -16,10 +27,12 @@ class VlcControlTelnet:
 		port = cfg.adminport.value
 		self.address = (host, int(port));
 		self.passwd = cfg.adminpwd.value
-		try:
-			self.defaultStreamName = "dream" + socket.gethostbyname(socket.gethostname()).split('.')[3]
-		except Exception, e:
-			pass
+		if VlcControlTelnet.defaultStreamName is None:
+			try:
+				ip = getLocalHostIP( (cfg.host.value, cfg.httpport.value) )
+				VlcControlTelnet.defaultStreamName = "dream" + str(ip)
+			except Exception, e:
+				VlcControlTelnet.defaultStreamName = "dreambox"
 
 	def __connect(self):
 		self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

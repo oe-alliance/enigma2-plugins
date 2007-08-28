@@ -1,3 +1,13 @@
+# -*- coding: ISO-8859-1 -*-
+#===============================================================================
+# VLC Player Plugin by A. Lätsch 2007
+#
+# This is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2, or (at your option) any later
+# version.
+#===============================================================================
+
 from enigma import iPlayableServicePtr
 from time import time
 from Screens.Screen import Screen
@@ -9,7 +19,6 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from enigma import iPlayableService
 from enigma import eTimer
 from Components.ActionMap import ActionMap
-
 from VlcControlTelnet import VlcControlTelnet
 from VlcControlHttp import VlcControlHttp
 
@@ -61,8 +70,11 @@ class VlcService(Source, iPlayableServicePtr):
 			self.stats = None
 			return
 		print "[VLC] refresh"
-		self.lastrefresh = time()
-		self.stats = self.vlccontrol.status()
+		try:
+			self.stats = self.vlccontrol.status()
+			self.lastrefresh = time()
+		except Exception, e:
+			print e
 	
 	def refresh(self):
 		self.__onRefresh()
@@ -166,13 +178,15 @@ class VlcPlayer(Screen):
 		cfg = config.plugins.vlcplayer.servers[servernum]
 		if cfg.method.value == "telnet":
 			self.vlccontrol = VlcControlTelnet(servernum)
+			streamName = VlcControlTelnet.defaultStreamName
 		else:
 			self.vlccontrol = VlcControlHttp(servernum)
+			streamName = VlcControlHttp.defaultStreamName
 		self.vlcservice.setFilename(path)
 		
-		self.url = "http://%s:%d/%s.ts" % (cfg.host.value, cfg.httpport.value, self.vlccontrol.defaultStreamName)
+		self.url = "http://%s:%d/%s.ts" % (cfg.host.value, cfg.httpport.value, streamName)
 		self.filename = path
-		self.output = "#transcode{vcodec=%s,vb=%d,width=%s,height=%s,fps=%s,scale=%s,acodec=%s,ab=%d,channels=%d}:std{access=http,mux=ts,dst=/%s.ts}" % (
+		self.output = "#transcode{vcodec=%s,vb=%d,width=%s,height=%s,fps=%s,scale=%s,acodec=%s,ab=%d,channels=%d,samplerate=%s}:std{access=http,mux=ts,dst=/%s.ts}" % (
 			config.plugins.vlcplayer.vcodec.value, 
 			config.plugins.vlcplayer.vb.value, 
 			config.plugins.vlcplayer.width.value, 
@@ -182,7 +196,8 @@ class VlcPlayer(Screen):
 			config.plugins.vlcplayer.acodec.value, 
 			config.plugins.vlcplayer.ab.value, 
 			config.plugins.vlcplayer.channels.value,
-			self.vlccontrol.defaultStreamName
+			config.plugins.vlcplayer.samplerate.value,
+			streamName
 		)
 		self.play()
 

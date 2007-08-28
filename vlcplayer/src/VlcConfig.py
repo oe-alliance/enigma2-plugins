@@ -1,3 +1,13 @@
+# -*- coding: ISO-8859-1 -*-
+#===============================================================================
+# VLC Player Plugin by A. Lätsch 2007
+#
+# This is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2, or (at your option) any later
+# version.
+#===============================================================================
+
 from Screens.Screen import Screen
 from Components.config import config
 from Components.config import getConfigListEntry
@@ -10,16 +20,16 @@ from Screens.MessageBox import MessageBox
 
 class VLCSettings(Screen, ConfigListScreen):
 	skin = """
-		<screen name="VLCSettings" position="80,140" size="560,320" title="VLC Settings">
-			<widget name="config" position="10,10" size="520,240" scrollbarMode="showOnDemand" />
-			<ePixmap name="red"    position="0,270"   zPosition="4" size="140,40" pixmap="Nemesis.SkinSuite.Shared/key-red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green"  position="140,270" zPosition="4" size="140,40" pixmap="Nemesis.SkinSuite.Shared/key-green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,270" zPosition="4" size="140,40" pixmap="Nemesis.SkinSuite.Shared/key-yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue"   position="420,270" zPosition="4" size="140,40" pixmap="Nemesis.SkinSuite.Shared/key-blue.png" transparent="1" alphatest="on" />
-			<widget name="key_red" position="0,270" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="140,270" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="280,270" zPosition="5" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="420,270" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<screen name="VLCSettings" position="80,140" size="560,330" title="VLC Settings">
+			<widget name="config" position="10,10" size="540,250" scrollbarMode="showOnDemand" />
+			<ePixmap name="red"    position="0,280"   zPosition="4" size="140,40" pixmap="Nemesis.SkinSuite.Shared/key-red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green"  position="140,280" zPosition="4" size="140,40" pixmap="Nemesis.SkinSuite.Shared/key-green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="280,280" zPosition="4" size="140,40" pixmap="Nemesis.SkinSuite.Shared/key-yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue"   position="420,280" zPosition="4" size="140,40" pixmap="Nemesis.SkinSuite.Shared/key-blue.png" transparent="1" alphatest="on" />
+			<widget name="key_red" position="0,280" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_green" position="140,280" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_yellow" position="280,280" zPosition="5" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_blue" position="420,280" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 	
 	def __init__(self, session):
@@ -45,6 +55,7 @@ class VLCSettings(Screen, ConfigListScreen):
 		cfglist.append(getConfigListEntry(_("Scale"), config.plugins.vlcplayer.scale))
 		cfglist.append(getConfigListEntry(_("Audio Codec"), config.plugins.vlcplayer.acodec))
 		cfglist.append(getConfigListEntry(_("Audio Bitrate"), config.plugins.vlcplayer.ab))
+		cfglist.append(getConfigListEntry(_("Audio Samplerate"), config.plugins.vlcplayer.samplerate))
 		cfglist.append(getConfigListEntry(_("Audio Channels"), config.plugins.vlcplayer.channels))
 		ConfigListScreen.__init__(self, cfglist, session)
 

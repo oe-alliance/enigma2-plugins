@@ -1,8 +1,18 @@
+# -*- coding: ISO-8859-1 -*-
+#===============================================================================
+# VLC Player Plugin by A. L�tsch 2007
+#
+# This is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2, or (at your option) any later
+# version.
+#===============================================================================
+
 from urllib import urlencode
 from urllib2 import urlopen
 from xml.dom.minidom import parse
 from Components.config import config
-import socket
+from socket import socket as socket_socket, AF_INET as socket_AF_INET, SOCK_STREAM as socket_SOCK_STREAM
 
 def getText(nodelist):
     rc = ""
@@ -11,18 +21,30 @@ def getText(nodelist):
             rc = rc + node.data
     return rc
 
+def getLocalHostIP( remote = ("www.python.org", 80)):
+ 	'''Get the "public" address of the local machine, i.e.
+ 	that address which is connected to the general internet.
+ 	Code by Donn Cave, posted to comp.lang.python'''
+	s = socket_socket(socket_AF_INET, socket_SOCK_STREAM)
+	s.connect( remote )
+	ip, localport = s.getsockname()
+	s.close()
+	return ip
+
 class VlcControlHttp:
-	defaultStreamName = "dreambox"
+	defaultStreamName = None
 	
 	def __init__(self, servernum):
 		cfg = config.plugins.vlcplayer.servers[servernum]
 		self.servercfg = cfg
 		self.host = cfg.host.value + ":" + str(cfg.httpport.value)
 		self.lastError = None
-		try:
-			self.defaultStreamName = "dream" + socket.gethostbyname(socket.gethostname()).split('.')[3]
-		except Exception, e:
-			pass
+		if VlcControlHttp.defaultStreamName is None:
+			try:
+				ip = getLocalHostIP( (cfg.host.value, cfg.httpport.value) )
+				VlcControlHttp.defaultStreamName = "dream" + str(ip)
+			except Exception, e:
+				VlcControlHttp.defaultStreamName = "dreambox"
 
 	def connect(self):
 		pass

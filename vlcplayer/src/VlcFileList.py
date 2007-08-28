@@ -1,13 +1,40 @@
+# -*- coding: ISO-8859-1 -*-
+#===============================================================================
+# VLC Player Plugin by A. Lätsch 2007
+#
+# This is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2, or (at your option) any later
+# version.
+#===============================================================================
+
 from Components.FileList import FileEntryComponent
 from Components.FileList import FileList
 from Components.config import config
 from urllib import urlencode
 from urllib import urlopen
-from re import compile
-from xml.sax import ContentHandler, parse
-import os.path
+import posixpath
+import re
+import xml.sax
 
-class vlcBrowseXmlHandler(ContentHandler):
+def normpath(path):
+	if path is None:
+		return None
+	path = path.replace("\\","/").replace("//", "/")
+	if path == "/..":
+		return ""
+	if len(path) > 0 and path[0] != '/': 
+		path = posixpath.normpath('/'+path)[1:]
+	else:
+		path = posixpath.normpath(path)
+
+	if len(path) == 0 or path == "//":
+		return "/"
+	elif path == ".":
+		return None
+	return path
+
+class vlcBrowseXmlHandler(xml.sax.ContentHandler):
 	
 	def __init__(self, host, regex = None):
 		self.host = host
@@ -18,8 +45,8 @@ class vlcBrowseXmlHandler(ContentHandler):
 	def startElement(self, name, attrs):
 		if name == "element" and attrs is not None:
 			type = attrs.getValue("type")
-			name = attrs.getValue("name").encode("latin_1", "replace")
-			path = self.host + ":" + attrs.getValue("path").encode("latin_1")
+			name = attrs.getValue("name").encode("utf8")
+			path = "%s:%s" % (self.host, normpath(attrs.getValue("path").encode("utf8")))
 			if type == "directory":
 				self.directories.append(FileEntryComponent(name, path, True))
 			elif len(path) > 0:
@@ -56,7 +83,7 @@ class VlcFileList(FileList):
 		if req is None:
 			raise IOError, "No response from server"
 		handler = vlcBrowseXmlHandler(str(servernum), regex)
-		parse(req, handler)
+		xml.sax.parse(req, handler)
 		return (handler.files, handler.directories)
 	
 	def initServerlist(self):
@@ -69,27 +96,22 @@ class VlcFileList(FileList):
 		self.current_directory = None
 		self.current_server = None
 		self.current_path = None
-
+		
 	def changeDir(self, directory, select = None):
-		print "[VLC] changeDir ", directory
+		print "[VLC] changeDir ", directory, select
 		if directory is None:
-			self.initServerlist()
-			return
-
-		directory = directory.replace("\\","/")
-		directory = os.path.normpath(directory)
-		if directory == ".":
 			self.initServerlist()
 			return
 
 		i = directory.find(":")
 		servernum = int(directory[0:i])
-		path = directory[i+1:]
-		if len(path) == 0:
-			path = "/"
+		path = normpath(directory[i+1:])
+		if path is None:
+			self.initServerlist()
+			return
 
 		if self.matchingPattern is not None:
-			regex = compile(self.matchingPattern)
+			regex = re.compile(self.matchingPattern)
 		else:
 			regex = None
 
@@ -105,6 +127,8 @@ class VlcFileList(FileList):
 		
 		if select is not None:
 			self.setSelection(select)
+		else:
+			self.moveToIndex(0)
 
 	def setSelection(self, select):
 		i = 0
