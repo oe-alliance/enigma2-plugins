@@ -118,9 +118,17 @@ class RSSBaseView(Screen):
 			print "[SimpleRSS] Trying to play back enclosure: url=%s, type=%s" % (url, type)
 
 			if type in ["video/mpeg", "audio/mpeg"]:
-				# We should launch a Player here, but the MediaPlayer gets angry about our non-local sources
 				from enigma import eServiceReference
-				self.session.nav.playService(eServiceReference(4097, 0, url))
+				from Screens.MediaPlayer import MediaPlayer
+
+				mp = self.session.open(MediaPlayer)
+				ref = eServiceReference(4097, 0, url)
+
+				mp.switchToPlayList()
+				mp.playlist.addFile(ref)
+				mp.playlist.updateList()
+
+				mp.playServiceRefEntry(ref)
 			elif type in ["image/jpeg", "image/png", "image/gif", "image/bmp"]:
 				self.session.open(PictureView, url)
 
@@ -369,6 +377,10 @@ class RSSFeedView(RSSBaseView):
 			self.setConditionalTitle() # Update title
 			return result
 		return (self.feedTitle, self.data, self.id)
+
+	def checkEmpty(self):
+		if self.id > 0 and not len(self.data):
+			self.singleUpdate(self.id-1)
 
 	def showCurrentEntry(self):
 		current_entry = self["content"].getCurrentEntry()
