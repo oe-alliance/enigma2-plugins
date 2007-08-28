@@ -143,6 +143,21 @@ function RND(tmpl, ns) {
 	};
 	return tmpl.replace(/%\(([A-Za-z0-9_|.]*)\)/g, fn);
 }
+
+function d2h(nr, len){
+
+		hex = parseInt(nr).toString(16).toUpperCase();
+		if(len > 0){
+			try{
+				while(hex.length < len){
+					hex = "0"+hex;
+				}
+			} 
+			catch(e){}
+		} 
+		return hex;
+}
+
 function debug(text){
 	if(DBG){
 		try{
@@ -983,22 +998,22 @@ function incomingAbout(request) {
 					,'serviceProvider': xml.getElementsByTagName('e2serviceprovider').item(0).firstChild.data
 					,'serviceAspect': xml.getElementsByTagName('e2serviceaspect').item(0).firstChild.data
 					,'serviceNamespace': xml.getElementsByTagName('e2servicenamespace').item(0).firstChild.data
-					,'vPIDh': '0x'+xml.getElementsByTagName('e2vpid').item(0).firstChild.data
-					 ,'vPID': parseInt(ownLazyNumber(xml.getElementsByTagName('e2vpid').item(0).firstChild.data),16)
-					,'aPIDh': '0x'+xml.getElementsByTagName('e2apid').item(0).firstChild.data
-					 ,'aPID': parseInt(ownLazyNumber(xml.getElementsByTagName('e2apid').item(0).firstChild.data),16)
-					,'pcrIDh': '0x'+xml.getElementsByTagName('e2pcrid').item(0).firstChild.data
- 					 ,'pcrID': parseInt(ownLazyNumber(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data),16)
-					,'pmtPIDh': '0x'+xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data
-					 ,'pmtPID': parseInt(ownLazyNumber(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data),16)
-					,'txtPIDh': '0x'+xml.getElementsByTagName('e2txtpid').item(0).firstChild.data
-					 ,'txtPID': parseInt(ownLazyNumber(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data),16)
-					,'tsIDh': '0x'+xml.getElementsByTagName('e2tsid').item(0).firstChild.data
-					 ,'tsID': parseInt(ownLazyNumber(xml.getElementsByTagName('e2tsid').item(0).firstChild.data),16)
-					,'onIDh': '0x'+xml.getElementsByTagName('e2onid').item(0).firstChild.data
-					 ,'onID': parseInt(ownLazyNumber(xml.getElementsByTagName('e2onid').item(0).firstChild.data),16)
-					,'sidh': '0x'+xml.getElementsByTagName('e2sid').item(0).firstChild.data
-					 ,'sid': parseInt(ownLazyNumber(xml.getElementsByTagName('e2sid').item(0).firstChild.data),16)
+					,'vPIDh': '0x'+d2h(xml.getElementsByTagName('e2vpid').item(0).firstChild.data, 4)
+					 ,'vPID': ownLazyNumber(xml.getElementsByTagName('e2vpid').item(0).firstChild.data)
+					,'aPIDh': '0x'+d2h(xml.getElementsByTagName('e2apid').item(0).firstChild.data, 4)
+					 ,'aPID': ownLazyNumber(xml.getElementsByTagName('e2apid').item(0).firstChild.data)
+					,'pcrPIDh': '0x'+d2h(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data, 4)
+ 					 ,'pcrPID': ownLazyNumber(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data)
+					,'pmtPIDh': '0x'+d2h(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data, 4)
+					 ,'pmtPID': ownLazyNumber(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data)
+					,'txtPIDh': '0x'+d2h(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data, 4)
+					 ,'txtPID': ownLazyNumber(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data)
+					,'tsIDh': '0x'+d2h(xml.getElementsByTagName('e2tsid').item(0).firstChild.data, 4)
+					 ,'tsID': ownLazyNumber(xml.getElementsByTagName('e2tsid').item(0).firstChild.data)
+					,'onIDh': '0x'+d2h(xml.getElementsByTagName('e2onid').item(0).firstChild.data, 4)
+					 ,'onID': ownLazyNumber(xml.getElementsByTagName('e2onid').item(0).firstChild.data)
+					,'sidh': '0x'+d2h(xml.getElementsByTagName('e2sid').item(0).firstChild.data, 4)
+					 ,'sid': ownLazyNumber(xml.getElementsByTagName('e2sid').item(0).firstChild.data)
 				  };				  
 				$('BodyContent').innerHTML = RND(tplAbout, namespace);
 				setBodyMainContent('BodyContent');
