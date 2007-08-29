@@ -981,24 +981,25 @@ function incomingAbout(request) {
 
 				var namespace = {
 					'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data
-/*
+
 					,'lanDHCP': xml.getElementsByTagName('e2landhcp').item(0).firstChild.data
 					,'lanIP': xml.getElementsByTagName('e2lanip').item(0).firstChild.data
-					,'lanMask': xml.getElementsByTagName('e2lanmask').item(0).firstChild.data
-					,'lanGW': xml.getElementsByTagName('e2langw').item(0).firstChild.data
-					,'lanDNS': xml.getElementsByTagName('e2landns').item(0).firstChild.data
-*/
+					,'lanNetmask': xml.getElementsByTagName('e2lanmask').item(0).firstChild.data
+					,'lanGateway': xml.getElementsByTagName('e2langw').item(0).firstChild.data
+
 					,'fpVersion': fptext
 					,'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data
 					,'tunerInfo': tunerinfo
 					,'hddmodel': hddmodel
 					,'hddcapacity': hddcapacity
 					,'hddfree': hddfree
+					
 					,'serviceName': xml.getElementsByTagName('e2servicename').item(0).firstChild.data
 					,'serviceProvider': xml.getElementsByTagName('e2serviceprovider').item(0).firstChild.data
 					,'serviceAspect': xml.getElementsByTagName('e2serviceaspect').item(0).firstChild.data
 					,'serviceVideosize': xml.getElementsByTagName('e2servicevideosize').item(0).firstChild.data
 					,'serviceNamespace': xml.getElementsByTagName('e2servicenamespace').item(0).firstChild.data
+					
 					,'vPIDh': '0x'+d2h(xml.getElementsByTagName('e2vpid').item(0).firstChild.data, 4)
 					 ,'vPID': ownLazyNumber(xml.getElementsByTagName('e2vpid').item(0).firstChild.data)
 					,'aPIDh': '0x'+d2h(xml.getElementsByTagName('e2apid').item(0).firstChild.data, 4)
