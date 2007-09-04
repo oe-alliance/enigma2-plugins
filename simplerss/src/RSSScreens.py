@@ -276,11 +276,18 @@ class RSSFeedView(RSSBaseView):
 			})
 			self.onShown.append(self.__show)
 			self.onClose.append(self.__close)
+
+			self.timer = None
 		else:
+			self["actions"] = ActionMap([ "OkCancelActions" ], 
+			{
+				"cancel": self.close,
+			})
+
 			self.timer = eTimer()
 			self.timer.timeout.get().append(self.timerTick)
 			self.onExecBegin.append(self.startTimer)
-		
+
 		self["content"].connectSelChanged(self.updateInfo)
 		self.onLayoutFinish.extend([self.updateInfo, self.setConditionalTitle])
 
@@ -288,14 +295,15 @@ class RSSFeedView(RSSBaseView):
 		self.timer.startLongTimer(5)
 
 	def timerTick(self):
-		self.timer.timeout.get().remove(self.timerTick)
-		self.timer = None
 		self.close()
 
 	def __show(self):
 		self.rssPoller.addCallback(self.pollCallback)
 
 	def __close(self):
+		if self.timer is not None:
+			self.timer.timeout.get().remove(self.timerTick)
+			self.timer = None
 		self.rssPoller.removeCallback(self.pollCallback)
 
 	def pollCallback(self, id = None):
