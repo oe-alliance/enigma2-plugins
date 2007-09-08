@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-trafficinfo
+Version: 1.0
+Description: view german trafficjam informations 
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: 3c5x9 <3c5x9@gmx.net>
+Homepage: n/a
+Depends: enigma2(>1.0cvs20070908), twisted-web 
+Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
