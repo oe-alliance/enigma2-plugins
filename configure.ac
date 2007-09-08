@@ -57,4 +57,6 @@ vlcplayer/src/Makefile
 simplerss/Makefile
 simplerss/src/Makefile
 
+trafficinfo/Makefile
+trafficinfo/src/Makefile
 ])
