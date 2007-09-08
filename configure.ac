@@ -54,6 +54,9 @@ logomanager/logodir_hdd/Makefile
 vlcplayer/Makefile
 vlcplayer/src/Makefile
 
+fritzcall/Makefile
+fritzcall/src/Makefile
+
 simplerss/Makefile
 simplerss/src/Makefile
 
