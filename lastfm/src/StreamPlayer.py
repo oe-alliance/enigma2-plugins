@@ -3,7 +3,7 @@ from os import system
 from os.path import isfile as os_path_isfile
 from math import ceil
 from time import time
-from httpclient import quote_plus
+from urllib import quote_plus
 from Components.config import config
 
 class StreamPlayer:
@@ -16,7 +16,6 @@ class StreamPlayer:
     playlist = None
     
     def __init__(self,session, args = 0):
-        print " init StreamPlayer"
         self.session = session
         self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
         self.session.nav.event.append(self.__event)

@@ -4,8 +4,9 @@ from md5 import md5
 from twisted.internet import reactor
 from enigma import iServiceInformation, iPlayableService
 from Components.config import config
+from twisted.web.client import getPage
 
-from httpclient import quote_plus, urlencode, getPage
+from urllib import  urlencode as urllib_urlencode
 
 class LastFMScrobbler(object):
     client     = "tst" # this must be changed to a own ID
@@ -27,15 +28,15 @@ class LastFMScrobbler(object):
         
     def handshake(self):
         print "[LastFMScrobbler] try logging into lastfm-submission-server"
-        url = "http://"+self.host+":"+str(self.port)+"?"+urlencode({
+        url = "http://"+self.host+":"+str(self.port)+"?"+urllib_urlencode({
             "hs":"true",
             "p":"1.1",
             "c":self.client,
             "v":self.version,
             "u":self.user
             })
-        getPage(self.host,self.port,url,method="GET",callback=self.handshakeCB,errorback=self.handshakeCBError)
-    
+        getPage(url).addCallback(self.handshakeCB).addErrback(self.handshakeCBError)
+
     def handshakeCBError(self,data): 
         self.failed(data.split("\n"))
 
@@ -52,6 +53,7 @@ class LastFMScrobbler(object):
         self.md5 = sub("\n$","",lines[0])
         self.submiturl = sub("\n$","",lines[1])
         self.loggedin = True
+        print "[LastFMScrobbler] logged in"
         
     def baduser(self,lines):
         print "[LastFMScrobbler] Bad user"
@@ -66,16 +68,24 @@ class LastFMScrobbler(object):
         tracks = self.tracks2Submit
         print "[LastFMScrobbler] Submitting ",len(tracks)," tracks"
         md5response = md5(md5(self.password).hexdigest()+self.md5).hexdigest()
-        post = "u="+self.user+"&s="+md5response
+        post = {}
+        post["u"]=self.user
+        post["s"]=md5response
         count = 0
         for track in tracks:
-            post += "&"
-            post += track.urlencoded(count)
+            track.urlencoded(post,count)
             count += 1
         (host,port) = self.submiturl.split("/")[2].split(":")
-        url = "/"+"/".join(self.submiturl.split("/")[3:])+"?"+post
-        getPage(host,int(port),url,method="POST",callback=self.submitCB,errorback=self.submitCBError)
-        
+        url = "http://"+host+":"+port+"/"+"/".join(self.submiturl.split("/")[3:])
+        data = self.encode(post)
+        getPage(url,method="POST",headers = {'Content-Type': "application/x-www-form-urlencoded",'Content-Length': str(len(data))},postdata=data).addCallback(self.submitCB).addErrback(self.submitCBError)
+    
+    def encode(self,postdict):
+        result=[]
+        for key,value in postdict.items():
+            result.append(key+"="+value)
+        return "&".join(result)
+
     def submitCBError(self,data):
         self.failed(data.split("\n"))
         
@@ -104,21 +114,21 @@ class Track(object):
     def __repr__(self):
         return "'"+self.name+"' by '"+self.artist+"' from '"+self.album+"'"
 
-    def urlencoded(self,num):
-        encode = ""
-        encode += "a["+str(num)+"]="+quote_plus(self.artist)
-        encode += "&t["+str(num)+"]="+quote_plus(self.name)
+    def urlencoded(self,encodedict,num):
         if self.length is not None:
-            encode += "&l["+str(num)+"]="+quote_plus(str(self.length))
+            encodedict["l["+str(num)+"]"]=str(self.length)
         else:
-            encode += "&l["+str(num)+"]="            
-        encode += "&i["+str(num)+"]="+quote_plus(self.date)
+            encodedict["l["+str(num)+"]"]=''
+        
         if self.mbid is not None:
-            encode += "&m["+str(num)+"]="+quote_plus(self.mbid)
+            encodedic["m["+str(num)+"]"]=self.mbid
         else:
-            encode += "&m["+str(num)+"]="
-        encode += "&b["+str(num)+"]="+quote_plus(self.album)
-        return encode
+            encodedict["m["+str(num)+"]"]=''
+        
+        encodedict["i["+str(num)+"]"]=self.date
+        encodedict["a["+str(num)+"]"]=self.artist
+        encodedict["t["+str(num)+"]"]=self.name
+        encodedict["b["+str(num)+"]"]=self.album
 ##########
 class EventListener:
     time2wait4submit = 30

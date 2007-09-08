@@ -11,7 +11,7 @@ from Plugins.Plugin import PluginDescriptor
 from StreamPlayer import StreamPlayer
 from LastFMConfig import LastFMConfigScreen
 from LastFM import LastFM
-from httpclient import getFile
+from twisted.web.client import downloadPage
 from os import remove as os_remove, system as os_system
 from random import randrange
 
@@ -93,7 +93,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
             <widget name="info_track" position="70,80" size="344,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
             <widget name="info_cover" position="414,0" size="116,116" />          
             
-            <widget name="tablist" position="0,120" size="150,260" scrollbarMode="showOnDemand" backgroundColor="#55cccccc"/>            
+            <widget name="tablist" position="0,120" size="150,260" scrollbarMode="showOnDemand" />            
             <widget name="streamlist" position="150,120" size="380,260" scrollbarMode="showOnDemand" />            
             
             <widget name="button_red" position="10,400" size="60,30" backgroundColor=\"red\" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
@@ -549,7 +549,7 @@ class ImageConverter:
         if self.lastURL != sourceURL:
             extension = sourceURL.split(".")[-1]
             self.tmpfile = self.targetfile+"."+extension
-            getFile(self.tmpfile,sourceURL,callback=self.onImageLoaded)
+            downloadPage(sourceURL,self.tmpfile).addCallback(self.onImageLoaded)
             self.lastURL = sourceURL
 
     def onImageLoaded(self,dummy):
