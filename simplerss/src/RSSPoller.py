@@ -6,7 +6,7 @@ from RSSScreens import RSSFeedView
 from TagStrip import TagStrip
 from RSSFeed import UniversalFeed
 
-from httpclient import getPage
+from twisted.web.client import getPage
 from xml.dom.minidom import parseString as minidom_parseString
 
 class RSSPoller:
@@ -123,13 +123,7 @@ class RSSPoller:
 
 	def singlePoll(self, id, callback = False, errorback = None):
 		from Tools.BoundFunction import boundFunction
-		getPage(
-			self.feeds[id].hostname,
-			self.feeds[id].port,
-			self.feeds[id].path,
-			callback=boundFunction(self._gotSinglePage, id, callback, errorback),
-			errorback=errorback
-		)
+		getPage(self.feeds[id].uri).addCallback(callback=boundFunction(self._gotSinglePage, id, callback, errorback)).addErrback(errorback)
 
 	def poll(self):
 		# Reloading, reschedule
@@ -159,13 +153,7 @@ class RSSPoller:
 			# Feed supposed to autoupdate
 			feed = self.feeds[self.current_feed]
 			if feed.autoupdate:
-				getPage(
-					feed.hostname,
-					feed.port,
-					feed.path,
-					callback=self._gotPage,
-					errorback=self.error
-				)
+				getPage(feed.uri).addCallback(self._gotPage).addErrback(self.error)
 			# Go to next feed
 			else:
 				print "[SimpleRSS] passing feed"

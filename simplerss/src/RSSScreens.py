@@ -38,8 +38,8 @@ class PictureView(Screen):
 
 	def fetchFile(self):
 		# Fetch file
-		from httpclient import getFile
-		getFile(self.filename, self.url, callback=self.gotFile, errorback=self.error)
+		from twisted.web.client import downloadPage
+		downloadPage(self.url, self.filename).addCallback(self.gotFile).addErrback(self.error)
 
 	def gotFile(self, data = ""):
 		# Determine Aspect

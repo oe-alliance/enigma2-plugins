@@ -1,7 +1,5 @@
 from sets import Set
 
-from urlparse import urlsplit
-
 class BaseFeed:
 	"""Base-class for all Feeds. Initializes needed Elements."""
 	MAX_HISTORY_ELEMENTS = 100
@@ -9,13 +7,6 @@ class BaseFeed:
 	def __init__(self, uri, autoupdate, stripper):
 		# Set URI (used as Identifier)
 		self.uri = uri
-
-		# Determine URI Elements
-		remote = urlsplit(uri)
-		self.hostname = remote.hostname
-		self.port = remote.port or 80
-		self.path = '?'.join([remote.path, remote.query])
-		print "[SimpleRSS] determined hostname:", self.hostname, ", port:", self.port, ", path:", self.path
 
 		# Set Autoupdate
 		self.autoupdate = autoupdate

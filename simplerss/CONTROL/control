@@ -1,9 +1,9 @@
 Package: enigma2-plugin-extensions-simplerss
-Version: 0.5-20070813-r0
+Version: 0.6-20070813-r0
 Description: rss viewer for the enigma2 gui
 Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
-Depends: enigma2(>1.0cvs20060516)
+Depends: enigma2(>1.0cvs20070908), twisted-web
 Source: http://schwerkraft.elitedvb.net/scm/?group_id=11
