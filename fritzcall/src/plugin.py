@@ -28,6 +28,8 @@ my_global_session = None
 config.plugins.FritzCall = ConfigSubsection()
 config.plugins.FritzCall.enable = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.hostname = ConfigIP(default = [192, 168, 178, 1])
+config.plugins.FritzCall.filter = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.filtermsn = ConfigText(default = "", fixed_size = False)
 config.plugins.FritzCall.showOutgoing = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.timeout = ConfigInteger(default = 15, limits = (0,60))
 config.plugins.FritzCall.lookup = ConfigEnableDisable(default = False)
@@ -220,6 +222,11 @@ class FritzCallSetup(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Call monitoring"), config.plugins.FritzCall.enable))
 		if config.plugins.FritzCall.enable.value:
 			self.list.append(getConfigListEntry(_("Fritz!Box FON IP address"), config.plugins.FritzCall.hostname))
+			
+			self.list.append(getConfigListEntry(_("Show Calls for specific MSN"), config.plugins.FritzCall.filter))
+			if config.plugins.FritzCall.filter.value:
+				self.list.append(getConfigListEntry(_("MSN to show"), config.plugins.FritzCall.filtermsn))
+				
 			self.list.append(getConfigListEntry(_("Show Outgoing Calls"), config.plugins.FritzCall.showOutgoing))
 			self.list.append(getConfigListEntry(_("Timeout for Call Notifications (seconds)"), config.plugins.FritzCall.timeout))
 			self.list.append(getConfigListEntry(_("Reverse Lookup Caller ID (DE only)"), config.plugins.FritzCall.lookup))
@@ -365,45 +372,49 @@ class FritzProtocol(LineReceiver):
 		#incoming Call
 		if self.event == "RING":
 			phone = a[4]
-			phonename = phonebook.search(phone)
-			if phonename is not None:
-				self.phone = "%s (%s)" %(phone, phonename)
-			else:
-				self.phone = phone
 			
-			if config.plugins.FritzCall.internal.value and a[3][0]=="0" and len(a[3]) > 3:
-				self.number = a[3][1:]
-			else:
-				self.number = a[3]
-			
-			self.caller = phonebook.search(self.number)
-			if self.caller is None:
-				if config.plugins.FritzCall.lookup.value:
-					self.reverseLookup()
+			if not config.plugins.FritzCall.filter.value or config.plugins.FritzCall.filtermsn.value == phone:	
+				phonename = phonebook.search(phone)
+				if phonename is not None:
+					self.phone = "%s (%s)" %(phone, phonename)
+				else:
+					self.phone = phone
+				
+				if config.plugins.FritzCall.internal.value and a[3][0]=="0" and len(a[3]) > 3:
+					self.number = a[3][1:]
+				else:
+					self.number = a[3]
+				
+				self.caller = phonebook.search(self.number)
+				if self.caller is None:
+					if config.plugins.FritzCall.lookup.value:
+						self.reverseLookup()
+					else:
+						self.handleEvent()
 				else:
 					self.handleEvent()
-			else:
-				self.handleEvent()
 		
 		#Outgoing Call
 		elif config.plugins.FritzCall.showOutgoing.value and self.event == "CALL":
 			self.phone = a[4]
-			self.number = a[5]
-			
-			if self.number[0] != '0':
-				self.number = Prefix + self.number
 
-			if config.plugins.FritzCall.internal.value and a[3][0]=="0" and len(a[3]) > 3:
-				self.number = a[3][1:]
-			else:
-				self.number = a[3]
-			self.caller = phonebook.search(self.number)
+			if not config.plugins.FritzCall.filter.value or config.plugins.FritzCall.filtermsn.value == self.phone:
 
-			if self.caller is None:
-				if config.plugins.FritzCall.lookup.value:
-					self.reverseLookup()
-			else:
-				self.handleEvent()
+				if config.plugins.FritzCall.internal.value and a[5][0]=="0" and len(a[3]) > 3:
+					self.number = a[5][1:]
+				else:
+					self.number = a[5]
+					
+				self.caller = phonebook.search(self.number)
+
+				if self.number[0] != '0':
+					self.number = config.plugins.FritzCall.prefix.value + self.number
+				
+				if self.caller is None:
+					if config.plugins.FritzCall.lookup.value:
+						self.reverseLookup()
+				else:
+					self.handleEvent()
 				
 								
 class FritzClientFactory(ReconnectingClientFactory):
