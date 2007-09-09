@@ -294,7 +294,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
     def startScreensaver(self):
         if config.plugins.LastFM.sreensaver.use.value:
             self.screensavertimer.stop()
-            self.session.openWithCallback(self.updateGUI, LastFMSaveScreen,self.streamplayer)
+            self.session.openWithCallback(self.updateGUI, LastFMSaveScreen,self)
            
     def action_nextTab(self):
         self.tablist.down()
@@ -475,7 +475,7 @@ class LastFMSaveScreen(Screen):
     noCoverArtPNG = "/usr/share/enigma2/no_coverArt.png"
     coverartsize= [200,200]
     lastcreator=""
-    def __init__(self,session,streamplayer):
+    def __init__(self,session,parent):
         self.skin = """<screen position="0,0" size="720,576" flags="wfNoBorder" title="LastFMSaveScreen" >
                 <widget name="cover" position="50,50" size="%i,%i" />          
               </screen>"""%(self.coverartsize[0],self.coverartsize[1])
@@ -483,12 +483,18 @@ class LastFMSaveScreen(Screen):
         Screen.__init__(self,session)
         self.imageconverter = ImageConverter(self.coverartsize[0],self.coverartsize[1],self.setCoverArt)
         self.session = session
-        self.streamplayer = streamplayer
+        self.streamplayer = parent.streamplayer
+        self.parent = parent
         self["cover"] = MovingPixmap()
+                        
         self["actions"] = ActionMap(["InfobarChannelSelection","WizardActions", "DirectionActions","MenuActions","ShortcutActions","GlobalActions","HelpActions"], 
             {
              "ok": self.action_exit,
              "back": self.action_exit,
+			 "red": self.parent.action_startstop,
+             "green": self.parent.skipTrack,
+             "yellow": self.parent.love,
+             "blue": self.parent.banTrack ,
              }, -1)
         
         self.onLayoutFinish.append(self.update)
