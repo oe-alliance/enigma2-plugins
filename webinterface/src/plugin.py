@@ -38,9 +38,16 @@ config.plugins.Webinterface.version = ConfigText(__version__) # used to make the
 
 DEBUGFILE= "/tmp/twisted.log"
 
+global running_defered
+running_defered = []
+
 def stopWebserver(session):
-	reactor.disconnectAll()
-	try:# got BS with "global name session is not defined" so i catched it, but please make it safe if you use globals! thx
+	global running_defered
+	for d in running_defered:
+		print "STOPPING reactor on interface ",d.interface," with port",d.port
+		d.stopListening()
+	running_defered = []
+	try:
 		del session.mediaplayer
 		del session.messageboxanswer
 	except NameError:
@@ -51,6 +58,8 @@ def restartWebserver(session):
 	startWebserver(session)
 
 def startWebserver(session):
+	global running_defered
+	
 	# variables, that are needed in the process
 	session.mediaplayer = None
 	session.messageboxanswer = None
@@ -74,8 +83,8 @@ def startWebserver(session):
 	# here we start the Toplevel without any username or password
 	# this allows access to all request over the iface 127.0.0.1 without any auth
 	localsite = server.Site(toplevel)
-	reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(localsite),interface='127.0.0.1')
-	
+	d = reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(localsite),interface='127.0.0.1')
+	running_defered.append(d)
 	# and here we make the Toplevel public to our external ifaces
 	# it depends on the config, if this is with auth support
 	# keep in mind, if we have a second external ip (like a wlan device), we have to do it in the same way for this iface too
@@ -86,7 +95,8 @@ def startWebserver(session):
 			extip = "%i.%i.%i.%i"%(extip[0],extip[1],extip[2],extip[3])
 			print "[WebIf] starting Webinterface on port %s on interface %s with address %s"%(str(config.plugins.Webinterface.port.value),adaptername,extip)
 			try:
-				reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site),interface=extip)
+				d = reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site),interface=extip)
+				running_defered.append(d)
 			except Exception,e:
 				print "[WebIf] Error starting Webinterface on port %s on interface %s with address %s,because \n%s"%(str(config.plugins.Webinterface.port.value),adaptername,extip,e)
 		else:
