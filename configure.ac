@@ -62,4 +62,7 @@ simplerss/src/Makefile
 
 trafficinfo/Makefile
 trafficinfo/src/Makefile
+
+webcamviewer/Makefile
+webcamviewer/src/Makefile
 ])
