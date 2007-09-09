@@ -1,0 +1,295 @@
+﻿<?xml version="1.0"  encoding="UTF-8" ?>
+<!-- I you have webcams that should be listed here, send an email to 3c5x9(at)gmx.net -->
+<xml>
+	<name>Mainmenu</name>
+	<menu>
+		<name>Webcam</name>
+		<menu>
+			<name>Amerika</name>
+			<menu>
+				<name>USA Westkueste</name>
+				<cam>
+					<name>Santa Monica Pier</name>
+					<url>http://www.westland.net/photo/file02.jpg</url>
+				</cam>
+				<cam>
+					<name>Venice Beach</name>
+					<url>http://www.westland.net/photo/file01.jpg</url>
+				</cam>
+				<cam>
+					<name>Pacific Palisades Bay</name>
+					<url>http://www.westland.net/photo/file01.jpg</url>
+				</cam>
+				<cam>
+					<name>Pacific Coast HWY</name>
+					<url>http://www.livinginthepalisades.com/photo/coastcam1.jpg</url>
+				</cam>
+				<cam>
+					<name>Auto Webcam - Live von unterwegs in L.A.</name>
+					<url>http://www.laavenue.com/la/la.jpg</url>
+				</cam>
+				<cam>
+					<name>sf Lawrence Hall of Science</name>
+					<url>http://sv.berkeley.edu/view/images/current_view.jpg</url>
+				</cam>
+				<cam>
+					<name>Mount St. Helens - VolcanoCam</name>
+					<url>http://www.fs.fed.us/gpnf/volcanocams/msh/images/mshvolcanocam.jpg</url>
+				</cam>
+				<cam>
+					<name>Seattle King 5 TV - From Queen Anne</name>
+					<url>http://www.king5.com/live/weather_images/external/queenanne_lg.jpg</url>
+				</cam>
+				<cam>
+					<name>Grand Canyon</name>
+					<url>http://www2.nature.nps.gov/air/WebCams/parks/grcacam/grca.jpg</url>
+				</cam>
+				<cam>
+					<name>Point Reyes National Seashore</name>
+					<url>http://www2.nature.nps.gov/air/webcams/parks/porecam/pore.jpg</url>
+				</cam>
+			</menu>
+			<menu>
+				<name>New York</name>
+				<cam>
+					<name>Broadway</name>
+					<url>http://images.earthcam.com/ec_metros/ourcams/charleyo.jpg</url>	
+				</cam>
+				<cam>
+					<name>Ground zero</name>
+					<url>http://images.earthcam.com/ec_metros/ourcams/millenium.jpg</url>	
+				</cam>
+				<cam>
+					<name>46th Street and Broadway</name>
+					<url>http://209.178.198.74/ec_metros/ourcams/fridays.jpg</url>	
+				</cam>		    
+				<cam>
+					<name>Emipre State Building</name>
+					<url>http://www.nyvibe.net/nyvibescam/view.jpg</url>	
+				</cam>
+			</menu>
+			<menu>
+				<name>Las Vegas</name>
+				<cam>
+					<name>MGM</name>
+					<url>http://images.earthcam.com/ec_metros/ourcams/mgm.jpg</url>	
+				</cam>
+				<cam>
+					<name>Wedding Chapel</name>
+					<url>http://images.earthcam.com/ec_metros/ourcams/wedding.jpg</url>	
+				</cam>
+				<cam>
+					<name>Paris Hotel</name>
+					<url>http://images.earthcam.com/ec_metros/ourcams/paris.jpg</url>	
+				</cam>		    
+				<cam>
+					<name>Hard Rock Hotel</name>
+					<url>http://images.earthcam.com/ec_metros/ourcams/cafe.jpg</url>	
+				</cam>
+			</menu>
+			<menu>
+				<name>Rio de Janeiro</name>
+				<cam>
+					<name>Lapa</name>
+					<url>http://transito.rio.rj.gov.br/imagens1/41.jpg</url>
+				</cam>
+				<cam>
+					<name>Av. Rio Branco / Av. Presidente Vargas</name>
+					<url>http://transito.rio.rj.gov.br/imagens1/2.jpg</url>
+				</cam>
+				<cam>
+					<name>Aterro do Flamengo</name>
+					<url>http://transito.rio.rj.gov.br/imagens1/5.jpg</url>
+				</cam>
+				<cam>
+					<name>Flamengo / Botafogo</name>
+					<url>http://transito.rio.rj.gov.br/imagens1/20.jpg</url>
+				</cam>
+				<cam>
+					<name>Copacabana - Avenida Atlantica</name>
+					<url>http://transito.rio.rj.gov.br/imagens1/26.jpg</url>
+				</cam>
+				<cam>
+					<name>Av. Nossa Senhora de Copacabana</name>
+					<url>http://transito.rio.rj.gov.br/imagens1/24.jpg</url>
+				</cam>
+			</menu>
+			<cam>
+				<name>Vancouver, English Bay</name>
+				<url>http://www.katkam.ca/p.asp?what=currentjpg</url>	
+			</cam>
+			<cam>
+				<name>Torronto</name>
+				<url>http://www.traveloffice.ca/webcam/capture1.jpg</url>	
+			</cam>
+			<cam>
+				<name>Argentinien, Mar del Plata</name>
+				<url>http://www.mardelplatawebcam.com.ar/img/webcam_colon_y_costa.jpg</url>	
+			</cam>
+
+		</menu>
+		<menu>
+			<name>Europa</name>
+			<cam>
+				<name>London, Trafalgar Square</name>
+				<url>http://images.earthcam.com/ec_metros/ourcams/trafalgarsq.jpg</url>	
+			</cam>
+			<cam>
+				<name>London, Big Ben</name>
+				<url>http://images.earthcam.com/ec_metros/ourcams/big_ben.jpg</url>	
+			</cam>
+			<cam>
+				<name>London, Covent Garden</name>
+				<url>http://images.earthcam.com/ec_metros/ourcams/ltm.jpg</url>	
+			</cam>
+			<cam>
+				<name>Spanien, Costa Brava</name>
+				<url>http://www.costabrava.cc/calella_live_webcam.jpg</url>	
+			</cam>
+			<cam>
+				<name>Paris</name>
+				<url>http://www.abcparislive.com/eiffel2.jpg</url>	
+			</cam>
+			<cam>
+				<name>Madrid</name>
+				<url>http://www.multimadrid.com/plaza.jpg</url>	
+			</cam>
+			<cam>
+				<name>Dublin</name>
+				<url>http://www.ireland.com/includes/webcam/liveview.jpg</url>	
+			</cam>
+			<cam>
+				<name>Griechenland, Naxos</name>
+				<url>http://www.flisvos-sportclub.com/images/webcam.jpg</url>	
+			</cam>
+			<cam>
+				<name>Griechenland, Mykonos</name>
+				<url>http://www.travel-to-mykonos.com/webcam/1/mykonos.jpg</url>	
+			</cam>
+		</menu>
+		<menu>
+			<name>Deutschland</name>
+			<menu>
+				<name>Hamburg</name>
+				<cam>
+					<name>Hamburg A7 Elbtunnel</name>
+					<url>http://www.ikk-hamburg.de/seiten/webcam/bild.php?bild=gross</url>	
+				</cam>    
+				<cam>
+					<name>Hamburg Landungsbruecken</name>
+					<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/wkam1-10148.jpg</url>	
+				</cam>
+				<cam>
+					<name>Hamburg Hafen</name>
+					<url>http://www.hafen-hamburg.de/webcam/camstill.jpg</url>	
+				</cam>					
+			</menu>
+			<menu>
+				<name>Dresden</name>
+				<cam>
+					<name>Frauenkirche</name>
+					<url>http://www3.mdr.de/webcams/frauen.jpg?t=12679</url>
+				</cam>
+				<cam>
+					<name>Blick auf Altstadtpanorama, Synagoge und Frauenkirche</name>
+					<url>http://www3.mdr.de/webcams/altstadt.jpg</url>
+				</cam>
+				<cam>
+					<name>Zwinger</name>
+					<url>http://www.softed.de/Webcam/webcam/hugesize.jpg</url>
+				</cam>
+				<cam>
+					<name>Fernsehturm</name>
+					<url>http://www.eb-world.de/FernsehturmCam/pics/Fernsehturm.jpg</url>
+				</cam>			
+				<cam>
+					<name>Seidnitz</name>
+					<url>http://www.webcam.maxg.ath.cx/capture1.jpg</url>
+				</cam>
+				<cam>
+					<name>Blick zur Frauenkirche</name>
+					<url>http://dataware.de/~combase/fkdrv/images/campics/image.jpg</url>
+				</cam>
+			</menu>
+			<cam>
+				<name>Eutin</name>
+				<url>http://www.stadtwerke-eutin.de/webcam/images/wasserturm.jpg</url>
+			</cam>
+			<cam>
+				<name>Offenbach/Frankfurt</name>
+				<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/wkam1-10640.jpg</url>	
+			</cam>
+			<cam>
+				<name>St. Peter Ording</name>
+				<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/wkam1-10028.jpg</url>	
+			</cam>
+			<cam>
+				<name>Rostock-Warnemuende Seestrasse</name>
+				<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/wkam1-10170.jpg</url>	
+			</cam>
+			<cam>
+				<name>Kahler Asten - Wetterstation</name>
+				<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/wkam1-10427.jpg</url>	
+			</cam>
+			<cam>
+				<name>Braunlage</name>
+				<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/wkam1-10452.jpg</url>	
+			</cam>
+			<cam>
+				<name>Hannover</name>
+				<url>http://www.langelaube2.de/webcam/webcam.jpg</url>	
+			</cam>
+			<cam>
+				<name>Koeln</name>
+				<url>http://www.wdr.de/themen/global/webcams/domcam/domcam_live.jpg</url>	
+			</cam>
+			<cam>
+				<name>Frankfurt</name>
+				<url>http://www.frankfurt.de/sis/frankfurtbilder/cams/pia/images/webcam_pia.jpg</url>	
+			</cam>
+			<cam>
+				<name>Berlin</name>
+				<url>http://www.dhm.de/webcams/pics/cam1_large.jpg</url>	
+			</cam>
+			<cam>
+				<name>Berlin2</name>
+				<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/wkam1-10384.jpg</url>	
+			</cam>
+			<cam>
+				<name>Berlin, Museumsinsel</name>
+				<url>http://www.ipb.de/webcam/cam/cam.jpg</url>	
+			</cam>
+			<cam>
+				<name>Leipzig</name>
+				<url>http://www.na-klarmann.de/cam.JPG</url>	
+			</cam>
+		</menu>
+		<cam>
+			<name>Antarkits,South Georgia</name>
+			<url>http://www.sgisland.org/webcam/webcam.jpg</url>	
+		</cam>
+		<cam>
+			<name>Neuseeland, Hammer Springs</name>
+			<url>http://www.hanmer.co.nz/hanmer.jpg</url>	
+		</cam>
+	</menu>
+	<menu>
+		<name>Wetter</name>
+		<cam>
+			<name>Deutschlandwetter</name>
+			<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/Wetter.jpg</url>	
+		</cam>    
+		<cam>
+			<name>Satellitenbild Wolken Deutschland</name>
+			<url>http://www.dwd.de/scripts/getimg.php?src=/hobbymet/mvvs1200.jpg</url>	
+		</cam>    
+		<cam>
+			<name>Satellitenbild Wolken Welt</name>
+			<url>http://www.dwd.de/scripts/getimg.php?src=/hobbymet/wvds1200.jpg</url>	
+		</cam>    
+		<cam>
+			<name>Wasser Temperaturen</name>
+			<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/00-awg_sst.png</url>	
+		</cam>
+	</menu>
+</xml>

@@ -1,0 +1,5 @@
+installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebcamViewer
+
+install_PYTHON = __init__.py plugin.py PictureScreen.py WebcamViewConfig.py
+
+install_DATA = webcam.xml
