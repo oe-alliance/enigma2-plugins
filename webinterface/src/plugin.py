@@ -16,6 +16,9 @@ from zope.interface import Interface, implements
 from WebIfConfig import WebIfConfigScreen
 
 from WebChilds.Toplevel import Toplevel
+
+from Tools.BoundFunction import boundFunction
+
 config.plugins.Webinterface = ConfigSubsection()
 config.plugins.Webinterface.enable = ConfigYesNo(default = True)
 config.plugins.Webinterface.port = ConfigInteger(80,limits = (1, 65536))
@@ -38,24 +41,50 @@ config.plugins.Webinterface.version = ConfigText(__version__) # used to make the
 
 DEBUGFILE= "/tmp/twisted.log"
 
-global running_defered
+global running_defered,waiting_shutdown
 running_defered = []
+waiting_shutdown = 0
 
-def stopWebserver(session):
-	global running_defered
-	for d in running_defered:
-		print "STOPPING reactor on interface ",d.interface," with port",d.port
-		d.stopListening()
-	running_defered = []
+class Closer:
+	counter = 0
+	def __init__(self,session, callback):
+		self.callback = callback
+		self.session = session
+		
+	def stop(self):
+		global running_defered
+		for d in running_defered:
+			print "[WebIf] STOPPING reactor on interface ",d.interface," with port",d.port
+			x = d.stopListening()
+			try:
+				x.addCallback(self.isDown)
+				self.counter +=1
+			except AttributeError:
+				pass
+		running_defered = []
+		if self.counter <1:
+			self.callback(self.session)
+		
+	def isDown(self,s):
+		self.counter-=1
+		if self.counter <1:
+			self.callback(self.session)
+			
+		
+def restartWebserver(session):
 	try:
 		del session.mediaplayer
 		del session.messageboxanswer
 	except NameError:
 		pass
-	
-def restartWebserver(session):
-	stopWebserver(session)
-	startWebserver(session)
+	except AttributeError:
+		pass
+
+	global running_defered
+	if len(running_defered) >0:
+		Closer(session,startWebserver).stop()
+	else:
+		startWebserver(session)
 
 def startWebserver(session):
 	global running_defered
