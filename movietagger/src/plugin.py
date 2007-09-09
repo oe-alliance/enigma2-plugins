@@ -13,7 +13,7 @@ from Components.ActionMap import ActionMap
 from Components.GUIComponent import GUIComponent
 from Components.HTMLComponent import HTMLComponent
 from Components.MultiContent import MultiContentEntryText
-from enigma import eListboxPythonMultiContent, eListbox, eServiceCenter, gFont, iServiceInformation, eServiceReference
+from enigma import eServiceReference, eListboxPythonMultiContent, eListbox, eServiceCenter, gFont, iServiceInformation, eServiceReference
 
 from Tools.Directories import *
 
@@ -287,7 +287,6 @@ def main(session, service, **kwargs):
 	try:
 		session.open(MovieTagger, service)
 	except Exception,e:
-		print "dont send this chrashlog to DMM, if you see this text in a chrashlog :-)"
 		raise e
 	
 def Plugins(path,**kwargs):
