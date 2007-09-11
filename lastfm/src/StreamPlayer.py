@@ -38,15 +38,19 @@ class StreamPlayer:
             self.trackstarttime = time()
 
     def getRemaining(self):
-        remaining = int((self.playlist.getTrack(self.currentplaylistitemnumber)["duration"]/1000) - (time() - self.trackstarttime))
-        minutes = int(remaining/60)
-        seconds = int(remaining-(minutes*60))
-        def shiftchars(integer,char):
-            if integer in range(0,10):
-                return char+str(integer)
-            else:
-                return str(integer)
-        return "-%s:%s"%(shiftchars(minutes," "), shiftchars(seconds,"0"))
+        track = self.playlist.getTrack(self.currentplaylistitemnumber)
+        if track is False:
+            return "N/A"
+        else:
+            remaining = int((track["duration"]/1000) - (time() - self.trackstarttime))
+            minutes = int(remaining/60)
+            seconds = int(remaining-(minutes*60))
+            def shiftchars(integer,char):
+                if integer in range(0,10):
+                    return char+str(integer)
+                else:
+                    return str(integer)
+            return "-%s:%s"%(shiftchars(minutes," "), shiftchars(seconds,"0"))
     
     def play(self,tracknumber=False):
         self.session.nav.stopService()
@@ -57,8 +61,9 @@ class StreamPlayer:
             self.currentplaylistitemnumber = tracknumber
         
         track = self.playlist.getTrack(self.currentplaylistitemnumber)
-        
-        if track['location'] != "no location":
+        if track is False:
+            print "no track to play"
+        elif track['location'] != "no location":
             print "playing item "+str(self.currentplaylistitemnumber) +"/"+str(self.playlist.length)+" with url ",track['location']
             self.session.nav.stopService()
             self.targetfile = "/tmp/lastfm.mp3"

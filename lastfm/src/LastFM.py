@@ -427,7 +427,10 @@ class LastFMPlaylist:
         return self.tracks
 
     def getTrack(self,tracknumber):
-        return self.tracks[tracknumber]
+        try:
+            return self.tracks[tracknumber]
+        except IndexError:
+            return False
     
     def parseTracks(self):
         try:
