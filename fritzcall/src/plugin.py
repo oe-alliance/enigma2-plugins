@@ -333,7 +333,7 @@ class FritzProtocol(LineReceiver):
 		found = re.match('.*<td.*?class="cel-data border.*?>(.*?)</td>', html, re.S)
 		if found:									
 			td = found.group(1)					# group(1) is the content of (.*?) in our pattern
-			td.decode("ISO-88-59-1").encode("UTF-8")
+			td.decode("ISO-8859-1").encode("UTF-8")
 			text = re.sub("<.*?>", "", td)		# remove tags and their content
 			text = text.split("\n")
 
