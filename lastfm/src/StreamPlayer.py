@@ -14,7 +14,7 @@ class StreamPlayer:
     trackstarttime = 0
     currentplaylistitemnumber = 0
     playlist = None
-    
+    targetfile = ""
     def __init__(self,session, args = 0):
         self.session = session
         self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
