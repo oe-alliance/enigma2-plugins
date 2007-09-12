@@ -6,5 +6,6 @@ Section: extra
 Priority: optional
 Maintainer: 3c5x9 <3c5x9@gmx.net>
 Homepage: n/a
-Depends: enigma2(>1.0cvs20070908), twisted-web
+Depends: enigma2(>1.0cvs20070908)
+Rdepends: twisted-web
 Source: http://schwerkraft.elitedvb.net/scm/?group_id=11
