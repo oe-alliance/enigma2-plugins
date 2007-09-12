@@ -63,17 +63,26 @@ class RSSSetup(ConfigListScreen, Screen):
 
 		self.rssPoller = rssPoller
 
-		# nun erzeugen wir eine liste von elementen fuer die menu liste.
+		# Create List of all Feeds
 		self.list = [
 			getConfigListEntry(_("Feed: "), config.plugins.simpleRSS.feed[i].uri)
 				for i in range(0, config.plugins.simpleRSS.feedcount.value)
 		]
+
+		# Attach notifier to autostart and append ConfigListEntry to List
+		config.plugins.simpleRSS.autostart.addNotifier(self.autostartChanged, initial_call = False)
 		self.list.append(getConfigListEntry(_("Start automatically with Enigma2: "), config.plugins.simpleRSS.autostart))
-		self.list.append(getConfigListEntry(_("Keep running in background: "), config.plugins.simpleRSS.keep_running))
+
+		# Save keep_running in instance as we want to dynamically add/remove it
+		self.keep_running = getConfigListEntry(_("Keep running in background: "), config.plugins.simpleRSS.keep_running)
+		if not config.plugins.simpleRSS.autostart.value:
+			self.list.append(self.keep_running)
+
+		# Append Last two config Elements
 		self.list.append(getConfigListEntry(_("Show new Messages: "), config.plugins.simpleRSS.show_new))
 		self.list.append(getConfigListEntry(_("Update Interval (min): "), config.plugins.simpleRSS.interval))
 
-		# die liste selbst
+		# Initialize ConfigListScreen
 		ConfigListScreen.__init__(self, self.list, session)
 
 		self["key_red"] = Button(_("Cancel"))
@@ -89,7 +98,18 @@ class RSSSetup(ConfigListScreen, Screen):
 			"cancel": self.keyCancel,
 			"ok": self.ok
 		}, -1)
-	
+
+	def autostartChanged(self, instance):
+		# Remove keep_running from list if autostart is active
+		if instance.value:
+			self.list.remove(self.keep_running)
+		# Otherwise add it at third position from behind
+		else:
+			self.list.insert(-2, self.keep_running)
+
+		# Assign new List to ConfigList
+		self["config"].setList(self.list)
+
 	def delete(self):
 		self.session.openWithCallback(self.deleteConfirm, MessageBox, "Really delete this entry?\nIt cannot be recovered!")
 
@@ -127,12 +147,17 @@ class RSSSetup(ConfigListScreen, Screen):
 			config.plugins.simpleRSS.feedcount.value = id+1
 
 	def keySave(self):
+		# Tell Poller to recreate List if present
 		if self.rssPoller is not None:
 			self.rssPoller.triggerReload()
 		ConfigListScreen.keySave(self)
 
 	def abort(self):
 		print "[SimpleRSS] Closing Setup Dialog"
+
+		# Remove Notifier
+		config.plugins.simpleRSS.autostart.notifiers.remove(self.autostartChanged)
+
 		# Keep feedcount sane
 		config.plugins.simpleRSS.feedcount.value = len(config.plugins.simpleRSS.feed)
 		config.plugins.simpleRSS.feedcount.save()
