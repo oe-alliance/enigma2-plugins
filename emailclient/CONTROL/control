@@ -1,0 +1,11 @@
+Package: enigma2-plugin-extensions-emailclient
+Version: 0.1
+Description: a imap4 client to access imap accounts and read emails 
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: 3c5x9 <3c5x9@gmx.net>
+Homepage: n/a
+Depends: enigma2
+Rdepends: twisted-web, twisted-mail, python-email 
+Source: http://schwerkraft.elitedvb.net/scm/?group_id=11
