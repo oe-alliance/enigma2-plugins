@@ -65,4 +65,7 @@ trafficinfo/src/Makefile
 
 webcamviewer/Makefile
 webcamviewer/src/Makefile
+
+emailclient/Makefile
+emailclient/src/Makefile
 ])
