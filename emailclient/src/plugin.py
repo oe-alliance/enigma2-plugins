@@ -48,7 +48,7 @@ class EmailScreen(Screen,EmailHandler):
         </screen>"""
          
     currentmailbox = None
-    
+    proto = None
     def __init__(self, session, args = 0):
         EmailHandler.__init__(self)
         self.session = session
@@ -204,10 +204,14 @@ class EmailScreen(Screen,EmailHandler):
         
 
     def action_exit(self):
-        self.proto.logout(
-        ).addCallback(self.onLogedOut, self.proto
-        ).addErrback(self.onLogedOut, self.proto
-        )
+        if self.proto is not None:
+            self.proto.logout(
+                            ).addCallback(self.onLogedOut, self.proto
+                            ).addErrback(self.onLogedOut, self.proto
+                            )
+        else:
+            self.close()
+    
     def onLogedOut(self,result,proto):
         print "onLogedOut",result
         self.close()
@@ -215,10 +219,7 @@ class EmailScreen(Screen,EmailHandler):
             
     def onConnect(self,proto):
         self["infolabel"].setText("connected")
-        proto.authenticate(config.plugins.emailimap.password.value
-        ).addCallback(self.onAuthentication, proto
-        ).addErrback(self.onAuthenticationFailed, proto
-        )
+        self.doLogin(proto)
         
     def onConnectFailed(self,reason):
         self["infolabel"].setText(reason.getErrorMessage())
@@ -230,8 +231,29 @@ class EmailScreen(Screen,EmailHandler):
         ).addCallback(self.onMailboxList, proto
         )
         
+    def doLogin(self,proto):
+        print "login secure"
+        proto.authenticate(config.plugins.emailimap.password.value
+                           ).addCallback(self.onAuthentication, proto
+                           ).addErrback(self.onAuthenticationFailed, proto
+                           )
+
     def onAuthenticationFailed(self,failure, proto):
+        # If it failed because no SASL mechanisms match
         print "onAuthenticationFailed",failure, proto
+        self["infolabel"].setText(failure.getErrorMessage())
+        failure.trap(imap4.NoSupportedAuthentication)
+        self.doLoginInsecure(proto)
+    
+    def doLoginInsecure(self,proto):
+        print "login INSECURE"
+        proto.login(config.plugins.emailimap.username.value, config.plugins.emailimap.password.value
+                ).addCallback(self.onAuthentication, proto
+                ).addErrback(self.onInsecureAuthenticationFailed, proto
+                )
+    
+    def onInsecureAuthenticationFailed(self,failure,proto):
+        print "onInsecureAuthenticationFailed",failure, proto
         self["infolabel"].setText(failure.getErrorMessage())
         
     def onMailboxList(self,result,proto):
