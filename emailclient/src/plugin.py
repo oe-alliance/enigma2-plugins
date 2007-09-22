@@ -512,7 +512,8 @@ def Plugins(path, **kwargs):
     return [
              PluginDescriptor(name="Email Client", description="view Emails via IMAP4", 
              where = PluginDescriptor.WHERE_PLUGINMENU, 
-             fnc = main
+             fnc = main,
+             icon="plugin.png"
              ), 
              #PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = startScrobbler)
         ]

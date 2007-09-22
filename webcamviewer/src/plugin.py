@@ -72,14 +72,16 @@ def Plugins(path,**kwargs):
                               name="PictureViewer", 
                               description="browse your local pictures", 
                               where = PluginDescriptor.WHERE_PLUGINMENU,
-                              fnc = main1
+                              fnc = main1,
+                              icon="pictureviewer.png"
                               )
         ,
             PluginDescriptor(
                              name="WebcamViewer", 
                              description="view webcams around the world", 
                              where = PluginDescriptor.WHERE_PLUGINMENU,
-                             fnc = main2
+                             fnc = main2,
+                             icon="webcamviewer.png"
                              )
          ]
     return p 

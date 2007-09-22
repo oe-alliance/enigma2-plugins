@@ -222,5 +222,5 @@ class AntiScrollConfig:
 def main(session, **kwargs):
   session.open(AntiScrollMain)
 def Plugins(**kwargs):
-  return [PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main),
+  return [PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main, icon="plugin.png"),
           PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_EXTENSIONSMENU,fnc = main)]
