@@ -6,13 +6,17 @@ from twisted.internet import stdio
 from twisted.mail import imap4
 from twisted.protocols import basic
 
+#from twisted.python import log
+#log.startLogging(open("/tmp/twisted.log","w"))
+
 class SimpleIMAP4Client(imap4.IMAP4Client):
     greetDeferred = None
-    def __init__(self,e2session, contextFactory = None):
+    def __init__(self,e2session, contextFac = None):
         self.e2session = e2session
-        imap4.IMAP4Client.__init__(self,contextFactory = contextFactory)
+        imap4.IMAP4Client.__init__(self,contextFactory = contextFac)
         
     def serverGreeting(self, caps):
+        print "serverGreeting",caps
         self.serverCapabilities = caps
         if self.greetDeferred is not None:
             d, self.greetDeferred = self.greetDeferred, None
@@ -22,14 +26,15 @@ class SimpleIMAP4ClientFactory(protocol.ClientFactory):
     
     protocol = SimpleIMAP4Client
 
-    def __init__(self, e2session, username, onConn):
-        self.ctx = ssl.ClientContextFactory()
+    def __init__(self, e2session, username, onConn,factory):
+        self.ctx = factory
         self.e2session = e2session
         self.username = username
         self.onConn = onConn
 
     def buildProtocol(self, addr):
-        p = self.protocol(self.e2session,self.ctx)
+        print "building protocol",addr
+        p = self.protocol(self.e2session,contextFac = self.ctx)
         p.factory = self
         p.greetDeferred = self.onConn
         auth = imap4.CramMD5ClientAuthenticator(self.username)
@@ -47,6 +52,11 @@ def createFactory( e2session,username,hostname, port):
         ).addErrback(e2session.onConnectFailed
         )
 
-    factory = SimpleIMAP4ClientFactory(e2session,username, onConn)
-    reactor.connectTCP(hostname, port, factory)
-    
+    f2 = ssl.ClientContextFactory()
+    factory = SimpleIMAP4ClientFactory(e2session,username, onConn,f2)
+    if port == 993:
+        reactor.connectSSL( hostname, port,factory,f2)
+    else:
+        reactor.connectTCP( hostname, port,factory)
+
+    print "factory started"

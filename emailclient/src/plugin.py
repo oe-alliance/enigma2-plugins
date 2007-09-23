@@ -200,8 +200,18 @@ class EmailScreen(Screen, EmailHandler):
             
     def onConnect(self, proto):
         self["infolabel"].setText("connected")
+        proto.getCapabilities(
+                        ).addCallback(self.cbCapabilities, proto
+                        ).addErrback(self.ebCapabilities, proto
+                        )
+
+    def cbCapabilities(self,reason,proto):
+        print "cbCapabilities",reason
+        
         self.doLogin(proto)
-        #self.doLoginInsecure(proto)
+
+    def ebCapabilities(reason,proto):
+        print "ebCapabilities",reason
         
     def onConnectFailed(self, reason):
         self["infolabel"].setText(reason.getErrorMessage())
@@ -215,10 +225,16 @@ class EmailScreen(Screen, EmailHandler):
         
     def doLogin(self, proto):
         print "login secure"
-        proto.authenticate(config.plugins.emailimap.password.value
-                           ).addCallback(self.onAuthentication, proto
-                           ).addErrback(self.onAuthenticationFailed, proto
-                           )
+        useTLS = False #True
+        if useTLS:
+            context = proto.context.getContext()
+            d = proto.startTLS(context)
+            d = d.addCallback(proto.authenticate, config.plugins.emailimap.password.value)
+        else:
+            d = proto.authenticate(config.plugins.emailimap.password.value)
+        d.addCallback(self.onAuthentication, proto)
+        d.addErrback(self.onAuthenticationFailed, proto)
+        return d
 
     def onAuthenticationFailed(self, failure, proto):
         # If it failed because no SASL mechanisms match
