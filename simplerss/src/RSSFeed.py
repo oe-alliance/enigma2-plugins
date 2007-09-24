@@ -1,18 +1,16 @@
 from sets import Set
+from TagStrip import strip, strip_readable
 
 class BaseFeed:
 	"""Base-class for all Feeds. Initializes needed Elements."""
 	MAX_HISTORY_ELEMENTS = 100
 
-	def __init__(self, uri, autoupdate, stripper):
+	def __init__(self, uri, autoupdate):
 		# Set URI (used as Identifier)
 		self.uri = uri
 
 		# Set Autoupdate
 		self.autoupdate = autoupdate
-
-		# Set Stripper
-		self.stripper = stripper
 
 		# Initialize
 		self.title = uri.encode("UTF-8")
@@ -42,7 +40,7 @@ class AtomFeed(BaseFeed):
 			
 			# Try to read title, continue if none found
 			try:
-				title = self.stripper.strip(item.getElementsByTagName("title")[0].childNodes[0].data)
+				title = strip(item.getElementsByTagName("title")[0].childNodes[0].data)
 			except:
 				continue
 
@@ -58,17 +56,16 @@ class AtomFeed(BaseFeed):
 			for current in item.getElementsByTagName("link"):
 				# Enclosure
 				if current.getAttribute("rel") == "enclosure":
-					enclosure.append((
-							current.getAttribute("href").encode("UTF-8"),
-							current.getAttribute("type").encode("UTF-8")
-					))
+					href = current.getAttribute("href").encode("UTF-8")
+					type = current.getAttribute("type").encode("UTF-8")
+					enclosure.append((href, type))
 				# No Enclosure, assume its a link to the item
 				else:
 					link = current.getAttribute("href")
 			
 			# Try to read summary, empty if none
 			try:
-				summary = self.stripper.strip_readable(item.getElementsByTagName("summary")[0].childNodes[0].data)
+				summary = strip_readable(item.getElementsByTagName("summary")[0].childNodes[0].data)
 			except:
 				summary = ""
 
@@ -107,7 +104,7 @@ class RSSFeed(BaseFeed):
 
 			# Try to read title, continue if none found
 			try:
-				title = self.stripper.strip(item.getElementsByTagName("title")[0].childNodes[0].data)
+				title = strip(item.getElementsByTagName("title")[0].childNodes[0].data)
 			except:
 				continue
 
@@ -129,16 +126,15 @@ class RSSFeed(BaseFeed):
 
 			# Try to read summary (description element), empty if none
 			try:
-				summary = self.stripper.strip_readable(item.getElementsByTagName("description")[0].childNodes[0].data)
+				summary = strip_readable(item.getElementsByTagName("description")[0].childNodes[0].data)
 			except:
 				summary = ""
 
 			# Read out enclosures
 			for current in item.getElementsByTagName("enclosure"):
-				enclosure.append((
-						current.getAttribute("url").encode("UTF-8"),
-						current.getAttribute("type").encode("UTF-8")
-				))
+				href = current.getAttribute("url").encode("UTF-8")
+				type = current.getAttribute("type").encode("UTF-8")
+				enclosure.append((href, type))
 
 			# Update Lists
 			new_items.append((
@@ -158,8 +154,8 @@ class RSSFeed(BaseFeed):
 
 class UniversalFeed(BaseFeed, RSSFeed, AtomFeed):
 	"""Universal Feed which on first run determines its type and calls the correct parsing-functions"""
-	def __init__(self, uri, autoupdate, stripper):
-		BaseFeed.__init__(self, uri, autoupdate, stripper)
+	def __init__(self, uri, autoupdate):
+		BaseFeed.__init__(self, uri, autoupdate)
 		self.type = None
 
 	def gotDom(self, dom):
@@ -190,8 +186,8 @@ class UniversalFeed(BaseFeed, RSSFeed, AtomFeed):
 					pass
 			else:
 				raise NotImplementedError, 'Unsupported Feed: %s' % dom.documentElement.localName
-			self.title = self.stripper.strip(self.title).encode("UTF-8")
-			self.description = self.stripper.strip_readable(self.description).encode("UTF-8")
+			self.title = strip(self.title).encode("UTF-8")
+			self.description = strip_readable(self.description).encode("UTF-8")
 		if self.type == "rss":
 			print "[SimpleRSS] type is rss"
 			return RSSFeed.gotDom(self, dom)

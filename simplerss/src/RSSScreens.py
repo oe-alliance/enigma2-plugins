@@ -69,10 +69,18 @@ class PictureView(Screen):
 class RSSBaseView(Screen):
 	"""Base Screen for all Screens used in SimpleRSS"""
 
-	def __init__(self, session):
+	def __init__(self, session, poller):
 		Screen.__init__(self, session)
+		self.rssPoller = poller
+		self.pollDialog = None
 
 	def errorPolling(self, errmsg = ""):
+		# Hide Dialog if shown
+		if self.pollDialog:
+			self.pollDialog.close()
+			self.pollDialog = None
+
+		# TODO: fix error not showing when dialog was just hid (work around by using a timer?)
 		self.session.open(
 			MessageBox,
 			"Error while parsing Feed, this usually means there is something wrong with it.",
@@ -85,8 +93,12 @@ class RSSBaseView(Screen):
 		# If an empty errorback is wanted the Screen needs to provide it
 		if errback is None:
 			errback = self.errorPolling
+
+		# Tell Poller to poll
 		self.rssPoller.singlePoll(feedid, callback=True, errorback=errback)
-		self.session.open(
+
+		# Open Dialog and save locally
+		self.pollDialog = self.session.open(
 			MessageBox,
 			"Update is being done in Background.\nContents will automatically be updated when it's done.",
 			type = MessageBox.TYPE_INFO,
@@ -141,7 +153,7 @@ class RSSEntryView(RSSBaseView):
 		</screen>"""
 
 	def __init__(self, session, data, feedTitle="", cur_idx=None, entries=None, nextEntryCB=None, previousEntryCB=None, nextFeedCB=None, previousFeedCB=None):
-		RSSBaseView.__init__(self, session)
+		RSSBaseView.__init__(self, session, None)
 
 		self.data = data
 		self.feedTitle = feedTitle
@@ -250,7 +262,7 @@ class RSSFeedView(RSSBaseView):
 		</screen>"""
 
 	def __init__(self, session, data, feedTitle = "", newItems=False, nextFeedCB=None, previousFeedCB=None, rssPoller=None, id = None):
-		RSSBaseView.__init__(self, session)
+		RSSBaseView.__init__(self, session, rssPoller)
 
 		self.data = data
 		self.feedTitle = feedTitle
@@ -258,7 +270,6 @@ class RSSFeedView(RSSBaseView):
 		self.id = id
 		self.nextFeedCB=nextFeedCB
 		self.previousFeedCB=previousFeedCB
-		self.rssPoller=rssPoller
 
 		self["content"] = RSSList(data)
 		self["summary"] = Label()
@@ -425,10 +436,8 @@ class RSSOverview(RSSBaseView):
 		</screen>"""
 
 	def __init__(self, session, poller):
-		RSSBaseView.__init__(self, session)
+		RSSBaseView.__init__(self, session, poller)
 
-		self.rssPoller = poller
-		
 		self["actions"] = ActionMap([ "OkCancelActions", "MenuActions", "ColorActions" ], 
 		{
 			"ok": self.showCurrentEntry,

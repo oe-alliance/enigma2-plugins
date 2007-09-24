@@ -3,7 +3,6 @@ from Components.config import config
 from enigma import eTimer
 
 from RSSScreens import RSSFeedView
-from TagStrip import TagStrip
 from RSSFeed import UniversalFeed
 
 from twisted.web.client import getPage
@@ -17,9 +16,6 @@ class RSSPoller:
 		self.poll_timer.timeout.get().append(self.poll)
 		self.poll_timer.start(0, 1)
 
-		# Stripper
-		self.stripper = TagStrip()
-
 		# Functions to call when updates happened
 		self.update_callbacks = [ ]
 
@@ -31,8 +27,7 @@ class RSSPoller:
 		self.feeds = [
 			UniversalFeed(
 				config.plugins.simpleRSS.feed[i].uri.value,
-				config.plugins.simpleRSS.feed[i].autoupdate.value,
-				self.stripper
+				config.plugins.simpleRSS.feed[i].autoupdate.value
 			)
 				for i in range(0, config.plugins.simpleRSS.feedcount.value)
 		]
@@ -185,8 +180,7 @@ class RSSPoller:
 				newfeeds.append(
 					UniversalFeed(
 						config.plugins.simpleRSS.feed[i].uri.value,
-						config.plugins.simpleRSS.feed[i].autoupdate.value,
-						self.stripper
+						config.plugins.simpleRSS.feed[i].autoupdate.value
 				))
 			found = False
 
