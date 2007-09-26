@@ -51,10 +51,6 @@ class RSSPoller:
 			except:
 				pass
 
-	# Wrap boundFunction over real function
-	def _gotSinglePage(self, id, callback, errorback, data):
-		self._gotPage(data, id, callback, errorback)
-
 	def error(self, error = ""):
 		if not self.session:
 			print "[SimpleRSS] error polling"
@@ -117,8 +113,7 @@ class RSSPoller:
 		self.next_feed()
 
 	def singlePoll(self, id, callback = False, errorback = None):
-		from Tools.BoundFunction import boundFunction
-		getPage(self.feeds[id].uri).addCallback(callback=boundFunction(self._gotSinglePage, id, callback, errorback)).addErrback(errorback)
+		getPage(self.feeds[id].uri).addCallback(self._gotPage, id, callback, errorback).addErrback(errorback)
 
 	def poll(self):
 		# Reloading, reschedule
