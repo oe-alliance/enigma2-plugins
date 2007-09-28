@@ -432,7 +432,6 @@ class webifHandler(ContentHandler):
 				if scr is None:
 					print "[webif.py] Parent Screen not found!"
 					print wsource
-				print "___________________________%s" %path
 				path = path[1:]
 			
 			source = scr.get(path[0])
