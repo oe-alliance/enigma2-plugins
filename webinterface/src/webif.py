@@ -15,6 +15,8 @@ from Tools.Import import my_import
 
 from Screens.InfoBarGenerics import InfoBarServiceName, InfoBarEvent, InfoBarTuner
 
+from Components.Sources.Source import Source, ObsoleteSource
+
 from Components.Sources.Clock import Clock
 from Components.Sources.ServiceList import ServiceList
 
@@ -393,7 +395,7 @@ class ListFiller(Converter):
 	text = property(getText)
 
 class webifHandler(ContentHandler):
-	def __init__(self, session,request):
+	def __init__(self, session, request):
 		self.res = [ ]
 		self.mode = 0
 		self.screen = None
@@ -419,11 +421,38 @@ class webifHandler(ContentHandler):
 		if self.mode == 0:
 			self.res.append(tag)
 		elif self.mode == 1: # expect "<e2:element>"
+			scr = self.screen
+			
 			assert name == "e2:element", "found %s instead of e2:element" % name
-			source = attrs["source"]
-			self.source_id = str(attrs.get("id", source))
-			self.source = self.screen[source]
+			wsource = attrs["source"]
+			
+			path = wsource.split('.')
+			while len(path) > 1:
+				scr = self.screen.getRelatedScreen(path[0])
+				if scr is None:
+					print "[webif.py] Parent Screen not found!"
+					print wsource
+				print "___________________________%s" %path
+				path = path[1:]
+			
+			source = scr.get(path[0])
+
+			if isinstance(source, ObsoleteSource):
+				# however, if we found an "obsolete source", issue warning, and resolve the real source.
+				print "WARNING: WEBIF '%s' USES OBSOLETE SOURCE '%s', USE '%s' INSTEAD!" % (name, wsource, source.new_source)
+				print "OBSOLETE SOURCE WILL BE REMOVED %s, PLEASE UPDATE!" % (source.removal_date)
+				if source.description:
+					print source.description
+
+				wsource = source.new_source
+			else:
+				pass
+				# otherwise, use that source.
+						
+			self.source = source		
+			self.source_id = str(attrs.get("id", wsource))
 			self.is_streaming = "streaming" in attrs
+			
 		elif self.mode == 2: # expect "<e2:convert>"
 			if name[:3] == "e2:":
 				assert name == "e2:convert"

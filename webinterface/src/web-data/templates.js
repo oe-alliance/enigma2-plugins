@@ -512,7 +512,6 @@ var tplAboutTuner  = '<tr>\n';
 	tplAboutTuner += '<td class="aboutElementRight">%(type)</td>\n';
 	tplAboutTuner += '</tr>\n';
 
-
 var tplExtraHiddenFunctions  = '<ul style="list-style-type:disc">';
 	tplExtraHiddenFunctions += '<li><div onclick="restartTwisted()">Restart Twisted</div></li>';
 	tplExtraHiddenFunctions += '<li><div onclick="clearInterval(UpdateStreamReaderPollTimer);">Stop Time/Signal/Current-Channel -Updates</div></li>';
