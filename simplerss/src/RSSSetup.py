@@ -161,3 +161,19 @@ class RSSSetup(ConfigListScreen, Screen):
 		# Keep feedcount sane
 		config.plugins.simpleRSS.feedcount.value = len(config.plugins.simpleRSS.feed)
 		config.plugins.simpleRSS.feedcount.save()
+
+def addFeed(address, auto = False):
+	# Read out ID
+	id = len(config.plugins.simpleRSS.feed)
+
+	# Create new Item
+	config.plugins.simpleRSS.feed.append(ConfigSubsection())
+	config.plugins.simpleRSS.feed[id].uri = ConfigText(default="http://", fixed_size = False)
+	config.plugins.simpleRSS.feed[id].autoupdate = ConfigEnableDisable(default=True)
+
+	# Set values
+	config.plugins.simpleRSS.feed[id].uri = address
+	config.plugins.simpleRSS.feed[id].autoupdate = auto
+
+	# Save (needed?)
+	config.plugins.simpleRSS.feed.save()
