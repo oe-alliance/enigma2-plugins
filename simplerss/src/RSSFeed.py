@@ -159,7 +159,13 @@ class UniversalFeed(BaseFeed, RSSFeed, AtomFeed):
 		self.type = None
 
 	def gotDom(self, dom):
-		if self.type is None:
+		if self.type == "rss":
+			print "[SimpleRSS] type is rss"
+			return RSSFeed.gotDom(self, dom)
+		elif self.type == "atom":
+			print "[SimpleRSS] type is atom"
+			return AtomFeed.gotDom(self, dom)
+		elif self.type is None:
 			# RSS 2.0
 			if dom.documentElement.getAttribute("version") in ["2.0", "0.94", "0.93", "0.92", "0.91"]:
 				self.type = "rss"
@@ -185,12 +191,10 @@ class UniversalFeed(BaseFeed, RSSFeed, AtomFeed):
 				except:
 					pass
 			else:
+				self.type = "unknown"
 				raise NotImplementedError, 'Unsupported Feed: %s' % dom.documentElement.localName
 			self.title = strip(self.title).encode("UTF-8")
 			self.description = strip_readable(self.description).encode("UTF-8")
-		if self.type == "rss":
-			print "[SimpleRSS] type is rss"
-			return RSSFeed.gotDom(self, dom)
-		elif self.type == "atom":
-			print "[SimpleRSS] type is atom"
-			return AtomFeed.gotDom(self, dom)
+
+			# Re-run function to parse dom
+			self.gotDom(dom)
