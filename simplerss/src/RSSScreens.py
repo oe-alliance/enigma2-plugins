@@ -75,12 +75,7 @@ class RSSBaseView(Screen):
 		self.pollDialog = None
 
 	def errorPolling(self, errmsg = ""):
-		# Hide Dialog if shown
-		if self.pollDialog:
-			self.pollDialog.close()
-			self.pollDialog = None
-
-		# TODO: fix error not showing when dialog was just hid (work around by using a timer?)
+		# An error occured while polling
 		self.session.open(
 			MessageBox,
 			"Error while parsing Feed, this usually means there is something wrong with it.",
@@ -88,7 +83,16 @@ class RSSBaseView(Screen):
 			timeout = 3
 		)
 
+		# Don't show "we're updating"-dialog any longer
+		if self.pollDialog:
+			self.pollDialog.close()
+			self.pollDialog = None
+
 	def singleUpdate(self, feedid, errback = None):
+		# Don't do anything if we have no poller
+		if self.rssPoller is None:
+			return
+
 		# Default errorback to self.errorPolling
 		# If an empty errorback is wanted the Screen needs to provide it
 		if errback is None:
