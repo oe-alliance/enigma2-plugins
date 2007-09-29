@@ -255,10 +255,10 @@ class RSSEntryView(RSSBaseView):
 class RSSFeedView(RSSBaseView):
 	"""Shows a RSS-Feed"""
 	skin = """
-		<screen position="100,100" size="460,420" title="Simple RSS Reader" >
+		<screen position="100,100" size="460,415" title="Simple RSS Reader" >
 			<widget name="info" position="0,0" size="460,20" halign="right" font="Regular; 18" />
-			<widget name="content" position="0,20" size="460,324" scrollbarMode="showOnDemand" />
-			<widget name="summary" position="0,325" size="460,95" font="Regular;16" />
+			<widget name="content" position="0,20" size="460,300" scrollbarMode="showOnDemand" />
+			<widget name="summary" position="0,320" size="460,95" font="Regular;16" />
 		</screen>"""
 
 	def __init__(self, session, data, feedTitle = "", newItems=False, nextFeedCB=None, previousFeedCB=None, rssPoller=None, id = None):
@@ -429,10 +429,10 @@ class RSSFeedView(RSSBaseView):
 class RSSOverview(RSSBaseView):
 	"""Shows an Overview over all RSS-Feeds known to rssPoller"""
 	skin = """
-		<screen position="100,100" size="460,420" title="Simple RSS Reader" >
+		<screen position="100,100" size="460,415" title="Simple RSS Reader" >
 			<widget name="info" position="0,0" size="460,20" halign="right" font="Regular; 18" />
-			<widget name="content" position="0,20" size="460,304" scrollbarMode="showOnDemand" />
-			<widget name="summary" position="0,325" size="460,95" font="Regular;16" />
+			<widget name="content" position="0,20" size="460,300" scrollbarMode="showOnDemand" />
+			<widget name="summary" position="0,320" size="460,95" font="Regular;16" />
 		</screen>"""
 
 	def __init__(self, session, poller):
