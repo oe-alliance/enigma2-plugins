@@ -186,17 +186,21 @@ class VlcPlayer(Screen):
 		
 		self.url = "http://%s:%d/%s.ts" % (cfg.host.value, cfg.httpport.value, streamName)
 		self.filename = path
-		self.output = "#transcode{vcodec=%s,vb=%d,width=%s,height=%s,fps=%s,scale=%s,acodec=%s,ab=%d,channels=%d,samplerate=%s}:std{access=http,mux=ts,dst=/%s.ts}" % (
+		if config.plugins.vlcplayer.soverlay.value:
+			soverlay=",soverlay"
+		else:
+			soverlay=""
+		self.output = "#transcode{vcodec=%s,vb=%d,width=%s,height=%s,fps=%s,scale=1,acodec=%s,ab=%d,channels=%d,samplerate=%s%s}:std{access=http,mux=ts,dst=/%s.ts}" % (
 			config.plugins.vlcplayer.vcodec.value, 
 			config.plugins.vlcplayer.vb.value, 
 			config.plugins.vlcplayer.width.value, 
 			config.plugins.vlcplayer.height.value, 
 			config.plugins.vlcplayer.fps.value, 
-			config.plugins.vlcplayer.scale.value, 
 			config.plugins.vlcplayer.acodec.value, 
 			config.plugins.vlcplayer.ab.value, 
 			config.plugins.vlcplayer.channels.value,
 			config.plugins.vlcplayer.samplerate.value,
+			soverlay,
 			streamName
 		)
 		self.play()

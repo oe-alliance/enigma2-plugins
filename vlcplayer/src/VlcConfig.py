@@ -52,7 +52,7 @@ class VLCSettings(Screen, ConfigListScreen):
 		cfglist.append(getConfigListEntry(_("Video Width"), config.plugins.vlcplayer.width))
 		cfglist.append(getConfigListEntry(_("Video Height"), config.plugins.vlcplayer.height))
 		cfglist.append(getConfigListEntry(_("Frames per Second"), config.plugins.vlcplayer.fps))
-		cfglist.append(getConfigListEntry(_("Scale"), config.plugins.vlcplayer.scale))
+		cfglist.append(getConfigListEntry(_("Subtitle overlay"), config.plugins.vlcplayer.soverlay))
 		cfglist.append(getConfigListEntry(_("Audio Codec"), config.plugins.vlcplayer.acodec))
 		cfglist.append(getConfigListEntry(_("Audio Bitrate"), config.plugins.vlcplayer.ab))
 		cfglist.append(getConfigListEntry(_("Audio Samplerate"), config.plugins.vlcplayer.samplerate))
