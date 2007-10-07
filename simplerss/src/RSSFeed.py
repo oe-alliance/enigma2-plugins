@@ -214,4 +214,4 @@ class UniversalFeed(BaseFeed, RSSFeed, AtomFeed):
 			self.description = strip_readable(self.description).encode("UTF-8")
 
 			# Re-run function to parse dom
-			self.gotDom(dom)
+			return self.gotDom(dom)
