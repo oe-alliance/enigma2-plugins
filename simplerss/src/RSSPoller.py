@@ -107,7 +107,8 @@ class RSSPoller:
 		print "[SimpleRSS] feed parsed.."
 
 		# Append new items to locally bound ones
-		self.new_items.extend(new_items)
+		if new_items is not None:
+			self.new_items.extend(new_items)
 
 		# Start Timer so we can either fetch next feed or show new_items
 		self.next_feed()
