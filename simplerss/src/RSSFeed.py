@@ -1,5 +1,6 @@
 from sets import Set
 from TagStrip import strip, strip_readable
+from Components.Scanner import ScanFile
 
 class BaseFeed:
 	"""Base-class for all Feeds. Initializes needed Elements."""
@@ -58,7 +59,15 @@ class AtomFeed(BaseFeed):
 				if current.getAttribute("rel") == "enclosure":
 					href = current.getAttribute("href").encode("UTF-8")
 					type = current.getAttribute("type").encode("UTF-8")
-					enclosure.append((href, type))
+					if current.hasAttribute("length"):
+						size = int(current.getAttribute("length")) / 1048576
+					else:
+						size = None
+
+					# Workaround so PicturePlayer does not try to open these
+					if type in ["image/jpeg", "image/png", "image/gif", "image/bmp"]:
+						type = None
+					enclosure.append(ScanFile(href, mimetype = type, size = size, autodetect = False))
 				# No Enclosure, assume its a link to the item
 				else:
 					link = current.getAttribute("href")
@@ -134,7 +143,15 @@ class RSSFeed(BaseFeed):
 			for current in item.getElementsByTagName("enclosure"):
 				href = current.getAttribute("url").encode("UTF-8")
 				type = current.getAttribute("type").encode("UTF-8")
-				enclosure.append((href, type))
+				if current.hasAttribute("length"):
+					size = int(current.getAttribute("length")) / 1048576
+				else:
+					size = None
+
+				# Workaround so PicturePlayer does not try to open these
+				if type in ["image/jpeg", "image/png", "image/gif", "image/bmp"]:
+					type = None
+				enclosure.append(ScanFile(href, mimetype = type, size = size, autodetect = False))
 
 			# Update Lists
 			new_items.append((
