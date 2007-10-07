@@ -64,9 +64,6 @@ class AtomFeed(BaseFeed):
 					else:
 						size = None
 
-					# Workaround so PicturePlayer does not try to open these
-					if type in ["image/jpeg", "image/png", "image/gif", "image/bmp"]:
-						type = None
 					enclosure.append(ScanFile(href, mimetype = type, size = size, autodetect = False))
 				# No Enclosure, assume its a link to the item
 				else:
@@ -148,9 +145,6 @@ class RSSFeed(BaseFeed):
 				else:
 					size = None
 
-				# Workaround so PicturePlayer does not try to open these
-				if type in ["image/jpeg", "image/png", "image/gif", "image/bmp"]:
-					type = None
 				enclosure.append(ScanFile(href, mimetype = type, size = size, autodetect = False))
 
 			# Update Lists
