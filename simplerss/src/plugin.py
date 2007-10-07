@@ -1,7 +1,7 @@
 from Plugins.Plugin import PluginDescriptor
 
-from RSSSetup import RSSSetup
-from RSSScreens import RSSOverview, addFeed
+from RSSSetup import RSSSetup, addFeed
+from RSSScreens import RSSOverview
 from RSSPoller import RSSPoller
 
 from Components.config import config, ConfigSubsection, ConfigSubList, ConfigEnableDisable, ConfigInteger, ConfigText
