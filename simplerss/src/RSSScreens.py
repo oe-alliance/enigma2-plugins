@@ -3,6 +3,9 @@ from enigma import eTimer
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
+
+from Components.Scanner import openList
+
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
@@ -10,61 +13,6 @@ from Components.Pixmap import Pixmap
 
 from RSSList import RSSList
 from RSSSetup import RSSSetup
-
-class PictureView(Screen):
-	"""Downloads a Picture, shows it and delete the temporary file"""
-
-	skin = """
-		<screen position="100,100" size="460,400" title="Simple RSS Reader" >
-			<widget name="content" position="0,0" size="460,400" alphatest="on"/>
-		</screen>"""
-
-	filename = '/tmp/simplerss_enclosure'
-
-	def __init__(self, session, url):
-		Screen.__init__(self, session)
-
-		self.url = url
-
-		self["actions"] = ActionMap([ "OkCancelActions" ], 
-		{
-			"ok": self.close,
-			"cancel": self.close,
-		})
-
-		self["content"] = Pixmap()
-
-		self.onLayoutFinish.append(self.fetchFile)
-
-	def fetchFile(self):
-		# Fetch file
-		from twisted.web.client import downloadPage
-		downloadPage(self.url, self.filename).addCallback(self.gotFile).addErrback(self.error)
-
-	def gotFile(self, data = ""):
-		# Determine Aspect
-		from Components.AVSwitch import AVSwitch
-		aspect = AVSwitch().getAspectRatioSetting()/2
-
-		# Load Picture
-		from enigma import loadPic
-		ptr = loadPic(self.filename, 460, 400, aspect)
-
-		# Show Picture
-		self["content"].instance.setPixmap(ptr)
-
-		# Remove Temporary File
-		from os import unlink
-		unlink(self.filename)
-
-	def error(self):
-		self.session.open(
-			MessageBox,
-			"Error while loading Picture.",
-			type = MessageBox.TYPE_ERROR,
-			timeout = 3
-		)
-		self.close()
 
 class RSSBaseView(Screen):
 	"""Base Screen for all Screens used in SimpleRSS"""
@@ -114,39 +62,13 @@ class RSSBaseView(Screen):
 		if enclosures is None:
 			return
 
-		count = len(enclosures)
-		# Select stream in ChoiceBox if more than one present
-		if count > 1:
-			self.session.openWithCallback(
-				self.enclosureSelected,
-				ChoiceBox,
-				"Select enclosure to play",
-				[(x[0][x[0].rfind("/")+1:].replace('%20', ' ').replace('%5F', '_').replace('%2D', '-'), x) for x in enclosures]
+		if not openList(self.session, enclosures):
+			self.session.open(
+				MessageBox,
+				"Found no Enclosure we can display.",
+				type = MessageBox.TYPE_INFO, 
+				timeout = 5
 			)
-		# Play if one present
-		elif count:
-			self.enclosureSelected((None, enclosures[0]))
-
-	def enclosureSelected(self, enclosure):
-		if enclosure:
-			(url, type) = enclosure[1]
-
-			print "[SimpleRSS] Trying to play back enclosure: url=%s, type=%s" % (url, type)
-
-			if type in ["video/mpeg", "audio/mpeg"]:
-				from enigma import eServiceReference
-				from Screens.MediaPlayer import MediaPlayer
-
-				mp = self.session.open(MediaPlayer)
-				ref = eServiceReference(4097, 0, url)
-
-				mp.switchToPlayList()
-				mp.playlist.addFile(ref)
-				mp.playlist.updateList()
-
-				mp.playServiceRefEntry(ref)
-			elif type in ["image/jpeg", "image/png", "image/gif", "image/bmp"]:
-				self.session.open(PictureView, url)
 
 class RSSEntryView(RSSBaseView):
 	"""Shows a RSS Item"""
