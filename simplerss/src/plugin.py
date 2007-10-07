@@ -1,7 +1,7 @@
 from Plugins.Plugin import PluginDescriptor
 
 from RSSSetup import RSSSetup
-from RSSScreens import RSSOverview
+from RSSScreens import RSSOverview, addFeed
 from RSSPoller import RSSPoller
 
 from Components.config import config, ConfigSubsection, ConfigSubList, ConfigEnableDisable, ConfigInteger, ConfigText
@@ -60,7 +60,46 @@ def autostart(reason, **kwargs):
 			rssPoller.shutdown()
 			rssPoller = None
 
+# Filescan 
+def filescan_open(item, session, **kwargs):
+	# Add earch feed
+	for each in item:
+		addFeed(each)
+
+	from Screens.MessageBox import MessageBox
+
+	# Display Message
+	session.open(
+		MessageBox,
+		"Feed(s) were added to configuration.",
+		type = MessageBox.TYPE_INFO,
+		timeout = 5
+	)
+
+# Filescanner
+def filescan(**kwargs):
+	from Components.Scanner import Scanner, ScanPath
+
+	# Overwrite checkFile to detect remote files
+	class RemoteScanner(Scanner):
+		def checkFile(self, file):
+			return file.path.startswith("http://") or file.path.startswith("https://")
+
+	return [
+		RemoteScanner(
+			mimetypes = ["application/rss+xml", "application/atom+xml"],
+			paths_to_scan = 
+				[
+					ScanPath(path = "", with_subdirs = False),
+				],
+			name = "RSS-Reader",
+			description = "Subscribe Newsfeed...",
+			openfnc = filescan_open,
+		)
+	]
+
 def Plugins(**kwargs):
  	return [ PluginDescriptor(name="RSS Reader", description="A simple to use RSS reader", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
  		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
- 		PluginDescriptor(name="View RSS", description="Let's you view current RSS entries", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main) ]
+ 		PluginDescriptor(name="View RSS", description="Let's you view current RSS entries", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
+ 		PluginDescriptor(where = PluginDescriptor.WHERE_FILESCAN, fnc = filescan)]
