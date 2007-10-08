@@ -1,4 +1,5 @@
 from twisted.web2 import resource, stream, responsecode, http, http_headers
+from urllib import unquote_plus
 from os import path as os_path
 
 class FileStreamer(resource.Resource):
@@ -16,9 +17,11 @@ class FileStreamer(resource.Resource):
             return http.Response(responsecode.OK, stream="no file given with file=???")
         root = "/hdd/movie/"
         if parts.has_key("root"):
-            root = parts["root"].replace("%20"," ")
+            #root = parts["root"].replace("%20"," ")
+            root = unquote_plus(parts["root"])
         if parts.has_key("file"):
-            filename = parts["file"].replace("%20"," ")
+            #filename = parts["file"].replace("%20"," ")
+            filename = unquote_plus(parts["file"])
             path = root+filename
             if os_path.exists(path):
                 s = stream.FileStream(open(path,"r"))
