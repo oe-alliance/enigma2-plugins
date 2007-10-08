@@ -1,6 +1,4 @@
 from enigma import eServiceReference, iServiceInformation, eServiceCenter
-from Screens.MediaPlayer import MediaPlayer
-from Components.MediaPlayer import PlayList
 from Components.Sources.Source import Source
 from ServiceReference import ServiceReference
 from Components.FileList import FileList
@@ -19,8 +17,7 @@ class MP( Source):
         error = "unknown command (%s)" % func
         self.result = [[error,error,error]]
     
-    def handleCommand(self,cmd):
-        
+    def handleCommand(self,cmd):       
         self.cmd = cmd
         if self.func is self.LIST:
             self.result = self.getFileList(cmd)
@@ -30,6 +27,26 @@ class MP( Source):
             self.result = self.command(cmd)
         elif self.func is self.WRITEPLAYLIST:
             self.result = self.writePlaylist(cmd)
+
+    def tryOpenMP(self):
+        # See is the Link is still active
+        if self.session.mediaplayer is not None:
+            try:
+                test = len(self.session.mediaplayer.playlist)
+                return True
+            except:
+                pass
+        
+        # Link inactive, instantiate new MP
+        try:
+            from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer, MyPlayList
+            self.session.mediaplayer = self.session.open(MediaPlayer)
+            self.session.mediaplayer.playlist = MyPlayList()
+            return True
+        
+        # No MP installed
+        except ImportError, ie:
+            return False
            
     def getFileList(self,param):
         print "getFileList:",param
@@ -37,16 +54,10 @@ class MP( Source):
         returnList = []
         
         if param["path"] == "playlist":
-            if self.session.mediaplayer is None:
-                self.session.mediaplayer = self.session.open(MediaPlayer)
-                self.session.mediaplayer.playlist = PlayList()
-                try:
-                    test = len(self.session.mediaplayer.playlist)
-                    #Just a test, wether the link is still active.
-                except:
-                    self.session.mediaplayer = self.session.open(MediaPlayer)
-                    #self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
-                    self.session.mediaplayer.playlist = PlayList()
+            # TODO: Fix dummy return if unable to load mp
+            if not self.tryOpenMP():
+                returnList.append(["empty","True","playlist"])
+                return returnList
             
             mp = self.session.mediaplayer
             if len(mp.playlist) != 0:
@@ -90,17 +101,9 @@ class MP( Source):
 
     def playFile(self,param):
         print "playFile: ",param
-        
-        if self.session.mediaplayer is None:
-            self.session.mediaplayer = self.session.open(MediaPlayer)
-            self.session.mediaplayer.playlist = PlayList()
-        try:
-            test = len(self.session.mediaplayer.playlist)
-            #Just a test, wether the link is still active.
-        except:
-            self.session.mediaplayer = self.session.open(MediaPlayer)
-            #self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
-            self.session.mediaplayer.playlist = PlayList()
+        # TODO: fix error handling
+        if not self.tryOpenMP():
+            return
 
         root = param["root"]
         file = param["file"]
@@ -137,16 +140,9 @@ class MP( Source):
         filename = "playlist/%s.e2pls" % param
         from Tools.Directories import resolveFilename, SCOPE_CONFIG
         
-        if self.session.mediaplayer is None:
-            self.session.mediaplayer = self.session.open(MediaPlayer)
-            self.session.mediaplayer.playlist = PlayList()
-        try:
-            test = len(self.session.mediaplayer.playlist)
-            #Just a test, wether the link is still active.
-        except:
-            self.session.mediaplayer = self.session.open(MediaPlayer)
-            #self.session.mediaplayer.filelist = FileList(root, matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)", useServiceRef = True)
-            self.session.mediaplayer.playlist = PlayList()
+        # TODO: fix error handling
+        if not self.tryOpenMP():
+            return
         
         mp = self.session.mediaplayer
         mp.playlistIOInternal.save(resolveFilename(SCOPE_CONFIG, filename))
@@ -155,11 +151,9 @@ class MP( Source):
         print "command: ",param
         param = int(param)
         
-        try:
-            test = len(self.session.mediaplayer.playlist)
-            #Just a test, wether the link is still active.
-        except:
-            self.session.mediaplayer = self.session.open(MediaPlayer)
+        # TODO: fix error handling
+        if not self.tryOpenMP():
+            return
         
         mp = self.session.mediaplayer
         
