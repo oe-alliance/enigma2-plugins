@@ -3,6 +3,7 @@ from Components.Sources.Source import Source
 from Components.config import config
 from ServiceReference import ServiceReference
 from Tools.Directories import resolveFilename, SCOPE_HDD
+from Tools.FuzzyDate import FuzzyTime
 
 from os import path as os_path, stat as os_stat, system as os_system
 
@@ -64,7 +65,16 @@ class Movie( Source):
             movie.append(serviceref.toString())
             movie.append(ServiceReference(serviceref).getServiceName())
             movie.append(info.getInfoString(serviceref, iServiceInformation.sDescription))
-            movie.append(info.getInfo(serviceref, iServiceInformation.sTimeCreate))
+            rtime = info.getInfo(serviceref, iServiceInformation.sTimeCreate)
+            movie.append(rtime)
+            
+            if rtime > 0:
+                t = FuzzyTime(rtime)
+                begin_string = t[0] + ", " + t[1]
+            else:
+                begin_string = "undefined"
+            movie.append(begin_string)
+            
             
             if config.plugins.Webinterface.loadmovielength.value:
                 len =  info.getLength(serviceref)
@@ -122,11 +132,12 @@ class Movie( Source):
            ,"Title": 1
            ,"Description": 2
            ,"Time": 3
-           ,"Length": 4
-           ,"ServiceName": 5
-           ,"Tags": 6
-           ,"DescriptionExtended": 7
-           ,"Filename": 8
-           ,"Filesize": 9
+           ,"TimeString": 4
+           ,"Length": 5
+           ,"ServiceName": 6
+           ,"Tags": 7
+           ,"DescriptionExtended": 8
+           ,"Filename": 9
+           ,"Filesize": 10
            }
 
