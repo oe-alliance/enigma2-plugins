@@ -23,8 +23,8 @@ class TrafficInfoMain(Screen):
     skin = """
         <screen position="110,83" size="530,430" title="Verkehrsinfo" >
                         
-            <widget name="sectionlist" position="0,0" size="530,130" scrollbarMode="showOnDemand" />            
-            <widget name="itemlist" position="0,130" size="530,130" scrollbarMode="showOnDemand" />            
+            <widget name="sectionlist" position="0,0" size="530,125" scrollbarMode="showOnDemand" />            
+            <widget name="itemlist" position="0,130" size="530,125" scrollbarMode="showOnDemand" />            
             <widget name="itemdetails" position="0,260" size="530,140" font="Regular;20" halign=\"center\" valign=\"center\"/>            
             <widget name="statuslabel" position="0,400" size="530,30" halign=\"left\"/>           
         </screen>
