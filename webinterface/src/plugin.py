@@ -88,49 +88,50 @@ def restartWebserver(session):
 
 def startWebserver(session):
 	global running_defered
+	try:
+		# variables, that are needed in the process
+		session.mediaplayer = None
+		session.messageboxanswer = None
+		
+		if config.plugins.Webinterface.enable.value is not True:
+			print "not starting Werbinterface"
+			return False
+		if config.plugins.Webinterface.debug.value:
+			print "start twisted logfile, writing to %s" % DEBUGFILE 
+			startLogging(open(DEBUGFILE,'w'))
 	
-	# variables, that are needed in the process
-	session.mediaplayer = None
-	session.messageboxanswer = None
-	
-	if config.plugins.Webinterface.enable.value is not True:
-		print "not starting Werbinterface"
-		return False
-	if config.plugins.Webinterface.debug.value:
-		print "start twisted logfile, writing to %s" % DEBUGFILE 
-		startLogging(open(DEBUGFILE,'w'))
-
-	toplevel = Toplevel(session)
-	if config.plugins.Webinterface.useauth.value is False:
-		site = server.Site(toplevel)
-	else:
-		portal = Portal(HTTPAuthRealm())
-		portal.registerChecker(PasswordDatabase())
-		root = ModifiedHTTPAuthResource(toplevel,(basic.BasicCredentialFactory('DM7025'),),portal, (IHTTPUser,))
-		site = server.Site(root)
-	
-	# here we start the Toplevel without any username or password
-	# this allows access to all request over the iface 127.0.0.1 without any auth
-	localsite = server.Site(toplevel)
-	d = reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(localsite),interface='127.0.0.1')
-	running_defered.append(d)
-	# and here we make the Toplevel public to our external ifaces
-	# it depends on the config, if this is with auth support
-	# keep in mind, if we have a second external ip (like a wlan device), we have to do it in the same way for this iface too
-	nw = Network()
-	for adaptername in nw.ifaces:
-		extip = nw.ifaces[adaptername]['ip']
-		if nw.ifaces[adaptername]['up'] is True:
-			extip = "%i.%i.%i.%i"%(extip[0],extip[1],extip[2],extip[3])
-			print "[WebIf] starting Webinterface on port %s on interface %s with address %s"%(str(config.plugins.Webinterface.port.value),adaptername,extip)
-			try:
-				d = reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site),interface=extip)
-				running_defered.append(d)
-			except Exception,e:
-				print "[WebIf] Error starting Webinterface on port %s on interface %s with address %s,because \n%s"%(str(config.plugins.Webinterface.port.value),adaptername,extip,e)
+		toplevel = Toplevel(session)
+		if config.plugins.Webinterface.useauth.value is False:
+			site = server.Site(toplevel)
 		else:
-			print "[WebIf] found configured interface %s, but it is not running. so not starting a server on it ..." % adaptername
-	
+			portal = Portal(HTTPAuthRealm())
+			portal.registerChecker(PasswordDatabase())
+			root = ModifiedHTTPAuthResource(toplevel,(basic.BasicCredentialFactory('DM7025'),),portal, (IHTTPUser,))
+			site = server.Site(root)
+		
+		# here we start the Toplevel without any username or password
+		# this allows access to all request over the iface 127.0.0.1 without any auth
+		localsite = server.Site(toplevel)
+		d = reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(localsite),interface='127.0.0.1')
+		running_defered.append(d)
+		# and here we make the Toplevel public to our external ifaces
+		# it depends on the config, if this is with auth support
+		# keep in mind, if we have a second external ip (like a wlan device), we have to do it in the same way for this iface too
+		nw = Network()
+		for adaptername in nw.ifaces:
+			extip = nw.ifaces[adaptername]['ip']
+			if nw.ifaces[adaptername]['up'] is True:
+				extip = "%i.%i.%i.%i"%(extip[0],extip[1],extip[2],extip[3])
+				print "[WebIf] starting Webinterface on port %s on interface %s with address %s"%(str(config.plugins.Webinterface.port.value),adaptername,extip)
+				try:
+					d = reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site),interface=extip)
+					running_defered.append(d)
+				except Exception,e:
+					print "[WebIf] Error starting Webinterface on port %s on interface %s with address %s,because \n%s"%(str(config.plugins.Webinterface.port.value),adaptername,extip,e)
+			else:
+				print "[WebIf] found configured interface %s, but it is not running. so not starting a server on it ..." % adaptername
+	except Exception,e:
+		print "\n\nSomething went wrong on starting the webif. May the following Line can help to find the error:\n",e,"\n\n"
 ####		
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
