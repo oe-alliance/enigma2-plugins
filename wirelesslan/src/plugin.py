@@ -180,7 +180,6 @@ class WlanScan(Screen):
 		self["canceltext"] = Label(_("Cancel"))
 		self["selecttext"] = Label(_("OK"))
 		self["rescantext"] = Label(_("Refresh"))
-		self["skiptext"] = Label(_("Skip"))
 			
 		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
 		{
