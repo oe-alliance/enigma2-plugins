@@ -57,7 +57,7 @@ class WebScreen(Screen):
 		self.stand_alone = True
 		self.request = request
 		self.instance = None
-		
+
 class DummyWebScreen(WebScreen):
 	#use it, if you dont need any source, just to can do a static file with an xml-file
 	def __init__(self, session,request):
