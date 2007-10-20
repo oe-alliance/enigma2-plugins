@@ -75,7 +75,7 @@ class RSSEntryView(RSSBaseView):
 	skin = """
 		<screen position="100,100" size="460,420" title="Simple RSS Reader" >
 			<widget name="info" position="0,0" size="460, 20" halign="right" font="Regular; 18" />
-			<widget name="content" position="0,20" size="460,420" font="Regular; 22" />
+			<widget name="content" position="0,20" size="460,400" font="Regular; 22" />
 		</screen>"""
 
 	def __init__(self, session, data, feedTitle="", cur_idx=None, entries=None, nextEntryCB=None, previousEntryCB=None, nextFeedCB=None, previousFeedCB=None):
