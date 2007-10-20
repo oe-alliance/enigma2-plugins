@@ -28,7 +28,7 @@ config.plugins.Webinterface.autowritetimer = ConfigYesNo(default = False)
 config.plugins.Webinterface.loadmovielength = ConfigYesNo(default = False)
 config.plugins.Webinterface.debug = ConfigYesNo(default = False) # False by default, not confgurable in GUI. Edit settingsfile directly if needed
 config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI. 
- 
+
 
 """
  set DEBUG to True, if twisted should write logoutput to a file.
@@ -37,7 +37,7 @@ config.plugins.Webinterface.version = ConfigText(__version__) # used to make the
  with this option enabled, twisted will print all TB to the logfile
  use tail -f <file> to view this log
 """
-			
+
 
 DEBUGFILE= "/tmp/twisted.log"
 

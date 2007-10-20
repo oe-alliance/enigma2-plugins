@@ -75,7 +75,7 @@ class UpdateWebScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner,WebScreen):
 		#Event_Now
 		#Event_Next
 		#FrontendStatus
-		
+
 class MessageWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
