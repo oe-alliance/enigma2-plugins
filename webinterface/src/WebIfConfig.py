@@ -5,7 +5,7 @@ from Components.config import config, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
-        
+
 class WebIfConfigScreen(ConfigListScreen,Screen):
     skin = """
         <screen position="100,100" size="550,400" title="Webinterface Setup" >
