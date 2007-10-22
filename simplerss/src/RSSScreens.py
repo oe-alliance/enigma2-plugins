@@ -11,7 +11,8 @@ from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.Pixmap import Pixmap
 
-from RSSList import RSSList
+from RSSFeed import BaseFeed
+from RSSList import RSSFeedList, RSSEntryList
 from RSSSetup import RSSSetup
 
 class RSSBaseView(Screen):
@@ -197,7 +198,7 @@ class RSSFeedView(RSSBaseView):
 		self.nextFeedCB=nextFeedCB
 		self.previousFeedCB=previousFeedCB
 
-		self["content"] = RSSList(data)
+		self["content"] = RSSEntryList(data)
 		self["summary"] = Label()
 		self["info"] = Label()
 
@@ -375,8 +376,8 @@ class RSSOverview(RSSBaseView):
 		self.fillFeeds()
 
 		# We always have at least "New Items"-Feed
-		self["content"] = RSSList(self.feeds)
-		self["summary"] = Label(self.feeds[0][2])
+		self["content"] = RSSFeedList(self.feeds)
+		self["summary"] = Label(' '.join([str(len(self.feeds[0][0].history)), "Entries"]))
 		self["info"] = Label("Feed 1/%s" % len(self.feeds))
 
 		self["content"].connectSelChanged(self.updateInfo)
@@ -390,21 +391,15 @@ class RSSOverview(RSSBaseView):
 		self.rssPoller.removeCallback(self.pollCallback)
 
 	def fillFeeds(self):
-		self.feeds = [(
-			"New Items",
-			"New Items since last Auto-Update",
-			' '.join([str(len(self.rssPoller.new_items)), "Entries"]),
-			self.rssPoller.new_items
-		)]
-		self.feeds.extend([
-			(
-				feed.title,
-				feed.description,
-				' '.join([str(len(feed.history)), "Entries"]),
-				feed.history
-			)
-				for feed in self.rssPoller.feeds
-		])
+		# Build virtual "new item"-Feed
+		newItemFeed = BaseFeed("", False)
+		newItemFeed.title = "New Items"
+		newItemFeed.description = "New Items since last Auto-Update"
+		newItemFeed.history = self.rssPoller.new_items
+
+		# Feedlist contains our virtual Feed and all real ones
+		self.feeds = [(newItemFeed,)]
+		self.feeds.extend([(feed,) for feed in self.rssPoller.feeds])
 
 	def pollCallback(self, id = None):
 		print "[SimpleRSS] SimpleRSS called back"
@@ -412,12 +407,6 @@ class RSSOverview(RSSBaseView):
 
 		if id is not None:
 			print "[SimpleRSS] pollCallback updating feed", id
-			self.feeds[id+1] = (
-				self.rssPoller.feeds[id].title,
-				self.rssPoller.feeds[id].description,
-				' '.join([str(len(self.rssPoller.feeds[id].history)), "Entries"]),
-				self.rssPoller.feeds[id].history
-			)
 		else:
 			print "[SimpleRSS] pollCallback updating all feeds"
 			self.fillFeeds()
@@ -430,7 +419,7 @@ class RSSOverview(RSSBaseView):
 	def updateInfo(self):
 		current_entry = self["content"].getCurrentEntry()
 		if current_entry:
-			self["summary"].setText(current_entry[2])
+			self["summary"].setText(' '.join([str(len(current_entry.history)), "Entries"]))
 			self["info"].setText("Feed %s/%s" % (self["content"].getCurrentIndex()+1, len(self.feeds)))
 		# Should never happen
 		else:
@@ -480,12 +469,12 @@ class RSSOverview(RSSBaseView):
 	def nextFeedCB(self):
 		self["content"].moveUp()
 		current_entry = self["content"].getCurrentEntry()
-		return (current_entry[0], current_entry[3], self["content"].getCurrentIndex())
+		return (current_entry.title, current_entry.history, self["content"].getCurrentIndex())
 
 	def previousFeedCB(self):
 		self["content"].moveDown()
 		current_entry = self["content"].getCurrentEntry()
-		return (current_entry[0], current_entry[3], self["content"].getCurrentIndex())
+		return (current_entry.title, current_entry.history, self["content"].getCurrentIndex())
 
 	def showCurrentEntry(self):
 		current_entry = self["content"].getCurrentEntry()
@@ -495,8 +484,8 @@ class RSSOverview(RSSBaseView):
 		self.session.openWithCallback(
 			self.refresh,
 			RSSFeedView,
-			current_entry[3],
-			feedTitle=current_entry[0],
+			current_entry.history,
+			feedTitle=current_entry.title,
 			nextFeedCB=self.nextFeedCB,
 			previousFeedCB=self.previousFeedCB,
 			rssPoller=self.rssPoller,
@@ -510,6 +499,6 @@ class RSSOverview(RSSBaseView):
 
 		# Build a list of all enclosures in this feed
 		enclosures = []
-		for entry in current_entry[3]:
+		for entry in current_entry.history:
 				enclosures.extend(entry[3])
 		RSSBaseView.selectEnclosure(self, enclosures)

@@ -140,7 +140,7 @@ class RSSPoller:
 		else:
 			# Id is 0 -> empty out new items
 			if self.current_feed == 0:
-				self.new_items = [ ]
+				del self.new_items[:]
 			# Feed supposed to autoupdate
 			feed = self.feeds[self.current_feed]
 			if feed.autoupdate:
