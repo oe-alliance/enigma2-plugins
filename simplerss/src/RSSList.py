@@ -55,6 +55,9 @@ class RSSBaseList(GUIComponent):
 	def moveUp(self):
 		self.instance.moveSelection(self.instance.moveUp)
 
+	def invalidate(self):
+		self.l.invalidate()
+
 class RSSFeedList(RSSBaseList):
 	def __init__(self, entries):
 		RSSBaseList.__init__(self, entries, 100)
@@ -66,7 +69,7 @@ class RSSFeedList(RSSBaseList):
 
 		idx = 0
 		for x in self.list:
-			if feed.title == x[0].title:
+			if feed.uri == x[0].uri:
 				self.instance.moveSelectionTo(idx)
 				break
 			idx += 1

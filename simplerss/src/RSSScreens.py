@@ -18,10 +18,11 @@ from RSSSetup import RSSSetup
 class RSSBaseView(Screen):
 	"""Base Screen for all Screens used in SimpleRSS"""
 
-	def __init__(self, session, poller):
+	def __init__(self, session, poller, parent=None):
 		Screen.__init__(self, session)
 		self.rssPoller = poller
 		self.pollDialog = None
+		self.parent = parent
 
 	def errorPolling(self, errmsg = ""):
 		# An error occured while polling
@@ -79,15 +80,11 @@ class RSSEntryView(RSSBaseView):
 			<widget name="content" position="0,20" size="460,400" font="Regular; 22" />
 		</screen>"""
 
-	def __init__(self, session, data, feedTitle="", cur_idx=None, entries=None, nextEntryCB=None, previousEntryCB=None, nextFeedCB=None, previousFeedCB=None):
-		RSSBaseView.__init__(self, session, None)
+	def __init__(self, session, data, feedTitle="", cur_idx=None, entries=None, parent=None):
+		RSSBaseView.__init__(self, session, None, parent)
 
 		self.data = data
 		self.feedTitle = feedTitle
-		self.nextEntryCB = nextEntryCB
-		self.previousEntryCB = previousEntryCB
-		self.nextFeedCB = nextFeedCB
-		self.previousFeedCB = previousFeedCB
 		self.cur_idx = cur_idx
 		self.entries = entries
 
@@ -126,19 +123,19 @@ class RSSEntryView(RSSBaseView):
 		self["content"].pageDown()
 
 	def next(self):
-		if self.nextEntryCB is not None:
-			(self.data, self.cur_idx, self.entries) = self.nextEntryCB()
+		if self.parent is not None:
+			(self.data, self.cur_idx, self.entries) = self.parent.nextEntry()
 			self.setContent()
 
 	def previous(self):
-		if self.previousEntryCB is not None:
-			(self.data, self.cur_idx, self.entries) = self.previousEntryCB()
+		if self.parent is not None:
+			(self.data, self.cur_idx, self.entries) = self.parent.previousEntry()
 			self.setContent()
 
 	def nextFeed(self):
 		# Show next Feed
-		if self.nextFeedCB is not None:
-			result = self.nextFeedCB()
+		if self.parent is not None:
+			result = self.parent.next()
 			self.feedTitle = result[0]
 			self.entries = len(result[1])
 			if self.entries:
@@ -152,8 +149,8 @@ class RSSEntryView(RSSBaseView):
 
 	def previousFeed(self):
 		# Show previous Feed
-		if self.previousFeedCB is not None:
-			result = self.previousFeedCB()
+		if self.parent is not None:
+			result = self.parent.previous()
 			self.feedTitle = result[0]
 			self.entries = len(result[1])
 			if self.entries:
@@ -188,17 +185,15 @@ class RSSFeedView(RSSBaseView):
 			<widget name="summary" position="0,320" size="460,95" font="Regular;16" />
 		</screen>"""
 
-	def __init__(self, session, data, feedTitle = "", newItems=False, nextFeedCB=None, previousFeedCB=None, rssPoller=None, id = None):
-		RSSBaseView.__init__(self, session, rssPoller)
+	def __init__(self, session, data, feedTitle = "", newItems=False, parent=None, rssPoller=None, id = None):
+		RSSBaseView.__init__(self, session, rssPoller, parent)
 
 		self.data = data
 		self.feedTitle = feedTitle
 		self.newItems = newItems
 		self.id = id
-		self.nextFeedCB=nextFeedCB
-		self.previousFeedCB=previousFeedCB
 
-		self["content"] = RSSEntryList(data)
+		self["content"] = RSSEntryList(self.data)
 		self["summary"] = Label()
 		self["info"] = Label()
 
@@ -212,7 +207,7 @@ class RSSFeedView(RSSBaseView):
 				"menu": self.menu,
 				"yellow": self.selectEnclosure,
 			})
-			self.onShown.append(self.__show)
+			self.onLayoutFinish.append(self.__show)
 			self.onClose.append(self.__close)
 
 			self.timer = None
@@ -287,19 +282,19 @@ class RSSFeedView(RSSBaseView):
 		if self.id > 0:
 			self.singleUpdate(self.id-1)
 
-	def nextEntryCB(self):
+	def nextEntry(self):
 		self["content"].moveDown()
 		return (self["content"].getCurrentEntry(), self["content"].getCurrentIndex(), len(self.data))
 
-	def previousEntryCB(self):
+	def previousEntry(self):
 		self["content"].moveUp()
 		return (self["content"].getCurrentEntry(), self["content"].getCurrentIndex(), len(self.data))
 
 	# TODO: Fix moving back to previously marked entry (same goes for self.previous)
 	def next(self):
 		# Show next Feed
-		if self.nextFeedCB is not None:
-			result = self.nextFeedCB()
+		if self.parent is not None:
+			result = self.parent.nextFeed()
 			(self.feedTitle, self.data, self.id) = result
 			#current_entry = self["content"].getCurrentEntry()
 			self["content"].l.setList(self.data) # Update list
@@ -312,8 +307,8 @@ class RSSFeedView(RSSBaseView):
 
 	def previous(self):
 		# Show previous Feed
-		if self.previousFeedCB is not None:
-			result = self.previousFeedCB()
+		if self.parent is not None:
+			result = self.parent.previousFeed()
 			(self.feedTitle, self.data, self.id) = result
 			#current_entry = self["content"].getCurrentEntry()
 			self["content"].l.setList(self.data) # Update list
@@ -340,10 +335,7 @@ class RSSFeedView(RSSBaseView):
 			cur_idx=self["content"].getCurrentIndex(),
 			entries=len(self.data),
 			feedTitle=self.feedTitle,
-			nextEntryCB=self.nextEntryCB,
-			previousEntryCB=self.previousEntryCB,
-			nextFeedCB=self.next,
-			previousFeedCB=self.previous
+			parent=self
 		)
 
 	def selectEnclosure(self):
@@ -381,7 +373,7 @@ class RSSOverview(RSSBaseView):
 		self["info"] = Label("Feed 1/%s" % len(self.feeds))
 
 		self["content"].connectSelChanged(self.updateInfo)
-		self.onShown.append(self.__show)
+		self.onLayoutFinish.append(self.__show)
 		self.onClose.append(self.__close)
 
 	def __show(self):
@@ -403,28 +395,13 @@ class RSSOverview(RSSBaseView):
 
 	def pollCallback(self, id = None):
 		print "[SimpleRSS] SimpleRSS called back"
-		current_entry = self["content"].getCurrentEntry()
-
-		if id is not None:
-			print "[SimpleRSS] pollCallback updating feed", id
-		else:
-			print "[SimpleRSS] pollCallback updating all feeds"
-			self.fillFeeds()
-
-		self["content"].l.setList(self.feeds)
-		self["content"].moveToEntry(current_entry)
-
 		self.updateInfo()
+		self["content"].invalidate()
 
 	def updateInfo(self):
 		current_entry = self["content"].getCurrentEntry()
-		if current_entry:
-			self["summary"].setText(' '.join([str(len(current_entry.history)), "Entries"]))
-			self["info"].setText("Feed %s/%s" % (self["content"].getCurrentIndex()+1, len(self.feeds)))
-		# Should never happen
-		else:
-			self["summary"].setText("")
-			self["info"].setText("")
+		self["summary"].setText(' '.join([str(len(current_entry.history)), "Entries"]))
+		self["info"].setText("Feed %s/%s" % (self["content"].getCurrentIndex()+1, len(self.feeds)))
 
 	def menu(self):
 		cur_idx = self["content"].getCurrentIndex()
@@ -453,7 +430,11 @@ class RSSOverview(RSSBaseView):
 				if cur_idx > 0:
 					self.singleUpdate(cur_idx-1)
 			elif result[1] == "setup":
-				self.session.openWithCallback(self.refresh, RSSSetup, rssPoller=self.rssPoller)
+				self.session.openWithCallback(
+					self.refresh,
+					RSSSetup,
+					rssPoller=self.rssPoller
+				)
 			elif result[1] == "close":
 				self.close()
 
@@ -466,39 +447,31 @@ class RSSOverview(RSSBaseView):
 		self["content"].moveToEntry(current_entry)
 		self.updateInfo()
 
-	def nextFeedCB(self):
+	def nextFeed(self):
 		self["content"].moveUp()
 		current_entry = self["content"].getCurrentEntry()
 		return (current_entry.title, current_entry.history, self["content"].getCurrentIndex())
 
-	def previousFeedCB(self):
+	def previousFeed(self):
 		self["content"].moveDown()
 		current_entry = self["content"].getCurrentEntry()
 		return (current_entry.title, current_entry.history, self["content"].getCurrentIndex())
 
 	def showCurrentEntry(self):
 		current_entry = self["content"].getCurrentEntry()
-		if current_entry is None: # empty list
-			return
-
 		self.session.openWithCallback(
-			self.refresh,
+			self.updateInfo,
 			RSSFeedView,
 			current_entry.history,
+			parent=self,
 			feedTitle=current_entry.title,
-			nextFeedCB=self.nextFeedCB,
-			previousFeedCB=self.previousFeedCB,
 			rssPoller=self.rssPoller,
 			id=self["content"].getCurrentIndex()
 		)
 
 	def selectEnclosure(self):
-		current_entry = self["content"].getCurrentEntry()
-		if current_entry is None: # empty list
-			return
-
 		# Build a list of all enclosures in this feed
 		enclosures = []
-		for entry in current_entry.history:
+		for entry in cself["content"].getCurrentEntry().history:
 				enclosures.extend(entry[3])
 		RSSBaseView.selectEnclosure(self, enclosures)
