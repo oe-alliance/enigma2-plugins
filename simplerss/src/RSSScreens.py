@@ -472,6 +472,6 @@ class RSSOverview(RSSBaseView):
 	def selectEnclosure(self):
 		# Build a list of all enclosures in this feed
 		enclosures = []
-		for entry in cself["content"].getCurrentEntry().history:
+		for entry in self["content"].getCurrentEntry().history:
 				enclosures.extend(entry[3])
 		RSSBaseView.selectEnclosure(self, enclosures)
