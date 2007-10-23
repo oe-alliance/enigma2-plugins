@@ -241,23 +241,12 @@ class RSSFeedView(RSSBaseView):
 
 	def pollCallback(self, id = None):
 		print "[SimpleRSS] SimpleRSSFeed called back"
+
+		# TODO: do we really need this?
 		current_entry = self["content"].getCurrentEntry()
-
-		if id is not None and self.id == id+1:
-			print "[SimpleRSS] pollCallback recieved local feed", self.id
-			self.feedTitle = self.rssPoller.feeds[id].title
-			self.data = self.rssPoller.feeds[id].history
-		elif self.id == 0:
-			print "[SimpleRSS] pollCallback recieved all or non-local feed, updating active view (new_items)"
-			self.data = self.rssPoller.new_items
-		else:
-			print "[SimpleRSS] pollCallback recieved all or non-local feed, updating", self.id
-			self.feedTitle = self.rssPoller.feeds[self.id-1].title
-			self.data = self.rssPoller.feeds[self-id-1].history
-
-		self["content"].l.setList(self.data)
 		self["content"].moveToEntry(current_entry)
 
+		self["content"].invalidate()
 		self.setConditionalTitle()
 		self.updateInfo()
 

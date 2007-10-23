@@ -34,7 +34,7 @@ class AtomFeed(BaseFeed):
 		return AtomFeed.parse(self, dom.getElementsByTagName("entry"))
 
 	def parse(self, items):
-		new_items = []
+		idx = 0
 		for item in items:
 			enclosure = []
 			link = ""
@@ -76,19 +76,20 @@ class AtomFeed(BaseFeed):
 				summary = ""
 
 			# Update Lists
-			new_items.append((
+			self.history.insert(idx, (
 					title.encode("UTF-8"),
 					link.encode("UTF-8"),
 					summary.encode("UTF-8"),
 					enclosure
 			))
 			self.last_ids.add(id)
+			
+			idx += 1
 
-		 # Append known Items to new Items and eventually cut it
-		self.history = new_items + self.history
-		self.history[:self.MAX_HISTORY_ELEMENTS]
+		# Eventually cut history
+		del self.history[self.MAX_HISTORY_ELEMENTS:]
 
-		return new_items
+		return self.history[:idx]
 
 class RSSFeed(BaseFeed):
 	"""Parses an RSS-Feed into expected format."""
@@ -104,6 +105,7 @@ class RSSFeed(BaseFeed):
 		return RSSFeed.parse(self, dom.getElementsByTagName("item"))
 
 	def parse(self, items):
+		idx = 0
 		new_items = []
 		for item in items:
 			enclosure = []
@@ -148,20 +150,20 @@ class RSSFeed(BaseFeed):
 				enclosure.append(ScanFile(href, mimetype = type, size = size, autodetect = False))
 
 			# Update Lists
-			new_items.append((
+			self.history.insert(idx, (
 					title.encode("UTF-8"),
 					link.encode("UTF-8"),
 					summary.encode("UTF-8"),
 					enclosure
 			))
-			
 			self.last_ids.add(guid)
 
-		# Append known Items to new Items and eventually cut it
-		self.history = new_items + self.history
-		self.history[:self.MAX_HISTORY_ELEMENTS]
+			idx += 1
 
-		return new_items
+		# Eventually cut history
+		del self.history[self.MAX_HISTORY_ELEMENTS:]
+
+		return self.history[:idx]
 
 class UniversalFeed(BaseFeed, RSSFeed, AtomFeed):
 	"""Universal Feed which on first run determines its type and calls the correct parsing-functions"""
