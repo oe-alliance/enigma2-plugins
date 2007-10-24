@@ -206,8 +206,10 @@ class EmailScreen(Screen, EmailHandler):
                         )
 
     def cbCapabilities(self,reason,proto):
-        print "cbCapabilities",reason
-        
+        print "#"*30
+        print "# If you have problems to log into your imap-server, please send me the output of the following line"
+        print "# cbCapabilities",reason
+        print "#"*30
         self.doLogin(proto)
 
     def ebCapabilities(reason,proto):
