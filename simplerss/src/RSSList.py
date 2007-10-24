@@ -104,5 +104,5 @@ class RSSEntryList(RSSBaseList):
 	def buildListboxEntry(self, title, link, summary, enclosures):
 		res = [ None ]
 		width = self.l.getItemSize().width()
-		res.append(MultiContentEntryText(pos=(0, 0), size=(width, 50), font=0, flags = RT_HALIGN_LEFT|RT_WRAP, text = title))
+		res.append(MultiContentEntryText(pos=(0, 3), size=(width, 50), font=0, flags = RT_HALIGN_LEFT|RT_WRAP, text = title))
 		return res
