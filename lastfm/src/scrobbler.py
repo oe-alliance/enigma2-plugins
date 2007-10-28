@@ -133,8 +133,10 @@ class Track(object):
 class EventListener:
     time2wait4submit = 30
     
-    def __init__(self,session):
+    def __init__(self,session,streamplayer):
         self.session = session
+        self.streamplayer = streamplayer
+        
         self.tracks_checking_for = []
         self.scrobbler = LastFMScrobbler(config.plugins.LastFM.username.value,config.plugins.LastFM.password.value)
         self.scrobbler.handshake()
@@ -151,7 +153,7 @@ class EventListener:
                         waittime = self.time2wait4submit
                     else:
                         waittime = track.length/2
-                    print "[LastFMScrobbler] waiting",waittime,"sec. until checking if the track '"+str(track)+"' is still playing"
+                    print "[LastFMScrobbler] waiting",waittime,"sec. until checking if the track "+str(track)+" is still playing"
                     reactor.callLater(waittime, self.checkTrack, track)
 
     def startListenToEvents(self):
@@ -170,8 +172,10 @@ class EventListener:
             print "[LastFMScrobbler] CurrentlyPlayingServiceReference is not a File, not submitting to LastFM"
             return False
         elif sref.toString().endswith("lastfm.mp3") is True:
-            print "[LastFMScrobbler] LastFm-Plugin is playing, not submitting"
-            return False
+            print "[LastFMScrobbler] LastFm-Plugin is playing"
+            trdata= self.streamplayer.playlist.getTrack(self.streamplayer.currentplaylistitemnumber)
+            track = self.getTrack(artist=trdata['creator'],title=trdata['title'],album=trdata['album'],length=(trdata["duration"]/1000))
+            return track
         elif currPlay is not None:
             tracklength = -1
             seek = currPlay and currPlay.seek()

@@ -17,6 +17,7 @@ from random import randrange
 
 ###############################################################################        
 plugin_path = ""
+streamplayer = False
 ###############################################################################        
 
 config.plugins.LastFM = ConfigSubsection()
@@ -52,7 +53,9 @@ def main(session,**kwargs):
     global proxy
     if proxy is not False:
         proxy.start()
-    session.openWithCallback(LastFMScreenMainCB,LastFMScreenMain)    
+        
+    global streamplayer
+    session.openWithCallback(LastFMScreenMainCB,LastFMScreenMain,streamplayer)    
 
 def LastFMScreenMainCB():
     global proxy
@@ -63,8 +66,11 @@ def LastFMScreenMainCB():
 
 def startScrobbler(reason, **kwargs):
     if "session" in kwargs and config.plugins.LastFM.sendSubmissions.value:
+        global streamplayer
+        streamplayer = StreamPlayer(kwargs["session"])
+        
         from scrobbler import EventListener
-        evl = EventListener(kwargs["session"])
+        evl = EventListener(kwargs["session"],streamplayer)
         evl.startListenToEvents()
         
 def Plugins(path,**kwargs):
@@ -106,13 +112,13 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
          
     noCoverArtPNG = "/usr/share/enigma2/no_coverArt.png"
     
-    def __init__(self, session, args = 0):
+    def __init__(self, session,streamplayer, args = 0):
         self.skin = LastFMScreenMain.skin
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)
         LastFM.__init__(self)
         self.session = session
-        self.streamplayer = StreamPlayer(session)
+        self.streamplayer = streamplayer#StreamPlayer(session)
         self.streamplayer.onStateChanged.append(self.onStreamplayerStateChanged)
         self.imageconverter = ImageConverter(116,116,self.setCoverArt)
         Screen.__init__(self, session)
