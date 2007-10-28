@@ -21,6 +21,11 @@ class StreamPlayer:
         self.session.nav.event.append(self.__event)
         self.onStateChanged = []
     
+    def setSession(self,session):
+        self.session.nav.event.remove(self.__event)
+        self.session = session
+        self.session.nav.event.append(self.__event)
+        
     def setPlaylist(self,playlist):
         if self.playlist is not None:
             self.currentplaylistitemnumber = 0 

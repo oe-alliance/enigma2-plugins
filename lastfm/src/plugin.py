@@ -55,6 +55,7 @@ def main(session,**kwargs):
         proxy.start()
         
     global streamplayer
+    streamplayer.setSession(session)
     session.openWithCallback(LastFMScreenMainCB,LastFMScreenMain,streamplayer)    
 
 def LastFMScreenMainCB():
