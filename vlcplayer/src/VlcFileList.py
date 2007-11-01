@@ -61,24 +61,10 @@ class VlcFileList(FileList):
 		self.current_server = None
 		self.current_path = None
 	
-#	def _getFilesAndDirs_old(self, host, path, regex = None):
-#		files = []
-#		directories = []
-#		result = vlcHttpCommand_old(host, path)
-#		entries = result.split("\n")
-#		for e in entries:
-#			if e[0:4] == "DIR:":
-#				e = e[4:]
-#				directories.append(FileEntryComponent(os.path.basename(e), host+":"+e, True))
-#			elif len(e) > 0:
-#				if regex is None or regex.search(e):
-#					files.append(FileEntryComponent(os.path.basename(e), host+":"+e, False))
-#		return (files,directories)
-
-	def _getFilesAndDirs(self, servernum, path, regex = None):
+	def __getFilesAndDirs(self, servernum, path, regex = None):
 		cfg = config.plugins.vlcplayer.servers[servernum]
 		url = "http://%s:%d/requests/browse.xml?%s" % (cfg.host.value, cfg.httpport.value, urlencode({'dir': path}))
-		print "[VLC] _getFilesAndDirs", url
+		print "[VLC] __getFilesAndDirs", url
 		req = urlopen(url)
 		if req is None:
 			raise IOError, "No response from server"
@@ -115,7 +101,7 @@ class VlcFileList(FileList):
 		else:
 			regex = None
 
-		files, directories = self._getFilesAndDirs(servernum, path, regex)
+		files, directories = self.__getFilesAndDirs(servernum, path, regex)
 
 		directories.sort(cmp=lambda x, y: cmp(x[0], y[0]));
 		files.sort(cmp=lambda x, y: cmp(x[0], y[0]));
@@ -138,3 +124,21 @@ class VlcFileList(FileList):
 			if p == select:
 				self.moveToIndex(i)
 			i += 1
+
+	def getNextFile(self):
+		i = self.getSelectedIndex() + 1
+		while i < len(self.list):
+			if self.list[i][0][1]==False:
+				self.moveToIndex(i)
+				return self.list[i][0][0]
+			i = i+1
+		return None
+	
+	def getPrevFile(self):
+		i = self.getSelectedIndex() - 1
+		while i >= 0:
+			if self.list[i][0][1]==False:
+				self.moveToIndex(i)
+				return self.list[i][0][0]
+			i = i-1
+		return None

@@ -22,6 +22,10 @@ from Components.ActionMap import ActionMap
 from VlcControlTelnet import VlcControlTelnet
 from VlcControlHttp import VlcControlHttp
 
+ENIGMA_SERVICE_ID = 0x1001
+DEFAULT_VIDEO_PID = 0x44
+DEFAULT_AUDIO_PID = 0x45
+STOP_BEFORE_UNPAUSE = True
 
 class VlcService(Source, iPlayableServicePtr):
 	refreshInterval = 3000
@@ -124,8 +128,9 @@ class VlcPlayer(Screen):
 	STATE_PLAYING = 1
 	STATE_PAUSED = 2
 	
-	def __init__(self, session):
+	def __init__(self, session, vlcfilelist):
 		Screen.__init__(self, session)
+		self.filelist = vlcfilelist
 		self.skinName = "MoviePlayer"
 		self.state = self.STATE_IDLE
 		self.url = None
@@ -147,7 +152,7 @@ class VlcPlayer(Screen):
 				else:
 					return ActionMap.action(self, contexts, action)
 		
-		self["actions"] = InfoBarSeekActionMap(self, ["OkCancelActions", "TvRadioActions", "InfobarSeekActions"],
+		self["actions"] = InfoBarSeekActionMap(self, ["OkCancelActions", "TvRadioActions", "InfobarSeekActions", "MediaPlayerActions"],
 		{
 				"ok": self.ok,
 				"cancel": self.cancel,
@@ -157,7 +162,9 @@ class VlcPlayer(Screen):
 				"seekFwd": self.seekFwd,
 				"seekBack": self.seekBack,
 				"seekFwdDown": self.seekFwd,
-				"seekBackDown": self.seekBack
+				"seekBackDown": self.seekBack,
+				"next": self.playNextFile,
+				"previous": self.playPrevFile
 			}, -2)
 
 		print "evEOF=%d" % iPlayableService.evEOF
@@ -186,11 +193,7 @@ class VlcPlayer(Screen):
 		
 		self.url = "http://%s:%d/%s.ts" % (cfg.host.value, cfg.httpport.value, streamName)
 		self.filename = path
-		if config.plugins.vlcplayer.soverlay.value:
-			soverlay=",soverlay"
-		else:
-			soverlay=""
-		self.output = "#transcode{vcodec=%s,vb=%d,width=%s,height=%s,fps=%s,scale=1,acodec=%s,ab=%d,channels=%d,samplerate=%s%s}:std{access=http,mux=ts,dst=/%s.ts}" % (
+		transcode = "vcodec=%s,vb=%d,width=%s,height=%s,fps=%s,scale=1,acodec=%s,ab=%d,channels=%d,samplerate=%s" % (
 			config.plugins.vlcplayer.vcodec.value, 
 			config.plugins.vlcplayer.vb.value, 
 			config.plugins.vlcplayer.width.value, 
@@ -199,10 +202,18 @@ class VlcPlayer(Screen):
 			config.plugins.vlcplayer.acodec.value, 
 			config.plugins.vlcplayer.ab.value, 
 			config.plugins.vlcplayer.channels.value,
-			config.plugins.vlcplayer.samplerate.value,
-			soverlay,
-			streamName
+			config.plugins.vlcplayer.samplerate.value
 		)
+		if config.plugins.vlcplayer.aspect.value != "none":
+			transcode += ",canvas-width=%s,canvas-height=%s,canvas-aspect=%s" % (
+				config.plugins.vlcplayer.width.value, 
+				config.plugins.vlcplayer.height.value, 
+				config.plugins.vlcplayer.aspect.value
+			) 
+		if config.plugins.vlcplayer.soverlay.value:
+			transcode += ",soverlay"
+		mux="ts{pid-video=%d,pid-audio=%d}" % (DEFAULT_VIDEO_PID, DEFAULT_AUDIO_PID)
+		self.output = "#transcode{%s}:std{access=http,mux=%s,dst=/%s.ts}" % (transcode, mux, streamName)
 		self.play()
 
 	def play(self):
@@ -217,7 +228,11 @@ class VlcPlayer(Screen):
 				self.session.open(
 					MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR)
 				return
-			self.session.nav.playService(eServiceReference(0x1001, 0, self.url))
+			sref = eServiceReference(ENIGMA_SERVICE_ID, 0, self.url)
+			print "sref valid=", sref.valid()
+			sref.setData(0, DEFAULT_VIDEO_PID)
+			sref.setData(1, DEFAULT_AUDIO_PID)
+			self.session.nav.playService(sref)
 			self.state = self.STATE_PLAYING
 			if self.shown:
 				self.__setHideTimer()
@@ -247,8 +262,14 @@ class VlcPlayer(Screen):
 				MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR)
 			self.stop()
 			return
-		self.session.nav.stopService()
-		self.session.nav.playService(eServiceReference(0x1001, 0, self.url))
+		if STOP_BEFORE_UNPAUSE:
+			self.session.nav.stopService()
+			sref = eServiceReference(ENIGMA_SERVICE_ID, 0, self.url)
+			sref.setData(0, DEFAULT_VIDEO_PID)
+			sref.setData(1, DEFAULT_AUDIO_PID)
+			self.session.nav.playService(sref)
+		else:
+			self.session.nav.pause(False)
 		self.state = self.STATE_PLAYING
 		self.vlcservice.refresh()
 		if self.shown:
@@ -291,6 +312,24 @@ class VlcPlayer(Screen):
 	def cancel(self):
 		self.stop()
 		self.close()
+	
+	def playNextFile(self):
+		print "[VLC] playNextFile"
+		path = self.filelist.getNextFile()
+		if path is None:
+			self.session.open(MessageBox, _("No more files in this directory"), MessageBox.TYPE_INFO)
+		else:
+			servernum, path = path.split(":", 1)
+			self.playfile(int(servernum), path)
+
+	def playPrevFile(self):
+		print "[VLC] playPrevFile"
+		path = self.filelist.getPrevFile()
+		if path is None:
+			self.session.open(MessageBox, _("No previous file in this directory"), MessageBox.TYPE_INFO)
+		else:
+			servernum, path = path.split(":", 1)
+			self.playfile(int(servernum), path)
 
 	def seekRelative(self, delta):
 		"""delta is seconds as integer number

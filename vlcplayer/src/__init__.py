@@ -19,6 +19,7 @@ config.plugins.vlcplayer.channels = ConfigInteger(2, (1, 9))
 config.plugins.vlcplayer.width = ConfigSelection(["352", "704", "720"])
 config.plugins.vlcplayer.height = ConfigSelection(["288", "576"])
 config.plugins.vlcplayer.fps = ConfigInteger(25, (1, 99))
+config.plugins.vlcplayer.aspect = ConfigSelection(["none", "16:9", "4:3"], "none")
 config.plugins.vlcplayer.soverlay = ConfigYesNo()
 
 config.plugins.vlcplayer.servercount = ConfigInteger(0)

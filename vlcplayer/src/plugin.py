@@ -116,7 +116,7 @@ class VlcBrowser(Screen):
 			else:
 				servernum, path = path.split(":", 1)
 				servernum = int(servernum)
-				dlg = self.session.open(VlcPlayer)
+				dlg = self.session.open(VlcPlayer, self.filelist)
 				dlg.playfile(servernum, path)
 
 	def __onClose(self):
@@ -151,5 +151,5 @@ def Plugins(**kwargs):
  	return PluginDescriptor(
 		name="VLC Video Player", 
 		description="VLC Video Player", 
-		where = [ PluginDescriptor.WHERE_MOVIELIST, PluginDescriptor.WHERE_PLUGINMENU ],
+		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
 		fnc = main)
