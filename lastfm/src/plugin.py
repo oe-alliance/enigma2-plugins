@@ -55,7 +55,11 @@ def main(session,**kwargs):
         proxy.start()
         
     global streamplayer
-    streamplayer.setSession(session)
+    if streamplayer is False:
+        streamplayer.setSession(session)
+    else:
+        streamplayer = StreamPlayer(session)
+        
     session.openWithCallback(LastFMScreenMainCB,LastFMScreenMain,streamplayer)    
 
 def LastFMScreenMainCB():
@@ -68,7 +72,10 @@ def LastFMScreenMainCB():
 def startScrobbler(reason, **kwargs):
     if "session" in kwargs and config.plugins.LastFM.sendSubmissions.value:
         global streamplayer
-        streamplayer = StreamPlayer(kwargs["session"])
+        if streamplayer is False:
+            streamplayer = StreamPlayer(kwargs["session"])
+        else:
+            streamplayer.setSession(kwargs["session"])
         
         from scrobbler import EventListener
         evl = EventListener(kwargs["session"],streamplayer)
