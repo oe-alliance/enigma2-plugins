@@ -180,7 +180,7 @@ class UniversalFeed(BaseFeed, RSSFeed, AtomFeed):
 			return AtomFeed.gotDom(self, dom)
 		elif self.type is None:
 			# RSS 2.0
-			if dom.documentElement.getAttribute("version") in ["2.0", "0.94", "0.93", "0.92", "0.91"]:
+			if dom.documentElement.getAttribute("version") in ["2.0", "2.00", "0.94", "0.93", "0.92", "0.91"]:
 				self.type = "rss"
 				try:
 					self.title = dom.getElementsByTagName("channel")[0].getElementsByTagName("title")[0].childNodes[0].data
