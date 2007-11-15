@@ -26,7 +26,6 @@ config.plugins.Webinterface.includehdd = ConfigYesNo(default = False)
 config.plugins.Webinterface.useauth = ConfigYesNo(default = False) # False, because a std. images hasnt a rootpasswd set and so no login. and a login with a empty pwd makes no sense
 config.plugins.Webinterface.autowritetimer = ConfigYesNo(default = False)
 config.plugins.Webinterface.loadmovielength = ConfigYesNo(default = False)
-config.plugins.Webinterface.debug = ConfigYesNo(default = False) # False by default, not confgurable in GUI. Edit settingsfile directly if needed
 config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI. 
 
 
@@ -38,6 +37,17 @@ config.plugins.Webinterface.version = ConfigText(__version__) # used to make the
  use tail -f <file> to view this log
 """
 
+# PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
+# AND DONT ADD CONFIG OPTIONS WHICH HELPS NORMAL USERS TO ENABLE
+# THIS KIND OF LOGGING !!!!!!!!!!!!! 
+# Twisted logging can't handle UTF8 correct,
+# and enigma2 internal completely use UTF8 (for debug messages too)             
+# so the twisted logging code self generates frequently blue screens 
+# at various places in enigma2(not only in Webif) and the reason 
+# of this crashes is NOT visible in the normal enigma2 crashlogs 
+# We have spent much time into debugging this		Ghost 2007/11/15
+
+DEBUG_TO_FILE=False
 
 DEBUGFILE= "/tmp/twisted.log"
 
@@ -96,7 +106,7 @@ def startWebserver(session):
 		if config.plugins.Webinterface.enable.value is not True:
 			print "not starting Werbinterface"
 			return False
-		if config.plugins.Webinterface.debug.value:
+		if DEBUG_TO_FILE:
 			print "start twisted logfile, writing to %s" % DEBUGFILE 
 			startLogging(open(DEBUGFILE,'w'))
 	
