@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-werbezapper
+Version: 0.2-20070820-r0
+Description: Werbezapper-Plugin for Enigma2
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2(>1.0cvs20070731)
+Source: http://www.ritzmo.de

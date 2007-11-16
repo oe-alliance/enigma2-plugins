@@ -68,4 +68,13 @@ webcamviewer/src/Makefile
 
 emailclient/Makefile
 emailclient/src/Makefile
+
+autotimer/Makefile
+autotimer/src/Makefile
+
+epgrefresh/Makefile
+epgrefresh/src/Makefile
+
+werbezapper/Makefile
+werbezapper/src/Makefile
 ])

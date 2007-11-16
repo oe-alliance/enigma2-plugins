@@ -1,0 +1,140 @@
+# To check if in Standby
+import Screens.Standby
+
+# Base Class
+import timer
+
+# To see if in Timespan and to determine begin of timespan
+from time import localtime, mktime, time
+
+# Config
+from Components.config import config
+
+def checkTimespan(begin, end):
+	# Get current time
+	time = localtime()
+
+	# Check if we span a day
+	if begin[0] > end[0] or (begin[0] == end[0] and begin[1] >= end[1]):
+		# Check if begin of event is later than our timespan starts
+		if time[3] > begin[0] or (time[3] == begin[0] and time[4] >= begin[1]):
+			# If so, event is in our timespan
+			return True
+		# Check if begin of event is earlier than our timespan end
+		if time[3] < end[0] or (time[3] == end[0] and time[4] <= end[1]):
+			# If so, event is in our timespan
+			return True
+		return False
+	else:
+		# Check if event begins earlier than our timespan starts 
+		if time[3] < begin[0] or (time[3] == begin[0] and time[4] <= begin[1]):
+			# Its out of our timespan then
+			return False
+		# Check if event begins later than our timespan ends
+		if time[3] > end[0] or (time[3] == end[0] and time[4] >= end[1]):
+			# Its out of our timespan then
+			return False
+		return True
+
+class EPGRefreshTimerEntry(timer.TimerEntry):
+	"""TimerEntry ..."""
+	def __init__(self, begin, tocall, nocheck = False):
+		timer.TimerEntry.__init__(self, int(begin), int(begin))
+
+		self.prepare_time = 0
+		self.function = tocall
+		self.nocheck = nocheck
+
+	def getNextActivation(self):
+		return self.begin
+
+	def activate(self):
+		if self.state == self.StateRunning:
+			print "[EPGRefresh] Timer activated"
+			# Just execute function and signalize success if told to
+			if self.nocheck:
+				print "[EPGRefresh] Timer is not checking but running function immediately"
+				self.function()
+				return True
+
+			# Check if in timespan
+			if checkTimespan(config.plugins.epgrefresh.begin.value, config.plugins.epgrefresh.end.value):
+				print "[EPGRefresh] In Timespan, will check if we're in Standby and have no Recordings running next"
+				# Do we realy want to check nav?
+				from NavigationInstance import instance
+				if config.plugins.epgrefresh.force.value or (Screens.Standby.inStandby and instance is not None and not instance.RecordTimer.isRecording()):
+					self.function()
+					return True
+				else:
+					print "[EPGRefresh] Box still in use, rescheduling"	
+
+					# Recheck later
+					self.begin = time() + config.plugins.epgrefresh.delay_standby.value*60
+					return False
+			else:
+				print "[EPGRefresh] Not in timespan, rescheduling"
+
+				# Recheck later
+				self.begin = config.plugins.epgrefresh.delay_standby.value*60
+				return False
+
+		return True
+
+	def shouldSkip(self):
+		return False
+
+class EPGRefreshTimer(timer.Timer):
+	def __init__(self):
+		timer.Timer.__init__(self)
+
+	def remove(self, entry):
+		print "[EPGRefresh] Timer removed " + str(entry)
+
+		# avoid re-enqueuing
+		entry.repeated = False
+
+		# abort timer.
+		# this sets the end time to current time, so timer will be stopped.
+		entry.abort()
+
+		if entry.state != entry.StateEnded:
+			self.timeChanged(entry)
+
+		print "state: ", entry.state
+		print "in processed: ", entry in self.processed_timers
+		print "in running: ", entry in self.timer_list
+		# now the timer should be in the processed_timers list. remove it from there.
+		self.processed_timers.remove(entry)
+
+	def setRefreshTimer(self, tocall):
+		# Add refresh Timer
+		begin = [x for x in localtime()]
+		begin[3] = config.plugins.epgrefresh.begin.value[0]
+		begin[4] = config.plugins.epgrefresh.begin.value[1]
+		begin = mktime(begin)
+
+		# Also call function when begin lies in the past (timer won't do so)
+		if begin < time():
+			tocall()
+
+		refreshTimer = EPGRefreshTimerEntry(begin, tocall, nocheck = True)
+
+		for x in range(0,7):
+			refreshTimer.setRepeated(x)
+
+		# We can be sure that whenever this function is called the timer list
+		# was wiped, so just add a new timer
+		self.addTimerEntry(refreshTimer)
+
+	def add(self, entry):
+		entry.timeChanged()
+		print "[EPGRefresh] Timer added " + str(entry)
+		self.addTimerEntry(entry)
+
+	def clear(self):
+		self.timer_list = []
+
+	def isActive(self):
+		return len(self.timer_list) > 0
+
+epgrefreshtimer = EPGRefreshTimer()

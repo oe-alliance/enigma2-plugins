@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!-- Beispieldatei -->
+
+<!-- Dieser Block enthaelt all unsere Timer -->
+<autotimer version="4">
+
+ <!-- 
+    - Zeichne alles mit "Dr. House" im Titel auf
+    - Das zwischen 20:15 und 23:00 gesendet wird
+    - Mit 5 Minuten Vor-/Nachlaufzeit (zusaetzlich zum Enigma2-Standardwert)
+ -->
+ <timer name="House aufnehmen" match="Dr. House" enabled="no" from="20:15" to="23:00" offset="5">
+  <!-- Auf RTL -->
+  <serviceref>1:0:1:2EE3:441:1:C00000:0:0:0:</serviceref>
+  <!-- Box nach der Aufnahme in den Standby schicken -->
+  <afterevent>standby</afterevent>
+  <!-- Nicht Aufnehmen, wenn "Wiederholung" in der Beschreibung steht -->
+  <exclude where="description">Wiederholung</exclude>
+  <!-- Nicht Aufnehmen, wenn "Staffel 1" in Kurzbeschreibung -->
+  <exclude where="shortdescription">Staffel 1</exclude>
+ </timer>
+
+ <!--
+    - Alles mit "ouse" im Titel aufzeichnen, z.B. Desperate H_ouse_wifes
+    - Keine Zeitbeschraenkung
+    - Mit 2 Minuten Vor- und 3 Minuten Nachlaufzeit
+ -->
+ <timer name="Alles mit ouse" match="ouse" enabled="no" offset="2,3">
+  <!-- Nur auf Pro7 und ORF1 aufzeichnen -->
+  <serviceref>1:0:1:445D:453:1:C00000:0:0:0:</serviceref>
+  <serviceref>1:0:1:32C9:45D:1:C00000:0:0:0:</serviceref>
+  <!-- Kein Afterevent, benutze den Standardwert von Enigma2 -->
+  <!-- Nicht Aufnahmen, wenn "Dr." im Titel steht -->
+  <exclude where="title">Dr.</exclude>
+ </timer>
+
+ <!--
+    - Alles mit "Malcolm" im Titel aufzeichnen
+    - Weder Zeitbeschraenkung noch benutzerdefinierte Vor-/Nachlaufzeit
+ -->
+ <timer name="Sendungen mit Malcolm" match="Malcolm" enabled="no">
+  <!-- Auf allen Sendern aufzeichnen -->
+  <!-- Wenn die Sendung zwischen 23:00 und 06:00 Uhr endet Box herunterfahren -->
+  <afterevent from="23:00" to="06:00">shutdown</afterevent>
+  <!-- Sendunden am Mittwoch auslassen -->
+  <exclude where="dayofweek">2</exclude>
+  <!-- Sendungen am Wochenende ebenfalls ausschliessen -->
+  <exclude where="dayofweek">weekend</exclude>
+ </timer>
+
+</autotimer>
+ 

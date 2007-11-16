@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-autotimer
+Version: 0.2.3-20071118-r0
+Description: Automatically add Timers based on simple rules 
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2(>2.3cvs20070916)
+Source: http://www.ritzmo.de
