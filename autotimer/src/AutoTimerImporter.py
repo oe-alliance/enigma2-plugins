@@ -34,10 +34,12 @@ class AutoTimerImportSelector(Screen):
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
 
-		self["actions"] = ActionMap(["OkCancelActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
 			"ok": self.openImporter,
 			"cancel": self.cancel,
+			"green": self.openImporter,
+			"red": self.cancel
 		}, -1)
 		self.onLayoutFinish.append(self.setCustomTitle)
 
@@ -135,6 +137,7 @@ class AutoTimerImporter(Screen):
 		{
 			"ok": self["list"].toggleSelection,
 			"cancel": self.cancel,
+			"red": self.cancel,
 			"green": self.accept
 		}, -1)
 
