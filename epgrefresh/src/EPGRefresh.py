@@ -31,6 +31,7 @@ class EPGRefresh:
 		self.previousService = None
 		self.forcedScan = False
 		self.session = None
+		self.beginOfTimespan = 0
 
 		# Mtime of configuration files
 		self.configMtime = -1
@@ -78,7 +79,7 @@ class EPGRefresh:
 		# Close file
 		file.close()
 
-	def refresh(self, session = None):
+	def forceRefresh(self, session = None):
 		print "[EPGRefresh] Forcing start of EPGRefresh"
 		if session is not None:
 			self.session = session
@@ -159,6 +160,9 @@ class EPGRefresh:
 		self.refresh()
 
 	def cleanUp(self):
+		config.plugins.epgrefresh.lastscan.value = int(time())
+		config.plugins.epgrefresh.lastscan.save()
+
 		# shutdown if we're supposed to go to deepstandby and not recording
 		if not self.forcedScan and config.plugins.epgrefresh.afterevent.value and not Screens.Standby.inTryQuitMainloop:
 			self.session.open(
@@ -174,21 +178,28 @@ class EPGRefresh:
 			self.session.nav.playService(self.previousService)
 
 	def refresh(self):
-		# Walk Services
-		if self.forcedScan or config.plugins.epgrefresh.force.value or (Screens.Standby.inStandby and not self.session.nav.RecordTimer.isRecording()):
+		if self.forcedScan:
 			self.nextService()
 		else:
+			# Abort if a scan finished later than our begin of timespan
+			if self.beginOfTimespan < config.plugins.epgrefresh.lastscan.value:
+				return
+			if config.plugins.epgrefresh.force.value or (Screens.Standby.inStandby and not self.session.nav.RecordTimer.isRecording()):
+				self.nextService()
 			# We don't follow our rules here - If the Box is still in Standby and not recording we won't reach this line 
-			if not checkTimespan(config.plugins.epgrefresh.begin.value, config.plugins.epgrefresh.end.value):
-				print "[EPGRefresh] Gone out of timespan while refreshing, sorry!"
-				self.cleanUp()
 			else:
-				print "[EPGRefresh] Box no longer in Standby or Recording started, rescheduling"
+				if not checkTimespan(config.plugins.epgrefresh.begin.value, config.plugins.epgrefresh.end.value):
+					print "[EPGRefresh] Gone out of timespan while refreshing, sorry!"
+					self.cleanUp()
+				else:
+					print "[EPGRefresh] Box no longer in Standby or Recording started, rescheduling"
 
-				# Recheck later
-				epgrefreshtimer.add(EPGRefreshTimerEntry(time() + config.plugins.epgrefresh.delay_standby.value*60, self.refresh, nocheck = True))
+					# Recheck later
+					epgrefreshtimer.add(EPGRefreshTimerEntry(time() + config.plugins.epgrefresh.delay_standby.value*60, self.refresh, nocheck = True))
 
 	def createWaitTimer(self):
+		self.beginOfTimespan = time()
+
 		# Add wait timer to epgrefreshtimer
 		epgrefreshtimer.add(EPGRefreshTimerEntry(time() + 3, self.prepareRefresh))
 
@@ -196,17 +207,16 @@ class EPGRefresh:
 		# DEBUG
 		print "[EPGRefresh] Maybe zap to next service"
 
-		# Check if more Services present
-		if len(self.scanServices):
+		try:
 			# Get next reference
-			service = self.scanServices.pop()
+			service = self.scanServices.pop(0)
 
 			# Play next service
 			self.session.nav.playService(service)
 
 			# Start Timer
 			epgrefreshtimer.add(EPGRefreshTimerEntry(time() + config.plugins.epgrefresh.interval.value*60, self.refresh, nocheck = True))
-		else:
+		except IndexError:
 			# Debug
 			print "[EPGRefresh] Done refreshing EPG"
 

@@ -24,6 +24,7 @@ config.plugins.epgrefresh.delay_standby = ConfigInteger(default = 10, limits=(1,
 config.plugins.epgrefresh.inherit_autotimer = ConfigEnableDisable(default = False)
 config.plugins.epgrefresh.afterevent = ConfigEnableDisable(default = False)
 config.plugins.epgrefresh.force = ConfigEnableDisable(default = False)
+config.plugins.epgrefresh.lastscan = ConfigInteger(default = 0)
 
 # Plugin
 from EPGRefresh import epgrefresh

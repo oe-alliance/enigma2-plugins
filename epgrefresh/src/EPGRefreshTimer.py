@@ -50,10 +50,8 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 
 	def activate(self):
 		if self.state == self.StateRunning:
-			print "[EPGRefresh] Timer activated"
 			# Just execute function and signalize success if told to
 			if self.nocheck:
-				print "[EPGRefresh] Timer is not checking but running function immediately"
 				self.function()
 				return True
 
@@ -72,11 +70,8 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 					self.begin = time() + config.plugins.epgrefresh.delay_standby.value*60
 					return False
 			else:
-				print "[EPGRefresh] Not in timespan, rescheduling"
-
-				# Recheck later
-				self.begin = config.plugins.epgrefresh.delay_standby.value*60
-				return False
+				print "[EPGRefresh] Not in timespan, ending timer"
+				return True
 
 		return True
 
@@ -113,8 +108,10 @@ class EPGRefreshTimer(timer.Timer):
 		begin[4] = config.plugins.epgrefresh.begin.value[1]
 		begin = mktime(begin)
 
-		# Also call function when begin lies in the past (timer won't do so)
-		if begin < time():
+		# If the last scan was finished before our timespan begins/began and
+		# timespan began in the past fire the timer once (timer wouldn't do so
+		# by itself)
+		if config.plugins.epgrefresh.lastscan.value < begin and begin < time():
 			tocall()
 
 		refreshTimer = EPGRefreshTimerEntry(begin, tocall, nocheck = True)
