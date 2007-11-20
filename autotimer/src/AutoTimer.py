@@ -410,14 +410,18 @@ class AutoTimer:
 			ret = self.epgcache.search(('RI', 100, eEPGCache.PARTIAL_TITLE_SEARCH, timer.match, eEPGCache.NO_CASE_CHECK)) or []
 
 			for serviceref, eit in ret:
-				# Check if Service is disallowed first as its the only property available here
-				if timer.checkServices(serviceref):
-					continue
+				eserviceref = eServiceReference(serviceref)
 
-				evt = self.epgcache.lookupEventId(eServiceReference(serviceref), eit)
+				evt = self.epgcache.lookupEventId(eserviceref, eit)
 				if not evt:
 					print "[AutoTimer] Could not create Event!"
 					continue
+
+				# Try to determine real service (we always choose the last one)
+				n = evt.getNumOfLinkageServices()
+				if n > 0:
+					i = evt.getLinkageService(eserviceref, n-1)
+					serviceref = i.toString()
 
 				# Gather Information
 				name = evt.getEventName()
@@ -437,7 +441,7 @@ class AutoTimer:
 				timer.update(begin, timestamp)
 
 				# Check Duration, Timespan and Excludes
-				if timer.checkDuration(duration) or timer.checkTimespan(timestamp) or timer.checkFilter(name, description, evt.getExtendedDescription(), str(timestamp[6])):
+				if timer.checkService(serviceref) or timer.checkDuration(duration) or timer.checkTimespan(timestamp) or timer.checkFilter(name, description, evt.getExtendedDescription(), str(timestamp[6])):
 					continue
 
 				# Apply E2 Offset
@@ -485,6 +489,7 @@ class AutoTimer:
 							newEntry.description = description
 							newEntry.begin = int(begin)
 							newEntry.end = int(end)
+							newEntry.service_ref = ServiceReference(serviceref)
 
 							break
 				except AutoTimerIgnoreTimerException, etite:
