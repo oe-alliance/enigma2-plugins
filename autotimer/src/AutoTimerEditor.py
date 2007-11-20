@@ -226,7 +226,10 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			default = 0
 		self.counter = ConfigInteger(default = default, limits = (0, 50))
 		self.counterLeft = ConfigInteger(default = timer.matchLeft, limits = (0, 50))
-		self.counterFormatString = ConfigSelection([("", _("Never")), ("%m", _("Monthly")), ("%U", _("Weekly (Sunday)")), ("%W", _("Weekly (Monday)"))], default = timer.matchFormatString)
+		selection = [("", _("Never")), ("%m", _("Monthly")), ("%U", _("Weekly (Sunday)")), ("%W", _("Weekly (Monday)"))]
+		if timer.matchFormatString not in ["", "%m", "%U", "%W"]:
+			selection.append((timer.matchFormatString, _("Custom")))
+		self.counterFormatString = ConfigSelection(selection, default = timer.matchFormatString)
 
 	def refresh(self):
 		# First four entries are always shown
