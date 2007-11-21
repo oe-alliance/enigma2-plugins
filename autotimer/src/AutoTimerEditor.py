@@ -227,9 +227,12 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		self.counter = ConfigInteger(default = default, limits = (0, 50))
 		self.counterLeft = ConfigInteger(default = timer.matchLeft, limits = (0, 50))
 		selection = [("", _("Never")), ("%m", _("Monthly")), ("%U", _("Weekly (Sunday)")), ("%W", _("Weekly (Monday)"))]
-		if timer.matchFormatString not in ["", "%m", "%U", "%W"]:
-			selection.append((timer.matchFormatString, _("Custom")))
-		self.counterFormatString = ConfigSelection(selection, default = timer.matchFormatString)
+		if timer.getCounterFormatString() not in ["", "%m", "%U", "%W"]:
+			selection.append((timer.getCounterFormatString(), _("Custom")))
+		self.counterFormatString = ConfigSelection(selection, default = timer.getCounterFormatString())
+
+		# Avoid Duplicate Description
+		self.avoidDuplicateDescription = ConfigEnableDisable(default = timer.getAvoidDuplicateDescription())
 
 	def refresh(self):
 		# First four entries are always shown
@@ -284,6 +287,8 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		if self.counter.value:
 			self.list.append(getConfigListEntry(_("Ammount of recordings left"), self.counterLeft))
 			self.list.append(getConfigListEntry(_("Reset Count"), self.counterFormatString))
+
+		self.list.append(getConfigListEntry(_("Require Description to be unique"), self.avoidDuplicateDescription))
 
 	def reloadList(self, value):
 		self.refresh()
@@ -423,6 +428,8 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			self.timer.matchCount = 0
 			self.timer.matchLeft = 0
 			self.timer.matchFormatString = ''
+
+		self.timer.avoidDuplicateDescription = self.avoidDuplicateDescription.value
 
 		# Close
 		self.close(self.timer)

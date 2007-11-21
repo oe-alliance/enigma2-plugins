@@ -105,27 +105,39 @@ class AutoTimerImporter(Screen):
 		end = localtime(timer.end)
 		list = [
 			SelectionEntryComponent(
+				': '.join([_("Enabled"), {True: _("disable"), False: _("enable")}[bool(timer.disabled)]]),
+				not timer.disabled,
+				0,
+				True
+			),
+			SelectionEntryComponent(
 				_("Match title: %s") % (timer.name),
 				timer.name,
-				0,
+				1,
 				True
 			),
 			SelectionEntryComponent(
 				_("Match Timespan: %02d:%02d - %02d:%02d") % (begin[3], begin[4], end[3], end[4]),
 				((begin[3], begin[4]), (end[3], end[4])),
-				1,
+				2,
 				True
 			),
 			SelectionEntryComponent(
 				_("Only on Service: %s") % (timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')),
 				str(timer.service_ref),
-				2,
+				3,
 				True
 			),
 			SelectionEntryComponent(
-				_("AfterEvent: %s") % (afterevent[timer.afterEvent]),
+				': '.join([_("After event"), afterevent[timer.afterEvent]]),
 				timer.afterEvent,
-				3,
+				4,
+				True
+			),
+			SelectionEntryComponent(
+				': '.join([_("Timer Type"), {0: _("record"), 1: _("zap")}[int(timer.justplay)]]),
+				int(timer.justplay),
+				5,
 				True
 			)
 		]
@@ -172,11 +184,13 @@ class AutoTimerImporter(Screen):
 		list = self["list"].getSelectionsList()
 
 		for item in list:
-			if item[2] == 0: # Match (should maybe be forced?)
+			if item[2] == 0: # Enable
+				self.autotimer.enabled = item[1]
+			elif item[2] == 1: # Match
 				self.autotimer.match = item[1]
-			if item[2] == 1: # Timespan
+			elif item[2] == 2: # Timespan
 				self.autotimer.timespan = item[1]
-			if item[2] == 2: # Service
+			elif item[2] == 3: # Service
 				value = item[1]
 
 				# strip all after last :
@@ -185,8 +199,10 @@ class AutoTimerImporter(Screen):
 					value = value[:pos+1]
 
 				self.autotimer.services = [value]
-			if item[2] == 3: # AfterEvent
+			elif item[2] == 4: # AfterEvent
 				self.autotimer.afterevent = [(item[1], None)]
+			elif item[2] == 5: # Justplay
+				self.autotimer.justplay = item[1]
 
 		if self.autotimer.match == "":
 			self.session.openWithCallback(

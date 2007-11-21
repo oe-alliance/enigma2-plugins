@@ -175,6 +175,9 @@ class AutoTimer:
 				# Read out justplay
 				justplay = int(timer.getAttribute("justplay") or '0')
 
+				# Read out avoidDuplicateDescription
+				avoidDuplicateDescription = bool(timer.getAttribute("avoidDuplicateDescription") or False)
+
 				# Read out allowed services
 				servicelist = []					
 				for service in timer.getElementsByTagName("serviceref"):
@@ -253,7 +256,8 @@ class AutoTimer:
 						matchLimit = counterLimit,
 						matchFormatString = counterFormat,
 						lastBegin = int(lastBegin),
-						justplay = justplay
+						justplay = justplay,
+						avoidDuplicateDescription = avoidDuplicateDescription
 				))
 
 	def getTimerList(self):
@@ -319,10 +323,14 @@ class AutoTimer:
 
 			# Counter
 			if timer.hasCounter():
-				list.extend([' lastBegin="', str(timer.lastBegin), '" counter="', str(timer.getCounter()), '" left="', str(timer.getCounterLeft()) ,'"'])
+				list.extend([' lastBegin="', str(timer.getLastBegin()), '" counter="', str(timer.getCounter()), '" left="', str(timer.getCounterLeft()) ,'"'])
 				if timer.hasCounterFormatString():
 					list.extend([' lastActivation="', str(timer.getCounterLimit()), '"'])
 					list.extend([' counterFormat="', str(timer.getCounterFormatString()), '"'])
+
+			# Duplicate Description
+			if timer.getAvoidDuplicateDescription():
+				list.append(' avoidDuplicateDescription="1" ')
 
 			# Only display justplay if true
 			if timer.justplay:
@@ -441,7 +449,7 @@ class AutoTimer:
 				timer.update(begin, timestamp)
 
 				# Check Duration, Timespan and Excludes
-				if timer.checkService(serviceref) or timer.checkDuration(duration) or timer.checkTimespan(timestamp) or timer.checkFilter(name, description, evt.getExtendedDescription(), str(timestamp[6])):
+				if timer.checkServices(serviceref) or timer.checkDuration(duration) or timer.checkTimespan(timestamp) or timer.checkFilter(name, description, evt.getExtendedDescription(), str(timestamp[6])):
 					continue
 
 				# Apply E2 Offset
@@ -492,6 +500,9 @@ class AutoTimer:
 							newEntry.service_ref = ServiceReference(serviceref)
 
 							break
+						elif timer.getAvoidDuplicateDescription() and rtimer.description == description:
+							raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
+
 				except AutoTimerIgnoreTimerException, etite:
 					print etite
 					continue
