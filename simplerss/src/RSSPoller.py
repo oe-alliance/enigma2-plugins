@@ -3,18 +3,19 @@ from Components.config import config
 from enigma import eTimer
 
 from RSSScreens import RSSFeedView
-from RSSFeed import UniversalFeed
+from RSSFeed import BaseFeed, UniversalFeed
 
 from twisted.web.client import getPage
 from xml.dom.minidom import parseString as minidom_parseString
 
 class RSSPoller:
 	"""Keeps all Feed and takes care of (automatic) updates"""
-	def __init__(self, session):
+	def __init__(self, session, poll = True):
 		# Timer
 		self.poll_timer = eTimer()
 		self.poll_timer.timeout.get().append(self.poll)
-		self.poll_timer.start(0, 1)
+		if poll:
+			self.poll_timer.start(0, 1)
 
 		# Functions to call when updates happened
 		self.update_callbacks = [ ]
@@ -22,6 +23,13 @@ class RSSPoller:
 		# Save Session, Initialize Var to identify triggered Reload
 		self.session = session
 		self.reloading = False
+
+		self.newItemFeed = BaseFeed(
+			"",
+			False,
+			_("New Items"),
+			_("New Items since last Auto-Update"),
+		)
 
 		# Generate Feeds
 		self.feeds = [
@@ -33,7 +41,6 @@ class RSSPoller:
 		]
 
 		# Initialize Vars
-		self.new_items = [ ]
 		self.current_feed = 0
 
 	def addCallback(self, callback):
@@ -57,7 +64,7 @@ class RSSPoller:
 		else:
 			self.session.open(
 				MessageBox,
-				"Sorry, failed to fetch feed.\n" + error,
+				_("Sorry, failed to fetch feed:\n%s") % (error),
 				type = MessageBox.TYPE_INFO,
 				timeout = 5
 			)
@@ -74,7 +81,7 @@ class RSSPoller:
 			# TODO: Annoying with Multifeed?
 			self.session.open(
 				MessageBox,
-				"Sorry, this type of feed is unsupported.\n"+ str(errmsg),
+				_("Sorry, this type of feed is unsupported:\n%s") % (str(errmsg)),
 				type = MessageBox.TYPE_INFO,
 				timeout = 5
 			)
@@ -87,7 +94,7 @@ class RSSPoller:
 				return
 			# Assume its just a temporary failure and jump over to next feed                          
 			self.next_feed()
-	
+
 	def gotPage(self, data, id = None):
 		print "[SimpleRSS] parsing.."
 
@@ -108,7 +115,7 @@ class RSSPoller:
 
 		# Append new items to locally bound ones
 		if new_items is not None:
-			self.new_items.extend(new_items)
+			self.newItemFeed.history.extend(new_items)
 
 		# Start Timer so we can either fetch next feed or show new_items
 		self.next_feed()
@@ -124,13 +131,13 @@ class RSSPoller:
 		# End of List
 		elif len(self.feeds) <= self.current_feed:
 			# New Items
-			if len(self.new_items):
-				print "[SimpleRSS] got", len(self.new_items), "new items"
+			if len(self.newItemFeed.history):
+				print "[SimpleRSS] got", len(self.newItemFeed.history), "new items"
 				print "[SimpleRSS] calling back"
 				self.doCallback()
 				# Inform User
 				if config.plugins.simpleRSS.show_new.value:
-					self.session.open(RSSFeedView, self.new_items, newItems=True)
+					self.session.open(RSSFeedView, self.newItemFeed, newItems=True)
 			# No new Items
 			else:
 				print "[SimpleRSS] no new items"
@@ -140,7 +147,7 @@ class RSSPoller:
 		else:
 			# Id is 0 -> empty out new items
 			if self.current_feed == 0:
-				del self.new_items[:]
+				del self.newItemFeed.history[:]
 			# Feed supposed to autoupdate
 			feed = self.feeds[self.current_feed]
 			if feed.autoupdate:

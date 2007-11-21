@@ -19,8 +19,8 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 
 		self.list = [
-			getConfigListEntry(_("Autoupdate: "), config.plugins.simpleRSS.feed[id].autoupdate),
-			getConfigListEntry(_("Feed URI: "), config.plugins.simpleRSS.feed[id].uri)
+			getConfigListEntry(_("Autoupdate"), config.plugins.simpleRSS.feed[id].autoupdate),
+			getConfigListEntry(_("Feed URI"), config.plugins.simpleRSS.feed[id].uri)
 		]
 
 		ConfigListScreen.__init__(self, self.list, session)
@@ -65,22 +65,22 @@ class RSSSetup(ConfigListScreen, Screen):
 
 		# Create List of all Feeds
 		self.list = [
-			getConfigListEntry(_("Feed: "), config.plugins.simpleRSS.feed[i].uri)
+			getConfigListEntry(_("Feed"), config.plugins.simpleRSS.feed[i].uri)
 				for i in range(0, config.plugins.simpleRSS.feedcount.value)
 		]
 
 		# Attach notifier to autostart and append ConfigListEntry to List
 		config.plugins.simpleRSS.autostart.addNotifier(self.autostartChanged, initial_call = False)
-		self.list.append(getConfigListEntry(_("Start automatically with Enigma2: "), config.plugins.simpleRSS.autostart))
+		self.list.append(getConfigListEntry(_("Start automatically with Enigma2"), config.plugins.simpleRSS.autostart))
 
 		# Save keep_running in instance as we want to dynamically add/remove it
-		self.keep_running = getConfigListEntry(_("Keep running in background: "), config.plugins.simpleRSS.keep_running)
+		self.keep_running = getConfigListEntry(_("Keep running in background"), config.plugins.simpleRSS.keep_running)
 		if not config.plugins.simpleRSS.autostart.value:
 			self.list.append(self.keep_running)
 
 		# Append Last two config Elements
-		self.list.append(getConfigListEntry(_("Show new Messages: "), config.plugins.simpleRSS.show_new))
-		self.list.append(getConfigListEntry(_("Update Interval (min): "), config.plugins.simpleRSS.interval))
+		self.list.append(getConfigListEntry(_("Show new Messages"), config.plugins.simpleRSS.show_new))
+		self.list.append(getConfigListEntry(_("Update Interval (min)"), config.plugins.simpleRSS.interval))
 
 		# Initialize ConfigListScreen
 		ConfigListScreen.__init__(self, self.list, session)
@@ -111,7 +111,11 @@ class RSSSetup(ConfigListScreen, Screen):
 		self["config"].setList(self.list)
 
 	def delete(self):
-		self.session.openWithCallback(self.deleteConfirm, MessageBox, "Really delete this entry?\nIt cannot be recovered!")
+		self.session.openWithCallback(
+			self.deleteConfirm,
+			MessageBox,
+			_("Really delete this entry?\nIt cannot be recovered!")
+		)
 
 	def deleteConfirm(self, result):
 		if result:
@@ -143,7 +147,7 @@ class RSSSetup(ConfigListScreen, Screen):
 		if config.plugins.simpleRSS.feed[id].uri.value == "http://":
 			del config.plugins.simpleRSS.feed[id]
 		else:
-			self.list.insert(id, getConfigListEntry(_("Feed: "), config.plugins.simpleRSS.feed[id].uri))
+			self.list.insert(id, getConfigListEntry(_("Feed"), config.plugins.simpleRSS.feed[id].uri))
 			config.plugins.simpleRSS.feedcount.value = id+1
 
 	def keySave(self):

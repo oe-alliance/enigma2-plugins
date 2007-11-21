@@ -6,7 +6,7 @@ class BaseFeed:
 	"""Base-class for all Feeds. Initializes needed Elements."""
 	MAX_HISTORY_ELEMENTS = 100
 
-	def __init__(self, uri, autoupdate):
+	def __init__(self, uri, autoupdate, title = "", description = ""):
 		# Set URI (used as Identifier)
 		self.uri = uri
 
@@ -14,8 +14,8 @@ class BaseFeed:
 		self.autoupdate = autoupdate
 
 		# Initialize
-		self.title = uri.encode("UTF-8")
-		self.description = ""
+		self.title = title or uri.encode("UTF-8")
+		self.description = description
 		self.last_update = None
 		self.last_ids = set()
 		self.history = []
