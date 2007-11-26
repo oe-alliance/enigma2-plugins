@@ -26,7 +26,7 @@ from re import compile
 ## XML
 from pyexpat import ExpatError
 import xml.dom.minidom
-from Tools.XMLTools elementsWithTag
+from Tools.XMLTools import elementsWithTag
 
 ### my
 from WebcamViewConfig import WebcamViewerMenu
