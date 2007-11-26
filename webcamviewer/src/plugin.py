@@ -10,25 +10,23 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.ScrollLabel import ScrollLabel
+from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.FileList import EXTENSIONS
 ## configmenu
-from Components.config import config, ConfigSubsection,ConfigSelection,ConfigText,getConfigListEntry
-from Components.ConfigList import ConfigListScreen
+from Components.config import config, ConfigSubsection,ConfigSelection,ConfigText
 ####
 from Components.Input import Input
 from Components.Pixmap import Pixmap
 from Plugins.Plugin import PluginDescriptor
 ### System
 import os
-import re
+from re import compile
 ## XML
 from pyexpat import ExpatError
 import xml.dom.minidom
-from Tools.XMLTools import mergeText, elementsWithTag
+from Tools.XMLTools elementsWithTag
 
 ### my
 from WebcamViewConfig import WebcamViewerMenu
@@ -177,7 +175,7 @@ class PictureViewer(Screen):
                 s = os.listdir(dirname)
                 s.sort()
                 for file in s:
-                    if re.compile(config.plugins.pictureviewer.matchingPattern.value).search(dirname+file):
+                    if compile(config.plugins.pictureviewer.matchingPattern.value).search(dirname+file):
                         self.slideshowfiles.append((_(file),dirname+file))
                 self["slist"].l.setList(self.slideshowfiles)
                     
@@ -448,7 +446,7 @@ class PictureList(MenuList, HTMLComponent, GUIComponent):
                 path = directory + x
                 name = x
                 if self.matchingPattern is not None:
-                    if re.compile(self.matchingPattern).search(path):
+                    if compile(self.matchingPattern).search(path):
                         self.list.append(self.getPictureEntryComponent(name,path ,False))
                 else:
                     pass 

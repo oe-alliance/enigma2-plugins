@@ -9,7 +9,6 @@ from Components.Scanner import openList
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
-from Components.Pixmap import Pixmap
 
 from RSSList import RSSFeedList, RSSEntryList
 from RSSSetup import RSSSetup

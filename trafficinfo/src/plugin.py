@@ -1,14 +1,10 @@
 # by 3c5x9@2007
 from enigma import eTimer
 from Screens.Screen import Screen
-from Screens.InputBox import InputBox
-from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Components.Input import Input
 
-from Components.GUIComponent import GUIComponent
 from Components.MultiContent import MultiContentEntryText
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_WRAP
 

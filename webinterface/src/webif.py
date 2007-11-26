@@ -15,7 +15,7 @@ from Tools.Import import my_import
 
 from Screens.InfoBarGenerics import InfoBarServiceName, InfoBarEvent, InfoBarTuner
 
-from Components.Sources.Source import Source, ObsoleteSource
+from Components.Sources.Source import ObsoleteSource
 
 from Components.Sources.Clock import Clock
 from Components.Sources.ServiceList import ServiceList

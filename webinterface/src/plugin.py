@@ -17,8 +17,6 @@ from WebIfConfig import WebIfConfigScreen
 
 from WebChilds.Toplevel import Toplevel
 
-from Tools.BoundFunction import boundFunction
-
 config.plugins.Webinterface = ConfigSubsection()
 config.plugins.Webinterface.enable = ConfigYesNo(default = True)
 config.plugins.Webinterface.port = ConfigInteger(80,limits = (1, 65536))

@@ -4,9 +4,8 @@ from Components.HTMLComponent import HTMLComponent
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
-from Components.Pixmap import Pixmap, MovingPixmap
 from Components.ScrollLabel import ScrollLabel
-from Components.config import config, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigText
 from EmailConfig import EmailConfigScreen
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
@@ -17,12 +16,7 @@ from zope.interface import implements
 import email
 import email.Parser
 from TagStrip import TagStrip
-import protocol
-import uu
-
-
-
-
+from protocol import createFactory
 
 config.plugins.emailimap = ConfigSubsection()
 config.plugins.emailimap.username = ConfigText("user", fixed_size=False)
@@ -58,7 +52,7 @@ class EmailScreen(Screen, EmailHandler):
         
         self.skin = EmailScreen.skin
         Screen.__init__(self, session)
-        protocol.createFactory(self, config.plugins.emailimap.username.value, config.plugins.emailimap.server.value, config.plugins.emailimap.port.value)
+        createFactory(self, config.plugins.emailimap.username.value, config.plugins.emailimap.server.value, config.plugins.emailimap.port.value)
 
         self["actions"] = ActionMap(["InfobarChannelSelection", "WizardActions", "DirectionActions", "MenuActions", "ShortcutActions", "GlobalActions", "HelpActions", "NumberActions"], 
             {

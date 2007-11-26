@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-from enigma import eTimer
-
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigIP, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger
-from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.ConfigList import ConfigListScreen
 
 from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
@@ -16,7 +14,6 @@ from twisted.internet import reactor
 from twisted.internet.protocol import ReconnectingClientFactory
 from twisted.protocols.basic import LineReceiver
 from twisted.web.client import getPage
-from twisted.web2.client.http import HTTPClientProtocol, ClientRequest
 
 from os import path as os_path
 from urllib import urlencode

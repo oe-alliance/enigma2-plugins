@@ -1,6 +1,5 @@
 # GUI (Screens)
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
 
 # GUI (Components)
 from Components.ActionMap import ActionMap

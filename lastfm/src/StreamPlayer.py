@@ -1,7 +1,6 @@
 from enigma import eServiceReference
 from os import system
 from os.path import isfile as os_path_isfile
-from math import ceil
 from time import time
 from urllib import quote_plus
 from Components.config import config
