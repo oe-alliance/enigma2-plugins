@@ -167,10 +167,10 @@ class AutoTimer:
 
 				# Read out counter
 				counter = int(timer.getAttribute("counter") or '0')
-				counterLeft = timer.getAttribute("left") or counter
+				counterLeft = int(timer.getAttribute("left") or counter)
 				counterLimit = timer.getAttribute("lastActivation")
 				counterFormat = timer.getAttribute("counterFormat")
-				lastBegin = timer.getAttribute("lastBegin") or 0
+				lastBegin = int(timer.getAttribute("lastBegin") or 0)
 
 				# Read out justplay
 				justplay = int(timer.getAttribute("justplay") or '0')
@@ -255,7 +255,7 @@ class AutoTimer:
 						matchLeft = counterLeft,
 						matchLimit = counterLimit,
 						matchFormatString = counterFormat,
-						lastBegin = int(lastBegin),
+						lastBegin = lastBegin,
 						justplay = justplay,
 						avoidDuplicateDescription = avoidDuplicateDescription
 				))
