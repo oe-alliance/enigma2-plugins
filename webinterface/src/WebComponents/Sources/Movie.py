@@ -19,6 +19,7 @@ class Movie( Source):
         self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
         self.movielist = movielist#MovieList(self.root)
         self.movielist.load(self.root,None)
+        self.cmd = ""
     
     def handleCommand(self,cmd):
         self.cmd = cmd
