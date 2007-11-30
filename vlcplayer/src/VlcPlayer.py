@@ -43,6 +43,8 @@ class VlcService(Source, iPlayableServicePtr):
 			return self.name
 		def isPlayable(self):
 			return True
+		def getEvent(self, what):
+			return None
 
 	def __init__(self, player):
 		Source.__init__(self)
@@ -64,6 +66,9 @@ class VlcService(Source, iPlayableServicePtr):
 		if i >= 0:
 			filename = filename[i+1:]
 		self.__info.name = filename
+		self.setChanged()
+	
+	def setChanged(self):
 		self.changed( (self.CHANGED_SPECIFIC, iPlayableService.evStart) )
 	
 	def setControl(self, control):
@@ -134,10 +139,13 @@ class VlcPlayer(Screen):
 		self.skinName = "MoviePlayer"
 		self.state = self.STATE_IDLE
 		self.url = None
+		self.oldservice = self.session.screen["CurrentService"]
 		self.vlcservice = VlcService(self)
 		self["CurrentService"] = self.vlcservice
+		self.session.screen["CurrentService"] = self.vlcservice
 		self.hidetimer = eTimer()
 		self.hidetimer.timeout.get().append(self.ok)
+		self.onClose.append(self.__onClose)
 
 		class InfoBarSeekActionMap(ActionMap):
 			def __init__(self, player, contexts = [ ], actions = { }, prio=0):
@@ -173,6 +181,8 @@ class VlcPlayer(Screen):
 				iPlayableService.evEOF: self.__evEOF,
 #				iPlayableService.evSOF: self.__evSOF,
 			})
+	def __onClose(self):
+		self.session.screen["CurrentService"] = self.oldservice
 	
 	def __evEOF(self):
 		print "[VLC] Event EOF"

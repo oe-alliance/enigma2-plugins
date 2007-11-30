@@ -21,7 +21,7 @@ from VlcPlayer import VlcPlayer
 
 class VlcBrowser(Screen):
 	skin = """
-		<screen position="80,100" size="560,400" title="VLC Video Player" >
+		<screen position="80,100" size="560,400" title="VLC Video Player V1.5" >
 			<widget name="currentdir" position="10,10" size="550,20" font="Regular;18"/>
 			<widget name="filelist" position="10,35" size="550,310"  scrollbarMode="showOnDemand"/>
 			<ePixmap name="red"    position="0,355"   zPosition="4" size="140,40" pixmap="skin_default/key-red.png" transparent="1" alphatest="on" />
@@ -34,7 +34,7 @@ class VlcBrowser(Screen):
 			<widget name="key_blue" position="420,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
-	defaultFilter = "(?i)\.(avi|mpeg|mpg|divx|xvid|mp4|mov|ts|vob|wmv)$"
+	defaultFilter = "(?i)\.(avi|mpeg|mpg|divx|xvid|mp4|mov|ts|vob|wmv|mkv)$"
 	
 	def __init__(self, session):
 		self.session = session
