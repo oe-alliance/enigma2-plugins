@@ -74,6 +74,11 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 
 		return True
 
+	def resetState(self):
+		self.state = self.StateWaiting
+		self.cancelled = False
+		self.timeChanged()
+
 	def timeChanged(self):
 		if self.nocheck and self.state < self.StateRunning:
 			self.state = self.StatePrepared
