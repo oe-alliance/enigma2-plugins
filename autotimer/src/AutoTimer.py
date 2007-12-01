@@ -449,7 +449,7 @@ class AutoTimer:
 				timer.update(begin, timestamp)
 
 				# Check Duration, Timespan and Excludes
-				if timer.checkServices(serviceref) or timer.checkDuration(duration) or timer.checkTimespan(timestamp) or timer.checkFilter(name, description, evt.getExtendedDescription(), str(timestamp[6])):
+				if timer.checkServices(serviceref) or timer.checkDuration(duration) or timer.checkTimespan(timestamp) or timer.checkFilter(name, description, evt.getExtendedDescription(), str(timestamp.tm_wday)):
 					continue
 
 				# Apply E2 Offset

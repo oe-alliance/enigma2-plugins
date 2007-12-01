@@ -119,21 +119,21 @@ class AutoTimerComponent(object):
 		# Check if we span a day
 		if haveDayspan:
 			# Check if begin of event is later than our timespan starts
-			if time[3] > begin[0] or (time[3] == begin[0] and time[4] >= begin[1]):
+			if time.tm_hour > begin[0] or (time.tm_hour == begin[0] and time.tm_min >= begin[1]):
 				# If so, event is in our timespan
 				return False
 			# Check if begin of event is earlier than our timespan end
-			if time[3] < end[0] or (time[3] == end[0] and time[4] <= end[1]):
+			if time.tm_hour < end[0] or (time.tm_hour == end[0] and time.tm_min <= end[1]):
 				# If so, event is in our timespan
 				return False
 			return True
 		else:
 			# Check if event begins earlier than our timespan starts 
-			if time[3] < begin[0] or (time[3] == begin[0] and time[4] < begin[1]):
+			if time.tm_hour < begin[0] or (time.tm_hour == begin[0] and time.tm_min < begin[1]):
 				# Its out of our timespan then
 				return True
 			# Check if event begins later than our timespan ends
-			if time[3] > end[0] or (time[3] == end[0] and time[4] > end[1]):
+			if time.tm_hour > end[0] or (time.tm_hour == end[0] and time.tm_min > end[1]):
 				# Its out of our timespan then
 				return True
 			return False
