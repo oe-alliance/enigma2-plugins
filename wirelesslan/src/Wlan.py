@@ -171,7 +171,7 @@ class WlanList(HTMLComponent, GUIComponent):
 		
 		e = encrypted and _("Yes") or _("No")
 		res.append( MultiContentEntryText(pos=(0, 0), size=(470, 35), font=0, flags=RT_HALIGN_LEFT, text=essid) )
-		res.append( MultiContentEntryText(pos=(480, 0), size=(90, 35), font=0, flags=RT_HALIGN_RIGHT, text="%s%" %signal))
+		res.append( MultiContentEntryText(pos=(480, 0), size=(90, 35), font=0, flags=RT_HALIGN_RIGHT, text="%s" %signal))
 		res.append( MultiContentEntryText(pos=(0, 40), size=(180, 20), font=1, flags=RT_HALIGN_LEFT, text=_("Max. Bitrate: %s") %maxrate ))
 		res.append( MultiContentEntryText(pos=(190, 40), size=(180, 20), font=1, flags=RT_HALIGN_CENTER, text=_("Encrypted: %s") %e ))
 		res.append( MultiContentEntryText(pos=(380, 40), size=(190, 20), font=1, flags=RT_HALIGN_RIGHT, text=_("Interface: %s") %iface ))
@@ -238,9 +238,11 @@ class wpaSupplicant:
 					if encryption == 'WPA':
 						fp.write('\tproto=WPA\n')
 						fp.write('\tpairwise=TKIP\n')
+						fp.write('\tgroup=TKIP\n')
 					else:
 						fp.write('\tproto=WPA RSN\n')
 						fp.write('\tpairwise=CCMP TKIP\n')
+						fp.write('\tgroup=CCMP TKIP\n')
 					
 					fp.write('\tpsk="'+psk+'"\n')
 				
