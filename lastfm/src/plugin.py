@@ -55,7 +55,7 @@ def main(session,**kwargs):
         proxy.start()
         
     global streamplayer
-    if streamplayer is False:
+    if streamplayer is not False:
         streamplayer.setSession(session)
     else:
         streamplayer = StreamPlayer(session)
