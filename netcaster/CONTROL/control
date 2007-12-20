@@ -1,4 +1,4 @@
-Package: netcaster
+Package: enigma2-plugin-extensions-netcaster
 Version: 0.1-20072203-r0
 Description: Player for Network and Internet Streams
 Architecture: mipsel
