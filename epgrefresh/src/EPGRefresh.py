@@ -23,7 +23,7 @@ from Components.config import config
 CONFIG = "/etc/enigma2/epgrefresh.conf"
 
 class EPGRefresh:
-	"""WIP - Simple Class to refresh EPGData - WIP"""
+	"""Simple Class to refresh EPGData"""
 
 	def __init__(self):
 		# Initialize 
