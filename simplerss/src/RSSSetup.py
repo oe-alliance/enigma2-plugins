@@ -1,4 +1,5 @@
 from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Button import Button
