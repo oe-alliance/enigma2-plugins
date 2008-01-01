@@ -1,5 +1,4 @@
-// Versioning
-Version = '$Header$';
+// $Header$
 
 // TimerEdit variables:
 var addTimerEditFormObject = new Object();

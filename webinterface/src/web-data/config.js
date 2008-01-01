@@ -1,4 +1,4 @@
-Version = '$Header$';
+// $Header$
 
 var DBG = true;
 DBG = false;

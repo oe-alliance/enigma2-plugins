@@ -1,4 +1,4 @@
-Version = '$Header$';
+// $Header$
 
 var doRequestMemory = new Object();
 var doRequestMemorySave = new Object();
@@ -170,8 +170,6 @@ function showhide(id){
  	o.display = (o.display!="none")? "none":"";
 }
 function set(element, value){
-	//debug(element+"-"+value);
-//	MP3 File: /media/hdd/13-Placebo_Song_To_Say_Goodbye-Meds.mp3
 	if(element == "CurrentService") {
 		if(value.search(/^MP3 File:/) != -1) {
 			value = value.replace(/.*\//, '');
@@ -272,18 +270,19 @@ function getXML(request){
 	return xmlDoc;
 }
 function parentPin(servicereference) {
+    debug ("parentPin: parentControlList");
 	servicereference = decodeURIComponent(servicereference);
-	if(parentControlList == null || String(getSettingByName("config.ParentalControl.configured")) != "True") {
+	if(parentControlList == null || String(getSettingByName("config.ParentalControl.configured")) != "true") {
 		return true;
 	}
-	debug("parentPin " + parentControlList.length);
+	//debug("parentPin " + parentControlList.length);
 	if(getParentControlByRef(servicereference) == servicereference) {
 		if(String(getSettingByName("config.ParentalControl.type.value")) == "whitelist") {
-			debug("leaving here 1");
+			debug("parentPin leaving here 1");
 			return true;
 		}
 	} else {
-		debug("leaving here 2");
+		debug("parentPin leaving here 2");
 		return true;
 	}
 	debug("going to ask for PIN");
@@ -301,21 +300,16 @@ function parentPin(servicereference) {
 }
 
 function zap(servicereference){
-	if(parentPin(servicereference)) {
-		new Ajax.Request( "/web/zap?sRef=" + servicereference, 
-							{
-								asynchronous: true,
-								method: 'get'
-							}
-						);
-		setTimeout("getSubServices()", 5000);
-	}
-	
+	new Ajax.Request( "/web/zap?sRef=" + servicereference, 
+						{
+							asynchronous: true,
+							method: 'get'
+						}
+					);
+	setTimeout("getSubServices()", 5000);
 }
 
-
 //++++       SignalPanel                           ++++
-
 function openSignalDialog(){
 	openWindow("Signal Info",tplSignalPanel, 215, 100,620,40);
 }
@@ -501,8 +495,6 @@ function initChannelList(){
 
 	var url = url_getServices+encodeURIComponent(bouqet_provider_radio);
 	doRequest(url, incomingProviderRadioBouquetList, true);
-	
-	getSettings();
 }
 
 var servicereftoloadepgnow = "";
@@ -737,15 +729,15 @@ function incomingRemoteControlResult(request){
 	}
 }
 
-function getSettings(){
-	doRequest(url_settings, incomingGetSettings, false);
+function getDreamboxSettings(){
+	doRequest(url_settings, incomingGetDreamboxSettings, false);
 }
-
-function incomingGetSettings(request){
+function incomingGetDreamboxSettings(request){
 	if(request.readyState == 4){
 		settings = new Settings(getXML(request)).getArray();
 	}
-	if(String(getSettingByName("config.ParentalControl.configured")) == "True") {
+	debug ("starte getParentControl " + getSettingByName("config.ParentalControl.configured"));
+	if(String(getSettingByName("config.ParentalControl.configured")) == "true") {
 		getParentControl();
 	}
 }
@@ -754,7 +746,7 @@ function getSettingByName(txt) {
 	for(i = 0; i < settings.length; i++) {
 		debug("("+settings[i].getSettingName()+") (" +settings[i].getSettingValue()+")");
 		if(String(settings[i].getSettingName()) == String(txt)) {
-			return settings[i].getSettingValue();
+			return settings[i].getSettingValue().toLowerCase();
 		} 
 	}
 	return "";

@@ -21,8 +21,8 @@ var tplEPGListItem  = '<tr style="background-color: #DDDDDD;">';
 	tplEPGListItem += '</tr>';
 
 	tplEPGListItem +='<tr style="background-color: #DDDDDD;"><td>';
-	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/timer.png" title="add to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'0\');"></a>&nbsp;&nbsp;';
-	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/zap.png" title="add zap to Timers" border="0" onclick="addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'1\');"></a>&nbsp;&nbsp;';
+	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/timer.png" title="add to Timers" border="0" onclick=" if( parentPin( \'%(servicereference)\' ) ) { addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'0\'); }"></a>&nbsp;&nbsp;';
+	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/zap.png" title="add zap to Timers" border="0" onclick="if ( parentPin( \'%(servicereference)\' ) ) { addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'1\'); }"></a>&nbsp;&nbsp;';
 	tplEPGListItem +='<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit and add timer" border="0" onclick="loadTimerFormSeconds(0,\'%(start)\',\'%(end)\',0,\'%(servicereference)\',\'%(servicename)\',\'%(title)\',\'%(description)\',\'0\',0,\'%(eventid)\');"></a><br/>';
 	tplEPGListItem +='<a target="_blank" href="/web/epgsearch.rss?search=%(title)" ><img src="/webdata/gfx/feed.png" title="RSS-Feed for this Title" border="0"></a><br/>';
 	tplEPGListItem +='<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=%(titleESC)" ><img src="/webdata/gfx/world.png" title="search IMDb" border="0"></a><br/>';
@@ -52,9 +52,9 @@ var tplServiceListHeader  = '<div class="BodyContentChannellist">\n';
 	tplServiceListHeader += '<input type="hidden" id="mainServiceRef" name="mainServiceRef" value="%(mainServiceRef)">\n';
 
 var tplServiceListItem  = '<tr>\n';
-	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><span id="%(servicereference)" onclick="zap(this.id);" class="sListSLink">%(servicename)</span></div>';
-	tplServiceListItem += '<div class="sListExt"><a onclick="loadEPGByServiceReference(this.id)" id="%(servicereference)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
-	tplServiceListItem += '<a target="_blank" href="/web/stream.m3u?ref=%(servicereference)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
+	tplServiceListItem += '<td style="border-top: 2px solid #AAA;" ><div class="sListSName"><span id="%(servicereference)" onclick="if ( parentPin( \'%(servicereference)\' ) ) { zap(this.id); }" class="sListSLink">%(servicename)</span></div>';
+	tplServiceListItem += '<div class="sListExt"><a onclick="if ( parentPin( \'%(servicereference)\' ) ) { loadEPGByServiceReference(this.id); }" id="%(servicereference)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
+	tplServiceListItem += '<a target="_blank" onclick="return parentPin( \'%(servicereference)\' );" href="/web/stream.m3u?ref=%(servicereference)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
 	tplServiceListItem += '</td></tr>\n';
 	tplServiceListItem += '<tr><td id="%(servicereference)sub"></td></tr>';
     tplServiceListItem += '<tr>\n';
@@ -68,7 +68,7 @@ var	tplServiceListEPGItem  = '<div class="sListEPGTime">%(starttime)</div>\n';
 	tplServiceListEPGItem += '<div class="sListEPGTitle">%(title)</div>\n';
 	tplServiceListEPGItem += '<div class="sListEPGDuration">%(length) min.</div>\n';
 
-var	tplSubServiceListItem  = '<div class="sListSName"><span id="%(servicereference)" onclick="zap(this.id);" class="sListSLink">%(servicename)</span></div>\n';
+var	tplSubServiceListItem  = '<div class="sListSName"><span id="%(servicereference)" onclick="if ( parentPin( \'%(servicereference)\' ) ) { zap(this.id); }" class="sListSLink">%(servicename)</span></div>\n';
 	tplSubServiceListItem += '<div class="sListExt"><a onclick="loadEPGByServiceReference(this.id)" id="%(servicereference)"><img src="/webdata/gfx/epg.png" border="0"/></a>\n';
 	tplSubServiceListItem += '<a target="_blank" href="/web/stream.m3u?ref=%(servicereference)"><img src="/webdata/gfx/screen.png" title="stream Service" border="0"></a></div>\n';
 
@@ -338,7 +338,7 @@ var tplAddTimerForm  = '<table border=0 cellpadding=0 cellspacing=10>';
 	tplAddTimerForm += '<input name="beginOld" id="beginOld" type="hidden" value="%(beginOld)">';
 	tplAddTimerForm += '<input name="endOld" id="endOld" type="hidden" value="%(endOld)">';
 	tplAddTimerForm += '<input name="eventID" id="eventID" type="hidden" value="%(eventID)">';
-	tplAddTimerForm += 	'<button onclick="sendAddTimer()">Add/Save</button></td></tr></table>';
+	tplAddTimerForm += 	'<button onclick="sendAddTimer();">Add/Save</button></td></tr></table>';
 
 var tplAddTimerFormOptions = '<option value="%(value)" %(selected)>%(txt)</option>';
 

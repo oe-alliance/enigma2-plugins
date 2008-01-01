@@ -2,7 +2,7 @@
 <html>
 <head>
 <!-- 
-	Version = '$Header$';
+ $Header$
 -->
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 	<title>Enigma 2 Webinterface</title>
@@ -160,6 +160,8 @@ new Rico.Accordion( $('accordionMenue'), accordionOptions );
 // do things to do at startup
 initVolumePanel();
 initChannelList();
+getDreamboxSettings();
+
 //setBodyMainContent('BodyContentChannellist');
 UpdateStreamReaderStart();
 showhide('Event_Next_Extended_Description');
