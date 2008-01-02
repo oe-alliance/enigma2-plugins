@@ -19,6 +19,9 @@ class StreamPlayer:
             self.stop()
             self.play(stream)
         else:
+            if stream.getURL() is None:
+            	print "no URL provided for play"
+            	return
             if stream.getURL().startswith("/") is not True:
                 print "playing remote stream",stream.getURL()
                 self.session.nav.stopService()
