@@ -2,7 +2,7 @@
 from Components.config import config, ConfigEnableDisable, ConfigInteger, ConfigSubsection, ConfigClock
 
 # Calculate default begin/end
-from time import localtime, mktime
+from time import time, localtime, mktime
 now = [x for x in localtime()]
 now[3] = 20
 now[4] = 15
@@ -38,6 +38,23 @@ def autostart(reason, **kwargs):
 	elif reason == 1:
 		epgrefresh.stop()
 
+def getNextWakeup():
+	# Return invalid time if not automatically refreshing
+	if not config.plugins.epgrefresh.enabled.value:
+		return -1
+	now = localtime()
+	begin = mktime(
+		(now.tm_year, now.tm_mon, now.tm_mday,
+		config.plugins.epgrefresh.begin.value[0],
+		config.plugins.epgrefresh.begin.value[1],
+		0, now.tm_wday, now.tm_yday, now.tm_isdst)
+	)
+	# todays timespan has not yet begun
+	if begin > time():
+		return begin
+	# otherwise add 1 day
+	return begin+86400
+
 # Mainfunction
 def main(session, **kwargs):
 	epgrefresh.stop()
@@ -52,6 +69,6 @@ def doneConfiguring(session, **kwargs):
 
 def Plugins(**kwargs):
 	return [
-		PluginDescriptor(name="EPGRefresh", description = "Automated EPGRefresher", where = [PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
+		PluginDescriptor(name="EPGRefresh", description = "Automated EPGRefresher", where = [PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart, wakeupfnc = getNextWakeup),
 		PluginDescriptor(name="EPGRefresh", description = "Automated EPGRefresher", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main)
 	]
