@@ -91,8 +91,9 @@ class LogoManagerScreen(Screen):
         
     def showSelected(self):
         """ show the currently selected MVI of the list """
-        sel= self["filelist"].getCurrent()[1]
-        self.showMVI(sel)
+        sel = self["filelist"].getCurrent()
+        if sel is not None:
+          self.showMVI(sel[1])
     
     def openMenu(self):
         """ opens up the Main Menu """
