@@ -1,6 +1,6 @@
 Package: enigma2-plugin-extensions-httpproxy
 Version: 1.0
-Description: view german trafficjam informations
+Description: use your Dreambox as Web Proxy
 Architecture: mipsel
 Section: extra
 Priority: optional
