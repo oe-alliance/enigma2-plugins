@@ -77,4 +77,8 @@ epgrefresh/src/Makefile
 
 werbezapper/Makefile
 werbezapper/src/Makefile
+
+httpproxy/Makefile
+httpproxy/src/Makefile
+
 ])
