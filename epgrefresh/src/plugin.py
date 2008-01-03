@@ -3,18 +3,14 @@ from Components.config import config, ConfigEnableDisable, ConfigInteger, Config
 
 # Calculate default begin/end
 from time import time, localtime, mktime
-now = [x for x in localtime()]
-now[3] = 20
-now[4] = 15
-begin = mktime(now)
-now[3] = 06
-now[4] = 30
-end = mktime(now)
+now = localtime()
+begin = mktime((now.tm_year, now.tm_mon, now.tm_mday, 20, 15, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
+end = mktime((now.tm_year, now.tm_mon, now.tm_mday, 06, 30, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
 
 config.plugins.epgrefresh = ConfigSubsection()
 config.plugins.epgrefresh.enabled = ConfigEnableDisable(default = False)
-config.plugins.epgrefresh.begin = ConfigClock(default = begin)
-config.plugins.epgrefresh.end = ConfigClock(default = end)
+config.plugins.epgrefresh.begin = ConfigClock(default = int(begin))
+config.plugins.epgrefresh.end = ConfigClock(default = int(end))
 config.plugins.epgrefresh.interval = ConfigInteger(default = 2, limits=(1, 10))
 config.plugins.epgrefresh.delay_timespan = ConfigInteger(default = 60, limits=(5, 300))
 config.plugins.epgrefresh.delay_standby = ConfigInteger(default = 10, limits=(1, 60))
@@ -22,6 +18,8 @@ config.plugins.epgrefresh.inherit_autotimer = ConfigEnableDisable(default = Fals
 config.plugins.epgrefresh.afterevent = ConfigEnableDisable(default = False)
 config.plugins.epgrefresh.force = ConfigEnableDisable(default = False)
 config.plugins.epgrefresh.lastscan = ConfigInteger(default = 0)
+
+del now, begin, end
 
 # Plugin
 from EPGRefresh import epgrefresh
@@ -43,12 +41,12 @@ def getNextWakeup():
 	if not config.plugins.epgrefresh.enabled.value:
 		return -1
 	now = localtime()
-	begin = mktime(
+	begin = int(mktime(
 		(now.tm_year, now.tm_mon, now.tm_mday,
 		config.plugins.epgrefresh.begin.value[0],
 		config.plugins.epgrefresh.begin.value[1],
 		0, now.tm_wday, now.tm_yday, now.tm_isdst)
-	)
+	))
 	# todays timespan has not yet begun
 	if begin > time():
 		return begin

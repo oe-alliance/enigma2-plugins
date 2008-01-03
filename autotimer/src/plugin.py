@@ -38,7 +38,7 @@ def autostart(reason, **kwargs):
 		autotimer = AutoTimer()
 
 		# Start Poller
-		autopoller.start(autotimer)
+		autopoller.start()
 	# Shutdown
 	elif reason == 1:
 		# Stop Poller
@@ -91,8 +91,9 @@ def main(session, **kwargs):
 def editCallback(session):
 	global autotimer
 
+	# Start autopoller again if wanted
 	if config.plugins.autotimer.autopoll.value:
-		autopoller.start(autotimer, initial = False)
+		autopoller.start(initial = False)
 
 	# Don't do anything when editing was canceled
 	if session is None:
@@ -117,6 +118,12 @@ def editCallback(session):
 			type = MessageBox.TYPE_ERROR,
 			timeout = 15
 		)
+
+	# Remove instance if not running in background
+	if not config.plugins.autotimer.autopoll.value:
+		# Save xml
+		autotimer.writeXml()
+		autotimer = None
 
 def Plugins(**kwargs):
 	return [

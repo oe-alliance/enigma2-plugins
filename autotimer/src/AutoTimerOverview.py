@@ -161,13 +161,5 @@ class AutoTimerOverview(Screen):
 				)
 
 	def save(self):
-		# Save Xml
-		try:
-			self.autotimer.writeXml()
-		except:
-			# Don't crash during development
-			import traceback, sys
-			traceback.print_exc(file=sys.stdout)
-
-		# Nothing else to be done?
+		# Just close here, saving will be done by cb
 		self.close(self.session)
