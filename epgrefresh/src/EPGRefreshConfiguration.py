@@ -47,7 +47,6 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 			getConfigListEntry(_("Time to stay on service (in m)"), config.plugins.epgrefresh.interval),
 			getConfigListEntry(_("Refresh EPG after"), config.plugins.epgrefresh.begin),
 			getConfigListEntry(_("Refresh EPG before"), config.plugins.epgrefresh.end),
-			getConfigListEntry(_("Delay when not in Timespan (in m)"), config.plugins.epgrefresh.delay_timespan),
 			getConfigListEntry(_("Delay when not in Standby (in m)"), config.plugins.epgrefresh.delay_standby),
 			getConfigListEntry(_("Force scan even if not in Standby or Recording"), config.plugins.epgrefresh.force),
 			getConfigListEntry(_("Inherit Services from AutoTimer if available"), config.plugins.epgrefresh.inherit_autotimer),
