@@ -61,7 +61,7 @@ def parseConfig_v3(configuration, list, uniqueTimerId = 0):
 		# Read out allowed services
 		servicelist = []			
 		for service in timer.getElementsByTagName("serviceref"):
-			value = getValue(service, None, False)
+			value = getValue(service, None)
 			if value:
 				# strip all after last :
 				pos = value.rfind(':')
@@ -89,7 +89,7 @@ def parseConfig_v3(configuration, list, uniqueTimerId = 0):
 		Len = len(elements)
 		if Len:
 			idx = {"none": AFTEREVENT.NONE, "standby": AFTEREVENT.STANDBY, "shutdown": AFTEREVENT.DEEPSTANDBY, "deepstandby": AFTEREVENT.DEEPSTANDBY}
-			value = getValue(elements[Len-1], None, False)
+			value = getValue(elements[Len-1], None)
 
 			try:
 				value = idx[value]
@@ -112,7 +112,7 @@ def parseConfig_v3(configuration, list, uniqueTimerId = 0):
 		excludes = ([], [], [], []) 
 		for exclude in timer.getElementsByTagName("exclude"):
 			where = exclude.getAttribute("where")
-			value = getValue(exclude, None, False)
+			value = getValue(exclude, None)
 			if not (value and where):
 				continue
 
@@ -190,7 +190,7 @@ def parseConfig_v2(configuration, list, uniqueTimerId = 0):
 		if len(elements):
 			servicelist = []
 			for service in elements:
-				value = getValue(service, None, False)
+				value = getValue(service, None)
 				if value:
 					# strip all after last :
 					pos = value.rfind(':')
@@ -220,7 +220,7 @@ def parseConfig_v2(configuration, list, uniqueTimerId = 0):
 		Len = len(elements)
 		if Len:
 			idx = {"none": AFTEREVENT.NONE, "standby": AFTEREVENT.STANDBY, "shutdown": AFTEREVENT.DEEPSTANDBY, "deepstandby": AFTEREVENT.DEEPSTANDBY}
-			value = getValue(elements[Len-1], None, False)
+			value = getValue(elements[Len-1], None)
 			try:
 				value = idx[value]
 				start = elements[Len-1].getAttribute("from")
@@ -244,7 +244,7 @@ def parseConfig_v2(configuration, list, uniqueTimerId = 0):
 			idx = {"title": 0, "shortdescription": 1, "description": 2, "dayofweek": 3}
 			for exclude in elements:
 				where = exclude.getAttribute("where")
-				value = getValue(exclude, None, False)
+				value = getValue(exclude, None)
 				if not (value and where):
 					continue
 
@@ -318,7 +318,7 @@ def parseConfig_v1(configuration, list, uniqueTimerId = 0):
 		if len(elements):
 			servicelist = []
 			for service in elements:
-				value = getValue(service, None, False)
+				value = getValue(service, None)
 				if value:
 					# strip all after last :
 					pos = value.rfind(':')
@@ -358,7 +358,7 @@ def parseConfig_v1(configuration, list, uniqueTimerId = 0):
 			idx = {"title": 0, "shortdescription": 1, "description": 2, "dayofweek": 3}
 			for exclude in elements:
 				where = exclude.getAttribute("where")
-				value = getValue(exclude, None, False)
+				value = getValue(exclude, None)
 				if not (value and where):
 					continue
 

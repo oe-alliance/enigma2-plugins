@@ -1,7 +1,3 @@
-#
-# Warning: This Plugin is WIP
-#
-
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
 from AutoTimerOverview import AutoTimerOverview

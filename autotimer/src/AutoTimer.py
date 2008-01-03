@@ -25,19 +25,19 @@ from AutoTimerComponent import AutoTimerComponent
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 CURRENT_CONFIG_VERSION = "4"
 
-def getValue(definitions, default, isList = True):
+def getValue(definitions, default):
 	# Initialize Output
 	ret = ""
 
 	# How many definitions are present
-	if isList:
+	try:
+		childNodes = definitions.childNodes
+	except:
 		Len = len(definitions)
 		if Len > 0:
 			childNodes = definitions[Len-1].childNodes
 		else:
 			childNodes = []
-	else:
-		childNodes = definitions.childNodes
 
 	# Iterate through nodes of last one
 	for node in childNodes:
@@ -181,7 +181,7 @@ class AutoTimer:
 				# Read out allowed services
 				servicelist = []					
 				for service in timer.getElementsByTagName("serviceref"):
-					value = getValue(service, None, False)
+					value = getValue(service, None)
 					if value:
 						# strip all after last :
 						pos = value.rfind(':')
@@ -194,7 +194,7 @@ class AutoTimer:
 				idx = {"none": AFTEREVENT.NONE, "standby": AFTEREVENT.STANDBY, "shutdown": AFTEREVENT.DEEPSTANDBY, "deepstandby": AFTEREVENT.DEEPSTANDBY}
 				afterevent = []
 				for element in timer.getElementsByTagName("afterevent"):
-					value = getValue(element, None, False)
+					value = getValue(element, None)
 
 					try:
 						value = idx[value]
@@ -215,7 +215,7 @@ class AutoTimer:
 				excludes = ([], [], [], []) 
 				for exclude in timer.getElementsByTagName("exclude"):
 					where = exclude.getAttribute("where")
-					value = getValue(exclude, None, False)
+					value = getValue(exclude, None)
 					if not (value and where):
 						continue
 
@@ -228,7 +228,7 @@ class AutoTimer:
 				includes = ([], [], [], []) 
 				for include in timer.getElementsByTagName("include"):
 					where = include.getAttribute("where")
-					value = getValue(include, None, False)
+					value = getValue(include, None)
 					if not (value and where):
 						continue
 

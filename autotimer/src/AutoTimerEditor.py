@@ -52,9 +52,21 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		self.onChangedEntry = []
 
 		# See if we are filtering some strings
-		self.excludes = (timer.getExcludedTitle(), timer.getExcludedShort(), timer.getExcludedDescription(), timer.getExcludedDays())
-		self.includes = (timer.getIncludedTitle(), timer.getIncludedShort(), timer.getIncludedDescription(), timer.getIncludedDays())
-		if len(self.excludes[0]) or len(self.excludes[1]) or len(self.excludes[2]) or len(self.excludes[3]) or len(self.includes[0]) or len(self.includes[1]) or len(self.includes[2]) or len(self.includes[3]):
+		self.excludes = (
+			timer.getExcludedTitle(),
+			timer.getExcludedShort(),
+			timer.getExcludedDescription(),
+			timer.getExcludedDays()
+		)
+		self.includes = (
+			timer.getIncludedTitle(),
+			timer.getIncludedShort(),
+			timer.getIncludedDescription(),
+			timer.getIncludedDays()
+		)
+		if len(self.excludes[0]) or len(self.excludes[1]) or len(self.excludes[2]) \
+				or len(self.excludes[3]) or len(self.includes[0]) or len(self.includes[1]) \
+				or len(self.includes[2]) or len(self.includes[3]):
 			self.filterSet = True
 		else:
 			self.filterSet = False
@@ -532,14 +544,26 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			getConfigListEntry(_("Filter"), self.typeSelection)
 		]
 
-		if self.typeSelection.value == "title":
+		if self.typeSelection.value == "day":
+			self.idx = 3
+
+			# Weekdays are presented as ConfigSelection
+			self.list.extend([
+				getConfigListEntry(_("Exclude"), ConfigSelection(choices = weekdays, default = x))
+					for x in self.excludes[3]
+			])
+			self.lenExcludes = len(self.list)
+			self.list.extend([
+				getConfigListEntry(_("Include"), ConfigSelection(choices = weekdays, default = x))
+					for x in self.includes[3]
+			])
+			return
+		elif self.typeSelection.value == "title":
 			self.idx = 0
 		elif self.typeSelection.value == "short":
 			self.idx = 1
-		elif self.typeSelection.value == "desc":
+		else: # self.typeSelection.value == "desc":
 			self.idx = 2
-		else:
-			self.idx = 3
 
 		self.list.extend([
 			getConfigListEntry(_("Exclude"), ConfigText(default = x, fixed_size = False))

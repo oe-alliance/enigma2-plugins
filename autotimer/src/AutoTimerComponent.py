@@ -18,7 +18,10 @@ class AutoTimerComponent(object):
 	def __ne__(self, other):
 		return not self.__eq__(other)
 
-	def setValues(self, name, match, enabled, timespan = None, services = None, offset = None, afterevent = [], exclude = None, maxduration = None, destination = None, include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', lastBegin = 0, justplay = False, avoidDuplicateDescription = False):
+	def setValues(self, name, match, enabled, timespan = None, services = None, offset = None, \
+			afterevent = [], exclude = None, maxduration = None, destination = None, \
+			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
+			lastBegin = 0, justplay = False, avoidDuplicateDescription = False):
 		self.name = name
 		self.match = match
 		self.timespan = timespan
