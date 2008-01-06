@@ -19,6 +19,14 @@ from twisted.internet import reactor
 config.plugins.httpproxy = ConfigSubsection()
 config.plugins.httpproxy.enable = ConfigYesNo(default = True)
 config.plugins.httpproxy.port = ConfigInteger(8080,limits = (1, 65536))
+config.plugins.httpproxy.filter_hosts = ConfigYesNo(default = False)
+config.plugins.httpproxy.filter_uri = ConfigYesNo(default = False)
+
+global ALLOWED_CLIENTS,LOG_TO_STDOUT,URI_BLACKLIST
+LOG_TO_STDOUT = False
+ALLOWED_CLIENTS = ['192.168.1.3'] # only clients listed here with ther IP Adress passed
+URI_BLACKLIST = ['microsoft','teen','porn'] # all uri s containig this words will be blocked
+
 
 ###############################################################################
 class HTTPProxyConfigScreen(ConfigListScreen,Screen):
@@ -35,6 +43,8 @@ class HTTPProxyConfigScreen(ConfigListScreen,Screen):
         self.list = []
         self.list.append(getConfigListEntry(_("start HTTP Proxy"), config.plugins.httpproxy.enable))
         self.list.append(getConfigListEntry(_("use Port"), config.plugins.httpproxy.port))
+        self.list.append(getConfigListEntry(_("use Host Filter"), config.plugins.httpproxy.filter_hosts))
+        self.list.append(getConfigListEntry(_("use URI Filter"), config.plugins.httpproxy.filter_uri))
 
         ConfigListScreen.__init__(self, self.list)
         self["buttonred"] = Label(_("cancel"))
@@ -61,8 +71,60 @@ class HTTPProxyConfigScreen(ConfigListScreen,Screen):
         self.close(False,self.session)
 
 ###############################################################################
+
+class myProxyRequest(proxy.ProxyRequest):
+    RESPONSE_CLIENTED_DENIED = "this client it not allowed to connect"
+    ports = {'http': 80}
+
+    def process(self):
+        global URI_BLACKLIST
+        check_passed = True
+        if config.plugins.httpproxy.filter_hosts.value is True:
+            if self.checkClientAccess(self.client) is not True:
+                self.logMessage('BLOCKED/HOST_FILTER')
+                self.renderResponse(self.RESPONSE_CLIENTED_DENIED)
+                check_passed = False
+
+        if check_passed is True and config.plugins.httpproxy.filter_uri.value is True:
+            for i in URI_BLACKLIST:
+                if self.uri.find(i) > 0:
+                    self.logMessage('BLOCKED/URI_FILTER')
+                    self.renderResponse('''<H1>Could not connect due to security issues</H1>''')
+                    check_passed = False
+                    break
+
+        if check_passed:
+            self.logMessage('OK')
+            proxy.ProxyRequest.process(self)
+
+    def renderResponse(self,message):
+        self.transport.write("HTTP/1.0 200 blocked\r\n")
+        self.transport.write("Content-Type: text/html\r\n")
+        self.transport.write("\r\n")
+        self.transport.write('<H1>%s</H1>'%message)
+        self.transport.stopProducing()
+
+    def checkClientAccess(self,client):
+        global ALLOWED_CLIENTS
+        if client.host not in ALLOWED_CLIENTS:
+            return False
+        else:
+            return True
+
+    def logMessage(self,status):
+        global LOG_TO_STDOUT
+        if LOG_TO_STDOUT:
+            try:
+                print "[PROXY]",self.client.host,self.uri,status
+            except Exception:
+                ''' now i am quite careful with logging webstuff with E2 '''
+                pass
+
+class ProxyProtocol(proxy.Proxy):
+    requestFactory = myProxyRequest
+
 class ProxyFactory(http.HTTPFactory):
-        protocol = proxy.Proxy
+        protocol = ProxyProtocol
 
 ###############################################################################
 def main(session, **kwargs):
