@@ -85,7 +85,8 @@ class MessageWebScreen(WebScreen):
 class AudioWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
-		self["AudioTracks"] = AudioTracks(session)		
+		self["AudioTracks"] = AudioTracks(session, func=AudioTracks.GET)
+		self["SelectAudioTrack"] = AudioTracks(session, func=AudioTracks.SET)	
 
 class AboutWebScreen(WebScreen):
 	def __init__(self, session,request):

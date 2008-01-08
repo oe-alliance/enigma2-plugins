@@ -3,15 +3,34 @@ from Tools.ISO639 import LanguageCodes
 
 class AudioTracks( Source ):
     
-    def __init__(self, session):
+    GET = 0
+    SET = 1
+    
+    text="False"
+    
+    def __init__(self, session, func=GET):
         self.session = session
+        self.func = func
         Source.__init__(self)
-        
-    def getList(self):
+    
+    def handleCommand(self, cmd):
+        self.cmd = cmd
+    
+    def setAudioTrack(self):
         service = self.session.nav.getCurrentService()
         audio = service and service.audioTracks()
-        currentTrack = audio.getCurrentTrack()
+        cmd = int(self.cmd) - 1
+        if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > cmd and cmd >= 0:
+            audio.selectTrack(cmd)
+            return "Success"
+        else:
+            return "Error"
+     
+    def getAudioTracks(self):
+        service = self.session.nav.getCurrentService()
+        audio = service and service.audioTracks()
         n = audio and audio.getNumberOfTracks() or 0
+        currentTrack = audio.getCurrentTrack()
         tlist = []
 
         if n > 0:
@@ -42,5 +61,6 @@ class AudioTracks( Source ):
         
         return tlist
     
-    list = property(getList)
+    text = property(setAudioTrack)
+    list = property(getAudioTracks)
     lut = {"Description": 0, "Id": 1, "Pid": 2, "Active": 3}
