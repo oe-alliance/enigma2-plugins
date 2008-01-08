@@ -46,7 +46,7 @@ from Components.Element import Element
 
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler, feature_namespaces
-
+from xml.sax.saxutils import escape as escape_xml
 from twisted.python import util
 
 # prototype of the new web frontend template system.
@@ -409,7 +409,8 @@ class ListFiller(Converter):
 				elif filternum == 2:
 					append(str(item[element]).replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 				elif filternum == 3:
-					append(str(item[element]).replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;"))
+					#append(str(item[element]).replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;"))
+					append(escape_xml(str(item[element])))
 				elif filternum == 4:
 					append(str(item[element]).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				else:
