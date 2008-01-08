@@ -19,7 +19,12 @@ class AudioTracks( Source ):
     def setAudioTrack(self):
         service = self.session.nav.getCurrentService()
         audio = service and service.audioTracks()
-        cmd = int(self.cmd) - 1
+        try:
+            cmd = int(self.cmd)
+        except ValueError:
+            cmd = -1
+            
+        print "COMMAND is %s" %self.cmd
         if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > cmd and cmd >= 0:
             audio.selectTrack(cmd)
             return "Success"
