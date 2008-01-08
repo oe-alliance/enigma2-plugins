@@ -137,6 +137,7 @@ class EPGWebScreen(WebScreen):
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
 		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
 		self["EPGNOW"] = EPG(session,func=EPG.NOW)
+		self["EPGNEXT"] = EPG(session,func=EPG.NEXT)
 
 class MovieWebScreen(WebScreen):
 	def __init__(self, session,request):

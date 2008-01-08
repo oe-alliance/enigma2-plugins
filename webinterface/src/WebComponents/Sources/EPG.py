@@ -4,8 +4,9 @@ from enigma import eServiceCenter, eServiceReference, eEPGCache
 
 class EPG( Source):
     NOW=0
-    SERVICE=1
-    TITLE=2
+    NEXT=1
+    SERVICE=2
+    TITLE=3
     
     def __init__(self, navcore,func=NOW):
         self.func = func
@@ -21,19 +22,32 @@ class EPG( Source):
             func = self.searchEvent
         elif self.func is self.SERVICE:
             func = self.getEPGofService
-        else:
+        elif self.func is self.NOW:
             func = self.getEPGNow
+        elif self.func is self.NEXT:
+            func = self.getEPGNext
             
         return func(self.command)
     
     def getEPGNow(self,bouqetref):
-        print "getting EPG NOW", bouqetref
+        return self.getEPGNowNext(bouqetref)
+    
+    def getEPGNext(self, bouqetref):
+        return self.getEPGNowNext(bouqetref, False)
+    
+    def getEPGNowNext(self, bouqetref, now=True):
+        print "getting EPG NOW/NEXT", bouqetref
         serviceHandler = eServiceCenter.getInstance()
         list = serviceHandler.list(eServiceReference(bouqetref))
         services = list and list.getContent('S')
+        
         search = ['IBDTSERN']
         for service in services:
-            search.append((service,0,-1))        
+            if now:
+                search.append((service,0,-1))
+            else:
+                search.append((service,1,-1))        
+        
         events = self.epgcache.lookupEvent(search);
         if events:
                 return events
