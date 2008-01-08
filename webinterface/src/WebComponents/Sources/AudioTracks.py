@@ -10,6 +10,7 @@ class AudioTracks( Source ):
     def getList(self):
         service = self.session.nav.getCurrentService()
         audio = service and service.audioTracks()
+        currentTrack = audio.getCurrentTrack()
         n = audio and audio.getNumberOfTracks() or 0
         tlist = []
 
@@ -32,9 +33,14 @@ class AudioTracks( Source ):
                 else:
                     description = language
                 
-                tlist.append((description, x, pid))
+                if x == currentTrack:
+                    active = "True"
+                else:
+                    active = "False"
+                
+                tlist.append((description, x, pid, active))
         
         return tlist
     
     list = property(getList)
-    lut = {"Description": 0, "Id": 1, "Pid": 2}
+    lut = {"Description": 0, "Id": 1, "Pid": 2, "Active": 3}
