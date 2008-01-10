@@ -344,6 +344,13 @@ class TextToHTML(Converter):
 	def getHTML(self, id):
 		return self.source.text # encode & etc. here!
 
+class TextToXML(Converter):
+	def __init__(self, arg):
+		Converter.__init__(self, arg)
+	
+	def getHTML(self, id):
+		return escape_xml(self.source.text)
+
 class TextToURL(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
@@ -457,7 +464,7 @@ class webifHandler(ContentHandler):
 			pass
 			# otherwise, use that source.
 
-		self.source = source		
+		self.source = source
 		self.source_id = str(attrs.get("id", wsource))
 		self.is_streaming = "streaming" in attrs
 		self.macro_name = attrs.get("macro") or None
@@ -521,7 +528,7 @@ class webifHandler(ContentHandler):
 		tag.insert(0, '<')
 		tag.append('>')
 		tag = ''.join(tag)#.encode('utf-8')
-
+		
 		if self.mode == 0:
 			self.res.append(tag)
 		elif self.mode == 1: # expect "<e2:element>"
@@ -535,6 +542,7 @@ class webifHandler(ContentHandler):
 				self.sub.append(tag)
 		elif self.mode == 3:
 			assert name == "e2:item", "found %s instead of e2:item!" % name
+			
 			self.parse_item(attrs)
 
 	def endElement(self, name):
