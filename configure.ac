@@ -81,4 +81,7 @@ werbezapper/src/Makefile
 httpproxy/Makefile
 httpproxy/src/Makefile
 
+startuptostandby/Makefile
+startuptostandby/src/Makefile
+
 ])
