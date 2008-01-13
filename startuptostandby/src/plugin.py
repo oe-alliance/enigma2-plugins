@@ -7,11 +7,8 @@ from enigma import eTimer
 
 config.plugins.startuptostandby = ConfigSubsection()
 config.plugins.startuptostandby.enabled = ConfigEnableDisable(default = False)
-
-
-def __init__(self):
-	self.timer = eTimer()
-	self.session = {}	
+timer = eTimer()
+savedkwargs = {}
 
 def main(session, **kwargs):
 	print "[StartupToStandby] Open Config Screen"
@@ -19,29 +16,31 @@ def main(session, **kwargs):
 	
 # Autostart
 def autostart(reason, **kwargs):
+	global timer
+	global savedkwargs
+
 	print "[StartupToStandby] autostart"
 	if config.plugins.startuptostandby.enabled.value and reason == 0 and kwargs.has_key("session"):
 		session = kwargs["session"]
+		savedkwargs = kwargs
 		session.open(Standby)
-		timer = eTimer()
 		#wait 10 seconds before setting standby again - bad hack...
 		print "[StartupToStandby] start timer..."
 		timer.timeout.get().append(timeout)
-		timer.start(10000)
+		timer.startLongTimer(10)
 		print "[StartupToStandby] ...ready"
 
 def timeout():
+	global savedkwargs
 	print "[StartupToStandby] Timeout!"
 	#standby-screen is open - close it
 	print "[StartupToStandby] Close Standby Screen"
-	session.open(Standby)
+	savedkwargs["session"].open(Standby)
 	#and open it again...
 	print "[StartupToStandby] Open Standby Screen"
-	session.open(Standby)
-	#end timer, since we only need to do this once.
-	print "[StartupToStandby] Stop Timer"
-	timer.stop()
-		
+	savedkwargs["session"].open(Standby)
+	
+	
 def Plugins(path, **kwargs):
 	return [PluginDescriptor(name="StartupToStandby", description="Startup To Standby", where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main),
 			PluginDescriptor(name="StartupToStandby", description = "Startup To Standby", where = PluginDescriptor.WHERE_SESSIONSTART,fnc = autostart)]
