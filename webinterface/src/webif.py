@@ -349,7 +349,7 @@ class TextToXML(Converter):
 		Converter.__init__(self, arg)
 	
 	def getHTML(self, id):
-		return escape_xml(self.source.text)
+		return escape_xml(self.source.text).replace("\x19", "").replace("\x1c", "").replace("\x1e", "")
 
 class TextToURL(Converter):
 	def __init__(self, arg):
