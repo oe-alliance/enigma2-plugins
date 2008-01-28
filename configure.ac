@@ -84,4 +84,7 @@ httpproxy/src/Makefile
 startuptostandby/Makefile
 startuptostandby/src/Makefile
 
+imdb/Makefile
+imdb/src/Makefile
+
 ])
