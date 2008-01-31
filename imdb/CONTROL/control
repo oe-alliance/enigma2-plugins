@@ -7,4 +7,5 @@ Priority: optional
 Maintainer: fraxinas <andreas.frisch@multimedia-labs.de>
 Homepage: n/a
 Depends: enigma2(>1.0cvs20070908)
+Rdepends: python-html
 Source: http://schwerkraft.elitedvb.net/scm/?group_id=11
