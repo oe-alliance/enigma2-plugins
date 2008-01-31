@@ -6,4 +6,4 @@ Priority: optional
 Maintainer: Felix Domke <tmbinc@elitedvb.net>
 Architecture: noarch
 Homepage: unknown
-Depends: enigma2(>20071008), twisted-web2
+Depends: enigma2(>2.3cvs20071008), twisted-web2
