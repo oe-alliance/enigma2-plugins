@@ -431,17 +431,17 @@ def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
 	
 def Plugins(**kwargs):
-	wherelist = [PluginDescriptor.WHERE_EVENTINFO, PluginDescriptor.WHERE_PLUGINMENU]
 	try:
+		wherelist = [PluginDescriptor.WHERE_EVENTINFO, PluginDescriptor.WHERE_PLUGINMENU]
 		return PluginDescriptor(name="IMDb Details",
 				description="Filmdetails aus der Internet Movie Database",
 				icon="imdb.png",
 				where = wherelist,
 				fnc=main)
 	except AttributeError:
+		wherelist = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]
 		return PluginDescriptor(name="IMDb Details",
 				description="Filmdetails aus der Internet Movie Database",
 				icon="imdb.png",
-				where = PluginDescriptor.WHERE_PLUGINMENU, 
+				where = wherelist,
 				fnc=main)
-	
