@@ -1,50 +1,56 @@
 <?xml version="1.0" ?>
-<!-- Beispieldatei -->
+<!-- Sample -->
 
-<!-- Dieser Block enthaelt all unsere Timer -->
+<!-- All timers are enclosed in this elements -->
 <autotimer version="4">
 
  <!-- 
-    - Zeichne alles mit "Dr. House" im Titel auf
-    - Das zwischen 20:15 und 23:00 gesendet wird
-    - Mit 5 Minuten Vor-/Nachlaufzeit (zusaetzlich zum Enigma2-Standardwert)
+    - Record all Events with "House" in its Title
+    - When aired between 20:15 and 23:00 on a weekday
+    - And add a margin of 5 minutes before and after the recording
+      (added to the margin already defined globally in enigma2)
  -->
- <timer name="House aufnehmen" match="Dr. House" enabled="no" from="20:15" to="23:00" offset="5">
-  <!-- Auf RTL -->
+ <timer name="Record House" match="House" enabled="no" from="20:15" to="23:00" offset="5">
+  <!-- Record only on german station "RTL" -->
   <serviceref>1:0:1:2EE3:441:1:C00000:0:0:0:</serviceref>
-  <!-- Box nach der Aufnahme in den Standby schicken -->
+  <!-- Go to standby after recording finished -->
   <afterevent>standby</afterevent>
-  <!-- Nicht Aufnehmen, wenn "Wiederholung" in der Beschreibung steht -->
+  <!-- Record only on a weekday -->
+  <include where="dayofweek">weekday</include>
+  <!-- Don't record when description contains "Wiederholung" -->
   <exclude where="description">Wiederholung</exclude>
-  <!-- Nicht Aufnehmen, wenn "Staffel 1" in Kurzbeschreibung -->
-  <exclude where="shortdescription">Staffel 1</exclude>
+  <!-- Don't record when shortdescription contains "Season 1" -->
+  <exclude where="shortdescription">Season 1</exclude>
  </timer>
 
  <!--
-    - Alles mit "ouse" im Titel aufzeichnen, z.B. Desperate H_ouse_wifes
-    - Keine Zeitbeschraenkung
-    - Mit 2 Minuten Vor- und 3 Minuten Nachlaufzeit
+    - Record all Events with "ouse" in its Title
+    - No specific timespan
+    - Add 2 minutes before and 3 after event to recording
  -->
- <timer name="Alles mit ouse" match="ouse" enabled="no" offset="2,3">
-  <!-- Nur auf Pro7 und ORF1 aufzeichnen -->
+ <timer name="Containing ouse" match="ouse" enabled="no" offset="2,3">
+  <!-- Record on german station "Pro Sieben" and austrian station "ORF 1" -->
   <serviceref>1:0:1:445D:453:1:C00000:0:0:0:</serviceref>
   <serviceref>1:0:1:32C9:45D:1:C00000:0:0:0:</serviceref>
-  <!-- Kein Afterevent, benutze den Standardwert von Enigma2 -->
-  <!-- Nicht Aufnahmen, wenn "Dr." im Titel steht -->
+  <!-- No specific afterEvent, use whatever enigma2 would use -->
+  <!-- Don't record when title contains "Dr." -->
   <exclude where="title">Dr.</exclude>
  </timer>
 
  <!--
-    - Alles mit "Malcolm" im Titel aufzeichnen
-    - Weder Zeitbeschraenkung noch benutzerdefinierte Vor-/Nachlaufzeit
+    - Record all Events with "Malcolm" in its Title
+    - When their extended description matches a rather weird regular expression
+      (must contain upper case L and end with "al" - any better example?)
  -->
- <timer name="Sendungen mit Malcolm" match="Malcolm" enabled="no">
-  <!-- Auf allen Sendern aufzeichnen -->
-  <!-- Wenn die Sendung zwischen 23:00 und 06:00 Uhr endet Box herunterfahren -->
+ <timer name="Events with Malcolm" match="Malcolm" enabled="no">
+  <!-- Don't limit stations to record on -->
+  <!-- If the recording ends between 23:00 and 06:00 shutdown afterwards -->
   <afterevent from="23:00" to="06:00">shutdown</afterevent>
-  <!-- Sendunden am Mittwoch auslassen -->
+  <!-- Make use of a regular expression to include only specific events -->
+  <include where="extended">L(.*?)al$</include>
+  <!-- Don't record on Wednesday -->
   <exclude where="dayofweek">2</exclude>
-  <!-- Sendungen am Wochenende ebenfalls ausschliessen -->
+  <!-- Don't record on Weekends -->
   <exclude where="dayofweek">weekend</exclude>
  </timer>
 

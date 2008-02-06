@@ -24,7 +24,7 @@ from time import localtime, mktime
 # Show ServiceName instead of ServiceReference
 from ServiceReference import ServiceReference
 
-weekdays = [("0", _("Monday")), ("1", _("Tuesday")),  ("2", _("Wednesday")),  ("3", _("Thursday")),  ("4", _("Friday")),  ("5", _("Saturday")),  ("6", _("Sunday")), ("weekend", _("Weekend"))]
+weekdays = [("0", _("Monday")), ("1", _("Tuesday")),  ("2", _("Wednesday")),  ("3", _("Thursday")),  ("4", _("Friday")),  ("5", _("Saturday")),  ("6", _("Sunday")), ("weekend", _("Weekend")), ("weekday", _("Weekday"))]
 
 class AutoTimerEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer"""
