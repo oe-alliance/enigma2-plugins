@@ -1,10 +1,5 @@
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
-from AutoTimerOverview import AutoTimerOverview
-
-# Plugin
-from AutoTimer import AutoTimer
-from AutoPoller import autopoller
 
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
@@ -23,22 +18,30 @@ config.plugins.autotimer.refresh = ConfigSelection(choices = [("none", _("None")
 config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = False)
 
 autotimer = None
+autopoller = None
 
 # Autostart
 def autostart(reason, **kwargs):
 	global autotimer
+	global autopoller
 
 	# Startup
 	if config.plugins.autotimer.autopoll.value and reason == 0:
 		# Initialize AutoTimer
+		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
 
 		# Start Poller
+		from AutoPoller import AutoPoller
+		autopoller = AutoPoller()
 		autopoller.start()
 	# Shutdown
 	elif reason == 1:
 		# Stop Poller
-		autopoller.stop()
+		if autopoller is not None:
+			autopoller.stop()
+
+			autopoller = None
 
 		if autotimer is not None:
 			# Save xml
@@ -50,7 +53,10 @@ def autostart(reason, **kwargs):
 # Mainfunction
 def main(session, **kwargs):
 	global autotimer
+	global autopoller
+
 	if autotimer is None:
+		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
 
 	try:
@@ -76,8 +82,10 @@ def main(session, **kwargs):
 		return
 
 	# Do not run in background while editing, this might screw things up
-	autopoller.stop()
+	if autopoller is not None:
+		autopoller.stop()
 
+	from AutoTimerOverview import AutoTimerOverview
 	session.openWithCallback(
 		editCallback,
 		AutoTimerOverview,
@@ -86,9 +94,13 @@ def main(session, **kwargs):
 
 def editCallback(session):
 	global autotimer
+	global autopoller
 
 	# Start autopoller again if wanted
 	if config.plugins.autotimer.autopoll.value:
+		if autopoller is None:
+			from AutoPoller import AutoPoller
+			autopoller = AutoPoller()
 		autopoller.start(initial = False)
 
 	# Don't do anything when editing was canceled
@@ -117,6 +129,8 @@ def editCallback(session):
 
 	# Remove instance if not running in background
 	if not config.plugins.autotimer.autopoll.value:
+		autopoller = None
+
 		# Save xml
 		autotimer.writeXml()
 		autotimer = None

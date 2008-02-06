@@ -34,5 +34,3 @@ class AutoPoller:
 			traceback.print_exc(file=sys.stdout)
 
 		self.timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
-
-autopoller = AutoPoller()
