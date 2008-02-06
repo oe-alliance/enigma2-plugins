@@ -177,8 +177,8 @@ def addFeed(address, auto = False):
 	config.plugins.simpleRSS.feed[id].autoupdate = ConfigEnableDisable(default=True)
 
 	# Set values
-	config.plugins.simpleRSS.feed[id].uri = address
-	config.plugins.simpleRSS.feed[id].autoupdate = auto
+	config.plugins.simpleRSS.feed[id].uri.value = address
+	config.plugins.simpleRSS.feed[id].autoupdate.value = auto
 
 	# Save (needed?)
 	config.plugins.simpleRSS.feed.save()
