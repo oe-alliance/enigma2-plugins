@@ -1,6 +1,9 @@
 # Format Counter
 from time import strftime
 
+# regular expression
+from re import compile as re_compile
+
 class AutoTimerComponent(object):
 	"""AutoTimer Component which also handles validity checks"""
 
@@ -60,7 +63,12 @@ class AutoTimerComponent(object):
 
 	def setExclude(self, exclude):
 		if exclude:
-			self._exclude = exclude
+			self._exclude = (
+				[re_compile(x) for x in exclude[0]],
+				[re_compile(x) for x in exclude[1]], 
+				[re_compile(x) for x in exclude[2]], 
+				exclude[3]
+			) 
 		else:
 			self._exclude = ([], [], [], [])
 
@@ -71,7 +79,12 @@ class AutoTimerComponent(object):
 
 	def setInclude(self, include):
 		if include:
-			self._include = include
+			self._include = (
+				[re_compile(x) for x in include[0]],
+				[re_compile(x) for x in include[1]], 
+				[re_compile(x) for x in include[2]], 
+				include[3]
+			) 
 		else:
 			self._include = ([], [], [], [])
 
@@ -161,25 +174,25 @@ class AutoTimerComponent(object):
 		return service not in self.services
 
 	def getExcludedTitle(self):
-		return self.exclude[0]
+		return [x.pattern for x in self.exclude[0]]
 
 	def getExcludedShort(self):
-		return self.exclude[1]
+		return [x.pattern for x in self.exclude[1]]
 
 	def getExcludedDescription(self):
-		return self.exclude[2]
+		return [x.pattern for x in self.exclude[2]]
 
 	def getExcludedDays(self):
 		return self.exclude[3]
 
 	def getIncludedTitle(self):
-		return self.include[0]
+		return [x.pattern for x in self.include[0]]
 
 	def getIncludedShort(self):
-		return self.include[1]
+		return [x.pattern for x in self.include[1]]
 
 	def getIncludedDescription(self):
-		return self.include[2]
+		return [x.pattern for x in self.include[2]]
 
 	def getIncludedDays(self):
 		return self.include[3]
@@ -195,13 +208,13 @@ class AutoTimerComponent(object):
 				return True
 
 		for exclude in self.exclude[0]:
-			if exclude in title:
+			if exclude.search(title):
 				return True
 		for exclude in self.exclude[1]:
-			if exclude in short:
+			if exclude.search(short):
 				return True
 		for exclude in self.exclude[2]:
-			if exclude in extended:
+			if exclude.search(extended):
 				return True
 		return False
 
@@ -216,13 +229,13 @@ class AutoTimerComponent(object):
 				return True
 
 		for include in self.include[0]:
-			if include not in title:
+			if not include.search(title):
 				return True
 		for include in self.include[1]:
-			if include not in short:
+			if not include.search(short):
 				return True
 		for include in self.include[2]:
-			if include not in extended:
+			if not include.search(extended):
 				return True
 
 		return False
