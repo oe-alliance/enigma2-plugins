@@ -405,8 +405,9 @@ class AutoTimer:
 		self.readXml()
 
 		# Save Recordings in a dict to speed things up a little
+		# We include processed timers as we might search for duplicate descriptions
 		recorddict = {}
-		for timer in NavigationInstance.instance.RecordTimer.timer_list:
+		for timer in NavigationInstance.instance.RecordTimer.timer_list + NavigationInstance.instance.RecordTimer.processed_timers:
 			if not recorddict.has_key(str(timer.service_ref)):
 				recorddict[str(timer.service_ref)] = [timer]
 			else:
@@ -449,7 +450,9 @@ class AutoTimer:
 				timer.update(begin, timestamp)
 
 				# Check Duration, Timespan and Excludes
-				if timer.checkServices(serviceref) or timer.checkDuration(duration) or timer.checkTimespan(timestamp) or timer.checkFilter(name, description, evt.getExtendedDescription(), str(timestamp.tm_wday)):
+				if timer.checkServices(serviceref) or timer.checkDuration(duration) or \
+					timer.checkTimespan(timestamp) or \
+					timer.checkFilter(name, description, evt.getExtendedDescription(), str(timestamp.tm_wday)):
 					continue
 
 				# Apply E2 Offset
