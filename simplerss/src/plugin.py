@@ -1,10 +1,5 @@
-from Plugins.Plugin import PluginDescriptor
-
-from RSSSetup import RSSSetup, addFeed
-from RSSScreens import RSSOverview
-from RSSPoller import RSSPoller
-
-from Components.config import config, ConfigSubsection, ConfigSubList, ConfigEnableDisable, ConfigInteger, ConfigText
+from Components.config import config, ConfigSubsection, ConfigSubList, \
+	ConfigEnableDisable, ConfigInteger, ConfigText
 
 # Initialize Configuration
 config.plugins.simpleRSS = ConfigSubsection()
@@ -29,19 +24,24 @@ def main(session, **kwargs):
 
 	# Create one if we have none (no autostart)
 	if rssPoller is None:
+		from RSSPoller import RSSPoller
 		rssPoller = RSSPoller(session)
 
 	# Show Overview when we have feeds
 	if len(rssPoller.feeds):
+		from RSSScreens import RSSOverview
 		session.openWithCallback(closed, RSSOverview, rssPoller)
 	# Show Setup otherwise
 	else:
+		from RSSSetup import RSSSetup
 		session.openWithCallback(closed, RSSSetup, rssPoller)
 
 # Plugin window has been closed
 def closed():
 	# If SimpleRSS should not run in Background: shutdown
-	if not config.plugins.simpleRSS.autostart.value and not config.plugins.simpleRSS.keep_running.value:
+	if not config.plugins.simpleRSS.autostart.value and \
+		not config.plugins.simpleRSS.keep_running.value:
+
 		# Get Global rssPoller-Object
 		global rssPoller
 		
@@ -52,8 +52,11 @@ def closed():
 def autostart(reason, **kwargs):
 	global rssPoller
 
-	# Instanciate when autostarting active, session present and enigma2 is launching
-	if config.plugins.simpleRSS.autostart.value and kwargs.has_key("session") and reason == 0:
+	# Instanciate when autostart active, session present and enigma2 is launching
+	if config.plugins.simpleRSS.autostart.value and \
+		kwargs.has_key("session") and reason == 0:
+
+		from RSSPoller import RSSPoller
 		rssPoller = RSSPoller(kwargs["session"])
 	elif reason == 1:
 		if rssPoller is not None:
@@ -62,6 +65,8 @@ def autostart(reason, **kwargs):
 
 # Filescan 
 def filescan_open(item, session, **kwargs):
+	from RSSSetup import addFeed
+
 	# Add earch feed
 	for each in item:
 		addFeed(each)
@@ -99,6 +104,7 @@ def filescan(**kwargs):
 	]
 
 def Plugins(**kwargs):
+	from Plugins.Plugin import PluginDescriptor
  	return [ PluginDescriptor(name="RSS Reader", description="A simple to use RSS reader", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
  		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
  		PluginDescriptor(name="View RSS", description="Let's you view current RSS entries", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
