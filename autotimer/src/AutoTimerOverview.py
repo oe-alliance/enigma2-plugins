@@ -66,7 +66,7 @@ class AutoTimerOverview(Screen):
 				self.autotimer.getUniqueId(),	# Id
 				"",								# Name
 				"",								# Match
-				True							# Enabled				
+				True							# Enabled
 			)
 		)
 
@@ -152,7 +152,7 @@ class AutoTimerOverview(Screen):
 						self.autotimer.getUniqueId(),	# Id
 						"",								# Name
 						"",								# Match
-						True							# Enabled				
+						True							# Enabled
 					)
 				)
 			elif ret[1] == "setup":

@@ -13,7 +13,8 @@ from Components.ActionMap import ActionMap
 from Components.Button import Button
 
 # Configuration
-from Components.config import getConfigListEntry, ConfigEnableDisable, ConfigYesNo, ConfigText, ConfigClock, ConfigInteger, ConfigSelection
+from Components.config import getConfigListEntry, ConfigEnableDisable, \
+	ConfigYesNo, ConfigText, ConfigClock, ConfigInteger, ConfigSelection
 
 # Timer
 from RecordTimer import AFTEREVENT
@@ -24,7 +25,17 @@ from time import localtime, mktime
 # Show ServiceName instead of ServiceReference
 from ServiceReference import ServiceReference
 
-weekdays = [("0", _("Monday")), ("1", _("Tuesday")),  ("2", _("Wednesday")),  ("3", _("Thursday")),  ("4", _("Friday")),  ("5", _("Saturday")),  ("6", _("Sunday")), ("weekend", _("Weekend")), ("weekday", _("Weekday"))]
+weekdays = [
+	("0", _("Monday")),
+	("1", _("Tuesday")),
+	("2", _("Wednesday")),
+	("3", _("Thursday")),
+	("4", _("Friday")),
+	("5", _("Saturday")),
+	("6", _("Sunday")),
+	("weekend", _("Weekend")),
+	("weekday", _("Weekday"))
+]
 
 class AutoTimerEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer"""
@@ -64,8 +75,9 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			timer.getIncludedDescription(),
 			timer.getIncludedDays()
 		)
-		if len(self.excludes[0]) or len(self.excludes[1]) or len(self.excludes[2]) \
-				or len(self.excludes[3]) or len(self.includes[0]) or len(self.includes[1]) \
+		if len(self.excludes[0]) or len(self.excludes[1]) \
+				or len(self.excludes[2]) or len(self.excludes[3]) \
+				or len(self.includes[0]) or len(self.includes[1]) \
 				or len(self.includes[2]) or len(self.includes[3]):
 			self.filterSet = True
 		else:
@@ -240,7 +252,7 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		self.counterLeft = ConfigInteger(default = timer.matchLeft, limits = (0, 50))
 		selection = [("", _("Never")), ("%m", _("Monthly")), ("%U", _("Weekly (Sunday)")), ("%W", _("Weekly (Monday)"))]
 		if timer.getCounterFormatString() not in ["", "%m", "%U", "%W"]:
-			selection.append((timer.getCounterFormatString(), _("Custom")))
+			selection.append((timer.getCounterFormatString(), _("Custom (%s)") % (timer.getCounterFormatString())))
 		self.counterFormatString = ConfigSelection(selection, default = timer.getCounterFormatString())
 
 		# Avoid Duplicate Description
@@ -338,7 +350,11 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 
 	def cancel(self):
 		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
+			self.session.openWithCallback(
+				self.cancelConfirm,
+				MessageBox,
+				_("Really close without saving settings?")
+			)
 		else:
 			self.close(None)
 
@@ -618,7 +634,11 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 
 	def cancel(self):
 		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
+			self.session.openWithCallback(
+				self.cancelConfirm,
+				MessageBox,
+				_("Really close without saving settings?")
+			)
 		else:
 			self.close(None)
 
@@ -731,7 +751,11 @@ class AutoTimerChannelEditor(Screen, ConfigListScreen):
 
 	def cancel(self):
 		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
+			self.session.openWithCallback(
+				self.cancelConfirm,
+				MessageBox,
+				_("Really close without saving settings?")
+			)
 		else:
 			self.close(None)
 
@@ -751,3 +775,54 @@ class AutoTimerChannelEditor(Screen, ConfigListScreen):
 					for x in list
 			]
 		))
+
+def addAutotimerFromEvent(session, evt = None, service = None):
+	from AutoTimerComponent import AutoTimerComponent
+
+	name = evt and evt.getEventName() or "New AutoTimer"
+	match = evt and evt.getEventName() or ""
+	servicelist = []
+	if service is not None:
+		service = str(service)
+		# strip all after last :
+		pos = service.rfind(':')
+		if pos != -1:
+			service = service[:pos+1]
+
+		servicelist.append(service)
+	if evt:
+		begin = evt.getBeginTime()
+		end = begin + evt.getDuration()
+		timetuple = (begin-3600, end+3600) # timespan defaults to +- 1h
+	else:
+		timetuple = None
+
+	session.openWithCallback(
+		addCallback,
+		AutoTimerEditor,
+		AutoTimerComponent(
+			self.autotimer.getUniqueId(),	# Id
+			name,							# Name
+			match,							# Match
+			True,							# Enabled
+			timespan = timetuple,
+			services = servicelist
+		)
+	)
+
+def addCallback(ret):
+	if ret:
+		from plugin import autotimer
+		
+		# Create instance if needed
+		if autotimer is None:
+			from AutoTimer import AutoTimer
+			autotimer = AutoTimer()
+
+		autotimer.add(ret)
+		
+		# Remove instance if not running in background
+		if not config.plugins.autotimer.autopoll.value:
+			# Save xml
+			autotimer.writeXml()
+			autotimer = None

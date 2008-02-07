@@ -8,7 +8,8 @@ from Plugins.Plugin import PluginDescriptor
 from xml.parsers.expat import ExpatError
 
 # Config
-from Components.config import config, ConfigSubsection, ConfigEnableDisable, ConfigInteger, ConfigSelection
+from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
+	ConfigInteger, ConfigSelection
 
 # Initialize Configuration
 config.plugins.autotimer = ConfigSubsection()
