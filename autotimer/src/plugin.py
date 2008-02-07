@@ -15,7 +15,7 @@ config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default = False)
 config.plugins.autotimer.interval = ConfigInteger(default = 3, limits=(1, 24))
 config.plugins.autotimer.refresh = ConfigSelection(choices = [("none", _("None")), ("auto", _("Only AutoTimers created during this Session")), ("all", _("All non-repeating Timers"))], default = "none")
-config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = False)
+config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = True)
 
 autotimer = None
 autopoller = None

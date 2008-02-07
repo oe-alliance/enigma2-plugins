@@ -187,8 +187,8 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			begin = 5
 			end = 5
 		self.offset = ConfigEnableDisable(default = default)
-		self.offsetbegin = ConfigInteger(default = begin, limits = (0, 60))
-		self.offsetend = ConfigInteger(default = end, limits = (0, 60))
+		self.offsetbegin = ConfigInteger(default = begin, limits = (0, 180))
+		self.offsetend = ConfigInteger(default = end, limits = (0, 180))
 
 		# AfterEvent
 		if timer.hasAfterEvent():
