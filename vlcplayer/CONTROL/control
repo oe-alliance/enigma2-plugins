@@ -6,5 +6,5 @@ Priority: optional
 Maintainer: Alex Laetsch <alex@laetsch.de>
 Architecture: mipsel
 Homepage: http://www.i-have-a-dreambox.com/wbb2/board.php?boardid=240
-Depends: enigma2(>=2.2), gst-plugin-neonhttpsrc | gst-neon-libs-0.26
+Depends: enigma2(>=2.2), gst-plugin-neonhttpsrc
 Source: cvs://anonymous@cvs.schwerkraft.elitedvb.net/cvsroot/enigma2-plugins;module=enigma2-plugins;method=pserver
