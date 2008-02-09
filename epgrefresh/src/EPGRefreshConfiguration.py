@@ -40,7 +40,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self.onChangedEntry = []
 
 		# -
-		self.servicelist = epgrefresh.services
+		self.servicelist = epgrefresh.services[0]
 
 		self.list = [
 			getConfigListEntry(_("Refresh automatically"), config.plugins.epgrefresh.enabled),
@@ -75,7 +75,8 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self.changed()
 
 	def forceRefresh(self):
-		epgrefresh.services = Set(self.servicelist)
+		# TODO: fix this :-)
+		epgrefresh.services = (Set(self.servicelist), epgrefresh.services[1])
 		# TODO: maybe we need to save the configuration here...
 		epgrefresh.forceRefresh(self.session)
 
@@ -126,7 +127,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 			self.close(self.session)
 
 	def keySave(self):
-		epgrefresh.services = Set(self.servicelist)
+		epgrefresh.services = (Set(self.servicelist), epgrefresh.services[1])
 		try:
 			epgrefresh.saveConfiguration()
 		except Exception, e:
