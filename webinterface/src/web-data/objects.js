@@ -11,7 +11,7 @@ function EPGList(xml){
 	
 	this.getArray = function(sortbytime){
 		debug("sort EPGList by time "+sortbytime);
-		if (sortbytime = true){
+		if (sortbytime == true){
 			var sort1 = new Array();
 			for(var i=0;i<this.xmlitems.length;i++){
 				var xv = new EPGEvent(this.xmlitems.item(i));
