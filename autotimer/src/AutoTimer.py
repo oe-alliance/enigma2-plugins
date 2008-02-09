@@ -190,6 +190,13 @@ class AutoTimer:
 
 						servicelist.append(value)
 
+				# Read out allowed bouquets
+				bouquets = []
+				for bouquet in timer.getElementsByTagName("bouquet"):
+					value = getValue(bouquet, None)
+					if value:
+						bouquets.append(value)
+
 				# Read out afterevent
 				idx = {"none": AFTEREVENT.NONE, "standby": AFTEREVENT.STANDBY, "shutdown": AFTEREVENT.DEEPSTANDBY, "deepstandby": AFTEREVENT.DEEPSTANDBY}
 				afterevent = []
@@ -257,7 +264,8 @@ class AutoTimer:
 						matchFormatString = counterFormat,
 						lastBegin = lastBegin,
 						justplay = justplay,
-						avoidDuplicateDescription = avoidDuplicateDescription
+						avoidDuplicateDescription = avoidDuplicateDescription,
+						bouquets = bouquets
 				))
 
 	def getTimerList(self):
@@ -344,6 +352,11 @@ class AutoTimer:
 				list.extend(['  <serviceref>', serviceref, '</serviceref>'])
 				ref = ServiceReference(str(serviceref))
 				list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
+
+			# Bouquets
+			for bouquet in timer.getBouquets():
+				# TODO: can we get a human-readable name here (at least for known ones)
+				list.extend(['  <bouquet>', str(bouquet), '</bouquet>\n'])
 
 			# AfterEvent
 			if timer.hasAfterEvent():

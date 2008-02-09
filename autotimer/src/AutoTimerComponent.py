@@ -24,7 +24,7 @@ class AutoTimerComponent(object):
 	def setValues(self, name, match, enabled, timespan = None, services = None, offset = None, \
 			afterevent = [], exclude = None, maxduration = None, destination = None, \
 			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
-			lastBegin = 0, justplay = False, avoidDuplicateDescription = False):
+			lastBegin = 0, justplay = False, avoidDuplicateDescription = False, bouquets = None):
 		self.name = name
 		self.match = match
 		self.timespan = timespan
@@ -43,6 +43,7 @@ class AutoTimerComponent(object):
 		self.lastBegin = lastBegin
 		self.justplay = justplay
 		self.avoidDuplicateDescription = avoidDuplicateDescription
+		self.bouquets = bouquets
 
 	def calculateDayspan(self, begin, end):
 		if end[0] < begin[0] or (end[0] == begin[0] and end[1] <= begin[1]):
@@ -103,6 +104,17 @@ class AutoTimerComponent(object):
 		return self._services
 
 	services = property(getServices, setServices)
+
+	def setBouquets(self, bouquets):
+		if bouquets:
+			self._bouquets = bouquets
+		else:
+			self._bouquets = []
+
+	def getBouquets(self):
+		return self._bouquets
+
+	bouquets = property(getBouquets, setBouquets)
 
 	def setAfterEvent(self, afterevent):
 		del self._afterevent[:]
@@ -168,10 +180,29 @@ class AutoTimerComponent(object):
 			return False
 		return length > self.maxduration
 
+	def getFullServices(self):
+		list = self.services[:]
+
+		from enigma import eServiceReference, eServiceCenter
+		serviceHandler = eServiceCenter.getInstance()
+		for bouquet in self.bouquets:
+			myref = eServiceReference(str(bouquet))
+			mylist = serviceHandler.list(myref)
+			if mylist is not None:
+				while 1:
+					s = mylist.getNext()
+					# TODO: I wonder if its sane to assume we get services here (and not just new lists)
+					# We can ignore markers & directorys here because they won't match any event's service :-)
+					if s.valid():
+						# TODO: see if we need to check on custom names here
+						list.append(s.toString())
+					else:
+						break
+		
+		return list
+
 	def checkServices(self, service):
-		if not len(self.services):
-			return False
-		return service not in self.services
+		return service not in self.getFullServices()
 
 	def getExcludedTitle(self):
 		return [x.pattern for x in self.exclude[0]]
