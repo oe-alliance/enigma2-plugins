@@ -66,10 +66,10 @@ class AutoTimerComponent(object):
 		if exclude:
 			self._exclude = (
 				[re_compile(x) for x in exclude[0]],
-				[re_compile(x) for x in exclude[1]], 
-				[re_compile(x) for x in exclude[2]], 
+				[re_compile(x) for x in exclude[1]],
+				[re_compile(x) for x in exclude[2]],
 				exclude[3]
-			) 
+			)
 		else:
 			self._exclude = ([], [], [], [])
 
@@ -82,10 +82,10 @@ class AutoTimerComponent(object):
 		if include:
 			self._include = (
 				[re_compile(x) for x in include[0]],
-				[re_compile(x) for x in include[1]], 
-				[re_compile(x) for x in include[2]], 
+				[re_compile(x) for x in include[1]],
+				[re_compile(x) for x in include[2]],
 				include[3]
-			) 
+			)
 		else:
 			self._include = ([], [], [], [])
 
@@ -202,7 +202,9 @@ class AutoTimerComponent(object):
 		return list
 
 	def checkServices(self, service):
-		return service not in self.getFullServices()
+		if len(self.services) or len(self.bouquets): 
+			return service not in self.getFullServices()
+		return False
 
 	def getExcludedTitle(self):
 		return [x.pattern for x in self.exclude[0]]
