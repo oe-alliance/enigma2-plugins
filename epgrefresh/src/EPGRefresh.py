@@ -69,7 +69,10 @@ class EPGRefresh:
 		self.configMtime = -1
 
 		# Read in Configuration
-		self.readConfiguration()
+		try:
+			self.readConfiguration()
+		except Exception, e:
+			print "[EPGRefresh] Error occured while reading in configuration:", e
 
 	def readConfiguration(self):
 		####
