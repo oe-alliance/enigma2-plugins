@@ -29,10 +29,10 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 			# TODO: we could just accept the current path here....
 			print "[BouquetSelector] Dunno what to do, no directory selected:", ref," :-/"
 
-class EPGRefreshChannelEditor(Screen, ConfigListScreen):
+class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 	"""Edit Services to be refreshed by EPGRefresh"""
 
-	skin = """<screen name="EPGRefreshChannelEditor" title="Edit Services to refresh" position="75,150" size="565,245">
+	skin = """<screen name="EPGRefreshServiceEditor" title="Edit Services to refresh" position="75,150" size="565,245">
 		<widget name="config" position="5,5" size="555,200" scrollbarMode="showOnDemand" />
 		<ePixmap position="5,205" zPosition="4" size="140,40" pixmap="skin_default/key-red.png" transparent="1" alphatest="on" />
 		<ePixmap position="145,205" zPosition="4" size="140,40" pixmap="skin_default/key-green.png" transparent="1" alphatest="on" />
@@ -51,7 +51,11 @@ class EPGRefreshChannelEditor(Screen, ConfigListScreen):
 		self.setup_title = "EPGRefresh Services"
 		self.onChangedEntry = []
 
-		self.services = services
+		# We need to copy the list to be able to ignore changes
+		self.services = (
+			services[0][:],
+			services[1][:]
+		)
 
 		self.typeSelection = ConfigSelection(choices = [("channels", _("Channels")), ("bouquets", _("Bouquets"))])
 		self.typeSelection.addNotifier(self.refresh, initial_call = False)
@@ -71,8 +75,8 @@ class EPGRefreshChannelEditor(Screen, ConfigListScreen):
 			{
 				"cancel": self.cancel,
 				"save": self.save,
-				"yellow": self.removeChannel,
-				"blue": self.newChannel
+				"yellow": self.removeService,
+				"blue": self.newService
 			}
 		)
 
@@ -102,16 +106,13 @@ class EPGRefreshChannelEditor(Screen, ConfigListScreen):
 		
 		if self.typeSelection.value == "channels":
 			self.idx = 0
-			self.list.extend([
-				getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
-					for x in self.services[0]
-			])
 		else: # self.typeSelection.value == "bouquets":
 			self.idx = 1
-			self.list.extend([
-				getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
-					for x in self.services[1]
-			])
+
+		self.list.extend([
+			getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
+				for x in self.services[self.idx]
+		])
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -135,31 +136,34 @@ class EPGRefreshChannelEditor(Screen, ConfigListScreen):
 	def createSummary(self):
 		return SetupSummary
 
-	def removeChannel(self):
+	def removeService(self):
 		cur = self["config"].getCurrent()
 		if cur:
 			list = self["config"].getList()
 			list.remove(cur)
 			self["config"].setList(list)
 
-	def newChannel(self):
+	def newService(self):
 		if self.typeSelection.value == "channels":
 			self.session.openWithCallback(
-				self.finishedChannelSelection,
+				self.finishedServiceSelection,
 				SimpleChannelSelection,
 				_("Select channel to refresh")
 			)
 		else: # self.typeSelection.value == "bouquets":
 			self.session.openWithCallback(
-				self.finishedChannelSelection,
+				self.finishedServiceSelection,
 				SimpleBouquetSelection,
 				_("Select bouquet to refresh")
 			)
 
-	def finishedChannelSelection(self, *args):
+	def finishedServiceSelection(self, *args):
 		if len(args):
 			list = self["config"].getList()
-			list.append(getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(args[0].toString(), ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])))
+			list.append(getConfigListEntry(
+				_("Refreshing"),
+				ConfigSelection(choices = [(args[0].toString(), ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])
+			))
 			self["config"].setList(list)
 
 	def cancel(self):

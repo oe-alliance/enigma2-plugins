@@ -1,7 +1,7 @@
 # GUI (Screens)
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from EPGRefreshChannelEditor import EPGRefreshChannelEditor
+from EPGRefreshChannelEditor import EPGRefreshServiceEditor
 
 # GUI (Summary)
 from Screens.Setup import SetupSummary
@@ -39,7 +39,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self.setup_title = "EPGRefresh Configuration"
 		self.onChangedEntry = []
 
-		# Entries are saved internally as a set, but we might need item deletion later on
+		# Although EPGRefresh keeps services in a Set we prefer a list
 		self.services = (
 			[x for x in epgrefresh.services[0]],
 			[x for x in epgrefresh.services[1]]
@@ -70,7 +70,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 				"cancel": self.keyCancel,
 				"save": self.keySave,
 				"yellow": self.forceRefresh,
-				"blue": self.editChannels
+				"blue": self.editServices
 			}
 		)
 
@@ -78,19 +78,17 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self.changed()
 
 	def forceRefresh(self):
-		# TODO: fix this :-)
 		epgrefresh.services = (Set(self.services[0]), Set(self.services[1]))
-		# TODO: maybe we need to save the configuration here...
 		epgrefresh.forceRefresh(self.session)
 
-	def editChannels(self):
+	def editServices(self):
 		self.session.openWithCallback(
-			self.editChannelsCallback,
-			EPGRefreshChannelEditor,
+			self.editServicesCallback,
+			EPGRefreshServiceEditor,
 			self.services
 		)
 
-	def editChannelsCallback(self, ret):
+	def editServicesCallback(self, ret):
 		if ret:
 			self.services = ret
 
