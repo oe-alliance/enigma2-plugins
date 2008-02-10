@@ -130,8 +130,12 @@ class EPGRefresh:
 		list = ['<?xml version="1.0" ?>\n<epgrefresh>\n\n']
 
 		for service in self.services[0]:
+			ref = ServiceReference(str(serviceref))
+			list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
 			list.extend([' <service>', service, '</service>\n'])
 		for bouquet in self.services[1]:
+			ref = ServiceReference(str(serviceref))
+			list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
 			list.extend([' <bouquet>', bouquet, '</bouquet>\n'])
 
 		list.append('\n</epgrefresh>')

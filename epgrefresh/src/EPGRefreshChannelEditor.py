@@ -16,10 +16,23 @@ from Components.config import getConfigListEntry, ConfigSelection
 # Show ServiceName instead of ServiceReference
 from ServiceReference import ServiceReference
 
-class EPGRefreshChannelEditor(Screen, ConfigListScreen):
-	"""Edit Channels to refresh by EPGRefresh"""
+class SimpleBouquetSelection(SimpleChannelSelection):
+	def __init__(self, session, title):
+		SimpleChannelSelection.__init__(self, session, title)
+		self.skinName = "SimpleChannelSelection"
 
-	skin = """<screen name="EPGRefreshChannelEditor" title="Edit Channels to refresh" position="75,150" size="565,245">
+	def channelSelected(self): # just return selected service
+		ref = self.getCurrentSelection()
+		if (ref.flags & 7) == 7:
+			self.close(ref)
+		else:
+			# TODO: we could just accept the current path here....
+			print "[BouquetSelector] Dunno what to do, no directory selected:", ref," :-/"
+
+class EPGRefreshChannelEditor(Screen, ConfigListScreen):
+	"""Edit Services to be refreshed by EPGRefresh"""
+
+	skin = """<screen name="EPGRefreshChannelEditor" title="Edit Services to refresh" position="75,150" size="565,245">
 		<widget name="config" position="5,5" size="555,200" scrollbarMode="showOnDemand" />
 		<ePixmap position="5,205" zPosition="4" size="140,40" pixmap="skin_default/key-red.png" transparent="1" alphatest="on" />
 		<ePixmap position="145,205" zPosition="4" size="140,40" pixmap="skin_default/key-green.png" transparent="1" alphatest="on" />
@@ -31,17 +44,19 @@ class EPGRefreshChannelEditor(Screen, ConfigListScreen):
 		<widget name="key_blue" position="425,205" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
-	def __init__(self, session, servicelist):
+	def __init__(self, session, services):
 		Screen.__init__(self, session)
 
 		# Summary
-		self.setup_title = "EPGRefresh Channels"
+		self.setup_title = "EPGRefresh Services"
 		self.onChangedEntry = []
 
-		self.list = [
-			getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
-				for x in servicelist
-		]
+		self.services = services
+
+		self.typeSelection = ConfigSelection(choices = [("channels", _("Channels")), ("bouquets", _("Bouquets"))])
+		self.typeSelection.addNotifier(self.refresh, initial_call = False)
+
+		self.reloadList()
 
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
 
@@ -63,6 +78,40 @@ class EPGRefreshChannelEditor(Screen, ConfigListScreen):
 
 		# Trigger change
 		self.changed()
+
+	def saveCurrent(self):
+		del self.services[self.idx][:]
+		
+		# Warning, accessing a ConfigListEntry directly might be considered evil!
+
+		myl = self["config"].getList()
+		myl.pop(0)
+		for item in myl:
+			self.services[self.idx].append(item[1].value)
+
+	def refresh(self, value):
+		self.saveCurrent()
+
+		self.reloadList()
+		self["config"].setList(self.list)
+
+	def reloadList(self):
+		self.list = [
+			getConfigListEntry(_("Editing"), self.typeSelection)
+		]
+		
+		if self.typeSelection.value == "channels":
+			self.idx = 0
+			self.list.extend([
+				getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
+					for x in self.services[0]
+			])
+		else: # self.typeSelection.value == "bouquets":
+			self.idx = 1
+			self.list.extend([
+				getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
+					for x in self.services[1]
+			])
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -94,11 +143,18 @@ class EPGRefreshChannelEditor(Screen, ConfigListScreen):
 			self["config"].setList(list)
 
 	def newChannel(self):
-		self.session.openWithCallback(
-			self.finishedChannelSelection,
-			SimpleChannelSelection,
-			_("Select channel to refresh")
-		)
+		if self.typeSelection.value == "channels":
+			self.session.openWithCallback(
+				self.finishedChannelSelection,
+				SimpleChannelSelection,
+				_("Select channel to refresh")
+			)
+		else: # self.typeSelection.value == "bouquets":
+			self.session.openWithCallback(
+				self.finishedChannelSelection,
+				SimpleBouquetSelection,
+				_("Select bouquet to refresh")
+			)
 
 	def finishedChannelSelection(self, *args):
 		if len(args):
@@ -110,8 +166,6 @@ class EPGRefreshChannelEditor(Screen, ConfigListScreen):
 		self.close(None)
 
 	def save(self):
-		# Warning, accessing a ConfigListEntry directly might be considered evil!
-		self.close([
-			x[1].value.encode("UTF-8")
-				for x in self["config"].getList()
-		])
+		self.saveCurrent()
+
+		self.close(self.services)
