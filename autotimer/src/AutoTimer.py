@@ -355,8 +355,8 @@ class AutoTimer:
 
 			# Bouquets
 			for bouquet in timer.getBouquets():
-				list.extend(['  <bouquet>', str(bouquet), '</bouquet>\n'])
-				ref = ServiceReference(str(serviceref))
+				list.extend(['  <bouquet>', str(bouquet), '</bouquet>'])
+				ref = ServiceReference(str(bouquet))
 				list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
 
 			# AfterEvent

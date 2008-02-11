@@ -194,8 +194,13 @@ class AutoTimerComponent(object):
 					# TODO: I wonder if its sane to assume we get services here (and not just new lists)
 					# We can ignore markers & directorys here because they won't match any event's service :-)
 					if s.valid():
-						# TODO: see if we need to check on custom names here
-						list.append(s.toString())
+						# strip all after last :
+						value = s.toString()
+						pos = value.rfind(':')
+						if pos != -1:
+							value = value[:pos+1]
+
+						list.append(value)
 					else:
 						break
 		
