@@ -355,8 +355,9 @@ class AutoTimer:
 
 			# Bouquets
 			for bouquet in timer.getBouquets():
-				# TODO: can we get a human-readable name here (at least for known ones)
 				list.extend(['  <bouquet>', str(bouquet), '</bouquet>\n'])
+				ref = ServiceReference(str(serviceref))
+				list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
 
 			# AfterEvent
 			if timer.hasAfterEvent():

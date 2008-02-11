@@ -37,6 +37,20 @@ weekdays = [
 	("weekday", _("Weekday"))
 ]
 
+class SimpleBouquetSelection(SimpleChannelSelection):
+	def __init__(self, session, title):
+		SimpleChannelSelection.__init__(self, session, title)
+		self.skinName = "SimpleChannelSelection"
+
+	def channelSelected(self): # just return selected service
+		ref = self.getCurrentSelection()
+		if (ref.flags & 7) == 7:
+			self.close(ref)
+		else:
+			# We return the currently active path here
+			# Asking the user if this is what he wants might be better though
+			self.close(self.servicePath[-1])
+
 class AutoTimerEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer"""
 
@@ -85,7 +99,8 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 
 		# See if services are restricted
 		self.services = timer.getServices()
-		if len(self.services):
+		self.bouquets = timer.getBouquets()
+		if len(self.services) or len(self.bouquets):
 			self.serviceRestriction = True
 		else:
 			self.serviceRestriction = False
@@ -111,7 +126,7 @@ class AutoTimerEditor(Screen, ConfigListScreen):
  		self["key_blue"] = Button()
 
 		# Set Button texts
-		self.renameChannelButton()
+		self.renameServiceButton()
 		self.renameFilterButton()
 
 		# Define Actions
@@ -120,7 +135,7 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 				"cancel": self.cancel,
 				"save": self.maybeSave,
 				"yellow": self.editFilter,
-				"blue": self.editChannels
+				"blue": self.editServices
 			}
 		)
 
@@ -133,11 +148,11 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		else:
 			self["key_yellow"].setText(_("Add Filters"))
 
-	def renameChannelButton(self):
+	def renameServiceButton(self):
 		if self.serviceRestriction:
-			self["key_blue"].setText(_("Edit Channels"))
+			self["key_blue"].setText(_("Edit Services"))
 		else:
-			self["key_blue"].setText(_("Add Channels"))
+			self["key_blue"].setText(_("Add Services"))
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -334,19 +349,21 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			self.includes = ret[2]
 			self.renameFilterButton()
 
-	def editChannels(self):
+	def editServices(self):
 		self.session.openWithCallback(
-			self.editChannelsCallback,
-			AutoTimerChannelEditor,
+			self.editServicesCallback,
+			AutoTimerServiceEditor,
 			self.serviceRestriction,
-			self.services
+			self.services,
+			self.bouquets
 		)
 
-	def editChannelsCallback(self, ret):
+	def editServicesCallback(self, ret):
 		if ret:
 			self.serviceRestriction = ret[0]
-			self.services = ret[1]
-			self.renameChannelButton()
+			self.services = ret[1][0]
+			self.bouquets = ret[1][1]
+			self.renameServiceButton()
 
 	def cancel(self):
 		if self["config"].isChanged():
@@ -405,8 +422,10 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		# Services
 		if self.serviceRestriction:
 			self.timer.services = self.services
+			self.timer.bouquets = self.bouquets
 		else:
 			self.timer.services = None
+			self.timer.bouquets = None
 
 		# Offset
 		if self.offset.value:
@@ -655,10 +674,10 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			self.includes
 		))
 
-class AutoTimerChannelEditor(Screen, ConfigListScreen):
-	"""Edit allowed Channels of a AutoTimer"""
+class AutoTimerServiceEditor(Screen, ConfigListScreen):
+	"""Edit allowed Services of a AutoTimer"""
 
-	skin = """<screen name="AutoChannelEditor" title="Edit AutoTimer Channels" position="75,150" size="565,245">
+	skin = """<screen name="AutoTimerServiceEditor" title="Edit AutoTimer Services" position="75,150" size="565,245">
 		<widget name="config" position="5,5" size="555,200" scrollbarMode="showOnDemand" />
 		<ePixmap position="5,205" zPosition="4" size="140,40" pixmap="skin_default/key-red.png" transparent="1" alphatest="on" />
 		<ePixmap position="145,205" zPosition="4" size="140,40" pixmap="skin_default/key-green.png" transparent="1" alphatest="on" />
@@ -670,21 +689,23 @@ class AutoTimerChannelEditor(Screen, ConfigListScreen):
 		<widget name="key_blue" position="425,205" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
-	def __init__(self, session, servicerestriction, servicelist):
+	def __init__(self, session, servicerestriction, servicelist, bouquetlist):
 		Screen.__init__(self, session)
 
 		# Summary
-		self.setup_title = "AutoTimer Channels"
+		self.setup_title = "AutoTimer Services"
 		self.onChangedEntry = []
 
-		self.list = [
-			getConfigListEntry(_("Enable Channel Restriction"), ConfigEnableDisable(default = servicerestriction))
-		]
+		self.services = (
+			servicelist[:],
+			bouquetlist[:]
+		)
 
-		self.list.extend([
-			getConfigListEntry(_("Record on"), ConfigSelection(choices = [(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
-				for x in servicelist
-		])
+		self.enabled = ConfigEnableDisable(default = servicerestriction)
+		self.typeSelection = ConfigSelection(choices = [("channels", _("Channels")), ("bouquets", _("Bouquets"))])
+		self.typeSelection.addNotifier(self.refresh, initial_call = False)
+
+		self.reloadList()
 
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
 
@@ -699,13 +720,47 @@ class AutoTimerChannelEditor(Screen, ConfigListScreen):
 			{
 				"cancel": self.cancel,
 				"save": self.save,
-				"yellow": self.removeChannel,
-				"blue": self.newChannel
+				"yellow": self.remove,
+				"blue": self.new
 			}
 		)
 
 		# Trigger change
 		self.changed()
+
+	
+	def saveCurrent(self):
+		del self.services[self.idx][:]
+		
+		# Warning, accessing a ConfigListEntry directly might be considered evil!
+
+		myl = self["config"].getList()
+		myl.pop(0) # Enabled
+		myl.pop(0) # Type
+		for item in myl:
+			self.services[self.idx].append(item[1].value)
+
+	def refresh(self, value):
+		self.saveCurrent()
+
+		self.reloadList()
+		self["config"].setList(self.list)
+
+	def reloadList(self):
+		self.list = [
+			getConfigListEntry(_("Enable Service Restriction"), self.enabled),
+			getConfigListEntry(_("Editing"), self.typeSelection)
+		]
+		
+		if self.typeSelection.value == "channels":
+			self.idx = 0
+		else: # self.typeSelection.value == "bouquets":
+			self.idx = 1
+
+		self.list.extend([
+			getConfigListEntry(_("Record on"), ConfigSelection(choices = [(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
+				for x in self.services[self.idx]
+		])
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -723,28 +778,36 @@ class AutoTimerChannelEditor(Screen, ConfigListScreen):
 	def createSummary(self):
 		return SetupSummary
 
-	def removeChannel(self):
+	def remove(self):
 		if self["config"].getCurrentIndex() != 0:
 			list = self["config"].getList()
 			list.remove(self["config"].getCurrent())
 			self["config"].setList(list)
 
-	def newChannel(self):
-		self.session.openWithCallback(
-			self.finishedChannelSelection,
-			SimpleChannelSelection,
-			_("Select channel to record from")
-		)
+	def new(self):
+		if self.typeSelection.value == "channels":
+			self.session.openWithCallback(
+				self.finishedServiceSelection,
+				SimpleChannelSelection,
+				_("Select channel to record on")
+			)
+		else: # self.typeSelection.value == "bouquets":
+			self.session.openWithCallback(
+				self.finishedServiceSelection,
+				SimpleBouquetSelection,
+				_("Select bouquet to record on")
+			)
 
-	def finishedChannelSelection(self, *args):
+	def finishedServiceSelection(self, *args):
 		if len(args):
 			list = self["config"].getList()
 			sname = args[0].toString()
 
-			# strip all after last :
-			pos = sname.rfind(':')
-			if pos != -1:
-				sname = sname[:pos+1]
+			if self.typeSelection.value == "channels":
+				# strip all after last : when adding a channel
+				pos = sname.rfind(':')
+				if pos != -1:
+					sname = sname[:pos+1]
 
 			list.append(getConfigListEntry(_("Record on"), ConfigSelection(choices = [(sname, ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])))
 			self["config"].setList(list)
@@ -764,16 +827,11 @@ class AutoTimerChannelEditor(Screen, ConfigListScreen):
 			self.close(None)
 
 	def save(self):
-		list = self["config"].getList()
-		restriction = list.pop(0)
+		self.saveCurrent()
 
-		# Warning, accessing a ConfigListEntry directly might be considered evil!
 		self.close((
-			restriction[1].value,
-			[
-				x[1].value.encode("UTF-8")
-					for x in list
-			]
+			self.enabled.value,
+			self.services
 		))
 
 def addAutotimerFromEvent(session, evt = None, service = None):
