@@ -184,21 +184,9 @@ class EPGRefresh:
 		self.scanServices = []
 		channelIdList = []
 
-		# This will hold services which are not explicitely in our servicelist
+		# This will hold services which are not explicitely in our list
 		additionalServices = []
-
-		serviceHandler = eServiceCenter.getInstance()
-		for bouquet in self.services[1]:
-			myref = eServiceReference(str(bouquet))
-			list = serviceHandler.list(myref)
-			if list is not None:
-				while 1:
-					s = list.getNext()
-					# TODO: I wonder if its sane to assume we get services here (and not just new lists)
-					if s.valid():
-						additionalServices.append(s.toString())
-					else:
-						break
+		additionalBouquets = []
 
 		# See if we are supposed to read in autotimer services
 		if config.plugins.epgrefresh.inherit_autotimer.value:
@@ -220,6 +208,11 @@ class EPGRefresh:
 				# Fetch services
 				for timer in autotimer.getEnabledTimerList():
 					additionalServices.extend(timer.getServices())
+					# Try/Except Bouquets as long as they are CVS-only
+					try:
+						additionalBouquets.extend(timer.getBouquets())
+					except NameError, ne:
+						pass
 
 				# Remove instance if there wasn't one before
 				# we might go into the exception before we reach this line, but we don't care then...
@@ -229,7 +222,19 @@ class EPGRefresh:
 			except Exception, e:
 				print "[EPGRefresh] Could not inherit AutoTimer Services:", e
 
-		# TODO: does this really work?
+		serviceHandler = eServiceCenter.getInstance()
+		for bouquet in self.services[1].union(additionalBouquets):
+			myref = eServiceReference(str(bouquet))
+			list = serviceHandler.list(myref)
+			if list is not None:
+				while 1:
+					s = list.getNext()
+					# TODO: I wonder if its sane to assume we get services here (and not just new lists)
+					if s.valid():
+						additionalServices.append(s.toString())
+					else:
+						break
+
 		for serviceref in self.services[0].union(additionalServices):
 			service = eServiceReference(str(serviceref))
 			if not service.valid() \
