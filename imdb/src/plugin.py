@@ -1,34 +1,20 @@
 # -*- coding: utf8 -*-
-from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Input import Input
-from Components.Pixmap import Pixmap
-from Components.FileList import FileList
-from Screens.ChoiceBox import ChoiceBox
 from Plugins.Plugin import PluginDescriptor
 from twisted.web.client import downloadPage
-from enigma import eServiceCenter, eServiceReference, iServiceInformation, eEPGCache
-from Components.Sources.Source import Source
-from Components.config import config
-from ServiceReference import ServiceReference
-from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT, parseEvent
+from enigma import loadPic
+from Screens.Screen import Screen
+from Components.ActionMap import ActionMap
+from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
-from os import popen
-import re
-from enigma import loadPic
-from enigma import loadPNG
-from enigma import gFont
-import htmlentitydefs
 from Components.AVSwitch import AVSwitch
-import urllib
 from Components.MenuList import MenuList
 from Components.Language import language
-#from PictureScreen import PictureScreen
-
 from Components.ProgressBar import ProgressBar
+import re
+import htmlentitydefs
+import urllib
 
 class IMDB(Screen):
 	skin = """
@@ -84,7 +70,7 @@ class IMDB(Screen):
 		self["key_green"] = Button("")
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
-			
+		
 		# 0 = multiple query selection menu page
 		# 1 = movie info page
 		# 2 = extra infos page
@@ -259,7 +245,7 @@ class IMDB(Screen):
 				self.eventName = event.getEventName()
 		if self.eventName is not "":
 			self["statusbar"].setText("Query IMDb: " + self.eventName + "...")
-			self.eventName = urllib.quote(self.eventName.decode('utf8').encode('latin-1'))
+			self.eventName = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore'))
 			localfile = "/home/root/imdbquery.html"
 			fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + self.eventName + "&s=tt&site=aka"
 			print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
@@ -407,7 +393,7 @@ class IMDB(Screen):
 					if extrainfos.group('g_'+category):
 						Extratext += extrainfos.group('g_'+category) + ": " + self.htmltags.sub('',extrainfos.group(category).replace("\n",'').replace("<br>",'\n')) + "\n"
 				if extrainfos.group("g_comments"):
-					Extratext += extrainfos.group("g_comments") + " [" + self.htmltags.sub('',extrainfos.group("commenter")) + "]: " + self.htmltags.sub('',extrainfos.group("comment").replace("\n",'')) + "\n"
+					Extratext += extrainfos.group("g_comments") + " [" + self.htmltags.sub('',extrainfos.group("commenter")) + "]: " + self.htmltags.sub('',extrainfos.group("comment").replace("\n",' ')) + "\n"
 	
 				self["extralabel"].setText(Extratext)
 				self["extralabel"].hide()
@@ -426,6 +412,22 @@ class IMDB(Screen):
 			self["poster"].instance.setPixmap(pixmap.__deref__())
 			self["poster"].move(4,90)
 			self["poster"].show()
+		
+	def createSummary(self):
+		return IMDbLCDScreen
+			
+class IMDbLCDScreen(Screen):
+	skin = """
+	<screen position="0,0" size="132,64" title="IMDB Plugin">
+		<widget name="headline" position="4,0" size="128,22" font="Regular;20"/>
+		<widget source="session.Event_Now" render="Label" position="6,26" size="120,34" font="Regular;14" >
+			<convert type="EventName">Name</convert>
+		</widget>
+	</screen>"""
+	
+	def __init__(self, session, parent):
+		Screen.__init__(self, session)
+		self["headline"] = Label("IMDB Plugin")
 
 def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
@@ -434,14 +436,14 @@ def Plugins(**kwargs):
 	try:
 		wherelist = [PluginDescriptor.WHERE_EVENTINFO, PluginDescriptor.WHERE_PLUGINMENU]
 		return PluginDescriptor(name="IMDb Details",
-				description="Filmdetails aus der Internet Movie Database",
+				description=_("Query details from the Internet Movie Database"),
 				icon="imdb.png",
 				where = wherelist,
 				fnc=main)
 	except AttributeError:
 		wherelist = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]
 		return PluginDescriptor(name="IMDb Details",
-				description="Filmdetails aus der Internet Movie Database",
+				description=_("Query details from the Internet Movie Database"),
 				icon="imdb.png",
 				where = wherelist,
-				fnc=main)
+				fnc=main)	
