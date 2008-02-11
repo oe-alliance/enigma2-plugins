@@ -26,8 +26,9 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 		if (ref.flags & 7) == 7:
 			self.close(ref)
 		else:
-			# TODO: we could just accept the current path here....
-			print "[BouquetSelector] Dunno what to do, no directory selected:", ref," :-/"
+			# We return the currently active path here
+			# Asking the user if this is what he wants might be better though
+			self.close(self.servicePath[-1])
 
 class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 	"""Edit Services to be refreshed by EPGRefresh"""
