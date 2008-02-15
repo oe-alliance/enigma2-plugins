@@ -194,7 +194,7 @@ class TrafficInfoMain(Screen):
 
 class ItemList(MenuList):
     def __init__(self, items, enableWrapAround = False):
-        MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent())
+        MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
         self.l.setFont(0, gFont("Regular", 20))
         self.l.setFont(1, gFont("Regular", 18))
 

@@ -398,7 +398,7 @@ class WebcamViewer(Screen):
 ##################
 class PictureList(MenuList):
     def __init__(self, directory, matchingPattern = None, enableWrapAround = False):
-        MenuList.__init__(self, None, enableWrapAround, eListboxPythonMultiContent())
+        MenuList.__init__(self, None, enableWrapAround, eListboxPythonMultiContent)
         self.showDirectories = True
         self.showFiles = True
         self.isTop = False
