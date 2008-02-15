@@ -13,7 +13,7 @@ class RSSPoller:
 	def __init__(self, session, poll = True):
 		# Timer
 		self.poll_timer = eTimer()
-		self.poll_timer.timeout.get().append(self.poll)
+		self.poll_timer.callback.append(self.poll)
 		if poll:
 			self.poll_timer.start(0, 1)
 
@@ -162,7 +162,7 @@ class RSSPoller:
 		self.poll_timer.start(1000, 1)
 
 	def shutdown(self):
-		self.poll_timer.timeout.get().remove(self.poll)
+		self.poll_timer.callback.remove(self.poll)
 		self.poll_timer = None
 
 	def triggerReload(self):

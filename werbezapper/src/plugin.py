@@ -14,7 +14,9 @@ def main(session, servicelist, **kwargs):
 
 def cleanup():
 	global zapperInstance
-	zapperInstance = None
+	if zapperInstance is not None:
+		zapperInstance.shutdown()
+		zapperInstance = None
 
 def Plugins(**kwargs):
  	return [

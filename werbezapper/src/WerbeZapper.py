@@ -20,7 +20,7 @@ class WerbeZapper:
 
 		# Create Timer
 		self.zap_timer = eTimer()
-		self.zap_timer.timeout.get().append(self.zap)
+		self.zap_timer.callback.append(self.zap)
 
 		# Initialize services
 		self.zap_service = None
@@ -129,3 +129,6 @@ class WerbeZapper:
 		if self.cleanupfnc:
 			self.cleanupfnc()
 
+	def shutdown(self):
+		self.zap_timer.callback.remove(self.zap)
+		self.zap_timer = None

@@ -215,7 +215,7 @@ class RSSFeedView(RSSBaseView):
 			})
 
 			self.timer = eTimer()
-			self.timer.timeout.get().append(self.timerTick)
+			self.timer.callback.append(self.timerTick)
 			self.onExecBegin.append(self.startTimer)
 
 		self["content"].connectSelChanged(self.updateInfo)
@@ -225,6 +225,9 @@ class RSSFeedView(RSSBaseView):
 		self.timer.startLongTimer(5)
 
 	def timerTick(self):
+		self.timer.callback.remove(self.timerTick)
+		self.timer = None
+
 		self.close()
 
 	def __show(self):
@@ -232,7 +235,7 @@ class RSSFeedView(RSSBaseView):
 
 	def __close(self):
 		if self.timer is not None:
-			self.timer.timeout.get().remove(self.timerTick)
+			self.timer.callback.remove(self.timerTick)
 			self.timer = None
 		self.rssPoller.removeCallback(self.pollCallback)
 
