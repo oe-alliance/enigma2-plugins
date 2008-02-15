@@ -1,10 +1,5 @@
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
-from Screens.ChoiceBox import ChoiceBox
-from Screens.InputBox import InputBox
-
-# GUI (Components)
-from Components.Input import Input
 
 # Timer
 from enigma import eTimer
@@ -39,6 +34,8 @@ class WerbeZapper:
 				_("Timer already running.\nStop it?")
 			)
 		else:
+			from Screens.ChoiceBox import ChoiceBox
+
 			# Select Timer Length
 			self.session.openWithCallback(
 				self.choiceCallback,
@@ -71,6 +68,9 @@ class WerbeZapper:
 	def choiceCallback(self, result):
 		result = result and result[1]
 		if result == "custom":
+			from Screens.InputBox import InputBox
+			from Components.Input import Input
+
 			self.session.openWithCallback(
 				self.inputCallback,
 				InputBox,

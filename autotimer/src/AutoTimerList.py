@@ -24,9 +24,12 @@ class AutoTimerList(GUIComponent):
 		instance.setContent(self.l)
 		instance.setItemHeight(25)
 
-#
-#  | <Name of AutoTimer> |
-#
+	def preWidgetRemove(self, instance):
+		instance.setContent(None)
+
+	#
+	#  | <Name of AutoTimer> |
+	#
 	def buildListboxEntry(self, timer):
 		res = [ None ]
 		width = self.l.getItemSize().width()
@@ -65,10 +68,13 @@ class AutoTimerPreviewList(GUIComponent):
 		instance.setContent(self.l)
 		instance.setItemHeight(70)
 
-#
-#  | <Service>     <Name of the Event>  |
-#  | <start, end>  <Name of AutoTimer>  |
-#
+	def preWidgetRemove(self, instance):
+		instance.setContent(None)
+
+	#
+	#  | <Service>     <Name of the Event>  |
+	#  | <start, end>  <Name of AutoTimer>  |
+	#
 	def buildListboxEntry(self, name, begin, end, serviceref, timername):
 		res = [ None ]
 		width = self.l.getItemSize().width()

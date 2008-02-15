@@ -37,6 +37,10 @@ class RSSBaseList(GUIComponent):
 		instance.setItemHeight(self.itemheight)
 		instance.selectionChanged.get().append(self.selectionChanged)
 
+	def preWidgetRemove(self, instance):
+		instance.selectionChanged.get().remove(self.selectionChanged)
+		instance.setContent(None)
+
 	def getCurrentEntry(self):
 		return self.l.getCurrentSelection()
 
