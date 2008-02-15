@@ -406,20 +406,14 @@ class ScreenMailView(Screen):
             print "Attachment selected", choice[1].getFilename()
             #showMessageBox(self.session)
     
-class MailList(MenuList, HTMLComponent, GUIComponent):
-    def __init__(self, list):
-        MenuList.__init__(self, list)
-        GUIComponent.__init__(self)
-        self.l = eListboxPythonMultiContent()
-        self.list = list
-        self.l.setList(list)
+class MailList(MenuList):
+    def __init__(self, list, enableWrapAround = False):
+        MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent())
         self.l.setFont(0, gFont("Regular", 18))
         self.l.setFont(1, gFont("Regular", 20))
         
-    GUI_WIDGET = eListbox
-
     def postWidgetCreate(self, instance):
-        instance.setContent(self.l)
+        MenuList.postWidgetCreate(self, instance)
         instance.setItemHeight(60)
 
 class MessageHeader(object):        

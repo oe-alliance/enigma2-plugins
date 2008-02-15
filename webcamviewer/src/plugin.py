@@ -4,8 +4,6 @@ from enigma import loadPic
 from enigma import loadPNG
 from enigma import gFont
 ### Picturelist
-from Components.HTMLComponent import HTMLComponent
-from Components.GUIComponent import GUIComponent
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.InputBox import InputBox
@@ -305,6 +303,7 @@ class PictureViewer(Screen):
              self.filelist.pageUp()         
              self.updateInfoPanel()
          else:
+
              self.slideshowlist.pageUp()
     def rightUp(self):
         if self.currList is "filelist" :
@@ -397,10 +396,9 @@ class WebcamViewer(Screen):
 ###################
 
 ##################
-class PictureList(MenuList, HTMLComponent, GUIComponent):
-    def __init__(self, directory, matchingPattern = None):
-        GUIComponent.__init__(self)
-        self.l = eListboxPythonMultiContent()
+class PictureList(MenuList):
+    def __init__(self, directory, matchingPattern = None, enableWrapAround = False):
+        MenuList.__init__(self, None, enableWrapAround, eListboxPythonMultiContent())
         self.showDirectories = True
         self.showFiles = True
         self.isTop = False
@@ -408,7 +406,7 @@ class PictureList(MenuList, HTMLComponent, GUIComponent):
         self.changeDir(directory)
         self.l.setFont(0, gFont("Regular", 18))
         self.currentDir = directory
-    
+
     def getCurrentDir(self):
         return self.currentDir
     
@@ -465,10 +463,8 @@ class PictureList(MenuList, HTMLComponent, GUIComponent):
     def getServiceRef(self):
         return self.getSelection()[0]
 
-    GUI_WIDGET = eListbox
-
     def postWidgetCreate(self, instance):
-        instance.setContent(self.l)
+        MenuList.postWidgetCreate(self, instance)
         instance.setItemHeight(23)
     
     def getPictureEntryComponent(self,name, absolute, isDir):

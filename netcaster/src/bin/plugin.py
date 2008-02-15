@@ -4,10 +4,7 @@ from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Label import Label
-from Components.GUIComponent import GUIComponent
 from Components.MenuList import MenuList
-from Components.HTMLComponent import HTMLComponent
-from Components.GUIComponent import GUIComponent
 from Components.MultiContent import MultiContentEntryText
 from enigma import eListboxPythonMultiContent, eListbox, gFont
 
@@ -186,20 +183,14 @@ class NETcasterScreenHelp(Screen):
              }, -1)
         
 ############################################################################### 
-class StreamMenu(MenuList, HTMLComponent, GUIComponent):
-    def __init__(self, list):
-        MenuList.__init__(self,list)
-        GUIComponent.__init__(self)
-        self.l = eListboxPythonMultiContent()
-        self.list = list
-        self.l.setList(list)
+class StreamMenu(MenuList):
+    def __init__(self, list, enableWrapAround = False):
+        MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent())
         self.l.setFont(0, gFont("Regular", 20))
         self.l.setFont(1, gFont("Regular", 18))
 
-    GUI_WIDGET = eListbox
-    
     def postWidgetCreate(self, instance):
-        instance.setContent(self.l)
+        MenuList.postWidgetCreate(self, instance)
         instance.setItemHeight(50)
     
     def buildList(self,listnew):

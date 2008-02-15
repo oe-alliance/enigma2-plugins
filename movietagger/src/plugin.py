@@ -10,8 +10,6 @@ from Components.MovieList import MovieList
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
-from Components.GUIComponent import GUIComponent
-from Components.HTMLComponent import HTMLComponent
 from Components.MultiContent import MultiContentEntryText
 from enigma import eServiceReference, eListboxPythonMultiContent, eListbox, eServiceCenter, gFont, iServiceInformation, eServiceReference
 
@@ -270,21 +268,15 @@ class MovieTagger(Screen):
 		if newTag >=0:
 			self.addTag(newTag.strip().replace(" ","_"))
 
-class TagMenuList(MenuList, HTMLComponent, GUIComponent):
-    def __init__(self, list):
-        MenuList.__init__(self,list)
-        GUIComponent.__init__(self)
-        self.l = eListboxPythonMultiContent()
-        self.list = list
-        self.l.setList(list)
-        self.l.setFont(0, gFont("Regular", 20))
-        self.l.setFont(1, gFont("Regular", 25))
+class TagMenuList(MenuList):
+	def __init__(self, list, enableWrapAround = False):
+		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent())
+		self.l.setFont(0, gFont("Regular", 20))
+		self.l.setFont(1, gFont("Regular", 25))
 
-    GUI_WIDGET = eListbox
-
-    def postWidgetCreate(self, instance):
-        instance.setContent(self.l)
-        instance.setItemHeight(25)
+	def postWidgetCreate(self, instance):
+		MenuList.postWidgetCreate(self, instance)
+		instance.setItemHeight(25)
 
 def main(session, service, **kwargs):
 	try:

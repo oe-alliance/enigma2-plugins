@@ -193,12 +193,10 @@ class TrafficInfoMain(Screen):
         return TrafficInfoItem(street,direction,details)
 
 class ItemList(MenuList):
-    def __init__(self, items):
-        MenuList.__init__(self,items)
-        self.l = eListboxPythonMultiContent()
+    def __init__(self, items, enableWrapAround = False):
+        MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent())
         self.l.setFont(0, gFont("Regular", 20))
         self.l.setFont(1, gFont("Regular", 18))
-    GUI_WIDGET = eListbox
 
     def getCurrentEntry(self):
         return self.l.getCurrentSelection()
