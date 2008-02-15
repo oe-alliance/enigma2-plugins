@@ -226,7 +226,6 @@ class RSSFeedView(RSSBaseView):
 
 	def timerTick(self):
 		self.timer.callback.remove(self.timerTick)
-		self.timer = None
 
 		self.close()
 
