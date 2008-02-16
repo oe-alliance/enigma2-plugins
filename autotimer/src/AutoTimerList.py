@@ -1,31 +1,21 @@
 # GUI (Components)
-from Components.GUIComponent import GUIComponent
+from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
-from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
+	RT_HALIGN_RIGHT, RT_VALIGN_CENTER
 
 from ServiceReference import ServiceReference
 from Tools.FuzzyDate import FuzzyTime
 
-class AutoTimerList(GUIComponent):
+class AutoTimerList(MenuList):
 	"""Defines a simple Component to show Timer name"""
 	
 	def __init__(self, entries):
-		GUIComponent.__init__(self)
+		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
 
-		self.list = entries
-		self.l = eListboxPythonMultiContent()
 		self.l.setFont(0, gFont("Regular", 22))
 		self.l.setBuildFunc(self.buildListboxEntry)
-		self.l.setList(self.list)
-
-	GUI_WIDGET = eListbox
-
-	def postWidgetCreate(self, instance):
-		instance.setContent(self.l)
-		instance.setItemHeight(25)
-
-	def preWidgetRemove(self, instance):
-		instance.setContent(None)
+		self.l.setItemHeight(25)
 
 	#
 	#  | <Name of AutoTimer> |
@@ -43,33 +33,16 @@ class AutoTimerList(GUIComponent):
 
 		return res
 
-	def getCurrent(self):
-		return self.l.getCurrentSelection()
-
-	def setList(self, l):
-		return self.l.setList(l)
-
-class AutoTimerPreviewList(GUIComponent):
+class AutoTimerPreviewList(MenuList):
 	"""Preview Timers, emulates TimerList"""
 	
 	def __init__(self, entries):
-		GUIComponent.__init__(self)
+		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
 
-		self.list = entries
-		self.l = eListboxPythonMultiContent()
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
 		self.l.setBuildFunc(self.buildListboxEntry)
-		self.l.setList(self.list)
-
-	GUI_WIDGET = eListbox
-
-	def postWidgetCreate(self, instance):
-		instance.setContent(self.l)
-		instance.setItemHeight(70)
-
-	def preWidgetRemove(self, instance):
-		instance.setContent(None)
+		self.l.setItemHeight(70)
 
 	#
 	#  | <Service>     <Name of the Event>  |
@@ -90,12 +63,6 @@ class AutoTimerPreviewList(GUIComponent):
 
 	def invalidate(self):
 		self.l.invalidate()
-
-	def getCurrent(self):
-		return self.l.getCurrentSelection()
-
-	def setList(self, l):
-		return self.l.setList(l)
 
 	def moveToEntry(self, entry):
 		if entry is None:

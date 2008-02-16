@@ -2,16 +2,12 @@ from enigma import eTimer
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Screens.ChoiceBox import ChoiceBox
-
-from Components.Scanner import openList
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 
 from RSSList import RSSFeedList, RSSEntryList
-from RSSSetup import RSSSetup
 
 class RSSBaseView(Screen):
 	"""Base Screen for all Screens used in SimpleRSS"""
@@ -62,6 +58,8 @@ class RSSBaseView(Screen):
 		if enclosures is None:
 			return
 
+		from Components.Scanner import openList
+
 		if not openList(self.session, enclosures):
 			self.session.open(
 				MessageBox,
@@ -72,6 +70,7 @@ class RSSBaseView(Screen):
 
 class RSSEntryView(RSSBaseView):
 	"""Shows a RSS Item"""
+
 	skin = """
 		<screen position="100,100" size="460,420" title="Simple RSS Reader" >
 			<widget name="info" position="0,0" size="460, 20" halign="right" font="Regular; 18" />
@@ -176,6 +175,7 @@ class RSSEntryView(RSSBaseView):
 
 class RSSFeedView(RSSBaseView):
 	"""Shows a RSS-Feed"""
+
 	skin = """
 		<screen position="100,100" size="460,415" title="Simple RSS Reader" >
 			<widget name="info" position="0,0" size="460,20" halign="right" font="Regular; 18" />
@@ -243,7 +243,7 @@ class RSSFeedView(RSSBaseView):
 
 		if id is None or id+1 == self.id:
 			# TODO: do we really need this?
-			current_entry = self["content"].getCurrentEntry()
+			current_entry = self["content"].getCurrent()
 			self["content"].moveToEntry(current_entry)
 
 			self["content"].invalidate()
@@ -254,11 +254,11 @@ class RSSFeedView(RSSBaseView):
 		self.setTitle(': '.join(["Simple RSS Reader", self.feed.title]))
 
 	def updateInfo(self):
-		current_entry = self["content"].getCurrentEntry()
+		current_entry = self["content"].getCurrent()
 		if current_entry:
 			self["summary"].setText(current_entry[2])
 
-			cur_idx = self["content"].getCurrentIndex()
+			cur_idx = self["content"].getSelectedIndex()
 			self["info"].setText(_("Entry %s/%s") % (cur_idx+1, len(self.feed.history)))
 		else:
 			self["summary"].setText(_("Feed is empty."))
@@ -269,19 +269,19 @@ class RSSFeedView(RSSBaseView):
 			self.singleUpdate(self.id-1)
 
 	def nextEntry(self):
-		self["content"].moveDown()
-		return (self["content"].getCurrentEntry(), self["content"].getCurrentIndex(), len(self.feed.history))
+		self["content"].down()
+		return (self["content"].getCurrent(), self["content"].getSelectedIndex(), len(self.feed.history))
 
 	def previousEntry(self):
-		self["content"].moveUp()
-		return (self["content"].getCurrentEntry(), self["content"].getCurrentIndex(), len(self.feed.history))
+		self["content"].up()
+		return (self["content"].getCurrent(), self["content"].getSelectedIndex(), len(self.feed.history))
 
 	# TODO: Fix moving back to previously marked entry (same goes for self.previous)
 	def next(self):
 		# Show next Feed
 		if self.parent is not None:
 			(self.feed, self.id) = self.parent.nextFeed()
-			#current_entry = self["content"].getCurrentEntry()
+			#current_entry = self["content"].getCurrent()
 			self["content"].l.setList(self.feed.history) # Update list
 			self["content"].moveToIndex(0)
 			#self["content"].moveToEntry(current_entry)
@@ -294,7 +294,7 @@ class RSSFeedView(RSSBaseView):
 		# Show previous Feed
 		if self.parent is not None:
 			(self.feed, self.id) = self.parent.previousFeed()
-			#current_entry = self["content"].getCurrentEntry()
+			#current_entry = self["content"].getCurrent()
 			self["content"].l.setList(self.feed.history) # Update list
 			self["content"].moveToIndex(0)
 			#self["content"].moveToEntry(current_entry)
@@ -308,7 +308,7 @@ class RSSFeedView(RSSBaseView):
 			self.singleUpdate(self.id-1)
 
 	def showCurrentEntry(self):
-		current_entry = self["content"].getCurrentEntry()
+		current_entry = self["content"].getCurrent()
 		if current_entry is None: # empty list
 			return
 
@@ -316,14 +316,14 @@ class RSSFeedView(RSSBaseView):
 			self.updateInfo,
 			RSSEntryView,
 			current_entry,
-			cur_idx=self["content"].getCurrentIndex(),
+			cur_idx=self["content"].getSelectedIndex(),
 			entries=len(self.feed.history),
 			feedTitle=self.feed.title,
 			parent=self
 		)
 
 	def selectEnclosure(self):
-		current_entry = self["content"].getCurrentEntry()
+		current_entry = self["content"].getCurrent()
 		if current_entry is None: # empty list
 			return
 
@@ -331,6 +331,7 @@ class RSSFeedView(RSSBaseView):
 
 class RSSOverview(RSSBaseView):
 	"""Shows an Overview over all RSS-Feeds known to rssPoller"""
+
 	skin = """
 		<screen position="100,100" size="460,415" title="Simple RSS Reader" >
 			<widget name="info" position="0,0" size="460,20" halign="right" font="Regular; 18" />
@@ -377,12 +378,14 @@ class RSSOverview(RSSBaseView):
 		self["content"].invalidate()
 
 	def updateInfo(self):
-		current_entry = self["content"].getCurrentEntry()
+		current_entry = self["content"].getCurrent()
 		self["summary"].setText(' '.join([str(len(current_entry.history)), _("Entries")]))
-		self["info"].setText(_("Feed %s/%s") % (self["content"].getCurrentIndex()+1, len(self.feeds)))
+		self["info"].setText(_("Feed %s/%s") % (self["content"].getSelectedIndex()+1, len(self.feeds)))
 
 	def menu(self):
-		cur_idx = self["content"].getCurrentIndex()
+		from Screens.ChoiceBox import ChoiceBox
+
+		cur_idx = self["content"].getSelectedIndex()
 		if cur_idx > 0:
 			possible_actions = [
 				(_("Update Feed"), "update"),
@@ -394,20 +397,23 @@ class RSSOverview(RSSBaseView):
 				(_("Setup"), "setup"),
 				(_("Close"), "close")
 			]
+
 		self.session.openWithCallback(
 			self.menuChoice,
 			ChoiceBox,
-			"What to do?",
+			_("What to do?"),
 			possible_actions
 		)
 
 	def menuChoice(self, result):
 		if result:
 			if result[1] == "update":
-				cur_idx = self["content"].getCurrentIndex()
+				cur_idx = self["content"].getSelectedIndex()
 				if cur_idx > 0:
 					self.singleUpdate(cur_idx-1)
 			elif result[1] == "setup":
+				from RSSSetup import RSSSetup
+
 				self.session.openWithCallback(
 					self.refresh,
 					RSSSetup,
@@ -417,7 +423,7 @@ class RSSOverview(RSSBaseView):
 				self.close()
 
 	def refresh(self):
-		current_entry = self["content"].getCurrentEntry()
+		current_entry = self["content"].getCurrent()
 
 		self.fillFeeds()
 		self["content"].l.setList(self.feeds)
@@ -426,27 +432,27 @@ class RSSOverview(RSSBaseView):
 		self.updateInfo()
 
 	def nextFeed(self):
-		self["content"].moveUp()
-		return (self["content"].getCurrentEntry(), self["content"].getCurrentIndex())
+		self["content"].up()
+		return (self["content"].getCurrent(), self["content"].getSelectedIndex())
 
 	def previousFeed(self):
-		self["content"].moveDown()
-		return (self["content"].getCurrentEntry(), self["content"].getCurrentIndex())
+		self["content"].down()
+		return (self["content"].getCurrent(), self["content"].getSelectedIndex())
 
 	def showCurrentEntry(self):
-		current_entry = self["content"].getCurrentEntry()
+		current_entry = self["content"].getCurrent()
 		self.session.openWithCallback(
 			self.updateInfo,
 			RSSFeedView,
 			feed=current_entry,
 			parent=self,
 			rssPoller=self.rssPoller,
-			id=self["content"].getCurrentIndex()
+			id=self["content"].getSelectedIndex()
 		)
 
 	def selectEnclosure(self):
 		# Build a list of all enclosures in this feed
 		enclosures = []
-		for entry in self["content"].getCurrentEntry().history:
+		for entry in self["content"].getCurrent().history:
 				enclosures.extend(entry[3])
 		RSSBaseView.selectEnclosure(self, enclosures)

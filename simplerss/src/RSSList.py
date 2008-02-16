@@ -1,19 +1,18 @@
-from Components.GUIComponent import GUIComponent
+from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
-from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_WRAP
 
-class RSSBaseList(GUIComponent):
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
+	RT_WRAP
+
+class RSSBaseList(MenuList):
 	"""Base List Component for RSSFeeds."""
+
 	def __init__(self, entries, itemheight):
-		GUIComponent.__init__(self)
-		self.list = entries
-		self.itemheight = itemheight
-		self.l = eListboxPythonMultiContent()
+		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
+
 		self.l.setFont(0, gFont("Regular", 22))
 		self.l.setFont(1, gFont("Regular", 18))
-		self.l.setList(self.list)
-
-		self.onSelectionChanged = [ ]
+		self.l.setItemHeight(itemheight)
 
 	def connectSelChanged(self, fnc):
 		if not fnc in self.onSelectionChanged:
@@ -23,41 +22,8 @@ class RSSBaseList(GUIComponent):
 		if fnc in self.onSelectionChanged:
 			self.onSelectionChanged.remove(fnc)
 
-	def selectionChanged(self):
-		for x in self.onSelectionChanged:
-			try:
-				x()
-			except:
-				pass
-
-	GUI_WIDGET = eListbox
-
-	def postWidgetCreate(self, instance):
-		instance.setContent(self.l)
-		instance.setItemHeight(self.itemheight)
-		instance.selectionChanged.get().append(self.selectionChanged)
-
-	def preWidgetRemove(self, instance):
-		instance.selectionChanged.get().remove(self.selectionChanged)
-		instance.setContent(None)
-
-	def getCurrentEntry(self):
-		return self.l.getCurrentSelection()
-
-	def getCurrentIndex(self):
-		return self.instance.getCurrentIndex()
-
-	def moveToIndex(self, index):
-		self.instance.moveSelectionTo(index)
-
 	def moveToEntry(self, identifier):
 		pass
-
-	def moveDown(self):
-		self.instance.moveSelection(self.instance.moveDown)
-
-	def moveUp(self):
-		self.instance.moveSelection(self.instance.moveUp)
 
 	def invalidate(self):
 		self.l.invalidate()
@@ -85,7 +51,7 @@ class RSSFeedList(RSSBaseList):
 		res.append(MultiContentEntryText(pos=(0, 75), size=(width, 20), font=1, flags = RT_HALIGN_LEFT, text = feed.description))
 		return res
 
-	def getCurrentEntry(self):
+	def getCurrent(self):
 		# We know that the list will never be empty...
 		return self.l.getCurrentSelection()[0]
 

@@ -1,6 +1,6 @@
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-from Components.config import config, ConfigSubsection, ConfigEnableDisable, ConfigText, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
+	ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Button import Button
 from Components.ActionMap import ActionMap
@@ -80,7 +80,7 @@ class RSSSetup(ConfigListScreen, Screen):
 			self.list.append(self.keep_running)
 
 		# Append Last two config Elements
-		self.list.append(getConfigListEntry(_("Show new Messages"), config.plugins.simpleRSS.show_new))
+		self.list.append(getConfigListEntry(_("Show new Messages as"), config.plugins.simpleRSS.update_notification))
 		self.list.append(getConfigListEntry(_("Update Interval (min)"), config.plugins.simpleRSS.interval))
 
 		# Initialize ConfigListScreen
@@ -112,6 +112,8 @@ class RSSSetup(ConfigListScreen, Screen):
 		self["config"].setList(self.list)
 
 	def delete(self):
+		from Screens.MessageBox import MessageBox
+
 		self.session.openWithCallback(
 			self.deleteConfirm,
 			MessageBox,

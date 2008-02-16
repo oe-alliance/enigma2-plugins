@@ -1,9 +1,16 @@
 from Components.config import config, ConfigSubsection, ConfigSubList, \
-	ConfigEnableDisable, ConfigInteger, ConfigText
+	ConfigEnableDisable, ConfigInteger, ConfigText, ConfigSelection
 
 # Initialize Configuration
 config.plugins.simpleRSS = ConfigSubsection()
-config.plugins.simpleRSS.show_new = ConfigEnableDisable(default=True)
+config.plugins.simpleRSS.update_notification = ConfigSelection(
+	choices = [
+		("notification", _("Notification")),
+		("preview", _("Preview")),
+		("none", _("none"))
+	],
+	default = "preview"
+)
 config.plugins.simpleRSS.interval = ConfigInteger(default=10, limits=(5, 300))
 config.plugins.simpleRSS.feedcount = ConfigInteger(default=0)
 config.plugins.simpleRSS.autostart = ConfigEnableDisable(default=False)
