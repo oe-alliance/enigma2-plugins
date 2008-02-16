@@ -282,7 +282,7 @@ class RSSFeedView(RSSBaseView):
 		if self.parent is not None:
 			(self.feed, self.id) = self.parent.nextFeed()
 			#current_entry = self["content"].getCurrent()
-			self["content"].l.setList(self.feed.history) # Update list
+			self["content"].setList(self.feed.history) # Update list
 			self["content"].moveToIndex(0)
 			#self["content"].moveToEntry(current_entry)
 			self.updateInfo() # In case entry is no longer in history
@@ -295,7 +295,7 @@ class RSSFeedView(RSSBaseView):
 		if self.parent is not None:
 			(self.feed, self.id) = self.parent.previousFeed()
 			#current_entry = self["content"].getCurrent()
-			self["content"].l.setList(self.feed.history) # Update list
+			self["content"].setList(self.feed.history) # Update list
 			self["content"].moveToIndex(0)
 			#self["content"].moveToEntry(current_entry)
 			self.updateInfo() # In case entry is no longer in history
@@ -426,7 +426,7 @@ class RSSOverview(RSSBaseView):
 		current_entry = self["content"].getCurrent()
 
 		self.fillFeeds()
-		self["content"].l.setList(self.feeds)
+		self["content"].setList(self.feeds)
 
 		self["content"].moveToEntry(current_entry)
 		self.updateInfo()

@@ -9,11 +9,6 @@ from AutoTimerList import AutoTimerPreviewList
 class AutoTimerPreview(Screen):
 	"""Preview Timers which would be set"""
 
-	# <ePixmap position="140,220" zPosition="4" size="140,40" pixmap="skin_default/key-green.png" transparent="1" alphatest="on" />
-	# <widget name="key_green" position="140,220" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-	# <ePixmap position="420,220" zPosition="4" size="140,40" pixmap="skin_default/key-blue.png" transparent="1" alphatest="on" />
-	# <widget name="key_blue" position="420,220" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-
 	skin = """<screen name="AutoTimerPreview" title="Preview AutoTimer" position="75,155" size="565,265">
 		<widget name="timerlist" position="5,5" size="555,210" scrollbarMode="showOnDemand" />
 		<ePixmap position="0,220" zPosition="4" size="140,40" pixmap="skin_default/key-red.png" transparent="1" alphatest="on" />
@@ -35,9 +30,7 @@ class AutoTimerPreview(Screen):
 
 		# Initialize Buttons
 		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("???"))
 		self["key_yellow"] = Button()
- 		self["key_blue"] = Button(_("???"))
 
 		self.setSortDescription()
 
@@ -46,8 +39,7 @@ class AutoTimerPreview(Screen):
 			{
 				"cancel": self.cancel,
 				"save": self.save,
-				"yellow": self.sort,
-				"blue": self.blue
+				"yellow": self.sort
 			}
 		)
 
@@ -69,9 +61,6 @@ class AutoTimerPreview(Screen):
 			self["timerlist"].setList(self.timers)
 			self["timerlist"].moveToEntry(timer)
 			self.setSortDescription()
-
-	def blue(self):
-		pass
 
 	def cancel(self):
 		self.close(None)
