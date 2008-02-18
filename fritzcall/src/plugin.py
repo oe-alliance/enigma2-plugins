@@ -147,7 +147,7 @@ class FritzCallPhonebook:
 					number, name = line.split("#")
 					if not self.phonebook.has_key(number):	
 						self.phonebook[number] = name 
-				except ValueError():
+				except ValueError:
 					print "[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" %line 
 
 		if config.plugins.FritzCall.fritzphonebook.value:
