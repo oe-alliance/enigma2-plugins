@@ -52,7 +52,7 @@ class FritzCallPhonebook:
 			f.write("01234567890#Name, Street, Location (Keep the Spaces!!!)\n");
 			f.close()
 			return True
-		except:
+		except IOError:
 			return False
 	
 	def error(self, error):
@@ -94,7 +94,7 @@ class FritzCallPhonebook:
 						print "[FritzCallPhonebook] Adding '''%s''' with '''%s''' from Fritz!Box Phonebook!" %(name, number)
 						self.phonebook[number.strip()] = name.strip()
 						
-					except IOError():
+					except IOError:
 						print "[FritzCallPhonebook] Could not parse Fritz!Box Phonebook entry"
 	
 	def _gotPage(self, html):
@@ -176,7 +176,7 @@ class FritzCallPhonebook:
 				f.close()
 				return True
 	
-			except IOError():
+			except IOError:
 				return False
 
 phonebook = FritzCallPhonebook()
