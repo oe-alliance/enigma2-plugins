@@ -24,7 +24,8 @@ class AutoTimerComponent(object):
 	def setValues(self, name, match, enabled, timespan = None, services = None, offset = None, \
 			afterevent = [], exclude = None, maxduration = None, destination = None, \
 			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
-			lastBegin = 0, justplay = False, avoidDuplicateDescription = False, bouquets = None):
+			lastBegin = 0, justplay = False, avoidDuplicateDescription = False, bouquets = None, \
+			tags = None):
 		self.name = name
 		self.match = match
 		self.timespan = timespan
@@ -44,6 +45,7 @@ class AutoTimerComponent(object):
 		self.justplay = justplay
 		self.avoidDuplicateDescription = avoidDuplicateDescription
 		self.bouquets = bouquets
+		self.tags = tags or []
 
 	def calculateDayspan(self, begin, end):
 		if end[0] < begin[0] or (end[0] == begin[0] and end[1] <= begin[1]):
@@ -382,6 +384,9 @@ class AutoTimerComponent(object):
 
 	def getAvoidDuplicateDescription(self):
 		return self.avoidDuplicateDescription
+
+	def hasTags(self):
+		return len(self.tags) > 0
 
 	def __repr__(self):
 		return ''.join([

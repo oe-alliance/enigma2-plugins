@@ -151,7 +151,7 @@ class AutoTimer:
 				if maxlen:
 					maxlen = int(maxlen)*60
 
-				# Read out recording path (needs my Location-select patch)
+				# Read out recording path
 				destination = timer.getAttribute("destination").encode("UTF-8") or None
 
 				# Read out offset
@@ -244,6 +244,15 @@ class AutoTimer:
 					except KeyError, ke:
 						pass
 
+				# Read out recording tags (needs my enhanced tag support patch)
+				tags = []
+				for tag in timer.getElementsByTagName("tag"):
+					value = getValue(tag, None)
+					if not value:
+						continue
+
+					tags.append(value.encode("UTF-8"))
+
 				# Finally append tuple
 				self.timers.append(AutoTimerComponent(
 						self.uniqueTimerId,
@@ -265,7 +274,8 @@ class AutoTimer:
 						lastBegin = lastBegin,
 						justplay = justplay,
 						avoidDuplicateDescription = avoidDuplicateDescription,
-						bouquets = bouquets
+						bouquets = bouquets,
+						tags = tags
 				))
 
 	def getTimerList(self):
@@ -388,6 +398,10 @@ class AutoTimer:
 				list.extend(['  <include where="description">', desc, '</include>\n'])
 			for day in timer.getIncludedDays():
 				list.extend(['  <include where="dayofweek">', day, '</include>\n'])
+
+			# Tags
+			for tag in timer.tags:
+				list.extend(['  <tag>', str(tag), '</tag>\n'])
 
 			# End of Timer
 			list.append(' </timer>\n\n')
@@ -548,13 +562,9 @@ class AutoTimer:
  					if afterEvent is not None:
  						newEntry.afterEvent = afterEvent
 
-				# Set custom destination directory (needs my Location-select patch)
-				if timer.hasDestination():
-					# TODO: add warning when patch not installed?
-					newEntry.dirname = timer.destination
- 
- 				# Make this timer a zap-timer if wanted
- 				newEntry.justplay = timer.justplay
+				newEntry.dirname = timer.destination
+				newEntry.justplay = timer.justplay
+				newEntry.tags = timer.tags # This needs my enhanced tag support patch to work
  
  				# Do a sanity check, although it does not do much right now
  				timersanitycheck = TimerSanityCheck(NavigationInstance.instance.RecordTimer.timer_list, newEntry)

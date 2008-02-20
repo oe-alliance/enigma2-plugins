@@ -134,9 +134,10 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			{
 				"cancel": self.cancel,
 				"save": self.maybeSave,
+				"ok": self.ok,
 				"yellow": self.editFilter,
 				"blue": self.editServices
-			}
+			}, -2
 		)
 
 		# Trigger change
@@ -273,6 +274,9 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		# Avoid Duplicate Description
 		self.avoidDuplicateDescription = ConfigEnableDisable(default = timer.getAvoidDuplicateDescription())
 
+		# Custom Location
+		self.destination = ConfigSelection(choices = [timer.destination or "/hdd/movie"])
+
 	def refresh(self):
 		# First four entries are always shown
 		self.list = [
@@ -329,6 +333,9 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 
 		self.list.append(getConfigListEntry(_("Require Description to be unique"), self.avoidDuplicateDescription))
 
+		# We always add this option though its actually expert only
+		self.list.append(getConfigListEntry(_("Custom Location"), self.destination))
+
 	def reloadList(self, value):
 		self.refresh()
 		self["config"].setList(self.list)
@@ -364,6 +371,26 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			self.services = ret[1][0]
 			self.bouquets = ret[1][1]
 			self.renameServiceButton()
+
+	def ok(self):
+		cur = self["config"].getCurrent()
+		cur = cur and cur[1]
+		if cur == self.destination:
+			from Screens.LocationBox import LocationBox
+
+			self.session.openWithCallback(
+				self.pathSelected,
+				LocationBox,
+				text = _("Choose target folder"),
+				filename = "",
+				currDir = self.destination.value
+			)
+
+	def pathSelected(self, res):
+		if res is not None:
+			self.destination.choices.append(res)
+			self.destination.description[res] = res
+			self.destination.value = res
 
 	def cancel(self):
 		if self["config"].isChanged():
@@ -477,6 +504,7 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			self.timer.matchFormatString = ''
 
 		self.timer.avoidDuplicateDescription = self.avoidDuplicateDescription.value
+		self.timer.destination = self.destination.value
 
 		# Close
 		self.close(self.timer)

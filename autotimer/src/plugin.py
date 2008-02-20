@@ -40,7 +40,11 @@ def autostart(reason, **kwargs):
 	elif reason == 1:
 		# Stop Poller
 		if autopoller is not None:
-			autopoller.stop()
+			# We might shutdown when configuring, timer won't be runnign then
+			try:
+				autopoller.stop()
+			except ValueError, ve:
+				pass
 
 			autopoller = None
 
