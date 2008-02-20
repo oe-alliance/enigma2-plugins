@@ -139,6 +139,12 @@ class AutoTimerImporter(Screen):
 				int(timer.justplay),
 				5,
 				True
+			),
+			SelectionEntryComponent(
+				': '.join([_("Location"), timer.dirname or "/hdd/movie/"]),
+				timer.dirname,
+				6,
+				True
 			)
 		]
 
@@ -203,12 +209,14 @@ class AutoTimerImporter(Screen):
 				self.autotimer.afterevent = [(item[1], None)]
 			elif item[2] == 5: # Justplay
 				self.autotimer.justplay = item[1]
+			elif item[2] == 6: # Location
+				self.autotimer.destination = item[1]
 
 		if self.autotimer.match == "":
 			self.session.openWithCallback(
 					self.gotCustomMatch,
 					InputBox,
-					title = _("Please provide a Text to Match")
+					title = _("Please provide a Text to match")
 			)
 		else:
 			self.close(self.autotimer)
