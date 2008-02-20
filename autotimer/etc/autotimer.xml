@@ -41,8 +41,9 @@
     - Record all Events with "Malcolm" in its Title
     - When their extended description matches a rather weird regular expression
       (must contain upper case L and end with "al" - any better example?)
+    - Save recordings into /media/net/Malcolm
  -->
- <timer name="Events with Malcolm" match="Malcolm" enabled="no">
+ <timer name="Events with Malcolm" match="Malcolm" destination="/media/net/Malcolm/" enabled="no">
   <!-- Don't limit stations to record on -->
   <!-- If the recording ends between 23:00 and 06:00 shutdown afterwards -->
   <afterevent from="23:00" to="06:00">shutdown</afterevent>

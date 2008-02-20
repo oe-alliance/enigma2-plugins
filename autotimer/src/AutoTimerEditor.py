@@ -275,7 +275,7 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		self.avoidDuplicateDescription = ConfigEnableDisable(default = timer.getAvoidDuplicateDescription())
 
 		# Custom Location
-		self.destination = ConfigSelection(choices = [timer.destination or "/hdd/movie"])
+		self.destination = ConfigSelection(choices = [timer.destination or "/hdd/movie/"])
 
 	def refresh(self):
 		# First four entries are always shown
@@ -385,6 +385,8 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 				filename = "",
 				currDir = self.destination.value
 			)
+		else:
+			ConfigListScreen.keyOK(self)
 
 	def pathSelected(self, res):
 		if res is not None:
@@ -504,7 +506,11 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			self.timer.matchFormatString = ''
 
 		self.timer.avoidDuplicateDescription = self.avoidDuplicateDescription.value
-		self.timer.destination = self.destination.value
+
+		if self.destination.value == "/hdd/movie/":
+			self.timer.destination = None
+		else:
+			self.timer.destination = self.destination.value
 
 		# Close
 		self.close(self.timer)
