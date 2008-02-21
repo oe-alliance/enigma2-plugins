@@ -14,7 +14,7 @@ from Components.Button import Button
 
 # Configuration
 from Components.config import getConfigListEntry, ConfigEnableDisable, \
-	ConfigYesNo, ConfigText, ConfigClock, ConfigInteger, ConfigSelection
+	ConfigYesNo, ConfigText, ConfigClock, ConfigNumber, ConfigSelection
 
 # Timer
 from RecordTimer import AFTEREVENT
@@ -215,8 +215,8 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			begin = 5
 			end = 5
 		self.offset = ConfigEnableDisable(default = default)
-		self.offsetbegin = ConfigInteger(default = begin, limits = (0, 180))
-		self.offsetend = ConfigInteger(default = end, limits = (0, 180))
+		self.offsetbegin = ConfigNumber(default = begin)
+		self.offsetend = ConfigNumber(default = end)
 
 		# AfterEvent
 		if timer.hasAfterEvent():
@@ -257,15 +257,15 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			default = False
 			duration =70
 		self.duration = ConfigEnableDisable(default = default)
-		self.durationlength = ConfigInteger(default = duration, limits = (0, 600))
+		self.durationlength = ConfigNumber(default = duration)
 
 		# Counter
 		if timer.hasCounter():
 			default = timer.matchCount
 		else:
 			default = 0
-		self.counter = ConfigInteger(default = default, limits = (0, 50))
-		self.counterLeft = ConfigInteger(default = timer.matchLeft, limits = (0, 50))
+		self.counter = ConfigNumber(default = default)
+		self.counterLeft = ConfigNumber(default = timer.matchLeft)
 		selection = [("", _("Never")), ("%m", _("Monthly")), ("%U", _("Weekly (Sunday)")), ("%W", _("Weekly (Monday)"))]
 		if timer.getCounterFormatString() not in ["", "%m", "%U", "%W"]:
 			selection.append((timer.getCounterFormatString(), _("Custom (%s)") % (timer.getCounterFormatString())))

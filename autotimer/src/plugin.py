@@ -1,21 +1,20 @@
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
 
-# Plugin definition
-from Plugins.Plugin import PluginDescriptor
-
-# ExpatError
-from xml.parsers.expat import ExpatError
-
 # Config
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
-	ConfigInteger, ConfigSelection
+	ConfigNumber, ConfigSelection
 
 # Initialize Configuration
 config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default = False)
-config.plugins.autotimer.interval = ConfigInteger(default = 3, limits=(1, 24))
-config.plugins.autotimer.refresh = ConfigSelection(choices = [("none", _("None")), ("auto", _("Only AutoTimers created during this Session")), ("all", _("All non-repeating Timers"))], default = "none")
+config.plugins.autotimer.interval = ConfigNumber(default = 3)
+config.plugins.autotimer.refresh = ConfigSelection(choices = [
+		("none", _("None")),
+		("auto", _("Only AutoTimers created during this Session")),
+		("all", _("All non-repeating Timers"))
+	], default = "none"
+)
 config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = True)
 
 autotimer = None
@@ -63,6 +62,8 @@ def main(session, **kwargs):
 	if autotimer is None:
 		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
+
+	from xml.parsers.expat import ExpatError
 
 	try:
 		autotimer.readXml()
@@ -141,6 +142,8 @@ def editCallback(session):
 		autotimer = None
 
 def Plugins(**kwargs):
+	from Plugins.Plugin import PluginDescriptor
+
 	return [
 		PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = autostart),
 		PluginDescriptor(name="AutoTimer", description = "Edit Timers and scan for new Events", where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main),
