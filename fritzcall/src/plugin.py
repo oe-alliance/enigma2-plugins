@@ -161,7 +161,7 @@ class FritzCallPhonebook:
 		name = None
 		if config.plugins.FritzCall.phonebook.value:
 			if self.phonebook.has_key(number):
-				name = self.phonebook[number].replace(", ", "\n")
+				name = self.phonebook[number].replace(", ", "\n").strip()
 		return name
 
 	def add(self, number, name):
