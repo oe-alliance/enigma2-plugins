@@ -119,6 +119,8 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 
 	def keyCancel(self):
 		if self["config"].isChanged():
+			from Screens.MessageBox import MessageBox
+
 			self.session.openWithCallback(
 				self.cancelConfirm,
 				MessageBox,
