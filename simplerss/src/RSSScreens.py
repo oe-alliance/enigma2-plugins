@@ -12,11 +12,10 @@ from RSSList import RSSFeedList, RSSEntryList
 class RSSBaseView(Screen):
 	"""Base Screen for all Screens used in SimpleRSS"""
 
-	def __init__(self, session, poller, parent=None):
-		Screen.__init__(self, session)
+	def __init__(self, session, poller, parent = None):
+		Screen.__init__(self, session, parent)
 		self.rssPoller = poller
 		self.pollDialog = None
-		self.parent = parent
 
 	def errorPolling(self, errmsg = ""):
 		# An error occured while polling

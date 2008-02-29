@@ -20,7 +20,7 @@ class BaseFeed:
 		self.last_ids = set()
 		self.history = []
 
-class AtomFeed(BaseFeed):
+class AtomFeed:
 	"""Parses an Atom-Feed into expected format."""
 	def gotDom(self, dom):
 		try:
@@ -91,7 +91,7 @@ class AtomFeed(BaseFeed):
 
 		return self.history[:idx]
 
-class RSSFeed(BaseFeed):
+class RSSFeed:
 	"""Parses an RSS-Feed into expected format."""
 	def gotDom(self, dom):
 		# Try to read when feed was last updated, if time equals return empty list. else fetch new items
@@ -106,7 +106,6 @@ class RSSFeed(BaseFeed):
 
 	def parse(self, items):
 		idx = 0
-		new_items = []
 		for item in items:
 			enclosure = []
 
@@ -173,26 +172,18 @@ class UniversalFeed(BaseFeed, RSSFeed, AtomFeed):
 
 	def gotDom(self, dom):
 		if self.type == "rss":
-			print "[SimpleRSS] type is rss"
 			return RSSFeed.gotDom(self, dom)
 		elif self.type == "atom":
-			print "[SimpleRSS] type is atom"
 			return AtomFeed.gotDom(self, dom)
 		elif self.type is None:
-			# RSS 2.0
-			if dom.documentElement.getAttribute("version") in ["2.0", "2.00", "0.94", "0.93", "0.92", "0.91"]:
+			# RSS 2.0 and RSS 1.0 (NS: http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+			if dom.documentElement.getAttribute("version") in ["2.0", "2.00", "0.94", "0.93", "0.92", "0.91"] \
+				or dom.documentElement.localName == "RDF":
 				self.type = "rss"
 				try:
-					self.title = dom.getElementsByTagName("channel")[0].getElementsByTagName("title")[0].childNodes[0].data
-					self.description = dom.getElementsByTagName("channel")[0].getElementsByTagName("description")[0].childNodes[0].data
-				except:
-					pass
-			# RSS 1.0 (NS: http://www.w3.org/1999/02/22-rdf-syntax-ns#)
-			elif dom.documentElement.localName == "RDF":
-				self.type = "rss"
-				try:
-					self.title = dom.getElementsByTagName("channel")[0].getElementsByTagName("title")[0].childNodes[0].data
-					self.description = dom.getElementsByTagName("channel")[0].getElementsByTagName("description")[0].childNodes[0].data
+					channel = dom.getElementsByTagName("channel")[0]
+					self.title = channel.getElementsByTagName("title")[0].childNodes[0].data
+					self.description = channel.getElementsByTagName("description")[0].childNodes[0].data
 				except:
 					pass
 			# Atom (NS: http://www.w3.org/2005/Atom)

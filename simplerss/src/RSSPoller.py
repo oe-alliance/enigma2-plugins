@@ -140,9 +140,10 @@ class RSSPoller:
 					from Screens.MessageBox import MessageBox
 
 					AddPopup(
-						_("Received %d new news items.") % (len(self.newItemFeed.history)),
+						_("Received %d new news item(s).") % (len(self.newItemFeed.history)),
 						MessageBox.TYPE_INFO,
-						5
+						5,
+						'SimpleRSSUpdateNotification'
 					)
 			# No new Items
 			else:

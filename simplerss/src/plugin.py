@@ -83,7 +83,7 @@ def filescan_open(item, session, **kwargs):
 	# Display Message
 	session.open(
 		MessageBox,
-		"Feed(s) were added to configuration.",
+		_("%d Feed(s) were added to configuration.") % (len(item)),
 		type = MessageBox.TYPE_INFO,
 		timeout = 5
 	)
@@ -95,7 +95,7 @@ def filescan(**kwargs):
 	# Overwrite checkFile to detect remote files
 	class RemoteScanner(Scanner):
 		def checkFile(self, file):
-			return file.path.startswith("http://") or file.path.startswith("https://")
+			return file.path.startswith(("http://", "https://"))
 
 	return [
 		RemoteScanner(
