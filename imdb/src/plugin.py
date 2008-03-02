@@ -48,7 +48,7 @@ class IMDB(Screen):
 		self.dictionary_init()
 
 		self["poster"] = Pixmap()
-	        self.preview = Pixmap()
+		#self.preview = Pixmap()
 		
 		self["stars"] = ProgressBar()
 		self["starsbg"] = Pixmap()
@@ -410,7 +410,7 @@ class IMDB(Screen):
 		pixmap = loadPic(filename, 96,140, AVSwitch().getAspectRatioSetting()/2,1,0,0)
 		if pixmap is not None:
 			self["poster"].instance.setPixmap(pixmap.__deref__())
-			self["poster"].move(4,90)
+			#self["poster"].move(4,90)
 			self["poster"].show()
 		
 	def createSummary(self):
