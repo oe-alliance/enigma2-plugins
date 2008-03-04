@@ -12,6 +12,7 @@ from enigma import iPlayableServicePtr
 from time import time
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens.InfoBarGenerics import InfoBarNotifications
 from Components.config import config
 from enigma import eServiceReference
 from Components.Sources.Source import Source
@@ -126,7 +127,7 @@ class VlcService(Source, iPlayableServicePtr):
 	def stop(self):
 		self.player.stop()
 
-class VlcPlayer(Screen):
+class VlcPlayer(Screen, InfoBarNotifications):
 	screen_timeout = 5000
 	
 	STATE_IDLE = 0
@@ -135,6 +136,7 @@ class VlcPlayer(Screen):
 	
 	def __init__(self, session, vlcfilelist):
 		Screen.__init__(self, session)
+		InfoBarNotifications.__init__(self)
 		self.filelist = vlcfilelist
 		self.skinName = "MoviePlayer"
 		self.state = self.STATE_IDLE
@@ -155,6 +157,13 @@ class VlcPlayer(Screen):
 			def action(self, contexts, action):
 				if action[:5] == "seek:":
 					time = int(action[5:])
+					self.player.seekRelative(time)
+					return 1
+				elif action[:8] == "seekdef:":
+					key = int(action[8:])
+					time = [-config.seek.selfdefined_13.value, False, config.seek.selfdefined_13.value,
+							-config.seek.selfdefined_46.value, False, config.seek.selfdefined_46.value,
+							-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value][key-1]
 					self.player.seekRelative(time)
 					return 1
 				else:
