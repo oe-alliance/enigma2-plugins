@@ -409,16 +409,11 @@ class AutoTimer:
 		# End of Configuration
 		list.append('</autotimer>\n')
 
-		# Try Saving to Flash
-		file = None
-		try:
-			file = open(XML_CONFIG, 'w')
-			file.writelines(list)
+		# Save to Flash
+		file = open(XML_CONFIG, 'w')
+		file.writelines(list)
 
-			# FIXME: This should actually be placed inside a finally-block but python 2.4 does not support this - waiting for some images to upgrade
-			file.close()
-		except Exception, e:
-			print "[AutoTimer] Error Saving Timer List:", e
+		file.close()
 
 	def parseEPG(self, simulateOnly = False):
 		if NavigationInstance.instance is None:

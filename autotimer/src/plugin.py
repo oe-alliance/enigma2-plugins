@@ -75,17 +75,6 @@ def main(session, **kwargs):
 			timeout = 10
 		)
 		return
-	except Exception, e:
-		# Don't crash during development
-		import traceback, sys
-		traceback.print_exc(file=sys.stdout)
-		session.open(
-			MessageBox,
-			"An unexpected error occured: %s" % (e),
-			type = MessageBox.TYPE_ERROR,
-			timeout = 15
-		)
-		return
 
 	# Do not run in background while editing, this might screw things up
 	if autopoller is not None:
@@ -102,39 +91,27 @@ def editCallback(session):
 	global autotimer
 	global autopoller
 
+	# Don't do anything when editing was canceled
+	if session is None:
+		return
+
+	# Poll EPGCache
+	ret = autotimer.parseEPG()
+	session.open(
+		MessageBox,
+		"Found a total of %d matching Events.\n%d Timer were added and %d modified.." % (ret[0], ret[1], ret[2]),
+		type = MessageBox.TYPE_INFO,
+		timeout = 10
+	)
+
 	# Start autopoller again if wanted
 	if config.plugins.autotimer.autopoll.value:
 		if autopoller is None:
 			from AutoPoller import AutoPoller
 			autopoller = AutoPoller()
 		autopoller.start(initial = False)
-
-	# Don't do anything when editing was canceled
-	if session is None:
-		return
-
-	# We might re-parse Xml so catch parsing error
-	try:
-		ret = autotimer.parseEPG()
-		session.open(
-			MessageBox,
-			"Found a total of %d matching Events.\n%d Timer were added and %d modified.." % (ret[0], ret[1], ret[2]),
-			type = MessageBox.TYPE_INFO,
-			timeout = 10
-		)
-	except Exception, e:
-		# Don't crash during development
-		import traceback, sys
-		traceback.print_exc(file=sys.stdout)
-		session.open(
-			MessageBox,
-			"An unexpected error occured: %s" % (e),
-			type = MessageBox.TYPE_ERROR,
-			timeout = 15
-		)
-
 	# Remove instance if not running in background
-	if not config.plugins.autotimer.autopoll.value:
+	else:
 		autopoller = None
 
 		# Save xml
