@@ -3,7 +3,10 @@ import Screens.Standby
 
 # eServiceReference
 from enigma import eServiceReference, eServiceCenter
-                                                                                                                                                     
+
+# ...
+from ServiceReference import ServiceReference
+
 # Timer
 from EPGRefreshTimer import epgrefreshtimer, EPGRefreshTimerEntry, checkTimespan
 
@@ -69,10 +72,7 @@ class EPGRefresh:
 		self.configMtime = -1
 
 		# Read in Configuration
-		try:
-			self.readConfiguration()
-		except Exception, e:
-			print "[EPGRefresh] Error occured while reading in configuration:", e
+		self.readConfiguration()
 
 	def readConfiguration(self):
 		####
@@ -130,25 +130,21 @@ class EPGRefresh:
 		list = ['<?xml version="1.0" ?>\n<epgrefresh>\n\n']
 
 		for service in self.services[0]:
-			ref = ServiceReference(str(serviceref))
+			ref = ServiceReference(str(service))
 			list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
 			list.extend([' <service>', service, '</service>\n'])
 		for bouquet in self.services[1]:
-			ref = ServiceReference(str(serviceref))
+			ref = ServiceReference(str(bouquet))
 			list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
 			list.extend([' <bouquet>', bouquet, '</bouquet>\n'])
 
 		list.append('\n</epgrefresh>')
 
-		# Try Saving to Flash
-		file = None
-		try:
-			file = open(CONFIG, 'w')
-			file.writelines(list)
+		# Save to Flash
+		file = open(CONFIG, 'w')
+		file.writelines(list)
 
-			file.close()
-		except Exception, e:
-			print "[EPGRefresh] Error Saving Service List:", e
+		file.close()
 
 	def forceRefresh(self, session = None):
 		print "[EPGRefresh] Forcing start of EPGRefresh"
@@ -253,7 +249,6 @@ class EPGRefresh:
 				channelIdList.append(channelID)
 
 		# Debug
-		from ServiceReference import ServiceReference
 		print "[EPGRefresh] Services we're going to scan:", ', '.join([ServiceReference(x).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '') for x in self.scanServices])
 
 		self.refresh()

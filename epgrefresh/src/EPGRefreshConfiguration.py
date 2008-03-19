@@ -131,10 +131,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 
 	def keySave(self):
 		epgrefresh.services = (Set(self.services[0]), Set(self.services[1]))
-		try:
-			epgrefresh.saveConfiguration()
-		except Exception, e:
-			print "[EPGRefresh] Error occured while saving configuration:", e
+		epgrefresh.saveConfiguration()
 		
 		for x in self["config"].list:
 			x[1].save()
