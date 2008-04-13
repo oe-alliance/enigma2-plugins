@@ -10,8 +10,8 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 	skin = """
 		<screen name="RSSFeedEdit" position="100,100" size="550,120" title="Simple RSS Reader Setup" >
 			<widget name="config" position="20,10" size="510,75" scrollbarMode="showOnDemand" />
-			<ePixmap name="red"    position="0,75"   zPosition="4" size="140,40" pixmap="skin_default/key-red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green"  position="140,75" zPosition="4" size="140,40" pixmap="skin_default/key-green.png" transparent="1" alphatest="on" />
+			<ePixmap name="red"    position="0,75"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green"  position="140,75" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="0,75" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_green" position="140,75" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
@@ -47,10 +47,10 @@ class RSSSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen name="RSSSetup" position="100,100" size="550,400" title="Simple RSS Reader Setup" >
 			<widget name="config"  position="20,10" size="510,350" scrollbarMode="showOnDemand" />
-			<ePixmap name="red"    position="0,360"   zPosition="4" size="140,40" pixmap="skin_default/key-red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green"  position="140,360" zPosition="4" size="140,40" pixmap="skin_default/key-green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,360" zPosition="4" size="140,40" pixmap="skin_default/key-yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue"   position="420,360" zPosition="4" size="140,40" pixmap="skin_default/key-blue.png" transparent="1" alphatest="on" />
+			<ePixmap name="red"    position="0,360"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green"  position="140,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="280,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue"   position="420,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 			<widget name="key_red"    position="0,360" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_green"  position="140,360" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_yellow" position="280,360" zPosition="5" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />

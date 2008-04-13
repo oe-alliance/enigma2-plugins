@@ -11,8 +11,8 @@ class AutoTimerPreview(Screen):
 
 	skin = """<screen name="AutoTimerPreview" title="Preview AutoTimer" position="75,155" size="565,265">
 		<widget name="timerlist" position="5,5" size="555,210" scrollbarMode="showOnDemand" />
-		<ePixmap position="0,220" zPosition="4" size="140,40" pixmap="skin_default/key-red.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,220" zPosition="4" size="140,40" pixmap="skin_default/key-yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="0,220" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,220" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 		<widget name="key_red" position="0,220" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_yellow" position="280,220" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""

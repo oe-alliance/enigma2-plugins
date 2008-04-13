@@ -118,7 +118,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
             <widget name="infolabel" position="290,400" size="290,30" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />           
         </screen>"""
          
-    noCoverArtPNG = "/usr/share/enigma2/no_coverArt.png"
+    noCoverArtPNG = "/usr/share/enigma2/skin_default/no_coverArt.png"
     
     def __init__(self, session,streamplayer, args = 0):
         self.skin = LastFMScreenMain.skin
@@ -487,7 +487,7 @@ class LastFMSaveScreen(Screen):
     skin = """<screen position="0,0" size="720,576" flags="wfNoBorder" title="LastFMSaveScreen" >
                 <widget name="cover" position="50,50" size="200,200" />          
               </screen>"""
-    noCoverArtPNG = "/usr/share/enigma2/no_coverArt.png"
+    noCoverArtPNG = "/usr/share/enigma2/skin_default/no_coverArt.png"
     coverartsize= [200,200]
     lastcreator=""
     def __init__(self,session,parent):

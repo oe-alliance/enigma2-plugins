@@ -20,10 +20,10 @@ class AutoTimerOverview(Screen):
 
 	skin = """<screen name="AutoTimerOverview" position="140,148" size="460,265" title="AutoTimer Overview">
 			<widget name="entries" position="5,5" size="450,200" scrollbarMode="showOnDemand" />
-			<ePixmap position="0,220" zPosition="1" size="140,40" pixmap="skin_default/key-green.png" transparent="1" alphatest="on" />
-			<ePixmap position="140,220" zPosition="1" size="140,40" pixmap="skin_default/key-yellow.png" transparent="1" alphatest="on" />
-			<ePixmap position="280,220" zPosition="1" size="140,40" pixmap="skin_default/key-blue.png" transparent="1" alphatest="on" />
-			<ePixmap position="422,230" zPosition="1" size="36,20" pixmap="key_menu-fs8.png" transparent="1" alphatest="on" />
+			<ePixmap position="0,220" zPosition="1" size="140,40" pixmap="skin_default/buttons/key-green.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,220" zPosition="1" size="140,40" pixmap="skin_default/buttons/key-yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="280,220" zPosition="1" size="140,40" pixmap="skin_default/buttons/key-blue.png" transparent="1" alphatest="on" />
+			<ePixmap position="422,230" zPosition="1" size="36,20" pixmap="skin_default/buttons/key_menu.png" transparent="1" alphatest="on" />
 			<widget name="key_green" position="0,220" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_yellow" position="140,220" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_blue" position="280,220" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
