@@ -13,8 +13,6 @@ from enigma import eServiceReference
 from Screens.Screen import Screen
 from Tools.Import import my_import
 
-from Screens.InfoBarGenerics import InfoBarServiceName, InfoBarEvent, InfoBarTuner
-
 from Components.Sources.Source import ObsoleteSource
 
 from Components.Sources.Clock import Clock
@@ -63,18 +61,11 @@ class DummyWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
 
-class UpdateWebScreen(InfoBarServiceName, InfoBarEvent,InfoBarTuner,WebScreen):
+class UpdateWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
-		InfoBarServiceName.__init__(self)
-		InfoBarEvent.__init__(self)
-		InfoBarTuner.__init__(self)
 		self["CurrentTime"] = Clock()
 		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
-		#CurrentService
-		#Event_Now
-		#Event_Next
-		#FrontendStatus
 
 class MessageWebScreen(WebScreen):
 	def __init__(self, session,request):
