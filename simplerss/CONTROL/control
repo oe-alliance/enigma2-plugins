@@ -5,5 +5,5 @@ Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
-Depends: enigma2(>2.3cvs20080220), twisted-web
+Depends: enigma2(>=2.5cvs20080416), twisted-web
 Source: http://schwerkraft.elitedvb.net/scm/?group_id=11
