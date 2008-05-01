@@ -23,10 +23,19 @@ from Components.ActionMap import ActionMap
 from VlcControlTelnet import VlcControlTelnet
 from VlcControlHttp import VlcControlHttp
 
-ENIGMA_SERVICE_ID = 0x1001
 DEFAULT_VIDEO_PID = 0x44
 DEFAULT_AUDIO_PID = 0x45
-STOP_BEFORE_UNPAUSE = True
+
+try:
+	import servicets
+except:
+	ENIGMA_SERVICE_ID = 0x1001
+	STOP_BEFORE_UNPAUSE = True
+	print "[VLC] use Gstreamer"
+else:
+	ENIGMA_SERVICE_ID = 0x1002
+	STOP_BEFORE_UNPAUSE = False
+	print "[VLC] use servicets.so"
 
 class VlcService(Source, iPlayableServicePtr):
 	refreshInterval = 3000
