@@ -87,4 +87,7 @@ startuptostandby/src/Makefile
 imdb/Makefile
 imdb/src/Makefile
 
+ofdb/Makefile
+ofdb/src/Makefile
+
 ])
