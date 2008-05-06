@@ -3,6 +3,20 @@ AM_INIT_AUTOMAKE(enigma2-plugins, 1.0)
 
 AM_PATH_PYTHON()
 
+AC_CHECK_HEADER(enigma2/lib/base/i18n.h,have_e2_includes="yes",have_e2_includes="no")
+if test x"${have_e2_includes}" = "xyes"; then
+	AC_PYTHON_DEVEL
+	TUXBOX_APPS
+	TUXBOX_APPS_DIRECTORY
+	TUXBOX_APPS_DVB
+	TUXBOX_APPS_LIB_PKGCONFIG(ENIGMA2,enigma2)
+	TUXBOX_APPS_LIB_PKGCONFIG(SIGC,sigc++-1.2)
+	AC_DEFINE(HAVE_E2_INCLUDES, 1,[Define if enigm2 includes are available])
+else
+	AC_MSG_NOTICE([enigma2 headers not found.. dont build servicets.so])
+fi
+AM_CONDITIONAL(HAVE_E2_INCLUDES, test "$have_e2_includes" = "yes")
+
 AC_OUTPUT([
 Makefile
 antiscrollbar/Makefile
@@ -53,6 +67,7 @@ logomanager/logodir_hdd/Makefile
 
 vlcplayer/Makefile
 vlcplayer/src/Makefile
+vlcplayer/src/servicets/Makefile
 
 fritzcall/Makefile
 fritzcall/src/Makefile
