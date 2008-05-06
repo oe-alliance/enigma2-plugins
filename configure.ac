@@ -5,6 +5,9 @@ AM_PATH_PYTHON()
 
 AC_CHECK_HEADER(enigma2/lib/base/i18n.h,have_e2_includes="yes",have_e2_includes="no")
 if test x"${have_e2_includes}" = "xyes"; then
+	AC_PROG_CC
+	AC_PROG_CXX
+	AC_PROG_RANLIB
 	AC_PYTHON_DEVEL
 	TUXBOX_APPS
 	TUXBOX_APPS_DIRECTORY
@@ -12,6 +15,8 @@ if test x"${have_e2_includes}" = "xyes"; then
 	TUXBOX_APPS_LIB_PKGCONFIG(ENIGMA2,enigma2)
 	TUXBOX_APPS_LIB_PKGCONFIG(SIGC,sigc++-1.2)
 	AC_DEFINE(HAVE_E2_INCLUDES, 1,[Define if enigm2 includes are available])
+	CXXFLAGS="$CXXFLAGS -fno-rtti -fno-exceptions"
+	LDFLAGS="$LDFLAGS -pthread $PYTHON_LDFLAGS"
 else
 	AC_MSG_NOTICE([enigma2 headers not found.. dont build servicets.so])
 fi
