@@ -91,18 +91,18 @@ def editCallback(session):
 	global autotimer
 	global autopoller
 
-	# Don't do anything when editing was canceled
-	if session is None:
-		return
+	# XXX: canceling of GUI (Overview) won't affect config values which might have been changed - is this intended?
 
-	# Poll EPGCache
-	ret = autotimer.parseEPG()
-	session.open(
-		MessageBox,
-		"Found a total of %d matching Events.\n%d Timer were added and %d modified.." % (ret[0], ret[1], ret[2]),
-		type = MessageBox.TYPE_INFO,
-		timeout = 10
-	)
+	# Don't parse EPG if editing was canceled
+	if session is not None:
+		# Poll EPGCache
+		ret = autotimer.parseEPG()
+		session.open(
+			MessageBox,
+			"Found a total of %d matching Events.\n%d Timer were added and %d modified.." % (ret[0], ret[1], ret[2]),
+			type = MessageBox.TYPE_INFO,
+			timeout = 10
+		)
 
 	# Start autopoller again if wanted
 	if config.plugins.autotimer.autopoll.value:
@@ -114,8 +114,8 @@ def editCallback(session):
 	else:
 		autopoller = None
 
-		# Save xml
-		autotimer.writeXml()
+		# Save xml (as long as we did not cancel)
+		session and autotimer.writeXml()
 		autotimer = None
 
 def Plugins(**kwargs):
