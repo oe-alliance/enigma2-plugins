@@ -2,13 +2,13 @@ AC_INIT(enigma2-plugins, 1.0)
 AM_INIT_AUTOMAKE(enigma2-plugins, 1.0)
 
 AM_PATH_PYTHON()
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_RANLIB
+AC_PYTHON_DEVEL
 
 AC_CHECK_HEADER(enigma2/lib/base/i18n.h,have_e2_includes="yes",have_e2_includes="no")
 if test x"${have_e2_includes}" = "xyes"; then
-	AC_PROG_CC
-	AC_PROG_CXX
-	AC_PROG_RANLIB
-	AC_PYTHON_DEVEL
 	TUXBOX_APPS
 	TUXBOX_APPS_DIRECTORY
 	TUXBOX_APPS_DVB
