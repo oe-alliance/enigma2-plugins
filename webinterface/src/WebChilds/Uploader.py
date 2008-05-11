@@ -9,7 +9,7 @@ class UploadResource(resource.PostableResource):
         #############
         uploaddir=self.default_uploaddir
         if self.getArg("path"):
-            if os.path.isdir(self.getArg("path")):
+            if os_path.isdir(self.getArg("path")):
                 uploaddir= self.getArg("path")
                 if uploaddir[-1] != "/":
                     uploaddir += "/"
