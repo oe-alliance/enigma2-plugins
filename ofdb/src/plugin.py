@@ -211,6 +211,11 @@ class OFDB(Screen):
 			event = info.getEvent(0) # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
+			try:
+				pos = self.eventName.index("(")
+				self.eventName=self.eventName[0:pos]
+			except ValueError:
+				pass
 
 		if self.eventName is not "":
 			self["statusbar"].setText("Query OFDb: " + self.eventName + "...")
