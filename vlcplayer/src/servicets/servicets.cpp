@@ -1,4 +1,11 @@
+/*******************************************************************************
+ VLC Player Plugin by A. Lätsch 2007
 
+ This is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free
+ Software Foundation; either version 2, or (at your option) any later
+ version.
+********************************************************************************/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -7,6 +14,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <signal.h>
+#include <time.h>
 #include "servicets.h"
 #include <lib/base/eerror.h>
 #include <lib/base/object.h>
@@ -17,9 +25,13 @@
 #include <lib/base/init.h>
 #include <lib/dvb/decoder.h>
 
+#include <lib/dvb/pmt.h>
+
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 
-// eServiceFactoryTS
+/********************************************************************/
+/* eServiceFactoryTS                                                */
+/********************************************************************/
 
 eServiceFactoryTS::eServiceFactoryTS()
 {
@@ -31,8 +43,6 @@ eServiceFactoryTS::eServiceFactoryTS()
 		std::list<std::string> extensions;
 		sc->addServiceFactory(eServiceFactoryTS::id, this, extensions);
 	}
-
-	m_service_info = new eStaticServiceTSInfo();
 }
 
 eServiceFactoryTS::~eServiceFactoryTS()
@@ -46,10 +56,9 @@ eServiceFactoryTS::~eServiceFactoryTS()
 
 DEFINE_REF(eServiceFactoryTS)
 
-	// iServiceHandler
+// iServiceHandler
 RESULT eServiceFactoryTS::play(const eServiceReference &ref, ePtr<iPlayableService> &ptr)
 {
-		// check resources...
 	ptr = new eServiceTS(ref);
 	return 0;
 }
@@ -68,8 +77,8 @@ RESULT eServiceFactoryTS::list(const eServiceReference &, ePtr<iListableService>
 
 RESULT eServiceFactoryTS::info(const eServiceReference &ref, ePtr<iStaticServiceInformation> &ptr)
 {
-	ptr = m_service_info;
-	return 0;
+	ptr = 0;
+	return -1;
 }
 
 RESULT eServiceFactoryTS::offlineOperations(const eServiceReference &, ePtr<iServiceOfflineOperations> &ptr)
@@ -79,29 +88,24 @@ RESULT eServiceFactoryTS::offlineOperations(const eServiceReference &, ePtr<iSer
 }
 
 
-// eStaticServiceTSInfo
-DEFINE_REF(eStaticServiceTSInfo)
+/********************************************************************/
+/* TSAudioInfo                                            */
+/********************************************************************/
+DEFINE_REF(TSAudioInfo);	
 
-eStaticServiceTSInfo::eStaticServiceTSInfo()
-{
+void TSAudioInfo::addAudio(int pid, std::string lang, std::string desc, int type) {
+	StreamInfo as;
+	as.description = desc;
+	as.language = lang;
+	as.pid = pid;
+	as.type = type;
+	audioStreams.push_back(as);
 }
 
-RESULT eStaticServiceTSInfo::getName(const eServiceReference &ref, std::string &name)
-{
-	size_t last = ref.path.rfind('/');
-	if (last != std::string::npos)
-		name = ref.path.substr(last+1);
-	else
-		name = ref.path;
-	return 0;
-}
 
-int eStaticServiceTSInfo::getLength(const eServiceReference &ref)
-{
-	return -1;
-}
-
-// eServiceTS
+/********************************************************************/
+/* eServiceTS                                                       */
+/********************************************************************/
 
 eServiceTS::eServiceTS(const eServiceReference &url): m_pump(eApp, 1)
 {
@@ -110,6 +114,7 @@ eServiceTS::eServiceTS(const eServiceReference &url): m_pump(eApp, 1)
 	m_vpid = url.getData(0) == 0 ? 0x44 : url.getData(0);
 	m_apid = url.getData(1) == 0 ? 0x45 : url.getData(1);
 	m_state = stIdle;
+	m_audioInfo = 0;
 }
 
 eServiceTS::~eServiceTS()
@@ -277,6 +282,7 @@ RESULT eServiceTS::stop()
 	m_streamthread->stop();
 	m_decodedemux->get().flush();
 	m_state = stStopped;
+	m_audioInfo = 0;
 	return 0;
 }
 
@@ -294,31 +300,22 @@ void eServiceTS::recv_event(int evt)
 		m_decoder->freeze(0);
 		m_state = stStopped;
 		m_event((iPlayableService*)this, evEOF);
+		break;
+	case eStreamThread::evtStreamInfo:
+		m_streamthread->getAudioInfo(m_audioInfo);
+		if (m_audioInfo)
+			eDebug("[servicets] %d audiostreams found", m_audioInfo->audioStreams.size());
+		break;
 	}
-}
-
-RESULT eServiceTS::setTarget(int target)
-{
-	return -1;
 }
 
 RESULT eServiceTS::pause(ePtr<iPauseableService> &ptr)
 {
-	ptr=this;
+	ptr = this;
 	return 0;
 }
 
-RESULT eServiceTS::setSlowMotion(int ratio)
-{
-	return -1;
-}
-
-RESULT eServiceTS::setFastForward(int ratio)
-{
-	return -1;
-}
-  
-		// iPausableService
+// iPausableService
 RESULT eServiceTS::pause()
 {
 	m_streamthread->stop();
@@ -342,19 +339,17 @@ RESULT eServiceTS::unpause()
 	
 	int destfd = ::open("/dev/misc/pvr", O_WRONLY);
 	if (destfd < 0) {
-		eDebug("Cannot open source stream: %s", m_filename.c_str());
+		eDebug("Cannot open /dev/misc/pvr");
 		::close(srcfd);
 		return 1;
 	}
 	m_decodedemux->get().flush();
 	m_streamthread->start(srcfd, destfd);
-	// let the video buffer fill up a bit
-	usleep(200*1000);
 	m_decoder->unfreeze();
 	return 0;
 }
 
-	/* iSeekableService */
+// iSeekableService
 RESULT eServiceTS::seek(ePtr<iSeekableService> &ptr)
 {
 	ptr = this;
@@ -386,7 +381,6 @@ RESULT eServiceTS::setTrickmode(int trick)
 	return -1;
 }
 
-
 RESULT eServiceTS::isCurrentlySeekable()
 {
 	return 1;
@@ -417,6 +411,52 @@ std::string eServiceTS::getInfoString(int w)
 	return "";
 }
 
+int eServiceTS::getNumberOfTracks() {
+	if (m_audioInfo)
+		return (int)m_audioInfo->audioStreams.size();
+	else
+		return 0;
+}
+
+RESULT eServiceTS::selectTrack(unsigned int i) {
+	if (m_audioInfo) {
+		m_apid = m_audioInfo->audioStreams[i].pid;
+		eDebug("[servicets] audio track %d PID 0x%02x\n", i, m_apid);
+		m_decoder->setAudioPID(m_apid, m_audioInfo->audioStreams[i].type);
+		if (m_state == stRunning)
+			m_decoder->preroll();
+		return 0;
+	} else {
+		return -1;
+	}
+}
+
+RESULT eServiceTS::getTrackInfo(struct iAudioTrackInfo &info, unsigned int n) {
+	if (m_audioInfo) {
+		info.m_pid = m_audioInfo->audioStreams[n].pid;
+		info.m_description = m_audioInfo->audioStreams[n].description;
+		info.m_language = m_audioInfo->audioStreams[n].language;
+		return 0;
+	} else {
+		return -1;
+	}
+}
+
+int eServiceTS::getCurrentTrack() {
+	if (m_audioInfo) {
+		for (size_t i = 0; i < m_audioInfo->audioStreams.size(); i++) {
+			if (m_apid == m_audioInfo->audioStreams[i].pid) {
+				return i;
+			}
+		}
+	}
+	return -1;
+}
+
+/********************************************************************/
+/* eServiceTS                                                       */
+/********************************************************************/
+
 DEFINE_REF(eStreamThread)
 
 eStreamThread::eStreamThread(): m_messagepump(eApp, 0) {
@@ -429,6 +469,7 @@ void eStreamThread::start(int srcfd, int destfd) {
 	m_srcfd = srcfd;
 	m_destfd = destfd;
 	m_stop = false;
+	m_audioInfo = 0;
 	run(IOPRIO_CLASS_RT);
 }
 void eStreamThread::stop() {
@@ -441,14 +482,122 @@ void eStreamThread::recvEvent(const int &evt)
 	m_event(evt);
 }
 
+RESULT eStreamThread::getAudioInfo(ePtr<TSAudioInfo> &ptr)
+{
+	ptr = m_audioInfo;
+	return 0;
+}
+
+std::string eStreamThread::readLanguage(unsigned char buf[], int len)
+{
+	if (len > 0 && buf[0] == 0xA) {
+		//ISO 639 language descriptor
+		std::string lang;
+		lang.append((char*)buf + 2, buf[1] - 1);
+		return lang;
+	} else {
+		return "";
+	}
+}
+
+bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
+{
+	if (len < 1880) 
+		return false;
+
+	int adaptfield, pmtpid, offset;
+	unsigned char pmt[1188];
+	int pmtsize = 0;
+	
+	for (int a=0; a < len - 188*4; a++) {
+		if ( buf[a] != 0x47 || buf[a + 188] != 0x47 || buf[a + 376] != 0x47 ) 
+			continue; // TS Header
+
+		if ((0x40 & buf[a + 1]) == 0) // start
+			continue;
+
+		if ((0xC0 & buf[a + 3]) != 0) // scrambling
+			continue;
+
+		adaptfield = (0x30 & buf[a + 3]) >> 4;
+
+		if ((adaptfield & 1) == 0) // adapt - no payload
+			continue;
+
+		offset = adaptfield == 3 ? 1 + (0xFF & buf[a + 4]) : 0; //adaptlength
+
+		if (buf[a + offset + 4] != 0 || buf[a + offset + 5] != 2 || (0xF0 & buf[a + offset + 6]) != 0xB0)
+		{ 
+			a += 187; 
+			continue; 
+		}
+
+		pmtpid = (0x1F & buf[a + 1])<<8 | (0xFF & buf[a + 2]);
+		memcpy(pmt + pmtsize, buf + a + 4 + offset, 184 - offset);
+		pmtsize += 184 - offset;
+		
+		if (pmtsize >= 1000)
+			break;
+	}
+	
+	if (pmtsize == 0) return false;
+	
+	int pmtlen = (0x0F & pmt[2]) << 8 | (0xFF & pmt[3]);
+	std::string lang;
+	ePtr<TSAudioInfo> ainfo = new TSAudioInfo();
+
+	for (int b=8; b < pmtlen-4 && b < pmtsize-6; b++)
+	{
+		if ( (0xe0 & pmt[b+1]) != 0xe0 ) 
+			continue;
+
+		int pid = (0x1F & pmt[b+1])<<8 | (0xFF & pmt[b+2]);
+
+		switch(pmt[b])
+		{
+		case 1:
+		case 2: // MPEG Video
+			//addVideo(pid, "MPEG2");
+			break; 
+
+		case 0x1B: // H.264 Video
+			//addVideo(pid, "H.264");
+			break; 
+
+		case 3:
+		case 4: // MPEG Audio
+			lang = readLanguage(pmt+b+5, pmt[b+4]);
+			ainfo->addAudio(pid, lang, "MPEG", eDVBAudio::aMPEG);
+			break; 
+
+		case 0x80:
+		case 0x81:  //private data of AC3 in ATSC
+		case 0x82: 
+		case 0x83: 
+		case 6:
+			lang = readLanguage(pmt+b+5, pmt[b+4]);
+			ainfo->addAudio(pid, lang, "AC3", eDVBAudio::aAC3);
+			break; 
+		}
+		b += 4 + pmt[b+4];
+	}
+	if (ainfo->audioStreams.size() > 0) {
+		m_audioInfo = ainfo;
+		return true;
+	} else {
+		return false;
+	}
+}
+
 void eStreamThread::thread() {
-	const int bufsize = 60000;
+	const int bufsize = 40000;
 	unsigned char buf[bufsize];
 	bool eof = false;
 	fd_set rfds;
 	fd_set wfds;
 	struct timeval timeout;
 	int rc,r,w,maxfd;
+	time_t next_scantime = 0;
 	
 	r = w = 0;
 	hasStarted();
@@ -490,7 +639,7 @@ void eStreamThread::thread() {
 				if (r == bufsize) eDebug("eStreamThread::thread: buffer full");
 			}
 		}
-		if (FD_ISSET(m_destfd, &wfds) && (w < r)) {
+		if (FD_ISSET(m_destfd, &wfds) && (w < r) && (r > bufsize/4)) {
 			rc = ::write(m_destfd, buf+w, r-w);
 			if (rc < 0) {
 				eDebug("eStreamThread::thread: error in write (%d)", errno);
@@ -499,7 +648,15 @@ void eStreamThread::thread() {
 			}
 			w += rc;
 			//eDebug("eStreamThread::thread: buffer r=%d w=%d",r,w);
-			if (w == r) w = r = 0;
+			if (w == r) {
+				if (time(0) >= next_scantime) {
+					if (scanAudioInfo(buf, r)) {
+						m_messagepump.send(evtStreamInfo);
+						next_scantime = time(0) + 1;
+					}
+				}
+				w = r = 0;
+			}
 		}
 		if (eof && (r==w)) {
 			::close(m_destfd);

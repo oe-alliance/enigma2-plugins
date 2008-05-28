@@ -1,3 +1,12 @@
+/*******************************************************************************
+ VLC Player Plugin by A. Lätsch 2007
+
+ This is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free
+ Software Foundation; either version 2, or (at your option) any later
+ version.
+********************************************************************************/
+
 #ifndef __servicets_h
 #define __servicets_h
 
@@ -22,60 +31,61 @@ public:
 	RESULT list(const eServiceReference &, ePtr<iListableService> &ptr);
 	RESULT info(const eServiceReference &, ePtr<iStaticServiceInformation> &ptr);
 	RESULT offlineOperations(const eServiceReference &, ePtr<iServiceOfflineOperations> &ptr);
-private:
-	ePtr<eStaticServiceTSInfo> m_service_info;
 };
 
-class eStaticServiceTSInfo: public iStaticServiceInformation
-{
-	DECLARE_REF(eStaticServiceTSInfo);
-	friend class eServiceFactoryTS;
-	eStaticServiceTSInfo();
+class TSAudioInfo {
+DECLARE_REF(TSAudioInfo);
 public:
-	RESULT getName(const eServiceReference &ref, std::string &name);
-	int getLength(const eServiceReference &ref);
+	struct StreamInfo {
+		int pid;
+		int type;
+		std::string language; /* iso639 */
+		std::string description;
+	};
+	std::vector<StreamInfo> audioStreams;
+	void addAudio(int pid, std::string lang, std::string desc, int type);
 };
+
 
 class eStreamThread;
-
 class eServiceTS: public iPlayableService, public iPauseableService, 
-	public iServiceInformation, public iSeekableService, public Object
+	public iServiceInformation, public iSeekableService, 
+	public iAudioTrackSelection, public iAudioChannelSelection, public Object
 {
 DECLARE_REF(eServiceTS);
 public:
 	virtual ~eServiceTS();
 
-		// iPlayableService
+	// iPlayableService
 	RESULT connectEvent(const Slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection);
 	RESULT start();
 	RESULT stop();
-	RESULT setTarget(int target);
-	
 	RESULT pause(ePtr<iPauseableService> &ptr);
-	RESULT setSlowMotion(int ratio);
-	RESULT setFastForward(int ratio);
-
 	RESULT seek(ePtr<iSeekableService> &ptr);
+	RESULT info(ePtr<iServiceInformation>&);
 
-		// not implemented (yet)
-	RESULT audioChannel(ePtr<iAudioChannelSelection> &ptr) { ptr = 0; return -1; }
-	RESULT audioTracks(ePtr<iAudioTrackSelection> &ptr) { ptr = 0; return -1; }
-	RESULT frontendInfo(ePtr<iFrontendInformation> &ptr) { ptr = 0; return -1; }
-	RESULT subServices(ePtr<iSubserviceList> &ptr) { ptr = 0; return -1; }
-	RESULT timeshift(ePtr<iTimeshiftService> &ptr) { ptr = 0; return -1; }
-	RESULT cueSheet(ePtr<iCueSheet> &ptr) { ptr = 0; return -1; }
-	RESULT subtitle(ePtr<iSubtitleOutput> &ptr) { ptr = 0; return -1; }
-	RESULT audioDelay(ePtr<iAudioDelay> &ptr) { ptr = 0; return -1; }
-	RESULT rdsDecoder(ePtr<iRdsDecoder> &ptr) { ptr = 0; return -1; }
-	RESULT stream(ePtr<iStreamableService> &ptr) { ptr = 0; return -1; }
-	RESULT keys(ePtr<iServiceKeys> &ptr) { ptr = 0; return -1; }
-		// iPausableService
+	// not implemented
+	RESULT setTarget(int target) { return -1; };
+	RESULT setSlowMotion(int ratio) { return -1; };
+	RESULT setFastForward(int ratio) { return -1; };
+	RESULT audioChannel(ePtr<iAudioChannelSelection> &ptr) { ptr = this; return 0; };
+	RESULT audioTracks(ePtr<iAudioTrackSelection> &ptr) { ptr = this; return 0; };
+	RESULT frontendInfo(ePtr<iFrontendInformation> &ptr) { ptr = 0; return -1; };
+	RESULT subServices(ePtr<iSubserviceList> &ptr) { ptr = 0; return -1; };
+	RESULT timeshift(ePtr<iTimeshiftService> &ptr) { ptr = 0; return -1; };
+	RESULT cueSheet(ePtr<iCueSheet> &ptr) { ptr = 0; return -1; };
+	RESULT subtitle(ePtr<iSubtitleOutput> &ptr) { ptr = 0; return -1; };
+	RESULT audioDelay(ePtr<iAudioDelay> &ptr) { ptr = 0; return -1; };
+	RESULT rdsDecoder(ePtr<iRdsDecoder> &ptr) { ptr = 0; return -1; };
+	RESULT stream(ePtr<iStreamableService> &ptr) { ptr = 0; return -1; };
+	RESULT keys(ePtr<iServiceKeys> &ptr) { ptr = 0; return -1; };
+	
+	// iPausableService
 	RESULT pause();
 	RESULT unpause();
 	
-	RESULT info(ePtr<iServiceInformation>&);
 	
-		// iSeekableService
+	// iSeekableService
 	RESULT getLength(pts_t &SWIG_OUTPUT);
 	RESULT seekTo(pts_t to);
 	RESULT seekRelative(int direction, pts_t to);
@@ -83,10 +93,21 @@ public:
 	RESULT setTrickmode(int trick);
 	RESULT isCurrentlySeekable();
 
-		// iServiceInformation
+	// iServiceInformation
 	RESULT getName(std::string &name);
 	int getInfo(int w);
 	std::string getInfoString(int w);
+
+	// iAudioTrackSelection
+	int getNumberOfTracks();
+	RESULT selectTrack(unsigned int i);
+	SWIG_VOID(RESULT) getTrackInfo(struct iAudioTrackInfo &, unsigned int n);
+	int getCurrentTrack();
+
+	// iAudioChannelSelection
+	int getCurrentChannel() { return iAudioChannelSelection_ENUMS::STEREO; };
+	RESULT selectChannel(int i) { return 0; };
+
 private:
 	friend class eServiceFactoryTS;
 	std::string m_filename;
@@ -95,6 +116,7 @@ private:
 	ePtr<eDVBAllocatedDemux> m_decodedemux;
 	ePtr<iTSMPEGDecoder> m_decoder;
 	ePtr<eStreamThread> m_streamthread;
+	ePtr<TSAudioInfo> m_audioInfo;
 	
 	eServiceTS(const eServiceReference &url);
 	int openHttpConnection(std::string url);
@@ -107,6 +129,7 @@ private:
 	int m_state;
 	eFixedMessagePump<int> m_pump;
 	void recv_event(int evt);
+	void setAudioPid(int pid, int type);
 };
 
 class eStreamThread: public eThread, public Object {
@@ -119,14 +142,19 @@ public:
 
 	virtual void thread();
 	virtual void thread_finished();
+	
+	RESULT getAudioInfo(ePtr<TSAudioInfo> &ptr);
 
-	enum { evtEOS, evtReadError, evtWriteError, evtUser };
+	enum { evtEOS, evtReadError, evtWriteError, evtUser, evtStreamInfo };
 	Signal1<void,int> m_event;
 private:
 	bool m_stop;
 	int m_srcfd, m_destfd;
+	ePtr<TSAudioInfo> m_audioInfo;
 	eFixedMessagePump<int> m_messagepump;
 	void recvEvent(const int &evt);
+	bool scanAudioInfo(unsigned char buf[], int len);
+	std::string readLanguage(unsigned char buf[], int len);
 };
 
 #endif
