@@ -12,7 +12,7 @@ from enigma import iPlayableServicePtr
 from time import time
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Screens.InfoBarGenerics import InfoBarNotifications
+from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarAudioSelection
 from Components.config import config
 from enigma import eServiceReference
 from Components.Sources.Source import Source
@@ -20,7 +20,6 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from enigma import iPlayableService
 from enigma import eTimer
 from Components.ActionMap import ActionMap
-from VlcControlTelnet import VlcControlTelnet
 from VlcControlHttp import VlcControlHttp
 
 DEFAULT_VIDEO_PID = 0x44
@@ -28,14 +27,30 @@ DEFAULT_AUDIO_PID = 0x45
 
 try:
 	import servicets
-except:
+except Exception, e:
 	ENIGMA_SERVICE_ID = 0x1001
 	STOP_BEFORE_UNPAUSE = True
-	print "[VLC] use Gstreamer"
+	print "[VLC] use Gstreamer", e
 else:
 	ENIGMA_SERVICE_ID = 0x1002
 	STOP_BEFORE_UNPAUSE = False
 	print "[VLC] use servicets.so"
+
+def isDvdUrl(url):
+	return url.startswith("dvd://") or url.startswith("dvdsimple://")
+
+def splitDvdUrl(url):
+	pos = url.rfind("@", len(url)-8)
+	if pos > 0:
+		track = url[pos+1:]
+		url = url[0:pos]
+		if track.find(":") >= 0:
+			track, chapter = track.split(":")
+		else:
+			chapter = None
+	else:
+		track, chapter = (None, None)
+	return (url, track, chapter)
 
 class VlcService(Source, iPlayableServicePtr):
 	refreshInterval = 3000
@@ -122,7 +137,8 @@ class VlcService(Source, iPlayableServicePtr):
 	# iPlayableService
 	def cueSheet(self): return None
 	def pause(self): return self.player
-	def audioTracks(self): return None
+	def audioTracks(self): 
+		return self.player.audioTracks();
 	def audioChannel(self): return None
 	def subServices(self): return None
 	def frontendInfo(self): return None
@@ -136,7 +152,7 @@ class VlcService(Source, iPlayableServicePtr):
 	def stop(self):
 		self.player.stop()
 
-class VlcPlayer(Screen, InfoBarNotifications):
+class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 	screen_timeout = 5000
 	
 	STATE_IDLE = 0
@@ -146,6 +162,7 @@ class VlcPlayer(Screen, InfoBarNotifications):
 	def __init__(self, session, vlcfilelist):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
+		InfoBarAudioSelection.__init__(self)
 		self.filelist = vlcfilelist
 		self.skinName = "MoviePlayer"
 		self.state = self.STATE_IDLE
@@ -158,7 +175,7 @@ class VlcPlayer(Screen, InfoBarNotifications):
 		self.hidetimer.timeout.get().append(self.ok)
 		self.onClose.append(self.__onClose)
 
-		class InfoBarSeekActionMap(ActionMap):
+		class VlcPlayerActionMap(ActionMap):
 			def __init__(self, player, contexts = [ ], actions = { }, prio=0):
 				ActionMap.__init__(self, contexts, actions, prio)
 				self.player = player
@@ -178,7 +195,7 @@ class VlcPlayer(Screen, InfoBarNotifications):
 				else:
 					return ActionMap.action(self, contexts, action)
 		
-		self["actions"] = InfoBarSeekActionMap(self, ["OkCancelActions", "TvRadioActions", "InfobarSeekActions", "MediaPlayerActions"],
+		self["actions"] = VlcPlayerActionMap(self, ["OkCancelActions", "TvRadioActions", "InfobarSeekActions", "MediaPlayerActions"],
 		{
 				"ok": self.ok,
 				"cancel": self.cancel,
@@ -211,17 +228,17 @@ class VlcPlayer(Screen, InfoBarNotifications):
 			self.stop()
 
 		cfg = config.plugins.vlcplayer.servers[servernum]
-		if cfg.method.value == "telnet":
-			self.vlccontrol = VlcControlTelnet(servernum)
-			streamName = VlcControlTelnet.defaultStreamName
-		else:
-			self.vlccontrol = VlcControlHttp(servernum)
-			streamName = VlcControlHttp.defaultStreamName
+		self.vlccontrol = VlcControlHttp(servernum)
+		streamName = VlcControlHttp.defaultStreamName
 		self.vlcservice.setFilename(path)
 		
+		self.servernum = servernum
 		self.url = "http://%s:%d/%s.ts" % (cfg.host.value, cfg.httpport.value, streamName)
-		self.filename = path
-		transcode = "vcodec=%s,vb=%d,width=%s,height=%s,fps=%s,scale=1,acodec=%s,ab=%d,channels=%d,samplerate=%s" % (
+		if path.lower().endswith(".iso") and not isDvdUrl(path):
+			self.filename = "dvdsimple://" + path
+		else:
+			self.filename = path
+		transcode = "vcodec=%s,vb=%d,venc=ffmpeg{strict-rc=1},width=%s,height=%s,fps=%s,scale=1,acodec=%s,ab=%d,channels=%d,samplerate=%s" % (
 			config.plugins.vlcplayer.vcodec.value, 
 			config.plugins.vlcplayer.vb.value, 
 			config.plugins.vlcplayer.width.value, 
@@ -242,6 +259,7 @@ class VlcPlayer(Screen, InfoBarNotifications):
 			transcode += ",soverlay"
 		mux="ts{pid-video=%d,pid-audio=%d}" % (DEFAULT_VIDEO_PID, DEFAULT_AUDIO_PID)
 		self.output = "#transcode{%s}:std{access=http,mux=%s,dst=/%s.ts}" % (transcode, mux, streamName)
+		self.output = self.output + " :sout-all" 
 		self.play()
 
 	def play(self):
@@ -342,22 +360,41 @@ class VlcPlayer(Screen, InfoBarNotifications):
 		self.close()
 	
 	def playNextFile(self):
-		print "[VLC] playNextFile"
-		path = self.filelist.getNextFile()
-		if path is None:
-			self.session.open(MessageBox, _("No more files in this directory"), MessageBox.TYPE_INFO)
+		print "[VLC] playNextFile",self.filename
+		if isDvdUrl(self.filename):
+			url,track,chapter = splitDvdUrl(self.filename)
+			if track is None:
+				track = 2
+			else:
+				track = int(track) + 1
+			url = "%s@%d" % (url, track)
+			self.playfile(self.servernum, url)
 		else:
-			servernum, path = path.split(":", 1)
-			self.playfile(int(servernum), path)
+			path = self.filelist.getNextFile()
+			if path is None:
+				self.session.open(MessageBox, _("No more files in this directory"), MessageBox.TYPE_INFO)
+			else:
+				servernum, path = path.split(":", 1)
+				self.playfile(int(servernum), path)
 
 	def playPrevFile(self):
 		print "[VLC] playPrevFile"
-		path = self.filelist.getPrevFile()
-		if path is None:
-			self.session.open(MessageBox, _("No previous file in this directory"), MessageBox.TYPE_INFO)
+		if isDvdUrl(self.filename):
+			url,track,chapter = splitDvdUrl(self.filename)
+			if track is not None and int(track) > 2:
+				track = int(track) - 1
+				url = "%s@%d" % (url, track)
+			self.playfile(self.servernum, url)
 		else:
-			servernum, path = path.split(":", 1)
-			self.playfile(int(servernum), path)
+			path = self.filelist.getPrevFile()
+			if path is None:
+				self.session.open(MessageBox, _("No previous file in this directory"), MessageBox.TYPE_INFO)
+			else:
+				servernum, path = path.split(":", 1)
+				self.playfile(int(servernum), path)
+
+	def audioTracks(self): 
+		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().audioTracks();
 
 	def seekRelative(self, delta):
 		"""delta is seconds as integer number
