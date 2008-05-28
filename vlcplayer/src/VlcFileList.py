@@ -41,6 +41,7 @@ class vlcBrowseXmlHandler(xml.sax.ContentHandler):
 		self.regex = regex
 		self.files = []
 		self.directories = []
+		self.allfiles = []
 	
 	def startElement(self, name, attrs):
 		if name == "element" and attrs is not None:
@@ -52,7 +53,7 @@ class vlcBrowseXmlHandler(xml.sax.ContentHandler):
 			elif len(path) > 0:
 				if self.regex is None or self.regex.search(path):
 					self.files.append(FileEntryComponent(name, path, False))
-	
+				self.allfiles.append( (name, path) )
 
 class VlcFileList(FileList):
 	def __init__(self, pMatchingPattern=None):
@@ -70,6 +71,7 @@ class VlcFileList(FileList):
 			raise IOError, "No response from server"
 		handler = vlcBrowseXmlHandler(str(servernum), regex)
 		xml.sax.parse(req, handler)
+		self.__all_files = handler.allfiles
 		return (handler.files, handler.directories)
 	
 	def initServerlist(self):
@@ -110,11 +112,40 @@ class VlcFileList(FileList):
 		self.current_directory = str(servernum) + ":" + path
 		self.current_server = servernum
 		self.current_path = path
+		self.current_isdvd = self.__checkDVD()
+		if self.current_isdvd:
+			dvdpath = str(servernum) + ":dvdsimple://" + normpath(path + "/..")
+			self.list.insert(1, FileEntryComponent(">> Play DVD <<", dvdpath, False))
 		
 		if select is not None:
 			self.setSelection(select)
 		else:
 			self.moveToIndex(0)
+	
+	def __checkDVD(self):
+		if self.__all_files is None or config.plugins.vlcplayer.checkdvd.value == False:
+			return False
+		for e in self.__all_files:
+			if e[1].upper().endswith("VIDEO_TS/VIDEO_TS.IFO"):
+				return True
+		return False
+	
+	def isDVD(self):
+		return self.current_isdvd
+	
+	def existsFile(self, fullname):
+		if fullname is None:
+			return None
+		i = fullname.find(":")
+		servernum = int(fullname[0:i])
+		path, file = posixpath.split(normpath(fullname[i+1:]))
+		files, directories = self._getFilesAndDirs(servernum, path, None)
+		file = file.upper()
+		for e in files:
+			name = e[1][7].upper()
+			if name == file:
+				return True
+		return False
 
 	def setSelection(self, select):
 		i = 0
