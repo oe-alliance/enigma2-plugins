@@ -13,18 +13,21 @@ from urllib2 import urlopen
 from xml.dom.minidom import parse
 from Components.config import config
 from socket import socket as socket_socket, AF_INET as socket_AF_INET, SOCK_STREAM as socket_SOCK_STREAM
+import re
 
 def getText(nodelist):
-    rc = ""
-    for node in nodelist:
-        if node.nodeType == node.TEXT_NODE:
-            rc = rc + node.data
-    return rc
+	if nodelist is None:
+		return None
+	rc = ""
+	for node in nodelist:
+		if node.nodeType == node.TEXT_NODE:
+			rc = rc + node.data
+	return rc
 
 def getLocalHostIP( remote = ("www.python.org", 80)):
- 	'''Get the "public" address of the local machine, i.e.
- 	that address which is connected to the general internet.
- 	Code by Donn Cave, posted to comp.lang.python'''
+	'''Get the "public" address of the local machine, i.e.
+	that address which is connected to the general internet.
+	Code by Donn Cave, posted to comp.lang.python'''
 	s = socket_socket(socket_AF_INET, socket_SOCK_STREAM)
 	s.connect( remote )
 	ip, localport = s.getsockname()
@@ -60,6 +63,11 @@ class VlcControlHttp:
 		return parse(resp)
 
 	def playfile(self, filename, output):
+		# workaround for VLC on Windows: subtitle files are not found, if path is
+		# written with '/' instead of '\' on Windows. Detect a Windows pathname if
+		# it starts with a drive-letter like "C:"
+		if re.match("[a-zA-Z]:", filename):
+			filename = filename.replace("/", "\\")
 		filename = filename.replace("\\", "\\\\")
 		filename = filename.replace("'", "\\'")
 		input = filename
@@ -84,10 +92,24 @@ class VlcControlHttp:
 		for e in xml.documentElement.childNodes:
 			if e.nodeType == e.ELEMENT_NODE:
 				if e.firstChild is None:
-					stats[e.nodeName.encode("latin_1", "replace")] = None
+					stats[e.nodeName.encode("utf8", "replace")] = None
 				else:
-					stats[e.nodeName.encode("latin_1", "replace")] = e.firstChild.nodeValue.encode("latin_1", "replace")
+					stats[e.nodeName.encode("utf8", "replace")] = e.firstChild.nodeValue.encode("utf8", "replace")
 		return stats
+	
+	def getStreamInfo(self):
+		xml = self.xmlRequest("status", None)
+		si = []
+		infoElem = xml.getElementsByTagName("information")
+		if infoElem is None:
+			return None
+		infoElem = infoElem[0]
+		for e in infoElem.getElementsByTagName("category"):
+			info = { "Name": e.getAttribute("name").encode("utf8", "replace") }
+			for i in e.getElementsByTagName("info"):
+				info[i.getAttribute("name").encode("utf8", "replace")] = getText(i.childNodes).encode("utf8", "replace")
+			si.append(info)
+		return si
 
 	def get_playlist(self):
 		xml = self.xmlRequest("playlist", None)
@@ -135,4 +157,9 @@ examples:
   +1H:2M -> seek 1 hour and 2 minutes forward
   -10% -> seek 10% back"""
 		self.xmlRequest("status", {"command": "seek", "val": str(value)})
-		
+	
+	def next(self):
+		self.xmlRequest("status", {"command": "pl_next"})
+	
+	def previous(self):
+		self.xmlRequest("status", {"command": "pl_previous"})
