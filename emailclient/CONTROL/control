@@ -6,6 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: 3c5x9 <3c5x9@gmx.net>
 Homepage: n/a
-Depends: enigma2
-Rdepends: twisted-web, twisted-mail, python-email 
+Depends: enigma2, twisted-web, twisted-mail, python-email 
 Source: http://schwerkraft.elitedvb.net/scm/?group_id=11
