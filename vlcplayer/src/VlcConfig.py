@@ -102,9 +102,9 @@ class VLCServerConfig(Screen, ConfigListScreen):
 		cfglist.append(getConfigListEntry(_("Hostname or IP"), config.plugins.vlcplayer.servers[i].host))
 		cfglist.append(getConfigListEntry(_("HTTP Port"), config.plugins.vlcplayer.servers[i].httpport))
 		cfglist.append(getConfigListEntry(_("Movie Directory"), config.plugins.vlcplayer.servers[i].basedir))
-		cfglist.append(getConfigListEntry(_("Method"), config.plugins.vlcplayer.servers[i].method))
-		cfglist.append(getConfigListEntry(_("Admin (telnet) Port"), config.plugins.vlcplayer.servers[i].adminport))
-		cfglist.append(getConfigListEntry(_("Admin Password"), config.plugins.vlcplayer.servers[i].adminpwd))
+		#cfglist.append(getConfigListEntry(_("Method"), config.plugins.vlcplayer.servers[i].method))
+		#cfglist.append(getConfigListEntry(_("Admin (telnet) Port"), config.plugins.vlcplayer.servers[i].adminport))
+		#cfglist.append(getConfigListEntry(_("Admin Password"), config.plugins.vlcplayer.servers[i].adminpwd))
 		ConfigListScreen.__init__(self, cfglist, session)
 		self.servernum = i
 

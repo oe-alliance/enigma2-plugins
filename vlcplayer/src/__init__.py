@@ -21,6 +21,7 @@ config.plugins.vlcplayer.height = ConfigSelection(["288", "576"])
 config.plugins.vlcplayer.fps = ConfigInteger(25, (1, 99))
 config.plugins.vlcplayer.aspect = ConfigSelection(["none", "16:9", "4:3"], "none")
 config.plugins.vlcplayer.soverlay = ConfigYesNo()
+config.plugins.vlcplayer.checkdvd = ConfigYesNo(True)
 
 config.plugins.vlcplayer.servercount = ConfigInteger(0)
 config.plugins.vlcplayer.servers = ConfigSubList()
@@ -31,9 +32,9 @@ def addVlcServerConfig():
 	config.plugins.vlcplayer.servers[i].host = ConfigText("", False)
 	config.plugins.vlcplayer.servers[i].httpport = ConfigInteger(8080, (0,65535))
 	config.plugins.vlcplayer.servers[i].basedir = ConfigText("/", False)
-	config.plugins.vlcplayer.servers[i].method = ConfigSelection({"http": "HTTP Interface", "telnet": "Telnet/VLM"})
-	config.plugins.vlcplayer.servers[i].adminport = ConfigInteger(4212, (0,65535))
-	config.plugins.vlcplayer.servers[i].adminpwd = ConfigText("admin", False)
+	#config.plugins.vlcplayer.servers[i].method = ConfigSelection({"http": "HTTP Interface", "telnet": "Telnet/VLM"})
+	#config.plugins.vlcplayer.servers[i].adminport = ConfigInteger(4212, (0,65535))
+	#config.plugins.vlcplayer.servers[i].adminpwd = ConfigText("admin", False)
 	config.plugins.vlcplayer.servercount.value = i+1
 	return i
 
