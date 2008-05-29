@@ -20,6 +20,7 @@ class WerbeZapper:
 		# Initialize services
 		self.zap_service = None
 		self.move_service = None
+		self.root = None
 
 		# Keep Cleanup
 		self.cleanupfnc = cleanupfnc
@@ -94,7 +95,7 @@ class WerbeZapper:
 
 
 	def confirmStart(self, duration):
-		# Show Information to User, Save Service, Start Timer
+		# Remind the User of what he just did
 		self.session.open(
 			MessageBox,
 			_("Zapping back in %d Minutes") % (duration),
@@ -102,28 +103,43 @@ class WerbeZapper:
 			timeout = 3
 		)
 
-		# Keep playing and selected service as we might be playing a service not in servicelist
+		# Keep any service related information (zap_service might not equal move_service -> subservices)
 		self.zap_service = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.move_service = self.servicelist.getCurrentSelection()
+		self.root = self.servicelist.getRoot()
+		
+		import ServiceReference
+		print [str(ServiceReference.ServiceReference(x)) for x in self.servicelist.getCurrentServicePath()]
+		print ServiceReference.ServiceReference(self.servicelist.getRoot())
 
 		# Start Timer
 		self.zap_timer.startLongTimer(duration*60)
 
 	def zap(self):
 		if self.zap_service is not None:
-			# Check if we know where to move in Servicelist
-			if self.move_service is not None:
+			if self.root:
+				import ServiceReference
+				if not self.servicelist.preEnterPath(str(ServiceReference.ServiceReference(self.root))):
+					if self.servicelist.isBasePathEqual(self.root):
+						self.servicelist.pathUp()
+						self.servicelist.enterPath(self.root)
+					else:
+						currentRoot = self.servicelist.getRoot()
+						if currentRoot is None or currentRoot != self.root:
+							self.servicelist.clearPath()
+							self.servicelist.enterPath(self.root)
+
+			if self.move_service:
 				self.servicelist.setCurrentSelection(self.move_service)
 				self.servicelist.zap()
 
-			# Play zap_service if it is different from move_service
-			if self.zap_service != self.move_service:
-				# Play Service
-				self.session.nav.playService(self.zap_service)
+			# Play zap_service (won't rezap if service equals to move_service)
+			self.session.nav.playService(self.zap_service)
 
 			# Reset services
 			self.zap_service = None
 			self.move_service = None
+			self.root = None
 
 		# Clean up if possible
 		if self.cleanupfnc:
