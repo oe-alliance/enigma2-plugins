@@ -110,4 +110,7 @@ imdb/src/Makefile
 ofdb/Makefile
 ofdb/src/Makefile
 
+networkwizard/Makefile
+networkwizard/src/Makefile
+
 ])
