@@ -1,5 +1,6 @@
 # Plugins Config
 from xml.dom.minidom import parse as minidom_parse
+from Tools.XMLTools import stringToXML
 from os import path as os_path
 
 # Navigation (RecordTimer)
@@ -318,7 +319,7 @@ class AutoTimer:
 		# Iterate timers
 		for timer in self.timers:
 			# Common attributes (match, enabled)
-			list.extend([' <timer name="', timer.name, '" match="', timer.match, '" enabled="', timer.getEnabled(), '"'])
+			list.extend([' <timer name="', stringToXML(timer.name), '" match="', stringToXML(timer.match), '" enabled="', timer.getEnabled(), '"'])
 
 			# Timespan
 			if timer.hasTimespan():
@@ -328,9 +329,9 @@ class AutoTimer:
 			if timer.hasDuration():
 				list.extend([' maxduration="', str(timer.getDuration()), '"'])
 
-			# Destination (needs my Location-select patch)
+			# Destination
 			if timer.hasDestination():
-				list.extend([' destination="', str(timer.destination), '"'])
+				list.extend([' destination="', stringToXML(timer.destination), '"'])
 
 			# Offset
 			if timer.hasOffset():
@@ -361,13 +362,13 @@ class AutoTimer:
 			for serviceref in timer.getServices():
 				list.extend(['  <serviceref>', serviceref, '</serviceref>'])
 				ref = ServiceReference(str(serviceref))
-				list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
+				list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
 
 			# Bouquets
 			for bouquet in timer.getBouquets():
 				list.extend(['  <bouquet>', str(bouquet), '</bouquet>'])
 				ref = ServiceReference(str(bouquet))
-				list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
+				list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
 
 			# AfterEvent
 			if timer.hasAfterEvent():
@@ -381,27 +382,27 @@ class AutoTimer:
 
 			# Excludes
 			for title in timer.getExcludedTitle():
-				list.extend(['  <exclude where="title">', title, '</exclude>\n'])
+				list.extend(['  <exclude where="title">', stringToXML(title), '</exclude>\n'])
 			for short in timer.getExcludedShort():
-				list.extend(['  <exclude where="shortdescription">', short, '</exclude>\n'])
+				list.extend(['  <exclude where="shortdescription">', stringToXML(short), '</exclude>\n'])
 			for desc in timer.getExcludedDescription():
-				list.extend(['  <exclude where="description">', desc, '</exclude>\n'])
+				list.extend(['  <exclude where="description">', stringToXML(desc), '</exclude>\n'])
 			for day in timer.getExcludedDays():
-				list.extend(['  <exclude where="dayofweek">', day, '</exclude>\n'])
+				list.extend(['  <exclude where="dayofweek">', stringToXML(day), '</exclude>\n'])
 
 			# Includes
 			for title in timer.getIncludedTitle():
-				list.extend(['  <include where="title">', title, '</include>\n'])
+				list.extend(['  <include where="title">', stringToXML(title), '</include>\n'])
 			for short in timer.getIncludedShort():
-				list.extend(['  <include where="shortdescription">', short, '</include>\n'])
+				list.extend(['  <include where="shortdescription">', stringToXML(short), '</include>\n'])
 			for desc in timer.getIncludedDescription():
-				list.extend(['  <include where="description">', desc, '</include>\n'])
+				list.extend(['  <include where="description">', stringToXML(desc), '</include>\n'])
 			for day in timer.getIncludedDays():
-				list.extend(['  <include where="dayofweek">', day, '</include>\n'])
+				list.extend(['  <include where="dayofweek">', stringToXML(day), '</include>\n'])
 
 			# Tags
 			for tag in timer.tags:
-				list.extend(['  <tag>', str(tag), '</tag>\n'])
+				list.extend(['  <tag>', stringToXML(tag), '</tag>\n'])
 
 			# End of Timer
 			list.append(' </timer>\n\n')
