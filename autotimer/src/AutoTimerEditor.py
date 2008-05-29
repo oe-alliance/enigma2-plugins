@@ -14,7 +14,8 @@ from Components.Button import Button
 
 # Configuration
 from Components.config import getConfigListEntry, ConfigEnableDisable, \
-	ConfigYesNo, ConfigText, ConfigClock, ConfigNumber, ConfigSelection
+	ConfigYesNo, ConfigText, ConfigClock, ConfigNumber, ConfigSelection, \
+	config
 
 # Timer
 from RecordTimer import AFTEREVENT
@@ -24,6 +25,9 @@ from time import localtime, mktime
 
 # Show ServiceName instead of ServiceReference
 from ServiceReference import ServiceReference
+
+# addAutotimerFromService
+from enigma import eServiceCenter, iServiceInformation
 
 weekdays = [
 	("0", _("Monday")),
@@ -871,9 +875,15 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 
 def addAutotimerFromEvent(session, evt = None, service = None):
 	from AutoTimerComponent import AutoTimerComponent
+	from plugin import autotimer
+		
+	# Create instance if needed
+	if autotimer is None:
+		from AutoTimer import AutoTimer
+		autotimer = AutoTimer()
 
-	name = evt and evt.getEventName() or "New AutoTimer"
 	match = evt and evt.getEventName() or ""
+	name = match or "New AutoTimer"
 	servicelist = []
 	if service is not None:
 		service = str(service)
@@ -886,7 +896,7 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 	if evt:
 		begin = evt.getBeginTime()
 		end = begin + evt.getDuration()
-		timetuple = (begin-3600, end+3600) # timespan defaults to +- 1h
+		timetuple = (localtime(begin-3600)[3:5], localtime(end+3600)[3:5]) # timespan defaults to +- 1h
 	else:
 		timetuple = None
 
@@ -894,7 +904,50 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 		addCallback,
 		AutoTimerEditor,
 		AutoTimerComponent(
-			self.autotimer.getUniqueId(),	# Id
+			autotimer.getUniqueId(),	# Id
+			name,							# Name
+			match,							# Match
+			True,							# Enabled
+			timespan = timetuple,
+			services = servicelist
+		)
+	)
+
+def addAutotimerFromService(session, service = None):	
+	from AutoTimerComponent import AutoTimerComponent
+	from plugin import autotimer
+		
+	# Create instance if needed
+	if autotimer is None:
+		from AutoTimer import AutoTimer
+		autotimer = AutoTimer()
+
+	serviceHandler = eServiceCenter.getInstance()
+	info = serviceHandler.info(service)
+
+	match = info and info.getName(service) or ""
+	name = match or "New AutoTimer"
+	servicelist = []
+	recordservice = info.getInfoString(service, iServiceInformation.sServiceref)
+	if recordservice:
+		# strip all after last :
+		pos = recordservice.rfind(':')
+		if pos != -1:
+			recordservice = recordservice[:pos+1]
+
+		servicelist.append(recordservice)
+	if info:
+		begin = info.getInfo(service, iServiceInformation.sTimeCreate)
+		end = begin + info.getLength(service)
+		timetuple = (localtime(begin)[3:5], localtime(end)[3:5])
+	else:
+		timetuple = None
+
+	session.openWithCallback(
+		addCallback,
+		AutoTimerEditor,
+		AutoTimerComponent(
+			autotimer.getUniqueId(),	# Id
 			name,							# Name
 			match,							# Match
 			True,							# Enabled
@@ -907,15 +960,15 @@ def addCallback(ret):
 	if ret:
 		from plugin import autotimer
 		
-		# Create instance if needed
+		# Create instance if needed (should have been created by addAutotimerFrom* above though)
 		if autotimer is None:
 			from AutoTimer import AutoTimer
 			autotimer = AutoTimer()
 
 		autotimer.add(ret)
 		
-		# Remove instance if not running in background
-		if not config.plugins.autotimer.autopoll.value:
-			# Save xml
-			autotimer.writeXml()
-			autotimer = None
+	# Remove instance if not running in background
+	if not config.plugins.autotimer.autopoll.value:
+		# Save xml
+		autotimer.writeXml()
+		autotimer = None

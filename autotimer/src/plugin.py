@@ -118,11 +118,17 @@ def editCallback(session):
 		session and autotimer.writeXml()
 		autotimer = None
 
+# Movielist
+def movielist(session, service, **kwargs):
+	from AutoTimerEditor import addAutotimerFromService
+	addAutotimerFromService(session, service)
+
 def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor
 
 	return [
 		PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = autostart),
-		PluginDescriptor(name="AutoTimer", description = "Edit Timers and scan for new Events", where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main),
-		PluginDescriptor(name="AutoTimer", description = "Edit Timers and scan for new Events", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)
+		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main),
+		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main),
+		PluginDescriptor(name="AutoTimer", description= _("Add AutoTimer..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist)
 	]
