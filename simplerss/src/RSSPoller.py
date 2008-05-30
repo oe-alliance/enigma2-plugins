@@ -134,7 +134,16 @@ class RSSPoller:
 				if config.plugins.simpleRSS.update_notification.value == "preview":
 					from RSSScreens import RSSFeedView
 
-					self.session.open(RSSFeedView, self.newItemFeed, newItems = True)
+					from Tools.Notifications import AddNotificationWithID, RemovePopup
+
+					RemovePopup('SimpleRSSUpdateNotification')
+
+					AddNotificationWithID(
+						'SimpleRSSUpdateNotification',
+						RSSFeedView,
+						self.newItemFeed,
+						newItems = True
+					)
 				elif config.plugins.simpleRSS.update_notification.value == "notification":
 					from Tools.Notifications import AddPopup
 					from Screens.MessageBox import MessageBox
