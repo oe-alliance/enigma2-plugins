@@ -1,51 +1,18 @@
 Version = '$Header$';
-__version__ = "Beta 0.98.5"
 from Plugins.Plugin import PluginDescriptor
-from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo,ConfigText
-from Components.Network import Network
-
+from Components.config import config
+from Screens.MessageBox import MessageBox
+from WebIfConfig import WebIfConfigScreen
+from WebChilds.Toplevel import Toplevel
 from twisted.internet import reactor, defer
 from twisted.web2 import server, channel, http
 from twisted.web2.auth import digest, basic, wrapper
-#from twisted.python import util
 from twisted.python.log import startLogging
 from twisted.cred.portal import Portal, IRealm
 from twisted.cred import checkers, credentials, error
 from zope.interface import Interface, implements
 
-from WebIfConfig import WebIfConfigScreen
-
-from WebChilds.Toplevel import Toplevel
-
-config.plugins.Webinterface = ConfigSubsection()
-config.plugins.Webinterface.enable = ConfigYesNo(default = True)
-config.plugins.Webinterface.port = ConfigInteger(80,limits = (1, 65536))
-config.plugins.Webinterface.includehdd = ConfigYesNo(default = False)
-config.plugins.Webinterface.useauth = ConfigYesNo(default = False) # False, because a std. images hasnt a rootpasswd set and so no login. and a login with a empty pwd makes no sense
-config.plugins.Webinterface.autowritetimer = ConfigYesNo(default = False)
-config.plugins.Webinterface.loadmovielength = ConfigYesNo(default = False)
-config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI. 
-
-
-"""
- set DEBUG to True, if twisted should write logoutput to a file.
- in normal console output, twisted will print only the first Traceback.
- is this a bug in twisted or a conflict with enigma2?
- with this option enabled, twisted will print all TB to the logfile
- use tail -f <file> to view this log
-"""
-
-# PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
-# AND DONT ADD CONFIG OPTIONS WHICH HELPS NORMAL USERS TO ENABLE
-# THIS KIND OF LOGGING !!!!!!!!!!!!! 
-# Twisted logging can't handle UTF8 correct,
-# and enigma2 internal completely use UTF8 (for debug messages too)             
-# so the twisted logging code self generates frequently blue screens 
-# at various places in enigma2(not only in Webif) and the reason 
-# of this crashes is NOT visible in the normal enigma2 crashlogs 
-# We have spent much time into debugging this		Ghost 2007/11/15
-
-DEBUG_TO_FILE=False
+DEBUG_TO_FILE=False # PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
 
 DEBUGFILE= "/tmp/twisted.log"
 
@@ -62,7 +29,7 @@ class Closer:
 	def stop(self):
 		global running_defered
 		for d in running_defered:
-			print "[WebIf] STOPPING reactor on interface ",d.interface," with port",d.port
+			print "[Webinterface] stopping interface on ",d.interface," with port",d.port
 			x = d.stopListening()
 			try:
 				x.addCallback(self.isDown)
@@ -96,57 +63,46 @@ def restartWebserver(session):
 
 def startWebserver(session):
 	global running_defered
-	try:
-		# variables, that are needed in the process
-		session.mediaplayer = None
-		session.messageboxanswer = None
-		
-		if config.plugins.Webinterface.enable.value is not True:
-			print "not starting Werbinterface"
-			return False
-		if DEBUG_TO_FILE:
-			print "start twisted logfile, writing to %s" % DEBUGFILE 
-			startLogging(open(DEBUGFILE,'w'))
+	session.mediaplayer = None
+	session.messageboxanswer = None
 	
-		toplevel = Toplevel(session)
-		if config.plugins.Webinterface.useauth.value is False:
-			site = server.Site(toplevel)
+	if config.plugins.Webinterface.enable.value is not True:
+		print "not starting Werbinterface"
+		return False
+	if DEBUG_TO_FILE:
+		print "start twisted logfile, writing to %s" % DEBUGFILE 
+		startLogging(open(DEBUGFILE,'w'))
+	
+	for i in range(0, config.plugins.Webinterface.interfacecount.value):
+		c = config.plugins.Webinterface.interfaces[i]
+		if c.disabled.value is False:
+			startServerInstance(session,c.adress.value,c.port.value,c.useauth.value)
 		else:
+			print "[Webinterface] not starting disabled interface on %s:%i"%(c.adress.value,c.port.value)
+			
+def startServerInstance(session,ipadress,port,useauth=False):
+	try:
+		toplevel = Toplevel(session)
+		if useauth:
 			portal = Portal(HTTPAuthRealm())
 			portal.registerChecker(PasswordDatabase())
 			root = ModifiedHTTPAuthResource(toplevel,(basic.BasicCredentialFactory('DM7025'),),portal, (IHTTPUser,))
-			site = server.Site(root)
-		
-		# here we start the Toplevel without any username or password
-		# this allows access to all request over the iface 127.0.0.1 without any auth
-		localsite = server.Site(toplevel)
-		d = reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(localsite),interface='127.0.0.1')
+			site = server.Site(root)	
+		else:
+			site = server.Site(toplevel)
+		d = reactor.listenTCP(port, channel.HTTPFactory(site),interface=ipadress)
 		running_defered.append(d)
-		# and here we make the Toplevel public to our external ifaces
-		# it depends on the config, if this is with auth support
-		# keep in mind, if we have a second external ip (like a wlan device), we have to do it in the same way for this iface too
-		nw = Network()
-		for adaptername in nw.ifaces:
-			extip = nw.ifaces[adaptername]['ip']
-			if nw.ifaces[adaptername]['up'] is True:
-				extip = "%i.%i.%i.%i"%(extip[0],extip[1],extip[2],extip[3])
-				print "[WebIf] starting Webinterface on port %s on interface %s with address %s"%(str(config.plugins.Webinterface.port.value),adaptername,extip)
-				try:
-					d = reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site),interface=extip)
-					running_defered.append(d)
-				except Exception,e:
-					print "[WebIf] Error starting Webinterface on port %s on interface %s with address %s,because \n%s"%(str(config.plugins.Webinterface.port.value),adaptername,extip,e)
-			else:
-				print "[WebIf] found configured interface %s, but it is not running. so not starting a server on it ..." % adaptername
+		print "[Webinterface] started on %s:%i"%(ipadress,port),"auth=",useauth
 	except Exception,e:
-		print "\n\nSomething went wrong on starting the webif. May the following Line can help to find the error:\n",e,"\n\n"
-####		
+		print "[Webinterface] starting FAILED on %s:%i!"%(ipadress,port),e
+		session.open(MessageBox,'starting FAILED on %s:%i!\n\n%s'%(ipadress,port,str(e)), MessageBox.TYPE_ERROR)
+
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
 		try:
 			startWebserver(kwargs["session"])
 		except ImportError,e:
-			print "[WebIf] twisted not available, not starting web services",e
+			print "[Webinterface] twisted not available, not starting web services",e
 			
 def openconfig(session, **kwargs):
 	session.openWithCallback(configCB,WebIfConfigScreen)
