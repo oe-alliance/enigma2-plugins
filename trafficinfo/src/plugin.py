@@ -225,5 +225,5 @@ def main(session, **kwargs):
     session.open(TrafficInfoMain)
 
 def Plugins(**kwargs):
-  return PluginDescriptor(name="Verkehrsinfo",description="view german traffic jam informations",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main)
+  return PluginDescriptor(name="Verkehrsinfo",description="view german traffic jam informations",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main,icon="plugin.png")
 
