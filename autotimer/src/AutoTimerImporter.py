@@ -67,8 +67,15 @@ class AutoTimerImportSelector(Screen):
 			self.session.openWithCallback(
 				self.importerClosed,
 				AutoTimerImporter,
-				cur,
-				self.autotimer
+				self.autotimer,
+				cur.name,
+				cur.begin,
+				cur.end,
+				cur.disabled,
+				cur.service_ref,
+				cur.afterEvent,
+				cur.justplay,
+				cur.dirname
 			)
 
 	def cancel(self):
@@ -89,7 +96,7 @@ class AutoTimerImporter(Screen):
 		<widget name="key_blue" position="420,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
-	def __init__(self, session, timer, autotimer):
+	def __init__(self, session, autotimer, name, begin, end, disabled, sref, afterEvent, justplay, dirname):
 		Screen.__init__(self, session)
 
 		# Keep AutoTimer
@@ -101,52 +108,70 @@ class AutoTimerImporter(Screen):
 		self["key_yellow"] = Button()
  		self["key_blue"] = Button()
 
-		begin = localtime(timer.begin)
-		end = localtime(timer.end)
 		list = [
 			SelectionEntryComponent(
-				': '.join([_("Enabled"), {True: _("disable"), False: _("enable")}[bool(timer.disabled)]]),
-				not timer.disabled,
+				': '.join([_("Enabled"), {True: _("disable"), False: _("enable")}[bool(disabled)]]),
+				not disabled,
 				0,
-				True
-			),
-			SelectionEntryComponent(
-				_("Match title: %s") % (timer.name),
-				timer.name,
-				1,
-				True
-			),
-			SelectionEntryComponent(
-				_("Match Timespan: %02d:%02d - %02d:%02d") % (begin[3], begin[4], end[3], end[4]),
-				((begin[3], begin[4]), (end[3], end[4])),
-				2,
-				True
-			),
-			SelectionEntryComponent(
-				_("Only on Service: %s") % (timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')),
-				str(timer.service_ref),
-				3,
-				True
-			),
-			SelectionEntryComponent(
-				': '.join([_("After event"), afterevent[timer.afterEvent]]),
-				timer.afterEvent,
-				4,
-				True
-			),
-			SelectionEntryComponent(
-				': '.join([_("Timer Type"), {0: _("record"), 1: _("zap")}[int(timer.justplay)]]),
-				int(timer.justplay),
-				5,
-				True
-			),
-			SelectionEntryComponent(
-				': '.join([_("Location"), timer.dirname or "/hdd/movie/"]),
-				timer.dirname,
-				6,
 				True
 			)
 		]
+
+		if name != "":
+			list.append(
+				SelectionEntryComponent(
+					_("Match title: %s") % (name),
+					name,
+					1,
+					True
+			))
+		
+		if begin and end:
+			begin = localtime(begin)
+			end = localtime(end)
+			list.append(
+				SelectionEntryComponent(
+					_("Match Timespan: %02d:%02d - %02d:%02d") % (begin[3], begin[4], end[3], end[4]),
+					((begin[3], begin[4]), (end[3], end[4])),
+					2,
+					True
+			))
+		
+		if sref:
+			list.append(
+				SelectionEntryComponent(
+					_("Only on Service: %s") % (sref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')),
+					str(sref),
+					3,
+					True
+			))
+		
+		if afterEvent is not None:
+			list.append(
+				SelectionEntryComponent(
+					': '.join([_("After event"), afterevent[afterEvent]]),
+					afterEvent,
+					4,
+					True
+			))
+			
+		if justplay is not None:
+			list.append(
+				SelectionEntryComponent(
+					': '.join([_("Timer Type"), {0: _("record"), 1: _("zap")}[int(justplay)]]),
+					int(justplay),
+					5,
+					True
+			))
+
+		if dirname is not None:
+			list.append(
+				SelectionEntryComponent(
+					': '.join([_("Location"), dirname or "/hdd/movie/"]),
+					dirname,
+					6,
+					True
+			))
 
 		self["list"] = SelectionList(list)
 

@@ -875,6 +875,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 
 def addAutotimerFromEvent(session, evt = None, service = None):
 	from AutoTimerComponent import AutoTimerComponent
+	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
 		
 	# Create instance if needed
@@ -884,7 +885,7 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 
 	match = evt and evt.getEventName() or ""
 	name = match or "New AutoTimer"
-	servicelist = []
+	sref = None
 	if service is not None:
 		service = str(service)
 		# strip all after last :
@@ -892,29 +893,36 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 		if pos != -1:
 			service = service[:pos+1]
 
-		servicelist.append(service)
+		sref = ServiceReference(service)
 	if evt:
-		begin = evt.getBeginTime()
-		end = begin + evt.getDuration()
-		timetuple = (localtime(begin-3600)[3:5], localtime(end+3600)[3:5]) # timespan defaults to +- 1h
+		 # timespan defaults to +- 1h
+		begin = evt.getBeginTime()-3600
+		end = begin + evt.getDuration()+7200
 	else:
-		timetuple = None
+		begin = end = 0
 
 	session.openWithCallback(
 		addCallback,
-		AutoTimerEditor,
+		AutoTimerImporter,
 		AutoTimerComponent(
-			autotimer.getUniqueId(),	# Id
-			name,							# Name
-			match,							# Match
-			True,							# Enabled
-			timespan = timetuple,
-			services = servicelist
-		)
+			autotimer.getUniqueId(),	  	# Id
+			name,	   						# Name
+			"",								# Match
+			True							# Enabled
+		),
+		match,  	   	   # Proposed Match
+		begin,  	   	   # Proposed Begin
+		end,	   	   	   # Proposed End
+		False,  	   	   # Proposed Disabled
+		sref,   		   # Proposed ServiceReference
+		None,   	       # Proposed afterEvent 
+		0,	   	   	   	   # Proposed justplay 
+		None  	   	   	   # Proposed dirname, can we get anything useful here? 
 	)
 
 def addAutotimerFromService(session, service = None):	
 	from AutoTimerComponent import AutoTimerComponent
+	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
 		
 	# Create instance if needed
@@ -927,35 +935,40 @@ def addAutotimerFromService(session, service = None):
 
 	match = info and info.getName(service) or ""
 	name = match or "New AutoTimer"
-	servicelist = []
-	recordservice = info.getInfoString(service, iServiceInformation.sServiceref)
-	if recordservice:
+	sref = info and info.getInfoString(service, iServiceInformation.sServiceref)
+	if sref:
 		# strip all after last :
-		pos = recordservice.rfind(':')
+		pos = sref.rfind(':')
 		if pos != -1:
-			recordservice = recordservice[:pos+1]
+			sref = sref[:pos+1]
 
-		servicelist.append(recordservice)
+		sref = ServiceReference(sref)
 	if info:
 		begin = info.getInfo(service, iServiceInformation.sTimeCreate)
 		end = begin + info.getLength(service)
-		timetuple = (localtime(begin)[3:5], localtime(end)[3:5])
 	else:
-		timetuple = None
+		begin = end = 0
 
 	session.openWithCallback(
 		addCallback,
-		AutoTimerEditor,
+		AutoTimerImporter,
 		AutoTimerComponent(
-			autotimer.getUniqueId(),	# Id
-			name,							# Name
-			match,							# Match
-			True,							# Enabled
-			timespan = timetuple,
-			services = servicelist
-		)
+			autotimer.getUniqueId(),	  	# Id
+			name,	   						# Name
+			"",								# Match
+			True							# Enabled
+		),
+		match,  	   	   # Proposed Match
+		begin,  	   	   # Proposed Begin
+		end,	   	   	   # Proposed End
+		False,  	   	   # Proposed Disabled
+		sref,   		   # Proposed ServiceReference
+		None,   	       # Proposed afterEvent 
+		0,	   	   	   	   # Proposed justplay 
+		None  	   	   	   # Proposed dirname, can we get anything useful here? 
 	)
 
+# XXX: we might wanna go for the editor here
 def addCallback(ret):
 	if ret:
 		from plugin import autotimer
@@ -965,10 +978,12 @@ def addCallback(ret):
 			from AutoTimer import AutoTimer
 			autotimer = AutoTimer()
 
+		# XXX: we override name here because it might just be "New AutoTimer" - to be removed when we go to the editor
+		ret.name = ret.match
 		autotimer.add(ret)
 		
 	# Remove instance if not running in background
 	if not config.plugins.autotimer.autopoll.value:
-		# Save xml
-		autotimer.writeXml()
+		# Save xml (as long as we added something)
+		ret and autotimer and autotimer.writeXml()
 		autotimer = None
