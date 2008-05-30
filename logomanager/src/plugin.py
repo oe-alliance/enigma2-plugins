@@ -25,6 +25,7 @@ def Plugins(path,**kwargs):
                 name="Logo Manager", 
                 description="manage logos to display at boottime", 
                 where = PluginDescriptor.WHERE_PLUGINMENU,
+                icon="plugin.png",
                 fnc = main
                 )
 ############################################################################### 
