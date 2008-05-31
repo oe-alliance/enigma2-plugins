@@ -901,8 +901,10 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 	else:
 		begin = end = 0
 
+	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
+
 	session.openWithCallback(
-		addCallback,
+		importerCallback,
 		AutoTimerImporter,
 		AutoTimerComponent(
 			autotimer.getUniqueId(),	  	# Id
@@ -913,10 +915,10 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 		match,  	   	   # Proposed Match
 		begin,  	   	   # Proposed Begin
 		end,	   	   	   # Proposed End
-		False,  	   	   # Proposed Disabled
+		None, 	   	   	   # Proposed Disabled
 		sref,   		   # Proposed ServiceReference
 		None,   	       # Proposed afterEvent 
-		0,	   	   	   	   # Proposed justplay 
+		None,  	   	   	   # Proposed justplay 
 		None  	   	   	   # Proposed dirname, can we get anything useful here? 
 	)
 
@@ -949,8 +951,10 @@ def addAutotimerFromService(session, service = None):
 	else:
 		begin = end = 0
 
+	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
+
 	session.openWithCallback(
-		addCallback,
+		importerCallback,
 		AutoTimerImporter,
 		AutoTimerComponent(
 			autotimer.getUniqueId(),	  	# Id
@@ -958,18 +962,33 @@ def addAutotimerFromService(session, service = None):
 			"",								# Match
 			True							# Enabled
 		),
-		match,  	   	   # Proposed Match
-		begin,  	   	   # Proposed Begin
+		match,	   	   	   # Proposed Match
+		begin,	   	   	   # Proposed Begin
 		end,	   	   	   # Proposed End
-		False,  	   	   # Proposed Disabled
+		None, 	 	   	   # Proposed Disabled
 		sref,   		   # Proposed ServiceReference
 		None,   	       # Proposed afterEvent 
-		0,	   	   	   	   # Proposed justplay 
+		None,  	   	   	   # Proposed justplay 
 		None  	   	   	   # Proposed dirname, can we get anything useful here? 
 	)
 
-# XXX: we might wanna go for the editor here
-def addCallback(ret):
+def importerCallback(ret):
+	if ret:
+		ret, session = ret
+		
+		session.openWithCallback(
+			editorCallback,
+			AutoTimerEditor,
+			ret
+		)
+	else:
+		# Remove instance if not running in background
+		if not config.plugins.autotimer.autopoll.value:
+			from plugin import autotimer
+			autotimer = None
+
+
+def editorCallback(ret):
 	if ret:
 		from plugin import autotimer
 		
@@ -978,8 +997,6 @@ def addCallback(ret):
 			from AutoTimer import AutoTimer
 			autotimer = AutoTimer()
 
-		# XXX: we override name here because it might just be "New AutoTimer" - to be removed when we go to the editor
-		ret.name = ret.match
 		autotimer.add(ret)
 		
 	# Remove instance if not running in background

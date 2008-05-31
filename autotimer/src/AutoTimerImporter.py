@@ -57,6 +57,7 @@ class AutoTimerImportSelector(Screen):
 		self.list.sort(cmp = lambda x, y: x[0].begin < y[0].begin)
 
 	def importerClosed(self, ret):
+		ret = ret and ret[0]
 		if ret is not None:
 			ret.name = ret.match
 		self.close(ret)
@@ -108,14 +109,16 @@ class AutoTimerImporter(Screen):
 		self["key_yellow"] = Button()
  		self["key_blue"] = Button()
 
-		list = [
-			SelectionEntryComponent(
-				': '.join([_("Enabled"), {True: _("disable"), False: _("enable")}[bool(disabled)]]),
-				not disabled,
-				0,
-				True
-			)
-		]
+		list = []
+
+		if disabled is not None:
+			list.append(
+				SelectionEntryComponent(
+					': '.join([_("Enabled"), {True: _("disable"), False: _("enable")}[bool(disabled)]]),
+					not disabled,
+					0,
+					True
+			))
 
 		if name != "":
 			list.append(
@@ -185,7 +188,11 @@ class AutoTimerImporter(Screen):
 		}, -1)
 
 	def cancel(self):
-		self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
+		self.session.openWithCallback(
+			self.cancelConfirm,
+			MessageBox,
+			_("Really close without saving settings?")
+		)
 
 	def cancelConfirm(self, ret):
 		if ret:
@@ -203,13 +210,19 @@ class AutoTimerImporter(Screen):
 				)
 			# Just confirm else
 			else:
-				self.close(self.autotimer)
+				self.close((
+				self.autotimer,
+				self.session
+			))
 
 	def trailingWhitespaceRemoval(self, ret):
 		if ret is not None:
 			if ret:
 				self.autotimer.match = self.autotimer.match.rstrip()
-			self.close(self.autotimer)
+			self.close((
+				self.autotimer,
+				self.session
+			))
 
 	def accept(self):
 		list = self["list"].getSelectionsList()
@@ -244,4 +257,7 @@ class AutoTimerImporter(Screen):
 					title = _("Please provide a Text to match")
 			)
 		else:
-			self.close(self.autotimer)
+			self.close((
+				self.autotimer,
+				self.session
+			))
