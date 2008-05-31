@@ -35,6 +35,7 @@ from WebComponents.Sources.AudioTracks import AudioTracks
 from WebComponents.Sources.WAPfunctions import WAPfunctions
 from WebComponents.Sources.MP import MP
 from WebComponents.Sources.Files import Files
+from WebComponents.Sources.ServiceListReload import ServiceListReload
 
 from Components.Sources.FrontendStatus import FrontendStatus
 
@@ -72,7 +73,12 @@ class MessageWebScreen(WebScreen):
 		WebScreen.__init__(self, session,request)
 		self["Message"] = Message(session,func = Message.PRINT)
 		self["GetAnswer"] = Message(session,func = Message.ANSWER)
-
+		
+class ServiceListReloadWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["ServiceListReload"] = ServiceListReload(session)
+		
 class AudioWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
