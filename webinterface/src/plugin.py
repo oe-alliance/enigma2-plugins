@@ -11,7 +11,7 @@ from twisted.python.log import startLogging
 from twisted.cred.portal import Portal, IRealm
 from twisted.cred import checkers, credentials, error
 from zope.interface import Interface, implements
-
+from socket import gethostname as socket_gethostname
 DEBUG_TO_FILE=False # PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
 
 DEBUGFILE= "/tmp/twisted.log"
@@ -86,7 +86,7 @@ def startServerInstance(session,ipadress,port,useauth=False):
 		if useauth:
 			portal = Portal(HTTPAuthRealm())
 			portal.registerChecker(PasswordDatabase())
-			root = ModifiedHTTPAuthResource(toplevel,(basic.BasicCredentialFactory('DM7025'),),portal, (IHTTPUser,))
+			root = ModifiedHTTPAuthResource(toplevel,(basic.BasicCredentialFactory(socket_gethostname()),),portal, (IHTTPUser,))
 			site = server.Site(root)	
 		else:
 			site = server.Site(toplevel)
