@@ -154,7 +154,7 @@ private:
 	eFixedMessagePump<int> m_messagepump;
 	void recvEvent(const int &evt);
 	bool scanAudioInfo(unsigned char buf[], int len);
-	std::string readLanguage(unsigned char buf[], int len);
+	std::string getDescriptor(unsigned char buf[], int buflen, int type);
 };
 
 #endif

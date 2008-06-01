@@ -421,7 +421,7 @@ int eServiceTS::getNumberOfTracks() {
 RESULT eServiceTS::selectTrack(unsigned int i) {
 	if (m_audioInfo) {
 		m_apid = m_audioInfo->audioStreams[i].pid;
-		eDebug("[servicets] audio track %d PID 0x%02x\n", i, m_apid);
+		eDebug("[servicets] audio track %d PID 0x%02x type %d\n", i, m_apid, m_audioInfo->audioStreams[i].type);
 		m_decoder->setAudioPID(m_apid, m_audioInfo->audioStreams[i].type);
 		if (m_state == stRunning)
 			m_decoder->preroll();
@@ -454,7 +454,7 @@ int eServiceTS::getCurrentTrack() {
 }
 
 /********************************************************************/
-/* eServiceTS                                                       */
+/* eStreamThread                                                       */
 /********************************************************************/
 
 DEFINE_REF(eStreamThread)
@@ -488,16 +488,26 @@ RESULT eStreamThread::getAudioInfo(ePtr<TSAudioInfo> &ptr)
 	return 0;
 }
 
-std::string eStreamThread::readLanguage(unsigned char buf[], int len)
+#define REGISTRATION_DESCRIPTOR 5
+#define LANGUAGE_DESCRIPTOR 10
+
+std::string eStreamThread::getDescriptor(unsigned char buf[], int buflen, int type)
 {
-	if (len > 0 && buf[0] == 0xA) {
-		//ISO 639 language descriptor
-		std::string lang;
-		lang.append((char*)buf + 2, buf[1] - 1);
-		return lang;
-	} else {
-		return "";
+	int desc_len;
+	while (buflen > 1) {
+		desc_len = buf[1];
+		if (buf[0] == type) {
+			char str[21];
+			if (desc_len > 20) desc_len = 20;
+			strncpy(str, (char*)buf+2, desc_len);
+			str[desc_len] = '\0';
+			return std::string(str);
+		} else {
+			buflen -= desc_len+2;
+			buf += desc_len+2;
+		}
 	}
+	return "";
 }
 
 bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
@@ -544,6 +554,7 @@ bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
 	
 	int pmtlen = (0x0F & pmt[2]) << 8 | (0xFF & pmt[3]);
 	std::string lang;
+	std::string pd_type;
 	ePtr<TSAudioInfo> ainfo = new TSAudioInfo();
 
 	for (int b=8; b < pmtlen-4 && b < pmtsize-6; b++)
@@ -566,7 +577,7 @@ bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
 
 		case 3:
 		case 4: // MPEG Audio
-			lang = readLanguage(pmt+b+5, pmt[b+4]);
+			lang = getDescriptor(pmt+b+5, pmt[b+4], LANGUAGE_DESCRIPTOR);
 			ainfo->addAudio(pid, lang, "MPEG", eDVBAudio::aMPEG);
 			break; 
 
@@ -575,8 +586,10 @@ bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
 		case 0x82: 
 		case 0x83: 
 		case 6:
-			lang = readLanguage(pmt+b+5, pmt[b+4]);
-			ainfo->addAudio(pid, lang, "AC3", eDVBAudio::aAC3);
+			lang = getDescriptor(pmt+b+5, pmt[b+4], LANGUAGE_DESCRIPTOR);
+			pd_type = getDescriptor(pmt+b+5, pmt[b+4], REGISTRATION_DESCRIPTOR);
+			if (pd_type == "AC-3")
+				ainfo->addAudio(pid, lang, pd_type, eDVBAudio::aAC3);
 			break; 
 		}
 		b += 4 + pmt[b+4];
