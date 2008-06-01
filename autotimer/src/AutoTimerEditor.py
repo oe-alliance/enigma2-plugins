@@ -70,11 +70,12 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		<widget name="key_blue" position="420,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
-	def __init__(self, session, timer):
+	def __init__(self, session, timer, editingDefaults = False):
 		Screen.__init__(self, session)
 
 		# Keep Timer
 		self.timer = timer
+		self.editingDefaults = editingDefaults
 
 		# Summary
 		self.setup_title = "AutoTimer Editor"
@@ -283,14 +284,19 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		self.destination = ConfigSelection(choices = [timer.destination or "/hdd/movie/"])
 
 	def refresh(self):
-		# First four entries are always shown
-		self.list = [
-			getConfigListEntry(_("Enabled"), self.enabled),
-			getConfigListEntry(_("Description"), self.name),
-			getConfigListEntry(_("Match Title"), self.match),
+		# First three entries are only showed when not editing defaults
+		self.list = []
+		if not self.editingDefaults:
+			self.list.extend([
+				getConfigListEntry(_("Enabled"), self.enabled),
+				getConfigListEntry(_("Description"), self.name),
+				getConfigListEntry(_("Match Title"), self.match),
+			])
+
+		self.list.extend([
 			getConfigListEntry(_("Timer Type"), self.justplay),
 			getConfigListEntry(_("Only match during Timespan"), self.timespan)
-		]
+		])
 
 		# Only allow editing timespan when it's enabled
 		if self.timespan.value:
@@ -333,7 +339,8 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 
 		# Only allow setting matchLeft when counting hits
 		if self.counter.value:
-			self.list.append(getConfigListEntry(_("Ammount of recordings left"), self.counterLeft))
+			if not self.editingDefaults:
+				self.list.append(getConfigListEntry(_("Ammount of recordings left"), self.counterLeft))
 			self.list.append(getConfigListEntry(_("Reset Count"), self.counterFormatString))
 
 		self.list.append(getConfigListEntry(_("Require Description to be unique"), self.avoidDuplicateDescription))

@@ -58,16 +58,13 @@ class AutoTimerOverview(Screen):
 		)
 
 	def add(self):
+		newTimer = self.autotimer.defaultTimer.clone()
+		newTimer.id = self.autotimer.getUniqueId()
+		
 		self.session.openWithCallback(
 			self.addCallback,
 			AutoTimerEditor,
-			# TODO: implement setting a default?
-			AutoTimerComponent(
-				self.autotimer.getUniqueId(),	# Id
-				"",								# Name
-				"",								# Match
-				True							# Enabled
-			)
+			newTimer
 		)
 
 	def editCallback(self, ret):
@@ -80,6 +77,14 @@ class AutoTimerOverview(Screen):
 			self.changed = True
 			self.autotimer.add(ret)
 			self.refresh()
+
+	def importCallback(self, ret):
+		if ret:
+			self.session.openWithCallback(
+				self.addCallback,
+				AutoTimerEditor,
+				ret
+			)
 
 	def refresh(self, res = None):
 		# Re-assign List
@@ -113,7 +118,11 @@ class AutoTimerOverview(Screen):
 
 	def cancel(self):
 		if self.changed:
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
+			self.session.openWithCallback(
+				self.cancelConfirm,
+				MessageBox,
+				_("Really close without saving settings?")
+			)
 		else:
 			self.close(None)
 
@@ -133,20 +142,23 @@ class AutoTimerOverview(Screen):
 				(_("Preview"), "preview"),
 				(_("Import"), "import"),
 				(_("Setup"), "setup"),
+				(_("Edit new timer defaults"), "defaults")
 			],
 		)
 
 	def menuCallback(self, ret):
+		ret = ret and ret[1]
 		if ret:
-			if ret[1] == "preview":
+			if ret == "preview":
 				total, new, modified, timers = self.autotimer.parseEPG(simulateOnly = True)
 				self.session.open(
 					AutoTimerPreview,
 					timers
 				)
-			elif ret[1] == "import":
+			elif ret == "import":
+				# XXX: apply defaults here too?
 				self.session.openWithCallback(
-					self.addCallback,
+					self.importCallback,
 					AutoTimerImportSelector,
 					AutoTimerComponent(
 						self.autotimer.getUniqueId(),	# Id
@@ -155,9 +167,15 @@ class AutoTimerOverview(Screen):
 						True							# Enabled
 					)
 				)
-			elif ret[1] == "setup":
+			elif ret == "setup":
 				self.session.open(
 					AutoTimerConfiguration
+				)
+			elif ret == "defaults":
+				self.session.open(
+					AutoTimerEditor,
+					self.autotimer.defaultTimer,
+					editingDefaults = True
 				)
 
 	def save(self):

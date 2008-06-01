@@ -21,6 +21,55 @@ class AutoTimerComponent(object):
 	def __ne__(self, other):
 		return not self.__eq__(other)
 
+	def __copy__(self):
+		return self.__class__(
+			self.id,
+			self.name,
+			self.name,
+			self.enabled,
+			timespan = self.timespan,
+			services = self.services,
+			offset = self.offset,
+			afterevent = self.afterevent,
+			exclude = (self.getExcludedTitle(), self.getExcludedShort(), self.getExcludedDescription(), self.getExcludedDays()),
+			include = (self.getIncludedTitle(), self.getIncludedShort(), self.getIncludedDescription(), self.getIncludedDays()),
+			matchCount = self.matchCount,
+			matchLeft = self.matchLeft,
+			matchLimit = self.matchLimit,
+			matchFormatString = self.matchFormatString,
+			lastBegin = self.lastBegin,
+			justplay = self.justplay,
+			avoidDuplicateDescription = self.avoidDuplicateDescription,
+			bouquets = self.bouquets,
+			tags = self.tags
+		)
+
+	def __deepcopy__(self, memo):
+		return self.__class__(
+			self.id,
+			self.name,
+			self.name,
+			self.enabled,
+			timespan = self.timespan,
+			services = self.services[:],
+			offset = self.offset and self.offset[:],
+			afterevent = self.afterevent[:],
+			exclude = (self.getExcludedTitle(), self.getExcludedShort(), self.getExcludedDescription(), self.exclude[3][:]),
+			include = (self.getIncludedTitle(), self.getIncludedShort(), self.getIncludedDescription(), self.include[3][:]),
+			matchCount = self.matchCount,
+			matchLeft = self.matchLeft,
+			matchLimit = self.matchLimit,
+			matchFormatString = self.matchFormatString,
+			lastBegin = self.lastBegin,
+			justplay = self.justplay,
+			avoidDuplicateDescription = self.avoidDuplicateDescription,
+			bouquets = self.bouquets[:],
+			tags = self.tags[:]
+		)
+
+	def clone(self):
+		return self.__deepcopy__({})
+
 	def setValues(self, name, match, enabled, timespan = None, services = None, offset = None, \
 			afterevent = [], exclude = None, maxduration = None, destination = None, \
 			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
@@ -47,14 +96,14 @@ class AutoTimerComponent(object):
 		self.bouquets = bouquets
 		self.tags = tags or []
 
-	def calculateDayspan(self, begin, end):
+	def calculateDayspan(self, begin, end, ignore = None):
 		if end[0] < begin[0] or (end[0] == begin[0] and end[1] <= begin[1]):
 			return (begin, end, True)
 		else:
 			return (begin, end, False)
 
 	def setTimespan(self, timespan):
-		if timespan is None:
+		if timespan is None or len(timespan) and timespan[0] is None:
 			self._timespan = (None,)
 		else:
 			self._timespan = self.calculateDayspan(*timespan)
@@ -205,7 +254,7 @@ class AutoTimerComponent(object):
 						list.append(value)
 					else:
 						break
-		
+
 		return list
 
 	def checkServices(self, service):
@@ -399,7 +448,16 @@ class AutoTimerComponent(object):
 			 		str(self.services),
 			 		str(self.offset),
 			 		str(self.afterevent),
-			 		str(self.exclude),
+			 		str(([x.pattern for x in self.exclude[0]],
+						[x.pattern for x in self.exclude[1]],
+						[x.pattern for x in self.exclude[2]],
+						self.exclude[3]
+					)),
+			 		str(([x.pattern for x in self.include[0]],
+						[x.pattern for x in self.include[1]],
+						[x.pattern for x in self.include[2]],
+						self.include[3]
+					)),
 			 		str(self.maxduration),
 			 		str(self.enabled),
 			 		str(self.destination),
@@ -408,7 +466,10 @@ class AutoTimerComponent(object):
 			 		str(self.matchLimit),
 			 		str(self.matchFormatString),
 			 		str(self.lastBegin),
-			 		str(self.justplay)
+			 		str(self.justplay),
+			 		str(self.avoidDuplicateDescription),
+					str(self.bouquets),
+					str(self.tags)
 			 ]),
 			 ")>"
 		])

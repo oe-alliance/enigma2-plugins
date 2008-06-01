@@ -24,7 +24,7 @@ from Components.config import config
 from AutoTimerComponent import AutoTimerComponent
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
-CURRENT_CONFIG_VERSION = "4"
+CURRENT_CONFIG_VERSION = "5"
 
 def getValue(definitions, default):
 	# Initialize Output
@@ -98,6 +98,12 @@ class AutoTimer:
 		# Empty out timers and reset Ids
 		del self.timers[:]
 		self.uniqueTimerId = 0
+		self.defaultTimer = AutoTimerComponent(
+			0,		# Id
+			"",		# Name
+			"",		# Match
+			True 	# Enabled
+		)
 
 		# Get Config Element
 		for configuration in dom.getElementsByTagName("autotimer"):
@@ -108,10 +114,127 @@ class AutoTimer:
 				if not self.uniqueTimerId:
 					self.uniqueTimerId = len(self.timers)
 				continue
+			# Read in defaults for a new timer
+			for defaults in configuration.getElementsByTagName("defaults"):
+				# Read out timespan
+				start = defaults.getAttribute("from")
+				end = defaults.getAttribute("to")
+				if start and end:
+					start = [int(x) for x in start.split(':')]
+					end = [int(x) for x in end.split(':')]
+					self.defaultTimer.timespan = (start, end)
+
+				# Read out max length
+				maxduration = defaults.getAttribute("maxduration") or None
+				if maxduration:
+					self.defaultTimer.maxduration = int(maxlen)*60
+
+				# Read out recording path
+				self.defaultTimer.destination = defaults.getAttribute("location").encode("UTF-8") or None
+
+				# Read out offset
+				offset = defaults.getAttribute("offset") or None
+				if offset:
+					offset = offset.split(",")
+					if len(offset) == 1:
+						before = after = int(offset[0] or 0) * 60
+					else:
+						before = int(offset[0] or 0) * 60
+						after = int(offset[1] or 0) * 60
+					self.defaultTimer.offset = (before, after)
+
+				# Read out counter
+				self.defaultTimer.matchCount = int(defaults.getAttribute("counter") or '0')
+				self.defaultTimer.matchFormatString = defaults.getAttribute("counterFormat")
+
+				# Read out justplay
+				justplay = int(defaults.getAttribute("justplay") or '0')
+
+				# Read out avoidDuplicateDescription
+				self.defaultTimer.avoidDuplicateDescription = bool(defaults.getAttribute("avoidDuplicateDescription") or False)
+
+				# Read out allowed services
+				servicelist = self.defaultTimer.services	
+				for service in defaults.getElementsByTagName("serviceref"):
+					value = getValue(service, None)
+					if value:
+						# strip all after last :
+						pos = value.rfind(':')
+						if pos != -1:
+							value = value[:pos+1]
+
+						servicelist.append(value)
+				self.defaultTimer.services = servicelist # We might have got a dummy list above
+
+				# Read out allowed bouquets
+				bouquets = self.defaultTimer.bouquets
+				for bouquet in defaults.getElementsByTagName("bouquet"):
+					value = getValue(bouquet, None)
+					if value:
+						bouquets.append(value)
+				self.defaultTimer.bouquets = bouquets
+
+				# Read out afterevent
+				idx = {"none": AFTEREVENT.NONE, "standby": AFTEREVENT.STANDBY, "shutdown": AFTEREVENT.DEEPSTANDBY, "deepstandby": AFTEREVENT.DEEPSTANDBY}
+				afterevent = self.defaultTimer.afterevent
+				for element in defaults.getElementsByTagName("afterevent"):
+					value = getValue(element, None)
+
+					try:
+						value = idx[value]
+						start = element.getAttribute("from")
+						end = element.getAttribute("to")
+						if start and end:
+							start = [int(x) for x in start.split(':')]
+							end = [int(x) for x in end.split(':')]
+							afterevent.append((value, (start, end)))
+						else:
+							afterevent.append((value, None))
+					except KeyError, ke:
+						print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
+						continue
+				self.defaultTimer.afterevent = afterevent
+
+				# Read out exclude
+				idx = {"title": 0, "shortdescription": 1, "description": 2, "dayofweek": 3}
+				excludes = (self.defaultTimer.getExcludedTitle(), self.defaultTimer.getExcludedShort(), self.defaultTimer.getExcludedDescription(), self.defaultTimer.getExcludedDays()) 
+				for exclude in defaults.getElementsByTagName("exclude"):
+					where = exclude.getAttribute("where")
+					value = getValue(exclude, None)
+					if not (value and where):
+						continue
+
+					try:
+						excludes[idx[where]].append(value.encode("UTF-8"))
+					except KeyError, ke:
+						pass
+				self.defaultTimer.excludes = excludes
+
+				# Read out includes (use same idx)
+				includes = (self.defaultTimer.getIncludedTitle(), self.defaultTimer.getIncludedShort(), self.defaultTimer.getIncludedDescription(), self.defaultTimer.getIncludedDays())
+				for include in defaults.getElementsByTagName("include"):
+					where = include.getAttribute("where")
+					value = getValue(include, None)
+					if not (value and where):
+						continue
+
+					try:
+						includes[idx[where]].append(value.encode("UTF-8"))
+					except KeyError, ke:
+						pass
+				self.defaultTimer.includes = includes
+
+				# Read out recording tags (needs my enhanced tag support patch)
+				tags = self.defaultTimer.tags
+				for tag in defaults.getElementsByTagName("tag"):
+					value = getValue(tag, None)
+					if not value:
+						continue
+
+					tags.append(value.encode("UTF-8"))
+
 			# Iterate Timers
 			for timer in configuration.getElementsByTagName("timer"):
-				# Timers are saved as tuple (name, allowedtime (from, to) or None, list of services or None, timeoffset in m (before, after) or None, afterevent)
-
 				# Increment uniqueTimerId
 				self.uniqueTimerId += 1
 
@@ -153,7 +276,7 @@ class AutoTimer:
 					maxlen = int(maxlen)*60
 
 				# Read out recording path
-				destination = timer.getAttribute("destination").encode("UTF-8") or None
+				destination = timer.getAttribute("location").encode("UTF-8") or None
 
 				# Read out offset
 				offset = timer.getAttribute("offset") or None
@@ -315,6 +438,94 @@ class AutoTimer:
 	def writeXml(self):
 		# Generate List in RAM
 		list = ['<?xml version="1.0" ?>\n<autotimer version="', CURRENT_CONFIG_VERSION, '">\n\n']
+
+		# XXX: we might want to make sure that we don't save empty default here
+		list.extend([' <defaults'])
+
+		# Timespan
+		if self.defaultTimer.hasTimespan():
+			list.extend([' from="', self.defaultTimer.getTimespanBegin(), '" to="', self.defaultTimer.getTimespanEnd(), '"'])
+
+		# Duration
+		if self.defaultTimer.hasDuration():
+			list.extend([' maxduration="', str(self.defaultTimer.getDuration()), '"'])
+
+		# Destination
+		if self.defaultTimer.hasDestination():
+			list.extend([' destination="', stringToXML(self.defaultTimer.destination), '"'])
+
+		# Offset
+		if self.defaultTimer.hasOffset():
+			if self.defaultTimer.isOffsetEqual():
+				list.extend([' offset="', str(self.defaultTimer.getOffsetBegin()), '"'])
+			else:
+				list.extend([' offset="', str(self.defaultTimer.getOffsetBegin()), ',', str(self.defaultTimer.getOffsetEnd()), '"'])
+
+		# Counter
+		if self.defaultTimer.hasCounter():
+			list.extend([' counter="', str(self.defaultTimer.getCounter()), '"'])
+			if self.defaultTimer.hasCounterFormatString():
+				list.extend([' counterFormat="', str(self.defaultTimer.getCounterFormatString()), '"'])
+
+		# Duplicate Description
+		if self.defaultTimer.getAvoidDuplicateDescription():
+			list.append(' avoidDuplicateDescription="1" ')
+
+		# Only display justplay if true
+		if self.defaultTimer.justplay:
+			list.extend([' justplay="', str(self.defaultTimer.getJustplay()), '"'])
+
+		# Close still opened defaults tag
+		list.append('>\n')
+
+		# Services
+		for serviceref in self.defaultTimer.getServices():
+			list.extend(['  <serviceref>', serviceref, '</serviceref>'])
+			ref = ServiceReference(str(serviceref))
+			list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
+
+		# Bouquets
+		for bouquet in self.defaultTimer.getBouquets():
+			list.extend(['  <bouquet>', str(bouquet), '</bouquet>'])
+			ref = ServiceReference(str(bouquet))
+			list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
+
+		# AfterEvent
+		if self.defaultTimer.hasAfterEvent():
+			idx = {AFTEREVENT.NONE: "none", AFTEREVENT.STANDBY: "standby", AFTEREVENT.DEEPSTANDBY: "shutdown"}
+			for afterevent in self.defaultTimer.getCompleteAfterEvent():
+				action, timespan = afterevent
+				list.append('  <afterevent')
+				if timespan[0] is not None:
+					list.append(' from="%02d:%02d" to="%02d:%02d"' % (timespan[0][0], timespan[0][1], timespan[1][0], timespan[1][1]))
+				list.extend(['>', idx[action], '</afterevent>\n'])
+
+		# Excludes
+		for title in self.defaultTimer.getExcludedTitle():
+			list.extend(['  <exclude where="title">', stringToXML(title), '</exclude>\n'])
+		for short in self.defaultTimer.getExcludedShort():
+			list.extend(['  <exclude where="shortdescription">', stringToXML(short), '</exclude>\n'])
+		for desc in self.defaultTimer.getExcludedDescription():
+			list.extend(['  <exclude where="description">', stringToXML(desc), '</exclude>\n'])
+		for day in self.defaultTimer.getExcludedDays():
+			list.extend(['  <exclude where="dayofweek">', stringToXML(day), '</exclude>\n'])
+
+		# Includes
+		for title in self.defaultTimer.getIncludedTitle():
+			list.extend(['  <include where="title">', stringToXML(title), '</include>\n'])
+		for short in self.defaultTimer.getIncludedShort():
+			list.extend(['  <include where="shortdescription">', stringToXML(short), '</include>\n'])
+		for desc in self.defaultTimer.getIncludedDescription():
+			list.extend(['  <include where="description">', stringToXML(desc), '</include>\n'])
+		for day in self.defaultTimer.getIncludedDays():
+			list.extend(['  <include where="dayofweek">', stringToXML(day), '</include>\n'])
+
+		# Tags
+		for tag in self.defaultTimer.tags:
+			list.extend(['  <tag>', stringToXML(tag), '</tag>\n'])
+
+		# End of Timer
+		list.append(' </defaults>\n\n')
 
 		# Iterate timers
 		for timer in self.timers:
