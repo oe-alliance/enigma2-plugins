@@ -21,6 +21,7 @@ from enigma import iPlayableService
 from enigma import eTimer
 from Components.ActionMap import ActionMap
 from VlcControlHttp import VlcControlHttp
+import re
 
 DEFAULT_VIDEO_PID = 0x44
 DEFAULT_AUDIO_PID = 0x45
@@ -238,28 +239,33 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			self.filename = "dvdsimple://" + path
 		else:
 			self.filename = path
-		transcode = "vcodec=%s,vb=%d,venc=ffmpeg{strict-rc=1},width=%s,height=%s,fps=%s,scale=1,acodec=%s,ab=%d,channels=%d,samplerate=%s" % (
-			config.plugins.vlcplayer.vcodec.value, 
-			config.plugins.vlcplayer.vb.value, 
-			config.plugins.vlcplayer.width.value, 
-			config.plugins.vlcplayer.height.value, 
-			config.plugins.vlcplayer.fps.value, 
-			config.plugins.vlcplayer.acodec.value, 
-			config.plugins.vlcplayer.ab.value, 
-			config.plugins.vlcplayer.channels.value,
-			config.plugins.vlcplayer.samplerate.value
-		)
-		if config.plugins.vlcplayer.aspect.value != "none":
-			transcode += ",canvas-width=%s,canvas-height=%s,canvas-aspect=%s" % (
+
+		do_direct = isDvdUrl(self.filename) or re.match("(?i).*\.(mpg|mpeg|ts)$", self.filename)
+		if do_direct and config.plugins.vlcplayer.notranscode.value:
+			self.output = "#"
+		else:
+			transcode = "vcodec=%s,vb=%d,venc=ffmpeg{strict-rc=1},width=%s,height=%s,fps=%s,scale=1,acodec=%s,ab=%d,channels=%d,samplerate=%s" % (
+				config.plugins.vlcplayer.vcodec.value, 
+				config.plugins.vlcplayer.vb.value, 
 				config.plugins.vlcplayer.width.value, 
 				config.plugins.vlcplayer.height.value, 
-				config.plugins.vlcplayer.aspect.value
-			) 
-		if config.plugins.vlcplayer.soverlay.value:
-			transcode += ",soverlay"
+				config.plugins.vlcplayer.fps.value, 
+				config.plugins.vlcplayer.acodec.value, 
+				config.plugins.vlcplayer.ab.value, 
+				config.plugins.vlcplayer.channels.value,
+				config.plugins.vlcplayer.samplerate.value
+			)
+			if config.plugins.vlcplayer.aspect.value != "none":
+				transcode += ",canvas-width=%s,canvas-height=%s,canvas-aspect=%s" % (
+					config.plugins.vlcplayer.width.value, 
+					config.plugins.vlcplayer.height.value, 
+					config.plugins.vlcplayer.aspect.value
+				) 
+			if config.plugins.vlcplayer.soverlay.value:
+				transcode += ",soverlay"
+			self.output = "#transcode{%s}:" % transcode
 		mux="ts{pid-video=%d,pid-audio=%d}" % (DEFAULT_VIDEO_PID, DEFAULT_AUDIO_PID)
-		self.output = "#transcode{%s}:std{access=http,mux=%s,dst=/%s.ts}" % (transcode, mux, streamName)
-		self.output = self.output + " :sout-all" 
+		self.output = self.output + "std{access=http,mux=%s,dst=/%s.ts} :sout-all" % (mux, streamName)
 		self.play()
 
 	def play(self):

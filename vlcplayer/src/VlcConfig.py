@@ -51,7 +51,7 @@ class VLCSettings(Screen, ConfigListScreen):
 		cfglist.append(getConfigListEntry(_("Video Bitrate"), config.plugins.vlcplayer.vb))
 		cfglist.append(getConfigListEntry(_("Video Width"), config.plugins.vlcplayer.width))
 		cfglist.append(getConfigListEntry(_("Video Height"), config.plugins.vlcplayer.height))
-		#cfglist.append(getConfigListEntry(_("Frames per Second"), config.plugins.vlcplayer.fps))
+		cfglist.append(getConfigListEntry(_("No transcode for mpg/dvd/iso"), config.plugins.vlcplayer.notranscode))
 		cfglist.append(getConfigListEntry(_("Correct aspect ratio to"), config.plugins.vlcplayer.aspect))
 		cfglist.append(getConfigListEntry(_("Subtitle overlay"), config.plugins.vlcplayer.soverlay))
 		cfglist.append(getConfigListEntry(_("Audio Codec"), config.plugins.vlcplayer.acodec))
