@@ -1,5 +1,6 @@
 # GUI (Screens)
 from Screens.Screen import Screen
+from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from AutoTimerEditor import AutoTimerEditor
@@ -9,13 +10,13 @@ from AutoTimerImporter import AutoTimerImportSelector
 
 # GUI (Components)
 from AutoTimerList import AutoTimerList
-from Components.ActionMap import ActionMap
+from Components.ActionMap import HelpableActionMap
 from Components.Button import Button
 
 # Plugin
 from AutoTimerComponent import AutoTimerComponent
 
-class AutoTimerOverview(Screen):
+class AutoTimerOverview(Screen, HelpableScreen):
 	"""Overview of AutoTimers"""
 
 	skin = """<screen name="AutoTimerOverview" position="140,148" size="460,265" title="AutoTimer Overview">
@@ -31,6 +32,7 @@ class AutoTimerOverview(Screen):
 
 	def __init__(self, session, autotimer):
 		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
 
 		# Save autotimer
 		self.autotimer = autotimer
@@ -46,14 +48,24 @@ class AutoTimerOverview(Screen):
 		self["entries"] = AutoTimerList(self.autotimer.getTupleTimerList())
 
 		# Define Actions
-		self["actions"] = ActionMap(["OkCancelActions", "MenuActions", "ColorActions"],
+		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 			{
-				"ok": self.ok,
-				"cancel": self.cancel,
-				"green": self.save,
-				"yellow": self.remove,
-				"blue": self.add,
-				"menu": self.menu
+				"ok": (self.ok, _("Edit selected AutoTimer")),
+				"cancel": (self.cancel, _("Close and forget changes")),
+			}
+		)
+
+		self["MenuActions"] = HelpableActionMap(self, "MenuActions",
+			{
+				"menu": (self.menu, _("Open Context Menu"))
+			}
+		)
+
+		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+			{
+				"green": (self.save, _("Close and save changes")),
+				"yellow": (self.remove, _("Remove selected AutoTimer")),
+				"blue": (self.add, _("Add new AutoTimer")),
 			}
 		)
 
