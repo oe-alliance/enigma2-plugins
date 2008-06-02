@@ -692,12 +692,14 @@ class AutoTimer:
 						evt.getExtendedDescription(), str(timestamp.tm_wday)):
 					continue
 
-				# Apply E2 Offset
-  				begin -= config.recording.margin_before.value * 60
-				end += config.recording.margin_after.value * 60
- 
-				# Apply custom Offset
-				begin, end = timer.applyOffset(begin, end)
+				if timer.hasOffset():
+					# Apply custom Offset
+					begin, end = timer.applyOffset(begin, end)
+				else:
+					# Apply E2 Offset
+					begin -= config.recording.margin_before.value * 60
+					end += config.recording.margin_after.value * 60
+
 
 				total += 1
 

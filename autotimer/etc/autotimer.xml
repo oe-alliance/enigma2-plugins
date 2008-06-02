@@ -22,7 +22,7 @@
     - Record all Events with "House" in its Title
     - When aired between 20:15 and 23:00 on a weekday
     - And add a margin of 5 minutes before and after the recording
-      (added to the margin already defined globally in enigma2)
+      (regardless of enigma2 defaults)
  -->
  <timer name="Record House" match="House" enabled="no" from="20:15" to="23:00" offset="5">
   <!-- Record only on german station "RTL" -->
