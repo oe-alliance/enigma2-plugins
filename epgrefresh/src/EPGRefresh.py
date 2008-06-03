@@ -204,11 +204,7 @@ class EPGRefresh:
 				# Fetch services
 				for timer in autotimer.getEnabledTimerList():
 					additionalServices.extend(timer.getServices())
-					# Try/Except Bouquets as long as they are CVS-only
-					try:
-						additionalBouquets.extend(timer.getBouquets())
-					except NameError, ne:
-						pass
+					additionalBouquets.extend(timer.getBouquets())
 
 				# Remove instance if there wasn't one before
 				# we might go into the exception before we reach this line, but we don't care then...

@@ -11,6 +11,6 @@
 	<service>1:0:1:32C9:45D:1:C00000:0:0:0:</service>
 
 	<!-- Adds "favourites" from single bouquet mode to our list -->
-	<bouquet>1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet</bouquet>
+	<bouquet>1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) || (type == 134) FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet</bouquet>
 
 </epgrefresh>
