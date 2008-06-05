@@ -1,21 +1,25 @@
 <wizard>
 		<step id="welcome" nextstep="introduction">
-			<text value="Welcome.\n\nIf you want to connect your Dreambox to the Internet, this wizard will guide you through the basic network setup of your Dreambox.\n\nPress the OK button on your remote control to move to the next step." />
+			<text value="Welcome.\n\nIf you want to connect your Dreambox to the Internet, this wizard will guide you through the basic network setup of your Dreambox.\n\nPress OK to start configuring your network" />
 			<code>
 self["arrowdown"].moveTo(557, 232, 1)
 self["arrowdown"].startMoving()
 self["arrowup"].moveTo(800, 232, 1)
 self["arrowup"].startMoving()
+self["arrowup2"].moveTo(800, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowup3"].moveTo(800, 320, 1)
+self["arrowup3"].startMoving()
 self["rc"].moveTo(500, 50, 1)
 self["rc"].startMoving()
 			</code>
 		</step>
 
 		<step id="introduction" >
-			<text value="Use the up/down keys on your remote control to select an option. After that, press OK." />
+			<text value="Use the up/down keys on your remote control to select an option. After that, press OK.\n\n\n\nConnect to the internet..." />
 			<list>
-				<listentry caption="Connect to the Internet with your local LAN" step="conflan" />
-				<listentry caption="Connect to the Internet with a USB Wlan Stick" step="wlanstart" />
+				<listentry caption="via LAN." step="conflan" />
+				<listentry caption="via wireless LAN." step="wlanstart" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />
 			</list>
 			<code>
@@ -31,15 +35,19 @@ self["rc"].startMoving()
 		</step>
 
 		<step id="conflan" nextstep="checklanstatusend">
-			<text value="Please configure your local LAN internet connection by filling out the needed values.\nWhen you are ready please press OK to continue." />
+			<text value="Please configure your LAN internet connection by filling out the required values.\nWhen you are ready press OK to continue." />
 			<config screen="AdapterSetup" module="NetworkSetup" args="0" type="ConfigList" />
 			<code>
 self.checkInterface('eth0')
 			</code>	
 			<code>
-self["arrowdown"].moveTo(557, 232, 1)
+self["arrowup2"].moveTo(525, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowup3"].moveTo(590, 320, 1)
+self["arrowup3"].startMoving()
+self["arrowdown"].moveTo(557, 200, 1)
+self["arrowup"].moveTo(557, 355, 1)
 self["arrowdown"].startMoving()
-self["arrowup"].moveTo(800, 232, 1)
 self["arrowup"].startMoving()
 self["rc"].moveTo(500, 50, 1)
 self["rc"].startMoving()
@@ -53,23 +61,47 @@ self.checkNetwork()
 		<condition>
 self.condition = (self.InterfaceState == True )
 		</condition>
-			<text value="Thank you for using the wizard. Your Dreambox is now ready to use.\n\nYour local LAN internet connection is working now.\n\nPlease press OK to continue." />
+			<text value="Your Dreambox is now ready to use.\n\nYour LAN internet connection is working now.\n\nPlease press OK to continue." />
+			<code>
+self["arrowdown"].moveTo(557, 232, 1)
+self["arrowdown"].startMoving()
+self["arrowup"].moveTo(800, 232, 1)
+self["arrowup"].startMoving()
+self["arrowup2"].moveTo(800, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowup3"].moveTo(800, 320, 1)
+self["arrowup3"].startMoving()
+self["rc"].moveTo(500, 50, 1)
+self["rc"].startMoving()
+			</code>
 		</step>
 
 		<step id="checklanstatusend">
 		<condition>
 self.condition = (self.InterfaceState == False )
 		</condition>
-			<text value="Your local LAN internet connection is not working!\nPlease choose what you want to do next." />
+			<text value="Your LAN internet connection is not working!\nPlease choose what you want to do next." />
+			<code>
+self["arrowdown"].moveTo(557, 232, 1)
+self["arrowdown"].startMoving()
+self["arrowup"].moveTo(800, 232, 1)
+self["arrowup"].startMoving()
+self["arrowup2"].moveTo(800, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowup3"].moveTo(800, 320, 1)
+self["arrowup3"].startMoving()
+self["rc"].moveTo(500, 50, 1)
+self["rc"].startMoving()
+			</code>
 			<list>
-				<listentry caption="Configure your internal LAN again" step="conflan" />
+				<listentry caption="Configure your LAN again" step="conflan" />
 				<listentry caption="Configure your wireless LAN" step="wlanstart" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />
 			</list>
 		</step>
 
 		<step id="wlanstart" nextstep="scanwlan">
-			<text value="Please attach your Zydas ZD1211B chipset compatibe WLAN USB Stick to your Dreambox and press the OK button on your remote control to enable the built in wireless network support" />
+			<text value="Please attach your Zydas ZD1211B or Ralink chipset compatibe WLAN USB Stick to your Dreambox and press OK to enable the built-in wireless network support" />
 			<code>
 self["arrowdown"].moveTo(557, 232, 1)
 self["arrowdown"].startMoving()
@@ -87,12 +119,14 @@ self.checkInterface('wlan0')
 		<condition>
 self.condition = (self.isInterfaceUp == True )
 		</condition>
-			<text value="Please select below the wireless network you want to connect to." />
+			<text value="Please select the wireless LAN network that you want to connect to.\n\nPlease press OK to continue." />
 			<list type="dynamic" source="listModes" evaluation="modeSelectionMade" onselect="modeSelectionMoved" />
 			<code>
-self["arrowdown"].moveTo(557, 232, 1)
+self["arrowup2"].moveTo(800, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowdown"].moveTo(557, 200, 1)
+self["arrowup"].moveTo(557, 355, 1)
 self["arrowdown"].startMoving()
-self["arrowup"].moveTo(800, 232, 1)
 self["arrowup"].startMoving()
 self["rc"].moveTo(500, 50, 1)
 self["rc"].startMoving()
@@ -106,16 +140,18 @@ self.saveAccessPoint(self.ap)
 		<condition>
 self.condition = (self.isInterfaceUp == False )
 		</condition>
-			<text value="Your wireless internet connection could not be started!\nHave you attached your USB WLAN Stick?\n\nPlease choose what you want to do next." />
+			<text value="Your wireless LAN internet connection could not be started!\nHave you attached your USB WLAN Stick?\n\nPlease choose what you want to do next." />
 			<list>
 				<listentry caption="Configure your wireless LAN again" step="wlanstart" />
 				<listentry caption="Configure your internal LAN" step="conflan" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />
 			</list>
 			<code>
-self["arrowdown"].moveTo(557, 232, 1)
+self["arrowup2"].moveTo(800, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowdown"].moveTo(557, 200, 1)
+self["arrowup"].moveTo(557, 355, 1)
 self["arrowdown"].startMoving()
-self["arrowup"].moveTo(800, 232, 1)
 self["arrowup"].startMoving()
 self["rc"].moveTo(500, 50, 1)
 self["rc"].startMoving()
@@ -126,8 +162,20 @@ self.saveAccessPoint(self.ap)
 		</step>
 
 		<step id="wlanconfig" nextstep="checkwlanstatusend" timeout="60" timeoutaction="selectnext">
-			<text value="Please configure your wireless LAN internet connection by filling out the needed values.\nWhen you are ready please press OK to continue." />
+			<text value="Please configure your wireless LAN internet connection by filling out the required values.\nWhen you are done, press OK to continue." />
 			<config screen="AdapterSetup" module="NetworkSetup" args="1" type="ConfigList" />
+			<code>
+self["arrowup2"].moveTo(525, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowup3"].moveTo(590, 320, 1)
+self["arrowup3"].startMoving()
+self["arrowdown"].moveTo(557, 200, 1)
+self["arrowup"].moveTo(557, 355, 1)
+self["arrowdown"].startMoving()
+self["arrowup"].startMoving()
+self["rc"].moveTo(500, 50, 1)
+self["rc"].startMoving()
+			</code>
 			<code pos="after">
 self.checkNetwork()
 			</code>	
@@ -137,14 +185,36 @@ self.checkNetwork()
 		<condition>
 self.condition = (self.InterfaceState == True )
 		</condition>
-			<text value="Thank you for using the wizard. Your Dreambox is now ready to use.\n\nYour wireless internet connection is working now.\n\nPlease press OK to continue." />
+			<text value="Your Dreambox is now ready to use.\n\nYour wireless LAN internet connection is working now.\n\nPlease press OK to continue." />
+			<code>
+self["arrowdown"].moveTo(557, 232, 1)
+self["arrowdown"].startMoving()
+self["arrowup"].moveTo(800, 232, 1)
+self["arrowup"].startMoving()
+self["arrowup2"].moveTo(800, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowup3"].moveTo(800, 320, 1)
+self["arrowup3"].startMoving()
+self["rc"].moveTo(500, 50, 1)
+self["rc"].startMoving()
+			</code>
 		</step>
 
 		<step id="checkwlanstatusend">
 		<condition>
 self.condition = (self.InterfaceState == False )
 		</condition>
-			<text value="Your wireless internet connection is not working!\nPlease choose what you want to do next." />
+			<text value="Your wireless LAN internet connection is not working!\nPlease choose what you want to do next." />
+			<code>
+self["arrowup2"].moveTo(800, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowdown"].moveTo(557, 200, 1)
+self["arrowup"].moveTo(557, 355, 1)
+self["arrowdown"].startMoving()
+self["arrowup"].startMoving()
+self["rc"].moveTo(500, 50, 1)
+self["rc"].startMoving()
+			</code>
 			<list>
 				<listentry caption="Configure your wireless LAN again" step="wlanstart" />
 				<listentry caption="Restart your wireless interface" step="wlanrestart" />
@@ -161,6 +231,9 @@ self.restartNetwork()
 		</step>
 
 		<step id="end">
-			<text value="Thank you for using the wizard. Your Dreambox is now ready to use.\nPlease press OK to start using your Dreambox." />
+			<text value="Thank you for using the wizard. Your Dreambox is now ready to use.\nPlease press OK to continue." />
+
 		</step>
 </wizard>
+
+

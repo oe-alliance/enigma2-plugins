@@ -24,5 +24,5 @@ def Plugins(**kwargs):
 		#PluginDescriptor(name=_("Network Wizard"), description=_("Network Wizard"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) 
 	]
 	if config.misc.firstrun.value:
-		list.append(PluginDescriptor(name=_("Network Wizard"), where = PluginDescriptor.WHERE_WIZARD, fnc=(1, NetworkWizard)))
+		list.append(PluginDescriptor(name=_("Network Wizard"), where = PluginDescriptor.WHERE_WIZARD, fnc=(25, NetworkWizard)))
  	return list
