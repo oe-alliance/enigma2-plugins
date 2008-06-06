@@ -16,10 +16,34 @@ self["rc"].startMoving()
 		</step>
 
 		<step id="introduction" >
+		<condition>
+self.condition = (self.InterfaceAvailable == True )
+		</condition>
 			<text value="Use the up/down keys on your remote control to select an option. After that, press OK.\n\n\n\nConnect to the internet..." />
 			<list>
 				<listentry caption="via LAN." step="conflan" />
-				<listentry caption="via wireless LAN." step="wlanstart" />
+				<listentry caption="via wireless LAN." step="scanwlan" />
+				<listentry caption="Exit wizard and configure later manually" step="end" />
+			</list>
+			<code>
+self["arrowup2"].moveTo(800, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowdown"].moveTo(557, 200, 1)
+self["arrowup"].moveTo(557, 355, 1)
+self["arrowdown"].startMoving()
+self["arrowup"].startMoving()
+self["rc"].moveTo(500, 50, 1)
+self["rc"].startMoving()
+			</code>
+		</step>
+
+		<step id="introduction" >
+		<condition>
+self.condition = (self.InterfaceAvailable == False )
+		</condition>
+			<text value="Use the up/down keys on your remote control to select an option. After that, press OK.\n\n\n\nConnect to the internet..." />
+			<list>
+				<listentry caption="via LAN." step="conflan" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />
 			</list>
 			<code>
@@ -95,29 +119,16 @@ self["rc"].startMoving()
 			</code>
 			<list>
 				<listentry caption="Configure your LAN again" step="conflan" />
-				<listentry caption="Configure your wireless LAN" step="wlanstart" />
+				<listentry caption="Configure your wireless LAN" step="scanwlan" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />
 			</list>
 		</step>
 
-		<step id="wlanstart" nextstep="scanwlan">
-			<text value="Please attach your Zydas ZD1211B or Ralink chipset compatibe WLAN USB Stick to your Dreambox and press OK to enable the built-in wireless network support" />
-			<code>
-self["arrowdown"].moveTo(557, 232, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].moveTo(800, 232, 1)
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
-			</code>
-			<code pos="after">
-self.checkInterface('wlan0')
-			</code>		
-		</step>
 
 		<step id="scanwlan" nextstep="wlanconfig">
 		<condition>
-self.condition = (self.isInterfaceUp == True )
+self.checkInterface('wlan0')			
+self.condition = (self.isInterfaceUp == True and self.WlanPluginInstalled == True)
 		</condition>
 			<text value="Please select the wireless LAN network that you want to connect to.\n\nPlease press OK to continue." />
 			<list type="dynamic" source="listModes" evaluation="modeSelectionMade" onselect="modeSelectionMoved" />
@@ -138,11 +149,12 @@ self.saveAccessPoint(self.ap)
 
 		<step id="scanwlan">
 		<condition>
-self.condition = (self.isInterfaceUp == False )
+self.checkInterface('wlan0')				
+self.condition = (self.isInterfaceUp == False and self.WlanPluginInstalled == True)
 		</condition>
 			<text value="Your wireless LAN internet connection could not be started!\nHave you attached your USB WLAN Stick?\n\nPlease choose what you want to do next." />
 			<list>
-				<listentry caption="Configure your wireless LAN again" step="wlanstart" />
+				<listentry caption="Configure your wireless LAN again" step="scanwlan" />
 				<listentry caption="Configure your internal LAN" step="conflan" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />
 			</list>
@@ -156,10 +168,30 @@ self["arrowup"].startMoving()
 self["rc"].moveTo(500, 50, 1)
 self["rc"].startMoving()
 			</code>
-			<code pos="after">
-self.saveAccessPoint(self.ap)
+		</step>
+
+		<step id="scanwlan">
+		<condition>
+self.checkInterface('wlan0')				
+self.condition = (self.isInterfaceUp == True and self.WlanPluginInstalled == False)
+		</condition>
+			<text value="The wireless LAN plugin is not installed!\nPlease install it and choose what you want to do next." />
+			<list>
+				<listentry caption="Configure your internal LAN" step="conflan" />
+				<listentry caption="Exit wizard and configure later manually" step="end" />
+			</list>
+			<code>
+self["arrowup2"].moveTo(800, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowdown"].moveTo(557, 200, 1)
+self["arrowup"].moveTo(557, 355, 1)
+self["arrowdown"].startMoving()
+self["arrowup"].startMoving()
+self["rc"].moveTo(500, 50, 1)
+self["rc"].startMoving()
 			</code>
 		</step>
+
 
 		<step id="wlanconfig" nextstep="checkwlanstatusend" timeout="60" timeoutaction="selectnext">
 			<text value="Please configure your wireless LAN internet connection by filling out the required values.\nWhen you are done, press OK to continue." />
@@ -216,7 +248,7 @@ self["rc"].moveTo(500, 50, 1)
 self["rc"].startMoving()
 			</code>
 			<list>
-				<listentry caption="Configure your wireless LAN again" step="wlanstart" />
+				<listentry caption="Configure your wireless LAN again" step="scanwlan" />
 				<listentry caption="Restart your wireless interface" step="wlanrestart" />
 				<listentry caption="Configure your internal LAN" step="conflan" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />

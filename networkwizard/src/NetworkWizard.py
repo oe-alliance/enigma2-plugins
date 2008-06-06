@@ -7,8 +7,6 @@ from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
-from Plugins.SystemPlugins.WirelessLan.plugin import *
-from Plugins.SystemPlugins.WirelessLan.Wlan import Wlan, WlanList, wpaSupplicant
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import time, os, re
 
@@ -57,7 +55,12 @@ class NetworkWizard(WizardLanguage):
 		
 		self.InterfaceState = None
 		self.isInterfaceUp = None
+		self.InterfaceAvailable = None
+		self.WlanPluginInstalled = None
 		self.ap = None
+		
+		self.isInterfaceAvailable()
+		self.isWlanPluginInstalled()
 
 	def checkInterface(self,iface):
 		self.Adapterlist = iNetwork.getAdapterList()
@@ -82,20 +85,26 @@ class NetworkWizard(WizardLanguage):
 		pass
 
 	def listModes(self):
-		self.w = Wlan('wlan0')
-		aps = self.w.getNetworkList()
 		list = []
-		if aps is not None:
-			print "[Wlan.py] got Accespoints!"
-			for ap in aps:
-				a = aps[ap]
-				if a['active']:
-					if a['essid'] == "":
-						a['essid'] = a['bssid']
-					list.append( (a['essid'], a['essid']) )		
-		list.sort(key = lambda x: x[0])
-		return list
-	
+		try:
+			from Plugins.SystemPlugins.WirelessLan.Wlan import Wlan
+		except ImportError:
+			list.append( ( _("No Networks found"),_("unavailable") ) )
+			return list
+		else:	
+			self.w = Wlan('wlan0')
+			aps = self.w.getNetworkList()
+			if aps is not None:
+				print "[Wlan.py] got Accespoints!"
+				for ap in aps:
+					a = aps[ap]
+					if a['active']:
+						if a['essid'] == "":
+							a['essid'] = a['bssid']
+						list.append( (a['essid'], a['essid']) )		
+			list.sort(key = lambda x: x[0])
+			return list
+
 
 	def modeSelectionMade(self, index):
 		print "modeSelectionMade:", index
@@ -126,3 +135,18 @@ class NetworkWizard(WizardLanguage):
 		iNetwork.restartNetwork()
 		self.checkNetwork()
 	
+	def isInterfaceAvailable(self):
+		ret = iNetwork.checkforInterface('wlan0')
+		if ret == True:
+			self.InterfaceAvailable = True
+		else:
+			self.InterfaceAvailable = False
+			
+	def isWlanPluginInstalled(self):		
+		try:
+			from Plugins.SystemPlugins.WirelessLan.Wlan import Wlan
+		except ImportError:
+			self.WlanPluginInstalled = False
+		else:
+			self.WlanPluginInstalled = True
+
