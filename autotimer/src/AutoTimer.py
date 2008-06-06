@@ -452,7 +452,7 @@ class AutoTimer:
 
 		# Destination
 		if self.defaultTimer.hasDestination():
-			list.extend([' destination="', stringToXML(self.defaultTimer.destination), '"'])
+			list.extend([' location="', stringToXML(self.defaultTimer.destination), '"'])
 
 		# Offset
 		if self.defaultTimer.hasOffset():
@@ -542,7 +542,7 @@ class AutoTimer:
 
 			# Destination
 			if timer.hasDestination():
-				list.extend([' destination="', stringToXML(timer.destination), '"'])
+				list.extend([' location="', stringToXML(timer.destination), '"'])
 
 			# Offset
 			if timer.hasOffset():
