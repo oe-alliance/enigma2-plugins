@@ -1,6 +1,7 @@
 # -*- coding: ISO-8859-1 -*-
 #===============================================================================
 # VLC Player Plugin by A. Lätsch 2007
+#                   modified by Volker Christian 2008
 #
 # This is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -8,168 +9,127 @@
 # version.
 #===============================================================================
 
-from Components.FileList import FileEntryComponent
-from Components.FileList import FileList
-from Components.config import config
-from urllib import urlencode
-from urllib import urlopen
-import posixpath
+
 import re
-import xml.sax
 
-def normpath(path):
-	if path is None:
-		return None
-	path = path.replace("\\","/").replace("//", "/")
-	if path == "/..":
-		return ""
-	if len(path) > 0 and path[0] != '/': 
-		path = posixpath.normpath('/'+path)[1:]
+from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
+from Tools.LoadPixmap import LoadPixmap
+from Tools.Directories import SCOPE_SKIN_IMAGE, resolveFilename
+from Components.MenuList import MenuList
+
+from VlcServerConfig import vlcPluginInfo
+
+
+MEDIA_EXTENSIONS = {
+		"mp3": "music",
+		"wav": "music",
+		"ogg": "music",
+		"ts": "movie",
+		"avi": "movie",
+		"mpg": "movie",
+		"mpeg": "movie",
+		"wmv": "movie",
+		"mov": "movie",
+		"iso": "movie"
+	}
+
+
+PLAYLIST_EXTENSIONS = {
+		"m3u": "playlist.png",
+		"pls": "playlist.png",
+		"xspf": "playlist.png",
+	}
+
+
+def VlcFileListEntry(name, path, isDir = False):
+	res = [ (path, isDir) ]
+	res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, name))
+	if isDir:
+		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/directory.png"))
 	else:
-		path = posixpath.normpath(path)
-
-	if len(path) == 0 or path == "//":
-		return "/"
-	elif path == ".":
-		return None
-	return path
-
-class vlcBrowseXmlHandler(xml.sax.ContentHandler):
-	
-	def __init__(self, host, regex = None):
-		self.host = host
-		self.regex = regex
-		self.files = []
-		self.directories = []
-		self.allfiles = []
-	
-	def startElement(self, name, attrs):
-		if name == "element" and attrs is not None:
-			type = attrs.getValue("type")
-			name = attrs.getValue("name").encode("utf8")
-			path = "%s:%s" % (self.host, normpath(attrs.getValue("path").encode("utf8")))
-			if type == "directory":
-				self.directories.append(FileEntryComponent(name, path, True))
-			elif len(path) > 0:
-				if self.regex is None or self.regex.search(path):
-					self.files.append(FileEntryComponent(name, path, False))
-				self.allfiles.append( (name, path) )
-
-class VlcFileList(FileList):
-	def __init__(self, pMatchingPattern=None):
-		FileList.__init__(self, None, matchingPattern = pMatchingPattern, useServiceRef = False)
-		self.current_directory = None
-		self.current_server = None
-		self.current_path = None
-	
-	def __getFilesAndDirs(self, servernum, path, regex = None):
-		cfg = config.plugins.vlcplayer.servers[servernum]
-		url = "http://%s:%d/requests/browse.xml?%s" % (cfg.host.value, cfg.httpport.value, urlencode({'dir': path}))
-		print "[VLC] __getFilesAndDirs", url
-		req = urlopen(url)
-		if req is None:
-			raise IOError, "No response from server"
-		handler = vlcBrowseXmlHandler(str(servernum), regex)
-		xml.sax.parse(req, handler)
-		self.__all_files = handler.allfiles
-		return (handler.files, handler.directories)
-	
-	def initServerlist(self):
-		self.list = []
-		for i in range(0, config.plugins.vlcplayer.servercount.value):
-			cfg = config.plugins.vlcplayer.servers[i]
-			self.list.append(FileEntryComponent(cfg.host.value, str(i)+":"+cfg.basedir.value, True))
-		self.list.append(FileEntryComponent(_("<add server>"), None, False))
-		self.l.setList(self.list)
-		self.current_directory = None
-		self.current_server = None
-		self.current_path = None
-		
-	def changeDir(self, directory, select = None):
-		print "[VLC] changeDir ", directory, select
-		if directory is None:
-			self.initServerlist()
-			return
-
-		i = directory.find(":")
-		servernum = int(directory[0:i])
-		path = normpath(directory[i+1:])
-		if path is None:
-			self.initServerlist()
-			return
-
-		if self.matchingPattern is not None:
-			regex = re.compile(self.matchingPattern)
+		extension = name.split('.')
+		extension = extension[-1].lower()
+		if MEDIA_EXTENSIONS.has_key(extension):
+			png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/" + MEDIA_EXTENSIONS[extension] + ".png"))
+		elif PLAYLIST_EXTENSIONS.has_key(extension):
+			png = LoadPixmap(vlcPluginInfo.pluginPath + "/" + PLAYLIST_EXTENSIONS[extension])
 		else:
-			regex = None
+			png = None
+	if png is not None:
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 2, 20, 20, png))
 
-		files, directories = self.__getFilesAndDirs(servernum, path, regex)
+	return res
 
-		directories.sort(cmp=lambda x, y: cmp(x[0], y[0]));
-		files.sort(cmp=lambda x, y: cmp(x[0], y[0]));
-		self.list = directories + files
+
+class VlcFileList(MenuList):
+	def __init__(self, server, matchingPattern):
+		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
+		self.l.setFont(0, gFont("Regular", 18))
+		self.l.setItemHeight(23)
+		self.server = server
+		self.currentDirectory = self.server.getBasedir()
+		self.changeRegex(matchingPattern)
+
+	def update(self):
+		files, directories = self.server.getFilesAndDirs(self.currentDirectory, self.regex)
+		fileEntries = []
+		for file in files:
+			[name, path] = file
+			fileEntries.append(VlcFileListEntry(name, path))
+		directoryEntries = []
+		for directory in directories:
+			[name, path] = directory
+			directoryEntries.append(VlcFileListEntry(name, path, True))
+		fileEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
+		directoryEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
+		self.list = directoryEntries + fileEntries
 		self.l.setList(self.list)
-		self.current_directory = str(servernum) + ":" + path
-		self.current_server = servernum
-		self.current_path = path
-		self.current_isdvd = self.__checkDVD()
-		if self.current_isdvd:
-			dvdpath = str(servernum) + ":dvdsimple://" + normpath(path + "/..")
-			self.list.insert(1, FileEntryComponent(">> Play DVD <<", dvdpath, False))
-		
-		if select is not None:
-			self.setSelection(select)
-		else:
-			self.moveToIndex(0)
-	
-	def __checkDVD(self):
-		if self.__all_files is None or config.plugins.vlcplayer.checkdvd.value == False:
-			return False
-		for e in self.__all_files:
-			if e[1].upper().endswith("VIDEO_TS/VIDEO_TS.IFO"):
-				return True
-		return False
-	
-	def isDVD(self):
-		return self.current_isdvd
-	
-	def existsFile(self, fullname):
-		if fullname is None:
-			return None
-		i = fullname.find(":")
-		servernum = int(fullname[0:i])
-		path, file = posixpath.split(normpath(fullname[i+1:]))
-		files, directories = self._getFilesAndDirs(servernum, path, None)
-		file = file.upper()
-		for e in files:
-			name = e[1][7].upper()
-			if name == file:
-				return True
-		return False
-
-	def setSelection(self, select):
-		i = 0
 		self.moveToIndex(0)
-		for x in self.list:
-			p = x[0][0]
-			if p == select:
-				self.moveToIndex(i)
-			i += 1
+
+	def isVideoTS(self):
+		for e in self.list:
+			if e[0][1] == True and e[0][0].upper().endswith("VIDEO_TS"):
+				return True
+		return False
+
+	def activate(self):
+		if self.getCurrent() is not None:
+			if self.getCurrent()[0][1]:
+				previousDirectory = self.currentDirectory
+				self.currentDirectory = self.getCurrent()[0][0]
+				self.update()
+				if self.isVideoTS():
+					ret = "dvdsimple://" + self.currentDirectory + "/VIDEO_TS", self.currentDirectory
+					self.currentDirectory = previousDirectory
+					self.update()
+				else:
+					ret = None, self.currentDirectory
+			else:
+				ret = self.getCurrent()[0][0], self.getCurrent()[1][7]
+		else:
+			ret = None, None
+		return ret
+
+	def changeRegex(self, matchingPattern):
+		if matchingPattern is not None:
+			self.regex = re.compile(matchingPattern)
+		else:
+			self.regex = None
 
 	def getNextFile(self):
 		i = self.getSelectedIndex() + 1
 		while i < len(self.list):
-			if self.list[i][0][1]==False:
+			if self.list[i][0][1] == False:
 				self.moveToIndex(i)
-				return self.list[i][0][0]
-			i = i+1
-		return None
-	
+				return self.getCurrent()[0][0], self.getCurrent()[1][7]
+			i = i + 1
+		return None, None
+
 	def getPrevFile(self):
 		i = self.getSelectedIndex() - 1
 		while i >= 0:
-			if self.list[i][0][1]==False:
+			if self.list[i][0][1] == False:
 				self.moveToIndex(i)
-				return self.list[i][0][0]
-			i = i-1
-		return None
+				return self.getCurrent()[0][0], self.getCurrent()[1][7]
+			i = i - 1
+		return None, None
