@@ -302,9 +302,17 @@ void eServiceTS::recv_event(int evt)
 		m_event((iPlayableService*)this, evEOF);
 		break;
 	case eStreamThread::evtStreamInfo:
+		bool wasnull = !m_audioInfo;
 		m_streamthread->getAudioInfo(m_audioInfo);
 		if (m_audioInfo)
 			eDebug("[servicets] %d audiostreams found", m_audioInfo->audioStreams.size());
+		if (m_audioInfo && wasnull) {
+			int sel = getCurrentTrack();
+			if (sel < 0) 
+				selectTrack(0);
+			else if (m_audioInfo->audioStreams[sel].type != eDVBAudio::aMPEG) 
+				selectTrack(sel);
+		}
 		break;
 	}
 }
