@@ -9,3 +9,5 @@ install_PYTHON = *.py servicets/servicets.so
 else
 install_PYTHON = *.py servicets.so
 endif
+
+install_DATA = *.png
