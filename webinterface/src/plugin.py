@@ -90,9 +90,13 @@ def startServerInstance(session,ipadress,port,useauth=False):
 			site = server.Site(root)	
 		else:
 			site = server.Site(toplevel)
-		d = reactor.listenTCP(port, channel.HTTPFactory(site),interface=ipadress)
-		running_defered.append(d)
-		print "[Webinterface] started on %s:%i"%(ipadress,port),"auth=",useauth
+		try:
+			d = reactor.listenTCP(port, channel.HTTPFactory(site),interface=ipadress)
+			running_defered.append(d)
+			print "[Webinterface] started on %s:%i"%(ipadress,port),"auth=",useauth
+		except CannotListenError, e:
+			print "[Webinterface] Could not Listen on %s:%i!"%(ipadress,port)
+			session.open(MessageBox,'Could not Listen on %s:%i!\n\n%s'%(ipadress,port,str(e)), MessageBox.TYPE_ERROR)
 	except Exception,e:
 		print "[Webinterface] starting FAILED on %s:%i!"%(ipadress,port),e
 		session.open(MessageBox,'starting FAILED on %s:%i!\n\n%s'%(ipadress,port,str(e)), MessageBox.TYPE_ERROR)
