@@ -28,6 +28,7 @@ from Components.Button import Button
 
 from VlcServer import VlcServer
 
+
 class VlcPluginInfo():
 	def __init__(self):
 		pass
@@ -49,7 +50,7 @@ class VlcServerConfig():
 		newServerConfigSubsection = ConfigSubsection()
 		config.plugins.vlcplayer.servers.append(newServerConfigSubsection)
 		newServerConfigSubsection.name = ConfigText("Server " + str(self.__getServerCount()), False)
-		newServerConfigSubsection.hostip = ConfigIP([192, 168, 1, 1])
+		newServerConfigSubsection.hostip = ConfigIP([0,0,0,0])
 		newServerConfigSubsection.httpport = ConfigInteger(8080, (0,65535))
 		newServerConfigSubsection.basedir = ConfigText("/", False)
 		newServerConfigSubsection.dvdPath = ConfigText("", False)
