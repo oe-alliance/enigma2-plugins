@@ -379,7 +379,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			return
 		try:
 			self.server.stop()
-			self.server.deleteCurrent()
+			self.server.deleteCurrentTree()
 		except Exception, e:
 			self.session.open(
 				MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR)
