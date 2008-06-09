@@ -195,6 +195,13 @@ class VlcServer:
 				files.append([name, path, int(e.getAttribute("id")), e.hasAttribute("current")])
 		return files
 
+	def getCurrentElement(self):
+		xml = self.__xmlRequest("playlist", None)
+		for e in xml.getElementsByTagName("leaf"):
+			if e.hasAttribute("current"):
+				return e
+		return None
+		
 	def getCurrentId(self):
 		files = self.getPlaylistEntries()
 		for file in files:
@@ -247,7 +254,7 @@ class VlcServer:
 			input += "transcode{%s}:" % (",".join(transcode))
 
 		mux="ts{pid-video=%d,pid-audio=%d}" % (videoPid, audioPid)
-		input += "std{access=http,mux=%s,dst=/%s.ts} :sout-all" % (mux, streamName)
+		input += "std{access=http,mux=%s,dst=/%s.ts} :sout-all :sout-keep" % (mux, streamName)
 
 		print "[VLC] playfile", input
 
@@ -280,6 +287,14 @@ class VlcServer:
 		listid = self.getCurrentId()
 		self.delete(listid)
 
+	def deleteCurrentTree(self):
+		print "[VLC] delete current tree"
+		currentElement = self.getCurrentElement()
+		while currentElement is not None and currentElement.parentNode.getAttribute("ro") != "ro":
+			currentElement = currentElement.parentNode
+		id = int(currentElement.getAttribute("id"))
+		self.delete(id)
+		
 	def seek(self, value):
 		"""  Allowed values are of the form:
   [+ or -][<int><H or h>:][<int><M or m or '>:][<int><nothing or S or s or ">]
