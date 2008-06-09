@@ -148,6 +148,7 @@ class VlcMediaListScreen(Screen):
 					if id is not None:
 						self.playlistIds.append(id)
 						self.updatePlaylist()
+						self.switchToPlayList()
 				except Exception, e:
 					self.session.open(
 						MessageBox, _("Error loading playlist %s into server %s:\n%s" % (
