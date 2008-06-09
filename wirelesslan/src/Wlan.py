@@ -250,7 +250,8 @@ class wpaSupplicant:
 				elif encryption == 'WEP':
 					fp.write('\tkey_mgmt=NONE\n')
 					fp.write('\twep_key0="'+psk+'"\n')
-			
+			else:
+				fp.write('\tkey_mgmt=NONE\n')			
 			fp.write('}')	
 			fp.close()
 				
