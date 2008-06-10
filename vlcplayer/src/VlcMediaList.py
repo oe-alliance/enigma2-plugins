@@ -142,7 +142,7 @@ class VlcMediaListScreen(Screen):
 	def ok(self):
 		media, name = self.currentList.activate()
 		if media is not None:
-			if media.endswith(".m3u"):
+			if media.lower().endswith(".m3u"):
 				try:
 					id = self.server.loadPlaylist(media)
 					if id is not None:
@@ -154,7 +154,7 @@ class VlcMediaListScreen(Screen):
 						MessageBox, _("Error loading playlist %s into server %s:\n%s" % (
 								media, self.server.getName(), e)
 							), MessageBox.TYPE_ERROR)
-			elif media.endswith(".iso"):
+			elif media.lower().endswith(".iso"):
 				self.play("dvdsimple://" + media, "DVD")
 			else:
 				self.play(media, name)
