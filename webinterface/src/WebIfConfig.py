@@ -17,10 +17,15 @@ from Plugins.Extensions.WebInterface import addInterfaceConfig
 class WebIfConfigScreen(ConfigListScreen,Screen):
     skin = """
         <screen position="100,100" size="550,400" title="Webinterface: Main Setup" >
-        <widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
-        <widget name="key_red" position="10,360" size="60,40" backgroundColor="red" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
-        <widget name="key_yellow" position="180,360" size="60,40" backgroundColor="yellow" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
-        <widget name="key_green" position="120,360" size="60,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
+            <widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
+            
+            <widget name="key_red" position="0,360" size="60,40" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
+            <widget name="key_yellow" position="140,360" size="60,40" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
+            <widget name="key_green" position="280,360" size="60,40" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
+            
+            <ePixmap name="red"    position="0,360"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+            <ePixmap name="green"  position="140,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+            <ePixmap name="yellow" position="280,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" /> 
         </screen>"""
     def __init__(self, session, args = 0):
         self.session = session
@@ -35,9 +40,9 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
             c = config.plugins.Webinterface.interfaces[i]
             
         ConfigListScreen.__init__(self, self.list)
-        self["key_red"] = Button(_("cancel"))
+        self["key_red"] = Button(_("Cancel"))
         self["key_yellow"] = Button(_("Interfaces"))
-        self["key_green"] = Button(_("ok"))
+        self["key_green"] = Button(_("Ok"))
         self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
         {
             "yellow": self.openIfacesConfig,
@@ -67,35 +72,39 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
 class WebIfInterfaceListConfigScreen(Screen):
     skin = """
         <screen position="100,100" size="550,400" title="Webinterface: list of configured Interfaces" >
-            <widget name="label1" position="5,0" size="150,50"   font="Regular;20" halign="left"/>
-            <widget name="label2" position="160,0" size="50,50"   font="Regular;20" halign="left"/>
-            <widget name="label3" position="215,0" size="200,50"   font="Regular;20" halign="left"/>
-            <widget name="label4" position="420,0" size="130,50"   font="Regular;20" halign="left"/>
+            <widget name="adress" position="5,0" size="150,50"   font="Regular;20" halign="left"/>
+            <widget name="port" position="160,0" size="50,50"   font="Regular;20" halign="left"/>
+            <widget name="auth" position="215,0" size="200,50"   font="Regular;20" halign="left"/>
+            <widget name="disabled" position="420,0" size="130,50"   font="Regular;20" halign="left"/>
             <widget name="ifacelist" position="0,50" size="550,300"  scrollbarMode="showOnDemand"/>
-            <widget name="key_red" position="6,350" size="130,40" zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-            <widget name="key_green" position="142,350" size="130,40"  zPosition="5" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+            
+            <widget name="key_red" position="0,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+	        <widget name="key_yellow" position="280,350" size="140,40"  zPosition="5" valign="center" halign="center" backgroundColor="yellow" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+    	    
+            <ePixmap name="red"    position="0,350"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+    	    <ePixmap name="yellow" position="280,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />	
         </screen>"""
     def __init__(self, session):
         
         Screen.__init__(self, session)
-        self["label1"] = Button(_("Adress"))
-        self["label2"] = Button(_("Port"))
-        self["label3"] = Button(_("use Authorization"))
-        self["label4"] = Button(_("disabled"))
-        self["key_red"] = Button(_("add"))
-        self["key_green"] = Button(_("edit"))
+        self["adress"] = Button(_("Adress"))
+        self["port"] = Button(_("Port"))
+        self["auth"] = Button(_("Use Authorization"))
+        self["disabled"] = Button(_("Disabled"))
+        self["key_red"] = Button(_("Add"))
+        self["key_yellow"] = Button(_("Change"))
         self["ifacelist"] = WebIfInterfaceList([])
         self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
             {
-             "ok":    self.keyGreen,
-             "back":    self.close,
-             "red":     self.keyRed,
-             "green":   self.keyGreen,
-             "yellow":   self.keyYellow,
-             "up":      self.up,
-             "down":    self.down,
-             "left":    self.left,
-             "right":   self.right,
+             "ok"	:	self.keyGreen,
+             "back"	:	self.close,
+             "red"	:	self.keyRed,
+             "green"	:	self.keyGreen,
+             "yellow"	:	self.keyYellow,
+             "up"	:	self.up,
+             "down"	:	self.down,
+             "left"	:	self.left,
+             "right"	:	self.right,
              }, -1)
         self.updateList()
         
@@ -127,12 +136,11 @@ class WebIfInterfaceListConfigScreen(Screen):
         
     def keyGreen(self):
         print "KEYGREEN"
+        
+    def keyYellow(self):
         x = self["ifacelist"].getCurrent()[0]
         print "current list index",x
         self.session.openWithCallback(self.updateList,WebIfInterfaceConfigScreen,int(x))
-        
-    def keyYellow(self):
-        print "KEYYellow"
 
     def up(self):
         self["ifacelist"].up()
@@ -163,12 +171,11 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
         <screen name="Interface Config" position="80,148" size="560,280" title="Webinterface: edit Interface">
             <widget name="config" position="10,10" size="520,210" scrollbarMode="showOnDemand" />
             <ePixmap name="red"    position="0,240"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-            <ePixmap name="green"  position="140,240" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-            <ePixmap name="yellow" position="280,240" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+            <ePixmap name="green"  position="140,240" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />            
             <ePixmap name="blue"   position="420,240" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+            
             <widget name="key_red" position="0,240" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
             <widget name="key_green" position="140,240" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-            <widget name="key_yellow" position="280,240" zPosition="5" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
             <widget name="key_blue" position="420,240" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
         </screen>"""
     
@@ -184,7 +191,7 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
 
         self["key_red"] = Button(_("Cancel"))
         self["key_green"] = Button(_("OK"))
-        self["key_yellow"] = Button("")
+        #self["key_yellow"] = Button("")
         self["key_blue"] = Button(_("Delete"))
 
         if ifacenum is None:
