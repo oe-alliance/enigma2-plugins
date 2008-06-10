@@ -192,7 +192,7 @@ class VlcServer:
 				if len(name) >= 50:
 					name = "..." + name[-50:]
 				path = e.getAttribute("uri").encode("utf8")
-				files.append([name, path, int(e.getAttribute("id")), e.hasAttribute("current")])
+				files.append([name, path])
 		return files
 
 	def getCurrentElement(self):
@@ -200,14 +200,6 @@ class VlcServer:
 		for e in xml.getElementsByTagName("leaf"):
 			if e.hasAttribute("current"):
 				return e
-		return None
-		
-	def getCurrentId(self):
-		files = self.getPlaylistEntries()
-		for file in files:
-			[name, path, id, isCurrent] = file
-			if isCurrent:
-				return id
 		return None
 
 	def playFile(self, filename, videoPid, audioPid):
@@ -282,10 +274,6 @@ class VlcServer:
 
 	def delete(self, id):
 		self.__xmlRequest("status", {"command": "pl_delete", "id": str(id)})
-
-	def deleteCurrent(self):
-		listid = self.getCurrentId()
-		self.delete(listid)
 
 	def deleteCurrentTree(self):
 		print "[VLC] delete current tree"

@@ -17,6 +17,8 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import SCOPE_SKIN_IMAGE, resolveFilename
 from Components.MenuList import MenuList
 
+from pyexpat import ExpatError
+
 from VlcServerConfig import vlcPluginInfo
 
 
@@ -62,29 +64,35 @@ def VlcFileListEntry(name, path, isDir = False):
 
 
 class VlcFileList(MenuList):
-	def __init__(self, server, matchingPattern):
+	def __init__(self, server, getFilesAndDirsCB, matchingPattern):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setItemHeight(23)
 		self.server = server
+		self.getFilesAndDirsCB = getFilesAndDirsCB
 		self.currentDirectory = self.server.getBasedir()
 		self.changeRegex(matchingPattern)
 
 	def update(self):
-		files, directories = self.server.getFilesAndDirs(self.currentDirectory, self.regex)
+		success = False
+		filelistEntries = self.getFilesAndDirsCB(self.currentDirectory, self.regex)
 		fileEntries = []
-		for file in files:
-			[name, path] = file
-			fileEntries.append(VlcFileListEntry(name, path))
 		directoryEntries = []
-		for directory in directories:
-			[name, path] = directory
-			directoryEntries.append(VlcFileListEntry(name, path, True))
-		fileEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
-		directoryEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
+		if filelistEntries is not None:
+			files, directories = filelistEntries
+			for file in files:
+				[name, path] = file
+				fileEntries.append(VlcFileListEntry(name, path))
+			for directory in directories:
+				[name, path] = directory
+				directoryEntries.append(VlcFileListEntry(name, path, True))
+			fileEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
+			directoryEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
+			success = True
 		self.list = directoryEntries + fileEntries
 		self.l.setList(self.list)
 		self.moveToIndex(0)
+		return success
 
 	def isVideoTS(self):
 		for e in self.list:
@@ -97,12 +105,20 @@ class VlcFileList(MenuList):
 			if self.getCurrent()[0][1]:
 				previousDirectory = self.currentDirectory
 				self.currentDirectory = self.getCurrent()[0][0]
-				self.update()
-				if self.isVideoTS():
-					ret = "dvdsimple://" + self.currentDirectory + "/VIDEO_TS", self.currentDirectory
+				try:
+					if self.update():
+						if self.isVideoTS():
+							ret = "dvdsimple://" + self.currentDirectory + "/VIDEO_TS", self.currentDirectory
+							self.currentDirectory = previousDirectory
+							self.update()
+						else:
+							ret = None, self.currentDirectory
+					else:
+						self.currentDirectory = previousDirectory
+						ret = None, None
+				except ExpatError, e:
 					self.currentDirectory = previousDirectory
 					self.update()
-				else:
 					ret = None, self.currentDirectory
 			else:
 				ret = self.getCurrent()[0][0], self.getCurrent()[1][7]
