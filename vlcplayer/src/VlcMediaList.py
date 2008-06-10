@@ -13,8 +13,11 @@
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Button import Button
+from Components.Pixmap import Pixmap
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+
+from pyexpat import ExpatError
 
 from VlcFileList import VlcFileList
 from VlcPlayList import VlcPlayList
@@ -22,11 +25,8 @@ from VlcPlayer import VlcPlayer
 
 
 class VlcMediaListScreen(Screen):
-	skin = """
-		<screen position="80,100" size="560,400" title="VLC-Server" >
-			<widget name="listlabel" position="10,10" size="550,20" font="Regular;18"/>
-			<widget name="filelist" position="10,35" size="550,300" scrollbarMode="showOnDemand"/>
-			<widget name="playlist" position="10,35" size="550,300" scrollbarMode="showOnDemand"/>
+	skin ="""
+		<screen size="560,400" position="80,100" name="VlcMediaListScreen" >
 			<ePixmap name="red"    position="0,355"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green"  position="140,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<ePixmap name="yellow" position="280,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -35,6 +35,13 @@ class VlcMediaListScreen(Screen):
 			<widget name="key_green" position="140,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_yellow" position="280,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_blue" position="420,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<ePixmap size="551,325" alphatest="on" position="5,30" pixmap="skin_default/border_epg.png" />
+			<widget size="320,25" alphatest="on" position="5,10" zPosition="1" name="filelist_button_sel" pixmap="skin_default/epg_now.png" />
+			<widget size="320,25" alphatest="on" position="5,10" zPosition="1" name="playlist_button_sel" pixmap="skin_default/epg_next.png" />
+			<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="5,10" zPosition="2" name="filelist_text" halign="center" font="Regular;18" text="Filelist" />
+			<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="111,10" zPosition="2" name="playlist_text" halign="center" font="Regular;18" text="Playlist" />
+			<widget size="540,320" scrollbarMode="showOnDemand" position="11,35" name="filelist" />
+			<widget size="540,320" scrollbarMode="showOnDemand" position="11,35" name="playlist" />
 		</screen>"""
 	
 	defaultFilter = "(?i)\.(avi|mpeg|mpg|divx|xvid|mp4|mov|ts|vob|wmv|mkv|iso|m3u|pls|xspf)$"
@@ -43,15 +50,18 @@ class VlcMediaListScreen(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.server = server
-		self.filelistlabel = "Filelist:" + self.server.getBasedir()
-		self.playlistlabel = "Playlist"
-		self["listlabel"] = Label("")
-		self["filelist"] = VlcFileList(server, self.defaultFilter)
-		self["playlist"] = VlcPlayList(server)
+		self["filelist"] = VlcFileList(server, self.getFilesAndDirs, self.defaultFilter)
+		self["playlist"] = VlcPlayList(server, self.getPlaylistEntries)
 		self["key_red"] = Button("filter off")
 		self["key_green"] = Button("refresh")
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("play DVD")
+		self["filelist_button_sel"] = Pixmap()
+		self["playlist_button_sel"] = Pixmap()
+		self["more_button_sel"] = Pixmap()
+		self["filelist_text"] = Label()
+		self["playlist_text"] = Label()
+		
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
 			{
 			 "back": 	self.close,
@@ -70,34 +80,29 @@ class VlcMediaListScreen(Screen):
 		self.currentList = None
 		self.playlistIds = []
 
-		self.switchToFileList()
-
 		self.onClose.append(self.__onClose)
-		self.onShown.append(self.__onShown)
-		
+		self.onFirstExecBegin.append(self.__onFirstExecBegin)
+
+	def __onFirstExecBegin(self):
+		self.setTitle("vlc://" + (self.server.getName() or self.server.getHost()) + "/" + self.server.getBasedir())
+			
 	def __onClose(self):
 		try:
 			for id in self.playlistIds:
 				self.server.delete(id)
 		except Exception, e:
-			pass
-
-	def __onShown(self):
-		self.setTitle("Server: " + (self.server.getName() or self.server.getHost()))
-
-	def update(self):
-		try:
-			self.updateFilelist()
-			self.updatePlaylist()
-			if self.currentList == self["playlist"]:
-				self.switchToPlayList()
-			else:
-				self.switchToFileList()
-		except Exception, e:
 			self.session.open(
-				MessageBox, _("Error updating file- and playlist from server %s:\n%s" % (
+				MessageBox, _("Error cleaning playlist on server %s:\n%s" % (
 						self.server.getName(), e)
 					), MessageBox.TYPE_ERROR)
+
+	def update(self):
+		self.updateFilelist()
+		self.updatePlaylist()
+		if self.currentList == self["playlist"]:
+			self.switchToPlayList()
+		else:
+			self.switchToFileList()
 
 	def updatePlaylist(self):
 		self["playlist"].update()
@@ -142,7 +147,7 @@ class VlcMediaListScreen(Screen):
 	def ok(self):
 		media, name = self.currentList.activate()
 		if media is not None:
-			if media.lower().endswith(".m3u"):
+			if media.lower().endswith(".m3u") or media.lower().endswith(".pls") or media.lower().endswith(".xspf"):
 				try:
 					id = self.server.loadPlaylist(media)
 					if id is not None:
@@ -159,15 +164,40 @@ class VlcMediaListScreen(Screen):
 			else:
 				self.play(media, name)
 		elif name is not None:
-			self.setLabel(name)
-	
-	def setLabel(self, text):
-		if self.currentList == self["filelist"]:
-			self.filelistlabel = "Filelist:" + text
-		else:
-			self.playlistlabel = text
-		self["listlabel"].setText(text)
-			
+			self.setTitle("vlc://" + (self.server.getName() or self.server.getHost()) + "/" + name)
+
+
+	def getFilesAndDirs(self, currentDirectory, regex):
+		try:
+			return self.server.getFilesAndDirs(currentDirectory, regex)
+		except ExpatError, e:
+			self.session.open(
+				MessageBox, _("Error loading playlist into server %s:\n%s" % (
+						self.server.getName(), e)
+					), MessageBox.TYPE_ERROR)
+			raise ExpatError, e
+		except Exception, e:
+			self.session.open(
+				MessageBox, _("Error loading filelist into server %s:\n%s" % (
+						self.server.getName(), e)
+					), MessageBox.TYPE_ERROR)
+		return None
+
+	def getPlaylistEntries(self):
+		try:
+			return self.server.getPlaylistEntries()
+		except ExpatError, e:
+			self.session.open(
+				MessageBox, _("Error loading playlist into server %s:\n%s" % (
+						self.server.getName(), e)
+					), MessageBox.TYPE_ERROR)
+		except Exception, e:
+			self.session.open(
+				MessageBox, _("Error loading playlist into server %s:\n%s" % (
+						self.server.getName(), e)
+					), MessageBox.TYPE_ERROR)
+		return None
+
 	def switchLists(self):
 		if self.currentList == self["filelist"]:
 			self.switchToPlayList()
@@ -175,15 +205,21 @@ class VlcMediaListScreen(Screen):
 			self.switchToFileList()
 
 	def switchToFileList(self):
-		self["playlist"].hide()
+		self["filelist"].selectionEnabled(1)
 		self["filelist"].show()
+		self["filelist_button_sel"].show()
+		self["playlist"].selectionEnabled(0)
+		self["playlist"].hide()
+		self["playlist_button_sel"].hide()
 		self.currentList = self["filelist"]
-		self["listlabel"].setText(self.filelistlabel)
 		self["key_yellow"].setText("show playlist")
 
 	def switchToPlayList(self):
+		self["filelist"].selectionEnabled(0)
 		self["filelist"].hide()
+		self["filelist_button_sel"].hide()
+		self["playlist"].selectionEnabled(1)
 		self["playlist"].show()
+		self["playlist_button_sel"].show()
 		self.currentList = self["playlist"]
-		self["listlabel"].setText(self.playlistlabel)
 		self["key_yellow"].setText("show filelist")
