@@ -22,6 +22,7 @@ from pyexpat import ExpatError
 from VlcFileList import VlcFileList
 from VlcPlayList import VlcPlayList
 from VlcPlayer import VlcPlayer
+from VlcServerConfig import _
 
 
 class VlcMediaListScreen(Screen):
@@ -52,10 +53,10 @@ class VlcMediaListScreen(Screen):
 		self.server = server
 		self["filelist"] = VlcFileList(self.getFilesAndDirsCB, server.getBasedir(), self.defaultFilter)
 		self["playlist"] = VlcPlayList(self.getPlaylistEntriesCB)
-		self["key_red"] = Button("filter off")
-		self["key_green"] = Button("refresh")
+		self["key_red"] = Button(_("filter off"))
+		self["key_green"] = Button(_("refresh"))
 		self["key_yellow"] = Button("")
-		self["key_blue"] = Button("play DVD")
+		self["key_blue"] = Button(_("play DVD"))
 		self["filelist_button_sel"] = Pixmap()
 		self["playlist_button_sel"] = Pixmap()
 		self["more_button_sel"] = Pixmap()
@@ -110,10 +111,10 @@ class VlcMediaListScreen(Screen):
 	def keyFilter(self):
 		if self["filelist"].regex is None:
 			self["filelist"].changeRegex(self.defaultFilter)
-			self["key_red"].setText("filter off")
+			self["key_red"].setText(_("filter off"))
 		else:
 			self["filelist"].changeRegex(None)
-			self["key_red"].setText("filter on")
+			self["key_red"].setText(_("filter on"))
 		try:
 			self.updateFilelist()
 		except Exception, e:
@@ -209,7 +210,7 @@ class VlcMediaListScreen(Screen):
 		self["playlist"].hide()
 		self["playlist_button_sel"].hide()
 		self.currentList = self["filelist"]
-		self["key_yellow"].setText("show playlist")
+		self["key_yellow"].setText(_("show playlist"))
 
 	def switchToPlayList(self):
 		self["filelist"].selectionEnabled(0)
@@ -219,4 +220,4 @@ class VlcMediaListScreen(Screen):
 		self["playlist"].show()
 		self["playlist_button_sel"].show()
 		self.currentList = self["playlist"]
-		self["key_yellow"].setText("show filelist")
+		self["key_yellow"].setText(_("show filelist"))

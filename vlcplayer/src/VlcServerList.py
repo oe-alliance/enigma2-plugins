@@ -20,14 +20,10 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Tools.LoadPixmap import LoadPixmap
 
-from VlcServer import VlcServer
 from VlcServerConfig import VlcServerConfig
 from VlcServerConfig import VlcServerConfigScreen
-from VlcFileList import VlcFileList
-from VlcPlayList import VlcPlayList
-from VlcPlayer import VlcPlayer
 from VlcMediaList import VlcMediaListScreen
-from VlcServerConfig import vlcPluginInfo
+from VlcServerConfig import vlcPluginInfo,_
 
 def VlcServerListEntry(vlcServer):
 	res = [ vlcServer ]
@@ -82,11 +78,11 @@ class VlcServerListScreen(Screen):
 		self.serverlist = VlcServerList()
 		self.vlcServerConfig = VlcServerConfig()
 
-		self["currentdir"] = Label("List of known VLC-Server")
+		self["currentdir"] = Label(_("List of known VLC-Server"))
 		self["serverlist"] = self.serverlist
-		self["key_red"] = Button("delete server")
-		self["key_green"] = Button("add server")
-		self["key_yellow"] = Button("edit server")
+		self["key_red"] = Button(_("delete server"))
+		self["key_green"] = Button(_("add server"))
+		self["key_yellow"] = Button(_("edit server"))
 		self["key_blue"] = Button("")
 
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions"],
@@ -122,7 +118,7 @@ class VlcServerListScreen(Screen):
 	def keyDelete(self):
 		self.session.openWithCallback(self.deleteCallback, MessageBox, _("Really delete this Server?"))
 
-	def deleteCallback(self, result, server):
+	def deleteCallback(self, result):
 		if result:
 			self.vlcServerConfig.delete(self.serverlist.getSelection())
 			self.updateServerlist()

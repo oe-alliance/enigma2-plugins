@@ -11,7 +11,6 @@
 
 
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
 from Components.config import config
 from Components.config import ConfigSubsection
 from Components.config import ConfigSubList
@@ -27,6 +26,15 @@ from Components.ActionMap import ActionMap
 from Components.Button import Button
 
 from VlcServer import VlcServer
+
+import gettext
+
+def _(txt):
+	t = gettext.dgettext("VlcPlayer", txt)
+	if t == txt:
+		print "[VLC] fallback to default translation for", txt
+		t = gettext.gettext(txt)
+	return t
 
 
 class VlcPluginInfo():

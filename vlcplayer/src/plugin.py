@@ -16,14 +16,13 @@ from Tools.BoundFunction import boundFunction
 from VlcServerList import VlcServerListScreen
 from VlcServerConfig import vlcPluginInfo
 
-
 def main(session, **kwargs):
 	vlcPluginInfo.pluginPath = kwargs["path"]
 	session.open(VlcServerListScreen)
 
 
 def Plugins(**kwargs):
- 	return PluginDescriptor(
+	return PluginDescriptor(
 		name="VLC Video Player",
 		description="VLC Video Player",
 		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
