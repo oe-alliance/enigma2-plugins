@@ -57,8 +57,8 @@ class VlcServerList(MenuList):
 
 class VlcServerListScreen(Screen):
 	skin = """
-		<screen position="80,100" size="560,400" title="VLC Video Player V1.7" >
-			<widget name="currentdir" position="10,10" size="550,20" font="Regular;18"/>
+		<screen position="80,100" size="560,400" title="VLC Video Player V2.5" >
+			<widget name="serverlabel" position="10,10" size="550,20" font="Regular;18"/>
 			<widget name="serverlist" position="10,35" size="550,310"  scrollbarMode="showOnDemand"/>
 			<ePixmap name="red"    position="0,355"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green"  position="140,355" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
@@ -73,12 +73,10 @@ class VlcServerListScreen(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
-		self.session.nav.stopService()
 		self.serverlist = VlcServerList()
 		self.vlcServerConfig = VlcServerConfig()
 
-		self["currentdir"] = Label(_("List of known VLC-Server"))
+		self["serverlabel"] = Label("List of known VLC-Server")
 		self["serverlist"] = self.serverlist
 		self["key_red"] = Button(_("delete server"))
 		self["key_green"] = Button(_("add server"))
@@ -99,7 +97,6 @@ class VlcServerListScreen(Screen):
 			 }, -1)
 
 		self.onLayoutFinish.append(self.updateServerlist)
-		self.onClose.append(self.__onClose)
 
 	def updateServerlist(self):
 		self.serverlist.update(self.vlcServerConfig.getServerlist())
@@ -150,6 +147,3 @@ class VlcServerListScreen(Screen):
 	def ok(self):
 		if self.serverlist.getSelection() is not None:
 			self.session.open(VlcMediaListScreen, self.serverlist.getSelection()).update()
-
-	def __onClose(self):
-		self.session.nav.playService(self.oldService)
