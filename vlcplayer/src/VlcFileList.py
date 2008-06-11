@@ -64,13 +64,12 @@ def VlcFileListEntry(name, path, isDir = False):
 
 
 class VlcFileList(MenuList):
-	def __init__(self, server, getFilesAndDirsCB, matchingPattern):
+	def __init__(self, getFilesAndDirsCB, baseDir, matchingPattern):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setItemHeight(23)
-		self.server = server
+		self.currentDirectory = baseDir
 		self.getFilesAndDirsCB = getFilesAndDirsCB
-		self.currentDirectory = self.server.getBasedir()
 		self.changeRegex(matchingPattern)
 
 	def update(self):

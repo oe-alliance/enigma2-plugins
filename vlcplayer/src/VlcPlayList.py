@@ -30,11 +30,10 @@ def VlcPlayListEntry(name, path):
 
 
 class VlcPlayList(MenuList):
-	def __init__(self, server, getPlaylistEntriesCB):
+	def __init__(self, getPlaylistEntriesCB):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setItemHeight(23)
-		self.server = server
 		self.getPlaylistEntriesCB = getPlaylistEntriesCB
 
 	def update(self):
