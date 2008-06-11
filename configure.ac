@@ -73,6 +73,7 @@ logomanager/logodir_hdd/Makefile
 vlcplayer/Makefile
 vlcplayer/src/Makefile
 vlcplayer/src/servicets/Makefile
+vlcplayer/po/Makefile
 
 fritzcall/Makefile
 fritzcall/src/Makefile
