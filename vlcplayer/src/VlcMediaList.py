@@ -50,8 +50,8 @@ class VlcMediaListScreen(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.server = server
-		self["filelist"] = VlcFileList(server, self.getFilesAndDirs, self.defaultFilter)
-		self["playlist"] = VlcPlayList(server, self.getPlaylistEntries)
+		self["filelist"] = VlcFileList(self.getFilesAndDirsCB, server.getBasedir(), self.defaultFilter)
+		self["playlist"] = VlcPlayList(self.getPlaylistEntriesCB)
 		self["key_red"] = Button("filter off")
 		self["key_green"] = Button("refresh")
 		self["key_yellow"] = Button("")
@@ -91,10 +91,7 @@ class VlcMediaListScreen(Screen):
 			for id in self.playlistIds:
 				self.server.delete(id)
 		except Exception, e:
-			self.session.open(
-				MessageBox, _("Error cleaning playlist on server %s:\n%s" % (
-						self.server.getName(), e)
-					), MessageBox.TYPE_ERROR)
+			pass
 
 	def update(self):
 		self.updateFilelist()
@@ -167,7 +164,7 @@ class VlcMediaListScreen(Screen):
 			self.setTitle("vlc://" + (self.server.getName() or self.server.getHost()) + "/" + name)
 
 
-	def getFilesAndDirs(self, currentDirectory, regex):
+	def getFilesAndDirsCB(self, currentDirectory, regex):
 		try:
 			return self.server.getFilesAndDirs(currentDirectory, regex)
 		except ExpatError, e:
@@ -183,7 +180,7 @@ class VlcMediaListScreen(Screen):
 					), MessageBox.TYPE_ERROR)
 		return None
 
-	def getPlaylistEntries(self):
+	def getPlaylistEntriesCB(self):
 		try:
 			return self.server.getPlaylistEntries()
 		except ExpatError, e:
