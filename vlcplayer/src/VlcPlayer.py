@@ -234,6 +234,8 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		self.skinName = "MoviePlayer"
 		self.state = self.STATE_IDLE
 		self.oldservice = self.session.screen["CurrentService"]
+		self.oldNavService = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.session.nav.stopService()
 		self.vlcservice = VlcService(self)
 		self.session.screen["CurrentService"] = self.vlcservice
 		self.hidetimer = eTimer()
@@ -290,19 +292,20 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 
 	def __onClose(self):
 		self.session.screen["CurrentService"] = self.oldservice
+		self.session.nav.playService(self.oldNavService)
 
 	def __evEOF(self):
 		print "[VLC] Event EOF"
 		self.stop()
 
 	def playfile(self, path, name):
-		if self.state != self.STATE_IDLE:
-			self.stopCurrent()
 		self.filename = path
 		self.vlcservice.setName(name)
 		self.play()
 
 	def play(self):
+		if self.state != self.STATE_IDLE:
+			self.stopCurrent()
 		if self.state == self.STATE_PAUSED:
 			self.unpause()
 			return
