@@ -62,6 +62,8 @@ class VlcMediaListScreen(Screen):
 		self["more_button_sel"] = Pixmap()
 		self["filelist_text"] = Label()
 		self["playlist_text"] = Label()
+		self["server_name"] = Label(server.getName())
+		self["current_dir"] = Label()
 		
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
 			{
@@ -75,8 +77,8 @@ class VlcMediaListScreen(Screen):
 			 "left": 	self.left,
 			 "right": 	self.right,
 			 "ok":		self.ok,
-			 "prevBouquet": self.switchLists,
-			 "nextBouquet": self.switchLists,
+			 "prevBouquet": self.switchToFileList,
+			 "nextBouquet": self.switchToPlayList,
 			 }, -1)
 		self.currentList = None
 		self.playlistIds = []
@@ -86,6 +88,7 @@ class VlcMediaListScreen(Screen):
 
 	def __onFirstExecBegin(self):
 		self.setTitle("vlc://" + (self.server.getName() or self.server.getHost()) + "/" + self.server.getBasedir())
+		self["current_dir"].setText(self.server.getBasedir())
 			
 	def __onClose(self):
 		try:
@@ -163,7 +166,7 @@ class VlcMediaListScreen(Screen):
 				self.play(media, name)
 		elif name is not None:
 			self.setTitle("vlc://" + (self.server.getName() or self.server.getHost()) + "/" + name)
-
+			self["current_dir"].setText(name)
 
 	def getFilesAndDirsCB(self, currentDirectory, regex):
 		try:
