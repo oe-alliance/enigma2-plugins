@@ -660,7 +660,7 @@ void eStreamThread::thread() {
 				if (r == bufsize) eDebug("eStreamThread::thread: buffer full");
 			}
 		}
-		if (FD_ISSET(m_destfd, &wfds) && (w < r) && (r > bufsize/4)) {
+		if (FD_ISSET(m_destfd, &wfds) && (w < r) && ((r > bufsize/4) || eof)) {
 			rc = ::write(m_destfd, buf+w, r-w);
 			if (rc < 0) {
 				eDebug("eStreamThread::thread: error in write (%d)", errno);
