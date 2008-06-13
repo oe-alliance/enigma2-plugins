@@ -36,10 +36,11 @@ class ConfigMutable(ConfigElement):
 	def __init__(self, configElementDict, defaultKey):
 		ConfigElement.__init__(self)
 		self.configElementDict = configElementDict
-		self.currentConfig = self.configElementDict[defaultKey]
-		self.currentKey = defaultKey
-		self.defaultConfig = self.currentConfig
-		self.defaultKey = self.currentKey
+		if self.configElementDict.has_key(defaultKey):
+			self.currentConfig = self.configElementDict[defaultKey]
+			self.currentKey = defaultKey
+			self.defaultConfig = self.currentConfig
+			self.defaultKey = self.currentKey
 
 	def addConfigElement(self, key, configElement):
 		self.elements[key] = configElement
@@ -170,8 +171,8 @@ class VlcServerConfig():
 		newServerConfigSubsection = ConfigSubsection()
 		config.plugins.vlcplayer.servers.append(newServerConfigSubsection)
 		newServerConfigSubsection.name = ConfigText("Server " + str(self.__getServerCount()), False)
-		newServerConfigSubsection.addressType = ConfigSelectionExtended({"DNS": "FQDN", "IP": "IP-Address"}, "IP")
-		newServerConfigSubsection.hostip = ConfigMutable({"IP": ConfigIP([192,168,1,1]), "DNS": ConfigText("dnsname", False)},
+		newServerConfigSubsection.addressType = ConfigSelectionExtended({"FQDN": "FQDN", "IP": "IP-Address"}, "IP")
+		newServerConfigSubsection.hostip = ConfigMutable({"IP": ConfigIP([192,168,1,1]), "FQDN": ConfigText("fqdname", False)},
 											newServerConfigSubsection.addressType.value)
 		newServerConfigSubsection.httpport = ConfigInteger(8080, (0,65535))
 		newServerConfigSubsection.basedir = ConfigText("/", False)
@@ -281,10 +282,7 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		self.server.addressType().deleteNotifier(self.switchAddressType)
 
 	def switchAddressType(self, configElement):
-		if configElement.value == "IP":
-			self.server.host().setAsCurrent("IP")
-		else:
-			self.server.host().setAsCurrent("DNS")
+		self.server.host().setAsCurrent(configElement.value)
 		self["config"].invalidate(self.hostConfigListEntry)
 
 	def keySave(self):
