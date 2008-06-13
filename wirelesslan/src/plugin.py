@@ -4,7 +4,7 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Components.config import config, getConfigListEntry
+from Components.config import config, getConfigListEntry, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.Network import Network, iNetwork
 from Plugins.Plugin import PluginDescriptor
@@ -12,6 +12,18 @@ from os import system
 from Wlan import Wlan, WlanList, wpaSupplicant
 
 plugin_path = "/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan"
+list = []
+list.append(_("WEP"))
+list.append(_("WPA"))
+list.append(_("WPA2"))
+
+config.plugins.wlan = ConfigSubsection()
+config.plugins.wlan.essid = NoSave(ConfigText(default = "home", fixed_size = False))
+
+config.plugins.wlan.encryption = ConfigSubsection()
+config.plugins.wlan.encryption.enabled = NoSave(ConfigYesNo(default = False))
+config.plugins.wlan.encryption.type = NoSave(ConfigSelection(list, default = _("WPA")))
+config.plugins.wlan.encryption.psk = NoSave(ConfigText(default = "mysecurewlan", fixed_size = False))
 
 class WlanSelectScreen(Screen):
 	skin = """
@@ -88,10 +100,10 @@ class WlanStatus(Screen):
 		<widget name="BottomBG" pixmap="skin_default/bottombar.png" position="5,210" size="540,120" zPosition="1" transparent="1" alphatest="on" />
 		<widget name="IFtext" position="20,225" size="100,21" zPosition="10" font="Regular;19" transparent="1" />
 		<widget name="IF" position="110,225" size="300,21" zPosition="10" font="Regular;19" transparent="1" />
-		<widget name="Statustext" position="20,250" size="60,21" zPosition="10" font="Regular;19" transparent="1"/>
-		<widget name="statuspic_inactive" pixmap="skin_default/buttons/button_green_off.png" position="70,250" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
-		<widget name="statuspic_active" pixmap="skin_default/buttons/button_green.png" position="70,250" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
-		<widget name="ButtonRedtext" position="430,225" size="80,21" zPosition="10" font="Regular;21" transparent="1" />
+		<widget name="Statustext" position="20,250" size="115,21" zPosition="10" font="Regular;19" transparent="1"/>
+		<widget name="statuspic_inactive" pixmap="skin_default/buttons/button_green_off.png" position="120,250" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
+		<widget name="statuspic_active" pixmap="skin_default/buttons/button_green.png" position="120,250" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
+		<widget name="ButtonRedtext" position="430,225" size="120,21" zPosition="10" font="Regular;21" transparent="1" />
 		<widget name="ButtonRed" pixmap="skin_default/buttons/button_red.png" position="410,225" zPosition="10" size="15,16" transparent="1" alphatest="on" />
 
 	</screen>
@@ -184,7 +196,7 @@ class WlanScan(Screen):
 
 		<ePixmap pixmap="skin_default/bottombar.png" position="30,310" size="540,120" zPosition="1" transparent="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/button_red.png" position="430,325" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-		<widget name="canceltext" position="450,325" size="80,21" zPosition="10" font="Regular;21" transparent="1" />
+		<widget name="canceltext" position="450,325" size="120,21" zPosition="10" font="Regular;21" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/button_green.png" position="50,325" zPosition="10" size="15,16" transparent="1" alphatest="on" />
 		<widget name="selecttext" position="80,325" size="150,21" zPosition="10" font="Regular;21" transparent="1" />
 		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="50,355" zPosition="10" size="15,16" transparent="1" alphatest="on" />
@@ -208,7 +220,7 @@ class WlanScan(Screen):
 		self["list"] = WlanList(self.session, iface)
 		
 		self.setInfo()
-		
+
 		self["canceltext"] = Label(_("Close"))
 		self["selecttext"] = Label(_("Connect"))
 		self["rescantext"] = Label(_("Refresh"))
@@ -229,26 +241,26 @@ class WlanScan(Screen):
 	
 	def select(self):
 		cur = self["list"].getCurrent()
-		print "CURRENT",cur
+		#print "CURRENT",cur
 		if cur[1] is not None:
 			essid = cur[0]
+			if essid == '':
+				essid = cur[1]
 			encrypted = cur[2]
-			iface = cur[3]
-			self.session.openWithCallback(self.WlanSetupClosed, WlanConfiguration, iface, essid, encrypted)
+			self.close(essid,self["list"].getList())
 		else:
-			self.session.openWithCallback(self.WlanSetupClosed, WlanConfiguration)
+			self.close(self["list"].getList())
 	
 	def WlanSetupClosed(self, *ret):
-		print "RET im WlanSetupClosed",ret
 		if ret[0] == 2:
-			self.close()
+			self.close(None)
 	
 	def rescan(self):
 		self["list"].reload()
 		self.setInfo()
 	
 	def exit(self):
-		self.close( (None ,) )
+		self.close(None)
 
 	def setInfo(self):
 		length = self["list"].getLength()
@@ -373,9 +385,9 @@ def configStrings(iface):
 	ret=system("dmesg | grep \"rt73: using permanent MAC addr\"")
 	ret2=system("dmesg | grep \"rt73: using net dev supplied MAC addr\"")
 	if ret == 0 or ret2 == 0:
-		return "	post-down start-stop-daemon -K -x /usr/sbin/wpa_supplicant\n	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dralink"
+		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dralink\n	post-down killall -q wpa_supplicant"
 	else:
-		return "	post-down start-stop-daemon -K -x /usr/sbin/wpa_supplicant\n	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B"
+		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B\n	post-down killall -q wpa_supplicant"
 	
 
 def Plugins(**kwargs):

@@ -150,7 +150,7 @@ class WlanList(HTMLComponent, GUIComponent):
 		self.iface = iface
 		
 		self.length = 0
-		
+		self.aplist = None
 		self.l = None
 		self.l = eListboxPythonMultiContent()
 		
@@ -182,12 +182,16 @@ class WlanList(HTMLComponent, GUIComponent):
 	def reload(self):
 		aps = self.w.getNetworkList()
 		list = []
+		self.aplist = []
 		if aps is not None:
 			print "[Wlan.py] got Accespoints!"
 			for ap in aps:
 				a = aps[ap]
 				if a['active']:
+					if a['essid'] == "":
+						a['essid'] = a['bssid']
 					list.append( (a['essid'], a['bssid'], a['encrypted'], a['iface'], a['maxrate'], a['signal']) )
+					self.aplist.append( a['essid'])
 		
 		self.length = len(list)
 		self.l.setList([])
@@ -207,7 +211,9 @@ class WlanList(HTMLComponent, GUIComponent):
 	
 	def getLength(self):
 		return self.length
-
+	
+	def getList(self):
+		return self.aplist
 
 
 class wpaSupplicant:
@@ -222,14 +228,17 @@ class wpaSupplicant:
 			encryption = config.plugins.wlan.encryption.type.value
 			psk = config.plugins.wlan.encryption.psk.value
 
-		
+
 			fp = file('/etc/wpa_supplicant.conf', 'w')
 			fp.write('#WPA Supplicant Configuration by enigma2\n\n')
 			fp.write('ctrl_interface=/var/run/wpa_supplicant\n')
 			fp.write('ctrl_interface_group=0\n')
+			fp.write('eapol_version=1\n')
+			fp.write('ap_scan=1\n')
+			fp.write('fast_reauth=1\n')			
 			fp.write('network={\n')
 			fp.write('\tssid="'+essid+'"\n')
-			fp.write('\tscan_ssid=1\n')
+			fp.write('\tscan_ssid=0\n')
 			
 			if encrypted:
 							
@@ -262,10 +271,9 @@ class wpaSupplicant:
 			fp = file('/etc/wpa_supplicant.conf', 'r')
 			supplicant = fp.readlines()
 			fp.close()
-			
+
 			for s in supplicant:
-			
-				split = s.strip().split('=')
+				split = s.strip().split('=',1)
 				if split[0] == 'ssid':
 					print "[Wlan.py] Got SSID "+split[1][1:-1]
 					config.plugins.wlan.essid.value = split[1][1:-1]
@@ -288,9 +296,35 @@ class wpaSupplicant:
 				else:
 					pass
 				
+			wsconfig = {
+					'ssid': config.plugins.wlan.essid.value,
+					'encryption': config.plugins.wlan.encryption.enabled.value,
+					'encryption_type': config.plugins.wlan.encryption.type.value,
+					'key': config.plugins.wlan.encryption.psk.value,
+				}
+		
+			for (key, item) in wsconfig.items():
+				if item is "None" or item is "":
+					if key == 'ssid':
+						wsconfig['ssid'] = "home"
+					if key == 'encryption':
+						wsconfig['encryption'] = False				
+					if key == 'encryption':
+						wsconfig['encryption_type'] = "WPA"
+					if key == 'encryption':
+						wsconfig['key'] = "mysecurewlan"
+
 		except:
 			print "[Wlan.py] Error parsing /etc/wpa_supplicant.conf"
-	
+			wsconfig = {
+					'ssid': "home",
+					'encryption': False,
+					'encryption_type': "WPA",
+					'key': "mysecurewlan",
+				}
+		print "WS-CONFIG-->",wsconfig
+		return wsconfig
+
 	
 	def restart(self, iface):
 		system("start-stop-daemon -K -x /usr/sbin/wpa_supplicant")
