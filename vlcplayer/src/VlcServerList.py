@@ -129,8 +129,6 @@ class VlcServerListScreen(Screen):
 		if result:
 			self.vlcServerConfig.save(server)
 			self.updateServerlist()
-		else:
-			self.vlcServerConfig.cancel(server)
 
 	def up(self):
 		self.serverlist.up()

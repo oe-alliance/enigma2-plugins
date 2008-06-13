@@ -52,11 +52,14 @@ class VlcServer:
 	def name(self):
 		return self.cfg.name
 
+	def getAddressType(self):
+		return self.cfg.addressType.value
+
+	def addressType(self):
+		return self.cfg.addressType
+
 	def getHost(self):
-		if self.cfg.hostip.value == [0,0,0,0]:
-			return self.cfg.name.value
-		else:
-			return '.'.join(["%d" % d for d in self.cfg.hostip.value])
+		return self.cfg.hostip.tostring(self.cfg.hostip.value)
 
 	def host(self):
 		return self.cfg.hostip

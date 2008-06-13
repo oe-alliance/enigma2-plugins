@@ -11,7 +11,9 @@
 
 
 from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
 from Components.config import config
+from Components.config import ConfigElement
 from Components.config import ConfigSubsection
 from Components.config import ConfigSubList
 from Components.config import ConfigInteger
@@ -28,6 +30,116 @@ from Components.Button import Button
 from VlcServer import VlcServer
 
 import gettext
+
+
+class ConfigMutable(ConfigElement):
+	def __init__(self, configElementDict, defaultKey):
+		ConfigElement.__init__(self)
+		self.configElementDict = configElementDict
+		self.currentConfig = self.configElementDict[defaultKey]
+		self.currentKey = defaultKey
+		self.defaultConfig = self.currentConfig
+		self.defaultKey = self.currentKey
+
+	def addConfigElement(self, key, configElement):
+		self.elements[key] = configElement
+
+	def setAsCurrent(self, key):
+		if self.configElementDict.has_key(key):
+			self.currentConfig = self.configElementDict[key]
+			self.currentKey = key
+			self.saved_value = self.currentConfig.saved_value
+			
+	def setValue(self, val):
+		self.currentConfig.value = val
+		self.changed()
+
+	def set_Value(self, val):
+		self.currentConfig._value = val
+		self.changed()
+
+	def getValue(self):
+		return self.currentConfig.value
+	
+	def get_Value(self):
+		return self.currentConfig._value
+
+	_value = property(get_Value, set_Value)
+	
+	def fromstring(self, value):
+		return self.currentConfig.fromstring(value)
+
+	def load(self):
+		self.currentConfig.saved_value = self.saved_value
+		self.currentConfig.load()
+
+	def tostring(self, value):
+		return self.currentConfig.tostring(value)
+
+	def save(self):
+		self.currentConfig.save()
+		self.defaultConfig = self.currentConfig
+		self.saved_value = self.currentConfig.saved_value
+
+	def cancel(self):
+		self.currentConfig = self.defaultConfig
+		self.currentKey = self.defaultKey
+		self.load()
+		
+	def isChanged(self):
+		return self.currentConfig.isChanged()
+
+	def changed(self):
+		for x in self.notifiers:
+			x(self)
+			
+	def addNotifier(self, notifier, initial_call = True):
+		assert callable(notifier), "notifiers must be callable"
+		self.notifiers.append(notifier)
+		if initial_call:
+			notifier(self)
+
+	def disableSave(self):
+		self.currentConfig.disableSave()
+
+	def __call__(self, selected):
+		return self.currentConfig.getMulti(selected)
+
+	def onSelect(self, session):
+		self.currentConfig.onSelect(session)
+
+	def onDeselect(self, session):
+		self.currentConfig.onDeselect(session)
+
+	def handleKey(self, key):
+		self.currentConfig.handleKey(key)
+
+	def getHTML(self, id):
+		return self.currentConfig.getHTML(id)
+
+	def genText(self):
+		return self.currentConfig.genText()
+
+	def getText(self):
+		return self.currentConfig.getText()
+
+	def getMulti(self, selected):
+		return self.currentConfig.getMulti(selected)
+
+	def onSelect(self, session):
+		self.currentConfig.onSelect(session)
+
+	def onDeselect(self, session):
+		self.currentConfig.onDeselect(session)
+
+
+class ConfigSelectionExtended(ConfigSelection):
+	def __init__(self, choices, default = None):
+		ConfigSelection.__init__(self, choices, default)
+
+	def deleteNotifier(self, notifier):
+		self.notifiers.remove(notifier)
+
 
 def _(txt):
 	t = gettext.dgettext("VlcPlayer", txt)
@@ -58,7 +170,9 @@ class VlcServerConfig():
 		newServerConfigSubsection = ConfigSubsection()
 		config.plugins.vlcplayer.servers.append(newServerConfigSubsection)
 		newServerConfigSubsection.name = ConfigText("Server " + str(self.__getServerCount()), False)
-		newServerConfigSubsection.hostip = ConfigIP([0,0,0,0])
+		newServerConfigSubsection.addressType = ConfigSelectionExtended({"DNS": "FQDN", "IP": "IP-Address"}, "IP")
+		newServerConfigSubsection.hostip = ConfigMutable({"IP": ConfigIP([192,168,1,1]), "DNS": ConfigText("dnsname", False)},
+											newServerConfigSubsection.addressType.value)
 		newServerConfigSubsection.httpport = ConfigInteger(8080, (0,65535))
 		newServerConfigSubsection.basedir = ConfigText("/", False)
 		newServerConfigSubsection.dvdPath = ConfigText("", False)
@@ -91,10 +205,6 @@ class VlcServerConfig():
 	def save(self, server):
 		server.getCfg().save()
 		self.__save()
-
-	# Edit was canceled
-	def cancel(self, server):
-		server.getCfg().load()
 
 	def getServerlist(self):
 		return self.serverlist
@@ -139,7 +249,9 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 
 		cfglist = []
 		cfglist.append(getConfigListEntry(_("Symbolic Servername"), server.name()))
-		cfglist.append(getConfigListEntry(_("Server IP"), server.host()))
+		cfglist.append(getConfigListEntry(_("Enter VLC-Server as FQDN or IP-Address"), server.addressType()))
+		self.hostConfigListEntry = getConfigListEntry(_("Server Address"), server.host())
+		cfglist.append(self.hostConfigListEntry)
 		cfglist.append(getConfigListEntry(_("HTTP Port"), server.httpPort()))
 		cfglist.append(getConfigListEntry(_("Movie Directory"), server.basedir()))
 		cfglist.append(getConfigListEntry(_("DVD Device (leave empty for default)"), server.dvdPath()))
@@ -161,13 +273,24 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 
 		ConfigListScreen.__init__(self, cfglist, session)
 
+		server.addressType().addNotifier(self.switchAddressType, False)
+		
+		self.onClose.append(self.__onClose)
+		
+	def __onClose(self):
+		self.server.addressType().deleteNotifier(self.switchAddressType)
+
+	def switchAddressType(self, configElement):
+		if configElement.value == "IP":
+			self.server.host().setAsCurrent("IP")
+		else:
+			self.server.host().setAsCurrent("DNS")
+		self["config"].invalidate(self.hostConfigListEntry)
+
 	def keySave(self):
-		for x in self["config"].list:
-			if isinstance(x[1].value, str):
-				x[1].value = x[1].value.strip()
-		result = [ True, self.server ]
 		self.close(True, self.server)
 
 	def keyCancel(self):
-		result = [ False, self.server ]
+		for x in self["config"].list:
+			x[1].cancel()
 		self.close(False, self.server)
