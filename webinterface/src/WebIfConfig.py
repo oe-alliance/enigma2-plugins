@@ -89,10 +89,10 @@ class WebIfInterfaceListConfigScreen(Screen):
         Screen.__init__(self, session)
         self["adress"] = Button(_("Adress"))
         self["port"] = Button(_("Port"))
-        self["auth"] = Button(_("Use Authorization"))
-        self["disabled"] = Button(_("Disabled"))
-        self["key_red"] = Button(_("Add"))
-        self["key_yellow"] = Button(_("Change"))
+        self["auth"] = Button(_("use Authorization"))
+        self["disabled"] = Button(_("disabled"))
+        self["key_red"] = Button(_("add"))
+        self["key_yellow"] = Button(_("change"))
         self["ifacelist"] = WebIfInterfaceList([])
         self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
             {
