@@ -280,7 +280,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 				"previous": self.playPrevFile
 			}, -2)
 
-		print "evEOF=%d" % iPlayableService.evEOF
+		print "[VLC] evEOF=%d" % iPlayableService.evEOF
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap=
 			{
 				iPlayableService.evEOF: self.__evEOF,
