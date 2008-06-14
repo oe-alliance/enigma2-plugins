@@ -80,6 +80,7 @@ class ConfigMutable(ConfigElement):
 	def save(self):
 		self.currentConfig.save()
 		self.defaultConfig = self.currentConfig
+		self.defaultKey = self.currentKey
 		self.saved_value = self.currentConfig.saved_value
 
 	def cancel(self):
@@ -104,7 +105,7 @@ class ConfigMutable(ConfigElement):
 		self.currentConfig.disableSave()
 
 	def __call__(self, selected):
-		return self.currentConfig.getMulti(selected)
+		return self.currentConfig(selected)
 
 	def onSelect(self, session):
 		self.currentConfig.onSelect(session)
