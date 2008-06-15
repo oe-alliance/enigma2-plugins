@@ -315,7 +315,7 @@ examples:
 		id = None
 		for n in xml.getElementsByTagName("node"):
 			if n.hasAttribute("name") is not None:
-				if n.getAttribute("name").encode("latin_1", "replace") == playlist:
+				if n.getAttribute("name").encode("utf8", "replace") == playlist:
 					if id is None:
 						id = n.getAttribute("id")
 					elif int(id) < int(n.getAttribute("id")):
