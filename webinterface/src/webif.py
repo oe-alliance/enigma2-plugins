@@ -11,6 +11,7 @@ Version = '$Header$';
 from enigma import eServiceReference
 
 from Screens.Screen import Screen
+from Screens.ChannelSelection import service_types_tv, service_types_radio
 from Tools.Import import my_import
 
 from Components.Sources.Source import ObsoleteSource
@@ -66,7 +67,7 @@ class UpdateWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
 		self["CurrentTime"] = Clock()
-		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
+		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 
 class MessageWebScreen(WebScreen):
 	def __init__(self, session,request):
@@ -108,7 +109,8 @@ class SubServiceWebScreen(WebScreen):
 class ServiceWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
-		fav = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
+
+		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["SwitchService"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
 		self["ServiceList"] = ServiceList(fav, command_func = self.getServiceList, validate_commands=False)
 		self["ServiceListRecursive"] = ServiceListRecursive(session, func=ServiceListRecursive.FETCH)
