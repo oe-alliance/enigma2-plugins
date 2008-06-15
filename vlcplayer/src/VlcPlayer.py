@@ -304,12 +304,10 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		self.play()
 
 	def play(self):
-		if self.state != self.STATE_IDLE:
-			self.stopCurrent()
 		if self.state == self.STATE_PAUSED:
 			self.unpause()
 			return
-		elif self.state == self.STATE_IDLE:
+		if self.state == self.STATE_IDLE:
 			print "[VLC] setupStream: " + self.filename
 			if ENIGMA_SERVICE_ID == 0:
 				self.hide()
@@ -419,6 +417,8 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 
 	def playNextFile(self):
 		print "[VLC] playNextFile"
+		if self.state != self.STATE_IDLE:
+			self.stopCurrent()
 		if isDvdUrl(self.filename):
 			url, track, chapter = splitDvdUrl(self.filename)
 			if track is None:
@@ -436,12 +436,15 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			media, name = self.currentList.getNextFile()
 			if media is None:
 				self.session.open(MessageBox, _("No more files in this directory"), MessageBox.TYPE_INFO)
+				self.close()
 			else:
 				self.playfile(media, name)
 				self.showInfobar()
 
 	def playPrevFile(self):
 		print "[VLC] playPrevFile"
+		if self.state != self.STATE_IDLE:
+			self.stopCurrent()
 		if isDvdUrl(self.filename):
 			url, track, chapter = splitDvdUrl(self.filename)
 			if track is None:
@@ -457,6 +460,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			media, name = self.currentList.getPrevFile()
 			if media is None:
 				self.session.open(MessageBox, _("No previous file in this directory"), MessageBox.TYPE_INFO)
+				self.close()
 			else:
 				self.playfile(media, name)
 				self.showInfobar()
