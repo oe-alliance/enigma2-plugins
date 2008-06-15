@@ -99,26 +99,30 @@ class VlcFileList(MenuList):
 				return True
 		return False
 
+	def changeDirectory(self, directory):
+		previousDirectory = self.currentDirectory
+		self.currentDirectory = directory
+		try:
+			if self.update():
+				if self.isVideoTS():
+					ret = "dvdsimple://" + self.currentDirectory + "/VIDEO_TS", self.currentDirectory
+					self.currentDirectory = previousDirectory
+					self.update()
+				else:
+					ret = None, self.currentDirectory
+			else:
+				self.currentDirectory = previousDirectory
+				ret = None, None
+		except ExpatError, e:
+			self.currentDirectory = previousDirectory
+			self.update()
+			ret = None, self.currentDirectory
+		return ret
+
 	def activate(self):
 		if self.getCurrent() is not None:
 			if self.getCurrent()[0][1]:
-				previousDirectory = self.currentDirectory
-				self.currentDirectory = self.getCurrent()[0][0]
-				try:
-					if self.update():
-						if self.isVideoTS():
-							ret = "dvdsimple://" + self.currentDirectory + "/VIDEO_TS", self.currentDirectory
-							self.currentDirectory = previousDirectory
-							self.update()
-						else:
-							ret = None, self.currentDirectory
-					else:
-						self.currentDirectory = previousDirectory
-						ret = None, None
-				except ExpatError, e:
-					self.currentDirectory = previousDirectory
-					self.update()
-					ret = None, self.currentDirectory
+				ret = self.changeDirectory(self.getCurrent()[0][0])
 			else:
 				ret = self.getCurrent()[0][0], self.getCurrent()[1][7]
 		else:
