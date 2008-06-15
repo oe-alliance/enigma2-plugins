@@ -23,7 +23,7 @@ from Tools.LoadPixmap import LoadPixmap
 from VlcServerConfig import VlcServerConfig
 from VlcServerConfig import VlcServerConfigScreen
 from VlcMediaList import VlcMediaListScreen
-from VlcServerConfig import vlcPluginInfo,_
+from VlcServerConfig import vlcPluginInfo, _
 
 def VlcServerListEntry(vlcServer):
 	res = [ vlcServer ]
@@ -129,6 +129,8 @@ class VlcServerListScreen(Screen):
 		if result:
 			self.vlcServerConfig.save(server)
 			self.updateServerlist()
+		else:
+			self.vlcServerConfig.cancel(server)
 
 	def up(self):
 		self.serverlist.up()
