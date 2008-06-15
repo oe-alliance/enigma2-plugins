@@ -39,7 +39,6 @@ class ConfigMutable(ConfigElement):
 		if self.configElementDict.has_key(defaultKey):
 			self.currentConfig = self.configElementDict[defaultKey]
 			self.currentKey = defaultKey
-			self.defaultConfig = self.currentConfig
 			self.defaultKey = self.currentKey
 
 	def addConfigElement(self, key, configElement):
@@ -79,13 +78,11 @@ class ConfigMutable(ConfigElement):
 
 	def save(self):
 		self.currentConfig.save()
-		self.defaultConfig = self.currentConfig
 		self.defaultKey = self.currentKey
 		self.saved_value = self.currentConfig.saved_value
 
 	def cancel(self):
-		self.currentConfig = self.defaultConfig
-		self.currentKey = self.defaultKey
+		self.setAsCurrent(self.defaultKey)
 		self.load()
 		
 	def isChanged(self):
@@ -208,6 +205,11 @@ class VlcServerConfig():
 		server.getCfg().save()
 		self.__save()
 
+	# Edit has been canceled
+	def cancel(self, server):
+		for element in server.getCfg().dict().values():
+			element.cancel()
+
 	def getServerlist(self):
 		return self.serverlist
 
@@ -290,6 +292,4 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		self.close(True, self.server)
 
 	def keyCancel(self):
-		for x in self["config"].list:
-			x[1].cancel()
 		self.close(False, self.server)
