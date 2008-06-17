@@ -10,59 +10,6 @@ def parseConfig(configuration, list, version = None, uniqueTimerId = 0):
 		# Increment uniqueTimerId
 		uniqueTimerId += 1
 
-		# Read out match
-		match = timer.getAttribute("match").encode("UTF-8")
-		if not match:
-			print '[AutoTimer] Erroneous config is missing attribute "match", skipping entry'
-			continue
-
-		# Read out name
-		name = timer.getAttribute("name").encode("UTF-8")
-		if not name:
-			print '[AutoTimer] Timer is missing attribute "name", defaulting to match'
-			name = match
-
-		# Read out enabled
-		enabled = timer.getAttribute("enabled") or "yes"
-		if enabled == "no":
-			enabled = False
-		elif enabled == "yes":
-			enabled = True
-		else:
-			print '[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', disabling'
-			enabled = False
-
-		# Finally append timer
-		list.append(AutoTimerComponent(
-				uniqueTimerId,
-				name,
-				match,
-				enabled,
-				timespan = timetuple,
-				services = servicelist,
-				offset = offset,
-				afterevent = afterevent,
-				exclude = excludes,
-				include = includes,
-				maxduration = maxlen,
-				destination = destination,
-				matchCount = counter,
-				matchLeft = counterLeft,
-				matchLimit = counterLimit,
-				matchFormatString = counterFormat,
-				lastBegin = lastBegin,
-				justplay = justplay,
-				avoidDuplicateDescription = avoidDuplicateDescription,
-				bouquets = bouquets,
-				tags = tags
-		))
-
-def parseConfig_v321(configuration, list, uniqueTimerId = 0):
-	# Iterate Timers
-	for timer in configuration.getElementsByTagName("timer"):
-		# Increment uniqueTimerId
-		uniqueTimerId += 1
-
 		# Get name (V2+)
 		if timer.hasAttribute("name"):
 			name = timer.getAttribute("name").encode("UTF-8")
