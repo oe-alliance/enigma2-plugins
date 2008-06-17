@@ -6,6 +6,8 @@ from RSSFeed import BaseFeed, UniversalFeed
 from twisted.web.client import getPage
 from xml.dom.minidom import parseString as minidom_parseString
 
+NOTIFICATIONID = 'SimpleRSSUpdateNotification'
+
 class RSSPoller:
 	"""Keeps all Feed and takes care of (automatic) updates"""
 
@@ -136,10 +138,10 @@ class RSSPoller:
 
 					from Tools.Notifications import AddNotificationWithID, RemovePopup
 
-					RemovePopup('SimpleRSSUpdateNotification')
+					RemovePopup(NOTIFICATIONID)
 
 					AddNotificationWithID(
-						'SimpleRSSUpdateNotification',
+						NOTIFICATIONID,
 						RSSFeedView,
 						self.newItemFeed,
 						newItems = True
@@ -152,7 +154,7 @@ class RSSPoller:
 						_("Received %d new news item(s).") % (len(self.newItemFeed.history)),
 						MessageBox.TYPE_INFO,
 						5,
-						'SimpleRSSUpdateNotification'
+						NOTIFICATIONID
 					)
 			# No new Items
 			else:
@@ -162,8 +164,24 @@ class RSSPoller:
 			self.poll_timer.startLongTimer(config.plugins.simpleRSS.interval.value*60)
 		# It's updating-time
 		else:
-			# Id is 0 -> empty out new items
-			if self.current_feed == 0:
+			# Assume we're cleaning history if current feed is 0
+			clearHistory = self.current_feed == 0
+			if config.plugins.simpleRSS.update_notification.value != "none":
+				from Tools.Notifications import current_notifications, notifications
+				for x in current_notifications:
+					if x[0] == NOTIFICATIONID:
+						print "[SimpleRSS] timer triggered while preview on screen, rescheduling"
+						self.poll_timer.start(10000, 1)
+						return
+
+				if clearHistory:
+					for x in notifications:
+						if x[4] and x[4] == NOTIFICATIONID:
+							print "[SimpleRSS] wont wipe history because it was never read"
+							clearHistory = False
+							break
+
+			if clearHistory:
 				del self.newItemFeed.history[:]
 
 			# Feed supposed to autoupdate
