@@ -1,5 +1,6 @@
 from Components.Sources.Source import Source
 from Components.Sources.ServiceList import ServiceList
+from Screens.ChannelSelection import service_types_tv
 from enigma import eServiceReference
 
 class ServiceListRecursive( Source ):
@@ -12,7 +13,7 @@ class ServiceListRecursive( Source ):
         self.func = func
         self.servicelist = {}
         self.xml = ""
-        self.command = eServiceReference('1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
+        self.command = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
     
     def handleCommand(self,cmd):
         self.command = eServiceReference(cmd)
