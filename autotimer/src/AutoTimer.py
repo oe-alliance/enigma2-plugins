@@ -77,6 +77,12 @@ class AutoTimer:
 		self.timers = []
 		self.configMtime = -1
 		self.uniqueTimerId = 0
+		self.defaultTimer = AutoTimerComponent(
+			0,		# Id
+			"",		# Name
+			"",		# Match
+			True 	# Enabled
+		)
 
 	def readXml(self):
 		# Abort if no config found
