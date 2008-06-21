@@ -1,7 +1,7 @@
 from enigma import eDVBVolumecontrol #this is not nice
 from Components.Sources.Source import Source
 from GlobalActions import globalActionMap
-from mytest import VolumeControl
+from Components.VolumeControl import VolumeControl
 
 class Volume(Source):
         
@@ -39,7 +39,7 @@ class Volume(Source):
                     targetvol = 100
                 if targetvol<0:
                     targetvol = 0
-                # because we can not set a fix volume in mytest.VolumeControl, we have to do in manualy here
+                # because we can not set a fix volume in Components.VolumeControl.VolumeControl, we have to do in manualy here
                 self.volctrl.setVolume(targetvol,targetvol) 
                 #self.volcontrol.volumeDialog.setValue(targetvol)
                 #self.volcontrol.volumeDialog.show()
