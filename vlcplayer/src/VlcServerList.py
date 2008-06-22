@@ -10,26 +10,25 @@
 #===============================================================================
 
 
-from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
-from Components.config import config
-from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
-from Components.Label import Label
 from Components.Button import Button
+from Components.Label import Label
+from Components.MenuList import MenuList
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
-
+from VlcMediaList import VlcMediaListScreen
 from VlcServerConfig import VlcServerConfig
 from VlcServerConfig import VlcServerConfigScreen
-from VlcMediaList import VlcMediaListScreen
-from VlcServerConfig import vlcPluginInfo, _
+from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
+from . import _
 
 def VlcServerListEntry(vlcServer):
 	res = [ vlcServer ]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, vlcServer.getName()))
 
-	png = LoadPixmap(vlcPluginInfo.pluginPath + "/vlc.png")
+	png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/vlc.png"))
 	if png is not None:
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 2, 20, 20, png))
 
@@ -76,7 +75,7 @@ class VlcServerListScreen(Screen):
 		self.serverlist = VlcServerList()
 		self.vlcServerConfig = VlcServerConfig()
 
-		self["serverlabel"] = Label("List of known VLC-Server")
+		self["serverlabel"] = Label(_("List of known VLC-Servers"))
 		self["serverlist"] = self.serverlist
 		self["key_red"] = Button(_("delete server"))
 		self["key_green"] = Button(_("add server"))

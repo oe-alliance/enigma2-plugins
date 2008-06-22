@@ -22,7 +22,7 @@ from pyexpat import ExpatError
 from VlcFileList import VlcFileList
 from VlcPlayList import VlcPlayList
 from VlcPlayer import VlcPlayer
-from VlcServerConfig import _
+from . import _
 
 
 class VlcMediaListScreen(Screen):
@@ -39,8 +39,8 @@ class VlcMediaListScreen(Screen):
 			<ePixmap size="551,325" alphatest="on" position="5,30" pixmap="skin_default/border_epg.png" />
 			<widget size="320,25" alphatest="on" position="5,10" zPosition="1" name="filelist_button_sel" pixmap="skin_default/epg_now.png" />
 			<widget size="320,25" alphatest="on" position="5,10" zPosition="1" name="playlist_button_sel" pixmap="skin_default/epg_next.png" />
-			<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="5,10" zPosition="2" name="filelist_text" halign="center" font="Regular;18" text="Filelist" />
-			<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="111,10" zPosition="2" name="playlist_text" halign="center" font="Regular;18" text="Playlist" />
+			<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="5,10" zPosition="2" name="filelist_text" halign="center" font="Regular;18" />
+			<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="111,10" zPosition="2" name="playlist_text" halign="center" font="Regular;18" />
 			<widget size="540,320" scrollbarMode="showOnDemand" position="11,35" name="filelist" />
 			<widget size="540,320" scrollbarMode="showOnDemand" position="11,35" name="playlist" />
 		</screen>"""
@@ -60,8 +60,8 @@ class VlcMediaListScreen(Screen):
 		self["filelist_button_sel"] = Pixmap()
 		self["playlist_button_sel"] = Pixmap()
 		self["more_button_sel"] = Pixmap()
-		self["filelist_text"] = Label()
-		self["playlist_text"] = Label()
+		self["filelist_text"] = Label(_("Filelist"))
+		self["playlist_text"] = Label(_("Playlist"))
 		self["server_name"] = Label(server.getName())
 		self["current_dir"] = Label()
 		
