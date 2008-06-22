@@ -229,6 +229,7 @@ class Timer( Source):
         if param['description'] is not None:
             print "description1 ",param['description']
             description = unescape(param['description'])#.encode("UTF-16LE")#.decode('utf-8')
+            description = description.replace("\n"," ") # if a \n is in the timedescription, the resulting .meta breacks
             print "description2 ",description
         else: 
             description = ""
@@ -330,6 +331,7 @@ class Timer( Source):
             
             if param['description'] is not None:
                 description = param['description']
+                description = description.replace("\n"," ") # if a \n is in the timedescription, the resulting .meta breacks
             else: 
                 description = ""
 
