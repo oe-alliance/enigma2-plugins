@@ -10,27 +10,23 @@
 #===============================================================================
 
 
-from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-from Components.config import config
-from Components.config import ConfigElement
-from Components.config import ConfigSubsection
-from Components.config import ConfigSubList
-from Components.config import ConfigInteger
-from Components.config import ConfigText
-from Components.config import ConfigIP
-from Components.config import ConfigSelection
-from Components.config import ConfigYesNo
-from Components.config import configfile
-from Components.config import getConfigListEntry
-from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Components.Button import Button
-
+from Components.ConfigList import ConfigListScreen
+from Components.config import ConfigElement
+from Components.config import ConfigIP
+from Components.config import ConfigInteger
+from Components.config import ConfigSelection
+from Components.config import ConfigSubList
+from Components.config import ConfigSubsection
+from Components.config import ConfigText
+from Components.config import ConfigYesNo
+from Components.config import config
+from Components.config import configfile
+from Components.config import getConfigListEntry
+from Screens.Screen import Screen
 from VlcServer import VlcServer
-
-import gettext
-
+from . import _
 
 class ConfigMutable(ConfigElement):
 	def __init__(self, configElementDict, defaultKey):
@@ -125,34 +121,12 @@ class ConfigMutable(ConfigElement):
 	def getMulti(self, selected):
 		return self.currentConfig.getMulti(selected)
 
-	def onSelect(self, session):
-		self.currentConfig.onSelect(session)
-
-	def onDeselect(self, session):
-		self.currentConfig.onDeselect(session)
-
-
 class ConfigSelectionExtended(ConfigSelection):
 	def __init__(self, choices, default = None):
 		ConfigSelection.__init__(self, choices, default)
 
 	def deleteNotifier(self, notifier):
 		self.notifiers.remove(notifier)
-
-
-def _(txt):
-	t = gettext.dgettext("VlcPlayer", txt)
-	if t == txt:
-		print "[VLC] fallback to default translation for", txt
-		t = gettext.gettext(txt)
-	return t
-
-
-class VlcPluginInfo():
-	def __init__(self):
-		pass
-
-vlcPluginInfo = VlcPluginInfo()
 
 
 class VlcServerConfig():
@@ -183,8 +157,8 @@ class VlcServerConfig():
 		newServerConfigSubsection.audiobitrate = ConfigInteger(128, (64, 320))
 		newServerConfigSubsection.samplerate = ConfigSelection({"0":"as Input", "44100": "44100", "48000": "48000"}, "0")
 		newServerConfigSubsection.audiochannels = ConfigInteger(2, (1, 9))
-		newServerConfigSubsection.videowidth = ConfigSelection(["352", "704", "720"])
-		newServerConfigSubsection.videoheight = ConfigSelection(["288", "576"])
+		newServerConfigSubsection.videowidth = ConfigSelection(["352", "704", "720", "1280", "1920"])
+		newServerConfigSubsection.videoheight = ConfigSelection(["288", "576", "720", "1080"])
 		newServerConfigSubsection.framespersecond = ConfigInteger(25, (1, 99))
 		newServerConfigSubsection.aspectratio = ConfigSelection(["none", "16:9", "4:3"], "none")
 		newServerConfigSubsection.soverlay = ConfigYesNo()
