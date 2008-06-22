@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2.plugins.vlcplayer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-11 18:29+0200\n"
+"POT-Creation-Date: 2008-06-22 14:37+0200\n"
 "PO-Revision-Date: 2008-06-08 19:22+0200\n"
 "Last-Translator: Alex Lätsch <info@laetsch.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -16,177 +16,143 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/VlcMediaList.py:56
-#: ../src/VlcMediaList.py:114
-msgid "filter off"
-msgstr "Filter aus"
+msgid "Audio Bitrate"
+msgstr "Audio Bitrate"
 
-#: ../src/VlcMediaList.py:57
-msgid "refresh"
-msgstr "aktualisieren"
+msgid "Audio Channels"
+msgstr "Anzahl Audiokanäle"
 
-#: ../src/VlcMediaList.py:59
-msgid "play DVD"
+msgid "Audio Codec"
+msgstr "Audio Codec"
+
+msgid "Audio Samplerate"
+msgstr "Audio Samplerate"
+
+msgid "Cancel"
 msgstr ""
 
-#: ../src/VlcMediaList.py:117
-msgid "filter on"
-msgstr "Filter an"
+msgid "Correct aspect ratio to"
+msgstr "Seitenverhältnis anpassen zu"
 
-#: ../src/VlcMediaList.py:122
-#, python-format
-msgid "Error updating filelist from server %s:\n"
-"%s"
-msgstr "Fehler beim holen der Filelist vom Server %s:\n"
-"%s"
+msgid "DVD Device (leave empty for default)"
+msgstr "DVD Laufwerk (leer für default)"
 
-#: ../src/VlcMediaList.py:157
-#, python-format
-msgid "Error loading playlist %s into server %s:\n"
-"%s"
-msgstr "Fehler beim laden der Playlist %s auf den Server %s:\n"
-"%s"
+msgid "Enter VLC-Server as FQDN or IP-Address"
+msgstr "VLC-Server mit Namen oder IP-Adresse"
 
-#: ../src/VlcMediaList.py:173
-#: ../src/VlcMediaList.py:189
-#: ../src/VlcMediaList.py:194
-#, python-format
-msgid "Error loading playlist into server %s:\n"
-"%s"
-msgstr "Fehler beim Laden der Playlist auf den Server %s:\n"
-"%s"
-
-#: ../src/VlcMediaList.py:179
 #, python-format
 msgid "Error loading filelist into server %s:\n"
 "%s"
 msgstr "Fehler beim Laden der Filelist auf den Server %s:\n"
 "%s"
 
-#: ../src/VlcMediaList.py:213
-msgid "show playlist"
-msgstr "zeige Playliste"
+#, python-format
+msgid "Error loading playlist %s into server %s:\n"
+"%s"
+msgstr "Fehler beim laden der Playlist %s auf den Server %s:\n"
+"%s"
 
-#: ../src/VlcMediaList.py:223
-msgid "show filelist"
-msgstr "zeige Fileliste"
+#, python-format
+msgid "Error loading playlist into server %s:\n"
+"%s"
+msgstr "Fehler beim Laden der Playlist auf den Server %s:\n"
+"%s"
 
-#: ../src/VlcPlayer.py:314
-msgid "No valid Enigma-Service to play a VLC-Stream\n"
-"Check your installation and try again!"
-msgstr "Kein gültiger Enima-Service zum abspielen eines VLC-Stream\n"
-"Bitte Installation überprüfen."
+#, python-format
+msgid "Error updating filelist from server %s:\n"
+"%s"
+msgstr "Fehler beim holen der Filelist vom Server %s:\n"
+"%s"
 
-#: ../src/VlcPlayer.py:323
-#: ../src/VlcPlayer.py:358
-#: ../src/VlcPlayer.py:385
 #, python-format
 msgid "Error with VLC server:\n"
 "%s"
 msgstr "Fehler beim VLC server:\n"
 "%s"
 
-#: ../src/VlcPlayer.py:435
-msgid "No more files in this directory"
-msgstr "Keine weiteren Dateien in diesem Verzeichnis"
+msgid "Filelist"
+msgstr "Filelist"
 
-#: ../src/VlcPlayer.py:456
-msgid "No previous file in this directory"
-msgstr "Keine vorhergehenden Dateien in diesem Verzeichnis"
-
-#: ../src/VlcServerConfig.py:135
-msgid "Cancel"
-msgstr "Abbruch"
-
-#: ../src/VlcServerConfig.py:136
-msgid "OK"
-msgstr ""
-
-#: ../src/VlcServerConfig.py:141
-msgid "Symbolic Servername"
-msgstr "Servername"
-
-#: ../src/VlcServerConfig.py:142
-msgid "Server IP"
-msgstr ""
-
-#: ../src/VlcServerConfig.py:143
 msgid "HTTP Port"
-msgstr ""
+msgstr "HTTP Port"
 
-#: ../src/VlcServerConfig.py:144
+msgid "List of known VLC-Servers"
+msgstr "Liste der verfügbaren VLC-Server"
+
 msgid "Movie Directory"
 msgstr "Film-Verzeichnis"
 
-#: ../src/VlcServerConfig.py:145
-msgid "DVD Device (leave empty for default)"
-msgstr "DVD Laufwerk (leer für default)"
+msgid "No more files in this directory"
+msgstr "Keine weiteren Dateien in diesem Verzeichnis"
 
-#: ../src/VlcServerConfig.py:147
-msgid "Transcode MPEG/DVD Video"
+msgid "No previous file in this directory"
+msgstr "Keine vorhergehenden Dateien in diesem Verzeichnis"
+
+msgid "No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+msgstr "Kein gültiger Enima-Service zum abspielen eines VLC-Stream\n"
+"Bitte Installation überprüfen."
+
+msgid "OK"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:148
-msgid "Video Codec"
-msgstr ""
+msgid "Playlist"
+msgstr "Playlist"
 
-#: ../src/VlcServerConfig.py:149
-msgid "Video Bitrate"
-msgstr ""
+msgid "Really delete this Server?"
+msgstr "Diesen Server wirklich löschen?"
 
-#: ../src/VlcServerConfig.py:150
-msgid "Video Width"
-msgstr "Video Breite"
+msgid "Server Address"
+msgstr "Server Adresse"
 
-#: ../src/VlcServerConfig.py:151
-msgid "Video Height"
-msgstr "Video Höhe"
-
-#: ../src/VlcServerConfig.py:153
-msgid "Correct aspect ratio to"
-msgstr "Seitenverhältnis anpassen zu"
-
-#: ../src/VlcServerConfig.py:154
 msgid "Subtitle overlay"
 msgstr "Untertitel einblenden"
 
-#: ../src/VlcServerConfig.py:156
+msgid "Symbolic Servername"
+msgstr "Servername"
+
 msgid "Transcode MPEG/DVD Audio"
-msgstr ""
+msgstr "Transcode MPEG/DVD Audio"
 
-#: ../src/VlcServerConfig.py:157
-msgid "Audio Codec"
-msgstr ""
+msgid "Transcode MPEG/DVD Video"
+msgstr "Transcode MPEG/DVD Video"
 
-#: ../src/VlcServerConfig.py:158
-msgid "Audio Bitrate"
-msgstr ""
+msgid "Video Bitrate"
+msgstr "Video Bitrate"
 
-#: ../src/VlcServerConfig.py:159
-msgid "Audio Samplerate"
-msgstr ""
+msgid "Video Codec"
+msgstr "Video Codec"
 
-#: ../src/VlcServerConfig.py:160
-msgid "Audio Channels"
-msgstr "Anzahl Audiokanäle"
+msgid "Video Height"
+msgstr "Video Höhe"
 
-#: ../src/VlcServerList.py:81
-msgid "List of known VLC-Server"
-msgstr "Liste der VLC Server"
+msgid "Video Width"
+msgstr "Video Breite"
 
-#: ../src/VlcServerList.py:83
-msgid "delete server"
-msgstr "löschen"
-
-#: ../src/VlcServerList.py:84
 msgid "add server"
 msgstr "neu"
 
-#: ../src/VlcServerList.py:85
+msgid "delete server"
+msgstr "löschen"
+
 msgid "edit server"
 msgstr "ändern"
 
-#: ../src/VlcServerList.py:119
-msgid "Really delete this Server?"
-msgstr "Diesen Server wirklich löschen?"
+msgid "filter off"
+msgstr "Filter aus"
+
+msgid "filter on"
+msgstr "Filter an"
+
+msgid "play DVD"
+msgstr "starte DVD"
+
+msgid "refresh"
+msgstr "aktualisieren"
+
+msgid "show filelist"
+msgstr "zeige Filelist"
+
+msgid "show playlist"
+msgstr "zeige Playlist"
 
