@@ -16,8 +16,15 @@ import os,gettext
 def localeInit():
 	lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
 	os.environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	#gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-	#gettext.textdomain("enigma2")
+	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
+	gettext.textdomain("enigma2")
 	gettext.bindtextdomain("VlcPlayer", resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/locale"))
+
+def _(txt):
+	t = gettext.dgettext("VlcPlayer", txt)
+	if t == txt:
+		print "[VLC] fallback to default translation for", txt
+		t = gettext.gettext(txt)
+	return t
 
 localeInit()
