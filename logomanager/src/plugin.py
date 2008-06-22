@@ -100,8 +100,8 @@ class LogoManagerScreen(Screen):
         """ opens up the Main Menu """
         menu = []
         menu.append(("install selected Logo as ...",self.action_install))
-        menu.append(("show aktive Logos",self.setlist_to_current))
-        menu.append(("show avaiable Logos",self.setlist_to_avaiable))
+        menu.append(("show active Logos",self.setlist_to_current))
+        menu.append(("show available Logos",self.setlist_to_avaiable))
         menu.append(("reset all Logos to default",self.restoreOriginal))
         menu.append(("open configuration",self.openConfig))
         self.session.openWithCallback(self.selectedMenu,ChoiceBox,_("please select a option"),menu)
