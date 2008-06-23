@@ -1,8 +1,12 @@
-servicets.so: servicets.cpp servicets.h
+OBJS := servicets.cpp
+
+-include $(OBJS:.cpp=.d)
+
+servicets.so:
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(ENIGMA2_CFLAGS) $(SIGC_CFLAGS) \
-	$(PYTHON_CPPFLAGS) $(DEFS) -I. -Wall -W servicets.cpp -shared -fPIC \
+	$(PYTHON_CPPFLAGS) $(DEFS) -I. -Wall -W $(OBJS) -shared -fPIC \
 	-Wl,-soname,servicets.so -o servicets.so $(LDFLAGS)
 
 all: servicets.so
 
-CLEANFILES = servicets.so
+CLEANFILES = servicets.so servicets.d
