@@ -629,8 +629,7 @@ def renderPage(stream, path, req, session):
 	# in this case, don't finish yet, don't cleanup yet,
 	# but instead do that when the client disconnects.
 	if finish:
-		handler.cleanup()
-		stream.finish()
+		streamFinish(handler, stream)
 	else:
 		# ok.
 		# you *need* something which constantly sends something in a regular interval,
@@ -638,4 +637,10 @@ def renderPage(stream, path, req, session):
 		# i agree that this "ping" sucks terrible, so better be sure to have something 
 		# similar. A "CurrentTime" is fine. Or anything that creates *some* output.
 		ping(stream)
-		stream.closed_callback = handler.cleanup
+		stream.closed_callback = streamFinish(handler, stream)
+
+def streamFinish(handler, stream):
+	handler.cleanup()
+	stream.finish()
+	del handler
+	del stream
