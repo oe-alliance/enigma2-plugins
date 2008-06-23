@@ -253,15 +253,15 @@ RESULT eServiceTS::start()
 {
 	ePtr<eDVBResourceManager> rmgr;
 	eDVBResourceManager::getInstance(rmgr);
-	if (rmgr->allocateDemux(NULL, m_decodedemux, iDVBChannel::capDecode) != 0) {
+	eDVBChannel dvbChannel(rmgr, 0);
+	if (dvbChannel.getDemux(m_decodedemux, iDVBChannel::capDecode) != 0) {
 		eDebug("Cannot allocate decode-demux");
 		return 1;
 	}
-	if (m_decodedemux->get().getMPEGDecoder(m_decoder, 1) != 0) {
+	if (m_decodedemux->getMPEGDecoder(m_decoder, 1) != 0) {
 		eDebug("Cannot allocate MPEGDecoder");
 		return 1;
 	}
-	m_decodedemux->get().setSourcePVR(0);
 	m_decoder->setVideoPID(m_vpid, eDVBVideo::MPEG2);
 	m_decoder->setAudioPID(m_apid, eDVBAudio::aMPEG);
 	m_streamthread = new eStreamThread();
@@ -280,7 +280,7 @@ RESULT eServiceTS::stop()
 		return -1;
 	printf("TS: %s stop\n", m_filename.c_str());
 	m_streamthread->stop();
-	m_decodedemux->get().flush();
+	m_decodedemux->flush();
 	m_state = stStopped;
 	m_audioInfo = 0;
 	return 0;
@@ -291,7 +291,7 @@ void eServiceTS::recv_event(int evt)
 	eDebug("eServiceTS::recv_event: %d", evt);
 	switch (evt) {
 	case eStreamThread::evtEOS:
-		m_decodedemux->get().flush();
+		m_decodedemux->flush();
 		m_state = stStopped;
 		m_event((iPlayableService*)this, evEOF);
 		break;
@@ -351,7 +351,7 @@ RESULT eServiceTS::unpause()
 		::close(srcfd);
 		return 1;
 	}
-	m_decodedemux->get().flush();
+	m_decodedemux->flush();
 	m_streamthread->start(srcfd, destfd);
 	m_decoder->unfreeze();
 	return 0;

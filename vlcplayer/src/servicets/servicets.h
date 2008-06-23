@@ -113,7 +113,7 @@ private:
 	std::string m_filename;
 	int m_vpid, m_apid;
 	int m_srcfd, m_destfd;
-	ePtr<eDVBAllocatedDemux> m_decodedemux;
+	ePtr<iDVBDemux> m_decodedemux;
 	ePtr<iTSMPEGDecoder> m_decoder;
 	ePtr<eStreamThread> m_streamthread;
 	ePtr<TSAudioInfo> m_audioInfo;
