@@ -637,7 +637,7 @@ def renderPage(stream, path, req, session):
 		# i agree that this "ping" sucks terrible, so better be sure to have something 
 		# similar. A "CurrentTime" is fine. Or anything that creates *some* output.
 		ping(stream)
-		stream.closed_callback = streamFinish(handler, stream)
+		stream.closed_callback = lambda : streamFinish(handler, stream)
 
 def streamFinish(handler, stream):
 	handler.cleanup()
