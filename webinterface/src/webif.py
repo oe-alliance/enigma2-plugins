@@ -123,7 +123,8 @@ class ServiceWebScreen(WebScreen):
 		pc = config.ParentalControl.configured.value
 		if pc:
 			config.ParentalControl.configured.value = False
-		self.session.nav.playService(reftozap)
+		if config.plugins.Webinterface.allowzapping.value:
+			self.session.nav.playService(reftozap)
 		if pc:
 			config.ParentalControl.configured.value = pc
 		"""

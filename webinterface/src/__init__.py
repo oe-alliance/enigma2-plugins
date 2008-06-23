@@ -14,6 +14,7 @@ __version__ = "0.99"
 
 config.plugins.Webinterface = ConfigSubsection()
 config.plugins.Webinterface.enable = ConfigYesNo(default = True)
+config.plugins.Webinterface.allowzapping = ConfigYesNo(default = True)
 config.plugins.Webinterface.includehdd = ConfigYesNo(default = False)
 config.plugins.Webinterface.autowritetimer = ConfigYesNo(default = False)
 config.plugins.Webinterface.loadmovielength = ConfigYesNo(default = False)
