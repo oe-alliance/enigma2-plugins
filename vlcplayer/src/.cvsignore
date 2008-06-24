@@ -1,4 +1,3 @@
+*.kdev*
 *.pyc
 *~
-*.so
-Make
