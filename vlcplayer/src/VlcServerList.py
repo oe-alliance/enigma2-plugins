@@ -93,7 +93,7 @@ class VlcServerListScreen(Screen):
 			 "left": 	self.left,
 			 "right": 	self.right,
 			 "ok":		self.ok,
-			 }, -1)
+            }, -1)
 
 		self.onLayoutFinish.append(self.updateServerlist)
 
