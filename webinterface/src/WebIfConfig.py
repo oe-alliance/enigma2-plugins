@@ -20,8 +20,8 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
             <widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
             
             <widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18"/> 
-            <widget name="key_yellow" position="140,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18"/> 
-            <widget name="key_green" position="280,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18"/>
+            <widget name="key_green" position="140,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18"/> 
+            <widget name="key_yellow" position="280,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18"/>
             
             <ePixmap name="red"    position="0,360"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
             <ePixmap name="green"  position="140,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
@@ -42,13 +42,13 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
             
         ConfigListScreen.__init__(self, self.list)
         self["key_red"] = Button(_("Cancel"))
-        self["key_yellow"] = Button(_("Interfaces"))
         self["key_green"] = Button(_("Ok"))
+        self["key_yellow"] = Button(_("Interfaces"))
         self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
         {
-            "yellow": self.openIfacesConfig,
-            "green": self.save,
             "red": self.cancel,
+            "green": self.save,
+            "yellow": self.openIfacesConfig,
             "save": self.save,
             "cancel": self.cancel,
             "ok": self.save,
