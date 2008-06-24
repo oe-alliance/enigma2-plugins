@@ -196,7 +196,7 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 
 
 class VlcPlayerSummary(Screen):
-	skin = """ 
+	skin = """
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="132,64">
 		<widget source="session.CurrentService" render="Label" position="6,0" size="120,25" font="Regular;14" halign="center" valign="center" >
 			<convert type="ServiceName">Name</convert>
@@ -299,6 +299,8 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		self.stop()
 
 	def playfile(self, path, name):
+		if self.state != self.STATE_IDLE:
+			self.stopCurrent()
 		self.filename = path
 		self.vlcservice.setName(name)
 		self.play()
@@ -307,34 +309,35 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		if self.state == self.STATE_PAUSED:
 			self.unpause()
 			return
-		if self.state == self.STATE_IDLE:
-			print "[VLC] setupStream: " + self.filename
-			if ENIGMA_SERVICE_ID == 0:
-				self.hide()
-				self.session.open(
-					MessageBox, _("No valid Enigma-Service to play a VLC-Stream\nCheck your installation and try again!"), MessageBox.TYPE_ERROR)
-				self.close()
-				return
-			try:
-				url = self.server.playFile(self.filename, DEFAULT_VIDEO_PID, DEFAULT_AUDIO_PID)
-				print "[VLC] url: " + url
-			except Exception, e:
-				self.hide()
-				self.session.open(
-					MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR)
-				self.close()
-				return
-			if url is not None:
-				sref = eServiceReference(ENIGMA_SERVICE_ID, 0, url)
-				print "sref valid=", sref.valid()
-				sref.setData(0, DEFAULT_VIDEO_PID)
-				sref.setData(1, DEFAULT_AUDIO_PID)
-				self.session.nav.playService(sref)
-				self.state = self.STATE_PLAYING
-				if self.shown:
-					self.__setHideTimer()
-		self.vlcservice.setServer(self.server)
-		self.vlcservice.refresh()
+		print "[VLC] setupStream: " + self.filename
+		if ENIGMA_SERVICE_ID == 0:
+			self.hide()
+			self.session.open(
+					MessageBox, _("No valid Enigma-Service to play a VLC-Stream\nCheck your installation and try again!"), MessageBox.TYPE_ERROR
+			)
+			self.close()
+			return
+		try:
+			url = self.server.playFile(self.filename, DEFAULT_VIDEO_PID, DEFAULT_AUDIO_PID)
+			print "[VLC] url: " + url
+		except Exception, e:
+			self.hide()
+			self.session.open(
+					MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR
+			)
+			self.close()
+			return
+		if url is not None:
+			sref = eServiceReference(ENIGMA_SERVICE_ID, 0, url)
+			print "sref valid=", sref.valid()
+			sref.setData(0, DEFAULT_VIDEO_PID)
+			sref.setData(1, DEFAULT_AUDIO_PID)
+			self.session.nav.playService(sref)
+			self.state = self.STATE_PLAYING
+			if self.shown:
+				self.__setHideTimer()
+			self.vlcservice.setServer(self.server)
+			self.vlcservice.refresh()
 
 	def pause(self):
 		print "[VLC] pause"
@@ -356,7 +359,8 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			self.server.play()
 		except Exception, e:
 			self.session.open(
-				MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR)
+				MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR
+			)
 			self.stop()
 			return
 		if STOP_BEFORE_UNPAUSE:
@@ -383,7 +387,8 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			self.server.deleteCurrentTree()
 		except Exception, e:
 			self.session.open(
-				MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR)
+				MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR
+			)
 		self.state = self.STATE_IDLE
 		self.vlcservice.setServer(None)
 		self.vlcservice.refresh()
@@ -417,8 +422,6 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 
 	def playNextFile(self):
 		print "[VLC] playNextFile"
-		if self.state != self.STATE_IDLE:
-			self.stopCurrent()
 		if isDvdUrl(self.filename):
 			url, track, chapter = splitDvdUrl(self.filename)
 			if track is None:
@@ -435,7 +438,9 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		else:
 			media, name = self.currentList.getNextFile()
 			if media is None:
-				self.session.open(MessageBox, _("No more files in this directory"), MessageBox.TYPE_INFO)
+				self.session.open(
+						MessageBox, _("No more files in this directory"), MessageBox.TYPE_INFO
+				)
 				self.close()
 			else:
 				self.playfile(media, name)
@@ -443,23 +448,25 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 
 	def playPrevFile(self):
 		print "[VLC] playPrevFile"
-		if self.state != self.STATE_IDLE:
-			self.stopCurrent()
 		if isDvdUrl(self.filename):
 			url, track, chapter = splitDvdUrl(self.filename)
 			if track is None:
 				track = 1
 			else:
 				track = int(track)
-			if chapter is not None and int(chapter) > 2:
+			if chapter is not None and int(chapter) > 1:
 				chapter = int(chapter) - 1
+			else:
+				chapter = 1
 			url = "%s@%d:%d" % (url, track, chapter)
 			self.playfile(url, "DVD")
 			self.showInfobar()
 		else:
 			media, name = self.currentList.getPrevFile()
 			if media is None:
-				self.session.open(MessageBox, _("No previous file in this directory"), MessageBox.TYPE_INFO)
+				self.session.open(
+						MessageBox, _("No previous file in this directory"), MessageBox.TYPE_INFO
+					)
 				self.close()
 			else:
 				self.playfile(media, name)
@@ -500,6 +507,8 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			if track is not None and int(track) > 2:
 				track = int(track) - 1
 				url = "%s@%d" % (url, track)
+			else:
+				track = 1
 			self.playfile(url, "DVD")
 			self.showInfobar()
 		else:
