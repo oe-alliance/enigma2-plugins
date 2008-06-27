@@ -91,7 +91,7 @@ class About( Source):
             svfeinfo = None
 
         # Get Service Info
-        if svinfo is not None:
+        if self.session.nav.getCurrentlyPlayingServiceReference() is not None:
             list.append(svinfo.getInfoString(iServiceInformation.sProvider))
             
             aspect = svinfo.getInfo(iServiceInformation.sAspect)
@@ -118,6 +118,7 @@ class About( Source):
             list.append(svinfo.getInfo(iServiceInformation.sONID))
             list.append(svinfo.getInfo(iServiceInformation.sSID))
         else:
+            list.append("N/A")
             list.append("N/A")
             list.append("N/A")
             list.append("N/A")
