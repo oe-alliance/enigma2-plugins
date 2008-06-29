@@ -22,7 +22,6 @@ from Components.config import ConfigSubsection
 from Components.config import ConfigText
 from Components.config import ConfigYesNo
 from Components.config import config
-from Components.config import configfile
 from Components.config import getConfigListEntry
 from Screens.Screen import Screen
 from VlcServer import VlcServer
@@ -129,7 +128,7 @@ class ConfigSelectionExtended(ConfigSelection):
 		self.notifiers.remove(notifier)
 
 
-class VlcServerConfig():
+class __VlcServerConfig():
 	def __init__(self):
 		self.serverlist = []
 		config.plugins.vlcplayer = ConfigSubsection()
@@ -187,14 +186,21 @@ class VlcServerConfig():
 	def getServerlist(self):
 		return self.serverlist
 
+	def getServerByName(self, name):
+		for server in self.serverlist:
+			if server.getName() == name:
+				return server
+		return None
+
 	def __save(self):
 		config.plugins.vlcplayer.servercount.value = self.__getServerCount()
 		config.plugins.vlcplayer.servercount.save()
-		configfile.save()
 
 	def __getServerCount(self):
 		return len(config.plugins.vlcplayer.servers)
 
+
+vlcServerConfig = __VlcServerConfig()
 
 class VlcServerConfigScreen(Screen, ConfigListScreen):
 	skin = """
@@ -226,7 +232,7 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		self["key_blue"] = Button("")
 
 		cfglist = []
-		cfglist.append(getConfigListEntry(_("Symbolic Servername"), server.name()))
+		cfglist.append(getConfigListEntry(_("Server Profile Name"), server.name()))
 		cfglist.append(getConfigListEntry(_("Enter VLC-Server as FQDN or IP-Address"), server.addressType()))
 		self.hostConfigListEntry = getConfigListEntry(_("Server Address"), server.host())
 		cfglist.append(self.hostConfigListEntry)

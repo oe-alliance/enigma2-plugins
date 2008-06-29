@@ -142,8 +142,7 @@ class VlcMediaListScreen(Screen):
 		self.currentList.pageDown()
 
 	def play(self, media, name):
-		dlg = self.session.open(VlcPlayer, self.server, self.currentList)
-		dlg.playfile(media, name)
+		self.server.play(self, media, name, self.currentList)
 
 	def ok(self):
 		media, name = self.currentList.activate()

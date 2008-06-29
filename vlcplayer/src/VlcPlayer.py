@@ -216,7 +216,7 @@ class VlcPlayerSummary(Screen):
 	def __init__(self, session, parent):
 		Screen.__init__(self, session)
 		self.skinName = "InfoBarMoviePlayerSummary"
-
+		
 
 class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 	screen_timeout = 5000
@@ -356,7 +356,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		print "[VLC] unpause"
 		try:
 			self.server.seek("-2")
-			self.server.play()
+			self.server.unpause()
 		except Exception, e:
 			self.session.open(
 				MessageBox, _("Error with VLC server:\n%s" % e), MessageBox.TYPE_ERROR
@@ -436,15 +436,16 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			self.playfile(url, "DVD")
 			self.showInfobar()
 		else:
-			media, name = self.currentList.getNextFile()
-			if media is None:
-				self.session.open(
-						MessageBox, _("No more files in this directory"), MessageBox.TYPE_INFO
-				)
-				self.close()
-			else:
-				self.playfile(media, name)
-				self.showInfobar()
+			if self.currentList != None:
+				media, name = self.currentList.getNextFile()
+				if media is None:
+					self.session.open(
+							MessageBox, _("No more files in this directory"), MessageBox.TYPE_INFO
+					)
+					self.close()
+				else:
+					self.playfile(media, name)
+					self.showInfobar()
 
 	def playPrevFile(self):
 		print "[VLC] playPrevFile"
@@ -462,15 +463,16 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			self.playfile(url, "DVD")
 			self.showInfobar()
 		else:
-			media, name = self.currentList.getPrevFile()
-			if media is None:
-				self.session.open(
-						MessageBox, _("No previous file in this directory"), MessageBox.TYPE_INFO
+			if self.currentList != None:
+				media, name = self.currentList.getPrevFile()
+				if media is None:
+					self.session.open(
+							MessageBox, _("No previous file in this directory"), MessageBox.TYPE_INFO
 					)
-				self.close()
-			else:
-				self.playfile(media, name)
-				self.showInfobar()
+					self.close()
+				else:
+					self.playfile(media, name)
+					self.showInfobar()
 
 	def audioTracks(self):
 		return self.session.nav.getCurrentService() and self.session.nav.getCurrentService().audioTracks();

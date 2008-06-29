@@ -17,7 +17,7 @@ from random import randint, seed
 from urllib import urlencode
 from urllib import urlopen
 from xml.dom.minidom import parse
-from VlcPlayer import isDvdUrl
+from VlcPlayer import VlcPlayer, isDvdUrl
 
 seed()
 
@@ -205,6 +205,10 @@ class VlcServer:
 				return e
 		return None
 
+	def play(self, screen, media, name, currentList = None):
+		dlg = screen.session.open(VlcPlayer, self, currentList)
+		dlg.playfile(media, name)
+	
 	def playFile(self, filename, videoPid, audioPid):
 		streamName = "dream" + str(randint(0, maxint))
 		transcode = []
@@ -266,7 +270,7 @@ class VlcServer:
 			self.lastError = None
 		return "http://%s:%d/%s.ts" % (self.getHost(), self.getHttpPort(), streamName)
 
-	def play(self):
+	def unpause(self):
 		self.__xmlRequest("status", {"command": "pl_pause"})
 
 	def stop(self):

@@ -23,8 +23,10 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
+
 def main(session, **kwargs):
 	session.open(VlcServerListScreen)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(
