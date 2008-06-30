@@ -120,6 +120,7 @@ class ConfigMutable(ConfigElement):
 	def getMulti(self, selected):
 		return self.currentConfig.getMulti(selected)
 
+
 class ConfigSelectionExtended(ConfigSelection):
 	def __init__(self, choices, default = None):
 		ConfigSelection.__init__(self, choices, default)
@@ -134,6 +135,7 @@ class __VlcServerConfig():
 		config.plugins.vlcplayer = ConfigSubsection()
 		config.plugins.vlcplayer.servercount = ConfigInteger(0)
 		config.plugins.vlcplayer.servers = ConfigSubList()
+		config.plugins.vlcplayer.defaultserver = ConfigText("", False)
 		for servernum in range(0, config.plugins.vlcplayer.servercount.value):
 			self.new()
 
@@ -192,6 +194,13 @@ class __VlcServerConfig():
 				return server
 		return None
 
+	def getDefaultServer(self):
+		return self.getServerByName(config.plugins.vlcplayer.defaultserver.value)
+
+	def setAsDefault(self, defaultServer):
+		config.plugins.vlcplayer.defaultserver.value = defaultServer.getName()
+		config.plugins.vlcplayer.defaultserver.save()
+
 	def __save(self):
 		config.plugins.vlcplayer.servercount.value = self.__getServerCount()
 		config.plugins.vlcplayer.servercount.save()
@@ -201,6 +210,7 @@ class __VlcServerConfig():
 
 
 vlcServerConfig = __VlcServerConfig()
+
 
 class VlcServerConfigScreen(Screen, ConfigListScreen):
 	skin = """

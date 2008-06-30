@@ -14,6 +14,9 @@ from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
 
 from VlcServerList import VlcServerListScreen
+from VlcMediaList import VlcMediaListScreen
+from VlcServerConfig import vlcServerConfig
+
 import gettext
 
 def _(txt):
@@ -22,15 +25,42 @@ def _(txt):
 		print "[VLC] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
+	
+
+class __VlcManager():
+	def __init__(self, session):
+		print "[VLC] VlcManager"
+		self.session = session
+
+	def startSession(self):
+		defaultServer = vlcServerConfig.getDefaultServer()
+		if defaultServer is None:
+			self.openServerlist()
+		else:
+			self.openMedialist(defaultServer)
+		
+	def openServerlist(self):
+		print "[VLC] openServerlist"
+		self.session.openWithCallback(self.openMedialist, VlcServerListScreen)
+
+	def openMedialist(self, vlcServer):
+		print "[VLC] openMedialist"
+		if vlcServer is not None:
+			self.session.openWithCallback(self.medialistClosed, VlcMediaListScreen, vlcServer).keyUpdate()
+
+	def medialistClosed(self, proceed = False):
+		print "[VLC] medialistClosed"
+		if proceed:
+			self.openServerlist()
 
 
 def main(session, **kwargs):
-	session.open(VlcServerListScreen)
+	__VlcManager(session).startSession()
 
 
 def Plugins(**kwargs):
 	return PluginDescriptor(
 		name="VLC Video Player",
-		description="VLC Video Player",
+		description="A video streaming solution based on VLC",
 		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-		icon = "plugin.png", fnc = boundFunction(main))
+		icon = "plugin.png", fnc = main)

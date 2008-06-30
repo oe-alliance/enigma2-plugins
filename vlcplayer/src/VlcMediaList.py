@@ -55,7 +55,7 @@ class VlcMediaListScreen(Screen):
 		self["playlist"] = VlcPlayList(self.getPlaylistEntriesCB)
 		self["key_red"] = Button(_("filter off"))
 		self["key_green"] = Button(_("refresh"))
-		self["key_yellow"] = Button("")
+		self["key_yellow"] = Button(_("Serverlist"))
 		self["key_blue"] = Button(_("play DVD"))
 		self["filelist_button_sel"] = Pixmap()
 		self["playlist_button_sel"] = Pixmap()
@@ -68,9 +68,9 @@ class VlcMediaListScreen(Screen):
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
 			{
 			 "back": 	self.close,
-			 "red": 	self.keyFilter,
-			 "green":	self.update,
-			 "yellow":	self.switchLists,
+			 "red": 	self.keyToggleFilter,
+			 "green":	self.keyUpdate,
+			 "yellow":	self.keyOpenServerlist,
 			 "blue":	self.keyDvd,
 			 "up": 		self.up,
 			 "down": 	self.down,
@@ -96,8 +96,11 @@ class VlcMediaListScreen(Screen):
 				self.server.delete(id)
 		except Exception, e:
 			pass
+			
+	def close(self, proceed = False):
+		Screen.close(self, proceed)
 
-	def update(self):
+	def keyUpdate(self):
 		self.updateFilelist()
 		self.updatePlaylist()
 		if self.currentList == self["playlist"]:
@@ -111,7 +114,7 @@ class VlcMediaListScreen(Screen):
 	def updateFilelist(self):
 		self["filelist"].update()
 
-	def keyFilter(self):
+	def keyToggleFilter(self):
 		if self["filelist"].regex is None:
 			self["filelist"].changeRegex(self.defaultFilter)
 			self["key_red"].setText(_("filter off"))
@@ -128,6 +131,9 @@ class VlcMediaListScreen(Screen):
 
 	def keyDvd(self):
 		self.play("dvdsimple://" + self.server.getDvdPath(), "DVD")
+
+	def keyOpenServerlist(self):
+		self.close(True)
 
 	def up(self):
 		self.currentList.up()
@@ -212,7 +218,6 @@ class VlcMediaListScreen(Screen):
 		self["playlist"].hide()
 		self["playlist_button_sel"].hide()
 		self.currentList = self["filelist"]
-		self["key_yellow"].setText(_("show playlist"))
 
 	def switchToPlayList(self):
 		self["filelist"].selectionEnabled(0)
@@ -222,4 +227,3 @@ class VlcMediaListScreen(Screen):
 		self["playlist"].show()
 		self["playlist_button_sel"].show()
 		self.currentList = self["playlist"]
-		self["key_yellow"].setText(_("show filelist"))
