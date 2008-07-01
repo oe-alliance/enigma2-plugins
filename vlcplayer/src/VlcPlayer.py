@@ -21,12 +21,12 @@ from enigma import eServiceCenter
 from enigma import eTimer
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens.MinuteInput import MinuteInput
 from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarAudioSelection
 from Components.Sources.Source import Source
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import ActionMap
 from Components.config import config
-from Screens.MinuteInput import MinuteInput
 
 
 def isValidServiceId(id):

@@ -21,7 +21,6 @@ from pyexpat import ExpatError
 
 from VlcFileList import VlcFileList
 from VlcPlayList import VlcPlayList
-from VlcPlayer import VlcPlayer
 from . import _
 
 
