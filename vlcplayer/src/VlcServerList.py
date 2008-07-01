@@ -27,7 +27,7 @@ def VlcServerListEntry(vlcServer, showDefaultServer):
 	res = [ vlcServer ]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, vlcServer.getName()))
 
-	if vlcServerConfig.getDefaultServer().getName() == vlcServer.getName() and showDefaultServer:
+	if vlcServerConfig.getDefaultServer() is not None and vlcServerConfig.getDefaultServer().getName() == vlcServer.getName() and showDefaultServer:
 		png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/vlc_default.png"))
 	else:
 		png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/vlc.png"))
@@ -140,7 +140,7 @@ class VlcServerListScreen(Screen):
 			vlcServerConfig.cancel(server)
 
 	def keySetAsDefault(self):
-		if showDefaultServer:
+		if self.showDefaultServer:
 			vlcServerConfig.setAsDefault(self.serverlist.getSelection())
 			index = self.serverlist.getSelectedIndex()
 			self.updateServerlist()
