@@ -273,23 +273,4 @@
 			<url>http://www.hanmer.co.nz/hanmer.jpg</url>	
 		</cam>
 	</menu>
-	<menu>
-		<name>Wetter</name>
-		<cam>
-			<name>Deutschlandwetter</name>
-			<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/Wetter.jpg</url>	
-		</cam>    
-		<cam>
-			<name>Satellitenbild Wolken Deutschland</name>
-			<url>http://www.dwd.de/scripts/getimg.php?src=/hobbymet/mvvs1200.jpg</url>	
-		</cam>    
-		<cam>
-			<name>Satellitenbild Wolken Welt</name>
-			<url>http://www.dwd.de/scripts/getimg.php?src=/hobbymet/wvds1200.jpg</url>	
-		</cam>    
-		<cam>
-			<name>Wasser Temperaturen</name>
-			<url>http://www.dwd.de/scripts/getimg.php?src=/wundk/00-awg_sst.png</url>	
-		</cam>
-	</menu>
 </xml>
