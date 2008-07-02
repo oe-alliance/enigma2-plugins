@@ -33,6 +33,7 @@ movietagger/etc/Makefile
 movietagger/src/Makefile
 
 webinterface/Makefile
+webinterface/etc/Makefile
 webinterface/src/Makefile
 webinterface/src/web/Makefile
 webinterface/src/web/wap/Makefile
