@@ -95,7 +95,6 @@ def startServerInstance(session,ipadress,port,useauth=False,usessl=False):
 		else:
 			site = server.Site(toplevel)
 		try:
-			#########
 			if usessl:				
 				ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem','/etc/enigma2/cacert.pem',sslmethod=SSL.SSLv23_METHOD)
 				d = reactor.listenSSL(port, channel.HTTPFactory(site),ctx,interface=ipadress)
@@ -106,8 +105,7 @@ def startServerInstance(session,ipadress,port,useauth=False,usessl=False):
 		except CannotListenError, e:
 			print "[Webinterface] Could not Listen on %s:%i!"%(ipadress,port)
 			session.open(MessageBox,'Could not Listen on %s:%i!\n\n%s'%(ipadress,port,str(e)), MessageBox.TYPE_ERROR)
-#	except Exception,e:
-	except CannotListenError,e:
+	except Exception,e:
 		print "[Webinterface] starting FAILED on %s:%i!"%(ipadress,port),e
 		session.open(MessageBox,'starting FAILED on %s:%i!\n\n%s'%(ipadress,port,str(e)), MessageBox.TYPE_ERROR)
 
