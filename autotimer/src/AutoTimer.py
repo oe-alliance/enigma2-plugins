@@ -769,6 +769,11 @@ class AutoTimer:
 					# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
 					newEntry.isAutoTimer = True
 
+					if not recorddict.has_key(serviceref):
+						recorddict[serviceref] = [newEntry]
+					else:
+						recorddict[serviceref].append(newEntry)
+
 				# Apply afterEvent
  				if timer.hasAfterEvent():
  					afterEvent = timer.getAfterEventTimespan(localtime(end))
