@@ -21,6 +21,7 @@ config.plugins.Webinterface.loadmovielength = ConfigYesNo(default = False)
 config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI. 
 config.plugins.Webinterface.interfacecount = ConfigInteger(0)
 config.plugins.Webinterface.interfaces = ConfigSubList()
+config.plugins.Webinterface.warningsslsend = ConfigYesNo(default = False)
 
 
 def addInterfaceConfig():
@@ -31,6 +32,7 @@ def addInterfaceConfig():
     config.plugins.Webinterface.interfaces[i].adress = ConfigSelection(choices,default=choices[0])
     config.plugins.Webinterface.interfaces[i].port = ConfigInteger(80, (0,65535))
     config.plugins.Webinterface.interfaces[i].useauth = ConfigYesNo(default = False)
+    config.plugins.Webinterface.interfaces[i].usessl = ConfigYesNo(default = False)
     config.plugins.Webinterface.interfacecount.value = i+1
     return i
 
@@ -54,6 +56,7 @@ if config.plugins.Webinterface.interfacecount.value == 0:
     config.plugins.Webinterface.interfaces[0].adress = ConfigSelection(getCofiguredAndSpecialNetworkinterfaces(),default='0.0.0.0')
     config.plugins.Webinterface.interfaces[0].port = ConfigInteger(80, (0,65535))
     config.plugins.Webinterface.interfaces[0].useauth = ConfigYesNo(default = False)
+    config.plugins.Webinterface.interfaces[0].usessl = ConfigYesNo(default = False)
     config.plugins.Webinterface.interfacecount.value = 1
     config.plugins.Webinterface.interfacecount.save()
     config.plugins.Webinterface.interfaces[0].save()

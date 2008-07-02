@@ -1,4 +1,4 @@
-SUBDIRS = src
+SUBDIRS = src etc
 
 PWD=$(shell pwd)
 

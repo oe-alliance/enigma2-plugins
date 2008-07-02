@@ -13,6 +13,9 @@ from twisted.cred.portal import Portal, IRealm
 from twisted.cred import checkers, credentials, error
 from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname
+from OpenSSL import SSL
+from twisted.internet import reactor, defer, ssl
+
 DEBUG_TO_FILE=False # PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
 
 DEBUGFILE= "/tmp/twisted.log"
@@ -77,11 +80,11 @@ def startWebserver(session):
 	for i in range(0, config.plugins.Webinterface.interfacecount.value):
 		c = config.plugins.Webinterface.interfaces[i]
 		if c.disabled.value is False:
-			startServerInstance(session,c.adress.value,c.port.value,c.useauth.value)
+			startServerInstance(session,c.adress.value,c.port.value,c.useauth.value,c.usessl.value)
 		else:
 			print "[Webinterface] not starting disabled interface on %s:%i"%(c.adress.value,c.port.value)
 			
-def startServerInstance(session,ipadress,port,useauth=False):
+def startServerInstance(session,ipadress,port,useauth=False,usessl=False):
 	try:
 		toplevel = Toplevel(session)
 		if useauth:
@@ -92,13 +95,19 @@ def startServerInstance(session,ipadress,port,useauth=False):
 		else:
 			site = server.Site(toplevel)
 		try:
-			d = reactor.listenTCP(port, channel.HTTPFactory(site),interface=ipadress)
+			#########
+			if usessl:				
+				ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem','/etc/enigma2/cacert.pem',sslmethod=SSL.SSLv23_METHOD)
+				d = reactor.listenSSL(port, channel.HTTPFactory(site),ctx,interface=ipadress)
+			else:
+				d = reactor.listenTCP(port, channel.HTTPFactory(site),interface=ipadress)
 			running_defered.append(d)
-			print "[Webinterface] started on %s:%i"%(ipadress,port),"auth=",useauth
+			print "[Webinterface] started on %s:%i"%(ipadress,port),"auth=",useauth,"ssl=",usessl
 		except CannotListenError, e:
 			print "[Webinterface] Could not Listen on %s:%i!"%(ipadress,port)
 			session.open(MessageBox,'Could not Listen on %s:%i!\n\n%s'%(ipadress,port,str(e)), MessageBox.TYPE_ERROR)
-	except Exception,e:
+#	except Exception,e:
+	except CannotListenError,e:
 		print "[Webinterface] starting FAILED on %s:%i!"%(ipadress,port),e
 		session.open(MessageBox,'starting FAILED on %s:%i!\n\n%s'%(ipadress,port,str(e)), MessageBox.TYPE_ERROR)
 
@@ -301,5 +310,65 @@ def passcrypt_md5(passwd, salt=None, magic='$1$'):
     rv = rv + _to64(l, 2)
     
     return rv
+
+#### stuff for SSL Support
+def makeSSLContext(myKey,trustedCA):
+     '''Returns an ssl Context Object
+    @param myKey a pem formated key and certifcate with for my current host
+           the other end of this connection must have the cert from the CA
+           that signed this key
+    @param trustedCA a pem formated certificat from a CA you trust
+           you will only allow connections from clients signed by this CA
+           and you will only allow connections to a server signed by this CA
+     '''
+
+     # our goal in here is to make a SSLContext object to pass to connectSSL
+     # or listenSSL
+
+     # Why these functioins... Not sure...
+     fd = open(myKey,'r')
+     ss = fd.read()
+     theCert = ssl.PrivateCertificate.loadPEM(ss)
+     fd.close()
+     fd = open(trustedCA,'r')
+     theCA = ssl.Certificate.loadPEM(fd.read())
+     fd.close()
+     #ctx = theCert.options(theCA)
+     ctx = theCert.options()
+
+     # Now the options you can set look like Standard OpenSSL Library options
+
+     # The SSL protocol to use, one of SSLv23_METHOD, SSLv2_METHOD,
+     # SSLv3_METHOD, TLSv1_METHOD. Defaults to TLSv1_METHOD.
+     ctx.method = ssl.SSL.TLSv1_METHOD
+
+     # If True, verify certificates received from the peer and fail
+     # the handshake if verification fails. Otherwise, allow anonymous
+     # sessions and sessions with certificates which fail validation.
+     ctx.verify = True
+
+     # Depth in certificate chain down to which to verify.
+     ctx.verifyDepth = 1
+
+     # If True, do not allow anonymous sessions.
+     ctx.requireCertification = True
+
+     # If True, do not re-verify the certificate on session resumption.
+     ctx.verifyOnce = True
+
+     # If True, generate a new key whenever ephemeral DH parameters are used
+     # to prevent small subgroup attacks.
+     ctx.enableSingleUseKeys = True
+
+     # If True, set a session ID on each context. This allows a shortened
+     # handshake to be used when a known client reconnects.
+     ctx.enableSessions = True
+
+     # If True, enable various non-spec protocol fixes for broken
+     # SSL implementations.
+     ctx.fixBrokenPeers = False
+
+     return ctx
+
 
 

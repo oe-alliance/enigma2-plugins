@@ -211,6 +211,7 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
         cfglist.append(getConfigListEntry(_("Adress"), current.adress))
         cfglist.append(getConfigListEntry(_("Port"), current.port))
         cfglist.append(getConfigListEntry(_("use Authorization"), current.useauth))
+        cfglist.append(getConfigListEntry(_("use SSL Encryption"), current.usessl))
         ConfigListScreen.__init__(self, cfglist, session)
         self.ifacenum = i
 
