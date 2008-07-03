@@ -74,9 +74,10 @@ class WebIfInterfaceListConfigScreen(Screen):
     skin = """
         <screen position="100,100" size="550,400" title="Webinterface: list of configured Interfaces" >
             <widget name="adress" position="5,0" size="150,50"   font="Regular;20" halign="left"/>
-            <widget name="port" position="160,0" size="50,50"   font="Regular;20" halign="left"/>
-            <widget name="auth" position="215,0" size="200,50"   font="Regular;20" halign="left"/>
-            <widget name="disabled" position="420,0" size="130,50"   font="Regular;20" halign="left"/>
+            <widget name="port" position="120,0" size="50,50"   font="Regular;20" halign="left"/>
+            <widget name="ssl" position="170,0" size="50,50"   font="Regular;20" halign="left"/>
+            <widget name="auth" position="230,0" size="200,50"   font="Regular;20" halign="left"/>
+            <widget name="disabled" position="430,0" size="130,50"   font="Regular;20" halign="left"/>
             <widget name="ifacelist" position="0,50" size="550,300"  scrollbarMode="showOnDemand"/>
             
             <widget name="key_red" position="0,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -91,6 +92,7 @@ class WebIfInterfaceListConfigScreen(Screen):
         self["adress"] = Button(_("Adress"))
         self["port"] = Button(_("Port"))
         self["auth"] = Button(_("use Authorization"))
+        self["ssl"] = Button(_("use SSL"))
         self["disabled"] = Button(_("disabled"))
         self["key_red"] = Button(_("add"))
         self["key_yellow"] = Button(_("change"))
@@ -115,17 +117,22 @@ class WebIfInterfaceListConfigScreen(Screen):
             c= config.plugins.Webinterface.interfaces[i]
             res = [ i ] #550,400
             res.append(MultiContentEntryText(pos=(5, 0), size=(150, 25), font=0, text=c.adress.value))
-            res.append(MultiContentEntryText(pos=(160, 0),size=(50, 25), font=0,text=str(c.port.value)))
+            res.append(MultiContentEntryText(pos=(120, 0),size=(50, 25), font=0,text=str(c.port.value)))
+            
+            if c.usessl.value:
+                res.append(MultiContentEntryText(pos=(170, 0),size=(200, 25), font=0,text=_("yes"),color=0x0000FF00))
+            else:
+                res.append(MultiContentEntryText(pos=(170, 0),size=(200, 25), font=0,text=_("no"),color=0x00FF0000))
             
             if c.useauth.value:
-                res.append(MultiContentEntryText(pos=(215, 0),size=(200, 25), font=0,text=_("yes"),color=0x0000FF00))
+                res.append(MultiContentEntryText(pos=(230, 0),size=(200, 25), font=0,text=_("yes"),color=0x0000FF00))
             else:
-                res.append(MultiContentEntryText(pos=(215, 0),size=(200, 25), font=0,text=_("no"),color=0x00FF0000))
+                res.append(MultiContentEntryText(pos=(230, 0),size=(200, 25), font=0,text=_("no"),color=0x00FF0000))
                 
             if c.disabled.value:
-                res.append(MultiContentEntryText(pos=(420, 0),size=(130, 25), font=0,text=_("yes"),color=0x0000FF00))
+                res.append(MultiContentEntryText(pos=(430, 0),size=(130, 25), font=0,text=_("yes"),color=0x0000FF00))
             else:
-                res.append(MultiContentEntryText(pos=(420, 0),size=(130, 25), font=0,text=_("no"),color=0x00FF0000))
+                res.append(MultiContentEntryText(pos=(430, 0),size=(130, 25), font=0,text=_("no"),color=0x00FF0000))
             ifaceguilist.append(res)
         ifaceguilist.sort()
         self["ifacelist"].l.setList(ifaceguilist)
