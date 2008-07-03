@@ -1,0 +1,181 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Italian locale for VLCPlayer 2.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-07-03 23:20+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Basepath: H:\\VlcPlayer\\\n"
+"X-Poedit-SearchPath-0: H:\\VlcPlayer\n"
+
+msgid "Audio Bitrate"
+msgstr "Bitrate Audio"
+
+msgid "Audio Channels"
+msgstr "Canali Audio"
+
+msgid "Audio Codec"
+msgstr "Codec Audio"
+
+msgid "Audio Samplerate"
+msgstr "Campionamento Audio"
+
+msgid "Cancel"
+msgstr "Annullare"
+
+msgid "Correct aspect ratio to"
+msgstr "Correggere rapporto d'aspetto in"
+
+msgid "DVD Device (leave empty for default)"
+msgstr "Dispositivo DVD (vuoto -> default)"
+
+msgid "Enter VLC-Server as FQDN or IP-Address"
+msgstr "Server VLC come FQDN o Indirizzo IP"
+
+#, python-format
+msgid ""
+"Error loading filelist into server %s:\n"
+"%s"
+msgstr ""
+"Errore caricamento lista file sul server %s:\n"
+"%s"
+
+#, python-format
+msgid ""
+"Error loading playlist %s into server %s:\n"
+"%s"
+msgstr ""
+"Errore caricamento playlist %s sul server %s:\n"
+"%s"
+
+#, python-format
+msgid ""
+"Error loading playlist into server %s:\n"
+"%s"
+msgstr ""
+"Errore caricamento playlist sul server %s:\n"
+"%s"
+
+#, python-format
+msgid ""
+"Error updating filelist from server %s:\n"
+"%s"
+msgstr ""
+"Errore aggiornamento lista file dal server %s:\n"
+"%s"
+
+#, python-format
+msgid ""
+"Error with VLC server:\n"
+"%s"
+msgstr ""
+"Errore con server VLC:\n"
+"%s"
+
+msgid "Filelist"
+msgstr "Lista file"
+
+msgid "HTTP Port"
+msgstr "Porta HTTP"
+
+msgid "List of known VLC-Server Profiles"
+msgstr ""
+
+msgid "Movie Directory"
+msgstr "Cartella video"
+
+msgid "No more files in this directory"
+msgstr "Nessun altro file nella cartella"
+
+msgid "No previous file in this directory"
+msgstr "Nessun file precedente nella cartella"
+
+msgid ""
+"No valid Enigma-Service to play a VLC-Stream\n"
+"Check your installation and try again!"
+msgstr ""
+"Nessun servizio Enigma adatto a riprodurre un\n"
+"flusso VLC! Verificare l'installazione e riprovare."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Playlist"
+msgstr "Playlist"
+
+msgid "Really delete this Server?"
+msgstr "Cancellare il Server?"
+
+msgid "Server Address"
+msgstr "Indirizzo Server"
+
+msgid "Server Profile Name"
+msgstr ""
+
+msgid "Serverlist"
+msgstr ""
+
+msgid "Subtitle overlay"
+msgstr "Sovrapposizione sottotitoli"
+
+msgid "Transcode MPEG/DVD Audio"
+msgstr "Transcodifica Audio MPEG/DVD"
+
+msgid "Transcode MPEG/DVD Video"
+msgstr "TRanscodifica video MPEG/DVD"
+
+msgid "Video Bitrate"
+msgstr "Bitrate Video"
+
+msgid "Video Codec"
+msgstr "Codec Video"
+
+msgid "Video Height"
+msgstr "Altezza Video"
+
+msgid "Video Width"
+msgstr "Larghezza Video"
+
+msgid "add server"
+msgstr "agg. server"
+
+msgid "delete server"
+msgstr "canc. server"
+
+msgid "edit server"
+msgstr "mod. server"
+
+msgid "filter off"
+msgstr "filtro Off"
+
+msgid "filter on"
+msgstr "filtro On"
+
+msgid "play DVD"
+msgstr "DVD"
+
+msgid "refresh"
+msgstr "ricaricare"
+
+msgid "set default"
+msgstr ""
+
+#~ msgid "List of known VLC-Servers"
+#~ msgstr "Lista server VLC riconosciuti"
+
+#~ msgid "Symbolic Servername"
+#~ msgstr "Nome Server"
+
+#~ msgid "show filelist"
+#~ msgstr "mostrare lista file"
+
+#~ msgid "show playlist"
+#~ msgstr "mostrare playlist"
