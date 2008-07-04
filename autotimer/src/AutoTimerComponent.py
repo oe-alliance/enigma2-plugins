@@ -99,7 +99,22 @@ class AutoTimerComponent(object):
 		self.avoidDuplicateDescription = avoidDuplicateDescription
 		self.bouquets = bouquets
 		self.tags = tags or []
-
+	
+	def getName(self):
+		return self.name
+	
+	def setName(self, name):
+		self.name = name
+	
+	def getMatch(self):
+		return self.match
+	
+	def setMatch(self, match):
+		self.match = match
+	
+	def getEntry(self):
+		return self
+	
 	def calculateDayspan(self, begin, end, ignore = None):
 		if end[0] < begin[0] or (end[0] == begin[0] and end[1] <= begin[1]):
 			return (begin, end, True)
@@ -385,6 +400,9 @@ class AutoTimerComponent(object):
 
 	def hasDestination(self):
 		return self.destination is not None
+	
+	def getDestination(self):
+		return self.destination is not None
 
 	def hasCounter(self):
 		return self.matchCount != 0
@@ -440,6 +458,9 @@ class AutoTimerComponent(object):
 
 	def hasTags(self):
 		return len(self.tags) > 0
+	
+	def getTags(self):
+		return self.tags
 
 	def __repr__(self):
 		return ''.join([
