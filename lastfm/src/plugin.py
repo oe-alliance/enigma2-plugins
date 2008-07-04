@@ -4,6 +4,8 @@ from Screens.HelpMenu import HelpableScreen
 from Components.Pixmap import Pixmap, MovingPixmap
 from Components.Label import Label
 from Components.MenuList import MenuList
+from Screens.InputBox import InputBox
+
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
 from Plugins.Plugin import PluginDescriptor
@@ -11,6 +13,7 @@ from Plugins.Plugin import PluginDescriptor
 from StreamPlayer import StreamPlayer
 from LastFMConfig import LastFMConfigScreen
 from LastFM import LastFM
+from urllib2 import quote as urllib2_qoute
 from twisted.web.client import downloadPage
 from os import remove as os_remove, system as os_system
 from random import randrange
@@ -336,9 +339,30 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         if x is None:
             pass
         elif len(x) >1:
-            self.changeStation(x[1])
-            self.resetScreensaverTimer()
-                
+            if not x[1].startswith('lastfm://'):
+                self.customstationtype = x[1]
+                text = _("please enter an %s name to listen to"% x[1])
+                texts = _("%s name"% x[1])
+                self.session.openWithCallback(
+                    self.onTextForCustomStationEntered,
+                    InputBox,
+                    windowTitle = text,
+                    title = texts
+                    )
+            else:
+                self.changeStation(x[1])
+                self.resetScreensaverTimer()
+
+    def onTextForCustomStationEntered(self,text):
+        print "onTextForCustomStationEntered",text,self.customstationtype
+        if text is not None:
+            if self.customstationtype =="artist":
+                self.changeStation(urllib2_qoute("lastfm://artist/%s/similarartists"%text))
+            elif self.customstationtype =="groupe":
+                self.changeStation(urllib2_qoute("lastfm://group/%s"%text))
+            elif self.customstationtype =="tag":
+                self.changeStation(urllib2_qoute("lastfm://globaltags/%s"%text))
+                        
     def action_startstop(self):
         self.resetScreensaverTimer()
         if self.streamplayer.is_playing:
@@ -416,10 +440,10 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
     def loadPersonalStations(self):
         tags = []
         x= {}
-        x["_display"] = "Personal Radio"
+        x["_display"] = "Personal Recommendations"
         x["stationurl"] = self.getPersonalURL(config.plugins.LastFM.username.value,level=config.plugins.LastFM.recommendedlevel.value)
         tags.append(x)
-        
+
         x= {}
         x["_display"] = "Neighbours Tracks"
         x["stationurl"] = self.getNeighboursURL(config.plugins.LastFM.username.value)
@@ -429,6 +453,22 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         x["_display"] = "Loved Tracks"
         x["stationurl"] = self.getLovedURL(config.plugins.LastFM.username.value)
         tags.append(x)
+        
+        x= {}
+        x["_display"] = "play Artist Radio ..."
+        x["stationurl"] = 'artist'
+        tags.append(x)
+
+        x= {}
+        x["_display"] = "play Groupe Radio ..."
+        x["stationurl"] = 'groupe'
+        tags.append(x)
+        
+        x= {}
+        x["_display"] = "play Tag Radio ..."
+        x["stationurl"] = 'tag'
+        tags.append(x)
+        
         
         creator = self.streamplayer.getMetadata("creator")
         if creator != "no creator" and creator != "N/A":
@@ -554,7 +594,7 @@ class LastFMSaveScreen(Screen):
         self["cover"].moveTo(newX, newY, time = config.plugins.LastFM.sreensaver.coverartspeed.value)
         self["cover"].startMoving()
         self.startmovingtimer.start(config.plugins.LastFM.sreensaver.coverartinterval.value*1000)
-
+        
 class ImageConverter:
     
     lastURL = ""
