@@ -131,7 +131,7 @@ var tplTimerListHeader  = '<div class="BodyContentChannellist">\n';
 	tplTimerListHeader += '<table border="0" cellpadding="0" cellspacing="0" class="BodyContentChannellist">\n';
 	tplTimerListHeader += '<thead class="fixedHeader">\n';
 	tplTimerListHeader += '<tr>\n';
-	tplTimerListHeader += '<th colspan="7"><div class="sListHeader">TimerList</div>\n';
+	tplTimerListHeader += '<th colspan="7"><div class="sListHeader">%(page_title)</div>\n';
 	tplTimerListHeader += '<div class="sListSearch">';
 	tplTimerListHeader += '<form onSubmit="loadEPGBySearchString(document.getElementById(\'searchText\').value); return false;">';
 	tplTimerListHeader += '<input type="text" id="searchText" onfocus="this.value=\'\'" value="Search EPG"/>';
@@ -141,15 +141,13 @@ var tplTimerListHeader  = '<div class="BodyContentChannellist">\n';
 	tplTimerListHeader += '</thead>\n';
 	tplTimerListHeader += '<tbody class="scrollContent" height="100%">\n';
 	tplTimerListHeader += '<tr>';
-	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListSName"><b>Channel</b><br/>Name</div></td>';
-/*	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListTitle"><b>Name</b></div></td>';*/
-/*	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListDescr"><b>Description</b></div></td>';*/
-	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListRepeat"><b>Repeated</b></div></td>';
-	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListDuration"><b>Time running</b></div></td>';
-	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListBegin"><b>Start time</b></div></td>';
-	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListEnd"><b>End time</b></div></td>';
-	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListAfter"><b>Event</b><br/>After event</div></td>';
-	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListOption"><b>Options</b></div></td></tr>\n';
+	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListSName"><b>%(name1)</b><br/>%(name2)</div></td>';
+	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListRepeat"><b>%(repeated)</b></div></td>';
+	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListDuration"><b>%(duration)</b></div></td>';
+	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListBegin"><b>%(start)</b></div></td>';
+	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListEnd"><b>%(end)</b></div></td>';
+	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListAfter"><b>%(event)</b><br/>%(after_event)</div></td>';
+	tplTimerListHeader += '<td><div style="color: #00BCBC;" class="tListOption"><b>%(options)</b></div></td></tr>\n';
 
 var tplTimerListItem  = '<tr width="99%">\n';
 	tplTimerListItem += '<td><div style="color: #%(color);" class="tListSName" title="%(description), %(descriptionextended)"><b>%(servicename)</b> <br/><br/> %(title)</div></td>\n';
@@ -158,9 +156,13 @@ var tplTimerListItem  = '<tr width="99%">\n';
 	tplTimerListItem += '<td><div style="color: #%(color);" class="tListBegin">%(beginDate)</div></td>\n';
 	tplTimerListItem += '<td><div style="color: #%(color);" class="tListEnd">%(endDate)</div></td>\n';
 	tplTimerListItem += '<td><div style="color: #%(color);" class="tListAfter"><b>%(justplayReadable)</b> <br/><br/> %(aftereventReadable)</div></td>\n';
-	tplTimerListItem += '<td><div style="color: #%(color);" class="tListOption"><a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\',\'%(servicename)\',\'%(title)\',\'%(description)\',incomingTimerDelResult);"></a>\n';
+/*	tplTimerListItem += '<td><div style="color: #%(color);" class="tListOption"><a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="delTimer(\'%(servicereference)\',\'%(begin)\',\'%(end)\',\'%(servicename)\',\'%(title)\',\'%(description)\',incomingTimerDelResult);"></a>\n';
 	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/%(onOff).png" title="toggle On/Off" border="0" onclick="sendToggleTimerDisable(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',\'%(disabled)\' );"></a>\n';
-	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(servicename)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a></div></td>\n';
+	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="loadTimerFormSeconds(\'%(justplay)\',\'%(begin)\',\'%(end)\',\'%(repeated)\',\'%(servicereference)\',\'%(servicename)\',\'%(title)\',\'%(description)\',\'%(afterevent)\',1);"></a></div></td>\n';*/
+	tplTimerListItem += '<td><div style="color: #%(color);" class="tListOption"><a target="_blank" ><img src="/webdata/gfx/trash.gif" title="delete timer entry" border="0" onclick="%(delTimer_FUNCTION);"></a>\n';
+	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/%(onOff).png" title="toggle On/Off" border="0" onclick="%(sendToggleTimerDisable_FUNCTION);"></a>\n';
+	tplTimerListItem += '<a target="_blank" ><img src="/webdata/gfx/edit.gif" title="edit timer entry" border="0" onclick="%(loadTimerFormSeconds_FUNCTION);"></a></div></td>\n';
+	
 	tplTimerListItem += '</tr>\n';
 
 var tplTimerListFooter  = '<tr><td colspan="7"><button onclick="writeTimerListNow()">Write To Memory</button></td></tr>\n';
@@ -619,3 +621,28 @@ var tplFileBrowserFooter  = '</tbody></table>\n';
 	tplFileBrowserFooter += '<input type="hidden" id="path" value="%(root)" name="path">';
 	tplFileBrowserFooter += '<input name="file" type="file">';
 	tplFileBrowserFooter += '<input type="image" style="vertical-align:middle" src="/webdata/gfx/save.png" alt="upload">';
+
+var tplAddAutoTimerForm  = '<table border=0 cellpadding=0 cellspacing=10>';
+	tplAddAutoTimerForm += '<tr><td colspan="3">Action:</td>';
+	tplAddAutoTimerForm += '<td colspan="3">';
+	tplAddAutoTimerForm += '<select name="justplay" id="justplay" size="1">';
+	tplAddAutoTimerForm += '%(justplay)';
+	tplAddAutoTimerForm += '</select></td></tr>';
+	tplAddAutoTimerForm += '<tr><td colspan="3">Start:</td>';
+	tplAddAutoTimerForm += '<td colspan="3"><select name="shour" id="shour" size="1" onchange="javascript:addTimerFormChangeTime(\'shour\');">%(shour)</select>';
+	tplAddAutoTimerForm += ':<select name="smin" id="smin" size="1" onchange="javascript:addTimerFormChangeTime(\'smin\');">%(smin)</select></td></tr>';
+	tplAddAutoTimerForm += '<tr><td colspan="3">End:</td>';
+	tplAddAutoTimerForm += '<td colspan="3"><select name="ehour" id="ehour" size="1" onchange="javascript:addTimerFormChangeTime(\'ehour\');">%(ehour)</select>';
+	tplAddAutoTimerForm += ':<select name="emin" id="emin" size="1" onchange="javascript:addTimerFormChangeTime(\'emin\');">%(emin)</select></td></tr>';
+	tplAddAutoTimerForm += '<tr><td colspan="3">Repeat times:</td><td colspan="3"><select name="repeated" id="repeated" size="1">%(repeated)</select>';
+	tplAddAutoTimerForm += '<tr><td colspan="3">Name:</td>';
+	tplAddAutoTimerForm += '<td colspan="3"><input name="name" id="name" type="text" size="100" maxlength="100" style="color: #000000;" value="%(name)"></td></tr>';
+	tplAddAutoTimerForm += '<tr><td colspan="3">Description:</td>';
+	tplAddAutoTimerForm += '<td colspan="3"><input name="descr" id="descr" type="text" size="100" maxlength="100" style="color: #000000;" value="%(description)"></td></tr>';
+	tplAddAutoTimerForm += '<tr><td colspan="3">After event do:</td>';
+	tplAddAutoTimerForm += '<td colspan="3"><select id="after_event" name="after_event" size="1">%(afterEvent)</select></td></tr>';
+	tplAddAutoTimerForm += '<tr>&nbsp;&nbsp;</tr>';
+	tplAddAutoTimerForm += '<tr><td colspan="3">&nbsp;</td><td colspan="3">';
+	tplAddAutoTimerForm += '<input name="deleteOldOnSave" id="deleteOldOnSave" type="hidden" value="%(deleteOldOnSave)">';
+	tplAddAutoTimerForm += '<input name="timers_element" id="timers_element" type="hidden" value="%(timers_element)">';
+	tplAddAutoTimerForm += 	'<button onclick="sendAddAutoTimer();">Add/Save</button></td></tr></table>';

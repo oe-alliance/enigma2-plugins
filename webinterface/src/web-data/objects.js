@@ -213,7 +213,7 @@ function MovieList(xml){
 //END class MovieList
 
 //START class Movie
-function Movie(xml){	
+function Movie(xml){
 	// parsing values from xml-element
 	//debug('init Movie');
 	try{
@@ -769,3 +769,247 @@ function Note(xml){
 	}
 }
 //END class NoteList
+
+//START class AutoTimerList
+function AutoTimerList(xml){
+	// parsing values from xml-element
+	debug('init AutoTimerList'+xml);
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2autotmerlist").item(0).getElementsByTagName("e2autotimer");
+	} catch (e) {
+		debug("AutoTimerList parsing Error");
+	}
+	this.getArray = function(){
+		var listxy = new Array();
+		for(var i=0;i<this.xmlitems.length;i++){
+			//debug("parsing movie "+i+" of "+this.xmlitems.length);
+			var xv = new AutoTimer(this.xmlitems.item(i));
+			listxy.push(xv);			
+		}
+		return listxy;
+	}
+}
+//END class AutoTimerList
+//START class AutoTimer
+function AutoTimer(xml){
+	// parsing values from xml-element
+	//debug('init Movie');
+	try{
+		this.name = xml.getElementsByTagName('e2name').item(0).firstChild.data;
+	} catch (e) {
+		this.name = "N/A";
+	}
+	try{
+		this.match = xml.getElementsByTagName('e2match').item(0).firstChild.data;
+	} catch (e) {
+		this.match = "N/A";
+	}
+	try{
+		this.enabled = xml.getElementsByTagName('e2enabled').item(0).firstChild.data;
+	} catch (e) {
+		this.enabled = "N/A";
+	}
+	try{
+		this.excludetitle = xml.getElementsByTagName('e2excludetitle').item(0).firstChild.data;
+	} catch (e) {
+		this.excludetitle = "N/A";
+	}
+	try{
+		this.excludeshort = xml.getElementsByTagName('e2excludeshort').item(0).firstChild.data;
+	} catch (e) {
+		this.excludeshort = "N/A";
+	}
+	try{
+		this.excludedescription = xml.getElementsByTagName('e2excludedescription').item(0).firstChild.data;
+	} catch (e) {
+		this.excludedescription = "N/A";
+	}
+	try{
+		this.excludedays = xml.getElementsByTagName('e2excludedays').item(0).firstChild.data;
+	} catch (e) {
+		this.excludedays = "n/a";
+	}
+	try{
+		this.includetitle = xml.getElementsByTagName('e2includetitle').item(0).firstChild.data;
+	} catch (e) {
+		this.includetitle = "N/A";
+	}
+	try{
+		this.includeshort = xml.getElementsByTagName('e2includeshort').item(0).firstChild.data;
+	} catch (e) {
+		this.includeshort = "N/A";
+	}
+	try{
+		this.includedescription = xml.getElementsByTagName('e2includedescription').item(0).firstChild.data;
+	} catch (e) {
+		this.includedescription = "N/A";
+	}
+	try{
+		this.includedays = xml.getElementsByTagName('e2includedays').item(0).firstChild.data;
+	} catch (e) {
+		this.includedays = "N/A";
+	}
+	try{
+		this.services = xml.getElementsByTagName('e2services').item(0).firstChild.data;
+	} catch (e) {
+		this.services = "N/A";
+	}
+	try{
+		this.bouquets = xml.getElementsByTagName('e2bouquets').item(0).firstChild.data;
+	} catch (e) {
+		this.bouquets = "N/A";
+	}
+	try{
+		this.timespanbegin = xml.getElementsByTagName('e2timespanbegin').item(0).firstChild.data;
+	} catch (e) {
+		this.timespanbegin = "0";
+	}
+	try{
+		this.timespanend = xml.getElementsByTagName('e2timespanend').item(0).firstChild.data;
+	} catch (e) {
+		this.timespanend = "0";
+	}
+	try{
+		this.duration = xml.getElementsByTagName('e2duration').item(0).firstChild.data;
+	} catch (e) {
+		this.duration = "0";
+	}
+	try{
+		this.counter = xml.getElementsByTagName('e2counter').item(0).firstChild.data;
+	} catch (e) {
+		this.counter = "0";
+	}
+	try{
+		this.counterleft = xml.getElementsByTagName('e2counterleft').item(0).firstChild.data;
+	} catch (e) {
+		this.counterleft = "0";
+	}
+	try{
+		this.counterlimit = xml.getElementsByTagName('e2counterlimit').item(0).firstChild.data;
+	} catch (e) {
+		this.counterlimit = "0";
+	}
+	try{
+		this.counterformatstring = xml.getElementsByTagName('e2counterformatstring').item(0).firstChild.data;
+	} catch (e) {
+		this.counterformatstring = "0";
+	}
+	try{
+		this.destination = xml.getElementsByTagName('e2destination').item(0).firstChild.data;
+	} catch (e) {
+		this.destination = "N/A";
+	}
+	try{
+		this.lastbegin = xml.getElementsByTagName('e2lastbegin').item(0).firstChild.data;
+	} catch (e) {
+		this.lastbegin = "0";
+	}
+	try{
+		this.justplay = xml.getElementsByTagName('e2justplay').item(0).firstChild.data;
+	} catch (e) {
+		this.justplay = "N/A";
+	}
+	try{
+		this.avoidduplicatedescription = xml.getElementsByTagName('e2avoidduplicatedescription').item(0).firstChild.data;
+	} catch (e) {
+		this.avoidduplicatedescription = "N/A";
+	}
+	try{
+		this.afterevent = xml.getElementsByTagName('e2afterevent').item(0).firstChild.data;
+	} catch (e) {
+		this.afterevent = "N/A";
+	}
+	try{
+		this.toggledisabledimg = xml.getElementsByTagName('e2toggledisableimg').item(0).firstChild.data;
+	} catch (e) {
+		this.toggledisabledimg = "N/A";
+	}
+	try{
+		this.tags = xml.getElementsByTagName('e2tags').item(0).firstChild.data;
+	} catch (e) {
+		this.tags = "no&nbsp;tags"; // no whitespaces... tags will be splittet later
+	}
+	
+	this.getName = function(){
+        return this.name;
+    }
+    this.getMatch = function(){
+        return this.match;
+    }
+    this.getEnabled = function(){
+        return this.enabled;
+    }
+    this.getExcludetitle = function(){
+        return this.excludetitle;
+    }
+    this.getExcludeshort = function(){
+        return this.excludeshort;
+    }
+    this.getExcludedescription = function(){
+        return this.excludedescription;
+    }
+    this.getExcludedays = function(){
+        return this.excludedays;
+    }
+    this.getIncludetitle = function(){
+        return this.includetitle;
+    }
+    this.getIncludeshort = function(){
+        return this.includeshort;
+    }
+    this.getIncludedescription = function(){
+        return this.includedescription;
+    }
+    this.getIncludedays = function(){
+        return this.includedays;
+    }
+    this.getServices = function(){
+        return this.services;
+    }
+    this.getBouquets = function(){
+        return this.bouquets;
+    }
+    this.getTimespanbegin = function(){
+        return this.timespanbegin;
+    }
+    this.getTimespanend = function(){
+        return this.timespanend;
+    }
+    this.getDuration = function(){
+        return this.duration;
+    }
+    this.getCounter = function(){
+        return this.counter;
+    }
+    this.getCounterleft = function(){
+        return this.counterleft;
+    }
+    this.getCounterlimit = function(){
+        return this.counterlimit;
+    }
+    this.getCounterformatstring = function(){
+        return this.counterformatstring;
+    }
+    this.getDestination = function(){
+        return this.destination;
+    }
+    this.getLastbegin = function(){
+        return this.lastbegin;
+    }
+    this.getJustplay = function(){
+        return this.justplay;
+    }
+    this.getAvoidduplicatedescription = function(){
+        return this.avoidduplicatedescription;
+    }
+    this.getTags = function(){
+        return this.tags;
+    }
+    this.getAfterevent = function(){
+        return this.afterevent;
+    }
+    this.getToggleDisabledIMG = function(){
+		return this.toggledisabledimg;
+	}
+}	
+//END class AutoTimer

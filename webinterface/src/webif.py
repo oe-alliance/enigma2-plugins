@@ -37,6 +37,7 @@ from WebComponents.Sources.WAPfunctions import WAPfunctions
 from WebComponents.Sources.MP import MP
 from WebComponents.Sources.Files import Files
 from WebComponents.Sources.ServiceListReload import ServiceListReload
+from WebComponents.Sources.AT import AT
 
 from Components.Sources.FrontendStatus import FrontendStatus
 
@@ -158,6 +159,12 @@ class MediaPlayerWebScreen(WebScreen):
 		self["Command"] = MP(session,func = MP.COMMAND)
 		self["WritePlaylist"] = MP(session,func = MP.WRITEPLAYLIST)
 		
+class AutoTimerWebScreen(WebScreen):
+	def __init__(self, session,request):
+		WebScreen.__init__(self, session,request)
+		self["AutoTimerList"] = AT(session,func = AT.LIST)
+		self["AutoTimerWrite"] = AT(session,func = AT.WRITE)
+
 class FilesWebScreen(WebScreen):
 	def __init__(self, session,request):
 		WebScreen.__init__(self, session,request)
@@ -423,6 +430,8 @@ class ListFiller(Converter):
 				else:
 					append(str(item[element]))
 		# (this will be done in c++ later!)
+#		print l
+#		print lut
 		return ''.join(strlist)
 
 	text = property(getText)

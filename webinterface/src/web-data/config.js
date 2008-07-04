@@ -60,3 +60,8 @@ var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER
 var windowStyle = 'alphacube';
 
 var url_delfile = "/web/delfile?file="; // plus file
+
+var url_autotimerlist = "/web/autotimerlist?gl";
+var url_autotimerdelete = "/web/autotimerdelete"; 
+var url_autotimertoggledisable = "/web/autotimertoggledisable"; 
+ 

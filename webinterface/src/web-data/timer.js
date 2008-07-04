@@ -42,7 +42,19 @@ function incomingTimerList(request){
 	if(request.readyState == 4){
 		var timers = new TimerList(getXML(request)).getArray();
 		debug("have "+timers.length+" timer");
-		listerHtml 	= tplTimerListHeader;
+		var ns_tplTimerListHeader = {
+			'page_title': 'Timerlist',
+			'name1': 'Channel',
+			'name2': 'Name',
+			'repeated': 'Repeated',
+			'duration': 'Time running',
+			'start': 'Start time',
+			'end': 'End time',
+			'event': 'Event',
+			'after_event': 'After event',
+			'options': 'Options'			
+		};
+		listerHtml = RND(tplTimerListHeader, ns_tplTimerListHeader);
 		var aftereventReadable = new Array ('Nothing', 'Standby', 'Deepstandby/Shutdown');
 		var justplayReadable = new Array('record', 'zap');
 		for ( var i = 0; i <timers.length; i++){
@@ -69,7 +81,20 @@ function incomingTimerList(request){
 				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
 				'disabled': timer.getDisabled(),
 				'onOff': timer.getToggleDisabledIMG(),
-				'color': timer.getColor()
+				'color': timer.getColor(),
+				'delTimer_FUNCTION': "delTimer(\'"+timer.getServiceReference()+"\',\'"+timer.getTimeBegin()
+					+"\',\'"+timer.getTimeEnd()+"\',\'"+quotes2html(timer.getServiceName())
+					+"\',\'"+quotes2html(timer.getName())+"\',\'"+quotes2html(timer.getDescription())
+					+"\',incomingTimerDelResult)",
+				'sendToggleTimerDisable_FUNCTION': "sendToggleTimerDisable(\'"+timer.getJustplay()+"\',\'"
+					+timer.getTimeBegin()+"\',\'"+timer.getTimeEnd()+"\',\'"+timer.getRepeated()
+					+"\',\'"+timer.getServiceReference()+"\',\'"+quotes2html(timer.getName())
+					+"\',\'"+quotes2html(timer.getDescription())+"\',\'"+timer.getAfterevent()
+					+"\',\'"+timer.getDisabled()+"\')",
+				'loadTimerFormSeconds_FUNCTION': "loadTimerFormSeconds(\'"+timer.getJustplay()+"\',\'"
+					+timer.getTimeBegin()+"\',\'"+timer.getTimeEnd()+"\',\'"+timer.getRepeated()
+					+"\',\'"+timer.getServiceReference()+"\',\'"+quotes2html(timer.getName())
+					+"\',\'"+quotes2html(timer.getDescription())+"\',\'"+timer.getAfterevent()+"\',1)"
 			};
 			listerHtml += RND(tplTimerListItem, namespace);
 		}
@@ -335,12 +360,12 @@ function loadTimerForm(){
 	}
 	var namespace = { 	
 				'justplay': addTimerFormCreateOptionList(Action, addTimerEditFormObject["justplay"]),
-				'syear': addTimerFormCreateOptions(2007,2010,addTimerEditFormObject["syear"]),
+				'syear': addTimerFormCreateOptions(2008,2010,addTimerEditFormObject["syear"]),
 				'smonth': addTimerFormCreateOptions(1,12,addTimerEditFormObject["smonth"]),
 				'sday': addTimerFormCreateOptions(1,31,addTimerEditFormObject["sday"]),
 				'shour': addTimerFormCreateOptions(0,23,addTimerEditFormObject["shour"]),
 				'smin': addTimerFormCreateOptions(0,59,addTimerEditFormObject["smin"]),
-				'eyear': addTimerFormCreateOptions(2007,2010,addTimerEditFormObject["eyear"]),
+				'eyear': addTimerFormCreateOptions(2008,2010,addTimerEditFormObject["eyear"]),
 				'emonth': addTimerFormCreateOptions(1,12,addTimerEditFormObject["emonth"]),
 				'eday': addTimerFormCreateOptions(1,31,addTimerEditFormObject["eday"]),
 				'ehour': addTimerFormCreateOptions(0,23,addTimerEditFormObject["ehour"]),
@@ -646,4 +671,149 @@ function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,descrip
 	 +"&channelOld="+channel
 	 +"&beginOld="+begin+"&endOld="+end
 	 +"&deleteOldOnSave=1", incomingTimerAddResult, false);
+}
+
+
+// AUTOTIMER
+function loadAutoTimerList(){
+	debug("loading AutoTimer");
+	doRequest(url_autotimerlist, incomingAutoTimerList, false);
+}
+
+var autotimers = null;
+function incomingAutoTimerList(request){
+	if(request.readyState == 4){
+		autotimers = new AutoTimerList(getXML(request)).getArray();
+		debug("have "+autotimers.length+" timer");
+		var ns_tplTimerListHeader = {
+			'page_title': 'Auto timerlist',
+			'name1': 'Name',
+			'name2': 'Match',
+			'repeated': 'Repeated',
+			'duration': 'Time running',
+			'start': 'Start time',
+			'end': 'End time',
+			'event': 'Event',
+			'after_event': 'After event',
+			'options': 'Options'			
+		};
+		listerHtml = RND(tplTimerListHeader, ns_tplTimerListHeader);
+		var aftereventReadable = new Array ('Nothing', 'Standby', 'Deepstandby/Shutdown');
+		var justplayReadable = new Array('record', 'zap');
+		for ( var i = 0; i <autotimers.length; i++){
+			var timer = autotimers[i];
+//			var beginDate = new Date(Number(timer.getTimeBegin())*1000);
+//			var endDate = new Date(Number(timer.getTimeEnd())*1000);
+			var namespace = { 	
+				 'servicereference': timer.getServices()
+				,'servicename': quotes2html(timer.getName())
+				,'title': quotes2html(timer.getMatch())
+				,'description': quotes2html(timer.getMatch())
+				,'justplay': timer.getJustplay()
+				,'justplayReadable': timer.getJustplay()
+				,'repeated': timer.getCounter()
+				,'repeatedReadable': timer.getCounter()
+				,'afterevent': timer.getAfterevent()
+				,'onOff': timer.getToggleDisabledIMG()
+				,'begin': timer.getTimespanbegin()
+				,'beginDate': timer.getTimespanbegin()
+				,'end': timer.getTimespanend()
+				,'endDate': timer.getTimespanend()
+				,'sendToggleTimerDisable_FUNCTION': "sendToggleAutoTimerDisable("+i+")"
+				,'delTimer_FUNCTION': "delAutoTimer("+i+")"
+				,'loadTimerFormSeconds_FUNCTION': "loadAutoTimer("+i+")"
+				,'color': '000000'
+/*				'descriptionextended': quotes2html(timer.getDescriptionExtended()),
+				'state': timer.getState(),
+				'duration': Math.ceil((timer.getDuration()/60)),
+				
+				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
+				'disabled': timer.getDisabled(),
+				'onOff': timer.getToggleDisabledIMG(),
+				'color': timer.getColor()*/
+			};
+			listerHtml += RND(tplTimerListItem, namespace);
+		}
+		listerHtml += tplTimerListFooter;
+		$('BodyContent').innerHTML = listerHtml;
+		setBodyMainContent('BodyContent');
+	}
+}
+
+function sendToggleAutoTimerDisable(element) {
+	timers = autotimers[Number(element)];
+	debug("sendToggleAutoTimerDisable["+element+"]: "+timers.getName());
+	
+	doRequest(url_autotimertoggledisable+"?name="+timer.getName()+"&match="+timer.getMatch()
+		, loadAutoTimerList, false);
+}
+
+function delAutoTimer(element) {
+	timers = autotimers[Number(element)];
+	debug("delAutoTimer["+element+"]: "+timers.getName());
+	Dialog.confirm(
+		"Selected timer:<br>"
+		+"Name: "+quotes2html(timer.getName())+"<br>"
+		+"Match: "+quotes2html(timer.getMatch())+"<br>"
+		+"Are you sure that you want to delete the AutoTimer?",
+		 {windowParameters: {width:300, className: windowStyle},
+			okLabel: "delete",
+			buttonClass: "myButtonClass",
+			cancel: function(win) {debug("delAutoTimer cancel confirm panel")},
+			ok: function(win) { 
+							    debug("delAutoTimer ok confirm panel"); 
+							    doRequest(url_autotimerdelete+"?name="+timer.getName()+"&match="+timer.getMatch(), loadAutoTimerList, false);
+							    return true;
+							  }
+			}
+	);
+}
+
+function loadAutoTimer(element) {
+	timer = autotimers[Number(element)];
+	debug("loadAutoTimer["+element+"]: "+timer.getName());
+	
+	var Action = new Object();
+	Action["0"] = "Record";
+	Action["1"] = "Zap";
+	
+	var Repeated = new Object();
+	Repeated["1"] =  "mo";
+	Repeated["2"] = "tu";
+	Repeated["4"] =  "we";
+	Repeated["8"] =  "th";
+	Repeated["16"] = "fr";
+	Repeated["32"] = "sa";
+	Repeated["64"] = "su";
+	Repeated["31"] = "mf";
+	Repeated["127"] ="ms";
+	
+	var AfterEvent = new Object();
+	AfterEvent["0"] = "Nothing";
+	AfterEvent["1"] = "Standby";
+	AfterEvent["2"] = "Deepstandby/Shutdown";
+	
+	var beginDate = timer.getTimespanbegin().split(":");
+	var endDate =   timer.getTimespanend().split(":");
+	
+	
+	var namespace = { 	
+				 'justplay': addTimerFormCreateOptionList(Action, timer.getJustplay)
+				,'shour': addTimerFormCreateOptions(0,23,beginDate[0])
+				,'smin': addTimerFormCreateOptions(0,59,beginDate[1])
+				,'ehour': addTimerFormCreateOptions(0,23,endDate[0])
+				,'emin': addTimerFormCreateOptions(0,59,endDate[1])
+				,'name': timer.getName()
+				,'description': timer.getMatch()
+				,'repeated': addTimerFormCreateOptions(0,99,timer.getCounter())
+				,'deleteOldOnSave': addTimerEditFormObject["deleteOldOnSave"]
+				,'afterEvent': addTimerFormCreateOptionList(AfterEvent, timer.getAfterevent())
+				,'timers_element': element
+		};
+	var listerHtml = RND(tplAddAutoTimerForm, namespace);
+	$('BodyContent').innerHTML = listerHtml;
+}
+
+function sendAddAutoTimer() {
+	debug("sendAddAutoTimer");
 }
