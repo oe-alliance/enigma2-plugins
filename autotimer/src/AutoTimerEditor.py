@@ -29,6 +29,9 @@ from ServiceReference import ServiceReference
 # addAutotimerFromService
 from enigma import eServiceCenter, iServiceInformation
 
+# Default Record Directory
+from Tools import Directories
+
 weekdays = [
 	("0", _("Monday")),
 	("1", _("Tuesday")),
@@ -119,6 +122,7 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		self.afterevent.addNotifier(self.reloadList, initial_call = False)
 		self.afterevent_timespan.addNotifier(self.reloadList, initial_call = False)
 		self.counter.addNotifier(self.reloadList, initial_call = False)
+		self.useDestination.addNotifier(self.reloadList, initial_call = False)
 
 		self.refresh()
 
@@ -281,7 +285,18 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		self.avoidDuplicateDescription = ConfigEnableDisable(default = timer.getAvoidDuplicateDescription())
 
 		# Custom Location
-		self.destination = ConfigSelection(choices = [timer.destination or "/hdd/movie/"])
+		if timer.hasDestination():
+			default = True
+		else:
+			default = False
+
+		self.useDestination = ConfigYesNo(default = default)
+
+		default = timer.destination or Directories.resolveFilename(Directories.SCOPE_HDD)
+		choices = config.movielist.videodirs.value
+		if default not in choices:
+			choices.append(default)
+		self.destination = ConfigSelection(default = default, choices = choices)
 
 	def refresh(self):
 		# First three entries are only showed when not editing defaults
@@ -318,9 +333,7 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 
 		# Only allow editing maxduration when it's enabled
 		if self.duration.value:
-			self.list.extend([
-				getConfigListEntry(_("Maximum Duration (in m)"), self.durationlength)
-			])
+			self.list.append(getConfigListEntry(_("Maximum Duration (in m)"), self.durationlength))
 
 		self.list.append(getConfigListEntry(_("After event"), self.afterevent))
 
@@ -345,8 +358,10 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 
 		self.list.append(getConfigListEntry(_("Require Description to be unique"), self.avoidDuplicateDescription))
 
-		# We always add this option though its actually expert only
-		self.list.append(getConfigListEntry(_("Custom Location"), self.destination))
+		# We always add this option though its expert only in enigma2
+		self.list.append(getConfigListEntry(_("Use a custom location"), self.useDestination))
+		if self.useDestination.value:
+			self.list.append(getConfigListEntry(_("Custom Location"), self.destination))
 
 	def reloadList(self, value):
 		self.refresh()
@@ -388,14 +403,14 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		cur = self["config"].getCurrent()
 		cur = cur and cur[1]
 		if cur == self.destination:
-			from Screens.LocationBox import LocationBox
+			from Screens.LocationBox import MovieLocationBox
 
 			self.session.openWithCallback(
 				self.pathSelected,
-				LocationBox,
-				text = _("Choose target folder"),
-				filename = "",
-				currDir = self.destination.value
+				MovieLocationBox,
+				_("Choose target folder"),
+				self.destination.value,
+				minFree = 100 # Same requirement as in Screens.TimerEntry
 			)
 		else:
 			ConfigListScreen.keyOK(self)
@@ -519,10 +534,10 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 
 		self.timer.avoidDuplicateDescription = self.avoidDuplicateDescription.value
 
-		if self.destination.value == "/hdd/movie/":
-			self.timer.destination = None
-		else:
+		if self.useDestination.value:
 			self.timer.destination = self.destination.value
+		else:
+			self.timer.destination = None
 
 		# Close
 		self.close(self.timer)
