@@ -293,7 +293,12 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		self.useDestination = ConfigYesNo(default = default)
 
 		default = timer.destination or Directories.resolveFilename(Directories.SCOPE_HDD)
-		choices = config.movielist.videodirs.value
+		choices = []
+		try:
+			choices = config.movielist.videodirs.value
+		except:
+			print "config.movielist.videodirs.value not set"
+			
 		if default not in choices:
 			choices.append(default)
 		self.destination = ConfigSelection(default = default, choices = choices)
