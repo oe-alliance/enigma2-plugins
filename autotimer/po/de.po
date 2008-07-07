@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Enigma2 FritzCall Plugin\n"
+"Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-07-05 16:54+0200\n"
 "PO-Revision-Date: 2008-07-05 17:09+0200\n"
@@ -28,7 +28,7 @@ msgstr "Ändere existierende Timer"
 
 #: AutoTimerConfiguration.py:40
 msgid "Guess existing Timer based on Begin/End"
-msgstr "Bestimme existierende Timer anhand Anfang/Ende"
+msgstr "Bestimme existierende Timer anhand Anfang-/Endzeit"
 
 #: AutoTimerConfiguration.py:46 AutoTimerEditor.py:135 AutoTimerEditor.py:588
 #: AutoTimerEditor.py:782 AutoTimerImporter.py:35 AutoTimerImporter.py:110
@@ -168,19 +168,19 @@ msgstr "Ende der Zeitspanne"
 
 #: AutoTimerEditor.py:331
 msgid "Custom offset"
-msgstr "Abstand vor und nach Sendung"
+msgstr "Angepasster Vor- und Nachlauf"
 
 #: AutoTimerEditor.py:336
 msgid "Offset before recording (in m)"
-msgstr "Abstand vor der Sendung (in Min)"
+msgstr "Vorlauf der Aufnahme (in Min)"
 
 #: AutoTimerEditor.py:337
 msgid "Offset after recording (in m)"
-msgstr "Abstand nach der Sendung (in Min)"
+msgstr "Nachlauf der Aufnahme (in Min)"
 
 #: AutoTimerEditor.py:340
 msgid "Set maximum Duration"
-msgstr "Setze maximale Länge"
+msgstr "Finde maximale Länge"
 
 #: AutoTimerEditor.py:344
 msgid "Maximum Duration (in m)"
@@ -208,7 +208,7 @@ msgstr "Höchstens X-mal aufnehmen"
 
 #: AutoTimerEditor.py:364
 msgid "Ammount of recordings left"
-msgstr "Restliche Anzahl Aufnahmen"
+msgstr "Verbleibende Anzahl Aufnahmen"
 
 #: AutoTimerEditor.py:365
 msgid "Reset Count"
@@ -220,11 +220,11 @@ msgstr "Beschreibung muss eindeutig sein"
 
 #: AutoTimerEditor.py:370
 msgid "Use a custom location"
-msgstr "Ablageort"
+msgstr "Angepasstes Aufnahmeverzeichnis"
 
 #: AutoTimerEditor.py:372
 msgid "Custom Location"
-msgstr "Ablageort"
+msgstr "Aufnahmeverzeichnis"
 
 #: AutoTimerEditor.py:419
 msgid "Choose target folder"
@@ -310,7 +310,7 @@ msgstr "Bearbeiten"
 
 #: AutoTimerEditor.py:830 AutoTimerEditor.py:881
 msgid "Record on"
-msgstr "Aufnahme am"
+msgstr "Aufnahme von"
 
 #: AutoTimerEditor.py:861
 msgid "Select channel to record on"
@@ -369,7 +369,7 @@ msgstr "Hinzufügen"
 
 #: AutoTimerOverview.py:56
 msgid "Edit selected AutoTimer"
-msgstr "Bestimmte AutoTimer bearbeiten"
+msgstr "Markierten AutoTimer bearbeiten"
 
 #: AutoTimerOverview.py:57
 msgid "Close and forget changes"
@@ -385,7 +385,7 @@ msgstr "Schließen und Speichern"
 
 #: AutoTimerOverview.py:70
 msgid "Remove selected AutoTimer"
-msgstr "Bestimmte AutoTimer löschen"
+msgstr "Markierten AutoTimer löschen"
 
 #: AutoTimerOverview.py:71
 msgid "Add new AutoTimer"
@@ -410,7 +410,7 @@ msgstr "Einstellungen"
 
 #: AutoTimerOverview.py:160
 msgid "Edit new timer defaults"
-msgstr "Einstellungen neuer Timer bearbeiten"
+msgstr "Voreinstellungen neuer Timer bearbeiten"
 
 #: AutoTimerPreview.py:51
 msgid "Sort Time"
