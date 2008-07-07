@@ -4,7 +4,7 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from AutoTimerEditor import AutoTimerEditor
-from AutoTimerConfiguration import AutoTimerConfiguration
+from AutoTimerSettings import AutoTimerSettings
 from AutoTimerPreview import AutoTimerPreview
 from AutoTimerImporter import AutoTimerImportSelector
 
@@ -181,7 +181,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				)
 			elif ret == "setup":
 				self.session.open(
-					AutoTimerConfiguration
+					AutoTimerSettings
 				)
 			elif ret == "defaults":
 				self.session.open(

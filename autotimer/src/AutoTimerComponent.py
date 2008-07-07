@@ -16,6 +16,13 @@ class AutoTimerComponent(object):
 		self.setValues(name, match, enabled, *args, **kwargs)
 
 	"""
+	 Unsets all Attributes
+	"""
+	def clear(self, id = -1, enabled = False):
+		self.id = id
+		self.setValues('', '', enabled)
+
+	"""
 	 Create a deep copy of this instance 
 	"""
 	def clone(self):
