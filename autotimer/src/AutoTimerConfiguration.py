@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from AutoTimerComponent import AutoTimerComponent
 from RecordTimer import AFTEREVENT
 from Tools.XMLTools import stringToXML

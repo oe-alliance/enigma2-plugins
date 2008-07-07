@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 # GUI (Components)
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText

@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
 
