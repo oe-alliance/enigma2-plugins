@@ -83,7 +83,7 @@ def parseEntry(element, baseTimer, defaults = False):
 	if start and end:
 		start = [int(x) for x in start.split(':')]
 		end = [int(x) for x in end.split(':')]
-	baseTimer.timespan = (start, end)
+		baseTimer.timespan = (start, end)
 
 	# Read out max length
 	maxduration = element.getAttribute("maxduration") or None
