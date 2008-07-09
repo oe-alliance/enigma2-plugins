@@ -117,10 +117,13 @@ class FritzCallPhonebook:
 						if found.group(4):
 							thisname = thisname + ", " + _("Vanity") + ": " + found.group(4)
 
-						thisnumber = found.group(2)
-						thisname = thisname.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
+						thisnumber = found.group(2).strip()
+						thisname = thisname.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü").strip()
 						print "[FritzCallPhonebook] Adding '''%s''' with '''%s''' from Fritz!Box Phonebook!" %(thisname, thisnumber)
-						self.phonebook[thisnumber.strip()] = thisname.strip()
+						if thisnumber <> "":
+							self.phonebook[thisnumber] = thisname
+						else:
+							print "[FritzCallPhonebook] ignoring empty number"
 						continue
 			elif re.search('TrFon', table):
 				#===============================================================================
@@ -224,8 +227,8 @@ class FritzCallPhonebook:
 	def add(self, number, name):
 		print "[FritzCallPhonebook] add"
 #===============================================================================
-#        It could happen, that two reverseLookups are running in parallel,
-#        so check first, whether we have already added the number to the phonebook.
+#		It could happen, that two reverseLookups are running in parallel,
+#		so check first, whether we have already added the number to the phonebook.
 #===============================================================================
 		if phonebook.search(number) is None and number <> 0 and config.plugins.FritzCall.phonebook.value and config.plugins.FritzCall.addcallers.value:
 			try:
@@ -467,6 +470,7 @@ class FritzProtocol(LineReceiver):
 		self.date = '0'
 
 	def notifyAndReset(self, timeout=config.plugins.FritzCall.timeout.value):
+		print "[FritzProtocol] notifyAndReset: Call on %s from %s, %s to: %s" % (self.date, self.number, self.caller, self.phone)
 		if self.event == "RING":
 			text = _("Incoming Call on %s from\n---------------------------------------------\n%s\n%s\n---------------------------------------------\nto: %s") % (self.date, self.number, self.caller, self.phone)
 		else:
@@ -488,8 +492,10 @@ class FritzProtocol(LineReceiver):
 		if self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoing.value):
 			phone = a[4]
 			number = (a[3] if self.event == "RING" else a[5])
+			print "[FritzProtocol] lineReceived phone: '''%s''' number: '''%s'''" % (phone, number)
 
-			if not (config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filtermsn.value == phone):
+			if not config.plugins.FritzCall.filter.value or config.plugins.FritzCall.filtermsn.value == phone:
+				print "[FritzProtocol] lineReceived no filter hit"
 				phonename = phonebook.search(phone)		   # do we have a name for the number of our side?
 				if phonename is not None:
 					self.phone = "%s (%s)" %(phone, phonename)
@@ -505,7 +511,9 @@ class FritzProtocol(LineReceiver):
 					self.number = config.plugins.FritzCall.prefix.value + self.number
 
 				if self.number is not "":
+					print "[FritzProtocol] lineReceived phonebook.search: %s" %self.number
 					self.caller = phonebook.search(self.number)
+					print "[FritzProtocol] lineReceived phonebook.search reault: %s" %self.caller
 					if (self.caller is None) and config.plugins.FritzCall.lookup.value:
 						FritzReverseLookupAndNotifier(self.event, self.number, self.caller, self.phone, self.date)
 						return							# reverselookup is supposed to handle the message itself 
