@@ -44,7 +44,7 @@ class ConfigMutable(ConfigElement):
 			self.currentConfig = self.configElementDict[key]
 			self.currentKey = key
 			self.saved_value = self.currentConfig.saved_value
-			
+
 	def setValue(self, val):
 		self.currentConfig.value = val
 		self.changed()
@@ -55,12 +55,12 @@ class ConfigMutable(ConfigElement):
 
 	def getValue(self):
 		return self.currentConfig.value
-	
+
 	def get_Value(self):
 		return self.currentConfig._value
 
 	_value = property(get_Value, set_Value)
-	
+
 	def fromstring(self, value):
 		return self.currentConfig.fromstring(value)
 
@@ -79,14 +79,14 @@ class ConfigMutable(ConfigElement):
 	def cancel(self):
 		self.setAsCurrent(self.defaultKey)
 		self.load()
-		
+
 	def isChanged(self):
 		return self.currentConfig.isChanged()
 
 	def changed(self):
 		for x in self.notifiers:
 			x(self)
-			
+
 	def addNotifier(self, notifier, initial_call = True):
 		assert callable(notifier), "notifiers must be callable"
 		self.notifiers.append(notifier)
@@ -198,8 +198,9 @@ class __VlcServerConfig():
 		return self.getServerByName(config.plugins.vlcplayer.defaultserver.value)
 
 	def setAsDefault(self, defaultServer):
-		config.plugins.vlcplayer.defaultserver.value = defaultServer.getName()
-		config.plugins.vlcplayer.defaultserver.save()
+		if defaultServer is not None:
+			config.plugins.vlcplayer.defaultserver.value = defaultServer.getName()
+			config.plugins.vlcplayer.defaultserver.save()
 
 	def __save(self):
 		config.plugins.vlcplayer.servercount.value = self.__getServerCount()
@@ -268,9 +269,9 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, cfglist, session)
 
 		server.addressType().addNotifier(self.switchAddressType, False)
-		
+
 		self.onClose.append(self.__onClose)
-		
+
 	def __onClose(self):
 		self.server.addressType().deleteNotifier(self.switchAddressType)
 
