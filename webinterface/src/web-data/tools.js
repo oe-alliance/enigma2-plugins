@@ -498,15 +498,60 @@ function initChannelList(){
 }
 
 var servicereftoloadepgnow = "";
-var loadedChannellist = new Object();
+var loadedChannellist = new Array();
+function getElementOfChannelList(element) {
+	debug("getElementOfChannelList: "+element);
+	for ( var i = 0; i <loadedChannellist.length; i++){
+		if(loadedChannellist[i] == String(element)) {
+			debug("getElementOfChannelList returning: " +loadedChannellist[i+1]);
+			return loadedChannellist[i+1];
+		}
+		i++;
+	}
+}
+function setElementOfChannelList(element, object) {
+	var num = loadedChannellist.length;
+
+	debug("setElementOfChannelList1:"+num);
+	
+	loadedChannellist[num] = String(element);
+	num++;
+	loadedChannellist[num] = object;
+	debug("setElementOfChannelList2:"+num);
+}
+function hasElementOfChannelList(element) {
+	for ( var i = 0; i <loadedChannellist.length; i++){
+		if(loadedChannellist[i] == String(element)) {
+			return true;
+		}
+		i++;
+	}
+	return false;
+}
+function getServiceName(ref) {
+	debug("getSericesName:"+ref);
+	ref = String(ref);
+	for ( var i = 1; i <loadedChannellist.length; i++){
+		services = loadedChannellist[i];
+		for ( var j = 0; j < services.length ; j++){
+			var reference = services[j];
+			debug(reference.getServiceReference() + " " +ref);
+			if(String(reference.getServiceReference()) == ref) {
+				return reference.getServiceName()
+			}
+		}
+		i++;
+	}
+	return ref;
+}
 function loadBouquet(servicereference){ 
 	debug("loading bouquet with "+servicereference);
 	servicereftoloadepgnow = servicereference;
-	debug("loadBouquet " + typeof(loadedChannellist[servicereftoloadepgnow]));
-	if(typeof(loadedChannellist[servicereftoloadepgnow]) == "undefined") {
-		doRequest(url_getServices+servicereference, incomingChannellist, true);
-	} else {
+	
+	if(hasElementOfChannelList(String(servicereftoloadepgnow))) {
 		incomingChannellist();
+	} else {
+		doRequest(url_getServices+servicereference, incomingChannellist, true);
 	}
 }
 
@@ -560,12 +605,11 @@ function renderBouquetTable(bouquet,templateHeader,templateItem,templateFooter){
 
 function incomingChannellist(request){
 	var services = null;
-	if(typeof(loadedChannellist[servicereftoloadepgnow]) != "undefined"){
-		services = loadedChannellist[servicereftoloadepgnow];
+	if(hasElementOfChannelList(String(servicereftoloadepgnow))){
+		services = getElementOfChannelList(String(servicereftoloadepgnow));
 	} else if(request.readyState == 4) {
 		services = new ServiceList(getXML(request)).getArray();
-		loadedChannellist[servicereftoloadepgnow] = services;
-		debug("got "+services.length+" Services");
+		setElementOfChannelList(String(servicereftoloadepgnow), services);
 	}
 	if(services != null) {
 		var smallNamespace = {'mainServiceRef': servicereftoloadepgnow };
@@ -583,8 +627,6 @@ function incomingChannellist(request){
 		setBodyMainContent('BodyContent');
 		setTimeout("getSubServices()", 5000);
 		loadServiceEPGNowNext(servicereftoloadepgnow);
-		
-		debug("incomingChannellist " + typeof(loadedChannellist[servicereftoloadepgnow]));
 	}
 }
 // Movies
@@ -793,7 +835,7 @@ function incomingSubServiceRequest(request){
 		if(services.length > 1) {
 			
 			first = services[0];
-			var mainChannellist = loadedChannellist[String($('mainServiceRef').value)];
+			var mainChannellist = getElementOfChannelList(String($('mainServiceRef').value));
 
 			last = false
 			for ( var i = 0; i < services.length ; i++){
@@ -818,7 +860,7 @@ function incomingSubServiceRequest(request){
 			$(first.getServiceReference()+'sub').innerHTML = listerHtml;
 			
 			subServicesInsertedList[String(first.getServiceReference())] = services;
-			loadedChannellist[$('mainServiceRef').value] = mainChannellist;
+			setElementOfChannelList(String($('mainServiceRef').value), mainChannellist);
 		}
 	}
 }

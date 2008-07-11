@@ -639,6 +639,19 @@ var tplAddAutoTimerForm  = '<table border=0 cellpadding=0 cellspacing=10>';
 	tplAddAutoTimerForm += '<td colspan="3"><input name="name" id="name" type="text" size="100" maxlength="100" style="color: #000000;" value="%(name)"></td></tr>';
 	tplAddAutoTimerForm += '<tr><td colspan="3">Description:</td>';
 	tplAddAutoTimerForm += '<td colspan="3"><input name="descr" id="descr" type="text" size="100" maxlength="100" style="color: #000000;" value="%(description)"></td></tr>';
+
+	tplAddAutoTimerForm += '<tr><td colspan="3">Services:</td>';
+	tplAddAutoTimerForm += '<td colspan="3"><input name="services" id="services" type="text" size="95" style="color: #000000;" value="%(services)">';
+	tplAddAutoTimerForm += '&nbsp;<img src="/webdata/gfx/edit.gif" title="edit allowed services" border="0" onclick="editAutoTimerServices(%(timers_element));"></td></tr>';
+
+	tplAddAutoTimerForm += '<tr><td colspan="3">Excludes:</td>';
+	tplAddAutoTimerForm += '<td colspan="3"><input name="excludes" id="excludes" type="text" size="95" style="color: #000000;" value="%(excludes)">';
+	tplAddAutoTimerForm += '&nbsp;<img src="/webdata/gfx/edit.gif" title="edit excludes" border="0" onclick="editAutoTimerExcludes(%(timers_element));"></td></tr>';
+	
+	tplAddAutoTimerForm += '<tr><td colspan="3">Includes:</td>';
+	tplAddAutoTimerForm += '<td colspan="3"><input name="includes" id="includes" type="text" size="95" style="color: #000000;" value="%(includes)">';
+	tplAddAutoTimerForm += '&nbsp;<img src="/webdata/gfx/edit.gif" title="edit includes" border="0" onclick="editAutoTimerIncludes(%(timers_element));"></td></tr>';
+
 	tplAddAutoTimerForm += '<tr><td colspan="3">After event do:</td>';
 	tplAddAutoTimerForm += '<td colspan="3"><select id="after_event" name="after_event" size="1">%(afterEvent)</select></td></tr>';
 	tplAddAutoTimerForm += '<tr>&nbsp;&nbsp;</tr>';

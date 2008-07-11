@@ -109,7 +109,7 @@ class AT( Source ):
                 innerList.append(timer.getCounterLimit()) # 18
                 
                 if timer.hasDestination():
-                    innerList.append(timer.getDestination()) # 19
+                    innerList.append(timer.hasDestination()) # 19
                 else:
                     innerList.append("/hdd/movie/") # 19
                     

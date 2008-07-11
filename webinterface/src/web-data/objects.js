@@ -916,8 +916,12 @@ function AutoTimer(xml){
 	}
 	try{
 		this.afterevent = xml.getElementsByTagName('e2afterevent').item(0).firstChild.data;
+		if(this.afterevent == "None") {
+			this.afterevent = 0;
+		}
+		this.afterevent = Number(this.afterevent);
 	} catch (e) {
-		this.afterevent = "N/A";
+		this.afterevent = 0;
 	}
 	try{
 		this.toggledisabledimg = xml.getElementsByTagName('e2toggledisableimg').item(0).firstChild.data;

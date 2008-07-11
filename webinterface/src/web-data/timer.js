@@ -457,20 +457,20 @@ function timerFormExtendChannellist(bouqet) {
 	}
 	if(found == 1) {
 		servicereftoloadepgnow = bouqet;
-		if(typeof(loadedChannellist[servicereftoloadepgnow]) == "undefined") {	
-			doRequest(url_getServices+servicereftoloadepgnow, incomingTimerFormExtendChannellist, true);
-		} else {
+		if( getElementOfChannelList(String(servicereftoloadepgnow)) ) {	
 			incomingTimerFormExtendChannellist();
+		} else {
+			doRequest(url_getServices+servicereftoloadepgnow, incomingTimerFormExtendChannellist, true);
 		}
 	}
 }
 function incomingTimerFormExtendChannellist(request) {
 	var services = null;
-	if(typeof(loadedChannellist[servicereftoloadepgnow]) != "undefined"){
-		services = loadedChannellist[servicereftoloadepgnow];
+	if( getElementOfChannelList(String(servicereftoloadepgnow)) ) {
+		services = getElementOfChannelList(String(servicereftoloadepgnow));
 	} else if(request.readyState == 4) {
 		services = new ServiceList(getXML(request)).getArray();
-		loadedChannellist[servicereftoloadepgnow] = services;
+		setElementOfChannelList(String(servicereftoloadepgnow), services);
 		debug("got "+services.length+" Services");
 	}
 	var attachLater = new Object();
@@ -719,6 +719,9 @@ function incomingAutoTimerList(request){
 				,'beginDate': timer.getTimespanbegin()
 				,'end': timer.getTimespanend()
 				,'endDate': timer.getTimespanend()
+				,'duration': timer.getDuration()
+				
+				,'aftereventReadable': aftereventReadable[timer.getAfterevent()]
 				,'sendToggleTimerDisable_FUNCTION': "sendToggleAutoTimerDisable("+i+")"
 				,'delTimer_FUNCTION': "delAutoTimer("+i+")"
 				,'loadTimerFormSeconds_FUNCTION': "loadAutoTimer("+i+")"
@@ -796,7 +799,15 @@ function loadAutoTimer(element) {
 	var beginDate = timer.getTimespanbegin().split(":");
 	var endDate =   timer.getTimespanend().split(":");
 	
+	debug("loadedChannellist: "+loadedChannellist.length);
 	
+	var services = splitPythonArray(timer.getServices());
+	var servicesNames = "";
+	for ( var i = 0; i <services.length; i++){
+		if(i > 0) {servicesNames += ", ";} 
+		servicesNames += getServiceName(escape(services[i]));
+	}
+
 	var namespace = { 	
 				 'justplay': addTimerFormCreateOptionList(Action, timer.getJustplay)
 				,'shour': addTimerFormCreateOptions(0,23,beginDate[0])
@@ -808,12 +819,65 @@ function loadAutoTimer(element) {
 				,'repeated': addTimerFormCreateOptions(0,99,timer.getCounter())
 				,'deleteOldOnSave': addTimerEditFormObject["deleteOldOnSave"]
 				,'afterEvent': addTimerFormCreateOptionList(AfterEvent, timer.getAfterevent())
-				,'timers_element': element
+				,'timers_element': ""+element
+				,'services': servicesNames
 		};
 	var listerHtml = RND(tplAddAutoTimerForm, namespace);
 	$('BodyContent').innerHTML = listerHtml;
+	$('services').disabled = true;
+	$('excludes').disabled = true;
+	$('includes').disabled = true;
 }
 
 function sendAddAutoTimer() {
 	debug("sendAddAutoTimer");
+}
+
+function editAutoTimerServices(element) {
+	debug("editAutoTimerServices " + element);
+	timer = autotimers[Number(element)];
+
+	services = splitPythonArray(timer.getServices());
+	debug("there are "+services.length+" services "+ services);
+	
+	var channels = "";
+	for ( var i = 0; i <services.length; i++){
+		debug("service "+services[i]);
+		channels += "<input type=checkbox name=\""+services[i]+"\">"+getServiceName(escape(services[i]))+"<br/>";
+	}
+	debug(channels);
+	var channelObject
+	var dashString = "------";
+	channelObject[dashString] = "- Bouquets -";
+	var listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_tv)])).getArray();
+	/*if(addTimerEditFormObject["channelSort"] == "radio") {
+		debug("weiter");
+		listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_radio)])).getArray();
+	}*/
+	for (i = 1; i < listeNeu.length; i++) {
+		var element = listeNeu[i];
+		channelObject[String(dashString+i)] = "---";
+		channelObject[element.getServiceReference()] = element.getServiceName();
+	}
+	Dialog.confirm(
+		"Selected channels:<br>"
+		+"Channel: "+channels+"<br>"
+		+"Select: "+addTimerFormCreateOptionList(channelObject, "")+"<br/>"
+		,{windowParameters: {width:300, className: windowStyle},
+			okLabel: "delete",
+			buttonClass: "myButtonClass",
+			cancel: function(win) {debug("editAutoTimerServices cancel confirm panel")},
+			ok: function(win) { 
+							    debug("editAutoTimerServices ok confirm panel"); 
+							    //doRequest(url_timerdelete+"?sRef="+sRef+"&begin="+begin+"&end="+end, readyFunction, false);
+							    return true;
+							  }
+			}
+	);
+}
+function splitPythonArray(str) {
+	//debug("splitPythonArray "+str);
+	str = str.replace(/\[[u]*\'(.*)\'\]/, "$1");
+	str = str.replace(/, u/, ", ");
+	return str.split("\', \'");
 }
