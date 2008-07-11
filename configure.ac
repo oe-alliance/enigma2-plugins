@@ -57,6 +57,7 @@ webinterface/src/web-data/lib/ptwindow/themes/iefix/Makefile
 
 wirelesslan/Makefile
 wirelesslan/src/Makefile
+wirelesslan/po/Makefile
 
 netcaster/Makefile
 netcaster/src/Makefile
@@ -116,5 +117,6 @@ ofdb/src/Makefile
 
 networkwizard/Makefile
 networkwizard/src/Makefile
+networkwizard/po/Makefile
 
 ])
