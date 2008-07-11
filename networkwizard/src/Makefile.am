@@ -4,5 +4,6 @@ install_PYTHON =	\
 	__init__.py \
 	plugin.py \
 	NetworkWizard.py \
-	networkwizard.xml
+	networkwizard.xml \
+	WizardPluginLanguage.py
 	

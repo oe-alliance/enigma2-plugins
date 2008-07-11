@@ -58,12 +58,29 @@ self["rc"].startMoving()
 			</code>
 		</step>
 
-		<step id="conflan" nextstep="checklanstatusend">
+		<step id="conflan" nextstep="conflandns">
 			<text value="Please configure your LAN internet connection by filling out the required values.\nWhen you are ready press OK to continue." />
-			<config screen="AdapterSetup" module="NetworkSetup" args="0" type="ConfigList" />
+			<config screen="AdapterSetup" module="NetworkSetup" args="'eth0'" type="ConfigList" />
 			<code>
 self.checkInterface('eth0')
 			</code>	
+			<code>
+self["arrowup2"].moveTo(525, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowup3"].moveTo(590, 320, 1)
+self["arrowup3"].startMoving()
+self["arrowdown"].moveTo(557, 200, 1)
+self["arrowup"].moveTo(557, 355, 1)
+self["arrowdown"].startMoving()
+self["arrowup"].startMoving()
+self["rc"].moveTo(500, 50, 1)
+self["rc"].startMoving()
+			</code>
+		</step>
+
+		<step id="conflandns" nextstep="checklanstatusend">
+			<text value="Please configure or verify your Nameservers by filling out the required values.\nWhen you are ready press OK to continue." />
+			<config screen="NameserverSetup" module="NetworkSetup" type="ConfigList" />
 			<code>
 self["arrowup2"].moveTo(525, 320, 1)
 self["arrowup2"].startMoving()
@@ -193,9 +210,26 @@ self["rc"].startMoving()
 		</step>
 
 
-		<step id="wlanconfig" nextstep="checkwlanstatusend" timeout="60" timeoutaction="selectnext">
+		<step id="wlanconfig" nextstep="confwlandns" timeout="60" timeoutaction="selectnext">
 			<text value="Please configure your wireless LAN internet connection by filling out the required values.\nWhen you are done, press OK to continue." />
-			<config screen="AdapterSetup" module="NetworkSetup" args="1" type="ConfigList" />
+			<config screen="AdapterSetup" module="NetworkSetup" args="'wlan0'" type="ConfigList" />
+			<code>
+self["arrowup2"].moveTo(525, 320, 1)
+self["arrowup2"].startMoving()
+self["arrowup3"].moveTo(590, 320, 1)
+self["arrowup3"].startMoving()
+self["arrowdown"].moveTo(557, 200, 1)
+self["arrowup"].moveTo(557, 355, 1)
+self["arrowdown"].startMoving()
+self["arrowup"].startMoving()
+self["rc"].moveTo(500, 50, 1)
+self["rc"].startMoving()
+			</code>
+		</step>
+
+		<step id="confwlandns" nextstep="checkwlanstatusend">
+			<text value="Please configure or verify your Nameservers by filling out the required values.\nWhen you are ready press OK to continue." />
+			<config screen="NameserverSetup" module="NetworkSetup" type="ConfigList" />
 			<code>
 self["arrowup2"].moveTo(525, 320, 1)
 self["arrowup2"].startMoving()

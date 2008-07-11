@@ -1,5 +1,7 @@
+# for localized messages
+from __init__ import _
+
 from Screens.Wizard import wizardManager, WizardSummary
-from Screens.WizardLanguage import WizardLanguage
 from Components.Pixmap import Pixmap, MovingPixmap
 from Components.config import config, ConfigBoolean, configfile, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, getConfigListEntry, ConfigSelection
 from Components.Network import iNetwork
@@ -9,6 +11,7 @@ from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import time, os, re
+from WizardPluginLanguage import WizardPluginLanguage
 
 config.misc.firstrun = ConfigBoolean(default = True)
 list = []
@@ -24,7 +27,7 @@ config.plugins.wlan.encryption.enabled = NoSave(ConfigYesNo(default = False))
 config.plugins.wlan.encryption.type = NoSave(ConfigSelection(list, default = _("WPA")))
 config.plugins.wlan.encryption.psk = NoSave(ConfigText(default = "mysecurewlan", fixed_size = False))
 
-class NetworkWizard(WizardLanguage):
+class NetworkWizard(WizardPluginLanguage):
 	skin = """
 		<screen position="0,0" size="720,576" title="Welcome..." flags="wfNoBorder" >
 			<widget name="text" position="153,50" size="340,300" font="Regular;22" />
@@ -44,7 +47,7 @@ class NetworkWizard(WizardLanguage):
 	def __init__(self, session):
 		self.xmlfile = resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")
 		
-		WizardLanguage.__init__(self, session, showSteps = False, showStepSlider = False)
+		WizardPluginLanguage.__init__(self, session, showSteps = False, showStepSlider = False)
 		self.session = session
 		self["wizard"] = Pixmap()
 		self["rc"] = MovingPixmap()

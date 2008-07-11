@@ -1,10 +1,13 @@
+# for localized messages
+from __init__ import _
+
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.SystemInfo import SystemInfo
 from Components.ConfigList import ConfigListScreen
 from Components.config import getConfigListEntry, config
 from Components.config import config
-
+#from WizardPluginLanguage import _
 
 def NetworkWizardMain(session, **kwargs):
 	session.open(NetworkWizard)
@@ -20,9 +23,7 @@ def NetworkWizard(*args, **kwargs):
 	return NetworkWizard(*args, **kwargs)
 
 def Plugins(**kwargs):
-	list = [
-		#PluginDescriptor(name=_("Network Wizard"), description=_("Network Wizard"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) 
-	]
+	list = []
 	if config.misc.firstrun.value:
 		list.append(PluginDescriptor(name=_("Network Wizard"), where = PluginDescriptor.WHERE_WIZARD, fnc=(25, NetworkWizard)))
  	return list

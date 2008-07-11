@@ -1,0 +1,146 @@
+# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-06-17 17:26+0200\n"
+"PO-Revision-Date: 2007-06-14 10:15+0300\n"
+"Last-Translator: enigma® <enigma.ua@gmail.com>\n"
+"Language-Team: Russian / enigma(c) Ukraine, Kiev>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Русский\n"
+"X-Poedit-Country: RUSSIA\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+
+msgid "Configure your LAN again"
+msgstr ""
+
+msgid "Configure your internal LAN"
+msgstr ""
+
+msgid "Configure your wireless LAN"
+msgstr ""
+
+msgid "Configure your wireless LAN again"
+msgstr ""
+
+msgid "Exit wizard and configure later manually"
+msgstr ""
+
+msgid "Network Wizard"
+msgstr ""
+
+msgid "No Networks found"
+msgstr ""
+
+msgid ""
+"Please configure your LAN internet connection by filling out the required "
+"values.\n"
+"When you are ready press OK to continue."
+msgstr ""
+
+msgid ""
+"Please configure your wireless LAN internet connection by filling out the "
+"required values.\n"
+"When you are done, press OK to continue."
+msgstr ""
+
+msgid ""
+"Please select the wireless LAN network that you want to connect to.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+
+msgid "Restart your wireless interface"
+msgstr ""
+
+msgid ""
+"Thank you for using the wizard. Your Dreambox is now ready to use.\n"
+"Please press OK to continue."
+msgstr ""
+
+msgid ""
+"The wireless LAN plugin is not installed!\n"
+"Please install it and choose what you want to do next."
+msgstr ""
+
+msgid ""
+"Use the up/down keys on your remote control to select an option. After that, "
+"press OK.\n"
+"\n"
+"\n"
+"\n"
+"Connect to the internet..."
+msgstr ""
+
+msgid "WEP"
+msgstr ""
+
+msgid "WPA"
+msgstr ""
+
+msgid "WPA2"
+msgstr ""
+
+msgid ""
+"Welcome.\n"
+"\n"
+"If you want to connect your Dreambox to the Internet, this wizard will guide "
+"you through the basic network setup of your Dreambox.\n"
+"\n"
+"Press OK to start configuring your network"
+msgstr ""
+
+msgid ""
+"Your Dreambox is now ready to use.\n"
+"\n"
+"Your LAN internet connection is working now.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+
+msgid ""
+"Your Dreambox is now ready to use.\n"
+"\n"
+"Your wireless LAN internet connection is working now.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+
+msgid ""
+"Your LAN internet connection is not working!\n"
+"Please choose what you want to do next."
+msgstr ""
+
+msgid ""
+"Your network is restarting.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+
+msgid ""
+"Your wireless LAN internet connection could not be started!\n"
+"Have you attached your USB WLAN Stick?\n"
+"\n"
+"Please choose what you want to do next."
+msgstr ""
+
+msgid ""
+"Your wireless LAN internet connection is not working!\n"
+"Please choose what you want to do next."
+msgstr ""
+
+msgid "unavailable"
+msgstr ""
+
+msgid "via LAN."
+msgstr ""
+
+msgid "via wireless LAN."
+msgstr ""
