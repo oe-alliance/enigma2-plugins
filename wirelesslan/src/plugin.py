@@ -1,3 +1,6 @@
+# for localized messages
+from __init__ import _
+
 from enigma import eTimer
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
@@ -8,10 +11,11 @@ from Components.config import config, getConfigListEntry, ConfigYesNo, NoSave, C
 from Components.ConfigList import ConfigListScreen
 from Components.Network import Network, iNetwork
 from Plugins.Plugin import PluginDescriptor
-from os import system
+from os import system, path as os_path, listdir
 from Wlan import Wlan, WlanList, wpaSupplicant
 
 plugin_path = "/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan"
+
 list = []
 list.append(_("WEP"))
 list.append(_("WPA"))
@@ -25,64 +29,10 @@ config.plugins.wlan.encryption.enabled = NoSave(ConfigYesNo(default = False))
 config.plugins.wlan.encryption.type = NoSave(ConfigSelection(list, default = _("WPA")))
 config.plugins.wlan.encryption.psk = NoSave(ConfigText(default = "mysecurewlan", fixed_size = False))
 
-class WlanSelectScreen(Screen):
-	skin = """
-	<screen position="185,238" size="350,100" title="Wireless Network Tools" >
-		<widget name="menu" position="10,10" size="330,80" scrollbarMode="showOnDemand" />
-	</screen>
-	"""
-	
-	
-	def __init__(self, session, iface):
-		Screen.__init__(self, session)
-		self.session = session
-		
-		self.skin = WlanSelectScreen.skin
-		self.skin_path = plugin_path 		
-		
-		self.iface = iface
-		
-		list = []
-		list.append(_("Scan for Wireless Networks")) 
-		list.append(_("Show WLAN Status"))
-		list.append(_("Edit Wireless Settings"))
-		
-		
-		self["menu"] = MenuList(list)
-		
-		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
-		{
-			"ok": self.ok,
-			"back": self.exit,
-		}, -1)
-
-
-	def ok(self):
-		idx = self["menu"].getSelectedIndex()
-		if idx is 0:
-			self.session.open(WlanScan, self.iface)
-			print "[plugin.py:Wireless] Starting WlanScan"
-		elif idx is 1:
-			self.session.open(WlanStatus, self.iface)
-			print "[plugin.py:Wireless] Starting WlanStatus"
-
-		elif idx is 2:
-			self.session.open(WlanConfiguration, self.iface)
-			print "[plugin.py:Wireless] Starting Manual Configuration"
-
-		else:
-			print "[plugin.py:Wireless] Unkown Menupoint"
-				
-	
-	def exit(self):
-		self.close()
-
-
 
 class WlanStatus(Screen):
-	#<screen position="185,188" size="350,223" title="Wireless Network Status" >
 	skin = """
-	<screen position="90,150" size="550,300" title="Wireless Network Status" >
+	<screen position="90,150" size="550,300" title="Wireless Network State" >
 		<widget name="LabelBSSID" position="10,10" size="150,25" valign="left" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 		<widget name="LabelESSID" position="10,38" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 		<widget name="LabelQuality" position="10,66" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
@@ -150,13 +100,17 @@ class WlanStatus(Screen):
 		self.resetList()
 		self.updateStatusbar()
 		
-		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
+		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions", "ShortcutActions"],
 		{
 			"ok": self.exit,
 			"back": self.exit,
+			"red": self.exit,
 		}, -1)
+		self.onLayoutFinish.append(self.layoutFinished)
 		
-	
+	def layoutFinished(self):
+		self.setTitle(_("Wireless Network State"))
+		
 	def resetList(self):
 		w = Wlan(self.iface)
 		stats = w.getStatus()
@@ -237,7 +191,10 @@ class WlanScan(Screen):
 			"green": self.select,
 			"yellow": self.rescan,
 		})
-
+		self.onLayoutFinish.append(self.layoutFinished)
+		
+	def layoutFinished(self):
+		self.setTitle(_("Choose a Wireless Network"))
 	
 	def select(self):
 		cur = self["list"].getCurrent()
@@ -270,104 +227,8 @@ class WlanScan(Screen):
 		self["info"].setText(str(length)+_(" Wireless Network(s) found!"))	
 
 
-	
-class WlanConfiguration(ConfigListScreen, Screen):
-	skin = """
-		<screen position="90,100" size="550,400" title="Wireless Network Configuration" >
-			<widget name="interface" position="10,10" size="530,30" font="Regular;24" valign="center" />
-			<widget name="config" position="10,60" size="530,150" scrollbarMode="showOnDemand" />
-			
-			<ePixmap name="BottomBG" pixmap="skin_default/bottombar.png" position="5,310" size="540,120" zPosition="1" transparent="1" alphatest="on" />
-			<widget name="Adaptertext" position="20,325" size="100,21" zPosition="10" font="Regular;19" transparent="1" />
-			<widget name="Adapter" position="110,325" size="300,21" zPosition="10" font="Regular;19" transparent="1" />
-			<widget name="introduction" position="110,360" size="300,20" zPosition="10" font="Regular;21" halign="center" transparent="1" />
-			<widget name="ButtonRedtext" position="430,325" size="80,21" zPosition="10" font="Regular;21" transparent="1" />
-			<ePixmap name="ButtonRed" pixmap="skin_default/buttons/button_red.png" position="410,325" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-		</screen>
-	"""
-	
-	def __init__(self, session, iface = "wlan0", essid = None, encrypted = False):		
-		Screen.__init__(self, session)		
-		self.skin = WlanConfiguration.skin
-		print "ESSID,",essid
-		self.iface = iface
-		self.list = []
-		self.ws = wpaSupplicant()
-		
-		self["introduction"] = Label(_("Press OK to activate the settings."))
-		self["interface"] = Label(_("Interface: ")+self.iface)
-		self["Adaptertext"] = Label(_("Network:"))
-		self["Adapter"] = Label(iNetwork.getFriendlyAdapterName(self.iface))
-		self["ButtonRedtext"] = Label(_("Close"))
-		
-		if essid is None:
-			self.ws.loadConfig()
-		
-		else:
-			config.plugins.wlan.essid.value = essid
-			config.plugins.wlan.encryption.enabled.value = True
-			
-
-		self["actions"] = ActionMap(["SetupActions"],
-		{
-			"ok": self.ok,
-			"cancel": self.cancel,
-		}, -2)
-		
-		ConfigListScreen.__init__(self, self.list)
-		self.createSetup()
-
-	
-	def createSetup(self):
-		self.list = [ ]
-						
-		self.list.append(getConfigListEntry(_("Network SSID"), config.plugins.wlan.essid))
-		#self.list.append(getConfigListEntry(_("Encryption"), config.plugins.wlan.encryption.enabled))
-		self.encryptionEnabled = getConfigListEntry(_("Encryption"), config.plugins.wlan.encryption.enabled)
-		self.list.append(self.encryptionEnabled)		
-		if config.plugins.wlan.encryption.enabled.value:
-			self.list.append(getConfigListEntry(_("Encryption Type"), config.plugins.wlan.encryption.type))
-			self.list.append(getConfigListEntry(_("Encryption Key"), config.plugins.wlan.encryption.psk))
-		
-		self["config"].list = self.list
-		self["config"].l.setList(self.list)
-
-	def keyLeft(self):
-		ConfigListScreen.keyLeft(self)
-		self.createSetup()
-
-	
-	def keyRight(self):
-		ConfigListScreen.keyRight(self)
-		self.createSetup()
-
-	
-	def ok(self):
-		self.ws.writeConfig()
-		iNetwork.deactivateNetworkConfig()
-		iNetwork.activateNetworkConfig()
-		self.close(2)
-
-	def cancel(self):
-		self.close(1)
-
-
-
-def EntryChosen(parms):
-	if parms[0]:
-		session = parms[0]
-		if parms[1] is not None:
-			val = parms[1]
-			essid = val[0]
-			encrypted = val[2]
-			iface = val[3]
-			session.open(WlanConfiguration, iface, essid, encrypted)
-		else:
-			session.open(WlanConfiguration)
-
-
-def WlanSelectScreenMain(session, iface):
-	session.open(WlanSelectScreen, iface)
+def WlanStatusScreenMain(session, iface):
+	session.open(WlanStatus, iface)
 
 
 def callFunction(iface):
@@ -376,19 +237,28 @@ def callFunction(iface):
 	i = w.getWirelessInterfaces()
 	if i:
 		if iface in i:
-			return WlanSelectScreenMain	
+			return WlanStatusScreenMain	
 	
 	return None
 
 
 def configStrings(iface):
-	ret=system("dmesg | grep \"rt73: using permanent MAC addr\"")
+	driver = iNetwork.detectWlanModule()
+	print "WLAN-MODULE",driver
+	if driver == 'ralink':
+		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dralink\n	post-down killall -q wpa_supplicant"
+	if driver == 'madwifi':
+		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dmadwifi\n	post-down killall -q wpa_supplicant"
+	if driver == 'zydas':
+		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B\n	post-down killall -q wpa_supplicant"
+
+	"""ret=system("dmesg | grep \"rt73: using permanent MAC addr\"")
 	ret2=system("dmesg | grep \"rt73: using net dev supplied MAC addr\"")
 	if ret == 0 or ret2 == 0:
 		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dralink\n	post-down killall -q wpa_supplicant"
 	else:
 		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B\n	post-down killall -q wpa_supplicant"
-	
+	"""
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "menuEntryName": lambda x: "Wireless Network Configuartion..."})

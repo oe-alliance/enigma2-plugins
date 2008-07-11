@@ -1,3 +1,6 @@
+# for localized messages
+from __init__ import _
+
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER
 from Components.MultiContent import MultiContentEntryText
 from Components.GUIComponent import GUIComponent
@@ -329,3 +332,5 @@ class wpaSupplicant:
 	def restart(self, iface):
 		system("start-stop-daemon -K -x /usr/sbin/wpa_supplicant")
 		system("start-stop-daemon -S -x /usr/sbin/wpa_supplicant -- -B -i"+iface+" -c/etc/wpa_supplicant.conf")
+
+
