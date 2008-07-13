@@ -36,6 +36,21 @@ class AutoTimerList(MenuList):
 
 		return res
 
+	def getCurrent(self):
+		cur = self.l.getCurrentSelection()
+		return cur and cur[0]
+
+	def moveToEntry(self, entry):
+		if entry is None:
+			return
+
+		idx = 0
+		for x in self.list:
+			if x[0] == entry:
+				self.instance.moveSelectionTo(idx)
+				break
+			idx += 1
+
 class AutoTimerPreviewList(MenuList):
 	"""Preview Timers, emulates TimerList"""
 	

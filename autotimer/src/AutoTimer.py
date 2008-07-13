@@ -111,7 +111,13 @@ class AutoTimer:
 		return self.timers
 
 	def getTupleTimerList(self):
-		return [(x,) for x in self.timers]
+		list = self.timers
+		return [(x,) for x in list]
+
+	def getSortedTupleTimerList(self):
+		list = self.timers[:]
+		list.sort()
+		return [(x,) for x in list]
 
 	def getUniqueId(self):
 		self.uniqueTimerId += 1

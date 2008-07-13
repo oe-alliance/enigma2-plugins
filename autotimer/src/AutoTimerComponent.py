@@ -506,6 +506,12 @@ class AutoTimerComponent(object):
 		except AttributeError:
 			return False
 
+	def __lt__(self, other):
+		try:
+			return self.name.lower() < other.name.lower()
+		except:
+			return False
+
 	def __ne__(self, other):
 		return not self.__eq__(other)
 

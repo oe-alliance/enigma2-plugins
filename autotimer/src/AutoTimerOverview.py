@@ -103,7 +103,9 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 	def refresh(self, res = None):
 		# Re-assign List
-		self["entries"].setList(self.autotimer.getTupleTimerList())
+		cur = self["entries"].getCurrent()
+		self["entries"].setList(self.autotimer.getSortedTupleTimerList())
+		self["entries"].moveToEntry(cur)
 
 	def ok(self):
 		# Edit selected Timer
@@ -112,7 +114,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			self.session.openWithCallback(
 				self.editCallback,
 				AutoTimerEditor,
-				current[0]
+				current
 			)
 
 	def remove(self):
@@ -122,13 +124,13 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			self.session.openWithCallback(
 				self.removeCallback,
 				MessageBox,
-				_("Do you really want to delete %s?") % (cur[0].name),
+				_("Do you really want to delete %s?") % (cur.name),
 			)
 
 	def removeCallback(self, ret):
 		cur = self["entries"].getCurrent()
 		if ret and cur:
-			self.autotimer.remove(cur[0].id)
+			self.autotimer.remove(cur.id)
 			self.refresh()
 
 	def cancel(self):
@@ -157,7 +159,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				(_("Preview"), "preview"),
 				(_("Import"), "import"),
 				(_("Setup"), "setup"),
-				(_("Edit new timer defaults"), "defaults")
+				(_("Edit new timer defaults"), "defaults"),
 			],
 		)
 
@@ -171,16 +173,13 @@ class AutoTimerOverview(Screen, HelpableScreen):
 					timers
 				)
 			elif ret == "import":
-				# XXX: apply defaults here too?
+				newTimer = self.autotimer.defaultTimer.clone()
+				newTimer.id = self.autotimer.getUniqueId()
+
 				self.session.openWithCallback(
 					self.importCallback,
 					AutoTimerImportSelector,
-					AutoTimerComponent(
-						self.autotimer.getUniqueId(),	# Id
-						"",								# Name
-						"",								# Match
-						True							# Enabled
-					)
+					newTimer
 				)
 			elif ret == "setup":
 				self.session.open(

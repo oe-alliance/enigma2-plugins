@@ -61,31 +61,12 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 			# Asking the user if this is what he wants might be better though
 			self.close(self.servicePath[-1])
 
-class AutoTimerEditor(Screen, ConfigListScreen):
-	"""Edit AutoTimer"""
-
-	skin = """<screen name="AutoTimerEdit" title="Edit AutoTimer" position="75,155" size="565,280">
-		<widget name="config" position="5,5" size="555,225" scrollbarMode="showOnDemand" />
-		<ePixmap position="0,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="140,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" position="280,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" position="420,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-	</screen>"""
-
-	def __init__(self, session, timer, editingDefaults = False):
-		Screen.__init__(self, session)
-
+class AutoTimerEditorBase():
+	""" Base Class for all Editors """
+	def __init__(self, timer, editingDefaults = False):
 		# Keep Timer
 		self.timer = timer
 		self.editingDefaults = editingDefaults
-
-		# Summary
-		self.setup_title = "AutoTimer Editor"
-		self.onChangedEntry = []
 
 		# See if we are filtering some strings
 		self.excludes = (
@@ -117,71 +98,6 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			self.serviceRestriction = False
 
 		self.createSetup(timer)
-
-		# We might need to change shown items, so add some notifiers
-		self.timespan.addNotifier(self.reloadList, initial_call = False)
-		self.offset.addNotifier(self.reloadList, initial_call = False)
-		self.duration.addNotifier(self.reloadList, initial_call = False)
-		self.afterevent.addNotifier(self.reloadList, initial_call = False)
-		self.afterevent_timespan.addNotifier(self.reloadList, initial_call = False)
-		self.counter.addNotifier(self.reloadList, initial_call = False)
-		self.useDestination.addNotifier(self.reloadList, initial_call = False)
-
-		self.refresh()
-
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
-
-		# Initialize Buttons
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("OK"))
-		self["key_yellow"] = Button()
- 		self["key_blue"] = Button()
-
-		# Set Button texts
-		self.renameServiceButton()
-		self.renameFilterButton()
-
-		# Define Actions
-		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
-			{
-				"cancel": self.cancel,
-				"save": self.maybeSave,
-				"ok": self.ok,
-				"yellow": self.editFilter,
-				"blue": self.editServices
-			}, -2
-		)
-
-		# Trigger change
-		self.changed()
-
-	def renameFilterButton(self):
-		if self.filterSet:
-			self["key_yellow"].setText(_("Edit Filters"))
-		else:
-			self["key_yellow"].setText(_("Add Filters"))
-
-	def renameServiceButton(self):
-		if self.serviceRestriction:
-			self["key_blue"].setText(_("Edit Services"))
-		else:
-			self["key_blue"].setText(_("Add Services"))
-
-	def changed(self):
-		for x in self.onChangedEntry:
-			try:
-				x()
-			except:
-				pass
-
-	def getCurrentEntry(self):
-		return self["config"].getCurrent()[0]
-
-	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].getText())
-
-	def createSummary(self):
-		return SetupSummary
 
 	def createSetup(self, timer):
 		# Name
@@ -305,6 +221,96 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		if default not in choices:
 			choices.append(default)
 		self.destination = ConfigSelection(default = default, choices = choices)
+
+
+class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
+	"""Edit AutoTimer"""
+
+	skin = """<screen name="AutoTimerEdit" title="Edit AutoTimer" position="75,155" size="565,280">
+		<widget name="config" position="5,5" size="555,225" scrollbarMode="showOnDemand" />
+		<ePixmap position="0,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget name="key_red" position="0,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_green" position="140,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_yellow" position="280,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_blue" position="420,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+	</screen>"""
+
+	def __init__(self, session, timer, editingDefaults = False):
+		Screen.__init__(self, session)
+
+		AutoTimerEditorBase.__init__(self, timer, editingDefaults)
+
+		# Summary
+		self.setup_title = "AutoTimer Editor"
+		self.onChangedEntry = []
+
+		# We might need to change shown items, so add some notifiers
+		self.timespan.addNotifier(self.reloadList, initial_call = False)
+		self.offset.addNotifier(self.reloadList, initial_call = False)
+		self.duration.addNotifier(self.reloadList, initial_call = False)
+		self.afterevent.addNotifier(self.reloadList, initial_call = False)
+		self.afterevent_timespan.addNotifier(self.reloadList, initial_call = False)
+		self.counter.addNotifier(self.reloadList, initial_call = False)
+		self.useDestination.addNotifier(self.reloadList, initial_call = False)
+
+		self.refresh()
+
+		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+
+		# Initialize Buttons
+		self["key_red"] = Button(_("Cancel"))
+		self["key_green"] = Button(_("OK"))
+		self["key_yellow"] = Button()
+ 		self["key_blue"] = Button()
+
+		# Set Button texts
+		self.renameServiceButton()
+		self.renameFilterButton()
+
+		# Define Actions
+		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
+			{
+				"cancel": self.cancel,
+				"save": self.maybeSave,
+				"ok": self.ok,
+				"yellow": self.editFilter,
+				"blue": self.editServices
+			}, -2
+		)
+
+		# Trigger change
+		self.changed()
+
+	def renameFilterButton(self):
+		if self.filterSet:
+			self["key_yellow"].setText(_("Edit Filters"))
+		else:
+			self["key_yellow"].setText(_("Add Filters"))
+
+	def renameServiceButton(self):
+		if self.serviceRestriction:
+			self["key_blue"].setText(_("Edit Services"))
+		else:
+			self["key_blue"].setText(_("Add Services"))
+
+	def changed(self):
+		for x in self.onChangedEntry:
+			try:
+				x()
+			except:
+				pass
+
+	def getCurrentEntry(self):
+		return self["config"].getCurrent()[0]
+
+	def getCurrentValue(self):
+		return str(self["config"].getCurrent()[1].getText())
+
+	def createSummary(self):
+		return SetupSummary
 
 	def refresh(self):
 		# First three entries are only showed when not editing defaults
@@ -444,8 +450,16 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 			self.close(None)
 
 	def maybeSave(self):
+		# Check if any match is set
+		if not self.match.value.strip():
+			self.session.open(
+					MessageBox,
+					_("The match attribute is mandatory."),
+					type = MessageBox.TYPE_ERROR,
+					timeout = 5
+			)
 		# Check if we have a trailing whitespace
-		if self.match.value[-1:] == " ":
+		elif self.match.value[-1:] == " ":
 			self.session.openWithCallback(
 				self.saveCallback,
 				MessageBox,
@@ -467,7 +481,7 @@ class AutoTimerEditor(Screen, ConfigListScreen):
 		self.timer.match = self.match.value
 
 		# Name
-		self.timer.name = self.name.value or self.timer.match
+		self.timer.name = self.name.value.strip() or self.timer.match
 
 		# Enabled
 		self.timer.enabled = self.enabled.value
