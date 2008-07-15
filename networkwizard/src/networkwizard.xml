@@ -1,97 +1,47 @@
 <wizard>
-		<step id="welcome" nextstep="introduction">
+		<step id="welcome" nextstep="selectinterface">
 			<text value="Welcome.\n\nIf you want to connect your Dreambox to the Internet, this wizard will guide you through the basic network setup of your Dreambox.\n\nPress OK to start configuring your network" />
 			<code>
-self["arrowdown"].moveTo(557, 232, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].moveTo(800, 232, 1)
-self["arrowup"].startMoving()
-self["arrowup2"].moveTo(800, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowup3"].moveTo(800, 320, 1)
-self["arrowup3"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
+self.clearSelectedKeys()
+self.selectKey("OK")
 			</code>
 		</step>
 
-		<step id="introduction" >
-		<condition>
-self.condition = (self.InterfaceAvailable == True )
-		</condition>
-			<text value="Use the up/down keys on your remote control to select an option. After that, press OK.\n\n\n\nConnect to the internet..." />
-			<list>
-				<listentry caption="via LAN." step="conflan" />
-				<listentry caption="via wireless LAN." step="scanwlan" />
-				<listentry caption="Exit wizard and configure later manually" step="end" />
-			</list>
-			<code>
-self["arrowup2"].moveTo(800, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowdown"].moveTo(557, 200, 1)
-self["arrowup"].moveTo(557, 355, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
-			</code>
-		</step>
+		<step id="selectinterface">
 
-		<step id="introduction" >
-		<condition>
-self.condition = (self.InterfaceAvailable == False )
-		</condition>
-			<text value="Use the up/down keys on your remote control to select an option. After that, press OK.\n\n\n\nConnect to the internet..." />
-			<list>
-				<listentry caption="via LAN." step="conflan" />
-				<listentry caption="Exit wizard and configure later manually" step="end" />
-			</list>
+			<text value="Please select the network interface that you want to use for your internet connection.\n\nPlease press OK to continue." />
+			<list type="dynamic" source="listInterfaces" evaluation="InterfaceSelectionMade" onselect="InterfaceSelectionMoved" />
 			<code>
-self["arrowup2"].moveTo(800, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowdown"].moveTo(557, 200, 1)
-self["arrowup"].moveTo(557, 355, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
+self.clearSelectedKeys()
+self.selectKey("OK")
+self.selectKey("UP")
+self.selectKey("DOWN")
 			</code>
-		</step>
-
-		<step id="conflan" nextstep="conflandns">
-			<text value="Please configure your LAN internet connection by filling out the required values.\nWhen you are ready press OK to continue." />
-			<config screen="AdapterSetup" module="NetworkSetup" args="'eth0'" type="ConfigList" />
-			<code>
-self.checkInterface('eth0')
+			<code pos="after">
+self.checkInterface(self.selectedInterface)			    
+self.currStep = self.getStepWithID(self.NextStep)
 			</code>	
+		</step>
+
+		<step id="nwconfig" nextstep="confdns">
+			<text value="Please configure your internet connection by filling out the required values.\nWhen you are ready press OK to continue." />
+			<config screen="AdapterSetup" module="NetworkSetup" args="self.selectedInterface" type="ConfigList" />
 			<code>
-self["arrowup2"].moveTo(525, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowup3"].moveTo(590, 320, 1)
-self["arrowup3"].startMoving()
-self["arrowdown"].moveTo(557, 200, 1)
-self["arrowup"].moveTo(557, 355, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
+self.clearSelectedKeys()
+self.selectKey("OK")
+self.selectKey("UP")
+self.selectKey("DOWN")
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
 			</code>
 		</step>
 
-		<step id="conflandns" nextstep="checklanstatusend">
+		<step id="confdns" nextstep="checklanstatusend">
 			<text value="Please configure or verify your Nameservers by filling out the required values.\nWhen you are ready press OK to continue." />
 			<config screen="NameserverSetup" module="NetworkSetup" type="ConfigList" />
 			<code>
-self["arrowup2"].moveTo(525, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowup3"].moveTo(590, 320, 1)
-self["arrowup3"].startMoving()
-self["arrowdown"].moveTo(557, 200, 1)
-self["arrowup"].moveTo(557, 355, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
+self.clearSelectedKeys()
+self.selectKey("OK")
 			</code>
 			<code pos="after">
 self.checkNetwork()
@@ -102,18 +52,10 @@ self.checkNetwork()
 		<condition>
 self.condition = (self.InterfaceState == True )
 		</condition>
-			<text value="Your Dreambox is now ready to use.\n\nYour LAN internet connection is working now.\n\nPlease press OK to continue." />
+			<text value="Your Dreambox is now ready to use.\n\nYour internet connection is working now.\n\nPlease press OK to continue." />
 			<code>
-self["arrowdown"].moveTo(557, 232, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].moveTo(800, 232, 1)
-self["arrowup"].startMoving()
-self["arrowup2"].moveTo(800, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowup3"].moveTo(800, 320, 1)
-self["arrowup3"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
+self.clearSelectedKeys()
+self.selectKey("OK")
 			</code>
 		</step>
 
@@ -121,43 +63,33 @@ self["rc"].startMoving()
 		<condition>
 self.condition = (self.InterfaceState == False )
 		</condition>
-			<text value="Your LAN internet connection is not working!\nPlease choose what you want to do next." />
+			<text value="Your internet connection is not working!\nPlease choose what you want to do next." />
 			<code>
-self["arrowdown"].moveTo(557, 232, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].moveTo(800, 232, 1)
-self["arrowup"].startMoving()
-self["arrowup2"].moveTo(800, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowup3"].moveTo(800, 320, 1)
-self["arrowup3"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
+self.clearSelectedKeys()
+self.selectKey("OK")
+self.selectKey("UP")
+self.selectKey("DOWN")
 			</code>
 			<list>
-				<listentry caption="Configure your LAN again" step="conflan" />
-				<listentry caption="Configure your wireless LAN" step="scanwlan" />
+				<listentry caption="Configure your network again" step="selectinterface" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />
 			</list>
 		</step>
 
-
-		<step id="scanwlan" nextstep="wlanconfig">
+		<step id="scanwlan" nextstep="nwconfig">
 		<condition>
-self.checkInterface('wlan0')			
+self.checkInterface(self.selectedInterface)			
 self.condition = (self.isInterfaceUp == True and self.WlanPluginInstalled == True)
 		</condition>
 			<text value="Please select the wireless LAN network that you want to connect to.\n\nPlease press OK to continue." />
 			<list type="dynamic" source="listModes" evaluation="modeSelectionMade" onselect="modeSelectionMoved" />
 			<code>
-self["arrowup2"].moveTo(800, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowdown"].moveTo(557, 200, 1)
-self["arrowup"].moveTo(557, 355, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
+self.clearSelectedKeys()
+self.selectKey("OK")
+self.selectKey("UP")
+self.selectKey("DOWN")
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
 			</code>
 			<code pos="after">
 self.saveAccessPoint(self.ap)
@@ -166,139 +98,47 @@ self.saveAccessPoint(self.ap)
 
 		<step id="scanwlan">
 		<condition>
-self.checkInterface('wlan0')				
+self.checkInterface(self.selectedInterface)				
 self.condition = (self.isInterfaceUp == False and self.WlanPluginInstalled == True)
 		</condition>
 			<text value="Your wireless LAN internet connection could not be started!\nHave you attached your USB WLAN Stick?\n\nPlease choose what you want to do next." />
 			<list>
 				<listentry caption="Configure your wireless LAN again" step="scanwlan" />
-				<listentry caption="Configure your internal LAN" step="conflan" />
+				<listentry caption="Configure your internal LAN" step="selectinterface" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />
 			</list>
 			<code>
-self["arrowup2"].moveTo(800, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowdown"].moveTo(557, 200, 1)
-self["arrowup"].moveTo(557, 355, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
+self.clearSelectedKeys()
+self.selectKey("OK")
+self.selectKey("UP")
+self.selectKey("DOWN")
 			</code>
 		</step>
 
 		<step id="scanwlan">
 		<condition>
-self.checkInterface('wlan0')				
+self.checkInterface(self.selectedInterface)				
 self.condition = (self.isInterfaceUp == True and self.WlanPluginInstalled == False)
 		</condition>
 			<text value="The wireless LAN plugin is not installed!\nPlease install it and choose what you want to do next." />
 			<list>
-				<listentry caption="Configure your internal LAN" step="conflan" />
+				<listentry caption="Configure your internal LAN" step="selectinterface" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />
 			</list>
 			<code>
-self["arrowup2"].moveTo(800, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowdown"].moveTo(557, 200, 1)
-self["arrowup"].moveTo(557, 355, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
+self.clearSelectedKeys()
+self.selectKey("OK")
+self.selectKey("UP")
+self.selectKey("DOWN")
 			</code>
-		</step>
-
-
-		<step id="wlanconfig" nextstep="confwlandns" timeout="60" timeoutaction="selectnext">
-			<text value="Please configure your wireless LAN internet connection by filling out the required values.\nWhen you are done, press OK to continue." />
-			<config screen="AdapterSetup" module="NetworkSetup" args="'wlan0'" type="ConfigList" />
-			<code>
-self["arrowup2"].moveTo(525, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowup3"].moveTo(590, 320, 1)
-self["arrowup3"].startMoving()
-self["arrowdown"].moveTo(557, 200, 1)
-self["arrowup"].moveTo(557, 355, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
-			</code>
-		</step>
-
-		<step id="confwlandns" nextstep="checkwlanstatusend">
-			<text value="Please configure or verify your Nameservers by filling out the required values.\nWhen you are ready press OK to continue." />
-			<config screen="NameserverSetup" module="NetworkSetup" type="ConfigList" />
-			<code>
-self["arrowup2"].moveTo(525, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowup3"].moveTo(590, 320, 1)
-self["arrowup3"].startMoving()
-self["arrowdown"].moveTo(557, 200, 1)
-self["arrowup"].moveTo(557, 355, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
-			</code>
-			<code pos="after">
-self.checkNetwork()
-			</code>	
-		</step>
-
-		<step id="checkwlanstatusend" nextstep="end">
-		<condition>
-self.condition = (self.InterfaceState == True )
-		</condition>
-			<text value="Your Dreambox is now ready to use.\n\nYour wireless LAN internet connection is working now.\n\nPlease press OK to continue." />
-			<code>
-self["arrowdown"].moveTo(557, 232, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].moveTo(800, 232, 1)
-self["arrowup"].startMoving()
-self["arrowup2"].moveTo(800, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowup3"].moveTo(800, 320, 1)
-self["arrowup3"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
-			</code>
-		</step>
-
-		<step id="checkwlanstatusend">
-		<condition>
-self.condition = (self.InterfaceState == False )
-		</condition>
-			<text value="Your wireless LAN internet connection is not working!\nPlease choose what you want to do next." />
-			<code>
-self["arrowup2"].moveTo(800, 320, 1)
-self["arrowup2"].startMoving()
-self["arrowdown"].moveTo(557, 200, 1)
-self["arrowup"].moveTo(557, 355, 1)
-self["arrowdown"].startMoving()
-self["arrowup"].startMoving()
-self["rc"].moveTo(500, 50, 1)
-self["rc"].startMoving()
-			</code>
-			<list>
-				<listentry caption="Configure your wireless LAN again" step="scanwlan" />
-				<listentry caption="Restart your wireless interface" step="wlanrestart" />
-				<listentry caption="Configure your internal LAN" step="conflan" />
-				<listentry caption="Exit wizard and configure later manually" step="end" />
-			</list>
-		</step>
-
-		<step id="wlanrestart" nextstep="checkwlanstatusend" timeout="3" timeoutaction="selectnext">
-			<text value="Your network is restarting.\n\nPlease press OK to continue." />
-			<code pos="after">
-self.restartNetwork()
-			</code>	
 		</step>
 
 		<step id="end">
-			<text value="Thank you for using the wizard. Your Dreambox is now ready to use.\nPlease press OK to continue." />
-
+			<text value="Thank you for using the wizard. Your Network is now ready to use.\nPlease press OK to continue." />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+			</code>
 		</step>
 </wizard>
 
