@@ -173,7 +173,7 @@ def parseEntry(element, baseTimer, defaults = False):
 			excludes[idx[where]].append(value.encode("UTF-8"))
 		except KeyError, ke:
 			pass
-	baseTimer.excludes = excludes
+	baseTimer.exclude = excludes
 
 	# Read out includes (use same idx)
 	includes = (baseTimer.getIncludedTitle(), baseTimer.getIncludedShort(), baseTimer.getIncludedDescription(), baseTimer.getIncludedDays())
@@ -187,7 +187,7 @@ def parseEntry(element, baseTimer, defaults = False):
 			includes[idx[where]].append(value.encode("UTF-8"))
 		except KeyError, ke:
 			pass
-	baseTimer.includes = includes
+	baseTimer.include = includes
 
 	# Read out recording tags (needs my enhanced tag support patch)
 	tags = baseTimer.tags
