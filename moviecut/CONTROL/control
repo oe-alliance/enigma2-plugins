@@ -1,0 +1,8 @@
+Package: enigma2-plugin-extensions-moviecut
+Version: 1.2-20080717
+Description: Perform the cuts specified with the Cutlist editor of DM7025
+Section: extra
+Priority: optional
+Architecture: mipsel
+Maintainer: Anders Holst <aho@sics.se>
+Depends: enigma2(>2.5cvs20080628)
