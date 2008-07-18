@@ -5,6 +5,6 @@ Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: 3c5x9 <3c5x9@gmx.net>
-Homepage: 
-Depends: enigma2(>= 1.0cvs20071803), gst-plugin-neonhttpsrc (>= 0.10.4)
+Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net/
+Depends: enigma2(>=1.0cvs20071803), gst-plugin-neonhttpsrc (>=0.10.4)
 Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
