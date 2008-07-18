@@ -44,7 +44,11 @@ config.plugins.FritzCall.phonebook = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.addcallers = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.phonebookLocation = ConfigSelection(choices = [("/etc/enigma2/PhoneBook.txt", _("Flash")), ("/media/usb/PhoneBook.txt", _("USB Stick")), ("/media/cf/PhoneBook.txt", _("CF Drive")), ("/media/hdd/PhoneBook.txt", _("Harddisk"))])
 config.plugins.FritzCall.password = ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.showType = ConfigEnableDisable(default = True)
+config.plugins.FritzCall.showShortcut = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.showVanity = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.prefix = ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.country = ConfigSelection(choices = [("DE", _("Germany")), ("CH", _("Switzerland"), ("IT"), _("Italy"))])
 
 class FritzCallPhonebook:
 	def __init__(self):
@@ -105,16 +109,17 @@ class FritzCallPhonebook:
 						thisname = name
 
 						kind = found.group(1)
-						if kind == "mobile":
-							thisname = thisname + " (" +_("mobile") + ")"
-						elif kind == "home":
-							thisname = thisname + " (" +_("home") + ")"
-						elif kind == "work":
-							thisname = thisname + " (" +_("work") + ")"
+						if config.plugins.FritzCall.showType.value:
+							if kind == "mobile":
+								thisname = thisname + " (" +_("mobile") + ")"
+							elif kind == "home":
+								thisname = thisname + " (" +_("home") + ")"
+							elif kind == "work":
+								thisname = thisname + " (" +_("work") + ")"
 
-						if found.group(3):
+						if config.plugins.FritzCall.showShortcut.value and found.group(3):
 							thisname = thisname + ", " + _("Shortcut") + ": " + found.group(3)
-						if found.group(4):
+						if config.plugins.FritzCall.showVanity.value and found.group(4):
 							thisname = thisname + ", " + _("Vanity") + ": " + found.group(4)
 
 						thisnumber = found.group(2).strip()
@@ -136,9 +141,9 @@ class FritzCallPhonebook:
 					if found:
 						name = found.group(1)
 						thisnumber = found.group(2)
-						if found.group(3):
+						if config.plugins.FritzCall.showShortcut.value and found.group(3):
 							name = name + ", " + _("Shortcut") + ": " + found.group(3)
-						if found.group(4):
+						if config.plugins.FritzCall.showVanity.value and found.group(4):
 							name = name + ", " +_("Vanity") +": " + found.group(4)
 						name = name.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
 						print "[FritzCallPhonebook] Adding '''%s''' with '''%s''' from Fritz!Box Phonebook!" %(name, thisnumber)
@@ -293,6 +298,8 @@ class FritzCallSetup(ConfigListScreen, Screen):
 		if config.plugins.FritzCall.enable.value:
 			self.list.append(getConfigListEntry(_("Fritz!Box FON IP address"), config.plugins.FritzCall.hostname))
 
+			self.list.append(getConfigListEntry(_("Country"), config.plugins.FritzCall.country))
+
 			self.list.append(getConfigListEntry(_("Show Calls for specific MSN"), config.plugins.FritzCall.filter))
 			if config.plugins.FritzCall.filter.value:
 				self.list.append(getConfigListEntry(_("MSN to show"), config.plugins.FritzCall.filtermsn))
@@ -304,6 +311,9 @@ class FritzCallSetup(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Read PhoneBook from Fritz!Box"), config.plugins.FritzCall.fritzphonebook))
 			if config.plugins.FritzCall.fritzphonebook.value:
 				self.list.append(getConfigListEntry(_("Password Accessing Fritz!Box"), config.plugins.FritzCall.password))
+				self.list.append(getConfigListEntry(_("Append type of number (home, mobile, business"), config.plugins.FritzCall.showType))
+				self.list.append(getConfigListEntry(_("Append shortcut number"), config.plugins.FritzCall.showShortcut))
+				self.list.append(getConfigListEntry(_("Append vanity name"), config.plugins.FritzCall.showVanity))
 
 			self.list.append(getConfigListEntry(_("Use internal PhoneBook"), config.plugins.FritzCall.phonebook))
 			if config.plugins.FritzCall.phonebook.value:
@@ -353,9 +363,23 @@ class FritzReverseLookupAndNotifier():
 		self.date = date
 
 		print "[FritzReverseLookupAndNotifier] reverse Lookup for %s!" %self.number
-		url = "http://www.dasoertliche.de/?form_name=search_inv&ph=%s" %self.number
-		getPage(url, method="GET").addCallback(self.gotPageDasOertliche).addErrback(self.gotErrorDasOertliche)
-		
+		if config.plugins.FritzCall.country.value == "DE":
+			if self.number[:4] == "0041":		 # Switzerland calling
+				url = "http://tel.search.ch/result.html?name=&m...&tel=%s" %self.number.replace("0041","0")
+				getPage(url, method="GET").addCallback(self.gotPageTelSearchCH).addErrback(self.gotErrorLast)
+			else:
+				url = "http://www.dasoertliche.de/?form_name=search_inv&ph=%s" %self.number
+				getPage(url, method="GET").addCallback(self.gotPageDasOertliche).addErrback(self.gotErrorDasOertliche)
+		elif config.plugins.FritzCall.country.value == "CH":
+			url = "http://tel.search.ch/result.html?name=&m...&tel=%s" %self.number
+			getPage(url, method="GET").addCallback(self.gotPageTelSearchCH).addErrback(self.gotErrorLast)
+		elif config.plugins.FritzCall.country.value == "IT":
+			url = "http://www.paginebianche.it/execute.cgi?btt=1&ts=106&cb=8&mr=10&rk=&om=&qs=%s" %self.number
+			getPage(url, method="GET").addCallback(self.gotPagePaginebiancheIT).addErrback(self.gotErrorLast)
+		else:
+			print "[FritzProtocol] reverse Lookup: unknown country?!?!"
+
+
 	def notifyAndReset(self, timeout=config.plugins.FritzCall.timeout.value):
 		if self.event == "RING":
 			text = _("Incoming Call on %s from\n---------------------------------------------\n%s\n%s\n---------------------------------------------\nto: %s") % (self.date, self.number, self.caller, self.phone)
@@ -367,7 +391,7 @@ class FritzReverseLookupAndNotifier():
 
 	def gotErrorDasOertliche(self, error):			 # so we try Klicktel
 		url = "http://www.klicktel.de/telefonbuch/backwardssearch.html?newSearch=1&boxtype=backwards&vollstaendig=%s" %self.number
-		getPage(url, method="GET").addCallback(self.gotPageKlicktel).addErrback(self.gotErrorKlicktel)
+		getPage(url, method="GET").addCallback(self.gotPageKlicktel).addErrback(self.gotErrorLast)
 
 	def gotPageDasOertliche(self, html):
 		print "[FritzReverseLookupAndNotifier] gotPageDasOertliche"
@@ -376,32 +400,28 @@ class FritzReverseLookupAndNotifier():
 			if found:
 				td = found.group(1)					# group(1) is the content of (.*?) in our pattern
 				td.decode("ISO-8859-1").encode("UTF-8")
+				found = re.match('.*<div.*</div>.*<div>.*<a.*class="entry">([^<]*)</a>.*</div>(.*)', td, re.S)
+				if found:
+					name = found.group(1)
+					td = found.group(2)
+				else:
+					return False
+				
 				text = re.sub("<.*?>", "", td)		# remove tags and their content
 				text = text.split("\n")
 				#===============================================================================
 				# 
 				#	The logic here is as follows:
-				#
-				#	The first line in the table, which has a word followed by a space
-				#	followed by a word is the name. As of the time of writing that was line 3,
-				#	but that could change in the future.
 				#	
-				#	Starting from the next line after that we are looking for a line
+				#	We are looking for a line
 				#	containing 5 digits (PLZ) followed by a space followed by a word at the
 				#	end of the line. If found, we assume, that that is the address. The right
 				#	one at time of writing was 10.
 				#	
 				#===============================================================================
-				nameLine = 3	 # as of 08.06.08
-				if not re.search('\S+ \S+', text[nameLine].replace("&nbsp;", " ").strip()):
-					for i in range(0,len(text)-1):
-						if re.search('\S+ \S+', text[i].replace("&nbsp;", " ").strip()):
-							nameLine = i
-							break
-				name = text[nameLine].replace("&nbsp;", " ").strip()
 	
 				addrLine = 10	# as of 08.06.08 that was the correct one
-				for i in range(nameLine+1,len(text)-1):   # look for a line containing the address, i.e. "PLZ Name" at the end of the line
+				for i in range(0,len(text)-1):   # look for a line containing the address, i.e. "PLZ Name" at the end of the line
 					if re.search('\d\d\d\d\d \S+$', text[i].replace("&nbsp;", " ").strip()):
 						addrLine = i
 						break
@@ -424,7 +444,7 @@ class FritzReverseLookupAndNotifier():
 		url = "http://www.klicktel.de/telefonbuch/backwardssearch.html?newSearch=1&boxtype=backwards&vollstaendig=%s" %self.number
 		getPage(url, method="GET").addCallback(self.gotPageKlicktel).addErrback(self.gotErrorKlicktel)
 
-	def gotErrorKlicktel(self, error):
+	def gotErrorLast(self, error):
 		self.caller = _("UNKNOWN")
 		self.notifyAndReset()
 		
@@ -451,11 +471,72 @@ class FritzReverseLookupAndNotifier():
 			import traceback, sys
 			traceback.print_exc(file=sys.stdout)
 			#raise e
-
 		self.caller = _("UNKNOWN")
 		self.notifyAndReset()
 
-		
+
+	def gotPageTelSearchCH(self, html):
+		print "[FritzReverseLookupAndNotifier] gotPageTelSearchCH"
+		try:
+			html.decode("ISO-8859-1").encode("UTF-8")
+			html = html.replace("<br />", ", ")
+			found = re.match('.*<table class="record">.*<a href="[^"]+">([\S ,]+)</a>.*<div class="raddr">([\S ,]+)</div>.*</table>', html, re.S)
+			if found:
+				name = found.group(1).replace(",","")
+				address = found.group(2)
+				print "[FritzProtocol] Reverse lookup succeeded:\nName: %s\n\nAddress: %s" %(name, address)
+
+				self.caller = "%s, %s" %(name, address)
+
+				if self.number != 0 and config.plugins.FritzCall.addcallers.value and self.event == "RING":
+					phonebook.add(self.number, self.caller)
+					
+				self.notifyAndReset()
+				return True
+
+		except:
+			import traceback, sys
+			traceback.print_exc(file=sys.stdout)
+			#raise e
+		self.caller = _("UNKNOWN")
+		self.notifyAndReset()
+
+
+	def gotPagePaginebiancheIT(self, html):
+		print "[FritzReverseLookupAndNotifier] gotPagePaginebiancheIT"
+		try:
+			html.decode("ISO-8859-1").encode("UTF-8")
+			found = re.match('.*<div class="client-identifying-pg(.*class="org">.*class="postal-code">.*</span>.*class="locality">.*</span>.*class="region">.*</span>.*class="street-address">.*)</span></p></address>', html, re.S)
+			if found:
+				html = found.group(1)
+			else:
+				return False
+			found = re.match('.*class="org">([^<]*).*class="postal-code">([^<]*).*</span>.*class="locality">([^<]*).*</span>.*class="region">([^<]*).*</span>.*class="street-address">([^<]*).*', html, re.S)
+			if found:
+				name = found.group(1)
+				postalcode = found.group(2)
+				locality = found.group(3)
+				region = found.group(4)
+				streetaddress = found.group(5).replace(",","")
+				address =  streetaddress+ ", " + postalcode + " " + locality + " " + region
+				print "[FritzProtocol] Reverse lookup succeeded:\nName: %s\n\nAddress: %s" %(name, address)
+
+				self.caller = "%s, %s" %(name, address)
+
+				if self.number != 0 and config.plugins.FritzCall.addcallers.value and self.event == "RING":
+					phonebook.add(self.number, self.caller)
+
+				self.notifyAndReset()
+				return True
+
+		except:
+			import traceback, sys
+			traceback.print_exc(file=sys.stdout)
+			#raise e
+		self.caller = _("UNKNOWN")
+		self.notifyAndReset()
+
+
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
