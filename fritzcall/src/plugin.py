@@ -354,7 +354,7 @@ class FritzCallSetup(ConfigListScreen, Screen):
 #		the necessary data for the notification
 #===============================================================================
 
-class FritzReverseLookupAndNotifier():
+class FritzReverseLookupAndNotifier:
 	def __init__(self, event, number, caller, phone, date):
 		self.event = event
 		self.number = number
@@ -566,13 +566,18 @@ class FritzProtocol(LineReceiver):
 #15.07.06 00:38:58;DISCONNECT;1;0;
 #15.07.06 00:39:22;RING;0;<from/extern>;<to/our msn>;
 #15.07.06 00:39:27;DISCONNECT;0;0;
-
+		a = []
 		a = line.split(';')
 		(self.date, self.event) = a[0:2]
 
 		if self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoing.value):
 			phone = a[4]
-			number = (a[3] if self.event == "RING" else a[5])
+			 
+			if self.event == "RING":
+				number = a[3] 
+			else:
+				number = a[5]
+				
 			print "[FritzProtocol] lineReceived phone: '''%s''' number: '''%s'''" % (phone, number)
 
 			if not config.plugins.FritzCall.filter.value or config.plugins.FritzCall.filtermsn.value == phone:
