@@ -10,11 +10,13 @@ from AutoTimerEditor import AutoTimerEditor
 from AutoTimerSettings import AutoTimerSettings
 from AutoTimerPreview import AutoTimerPreview
 from AutoTimerImporter import AutoTimerImportSelector
+from AutoTimerWizard import AutoTimerWizard
 
 # GUI (Components)
 from AutoTimerList import AutoTimerList
 from Components.ActionMap import HelpableActionMap
 from Components.Button import Button
+from Components.config import config
 
 # Plugin
 from AutoTimerComponent import AutoTimerComponent
@@ -75,12 +77,19 @@ class AutoTimerOverview(Screen, HelpableScreen):
 	def add(self):
 		newTimer = self.autotimer.defaultTimer.clone()
 		newTimer.id = self.autotimer.getUniqueId()
-		
-		self.session.openWithCallback(
-			self.addCallback,
-			AutoTimerEditor,
-			newTimer
-		)
+
+		if config.plugins.autotimer.editor.value == "wizard":
+			self.session.openWithCallback(
+				self.addCallback,
+				AutoTimerWizard,
+				newTimer
+			)
+		else:
+			self.session.openWithCallback(
+				self.addCallback,
+				AutoTimerEditor,
+				newTimer
+			)
 
 	def editCallback(self, ret):
 		if ret:
@@ -152,15 +161,22 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			self.close(None)
 
 	def menu(self):
+		list = [
+			(_("Preview"), "preview"),
+			(_("Import"), "import"),
+			(_("Setup"), "setup"),
+			(_("Edit new timer defaults"), "defaults"),
+		]
+
+		if config.plugins.autotimer.editor.value == "wizard":
+			list.append((_("Create a new timer using the classic editor"), "newplain"))
+		else:
+			list.append((_("Create a new timer using the wizard"), "newwizard"))
+
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
-			list = [
-				(_("Preview"), "preview"),
-				(_("Import"), "import"),
-				(_("Setup"), "setup"),
-				(_("Edit new timer defaults"), "defaults"),
-			],
+			list = list,
 		)
 
 	def menuCallback(self, ret):
@@ -190,6 +206,24 @@ class AutoTimerOverview(Screen, HelpableScreen):
 					AutoTimerEditor,
 					self.autotimer.defaultTimer,
 					editingDefaults = True
+				)
+			elif ret == "newwizard":
+				newTimer = self.autotimer.defaultTimer.clone()
+				newTimer.id = self.autotimer.getUniqueId()
+
+				self.session.openWithCallback(
+					self.addCallback, # XXX: we could also use importCallback... dunno what seems more natural
+					AutoTimerWizard,
+					newTimer
+				)
+			elif ret == "newplain":
+				newTimer = self.autotimer.defaultTimer.clone()
+				newTimer.id = self.autotimer.getUniqueId()
+
+				self.session.openWithCallback(
+					self.addCallback,
+					AutoTimerEditor,
+					newTimer
 				)
 
 	def save(self):

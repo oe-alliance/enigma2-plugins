@@ -222,6 +222,23 @@ class AutoTimerEditorBase():
 			choices.append(default)
 		self.destination = ConfigSelection(default = default, choices = choices)
 
+	def pathSelected(self, res):
+		if res is not None:
+			if res not in self.destination.choices:
+				self.destination.choices.append(res)
+				self.destination.description[res] = res
+			self.destination.value = res
+
+	def chooseDestination(self):
+		from Screens.LocationBox import MovieLocationBox
+
+		self.session.openWithCallback(
+			self.pathSelected,
+			MovieLocationBox,
+			_("Choose target folder"),
+			self.destination.value,
+			minFree = 100 # Same requirement as in Screens.TimerEntry
+		)
 
 class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	"""Edit AutoTimer"""
@@ -417,23 +434,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		cur = self["config"].getCurrent()
 		cur = cur and cur[1]
 		if cur == self.destination:
-			from Screens.LocationBox import MovieLocationBox
-
-			self.session.openWithCallback(
-				self.pathSelected,
-				MovieLocationBox,
-				_("Choose target folder"),
-				self.destination.value,
-				minFree = 100 # Same requirement as in Screens.TimerEntry
-			)
+			self.chooseDestination()
 		else:
 			ConfigListScreen.keyOK(self)
-
-	def pathSelected(self, res):
-		if res is not None:
-			self.destination.choices.append(res)
-			self.destination.description[res] = res
-			self.destination.value = res
 
 	def cancel(self):
 		if self["config"].isChanged():

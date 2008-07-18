@@ -19,6 +19,11 @@ config.plugins.autotimer.refresh = ConfigSelection(choices = [
 	], default = "none"
 )
 config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = True)
+config.plugins.autotimer.editor = ConfigSelection(choices = [
+		("plain", _("Classic")),
+		("wizard", _("Wizard"))
+	], default = "wizard"
+)
 
 autotimer = None
 autopoller = None
