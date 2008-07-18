@@ -18,6 +18,11 @@ from Components.config import getConfigListEntry, KEY_0, KEY_DELETE, \
 from Tools import Directories
 
 class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
+	STEP_ID_BASIC = 2
+	STEP_ID_TIMESPAN = 5
+	STEP_ID_SERVICES = 7
+	STEP_ID_FILTER = 8
+
 	skin = """
 		<screen position="0,0" size="720,576" title="Welcome..." flags="wfNoBorder" >
 			<widget name="text" position="153,50" size="340,300" font="Regular;22" />
@@ -60,19 +65,19 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 				self.filterSet, self.excludes, self.includes
 		)
 
-		self["TextEntryActions"] = ActionMap("TextEntryActions",
+		self["TextEntryActions"] = ActionMap(["TextEntryActions"],
 			{
 				"deleteForward": self.deleteForward,
 				"deleteBackward": self.deleteBackward
-			}
+			}, -2
 		)
 
 	def getTranslation(self, text):
 		return _(text)
 
-	def regenTimespanList(self):
+	def regenTimespanList(self, *args, **kwargs):
 		self.generateTimespanList()
-		if self.currStep == 3:
+		if self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN:
 			self["config"].setList(self.timespanList)
 
 	def generateTimespanList(self):
@@ -88,38 +93,37 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 			])
 
 	def getConfigList(self):
-		if self.currStep == 2: # Basic
+		if self.currStep == AutoTimerWizard.STEP_ID_BASIC: # Basic
 			return [
 				getConfigListEntry(_("Enabled"), self.enabled),
 				getConfigListEntry(_("Description"), self.name),
 				getConfigListEntry(_("Match Title"), self.match),
 				getConfigListEntry(_("Timer Type"), self.justplay),
 			]
-		elif self.currStep == 5: # Timespan
+		elif self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN: # Timespan
 			return self.timespanList
-		elif self.currStep == 7: # Services
+		elif self.currStep == AutoTimerWizard.STEP_ID_SERVICES: # Services
 			return self.servicesDlg["config"].getList()
-		elif self.currStep == 8: # Filters
+		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER: # Filters
 			return self.filterDlg["config"].getList()
 		return []
 
 	def selectionMade(self):
-		if self.currStep == 2: # Basic
+		if self.currStep == AutoTimerWizard.STEP_ID_BASIC: # Basic
 			self.timer.enabled = self.enabled.value
 			self.timer.name = self.name.value.strip() or self.match.value
 			self.timer.match = self.match.value
 			self.timer.justplay = self.justplay.value == "zap"
 			self.emptyMatch = not self.timer.match.strip()
 			self.trailingWhitespacesMatch = (self.timer.match[-1:] == " ")
-		elif self.currStep == 3: # Timespan
-			# Timespan
+		elif self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN: # Timespan
 			if self.timespan.value:
 				start = self.timespanbegin.value
 				end = self.timespanend.value
 				self.timer.timespan = (start, end)
 			else:
 				self.timer.timespan = None
-		elif self.currStep == 4: # Services
+		elif self.currStep == AutoTimerWizard.STEP_ID_SERVICES: # Services
 			self.servicesDlg.saveCurrent()
 
 			if self.servicesDlg.enabled.value:
@@ -128,7 +132,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 			else:
 				self.timer.services = []
 				self.timer.bouquets = []
-		elif self.currStep == 5: # Filters
+		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER: # Filters
 			self.filterDlg.saveCurrent()
 
 			if self.filterDlg.enabled.value:
@@ -139,26 +143,26 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 				self.timer.excludes = []
 
 	def keyNumberGlobal(self, number):
-		if self.currStep == 2 or self.currStep == 3:
+		if self.currStep == AutoTimerWizard.STEP_ID_BASIC or self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN:
 			self["config"].handleKey(KEY_0 + number)
 		else:
 			WizardLanguage.keyNumberGlobal(self, number)
 
 	def blue(self):
 		print "blue"
-		if self.currStep == 4:
+		if self.currStep == AutoTimerWizard.STEP_ID_SERVICES:
 			self.servicesDlg.new()
 			return
-		elif self.currStep == 5:
+		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER:
 			self.filterDlg.new()
 			return
 
 	def yellow(self):
 		print "yellow"
-		if self.currStep == 4:
+		if self.currStep == AutoTimerWizard.STEP_ID_SERVICES:
 			self.servicesDlg.remove()
 			return
-		elif self.currStep == 5:
+		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER:
 			self.filterDlg.remove()
 			return
 

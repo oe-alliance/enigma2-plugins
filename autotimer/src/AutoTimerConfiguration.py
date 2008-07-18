@@ -116,7 +116,7 @@ def parseEntry(element, baseTimer, defaults = False):
 	justplay = int(element.getAttribute("justplay") or '0')
 
 	# Read out avoidDuplicateDescription
-	baseTimer.avoidDuplicateDescription = bool(element.getAttribute("avoidDuplicateDescription") or False)
+	baseTimer.avoidDuplicateDescription = int(element.getAttribute("avoidDuplicateDescription") or 0)
 
 	# Read out allowed services
 	servicelist = baseTimer.services	
@@ -344,7 +344,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 		justplay = int(timer.getAttribute("justplay") or '0')
 
 		# Read out avoidDuplicateDescription
-		avoidDuplicateDescription = bool(timer.getAttribute("avoidDuplicateDescription") or False)
+		avoidDuplicateDescription = int(timer.getAttribute("avoidDuplicateDescription") or 0)
 
 		# Read out afterevent (compatible to V* though behaviour for V3- is different as V4+ allows multiple afterevents while the last definication was chosen before)
 		idx = {"none": AFTEREVENT.NONE, "standby": AFTEREVENT.STANDBY, "shutdown": AFTEREVENT.DEEPSTANDBY, "deepstandby": AFTEREVENT.DEEPSTANDBY}
@@ -570,7 +570,7 @@ def writeConfig(filename, defaultTimer, timers):
 
 		# Duplicate Description
 		if timer.getAvoidDuplicateDescription():
-			list.append(' avoidDuplicateDescription="1" ')
+			list.extend([' avoidDuplicateDescription="', str(timer.getAvoidDuplicateDescription()), '"'])
 
 		# Only display justplay if true
 		if timer.justplay:

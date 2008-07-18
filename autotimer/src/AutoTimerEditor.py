@@ -201,7 +201,13 @@ class AutoTimerEditorBase():
 		self.counterFormatString = ConfigSelection(selection, default = timer.getCounterFormatString())
 
 		# Avoid Duplicate Description
-		self.avoidDuplicateDescription = ConfigEnableDisable(default = timer.getAvoidDuplicateDescription())
+		self.avoidDuplicateDescription = ConfigSelection([
+				("0", _("No")),
+				("1", _("On same service")),
+				("2", _("On any service")),
+			],
+			default = str(timer.getAvoidDuplicateDescription())
+		)
 
 		# Custom Location
 		if timer.hasDestination():
@@ -557,7 +563,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.matchLeft = 0
 			self.timer.matchFormatString = ''
 
-		self.timer.avoidDuplicateDescription = self.avoidDuplicateDescription.value
+		self.timer.avoidDuplicateDescription = int(self.avoidDuplicateDescription.value)
 
 		if self.useDestination.value:
 			self.timer.destination = self.destination.value

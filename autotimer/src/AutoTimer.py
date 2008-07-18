@@ -257,8 +257,15 @@ class AutoTimer:
 							newEntry.service_ref = ServiceReference(serviceref)
 
 							break
-						elif timer.getAvoidDuplicateDescription() and rtimer.description == description:
-							raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
+						elif timer.getAvoidDuplicateDescription() == 1 and rtimer.description == description:
+								raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
+					if newEntry is None and timer.getAvoidDuplicateDescription() == 2:
+						all = []
+						for list in recorddict.values():
+							all.extend(list)
+						for rtimer in all:
+							if rtimer.description == description:
+								raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
 
 				except AutoTimerIgnoreTimerException, etite:
 					print etite
@@ -272,6 +279,7 @@ class AutoTimer:
 					new += 1
 
 					print "[AutoTimer] Adding an event."
+
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, description, eit)
 					func = NavigationInstance.instance.RecordTimer.record
 

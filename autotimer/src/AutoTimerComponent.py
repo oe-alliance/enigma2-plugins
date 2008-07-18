@@ -40,7 +40,7 @@ class AutoTimerComponent(object):
 	def setValues(self, name, match, enabled, timespan = None, services = None, offset = None, \
 			afterevent = [], exclude = None, maxduration = None, destination = None, \
 			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
-			lastBegin = 0, justplay = False, avoidDuplicateDescription = False, bouquets = None, \
+			lastBegin = 0, justplay = False, avoidDuplicateDescription = 0, bouquets = None, \
 			tags = None):
 		self.name = name
 		self.match = match
