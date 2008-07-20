@@ -13,6 +13,8 @@ from Components.Pixmap import Pixmap
 from enigma import eTimer, eServiceReference, eServiceCenter, iServiceInformation, eConsoleAppContainer
 from os import WIFEXITED, WEXITSTATUS
 
+mcut_path = "/usr/lib/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut"
+
 def main(session, service, **kwargs):
 	session.open(MovieCut, service, **kwargs)
 
@@ -42,10 +44,10 @@ class MovieCut(ChoiceBox):
 		self.close()
 
 	def confirmed1(self, arg):
-		MovieCutSpawn(self.session, self, ["/usr/bin/mcut", "-r", self.service.getPath()], self.name)
+		MovieCutSpawn(self.session, self, [mcut_path, "-r", self.service.getPath()], self.name)
 
 	def confirmed2(self, arg):
-		MovieCutSpawn(self.session, self, ["/usr/bin/mcut", self.service.getPath()], self.name)
+		MovieCutSpawn(self.session, self, [mcut_path, self.service.getPath()], self.name)
 
 	def confirmed3(self, arg):
 		serviceHandler = eServiceCenter.getInstance()
@@ -59,7 +61,7 @@ class MovieCut(ChoiceBox):
 		if len(ret) <= 1 or not ret[0]:
 			self.close()
 			return
-		clist = ["/usr/bin/mcut"]
+		clist = [mcut_path]
 		if ret[1] == True:
 			clist.append("-r")
 		clist.append(self.service.getPath())
