@@ -119,4 +119,14 @@ networkwizard/Makefile
 networkwizard/src/Makefile
 networkwizard/po/Makefile
 
+movieretitle/Makefile
+movieretitle/src/Makefile
+
+moviecut/Makefile
+moviecut/src_cc/Makefile
+moviecut/src_py/Makefile
+
+tageditor/Makefile
+tageditor/src/Makefile
+
 ])
