@@ -11,9 +11,12 @@ from Components.Button import Button
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from enigma import eTimer, eServiceReference, eServiceCenter, iServiceInformation, eConsoleAppContainer
-from os import WIFEXITED, WEXITSTATUS
+from os import access, chmod, X_OK
 
 mcut_path = "/usr/lib/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut"
+# Hack to make sure it is executable
+if not access(mcut_path, X_OK):
+	chmod(mcut_path, 493)
 
 def main(session, service, **kwargs):
 	session.open(MovieCut, service, **kwargs)

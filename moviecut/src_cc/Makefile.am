@@ -4,4 +4,4 @@ bin_PROGRAMS = mcut
 
 mcut_SOURCES = mcut.cc
 
-install_PYTHON = mcut
+install_DATA = mcut
