@@ -260,12 +260,10 @@ class AutoTimer:
 						elif timer.getAvoidDuplicateDescription() == 1 and rtimer.description == description:
 								raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
 					if newEntry is None and timer.getAvoidDuplicateDescription() == 2:
-						all = []
 						for list in recorddict.values():
-							all.extend(list)
-						for rtimer in all:
-							if rtimer.description == description:
-								raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
+							for rtimer in list:
+								if rtimer.description == description:
+									raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
 
 				except AutoTimerIgnoreTimerException, etite:
 					print etite

@@ -149,22 +149,16 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 			WizardLanguage.keyNumberGlobal(self, number)
 
 	def blue(self):
-		print "blue"
 		if self.currStep == AutoTimerWizard.STEP_ID_SERVICES:
 			self.servicesDlg.new()
-			return
 		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER:
 			self.filterDlg.new()
-			return
 
 	def yellow(self):
-		print "yellow"
 		if self.currStep == AutoTimerWizard.STEP_ID_SERVICES:
 			self.servicesDlg.remove()
-			return
 		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER:
 			self.filterDlg.remove()
-			return
 
 	def maybeRemoveWhitespaces(self):
 		# XXX: Hack alert
@@ -182,12 +176,10 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 		self["config"].handleKey(KEY_BACKSPACE)
 
 	def cancel(self):
-		print "[AutoTimerWizard] cancel called"
 		self.doCancel = True
 		self.currStep = len(self.wizard)
 
 	def close(self, *args, **kwargs):
-		print "[AutoTimerWizard] closing"
 		if self.doCancel:
 			WizardLanguage.close(self, None)
 		else:
