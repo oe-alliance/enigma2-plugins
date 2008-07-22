@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens import Standby
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -33,6 +34,7 @@ my_global_session = None
 config.plugins.FritzCall = ConfigSubsection()
 config.plugins.FritzCall.enable = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.hostname = ConfigIP(default = [192, 168, 178, 1])
+config.plugins.FritzCall.afterStandby = ConfigSelection(choices = [("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
 config.plugins.FritzCall.filter = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.filtermsn = ConfigText(default = "", fixed_size = False)
 config.plugins.FritzCall.showOutgoing = ConfigEnableDisable(default = False)
@@ -48,7 +50,7 @@ config.plugins.FritzCall.showType = ConfigEnableDisable(default = True)
 config.plugins.FritzCall.showShortcut = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.showVanity = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.prefix = ConfigText(default = "", fixed_size = False)
-config.plugins.FritzCall.country = ConfigSelection(choices = [("DE", _("Germany")), ("CH", _("Switzerland"), ("IT"), _("Italy"))])
+config.plugins.FritzCall.country = ConfigSelection(choices = [("DE", _("Germany")), ("CH", _("Switzerland")), ("IT", _("Italy"))])
 
 class FritzCallPhonebook:
 	def __init__(self):
@@ -297,8 +299,9 @@ class FritzCallSetup(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Call monitoring"), config.plugins.FritzCall.enable))
 		if config.plugins.FritzCall.enable.value:
 			self.list.append(getConfigListEntry(_("Fritz!Box FON IP address"), config.plugins.FritzCall.hostname))
-
 			self.list.append(getConfigListEntry(_("Country"), config.plugins.FritzCall.country))
+
+			self.list.append(getConfigListEntry(_("Show after Standby"), config.plugins.FritzCall.afterStandby))
 
 			self.list.append(getConfigListEntry(_("Show Calls for specific MSN"), config.plugins.FritzCall.filter))
 			if config.plugins.FritzCall.filter.value:
@@ -306,7 +309,7 @@ class FritzCallSetup(ConfigListScreen, Screen):
 
 			self.list.append(getConfigListEntry(_("Show Outgoing Calls"), config.plugins.FritzCall.showOutgoing))
 			self.list.append(getConfigListEntry(_("Timeout for Call Notifications (seconds)"), config.plugins.FritzCall.timeout))
-			self.list.append(getConfigListEntry(_("Reverse Lookup Caller ID (DE only)"), config.plugins.FritzCall.lookup))
+			self.list.append(getConfigListEntry(_("Reverse Lookup Caller ID (DE,CH,IT only)"), config.plugins.FritzCall.lookup))
 
 			self.list.append(getConfigListEntry(_("Read PhoneBook from Fritz!Box"), config.plugins.FritzCall.fritzphonebook))
 			if config.plugins.FritzCall.fritzphonebook.value:
@@ -349,6 +352,73 @@ class FritzCallSetup(ConfigListScreen, Screen):
 			x[1].cancel()
 		self.close()
 
+standbyMode = False
+
+class FritzCallList():
+	def __init__(self):
+		self.callList = [ ]
+	
+	def add(self, event, date, number, caller, phone):
+		print "[FritzCallList] add"
+		self.callList.append((event, number, date, caller, phone))
+	
+	def display(self):
+		print "[FritzCallList] display"
+		global standbyMode
+		standbyMode = False
+		# Standby.inStandby.onClose.remove(self.display) object does not exist anymore...
+		# build screen from call list
+                text = "\n"
+		for call in self.callList:
+			(event, number, date, caller, phone) = call
+			if event == "RING":
+				direction = "->"
+			else:
+				direction = "<-"
+			found = re.match("(\d\d.\d\d).\d\d (\d\d:\d\d):\d\d", date)
+			date = found.group(1) + ". " + found.group(2)
+                        found = re.match(".*\((.*)\)", phone)
+                        if found: phone = found.group(1)
+                        if len(phone) > 20: phone = phone[:20]
+
+                        if caller == _("UNKNOWN") and number != "":
+                            caller = number
+                        else:
+                            found = re.match("(.*)\n.*", caller)
+                            if found: caller = found.group(1)
+                        if len(caller) > 20: caller = caller[:20]
+
+                        text = text + "%s %s %s %s\n" %(date, caller, direction, phone)
+                        print "[FritzCallList] display: '%s %s %s %s'" %(date, caller, direction, phone)
+                        # display screen
+		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO)
+		self.callList = [ ]
+
+
+callList = FritzCallList()
+
+def notifyCall(event, date, number, caller, phone):
+	if Standby.inStandby is None or config.plugins.FritzCall.afterStandby.value == "each":
+		if event == "RING":
+			text = _("Incoming Call on %s from\n---------------------------------------------\n%s\n%s\n---------------------------------------------\nto: %s") % (date, number, caller, phone)
+		else:
+			text = _("Outgoing Call on %s to\n---------------------------------------------\n%s\n%s\n---------------------------------------------\nfrom: %s") % (date, number, caller, phone)
+		print "[FritzCall] notifyCall:\n%s" %text
+		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
+	elif config.plugins.FritzCall.afterStandby.value == "inList":
+		#
+		# if not yet done, register function to show call list
+		global standbyMode
+		if not standbyMode :
+			standbyMode = True
+			Standby.inStandby.onClose.append(callList.display)
+		# add text/timeout to call list
+		callList.add(event, date, number, caller, phone)
+		print "[FritzCall] notifyCall: added to callList"
+	else: # this is the "None" case
+		print "[FritzCall] notifyCall: standby and no show"
+
+
 #===============================================================================
 #		We need a separate class for each invocation of reverseLookup to retain
 #		the necessary data for the notification
@@ -367,6 +437,9 @@ class FritzReverseLookupAndNotifier:
 			if self.number[:4] == "0041":		 # Switzerland calling
 				url = "http://tel.search.ch/result.html?name=&m...&tel=%s" %self.number.replace("0041","0")
 				getPage(url, method="GET").addCallback(self.gotPageTelSearchCH).addErrback(self.gotErrorLast)
+                        elif self.number[:4] == "0039":		 # Italy calling
+                                url = "http://www.paginebianche.it/execute.cgi?btt=1&ts=106&cb=8&mr=10&rk=&om=&qs=%s" %self.number.replace("0039","0")
+                                getPage(url, method="GET").addCallback(self.gotPagePaginebiancheIT).addErrback(self.gotErrorLast)
 			else:
 				url = "http://www.dasoertliche.de/?form_name=search_inv&ph=%s" %self.number
 				getPage(url, method="GET").addCallback(self.gotPageDasOertliche).addErrback(self.gotErrorDasOertliche)
@@ -381,13 +454,8 @@ class FritzReverseLookupAndNotifier:
 
 
 	def notifyAndReset(self, timeout=config.plugins.FritzCall.timeout.value):
-		if self.event == "RING":
-			text = _("Incoming Call on %s from\n---------------------------------------------\n%s\n%s\n---------------------------------------------\nto: %s") % (self.date, self.number, self.caller, self.phone)
-		else:
-			text = _("Outgoing Call on %s to\n---------------------------------------------\n%s\n%s\n---------------------------------------------\nfrom: %s") % (self.date, self.number, self.caller, self.phone)
-		print "[FritzReverseLookupAndNotifier] notifyAndReset:\n%s" %text
-		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=timeout)
-		#	at this point we could destroy the object, but I dunno how :-)
+		notifyCall(self.event, self.date, self.number, self.caller, self.phone)
+		# kill that object...
 
 	def gotErrorDasOertliche(self, error):			 # so we try Klicktel
 		url = "http://www.klicktel.de/telefonbuch/backwardssearch.html?newSearch=1&boxtype=backwards&vollstaendig=%s" %self.number
@@ -551,13 +619,7 @@ class FritzProtocol(LineReceiver):
 		self.date = '0'
 
 	def notifyAndReset(self, timeout=config.plugins.FritzCall.timeout.value):
-		print "[FritzProtocol] notifyAndReset: Call on %s from %s, %s to: %s" % (self.date, self.number, self.caller, self.phone)
-		if self.event == "RING":
-			text = _("Incoming Call on %s from\n---------------------------------------------\n%s\n%s\n---------------------------------------------\nto: %s") % (self.date, self.number, self.caller, self.phone)
-		else:
-			text = _("Outgoing Call on %s to\n---------------------------------------------\n%s\n%s\n---------------------------------------------\nfrom: %s") % (self.date, self.number, self.caller, self.phone)
-		print "[FritzProtocol] notifyAndReset:\n%s" %text
-		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=timeout)
+		notifyCall(self.event, self.date, self.number, self.caller, self.phone)
 		self.resetValues()
 
 	def lineReceived(self, line):
