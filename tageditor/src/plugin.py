@@ -11,7 +11,7 @@ from enigma import eServiceReference, eServiceCenter, iServiceInformation
 import os
 
 def main(session, service, **kwargs):
-	session.open(MovieTagEditor, service, **kwargs)
+	session.open(MovieTagEditor, service, session.current_dialog, **kwargs)
 
 def Plugins(**kwargs):
 	try:
@@ -264,8 +264,9 @@ class TagEditor(Screen):
 		self.close(list)
 
 class MovieTagEditor(TagEditor):
-	def __init__(self, session, service, args = 0):
+	def __init__(self, session, service, parent, args = 0):
 		self.service = service
+		self.parentscreen = parent
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(self.service)
 		self.path = self.service.getPath()
@@ -313,7 +314,7 @@ class MovieTagEditor(TagEditor):
 		# This will try to get back to an updated movie list.
 		# A proper way to do this should be provided in enigma2.
 		try:
-			self.session.current_dialog.csel.reloadList()
-			self.session.current_dialog.close()
+			self.parentscreen.csel.reloadList()
+			self.parentscreen.close()
 		except AttributeError:
 			pass
