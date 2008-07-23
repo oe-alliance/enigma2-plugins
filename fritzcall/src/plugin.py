@@ -354,7 +354,7 @@ class FritzCallSetup(ConfigListScreen, Screen):
 
 standbyMode = False
 
-class FritzCallList():
+class FritzCallList:
 	def __init__(self):
 		self.callList = [ ]
 	
