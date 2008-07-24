@@ -51,6 +51,7 @@ class TagEditor(Screen):
 		self.joinTags(self.tags, tags)
 		
 		self["list"] = SelectionList()
+		self.ghostlist = tags + []
 		self.updateMenuList(self.tags, tags)
 
 		# Define Actions
@@ -103,7 +104,7 @@ class TagEditor(Screen):
 				taglist.append(tag)
 
 	def setTimerTags(self, timer, tags):
-		if timer.tags != tags:
+		if hasattr(timer, "tags") and timer.tags != tags:
 			timer.tags = tags
 			self.timerdirty = True
 
@@ -130,7 +131,7 @@ class TagEditor(Screen):
 	def foreachTimerTags(self, func):
 		self.timerdirty = False
 		for timer in self.session.nav.RecordTimer.timer_list + self.session.nav.RecordTimer.processed_timers:
-			if timer.tags:
+			if hasattr(timer, "tags") and timer.tags:
 				func(timer, timer.tags+[])
 		if self.timerdirty:
 			self.session.nav.RecordTimer.saveTimer()
@@ -204,6 +205,7 @@ class TagEditor(Screen):
 			self.foreachMovieTags(lambda r, tg: (thistag in tg) and self.setMovieTags(r, self.listReplace(tg, thistag, res)))
 			self.listReplace(self.tags, thistag, res)
 			self.listReplace(self.ghosttags, thistag, res)
+			self.listReplace(self.ghostlist, thistag, res)
 			self.updateMenuList(self.tags, self.thistag[3] and [res] or [])
 
 	def removeTag(self):
@@ -221,6 +223,7 @@ class TagEditor(Screen):
 			self.foreachMovieTags(lambda r, tg: (thistag in tg) and self.setMovieTags(r, self.listReplace(tg, thistag)))
 			self.listReplace(self.tags, thistag)
 			self.listReplace(self.ghosttags, thistag)
+			self.listReplace(self.ghostlist, thistag)
 			self.updateMenuList(self.tags)
 
 	def removeAll(self):
@@ -236,6 +239,7 @@ class TagEditor(Screen):
 			self.foreachMovieTags(lambda r, tg: tg and self.setMovieTags(r, []))
 			self.tags = []
 			self.ghosttags = []
+			self.ghostlist = []
 			self.updateMenuList(self.tags)
 
 	def showMenu(self):
@@ -255,7 +259,9 @@ class TagEditor(Screen):
 	def cancel(self):
 		if not self.origtags == self.ghosttags:
 			self.saveTagsFile(self.ghosttags)
-		self.close(None)
+			self.close(self.ghostlist)
+		else:
+			self.close(None)
 
 	def accept(self):
 		list = [x[1] for x in self["list"].getSelectionsList()]
@@ -278,7 +284,6 @@ class MovieTagEditor(TagEditor):
 		else:
 			self.tags = []
 		TagEditor.__init__(self, session, self.tags, args)
-#		self.session.openWithCallback(self.tagsConfirmed, TagEditor, self.tags)
 
 	def saveTags(self, file, tags):
 		if os.path.exists(file + ".ts.meta"):
