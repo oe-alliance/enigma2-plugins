@@ -368,7 +368,11 @@ class FritzCallList:
 		standbyMode = False
 		# Standby.inStandby.onClose.remove(self.display) object does not exist anymore...
 		# build screen from call list
-                text = "\n"
+		text = "\n"
+		if self.callList[0] == "Start":
+			text = text + _("Last 10 calls:\n")
+			del self.callList[0]
+
 		for call in self.callList:
 			(event, number, date, caller, phone) = call
 			if event == "RING":
@@ -377,22 +381,28 @@ class FritzCallList:
 				direction = "<-"
 			found = re.match("(\d\d.\d\d).\d\d (\d\d:\d\d):\d\d", date)
 			date = found.group(1) + ". " + found.group(2)
-                        found = re.match(".*\((.*)\)", phone)
-                        if found: phone = found.group(1)
-                        if len(phone) > 20: phone = phone[:20]
+			found = re.match(".*\((.*)\)", phone)
+			if found: phone = found.group(1)
+			if len(phone) > 20: phone = phone[:20]
 
-                        if caller == _("UNKNOWN") and number != "":
-                            caller = number
-                        else:
-                            found = re.match("(.*)\n.*", caller)
-                            if found: caller = found.group(1)
-                        if len(caller) > 20: caller = caller[:20]
+			if caller == _("UNKNOWN") and number != "":
+				caller = number
+			else:
+				found = re.match("(.*)\n.*", caller)
+				if found: caller = found.group(1)
+			if len(caller) > 20: caller = caller[:20]
 
-                        text = text + "%s %s %s %s\n" %(date, caller, direction, phone)
-                        print "[FritzCallList] display: '%s %s %s %s'" %(date, caller, direction, phone)
-                        # display screen
+			text = text + "%s %s %s %s\n" %(date, caller, direction, phone)
+
+		print "[FritzCallList] display: '%s %s %s %s'" %(date, caller, direction, phone)
+		# display screen
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO)
+		# self.session.open(FritzCallDisplayCalls)
 		self.callList = [ ]
+		self.text = ""
+
+	def getList(self):
+		return self.text
 
 
 callList = FritzCallList()
@@ -437,9 +447,9 @@ class FritzReverseLookupAndNotifier:
 			if self.number[:4] == "0041":		 # Switzerland calling
 				url = "http://tel.search.ch/result.html?name=&m...&tel=%s" %self.number.replace("0041","0")
 				getPage(url, method="GET").addCallback(self.gotPageTelSearchCH).addErrback(self.gotErrorLast)
-                        elif self.number[:4] == "0039":		 # Italy calling
-                                url = "http://www.paginebianche.it/execute.cgi?btt=1&ts=106&cb=8&mr=10&rk=&om=&qs=%s" %self.number.replace("0039","0")
-                                getPage(url, method="GET").addCallback(self.gotPagePaginebiancheIT).addErrback(self.gotErrorLast)
+			elif self.number[:4] == "0039":		 # Italy calling
+				url = "http://www.paginebianche.it/execute.cgi?btt=1&ts=106&cb=8&mr=10&rk=&om=&qs=%s" %self.number.replace("0039","0")
+				getPage(url, method="GET").addCallback(self.gotPagePaginebiancheIT).addErrback(self.gotErrorLast)
 			else:
 				url = "http://www.dasoertliche.de/?form_name=search_inv&ph=%s" %self.number
 				getPage(url, method="GET").addCallback(self.gotPageDasOertliche).addErrback(self.gotErrorDasOertliche)
