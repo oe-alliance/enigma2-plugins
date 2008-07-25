@@ -7,192 +7,196 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-22 13:24+0200\n"
-"PO-Revision-Date: 2008-07-22 13:25+0200\n"
+"POT-Creation-Date: 2008-07-25 15:26+0200\n"
+"PO-Revision-Date: 2008-07-25 15:28+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../plugin.py:37
+#: plugin.py:37
 msgid "show nothing"
 msgstr "keine Anzeige"
 
-#: ../plugin.py:37
+#: plugin.py:37
 msgid "show as list"
 msgstr "Liste der Anrufe"
 
-#: ../plugin.py:37
+#: plugin.py:37
 msgid "show each call"
 msgstr "Anzeige der einzelnen Anrufe"
 
-#: ../plugin.py:47
+#: plugin.py:47
 msgid "Flash"
 msgstr "Flash"
 
-#: ../plugin.py:47
+#: plugin.py:47
 msgid "USB Stick"
 msgstr "USB Stick"
 
-#: ../plugin.py:47
+#: plugin.py:47
 msgid "CF Drive"
 msgstr "CF Laufwerk"
 
-#: ../plugin.py:47
+#: plugin.py:47
 msgid "Harddisk"
 msgstr "Festplatte"
 
-#: ../plugin.py:53
+#: plugin.py:53
 msgid "Germany"
 msgstr "Deutschland"
 
-#: ../plugin.py:53
+#: plugin.py:53
 msgid "Switzerland"
 msgstr "Schweiz"
 
-#: ../plugin.py:53
+#: plugin.py:53
 msgid "Italy"
 msgstr "Italien"
 
-#: ../plugin.py:73
+#: plugin.py:73
 #, python-format
 msgid "Fritz!Box Login failed! - Error: %s"
 msgstr "Fritz!Box Login fehlgeschlagen! - Fehler: %s"
 
-#: ../plugin.py:77
+#: plugin.py:77
 #, python-format
 msgid "Could not load phonebook from Fritz!Box - Error: %s"
 msgstr "Konnte Telefonbuch nicht von Fritz!Box laden - Fehler: %s"
 
-#: ../plugin.py:116
+#: plugin.py:116
 msgid "mobile"
 msgstr "mobil"
 
-#: ../plugin.py:118
+#: plugin.py:118
 msgid "home"
 msgstr "privat"
 
-#: ../plugin.py:120
+#: plugin.py:120
 msgid "work"
 msgstr "geschäftlich"
 
-#: ../plugin.py:123 ../plugin.py:147
+#: plugin.py:123 plugin.py:147
 msgid "Shortcut"
 msgstr "Kurzwahl"
 
-#: ../plugin.py:125 ../plugin.py:149
+#: plugin.py:125 plugin.py:149
 msgid "Vanity"
 msgstr "Vanity"
 
-#: ../plugin.py:154
+#: plugin.py:154
 msgid "Could not parse Fritz!Box Phonebook entry"
 msgstr "Konnte Eintrag in Frritz!Box-Telefonbuch nicht lesen"
 
-#: ../plugin.py:196
+#: plugin.py:196
 msgid "Fritz!Box Login failed! - Wrong Password!"
 msgstr "Fritz!Box Login fehlgeschlagen! - Falsches Passwort"
 
-#: ../plugin.py:271
+#: plugin.py:271
 msgid "You need to enable the monitoring on your Fritz!Box by dialing #96*5*!"
 msgstr ""
 "Monitoring auf der Fritz!Box muss durch Wählen von #96*5* eingeschaltet "
 "werden!"
 
-#: ../plugin.py:275
+#: plugin.py:275
 msgid "Cancel"
 msgstr "Abbruch"
 
-#: ../plugin.py:276
+#: plugin.py:276
 msgid "OK"
 msgstr "OK"
 
-#: ../plugin.py:299
+#: plugin.py:299
 msgid "Call monitoring"
 msgstr "Anrufanzeige"
 
-#: ../plugin.py:301
+#: plugin.py:301
 msgid "Fritz!Box FON IP address"
 msgstr "Fritz!Box FON IP-Adresse"
 
-#: ../plugin.py:303
-msgid "Show after Standby"
-msgstr "Anzeige nach Standby"
-
-#: ../plugin.py:305
-msgid "Show Calls for specific MSN"
-msgstr "Zeige nur Anrufe bestimmter Nummern"
-
-#: ../plugin.py:307
-msgid "MSN to show"
-msgstr "anzuzeigende MSN"
-
-#: ../plugin.py:309
-msgid "Show Outgoing Calls"
-msgstr "Zeige ausgehende Anrufe an"
-
-#: ../plugin.py:310
-msgid "Timeout for Call Notifications (seconds)"
-msgstr "Anzeigedauer in Sekunden"
-
-#: ../plugin.py:311
-msgid "Reverse Lookup Caller ID (DE,CH,IT only)"
-msgstr "Rückwärtssuche (nur DE,CH,IT)"
-
-#: ../plugin.py:313
+#: plugin.py:302
 msgid "Country"
 msgstr "Land"
 
-#: ../plugin.py:315
+#: plugin.py:304
+msgid "Show after Standby"
+msgstr "Anzeige nach Standby"
+
+#: plugin.py:306
+msgid "Show Calls for specific MSN"
+msgstr "Zeige nur Anrufe bestimmter Nummern"
+
+#: plugin.py:308
+msgid "MSN to show (separated by ,)"
+msgstr "anzuzeigende MSNs (getrennt durch ,)"
+
+#: plugin.py:310
+msgid "Show Outgoing Calls"
+msgstr "Zeige ausgehende Anrufe an"
+
+#: plugin.py:311
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Anzeigedauer in Sekunden"
+
+#: plugin.py:312
+msgid "Reverse Lookup Caller ID (DE,CH,IT only)"
+msgstr "Rückwärtssuche (nur DE,CH,IT)"
+
+#: plugin.py:314
 msgid "Read PhoneBook from Fritz!Box"
 msgstr "Telefonbuch der Fritz!Box auslesen"
 
-#: ../plugin.py:317
+#: plugin.py:316
 msgid "Password Accessing Fritz!Box"
 msgstr "Passwort der Fritz!Box"
 
-#: ../plugin.py:318
+#: plugin.py:317
 msgid "Append type of number (home, mobile, business"
 msgstr "Zeige auch Typ der Nummer an"
 
-#: ../plugin.py:319
+#: plugin.py:318
 msgid "Append shortcut number"
 msgstr "Zeige auch Kurzwahl an"
 
-#: ../plugin.py:320
+#: plugin.py:319
 msgid "Append vanity name"
 msgstr "Zeige auch Vanity-Nummer an"
 
-#: ../plugin.py:322
+#: plugin.py:321
 msgid "Use internal PhoneBook"
 msgstr "Benutze internes Telefonbuch"
 
-#: ../plugin.py:324
+#: plugin.py:323
 msgid "PhoneBook Location"
 msgstr "Speicherort des Telefonbuchs"
 
-#: ../plugin.py:325
+#: plugin.py:324
 msgid "Automatically add new Caller to PhoneBook"
 msgstr "Anrufer automatisch dem Telefonbuch hinzufügen"
 
-#: ../plugin.py:327
+#: plugin.py:326
 msgid "Strip Leading 0"
 msgstr "Führende 0 entfernen"
 
-#: ../plugin.py:328
+#: plugin.py:327
 msgid "Prefix for Outgoing Calls"
 msgstr "Vorwahl für ausgehende Anrufe"
 
-#: ../plugin.py:343
+#: plugin.py:342
 msgid "Can't create PhoneBook.txt"
 msgstr "Kann Phonebook.txt nicht anlegen"
 
-#: ../plugin.py:385 ../plugin.py:517 ../plugin.py:543 ../plugin.py:570
-#: ../plugin.py:605 ../plugin.py:671
+#: plugin.py:373
+msgid "Last 10 calls:\n"
+msgstr "Die letzten zehn Anrufe im Standby:\n"
+
+#: plugin.py:388 plugin.py:526 plugin.py:552 plugin.py:579 plugin.py:614
+#: plugin.py:683
 msgid "UNKNOWN"
 msgstr "UNBEKANNT"
 
-#: ../plugin.py:404
+#: plugin.py:413
 #, python-format
 msgid ""
 "Incoming Call on %s from\n"
@@ -209,7 +213,7 @@ msgstr ""
 "---------------------------------------------\n"
 "an: %s"
 
-#: ../plugin.py:406
+#: plugin.py:415
 #, python-format
 msgid ""
 "Outgoing Call on %s to\n"
@@ -226,15 +230,15 @@ msgstr ""
 "---------------------------------------------\n"
 "von: %s"
 
-#: ../plugin.py:684
+#: plugin.py:696
 msgid "Connecting to Fritz!Box..."
 msgstr "Verbinde mit Fritz!Box..."
 
-#: ../plugin.py:687
+#: plugin.py:699
 msgid "Connected to Fritz!Box!"
 msgstr "Verbunden mit Fritz!Box!"
 
-#: ../plugin.py:693
+#: plugin.py:705
 #, python-format
 msgid ""
 "Connection to Fritz!Box! lost\n"
@@ -245,7 +249,7 @@ msgstr ""
 " (%s)\n"
 "neuer Versuch..."
 
-#: ../plugin.py:697
+#: plugin.py:709
 #, python-format
 msgid ""
 "Connecting to Fritz!Box failed\n"
@@ -256,9 +260,12 @@ msgstr ""
 " (%s)\n"
 "neuer Versuch..."
 
-#: ../plugin.py:745 ../plugin.py:748
+#: plugin.py:757 plugin.py:760
 msgid "Display Fritzbox-Fon calls on screen"
 msgstr "Anzeige der Anrufe auf der Fritzbox-Fon"
+
+#~ msgid "MSN to show"
+#~ msgstr "anzuzeigende MSN"
 
 #~ msgid "Could not read Fritz!Box Phonebook"
 #~ msgstr "Konnte Fritz!Box-Telefonbuch nicht lesen"

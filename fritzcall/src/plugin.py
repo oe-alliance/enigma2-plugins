@@ -305,7 +305,7 @@ class FritzCallSetup(ConfigListScreen, Screen):
 
 			self.list.append(getConfigListEntry(_("Show Calls for specific MSN"), config.plugins.FritzCall.filter))
 			if config.plugins.FritzCall.filter.value:
-				self.list.append(getConfigListEntry(_("MSN to show"), config.plugins.FritzCall.filtermsn))
+				self.list.append(getConfigListEntry(_("MSN to show (separated by ,)"), config.plugins.FritzCall.filtermsn))
 
 			self.list.append(getConfigListEntry(_("Show Outgoing Calls"), config.plugins.FritzCall.showOutgoing))
 			self.list.append(getConfigListEntry(_("Timeout for Call Notifications (seconds)"), config.plugins.FritzCall.timeout))
@@ -652,7 +652,10 @@ class FritzProtocol(LineReceiver):
 				
 			print "[FritzProtocol] lineReceived phone: '''%s''' number: '''%s'''" % (phone, number)
 
-			if not config.plugins.FritzCall.filter.value or config.plugins.FritzCall.filtermsn.value == phone:
+                        filtermsns = config.plugins.FritzCall.filtermsn.value.split(",")
+                        for msn in filtermsns:
+                            msn = msn.strip()
+			if not config.plugins.FritzCall.filter.value or phone in filtermsns:
 				print "[FritzProtocol] lineReceived no filter hit"
 				phonename = phonebook.search(phone)		   # do we have a name for the number of our side?
 				if phonename is not None:
