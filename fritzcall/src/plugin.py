@@ -360,6 +360,11 @@ class FritzCallList:
 	
 	def add(self, event, date, number, caller, phone):
 		print "[FritzCallList] add"
+		if len(self.callList) > 10:
+			if self.callList[0] != "Start":
+				self.callList[0] = "Start"
+			del self.callList[1]
+
 		self.callList.append((event, number, date, caller, phone))
 	
 	def display(self):
@@ -454,11 +459,25 @@ class FritzReverseLookupAndNotifier:
 				url = "http://www.dasoertliche.de/?form_name=search_inv&ph=%s" %self.number
 				getPage(url, method="GET").addCallback(self.gotPageDasOertliche).addErrback(self.gotErrorDasOertliche)
 		elif config.plugins.FritzCall.country.value == "CH":
-			url = "http://tel.search.ch/result.html?name=&m...&tel=%s" %self.number
-			getPage(url, method="GET").addCallback(self.gotPageTelSearchCH).addErrback(self.gotErrorLast)
+			if self.number[:4] == "0049":		 # Germany calling
+				url = "http://www.dasoertliche.de/?form_name=search_inv&ph=%s" %self.number.replace("0049","0")
+				getPage(url, method="GET").addCallback(self.gotPageDasOertliche).addErrback(self.gotErrorDasOertliche)
+			elif self.number[:4] == "0039":		 # Italy calling
+				url = "http://www.paginebianche.it/execute.cgi?btt=1&ts=106&cb=8&mr=10&rk=&om=&qs=%s" %self.number.replace("0039","0")
+				getPage(url, method="GET").addCallback(self.gotPagePaginebiancheIT).addErrback(self.gotErrorLast)
+			else:
+				url = "http://tel.search.ch/result.html?name=&m...&tel=%s" %self.number
+				getPage(url, method="GET").addCallback(self.gotPageTelSearchCH).addErrback(self.gotErrorLast)
 		elif config.plugins.FritzCall.country.value == "IT":
-			url = "http://www.paginebianche.it/execute.cgi?btt=1&ts=106&cb=8&mr=10&rk=&om=&qs=%s" %self.number
-			getPage(url, method="GET").addCallback(self.gotPagePaginebiancheIT).addErrback(self.gotErrorLast)
+			if self.number[:4] == "0049":		 # Germany calling
+				url = "http://www.dasoertliche.de/?form_name=search_inv&ph=%s" %self.number.replace("0049","0")
+				getPage(url, method="GET").addCallback(self.gotPageDasOertliche).addErrback(self.gotErrorDasOertliche)
+			elif self.number[:4] == "0041":		 # Switzerland calling
+				url = "http://tel.search.ch/result.html?name=&m...&tel=%s" %self.number.replace("0041","0")
+				getPage(url, method="GET").addCallback(self.gotPageTelSearchCH).addErrback(self.gotErrorLast)
+			else:
+				url = "http://www.paginebianche.it/execute.cgi?btt=1&ts=106&cb=8&mr=10&rk=&om=&qs=%s" %self.number
+				getPage(url, method="GET").addCallback(self.gotPagePaginebiancheIT).addErrback(self.gotErrorLast)
 		else:
 			print "[FritzProtocol] reverse Lookup: unknown country?!?!"
 
@@ -652,9 +671,9 @@ class FritzProtocol(LineReceiver):
 				
 			print "[FritzProtocol] lineReceived phone: '''%s''' number: '''%s'''" % (phone, number)
 
-                        filtermsns = config.plugins.FritzCall.filtermsn.value.split(",")
-                        for msn in filtermsns:
-                            msn = msn.strip()
+			filtermsns = config.plugins.FritzCall.filtermsn.value.split(",")
+			for msn in filtermsns:
+				msn = msn.strip()
 			if not config.plugins.FritzCall.filter.value or phone in filtermsns:
 				print "[FritzProtocol] lineReceived no filter hit"
 				phonename = phonebook.search(phone)		   # do we have a name for the number of our side?
