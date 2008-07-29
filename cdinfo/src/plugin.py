@@ -93,7 +93,7 @@ class CDInfo(ConfigListScreen,Screen):
 class Query:
 	def __init__(self, mediaplayer):
 		self.playlist = mediaplayer.playlist
-		self.mp_albuminfo = mediaplayer.AudioCD_albuminfo
+		self.mp = mediaplayer
 		self.cddb_container = eConsoleAppContainer()
 		self.cddb_output = ""
 		self.cdtext_container = eConsoleAppContainer()
@@ -109,7 +109,7 @@ class Query:
 	    return rc.encode("utf-8")
 
 	def xml_parse_output(self,string):
-		data = string.decode("utf-8").encode("ascii",'xmlcharrefreplace')
+		data = string.decode("utf-8").replace('&',"&amp;").encode("ascii",'xmlcharrefreplace')
 		try:
 			cdinfodom = xml.dom.minidom.parseString(data)
 		except:
@@ -173,8 +173,8 @@ class Query:
 
 	def updateAlbuminfo(self, replace = False):
 		for tag in self.albuminfo:
-			if tag not in self.mp_albuminfo or replace:
-				self.mp_albuminfo[tag] = self.albuminfo[tag]
+			if tag not in self.mp.AudioCD_albuminfo or replace:
+				self.mp.AudioCD_albuminfo[tag] = self.albuminfo[tag]
 	
 	def updatePlaylist(self, replace = False):
 		for idx in range(len(self.playlist)):
@@ -231,6 +231,7 @@ class Query:
 		else:
 			self.updatePlaylist(replace = False)
 			self.updateAlbuminfo(replace = False)
+		self.mp.readTitleInformation()
 		self.cddb_output = ""
 
 	def cdtext_finished(self,retval):
@@ -244,6 +245,7 @@ class Query:
 		else:
 			self.updatePlaylist(replace = False)
 			self.updateAlbuminfo(replace = False)
+		self.mp.readTitleInformation()
 		self.cdtext_output = ""
 
 def main(session, **kwargs):
