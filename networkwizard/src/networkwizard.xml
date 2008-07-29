@@ -1,6 +1,7 @@
 <wizard>
 		<step id="welcome" nextstep="selectinterface">
 			<text value="Welcome.\n\nIf you want to connect your Dreambox to the Internet, this wizard will guide you through the basic network setup of your Dreambox.\n\nPress OK to start configuring your network" />
+			<displaytext value="Network Wizard" />
 			<code>
 self.clearSelectedKeys()
 self.selectKey("OK")
@@ -8,8 +9,8 @@ self.selectKey("OK")
 		</step>
 
 		<step id="selectinterface">
-
 			<text value="Please select the network interface that you want to use for your internet connection.\n\nPlease press OK to continue." />
+			<displaytext value="Select interface" />
 			<list type="dynamic" source="listInterfaces" evaluation="InterfaceSelectionMade" onselect="InterfaceSelectionMoved" />
 			<code>
 self.clearSelectedKeys()
@@ -25,6 +26,7 @@ self.currStep = self.getStepWithID(self.NextStep)
 
 		<step id="nwconfig" nextstep="confdns">
 			<text value="Please configure your internet connection by filling out the required values.\nWhen you are ready press OK to continue." />
+			<displaytext value="Configure interface" />
 			<config screen="AdapterSetup" module="NetworkSetup" args="self.selectedInterface" type="ConfigList" />
 			<code>
 self.clearSelectedKeys()
@@ -38,6 +40,7 @@ self.selectKey("RIGHT")
 
 		<step id="confdns" nextstep="checklanstatusend">
 			<text value="Please configure or verify your Nameservers by filling out the required values.\nWhen you are ready press OK to continue." />
+			<displaytext value="Configure nameservers" />
 			<config screen="NameserverSetup" module="NetworkSetup" type="ConfigList" />
 			<code>
 self.clearSelectedKeys()
@@ -53,10 +56,17 @@ self.checkNetwork()
 self.condition = (self.InterfaceState == True )
 		</condition>
 			<text value="Your Dreambox is now ready to use.\n\nYour internet connection is working now.\n\nPlease press OK to continue." />
+			<displaytext value="Please follow the instructions on the TV" />
 			<code>
 self.clearSelectedKeys()
 self.selectKey("OK")
 			</code>
+			<code pos="after">
+currStep = self.numSteps				
+self.wizard[currStep]["nextstep"] = None
+self.markDone()
+self.close()
+			</code>	
 		</step>
 
 		<step id="checklanstatusend">
@@ -64,6 +74,7 @@ self.selectKey("OK")
 self.condition = (self.InterfaceState == False )
 		</condition>
 			<text value="Your internet connection is not working!\nPlease choose what you want to do next." />
+			<displaytext value="Please follow the instructions on the TV" />
 			<code>
 self.clearSelectedKeys()
 self.selectKey("OK")
@@ -82,6 +93,7 @@ self.checkInterface(self.selectedInterface)
 self.condition = (self.isInterfaceUp == True and self.WlanPluginInstalled == True)
 		</condition>
 			<text value="Please select the wireless LAN network that you want to connect to.\n\nPlease press OK to continue." />
+			<displaytext value="Select wireless network" />
 			<list type="dynamic" source="listModes" evaluation="modeSelectionMade" onselect="modeSelectionMoved" />
 			<code>
 self.clearSelectedKeys()
@@ -102,6 +114,7 @@ self.checkInterface(self.selectedInterface)
 self.condition = (self.isInterfaceUp == False and self.WlanPluginInstalled == True)
 		</condition>
 			<text value="Your wireless LAN internet connection could not be started!\nHave you attached your USB WLAN Stick?\n\nPlease choose what you want to do next." />
+			<displaytext value="Please follow the instructions on the TV" />
 			<list>
 				<listentry caption="Configure your wireless LAN again" step="scanwlan" />
 				<listentry caption="Configure your internal LAN" step="selectinterface" />
@@ -121,6 +134,7 @@ self.checkInterface(self.selectedInterface)
 self.condition = (self.isInterfaceUp == True and self.WlanPluginInstalled == False)
 		</condition>
 			<text value="The wireless LAN plugin is not installed!\nPlease install it and choose what you want to do next." />
+			<displaytext value="Please follow the instructions on the TV" />
 			<list>
 				<listentry caption="Configure your internal LAN" step="selectinterface" />
 				<listentry caption="Exit wizard and configure later manually" step="end" />
@@ -134,7 +148,7 @@ self.selectKey("DOWN")
 		</step>
 
 		<step id="end">
-			<text value="Thank you for using the wizard. Your Network is now ready to use.\nPlease press OK to continue." />
+			<text value="Thank you for using the wizard.\nPlease press OK to continue." />
 			<code>
 self.clearSelectedKeys()
 self.selectKey("OK")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-15 22:49+0200\n"
+"POT-Creation-Date: 2008-07-29 08:23+0200\n"
 "PO-Revision-Date: 2005-11-17 20:53+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -15,6 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Configure interface"
+msgstr ""
+
+msgid "Configure nameservers"
+msgstr ""
 
 msgid "Configure your internal LAN"
 msgstr ""
@@ -46,6 +52,9 @@ msgid ""
 "When you are ready press OK to continue."
 msgstr ""
 
+msgid "Please follow the instructions on the TV"
+msgstr ""
+
 msgid ""
 "Please select the network interface that you want to use for your internet "
 "connection.\n"
@@ -59,8 +68,14 @@ msgid ""
 "Please press OK to continue."
 msgstr ""
 
+msgid "Select interface"
+msgstr ""
+
+msgid "Select wireless network"
+msgstr ""
+
 msgid ""
-"Thank you for using the wizard. Your Network is now ready to use.\n"
+"Thank you for using the wizard.\n"
 "Please press OK to continue."
 msgstr ""
 
