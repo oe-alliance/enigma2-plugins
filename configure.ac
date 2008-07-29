@@ -129,4 +129,7 @@ moviecut/src_py/Makefile
 tageditor/Makefile
 tageditor/src/Makefile
 
+cdinfo/Makefile
+cdinfo/src/Makefile
+
 ])
