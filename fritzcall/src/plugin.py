@@ -452,7 +452,7 @@ class FritzReverseLookupAndNotifier:
 					"0049": ("http://www.dasoertliche.de/?form_name=search_inv&ph=%s", self.gotPageDasOertliche, self.gotErrorDasOertliche),
 					"0041": ("http://tel.search.ch/result.html?name=&m...&tel=%s", self.gotPageTelSearchCH, self.gotErrorLast),
 					"0039": ("http://www.paginebianche.it/execute.cgi?btt=1&ts=106&cb=8&mr=10&rk=&om=&qs=%s", self.gotPagePaginebiancheIT, self.gotErrorLast),
-					"0043": ("http://www.telefonabc.at/result.aspx?x=68&y=52&what=&where=&telpre=%s&telnr=%s&lastname=&street=&firstname=&appendix=", self.gotTelefonabcAT, self.gotErrorLast)
+					"0043": ("http://www.telefonabc.at/result.aspx?telpre=%s&telnr=%s&exact=1", self.gotTelefonabcAT, self.gotErrorLast)
 					}
 
 		print "[FritzReverseLookupAndNotifier] reverse Lookup for %s!" %self.number
@@ -481,7 +481,7 @@ class FritzReverseLookupAndNotifier:
 				if number[:2] == "01":  # Wien
 					print "[FritzReverseLookupAndNotifier] AT: Wien"
 					url = url % ("01", number[2:])
-				elif number[1:4] in ["316", "512", "463", "732", "662", "720", "660", "664", "676", "699", "678", "650", "680", "681", "688"]:
+				elif number[1:4] in ["316", "463", "512", "650", "662", "660", "664", "676", "678", "680", "681", "688", "699", "720", "732"]:
 					print "[FritzReverseLookupAndNotifier] AT: short prefix"
 					url = url % (number[:4], number[4:])
 				else:
@@ -644,18 +644,23 @@ class FritzReverseLookupAndNotifier:
 		print "[FritzReverseLookupAndNotifier] gotTelefonabcAT"
 		try:
 			html = html.decode("ISO-8859-1").encode("UTF-8")
-			found = re.match('.*<td class="name">\r\n<b>([^<]*)</b></td>.*<td colspan="2" class="address small">\r\n([^<]*)</td>', html, re.S)
+			html = html.replace("<b>","").replace("</b>","")
+			found = re.match('.*(<td class="name">.*.*<td colspan="2" class="address small">.*</td>)', html, re.S)
 			if found:
-				address =  found.group(1) + ", " + found.group(2)
-				print "[FritzProtocol] Reverse lookup succeeded:\nName: %s\n\nAddress: %s" %(name, address)
+				html = found.group(1)
+				found = re.match('.*<td class="name">\r\n([^<]*)</td>.*<td colspan="2" class="address small">\r\n([^<]*)</td>', html, re.S)
+				if found:
+					name = found.group(1)
+					address =  found.group(2)
+					myprint("[FritzProtocol] Reverse lookup succeeded:\nName: %s\n\nAddress: %s" %(name, address))
 
-				self.caller = "%s, %s" %(name, address)
+					self.caller = "%s, %s" %(name, address)
 
-				if self.number != 0 and config.plugins.FritzCall.addcallers.value and self.event == "RING":
-					phonebook.add(self.number, self.caller)
+					if self.number != 0 and config.plugins.FritzCall.addcallers.value and self.event == "RING":
+						phonebook.add(self.number, self.caller)
 
-				self.notifyAndReset()
-				return True
+					self.notifyAndReset()
+					return True
 
 		except:
 			import traceback, sys
