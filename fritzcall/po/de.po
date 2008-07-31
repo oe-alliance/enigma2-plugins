@@ -73,7 +73,7 @@ msgid "Could not load phonebook from Fritz!Box - Error: %s"
 msgstr "Konnte Telefonbuch nicht von Fritz!Box laden - Fehler: %s"
 
 msgid "Could not parse Fritz!Box Phonebook entry"
-msgstr "Konnte Eintrag in Frritz!Box-Telefonbuch nicht lesen"
+msgstr "Konnte Eintrag in Fritz!Box-Telefonbuch nicht lesen"
 
 msgid "Country"
 msgstr "Land"
