@@ -501,16 +501,14 @@ class AutoTimerComponent(object):
 		)
 
 	def __eq__(self, other):
-		try:
+		if hasattr(other, "id"):
 			return self.id == other.id
-		except AttributeError:
-			return False
+		return False
 
 	def __lt__(self, other):
-		try:
+		if hasattr(other, "name"):
 			return self.name.lower() < other.name.lower()
-		except:
-			return False
+		return False
 
 	def __ne__(self, other):
 		return not self.__eq__(other)
@@ -551,3 +549,4 @@ class AutoTimerComponent(object):
 			 ]),
 			 ")>"
 		])
+

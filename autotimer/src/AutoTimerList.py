@@ -92,3 +92,4 @@ class AutoTimerPreviewList(MenuList):
 				self.instance.moveSelectionTo(idx)
 				break
 			idx += 1
+

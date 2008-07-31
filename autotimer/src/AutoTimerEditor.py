@@ -218,12 +218,8 @@ class AutoTimerEditorBase():
 		self.useDestination = ConfigYesNo(default = default)
 
 		default = timer.destination or Directories.resolveFilename(Directories.SCOPE_HDD)
-		choices = []
-		try:
-			choices = config.movielist.videodirs.value
-		except:
-			print "config.movielist.videodirs.value not set"
-			
+		choices = config.movielist.videodirs.value
+
 		if default not in choices:
 			choices.append(default)
 		self.destination = ConfigSelection(default = default, choices = choices)
@@ -1057,3 +1053,4 @@ def editorCallback(ret):
 		# Save xml (as long as we added something)
 		ret and autotimer and autotimer.writeXml()
 		autotimer = None
+

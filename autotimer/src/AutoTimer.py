@@ -238,10 +238,9 @@ class AutoTimer:
 							if config.plugins.autotimer.refresh.value == "none" or newEntry.repeated:
 								raise AutoTimerIgnoreTimerException("Won't modify existing timer because either no modification allowed or repeated timer")
 
-							try:
-								if newEntry.isAutoTimer:
+							if hasattr(newEntry, "isAutoTimer"):
 									print "[AutoTimer] Modifying existing AutoTimer!"
-							except AttributeError, ae:
+							else:
 								if config.plugins.autotimer.refresh.value != "all":
 									raise AutoTimerIgnoreTimerException("Won't modify existing timer because it's no timer set by us")
 								print "[AutoTimer] Warning, we're messing with a timer which might not have been set by us"
@@ -312,3 +311,4 @@ class AutoTimer:
  				func(newEntry)
 
 		return (total, new, modified, timers)
+

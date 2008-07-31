@@ -17,11 +17,13 @@ class AutoPoller:
 		else:
 			delay = config.plugins.autotimer.interval.value*3600
 
-		self.timer.callback.append(self.query)
+		if self.query not in self.timer.callback:
+			self.timer.callback.append(self.query)
 		self.timer.startLongTimer(delay)
 
 	def stop(self):
-		self.timer.callback.remove(self.query)
+		if self.query in self.timer.callback:
+			self.timer.callback.remove(self.query)
 		self.timer.stop()
 
 	def query(self):
@@ -36,3 +38,4 @@ class AutoPoller:
 			traceback.print_exc(file=sys.stdout)
 
 		self.timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
+

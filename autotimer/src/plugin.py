@@ -47,12 +47,7 @@ def autostart(reason, **kwargs):
 	elif reason == 1:
 		# Stop Poller
 		if autopoller is not None:
-			# We might shutdown when configuring, timer won't be running then
-			try:
-				autopoller.stop()
-			except ValueError, ve:
-				pass
-
+			autopoller.stop()
 			autopoller = None
 
 		if autotimer is not None:
@@ -140,3 +135,4 @@ def Plugins(**kwargs):
 		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main),
 		PluginDescriptor(name="AutoTimer", description= _("Add AutoTimer..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist)
 	]
+

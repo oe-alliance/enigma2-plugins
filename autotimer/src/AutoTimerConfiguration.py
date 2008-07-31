@@ -13,14 +13,14 @@ def getValue(definitions, default):
 	ret = ""
 
 	# How many definitions are present
-	try:
-		childNodes = definitions.childNodes
-	except:
+	if isinstance(definitions, list):
 		Len = len(definitions)
 		if Len > 0:
 			childNodes = definitions[Len-1].childNodes
 		else:
 			childNodes = []
+	else:
+		childNodes = definitions.childNodes
 
 	# Iterate through nodes of last one
 	for node in childNodes:
@@ -147,17 +147,18 @@ def parseEntry(element, baseTimer, defaults = False):
 
 		try:
 			value = idx[value]
-			start = element.getAttribute("from")
-			end = element.getAttribute("to")
-			if start and end:
-				start = [int(x) for x in start.split(':')]
-				end = [int(x) for x in end.split(':')]
-				afterevent.append((value, (start, end)))
-			else:
-				afterevent.append((value, None))
 		except KeyError, ke:
 			print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
 			continue
+
+		start = element.getAttribute("from")
+		end = element.getAttribute("to")
+		if start and end:
+			start = [int(x) for x in start.split(':')]
+			end = [int(x) for x in end.split(':')]
+			afterevent.append((value, (start, end)))
+		else:
+			afterevent.append((value, None))
 	baseTimer.afterevent = afterevent
 
 	# Read out exclude
@@ -354,17 +355,18 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 			try:
 				value = idx[value]
-				start = element.getAttribute("from")
-				end = element.getAttribute("to")
-				if start and end:
-					start = [int(x) for x in start.split(':')]
-					end = [int(x) for x in end.split(':')]
-					afterevent.append((value, (start, end)))
-				else:
-					afterevent.append((value, None))
 			except KeyError, ke:
 				print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
 				continue
+
+			start = element.getAttribute("from")
+			end = element.getAttribute("to")
+			if start and end:
+				start = [int(x) for x in start.split(':')]
+				end = [int(x) for x in end.split(':')]
+				afterevent.append((value, (start, end)))
+			else:
+				afterevent.append((value, None))
 
 		# Read out exclude (V*)
 		idx = {"title": 0, "shortdescription": 1, "description": 2, "dayofweek": 3}
@@ -636,3 +638,4 @@ def writeConfig(filename, defaultTimer, timers):
 	file.writelines(list)
 
 	file.close()
+
