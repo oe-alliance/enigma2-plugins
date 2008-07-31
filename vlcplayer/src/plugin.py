@@ -41,12 +41,17 @@ class __VlcManager():
 		
 	def openServerlist(self):
 		print "[VLC] openServerlist"
-		self.session.openWithCallback(self.openMedialist, VlcServerListScreen)
+		defaultServer = vlcServerConfig.getDefaultServer()
+		self.session.openWithCallback(self.serverlistClosed, VlcServerListScreen, defaultServer)
 
-	def openMedialist(self, vlcServer):
+	def serverlistClosed(self, selectedServer, defaultServer):
+		vlcServerConfig.setAsDefault(defaultServer)
+		self.openMedialist(selectedServer)
+		
+	def openMedialist(self, selectedServer):
 		print "[VLC] openMedialist"
-		if vlcServer is not None:
-			self.session.openWithCallback(self.medialistClosed, VlcMediaListScreen, vlcServer).keyUpdate()
+		if selectedServer is not None:
+			self.session.openWithCallback(self.medialistClosed, VlcMediaListScreen, selectedServer).keyUpdate()
 
 	def medialistClosed(self, proceed = False):
 		print "[VLC] medialistClosed"
