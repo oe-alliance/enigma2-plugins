@@ -205,9 +205,13 @@ class VlcServer:
 				return e
 		return None
 
-	def play(self, screen, media, name, currentList = None):
-		dlg = screen.session.open(VlcPlayer, self, currentList)
+	def play(self, session, media, name, currentList = None, player = None):
+		if player is None:
+# or not isinstance(player, VlcPlayer):
+			player = VlcPlayer
+		dlg = session.open(player, self, currentList)
 		dlg.playfile(media, name)
+		return dlg
 	
 	def playFile(self, filename, videoPid, audioPid):
 		streamName = "dream" + str(randint(0, maxint))
