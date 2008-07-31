@@ -199,6 +199,10 @@ class FritzCallPhonebook:
 	def reload(self):
 		print "[FritzCallPhonebook] reload"
 		self.phonebook.clear()
+
+		if not config.plugins.FritzCall.enable.value:
+			return
+
 		exists = False
 		
 		if config.plugins.FritzCall.phonebook.value:
