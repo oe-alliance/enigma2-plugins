@@ -501,12 +501,12 @@ class AutoTimerComponent(object):
 		)
 
 	def __eq__(self, other):
-		if hasattr(other, "id"):
+		if isinstance(other, AutoTimerComponent):
 			return self.id == other.id
 		return False
 
 	def __lt__(self, other):
-		if hasattr(other, "name"):
+		if isinstance(other, AutoTimerComponent):
 			return self.name.lower() < other.name.lower()
 		return False
 
