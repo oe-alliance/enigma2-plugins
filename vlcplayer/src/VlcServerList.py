@@ -23,11 +23,11 @@ from VlcServerConfig import VlcServerConfigScreen
 from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
 from . import _
 
-def VlcServerListEntry(vlcServer, showDefaultServer):
+def VlcServerListEntry(vlcServer, defaultServer):
 	res = [ vlcServer ]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, vlcServer.getName()))
 
-	if vlcServerConfig.getDefaultServer() is not None and vlcServerConfig.getDefaultServer().getName() == vlcServer.getName() and showDefaultServer:
+	if defaultServer is not None and defaultServer.getName() == vlcServer.getName():
 		png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/vlc_default.png"))
 	else:
 		png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/vlc.png"))
@@ -43,10 +43,10 @@ class VlcServerList(MenuList):
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setItemHeight(23)
 
-	def update(self, serverList, showDefaultServer):
+	def update(self, serverList, defaultServer):
 		self.list = []
 		for server in serverList:
-			self.list.append(VlcServerListEntry(server, showDefaultServer))
+			self.list.append(VlcServerListEntry(server, defaultServer))
 		self.l.setList(self.list)
 		self.moveToIndex(0)
 
@@ -71,21 +71,18 @@ class VlcServerListScreen(Screen):
 			<widget name="key_blue" position="420,355" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
-	def __init__(self, session, showDefaultServer = True):
+	def __init__(self, session, defaultServer):
 		Screen.__init__(self, session)
 		self.session = session
 		self.serverlist = VlcServerList()
-		self.showDefaultServer = showDefaultServer
+		self.defaultServer = defaultServer
 
 		self["serverlabel"] = Label(_("List of known VLC-Server Profiles"))
 		self["serverlist"] = self.serverlist
 		self["key_red"] = Button(_("delete server"))
 		self["key_green"] = Button(_("add server"))
 		self["key_yellow"] = Button(_("edit server"))
-		if self.showDefaultServer:
-			self["key_blue"] = Button(_("set default"))
-		else:
-			self["key_blue"] = Button("")
+		self["key_blue"] = Button(_("set default"))
 
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 			{
@@ -101,10 +98,16 @@ class VlcServerListScreen(Screen):
 			 "ok":		self.ok,
             }, -1)
 			
-		self.onLayoutFinish.append(self.updateServerlist)
+		self.onLayoutFinish.append(self.initialServerlistUpdate)
+
+	def initialServerlistUpdate(self):
+		self.updateServerlist()
+		if self.defaultServer is not None:
+			defaultIndex = vlcServerConfig.getServerlist().index(self.defaultServer)
+			self.serverlist.moveToIndex(defaultIndex)
 
 	def updateServerlist(self):
-		self.serverlist.update(vlcServerConfig.getServerlist(), self.showDefaultServer)
+		self.serverlist.update(vlcServerConfig.getServerlist(), self.defaultServer)
 
 	def keyAddServer(self):
 		newServer = vlcServerConfig.new()
@@ -118,7 +121,9 @@ class VlcServerListScreen(Screen):
 			vlcServerConfig.delete(server)
 
 	def keyDelete(self):
-		self.session.openWithCallback(self.deleteCallback, MessageBox, _("Really delete this Server?"))
+		server = self.serverlist.getSelection()
+		if server is not None:
+			self.session.openWithCallback(self.deleteCallback, MessageBox, _("Really delete this Server?"))
 
 	def deleteCallback(self, result):
 		if result:
@@ -140,11 +145,10 @@ class VlcServerListScreen(Screen):
 			vlcServerConfig.cancel(server)
 
 	def keySetAsDefault(self):
-		if self.showDefaultServer:
-			vlcServerConfig.setAsDefault(self.serverlist.getSelection())
-			index = self.serverlist.getSelectedIndex()
-			self.updateServerlist()
-			self.serverlist.moveToIndex(index)
+		self.defaultServer = self.serverlist.getSelection()
+		index = self.serverlist.getSelectedIndex()
+		self.updateServerlist()
+		self.serverlist.moveToIndex(index)
 
 	def up(self):
 		self.serverlist.up()
@@ -159,7 +163,7 @@ class VlcServerListScreen(Screen):
 		self.serverlist.pageDown()
 
 	def close(self, server = None):
-		Screen.close(self, server)
+		Screen.close(self, server, self.defaultServer)
 
 	def ok(self):
 		self.close(self.serverlist.getSelection())
