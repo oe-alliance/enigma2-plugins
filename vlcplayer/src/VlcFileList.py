@@ -30,7 +30,8 @@ MEDIA_EXTENSIONS = {
 		"mpeg": "movie",
 		"wmv": "movie",
 		"mov": "movie",
-		"iso": "movie"
+		"iso": "movie",
+		"flv": "movie"
 	}
 
 
