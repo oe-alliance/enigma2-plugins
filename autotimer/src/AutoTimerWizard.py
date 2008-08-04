@@ -124,7 +124,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 			else:
 				self.timer.timespan = None
 		elif self.currStep == AutoTimerWizard.STEP_ID_SERVICES: # Services
-			self.servicesDlg.saveCurrent()
+			self.servicesDlg.refresh()
 
 			if self.servicesDlg.enabled.value:
 				self.timer.services = self.servicesDlg.services[0]
@@ -133,7 +133,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 				self.timer.services = []
 				self.timer.bouquets = []
 		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER: # Filters
-			self.filterDlg.saveCurrent()
+			self.filterDlg.refresh()
 
 			if self.filterDlg.enabled.value:
 				self.timer.includes = self.filterDlg.includes

@@ -645,7 +645,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		# Warning, accessing a ConfigListEntry directly might be considered evil!
 
 		idx = -1
-		for item in self["config"].getList():
+		for item in self["config"].getList()[:]:
 			idx += 1
 			# Skip empty entries (and those which are no filters)
 			if item[1].value == "" or idx < 2:
@@ -754,7 +754,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			self.close(None)
 
 	def save(self):
-		self.saveCurrent()
+		self.refresh()
 
 		self.close((
 			self.enabled.value,
@@ -822,7 +822,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		
 		# Warning, accessing a ConfigListEntry directly might be considered evil!
 
-		myl = self["config"].getList()
+		myl = self["config"].getList()[:]
 		myl.pop(0) # Enabled
 		myl.pop(0) # Type
 		for item in myl:
@@ -915,7 +915,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 			self.close(None)
 
 	def save(self):
-		self.saveCurrent()
+		self.refresh()
 
 		self.close((
 			self.enabled.value,
