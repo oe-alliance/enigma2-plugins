@@ -655,7 +655,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			else:
 				self.includes[self.idx].append(item[1].value.encode("UTF-8"))
 
-	def refresh(self, value):
+	def refresh(self, *args, **kwargs):
 		self.saveCurrent()
 
 		self.reloadList()
@@ -828,7 +828,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		for item in myl:
 			self.services[self.idx].append(item[1].value)
 
-	def refresh(self, value):
+	def refresh(self, *args, **kwargs):
 		self.saveCurrent()
 
 		self.reloadList()
