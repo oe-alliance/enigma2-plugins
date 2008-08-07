@@ -66,6 +66,6 @@ def main(session, **kwargs):
 def Plugins(**kwargs):
 	return PluginDescriptor(
 		name="VLC Video Player",
-		description="A video streaming solution based on VLC",
+		description=_("A video streaming solution based on VLC"),
 		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
 		icon = "plugin.png", fnc = main)

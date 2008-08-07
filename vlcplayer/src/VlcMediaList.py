@@ -124,8 +124,8 @@ class VlcMediaListScreen(Screen):
 			self.updateFilelist()
 		except Exception, e:
 			self.session.open(
-				MessageBox, _("Error updating filelist from server %s:\n%s" % (
-						self.server.getName(), e)
+				MessageBox, _("Error updating filelist from server %(server)s:\n%(error)s" % (
+						{"server" : self.server.getName(), "error" : e})
 					), MessageBox.TYPE_ERROR)
 
 	def keyDvd(self):
@@ -161,8 +161,8 @@ class VlcMediaListScreen(Screen):
 						self.switchToPlayList()
 				except Exception, e:
 					self.session.open(
-						MessageBox, _("Error loading playlist %s into server %s:\n%s" % (
-								media, self.server.getName(), e)
+						MessageBox, _("Error loading playlist %(media)s into server %(server)s:\n%(error)s" % (
+								{"media" : media, "server" : self.server.getName(), "error" : e})
 							), MessageBox.TYPE_ERROR)
 			elif media.lower().endswith(".iso"):
 				self.play("dvdsimple://" + media, "DVD")
@@ -177,14 +177,14 @@ class VlcMediaListScreen(Screen):
 			return self.server.getFilesAndDirs(currentDirectory, regex)
 		except ExpatError, e:
 			self.session.open(
-				MessageBox, _("Error loading playlist into server %s:\n%s" % (
-						self.server.getName(), e)
+				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s" % (
+						{"server" : self.server.getName(), "error" : e })
 					), MessageBox.TYPE_ERROR)
 			raise ExpatError, e
 		except Exception, e:
 			self.session.open(
-				MessageBox, _("Error loading filelist into server %s:\n%s" % (
-						self.server.getName(), e)
+				MessageBox, _("Error loading filelist into server %(server)s:\n%(error)s" % (
+						{"server" : self.server.getName(), "error" : e })
 					), MessageBox.TYPE_ERROR)
 		return None
 
@@ -193,13 +193,13 @@ class VlcMediaListScreen(Screen):
 			return self.server.getPlaylistEntries()
 		except ExpatError, e:
 			self.session.open(
-				MessageBox, _("Error loading playlist into server %s:\n%s" % (
-						self.server.getName(), e)
+				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s" % (
+						{"server" : self.server.getName(), "error" : e })
 					), MessageBox.TYPE_ERROR)
 		except Exception, e:
 			self.session.open(
-				MessageBox, _("Error loading playlist into server %s:\n%s" % (
-						self.server.getName(), e)
+				MessageBox, _("Error loading playlist into server %(server)s:\n%(error)s" % (
+						{"server" : self.server.getName(), "error" : e })
 					), MessageBox.TYPE_ERROR)
 		return None
 
