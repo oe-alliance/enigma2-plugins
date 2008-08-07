@@ -130,6 +130,197 @@
 		</menu>
 		<menu>
 			<name>Europa</name>
+			<menu>
+				<name>Finland</name>
+				<cam>
+					<name>Alaharma - Motor racing circuit</name>
+					<url>http://www.lillbacka.com/powerpark/photos/webcam4.jpg</url>     
+				</cam>
+				<cam>
+					<name>Espoo - Sunantie</name>
+					<url>http://email.jellona.net/ip/ftproot/sony.jpg</url>     
+				</cam>
+				<cam>
+					<name>Helsinki - Lasipalatsi</name>
+					<url>http://nettikamera.lasipalatsi.fi/jpg/image.jpg</url>     
+				</cam>
+				<cam>
+					<name>Helsinki - Kaisaniemi park</name>
+					<url>http://www.lintukoto.net/dl/webcam/webcam_pieni.jpg</url>     
+				</cam>
+				<cam>
+					<name>Helsinki - Makasiinit</name>
+					<url>http://www4.hs.fi/kaupunki/makasiinit/kuvat/web/current.jpg</url>     
+				</cam>
+				<cam>
+					<name>Helsinki - Southdocs</name>
+					<url>http://www.ek.fi/kamera/tn_palace00.jpg</url>     
+				</cam>
+				<cam>
+					<name>Helsinki - Forum parking</name>
+					<url>http://www.forump.com/pics/webpic.jpg</url>     
+				</cam>
+				<cam>
+					<name>Hameenlinna - Tahtitorni cam</name>
+					<url>http://agolx3.ainagroup.fi/kameramies/camera.php?cid=Cam-observatory</url>
+				</cam>
+				<cam>
+					<name>Joensuu - center</name>
+					<url>http://pelu.jns.fi/sony/webcam.jpg</url>     
+				</cam>
+				<cam>
+					<name>Santa Park - Arctic Circle</name>
+					<url>http://www.santaclauslive.com/cam/cam.jpg</url>     
+				</cam>
+				<cam>
+					<name>Kajaani - Raatihuone square</name>
+					<url>http://kuvat.kpo.fi/kuva2.jpg</url>     
+				</cam>
+				<cam>
+					<name>Kauniainen</name>
+					<url>http://www.kauniainen.fi/webcam/webcam01.jpg</url>    
+				</cam>
+				<cam>
+					<name>Kokkola AWT</name>
+					<url>http://194.211.36.78/-wvhttp-01-/GetStillImage?1208793846677</url>     
+				</cam>	
+				<cam>
+					<name>Port of Kokkola</name>
+					<url>http://194.240.224.195/axis-cgi/jpg/image.cgi?resolution=640x480</url>     
+				</cam>	
+				<cam>
+					<name>Port of Kokkola 2</name>
+					<url>http://194.211.36.71/-wvhttp-01-/GetStillImage</url>     
+				</cam>	
+				<cam>
+					<name>Port of Kokkola, Silverstone</name>
+					<url>http://85.157.204.67/jpg/image.jpg</url>     
+				</cam>	
+				<cam>
+					<name>Kokkola</name>
+					<url>http://weathercam.vaisala.net/banner/weather.aspx?id=kavelykatu</url>     
+				</cam>	
+				<cam>
+					<name>Levi - Front Slope</name>
+					<url>http://213.28.111.18/record/current.jpg</url>     
+				</cam>
+				<cam>
+					<name>Birdnest</name>
+					<url>http://natureit.net/kuvat/full_seili-wide.jpg</url>     
+				</cam>
+				<cam>
+					<name>Birdnest closeup</name>
+					<url>http://natureit.net/kuvat/full_seili-tele.jpg</url>     
+				</cam>
+				<cam>
+					<name>Joutseno</name>
+					<url>http://195.255.122.186/JOU/Joutseno.jpg</url>     
+				</cam>
+				<cam>
+					<name>Kuhmo - Kuhmo house</name>
+					<url>http://kuvat.kpo.fi/kuva3.jpg</url>     
+				</cam>
+				<cam>
+					<name>Kuopio - Savonia AMK</name>
+					<url>http://weathercam.pspt.fi/image.jpg</url>     
+				</cam>
+				<cam>
+					<name>Mikkeli</name>
+					<url>http://www.yle.fi/esradio/webcam/cam.jpg</url>     
+				</cam>
+				<cam>
+					<name>Oulu - Hallituskatu</name>
+					<url>http://www.oulunkaupunki.fi/_private/kamera/image.jpg</url>     
+				</cam>
+				<cam>
+					<name>Pietarsaari</name>
+					<url>http://www.ibiworks.com//image.jpg</url>     
+				</cam>
+				<cam>
+					<name>Pori</name>
+					<url>http://212.86.4.14/camera_image/kauppatori.jpg</url>     
+				</cam>
+				<cam>
+					<name>Pori - Yyteri beach</name>
+					<url>http://212.86.4.14/camera_image/yyteri.jpg</url>     
+				</cam>
+				<cam>
+					<name>Porvoo</name>
+					<url>http://www.datapartner.fi/images/webcam/webcam.jpg</url>     
+				</cam>
+				<cam>
+					<name>Raahe</name>
+					<url>http://www2.ppo.fi/webkamerat/raahe.jpg</url>     
+				</cam>
+				<cam>
+					<name>Raippaluoto bridge</name>
+					<url>http://www2.syh.fi/replot/pics/replot.jpg</url>     
+				</cam>
+				<cam>
+					<name>Rovaniemi - Rovakatu</name>
+					<url>http://www.rovaniemi.fi/images/webcam/Kamera2_00001.jpg</url>     
+				</cam>
+				<cam>
+					<name>Rovaniemi - Lordi square</name>
+					<url>http://www.rovaniemi.fi/images/webcam/Kamera4_00001.jpg</url>     
+				</cam>
+				<cam>
+					<name>Saariselka Ski: Front slope</name>
+					<url>http://www.holidayclub.fi/ap-pics/loma-asunnot/saariselka/rinne/ss_ski_webcam01.jpg</url>     
+				</cam>
+				<cam>
+					<name>Seinajoki</name>
+					<url>http://webcam.sjk.fi/sjk.jpg</url>     
+				</cam>
+				<cam>
+					<name>Sotkamo - Hiukka</name>
+					<url>http://kuvat.kpo.fi/kuva4.jpg</url>     
+				</cam>
+				<cam>
+					<name>Sarkaniemi- Turning Restaurant view</name>
+					<url>http://www.sarkanniemi.fi/webcam/dlink_kuva.jpg</url>     
+				</cam>
+				<cam>
+					<name>Sarkanniemi - amusement park</name>
+					<url>http://www.sarkanniemi.fi/webcam/axiskuva.jpg</url>     
+				</cam>
+				<cam>
+					<name>Tampere</name>
+					<url>http://www.tampere.fi/live/kuva.jpg</url>     
+				</cam>
+				<cam>
+					<name>Tampere - Ratina</name>
+					<url>http://www.medialab.sonera.fi/webcam/kuva.jpg</url>     
+				</cam>
+				<cam>
+					<name>Turku</name>
+					<url>http://62.73.32.2/record/current.jpg</url>     
+				</cam>
+				<cam>
+					<name>Vaasa</name>
+					<url>http://www2.vaasa.fi/webcam1/image.jpg</url>     
+				</cam>
+				<cam>
+					<name>Vammala</name>
+					<url>http://www.kopteri.net/~webcam/kamera1.jpg</url>     
+				</cam>
+				<cam>
+					<name>Virrat</name>
+					<url>http://www.virrat.fi/~petki/kuvaa.jpg</url>     
+				</cam>
+				<cam>
+					<name>Vuokatti - West slope</name>
+					<url>http://kuvat.kpo.fi/kuva10.jpg</url>     
+				</cam>
+				<cam>
+					<name>Ylivieska</name>
+					<url>http://212.50.216.141/record/current.jpg</url>     
+				</cam>
+				<cam>
+					<name>Ylojarvi</name>
+					<url>http://192.89.47.96/kuva1.jpg</url>     
+				</cam>
+			</menu>
 			<cam>
 				<name>London, Trafalgar Square</name>
 				<url>http://images.earthcam.com/ec_metros/ourcams/trafalgarsq.jpg</url>	
