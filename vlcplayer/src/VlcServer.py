@@ -112,29 +112,17 @@ class VlcServer:
 	def audioChannels(self):
 		return self.cfg.audiochannels
 
-	def getVideoWidth(self):
-		return self.cfg.videowidth.value
+	def getVideoNorm(self):
+		return self.cfg.videonorm.value
 
-	def videoWidth(self):
-		return self.cfg.videowidth
+	def videoNorm(self):
+		return self.cfg.videonorm
 
-	def getVideoHeight(self):
-		return self.cfg.videoheight.value
+	def getOverscanCorrection(self):
+		return self.cfg.overscancorrection.value
 
-	def videoHeight(self):
-		return self.cfg.videoheight
-
-	def getFramesPerSecond(self):
-		return self.cfg.framespersecond.value
-
-	def framesPerSecond(self):
-		return self.cfg.framespersecond
-
-	def getAspectRatio(self):
-		return self.cfg.aspectratio.value
-
-	def aspectRatio(self):
-		return self.cfg.aspectratio
+	def overscanCorrection(self):
+		return self.cfg.overscancorrection
 
 	def getSOverlay(self):
 		return self.cfg.soverlay.value
@@ -217,23 +205,19 @@ class VlcServer:
 		streamName = "dream" + str(randint(0, maxint))
 		transcode = []
 
-		doDirect = isDvdUrl(filename) or re.match("(?i).*\.(mpg|mpeg|ts)$", filename)
+		doDirect = isDvdUrl(filename) or re.match("(?i).*\.(mpg|mpeg|ts)$", filename.lower())
 
 		if not doDirect or self.getTranscodeVideo():
-			transcode.append("vcodec=%s,vb=%d,venc=ffmpeg{strict-rc=1},width=%s,height=%s,fps=%s,scale=1" % (
-				self.getVideoCodec(),
-				self.getVideoBitrate(),
-				self.getVideoWidth(),
-				self.getVideoHeight(),
-				self.getFramesPerSecond()
+			videoNormList = self.getVideoNorm().split(",")
+#			,height=%s
+			transcode.append("vcodec=%s,vb=%d,venc=ffmpeg{strict-rc=1},width=%s,height=%s,canvas-width=%s,canvas-height=%s,canvas-aspect=%s,fps=%s" % (
+				self.getVideoCodec(),self.getVideoBitrate(),
+				str(int(float(videoNormList[0]) - float(videoNormList[0]) * float(self.getOverscanCorrection()) / 100)),
+				str(int(float(videoNormList[1]) - float(videoNormList[1]) * float(self.getOverscanCorrection()) / 100)),
+				videoNormList[0], videoNormList[1], videoNormList[2], videoNormList[3]
 			))
-			if self.getAspectRatio() != "none":
-				transcode.append("canvas-width=%s,canvas-height=%s,canvas-aspect=%s" % (
-					self.getVideoWidth(),
-					self.getVideoHeight(),
-					self.getAspectRatio()
-				))
-
+			if self.getSOverlay():
+				transcode.append("soverlay")
 		if not doDirect or self.getTranscodeAudio():
 			transcode.append("acodec=%s,ab=%d,channels=%d,samplerate=%s" % (
 				self.getAudioCodec(),
@@ -241,10 +225,6 @@ class VlcServer:
 				self.getAudioChannels(),
 				self.getSamplerate()
 			))
-
-		if self.getSOverlay():
-			transcode.append("soverlay")
-
 		if re.match("[a-zA-Z]:", filename):
 			# Fix for subtitles with VLC on Windows.
 			filename = filename.replace("/", "\\")

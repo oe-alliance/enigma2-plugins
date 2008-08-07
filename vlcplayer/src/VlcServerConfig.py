@@ -19,6 +19,7 @@ from Components.config import ConfigInteger
 from Components.config import ConfigSelection
 from Components.config import ConfigSubList
 from Components.config import ConfigSubsection
+from Components.config import ConfigSlider
 from Components.config import ConfigText
 from Components.config import ConfigYesNo
 from Components.config import config
@@ -146,7 +147,7 @@ class __VlcServerConfig():
 		newServerConfigSubsection.name = ConfigText("Server " + str(self.__getServerCount()), False)
 		if newServerConfigSubsection.name.value == newServerConfigSubsection.name.default:
 			newServerConfigSubsection.name.default = ""
-		newServerConfigSubsection.addressType = ConfigSelectionExtended({"FQDN": "FQDN", "IP": "IP-Address"}, "IP")
+		newServerConfigSubsection.addressType = ConfigSelectionExtended([("FQDN", "FQDN"), ("IP", "IP-Address")], "IP")
 		newServerConfigSubsection.hostip = ConfigMutable({"IP": ConfigIP([192,168,1,1]), "FQDN": ConfigText("fqdname", False)},
 											newServerConfigSubsection.addressType.value)
 		newServerConfigSubsection.httpport = ConfigInteger(8080, (0,65535))
@@ -154,16 +155,51 @@ class __VlcServerConfig():
 		newServerConfigSubsection.dvdPath = ConfigText("", False)
 		newServerConfigSubsection.transcodeVideo = ConfigYesNo()
 		newServerConfigSubsection.transcodeAudio = ConfigYesNo(True)
-		newServerConfigSubsection.videocodec = ConfigSelection({"mp1v": "MPEG1", "mp2v": "MPEG2"}, "mp2v")
+		newServerConfigSubsection.videocodec = ConfigSelection([("mp1v", "MPEG1"), ("mp2v", "MPEG2")], "mp2v")
 		newServerConfigSubsection.videobitrate = ConfigInteger(1000, (100, 9999))
-		newServerConfigSubsection.audiocodec = ConfigSelection({"mpga":"MP1", "mp2a": "MP2", "mp3": "MP3"}, "mp2a")
+		newServerConfigSubsection.audiocodec = ConfigSelection([("mpga", "MP1"), ("mp2a", "MP2"), ("mp3", "MP3")], "mp2a")
 		newServerConfigSubsection.audiobitrate = ConfigInteger(128, (64, 320))
-		newServerConfigSubsection.samplerate = ConfigSelection({"0":"as Input", "44100": "44100", "48000": "48000"}, "0")
+		newServerConfigSubsection.samplerate = ConfigSelection([("0", "as Input"), ("44100", "44100"), ("48000", "48000")], "44100")
 		newServerConfigSubsection.audiochannels = ConfigInteger(2, (1, 9))
-		newServerConfigSubsection.videowidth = ConfigSelection(["352", "704", "720", "1280", "1920"])
-		newServerConfigSubsection.videoheight = ConfigSelection(["288", "576", "720", "1080"])
-		newServerConfigSubsection.framespersecond = ConfigInteger(25, (1, 99))
-		newServerConfigSubsection.aspectratio = ConfigSelection(["none", "16:9", "4:3"], "none")
+		newServerConfigSubsection.videonorm = ConfigSelection(
+				[("720,576,4:3,25,i", "720 x 576 (4:3) @ 25fps (PAL)"),
+				 ("720,576,16:9,25,i", "720 x 576 (16:9) @ 25fps (PAL)"),
+				 ("704,576,4:3,25,i", "704 x 576 (4:3) @ 25fps (PAL)"),
+				 ("704,576,16:9,25,i", "704 x 576 (16:9) @ 25fps (PAL)"),
+				 ("544,576,4:3,25,i", "544 x 576 (4:3) @ 25fps (PAL)"),
+				 ("544,576,16:9,25,i", "544 x 576 (16:9) @ 25fps (PAL)"),
+				 ("480,576,4:3,25,i", "480 x 576 (4:3) @ 25fps (PAL)"),
+				 ("480,576,16:9,25,i", "480 x 576 (16:9) @ 25fps (PAL)"),
+				 ("480,288,4:3,25,i", "480 x 288 (4:3) @ 25fps (PAL)"),
+				 ("480,288,16:9,25,i", "480 x 288 (16:9) @ 25fps (PAL)"),
+				 ("352,576,4:3,25,i", "352 x 576 (4:3) @ 25fps (PAL)"),
+				 ("352,576,16:9,25,i", "352 x 576 (16:9) @ 25fps (PAL)"),
+				 ("352,288,4:3,25,i", "352 x 288 (4:3) @ 25fps (PAL)"),
+				 ("352,288,16:9,25,i", "352 x 288 (16:9) @ 25fps (PAL)"),
+				 ("720,480,4:3,30,i", "720 x 480 (4:3) @ 30fps (NTSC)"),
+				 ("720,480,16:9,30,i", "720 x 480 (16:9) @ 30fps (NTSC)"),
+				 ("640,480,4:3,30,i", "640 x 480 (4:3) @ 30fps (NTSC)"),
+				 ("640,480,16:9,30,i", "640 x 480 (16:9) @ 30fps (NTSC)"),
+				 ("544,480,4:3,30,i", "544 x 480 (4:3) @ 30fps (NTSC)"),
+				 ("544,480,16:9,30,i", "544 x 480 (16:9) @ 30fps (NTSC)"),
+				 ("480,480,4:3,30,i", "480 x 480 (4:3) @ 30fps (NTSC)"),
+				 ("480,480,16:9,30,i", "480 x 480 (16:9) @ 30fps (NTSC)"),
+				 ("480,240,4:3,30,i", "480 x 240 (4:3) @ 30fps (NTSC)"),
+				 ("480,240,16:9,30,i", "480 x 240 (16:9) @ 30fps (NTSC)"),
+				 ("353,480,4:3,30,i", "353 x 480 (4:3) @ 30fps (NTSC)"),
+				 ("353,480,16:9,30,i", "353 x 480 (16:9) @ 30fps (NTSC)"),
+				 ("352,240,4:3,30,i", "352 x 240 (4:3) @ 30fps (NTSC)"),
+				 ("352,240,16:9,30,i", "352 x 240 (16:9) @ 30fps (NTSC)"),
+				 ("1920,1080,16:9,50,p", "1920 x 1080 (16:9) @ 50p (HTDV)"),
+				 ("1920,1080,16:9,25,p", "1920 x 1080 (16:9) @ 25p (HTDV)"),
+				 ("1920,1080,16:9,25,i", "1920 x 1080 (16:9) @ 25i (HTDV)"),
+				 ("1440,1080,16:9,25,p", "1440 x 1080 (16:9) @ 25p (HTDV)"),
+				 ("1440,1080,16:9,25,i", "1440 x 1080 (16:9) @ 25i (HTDV)"),
+				 ("1280,720,16:9,50,p", "1280 x 720 (16:9) @ 50p (HDTV)"),
+				 ("1280,720,16:9,25,p", "1280 x 720 (16:9) @ 25p (HDTV)"),
+				 ("720,576,16:9,50,p", "720 x 576 (16:9) @ 50p (HDTV)")
+				], "352,288,4:3,25,i")
+		newServerConfigSubsection.overscancorrection = ConfigInteger(0, (0, 100))
 		newServerConfigSubsection.soverlay = ConfigYesNo()
 		newServer = VlcServer(newServerConfigSubsection)
 
@@ -256,10 +292,8 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		cfglist.append(getConfigListEntry(_("Transcode MPEG/DVD Video"), server.transcodeVideo()))
 		cfglist.append(getConfigListEntry(_("Video Codec"), server.videoCodec()))
 		cfglist.append(getConfigListEntry(_("Video Bitrate"), server.videoBitrate()))
-		cfglist.append(getConfigListEntry(_("Video Width"), server.videoWidth()))
-		cfglist.append(getConfigListEntry(_("Video Height"), server.videoHeight()))
-		#cfglist.append(getConfigListEntry(_("Frames per Second"), config.plugins.vlcplayer.fps))
-		cfglist.append(getConfigListEntry(_("Correct aspect ratio to"), server.aspectRatio()))
+		cfglist.append(getConfigListEntry(_("Video Norm"), server.videoNorm()))
+		cfglist.append(getConfigListEntry(_("Overscan Correction [in % of Video width]"), server.overscanCorrection()))
 		cfglist.append(getConfigListEntry(_("Subtitle overlay"), server.sOverlay()))
 
 		cfglist.append(getConfigListEntry(_("Transcode MPEG/DVD Audio"), server.transcodeAudio()))
