@@ -293,7 +293,8 @@ class VlcServerConfigScreen(Screen, ConfigListScreen):
 		cfglist.append(getConfigListEntry(_("Video Codec"), server.videoCodec()))
 		cfglist.append(getConfigListEntry(_("Video Bitrate"), server.videoBitrate()))
 		cfglist.append(getConfigListEntry(_("Video Norm"), server.videoNorm()))
-		cfglist.append(getConfigListEntry(_("Overscan Correction [in % of Video width]"), server.overscanCorrection()))
+		cfglist.append(getConfigListEntry(_("Overscan Correction [in %(percentsign)s of Video width]") % { "percentsign" : "%"}, server.overscanCorrection()))
+
 		cfglist.append(getConfigListEntry(_("Subtitle overlay"), server.sOverlay()))
 
 		cfglist.append(getConfigListEntry(_("Transcode MPEG/DVD Audio"), server.transcodeAudio()))
