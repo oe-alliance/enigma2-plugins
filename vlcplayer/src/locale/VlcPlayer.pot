@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-07 23:33+0200\n"
+"POT-Creation-Date: 2008-08-09 17:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,30 +147,30 @@ msgstr ""
 
 #: ../VlcServerConfig.py:296
 #, python-format
-msgid "Overscan Correction [in % of Video width]"
+msgid "Overscan Correction [in %(percentsign)s of Video width]"
 msgstr ""
 
-#: ../VlcServerConfig.py:297
+#: ../VlcServerConfig.py:298
 msgid "Subtitle overlay"
 msgstr ""
 
-#: ../VlcServerConfig.py:299
+#: ../VlcServerConfig.py:300
 msgid "Transcode MPEG/DVD Audio"
 msgstr ""
 
-#: ../VlcServerConfig.py:300
+#: ../VlcServerConfig.py:301
 msgid "Audio Codec"
 msgstr ""
 
-#: ../VlcServerConfig.py:301
+#: ../VlcServerConfig.py:302
 msgid "Audio Bitrate"
 msgstr ""
 
-#: ../VlcServerConfig.py:302
+#: ../VlcServerConfig.py:303
 msgid "Audio Samplerate"
 msgstr ""
 
-#: ../VlcServerConfig.py:303
+#: ../VlcServerConfig.py:304
 msgid "Audio Channels"
 msgstr ""
 
