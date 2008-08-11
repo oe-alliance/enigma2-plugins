@@ -931,6 +931,7 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 	if autotimer is None:
 		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
+		autotimer.readXml()
 
 	match = evt and evt.getEventName() or ""
 	name = match or "New AutoTimer"
@@ -980,6 +981,7 @@ def addAutotimerFromService(session, service = None):
 	if autotimer is None:
 		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
+		autotimer.readXml()
 
 	serviceHandler = eServiceCenter.getInstance()
 	info = serviceHandler.info(service)
@@ -1036,7 +1038,6 @@ def importerCallback(ret):
 			from plugin import autotimer
 			autotimer = None
 
-
 def editorCallback(ret):
 	if ret:
 		from plugin import autotimer
@@ -1045,9 +1046,10 @@ def editorCallback(ret):
 		if autotimer is None:
 			from AutoTimer import AutoTimer
 			autotimer = AutoTimer()
+			autotimer.readXml()
 
 		autotimer.add(ret)
-		
+
 	# Remove instance if not running in background
 	if not config.plugins.autotimer.autopoll.value:
 		# Save xml (as long as we added something)

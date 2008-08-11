@@ -51,6 +51,12 @@ def autostart(reason, **kwargs):
 			autopoller = None
 
 		if autotimer is not None:
+			# We re-read the config so we won't save wrong information
+			try:
+				autotimer.readXml()
+			except:
+				pass
+
 			# Save xml
 			autotimer.writeXml()
 
