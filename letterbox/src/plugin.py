@@ -37,7 +37,10 @@ class LetterBox(Screen):
 			self.default = get_mode()
 
 	def toggle(self):
-		modeidx = MODE_CHOICES.index(get_mode())
+		mode = get_mode()
+		if not mode in MODE_CHOICES:
+			MODE_CHOICES.append(mode)
+		modeidx = MODE_CHOICES.index(mode)
 		modeidx = (modeidx + 1) % len(MODE_CHOICES)
 		set_mode(MODE_CHOICES[modeidx])
 		self.used = True
@@ -47,8 +50,6 @@ letterbox = None
 def zoom_init(reason, **kwargs):
 	global letterbox
 	letterbox = LetterBox(kwargs["session"])
-	#letterbox.session = kwargs["session"]
-	#letterbox.default = get_mode()
 
 def zoom_toggle(session, **kwargs):
 	global letterbox
