@@ -5,6 +5,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.config import *
+from os import path
 
 CONFIGS = [("1", "layer 1"),
 	   ("2", "layer 2"),
@@ -15,8 +16,10 @@ CONFIGS = [("1", "layer 1"),
 config.plugins.MultiRC = ConfigSubsection()
 config.plugins.MultiRC.mask = ConfigSelection(choices = CONFIGS, default = "f")
 
-# config file for IR mask
+# config file for IR mask, default is DM7025 or later, fallback to DM500/600
 MASK = "/proc/stb/ir/rc/mask0"
+if not path.exists(MASK):
+	MASK = "/proc/stb/ir/rc/mask"
 
 class MultiRCSetup(ConfigListScreen, Screen):
 	skin = """
