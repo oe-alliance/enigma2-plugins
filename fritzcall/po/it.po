@@ -1,109 +1,137 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2008 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <spaeleus@croci.org>, 2008.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: Enigma2 Fritz!Box plugin italian locale\n"
+"Project-Id-Version: Enigma2 FRITZ!Box plugin italian locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-30 09:28+0200\n"
-"PO-Revision-Date: 2008-07-30 09:33+0200\n"
-"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"POT-Creation-Date: 2008-08-08 08:37+0200\n"
+"PO-Revision-Date: 2008-08-07 20:49+0100\n"
+"Last-Translator: Spaeleus <spaeleus#croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
+#: ../plugin.py:489
 msgid "Append shortcut number"
 msgstr "Aggiungere numero breve"
 
-msgid "Append type of number (home, mobile, business)"
-msgstr "Aggiungere il tipo di numero (casa, cellulare, ufficio...)"
+#: ../plugin.py:488
+msgid "Append type of number"
+msgstr "Agg. il tipo di numero (casa,cell.,uff.)"
 
+#: ../plugin.py:490
 msgid "Append vanity name"
 msgstr "Aggiungere nome 'Vanity'"
 
+#: ../plugin.py:54
 msgid "Austria"
 msgstr "Austria"
 
+#: ../plugin.py:495
 msgid "Automatically add new Caller to PhoneBook"
-msgstr "Inserire automaticamente nuovo chiamante in rubrica"
+msgstr "Ins. autom. nuovo chiamante in rubrica"
 
+#: ../plugin.py:48
 msgid "CF Drive"
 msgstr "Drive CF"
 
+#: ../plugin.py:469
 msgid "Call monitoring"
 msgstr "Monitoraggio chiamate"
 
+#: ../plugin.py:513
 msgid "Can't create PhoneBook.txt"
 msgstr "Impossibile creare PhoneBook.txt!"
 
+#: ../plugin.py:441
 msgid "Cancel"
 msgstr "Annullare"
 
-msgid "Connected to Fritz!Box!"
-msgstr "Connesso alla Fritz!Box!"
+#: ../plugin.py:930
+msgid "Connected to FRITZ!Box!"
+msgstr "Connesso alla FRITZ!Box!"
 
+#: ../plugin.py:940
 #, python-format
 msgid ""
-"Connecting to Fritz!Box failed\n"
+"Connecting to FRITZ!Box failed\n"
 " (%s)\n"
 "retrying..."
 msgstr ""
-"Connessione alla Fritz!Box fallita!\n"
+"Connessione alla FRITZ!Box fallita!\n"
 "(%s)\n"
 "Nuovo tentativo in corso..."
 
-msgid "Connecting to Fritz!Box..."
-msgstr "Connessione alla Fritz!Box in corso"
+#: ../plugin.py:927
+msgid "Connecting to FRITZ!Box..."
+msgstr "Connessione alla FRITZ!Box in corso"
 
+#: ../plugin.py:936
 #, python-format
 msgid ""
-"Connection to Fritz!Box! lost\n"
+"Connection to FRITZ!Box! lost\n"
 " (%s)\n"
 "retrying..."
 msgstr ""
-"Connessione alla Fritz!Box persa!\n"
+"Connessione alla FRITZ!Box persa!\n"
 "(%s)\n"
 "Nuovo tentativo in corso..."
 
+#: ../plugin.py:212
 #, python-format
-msgid "Could not load phonebook from Fritz!Box - Error: %s"
-msgstr "Impossibile caricare la rubrica dalla Fritz!Box! - Errore: %s"
+msgid "Could not load missed calls from FRITZ!Box - Error: %s"
+msgstr "Impossibile caricare la rubrica dalla FRITZ!Box! - Errore: %s"
 
-msgid "Could not parse Fritz!Box Phonebook entry"
-msgstr "Impossibile analizzare la voce nella Rubrica della Fritz!Box!"
+#: ../plugin.py:116
+#, python-format
+msgid "Could not load phonebook from FRITZ!Box - Error: %s"
+msgstr "Impossibile caricare la rubrica dalla FRITZ!Box! - Errore: %s"
 
+#: ../plugin.py:206
+msgid "Could not parse FRITZ!Box Phonebook entry"
+msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
+
+#: ../plugin.py:483
 msgid "Country"
 msgstr "Nazione"
 
-msgid "Display Fritzbox-Fon calls on screen"
-msgstr "Visualizza sullo schermo le chiamate telefoniche"
+#: ../plugin.py:990
+msgid "Display FRITZ!box-Fon calls on screen"
+msgstr "Visualizza le chiamate telef. sulla TV"
 
+#: ../plugin.py:471
+msgid "FRITZ!Box FON IP address"
+msgstr "Indirizzo IP FRITZ!Box FON"
+
+#: ../plugin.py:83
+#, python-format
+msgid "FRITZ!Box Login failed! - Error: %s"
+msgstr "Login alla FRITZ!Box fallito! - Errore: %s"
+
+#: ../plugin.py:93
+msgid "FRITZ!Box Login failed! - Wrong Password!"
+msgstr "Login alla FRITZ!Box fallito! - Password errata!"
+
+#: ../plugin.py:48
 msgid "Flash"
 msgstr "Flash"
 
-msgid "Fritz!Box FON IP address"
-msgstr "Indirizzo IP Fritz!Box FON"
-
-#, python-format
-msgid "Fritz!Box Login failed! - Error: %s"
-msgstr "Login alla Fritz!Box fallito! - Errore: %s"
-
-msgid "Fritz!Box Login failed! - Wrong Password!"
-msgstr "Login alla Fritz!Box fallito! - Password errata!"
-
+#: ../plugin.py:54
 msgid "Germany"
 msgstr "Germania"
 
+#: ../plugin.py:322
+msgid "Getting missed calls from FRITZ!Box..."
+msgstr "Recupero chiamate perse dalla Fritz!Box in corso"
+
+#: ../plugin.py:48
 msgid "Harddisk"
 msgstr "Harddisk"
 
+#: ../plugin.py:595
 #, python-format
 msgid ""
 "Incoming Call on %s from\n"
@@ -120,18 +148,35 @@ msgstr ""
 "---------------------------------------------\n"
 "a: %s"
 
+#: ../plugin.py:54
 msgid "Italy"
 msgstr "Italia"
 
+#: ../plugin.py:554
 msgid "Last 10 calls:\n"
 msgstr "Ultime 10 chiamate:\n"
 
+#: ../plugin.py:477
 msgid "MSN to show (separated by ,)"
 msgstr "MSN da mostrare (separare con ,)"
 
+#: ../plugin.py:443
+msgid "Missed Calls"
+msgstr "Chiamate Perse"
+
+#: ../plugin.py:340 ../plugin.py:991
+msgid "Missed calls"
+msgstr "Chiamate perse"
+
+#: ../plugin.py:326
+msgid "Missed calls during Standby"
+msgstr "Chiamate perse durante lo standby"
+
+#: ../plugin.py:442
 msgid "OK"
 msgstr "OK"
 
+#: ../plugin.py:597
 #, python-format
 msgid ""
 "Outgoing Call on %s to\n"
@@ -148,71 +193,110 @@ msgstr ""
 "---------------------------------------------\n"
 "da: %s"
 
-msgid "Password Accessing Fritz!Box"
-msgstr "Password di accesso alla Fritz!Box"
+#: ../plugin.py:485
+msgid "Password Accessing FRITZ!Box"
+msgstr "Password di accesso alla FRITZ!Box"
 
+#: ../plugin.py:494
 msgid "PhoneBook Location"
 msgstr "Posizione Rubrica"
 
+#: ../plugin.py:498
 msgid "Prefix for Outgoing Calls"
 msgstr "Prefisso per le chiamate in uscita"
 
-msgid "Read PhoneBook from Fritz!Box"
-msgstr "Caricare la Rubrica dalla Fritz!Box"
+#: ../plugin.py:486
+msgid "Read PhoneBook from FRITZ!Box"
+msgstr "Caricare la Rubrica dalla FRITZ!Box"
 
+#: ../plugin.py:481
 msgid "Reverse Lookup Caller ID (DE,CH,IT,AT only)"
-msgstr "Identificativo Chiamante (solo IT, CH, DE, AT)"
+msgstr "Identificativo Chiamante (solo IT,CH,DE,AT)"
 
+#: ../plugin.py:176 ../plugin.py:200
 msgid "Shortcut"
 msgstr "Numero breve"
 
+#: ../plugin.py:475
 msgid "Show Calls for specific MSN"
 msgstr "Mostrare le chiamate per MSN specifico"
 
+#: ../plugin.py:479
 msgid "Show Outgoing Calls"
 msgstr "Mostrare le chiamate in uscita"
 
+#: ../plugin.py:473
 msgid "Show after Standby"
 msgstr "Mostrare chiamate dopo lo Standby"
 
+#: ../plugin.py:497
 msgid "Strip Leading 0"
 msgstr "Sopprimere '0' iniziali"
 
+#: ../plugin.py:54
 msgid "Switzerland"
 msgstr "Svizzera"
 
+#: ../plugin.py:480
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Ritardo notifica chiamate (secondi)"
 
+#: ../plugin.py:226 ../plugin.py:569 ../plugin.py:677 ../plugin.py:755
+#: ../plugin.py:782 ../plugin.py:815 ../plugin.py:845 ../plugin.py:914
 msgid "UNKNOWN"
 msgstr "SCONOSCIUTO"
 
+#: ../plugin.py:48
 msgid "USB Stick"
 msgstr "Penna USB"
 
+#: ../plugin.py:492
 msgid "Use internal PhoneBook"
 msgstr "Usare la Rubrica interna"
 
+#: ../plugin.py:178 ../plugin.py:202
 msgid "Vanity"
 msgstr "'Vanity'"
 
-msgid "You need to enable the monitoring on your Fritz!Box by dialing #96*5*!"
-msgstr "Per abilitare il monitoraggio sulla Fritz!Box comporre #96*5*!"
+#: ../plugin.py:437
+msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
+msgstr "Per abilitare il monitoraggio sulla FRITZ!Box comporre #96*5*!"
 
+#: ../plugin.py:233
+msgid ""
+"You need to set the password of the FRITZ!Box\n"
+"in the configuration dialog to display missed calls\n"
+"\n"
+"It could be a communication issue, just try again."
+msgstr ""
+"E' necessario impostare la password della Fritz!Box\n"
+"nel menu configurazione per mostrare le chiamate perse.\n"
+"\n"
+"Potrebbe trattarsi di un problema di comunicazione, riprovare."
+
+#: ../plugin.py:171
 msgid "home"
 msgstr "Casa"
 
+#: ../plugin.py:169
 msgid "mobile"
 msgstr "Cellulare"
 
+#: ../plugin.py:38
 msgid "show as list"
 msgstr "Come lista"
 
+#: ../plugin.py:38
 msgid "show each call"
 msgstr "Tutte"
 
+#: ../plugin.py:38
 msgid "show nothing"
 msgstr "Nulla"
 
+#: ../plugin.py:173
 msgid "work"
 msgstr "Ufficio"
+
+#~ msgid "Append type of number (home, mobile, business)"
+#~ msgstr "Agg. il tipo di numero (casa,cell.,uff.)"

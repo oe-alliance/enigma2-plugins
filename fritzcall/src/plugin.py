@@ -8,6 +8,7 @@ from Components.Label import Label
 from Components.Button import Button
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigIP, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger
 from Components.ConfigList import ConfigListScreen
+from Components.ScrollLabel import ScrollLabel
 
 from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
@@ -52,6 +53,308 @@ config.plugins.FritzCall.showVanity = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.prefix = ConfigText(default = "", fixed_size = False)
 config.plugins.FritzCall.country = ConfigSelection(choices = [("DE", _("Germany")), ("CH", _("Switzerland")), ("IT", _("Italy")), ("AT", _("Austria"))])
 
+def html2utf8(in_html):
+	try:
+		import htmlentitydefs
+		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
+		htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
+		entities = htmlentitynamemask.finditer(in_html)
+		entitydict = {}
+		for x in entities:
+			entitydict[x.group(1)] = x.group(2)
+		for key, name in entitydict.items():
+			try:
+				entitydict[key] = htmlentitydefs.name2codepoint[name]
+			except KeyError:
+				pass
+		entities = htmlentitynumbermask.finditer(in_html)
+		for x in entities:
+			entitydict[x.group(1)] = x.group(2)
+		for key, codepoint in entitydict.items():
+			try:
+				in_html = in_html.replace(key, (unichr(int(codepoint)).encode('utf8')))
+			except ValueError:
+				pass
+	except ImportError:
+		return in_html.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
+	return in_html
+
+class FritzCallFBF:
+	def __init__(self):
+		print "[FritzCallFBF] __init__"
+		self.missedCallback = None
+		self.loginCallback = None
+
+	def notify(self, text):
+		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
+
+	def errorLogin(self, error):
+		text = _("FRITZ!Box Login failed! - Error: %s") %error
+		self.notify(text)
+
+	def _gotPageLogin(self, html):
+#		print "[FritzCallPhonebook] _gotPageLogin"
+		# workaround: exceptions in gotPage-callback were ignored
+		try:
+			print "[FritzCallFBF] _gotPageLogin: verify login"
+			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;Das angegebene Kennwort', html, re.S)
+			if found:
+				text = _("FRITZ!Box Login failed! - Wrong Password!")
+				self.notify(text)
+			else:
+				self.loginCallback()
+			loginCallback = None
+		except:
+			import traceback, sys
+			traceback.print_exc(file=sys.stdout)
+			#raise e
+
+	def login(self):
+		print "[FritzCallFBF] Login"
+		if config.plugins.FritzCall.password.value != "":
+			host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
+			uri =  "/cgi-bin/webcm"
+			parms = "login:command/password=%s" %(config.plugins.FritzCall.password.value)
+			url = "http://%s%s" %(host, uri)
+			getPage(url, method="POST", headers = {'Content-Type': "application/x-www-form-urlencoded",'Content-Length': str(len(parms))}, postdata=parms).addCallback(self._gotPageLogin).addErrback(self.errorLogin)
+		else:
+			self.loginCallback()
+			self.loginCallback = None
+
+	def errorLoad(self, error):
+		text = _("Could not load phonebook from FRITZ!Box - Error: %s") %error
+		self.notify(text)
+
+	def _gotPageLoad(self, html):
+		print "[FritzCallFBF] _gotPageLoad"
+		# workaround: exceptions in gotPage-callback were ignored
+		try:
+			self.parseFritzBoxPhonebook(html)
+		except:
+			import traceback, sys
+			traceback.print_exc(file=sys.stdout)
+			#raise e
+
+	def loadFritzBoxPhonebook(self):
+		print "[FritzCallFBF] loadFritzBoxPhonebook"
+		if config.plugins.FritzCall.fritzphonebook.value:
+			print "[FritzCallFBF] loadFritzBoxPhonebook: logging in"
+			self.loginCallback = self._loadFritzBoxPhonebook
+			self.login()
+
+	def _loadFritzBoxPhonebook(self):
+			host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
+			uri = "/cgi-bin/webcm"# % tuple(config.plugins.FritzCall.hostname.value)
+			parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de','var:pagename':'fonbuch','var:menu':'fon'})
+			url = "http://%s%s?%s" %(host, uri, parms)
+
+			getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
+
+	def parseFritzBoxPhonebook(self, html):
+		print "[FritzCallFBF] parseFritzBoxPhonebook"
+
+		table = html2utf8(html)
+		if re.search('TrFonName', table):
+			#===============================================================================
+			#				 New Style: 7170 / 7270 (FW 54.04.58, 54.04.63-11941) 
+			#	We expect one line with TrFonName followed by several lines with
+			#	TrFonNr(Type,Number,Shortcut,Vanity), which all belong to the name in TrFonName.
+			#===============================================================================
+			# entrymask = re.compile('(TrFonName\("[^"]+", "[^"]+", "[^"]+"\);</SCRIPT>\s+[<SCRIPT type=text/javascript>TrFonNr\("[^"]+", "[^"]+", "[^"]+", "[^"]+"\);</SCRIPT>\s+]+)<SCRIPT type=text/javascript>document.write(TrFon1());</SCRIPT>', re.DOTALL)
+			# entrymask = re.compile('(TrFonName\("[^"]+", "[^"]+", "[^"]+"\);.*?[.*?TrFonNr\("[^"]+", "[^"]+", "[^"]+", "[^"]+"\);.*?]+).*?document.write(TrFon1());', re.DOTALL)
+			entrymask = re.compile('(TrFonName\("[^"]+", "[^"]+", "[^"]*"\);.*?)TrFon1\(\)', re.S)
+			entries = entrymask.finditer(html)
+			for entry in entries:
+				# print entry.group(1)
+				found = re.match('TrFonName\("[^"]*", "([^"]+)", "[^"]*"\);', entry.group(1))
+				if found:
+					name = found.group(1)
+				else:
+					continue
+				detailmask = re.compile('TrFonNr\("([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)"\);', re.S)
+				details = detailmask.finditer(entry.group(1))
+				for found in details:
+					thisname = name
+
+					type = found.group(1)
+					if config.plugins.FritzCall.showType.value:
+						if type == "mobile":
+							thisname = thisname + " (" +_("mobile") + ")"
+						elif type == "home":
+							thisname = thisname + " (" +_("home") + ")"
+						elif type == "work":
+							thisname = thisname + " (" +_("work") + ")"
+
+					if config.plugins.FritzCall.showShortcut.value and found.group(3):
+						thisname = thisname + ", " + _("Shortcut") + ": " + found.group(3)
+					if config.plugins.FritzCall.showVanity.value and found.group(4):
+						thisname = thisname + ", " + _("Vanity") + ": " + found.group(4)
+
+					thisnumber = found.group(2).strip()
+					thisname = thisname.strip()
+					if thisnumber:
+						print "[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" %(thisname, thisnumber)
+						phonebook.phonebook[thisnumber] = thisname
+					else:
+						print "[FritzCallFBF] ignoring empty number for %s" %thisname
+					continue
+
+		elif re.search('TrFon', table):
+			#===============================================================================
+			#				Old Style: 7050 (FW 14.04.33)
+			#	We expect one line with TrFon(No,Name,Number,Shortcut,Vanity)
+			#===============================================================================				
+			entrymask = re.compile('TrFon\("[^"]*", "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)"\)', re.S)
+			entries = entrymask.finditer(html)
+			for found in entries:
+				name = found.group(1).strip()
+				thisnumber = found.group(2).strip()
+				if config.plugins.FritzCall.showShortcut.value and found.group(3):
+					name = name + ", " + _("Shortcut") + ": " + found.group(3)
+				if config.plugins.FritzCall.showVanity.value and found.group(4):
+					name = name + ", " +_("Vanity") +": " + found.group(4)
+				if thisnumber:
+					print "[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" %(name, thisnumber)
+					phonebook.phonebook[thisnumber] = name
+				else:
+					print "[FritzCallFBF] ignoring empty number for %s" %name
+				continue
+		else:
+			self.notify(_("Could not parse FRITZ!Box Phonebook entry"))
+
+	def errorCalls(self, error):
+		text = _("Could not load missed calls from FRITZ!Box - Error: %s") %error
+		self.notify(text)
+
+	def _gotPageCalls(self, html):
+		def _resolveNumber(number):
+			if number.isdigit():
+				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0]=="0": number = number[1:]
+				name = phonebook.search(number)
+				if name:
+					found = re.match('(.*?)\n.*', name)
+					if found:
+						name = found.group(1)
+					number = name
+			elif number == "":
+				number = _("UNKNOWN")
+			# if len(number) > 20: number = number[:20]
+			return number
+
+		# check for error: wrong password or password not set... TODO
+		found = re.search('Melden Sie sich mit dem Kennwort der FRITZ!Box an', html)
+		if found:
+			text = _("You need to set the password of the FRITZ!Box\nin the configuration dialog to display missed calls\n\nIt could be a communication issue, just try again.")
+			# self.session.open(MessageBox, text, MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
+			self.notify(text)
+			return
+
+		# print "[FritzCallFBF] _gotPageCalls:\n" + html
+		lines = html.splitlines()
+		text = ""
+		for line in lines:
+			# print line
+			found = re.match(".*2;([^;]*);;([^;]*);;([^;]*)", line)
+			if found:
+				date = found.group(1)
+				caller = _resolveNumber(found.group(2))
+				callee = _resolveNumber(found.group(3))
+				while (len(caller) + len(callee)) > 40:
+					if len(caller) > len(callee):
+						caller = caller[:-1]
+					else:
+						callee = callee[:-1]
+				found = re.match("(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
+                                if found: date = found.group(1) + found.group(2)
+				text = text + "\n" + date + " " + caller + " -> " + callee
+
+		# print "[FritzCallFBF] _gotPageCalls result:\n" + text
+
+		if self.missedCallback is not None:
+			# print "[FritzCallFBF] _gotPageCalls call callback with\n" + text
+			self.missedCallback(text = text)
+			self.missedCallback = None
+
+	def getMissedCalls(self, callback):
+		#
+		# call sequence must be:
+		# - login
+		# - getPage -> _gotPageLogin
+		# - loginCallback (_getMissedCalls)
+		# - getPage -> _getMissedCalls1
+		print "[FritzCallFBF] getMissedCalls"
+		self.missedCallback = callback
+		self.loginCallback = self._getMissedCalls
+		self.login()
+
+	def _getMissedCalls(self):
+		#
+		# we need this to fill Anrufliste.csv
+		# http://repeater1/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:menu=fon&var:pagename=foncalls
+		#
+		print "[FritzCallFBF] _getMissedCalls"
+		host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
+		parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de','var:pagename':'foncalls','var:menu':'fon'})
+		url = "http://%s/cgi-bin/webcm?%s" %(host, parms)
+		getPage(url).addCallback(self._getMissedCalls1).addErrback(self.errorCalls)
+
+	def _getMissedCalls1(self, html):
+		#
+		# finally we should have successfully lgged in and filled the csv
+		#
+		print "[FritzCallFBF] _getMissedCalls1"
+		host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
+		parms = urlencode({'getpage':'../html/de/FRITZ!Box_Anrufliste.csv'})
+		url = "http://%s/cgi-bin/webcm?%s" %(host, parms)
+		getPage(url).addCallback(self._gotPageCalls).addErrback(self.errorCalls)
+
+fritzbox = FritzCallFBF()
+
+class FritzDisplayMissedCalls(Screen):
+
+	skin = """
+		<screen name="FritzDisplayMissedCalls" position="100,90" size="550,420" title="Missed calls" >
+			<widget name="statusbar" position="0,0" size="550,22" font="Regular;22" />
+			<widget name="list" position="0,22" size="550,398" font="Regular;22" />
+		</screen>"""
+
+	def __init__(self, session, text = ""):
+		self.skin = FritzDisplayMissedCalls.skin
+		Screen.__init__(self, session)
+
+		self["setupActions"] = ActionMap(["OkCancelActions", "DirectionActions"],
+		{
+			"down": self.pageDown,
+			"up": self.pageUp,
+			"right": self.pageDown,
+			"left": self.pageUp,
+			"cancel": self.ok,
+			"save": self.ok,
+			"ok": self.ok,}, -2)
+		
+		if text == "":
+			self["statusbar"] = Label(_("Getting missed calls from FRITZ!Box..."))
+			self["list"] = ScrollLabel("")
+			fritzbox.getMissedCalls(self.gotMissedCalls)
+		else:
+			self["statusbar"] = Label(_("Missed calls during Standby"))
+			self["list"] = ScrollLabel(text)
+
+	def ok(self):
+		self.close()
+
+	def pageDown(self):
+		self["list"].pageDown()
+
+	def pageUp(self):
+		self["list"].pageUp()
+
+	def gotMissedCalls(self, text):
+		# print "[FritzDisplayMissedCalls] gotMissedCalls:\n" + text
+		self["statusbar"].setText(_("Missed calls"))
+		self["list"].setText(text)
+
+
 class FritzCallPhonebook:
 	def __init__(self):
 		self.phonebook = {}
@@ -68,133 +371,6 @@ class FritzCallPhonebook:
 			return True
 		except IOError:
 			return False
-
-	def errorLogin(self, error):
-		text = _("Fritz!Box Login failed! - Error: %s") %error
-		self.notify(text)
-
-	def errorLoad(self, error):
-		text = _("Could not load phonebook from Fritz!Box - Error: %s") %error
-		self.notify(text)
-
-	def loadFritzBoxPhonebook(self):
-		print "[FritzCallPhonebook] loadFritzBoxPhonebook"
-
-		host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
-		uri = "/cgi-bin/webcm"# % tuple(config.plugins.FritzCall.hostname.value)
-		parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de','var:pagename':'fonbuch','var:menu':'fon'})
-
-		url = "http://%s%s?%s" %(host, uri, parms)
-
-		getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
-
-	def parseFritzBoxPhonebook(self, html):
-		print "[FritzCallPhonebook] parseFritzBoxPhonebook"
-		found = re.match('.*<table id="tList".*?</tr>\n(.*?)</table>', html, re.S)
-
-		if found:
-			table = found.group(1)
-			if re.search('TrFonName', table):		   # this is the new style
-				#===============================================================================
-				#				7170 / 7270 / New Style
-				#	We expect one line with TrFonName followed by several lines with
-				#	TrFonNr(Kind,Number,Shortcut,Vanity), which all belong to the name in TrFonName.
-				#===============================================================================
-				text = table.split('\n')
-				for line in text:
-					found = re.match('.*TrFonName\(".*", "(.*)", ".*"\)', line, re.S)
-					if found:
-						name = found.group(1)
-						continue
-					found = re.match('.*TrFonNr\("(.*)", "(.*)", "(.*)", "(.*)"\)', line, re.S) # TrFonNr(Art,Nummer,Kurzwahl,Vanity)
-					if found:
-						thisname = name
-
-						kind = found.group(1)
-						if config.plugins.FritzCall.showType.value:
-							if kind == "mobile":
-								thisname = thisname + " (" +_("mobile") + ")"
-							elif kind == "home":
-								thisname = thisname + " (" +_("home") + ")"
-							elif kind == "work":
-								thisname = thisname + " (" +_("work") + ")"
-
-						if config.plugins.FritzCall.showShortcut.value and found.group(3):
-							thisname = thisname + ", " + _("Shortcut") + ": " + found.group(3)
-						if config.plugins.FritzCall.showVanity.value and found.group(4):
-							thisname = thisname + ", " + _("Vanity") + ": " + found.group(4)
-
-						thisnumber = found.group(2).strip()
-						thisname = thisname.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü").strip()
-						print "[FritzCallPhonebook] Adding '''%s''' with '''%s''' from Fritz!Box Phonebook!" %(thisname, thisnumber)
-						if thisnumber <> "":
-							self.phonebook[thisnumber] = thisname
-						else:
-							print "[FritzCallPhonebook] ignoring empty number"
-						continue
-			elif re.search('TrFon', table):
-				#===============================================================================
-				#				7050 / Old Style
-				#	We expect one line with TrFon(No,Name,Number,Shortcut,Vanity)
-				#===============================================================================				
-				text = table.split('\n')
-				for line in text:
-					found = re.match('.*TrFon\(".*", "(.*)", "(.*)", "(.*)", "(.*)"\)', line, re.S)
-					if found:
-						name = found.group(1)
-						thisnumber = found.group(2)
-						if config.plugins.FritzCall.showShortcut.value and found.group(3):
-							name = name + ", " + _("Shortcut") + ": " + found.group(3)
-						if config.plugins.FritzCall.showVanity.value and found.group(4):
-							name = name + ", " +_("Vanity") +": " + found.group(4)
-						name = name.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
-						print "[FritzCallPhonebook] Adding '''%s''' with '''%s''' from Fritz!Box Phonebook!" %(name, thisnumber)
-						self.phonebook[thisnumber.strip()] = name.strip()
-			else:
-				self.notify(_("Could not parse Fritz!Box Phonebook entry"))
-		else:
-			print "[FritzCallPhonebook] Could not read Fritz!Box Phonebook"
-			# self.notify(_("Could not read Fritz!Box Phonebook"))
-
-
-	def _gotPageLogin(self, html):
-#		print "[FritzCallPhonebook] _gotPageLogin"
-		# workaround: exceptions in gotPage-callback were ignored
-		try:
-			self.verifyLogin(html)
-		except:
-			import traceback, sys
-			traceback.print_exc(file=sys.stdout)
-			#raise e
-
-	def _gotPageLoad(self, html):
-#		print "[FritzCallPhonebook] _gotPageLoad"
-		# workaround: exceptions in gotPage-callback were ignored
-		try:
-			self.parseFritzBoxPhonebook(html)
-		except:
-			import traceback, sys
-			traceback.print_exc(file=sys.stdout)
-			#raise e
-
-	def login(self):
-		print "[FritzCallPhonebook] Login"
-
-		host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
-		uri =  "/cgi-bin/webcm"
-		parms = "login:command/password=%s" %(config.plugins.FritzCall.password.value)
-		url = "http://%s%s" %(host, uri)
-
-		getPage(url, method="POST", headers = {'Content-Type': "application/x-www-form-urlencoded",'Content-Length': str(len(parms))}, postdata=parms).addCallback(self._gotPageLogin).addErrback(self.errorLogin)
-
-	def verifyLogin(self, html):
-		# print "[FritzCallPhonebook] verifyLogin - html: %s" %html
-		found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;Das angegebene Kennwort', html, re.S)
-		if not found:
-			self.loadFritzBoxPhonebook()
-		else:
-			text = _("Fritz!Box Login failed! - Wrong Password!")
-			self.notify(text)
 
 	def reload(self):
 		print "[FritzCallPhonebook] reload"
@@ -222,10 +398,7 @@ class FritzCallPhonebook:
 						print "[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" %line
 
 		if config.plugins.FritzCall.fritzphonebook.value:
-			if config.plugins.FritzCall.password.value != "":
-				self.login()
-			else:
-				self.loadFritzBoxPhonebook()
+			fritzbox.loadFritzBoxPhonebook()
 
 	def search(self, number):
 		print "[FritzCallPhonebook] Searching for %s" %number
@@ -262,27 +435,34 @@ class FritzCallSetup(ConfigListScreen, Screen):
 		<screen position="100,90" size="550,420" title="FritzCall Setup" >
 		<widget name="config" position="20,10" size="510,300" scrollbarMode="showOnDemand" />
 		<widget name="consideration" position="20,320" font="Regular;20" halign="center" size="510,50" />
-		<ePixmap position="135,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="275,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="135,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="275,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<ePixmap position="5,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="145,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="285,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<widget name="key_red" position="5,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_green" position="145,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_yellow" position="285,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
 	def __init__(self, session, args = None):
 
 		Screen.__init__(self, session)
+		self.session = session
 
-		self["consideration"] = Label(_("You need to enable the monitoring on your Fritz!Box by dialing #96*5*!"))
+		self["consideration"] = Label(_("You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"))
 		self.list = []
 
 		# Initialize Buttons
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
+		self["key_yellow"] = Button(_("Missed Calls"))
 
-		self["setupActions"] = ActionMap(["SetupActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
-			"save": self.save,
 			"cancel": self.cancel,
+			"red": self.cancel,  	# not strictly needed, better for clarity
+			"save": self.save,
+			"green": self.save,  	# not strictly needed, better for clarity
+			"yellow": self.displayMissedCalls,
 			"ok": self.save,
 		}, -2)
 
@@ -302,7 +482,7 @@ class FritzCallSetup(ConfigListScreen, Screen):
 		self.list = [ ]
 		self.list.append(getConfigListEntry(_("Call monitoring"), config.plugins.FritzCall.enable))
 		if config.plugins.FritzCall.enable.value:
-			self.list.append(getConfigListEntry(_("Fritz!Box FON IP address"), config.plugins.FritzCall.hostname))
+			self.list.append(getConfigListEntry(_("FRITZ!Box FON IP address"), config.plugins.FritzCall.hostname))
 
 			self.list.append(getConfigListEntry(_("Show after Standby"), config.plugins.FritzCall.afterStandby))
 
@@ -316,10 +496,10 @@ class FritzCallSetup(ConfigListScreen, Screen):
 			if config.plugins.FritzCall.lookup.value:
 				self.list.append(getConfigListEntry(_("Country"), config.plugins.FritzCall.country))
 
-			self.list.append(getConfigListEntry(_("Read PhoneBook from Fritz!Box"), config.plugins.FritzCall.fritzphonebook))
+			self.list.append(getConfigListEntry(_("Password Accessing FRITZ!Box"), config.plugins.FritzCall.password))
+			self.list.append(getConfigListEntry(_("Read PhoneBook from FRITZ!Box"), config.plugins.FritzCall.fritzphonebook))
 			if config.plugins.FritzCall.fritzphonebook.value:
-				self.list.append(getConfigListEntry(_("Password Accessing Fritz!Box"), config.plugins.FritzCall.password))
-				self.list.append(getConfigListEntry(_("Append type of number (home, mobile, business)"), config.plugins.FritzCall.showType))
+				self.list.append(getConfigListEntry(_("Append type of number"), config.plugins.FritzCall.showType))
 				self.list.append(getConfigListEntry(_("Append shortcut number"), config.plugins.FritzCall.showShortcut))
 				self.list.append(getConfigListEntry(_("Append vanity name"), config.plugins.FritzCall.showVanity))
 
@@ -357,6 +537,10 @@ class FritzCallSetup(ConfigListScreen, Screen):
 			x[1].cancel()
 		self.close()
 
+	def displayMissedCalls(self):
+		self.session.open(FritzDisplayMissedCalls)
+
+
 standbyMode = False
 
 class FritzCallList:
@@ -375,6 +559,7 @@ class FritzCallList:
 	def display(self):
 		print "[FritzCallList] display"
 		global standbyMode
+		global my_global_session
 		standbyMode = False
 		# Standby.inStandby.onClose.remove(self.display) object does not exist anymore...
 		# build screen from call list
@@ -389,31 +574,32 @@ class FritzCallList:
 				direction = "->"
 			else:
 				direction = "<-"
-			found = re.match("(\d\d.\d\d).\d\d (\d\d:\d\d):\d\d", date)
-			date = found.group(1) + ". " + found.group(2)
+			found = re.match(".*(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
+			if found: date = found.group(1) + found.group(2)
 			found = re.match(".*\((.*)\)", phone)
 			if found: phone = found.group(1)
-			if len(phone) > 20: phone = phone[:20]
+			# if len(phone) > 20: phone = phone[:20]
 
 			if caller == _("UNKNOWN") and number != "":
 				caller = number
 			else:
 				found = re.match("(.*)\n.*", caller)
 				if found: caller = found.group(1)
-			if len(caller) > 20: caller = caller[:20]
+			# if len(caller) > 20: caller = caller[:20]
+			while (len(caller) + len(phone)) > 40:
+				if len(caller) > len(phone):
+					caller = caller[:-1]
+				else:
+					phone = phone[:-1]
 
 			text = text + "%s %s %s %s\n" %(date, caller, direction, phone)
 
 		print "[FritzCallList] display: '%s %s %s %s'" %(date, caller, direction, phone)
 		# display screen
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO)
-		# self.session.open(FritzCallDisplayCalls)
+		# my_global_session.open(FritzDisplayMissedCalls, text) # TODO please HELP: from where can I get a session?
 		self.callList = [ ]
 		self.text = ""
-
-	def getList(self):
-		return self.text
-
 
 callList = FritzCallList()
 
@@ -431,7 +617,7 @@ def notifyCall(event, date, number, caller, phone):
 		global standbyMode
 		if not standbyMode :
 			standbyMode = True
-			Standby.inStandby.onClose.append(callList.display)
+			Standby.inStandby.onHide.append(callList.display)
 		# add text/timeout to call list
 		callList.add(event, date, number, caller, phone)
 		print "[FritzCall] notifyCall: added to callList"
@@ -712,9 +898,9 @@ class FritzProtocol(LineReceiver):
 			print "[FritzProtocol] lineReceived phone: '''%s''' number: '''%s'''" % (phone, number)
 
 			filtermsns = config.plugins.FritzCall.filtermsn.value.split(",")
-			for msn in filtermsns:
-				msn = msn.strip()
-			if not config.plugins.FritzCall.filter.value or phone in filtermsns:
+			for i in range(len(filtermsns)):
+				filtermsns[i] = filtermsns[i].strip()
+			if not (config.plugins.FritzCall.filter.value and phone not in filtermsns):
 				print "[FritzProtocol] lineReceived no filter hit"
 				phonename = phonebook.search(phone)		   # do we have a name for the number of our side?
 				if phonename is not None:
@@ -752,20 +938,20 @@ class FritzClientFactory(ReconnectingClientFactory):
 		self.hangup_ok = False
 
 	def startedConnecting(self, connector):
-		Notifications.AddNotification(MessageBox, _("Connecting to Fritz!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
+		Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
 
 	def buildProtocol(self, addr):
-		Notifications.AddNotification(MessageBox, _("Connected to Fritz!Box!"), type=MessageBox.TYPE_INFO, timeout=4)
+		Notifications.AddNotification(MessageBox, _("Connected to FRITZ!Box!"), type=MessageBox.TYPE_INFO, timeout=4)
 		self.resetDelay()
 		return FritzProtocol()
 
 	def clientConnectionLost(self, connector, reason):
 		if not self.hangup_ok:
-			Notifications.AddNotification(MessageBox, _("Connection to Fritz!Box! lost\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
+			Notifications.AddNotification(MessageBox, _("Connection to FRITZ!Box! lost\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
 
 	def clientConnectionFailed(self, connector, reason):
-		Notifications.AddNotification(MessageBox, _("Connecting to Fritz!Box failed\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
+		Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box failed\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		ReconnectingClientFactory.clientConnectionFailed(self, connector, reason)
 
 class FritzCall:
@@ -790,6 +976,9 @@ class FritzCall:
 			self.d[1].disconnect()
 			self.d = None
 
+def displayMissedCalls(session, servicelist):
+	session.open(FritzDisplayMissedCalls)
+
 def main(session):
 	session.open(FritzCallSetup)
 
@@ -804,7 +993,7 @@ def autostart(reason, **kwargs):
 		my_global_session = kwargs["session"]
 		return
 
-	print "[Fritz!Call] - Autostart"
+	print "[FRITZ!Call] - Autostart"
 	if reason == 0:
 		fritz_call = FritzCall()
 	elif reason == 1:
@@ -812,10 +1001,13 @@ def autostart(reason, **kwargs):
 		fritz_call = None
 
 def Plugins(**kwargs):
+	what = _("Display FRITZ!box-Fon calls on screen")
+	what_missed = _("Missed calls")
 	if os_path.exists("plugin.png"):
-		return [ PluginDescriptor(name="FritzCall", description=_("Display Fritzbox-Fon calls on screen"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc=main),
-		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart) ]
+		return [ PluginDescriptor(name="FritzCall", description=what, where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc=main),
+			PluginDescriptor(name=what_missed, description=what_missed, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayMissedCalls),
+			PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart) ]
 	else:
-		return [ PluginDescriptor(name="FritzCall", description=_("Display Fritzbox-Fon calls on screen"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
-		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart) ]
-		
+		return [ PluginDescriptor(name="FritzCall", description=what, where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+			PluginDescriptor(name=what_missed, description=what_missed, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayMissedCalls),
+			PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart) ]
