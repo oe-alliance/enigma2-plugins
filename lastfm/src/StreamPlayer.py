@@ -5,6 +5,8 @@ from time import time
 from urllib import quote_plus
 from Components.config import config
 
+from enigma import iPlayableService
+from Components.ServiceEventTracker import ServiceEventTracker
 class StreamPlayer:
     STATE_PLAYINGSTARTED = 0
     STATE_STOP = 1
@@ -14,16 +16,37 @@ class StreamPlayer:
     currentplaylistitemnumber = 0
     playlist = None
     targetfile = ""
+    onClose = []
     def __init__(self,session, args = 0):
         self.session = session
         self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
-        self.session.nav.event.append(self.__event)
         self.onStateChanged = []
+        self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
+            {
+                iPlayableService.evStart: self.__onStart,
+                iPlayableService.evEOF: self.__onStop,
+                iPlayableService.evEnd: self.__onEnd,
+                iPlayableService.evStopped: self.__onStopped,
+            })
     
+    def __onStart(self):
+        print "START"*20
+        self.trackstarttime = time()
+    
+    def __onStop(self):
+        print "STOP"*20
+        self.stop("got EVENT 6, GST stopped")
+    
+    def __onStopped(self):
+        #for know just for debugging
+        print "STOPPED"*20
+    
+    def __onEnd(self):
+        #for know just for debugging
+        print "END"*20
+        
     def setSession(self,session):
-        self.session.nav.event.remove(self.__event)
         self.session = session
-        self.session.nav.event.append(self.__event)
         
     def setPlaylist(self,playlist):
         if self.playlist is not None:
@@ -33,14 +56,6 @@ class StreamPlayer:
     def stateChanged(self,reason):
         for i in self.onStateChanged:
             i(reason)   
- 
-    def __event(self, ev):
-        print "EVENT ==>",ev
-        if ev == 6:
-            self.stop("got EVENT 6, GST stopped")
-        if ev == 4:
-            self.trackstarttime = time()
-
     def getRemaining(self):
         track = self.playlist.getTrack(self.currentplaylistitemnumber)
         if track is False:
@@ -108,6 +123,8 @@ class StreamPlayer:
             self.stateChanged(self.STATE_PLAYLISTENDS)
             
     def exit(self):
+        for x in self.onClose:
+            x()
         self.stop()
     
     def getMetadata(self,key):
