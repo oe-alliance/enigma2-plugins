@@ -250,15 +250,7 @@ def configStrings(iface):
 	if driver == 'madwifi':
 		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dmadwifi\n	post-down killall -q wpa_supplicant"
 	if driver == 'zydas':
-		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B\n	post-down killall -q wpa_supplicant"
-
-	"""ret=system("dmesg | grep \"rt73: using permanent MAC addr\"")
-	ret2=system("dmesg | grep \"rt73: using net dev supplied MAC addr\"")
-	if ret == 0 or ret2 == 0:
-		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dralink\n	post-down killall -q wpa_supplicant"
-	else:
-		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B\n	post-down killall -q wpa_supplicant"
-	"""
+		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dzydas\n	post-down killall -q wpa_supplicant"
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "menuEntryName": lambda x: "Wireless Network Configuartion..."})

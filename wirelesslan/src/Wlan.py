@@ -237,7 +237,7 @@ class wpaSupplicant:
 			fp.write('ctrl_interface=/var/run/wpa_supplicant\n')
 			fp.write('ctrl_interface_group=0\n')
 			fp.write('eapol_version=1\n')
-			fp.write('ap_scan=1\n')
+			fp.write('ap_scan=2\n')
 			fp.write('fast_reauth=1\n')			
 			fp.write('network={\n')
 			fp.write('\tssid="'+essid+'"\n')
