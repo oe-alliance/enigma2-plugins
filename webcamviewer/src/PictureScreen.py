@@ -1,5 +1,6 @@
 from enigma import loadPic
 from enigma import eTimer
+from enigma import getDesktop
 
 from Screens.Screen import Screen
 from Components.AVSwitch import AVSwitch
@@ -16,10 +17,13 @@ class PictureScreen(Screen):
         self.session=session
         self.slideshowcallback=slideshowcallback
         self.screentitle = title
+        ##
+        size_w = getDesktop(0).size().width()	
+        size_h = getDesktop(0).size().height()		
         self.skin = """
-        <screen position="0,0" size="720,576" title="%s" flags=\"wfNoBorder\">
-             <widget name="pixmap" position="0,0" size="720,576" backgroundColor=\"black\"/>
-        </screen>""" % (filename)
+        <screen position="0,0" size="%i,%i" title="%s" flags=\"wfNoBorder\">
+             <widget name="pixmap" position="0,0" size="%i,%i" backgroundColor=\"black\"/>
+        </screen>""" % (size_w,size_h,filename,size_w,size_h)
         Screen.__init__(self, session)
         self.filename = filename
         self["pixmap"] = Pixmap()
@@ -79,7 +83,7 @@ class PictureScreen(Screen):
               
     def setPicture(self,string):
         self.setTitle(self.filename.split("/")[-1])        
-        pixmap = loadPic(string,720,576, AVSwitch().getAspectRatioSetting()/2,1, 0,1)
+        pixmap = loadPic(string,getDesktop(0).size().width(),getDesktop(0).size().height(), AVSwitch().getAspectRatioSetting()/2,1, 0,1)
         if pixmap is not None:
             self["pixmap"].instance.setPixmap(pixmap)
         self.prozessing =False
