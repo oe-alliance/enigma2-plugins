@@ -171,7 +171,7 @@ class EventListener:
         elif sref.toString().startswith("4097:0:0:0:0:0:0:0:0:0:") is not True:
             print "[LastFMScrobbler] CurrentlyPlayingServiceReference is not a File, not submitting to LastFM"
             return False
-        elif sref.toString().endswith("lastfm.mp3") is True:
+        elif self.streamplayer.is_playing:
             print "[LastFMScrobbler] LastFm-Plugin is playing"
             trdata= self.streamplayer.playlist.getTrack(self.streamplayer.currentplaylistitemnumber)
             track = self.getTrack(artist=trdata['creator'],title=trdata['title'],album=trdata['album'],length=(trdata["duration"]/1000))
