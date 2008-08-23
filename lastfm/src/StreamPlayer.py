@@ -61,8 +61,6 @@ class StreamPlayer:
             return "-%s:%s"%(shiftchars(minutes," "), shiftchars(seconds,"0"))
     
     def play(self,tracknumber=False):
-        self.session.nav.stopService()
-            
         if tracknumber is False:
             self.currentplaylistitemnumber = 0 
         else:
@@ -73,7 +71,6 @@ class StreamPlayer:
             print "no track to play"
         elif track['location'] != "no location":
             print "playing item "+str(self.currentplaylistitemnumber) +"/"+str(self.playlist.length)+" with url ",track['location']
-            self.session.nav.stopService()
             sref = eServiceReference(4097,0,track['location'])
             self.session.nav.playService(sref)
         self.is_playing = True
@@ -82,6 +79,7 @@ class StreamPlayer:
         self.stop()
                 
     def stop(self,text="",force=False):
+        print "STREAMPLAYER SOP text=",text,"force=",force
         if self.playlist is None:
             self.is_playing = False
             self.stateChanged(self.STATE_STOP)
