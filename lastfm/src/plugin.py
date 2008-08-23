@@ -1,4 +1,5 @@
-from enigma import eTimer, loadPic
+from enigma import eTimer, loadPic, getDesktop
+
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Components.Pixmap import Pixmap, MovingPixmap
@@ -531,9 +532,11 @@ class LastFMSaveScreen(Screen):
     coverartsize= [200,200]
     lastcreator=""
     def __init__(self,session,parent):
-        self.skin = """<screen position="0,0" size="720,576" flags="wfNoBorder" title="LastFMSaveScreen" >
+        size_w = getDesktop(0).size().width()    
+        size_h = getDesktop(0).size().height()
+        self.skin = """<screen position="0,0" size="%i,%i" flags="wfNoBorder" title="LastFMSaveScreen" >
                 <widget name="cover" position="50,50" size="%i,%i" />          
-              </screen>"""%(self.coverartsize[0],self.coverartsize[1])
+              </screen>"""%(size_w,size_h,self.coverartsize[0],self.coverartsize[1])
     
         Screen.__init__(self,session)
         self.imageconverter = ImageConverter(self.coverartsize[0],self.coverartsize[1],self.setCoverArt)
