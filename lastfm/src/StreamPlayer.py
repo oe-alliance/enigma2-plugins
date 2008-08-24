@@ -1,9 +1,9 @@
 from enigma import eServiceReference
 from enigma import iPlayableService
-from time import time
-from urllib import quote_plus
-from Components.config import config
 from Components.ServiceEventTracker import ServiceEventTracker
+from twisted.internet import reactor
+from time import time
+
 
 class StreamPlayer:
     STATE_PLAYINGSTARTED = 0
@@ -13,7 +13,6 @@ class StreamPlayer:
     trackstarttime = 0
     currentplaylistitemnumber = 0
     playlist = None
-    targetfile = ""
     onClose = []
     def __init__(self,session, args = 0):
         self.session = session
@@ -24,14 +23,11 @@ class StreamPlayer:
                 iPlayableService.evStart: self.__onStart,
                 iPlayableService.evEOF: self.__onStop,
             })
-    
     def __onStart(self):
-        print "START"*20
         self.trackstarttime = time()
     
     def __onStop(self):
-        print "STOP"*20
-        self.stop("got EVENT 6, GST stopped")
+        self.stop()
         
     def setSession(self,session):
         self.session = session
@@ -71,15 +67,17 @@ class StreamPlayer:
             print "no track to play"
         elif track['location'] != "no location":
             print "playing item "+str(self.currentplaylistitemnumber) +"/"+str(self.playlist.length)+" with url ",track['location']
-            sref = eServiceReference(4097,0,track['location'])
-            self.session.nav.playService(sref)
-        self.is_playing = True
+            reactor.callLater(1, self._delayedPlay, eServiceReference(4097,0,track['location']))
+            self.is_playing = True
 
+    def _delayedPlay(self,sref):
+        if self.is_playing: # making sure, that no one presses stop while we had wait 
+            self.session.nav.playService(sref)
+    
     def skip(self):
         self.stop()
                 
     def stop(self,text="",force=False):
-        print "STREAMPLAYER SOP text=",text,"force=",force
         if self.playlist is None:
             self.is_playing = False
             self.stateChanged(self.STATE_STOP)
@@ -87,11 +85,10 @@ class StreamPlayer:
             self.play(tracknumber=self.currentplaylistitemnumber+1)
             self.stateChanged(self.STATE_PLAYINGSTARTED)
         elif self.is_playing is True and force is True:
-            self.session.nav.stopService()
+            pass
             self.session.nav.playService(self.oldService)
             self.is_playing = False
-            self.stateChanged(self.STATE_STOP)
-            
+            self.stateChanged(self.STATE_STOP)            
         else:
             self.stateChanged(self.STATE_PLAYLISTENDS)
             
