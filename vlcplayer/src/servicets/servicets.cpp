@@ -36,7 +36,7 @@
 eServiceFactoryTS::eServiceFactoryTS()
 {
 	ePtr<eServiceCenter> sc;
-	
+
 	eServiceCenter::getPrivInstance(sc);
 	if (sc)
 	{
@@ -48,7 +48,7 @@ eServiceFactoryTS::eServiceFactoryTS()
 eServiceFactoryTS::~eServiceFactoryTS()
 {
 	ePtr<eServiceCenter> sc;
-	
+
 	eServiceCenter::getPrivInstance(sc);
 	if (sc)
 		sc->removeServiceFactory(eServiceFactoryTS::id);
@@ -91,7 +91,7 @@ RESULT eServiceFactoryTS::offlineOperations(const eServiceReference &, ePtr<iSer
 /********************************************************************/
 /* TSAudioInfo                                            */
 /********************************************************************/
-DEFINE_REF(TSAudioInfo);	
+DEFINE_REF(TSAudioInfo);
 
 void TSAudioInfo::addAudio(int pid, std::string lang, std::string desc, int type) {
 	StreamInfo as;
@@ -124,7 +124,7 @@ eServiceTS::~eServiceTS()
 		stop();
 }
 
-DEFINE_REF(eServiceTS);	
+DEFINE_REF(eServiceTS);
 
 size_t crop(char *buf)
 {
@@ -135,7 +135,7 @@ size_t crop(char *buf)
 	return len;
 }
 
-static int getline(char** pbuffer, size_t* pbufsize, int fd) 
+static int getline(char** pbuffer, size_t* pbufsize, int fd)
 {
 	size_t i = 0;
 	int rc;
@@ -301,6 +301,9 @@ void eServiceTS::recv_event(int evt)
 		m_state = stStopped;
 		m_event((iPlayableService*)this, evEOF);
 		break;
+	case eStreamThread::evtSOS:
+		m_event((iPlayableService*)this, evSOF);
+		break;
 	case eStreamThread::evtStreamInfo:
 		bool wasnull = !m_audioInfo;
 		m_streamthread->getAudioInfo(m_audioInfo);
@@ -308,9 +311,9 @@ void eServiceTS::recv_event(int evt)
 			eDebug("[servicets] %d audiostreams found", m_audioInfo->audioStreams.size());
 		if (m_audioInfo && wasnull) {
 			int sel = getCurrentTrack();
-			if (sel < 0) 
+			if (sel < 0)
 				selectTrack(0);
-			else if (m_audioInfo->audioStreams[sel].type != eDVBAudio::aMPEG) 
+			else if (m_audioInfo->audioStreams[sel].type != eDVBAudio::aMPEG)
 				selectTrack(sel);
 		}
 		break;
@@ -344,7 +347,7 @@ RESULT eServiceTS::unpause()
 		eDebug("Cannot open source stream: %s", m_filename.c_str());
 		return 1;
 	}
-	
+
 	int destfd = ::open("/dev/misc/pvr", O_WRONLY);
 	if (destfd < 0) {
 		eDebug("Cannot open /dev/misc/pvr");
@@ -520,15 +523,15 @@ std::string eStreamThread::getDescriptor(unsigned char buf[], int buflen, int ty
 
 bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
 {
-	if (len < 1880) 
+	if (len < 1880)
 		return false;
 
 	int adaptfield, pmtpid, offset;
 	unsigned char pmt[1188];
 	int pmtsize = 0;
-	
+
 	for (int a=0; a < len - 188*4; a++) {
-		if ( buf[a] != 0x47 || buf[a + 188] != 0x47 || buf[a + 376] != 0x47 ) 
+		if ( buf[a] != 0x47 || buf[a + 188] != 0x47 || buf[a + 376] != 0x47 )
 			continue; // TS Header
 
 		if ((0x40 & buf[a + 1]) == 0) // start
@@ -545,21 +548,21 @@ bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
 		offset = adaptfield == 3 ? 1 + (0xFF & buf[a + 4]) : 0; //adaptlength
 
 		if (buf[a + offset + 4] != 0 || buf[a + offset + 5] != 2 || (0xF0 & buf[a + offset + 6]) != 0xB0)
-		{ 
-			a += 187; 
-			continue; 
+		{
+			a += 187;
+			continue;
 		}
 
 		pmtpid = (0x1F & buf[a + 1])<<8 | (0xFF & buf[a + 2]);
 		memcpy(pmt + pmtsize, buf + a + 4 + offset, 184 - offset);
 		pmtsize += 184 - offset;
-		
+
 		if (pmtsize >= 1000)
 			break;
 	}
-	
+
 	if (pmtsize == 0) return false;
-	
+
 	int pmtlen = (0x0F & pmt[2]) << 8 | (0xFF & pmt[3]);
 	std::string lang;
 	std::string pd_type;
@@ -567,7 +570,7 @@ bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
 
 	for (int b=8; b < pmtlen-4 && b < pmtsize-6; b++)
 	{
-		if ( (0xe0 & pmt[b+1]) != 0xe0 ) 
+		if ( (0xe0 & pmt[b+1]) != 0xe0 )
 			continue;
 
 		int pid = (0x1F & pmt[b+1])<<8 | (0xFF & pmt[b+2]);
@@ -577,28 +580,28 @@ bool eStreamThread::scanAudioInfo(unsigned char buf[], int len)
 		case 1:
 		case 2: // MPEG Video
 			//addVideo(pid, "MPEG2");
-			break; 
+			break;
 
 		case 0x1B: // H.264 Video
 			//addVideo(pid, "H.264");
-			break; 
+			break;
 
 		case 3:
 		case 4: // MPEG Audio
 			lang = getDescriptor(pmt+b+5, pmt[b+4], LANGUAGE_DESCRIPTOR);
 			ainfo->addAudio(pid, lang, "MPEG", eDVBAudio::aMPEG);
-			break; 
+			break;
 
 		case 0x80:
 		case 0x81:  //private data of AC3 in ATSC
-		case 0x82: 
-		case 0x83: 
+		case 0x82:
+		case 0x83:
 		case 6:
 			lang = getDescriptor(pmt+b+5, pmt[b+4], LANGUAGE_DESCRIPTOR);
 			pd_type = getDescriptor(pmt+b+5, pmt[b+4], REGISTRATION_DESCRIPTOR);
 			if (pd_type == "AC-3")
 				ainfo->addAudio(pid, lang, pd_type, eDVBAudio::aAC3);
-			break; 
+			break;
 		}
 		b += 4 + pmt[b+4];
 	}
@@ -619,7 +622,8 @@ void eStreamThread::thread() {
 	struct timeval timeout;
 	int rc,r,w,maxfd;
 	time_t next_scantime = 0;
-	
+	bool sosSend = false;
+
 	r = w = 0;
 	hasStarted();
 	eDebug("eStreamThread started");
@@ -656,6 +660,10 @@ void eStreamThread::thread() {
 			} else if (rc == 0) {
 				eof = true;
 			} else {
+				if (!sosSend) {
+					sosSend = true;
+					m_messagepump.send(evtSOS);
+				}
 				r += rc;
 				if (r == bufsize) eDebug("eStreamThread::thread: buffer full");
 			}

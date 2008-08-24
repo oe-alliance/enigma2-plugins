@@ -48,8 +48,8 @@ public:
 
 
 class eStreamThread;
-class eServiceTS: public iPlayableService, public iPauseableService, 
-	public iServiceInformation, public iSeekableService, 
+class eServiceTS: public iPlayableService, public iPauseableService,
+	public iServiceInformation, public iSeekableService,
 	public iAudioTrackSelection, public iAudioChannelSelection, public Object
 {
 DECLARE_REF(eServiceTS);
@@ -79,12 +79,12 @@ public:
 	RESULT rdsDecoder(ePtr<iRdsDecoder> &ptr) { ptr = 0; return -1; };
 	RESULT stream(ePtr<iStreamableService> &ptr) { ptr = 0; return -1; };
 	RESULT keys(ePtr<iServiceKeys> &ptr) { ptr = 0; return -1; };
-	
+
 	// iPausableService
 	RESULT pause();
 	RESULT unpause();
-	
-	
+
+
 	// iSeekableService
 	RESULT getLength(pts_t &SWIG_OUTPUT);
 	RESULT seekTo(pts_t to);
@@ -117,10 +117,10 @@ private:
 	ePtr<iTSMPEGDecoder> m_decoder;
 	ePtr<eStreamThread> m_streamthread;
 	ePtr<TSAudioInfo> m_audioInfo;
-	
+
 	eServiceTS(const eServiceReference &url);
 	int openHttpConnection(std::string url);
-	
+
 	Signal2<void,iPlayableService*,int> m_event;
 	enum
 	{
@@ -142,10 +142,10 @@ public:
 
 	virtual void thread();
 	virtual void thread_finished();
-	
+
 	RESULT getAudioInfo(ePtr<TSAudioInfo> &ptr);
 
-	enum { evtEOS, evtReadError, evtWriteError, evtUser, evtStreamInfo };
+	enum { evtEOS, evtSOS, evtReadError, evtWriteError, evtUser, evtStreamInfo };
 	Signal1<void,int> m_event;
 private:
 	bool m_stop;
