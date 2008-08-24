@@ -46,18 +46,8 @@ config.plugins.LastFM.sreensaver.coverartspeed = ConfigInteger(10,limits = (0, 1
 config.plugins.LastFM.sreensaver.coverartinterval = ConfigInteger(10,limits = (0, 100))
 
 ###############################################################################        
-try:
-    from LastFMproxyStarter import ProxyStarter
-    global proxy
-    proxy = ProxyStarter()
-except:
-    proxy = False
     
 def main(session,**kwargs):
-    global proxy
-    if proxy is not False:
-        proxy.start()
-        
     global streamplayer
     if streamplayer is not False:
         streamplayer.setSession(session)
@@ -67,11 +57,7 @@ def main(session,**kwargs):
     session.openWithCallback(LastFMScreenMainCB,LastFMScreenMain,streamplayer)    
 
 def LastFMScreenMainCB():
-    global proxy
-    if proxy is not False:
-        proxy.stop()
-        del proxy
-        proxy = ProxyStarter()
+    pass
 
 def startScrobbler(reason, **kwargs):
     if "session" in kwargs and config.plugins.LastFM.sendSubmissions.value:
@@ -592,8 +578,8 @@ class LastFMSaveScreen(Screen):
         
     def movePixmap(self):
         self.startmovingtimer.stop() 
-        newX = randrange(720-self.coverartsize[0]-1)
-        newY = randrange(576-self.coverartsize[1]-1)
+        newX = randrange(getDesktop(0).size().width()-self.coverartsize[0]-1)
+        newY = randrange(getDesktop(0).size().height()-self.coverartsize[1]-1)
         self["cover"].moveTo(newX, newY, time = config.plugins.LastFM.sreensaver.coverartspeed.value)
         self["cover"].startMoving()
         self.startmovingtimer.start(config.plugins.LastFM.sreensaver.coverartinterval.value*1000)
