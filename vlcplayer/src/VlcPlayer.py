@@ -119,9 +119,6 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 		self.player = player
 		self.lastrefresh = time()
 		self.stats = None
-		self.refreshTimer = eTimer()
-		self.refreshTimer.timeout.get().append(self.__onRefresh)
-		self.refreshTimer.start(self.refreshInterval)
 
 	def setName(self, name):
 		i = name.rfind("/")
@@ -147,6 +144,8 @@ class VlcService(Source, iPlayableServicePtr, iSeekableService):
 		try:
 			self.stats = self.server.status()
 			self.lastrefresh = time()
+			if self.stats and self.stats.has_key("time"):
+				print "Time: ", self.stats["time"]
 		except Exception, e:
 			print e
 
@@ -281,9 +280,10 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			}, -2)
 
 		print "[VLC] evEOF=%d" % iPlayableService.evEOF
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap=
+		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
 			{
 				iPlayableService.evEOF: self.__evEOF,
+				iPlayableService.evSOF: self.__evSOF
 			})
 
 	def createSummary(self):
@@ -297,6 +297,10 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 	def __evEOF(self):
 		print "[VLC] Event EOF"
 		self.stop()
+
+	def __evSOF(self):
+		print "[VLC] Event SOF"
+		self.vlcservice.refresh()
 
 	def playfile(self, path, name):
 		if self.state != self.STATE_IDLE:
@@ -407,12 +411,11 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		if self.state == self.STATE_PLAYING:
 			self.__setHideTimer()
 		else:
-			self.vlcservice.refreshTimer.start(self.vlcservice.refreshInterval)
+			pass
 
 	def hideInfobar(self):
 		self.hide()
 		self.hidetimer.stop()
-		self.vlcservice.refreshTimer.stop()
 
 	def ok(self):
 		if self.shown:
@@ -485,10 +488,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 				self.server.seek("+" + str(delta))
 			else:
 				self.server.seek(str(delta))
-		self.vlcservice.refresh()
-		if not self.shown:
-			self.show()
-			self.__setHideTimer()
+		self.showInfobar()
 
 	def seekFwd(self):
 		if isDvdUrl(self.filename):
@@ -518,10 +518,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 
 	def seekToMinute(self, minutes):
 		self.server.seek(str(int(minutes)*60))
-		self.vlcservice.refresh()
-		if not self.shown:
-			self.show()
-			self.__setHideTimer()
+		self.showInfobar()
 
 	def seekManual(self):
 		self.session.openWithCallback(self.seekToMinute, MinuteInput)
