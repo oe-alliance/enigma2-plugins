@@ -2,6 +2,7 @@ from Components.ActionMap import ActionMap
 from Components.GUIComponent import GUIComponent
 from Components.HTMLComponent import HTMLComponent
 from Components.Label import Label
+from Screens.MessageBox import MessageBox
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
 from Components.ScrollLabel import ScrollLabel
@@ -510,8 +511,18 @@ def UTF8toUTF7(str):
     return imap4.encoder(str.decode('utf-8'))[0]
 
 def main(session, **kwargs):
-    session.open(EmailScreen)    
-
+    import os,shutil
+    if os.path.isfile('/usr/lib/python2.5/uu.py') is not True:
+        shutil.copy('/usr/lib/enigma2/python/Plugins/Extensions/EmailClient/uu.py', '/usr/lib/python2.5/uu.py')
+        global session2
+        session2 = session
+        session.openWithCallback(MessageCB, MessageBox, 'In order of missing standart python library files\ni have copied the nessary files now.\nBut you have to restart your Box\n to apply this!', type = MessageBox.TYPE_INFO)
+    else:    
+        session.open(EmailScreen)    
+def MessageCB(balblub):
+    global session2
+    session2.open(EmailScreen)  
+        
 def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
