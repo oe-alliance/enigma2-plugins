@@ -15,9 +15,9 @@ class LastFMScrobbler(object):
     port       = 80
     loggedin  = False # indicates, if we are logged in
 
-    def __init__(self,user,password):
-        self.user = user
-        self.password = password
+    def __init__(self):
+        self.user = config.plugins.LastFM.username.value
+        self.password = config.plugins.LastFM.password.value
         self.tracks2Submit = []
     
     def addTrack2Submit(self,track):
@@ -54,6 +54,7 @@ class LastFMScrobbler(object):
         self.submiturl = sub("\n$","",lines[1])
         self.loggedin = True
         print "[LastFMScrobbler] logged in"
+        self.submit()
         
     def baduser(self,lines):
         print "[LastFMScrobbler] Bad user"
@@ -63,7 +64,7 @@ class LastFMScrobbler(object):
            
     def submit(self):
         if self.loggedin is False:
-            print "[LastFMScrobbler] Submitting cancled, because not logged in"
+            self.handshake()
             return False
         tracks = self.tracks2Submit
         print "[LastFMScrobbler] Submitting ",len(tracks)," tracks"
@@ -138,8 +139,8 @@ class EventListener:
         self.streamplayer = streamplayer
         
         self.tracks_checking_for = []
-        self.scrobbler = LastFMScrobbler(config.plugins.LastFM.username.value,config.plugins.LastFM.password.value)
-        self.scrobbler.handshake()
+#        self.scrobbler = LastFMScrobbler(config.plugins.LastFM.username.value,config.plugins.LastFM.password.value)
+#        self.scrobbler.handshake()
         
     def onEvent(self,event):
         if event == iPlayableService.evUpdatedInfo:
@@ -166,10 +167,10 @@ class EventListener:
         currPlay = self.session.nav.getCurrentService()
         sref=self.session.nav.getCurrentlyPlayingServiceReference()
         if sref is None:
-            print "[LastFMScrobbler] CurrentlyPlayingServiceReference is None, not submitting to LastFM"
+            #print "[LastFMScrobbler] CurrentlyPlayingServiceReference is None, not submitting to LastFM"
             return False
-        elif sref.toString().startswith("4097:0:0:0:0:0:0:0:0:0:") is not True:
-            print "[LastFMScrobbler] CurrentlyPlayingServiceReference is not a File, not submitting to LastFM"
+        elif sref.toString().startswith("4097:") is not True:
+            #print "[LastFMScrobbler] CurrentlyPlayingServiceReference is not a File, not submitting to LastFM"
             return False
         elif self.streamplayer.is_playing:
             print "[LastFMScrobbler] LastFm-Plugin is playing"
@@ -205,6 +206,7 @@ class EventListener:
         trackcurrent = self.getCurrentServiceType()
         if str(track) == str(trackcurrent):
             print "[LastFMScrobbler] sending track to lastfm as now playing... "+str(track)
+            self.scrobbler = LastFMScrobbler()
             self.scrobbler.addTrack2Submit(track)
             self.scrobbler.submit()
             self.tracks_checking_for.remove(str(track))
