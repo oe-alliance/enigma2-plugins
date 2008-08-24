@@ -341,7 +341,6 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 			if self.shown:
 				self.__setHideTimer()
 			self.vlcservice.setServer(self.server)
-			self.vlcservice.refresh()
 
 	def pause(self):
 		print "[VLC] pause"
