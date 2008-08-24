@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ienigma2 plugin VlcPlayer italian locale v2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-08 14:31+0200\n"
-"PO-Revision-Date: 2008-08-08 16:20+0100\n"
+"POT-Creation-Date: 2008-08-12 07:20+0200\n"
+"PO-Revision-Date: 2008-08-12 17:37+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,19 +20,19 @@ msgstr ""
 msgid "A video streaming solution based on VLC"
 msgstr "Una soluzione di streaming video su VLC"
 
-#: ../src/VlcServerConfig.py:301
+#: ../src/VlcServerConfig.py:302
 msgid "Audio Bitrate"
 msgstr "Bitrate Audio"
 
-#: ../src/VlcServerConfig.py:303
+#: ../src/VlcServerConfig.py:304
 msgid "Audio Channels"
 msgstr "Canali Audio"
 
-#: ../src/VlcServerConfig.py:300
+#: ../src/VlcServerConfig.py:301
 msgid "Audio Codec"
 msgstr "Codec Audio"
 
-#: ../src/VlcServerConfig.py:302
+#: ../src/VlcServerConfig.py:303
 msgid "Audio Samplerate"
 msgstr "Campionamento Audio"
 
@@ -94,7 +94,7 @@ msgid ""
 "Error with VLC server:\n"
 "%s"
 msgstr ""
-"Errore con server VLC:\n"
+"Errore server VLC:\n"
 "%s"
 
 #: ../src/VlcMediaList.py:62
@@ -135,8 +135,8 @@ msgstr "OK"
 
 #: ../src/VlcServerConfig.py:296
 #, python-format
-msgid "Overscan Correction [in %% of Video width]"
-msgstr "Correzione Overscan [in %% amp. orizz. Video]"
+msgid "Overscan Correction [in %(percentsign)s of Video width]"
+msgstr "Correzione \"Overscan\" [in %(percentsign)s larghezza Video]"
 
 #: ../src/VlcMediaList.py:63
 msgid "Playlist"
@@ -158,17 +158,17 @@ msgstr "Nome Profilo Server"
 msgid "Serverlist"
 msgstr "Lista Server"
 
-#: ../src/VlcServerConfig.py:297
+#: ../src/VlcServerConfig.py:298
 msgid "Subtitle overlay"
 msgstr "Sovrapposizione sottotitoli"
 
-#: ../src/VlcServerConfig.py:299
+#: ../src/VlcServerConfig.py:300
 msgid "Transcode MPEG/DVD Audio"
 msgstr "Transcodifica Audio MPEG/DVD"
 
 #: ../src/VlcServerConfig.py:292
 msgid "Transcode MPEG/DVD Video"
-msgstr "TRanscodifica video MPEG/DVD"
+msgstr "Transcodifica video MPEG/DVD"
 
 #: ../src/VlcServerConfig.py:294
 msgid "Video Bitrate"
@@ -184,15 +184,15 @@ msgstr "Standard Video"
 
 #: ../src/VlcServerList.py:83
 msgid "add server"
-msgstr "agg. server"
+msgstr "Agg. server"
 
 #: ../src/VlcServerList.py:82
 msgid "delete server"
-msgstr "canc. server"
+msgstr "Canc. server"
 
 #: ../src/VlcServerList.py:84
 msgid "edit server"
-msgstr "mod. server"
+msgstr "Mod. server"
 
 #: ../src/VlcMediaList.py:55
 #: ../src/VlcMediaList.py:119
@@ -213,7 +213,7 @@ msgstr "ricaricare"
 
 #: ../src/VlcServerList.py:85
 msgid "set default"
-msgstr "Impostare predefiniti"
+msgstr "Predefiniti"
 
 #~ msgid "Correct aspect ratio to"
 #~ msgstr "Correggere rapporto d'aspetto in"
