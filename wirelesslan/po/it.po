@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WirelessLan Italian Locale\n"
+"Project-Id-Version: enigma2 plugin WirelessLan italian locale v2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-28 08:43+0200\n"
-"PO-Revision-Date: 2008-07-21 17:17+0100\n"
+"POT-Creation-Date: 2008-08-03 17:39+0200\n"
+"PO-Revision-Date: 2008-08-04 11:21+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
-"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language-Team: WWW.Linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,91 +13,121 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Basepath: /usr/lib/enigma2/python/Plugins/SystemPlugins/"
-"WirelessLan\n"
-"X-Poedit-SearchPath-0: /usr/lib/enigma2/python/Plugins/SystemPlugins/"
-"WirelessLan\n"
 
+#: ../src/plugin.py:227
 msgid " Wireless Network(s) found!"
 msgstr "Rete Wireless rilevata!"
 
+#: ../src/plugin.py:75
 msgid "Accesspoint:"
-msgstr "Punto di accesso:"
+msgstr "Accesspoint:"
 
+#: ../src/plugin.py:79
 msgid "Bitrate:"
 msgstr "Bitrate:"
 
+#: ../src/plugin.py:80
 msgid "Channel:"
-msgstr "Canale:"
+msgstr "Canale: "
 
+#: ../src/plugin.py:197
 msgid "Choose a Wireless Network"
 msgstr "Scegliere una Rete Wireless"
 
+#: ../src/plugin.py:98
+#: ../src/plugin.py:178
 msgid "Close"
 msgstr "Chiudere"
 
+#: ../src/plugin.py:179
 msgid "Connect"
 msgstr "Connettere"
 
+#: ../src/plugin.py:264
 msgid "Connect to a Wireless Network"
-msgstr "Connettere ad una Rete Wireless"
+msgstr "Connesso a Rete Wireless"
 
+#: ../src/Wlan.py:180
 #, python-format
 msgid "Encrypted: %s"
-msgstr "Codificato: %s"
+msgstr "Codificata: %s"
 
+#: ../src/Wlan.py:181
 #, python-format
 msgid "Interface: %s"
 msgstr "Interfaccia: %s"
 
+#: ../src/plugin.py:77
 msgid "Link Quality:"
-msgstr "Qualità collegamento:"
+msgstr "Qualità:"
 
+#: ../src/plugin.py:134
 msgid "Link:"
-msgstr "Collegamento:"
+msgstr "Connesso:"
 
+#: ../src/Wlan.py:179
 #, python-format
 msgid "Max. Bitrate: %s"
-msgstr "Max. Bitrate: %s"
+msgstr "Bitrate Max.: %s"
 
+#: ../src/Wlan.py:142
 msgid "N/A"
 msgstr "N/A"
 
+#: ../src/plugin.py:132
 msgid "Network:"
 msgstr "Rete:"
 
+#: ../src/Wlan.py:175
 msgid "No"
 msgstr "No"
 
+#: ../src/plugin.py:118
 msgid "No Connection!"
 msgstr "Nessuna Connessione!"
 
+#: ../src/plugin.py:180
 msgid "Refresh"
-msgstr "Ricaricare"
+msgstr "Aggiornare"
 
+#: ../src/plugin.py:76
 msgid "SSID:"
 msgstr "SSID:"
 
+#: ../src/plugin.py:78
 msgid "Signal Strength:"
-msgstr "Potenza segnale:"
+msgstr "Potenza:"
 
+#: ../src/Wlan.py:177
 msgid "Signal: "
-msgstr "Segnale:"
+msgstr "Segnale: "
 
+#: ../src/Wlan.py:15
+#: ../src/plugin.py:20
 msgid "WEP"
 msgstr "WEP"
 
+#: ../src/Wlan.py:16
+#: ../src/Wlan.py:24
+#: ../src/plugin.py:21
+#: ../src/plugin.py:29
 msgid "WPA"
 msgstr "WPA"
 
+#: ../src/Wlan.py:17
+#: ../src/plugin.py:22
 msgid "WPA2"
 msgstr "WPA2"
 
+#: ../src/plugin.py:264
 msgid "Wireless LAN"
-msgstr "Rete Wireless"
+msgstr "Rete Locale Wireless"
 
+#: ../src/plugin.py:112
 msgid "Wireless Network State"
 msgstr "Stato Rete Wireless"
 
+#: ../src/Wlan.py:175
 msgid "Yes"
 msgstr "Sì"
+
