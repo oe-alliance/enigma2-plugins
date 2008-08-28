@@ -132,4 +132,7 @@ tageditor/src/Makefile
 cdinfo/Makefile
 cdinfo/src/Makefile
 
+unwetterzentrale/Makefile
+unwetterzentrale/src/Makefile
+
 ])
