@@ -78,7 +78,7 @@ class HelpPictureView(Screen):
 		skin = """
 			<screen position="25,200" size="670,290" title="Warnstufen" >
 				<eLabel position="0,0" zPosition="1" size="670,290" backgroundColor="black" />
-				<ePixmap position="320,260" zPosition="2" size="36,20" pixmap="skin_default/buttons/key_arrow.png" alphatest="on" />
+				<ePixmap position="320,260" zPosition="2" size="36,20" pixmap="skin_default/arrowdown.png" alphatest="on" />
 				<widget name="picture" position="-10,20" zPosition="2" size="690,225" />
 			</screen>"""
 				
