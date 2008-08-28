@@ -155,7 +155,9 @@ class VlcServer:
 		resp = urlopen("http://" + location + uri)
 		if resp is None:
 			raise IOError, "No response from Server"
-		return parse(resp)
+		xml = parse(resp)
+		resp.close()
+		return xml
 
 	def getFilesAndDirs(self, directory, regex):
 		files = []
