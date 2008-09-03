@@ -40,6 +40,7 @@ config.plugins.FritzCall.hostname = ConfigIP(default = [192, 168, 178, 1])
 config.plugins.FritzCall.afterStandby = ConfigSelection(choices = [("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
 config.plugins.FritzCall.filter = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.filtermsn = ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.filtermsn.setUseableChars('0123456789,')
 config.plugins.FritzCall.showOutgoing = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.timeout = ConfigInteger(default = 15, limits = (0,60))
 config.plugins.FritzCall.lookup = ConfigEnableDisable(default = False)
@@ -53,6 +54,7 @@ config.plugins.FritzCall.showType = ConfigEnableDisable(default = True)
 config.plugins.FritzCall.showShortcut = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.showVanity = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.prefix = ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 
 countryCodes = [
 			("0049", _("Germany")),
@@ -483,7 +485,7 @@ class FritzCallSetup(ConfigListScreen, Screen):
 			"ok": self.save,
 		}, -2)
 
-		ConfigListScreen.__init__(self, self.list)
+		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
 		self.createSetup()
 
 
