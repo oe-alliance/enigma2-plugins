@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FRITZ!Box plugin italian locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-24 09:51+0200\n"
-"PO-Revision-Date: 2008-08-23 22:21+0100\n"
+"POT-Creation-Date: 2008-09-07 19:04+0200\n"
+"PO-Revision-Date: 2008-09-08 15:51+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -13,6 +13,13 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "All"
+msgstr "Tutte"
+
+msgid "All calls"
+msgstr "Tutte le Chiamate"
 
 msgid "Append shortcut number"
 msgstr "Aggiungere numero breve"
@@ -41,6 +48,7 @@ msgstr "Monitoraggio chiamate"
 msgid "Can't create PhoneBook.txt"
 msgstr "Impossibile creare PhoneBook.txt!"
 
+#. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
 msgstr "Annullare"
 
@@ -71,8 +79,8 @@ msgstr ""
 "Nuovo tentativo in corso..."
 
 #, python-format
-msgid "Could not load missed calls from FRITZ!Box - Error: %s"
-msgstr "Impossibile caricare la rubrica dalla FRITZ!Box! - Errore: %s"
+msgid "Could not load calls from FRITZ!Box - Error: %s"
+msgstr "Impossibile caricare le chiamate dalla FRITZ!Box! - Errore: %s"
 
 #, python-format
 msgid "Could not load phonebook from FRITZ!Box - Error: %s"
@@ -109,11 +117,15 @@ msgstr "Configurazione FritzCall"
 msgid "Germany"
 msgstr "Germania"
 
-msgid "Getting missed calls from FRITZ!Box..."
-msgstr "Recupero chiamate perse dalla FRITZ!Box in corso"
+msgid "Getting calls from FRITZ!Box..."
+msgstr "Recupero chiamate dalla FRITZ!Box in corso"
 
 msgid "Harddisk"
 msgstr "Harddisk"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Incoming"
+msgstr "In Entr."
 
 #, python-format
 msgid ""
@@ -131,6 +143,9 @@ msgstr ""
 "---------------------------------------------\n"
 "a: %(phone)s"
 
+msgid "Incoming calls"
+msgstr "Chiamate in Ingresso"
+
 msgid "Italy"
 msgstr "Italia"
 
@@ -140,17 +155,20 @@ msgstr "Ultime 10 chiamate:\n"
 msgid "MSN to show (separated by ,)"
 msgstr "MSN da mostrare (separare con ,)"
 
-msgid "Missed Calls"
+#. TRANSLATORS: keep it short, this is a button
+msgid "Missed"
 msgstr "Ch. Perse"
 
 msgid "Missed calls"
 msgstr "Chiamate perse"
 
-msgid "Missed calls during Standby"
-msgstr "Chiamate perse durante lo standby"
-
+#. TRANSLATORS: keep it short, this is a button
 msgid "OK"
 msgstr "OK"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Outgoing"
+msgstr "In Uscita"
 
 #, python-format
 msgid ""
@@ -168,8 +186,15 @@ msgstr ""
 "---------------------------------------------\n"
 "da: %(phone)s"
 
+msgid "Outgoing calls"
+msgstr "Chiamate in Uscita"
+
 msgid "Password Accessing FRITZ!Box"
 msgstr "Password di accesso alla FRITZ!Box"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phone calls"
+msgstr "Ch. Telef."
 
 msgid "PhoneBook Location"
 msgstr "Posizione Rubrica"
@@ -221,20 +246,41 @@ msgstr "Per abilitare il monitoraggio sulla FRITZ!Box comporre #96*5*!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
-"in the configuration dialog to display missed calls\n"
+"in the configuration dialog to display calls\n"
 "\n"
 "It could be a communication issue, just try again."
 msgstr ""
 "E' necessario impostare la password della FRITZ!Box\n"
-"nel menu configurazione per mostrare le chiamate perse.\n"
+"nel menu configurazione per mostrare le chiamate.\n"
 "\n"
 "Potrebbe trattarsi di un problema di comunicazione, riprovare."
+
+msgid "done"
+msgstr "Fatto"
+
+msgid "done, using last list"
+msgstr "Fatto, sarà usata l'ultima lista"
+
+msgid "finishing"
+msgstr "Quasi terminato..."
 
 msgid "home"
 msgstr "Casa"
 
+msgid "login"
+msgstr "Login"
+
+msgid "login ok"
+msgstr "Login OK"
+
+msgid "login verification"
+msgstr "Verifica Login"
+
 msgid "mobile"
 msgstr "Cellulare"
+
+msgid "preparing"
+msgstr "Preparazione in corso"
 
 msgid "show as list"
 msgstr "Come lista"
@@ -248,5 +294,3 @@ msgstr "Nulla"
 msgid "work"
 msgstr "Ufficio"
 
-#~ msgid "Prefix for Outgoing Calls"
-#~ msgstr "Prefisso per le chiamate in uscita"

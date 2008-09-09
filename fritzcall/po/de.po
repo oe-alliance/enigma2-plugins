@@ -7,59 +7,55 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-19 08:28+0200\n"
-"PO-Revision-Date: 2008-08-19 08:29+0200\n"
+"POT-Creation-Date: 2008-09-07 19:04+0200\n"
+"PO-Revision-Date: 2008-09-07 19:09+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../plugin.py:517
+#. TRANSLATORS: keep it short, this is a button
+msgid "All"
+msgstr "Alle"
+
+msgid "All calls"
+msgstr "Alle Anrufe"
+
 msgid "Append shortcut number"
 msgstr "Füge Kurzwahl an"
 
-#: ../plugin.py:516
 msgid "Append type of number"
 msgstr "Füge Typ der Nummer an"
 
-#: ../plugin.py:518
 msgid "Append vanity name"
 msgstr "Füge Vanity-Nummer an"
 
-#: ../plugin.py:507
 msgid "Areacode to add to Outgoing Calls (if necessary)"
-msgstr "Vorwahl für ausgehende Anrufe (falls nötig)"
+msgstr "Vorwahl für abgehende Anrufe (falls nötig)"
 
-#: ../plugin.py:62
 msgid "Austria"
 msgstr "Österreich"
 
-#: ../plugin.py:523
 msgid "Automatically add new Caller to PhoneBook"
 msgstr "Anrufer automatisch dem Telefonbuch hinzufügen"
 
-#: ../plugin.py:50
 msgid "CF Drive"
 msgstr "CF Laufwerk"
 
-#: ../plugin.py:495
 msgid "Call monitoring"
 msgstr "Anrufanzeige"
 
-#: ../plugin.py:540
 msgid "Can't create PhoneBook.txt"
 msgstr "Kann Phonebook.txt nicht anlegen"
 
-#: ../plugin.py:467
+#. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
 msgstr "Abbruch"
 
-#: ../plugin.py:879
 msgid "Connected to FRITZ!Box!"
 msgstr "Verbunden mit FRITZ!Box!"
 
-#: ../plugin.py:889
 #, python-format
 msgid ""
 "Connecting to FRITZ!Box failed\n"
@@ -70,11 +66,9 @@ msgstr ""
 " (%s)\n"
 "neuer Versuch..."
 
-#: ../plugin.py:876
 msgid "Connecting to FRITZ!Box..."
 msgstr "Verbinde mit FRITZ!Box..."
 
-#: ../plugin.py:885
 #, python-format
 msgid ""
 "Connection to FRITZ!Box! lost\n"
@@ -85,66 +79,55 @@ msgstr ""
 " (%s)\n"
 "neuer Versuch..."
 
-#: ../plugin.py:238
 #, python-format
-msgid "Could not load missed calls from FRITZ!Box - Error: %s"
+msgid "Could not load calls from FRITZ!Box - Error: %s"
 msgstr "Konnte verpasste Anrufe nicht von FRITZ!Box laden - Fehler: %s"
 
-#: ../plugin.py:136
 #, python-format
 msgid "Could not load phonebook from FRITZ!Box - Error: %s"
 msgstr "Konnte Telefonbuch nicht von FRITZ!Box laden - Fehler: %s"
 
-#: ../plugin.py:235
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "Konnte Eintrag in FRITZ!Box-Telefonbuch nicht lesen"
 
-#: ../plugin.py:511
 msgid "Country"
 msgstr "Land"
 
-#: ../plugin.py:939
 msgid "Display FRITZ!box-Fon calls on screen"
 msgstr "Anzeige der Anrufe auf der FRITZ!Box Fon"
 
-#: ../plugin.py:497
 msgid "FRITZ!Box FON IP address"
 msgstr "FRITZ!Box FON IP-Adresse"
 
-#: ../plugin.py:103
 #, python-format
 msgid "FRITZ!Box Login failed! - Error: %s"
 msgstr "FRITZ!Box Login fehlgeschlagen! - Fehler: %s"
 
-#: ../plugin.py:113
 msgid "FRITZ!Box Login failed! - Wrong Password!"
 msgstr "FRITZ!Box Login fehlgeschlagen! - Falsches Passwort"
 
-#: ../plugin.py:50
 msgid "Flash"
 msgstr "Flash"
 
-#: ../plugin.py:59
 msgid "France"
 msgstr "Frankreich"
 
-#: ../plugin.py:456
 msgid "FritzCall Setup"
 msgstr "FritzCall Einstellungen"
 
-#: ../plugin.py:63
 msgid "Germany"
 msgstr "Deutschland"
 
-#: ../plugin.py:348
-msgid "Getting missed calls from FRITZ!Box..."
-msgstr "Hole die Liste verpasster Anrufe von der FRITZ!Box..."
+msgid "Getting calls from FRITZ!Box..."
+msgstr "Hole Liste der Anrufe von der FRITZ!Box..."
 
-#: ../plugin.py:50
 msgid "Harddisk"
 msgstr "Festplatte"
 
-#: ../plugin.py:622
+#. TRANSLATORS: keep it short, this is a button
+msgid "Incoming"
+msgstr "Eingehend"
+
 #, python-format
 msgid ""
 "Incoming Call on %(date)s from\n"
@@ -161,36 +144,33 @@ msgstr ""
 "---------------------------------------------\n"
 "an: %(phone)s"
 
-#: ../plugin.py:60
+msgid "Incoming calls"
+msgstr "Eingehende Anrufe"
+
 msgid "Italy"
 msgstr "Italien"
 
-#: ../plugin.py:581
 msgid "Last 10 calls:\n"
 msgstr "Die letzten zehn Anrufe im Standby:\n"
 
-#: ../plugin.py:503
 msgid "MSN to show (separated by ,)"
 msgstr "anzuzeigende MSNs (getrennt durch ,)"
 
-# This is the text for the yellow button, thus very short...
-#: ../plugin.py:469
-msgid "Missed Calls"
+#. TRANSLATORS: keep it short, this is a button
+msgid "Missed"
 msgstr "Verpasst"
 
-#: ../plugin.py:331 ../plugin.py:366 ../plugin.py:940
 msgid "Missed calls"
 msgstr "Verpasste Anrufe"
 
-#: ../plugin.py:352
-msgid "Missed calls during Standby"
-msgstr "Verpasste Anrufe während Standby"
-
-#: ../plugin.py:468
+#. TRANSLATORS: keep it short, this is a button
 msgid "OK"
 msgstr "OK"
 
-#: ../plugin.py:624
+#. TRANSLATORS: keep it short, this is a button
+msgid "Outgoing"
+msgstr "Abgehend"
+
 #, python-format
 msgid ""
 "Outgoing Call on %(date)s to\n"
@@ -207,82 +187,69 @@ msgstr ""
 "---------------------------------------------\n"
 "von: %(phone)s"
 
-#: ../plugin.py:513
+msgid "Outgoing calls"
+msgstr "Abgehende Anrufe"
+
 msgid "Password Accessing FRITZ!Box"
 msgstr "Passwort der FRITZ!Box"
 
-#: ../plugin.py:522
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phone calls"
+msgstr "Telefonanrufe"
+
 msgid "PhoneBook Location"
 msgstr "Speicherort des Telefonbuchs"
 
-#: ../plugin.py:514
 msgid "Read PhoneBook from FRITZ!Box"
 msgstr "Telefonbuch der FRITZ!Box auslesen"
 
-#: ../plugin.py:509
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Rückwärtssuche (bitte Land auswählen)"
 
-#: ../plugin.py:200 ../plugin.py:224
 msgid "Shortcut"
 msgstr "Kurzwahl"
 
-#: ../plugin.py:501
 msgid "Show Calls for specific MSN"
 msgstr "Zeige nur Anrufe bestimmter Nummern"
 
-#: ../plugin.py:505
 msgid "Show Outgoing Calls"
-msgstr "Zeige ausgehende Anrufe an"
+msgstr "Zeige abgehende Anrufe an"
 
-#: ../plugin.py:499
 msgid "Show after Standby"
 msgstr "Anzeige nach Standby"
 
-#: ../plugin.py:525
 msgid "Strip Leading 0"
 msgstr "Führende 0 entfernen"
 
-#: ../plugin.py:61
 msgid "Switzerland"
 msgstr "Schweiz"
 
-#: ../plugin.py:58
 msgid "The Netherlands"
 msgstr "Niederlande"
 
-#: ../plugin.py:508
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Anzeigedauer in Sekunden"
 
-#: ../plugin.py:252 ../plugin.py:596 ../plugin.py:670 ../plugin.py:683
-#: ../plugin.py:694 ../plugin.py:708 ../plugin.py:727 ../plugin.py:781
-#: ../plugin.py:864
 msgid "UNKNOWN"
 msgstr "UNBEKANNT"
 
-#: ../plugin.py:50
 msgid "USB Stick"
 msgstr "USB Stick"
 
-#: ../plugin.py:520
 msgid "Use internal PhoneBook"
 msgstr "Benutze internes Telefonbuch"
 
-#: ../plugin.py:202 ../plugin.py:226
 msgid "Vanity"
 msgstr "Vanity"
 
-#: ../plugin.py:463
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
 msgstr ""
 "Monitoring auf der FRITZ!Box muss durch Wählen von #96*5* eingeschaltet "
 "werden!"
 
-#: ../plugin.py:259
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
-"in the configuration dialog to display missed calls\n"
+"in the configuration dialog to display calls\n"
 "\n"
 "It could be a communication issue, just try again."
 msgstr ""
@@ -292,26 +259,41 @@ msgstr ""
 "Es könnte eine Kommunikationsproblem mit der FRITZ!Box sein.\n"
 "Versuchen Sie es nochmal."
 
-#: ../plugin.py:195
+msgid "done"
+msgstr "fertig"
+
+msgid "done, using last list"
+msgstr "fertig, benutze letzte Liste"
+
+msgid "finishing"
+msgstr "Fertigstellung"
+
 msgid "home"
 msgstr "privat"
 
-#: ../plugin.py:193
+msgid "login"
+msgstr "Login"
+
+msgid "login ok"
+msgstr "Login OK"
+
+msgid "login verification"
+msgstr "Login Verifikation"
+
 msgid "mobile"
 msgstr "mobil"
 
-#: ../plugin.py:40
+msgid "preparing"
+msgstr "Vorbereitung"
+
 msgid "show as list"
 msgstr "Liste der Anrufe"
 
-#: ../plugin.py:40
 msgid "show each call"
 msgstr "Anzeige der einzelnen Anrufe"
 
-#: ../plugin.py:40
 msgid "show nothing"
 msgstr "keine Anzeige"
 
-#: ../plugin.py:197
 msgid "work"
 msgstr "geschäftlich"

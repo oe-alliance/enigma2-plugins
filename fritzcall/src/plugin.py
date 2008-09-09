@@ -22,7 +22,7 @@ from xml.dom.minidom import parse
 
 from os import path as os_path
 from urllib import urlencode 
-import re
+import re, time
 
 import gettext
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -57,14 +57,25 @@ config.plugins.FritzCall.prefix = ConfigText(default = "", fixed_size = False)
 config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 
 countryCodes = [
-			("0049", _("Germany")),
-			("0031", _("The Netherlands")),
-			("0033", _("France")),
-			("0039", _("Italy")),
-			("0041", _("Switzerland")),
-			("0043", _("Austria"))
-			]
+	("0049", _("Germany")),
+	("0031", _("The Netherlands")),
+	("0033", _("France")),
+	("0039", _("Italy")),
+	("0041", _("Switzerland")),
+	("0043", _("Austria"))
+	]
 config.plugins.FritzCall.country = ConfigSelection(choices = countryCodes)
+
+FBF_ALL_CALLS = "."
+FBF_IN_CALLS = "1"
+FBF_MISSED_CALLS = "2"
+FBF_OUT_CALLS = "3"
+fbfCallsChoices = {FBF_ALL_CALLS: _("All calls"),
+				   FBF_IN_CALLS: _("Incoming calls"),
+				   FBF_MISSED_CALLS: _("Missed calls"),
+				   FBF_OUT_CALLS: _("Outgoing calls")
+				   }
+config.plugins.FritzCall.fbfCalls = ConfigSelection(choices = fbfCallsChoices)
 
 def html2utf8(in_html):
 	try:
@@ -92,13 +103,24 @@ def html2utf8(in_html):
 		return in_html.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
 	return in_html
 
+
 class FritzCallFBF:
 	def __init__(self):
 		print "[FritzCallFBF] __init__"
-		self.missedCallback = None
+		self.callScreen= None
+		self.loggedIn = False
+		self.Callback = None
 		self.loginCallback = None
+		self.timestamp = 0
+		self.callList = []
+		self.callType = config.plugins.FritzCall.fbfCalls.value
 
 	def notify(self, text):
+		print "[FritzCallFBF] notify"
+		if self.callScreen:
+			print "[FritzCallFBF] notify: try to close callScreen"
+			self.callScreen.close()
+			self.callScreen = None
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def errorLogin(self, error):
@@ -108,6 +130,8 @@ class FritzCallFBF:
 	def _gotPageLogin(self, html):
 #		print "[FritzCallPhonebook] _gotPageLogin"
 		# workaround: exceptions in gotPage-callback were ignored
+		if self.callScreen:
+			self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("login verification"))
 		try:
 			print "[FritzCallFBF] _gotPageLogin: verify login"
 			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;Das angegebene Kennwort', html, re.S)
@@ -115,6 +139,9 @@ class FritzCallFBF:
 				text = _("FRITZ!Box Login failed! - Wrong Password!")
 				self.notify(text)
 			else:
+				if self.callScreen:
+					self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("login ok"))
+				self.loggedIn = True
 				self.loginCallback()
 			loginCallback = None
 		except:
@@ -125,6 +152,8 @@ class FritzCallFBF:
 	def login(self):
 		print "[FritzCallFBF] Login"
 		if config.plugins.FritzCall.password.value != "":
+			if self.callScreen:
+				self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("login"))
 			host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
 			uri =  "/cgi-bin/webcm"
 			parms = "login:command/password=%s" %(config.plugins.FritzCall.password.value)
@@ -237,10 +266,10 @@ class FritzCallFBF:
 			self.notify(_("Could not parse FRITZ!Box Phonebook entry"))
 
 	def errorCalls(self, error):
-		text = _("Could not load missed calls from FRITZ!Box - Error: %s") %error
+		text = _("Could not load calls from FRITZ!Box - Error: %s") %error
 		self.notify(text)
 
-	def _gotPageCalls(self, html):
+	def _gotPageCalls(self, csv = ""):
 		def _resolveNumber(number):
 			if number.isdigit():
 				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0]=="0": number = number[1:]
@@ -255,73 +284,112 @@ class FritzCallFBF:
 			# if len(number) > 20: number = number[:20]
 			return number
 
-		# check for error: wrong password or password not set... TODO
-		found = re.search('Melden Sie sich mit dem Kennwort der FRITZ!Box an', html)
-		if found:
-			text = _("You need to set the password of the FRITZ!Box\nin the configuration dialog to display missed calls\n\nIt could be a communication issue, just try again.")
-			# self.session.open(MessageBox, text, MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
-			self.notify(text)
-			return
+		if csv:
+			print "[FritzCallFBF] _gotPageCalls: got csv, setting callList"
+			if self.callScreen:
+				self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("done"))
+			# check for error: wrong password or password not set... TODO
+			found = re.search('Melden Sie sich mit dem Kennwort der FRITZ!Box an', csv)
+			if found:
+				text = _("You need to set the password of the FRITZ!Box\nin the configuration dialog to display calls\n\nIt could be a communication issue, just try again.")
+				# self.session.open(MessageBox, text, MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
+				self.notify(text)
+				return
 
-		# print "[FritzCallFBF] _gotPageCalls:\n" + html
-		html = html.decode('iso-8859-1','replace').encode('utf-8','replace')
-		lines = html.splitlines()
+			csv = csv.decode('iso-8859-1','replace').encode('utf-8','replace')
+			lines = csv.splitlines()
+			self.callList = lines
+		elif self.callList:
+			print "[FritzCallFBF] _gotPageCalls: got no csv, but have callList"
+			if self.callScreen:
+				self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("done, using last list"))
+			lines = self.callList
+		else:
+			print "[FritzCallFBF] _gotPageCalls: got no csv, no callList, leaving"
+			return
+			
 		text = ""
+		noCalls = 0
 		for line in lines:
 			# print line
 			# Typ;Datum;Name;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
-			found = re.match("^2;([^;]*);([^;]*);([^;]*);([^;]*);([^;]*)", line)
+			found = re.match("^(" + self.callType + ");([^;]*);([^;]*);([^;]*);([^;]*);([^;]*)", line)
 			if found:
-				date = found.group(1)
-				if found.group(2):
-					caller = found.group(2)
+				direct = found.group(1)
+				date = found.group(2)
+				if direct != FBF_OUT_CALLS and found.group(3):
+					caller = found.group(3)
 				else:
-					caller = _resolveNumber(found.group(3))
-				callee = _resolveNumber(found.group(5))
+					caller = _resolveNumber(found.group(4))
+				found1 = re.match('Internet: (.*)', found.group(6))
+				if found1:
+					callee = _resolveNumber(found1.group(1))
+				else:
+					callee = _resolveNumber(found.group(6))
 				while (len(caller) + len(callee)) > 40:
 					if len(caller) > len(callee):
 						caller = caller[:-1]
 					else:
 						callee = callee[:-1]
 				found = re.match("(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
-                                if found: date = found.group(1) + found.group(2)
-				text = text + "\n" + date + " " + caller + " -> " + callee
+				if found: date = found.group(1) + found.group(2)
+				if direct == FBF_OUT_CALLS:
+					text = text + date + "\t" + callee + " -> " + caller + "\n"
+				else:
+					text = text + date + "\t" + caller + " -> " + callee + "\n"
+				noCalls += 1
 
 		# print "[FritzCallFBF] _gotPageCalls result:\n" + text
 
-		if self.missedCallback is not None:
+		if self.Callback is not None:
 			# print "[FritzCallFBF] _gotPageCalls call callback with\n" + text
-			self.missedCallback(text = text)
-			self.missedCallback = None
+			self.Callback(text = text, count = noCalls)
+			self.Callback = None
+		self.callScreen = None
 
-	def getMissedCalls(self, callback):
+	def getCalls(self, callScreen, callback, type):
 		#
 		# call sequence must be:
 		# - login
 		# - getPage -> _gotPageLogin
-		# - loginCallback (_getMissedCalls)
-		# - getPage -> _getMissedCalls1
-		print "[FritzCallFBF] getMissedCalls"
-		self.missedCallback = callback
-		self.loginCallback = self._getMissedCalls
-		self.login()
+		# - loginCallback (_getCalls)
+		# - getPage -> _getCalls1
+		print "[FritzCallFBF] getCalls"
+		self.callScreen = callScreen
+		self.callType = type
+		self.Callback = callback
+		if (time.time() - self.timestamp) > 180: 
+			print "[FritzCallFBF] getCalls: outdated data, login and get new ones"
+			self.timestamp = time.time()
+			self.loginCallback = self._getCalls
+			self.login()
+		elif not self.callList:
+			print "[FritzCallFBF] getCalls: time is ok, but no callList"
+			self._getCalls1()
+		else:
+			print "[FritzCallFBF] getCalls: time is ok, callList is ok"
+			self._gotPageCalls()
 
-	def _getMissedCalls(self):
+	def _getCalls(self):
 		#
 		# we need this to fill Anrufliste.csv
 		# http://repeater1/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:menu=fon&var:pagename=foncalls
 		#
-		print "[FritzCallFBF] _getMissedCalls"
+		print "[FritzCallFBF] _getCalls"
+		if self.callScreen:
+			self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("preparing"))
 		host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
 		parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de','var:pagename':'foncalls','var:menu':'fon'})
 		url = "http://%s/cgi-bin/webcm?%s" %(host, parms)
-		getPage(url).addCallback(self._getMissedCalls1).addErrback(self.errorCalls)
+		getPage(url).addCallback(self._getCalls1).addErrback(self.errorCalls)
 
-	def _getMissedCalls1(self, html):
+	def _getCalls1(self, html = ""):
 		#
 		# finally we should have successfully lgged in and filled the csv
 		#
-		print "[FritzCallFBF] _getMissedCalls1"
+		print "[FritzCallFBF] _getCalls1"
+		if self.callScreen:
+			self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("finishing"))
 		host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
 		parms = urlencode({'getpage':'../html/de/FRITZ!Box_Anrufliste.csv'})
 		url = "http://%s/cgi-bin/webcm?%s" %(host, parms)
@@ -329,20 +397,41 @@ class FritzCallFBF:
 
 fritzbox = FritzCallFBF()
 
-class FritzDisplayMissedCalls(Screen):
+class FritzDisplayCalls(Screen):
 
 	skin = """
-		<screen name="FritzDisplayMissedCalls" position="100,90" size="550,420" title="%s" >
-			<widget name="statusbar" position="0,0" size="550,22" font="Regular;22" />
-			<widget name="list" position="0,22" size="550,398" font="Regular;22" />
-		</screen>""" % _("Missed calls")
+		<screen name="FritzDisplayCalls" position="100,90" size="550,420" title="%s" >
+			<widget name="statusbar" position="0,0" size="550,22" font="Regular;21" />
+			<widget name="list" position="0,22" size="550,358" font="Regular;19" />
+			<ePixmap position="5,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="145,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="285,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="425,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget name="key_red" position="5,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_green" position="145,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_yellow" position="285,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_blue" position="425,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		</screen>""" % _("Phone calls")
 
 	def __init__(self, session, text = ""):
-		self.skin = FritzDisplayMissedCalls.skin
+		self.skin = FritzDisplayCalls.skin
 		Screen.__init__(self, session)
 
-		self["setupActions"] = ActionMap(["OkCancelActions", "DirectionActions"],
+		# TRANSLATORS: keep it short, this is a button
+		self["key_red"] = Button(_("All"))
+		# TRANSLATORS: keep it short, this is a button
+		self["key_green"] = Button(_("Missed"))
+		# TRANSLATORS: keep it short, this is a button
+		self["key_yellow"] = Button(_("Incoming"))
+		# TRANSLATORS: keep it short, this is a button
+		self["key_blue"] = Button(_("Outgoing"))
+
+		self["setupActions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"],
 		{
+			"red": self.displayAllCalls,
+			"green": self.displayMissedCalls,
+			"yellow": self.displayInCalls,
+			"blue": self.displayOutCalls,
 			"down": self.pageDown,
 			"up": self.pageUp,
 			"right": self.pageDown,
@@ -351,13 +440,10 @@ class FritzDisplayMissedCalls(Screen):
 			"save": self.ok,
 			"ok": self.ok,}, -2)
 		
-		if text == "":
-			self["statusbar"] = Label(_("Getting missed calls from FRITZ!Box..."))
-			self["list"] = ScrollLabel("")
-			fritzbox.getMissedCalls(self.gotMissedCalls)
-		else:
-			self["statusbar"] = Label(_("Missed calls during Standby"))
-			self["list"] = ScrollLabel(text)
+		self["statusbar"] = Label(_("Getting calls from FRITZ!Box..."))
+		self["list"] = ScrollLabel("")
+		print "[FritzDisplayCalls] init: '''%s'''" %config.plugins.FritzCall.fbfCalls.value
+		self.displayCalls()
 
 	def ok(self):
 		self.close()
@@ -368,19 +454,48 @@ class FritzDisplayMissedCalls(Screen):
 	def pageUp(self):
 		self["list"].pageUp()
 
-	def gotMissedCalls(self, text):
-		# print "[FritzDisplayMissedCalls] gotMissedCalls:\n" + text
-		self["statusbar"].setText(_("Missed calls"))
+	def displayAllCalls(self):
+		print "[FritzDisplayCalls] displayAllCalls"
+		config.plugins.FritzCall.fbfCalls.value = FBF_ALL_CALLS
+		config.plugins.FritzCall.fbfCalls.save()
+		self.displayCalls()
+
+	def displayMissedCalls(self):
+		print "[FritzDisplayCalls] displayMissedCalls"
+		config.plugins.FritzCall.fbfCalls.value = FBF_MISSED_CALLS
+		config.plugins.FritzCall.fbfCalls.save()
+		self.displayCalls()
+
+	def displayInCalls(self):
+		print "[FritzDisplayCalls] displayInCalls"
+		config.plugins.FritzCall.fbfCalls.value = FBF_IN_CALLS
+		config.plugins.FritzCall.fbfCalls.save()
+		self.displayCalls()
+
+	def displayOutCalls(self):
+		print "[FritzDisplayCalls] displayOutCalls"
+		config.plugins.FritzCall.fbfCalls.value = FBF_OUT_CALLS
+		config.plugins.FritzCall.fbfCalls.save()
+		self.displayCalls()
+
+	def displayCalls(self):
+		print "[FritzDisplayCalls] displayCalls"
+		self.header = fbfCallsChoices[config.plugins.FritzCall.fbfCalls.value]
+		fritzbox.getCalls(self, self.gotCalls, config.plugins.FritzCall.fbfCalls.value)
+
+	def gotCalls(self, text, count):
+		# print "[FritzDisplayCalls] gotCalls:\n" + text
+		self["statusbar"].setText(self.header + " (" + str(count) + ")")
 		self["list"].setText(text)
+
+	def updateStatus(self, text):
+		self["statusbar"].setText(text)
 
 
 class FritzCallPhonebook:
 	def __init__(self):
 		self.phonebook = {}
 		self.reload()
-
-	def notify(self, text):
-		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def create(self):
 		try:
@@ -420,7 +535,7 @@ class FritzCallPhonebook:
 			fritzbox.loadFritzBoxPhonebook()
 
 	def search(self, number):
-		print "[FritzCallPhonebook] Searching for %s" %number
+		# print "[FritzCallPhonebook] Searching for %s" %number
 		name = None
 		if config.plugins.FritzCall.phonebook.value or config.plugins.FritzCall.fritzphonebook.value:
 			if self.phonebook.has_key(number):
@@ -471,21 +586,24 @@ class FritzCallSetup(ConfigListScreen, Screen):
 		self.list = []
 
 		# Initialize Buttons
+		# TRANSLATORS: keep it short, this is a button
 		self["key_red"] = Button(_("Cancel"))
+		# TRANSLATORS: keep it short, this is a button
 		self["key_green"] = Button(_("OK"))
-		self["key_yellow"] = Button(_("Missed Calls"))
+		# TRANSLATORS: keep it short, this is a button
+		self["key_yellow"] = Button(_("Phone calls"))
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"cancel": self.cancel,
-			"red": self.cancel,  	# not strictly needed, better for clarity
+			"red": self.cancel,	# not strictly needed, better for clarity
 			"save": self.save,
-			"green": self.save,  	# not strictly needed, better for clarity
-			"yellow": self.displayMissedCalls,
+			"green": self.save,	# not strictly needed, better for clarity
+			"yellow": self.displayCalls,
 			"ok": self.save,
 		}, -2)
 
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, self.list, session = session)
 		self.createSetup()
 
 
@@ -531,6 +649,7 @@ class FritzCallSetup(ConfigListScreen, Screen):
 					self.list.append(getConfigListEntry(_("Automatically add new Caller to PhoneBook"), config.plugins.FritzCall.addcallers))
 
 			self.list.append(getConfigListEntry(_("Strip Leading 0"), config.plugins.FritzCall.internal))
+			# self.list.append(getConfigListEntry(_("Default display mode for FRITZ!Box calls"), config.plugins.FritzCall.fbfCalls))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -558,8 +677,8 @@ class FritzCallSetup(ConfigListScreen, Screen):
 			x[1].cancel()
 		self.close()
 
-	def displayMissedCalls(self):
-		self.session.open(FritzDisplayMissedCalls)
+	def displayCalls(self):
+		self.session.open(FritzDisplayCalls)
 
 
 standbyMode = False
@@ -618,7 +737,7 @@ class FritzCallList:
 		print "[FritzCallList] display: '%s %s %s %s'" %(date, caller, direction, phone)
 		# display screen
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO)
-		# my_global_session.open(FritzDisplayMissedCalls, text) # TODO please HELP: from where can I get a session?
+		# my_global_session.open(FritzDisplayCalls, text) # TODO please HELP: from where can I get a session?
 		self.callList = [ ]
 		self.text = ""
 
@@ -663,7 +782,6 @@ class FritzReverseLookupAndNotifier:
 		self.date = date
 		self.currentWebsite = None
 		self.nextWebsiteNo = 0
-                self.countrycode = "0049"
 
 		if not countries:
 			dom = parse(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/reverselookup.xml"))
@@ -680,7 +798,7 @@ class FritzReverseLookupAndNotifier:
 			return
 
 		if self.number[:2] == "00":
-			if countries.has_key(self.number[:3]):   #	e.g. USA
+			if countries.has_key(self.number[:3]):	 #	e.g. USA
 				self.countrycode = self.number[:3]
 			elif countries.has_key(self.number[:4]):
 				self.countrycode = self.number[:4]
@@ -857,7 +975,7 @@ class FritzProtocol(LineReceiver):
 				else:
 					self.number = number
 
-				if self.event == "CALL" and self.number[0] != '0':			  		  # should only happen for outgoing
+				if self.event == "CALL" and self.number[0] != '0':					  # should only happen for outgoing
 					self.number = config.plugins.FritzCall.prefix.value + self.number
 
 				if self.number is not "":
@@ -919,8 +1037,8 @@ class FritzCall:
 			self.d[1].disconnect()
 			self.d = None
 
-def displayMissedCalls(session, servicelist):
-	session.open(FritzDisplayMissedCalls)
+def displayCalls(session, servicelist):
+	session.open(FritzDisplayCalls)
 
 def main(session):
 	session.open(FritzCallSetup)
@@ -945,7 +1063,7 @@ def autostart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	what = _("Display FRITZ!box-Fon calls on screen")
-	what_missed = _("Missed calls")
+	what_calls = _("Phone calls")
 	return [ PluginDescriptor(name="FritzCall", description=what, where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc=main),
-		PluginDescriptor(name=what_missed, description=what_missed, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayMissedCalls),
+		PluginDescriptor(name=what_calls, description=what_calls, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayCalls),
 		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart) ]
