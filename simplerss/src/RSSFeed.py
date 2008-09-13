@@ -121,11 +121,11 @@ class RSSFeed:
 			except:
 				link = ""
 			
-			# Try to read guid, link if none (RSS 1.0 or invalid RSS 2.0)
+			# Try to read guid, title+link if none (RSS 1.0 or invalid RSS 2.0)
 			try:
 				guid = item.getElementsByTagName("guid")[0].childNodes[0].data
 			except:
-				guid = link
+				guid = ''.join([title, link])
 
 			# Continue if item is to be excluded
 			if guid in self.last_ids:
