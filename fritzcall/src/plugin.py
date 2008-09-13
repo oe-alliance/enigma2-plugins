@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
+from Screens.InputBox import InputBox
 from Screens import Standby
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT
 
+from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Button import Button
@@ -12,6 +16,7 @@ from Components.ScrollLabel import ScrollLabel
 
 from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
+from Tools.NumericalTextInput import NumericalTextInput
 
 from twisted.internet import reactor
 from twisted.internet.protocol import ReconnectingClientFactory
@@ -20,16 +25,15 @@ from twisted.web.client import getPage
 
 from xml.dom.minidom import parse
 
-from os import path as os_path
 from urllib import urlencode 
-import re, time
+import re, time, os
 
 import gettext
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 try:
-		_ = gettext.translation('FritzCall', resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/locale"), [config.osd.language.getText()]).gettext
+	_ = gettext.translation('FritzCall', resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/locale"), [config.osd.language.getText()]).gettext
 except IOError:
-		pass
+	pass
 
 
 my_global_session = None
@@ -76,6 +80,11 @@ fbfCallsChoices = {FBF_ALL_CALLS: _("All calls"),
 				   FBF_OUT_CALLS: _("Outgoing calls")
 				   }
 config.plugins.FritzCall.fbfCalls = ConfigSelection(choices = fbfCallsChoices)
+
+config.plugins.FritzCall.name = ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.number= ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.number.setUseableChars('0123456789')
+
 
 def html2utf8(in_html):
 	try:
@@ -308,8 +317,7 @@ class FritzCallFBF:
 			print "[FritzCallFBF] _gotPageCalls: got no csv, no callList, leaving"
 			return
 			
-		text = ""
-		noCalls = 0
+		callList = []
 		for line in lines:
 			# print line
 			# Typ;Datum;Name;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
@@ -318,32 +326,21 @@ class FritzCallFBF:
 				direct = found.group(1)
 				date = found.group(2)
 				if direct != FBF_OUT_CALLS and found.group(3):
-					caller = found.group(3)
+					remote = found.group(3)
 				else:
-					caller = _resolveNumber(found.group(4))
+					remote = _resolveNumber(found.group(4))
 				found1 = re.match('Internet: (.*)', found.group(6))
 				if found1:
-					callee = _resolveNumber(found1.group(1))
+					here = _resolveNumber(found1.group(1))
 				else:
-					callee = _resolveNumber(found.group(6))
-				while (len(caller) + len(callee)) > 40:
-					if len(caller) > len(callee):
-						caller = caller[:-1]
-					else:
-						callee = callee[:-1]
-				found = re.match("(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
-				if found: date = found.group(1) + found.group(2)
-				if direct == FBF_OUT_CALLS:
-					text = text + date + "\t" + callee + " -> " + caller + "\n"
-				else:
-					text = text + date + "\t" + caller + " -> " + callee + "\n"
-				noCalls += 1
+					here = _resolveNumber(found.group(6))
+				callList.append((found.group(4), date, here, direct, remote))
 
 		# print "[FritzCallFBF] _gotPageCalls result:\n" + text
 
 		if self.Callback is not None:
 			# print "[FritzCallFBF] _gotPageCalls call callback with\n" + text
-			self.Callback(text = text, count = noCalls)
+			self.Callback(callList)
 			self.Callback = None
 		self.callScreen = None
 
@@ -395,14 +392,62 @@ class FritzCallFBF:
 		url = "http://%s/cgi-bin/webcm?%s" %(host, parms)
 		getPage(url).addCallback(self._gotPageCalls).addErrback(self.errorCalls)
 
+	def dial(self, number):
+		''' initiate a call to number '''
+		#
+		# does not work... if anybody wants to make it work, feel free
+		# I not convinced of FBF's style to establish a connection: first get the connection, then ring the local phone?!?!
+		#  
+		return
+		# http://fritz.box/cgi-bin/webcm
+		# getpage=../html/de/menus/menu2.html
+		# var:lang=de
+		# var:pagename=foncalls
+		# var:menu=home
+		# var:pagemaster=
+		# var:showsetup=
+		# var:showall=
+		# var:showDialing=08001235005
+		# telcfg:settings/UseJournal=1
+		# telcfg:command/Dial=08001235005
+		self.login()
+		url = "http://%s/cgi-bin/webcm" %("%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value))
+		parms = urlencode({
+			'getpage':'../html/de/menus/menu2.html',
+			'errorpage':'../html/de/menus/menu2.html',
+			'var:lang':'de',
+			'var:pagename':'foncalls',
+			'var:errorpagename':'foncalls',
+			'var:menu':'home',
+			'var:pagemaster':'',
+			'var:settings/time':'0,0',
+			'var:showsetup':'',
+			'var:showall':'',
+			'var:showDialing':number,
+			'var:tabFoncall':'',
+			'var:TestPort':'',
+			'var:kurzwahl':'',
+			'var:kwCode':'',
+			'var:kwVanity':'',
+			'var:kwNumber':'',
+			'var:kwName':'',
+			'telcfg:settings/UseJournal':'1',
+			'telcfg:command/Dial':number
+			})
+		print "[FritzCallFBF] dial url: '" + url + "' parms: '" + parms + "'"
+		getPage(url, method="POST", headers = {'Content-Type': "application/x-www-form-urlencoded",'Content-Length': str(len(parms))}, postdata=parms)
+
+
+
 fritzbox = FritzCallFBF()
 
 class FritzDisplayCalls(Screen):
 
+	# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 	skin = """
-		<screen name="FritzDisplayCalls" position="100,90" size="550,420" title="%s" >
-			<widget name="statusbar" position="0,0" size="550,22" font="Regular;21" />
-			<widget name="list" position="0,22" size="550,358" font="Regular;19" />
+		<screen name="FritzDisplayCalls" position="100,90" size="570,420" title="%s" >
+			<widget name="statusbar" position="0,0" size="570,22" font="Regular;21" />
+			<widget name="entries" position="0,22" size="570,358" scrollbarMode="showOnDemand" />
 			<ePixmap position="5,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap position="145,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<ePixmap position="285,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -426,33 +471,25 @@ class FritzDisplayCalls(Screen):
 		# TRANSLATORS: keep it short, this is a button
 		self["key_blue"] = Button(_("Outgoing"))
 
-		self["setupActions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"],
+		self["setupActions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
 			"red": self.displayAllCalls,
 			"green": self.displayMissedCalls,
 			"yellow": self.displayInCalls,
 			"blue": self.displayOutCalls,
-			"down": self.pageDown,
-			"up": self.pageUp,
-			"right": self.pageDown,
-			"left": self.pageUp,
 			"cancel": self.ok,
-			"save": self.ok,
-			"ok": self.ok,}, -2)
+			"ok": self.showEntry,}, -2)
 		
 		self["statusbar"] = Label(_("Getting calls from FRITZ!Box..."))
-		self["list"] = ScrollLabel("")
+		self["entries"] = MenuList([], True, content = eListboxPythonMultiContent)
+		self["entries"].l.setFont(0, gFont("Console", 16))
+		self["entries"].l.setItemHeight(20)
+
 		print "[FritzDisplayCalls] init: '''%s'''" %config.plugins.FritzCall.fbfCalls.value
 		self.displayCalls()
 
 	def ok(self):
 		self.close()
-
-	def pageDown(self):
-		self["list"].pageDown()
-
-	def pageUp(self):
-		self["list"].pageUp()
 
 	def displayAllCalls(self):
 		print "[FritzDisplayCalls] displayAllCalls"
@@ -483,10 +520,44 @@ class FritzDisplayCalls(Screen):
 		self.header = fbfCallsChoices[config.plugins.FritzCall.fbfCalls.value]
 		fritzbox.getCalls(self, self.gotCalls, config.plugins.FritzCall.fbfCalls.value)
 
-	def gotCalls(self, text, count):
-		# print "[FritzDisplayCalls] gotCalls:\n" + text
-		self["statusbar"].setText(self.header + " (" + str(count) + ")")
-		self["list"].setText(text)
+	def gotCalls(self, callList):
+		print "[FritzDisplayCalls] gotCalls"
+		self.updateStatus(self.header + " (" + str(len(callList)) + ")")
+		sortlist = []
+		for (number, date, remote, direct, here) in callList:
+			while (len(remote) + len(here)) > 40:
+				if len(remote) > len(here):
+					remote = remote[:-1]
+				else:
+					here = here[:-1]
+			found = re.match("(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
+			if found: date = found.group(1) + found.group(2)
+			if direct == FBF_OUT_CALLS:
+				message = date + " " + remote + " -> " + here
+			else:
+				message = date + " " + here + " -> " + remote
+			sortlist.append([number, (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, 560, 20, 0, RT_HALIGN_LEFT, message)])
+		self["entries"].setList(sortlist)
+
+	def showEntry(self):
+		print "[FritzDisplayCalls] showEntry"
+		cur = self["entries"].getCurrent()
+		if cur:
+			print "[FritzDisplayCalls] showEntry %s" % (cur[0])
+			if cur[0]:
+				fullname = phonebook.search(cur[0])
+				if fullname:
+					self.session.open(MessageBox,
+							  cur[0] + "\n\n" + fullname.replace(", ","\n"),
+							  type = MessageBox.TYPE_INFO)
+				else:
+					self.session.open(MessageBox,
+							  cur[0],
+							  type = MessageBox.TYPE_INFO)
+			else:
+				self.session.open(MessageBox,
+						  _("UNKNOWN"),
+						  type = MessageBox.TYPE_INFO)
 
 	def updateStatus(self, text):
 		self["statusbar"].setText(text)
@@ -516,7 +587,7 @@ class FritzCallPhonebook:
 		exists = False
 		
 		if config.plugins.FritzCall.phonebook.value:
-			if not os_path.exists(config.plugins.FritzCall.phonebookLocation.value):
+			if not os.path.exists(config.plugins.FritzCall.phonebookLocation.value):
 				if(self.create()):
 					exists = True
 			else:
@@ -544,16 +615,16 @@ class FritzCallPhonebook:
 
 	def add(self, number, name):
 		print "[FritzCallPhonebook] add"
-#===============================================================================
-#		It could happen, that two reverseLookups are running in parallel,
-#		so check first, whether we have already added the number to the phonebook.
-#===============================================================================
-		if phonebook.search(number) is None and number <> 0 and config.plugins.FritzCall.phonebook.value and config.plugins.FritzCall.addcallers.value:
+		#===============================================================================
+		#		It could happen, that two reverseLookups are running in parallel,
+		#		so check first, whether we have already added the number to the phonebook.
+		#===============================================================================
+		self.phonebook[number] = name;
+		if number <> 0 and config.plugins.FritzCall.phonebook.value and config.plugins.FritzCall.addcallers.value:
 			try:
 				f = open(config.plugins.FritzCall.phonebookLocation.value, 'a')
 				name = name.strip() + "\n"
 				string = "%s#%s" %(number, name)
-				self.phonebook[number] = name;
 				f.write(string)
 				f.close()
 				print "[FritzCallPhonebook] added %s with %sto Phonebook.txt" %(number, name)
@@ -562,19 +633,349 @@ class FritzCallPhonebook:
 			except IOError:
 				return False
 
+	def remove(self, number):
+		print "[FritzCallPhonebook] remove"
+		if number in self.phonebook:
+			print "[FritzCallPhonebook] remove entry in phonebook"
+			del self.phonebook[number]
+			if config.plugins.FritzCall.phonebook.value and config.plugins.FritzCall.addcallers.value:
+				try:
+					print "[FritzCallPhonebook] remove entry in Phonebook.txt"
+					fOld = open(config.plugins.FritzCall.phonebookLocation.value, 'r')
+					fNew = open(config.plugins.FritzCall.phonebookLocation.value + str(os.getpid()), 'w')
+					line = fOld.readline()
+					while (line):
+						if not re.match("^"+number+"#.*$", line):
+							fNew.write(line)
+						line = fOld.readline()
+					fOld.close()
+					fNew.close()
+					os.remove(config.plugins.FritzCall.phonebookLocation.value)
+					os.rename(config.plugins.FritzCall.phonebookLocation.value + str(os.getpid()),
+							config.plugins.FritzCall.phonebookLocation.value)
+					print "[FritzCallPhonebook] removed %s from Phonebook.txt" %number
+					return True
+	
+				except IOError:
+					pass
+		return False
+
+	class displayPhonebook(Screen, NumericalTextInput):
+		# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+		skin = """
+			<screen name="FritzDisplayPhonebook" position="100,90" size="570,420" title="%s" >
+				<widget name="entries" position="5,5" size="560,370" scrollbarMode="showOnDemand" />
+				<ePixmap position="5,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap position="145,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="285,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap position="425,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+				<widget name="key_red" position="5,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_green" position="145,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_yellow" position="285,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_blue" position="425,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			</screen>""" % _("Phonebook")
+
+		def __init__(self, session):
+			Screen.__init__(self, session)
+			NumericalTextInput.__init__(self)
+		
+			# TRANSLATORS: keep it short, this is a button
+			self["key_red"] = Button(_("Delete"))
+			# TRANSLATORS: keep it short, this is a button
+			self["key_green"] = Button(_("New"))
+			# TRANSLATORS: keep it short, this is a button
+			self["key_yellow"] = Button(_("Edit"))
+			# TRANSLATORS: keep it short, this is a button
+			self["key_blue"] = Button(_("Search"))
+	
+			self["setupActions"] = ActionMap(["OkCancelActions", "ColorActions"],
+			{
+				"red": self.delete,
+				"green": self.add,
+				"yellow": self.edit,
+				"blue": self.search,
+				"cancel": self.exit,
+				"ok": self.showEntry,}, -2)
+
+			self["entries"] = MenuList([], True, content = eListboxPythonMultiContent)
+			self["entries"].l.setFont(0, gFont("Console", 16))
+			self["entries"].l.setItemHeight(20)
+			print "[FritzCallPhonebook] displayPhonebook init"
+			self.display()
+
+		def display(self, filter=""):
+			print "[FritzCallPhonebook] displayPhonebook/display"
+			self.sortlist = []
+			sortlistHelp = sorted((name.lower(), name, number) for (number, name) in phonebook.phonebook.iteritems())
+			for (low, name, number) in sortlistHelp:
+				low = low.decode("utf-8")
+				if filter:
+					filter = filter.lower()
+					if low.find(filter) == -1:
+						continue
+				name = name.strip().decode("utf-8")
+				number = number.strip().decode("utf-8")
+				found = re.match("([^,]*),.*", name)
+				if found:
+					shortname = found.group(1)
+				if len(name) > 35:
+					shortname = name[:35]
+				else:
+					shortname = name
+				message = u"%-35s  %-18s" %(shortname, number)
+				message = message.encode("utf-8")
+				# print "[FritzCallPhonebook] displayPhonebook/display: add " + message
+				self.sortlist.append([(number.encode("utf-8","replace"),
+							   name.encode("utf-8","replace")),
+							   (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, 560, 20, 0, RT_HALIGN_LEFT, message)])
+
+			self["entries"].setList(self.sortlist)
+
+		def showEntry(self):
+			cur = self["entries"].getCurrent()
+			print "[FritzCallPhonebook] displayPhonebook/showEntry (%s,%s)" % (cur[0][0],cur[0][1])
+			if cur:
+				fullname = phonebook.search(cur[0][0])
+				if fullname:
+					self.session.open(MessageBox,
+							  cur[0][0] + "\n\n" + fullname.replace(", ","\n"),
+							  type = MessageBox.TYPE_INFO)
+				else:
+					self.session.open(MessageBox,
+							  cur[0][0],
+							  type = MessageBox.TYPE_INFO)
+
+		def delete(self):
+			cur = self["entries"].getCurrent()
+			print "[FritzCallPhonebook] displayPhonebook/delete " + cur[0][0]
+			if cur:
+				self.session.openWithCallback(
+					self.deleteConfirmed,
+					MessageBox,
+					_("Do you really want to delete entry for\n\n%(number)s\n\n%(name)s?") 
+					% { 'number':str(cur[0][0]), 'name':str(cur[0][1]).replace(", ","\n") }
+				)
+			else:
+				self.session.open(MessageBox,_("No entry selected"), MessageBox.TYPE_INFO)
+
+		def deleteConfirmed(self, ret):
+			print "[FritzCallPhonebook] displayPhonebook/deleteConfirmed"
+			#
+			# if ret: delete number from sortlist, delete number from phonebook.phonebook and write it to disk
+			#
+			cur = self["entries"].getCurrent()
+			if cur:
+				if ret:
+					# delete number from sortlist, delete number from phonebook.phonebook and write it to disk
+					print "[FritzCallPhonebook] displayPhonebook/deleteConfirmed: remove " +cur[0][0]
+					phonebook.remove(cur[0][0])
+					self.display()
+				# else:
+					# self.session.open(MessageBox, _("Not deleted."), MessageBox.TYPE_INFO)
+			else:
+				self.session.open(MessageBox,_("No entry selected"), MessageBox.TYPE_INFO)
+
+		def add(self):
+			class addScreen(Screen, ConfigListScreen):
+				'''ConfiglistScreen with two ConfigTexts for Name and Number'''
+				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+				skin = """
+					<screen position="100,150" size="570,130" title="%s" >
+					<widget name="config" position="5,5" size="560,75" scrollbarMode="showOnDemand" />
+					<ePixmap position="145,85" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+					<ePixmap position="285,85" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+					<widget name="key_red" position="145,85" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+					<widget name="key_green" position="285,85" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+					</screen>"""  % _("Add entry to phonebook")
+
+				def __init__(self, session, parent):
+					#
+					# setup screen with two ConfigText and OK and ABORT button
+					# 
+					Screen.__init__(self, session)
+					self.session = session
+					self.parent = parent
+					# TRANSLATORS: keep it short, this is a button
+					self["key_red"] = Button(_("Cancel"))
+					# TRANSLATORS: keep it short, this is a button
+					self["key_green"] = Button(_("OK"))
+					self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+					{
+						"cancel": self.cancel,
+						"red": self.cancel,
+						"green": self.add,
+						"ok": self.add,
+					}, -2)
+
+					self.list = [ ]
+					ConfigListScreen.__init__(self, self.list, session = session)
+					self.list.append(getConfigListEntry(_("Name"), config.plugins.FritzCall.name))
+					self.list.append(getConfigListEntry(_("Number"), config.plugins.FritzCall.number))
+					self["config"].list = self.list
+					self["config"].l.setList(self.list)
+
+
+				def add(self):
+					# get texts from Screen
+					# add (number,name) to sortlist and phonebook.phonebook and disk
+					number = config.plugins.FritzCall.number.value
+					name = config.plugins.FritzCall.name.value
+					# add (number,name) to sortlist and phonebook.phonebook and disk
+					if phonebook.phonebook.has_key(self.newnumber):
+						self.session.openWithCallback(
+							self.overwriteConfirmed,
+							MessageBox,
+							_("Do you really want to overwrite entry for\n%(number)s\n\n%(name)s\n\nwith\n\n%(newname)s?")
+							% {
+							'number':number,
+							'name':phonebook.search(number).replace(", ","\n"),
+							'newname': name
+							}
+							)
+						self.close()
+						return
+					phonebook.add(number, name)
+					self.close()
+					self.parent.display()
+
+				def overwriteConfirmed(self, ret):
+					if ret:
+						phonebook.add(self.newnumber, self.newname)
+						self.parent.display()
+					self.close()
+
+				def cancel(self):
+					self.close()
+
+			print "[FritzCallPhonebook] displayPhonebook/add"
+			# self.session.open(MessageBox, "Not yet implemented.", type = MessageBox.TYPE_INFO)
+			# return
+			self.session.open(addScreen, self)
+
+		def edit(self):
+			# Edit selected Timer
+			class editScreen(Screen, ConfigListScreen):
+				'''ConfiglistScreen with two ConfigTexts for Name and Number'''
+				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+				skin = """
+					<screen position="100,150" size="570,130" title="%s" >
+					<widget name="config" position="5,5" size="560,75" scrollbarMode="showOnDemand" />
+					<ePixmap position="145,85" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+					<ePixmap position="285,85" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+					<widget name="key_red" position="145,85" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+					<widget name="key_green" position="285,85" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+					</screen>""" % _("Edit phonebook entry").decode("utf-8")
+
+				def __init__(self, session, parent, name, number):
+					#
+					# setup screen with two ConfigText and OK and ABORT button
+					# 
+					Screen.__init__(self, session)
+					self.session = session
+					self.parent = parent
+					config.plugins.FritzCall.name.value = name
+					config.plugins.FritzCall.number.value = number
+					self.name = name
+					self.number = number
+					# TRANSLATORS: keep it short, this is a button
+					self["key_red"] = Button(_("Cancel"))
+					# TRANSLATORS: keep it short, this is a button
+					self["key_green"] = Button(_("OK"))
+					self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+					{
+						"cancel": self.cancel,
+						"red": self.cancel,
+						"green": self.edit,
+						"ok": self.edit,
+					}, -2)
+
+					self.list = [ ]
+					ConfigListScreen.__init__(self, self.list, session = session)
+					# config.plugins.FritzCall.name.value = config.plugins.FritzCall.name.value.replace(", ","\n")
+					self.list.append(getConfigListEntry(_("Name"), config.plugins.FritzCall.name))
+					self.list.append(getConfigListEntry(_("Number"), config.plugins.FritzCall.number))
+					self["config"].list = self.list
+					self["config"].l.setList(self.list)
+
+
+				def edit(self):
+					print "[FritzCallPhonebook] displayPhonebook/edit: add (%s,%s)" %(config.plugins.FritzCall.number.value,config.plugins.FritzCall.name.value)
+					self.newnumber = config.plugins.FritzCall.number.value.replace("\n",", ")
+					self.newname = config.plugins.FritzCall.name.value
+					if self.number != self.newnumber:
+						if phonebook.phonebook.has_key(self.newnumber):
+							self.session.openWithCallback(
+								self.overwriteConfirmed,
+								MessageBox,
+								_("Do you really want to overwrite entry for\n%(number)s\n\n%(name)s\n\nwith\n\n%(newname)s?")
+								% {
+								'number':self.newnumber,
+								'name':phonebook.search(self.newnumber).replace(", ","\n"),
+								'newname': self.newname
+								}
+								)
+							self.close()
+							return
+						else:
+							phonebook.remove(self.number)
+					phonebook.add(self.newnumber, self.newname, force = True)
+					self.close()
+					self.parent.display()
+
+				def overwriteConfirmed(self, ret):
+					if ret:
+						phonebook.add(self.newnumber, self.newname, force = True)
+						self.parent.display()
+					self.close()
+						
+
+				def cancel(self):
+					self.close()
+
+			print "[FritzCallPhonebook] displayPhonebook/edit"
+			# self.session.open(MessageBox, "Not yet implemented.", type = MessageBox.TYPE_INFO)
+			# return
+			cur = self["entries"].getCurrent()
+			if cur is None:
+				self.session.open(MessageBox,_("No entry selected"), MessageBox.TYPE_INFO)
+			else:
+				(number, name) = cur[0]
+				self.session.open(editScreen, self, str(name), str(number))
+
+		def search(self):
+			print "[FritzCallPhonebook] displayPhonebook/search"
+			self.help_window = self.session.instantiateDialog(NumericalTextInputHelpDialog, self)
+			self.help_window.show()
+			self.session.openWithCallback(self.doSearch, InputBox, _("Enter Search Terms"), _("Search phonebook"))
+
+		def doSearch(self, searchTerms):
+			if not searchTerms: searchTerms = ""
+			print "[FritzCallPhonebook] displayPhonebook/doSearch: " + searchTerms
+			if self.help_window:
+				self.session.deleteDialog(self.help_window)
+				self.help_window = None
+			self.display(searchTerms)
+
+		def exit(self):
+			self.close()
+
 phonebook = FritzCallPhonebook()
 
+
 class FritzCallSetup(ConfigListScreen, Screen):
+	# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 	skin = """
-		<screen position="100,90" size="550,420" title="%s" >
-		<widget name="config" position="20,10" size="510,300" scrollbarMode="showOnDemand" />
+		<screen position="100,90" size="570,420" title="%s" >
+		<widget name="config" position="5,10" size="560,300" scrollbarMode="showOnDemand" />
 		<widget name="consideration" position="20,320" font="Regular;20" halign="center" size="510,50" />
 		<ePixmap position="5,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="145,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="285,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="425,375" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		<widget name="key_red" position="5,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_green" position="145,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_yellow" position="285,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_blue" position="425,375" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>""" % _("FritzCall Setup")
 
 	def __init__(self, session, args = None):
@@ -592,6 +993,8 @@ class FritzCallSetup(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("OK"))
 		# TRANSLATORS: keep it short, this is a button
 		self["key_yellow"] = Button(_("Phone calls"))
+		# TRANSLATORS: keep it short, this is a button
+		self["key_blue"] = Button(_("Phonebook"))
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -600,6 +1003,7 @@ class FritzCallSetup(ConfigListScreen, Screen):
 			"save": self.save,
 			"green": self.save,	# not strictly needed, better for clarity
 			"yellow": self.displayCalls,
+			"blue": self.displayPhonebook,
 			"ok": self.save,
 		}, -2)
 
@@ -662,7 +1066,7 @@ class FritzCallSetup(ConfigListScreen, Screen):
 			fritz_call.connect()
 
 			if config.plugins.FritzCall.phonebook.value:
-				if not os_path.exists(config.plugins.FritzCall.phonebookLocation.value):
+				if not os.path.exists(config.plugins.FritzCall.phonebookLocation.value):
 					if not phonebook.create():
 						Notifications.AddNotification(MessageBox, _("Can't create PhoneBook.txt"), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 				else:
@@ -679,6 +1083,9 @@ class FritzCallSetup(ConfigListScreen, Screen):
 
 	def displayCalls(self):
 		self.session.open(FritzDisplayCalls)
+
+	def displayPhonebook(self):
+		self.session.open(phonebook.displayPhonebook)
 
 
 standbyMode = False
@@ -1040,6 +1447,9 @@ class FritzCall:
 def displayCalls(session, servicelist):
 	session.open(FritzDisplayCalls)
 
+def displayPhonebook(session, servicelist):
+	session.open(phonebook.displayPhonebook)
+
 def main(session):
 	session.open(FritzCallSetup)
 
@@ -1064,6 +1474,8 @@ def autostart(reason, **kwargs):
 def Plugins(**kwargs):
 	what = _("Display FRITZ!box-Fon calls on screen")
 	what_calls = _("Phone calls")
+	what_phonebook = _("Phonebook")
 	return [ PluginDescriptor(name="FritzCall", description=what, where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc=main),
 		PluginDescriptor(name=what_calls, description=what_calls, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayCalls),
+		PluginDescriptor(name=what_phonebook, description=what_phonebook, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayPhonebook),
 		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart) ]
