@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FRITZ!Box plugin italian locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-07 19:04+0200\n"
-"PO-Revision-Date: 2008-09-08 15:51+0100\n"
+"POT-Creation-Date: 2008-09-15 12:41+0200\n"
+"PO-Revision-Date: 2008-09-16 10:19+0200\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -13,6 +13,11 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
+
+#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+msgid "Add entry to phonebook"
+msgstr "Aggiungere voce in rubrica"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "All"
@@ -92,8 +97,81 @@ msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
 msgid "Country"
 msgstr "Nazione"
 
+#. TRANSLATORS: keep it short, this is a button
+msgid "Delete"
+msgstr "Cancell."
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Delete entry"
+msgstr "Cancellare voce"
+
 msgid "Display FRITZ!box-Fon calls on screen"
 msgstr "Visualizza le chiamate telef. sulla TV"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Display all calls"
+msgstr "Tutte le Chiamate"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Display incoming calls"
+msgstr "Chiamate in Ingresso"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Display missed calls"
+msgstr "Chiamate perse"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Display outgoing calls"
+msgstr "Chiamate in Uscita"
+
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+"Cancellare la voce\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+
+#, python-format
+msgid ""
+"Do you really want to overwrite entry for\n"
+"%(number)s\n"
+"\n"
+"%(name)s\n"
+"\n"
+"with\n"
+"\n"
+"%(newname)s?"
+msgstr ""
+"Sovrascrivere la voce\n"
+"%(number)s\n"
+"\n"
+"%(name)s\n"
+"\n"
+"con\n"
+"\n"
+"%(newname)s?"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Edit"
+msgstr "Mod."
+
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+msgid "Edit phonebook entry"
+msgstr "Modificare voce rubrica"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Edit selected entry"
+msgstr "Mod. voce selezionata"
+
+msgid "Enter Search Terms"
+msgstr "Inserire criteri di ricerca"
 
 msgid "FRITZ!Box FON IP address"
 msgstr "Indirizzo IP FRITZ!Box FON"
@@ -111,6 +189,7 @@ msgstr "Flash"
 msgid "France"
 msgstr "Francia"
 
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "FritzCall Setup"
 msgstr "Configurazione FritzCall"
 
@@ -162,6 +241,19 @@ msgstr "Ch. Perse"
 msgid "Missed calls"
 msgstr "Chiamate perse"
 
+msgid "Name"
+msgstr "Nome"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "New"
+msgstr "Nuovo"
+
+msgid "No entry selected"
+msgstr "Nessuna voce selezionata"
+
+msgid "Number"
+msgstr "Numero"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "OK"
 msgstr "OK"
@@ -192,6 +284,7 @@ msgstr "Chiamate in Uscita"
 msgid "Password Accessing FRITZ!Box"
 msgstr "Password di accesso alla FRITZ!Box"
 
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
 msgstr "Ch. Telef."
@@ -199,11 +292,31 @@ msgstr "Ch. Telef."
 msgid "PhoneBook Location"
 msgstr "Posizione Rubrica"
 
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phonebook"
+msgstr "Rubrica"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Quit"
+msgstr "Uscire"
+
 msgid "Read PhoneBook from FRITZ!Box"
 msgstr "Caricare la Rubrica dalla FRITZ!Box"
 
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Identificativo Chiamante (Selezionare il Paese!)"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Search"
+msgstr "Ricerca"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Search (case insensitive)"
+msgstr "Ricerca (non distingue Maiusc-minusc)"
+
+msgid "Search phonebook"
+msgstr "Ricerca su rubrica"
 
 msgid "Shortcut"
 msgstr "Numero breve"
@@ -216,6 +329,10 @@ msgstr "Mostrare le chiamate in uscita"
 
 msgid "Show after Standby"
 msgstr "Mostrare chiamate dopo lo Standby"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Show details of entry"
+msgstr "Mostrare dettagli voce"
 
 msgid "Strip Leading 0"
 msgstr "Sopprimere '0' iniziali"
@@ -255,6 +372,14 @@ msgstr ""
 "\n"
 "Potrebbe trattarsi di un problema di comunicazione, riprovare."
 
+#. TRANSLATORS: this is a help text, keep it short
+msgid "display calls"
+msgstr "Tutte le Chiamate"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "display phonebook"
+msgstr "Mostrare rubrica"
+
 msgid "done"
 msgstr "Fatto"
 
@@ -281,6 +406,14 @@ msgstr "Cellulare"
 
 msgid "preparing"
 msgstr "Preparazione in corso"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "quit"
+msgstr "Uscire"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "save and quit"
+msgstr "Salvare e uscire"
 
 msgid "show as list"
 msgstr "Come lista"

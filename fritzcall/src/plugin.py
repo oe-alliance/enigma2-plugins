@@ -4,6 +4,8 @@ from Screens.MessageBox import MessageBox
 from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
 from Screens.InputBox import InputBox
 from Screens import Standby
+from Screens.HelpMenu import HelpableScreen
+
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT
 
 from Components.MenuList import MenuList
@@ -441,7 +443,7 @@ class FritzCallFBF:
 
 fritzbox = FritzCallFBF()
 
-class FritzDisplayCalls(Screen):
+class FritzDisplayCalls(Screen, HelpableScreen):
 
 	# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 	skin = """
@@ -461,6 +463,7 @@ class FritzDisplayCalls(Screen):
 	def __init__(self, session, text = ""):
 		self.skin = FritzDisplayCalls.skin
 		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
 
 		# TRANSLATORS: keep it short, this is a button
 		self["key_red"] = Button(_("All"))
@@ -479,7 +482,20 @@ class FritzDisplayCalls(Screen):
 			"blue": self.displayOutCalls,
 			"cancel": self.ok,
 			"ok": self.showEntry,}, -2)
-		
+
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "OkCancelActions", [("ok", _("Show details of entry"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "OkCancelActions", [("cancel", _("Quit"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "ColorActions", [("red", _("Display all calls"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "ColorActions", [("green", _("Display missed calls"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "ColorActions", [("yellow", _("Display incoming calls"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("Display outgoing calls"))]))
+
 		self["statusbar"] = Label(_("Getting calls from FRITZ!Box..."))
 		self["entries"] = MenuList([], True, content = eListboxPythonMultiContent)
 		self["entries"].l.setFont(0, gFont("Console", 16))
@@ -575,11 +591,12 @@ class FritzCallPhonebook:
 			f.close()
 			return True
 		except IOError:
+			Notifications.AddNotification(MessageBox, _("Can't create PhoneBook.txt"), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 			return False
 
 	def reload(self):
 		print "[FritzCallPhonebook] reload"
-		self.phonebook.clear()
+		self.phonebook = {}
 
 		if not config.plugins.FritzCall.enable.value:
 			return
@@ -660,7 +677,7 @@ class FritzCallPhonebook:
 					pass
 		return False
 
-	class displayPhonebook(Screen, NumericalTextInput):
+	class displayPhonebook(Screen, HelpableScreen, NumericalTextInput):
 		# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 		skin = """
 			<screen name="FritzDisplayPhonebook" position="100,90" size="570,420" title="%s" >
@@ -678,6 +695,7 @@ class FritzCallPhonebook:
 		def __init__(self, session):
 			Screen.__init__(self, session)
 			NumericalTextInput.__init__(self)
+			HelpableScreen.__init__(self)
 		
 			# TRANSLATORS: keep it short, this is a button
 			self["key_red"] = Button(_("Delete"))
@@ -697,6 +715,19 @@ class FritzCallPhonebook:
 				"cancel": self.exit,
 				"ok": self.showEntry,}, -2)
 
+			# TRANSLATORS: this is a help text, keep it short
+			self.helpList.append((self["setupActions"], "OkCancelActions", [("ok", _("Show details of entry"))]))
+			# TRANSLATORS: this is a help text, keep it short
+			self.helpList.append((self["setupActions"], "OkCancelActions", [("cancel", _("Quit"))]))
+			# TRANSLATORS: this is a help text, keep it short
+			self.helpList.append((self["setupActions"], "ColorActions", [("red", _("Delete entry"))]))
+			# TRANSLATORS: this is a help text, keep it short
+			self.helpList.append((self["setupActions"], "ColorActions", [("green", _("Add entry to phonebook"))]))
+			# TRANSLATORS: this is a help text, keep it short
+			self.helpList.append((self["setupActions"], "ColorActions", [("yellow", _("Edit selected entry"))]))
+			# TRANSLATORS: this is a help text, keep it short
+			self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("Search (case insensitive)"))]))
+
 			self["entries"] = MenuList([], True, content = eListboxPythonMultiContent)
 			self["entries"].l.setFont(0, gFont("Console", 16))
 			self["entries"].l.setItemHeight(20)
@@ -708,6 +739,8 @@ class FritzCallPhonebook:
 			self.sortlist = []
 			sortlistHelp = sorted((name.lower(), name, number) for (number, name) in phonebook.phonebook.iteritems())
 			for (low, name, number) in sortlistHelp:
+				if number == "01234567890":
+					continue
 				low = low.decode("utf-8")
 				if filter:
 					filter = filter.lower()
@@ -809,6 +842,8 @@ class FritzCallPhonebook:
 
 					self.list = [ ]
 					ConfigListScreen.__init__(self, self.list, session = session)
+					config.plugins.FritzCall.name.value = ""
+					config.plugins.FritzCall.number.value = ""
 					self.list.append(getConfigListEntry(_("Name"), config.plugins.FritzCall.name))
 					self.list.append(getConfigListEntry(_("Number"), config.plugins.FritzCall.number))
 					self["config"].list = self.list
@@ -818,29 +853,30 @@ class FritzCallPhonebook:
 				def add(self):
 					# get texts from Screen
 					# add (number,name) to sortlist and phonebook.phonebook and disk
-					number = config.plugins.FritzCall.number.value
-					name = config.plugins.FritzCall.name.value
+					self.number = config.plugins.FritzCall.number.value
+					self.name = config.plugins.FritzCall.name.value
 					# add (number,name) to sortlist and phonebook.phonebook and disk
-					if phonebook.phonebook.has_key(self.newnumber):
+					oldname = phonebook.search(self.number)
+					if oldname:
 						self.session.openWithCallback(
 							self.overwriteConfirmed,
 							MessageBox,
 							_("Do you really want to overwrite entry for\n%(number)s\n\n%(name)s\n\nwith\n\n%(newname)s?")
 							% {
-							'number':number,
-							'name':phonebook.search(number).replace(", ","\n"),
-							'newname': name
+							'number':self.number,
+							'name': oldname,
+							'newname':self.name.replace(", ","\n")
 							}
 							)
 						self.close()
 						return
-					phonebook.add(number, name)
+					phonebook.add(self.number, self.name)
 					self.close()
 					self.parent.display()
 
 				def overwriteConfirmed(self, ret):
 					if ret:
-						phonebook.add(self.newnumber, self.newname)
+						phonebook.add(self.number, self.name)
 						self.parent.display()
 					self.close()
 
@@ -873,10 +909,6 @@ class FritzCallPhonebook:
 					Screen.__init__(self, session)
 					self.session = session
 					self.parent = parent
-					config.plugins.FritzCall.name.value = name
-					config.plugins.FritzCall.number.value = number
-					self.name = name
-					self.number = number
 					# TRANSLATORS: keep it short, this is a button
 					self["key_red"] = Button(_("Cancel"))
 					# TRANSLATORS: keep it short, this is a button
@@ -892,6 +924,10 @@ class FritzCallPhonebook:
 					self.list = [ ]
 					ConfigListScreen.__init__(self, self.list, session = session)
 					# config.plugins.FritzCall.name.value = config.plugins.FritzCall.name.value.replace(", ","\n")
+					self.name = name
+					self.number = number
+					config.plugins.FritzCall.name.value = name
+					config.plugins.FritzCall.number.value = number
 					self.list.append(getConfigListEntry(_("Name"), config.plugins.FritzCall.name))
 					self.list.append(getConfigListEntry(_("Number"), config.plugins.FritzCall.number))
 					self["config"].list = self.list
@@ -900,10 +936,10 @@ class FritzCallPhonebook:
 
 				def edit(self):
 					print "[FritzCallPhonebook] displayPhonebook/edit: add (%s,%s)" %(config.plugins.FritzCall.number.value,config.plugins.FritzCall.name.value)
-					self.newnumber = config.plugins.FritzCall.number.value.replace("\n",", ")
-					self.newname = config.plugins.FritzCall.name.value
+					self.newname = config.plugins.FritzCall.name.value.replace("\n",", ")
+					self.newnumber = config.plugins.FritzCall.number.value
 					if self.number != self.newnumber:
-						if phonebook.phonebook.has_key(self.newnumber):
+						if phonebook.search(self.newnumber):
 							self.session.openWithCallback(
 								self.overwriteConfirmed,
 								MessageBox,
@@ -918,13 +954,13 @@ class FritzCallPhonebook:
 							return
 						else:
 							phonebook.remove(self.number)
-					phonebook.add(self.newnumber, self.newname, force = True)
+					phonebook.add(self.newnumber, self.newname)
 					self.close()
 					self.parent.display()
 
 				def overwriteConfirmed(self, ret):
 					if ret:
-						phonebook.add(self.newnumber, self.newname, force = True)
+						phonebook.add(self.newnumber, self.newname)
 						self.parent.display()
 					self.close()
 						
@@ -962,7 +998,7 @@ class FritzCallPhonebook:
 phonebook = FritzCallPhonebook()
 
 
-class FritzCallSetup(ConfigListScreen, Screen):
+class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 	# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 	skin = """
 		<screen position="100,90" size="570,420" title="%s" >
@@ -981,6 +1017,7 @@ class FritzCallSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 
 		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
 		self.session = session
 
 		self["consideration"] = Label(_("You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"))
@@ -998,14 +1035,29 @@ class FritzCallSetup(ConfigListScreen, Screen):
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
-			"cancel": self.cancel,
-			"red": self.cancel,	# not strictly needed, better for clarity
-			"save": self.save,
-			"green": self.save,	# not strictly needed, better for clarity
+			"red": self.cancel,
+			"green": self.save,
 			"yellow": self.displayCalls,
 			"blue": self.displayPhonebook,
+			"cancel": self.cancel,
+			"save": self.save,
 			"ok": self.save,
 		}, -2)
+
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "SetupActions", [("ok", _("save and quit"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "SetupActions", [("save", _("save and quit"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "SetupActions", [("cancel", _("quit"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "ColorActions", [("red", _("quit"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "ColorActions", [("green", _("save and quit"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "ColorActions", [("yellow", _("display calls"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("display phonebook"))]))
 
 		ConfigListScreen.__init__(self, self.list, session = session)
 		self.createSetup()
@@ -1064,14 +1116,8 @@ class FritzCallSetup(ConfigListScreen, Screen):
 			x[1].save()
 		if fritz_call is not None:
 			fritz_call.connect()
-
-			if config.plugins.FritzCall.phonebook.value:
-				if not os.path.exists(config.plugins.FritzCall.phonebookLocation.value):
-					if not phonebook.create():
-						Notifications.AddNotification(MessageBox, _("Can't create PhoneBook.txt"), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
-				else:
-					print "[FritzCallSetup] called phonebook.reload()"
-					phonebook.reload()
+			print "[FritzCallSetup] called phonebook.reload()"
+			phonebook.reload()
 
 		self.close()
 
