@@ -795,10 +795,13 @@
 	<country code="+43">
 		<website name="tb-online.at" url="http://www.tb-online.at/index.php?pc=in&amp;telnummer=$NUMBER&amp;aktion=suchein" prefix="0">
 			<entry>
+				<!-- 
+				zipcode hidden as image...
+				-->
 				<name>&lt;div\sclass=&quot;ergebnis&quot;(?:[^&gt;]*&gt;){4}([^&lt;]*)&lt;</name>
-				<street>&lt;div\sclass=&quot;ergebnis&quot;(?:[^&gt;]*&gt;){6,8}([^&lt;]*)&lt;/p&gt;\s+&lt;p&gt;\d{4}</street>
-				<city>&lt;div\sclass=&quot;ergebnis&quot;(?:[^&gt;]*&gt;){8,10}\d{4}&amp;nbsp;([^&lt;]*)&lt;</city>
-				<zipcode>&lt;div\sclass=&quot;ergebnis&quot;(?:[^&gt;]*&gt;){8,10}(\d{4})</zipcode>
+				<street>&lt;div\sclass=&quot;ergebnis&quot;(?:[^&gt;]*&gt;){6,8}([^&lt;]*)&lt;/p&gt;\s+&lt;p&gt;</street>
+				<city>&lt;div\sclass=&quot;ergebnis&quot;(?:[^&gt;]*&gt;){8,10}&amp;nbsp;([^&lt;]*)&lt;</city>
+				<zipcode>()</zipcode>
 			</entry>
 		</website>
 	</country>	
@@ -846,7 +849,7 @@
 		<website name="dasoertliche.de" url="http://dasoertliche.de/?form_name=search_inv&amp;page=RUECKSUCHE&amp;context=RUECKSUCHE&amp;action=STANDARDSUCHE&amp;la=de&amp;rci=no&amp;ph=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>class=&quot;entry&quot;\s*(?:onmouseover=&quot;&quot;)?\s*&gt;([^&lt;]*)&lt;/a&gt;</name>
-	        	<street>^([^,&gt;]*),[^&lt;]*&lt;br/&gt;\s*$</street>
+	        	<street>^\s*([^,&gt;]*),&amp;nbsp;[^&amp;]*[^&lt;]*&lt;br/&gt;</street>
 	        	<city>[^,&gt;]*,&amp;nbsp;[^&amp;]*([^&lt;]*)&lt;br/&gt;</city>
 	        	<zipcode>[^,&gt;]*,&amp;nbsp;([^&amp;]*)[^&lt;]*&lt;br/&gt;</zipcode>
 	        </entry>
