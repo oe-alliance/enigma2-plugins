@@ -88,7 +88,7 @@ def parseEntry(element, baseTimer, defaults = False):
 	# Read out max length
 	maxduration = element.getAttribute("maxduration") or None
 	if maxduration:
-		baseTimer.maxduration = int(maxlen)*60
+		baseTimer.maxduration = int(maxduration)*60
 
 	# Read out recording path
 	baseTimer.destination = element.getAttribute("location").encode("UTF-8") or None
