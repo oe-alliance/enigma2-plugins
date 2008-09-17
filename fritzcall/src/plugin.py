@@ -42,7 +42,8 @@ my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
 config.plugins.FritzCall.enable = ConfigEnableDisable(default = False)
-config.plugins.FritzCall.hostname = ConfigIP(default = [192, 168, 178, 1])
+# config.plugins.FritzCall.hostname = ConfigIP(default = [192, 168, 178, 1])
+config.plugins.FritzCall.hostname = ConfigText(default = "fritz.box", fixed_size = False)
 config.plugins.FritzCall.afterStandby = ConfigSelection(choices = [("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
 config.plugins.FritzCall.filter = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.filtermsn = ConfigText(default = "", fixed_size = False)
@@ -165,10 +166,8 @@ class FritzCallFBF:
 		if config.plugins.FritzCall.password.value != "":
 			if self.callScreen:
 				self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("login"))
-			host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
-			uri =  "/cgi-bin/webcm"
 			parms = "login:command/password=%s" %(config.plugins.FritzCall.password.value)
-			url = "http://%s%s" %(host, uri)
+			url = "http://%s/cgi-bin/webcm" %(config.plugins.FritzCall.hostname.value)
 			getPage(url, method="POST", headers = {'Content-Type': "application/x-www-form-urlencoded",'Content-Length': str(len(parms))}, postdata=parms).addCallback(self._gotPageLogin).addErrback(self.errorLogin)
 		else:
 			self.loginCallback()
@@ -196,10 +195,8 @@ class FritzCallFBF:
 			self.login()
 
 	def _loadFritzBoxPhonebook(self):
-			host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
-			uri = "/cgi-bin/webcm"# % tuple(config.plugins.FritzCall.hostname.value)
 			parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de','var:pagename':'fonbuch','var:menu':'fon'})
-			url = "http://%s%s?%s" %(host, uri, parms)
+			url = "http://%s/cgi-bin/webcm?%s" %(config.plugins.FritzCall.hostname.value, parms)
 
 			getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
 
@@ -377,9 +374,8 @@ class FritzCallFBF:
 		print "[FritzCallFBF] _getCalls"
 		if self.callScreen:
 			self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("preparing"))
-		host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
 		parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de','var:pagename':'foncalls','var:menu':'fon'})
-		url = "http://%s/cgi-bin/webcm?%s" %(host, parms)
+		url = "http://%s/cgi-bin/webcm?%s" %(config.plugins.FritzCall.hostname.value, parms)
 		getPage(url).addCallback(self._getCalls1).addErrback(self.errorCalls)
 
 	def _getCalls1(self, html = ""):
@@ -389,14 +385,14 @@ class FritzCallFBF:
 		print "[FritzCallFBF] _getCalls1"
 		if self.callScreen:
 			self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("finishing"))
-		host = "%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value)
 		parms = urlencode({'getpage':'../html/de/FRITZ!Box_Anrufliste.csv'})
-		url = "http://%s/cgi-bin/webcm?%s" %(host, parms)
+		url = "http://%s/cgi-bin/webcm?%s" %(config.plugins.FritzCall.hostname.value, parms)
 		getPage(url).addCallback(self._gotPageCalls).addErrback(self.errorCalls)
 
 	def dial(self, number):
 		''' initiate a call to number '''
 		#
+		# TODO:
 		# does not work... if anybody wants to make it work, feel free
 		# I not convinced of FBF's style to establish a connection: first get the connection, then ring the local phone?!?!
 		#  
@@ -413,7 +409,7 @@ class FritzCallFBF:
 		# telcfg:settings/UseJournal=1
 		# telcfg:command/Dial=08001235005
 		self.login()
-		url = "http://%s/cgi-bin/webcm" %("%d.%d.%d.%d" %tuple(config.plugins.FritzCall.hostname.value))
+		url = "http://%s/cgi-bin/webcm" %config.plugins.FritzCall.hostname.value
 		parms = urlencode({
 			'getpage':'../html/de/menus/menu2.html',
 			'errorpage':'../html/de/menus/menu2.html',
@@ -564,16 +560,24 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				fullname = phonebook.search(cur[0])
 				if fullname:
 					self.session.open(MessageBox,
-							  cur[0] + "\n\n" + fullname.replace(", ","\n"),
-							  type = MessageBox.TYPE_INFO)
+									cur[0] + "\n\n" + fullname.replace(", ","\n"),
+									type = MessageBox.TYPE_INFO)
 				else:
-					self.session.open(MessageBox,
-							  cur[0],
-							  type = MessageBox.TYPE_INFO)
+					# TODO: offer to add entry to phonebook
+					self.actualNumber = cur[0]
+					self.session.openWithCallback(
+						self.addConfirmed,
+						MessageBox,
+						_("Do you want to add a phonebook entry for\n\n%s?") %cur[0]
+						)
 			else:
 				self.session.open(MessageBox,
 						  _("UNKNOWN"),
 						  type = MessageBox.TYPE_INFO)
+
+	def addConfirmed(self, ret):
+		if ret:
+			phonebook.displayPhonebook(self.session).add(self.actualNumber)
 
 	def updateStatus(self, text):
 		self["statusbar"].setText(text)
@@ -808,7 +812,7 @@ class FritzCallPhonebook:
 			else:
 				self.session.open(MessageBox,_("No entry selected"), MessageBox.TYPE_INFO)
 
-		def add(self):
+		def add(self, number = ""):
 			class addScreen(Screen, ConfigListScreen):
 				'''ConfiglistScreen with two ConfigTexts for Name and Number'''
 				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
@@ -821,7 +825,7 @@ class FritzCallPhonebook:
 					<widget name="key_green" position="285,85" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 					</screen>"""  % _("Add entry to phonebook")
 
-				def __init__(self, session, parent):
+				def __init__(self, session, parent, number = ""):
 					#
 					# setup screen with two ConfigText and OK and ABORT button
 					# 
@@ -843,7 +847,7 @@ class FritzCallPhonebook:
 					self.list = [ ]
 					ConfigListScreen.__init__(self, self.list, session = session)
 					config.plugins.FritzCall.name.value = ""
-					config.plugins.FritzCall.number.value = ""
+					config.plugins.FritzCall.number.value = number
 					self.list.append(getConfigListEntry(_("Name"), config.plugins.FritzCall.name))
 					self.list.append(getConfigListEntry(_("Number"), config.plugins.FritzCall.number))
 					self["config"].list = self.list
@@ -855,6 +859,9 @@ class FritzCallPhonebook:
 					# add (number,name) to sortlist and phonebook.phonebook and disk
 					self.number = config.plugins.FritzCall.number.value
 					self.name = config.plugins.FritzCall.name.value
+					if not self.number or not self.name:
+						self.session.open(MessageBox, _("Entry incomplete."), type = MessageBox.TYPE_ERROR)
+						return
 					# add (number,name) to sortlist and phonebook.phonebook and disk
 					oldname = phonebook.search(self.number)
 					if oldname:
@@ -884,9 +891,9 @@ class FritzCallPhonebook:
 					self.close()
 
 			print "[FritzCallPhonebook] displayPhonebook/add"
+			self.session.open(addScreen, self, number)
 			# self.session.open(MessageBox, "Not yet implemented.", type = MessageBox.TYPE_INFO)
 			# return
-			self.session.open(addScreen, self)
 
 		def edit(self):
 			# Edit selected Timer
@@ -938,6 +945,9 @@ class FritzCallPhonebook:
 					print "[FritzCallPhonebook] displayPhonebook/edit: add (%s,%s)" %(config.plugins.FritzCall.number.value,config.plugins.FritzCall.name.value)
 					self.newname = config.plugins.FritzCall.name.value.replace("\n",", ")
 					self.newnumber = config.plugins.FritzCall.number.value
+					if not self.number or not self.name:
+						self.session.open(MessageBox, _("Entry incomplete."), type = MessageBox.TYPE_ERROR)
+						return
 					if self.number != self.newnumber:
 						if phonebook.search(self.newnumber):
 							self.session.openWithCallback(
@@ -1075,7 +1085,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.list = [ ]
 		self.list.append(getConfigListEntry(_("Call monitoring"), config.plugins.FritzCall.enable))
 		if config.plugins.FritzCall.enable.value:
-			self.list.append(getConfigListEntry(_("FRITZ!Box FON IP address"), config.plugins.FritzCall.hostname))
+			self.list.append(getConfigListEntry(_("FRITZ!Box FON address (Name or IP)"), config.plugins.FritzCall.hostname))
 
 			self.list.append(getConfigListEntry(_("Show after Standby"), config.plugins.FritzCall.afterStandby))
 
@@ -1478,7 +1488,7 @@ class FritzCall:
 		self.abort()
 		if config.plugins.FritzCall.enable.value:
 			f = FritzClientFactory()
-			self.d = (f, reactor.connectTCP("%d.%d.%d.%d" % tuple(config.plugins.FritzCall.hostname.value), 1012, f))
+			self.d = (f, reactor.connectTCP(config.plugins.FritzCall.hostname.value, 1012, f))
 
 	def shutdown(self):
 		self.abort()
