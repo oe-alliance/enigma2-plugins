@@ -90,7 +90,7 @@ def startServerInstance(session,ipadress,port,useauth=False,usessl=False):
 		if useauth:
 			portal = Portal(HTTPAuthRealm())
 			portal.registerChecker(PasswordDatabase())
-			root = ModifiedHTTPAuthResource(toplevel,(basic.BasicCredentialFactory(socket_gethostname()),),portal, (IHTTPUser,))
+			root = wrapper.HTTPAuthResource(toplevel,(basic.BasicCredentialFactory(socket_gethostname()),),portal, (IHTTPUser,))
 			site = server.Site(root)	
 		else:
 			site = server.Site(toplevel)
@@ -132,15 +132,6 @@ def Plugins(**kwargs):
 		    PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),where = [PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png",fnc = openconfig)]
 	
 	
-class ModifiedHTTPAuthResource(wrapper.HTTPAuthResource):
-	"""
-		set it only to True, if you have a patched wrapper.py
-		see http://twistedmatrix.com/trac/ticket/2041
-		so, the solution for us is to make a new class an override ne faulty func
-	"""
-
-	def locateChild(self, req, seg):
-		return self.authenticate(req), seg
 	
 class PasswordDatabase:
     """
@@ -167,12 +158,15 @@ class IHTTPUser(Interface):
 
 class HTTPUser(object):
 	implements(IHTTPUser)
+	username = None
+	def __init__(self,username):
+		self.username = username
 
 class HTTPAuthRealm(object):
 	implements(IRealm)
 	def requestAvatar(self, avatarId, mind, *interfaces):
 		if IHTTPUser in interfaces:
-			return IHTTPUser, HTTPUser()
+			return IHTTPUser, HTTPUser(avatarId)
 		raise NotImplementedError("Only IHTTPUser interface is supported")
 
 
