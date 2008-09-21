@@ -23,7 +23,7 @@ DEBUGFILE= "/tmp/twisted.log"
 global running_defered,waiting_shutdown
 running_defered = []
 waiting_shutdown = 0
-server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revision$","")
+server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revi","").replace("sion: ","").replace("$","")
 
 class Closer:
 	counter = 0
