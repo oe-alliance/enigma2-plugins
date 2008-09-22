@@ -15,7 +15,7 @@ import posixpath
 from sys import maxint
 from random import randint, seed
 from urllib import urlencode
-from urllib import urlopen
+from urllib2 import urlopen
 from xml.dom.minidom import parse
 from VlcPlayer import VlcPlayer, isDvdUrl
 
