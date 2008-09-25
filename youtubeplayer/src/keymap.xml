@@ -1,0 +1,109 @@
+<keymap>
+<!--
+"m" kommt einmal sobald die taste gedrueckt wurde.
+"r" kommt dann nach "m" wenn man die taste feshaelt.. und das solange bis man die taste loslaesst,
+"l" kommt nachdem 5 repeats kamen..aber nur exakt einmal (repeat kommt dann trotzdem weiter..)
+"b" kommt nachdem man die taste losgelassen hat.
+
+Wenn man nun also ein Fenster mit "m" oeffnet.. dann kann man im selben context r, l, b nicht mehr benutzen.
+Deshalb muss man dann halt das Fenster erst auf "b" oeffnen..
+-->
+	<map context = "YouTubeAddPlaylistActions">
+		<key id = "KEY_GREEN"	mapto = "save"		flags = "m" />
+		<key id = "KEY_RED" 	mapto = "cancel"	flags = "m" />
+		<key id = "KEY_EXIT"	mapto = "cancel"	flags = "m" />
+		<key id = "KEY_ESC"		mapto = "cancel"	flags = "m" />
+	</map>
+
+	<map context = "YouTubeVideoDetailsScreenActions">
+		<key id = "KEY_LEFT"	mapto = "left"		flags = "mr" />
+		<key id = "KEY_RIGHT"	mapto = "right"		flags = "mr" />
+		<key id = "KEY_UP"		mapto = "up"		flags = "mr" />
+		<key id = "KEY_DOWN"	mapto = "down"		flags = "mr" />
+		
+		<key id = "KEY_OK"		mapto = "ok"		flags = "m" />
+		<key id = "KEY_EXIT"	mapto = "cancel"	flags = "m" />
+		
+		<key id = "KEY_ENTER"	mapto = "ok"		flags = "m" />
+		<key id = "KEY_ESC"		mapto = "cancel"	flags = "m" />
+	</map>
+
+	<map context = "YouTubeVideoListActions">
+		<key id = "KEY_OK"		mapto = "play"		flags = "m" />
+		<key id = "KEY_ENTER"	mapto = "play" 		flags = "m" />
+		
+		<key id = "KEY_RED"		mapto = "select"	flags = "m" />
+		<key id = "KEY_GREEN" 	mapto = "search"	flags = "m" />
+
+		<key id = "KEY_MENU"	mapto = "menu"		flags = "m" />
+		
+		<key id = "KEY_CHANNELUP" 	mapto = "forward"	flags = "m" />
+		<key id = "KEY_CHANNELDOWN"	mapto = "backward"	flags = "m" />
+		
+		<key id = "KEY_LEFT"	mapto = "left"		flags = "mr" />
+		<key id = "KEY_RIGHT"	mapto = "right"		flags = "mr" />
+		<key id = "KEY_UP"		mapto = "up"		flags = "mr" />
+		<key id = "KEY_DOWN"	mapto = "down"		flags = "mr" />
+
+		<key id = "KEY_INFO"	mapto = "info"		flags = "m" />
+		
+		<key id = "KEY_EXIT"	mapto = "cancel"	flags = "m" />
+		<key id = "KEY_ESC"		mapto = "cancel"	flags = "m" />
+	</map>
+
+	<map context = "YouTubePlayerScreenActions">
+		<key id = "KEY_MENU"	mapto = "menu"		flags = "m" />
+		<key id = "KEY_INFO"	mapto = "info"		flags = "m" />
+	</map>
+	
+	<map context = "YouTubePlaylistScreenActions">
+		<key id = "KEY_OK"		mapto = "ok"		flags = "m" />
+		<key id = "KEY_EXIT"	mapto = "cancel"	flags = "m" />
+		
+		<key id = "KEY_ENTER"	mapto = "ok"		flags = "m" />
+		<key id = "KEY_ESC"		mapto = "cancel"	flags = "m" />
+		
+		<key id = "KEY_GREEN"	mapto = "add"		flags = "m" />
+		<key id = "KEY_RED" 	mapto = "delete"	flags = "m" />
+	</map>
+
+	<map context = "YouTubeSearchDialogActions">
+		<key id = "KEY_RED"		mapto = "standard"	flags = "m" />
+		<key id = "KEY_GREEN"	mapto = "search"	flags = "m" />
+		<key id = "KEY_BLUE"	mapto = "favorites"	flags = "m" />
+		<key id = "KEY_YELLOW"	mapto = "playlists"	flags = "m" />
+		
+		<key id = "KEY_ESC"		mapto = "cancel"	flags = "m" />
+		<key id = "KEY_EXIT"	mapto = "cancel"	flags = "m" />
+		
+		<key id = "KEY_LEFT"	mapto = "left"		flags = "mr" />
+		<key id = "KEY_RIGHT"	mapto = "right"		flags = "mr" />
+		<key id = "KEY_UP"		mapto = "up"		flags = "mr" />
+		<key id = "KEY_DOWN"	mapto = "down"		flags = "mr" />
+	</map>
+
+	<map context = "YouTubeUserConfigScreenActions">
+		<key id = "KEY_GREEN"	mapto = "save"		flags = "m" />
+		<key id = "KEY_RED"		mapto = "cancel"	flags = "m" />
+		<key id = "KEY_EXIT"	mapto = "cancel"	flags = "m" />
+		<key id = "KEY_ESC"		mapto = "cancel"	flags = "m" />
+	</map>
+
+	<map context = "YouTubeUserListScreenActions">
+		<key id = "KEY_RED"		mapto = "delete"	flags = "m" />
+		<key id = "KEY_GREEN"	mapto = "add"		flags = "m" />
+		<key id = "KEY_BLUE"	mapto = "default"	flags = "m" />
+		<key id = "KEY_YELLOW"	mapto = "edit"		flags = "m" />
+		
+		<key id = "KEY_OK"		mapto = "ok"		flags = "m" />
+		<key id = "KEY_EXIT"	mapto = "cancel"	flags = "m" />
+		
+		<key id = "KEY_ENTER"	mapto = "ok"		flags = "m" />
+		<key id = "KEY_ESC"		mapto = "cancel"	flags = "m" />
+		
+		<key id = "KEY_LEFT"	mapto = "left"		flags = "mr" />
+		<key id = "KEY_RIGHT"	mapto = "right"		flags = "mr" />
+		<key id = "KEY_UP"		mapto = "up"		flags = "mr" />
+		<key id = "KEY_DOWN"	mapto = "down"		flags = "mr" />
+	</map>
+</keymap>

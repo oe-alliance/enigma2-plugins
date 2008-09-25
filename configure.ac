@@ -135,4 +135,8 @@ cdinfo/src/Makefile
 unwetterzentrale/Makefile
 unwetterzentrale/src/Makefile
 
+youtubeplayer/Makefile
+youtubeplayer/src/Makefile
+youtubeplayer/src/Nemesis.GlassLine_Mod/Makefile
+
 ])
