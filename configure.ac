@@ -139,4 +139,7 @@ youtubeplayer/Makefile
 youtubeplayer/src/Makefile
 youtubeplayer/src/Nemesis.GlassLine_Mod/Makefile
 
+zaphistorybrowser/Makefile
+zaphistorybrowser/src/Makefile
+
 ])
