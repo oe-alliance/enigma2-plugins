@@ -158,7 +158,10 @@ class YouTubeEntry():
 
 	def getYouTubeId(self):
 		print "[YTB] YouTubeEntry::getYouTubeId()"
-		return self.entry.media.player.url.split("=").pop()
+		ret = None
+		if self.entry.media.player:
+			ret = self.entry.media.player.url.split("=").pop()
+		return ret
 
 
 	def getTitle(self):
