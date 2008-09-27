@@ -142,4 +142,7 @@ youtubeplayer/src/Nemesis.GlassLine_Mod/Makefile
 zaphistorybrowser/Makefile
 zaphistorybrowser/src/Makefile
 
+passwordchanger/Makefile
+passwordchanger/src/Makefile
+
 ])
