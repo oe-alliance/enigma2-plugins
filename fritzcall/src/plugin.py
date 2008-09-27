@@ -1177,18 +1177,23 @@ class FritzCallList:
 				direction = "->"
 			else:
 				direction = "<-"
+
+			# shorten the date info
 			found = re.match(".*(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
 			if found: date = found.group(1) + found.group(2)
+
+			# our phone could be of the form "0123456789 (home)", then we only take "home"
 			found = re.match(".*\((.*)\)", phone)
 			if found: phone = found.group(1)
-			# if len(phone) > 20: phone = phone[:20]
 
+			#  if we have an unknown number, show the number
 			if caller == _("UNKNOWN") and number != "":
 				caller = number
 			else:
+				# strip off the address part of the remote number, if there is any
 				found = re.match("(.*)\n.*", caller)
 				if found: caller = found.group(1)
-			# if len(caller) > 20: caller = caller[:20]
+
 			while (len(caller) + len(phone)) > 40:
 				if len(caller) > len(phone):
 					caller = caller[:-1]

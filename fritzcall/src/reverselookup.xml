@@ -849,9 +849,9 @@
 		<website name="dasoertliche.de" url="http://dasoertliche.de/?form_name=search_inv&amp;page=RUECKSUCHE&amp;context=RUECKSUCHE&amp;action=STANDARDSUCHE&amp;la=de&amp;rci=no&amp;ph=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>class=&quot;entry&quot;\s*(?:onmouseover=&quot;&quot;)?\s*&gt;([^&lt;]*)&lt;/a&gt;</name>
-	        	<street>^\s*([^,&gt;]*),&amp;nbsp;[^&amp;]*[^&lt;]*&lt;br/&gt;</street>
-	        	<city>[^,&gt;]*,&amp;nbsp;[^&amp;]*([^&lt;]*)&lt;br/&gt;</city>
-	        	<zipcode>[^,&gt;]*,&amp;nbsp;([^&amp;]*)[^&lt;]*&lt;br/&gt;</zipcode>
+	        	<street>^\s*([^,]*),&amp;nbsp;\d{5}&amp;nbsp;[^&lt;]*&lt;br/&gt;</street>
+	        	<city>^[^,]*,&amp;nbsp;\d{5}&amp;nbsp;([^&lt;]*)&lt;br/&gt;</city>
+	        	<zipcode>^[^,]*,&amp;nbsp;(\d{5})&amp;nbsp;[^&lt;]*&lt;br/&gt;</zipcode>
 	        </entry>
 		</website>
 		<website name="dastelefonbuch.de" url="http://www.dastelefonbuch.de/?sourceid=Mozilla-search&amp;cmd=search&amp;kw=$NUMBER" prefix="0">
@@ -862,7 +862,7 @@
 				<zipcode>&lt;td class=&quot;col3&quot;&gt;(\d{5})</zipcode>
 			</entry>
 		</website>
-		<website name="www.klicktel.de" url="http://www.klicktel.de/telefonbuch/backwardssearch.html?newSearch=1&amp;boxtype=backwards&amp;vollstaendig=$NUMBER" prefix="0">
+		<website name="www.klicktel.de" url="http://www.klicktel.de/inverssuche/backwardssearch.html?newSearch=1&amp;boxtype=backwards&amp;vollstaendig=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>class=&quot;title&quot;&gt;([^&lt;]+)&lt;/span&gt;</name>
 	        	<street>class=&quot;location&quot;&gt;([^&lt;]+)&lt;br /&gt;\d{5}\s+[^&lt;]+&lt;/span&gt;</street>
