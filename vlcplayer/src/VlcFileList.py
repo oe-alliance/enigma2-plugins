@@ -31,6 +31,7 @@ MEDIA_EXTENSIONS = {
 		"wmv": "movie",
 		"mov": "movie",
 		"iso": "movie",
+		"mkv": "movie",
 		"flv": "movie"
 	}
 
