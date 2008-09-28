@@ -148,4 +148,7 @@ passwordchanger/src/Makefile
 autoresolution/Makefile
 autoresolution/src/Makefile
 
+mosaic/Makefile
+mosaic/src/Makefile
+
 ])

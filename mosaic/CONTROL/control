@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-mosaic
+Version: 0.1-r0
+Description: Shows you screenshots of the services in the current bouquet
+Architecture: all
+Section: extra
+Priority: optional
+Maintainer: Nabil Hanna <nabil1978@web.de>
+Homepage: http://code.google.com/p/enigma2
+Depends: enigma2
+Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
