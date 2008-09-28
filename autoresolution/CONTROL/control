@@ -1,0 +1,10 @@
+Package: enigma2-plugin-systemplugins-autoresolution
+Version: 0.8-20080928-r0
+Description: Automatically change resolution 
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: domino <dom.nehls@web.de>
+Homepage: n/a
+Depends: enigma2(>=2.5cvs20080928)
+Source: http://schwerkraft.elitedvb.net/scm/?group_id=11

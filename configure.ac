@@ -145,4 +145,7 @@ zaphistorybrowser/src/Makefile
 passwordchanger/Makefile
 passwordchanger/src/Makefile
 
+autoresolution/Makefile
+autoresolution/src/Makefile
+
 ])
