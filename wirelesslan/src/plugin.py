@@ -22,6 +22,7 @@ list.append(_("WPA"))
 list.append(_("WPA2"))
 
 config.plugins.wlan = ConfigSubsection()
+config.plugins.wlan.essidscan = NoSave(ConfigYesNo(default = False))
 config.plugins.wlan.essid = NoSave(ConfigText(default = "home", fixed_size = False))
 
 config.plugins.wlan.encryption = ConfigSubsection()
@@ -163,7 +164,7 @@ class WlanScan(Screen):
 	
 		Screen.__init__(self, session)
 		self.session = session
-
+		self.iface = iface
 		self.skin = WlanScan.skin
 		self.skin_path = plugin_path 
 		
@@ -171,7 +172,7 @@ class WlanScan(Screen):
 		self["info"] = Label()
 		
 		self.list = []	
-		self["list"] = WlanList(self.session, iface)
+		self["list"] = WlanList(self.session, self.iface)
 		
 		self.setInfo()
 
@@ -223,7 +224,7 @@ class WlanScan(Screen):
 		length = self["list"].getLength()
 		
 		if length == 0:
-			length = "No" 
+			length = _("No") 
 		self["info"].setText(str(length)+_(" Wireless Network(s) found!"))	
 
 
@@ -248,10 +249,10 @@ def configStrings(iface):
 	if driver == 'ralink':
 		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dralink\n	post-down wpa_cli terminate"
 	if driver == 'madwifi':
-		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dmadwifi\n	post-down wpa_cli terminate"
+		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -dd -Dmadwifi\n	post-down wpa_cli terminate"
 	if driver == 'zydas':
 		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dzydas\n	post-down wpa_cli terminate"
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "menuEntryName": lambda x: "Wireless Network Configuartion..."})
+	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "WlanPluginEntry": lambda x: "Wireless Network Configuartion..."})
 	

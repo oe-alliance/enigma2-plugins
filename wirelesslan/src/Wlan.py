@@ -17,6 +17,7 @@ list.append(_("WPA"))
 list.append(_("WPA2"))
 
 config.plugins.wlan = ConfigSubsection()
+config.plugins.wlan.essidscan = NoSave(ConfigYesNo(default = True))
 config.plugins.wlan.essid = NoSave(ConfigText(default = "home", fixed_size = False))
 
 config.plugins.wlan.encryption = ConfigSubsection()
@@ -55,13 +56,13 @@ class Wlan:
 	
 	def getNetworkList(self):
 		ifobj = Wireless(self.iface) # a Wireless NIC Object
+		system("ifconfig "+self.iface+" up")
 		print "ifobj.getStatistics(): ", ifobj.getStatistics()
 		
 		#Association mappings
 		stats, quality, discard, missed_beacon = ifobj.getStatistics()
 		snr = quality.signallevel - quality.noiselevel
-		system("ifconfig "+self.iface+" up")
-		
+
 		try:
 			scanresults = ifobj.scan()
 		except:
@@ -127,14 +128,18 @@ class Wlan:
 	def getStatus(self):
 		ifobj = Wireless(self.iface)
 		fq = Iwfreq()
-		
+		try:
+			self.channel = str(fq.getChannel(str(ifobj.getFrequency()[0:-3])))
+		except:
+			self.channel = 0
 		status = {
 				  'BSSID': str(ifobj.getAPaddr()),
 				  'ESSID': str(ifobj.getEssid()),
 				  'quality': str(ifobj.getStatistics()[1].quality),
 				  'signal': str(ifobj.getStatistics()[1].sl),
 				  'bitrate': str(ifobj.getBitrate()),
-				  'channel': str(fq.getChannel(str(ifobj.getFrequency()[0:-3]))),
+				  'channel': str(self.channel),
+				  #'channel': str(fq.getChannel(str(ifobj.getFrequency()[0:-3]))),
 		}
 		
 		for (key, item) in status.items():
@@ -163,7 +168,6 @@ class WlanList(HTMLComponent, GUIComponent):
 		self.l.setBuildFunc(self.buildWlanListEntry)		
 				
 		self.reload()
-	
 	
 	def buildWlanListEntry(self, essid, bssid, encrypted, iface, maxrate, signal):                                                                                                 
 		
@@ -226,6 +230,7 @@ class wpaSupplicant:
 		
 	def writeConfig(self):	
 			
+			essidscan = config.plugins.wlan.essidscan.value
 			essid = config.plugins.wlan.essid.value
 			encrypted = config.plugins.wlan.encryption.enabled.value
 			encryption = config.plugins.wlan.encryption.type.value
@@ -233,7 +238,11 @@ class wpaSupplicant:
 
 
 			fp = file('/etc/wpa_supplicant.conf', 'w')
-			fp.write('#WPA Supplicant Configuration by enigma2\n\n')
+			fp.write('#WPA Supplicant Configuration by enigma2\n')
+			if essidscan:
+				fp.write('#essidscan=automatic\n\n')
+			else:
+				fp.write('#essidscan=manual\n\n')
 			fp.write('ctrl_interface=/var/run/wpa_supplicant\n')
 			fp.write('ctrl_interface_group=0\n')
 			fp.write('eapol_version=1\n')
@@ -277,6 +286,12 @@ class wpaSupplicant:
 
 			for s in supplicant:
 				split = s.strip().split('=',1)
+				if split[0] == '#essidscan':
+					print "[Wlan.py] Got SSID Scan Value "+split[1]#[1:-1]
+					if split[1] == "automatic":
+						config.plugins.wlan.essidscan.value = True
+					if split[1] == "manual":
+						config.plugins.wlan.essidscan.value = False
 				if split[0] == 'ssid':
 					print "[Wlan.py] Got SSID "+split[1][1:-1]
 					config.plugins.wlan.essid.value = split[1][1:-1]
@@ -300,6 +315,7 @@ class wpaSupplicant:
 					pass
 				
 			wsconfig = {
+					'ssidscan': config.plugins.wlan.essidscan.value,
 					'ssid': config.plugins.wlan.essid.value,
 					'encryption': config.plugins.wlan.encryption.enabled.value,
 					'encryption_type': config.plugins.wlan.encryption.type.value,
@@ -308,6 +324,8 @@ class wpaSupplicant:
 		
 			for (key, item) in wsconfig.items():
 				if item is "None" or item is "":
+					if key == 'ssidscan':
+						wsconfig['ssidscan'] = True
 					if key == 'ssid':
 						wsconfig['ssid'] = "home"
 					if key == 'encryption':
@@ -320,6 +338,7 @@ class wpaSupplicant:
 		except:
 			print "[Wlan.py] Error parsing /etc/wpa_supplicant.conf"
 			wsconfig = {
+					'ssidscan': True,
 					'ssid': "home",
 					'encryption': False,
 					'encryption_type': "WPA",

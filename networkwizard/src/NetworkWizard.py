@@ -21,6 +21,7 @@ list.append(_("WPA"))
 list.append(_("WPA2"))
 
 config.plugins.wlan = ConfigSubsection()
+config.plugins.wlan.essidscan = NoSave(ConfigYesNo(default = True))
 config.plugins.wlan.essid = NoSave(ConfigText(default = "home", fixed_size = False))
 config.plugins.wlan.encryption = ConfigSubsection()
 config.plugins.wlan.encryption.enabled = NoSave(ConfigYesNo(default = False))
@@ -121,7 +122,9 @@ class NetworkWizard(WizardPluginLanguage, Rc):
 					if a['active']:
 						if a['essid'] == "":
 							a['essid'] = a['bssid']
-						list.append( (a['essid'], a['essid']) )		
+						list.append( (a['essid'], a['essid']) )
+			else:
+				list.append( ( _("No Networks found"),_("unavailable") ) )
 			list.sort(key = lambda x: x[0])
 			return list
 
