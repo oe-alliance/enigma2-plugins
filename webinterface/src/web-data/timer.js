@@ -93,7 +93,8 @@ function incomingTimerList(request){
 					+"\',\'"+timer.getDisabled()+"\')",
 				'loadTimerFormSeconds_FUNCTION': "loadTimerFormSeconds(\'"+timer.getJustplay()+"\',\'"
 					+timer.getTimeBegin()+"\',\'"+timer.getTimeEnd()+"\',\'"+timer.getRepeated()
-					+"\',\'"+timer.getServiceReference()+"\',\'"+quotes2html(timer.getName())
+					+"\',\'"+timer.getServiceReference()+"\',\'"+quotes2html(timer.getServiceName())
+					+"\',\'"+quotes2html(timer.getName())
 					+"\',\'"+quotes2html(timer.getDescription())+"\',\'"+timer.getAfterevent()+"\',1)"
 			};
 			listerHtml += RND(tplTimerListItem, namespace);
