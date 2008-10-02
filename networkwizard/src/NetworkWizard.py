@@ -95,6 +95,7 @@ class NetworkWizard(WizardPluginLanguage, Rc):
 		if iface == 'ath0':
 			iNetwork.resetNetworkConfig('wlan-mpci')
 			self.InterfaceUp('ath0')
+			
 	def InterfaceUp(self,iface):
 		iNetwork.getInterfaces()
 		if iNetwork.getAdapterAttribute(iface, 'up') is True:
@@ -157,7 +158,6 @@ class NetworkWizard(WizardPluginLanguage, Rc):
 		iNetwork.restartNetwork()
 		self.checkNetwork()
 	
-
 	def isWlanPluginInstalled(self):		
 		try:
 			from Plugins.SystemPlugins.WirelessLan.Wlan import Wlan
@@ -165,4 +165,14 @@ class NetworkWizard(WizardPluginLanguage, Rc):
 			self.WlanPluginInstalled = False
 		else:
 			self.WlanPluginInstalled = True
+
+	def AdapterSetupEnd(self, iface):
+		self.iface = iface
+		if iNetwork.getAdapterAttribute(self.iface, "dhcp") is True:
+			self.checkNetwork()
+			self.NextStep = 'checklanstatusend'
+		else:
+			self.NextStep = 'confdns'
+			
+
 

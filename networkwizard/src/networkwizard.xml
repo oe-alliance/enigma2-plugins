@@ -24,7 +24,7 @@ self.currStep = self.getStepWithID(self.NextStep)
 			</code>	
 		</step>
 
-		<step id="nwconfig" nextstep="confdns">
+		<step id="nwconfig">
 			<text value="Please configure your internet connection by filling out the required values.\nWhen you are ready press OK to continue." />
 			<displaytext value="Configure interface" />
 			<config screen="AdapterSetup" module="NetworkSetup" args="self.selectedInterface" type="ConfigList" />
@@ -36,6 +36,10 @@ self.selectKey("DOWN")
 self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
+			<code pos="after">
+self.AdapterSetupEnd(self.selectedInterface)    
+self.currStep = self.getStepWithID(self.NextStep)
+			</code>			
 		</step>
 
 		<step id="confdns" nextstep="checklanstatusend">
