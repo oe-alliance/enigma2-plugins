@@ -11,6 +11,7 @@ from IPKG import IPKGResource
 from PlayService import ServiceplayerResource
 from Uploader import UploadResource
 from Notepad import NotepadResource
+from ServiceListSave import ServiceList
 
 class Toplevel(resource.Resource):
     addSlash = True
@@ -27,7 +28,8 @@ class Toplevel(resource.Resource):
         self.putChild("wap",RedirectorResource("/web/wap/"))# shorten and simplify url to wap-pages
         self.putChild("upload",UploadResource())
         self.putChild("notes",NotepadResource())
-        
+        self.putChild("servicelist",ServiceList(self.session))
+
         if config.plugins.Webinterface.includehdd.value:
             self.putChild("hdd",static.File("/hdd"))
         
