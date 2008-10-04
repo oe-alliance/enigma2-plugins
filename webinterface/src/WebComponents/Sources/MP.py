@@ -81,9 +81,8 @@ class MP( Source):
             matchingPattern = ".*"
         else:
             matchingPattern = param["types"]
-        
-        #__init__(self, directory, showDirectories = True, showFiles = True, matchingPattern = None, useServiceRef = False, isTop = False):
-        filelist = FileList(param["path"], True, True, matchingPattern, useServiceRef, False)
+
+        filelist = FileList(param["path"], showDirectories = True, showFiles = True, matchingPattern = matchingPattern, useServiceRef = useServiceRef, isTop = False)
         list = filelist.getFileList()
         for x in list:
             if useServiceRef == True:
