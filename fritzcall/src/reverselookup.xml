@@ -846,7 +846,7 @@
 		</website>
 	</country>
 	<country code="+49">
-		<website name="dasoertliche.de" url="http://dasoertliche.de/?form_name=search_inv&amp;page=RUECKSUCHE&amp;context=RUECKSUCHE&amp;action=STANDARDSUCHE&amp;la=de&amp;rci=no&amp;ph=$NUMBER" prefix="0">
+		<website name="www.dasoertliche.de" url="http://dasoertliche.de/?form_name=search_inv&amp;page=RUECKSUCHE&amp;context=RUECKSUCHE&amp;action=STANDARDSUCHE&amp;la=de&amp;rci=no&amp;ph=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>class=&quot;entry&quot;\s*(?:onmouseover=&quot;&quot;)?\s*&gt;([^&lt;]*)&lt;/a&gt;</name>
 	        	<street>^\s*([^,]*),&amp;nbsp;\d{5}&amp;nbsp;[^&lt;]*&lt;br/&gt;</street>
@@ -854,7 +854,7 @@
 	        	<zipcode>^[^,]*,&amp;nbsp;(\d{5})&amp;nbsp;[^&lt;]*&lt;br/&gt;</zipcode>
 	        </entry>
 		</website>
-		<website name="dastelefonbuch.de" url="http://www.dastelefonbuch.de/?sourceid=Mozilla-search&amp;cmd=search&amp;kw=$NUMBER" prefix="0">
+		<website name="www.dastelefonbuch.de" url="http://www.dastelefonbuch.de/?sourceid=Mozilla-search&amp;cmd=search&amp;kw=$NUMBER" prefix="0">
 			<entry>
 				<name>&lt;td\sclass=&quot;col1&quot;&gt;[^&gt;]*&gt;([^&lt;]*)&lt;</name>
 				<street>&lt;td\sclass=&quot;col2&quot;&gt;([^&lt;]*)&lt;</street>
@@ -873,17 +873,17 @@
 		<website name="www.goyellow.de" url="http://www.goyellow.de/inverssuche/?TEL=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>&lt;a href=&quot;[^&quot;]*&quot; onClick=&quot;[^&quot;]*&quot; title=&quot;[^&quot;]*&quot;&gt;([^&lt;]*)&lt;/a&gt;</name>
-	        	<street>&lt;p class=&quot;address&quot;&gt;([^&lt;]*)&lt;br /&gt;[\d]* [^&lt;]*&lt;/p&gt;</street>
-	        	<city>&lt;p class=&quot;address&quot;&gt;[^&lt;]*&lt;br /&gt;[\d]* ([^&lt;]*)&lt;/p&gt;</city>
-	        	<zipcode>&lt;p class=&quot;address&quot;&gt;[^&lt;]*&lt;br /&gt;([\d]*) [^&lt;]*&lt;/p&gt;</zipcode>
+		  		<street>&lt;p class=&quot;address&quot;&gt;([^&lt;]*)&lt;br /&gt;[\d]*\s*[^&lt;]*&lt;/p&gt;</street>
+	        	<city>&lt;p class=&quot;address&quot;&gt;[^&lt;]*&lt;br /&gt;[\d]*\s*([^&lt;]*)&lt;/p&gt;</city>
+	        	<zipcode>&lt;p class=&quot;address&quot;&gt;[^&lt;]*&lt;br /&gt;([\d]*)\s*[^&lt;]*&lt;/p&gt;</zipcode>
 	        </entry>
 		</website>
 		<website name="www.11880.com" url="http://www.11880.com/Suche/index.cfm?fuseaction=Suche.rueckwaertssucheresult&amp;init=true&amp;tel=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>&lt;a style=&quot;text-decoration: underline;&quot; href=&quot;[^&quot;]*&quot; onclick=&quot;[^&quot;]*&quot; class=&quot;popup&quot;[^&gt;]*&gt;([^&lt;]*)&lt;/a&gt;</name>
-	        	<street>&lt;div style=&quot;padding-bottom:5px;&quot;&gt;\s*([^,]*), [\d]* [^&lt;]*&lt;br /&gt;</street>
-	        	<city>&lt;div style=&quot;padding-bottom:5px;&quot;&gt;\s*[^,]*, [\d]* ([^&lt;]*)&lt;br /&gt;</city>
-	        	<zipcode>&lt;div style=&quot;padding-bottom:5px;&quot;&gt;\s*[^,]*, ([\d]*) [^&lt;]*&lt;br /&gt;</zipcode>
+	        	<street>(?:&lt;div style=&quot;padding-bottom:5px;&quot;&gt;)?\s*([^,]*), [\d]* [^&lt;]*&lt;br /&gt;</street>
+	        	<city>(?:&lt;div style=&quot;padding-bottom:5px;&quot;&gt;)?\s*[^,]*, [\d]* ([^&lt;]*)&lt;br /&gt;</city>
+	        	<zipcode>(?:&lt;div style=&quot;padding-bottom:5px;&quot;&gt;)?\s*[^,]*, ([\d]*) [^&lt;]*&lt;br /&gt;</zipcode>
 	        </entry>
 		</website>
 	</country>

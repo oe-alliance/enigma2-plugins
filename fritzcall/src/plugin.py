@@ -557,13 +557,13 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		if cur:
 			print "[FritzDisplayCalls] showEntry %s" % (cur[0])
 			if cur[0]:
+				# TODO: offer to call number
 				fullname = phonebook.search(cur[0])
 				if fullname:
 					self.session.open(MessageBox,
 									cur[0] + "\n\n" + fullname.replace(", ","\n"),
 									type = MessageBox.TYPE_INFO)
 				else:
-					# TODO: offer to add entry to phonebook
 					self.actualNumber = cur[0]
 					self.session.openWithCallback(
 						self.addConfirmed,
@@ -1213,6 +1213,7 @@ callList = FritzCallList()
 
 def notifyCall(event, date, number, caller, phone):
 	if Standby.inStandby is None or config.plugins.FritzCall.afterStandby.value == "each":
+		# TODO: mute audio and/or stop tv/video
 		if event == "RING":
 			text = _("Incoming Call on %(date)s from\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nto: %(phone)s") % { 'date':date, 'number':number, 'caller':caller, 'phone':phone }
 		else:
