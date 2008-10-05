@@ -862,6 +862,7 @@
 				<zipcode>&lt;td class=&quot;col3&quot;&gt;(\d{5})</zipcode>
 			</entry>
 		</website>
+<!-- this appears not to be working correctly. Klicktel tries to "guess" numbers by stripping the last digits
 		<website name="www.klicktel.de" url="http://www.klicktel.de/inverssuche/backwardssearch.html?newSearch=1&amp;boxtype=backwards&amp;vollstaendig=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>class=&quot;title&quot;&gt;([^&lt;]+)&lt;/span&gt;</name>
@@ -870,6 +871,7 @@
 	        	<zipcode>class=&quot;location&quot;&gt;[^&lt;]+&lt;br /&gt;(\d{5})\s+[^&lt;]+&lt;/span&gt;</zipcode>
 	        </entry>
 		</website>
+-->
 		<website name="www.goyellow.de" url="http://www.goyellow.de/inverssuche/?TEL=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>&lt;a href=&quot;[^&quot;]*&quot; onClick=&quot;[^&quot;]*&quot; title=&quot;[^&quot;]*&quot;&gt;([^&lt;]*)&lt;/a&gt;</name>
@@ -881,9 +883,9 @@
 		<website name="www.11880.com" url="http://www.11880.com/Suche/index.cfm?fuseaction=Suche.rueckwaertssucheresult&amp;init=true&amp;tel=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>&lt;a style=&quot;text-decoration: underline;&quot; href=&quot;[^&quot;]*&quot; onclick=&quot;[^&quot;]*&quot; class=&quot;popup&quot;[^&gt;]*&gt;([^&lt;]*)&lt;/a&gt;</name>
-	        	<street>(?:&lt;div style=&quot;padding-bottom:5px;&quot;&gt;)?\s*([^,]*), [\d]* [^&lt;]*&lt;br /&gt;</street>
-	        	<city>(?:&lt;div style=&quot;padding-bottom:5px;&quot;&gt;)?\s*[^,]*, [\d]* ([^&lt;]*)&lt;br /&gt;</city>
-	        	<zipcode>(?:&lt;div style=&quot;padding-bottom:5px;&quot;&gt;)?\s*[^,]*, ([\d]*) [^&lt;]*&lt;br /&gt;</zipcode>
+	        	<street>^\s*([^,]*), [\d]{5} [^&lt;]*&lt;br /&gt;</street>
+	        	<city>^\s*[^,]*, [\d]{5} ([^&lt;]*)&lt;br /&gt;</city>
+	        	<zipcode>^\s*[^,]*, ([\d]{5}) [^&lt;]*&lt;br /&gt;</zipcode>
 	        </entry>
 		</website>
 	</country>
