@@ -147,19 +147,35 @@ class __VlcServerConfig():
 		newServerConfigSubsection.name = ConfigText("Server " + str(self.__getServerCount()), False)
 		if newServerConfigSubsection.name.value == newServerConfigSubsection.name.default:
 			newServerConfigSubsection.name.default = ""
-		newServerConfigSubsection.addressType = ConfigSelectionExtended([("FQDN", "FQDN"), ("IP", "IP-Address")], "IP")
-		newServerConfigSubsection.hostip = ConfigMutable({"IP": ConfigIP([192,168,1,1]), "FQDN": ConfigText("fqdname", False)},
-											newServerConfigSubsection.addressType.value)
+		newServerConfigSubsection.addressType = ConfigSelectionExtended(
+				[("FQDN", "FQDN"),
+				 ("IP", "IP-Address")
+				], "IP")
+		newServerConfigSubsection.hostip = ConfigMutable(
+				{"IP": ConfigIP([192,168,1,1]),
+				 "FQDN": ConfigText("fqdname", False)
+				}, newServerConfigSubsection.addressType.value)
 		newServerConfigSubsection.httpport = ConfigInteger(8080, (0,65535))
 		newServerConfigSubsection.basedir = ConfigText("/", False)
 		newServerConfigSubsection.dvdPath = ConfigText("", False)
 		newServerConfigSubsection.transcodeVideo = ConfigYesNo()
 		newServerConfigSubsection.transcodeAudio = ConfigYesNo(True)
-		newServerConfigSubsection.videocodec = ConfigSelection([("mp1v", "MPEG1"), ("mp2v", "MPEG2")], "mp2v")
-		newServerConfigSubsection.videobitrate = ConfigInteger(1000, (100, 9999))
-		newServerConfigSubsection.audiocodec = ConfigSelection([("mpga", "MP1"), ("mp2a", "MP2"), ("mp3", "MP3")], "mp2a")
+		newServerConfigSubsection.videocodec = ConfigSelection(
+				[("mp1v", "MPEG1"),
+				 ("mp2v", "MPEG2")
+				], "mp2v")
+		newServerConfigSubsection.videobitrate = ConfigInteger(2000, (100, 9999))
+		newServerConfigSubsection.audiocodec = ConfigSelection(
+				[("mpga", "MPEG Layer 1 (mpga)"),
+				 ("mp2a", "MPEG Layer 2 (mp2a)"),
+				 ("mp3", "MPEG Layer 3 (mp3)")
+				], "mp2a")
 		newServerConfigSubsection.audiobitrate = ConfigInteger(128, (64, 320))
-		newServerConfigSubsection.samplerate = ConfigSelection([("0", "as Input"), ("44100", "44100"), ("48000", "48000")], "44100")
+		newServerConfigSubsection.samplerate = ConfigSelection(
+				[("32000", "32000"),
+				 ("44100", "44100"),
+				 ("48000", "48000")
+				], "44100")
 		newServerConfigSubsection.audiochannels = ConfigInteger(2, (1, 9))
 		newServerConfigSubsection.videonorm = ConfigSelection(
 				[("720,576,4:3,25,i", "720 x 576 (4:3) @ 25fps (PAL)"),
