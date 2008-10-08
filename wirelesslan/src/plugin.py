@@ -200,14 +200,17 @@ class WlanScan(Screen):
 	def select(self):
 		cur = self["list"].getCurrent()
 		#print "CURRENT",cur
-		if cur[1] is not None:
-			essid = cur[0]
-			if essid == '':
-				essid = cur[1]
-			encrypted = cur[2]
-			self.close(essid,self["list"].getList())
+		if cur is not None:
+			if cur[1] is not None:
+				essid = cur[0]
+				if essid == '':
+					essid = cur[1]
+				encrypted = cur[2]
+				self.close(essid,self["list"].getList())
+			else:
+				self.close(None,None)
 		else:
-			self.close(self["list"].getList())
+			self.close(None,None)
 	
 	def WlanSetupClosed(self, *ret):
 		if ret[0] == 2:
