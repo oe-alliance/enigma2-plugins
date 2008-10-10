@@ -151,4 +151,7 @@ autoresolution/src/Makefile
 mosaic/Makefile
 mosaic/src/Makefile
 
+googlemaps/Makefile
+googlemaps/src/Makefile
+
 ])
