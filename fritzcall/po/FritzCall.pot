@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 12:41+0200\n"
+"POT-Creation-Date: 2008-10-11 11:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,6 +141,13 @@ msgid ""
 "%(newname)s?"
 msgstr ""
 
+#, python-format
+msgid ""
+"Do you want to add a phonebook entry for\n"
+"\n"
+"%s?"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Edit"
 msgstr ""
@@ -156,7 +163,10 @@ msgstr ""
 msgid "Enter Search Terms"
 msgstr ""
 
-msgid "FRITZ!Box FON IP address"
+msgid "Entry incomplete."
+msgstr ""
+
+msgid "FRITZ!Box FON address (Name or IP)"
 msgstr ""
 
 #, python-format

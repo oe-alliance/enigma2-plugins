@@ -12,7 +12,7 @@ from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Button import Button
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigIP, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigIP, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger, ConfigPassword
 from Components.ConfigList import ConfigListScreen
 from Components.ScrollLabel import ScrollLabel
 
@@ -56,7 +56,7 @@ config.plugins.FritzCall.fritzphonebook = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.phonebook = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.addcallers = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.phonebookLocation = ConfigSelection(choices = [("/etc/enigma2/PhoneBook.txt", _("Flash")), ("/media/usb/PhoneBook.txt", _("USB Stick")), ("/media/cf/PhoneBook.txt", _("CF Drive")), ("/media/hdd/PhoneBook.txt", _("Harddisk"))])
-config.plugins.FritzCall.password = ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.password = ConfigPassword(default = "", fixed_size = False)
 config.plugins.FritzCall.showType = ConfigEnableDisable(default = True)
 config.plugins.FritzCall.showShortcut = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.showVanity = ConfigEnableDisable(default = False)
@@ -102,6 +102,7 @@ def html2utf8(in_html):
 			try:
 				entitydict[key] = htmlentitydefs.name2codepoint[name]
 			except KeyError:
+				print "[FritzCallhtml2utf8] KeyError " + key + "/" + name
 				pass
 		entities = htmlentitynumbermask.finditer(in_html)
 		for x in entities:
@@ -110,6 +111,7 @@ def html2utf8(in_html):
 			try:
 				in_html = in_html.replace(key, (unichr(int(codepoint)).encode('utf8', "replace")))
 			except ValueError:
+				print "[FritzCallhtml2utf8] ValueError " + key + "/" + codepoint
 				pass
 	except ImportError:
 		return in_html.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
@@ -1440,12 +1442,22 @@ class FritzProtocol(LineReceiver):
 					self.phone = phone
 
 				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0]=="0":
+					print "[FritzProtocol] lineReceived: strip leading 0"
 					self.number = number[1:]
 				else:
 					self.number = number
+					if self.event == "CALL" and self.number[0] != '0':					  # should only happen for outgoing
+						print "[FritzProtocol] lineReceived: add local prefix"
+						self.number = config.plugins.FritzCall.prefix.value + self.number
 
-				if self.event == "CALL" and self.number[0] != '0':					  # should only happen for outgoing
-					self.number = config.plugins.FritzCall.prefix.value + self.number
+				# check, whether we are in Germany and number has call-by-call prefix. If so strip it
+				if self.event == "CALL" and config.plugins.FritzCall.country.value == '0049':
+					if re.match('^0100\d\d', self.number):
+						print "[FritzProtocol] lineReceived: strip CbC 0100.. prefix"
+						self.number = self.number[6:]
+					elif re.match('^010\d\d', self.number):
+						print "[FritzProtocol] lineReceived: strip CbC 010.. prefix"
+						self.number = self.number[5:]
 
 				if self.number is not "":
 					print "[FritzProtocol] lineReceived phonebook.search: %s" %self.number
