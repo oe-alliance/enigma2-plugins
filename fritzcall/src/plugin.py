@@ -111,7 +111,7 @@ def html2utf8(in_html):
 			try:
 				in_html = in_html.replace(key, (unichr(int(codepoint)).encode('utf8', "replace")))
 			except ValueError:
-				print "[FritzCallhtml2utf8] ValueError " + key + "/" + codepoint
+				print "[FritzCallhtml2utf8] ValueError " + key + "/" + str(codepoint)
 				pass
 	except ImportError:
 		return in_html.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
