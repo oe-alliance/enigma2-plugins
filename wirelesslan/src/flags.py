@@ -1,4 +1,4 @@
-# -*- coding: latin1 -*-
+# -*- coding: ISO-8859-1 -*-
 # python-wifi -- a wireless library to access wireless cards via python
 # Copyright (C) 2004, 2005, 2006 Róman Joost
 #
