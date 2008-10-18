@@ -28,6 +28,7 @@ from os import remove as os_remove, mkdir as os_mkdir
 from os.path import isdir as os_path_isdir, isfile as os_isfile
 
 from Components.AVSwitch import AVSwitch
+from Components.config import config
 
 def getAspect():
     val = AVSwitch().getAspectRatioSetting()
@@ -84,7 +85,8 @@ class WebPixmap(Pixmap):
     def onLoadFinished(self,result):
         self.setPixmapFromFile(self.tmpfile)
         if os_isfile(self.tmpfile):
-            os_remove(self.tmpfile)
+            if config.plugins.GoogleMaps.cache_enabled.value is not True:
+                os_remove(self.tmpfile)
         
     def onLoadFailed(self,error):
         print "WebPixmap:onLoadFAILED",error
