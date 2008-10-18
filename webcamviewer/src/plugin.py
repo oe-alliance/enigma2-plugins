@@ -13,7 +13,7 @@ from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.FileList import EXTENSIONS
 ## configmenu
-from Components.config import config, ConfigSubsection,ConfigSelection,ConfigText
+from Components.config import config, ConfigSubsection,ConfigSelection,ConfigText,ConfigYesNo
 ####
 from Components.Input import Input
 from Components.Pixmap import Pixmap
@@ -43,24 +43,41 @@ config.plugins.pictureviewer.slideshowext = ConfigText(default=".3ssl")
 config.plugins.pictureviewer.matchingPattern = ConfigText(default="(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif)")
 config.plugins.pictureviewer.slideshowdir = ConfigText(default="/media/hdd/slideshows/")
 config.plugins.pictureviewer.rootdir = ConfigText(default="/media/")
+config.plugins.pictureviewer.stopserviceonstart = ConfigYesNo(default = False)
 SLIDESHOWMODE_NORMAL = 0
 SLIDESHOWMODE_REPEAT = 1
 
-    
+originalservice = None
+mysession = None
+  
 def main1(session,**kwargs):
-    session.open(PictureViewer)
+    global originalservice,mysession
+    mysession = session
+    originalservice = session.nav.getCurrentlyPlayingServiceReference()
+    if config.plugins.pictureviewer.stopserviceonstart.value:
+        session.nav.stopService()
+    session.openWithCallback(mainCB,PictureViewer)
 
 def main2(session,**kwargs):
+    global originalservice,mysession
+    mysession = session
+    originalservice = session.nav.getCurrentlyPlayingServiceReference()
+    if config.plugins.pictureviewer.stopserviceonstart.value:
+        session.nav.stopService()
     xmlfile = "/usr/lib/enigma2/python/Plugins/Extensions/WebcamViewer/webcam.xml"
     if os.path.isfile(xmlfile):
         try:
             xmlnode = xml.dom.minidom.parse( open(xmlfile) )
-            session.open(WebcamViewer,xmlnode.childNodes[1])
+            session.openWithCallback(mainCB,WebcamViewer,xmlnode.childNodes[1])
         except ExpatError,e:
             session.open(MessageBox,_("Loading config file failed!\n\n%s"%e), MessageBox.TYPE_WARNING)
     else:
         session.open(MessageBox,_("Loading config file failed!\n\nconfigfile not found!"), MessageBox.TYPE_WARNING)
         
+def mainCB():
+    global originalservice,mysession
+    if config.plugins.pictureviewer.stopserviceonstart.value:
+        mysession.nav.playService(originalservice)
     
 def Plugins(path,**kwargs):
     p = [
