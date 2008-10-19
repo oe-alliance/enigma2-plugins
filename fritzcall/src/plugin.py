@@ -758,6 +758,8 @@ class FritzCallPhonebook:
 					found = re.match("([^,]*),.*", name)   # strip address information from the name part
 					if found:
 						shortname = found.group(1)
+					else:
+						shortname = name
 					if len(shortname) > 35:
 						shortname = shortname[:35]
 					message = u"%-35s  %-18s" %(shortname, number)
