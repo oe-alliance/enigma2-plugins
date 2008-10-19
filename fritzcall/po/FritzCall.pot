@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-11 11:58+0200\n"
+"POT-Creation-Date: 2008-10-19 12:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,6 +77,13 @@ msgid ""
 "Connection to FRITZ!Box! lost\n"
 " (%s)\n"
 "retrying..."
+msgstr ""
+
+#, python-format
+msgid ""
+"Corrupt phonebook entry\n"
+"for number %d\n"
+"Deleting."
 msgstr ""
 
 #, python-format

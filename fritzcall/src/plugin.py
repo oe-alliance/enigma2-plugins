@@ -111,7 +111,7 @@ def html2utf8(in_html):
 			try:
 				in_html = in_html.replace(key, (unichr(int(codepoint)).encode('utf8', "replace")))
 			except ValueError:
-				print "[FritzCallhtml2utf8] ValueError " + key + "/" + str(codepoint)
+				print "[FritzCallhtml2utf8] ValueError " + key + "/" + codepoint
 				pass
 	except ImportError:
 		return in_html.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
@@ -747,27 +747,30 @@ class FritzCallPhonebook:
 			for (low, name, number) in sortlistHelp:
 				if number == "01234567890":
 					continue
-				low = low.decode("utf-8")
-				if filter:
-					filter = filter.lower()
-					if low.find(filter) == -1:
-						continue
-				name = name.strip().decode("utf-8")
-				number = number.strip().decode("utf-8")
-				found = re.match("([^,]*),.*", name)
-				if found:
-					shortname = found.group(1)
-				if len(name) > 35:
-					shortname = name[:35]
-				else:
-					shortname = name
-				message = u"%-35s  %-18s" %(shortname, number)
-				message = message.encode("utf-8")
-				# print "[FritzCallPhonebook] displayPhonebook/display: add " + message
-				self.sortlist.append([(number.encode("utf-8","replace"),
-							   name.encode("utf-8","replace")),
-							   (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, 560, 20, 0, RT_HALIGN_LEFT, message)])
-
+				try:
+					low = low.decode("utf-8")
+					if filter:
+						filter = filter.lower()
+						if low.find(filter) == -1:
+							continue
+					name = name.strip().decode("utf-8")
+					number = number.strip().decode("utf-8")
+					found = re.match("([^,]*),.*", name)   # strip address information from the name part
+					if found:
+						shortname = found.group(1)
+					if len(shortname) > 35:
+						shortname = shortname[:35]
+					message = u"%-35s  %-18s" %(shortname, number)
+					message = message.encode("utf-8")
+					# print "[FritzCallPhonebook] displayPhonebook/display: add " + message
+					self.sortlist.append([(number.encode("utf-8","replace"),
+								   name.encode("utf-8","replace")),
+								   (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, 560, 20, 0, RT_HALIGN_LEFT, message)])
+				except UnicodeDecodeError:  # this should definitely not happen
+					self.session.open(MessageBox, _("Corrupt phonebook entry\nfor number %d\nDeleting.") %number, type = MessageBox.TYPE_ERROR)
+					phonebook.remove(number)
+					continue
+				
 			self["entries"].setList(self.sortlist)
 
 		def showEntry(self):
