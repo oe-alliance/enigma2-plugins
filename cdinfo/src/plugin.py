@@ -109,7 +109,7 @@ class Query:
 	    return rc.encode("utf-8")
 
 	def xml_parse_output(self,string):
-		data = string.decode("utf-8").replace('&',"&amp;").encode("ascii",'xmlcharrefreplace')
+		data = string.decode("utf-8","replace").replace('&',"&amp;").encode("ascii",'xmlcharrefreplace')
 		try:
 			cdinfodom = xml.dom.minidom.parseString(data)
 		except:
