@@ -9,6 +9,7 @@
 		&lt;e2langw><e2:item name="lanGW" filter="xml"/>&lt;/e2langw>
 <!--		&lt;e2landns><e2:item name="lanDNS" filter="xml"/>&lt;/e2landns> -->
 	
+		&lt;e2model><e2:item name="model" filter="xml"/>&lt;/e2model>
 		&lt;e2fpversion><e2:item name="fpVersion" filter="xml"/>&lt;/e2fpversion>
 		&lt;e2webifversion><e2:item name="WebIfVersion" />&lt;/e2webifversion>
 		&lt;e2tunerinfo><e2:item name="tunerInfo" />&lt;/e2tunerinfo>

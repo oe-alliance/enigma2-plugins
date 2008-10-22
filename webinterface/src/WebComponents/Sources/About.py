@@ -135,10 +135,17 @@ class About( Source):
         ## webifversion
         list.append(config.plugins.Webinterface.version.value)
         
+        
+        #box model
+        fp = open("/proc/stb/info/model")
+        model = fp.read().lstrip().rstrip()
+        fp.close()
+        list.append(model)
         #please remove unneeded debugoutpu while commiting #print list
         
         listR = []
         listR.append(list)
+        
         
         return listR
 
@@ -167,4 +174,5 @@ class About( Source):
            ,"onID": 19
            ,"sid": 20
            ,"WebIfVersion": 21
+           ,"model": 22
            }
