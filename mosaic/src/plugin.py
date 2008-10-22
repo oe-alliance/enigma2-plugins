@@ -1,7 +1,7 @@
 ##
 ## Mosaic
 ## by AliAbdul
-## needs the binary 'grab' by seddi in /usr/bin
+## needs the aio-screengrabber by seddi
 ##
 from Components.ActionMap import NumberActionMap
 from Components.AVSwitch import AVSwitch
@@ -11,6 +11,7 @@ from Components.Pixmap import Pixmap
 from Components.VideoWindow import VideoWindow
 from enigma import eConsoleAppContainer, eServiceCenter, eServiceReference, eTimer, loadPic, loadPNG
 from Plugins.Plugin import PluginDescriptor
+from Screens.ChannelSelection import BouquetSelector
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE
@@ -26,6 +27,11 @@ config.plugins.Mosaic.countdown = ConfigInteger(default=5, limits=config_limits)
 
 playingIcon = loadPNG(resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/icons/ico_mp_play.png'))
 pausedIcon = loadPNG(resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/icons/ico_mp_pause.png'))
+
+Session = None
+Servicelist = None
+bouquetSel = None
+dlg_stack = []
 
 ################################################
 
@@ -45,15 +51,15 @@ class Mosaic(Screen):
 		<eLabel position="78,388" size="180,144" />
 		<eLabel position="274,388" size="180,144" />
 		<eLabel position="470,388" size="180,144" />
-		<widget name="label1" position="80,32" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
-		<widget name="label2" position="276,32" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
-		<widget name="label3" position="472,32" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
-		<widget name="label4" position="80,198" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
-		<widget name="label5" position="276,198" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
-		<widget name="label6" position="472,198" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
-		<widget name="label7" position="80,366" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
-		<widget name="label8" position="276,366" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
-		<widget name="label9" position="472,366" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
+		<widget name="channel1" position="80,32" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
+		<widget name="channel2" position="276,32" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
+		<widget name="channel3" position="472,32" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
+		<widget name="channel4" position="80,198" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
+		<widget name="channel5" position="276,198" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
+		<widget name="channel6" position="472,198" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
+		<widget name="channel7" position="80,366" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
+		<widget name="channel8" position="276,366" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
+		<widget name="channel9" position="472,366" size="176,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" />
 		<widget name="window1" position="78,54" zPosition="1" size="180,144" />
 		<widget name="window2" position="274,54" zPosition="1" size="180,144" />
 		<widget name="window3" position="470,54" zPosition="1" size="180,144" />
@@ -85,16 +91,15 @@ class Mosaic(Screen):
 		<widget name="count" position="472,535" size="175,20" font="Regular;18" backgroundColor="#ffffff" foregroundColor="#000000" halign="right" />
 	</screen>"""
 
-	def __init__(self, session, servicelist):
+	def __init__(self, session, services):
 		Screen.__init__(self, session)
 		
 		self.session = session
-		self.servicelist = servicelist
 		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.container = eConsoleAppContainer()
 		self.aspect = AVSwitch().getAspectRatioSetting()
 		self.serviceHandler = eServiceCenter.getInstance()
-		self.ref_list = []
+		self.ref_list = services
 		self.window_refs = [None, None, None, None, None, None, None, None, None]
 		self.current_refidx = 0
 		self.current_window = 1
@@ -107,7 +112,7 @@ class Mosaic(Screen):
 			self["window" + str(i)] = Pixmap()
 			self["video" + str(i)] = VideoWindow(decoder = 0)
 			self["video" + str(i)].hide()
-			self["label" + str(i)] = Label("")
+			self["channel" + str(i)] = Label("")
 			self["event" + str(i)] = Label("")
 			self["event" + str(i)].hide()
 		self["video1"].decoder = 0
@@ -145,11 +150,24 @@ class Mosaic(Screen):
 
 	def checkGrab(self):
 		if fileExists(grab_binary):
-			self.firstRun()
+			# Start the first service in the bouquet and show the service-name
+			ref = self.ref_list[0]
+			self.window_refs[0] = ref
+			info = self.serviceHandler.info(ref)
+			name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
+			event_name = self.getEventName(info, ref)
+			self["channel1"].setText(name)
+			self["event1"].setText(event_name)
+			self.session.nav.playService(ref)
+			self["count"].setText(_("Channel: ") + "1 / " + str(len(self.ref_list)))
+			self["playState"].instance.setPixmap(playingIcon)
+			
+			# Start updating the video-screenshots
+			self.updateTimer.start(1, 1)
 		else:
 			self.session.openWithCallback(self.exit, MessageBox, _("%s does not exist!") % grab_binary, MessageBox.TYPE_ERROR, timeout=5)
 
-	def exit(self, callback = None):
+	def exit(self, callback=None):
 		self.close()
 
 	def closeWithOldService(self):
@@ -157,9 +175,8 @@ class Mosaic(Screen):
 		self.close()
 
 	def numberPressed(self, number):
-		sRef = self.window_refs[number-1]
-		if sRef is not None:
-			ref = eServiceReference(sRef)
+		ref = self.window_refs[number-1]
+		if ref is not None:
 			self.session.nav.playService(ref)
 			self.close()
 
@@ -196,67 +213,6 @@ class Mosaic(Screen):
 			
 			self.updateCountdownLabel()
 
-	def firstRun(self):
-		# Get the current bouquet
-		bouquet = None
-		bouquets = self.servicelist.getBouquetList()
-		if bouquets is not None:
-			if len(bouquets) == 1:
-				bouquet = bouquets[0][1]
-			else:
-				# Multibouquet activated => get the root first
-				root = self.servicelist.getRoot()
-				idx = 0
-				for x in bouquets:
-					if x[1] == root:
-						# Current bouquet
-						bouquet = bouquets[idx][1]
-					else:
-						idx += 1
-		
-		if bouquet is not None:
-			# Get the channels from the current bouquet
-			services = self.serviceHandler.list(bouquet)
-			channels = services and services.getContent("SN", True)
-			
-			for channel in channels:
-				ref = channel[0]
-				if not ref.startswith("1:64:"): # Ignore marker
-					self.ref_list.append(ref)
-			if len(self.ref_list) > 1:
-				# Start the first service in the bouquet and show the service-name
-				sRef = self.ref_list[0]
-				self.window_refs[0] = sRef
-				ref = eServiceReference(sRef)
-				info = self.serviceHandler.info(ref)
-				name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
-				event_name = self.getEventName(info, ref)
-				self["label1"].setText(name)
-				self["event1"].setText(event_name)
-				self.session.nav.playService(ref)
-				self["count"].setText(_("Channel: ") + "1 / " + str(len(self.ref_list)))
-				self["playState"].instance.setPixmap(playingIcon)
-				
-				# Start updating the video-screenshots
-				self.updateTimer.start(1, 1)
-		else:
-			log = "Error reading your channel-list!\n"
-			log += "Bouquets:\n"
-			log += str(bouquets)
-			log += "\nContent:\n"
-			for x in bouquets:
-				log += str(x[1])
-				log += "\n"
-			
-			try:
-				f = open("/tmp/mosaic.log", "w")
-				f.write(log)
-				f.close()
-			except:
-				pass
-			
-			self.session.openWithCallback(self.exit, MessageBox, _("Error while reading the channel-list!\nPlease send the file /tmp/mosaic.log to:\naliabdul1978 at hotmail dot de."), MessageBox.TYPE_ERROR, timeout=5)
-
 	def makeNextScreenshot(self):
 		# Grab video
 		if self.container.execute("%s -v %s" % (grab_binary, grab_picture)):
@@ -277,8 +233,7 @@ class Mosaic(Screen):
 			self.current_refidx = 0
 		
 		# Play next ref
-		sRef = self.ref_list[self.current_refidx]
-		ref = eServiceReference(sRef)
+		ref = self.ref_list[self.current_refidx]
 		info = self.serviceHandler.info(ref)
 		name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
 		event_name = self.getEventName(info, ref)
@@ -289,8 +244,8 @@ class Mosaic(Screen):
 		if self.current_window > 9:
 			self.current_window = 1
 		
-		# Save the sRef
-		self.window_refs[self.current_window-1] = sRef
+		# Save the ref
+		self.window_refs[self.current_window-1] = ref
 		
 		# Save the event-name and hide the label
 		self["event" + str(self.current_window)].hide()
@@ -301,14 +256,14 @@ class Mosaic(Screen):
 		self["video" + str(self.current_window)].decoder = 0
 		
 		# Show the servicename
-		self["label" + str(self.current_window)].setText(name)
+		self["channel" + str(self.current_window)].setText(name)
 		self["count"].setText(_("Channel: ") + str(self.current_refidx + 1) + " / " + str(len(self.ref_list)))
 		
 		# Restart timer
 		self.working = False
 		self.updateTimer.start(1, 1)
 
-	def updateCountdown(self, callback = None):
+	def updateCountdown(self, callback=None):
 		self.countdown -= 1
 		self.updateCountdownLabel()
 		if self.countdown == 0:
@@ -332,9 +287,64 @@ class Mosaic(Screen):
 		return eventName
 
 ################################################
+# Most stuff stolen from the GraphMultiEPG
+
+def getBouquetServices(bouquet):
+	services = []
+	Servicelist = eServiceCenter.getInstance().list(bouquet)
+	if not Servicelist is None:
+		while True:
+			service = Servicelist.getNext()
+			if not service.valid():
+				break
+			if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):
+				continue
+			services.append(service)
+	return services
+
+def openMosaic(bouquet):
+	services = getBouquetServices(bouquet)
+	if len(services):
+		dlg_stack.append(Session.openWithCallback(closed, Mosaic, services))
+		return True
+	return False
+
+def cleanup():
+	global Session
+	Session = None
+	global Servicelist
+	Servicelist = None
+
+def closed(ret=False):
+	closedScreen = dlg_stack.pop()
+	global bouquetSel
+	if bouquetSel and closedScreen == bouquetSel:
+		bouquetSel = None
+	dlgs = len(dlg_stack)
+	if ret and dlgs > 0:
+		dlg_stack[dlgs-1].close(dlgs > 1)
+	if dlgs <= 0:
+		cleanup()
 
 def main(session, servicelist, **kwargs):
-	session.open(Mosaic, servicelist)
+	global Session
+	Session = session
+	global Servicelist
+	Servicelist = servicelist
+	
+	bouquets = Servicelist.getBouquetList()
+	if bouquets is None:
+		cnt = 0
+	else:
+		cnt = len(bouquets)
+	
+	if cnt > 1:
+		global bouquetSel
+		bouquetSel = Session.openWithCallback(closed, BouquetSelector, bouquets, openMosaic, enableWrapAround=True)
+		dlg_stack.append(bouquetSel)
+	elif cnt == 1:
+		if not openMosaic(bouquets[0][1]):
+			cleanup()
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Mosaic"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
