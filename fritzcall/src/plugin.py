@@ -777,8 +777,8 @@ class FritzCallPhonebook:
 
 		def showEntry(self):
 			cur = self["entries"].getCurrent()
-			print "[FritzCallPhonebook] displayPhonebook/showEntry (%s,%s)" % (cur[0][0],cur[0][1])
-			if cur:
+			if cur and cur[0]:
+				print "[FritzCallPhonebook] displayPhonebook/showEntry (%s,%s)" % (cur[0][0],cur[0][1])
 				fullname = phonebook.search(cur[0][0])
 				if fullname:
 					self.session.open(MessageBox,
@@ -791,8 +791,8 @@ class FritzCallPhonebook:
 
 		def delete(self):
 			cur = self["entries"].getCurrent()
-			print "[FritzCallPhonebook] displayPhonebook/delete " + cur[0][0]
-			if cur:
+			if cur and cur[0]:
+				print "[FritzCallPhonebook] displayPhonebook/delete " + cur[0][0]
 				self.session.openWithCallback(
 					self.deleteConfirmed,
 					MessageBox,

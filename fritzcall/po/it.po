@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2 FRITZ!Box plugin italian locale\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-19 12:39+0200\n"
-"PO-Revision-Date: 2008-10-19 04:15+0100\n"
+"PO-Revision-Date: 2008-10-22 20:09+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -13,10 +13,8 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: /home/dario/build800/build/tmp/work/enigma2-plugins-"
-"2.5cvs20081019-r0/enigma2-plugins/fritzcall\n"
-"X-Poedit-SearchPath-0: /home/dario/build800/build/tmp/work/enigma2-plugins-"
-"2.5cvs20081019-r0/enigma2-plugins/fritzcall\n"
+"X-Poedit-Basepath: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081019-r0/enigma2-plugins/fritzcall\n"
+"X-Poedit-SearchPath-0: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081019-r0/enigma2-plugins/fritzcall\n"
 
 #. TRANSLATORS: this is a help text, keep it short
 #. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
@@ -93,6 +91,9 @@ msgid ""
 "for number %d\n"
 "Deleting."
 msgstr ""
+"Voce in rubrica corrotta\n"
+"per il numero %d\n"
+"Cancellazione in corso."
 
 #, python-format
 msgid "Could not load calls from FRITZ!Box - Error: %s"
@@ -195,7 +196,7 @@ msgid "Enter Search Terms"
 msgstr "Inserire criteri di ricerca"
 
 msgid "Entry incomplete."
-msgstr "Voce incompleta"
+msgstr "Voce incompleta."
 
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "Indirizzo FRITZ!Box FON (Nome o IP)"
@@ -359,7 +360,7 @@ msgid "Show details of entry"
 msgstr "Mostrare dettagli voce"
 
 msgid "Strip Leading 0"
-msgstr "Sopprimere '0' iniziali"
+msgstr "Sopprimere \"0\" iniziali"
 
 msgid "Switzerland"
 msgstr "Svizzera"
@@ -380,7 +381,7 @@ msgid "Use internal PhoneBook"
 msgstr "Usare la Rubrica interna"
 
 msgid "Vanity"
-msgstr "'Vanity'"
+msgstr "\"Vanity\""
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
 msgstr "Per abilitare il monitoraggio sulla FRITZ!Box comporre #96*5*!"
@@ -454,3 +455,4 @@ msgstr "Ufficio"
 #, fuzzy
 #~ msgid "display calls from FRITZ!Box"
 #~ msgstr "Recupero chiamate dalla FRITZ!Box in corso"
+
