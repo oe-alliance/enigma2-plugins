@@ -590,16 +590,6 @@ class FritzCallPhonebook:
 		self.phonebook = {}
 		self.reload()
 
-	def create(self):
-		try:
-			f = open(config.plugins.FritzCall.phonebookLocation.value, 'w')
-			f.write("01234567890#Name, Street, Location (Keep the Spaces!!!)\n");
-			f.close()
-			return True
-		except IOError:
-			Notifications.AddNotification(MessageBox, _("Can't create PhoneBook.txt"), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
-			return False
-
 	def reload(self):
 		print "[FritzCallPhonebook] reload"
 		self.phonebook = {}
@@ -609,21 +599,30 @@ class FritzCallPhonebook:
 
 		exists = False
 		
-		if config.plugins.FritzCall.phonebook.value:
-			if not os.path.exists(config.plugins.FritzCall.phonebookLocation.value):
-				if(self.create()):
-					exists = True
-			else:
-				exists = True
-	
-			if exists:
-				for line in open(config.plugins.FritzCall.phonebookLocation.value):
+		if config.plugins.FritzCall.phonebook.value and os.path.exists(config.plugins.FritzCall.phonebookLocation.value):
+			phonebookTxtCorrupt = False
+			for line in open(config.plugins.FritzCall.phonebookLocation.value):
+				if re.match("^\d+#.*$", line):
 					try:
 						number, name = line.split("#")
 						if not self.phonebook.has_key(number):
 							self.phonebook[number] = name
 					except ValueError:
 						print "[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" %line
+						phonebookTxtCorrupt = True
+				else:
+					print "[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" %line
+					phonebookTxtCorrupt = True
+
+			if phonebookTxtCorrupt:
+				# dump phonebook to PhoneBook.txt
+				print "[FritzCallPhonebook] dump Phonebook.txt"
+				os.rename(config.plugins.FritzCall.phonebookLocation.value,
+						config.plugins.FritzCall.phonebookLocation.value + ".bck")
+				fNew = open(config.plugins.FritzCall.phonebookLocation.value, 'w')
+				for (number, name) in self.phonebook.iteritems():
+					fNew.write(number + "#" + name + "\n")
+				fNew.close()
 
 		if config.plugins.FritzCall.fritzphonebook.value:
 			fritzbox.loadFritzBoxPhonebook()
@@ -650,7 +649,7 @@ class FritzCallPhonebook:
 				string = "%s#%s" %(number, name)
 				f.write(string)
 				f.close()
-				print "[FritzCallPhonebook] added %s with %sto Phonebook.txt" %(number, name)
+				print "[FritzCallPhonebook] added %s with %s to Phonebook.txt" %(number, name)
 				return True
 
 			except IOError:
@@ -661,7 +660,7 @@ class FritzCallPhonebook:
 		if number in self.phonebook:
 			print "[FritzCallPhonebook] remove entry in phonebook"
 			del self.phonebook[number]
-			if config.plugins.FritzCall.phonebook.value and config.plugins.FritzCall.addcallers.value:
+			if config.plugins.FritzCall.phonebook.value:
 				try:
 					print "[FritzCallPhonebook] remove entry in Phonebook.txt"
 					fOld = open(config.plugins.FritzCall.phonebookLocation.value, 'r')
