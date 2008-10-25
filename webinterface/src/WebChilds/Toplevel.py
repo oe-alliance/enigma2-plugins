@@ -30,7 +30,7 @@ class Toplevel(resource.Resource):
         self.putChild("notes",NotepadResource())
         self.putChild("servicelist",ServiceList(self.session))
 
-        if config.plugins.Webinterface.includehdd.value:
+        if config.plugins.Webinterface.includehdd.value is True:
             self.putChild("hdd",static.File("/hdd"))
         
     def render(self, req):
