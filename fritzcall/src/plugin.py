@@ -621,7 +621,7 @@ class FritzCallPhonebook:
 						config.plugins.FritzCall.phonebookLocation.value + ".bck")
 				fNew = open(config.plugins.FritzCall.phonebookLocation.value, 'w')
 				for (number, name) in self.phonebook.iteritems():
-					fNew.write(number + "#" + name + "\n")
+					fNew.write(number + "#" + name)
 				fNew.close()
 
 		if config.plugins.FritzCall.fritzphonebook.value:
