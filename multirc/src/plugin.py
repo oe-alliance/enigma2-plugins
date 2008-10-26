@@ -7,11 +7,11 @@ from Components.Label import Label
 from Components.config import *
 from os import path
 
-CONFIGS = [("1", "layer 1"),
-	   ("2", "layer 2"),
-	   ("4", "layer 3"),
-	   ("8", "layer 4"),
-	   ("f", "any RC")]
+CONFIGS = [("1", _("layer 1")),
+	   ("2", _("layer 2")),
+	   ("4", _("layer 3")),
+	   ("8", _("layer 4")),
+	   ("f", _("any RC"))]
 
 config.plugins.MultiRC = ConfigSubsection()
 config.plugins.MultiRC.mask = ConfigSelection(choices = CONFIGS, default = "f")
@@ -32,12 +32,12 @@ class MultiRCSetup(ConfigListScreen, Screen):
 	# e2 devs should really make some best practices or wrapper for this!
 	def __init__(self, session, args = None):
 		Screen.__init__(self, session)
-		self.list = [getConfigListEntry("Listen on Remote Control", config.plugins.MultiRC.mask)]
+		self.list = [getConfigListEntry(_("Listen on Remote Control"), config.plugins.MultiRC.mask)]
 		ConfigListScreen.__init__(self, self.list)
-		self["warning"] = Label("""WARNING!
+		self["warning"] = Label(_("""WARNING!
 After changing this and pressing <Ok>, your Remote Control might stop working!
 
-Information about re-configuring the RC is available at http://www.dream-multimedia-tv.de/board/thread.php?threadid=5613""")
+Information about re-configuring the RC is available at http://www.dream-multimedia-tv.de/board/thread.php?threadid=5613"""))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 		self["setupActions"] = ActionMap(["SetupActions"],
@@ -49,7 +49,7 @@ Information about re-configuring the RC is available at http://www.dream-multime
 
 	def ask_save(self):
 		if not set_mask():
-			self.session.open(MessageBox, text = "Error writing to %s!" % MASK,
+			self.session.open(MessageBox, text = _("Error writing to %s!") % MASK,
 				type = MessageBox.TYPE_WARNING)
 			return
 		# mask value 0xf allows all RCs, no need to verify
@@ -57,7 +57,7 @@ Information about re-configuring the RC is available at http://www.dream-multime
 			self.confirm_save(True)
 		else:
 			self.session.openWithCallback(self.confirm_save, MessageBox,
-				"Is the RC still working?", MessageBox.TYPE_YESNO,
+				_("Is the RC still working?"), MessageBox.TYPE_YESNO,
 				timeout = 20, default = False)
 
 	def confirm_save(self, confirmed):
@@ -98,7 +98,7 @@ def multirc_autostart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="Multi RemoteControl",
-				description="Multi Dreambox RC layer setup",
+				description=_("Multi Dreambox RC layer setup"),
 				where=PluginDescriptor.WHERE_PLUGINMENU,
 				fnc = multirc_setup),
 
