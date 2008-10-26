@@ -48,7 +48,10 @@ Information about re-configuring the RC is available at http://www.dream-multime
 		}, -2)
 
 	def ask_save(self):
-		set_mask()
+		if not set_mask():
+			self.session.open(MessageBox, text = "Error writing to %s!" % MASK,
+				type = MessageBox.TYPE_WARNING)
+			return
 		# mask value 0xf allows all RCs, no need to verify
 		if config.plugins.MultiRC.mask.value == "f":
 			self.confirm_save(True)
@@ -76,9 +79,13 @@ Information about re-configuring the RC is available at http://www.dream-multime
 def set_mask(mask=None):
 	if not mask:
 		mask = config.plugins.MultiRC.mask.value
-	f = open(MASK, "w")
-	f.write(mask)
-	f.close()
+	try:
+		f = open(MASK, "w")
+		f.write(mask)
+		f.close()
+	except Exception, e:
+		return False
+	return True
 
 def multirc_setup(session, **kwargs):
 	session.open(MultiRCSetup)
