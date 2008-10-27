@@ -27,7 +27,9 @@ from Tools.LoadPixmap import LoadPixmap
 
 from twisted.web.client import downloadPage
 
-from urllib import urlretrieve, quote
+#from urllib import urlretrieve, quote
+
+from urllib2 import urlopen, Request, URLError, HTTPError, quote
 
 from httplib import HTTPConnection
 
@@ -214,19 +216,47 @@ class YouTubeEntry():
 		self.loadThumbnail(0, callback)
 
 
+#	def getVideoUrl(self, fmt):
+#		conn = HTTPConnection("www.youtube.com")
+#		conn.request("GET", "/v/" + quote(self.getYouTubeId()))
+#		response = conn.getresponse()
+#		conn.close()
+#		mrl = None
+#		print "[YTB] Response: ", response.status, response.reason
+#		if response.status == 303:
+#			location = response.getheader("location")
+#			mrl = "http://www.youtube.com/get_video?video_id=" + quote(self.getYouTubeId()) + "&t=" + quote(re.match (".*[?&]t=([^&]+)", location).groups()[0]) + fmt
+#			print "[YTB] Playing ", mrl
+#		else:
+#			print "[YTB] No valid flv-mrl found"
+#		return mrl
+
+
 	def getVideoUrl(self, fmt):
-		conn = HTTPConnection("www.youtube.com")
-		conn.request("GET", "/v/" + quote(self.getYouTubeId()))
-		response = conn.getresponse()
-		conn.close()
 		mrl = None
-		print "[YTB] Response: ", response.status, response.reason
-		if response.status == 303:
-			location = response.getheader("location")
-			mrl = "http://www.youtube.com/get_video?video_id=" + quote(self.getYouTubeId()) + "&t=" + quote(re.match (".*[?&]t=([^&]+)", location).groups()[0]) + fmt
-			print "[YTB] Playing ", mrl
+		req = Request("http://www.youtube.com/watch?v=" + quote(self.getYouTubeId()))
+		try:
+			response = urlopen(req)
+		except HTTPError, e:
+			print "[YTB] The server coundn't fulfill the request."
+			print "[YTB] Error code: ", e.code
+		except URLError, e:
+			print "[YTB] We failed to reach a server."
+			print "[YTB] Reason: ", e.reason
 		else:
-			print "[YTB] No valid flv-mrl found"
+			while not None:
+				data = response.readline()
+				if data == "":
+					break
+				m = re.search("watch_fullscreen\\?(?P<vid_query>.*?)&title=(?P<name>.*)';\n", data)
+				if m:
+					break
+			response.close
+			if m:
+				mrl = "http://www.youtube.com/get_video?" + quote(m.group("vid_query")) + fmt
+				print "[YTB] Playing ", mrl
+			else:
+				print "[YTB] No valid flv-mrl found"
 		return mrl
 
 
