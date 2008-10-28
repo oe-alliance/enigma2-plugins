@@ -201,8 +201,8 @@ class Query:
 	def cdtext_scan(self):
 		cmd = "cdtextinfo -xalT"
 		print "[cdtext_scan] " + cmd
-		self.cdtext_container.appClosed.get().append(self.cdtext_finished)
-		self.cdtext_container.dataAvail.get().append(self.cdtext_avail)
+		self.cdtext_container.appClosed.append(self.cdtext_finished)
+		self.cdtext_container.dataAvail.append(self.cdtext_avail)
 		self.cdtext_container.execute(cmd)
 
 	def cddb_scan(self):
@@ -210,8 +210,8 @@ class Query:
 		if not config.plugins.CDInfo.CDDB_cache.value:
 			cmd += " --no-cddb-cache"
 		print "[cddb_scan] " + cmd
-		self.cddb_container.appClosed.get().append(self.cddb_finished)
-		self.cddb_container.dataAvail.get().append(self.cddb_avail)
+		self.cddb_container.appClosed.append(self.cddb_finished)
+		self.cddb_container.dataAvail.append(self.cddb_avail)
 		self.cddb_container.execute(cmd)
 
 	def cddb_avail(self,string):
@@ -221,8 +221,8 @@ class Query:
 		self.cdtext_output += string
 
 	def cddb_finished(self,retval):
-		self.cddb_container.appClosed.get().remove(self.cddb_finished)
-		self.cddb_container.dataAvail.get().remove(self.cddb_avail)
+		self.cddb_container.appClosed.remove(self.cddb_finished)
+		self.cddb_container.dataAvail.remove(self.cddb_avail)
 		if not self.xml_parse_output(self.cddb_output):
 			return
 		if config.plugins.CDInfo.preferCDDB.value:
@@ -235,8 +235,8 @@ class Query:
 		self.cddb_output = ""
 
 	def cdtext_finished(self,retval):
-		self.cdtext_container.appClosed.get().remove(self.cdtext_finished)
-		self.cdtext_container.dataAvail.get().remove(self.cdtext_avail)
+		self.cdtext_container.appClosed.remove(self.cdtext_finished)
+		self.cdtext_container.dataAvail.remove(self.cdtext_avail)
 		if not self.xml_parse_output(self.cdtext_output):
 			return
 		if not config.plugins.CDInfo.preferCDDB.value:

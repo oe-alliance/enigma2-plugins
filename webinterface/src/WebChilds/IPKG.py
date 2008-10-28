@@ -101,8 +101,8 @@ class IPKGConsoleStream(stream.ProducerStream):
     def __init__(self,cmd):
         stream.ProducerStream.__init__(self)
         self.container = eConsoleAppContainer()
-        self.container.appClosed.get().append(self.cmdFinished)
-        self.container.dataAvail.get().append(self.dataAvail)
+        self.container.appClosed.append(self.cmdFinished)
+        self.container.dataAvail.append(self.dataAvail)
         self.container.execute(cmd)
 
     def cmdFinished(self,data):

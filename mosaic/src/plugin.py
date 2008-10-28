@@ -145,7 +145,7 @@ class Mosaic(Screen):
 		self.checkTimer = eTimer()
 		self.checkTimer.timeout.get().append(self.checkGrab)
 		
-		self.container.appClosed.get().append(self.showNextScreenshot)
+		self.container.appClosed.append(self.showNextScreenshot)
 		self.checkTimer.start(500, 1)
 
 	def checkGrab(self):

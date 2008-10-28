@@ -98,8 +98,8 @@ class GrabStream(stream.ProducerStream):
         stream.ProducerStream.__init__(self)
 
         self.container = eConsoleAppContainer()
-        self.container.appClosed.get().append(self.cmdFinished)
-        self.container.dataAvail.get().append(self.dataAvail)
+        self.container.appClosed.append(self.cmdFinished)
+        self.container.dataAvail.append(self.dataAvail)
         print "AiO grab starting aio grab with cmdline:",self.cmd
         self.container.execute(cmd)
 

@@ -183,7 +183,7 @@ class MovieRetitle(Screen, ConfigListScreen):
 class MovieRetitleBackgroundMover:
 	def __init__(self):
 		self.container = eConsoleAppContainer()
-		self.container.appClosed.get().append(self.moveNextSuffBG)
+		self.container.appClosed.append(self.moveNextSuffBG)
 		self.currid = 0;
 		self.queue = []
 		self.running = False

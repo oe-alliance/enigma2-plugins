@@ -216,7 +216,7 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 class MovieCutQueue:
 	def __init__(self):
 		self.container = eConsoleAppContainer()
-		self.container.appClosed.get().append(self.runDone)
+		self.container.appClosed.append(self.runDone)
 		self.queue = []
 		self.running = False
 
