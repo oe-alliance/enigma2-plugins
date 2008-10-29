@@ -27,8 +27,6 @@ from Tools.LoadPixmap import LoadPixmap
 
 from twisted.web.client import downloadPage
 
-#from urllib import urlretrieve, quote
-
 from urllib2 import urlopen, Request, URLError, HTTPError, quote
 
 from httplib import HTTPConnection
@@ -253,7 +251,8 @@ class YouTubeEntry():
 					break
 			response.close
 			if m:
-				mrl = "http://www.youtube.com/get_video?" + quote(m.group("vid_query")) + fmt
+#				mrl = "http://www.youtube.com/get_video?" + quote(m.group("vid_query")) + fmt
+				mrl = "http://www.youtube.com/get_video?video_id=" + quote(self.getYouTubeId()) + "&t=" + quote(re.match (".*[?&]t=([^&]+)", m.group('vid_query')).groups()[0]) + fmt
 				print "[YTB] Playing ", mrl
 			else:
 				print "[YTB] No valid flv-mrl found"
