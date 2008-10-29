@@ -106,7 +106,7 @@ class AutoTimerEditorBase():
 
 		# Match
 		self.match = ConfigText(default = timer.match, fixed_size = False)
-		self.match.setUseableChars('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789') # XXX: what exactly is useable? :-)
+		self.match.setUseableChars('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-_') # XXX: what exactly is useable? :-)
 
 		# Justplay
 		self.justplay = ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)])
