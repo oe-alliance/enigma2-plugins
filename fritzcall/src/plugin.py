@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-from Screens.Screen import Screen
+#===============================================================================
+# $Author$
+# $Revision$
+# $Date$
+#==============================from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
 from Screens.InputBox import InputBox
