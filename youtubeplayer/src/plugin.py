@@ -128,7 +128,12 @@ class YouTubeManager():
 
 
 def main(session, **kwargs):
-	YouTubeManager(session).openSearchDialog()
+	try:
+		youTubeManager = YouTubeManager(session)
+	except Exception, e:
+		session.open(MessageBox, _("Error contacting YouTube:\n%s" % e), MessageBox.TYPE_ERROR)
+	else:
+		youTubeManager.openSearchDialog()
 
 
 def Plugins(**kwargs):

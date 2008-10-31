@@ -283,27 +283,34 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 
 	def showFeed(self, feed, append):
-		self.feed = feed
-		self.setTitle(feed.getTitle())
-		self["total_results"].setText(feed.getTotalResults())
-		if not append:
-			self.list = []
-			self["list"].setList(self.list)
-		self.feed.loadThumbnails(self.insertEntry)
+		if feed is not None:
+			self.feed = feed
+			self.setTitle(feed.getTitle())
+			self["total_results"].setText(feed.getTotalResults())
+			if not append:
+				self.list = []
+				self["list"].setList(self.list)
+			self.feed.loadThumbnails(self.insertEntry)
 		self.delay_timer = eTimer()
 		self.delay_timer.callback.append(self.closePatientDialogDelayed)
 		self.delay_timer.start(100, 1)
 
 
 	def addToHistory(self, feed):
-		del self.history[self.historyIndex : len(self.history)]
-		self.history.insert(self.historyIndex, feed.getSelfFeed())
-		self.historyIndex = self.historyIndex + 1
+		if feed is not None:
+			del self.history[self.historyIndex : len(self.history)]
+			self.history.insert(self.historyIndex, feed.getSelfFeed())
+			self.historyIndex = self.historyIndex + 1
 
-
+		
 	def searchFeedReal(self, searchContext):
-		print "[YTB] youTubeTest"
-		feed = interface.search(searchContext.searchTerm.value)
+		print "[YTB] searchFeedReal"
+		try:
+			feed = interface.search(searchContext.searchTerm.value)
+		except Exception, e:
+			feed = None
+			self.session.open(MessageBox, _("Error querying feed for search term %s:\n%s" %
+					(searchContext.searchTerm.value, e)), MessageBox.TYPE_ERROR)
 		self.showFeed(feed, False)
 		self.addToHistory(feed)
 
@@ -315,7 +322,12 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 
 	def loadPlaylistFeedReal(self, playlist):
-		feed = interface.getUserPlaylistFeed(playlist)
+		try:
+			feed = interface.getUserPlaylistFeed(playlist)
+		except Exception, e:
+			feed = None
+			self.session.open(MessageBox, _("Error querying playlist-feed for playlist %s:\n%s" %
+					(playlist.getTitle(), e)), MessageBox.TYPE_ERROR)
 		self.showFeed(feed, False)
 		self.addToHistory(feed)
 
@@ -326,7 +338,12 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 
 	def loadFavoritesFeedReal(self, userName = "default"):
-		feed = interface.getUserFavoritesFeed(userName)
+		try:
+			feed = interface.getUserFavoritesFeed(userName)
+		except Exception, e:
+			feed = None
+			self.session.open(MessageBox, _("Error querying favorites feed:\n%s" %
+					e), MessageBox.TYPE_ERROR)
 		self.showFeed(feed, False)
 		self.addToHistory(feed)
 
@@ -338,20 +355,25 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 
 	def loadStandardFeed(self, url):
-		self.loadFeed(_("Loading standard feed, be patient ..."), url)
+		self.loadFeed(_("Loading standard feed, be patient ..."), url, "standard feed")
 
 
-	def loadFeedReal(self, feedUrl, append = False, addToHistory = True):
-		feed = interface.getFeed(feedUrl)
+	def loadFeedReal(self, feedUrl, feedName, append = False, addToHistory = True):
+		try:
+			feed = interface.getFeed(feedUrl)
+		except Exception, e:
+			feed = None
+			self.session.open(MessageBox, _("Error querying feed %s:\n%s" %
+					(feedName, e)), MessageBox.TYPE_ERROR)
 		self.showFeed(feed, append)
 		if addToHistory:
 			self.addToHistory(feed)
 
 
-	def loadFeed(self, text, feedUrl, append = False, addToHistory = True):
+	def loadFeed(self, text, feedUrl, feedName, append = False, addToHistory = True):
 		self.patientDialog = self.session.open(PatientMessageBox, text)
-		self.patientDialog.processDelayed(boundFunction(self.loadFeedReal, feedUrl = feedUrl,
-											append = append, addToHistory = addToHistory))
+		self.patientDialog.processDelayed(boundFunction(self.loadFeedReal, feedName = feedName,
+											feedUrl = feedUrl, append = append, addToHistory = addToHistory))
 
 
 	def loadPreviousFeed(self, result):
@@ -359,7 +381,8 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 			return
 		prevUrl = self.feed.getPreviousFeed()
 		if prevUrl is not None:
-			self.loadFeed(_("Loading additional videos, be patient ..."), prevUrl, True, True)
+			self.loadFeed(_("Loading additional videos, be patient ..."), prevUrl, _("additional videos"),
+			True, True)
 
 
 	def loadNextFeed(self, result):
@@ -367,29 +390,30 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 			return
 		nextUrl = self.feed.getNextFeed()
 		if nextUrl is not None:
-			self.loadFeed(_("Loading additional videos, be patient ..."), nextUrl, True, True)
+			self.loadFeed(_("Loading additional videos, be patient ..."), nextUrl, _("additional videos"),
+			True, True)
 
 
 	def getRelated(self):
-		self.loadFeed(_("Loading related videos, be patient ..."), self["list"].getCurrent()[0].getRelatedFeed(), False, True)
+		self.loadFeed(_("Loading related videos, be patient ..."), self["list"].getCurrent()[0].getRelatedFeed(), _("related videos"), False, True)
 		self.isFavoritesFeed = False
 
 
 	def getResponses(self):
-		self.loadFeed(_("Loading response videos, be patient ..."), self["list"].getCurrent()[0].getResponsesFeed(), False, True)
+		self.loadFeed(_("Loading response videos, be patient ..."), self["list"].getCurrent()[0].getResponsesFeed(), _("response videos"), False, True)
 		self.isFavoritesFeed = False
 
 
 	def backInHistory(self):
 		if self.historyIndex > 1:
 			self.historyIndex = self.historyIndex - 1
-			self.loadFeed(_("Back in history, be patient ..."), self.history[self.historyIndex - 1], False, False)
+			self.loadFeed(_("Back in history, be patient ..."), self.history[self.historyIndex - 1], _("back in history"), False, False)
 
 
 	def forwardInHistory(self):
 		if self.historyIndex < len(self.history):
 			self.historyIndex = self.historyIndex + 1
-			self.loadFeed(_("Forward in history, be patient ..."), self.history[self.historyIndex - 1], False, False)
+			self.loadFeed(_("Forward in history, be patient ..."), self.history[self.historyIndex - 1], _("forward in history"), False, False)
 
 
 	def showVideoInfo(self):
@@ -432,7 +456,11 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 
 	def addToFavoritesReal(self):
-		interface.addToFavorites(self["list"].getCurrent()[0])
+		try:
+			interface.addToFavorites(self["list"].getCurrent()[0])
+		except Exception, e:
+			self.session.open(MessageBox, _("Error adding video to favorites:\n%s" %
+					e), MessageBox.TYPE_ERROR)
 
 
 	def addToFavoritesLogin(self, loginState):
@@ -452,9 +480,13 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 
 	def removeFromFavoritesReal(self):
-		if interface.removeFromFavorites(self["list"].getCurrent()[0]):
-			self.list.remove(self["list"].getCurrent())
-			self["list"].setList(self.list)
+		try:
+			if interface.removeFromFavorites(self["list"].getCurrent()[0]):
+				self.list.remove(self["list"].getCurrent())
+				self["list"].setList(self.list)
+		except Exception, e:
+			self.session.open(MessageBox, _("Error removing video from favorites:\n%s" %
+					e), MessageBox.TYPE_ERROR)
 
 
 	def removeFromFavoritesLogin(self, loginState):
@@ -474,9 +506,13 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 
 	def removeFromPlaylistReal(self):
-		if interface.removeFromPlaylist(self["list"].getCurrent()[0]):
-			self.list.remove(self["list"].getCurrent())
-			self["list"].setList(self.list)
+		try:
+			if interface.removeFromPlaylist(self["list"].getCurrent()[0]):
+				self.list.remove(self["list"].getCurrent())
+				self["list"].setList(self.list)
+		except Exception, e:
+			self.session.open(MessageBox, _("Error removing video from playlist:\n%s" %
+					e), MessageBox.TYPE_ERROR)
 
 
 	def removeFromPlaylistLogin(self, loginState):
@@ -497,7 +533,11 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 
 	def playlistChoosen(self, playlist):
 		if playlist is not None:
-			interface.addToPlaylist(playlist, self["list"].getCurrent()[0])
+			try:
+				interface.addToPlaylist(playlist, self["list"].getCurrent()[0])
+			except Exception, e:
+				self.session.open(MessageBox, _("Error adding video to playlist:\n%s" %
+					e), MessageBox.TYPE_ERROR)
 
 
 	def addToPlaylistReal(self):

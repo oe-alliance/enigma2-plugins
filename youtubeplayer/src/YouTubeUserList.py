@@ -185,7 +185,10 @@ class YouTubeUserListScreen(Screen):
 
 
 	def ok(self):
-		if self.userlist.getSelection().login():
-			self.close(YouTubeUserListScreen.LOGIN_SUCCESS)
-		else:
+		try:
+			if self.userlist.getSelection().login():
+				self.close(YouTubeUserListScreen.LOGIN_SUCCESS)
+			else:
+				self.close(YouTubeUserListScreen.LOGIN_FAILED)
+		except:
 			self.close(YouTubeUserListScreen.LOGIN_FAILED)
