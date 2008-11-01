@@ -28,11 +28,6 @@ config.plugins.Mosaic.countdown = ConfigInteger(default=5, limits=config_limits)
 playingIcon = loadPNG(resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/icons/ico_mp_play.png'))
 pausedIcon = loadPNG(resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/icons/ico_mp_pause.png'))
 
-Session = None
-Servicelist = None
-bouquetSel = None
-dlg_stack = []
-
 ################################################
 
 class Mosaic(Screen):
@@ -289,10 +284,14 @@ class Mosaic(Screen):
 ################################################
 # Most stuff stolen from the GraphMultiEPG
 
+Session = None
+Servicelist = None
+BouquetSelectorScreen = None
+
 def getBouquetServices(bouquet):
 	services = []
 	Servicelist = eServiceCenter.getInstance().list(bouquet)
-	if not Servicelist is None:
+	if Servicelist is not None:
 		while True:
 			service = Servicelist.getNext()
 			if not service.valid():
@@ -302,49 +301,29 @@ def getBouquetServices(bouquet):
 			services.append(service)
 	return services
 
+def closeBouquetSelectorScreen(ret=None):
+	if BouquetSelectorScreen is not None:
+		BouquetSelectorScreen.close()
+
 def openMosaic(bouquet):
-	services = getBouquetServices(bouquet)
-	if len(services):
-		dlg_stack.append(Session.openWithCallback(closed, Mosaic, services))
-		return True
-	return False
-
-def cleanup():
-	global Session
-	Session = None
-	global Servicelist
-	Servicelist = None
-
-def closed(ret=False):
-	closedScreen = dlg_stack.pop()
-	global bouquetSel
-	if bouquetSel and closedScreen == bouquetSel:
-		bouquetSel = None
-	dlgs = len(dlg_stack)
-	if ret and dlgs > 0:
-		dlg_stack[dlgs-1].close(dlgs > 1)
-	if dlgs <= 0:
-		cleanup()
+	if bouquet is not None:
+		services = getBouquetServices(bouquet)
+		if len(services):
+			Session.openWithCallback(closeBouquetSelectorScreen, Mosaic, services)
 
 def main(session, servicelist, **kwargs):
 	global Session
 	Session = session
 	global Servicelist
 	Servicelist = servicelist
+	global BouquetSelectorScreen
 	
 	bouquets = Servicelist.getBouquetList()
-	if bouquets is None:
-		cnt = 0
-	else:
-		cnt = len(bouquets)
-	
-	if cnt > 1:
-		global bouquetSel
-		bouquetSel = Session.openWithCallback(closed, BouquetSelector, bouquets, openMosaic, enableWrapAround=True)
-		dlg_stack.append(bouquetSel)
-	elif cnt == 1:
-		if not openMosaic(bouquets[0][1]):
-			cleanup()
+	if bouquets is not None:
+		if len(bouquets) == 1:
+			self.openMosaic(bouquets[0][1])
+		elif len(bouquets) > 1:
+			BouquetSelectorScreen = Session.open(BouquetSelector, bouquets, openMosaic, enableWrapAround=True)
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Mosaic"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
