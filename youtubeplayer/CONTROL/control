@@ -6,5 +6,5 @@ Priority: optional
 Maintainer: Volker Christian <volker.christian@fh-hagenberg.at>
 Architecture: mipsel
 Homepage: http://www.i-have-a-dreambox.com/wbb2/board.php?boardid=240
-Depends: enigma2, enigma2-plugin-extensions-vlcplayer, twisted-web python-gdata
+Depends: enigma2, enigma2-plugin-extensions-vlcplayer, twisted-web, python-gdata
 Source: Just localy at my harddrive
