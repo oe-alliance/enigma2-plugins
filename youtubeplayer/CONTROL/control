@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-youtubeplayer
-Version: 0.2
+Version: 0.2.1
 Description: Enigma2 Plugin to search and play YouTube Movies
 Section: base
 Priority: optional
