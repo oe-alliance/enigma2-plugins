@@ -561,6 +561,13 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 			self.addToPlaylistReal()
 
 
+	def getVideoUrl(self, youTubeEntry, fmt):
+		mrl = youTubeEntry.getVideoUrl(fmt)
+		if mrl is None:
+			self.session.open(MessageBox, _("Could not retrive video url:\n%s") % e, MessageBox.TYPE_ERROR)
+		return mrl
+
+
 # http://cacan.blog385.com/index.php/2008/05/09/youtube-high-quality-hacks/
 # add the &fmt=6 onto the end:
 #
@@ -580,7 +587,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 	def play(self):
 		print "[YTB] Play()"
 		youTubeEntry = self["list"].getCurrent()[0]
-		mrl = youTubeEntry.getVideoUrl("&fmt=18")
+		mrl = self.getVideoUrl(youTubeEntry, "&fmt=18")
 ############## To be resolved
 #Traceback (most recent call last):
 #  File "/usr/lib/enigma2/python/Components/ActionMap.py", line 46, in action
@@ -631,7 +638,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		if i < len(self.list):
 			self["list"].moveToIndex(i)
 			youTubeEntry = self["list"].getCurrent()[0]
-			return youTubeEntry.getVideoUrl("&fmt=18"), youTubeEntry.getTitle()
+			return self.getVideoUrl(youTubeEntry, "&fmt=18"), youTubeEntry.getTitle()
 		return None, None
 
 
@@ -640,7 +647,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		if i >= 0:
 			self["list"].moveToIndex(i)
 			youTubeEntry = self["list"].getCurrent()[0]
-			return youTubeEntry.getVideoUrl("&fmt=18"), youTubeEntry.getTitle()
+			return self.getVideoUrl(youTubeEntry, "&fmt=18"), youTubeEntry.getTitle()
 		return None, None
 
 
