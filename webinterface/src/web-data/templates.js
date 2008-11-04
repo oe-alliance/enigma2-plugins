@@ -360,6 +360,10 @@ var tplAbout  = '<table cellspacing="0" cellpadding="0" class="aboutSection">\n'
 	tplAbout += '<th colspan="2" class="aboutHeader">Software</th>\n';
 	tplAbout += '</tr>\n';
 	tplAbout += '<tr>\n';
+	tplAbout += '<td class="aboutElementLeft">Dreambox:</td>\n';
+	tplAbout += '<td class="aboutElementRight">%(dreamboxmodel)</td>\n';
+	tplAbout += '</tr>\n';
+	tplAbout += '<tr>\n';
 	tplAbout += '<td class="aboutElementLeft">Enigma Version:</td>\n';
 	tplAbout += '<td class="aboutElementRight">%(enigmaVersion)</td>\n';
 	tplAbout += '</tr>\n';

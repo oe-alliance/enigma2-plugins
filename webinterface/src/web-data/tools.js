@@ -993,7 +993,7 @@ function incomingAbout(request) {
 			try{
 				var fptext = "V"+xml.getElementsByTagName('e2fpversion').item(0).firstChild.data;
 				var tunerinfo = "";
-				
+
 				var nims = xml.getElementsByTagName('e2tunerinfo').item(0).getElementsByTagName("e2nim");
 				debug("nims: "+nims.length);
 				for(var i=0;i< nims.length;i++){
@@ -1006,15 +1006,16 @@ function incomingAbout(request) {
 					tunerinfo += RND(tplAboutTuner, ns);
 					
 				}
-				
+
 				var hdddata = xml.getElementsByTagName('e2hddinfo').item(0);
 				
 				var hddmodel 	= hdddata.getElementsByTagName("model").item(0).firstChild.data;
-				var hddcapacity = hdddata.getElementsByTagName("capacity").item(0).firstChild.data;
-				var hddfree		= hdddata.getElementsByTagName("free").item(0).firstChild.data;
+				var hddcapacity	= hdddata.getElementsByTagName("capacity").item(0).firstChild.data;
+				var hddfree	= hdddata.getElementsByTagName("free").item(0).firstChild.data;
 
 				var namespace = {
-					'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data
+					'dreamboxmodel':  xml.getElementsByTagName('e2model').item(0).firstChild.data
+					,'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data
 
 					,'lanDHCP': xml.getElementsByTagName('e2landhcp').item(0).firstChild.data
 					,'lanIP': xml.getElementsByTagName('e2lanip').item(0).firstChild.data
