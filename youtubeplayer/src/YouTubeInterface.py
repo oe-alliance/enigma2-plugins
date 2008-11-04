@@ -251,8 +251,8 @@ class YouTubeEntry():
 					break
 			response.close
 			if m:
-#				mrl = "http://www.youtube.com/get_video?" + quote(m.group("vid_query")) + fmt
 				mrl = "http://www.youtube.com/get_video?video_id=" + quote(self.getYouTubeId()) + "&t=" + quote(re.match (".*[?&]t=([^&]+)", m.group('vid_query')).groups()[0]) + fmt
+#"&sk=" + quote(re.match (".*[?&]sk=([^&]+)", m.group('vid_query')).groups()[0]) + fmt
 				print "[YTB] Playing ", mrl
 			else:
 				print "[YTB] No valid flv-mrl found"
