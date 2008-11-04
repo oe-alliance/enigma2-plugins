@@ -225,6 +225,7 @@ class AutoTimer:
 
 				# Initialize
 				newEntry = None
+				isNew = False
 
 				# Check for double Timers
 				# We first check eit and if user wants us to guess event based on time
@@ -245,7 +246,6 @@ class AutoTimer:
 									raise AutoTimerIgnoreTimerException("Won't modify existing timer because it's no timer set by us")
 								print "[AutoTimer] Warning, we're messing with a timer which might not have been set by us"
 
-							func = NavigationInstance.instance.RecordTimer.timeChanged
 							modified += 1
 
 							# Modify values saved in timer
@@ -273,20 +273,13 @@ class AutoTimer:
 					if timer.checkCounter(timestamp):
 						continue
 
-					new += 1
+					isNew = True
 
 					print "[AutoTimer] Adding an event."
-
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, description, eit)
-					func = NavigationInstance.instance.RecordTimer.record
 
 					# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
 					newEntry.isAutoTimer = True
-
-					if not recorddict.has_key(serviceref):
-						recorddict[serviceref] = [newEntry]
-					else:
-						recorddict[serviceref].append(newEntry)
 
 				# Apply afterEvent
  				if timer.hasAfterEvent():
@@ -299,16 +292,17 @@ class AutoTimer:
 				newEntry.dirname = timer.destination
 				newEntry.justplay = timer.justplay
 				newEntry.tags = timer.tags # This needs my enhanced tag support patch to work
- 
- 				# Do a sanity check, although it does not do much right now
- 				timersanitycheck = TimerSanityCheck(NavigationInstance.instance.RecordTimer.timer_list, newEntry)
- 				if not timersanitycheck.check():
- 					print "[Autotimer] Sanity check failed"
- 				else:
- 					print "[Autotimer] Sanity check passed"
 
- 				# Either add to List or change time
- 				func(newEntry)
+				if isNew:
+					if NavigationInstance.instance.RecordTimer.record(newEntry) is None:
+						new += 1
+						if recorddict.has_key(serviceref):
+							recorddict[serviceref].append(newEntry)
+						else:
+							recorddict[serviceref] = [newEntry]
+				else:
+					# XXX: this won't perform a sanity check, but do we actually want to do so?
+					NavigationInstance.instance.RecordTimer.timeChanged(newEntry)
 
 		return (total, new, modified, timers)
 
