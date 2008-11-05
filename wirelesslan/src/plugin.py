@@ -7,46 +7,53 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Components.config import config, getConfigListEntry, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, ConfigSelection
+from Components.config import config, getConfigListEntry, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, ConfigSelection, ConfigPassword
 from Components.ConfigList import ConfigListScreen
 from Components.Network import Network, iNetwork
 from Plugins.Plugin import PluginDescriptor
 from os import system, path as os_path, listdir
 from Wlan import Wlan, WlanList, wpaSupplicant
+from Wlan import Status, iStatus
 
 plugin_path = "/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessLan"
 
 list = []
-list.append(_("WEP"))
-list.append(_("WPA"))
-list.append(_("WPA2"))
+list.append("WEP")
+list.append("WPA")
+list.append("WPA2")
+list.append("WPA/WPA2")
+
+weplist = []
+weplist.append("ASCII")
+weplist.append("HEX")
 
 config.plugins.wlan = ConfigSubsection()
-config.plugins.wlan.essidscan = NoSave(ConfigYesNo(default = False))
 config.plugins.wlan.essid = NoSave(ConfigText(default = "home", fixed_size = False))
+config.plugins.wlan.hiddenessid = NoSave(ConfigText(default = "home", fixed_size = False))
 
 config.plugins.wlan.encryption = ConfigSubsection()
 config.plugins.wlan.encryption.enabled = NoSave(ConfigYesNo(default = False))
-config.plugins.wlan.encryption.type = NoSave(ConfigSelection(list, default = _("WPA")))
-config.plugins.wlan.encryption.psk = NoSave(ConfigText(default = "mysecurewlan", fixed_size = False))
+config.plugins.wlan.encryption.type = NoSave(ConfigSelection(list, default = "WPA/WPA2" ))
+config.plugins.wlan.encryption.wepkeytype = NoSave(ConfigSelection(weplist, default = "ASCII"))
+config.plugins.wlan.encryption.psk = NoSave(ConfigPassword(default = "mysecurewlan", fixed_size = False))
 
 
 class WlanStatus(Screen):
 	skin = """
 	<screen position="90,150" size="550,300" title="Wireless Network State" >
-		<widget name="LabelBSSID" position="10,10" size="150,25" valign="left" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="LabelESSID" position="10,38" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="LabelQuality" position="10,66" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="LabelSignal" position="10,94" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="LabelBitrate" position="10,122" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="LabelChannel" position="10,150" size="150,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelBSSID" position="10,10" size="250,25" valign="left" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelESSID" position="10,38" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelQuality" position="10,66" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelSignal" position="10,94" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelBitrate" position="10,122" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="LabelEnc" position="10,150" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 		
 		<widget name="BSSID" position="320,10" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 		<widget name="ESSID" position="320,38" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 		<widget name="quality" position="320,66" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 		<widget name="signal" position="320,94" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 		<widget name="bitrate" position="320,122" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="channel" position="320,150" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget name="enc" position="320,150" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
 		
 		<widget name="BottomBG" pixmap="skin_default/bottombar.png" position="5,210" size="540,120" zPosition="1" transparent="1" alphatest="on" />
 		<widget name="IFtext" position="20,225" size="100,21" zPosition="10" font="Regular;19" transparent="1" />
@@ -68,24 +75,20 @@ class WlanStatus(Screen):
 		self.session = session
 		self.iface = iface
 		self.skin = WlanStatus.skin
-		
-		self.timer = eTimer()
-		self.timer.timeout.get().append(self.resetList) 
-		self.onShown.append(lambda: self.timer.start(5000))
-						    
+				    
 		self["LabelBSSID"] = Label(_('Accesspoint:'))
 		self["LabelESSID"] = Label(_('SSID:'))
 		self["LabelQuality"] = Label(_('Link Quality:'))
 		self["LabelSignal"] = Label(_('Signal Strength:'))
 		self["LabelBitrate"] = Label(_('Bitrate:'))
-		self["LabelChannel"] = Label(_('Channel:'))
+		self["LabelEnc"] = Label(_('Encryption:'))
 			
 		self["BSSID"] = Label()
 		self["ESSID"] = Label()
 		self["quality"] = Label()
 		self["signal"] = Label()
 		self["bitrate"] = Label()
-		self["channel"] = Label()
+		self["enc"] = Label()
 
 		self["IFtext"] = Label()
 		self["IF"] = Label()
@@ -107,40 +110,61 @@ class WlanStatus(Screen):
 			"back": self.exit,
 			"red": self.exit,
 		}, -1)
+		self.timer = eTimer()
+		self.timer.timeout.get().append(self.resetList) 
+		self.onShown.append(lambda: self.timer.start(5000))
 		self.onLayoutFinish.append(self.layoutFinished)
+		self.onClose.append(self.cleanup)
+
+	def cleanup(self):
+		iStatus.stopWlanConsole()
 		
 	def layoutFinished(self):
 		self.setTitle(_("Wireless Network State"))
 		
 	def resetList(self):
-		w = Wlan(self.iface)
-		stats = w.getStatus()
-		if stats['BSSID'] == "00:00:00:00:00:00":
-			stats['BSSID'] = _("No Connection!")
-		self["BSSID"].setText(stats['BSSID'])
-		self["ESSID"].setText(stats['ESSID'])
-		self["quality"].setText(stats['quality']+"%")
-		self["signal"].setText(stats['signal']+"%")
-		self["bitrate"].setText(stats['bitrate'])
-		self["channel"].setText(stats['channel'])
+		print "self.iface im resetlist",self.iface
+		iStatus.getDataForInterface(self.iface,self.getInfoCB)
 		
-	
+	def getInfoCB(self,data,status):
+		if data is not None:
+			if data is True:
+				if status is not None:
+					self["BSSID"].setText(status[self.iface]["acesspoint"])
+					self["ESSID"].setText(status[self.iface]["essid"])
+					self["quality"].setText(status[self.iface]["quality"]+"%")
+					self["signal"].setText(status[self.iface]["signal"])
+					self["bitrate"].setText(status[self.iface]["bitrate"])
+					self["enc"].setText(status[self.iface]["encryption"])
+					self.updateStatusLink(status)
+
 	def exit(self):
 		self.timer.stop()
 		self.close()	
 
 	def updateStatusbar(self):
+		print "self.iface im updateStatusbar",self.iface
+		self["BSSID"].setText(_("Please wait..."))
+		self["ESSID"].setText(_("Please wait..."))
+		self["quality"].setText(_("Please wait..."))
+		self["signal"].setText(_("Please wait..."))
+		self["bitrate"].setText(_("Please wait..."))
+		self["enc"].setText(_("Please wait..."))
 		self["IFtext"].setText(_("Network:"))
 		self["IF"].setText(iNetwork.getFriendlyAdapterName(self.iface))
 		self["Statustext"].setText(_("Link:"))
-		w = Wlan(self.iface)
-		stats = w.getStatus()
-		if stats['BSSID'] == "00:00:00:00:00:00":
-			self["statuspic_active"].hide()
-			self["statuspic_inactive"].show()
-		else:
-			self["statuspic_active"].show()
-			self["statuspic_inactive"].hide()
+
+	def updateStatusLink(self,status):
+		
+		if status is not None:
+			if status[self.iface]["acesspoint"] == "No Connection" or status[self.iface]["acesspoint"] == "Not-Associated" or status[self.iface]["acesspoint"] == False:
+				self["statuspic_active"].hide()
+				self["statuspic_inactive"].show()
+			else:
+				self["statuspic_active"].show()
+				self["statuspic_inactive"].hide()		
+
+
 
 
 class WlanScan(Screen):
@@ -254,7 +278,7 @@ def configStrings(iface):
 	if driver == 'madwifi':
 		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -dd -Dmadwifi\n	post-down wpa_cli terminate"
 	if driver == 'zydas':
-		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -Dzydas\n	post-down wpa_cli terminate"
+		return "	pre-up /usr/sbin/wpa_supplicant -i"+iface+" -c/etc/wpa_supplicant.conf -B -dd -Dzydas\n	post-down wpa_cli terminate"
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Wireless LAN"), description=_("Connect to a Wireless Network"), where = PluginDescriptor.WHERE_NETWORKSETUP, fnc={"ifaceSupported": callFunction, "configStrings": configStrings, "WlanPluginEntry": lambda x: "Wireless Network Configuartion..."})
