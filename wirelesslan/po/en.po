@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 17:26+0200\n"
+"POT-Creation-Date: 2008-07-29 08:23+0200\n"
 "PO-Revision-Date: 2005-11-17 20:53+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -16,97 +16,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid " Wireless Network(s) found!"
+msgid "Configure interface"
 msgstr ""
 
-msgid "Accesspoint:"
+msgid "Configure nameservers"
 msgstr ""
 
-msgid "Bitrate:"
+msgid "Configure your internal LAN"
 msgstr ""
 
-msgid "Channel:"
+msgid "Configure your network again"
 msgstr ""
 
-msgid "Choose a Wireless Network"
+msgid "Configure your wireless LAN again"
 msgstr ""
 
-msgid "Close"
+msgid "Exit wizard and configure later manually"
 msgstr ""
 
-msgid "Connect"
+msgid "Network Wizard"
 msgstr ""
 
-msgid "Connect to a Wireless Network"
+msgid "No Networks found"
 msgstr ""
 
-msgid "Edit Wireless Settings"
+msgid ""
+"Please configure or verify your Nameservers by filling out the required "
+"values.\n"
+"When you are ready press OK to continue."
 msgstr ""
 
-#, python-format
-msgid "Encrypted: %s"
+msgid ""
+"Please configure your internet connection by filling out the required "
+"values.\n"
+"When you are ready press OK to continue."
 msgstr ""
 
-msgid "Encryption"
+msgid "Please follow the instructions on the TV"
 msgstr ""
 
-msgid "Encryption Key"
+msgid ""
+"Please select the network interface that you want to use for your internet "
+"connection.\n"
+"\n"
+"Please press OK to continue."
 msgstr ""
 
-msgid "Encryption Type"
+msgid ""
+"Please select the wireless LAN network that you want to connect to.\n"
+"\n"
+"Please press OK to continue."
 msgstr ""
 
-msgid "Interface: "
+msgid "Select interface"
 msgstr ""
 
-#, python-format
-msgid "Interface: %s"
+msgid "Select wireless network"
 msgstr ""
 
-msgid "Link Quality:"
+msgid ""
+"Thank you for using the wizard.\n"
+"Please press OK to continue."
 msgstr ""
 
-msgid "Link:"
-msgstr ""
-
-#, python-format
-msgid "Max. Bitrate: %s"
-msgstr ""
-
-msgid "N/A"
-msgstr ""
-
-msgid "Network SSID"
-msgstr ""
-
-msgid "Network:"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "No Connection!"
-msgstr ""
-
-msgid "Press OK to activate the settings."
-msgstr ""
-
-msgid "Refresh"
-msgstr ""
-
-msgid "SSID:"
-msgstr ""
-
-msgid "Scan for Wireless Networks"
-msgstr ""
-
-msgid "Show WLAN Status"
-msgstr ""
-
-msgid "Signal Strength:"
-msgstr ""
-
-msgid "Signal: "
+msgid ""
+"The wireless LAN plugin is not installed!\n"
+"Please install it and choose what you want to do next."
 msgstr ""
 
 msgid "WEP"
@@ -118,11 +93,34 @@ msgstr ""
 msgid "WPA2"
 msgstr ""
 
-msgid "Wireless LAN"
+msgid ""
+"Welcome.\n"
+"\n"
+"If you want to connect your Dreambox to the Internet, this wizard will guide "
+"you through the basic network setup of your Dreambox.\n"
+"\n"
+"Press OK to start configuring your network"
 msgstr ""
 
-msgid "Wireless Network State"
+msgid ""
+"Your Dreambox is now ready to use.\n"
+"\n"
+"Your internet connection is working now.\n"
+"\n"
+"Please press OK to continue."
 msgstr ""
 
-msgid "Yes"
+msgid ""
+"Your internet connection is not working!\n"
+"Please choose what you want to do next."
+msgstr ""
+
+msgid ""
+"Your wireless LAN internet connection could not be started!\n"
+"Have you attached your USB WLAN Stick?\n"
+"\n"
+"Please choose what you want to do next."
+msgstr ""
+
+msgid "unavailable"
 msgstr ""

@@ -1,133 +1,228 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2008 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <spaeleus@croci.org>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 plugin WirelessLan italian locale v2.0\n"
+"Project-Id-Version: Enigma2 Networkwizard italian locale\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-08-03 17:39+0200\n"
-"PO-Revision-Date: 2008-08-04 11:21+0100\n"
+"PO-Revision-Date: 2008-08-04 12:01+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
-"Language-Team: WWW.Linsat.net <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
-"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
 
-#: ../src/plugin.py:227
-msgid " Wireless Network(s) found!"
-msgstr "Rete Wireless rilevata!"
+#: ../src/NetworkWizard.py:65
+#: ../src/
+msgid "Exit wizard and configure later manually"
+msgstr "Uscire e configurare manualmente più tardi"
 
-#: ../src/plugin.py:75
-msgid "Accesspoint:"
-msgstr "Accesspoint:"
+#: ../src/plugin.py:19
+#: ../src/plugin.py:28
+#: ../src/
+msgid "Network Wizard"
+msgstr "Configurazione Guidata"
 
-#: ../src/plugin.py:79
-msgid "Bitrate:"
-msgstr "Bitrate:"
+#: ../src/NetworkWizard.py:112
+msgid "No Networks found"
+msgstr "Nessuna Rete rilevata!"
 
-#: ../src/plugin.py:80
-msgid "Channel:"
-msgstr "Canale: "
-
-#: ../src/plugin.py:197
-msgid "Choose a Wireless Network"
-msgstr "Scegliere una Rete Wireless"
-
-#: ../src/plugin.py:98
-#: ../src/plugin.py:178
-msgid "Close"
-msgstr "Chiudere"
-
-#: ../src/plugin.py:179
-msgid "Connect"
-msgstr "Connettere"
-
-#: ../src/plugin.py:264
-msgid "Connect to a Wireless Network"
-msgstr "Connesso a Rete Wireless"
-
-#: ../src/Wlan.py:180
-#, python-format
-msgid "Encrypted: %s"
-msgstr "Codificata: %s"
-
-#: ../src/Wlan.py:181
-#, python-format
-msgid "Interface: %s"
-msgstr "Interfaccia: %s"
-
-#: ../src/plugin.py:77
-msgid "Link Quality:"
-msgstr "Qualità:"
-
-#: ../src/plugin.py:134
-msgid "Link:"
-msgstr "Connesso:"
-
-#: ../src/Wlan.py:179
-#, python-format
-msgid "Max. Bitrate: %s"
-msgstr "Bitrate Max.: %s"
-
-#: ../src/Wlan.py:142
-msgid "N/A"
-msgstr "N/A"
-
-#: ../src/plugin.py:132
-msgid "Network:"
-msgstr "Rete:"
-
-#: ../src/Wlan.py:175
-msgid "No"
-msgstr "No"
-
-#: ../src/plugin.py:118
-msgid "No Connection!"
-msgstr "Nessuna Connessione!"
-
-#: ../src/plugin.py:180
-msgid "Refresh"
-msgstr "Aggiornare"
-
-#: ../src/plugin.py:76
-msgid "SSID:"
-msgstr "SSID:"
-
-#: ../src/plugin.py:78
-msgid "Signal Strength:"
-msgstr "Potenza:"
-
-#: ../src/Wlan.py:177
-msgid "Signal: "
-msgstr "Segnale: "
-
-#: ../src/Wlan.py:15
-#: ../src/plugin.py:20
+#: ../src/NetworkWizard.py:19
 msgid "WEP"
 msgstr "WEP"
 
-#: ../src/Wlan.py:16
-#: ../src/Wlan.py:24
-#: ../src/plugin.py:21
-#: ../src/plugin.py:29
+#: ../src/NetworkWizard.py:20
+#: ../src/NetworkWizard.py:27
 msgid "WPA"
 msgstr "WPA"
 
-#: ../src/Wlan.py:17
-#: ../src/plugin.py:22
+#: ../src/NetworkWizard.py:21
 msgid "WPA2"
 msgstr "WPA2"
 
-#: ../src/plugin.py:264
-msgid "Wireless LAN"
-msgstr "Rete Locale Wireless"
+#: ../src/NetworkWizard.py:112
+msgid "unavailable"
+msgstr "Non disponibile!"
 
-#: ../src/plugin.py:112
-msgid "Wireless Network State"
-msgstr "Stato Rete Wireless"
+#: ../src/
+msgid "Configure interface"
+msgstr "Configurare l'interfaccia."
 
-#: ../src/Wlan.py:175
-msgid "Yes"
-msgstr "Sì"
+#: ../src/
+msgid "Configure nameservers"
+msgstr "Configurare i Nameserver"
+
+#: ../src/
+msgid "Configure your internal LAN"
+msgstr "Configurare la rete locale cablata."
+
+#: ../src/
+msgid "Configure your network again"
+msgstr "Configurare di nuovo la rete locale."
+
+#: ../src/
+msgid "Configure your wireless LAN again"
+msgstr "Configurare di nuovo la rete locale wireless."
+
+#: ../src/
+msgid ""
+"Please configure or verify your Nameservers by filling out the required values.\n"
+"When you are ready press OK to continue."
+msgstr ""
+"Configurare o verificare i Nameserver inserendo i parametri richiesti.\n"
+"Quando pronti, premere OK per continuare."
+
+#: ../src/
+msgid ""
+"Please configure your internet connection by filling out the required values.\n"
+"When you are ready press OK to continue."
+msgstr ""
+"Configurare la connessione a Internet inserendo i parametri richiesti.\n"
+"Quando pronti, premere OK per continuare."
+
+#: ../src/
+msgid "Please follow the instructions on the TV"
+msgstr "Seguire le istruzioni sullo schermo"
+
+#: ../src/
+msgid ""
+"Please select the network interface that you want to use for your internet connection.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+"Selezionare l'interfaccia di rete che verrà utilizzata per la connessione a Internet.\n"
+"\n"
+"Premere OK per continuare."
+
+#: ../src/
+msgid ""
+"Please select the wireless LAN network that you want to connect to.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+"Selezionare la rete locale wireless a cui connettersi.\n"
+"\n"
+"Premere OK per continuare."
+
+#: ../src/
+msgid "Select interface"
+msgstr "Selezionare l'interfaccia"
+
+#: ../src/
+msgid "Select wireless network"
+msgstr "Selezionare una Rete Wireless"
+
+#: ../src/
+msgid ""
+"Thank you for using the wizard.\n"
+"Please press OK to continue."
+msgstr ""
+"Grazie per aver utilizzato questa Configurazione guidata.\n"
+"Premere OK per continuare."
+
+#: ../src/
+msgid ""
+"The wireless LAN plugin is not installed!\n"
+"Please install it and choose what you want to do next."
+msgstr ""
+"Il plugin 'WirelessLan' non è installato!\n"
+"Installarlo per poterlo configurare."
+
+#: ../src/
+msgid ""
+"Welcome.\n"
+"\n"
+"If you want to connect your Dreambox to the Internet, this wizard will guide you through the basic network setup of your Dreambox.\n"
+"\n"
+"Press OK to start configuring your network"
+msgstr ""
+"Benvenuto.\n"
+"\n"
+"Questa configurazione guidata fornirà supporto di base per la configurazione di rete del Dreambox e la sua connessione a Internet.\n"
+"\n"
+"Premere OK per iniziare la configurazione della rete."
+
+#: ../src/
+msgid ""
+"Your Dreambox is now ready to use.\n"
+"\n"
+"Your internet connection is working now.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+"Il Dreambox è ora pronto per l'uso.\n"
+"\n"
+"La connessione a Internet è attiva.\n"
+"\n"
+"Premere OK per continuare."
+
+#: ../src/
+msgid ""
+"Your internet connection is not working!\n"
+"Please choose what you want to do next."
+msgstr ""
+"La connessione a Internet non funziona!\n"
+"Selezionare un'opzione per proseguire."
+
+#: ../src/
+msgid ""
+"Your wireless LAN internet connection could not be started!\n"
+"Have you attached your USB WLAN Stick?\n"
+"\n"
+"Please choose what you want to do next."
+msgstr ""
+"La connessione a Internet su rete locale wireless non può essere avviata!\n"
+"Controllare che la penna WLAN USB sia collegata correttamente.\n"
+"\n"
+"Selezionare un'opzione per proseguire."
+
+#~ msgid "Accesspoint:"
+#~ msgstr "Exit wizard and configure later manually"
+#~ msgid "Bitrate:"
+#~ msgstr "Bitrate:"
+#~ msgid "Channel:"
+#~ msgstr "Canale:"
+#~ msgid "Choose a Wireless Network"
+#~ msgstr "Scegliere una Rete Wireless"
+#~ msgid "Close"
+#~ msgstr "Chiudere"
+#~ msgid "Connect"
+#~ msgstr "Connettere"
+#~ msgid "Encrypted: %s"
+#~ msgstr "Codificato: %s"
+#~ msgid "Interface: %s"
+#~ msgstr "Interfaccia: %s"
+#~ msgid "Link Quality:"
+#~ msgstr "Qualità:"
+#~ msgid "Link:"
+#~ msgstr "Link:"
+#~ msgid "Max. Bitrate: %s"
+#~ msgstr "Bitrate Max: %s"
+#~ msgid "N/A"
+#~ msgstr "N/A"
+#~ msgid "No"
+#~ msgstr "No"
+#~ msgid "No Connection!"
+#~ msgstr "Nessuna Connessione!"
+#~ msgid "Refresh"
+#~ msgstr "Ricaricare"
+#~ msgid "SSID:"
+#~ msgstr "SSID:"
+#~ msgid "Signal Strength:"
+#~ msgstr "Potenza:"
+#~ msgid "Signal: "
+#~ msgstr "Segnale:"
+#~ msgid "Wireless LAN"
+#~ msgstr "Rete Wireless"
+#~ msgid "Wireless Network State"
+#~ msgstr "Stato Rete Wireless"
+#~ msgid "Yes"
+#~ msgstr "Sì"
 

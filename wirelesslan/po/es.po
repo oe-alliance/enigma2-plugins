@@ -19,97 +19,65 @@ msgstr ""
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
-msgid " Wireless Network(s) found!"
+msgid "Configure your LAN again"
 msgstr ""
 
-msgid "Accesspoint:"
+msgid "Configure your internal LAN"
 msgstr ""
 
-msgid "Bitrate:"
+msgid "Configure your wireless LAN"
 msgstr ""
 
-msgid "Channel:"
+msgid "Configure your wireless LAN again"
 msgstr ""
 
-msgid "Choose a Wireless Network"
+msgid "Exit wizard and configure later manually"
 msgstr ""
 
-msgid "Close"
+msgid "Network Wizard"
 msgstr ""
 
-msgid "Connect"
+msgid "No Networks found"
 msgstr ""
 
-msgid "Connect to a Wireless Network"
+msgid ""
+"Please configure your LAN internet connection by filling out the required "
+"values.\n"
+"When you are ready press OK to continue."
 msgstr ""
 
-msgid "Edit Wireless Settings"
+msgid ""
+"Please configure your wireless LAN internet connection by filling out the "
+"required values.\n"
+"When you are done, press OK to continue."
 msgstr ""
 
-#, python-format
-msgid "Encrypted: %s"
+msgid ""
+"Please select the wireless LAN network that you want to connect to.\n"
+"\n"
+"Please press OK to continue."
 msgstr ""
 
-msgid "Encryption"
+msgid "Restart your wireless interface"
 msgstr ""
 
-msgid "Encryption Key"
+msgid ""
+"Thank you for using the wizard. Your Dreambox is now ready to use.\n"
+"Please press OK to continue."
 msgstr ""
 
-msgid "Encryption Type"
+msgid ""
+"The wireless LAN plugin is not installed!\n"
+"Please install it and choose what you want to do next."
 msgstr ""
 
-msgid "Interface: "
-msgstr ""
-
-#, python-format
-msgid "Interface: %s"
-msgstr ""
-
-msgid "Link Quality:"
-msgstr ""
-
-msgid "Link:"
-msgstr ""
-
-#, python-format
-msgid "Max. Bitrate: %s"
-msgstr ""
-
-msgid "N/A"
-msgstr ""
-
-msgid "Network SSID"
-msgstr ""
-
-msgid "Network:"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "No Connection!"
-msgstr ""
-
-msgid "Press OK to activate the settings."
-msgstr ""
-
-msgid "Refresh"
-msgstr ""
-
-msgid "SSID:"
-msgstr ""
-
-msgid "Scan for Wireless Networks"
-msgstr ""
-
-msgid "Show WLAN Status"
-msgstr ""
-
-msgid "Signal Strength:"
-msgstr ""
-
-msgid "Signal: "
+msgid ""
+"Use the up/down keys on your remote control to select an option. After that, "
+"press OK.\n"
+"\n"
+"\n"
+"\n"
+"Connect to the internet..."
 msgstr ""
 
 msgid "WEP"
@@ -121,11 +89,59 @@ msgstr ""
 msgid "WPA2"
 msgstr ""
 
-msgid "Wireless LAN"
+msgid ""
+"Welcome.\n"
+"\n"
+"If you want to connect your Dreambox to the Internet, this wizard will guide "
+"you through the basic network setup of your Dreambox.\n"
+"\n"
+"Press OK to start configuring your network"
 msgstr ""
 
-msgid "Wireless Network State"
+msgid ""
+"Your Dreambox is now ready to use.\n"
+"\n"
+"Your LAN internet connection is working now.\n"
+"\n"
+"Please press OK to continue."
 msgstr ""
 
-msgid "Yes"
+msgid ""
+"Your Dreambox is now ready to use.\n"
+"\n"
+"Your wireless LAN internet connection is working now.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+
+msgid ""
+"Your LAN internet connection is not working!\n"
+"Please choose what you want to do next."
+msgstr ""
+
+msgid ""
+"Your network is restarting.\n"
+"\n"
+"Please press OK to continue."
+msgstr ""
+
+msgid ""
+"Your wireless LAN internet connection could not be started!\n"
+"Have you attached your USB WLAN Stick?\n"
+"\n"
+"Please choose what you want to do next."
+msgstr ""
+
+msgid ""
+"Your wireless LAN internet connection is not working!\n"
+"Please choose what you want to do next."
+msgstr ""
+
+msgid "unavailable"
+msgstr ""
+
+msgid "via LAN."
+msgstr ""
+
+msgid "via wireless LAN."
 msgstr ""
