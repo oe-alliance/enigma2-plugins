@@ -1,5 +1,5 @@
 # Plugins Config
-from xml.dom.minidom import parse as minidom_parse
+from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
 from AutoTimerConfiguration import parseConfig, writeConfig
 
@@ -78,23 +78,20 @@ class AutoTimer:
 		self.configMtime = mtime
 
 		# Parse Config
-		dom = minidom_parse(XML_CONFIG)
-		
+		configuration = cet_parse(XML_CONFIG).getroot()
+
 		# Empty out timers and reset Ids
 		del self.timers[:]
-		self.uniqueTimerId = 0
 		self.defaultTimer.clear(-1, True)
 
-		# Get Config Element
-		for configuration in dom.getElementsByTagName("autotimer"):
-			parseConfig(
-				configuration,
-				self.timers,
-				configuration.getAttribute("version"),
-				self.uniqueTimerId,
-				self.defaultTimer
-			)
-			self.uniqueTimerId = len(self.timers)
+		parseConfig(
+			configuration,
+			self.timers,
+			configuration.get("version"),
+			0,
+			self.defaultTimer
+		)
+		self.uniqueTimerId = len(self.timers)
 
 	def writeXml(self):
 		writeConfig(XML_CONFIG, self.defaultTimer, self.timers)

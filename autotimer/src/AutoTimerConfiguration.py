@@ -17,17 +17,11 @@ def getValue(definitions, default):
 	if isinstance(definitions, list):
 		Len = len(definitions)
 		if Len > 0:
-			childNodes = definitions[Len-1].childNodes
+			childNodes = definitions[Len-1].text
 		else:
-			childNodes = []
+			childNodes = ""
 	else:
-		childNodes = definitions.childNodes
-
-	# Iterate through nodes of last one
-	for node in childNodes:
-		# Append text if we have a text node
-		if node.nodeType == node.TEXT_NODE:
-			ret = ret + node.data
+		ret = definitions.text
 
 	# Return stripped output or (if empty) default
 	return ret.strip() or default
@@ -39,10 +33,10 @@ def parseConfig(configuration, list, version = None, uniqueTimerId = 0, defaultT
 
 	if defaultTimer is not None:
 		# Read in defaults for a new timer
-		for defaults in configuration.getElementsByTagName("defaults"):
+		for defaults in configuration.findall("defaults"):
 			parseEntry(defaults, defaultTimer, True)
 
-	for timer in configuration.getElementsByTagName("timer"):
+	for timer in configuration.findall("timer"):
 		uniqueTimerId += 1
 		baseTimer = AutoTimerComponent(
 			uniqueTimerId,
@@ -57,19 +51,19 @@ def parseConfig(configuration, list, version = None, uniqueTimerId = 0, defaultT
 def parseEntry(element, baseTimer, defaults = False):
 	if not defaults:
 		# Read out match
-		baseTimer.match = element.getAttribute("match").encode("UTF-8")
+		baseTimer.match = element.get("match", "").encode("UTF-8")
 		if not baseTimer.match:
 			print '[AutoTimer] Erroneous config is missing attribute "match", skipping entry'
 			return False
 
 		# Read out name
-		baseTimer.name = element.getAttribute("name").encode("UTF-8")
+		baseTimer.name = element.get("name", "").encode("UTF-8")
 		if not baseTimer.name:
 			print '[AutoTimer] Timer is missing attribute "name", defaulting to match'
 			baseTimer.name = baseTimer.match
 
 		# Read out enabled
-		enabled = element.getAttribute("enabled") or "yes"
+		enabled = element.get("enabled", "yes")
 		if enabled == "no":
 			baseTimer.enabled = False
 		elif enabled == "yes":
@@ -79,23 +73,23 @@ def parseEntry(element, baseTimer, defaults = False):
 			baseTimer.enabled = False
 
 	# Read out timespan
-	start = element.getAttribute("from")
-	end = element.getAttribute("to")
+	start = element.get("from")
+	end = element.get("to")
 	if start and end:
 		start = [int(x) for x in start.split(':')]
 		end = [int(x) for x in end.split(':')]
 		baseTimer.timespan = (start, end)
 
 	# Read out max length
-	maxduration = element.getAttribute("maxduration") or None
+	maxduration = element.get("maxduration")
 	if maxduration:
 		baseTimer.maxduration = int(maxduration)*60
 
 	# Read out recording path
-	baseTimer.destination = element.getAttribute("location").encode("UTF-8") or None
+	baseTimer.destination = element.get("location", "").encode("UTF-8") or None
 
 	# Read out offset
-	offset = element.getAttribute("offset") or None
+	offset = element.get("offset")
 	if offset:
 		offset = offset.split(",")
 		if len(offset) == 1:
@@ -106,23 +100,23 @@ def parseEntry(element, baseTimer, defaults = False):
 		baseTimer.offset = (before, after)
 
 	# Read out counter
-	baseTimer.matchCount = int(element.getAttribute("counter") or '0')
-	baseTimer.matchFormatString = element.getAttribute("counterFormat")
+	baseTimer.matchCount = int(element.get("counter", 0))
+	baseTimer.matchFormatString = element.get("counterFormat", "")
 	if not defaults:
-		baseTimer.counterLimit = element.getAttribute("lastActivation")
-		baseTimer.counterFormat = element.getAttribute("counterFormat")
-		baseTimer.lastBegin = int(element.getAttribute("lastBegin") or 0)
+		baseTimer.counterLimit = element.get("lastActivation", "")
+		baseTimer.counterFormat = element.get("counterFormat", "")
+		baseTimer.lastBegin = int(element.get("lastBegin", 0))
 
 	# Read out justplay
-	justplay = int(element.getAttribute("justplay") or '0')
+	justplay = int(element.get("justplay", 0))
 
 	# Read out avoidDuplicateDescription
-	baseTimer.avoidDuplicateDescription = int(element.getAttribute("avoidDuplicateDescription") or 0)
+	baseTimer.avoidDuplicateDescription = int(element.get("avoidDuplicateDescription", 0))
 
 	# Read out allowed services
 	servicelist = baseTimer.services	
-	for service in element.getElementsByTagName("serviceref"):
-		value = getValue(service, None)
+	for service in element.findall("serviceref"):
+		value = service.text
 		if value:
 			# strip all after last :
 			pos = value.rfind(':')
@@ -134,8 +128,8 @@ def parseEntry(element, baseTimer, defaults = False):
 
 	# Read out allowed bouquets
 	bouquets = baseTimer.bouquets
-	for bouquet in element.getElementsByTagName("bouquet"):
-		value = getValue(bouquet, None)
+	for bouquet in element.findall("bouquet"):
+		value = bouquet.text
 		if value:
 			bouquets.append(value)
 	baseTimer.bouquets = bouquets
@@ -143,8 +137,8 @@ def parseEntry(element, baseTimer, defaults = False):
 	# Read out afterevent
 	idx = {"none": AFTEREVENT.NONE, "standby": AFTEREVENT.STANDBY, "shutdown": AFTEREVENT.DEEPSTANDBY, "deepstandby": AFTEREVENT.DEEPSTANDBY}
 	afterevent = baseTimer.afterevent
-	for element in element.getElementsByTagName("afterevent"):
-		value = getValue(element, None)
+	for element in element.findall("afterevent"):
+		value = element.text
 
 		try:
 			value = idx[value]
@@ -152,8 +146,8 @@ def parseEntry(element, baseTimer, defaults = False):
 			print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
 			continue
 
-		start = element.getAttribute("from")
-		end = element.getAttribute("to")
+		start = element.get("from")
+		end = element.get("to")
 		if start and end:
 			start = [int(x) for x in start.split(':')]
 			end = [int(x) for x in end.split(':')]
@@ -165,9 +159,9 @@ def parseEntry(element, baseTimer, defaults = False):
 	# Read out exclude
 	idx = {"title": 0, "shortdescription": 1, "description": 2, "dayofweek": 3}
 	excludes = (baseTimer.getExcludedTitle(), baseTimer.getExcludedShort(), baseTimer.getExcludedDescription(), baseTimer.getExcludedDays()) 
-	for exclude in element.getElementsByTagName("exclude"):
-		where = exclude.getAttribute("where")
-		value = getValue(exclude, None)
+	for exclude in element.findall("exclude"):
+		where = exclude.get("where")
+		value = exclude.text
 		if not (value and where):
 			continue
 
@@ -179,9 +173,9 @@ def parseEntry(element, baseTimer, defaults = False):
 
 	# Read out includes (use same idx)
 	includes = (baseTimer.getIncludedTitle(), baseTimer.getIncludedShort(), baseTimer.getIncludedDescription(), baseTimer.getIncludedDays())
-	for include in element.getElementsByTagName("include"):
-		where = include.getAttribute("where")
-		value = getValue(include, None)
+	for include in element.findall("include"):
+		where = include.get("where")
+		value = include.text
 		if not (value and where):
 			continue
 
@@ -193,8 +187,8 @@ def parseEntry(element, baseTimer, defaults = False):
 
 	# Read out recording tags (needs my enhanced tag support patch)
 	tags = baseTimer.tags
-	for tag in element.getElementsByTagName("tag"):
-		value = getValue(tag, None)
+	for tag in element.findall("tag"):
+		value = tag.text
 		if not value:
 			continue
 
@@ -207,38 +201,40 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 	print "[AutoTimer] Trying to parse old config"
 
 	# Iterate Timers
-	for timer in configuration.getElementsByTagName("timer"):
+	for timer in configuration.findall("timer"):
 		# Increment uniqueTimerId
 		uniqueTimerId += 1
 
 		# Get name (V2+)
-		if timer.hasAttribute("name"):
-			name = timer.getAttribute("name").encode("UTF-8")
+		name = timer.get("name")
+		if name:
+			name = name.encode("UTF-8")
 		# Get name (= match) (V1)
 		else:
 			# Read out name
-			name = getValue(timer.getElementsByTagName("name"), "").encode("UTF-8")
+			name = getValue(timer.findall("name"), "").encode("UTF-8")
 
 		if not name:
 			print '[AutoTimer] Erroneous config is missing attribute "name", skipping entry'
 			continue
 
 		# Read out match (V3+)
-		if timer.hasAttribute("match"):
+		match = timer.get("match")
+		if match:
 			# Read out match
-			match = timer.getAttribute("match").encode("UTF-8")
+			match = match.encode("UTF-8")
 			if not match:
 				print '[AutoTimer] Erroneous config contains empty attribute "match", skipping entry'
 				continue
 		# V2-
 		else:
-			# Setting name to match
-			name = match
+			# Setting match to name
+			match = name
 
 
 		# See if Timer is ensabled (V2+)
-		if timer.hasAttribute("enabled"):
-			enabled = timer.getAttribute("enabled") or "yes"
+		enabled = timer.get("enabled")
+		if enabled:
 			if enabled == "no":
 				enabled = False
 			elif enabled == "yes":
@@ -248,7 +244,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				enabled = False
 		# V1
 		else:
-			elements = timer.getElementsByTagName("enabled")
+			elements = timer.findall("enabled")
 			if len(elements):
 				if getValue(elements, "yes") == "no":
 					enabled = False
@@ -256,26 +252,22 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 					enabled = True
 			else:
 				enabled = True
-			
 
 		# Read out timespan (V4+; Falling back on missing definition should be OK)
-		if timer.hasAttribute("from") and timer.hasAttribute("to"):
-			start = timer.getAttribute("from")
-			end = timer.getAttribute("to")
-			if start and end:
-				start = [int(x) for x in start.split(':')]
-				end = [int(x) for x in end.split(':')]
-				timetuple = (start, end)
-			else:
-				timetuple = None
+		start = timer.get("from")
+		end = timer.get("to")
+		if start and end:
+			start = [int(x) for x in start.split(':')]
+			end = [int(x) for x in end.split(':')]
+			timetuple = (start, end)
 		# V3-
 		else:
-			elements = timer.getElementsByTagName("timespan")
+			elements = timer.findall("timespan")
 			Len = len(elements)
 			if Len:
 				# Read out last definition
-				start = elements[Len-1].getAttribute("from")
-				end = elements[Len-1].getAttribute("to")
+				start = elements[Len-1].get("from")
+				end = elements[Len-1].get("to")
 				if start and end:
 					start = [int(x) for x in start.split(':')]
 					end = [int(x) for x in end.split(':')]
@@ -287,11 +279,11 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				timetuple = None
 
 		# Read out allowed services (V*)
-		elements = timer.getElementsByTagName("serviceref")
+		elements = timer.findall("serviceref")
 		if len(elements):
 			servicelist = []
 			for service in elements:
-				value = getValue(service, None)
+				value = service.text
 				if value:
 					# strip all after last :
 					pos = value.rfind(':')
@@ -304,31 +296,30 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 		# Read out allowed bouquets (V* though officially supported since V4)
 		bouquets = []
-		for bouquet in timer.getElementsByTagName("bouquet"):
-			value = getValue(bouquet, None)
+		for bouquet in timer.findall("bouquet"):
+			value = bouquet.text
 			if value:
 				bouquets.append(value)
 
 		# Read out offset (V4+)
-		if timer.hasAttribute("offset"):
-			offset = timer.getAttribute("offset") or None
-			if offset:
-				offset = offset.split(",")
-				if len(offset) == 1:
-					before = after = int(offset[0] or 0) * 60
-				else:
-					before = int(offset[0] or 0) * 60
-					after = int(offset[1] or 0) * 60
-				offset = (before, after)
+		offset = timer.get("offset")
+		if offset:
+			offset = offset.split(",")
+			if len(offset) == 1:
+				before = after = int(offset[0] or 0) * 60
+			else:
+				before = int(offset[0] or 0) * 60
+				after = int(offset[1] or 0) * 60
+			offset = (before, after)
 		# V3-
 		else:
-			elements = timer.getElementsByTagName("offset")
+			elements = timer.findall("offset")
 			Len = len(elements)
 			if Len:
-				value = elements[Len-1].getAttribute("both")
+				value = elements[Len-1].get("both")
 				if value == '':
-					before = int(elements[Len-1].getAttribute("before") or 0) * 60
-					after = int(elements[Len-1].getAttribute("after") or 0) * 60
+					before = int(elements[Len-1].get("before", 0)) * 60
+					after = int(elements[Len-1].get("after", 0)) * 60
 				else:
 					before = after = int(value) * 60
 				offset = (before, after)
@@ -336,23 +327,23 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				offset = None
 
 		# Read out counter
-		counter = int(timer.getAttribute("counter") or '0')
-		counterLeft = int(timer.getAttribute("left") or counter)
-		counterLimit = timer.getAttribute("lastActivation")
-		counterFormat = timer.getAttribute("counterFormat")
-		lastBegin = int(timer.getAttribute("lastBegin") or 0)
+		counter = int(timer.get("counter", '0'))
+		counterLeft = int(timer.get("left", counter))
+		counterLimit = timer.get("lastActivation")
+		counterFormat = timer.get("counterFormat", "")
+		lastBegin = int(timer.get("lastBegin", 0))
 
 		# Read out justplay
-		justplay = int(timer.getAttribute("justplay") or '0')
+		justplay = int(timer.get("justplay", '0'))
 
 		# Read out avoidDuplicateDescription
-		avoidDuplicateDescription = int(timer.getAttribute("avoidDuplicateDescription") or 0)
+		avoidDuplicateDescription = int(timer.get("avoidDuplicateDescription", 0))
 
 		# Read out afterevent (compatible to V* though behaviour for V3- is different as V4+ allows multiple afterevents while the last definication was chosen before)
 		idx = {"none": AFTEREVENT.NONE, "standby": AFTEREVENT.STANDBY, "shutdown": AFTEREVENT.DEEPSTANDBY, "deepstandby": AFTEREVENT.DEEPSTANDBY}
 		afterevent = []
-		for element in timer.getElementsByTagName("afterevent"):
-			value = getValue(element, None)
+		for element in timer.findall("afterevent"):
+			value = element.text
 
 			try:
 				value = idx[value]
@@ -360,8 +351,8 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
 				continue
 
-			start = element.getAttribute("from")
-			end = element.getAttribute("to")
+			start = element.get("from")
+			end = element.get("to")
 			if start and end:
 				start = [int(x) for x in start.split(':')]
 				end = [int(x) for x in end.split(':')]
@@ -372,9 +363,9 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 		# Read out exclude (V*)
 		idx = {"title": 0, "shortdescription": 1, "description": 2, "dayofweek": 3}
 		excludes = ([], [], [], []) 
-		for exclude in timer.getElementsByTagName("exclude"):
-			where = exclude.getAttribute("where")
-			value = getValue(exclude, None)
+		for exclude in timer.findall("exclude"):
+			where = exclude.get("where")
+			value = exclude.text
 			if not (value and where):
 				continue
 
@@ -385,9 +376,9 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 		# Read out includes (use same idx) (V4+ feature, should not harm V3-)
 		includes = ([], [], [], []) 
-		for include in timer.getElementsByTagName("include"):
-			where = include.getAttribute("where")
-			value = getValue(include, None)
+		for include in timer.findall("include"):
+			where = include.get("where")
+			value = include.text
 			if not (value and where):
 				continue
 
@@ -397,13 +388,12 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				pass
 
 		# Read out max length (V4+)
-		if timer.hasAttribute("maxduration"):
-			maxlen = timer.getAttribute("maxduration") or None
-			if maxlen:
-				maxlen = int(maxlen)*60
+		maxlen = timer.get("maxduration")
+		if maxlen:
+			maxlen = int(maxlen)*60
 		# V3-
 		else:
-			elements = timer.getElementsByTagName("maxduration")
+			elements = timer.findall("maxduration")
 			if len(elements):
 				maxlen = getValue(elements, None)
 				if maxlen is not None:
@@ -412,12 +402,12 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				maxlen = None
 
 		# Read out recording path
-		destination = timer.getAttribute("destination").encode("UTF-8") or None
+		destination = timer.get("destination", "").encode("UTF-8") or None
 
 		# Read out recording tags (needs my enhanced tag support patch)
 		tags = []
-		for tag in timer.getElementsByTagName("tag"):
-			value = getValue(tag, None)
+		for tag in timer.findall("tag"):
+			value = tag.text
 			if not value:
 				continue
 
