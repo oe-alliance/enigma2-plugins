@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-29 08:23+0200\n"
+"POT-Creation-Date: 2008-11-06 14:59+0100\n"
 "PO-Revision-Date: 2008-05-16 17:15+0100\n"
 "Last-Translator: Stefan Pluecken <stefan.pluecken@multimedia-labs.de>\n"
 "Language-Team: none\n"
@@ -19,143 +19,93 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid "Configure interface"
-msgstr "Netzwerkkarte konfigurieren"
+msgid " Wireless Network(s) found!"
+msgstr " Funk Netzwerk(e) gefunden!"
 
-msgid "Configure nameservers"
-msgstr "DNS-Server konfigurieren"
+msgid "Accesspoint:"
+msgstr "Zugangspunkt:"
 
-msgid "Configure your internal LAN"
-msgstr "Internes Netzwerk konfigurieren"
-
-msgid "Configure your network again"
-msgstr "Netzwerk erneut konfigurieren"
-
-msgid "Configure your wireless LAN again"
-msgstr "Funknetzwerk erneut konfigurieren"
-
-msgid "Exit wizard and configure later manually"
-msgstr "Assistenten beenden und manuell konfigurieren"
-
-msgid "Network Wizard"
-msgstr "Netzwerk Assistent"
-
-msgid "No Networks found"
-msgstr "Keine Netzwerke gefunden"
-
-msgid ""
-"Please configure or verify your Nameservers by filling out the required "
-"values.\n"
-"When you are ready press OK to continue."
+msgid "Bitrate:"
 msgstr ""
-"Konfigurieren Sie Ihre DNS-Server durch ausfüllen der entsprechenden Werte.\n"
-"Drücken Sie OK zum fortfahren"
 
-msgid ""
-"Please configure your internet connection by filling out the required "
-"values.\n"
-"When you are ready press OK to continue."
+msgid "Choose a Wireless Network"
+msgstr "Wähle ein Funk-Netzwerk"
+
+msgid "Close"
+msgstr "Schliessen"
+
+msgid "Connect"
+msgstr "Verbinden"
+
+msgid "Connect to a Wireless Network"
+msgstr "Mit Funknetzwerk verbinden"
+
+msgid "Disabled"
 msgstr ""
-"Konfigurieren Sie Ihr Netzwerk durch ausfüllen der entsprechenden Werte.\n"
-"Drücken Sie OK zum fortfahren"
 
-msgid "Please follow the instructions on the TV"
-msgstr "Bitte folgen Sie den Angaben auf Ihrem Fernseher."
-
-msgid ""
-"Please select the network interface that you want to use for your internet "
-"connection.\n"
-"\n"
-"Please press OK to continue."
+msgid "Enabled"
 msgstr ""
-"Bitte wählen Sie die Netzwerkschnitstelle welche Sie für Ihren "
-"Internetzugangnutzen möchten.\n"
-"\n"
-"Drücken Sie OK zum fortfahren"
 
-msgid ""
-"Please select the wireless LAN network that you want to connect to.\n"
-"\n"
-"Please press OK to continue."
+#, python-format
+msgid "Encrypted: %s"
+msgstr "verschlüsselt: %s"
+
+msgid "Encryption:"
 msgstr ""
-"Bitte wählen Sie das Funknetzwerk zu welchem Sie sich verbinden möchten.\n"
-"\n"
-"Drücken Sie OK zum fortfahren."
 
-msgid "Select interface"
-msgstr "Netzwerkkarte auswählen"
-
-msgid "Select wireless network"
-msgstr "Funknetzwerk auswählen"
-
-msgid ""
-"Thank you for using the wizard.\n"
-"Please press OK to continue."
+msgid "Hidden networkname"
 msgstr ""
-"Vielen Dank das Sie den Assisten benutzt haben.\n"
-"Drücken Sie OK zum fortfahren."
 
-msgid ""
-"The wireless LAN plugin is not installed!\n"
-"Please install it and choose what you want to do next."
+#, python-format
+msgid "Interface: %s"
+msgstr "Adapter: %s"
+
+msgid "Link Quality:"
+msgstr "Qualität:"
+
+msgid "Link:"
+msgstr "Verbindung:"
+
+#, python-format
+msgid "Max. Bitrate: %s"
 msgstr ""
-"Das WirelessLan Plugin ist nicht instaliert!\n"
-"Bitte installieren Sie es und wählen Sie dann eine Option zum fortfahren."
 
-msgid "WEP"
-msgstr "WEP"
-
-msgid "WPA"
-msgstr "WPA"
-
-msgid "WPA2"
-msgstr "WPA2"
-
-msgid ""
-"Welcome.\n"
-"\n"
-"If you want to connect your Dreambox to the Internet, this wizard will guide "
-"you through the basic network setup of your Dreambox.\n"
-"\n"
-"Press OK to start configuring your network"
+msgid "N/A"
 msgstr ""
-"Wilkommen.\n"
-"\n"
-"Wenn Sie Ihre Dreambox mit dem Internet verbinden möchten, wird sie dieser "
-"Assistent durch die grundlegenden Netzwerkeinstellungen führen.\n"
-"\n"
-"Drücken Sie OK um Ihr Netzwerk zu konfigurieren"
 
-msgid ""
-"Your Dreambox is now ready to use.\n"
-"\n"
-"Your internet connection is working now.\n"
-"\n"
-"Please press OK to continue."
+msgid "Network:"
+msgstr "Netzwerk"
+
+msgid "No"
+msgstr "Nein"
+
+msgid "No Connection"
 msgstr ""
-"Ihre Dreambox ist nun konfiguriert.\n"
-"\n"
-"Ihre Internetverbindung funktioniert nun.\n"
-"\n"
-"Drücken Sie OK zum fortfahren."
 
-msgid ""
-"Your internet connection is not working!\n"
-"Please choose what you want to do next."
+msgid "Please wait..."
 msgstr ""
-"Ihre Internetverbindung funktioniert nicht!\n"
-"Bite wählen Sie eine Option zum fortfahren."
 
-msgid ""
-"Your wireless LAN internet connection could not be started!\n"
-"Have you attached your USB WLAN Stick?\n"
-"\n"
-"Please choose what you want to do next."
+msgid "Refresh"
+msgstr "Aktualisieren"
+
+msgid "SSID:"
 msgstr ""
-"Ihre Funk-Internetverbindung konnte nicht gestartet werden!\n"
-"Ist Ihr USB WLAN Stick korrekt angeschlossen?\n"
-"\n"
-"Bite wählen Sie eine Option zum fortfahren."
 
-msgid "unavailable"
-msgstr "nicht verfügbar"
+msgid "Signal Strength:"
+msgstr "Signal Stärke:"
+
+msgid "Signal: "
+msgstr ""
+
+msgid "Unsupported"
+msgstr ""
+
+msgid "Wireless LAN"
+msgstr "Funknetzwerk"
+
+msgid "Wireless Network State"
+msgstr "Funk-Netzwerk Status"
+
+msgid "Yes"
+msgstr "Ja"
+
