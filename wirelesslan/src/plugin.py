@@ -10,6 +10,7 @@ from Components.MenuList import MenuList
 from Components.config import config, getConfigListEntry, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, ConfigSelection, ConfigPassword
 from Components.ConfigList import ConfigListScreen
 from Components.Network import Network, iNetwork
+from Components.Console import Console
 from Plugins.Plugin import PluginDescriptor
 from os import system, path as os_path, listdir
 from Wlan import Wlan, WlanList, wpaSupplicant
@@ -190,8 +191,8 @@ class WlanScan(Screen):
 		self.session = session
 		self.iface = iface
 		self.skin = WlanScan.skin
-		self.skin_path = plugin_path 
-		
+		self.skin_path = plugin_path
+		self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
 		
 		self["info"] = Label()
 		
@@ -207,12 +208,12 @@ class WlanScan(Screen):
 		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
 		{
 			"ok": self.select,
-			"back": self.exit,
+			"back": self.cancel,
 		}, -1)
 		
 		self["shortcuts"] = ActionMap(["ShortcutActions"],
 		{
-		 	"red": self.exit,
+		 	"red": self.cancel,
 			"green": self.select,
 			"yellow": self.rescan,
 		})
@@ -244,8 +245,21 @@ class WlanScan(Screen):
 		self["list"].reload()
 		self.setInfo()
 	
-	def exit(self):
-		self.close(None)
+	def cancel(self):
+		if self.oldInterfaceState is False:
+			iNetwork.deactivateInterface(self.iface,self.deactivateInterfaceCB)
+		else:
+			self.close(None)
+
+	def deactivateInterfaceCB(self,data):
+		if data is not None:
+			if data is True:
+				iNetwork.getInterfaces(self.cancelCB)
+	
+	def cancelCB(self,data):			
+		if data is not None:
+			if data is True:
+				self.close(None)
 
 	def setInfo(self):
 		length = self["list"].getLength()
