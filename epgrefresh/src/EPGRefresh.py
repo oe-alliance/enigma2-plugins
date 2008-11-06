@@ -14,7 +14,7 @@ from EPGRefreshTimer import epgrefreshtimer, EPGRefreshTimerEntry, checkTimespan
 from time import time
 
 # Plugin Config
-from xml.dom.minidom import parse as minidom_parse
+from xml.etree.cElementTree import parse as cet_parse
 from os import path as path
 
 # We want a list of unique services
@@ -25,37 +25,6 @@ from Components.config import config
 
 # Path to configuration
 CONFIG = "/etc/enigma2/epgrefresh.xml"
-
-####
-# Support for old configuration
-# to be removed :-)
-####
-OLD_CONFIG = "/etc/enigma2/epgrefresh.conf"
-def readOldConfig(myset):
-	# Open file
-	file = open(OLD_CONFIG, 'r')
-
-	# Add References
-	for line in file:
-		line = line.strip()
-		if line:
-			myset.add(line)
-
-	# Close file
-	file.close()
-
-def getValue(definition, default):
-	# Initialize Output
-	ret = ""
-
-	# Iterate through nodes of last one
-	for node in definition.childNodes:
-		# Append text if we have a text node
-		if node.nodeType == node.TEXT_NODE:
-			ret = ret + node.data
-
-	# Return stripped output or (if empty) default
-	return ret.strip() or default
 
 class EPGRefresh:
 	"""Simple Class to refresh EPGData"""
@@ -75,21 +44,6 @@ class EPGRefresh:
 		self.readConfiguration()
 
 	def readConfiguration(self):
-		####
-		# Support for old configuration
-		# to be removed :-)
-		####
-		if path.exists(OLD_CONFIG):
-			self.services[0].clear()
-			readOldConfig(self.services[0])
-
-			# Save new config
-			self.saveConfiguration()
-
-			# Delete old config
-			from os import unlink
-			unlink(OLD_CONFIG)
-
 		# Check if file exists
 		if not path.exists(CONFIG):
 			return
@@ -107,23 +61,22 @@ class EPGRefresh:
 		self.services[1].clear()
 
 		# Open file
-		dom = minidom_parse(CONFIG)
+		configuration= cet_parse(CONFIG).getroot()
 
 		# Add References
-		for configuration in dom.getElementsByTagName("epgrefresh"):
-			for service in configuration.getElementsByTagName("service"):
-				value = getValue(service, None)
-				if value:
-					# strip all after last : (custom name)
-					pos = value.rfind(':')
-					if pos != -1:
-						value = value[:pos+1]
+		for service in configuration.findall("service"):
+			value = service.text
+			if value:
+				# strip all after last : (custom name)
+				pos = value.rfind(':')
+				if pos != -1:
+					value = value[:pos+1]
 
-					self.services[0].add(value)
-			for bouquet in configuration.getElementsByTagName("bouquet"):
-				value = getValue(bouquet, None)
-				if value:
-					self.services[1].add(value)
+				self.services[0].add(value)
+		for bouquet in configuration.findall("bouquet"):
+			value = bouquet.text
+			if value:
+				self.services[1].add(value)
 
 	def saveConfiguration(self):
 		# Generate List in RAM
