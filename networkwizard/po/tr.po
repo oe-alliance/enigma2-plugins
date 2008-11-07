@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tr 01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 17:08+0200\n"
+"POT-Creation-Date: 2008-11-07 22:59+0100\n"
 "PO-Revision-Date: 2006-06-16 12:51+0200\n"
 "Last-Translator: koksal <goksel@goksel.com>\n"
 "Language-Team: GökselD& <gok_68@hotmail.com>\n"
@@ -16,37 +16,50 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Turkish\n"
 
-msgid "Configure your LAN again"
+msgid "Configure interface"
+msgstr ""
+
+msgid "Configure nameservers"
 msgstr ""
 
 msgid "Configure your internal LAN"
 msgstr ""
 
-msgid "Configure your wireless LAN"
+msgid "Configure your network again"
 msgstr ""
 
 msgid "Configure your wireless LAN again"
 msgstr ""
 
-msgid "Exit wizard and configure later manually"
+msgid "Exit network wizard"
 msgstr ""
 
 msgid "Network Wizard"
 msgstr ""
 
-msgid "No Networks found"
+msgid "No networks found"
 msgstr ""
 
 msgid ""
-"Please configure your LAN internet connection by filling out the required "
+"Please configure or verify your Nameservers by filling out the required "
 "values.\n"
 "When you are ready press OK to continue."
 msgstr ""
 
 msgid ""
-"Please configure your wireless LAN internet connection by filling out the "
-"required values.\n"
-"When you are done, press OK to continue."
+"Please configure your internet connection by filling out the required "
+"values.\n"
+"When you are ready press OK to continue."
+msgstr ""
+
+msgid "Please follow the instructions on the TV"
+msgstr ""
+
+msgid ""
+"Please select the network interface that you want to use for your internet "
+"connection.\n"
+"\n"
+"Please press OK to continue."
 msgstr ""
 
 msgid ""
@@ -55,35 +68,26 @@ msgid ""
 "Please press OK to continue."
 msgstr ""
 
-msgid "Restart your wireless interface"
+msgid "Please wait while we prepare your network interfaces..."
+msgstr ""
+
+msgid "Please wait while we test your network..."
+msgstr ""
+
+msgid "Select interface"
+msgstr ""
+
+msgid "Select wireless network"
 msgstr ""
 
 msgid ""
-"Thank you for using the wizard. Your Dreambox is now ready to use.\n"
+"Thank you for using the wizard.\n"
 "Please press OK to continue."
 msgstr ""
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
 "Please install it and choose what you want to do next."
-msgstr ""
-
-msgid ""
-"Use the up/down keys on your remote control to select an option. After that, "
-"press OK.\n"
-"\n"
-"\n"
-"\n"
-"Connect to the internet..."
-msgstr ""
-
-msgid "WEP"
-msgstr ""
-
-msgid "WPA"
-msgstr ""
-
-msgid "WPA2"
 msgstr ""
 
 msgid ""
@@ -98,28 +102,14 @@ msgstr ""
 msgid ""
 "Your Dreambox is now ready to use.\n"
 "\n"
-"Your LAN internet connection is working now.\n"
+"Your internet connection is working now.\n"
 "\n"
 "Please press OK to continue."
 msgstr ""
 
 msgid ""
-"Your Dreambox is now ready to use.\n"
-"\n"
-"Your wireless LAN internet connection is working now.\n"
-"\n"
-"Please press OK to continue."
-msgstr ""
-
-msgid ""
-"Your LAN internet connection is not working!\n"
+"Your internet connection is not working!\n"
 "Please choose what you want to do next."
-msgstr ""
-
-msgid ""
-"Your network is restarting.\n"
-"\n"
-"Please press OK to continue."
 msgstr ""
 
 msgid ""
@@ -129,16 +119,11 @@ msgid ""
 "Please choose what you want to do next."
 msgstr ""
 
-msgid ""
-"Your wireless LAN internet connection is not working!\n"
-"Please choose what you want to do next."
+msgid "enter hidden network SSID"
+msgstr ""
+
+msgid "hidden..."
 msgstr ""
 
 msgid "unavailable"
-msgstr ""
-
-msgid "via LAN."
-msgstr ""
-
-msgid "via wireless LAN."
 msgstr ""
