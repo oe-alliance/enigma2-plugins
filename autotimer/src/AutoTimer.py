@@ -292,6 +292,7 @@ class AutoTimer:
 
 				if isNew:
 					if NavigationInstance.instance.RecordTimer.record(newEntry) is None:
+						timer.decrementCounter()
 						new += 1
 						if recorddict.has_key(serviceref):
 							recorddict[serviceref].append(newEntry)
