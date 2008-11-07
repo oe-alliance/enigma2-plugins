@@ -436,7 +436,8 @@ class AutoTimerComponent(object):
 		return self.checkAnyTimespan(begin, *self.timespan)
 
 	def decrementCounter(self)
-		self.matchLeft -= 1
+		if self.matchCount and self.matchLeft > 0:
+			self.matchLeft -= 1
 
 	def getAfterEvent(self):
 		for afterevent in self.afterevent:
