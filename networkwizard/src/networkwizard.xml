@@ -18,9 +18,8 @@ self.selectKey("OK")
 self.selectKey("UP")
 self.selectKey("DOWN")
 			</code>
-			<code pos="after">
-self.checkInterface(self.selectedInterface)			    
-self.currStep = self.getStepWithID(self.NextStep)
+			<code pos="after" async="yes">
+self.checkInterface(self.selectedInterface)
 			</code>	
 		</step>
 
@@ -36,9 +35,8 @@ self.selectKey("DOWN")
 self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
-			<code pos="after">
-self.AdapterSetupEnd(self.selectedInterface)    
-self.currStep = self.getStepWithID(self.NextStep)
+			<code pos="after" async="yes">
+self.AdapterSetupEnd(self.selectedInterface)
 			</code>			
 		</step>
 
@@ -50,7 +48,7 @@ self.currStep = self.getStepWithID(self.NextStep)
 self.clearSelectedKeys()
 self.selectKey("OK")
 			</code>
-			<code pos="after">
+			<code pos="after" async="yes">
 self.checkNetwork()
 			</code>	
 		</step>
@@ -87,13 +85,12 @@ self.selectKey("DOWN")
 			</code>
 			<list>
 				<listentry caption="Configure your network again" step="selectinterface" />
-				<listentry caption="Exit wizard and configure later manually" step="end" />
+				<listentry caption="Exit network wizard" step="end" />
 			</list>
 		</step>
 
-		<step id="scanwlan" nextstep="nwconfig">
+		<step id="scanwlan" nextstep="wlanconfig">
 		<condition>
-self.checkInterface(self.selectedInterface)			
 self.condition = (self.isInterfaceUp == True and self.WlanPluginInstalled == True)
 		</condition>
 			<text value="Please select the wireless LAN network that you want to connect to.\n\nPlease press OK to continue." />
@@ -107,14 +104,10 @@ self.selectKey("DOWN")
 self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
-			<code pos="after">
-self.saveAccessPoint(self.ap)
-			</code>
 		</step>
 
 		<step id="scanwlan">
 		<condition>
-self.checkInterface(self.selectedInterface)				
 self.condition = (self.isInterfaceUp == False and self.WlanPluginInstalled == True)
 		</condition>
 			<text value="Your wireless LAN internet connection could not be started!\nHave you attached your USB WLAN Stick?\n\nPlease choose what you want to do next." />
@@ -122,7 +115,7 @@ self.condition = (self.isInterfaceUp == False and self.WlanPluginInstalled == Tr
 			<list>
 				<listentry caption="Configure your wireless LAN again" step="scanwlan" />
 				<listentry caption="Configure your internal LAN" step="selectinterface" />
-				<listentry caption="Exit wizard and configure later manually" step="end" />
+				<listentry caption="Exit network wizard" step="end" />
 			</list>
 			<code>
 self.clearSelectedKeys()
@@ -134,14 +127,13 @@ self.selectKey("DOWN")
 
 		<step id="scanwlan">
 		<condition>
-self.checkInterface(self.selectedInterface)				
 self.condition = (self.isInterfaceUp == True and self.WlanPluginInstalled == False)
 		</condition>
 			<text value="The wireless LAN plugin is not installed!\nPlease install it and choose what you want to do next." />
 			<displaytext value="Please follow the instructions on the TV" />
 			<list>
 				<listentry caption="Configure your internal LAN" step="selectinterface" />
-				<listentry caption="Exit wizard and configure later manually" step="end" />
+				<listentry caption="Exit network wizard" step="end" />
 			</list>
 			<code>
 self.clearSelectedKeys()
@@ -149,6 +141,23 @@ self.selectKey("OK")
 self.selectKey("UP")
 self.selectKey("DOWN")
 			</code>
+		</step>
+
+		<step id="wlanconfig">
+			<text value="Please configure your internet connection by filling out the required values.\nWhen you are ready press OK to continue." />
+			<displaytext value="Configure interface" />
+			<config screen="AdapterSetup" module="NetworkSetup" args="(self.selectedInterface,self.ap,self.WlanList)" type="ConfigList" />
+			<code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+self.selectKey("UP")
+self.selectKey("DOWN")
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
+			</code>
+			<code pos="after" async="yes">
+self.AdapterSetupEnd(self.selectedInterface)
+			</code>			
 		</step>
 
 		<step id="end">
