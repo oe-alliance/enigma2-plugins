@@ -352,6 +352,7 @@ class wpaSupplicant:
 			fp.write('\tscan_ssid=0\n')			
 			if encrypted:
 				if encryption == 'WPA' or encryption == 'WPA2' or encryption == 'WPA/WPA2' :
+					fp.write('\tkey_mgmt=WPA-PSK\n')
 					
 					if encryption == 'WPA':
 						fp.write('\tproto=WPA\n')
