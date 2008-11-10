@@ -22,7 +22,7 @@ class RSSEntryWrapper(ElementWrapper):
 		if tag == "enclosures":
 			myl = []
 			for elem in self._element.findall(self._ns + "enclosure"):
-				length = elem.get("length", None)
+				length = elem.get("length")
 				if length:
 					length = int(length) / 1048576
 				myl.append({
@@ -53,7 +53,7 @@ class PEAEntryWrapper(ElementWrapper):
 			myl = []
 			for elem in self._element.findall(self._ns + "link"):
 				if elem.get("rel") == "enclosure":
-					length = elem.get("length", None)
+					length = elem.get("length")
 					if length:
 						length = int(length) / 1048576
 					myl.append({
@@ -86,14 +86,14 @@ class RSS1Wrapper(RSSWrapper):
 			)
 
 class RSS2Wrapper(RSSWrapper):
-	def __init__(self, feed):
+	def __init__(self, feed, ns):
 		channel = feed.find("channel")
 		RSSWrapper.__init__(
 			self, channel, channel.findall("item")
 			)
 
 class PEAWrapper(RSSWrapper):
-	def __init__(self, feed):
+	def __init__(self, feed, ns):
 		ns = feed.tag[:feed.tag.index("}")+1]
 		RSSWrapper.__init__(
 			self, feed, feed.findall(ns + "entry"), ns
@@ -134,6 +134,8 @@ class UniversalFeed(BaseFeed):
 		# Initialize
 		self.last_update = None
 		self.last_ids = set()
+		self.wrapper = None
+		self.ns = ""
 
 	def gotWrapper(self, wrapper):
 		updated = wrapper.updated
@@ -182,21 +184,29 @@ class UniversalFeed(BaseFeed):
 		return self.history[:idx]
 
 	def gotFeed(self, feed):
-		if feed.tag == "rss":
-			wrapper = RSS2Wrapper(feed)
-		elif feed.tag.startswith(NS_RDF):
-			wrapper = RSS1Wrapper(feed, ns = NS_RDF)
-		elif feed.tag.startswith(NS_RSS_09):
-			wrapper = RSS1Wrapper(feed, ns = NS_RSS_09)
-		elif feed.tag.startswith(NS_RSS_10):
-			wrapper = RSS1Wrapper(feed, ns = NS_RSS_10)
-		elif feed.tag.endswith("feed"):
-			wrapper = PEAWrapper(feed)
+		if self.wrapper is not None:
+			wrapper = self.wrapper(feed, self.ns)
 		else:
-			raise NotImplementedError, 'Unsupported Feed: %s' % feed.tag
+			if feed.tag == "rss":
+				self.wrapper = RSS2Wrapper
+			elif feed.tag.startswith(NS_RDF):
+				self.ns = NS_RDF
+				self.wrapper = RSS1Wrapper
+			elif feed.tag.startswith(NS_RSS_09):
+				self.ns = NS_RSS_09
+				self.wrapper = RSS1Wrapper
+			elif feed.tag.startswith(NS_RSS_10):
+				self.ns = NS_RSS_10
+				self.wrapper = RSS1Wrapper
+			elif feed.tag.endswith("feed"):
+				self.wrapper = PEAWrapper
+			else:
+				raise NotImplementedError, 'Unsupported Feed: %s' % feed.tag
 
-		self.title = strip(wrapper.title).encode("UTF-8")
-		self.description = strip_readable(wrapper.description or "").encode("UTF-8")
+			wrapper = self.wrapper(feed, self.ns)
+
+			self.title = strip(wrapper.title).encode("UTF-8")
+			self.description = strip_readable(wrapper.description or "").encode("UTF-8")
 
 		return self.gotWrapper(wrapper)
 
