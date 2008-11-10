@@ -154,4 +154,7 @@ mosaic/src/Makefile
 googlemaps/Makefile
 googlemaps/src/Makefile
 
+rsdownloader/Makefile
+rsdownloader/src/Makefile
+
 ])
