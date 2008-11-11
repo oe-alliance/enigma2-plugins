@@ -7,4 +7,6 @@ install_PYTHON =	\
 	networkwizard.xml \
 	WizardPluginLanguage.py \
 	LICENSE
+
+install_DATA = *.info
 	

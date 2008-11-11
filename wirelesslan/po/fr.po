@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-06 14:59+0100\n"
-"PO-Revision-Date: 2008-08-24 21:51+0100\n"
+"PO-Revision-Date: 2008-05-16 17:15+0100\n"
 "Last-Translator: mimi74 <remi.jarrige0293@wanadoo.fr>\n"
 "Language-Team: french\n"
 "MIME-Version: 1.0\n"
@@ -18,10 +18,7 @@ msgid " Wireless Network(s) found!"
 msgstr "Réseau Sans Fil(s) trouvé!"
 
 msgid "Accesspoint:"
-msgstr ""
-
-msgid "Bitrate:"
-msgstr ""
+msgstr "Point accès:"
 
 msgid "Choose a Wireless Network"
 msgstr "Choisir un réseau sans fil"
@@ -35,23 +32,9 @@ msgstr "Connecter"
 msgid "Connect to a Wireless Network"
 msgstr "Connecter à un réseau sans fil"
 
-msgid "Disabled"
-msgstr ""
-
-msgid "Enabled"
-msgstr ""
-
-#, python-format
 msgid "Encrypted: %s"
 msgstr "Chiffré: %s"
 
-msgid "Encryption:"
-msgstr ""
-
-msgid "Hidden networkname"
-msgstr ""
-
-#, python-format
 msgid "Interface: %s"
 msgstr "Adaptateur: %s"
 
@@ -61,39 +44,17 @@ msgstr "qualité lien:"
 msgid "Link:"
 msgstr "Lien:"
 
-#, python-format
-msgid "Max. Bitrate: %s"
-msgstr ""
-
-msgid "N/A"
-msgstr ""
-
 msgid "Network:"
 msgstr "Réseau:"
 
 msgid "No"
 msgstr "Non"
 
-msgid "No Connection"
-msgstr ""
-
-msgid "Please wait..."
-msgstr ""
-
 msgid "Refresh"
 msgstr "Actualiser"
 
-msgid "SSID:"
-msgstr ""
-
 msgid "Signal Strength:"
 msgstr "Force signal:"
-
-msgid "Signal: "
-msgstr ""
-
-msgid "Unsupported"
-msgstr ""
 
 msgid "Wireless LAN"
 msgstr "LAN sans fil"
@@ -103,4 +64,3 @@ msgstr "Etat réseau sans fil"
 
 msgid "Yes"
 msgstr "Oui"
-
