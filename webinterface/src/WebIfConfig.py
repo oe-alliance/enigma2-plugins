@@ -4,7 +4,7 @@ from enigma import  eListboxPythonMultiContent, gFont
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger,ConfigYesNo,ConfigText
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger,ConfigYesNo,ConfigText,ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Button import Button
@@ -12,7 +12,7 @@ from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
 
 from Components.ActionMap import ActionMap
-from Plugins.Extensions.WebInterface import addInterfaceConfig
+from Plugins.Extensions.WebInterface import addInterfaceConfig,getCofiguredAndSpecialNetworkinterfaces
 
 class WebIfConfigScreen(ConfigListScreen,Screen):
     skin = """
@@ -213,7 +213,10 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
             print "[WebIf] iface config %i not found, adding it and setting default values"%i
             addInterfaceConfig()
             current = config.plugins.Webinterface.interfaces[ifacenum]
-            
+        
+        #reloading current network devices
+        current.adress = ConfigSelection(getCofiguredAndSpecialNetworkinterfaces(),default=current.adress.value)
+        
         cfglist.append(getConfigListEntry(_("disabled"), current.disabled))
         cfglist.append(getConfigListEntry(_("Adress"), current.adress))
         cfglist.append(getConfigListEntry(_("Port"), current.port))
