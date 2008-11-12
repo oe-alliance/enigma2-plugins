@@ -96,7 +96,7 @@ class GoogleMapsConfigScreen(ConfigListScreen,Screen):
 
 class GoogleMapsMainScreen(Screen,HelpableScreen):
     raw_skin =  """
-            <screen position="0,0" size="{screen.size}" title="GoogleMaps" flags="wfNoBorder">
+            <screen position="{screen.position}" size="{screen.size}" title="GoogleMaps" flags="wfNoBorder">
     <widget  name="pic1b" position="{pixmap1.pos}" size="{pixmap.size}" zPosition="0" alphatest="blend"/>
     <widget  name="pic1" position="{pixmap1.pos}" size="{pixmap.size}" zPosition="1" alphatest="blend"/>
     <widget name="pic1o" position="{pixmap1.pos}" size="{pixmap.size}" zPosition="2" alphatest="blend"/>
@@ -129,8 +129,10 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
             """
     def __init__(self, session):
         self.session = session
-        size_w = getDesktop(0).size().width()    
-        size_h = getDesktop(0).size().height()        
+        size_w = getDesktop(0).size().width()*0.9    
+        size_h = getDesktop(0).size().height()*0.9
+        pos_w = (getDesktop(0).size().width()-size_w)/2
+        pos_h = (getDesktop(0).size().height()-size_h)/2        
         p_h = size_h/3
                 
         infopanel_width = size_w - (p_h*3)
@@ -142,6 +144,7 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
                 'font': font,
                 
                 'screen.size': "%i,%i"%(size_w,size_h),
+                'screen.position': "%i,%i"%(pos_w,pos_h),
                 'pixmap.size': '%i,%i'%(p_h,p_h),
                 
                 'pixmap1.pos': '0,0',
