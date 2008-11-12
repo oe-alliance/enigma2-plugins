@@ -107,6 +107,10 @@ class AutoTimerEditorBase():
 		# Match
 		self.match = ConfigText(default = timer.match, fixed_size = False)
 		self.match.setUseableChars('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-_?!.:;,&%()\'"+/$@') # XXX: what exactly is useable? :-)
+		# Workaround some characters currently not "typeable" using NumericalTextInput
+		mapping = self.match.mapping
+		if(len(mapping) and "&" not in mapping[0]):
+			mapping[0] += "&;%"
 
 		# Justplay
 		self.justplay = ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)])
