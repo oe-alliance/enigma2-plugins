@@ -8,7 +8,7 @@ from Components.config import ConfigSubDict
 from Components.config import ConfigText
 from Components.config import configfile
 from Components.config import ConfigYesNo
-from Components.Network import Network
+from Components.Network import iNetwork
 
 __version__ = "0.99"
 
@@ -37,7 +37,7 @@ def addInterfaceConfig():
     return i
 
 def getCofiguredAndSpecialNetworkinterfaces():
-    nw = Network()
+    nw = iNetwork
     choices = []
     choices.append('0.0.0.0')
     choices.append('127.0.0.1')
@@ -53,7 +53,10 @@ if config.plugins.Webinterface.interfacecount.value == 0:
     # 0.0.0.0:80 auth=False
     config.plugins.Webinterface.interfaces.append(ConfigSubsection())
     config.plugins.Webinterface.interfaces[0].disabled = ConfigYesNo(default = False)
+    
+    #needs to be refreshed before each call, because ifaces can be changed since e2 boot 
     config.plugins.Webinterface.interfaces[0].adress = ConfigSelection(getCofiguredAndSpecialNetworkinterfaces(),default='0.0.0.0')
+    
     config.plugins.Webinterface.interfaces[0].port = ConfigInteger(80, (0,65535))
     config.plugins.Webinterface.interfaces[0].useauth = ConfigYesNo(default = False)
     config.plugins.Webinterface.interfaces[0].usessl = ConfigYesNo(default = False)
