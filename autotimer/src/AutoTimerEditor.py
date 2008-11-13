@@ -48,6 +48,20 @@ weekdays = [
 	("weekday", _("Weekday"))
 ]
 
+class ExtendedConfigText(ConfigText):
+	def __init__(self, default = "", fixed_size = True, visible_width = False):
+		ConfigText.__init__(self, default = default, fixed_size = fixed_size, visible_width = visible_width)
+
+		# Workaround some characters currently not "typeable" using NumericalTextInput
+		mapping = self.mapping
+		if len(mapping):
+			if "&" not in mapping[0]):
+				mapping[0] += "&"
+			if ";" not in mapping[0]):
+				mapping[0] += ";"
+			if "%" not in mapping[0]):
+				mapping[0] += "%"
+
 class SimpleBouquetSelection(SimpleChannelSelection):
 	def __init__(self, session, title):
 		SimpleChannelSelection.__init__(self, session, title)
@@ -102,15 +116,11 @@ class AutoTimerEditorBase():
 
 	def createSetup(self, timer):
 		# Name
-		self.name = ConfigText(default = timer.name, fixed_size = False)
+		self.name = ExtendedConfigText(default = timer.name, fixed_size = False)
 
 		# Match
-		self.match = ConfigText(default = timer.match, fixed_size = False)
+		self.match = ExtendedConfigText(default = timer.match, fixed_size = False)
 		self.match.setUseableChars('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-_?!.:;,&%()\'"+/$@') # XXX: what exactly is useable? :-)
-		# Workaround some characters currently not "typeable" using NumericalTextInput
-		mapping = self.match.mapping
-		if(len(mapping) and "&" not in mapping[0]):
-			mapping[0] += "&;%"
 
 		# Justplay
 		self.justplay = ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)])
@@ -694,12 +704,12 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			self.idx = 2
 
 		self.list.extend([
-			getConfigListEntry(_("Exclude"), ConfigText(default = x, fixed_size = False))
+			getConfigListEntry(_("Exclude"), ExtendedConfigText(default = x, fixed_size = False))
 				for x in self.excludes[self.idx]
 		])
 		self.lenExcludes = len(self.list)
 		self.list.extend([
-			getConfigListEntry(_("Include"), ConfigText(default = x, fixed_size = False))
+			getConfigListEntry(_("Include"), ExtendedConfigText(default = x, fixed_size = False))
 				for x in self.includes[self.idx]
 		])
 
@@ -739,7 +749,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			if self.typeSelection.value == "day":
 				entry = getConfigListEntry(text, ConfigSelection(choices = weekdays))
 			else:
-				entry = getConfigListEntry(text, ConfigText(fixed_size = False))
+				entry = getConfigListEntry(text, ExtendedConfigText(fixed_size = False))
 
 			list.insert(pos, entry)
 			self["config"].setList(list)
