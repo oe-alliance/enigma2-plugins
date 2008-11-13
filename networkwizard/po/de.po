@@ -74,7 +74,7 @@ msgstr ""
 "Drücken Sie OK zum fortfahren"
 
 msgid ""
-"Please select the wireless LAN network that you want to connect to.\n"
+"Please select the wireless network that you want to connect to.\n"
 "\n"
 "Please press OK to continue."
 msgstr ""

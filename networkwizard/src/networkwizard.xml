@@ -93,7 +93,7 @@ self.selectKey("DOWN")
 		<condition>
 self.condition = (self.isInterfaceUp == True and self.WlanPluginInstalled == True)
 		</condition>
-			<text value="Please select the wireless LAN network that you want to connect to.\n\nPlease press OK to continue." />
+			<text value="Please select the wireless network that you want to connect to.\n\nPlease press OK to continue." />
 			<displaytext value="Select wireless network" />
 			<list type="dynamic" source="listModes" evaluation="modeSelectionMade" onselect="modeSelectionMoved" />
 			<code>

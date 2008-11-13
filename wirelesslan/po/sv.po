@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-06 14:59+0100\n"
-"PO-Revision-Date: 2008-05-14 15:07+0100\n"
+"PO-Revision-Date: 2008-11-12 09:25+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: WeeGull <weegull@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,91 +20,92 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid " Wireless Network(s) found!"
-msgstr ""
+msgstr " Trådlöst nätverk funnet!"
 
 msgid "Accesspoint:"
-msgstr ""
+msgstr "Accespunkt:"
 
 msgid "Bitrate:"
-msgstr ""
+msgstr "Bitrate:"
 
 msgid "Choose a Wireless Network"
-msgstr ""
+msgstr "Välj ett Trådlöst nätverk"
 
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
 msgid "Connect"
-msgstr ""
+msgstr "Anslut"
 
 msgid "Connect to a Wireless Network"
-msgstr ""
+msgstr "Anslut till ett Trådlöst nätverk"
 
 msgid "Disabled"
-msgstr ""
+msgstr "Avaktiverat"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiverat"
 
 #, python-format
 msgid "Encrypted: %s"
-msgstr ""
+msgstr "Krypterat: %s"
 
 msgid "Encryption:"
-msgstr ""
+msgstr "Kryptering:"
 
 msgid "Hidden networkname"
-msgstr ""
+msgstr "Dolt nätverksnamn"
 
 #, python-format
 msgid "Interface: %s"
-msgstr ""
+msgstr "Kort: %s"
 
 msgid "Link Quality:"
-msgstr ""
+msgstr "Länkkvalitet:"
 
 msgid "Link:"
-msgstr ""
+msgstr "Länk:"
 
 #, python-format
 msgid "Max. Bitrate: %s"
-msgstr ""
+msgstr "Max. Bitrate: %s"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 msgid "Network:"
-msgstr ""
+msgstr "Nätverk:"
 
 msgid "No"
-msgstr ""
+msgstr "Nej"
 
 msgid "No Connection"
-msgstr ""
+msgstr "Ingen anslutning"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Vänligen vänta..."
 
 msgid "Refresh"
-msgstr ""
+msgstr "Uppdatera"
 
 msgid "SSID:"
-msgstr ""
+msgstr "SSID:"
 
 msgid "Signal Strength:"
-msgstr ""
+msgstr "Signalstyrka:"
 
 msgid "Signal: "
-msgstr ""
+msgstr "Signal:"
 
 msgid "Unsupported"
-msgstr ""
+msgstr "Osupporterat"
 
 msgid "Wireless LAN"
-msgstr ""
+msgstr "Trådlöst LAN"
 
 msgid "Wireless Network State"
-msgstr ""
+msgstr "Status Trådlöst nätverk"
 
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
+
