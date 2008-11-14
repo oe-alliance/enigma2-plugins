@@ -4,7 +4,6 @@
 ##
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
-from RS import rapidshare
 from RSConfig import config
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
