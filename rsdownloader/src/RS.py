@@ -190,7 +190,7 @@ class RS:
 				
 				if content.__contains__(file):
 					content = content.replace(file, "")
-					content = content.replace("\n\n", "\n")
+					content = content.replace("\n\n", "\n").replace("\r\r", "\r")
 					
 					f = open(list, "w")
 					f.write(content)

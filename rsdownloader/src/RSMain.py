@@ -10,16 +10,26 @@ from RSConfig import RSConfig, config
 from RSDownloadBrowser import RSDownloadBrowser
 from RSListBrowser import RSListBrowser
 from RSProgress import RSProgress
+from RSSearch import RSSearch
 from Screens.Console import Console
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Tools.Directories import fileExists
+
+if fileExists("/usr/lib/enigma2/python/Screens/LTKeyBoard.pyc"):
+	from Screens.LTKeyBoard import LTKeyBoard
+	LT = True
+else:
+	from Components.Input import Input
+	from Screens.InputBox import InputBox
+	LT = False
 
 ##############################################################################
 
 class RSMain(Screen):
 	skin = """
-		<screen position="200,175" size="320,250" title="RS Downloader">
-			<widget name="list" position="10,10" size="300,230" />
+		<screen position="200,165" size="320,270" title="RS Downloader">
+			<widget name="list" position="10,10" size="300,250" />
 		</screen>"""
 
 	def __init__(self, session, args = None):
@@ -35,6 +45,7 @@ class RSMain(Screen):
 			_("Show status..."),
 			_("Show log..."),
 			_("Delete log..."),
+			_("Use search-engine..."),
 			_("Show info...")])
 		
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
@@ -84,5 +95,17 @@ class RSMain(Screen):
 			elif selected == (_("Delete log...")):
 				self.session.open(Console, "RS Downloader", ["rm -f /tmp/rapidshare.log"])
 			
+			elif selected == (_("Use search-engine...")):
+				title = _("Search http://rapidshare-search-engine.com for:")
+				if LT:
+					self.session.openWithCallback(self.searchCallback, LTKeyBoard, title=title)
+				else:
+					self.session.openWithCallback(self.searchCallback, InputBox, title=title, text="", maxSize=False, type=Input.TEXT)
+			
 			elif selected == (_("Show info...")):
-				self.session.open(MessageBox, (_("RS Downloader\nby AliAbdul\n\nThis plugin allows you to download files from rapidshare in the background. You can use this plugin only with a rapidshare-account!")), MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, (_("RS Downloader\nby AliAbdul\n\nThis plugin allows you to download files from rapidshare in the background.")), MessageBox.TYPE_INFO)
+
+	def searchCallback(self, callback):
+		if callback is not None and callback != "":
+			self.session.open(RSSearch, callback)
+

@@ -11,7 +11,7 @@ from time import time
 
 ##############################################################################
 
-config.plugins.RSDownloader  = ConfigSubsection()
+config.plugins.RSDownloader = ConfigSubsection()
 config.plugins.RSDownloader.username = ConfigText(default="", fixed_size=False)
 config.plugins.RSDownloader.password = ConfigText(default="", fixed_size=False)
 config.plugins.RSDownloader.lists_directory = ConfigText(default="/media/cf/rs/lists/", fixed_size=False)
