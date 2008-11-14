@@ -133,7 +133,6 @@ class AutoRes(Screen):
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			height = info and info.getInfo(iServiceInformation.sVideoHeight)
-			print "[AutoRes Debug] VideoSize height = %s" % self.height
 			if height != self.height:
 				self.height = height
 				self.changeVideomode()
@@ -145,7 +144,6 @@ class AutoRes(Screen):
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			progressive = info and info.getInfo(iServiceInformation.sProgressive)
-			print "[AutoRes Debug] progressive (%d)" % progressive
 			if progressive == 1:
 				prog = 'p'
 			if prog != self.progressive:
@@ -153,17 +151,11 @@ class AutoRes(Screen):
 				self.changeVideomode()
 					       
 	def changeVideomode(self):
-		print "[AutoRes Debug] Resolution or content_is has changed"
 		content_mode = "%s%s" %(self.height, self.progressive)
-		print "[AutoRes Debug] New content mode is %s" % content_mode
 		if switchdic.has_key(content_mode):
-			print "[AutoRes Debug] content_mode is in switchdic"
 			if switchdic[content_mode] in preferedmodes:
-				print "[AutoRes Debug] Resolution is in switchdic and in preferedmodes"
 				port = config.av.videoport.value
-				print "[AutoRes Debug] port=%s" % port
 				mode = switchdic[content_mode]
-				print "[AutoRes Debug] mode=%s" % mode
 				rate = config.av.videorate[mode].value
 				print "[AutoRes Debug] switching to %s %s %s" % (port, mode, rate)
 				if config.plugins.autoresolution.showinfo.value:
