@@ -55,11 +55,11 @@ class ExtendedConfigText(ConfigText):
 		# Workaround some characters currently not "typeable" using NumericalTextInput
 		mapping = self.mapping
 		if len(mapping):
-			if "&" not in mapping[0]):
+			if "&" not in mapping[0]:
 				mapping[0] += "&"
-			if ";" not in mapping[0]):
+			if ";" not in mapping[0]:
 				mapping[0] += ";"
-			if "%" not in mapping[0]):
+			if "%" not in mapping[0]:
 				mapping[0] += "%"
 
 class SimpleBouquetSelection(SimpleChannelSelection):
