@@ -15,7 +15,7 @@ from twisted.web.client import getPage
 class RSSearch(Screen):
 	skin = """
 		<screen position="75,75" size="570,425" title="Searching... please wait!">
-			<widget name="list" position="0,0" size="570,425" />
+			<widget name="list" position="0,0" size="570,425" scrollbarMode="showOnDemand" />
 		</screen>"""
 
 	def __init__(self, session, searchFor):
@@ -72,7 +72,7 @@ class RSSearch(Screen):
 		
 		if html.__contains__("Nothing found, sorry."):
 			self.session.open(MessageBox, (_("Error while searching http://rapidshare-search-engine.com!\n\nError: Nothing found, sorry.")), MessageBox.TYPE_ERROR)
-			self.instance.setTitle(_("Error while searching!"))
+			self.instance.setTitle(_("Nothing found, sorry."))
 		else:
 			tmp = html
 			while tmp.__contains__("goPg('"):
