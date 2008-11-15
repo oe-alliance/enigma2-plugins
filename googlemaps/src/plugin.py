@@ -129,13 +129,13 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
             """
     def __init__(self, session):
         self.session = session
-        size_w = getDesktop(0).size().width()*0.9    
-        size_h = getDesktop(0).size().height()*0.9
-        pos_w = (getDesktop(0).size().width()-size_w)/2
-        pos_h = (getDesktop(0).size().height()-size_h)/2        
-        p_h = size_h/3
+        size_w = int(getDesktop(0).size().width()*0.9)    
+        size_h = int(getDesktop(0).size().height()*0.9)
+        pos_w = int((getDesktop(0).size().width()-size_w)/2)
+        pos_h = int((getDesktop(0).size().height()-size_h)/2)        
+        p_h = int(size_h/3)
                 
-        infopanel_width = size_w - (p_h*3)
+        infopanel_width = int(size_w - (p_h*3))
         infopanel_height = size_h
         label_height = 30
         font = "Regular;21"
@@ -149,36 +149,36 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
                 
                 'pixmap1.pos': '0,0',
                 'pixmap2.pos': '%i,0'%(p_h),
-                'pixmap3.pos': '%i,0'%(p_h*2),
+                'pixmap3.pos': '%i,0'%(int(p_h*2)),
                 
                 'pixmap4.pos': '0,%i'%(p_h),
                 'pixmap5.pos': '%i,%i'%(p_h,p_h),
-                'pixmap6.pos': '%i,%i'%(p_h*2,p_h),
+                'pixmap6.pos': '%i,%i'%(int(p_h*2),p_h),
                 
-                'pixmap7.pos': '0,%i'%(p_h*2),
-                'pixmap8.pos': '%i,%i'%(p_h,p_h*2),
-                'pixmap9.pos': '%i,%i'%(p_h*2,p_h*2),
+                'pixmap7.pos': '0,%i'%(int(p_h*2)),
+                'pixmap8.pos': '%i,%i'%(p_h,int(p_h*2)),
+                'pixmap9.pos': '%i,%i'%(int(p_h*2),int(p_h*2)),
                 
-                'infopanel.pos': '%i,0'%(p_h*3),
+                'infopanel.pos': '%i,0'%(int(p_h*3)),
                 'infopanel.size': '%i,%i'%(infopanel_width,infopanel_height),
                 
-                'posx.pos': '%i,0'%(p_h*3),
+                'posx.pos': '%i,0'%(int(p_h*3)),
                 'posx.size': '%i,%i'%(infopanel_width,label_height),
                 
-                'posy.pos': '%i,%i'%(p_h*3,label_height),
+                'posy.pos': '%i,%i'%(int(p_h*3),label_height),
                 'posy.size': '%i,%i'%(infopanel_width,label_height),
                 
-                'posz.pos': '%i,%i'%(p_h*3,label_height*2),
+                'posz.pos': '%i,%i'%(int(p_h*3),int(label_height*2)),
                 'posz.size': '%i,%i'%(infopanel_width,label_height),
                 
-                'placeslist.pos': '%i,%i'%(p_h*3,label_height*3),
-                'placeslist.size': '%i,%i'%(infopanel_width,infopanel_height-(label_height*4)),
+                'placeslist.pos': '%i,%i'%(int(p_h*3),int(label_height*3)),
+                'placeslist.size': '%i,%i'%(infopanel_width,int(infopanel_height-(label_height*4))),
 
-                'buttonmenu.pos': '%i,%i'%(p_h*3,infopanel_height-(label_height*4)+(label_height*3)),
-                'buttonmenu.size': '%i,%i'%(infopanel_width/2,label_height),
+                'buttonmenu.pos': '%i,%i'%(int(p_h*3),int(infopanel_height-(label_height*4)+(label_height*3))),
+                'buttonmenu.size': '%i,%i'%(int(infopanel_width/2),label_height),
                 
-                'buttonhelp.pos': '%i,%i'%(p_h*3+(infopanel_width/2),infopanel_height-(label_height*4)+(label_height*3)),
-                'buttonhelp.size': '%i,%i'%(infopanel_width/2,label_height),
+                'buttonhelp.pos': '%i,%i'%(int(p_h*3+(infopanel_width/2)),int(infopanel_height-(label_height*4)+(label_height*3))),
+                'buttonhelp.size': '%i,%i'%(int(infopanel_width/2),label_height),
                 
                 }
         
