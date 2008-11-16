@@ -49,9 +49,8 @@ def getAspect():
     return r
 
 class WebPixmap(Pixmap):
-    def __init__(self,url=None,text=""):
-        self.url = url
-        self.default = "/usr/lib/enigma2/python/Plugins/Extensions/GoogleMaps/404.png"
+    def __init__(self,default=None):
+        self.default = default
         self.cachedir = "/tmp/googlemaps/"
         Pixmap.__init__(self)
 
@@ -91,6 +90,7 @@ class WebPixmap(Pixmap):
     def onLoadFailed(self,error):
         print "WebPixmap:onLoadFAILED",error
         if self.default is not None:
+            print "showing 404",self.default
             self.setPixmapFromFile(self.default)
         if os_isfile(self.tmpfile):
             os_remove(self.tmpfile)
