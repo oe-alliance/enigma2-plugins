@@ -22,7 +22,7 @@ def main(session, service, **kwargs):
 	session.open(MovieCut, service, **kwargs)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="MovieCut", description="Execute cuts...", where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+	return PluginDescriptor(name="MovieCut", description=_("Execute cuts..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
 
 
 class MovieCut(ChoiceBox):
@@ -36,10 +36,10 @@ class MovieCut(ChoiceBox):
 		else:
 			self.name = info.getName(self.service)
 		tlist = []
-		tlist.append(("Don't cut", "CALLFUNC", self.confirmed0))
-		tlist.append(("Replace the original movie with the cut movie", "CALLFUNC", self.confirmed1))
-		tlist.append(("Place the cut movie in a new file ending with \" cut\"", "CALLFUNC", self.confirmed2))
-		tlist.append(("Advanced cut parameter settings...", "CALLFUNC", self.confirmed3))
+		tlist.append((_("Don't cut"), "CALLFUNC", self.confirmed0))
+		tlist.append((_("Replace the original movie with the cut movie"), "CALLFUNC", self.confirmed1))
+		tlist.append((_("Place the cut movie in a new file ending with \" cut\""), "CALLFUNC", self.confirmed2))
+		tlist.append((_("Advanced cut specification..."), "CALLFUNC", self.confirmed3))
 		ChoiceBox.__init__(self, session, _("How would you like to cut \"%s\"?") % (self.name), list = tlist, selection = 0)
 		self.skinName = "ChoiceBox"
 
@@ -133,7 +133,7 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 		self.entry_dir = getConfigListEntry(_("New location:"), self.input_dir)
 		self.entry_manual = getConfigListEntry(_("Cut source:"), self.input_manual)
 		self.entry_space = getConfigListEntry(_("Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"), self.input_space)
-		self.entry_manualcuts = getConfigListEntry(_(":"), self.input_manualcuts)
+		self.entry_manualcuts = getConfigListEntry(":", self.input_manualcuts)
 		self.createSetup(self["config"])
 
 	def createSetup(self, configlist):
@@ -233,7 +233,7 @@ class MovieCutQueue:
 		if not self.queue:
 			self.running = False
 		else:
-			self.container.execute(self.queue[0][1][0], self.queue[0][1])
+			self.container.execute(*self.queue[0][1])
 
 	def runDone(self, retval):
 		cb = self.queue[0][0]
@@ -241,18 +241,18 @@ class MovieCutQueue:
 		cb(retval)
 		self.runNext()
 
-global_mcut_errors = ["The movie \"%s\" is successfully cut",
-		      "Cutting failed for movie \"%s\":\nBad arguments",
-		      "Cutting failed for movie \"%s\":\nCouldn't open input .ts file",
-		      "Cutting failed for movie \"%s\":\nCouldn't open input .cuts file",
-		      "Cutting failed for movie \"%s\":\nCouldn't open input .ap file",
-		      "Cutting failed for movie \"%s\":\nCouldn't open output .ts file",
-		      "Cutting failed for movie \"%s\":\nCouldn't open output .cuts file",
-		      "Cutting failed for movie \"%s\":\nCouldn't open output .ap file",
-		      "Cutting failed for movie \"%s\":\nEmpty .ap file",
-		      "Cutting failed for movie \"%s\":\nNo cuts specified",
-		      "Cutting failed for movie \"%s\":\nRead/write error (disk full?)",
-		      "Cutting was aborted for movie \"%s\""]
+global_mcut_errors = [_("The movie \"%s\" is successfully cut"),
+		      _("Cutting failed for movie \"%s\"")+":\n"+_("Bad arguments"),
+		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .ts file"),
+		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .cuts file"),
+		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open input .ap file"),
+		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .ts file"),
+		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .cuts file"),
+		      _("Cutting failed for movie \"%s\"")+":\n"+_("Couldn't open output .ap file"),
+		      _("Cutting failed for movie \"%s\"")+":\n"+_("Empty .ap file"),
+		      _("Cutting failed for movie \"%s\"")+":\n"+_("No cuts specified"),
+		      _("Cutting failed for movie \"%s\"")+":\n"+_("Read/write error (disk full?)"),
+		      _("Cutting was aborted for movie \"%s\"")]
 
 global_mcut_queue = MovieCutQueue()
 
