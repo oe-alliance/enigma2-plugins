@@ -17,9 +17,8 @@ from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Button import Button
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigIP, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger, ConfigPassword
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger, ConfigPassword
 from Components.ConfigList import ConfigListScreen
-from Components.ScrollLabel import ScrollLabel
 
 from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
@@ -97,10 +96,13 @@ config.plugins.FritzCall.number.setUseableChars('0123456789')
 def html2utf8(in_html):
 	try:
 		import htmlentitydefs
-		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
+
+		# first convert some WML codes
+		in_html = in_html.replace("&#xDF;;", "ß").replace("&#xE4;", "ä").replace("&#xF6;", "ö").replace("&#xFC;", "ü").replace("&#xC4;", "Ä").replace("&#xD6;", "Ö").replace("&#xDC;", "Ü")
+
 		htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
-		entities = htmlentitynamemask.finditer(in_html)
 		entitydict = {}
+		entities = htmlentitynamemask.finditer(in_html)
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
 		for key, name in entitydict.items():
@@ -109,6 +111,9 @@ def html2utf8(in_html):
 			except KeyError:
 				print "[FritzCallhtml2utf8] KeyError " + key + "/" + name
 				pass
+
+		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
+		entitydict = {}
 		entities = htmlentitynumbermask.finditer(in_html)
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
@@ -162,7 +167,6 @@ class FritzCallFBF:
 					self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("login ok"))
 				self.loggedIn = True
 				self.loginCallback()
-			loginCallback = None
 		except:
 			import traceback, sys
 			traceback.print_exc(file=sys.stdout)
@@ -288,6 +292,12 @@ class FritzCallFBF:
 		def _resolveNumber(number):
 			if number.isdigit():
 				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0]=="0": number = number[1:]
+				# strip CbC prefix
+				if config.plugins.FritzCall.country.value == '0049':
+					if re.match('^0100\d\d', number):
+						number = number[6:]
+					elif re.match('^010\d\d', number):
+						number = number[5:]
 				name = phonebook.search(number)
 				if name:
 					found = re.match('(.*?)\n.*', name)
@@ -340,7 +350,15 @@ class FritzCallFBF:
 					here = _resolveNumber(found1.group(1))
 				else:
 					here = _resolveNumber(found.group(6))
-				callList.append((found.group(4), date, here, direct, remote))
+				
+				# strip CbC prefix for Germany
+				number = found.group(4)
+				if config.plugins.FritzCall.country.value == '0049':
+					if re.match('^0100\d\d', number):
+						number = number[6:]
+					elif re.match('^010\d\d', number):
+						number = number[5:]
+				callList.append((number, date, here, direct, remote))
 
 		# print "[FritzCallFBF] _gotPageCalls result:\n" + text
 
@@ -399,7 +417,7 @@ class FritzCallFBF:
 	def dial(self, number):
 		''' initiate a call to number '''
 		#
-		# TODO:
+		# TODO: implement dial out
 		# does not work... if anybody wants to make it work, feel free
 		# I not convinced of FBF's style to establish a connection: first get the connection, then ring the local phone?!?!
 		#  
@@ -562,8 +580,8 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		print "[FritzDisplayCalls] showEntry"
 		cur = self["entries"].getCurrent()
 		if cur:
-			print "[FritzDisplayCalls] showEntry %s" % (cur[0])
 			if cur[0]:
+				print "[FritzDisplayCalls] showEntry %s" % (cur[0])
 				# TODO: offer to call number
 				fullname = phonebook.search(cur[0])
 				if fullname:
@@ -602,8 +620,6 @@ class FritzCallPhonebook:
 		if not config.plugins.FritzCall.enable.value:
 			return
 
-		exists = False
-		
 		if config.plugins.FritzCall.phonebook.value and os.path.exists(config.plugins.FritzCall.phonebookLocation.value):
 			phonebookTxtCorrupt = False
 			for line in open(config.plugins.FritzCall.phonebookLocation.value):
@@ -1358,6 +1374,10 @@ class FritzReverseLookupAndNotifier:
 					# print "[FritzReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( what, found.group(2) )
 					item = found.group(2).replace("&nbsp;"," ").replace("</b>","").replace(",","")
 					item = html2utf8(item)
+					newitem = item.replace("  ", " ")
+					while newitem != item:
+						item = newitem
+						newitem = item.replace("  ", " ")
 					details.append(item.strip())
 					# print "[FritzReverseLookupAndNotifier] _gotPage: got '''%s''': '''%s'''" %( what, item.strip() )
 				else:
@@ -1425,13 +1445,12 @@ class FritzProtocol(LineReceiver):
 #15.07.06 00:38:58;DISCONNECT;1;0;
 #15.07.06 00:39:22;RING;0;<from/extern>;<to/our msn>;
 #15.07.06 00:39:27;DISCONNECT;0;0;
-		a = []
 		a = line.split(';')
 		(self.date, self.event) = a[0:2]
 
 		if self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoing.value):
 			phone = a[4]
-			 
+
 			if self.event == "RING":
 				number = a[3] 
 			else:
