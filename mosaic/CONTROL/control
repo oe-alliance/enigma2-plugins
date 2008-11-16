@@ -1,6 +1,6 @@
 Package: enigma2-plugin-extensions-mosaic
 Version: 0.1-r0
-Description: Shows you screenshots of the services in the current bouquet
+Description: Shows you screenshots of the services in a selected bouquet
 Architecture: all
 Section: extra
 Priority: optional
