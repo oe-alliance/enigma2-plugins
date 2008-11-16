@@ -278,21 +278,21 @@ class MovieRetitleBackgroundMover:
 			self.sufflst = self.sufflst[1:]
 			print "Moving %s to %s" % (fr, to)
 			if os.path.exists(fr):
-				self.container.execute("/bin/cp", ["/bin/cp", fr, to])
+				self.container.execute("/bin/cp", fr, to)
 			else:
 				self.moveNextSuffBG(0)
 		elif retval:
 			for suff in self.sufflst2:
 				if os.path.exists(self.ele[3] + suff) and os.path.exists(self.ele[2] + suff):
 					os.unlink(self.ele[3] + suff)
-			mess = "Failed to move the movie %s to %s in the background" % (self.ele[2], self.ele[3])
+			mess = _("Failed to move the movie %s to %s in the background") % (self.ele[2], self.ele[3])
 			self.message(self.ele[0], self.ele[1], None, mess)
 			self.runDone(1)
 		else:
 			for suff in self.sufflst2:
 				if os.path.exists(self.ele[2] + suff) and os.path.exists(self.ele[3] + suff):
 					os.unlink(self.ele[2] + suff)
-			mess = "Successfully moved the movie %s" % (self.ele[2])
+			mess = _("Successfully moved the movie %s") % (self.ele[2])
 			self.message(self.ele[0], self.ele[1], None, mess)
 			self.runDone(0)
 
