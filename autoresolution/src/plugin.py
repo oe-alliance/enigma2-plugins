@@ -29,6 +29,15 @@ config.plugins.autoresolution.i480 = ConfigSelection(default = default, choices 
 config.plugins.autoresolution.p480 = ConfigSelection(default = default, choices = preferedmodes)
 config.plugins.autoresolution.showinfo = ConfigYesNo(default = True)
 config.plugins.autoresolution.testmode = ConfigYesNo(default = False)
+config.plugins.autoresolution.deinterlacer = ConfigSelection(default = "auto", choices =
+		[("auto", _("auto")), ("off", _("off")), ("on", _("on"))])
+def setDeinterlacer(configElement):
+	mode = config.plugins.autoresolution.deinterlacer.value
+	print "[AutoRes] switch deinterlacer mode to %s" % mode
+	f = open('/proc/stb/vmpeg/deinterlace' , "w")
+	f.write("%s\n" % mode)
+	f.close()
+config.plugins.autoresolution.deinterlacer.addNotifier(setDeinterlacer)
 
 def build_switchdic():
 	dic = { '1080i': config.plugins.autoresolution.i1080.value, \
@@ -76,13 +85,14 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("%s Content" % "1080i"), config.plugins.autoresolution.i1080))
 #			self.list.append(getConfigListEntry(_("%s Content" % "1080p"), config.plugins.autoresolution.p1080))
 #			self.list.append(getConfigListEntry(_("%s Content" % "720i"), config.plugins.autoresolution.i720))
-			self.list.append(getConfigListEntry(_("%s Content" % "720p"), config.plugins.autoresolution.p720))
-			self.list.append(getConfigListEntry(_("%s Content" % "576i"), config.plugins.autoresolution.i576))
-			self.list.append(getConfigListEntry(_("%s Content" % "576p"), config.plugins.autoresolution.p576))
-			self.list.append(getConfigListEntry(_("%s Content" % "480p"), config.plugins.autoresolution.p480))
-			self.list.append(getConfigListEntry(_("%s Content" % "480i"), config.plugins.autoresolution.i480))
+			self.list.append(getConfigListEntry(_("720p Content"), config.plugins.autoresolution.p720))
+			self.list.append(getConfigListEntry(_("576i Content"), config.plugins.autoresolution.i576))
+			self.list.append(getConfigListEntry(_("576p Content"), config.plugins.autoresolution.p576))
+			self.list.append(getConfigListEntry(_("480p Content"), config.plugins.autoresolution.p480))
+			self.list.append(getConfigListEntry(_("480i Content"), config.plugins.autoresolution.i480))
 			self.list.append(getConfigListEntry(_("Show Info Screen"), config.plugins.autoresolution.showinfo))
 			self.list.append(getConfigListEntry(_("Running in Testmode"), config.plugins.autoresolution.testmode))
+		self.list.append(getConfigListEntry(_("Deinterlacer Mode"), config.plugins.autoresolution.deinterlacer))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 	
@@ -128,7 +138,7 @@ class AutoRes(Screen):
 		self.height, self.progressive = '','i'
 		
 	def __evVideoSizeChanged(self):
-		print "[AutoRes Debug] got event evVideoSizeChanged"
+		print "[AutoRes] got event evVideoSizeChanged"
 		if config.plugins.autoresolution.enable.value:
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
@@ -138,7 +148,7 @@ class AutoRes(Screen):
 				self.changeVideomode()
 	
 	def __evVideoProgressiveChanged(self):
-		print "[AutoRes Debug] got event evVideoProgressiveChanged"
+		print "[AutoRes] got event evVideoProgressiveChanged"
 		prog = 'i'
 		if config.plugins.autoresolution.enable.value:
 			service = self.session.nav.getCurrentService()
@@ -152,12 +162,13 @@ class AutoRes(Screen):
 					       
 	def changeVideomode(self):
 		content_mode = "%s%s" %(self.height, self.progressive)
+		print "[AutoRes] new content is %s%s" %(self.height, self.progressive)
 		if switchdic.has_key(content_mode):
 			if switchdic[content_mode] in preferedmodes:
 				port = config.av.videoport.value
 				mode = switchdic[content_mode]
 				rate = config.av.videorate[mode].value
-				print "[AutoRes Debug] switching to %s %s %s" % (port, mode, rate)
+				print "[AutoRes] switching to %s %s %s" % (port, mode, rate)
 				if config.plugins.autoresolution.showinfo.value:
 					resolutionlabel["restxt"].setText("%s %s %s" % (port, mode, rate))
 					resolutionlabel.show()
@@ -169,7 +180,7 @@ class AutoRes(Screen):
 					self.session.openWithCallback(
 							self.confirm, MessageBox, _("Autoresolution Plugin Testmode:\nIs %s %s %s videomode ok?" % ((port, mode, rate))), MessageBox.TYPE_YESNO, timeout = 15, default = False)
 			else:
-				print '[AutoRes Debug] TV dont support %s' % switchdic[self.height]
+				print '[AutoRes] TV dont support %s' % switchdic[self.height]
 
 	def confirm(self, confirmed):
 		if not confirmed:
