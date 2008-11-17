@@ -1,27 +1,28 @@
-# SOME DESCRIPTIVE TITLE.
+# translation of nl.po to gerrit
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# gerrit <gerrit@nedlinux.nl>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: E2 vertaling\n"
+"Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-06 14:59+0100\n"
-"PO-Revision-Date: 2008-10-07 22:52+0100\n"
-"Last-Translator: Henksat <henksat@xs4all.nl>\n"
-"Language-Team: PLi Images <webmaster@pli-images.org>\n"
+"PO-Revision-Date: 2008-11-14 08:49+0100\n"
+"Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
+"Language-Team: gerrit <fy@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
+"X-Generator: KBabel 1.11.4\n"
 
 msgid " Wireless Network(s) found!"
-msgstr "Draadloze netwerken gevonden"
+msgstr "Draadloze netwerk(en) gevonden!"
 
 msgid "Accesspoint:"
-msgstr "Draadloos aansluitpunt:"
+msgstr "Toegangspunt:"
 
 msgid "Bitrate:"
 msgstr "Bitrate:"
@@ -33,33 +34,33 @@ msgid "Close"
 msgstr "Sluiten"
 
 msgid "Connect"
-msgstr "Verbind"
+msgstr "Verbinden"
 
 msgid "Connect to a Wireless Network"
 msgstr "Verbind met draadloos netwerk"
 
 msgid "Disabled"
-msgstr ""
+msgstr "Uitgeschakeld"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Ingeschakeld"
 
 #, python-format
 msgid "Encrypted: %s"
-msgstr "Encrypted: %s"
+msgstr "Gecodeerd : %s"
 
 msgid "Encryption:"
-msgstr ""
+msgstr "Codering:"
 
 msgid "Hidden networkname"
-msgstr ""
+msgstr "Verborgen netwerknaam"
 
 #, python-format
 msgid "Interface: %s"
 msgstr "Interface: %s"
 
 msgid "Link Quality:"
-msgstr "Kwaliteit verbinding"
+msgstr "Kwaliteit verbinding:"
 
 msgid "Link:"
 msgstr "Verbinding:"
@@ -75,31 +76,31 @@ msgid "Network:"
 msgstr "Netwerk:"
 
 msgid "No"
-msgstr "Geen"
+msgstr "Nee"
 
 msgid "No Connection"
-msgstr ""
+msgstr "Geen verbinding"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Even geduld..."
 
 msgid "Refresh"
-msgstr "Ververs info"
+msgstr "Verversen"
 
 msgid "SSID:"
 msgstr "SSID:"
 
 msgid "Signal Strength:"
-msgstr "Signaal sterkte"
+msgstr "Signaal sterkte:"
 
 msgid "Signal: "
-msgstr "Signaal"
+msgstr "Signaal:"
 
 msgid "Unsupported"
-msgstr ""
+msgstr "Niet Ondersteund"
 
 msgid "Wireless LAN"
-msgstr "Draadloos Local Area Network"
+msgstr "Draadloos LAN"
 
 msgid "Wireless Network State"
 msgstr "Status draadloos netwerk"
