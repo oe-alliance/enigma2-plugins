@@ -1,3 +1,5 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2008 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -7,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 Networkwizard italian locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-07 23:03+0100\n"
-"PO-Revision-Date: 2008-08-04 12:01+0100\n"
+"POT-Creation-Date: 2008-11-14 11:33+0100\n"
+"PO-Revision-Date: 2008-11-14 12:24+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,81 +21,116 @@ msgstr ""
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
-msgid "Configure interface"
-msgstr "Configurare l'interfaccia."
-
-msgid "Configure nameservers"
-msgstr "Configurare i Nameserver"
-
-msgid "Configure your internal LAN"
-msgstr "Configurare la rete locale cablata."
-
-msgid "Configure your network again"
-msgstr "Configurare di nuovo la rete locale."
-
-msgid "Configure your wireless LAN again"
-msgstr "Configurare di nuovo la rete locale wireless."
-
+#: ../src/NetworkWizard.py:77
+#: ../src/
 msgid "Exit network wizard"
-msgstr ""
+msgstr "Uscire da Configurazione Guidata"
 
+#: ../src/plugin.py:19
+#: ../src/plugin.py:28
+#: ../src/
 msgid "Network Wizard"
 msgstr "Configurazione Guidata"
 
+#: ../src/NetworkWizard.py:182
+#: ../src/NetworkWizard.py:183
 msgid "No networks found"
-msgstr ""
+msgstr "Nessuna Rete rilevata!"
 
+#: ../src/NetworkWizard.py:101
+#: ../src/NetworkWizard.py:104
+#: ../src/NetworkWizard.py:107
+#: ../src/NetworkWizard.py:110
+msgid "Please wait while we prepare your network interfaces..."
+msgstr "Attendere: preparazione interfacce di rete in corso..."
+
+#: ../src/NetworkWizard.py:139
+#: ../src/NetworkWizard.py:159
+msgid "Please wait while we test your network..."
+msgstr "Attendere: test della rete in corso..."
+
+#: ../src/NetworkWizard.py:198
+msgid "enter hidden network SSID"
+msgstr "Inserire SSID di rete nascosto"
+
+#: ../src/NetworkWizard.py:198
+#: ../src/NetworkWizard.py:199
+msgid "hidden..."
+msgstr "Nascosto..."
+
+#: ../src/NetworkWizard.py:182
+msgid "unavailable"
+msgstr "Non disponibile!"
+
+#: ../src/
+msgid "Configure interface"
+msgstr "Configurare l'interfaccia."
+
+#: ../src/
+msgid "Configure nameservers"
+msgstr "Configurare i Nameserver"
+
+#: ../src/
+msgid "Configure your internal LAN"
+msgstr "Configurare la rete locale cablata."
+
+#: ../src/
+msgid "Configure your network again"
+msgstr "Configurare di nuovo la rete locale."
+
+#: ../src/
+msgid "Configure your wireless LAN again"
+msgstr "Configurare di nuovo la rete locale wireless."
+
+#: ../src/
 msgid ""
-"Please configure or verify your Nameservers by filling out the required "
-"values.\n"
+"Please configure or verify your Nameservers by filling out the required values.\n"
 "When you are ready press OK to continue."
 msgstr ""
 "Configurare o verificare i Nameserver inserendo i parametri richiesti.\n"
 "Quando pronti, premere OK per continuare."
 
+#: ../src/
 msgid ""
-"Please configure your internet connection by filling out the required "
-"values.\n"
+"Please configure your internet connection by filling out the required values.\n"
 "When you are ready press OK to continue."
 msgstr ""
 "Configurare la connessione a Internet inserendo i parametri richiesti.\n"
 "Quando pronti, premere OK per continuare."
 
+#: ../src/
 msgid "Please follow the instructions on the TV"
 msgstr "Seguire le istruzioni sullo schermo"
 
+#: ../src/
 msgid ""
-"Please select the network interface that you want to use for your internet "
-"connection.\n"
+"Please select the network interface that you want to use for your internet connection.\n"
 "\n"
 "Please press OK to continue."
 msgstr ""
-"Selezionare l'interfaccia di rete che verrà utilizzata per la connessione a "
-"Internet.\n"
+"Selezionare l'interfaccia di rete che verrà utilizzata per la connessione a Internet.\n"
 "\n"
 "Premere OK per continuare."
 
+#: ../src/
 msgid ""
 "Please select the wireless network that you want to connect to.\n"
 "\n"
 "Please press OK to continue."
 msgstr ""
-"Selezionare la rete locale wireless a cui connettersi.\n"
+"Selezionare la rete wireless a cui connettersi.\n"
 "\n"
 "Premere OK per continuare."
 
-msgid "Please wait while we prepare your network interfaces..."
-msgstr ""
-
-msgid "Please wait while we test your network..."
-msgstr ""
-
+#: ../src/
 msgid "Select interface"
 msgstr "Selezionare l'interfaccia"
 
+#: ../src/
 msgid "Select wireless network"
 msgstr "Selezionare una Rete Wireless"
 
+#: ../src/
 msgid ""
 "Thank you for using the wizard.\n"
 "Please press OK to continue."
@@ -101,6 +138,7 @@ msgstr ""
 "Grazie per aver utilizzato questa Configurazione guidata.\n"
 "Premere OK per continuare."
 
+#: ../src/
 msgid ""
 "The wireless LAN plugin is not installed!\n"
 "Please install it and choose what you want to do next."
@@ -108,21 +146,21 @@ msgstr ""
 "Il plugin 'WirelessLan' non è installato!\n"
 "Installarlo per poterlo configurare."
 
+#: ../src/
 msgid ""
 "Welcome.\n"
 "\n"
-"If you want to connect your Dreambox to the Internet, this wizard will guide "
-"you through the basic network setup of your Dreambox.\n"
+"If you want to connect your Dreambox to the Internet, this wizard will guide you through the basic network setup of your Dreambox.\n"
 "\n"
 "Press OK to start configuring your network"
 msgstr ""
 "Benvenuto.\n"
 "\n"
-"Questa configurazione guidata fornirà supporto di base per la configurazione "
-"di rete del Dreambox e la sua connessione a Internet.\n"
+"Questa configurazione guidata fornirà supporto di base per la configurazione di rete del Dreambox e la sua connessione a Internet.\n"
 "\n"
 "Premere OK per iniziare la configurazione della rete."
 
+#: ../src/
 msgid ""
 "Your Dreambox is now ready to use.\n"
 "\n"
@@ -136,6 +174,7 @@ msgstr ""
 "\n"
 "Premere OK per continuare."
 
+#: ../src/
 msgid ""
 "Your internet connection is not working!\n"
 "Please choose what you want to do next."
@@ -143,6 +182,7 @@ msgstr ""
 "La connessione a Internet non funziona!\n"
 "Selezionare un'opzione per proseguire."
 
+#: ../src/
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"
 "Have you attached your USB WLAN Stick?\n"
@@ -154,89 +194,3 @@ msgstr ""
 "\n"
 "Selezionare un'opzione per proseguire."
 
-msgid "enter hidden network SSID"
-msgstr ""
-
-msgid "hidden..."
-msgstr ""
-
-msgid "unavailable"
-msgstr "Non disponibile!"
-
-#~ msgid "Accesspoint:"
-#~ msgstr "Exit wizard and configure later manually"
-
-#~ msgid "Bitrate:"
-#~ msgstr "Bitrate:"
-
-#~ msgid "Channel:"
-#~ msgstr "Canale:"
-
-#~ msgid "Choose a Wireless Network"
-#~ msgstr "Scegliere una Rete Wireless"
-
-#~ msgid "Close"
-#~ msgstr "Chiudere"
-
-#~ msgid "Connect"
-#~ msgstr "Connettere"
-
-#~ msgid "Encrypted: %s"
-#~ msgstr "Codificato: %s"
-
-#~ msgid "Exit wizard and configure later manually"
-#~ msgstr "Uscire e configurare manualmente più tardi"
-
-#~ msgid "Interface: %s"
-#~ msgstr "Interfaccia: %s"
-
-#~ msgid "Link Quality:"
-#~ msgstr "Qualità:"
-
-#~ msgid "Link:"
-#~ msgstr "Link:"
-
-#~ msgid "Max. Bitrate: %s"
-#~ msgstr "Bitrate Max: %s"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
-
-#~ msgid "No"
-#~ msgstr "No"
-
-#~ msgid "No Connection!"
-#~ msgstr "Nessuna Connessione!"
-
-#~ msgid "No Networks found"
-#~ msgstr "Nessuna Rete rilevata!"
-
-#~ msgid "Refresh"
-#~ msgstr "Ricaricare"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Signal Strength:"
-#~ msgstr "Potenza:"
-
-#~ msgid "Signal: "
-#~ msgstr "Segnale:"
-
-#~ msgid "WEP"
-#~ msgstr "WEP"
-
-#~ msgid "WPA"
-#~ msgstr "WPA"
-
-#~ msgid "WPA2"
-#~ msgstr "WPA2"
-
-#~ msgid "Wireless LAN"
-#~ msgstr "Rete Wireless"
-
-#~ msgid "Wireless Network State"
-#~ msgstr "Stato Rete Wireless"
-
-#~ msgid "Yes"
-#~ msgstr "Sì"
