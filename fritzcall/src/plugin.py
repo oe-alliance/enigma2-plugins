@@ -97,8 +97,8 @@ def html2utf8(in_html):
 	try:
 		import htmlentitydefs
 
-		# first convert some WML codes
-		in_html = in_html.replace("&#xDF;;", "ß").replace("&#xE4;", "ä").replace("&#xF6;", "ö").replace("&#xFC;", "ü").replace("&#xC4;", "Ä").replace("&#xD6;", "Ö").replace("&#xDC;", "Ü")
+		# TODO: first convert some WML codes; does not work?!?!
+		# in_html = in_html.replace("&#xDF;;", "ß").replace("&#xE4;", "ä").replace("&#xF6;", "ö").replace("&#xFC;", "ü").replace("&#xC4;", "Ä").replace("&#xD6;", "Ö").replace("&#xDC;", "Ü")
 
 		htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
 		entitydict = {}
@@ -113,7 +113,6 @@ def html2utf8(in_html):
 				pass
 
 		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
-		entitydict = {}
 		entities = htmlentitynumbermask.finditer(in_html)
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
@@ -121,10 +120,13 @@ def html2utf8(in_html):
 			try:
 				in_html = in_html.replace(key, (unichr(int(codepoint)).encode('utf8', "replace")))
 			except ValueError:
-				print "[FritzCallhtml2utf8] ValueError " + key + "/" + codepoint
+				print "[FritzCallhtml2utf8] ValueError " + key + "/" + str(codepoint)
 				pass
 	except ImportError:
-		return in_html.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
+		try:
+			return in_html.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
+		except UnicodeDecodeError:
+			pass
 	return in_html
 
 
@@ -298,6 +300,8 @@ class FritzCallFBF:
 						number = number[6:]
 					elif re.match('^010\d\d', number):
 						number = number[5:]
+				if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
+					number = config.plugins.FritzCall.prefix.value + number
 				name = phonebook.search(number)
 				if name:
 					found = re.match('(.*?)\n.*', name)
@@ -358,6 +362,8 @@ class FritzCallFBF:
 						number = number[6:]
 					elif re.match('^010\d\d', number):
 						number = number[5:]
+				if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
+					number = config.plugins.FritzCall.prefix.value + number
 				callList.append((number, date, here, direct, remote))
 
 		# print "[FritzCallFBF] _gotPageCalls result:\n" + text
