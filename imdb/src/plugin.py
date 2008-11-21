@@ -13,7 +13,6 @@ from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
-from Tools.LoadPixmap import LoadPixmap
 import re
 import htmlentitydefs
 import urllib
