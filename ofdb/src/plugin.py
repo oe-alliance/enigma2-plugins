@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from Plugins.Plugin import PluginDescriptor
 from twisted.web.client import downloadPage
-from enigma import loadPic
+from enigma import ePicLoad
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
@@ -12,6 +12,7 @@ from Components.AVSwitch import AVSwitch
 from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import re
 import htmlentitydefs
 import urllib
@@ -45,6 +46,9 @@ class OFDB(Screen):
 		self.eventName = eventName
 		self.dictionary_init()
 		self["poster"] = Pixmap()
+		self.picload = ePicLoad()
+		self.picload.PictureData.get().append(self.paintPosterPixmapCB)
+
 		self["stars"] = ProgressBar()
 		self["starsbg"] = Pixmap()
 		self["stars"].hide()
@@ -174,7 +178,7 @@ class OFDB(Screen):
 			link = self["menu"].getCurrent()[1]
 			title = self["menu"].getCurrent()[0]
 			self["statusbar"].setText("Re-Query OFDb: "+title+"...")
-			localfile = "/home/root/ofdbquery2.html"
+			localfile = "/tmp/ofdbquery2.html"
 			fetchurl = "http://www.ofdb.de/film/" + link
 			print "[OFDb] downloading query " + fetchurl + " to " + localfile
 			downloadPage(fetchurl,localfile).addCallback(self.OFDBquery2).addErrback(self.fetchFailed)
@@ -223,7 +227,7 @@ class OFDB(Screen):
 				self.eventName = urllib.quote(self.eventName)
 			except:
 				self.eventName = urllib.quote(self.eventName.decode('utf8').encode('ascii','ignore'))
-			localfile = "/home/root/ofdbquery.html"
+			localfile = "/tmp/ofdbquery.html"
 			fetchurl = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText=" + self.eventName
 			print "[OFDb] Downloading Query " + fetchurl + " to " + localfile
 			downloadPage(fetchurl,localfile).addCallback(self.OFDBquery).addErrback(self.fetchFailed)
@@ -261,7 +265,7 @@ class OFDB(Screen):
 		print "[OFDBquery]"
 		self["statusbar"].setText("OFDb Download completed")
 
-		self.html2utf8(open("/home/root/ofdbquery.html", "r").read())
+		self.html2utf8(open("/tmp/ofdbquery.html", "r").read())
 
 		self.generalinfos = self.generalinfomask.search(self.inhtml)
 
@@ -291,7 +295,7 @@ class OFDB(Screen):
 
 	def OFDBquery2(self,string):
 		self["statusbar"].setText("OFDb Re-Download completed")
-		self.html2utf8(open("/home/root/ofdbquery2.html", "r").read())
+		self.html2utf8(open("/tmp/ofdbquery2.html", "r").read())
 		self.generalinfos = self.generalinfomask.search(self.inhtml)
 		self.OFDBparse()
 
@@ -356,16 +360,17 @@ class OFDB(Screen):
 					else:
 						Casttext = self._("No cast list found in the database.")
 					self["castlabel"].setText(Casttext)
-			print Casttext
-			
+
 			postermask = re.compile('<img src=\"(http://img.ofdb.de/film.*?)\" alt', re.DOTALL)
-			posterurl = postermask.search(self.inhtml).group(1)
-			if posterurl.find("jpg") > 0:
+			posterurl = postermask.search(self.inhtml)
+			if posterurl and posterurl.group(1).find("jpg") > 0:
+				posterurl = posterurl.group(1)
 				self["statusbar"].setText("Downloading Movie Poster: "+posterurl+"...")
-				localfile = "/home/root/poster.jpg"
+				localfile = "/tmp/poster.jpg"
 				print "[OFDb] downloading poster " + posterurl + " to " + localfile
 				downloadPage(posterurl,localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
 			else:
+				print "no jpg poster!"
 				self.OFDBPoster("kein Poster")
 
 		self["detailslabel"].setText(Detailstext)
@@ -373,12 +378,17 @@ class OFDB(Screen):
 	def OFDBPoster(self,string):
 		self["statusbar"].setText("OFDb Details parsed ^^")
 		if not string:
-			filename = "/home/root/poster.jpg"
+			filename = "/tmp/poster.jpg"
 		else:
-			filename = "/usr/lib/enigma2/python/Plugins/Extensions/OFDb/no_poster.png"
-		pixmap = loadPic(filename, 96,140, AVSwitch().getAspectRatioSetting()/2,1,0,0)
-		if pixmap is not None:
-			self["poster"].instance.setPixmap(pixmap.__deref__())
+			filename = resolveFilename(SCOPE_PLUGINS, "Extensions/OFDb/no_poster.png")
+		sc = AVSwitch().getFramebufferScale()
+		self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
+		self.picload.startDecode(filename)
+
+	def paintPosterPixmapCB(self, picInfo=None):
+		ptr = self.picload.getData()
+		if ptr != None:
+			self["poster"].instance.setPixmap(ptr.__deref__())
 			self["poster"].show()
 
 	def createSummary(self):
