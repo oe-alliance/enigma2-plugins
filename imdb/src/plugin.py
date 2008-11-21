@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from Plugins.Plugin import PluginDescriptor
 from twisted.web.client import downloadPage
-from enigma import loadPic
+from enigma import ePicLoad
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
@@ -12,6 +12,8 @@ from Components.AVSwitch import AVSwitch
 from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
+from Tools.LoadPixmap import LoadPixmap
 import re
 import htmlentitydefs
 import urllib
@@ -48,6 +50,8 @@ class IMDB(Screen):
 		self.dictionary_init()
 
 		self["poster"] = Pixmap()
+		self.picload = ePicLoad()
+		self.picload.PictureData.get().append(self.paintPosterPixmapCB)
 
 		self["stars"] = ProgressBar()
 		self["starsbg"] = Pixmap()
@@ -205,7 +209,7 @@ class IMDB(Screen):
 			link = self["menu"].getCurrent()[1]
 			title = self["menu"].getCurrent()[0]
 			self["statusbar"].setText("Re-Query IMDb: "+title+"...")
-			localfile = "/home/root/imdbquery2.html"
+			localfile = "/tmp/imdbquery2.html"
 			fetchurl = "http://" + self.IMDBlanguage + "imdb.com/title/" + link
 			print "[IMDB] downloading query " + fetchurl + " to " + localfile
 			downloadPage(fetchurl,localfile).addCallback(self.IMDBquery2).addErrback(self.fetchFailed)
@@ -245,7 +249,7 @@ class IMDB(Screen):
 		if self.eventName is not "":
 			self["statusbar"].setText("Query IMDb: " + self.eventName + "...")
 			event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore'))
-			localfile = "/home/root/imdbquery.html"
+			localfile = "/tmp/imdbquery.html"
 			fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 			print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
 			downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
@@ -283,7 +287,7 @@ class IMDB(Screen):
 		print "[IMDBquery]"
 		self["statusbar"].setText("IMDb Download completed")
 
-		self.html2utf8(open("/home/root/imdbquery.html", "r").read())
+		self.html2utf8(open("/tmp/imdbquery.html", "r").read())
 
 		self.generalinfos = self.generalinfomask.search(self.inhtml)
 
@@ -310,7 +314,7 @@ class IMDB(Screen):
 					self.eventName = self.eventName[splitpos+1:-1]
 					self["statusbar"].setText("Re-Query IMDb: " + self.eventName + "...")
 					event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore'))
-					localfile = "/home/root/imdbquery.html"
+					localfile = "/tmp/imdbquery.html"
 					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 					print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
 					downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
@@ -319,7 +323,7 @@ class IMDB(Screen):
 
 	def IMDBquery2(self,string):
 		self["statusbar"].setText("IMDb Re-Download completed")
-		self.html2utf8(open("/home/root/imdbquery2.html", "r").read())
+		self.html2utf8(open("/tmp/imdbquery2.html", "r").read())
 		self.generalinfos = self.generalinfomask.search(self.inhtml)
 		self.IMDBparse()
 
@@ -330,7 +334,6 @@ class IMDB(Screen):
 		if self.generalinfos:
 			self["key_yellow"].setText(self._("Details"))
 			self["statusbar"].setText("IMDb Details parsed ^^")
-
 			Titeltext = self.generalinfos.group("title")
 			if len(Titeltext) > 57:
 				Titeltext = Titeltext[0:54] + "..."
@@ -347,7 +350,6 @@ class IMDB(Screen):
 					Detailstext += "Genre: "
 					for x in genres:
 						Detailstext += x.group(1) + " "
-
 			detailscategories = ["director", "creator", "writer", "premiere", "seasons", "country"]
 
 			for category in detailscategories:
@@ -367,7 +369,6 @@ class IMDB(Screen):
 				self["stars"].setValue(self.ratingstars)
 				self["starsbg"].show()
 			self["ratinglabel"].setText(Ratingtext)
-
 			castmask = re.compile('<td class="nm">.*?>(.*?)</a>.*?<td class="char">(?:<a.*?>)?(.*?)(?:</a>)?</td>', re.DOTALL)
 			castresult = castmask.finditer(self.inhtml)
 			if castresult:
@@ -381,17 +382,16 @@ class IMDB(Screen):
 				else:
 					Casttext = self._("No cast list found in the database.")
 				self["castlabel"].setText(Casttext)
-
 			postermask = re.compile('<div class="photo">.*?<img .*? src=\"(http.*?)\" .*?>', re.DOTALL)
-			posterurl = postermask.search(self.inhtml).group(1)
-			if posterurl.find("jpg") > 0:
+			posterurl = postermask.search(self.inhtml)
+			if posterurl and posterurl.group(1).find("jpg") > 0:
+				posterurl = posterurl.group(1)
 				self["statusbar"].setText("Downloading Movie Poster: "+posterurl+"...")
-				localfile = "/home/root/poster.jpg"
+				localfile = "/tmp/poster.jpg"
 				print "[IMDB] downloading poster " + posterurl + " to " + localfile
 				downloadPage(posterurl,localfile).addCallback(self.IMDBPoster).addErrback(self.fetchFailed)
 			else:
 				self.IMDBPoster("kein Poster")
-
 			extrainfos = self.extrainfomask.search(self.inhtml)
 
 			if extrainfos:
@@ -413,12 +413,17 @@ class IMDB(Screen):
 	def IMDBPoster(self,string):
 		self["statusbar"].setText("IMDb Details parsed ^^")
 		if not string:
-			filename = "/home/root/poster.jpg"
+			filename = "/tmp/poster.jpg"
 		else:
-			filename = "/usr/lib/enigma2/python/Plugins/Extensions/IMDb/no_poster.png"
-		pixmap = loadPic(filename, 96,140, AVSwitch().getAspectRatioSetting()/2,1,0,0)
-		if pixmap is not None:
-			self["poster"].instance.setPixmap(pixmap.__deref__())
+			filename = resolveFilename(SCOPE_PLUGINS, "Extensions/IMDb/no_poster.png")
+		sc = AVSwitch().getFramebufferScale()
+		self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
+		self.picload.startDecode(filename)
+
+	def paintPosterPixmapCB(self, picInfo=None):
+		ptr = self.picload.getData()
+		if ptr != None:
+			self["poster"].instance.setPixmap(ptr.__deref__())
 			self["poster"].show()
 
 	def createSummary(self):
