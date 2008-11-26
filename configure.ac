@@ -140,21 +140,29 @@ youtubeplayer/src/Makefile
 youtubeplayer/src/Nemesis.GlassLine_Mod/Makefile
 
 zaphistorybrowser/Makefile
+zaphistorybrowser/po/Makefile
 zaphistorybrowser/src/Makefile
 
 passwordchanger/Makefile
+passwordchanger/po/Makefile
 passwordchanger/src/Makefile
 
 autoresolution/Makefile
 autoresolution/src/Makefile
 
 mosaic/Makefile
+mosaic/po/Makefile
 mosaic/src/Makefile
 
 googlemaps/Makefile
 googlemaps/src/Makefile
 
 rsdownloader/Makefile
+rsdownloader/po/Makefile
 rsdownloader/src/Makefile
+
+permanentclock/Makefile
+permanentclock/po/Makefile
+permanentclock/src/Makefile
 
 ])
