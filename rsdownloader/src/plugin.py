@@ -5,6 +5,7 @@
 from Plugins.Plugin import PluginDescriptor
 from RS import rapidshare
 from RSMain import RSMain
+from RSTranslation import _
 
 ##############################################################################
 

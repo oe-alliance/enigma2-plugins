@@ -5,20 +5,20 @@
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from RSConfig import config
+from RSTranslation import _, TitleScreen
 from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen
 from twisted.web.client import getPage
 
 ##############################################################################
 
-class RSSearch(Screen):
+class RSSearch(TitleScreen):
 	skin = """
 		<screen position="75,75" size="570,425" title="Searching... please wait!">
 			<widget name="list" position="0,0" size="570,425" scrollbarMode="showOnDemand" />
 		</screen>"""
 
 	def __init__(self, session, searchFor):
-		Screen.__init__(self, session)
+		TitleScreen.__init__(self, session)
 		self.session = session
 		
 		self.searchFor = searchFor.replace(" ", "%2B")
@@ -87,7 +87,7 @@ class RSSearch(Screen):
 				except:
 					pass
 				
-				self.instance.setTitle("Page %d / %d. Push < > to switch the page..." % (self.curPage, self.maxPage))
+				self.instance.setTitle(_("Page %d / %d. Push < > to switch the page...") % (self.curPage, self.maxPage))
 			
 			while html.__contains__('title="Download"'):
 				idx = html.index('title="Download"')
@@ -119,12 +119,12 @@ class RSSearch(Screen):
 	def previousPage(self):
 		if self.curPage > 1:
 			self.curPage -= 1
-			self.instance.setTitle("Loading previous page... please wait!")
+			self.instance.setTitle(_("Loading previous page... please wait!"))
 			self.search()
 
 	def nextPage(self):
 		if self.curPage < self.maxPage:
 			self.curPage += 1
-			self.instance.setTitle("Loading next page... please wait!")
+			self.instance.setTitle(_("Loading next page... please wait!"))
 			self.search()
 

@@ -6,7 +6,7 @@ from Components.ActionMap import ActionMap
 from Components.config import config, ConfigText, ConfigYesNo, ConfigClock, ConfigSubsection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
-from Screens.Screen import Screen
+from RSTranslation import _, TitleScreen
 from time import time
 
 ##############################################################################
@@ -23,7 +23,7 @@ config.plugins.RSDownloader.reconnect_fritz = ConfigYesNo(default = False)
 
 ##############################################################################
 
-class RSConfig(ConfigListScreen, Screen):
+class RSConfig(ConfigListScreen, TitleScreen):
 	skin = """
 		<screen position="80,170" size="560,270" title="RS Downloader">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
@@ -35,7 +35,7 @@ class RSConfig(ConfigListScreen, Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		Screen.__init__(self, session)
+		TitleScreen.__init__(self, session)
 		
 		self["key_green"] = Label(_("Save"))
 		

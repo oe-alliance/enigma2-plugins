@@ -4,18 +4,18 @@
 ##
 from Components.ActionMap import ActionMap
 from Components.FileList import FileList
-from Screens.Screen import Screen
+from RSTranslation import TitleScreen
 
 ##############################################################################
 
-class RSListBrowser(Screen):
+class RSListBrowser(TitleScreen):
 	skin = """
 		<screen position="80,100" size="560,400" title="RS Downloader">
 			<widget name="list" position="0,0" size="560,395" scrollbarMode="showOnDemand" />
 		</screen>"""
 
 	def __init__(self, session, path):
-		Screen.__init__(self, session)
+		TitleScreen.__init__(self, session)
 		self["list"] = FileList(path, False, True, "^.*\.(txt)")
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
 

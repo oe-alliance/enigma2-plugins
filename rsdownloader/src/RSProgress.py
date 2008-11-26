@@ -6,11 +6,11 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
 from RS import rapidshare
-from Screens.Screen import Screen
+from RSTranslation import _, TitleScreen
 
 ##############################################################################
 
-class RSProgress(Screen):
+class RSProgress(TitleScreen):
 	skin = """
 		<screen position="80,120" size="560,360" title="RS Downloader">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
@@ -25,7 +25,7 @@ class RSProgress(Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		Screen.__init__(self, session)
+		TitleScreen.__init__(self, session)
 		
 		self["key_red"] = Label(_("Downloading"))
 		self["key_green"] = Label(_("Files"))

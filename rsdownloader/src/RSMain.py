@@ -11,9 +11,9 @@ from RSDownloadBrowser import RSDownloadBrowser
 from RSListBrowser import RSListBrowser
 from RSProgress import RSProgress
 from RSSearch import RSSearch
+from RSTranslation import _, TitleScreen
 from Screens.Console import Console
 from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen
 from Tools.Directories import fileExists
 
 if fileExists("/usr/lib/enigma2/python/Screens/LTKeyBoard.pyc"):
@@ -26,14 +26,14 @@ else:
 
 ##############################################################################
 
-class RSMain(Screen):
+class RSMain(TitleScreen):
 	skin = """
 		<screen position="200,165" size="320,270" title="RS Downloader">
 			<widget name="list" position="10,10" size="300,250" />
 		</screen>"""
 
 	def __init__(self, session, args = None):
-		Screen.__init__(self, session)
+		TitleScreen.__init__(self, session)
 		self.session = session
 		
 		self["list"] = MenuList([
