@@ -1,0 +1,35 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mosaic\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-26 16:37-0000\n"
+"PO-Revision-Date: 2008-11-26 16:41-0000\n"
+"Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
+"Language-Team: Nabil Hanna <nabil1978@web.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/mosaic/src\n"
+
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:174
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:272
+msgid "Channel: "
+msgstr "Kanal: "
+
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:180
+#, python-format
+msgid "%s does not exist!"
+msgstr "%s existiert nicht!"
+
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:289
+msgid "Countdown:"
+msgstr "Countdown:"
+
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:346
+msgid "Mosaic"
+msgstr "Mosaik"
+
