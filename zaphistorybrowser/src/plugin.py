@@ -4,14 +4,42 @@
 ##
 from Components.ActionMap import ActionMap
 from Components.Label import Label
+from Components.Language import language
 from Components.MenuList import MenuList
 from enigma import eServiceCenter
+from os import environ
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
+from Tools.Directories import resolveFilename, SCOPE_LANGUAGE
+import gettext
 
 ################################################
 
-class ZapHistoryBrowser(Screen):
+lang = language.getLanguage()
+environ["LANGUAGE"] = lang[:2]
+gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
+gettext.textdomain("enigma2")
+gettext.bindtextdomain("ZapHistoryBrowser", resolveFilename(SCOPE_LANGUAGE))
+
+def _(txt):
+	t = gettext.dgettext("ZapHistoryBrowser", txt)
+	if t == txt:
+		t = gettext.gettext(txt)
+	return t
+
+############################################
+
+class TitleScreen(Screen):
+	def __init__(self, session, parent=None):
+		Screen.__init__(self, session, parent)
+		self.onLayoutFinish.append(self.setScreenTitle)
+
+	def setScreenTitle(self):
+		self.setTitle(_("Zap-History Browser"))
+
+################################################
+
+class ZapHistoryBrowser(TitleScreen):
 	skin = """
 	<screen position="200,80" size="320,440" title="Zap-History Browser" >
 		<ePixmap pixmap="skin_default/buttons/red.png" position="10,0" size="140,40" transparent="1" alphatest="on" />
@@ -22,7 +50,7 @@ class ZapHistoryBrowser(Screen):
 	</screen>"""
 
 	def __init__(self, session, servicelist):
-		Screen.__init__(self, session)
+		TitleScreen.__init__(self, session)
 		
 		self.servicelist = servicelist
 		self.serviceHandler = eServiceCenter.getInstance()
