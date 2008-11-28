@@ -69,7 +69,7 @@ class PermanentClockScreen(Screen):
 
 class PermanentClock():
 	def __init__(self):
-		pass
+		self.dialog = None
 
 	def gotSession(self, session):
 		self.dialog = session.instantiateDialog(PermanentClockScreen)
@@ -168,6 +168,7 @@ class PermanentClockMenu(TitleScreen):
 
 	def __init__(self, session):
 		TitleScreen.__init__(self, session)
+		self.session = session
 		self["list"] = MenuList([])
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
 		self.onLayoutFinish.append(self.showMenu)
@@ -184,9 +185,13 @@ class PermanentClockMenu(TitleScreen):
 	def okClicked(self):
 		sel = self["list"].getCurrent()
 		if sel == _("Deactivate permanent clock") or sel == _("Activate permanent clock"):
+			if pClock.dialog is None:
+				pClock.gotSession(self.session)
 			pClock.changeVisibility()
 			self.showMenu()
 		else:
+			if pClock.dialog is None:
+				pClock.gotSession(self.session)
 			pClock.dialog.hide()
 			self.session.openWithCallback(self.positionerCallback, PermanentClockPositioner)
 
