@@ -43,24 +43,26 @@ class AntiScrollMain(Screen):
         self["label"] = Label()
         self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions","NumberActions"], 
             {
-             "ok": 	self.go,
-             "back": 	self.close,
-             "menu": 	self.openmenu,
-             "down": 	self.down,
-             "up": 	self.up,
-             "left":	self.left,
-             "right":	self.right,
-             "2":	self.key2,
-             "8":	self.key8,
-             "4":	self.key4,
-             "6":	self.key6,
-             }, -1)
-
+             "ok":     self.go,
+             "back":     self.close,
+             "menu":     self.openmenu,
+             "down":     self.down,
+             "up":     self.up,
+             "left":    self.left,
+             "right":    self.right,
+             "2":    self.key2,
+             "8":    self.key8,
+             "4":    self.key4,
+             "6":    self.key6,
+                 }, -1)
+        
 
     def go(self):
       pass
+  
     def openmenu(self):
       self.session.open(AntiScrollMenu,callback=self.menuCallback,size=self.size,position=self.position)
+    
     def menuCallback(self,size,position):
       self.size = size
       self.position = position
@@ -70,12 +72,15 @@ class AntiScrollMain(Screen):
     def key2(self):
       self.size= [self.size[0],self.size[1]-self.step]
       self.resize(self.size[0],self.size[1])
+    
     def key8(self):
       self.size= [self.size[0],self.size[1]+self.step]
       self.resize(self.size[0],self.size[1])
+    
     def key4(self):
       self.size= [self.size[0]-self.step,self.size[1]]
       self.resize(self.size[0],self.size[1])
+    
     def key6(self):
       self.size= [self.size[0]+self.step,self.size[1]]
       self.resize(self.size[0],self.size[1])
@@ -83,12 +88,15 @@ class AntiScrollMain(Screen):
     def down(self):
       self.position = [self.position[0],self.position[1]+self.step]
       self.move(self.position[0],self.position[1])
+    
     def up(self):
       self.position = [self.position[0],self.position[1]-self.step]
       self.move(self.position[0],self.position[1])
+    
     def left(self):
       self.position = [self.position[0]-self.step,self.position[1]]
       self.move(self.position[0],self.position[1])
+    
     def right(self):
       self.position = [self.position[0]+self.step,self.position[1]]
       self.move(self.position[0],self.position[1])
@@ -96,11 +104,12 @@ class AntiScrollMain(Screen):
     def move(self, x, y):
       print "["+myname+"] moving to", str(x) + ":" + str(y)
       self.instance.move(ePoint(x, y))
-          
+      
     def resize(self, w, h):
       print "["+myname+"] resizing to", str(w) + "x" + str(h)
       self.instance.resize(eSize(*(w, h)))
       self["label"].instance.resize(eSize(*(w, h)))
+  
 #############################
 class  AntiScrollMenu(Screen):
   def __init__(self,session,callback=None,size=None,position=None,arg=0):
@@ -142,6 +151,7 @@ class  AntiScrollMenu(Screen):
       profil = config.getProfile(value[1])
       if profil is not False:
         self.callBack([profil["sizex"],profil["sizey"]],[profil["posx"],profil["posy"]])
+  
   def savenew(self):
     self.session.openWithCallback(self.profilnameEntered,InputBox, title=_("Please enter a name for the Profile"), text="Profil", maxSize=False, type=Input.TEXT)
     
@@ -149,6 +159,7 @@ class  AntiScrollMenu(Screen):
     if value is not None:
       config = AntiScrollConfig()
       config.setProfile(value,self.size,self.position)   
+  
   def save(self):
     config = AntiScrollConfig()
     liste = []
@@ -217,10 +228,22 @@ class AntiScrollConfig:
         fp.close()
                             
     
-     
+activebar = None 
 #############################
+def showhide(session, **kwargs):
+    global activebar
+    if activebar is None:
+        activebar = session.instantiateDialog(AntiScrollMain)
+    
+    if activebar.shown:
+        activebar.hide()
+    else:
+        activebar.show()
+    print dir(activebar)
+    
 def main(session, **kwargs):
   session.open(AntiScrollMain)
+  
 def Plugins(**kwargs):
   return [PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main, icon="plugin.png"),
-          PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_EXTENSIONSMENU,fnc = main)]
+          PluginDescriptor(name=myname+" show/hide",where = PluginDescriptor.WHERE_EXTENSIONSMENU,fnc = showhide)]
