@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 plugin rsdownloader italian locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-28 09:16+0100\n"
+"PO-Revision-Date: 2008-11-28 09:16+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/rsdownloader\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/rsdownloader\n"
+
+#: /home/dario/Plugins/rsdownloader/src/plugin.py:25
+#: /home/dario/Plugins/rsdownloader/src/RSTranslation.py:33
+msgid "RS Downloader"
+msgstr "RS Downloader"
+
+#: /home/dario/Plugins/rsdownloader/src/plugin.py:25
+msgid "Download files from rapidshare in the background"
+msgstr "Scaricare file da rapidshare in background"
+
+#: /home/dario/Plugins/rsdownloader/src/RSProgress.py:30
+msgid "Downloading"
+msgstr "Scaricamento in corso"
+
+#: /home/dario/Plugins/rsdownloader/src/RSProgress.py:31
+msgid "Files"
+msgstr "File"
+
+#: /home/dario/Plugins/rsdownloader/src/RSProgress.py:32
+msgid "Downloaded"
+msgstr "Scaricato"
+
+#: /home/dario/Plugins/rsdownloader/src/RSProgress.py:33
+msgid "Failed"
+msgstr "Fallito"
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:40
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:56
+msgid "Start downloading..."
+msgstr "Avviare download..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:41
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:66
+msgid "Show lists..."
+msgstr "Lista..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:42
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:73
+msgid "Show downloads..."
+msgstr "Mostrare downloads..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:43
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:80
+msgid "Show progress..."
+msgstr "Mostrare avanzamento"
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:44
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:83
+msgid "Edit configs..."
+msgstr "Configurazione..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:45
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:86
+msgid "Show status..."
+msgstr "Stato..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:46
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:92
+msgid "Show log..."
+msgstr "Log..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:47
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:95
+msgid "Delete log..."
+msgstr "Cancellare log..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:48
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:98
+msgid "Use search-engine..."
+msgstr "Usare motore di ricerca..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:49
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:105
+msgid "Show info..."
+msgstr "Info..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:60
+msgid "Started downloading..."
+msgstr "Download avviato..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:62
+msgid "Could not start downloading!"
+msgstr "Avvio download fallito!"
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:64
+msgid "Already downloading!"
+msgstr "Download già in corso!"
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:71
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:78
+#, python-format
+msgid "Couldn't find the directory %s!"
+msgstr "Cartella %s non trovata!"
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:88
+#, python-format
+msgid "Downloading %s."
+msgstr "Download di %s in corso"
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:90
+msgid "Stopped!"
+msgstr "Arrestato!"
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:99
+msgid "Search http://rapidshare-search-engine.com for:"
+msgstr "Ricerca su http://rapidshare-search-engine.com per: "
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:106
+msgid ""
+"RS Downloader\n"
+"by AliAbdul\n"
+"\n"
+"This plugin allows you to download files from rapidshare in the background."
+msgstr ""
+"RS Downloader\n"
+"by AliAbdul\n"
+"\n"
+"Questo plugin permette di scaricare file da rapidshare in background."
+
+#: /home/dario/Plugins/rsdownloader/src/RSSearch.py:61
+#, python-format
+msgid "Added %s to the download-list."
+msgstr "%s aggiunto alla lista download."
+
+#: /home/dario/Plugins/rsdownloader/src/RSSearch.py:63
+#, python-format
+msgid "Error while adding %s to the download-list!"
+msgstr "Aggiunta di %s alla lista download fallita!"
+
+#: /home/dario/Plugins/rsdownloader/src/RSSearch.py:73
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: Nothing found, sorry."
+msgstr ""
+"Errore nel corso della ricerca su http://rapidshare-search-engine.com!\n"
+"\n"
+"Nessuna corrispondenza trovata!"
+
+#: /home/dario/Plugins/rsdownloader/src/RSSearch.py:74
+msgid "Nothing found, sorry."
+msgstr "Nessuna corrispondenza trovata!"
+
+#: /home/dario/Plugins/rsdownloader/src/RSSearch.py:90
+#, python-format
+msgid "Page %d / %d. Push < > to switch the page..."
+msgstr "Pagina %d di %d. Premere  <> per cambiare pagina..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSSearch.py:117
+#, python-format
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Errore nel corso della ricerca su http://rapidshare-search-engine.com!\n"
+"\n"
+"Errore: %s!"
+
+#: /home/dario/Plugins/rsdownloader/src/RSSearch.py:122
+msgid "Loading previous page... please wait!"
+msgstr "Caricamento pagina precedente in corso. Attendere..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSSearch.py:128
+msgid "Loading next page... please wait!"
+msgstr "Caricamento pagina seguente in corso. Attendere..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:40
+msgid "Save"
+msgstr "Salvare"
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:43
+msgid "Username:"
+msgstr "Username: "
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:44
+msgid "Password:"
+msgstr "Password: "
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:45
+msgid "Lists directory:"
+msgstr "Elenco cartelle: "
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:46
+msgid "Downloads directory:"
+msgstr "Cartella download: "
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:47
+msgid "Don't download before:"
+msgstr "Non scaricare prima delle: "
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:48
+msgid "Don't download after:"
+msgstr "Non scaricare dopo le: "
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:49
+msgid "Write log:"
+msgstr "Creare log: "
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:50
+msgid "Reconnect fritz.Box before downloading:"
+msgstr "Ricollegare la Fritz.Box prima di scaricare: "
+

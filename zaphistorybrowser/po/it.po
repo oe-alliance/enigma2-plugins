@@ -1,0 +1,31 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 plugin zaphistorybrowser italian locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-28 09:16+0100\n"
+"PO-Revision-Date: 2008-11-28 09:16+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/zaphistorybrowser\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/zaphistorybrowser\n"
+
+#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:38
+#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:111
+msgid "Zap-History Browser"
+msgstr "Zap-History Browser"
+
+#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:59
+msgid "Clear"
+msgstr "Pulire"
+
+#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:60
+msgid "Delete"
+msgstr "Cancellare"
+
