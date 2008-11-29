@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 ##
 ## Zap-History Browser
 ## by AliAbdul
