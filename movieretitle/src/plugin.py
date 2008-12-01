@@ -278,7 +278,7 @@ class MovieRetitleBackgroundMover:
 			self.sufflst = self.sufflst[1:]
 			print "Moving %s to %s" % (fr, to)
 			if os.path.exists(fr):
-				self.container.execute("/bin/cp", fr, to)
+				self.container.execute("/bin/cp", "/bin/cp", fr, to)
 			else:
 				self.moveNextSuffBG(0)
 		elif retval:

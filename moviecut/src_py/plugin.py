@@ -265,12 +265,12 @@ class MovieCutSpawn:
 		self.session = session
 		self.parent = parent
 		self.name = name
-		self.clist = clist
+		self.clist = [clist[0]] + clist
 		self.mess = ""
 		self.dialog = False
 		self.waitTimer = eTimer()
 		self.waitTimer.callback.append(self.doWaitAck)
-		if global_mcut_queue.enqueue(self.doAck, clist):
+		if global_mcut_queue.enqueue(self.doAck, self.clist):
 			mess = _("The movie \"%s\" is cut in the background.") % (self.name)
 		else:
 			mess = _("Another movie is currently cut.\nThe movie \"%s\" will be cut in the background after it.") % (self.name)
