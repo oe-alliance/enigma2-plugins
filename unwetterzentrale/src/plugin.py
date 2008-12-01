@@ -21,7 +21,7 @@ from Components.Sources.List import List
 from Components.MenuList import MenuList
 from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap, MovingPixmap
-from enigma import eTimer, loadPic, getExif
+from enigma import eTimer, loadPic
 from re import sub, split, search, match, findall
 
 
