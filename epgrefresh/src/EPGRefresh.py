@@ -139,12 +139,11 @@ class EPGRefresh:
 
 		# See if we are supposed to read in autotimer services
 		if config.plugins.epgrefresh.inherit_autotimer.value:
+			removeInstance = False
 			try:
 				# Import Instance
 				from Plugins.Extensions.AutoTimer.plugin import autotimer
 
-				# See if instance is empty
-				removeInstance = False
 				if autotimer is None:
 					removeInstance = True
 					# Create an instance
@@ -153,19 +152,17 @@ class EPGRefresh:
 
 				# Read in configuration
 				autotimer.readXml()
-
+			except Exception, e:
+				print "[EPGRefresh] Could not inherit AutoTimer Services:", e
+			else:
 				# Fetch services
 				for timer in autotimer.getEnabledTimerList():
 					additionalServices.extend(timer.getServices())
 					additionalBouquets.extend(timer.getBouquets())
-
+			finally:
 				# Remove instance if there wasn't one before
-				# we might go into the exception before we reach this line, but we don't care then...
 				if removeInstance:
 					autotimer = None
-
-			except Exception, e:
-				print "[EPGRefresh] Could not inherit AutoTimer Services:", e
 
 		serviceHandler = eServiceCenter.getInstance()
 		for bouquet in self.services[1].union(additionalBouquets):
@@ -265,7 +262,13 @@ class EPGRefresh:
 		try:
 			# Get next reference
 			service = self.scanServices.pop(0)
+		except IndexError:
+			# Debug
+			print "[EPGRefresh] Done refreshing EPG"
 
+			# Clean up
+			self.cleanUp()
+		else:
 			# Play next service
 			self.session.nav.playService(service)
 
@@ -275,11 +278,5 @@ class EPGRefresh:
 				self.refresh,
 				nocheck = True)
 			)
-		except IndexError:
-			# Debug
-			print "[EPGRefresh] Done refreshing EPG"
-
-			# Clean up
-			self.cleanUp()
 
 epgrefresh = EPGRefresh()
