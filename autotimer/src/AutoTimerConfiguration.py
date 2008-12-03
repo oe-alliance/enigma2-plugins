@@ -597,7 +597,7 @@ def writeConfig(filename, defaultTimer, timers):
 		if timer.hasAfterEvent():
 			idx = {
 				AFTEREVENT.NONE: "none",
-				AFTEREVENT.STANDBY: "standby"
+				AFTEREVENT.STANDBY: "standby",
 				AFTEREVENT.DEEPSTANDBY: "shutdown",
 				AFTEREVENT.AUTO: "auto"
 			}
