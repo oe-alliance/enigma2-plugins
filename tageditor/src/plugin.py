@@ -4,7 +4,7 @@ from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Components.config import config
-from Components.ActionMap import NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.SelectionList import SelectionList
 from enigma import eServiceReference, eServiceCenter, iServiceInformation
@@ -45,17 +45,19 @@ class TagEditor(Screen):
 		self["key_yellow"] = Button(_("New"))
 		self["key_blue"] = Button(_("Load"))
 
-		self.tags = self.loadTagsFile()
-		self.origtags = self.tags + []
-		self.ghosttags = self.tags + []
-		self.joinTags(self.tags, tags)
-		
 		self["list"] = SelectionList()
-		self.ghostlist = tags + []
-		self.updateMenuList(self.tags, tags)
+
+		allTags = self.loadTagsFile()
+		self.joinTags(allTags, tags)
+		self.updateMenuList(allTags, tags)
+
+		self.ghostlist = tags[:]
+		self.ghosttags = allTags[:]
+		self.origtags = allTags[:]
+		self.tags = allTags
 
 		# Define Actions
-		self["actions"] = NumberActionMap(["OkCancelActions", "ColorActions", "MenuActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MenuActions"],
 		{
 			"ok": self["list"].toggleSelection,
 			"cancel": self.cancel,
@@ -110,7 +112,7 @@ class TagEditor(Screen):
 
 	def setMovieTags(self, ref, tags):
 		file = ref.getPath()
-		if file.endswith(".ts") is True:
+		if file.endswith(".ts"):
 			file = file + ".meta"
 		else:
 			file = file + ".ts.meta"
@@ -132,7 +134,7 @@ class TagEditor(Screen):
 		self.timerdirty = False
 		for timer in self.session.nav.RecordTimer.timer_list + self.session.nav.RecordTimer.processed_timers:
 			if hasattr(timer, "tags") and timer.tags:
-				func(timer, timer.tags+[])
+				func(timer, timer.tags[:])
 		if self.timerdirty:
 			self.session.nav.RecordTimer.saveTimer()
 
@@ -167,7 +169,7 @@ class TagEditor(Screen):
 			self["list"].addSelection(tag, tag, 0, tag in seltags)
 		
 	def loadFromHdd(self):
-		tags = self.tags + []
+		tags = self.tags[:]
 		self.foreachTimerTags(lambda t, tg: self.joinTags(tags, tg))
 		self.foreachMovieTags(lambda r, tg: self.joinTags(tags, tg))
 		self.updateMenuList(tags)
@@ -274,16 +276,17 @@ class MovieTagEditor(TagEditor):
 		self.service = service
 		self.parentscreen = parent
 		serviceHandler = eServiceCenter.getInstance()
-		info = serviceHandler.info(self.service)
-		self.path = self.service.getPath()
-		if self.path.endswith(".ts") is True:
-			self.path = self.path[:-3]
-		tags = info.getInfoString(self.service, iServiceInformation.sTags)
+		info = serviceHandler.info(service)
+		path = service.getPath()
+		if path.endswith(".ts"):
+			path = path[:-3]
+		self.path = path
+		tags = info.getInfoString(service, iServiceInformation.sTags)
 		if tags:
-			self.tags = tags.split(' ')
+			tags = tags.split(' ')
 		else:
-			self.tags = []
-		TagEditor.__init__(self, session, self.tags, args)
+			tags = []
+		TagEditor.__init__(self, session, tags, args)
 
 	def saveTags(self, file, tags):
 		if os.path.exists(file + ".ts.meta"):
