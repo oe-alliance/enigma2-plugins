@@ -164,10 +164,16 @@ class AutoTimerEditorBase():
 
 		# AfterEvent
 		if timer.hasAfterEvent():
-			afterevent = { None: "default", AFTEREVENT.NONE: "nothing", AFTEREVENT.DEEPSTANDBY: "deepstandby", AFTEREVENT.STANDBY: "standby"}[timer.afterevent[0][0]]
+			afterevent = {
+				None: "default",
+				AFTEREVENT.NONE: "nothing",
+				AFTEREVENT.DEEPSTANDBY: "deepstandby",
+				AFTEREVENT.STANDBY: "standby",
+				AFTEREVENT.AUTO: "auto"
+			}[timer.afterevent[0][0]]
 		else:
 			afterevent = "default"
-		self.afterevent = ConfigSelection(choices = [("default", _("standard")), ("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby"))], default = afterevent)
+		self.afterevent = ConfigSelection(choices = [("default", _("standard")), ("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default = afterevent)
 
 		# AfterEvent (Timespan)
 		if timer.hasAfterEvent() and timer.afterevent[0][1][0] is not None:
@@ -535,7 +541,12 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		if self.afterevent.value == "default":
 			self.timer.afterevent = []
 		else:
-			afterevent = {"nothing": AFTEREVENT.NONE, "deepstandby": AFTEREVENT.DEEPSTANDBY, "standby": AFTEREVENT.STANDBY}[self.afterevent.value]
+			afterevent = {
+				"nothing": AFTEREVENT.NONE,
+				"deepstandby": AFTEREVENT.DEEPSTANDBY,
+				"standby": AFTEREVENT.STANDBY,
+				"auto": AFTEREVENT.AUTO
+			}[self.afterevent.value]
 			# AfterEvent Timespan
 			if self.afterevent_timespan.value:
 				start = self.afterevent_timespanbegin.value

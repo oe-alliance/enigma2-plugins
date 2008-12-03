@@ -19,7 +19,12 @@ from RecordTimer import AFTEREVENT
 # Needed to convert our timestamp back and forth
 from time import localtime
 
-afterevent = { AFTEREVENT.NONE: _("do nothing"), AFTEREVENT.DEEPSTANDBY: _("go to deep standby"), AFTEREVENT.STANDBY: _("go to standby")}
+afterevent = {
+	AFTEREVENT.NONE: _("do nothing"),
+	AFTEREVENT.DEEPSTANDBY: _("go to deep standby"),
+	AFTEREVENT.STANDBY: _("go to standby"),
+	AFTEREVENT.AUTO: _("auto")
+}
 
 class AutoTimerImportSelector(Screen):
 	def __init__(self, session, autotimer):

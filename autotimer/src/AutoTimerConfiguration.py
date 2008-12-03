@@ -135,14 +135,20 @@ def parseEntry(element, baseTimer, defaults = False):
 	baseTimer.bouquets = bouquets
 
 	# Read out afterevent
-	idx = {"none": AFTEREVENT.NONE, "standby": AFTEREVENT.STANDBY, "shutdown": AFTEREVENT.DEEPSTANDBY, "deepstandby": AFTEREVENT.DEEPSTANDBY}
+	idx = {
+		"none": AFTEREVENT.NONE,
+		"deepstandby": AFTEREVENT.DEEPSTANDBY,
+		"shutdown": AFTEREVENT.DEEPSTANDBY,
+		"standby": AFTEREVENT.STANDBY,
+		"auto": AFTEREVENT.AUTO
+	}
 	afterevent = baseTimer.afterevent
 	for element in element.findall("afterevent"):
 		value = element.text
 
-		try:
+		if idx.has_key(value):
 			value = idx[value]
-		except KeyError, ke:
+		else:
 			print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
 			continue
 
@@ -165,10 +171,8 @@ def parseEntry(element, baseTimer, defaults = False):
 		if not (value and where):
 			continue
 
-		try:
+		if idx.has_key(where):
 			excludes[idx[where]].append(value.encode("UTF-8"))
-		except KeyError, ke:
-			pass
 	baseTimer.exclude = excludes
 
 	# Read out includes (use same idx)
@@ -179,10 +183,8 @@ def parseEntry(element, baseTimer, defaults = False):
 		if not (value and where):
 			continue
 
-		try:
+		if idx.has_key(where):
 			includes[idx[where]].append(value.encode("UTF-8"))
-		except KeyError, ke:
-			pass
 	baseTimer.include = includes
 
 	# Read out recording tags (needs my enhanced tag support patch)
@@ -340,14 +342,20 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 		avoidDuplicateDescription = int(timer.get("avoidDuplicateDescription", 0))
 
 		# Read out afterevent (compatible to V* though behaviour for V3- is different as V4+ allows multiple afterevents while the last definication was chosen before)
-		idx = {"none": AFTEREVENT.NONE, "standby": AFTEREVENT.STANDBY, "shutdown": AFTEREVENT.DEEPSTANDBY, "deepstandby": AFTEREVENT.DEEPSTANDBY}
+		idx = {
+			"none": AFTEREVENT.NONE,
+			"deepstandby": AFTEREVENT.DEEPSTANDBY,
+			"shutdown": AFTEREVENT.DEEPSTANDBY,
+			"standby": AFTEREVENT.STANDBY,
+			"auto": AFTEREVENT.AUTO
+		}
 		afterevent = []
 		for element in timer.findall("afterevent"):
 			value = element.text
 
-			try:
+			if idx.has_key(value):
 				value = idx[value]
-			except KeyError, ke:
+			else:
 				print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
 				continue
 
@@ -369,10 +377,8 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			if not (value and where):
 				continue
 
-			try:
+			if idx.has_key(where):
 				excludes[idx[where]].append(value.encode("UTF-8"))
-			except KeyError, ke:
-				pass
 
 		# Read out includes (use same idx) (V4+ feature, should not harm V3-)
 		includes = ([], [], [], []) 
@@ -382,10 +388,8 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			if not (value and where):
 				continue
 
-			try:
+			if idx.has_key(where):
 				includes[idx[where]].append(value.encode("UTF-8"))
-			except KeyError, ke:
-				pass
 
 		# Read out max length (V4+)
 		maxlen = timer.get("maxduration")
@@ -495,7 +499,12 @@ def writeConfig(filename, defaultTimer, timers):
 
 	# AfterEvent
 	if defaultTimer.hasAfterEvent():
-		idx = {AFTEREVENT.NONE: "none", AFTEREVENT.STANDBY: "standby", AFTEREVENT.DEEPSTANDBY: "shutdown"}
+		idx = {
+			AFTEREVENT.NONE: "none",
+			AFTEREVENT.STANDBY: "standby",
+			AFTEREVENT.DEEPSTANDBY: "shutdown",
+			AFTEREVENT.AUTO: "auto"
+		}
 		for afterevent in defaultTimer.getCompleteAfterEvent():
 			action, timespan = afterevent
 			list.append('  <afterevent')
@@ -586,7 +595,12 @@ def writeConfig(filename, defaultTimer, timers):
 
 		# AfterEvent
 		if timer.hasAfterEvent():
-			idx = {AFTEREVENT.NONE: "none", AFTEREVENT.STANDBY: "standby", AFTEREVENT.DEEPSTANDBY: "shutdown"}
+			idx = {
+				AFTEREVENT.NONE: "none",
+				AFTEREVENT.STANDBY: "standby"
+				AFTEREVENT.DEEPSTANDBY: "shutdown",
+				AFTEREVENT.AUTO: "auto"
+			}
 			for afterevent in timer.getCompleteAfterEvent():
 				action, timespan = afterevent
 				list.append('  <afterevent')
