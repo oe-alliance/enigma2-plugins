@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mosaic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-26 16:37-0000\n"
-"PO-Revision-Date: 2008-11-26 16:41-0000\n"
+"POT-Creation-Date: 2008-12-03 13:51-0000\n"
+"PO-Revision-Date: 2008-12-03 13:53-0000\n"
 "Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
 "MIME-Version: 1.0\n"
@@ -15,21 +15,25 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/mosaic/src\n"
 
-#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:174
-#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:272
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:171
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:283
 msgid "Channel: "
 msgstr "Kanal: "
 
-#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:180
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:177
 #, python-format
 msgid "%s does not exist!"
 msgstr "%s existiert nicht!"
 
-#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:289
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:298
+msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
+msgstr "Fehler während dem Erstellen des Screenshots. Du benötigst die grab Version 0.8 oder höher!"
+
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:311
 msgid "Countdown:"
 msgstr "Countdown:"
 
-#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:346
+#: /home/aliabdul/dream/enigma2-plugins/mosaic/src/plugin.py:368
 msgid "Mosaic"
 msgstr "Mosaik"
 

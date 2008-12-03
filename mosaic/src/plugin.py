@@ -108,6 +108,7 @@ class Mosaic(Screen):
 		
 		self.session = session
 		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.consoleCmd = ""
 		self.Console = Console()
 		self.serviceHandler = eServiceCenter.getInstance()
 		self.ref_list = services
@@ -134,7 +135,7 @@ class Mosaic(Screen):
 		
 		self["actions"] = NumberActionMap(["MosaicActions"],
 			{
-				"ok": self.close,
+				"ok": self.exit,
 				"cancel": self.closeWithOldService,
 				"green": self.play,
 				"yellow": self.pause,
@@ -177,16 +178,27 @@ class Mosaic(Screen):
 			self.session.openWithCallback(self.exit, MessageBox, _("%s does not exist!") % grab_binary, MessageBox.TYPE_ERROR, timeout=5)
 
 	def exit(self, callback=None):
+		self.deleteConsoleCallbacks()
 		self.close()
+
+	def deleteConsoleCallbacks(self):
+		if self.Console.appContainers.has_key(self.consoleCmd):
+			del self.Console.appContainers[self.consoleCmd].dataAvail[:]
+			del self.Console.appContainers[self.consoleCmd].appClosed[:]
+			del self.Console.appContainers[self.consoleCmd]
+			del self.Console.extra_args[self.consoleCmd]
+			del self.Console.callbacks[self.consoleCmd]
 
 	def closeWithOldService(self):
 		self.session.nav.playService(self.oldService)
+		self.deleteConsoleCallbacks()
 		self.close()
 
 	def numberPressed(self, number):
 		ref = self.window_refs[number-1]
 		if ref is not None:
 			self.session.nav.playService(ref)
+			self.deleteConsoleCallbacks()
 			self.close()
 
 	def play(self):
@@ -226,23 +238,11 @@ class Mosaic(Screen):
 		# Grab video
 		if not self.Console:
 			self.Console = Console()
-		cmd = "%s -v -r 180 -l -j 100 %s" % (grab_binary, grab_picture)
-		self.Console.ePopen(cmd, self.showNextScreenshot)
-
-	def isStillRunning(self):
-		try:
-			instance = self.instance
-			return True
-		except:
-			return False
+		self.consoleCmd = "%s -v -r 180 -l -j 100 %s" % (grab_binary, grab_picture)
+		self.Console.ePopen(self.consoleCmd, self.showNextScreenshot)
 
 	def showNextScreenshot(self, result, retval, extra_args):
-		if not self.isStillRunning():
-			# If the grab is working and the user exits the plugin there is no instance any more...
-			# Console.ePopen gives us a callback and this can't be handled any more!
-			# Should be there a fix in the Console class?
-			pass
-		elif retval == 0:
+		if retval == 0:
 			# Show screenshot in the current window
 			pic = LoadPixmap(grab_picture)
 			self["window" + str(self.current_window)].instance.setPixmap(pic)
