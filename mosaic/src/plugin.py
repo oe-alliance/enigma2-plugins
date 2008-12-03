@@ -1,29 +1,28 @@
 # -*- coding: UTF-8 -*-
-##
-## Mosaic
-## by AliAbdul
-## needs the aio-screengrabber by seddi
-##
+# Mosaic by AliAbdul
+# needs the aio-screengrabber v0.8 by seddi
 from Components.ActionMap import NumberActionMap
-from Components.AVSwitch import AVSwitch
 from Components.config import config, ConfigSubsection, ConfigInteger
+from Components.Console import Console
 from Components.Label import Label
 from Components.Language import language
 from Components.Pixmap import Pixmap
 from Components.VideoWindow import VideoWindow
-from enigma import eConsoleAppContainer, eServiceCenter, eServiceReference, eTimer, loadPic, loadPNG
+from enigma import eServiceCenter, eServiceReference, eTimer, loadPNG
 from os import environ
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChannelSelection import BouquetSelector
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE
+from Tools.LoadPixmap import LoadPixmap
 import gettext
 
 ################################################
 
 grab_binary = "/usr/bin/grab"
-grab_picture = "/tmp/.mosaic.bmp"
+grab_picture = "/tmp/mosaic.jpg"
+grab_errorlog = "/tmp/mosaic.log"
 
 config_limits = (3, 30)
 config.plugins.Mosaic = ConfigSubsection()
@@ -109,8 +108,7 @@ class Mosaic(Screen):
 		
 		self.session = session
 		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
-		self.container = eConsoleAppContainer()
-		self.aspect = AVSwitch().getAspectRatioSetting()
+		self.Console = Console()
 		self.serviceHandler = eServiceCenter.getInstance()
 		self.ref_list = services
 		self.window_refs = [None, None, None, None, None, None, None, None, None]
@@ -157,8 +155,6 @@ class Mosaic(Screen):
 		self.updateTimer.timeout.get().append(self.updateCountdown)
 		self.checkTimer = eTimer()
 		self.checkTimer.timeout.get().append(self.checkGrab)
-		
-		self.container.appClosed.append(self.showNextScreenshot)
 		self.checkTimer.start(500, 1)
 
 	def checkGrab(self):
@@ -228,53 +224,79 @@ class Mosaic(Screen):
 
 	def makeNextScreenshot(self):
 		# Grab video
-		if self.container.execute("%s -v %s" % (grab_binary, grab_picture)):
-			self.showNextScreenshot(-1)
+		if not self.Console:
+			self.Console = Console()
+		cmd = "%s -v -r 180 -l -j 100 %s" % (grab_binary, grab_picture)
+		self.Console.ePopen(cmd, self.showNextScreenshot)
 
-	def showNextScreenshot(self, callback):
-		# Resize screenshot and show in the current window
-		picture = loadPic(grab_picture, 180, 144, self.aspect, 1, 0, 1)
-		self["window" + str(self.current_window)].instance.setPixmap(picture)
+	def isStillRunning(self):
+		try:
+			instance = self.instance
+			return True
+		except:
+			return False
+
+	def showNextScreenshot(self, result, retval, extra_args):
+		if not self.isStillRunning():
+			# If the grab is working and the user exits the plugin there is no instance any more...
+			# Console.ePopen gives us a callback and this can't be handled any more!
+			# Should be there a fix in the Console class?
+			pass
+		elif retval == 0:
+			# Show screenshot in the current window
+			pic = LoadPixmap(grab_picture)
+			self["window" + str(self.current_window)].instance.setPixmap(pic)
 		
-		# Hide current video-window and show the running event-name
-		self["video" + str(self.current_window)].hide()
-		self["event" + str(self.current_window)].show()
+			# Hide current video-window and show the running event-name
+			self["video" + str(self.current_window)].hide()
+			self["event" + str(self.current_window)].show()
 		
-		# Get next ref
-		self.current_refidx += 1
-		if self.current_refidx > (len(self.ref_list) -1):
-			self.current_refidx = 0
+			# Get next ref
+			self.current_refidx += 1
+			if self.current_refidx > (len(self.ref_list) -1):
+				self.current_refidx = 0
 		
-		# Play next ref
-		ref = self.ref_list[self.current_refidx]
-		info = self.serviceHandler.info(ref)
-		name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
-		event_name = self.getEventName(info, ref)
-		self.session.nav.playService(ref)
+			# Play next ref
+			ref = self.ref_list[self.current_refidx]
+			info = self.serviceHandler.info(ref)
+			name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
+			event_name = self.getEventName(info, ref)
+			self.session.nav.playService(ref)
 		
-		# Get next window index
-		self.current_window += 1
-		if self.current_window > 9:
-			self.current_window = 1
+			# Get next window index
+			self.current_window += 1
+			if self.current_window > 9:
+				self.current_window = 1
 		
-		# Save the ref
-		self.window_refs[self.current_window-1] = ref
+			# Save the ref
+			self.window_refs[self.current_window-1] = ref
 		
-		# Save the event-name and hide the label
-		self["event" + str(self.current_window)].hide()
-		self["event" + str(self.current_window)].setText(event_name)
+			# Save the event-name and hide the label
+			self["event" + str(self.current_window)].hide()
+			self["event" + str(self.current_window)].setText(event_name)
 		
-		# Show the new video-window
-		self["video" + str(self.current_window)].show()
-		self["video" + str(self.current_window)].decoder = 0
+			# Show the new video-window
+			self["video" + str(self.current_window)].show()
+			self["video" + str(self.current_window)].decoder = 0
 		
-		# Show the servicename
-		self["channel" + str(self.current_window)].setText(name)
-		self["count"].setText(_("Channel: ") + str(self.current_refidx + 1) + " / " + str(len(self.ref_list)))
+			# Show the servicename
+			self["channel" + str(self.current_window)].setText(name)
+			self["count"].setText(_("Channel: ") + str(self.current_refidx + 1) + " / " + str(len(self.ref_list)))
 		
-		# Restart timer
-		self.working = False
-		self.updateTimer.start(1, 1)
+			# Restart timer
+			self.working = False
+			self.updateTimer.start(1, 1)
+		else:
+			print "[Mosaic] retval: %d result: %s" % (retval, result)
+			
+			try:
+				f = open(grab_errorlog, "w")
+				f.write("retval: %d\nresult: %s" % (retval, result))
+				f.close()
+			except:
+				pass
+			
+			self.session.openWithCallback(self.exit, MessageBox, _("Error while creating screenshot. You need grab version 0.8 or higher!"), MessageBox.TYPE_ERROR, timeout=5)
 
 	def updateCountdown(self, callback=None):
 		self.countdown -= 1
