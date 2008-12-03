@@ -52,6 +52,7 @@ class ZapHistoryBrowser(TitleScreen):
 
 	def __init__(self, session, servicelist):
 		TitleScreen.__init__(self, session)
+		self.session = session
 		
 		self.servicelist = servicelist
 		self.serviceHandler = eServiceCenter.getInstance()
@@ -73,11 +74,9 @@ class ZapHistoryBrowser(TitleScreen):
 	def buildList(self):
 		list = []
 		for x in self.servicelist.history:
-			if len(x) == 2:
-				#print "Single-Bouquet!!!"
+			if len(x) == 2: # Single-Bouquet
 				ref = x[1]
-			else:
-				#print "Multi-Bouquet!!!"
+			else: # Multi-Bouquet
 				ref = x[2]
 			info = self.serviceHandler.info(ref)
 			name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
@@ -95,6 +94,7 @@ class ZapHistoryBrowser(TitleScreen):
 		for i in range(0, len(self.servicelist.history)):
 			del self.servicelist.history[0]
 		self.buildList()
+		self.servicelist.history_pos = 0
 
 	def delete(self):
 		length = len(self.servicelist.history)
@@ -102,6 +102,21 @@ class ZapHistoryBrowser(TitleScreen):
 			idx = (length - self["list"].getSelectionIndex()) - 1
 			del self.servicelist.history[idx]
 			self.buildList()
+			
+			# We must check if the current service is still in the zap-history
+			currRef = self.session.nav.getCurrentlyPlayingServiceReference()
+			idx = 0
+			for x in self.servicelist.history:
+				if len(x) == 2: # Single-Bouquet
+					ref = x[1]
+				else: # Multi-Bouquet
+					ref = x[2]
+				
+				if ref == currRef:
+					self.servicelist.history_pos = idx
+					break
+				else:
+					idx += 1
 
 ################################################
 
