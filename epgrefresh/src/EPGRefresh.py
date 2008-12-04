@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # To check if in Standby
 import Screens.Standby
 
