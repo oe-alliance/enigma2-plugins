@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from Components.config import config
 from enigma import eTimer
 

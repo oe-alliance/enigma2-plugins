@@ -83,6 +83,7 @@ fritzcall/po/Makefile
 
 simplerss/Makefile
 simplerss/src/Makefile
+simplerss/po/Makefile
 
 trafficinfo/Makefile
 trafficinfo/src/Makefile

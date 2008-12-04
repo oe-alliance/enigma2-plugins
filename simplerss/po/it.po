@@ -1,0 +1,174 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 simplerss plugin italian locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-04 11:47+0100\n"
+"PO-Revision-Date: 2008-12-04 11:51+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/simplerss\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/simplerss\n"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:23
+msgid "Autoupdate"
+msgstr "Autoaggiornamento"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:24
+msgid "Feed URI"
+msgstr "URI Feed"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:29
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:89
+msgid "Cancel"
+msgstr "Annullare"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:30
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:90
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:69
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:153
+msgid "Feed"
+msgstr "Feed"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:75
+msgid "Start automatically with Enigma2"
+msgstr "Avviare automaticamente con Enigma2"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:78
+msgid "Keep running in background"
+msgstr "Mantenere attivo in background"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:83
+msgid "Show new Messages as"
+msgstr "Mostrare nuovi messaggi come"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:84
+msgid "Update Interval (min)"
+msgstr "Intervallo aggiornamento (min)"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:91
+msgid "New"
+msgstr "Nuovo"
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:92
+msgid "Delete"
+msgstr "Canc."
+
+#: /home/dario/Plugins/simplerss/src/RSSSetup.py:120
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr "Cancellare la voce? Non potrà essere recuperata!"
+
+#: /home/dario/Plugins/simplerss/src/plugin.py:8
+msgid "Notification"
+msgstr "Notifica"
+
+#: /home/dario/Plugins/simplerss/src/plugin.py:9
+msgid "Preview"
+msgstr "Anteprima"
+
+#: /home/dario/Plugins/simplerss/src/plugin.py:10
+msgid "none"
+msgstr "Nessuno"
+
+#: /home/dario/Plugins/simplerss/src/plugin.py:86
+#, python-format
+msgid "%d Feed(s) were added to configuration."
+msgstr "%d Feed aggiunti alla configurazione. "
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:24
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
+msgstr "Errore nell'analisi del Feed: normalmente indica qualcosa di errato in esso."
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:50
+msgid ""
+"Update is being done in Background.\n"
+"Contents will automatically be updated when it's done."
+msgstr ""
+"L'aggiornamento verrà effettuato in background.\n"
+"Al termine i contenuti verranno automaticamente aggiornati."
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:65
+msgid "Found no Enclosure we can display."
+msgstr "Nessun allegato visualizzabile trovato!"
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:88
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:163
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:261
+#, python-format
+msgid "Entry %s/%s"
+msgstr "Voce %s/%s"
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:167
+msgid "Enclosures"
+msgstr "Allegati"
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:169
+msgid "No such Item."
+msgstr "Elemento non trovato."
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:263
+msgid "Feed is empty."
+msgstr "Feed vuoto!"
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:356
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:381
+msgid "Entries"
+msgstr "Voci"
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:357
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:382
+#, python-format
+msgid "Feed %s/%s"
+msgstr "Feed %s/%s"
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:390
+msgid "Update Feed"
+msgstr "Aggiornare Feed"
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:391
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:396
+msgid "Setup"
+msgstr "Conf."
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:392
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:397
+msgid "Close"
+msgstr "Chiudere"
+
+#: /home/dario/Plugins/simplerss/src/RSSScreens.py:403
+msgid "What to do?"
+msgstr "Che fare?"
+
+#: /home/dario/Plugins/simplerss/src/RSSPoller.py:30
+msgid "New Items"
+msgstr "Nuovo elemento"
+
+#: /home/dario/Plugins/simplerss/src/RSSPoller.py:31
+msgid "New Items since last Auto-Update"
+msgstr "Nuovo elemento dall'ultimo aggiornamento automatico"
+
+#: /home/dario/Plugins/simplerss/src/RSSPoller.py:80
+#, python-format
+msgid ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+msgstr ""
+"Feed non supportato:\n"
+"%s"
+
+#: /home/dario/Plugins/simplerss/src/RSSPoller.py:148
+#, python-format
+msgid "Received %d new news item(s)."
+msgstr "Nuovi argomenti ricevuti: %d."
+
