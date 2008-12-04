@@ -1,0 +1,105 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 plugin epgrefresh italian locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-04 11:45+0100\n"
+"PO-Revision-Date: 2008-12-04 11:47+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/epgrefresh\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/epgrefresh\n"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:49
+msgid "Refresh automatically"
+msgstr "Aggiornare automaticamente"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:50
+msgid "Time to stay on service (in m)"
+msgstr "Permanenza sul canale (min.)"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:51
+msgid "Refresh EPG after"
+msgstr "Aggiornare EGG dopo"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:52
+msgid "Refresh EPG before"
+msgstr "Aggiornare EGG prima"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:53
+msgid "Delay when not in Standby (in m)"
+msgstr "Ritardo se non in standby (min.)"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:54
+msgid "Force scan even if reciever is in use"
+msgstr "Forzare ricerca anche se il ricevitore è in uso"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:55
+msgid "Inherit Services from AutoTimer if available"
+msgstr "Ereditare Canali da AutoTimer se disponibile"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:56
+msgid "Shutdown after refresh"
+msgstr "Spegnere dopo aggiornamento"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:62
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:69
+msgid "Cancel"
+msgstr "Annullare"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:63
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:70
+msgid "OK"
+msgstr "OK"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:64
+msgid "Refresh now"
+msgstr "Aggiornnare ora"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:65
+msgid "Edit Services"
+msgstr "Mod. Canali"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshConfiguration.py:127
+msgid "Really close without saving settings?"
+msgstr "Chiudere senza salvare le modifiche?"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:61
+msgid "Channels"
+msgstr "Canali"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:61
+msgid "Bouquets"
+msgstr "Bouquets"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:71
+msgid "delete"
+msgstr "Cancellare"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:72
+msgid "New"
+msgstr "Nuovo"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:105
+msgid "Editing"
+msgstr "Modifica in corso"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:114
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:165
+msgid "Refreshing"
+msgstr "Aggiornamento in corso"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:152
+msgid "Select channel to refresh"
+msgstr "Selezionare canali da aggiornare"
+
+#: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:158
+msgid "Select bouquet to refresh"
+msgstr "Selezionare bouquet da aggiornare"
+

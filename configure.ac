@@ -99,6 +99,7 @@ autotimer/po/Makefile
 
 epgrefresh/Makefile
 epgrefresh/src/Makefile
+epgrefresh/po/Makefile
 
 werbezapper/Makefile
 werbezapper/src/Makefile

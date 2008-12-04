@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 # Config
 from Components.config import config, ConfigEnableDisable, ConfigNumber, \
 	ConfigSubsection, ConfigClock
@@ -77,7 +80,7 @@ def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
 			name="EPGRefresh",
-			description = "Automated EPGRefresher",
+			description = _("Automated EPGRefresher"),
 			where = [
 				PluginDescriptor.WHERE_AUTOSTART,
 				PluginDescriptor.WHERE_SESSIONSTART
@@ -87,7 +90,7 @@ def Plugins(**kwargs):
 		),
 		PluginDescriptor(
 			name="EPGRefresh",
-			description = "Automated EPGRefresher",
+			description = _("Automated EPGRefresher"),
 			where = PluginDescriptor.WHERE_PLUGINMENU,
 			fnc = main
 		)
