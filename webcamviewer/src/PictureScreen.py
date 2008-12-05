@@ -1,6 +1,4 @@
-from enigma import loadPic
-from enigma import eTimer
-from enigma import getDesktop
+from enigma import ePicLoad, eTimer, getDesktop
 
 from Screens.Screen import Screen
 from Components.AVSwitch import AVSwitch
@@ -105,12 +103,13 @@ def download(url, file, contextFactory = None, *args, **kwargs):
 
 class PictureScreen(Screen):
 	skin = ""
-	prozessing =False # if fetching or converting is active
-	autoreload =False
+	processing = False # if fetching or converting is active
+	autoreload = False
 	def __init__(self, session,title,filename, slideshowcallback = None,args=0):
 		self.slideshowcallback=slideshowcallback
 		self.screentitle = title
-		##
+		self.filename = filename
+
 		size_w = getDesktop(0).size().width()
 		size_h = getDesktop(0).size().height()
 		self.skin = """
@@ -118,7 +117,11 @@ class PictureScreen(Screen):
 			 <widget name="pixmap" position="0,0" size="%i,%i" backgroundColor=\"black\"/>
 		</screen>""" % (size_w,size_h,filename,size_w,size_h)
 		Screen.__init__(self, session)
-		self.filename = filename
+
+		self.picload = ePicLoad()
+		self.picload.PictureData.get().append(self.setPictureCB)
+		sc = AVSwitch().getFramebufferScale()
+		self.picload.setPara((size_w, size_h, sc[0], sc[1], False, 1, '#00000000'))
 		self["pixmap"] = Pixmap()
 
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions","ChannelSelectBaseActions","ShortcutActions"],
@@ -131,17 +134,17 @@ class PictureScreen(Screen):
 		self.onLayoutFinish.append(self.do)
 
 	def AutoReloaderSwitch(self):
-		if self.filename.startswith("http") or self.filename.startswith("ftp"):
-			if self.autoreload is False:
+		if self.filename.startswith(("http://", "https://", "ftp://")):
+			if not self.autoreload:
 				self.autoreload = True
 				self.do()
 			else:
 				self.autoreload = False
 
 	def do(self):
-		if self.prozessing:
+		if self.processing:
 			pass
-		elif self.filename.startswith("http") or self.filename.startswith("ftp"):
+		elif self.filename.startswith(("http://", "https://", "ftp://")):
 			self.fetchFile(self.filename)
 		else:
 			self.sourcefile = self.filename
@@ -158,27 +161,30 @@ class PictureScreen(Screen):
 		except:## OSerror??
 			pass
 
-	def fetchFile(self,url):
-		self.prozessing =True
+	def fetchFile(self, url):
+		self.processing = True
 		self.setTitle("loading File")
-		print "fetching URL ",url
+		print "fetching URL", url
 		self.sourcefile = "/tmp/loadedfile"
-		download(url,self.sourcefile).addCallback(self.fetchFinished).addErrback(self.fetchFailed)
+		download(url, self.sourcefile).addCallback(self.fetchFinished).addErrback(self.fetchFailed)
 
 	def fetchFailed(self,string):
-		print "fetch failed",string
-		self.setTitle( "fetch failed: "+string)
+		print "fetch failed", string
+		self.setTitle("fetch failed: "+string)
 
 	def fetchFinished(self,string):
-		print "fetching finished "
+		print "fetching finished"
 		self.setPicture(self.sourcefile)
 
-	def setPicture(self,string):
+	def setPicture(self, string):
 		self.setTitle(self.filename.split("/")[-1])
-		pixmap = loadPic(string,getDesktop(0).size().width(),getDesktop(0).size().height(), AVSwitch().getAspectRatioSetting()/2,1, 0,1)
-		if pixmap is not None:
-			self["pixmap"].instance.setPixmap(pixmap)
-		self.prozessing =False
+		self.picload.startDecode(string)
+
+	def setPictureCB(self, picInfo = None):
+		ptr = self.picload.getData()
+		if ptr is not None:
+			self["pixmap"].instance.setPixmap(ptr.__deref__())
+		self.processing = False
 
 		if self.autoreload is True:
 				self.cleanUP()
@@ -186,6 +192,6 @@ class PictureScreen(Screen):
 		elif self.slideshowcallback is not None:
 				self.closetimer = eTimer()
 				self.closetimer.timeout.get().append(self.slideshowcallback)
-				print "waiting ",config.plugins.pictureviewer.slideshowtime.value," seconds for next picture"
+				print "waiting", config.plugins.pictureviewer.slideshowtime.value, "seconds for next picture"
 				self.closetimer.start(int(config.plugins.pictureviewer.slideshowtime.value))
 

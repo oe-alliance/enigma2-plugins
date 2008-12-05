@@ -119,3 +119,4 @@ class FTPDownloader(Protocol):
 		if self.file is not None:
 			self.file.close()
 		self.deferred.errback(reason)
+
