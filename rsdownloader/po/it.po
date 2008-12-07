@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin rsdownloader italian locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-28 09:16+0100\n"
-"PO-Revision-Date: 2008-11-28 09:16+0100\n"
+"POT-Creation-Date: 2008-12-06 23:43+0100\n"
+"PO-Revision-Date: 2008-12-06 23:43+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,38 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/rsdownloader\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/rsdownloader\n"
+
+#: /home/dario/Plugins/rsdownloader/src/RSListBrowser.py:61
+msgid "Clear"
+msgstr "Pulire"
+
+#: /home/dario/Plugins/rsdownloader/src/RSListBrowser.py:62
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:40
+msgid "Save"
+msgstr "Salvare"
+
+#: /home/dario/Plugins/rsdownloader/src/RSListBrowser.py:63
+msgid "Reload"
+msgstr "Ricaricare"
+
+#: /home/dario/Plugins/rsdownloader/src/RSListBrowser.py:64
+msgid "Delete"
+msgstr "Cancellare"
+
+#: /home/dario/Plugins/rsdownloader/src/RSListBrowser.py:95
+#, python-format
+msgid "%s saved."
+msgstr "%s salvato"
+
+#: /home/dario/Plugins/rsdownloader/src/RSListBrowser.py:97
+#, python-format
+msgid "Error while writing %s!"
+msgstr "Errore in scrittura %s!"
+
+#: /home/dario/Plugins/rsdownloader/src/RSListBrowser.py:121
+#: /home/dario/Plugins/rsdownloader/src/RSListBrowser.py:123
+msgid "Edit:"
+msgstr "Mod: "
 
 #: /home/dario/Plugins/rsdownloader/src/plugin.py:25
 #: /home/dario/Plugins/rsdownloader/src/RSTranslation.py:33
@@ -181,10 +213,6 @@ msgstr "Caricamento pagina precedente in corso. Attendere..."
 #: /home/dario/Plugins/rsdownloader/src/RSSearch.py:128
 msgid "Loading next page... please wait!"
 msgstr "Caricamento pagina seguente in corso. Attendere..."
-
-#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:40
-msgid "Save"
-msgstr "Salvare"
 
 #: /home/dario/Plugins/rsdownloader/src/RSConfig.py:43
 msgid "Username:"
