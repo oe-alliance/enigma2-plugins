@@ -132,6 +132,12 @@ def movielist(session, service, **kwargs):
 	from AutoTimerEditor import addAutotimerFromService
 	addAutotimerFromService(session, service)
 
+# Event Info
+def eventinfo(session, servicelist, **kwargs):
+	from AutoTimerEditor import AutoTimerEPGSelection
+	ref = session.nav.getCurrentlyPlayingServiceReference()
+	session.open(AutoTimerEPGSelection, ref)
+
 def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor
 
@@ -139,6 +145,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = autostart),
 		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main),
 		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main),
-		PluginDescriptor(name="AutoTimer", description= _("Add AutoTimer..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist)
+		PluginDescriptor(name="AutoTimer", description= _("Add AutoTimer..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist),
+		PluginDescriptor(name="AutoTimer", description= _("Add AutoTimer..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc = eventinfo),
 	]
 

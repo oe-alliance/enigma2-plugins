@@ -6,6 +6,7 @@ from . import _
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Screens.ChannelSelection import SimpleChannelSelection
+from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 
@@ -76,7 +77,24 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 			# Asking the user if this is what he wants might be better though
 			self.close(self.servicePath[-1])
 
-class AutoTimerEditorBase():
+class AutoTimerEPGSelection(EPGSelection):
+	def __init__(self, *args):
+		EPGSelection.__init__(*args)
+		self.skinName = "EPGSelection"
+
+	def infoKeyPressed(self):
+		self.timerAdd()
+
+	def timerAdd(self):
+		cur = self["list"].getCurrent()
+		evt = cur[0]
+		sref = cur[1]
+		if not evt:
+			return
+
+		addAutotimerFromEvent(self.session, evt = evt, service = sref)
+
+class AutoTimerEditorBase:
 	""" Base Class for all Editors """
 	def __init__(self, timer, editingDefaults = False):
 		# Keep Timer
@@ -971,7 +989,7 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 
 		sref = ServiceReference(service)
 	if evt:
-		 # timespan defaults to +- 1h
+		# timespan defaults to +- 1h
 		begin = evt.getBeginTime()-3600
 		end = begin + evt.getDuration()+7200
 	else:
