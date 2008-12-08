@@ -16,16 +16,16 @@ from Plugins.Extensions.WebInterface import addInterfaceConfig,getCofiguredAndSp
 
 class WebIfConfigScreen(ConfigListScreen,Screen):
     skin = """
-        <screen position="100,100" size="550,400" title="Webinterface: Main Setup" >
-            <widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
+        <screen position="100,100" size="550,400" title="Webinterface: Main Setup">
+            <widget name="config" position="5,5" size="540,360" scrollbarMode="showOnDemand" zPosition="1"/>
             
-            <widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18"/> 
-            <widget name="key_green" position="140,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18"/> 
-            <widget name="key_yellow" position="280,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18"/>
+            <widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/> 
+            <widget name="key_green" position="140,360" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/> 
+            <widget name="key_yellow" position="280,360" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
             
-            <ePixmap name="red"    position="0,360"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-            <ePixmap name="green"  position="140,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-            <ePixmap name="yellow" position="280,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" /> 
+            <ePixmap name="red" pixmap="skin_default/buttons/red.png" position="0,360" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
+            <ePixmap name="green" pixmap="skin_default/buttons/green.png" position="140,360" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
+            <ePixmap name="yellow"  pixmap="skin_default/buttons/yellow.png" position="280,360" size="140,40" zPosition="4" transparent="1" alphatest="on"/> 
         </screen>"""
     def __init__(self, session, args = 0):
         self.session = session
