@@ -173,7 +173,7 @@ class PictureViewer(Screen):
 
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.updateInfoPanelCB)
-		self.picload.setPara((275, 200, 1, 1, False, 1, "#00000000"))
+		self.picload.setPara((275, 200, 1, 1, False, 1, "#ff000000"))
 		self.preview = Pixmap()
 		self["pixmap"] = self.preview
 

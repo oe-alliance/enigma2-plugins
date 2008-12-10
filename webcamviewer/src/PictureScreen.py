@@ -121,7 +121,7 @@ class PictureScreen(Screen):
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.setPictureCB)
 		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((size_w, size_h, sc[0], sc[1], False, 1, '#00000000'))
+		self.picload.setPara((size_w, size_h, sc[0], sc[1], False, 1, '#ff000000'))
 		self["pixmap"] = Pixmap()
 
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions","ChannelSelectBaseActions","ShortcutActions"],
