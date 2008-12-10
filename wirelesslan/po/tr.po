@@ -1,107 +1,151 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FIRST AUTHOR Zulfikar VEYISOGLU <zveyis@gmail.com>, 2008
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Tr 01\n"
+"Project-Id-Version: enigma2 plugin WirelessLan Turkish locale v1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 14:59+0100\n"
-"PO-Revision-Date: 2006-06-16 12:51+0200\n"
-"Last-Translator: koksal <goksel@goksel.com>\n"
-"Language-Team: GökselD& <gok_68@hotmail.com>\n"
+"POT-Creation-Date: 2008-11-14 11:32+0100\n"
+"PO-Revision-Date: 2008-11-20 20:57+0200\n"
+"Last-Translator: Zülfikar Veyisoğlu <zveyis@gmail.com>\n"
+"Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Country: TURKEY\n"
 "X-Poedit-Language: Turkish\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
+#: ../src/plugin.py:269
 msgid " Wireless Network(s) found!"
-msgstr ""
+msgstr " Kablosuz Ağ(lar) bulundu!"
 
+#: ../src/plugin.py:80
 msgid "Accesspoint:"
-msgstr ""
+msgstr "Erişim noktası:"
 
+#: ../src/plugin.py:84
 msgid "Bitrate:"
-msgstr ""
+msgstr "Hız:"
 
+#: ../src/plugin.py:223
 msgid "Choose a Wireless Network"
-msgstr ""
+msgstr "Kablosuz ağ seç"
 
+#: ../src/plugin.py:103
+#: ../src/plugin.py:204
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
+#: ../src/plugin.py:205
 msgid "Connect"
-msgstr ""
+msgstr "Bağlan"
 
+#: ../src/plugin.py:298
 msgid "Connect to a Wireless Network"
-msgstr ""
+msgstr "Kablosuz ağa bağlan"
 
+#: ../src/Wlan.py:108
+#: ../src/Wlan.py:556
 msgid "Disabled"
-msgstr ""
+msgstr "Devre dışı"
 
+#: ../src/Wlan.py:113
+#: ../src/Wlan.py:560
 msgid "Enabled"
-msgstr ""
+msgstr "Etkin"
 
+#: ../src/Wlan.py:283
 #, python-format
 msgid "Encrypted: %s"
-msgstr ""
+msgstr "Şifrelenmiş: %s"
 
+#: ../src/plugin.py:85
 msgid "Encryption:"
-msgstr ""
+msgstr "Veri şifreleme:"
 
+#: ../src/Wlan.py:83
+#: ../src/Wlan.py:85
+#: ../src/Wlan.py:519
+#: ../src/Wlan.py:521
 msgid "Hidden networkname"
-msgstr ""
+msgstr "Gizlenmiş ağ adı"
 
+#: ../src/Wlan.py:284
 #, python-format
 msgid "Interface: %s"
-msgstr ""
+msgstr "Arayüz: %s"
 
+#: ../src/plugin.py:82
 msgid "Link Quality:"
-msgstr ""
+msgstr "Bağlantı Kalitesi:"
 
+#: ../src/plugin.py:156
 msgid "Link:"
-msgstr ""
+msgstr "Bağlantı:"
 
+#: ../src/Wlan.py:282
 #, python-format
 msgid "Max. Bitrate: %s"
-msgstr ""
+msgstr "Maks. Hız: %s"
 
+#: ../src/Wlan.py:246
 msgid "N/A"
-msgstr ""
+msgstr "Kullanılamaz"
 
+#: ../src/plugin.py:154
 msgid "Network:"
-msgstr ""
+msgstr "Ağ:"
 
+#: ../src/Wlan.py:278
+#: ../src/plugin.py:268
 msgid "No"
-msgstr ""
+msgstr "Hayır"
 
+#: ../src/Wlan.py:79
+#: ../src/Wlan.py:515
+#: ../src/Wlan.py:538
 msgid "No Connection"
-msgstr ""
+msgstr "Bağlı değil"
 
+#: ../src/plugin.py:148
+#: ../src/plugin.py:149
+#: ../src/plugin.py:150
+#: ../src/plugin.py:151
+#: ../src/plugin.py:152
+#: ../src/plugin.py:153
 msgid "Please wait..."
-msgstr ""
+msgstr "Lütfen bekleyin..."
 
+#: ../src/plugin.py:206
 msgid "Refresh"
-msgstr ""
+msgstr "Ağ listesini yenile"
 
+#: ../src/plugin.py:81
 msgid "SSID:"
-msgstr ""
+msgstr "Ağ adı (SSID):"
 
+#: ../src/plugin.py:83
 msgid "Signal Strength:"
-msgstr ""
+msgstr "Sinyal Gücü:"
 
+#: ../src/Wlan.py:280
 msgid "Signal: "
-msgstr ""
+msgstr "Sinyal:"
 
+#: ../src/Wlan.py:543
+#: ../src/Wlan.py:554
 msgid "Unsupported"
-msgstr ""
+msgstr "Desteklenmiyor"
 
+#: ../src/plugin.py:298
 msgid "Wireless LAN"
-msgstr ""
+msgstr "Kablosuz Ağ"
 
+#: ../src/plugin.py:124
 msgid "Wireless Network State"
-msgstr ""
+msgstr "Kablosuz Ağ Durumu"
 
+#: ../src/Wlan.py:278
 msgid "Yes"
-msgstr ""
+msgstr "Evet"
+
