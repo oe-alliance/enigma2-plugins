@@ -94,20 +94,43 @@ class NetworkWizard(WizardPluginLanguage, Rc):
 		
 	def checkInterface(self,iface):
 		self.Adapterlist = iNetwork.getAdapterList()
+		print "iNetwork.configuredNetworkAdapters",iNetwork.configuredNetworkAdapters
+		print "len - iNetwork.configuredNetworkAdapters",len(iNetwork.configuredNetworkAdapters)
 		if self.NextStep is not 'end':
 			if len(self.Adapterlist) == 0:
 				#Reset Network to defaults if network broken
 				iNetwork.resetNetworkConfig('lan', self.checkInterfaceCB)
 				self.myref = self.session.openWithCallback(self.resetfinishedCB, MessageBox, _("Please wait while we prepare your network interfaces..."), type = MessageBox.TYPE_INFO, enable_input = False)
 			if iface == 'eth0':
-				iNetwork.resetNetworkConfig('lan',self.checkInterfaceCB)
-				self.myref = self.session.openWithCallback(self.resetfinishedCB, MessageBox, _("Please wait while we prepare your network interfaces..."), type = MessageBox.TYPE_INFO, enable_input = False)
+				if iface in iNetwork.configuredNetworkAdapters and len(iNetwork.configuredNetworkAdapters) == 1:
+					if iNetwork.getAdapterAttribute(iface, 'up') is True:
+						self.isInterfaceUp = True
+					else:
+						self.isInterfaceUp = False
+					self.resetfinishedCB(False)
+				else:
+					iNetwork.resetNetworkConfig('lan',self.checkInterfaceCB)
+					self.myref = self.session.openWithCallback(self.resetfinishedCB, MessageBox, _("Please wait while we prepare your network interfaces..."), type = MessageBox.TYPE_INFO, enable_input = False)
 			elif iface == 'wlan0':
-				iNetwork.resetNetworkConfig('wlan',self.checkInterfaceCB)
-				self.myref = self.session.openWithCallback(self.resetfinishedCB, MessageBox, _("Please wait while we prepare your network interfaces..."), type = MessageBox.TYPE_INFO, enable_input = False)
+				if iface in iNetwork.configuredNetworkAdapters and len(iNetwork.configuredNetworkAdapters) == 1:
+					if iNetwork.getAdapterAttribute(iface, 'up') is True:
+						self.isInterfaceUp = True
+					else:
+						self.isInterfaceUp = False
+					self.resetfinishedCB(False)
+				else:
+					iNetwork.resetNetworkConfig('wlan',self.checkInterfaceCB)
+					self.myref = self.session.openWithCallback(self.resetfinishedCB, MessageBox, _("Please wait while we prepare your network interfaces..."), type = MessageBox.TYPE_INFO, enable_input = False)
 			elif iface == 'ath0':
-				iNetwork.resetNetworkConfig('wlan-mpci',self.checkInterfaceCB)
-				self.myref = self.session.openWithCallback(self.resetfinishedCB, MessageBox, _("Please wait while we prepare your network interfaces..."), type = MessageBox.TYPE_INFO, enable_input = False)
+				if iface in iNetwork.configuredNetworkAdapters and len(iNetwork.configuredNetworkAdapters) == 1:
+					if iNetwork.getAdapterAttribute(iface, 'up') is True:
+						self.isInterfaceUp = True
+					else:
+						self.isInterfaceUp = False
+					self.resetfinishedCB(False)
+				else:
+					iNetwork.resetNetworkConfig('wlan-mpci',self.checkInterfaceCB)
+					self.myref = self.session.openWithCallback(self.resetfinishedCB, MessageBox, _("Please wait while we prepare your network interfaces..."), type = MessageBox.TYPE_INFO, enable_input = False)
 		else:
 			self.resetfinishedCB(False)
 			
