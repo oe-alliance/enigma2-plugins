@@ -302,7 +302,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		AutoTimerEditorBase.__init__(self, timer, editingDefaults)
 
 		# Summary
-		self.setup_title = "AutoTimer Editor"
+		self.setup_title = _("AutoTimer Editor")
 		self.onChangedEntry = []
 
 		# We might need to change shown items, so add some notifiers
@@ -341,6 +341,11 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Trigger change
 		self.changed()
+
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Edit AutoTimer"))
 
 	def renameFilterButton(self):
 		if self.filterSet:
@@ -632,7 +637,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		# Summary
-		self.setup_title = "AutoTimer Filters"
+		self.setup_title = _("AutoTimer Filters")
 		self.onChangedEntry = []
 
 		self.typeSelection = ConfigSelection(choices = [("title", _("in Title")), ("short", _("in Shortdescription")), ("desc", _("in Description")), ("day", _("on Weekday"))])
@@ -665,6 +670,12 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 
 		# Trigger change
 		self.changed()
+
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Edit AutoTimer Filters"))
+
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -825,7 +836,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		# Summary
-		self.setup_title = "AutoTimer Services"
+		self.setup_title = _("AutoTimer Services")
 		self.onChangedEntry = []
 
 		self.services = (
@@ -860,7 +871,11 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		# Trigger change
 		self.changed()
 
-	
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Edit AutoTimer Services"))
+
 	def saveCurrent(self):
 		del self.services[self.idx][:]
 		

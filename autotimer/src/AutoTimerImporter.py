@@ -196,6 +196,11 @@ class AutoTimerImporter(Screen):
 			"green": self.accept
 		}, -1)
 
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Import AutoTimer"))
+
 	def cancel(self):
 		self.session.openWithCallback(
 			self.cancelConfirm,

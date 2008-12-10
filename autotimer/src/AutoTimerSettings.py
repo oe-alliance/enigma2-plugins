@@ -30,7 +30,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		# Summary
-		self.setup_title = "AutoTimer Settings"
+		self.setup_title = _("AutoTimer Settings")
 		self.onChangedEntry = []
 
 		self.list = [
@@ -57,6 +57,11 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 
 		# Trigger change
 		self.changed()
+
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Configure AutoTimer behavior"))
 
 	def changed(self):
 		for x in self.onChangedEntry:

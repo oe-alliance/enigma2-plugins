@@ -46,6 +46,11 @@ class AutoTimerPreview(Screen):
 			}
 		)
 
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Preview AutoTimer"))
+
 	def setSortDescription(self):
 		if self.sort_type == 1:
 			self["key_yellow"].setText(_("Sort Time"))

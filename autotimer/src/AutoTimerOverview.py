@@ -74,6 +74,11 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			}
 		)
 
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("AutoTimer Overview"))
+
 	def add(self):
 		newTimer = self.autotimer.defaultTimer.clone()
 		newTimer.id = self.autotimer.getUniqueId()
