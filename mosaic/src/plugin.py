@@ -14,7 +14,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.ChannelSelection import BouquetSelector
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE
+from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 import gettext
 
@@ -37,7 +37,7 @@ lang = language.getLanguage()
 environ["LANGUAGE"] = lang[:2]
 gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain("enigma2")
-gettext.bindtextdomain("Mosaic", resolveFilename(SCOPE_LANGUAGE))
+gettext.bindtextdomain("Mosaic", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/Mosaic/locale/"))
 
 def _(txt):
 	t = gettext.dgettext("Mosaic", txt)

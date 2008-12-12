@@ -10,7 +10,7 @@ from enigma import ePoint, eTimer, getDesktop
 from os import environ
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
-from Tools.Directories import resolveFilename, SCOPE_LANGUAGE
+from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import gettext
 
 ##############################################################################
@@ -35,7 +35,7 @@ lang = language.getLanguage()
 environ["LANGUAGE"] = lang[:2]
 gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain("enigma2")
-gettext.bindtextdomain("PermanentClock", resolveFilename(SCOPE_LANGUAGE))
+gettext.bindtextdomain("PermanentClock", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PermanentClock/locale/"))
 
 def _(txt):
 	t = gettext.dgettext("PermanentClock", txt)

@@ -12,7 +12,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from telnetlib import Telnet
-from Tools.Directories import resolveFilename, SCOPE_LANGUAGE
+from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import gettext
 
 ############################################
@@ -21,7 +21,7 @@ lang = language.getLanguage()
 environ["LANGUAGE"] = lang[:2]
 gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain("enigma2")
-gettext.bindtextdomain("PasswordChanger", resolveFilename(SCOPE_LANGUAGE))
+gettext.bindtextdomain("PasswordChanger", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PasswordChanger/locale/"))
 
 def _(txt):
 	t = gettext.dgettext("PasswordChanger", txt)
