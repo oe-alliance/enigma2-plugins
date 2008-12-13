@@ -563,7 +563,7 @@
 		</website>
 	</country>
 	<country code="+33">
-		<website name="www.annuaireinverse.com" url="http://82.228.61.77/G118012/home.asp?RN=$NUMBER&amp;CO=RN&amp;ND=118012&amp;NS=0&amp;FR=118012&amp;PAGE=1&amp;NBR_L_P=10&amp;TRI=&amp;ORD_TRI=&amp;FILTRE=ALL&amp;m=recherche&amp;sm=rep&amp;action.x=83&amp;action.y=14&amp;action=RECHERCHER" prefix="0">;
+		<website name="www.annuaireinverse.com" url="http://88.175.61.166/G118012/home.asp?RN=$NUMBER&amp;CO=RN&amp;FR=118012&amp;sm=rep" prefix="0">;
 			<entry>
 				<name>&lt;TD HEIGHT=&quot;15&quot; BGCOLOR=&quot;#ABEEFB&quot;  &gt;&lt;FONT CLASS=&quot;ctexte&quot;&gt;&amp;nbsp;([^&lt;]*)</name>
 				<street>&lt;TD HEIGHT=&quot;35&quot; VALIGN=&quot;TOP&quot;&gt;&lt;FONT CLASS=&quot;copytexte&quot;&gt;([^&lt;]*)&lt;br /&gt;[^&lt;]*</street>
@@ -899,7 +899,7 @@
 		<website name="www.dasoertliche.de" url="http://dasoertliche.de/?form_name=search_inv&amp;page=RUECKSUCHE&amp;context=RUECKSUCHE&amp;action=STANDARDSUCHE&amp;la=de&amp;rci=no&amp;ph=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>class=&quot;entry&quot;\s*(?:onmouseover=&quot;&quot;)?\s*&gt;([^&lt;]*)&lt;/a&gt;</name>
-	        	<street>^\s*&lt;/div&gt;\s+([^,]*),&amp;nbsp;\d{5}&amp;nbsp;[^&lt;]*&lt;br/&gt;</street>
+	        	<street>^\s*([^,&gt;]+),&amp;nbsp;\d{5}&amp;nbsp;[^&lt;]*&lt;br/&gt;</street>
 	        	<city>^[^,]*,&amp;nbsp;\d{5}&amp;nbsp;([^&lt;]*)&lt;br/&gt;</city>
 	        	<zipcode>^[^,]*,&amp;nbsp;(\d{5})&amp;nbsp;[^&lt;]*&lt;br/&gt;</zipcode>
 	        </entry>
