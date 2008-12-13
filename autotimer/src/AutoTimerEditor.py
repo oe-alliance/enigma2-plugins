@@ -79,7 +79,7 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 
 class AutoTimerEPGSelection(EPGSelection):
 	def __init__(self, *args):
-		EPGSelection.__init__(*args)
+		EPGSelection.__init__(self, *args)
 		self.skinName = "EPGSelection"
 
 	def infoKeyPressed(self):
