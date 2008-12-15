@@ -361,7 +361,7 @@ def main(session, servicelist, **kwargs):
 	bouquets = Servicelist.getBouquetList()
 	if bouquets is not None:
 		if len(bouquets) == 1:
-			self.openMosaic(bouquets[0][1])
+			openMosaic(bouquets[0][1])
 		elif len(bouquets) > 1:
 			BouquetSelectorScreen = Session.open(BouquetSelector, bouquets, openMosaic, enableWrapAround=True)
 
