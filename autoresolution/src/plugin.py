@@ -14,17 +14,19 @@ from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw
 
 session = [ ]
 
-preferedmodes = [mode[0] for mode in video_hw.getModeList(config.av.videoport.value)]
-default = config.av.videomode[config.av.videoport.value].value
+default = (config.av.videomode[config.av.videoport.value].value, _("default"))
+preferedmodes = [mode[0] for mode in video_hw.getModeList(config.av.videoport.value) if mode[0] != default[0]]
+preferedmodes.append(default)
+print preferedmodes
 config.plugins.autoresolution = ConfigSubsection()
 config.plugins.autoresolution.enable = ConfigYesNo(default = False)
-config.plugins.autoresolution.sd_i = ConfigSelection(default = default, choices = preferedmodes)
-config.plugins.autoresolution.sd_p = ConfigSelection(default = default, choices = preferedmodes)
-config.plugins.autoresolution.hd_i = ConfigSelection(default = default, choices = preferedmodes)
-config.plugins.autoresolution.hd_p = ConfigSelection(default = default, choices = preferedmodes)
-config.plugins.autoresolution.p1080_24 = ConfigSelection(default = default, choices = ['1080p24'] + preferedmodes)
-config.plugins.autoresolution.p1080_25 = ConfigSelection(default = default, choices = ['1080p25'] + preferedmodes)
-config.plugins.autoresolution.p1080_30 = ConfigSelection(default = default, choices = ['1080p30'] + preferedmodes)
+config.plugins.autoresolution.sd_i = ConfigSelection(default = default[0], choices = preferedmodes)
+config.plugins.autoresolution.sd_p = ConfigSelection(default = default[0], choices = preferedmodes)
+config.plugins.autoresolution.hd_i = ConfigSelection(default = default[0], choices = preferedmodes)
+config.plugins.autoresolution.hd_p = ConfigSelection(default = default[0], choices = preferedmodes)
+config.plugins.autoresolution.p1080_24 = ConfigSelection(default = default[0], choices = ['1080p24'] + preferedmodes)
+config.plugins.autoresolution.p1080_25 = ConfigSelection(default = default[0], choices = ['1080p25'] + preferedmodes)
+config.plugins.autoresolution.p1080_30 = ConfigSelection(default = default[0], choices = ['1080p30'] + preferedmodes)
 config.plugins.autoresolution.showinfo = ConfigYesNo(default = True)
 config.plugins.autoresolution.testmode = ConfigYesNo(default = False)
 config.plugins.autoresolution.deinterlacer = ConfigSelection(default = "auto", choices =
@@ -95,9 +97,9 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("SD Progressive Mode"), config.plugins.autoresolution.sd_p))
 			self.list.append(getConfigListEntry(_("HD Interlace Mode"), config.plugins.autoresolution.hd_i))
 			self.list.append(getConfigListEntry(_("HD Progressive Mode"), config.plugins.autoresolution.hd_p))
-			self.list.append(getConfigListEntry(_("Enable 1080p24"), config.plugins.autoresolution.p1080_24))
-			self.list.append(getConfigListEntry(_("Enable 1080p25"), config.plugins.autoresolution.p1080_25))
-			self.list.append(getConfigListEntry(_("Enable 1080p30"), config.plugins.autoresolution.p1080_30))
+			self.list.append(getConfigListEntry(_("Enable 1080p24 Mode"), config.plugins.autoresolution.p1080_24))
+			self.list.append(getConfigListEntry(_("Enable 1080p25 Mode"), config.plugins.autoresolution.p1080_25))
+			self.list.append(getConfigListEntry(_("Enable 1080p30 Mode"), config.plugins.autoresolution.p1080_30))
 			self.list.append(getConfigListEntry(_("Show Info Screen"), config.plugins.autoresolution.showinfo))
 			self.list.append(getConfigListEntry(_("Running in Testmode"), config.plugins.autoresolution.testmode))
 		self.list.append(getConfigListEntry(_("Deinterlacer Mode"), config.plugins.autoresolution.deinterlacer))
@@ -144,7 +146,7 @@ class AutoRes(Screen):
 			})
 		self.timer = eTimer()
 		self.timer.callback.append(self.determineContent)
-		self.delayval = 250
+		self.delayval = 200
 		self.height, self.width, self.progressive, self.framerate = '', '', 'i', '50'
 
 	def __evVideoFramerateChanged(self):
@@ -188,6 +190,8 @@ class AutoRes(Screen):
 		progressive = info and info.getInfo(iServiceInformation.sProgressive)
 		if progrdic.has_key(progressive):
 			prog = progrdic[progressive]
+		else:
+			prog = 'i'
 		if prog != self.progressive:
 			self.progressive = prog
 		self.changeVideomode()
@@ -216,7 +220,7 @@ class AutoRes(Screen):
 					self.confirm, MessageBox, _("Autoresolution Plugin Testmode:\nIs %s videomode ok?" % (resolutionlabeltxt)), MessageBox.TYPE_YESNO, timeout = 15, default = False)
 			
 	def determineVideoMode(self):
-		if self.height > 900 and self.progressive == 'p':
+		if self.height > 900 and self.framerate in ('24', '25', '30') and self.progressive == 'p':
 			mode = '1080p%s' % self.framerate
 		elif self.height > 576 or self.width > 720: #asume that, higher then 576 or greater then 720 is hd content
 			mode = 'hd_%s' % self.progressive
