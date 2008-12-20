@@ -545,10 +545,10 @@
 		</website>
 		<website name="www.gebeld.nl" url="http://www.gebeld.nl/content.asp?zapp=zapp&amp;land=Nederland&amp;zoek=numm&amp;searchfield1=fullnumber&amp;searchfield2=&amp;queryfield1=$NUMBER" prefix="0">
 			<entry>
-				<name>\s+&lt;td&gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot;&gt;([^&lt;]*)&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</name>
-				<street>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot;&gt;([^&lt;]*)&lt;/font&gt;&lt;/td>&lt;/tr&gt;\s+&lt;tr&gt;&lt;td>&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;/tr&gt;</street>
-				<city>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot;&gt;[^&lt;]*&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&lt;\d]+)[^&lt;]+&lt;/td&gt;&lt;/tr&gt;</city>
-				<zipcode>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot;&gt;[^&lt;]*&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;\d]+([^&lt;]+)&lt;/td&gt;&lt;/tr&gt;</zipcode>
+				<name>&lt;td&gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot;&gt;([^&lt;]*)&lt;/font&gt;&lt;/td&gt;</name>
+				<street>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&lt;]+)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</street>
+				<city>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;([^&lt;]+)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</city>
+				<zipcode>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&lt;]+)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&amp;]*)&amp;nbsp;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</zipcode>
 			</entry>
 		</website>
 	</country>

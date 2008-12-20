@@ -34,6 +34,8 @@ from xml.dom.minidom import parse
 from urllib import urlencode 
 import re, time, os
 
+from nrzuname import ReverseLookupAndNotifier
+
 import gettext
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 try:
@@ -595,6 +597,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 									cur[0] + "\n\n" + fullname.replace(", ","\n"),
 									type = MessageBox.TYPE_INFO)
 				else:
+					# TODO: offer to make reverselookup also
 					self.actualNumber = cur[0]
 					self.session.openWithCallback(
 						self.addConfirmed,
@@ -1273,6 +1276,7 @@ def notifyCall(event, date, number, caller, phone):
 #===============================================================================
 
 countries = { }
+reverselookupMtime = 0
 
 class FritzReverseLookupAndNotifier:
 	def __init__(self, event, number, caller, phone, date):
@@ -1282,149 +1286,22 @@ class FritzReverseLookupAndNotifier:
 		self.caller = caller
 		self.phone = phone
 		self.date = date
-		self.currentWebsite = None
-		self.nextWebsiteNo = 0
-
-		if not countries:
-			dom = parse(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/reverselookup.xml"))
-			for top in dom.getElementsByTagName("reverselookup"):
-				for country in top.getElementsByTagName("country"):
-					code = country.getAttribute("code").replace("+","00")
-					countries[code] = country.getElementsByTagName("website")
-
-		self.countrycode = config.plugins.FritzCall.country.value
 
 		if number[0] != "0":
-			self.caller = _("UNKNOWN")
 			self.notifyAndReset()
 			return
 
-		if self.number[:2] == "00":
-			if countries.has_key(self.number[:3]):	 #	e.g. USA
-				self.countrycode = self.number[:3]
-			elif countries.has_key(self.number[:4]):
-				self.countrycode = self.number[:4]
-			elif countries.has_key(self.number[:5]):
-				self.countrycode = self.number[:5]
-			else:
-				print "[FritzReverseLookupAndNotifier] Country cannot be reverse handled"
-				self.caller = _("UNKNOWN")
-				self.notifyAndReset()
-				return
+		ReverseLookupAndNotifier(number, self.notifyAndReset)
 
-		if countries.has_key(self.countrycode):
-			print "[FritzReverseLookupAndNotifier] Found website for reverse lookup"
-			self.websites = countries[self.countrycode]
-			self.nextWebsiteNo = 1
-			self.handleWebsite(self.websites[0])
+	def notifyAndReset(self, number, caller):
+		print "[FritzReverseLookupAndNotifier] got: " + caller
+		if caller:
+			self.caller = caller.replace(", ", "\n")
+			if self.number != 0 and config.plugins.FritzCall.addcallers.value and self.event == "RING":
+				print "[FritzReverseLookupAndNotifier] add to phonebook"
+				phonebook.add(self.number, self.caller)
 		else:
-			print "[FritzReverseLookupAndNotifier] Country cannot be reverse handled"
 			self.caller = _("UNKNOWN")
-			self.notifyAndReset()
-			return
-
-	def handleWebsite(self, website):
-		print "[FritzReverseLookupAndNotifier] handleWebsite: " + website.getAttribute("name")
-		if self.number[:2] == "00":
-			number = website.getAttribute("prefix") + self.number.replace(self.countrycode,"")
-		else:
-			number = self.number
-
-		url = website.getAttribute("url")
-		if re.search('$AREACODE',url) or re.search('$PFXAREACODE',url):
-			print "[FritzReverseLookupAndNotifier] handleWebsite: (PFX)ARECODE cannot be handled"
-			self.caller = _("UNKNOWN")
-			self.notifyAndReset()
-			return
-		#
-		# Apparently, there is no attribute called (pfx)areacode anymore
-		# So, this below will not work.
-		#
-		if re.search('\\$AREACODE',url) and website.hasAttribute("areacode"):
-			areaCodeLen = int(website.getAttribute("areacode"))
-			url = url.replace("$AREACODE","%(areacode)s").replace("$NUMBER","%(number)s")
-			url = url %{ 'areacode':number[:areaCodeLen], 'number':number[areaCodeLen:] }
-		elif re.search('\\$PFXAREACODE',url) and website.hasAttribute("pfxareacode"):
-			areaCodeLen = int(website.getAttribute("pfxareacode"))
-			url = url.replace("$PFXAREACODE","%(pfxareacode)s").replace("$NUMBER","%(number)s")
-			url = url %{ 'pfxareacode':number[:areaCodeLen], 'number':number[areaCodeLen:] }
-		elif re.search('\\$NUMBER',url): 
-			url = url.replace("$NUMBER","%s") %number
-		else:
-			print "[FritzReverseLookupAndNotifier] handleWebsite: cannot handle websites with no $NUMBER in url"
-			self.caller = _("UNKNOWN")
-			self.notifyAndReset()
-			return
-		print "[FritzReverseLookupAndNotifier] Url to query: " + url
-		url = url.encode("UTF-8", "replace")
-		self.currentWebsite = website
-		getPage(url, method="GET").addCallback(self._gotPage).addErrback(self._gotError)
-
-	def _gotPage(self, page):
-		print "[FritzReverseLookupAndNotifier] _gotPage"
-		found = re.match('.*content=".*?charset=([^"]+)"',page,re.S)
-		if found:
-			print "[FritzReverseLookupAndNotifier] Charset: " + found.group(1)
-			page = page.replace("\xa0"," ").decode(found.group(1), "replace")
-		else:
-			page = page.replace("\xa0"," ").decode("ISO-8859-1", "replace")
-
-		for entry in self.currentWebsite.getElementsByTagName("entry"):
-			# print "[FritzReverseLookupAndNotifier] _gotPage: try entry"
-			details = []
-			for what in ["name", "street", "city", "zipcode"]:
-				pat = "(.*)" + self.getPattern(entry, what)
-				# print "[FritzReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( what, pat )
-				found = re.match(pat, page, re.S|re.M)
-				if found:
-					# print "[FritzReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( what, found.group(2) )
-					item = found.group(2).replace("&nbsp;"," ").replace("</b>","").replace(",","")
-					item = html2utf8(item)
-					newitem = item.replace("  ", " ")
-					while newitem != item:
-						item = newitem
-						newitem = item.replace("  ", " ")
-					details.append(item.strip())
-					# print "[FritzReverseLookupAndNotifier] _gotPage: got '''%s''': '''%s'''" %( what, item.strip() )
-				else:
-					break
-
-			if len(details) != 4:
-				continue
-			else:
-				name = details[0]
-				address =  details[1] + ", " + details[3] + " " + details[2]
-				print "[FritzReverseLookupAndNotifier] _gotPage: Reverse lookup succeeded:\nName: %s\nAddress: %s" %(name, address)
-				self.caller = "%s, %s" %(name, address)
-				if self.number != 0 and config.plugins.FritzCall.addcallers.value and self.event == "RING":
-					phonebook.add(self.number, self.caller)
-
-				self.caller = self.caller.replace(", ", "\n").encode("UTF-8", "replace")
-				self.notifyAndReset()
-				return True
-				break
-		else:
-			self._gotError("[FritzReverseLookupAndNotifier] _gotPage: Nothing found at %s" %self.currentWebsite.getAttribute("name"))
-			
-	def _gotError(self, error = ""):
-		print "[FritzReverseLookupAndNotifier] _gotError - Error: %s" %error
-		if self.nextWebsiteNo >= len(self.websites):
-			print "[FritzReverseLookupAndNotifier] _gotError: I give up"
-			self.caller = _("UNKNOWN")
-			self.notifyAndReset()
-			return
-		else:
-			print "[FritzReverseLookupAndNotifier] _gotError: try next website"
-			self.nextWebsiteNo = self.nextWebsiteNo+1
-			self.handleWebsite(self.websites[self.nextWebsiteNo-1])
-
-	def getPattern(self, website, which):
-		pat1 = website.getElementsByTagName(which)
-		if len(pat1) > 1:
-			print "Something strange: more than one %s for website %s" %(which, website.getAttribute("name"))
-		return pat1[0].childNodes[0].data
-
-	def notifyAndReset(self, timeout=config.plugins.FritzCall.timeout.value):
 		notifyCall(self.event, self.date, self.number, self.caller, self.phone)
 		# kill that object...
 
