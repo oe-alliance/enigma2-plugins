@@ -29,8 +29,6 @@ from twisted.internet.protocol import ReconnectingClientFactory
 from twisted.protocols.basic import LineReceiver
 from twisted.web.client import getPage
 
-from xml.dom.minidom import parse
-
 from urllib import urlencode 
 import re, time, os
 
@@ -1291,7 +1289,7 @@ class FritzReverseLookupAndNotifier:
 			self.notifyAndReset()
 			return
 
-		ReverseLookupAndNotifier(number, self.notifyAndReset)
+		ReverseLookupAndNotifier(number, self.notifyAndReset, "UTF-8")
 
 	def notifyAndReset(self, number, caller):
 		print "[FritzReverseLookupAndNotifier] got: " + caller
