@@ -17,7 +17,11 @@ from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Button import Button
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger, ConfigPassword
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger
+try:
+	from Components.config import ConfigPassword
+except ImportError:
+	ConfigPassword = ConfigText
 from Components.ConfigList import ConfigListScreen
 
 from Plugins.Plugin import PluginDescriptor
