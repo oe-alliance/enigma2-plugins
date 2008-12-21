@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 AutoTimer Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-04 13:02+0100\n"
+"PO-Revision-Date: 2008-12-21 12:40+0100\n"
+"Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
+"Language-Team: german <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/plugin.py:83 ../src/plugin.py:93
+msgid "Automated EPGRefresher"
+msgstr "Automatisierte EPG Aktualisierung"
+
+#: ../src/EPGRefreshChannelEditor.py:64
+msgid "Bouquets"
+msgstr "Bouquets"
+
+#: ../src/EPGRefreshChannelEditor.py:72 ../src/EPGRefreshConfiguration.py:65
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: ../src/EPGRefreshChannelEditor.py:64
+msgid "Channels"
+msgstr "Sender"
+
+#: ../src/EPGRefreshConfiguration.py:56
+msgid "Delay when not in Standby (in m)"
+msgstr "Verzögerung sofern nicht im Standby (min)"
+
+#: ../src/EPGRefreshConfiguration.py:68
+msgid "Edit Services"
+msgstr "Sender bearbeiten"
+
+#: ../src/EPGRefreshChannelEditor.py:108
+msgid "Editing"
+msgstr "Bearbeite"
+
+#: ../src/EPGRefreshConfiguration.py:57
+msgid "Force scan even if reciever is in use"
+msgstr "Aktualisierung erzwingen"
+
+#: ../src/EPGRefreshConfiguration.py:58
+msgid "Inherit Services from AutoTimer if available"
+msgstr "Zusätzlich Sender vom AutoTimer verwenden"
+
+#: ../src/EPGRefreshChannelEditor.py:75
+msgid "New"
+msgstr "Neu"
+
+#: ../src/EPGRefreshChannelEditor.py:73 ../src/EPGRefreshConfiguration.py:66
+msgid "OK"
+msgstr "OK"
+
+#: ../src/EPGRefreshConfiguration.py:130
+msgid "Really close without saving settings?"
+msgstr "Wirklich Beenden ohne zu Speichern?"
+
+#: ../src/EPGRefreshConfiguration.py:54
+msgid "Refresh EPG after"
+msgstr "Aktualisiere nach"
+
+#: ../src/EPGRefreshConfiguration.py:55
+msgid "Refresh EPG before"
+msgstr "Aktualisiere vor"
+
+#: ../src/EPGRefreshConfiguration.py:52
+msgid "Refresh automatically"
+msgstr "Automatisch aktualisieren"
+
+#: ../src/EPGRefreshConfiguration.py:67
+msgid "Refresh now"
+msgstr "Jetzt aktualisieren"
+
+#: ../src/EPGRefreshChannelEditor.py:117 ../src/EPGRefreshChannelEditor.py:168
+msgid "Refreshing"
+msgstr "Aktualisiere"
+
+#: ../src/EPGRefreshChannelEditor.py:161
+msgid "Select bouquet to refresh"
+msgstr "Bouquet zum aktualisieren auswählen"
+
+#: ../src/EPGRefreshChannelEditor.py:155
+msgid "Select channel to refresh"
+msgstr "Sender zum aktualisieren auswählen"
+
+#: ../src/EPGRefreshConfiguration.py:59
+msgid "Shutdown after refresh"
+msgstr "Nach Aktualisieren herunterfahren"
+
+#: ../src/EPGRefreshConfiguration.py:53
+msgid "Time to stay on service (in m)"
+msgstr "Verbleibe auf Sender für (min)"
+
+#: ../src/EPGRefreshChannelEditor.py:74
+msgid "delete"
+msgstr "Löschen"
