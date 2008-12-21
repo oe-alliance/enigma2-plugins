@@ -6,110 +6,90 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 SimpleRSS Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-04 13:07+0100\n"
-"PO-Revision-Date: 2008-12-21 12:50+0100\n"
+"POT-Creation-Date: 2008-12-21 14:23+0100\n"
+"PO-Revision-Date: 2008-12-21 14:27+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:89
 #, python-format
 msgid "%d Feed(s) were added to configuration."
 msgstr "%d Kanäle wurden der Konfiguration hinzugefügt."
 
-#: ../src/RSSSetup.py:26
+msgid "A simple to use RSS reader"
+msgstr "Ein einfacher Newsreader"
+
 msgid "Autoupdate"
 msgstr "Automatisch aktualisieren"
 
-#: ../src/RSSSetup.py:32 ../src/RSSSetup.py:92
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../src/RSSScreens.py:395 ../src/RSSScreens.py:400
 msgid "Close"
 msgstr "Schließen"
 
-#: ../src/RSSSetup.py:95
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../src/RSSScreens.py:170
 msgid "Enclosures"
 msgstr "Anhänge"
 
-#: ../src/RSSScreens.py:359 ../src/RSSScreens.py:384
 msgid "Entries"
 msgstr "Einträge"
 
-#: ../src/RSSScreens.py:91 ../src/RSSScreens.py:166 ../src/RSSScreens.py:264
 #, python-format
 msgid "Entry %s/%s"
 msgstr "Eintrag %s/%s"
 
-#: ../src/RSSScreens.py:27
 msgid ""
 "Error while parsing Feed, this usually means there is something wrong with "
 "it."
 msgstr ""
-"Fehler während der Verarbeitung. Dies beudetet in der Regel, dass etwas "
-"mit dem Kanal nicht stimmt."
+"Fehler während der Verarbeitung. Dies beudetet in der Regel, dass etwas mit "
+"dem Kanal nicht stimmt."
 
-#: ../src/RSSSetup.py:72 ../src/RSSSetup.py:156
 msgid "Feed"
 msgstr "Kanal"
 
-#: ../src/RSSScreens.py:360 ../src/RSSScreens.py:385
 #, python-format
 msgid "Feed %s/%s"
 msgstr "Kanal %s/%s"
 
-#: ../src/RSSSetup.py:27
 msgid "Feed URI"
 msgstr "Adresse"
 
-#: ../src/RSSScreens.py:266
 msgid "Feed is empty."
 msgstr "Kanal ist leer."
 
-#: ../src/RSSScreens.py:68
 msgid "Found no Enclosure we can display."
 msgstr "Keine anzeigbaren Anhänge gefunden."
 
-#: ../src/RSSSetup.py:81
 msgid "Keep running in background"
 msgstr "Im Hintergrund aktiv bleiben"
 
-#: ../src/RSSSetup.py:94
 msgid "New"
 msgstr "Neu"
 
-#: ../src/RSSPoller.py:33
 msgid "New Items"
 msgstr "Neue Nachrichten"
 
-#: ../src/RSSPoller.py:34
 msgid "New Items since last Auto-Update"
 msgstr "Neue Nachrichten seit letzter Aktualisierung"
 
-#: ../src/RSSScreens.py:172
 msgid "No such Item."
 msgstr "Keine derartige Nachricht."
 
-#: ../src/plugin.py:11
 msgid "Notification"
 msgstr "Benachrichtigung"
 
-#: ../src/RSSSetup.py:33 ../src/RSSSetup.py:93
 msgid "OK"
 msgstr "OK"
 
-#: ../src/plugin.py:12
 msgid "Preview"
 msgstr "Vorschau"
 
-#: ../src/RSSSetup.py:123
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -117,20 +97,16 @@ msgstr ""
 "Diesen Eintrag wirklich entfernen?\n"
 "Diese Aktion ist unwiderruflich!"
 
-#: ../src/RSSPoller.py:151
 #, python-format
 msgid "Received %d new news item(s)."
 msgstr "%d neue Nachrichten empfangen."
 
-#: ../src/RSSScreens.py:394 ../src/RSSScreens.py:399
 msgid "Setup"
 msgstr "Einstellungen"
 
-#: ../src/RSSSetup.py:86
 msgid "Show new Messages as"
 msgstr "Neue Nachrichten als"
 
-#: ../src/RSSPoller.py:83
 #, python-format
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
@@ -139,19 +115,15 @@ msgstr ""
 "Derartige Kanäle werden nicht unterstützt:\n"
 "%s"
 
-#: ../src/RSSSetup.py:78
 msgid "Start automatically with Enigma2"
 msgstr "Automatisch mit Enigma2 starten"
 
-#: ../src/RSSScreens.py:393
 msgid "Update Feed"
 msgstr "Kanal aktualisieren"
 
-#: ../src/RSSSetup.py:87
 msgid "Update Interval (min)"
 msgstr "Aktualisierungsinterval (min)"
 
-#: ../src/RSSScreens.py:53
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
@@ -159,10 +131,8 @@ msgstr ""
 "Aktualisiere im Hintergrund.\n"
 "Die Änderungen werden automatisch übernommen."
 
-#: ../src/RSSScreens.py:406
 msgid "What to do?"
 msgstr "Was möchten Sie tun?"
 
-#: ../src/plugin.py:13
 msgid "none"
 msgstr "Keins"

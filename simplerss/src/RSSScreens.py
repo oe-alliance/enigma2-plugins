@@ -93,7 +93,7 @@ class RSSEntryView(RSSBaseView):
 			self["info"] = Label()
 
 		if data is not None:
-			self["content"] = ScrollLabel("\n\n".join([data[0], data[2], " ".join([str(len(data[3])), "Enclosures"])]))
+			self["content"] = ScrollLabel("\n\n".join([data[0], data[2], " ".join([str(len(data[3])), _("Enclosures")])]))
 		else:
 			self["content"] = ScrollLabel()
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-04 13:07+0100\n"
+"POT-Creation-Date: 2008-12-21 14:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,10 @@ msgstr ""
 #: ../src/plugin.py:89
 #, python-format
 msgid "%d Feed(s) were added to configuration."
+msgstr ""
+
+#: ../src/plugin.py:118
+msgid "A simple to use RSS reader"
 msgstr ""
 
 #: ../src/RSSSetup.py:26
@@ -37,7 +41,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: ../src/RSSScreens.py:170
+#: ../src/RSSScreens.py:96 ../src/RSSScreens.py:170
 msgid "Enclosures"
 msgstr ""
 
