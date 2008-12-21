@@ -1109,9 +1109,10 @@ def editorCallback(ret):
 
 		autotimer.add(ret)
 
+		# Save modified xml
+		autotimer.writeXml()
+
 	# Remove instance if not running in background
 	if not config.plugins.autotimer.autopoll.value:
-		# Save xml (as long as we added something)
-		ret and autotimer and autotimer.writeXml()
 		autotimer = None
 

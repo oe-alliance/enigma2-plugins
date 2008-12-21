@@ -6,13 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-18 14:20+0200\n"
+"POT-Creation-Date: 2008-12-21 12:04+0100\n"
 "PO-Revision-Date: 2008-07-05 17:09+0200\n"
-"Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
+"Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "Abort this Wizard."
+msgstr "Den Wizard beenden."
 
 msgid "Add"
 msgstr "Hinzufügen"
@@ -37,6 +40,21 @@ msgstr "Alle sich nicht Wiederholenden"
 
 msgid "Ammount of recordings left"
 msgstr "Verbleibende Anzahl Aufnahmen"
+
+msgid "AutoTimer Editor"
+msgstr "AutoTimer Editor"
+
+msgid "AutoTimer Filters"
+msgstr "AutoTimer Filter"
+
+msgid "AutoTimer Overview"
+msgstr "AutoTimer Übersicht"
+
+msgid "AutoTimer Services"
+msgstr "AutoTimer Sender"
+
+msgid "AutoTimer Settings"
+msgstr "AutoTimer Einstellungen"
 
 msgid "Begin of Timespan"
 msgstr "Anfang der Zeitspanne"
@@ -65,6 +83,12 @@ msgstr "Schließen ohne Speichern der Änderungen"
 msgid "Close and save changes"
 msgstr "Schließen und Speichern"
 
+msgid "Configure AutoTimer behavior"
+msgstr "AutoTimer Verhalten"
+
+msgid "Create a new AutoTimer."
+msgstr "Einen neuen AutoTimer erstellen."
+
 msgid "Create a new timer using the classic editor"
 msgstr "Neuen Timer mit dem klassichen Editor erstellen"
 
@@ -90,6 +114,15 @@ msgstr "Beschreibung"
 #, python-format
 msgid "Do you really want to delete %s?"
 msgstr "%s wirklich löschen?"
+
+msgid "Edit AutoTimer"
+msgstr "AutoTimer bearbeiten"
+
+msgid "Edit AutoTimer Filters"
+msgstr "AutoTimer Filter bearbeiten"
+
+msgid "Edit AutoTimer Services"
+msgstr "AutoTimer Sender bearbeiten"
 
 msgid "Edit Filters"
 msgstr "Filter bearbeiten"
@@ -136,6 +169,25 @@ msgstr "Führe innerhalb der Zeitspanne aus"
 msgid "Filter"
 msgstr "Filter"
 
+msgid ""
+"Filters are another powerful tool when matching events. An AutoTimer can be "
+"restricted to certain Weekdays or only match an event with a text inside eg "
+"it's Description.\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"Filter sind ein hilfreiches Hilfsmittel um Sendungen zu erkennen. Ein "
+"AutoTimer kann auf bestimmte Wochentage beschränkt sein oder z.B. nur bei "
+"einem Text innerhalb der Kurzbeschreibung aktiv werden. Drücke BLAU um "
+"einen neuen Filter hinzuzufügen und GELB um einen zu entfernen"
+
+#, python-format
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and %d modified."
+msgstr ""
+"Habe insgesamt %d Sendungen gefunden.\n"
+"%d Timer wurden hinzugefügt und %d geändert."
+
 msgid "Friday"
 msgstr "Freitag"
 
@@ -145,11 +197,27 @@ msgstr "Bestimme existierende Timer anhand Anfang-/Endzeit"
 msgid "Import"
 msgstr "Importieren"
 
+msgid "Import AutoTimer"
+msgstr "AutoTimer importieren"
+
 msgid "Include"
 msgstr "Einschließen"
 
+msgid ""
+"It's possible to restrict an AutoTimer to certain Services or Bouquets or to "
+"deny specific ones.\n"
+"An Event will only match this AutoTimer if it's on a specific and not denied "
+"Service (inside a Bouquet).\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"AutoTimer können auch auf bestimmte Sender oder Bouquets beschränkt "
+"werden. Eine Sendung wird dann nur hinzugefügt wenn sie auf einen "
+"erlaubten und keinem verbotenen Sender (innerhalb eines Bouquets) läuft. "
+"Drücke BLAU um eine neue Beschränkungen hinzuzufügen und GELB um die "
+"markierte zu entfernen"
+
 msgid "Location"
-msgstr "Ablage"
+msgstr "Zielverzeichnis"
 
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
@@ -180,6 +248,12 @@ msgstr "Niemals"
 msgid "New"
 msgstr "Neu"
 
+msgid "No"
+msgstr "Nein"
+
+msgid "No, remove them."
+msgstr "Nein, entfernen."
+
 msgid "None"
 msgstr "Keine"
 
@@ -191,6 +265,12 @@ msgstr "Nachlauf der Aufnahme (in Min)"
 
 msgid "Offset before recording (in m)"
 msgstr "Vorlauf der Aufnahme (in Min)"
+
+msgid "On any service"
+msgstr "Auf jedem Sender"
+
+msgid "On same service"
+msgstr "Auf dem gleichen Sender"
 
 msgid "Only AutoTimers created during this Session"
 msgstr "Nur die dieser Sitzung"
@@ -215,6 +295,9 @@ msgid "Poll automatically"
 msgstr "Frage automatisch ab"
 
 msgid "Preview"
+msgstr "Vorschau"
+
+msgid "Preview AutoTimer"
 msgstr "Vorschau"
 
 msgid "Really close without saving settings?"
@@ -268,6 +351,30 @@ msgstr "Sortiere nach Zeit"
 msgid "Sunday"
 msgstr "Sonntag"
 
+msgid ""
+"Thank you for using the wizard. Your new AutoTimer has been added to the "
+"List.\n"
+"Please press OK to continue."
+msgstr ""
+"Vielen Dank für das Benutzen des Wizards. Der neue AutoTimer wurde der "
+"Liste hinzugefügt. Drücke OK um Fortzufahren."
+
+msgid ""
+"The Timer will not be added to the List.\n"
+"Please press OK to close this Wizard."
+msgstr ""
+"Der Timer wird nicht zur Liste hinzugefügt.\n"
+"Drücke OK um den Wizard zu beenden."
+
+msgid ""
+"The Timespan of an AutoTimer is the first 'advanced' attribute. If a "
+"timespan is specified an event will only match this AutoTimer if it lies "
+"inside of this timespan."
+msgstr ""
+"Der Zeitraum eines AutoTimers ist das erste \"fortgeschrittene\" "
+"Attribut. Wenn ein Zeitraum angegeben ist wird eine Sendung nur "
+"hinzugefügt wenn sie innerhalb dieser Zeitspanne liegt."
+
 msgid "The match attribute is mandatory."
 msgstr "Das Attribut 'Finde in Titel' muss angegeben werden!"
 
@@ -298,8 +405,41 @@ msgstr "Wöchentlich (Montag)"
 msgid "Weekly (Sunday)"
 msgstr "Wöchentlich (Sonntag)"
 
-msgid "Wizard"
+msgid ""
+"Welcome.\n"
+"\n"
+"This Wizard will help you to create a new AutoTimer by providing "
+"descriptions for common settings."
 msgstr ""
+"Willkommen\n"
+"Dieser Assistent wird Ihnen helfen einen neuen AutoTimer zu erstellen "
+"indem er für häufig genutzte Einstellungen eine Beschreibung liefert."
+
+msgid "Wizard"
+msgstr "Assistent"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "Yes, keep them."
+msgstr "Ja, behalten."
+
+msgid ""
+"You can set the basic properties of an AutoTimer here.\n"
+"While 'Name' is just a human-readable name displayed in the Overview, 'Match "
+"in title' is what is looked for in the EPG."
+msgstr ""
+"Hier können Sie grundlegende Einstellungen des AutoTimers treffen. Das "
+"Attribut \"Name\" ist eine Beschreibung innerhalb der Overview während "
+"\"Finde in Titel\" der gesuchte Text im Sendungsnamen ist."
+
+msgid ""
+"You did not provide a valid 'Match in title' Attribute for your new "
+"AutoTimer.\n"
+"As this is a mandatory Attribute you cannot continue without doing so."
+msgstr ""
+"Sie habendas Attribut \"Finde in Titel\" nicht angegeben. Da dies ein "
+"notwendiges Attribut ist können Sie nicht fortfahren ohne dies zu tun."
 
 #, python-format
 msgid ""
@@ -308,6 +448,34 @@ msgid ""
 msgstr ""
 "Es wurde \"%s\" als Suchtext eingegeben.\n"
 "Sollen Leerzeichen am Ende entfernt werden?"
+
+msgid ""
+"You successfully configured a new AutoTimer. Do you want to add it to the "
+"list?\n"
+"\n"
+"You can go back a step by pressing EXIT on your remote."
+msgstr ""
+"Sie haben den neuen AutoTimer erfolgreich konfiguriert. Soll er der Liste "
+"hinzugefügt werden? Durch drücken von \"EXIT\" auf der Fernbedienung "
+"können Sie einen Schritt zurück gehen."
+
+msgid ""
+"Your 'Match in title' Attribute ends with a Whitespace.\n"
+"Please confirm if this was intentional, if not they will be removed."
+msgstr ""
+"Das Attribut \"Finde in Titel\" endet bei Ihnen mit einem Leerzeichen. "
+"Bitte bestätigen Sie ob dies Absicht war, sonst werden diese entfernt."
+
+#, python-format
+msgid ""
+"Your config file is not well-formed:\n"
+"%s"
+msgstr ""
+"Ihre Konfigurationsdatei ist nicht wohlgeformt:\n"
+"%s"
+
+msgid "auto"
+msgstr "automatisch"
 
 msgid "delete"
 msgstr "Löschen"
@@ -351,105 +519,3 @@ msgstr "standard"
 msgid "zap"
 msgstr "umschalten"
 
-#~ msgid "Abort this Wizard."
-#~ msgstr "Den Wizard beenden."
-
-#~ msgid "Create a new AutoTimer."
-#~ msgstr "Einen neuen AutoTimer erstellen."
-
-#~ msgid ""
-#~ "Filters are another powerful tool when matching events. An AutoTimer can "
-#~ "be restricted to certain Weekdays or only match an event with a text "
-#~ "inside eg it's Description.Press BLUE to add a new restriction and YELLOW "
-#~ "to remove the selected one."
-#~ msgstr ""
-#~ "Filter sind ein hilfreiches Hilfsmittel um Sendungen zu erkennen. Ein "
-#~ "AutoTimer kann auf bestimmte Wochentage beschränkt sein oder z.B. nur bei "
-#~ "einem Text innerhalb der Kurzbeschreibung aktiv werden. Drücke BLAU um "
-#~ "einen neuen Filter hinzuzufügen und GELB um einen zu entfernen"
-
-#~ msgid ""
-#~ "It's possible to restrict an AutoTimer to certain Services or Bouquets or "
-#~ "to deny specific ones.An Event will only match this AutoTimer if it's on "
-#~ "a specific and not denied Service (inside a Bouquets).Press BLUE to add a "
-#~ "new restriction and YELLOW to remove the selected one."
-#~ msgstr ""
-#~ "AutoTimer können auch auf bestimmte Sender oder Bouquets beschränkt "
-#~ "werden. Eine Sendung wird dann nur hinzugefügt wenn sie auf einen "
-#~ "erlaubten und keinem verbotenen Sender (innerhalb eines Bouquets) läuft. "
-#~ "Drücke BLAU um eine neue Beschränkungen hinzuzufügen und GELB um die "
-#~ "markierte zu entfernen"
-
-#~ msgid "No"
-#~ msgstr "Nein"
-
-#~ msgid "No, remove them."
-#~ msgstr "Nein, entfernen."
-
-#~ msgid ""
-#~ "Thank you for using the wizard. Your new AutoTimer has been added to the "
-#~ "List.Please press OK to continue."
-#~ msgstr ""
-#~ "Vielen Dank für das Benutzen des Wizards. Der neue AutoTimer wurde der "
-#~ "Liste hinzugefügt. Drücke OK um Fortzufahren."
-
-#~ msgid ""
-#~ "The Timer will not be added to the List.Please press OK to close this "
-#~ "Wizard."
-#~ msgstr ""
-#~ "Der Timer wird nicht zur Liste hinzugefügt. Drücke OK um den Wizard zu "
-#~ "beenden."
-
-#~ msgid ""
-#~ "The Timespan of an AutoTimer is the first \"advanced\" attribute. If a "
-#~ "timespan is specified an event will only match this AutoTimer if it lies "
-#~ "inside of this timespan."
-#~ msgstr ""
-#~ "Der Zeitraum eines AutoTimers ist das erste \"fortgeschrittene\" "
-#~ "Attribut. Wenn ein Zeitraum angegeben ist wird eine Sendung nur "
-#~ "hinzugefügt wenn sie innerhalb dieser Zeitspanne liegt."
-
-#~ msgid ""
-#~ "Welcome.This Wizard will help you to create a new AutoTimer by providing "
-#~ "descriptions for common settings."
-#~ msgstr ""
-#~ "Willkommen. Dieser Wizard wird Ihnen helfen einen neuen AutoTimer zu "
-#~ "erstellen indem er für häufig genutzte Einstellungen eine Beschreibung "
-#~ "liefert."
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "Yes, keep them."
-#~ msgstr "Ja, behalten."
-
-#~ msgid ""
-#~ "You can set the basic properties of an AutoTimer here.While \"Name\" is "
-#~ "just a human-readable name displayed in the Overview, \"Match\" is what "
-#~ "is looked for in the EPG.Enabled and Type should be self-explanatory."
-#~ msgstr ""
-#~ "Hier können Sie grundlegende Einstellungen des AutoTimers treffen. Das "
-#~ "Attribut \"Name\" ist eine Beschreibung innerhalb der Overview während "
-#~ "\"Finde in Titel\" der gesuchte Text im Sendungsnamen ist."
-
-#~ msgid ""
-#~ "You did not provide a match-Attribute for your new AutoTimer.As this is a "
-#~ "mandatory Attribute you cannot continue without doing so."
-#~ msgstr ""
-#~ "Sie habendas Attribut \"Finde in Titel\" nicht angegeben. Da dies ein "
-#~ "notwendiges Attribut ist können Sie nicht fortfahren ohne dies zu tun."
-
-#~ msgid ""
-#~ "You successfully configured a new AutoTimer. Do you want to add it to the "
-#~ "list?You can go back a step by pressing \"exit\" on your remote."
-#~ msgstr ""
-#~ "Sie haben den neuen AutoTimer erfolgreich konfiguriert. Soll er der Liste "
-#~ "hinzugefügt werden? Durch drücken von \"EXIT\" auf der Fernbedienung "
-#~ "können Sie einen Schritt zurück gehen."
-
-#~ msgid ""
-#~ "Your match-Attribute ends with a Whitespace.Please confirm if this was "
-#~ "intentional, if not they will be removed."
-#~ msgstr ""
-#~ "Das Attribut \"Finde in Titel\" endet bei Ihnen mit einem Leerzeichen. "
-#~ "Bitte bestätigen Sie ob dies Absicht war, sonst werden diese entfernt."

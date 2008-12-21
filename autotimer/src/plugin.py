@@ -72,14 +72,12 @@ def main(session, **kwargs):
 		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
 
-	from xml.parsers.expat import ExpatError
-
 	try:
 		autotimer.readXml()
-	except ExpatError, ee:
+	except SyntaxError, se:
 		session.open(
 			MessageBox,
-			_("Your config file is not well-formed.\nError parsing in line: %s") % (ee.lineno),
+			_("Your config file is not well-formed:\n%s") % (str(se)),
 			type = MessageBox.TYPE_ERROR,
 			timeout = 10
 		)
@@ -113,6 +111,9 @@ def editCallback(session):
 			timeout = 10
 		)
 
+		# Save xml
+		autotimer.writeXml()
+
 	# Start autopoller again if wanted
 	if config.plugins.autotimer.autopoll.value:
 		if autopoller is None:
@@ -122,9 +123,6 @@ def editCallback(session):
 	# Remove instance if not running in background
 	else:
 		autopoller = None
-
-		# Save xml (as long as we did not cancel)
-		session and autotimer.writeXml()
 		autotimer = None
 
 # Movielist
