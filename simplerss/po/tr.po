@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SimpleRSS Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-04 13:07+0100\n"
+"POT-Creation-Date: 2008-12-21 14:23+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Zülfikar Veyisoğlu <zveyis@gmail.com>\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,6 +17,10 @@ msgstr ""
 #, python-format
 msgid "%d Feed(s) were added to configuration."
 msgstr "%d besleme(leri) ayarlarınıza eklendi."
+
+#: ../src/plugin.py:118
+msgid "A simple to use RSS reader"
+msgstr "Kolay kullanımlı RSS okuyucu"
 
 #: ../src/RSSSetup.py:26
 msgid "Autoupdate"
@@ -36,6 +40,7 @@ msgstr "Kapat"
 msgid "Delete"
 msgstr "Sil"
 
+#: ../src/RSSScreens.py:96
 #: ../src/RSSScreens.py:170
 msgid "Enclosures"
 msgstr "İlişkili bildiri"
