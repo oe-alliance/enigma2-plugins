@@ -25,7 +25,7 @@ SKIN = """
 ##############################################################################
 
 config.plugins.PermanentClock = ConfigSubsection()
-config.plugins.PermanentClock.enabled = ConfigYesNo(default=True)
+config.plugins.PermanentClock.enabled = ConfigYesNo(default=False)
 config.plugins.PermanentClock.position_x = ConfigInteger(default=590)
 config.plugins.PermanentClock.position_y = ConfigInteger(default=35)
 
