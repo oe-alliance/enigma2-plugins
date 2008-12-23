@@ -17,7 +17,7 @@ session = [ ]
 default = (config.av.videomode[config.av.videoport.value].value, _("default"))
 preferedmodes = [mode[0] for mode in video_hw.getModeList(config.av.videoport.value) if mode[0] != default[0]]
 preferedmodes.append(default)
-print preferedmodes
+
 config.plugins.autoresolution = ConfigSubsection()
 config.plugins.autoresolution.enable = ConfigYesNo(default = False)
 config.plugins.autoresolution.sd_i = ConfigSelection(default = default[0], choices = preferedmodes)
@@ -146,8 +146,8 @@ class AutoRes(Screen):
 			})
 		self.timer = eTimer()
 		self.timer.callback.append(self.determineContent)
-		self.delayval = 200
-		self.height, self.width, self.progressive, self.framerate = '', '', 'i', '50'
+		self.delayval = 250
+		self.lastmode = config.av.videomode[config.av.videoport.value].value
 
 	def __evVideoFramerateChanged(self):
 		print "[AutoRes] got event evFramerateChanged"
@@ -174,31 +174,35 @@ class AutoRes(Screen):
 		self.timer.stop()
 		service = session.nav.getCurrentService()
 		info = service and service.info()
-		#determine width/height
 		height = info and info.getInfo(iServiceInformation.sVideoHeight)
 		width = info and info.getInfo(iServiceInformation.sVideoWidth)
-		if height != self.height or width != self.width:
-			self.height, self.width = height, width
-		# determine framerate
 		framerate = info and info.getInfo(iServiceInformation.sFrameRate)
 		frate = str(framerate)[:2] #fallback?
 		if frqdic.has_key(framerate):
 			frate = frqdic[framerate]
-		if frate != self.framerate:
-			self.framerate = frate
-		# determine progressive/interlace
 		progressive = info and info.getInfo(iServiceInformation.sProgressive)
 		if progrdic.has_key(progressive):
 			prog = progrdic[progressive]
 		else:
 			prog = 'i'
-		if prog != self.progressive:
-			self.progressive = prog
-		self.changeVideomode()
+		print "[AutoRes] new content is %sx%s%s%s" %(width, height, prog, frate)
+		self.determineVideoMode(width, height, prog, frate)
+	
+	def determineVideoMode(self, width, height, prog, frate):
+		if height > 900 and frate in ('24', '25', '30') and prog == 'p':
+			new_mode = '1080p%s' % frate
+		elif height > 576 or width > 720: #asume that, higher then 576 or greater then 720 is hd content
+			new_mode = 'hd_%s' % prog
+		else:
+			new_mode = 'sd_%s' % prog
+		if switchdic.has_key(new_mode):
+			new_mode = switchdic[new_mode]
+			print '[AutoRes] determined VideoMode', new_mode
+			if new_mode != self.lastmode:
+				self.lastmode = new_mode
+				self.changeVideomode(new_mode)
 		
-	def changeVideomode(self):
-		print "[AutoRes] new content is %sx%s%s%s" %(self.width, self.height, self.progressive, self.framerate)
-		mode = self.determineVideoMode()
+	def changeVideomode(self, mode):
 		if mode.find("1080p") != -1:
 			print "[AutoRes] switching to", mode
 			v = open('/proc/stb/video/videomode' , "w")
@@ -217,18 +221,7 @@ class AutoRes(Screen):
 		if config.plugins.autoresolution.testmode.value:
 			from Screens.MessageBox import MessageBox
 			self.session.openWithCallback(
-					self.confirm, MessageBox, _("Autoresolution Plugin Testmode:\nIs %s videomode ok?" % (resolutionlabeltxt)), MessageBox.TYPE_YESNO, timeout = 15, default = False)
-			
-	def determineVideoMode(self):
-		if self.height > 900 and self.framerate in ('24', '25', '30') and self.progressive == 'p':
-			mode = '1080p%s' % self.framerate
-		elif self.height > 576 or self.width > 720: #asume that, higher then 576 or greater then 720 is hd content
-			mode = 'hd_%s' % self.progressive
-		else:
-			mode = 'sd_%s' % self.progressive
-		if switchdic.has_key(mode):
-			print '[AutoRes] determined VideoMode', switchdic[mode]
-			return switchdic[mode]
+				self.confirm, MessageBox, _("Autoresolution Plugin Testmode:\nIs %s videomode ok?" % (resolutionlabeltxt)), MessageBox.TYPE_YESNO, timeout = 15, default = False)
 		
 	def confirm(self, confirmed):
 		if not confirmed:
