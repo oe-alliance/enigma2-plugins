@@ -184,14 +184,12 @@ class PermanentClockMenu(TitleScreen):
 
 	def okClicked(self):
 		sel = self["list"].getCurrent()
+		if pClock.dialog is None:
+			pClock.gotSession(self.session)
 		if sel == _("Deactivate permanent clock") or sel == _("Activate permanent clock"):
-			if pClock.dialog is None:
-				pClock.gotSession(self.session)
 			pClock.changeVisibility()
 			self.showMenu()
 		else:
-			if pClock.dialog is None:
-				pClock.gotSession(self.session)
 			pClock.dialog.hide()
 			self.session.openWithCallback(self.positionerCallback, PermanentClockPositioner)
 
