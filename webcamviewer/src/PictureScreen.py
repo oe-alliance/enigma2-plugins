@@ -124,11 +124,16 @@ class PictureScreen(Screen):
 		self.picload.setPara((size_w, size_h, sc[0], sc[1], False, 1, '#ff000000'))
 		self["pixmap"] = Pixmap()
 
+		self.paused = False
+
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions","ChannelSelectBaseActions","ShortcutActions"],
 			{
 			 "ok": self.do,
 			 "back": self.exit,
-			 "green":self.AutoReloaderSwitch,
+			 "green": self.AutoReloaderSwitch,
+			 "yellow": self.pause,
+			 "red": self.prev,
+			 "blue": self.next,
 			 }, -1)
 
 		self.onLayoutFinish.append(self.do)
@@ -140,6 +145,11 @@ class PictureScreen(Screen):
 				self.do()
 			else:
 				self.autoreload = False
+
+		if self.paused:
+			self.paused = False
+			self.slideshowcallback()
+			self.closetimer.start(int(config.plugins.pictureviewer.slideshowtime.value))
 
 	def do(self):
 		if self.processing:
@@ -177,7 +187,10 @@ class PictureScreen(Screen):
 		self.setPicture(self.sourcefile)
 
 	def setPicture(self, string):
-		self.setTitle(self.filename.split("/")[-1])
+		if not self.paused:
+			self.setTitle(self.filename.split("/")[-1])
+		else:
+			self.setTitle(_("pause") + ":" + self.filename.split("/")[-1])
 		self.picload.startDecode(string)
 
 	def setPictureCB(self, picInfo = None):
@@ -193,5 +206,37 @@ class PictureScreen(Screen):
 				self.closetimer = eTimer()
 				self.closetimer.timeout.get().append(self.slideshowcallback)
 				print "waiting", config.plugins.pictureviewer.slideshowtime.value, "seconds for next picture"
-				self.closetimer.start(int(config.plugins.pictureviewer.slideshowtime.value))
+				if not self.paused:
+					self.closetimer.start(int(config.plugins.pictureviewer.slideshowtime.value))
+
+	def pause(self):
+		if not self.slideshowcallback:
+			return
+		if not self.paused:
+			self.closetimer.stop()
+			self.paused = True
+
+			self.setTitle(_("pause") + ":" + self.filename.split("/")[-1])
+		else:
+			self.paused = False
+
+			self.setTitle(self.filename.split("/")[-1])
+			self.slideshowcallback()
+			self.closetimer.start(int(config.plugins.pictureviewer.slideshowtime.value))
+
+	def prev(self):
+		if not self.slideshowcallback:
+			return
+		if not self.paused:
+			self.closetimer.stop()
+			self.paused = True
+		self.slideshowcallback(prev = True)
+
+	def next(self):
+		if not self.slideshowcallback:
+			return
+		if not self.paused:
+			self.closetimer.stop()
+			self.paused = True
+		self.slideshowcallback()
 

@@ -122,10 +122,15 @@ class Slideshow:
 			self.currentslideshowitem = -1
 			self.nextSlideshowItem()
 
-	def nextSlideshowItem(self):
-		if self.currentslideshowitem is not (len(self.filelist) - 1):
-			self.currentslideshowitem = self.currentslideshowitem + 1
-			filetoshow = self.filelist[self.currentslideshowitem][1]
+	def nextSlideshowItem(self, prev = False):
+		currentslideshowitem = self.currentslideshowitem
+		if prev:
+   			currentslideshowitem -= 2
+		if currentslideshowitem < 0:
+			currentslideshowitem = -1
+		if currentslideshowitem is not (len(self.filelist) - 1):
+			currentslideshowitem += 1
+			filetoshow = self.filelist[currentslideshowitem][1]
 			if not self.wbviewer:
 				self.wbviewer = self.session.openWithCallback(
 									self.cb,
@@ -137,7 +142,8 @@ class Slideshow:
 			else:
 				self.wbviewer.filename = filetoshow
 				self.wbviewer.do()
-		elif self.currentslideshowitem is (len(self.filelist) - 1) and int(config.plugins.pictureviewer.slideshowmode.value) is SLIDESHOWMODE_REPEAT:
+			self.currentslideshowitem = currentslideshowitem
+		elif int(config.plugins.pictureviewer.slideshowmode.value) is SLIDESHOWMODE_REPEAT:
 			print "["+myname+"] restarting slideshow"
 			self.start()
 		else:
