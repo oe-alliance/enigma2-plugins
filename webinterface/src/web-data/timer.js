@@ -631,7 +631,7 @@ function incomingCleanTimerListNow(request) {
 		for ( var i = 0; i <timers.length; i++){
 			var timer = timers[i];
 			debug("[cleanTimerListNow]" + timer.getState() + " " + quotes2html(timer.getName()));
-			if(timer.getState() !== 0 && timer.getState() !== 2) {
+			if(timer.getState() != "0" && timer.getState() != "2") {
 				delTimer(timer.getServiceReference(),timer.getTimeBegin(),timer.getTimeEnd(),
 					quotes2html(timer.getServiceName()),quotes2html(timer.getName()),quotes2html(timer.getDescription()),incomingJustDoNothing);
 			}
