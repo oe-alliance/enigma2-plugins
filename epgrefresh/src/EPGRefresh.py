@@ -19,6 +19,7 @@ from xml.etree.cElementTree import parse as cet_parse
 from os import path as path
 
 # We want a list of unique services
+from EPGRefreshService import EPGRefreshService
 from sets import Set
 
 # Configuration
@@ -73,24 +74,36 @@ class EPGRefresh:
 				if pos != -1:
 					value = value[:pos+1]
 
-				self.services[0].add(value)
+				duration = service.get('duration', None)
+				duration = duration and int(duration)
+
+				self.services[0].add(EPGRefreshService(value, duration))
 		for bouquet in configuration.findall("bouquet"):
 			value = bouquet.text
 			if value:
 				self.services[1].add(value)
+				duration = bouquet.get('duration', None)
+				duration = duration and int(duration)
+				self.services[0].add(EPGRefreshService(value, duration))
 
 	def saveConfiguration(self):
 		# Generate List in RAM
 		list = ['<?xml version="1.0" ?>\n<epgrefresh>\n\n']
 
 		for service in self.services[0]:
-			ref = ServiceReference(str(service))
+			ref = ServiceReference(service.sref)
 			list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
-			list.extend([' <service>', service, '</service>\n'])
+			list.append(' <service')
+			if service.duration is not None:
+				list.extend([' duration="', str(service.duration), '"'])
+			list.extend(['>', str(service.sref), '</service>\n'])
 		for bouquet in self.services[1]:
-			ref = ServiceReference(str(bouquet))
+			ref = ServiceReference(bouquet.sref)
 			list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
-			list.extend([' <bouquet>', bouquet, '</bouquet>\n'])
+			list.append(' <bouquet')
+			if bouquet.duration is not None:
+				list.extend([' duration="', str(bouquet.duration), '"'])
+			list.extend(['>', str(bouquet.sref), '</bouquet>\n'])
 
 		list.append('\n</epgrefresh>')
 
@@ -130,10 +143,6 @@ class EPGRefresh:
 		except Exception, e:
 			print "[EPGRefresh] Error occured while reading in configuration:", e
 
-		# Save Services in a dict <transponder data> => serviceref
-		self.scanServices = []
-		channelIdList = []
-
 		# This will hold services which are not explicitely in our list
 		additionalServices = []
 		additionalBouquets = []
@@ -158,8 +167,8 @@ class EPGRefresh:
 			else:
 				# Fetch services
 				for timer in autotimer.getEnabledTimerList():
-					additionalServices.extend(timer.getServices())
-					additionalBouquets.extend(timer.getBouquets())
+					additionalServices.extend([EPGRefreshService(x, None) for x in timer.getServices()])
+					additionalBouquets.extend([EPGRefreshService(x, None) for x in timer.getBouquets()])
 			finally:
 				# Remove instance if there wasn't one before
 				if removeInstance:
@@ -167,19 +176,22 @@ class EPGRefresh:
 
 		serviceHandler = eServiceCenter.getInstance()
 		for bouquet in self.services[1].union(additionalBouquets):
-			myref = eServiceReference(str(bouquet))
+			myref = eServiceReference(str(bouquet.sref))
 			list = serviceHandler.list(myref)
 			if list is not None:
 				while 1:
 					s = list.getNext()
 					# TODO: I wonder if its sane to assume we get services here (and not just new lists)
 					if s.valid():
-						additionalServices.append(s.toString())
+						additionalServices.append(EPGRefreshService(s.toString(), None))
 					else:
 						break
+		del additionalBouquets[:]
 
-		for serviceref in self.services[0].union(additionalServices):
-			service = eServiceReference(str(serviceref))
+		scanServices = []
+		channelIdList = []
+		for scanservice in self.services[0].union(additionalServices):
+			service = eServiceReference(str(scanservice.sref))
 			if not service.valid() \
 				or (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 				
@@ -192,12 +204,14 @@ class EPGRefresh:
 			)
 
 			if channelID not in channelIdList:
-				self.scanServices.append(service)
+				scanServices.append(scanservice)
 				channelIdList.append(channelID)
+		del additionalServices[:]
 
 		# Debug
-		print "[EPGRefresh] Services we're going to scan:", ', '.join([ServiceReference(x).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '') for x in self.scanServices])
+		print "[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in scanServices])
 
+		self.scanServices = scanServices
 		self.refresh()
 
 	def cleanUp(self):
@@ -257,7 +271,7 @@ class EPGRefresh:
 		epgrefreshtimer.add(EPGRefreshTimerEntry(time() + 30, self.prepareRefresh))
 
 	def nextService(self):
-		# DEBUG
+		# Debug
 		print "[EPGRefresh] Maybe zap to next service"
 
 		try:
@@ -271,11 +285,12 @@ class EPGRefresh:
 			self.cleanUp()
 		else:
 			# Play next service
-			self.session.nav.playService(service)
+			self.session.nav.playService(eServiceReference(service.sref))
 
 			# Start Timer
+			delay = service.duration or config.plugins.epgrefresh.interval.value
 			epgrefreshtimer.add(EPGRefreshTimerEntry(
-				time() + config.plugins.epgrefresh.interval.value*60,
+				time() + delay*60,
 				self.refresh,
 				nocheck = True)
 			)

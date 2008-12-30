@@ -17,6 +17,8 @@ from Components.Button import Button
 # Configuration
 from Components.config import getConfigListEntry, ConfigSelection
 
+from EPGRefreshService import EPGRefreshService
+
 # Show ServiceName instead of ServiceReference
 from ServiceReference import ServiceReference
 
@@ -115,7 +117,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			self.idx = 1
 
 		self.list.extend([
-			getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(str(x), ServiceReference(str(x)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
+			getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(x, ServiceReference(x.sref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
 				for x in self.services[self.idx]
 		])
 
@@ -167,7 +169,10 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			list = self["config"].getList()
 			list.append(getConfigListEntry(
 				_("Refreshing"),
-				ConfigSelection(choices = [(args[0].toString(), ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])
+				ConfigSelection(choices = [(
+					EPGRefreshService(args[0].toString(), None),
+					ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+				)])
 			))
 			self["config"].setList(list)
 
