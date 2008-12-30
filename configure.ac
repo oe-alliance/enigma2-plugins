@@ -44,16 +44,8 @@ webinterface/src/WebComponents/Sources/Makefile
 
 webinterface/src/web-data/Makefile
 webinterface/src/web-data/gfx/Makefile
-
+webinterface/src/web-data/img/Makefile
 webinterface/src/web-data/lib/Makefile
-
-webinterface/src/web-data/lib/ptwindow/Makefile
-webinterface/src/web-data/lib/ptwindow/javascripts/Makefile
-webinterface/src/web-data/lib/ptwindow/themes/Makefile
-webinterface/src/web-data/lib/ptwindow/themes/alert/Makefile
-webinterface/src/web-data/lib/ptwindow/themes/alphacube/Makefile
-webinterface/src/web-data/lib/ptwindow/themes/default/Makefile
-webinterface/src/web-data/lib/ptwindow/themes/iefix/Makefile
 
 wirelesslan/Makefile
 wirelesslan/src/Makefile
