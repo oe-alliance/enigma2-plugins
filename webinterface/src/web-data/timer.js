@@ -636,6 +636,7 @@ function incomingCleanTimerListNow(request) {
 					quotes2html(timer.getServiceName()),quotes2html(timer.getName()),quotes2html(timer.getDescription()),incomingJustDoNothing);
 			}
 		}
+		loadTimerList();
 	}
 }
 
