@@ -4,3 +4,4 @@
 * add box dependent remote control picture (for dm8000)
 * rename "extra" to "boxcontrol"
 * add new button "info" and move "about" from "extra" to "info"
+* Fix some smaller IE Bugs
