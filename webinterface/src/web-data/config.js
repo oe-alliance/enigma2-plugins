@@ -3,6 +3,8 @@
 var DBG = true;
 DBG = false;
 
+var url_getcurrent = '/web/getcurrent';
+
 var url_getvolume = '/web/vol?set=state'; 
 var url_setvolume = '/web/vol?set=set'; // plus new value eg: set=set15
 var url_volumeup = '/web/vol?set=up';
@@ -11,7 +13,8 @@ var url_volumemute = '/web/vol?set=mute';
 
 var url_epgservice = "/web/epgservice?sRef="; // plus serviceRef
 var url_epgsearch = "/web/epgsearch?search="; // plus serviceRef
-var url_epgnow = "/web/epgnow?bRef="; // plus bouqetRev
+var url_epgnow = "/web/epgnow?bRef="; // plus bouquetRev
+var url_epgnext = "/web/epgnext?bRef="; // plus bouquetRev
 
 var url_getServices = "/web/getservices?sRef="; // plus serviceref
 var url_subservices = "/web/subservices"; // subservices for current service
@@ -48,20 +51,16 @@ var url_messageanswer = "/web/messageanswer?getanswer=now";
 
 var url_powerstate = "/web/powerstate"; // plus new powerstate
 var url_remotecontrol = "/web/remotecontrol"; // plus command
+var url_signal = "/web/signal";
 
 var url_notelist = "/notes";
 var url_note = "/notes?show="; //plus filename
 
-var bouqet_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
-var bouqet_radio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
-var bouqet_provider_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name';
-var bouqet_provider_radio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
+var bouquetsTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
+var bouquetsRadio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
+var providerTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name';
+var providerRadio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
 
 var windowStyle = 'alphacube';
 
 var url_delfile = "/web/delfile?file="; // plus file
-
-var url_autotimerlist = "/web/autotimerlist?gl";
-var url_autotimerdelete = "/web/autotimerdelete"; 
-var url_autotimertoggledisable = "/web/autotimertoggledisable"; 
- 

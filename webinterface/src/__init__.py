@@ -10,7 +10,7 @@ from Components.config import configfile
 from Components.config import ConfigYesNo
 from Components.Network import iNetwork
 
-__version__ = "0.99"
+__version__ = "1.5beta"
 
 config.plugins.Webinterface = ConfigSubsection()
 config.plugins.Webinterface.enable = ConfigYesNo(default = True)

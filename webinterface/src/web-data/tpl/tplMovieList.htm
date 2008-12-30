@@ -1,0 +1,56 @@
+
+						<table id="contentTable">
+							{for movie in movies}
+							<tr>
+								<td class="${movie.cssclass}" >
+									<table class="sListItem">
+										<tr>
+											<td style="width: 740px;">										
+												<div class="sListSName">
+													<a href="#" id="${movie.servicereference}" onclick="{ zap(this.id); }" class="sListSLink" title="Play ${movie.title}">
+														${movie.title} - ${movie.description} (${movie.servicename})
+													</a>
+												</div>
+											</td>
+											<td>
+												<a target="_blank" href="/web/ts.m3u?file=${movie.filelink}">
+													<img src="/webdata/gfx/screen.png" title="Stream ${movie.title}" border="0">
+												</a>
+											</td>
+											<td>
+												<a target="_blank" href="/file/?file=${movie.filelink}&root=/hdd/movie/">
+													<img src="/webdata/gfx/save.png" title="Download ${movie.title}" border="0">
+												</a>
+											</td>
+											<td>
+												<a target="#" onclick="delMovieFile('${movie.filename}','${movie.servicename}','${movie.title}','${movie.description}');">
+													<img src="/webdata/img/delete.png" title="Delete ${movie.title}" border="0">
+												</a>
+											</td>
+										</tr>
+										<tr class="mListDetail">
+											<td colspan="4" class="mListDetailItem">
+												<table cellspacing="0">
+													<tr>
+														<td class="mStart">${movie.time}</td>
+														<td class="mTitle">${movie.descriptionextended}</td>
+														<td class="mLength">${movie.length}</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{forelse}
+							<tr>
+								<td>
+									<table>
+										<tr>
+											<td>No Movies to Display</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{/for}		
+						</table>

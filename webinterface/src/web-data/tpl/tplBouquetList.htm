@@ -1,0 +1,22 @@
+
+						<table id="contentTable">
+							{for s in services}
+							<tr><td>
+								<table>
+									<tr>
+										<td>										
+											<div class="sListSName">
+												<a id="${s.servicereference}" onclick="{ loadBouquet(this.id, this.innerHTML); }" class="sListSLink">
+													${s.bouquetname}
+												</a>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</td></tr>
+							{forelse}
+							<tr><td>
+								<table><tr><td>No Bouquets to Display</td></tr></table>
+							</td></tr>
+							{/for}		
+						</table>

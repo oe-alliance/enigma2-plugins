@@ -1,5 +1,3 @@
 installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/lib/
 
-install_DATA = rico.js
-
-SUBDIRS = ptwindow
+install_DATA = *.js

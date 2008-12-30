@@ -1,638 +1,486 @@
-button, span { 
-	behavior: url(webdata/IEFixes.htc);
-}
-
-body { 	
-	text-align:left;
-	vertical-align: top;
-	margin:0px; 
-	font-family:Arial,sans-serif;
-	font-size: 12px;
-	background-color:#EEE;
-	color:#444;
-}
-
-a:link { color:#444; }
-a:visited { color:#444; }
-a:active { color:#444; }
-
-hr{ border: 1px solid #BBB; 
-	margin-left: 3px;
-	margin-right: 3px;
-}
-
-form{
-	margin: 0px;
-	padding: 0px;
-}
-
-button {
-	background-image: url('gfx/button.png');
-	height: 20px;
-	width: 140px;
-	border: 1px solid #AAA;
-}
-
-button:hover, button.hover {
-	border: 1px solid #000;
-}
-
-#currentServiceName { 
-	font-family:Arial,sans-serif;
-	font-size:14px;
-	font-weight:bold;
+	body{
+		font-family: Tahoma, Sans-Serif;
+		font-size: 14px;
+		font-weight: bold;
+		color: #fff;
+		text-align: center;
+		background-color: #555
+	}
 	
-	float:right;
+	a, a:visited, a:active{
+		color: #FFF;
+		text-decoration: none;
+	}
 
-	color: #FFFFFF;
-	text-align:left;
+/***********************
+ GENERAL
+ ***********************/
 
-	width:30%;
-	height:20px;
-}
-.currentServiceEPGStarttime { 
-	font-family:Arial,sans-serif;
-	font-size:14px;
-	font-weight:bold;
+	.odd{
+		background-color: #FFF;
+	}
 	
-	float:left;
-
-	color: #FFFFFF;
-	text-align:left;
-
-	width:40px;
-	height:20px;
-}
-.currentServiceEPGTitle { 
-	font-family:Arial,sans-serif;
-	font-size:14px;
-	font-weight:bold;
+	.even{
+		background-color: #DDD;
+	}
 	
-	float:left;
-
-	color: #FFFFFF;
-	text-align:left;
-
-	width:240px;
-	height:20px;
-}
-.currentServiceEPGDuration { 
-	font-family:Arial,sans-serif;
-	font-size:14px;
-	font-weight:bold;
+	.fullwidth {
+		width: 100%;
+	}
 	
-	float:left;
-	color: #FFFFFF;
-	text-align:right;
-
-	width:70px;
-	height:20px;
-}
-
-#searchText{
-	border: 1px solid #000;
-	margin: 0 0 0 0;
-}
-#filterMovietag{
-	border: 1px solid #000;
-	margin: 0 0 0 0;
-}
-
-/**************************************************************
-Make the ServiceList Table scrollable**************************
-***************************************************************/
-
-/* define height and width of scrollable area. Add 16px to width for scrollbar          */
-div.BodyContent {
-	border: 1px solid #000;
-	height: 455px;
-	overflow: auto;
-	margin: 0px 9px 0px;
-	font-size: 12px;
-}
-
-div.BodyContentChannellist {
-	clear: both;
-	max-height: 455px;
-	overflow: auto;
-/*	width: 780px; */
-}
-
-.BodyContentChannellist{
-	font-size: 12px;
-}
-
-/* Reset overflow value to hidden for all non-IE browsers. */
-html>body div.BodyContentChannellist {
-	overflow: hidden;
-	width: 780px;
-}
-
-/* define width of table. IE browsers only                 */
-div.BodyContentChannellist table {
-	float: left;
-	width: 760px;
-	max-height: 455px;
-}
-
-/* define width of table. Add 16px to width for scrollbar.           */
-/* All other non-IE browsers.                                        */
-html>body div.BodyContentChannellist table {
-	width: 780px;
-}
-
-/* set table header to a fixed position. WinIE 6.x only                                       */
-/* In WinIE 6.x, any element with a position property set to relative and is a child of       */
-/* an element that has an overflow property set, the relative value translates into fixed.    */
-/* Ex: parent element DIV with a class of tableContainer has an overflow property set to auto */
-thead.fixedHeader tr {
-	position: relative;
-	height: 30px;
-	background: url(gfx/banner_30.png);	
-}
-
-/* set THEAD element to have block level attributes. All other non-IE browsers            */
-/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
-html>body thead.fixedHeader tr {
-	display: block
-}
-
-/* make the TH elements pretty */
-thead.fixedHeader th {
-	border: 0px;
-	font-weight: normal;
-	padding: 4px 3px;
-	text-align: left
-}
-
-/* make the A elements pretty. makes for nice clickable headers                */
-thead.fixedHeader a, thead.fixedHeader a:link, thead.fixedHeader a:visited {
-	color: #FFF;
-	display: block;
-	text-decoration: none;
-	width: 100%
-}
-
-/* make the A elements pretty. makes for nice clickable headers                */
-/* WARNING: swapping the background on hover may cause problems in WinIE 6.x   */
-thead.fixedHeader a:hover {
-	color: #FFF;
-	display: block;
-	text-decoration: underline;
-	width: 100%
-}
-
-/* define the table content to be scrollable                                              */
-/* set TBODY element to have block level attributes. All other non-IE browsers            */
-/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
-/* induced side effect is that child TDs no longer accept width: auto                     */
-html>body tbody.scrollContent {
-	display: block;
-	height: 422px;
-	/* This is realy bad for resolution below 1280x1024 */
-	overflow: auto;
-	width: 100%;
-}
-
-/* make TD elements pretty. Provide alternating classes for striping the table */
-/* http://www.alistapart.com/articles/zebratables/                             */
+	.center {
+		text-align: center;
+	}
 
 
-tbody.scrollContent td, tbody.scrollContent tr.normalRow td {
-	background: #FFF;
-	border-bottom: none;
-	border-left: none;
-	border-right: 1px solid #CCC;
-	border-top: 1px solid #DDD;
-	padding: 2px 3px 3px 4px;
-}
+/***********************
+ BANNER with MainMenu
+ ***********************/
 
-/* define width of TH elements: 1st, 2nd, and 3rd respectively.          */
-/* Add 16px to last TH for scrollbar padding. All other non-IE browsers. */
-/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
-html>body thead.fixedHeader th {
-	width: 780px; 
-}
+	#banner{
+		width: 1000px;
+		height: 70px;
+		background: #000;
+		padding-left: 5px;
+		margin-bottom: 8px;
+	}
 
-/* define width of TD elements: 1st, 2nd, and 3rd respectively.          */
-/* All other non-IE browsers.                                            */
-/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
-html>body tbody.scrollContent td {
-width: 764px; 
-}
+	#banner, #banner .sb-inner { background:#000 }
+	#banner .sb-border { background: #FFF }
+	#bannerText{
+		margin-bottom: 10px;
+		padding-left: 2px;
+		padding-top: 6px;
+	}
 
-/****************************************
-normal stylesheet-stuff******************
-*****************************************/
-
-#Main{
-	width:960px;
-	background-color: #AAA;
-	text-align: left;
-	margin: 0; 
-	padding: 0;
-	overflow: auto;
-	vertical-align: top;
-	cursor: default;
-	border: 1px solid #000; 
-}
-
-#Content{
-	vertical-align: middle;  
-	float: left;
-	background-color: #FFF;
-	width: 800px;
-	padding-bottom: 10px;
-	border-right: 1px solid #000;
-	border-left: 1px solid #000;
-}
-
-#CurrentService { 
-	font-family: Arial,sans-serif;
-	font-size: 14px;
-	font-weight: bold;
-	float: left;
-	color: #FFFFFF;
+	#bannerLeft{
+		width: 800px;
+		float: left;
+	}
 	
-	width: 55%;
-	height: 20px;
-}
-
-#CurrentEvent { 
-	font-family: Arial,sans-serif;
-	font-size: 14px;
-	font-weight: bold;
-	float: left;
-	color: #FFFFFF;
-	text-align: right;
-	width: 45%;
-	height: 20px;
-}
-
-#VolumePanel { 
-	font-family:Arial,sans-serif;
-	font-size:14px;
-	font-weight:bold;
+	#bannerRight{
+		width: 190px;
+		text-align: right;
+		height: 60px;
+		float: left;
+	}
 	
-	float:left;
-	color: #FFFFFF;
+	#bannerRight img{
+		padding-top: 5px;
+	}
 	
-	width:25%;
-	height:20px;
-}
-
-#CurrentTime { 
-	font-family:Arial,sans-serif;
-	font-size:14px;
-	font-weight:bold;
 	
-	float:left;
-	text-align:right;
-	color: #FFFFFF;
+	#current{
+		width: 999px;
+		background: #000;
+		padding-left: 3px;
+		padding-right: 3px;
+		padding-bottom: 1px;
+		margin-bottom: 8px;
+	}
+
+	#current, #current .sb-inner { background:#000 }
+	#current .sb-border { background: #FFF }
+	#currentTable{
+		margin-bottom: 10px;
+		padding-left: 2px;
+		padding-top: 3px;
+		width: 100%;
+	}
 	
-	width: 11%;
-	height: 20px;
-}
-
-#SignalPanel { 
-	font-family:Arial,sans-serif;
-	font-size:14px;
-	font-weight:bold;
+	#currentDuration{
+		text-align: right;
+	}
 	
-	float:left;
-
-	color: #FFFFFF;
-	text-align:right;
-
-	width:20px;
-	height:20px;
-}
-#StreaminterfaceButton { 
-	font-family:Arial,sans-serif;
-	font-size:14px;
-	font-weight:bold;
 	
-	float:left;
+	
+	#mainMenu{
+		background-color: #485052;
+		text-align: center;
+		overflow:hidden; 
+		background: #000; 
+		margin: 0; 
+		padding: 0; 
+		width: 850px;
+	}
 
-	color: #FFFFFF;
-	text-align:right;
+	#mainMenu li{
+		list-style: none;
+		float: left;
+		width: 130px;
+		height: 21px;
+		margin-left: 2px;
+	}
+	#mainMenu li .sb-border { background:#485052; }
+	#mainMenu li, #mainMenu li .sb-inner { background-color: #485052; }
 
-	width:20px;
-	height:20px;
-}
+	#mainMenu a{ display:block; padding: 1px; }
 
+	#mainMenu li:hover, #mainMenu li:hover .sb-inner { background: #AAA; }
+	#mainMenu li.hover, #mainMenu li.hover .sb-inner { background: #AAA; }
 
-#RecordButton { 
-	float:left;
-	width:20px;
-	height:20px;
-}
+/***************
+ Upper Left Nav
+ ***************/
 
-#ServiceInfo{
-	width:800px;
-	height: 20px;
-	border-bottom: 1px solid #000;
-	float:none;
-	clear:both;
-	padding: 0 0 0;
-	margin: 0 0 0;
-	vertical-align: middle;
-	background: url(gfx/banner.png);
-	color: #FFFFFF;
-}
+	#navContainer{
+		float:left;
+		width: 160px;
+	}
+	 
+	#nav{
+		width: 100%;
+		height: 250px;
+		background: #000;
+		padding-left: 5px;
+	}
 
-#nav{
-	float: left;
-	width: 117px;
-	background-color: #AAA;
-}
+	#nav, #nav .sb-inner { 
+		background:#FFF; 
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+	#nav .sb-border { background:#000; }
 
-#navTable{
-	background-color: #EEE;
-	vertical-align: middle;
-	font-size: 14px;
-	font-weight: bold;
-	width: 100%;
-	margin:0 0 0 0;
-	padding:0 0 0 0;
-}
+	#navHd, #navHd .sb-inner{
+		background: #000;
+		text-align: center;
+	}
+	
+	#navContent{
+		color: #485052;
+		padding-left: 5px;
+	}
 
-#NavHd{
-	background: url(gfx/banner.png);
-	color: #FFFFFF;
-	font-size:10px;
-	font-weight: bold;
-	height: 20px;
-	vertical-align: middle;
-}
-#RequestIndicator{
-	display: inline;
-	vertical-align: middle;
-	font-size:14px;
-	font-weight: bold;
-	height:20px;
-}
+	#navSearch{
+		width: 100%;
+		height: 61px;
+		background: #000;
+		padding-left: 5px;
+	}
 
-#EventNowNext{
-}
+	#navSearch, #navSearch .sb-inner { 
+		background:#FFF; 
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+	#navSearch .sb-border { background:#000; }
 
-#updates{
-	visibility: hidden;
-}
+	#searchHd, #searchHd .sb-inner{
+		background: #000;
+		text-align: center;
+	}
+	
+	
+	#navVolume{
+		width: 100%;
+		height: 75px;
+		background: #000;
+		padding-left: 0px;
+	}
 
-.navMenuPanel{
-	background-color: #BBB;
-}
-.navMenuHeader{
-	font-size: 14px;
-	border-top: 1px solid #000;
-	height: 20px;
-}
+	#navVolume, #navVolume .sb-inner { 
+		background:#FFF; 
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+	#navVolume .sb-border { background:#000; }
 
-.navMenuContent{
-	font-size: 12px;
-	font-weight: normal;
-	background-color: #EEE;
-	border: 0px;
-}
-.navMenuItem{
-	font-size: 12px;
-}
+	#volHd, #volHd .sb-inner{
+		background: #000;
+		text-align: center;
+	}
+	
+	
 
-.divblock{
-	width:100%;
-	float:none;
-	clear:both;
-}
+/**************
+ Content
+ **************/
+	#content{
+		float: left;
+		color: #485052;
+		background: #000;
+		width: 833px;
+		min-height: 308px;
+		margin-left: 8px;
+	}
 
-.event{
-	font-size:12px;
-	width:100%;
-	font-weight:bold;
-	background-color: #DDEEFF;
-	margin-bottom: 1px;
-	cursor:help;
-}
-.eventRA{
-	font-size:12px;
-	width:100%;
-	font-weight:bold;
-	text-align:right;
-	background-color: #DDEEFF;
-	margin-bottom: 1px;
-	cursor:help;
-}
+	#content, #content .sb-inner { background:#FFF; padding: 2px}
+	#content .sb-border { background:#000; }
 
-.eventExtDesc{
-	color: #777;
-	background-color: #FFF;
-	font-size:12px;
-	margin-bottom: 1px;
-	width:100%;
-}
+	#contentHd, #contentHd .sb-inner{
+		background: #000;
+		color: #fff;
+	}
 
-.bgMain{
-	background-color: #FFF;
-	width: 100%;
-}
-.sListHeader{
-	font-size: 14px;
-	font-weight: bold;
-	color: #FFF;
-	float:left;
-	width:50%;
-}
-.sListSearch{
-	font-size: 14px;
-	float:left;
-	width:50%;
-	text-align: right;
-	margin: 0 0 0 0;
-}
+	#epgSearch{ width: 120px; }
+	
+	.boxContent{
+		padding: 3px;	
+	}
+	
+/*****************
+* Subnavigation
+******************/	
+	.navTable{
+		width: 100%;
+	}
+	
+	.navTable a, .navTable a:visited, .navTable a:active{
+		color: #485052;
+		text-decoration: none;
+		display: block;
+	}
+	
+	.navTable a:hover{
+		background-color:#CCC;
+		color: #485052;
+		display: block;
+	}
+	
+/*****************
+* ServiceList
+******************/		
+	.sListSName a{
+		display: block;
+		margin-right: 5px;
+		color: #485052;
+	}
+	
+	.sListSName a:hover{
+		background-color:#CCC;
+		color: #485052;
+		display: block;
+	}
+	
+	.sListEPGItem{
+		font-size:12px;
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	.header{
+		padding-top: 2px;
+		padding-left: 4px;
+		padding-right: 4px;
+		display:block;
+		height: 22px;
+	}
 
-.sListTh{
-	height: 30px;
-	background: url(gfx/banner_30.png);	
-	vertical-align: middle;
-}
+	#container {
+		margin: 0 auto;   /* align for good browsers */
+		text-align: left; /* counter the body center */
+		width: 1005px;
+	}
 
-form.sListSearch{
-	text-align: right;
-}
-.sListSName{
-	font-size: 14px;
-	font-weight: bold;
-	float:left;
-	width:661px;
-}
+	#contentTable{
+		scrollbar: auto;
+		width: 785px;
+	}
+	
+	#contentTable div{
+		width: auto;
+		overflow: auto;
+	}
 
-span.sListSLink{
-	display: block;
-	width: 656px;
-	height: 100%;
-	text-decoration: none;
-}
+	#contentMain{
+		padding: 8px;
+		margin-bottom: 5px;
+	}
 
-span.sListSLink:hover, span.sListSLink.hover{
-	background-color: #DDD;
-}
+	#contentMain {
+		clear: both;
+		/*overflow-x: hidden;*/
+		overflow-y: auto;
+		width: 815px;
+	}
 
-.sListExt{
-	border-left: 1px solid #CCC;
-	float:left;
-	width:90px;
-	text-align: right;
-}
-.sListEPGTime{
-	float:left;
-	width:60px;
-	text-align: left;
-}
-.sListEPGTitle{
-	border-left: 1px solid #CCC;
-	border-right: 1px solid #CCC;
-	float: left;
-	width:600px; 
-	text-align: left;
-}
-.sListEPGDuration{
-	float:left;
-	width:75px;
-	text-align: right;
-}
-.tListSName{
-	width: 180px;
-	text-align: left;
-}
-.tListTitle{
-	width: 150px;
-	text-align: left;
-}
-.tListDescr{
-	width: 150px;
-	text-align: left;
-}
-.tListRepeat{
-	width: 70px;
-	text-align: left;
-}
-.tListDuration{
-	width: 70px;
-	text-align: left;
-}
-.tListBegin{
-	width: 100px;
-	text-align: left;
-}
-.tListEnd{
-	width: 100px;
-	text-align: left;
-}
-.tListAfter{
-	width: 85px;
-	text-align: left;
-}
-.tListOption{
-	width: 80px;
-	text-align: center;
-}
-#TimerColor0 {
-	color: #000000;
-}
-#TimerColor1 {
-	color: #00BCBC;
-	background-color: #DDD;
-}
-#TimerColor2 {
-	color: #9F1919;
-	background-color: #DDD;
-}
-#TimerColor3 {
-	color: #00BCBC;
-	background-color: #DDD;
-}
+	/*
+	html>body #contentMain div{
+		overflow: hidden;
+		width: 785px;
+	}
+*/
+	#contentMain div table {
+		float: left;
+		width: 799px;
+	}
+	
+	.sListItem{
+		/*border-bottom: 2px solid #CCC;*/
+		width: 780px;
+	}
 
-.pageHeader {
-	width:100%;
-	height: 30px;
-	background: url(gfx/banner_30.png);
-	color: #FFF;
-	font-weight:bold;
-}
+/*****************
+* ServiceList EPG
+******************/		
+	.epgStart{
+		width: 50px;		
+	}
+	
+	.epgTitle{
+		width: 680px;
+	}
+	
+	.epgLength{
+		width: 50px;
+		text-align: right;
+	}
+	
+	
+/*****************
+* MovieList EPG
+******************/	
+	.mListDetail{
+		font-size: 12px;
+	}
+	
+	.mStart{
+		width: 160px;		
+	}
+	
+	.mTitle{
+		width: 650px;
+	}
+	
+	.mLength{
+		width: 90px;
+		text-align: right;
+	}
+	
+/*****************
+* About
+******************/	
+	
+	.aboutHeader {
+		width:100%;
+		color:#FFF;
+		font-weight:bold;
+		background-color:#000;
+	}
 
-.aboutHeader {
-	width:100%;
-	color:#444444;
-	font-weight:bold;
-	background-color:#DDEEFF;
-}
+	.about {
+		border: 1px solid #CCC;
+		width: 100%;
+		margin: 0px;
+		padding: 0px;
+	}
 
-.about {
-	border: 1px solid #AAA;
-	width: 100%;
-	font-size: 12px;
-}
+	.aboutSection{
+		width:100%;
+		margin: 0 0 0 0;
+	}
 
-.fullwidth {
-	width: 100%;
-}
+	.aboutSectionLeft{
+		width:50%;
+		vertical-align: top;
+	}
 
-.aboutSection{
-	width:100%;
-	margin: 0 0 0 0;
-}
+	.aboutSectionRight{
+		width:50%;
+		vertical-align: top;
+	}
 
-.aboutSectionLeft{
-	width:50%;
-	vertical-align: top;
-}
+	.aboutElement{
+		float: none;
+	}
 
-.aboutSectionRight{
-	width:50%;
-	vertical-align: top;
-}
+	.aboutElementLeft{
+		font-weight:bold;
+		width: 50%;
+		text-align: left;
+	}
 
-.aboutElement{
-	float: none;
-}
+	.aboutElementRight{
+		width: 50%;
+	}
+	
+	.w200h50{
+		width: 200px;
+		height: 50px;
+	}
+	
+	
+/*****************
+* Timer
+******************/		
+	.tListItemTable{
+		width: 100%;
+	}
 
-.aboutElementLeft{
-	font-weight:bold;
-	width: 50%;
-	text-align: left;
-}
+	.tListHead{
+		/*background-color: #DDD; */
+	}
 
-.aboutElementRight{
-	width: 50%;
-}
+	.tListSName{
+		text-align: left;
+	}
 
-/* movielist */
-.movieListName{
-	font-size: 14px;
-	font-weight: bold;
-	float:left;
-	width:661px;
-	cursor:help;
-}
-.movieListExt{
-	border-left: 1px solid #CCC;
-	float:left;
-	width:90px;
-	text-align: right;
-}
-
-.movieDetails {
-	border: 1px solid #AAA;
-	width: 100%;
-	font-size: 12px;
-}
-
-.movieElementRight{
-	width: 1%;
-}
-
-.movieElementLeft{
-	font-weight:bold;
-	width: 99%;
-	text-align: left;
-}
+	.tListItem{
+/*		background-color: #EEE; */
+		font-weight: bold;
+		font-size: 12px;
+	}
+	
+	.tListTitle{
+		width: 150px;
+		text-align: left;
+	}
+	
+	.tListDescr{
+		width: 150px;
+		text-align: left;
+	}
+	
+	.tListRepeat{
+		width: 70px;
+		text-align: left;
+	}
+	
+	.tListDuration{
+		width: 70px;
+		text-align: left;
+	}
+	
+	.tListBegin{
+		width: 100px;
+		text-align: left;
+	}
+	
+	.tListEnd{
+		width: 100px;
+		text-align: left;
+	}
+	
+	.tListAfter{
+		width: 85px;
+		text-align: left;
+	}
+	
+	.tListOption{
+		width: 80px;
+		text-align: center;
+	}
+	
+	.timerState0 {
+		color: #485052;
+	}
+	
+	.timerState1 {
+		color: #00BCBC;
+	}
+	
+	.timerState2 {
+		color: #990000;
+	}
+	
+	.timerState3 {
+		color: #000099;		
+	}
+	
+/*****************
+* EPG List
+******************/			
+	.epgListItem{
+		font-size:12px;
+	}

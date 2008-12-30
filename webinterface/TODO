@@ -1,0 +1,6 @@
+* Finish "Current Service" Stuff
+* Decide whether the MediaPlayer Menu should stay and if how.
+* Add Support for Multiple NICs in About
+* add box dependent remote control picture (for dm8000)
+* rename "extra" to "boxcontrol"
+* add new button "info" and move "about" from "extra" to "info"

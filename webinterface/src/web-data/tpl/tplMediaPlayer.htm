@@ -1,0 +1,53 @@
+<table id="contentTable">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" border="1">
+				<thead>
+					<tr>
+						<th>
+							<div class="sListHeader">MediaPlayer ${mp.root}
+								<map name="mpcontrols">
+								<area shape="circle" coords="17, 17, 14" nohref onclick="sendMediaPlayer('back')" alt="jump back">
+								<area shape="circle" coords="54, 17, 14" nohref onclick="sendMediaPlayer('play')" alt="play">
+								<area shape="circle" coords="88, 17, 14" nohref onclick="sendMediaPlayer('pause')" alt="pause">
+								<area shape="circle" coords="125, 17, 14" nohref onclick="sendMediaPlayer('next')" alt="jump forward">
+								<area shape="circle" coords="161, 17, 14" nohref onclick="sendMediaPlayer('stop')" alt="stop">
+								</map><img src="/webdata/gfx/dvr-buttons-small-fs8.png" align="top" title="Control MediaPlayer" border="0" usemap="#mpcontrols">
+								<!--  <img src="/webdata/gfx/edit.gif" onclick="openMediaPlayerPlaylist()">
+								 still need some work for editing --> 
+							</div>
+							<div class="sListSearch">
+								<img src="/webdata/gfx/nok.png" align="top" title="Close MediaPlayer" border="0" onclick="sendMediaPlayer('exit')">
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{for item in items}
+					<tr>
+						<!-- ItemBody -->
+						<td>
+							<div style="color: #${item.color};" onclick="${item.exec}('${item.servicereference}','${item.root}');" class="sListSName" title="${item.servicereference}">${item.name}</div>
+						</td>
+						<td>
+							{if item.isdir == "false"}							
+							<div class="sListExt">
+								<img src="/webdata/gfx/play.png" onclick="${item.exec}('${item.servicereference}','${item.root}');" title="${item.exec_description}" border="0">
+								<a target="_blank" href="/file/?file=${item.name}&root=${item.root}"><img src="/webdata/gfx/save.png" title="Download File" border="0"></a>
+							</div>
+							{/if}
+						</td>
+					</tr>
+					{forelse}
+					<tr>
+						<td>Nothing to Display</td>
+					</tr>
+					{/for}
+					<tr>
+						<td colspan="7"><button onclick="writePlaylist()">Write Playlist</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</td>
+	</tr>
+</table>

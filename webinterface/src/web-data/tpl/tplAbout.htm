@@ -1,0 +1,174 @@
+
+						<table id="contentTable">
+							<tr>
+								<td>
+									<table cellspacing="0" cellpadding="0" class="aboutSection">
+										<tr>
+											<td class="aboutSectionLeft">
+												<table class="fullwidth">
+													<tr>
+														<td class="fullwidth">
+															<table cellspacing="0" class="about">
+																<tr>
+																	<th colspan="2" class="aboutHeader">Hard- & Software</th>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Box Model:</td>
+																	<td class="aboutElementRight">${about.model}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Enigma Version:</td>
+																	<td class="aboutElementRight">${about.enigmaVersion}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Frontprozessor Version:</td>
+																	<td class="aboutElementRight">${about.fpVersion}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Webinterface Version:</td>
+																	<td class="aboutElementRight">${about.webifversion}</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+													<tr>
+														<td class="fullwidth">
+															<table cellspacing="0" class="about">
+																<tr>
+																	<th colspan="2" class="aboutHeader">Detected Tuners</th>
+																</tr>
+																{for t in tuner}
+																<tr>
+																	<td class="aboutElementLeft">${t.name}:</td>
+																	<td class="aboutElementRight">${t.type}</td>
+																</tr>
+																{/for}
+															</table>
+														</td>
+													</tr>
+													<tr>
+														<td class="fullwidth">
+															<table cellspacing="0" class="about">
+																<tr>
+																	<th colspan="2" class="aboutHeader">Harddisk</th>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Model:</td>
+																	<td class="aboutElementRight">${about.hddmodel}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Capacity:</td>
+																	<td class="aboutElementRight">${about.hddcapacity}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Free:</td>
+																	<td class="aboutElementRight">${about.hddfree}</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+													<tr>
+														<td class="fullwidth">
+															<table cellspacing="0" class="about">
+																<tr>
+																	<th colspan="2" class="aboutHeader">Internal Network</th>
+																</tr>																													<tr>
+																	<td class="aboutElementLeft">Mac Address:</td>
+																	<td class="aboutElementRight">${about.lanMac}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">DHCP enabled:</td>
+																	<td class="aboutElementRight">${about.lanDHCP}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">IP:</td>
+																	<td class="aboutElementRight">${about.lanIP}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Netmask:</td>
+																	<td class="aboutElementRight">${about.lanNetmask}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Gateway:</td>
+																	<td class="aboutElementRight">${about.lanGateway}</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+											</td>
+											<td class="aboutSectionRight">
+												<table class="fullwidth">
+													<tr>
+														<td class="fullwidth">
+															<table cellspacing="0" class="about">
+																<tr>
+																	<th colspan="2" class="aboutHeader">Serviceinfo</th>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Name:</td>
+																	<td class="aboutElementRight">${about.serviceName}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Provider:</td>
+																	<td class="aboutElementRight">${about.serviceProvider}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Videoformat:</td>
+																	<td class="aboutElementRight">${about.serviceAspect}</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">Videosize:</td>
+																	<td class="aboutElementRight">${about.serviceVideosize}</td>
+																</tr>
+															</table>
+														</td>
+													</tr>	 
+													<tr>
+														<td class="fullwidth">
+															<table cellspacing="0" class="about">
+																<tr>
+																	<th colspan="2" class="aboutHeader">Pids</th>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">VideoPid:</td>
+																	<td class="aboutElementRight">${about.vPidh} (${about.vPid}d)</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">AudioPid:</td>
+																	<td class="aboutElementRight">${about.aPidh} (${about.aPid}d)</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">PCRPid:</td>
+																	<td class="aboutElementRight">${about.pcrPidh} (${about.pcrPid}d)</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">PMTPid:</td>
+																	<td class="aboutElementRight">${about.pmtPidh} (${about.pmtPid}d)</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">TXTPid:</td>
+																	<td class="aboutElementRight">${about.txtPidh} (${about.txtPid}d)</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">TSID:</td>
+																	<td class="aboutElementRight">${about.tsidh} (${about.tsid}d)</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">ONID:</td>
+																	<td class="aboutElementRight">${about.onIDh} (${about.onid}d)</td>
+																</tr>
+																<tr>
+																	<td class="aboutElementLeft">SID:</td>
+																	<td class="aboutElementRight">${about.sidh} (${about.sid}d)</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</tr>
+							</td>
+						</table>

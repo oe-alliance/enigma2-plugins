@@ -1,0 +1,46 @@
+
+						<table id="contentTable" style="width: 100%;">
+							{for t in timer}
+							<tr style="width:100%;">
+								<td style="width:100%;">									
+									<table class="timerState${t.state} tListItemTable ${t.cssclass}" border="0" cellpadding="0" cellspacing="0">				
+										<tr class="tListHead">
+											<td colspan="4" rowspan="1" class="tListSName" title="${t.description}, ${t.descriptionextended}">${t.title} (${t.servicename})</td>											
+										</tr>
+										<tr class="tListItem">
+											<td colspan="1" rowspan="1" class="tListRepeat">${t.repeatedReadable}</td>
+											<td colspan="1" rowspan="1" class="tListBegin">${t.beginDate}</td>												
+											<td colspan="1" rowspan="1" class="tListType">${t.justplayReadable}</td>						
+											<td colspan="1" rowspan="2" class="tListOption">
+												<a target="_blank" >
+													<img src="/webdata/img/delete.png" title="Delete timer ${t.title}" border="0" onclick="delTimer('${t.servicereference}','${t.begin}','${t.end}','${t.servicename}','${t.title}','${t.description}',incomingTimerDelResult);">
+												</a>
+												<a target="_blank" >
+													<img src="/webdata/img/${t.onOff}.png" title="${t.enDis} ${t.title}" border="0" onclick="sendToggleTimerDisable('${t.justplay}','${t.begin}','${t.end}','${t.repeated}','${t.servicereference}','${t.title}','${t.description}','${t.afterevent}','${t.disabled}' );">
+												</a>
+												<a target="_blank" >
+													<img src="/webdata/img/edit.png" title="Edit timer ${t.title}" border="0" onclick="loadTimerFormSeconds('${t.justplay}','${t.begin}','${t.end}','${t.repeated}','${t.servicereference}','${t.servicename}','${t.title}','${t.description}','${t.afterevent}',1);">
+												</a>
+											</td>	
+										</tr>
+										<tr class="tListItem">						
+											<td class="tListDuration">${t.duration}&nbsp;Min</td>
+											<td class="tListEnd">${t.endDate}</td>												
+											<td class="tListAfter">${t.aftereventReadable}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{forelse}
+							<tr style="width:100%;">
+								<td>No Timers Available!</td>
+							</tr>
+							{/for}
+										
+							<tr style="width:100%;">
+								<td colspan="7"><button onclick="writeTimerListNow()">Write To Memory</button></td>
+							</tr>
+							<tr style="width:100%;">
+								<td colspan="7"><button onclick="cleanTimerListNow()">Cleanup</button></td>
+							</tr>
+						</table>

@@ -61,55 +61,55 @@ class WebScreen(Screen):
 
 class DummyWebScreen(WebScreen):
 	#use it, if you dont need any source, just to can do a static file with an xml-file
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 
 class UpdateWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["CurrentTime"] = Clock()
 		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 
 class MessageWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["Message"] = Message(session,func = Message.PRINT)
 		self["GetAnswer"] = Message(session,func = Message.ANSWER)
 		
 class ServiceListReloadWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["ServiceListReload"] = ServiceListReload(session)
 		
 class AudioWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["AudioTracks"] = AudioTracks(session, func=AudioTracks.GET)
 		self["SelectAudioTrack"] = AudioTracks(session, func=AudioTracks.SET)	
 
 class AboutWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["About"] = About(session)
 		
 class VolumeWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["Volume"] = Volume(session)
 
 class SettingsWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["Settings"] = Settings(session)
 
 class SubServiceWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["SubServices"] = SubServices(session)
 
 class ServiceWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 
 		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["SwitchService"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
@@ -134,16 +134,16 @@ class ServiceWebScreen(WebScreen):
 		"""
 
 class EPGWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
 		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
 		self["EPGNOW"] = EPG(session,func=EPG.NOW)
 		self["EPGNEXT"] = EPG(session,func=EPG.NEXT)
 
 class MovieWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		from Components.MovieList import MovieList
 		from Tools.Directories import resolveFilename,SCOPE_HDD
 		movielist = MovieList(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD)))
@@ -152,27 +152,27 @@ class MovieWebScreen(WebScreen):
 		self["MovieTags"] = Movie(session,movielist,func = Movie.TAGS)
 
 class MediaPlayerWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["FileList"] = MP(session,func = MP.LIST)
 		self["PlayFile"] = MP(session,func = MP.PLAY)
 		self["Command"] = MP(session,func = MP.COMMAND)
 		self["WritePlaylist"] = MP(session,func = MP.WRITEPLAYLIST)
 		
 class AutoTimerWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["AutoTimerList"] = AT(session,func = AT.LIST)
 		self["AutoTimerWrite"] = AT(session,func = AT.WRITE)
 
 class FilesWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["DelFile"] = Files(session,func = Files.DEL)
 		
 class TimerWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["TimerList"] = Timer(session,func = Timer.LIST)
 		self["TimerAddEventID"] = Timer(session,func = Timer.ADDBYID)
 		self["TimerAdd"] = Timer(session,func = Timer.ADD)
@@ -183,23 +183,23 @@ class TimerWebScreen(WebScreen):
 		self["RecordNow"] = Timer(session,func = Timer.RECNOW)
 
 class RemoteWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["RemoteControl"] = RemoteControl(session)
 
 class PowerWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["PowerState"] = PowerState(session)
 
 class ParentControlWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["ParentControlList"] = ParentControl(session)
 				
 class WAPWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		self["WAPFillOptionListSyear"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListSday"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListSmonth"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
@@ -224,14 +224,14 @@ class WAPWebScreen(WebScreen):
 		self["WAPdeleteOldOnSave"] = WAPfunctions(session,func = WAPfunctions.DELETEOLD)
 	
 class StreamingWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		from Components.Sources.StreamService import StreamService
 		self["StreamService"] = StreamService(self.session.nav)
 
 class M3UStreamingWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		from Components.Sources.StaticText import StaticText
 		from Components.Sources.Config import Config
 		from Components.config import config
@@ -239,8 +239,8 @@ class M3UStreamingWebScreen(WebScreen):
 		self["localip"] = RequestData(request,what=RequestData.HOST)
 
 class TsM3U(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		from Components.Sources.StaticText import StaticText
 		from Components.Sources.Config import Config
 		from Components.config import config
@@ -248,14 +248,14 @@ class TsM3U(WebScreen):
 		self["localip"] = RequestData(request,what=RequestData.HOST)
 
 class RestartWebScreen(WebScreen):
-	def __init__(self, session,request):
-		WebScreen.__init__(self, session,request)
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		import plugin
 		plugin.restartWebserver()
 		
 class GetPid(WebScreen):
-      def __init__(self, session,request):
-         WebScreen.__init__(self, session,request)
+      def __init__(self, session, request):
+         WebScreen.__init__(self, session, request)
          from Components.Sources.StaticText import StaticText
          from enigma import iServiceInformation
          pids = self.session.nav.getCurrentService()

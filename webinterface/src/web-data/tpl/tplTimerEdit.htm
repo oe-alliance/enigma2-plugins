@@ -1,0 +1,151 @@
+
+						<table id="contentTable">
+							<tr>
+								<td>
+									<table>
+										<tr>
+											<td colspan="3">Action:</td>
+											<td colspan="3">
+												<select name="justplay" id="justplay" size="1">
+													{for a in action}
+													<option value="${a.value}" ${a.selected}>${a.txt}</option>
+													{/for}
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3">&nbsp;</td>
+											<td colspan="3">Note: For recurring events start/end day/month are not required.</td>
+										</tr>
+										<tr>
+											<td colspan="3">Start:</td>
+											<td colspan="3">
+												<select name="syear" size="1" id="syear" onchange="javascript:addTimerFormChangeTime('syear');">
+													{for year in syear}
+													<option value="${year.value}" ${year.selected}>${year.txt}</option>
+													{/for}
+												</select>
+												. 
+												<select name="smonth" id="smonth" size="1" onchange="javascript:addTimerFormChangeTime('smonth');">
+													{for month in smonth}
+													<option value="${month.value}" ${month.selected}>${month.txt}</option>
+													{/for}
+												</select>
+												.
+												<select name="sday" id="sday" size="1" onchange="javascript:addTimerFormChangeTime('sday');">
+													{for day in sday}
+													<option value="${day.value}" ${day.selected}>${day.txt}</option>
+													{/for}
+												</select>
+												&nbsp;-&nbsp;
+												<select name="shour" id="shour" size="1" onchange="javascript:addTimerFormChangeTime('shour');">
+													{for hour in shour}
+													<option value="${hour.value}" ${hour.selected}>${hour.txt}</option>
+													{/for}
+												</select>
+												:
+												<select name="smin" id="smin" size="1" onchange="javascript:addTimerFormChangeTime('smin');">
+													{for min in smin}
+													<option value="${min.value}" ${min.selected}>${min.txt}</option>
+													{/for}
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3">End:</td>
+											<td colspan="3">
+												<select name="eyear" id="eyear" size="1" onchange="javascript:addTimerFormChangeTime('eyear');">
+													{for year in eyear}
+													<option value="${year.value}" ${year.selected}>${year.txt}</option>
+													{/for}
+												</select>
+												.
+												<select name="emonth" id="emonth" size="1" onchange="javascript:addTimerFormChangeTime('emonth');">
+													{for month in emonth}
+													<option value="${month.value}" ${month.selected}>${month.txt}</option>
+													{/for}
+												</select>
+												.
+												<select name="eday" id="eday" size="1" onchange="javascript:addTimerFormChangeTime('eday');">
+													{for day in eday}
+													<option value="${day.value}" ${day.selected}>${day.txt}</option>
+													{/for}
+												</select>
+												&nbsp;-&nbsp;
+												<select name="ehour" id="ehour" size="1" onchange="javascript:addTimerFormChangeTime('ehour');">
+													{for hour in ehour}
+													<option value="${hour.value}" ${hour.selected}>${hour.txt}</option>
+													{/for}
+												</select>
+												:
+												<select name="emin" id="emin" size="1" onchange="javascript:addTimerFormChangeTime('emin');">
+													{for min in emin}
+													<option value="${min.value}" ${min.selected}>${min.txt}</option>
+													{/for}
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3">&nbsp;</td>
+											<td colspan="3">Note: For one-time events the "days" field doesn't have to be specified.</td>
+										</tr>
+										<tr>
+											<td colspan="3">Days:</td>
+											<td colspan="3">
+												{for r in repeated}
+												<input type="checkbox" id="${r.id}" name="${r.name}" value="${r.value}" ${r.checked}>&nbsp;${r.txt}&nbsp;&nbsp;
+												{/for}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3">Channel:</td>
+											<td>
+												<p><input type="radio" id="tvradio" name="tvradio" value="tv" checked onchange="javascript:addTimerFormChangeType();">TV</p>
+												<p><input type="radio" name="tvradio" value="radio" onchange="javascript:addTimerFormChangeType();">Radio</p>
+											<td>
+												<p>Channel:</p>
+												<select name="channel" id="channel" size="1" onchange="timerFormExtendChannellist($('channel').options[$('channel').selectedIndex].value)">
+													{for c in channel}
+													<option value="${c.value}" ${c.selected}>${c.txt}</option>
+													{/for}	
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3">Name:</td>
+											<td colspan="3">
+												<input name="name" id="name" type="text" size="100" maxlength="100" style="color: #000000;" value="${timer.name}">
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3">Description:</td>
+											<td colspan="3">
+												<input name="descr" id="descr" type="text" size="100" maxlength="100" style="color: #000000;" value="${timer.description}">
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3">After event do:</td>
+											<td colspan="3">
+												<select id="after_event" name="after_event" size="1">
+													{for event in afterEvent}
+													<option value="${event.value}" ${event.selected}>${event.txt}</option>
+													{/for}
+												</select>
+											</td>
+										</tr>
+										<tr><td>&nbsp;&nbsp;</td></tr>
+										<tr>
+											<td colspan="3">&nbsp;</td><td colspan="3">
+												<input name="deleteOldOnSave" id="deleteOldOnSave" type="hidden" value="${timer.deleteOldOnSave}">
+												<input name="channelOld" id="channelOld" type="hidden" value="${timer.channelOld}">
+												<input name="beginOld" id="beginOld" type="hidden" value="${timer.beginOld}">
+												<input name="endOld" id="endOld" type="hidden" value="${timer.endOld}">
+												<input name="eventID" id="eventID" type="hidden" value="${timer.eventID}">
+												<button onclick="sendAddTimer();">Add/Save</button>
+											</td>
+										</tr>
+									</table>
+								</tr>
+							</td>
+						</table>
+							

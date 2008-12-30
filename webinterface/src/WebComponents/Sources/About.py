@@ -35,6 +35,7 @@ class About( Source):
             return retstr
 
         iface = "eth0"
+        list.append(iNetwork.getAdapterAttribute(iface, "mac"))
         list.append(iNetwork.getAdapterAttribute(iface, "dhcp"))
         list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "ip")))
         list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "netmask")))
@@ -153,26 +154,27 @@ class About( Source):
     
     list = property(command)
     lut = {"enigmaVersion": 0
-           ,"lanDHCP": 1
-           ,"lanIP": 2
-           ,"lanMask": 3
-           ,"lanGW": 4
-           ,"fpVersion": 5
-           ,"tunerInfo": 6
-           ,"hddInfo": 7
-           ,"serviceName": 8
-           ,"serviceProvider": 9
-           ,"serviceAspect": 10
-           ,"serviceVideosize": 11
-           ,"serviceNamespace": 12
-           ,"vPID": 13
-           ,"aPID": 14
-           ,"pcrID": 15
-           ,"pmtPID": 16
-           ,"txtPID": 17
-           ,"tsID": 18
-           ,"onID": 19
-           ,"sid": 20
-           ,"WebIfVersion": 21
-           ,"model": 22
+           ,"lanMac": 1
+           ,"lanDHCP": 2
+           ,"lanIP": 3
+           ,"lanMask": 4
+           ,"lanGW": 5
+           ,"fpVersion": 6
+           ,"tunerInfo": 7
+           ,"hddInfo": 8
+           ,"serviceName": 9
+           ,"serviceProvider": 10
+           ,"serviceAspect": 11
+           ,"serviceVideosize": 12
+           ,"serviceNamespace": 13
+           ,"vPID": 14
+           ,"aPID": 15
+           ,"pcrID": 16
+           ,"pmtPID": 17
+           ,"txtPID": 18
+           ,"tsID": 19
+           ,"onID": 20
+           ,"sid": 21
+           ,"WebIfVersion": 22
+           ,"model": 23
            }

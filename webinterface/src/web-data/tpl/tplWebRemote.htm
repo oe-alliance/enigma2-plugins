@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+		<title>Enigma2 Webremote</title>
+		
+		<script type="text/javascript" src="/webdata/lib/prototype-1.6.0.2.js"></script>
+	</head>
+	<body>
+			<center>
+				Get a Screenshoot&nbsp;<input type="checkbox" id="getScreen" name="getScreen" checked><br>
+				Grab Picture & OSD&nbsp;<input type="checkbox" id="getVideo" name="getVideo"><br>
+			</center>
+			<br>
+	<!--<center><input type="checkbox" id="getScreen" name="getScreen" checked>&nbsp;Show Screenshot</center><br>-->
+		<map name="remotecontrol">
+			<area shape="circle" coords="129, 54, 10" nohref onclick="opener.sendRemoteControlRequest(116)" alt="Power">
+			<area shape="circle" coords="130, 95, 15" nohref onclick="opener.openGrabPicture()" alt="TV Screenshot">
+			<area shape="circle" coords="63, 123, 10" nohref onclick="opener.sendRemoteControlRequest(2)" alt="1">
+			<area shape="circle" coords="109, 123, 10" nohref onclick="opener.sendRemoteControlRequest(3)" alt="2">
+			<area shape="circle" coords="153, 123, 10" nohref onclick="opener.sendRemoteControlRequest(4)" alt="3">
+			<area shape="circle" coords="63, 148, 10" nohref onclick="opener.sendRemoteControlRequest(5)" alt="4">
+			<area shape="circle" coords="109, 148, 10" nohref onclick="opener.sendRemoteControlRequest(6)" alt="5">
+			<area shape="circle" coords="153, 148, 10" nohref onclick="opener.sendRemoteControlRequest(7)" alt="6">
+			<area shape="circle" coords="63, 173, 10" nohref onclick="opener.sendRemoteControlRequest(8)" alt="7">
+			<area shape="circle" coords="109, 173, 10" nohref onclick="opener.sendRemoteControlRequest(9)" alt="8">
+			<area shape="circle" coords="153, 173, 10" nohref onclick="opener.sendRemoteControlRequest(10)" alt="9">
+			<area shape="circle" coords="63, 197, 10" nohref onclick="opener.sendRemoteControlRequest(412)" alt="previous">
+			<area shape="circle" coords="109, 197, 10" nohref onclick="opener.sendRemoteControlRequest(11)" alt="0">
+			<area shape="circle" coords="153, 197, 10" nohref onclick="opener.sendRemoteControlRequest(407)" alt="next">
+			<area shape="circle" coords="54, 243, 15" nohref onclick="opener.sendRemoteControlRequest(115)" alt="volume up">
+			<area shape="circle" coords="107, 233, 10" nohref onclick="opener.sendRemoteControlRequest(113)" alt="mute">
+			<area shape="circle" coords="159, 243, 15" nohref onclick="opener.sendRemoteControlRequest(402)" alt="bouquet up">
+			<area shape="circle" coords="66, 274, 15" nohref onclick="opener.sendRemoteControlRequest(114)" alt="volume down">
+			<area shape="circle" coords="107, 258, 10" nohref onclick="opener.sendRemoteControlRequest(174)" alt="lame">
+			<area shape="circle" coords="147, 274, 15" nohref onclick="opener.sendRemoteControlRequest(403)" alt="bouquet down">
+			<area shape="circle" coords="48, 306, 10" nohref onclick="opener.sendRemoteControlRequest(358)" alt="info">
+			<area shape="circle" coords="106, 310, 15" nohref onclick="opener.sendRemoteControlRequest(103)" alt="up">
+			<area shape="circle" coords="167, 306, 10" nohref onclick="opener.sendRemoteControlRequest(139)" alt="menu">
+			<area shape="circle" coords="70, 343, 15" nohref onclick="opener.sendRemoteControlRequest(105)" alt="left">
+			<area shape="circle" coords="108, 340, 15" nohref onclick="opener.sendRemoteControlRequest(352)" alt="OK">
+			<area shape="circle" coords="146, 343, 15" nohref onclick="opener.sendRemoteControlRequest(106)" alt="right">
+			<area shape="circle" coords="53, 381, 10" nohref onclick="opener.sendRemoteControlRequest(392)" alt="audio">
+			<area shape="circle" coords="106, 374, 15" nohref onclick="opener.sendRemoteControlRequest(108)" alt="down">
+			<area shape="circle" coords="162, 381, 10" nohref onclick="opener.sendRemoteControlRequest(393)" alt="video">
+			<area shape="circle" coords="56, 421, 10" nohref onclick="opener.sendRemoteControlRequest(398)" alt="red">
+			<area shape="circle" coords="90, 422, 10" nohref onclick="opener.sendRemoteControlRequest(399)" alt="green">
+			<area shape="circle" coords="123, 422, 10" nohref onclick="opener.sendRemoteControlRequest(400)" alt="yellow">
+			<area shape="circle" coords="158, 421, 10" nohref onclick="opener.sendRemoteControlRequest(401)" alt="blue">
+			<area shape="circle" coords="61, 460, 10" nohref onclick="opener.sendRemoteControlRequest(377)" alt="tv">
+			<area shape="circle" coords="90, 461, 10" nohref onclick="opener.sendRemoteControlRequest(385)" alt="radio">
+			<area shape="circle" coords="123, 461, 10" nohref onclick="opener.sendRemoteControlRequest(388)" alt="text">
+			<area shape="circle" coords="153, 460, 10" nohref onclick="opener.sendRemoteControlRequest(138)" alt="help">
+		</map>
+		<img src="/webdata/gfx/remotecontrol.jpg" height="607" width="220" border="0)" alt="Remote Control" usemap="#remotecontrol">
+
+	</body>
+</html>

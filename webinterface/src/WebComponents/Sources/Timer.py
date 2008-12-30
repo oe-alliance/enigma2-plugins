@@ -283,11 +283,10 @@ class Timer( Source):
         event = epgcache.lookupEventId(eServiceReference(param['sRef']),int(param['eventid']))
         if event is None:
             return False,"Eventid not found"
-        (begin, end, name, description, eit) =parseEvent(event)
+        (begin, end, name, description, eit) = parseEvent(event)
         
-        print "addTimerByEventID newtimer ",param['sRef'], (begin - (int(config.recording.margin_before.value)*60)), (end + (int(config.recording.margin_after.value)*60)), name, description, eit, False, justplay
-        newtimer = RecordTimerEntry(ServiceReference(param['sRef']), (begin - (int(config.recording.margin_before.value)*60)), (end + (int(config.recording.margin_after.value)*60)), name, description, eit, False, justplay, AFTEREVENT.NONE)
-                        #RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent)
+        print "addTimerByEventID newtimer ", param['sRef'], begin, end, name, description, eit, False, justplay
+        newtimer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.NONE)                        
                 
         self.recordtimer.record(newtimer)
         return True,"Timer added"    

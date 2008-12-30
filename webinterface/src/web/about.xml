@@ -3,6 +3,7 @@
 	&lt;e2about>
 		&lt;e2enigmaversion><e2:item name="enigmaVersion" filter="xml"/>&lt;/e2enigmaversion>
 
+		&lt;e2lanmac><e2:item name="lanMac" filter="xml"/>&lt;/e2lanmac>
 		&lt;e2landhcp><e2:item name="lanDHCP" filter="xml"/>&lt;/e2landhcp>
 		&lt;e2lanip><e2:item name="lanIP" filter="xml"/>&lt;/e2lanip>
 		&lt;e2lanmask><e2:item name="lanMask" filter="xml"/>&lt;/e2lanmask>

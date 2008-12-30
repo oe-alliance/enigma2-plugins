@@ -1,36 +1,30 @@
 // $Header$
 
 // TimerEdit variables:
-var addTimerEditFormObject = new Object();
-addTimerEditFormObject["TVListFilled"] = 0;
-addTimerEditFormObject["RadioListFilled"] = 0;
-addTimerEditFormObject["deleteOldOnSave"] = 0;
-addTimerEditFormObject["eventID"] = 0;
-days = [];
-days[0] = 'mo';
-days[1] = 'tu';
-days[2] = 'we';
-days[3] = 'th';
-days[4] = 'fr';
-days[5] = 'sa';
-days[6] = 'su';
+var addTimerEditFormArray = [];
+addTimerEditFormArray.TVListFilled = 0;
+addTimerEditFormArray.RadioListFilled = 0;
+addTimerEditFormArray.deleteOldOnSave = 0;
+addTimerEditFormArray.eventID = 0;
+
+days = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
 // Timer
 function addTimerByID(sRef,eventID,justplay){
 	if(parentPin(sRef)) {
-		debug("addTimerByID\neventID: "+eventID);
+		debug("[addTimerByID] eventID: "+eventID);
 		doRequest(url_timeraddbyeventid+"?sRef="+sRef+"&eventid="+eventID+"&justplay="+justplay, incomingTimerAddResult, false);	
 	}
 }
 function incomingTimerAddResult(request){
-	debug("onTimerAdded");
+	debug("[incomingTimerAddResult] called");
 	if(request.readyState == 4){
 		var addresult = new SimpleXMLResult(getXML(request));
 		if(addresult.getState()){
 			//timer was add
 			loadTimerList();
 		}else{
-			messageBox("Timer Error","your Timer could not be added!\nReason: "+addresult.getStateText());
+			messageBox("Timer Error","Your Timer could not be added!\nReason: "+addresult.getStateText());
 		}
 	}		
 }
@@ -41,36 +35,33 @@ function loadTimerList(){
 function incomingTimerList(request){
 	if(request.readyState == 4){
 		var timers = new TimerList(getXML(request)).getArray();
-		debug("have "+timers.length+" timer");
-		var ns_tplTimerListHeader = {
-			'page_title': 'Timerlist',
-			'name1': 'Channel',
-			'name2': 'Name',
-			'repeated': 'Repeated',
-			'duration': 'Time running',
-			'start': 'Start time',
-			'end': 'End time',
-			'event': 'Event',
-			'after_event': 'After event',
-			'options': 'Options'			
-		};
-		listerHtml = RND(tplTimerListHeader, ns_tplTimerListHeader);
-		var aftereventReadable = new Array ('Nothing', 'Standby', 'Deepstandby/Shutdown');
-		var justplayReadable = new Array('record', 'zap');
-		for ( var i = 0; i <timers.length; i++){
+		debug("[incomingTimerList] Got " + timers.length + " timers");
+
+		var aftereventReadable = ['Nothing', 'Standby', 'Deepstandby/Shutdown'];
+		var justplayReadable = ['record', 'zap'];
+		
+		var namespace = [];
+		var cssclass = "even";
+		
+		for ( var i = 0; i < timers.length; i++){
 			var timer = timers[i];
 			var beginDate = new Date(Number(timer.getTimeBegin())*1000);
 			var endDate = new Date(Number(timer.getTimeEnd())*1000);
-			var namespace = { 	
+			
+			var enDis = timer.getToggleDisabledIMG() == "on" ? "Disable Timer" : "Enable Timer";
+			
+			cssclass = cssclass == 'even' ? 'odd' : 'even';
+			
+			namespace[i] = { 	
 				'servicereference': timer.getServiceReference(),
 				'servicename': quotes2html(timer.getServiceName()),
 				'title': quotes2html(timer.getName()),
 				'description': quotes2html(timer.getDescription()),
 				'descriptionextended': quotes2html(timer.getDescriptionExtended()),
 				'begin': timer.getTimeBegin(),
-				'beginDate': beginDate.toLocaleString(),
+				'beginDate': dateToString(beginDate),
 				'end': timer.getTimeEnd(),
-				'endDate': endDate.toLocaleString(),
+				'endDate': dateToString(endDate),
 				'state': timer.getState(),
 				'duration': Math.ceil((timer.getDuration()/60)),
 				'repeated': timer.getRepeated(),
@@ -81,37 +72,22 @@ function incomingTimerList(request){
 				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
 				'disabled': timer.getDisabled(),
 				'onOff': timer.getToggleDisabledIMG(),
-				'color': timer.getColor(),
-				'delTimer_FUNCTION': "delTimer(\'"+timer.getServiceReference()+"\',\'"+timer.getTimeBegin()
-					+"\',\'"+timer.getTimeEnd()+"\',\'"+quotes2html(timer.getServiceName())
-					+"\',\'"+quotes2html(timer.getName())+"\',\'"+quotes2html(timer.getDescription())
-					+"\',incomingTimerDelResult)",
-				'sendToggleTimerDisable_FUNCTION': "sendToggleTimerDisable(\'"+timer.getJustplay()+"\',\'"
-					+timer.getTimeBegin()+"\',\'"+timer.getTimeEnd()+"\',\'"+timer.getRepeated()
-					+"\',\'"+timer.getServiceReference()+"\',\'"+quotes2html(timer.getName())
-					+"\',\'"+quotes2html(timer.getDescription())+"\',\'"+timer.getAfterevent()
-					+"\',\'"+timer.getDisabled()+"\')",
-				'loadTimerFormSeconds_FUNCTION': "loadTimerFormSeconds(\'"+timer.getJustplay()+"\',\'"
-					+timer.getTimeBegin()+"\',\'"+timer.getTimeEnd()+"\',\'"+timer.getRepeated()
-					+"\',\'"+timer.getServiceReference()+"\',\'"+quotes2html(timer.getServiceName())
-					+"\',\'"+quotes2html(timer.getName())
-					+"\',\'"+quotes2html(timer.getDescription())+"\',\'"+timer.getAfterevent()+"\',1)"
-			};
-			listerHtml += RND(tplTimerListItem, namespace);
+				'enDis': timer.getToggleDisabledText(),
+				'cssclass': cssclass
+			};			
 		}
-		listerHtml += tplTimerListFooter;
-		$('BodyContent').innerHTML = listerHtml;
-		setBodyMainContent('BodyContent');
+		data = { timer : namespace };
+		processTpl('tplTimerList', data, 'contentMain');
 	}
 }
 function repeatedReadable(num) {
 	num = Number(num);
-	if(num == 0) {
+	if(num === 0) {
 		return "One Time";
 	}
 	
 	var html = "";
-	var Repeated = new Object();
+	var Repeated = [];
 	Repeated["Mo-Su"] =127;
 	Repeated["Su"] =    64;
 	Repeated["Sa"] =    32;
@@ -123,14 +99,14 @@ function repeatedReadable(num) {
 	Repeated["Mo"] =     1;
 	
 	for(rep in Repeated) {
-		if(rep.toString() != "extend") {
+		if(rep.toString() != 'extend') {
 			var check = Number(Repeated[rep]);
 			if(check <= num) {
 				num -= check;
-				if(html == "") {
+				if(html === '') {
 					html += rep.toString();
 				} else {
-					html = rep.toString()+","+html;
+					html = rep.toString()+','+html;
 				}
 			}
 		}
@@ -139,7 +115,7 @@ function repeatedReadable(num) {
 }
 
 function colorTimerListEntry (state) {
-	if (state == 0) {
+	if (state === 0) {
 		return "000000";
 	} else if(state == 1) {
 		return "00BCBC";
@@ -150,130 +126,128 @@ function colorTimerListEntry (state) {
 	}
 }
 function delTimer(sRef,begin,end,servicename,title,description,readyFunction){
-	debug("delTimer: sRef("+sRef+"),begin("+begin+"),end("+end+"),servicename("+servicename+"),title("+title+"),description("+description+")");
-	Dialog.confirm(
-		"Selected timer:<br>"
-		+"Channel: "+servicename+"<br>"
-		+"Title: "+title+"<br>"
-		+"Description: "+description+"<br>"
-		+"Are you sure that you want to delete the Timer?",
-		 {windowParameters: {width:300, className: windowStyle},
-			okLabel: "delete",
-			buttonClass: "myButtonClass",
-			cancel: function(win) {debug("delTimer cancel confirm panel")},
-			ok: function(win) { 
-							    debug("delTimer ok confirm panel"); 
-							    doRequest(url_timerdelete+"?sRef="+sRef+"&begin="+begin+"&end="+end, readyFunction, false);
-							    return true;
-							  }
-			}
-	);
+	debug("[delTimer] sRef("+sRef+"),begin("+begin+"),end("+end+"),servicename("+servicename+"),title("+title+"),description("+description+")");
+	var result = confirm(
+		"Selected timer:\n"	+
+		"Channel: "+servicename+"\n" + 
+		"Title: "+title+"\n" +
+		"Description: "+description+"\n" +
+		"Are you sure that you want to delete the Timer?");
+	if(result){
+		debug("[delTimer] ok confirm panel"); 
+		doRequest(url_timerdelete+"?sRef="+sRef+"&begin="+begin+"&end="+end, readyFunction, false);
+		return true;
+	
+	} else {
+		debug("[delTimer] cancel confirm panel");
+	}
+	return false;
 }
 
 function incomingTimerDelResult(request){
-	debug("onTimerDeleted");
+	debug("[incomingTimerDelResult] called");
 	if(request.readyState == 4){
 		var delresult = new SimpleXMLResult(getXML(request));
-		debug("Lade liste");
+		debug("[incomingTimerDelResult] Loading List");
 		loadTimerList();
 	}		
 }
 function loadTimerFormNow() {
 	var now = new Date();
-	addTimerEditFormObject["syear"] = now.getFullYear();
-	addTimerEditFormObject["smonth"] = now.getMonth() + 1;
-	addTimerEditFormObject["sday"] = now.getDate();
-	addTimerEditFormObject["shour"] = now.getHours();
-	addTimerEditFormObject["smin"] = now.getMinutes();
+	addTimerEditFormArray.syear = now.getFullYear();
+	addTimerEditFormArray.smonth = now.getMonth() + 1;
+	addTimerEditFormArray.sday = now.getDate();
+	addTimerEditFormArray.shour = now.getHours();
+	addTimerEditFormArray.smin = now.getMinutes();
 
 	var	plusTwoHours = new Date(now.getTime() + ((120 *60)*1000) );
-	addTimerEditFormObject["eyear"] = plusTwoHours.getFullYear();
-	addTimerEditFormObject["emonth"] = plusTwoHours.getMonth() + 1;
-	addTimerEditFormObject["eday"] = plusTwoHours.getDate();
-	addTimerEditFormObject["ehour"] = plusTwoHours.getHours();
-	addTimerEditFormObject["emin"] = plusTwoHours.getMinutes();
+	addTimerEditFormArray.eyear = plusTwoHours.getFullYear();
+	addTimerEditFormArray.emonth = plusTwoHours.getMonth() + 1;
+	addTimerEditFormArray.eday = plusTwoHours.getDate();
+	addTimerEditFormArray.ehour = plusTwoHours.getHours();
+	addTimerEditFormArray.emin = plusTwoHours.getMinutes();
 		
-	addTimerEditFormObject["justplay"] = "record";
-	addTimerEditFormObject["channel"] = "";
-	addTimerEditFormObject["channelName"] = "";
-	addTimerEditFormObject["channelSort"] = "tv";
-	addTimerEditFormObject["name"] = "";
-	addTimerEditFormObject["description"] = "";
-	addTimerEditFormObject["repeated"] = 0;
-	addTimerEditFormObject["afterEvent"] = "0";
-	addTimerEditFormObject["deleteOldOnSave"] = 0;
+	addTimerEditFormArray.justplay = "record";
+	addTimerEditFormArray.channel = "";
+	addTimerEditFormArray.channelName = "";
+	addTimerEditFormArray.channelSort = "tv";
+	addTimerEditFormArray.name = "";
+	addTimerEditFormArray.description = "";
+	addTimerEditFormArray.repeated = 0;
+	addTimerEditFormArray.afterEvent = "0";
+	addTimerEditFormArray.deleteOldOnSave = 0;
 	
-	addTimerEditFormObject["beginOld"] = 0;
-	addTimerEditFormObject["endOld"] = 0;
+	addTimerEditFormArray.beginOld = 0;
+	addTimerEditFormArray.endOld = 0;
 	
 	
-	debug("loadTimerFormNow 2");
+	debug("[loadTimerFormNow] done");
 	loadTimerFormChannels();
 }
 
-function loadTimerFormSeconds(justplay,begin,end,repeated,channel,channelName,name,description,afterEvent,deleteOldOnSave,eit) {
-	debug('justplay:'+justplay+' begin:'+begin+' end:'+end+' repeated:'+repeated+' channel:'+channel+' name:'+name+' description:'+description+' afterEvent:'+afterEvent+' deleteOldOnSave:'+deleteOldOnSave);
+function loadTimerFormSeconds(justplay, begin, end, repeated, channel, channelName, name, description, afterEvent, deleteOldOnSave, eit) {
+	debug('[loadTimerFormSeconds] justplay: ' + justplay + ',begin: ' + begin + ',end: ' + end + ',repeated: ' + repeated + ',channel: ' + channel + ',name: ' + name +',description: ' + description + ',afterEvent: ' + afterEvent + ',deleteOldOnSave: ' + deleteOldOnSave);
 	var start = new Date(Number(begin)*1000);
-	addTimerEditFormObject["syear"] = start.getFullYear();
-	addTimerEditFormObject["smonth"] = start.getMonth() + 1;
-	addTimerEditFormObject["sday"] = start.getDate();
-	addTimerEditFormObject["shour"] = start.getHours();
-	addTimerEditFormObject["smin"] = start.getMinutes();
+	addTimerEditFormArray.syear = start.getFullYear();
+	addTimerEditFormArray.smonth = start.getMonth() + 1;
+	addTimerEditFormArray.sday = start.getDate();
+	addTimerEditFormArray.shour = start.getHours();
+	addTimerEditFormArray.smin = start.getMinutes();
 	
 	var	stopp = new Date(Number(end)*1000);
-	addTimerEditFormObject["eyear"] = stopp.getFullYear();
-	addTimerEditFormObject["emonth"] = stopp.getMonth() + 1;
-	addTimerEditFormObject["eday"] = stopp.getDate();
-	addTimerEditFormObject["ehour"] = stopp.getHours();
-	addTimerEditFormObject["emin"] = stopp.getMinutes();
+	addTimerEditFormArray.eyear = stopp.getFullYear();
+	addTimerEditFormArray.emonth = stopp.getMonth() + 1;
+	addTimerEditFormArray.eday = stopp.getDate();
+	addTimerEditFormArray.ehour = stopp.getHours();
+	addTimerEditFormArray.emin = stopp.getMinutes();
 	
-	addTimerEditFormObject["justplay"] = String(justplay);
-	addTimerEditFormObject["channel"] = decodeURIComponent(String(channel));
-	addTimerEditFormObject["channelName"] = String(channelName);
-	addTimerEditFormObject["channelSort"] = "";
-	addTimerEditFormObject["name"] = String(name);
-	addTimerEditFormObject["description"] = String(description);
-	addTimerEditFormObject["repeated"] = Number(repeated);
-	addTimerEditFormObject["afterEvent"] = Number(afterEvent);
+	addTimerEditFormArray.justplay = String(justplay);
+	addTimerEditFormArray.channel = decodeURIComponent(String(channel));
+	addTimerEditFormArray.channelName = String(channelName);
+	addTimerEditFormArray.channelSort = "";
+	addTimerEditFormArray.name = String(name);
+	addTimerEditFormArray.description = String(description);
+	addTimerEditFormArray.repeated = Number(repeated);
+	addTimerEditFormArray.afterEvent = Number(afterEvent);
 	
-	debug(justplay+"|"+begin+"|"+end+"|"+repeated+"|"+channel+"|"+name+"|"+description+"|"+afterEvent);
+	debug("[loadTimerFormSeconds]" + justplay + "|" + begin + "|" + end + "|" + repeated + "|"+channel+"|"+name+"|"+description+"|"+afterEvent);
 
-	addTimerEditFormObject["deleteOldOnSave"] = Number(deleteOldOnSave);
-	addTimerEditFormObject["beginOld"] = Number(begin);
-	addTimerEditFormObject["endOld"] = Number(end);
+	addTimerEditFormArray.deleteOldOnSave = Number(deleteOldOnSave);
+	addTimerEditFormArray.beginOld = Number(begin);
+	addTimerEditFormArray.endOld = Number(end);
 	
-	addTimerEditFormObject["eventID"] = Number(eit);
+	addTimerEditFormArray.eventID = Number(eit);
 	
 	loadTimerFormChannels();
 }
 
 // startin to load for TV
 function loadTimerFormChannels() {
-	if(addTimerEditFormObject["TVListFilled"] == 1 && addTimerEditFormObject["RadioListFilled"] == 1) {
+	if(addTimerEditFormArray.TVListFilled === 1 && addTimerEditFormArray.RadioListFilled === 1) {
 		loadTimerForm();
-	} else if(addTimerEditFormObject["TVListFilled"] == 1 && addTimerEditFormObject["RadioListFilled"] == 0) {
+	} else if(addTimerEditFormArray.TVListFilled === 1 && addTimerEditFormArray.RadioListFilled === 0) {
 		addTimerListFormatTV();
 	} else {
-		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.tv%22%20ORDER%20BY%20bouquet'
+		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.tv%22%20ORDER%20BY%20bouquet';
 		doRequest(url_getServices+favorites, addTimerListFormatTV, false);
 	}
 }
 
 function addTimerListFormatTV(request) {
-	if(addTimerEditFormObject["RadioListFilled"] == 0) {
+	if(addTimerEditFormArray.RadioListFilled === 0) {
 		if(request.readyState == 4){
 			var services = new ServiceList(getXML(request)).getArray();
-			var tv = new Object();
+			var tv = {};
 			for ( var i = 0; i < services.length ; i++){
 				var reference = services[i];
 				tv[reference.servicereference] = reference.servicename;
 			}
-			addTimerEditFormObject["TVListFilled"] = 1;
-			addTimerEditFormObject["TVList"] = tv;
+			addTimerEditFormArray.TVListFilled = 1;
+			addTimerEditFormArray.TVList = tv;
 		}
 	}
-	if(addTimerEditFormObject["RadioListFilled"] == 1) {
-		loadTimerForm()
+	if(addTimerEditFormArray.RadioListFilled == 1) {
+		loadTimerForm();
 	} else {
 		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.radio%22%20ORDER%20BY%20bouquet';
 		doRequest(url_getServices+favorites, addTimerListFormatRadio, false);
@@ -282,24 +256,24 @@ function addTimerListFormatTV(request) {
 function addTimerListFormatRadio(request) {
 	if(request.readyState == 4){
 		var services = new ServiceList(getXML(request)).getArray();
-		var radio = new Object();
+		var radio = {};
 		for ( var i = 0; i < services.length ; i++){
 			var reference = services[i];
 			radio[reference.servicereference] = reference.servicename;
 		}
-		addTimerEditFormObject["RadioListFilled"] = 1;
-		addTimerEditFormObject["RadioList"] = radio;
+		addTimerEditFormArray.RadioListFilled = 1;
+		addTimerEditFormArray.RadioList = radio;
 	}
 	loadTimerForm();
 }
 
 function loadTimerForm(){
 
-	var Action = new Object();
+	var Action = {};
 	Action["0"] = "Record";
 	Action["1"] = "Zap";
 	
-	var Repeated = new Object();
+	var Repeated = [];
 	Repeated["1"] =  "mo";
 	Repeated["2"] = "tu";
 	Repeated["4"] =  "we";
@@ -308,182 +282,188 @@ function loadTimerForm(){
 	Repeated["32"] = "sa";
 	Repeated["64"] = "su";
 	Repeated["31"] = "mf";
-	Repeated["127"] ="ms";
+	Repeated["127"] = "ms";
 	
-	var AfterEvent = new Object();
+	var AfterEvent = {};
 	AfterEvent["0"] = "Nothing";
 	AfterEvent["1"] = "Standby";
 	AfterEvent["2"] = "Deepstandby/Shutdown";
 	
-	addTimerEditFormObject["name"] = (typeof(addTimerEditFormObject["name"]) != "undefined") ? addTimerEditFormObject["name"] : "";
-	addTimerEditFormObject["name"] = (addTimerEditFormObject["name"] == "") ? " " : addTimerEditFormObject["name"];
+	addTimerEditFormArray.name = (typeof(addTimerEditFormArray.name) != 'undefined') ? addTimerEditFormArray.name : '';
+	addTimerEditFormArray.name = (addTimerEditFormArray.name === '') ? ' ' : addTimerEditFormArray.name;
 
-	addTimerEditFormObject["description"] = (typeof(addTimerEditFormObject["description"]) != "undefined") ? addTimerEditFormObject["description"] : "";
-	addTimerEditFormObject["description"] = (addTimerEditFormObject["description"] == "") ? " " : addTimerEditFormObject["description"];
+	addTimerEditFormArray.description = (typeof(addTimerEditFormArray.description) != 'undefined') ? addTimerEditFormArray.description : '';
+	addTimerEditFormArray.description = (addTimerEditFormArray.description === '') ? ' ' : addTimerEditFormArray.description;
 
-	var channelObject = addTimerEditFormObject["TVList"];
-	if(	addTimerEditFormObject["channelSort"] == "tv") {
+	var channelObject = addTimerEditFormArray.TVList;
+	if(	addTimerEditFormArray.channelSort === 'tv') {
 		// already set
-	} else if( addTimerEditFormObject["channelSort"] == "radio") {
-		channelObject = addTimerEditFormObject["RadioList"];
+	} else if( addTimerEditFormArray.channelSort === 'radio') {
+		channelObject = addTimerEditFormArray.RadioList;
 	} else {
 		var found = 0;
-		for( element in addTimerEditFormObject["TVList"]) {
-			if( element == addTimerEditFormObject["channel"]) {
+		for( element in addTimerEditFormArray.TVList) {
+			if( element == addTimerEditFormArray.channel) {
 				found = 1;
 				break;
 			}
 		}
-		if(found == 0) {
-			for( element in addTimerEditFormObject["RadioList"]) {
-				if( element == addTimerEditFormObject["channel"]) {
-					channelObject = addTimerEditFormObject["RadioList"];
+		if(found === 0) {
+			for( element in addTimerEditFormArray.RadioList) {
+				if( element == addTimerEditFormArray.channel) {
+					channelObject = addTimerEditFormArray.RadioList;
 					found = 1;
 					break;
 				}
 			}
 		}
-		if(found == 0) {
-			addTimerEditFormObject["TVList"][addTimerEditFormObject["channel"]] = addTimerEditFormObject["channelName"];
+		if(found === 0) {
+			addTimerEditFormArray.TVList[addTimerEditFormArray.channel] = addTimerEditFormArray.channelName;
 		}
 	}
+	
 	var dashString = "------";
+	
 	channelObject[dashString] = "- Bouquets -";
-	var listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_tv)])).getArray();
-	if(addTimerEditFormObject["channelSort"] == "radio") {
-		debug("weiter");
-		listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_radio)])).getArray();
+	
+	var listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouquetsTv)])).getArray();
+	if(addTimerEditFormArray.channelSort == "radio") {
+		listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouquetsRadio)])).getArray();
 	}
+	
 	for (i = 1; i < listeNeu.length; i++) {
-		var element = listeNeu[i];
+		element = listeNeu[i];
 		channelObject[String(dashString+i)] = "---";
 		channelObject[element.getServiceReference()] = element.getServiceName();
 	}
-	var namespace = { 	
-				'justplay': addTimerFormCreateOptionList(Action, addTimerEditFormObject["justplay"]),
-				'syear': addTimerFormCreateOptions(2008,2010,addTimerEditFormObject["syear"]),
-				'smonth': addTimerFormCreateOptions(1,12,addTimerEditFormObject["smonth"]),
-				'sday': addTimerFormCreateOptions(1,31,addTimerEditFormObject["sday"]),
-				'shour': addTimerFormCreateOptions(0,23,addTimerEditFormObject["shour"]),
-				'smin': addTimerFormCreateOptions(0,59,addTimerEditFormObject["smin"]),
-				'eyear': addTimerFormCreateOptions(2008,2010,addTimerEditFormObject["eyear"]),
-				'emonth': addTimerFormCreateOptions(1,12,addTimerEditFormObject["emonth"]),
-				'eday': addTimerFormCreateOptions(1,31,addTimerEditFormObject["eday"]),
-				'ehour': addTimerFormCreateOptions(0,23,addTimerEditFormObject["ehour"]),
-				'emin': addTimerFormCreateOptions(0,59,addTimerEditFormObject["emin"]),
-				'channel': addTimerFormCreateOptionList(channelObject, addTimerEditFormObject["channel"]),
-				'name': addTimerEditFormObject["name"],
-				'description': addTimerEditFormObject["description"],
-				'repeated': addTimerFormCreateOptionListRepeated(Repeated, addTimerEditFormObject["repeated"]),
-				'deleteOldOnSave': addTimerEditFormObject["deleteOldOnSave"],
-				'channelOld': addTimerEditFormObject["channel"],
-				'beginOld': addTimerEditFormObject["beginOld"],
-				'endOld': addTimerEditFormObject["endOld"],
-				'afterEvent': addTimerFormCreateOptionList(AfterEvent, addTimerEditFormObject["afterEvent"]),
-				'eventID': addTimerEditFormObject["eventID"]
+
+	var namespace = { 					
+				syear: createOptions(2008,2015,addTimerEditFormArray.syear),
+				smonth: createOptions(1,12,addTimerEditFormArray.smonth),
+				sday: createOptions(1,31,addTimerEditFormArray.sday),
+				shour: createOptions(0,23,addTimerEditFormArray.shour),
+				smin: createOptions(0,59,addTimerEditFormArray.smin),
+				eyear: createOptions(2008,2015,addTimerEditFormArray.eyear),
+				emonth: createOptions(1,12,addTimerEditFormArray.emonth),
+				eday: createOptions(1,31,addTimerEditFormArray.eday),
+				ehour: createOptions(0,23,addTimerEditFormArray.ehour),
+				emin: createOptions(0,59,addTimerEditFormArray.emin),
+				action: createOptionList(Action, addTimerEditFormArray.justplay),
+				channel: createOptionList(channelObject, addTimerEditFormArray.channel),
+				afterEvent: createOptionList(AfterEvent, addTimerEditFormArray.afterEvent),
+				repeated: createOptionListRepeated(Repeated, addTimerEditFormArray.repeated),
+
+				timer: {
+					name: addTimerEditFormArray.name,
+					description: addTimerEditFormArray.description,
+					deleteOldOnSave: addTimerEditFormArray.deleteOldOnSave,
+					channelOld: addTimerEditFormArray.channel,
+					beginOld: addTimerEditFormArray.beginOld,
+					endOld: addTimerEditFormArray.endOld,					
+					eventID: addTimerEditFormArray.eventID
+				}
 		};
+	data = namespace;
+	processTpl('tplTimerEdit', data, 'contentMain');
+	/*
 	var listerHtml = RND(tplAddTimerForm, namespace);
 	$('BodyContent').innerHTML = listerHtml;
-
+	*/
+	
 	// Empty some stuff, but keep others to have the performance
-	var tmp1 = addTimerEditFormObject["RadioList"];
-	var tmp2 = addTimerEditFormObject["TVList"];
-	addTimerEditFormObject = new Object();
-	addTimerEditFormObject["deleteOldOnSave"] = 0;
-	addTimerEditFormObject["RadioList"] = tmp1;
-	addTimerEditFormObject["TVList"] = tmp2;
-	addTimerEditFormObject["TVListFilled"] = 1;
-	addTimerEditFormObject["RadioListFilled"] = 1;
+	var tmp1 = addTimerEditFormArray.RadioList;
+	var tmp2 = addTimerEditFormArray.TVList;
+	addTimerEditFormArray = [];
+	addTimerEditFormArray.deleteOldOnSave = 0;
+	addTimerEditFormArray.RadioList = tmp1;
+	addTimerEditFormArray.TVList = tmp2;
+	addTimerEditFormArray.TVListFilled = 1;
+	addTimerEditFormArray.RadioListFilled = 1;
 }
 
-function addTimerFormCreateOptions(start,end,number) {
-	var html = '';
+function createOptions(start, end, number) {
+	var namespace =[];
+	
 	for(i = start; i <= end; i++) {
 		var txt = (String(i).length == 1) ? "0" + String(i) : String(i);
 		var selected = 	(i == Number(number)) ? "selected" : " ";
-		var namespace = {
+		namespace[i] = {
 			'value': i,
 			'txt': txt,
 			'selected': selected };
-		html += RND(tplAddTimerFormOptions, namespace);
 	}
-	return html;
+	return namespace;
 }
-function addTimerFormCreateOptionList(object,selected) {
-	html = '';
-	var found = 0;
+function createOptionList(object, selected) {
+	var namespace = Array();
+	var i = 0;
 	for(var element in object) {
 		var txt = String(object[element]);
 		var sel = " ";
+		
 		if(element == selected) {
-			found = 1;
 			sel = "selected";
 		}
-		var namespace = {
-			'value': element,
-			'txt': txt,
-			'selected': sel };
+		
 		if(element != "extend") {
-			html += RND(tplAddTimerFormOptions, namespace);
+			namespace[i] = {
+				'value': element,
+				'txt': txt,
+				'selected': sel };
+			i++;
 		}
 	}
-	if(found == 0) {
-		var namespace = {
-			'value': element,
-			'txt': txt,
-			'selected': sel };
-	}
-	return html;
+
+	return namespace;
 }
 
-function timerFormExtendChannellist(bouqet) {
-	var listeTV = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_tv)])).getArray();
-	var listeRadio = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_radio)])).getArray();
+function timerFormExtendChannellist(bouquet) {
+	var listeTV = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouquetsTv)])).getArray();
+	var listeRadio = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouquetsRadio)])).getArray();
 	found = 0;
 	for(i = 0; i < listeTV.length; i++) {
-		var element = listeTV[i];
-		if(String(element.getServiceReference()) == bouqet) {
+		element = listeTV[i];
+		if(String(element.getServiceReference()) == bouquet) {
 			found = 1;
 			break;
 		}
 	}
-	if(found == 0) {
+	if(found === 0) {
 		for(i = 0; i < listeRadio.length; i++) {
-			var element = listeTV[i];
-			if(String(element.getServiceReference()) == bouqet) {
+			element = listeTV[i];
+			if(String(element.getServiceReference()) == bouquet) {
 				found = 1;
 				break;
 			}
 		}
 	}
 	if(found == 1) {
-		servicereftoloadepgnow = bouqet;
-		if( getElementOfChannelList(String(servicereftoloadepgnow)) ) {	
-			incomingTimerFormExtendChannellist();
-		} else {
+		servicereftoloadepgnow = bouquet;
+		if(typeof(loadedChannellist[servicereftoloadepgnow]) == "undefined") {	
 			doRequest(url_getServices+servicereftoloadepgnow, incomingTimerFormExtendChannellist, true);
+		} else {
+			incomingTimerFormExtendChannellist();
 		}
 	}
 }
 function incomingTimerFormExtendChannellist(request) {
 	var services = null;
-	if( getElementOfChannelList(String(servicereftoloadepgnow)) ) {
-		services = getElementOfChannelList(String(servicereftoloadepgnow));
+	if(typeof(loadedChannellist[servicereftoloadepgnow]) != "undefined"){
+		services = loadedChannellist[servicereftoloadepgnow];
 	} else if(request.readyState == 4) {
 		services = new ServiceList(getXML(request)).getArray();
-		setElementOfChannelList(String(servicereftoloadepgnow), services);
-		debug("got "+services.length+" Services");
+		loadedChannellist[servicereftoloadepgnow] = services;	
 	}
-	var attachLater = new Object();
-	if(services != null) {
-		debug("incomingTimerFormExtendChannellist " + services.length);
-		var selected = $('channel').selectedIndex;
+	attachLater = {};
+	if(services !== null) {
+		debug("[incomingTimerFormExtendChannellist] Got "+services.length+" Services");
+		selected = $('channel').selectedIndex;
 		for(j = selected; j < $('channel').options.length; j++) {
 			if($('channel').options[j].value == servicereftoloadepgnow) {
 				j++;
 				for(var i = 0; i < services.length ; i++) {
-					var reference = services[i];
-					var newEntry = new Option(reference.getServiceName(), reference.getServiceReference(), false, true);
+					reference = services[i];
+					newEntry = new Option(reference.getServiceName(), reference.getServiceReference(), false, true);
 					if(typeof($('channel').options[j]) != "undefined") {
 						attachLater[String($('channel').options[j].value)] = $('channel').options[j].text;
 					}
@@ -494,7 +474,7 @@ function incomingTimerFormExtendChannellist(request) {
 			break;
 		}
 		for(x in attachLater) {
-			var newEntry = new Option(attachLater[x], x, false, true);
+			newEntry = new Option(attachLater[x], x, false, true);
 			if(x != "extend") {
 				$('channel').options[$('channel').options.length] = newEntry;
 			}
@@ -513,7 +493,7 @@ function addTimerFormChangeTime(which) {
 		opponent = (which.substr(0,1) == 's') ? 'e' +  which.substr(1, which.length -1) : 's' +  which.substr(1, which.length -1) ;
 		$(opponent).value = $(which).value;
 	}
-	var all = new Array('year','month','day','hour','min');
+	var all = ['year','month','day','hour','min'];
 	for(i=0; i < all.length; i++) {
 		if(which.substr(1, which.length -1) == all[i]) {
 			addTimerFormChangeTime(which.substr(0,1) + all[i+1] );
@@ -522,11 +502,13 @@ function addTimerFormChangeTime(which) {
 	}
 }
 function addTimerFormChangeType() {
-	var selected = ($('tvradio').checked == true) ? addTimerEditFormObject["TVList"]: addTimerEditFormObject["RadioList"];
-	for (i = $('channel').options.length; i != 0; i--) {
+	selected = ($('tvradio').checked === true) ? addTimerEditFormArray.TVList: addTimerEditFormArray.RadioList;
+	
+	for (i = $('channel').options.length; i !== 0; i--) {
 		$('channel').options[i - 1] = null;
 	}
-	var i = -1;
+	
+	i = -1;
 	for(element in selected) {
 		if(element != "extend") {
 			i++;
@@ -535,13 +517,14 @@ function addTimerFormChangeType() {
 		}
 	}
 }
-function addTimerFormCreateOptionListRepeated(Repeated,repeated) {
-	var num = Number(repeated);
-	var html = "";
-	var html2 = "";
-	var list = new Array(127, 64, 32, 31, 16, 8, 4, 2, 1);
-	for(i = 0; i < list.length; i++) {
-		var txt = String(Repeated[String(list[i])]);
+function createOptionListRepeated(Repeated,repeated) {
+	num = Number(repeated);
+	
+	list = [127, 64, 32, 31, 16, 8, 4, 2, 1];
+	namespace = [];
+	
+	for(var i = 0; i < list.length; i++) {
+		txt = String(Repeated[String(list[i])]);
 		if( String(Repeated[String(list[i])]) == "mf") {
 			txt = "Mo-Fr";
 		} else if( String(Repeated[String(list[i])]) == "ms") {
@@ -549,36 +532,32 @@ function addTimerFormCreateOptionListRepeated(Repeated,repeated) {
 		} else {
 			txt = txt.substr(0,1).toUpperCase() + txt.substr(1,1);
 		}
-		var checked = " ";
-		if(num >=  list[i]) {
+		checked = " ";
+		if(num >= list[i]) {
 			num -= list[i];
 			checked = "checked";
 		}
-		var namespace = {
-			'id': Repeated[String(list[i])],
+		
+		namespace[i] = { 'id': Repeated[String(list[i])],
 			'name': Repeated[String(list[i])],
 			'value': list[i],
 			'txt': txt,
-			'checked': checked };
-		if(String(Repeated[String(list[i])]) == "mf" || String(Repeated[String(list[i])]) == "ms") {
-			html2 = RND(tplAddTimerFormCheckbox, namespace) + html2;
-		} else {
-			html = RND(tplAddTimerFormCheckbox, namespace) + html;
-		}
+			'checked': checked 
+		};
 	}
-	return html + html2;
+	return namespace;
 }
 function sendAddTimer() {
-	debug("sendAddTimer" + "parentChannel:" +$('channel').value);
+	debug("[sendAddTimer]" + "parentChannel:" +$('channel').value);
 	
 	if(parentPin($('channel').value)) {
-		var beginD = new Date(ownLazyNumber($('syear').value), (ownLazyNumber($('smonth').value) - 1), ownLazyNumber($('sday').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
-		var begin = beginD.getTime()/1000;
+		beginD = new Date(ownLazyNumber($('syear').value), (ownLazyNumber($('smonth').value) - 1), ownLazyNumber($('sday').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
+		begin = beginD.getTime()/1000;
 		
-		var endD = new Date(ownLazyNumber($('eyear').value), (ownLazyNumber($('emonth').value) - 1), ownLazyNumber($('eday').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
-		var end = endD.getTime()/1000;
+		endD = new Date(ownLazyNumber($('eyear').value), (ownLazyNumber($('emonth').value) - 1), ownLazyNumber($('eday').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
+		end = endD.getTime()/1000;
 
-		var repeated = 0;
+		repeated = 0;
 		if( $('ms').checked ) {
 			repeated = 127;
 		} else if($('mf').checked) {
@@ -590,7 +569,7 @@ function sendAddTimer() {
 				repeated += ownLazyNumber($('su').value);
 			}
 		} else {
-			var check = new Array('mo', 'tu', 'we', 'th', 'fr');
+			check = ['mo', 'tu', 'we', 'th', 'fr'];
 			for(i = 0; i < check.length; i++) {
 				if($(check[i]).checked) {
 					repeated += Number($(check[i]).value);
@@ -598,17 +577,17 @@ function sendAddTimer() {
 			}
 		}
 	
-		var descriptionClean = ($('descr').value == " " || $('descr').value == "N/A") ? "" : $('descr').value;
-		var nameClean = ($('name').value == " " || $('name').value == "N/A") ? "" : $('name').value;
+		descriptionClean = ($('descr').value == " " || $('descr').value == "N/A") ? "" : $('descr').value;
+		nameClean = ($('name').value == " " || $('name').value == "N/A") ? "" : $('name').value;
 		
-		var neverString = "[0-9a-zA-Z\-_\.\!\(\)&=\+$,;\?/:\\\ ]*";
+		neverString = "[0-9a-zA-Z\\-_\\.\\!\\(\\)&=\\+$,;\\?/:\\\\ ]*";
 		if(descriptionClean != descriptionClean.match(neverString) ||
 			nameClean != nameClean.match(neverString)) {
 			alert("Please only use "+neverString+" in the name and the description field");
 			return;
 		}
 
-		var repeated = 0;
+		repeated = 0;
 		if($('ms').checked) {
 			repeated = ownLazyNumber($('ms').value);
 		} else if($('mf').checked) {
@@ -627,258 +606,56 @@ function sendAddTimer() {
 			}
 		}
 		//addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'False\');
-		doRequest(url_timerchange+"?"+"sRef="+($('channel').value).replace("&quot;", '"')+"&begin="+begin
-		  +"&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean)
-		  +"&afterevent="+$('after_event').value+"&eit=0&disabled=0"
-		  +"&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated
-		  +"&channelOld="+$('channelOld').value
-		  +"&beginOld="+$('beginOld').value+"&endOld="+$('endOld').value
-		  +"&eventID"+$('eventID').value
-		  +"&deleteOldOnSave="+ownLazyNumber($('deleteOldOnSave').value), incomingTimerAddResult, false);
+		doRequest(url_timerchange+"?"+"sRef="+($('channel').value).replace("&quot;", '"')+"&begin="+ begin +
+		  "&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean) +
+		  "&afterevent="+$('after_event').value+"&eit=0&disabled=0" +
+		  "&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated +
+		  "&channelOld="+$('channelOld').value +
+		  "&beginOld="+$('beginOld').value+"&endOld="+$('endOld').value +
+		  "&eventID"+$('eventID').value +
+		  "&deleteOldOnSave="+ownLazyNumber($('deleteOldOnSave').value), incomingTimerAddResult, false);
 	}
 }
 
+
 function cleanTimerListNow(){
-	debug("cleanTimerListNow pushed");
+	debug("[cleanTimerListNow] called");
 	doRequest(url_timerlist, incomingCleanTimerListNow, false);	
 }
+
+
 function incomingCleanTimerListNow(request) {
 	if(request.readyState == 4){
 		var timers = new TimerList(getXML(request)).getArray();
-		debug("have "+timers.length+" timer");
+		debug("[cleanTimerListNow] Got "+timers.length+" timer");
 		for ( var i = 0; i <timers.length; i++){
 			var timer = timers[i];
-			debug(timer.getState() + " " + quotes2html(timer.getName()));
-			if(timer.getState() != 0 && timer.getState() != 2) {
-				delTimer(timer.getServiceReference(),timer.getTimeBegin(),timer.getTimeEnd()
-					,quotes2html(timer.getServiceName()),quotes2html(timer.getName()),quotes2html(timer.getDescription()),incomingJustDoNothing);
+			debug("[cleanTimerListNow]" + timer.getState() + " " + quotes2html(timer.getName()));
+			if(timer.getState() !== 0 && timer.getState() !== 2) {
+				delTimer(timer.getServiceReference(),timer.getTimeBegin(),timer.getTimeEnd(),
+					quotes2html(timer.getServiceName()),quotes2html(timer.getName()),quotes2html(timer.getDescription()),incomingJustDoNothing);
 			}
 		}
 	}
 }
+
+
 function incomingJustDoNothing(request){
-	debug("just do nothing");
+	debug("[incomingJustDoNothing] called");
 }
+
+
 function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,description,afterEvent,disabled){
-	disabled = (ownLazyNumber(disabled) == 0) ? 1 : 0;
+	disabled = (ownLazyNumber(disabled) === 0) ? 1 : 0;
 	
 	var descriptionClean = (description == " " || description == "N/A") ? "" : description;
 	var nameClean = (name == " " || name == "N/A") ? "" : name;
 
-	doRequest(url_timerchange+"?"+"sRef="+channel.replace("&quot;", '"')+"&begin="+begin
-	 +"&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean)
-	 +"&afterevent="+afterEvent+"&eit=0&disabled="+disabled
-	 +"&justplay="+justplay+"&repeated="+repeated
-	 +"&channelOld="+channel
-	 +"&beginOld="+begin+"&endOld="+end
-	 +"&deleteOldOnSave=1", incomingTimerAddResult, false);
-}
-
-
-// AUTOTIMER
-function loadAutoTimerList(){
-	debug("loading AutoTimer");
-	doRequest(url_autotimerlist, incomingAutoTimerList, false);
-}
-
-var autotimers = null;
-function incomingAutoTimerList(request){
-	if(request.readyState == 4){
-		autotimers = new AutoTimerList(getXML(request)).getArray();
-		debug("have "+autotimers.length+" timer");
-		var ns_tplTimerListHeader = {
-			'page_title': 'Auto timerlist',
-			'name1': 'Name',
-			'name2': 'Match',
-			'repeated': 'Repeated',
-			'duration': 'Time running',
-			'start': 'Start time',
-			'end': 'End time',
-			'event': 'Event',
-			'after_event': 'After event',
-			'options': 'Options'			
-		};
-		listerHtml = RND(tplTimerListHeader, ns_tplTimerListHeader);
-		var aftereventReadable = new Array ('Nothing', 'Standby', 'Deepstandby/Shutdown');
-		var justplayReadable = new Array('record', 'zap');
-		for ( var i = 0; i <autotimers.length; i++){
-			var timer = autotimers[i];
-//			var beginDate = new Date(Number(timer.getTimeBegin())*1000);
-//			var endDate = new Date(Number(timer.getTimeEnd())*1000);
-			var namespace = { 	
-				 'servicereference': timer.getServices()
-				,'servicename': quotes2html(timer.getName())
-				,'title': quotes2html(timer.getMatch())
-				,'description': quotes2html(timer.getMatch())
-				,'justplay': timer.getJustplay()
-				,'justplayReadable': timer.getJustplay()
-				,'repeated': timer.getCounter()
-				,'repeatedReadable': timer.getCounter()
-				,'afterevent': timer.getAfterevent()
-				,'onOff': timer.getToggleDisabledIMG()
-				,'begin': timer.getTimespanbegin()
-				,'beginDate': timer.getTimespanbegin()
-				,'end': timer.getTimespanend()
-				,'endDate': timer.getTimespanend()
-				,'duration': timer.getDuration()
-				
-				,'aftereventReadable': aftereventReadable[timer.getAfterevent()]
-				,'sendToggleTimerDisable_FUNCTION': "sendToggleAutoTimerDisable("+i+")"
-				,'delTimer_FUNCTION': "delAutoTimer("+i+")"
-				,'loadTimerFormSeconds_FUNCTION': "loadAutoTimer("+i+")"
-				,'color': '000000'
-/*				'descriptionextended': quotes2html(timer.getDescriptionExtended()),
-				'state': timer.getState(),
-				'duration': Math.ceil((timer.getDuration()/60)),
-				
-				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
-				'disabled': timer.getDisabled(),
-				'onOff': timer.getToggleDisabledIMG(),
-				'color': timer.getColor()*/
-			};
-			listerHtml += RND(tplTimerListItem, namespace);
-		}
-		listerHtml += tplTimerListFooter;
-		$('BodyContent').innerHTML = listerHtml;
-		setBodyMainContent('BodyContent');
-	}
-}
-
-function sendToggleAutoTimerDisable(element) {
-	timers = autotimers[Number(element)];
-	debug("sendToggleAutoTimerDisable["+element+"]: "+timers.getName());
-	
-	doRequest(url_autotimertoggledisable+"?name="+timer.getName()+"&match="+timer.getMatch()
-		, loadAutoTimerList, false);
-}
-
-function delAutoTimer(element) {
-	timers = autotimers[Number(element)];
-	debug("delAutoTimer["+element+"]: "+timers.getName());
-	Dialog.confirm(
-		"Selected timer:<br>"
-		+"Name: "+quotes2html(timer.getName())+"<br>"
-		+"Match: "+quotes2html(timer.getMatch())+"<br>"
-		+"Are you sure that you want to delete the AutoTimer?",
-		 {windowParameters: {width:300, className: windowStyle},
-			okLabel: "delete",
-			buttonClass: "myButtonClass",
-			cancel: function(win) {debug("delAutoTimer cancel confirm panel")},
-			ok: function(win) { 
-							    debug("delAutoTimer ok confirm panel"); 
-							    doRequest(url_autotimerdelete+"?name="+timer.getName()+"&match="+timer.getMatch(), loadAutoTimerList, false);
-							    return true;
-							  }
-			}
-	);
-}
-
-function loadAutoTimer(element) {
-	timer = autotimers[Number(element)];
-	debug("loadAutoTimer["+element+"]: "+timer.getName());
-	
-	var Action = new Object();
-	Action["0"] = "Record";
-	Action["1"] = "Zap";
-	
-	var Repeated = new Object();
-	Repeated["1"] =  "mo";
-	Repeated["2"] = "tu";
-	Repeated["4"] =  "we";
-	Repeated["8"] =  "th";
-	Repeated["16"] = "fr";
-	Repeated["32"] = "sa";
-	Repeated["64"] = "su";
-	Repeated["31"] = "mf";
-	Repeated["127"] ="ms";
-	
-	var AfterEvent = new Object();
-	AfterEvent["0"] = "Nothing";
-	AfterEvent["1"] = "Standby";
-	AfterEvent["2"] = "Deepstandby/Shutdown";
-	
-	var beginDate = timer.getTimespanbegin().split(":");
-	var endDate =   timer.getTimespanend().split(":");
-	
-	debug("loadedChannellist: "+loadedChannellist.length);
-	
-	var services = splitPythonArray(timer.getServices());
-	var servicesNames = "";
-	for ( var i = 0; i <services.length; i++){
-		if(i > 0) {servicesNames += ", ";} 
-		servicesNames += getServiceName(escape(services[i]));
-	}
-
-	var namespace = { 	
-				 'justplay': addTimerFormCreateOptionList(Action, timer.getJustplay)
-				,'shour': addTimerFormCreateOptions(0,23,beginDate[0])
-				,'smin': addTimerFormCreateOptions(0,59,beginDate[1])
-				,'ehour': addTimerFormCreateOptions(0,23,endDate[0])
-				,'emin': addTimerFormCreateOptions(0,59,endDate[1])
-				,'name': timer.getName()
-				,'description': timer.getMatch()
-				,'repeated': addTimerFormCreateOptions(0,99,timer.getCounter())
-				,'deleteOldOnSave': addTimerEditFormObject["deleteOldOnSave"]
-				,'afterEvent': addTimerFormCreateOptionList(AfterEvent, timer.getAfterevent())
-				,'timers_element': ""+element
-				,'services': servicesNames
-		};
-	var listerHtml = RND(tplAddAutoTimerForm, namespace);
-	$('BodyContent').innerHTML = listerHtml;
-	$('services').disabled = true;
-	$('excludes').disabled = true;
-	$('includes').disabled = true;
-}
-
-function sendAddAutoTimer() {
-	debug("sendAddAutoTimer");
-}
-
-function editAutoTimerServices(element) {
-	debug("editAutoTimerServices " + element);
-	timer = autotimers[Number(element)];
-
-	services = splitPythonArray(timer.getServices());
-	debug("there are "+services.length+" services "+ services);
-	
-	var channels = "";
-	for ( var i = 0; i <services.length; i++){
-		debug("service "+services[i]);
-		channels += "<input type=checkbox name=\""+services[i]+"\">"+getServiceName(escape(services[i]))+"<br/>";
-	}
-	debug(channels);
-	var channelObject
-	var dashString = "------";
-	channelObject[dashString] = "- Bouquets -";
-	var listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_tv)])).getArray();
-	/*if(addTimerEditFormObject["channelSort"] == "radio") {
-		debug("weiter");
-		listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouqet_radio)])).getArray();
-	}*/
-	for (i = 1; i < listeNeu.length; i++) {
-		var element = listeNeu[i];
-		channelObject[String(dashString+i)] = "---";
-		channelObject[element.getServiceReference()] = element.getServiceName();
-	}
-	Dialog.confirm(
-		"Selected channels:<br>"
-		+"Channel: "+channels+"<br>"
-		+"Select: "+addTimerFormCreateOptionList(channelObject, "")+"<br/>"
-		,{windowParameters: {width:300, className: windowStyle},
-			okLabel: "delete",
-			buttonClass: "myButtonClass",
-			cancel: function(win) {debug("editAutoTimerServices cancel confirm panel")},
-			ok: function(win) { 
-							    debug("editAutoTimerServices ok confirm panel"); 
-							    //doRequest(url_timerdelete+"?sRef="+sRef+"&begin="+begin+"&end="+end, readyFunction, false);
-							    return true;
-							  }
-			}
-	);
-}
-function splitPythonArray(str) {
-	//debug("splitPythonArray "+str);
-	str = str.replace(/\[[u]*\'(.*)\'\]/, "$1");
-	str = str.replace(/, u/, ", ");
-	return str.split("\', \'");
+	doRequest(url_timerchange+"?"+"sRef="+channel.replace("&quot;", '"')+"&begin="+begin +
+	 "&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean) +
+	 "&afterevent="+afterEvent+"&eit=0&disabled="+disabled +
+	 "&justplay="+justplay+"&repeated="+repeated +
+	 "&channelOld="+channel +
+	 "&beginOld="+begin+"&endOld="+end +
+	 "&deleteOldOnSave=1", incomingTimerAddResult, false);
 }

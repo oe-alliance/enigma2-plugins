@@ -1,170 +1,186 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
-<!-- 
- $Header$
--->
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
-	<title>Enigma 2 Webinterface</title>
+	<title>Dreambox WebControl</title>
 	
-	<!-- load everything for prototype and prototype window //-->
-	<script type="text/javascript" src="/webdata/lib/ptwindow/javascripts/prototype.js" ></script>
-	<script type="text/javascript" src="/webdata/lib/ptwindow/javascripts/effects.js" ></script>
-	<script type="text/javascript" src="/webdata/lib/ptwindow/javascripts/window.js" ></script>
-	<script type="text/javascript" src="/webdata/lib/ptwindow/javascripts/debug.js"> </script>
+	<script type="text/javascript" src="webdata/lib/prototype-1.6.0.3.js"></script>
+	<script type="text/javascript" src="webdata/lib/shadedborder.js"></script>
+	<script type="text/javascript" src="webdata/lib/trimpath-template-1.0.38.js"></script>
 
-	<script type="text/javascript" src="/webdata/lib/rico.js"></script>
-
-	<link href="/webdata/lib/ptwindow/themes/default.css" rel="stylesheet" type="text/css" >
-	<link href="/webdata/lib/ptwindow/themes/alphacube.css" rel="stylesheet" type="text/css" >
-	
-	<!-- link href="/webdata/lib/ptwindow/themes/debug.css" rel="stylesheet" type="text/css" ></link -->
 	
 	<!-- our stuff //-->
-	<script type="text/javascript" src="/webdata/templates.js" ></script>
 	<script type="text/javascript" src="/webdata/objects.js" ></script>
 	<script type="text/javascript" src="/webdata/config.js" ></script>
 	<script type="text/javascript" src="/webdata/tools.js" ></script>
 	<script type="text/javascript" src="/webdata/timer.js" ></script>
 	
-	<link href="/webdata/style.css" type="text/css" rel="stylesheet" >
-	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico">
+	<link href="/webdata/style.css" type="text/css" rel="stylesheet">
+	<link rel="shortcut icon" type="webdata/image/x-icon" href="/webdata/gfx/favicon.ico">
 
 	<!-- Live RSS Feeds //-->
 	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss?tag" >
-</head>
 
-<body>
-<div id="Main">
-	<div id="nav">	
-		<div id="NavHd"><span id="RequestIndicator" style="display:none;"><img alt="R" src="/webdata/gfx/progress.gif" />loading... </span></div>
+
+	<script language="javascript" type="text/javascript">
 		
-		<div id="navTable">
-			<div class="NavEl">
-				<!-- START BODY MENUE //-->
-				<div id="accordionMenue">
-					<div class="navMenuPanel" id="accordionMenueBouquetPanelTV">
-						<div class="navMenuHeader" id="accordionMenueBouquetHeaderTV">TV</div>
-						<div class="navMenuContent" id="accordionMenueBouquetContentTV">please wait, loading...</div>
+		if (!window.$) {
+			window.$ = function(id) { return document.getElementById(id); }
+		}
+		
+		function getWinSize(win) 
+		{ 
+			if(!win) win = window; 
+			var s = new Object(); 
+			if(typeof win.innerWidth != 'undefined') 
+			{ 
+				s.width = win.innerWidth; 
+				s.height = win.innerHeight; 
+			} 
+			else 
+			{ 
+				 var obj = getBody(win); 
+				 s.width = parseInt(obj.clientWidth); 
+				 s.height = parseInt(obj.clientHeight); 
+			} 
+			return s; 
+		} 
+
+		function getBody(w) 
+		{ 
+			return (w.document.compatMode && w.document.compatMode == "CSS1Compat") ? w.document.documentElement : w.document.body || null; 
+		} 
+		
+		function setMaxHeight(element){
+			try{			
+				var slc = $(element);
+				size = getWinSize();
+				slc.style.maxHeight = size.height - 200+"px";
+			} catch (e) {}
+		}
+
+	</script>
+</head>
+<body onresize="setMaxHeight('contentMain')">
+	<div id="container">
+		<div id="banner">
+			<div id="bannerLeft">
+				<div id="bannerText" style="font-size: 24px;"><img src="/webdata/img/dreamboxweb.png" alt="Dreambox Web"></div>
+				<ul id="mainMenu">
+					<li><a href="#" onClick="switchMode('TV')">TeleVision</a></li>
+					<li><a href="#" onClick="switchMode('Radio')">Radio</a></li>
+					<li><a href="#" onClick="switchMode('Movies')">Movies</a></li>
+					<li><a href="#" onClick="switchMode('Timer')">Timer</a></li>
+					<!-- <li><a href="#" onClick="switchMode('MediaPlayer')">MediaPlayer</a></li>  -->
+					<li><a href="#" onClick="switchMode('Extras')">Extras</a></li>
+				</ul>
+			</div>
+			<div id="bannerRight">
+				<div>
+					<a href="#" onClick="openSignalPanel()">
+						<img border="0" src="/webdata/img/signal.png" alt="Signal" title="Show Signal Panel">
+					</a>
+				</div>			
+			</div>
+		</div>
+		<div id="current">
+			<table id="currentTable">
+				<tr>
+					<td id="currentName">N/A</td>
+					<td id="currentDuration">N/A</td>
+				</tr>	
+			</table>
+		</div>
+		<div id="main">
+			<div id="navContainer">
+				<div id="nav">
+					<div id="navHd" class="header"><div>SubNav</div></div>
+					<div id="navContent">loading...</div>
+				</div>
+				<div id="navVolume">
+					<div id="volHd" class="header"><div>Volume</div></div>
+					<span class="boxContent center" style="width: 94%; display:block;">
+						<img id='volume1' onclick='volumeSet(10)' src='/webdata/img/led_off.png' title="Volume to 10%" alt="10%">
+						<img id='volume2' onclick='volumeSet(20)' src='/webdata/img/led_off.png' title="Volume to 20%" alt="20%">
+						<img id='volume3' onclick='volumeSet(30)' src='/webdata/img/led_off.png' title="Volume to 30%" alt="30%">
+						<img id='volume4' onclick='volumeSet(40)' src='/webdata/img/led_off.png' title="Volume to 40%" alt="40%">
+						<img id='volume5' onclick='volumeSet(50)' src='/webdata/img/led_off.png' title="Volume to 50%" alt="50%">
+						<img id='volume6' onclick='volumeSet(60)' src='/webdata/img/led_off.png' title="Volume to 60%" alt="60%">
+						<img id='volume7' onclick='volumeSet(70)' src='/webdata/img/led_off.png' title="Volume to 70%" alt="70%">
+						<img id='volume8' onclick='volumeSet(80)' src='/webdata/img/led_off.png' title="Volume to 80%" alt="80%">
+						<img id='volume9' onclick='volumeSet(90)' src='/webdata/img/led_off.png' title="Volume to 90%" alt="90%">
+						<img id='volume10' onclick='volumeSet(100)' src='/webdata/img/led_off.png' title="Volume to 100%" alt="100%">
+						<br>
+						<img onclick='volumeUp()' src='/webdata/img/arrow_up.png'  title="Volume Up" alt="Up">
+						<img onclick='volumeDown()' src='/webdata/img/arrow_down.png'  title="Volume Down" alt="Down">
+						<img id='speaker' onclick='volumeMute()' src='/webdata/img/speak_on.png'  title="Mute" alt="Mute">
+						<br>						
+					</span>
+				</div>
+				<div id="navSearch">
+					<div id="searchHd" class="header"><div>EPG-Search</div></div>
+					<div class="boxContent">
+						<form action="" onSubmit="loadEPGBySearchString(document.getElementById('epgSearch').value); return false;">
+							<input type="text" id="epgSearch" onfocus="this.value=''" value="Search EPG"/>
+							<input style="vertical-align:middle" type="image" src="/webdata/gfx/search.png" alt="search..." title="Search EPG for term">
+						</form>						
 					</div>
-					
-					<div class="navMenuPanel" id="accordionMenueBouquetPanelRadio">
-						<div class="navMenuHeader" id="accordionMenueBouquetHeaderRadio">Radio</div>
-						<div class="navMenuContent" id="accordionMenueBouquetContentRadio">please wait, loading...</div>
-					</div>
-					
-					<div class="navMenuPanel" id="accordionMenueBouquetPanelProviderTV">
-						<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderTV">Provider TV</div>
-						<div class="navMenuContent" id="accordionMenueBouquetContentProviderTV">please wait, loading...</div>
-					</div>
-					
-					<div class="navMenuPanel" id="accordionMenueBouquetPanelProviderRadio">
-						<div class="navMenuHeader" id="accordionMenueBouquetHeaderProviderRadio">Provider Radio</div>
-						<div class="navMenuContent" id="accordionMenueBouquetContentProviderRadio">please wait, loading...</div>
-					</div>
-					
-					<div class="navMenuPanel" id="accordionMenueBouquetPanelMovieTimer">
-						<div class="navMenuHeader" id="accordionMenueBouquetHeaderMovieTimer">Movie/Timer</div>
-						<div class="navMenuContent" id="accordionMenueBouquetContentMovieTimer">
-							<div onclick="loadMovieList('')">Movies</div>
-							<div onclick="loadTimerList()">Timers</div>
-							<div onclick="loadTimerFormNow()">Add Timer</div>
-						</div>
-					</div>
-						
-					<div class="navMenuPanel" id="accordionMenueBouquetPanelExtras">
-						<div class="navMenuHeader" id="accordionMenueBouquetHeaderExtras">Extras</div>
-						<div class="navMenuContent" id="accordionMenueBouquetContentExtras">
-							<div onclick="loadMediaPlayer('/media/hdd/')">MediaPlayer</div>
-							<div onclick="showMessageSendForm()">Message</div>
-							<div onclick="showRemoteControllSendForm()">Remote Control</div>
-							<div onclick="showPowerStateSendForm()">Power</div>
-							<div onclick="loadFileBrowser('/media/hdd/','any')">FileBrowser</div>
-							<div onclick="showAbout()">About</div>
-							<div onclick="showNotes()">Notes</div>
-						</div>
-					</div>		
 				</div>
 			</div>
+			<div id="content">
+				<div id="contentHd" class="header"><div>Content</div></div>
+				<div id="contentMain">...</div>
+			</div>	
 		</div>
 	</div>
-	
-	<div id="Content">
-		<div id="EventNowNext" class="bgMain">
+	<script language="javascript" type="text/javascript">			
+		/****************
+		Rounded Corners 
+		*****************/
+		var menuBorder = RUZEE.ShadedBorder.create({ corner:5, border: 1 });
 
-		    <div id="ServiceInfo">
-				<div id="CurrentService"></div>
-				<div id="VolumePanel"></div>
-				<div id="RecordButton"><img alt="Record" src="/webdata/gfx/record.png" onclick="recordingPushed();" /></div>
-		      	<div id="SignalPanel"><img src="/webdata/gfx/signal.png" alt="SP" onclick="openSignalDialog();" title="view Signal Info"></div>
-				<div id="StreaminterfaceButton"><a href="/webdata/streaminterface.html" target="_blank" ><img alt="Streaminterface" border="0" src="/webdata/gfx/screen.png" /></a></div>
-		      	<div id="CurrentTime" onclick="openHiddenFunctions();"></div>
-			</div>
-		    
-		    <div class="divblock">
-				<div style="width:5%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Begin"></div>
-				<div style="width:65%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="event" id="Event_Now_Name"></div>
-				<div style="width:30%; float:left;" onclick="showhide('Event_Now_Extended_Description')" class="eventRA" id="Event_Now_Remaining"></div>
-		    </div>
-	    
-		    <div class="divblock">
-				<div class="eventExtDesc" id="Event_Now_Extended_Description"></div>
-		    </div>
-		    
-		    <div class="divblock" onclick="showhide('Event_Next_Extended_Description');">
-				<div style="width:5%; float:left;" class="event" id="Event_Next_Begin"></div>
-				<div style="width:65%; float:left;" class="event" id="Event_Next_Name"></div>
-				<div style="width:30%; float:left;" class="eventRA" id="Event_Next_Remaining"></div>
-		    </div>
-		    
-		    <div class="divblock">
-				<div class="eventExtDesc" id="Event_Next_Extended_Description"></div>
-		    </div>
-		</div>
-		<hr />
+		var buttons = $('mainMenu').getElementsByTagName("li");
+
+		for (var i=0; i < buttons.length; ++i) {			
+			menuBorder.render(buttons[i]);
+		}
+
+		var bannerBorder = RUZEE.ShadedBorder.create({corner:5, shadow:10});
+		bannerBorder.render('banner');
+		bannerBorder.render('current');
+
+		var contentBorder = RUZEE.ShadedBorder.create({corner:5, border: 2, shadow:10});
+		contentBorder.render('nav');
+		contentBorder.render('navSearch');
+		contentBorder.render('navVolume');
+		contentBorder.render('content');
+
+		var hdBorder = RUZEE.ShadedBorder.create({corner:5, edges:"tlr"});
+		hdBorder.render('navHd');
+		hdBorder.render('searchHd');
+		hdBorder.render('volHd');
+		hdBorder.render('contentHd');
 		
-		<div id="BodyContent" class="BodyContent"></div>
+		function setNavHd(content){
+			set("navHd", "<div>"+content+"</div>");
+			hdBorder.render('navHd');
+		}
+		
+		function setContentHd(content){
+			set("contentHd", "<div>"+content+"</div>");
+			hdBorder.render('contentHd');
+		}
+		
+		function getAjaxLoad(){
+			return ('<div>loading...</div>');
+		}
+		
+		setMaxHeight('contentMain');		
+		
+		init();
+	</script>
 
-	</div>
-
-</div>
-<div>
-<!-- START LIVEUPDATESTREAM  is used to enable the liveupdatestream in MS Internet Explorer //-->
-<div id="UpdateStreamReaderIEFixPanel"></div>
-<!-- END LIVEUPDATESTREAM//-->
-
-<div id="ServiceListBouqetReference"  style="display:none;" ></div>
-</div>
-<script type="text/javascript" >
-
-var debugWin = null;
-if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, 920,140 , "debugWindow"); }
-
-
-var accordionOptions = {
-	expandedBg : 'transparent',
-	hoverBg : 'CCCCCC',
-	collapsedBg : 'transparent',
-	expandedTextColor : '#000000',
-	expandedFontWeight : 'bold',
-	hoverTextColor : '#000000',
-	collapsedTextColor : '#000000',
-	collapsedFontWeight : 'normal',
-	borderColor : '#EEEEEE',
-	border : '0',
-	panelHeight : 150
-}
-
-new Rico.Accordion( $('accordionMenue'), accordionOptions );
-
-// do things to do at startup
-initVolumePanel();
-initChannelList();
-getDreamboxSettings();
-
-//setBodyMainContent('BodyContentChannellist');
-UpdateStreamReaderStart();
-showhide('Event_Next_Extended_Description');
-</script>
 </body>
 </html>

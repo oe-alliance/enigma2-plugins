@@ -148,7 +148,6 @@ class MP( Source):
         
     def command(self,param):
         print "command: ",param
-        param = int(param)
         
         # TODO: fix error handling
         if not self.tryOpenMP():
@@ -156,17 +155,17 @@ class MP( Source):
         
         mp = self.session.mediaplayer
         
-        if param == 0:
+        if param == "previous":
             mp.previousEntry()
-        elif param == 1:
+        elif param == "play":
             mp.playEntry()
-        elif param == 2:
+        elif param == "pause":
             mp.pauseEntry()
-        elif param == 3:
+        elif param == "next":
             mp.nextEntry()
-        elif param == 4:
+        elif param == "stop":
             mp.stopEntry()
-        elif param == 5:
+        elif param == "exit":
             mp.exit()
         
         return

@@ -7,34 +7,34 @@ function EPGList(xml){
 	//debug('init EPGList'+xml);
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
-	} catch (e) { debug("EPGList parsing Error");}
+	} catch (e) { debug("[EPGList] parsing Error");}
 	
 	this.getArray = function(sortbytime){
-		debug("sort EPGList by time "+sortbytime);
-		if (sortbytime == true){
-			var sort1 = new Array();
+		debug("[EPGList] Sort by time "+sortbytime);
+		if (sortbytime === true){
+			var sort1 = [];
 			for(var i=0;i<this.xmlitems.length;i++){
 				var xv = new EPGEvent(this.xmlitems.item(i));
-				sort1.push(new Array(xv.startTime,xv));
+				sort1.push( [xv.startTime, xv] );
 			}
 			sort1.sort(this.sortFunction);
-			var sort2 = new Array();
-			for(var i=0;i<sort1.length;i++){
+			var sort2 = [];
+			for(i=0;i<sort1.length;i++){
 				sort2.push(sort1[i][1]);
 			}
 			return sort2;
 		}else{
-			var listxy = new Array();
-			for (var i=0;i<this.xmlitems.length;i++){
-				var xv = new EPGEvent(this.xmlitems.item(i));
+			var listxy = [];
+			for (i=0;i<this.xmlitems.length;i++){
+				xv = new EPGEvent(this.xmlitems.item(i));
 				listxy.push(xv);			
 			}
 			return listxy;
 		}
-	}
+	};
 	this.sortFunction = function(a,b){
 	  return a[0] - b[0];
-	}
+	};
 }
 //END class EPGList
 
@@ -50,7 +50,6 @@ function EPGEvent(xml){
 		this.serviceName = xml.getElementsByTagName('e2eventservicename').item(0).firstChild.data;
 		this.fileName = xml.getElementsByTagName('e2filename').item(0).firstChild.data;
 	} catch (e) {
-		//debug("EPGEvent parsing Error");
 	}	
 	try{
 		this.description = xml.getElementsByTagName('e2eventdescription').item(0).firstChild.data;
@@ -60,80 +59,67 @@ function EPGEvent(xml){
 		this.descriptionE = xml.getElementsByTagName('e2eventdescriptionextended').item(0).firstChild.data;
 	} catch (e) {	this.descriptionE = 'N/A';	}
 
-	this.getFilename = function ()
-	{
+	this.getFilename = function (){
 		return this.fileName;
-	}
-	this.getEventId = function ()
-	{
+	};
+	this.getEventId = function (){
 		return this.eventID;
-	}
-	this.getTimeStart = function ()
-	{
-		var date = new Date(parseInt(this.startTime)*1000);
+	};
+	this.getTimeStart = function (){
+		var date = new Date(parseInt(this.startTime, 10)*1000);
 		return date;
-	}
-	this.getTimeStartString = function ()
-	{
+	};
+	this.getTimeStartString = function (){
 		var h = this.getTimeStart().getHours();
 		var m = this.getTimeStart().getMinutes();
 		if (m < 10){
 			m="0"+m;
 		}
 		return h+":"+m;
-	}
-	this.getTimeDay = function ()
-	{
-		var Wochentag = new Array("So", "Mo", "Di", "Mi", "Do", "Fr", "Sa");
+	};
+	this.getTimeDay = function (){
+		var Wochentag = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 		var wday = Wochentag[this.getTimeStart().getDay()];
 		var day = this.getTimeStart().getDate();
 		var month = this.getTimeStart().getMonth()+1;
 		var year = this.getTimeStart().getFullYear();
 		
 		return wday+".&nbsp;"+day+"."+month+"."+year;
-	}
+	};
 	this.getTimeBegin = function(){
-		return this.getTimeStart().getTime()/1000
-	}
-	this.getTimeEnd = function ()
-	{
-		var date = new Date((parseInt(this.startTime)+parseInt(this.duration))*1000);
-		return date.getTime()/1000
-	}
-	this.getTimeEndString = function ()
-	{
-		var date = new Date((parseInt(this.startTime)+parseInt(this.duration))*1000);
+		return this.getTimeStart().getTime()/1000;
+	};
+	this.getTimeEnd = function (){
+		var date = new Date((parseInt(this.startTime, 10)+parseInt(this.duration, 10))*1000);
+		return date.getTime()/1000;
+	};
+	this.getTimeEndString = function (){
+		var date = new Date((parseInt(this.startTime, 10)+parseInt(this.duration, 10))*1000);
 		var h = date.getHours();
 		var m = date.getMinutes();
 		if (m < 10){
 			m="0"+m;
 		}
 		return h+":"+m;
-	}
-	this.getDuration = function ()
-	{
-		return  new Date(parseInt(this.duration)*1000);
-	}
-	this.getTitle = function ()
-	{
+	};
+	this.getDuration = function (){
+		return  new Date(parseInt(this.duration, 10)*1000);
+	};
+	this.getTitle = function (){
 		return this.title;
-	}
-	this.getDescription = function ()
-	{
+	};
+	this.getDescription = function (){
 		return this.description;
-	}
-	this.getDescriptionExtended = function ()
-	{
+	};
+	this.getDescriptionExtended = function (){
 		return this.descriptionE;
-	}
-	this.getServiceReference = function ()
-	{
+	};
+	this.getServiceReference = function (){
 		return encodeURIComponent(this.serviceRef);
-	}
-	this.getServiceName = function ()
-	{
+	};
+	this.getServiceName = function (){
 		return this.serviceName.replace(" ","&nbsp;");
-	}
+	};
 }
 //END class EPGEvent
 
@@ -150,21 +136,23 @@ function ServiceReference(xml){
 	
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
-	}
+	};
+	
 	this.getClearServiceReference = function(){
 		return this.servicereference;
-	}
+	};
 		
 	this.getServiceName = function(){
 		return this.servicename.replace('&quot;', '"');
-	}
+	};
+	
 	this.setServiceReference = function(toInsert){
 		this.servicereference = toInsert;
-	}
+	};
 		
 	this.setServiceName = function(toInsert){
 		this.servicename = toInsert.replace('&quot;', '"');
-	}
+	};
 }	
 //END class Service
 
@@ -178,7 +166,7 @@ function ServiceList(xml){
 		//debug("Service parsing Error");
 	}
 	this.getArray = function(){
-		var listxy = new Array();
+		var listxy = [];
 		try{
 			for (var i=0;i<this.xmlitems.length;i++){
 				var xv = new ServiceReference(this.xmlitems.item(i));
@@ -187,33 +175,33 @@ function ServiceList(xml){
 		}catch (e){}
 		
 		return listxy;
-	}
+	};
 }
 //END class ServiceList
 
 //START class MovieList
 function MovieList(xml){
 	// parsing values from xml-element
-	debug('init MovieList'+xml);
+	debug('[MovieList] init: ' + xml);
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2movielist").item(0).getElementsByTagName("e2movie");
 	} catch (e) {
-		debug("MovieList parsing Error");
+		debug("[MovieList] parsing Error");
 	}
 	this.getArray = function(){
-		var listxy = new Array();
+		var listxy = [];
 		for(var i=0;i<this.xmlitems.length;i++){
 			//debug("parsing movie "+i+" of "+this.xmlitems.length);
 			var xv = new Movie(this.xmlitems.item(i));
 			listxy.push(xv);			
 		}
 		return listxy;
-	}
+	};
 }
 //END class MovieList
 
 //START class Movie
-function Movie(xml){
+function Movie(xml){	
 	// parsing values from xml-element
 	//debug('init Movie');
 	try{
@@ -270,61 +258,64 @@ function Movie(xml){
 		
 	
 
-	this.getLength = function ()
-	{
+	this.getLength = function (){
 		return this.length;
-	}
-	this.getTimeStart = function ()
-	{
-		var date = new Date(parseInt(this.startTime)*1000);
+	};
+	
+	this.getTimeStart = function (){
+		var date = new Date(parseInt(this.startTime, 10)*1000);
 		return date;
-	}
-	this.getTimeStartString = function ()
-	{
+	};
+	
+	this.getTimeStartString = function (){
 		var h = this.getTimeStart().getHours();
 		var m = this.getTimeStart().getMinutes();
 		if (m < 10){
 			m="0"+m;
 		}
 		return h+":"+m;
-	}
-	this.getTimeDay = function ()
-	{
-		var Wochentag = new Array("So", "Mo", "Di", "Mi", "Do", "Fr", "Sa");
+	};
+	
+	this.getTimeDay = function (){
+		var Wochentag = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 		var wday = Wochentag[this.getTimeStart().getDay()];
 		var day = this.getTimeStart().getDate();
 		var month = this.getTimeStart().getMonth()+1;
 		var year = this.getTimeStart().getFullYear();
 		
 		return wday+".&nbsp;"+day+"."+month+"."+year;
-	}
+	};
 
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
-	}
+	};
 	this.getServiceName = function(){
 		return this.servicename.replace('&quot;', '"');
-	}	
+	};
+	
 	this.getTitle = function(){
 		return this.title;
-	}	
+	};
+	
 	this.getDescription = function(){
 		return this.description;
-	}	
+	};
+	
 	this.getDescriptionExtended = function(){
 		return this.descriptionextended;
-	}	
+	};
+	
 	this.getTags = function(){		
 		return this.tags.split(" ");
-	}	
+	};
+	
 	this.getFilename = function(){		
-		return encodeURIComponent(this.filename);
-		
-	}	
+		return encodeURIComponent(this.filename);		
+	};
+	
 	this.getFilesizeMB = function(){		
-		return Math.round((parseInt(this.filesize)/1024)/1024)+"MB";
-		
-	}	
+		return Math.round((parseInt(this.filesize, 10)/1024)/1024)+"MB";
+	};	
 }	
 //END class Movie
 
@@ -334,17 +325,17 @@ function TimerList(xml){
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2timerlist").item(0).getElementsByTagName("e2timer");
 	} catch (e) {
-		debug("TimerList parsing Error");
+		debug("[TimerList] parsing Error");
 	}
 	this.getArray = function(){
-		var listxy = new Array();
+		var listxy = [];
 		for(var i=0;i<this.xmlitems.length;i++){
 			//debug("parsing timer "+i+" of "+this.xmlitems.length);
 			var xv = new Timer(this.xmlitems.item(i));
 			listxy.push(xv);			
 		}
 		return listxy;
-	}
+	};
 }
 //END class TimerList
 
@@ -480,100 +471,128 @@ function Timer(xml){
 
 	this.getColor = function(){
 		return this.color;
-	}
+	};
+	
 	this.getToggleDisabled = function(){
 		return this.toggledisabled;
-	}
+	};
+	
 	this.getToggleDisabledIMG = function(){
 		return this.toggledisabledimg;
-	}
+	};
+	
+	this.getToggleDisabledText = function(){
+		var retVal = this.toggledisabled == "0" ? "Enable timer" : "Disable timer";
+		return retVal;
+	};
 	
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
-	}
+	};
+	
 	this.getServiceName = function(){
 		return this.servicename.replace('&quot;', '"');
-	}	
+	};
+	
 	this.getEventID = function(){
 		return this.eventid;
-	}	
+	};
+	
 	this.getName = function(){
 		return this.name;
-	}	
+	};
+	
 	this.getDescription = function(){
 		return this.description;
-	}	
+	};
+	
 	this.getDescriptionExtended = function(){
 		return this.descriptionextended;
-	}	
+	};
+	
 	this.getDisabled = function(){
 		return this.disabled;
-	}
+	};
+	
 	this.getTimeBegin = function(){
 		return this.timebegin;
-	}	
+	};
+	
 	this.getTimeEnd = function(){
 		return this.timeend;
-	}	
+	};
+	
 	this.getDuration = function(){
-		return parseInt(this.duration);
-	}	
+		return parseInt(this.duration, 10);
+	};
+	
 	this.getStartPrepare = function(){
 		return this.startprepare;
-	}	
+	};
+	
 	this.getJustplay = function(){
 		return this.justplay;
-	}	
+	};
+	
 	this.getAfterevent = function(){
 		return this.afterevent;
-	}	
+	};
+	
 	this.getLogentries = function(){
 		return this.logentries;
-	}	
+	};
+	
 	this.getFilename = function(){
 		return this.tfilename;
-	}	
+	};
+	
 	this.getBackoff = function(){
 		return this.backoff;
-	}	
+	};
+	
 	this.getNextActivation = function(){
 		return this.nextactivation;
-	}	
+	};
+	
 	this.getFirsttryprepare = function(){
 		return this.firsttryprepare;
-	}	
+	};
+	
 	this.getState = function(){
 		return this.state;
-	}	
+	};
+	
 	this.getRepeated = function(){
 		return this.repeated;
-	}	
+	};
+	
 	this.getDontSave = function(){
 		return this.dontsave;
-	}	
+	};
+	
 	this.isCancled = function(){
 		return this.cancled;
-	}	
+	};	
 }
 // START SimpleXMLResult ehemals TimerAddResult
 function SimpleXMLResult(xml){
 	// parsing values from xml-element
-	debug('init SimpleXMLResult'+xml);
+	debug('[SimpleXMLResult] init: '+xml);
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2simplexmlresult").item(0);
-		debug(xml.getElementsByTagName("e2simplexmlresult").length);
+		debug("[SimpleXMLResult] count: " + xml.getElementsByTagName("e2simplexmlresult").length);
 	} catch (e) {
-		debug("SimpleXMLResult parsing e2simplexmlresult"+e);
+		debug("[SimpleXMLResult] parsing e2simplexmlresult"+e);
 	}
 	try{
 		this.state = this.xmlitems.getElementsByTagName("e2state").item(0).firstChild.data;
 	} catch (e) {
-		debug("SimpleXMLResult parsing e2state"+e);
+		debug("[SimpleXMLResult] parsing e2state"+e);
 	}
 	try{
 		this.statetext = this.xmlitems.getElementsByTagName("e2statetext").item(0).firstChild.data;
 	} catch (e) {
-		debug("SimpleXMLResult parsing e2statetext"+e);
+		debug("[SimpleXMLResult] parsing e2statetext"+e);
 	}
 	
 	this.getState = function(){
@@ -582,10 +601,10 @@ function SimpleXMLResult(xml){
 		}else{
 			return false;
 		}
-	}
+	};
 	this.getStateText = function(){
 			return this.statetext;
-	}
+	};
 }
 // END SimpleXMLResult
 
@@ -595,18 +614,18 @@ function Settings(xml){
 	//debug('init ServiceList'+xml);
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2settings").item(0).getElementsByTagName("e2setting");
-		debug(this.xmlitems);
+		debug("[Settings] Number of items: " + this.xmlitems);
 	} catch (e) {
 		//debug("Service parsing Error");
 	}
 	this.getArray = function(){
-		var listxy = new Array();
+		var listxy = [];
 		for (var i=0;i<this.xmlitems.length;i++){
 			var xv = new Setting(this.xmlitems.item(i));
 			listxy.push(xv);			
 		}
 		return listxy;
-	}
+	};
 }
 //END class Settings
 
@@ -624,31 +643,31 @@ function Setting(xml){
 	
 	this.getSettingValue = function(){
 		return this.settingvalue;
-	}
+	};
 		
 	this.getSettingName = function(){
 		return this.settingname;
-	}
+	};
 	
 }
 //START class FileList
 function FileList(xml){
 	// parsing values from xml-element
-	debug('init FileList'+xml);
+	debug('[FileList] init: ' + xml);
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2filelist").item(0).getElementsByTagName("e2file");
 	} catch (e) {
-		debug("FileList parsing Error");
+		debug("[FileList] parsing Error");
 	}
 	this.getArray = function(){
-		var listxy = new Array();
+		var listxy = [];
 		for(var i=0;i<this.xmlitems.length;i++){
 			//debug("parsing File "+i+" of "+this.xmlitems.length);
 			var xv = new File(this.xmlitems.item(i));
 			listxy.push(xv);			
 		}
 		return listxy;
-	}
+	};
 }
 //END class FileList
 
@@ -663,30 +682,35 @@ function File(xml){
 	}
 	this.getServiceReference = function(){
 		return this.servicereference;
-	}
+	};
+	
 	this.getNameOnly = function(){
 		if(this.root == '/') {
 			return this.servicereference;
 		} else {
 			return this.servicereference.replace(new RegExp('.*'+this.root, "i"), '');
 		}
-	}
+	};
+	
 	try{
 		this.isdirectory = xml.getElementsByTagName('e2isdirectory').item(0).firstChild.data;
 	} catch (e) {
 		this.isdirectory = "N/A";
 	}
+	
 	this.getIsDirectory = function(){
 		return this.isdirectory;
-	}
+	};
+	
 	try{
 		this.root = xml.getElementsByTagName('e2root').item(0).firstChild.data;
 	} catch (e) {
 		this.root = "N/A";
 	}
+	
 	this.getRoot = function(){
 		return this.root;
-	}
+	};
 }	
 //END class File
 
@@ -698,16 +722,16 @@ function NoteList(xml){
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2noteslist").item(0).getElementsByTagName("e2note");
 	} catch (e) {
-		debug("NoteList parsing Error");
+		debug("[NoteList] parsing Error");
 	}
 	this.getArray = function(){
-		var listxy = new Array();
+		var listxy = [];
 		for(var i=0;i<this.xmlitems.length;i++){
 			var xv = new Note(this.xmlitems.item(i));
 			listxy.push(xv);			
 		}
 		return listxy;
-	}
+	};
 }
 //END class NoteList
 
@@ -739,281 +763,32 @@ function Note(xml){
 		this.size = "N/A";
 	}
 	try{
-		this.mtime = new Date(parseInt(xml.getElementsByTagName('e2notemtime').item(0).firstChild.data)*1000);
+		this.mtime = new Date(parseInt(xml.getElementsByTagName('e2notemtime').item(0).firstChild.data, 10)*1000);
 	} catch (e) {
 		this.mtime = "N/A";
 	}
 	try{
-		this.ctime = new Date(parseInt(xml.getElementsByTagName('e2notectime').item(0).firstChild.data)*1000);
+		this.ctime = new Date(parseInt(xml.getElementsByTagName('e2notectime').item(0).firstChild.data, 10)*1000);
 	} catch (e) {
 		this.ctime = "N/A";
 	}
 
-	this.getMTime = function()
-	{
-		var Wochentag = new Array("So", "Mo", "Di", "Mi", "Do", "Fr", "Sa");
+	this.getMTime = function(){
+		var Wochentag = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 		var wday = Wochentag[this.mtime.getDay()];
 		var day = this.mtime.getDate();
 		var month = this.mtime.getMonth()+1;
 		var year = this.mtime.getFullYear();
 		return wday+".&nbsp;"+day+"."+month+"."+year+" "+this.mtime.getHours()+":"+this.mtime.getMinutes();
-	}
-	this.getCTime = function()
-	{
-		var Wochentag = new Array("So", "Mo", "Di", "Mi", "Do", "Fr", "Sa");
+	};
+	
+	this.getCTime = function(){
+		var Wochentag = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 		var wday = Wochentag[this.ctime.getDay()];
 		var day = this.ctime.getDate();
 		var month = this.ctime.getMonth()+1;
 		var year = this.ctime.getFullYear();
 		return wday+".&nbsp;"+day+"."+month+"."+year+" "+this.ctime.getHours()+":"+this.ctime.getMinutes();
-	}
+	};
 }
 //END class NoteList
-
-//START class AutoTimerList
-function AutoTimerList(xml){
-	// parsing values from xml-element
-	debug('init AutoTimerList'+xml);
-	try{
-		this.xmlitems = xml.getElementsByTagName("e2autotmerlist").item(0).getElementsByTagName("e2autotimer");
-	} catch (e) {
-		debug("AutoTimerList parsing Error");
-	}
-	this.getArray = function(){
-		var listxy = new Array();
-		for(var i=0;i<this.xmlitems.length;i++){
-			//debug("parsing movie "+i+" of "+this.xmlitems.length);
-			var xv = new AutoTimer(this.xmlitems.item(i));
-			listxy.push(xv);			
-		}
-		return listxy;
-	}
-}
-//END class AutoTimerList
-//START class AutoTimer
-function AutoTimer(xml){
-	// parsing values from xml-element
-	//debug('init Movie');
-	try{
-		this.name = xml.getElementsByTagName('e2name').item(0).firstChild.data;
-	} catch (e) {
-		this.name = "N/A";
-	}
-	try{
-		this.match = xml.getElementsByTagName('e2match').item(0).firstChild.data;
-	} catch (e) {
-		this.match = "N/A";
-	}
-	try{
-		this.enabled = xml.getElementsByTagName('e2enabled').item(0).firstChild.data;
-	} catch (e) {
-		this.enabled = "N/A";
-	}
-	try{
-		this.excludetitle = xml.getElementsByTagName('e2excludetitle').item(0).firstChild.data;
-	} catch (e) {
-		this.excludetitle = "N/A";
-	}
-	try{
-		this.excludeshort = xml.getElementsByTagName('e2excludeshort').item(0).firstChild.data;
-	} catch (e) {
-		this.excludeshort = "N/A";
-	}
-	try{
-		this.excludedescription = xml.getElementsByTagName('e2excludedescription').item(0).firstChild.data;
-	} catch (e) {
-		this.excludedescription = "N/A";
-	}
-	try{
-		this.excludedays = xml.getElementsByTagName('e2excludedays').item(0).firstChild.data;
-	} catch (e) {
-		this.excludedays = "n/a";
-	}
-	try{
-		this.includetitle = xml.getElementsByTagName('e2includetitle').item(0).firstChild.data;
-	} catch (e) {
-		this.includetitle = "N/A";
-	}
-	try{
-		this.includeshort = xml.getElementsByTagName('e2includeshort').item(0).firstChild.data;
-	} catch (e) {
-		this.includeshort = "N/A";
-	}
-	try{
-		this.includedescription = xml.getElementsByTagName('e2includedescription').item(0).firstChild.data;
-	} catch (e) {
-		this.includedescription = "N/A";
-	}
-	try{
-		this.includedays = xml.getElementsByTagName('e2includedays').item(0).firstChild.data;
-	} catch (e) {
-		this.includedays = "N/A";
-	}
-	try{
-		this.services = xml.getElementsByTagName('e2services').item(0).firstChild.data;
-	} catch (e) {
-		this.services = "N/A";
-	}
-	try{
-		this.bouquets = xml.getElementsByTagName('e2bouquets').item(0).firstChild.data;
-	} catch (e) {
-		this.bouquets = "N/A";
-	}
-	try{
-		this.timespanbegin = xml.getElementsByTagName('e2timespanbegin').item(0).firstChild.data;
-	} catch (e) {
-		this.timespanbegin = "0";
-	}
-	try{
-		this.timespanend = xml.getElementsByTagName('e2timespanend').item(0).firstChild.data;
-	} catch (e) {
-		this.timespanend = "0";
-	}
-	try{
-		this.duration = xml.getElementsByTagName('e2duration').item(0).firstChild.data;
-	} catch (e) {
-		this.duration = "0";
-	}
-	try{
-		this.counter = xml.getElementsByTagName('e2counter').item(0).firstChild.data;
-	} catch (e) {
-		this.counter = "0";
-	}
-	try{
-		this.counterleft = xml.getElementsByTagName('e2counterleft').item(0).firstChild.data;
-	} catch (e) {
-		this.counterleft = "0";
-	}
-	try{
-		this.counterlimit = xml.getElementsByTagName('e2counterlimit').item(0).firstChild.data;
-	} catch (e) {
-		this.counterlimit = "0";
-	}
-	try{
-		this.counterformatstring = xml.getElementsByTagName('e2counterformatstring').item(0).firstChild.data;
-	} catch (e) {
-		this.counterformatstring = "0";
-	}
-	try{
-		this.destination = xml.getElementsByTagName('e2destination').item(0).firstChild.data;
-	} catch (e) {
-		this.destination = "N/A";
-	}
-	try{
-		this.lastbegin = xml.getElementsByTagName('e2lastbegin').item(0).firstChild.data;
-	} catch (e) {
-		this.lastbegin = "0";
-	}
-	try{
-		this.justplay = xml.getElementsByTagName('e2justplay').item(0).firstChild.data;
-	} catch (e) {
-		this.justplay = "N/A";
-	}
-	try{
-		this.avoidduplicatedescription = xml.getElementsByTagName('e2avoidduplicatedescription').item(0).firstChild.data;
-	} catch (e) {
-		this.avoidduplicatedescription = "N/A";
-	}
-	try{
-		this.afterevent = xml.getElementsByTagName('e2afterevent').item(0).firstChild.data;
-		if(this.afterevent == "None") {
-			this.afterevent = 0;
-		}
-		this.afterevent = Number(this.afterevent);
-	} catch (e) {
-		this.afterevent = 0;
-	}
-	try{
-		this.toggledisabledimg = xml.getElementsByTagName('e2toggledisableimg').item(0).firstChild.data;
-	} catch (e) {
-		this.toggledisabledimg = "N/A";
-	}
-	try{
-		this.tags = xml.getElementsByTagName('e2tags').item(0).firstChild.data;
-	} catch (e) {
-		this.tags = "no&nbsp;tags"; // no whitespaces... tags will be splittet later
-	}
-	
-	this.getName = function(){
-        return this.name;
-    }
-    this.getMatch = function(){
-        return this.match;
-    }
-    this.getEnabled = function(){
-        return this.enabled;
-    }
-    this.getExcludetitle = function(){
-        return this.excludetitle;
-    }
-    this.getExcludeshort = function(){
-        return this.excludeshort;
-    }
-    this.getExcludedescription = function(){
-        return this.excludedescription;
-    }
-    this.getExcludedays = function(){
-        return this.excludedays;
-    }
-    this.getIncludetitle = function(){
-        return this.includetitle;
-    }
-    this.getIncludeshort = function(){
-        return this.includeshort;
-    }
-    this.getIncludedescription = function(){
-        return this.includedescription;
-    }
-    this.getIncludedays = function(){
-        return this.includedays;
-    }
-    this.getServices = function(){
-        return this.services;
-    }
-    this.getBouquets = function(){
-        return this.bouquets;
-    }
-    this.getTimespanbegin = function(){
-        return this.timespanbegin;
-    }
-    this.getTimespanend = function(){
-        return this.timespanend;
-    }
-    this.getDuration = function(){
-        return this.duration;
-    }
-    this.getCounter = function(){
-        return this.counter;
-    }
-    this.getCounterleft = function(){
-        return this.counterleft;
-    }
-    this.getCounterlimit = function(){
-        return this.counterlimit;
-    }
-    this.getCounterformatstring = function(){
-        return this.counterformatstring;
-    }
-    this.getDestination = function(){
-        return this.destination;
-    }
-    this.getLastbegin = function(){
-        return this.lastbegin;
-    }
-    this.getJustplay = function(){
-        return this.justplay;
-    }
-    this.getAvoidduplicatedescription = function(){
-        return this.avoidduplicatedescription;
-    }
-    this.getTags = function(){
-        return this.tags;
-    }
-    this.getAfterevent = function(){
-        return this.afterevent;
-    }
-    this.getToggleDisabledIMG = function(){
-		return this.toggledisabledimg;
-	}
-}	
-//END class AutoTimer

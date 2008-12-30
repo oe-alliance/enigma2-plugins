@@ -1,0 +1,45 @@
+
+						<table id="contentTable">
+							{for service in services}
+							<tr>
+								<td class="${service.cssclass}">
+									<table class="sListItem">
+										<tr>
+											<td style="width: 740px;">										
+												<div class="sListSName">
+													<a href="#" id="${service.servicereference}" onclick="{ zap(this.id); }" class="sListSLink" title="Zap to ${service.servicename}">
+														${service.servicename}
+													</a>
+												</div>
+											</td>
+											<td>
+												<a onclick="if ( parentPin( '${service.servicereference}' ) ) { loadEPGByServiceReference( '${service.servicereference}' ); }">
+													<img src="/webdata/gfx/epg.png" border="0" title="Show EPG for ${service.servicename}"/>
+												</a>
+											</td>
+											<td>
+												<a target="_blank" onclick="return parentPin( '${service.servicereference}' );" href="/web/stream.m3u?ref=${service.servicereference}">
+													<img src="/webdata/gfx/screen.png" title="Stream ${service.servicename}" border="0">
+												</a>
+											</td>											
+										</tr>
+										<tr id="trNOW${service.servicereference}" class="sListEPGNow" style="display:none;">
+											<td id="NOW${service.servicereference}" class="sListEPGItem" colspan="3"></td>
+										</tr>
+										<tr id="trNEXT${service.servicereference}" class="sListEPGNext" style="display:none;">
+											<td id="NEXT${service.servicereference}" class="sListEPGItem" colspan="3"></td>
+										</tr>
+										<tr id="trSUB${service.servicereference}" class="sListSubService" style="display:none;">
+											<td id="SUB${service.servicereference}" colspan="3"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{forelse}
+							<tr>
+								<td>
+									<table><tr><td>No Services to Display</td></tr></table>
+								</td>
+							</tr>
+							{/for}		
+						</table>

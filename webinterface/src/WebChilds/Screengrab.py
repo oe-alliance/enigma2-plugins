@@ -90,7 +90,7 @@ class GrabStream(stream.ProducerStream):
         used to start the grab-bin in the console in the background
         while this takes some time, the browser must wait until the grabis finished
     """
-    def __init__(self,cmd,target=None,save=False):
+    def __init__(self, cmd, target=None, save=False):
         self.cmd = cmd
         self.target = target
         self.save = save
@@ -103,7 +103,7 @@ class GrabStream(stream.ProducerStream):
         print "AiO grab starting aio grab with cmdline:",self.cmd
         self.container.execute(cmd)
 
-    def cmdFinished(self,data):
+    def cmdFinished(self, data):
         if int(data) is 0 and self.target is not None:
             try:
                 fp = open(self.target)
@@ -121,5 +121,5 @@ class GrabStream(stream.ProducerStream):
             self.write("internal error")
         self.finish()
 
-    def dataAvail(self,data):
+    def dataAvail(self, data):
         print "AiO grab:",data
