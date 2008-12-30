@@ -103,8 +103,8 @@ def parseEntry(element, baseTimer, defaults = False):
 	baseTimer.matchCount = int(element.get("counter", 0))
 	baseTimer.matchFormatString = element.get("counterFormat", "")
 	if not defaults:
-		baseTimer.counterLimit = element.get("lastActivation", "")
-		baseTimer.counterFormat = element.get("counterFormat", "")
+		baseTimer.matchLeft = int(timer.getAttribute("left") or counter)
+		baseTimer.matchLimit = element.get("lastActivation", "")
 		baseTimer.lastBegin = int(element.get("lastBegin", 0))
 
 	# Read out justplay
