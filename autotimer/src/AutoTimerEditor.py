@@ -37,6 +37,9 @@ from enigma import eServiceCenter, iServiceInformation
 # Default Record Directory
 from Tools import Directories
 
+# Tags
+from Screens.MovieSelection import getPreferredTagEditor
+
 weekdays = [
 	("0", _("Monday")),
 	("1", _("Tuesday")),
@@ -263,6 +266,10 @@ class AutoTimerEditorBase:
 			choices.append(default)
 		self.destination = ConfigSelection(default = default, choices = choices)
 
+		# Tags
+		self.timerentry_tags = timer.tags
+		self.tags = ConfigSelection(choices = [len(self.timerentry_tags) == 0 and _("None") or ' '.join(self.timerentry_tags)])
+
 	def pathSelected(self, res):
 		if res is not None:
 			if res not in self.destination.choices:
@@ -280,6 +287,20 @@ class AutoTimerEditorBase:
 			self.destination.value,
 			minFree = 100 # Same requirement as in Screens.TimerEntry
 		)
+
+	def tagEditFinished(self, ret):
+		if ret is not None:
+			self.timerentry_tags = ret
+			self.tags.setChoices([len(ret) == 0 and _("None") or ' '.join(ret)])
+
+	def chooseTags(self):
+		preferredTagEditor = getPreferredTagEditor()
+		if preferredTagEditor:
+			self.session.openWithCallback(
+				self.tagEditFinished,
+				preferredTagEditor,
+				self.timerentry_tags
+			)
 
 class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	"""Edit AutoTimer"""
@@ -440,6 +461,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		if self.useDestination.value:
 			self.list.append(getConfigListEntry(_("Custom Location"), self.destination))
 
+		self.list.append(getConfigListEntry(_("Tags"), self.tags))
+
 	def reloadList(self, value):
 		self.refresh()
 		self["config"].setList(self.list)
@@ -481,6 +504,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		cur = cur and cur[1]
 		if cur == self.destination:
 			self.chooseDestination()
+		elif cur == self.tags:
+			self.chooseTags()
 		else:
 			ConfigListScreen.keyOK(self)
 
@@ -614,6 +639,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.destination = self.destination.value
 		else:
 			self.timer.destination = None
+
+		self.timer.tags = self.timerentry_tags
 
 		# Close
 		self.close(self.timer)
