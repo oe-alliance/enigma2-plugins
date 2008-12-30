@@ -24,26 +24,22 @@ class SubServices(Source):
         #sleep(5) # FIXMEEEEE very ugly code !! 
         
         list0 = []
-        currentService = self.session.nav.getCurrentlyPlayingServiceReference()
-        if currentService is not None:
-            list0.append(currentService.toString())
-            list0.append( ServiceReference(currentService).getServiceName() )
-            list.append(list0)
+        currentServiceRef = self.session.nav.getCurrentlyPlayingServiceReference()
+        if currentServiceRef is not None:
+            list.append( [currentServiceRef.toString(),
+                         ServiceReference(currentServiceRef).getServiceName()] 
+            )
+            
+            currentService = self.session.nav.getCurrentService()
+            subservices = currentService and currentService.subServices()
+            if subservices or subservices.getNumberOfSubservices() != 0:
+                n = subservices and subservices.getNumberOfSubservices()
+                for x in range(n):
+                    sub = subservices.getSubservice(x)                    
+                    list.append([sub.toString() , sub.getName()])
+                
         else:
-            list0.append("N/A")
-            list0.append("N/A")
-            list.append(list0)
-
-        service = self.session.nav.getCurrentService()
-        subservices = service and service.subServices()
-        if subservices or subservices.getNumberOfSubservices() != 0:
-            n = subservices and subservices.getNumberOfSubservices()
-            for x in range(n):
-                list1 = []
-                sub = subservices.getSubservice(x)
-                list1.append(sub.toString())
-                list1.append(sub.getName())
-                list.append(list1)
+            list.append(["N/A", "N/A"])
         
         print "SubServices is returning list ",list
         return list
