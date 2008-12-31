@@ -59,27 +59,23 @@ function quotes2html(txt) {
 	return txt.replace(/'/g, "\\'").replace(/"/g, '&quot;');
 }
 
+function addLeadingZero(nr){
+	if(nr < 10){
+		return '0' + nr;
+	}
+	return nr;
+}
 
 function dateToString(date){
 
 	var dateString = "";
 	
 	dateString += date.getFullYear();
-	dateString += "-" + date.getMonth();
-	dateString += "-" + date.getDate();
-	
-	var hours = date.getHours();
-	if(hours < 10){
-		hours = '0' + hours;
-	}
-	dateString += " " + hours;
-	
-	var minutes = date.getMinutes();
-	if(minutes < 10){
-		minutes = '0' + minutes;
-	}
-	dateString += ":" + minutes;
-	
+	dateString += "-" + addLeadingZero(date.getMonth()+1);
+	dateString += "-" + addLeadingZero(date.getDate());
+	dateString += " " + addLeadingZero(date.getHours());
+	dateString += ":" + addLeadingZero(date.getMinutes());
+		
 	return dateString;
 }
 

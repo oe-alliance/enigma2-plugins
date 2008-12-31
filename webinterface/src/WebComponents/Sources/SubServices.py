@@ -8,15 +8,6 @@ class SubServices(Source):
         Source.__init__(self)        
         self.session = session
         
-#        self.session.nav.event.append(self.checkSubservicesAvail) # we like to get service events
-#
-#    def checkSubservicesAvail(self, ev):
-#        if ev == iPlayableService.evUpdatedEventInfo:
-#            service = self.session.nav.getCurrentService()
-#            subservices = service and service.subServices()
-#            if subservices or subservices.getNumberOfSubservices() == 0:
-#                self["SubserviceQuickzapAction"].setEnabled(False)
-        
     def command(self):
         print "SubServices was called"
         list = []
@@ -36,7 +27,7 @@ class SubServices(Source):
                 n = subservices and subservices.getNumberOfSubservices()
                 for x in range(n):
                     sub = subservices.getSubservice(x)                    
-                    list.append([sub.toString() , sub.getName()])
+                    list.append([sub.toString(), sub.getName()])
                 
         else:
             list.append(["N/A", "N/A"])
