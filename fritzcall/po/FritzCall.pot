@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-19 12:39+0200\n"
+"POT-Creation-Date: 2008-12-31 16:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,10 +49,11 @@ msgstr ""
 msgid "CF Drive"
 msgstr ""
 
-msgid "Call monitoring"
+#. TRANSLATORS: keep it short, this is a button
+msgid "Call"
 msgstr ""
 
-msgid "Can't create PhoneBook.txt"
+msgid "Call monitoring"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -127,6 +128,10 @@ msgstr ""
 msgid "Display outgoing calls"
 msgstr ""
 
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+msgid "Do what?"
+msgstr ""
+
 #, python-format
 msgid ""
 "Do you really want to delete entry for\n"
@@ -138,8 +143,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Do you really want to overwrite entry for\n"
-"%(number)s\n"
+"Do you really want to overwrite entry for %(number)s\n"
 "\n"
 "%(name)s\n"
 "\n"
@@ -148,19 +152,8 @@ msgid ""
 "%(newname)s?"
 msgstr ""
 
-#, python-format
-msgid ""
-"Do you want to add a phonebook entry for\n"
-"\n"
-"%s?"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Edit"
-msgstr ""
-
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
-msgid "Edit phonebook entry"
 msgstr ""
 
 #. TRANSLATORS: this is a help text, keep it short
@@ -171,6 +164,9 @@ msgid "Enter Search Terms"
 msgstr ""
 
 msgid "Entry incomplete."
+msgstr ""
+
+msgid "Extension number to initiate call on"
 msgstr ""
 
 msgid "FRITZ!Box FON address (Name or IP)"
@@ -225,6 +221,10 @@ msgstr ""
 msgid "Last 10 calls:\n"
 msgstr ""
 
+#. TRANSLATORS: keep it short, this is a button
+msgid "Lookup"
+msgstr ""
+
 msgid "MSN to show (separated by ,)"
 msgstr ""
 
@@ -233,6 +233,9 @@ msgid "Missed"
 msgstr ""
 
 msgid "Missed calls"
+msgstr ""
+
+msgid "Mute on call"
 msgstr ""
 
 msgid "Name"
@@ -293,6 +296,10 @@ msgid "Read PhoneBook from FRITZ!Box"
 msgstr ""
 
 msgid "Reverse Lookup Caller ID (select country below)"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Save"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button

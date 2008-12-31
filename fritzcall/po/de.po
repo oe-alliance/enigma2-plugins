@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-19 12:39+0200\n"
-"PO-Revision-Date: 2008-10-19 12:39+0200\n"
+"POT-Creation-Date: 2008-12-31 16:41+0100\n"
+"PO-Revision-Date: 2008-12-26 14:06+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -48,11 +48,12 @@ msgstr "Anrufer automatisch dem Telefonbuch hinzufügen"
 msgid "CF Drive"
 msgstr "CF Laufwerk"
 
+#. TRANSLATORS: keep it short, this is a button
+msgid "Call"
+msgstr "Anrufen"
+
 msgid "Call monitoring"
 msgstr "Anrufanzeige"
-
-msgid "Can't create PhoneBook.txt"
-msgstr "Kann Phonebook.txt nicht anlegen"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -136,6 +137,10 @@ msgstr "Verpasste Anrufe"
 msgid "Display outgoing calls"
 msgstr "Abgehende Anrufe"
 
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+msgid "Do what?"
+msgstr "Aktion mit Nummer?"
+
 #, python-format
 msgid ""
 "Do you really want to delete entry for\n"
@@ -152,8 +157,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Do you really want to overwrite entry for\n"
-"%(number)s\n"
+"Do you really want to overwrite entry for %(number)s\n"
 "\n"
 "%(name)s\n"
 "\n"
@@ -165,33 +169,13 @@ msgstr ""
 "\n"
 "%(name)s\n"
 "\n"
-"für\n"
-"\n"
-"%(number)s\n"
-"\n"
-"wirklich in den folgenden geändert werden?\n"
+"für %(number)s wirklich in den folgenden geändert werden?\n"
 "\n"
 "%(newname)s"
-
-#, python-format
-msgid ""
-"Do you want to add a phonebook entry for\n"
-"\n"
-"%s?"
-msgstr ""
-"Telefonbucheintrag für\n"
-"\n"
-"%s\n"
-"\n"
-"erstellen?"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Edit"
 msgstr "Ändern"
-
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
-msgid "Edit phonebook entry"
-msgstr "Bearbeite Telefonbucheintrag"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Edit selected entry"
@@ -202,6 +186,9 @@ msgstr "Suchbegriffe"
 
 msgid "Entry incomplete."
 msgstr "Eintrag unvollständig."
+
+msgid "Extension number to initiate call on"
+msgstr "Nebenstelle für Anrufe"
 
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
@@ -261,6 +248,10 @@ msgstr "Italien"
 msgid "Last 10 calls:\n"
 msgstr "Die letzten zehn Anrufe im Standby:\n"
 
+#. TRANSLATORS: keep it short, this is a button
+msgid "Lookup"
+msgstr "Suchen"
+
 msgid "MSN to show (separated by ,)"
 msgstr "anzuzeigende MSNs (getrennt durch ,)"
 
@@ -270,6 +261,9 @@ msgstr "Verpasst"
 
 msgid "Missed calls"
 msgstr "Verpasste Anrufe"
+
+msgid "Mute on call"
+msgstr "Ton aus bei angezeigten Anrufen"
 
 msgid "Name"
 msgstr "Name"
@@ -336,6 +330,10 @@ msgstr "Telefonbuch der FRITZ!Box auslesen"
 
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Rückwärtssuche (bitte Land auswählen)"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Save"
+msgstr "Speichern"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Search"

@@ -1,11 +1,9 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
-#
+# -*- coding: ISO-8859-1 -*-
 # $Id$
 # $Author$
 # $Revision$
 # $Date$
-# -*- coding: utf-8 -*-
 
 import re, sys, os
 from xml.dom.minidom import parse
@@ -65,7 +63,7 @@ def html2utf8(in_html):
 				pass
 	except ImportError:
 		try:
-			return in_html.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
+			return in_html.replace("&amp;", "&").replace("&szlig;", "ßŸ").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
 		except UnicodeDecodeError:
 			pass
 	return in_html
@@ -116,7 +114,7 @@ countries = { }
 reverselookupMtime = 0
 
 class ReverseLookupAndNotifier:
-	def __init__(self, number, outputFunction=out, charset="ISO-8859-1"):
+	def __init__(self, number, outputFunction=out, charset="ISO-8859-1", countrycode = "0049"):
 		myprint("[ReverseLookupAndNotifier] reverse Lookup for %s!" %number)
 		self.number = number
 		self.outputFunction = outputFunction
@@ -136,7 +134,7 @@ class ReverseLookupAndNotifier:
 					code = country.getAttribute("code").replace("+","00")
 					countries[code] = country.getElementsByTagName("website")
 
-		self.countrycode = "0049"
+		self.countrycode = countrycode
 
 		if number[0] != "0":
 			# self.caller = _("UNKNOWN")
@@ -204,15 +202,8 @@ class ReverseLookupAndNotifier:
 		self.currentWebsite = website
 		# I am not sure, whether setting the user-agent works this way
 		getPage(url,
-			method="GET",
-			headers = {
-#					"User-Agent" : "User-Agent=Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4"
-#					"Connection" : "keep-alive",
-#					"Keep-Alive" : "300",
-#					"Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-#					"Accept-Charset" : "ISO-8859-1,utf-8;q=0.7,*;q=0.7",
-##					"Accept-Encoding" : "gzip,deflate"
-			}).addCallback(self._gotPage).addErrback(self._gotError)
+			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5"
+			).addCallback(self._gotPage).addErrback(self._gotError)
 
 	def _gotPage(self, page):
 		myprint("[ReverseLookupAndNotifier] _gotPage")
@@ -234,7 +225,7 @@ class ReverseLookupAndNotifier:
 					# myprint("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( what, found.group(2) ))
 					myprint(found.group(1))
 					item = found.group(1).replace("&nbsp;"," ").replace("</b>","").replace(","," ")
-					item = html2utf8(item)
+					item = html2utf8(item).decode("ISO-8859-1", "replace")
 					newitem = item.replace("  ", " ")
 					while newitem != item:
 						item = newitem
@@ -282,17 +273,19 @@ class ReverseLookupAndNotifier:
 		myprint("[ReverseLookupAndNotifier] notifyAndReset: Number: " + self.number + "; Caller: " + self.caller)
 		if self.caller:
 			self.outputFunction(self.number, self.caller.decode("utf-8").encode(self.charset))
+		else:
+			self.outputFunction(self.number, "")
 		if __name__ == '__main__':
-			reactor.stop()
+			reactor.stop() #@UndefinedVariable
 
 if __name__ == '__main__':
 	cwd = os.path.dirname(sys.argv[0])
 	if (len(sys.argv) == 2):
 		# nrzuname.py Nummer
 		ReverseLookupAndNotifier(sys.argv[1])
-		reactor.run()
+		reactor.run() #@UndefinedVariable
 	elif (len(sys.argv) == 3):
 		# nrzuname.py Nummer SimpleOut
 		debug = False
 		ReverseLookupAndNotifier(sys.argv[1], simpleout)
-		reactor.run()
+		reactor.run() #@UndefinedVariable
