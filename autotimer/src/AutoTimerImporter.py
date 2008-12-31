@@ -85,7 +85,8 @@ class AutoTimerImportSelector(Screen):
 				cur.service_ref,
 				cur.afterEvent,
 				cur.justplay,
-				cur.dirname
+				cur.dirname,
+				cur.tags
 			)
 
 	def cancel(self):
@@ -106,7 +107,7 @@ class AutoTimerImporter(Screen):
 		<widget name="key_blue" position="420,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
-	def __init__(self, session, autotimer, name, begin, end, disabled, sref, afterEvent, justplay, dirname):
+	def __init__(self, session, autotimer, name, begin, end, disabled, sref, afterEvent, justplay, dirname, tags):
 		Screen.__init__(self, session)
 
 		# Keep AutoTimer
@@ -182,6 +183,15 @@ class AutoTimerImporter(Screen):
 					': '.join([_("Location"), dirname or "/hdd/movie/"]),
 					dirname,
 					6,
+					True
+			))
+
+		if tags:
+			list.append(
+				SelectionEntryComponent(
+					': '.join([_("Tags"), ', '.join(tags)]),
+					tags,
+					7,
 					True
 			))
 
@@ -263,6 +273,8 @@ class AutoTimerImporter(Screen):
 				self.autotimer.justplay = item[1]
 			elif item[2] == 6: # Location
 				self.autotimer.destination = item[1]
+			elif item[2] == 7: # Tags
+				self.autotimer.tags = item[1]
 
 		if self.autotimer.match == "":
 			self.session.openWithCallback(

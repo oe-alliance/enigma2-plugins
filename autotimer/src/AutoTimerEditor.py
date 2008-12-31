@@ -1053,9 +1053,10 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 		end,	   	   	   # Proposed End
 		None, 	   	   	   # Proposed Disabled
 		sref,   		   # Proposed ServiceReference
-		None,   	       # Proposed afterEvent 
-		None,  	   	   	   # Proposed justplay 
-		None  	   	   	   # Proposed dirname, can we get anything useful here? 
+		None,   	       # Proposed afterEvent
+		None,  	   	   	   # Proposed justplay
+		None,  	   	   	   # Proposed dirname, can we get anything useful here?
+		[]                 #
 	)
 
 def addAutotimerFromService(session, service = None):	
@@ -1088,6 +1089,14 @@ def addAutotimerFromService(session, service = None):
 	else:
 		begin = end = 0
 
+	from os.path import dirname
+	path = dirname(service.getPath())
+	if not path == '/':
+		path += '/'
+
+	tags = info.getInfoString(service, iServiceInformation.sTags)
+	tags = tags and tags.split(' ') or []
+
 	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
 
 	session.openWithCallback(
@@ -1104,9 +1113,10 @@ def addAutotimerFromService(session, service = None):
 		end,	   	   	   # Proposed End
 		None, 	 	   	   # Proposed Disabled
 		sref,   		   # Proposed ServiceReference
-		None,   	       # Proposed afterEvent 
-		None,  	   	   	   # Proposed justplay 
-		None  	   	   	   # Proposed dirname, can we get anything useful here? 
+		None,   	       # Proposed afterEvent
+		None,  	   	   	   # Proposed justplay
+		path,  	   	   	   # Proposed dirname
+		tags               # Proposed tags
 	)
 
 def importerCallback(ret):
