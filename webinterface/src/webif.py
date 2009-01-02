@@ -298,10 +298,10 @@ class OneTimeElement(Element):
 		stream.write(t)
 
 	def execBegin(self):
-		pass
+		self.suspended = False
 
 	def execEnd(self):
-		pass
+		self.suspended = True
 
 	def onShow(self):
 		pass
