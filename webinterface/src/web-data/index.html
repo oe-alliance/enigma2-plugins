@@ -102,20 +102,48 @@
 				<div id="navVolume">
 					<div id="volHd" class="header"><div>Volume</div></div>
 					<span class="boxContent center" style="width: 94%; display:block;">
-						<img id='volume1' onclick='volumeSet(10)' src='/webdata/img/led_off.png' title="Volume to 10%" alt="10%">
-						<img id='volume2' onclick='volumeSet(20)' src='/webdata/img/led_off.png' title="Volume to 20%" alt="20%">
-						<img id='volume3' onclick='volumeSet(30)' src='/webdata/img/led_off.png' title="Volume to 30%" alt="30%">
-						<img id='volume4' onclick='volumeSet(40)' src='/webdata/img/led_off.png' title="Volume to 40%" alt="40%">
-						<img id='volume5' onclick='volumeSet(50)' src='/webdata/img/led_off.png' title="Volume to 50%" alt="50%">
-						<img id='volume6' onclick='volumeSet(60)' src='/webdata/img/led_off.png' title="Volume to 60%" alt="60%">
-						<img id='volume7' onclick='volumeSet(70)' src='/webdata/img/led_off.png' title="Volume to 70%" alt="70%">
-						<img id='volume8' onclick='volumeSet(80)' src='/webdata/img/led_off.png' title="Volume to 80%" alt="80%">
-						<img id='volume9' onclick='volumeSet(90)' src='/webdata/img/led_off.png' title="Volume to 90%" alt="90%">
-						<img id='volume10' onclick='volumeSet(100)' src='/webdata/img/led_off.png' title="Volume to 100%" alt="100%">
+						<!-- Volume "Slider" -->
+						<a href="#" onClick="volumeSet(10)">
+							<img id='volume1' src='/webdata/img/led_off.png' title="Volume to 10%" alt="10%">
+						</a>
+						<a href="#" onClick="volumeSet(20)">
+							<img id='volume2' src='/webdata/img/led_off.png' title="Volume to 20%" alt="20%">
+						</a>
+						<a href="#" onClick="volumeSet(30)">
+							<img id='volume3' src='/webdata/img/led_off.png' title="Volume to 30%" alt="30%">
+						</a>
+						<a href="#" onClick="volumeSet(40)">
+							<img id='volume4' src='/webdata/img/led_off.png' title="Volume to 40%" alt="40%">
+						</a>
+						<a href="#" onClick="volumeSet(50)">
+							<img id='volume5' src='/webdata/img/led_off.png' title="Volume to 50%" alt="50%">
+						</a>
+						<a href="#" onClick="volumeSet(60)">
+							<img id='volume6' src='/webdata/img/led_off.png' title="Volume to 60%" alt="60%">
+						</a>
+						<a href="#" onClick="volumeSet(70)">
+							<img id='volume7' src='/webdata/img/led_off.png' title="Volume to 70%" alt="70%">
+						</a>
+						<a href="#" onClick="volumeSet(80)">
+							<img id='volume8' src='/webdata/img/led_off.png' title="Volume to 80%" alt="80%">
+						</a>
+						<a href="#" onClick="volumeSet(90)">
+							<img id='volume9' src='/webdata/img/led_off.png' title="Volume to 90%" alt="90%">
+						</a>
+						<a href="#" onClick="volumeSet(100)">
+							<img id='volume10' src='/webdata/img/led_off.png' title="Volume to 100%" alt="100%">
+						</a>
 						<br>
-						<img onclick='volumeUp()' src='/webdata/img/arrow_up.png'  title="Volume Up" alt="Up">
-						<img onclick='volumeDown()' src='/webdata/img/arrow_down.png'  title="Volume Down" alt="Down">
-						<img id='speaker' onclick='volumeMute()' src='/webdata/img/speak_on.png'  title="Mute" alt="Mute">
+						<!-- Volume Control -->
+						<a href="#" onClick="volumeUp()">
+							<img src='/webdata/img/arrow_up.png'  title="Volume Up" alt="Up">
+						</a>
+						<a href="#" onClick="volumeDown()">
+							<img src='/webdata/img/arrow_down.png'  title="Volume Down" alt="Down">
+						</a>
+						<a href="#" onClick="volumeMute()">
+							<img id='speaker' src='/webdata/img/speak_on.png'  title="Mute" alt="Mute">
+						</a>
 						<br>						
 					</span>
 				</div>

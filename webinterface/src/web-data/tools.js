@@ -219,7 +219,7 @@ function renderTpl(tpl, data, domElement) {
 
 
 function fetchTpl(tplName, callback){
-	if(typeof(templates.tplName) == 'undefined') {
+	if(typeof(templates[tplName]) == "undefined") {
 		var url = "/webdata/tpl/"+tplName+".htm";
 		var options = {
 				asynchronous: true,
@@ -623,7 +623,7 @@ function buildServiceListEPGItem(epgevent, type){
 	
 	show('tr' + id);
 	
-		if(typeof(templates.tplServiceListEPGItem) == "string"){
+		if(typeof(templates.tplServiceListEPGItem) != "undefined"){
 			renderTpl(templates.tplServiceListEPGItem, data, id, true);
 		} else {
 			debug("[buildServiceListEPGItem] tplServiceListEPGItem N/A");
