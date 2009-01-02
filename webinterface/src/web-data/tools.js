@@ -956,9 +956,6 @@ function sendMessage(messagetext,messagetype,messagetimeout){
 function getScreenShot(what) {
 	debug("[getScreenShot] called");
 	
-	setAjaxLoad('contentMain');
-	setContentHd('Screenshot');
-	
 	var buffer = new Image();
 	var downloadStart;
 	var data = {};
@@ -1576,20 +1573,24 @@ function loadContentStatic(template, title){
  * @param extra - Extra Page as String
  * Possible Values: power, about, message
  */
-function openExtra(extra){
-	switch(extra){
+function loadControl(control){
+	switch(control){
 		case "power":
 			loadContentStatic('tplPower', 'PowerControl');
-			break;
-	
-		case "about":
-			loadContentDynamic(showAbout, 'About');
 			break;
 		
 		case "message":
 			loadContentStatic('tplSendMessage', 'Send a Message');
 			break;
 		
+		case "remote":
+			loadAndOpenWebRemote();
+			break;
+			
+		case "screenshot":
+			loadContentDynamic(getScreenShot, 'Screenshot')
+			break;
+			
 		default:
 			break;
 	}
@@ -1626,9 +1627,14 @@ function switchMode(mode){
 			loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
 			break;
 			
-		case "Extras":
-			reloadNav('tplNavExtras', 'Extras');
+		case "BoxControl":
+			reloadNav('tplNavBoxControl', 'BoxControl');
 			break;
+			
+		case "About":
+			loadContentDynamic(showAbout, 'About');
+			break;
+		
 		default:
 			break;
 	}
