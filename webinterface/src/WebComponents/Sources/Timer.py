@@ -291,128 +291,130 @@ class Timer( Source):
         self.recordtimer.record(newtimer)
         return True,"Timer added"    
             
-    def changeTimer(self,param):
+    def changeTimer(self, param):
         
-        print "changeTimer ",param
-        
-        if int(param['deleteOldOnSave']) == 1:
-            
-            if param['sRef'] is None:
-                return False,"ServiceReference missing"
-            else: 
-                serviceref = ServiceReference(param['sRef'])
-
-            if param['repeated'] is not None:
-                repeated = int(param['repeated'])
-            else: 
-                repeated = 0
-            
-            if param['begin'] is None:
-                return False,"begin missing"
-            elif time() <= float(param['begin']):
-                begin = float(param['begin'])
-            elif time() > float(param['begin']) and repeated == 1:
-                begin = time()
-            else:
-                return False,"incorrect time begin"
-        
-            if param['end'] is None:
-                return False,"end missing"
-            elif begin < float(param['end']):
-                end = float(param['end'])
-            else:
-                return False,"incorrect time end"
+        print "changeTimer ", param
+        if param['deleteOldOnSave'] is not None:
+            if int(param['deleteOldOnSave']) == 1:
                 
-            if param['name'] is None:
-                return False,"name is missing"
-            else:
-                name = param['name']
-            
-            if param['description'] is not None:
-                description = param['description']
-                description = description.replace("\n"," ") # if a \n is in the timedescription, the resulting .meta breacks
-            else: 
-                description = ""
-
-            if param['repeated'] is not None:
-                repeated = int(param['repeated'])
-            else: 
-                repeated = 0
-
-            if param['disabled'] =="0":
-                disabled = False
-            elif param['disabled'] =="1":
-                disabled = True
-            else:
-                return False,"disabled incorrect"
-        
-            if param['justplay'] == "0":
-                justplay = False
-            elif param['justplay'] == "1":
-                justplay = True
-            else:
-                return False,"justplay incorrect"
-            
-            if param['afterevent'] == "0":
-                afterevent = 0
-            elif param['afterevent'] == "1":
-                afterevent = 1
-            elif param['afterevent'] == "2":
-                afterevent = 2
-            else:
-                return False,"afterevent incorrect"
-        
-            if param['channelOld'] is None:
-                return False,"channelOld missing"
-            else: 
-                channelOld = ServiceReference(param['channelOld'])
-            
-            if param['beginOld'] is None:
-                return False,"beginOld missing"
-            else:
-                beginOld = float(param['beginOld'])
-            
-            if param['endOld'] is None:
-                return False,"endOld missing"
-            else:
-                endOld = float(param['endOld'])
-                
-            toChange = None
-            try:
-                #print "beginOld(%s), endOld(%s), channelOld(%s)" % (beginOld, endOld, channelOld)
-                for x in self.recordtimer.timer_list + self.recordtimer.processed_timers:
-                    #print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (float(x.begin), float(x.end), x.service_ref)
-                    if str(x.service_ref) == str(channelOld) and float(x.begin) == beginOld and float(x.end) == endOld:
-                        #print "one found"
-                        toChange = x
-                        toChange.service_ref = ServiceReference(param['sRef'])
-                        toChange.begin = int(begin)
-                        toChange.end = int(end)
-                        toChange.name = name
-                        toChange.description = description
-                        toChange.disabled = disabled
-                        toChange.justplay = justplay
-                        toChange.afterEvent = afterevent
-                        toChange.repeated = repeated
-                        self.session.nav.RecordTimer.timeChanged(toChange)
-                        print "Timer changed"
-                        return True,"Timer changed"
-                        break
-            except:
-                return False,"error searching for old Timer"            
-            if toChange is None:
-                return False,"Timer not found"
-        else:
-            return self.addTimer(param)
+                if param['sRef'] is None:
+                    return [False, "ServiceReference missing"]
+                else: 
+                    serviceref = ServiceReference(param['sRef'])
     
+                if param['repeated'] is not None:
+                    repeated = int(param['repeated'])
+                else: 
+                    repeated = 0
+                
+                if param['begin'] is None:
+                    return False,"begin missing"
+                elif time() <= float(param['begin']):
+                    begin = float(param['begin'])
+                elif time() > float(param['begin']) and repeated == 1:
+                    begin = time()
+                else:
+                    return False,"incorrect time begin"
+            
+                if param['end'] is None:
+                    return False,"end missing"
+                elif begin < float(param['end']):
+                    end = float(param['end'])
+                else:
+                    return False,"incorrect time end"
+                    
+                if param['name'] is None:
+                    return False,"name is missing"
+                else:
+                    name = param['name']
+                
+                if param['description'] is not None:
+                    description = param['description']
+                    description = description.replace("\n"," ") # if a \n is in the timedescription, the resulting .meta breacks
+                else: 
+                    description = ""
+    
+                if param['repeated'] is not None:
+                    repeated = int(param['repeated'])
+                else: 
+                    repeated = 0
+    
+                if param['disabled'] =="0":
+                    disabled = False
+                elif param['disabled'] =="1":
+                    disabled = True
+                else:
+                    return False,"disabled incorrect"
+            
+                if param['justplay'] == "0":
+                    justplay = False
+                elif param['justplay'] == "1":
+                    justplay = True
+                else:
+                    return False,"justplay incorrect"
+                
+                if param['afterevent'] == "0":
+                    afterevent = 0
+                elif param['afterevent'] == "1":
+                    afterevent = 1
+                elif param['afterevent'] == "2":
+                    afterevent = 2
+                else:
+                    return False,"afterevent incorrect"
+            
+                if param['channelOld'] is None:
+                    return False,"channelOld missing"
+                else: 
+                    channelOld = ServiceReference(param['channelOld'])
+                
+                if param['beginOld'] is None:
+                    return False,"beginOld missing"
+                else:
+                    beginOld = float(param['beginOld'])
+                
+                if param['endOld'] is None:
+                    return False,"endOld missing"
+                else:
+                    endOld = float(param['endOld'])
+                    
+                toChange = None
+                try:
+                    #print "beginOld(%s), endOld(%s), channelOld(%s)" % (beginOld, endOld, channelOld)
+                    for x in self.recordtimer.timer_list + self.recordtimer.processed_timers:
+                        #print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (float(x.begin), float(x.end), x.service_ref)
+                        if str(x.service_ref) == str(channelOld) and float(x.begin) == beginOld and float(x.end) == endOld:
+                            #print "one found"
+                            toChange = x
+                            toChange.service_ref = ServiceReference(param['sRef'])
+                            toChange.begin = int(begin)
+                            toChange.end = int(end)
+                            toChange.name = name
+                            toChange.description = description
+                            toChange.disabled = disabled
+                            toChange.justplay = justplay
+                            toChange.afterEvent = afterevent
+                            toChange.repeated = repeated
+                            self.session.nav.RecordTimer.timeChanged(toChange)
+                            print "Timer changed"
+                            return True,"Timer changed"
+                            break
+                except:
+                    return False, "error searching for old Timer"            
+                if toChange is None:
+                    return False, "Timer not found"
+            else:
+                return self.addTimer(param)
+        else:
+                return False, "Parameter deleteOldOnSave not Set"
+        
     def writeTimerList(self,force=False):
         # is there an easier and better way? :\
         if config.plugins.Webinterface.autowritetimer.value or force: 
             print "Timer.py writing timer to flash"
             self.session.nav.RecordTimer.saveTimer()
-            return True,"TimerList was saved "
+            return True, "TimerList was saved "
         else:
-            return False,"TimerList was not saved "    
+            return False, "TimerList was not saved "    
 
     def getText(self):
         print self.result

@@ -3,18 +3,17 @@ from Components.Sources.Source import Source
 class PowerState(Source):
         
     def __init__(self,session):
-        self.cmd = []
+        self.cmd = None
         self.session = session
         Source.__init__(self)
 
     def handleCommand(self, cmd):
         self.cmd = cmd
     
-    def do_func(self):
-        print "PowerState:", self.cmd
+    def do_func(self):        
         if self.cmd == "" or self.cmd is None:
-            print "the PowerState was not defined (%s)" % self.cmd
-            return [[False,"the PowerState was not defined"]]
+            print "[PowerState.py] cmd was empty or None"
+            return "error"
         
         #-1: get current state
         # 0: toggle standby
@@ -31,7 +30,7 @@ class PowerState(Source):
                     return "true"
                 
             elif type == 0:
-                print "Standby 0"
+                print "[PowerState.py] Standby 0"
                 from Screens.Standby import inStandby
                 if inStandby == None:
                     from Screens.Standby import Standby
@@ -42,12 +41,12 @@ class PowerState(Source):
                     return "false"
                 
             elif 0 < type < 4:
-                print "TryQuitMainloop if"
+                print "[PowerState.py] TryQuitMainloop"
                 from Screens.Standby import TryQuitMainloop
                 self.session.open(TryQuitMainloop, type)
                 return "true"
             else:
-                print "PowerState was not defined correctly (%s)" % type
+                print "[PowerState.py] cmd unknown" % type
                 return "error"
         except ValueError:
             return "error"

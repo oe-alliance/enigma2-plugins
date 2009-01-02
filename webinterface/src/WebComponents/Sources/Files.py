@@ -4,17 +4,19 @@ from os import path, system
 class Files( Source):
     DEL = 0
     
-    def __init__(self, session,func = DEL):
+    def __init__(self, session, func = DEL):
         Source.__init__(self)
         self.func = func
         self.session = session
-        error = "unknown command (%s)" % func
-        self.result = [[error,error]]
+        self.result = []
     
-    def handleCommand(self,cmd):
-        self.cmd = cmd
-        if self.func is self.DEL:
-            self.result = self.delFile(cmd)
+    def handleCommand(self, cmd):
+        if cmd is not None:
+            self.cmd = cmd
+            if self.func is self.DEL:
+                self.result = self.delFile(cmd)
+        else:
+            self.result = [False, "Wrong or Missing Arguments"]
            
     def delFile(self,param):
         print "delFile:",param
@@ -22,15 +24,16 @@ class Files( Source):
         returnList = ["False", "Some error occurred deleting %s" % param]
         
         if path.exists(param):
+            #TODO fix fix fix fix this!!!! this allow to delete the whole /!!!
             system('rm -f "%s"' % param)
         if path.exists(param):
-            returnList = ["True","File (%s) was deleted"% param]
+            returnList = ["True", "File (%s) was deleted" % param]
         
         return returnList
    
     def getText(self):
         print self.result
-        (result,text) = self.result
+        (result, text) = self.result
         xml  = "<e2simplexmlresult>\n"
         if result:
             xml += "<e2state>True</e2state>\n"

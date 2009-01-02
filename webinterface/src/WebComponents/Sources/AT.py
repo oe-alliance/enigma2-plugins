@@ -9,21 +9,21 @@ class AT( Source ):
     LIST = 0
     WRITE = 1
     
-    def __init__(self, session,func = LIST):
+    def __init__(self, session, func = LIST):
         print "AutoTimer: init: ", func
         Source.__init__(self)
         self.func = func
         self.session = session
-        error = "unknown command (%s)" % func
-        self.result = [[error,error,error]]
+        self.result = []
     
-    def handleCommand(self,cmd):
-        print "AutoTimer: handleCommand: ", cmd    
-        self.cmd = cmd
-        if self.func is self.LIST:
-            self.result = self.timerList(cmd)
-        elif self.func is self.WRITE:
-            self.result = self.writeTimer(cmd)
+    def handleCommand(self, cmd):
+        print "AutoTimer: handleCommand: ", cmd
+        if cmd is not None:
+            self.cmd = cmd
+            if self.func is self.LIST:
+                self.result = self.timerList(cmd)
+            elif self.func is self.WRITE:
+                self.result = self.writeTimer(cmd)
         
     def timerList(self,param):
         print "timerList:",param

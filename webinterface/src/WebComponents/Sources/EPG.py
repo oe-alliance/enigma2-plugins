@@ -8,28 +8,32 @@ class EPG( Source):
     SERVICE=2
     TITLE=3
     
-    def __init__(self, navcore,func=NOW):
+    def __init__(self, navcore, func=NOW):
         self.func = func
         Source.__init__(self)        
         self.navcore = navcore
         self.epgcache = eEPGCache.getInstance()
+        self.command = None
         
-    def handleCommand(self,cmd):
+    def handleCommand(self, cmd):
         self.command = cmd
 
     def do_func(self):
-        if self.func is self.TITLE:
-            func = self.searchEvent
-        elif self.func is self.SERVICE:
-            func = self.getEPGofService
-        elif self.func is self.NOW:
-            func = self.getEPGNow
-        elif self.func is self.NEXT:
-            func = self.getEPGNext
+        if not self.command is None:
+            if self.func is self.TITLE:
+                func = self.searchEvent
+            elif self.func is self.SERVICE:
+                func = self.getEPGofService
+            elif self.func is self.NOW:
+                func = self.getEPGNow
+            elif self.func is self.NEXT:
+                func = self.getEPGNext
             
-        return func(self.command)
+            return func(self.command)
+        else:
+            return []
     
-    def getEPGNow(self,bouqetref):
+    def getEPGNow(self, bouqetref):
         return self.getEPGNowNext(bouqetref)
     
     def getEPGNext(self, bouqetref):
@@ -54,7 +58,7 @@ class EPG( Source):
         else:
                 return []
     
-    def getEPGofService(self,cmd):
+    def getEPGofService(self, cmd):
         print "getting EPG of Service", cmd
         events = self.epgcache.lookupEvent(['IBDTSERN',(cmd,0,-1,-1)]);
         if events:
@@ -62,7 +66,7 @@ class EPG( Source):
         else:
                 return []
     
-    def searchEvent(self,cmd):
+    def searchEvent(self, cmd):
         print "getting EPG by title",cmd
         events = self.epgcache.search(('IBDTSERN',256,eEPGCache.PARTIAL_TITLE_SEARCH,cmd,1));
         if events:

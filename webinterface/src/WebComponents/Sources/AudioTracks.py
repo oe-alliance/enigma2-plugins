@@ -9,6 +9,7 @@ class AudioTracks( Source ):
     text="False"
     
     def __init__(self, session, func=GET):
+        self.cmd = None
         self.session = session
         self.func = func
         Source.__init__(self)
@@ -17,17 +18,20 @@ class AudioTracks( Source ):
         self.cmd = cmd
     
     def setAudioTrack(self):
-        service = self.session.nav.getCurrentService()
-        audio = service and service.audioTracks()
-        try:
-            cmd = int(self.cmd)
-        except ValueError:
-            cmd = -1
-            
-        print "COMMAND is %s" %self.cmd
-        if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > cmd and cmd >= 0:
-            audio.selectTrack(cmd)
-            return "Success"
+        if self.cmd is not None:
+            service = self.session.nav.getCurrentService()
+            audio = service and service.audioTracks()
+            try:
+                cmd = int(self.cmd)
+            except ValueError:
+                cmd = -1
+                
+            print "COMMAND is %s" %self.cmd
+            if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > cmd and cmd >= 0:
+                audio.selectTrack(cmd)
+                return "Success"
+            else:
+                return "Error"
         else:
             return "Error"
      
@@ -35,36 +39,39 @@ class AudioTracks( Source ):
         service = self.session.nav.getCurrentService()
         audio = service and service.audioTracks()
         n = audio and audio.getNumberOfTracks() or 0
-        currentTrack = audio.getCurrentTrack()
-        tlist = []
-
-        if n > 0:
-            print "[AudioTracks.py] got %s Audiotracks!" %(n)
-            
-            for x in range(n):
-                i = audio.getTrackInfo(x)
-                for name in dir(i):
-                    print getattr(i, name)
-                language = i.getLanguage()
-                description = i.getDescription()
-                pid = i.getPID()
-                
-                if LanguageCodes.has_key(language):
-                    language = LanguageCodes[language][0]
-                
-                if len(description):
-                    description += " (" + language + ")"
-                else:
-                    description = language
-                
-                if x == currentTrack:
-                    active = "True"
-                else:
-                    active = "False"
-                
-                tlist.append((description, x, pid, active))
         
-        return tlist
+        tracklist = []
+        
+        #check for standby
+        if audio is not None and service is not None: 
+            currentTrack = audio.getCurrentTrack()
+    
+            if n > 0:
+                print "[AudioTracks.py] got %s Audiotracks!" %(n)
+                
+                for x in range(n):
+                    i = audio.getTrackInfo(x)
+
+                    language = i.getLanguage()
+                    description = i.getDescription()
+                    pid = i.getPID()
+                    
+                    if LanguageCodes.has_key(language):
+                        language = LanguageCodes[language][0]
+                    
+                    if len(description):
+                        description += " (" + language + ")"
+                    else:
+                        description = language
+                    
+                    if x == currentTrack:
+                        active = "True"
+                    else:
+                        active = "False"
+                    
+                    tracklist.append((description, x, pid, active))
+        
+        return tracklist
     
     text = property(setAudioTrack)
     list = property(getAudioTracks)

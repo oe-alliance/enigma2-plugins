@@ -4,7 +4,7 @@ Version = '$Header$';
 # things to improve:
 #  - nicer code
 #  - screens need to be defined somehow else. 
-#    I don't know how, yet. Probably each in an own file.
+#	I don't know how, yet. Probably each in an own file.
 #  - more components, like the channellist
 #  - better error handling
 #  - use namespace parser
@@ -251,21 +251,24 @@ class RestartWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		import plugin
-		plugin.restartWebserver()
+		plugin.restartWebserver(session)
 		
 class GetPid(WebScreen):
-      def __init__(self, session, request):
-         WebScreen.__init__(self, session, request)
-         from Components.Sources.StaticText import StaticText
-         from enigma import iServiceInformation
-         pids = self.session.nav.getCurrentService()
-         if pids is not None:
-                 pidinfo = pids.info()
-                 VPID = hex(pidinfo.getInfo(iServiceInformation.sVideoPID))
-                 APID = hex(pidinfo.getInfo(iServiceInformation.sAudioPID))
-                 PPID = hex(pidinfo.getInfo(iServiceInformation.sPMTPID))
-         self["pids"] = StaticText("%s,%s,%s"%(PPID.lstrip("0x"),VPID.lstrip("0x"),APID.lstrip("0x")))
-         self["localip"] = RequestData(request,what=RequestData.HOST)
+	  def __init__(self, session, request):
+		 WebScreen.__init__(self, session, request)
+		 from Components.Sources.StaticText import StaticText
+		 from enigma import iServiceInformation
+		 pids = self.session.nav.getCurrentService()
+		 if pids is not None:
+		 	pidinfo = pids.info()
+		 	VPID = hex(pidinfo.getInfo(iServiceInformation.sVideoPID))
+			APID = hex(pidinfo.getInfo(iServiceInformation.sAudioPID))
+			PPID = hex(pidinfo.getInfo(iServiceInformation.sPMTPID))
+			self["pids"] = StaticText("%s,%s,%s"%(PPID.lstrip("0x"),VPID.lstrip("0x"),APID.lstrip("0x")))
+		 else:
+			self["pids"] = StaticText("0x,0x,0x")
+
+		 self["localip"] = RequestData(request,what=RequestData.HOST)
 
 
 # implements the 'render'-call.
@@ -422,16 +425,14 @@ class ListFiller(Converter):
 					append(element)
 				elif filternum == 2:
 					append(str(item[element]).replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
-				elif filternum == 3:
-					#append(str(item[element]).replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;"))
+				elif filternum == 3:					
 					append(escape_xml(str(item[element])))
 				elif filternum == 4:
 					append(str(item[element]).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				else:
 					append(str(item[element]))
 		# (this will be done in c++ later!)
-#		print l
-#		print lut
+
 		return ''.join(strlist)
 
 	text = property(getText)
