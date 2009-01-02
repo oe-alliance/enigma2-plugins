@@ -12,13 +12,13 @@
 											<td colspan="1" rowspan="1" class="tListBegin">${t.beginDate}</td>												
 											<td colspan="1" rowspan="1" class="tListType">${t.justplayReadable}</td>						
 											<td colspan="1" rowspan="2" class="tListOption">
-												<a target="_blank" >
+												<a href="#">
 													<img src="/webdata/img/delete.png" title="Delete timer ${t.title}" border="0" onclick="delTimer('${t.servicereference}','${t.begin}','${t.end}','${t.servicename}','${t.title}','${t.description}',incomingTimerDelResult);">
 												</a>
-												<a target="_blank" >
+												<a href="#">
 													<img src="/webdata/img/${t.onOff}.png" title="${t.enDis} ${t.title}" border="0" onclick="sendToggleTimerDisable('${t.justplay}','${t.begin}','${t.end}','${t.repeated}','${t.servicereference}','${t.title}','${t.description}','${t.afterevent}','${t.disabled}' );">
 												</a>
-												<a target="_blank" >
+												<a href="#">
 													<img src="/webdata/img/edit.png" title="Edit timer ${t.title}" border="0" onclick="loadTimerFormSeconds('${t.justplay}','${t.begin}','${t.end}','${t.repeated}','${t.servicereference}','${t.servicename}','${t.title}','${t.description}','${t.afterevent}',1);">
 												</a>
 											</td>	
