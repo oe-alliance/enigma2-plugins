@@ -20,7 +20,7 @@ class Timer( Source):
     WRITE = 6
     RECNOW = 7
     
-    def __init__(self, session,func = LIST):
+    def __init__(self, session, func = LIST):
         self.func = func
         Source.__init__(self)        
         self.session = session
@@ -439,11 +439,12 @@ class Timer( Source):
             timer.append(item.eit)
             timer.append(item.name)
             timer.append(item.description)
+            timer.append(item.dirname)
+
             if item.disabled is True:
                 timer.append("1")
             else:
                 timer.append("0")
-            #timer.append(item.disabled)
 
             timer.append(item.begin)
             timer.append(item.end)
@@ -465,8 +466,7 @@ Zeile Nr. 374, Spalte 259:        <e2logentries>[(1171275272, 15, 'record time c
 ------------------------------------------------------------------------------------------------------------
 No clue, what it could be.
             """
-            #timer.append(item.log_entries)
-            timer.append("")
+            timer.append(item.log_entries)
             
             try:
                 timer.append(item.Filename)
@@ -501,14 +501,6 @@ No clue, what it could be.
             else:
                 timer.append("N/A")
             
-            if item.state == 0:
-                timer.append("000000")
-            elif item.state == 1:
-                timer.append("00BCBC")
-            elif item.state == 2:
-                timer.append("9F1919")
-            else:
-                timer.append("00BCBC")
             #toggleDisabled
             if item.disabled is True:
                 timer.append("0")
@@ -527,24 +519,24 @@ No clue, what it could be.
            ,"EIT":2
            ,"Name":3
            ,"Description":4
-           ,"Disabled":5
-           ,"TimeBegin":6
-           ,"TimeEnd":7
-           ,"Duration":8
-           ,"startPrepare":9
-           ,"justPlay":10
-           ,"afterEvent":11
-           ,"LogEntries":12
-           ,"Filename":13
-           ,"Backoff":14
-           ,"nextActivation":15
-           ,"firstTryPrepare":16
-           ,"State":17
-           ,"Repeated":18
-           ,"dontSave":19
-           ,"Cancled":20
-           ,"DescriptionExtended":21
-           ,"Color":22
+           ,"Directory":5
+           ,"Disabled":6
+           ,"TimeBegin":7
+           ,"TimeEnd":8
+           ,"Duration":9
+           ,"startPrepare":10
+           ,"justPlay":11
+           ,"afterEvent":12
+           ,"LogEntries":13
+           ,"Filename":14
+           ,"Backoff":15
+           ,"nextActivation":16
+           ,"firstTryPrepare":17
+           ,"State":18
+           ,"Repeated":19
+           ,"dontSave":20
+           ,"Cancled":21
+           ,"DescriptionExtended":22
            ,"toggleDisabled":23
            ,"toggleDisabledIMG":24
            }       

@@ -7,6 +7,7 @@
 		&lt;e2name><e2:item name="Name" filter="xml"/>&lt;/e2name>
 		&lt;e2description><e2:item name="Description" filter="xml"/>&lt;/e2description>
 		&lt;e2descriptionextended><e2:item name="DescriptionExtended" filter="xml"/>&lt;/e2descriptionextended>
+		&lt;e2directory><e2:item name="Directory" filter="xml"/>&lt;/e2directory>
 		&lt;e2disabled><e2:item name="Disabled" />&lt;/e2disabled>
 		&lt;e2timebegin><e2:item name="TimeBegin" />&lt;/e2timebegin>
 		&lt;e2timeend><e2:item name="TimeEnd" />&lt;/e2timeend>
@@ -23,7 +24,6 @@
 		&lt;e2repeated><e2:item name="Repeated" />&lt;/e2repeated>
 		&lt;e2dontsave><e2:item name="dontSave" />&lt;/e2dontsave>
 		&lt;e2cancled><e2:item name="Cancled" />&lt;/e2cancled>
-		&lt;e2color><e2:item name="Color" />&lt;/e2color>
 		&lt;e2toggledisabled><e2:item name="toggleDisabled" />&lt;/e2toggledisabled>
 		&lt;e2toggledisabledimg><e2:item name="toggleDisabledIMG" />&lt;/e2toggledisabledimg>
 	&lt;/e2timer>
