@@ -5,7 +5,7 @@ from ServiceReference import ServiceReference
 from Tools.Directories import resolveFilename, SCOPE_HDD
 from Tools.FuzzyDate import FuzzyTime
 
-from os import path as os_path, stat as os_stat, system as os_system
+from os import stat as os_stat
 
 class Movie( Source):
 	LIST = 0
