@@ -288,9 +288,10 @@ class AutoTimer:
 
 				newEntry.dirname = timer.destination
 				newEntry.justplay = timer.justplay
-				newEntry.tags = timer.tags # This needs my enhanced tag support patch to work
+				newEntry.tags = timer.tags
 
 				if isNew:
+					conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
 					if conflicts and config.plugins.autotimer.disabled_on_conflict.value:
 						timer.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
