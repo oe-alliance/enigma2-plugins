@@ -917,13 +917,10 @@ function delMovie(sref ,servicename, title, description) {
 function incomingMessageResult(request){
 	if(request.readyState== 4){
 		var result = getXML(request).getElementsByTagName("e2message").item(0).getElementsByTagName('e2result').item(0).firstChild.data;
+		var resulttext = getXML(request).getElementsByTagName("e2message").item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
 		
-		if (result=="True"){
-			messageBox('Message sent successfully!');
-			return;
-		}
-	}	
-	messageBox('Message NOT sent!');
+		messageBox(resulttext);
+	}
 }
 
 function getMessageAnswer() {
