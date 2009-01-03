@@ -24,6 +24,7 @@ config.plugins.autotimer.editor = ConfigSelection(choices = [
 		("wizard", _("Wizard"))
 	], default = "wizard"
 )
+config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default = False)
 
 autotimer = None
 autopoller = None

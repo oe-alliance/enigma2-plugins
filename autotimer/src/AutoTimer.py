@@ -291,7 +291,11 @@ class AutoTimer:
 				newEntry.tags = timer.tags # This needs my enhanced tag support patch to work
 
 				if isNew:
-					if NavigationInstance.instance.RecordTimer.record(newEntry) is None:
+					if conflicts and config.plugins.autotimer.disabled_on_conflict.value:
+						timer.disabled = True
+						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
+						conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
+					if conflicts is None:
 						timer.decrementCounter()
 						new += 1
 						if recorddict.has_key(serviceref):
