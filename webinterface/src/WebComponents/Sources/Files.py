@@ -8,28 +8,31 @@ class Files( Source):
         Source.__init__(self)
         self.func = func
         self.session = session
-        self.result = []
+        #self.result = []
+        self.result = False, "Deleting Files has been deactivated for Security Reasons"
     
     def handleCommand(self, cmd):
+        #===============================================================================
+        # Disable File.py functionality Deleting until we've got something secure
+        #===============================================================================        
+        return
+        
         if cmd is not None:
             self.cmd = cmd
             if self.func is self.DEL:
-                self.result = self.delFile(cmd)
+                self.delFile(cmd)
         else:
-            self.result = [False, "Wrong or Missing Arguments"]
+            self.result = False, "Wrong or Missing Arguments"
            
-    def delFile(self,param):
-        print "delFile:",param
-        
-        returnList = ["False", "Some error occurred deleting %s" % param]
+    def delFile(self, param):
+        print "[Files.py] Delete File: ", param
+                
+        self.result = False, "Some error occurred deleting %s" % param
         
         if path.exists(param):
             #TODO fix fix fix fix this!!!! this allow to delete the whole /!!!
             system('rm -f "%s"' % param)
-        if path.exists(param):
-            returnList = ["True", "File (%s) was deleted" % param]
-        
-        return returnList
+            self.result = True, "File (%s) was deleted" % param
    
     def getText(self):
         print self.result
