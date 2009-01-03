@@ -40,7 +40,7 @@ function ownLazyNumber(num) {
 }
 
 
-function d2h(nr, len){
+function dec2hex(nr, len){
 
 	var hex = parseInt(nr, 10).toString(16).toUpperCase();
 	if(len > 0){
@@ -1198,21 +1198,21 @@ function incomingAbout(request) {
 				'serviceVideosize': xml.getElementsByTagName('e2servicevideosize').item(0).firstChild.data,
 				'serviceNamespace': xml.getElementsByTagName('e2servicenamespace').item(0).firstChild.data,
 				
-				'vPidh': '0x'+d2h(xml.getElementsByTagName('e2vpid').item(0).firstChild.data, 4),
+				'vPidh': '0x'+dec2hex(xml.getElementsByTagName('e2vpid').item(0).firstChild.data, 4),
 				'vPid': ownLazyNumber(xml.getElementsByTagName('e2vpid').item(0).firstChild.data),
-				'aPidh': '0x'+d2h(xml.getElementsByTagName('e2apid').item(0).firstChild.data, 4),
+				'aPidh': '0x'+dec2hex(xml.getElementsByTagName('e2apid').item(0).firstChild.data, 4),
 				'aPid': ownLazyNumber(xml.getElementsByTagName('e2apid').item(0).firstChild.data),
-				'pcrPidh': '0x'+d2h(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data, 4),
+				'pcrPidh': '0x'+dec2hex(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data, 4),
 				'pcrPid': ownLazyNumber(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data),
-				'pmtPidh': '0x'+d2h(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data, 4),
+				'pmtPidh': '0x'+dec2hex(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data, 4),
 				'pmtPid': ownLazyNumber(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data),
-				'txtPidh': '0x'+d2h(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data, 4),
+				'txtPidh': '0x'+dec2hex(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data, 4),
 				'txtPid': ownLazyNumber(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data),
-				'tsidh': '0x'+d2h(xml.getElementsByTagName('e2tsid').item(0).firstChild.data, 4),
+				'tsidh': '0x'+dec2hex(xml.getElementsByTagName('e2tsid').item(0).firstChild.data, 4),
 				'tsid': ownLazyNumber(xml.getElementsByTagName('e2tsid').item(0).firstChild.data),
-				'onidh': '0x'+d2h(xml.getElementsByTagName('e2onid').item(0).firstChild.data, 4),
+				'onidh': '0x'+dec2hex(xml.getElementsByTagName('e2onid').item(0).firstChild.data, 4),
 				'onid': ownLazyNumber(xml.getElementsByTagName('e2onid').item(0).firstChild.data),
-				'sidh': '0x'+d2h(xml.getElementsByTagName('e2sid').item(0).firstChild.data, 4),
+				'sidh': '0x'+dec2hex(xml.getElementsByTagName('e2sid').item(0).firstChild.data, 4),
 				'sid': ownLazyNumber(xml.getElementsByTagName('e2sid').item(0).firstChild.data)
 			};				  
 		} catch (e) {
