@@ -81,10 +81,9 @@ class EPGRefresh:
 		for bouquet in configuration.findall("bouquet"):
 			value = bouquet.text
 			if value:
-				self.services[1].add(value)
 				duration = bouquet.get('duration', None)
 				duration = duration and int(duration)
-				self.services[0].add(EPGRefreshService(value, duration))
+				self.services[1].add(EPGRefreshService(value, duration))
 
 	def saveConfiguration(self):
 		# Generate List in RAM
