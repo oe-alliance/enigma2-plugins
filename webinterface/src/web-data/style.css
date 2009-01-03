@@ -373,6 +373,10 @@
 		margin: 0px;
 		padding: 0px;
 	}
+	
+	.about td{
+		font-size:12px;
+	}
 
 	.aboutSection{
 		width:100%;
