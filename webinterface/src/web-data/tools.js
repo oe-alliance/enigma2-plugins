@@ -1074,7 +1074,7 @@ function incomingRecordingPushed(request) {
 		var timers = new TimerList(getXML(request)).getArray();
 		debug("[incomingRecordingPushed] Got " + timers.length + " timers");
 		
-		var aftereventReadable = ['Nothing', 'Standby', 'Deepstandby/Shutdown'];
+		var aftereventReadable = ['Nothing', 'Standby', 'Deepstandby/Shutdown', 'Auto'];
 		var justplayReadable = ['record', 'zap'];
 		var OnOff = ['on', 'off'];
 		

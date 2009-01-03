@@ -37,7 +37,7 @@ function incomingTimerList(request){
 		var timers = new TimerList(getXML(request)).getArray();
 		debug("[incomingTimerList] Got " + timers.length + " timers");
 
-		var aftereventReadable = ['Nothing', 'Standby', 'Deepstandby/Shutdown'];
+		var aftereventReadable = ['Nothing', 'Standby', 'Deepstandby/Shutdown', 'Auto'];
 		var justplayReadable = ['record', 'zap'];
 		
 		var namespace = [];
@@ -288,6 +288,7 @@ function loadTimerForm(){
 	AfterEvent["0"] = "Nothing";
 	AfterEvent["1"] = "Standby";
 	AfterEvent["2"] = "Deepstandby/Shutdown";
+	AfterEvent["3"] = "Auto";
 	
 	addTimerEditFormArray.name = (typeof(addTimerEditFormArray.name) != 'undefined') ? addTimerEditFormArray.name : '';
 	addTimerEditFormArray.name = (addTimerEditFormArray.name === '') ? ' ' : addTimerEditFormArray.name;

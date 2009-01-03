@@ -267,18 +267,26 @@ class WAPfunctions( Source):
         elif param.has_key("afterevent"):
             number = param["afterevent"] or 0
             number = int(number)
-            if number == 2:
+            if number == 3:
+                returnList.append(["Nothing",0,""])
+                returnList.append(["Standby",1,""])
+                returnList.append(["Deepstandby/Shutdown",2,""])
+                returnList.append(["Auto",3,"selected"])
+            elif number == 2:
                 returnList.append(["Nothing",0,""])
                 returnList.append(["Standby",1,""])
                 returnList.append(["Deepstandby/Shutdown",2,"selected"])
+                returnList.append(["Auto",3,""])
             elif number == 1:
                 returnList.append(["Nothing",0,""])
                 returnList.append(["Standby",1,"selected"])
                 returnList.append(["Deepstandby/Shutdown",2,""])
+                returnList.append(["Auto",3,""])
             else:
                 returnList.append(["Nothing",0,"selected"])
                 returnList.append(["Standby",1,""])
                 returnList.append(["Deepstandby/Shutdown",2,""])
+                returnList.append(["Auto",3,""])
         
         return returnList
     
