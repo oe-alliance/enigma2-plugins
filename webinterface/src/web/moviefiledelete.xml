@@ -1,5 +1,0 @@
-<e2:screen name="MovieWebScreen">
-	<e2:element source="MovieFileDel" id="filename">
-		<e2:convert type="web:TextToHTML" />
-	</e2:element>
-</e2:screen>

@@ -878,8 +878,8 @@ function loadMovieList(tag){
 }
 
 
-function incomingDelMovieFileResult(request) {
-	debug("[incomingDelMovieFileResult] called");
+function incomingdelMovieResult(request) {
+	debug("[incomingdelMovieResult] called");
 	if(request.readyState == 4){
 		var delresult = new SimpleXMLResult(getXML(request));
 		if(delresult.getState()){
@@ -891,8 +891,8 @@ function incomingDelMovieFileResult(request) {
 }
 
 
-function delMovieFile(file ,servicename, title, description) {
-	debug("[delMovieFile] File(" + file + "), servicename(" + servicename + ")," +
+function delMovie(sref ,servicename, title, description) {
+	debug("[delMovie] File(" + sref + "), servicename(" + servicename + ")," +
 			"title(" + title + "), description(" + description + ")");
 	
 	result = confirm( "Are you sure want to delete the Movie?\n" +
@@ -901,12 +901,12 @@ function delMovieFile(file ,servicename, title, description) {
 		"Description: "+description+"\n");
 
 	if(result){
-		debug("[delMovieFile] ok confirm panel"); 
-		doRequest(url_moviefiledelete+"?filename="+file, incomingDelMovieFileResult, false); 
+		debug("[delMovie] ok confirm panel"); 
+		doRequest(url_moviedelete+"?sRef="+sref, incomingdelMovieResult, false); 
 		return true;
 	}
 	else{
-		debug("[delMovieFile] cancel confirm panel");
+		debug("[delMovie] cancel confirm panel");
 		return false;
 	}
 }

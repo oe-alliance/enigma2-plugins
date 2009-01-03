@@ -29,7 +29,7 @@ var url_settings= "/web/settings";
 
 var url_parentcontrol= "/web/parentcontrollist";
 
-var url_moviefiledelete= "/web/moviefiledelete"; // plus serviceref,eventid
+var url_moviedelete= "/web/moviedelete"; // plus serviceref,eventid
 
 var url_mediaplayerlist= "/web/mediaplayerlist?types=audio&path="; // plus full qualified path
 var url_mediaplayerplay= "/web/mediaplayerplay?file="; // plus file-serviceref

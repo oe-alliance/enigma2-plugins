@@ -1,4 +1,4 @@
-from enigma import eServiceReference, iServiceInformation
+from enigma import eServiceReference, iServiceInformation, eServiceCenter
 from Components.Sources.Source import Source
 from Components.config import config
 from ServiceReference import ServiceReference
@@ -26,38 +26,39 @@ class Movie( Source):
 		if cmd is not None:
 			self.cmd = cmd
 			if self.func is self.DEL:
-				self.result = self.delMovieFiles(cmd)
+				self.result = self.delMovie(cmd)
         
 
 		   
-	def delMovieFiles(self,param):
+	def delMovie(self, param):
 		print "delMovieFiles:", param
 		
 		if param is None:
-			return False,"title missing"
+			return False, "ServiceReference missing"
 		
-        #fixme - use eAppContainer!
-		try:
-			os_system('rm -f "%s"' % param)
-			#.ap .cuts .meta
-			if os_path.exists("%s.ap" % param):
-				os_system('rm -f "%s.ap"' % param)
-			
-			if os_path.exists("%s.cuts" % param):
-				os_system('rm -f "%s.cuts"' % param)
-			
-			if os_path.exists("%s.meta" % param):
-				os_system('rm -f "%s.meta"' % param)
-			
-			if os_path.exists("%s.eit" % param):
-				os_system('rm -f "%s.eit"' % param)
-		except OSError:
-			return False,"OSErrorSome error occurred while deleting file"
+		service = ServiceReference(param)
+		result = False
 		
-		if os_path.exists(param):
-			return False,"Some error occurred while deleting file"
-		else:
-			return True,"File deleted"
+		if service is not None:
+			#mostly copied from Screens.MovieSelection
+			serviceHandler = eServiceCenter.getInstance()
+			offline = serviceHandler.offlineOperations(service.ref)
+			info = serviceHandler.info(service.ref)
+			name = info and info.getName(service.ref) or "this recording"
+			
+			if offline is not None:
+				if not offline.deleteFromDisk(0):
+					result = True
+				
+			if result == False:
+				return result, "Could not delete Movie"
+			else: 
+				return result, "Movie deleted"
+		
+		return result, "Illegal ServiceReference %s" %(param)  
+		
+		
+
    
 	def command(self):
 		#self.movielist.reload(root=self.root)
