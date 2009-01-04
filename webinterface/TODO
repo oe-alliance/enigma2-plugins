@@ -1,6 +1,7 @@
 * Remove all os.system calls
 * Fix potential security issues in all shell operations (deleting unwanted files etc)
 * Finish "Current Service" Stuff
+* Add Timer/Movie-Location Stuff
 * Decide whether the MediaPlayer Menu should stay and if how.
 * Add Support for Multiple NICs in About
 * add box dependent remote control picture (for dm8000)
