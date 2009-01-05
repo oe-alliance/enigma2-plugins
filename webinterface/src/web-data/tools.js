@@ -2,17 +2,19 @@
 
 var doRequestMemory = {};
 var doRequestMemorySave = {};
-
+var signalPanelData = {};
+var epgListData = {};
+var bouquetsMemory = {};
+var loadedChannellist = {};
 var templates = {};
 
 var mediaPlayerStarted = false;
+var popUpBlockerHinted = false;
 
-// Settings
 var settings = null;
 var parentControlList = null;
 
-// Globals
-var popUpBlockerHinted = false;
+
 var requestcounter = 0;
 
 var debugWin = '';
@@ -24,14 +26,9 @@ var MessageAnswerPolling = '';
 
 var currentBouquet = bouquetsTv;
 
-var signalPanelData = {};
-var epgListData = {};
-var bouquetsMemory = {};
-var loadedChannellist = {};
-
-
-var updateCurrentPoller = setInterval(updateItems, 7500);
 var updateBouquetItemsPoller = '';
+var updateCurrentPoller = setInterval(updateItems, 7500);
+
 
 var boxtype = "";
 
@@ -1000,7 +997,7 @@ function getScreenShot(what) {
 	
 	switch(what){
 		case "o":
-			what = "&o";
+			what = "&o&n";
 			break;
 		case "v":
 			what = "&v";
@@ -1011,7 +1008,7 @@ function getScreenShot(what) {
 	}
 	
 	downloadStart = new Date().getTime();
-	buffer.src = '/grab?format=jpg&n=&r=720&' + what + '&filename=/tmp/' + downloadStart;
+	buffer.src = '/grab?format=jpg&r=720&' + what + '&filename=/tmp/' + downloadStart;
 }
 
 
