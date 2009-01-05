@@ -86,11 +86,12 @@ class GrabStream(stream.ProducerStream):
         self.output = ''
         stream.ProducerStream.__init__(self)
 
-        self.container = eConsoleAppContainer()
-        self.container.appClosed.append(self.cmdFinished)
-        self.container.dataAvail.append(self.dataAvail)
+        container = eConsoleAppContainer()
+        container.appClosed.append(self.cmdFinished)
+        container.dataAvail.append(self.dataAvail)
+        
         print '[Screengrab.py] starting AiO grab with cmdline:', cmd
-        self.container.execute(*cmd)
+        container.execute(*cmd)
 
     def cmdFinished(self, data):
         if int(data) is 0 and self.target is not None:
