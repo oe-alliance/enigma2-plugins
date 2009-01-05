@@ -30,6 +30,19 @@ var bouquetsMemory = {};
 var loadedChannellist = {};
 
 
+var updateCurrentPoller = setInterval(updateItems, 7500);
+var updateBouquetItemsPoller = '';
+
+
+function startUpdateBouquetItemsPoller(){
+	debug("[startUpdateBouquetItemsPoller] called")
+	updateBouquetItemsPoller = setInterval(updateItemsLazy, 60000);
+}
+
+function stopUpdateBouquetItemsPoller(){
+	debug("[stopUpdateBouquetItemsPoller] called")
+	clearInterval(updateBouquetItemsPoller);
+}
 //General Helpers
 function ownLazyNumber(num) {
 	if(isNaN(num)){
@@ -213,7 +226,7 @@ function renderTpl(tpl, data, domElement) {
 	try{
 		$(domElement).innerHTML = result;
 	}catch(ex){
-		debug("[renderTpl] exception: " + ex);
+//		debug("[renderTpl] exception: " + ex);
 	}
 }
 
@@ -471,7 +484,7 @@ function incomingSubServiceRequest(request){
 }
 
 
-function getSubServices() {
+function getSubServices(bouquet) {
 	doRequest(url_subservices, incomingSubServiceRequest, false);
 }
 
@@ -760,31 +773,26 @@ function incomingChannellist(request){
 
 
 function loadBouquet(servicereference, name){ 
-	debug("[loadBouquet] Loading "+servicereference);
+	debug("[loadBouquet] called");
 
 	currentBouquet = servicereference;
 		
 	setContentHd(name);
 	setAjaxLoad('contentMain');
+		
+	startUpdateBouquetItemsPoller();
 	
-	debug("[loadBouquet] " + typeof(loadedChannellist[servicereference]));
-	if(typeof(loadedChannellist[servicereference]) == "undefined") {
-		doRequest(url_getServices+servicereference, incomingChannellist, true);
-	} else {
-		incomingChannellist();
-	}
+	doRequest(url_getServices+servicereference, incomingChannellist, true);
 }
 
 
 function incomingBouquetListInitial(request){
 	if (request.readyState == 4) {
 		var bouquetList = new ServiceList(getXML(request)).getArray();
-		debug("[loadBouquet] Got " + bouquetList.length + " TV Bouquets!");	
+		debug("[incomingBouquetListInitial] Got " + bouquetList.length + " TV Bouquets!");	
 
 		//loading first entry of TV Favorites as default for ServiceList
 		loadBouquet(bouquetList[0].getServiceReference(), bouquetList[0].getServiceName());
-
-		bouquetsMemory.bouquetsTv = bouquetList;
 	}
 }
 
@@ -794,7 +802,7 @@ function renderBouquetTable(list, target){
 	
 	var namespace = [];
 	if (list.length < 1){
-		alert("NO BOUQUETS!");
+		debug("[renderBouquetTable] NO BOUQUETS!");
 	}
 	for (var i=0; i < list.length; i++){
 		try{
@@ -803,9 +811,7 @@ function renderBouquetTable(list, target){
 				'servicereference': bouquet.getServiceReference(), 
 				'bouquetname': bouquet.getServiceName()
 			};
-		} catch (e) { 
-			//TODO error handling 
-		}
+		} catch (e) { }
 	}
 	var data = { 
 		services : namespace 
@@ -826,9 +832,9 @@ function incomingBouquetList(request){
 
 
 function initChannelList(){
-	//debug("init ChannelList");	
 	var url = url_getServices+encodeURIComponent(bouquetsTv);
 	currentBouquet = bouquetsTv;
+	
 	doRequest(url, incomingBouquetListInitial, true);
 }
 
@@ -1499,32 +1505,7 @@ function getCurrent(){
  * Loads all Bouquets for the given enigma2 servicereference and sets the according contentHeader
  * @param sRef - the Servicereference for the bouquet to load
  */
-function getBouquets(sRef){
-	setAjaxLoad('contentMain');
-
-	var contentHeader = "";
-	switch(sRef){
-		case bouquetsTv:
-			contentHeader = "Bouquets (TV)";
-			break;
-		
-		case providerTv:
-			contentHeader = "Provider (TV)";
-			break;
-		
-		case bouquetsRadio:
-			contentHeader = "Bouquets (Radio)";
-			break;
-		
-		case providerRadio:
-			contentHeader = "Provider (Radio)";
-			break;
-		
-		default:
-			break;
-	}
-	setContentHd(contentHeader);
-	
+function getBouquets(sRef){	
 	var url = url_getServices+encodeURIComponent(sRef);
 	doRequest(url, incomingBouquetList, true);
 }
@@ -1540,6 +1521,31 @@ function reloadNav(template, title){
 		setNavHd(title);
 }
 
+function getBouquetsTv(){
+	getBouquets(bouquetsTv);
+}
+
+function getProviderTv(){
+	getBouquets(providerTv);
+}
+
+function getAllTv(){
+	loadBouquet(allTv, "All (TV)")
+}
+
+
+function getBouquetsRadio(){
+	getBouquets(bouquetsRadio);
+}
+
+function getProviderRadio(){
+	getBouquets(providerRadio);
+}
+
+function getAllRadio(){
+	loadBouquet(allRadio, "All (Radio)");
+}
+
 /*
  * Loads dynamic content to $(contentMain) by calling a execution function
  * @param fnc - The function used to load the content
@@ -1548,6 +1554,8 @@ function reloadNav(template, title){
 function loadContentDynamic(fnc, title){
 	setAjaxLoad('contentMain');
 	setContentHd(title);
+	stopUpdateBouquetItemsPoller();
+	
 	fnc();
 }
 
@@ -1559,6 +1567,7 @@ function loadContentDynamic(fnc, title){
 function loadContentStatic(template, title){
 	setAjaxLoad('contentMain');
 	setContentHd(title);
+	stopUpdateBouquetItemsPoller();
 	processTpl(template, null, 'contentMain');
 }
 
@@ -1642,13 +1651,11 @@ function updateItems(){
 	getCurrent();
 }
 
-function updateItemsLazy(){
+function updateItemsLazy(bouquet){
 	getSubServices();
 	getBouquetEpg();
 }
 
-var updateItemsPoller = setInterval(updateItems, 7500);
-var updateItemsLazyPoller = setInterval(updateItemsLazy, 60000);
 /*
  * Does the everything required on initial pageload
  */
