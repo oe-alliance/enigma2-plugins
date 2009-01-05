@@ -1,9 +1,10 @@
 * Remove all os.system calls
-* Fix potential security issues in all shell operations (deleting unwanted files etc), 
+* Fix potential security issues in all shell operations (deleting unwanted files etc)
 ** done for IPKG.py, Screengrab.py
-* Add Timer/Movie-Location Stuff (backend done)
+* Add Timer/Movie-Location Stuff (backend partly done)
 * Decide whether the MediaPlayer Menu should stay and if how.
 * Add Support for Multiple NICs in About
 * add box dependent remote control picture (for dm8000)
 * Fix some smaller IE Bugs
 ** Exception on Movielist
+* Move Timer Cleaning to Python Side
