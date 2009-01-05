@@ -43,7 +43,7 @@ function incomingAboutBoxtype(request){
 	var xml = getXML(request).getElementsByTagName("e2abouts").item(0).getElementsByTagName("e2about");
 	xml = xml.item(0);
 	
-	boxtype = xml.getElementsByTagName('e2model').item(0).firstChild.data
+	boxtype = xml.getElementsByTagName('e2model').item(0).firstChild.data;
 	debug("[incomingAboutBoxtype] Boxtype: " + boxtype);
 }
 
@@ -54,13 +54,13 @@ function getBoxtype(){
 
 
 function startUpdateBouquetItemsPoller(){
-	debug("[startUpdateBouquetItemsPoller] called")
+	debug("[startUpdateBouquetItemsPoller] called");
 	updateBouquetItemsPoller = setInterval(updateItemsLazy, 60000);
 }
 
 
 function stopUpdateBouquetItemsPoller(){
-	debug("[stopUpdateBouquetItemsPoller] called")
+	debug("[stopUpdateBouquetItemsPoller] called");
 	clearInterval(updateBouquetItemsPoller);
 }
 
@@ -1028,10 +1028,10 @@ function incomingRemoteControlResult(request){
 }
 
 function openWebRemote(){
-	var template = templates.tplWebRemoteOld
+	var template = templates.tplWebRemoteOld;
 	
 	if(boxtype == "dm8000"){
-		template = templates.tplWebRemote
+		template = templates.tplWebRemote;
 	}
 	
 	
@@ -1486,7 +1486,7 @@ function getProviderTv(){
 }
 
 function getAllTv(){
-	loadBouquet(allTv, "All (TV)")
+	loadBouquet(allTv, "All (TV)");
 }
 
 
@@ -1548,7 +1548,7 @@ function loadControl(control){
 			break;
 			
 		case "screenshot":
-			loadContentDynamic(getScreenShot, 'Screenshot')
+			loadContentDynamic(getScreenShot, 'Screenshot');
 			break;
 			
 		default:
