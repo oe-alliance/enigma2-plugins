@@ -35,7 +35,6 @@ from WebComponents.Sources.RequestData import RequestData
 from WebComponents.Sources.AudioTracks import AudioTracks
 from WebComponents.Sources.WAPfunctions import WAPfunctions
 from WebComponents.Sources.MP import MP
-from WebComponents.Sources.Files import Files
 from WebComponents.Sources.ServiceListReload import ServiceListReload
 from WebComponents.Sources.AT import AT
 
@@ -164,11 +163,6 @@ class AutoTimerWebScreen(WebScreen):
 		WebScreen.__init__(self, session, request)
 		self["AutoTimerList"] = AT(session,func = AT.LIST)
 		self["AutoTimerWrite"] = AT(session,func = AT.WRITE)
-
-class FilesWebScreen(WebScreen):
-	def __init__(self, session, request):
-		WebScreen.__init__(self, session, request)
-		self["DelFile"] = Files(session,func = Files.DEL)
 		
 class TimerWebScreen(WebScreen):
 	def __init__(self, session, request):

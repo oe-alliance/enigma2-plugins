@@ -960,10 +960,7 @@ function getScreenShot(what) {
 	buffer.onload = function () { 
 		debug("[getScreenShot] image assigned");
 		
-		data = { img : { src : buffer.src } };
-
-		
-		
+		data = { img : { src : buffer.src } };	
 		processTpl('tplGrab', data, 'contentMain');
 
 		return true;
@@ -973,6 +970,7 @@ function getScreenShot(what) {
 		debug("[getScreenShot] Loading image failed"); 
 		return true;
 	};
+	
 	switch(what){
 		case "o":
 			what = "&o";
@@ -986,7 +984,7 @@ function getScreenShot(what) {
 	}
 	
 	downloadStart = new Date().getTime();
-	buffer.src = '/grab?format=jpg&n=&r=720&' + what + '&' + downloadStart;
+	buffer.src = '/grab?format=jpg&n=&r=720&' + what + '&filename=/tmp/' + downloadStart;
 }
 
 

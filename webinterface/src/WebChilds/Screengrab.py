@@ -5,103 +5,92 @@ from twisted.web2 import resource, stream, responsecode, http, http_headers
 from os import path as os_path, remove as os_remove
 
 class GrabResource(resource.Resource):
-    """
-        this is a interface to Seddis AiO Dreambox Screengrabber 
-        version 0.8 or lower
-    """
-    grab_bin = "/usr/bin/grab"
+    '''
+        this is a interface to Seddis AiO Dreambox Screengrabber
+    '''
+    GRAB_BIN = '/usr/bin/grab'
+    SPECIAL_ARGS = ['format', 'filename', 'save'] 
     
     def render(self, req):
-        grab_command = self.grab_bin+" "
+        self.baseCmd = ['/usr/bin/grab', 'grab']
+        self.args = []
         
-        #choosing what to grab
-        if req.args.has_key("command"):
-            # using 'command' for older versions
-            cmd = req.args['command'][0].replace("-","")
-            if cmd == "o":
-                #-o only grab osd (framebuffer)
-                grab_command += " -o "
-            elif cmd == "v":
-                #-v only grab video
-                grab_command += " -v "
-        elif req.args.has_key("o"):
-            grab_command += " -o "
-        elif req.args.has_key("v"):
-            grab_command += " -v " 
-                  
-        #chossing the imageformat
-        if req.args.has_key("format"):
-            formatraw = req.args["format"][0]
-            if formatraw == "png":
-                #-p produce png files instead of bmp
-                imageformat = "png"
-                grab_command += " -p "
-            elif formatraw == "jpg":
-                #-j (quality) produce jpg files instead of bmp (quality 0-100)
-                imageformat = "jpg"
-                if req.args.has_key("jpgquali"):
-                    grab_command += " -j %s "%req.args["jpgquali"][0]
-                else:    
-                    grab_command += " -j 80 "
+        # some presets
+        filename = 'screenshot'
+        imageformat = '.bmp'
+        osdOnly = False
+        videoOnly = False
+        save = False
+        
+        for key, value in req.args.items():
+            if key in GrabResource.SPECIAL_ARGS:                
+                
+                if key == 'format':                
+                    format = req.args['format'][0]
+                    
+                    if format == 'png':
+                        #-p produce png files instead of bmp
+                        imageformat = ".%s" %format
+                        self.args.append('-p')
+                    elif format == 'jpg':
+                        #-j (quality) produce jpg files instead of bmp
+                    
+                        imageformat = ".%s" %format
+                        self.args.append('-j')
+                        #Quality Setting                    
+                        if req.args.has_key("jpgquali"):
+                            self.args.append("%s" %(req.args["jpgquali"][0]) )
+                        else:                            
+                            self.args.append('80')
+                
+                if key == 'filename':
+                    filename = req.args['filename'][0]
+                
+                if key == 'save':
+                    save = True
+                                                
             else:
-                imageformat = "bmp"
-        else:
-            imageformat = "bmp"
+                if key == "o" and videoOnly is True:
+                    continue
+                if key == "v" and osdOnly is True:
+                    continue                                        
+                                
+                self.args.append("-%s" %key )
+                
+                if value is not None:
+                    if len(value[0]) > 0:
+                        self.args.append("%s" %value[0])
+                
 
-        
-        #-d always use osd resolution (good for skinshots)
-        if req.args.has_key("d"):
-            grab_command += " -d " 
-
-        #-n dont correct 16:9 aspect ratio
-        if req.args.has_key("n"):
-            grab_command += " -n " 
-            
-        #-r (size) resize to to a fixed width, maximum: 1920
-        if req.args.has_key("r"):
-            grab_command += " -r %s " % req.args['r'][0]
-
-        #-l always 4:3, create letterbox if 16:9
-        if req.args.has_key("l"):
-            grab_command += " -l "
-
-        #target filename
-        if req.args.has_key("filename"):
-            filetarget = req.args['filename'][0]
-        else:
-            filetarget = "/tmp/screenshot."+imageformat
-
-        # choose if we leave the file in /tmp
-        if req.args.has_key("save"):
-            save_image = True
-        else:
-            save_image = False
-
-        if os_path.exists(self.grab_bin) is not True:
-            return http.Response(responsecode.OK,stream="grab is not installed at '%s'. go and fix it."%self.grab_bin)
+        if not os_path.exists(self.GRAB_BIN):
+            return http.Response(responsecode.OK,stream='Grab is not installed at %s. Please install package aio-grab.' %self.GRAB_BIN)
         else:
             headers = http_headers.Headers()
             headers.addRawHeader('Content-Disposition', 'inline; filename=screenshot.%s;'%imageformat)
             headers.addRawHeader('Content-Type','image/%s'%imageformat)
-            return http.Response(responsecode.OK,headers,stream=GrabStream(grab_command+filetarget,target=filetarget,save=save_image))
+            
+            filename = filename+imageformat
+            self.args.append(filename)
+            cmd = self.baseCmd + self.args
+            
+            return http.Response(responsecode.OK,headers,stream=GrabStream(cmd, filename, save))
        
 class GrabStream(stream.ProducerStream):
-    """
+    '''
         used to start the grab-bin in the console in the background
         while this takes some time, the browser must wait until the grabis finished
-    """
+    '''
     def __init__(self, cmd, target=None, save=False):
-        self.cmd = cmd
         self.target = target
         self.save = save
-        self.output = ""
+        self.output = ''
         stream.ProducerStream.__init__(self)
 
         self.container = eConsoleAppContainer()
         self.container.appClosed.append(self.cmdFinished)
         self.container.dataAvail.append(self.dataAvail)
-        print "AiO grab starting aio grab with cmdline:",self.cmd
-        self.container.execute(cmd)
+        print '[Screengrab.py] starting AiO grab with cmdline:', cmd
+        self.container.execute(*cmd)
 
     def cmdFinished(self, data):
         if int(data) is 0 and self.target is not None:
@@ -112,14 +101,14 @@ class GrabStream(stream.ProducerStream):
                 if self.save is False:
                     os_remove(self.target)
             except Exception,e:
-                self.write("internal error while reading target file")
+                self.write('Internal error while reading target file')
         elif int(data) is 0 and self.target is None:
             self.write(self.output)
         elif int(data) is 1:
             self.write(self.output)
         else:
-            self.write("internal error")
+            self.write('Internal error')
         self.finish()
 
     def dataAvail(self, data):
-        print "AiO grab:",data
+        print '[Screengrab.py] data Available ', data
