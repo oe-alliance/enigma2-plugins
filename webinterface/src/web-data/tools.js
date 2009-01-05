@@ -33,16 +33,37 @@ var loadedChannellist = {};
 var updateCurrentPoller = setInterval(updateItems, 7500);
 var updateBouquetItemsPoller = '';
 
+var boxtype = "";
+
+/*
+ * Set boxtype Variable for being able of determining model specific stuff correctly (like WebRemote)
+ */
+function incomingAboutBoxtype(request){
+	debug("[incomingAboutBoxtype] returned");
+	var xml = getXML(request).getElementsByTagName("e2abouts").item(0).getElementsByTagName("e2about");
+	xml = xml.item(0);
+	
+	boxtype = xml.getElementsByTagName('e2model').item(0).firstChild.data
+	debug("[incomingAboutBoxtype] Boxtype: " + boxtype);
+}
+
+
+function getBoxtype(){
+	doRequest(url_about, incomingAboutBoxtype, false);
+}
+
 
 function startUpdateBouquetItemsPoller(){
 	debug("[startUpdateBouquetItemsPoller] called")
 	updateBouquetItemsPoller = setInterval(updateItemsLazy, 60000);
 }
 
+
 function stopUpdateBouquetItemsPoller(){
 	debug("[stopUpdateBouquetItemsPoller] called")
 	clearInterval(updateBouquetItemsPoller);
 }
+
 //General Helpers
 function ownLazyNumber(num) {
 	if(isNaN(num)){
@@ -1007,18 +1028,27 @@ function incomingRemoteControlResult(request){
 }
 
 function openWebRemote(){
+	var template = templates.tplWebRemoteOld
+	
+	if(boxtype == "dm8000"){
+		template = templates.tplWebRemote
+	}
+	
 	
 	if (!webRemoteWin.closed && webRemoteWin.location) {
-		setWindowContent(webRemoteWin, templates.tplWebRemote);
+		setWindowContent(webRemoteWin, template);
 	} else {
-		webRemoteWin = openPopup('WebRemote', templates.tplWebRemote, 250, 670);
+		webRemoteWin = openPopup('WebRemote', template, 250, 600);
 	}
 	
 }
 
 
 function loadAndOpenWebRemote(){
-	fetchTpl('tplWebRemote', openWebRemote);
+	if(boxtype == "dm8000"){
+		fetchTpl('tplWebRemote', openWebRemote);
+	}
+	fetchTpl('tplWebRemoteOld', openWebRemote);
 }
 
 
@@ -1590,6 +1620,7 @@ function init(){
 	if(DBG){
 		loadAndOpenDebug();
 	}
+	getBoxtype();
 	
 	setAjaxLoad('navContent');
 	setAjaxLoad('contentMain');

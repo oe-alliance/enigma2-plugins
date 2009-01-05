@@ -4,7 +4,6 @@
 * Add Timer/Movie-Location Stuff (backend partly done)
 * Decide whether the MediaPlayer Menu should stay and if how.
 * Add Support for Multiple NICs in About
-* add box dependent remote control picture (for dm8000)
 * Fix some smaller IE Bugs
 ** Exception on Movielist
 * Move Timer Cleaning to Python Side
