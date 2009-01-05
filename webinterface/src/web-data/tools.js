@@ -1385,84 +1385,6 @@ function sendPowerState(newState){
 }
 
 
-//FileBrowser
-//function incomingFileBrowser(request){
-//	if(request.readyState == 4){
-//		var files = new FileList(getXML(request)).getArray();
-//
-//		debug("[incomingFileBrowser] Got " + files.length + " entry in filelist");
-//		listerHtml 	= tplFileBrowserHeader;
-//		root = files[0].getRoot();
-//		listerHtml 	= RND(tplFileBrowserHeader, {'root': root});
-//		if(root != '/') {
-//			re = new RegExp(/(.*)\/(.*)\/$/);
-//			re.exec(root);
-//			newroot = RegExp.$1+'/';
-//			if(newroot == '//') {
-//				newroot = '/';
-//			}
-//			listerHtml += RND(tplFileBrowserItemBody, 
-//				{'root': root,
-//				'servicereference': newroot,
-//				'exec': 'loadFileBrowser',
-//				'exec_description': 'change to directory ../',
-//				'color': '000000',
-//				'newroot': newroot,
-//				'name': '..'});
-//		}
-//		for ( var i = 0; i <files.length; i++){
-//			var file = files[i];
-//			if(file.getNameOnly() == 'None') {
-//				continue;
-//			}
-//			var exec = 'loadFileBrowser';
-//			var exec_description = 'change to directory' + file.getServiceReference();
-//			var color = '000000';
-//			if (file.getIsDirectory() == "False") {
-//				exec = '';
-//				exec_description = 'do Nothing';
-//				color = '00BCBC';
-//			}
-//			var namespace = {
-//				'servicereference': file.getServiceReference(),
-//				'exec': exec,
-//				'exec_description': exec_description,
-//				'color': color,
-//				'root': file.getRoot(),
-//				'name': file.getNameOnly()
-//			};
-//			listerHtml += tplFileBrowserItemHead;
-//			listerHtml += RND(tplFileBrowserItemBody, namespace);
-//			if (file.getIsDirectory() == "False") {
-//				listerHtml += RND(tplFileBrowserItemIMG, namespace);
-//			}
-//			listerHtml += tplFileBrowserItemFooter;
-//		}
-//		listerHtml += RND(tplFileBrowserFooter, {'root': root});
-//		$('BodyContent').innerHTML = listerHtml;
-////		setBodyMainContent('BodyContent');
-//	}		
-//}
-//
-//
-//function loadFileBrowser(directory,types){
-//	debug("[loadFileBrowser] loading loadFileBrowser");
-//	doRequest(url_filelist+directory+"&types="+types, incomingFileBrowser, false);	
-//}
-//
-//
-//function incomingDelFileResult(request) {
-//	debug("[incomingDelFileResult called]");
-//	if(request.readyState == 4){
-//		var delresult = new SimpleXMLResult(getXML(request));
-//		if(delresult.getState()){
-//			loadFileBrowser($('path').value);
-//		}else{
-//			messageBox("Deletion Error","Reason: "+delresult.getStateText());
-//		}
-//	}		
-//}
-
 
 function delFile(file,root) {
 	debug("[delFile] called");
@@ -1477,18 +1399,22 @@ function incomingCurrent(request){
 		try{
 			var xml = getXML(request).getElementsByTagName("e2currentserviceinformation").item(0);
 			
-			var servicereference = xml.getElementsByTagName('e2servicereference').item(0).firstChild.data;
-			var servicename = xml.getElementsByTagName('e2servicename').item(0).firstChild.data;
-			var currentname = xml.getElementsByTagName('e2eventname').item(0).firstChild.data;
-			var currentduration	= xml.getElementsByTagName('e2eventduration').item(0).firstChild.data;
 			
-			if(servicereference.length > 0){
-				set('currentName', servicename + ' - ' + currentname );
-				set('currentDuration', currentduration);
+			namespace = {
+				"servicereference" : encodeURIComponent(xml.getElementsByTagName('e2servicereference').item(0).firstChild.data),
+				"servicename" : xml.getElementsByTagName('e2servicename').item(0).firstChild.data,
+				"eventname" : xml.getElementsByTagName('e2eventname').item(0).firstChild.data,
+				"duration" : xml.getElementsByTagName('e2eventduration').item(0).firstChild.data
+			};
+			
+			data = { current : namespace };
+			
+			if(typeof(templates.tplCurrent) != "undefined"){
+				renderTpl(templates.tplCurrent, data, "currentContent");
 			} else {
-				set('currentName', 'N/A');
-				set('currentDuration', 'N/A');
+				debug("[incomingCurrent] tplCurrent N/A");
 			}
+
 		} catch (e){}
 		
 	}
@@ -1669,6 +1595,8 @@ function init(){
 	setAjaxLoad('contentMain');
 	
 	fetchTpl('tplServiceListEPGItem');
+	fetchTpl('tplCurrent');
+	
 	reloadNav('tplNavTv', 'TeleVision');
 	
 	initChannelList();

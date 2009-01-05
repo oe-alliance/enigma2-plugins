@@ -1,0 +1,15 @@
+
+			<table id="currentTable">
+				<tr>
+					<td id="currentName">${current.eventname} (${current.servicename})</td>
+					<td id="currentDuration">																	
+						<a href="#" onclick="if ( parentPin( '${current.servicereference}' ) ) { loadEPGByServiceReference( '${current.servicereference}' ); }">
+							<img src="/webdata/gfx/epg.png" border="0" title="Show EPG for ${current.servicename}"/>
+						</a>
+						<a target="_blank" onclick="return parentPin( '${current.servicereference}' );" href="/web/stream.m3u?ref=${current.servicereference}">
+							<img src="/webdata/gfx/screen.png" title="Stream ${current.servicename}" border="0">
+						</a>	
+						${current.duration}
+					</td>
+				</tr>	
+			</table>
