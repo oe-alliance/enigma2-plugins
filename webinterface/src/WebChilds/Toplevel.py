@@ -19,7 +19,7 @@ class Toplevel(resource.Resource):
         resource.Resource.__init__(self)
         
         self.putChild("web",ScreenPage(self.session,util.sibpath(WebInterface.__file__, "web"))) # "/web/*"
-        self.putChild("webdata",static.File(util.sibpath(WebInterface.__file__, "web-data"))) # FIXME: web-data appears as webdata
+        self.putChild("web-data",static.File(util.sibpath(WebInterface.__file__, "web-data"))) # FIXME: web-data appears as webdata
         self.putChild("file",FileStreamer())
         self.putChild("grab",GrabResource())
         self.putChild("ipkg",IPKGResource())

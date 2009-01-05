@@ -233,7 +233,7 @@ function renderTpl(tpl, data, domElement) {
 
 function fetchTpl(tplName, callback){
 	if(typeof(templates[tplName]) == "undefined") {
-		var url = "/webdata/tpl/"+tplName+".htm";
+		var url = "/web-data/tpl/"+tplName+".htm";
 		var options = {
 				asynchronous: true,
 				method: 'GET',
@@ -269,7 +269,7 @@ function incomingProcessTpl(request, data, domElement, callback){
 }
 
 function processTpl(tplName, data, domElement, callback){
-	var url = "/webdata/tpl/"+tplName+".htm";
+	var url = "/web-data/tpl/"+tplName+".htm";
 		var request = new Ajax.Request(url,
 			{
 				asynchronous: true,
@@ -698,15 +698,15 @@ function handleVolumeRequest(request){
 		
 		for (var i = 1; i <= 10; i++)		{
 			if ( (newvalue/10)>=i){
-				$("volume"+i).src = "/webdata/img/led_on.png";
+				$("volume"+i).src = "/web-data/img/led_on.png";
 			}else{
-				$("volume"+i).src = "/webdata/img/led_off.png";
+				$("volume"+i).src = "/web-data/img/led_off.png";
 			}
 		}
 		if (mute == "False"){
-			$("speaker").src = "/webdata/img/speak_on.png";
+			$("speaker").src = "/web-data/img/speak_on.png";
 		}else{
-			$("speaker").src = "/webdata/img/speak_off.png";
+			$("speaker").src = "/web-data/img/speak_off.png";
 		}
 	}    	
 }
