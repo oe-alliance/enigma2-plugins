@@ -1,5 +1,12 @@
-INSTALLDIR = $(LIBDIR)/enigma2/python/Plugins/Extensions/WebInterface
+#
+# to use this for the localisation of other plugins,
+# just change the DOMAIN to the name of the Plugin.
+# It is assumed, that the domain ist the same as
+# the directory name of the plugin.
+#
+
 DOMAIN=WebInterface
+installdir = /usr/lib/enigma2/python/Plugins/Extensions/$(DOMAIN)
 #GETTEXT=./pygettext.py
 GETTEXT=xgettext
 
@@ -10,34 +17,33 @@ LANGS := de
 LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
 LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
 
-default: WebInterface.pot $(LANGPO) merge $(LANGMO)
+default: $(DOMAIN).pot $(LANGPO) merge $(LANGMO)
 	for lang in $(LANGS); do \
 		mkdir -p $$lang/LC_MESSAGES; \
-		cp $$lang.mo $$lang/LC_MESSAGES/WebInterface.mo; \
+		cp $$lang.mo $$lang/LC_MESSAGES/$(DOMAIN).mo; \
 	done
 
 merge:
 	for lang in $(LANGS); do \
-		msgmerge --no-location -s -N -U $$lang.po WebInterface.pot; \
+		msgmerge --no-location -s -N -U $$lang.po $(DOMAIN).pot; \
 	done
 
 
 # the TRANSLATORS: allows putting translation comments before the to-be-translated line.
-WebInterface.pot:
-	$(GETTEXT) -L python --add-comments="TRANSLATORS:" -d WebInterface -s -o WebInterface.pot ../src/*.py
+$(DOMAIN).pot:
+	$(GETTEXT) -L python --add-comments="TRANSLATORS:" -d $(DOMAIN) -s -o $(DOMAIN).pot ../src/*.py
+	msguniq -o $(DOMAIN)uniq.pot $(DOMAIN).pot
+	$(RM) $(DOMAIN).pot
+	mv $(DOMAIN)uniq.pot $(DOMAIN).pot
 
-	msguniq -o WebInterfaceuniq.pot WebInterface.pot
-	$(RM) WebInterface.pot
-	mv WebInterfaceuniq.pot WebInterface.pot
-
-.PHONY: WebInterface.pot
+.PHONY: $(DOMAIN).pot
 
 
 %.mo: %.po
 	$(MSGFMT) -o $@ $<
 
 %.po:
-	msginit -l $@ -o $@ -i WebInterface.pot --no-translator
+	msginit -l $@ -o $@ -i $(DOMAIN).pot --no-translator
 
 CLEANFILES = $(foreach LANG, $(LANGS),$(LANG).mo)
 
@@ -46,6 +52,6 @@ clean-local:
 
 install-data-am: default
 	for lang in $(LANGS); do \
-		mkdir -p $(DESTDIR)$(INSTALLDIR)/po/$$lang/LC_MESSAGES; \
-		cp $$lang.mo $(DESTDIR)$(INSTALLDIR)/po/$$lang/LC_MESSAGES/$(DOMAIN).mo; \
+		mkdir -p $(DESTDIR)$(installdir)/locale/$$lang/LC_MESSAGES; \
+		cp $$lang.mo $(DESTDIR)$(installdir)/locale/$$lang/LC_MESSAGES/$(DOMAIN).mo; \
 	done
