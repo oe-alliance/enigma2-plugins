@@ -1,510 +1,421 @@
+# translation of AutoTimer.nl.po to gerrit
+# gerrit <gerrit@nedlinux.nl>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: Autotimer 1\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2008-10-07 22:52+0100\n"
-"Last-Translator: Roodkapke <webmaster@pli-images.org>\n"
-"Language-Team: Pli\n"
+"Project-Id-Version: AutoTimer.nl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-06 17:12+0100\n"
+"PO-Revision-Date: 2009-01-06 17:37+0100\n"
+"Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
+"Language-Team: gerrit <fy@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
+"X-Generator: KBabel 1.11.4\n"
 
-#: ../src/AutoTimerOverview.py:50
 msgid "Add"
 msgstr "Toevoegen"
 
-#: ../src/plugin.py:142
 msgid "Add AutoTimer..."
-msgstr "Voeg Autotimer toe..."
+msgstr "Autotimer toevoegen..."
 
-#: ../src/AutoTimerEditor.py:310
 msgid "Add Filters"
 msgstr "Filters toevoegen"
 
-#: ../src/AutoTimerEditor.py:316
 msgid "Add Services"
 msgstr "Services toevoegen"
 
-#: ../src/AutoTimerOverview.py:73
 msgid "Add new AutoTimer"
 msgstr "Nieuwe Autotimer toevoegen"
 
-#: ../src/AutoTimerEditor.py:371
-#: ../src/AutoTimerImporter.py:158
-msgid "After event"
-msgstr "Na uitvoering"
+msgid "Add timer as disabled on conflict"
+msgstr "Timer als 'uitgeschakeld op conflict' toevoegen"
 
-#: ../src/plugin.py:18
+msgid "After event"
+msgstr "Na de actie"
+
 msgid "All non-repeating Timers"
 msgstr "Alle niet-herhalende timers"
 
-#: ../src/AutoTimerEditor.py:389
 msgid "Ammount of recordings left"
 msgstr "Hoeveelheid resterende opnames"
 
-#: ../src/AutoTimerEditor.py:352
-#: ../src/AutoTimerWizard.py:91
+msgid "AutoTimer Editor"
+msgstr "AutoTimer bewerker"
+
+msgid "AutoTimer Filters"
+msgstr "AutoTimer filters"
+
+msgid "AutoTimer Overview"
+msgstr "AutoTimer overzicht"
+
+msgid "AutoTimer Services"
+msgstr "AutoTimer Services"
+
+msgid "AutoTimer Settings"
+msgstr "AutoTimer instellingen"
+
 msgid "Begin of Timespan"
 msgstr "Begin van tijdsduur"
 
-#: ../src/AutoTimerEditor.py:380
 msgid "Begin of after Event Timespan"
 msgstr "Begin van gebeurtenis na tijdsduur"
 
-#: ../src/AutoTimerEditor.py:793
 msgid "Bouquets"
 msgstr "Bouquetten"
 
-#: ../src/AutoTimerEditor.py:283
-#: ../src/AutoTimerEditor.py:607
-#: ../src/AutoTimerEditor.py:801
-#: ../src/AutoTimerImporter.py:35
-#: ../src/AutoTimerImporter.py:110
-#: ../src/AutoTimerPreview.py:35
-#: ../src/AutoTimerSettings.py:47
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../src/AutoTimerEditor.py:793
 msgid "Channels"
 msgstr "Kanalen"
 
-#: ../src/AutoTimerEditor.py:240
 msgid "Choose target folder"
 msgstr "Kies doel folder"
 
-#: ../src/plugin.py:23
 msgid "Classic"
 msgstr "Klassiek"
 
-#: ../src/AutoTimerOverview.py:59
 msgid "Close and forget changes"
 msgstr "Sluiten en niet opslaan"
 
-#: ../src/AutoTimerOverview.py:71
 msgid "Close and save changes"
 msgstr "Sluiten en wijzigingen opslaan"
 
-#: ../src/AutoTimerOverview.py:172
+msgid "Configure AutoTimer behavior"
+msgstr "AutoTimer gedrag instellen"
+
 msgid "Create a new timer using the classic editor"
 msgstr "Nieuwe timer instellen met de klassieke editor"
 
-#: ../src/AutoTimerOverview.py:174
 msgid "Create a new timer using the wizard"
 msgstr "Nieuwe timer instellen met de wizard"
 
-#: ../src/AutoTimerEditor.py:200
 #, python-format
 msgid "Custom (%s)"
 msgstr "Eigen (%s)"
 
-#: ../src/AutoTimerEditor.py:397
 msgid "Custom Location"
 msgstr "Eigen bestemming"
 
-#: ../src/AutoTimerEditor.py:356
 msgid "Custom offset"
 msgstr "Eigen offset"
 
-#: ../src/AutoTimerOverview.py:49
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: ../src/AutoTimerEditor.py:340
-#: ../src/AutoTimerWizard.py:99
 msgid "Description"
 msgstr "Omschrijving"
 
-#: ../src/AutoTimerOverview.py:136
 #, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Wilt u %s echt verwijderen?"
 
-#: ../src/AutoTimerEditor.py:308
+msgid "Edit AutoTimer"
+msgstr "AutoTimer bewerken"
+
+msgid "Edit AutoTimer Filters"
+msgstr "AutoTimer filters bewerken"
+
+msgid "Edit AutoTimer Services"
+msgstr "AutoTimer Services bewerken"
+
 msgid "Edit Filters"
 msgstr "Filters aanpassen"
 
-#: ../src/AutoTimerEditor.py:314
 msgid "Edit Services"
 msgstr "Services aanpassen"
 
-#: ../src/plugin.py:140
-#: ../src/plugin.py:141
 msgid "Edit Timers and scan for new Events"
 msgstr "Timers aanpassen en zoeken naar nieuwe opnames"
 
-#: ../src/AutoTimerOverview.py:168
 msgid "Edit new timer defaults"
 msgstr "Nieuwe timers aanpassen"
 
-#: ../src/AutoTimerOverview.py:58
 msgid "Edit selected AutoTimer"
 msgstr "Gekozen Autotimer aanpassen"
 
-#: ../src/AutoTimerEditor.py:840
 msgid "Editing"
 msgstr "Aanpassen"
 
-#: ../src/AutoTimerSettings.py:41
 msgid "Editor for new AutoTimers"
 msgstr "Editor voor nieuwe Autotimers"
 
-#: ../src/AutoTimerEditor.py:666
 msgid "Enable Filtering"
 msgstr "Filters inschakelen"
 
-#: ../src/AutoTimerEditor.py:839
 msgid "Enable Service Restriction"
 msgstr "Service restrictie inschakelen"
 
-#: ../src/AutoTimerEditor.py:339
-#: ../src/AutoTimerImporter.py:120
-#: ../src/AutoTimerWizard.py:98
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-#: ../src/AutoTimerEditor.py:353
-#: ../src/AutoTimerWizard.py:92
 msgid "End of Timespan"
 msgstr "Einde van tijdsduur"
 
-#: ../src/AutoTimerEditor.py:381
 msgid "End of after Event Timespan"
 msgstr "Einde van gebeurtenis na tijdsduur"
 
-#: ../src/AutoTimerEditor.py:675
-#: ../src/AutoTimerEditor.py:692
-#: ../src/AutoTimerEditor.py:717
 msgid "Exclude"
 msgstr "Uitsluiten"
 
-#: ../src/AutoTimerEditor.py:375
 msgid "Execute after Event during Timespan"
 msgstr "Uitvoeren na gebeurtenis gedurende tijdsduur"
 
-#: ../src/AutoTimerEditor.py:667
 msgid "Filter"
 msgstr "Filter"
 
-#: ../src/AutoTimerEditor.py:43
+#, python-format
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and %d modified."
+msgstr ""
+"Een totaal van %d overeenkomende gebeurtenissen gevonden.\n"
+"%d Timers werd toegevoegd en %d gewijzigd."
+
 msgid "Friday"
 msgstr "Vrijdag"
 
-#: ../src/AutoTimerSettings.py:40
 msgid "Guess existing Timer based on Begin/End"
 msgstr "Gok bestaande timer gebaseert op begin/einde"
 
-#: ../src/AutoTimerOverview.py:166
 msgid "Import"
 msgstr "Importeer"
 
-#: ../src/AutoTimerEditor.py:680
-#: ../src/AutoTimerEditor.py:697
-#: ../src/AutoTimerEditor.py:718
+msgid "Import AutoTimer"
+msgstr "Importeren AutoTimer"
+
 msgid "Include"
 msgstr "Toevoegen"
 
-#: ../src/AutoTimerImporter.py:176
 msgid "Location"
 msgstr "Locatie"
 
-#: ../src/AutoTimerImporter.py:140
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr "Match tijdsduur: %02d:%02d - %02d:%02d"
 
-#: ../src/AutoTimerEditor.py:341
-#: ../src/AutoTimerWizard.py:100
 msgid "Match Title"
 msgstr "Match titel"
 
-#: ../src/AutoTimerImporter.py:129
 #, python-format
 msgid "Match title: %s"
 msgstr "Match titel: %s"
 
-#: ../src/AutoTimerEditor.py:369
 msgid "Maximum Duration (in m)"
 msgstr "Maximale tijdsduur (in m)"
 
-#: ../src/AutoTimerSettings.py:39
 msgid "Modify existing Timers"
 msgstr "Bestaande timers aanpassen"
 
-#: ../src/AutoTimerEditor.py:39
 msgid "Monday"
 msgstr "Maandag"
 
-#: ../src/AutoTimerEditor.py:198
 msgid "Monthly"
 msgstr "Maandelijks"
 
-#: ../src/AutoTimerEditor.py:198
 msgid "Never"
 msgstr "Nooit"
 
-#: ../src/AutoTimerEditor.py:610
-#: ../src/AutoTimerEditor.py:804
 msgid "New"
 msgstr "Nieuw"
 
-#: ../src/AutoTimerEditor.py:205
 msgid "No"
 msgstr "Nee"
 
-#: ../src/plugin.py:16
 msgid "None"
 msgstr "Geen"
 
-#: ../src/AutoTimerEditor.py:284
-#: ../src/AutoTimerEditor.py:802
-#: ../src/AutoTimerImporter.py:36
-#: ../src/AutoTimerImporter.py:111
-#: ../src/AutoTimerSettings.py:48
 msgid "OK"
 msgstr "OK"
 
-#: ../src/AutoTimerEditor.py:362
 msgid "Offset after recording (in m)"
 msgstr "Extra tijd na opname (in m)"
 
-#: ../src/AutoTimerEditor.py:361
 msgid "Offset before recording (in m)"
 msgstr "Extra tijd voor opname (in m)"
 
-#: ../src/AutoTimerEditor.py:207
 msgid "On any service"
 msgstr "Op iedere service"
 
-#: ../src/AutoTimerEditor.py:206
 msgid "On same service"
 msgstr "Op dezelfde service"
 
-#: ../src/plugin.py:17
 msgid "Only AutoTimers created during this Session"
 msgstr "Alleen Autotimers gemaakt gedurende deze sessie"
 
-#: ../src/AutoTimerEditor.py:346
-#: ../src/AutoTimerWizard.py:85
 msgid "Only match during Timespan"
 msgstr "Alleen gelijke gedurende tijdsduur"
 
-#: ../src/AutoTimerImporter.py:149
 #, python-format
 msgid "Only on Service: %s"
 msgstr "Alleen op service: %s"
 
-#: ../src/AutoTimerOverview.py:65
 msgid "Open Context Menu"
 msgstr "Open context menu"
 
-#: ../src/AutoTimerImporter.py:260
 msgid "Please provide a Text to match"
 msgstr "Geef aub een tekst in om te vergelijken."
 
-#: ../src/AutoTimerSettings.py:38
 msgid "Poll Interval (in h)"
 msgstr "Poll interval ( in h)"
 
-#: ../src/AutoTimerSettings.py:37
 msgid "Poll automatically"
 msgstr "Controleer automatisch"
 
-#: ../src/AutoTimerOverview.py:165
 msgid "Preview"
 msgstr "Voorvertoning"
 
-#: ../src/AutoTimerEditor.py:448
-#: ../src/AutoTimerEditor.py:747
-#: ../src/AutoTimerEditor.py:908
-#: ../src/AutoTimerImporter.py:197
-#: ../src/AutoTimerOverview.py:150
+msgid "Preview AutoTimer"
+msgstr "AutoTimer preview"
+
 msgid "Really close without saving settings?"
 msgstr "Echt afsluiten zonder op te slaan?"
 
-#: ../src/AutoTimerEditor.py:384
 msgid "Record a maximum of x times"
 msgstr "Neem maximaal x keer op"
 
-#: ../src/AutoTimerEditor.py:849
-#: ../src/AutoTimerEditor.py:900
 msgid "Record on"
 msgstr "Opname op"
 
-#: ../src/AutoTimerOverview.py:72
 msgid "Remove selected AutoTimer"
 msgstr "Verwijder geselecteerde Autotimer"
 
-#: ../src/AutoTimerEditor.py:392
 msgid "Require Description to be unique"
 msgstr "Beschrijving moet uniek zijn"
 
-#: ../src/AutoTimerEditor.py:390
 msgid "Reset Count"
 msgstr "Reset counter"
 
-#: ../src/AutoTimerEditor.py:44
 msgid "Saturday"
 msgstr "Zaterdag"
 
-#: ../src/AutoTimerEditor.py:608
-#: ../src/AutoTimerOverview.py:48
 msgid "Save"
 msgstr "Opslaan"
 
-#: ../src/AutoTimerImporter.py:50
 msgid "Select a Timer to Import"
 msgstr "Selecteer een timer voor importeren"
 
-#: ../src/AutoTimerEditor.py:886
 msgid "Select bouquet to record on"
 msgstr "Selecteer het bouquet voor opname"
 
-#: ../src/AutoTimerEditor.py:880
 msgid "Select channel to record on"
 msgstr "Selecteer het kanaal voor opname"
 
-#: ../src/AutoTimerEditor.py:715
 msgid "Select type of Filter"
 msgstr "Selecteer type filter"
 
-#: ../src/AutoTimerEditor.py:365
 msgid "Set maximum Duration"
 msgstr "Stel maximale tijdsduur in"
 
-#: ../src/AutoTimerOverview.py:167
 msgid "Setup"
 msgstr "Setup"
 
-#: ../src/AutoTimerPreview.py:53
 msgid "Sort AutoTimer"
 msgstr "Sorteer Autotimer"
 
-#: ../src/AutoTimerPreview.py:51
 msgid "Sort Time"
 msgstr "Selecteer op tijd"
 
-#: ../src/AutoTimerEditor.py:45
 msgid "Sunday"
 msgstr "Zondag"
 
-#: ../src/AutoTimerEditor.py:462
-msgid "The match attribute is mandatory."
-msgstr "De xxx atribuut is verplicht."
+msgid "Tags"
+msgstr "Labels"
 
-#: ../src/AutoTimerEditor.py:42
+msgid "The match attribute is mandatory."
+msgstr "De vergelijkings attribuut is verplicht."
+
 msgid "Thursday"
 msgstr "Donderdag"
 
-#: ../src/AutoTimerEditor.py:345
-#: ../src/AutoTimerImporter.py:167
-#: ../src/AutoTimerWizard.py:101
 msgid "Timer Type"
 msgstr "Timer type"
 
-#: ../src/AutoTimerEditor.py:40
 msgid "Tuesday"
 msgstr "Dinsdag"
 
-#: ../src/AutoTimerEditor.py:395
 msgid "Use a custom location"
 msgstr "Gebruik een eigen locatie"
 
-#: ../src/AutoTimerEditor.py:41
 msgid "Wednesday"
 msgstr "Woensdag"
 
-#: ../src/AutoTimerEditor.py:47
 msgid "Weekday"
 msgstr "Door de weekse dag"
 
-#: ../src/AutoTimerEditor.py:46
 msgid "Weekend"
 msgstr "Weekend"
 
-#: ../src/AutoTimerEditor.py:198
 msgid "Weekly (Monday)"
 msgstr "Wekelijks (Maandag)"
 
-#: ../src/AutoTimerEditor.py:198
 msgid "Weekly (Sunday)"
 msgstr "Wekelijks (Zondag)"
 
-#: ../src/plugin.py:24
 msgid "Wizard"
 msgstr "Instelhulp"
 
-#: ../src/AutoTimerEditor.py:471
-#: ../src/AutoTimerImporter.py:212
 #, python-format
 msgid ""
 "You entered \"%s\" as Text to match.\n"
 "Do you want to remove trailing whitespaces?"
 msgstr ""
-"U gaf \"%s\" als match.\n"
+"U gaf \"%s\" als vergelijking.\n"
 "Wilt u achterliggende spaties verwijderen?"
 
-#: ../src/AutoTimerEditor.py:609
-#: ../src/AutoTimerEditor.py:803
+#, python-format
+msgid ""
+"Your config file is not well-formed:\n"
+"%s"
+msgstr ""
+"Uw configuratie bevat fouten:\n"
+"%s"
+
+msgid "auto"
+msgstr "auto"
+
 msgid "delete"
 msgstr "verwijderen"
 
-#: ../src/AutoTimerImporter.py:120
 msgid "disable"
 msgstr "uitschakelen"
 
-#: ../src/AutoTimerEditor.py:155
-#: ../src/AutoTimerImporter.py:21
 msgid "do nothing"
 msgstr "doe niets"
 
-#: ../src/AutoTimerImporter.py:120
 msgid "enable"
 msgstr "inschakelen"
 
-#: ../src/AutoTimerEditor.py:155
-#: ../src/AutoTimerImporter.py:21
 msgid "go to deep standby"
-msgstr "ga in deep standby"
+msgstr "ga naar deep standby"
 
-#: ../src/AutoTimerEditor.py:155
-#: ../src/AutoTimerImporter.py:21
 msgid "go to standby"
-msgstr "ga in standby"
+msgstr "ga naar standby"
 
-#: ../src/AutoTimerEditor.py:594
 msgid "in Description"
-msgstr "in omschrijving"
+msgstr "in de omschrijving"
 
-#: ../src/AutoTimerEditor.py:594
 msgid "in Shortdescription"
-msgstr "in korte omschrijving"
+msgstr "in de korte omschrijving"
 
-#: ../src/AutoTimerEditor.py:594
 msgid "in Title"
-msgstr "in titel"
+msgstr "in de titel"
 
-#: ../src/AutoTimerList.py:76
 msgid "mins"
 msgstr "minuten"
 
-#: ../src/AutoTimerEditor.py:594
 msgid "on Weekday"
-msgstr "door de weekse dag"
+msgstr "op een weekdag"
 
-#: ../src/AutoTimerEditor.py:111
-#: ../src/AutoTimerImporter.py:167
 msgid "record"
-msgstr "opname"
+msgstr "opnemen"
 
-#: ../src/AutoTimerEditor.py:155
 msgid "standard"
 msgstr "standaard"
 
-#: ../src/AutoTimerEditor.py:111
-#: ../src/AutoTimerImporter.py:167
 msgid "zap"
 msgstr "kanaal wisselen"
 
