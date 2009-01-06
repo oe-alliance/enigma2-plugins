@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-mediadownloader
+Version: 0.2-20070927-r0
+Description: Downloader-Plugin for Enigma2
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: Moritz Venn <moritz.venn@freaque.net>
+Homepage: http://www.ritzmo.de
+Depends: enigma2(>=2.5cvs20080416), twisted-web, python-shell
+Source: http://www.ritzmo.de

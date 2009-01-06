@@ -161,4 +161,6 @@ permanentclock/Makefile
 permanentclock/po/Makefile
 permanentclock/src/Makefile
 
+mediadownloader/Makefile
+mediadownloader/src/Makefile
 ])
