@@ -27,7 +27,7 @@ msgid "Add Filters"
 msgstr "Neue Filter"
 
 msgid "Add Services"
-msgstr "Neue Services"
+msgstr "Neue Sender"
 
 msgid "Add new AutoTimer"
 msgstr "Neuen AutoTimer hinzufügen"
@@ -131,7 +131,7 @@ msgid "Edit Filters"
 msgstr "Filter bearbeiten"
 
 msgid "Edit Services"
-msgstr "Services bearbeiten"
+msgstr "Sender bearbeiten"
 
 msgid "Edit Timers and scan for new Events"
 msgstr "Automatisch Aufnahmen erstellen"
@@ -152,7 +152,7 @@ msgid "Enable Filtering"
 msgstr "Filter einschalten"
 
 msgid "Enable Service Restriction"
-msgstr "Service-Einschränkungen"
+msgstr "Sender-Beschränkungen"
 
 msgid "Enabled"
 msgstr "Eingeschaltet"
@@ -282,7 +282,7 @@ msgstr "Finde nur innerhalb einer Zeitspanne"
 
 #, python-format
 msgid "Only on Service: %s"
-msgstr "Nur auf Service: %s"
+msgstr "Nur auf Sender: %s"
 
 msgid "Open Context Menu"
 msgstr "Öffne Kontext-Menü"
