@@ -1,0 +1,122 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extension-webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-06 14:25+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Stephan Reichholf <stephan@reichholf.net>\n"
+"Language-Team:  <stephan@reichholf.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-plugins\\webinterface\n"
+"X-Poedit-SearchPath-0: src\n"
+
+#: src/plugin.py:133
+msgid "Webinterface"
+msgstr "Webinterface"
+
+#: src/plugin.py:133
+msgid "Configuration for the Webinterface"
+msgstr "Konfiguration des Webinterface"
+
+#: src/WebIfConfig.py:34
+msgid "Start Webinterface"
+msgstr "Webinterface starten"
+
+#: src/WebIfConfig.py:35
+msgid "Enable /hdd"
+msgstr "Aktiviere /hdd"
+
+#: src/WebIfConfig.py:36
+msgid "Allow zapping via Webinterface"
+msgstr "Umschalten per Webinterface erlauben"
+
+#: src/WebIfConfig.py:37
+msgid "Autowrite timer"
+msgstr "Timer automatisch schreiben"
+
+#: src/WebIfConfig.py:38
+msgid "Load movie-length"
+msgstr "Aufnahmelängen laden"
+
+#: src/WebIfConfig.py:44
+#: src/WebIfConfig.py:199
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: src/WebIfConfig.py:45
+#: src/WebIfConfig.py:200
+msgid "OK"
+msgstr "OK"
+
+#: src/WebIfConfig.py:46
+msgid "Interfaces"
+msgstr "Schnittstellen"
+
+#: src/WebIfConfig.py:91
+#: src/WebIfConfig.py:220
+msgid "Address"
+msgstr "Adresse"
+
+#: src/WebIfConfig.py:92
+#: src/WebIfConfig.py:221
+msgid "Port"
+msgstr "Port"
+
+#: src/WebIfConfig.py:93
+msgid "Authorization"
+msgstr "Authorisierung"
+
+#: src/WebIfConfig.py:94
+msgid "SSL"
+msgstr "SSL"
+
+#: src/WebIfConfig.py:95
+#: src/WebIfConfig.py:219
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+#: src/WebIfConfig.py:96
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: src/WebIfConfig.py:97
+msgid "Change"
+msgstr "Ändern"
+
+#: src/WebIfConfig.py:122
+#: src/WebIfConfig.py:127
+#: src/WebIfConfig.py:132
+msgid "yes"
+msgstr "ja"
+
+#: src/WebIfConfig.py:124
+#: src/WebIfConfig.py:129
+#: src/WebIfConfig.py:134
+msgid "no"
+msgstr "nein"
+
+#: src/WebIfConfig.py:202
+msgid "Delete"
+msgstr "Löschen"
+
+#: src/WebIfConfig.py:222
+msgid "Require Authorization"
+msgstr "Authorisierung erfolderlich"
+
+#: src/WebIfConfig.py:223
+msgid "SSL Encryption"
+msgstr "SSL Verschlüsselung"
+
+#: src/WebIfConfig.py:243
+msgid "Really delete this Interface?"
+msgstr "Diese Schnittstelle wirklich löschen?"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+

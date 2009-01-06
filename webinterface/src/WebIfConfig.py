@@ -42,7 +42,7 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
             
         ConfigListScreen.__init__(self, self.list)
         self["key_red"] = Button(_("Cancel"))
-        self["key_green"] = Button(_("Ok"))
+        self["key_green"] = Button(_("OK"))
         self["key_yellow"] = Button(_("Interfaces"))
         self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
         {

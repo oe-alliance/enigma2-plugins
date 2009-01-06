@@ -1,0 +1,117 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extensions-webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-06 14:34+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Stephan Reichholf <stephan@reichholf.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-plugins\\webinterface\n"
+"X-Poedit-SearchPath-0: src\n"
+
+#: src/plugin.py:133
+msgid "Webinterface"
+msgstr ""
+
+#: src/plugin.py:133
+msgid "Configuration for the Webinterface"
+msgstr ""
+
+#: src/WebIfConfig.py:34
+msgid "Start Webinterface"
+msgstr ""
+
+#: src/WebIfConfig.py:35
+msgid "Enable /hdd"
+msgstr ""
+
+#: src/WebIfConfig.py:36
+msgid "Allow zapping via Webinterface"
+msgstr ""
+
+#: src/WebIfConfig.py:37
+msgid "Autowrite timer"
+msgstr ""
+
+#: src/WebIfConfig.py:38
+msgid "Load movie-length"
+msgstr ""
+
+#: src/WebIfConfig.py:44
+#: src/WebIfConfig.py:199
+msgid "Cancel"
+msgstr ""
+
+#: src/WebIfConfig.py:45
+#: src/WebIfConfig.py:200
+msgid "OK"
+msgstr ""
+
+#: src/WebIfConfig.py:46
+msgid "Interfaces"
+msgstr ""
+
+#: src/WebIfConfig.py:91
+#: src/WebIfConfig.py:220
+msgid "Address"
+msgstr ""
+
+#: src/WebIfConfig.py:92
+#: src/WebIfConfig.py:221
+msgid "Port"
+msgstr ""
+
+#: src/WebIfConfig.py:93
+msgid "Authorization"
+msgstr ""
+
+#: src/WebIfConfig.py:94
+msgid "SSL"
+msgstr ""
+
+#: src/WebIfConfig.py:95
+#: src/WebIfConfig.py:219
+msgid "Disabled"
+msgstr ""
+
+#: src/WebIfConfig.py:96
+msgid "Add"
+msgstr ""
+
+#: src/WebIfConfig.py:97
+msgid "Change"
+msgstr ""
+
+#: src/WebIfConfig.py:122
+#: src/WebIfConfig.py:127
+#: src/WebIfConfig.py:132
+msgid "yes"
+msgstr ""
+
+#: src/WebIfConfig.py:124
+#: src/WebIfConfig.py:129
+#: src/WebIfConfig.py:134
+msgid "no"
+msgstr ""
+
+#: src/WebIfConfig.py:202
+msgid "Delete"
+msgstr ""
+
+#: src/WebIfConfig.py:222
+msgid "Require Authorization"
+msgstr ""
+
+#: src/WebIfConfig.py:223
+msgid "SSL Encryption"
+msgstr ""
+
+#: src/WebIfConfig.py:243
+msgid "Really delete this Interface?"
+msgstr ""
+
