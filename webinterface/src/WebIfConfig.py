@@ -31,11 +31,11 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
         self.session = session
         Screen.__init__(self, session)
         self.list = []
-        self.list.append(getConfigListEntry(_("start Webinterface"), config.plugins.Webinterface.enable))
-        self.list.append(getConfigListEntry(_("enable /hdd"), config.plugins.Webinterface.includehdd))
-        self.list.append(getConfigListEntry(_("allow zapping via webif"), config.plugins.Webinterface.allowzapping))
-        self.list.append(getConfigListEntry(_("autowrite timer"), config.plugins.Webinterface.autowritetimer))
-        self.list.append(getConfigListEntry(_("load movie-length"), config.plugins.Webinterface.loadmovielength))
+        self.list.append(getConfigListEntry(_("Start Webinterface"), config.plugins.Webinterface.enable))
+        self.list.append(getConfigListEntry(_("Enable /hdd"), config.plugins.Webinterface.includehdd))
+        self.list.append(getConfigListEntry(_("Allow zapping via Webinterface"), config.plugins.Webinterface.allowzapping))
+        self.list.append(getConfigListEntry(_("Autowrite timer"), config.plugins.Webinterface.autowritetimer))
+        self.list.append(getConfigListEntry(_("Load movie-length"), config.plugins.Webinterface.loadmovielength))
         
         for i in range(0, config.plugins.Webinterface.interfacecount.value):
             c = config.plugins.Webinterface.interfaces[i]
@@ -73,41 +73,40 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
 class WebIfInterfaceListConfigScreen(Screen):
     skin = """
         <screen position="100,100" size="550,400" title="Webinterface: list of configured Interfaces" >
-            <widget name="adress" position="5,0" size="150,50"   font="Regular;20" halign="left"/>
-            <widget name="port" position="120,0" size="50,50"   font="Regular;20" halign="left"/>
-            <widget name="ssl" position="170,0" size="50,50"   font="Regular;20" halign="left"/>
-            <widget name="auth" position="230,0" size="200,50"   font="Regular;20" halign="left"/>
-            <widget name="disabled" position="430,0" size="130,50"   font="Regular;20" halign="left"/>
-            <widget name="ifacelist" position="0,50" size="550,300"  scrollbarMode="showOnDemand"/>
+            <widget name="address" position="5,0" size="150,50" font="Regular;20" halign="left"/>
+            <widget name="port" position="120,0" size="50,50" font="Regular;20" halign="left"/>
+            <widget name="ssl" position="170,0" size="50,50" font="Regular;20" halign="left"/>
+            <widget name="auth" position="230,0" size="170,50" font="Regular;20" halign="left"/>
+            <widget name="disabled" position="400,0" size="160,50" font="Regular;20" halign="left"/>
+            <widget name="ifacelist" position="0,50" size="550,300" scrollbarMode="showOnDemand"/>
             
             <widget name="key_red" position="0,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-	        <widget name="key_yellow" position="280,350" size="140,40"  zPosition="5" valign="center" halign="center" backgroundColor="yellow" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-    	    
-            <ePixmap name="red"    position="0,350"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+	        <widget name="key_yellow" position="280,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="yellow" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />    	    
+            <ePixmap name="red" position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
     	    <ePixmap name="yellow" position="280,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />	
         </screen>"""
-    def __init__(self, session):
         
+    def __init__(self, session):
         Screen.__init__(self, session)
-        self["adress"] = Button(_("Adress"))
+        self["address"] = Button(_("Address"))
         self["port"] = Button(_("Port"))
-        self["auth"] = Button(_("use Authorization"))
-        self["ssl"] = Button(_("use SSL"))
-        self["disabled"] = Button(_("disabled"))
-        self["key_red"] = Button(_("add"))
-        self["key_yellow"] = Button(_("change"))
+        self["auth"] = Button(_("Authorization"))
+        self["ssl"] = Button(_("SSL"))
+        self["disabled"] = Button(_("Disabled"))
+        self["key_red"] = Button(_("Add"))
+        self["key_yellow"] = Button(_("Change"))
         self["ifacelist"] = WebIfInterfaceList([])
         self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
             {
              "ok"	:	self.keyGreen,
              "back"	:	self.close,
              "red"	:	self.keyRed,
-             "green"	:	self.keyGreen,
-             "yellow"	:	self.keyYellow,
+             "green":	self.keyGreen,
+             "yellow":	self.keyYellow,
              "up"	:	self.up,
              "down"	:	self.down,
              "left"	:	self.left,
-             "right"	:	self.right,
+             "right":	self.right,
              }, -1)
         self.updateList()
         
@@ -116,7 +115,7 @@ class WebIfInterfaceListConfigScreen(Screen):
         for i in range(0, config.plugins.Webinterface.interfacecount.value):
             c= config.plugins.Webinterface.interfaces[i]
             res = [ i ] #550,400
-            res.append(MultiContentEntryText(pos=(5, 0), size=(150, 25), font=0, text=c.adress.value))
+            res.append(MultiContentEntryText(pos=(5, 0), size=(150, 25), font=0, text=c.address.value))
             res.append(MultiContentEntryText(pos=(120, 0),size=(50, 25), font=0,text=str(c.port.value)))
             
             if c.usessl.value:
@@ -125,14 +124,14 @@ class WebIfInterfaceListConfigScreen(Screen):
                 res.append(MultiContentEntryText(pos=(170, 0),size=(200, 25), font=0,text=_("no"),color=0x00FF0000))
             
             if c.useauth.value:
-                res.append(MultiContentEntryText(pos=(230, 0),size=(200, 25), font=0,text=_("yes"),color=0x0000FF00))
+                res.append(MultiContentEntryText(pos=(230, 0),size=(170, 25), font=0,text=_("yes"),color=0x0000FF00))
             else:
-                res.append(MultiContentEntryText(pos=(230, 0),size=(200, 25), font=0,text=_("no"),color=0x00FF0000))
+                res.append(MultiContentEntryText(pos=(230, 0),size=(170, 25), font=0,text=_("no"),color=0x00FF0000))
                 
             if c.disabled.value:
-                res.append(MultiContentEntryText(pos=(430, 0),size=(130, 25), font=0,text=_("yes"),color=0x0000FF00))
+                res.append(MultiContentEntryText(pos=(400, 0),size=(160, 25), font=0,text=_("yes"),color=0x0000FF00))
             else:
-                res.append(MultiContentEntryText(pos=(430, 0),size=(130, 25), font=0,text=_("no"),color=0x00FF0000))
+                res.append(MultiContentEntryText(pos=(400, 0),size=(160, 25), font=0,text=_("no"),color=0x00FF0000))
             ifaceguilist.append(res)
         ifaceguilist.sort()
         self["ifacelist"].l.setList(ifaceguilist)
@@ -215,13 +214,13 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
             current = config.plugins.Webinterface.interfaces[ifacenum]
         
         #reloading current network devices
-        current.adress = ConfigSelection(getCofiguredAndSpecialNetworkinterfaces(),default=current.adress.value)
+        current.address = ConfigSelection(getCofiguredAndSpecialNetworkinterfaces(),default=current.address.value)
         
-        cfglist.append(getConfigListEntry(_("disabled"), current.disabled))
-        cfglist.append(getConfigListEntry(_("Adress"), current.adress))
+        cfglist.append(getConfigListEntry(_("Disabled"), current.disabled))
+        cfglist.append(getConfigListEntry(_("Address"), current.address))
         cfglist.append(getConfigListEntry(_("Port"), current.port))
-        cfglist.append(getConfigListEntry(_("use Authorization"), current.useauth))
-        cfglist.append(getConfigListEntry(_("use SSL Encryption"), current.usessl))
+        cfglist.append(getConfigListEntry(_("Require Authorization"), current.useauth))
+        cfglist.append(getConfigListEntry(_("SSL Encryption"), current.usessl))
         ConfigListScreen.__init__(self, cfglist, session)
         self.ifacenum = i
 

@@ -10,7 +10,7 @@ from Components.config import configfile
 from Components.config import ConfigYesNo
 from Components.Network import iNetwork
 
-__version__ = "1.5beta"
+__version__ = "1.5beta2"
 
 config.plugins.Webinterface = ConfigSubsection()
 config.plugins.Webinterface.enable = ConfigYesNo(default = True)
@@ -29,7 +29,7 @@ def addInterfaceConfig():
     i = len(config.plugins.Webinterface.interfaces)
     config.plugins.Webinterface.interfaces.append(ConfigSubsection())
     config.plugins.Webinterface.interfaces[i].disabled = ConfigYesNo(default = False)
-    config.plugins.Webinterface.interfaces[i].adress = ConfigSelection(choices,default=choices[0])
+    config.plugins.Webinterface.interfaces[i].address = ConfigSelection(choices,default=choices[0])
     config.plugins.Webinterface.interfaces[i].port = ConfigInteger(80, (0,65535))
     config.plugins.Webinterface.interfaces[i].useauth = ConfigYesNo(default = False)
     config.plugins.Webinterface.interfaces[i].usessl = ConfigYesNo(default = False)
@@ -55,7 +55,7 @@ if config.plugins.Webinterface.interfacecount.value == 0:
     config.plugins.Webinterface.interfaces[0].disabled = ConfigYesNo(default = False)
     
     #needs to be refreshed before each call, because ifaces can be changed since e2 boot 
-    config.plugins.Webinterface.interfaces[0].adress = ConfigSelection(getCofiguredAndSpecialNetworkinterfaces(),default='0.0.0.0')
+    config.plugins.Webinterface.interfaces[0].address = ConfigSelection(getCofiguredAndSpecialNetworkinterfaces(),default='0.0.0.0')
     
     config.plugins.Webinterface.interfaces[0].port = ConfigInteger(80, (0,65535))
     config.plugins.Webinterface.interfaces[0].useauth = ConfigYesNo(default = False)

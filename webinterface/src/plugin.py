@@ -81,11 +81,11 @@ def startWebserver(session):
 	for i in range(0, config.plugins.Webinterface.interfacecount.value):
 		c = config.plugins.Webinterface.interfaces[i]
 		if c.disabled.value is False:
-			startServerInstance(session,c.adress.value,c.port.value,c.useauth.value,c.usessl.value)
+			startServerInstance(session,c.address.value,c.port.value,c.useauth.value,c.usessl.value)
 		else:
-			print "[Webinterface] not starting disabled interface on %s:%i"%(c.adress.value,c.port.value)
+			print "[Webinterface] not starting disabled interface on %s:%i"%(c.address.value,c.port.value)
 			
-def startServerInstance(session,ipadress,port,useauth=False,usessl=False):
+def startServerInstance(session,ipaddress,port,useauth=False,usessl=False):
 	try:
 		toplevel = Toplevel(session)
 		if useauth:
@@ -98,17 +98,17 @@ def startServerInstance(session,ipadress,port,useauth=False,usessl=False):
 		try:
 			if usessl:				
 				ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem','/etc/enigma2/cacert.pem',sslmethod=SSL.SSLv23_METHOD)
-				d = reactor.listenSSL(port, channel.HTTPFactory(site),ctx,interface=ipadress)
+				d = reactor.listenSSL(port, channel.HTTPFactory(site),ctx,interface=ipaddress)
 			else:
-				d = reactor.listenTCP(port, channel.HTTPFactory(site),interface=ipadress)
+				d = reactor.listenTCP(port, channel.HTTPFactory(site),interface=ipaddress)
 			running_defered.append(d)
-			print "[Webinterface] started on %s:%i"%(ipadress,port),"auth=",useauth,"ssl=",usessl
+			print "[Webinterface] started on %s:%i"%(ipaddress,port),"auth=",useauth,"ssl=",usessl
 		except CannotListenError, e:
-			print "[Webinterface] Could not Listen on %s:%i!"%(ipadress,port)
-			session.open(MessageBox,'Could not Listen on %s:%i!\n\n%s'%(ipadress,port,str(e)), MessageBox.TYPE_ERROR)
+			print "[Webinterface] Could not Listen on %s:%i!"%(ipaddress,port)
+			session.open(MessageBox,'Could not Listen on %s:%i!\n\n%s'%(ipaddress,port,str(e)), MessageBox.TYPE_ERROR)
 	except Exception,e:
-		print "[Webinterface] starting FAILED on %s:%i!"%(ipadress,port),e
-		session.open(MessageBox,'starting FAILED on %s:%i!\n\n%s'%(ipadress,port,str(e)), MessageBox.TYPE_ERROR)
+		print "[Webinterface] starting FAILED on %s:%i!"%(ipaddress,port),e
+		session.open(MessageBox,'starting FAILED on %s:%i!\n\n%s'%(ipaddress,port,str(e)), MessageBox.TYPE_ERROR)
 
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
