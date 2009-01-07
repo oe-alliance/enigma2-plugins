@@ -1,14 +1,14 @@
-# translation of EPGRefresh_fy.po to gerrit
+# translation of fy.po to gerrit
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # gerrit <gerrit@nedlinux.nl>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: EPGRefresh_fy\n"
+"Project-Id-Version: fy\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-06 17:12+0100\n"
-"PO-Revision-Date: 2009-01-07 14:59+0100\n"
+"PO-Revision-Date: 2009-01-07 15:39+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -53,17 +53,14 @@ msgid "Inherit Services from AutoTimer if available"
 msgstr "Services fan AutoTimer brûke at dizze beskikber is."
 
 #: ../src/EPGRefreshChannelEditor.py:78
-#, fuzzy
 msgid "New"
 msgstr "Nij"
 
 #: ../src/EPGRefreshChannelEditor.py:76 ../src/EPGRefreshConfiguration.py:66
-#, fuzzy
 msgid "OK"
 msgstr "Ok"
 
 #: ../src/EPGRefreshConfiguration.py:130
-#, fuzzy
 msgid "Really close without saving settings?"
 msgstr "Slúte sunder op te slaan ?"
 
