@@ -12,7 +12,7 @@ class GrabResource(resource.Resource):
     SPECIAL_ARGS = ['format', 'filename', 'save'] 
     
     def render(self, req):
-        self.baseCmd = ['/usr/bin/grab', 'grab']
+        self.baseCmd = ['/usr/bin/grab', '/usr/bin/grab']
         self.args = []
         
         # some presets
@@ -43,10 +43,10 @@ class GrabResource(resource.Resource):
                         else:                            
                             self.args.append('80')
                 
-                if key == 'filename':
+                elif key == 'filename':
                     filename = req.args['filename'][0]
                 
-                if key == 'save':
+                elif key == 'save':
                     save = True
                                                 
             else:
@@ -86,14 +86,15 @@ class GrabStream(stream.ProducerStream):
         self.output = ''
         stream.ProducerStream.__init__(self)
 
-        container = eConsoleAppContainer()
-        container.appClosed.append(self.cmdFinished)
-        container.dataAvail.append(self.dataAvail)
+        self.container = eConsoleAppContainer()
+        self.container.appClosed.append(self.cmdFinished)
+        self.container.dataAvail.append(self.dataAvail)
         
         print '[Screengrab.py] starting AiO grab with cmdline:', cmd
-        container.execute(*cmd)
+        self.container.execute(*cmd)
 
     def cmdFinished(self, data):
+        print '[Screengrab.py] cmdFinished'
         if int(data) is 0 and self.target is not None:
             try:
                 fp = open(self.target)
@@ -101,6 +102,7 @@ class GrabStream(stream.ProducerStream):
                 fp.close()
                 if self.save is False:
                     os_remove(self.target)
+                    print '[Screengrab.py] %s removed' %self.target
             except Exception,e:
                 self.write('Internal error while reading target file')
         elif int(data) is 0 and self.target is None:
