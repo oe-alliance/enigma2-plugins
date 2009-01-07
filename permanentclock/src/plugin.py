@@ -16,8 +16,8 @@ import gettext
 ##############################################################################
 
 SKIN = """
-	<screen position="0,0" size="90,24" zPosition="10" title="Permanent Clock" flags="wfNoBorder">
-		<widget source="global.CurrentTime" render="Label" position="0,0" size="90,24" font="Regular;24" valign="center" halign="center" transparent="1">
+	<screen position="0,0" size="92,26" zPosition="10" backgroundColor="#ff000000" title="Permanent Clock" flags="wfNoBorder">
+		<widget source="global.CurrentTime" render="Label" position="1,1" size="90,24" font="Regular;24" valign="center" halign="center" backgroundColor="#ff000000" transparent="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
 	</screen>"""
