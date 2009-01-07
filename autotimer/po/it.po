@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin AutoTimer italian locale v 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-09 13:01+0100\n"
-"PO-Revision-Date: 2008-12-09 13:38+0100\n"
+"POT-Creation-Date: 2009-01-07 03:42+0100\n"
+"PO-Revision-Date: 2009-01-07 04:21+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.yeam <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,27 +20,33 @@ msgstr ""
 
 #: /home/dario/Plugins/autotimer/src/AutoTimerList.py:77
 msgid "mins"
-msgstr "min."
+msgstr "Min."
 
 #: /home/dario/Plugins/autotimer/src/AutoTimerPreview.py:35
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:322
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:651
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:845
-#: /home/dario/Plugins/autotimer/src/AutoTimerSettings.py:47
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:343
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:683
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:883
+#: /home/dario/Plugins/autotimer/src/AutoTimerSettings.py:48
 #: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:41
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:116
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:117
 msgid "Cancel"
 msgstr "Annullare"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerPreview.py:51
-msgid "Sort Time"
-msgstr "Ordine per Ora"
+#: /home/dario/Plugins/autotimer/src/AutoTimerPreview.py:52
+msgid "Preview AutoTimer"
+msgstr "Anteprima AutoTimer"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerPreview.py:53
+#: /home/dario/Plugins/autotimer/src/AutoTimerPreview.py:56
+msgid "Sort Time"
+msgstr "Ord. per Ora"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerPreview.py:58
 msgid "Sort AutoTimer"
-msgstr "Ordinare"
+msgstr "Ordinare Autotimer"
 
 #: /home/dario/Plugins/autotimer/src/plugin.py:16
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:271
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:294
 msgid "None"
 msgstr "Nessuno"
 
@@ -60,259 +66,290 @@ msgstr "Classico"
 msgid "Wizard"
 msgstr "Configurazione Guidata"
 
+#: /home/dario/Plugins/autotimer/src/plugin.py:81
+#, python-format
+msgid ""
+"Your config file is not well-formed:\n"
+"%s"
+msgstr ""
+"File di configurazione errato:\n"
+"%s"
+
+#: /home/dario/Plugins/autotimer/src/plugin.py:110
+#, python-format
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and %d modified."
+msgstr ""
+"Totale eventi trovati: %d.\n"
+"Nuovi Timer Aggiunti: %d - Timer modificati: %d."
+
+#: /home/dario/Plugins/autotimer/src/plugin.py:145
 #: /home/dario/Plugins/autotimer/src/plugin.py:146
-#: /home/dario/Plugins/autotimer/src/plugin.py:147
 msgid "Edit Timers and scan for new Events"
-msgstr "Modifica Timer e ricerca nuovi Eventi"
+msgstr "Modificare Timer e ricercare nuovi Eventi"
 
+#: /home/dario/Plugins/autotimer/src/plugin.py:147
 #: /home/dario/Plugins/autotimer/src/plugin.py:148
-#: /home/dario/Plugins/autotimer/src/plugin.py:149
 msgid "Add AutoTimer..."
-msgstr "Agg. AutoTimer"
+msgstr "Agg. AutoTimer..."
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:41
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:44
 msgid "Monday"
 msgstr "Lunedì"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:42
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:45
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:43
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:46
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:44
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:47
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:45
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:48
 msgid "Friday"
 msgstr "Venerdì"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:46
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:49
 msgid "Saturday"
 msgstr "Sabato"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:47
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:50
 msgid "Sunday"
 msgstr "Domenica"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:48
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:51
 msgid "Weekend"
 msgstr "Weekend"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:49
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:52
 msgid "Weekday"
 msgstr "Giorno feriale"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:144
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:173
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:147
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:174
 msgid "zap"
 msgstr "Zap"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:144
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:173
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:147
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:174
 msgid "record"
 msgstr "Registrazione"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:194
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:197
 msgid "standard"
 msgstr "Standard"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:194
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:197
 #: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:23
 msgid "do nothing"
 msgstr "Non fare nulla"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:194
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:197
 #: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:25
 msgid "go to standby"
 msgstr "Standby"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:194
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:197
 #: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:24
 msgid "go to deep standby"
 msgstr "Spegnere (Deep Standby)"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:194
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:197
 #: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:26
 msgid "auto"
 msgstr "Auto"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:237
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:240
 msgid "Never"
 msgstr "Mai"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:237
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:240
 msgid "Monthly"
 msgstr "Mensile"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:237
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:240
 msgid "Weekly (Sunday)"
 msgstr "Settimanale (Domenica)"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:237
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:240
 msgid "Weekly (Monday)"
 msgstr "Settimanale (Lunedì)"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:239
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:242
 #, python-format
 msgid "Custom (%s)"
 msgstr "Personalizzata (%s)"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:244
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:247
 msgid "No"
 msgstr "No"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:245
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:248
 msgid "On same service"
 msgstr "Sullo stesso canale"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:246
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:249
 msgid "On any service"
 msgstr "Su tutti i canali"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:279
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:286
 msgid "Choose target folder"
-msgstr "Scegliere la cartella di destinazione"
+msgstr "Scegliere cartella destinazione"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:323
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:846
-#: /home/dario/Plugins/autotimer/src/AutoTimerSettings.py:48
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:326
+msgid "AutoTimer Editor"
+msgstr "Editor AutoTimer"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:344
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:884
+#: /home/dario/Plugins/autotimer/src/AutoTimerSettings.py:49
 #: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:42
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:117
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:118
 msgid "OK"
-msgstr "OK"
+msgstr "Ok"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:347
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:369
+msgid "Edit AutoTimer"
+msgstr "Modifica AutoTimer"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:373
 msgid "Edit Filters"
 msgstr "Mod. Filtri"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:349
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:375
 msgid "Add Filters"
 msgstr "Agg. Filtri"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:353
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:379
 msgid "Edit Services"
 msgstr "Mod. Canali"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:355
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:381
 msgid "Add Services"
 msgstr "Agg. Canali"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:378
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:126
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:404
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:127
 #: /home/dario/Plugins/autotimer/src/AutoTimerWizard.py:98
 msgid "Enabled"
 msgstr "Abilitato"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:379
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:405
 #: /home/dario/Plugins/autotimer/src/AutoTimerWizard.py:99
 msgid "Description"
 msgstr "Descrizione"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:380
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:406
 #: /home/dario/Plugins/autotimer/src/AutoTimerWizard.py:100
 msgid "Match Title"
 msgstr "Stringa di confronto"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:384
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:173
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:410
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:174
 #: /home/dario/Plugins/autotimer/src/AutoTimerWizard.py:101
 msgid "Timer Type"
 msgstr "Tipo Timer"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:385
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:411
 #: /home/dario/Plugins/autotimer/src/AutoTimerWizard.py:85
 msgid "Only match during Timespan"
 msgstr "Confrontare solo nell'intervallo"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:391
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:417
 #: /home/dario/Plugins/autotimer/src/AutoTimerWizard.py:91
 msgid "Begin of Timespan"
 msgstr "Inizio Intervallo"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:392
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:418
 #: /home/dario/Plugins/autotimer/src/AutoTimerWizard.py:92
 msgid "End of Timespan"
 msgstr "Fine Intervallo"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:395
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:421
 msgid "Custom offset"
 msgstr "Margine personalizzato"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:400
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:426
 msgid "Offset before recording (in m)"
-msgstr "Margine fine registrazione (min.)"
+msgstr "Margine inizio registrazione (min.)"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:401
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:427
 msgid "Offset after recording (in m)"
 msgstr "Margine fine registrazione (min.)"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:404
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:430
 msgid "Set maximum Duration"
-msgstr "Durata massima:"
+msgstr "Configurazione Durata massima"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:408
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:434
 msgid "Maximum Duration (in m)"
 msgstr "Durata massima (min.)"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:410
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:164
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:436
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:165
 msgid "After event"
 msgstr "Dopo l'evento"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:414
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:440
 msgid "Execute after Event during Timespan"
 msgstr "Eseguire dopo l'Evento durante l'Intervallo"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:419
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:445
 msgid "Begin of after Event Timespan"
 msgstr "Inizio Intervallo dopo l'Evento"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:420
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:446
 msgid "End of after Event Timespan"
 msgstr "Fine Intervallo dopo l'Evento"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:423
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:449
 msgid "Record a maximum of x times"
-msgstr "Registrare per un massimo di x volte"
+msgstr "Registrare per un massimo di \"x\" volte"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:428
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:454
 msgid "Ammount of recordings left"
 msgstr "Registrazioni residue"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:429
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:455
 msgid "Reset Count"
 msgstr "Azzerare Conteggio"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:431
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:457
 msgid "Require Description to be unique"
-msgstr "La Descrizione deve essere unica"
+msgstr "Richiesta Descrizione univoca"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:434
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:460
 msgid "Use a custom location"
 msgstr "Usare destinazione personalizzata"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:436
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:462
 msgid "Custom Location"
 msgstr "Destinazione personalizzata"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:487
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:791
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:952
-#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:150
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:203
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:464
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:192
+msgid "Tags"
+msgstr "Etich."
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:517
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:829
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:994
+#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:155
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:218
 msgid "Really close without saving settings?"
 msgstr "Chiudere senza salvare le modifiche?"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:501
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:531
 msgid "The match attribute is mandatory."
-msgstr "Una stringa non può essere vuota!"
+msgstr "La stringa di confronto è obbligatoria!"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:510
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:218
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:540
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:233
 #, python-format
 msgid ""
 "You entered \"%s\" as Text to match.\n"
@@ -321,89 +358,109 @@ msgstr ""
 "Il testo inserito per il confronto è \"%s\".\n"
 "Rimuovere gli spazi bianchi finali?"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:638
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:667
+msgid "AutoTimer Filters"
+msgstr "Filtri AutoTimer"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:670
 msgid "in Title"
 msgstr "Nel Titolo"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:638
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:670
 msgid "in Shortdescription"
 msgstr "Nella Descrizione Breve"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:638
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:670
 msgid "in Description"
 msgstr "Nella Descrizione"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:638
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:670
 msgid "on Weekday"
 msgstr "Nei giorni feriali"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:652
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:684
 #: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:48
 msgid "Save"
 msgstr "Salvare"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:653
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:847
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:685
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:885
 msgid "delete"
 msgstr "Cancellare"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:654
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:848
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:686
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:886
 msgid "New"
 msgstr "Nuovo"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:710
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:704
+msgid "Edit AutoTimer Filters"
+msgstr "Mod. Filtri AutoTimer"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:748
 msgid "Enable Filtering"
 msgstr "Abilitare Filtri"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:711
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:749
 msgid "Filter"
 msgstr "Filtro"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:719
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:736
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:761
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:757
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:774
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:799
 msgid "Exclude"
 msgstr "Escludere"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:724
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:741
 #: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:762
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:779
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:800
 msgid "Include"
 msgstr "Includere"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:759
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:797
 msgid "Select type of Filter"
 msgstr "Selezionare il tipo di Filtro"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:837
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:866
+msgid "AutoTimer Services"
+msgstr "Canali AutoTimer"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:875
 msgid "Channels"
 msgstr "Canali"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:837
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:875
 msgid "Bouquets"
 msgstr "Bouquet"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:883
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:904
+msgid "Edit AutoTimer Services"
+msgstr "Modifica Canali AutoTimer"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:925
 msgid "Enable Service Restriction"
 msgstr "Abilitare Restrizione Canale"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:884
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:926
 msgid "Editing"
 msgstr "Editing"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:893
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:944
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:935
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:986
 msgid "Record on"
 msgstr "Registrare da"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:924
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:966
 msgid "Select channel to record on"
-msgstr "Selezionare il canale per la registrazione"
+msgstr "Selezionare il canale da cui registrare"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:930
+#: /home/dario/Plugins/autotimer/src/AutoTimerEditor.py:972
 msgid "Select bouquet to record on"
-msgstr "Selezionare il bouquet per la registrazione"
+msgstr "Selezionare il bouquet da cui registrare"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerSettings.py:33
+msgid "AutoTimer Settings"
+msgstr "Configurazione Autotimer"
 
 #: /home/dario/Plugins/autotimer/src/AutoTimerSettings.py:37
 msgid "Poll automatically"
@@ -422,8 +479,16 @@ msgid "Guess existing Timer based on Begin/End"
 msgstr "Calcolare i Timer esistenti basati su Inizio/Fine"
 
 #: /home/dario/Plugins/autotimer/src/AutoTimerSettings.py:41
+msgid "Add timer as disabled on conflict"
+msgstr "Agg. Timer disabilitato se in conflitto"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerSettings.py:42
 msgid "Editor for new AutoTimers"
 msgstr "Editor nuovi AutoTimer"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerSettings.py:65
+msgid "Configure AutoTimer behavior"
+msgstr "Configurazione caratteristiche AutoTimer"
 
 #: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:49
 msgid "Delete"
@@ -457,32 +522,36 @@ msgstr "Cancellare AutoTimer selezionato"
 msgid "Add new AutoTimer"
 msgstr "Aggiungere nuovo AutoTimer"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:136
+#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:80
+msgid "AutoTimer Overview"
+msgstr "Quadro generale AutoTimer"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:141
 #, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Cancellare %s?"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:165
+#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:170
 msgid "Preview"
 msgstr "Anteprima"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:166
+#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:171
 msgid "Import"
 msgstr "Importare"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:167
+#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:172
 msgid "Setup"
 msgstr "Configurazione"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:168
+#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:173
 msgid "Edit new timer defaults"
-msgstr "Modifica parametri predefiniti nuovo Timer"
+msgstr "Modificare parametri predefiniti nuovo Timer"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:172
+#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:177
 msgid "Create a new timer using the classic editor"
 msgstr "Impostare un nuovo Timer con l'Editor classico"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:174
+#: /home/dario/Plugins/autotimer/src/AutoTimerOverview.py:179
 msgid "Create a new timer using the wizard"
 msgstr "Impostare un nuovo Timer con la Conf. Guidata"
 
@@ -490,34 +559,38 @@ msgstr "Impostare un nuovo Timer con la Conf. Guidata"
 msgid "Select a Timer to Import"
 msgstr "Selezionare un Timer da importare"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:126
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:127
 msgid "disable"
 msgstr "Disabilitare"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:126
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:127
 msgid "enable"
 msgstr "Abilitare"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:135
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:136
 #, python-format
 msgid "Match title: %s"
 msgstr "Stringa di confronto: %s"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:146
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:147
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr "Intervallo di confronto: %02d:%02d - %02d:%02d"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:155
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:156
 #, python-format
 msgid "Only on Service: %s"
 msgstr "Solo sul canale: %s"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:182
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:183
 msgid "Location"
 msgstr "Destinazione"
 
-#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:266
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:212
+msgid "Import AutoTimer"
+msgstr "Importare AutoTimer"
+
+#: /home/dario/Plugins/autotimer/src/AutoTimerImporter.py:283
 msgid "Please provide a Text to match"
 msgstr "Introdurre una stringa di confronto"
 
@@ -561,7 +634,7 @@ msgstr ""
 "Premere OK per chiudere la configurazione."
 
 msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
-msgstr "L'Intervallo di un AutoTimer è il primo attributo 'avanzato'. Se viene specificato un intervallo verranno considerati validi solo gli eventi previsti all'interno di tale intervallo temporale."
+msgstr "L'Intervallo di un AutoTimer è il primo attributo \"avanzato\". Se viene specificato un intervallo verranno considerati validi solo gli eventi previsti all'interno di tale intervallo temporale."
 
 msgid ""
 "Welcome.\n"
@@ -583,13 +656,13 @@ msgid ""
 "While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
 msgstr ""
 "Verranno configurate le proprietà fondamentali per un Autotimer.\n"
-"'Descrizione' rappresenta solo la voce mostrata nell'Anteprima, mentre 'Stringa di confronto' rappresenta la voce utilizzata per la ricerca nell'EPG"
+"\"Descrizione\" rappresenta solo la voce mostrata nell'Anteprima, mentre \"Stringa di confronto\" rappresenta la voce utilizzata per la ricerca nell'EPG"
 
 msgid ""
 "You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
 "As this is a mandatory Attribute you cannot continue without doing so."
 msgstr ""
-"Non è stata fornita una 'Stringa di confronto' valida per il nuovo AutoTimer!\n"
+"Non è stata fornita una \"Stringa di confronto\" valida per il nuovo AutoTimer!\n"
 "Questo attributo è obbligatorio: non sarà possibile proseguire senza fornirla!"
 
 msgid ""
@@ -599,12 +672,12 @@ msgid ""
 msgstr ""
 "Un nuovo AutoTimer è stato configurato con successo. Aggiungerlo alla lista?\n"
 "\n"
-"E' possibile tornare al passo precedente premendo EXIT sul telecomando."
+"Per tornare al passo precedente, premere \"EXIT\" sul telecomando."
 
 msgid ""
 "Your 'Match in title' Attribute ends with a Whitespace.\n"
 "Please confirm if this was intentional, if not they will be removed."
 msgstr ""
-"La 'Stringa di confronto' fornita termina con uno spazio.\n"
-"Confermare se si tratta di scelta intenzionale, altrimenti verrà rimosso."
+"La \"Stringa di confronto\" fornita termina con uno spazio.\n"
+"Confermare se si tratta di scelta intenzionale, altrimenti lo spazio verrà rimosso."
 
