@@ -1011,6 +1011,13 @@ function getScreenShot(what) {
 	buffer.src = '/grab?format=jpg&r=720&' + what + '&filename=/tmp/' + downloadStart;
 }
 
+function getVideoShot() {
+	getScreenShot("v");
+}
+
+function getOsdShot(){
+	getScreenShot("o");
+}
 
 // RemoteControl Code
 
@@ -1526,9 +1533,9 @@ function loadContentStatic(template, title){
 
 
 /*
- * Opens the given Extra
- * @param extra - Extra Page as String
- * Possible Values: power, about, message
+ * Opens the given Control
+ * @param control - Control Page as String
+ * Possible Values: power, about, message, screenshot, videoshot, osdshot
  */
 function loadControl(control){
 	switch(control){
@@ -1546,6 +1553,14 @@ function loadControl(control){
 			
 		case "screenshot":
 			loadContentDynamic(getScreenShot, 'Screenshot');
+			break;
+			
+		case "videoshot":
+			loadContentDynamic(getVideoShot, 'Videoshot');
+			break;
+			
+		case "osdshot":
+			loadContentDynamic(getOsdShot, 'OSDshot');
 			break;
 			
 		default:
