@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 Version = '$Header$';
 
 # OK, this is more than a proof of concept
