@@ -524,6 +524,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.close(None)
 
 	def maybeSave(self):
+		if self.editingDefaults:
+			self.save()
+			return
 		# Check if any match is set
 		if not self.match.value.strip():
 			self.session.open(
