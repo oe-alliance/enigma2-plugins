@@ -119,6 +119,10 @@
 				<url>http://www.katkam.ca/p.asp?what=currentjpg</url>
 			</cam>
 			<cam>
+				<name>Vancouver</name>
+				<url>http://www.numinous.ca/images/webcam01.jpg</url>
+			</cam>
+            <cam>
 				<name>Torronto</name>
 				<url>http://www.traveloffice.ca/webcam/capture1.jpg</url>
 			</cam>
@@ -227,12 +231,20 @@
 					<url>http://www.na-klarmann.de/cam.JPG</url>
 				</cam>
 				<cam>
-					<name>Würzburg 1</name>
+					<name>Wuerzburg 1</name>
 					<url>http://wuecam.bplaced.net/live/mega/live2.jpg</url>
 				</cam>
 				<cam>
-					<name>Würzburg 2</name>
+					<name>Wuerzburg 2</name>
 					<url>http://www.wuerzburgwebcam.de/live/images/image.gif</url>
+				</cam>
+                <cam>
+					<name>Eggstaett Bayern</name>
+					<url>http://www.eggstaett.de/webcam/webcam.jpg</url>
+				</cam>
+				<cam>
+					<name>Rosenheim Bayern</name>
+					<url>http://www.klinikum-rosenheim.de/sonstiges/kliroinfo/webcam.jpg</url>
 				</cam>
 			</menu>
 			<menu>
@@ -460,7 +472,7 @@
 				</cam>
 			</menu>
 			<menu>
-				<name>Österreich</name>
+				<name>Oesterreich</name>
 				<cam>
 					<name>Linz</name>
 					<url>http://www.linz.at/images/T_WebcamKunstuni.jpg</url>
@@ -623,7 +635,31 @@
 			</cam>
 
 		</menu>
-		<cam>
+		<menu>
+			<name>Polarlicht_Webcam Hochaufloesung</name>
+            <cam>
+				<name>Polarlicht1</name>
+				<url>http://uk.jokkmokk.jp/photo/nr3/latest_raw.jpg</url>
+			</cam>
+			<cam>
+				<name>Polarlicht2</name>
+				<url>http://uk.jokkmokk.jp/photo/nr4/latest_raw.jpg</url>
+			</cam>
+
+		</menu>
+		<menu>
+			<name>Polarlicht_Webcam Niedrigaufloesung</name>
+            <cam>
+				<name>Polarlicht1</name>
+				<url>http://uk.jokkmokk.jp/photo/nr3/latest.jpg</url>
+			</cam>
+			<cam>
+				<name>Polarlicht2</name>
+				<url>http://uk.jokkmokk.jp/photo/nr4/latest.jpg</url>
+			</cam>
+
+		</menu>
+        <cam>
 			<name>DKRZ</name>
 			<url>http://www.dkrz.de/images/sat_meteo_france/cartefrmod.gif</url>
 		</cam>
