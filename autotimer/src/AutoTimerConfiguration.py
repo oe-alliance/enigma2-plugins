@@ -486,13 +486,13 @@ def writeConfig(filename, defaultTimer, timers):
 	list.append('>\n')
 
 	# Services
-	for serviceref in defaultTimer.getServices():
+	for serviceref in defaultTimer.services:
 		list.extend(['  <serviceref>', serviceref, '</serviceref>'])
 		ref = ServiceReference(str(serviceref))
 		list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
 
 	# Bouquets
-	for bouquet in defaultTimer.getBouquets():
+	for bouquet in defaultTimer.bouquets:
 		list.extend(['  <bouquet>', str(bouquet), '</bouquet>'])
 		ref = ServiceReference(str(bouquet))
 		list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
@@ -505,7 +505,7 @@ def writeConfig(filename, defaultTimer, timers):
 			AFTEREVENT.DEEPSTANDBY: "shutdown",
 			AFTEREVENT.AUTO: "auto"
 		}
-		for afterevent in defaultTimer.getCompleteAfterEvent():
+		for afterevent in defaultTimer.afterevent:
 			action, timespan = afterevent
 			list.append('  <afterevent')
 			if timespan[0] is not None:
@@ -582,13 +582,13 @@ def writeConfig(filename, defaultTimer, timers):
 		list.append('>\n')
 
 		# Services
-		for serviceref in timer.getServices():
+		for serviceref in timer.services:
 			list.extend(['  <serviceref>', serviceref, '</serviceref>'])
 			ref = ServiceReference(str(serviceref))
 			list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
 
 		# Bouquets
-		for bouquet in timer.getBouquets():
+		for bouquet in timer.bouquets:
 			list.extend(['  <bouquet>', str(bouquet), '</bouquet>'])
 			ref = ServiceReference(str(bouquet))
 			list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
@@ -601,7 +601,7 @@ def writeConfig(filename, defaultTimer, timers):
 				AFTEREVENT.DEEPSTANDBY: "shutdown",
 				AFTEREVENT.AUTO: "auto"
 			}
-			for afterevent in timer.getCompleteAfterEvent():
+			for afterevent in timer.afterevent:
 				action, timespan = afterevent
 				list.append('  <afterevent')
 				if timespan[0] is not None:

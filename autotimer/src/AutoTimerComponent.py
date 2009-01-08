@@ -65,9 +65,6 @@ class AutoTimerComponent(object):
 
 ### Attributes / Properties
 
-	def getCompleteAfterEvent(self):
-		return self._afterevent
-
 	def setAfterEvent(self, afterevent):
 		del self._afterevent[:]
 		if len(afterevent):
@@ -78,7 +75,7 @@ class AutoTimerComponent(object):
 				else:
 					self._afterevent.append((action, self.calculateDayspan(*timespan)))
 
-	afterevent = property(getCompleteAfterEvent, setAfterEvent)
+	afterevent = property(lamba self: self._afterevent, setAfterEvent)
 
 	def setBouquets(self, bouquets):
 		if bouquets:
@@ -86,10 +83,7 @@ class AutoTimerComponent(object):
 		else:
 			self._bouquets = []
 
-	def getBouquets(self):
-		return self._bouquets
-
-	bouquets = property(getBouquets, setBouquets)
+	bouquets = property(lambda self: self._bouquets , setBouquets)
 
 	def setExclude(self, exclude):
 		if exclude:
@@ -102,10 +96,7 @@ class AutoTimerComponent(object):
 		else:
 			self._exclude = ([], [], [], [])
 
-	def getExclude(self):
-		return self._exclude
-
-	exclude = property(getExclude, setExclude)
+	exclude = property(lambda self: self._exclude, setExclude)
 
 	def setInclude(self, include):
 		if include:
@@ -118,10 +109,7 @@ class AutoTimerComponent(object):
 		else:
 			self._include = ([], [], [], [])
 
-	def getInclude(self):
-		return self._include
-
-	include = property(getInclude, setInclude)
+	include = property(lamba self: self._include, setInclude)
 
 	def setName(self, name):
 		self.name = name
@@ -135,19 +123,13 @@ class AutoTimerComponent(object):
 
 	match = property(getMatch, setMatch)
 
-	def getServices(self):
-		return self._services
-
 	def setServices(self, services):
 		if services:
 			self._services = services
 		else:
 			self._services = []
 
-	services = property(getServices, setServices)
-
-	def getTimespan(self):
-		return self._timespan
+	services = property(lambda self: self._services, setServices)
 
 	def setTimespan(self, timespan):
 		if timespan is None or len(timespan) and timespan[0] is None:
@@ -155,7 +137,7 @@ class AutoTimerComponent(object):
 		else:
 			self._timespan = self.calculateDayspan(*timespan)
 
-	timespan = property(getTimespan, setTimespan)
+	timespan = property(lambda self: self._timespan, setTimespan)
 
 ### See if Attributes are set
 
@@ -276,81 +258,54 @@ class AutoTimerComponent(object):
 
 ### Makes saving Config easier
 
-	def getAvoidDuplicateDescription(self):
-		return self.avoidDuplicateDescription
+	getAvoidDuplicateDescription = lambda self: self.avoidDuplicateDescription
 
-	def getCounter(self):
-		return self.matchCount
+	getBouquets = lamda self: self._bouquets
 
-	def getCounterFormatString(self):
-		return self.matchFormatString
+	getCompleteAfterEvent = lambda self: self._afterevent
 
-	def getCounterLeft(self):
-		return self.matchLeft
+	getCounter = lambda self: self.matchCount
+	getCounterFormatString = lambda self: self.matchFormatString
+	getCounterLeft = lambda self: self.matchLeft
+	getCounterLimit = lambda self: self.matchLimit
 
-	def getCounterLimit(self):
-		return self.matchLimit
+	# XXX: as this function was not added by me (ritzMo) i'll leave it like this but i'm not really sure if this is right ;-)
+	getDestination = lambda self: self.destination is not None
 
-	def getDestination(self):
-		# XXX: as this function was not added by me (ritzMo) i'll leave it like this but i'm not really sure if this is right ;-)
-		return self.destination is not None
+	getDuration = lambda self: self.maxduration/60
 
-	def getDuration(self):
-		return self.maxduration/60
+	getEnabled = lambda self: self.enabled and "yes" or "no"
 
-	def getEnabled(self):
-		return self.enabled and "yes" or "no"
+	getExclude = lambda self: self._exclude
+	getExcludedDays = lambda self: self.exclude[3]
+	getExcludedDescription = lambda self: [x.pattern for x in self.exclude[2]]
+	getExcludedShort = lambda self: [x.pattern for x in self.exclude[1]]
+	getExcludedTitle = lambda self: [x.pattern for x in self.exclude[0]]	
 
-	def getExcludedDays(self):
-		return self.exclude[3]
+	getInclude = lambda self: self._include
+	getIncludedTitle = lambda self: [x.pattern for x in self.include[0]]
+	getIncludedShort = lambda self: [x.pattern for x in self.include[1]]
+	getIncludedDescription = lambda self: [x.pattern for x in self.include[2]]
+	getIncludedDays = lambda self: self.include[3]
 
-	def getExcludedDescription(self):
-		return [x.pattern for x in self.exclude[2]]
+	getJustplay = lambda self: self.justplay and "1" or "0"
 
-	def getExcludedShort(self):
-		return [x.pattern for x in self.exclude[1]]
+	getLastBegin = lambda self: self.lastBegin
 
-	def getExcludedTitle(self):
-		return [x.pattern for x in self.exclude[0]]	
+	getName = lambda self: self.name
 
-	def getIncludedTitle(self):
-		return [x.pattern for x in self.include[0]]
+	getOffsetBegin = lambda self: self.offset[0]/60
+	getOffsetEnd = lambda self: self.offset[1]/60
 
-	def getIncludedShort(self):
-		return [x.pattern for x in self.include[1]]
+	getServices = lambda self: self._services
 
-	def getIncludedDescription(self):
-		return [x.pattern for x in self.include[2]]
+	getTags = lambda self: self.tags
 
-	def getIncludedDays(self):
-		return self.include[3]
+	getTimespan = lambda self: self._timespan
+	getTimespanBegin = lambda self: '%02d:%02d' % (self.timespan[0][0], self.timespan[0][1])
+	getTimespanEnd = lambda self: '%02d:%02d' % (self.timespan[1][0], self.timespan[1][1])
 
-	def getJustplay(self):
-		return self.justplay and "1" or "0"
-
-	def getLastBegin(self):
-		return self.lastBegin
-
-	def getName(self):
-		return self.name
-
-	def getOffsetBegin(self):
-		return self.offset[0]/60
-
-	def getOffsetEnd(self):
-		return self.offset[1]/60
-
-	def getTags(self):
-		return self.tags
-
-	def getTimespanBegin(self):
-		return '%02d:%02d' % (self.timespan[0][0], self.timespan[0][1])
-
-	def getTimespanEnd(self):
-		return '%02d:%02d' % (self.timespan[1][0], self.timespan[1][1])
-
-	def isOffsetEqual(self):
-		return self.offset[0] == self.offset[1]
+	isOffsetEqual = lambda self: self.offset[0] == self.offset[1]
 	
 ### Actual functionality
 

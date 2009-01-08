@@ -126,8 +126,8 @@ class AutoTimerEditorBase:
 			self.filterSet = False
 
 		# See if services are restricted
-		self.services = timer.getServices()
-		self.bouquets = timer.getBouquets()
+		self.services = timer.services
+		self.bouquets = timer.bouquets
 		if len(self.services) or len(self.bouquets):
 			self.serviceRestriction = True
 		else:
