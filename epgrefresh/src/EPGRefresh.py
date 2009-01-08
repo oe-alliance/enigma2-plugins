@@ -166,8 +166,8 @@ class EPGRefresh:
 			else:
 				# Fetch services
 				for timer in autotimer.getEnabledTimerList():
-					additionalServices.extend([EPGRefreshService(x, None) for x in timer.getServices()])
-					additionalBouquets.extend([EPGRefreshService(x, None) for x in timer.getBouquets()])
+					additionalServices.extend([EPGRefreshService(x, None) for x in timer.services])
+					additionalBouquets.extend([EPGRefreshService(x, None) for x in timer.bouquets])
 			finally:
 				# Remove instance if there wasn't one before
 				if removeInstance:
