@@ -175,7 +175,7 @@ class WebIfInterfaceList(MenuList):
         
 class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
     skin = """
-        <screen name="Interface Config" position="80,148" size="560,280" title="Webinterface: edit Interface">
+        <screen name="Interface Config" position="80,148" size="560,280" title="Webinterface: Edit Interface">
             <widget name="config" position="10,10" size="520,210" scrollbarMode="showOnDemand" />
             <ePixmap name="red"    position="0,240"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
             <ePixmap name="green"  position="140,240" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />            
