@@ -1,20 +1,23 @@
-# translation of Autotimer_fy.po to gerrit
+# translation of autotimer_fy.po to gerrit
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # gerrit <gerrit@nedlinux.nl>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: Autotimer_fy\n"
+"Project-Id-Version: autotimer_fy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-06 18:07+0100\n"
-"PO-Revision-Date: 2009-01-06 18:17+0100\n"
+"POT-Creation-Date: 2009-01-09 20:07+0100\n"
+"PO-Revision-Date: 2009-01-09 20:55+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+
+msgid "Abort this Wizard."
+msgstr "Dizze gûcheler ôfbrekke"
 
 msgid "Add"
 msgstr "Tafoegje"
@@ -87,6 +90,9 @@ msgstr "Feroaringen opslaan en ôfslúte"
 
 msgid "Configure AutoTimer behavior"
 msgstr "AutoTimer gedrach ynstelle"
+
+msgid "Create a new AutoTimer."
+msgstr "Nije AutoTimer oanmeitsje"
 
 msgid "Create a new timer using the classic editor"
 msgstr "Nei Tiidsbarren ynstelle mei de klassyke bewurker"
@@ -168,6 +174,15 @@ msgstr "Utfiere tiidens in barren yn Tiidsspan"
 msgid "Filter"
 msgstr "Filter"
 
+msgid ""
+"Filters are another powerful tool when matching events. An AutoTimer can be "
+"restricted to certain Weekdays or only match an event with a text inside eg "
+"it's Description.\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"In Filter is in kreftig ark foar it fergelykjen fan tiidsbarren. In AutoTimer kin beperkt wurde ta bepaalde wiekdagen of allinne barren mei in bepaalde tekst bijv yn in beskriuwing.\n"
+"Druk BLAU foar in nije filter rigele en GIEL om in selektearre te ferwiderjen."
+
 #, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
@@ -190,6 +205,17 @@ msgstr "Ymport AutoTimer"
 
 msgid "Include"
 msgstr "Ynclusief"
+
+msgid ""
+"It's possible to restrict an AutoTimer to certain Services or Bouquets or to "
+"deny specific ones.\n"
+"An Event will only match this AutoTimer if it's on a specific and not denied "
+"Service (inside a Bouquet).\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"It is mooglik om in AutoTimer te beperken ta bepaalde Services of Boeketten of ta wiigerje fan bepaalde items.\n"
+"In barren komt allinne oerien mei in AutoTimer wanneer it in bepaalde en net wiigere Service (yn in boeket).\n"
+"Druk BLAU om in nije foarwaarde en GIEL om in selektearre te ferwiderjen."
 
 msgid "Location"
 msgstr "Lokaasje"
@@ -225,6 +251,9 @@ msgstr "Nij"
 
 msgid "No"
 msgstr "Nee"
+
+msgid "No, remove them."
+msgstr "Nee, gewoan ferwiderje"
 
 msgid "None"
 msgstr "Gjin"
@@ -326,8 +355,29 @@ msgstr "Snein"
 msgid "Tags"
 msgstr "Merkers"
 
+msgid ""
+"Thank you for using the wizard. Your new AutoTimer has been added to the "
+"List.\n"
+"Please press OK to continue."
+msgstr ""
+"Bedankt foar it brûken fan de gûcheler. De nije AutoTimer is tafoege oan de lyst.\n"
+"Druk OK om troch te gean."
+
+msgid ""
+"The Timer will not be added to the List.\n"
+"Please press OK to close this Wizard."
+msgstr ""
+"It Tiidsbarren wurd net tafoegt oan de lyst.\n"
+"Druk OK om de gûcheler ôf te slúten."
+
+msgid ""
+"The Timespan of an AutoTimer is the first 'advanced' attribute. If a "
+"timespan is specified an event will only match this AutoTimer if it lies "
+"inside of this timespan."
+msgstr "It Tiidsspan fan in AutoTimer is de eerst afansjearre attributen. Ot in tiidsspan opjûn is, sil in tiidbarren allinne oerien komme ot it binnen dit tiidsspan falt."
+
 msgid "The match attribute is mandatory."
-msgstr "It syk attribuut is net unyk "
+msgstr "It syk attribuut is ferplicht."
 
 msgid "Thursday"
 msgstr "Tongersdei"
@@ -356,8 +406,42 @@ msgstr "Wykeliks (Moandei)"
 msgid "Weekly (Sunday)"
 msgstr "Wykeliks (Snein)"
 
+msgid ""
+"Welcome.\n"
+"\n"
+"This Wizard will help you to create a new AutoTimer by providing "
+"descriptions for common settings."
+msgstr ""
+"Wolkom\n"
+"\n"
+"Dizze gûcheler helpt jo by it meitsjen fan in AutoTimer troch in beskriuwing te jaan "
+"foar algemiene ynstellingen."
+
 msgid "Wizard"
 msgstr "Gûcheler"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "Yes, keep them."
+msgstr "Ja, anhâlde."
+
+msgid ""
+"You can set the basic properties of an AutoTimer here.\n"
+"While 'Name' is just a human-readable name displayed in the Overview, 'Match "
+"in title' is what is looked for in the EPG."
+msgstr ""
+"Hjir kinne standaard ynstellingen foar in AutoTimer dien wurde.\n"
+"'Namme' is in namme dy't yn de lyst toant wurd, 'Match' is een titel wêr nei "
+" sjoen wurd yn de EPG."
+
+msgid ""
+"You did not provide a valid 'Match in title' Attribute for your new "
+"AutoTimer.\n"
+"As this is a mandatory Attribute you cannot continue without doing so."
+msgstr ""
+"Der is gjin jildige opjefte dien foar 'Match in titel', foar de nije AutoTimer.\n"
+"Whylst dizze ferplicht is, kinne jo net fjierder sunder ien te jaan."
 
 #, python-format
 msgid ""
@@ -366,6 +450,23 @@ msgid ""
 msgstr ""
 "Jo hawwe \"%s\" as syk tekst ynjûn.\n"
 "Wolle jo de spaties foar en nei de tekst ferwiderje ?"
+
+msgid ""
+"You successfully configured a new AutoTimer. Do you want to add it to the "
+"list?\n"
+"\n"
+"You can go back a step by pressing EXIT on your remote."
+msgstr ""
+"Der is mei sukses in nije AutoTimer ynstelt. Wolle jo it tafoegje oan de lyst ?\n"
+"\n"
+"Jo kinne ien stap wêrom troch de EXIT knop te brûken."
+
+msgid ""
+"Your 'Match in title' Attribute ends with a Whitespace.\n"
+"Please confirm if this was intentional, if not they will be removed."
+msgstr ""
+"Jo 'Match in titel' opjefte hat in spatie op it ein.\n"
+"Klopt dit of net ? Sa net, dan wurd dizze ferwidere."
 
 #, python-format
 msgid ""

@@ -1,14 +1,14 @@
-# translation of nl.po to gerrit
+# translation of epgrefresh_nl.po to gerrit
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # gerrit <gerrit@nedlinux.nl>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: nl\n"
+"Project-Id-Version: epgrefresh_nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-06 17:12+0100\n"
-"PO-Revision-Date: 2009-01-07 15:39+0100\n"
+"POT-Creation-Date: 2009-01-09 20:07+0100\n"
+"PO-Revision-Date: 2009-01-09 20:48+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,91 +16,84 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../src/plugin.py:83 ../src/plugin.py:93
 msgid "Automated EPGRefresher"
 msgstr "Automatische EPG ververser"
 
-#: ../src/EPGRefreshChannelEditor.py:67
 msgid "Bouquets"
 msgstr "Boeketten"
 
-#: ../src/EPGRefreshChannelEditor.py:75 ../src/EPGRefreshConfiguration.py:65
 msgid "Cancel"
 msgstr "Afbreken"
 
-#: ../src/EPGRefreshChannelEditor.py:67
 msgid "Channels"
 msgstr "Kanalen"
 
-#: ../src/EPGRefreshConfiguration.py:56
+msgid "Configure EPGRefresh"
+msgstr "EPGRefresh instellen"
+
 msgid "Delay when not in Standby (in m)"
 msgstr "Vertraging wanneer niet in Standby (in min)"
 
-#: ../src/EPGRefreshConfiguration.py:68
+msgid "EPGRefresh Configuration"
+msgstr "EPGRefresh configuratie"
+
+msgid "EPGRefresh Services"
+msgstr "EPGRefresh Services"
+
 msgid "Edit Services"
 msgstr "Services bewerken"
 
-#: ../src/EPGRefreshChannelEditor.py:111
+msgid "Edit Services to refresh"
+msgstr "Bewerk te verversen Services"
+
 msgid "Editing"
 msgstr "Aan het bewerken"
 
-#: ../src/EPGRefreshConfiguration.py:57
 msgid "Force scan even if reciever is in use"
 msgstr "Ook zoeken wanneer de ontvanger in gebruik is"
 
-#: ../src/EPGRefreshConfiguration.py:58
 msgid "Inherit Services from AutoTimer if available"
 msgstr "Services uit AutoTimer halen wanneer deze beschikbaar is"
 
-#: ../src/EPGRefreshChannelEditor.py:78
 msgid "New"
 msgstr "Nieuw"
 
-#: ../src/EPGRefreshChannelEditor.py:76 ../src/EPGRefreshConfiguration.py:66
 msgid "OK"
 msgstr "Ok"
 
-#: ../src/EPGRefreshConfiguration.py:130
 msgid "Really close without saving settings?"
 msgstr "Echt sluiten zonder op te slaan ?"
 
-#: ../src/EPGRefreshConfiguration.py:54
 msgid "Refresh EPG after"
 msgstr "Ververs EPG na"
 
-#: ../src/EPGRefreshConfiguration.py:55
 msgid "Refresh EPG before"
 msgstr "Ververs EPG voor"
 
-#: ../src/EPGRefreshConfiguration.py:52
 msgid "Refresh automatically"
 msgstr "Automatisch verversen"
 
-#: ../src/EPGRefreshConfiguration.py:67
 msgid "Refresh now"
 msgstr "Nu verversen"
 
-#: ../src/EPGRefreshChannelEditor.py:120 ../src/EPGRefreshChannelEditor.py:171
 msgid "Refreshing"
 msgstr "Aan het verversen"
 
-#: ../src/EPGRefreshChannelEditor.py:164
 msgid "Select bouquet to refresh"
 msgstr "Kies boeket om te verversen"
 
-#: ../src/EPGRefreshChannelEditor.py:158
 msgid "Select channel to refresh"
 msgstr "Kies zender om te verversen"
 
-#: ../src/EPGRefreshConfiguration.py:59
 msgid "Shutdown after refresh"
 msgstr "Afsluiten na het verversen"
 
-#: ../src/EPGRefreshConfiguration.py:53
 msgid "Time to stay on service (in m)"
 msgstr "Deze tijd op de service blijven (in min)"
 
-#: ../src/EPGRefreshChannelEditor.py:77
+msgid "Wakeup from Deep-Standby to refresh EPG"
+msgstr "Wakker worden uit de diepe standby om EPG te verversen"
+
 msgid "delete"
 msgstr "verwijderen"
 
