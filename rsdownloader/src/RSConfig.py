@@ -12,15 +12,16 @@ from time import time
 ##############################################################################
 
 config.plugins.RSDownloader = ConfigSubsection()
+config.plugins.RSDownloader.onoff = ConfigYesNo(default=True)
 config.plugins.RSDownloader.username = ConfigText(default="", fixed_size=False)
 config.plugins.RSDownloader.password = ConfigText(default="", fixed_size=False)
 config.plugins.RSDownloader.lists_directory = ConfigText(default="/media/cf/rs/lists/", fixed_size=False)
 config.plugins.RSDownloader.downloads_directory = ConfigText(default="/media/cf/rs/downloads", fixed_size=False)
-config.plugins.RSDownloader.ignore_time = ConfigYesNo(default = False)
-config.plugins.RSDownloader.start_time = ConfigClock(default = time())
-config.plugins.RSDownloader.end_time = ConfigClock(default = time())
-config.plugins.RSDownloader.write_log = ConfigYesNo(default = True)
-config.plugins.RSDownloader.reconnect_fritz = ConfigYesNo(default = False)
+config.plugins.RSDownloader.ignore_time = ConfigYesNo(default=False)
+config.plugins.RSDownloader.start_time = ConfigClock(default=time())
+config.plugins.RSDownloader.end_time = ConfigClock(default=time())
+config.plugins.RSDownloader.write_log = ConfigYesNo(default=True)
+config.plugins.RSDownloader.reconnect_fritz = ConfigYesNo(default=False)
 
 ##############################################################################
 
@@ -41,6 +42,7 @@ class RSConfig(ConfigListScreen, TitleScreen):
 		self["key_green"] = Label(_("Save"))
 		
 		list = []
+		list.append(getConfigListEntry(_("Download in the background:"), config.plugins.RSDownloader.onoff))
 		list.append(getConfigListEntry(_("Username:"), config.plugins.RSDownloader.username))
 		list.append(getConfigListEntry(_("Password:"), config.plugins.RSDownloader.password))
 		list.append(getConfigListEntry(_("Lists directory:"), config.plugins.RSDownloader.lists_directory))

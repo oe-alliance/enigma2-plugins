@@ -46,6 +46,10 @@ class RS:
 			writeLog("Added %s to the downloads." % file)
 
 	def readLists(self):
+		if config.plugins.RSDownloader.onoff.value == False:
+			writeLog("Background downloader is turned off...")
+			return
+		
 		writeLog("Reading all lists...")
 		path = config.plugins.RSDownloader.lists_directory.value
 		if not path.endswith("/"):
@@ -199,6 +203,10 @@ class RS:
 				writeLog("Error while cleaning list %s!" % list)
 
 	def mayDownload(self):
+		if config.plugins.RSDownloader.onoff.value == False:
+			writeLog("Background downloader is turned off...")
+			return False
+		
 		if config.plugins.RSDownloader.ignore_time.value:
 			return True
 		
