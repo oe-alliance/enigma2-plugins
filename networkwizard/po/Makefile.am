@@ -26,7 +26,7 @@ merge:
 NetworkWizard.pot:
 	$(GETTEXT) -L python --add-comments="TRANSLATORS:" -d NetworkWizard -s -o NetworkWizard.pot ../src/*.py
 
-	./xml2po.py	../src/ >> NetworkWizard.pot
+	../../xml2po.py ../src/ >> NetworkWizard.pot
 
 	msguniq -o NetworkWizarduniq.pot NetworkWizard.pot
 	$(RM) NetworkWizard.pot
