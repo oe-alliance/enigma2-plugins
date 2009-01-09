@@ -40,6 +40,11 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 
 		self.id = id
 
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Simple RSS Reader Setup"))
+
 	def save(self):
 		config.plugins.simpleRSS.feed[self.id].save()
 		config.plugins.simpleRSS.feed.save()
@@ -102,6 +107,11 @@ class RSSSetup(ConfigListScreen, Screen):
 			"cancel": self.keyCancel,
 			"ok": self.ok
 		}, -1)
+
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Simple RSS Reader Setup"))
 
 	def autostartChanged(self, instance):
 		# Remove keep_running from list if autostart is active
@@ -187,3 +197,4 @@ def addFeed(address, auto = False):
 
 	# Save (needed?)
 	config.plugins.simpleRSS.feed.save()
+

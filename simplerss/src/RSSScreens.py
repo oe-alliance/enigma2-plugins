@@ -113,7 +113,7 @@ class RSSEntryView(RSSBaseView):
 		self.onLayoutFinish.append(self.setConditionalTitle)
 
 	def setConditionalTitle(self):
-		self.setTitle(': '.join(["Simple RSS Reader", self.feedTitle]))
+		self.setTitle(_("Simple RSS Reader: %s") % (self.feedTitle))
 
 	def up(self):
 		self["content"].pageUp()
@@ -253,7 +253,7 @@ class RSSFeedView(RSSBaseView):
 			self.updateInfo()
 
 	def setConditionalTitle(self):
-		self.setTitle(': '.join(["Simple RSS Reader", self.feed.title]))
+		self.setTitle(_("Simple RSS Reader: %s") % (self.feed.title))
 
 	def updateInfo(self):
 		current_entry = self["content"].getCurrent()
@@ -365,6 +365,7 @@ class RSSOverview(RSSBaseView):
 
 	def __show(self):
 		self.rssPoller.addCallback(self.pollCallback)
+		self.setTitle(_("Simple RSS Reader"))
 
 	def __close(self):
 		self.rssPoller.removeCallback(self.pollCallback)
@@ -458,3 +459,4 @@ class RSSOverview(RSSBaseView):
 		for entry in self["content"].getCurrent().history:
 				enclosures.extend(entry[3])
 		RSSBaseView.selectEnclosure(self, enclosures)
+
