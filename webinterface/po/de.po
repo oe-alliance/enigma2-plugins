@@ -26,7 +26,7 @@ msgstr "Konfiguration des Webinterface"
 
 #: src/WebIfConfig.py:31
 msgid "Webinterface: Main Setup"
-msgstr "Webinterface: Hauptsetup"
+msgstr "Webinterface: Haupteinstellungen"
 
 #: src/WebIfConfig.py:36
 msgid "Start Webinterface"
@@ -111,7 +111,7 @@ msgstr "nein"
 
 #: src/WebIfConfig.py:189
 msgid "Webinterface: Edit Interface"
-msgstr "Webinterface: Interface bearbeiten"
+msgstr "Webinterface: Schnittstelle bearbeiten"
 
 #: src/WebIfConfig.py:204
 msgid "Delete"
