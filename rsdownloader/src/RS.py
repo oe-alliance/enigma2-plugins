@@ -110,7 +110,7 @@ class RS:
 			
 			try:
 				list = downloading_file.split("/")
-				file = path + list[(len(list)-2)] + "_" + list[(len(list)-1)]
+				file = path + list[(len(list)-1)]
 				file = file.replace(".html", "")
 			except:
 				file = downloading_file.replace(".html", "").replace("http://", "")
