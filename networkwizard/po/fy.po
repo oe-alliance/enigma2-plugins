@@ -1,14 +1,14 @@
-# translation of NetworkWizard_fy.po to gerrit
+# translation of networkwizard_fy.po to gerrit
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# gerrit <gerrit@nedlinux.nl>, 2008.
+# gerrit <gerrit@nedlinux.nl>, 2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: NetworkWizard_fy\n"
+"Project-Id-Version: networkwizard_fy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-06 17:18+0200\n"
-"PO-Revision-Date: 2008-10-15 19:03+0200\n"
+"POT-Creation-Date: 2009-01-06 18:07+0100\n"
+"PO-Revision-Date: 2009-01-06 18:30+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,77 +16,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../src/NetworkWizard.py:66 ../src/
-msgid "Exit wizard and configure later manually"
-msgstr "Gûcheler ofslûte en letter ynstelle"
-
-#: ../src/plugin.py:19 ../src/plugin.py:28 ../src/
-msgid "Network Wizard"
-msgstr "Netwurk gûcheler"
-
-#: ../src/NetworkWizard.py:114 ../src/NetworkWizard.py:128
-msgid "No Networks found"
-msgstr "Gjin Netwurken fûn"
-
-#: ../src/NetworkWizard.py:19
-msgid "WEP"
-msgstr "WEP"
-
-#: ../src/NetworkWizard.py:20 ../src/NetworkWizard.py:28
-msgid "WPA"
-msgstr "WPA"
-
-#: ../src/NetworkWizard.py:21
-msgid "WPA2"
-msgstr "WPA2"
-
-#: ../src/NetworkWizard.py:114 ../src/NetworkWizard.py:128
-msgid "unavailable"
-msgstr "net beskikber"
-
-#: ../src/
 msgid "Configure interface"
 msgstr "Interface ynstelle"
 
-#: ../src/
 msgid "Configure nameservers"
 msgstr "Nammeservers ynstelle"
 
-#: ../src/
 msgid "Configure your internal LAN"
 msgstr "Ynterne LAN ynstelle"
 
-#: ../src/
 msgid "Configure your network again"
 msgstr "Netwurk opnei ynstelle"
 
-#: ../src/
 msgid "Configure your wireless LAN again"
 msgstr "Triidloas LAN opnei ynstelle"
 
-#: ../src/
+msgid "Exit network wizard"
+msgstr "Netwurk gûcheler ôfslute"
+
+msgid "Network Wizard"
+msgstr "Netwurk gûcheler"
+
+msgid "No networks found"
+msgstr "Gjin netwurken fûn"
+
 msgid ""
 "Please configure or verify your Nameservers by filling out the required "
 "values.\n"
 "When you are ready press OK to continue."
 msgstr ""
-"Graach de nammeservers neisjen of ynstelle troch de juste fjilden yn te jaan.\n"
+"Graach de nammeservers neisjen of ynstelle troch de juste fjilden yn te "
+"jaan.\n"
 "Druk OK om troch te gean."
 
-#: ../src/
 msgid ""
 "Please configure your internet connection by filling out the required "
 "values.\n"
 "When you are ready press OK to continue."
 msgstr ""
-"Graach de internet ferbining neisjen of ynstelle troch de juste fjilden yn te jaan.\n"
+"Graach de internet ferbining neisjen of ynstelle troch de juste fjilden yn "
+"te jaan.\n"
 "Druk OK om troch te gean."
 
-#: ../src/
 msgid "Please follow the instructions on the TV"
 msgstr "Folgje de opjeften fan it TV skerm"
 
-#: ../src/
 msgid ""
 "Please select the network interface that you want to use for your internet "
 "connection.\n"
@@ -97,25 +71,27 @@ msgstr ""
 "\n"
 "Druk OK om troch te gean."
 
-#: ../src/
 msgid ""
-"Please select the wireless LAN network that you want to connect to.\n"
+"Please select the wireless network that you want to connect to.\n"
 "\n"
 "Please press OK to continue."
 msgstr ""
-"Graach de triidloaze LAN netwurk interface kieze foar gebrûk mei it internet.\n"
+"Kies it triidloase netwurk wêrmei jo ferbyne wolle\n"
 "\n"
-"Druk OK om troch te gean."
+"Druk OK om troch te gean"
 
-#: ../src/
+msgid "Please wait while we prepare your network interfaces..."
+msgstr "Wachtsje oant de netwurkynstellingen dien binne..."
+
+msgid "Please wait while we test your network..."
+msgstr "Netwurk an it testen..."
+
 msgid "Select interface"
 msgstr "Kies interface"
 
-#: ../src/
 msgid "Select wireless network"
 msgstr "Kies triidloas netwurk"
 
-#: ../src/
 msgid ""
 "Thank you for using the wizard.\n"
 "Please press OK to continue."
@@ -123,7 +99,6 @@ msgstr ""
 "Dank foar it brûken fan de gûcheler.\n"
 "Druk OK om troch te gean."
 
-#: ../src/
 msgid ""
 "The wireless LAN plugin is not installed!\n"
 "Please install it and choose what you want to do next."
@@ -131,7 +106,6 @@ msgstr ""
 "De triidloas LAN plugin is net ynstallearre !\n"
 "Ynstallearje de plugin en kies wot jo dan dwaan wolle."
 
-#: ../src/
 msgid ""
 "Welcome.\n"
 "\n"
@@ -142,12 +116,11 @@ msgid ""
 msgstr ""
 "Wolkom.\n"
 "\n"
-"Dizze gûcheler rint mei jo troch de stappen foar it ynstellen fan de "
-"basis netwurk ynstellingen fan jo Dreambox.\n"
+"Dizze gûcheler rint mei jo troch de stappen foar it ynstellen fan de basis "
+"netwurk ynstellingen fan jo Dreambox.\n"
 "\n"
 "Druk OK om te begjinnen."
 
-#: ../src/
 msgid ""
 "Your Dreambox is now ready to use.\n"
 "\n"
@@ -161,7 +134,6 @@ msgstr ""
 "\n"
 "Druk OK om troch te gean."
 
-#: ../src/
 msgid ""
 "Your internet connection is not working!\n"
 "Please choose what you want to do next."
@@ -169,7 +141,6 @@ msgstr ""
 "Jo internetferbinining wurket net !\n"
 "Kies wat jo no dwaan wolle"
 
-#: ../src/
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"
 "Have you attached your USB WLAN Stick?\n"
@@ -177,7 +148,15 @@ msgid ""
 "Please choose what you want to do next."
 msgstr ""
 "Jo triidloas internet oansluting koe net start wurde!\n"
-"Hawwe jo jo USB WLAN Stick oanslûten ?n "
-"\n"
+"Hawwe jo jo USB WLAN Stick oanslûten ?n \n"
 "Kies wat jo no dwaan wolle."
+
+msgid "enter hidden network SSID"
+msgstr "ynjefte fan ferstoppe netwurk SSID"
+
+msgid "hidden..."
+msgstr "ferstoppe..."
+
+msgid "unavailable"
+msgstr "net beskikber"
 
