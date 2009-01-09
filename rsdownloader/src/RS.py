@@ -199,6 +199,9 @@ class RS:
 				writeLog("Error while cleaning list %s!" % list)
 
 	def mayDownload(self):
+		if config.plugins.RSDownloader.ignore_time.value:
+			return True
+		
 		start = config.plugins.RSDownloader.start_time.value
 		end = config.plugins.RSDownloader.end_time.value
 		t = localtime()
