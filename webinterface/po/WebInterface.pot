@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins-extensions-webinterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-06 14:34+0100\n"
+"POT-Creation-Date: 2009-01-09 03:17+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Stephan Reichholf <stephan@reichholf.net>\n"
 "Language-Team: \n"
@@ -22,96 +22,108 @@ msgstr ""
 msgid "Configuration for the Webinterface"
 msgstr ""
 
-#: src/WebIfConfig.py:34
-msgid "Start Webinterface"
-msgstr ""
-
-#: src/WebIfConfig.py:35
-msgid "Enable /hdd"
+#: src/WebIfConfig.py:31
+msgid "Webinterface: Main Setup"
 msgstr ""
 
 #: src/WebIfConfig.py:36
-msgid "Allow zapping via Webinterface"
+msgid "Start Webinterface"
 msgstr ""
 
 #: src/WebIfConfig.py:37
-msgid "Autowrite timer"
+msgid "Enable /hdd"
 msgstr ""
 
 #: src/WebIfConfig.py:38
+msgid "Allow zapping via Webinterface"
+msgstr ""
+
+#: src/WebIfConfig.py:39
+msgid "Autowrite timer"
+msgstr ""
+
+#: src/WebIfConfig.py:40
 msgid "Load movie-length"
 msgstr ""
 
-#: src/WebIfConfig.py:44
-#: src/WebIfConfig.py:199
+#: src/WebIfConfig.py:46
+#: src/WebIfConfig.py:201
 msgid "Cancel"
 msgstr ""
 
-#: src/WebIfConfig.py:45
-#: src/WebIfConfig.py:200
+#: src/WebIfConfig.py:47
+#: src/WebIfConfig.py:202
 msgid "OK"
 msgstr ""
 
-#: src/WebIfConfig.py:46
+#: src/WebIfConfig.py:48
 msgid "Interfaces"
 msgstr ""
 
-#: src/WebIfConfig.py:91
-#: src/WebIfConfig.py:220
-msgid "Address"
-msgstr ""
-
-#: src/WebIfConfig.py:92
-#: src/WebIfConfig.py:221
-msgid "Port"
+#: src/WebIfConfig.py:89
+msgid "Webinterface: List of configured Interfaces"
 msgstr ""
 
 #: src/WebIfConfig.py:93
-msgid "Authorization"
+#: src/WebIfConfig.py:222
+msgid "Address"
 msgstr ""
 
 #: src/WebIfConfig.py:94
-msgid "SSL"
+#: src/WebIfConfig.py:223
+msgid "Port"
 msgstr ""
 
 #: src/WebIfConfig.py:95
-#: src/WebIfConfig.py:219
-msgid "Disabled"
+msgid "Authorization"
 msgstr ""
 
 #: src/WebIfConfig.py:96
-msgid "Add"
+msgid "SSL"
 msgstr ""
 
 #: src/WebIfConfig.py:97
-msgid "Change"
+#: src/WebIfConfig.py:221
+msgid "Disabled"
 msgstr ""
 
-#: src/WebIfConfig.py:122
-#: src/WebIfConfig.py:127
-#: src/WebIfConfig.py:132
-msgid "yes"
+#: src/WebIfConfig.py:98
+msgid "Add"
+msgstr ""
+
+#: src/WebIfConfig.py:99
+msgid "Change"
 msgstr ""
 
 #: src/WebIfConfig.py:124
 #: src/WebIfConfig.py:129
 #: src/WebIfConfig.py:134
+msgid "yes"
+msgstr ""
+
+#: src/WebIfConfig.py:126
+#: src/WebIfConfig.py:131
+#: src/WebIfConfig.py:136
 msgid "no"
 msgstr ""
 
-#: src/WebIfConfig.py:202
+#: src/WebIfConfig.py:189
+msgid "Webinterface: Edit Interface"
+msgstr ""
+
+#: src/WebIfConfig.py:204
 msgid "Delete"
 msgstr ""
 
-#: src/WebIfConfig.py:222
+#: src/WebIfConfig.py:224
 msgid "Require Authorization"
 msgstr ""
 
-#: src/WebIfConfig.py:223
+#: src/WebIfConfig.py:225
 msgid "SSL Encryption"
 msgstr ""
 
-#: src/WebIfConfig.py:243
+#: src/WebIfConfig.py:245
 msgid "Really delete this Interface?"
 msgstr ""
 
