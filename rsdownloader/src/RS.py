@@ -218,6 +218,22 @@ class RS:
 		#print "====>End:", str(end)
 		#print "====>Now:", str(t)
 		
+		weekday = t[6]
+		if weekday == 0 and config.plugins.RSDownloader.download_monday.value == False:
+			return False
+		elif weekday == 1 and config.plugins.RSDownloader.download_tuesday.value == False:
+			return False
+		elif weekday == 2 and config.plugins.RSDownloader.download_wednesday.value == False:
+			return False
+		elif weekday == 3 and config.plugins.RSDownloader.download_thursday.value == False:
+			return False
+		elif weekday == 4 and config.plugins.RSDownloader.download_friday.value == False:
+			return False
+		elif weekday == 5 and config.plugins.RSDownloader.download_saturday.value == False:
+			return False
+		elif weekday == 6 and config.plugins.RSDownloader.download_sunday.value == False:
+			return False
+		
 		hour_now = t[3]
 		minute_now = t[4]
 		hour_start = start[0]
