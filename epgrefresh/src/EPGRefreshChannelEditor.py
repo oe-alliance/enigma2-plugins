@@ -55,7 +55,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		# Summary
-		self.setup_title = "EPGRefresh Services"
+		self.setup_title = _("EPGRefresh Services")
 		self.onChangedEntry = []
 
 		# We need to copy the list to be able to ignore changes
@@ -89,6 +89,11 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 
 		# Trigger change
 		self.changed()
+
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Edit Services to refresh"))
 
 	def saveCurrent(self):
 		del self.services[self.idx][:]

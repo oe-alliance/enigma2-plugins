@@ -39,7 +39,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 
 		# Summary
-		self.setup_title = "EPGRefresh Configuration"
+		self.setup_title = _("EPGRefresh Configuration")
 		self.onChangedEntry = []
 
 		# Although EPGRefresh keeps services in a Set we prefer a list
@@ -50,6 +50,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 
 		self.list = [
 			getConfigListEntry(_("Refresh automatically"), config.plugins.epgrefresh.enabled),
+			getConfigListEntry(_("Wakeup from Deep-Standby to refresh EPG"), config.plugins.epgrefresh.wakeup),
 			getConfigListEntry(_("Time to stay on service (in m)"), config.plugins.epgrefresh.interval),
 			getConfigListEntry(_("Refresh EPG after"), config.plugins.epgrefresh.begin),
 			getConfigListEntry(_("Refresh EPG before"), config.plugins.epgrefresh.end),
@@ -79,6 +80,11 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 
 		# Trigger change
 		self.changed()
+
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Configure EPGRefresh"))
 
 	def forceRefresh(self):
 		epgrefresh.services = (Set(self.services[0]), Set(self.services[1]))

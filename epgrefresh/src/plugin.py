@@ -26,6 +26,7 @@ config.plugins.epgrefresh.delay_standby = ConfigNumber(default = 10)
 config.plugins.epgrefresh.inherit_autotimer = ConfigEnableDisable(default = False)
 config.plugins.epgrefresh.afterevent = ConfigEnableDisable(default = False)
 config.plugins.epgrefresh.force = ConfigEnableDisable(default = False)
+config.plugins.epgrefresh.wakeup = ConfigEnableDisable(default = False)
 config.plugins.epgrefresh.lastscan = ConfigNumber(default = 0)
 
 del now, begin, end
@@ -49,8 +50,11 @@ def autostart(reason, **kwargs):
 
 def getNextWakeup():
 	# Return invalid time if not automatically refreshing
-	if not config.plugins.epgrefresh.enabled.value:
+	if not config.plugins.epgrefresh.enabled.value or \
+		not config.plugins.epgrefresh.wakeup.value:
+
 		return -1
+
 	now = localtime()
 	begin = int(mktime(
 		(now.tm_year, now.tm_mon, now.tm_mday,
