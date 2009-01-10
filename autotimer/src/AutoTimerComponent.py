@@ -260,7 +260,7 @@ class AutoTimerComponent(object):
 
 	getAvoidDuplicateDescription = lambda self: self.avoidDuplicateDescription
 
-	getBouquets = lamda self: self._bouquets
+	getBouquets = lambda self: self._bouquets
 
 	getCompleteAfterEvent = lambda self: self._afterevent
 
