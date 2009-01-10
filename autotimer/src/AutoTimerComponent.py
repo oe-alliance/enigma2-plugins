@@ -75,7 +75,7 @@ class AutoTimerComponent(object):
 				else:
 					self._afterevent.append((action, self.calculateDayspan(*timespan)))
 
-	afterevent = property(lamba self: self._afterevent, setAfterEvent)
+	afterevent = property(lambda self: self._afterevent, setAfterEvent)
 
 	def setBouquets(self, bouquets):
 		if bouquets:
@@ -109,7 +109,7 @@ class AutoTimerComponent(object):
 		else:
 			self._include = ([], [], [], [])
 
-	include = property(lamba self: self._include, setInclude)
+	include = property(lambda self: self._include, setInclude)
 
 	def setName(self, name):
 		self.name = name
