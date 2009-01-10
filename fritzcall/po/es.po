@@ -1,0 +1,457 @@
+# Spanish translations for enigma package.
+# Copyright (C) 2009 THE enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma 2-plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-31 16:41+0100\n"
+"PO-Revision-Date: 2009-01-09 18:07+0100\n"
+"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+msgid "Add entry to phonebook"
+msgstr "Añadir entrada a la agenda"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "All"
+msgstr "Todos"
+
+msgid "All calls"
+msgstr "Todas llamadas"
+
+msgid "Append shortcut number"
+msgstr "Añadir número corto"
+
+msgid "Append type of number"
+msgstr "Añadir tipo de número"
+
+msgid "Append vanity name"
+msgstr "Añadir nombre de vanidad"
+
+msgid "Areacode to add to Outgoing Calls (if necessary)"
+msgstr "Añadir código de área a las llamadas salientes (si es necesario)"
+
+msgid "Austria"
+msgstr "Austria"
+
+msgid "Automatically add new Caller to PhoneBook"
+msgstr "Añadir el Llamante automáticamente a la Agenda"
+
+msgid "CF Drive"
+msgstr "Unidad CF"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Call"
+msgstr "Llamar"
+
+msgid "Call monitoring"
+msgstr "Monitorizar llamada"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Connected to FRITZ!Box!"
+msgstr "Conectado a FRITZ!Box!"
+
+#, python-format
+msgid ""
+"Connecting to FRITZ!Box failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Conectando a FRITZ!Box\n"
+"(%s)\n"
+"reintentando..."
+
+msgid "Connecting to FRITZ!Box..."
+msgstr "Conectando a FRITZ!Box..."
+
+#, python-format
+msgid ""
+"Connection to FRITZ!Box! lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Se perdió la conexión a FRITZ!Box!\n"
+"(%s)\n"
+"reintentando..."
+
+#, python-format
+msgid ""
+"Corrupt phonebook entry\n"
+"for number %d\n"
+"Deleting."
+msgstr ""
+"Posición en la agenda corrupta\n"
+"para el número %d\n"
+"Borrando."
+
+#, python-format
+msgid "Could not load calls from FRITZ!Box - Error: %s"
+msgstr "No puedo cargar llamadas desde FRITZ!Box - Error: %s"
+
+#, python-format
+msgid "Could not load phonebook from FRITZ!Box - Error: %s"
+msgstr "No puedo cargar la agenda desde FRITZ!Box - Error: %s"
+
+msgid "Could not parse FRITZ!Box Phonebook entry"
+msgstr "No puedo analizar las entradas de la agenda de FRITZ!Box"
+
+msgid "Country"
+msgstr "País"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Delete"
+msgstr "Borrar"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Delete entry"
+msgstr "Borrar entrada"
+
+msgid "Display FRITZ!box-Fon calls on screen"
+msgstr "Visualizar llamadas FRITZ!Box-Fon en la pantalla"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Display all calls"
+msgstr "Visualizar todas llamadas"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Display incoming calls"
+msgstr "Visualizar llamadas entrantes"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Display missed calls"
+msgstr "Visualizar llamadas perdidas"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Display outgoing calls"
+msgstr "Visualizar llamadas salientes"
+
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+msgid "Do what?"
+msgstr "¿Qué hago?"
+
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+"¿Quiere borrar la entrada para\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+
+#, python-format
+msgid ""
+"Do you really want to overwrite entry for %(number)s\n"
+"\n"
+"%(name)s\n"
+"\n"
+"with\n"
+"\n"
+"%(newname)s?"
+msgstr ""
+"¿Quiere sobreescribir la entrada para %(number)s\n"
+"\n"
+"%(name)s\n"
+"\n"
+"con\n"
+"\n"
+"%(newname)s?"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Edit"
+msgstr "Editar"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Edit selected entry"
+msgstr "Editar entrada seleccionada"
+
+msgid "Enter Search Terms"
+msgstr "Introduzca Términos de Búsqueda"
+
+msgid "Entry incomplete."
+msgstr "Entrada incompleta."
+
+msgid "Extension number to initiate call on"
+msgstr "Número de extensión para iniciar la llamada"
+
+msgid "FRITZ!Box FON address (Name or IP)"
+msgstr "Dirección FRITZ!Box FON (Nombre o IP)"
+
+#, python-format
+msgid "FRITZ!Box Login failed! - Error: %s"
+msgstr "Falló la identificación a FRITZ!Box - Error: %s"
+
+msgid "FRITZ!Box Login failed! - Wrong Password!"
+msgstr "Falló la identificación FRITZ!Box - Contraseña errónea!"
+
+msgid "Flash"
+msgstr "Flash"
+
+msgid "France"
+msgstr "Francia"
+
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+msgid "FritzCall Setup"
+msgstr "Configuración FritzCall"
+
+msgid "Germany"
+msgstr "Alemania"
+
+msgid "Getting calls from FRITZ!Box..."
+msgstr "Consiguiendo llamadas desde FRITZ!Box..."
+
+msgid "Harddisk"
+msgstr "Disco duro"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Incoming"
+msgstr "Entrada"
+
+#, python-format
+msgid ""
+"Incoming Call on %(date)s from\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"to: %(phone)s"
+msgstr ""
+"Llamada Entrante en %(date)s desde\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"a: %(phone)s"
+
+msgid "Incoming calls"
+msgstr "Llamadas entrantes"
+
+msgid "Italy"
+msgstr "Italia"
+
+msgid "Last 10 calls:\n"
+msgstr "Últimas 10 llamadas:\n"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Lookup"
+msgstr "Buscar"
+
+msgid "MSN to show (separated by ,)"
+msgstr "MSN a mostrar (separado por ,)"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Missed"
+msgstr "Perdidas"
+
+msgid "Missed calls"
+msgstr "Llamadas perdidas"
+
+msgid "Mute on call"
+msgstr "Silencio en llamada"
+
+msgid "Name"
+msgstr "Nombre"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "New"
+msgstr "Nuevo"
+
+msgid "No entry selected"
+msgstr "No hay entrada seleccionada"
+
+msgid "Number"
+msgstr "Número"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "OK"
+msgstr "OK"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Outgoing"
+msgstr "Salida"
+
+#, python-format
+msgid ""
+"Outgoing Call on %(date)s to\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"from: %(phone)s"
+msgstr ""
+"Llamadas saliente en %(date)s a\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"desde: %(phone)s"
+
+msgid "Outgoing calls"
+msgstr "Llamadas salientes"
+
+msgid "Password Accessing FRITZ!Box"
+msgstr "Contraseña accediendo a FRITZ!Box"
+
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phone calls"
+msgstr "Llamadas de teléfono"
+
+msgid "PhoneBook Location"
+msgstr "Ubicación de la Agenda"
+
+#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+#. TRANSLATORS: keep it short, this is a button
+msgid "Phonebook"
+msgstr "Agenda"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Quit"
+msgstr "Salir"
+
+msgid "Read PhoneBook from FRITZ!Box"
+msgstr "Leer Agenda desde FRITZ!Box"
+
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr "Búsqueda inversa del ID llamante (seleccionar país abajo)"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Save"
+msgstr "Guardar"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Search"
+msgstr "Buscar"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Search (case insensitive)"
+msgstr "Buscar (may/min indistinto)"
+
+msgid "Search phonebook"
+msgstr "Buscar agenda"
+
+msgid "Shortcut"
+msgstr "Acceso rápido"
+
+msgid "Show Calls for specific MSN"
+msgstr "Mostrar Llamadas para un específico MSN"
+
+msgid "Show Outgoing Calls"
+msgstr "Mostrar Llamadas Salientes"
+
+msgid "Show after Standby"
+msgstr "Mostrar después del inicio"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "Show details of entry"
+msgstr "Mostrar detalles de la entrada"
+
+msgid "Strip Leading 0"
+msgstr "Quitar el 0 al inicio"
+
+msgid "Switzerland"
+msgstr "Suiza"
+
+msgid "The Netherlands"
+msgstr "Holanda"
+
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Tiempo cumplido para Notificaciones de Llamadas (segundos)"
+
+msgid "UNKNOWN"
+msgstr "DESCONOCIDO"
+
+msgid "USB Stick"
+msgstr "Lápiz USB"
+
+msgid "Use internal PhoneBook"
+msgstr "Usar Agenda interna"
+
+msgid "Vanity"
+msgstr "Vanidad"
+
+msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
+msgstr "¡Necesitas activar la monitorización en tu FRITZ!Box marcando #96*5*!"
+
+msgid ""
+"You need to set the password of the FRITZ!Box\n"
+"in the configuration dialog to display calls\n"
+"\n"
+"It could be a communication issue, just try again."
+msgstr ""
+"Necesita poner la contraseña del FRITZ!Box\n"
+"en el diálogo de configuración para visualizar las llamadas\n"
+"\n"
+"Puede hacer un problema de comunicación, sólo reintente otra vez."
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "display calls"
+msgstr "visualizar llamadas"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "display phonebook"
+msgstr "visualizar agenda"
+
+msgid "done"
+msgstr "hecho"
+
+msgid "done, using last list"
+msgstr "hecho, usando la última lista"
+
+msgid "finishing"
+msgstr "terminando"
+
+msgid "home"
+msgstr "casa"
+
+msgid "login"
+msgstr "identificar"
+
+msgid "login ok"
+msgstr "identificación ok"
+
+msgid "login verification"
+msgstr "verificación de entrada"
+
+msgid "mobile"
+msgstr "móvil"
+
+msgid "preparing"
+msgstr "preparando"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "quit"
+msgstr "salir"
+
+#. TRANSLATORS: this is a help text, keep it short
+msgid "save and quit"
+msgstr "guardar y salir"
+
+msgid "show as list"
+msgstr "mostrar como lista"
+
+msgid "show each call"
+msgstr "mostrar cada llamada"
+
+msgid "show nothing"
+msgstr "no mostrar nada"
+
+msgid "work"
+msgstr "trabajo"
+
