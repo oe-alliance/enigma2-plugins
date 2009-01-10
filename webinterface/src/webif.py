@@ -4,7 +4,7 @@ Version = '$Header$';
 # OK, this is more than a proof of concept
 # things to improve:
 #  - nicer code
-#  - screens need to be defined somehow else. 
+#  - screens need to be defined somehow else.
 #	I don't know how, yet. Probably each in an own file.
 #  - more components, like the channellist
 #  - better error handling
@@ -38,6 +38,7 @@ from WebComponents.Sources.WAPfunctions import WAPfunctions
 from WebComponents.Sources.MP import MP
 from WebComponents.Sources.ServiceListReload import ServiceListReload
 from WebComponents.Sources.AT import AT
+from WebComponents.Sources.CurrentService import CurrentService
 
 from Components.Sources.FrontendStatus import FrontendStatus
 
@@ -75,23 +76,23 @@ class MessageWebScreen(WebScreen):
 		WebScreen.__init__(self, session, request)
 		self["Message"] = Message(session,func = Message.PRINT)
 		self["GetAnswer"] = Message(session,func = Message.ANSWER)
-		
+
 class ServiceListReloadWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		self["ServiceListReload"] = ServiceListReload(session)
-		
+
 class AudioWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		self["AudioTracks"] = AudioTracks(session, func=AudioTracks.GET)
-		self["SelectAudioTrack"] = AudioTracks(session, func=AudioTracks.SET)	
+		self["SelectAudioTrack"] = AudioTracks(session, func=AudioTracks.SET)
 
 class AboutWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		self["About"] = About(session)
-		
+
 class VolumeWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
@@ -158,13 +159,13 @@ class MediaPlayerWebScreen(WebScreen):
 		self["PlayFile"] = MP(session,func = MP.PLAY)
 		self["Command"] = MP(session,func = MP.COMMAND)
 		self["WritePlaylist"] = MP(session,func = MP.WRITEPLAYLIST)
-		
+
 class AutoTimerWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		self["AutoTimerList"] = AT(session,func = AT.LIST)
 		self["AutoTimerWrite"] = AT(session,func = AT.WRITE)
-		
+
 class TimerWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
@@ -191,7 +192,7 @@ class ParentControlWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		self["ParentControlList"] = ParentControl(session)
-				
+
 class WAPWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
@@ -200,16 +201,16 @@ class WAPWebScreen(WebScreen):
 		self["WAPFillOptionListSmonth"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListShour"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListSmin"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		
+
 		self["WAPFillOptionListEyear"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListEday"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListEmonth"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListEhour"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListEmin"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		
+
 		self["WAPFillOptionListRecord"] = WAPfunctions(session,func = WAPfunctions.OPTIONLIST)
 		self["WAPFillOptionListAfterEvent"] = WAPfunctions(session,func = WAPfunctions.OPTIONLIST)
-		
+
 		self["WAPFillValueName"] = WAPfunctions(session,func = WAPfunctions.FILLVALUE)
 		self["WAPFillValueDescr"] = WAPfunctions(session,func = WAPfunctions.FILLVALUE)
 
@@ -217,7 +218,7 @@ class WAPWebScreen(WebScreen):
 		self["WAPServiceList"] = WAPfunctions(session, func = WAPfunctions.SERVICELIST)
 
 		self["WAPdeleteOldOnSave"] = WAPfunctions(session,func = WAPfunctions.DELETEOLD)
-	
+
 class StreamingWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
@@ -231,6 +232,12 @@ class M3UStreamingWebScreen(WebScreen):
 		from Components.Sources.Config import Config
 		from Components.config import config
 		self["ref"] = StaticText()
+		self["localip"] = RequestData(request,what=RequestData.HOST)
+
+class M3UStreamingCurrentServiceWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		self["CurrentService"] = CurrentService(session)
 		self["localip"] = RequestData(request,what=RequestData.HOST)
 
 class TsM3U(WebScreen):
@@ -247,7 +254,7 @@ class RestartWebScreen(WebScreen):
 		WebScreen.__init__(self, session, request)
 		import plugin
 		plugin.restartWebserver(session)
-		
+
 class GetPid(WebScreen):
 	  def __init__(self, session, request):
 		 WebScreen.__init__(self, session, request)
@@ -281,9 +288,9 @@ class OneTimeElement(Element):
 			for key in paramlist:
 				arg = args.get(key, [])
 				if len(arg) == 0:
-					list[key] = None	
+					list[key] = None
 				elif len(arg) == 1:
-					list[key] = "".join(arg)	
+					list[key] = "".join(arg)
 				elif len(arg) == 2:
 					list[key] = arg[0]
 			self.source.handleCommand(list)
@@ -352,7 +359,7 @@ class TextToHTML(Converter):
 class TextToXML(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
-	
+
 	def getHTML(self, id):
 		return escape_xml(self.source.text).replace("\x19", "").replace("\x1c", "").replace("\x1e", "")
 
@@ -420,7 +427,7 @@ class ListFiller(Converter):
 					append(element)
 				elif filternum == 2:
 					append(str(item[element]).replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
-				elif filternum == 3:					
+				elif filternum == 3:
 					append(escape_xml(str(item[element])))
 				elif filternum == 4:
 					append(str(item[element]).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
@@ -533,7 +540,7 @@ class webifHandler(ContentHandler):
 		tag.insert(0, '<')
 		tag.append('>')
 		tag = ''.join(tag)#.encode('utf-8')
-		
+
 		if self.mode == 0:
 			self.res.append(tag)
 		elif self.mode == 1: # expect "<e2:element>"
@@ -547,7 +554,7 @@ class webifHandler(ContentHandler):
 				self.sub.append(tag)
 		elif self.mode == 3:
 			assert name == "e2:item", "found %s instead of e2:item!" % name
-			
+
 			self.parse_item(attrs)
 
 	def endElement(self, name):
@@ -592,7 +599,7 @@ class webifHandler(ContentHandler):
 		self.screens = [ ]
 
 def renderPage(stream, path, req, session):
-	
+
 	# read in the template, create required screens
 	# we don't have persistense yet.
 	# if we had, this first part would only be done once.
@@ -601,10 +608,10 @@ def renderPage(stream, path, req, session):
 	parser.setFeature(feature_namespaces, 0)
 	parser.setContentHandler(handler)
 	parser.parse(open(util.sibpath(__file__, path)))
-	
+
 	# by default, we have non-streaming pages
 	finish = True
-	
+
 	# first, apply "commands" (aka. URL argument)
 	for x in handler.res:
 		if isinstance(x, Element):
@@ -628,7 +635,7 @@ def renderPage(stream, path, req, session):
 		from twisted.internet import reactor
 		s.write("\n");
 		reactor.callLater(3, ping, s)
-	
+
 	# if we met a "StreamingElement", there is at least one
 	# element which wants to output data more than once,
 	# i.e. on host-originated changes.
@@ -640,7 +647,7 @@ def renderPage(stream, path, req, session):
 		# ok.
 		# you *need* something which constantly sends something in a regular interval,
 		# in order to detect disconnected clients.
-		# i agree that this "ping" sucks terrible, so better be sure to have something 
+		# i agree that this "ping" sucks terrible, so better be sure to have something
 		# similar. A "CurrentTime" is fine. Or anything that creates *some* output.
 		ping(stream)
 		stream.closed_callback = lambda : streamFinish(handler, stream)
