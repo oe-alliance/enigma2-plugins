@@ -22,6 +22,37 @@ from EPGRefreshService import EPGRefreshService
 # Show ServiceName instead of ServiceReference
 from ServiceReference import ServiceReference
 
+# This is a modified ConfigSelection which does not require the
+# choices to be strings...
+class ConfigDummy(ConfigSelection):
+	def setChoices(self, choices, default = None):
+		self.choices = [] 
+		self.description = {} 
+	 
+		if isinstance(choices, list):
+			for x in choices:
+				if isinstance(x, tuple):
+					self.choices.append(x[0])
+					self.description[x[0]] = x[1] 
+				else:
+					self.choices.append(x)
+					self.description[x] = x
+		else:
+			assert False, "ConfigDummy choices must be a list!"
+	 
+		if len(self.choices) == 0:
+			self.choices = [""] 
+			self.description[""] = "" 
+
+		if default is None:
+			default = self.choices[0]
+
+		assert default in self.choices, "default must be in choice list, but " + repr(default) + " is not!"
+		self.default = default
+
+		if self.value == None or not self.value in self.choices:
+			self.value = default
+
 class SimpleBouquetSelection(SimpleChannelSelection):
 	def __init__(self, session, title):
 		SimpleChannelSelection.__init__(self, session, title)
@@ -64,7 +95,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			services[1][:]
 		)
 
-		self.typeSelection = ConfigSelection(choices = [("channels", _("Channels")), ("bouquets", _("Bouquets"))])
+		self.typeSelection = ConfigDummy(choices = [("channels", _("Channels")), ("bouquets", _("Bouquets"))])
 		self.typeSelection.addNotifier(self.refresh, initial_call = False)
 
 		self.reloadList()
@@ -122,7 +153,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			self.idx = 1
 
 		self.list.extend([
-			getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(x, ServiceReference(x.sref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
+			getConfigListEntry(_("Refreshing"), ConfigDummy(choices = [(x, ServiceReference(x.sref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
 				for x in self.services[self.idx]
 		])
 
@@ -174,7 +205,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			list = self["config"].getList()
 			list.append(getConfigListEntry(
 				_("Refreshing"),
-				ConfigSelection(choices = [(
+				ConfigDummy(choices = [(
 					EPGRefreshService(args[0].toString(), None),
 					ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 				)])
