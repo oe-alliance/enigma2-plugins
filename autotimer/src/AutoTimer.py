@@ -222,55 +222,65 @@ class AutoTimer:
 
 				# Initialize
 				newEntry = None
-				isNew = False
+				oldExists = False
 
 				# Check for double Timers
 				# We first check eit and if user wants us to guess event based on time
 				# we try this as backup. The allowed diff should be configurable though.
-				try:
-					for rtimer in recorddict.get(serviceref, []):
-						if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, begin, end) > ((duration/10)*8):
-							newEntry = rtimer
+				for rtimer in recorddict.get(serviceref, []):
+					if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, begin, end) > ((duration/10)*8):
+						oldExists = True
 
-							# Abort if we don't want to modify timers or timer is repeated
-							if config.plugins.autotimer.refresh.value == "none" or newEntry.repeated:
-								raise AutoTimerIgnoreTimerException("Won't modify existing timer because either no modification allowed or repeated timer")
-
-							if hasattr(newEntry, "isAutoTimer"):
-									print "[AutoTimer] Modifying existing AutoTimer!"
-							else:
-								if config.plugins.autotimer.refresh.value != "all":
-									raise AutoTimerIgnoreTimerException("Won't modify existing timer because it's no timer set by us")
-								print "[AutoTimer] Warning, we're messing with a timer which might not have been set by us"
-
-							modified += 1
-
-							# Modify values saved in timer
-							newEntry.name = name
-							newEntry.description = description
-							newEntry.begin = int(begin)
-							newEntry.end = int(end)
-							newEntry.service_ref = ServiceReference(serviceref)
-
+						# Abort if we don't want to modify timers or timer is repeated
+						if config.plugins.autotimer.refresh.value == "none" or rtimer.repeated:
+							print "[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer"
 							break
-						elif timer.getAvoidDuplicateDescription() == 1 and rtimer.description == description:
-								raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
-					if newEntry is None and timer.getAvoidDuplicateDescription() == 2:
+
+						if hasattr(rtimer, "isAutoTimer"):
+								print "[AutoTimer] Modifying existing AutoTimer!"
+						else:
+							if config.plugins.autotimer.refresh.value != "all":
+								print "[AutoTimer] Won't modify existing timer because it's no timer set by us"
+								break
+
+							print "[AutoTimer] Warning, we're messing with a timer which might not have been set by us"
+
+						newEntry = rtimer
+						modified += 1
+
+						# Modify values saved in timer
+						newEntry.name = name
+						newEntry.description = description
+						newEntry.begin = int(begin)
+						newEntry.end = int(end)
+						newEntry.service_ref = ServiceReference(serviceref)
+
+						break
+					elif timer.getAvoidDuplicateDescription() == 1 and rtimer.description == description:
+						oldExists = True
+						print "[AutoTimer] We found a timer with same description, skipping event"
+						break
+
+				# Old Timer exists
+				if oldExists:
+					# Which we don't want to edit
+					if newEntry is None:
+						continue
+				# No Timer found yet and we want to search for possible doubles
+				elif newEntry is None and timer.getAvoidDuplicateDescription() == 2:
+					# I thinks thats the fastest way to do this, though it's a little ugly
+					try:
 						for list in recorddict.values():
 							for rtimer in list:
 								if rtimer.description == description:
 									raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
-
-				except AutoTimerIgnoreTimerException, etite:
-					print etite
-					continue
-
+					except AutoTimerIgnoreTimerException, etite:
+						print etite
+						continue
 				# Event not yet in Timers
-				if newEntry is None:
+				else:
 					if timer.checkCounter(timestamp):
 						continue
-
-					isNew = True
 
 					print "[AutoTimer] Adding an event."
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, description, eit)
@@ -290,7 +300,10 @@ class AutoTimer:
 				newEntry.justplay = timer.justplay
 				newEntry.tags = timer.tags
 
-				if isNew:
+				if oldExists:
+					# XXX: this won't perform a sanity check, but do we actually want to do so?
+					NavigationInstance.instance.RecordTimer.timeChanged(newEntry)
+				else:
 					conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
 					if conflicts and config.plugins.autotimer.disabled_on_conflict.value:
 						newEntry.disabled = True
@@ -303,9 +316,6 @@ class AutoTimer:
 							recorddict[serviceref].append(newEntry)
 						else:
 							recorddict[serviceref] = [newEntry]
-				else:
-					# XXX: this won't perform a sanity check, but do we actually want to do so?
-					NavigationInstance.instance.RecordTimer.timeChanged(newEntry)
 
 		return (total, new, modified, timers)
 
