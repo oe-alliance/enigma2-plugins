@@ -473,6 +473,57 @@
 			</menu>
 			<menu>
 				<name>Oesterreich</name>
+				<menu>
+					<name>Stubaier Gletscher</name>
+					<cam>
+						<name>Wildspitzlift</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/schaufelschuss1.jpg</url>
+					</cam>
+					<cam>
+						<name>Bergstation Rotadl</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/schaufelschuss2.jpg</url>
+					</cam>
+					<cam>
+						<name>Piste Schaufelschuss</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/schaufelschuss3.jpg</url>
+					</cam>
+					<cam>
+						<name>Bergstation Eisgrat</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/schaufelschuss4.jpg</url>
+					</cam>
+					<cam>
+						<name>Schirmbar Gamsgarten</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/eisjoch1.jpg</url>
+					</cam>
+					<cam>
+						<name>Eiskletterturm Gamsgarten</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/eisjoch2.jpg</url>
+					</cam>
+					<cam>
+						<name>Eisjochferner</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/eisjoch3.jpg</url>
+					</cam>
+					<cam>
+						<name>Daunferner</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/eisjoch4.jpg</url>
+					</cam>
+					<cam>
+						<name>Gaisskarferner</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/jochdohle1.jpg</url>
+					</cam>
+					<cam>
+						<name>Schussgrubenkogel</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/jochdohle2.jpg</url>
+					</cam>
+					<cam>
+						<name>Bergstation Schaufeljoch</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/jochdohle3.jpg</url>
+					</cam>
+					<cam>
+						<name>Zuckerhuetl</name>
+						<url>http://www.stubaier-gletscher.com/static/webcam/jochdohle4.jpg</url>
+					</cam>
+				</menu>
 				<cam>
 					<name>Linz</name>
 					<url>http://www.linz.at/images/T_WebcamKunstuni.jpg</url>
