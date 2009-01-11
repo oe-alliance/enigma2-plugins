@@ -261,24 +261,24 @@ class AutoTimer:
 						print "[AutoTimer] We found a timer with same description, skipping event"
 						break
 
-				# Old Timer exists
-				if oldExists:
-					# Which we don't want to edit
-					if newEntry is None:
+				# We found no timer we want to edit
+				if newEntry is None:
+					# But there is a match
+					if oldExists:
 						continue
-				# No Timer found yet and we want to search for possible doubles
-				elif newEntry is None and timer.getAvoidDuplicateDescription() == 2:
-					# I thinks thats the fastest way to do this, though it's a little ugly
-					try:
-						for list in recorddict.values():
-							for rtimer in list:
-								if rtimer.description == description:
-									raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
-					except AutoTimerIgnoreTimerException, etite:
-						print etite
-						continue
-				# Event not yet in Timers
-				else:
+
+					# We want to search for possible doubles
+					if timer.getAvoidDuplicateDescription() == 2:
+						# I thinks thats the fastest way to do this, though it's a little ugly
+						try:
+							for list in recorddict.values():
+								for rtimer in list:
+									if rtimer.description == description:
+										raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
+						except AutoTimerIgnoreTimerException, etite:
+							print etite
+							continue
+
 					if timer.checkCounter(timestamp):
 						continue
 
