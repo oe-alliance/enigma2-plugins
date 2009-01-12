@@ -108,7 +108,7 @@ def parseEntry(element, baseTimer, defaults = False):
 		baseTimer.lastBegin = int(element.get("lastBegin", 0))
 
 	# Read out justplay
-	justplay = int(element.get("justplay", 0))
+	baseTimer.justplay = int(element.get("justplay", 0))
 
 	# Read out avoidDuplicateDescription
 	baseTimer.avoidDuplicateDescription = int(element.get("avoidDuplicateDescription", 0))
