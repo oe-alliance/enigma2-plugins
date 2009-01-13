@@ -17,7 +17,7 @@ class GrabResource(resource.Resource):
         
         # some presets
         filename = 'screenshot'
-        imageformat = '.bmp'
+        imageformat = 'bmp'
         osdOnly = False
         videoOnly = False
         save = False
@@ -30,12 +30,12 @@ class GrabResource(resource.Resource):
                     
                     if format == 'png':
                         #-p produce png files instead of bmp
-                        imageformat = ".%s" %format
+                        imageformat = format
                         self.args.append('-p')
                     elif format == 'jpg':
                         #-j (quality) produce jpg files instead of bmp
                     
-                        imageformat = ".%s" %format
+                        imageformat = format
                         self.args.append('-j')
                         #Quality Setting                    
                         if req.args.has_key("jpgquali"):
@@ -66,8 +66,8 @@ class GrabResource(resource.Resource):
             return http.Response(responsecode.OK,stream='Grab is not installed at %s. Please install package aio-grab.' %self.GRAB_BIN)
         else:
             headers = http_headers.Headers()
-            headers.addRawHeader('Content-Disposition', 'inline; filename=screenshot.%s;'%imageformat)
-            headers.addRawHeader('Content-Type','image/%s'%imageformat)
+            headers.addRawHeader('Content-Disposition', 'inline; filename=screenshot.%s;' %imageformat)
+            headers.addRawHeader('Content-Type','image/%s' %imageformat)
             
             filename = filename+imageformat
             self.args.append(filename)
