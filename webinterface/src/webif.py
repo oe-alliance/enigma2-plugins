@@ -117,6 +117,7 @@ class ServiceWebScreen(WebScreen):
 		self["SwitchService"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
 		self["ServiceList"] = ServiceList(fav, command_func = self.getServiceList, validate_commands=False)
 		self["ServiceListRecursive"] = ServiceListRecursive(session, func=ServiceListRecursive.FETCH)
+		self["localip"] = RequestData(request,what=RequestData.HOST)
 
 	def getServiceList(self, sRef):
 		self["ServiceList"].root = sRef
