@@ -68,8 +68,11 @@ function plugintype(){
 function onStart(){
 	DBG = true;
 	DBG = false;
-	if(DBG) { debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow"); }
+	if (DBG) {
+		debugWin = openWindow("DEBUG", "", 300, 300, "debugWindow");
+	}
 	debug("startup");
+}
 
 var accordionOptions = {
 	expandedBg : 'transparent',
@@ -85,25 +88,25 @@ var accordionOptions = {
 	panelHeight : 150
 }
 
-new Rico.Accordion( $('accordionMenue'), accordionOptions );
-	
-	var url = url_getServices+encodeURIComponent(bouqet_tv);
-	doRequest(url, incomingVLCTVBouquetList);
-
-	var url = url_getServices+encodeURIComponent(bouqet_radio);
-	doRequest(url, incomingVLCRadioBouquetList);
-
-	var url = url_getServices+encodeURIComponent(bouqet_provider_tv);
-	doRequest(url, incomingVLCProviderTVBouquetList);
-
-	var url = url_getServices+encodeURIComponent(bouqet_provider_radio);
-	doRequest(url, incomingVLCProviderRadioBouquetList);
-	buildButtons();
-	buildplayer(550,412);
-//	buildplayer(720,576);
-	debug("VLC-Version: "+getVersion()+" "+plugintype());
-	
-}
+//new Rico.Accordion( $('accordionMenue'), accordionOptions );
+//	
+//	var url = url_getServices+encodeURIComponent(bouqet_tv);
+//	doRequest(url, incomingVLCTVBouquetList);
+//
+//	var url = url_getServices+encodeURIComponent(bouqet_radio);
+//	doRequest(url, incomingVLCRadioBouquetList);
+//
+//	var url = url_getServices+encodeURIComponent(bouqet_provider_tv);
+//	doRequest(url, incomingVLCProviderTVBouquetList);
+//
+//	var url = url_getServices+encodeURIComponent(bouqet_provider_radio);
+//	doRequest(url, incomingVLCProviderRadioBouquetList);
+//	buildButtons();
+//	buildplayer(550,412);
+////	buildplayer(720,576);
+//	debug("VLC-Version: "+getVersion()+" "+plugintype());
+//	
+//}
 function onServiceSelected(){
 	var index = $('channelselect').selectedIndex;
 	var servicereference = $('channelselect').options[index].id;

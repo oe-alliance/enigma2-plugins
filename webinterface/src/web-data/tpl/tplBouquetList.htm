@@ -1,16 +1,21 @@
 
 						<table id="contentTable">
-							{for s in services}
+							{for service in services}
 							<tr><td>
 								<table>
 									<tr>
 										<td>										
 											<div class="sListSName">
-												<a id="${s.servicereference}" onclick="{ loadBouquet(this.id, this.innerHTML); }" class="sListSLink">
-													${s.bouquetname}
+												<a id="${service.servicereference}" onclick="{ loadBouquet(this.id, this.innerHTML); }" class="sListSLink" title="Load Bouquet ${service.bouquetname}">
+													${service.bouquetname}
 												</a>
 											</div>
 										</td>
+										<td>
+											<a target="_blank" onclick="return parentPin( '${service.servicereference}' );" href="/web/services.m3u?bRef=${service.servicereference}">
+												<img src="/web-data/img/screen.png" title="Open ${service.bouquetname} as Playlist" border="0">
+											</a>
+										</td>	
 									</tr>
 								</table>
 							</td></tr>
