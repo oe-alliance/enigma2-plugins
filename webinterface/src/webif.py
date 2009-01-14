@@ -50,6 +50,7 @@ from xml.sax import make_parser
 from xml.sax.handler import ContentHandler, feature_namespaces
 from xml.sax.saxutils import escape as escape_xml
 from twisted.python import util
+from urllib2 import quote
 
 # prototype of the new web frontend template system.
 
@@ -151,6 +152,7 @@ class MovieWebScreen(WebScreen):
 		self["MovieList"] = Movie(session,movielist,func = Movie.LIST)
 		self["MovieFileDel"] = Movie(session,movielist,func = Movie.DEL)
 		self["MovieTags"] = Movie(session,movielist,func = Movie.TAGS)
+		self["localip"] = RequestData(request,what=RequestData.HOST)
 
 class MediaPlayerWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -431,6 +433,8 @@ class ListFiller(Converter):
 					append(escape_xml(str(item[element])))
 				elif filternum == 4:
 					append(str(item[element]).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
+				elif filternum == 5:
+					append(quote(str(item[element])))
 				else:
 					append(str(item[element]))
 		# (this will be done in c++ later!)
@@ -520,7 +524,7 @@ class webifHandler(ContentHandler):
 
 	def parse_item(self, attrs):
 		if "name" in attrs:
-			filter = {"": 1, "javascript_escape": 2, "xml": 3, "uri": 4}[attrs.get("filter", "")]
+			filter = {"": 1, "javascript_escape": 2, "xml": 3, "uri": 4, "urlencode": 5}[attrs.get("filter", "")]
 			self.sub.append(ListItem(attrs["name"], filter))
 		else:
 			assert "macro" in attrs, "e2:item must have a name= or macro= attribute!"
