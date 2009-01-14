@@ -9,7 +9,7 @@ import os
     define all files in /web to send no  XML-HTTP-Headers here
     all files listed here will get an Content-Type: application/xhtml+xml charset: UTF-8
 """
-AppTextHeaderFiles = ['stream.m3u.xml','ts.m3u.xml','streamcurrent.m3u.xml','movielist.m3u.xml',]
+AppTextHeaderFiles = ['stream.m3u.xml','ts.m3u.xml','streamcurrent.m3u.xml','movielist.m3u.xml','getservices.m3u.xml',]
 
 """
  Actualy, the TextHtmlHeaderFiles should contain the updates.html.xml, but the IE then
