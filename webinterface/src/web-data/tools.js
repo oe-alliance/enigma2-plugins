@@ -227,7 +227,7 @@ function openPopup(title, html, width, height, x, y){
 		return popup;
 	} catch(e){
 		popUpBlockerHint();
-		return null;
+		return "";
 	}
 }
 
