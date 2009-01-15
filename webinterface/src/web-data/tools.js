@@ -1628,6 +1628,12 @@ function init(){
 	if(DBG){
 		loadAndOpenDebug();
 	}
+	
+	if (typeof document.body.style.maxHeight == "undefined") {
+		alert("Due to the tremendous amount of work needed to get everthing to " +
+				"work properly, there is (for now) no support for Internet Explorer Versions below 7");
+	}
+	
 	getBoxtype();
 	
 	setAjaxLoad('navContent');
