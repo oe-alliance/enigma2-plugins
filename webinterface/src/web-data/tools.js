@@ -367,20 +367,16 @@ function doRequest(url, readyFunction, save){
 }
 
 function getXML(request){
-	if (document.implementation && document.implementation.createDocument){
-		var xmlDoc = request.responseXML;
+	var xmlDoc = "";
+	
+	if(window.ActiveXObject){ // we're on IE
+		xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+		xmlDoc.async="false";
+		xmlDoc.loadXML(request.responseText);
+	} else { //we're not on IE			
+		xmlDoc = request.responseXML;
 	}
-	else if (window.ActiveXObject){
-		var xmlInsert = document.createElement('xml');
 
-		xmlInsert.setAttribute('innerHTML',request.responseText);
-		xmlInsert.setAttribute('id','_MakeAUniqueID');
-		document.body.appendChild(xmlInsert);
-		xmlDoc = $('_MakeAUniqueID');
-		document.body.removeChild($('_MakeAUniqueID'));
-	} else {
-		debug("[getXML] Your Browser Sucks!");
-	}
 	return xmlDoc;
 }
 
