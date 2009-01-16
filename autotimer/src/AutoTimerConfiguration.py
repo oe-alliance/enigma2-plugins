@@ -72,6 +72,9 @@ def parseEntry(element, baseTimer, defaults = False):
 			print '[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', disabling'
 			baseTimer.enabled = False
 
+	# Read out encoding (won't change if no value is set)
+	baseTimer.encoding = element.get("encoding")
+
 	# Read out timespan
 	start = element.get("from")
 	end = element.get("to")
@@ -482,6 +485,10 @@ def writeConfig(filename, defaultTimer, timers):
 	if defaultTimer.justplay:
 		list.extend([' justplay="', str(defaultTimer.getJustplay()), '"'])
 
+	# Only display encoding if != utf-8
+	if defaultTimer.encoding != 'UTF-8':
+		list.extend([' encoding="', str(defaultTimer.encoding), '"'])
+
 	# Close still opened defaults tag
 	list.append('>\n')
 
@@ -577,6 +584,10 @@ def writeConfig(filename, defaultTimer, timers):
 		# Only display justplay if true
 		if timer.justplay:
 			list.extend([' justplay="', str(timer.getJustplay()), '"'])
+
+		# Only display encoding if != utf-8
+		if timer.encoding != 'UTF-8':
+			list.extend([' encoding="', str(timer.encoding), '"'])
 
 		# Close still opened timer tag
 		list.append('>\n')

@@ -144,7 +144,13 @@ class AutoTimerEditorBase:
 
 		# Match
 		self.match = ExtendedConfigText(default = timer.match, fixed_size = False)
-		self.match.setUseableChars('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-_?!.:;,&%()\'"+/$@') # XXX: what exactly is useable? :-)
+
+		# Encoding
+		default = timer.encoding
+		selection = ['UTF-8', 'ISO8859-15']
+		if default not in selection:
+			selection.append(default)
+		self.encoding = ConfigSelection(choices = selection, default = default)
 
 		# Justplay
 		self.justplay = ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)])
@@ -240,10 +246,11 @@ class AutoTimerEditorBase:
 			default = 0
 		self.counter = ConfigNumber(default = default)
 		self.counterLeft = ConfigNumber(default = timer.matchLeft)
+		default = timer.getCounterFormatString()
 		selection = [("", _("Never")), ("%m", _("Monthly")), ("%U", _("Weekly (Sunday)")), ("%W", _("Weekly (Monday)"))]
-		if timer.getCounterFormatString() not in ["", "%m", "%U", "%W"]:
-			selection.append((timer.getCounterFormatString(), _("Custom (%s)") % (timer.getCounterFormatString())))
-		self.counterFormatString = ConfigSelection(selection, default = timer.getCounterFormatString())
+		if default not in ('', '%m', '%U', '%W'):
+			selection.append((default, _("Custom (%s)") % (default)))
+		self.counterFormatString = ConfigSelection(selection, default = default)
 
 		# Avoid Duplicate Description
 		self.avoidDuplicateDescription = ConfigSelection([
@@ -410,6 +417,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			])
 
 		self.list.extend([
+			getConfigListEntry(_("EPG Encoding"), self.encoding),
 			getConfigListEntry(_("Timer Type"), self.justplay),
 			getConfigListEntry(_("Only match during Timespan"), self.timespan)
 		])
@@ -562,6 +570,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Name
 		self.timer.name = self.name.value.strip() or self.timer.match
+
+		# Encoding
+		self.timer.encoding = self.encoding.value
 
 		# Enabled
 		self.timer.enabled = self.enabled.value

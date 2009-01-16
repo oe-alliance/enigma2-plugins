@@ -41,7 +41,7 @@ class AutoTimerComponent(object):
 			afterevent = [], exclude = None, maxduration = None, destination = None, \
 			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
 			lastBegin = 0, justplay = False, avoidDuplicateDescription = 0, bouquets = None, \
-			tags = None):
+			tags = None, encoding = 'UTF-8'):
 		self.name = name
 		self.match = match
 		self.enabled = enabled
@@ -62,6 +62,7 @@ class AutoTimerComponent(object):
 		self.avoidDuplicateDescription = avoidDuplicateDescription
 		self.bouquets = bouquets
 		self.tags = tags or []
+		self.encoding = encoding
 
 ### Attributes / Properties
 
@@ -84,6 +85,12 @@ class AutoTimerComponent(object):
 			self._bouquets = []
 
 	bouquets = property(lambda self: self._bouquets , setBouquets)
+
+	def setEncoding(self, encoding):
+		if encoding:
+			self._encoding = encoding
+
+	encoding = property(lambda self: self._encoding, setEncoding)
 
 	def setExclude(self, exclude):
 		if exclude:
@@ -111,17 +118,11 @@ class AutoTimerComponent(object):
 
 	include = property(lambda self: self._include, setInclude)
 
-	def setName(self, name):
-		self.name = name
-
-	def getMatch(self):
-		return self._match
-
 	def setMatch(self, match):
 		# XXX: a sanity check might be useful...
 		self._match = match
 
-	match = property(getMatch, setMatch)
+	match = property(lambda self: self._match, setMatch)
 
 	def setServices(self, services):
 		if services:

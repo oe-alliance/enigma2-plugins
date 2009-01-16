@@ -162,8 +162,16 @@ class AutoTimer:
 
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
+			# Workaround to allow search for umlauts if we know the encoding
+			match = timer.match
+			if timer.encoding != 'UTF-8':
+				try:
+					match = match.decode('UTF-8').encode(timer.encoding)
+				except UnicodeDecodeError:
+					pass
+
 			# Search EPG, default to empty list
-			ret = self.epgcache.search(('RI', 100, eEPGCache.PARTIAL_TITLE_SEARCH, timer.match, eEPGCache.NO_CASE_CHECK)) or []
+			ret = self.epgcache.search(('RI', 100, eEPGCache.PARTIAL_TITLE_SEARCH, match, eEPGCache.NO_CASE_CHECK)) or []
 
 			for serviceref, eit in ret:
 				eserviceref = eServiceReference(serviceref)
