@@ -139,10 +139,17 @@ class ServiceWebScreen(WebScreen):
 class EPGWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
+		
+		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
+		
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
 		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
 		self["EPGNOW"] = EPG(session,func=EPG.NOW)
 		self["EPGNEXT"] = EPG(session,func=EPG.NEXT)
+		self["EPGBOUQUET"] = EPG(session,func=EPG.BOUQUET)
+		
+	def getServiceList(self, sRef):
+		self["ServiceList"].root = sRef
 
 class MovieWebScreen(WebScreen):
 	def __init__(self, session, request):

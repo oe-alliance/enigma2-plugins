@@ -7,6 +7,7 @@ class EPG( Source):
     NEXT=1
     SERVICE=2
     TITLE=3
+    BOUQUET=4
     
     def __init__(self, navcore, func=NOW):
         self.func = func
@@ -28,6 +29,8 @@ class EPG( Source):
                 func = self.getEPGNow
             elif self.func is self.NEXT:
                 func = self.getEPGNext
+            elif self.func is self.BOUQUET:
+                func = self.getEPGofBouquet
             
             return func(self.command)
         else:
@@ -52,20 +55,40 @@ class EPG( Source):
             else:
                 search.append((service,1,-1))        
         
-        events = self.epgcache.lookupEvent(search);
+        events = self.epgcache.lookupEvent(search)
         if events:
                 return events
         else:
                 return []
     
-    def getEPGofService(self, cmd):
+    def getEPGofService(self, ref, options = 'IBDTSERN'):
         print "getting EPG of Service", cmd
-        events = self.epgcache.lookupEvent(['IBDTSERN',(cmd,0,-1,-1)]);
+        events = self.epgcache.lookupEvent([options ,(ref,0,-1,-1)]);
         if events:
                 return events
         else:
                 return []
     
+    def getEPGofBouquet(self, bouqetref):
+        print "[EPG.py] getting EPG for Bouquet", bouqetref
+        
+        serviceHandler = eServiceCenter.getInstance()
+        sl = serviceHandler.list(eServiceReference(bouqetref))
+        services = sl and sl.getContent('S')
+        
+        search = ['IBDTSERN']
+        
+        for service in services:
+            search.append((service,0,-1,-1))
+        
+        events = self.epgcache.lookupEvent(search)
+        
+        if events:
+            return events
+        else:
+            return []
+        
+        
     def searchEvent(self, cmd):
         print "getting EPG by title",cmd
         events = self.epgcache.search(('IBDTSERN',256,eEPGCache.PARTIAL_TITLE_SEARCH,cmd,1));
