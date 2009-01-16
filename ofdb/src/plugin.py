@@ -3,6 +3,7 @@ from Plugins.Plugin import PluginDescriptor
 from twisted.web.client import downloadPage
 from enigma import ePicLoad
 from Screens.Screen import Screen
+from Screens.EpgSelection import EPGSelection
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -16,6 +17,30 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import re
 import htmlentitydefs
 import urllib
+
+class OFDBEPGSelection(EPGSelection):
+	def __init__(self, *args):
+		EPGSelection.__init__(self, *args)
+		self.skinName = "EPGSelection"
+		self["key_green"].setText(_("Lookup"))
+
+	def infoKeyPressed(self):
+		self.timerAdd()
+
+	def timerAdd(self):
+		cur = self["list"].getCurrent()
+		evt = cur[0]
+		sref = cur[1]
+		if not evt: 
+			return
+
+		self.session.open(
+			OFDB,
+			evt.getEventName()
+		)
+
+	def onSelectionChanged(self):
+		pass
 
 class OFDB(Screen):
 	skin = """
@@ -407,17 +432,25 @@ class OFDbLCDScreen(Screen):
 		Screen.__init__(self, session)
 		self["headline"] = Label("OFDb Plugin")
 
+def eventinfo(session, servicelist, **kwargs):
+	ref = session.nav.getCurrentlyPlayingServiceReference()
+	session.open(OFDBEPGSelection, ref)
+
 def main(session, eventName="", **kwargs):
 	session.open(OFDB, eventName)
 	
 def Plugins(**kwargs):
 	try:
-		wherelist = [PluginDescriptor.WHERE_EVENTINFO, PluginDescriptor.WHERE_PLUGINMENU]
-		return PluginDescriptor(name="OFDb Details",
-				description=_("Query details from the Online-Filmdatenbank"),
-				icon="ofdb.png",
-				where = wherelist,
-				fnc=main)
+		return [PluginDescriptor(name = "OFDb Details",
+				description = _("Query details from the Online-Filmdatenbank"),
+				icon = "ofdb.png",
+				where = PluginDescriptor.WHERE_PLUGINMENU,
+				fnc = main),
+				PluginDescriptor(name = "OFDb Details",
+				description = _("Query details from the Online-Filmdatenbank"),
+				where = PluginDescriptor.WHERE_EVENTINFO,
+				fnc = eventinfo)
+				]
 	except AttributeError:
 		wherelist = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]
 		return PluginDescriptor(name="OFDb Details",
