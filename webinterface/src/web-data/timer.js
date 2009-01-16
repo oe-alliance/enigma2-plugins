@@ -443,10 +443,7 @@ function createOptionList(object, selected) {
 	var namespace = Array();
 	var i = 0;
 	
-	debug("[createOptionList] selected: " + selected)
-	
-	for(var element in object) {
-		debug("[createOptionList] element: " + element)
+	for(var element in object) {		
 		var txt = String(object[element]);
 		var sel = " ";
 		
