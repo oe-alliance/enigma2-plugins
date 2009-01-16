@@ -131,12 +131,12 @@ function repeatedReadable(num) {
 		return "One Time";
 	}
 	
-	var html = "";
+	var retVal = "";
 	var Repeated = [];
 	Repeated["Mo-Su"] =127;
+	Repeated["Mo-Fr"] = 31;
 	Repeated["Su"] =    64;
 	Repeated["Sa"] =    32;
-	Repeated["Mo-Fr"] = 31;
 	Repeated["Fr"] =    16;
 	Repeated["Th"] =     8;
 	Repeated["We"] =     4;
@@ -148,15 +148,15 @@ function repeatedReadable(num) {
 			var check = Number(Repeated[rep]);
 			if(check <= num) {
 				num -= check;
-				if(html === '') {
-					html += rep.toString();
+				if(retVal === '') {
+					retVal += rep.toString();
 				} else {
-					html = rep.toString()+','+html;
+					retVal = rep.toString()+','+retVal;
 				}
 			}
 		}
 	}
-	return html;
+	return retVal;
 }
 
 
@@ -423,6 +423,7 @@ function loadTimerForm(){
 	addTimerEditFormArray.RadioListFilled = 1;
 }
 
+
 function createOptions(start, end, number) {
 	var namespace =[];
 	
@@ -468,8 +469,8 @@ function createOptionList(object, selected) {
 
 function createOptionListRepeated(Repeated, repeated) {
 	num = Number(repeated);
-	
-	list = [127, 64, 32, 31, 16, 8, 4, 2, 1];
+		
+	list = [1, 2, 4, 8, 16, 32, 64, 31, 127];
 	namespace = [];
 	
 	for(var i = 0; i < list.length; i++) {
