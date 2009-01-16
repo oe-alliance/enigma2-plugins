@@ -254,6 +254,8 @@ class Timer( Source):
             afterevent = 1
         elif param['afterevent'] == "2":
             afterevent = 2
+        elif param['afterevent'] == "3":
+            afterevent = 3
         else:
             return False,"afterevent incorrect"
         
