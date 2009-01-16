@@ -97,6 +97,9 @@ class AutoTimerEPGSelection(EPGSelection):
 
 		addAutotimerFromEvent(self.session, evt = evt, service = sref)
 
+	def onSelectionChanged(self):
+		pass
+
 class AutoTimerEditorBase:
 	""" Base Class for all Editors """
 	def __init__(self, timer, editingDefaults = False):
