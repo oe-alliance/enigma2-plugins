@@ -3,6 +3,8 @@
 var DBG = true;
 DBG = false;
 
+var url_tpl = '/web-data/tpl/default/';
+
 var url_getcurrent = '/web/getcurrent';
 
 var url_getvolume = '/web/vol?set=state'; 

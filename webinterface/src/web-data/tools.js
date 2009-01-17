@@ -251,7 +251,7 @@ function renderTpl(tpl, data, domElement) {
 
 function fetchTpl(tplName, callback){
 	if(typeof(templates[tplName]) == "undefined") {
-		var url = "/web-data/tpl/"+tplName+".htm";
+		var url = url_tpl+tplName+".htm";
 		var options = {
 				asynchronous: true,
 				method: 'GET',
@@ -287,7 +287,7 @@ function incomingProcessTpl(request, data, domElement, callback){
 }
 
 function processTpl(tplName, data, domElement, callback){
-	var url = "/web-data/tpl/"+tplName+".htm";
+	var url = url_tpl+tplName+".htm";
 		var request = new Ajax.Request(url,
 			{
 				asynchronous: true,
