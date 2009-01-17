@@ -22,7 +22,12 @@ def myprint(str):
 def html2utf8(in_html):
 	try:
 		import htmlentitydefs
-
+	except ImportError:
+		try:
+			return in_html.replace("&amp;", "&").replace("&szlig;", "ßŸ").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
+		except UnicodeDecodeError:
+			pass
+	else:
 		# first convert some WML codes; does not work?!?!
 		wmldefs = [
 				("&#xDF;", "ß"),
@@ -61,11 +66,6 @@ def html2utf8(in_html):
 			except ValueError:
 				myprint("[Callhtml2utf8] ValueError " + key + "/" + str(codepoint))
 				pass
-	except ImportError:
-		try:
-			return in_html.replace("&amp;", "&").replace("&szlig;", "ßŸ").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
-		except UnicodeDecodeError:
-			pass
 	return in_html
 
 def out(number, caller):
