@@ -426,7 +426,7 @@ class ListFiller(Converter):
 			elif isinstance(element, ListMacroItem):
 				lutlist.append((element.macrodict[element.macroname], None))
 			else:
-				raise "neither string, ListItem nor ListMacroItem"
+				raise Exception("neither string, ListItem nor ListMacroItem")
 
 		# now, for the huge list, do:
 		strlist = [ ]
