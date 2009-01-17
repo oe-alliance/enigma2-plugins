@@ -70,7 +70,6 @@ class UpdateWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		self["CurrentTime"] = Clock()
-		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 
 class MessageWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -139,8 +138,6 @@ class ServiceWebScreen(WebScreen):
 class EPGWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
-		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
 		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
