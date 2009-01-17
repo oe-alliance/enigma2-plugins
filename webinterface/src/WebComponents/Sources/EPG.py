@@ -62,7 +62,7 @@ class EPG( Source):
                 return []
     
     def getEPGofService(self, ref, options = 'IBDTSERN'):
-        print "getting EPG of Service", cmd
+        print "getting EPG of Service", ref
         events = self.epgcache.lookupEvent([options ,(ref,0,-1,-1)]);
         if events:
                 return events
