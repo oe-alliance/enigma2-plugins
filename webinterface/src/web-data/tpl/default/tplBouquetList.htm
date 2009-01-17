@@ -4,6 +4,11 @@
 							<tr><td>
 								<table>
 									<tr>
+										<td>
+											<a target="_blank" onclick="return parentPin( '${service.servicereference}' );" href="/web/services.m3u?bRef=${service.servicereference}">
+												<img src="/web-data/img/screen.png" title="Open ${service.bouquetname} as Playlist" border="0">
+											</a>
+										</td>	Ê										
 										<td>										
 											<div class="sListSName">
 												<a href="#" id="${service.servicereference}" onclick="{ loadBouquet(this.id, this.innerHTML); }" class="sListSLink" title="Load Bouquet ${service.bouquetname}">
@@ -11,11 +16,6 @@
 												</a>
 											</div>
 										</td>
-										<td>
-											<a target="_blank" onclick="return parentPin( '${service.servicereference}' );" href="/web/services.m3u?bRef=${service.servicereference}">
-												<img src="/web-data/img/screen.png" title="Open ${service.bouquetname} as Playlist" border="0">
-											</a>
-										</td>	
 									</tr>
 								</table>
 							</td></tr>
