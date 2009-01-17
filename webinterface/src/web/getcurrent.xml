@@ -1,28 +1,28 @@
 <e2:screen name="UpdateWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 <e2currentserviceinformation>																														
-&lt;e2service>
-	&lt;e2servicereference><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Reference</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2servicereference>
-	&lt;e2servicename><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2servicename>
-	&lt;e2providername><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Provider</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2providername>
-&lt;/e2service>
+<e2service>
+	<e2servicereference><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Reference</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2servicereference>
+	<e2servicename><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2servicename>
+	<e2providername><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Provider</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2providername>
+</e2service>
 
-&lt;e2eventlist>
-	&lt;e2event>
-		&lt;e2eventid><e2:element source="session.Event_Now"><e2:convert type="EventName">ID</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventid>	
-		&lt;e2eventname><e2:element source="session.Event_Now"><e2:convert type="EventName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventname>
-		&lt;e2eventdescription><e2:element source="session.Event_Now"><e2:convert type="EventName">Description</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventdescription>
-		&lt;e2eventdescriptionextended><e2:element source="session.Event_Now"><e2:convert type="EventName">ExtendedDescription</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventdescriptionextended>
-		&lt;e2eventstart><e2:element source="session.Event_Now"><e2:convert type="EventTime">StartTime</e2:convert><e2:convert type="ClockToText">Default</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventstart>
-		&lt;e2eventduration><e2:element source="session.Event_Now"><e2:convert type="EventTime">Remaining</e2:convert><e2:convert type="RemainingToText">InMinutes</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventduration>
-	&lt;/e2event>
-	&lt;e2event>
-		&lt;e2eventid><e2:element source="session.Event_Next"><e2:convert type="EventName">ID</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventid>
-		&lt;e2eventname><e2:element source="session.Event_Next"><e2:convert type="EventName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventname>
-		&lt;e2eventdescription><e2:element source="session.Event_Next"><e2:convert type="EventName">Description</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventdescription>
-		&lt;e2eventstart><e2:element source="session.Event_Next"><e2:convert type="EventTime">StartTime</e2:convert><e2:convert type="ClockToText">Default</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventstart>
-		&lt;e2eventduration><e2:element source="session.Event_Next"><e2:convert type="EventTime">Remaining</e2:convert><e2:convert type="RemainingToText">InMinutes</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventduration>
-		&lt;e2eventdescriptionextended><e2:element source="session.Event_Next"><e2:convert type="EventName">ExtendedDescription</e2:convert><e2:convert type="web:TextToXML" /></e2:element>&lt;/e2eventdescriptionextended>
-	&lt;/e2event>
-&lt;/e2eventlist>
+<e2eventlist>
+	<e2event>
+		<e2eventid><e2:element source="session.Event_Now"><e2:convert type="EventName">ID</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventid>	
+		<e2eventname><e2:element source="session.Event_Now"><e2:convert type="EventName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventname>
+		<e2eventdescription><e2:element source="session.Event_Now"><e2:convert type="EventName">Description</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescription>
+		<e2eventdescriptionextended><e2:element source="session.Event_Now"><e2:convert type="EventName">ExtendedDescription</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescriptionextended>
+		<e2eventstart><e2:element source="session.Event_Now"><e2:convert type="EventTime">StartTime</e2:convert><e2:convert type="ClockToText">Default</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventstart>
+		<e2eventduration><e2:element source="session.Event_Now"><e2:convert type="EventTime">Remaining</e2:convert><e2:convert type="RemainingToText">InMinutes</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventduration>
+	</e2event>
+	<e2event>
+		<e2eventid><e2:element source="session.Event_Next"><e2:convert type="EventName">ID</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventid>
+		<e2eventname><e2:element source="session.Event_Next"><e2:convert type="EventName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventname>
+		<e2eventdescription><e2:element source="session.Event_Next"><e2:convert type="EventName">Description</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescription>
+		<e2eventstart><e2:element source="session.Event_Next"><e2:convert type="EventTime">StartTime</e2:convert><e2:convert type="ClockToText">Default</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventstart>
+		<e2eventduration><e2:element source="session.Event_Next"><e2:convert type="EventTime">Remaining</e2:convert><e2:convert type="RemainingToText">InMinutes</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventduration>
+		<e2eventdescriptionextended><e2:element source="session.Event_Next"><e2:convert type="EventName">ExtendedDescription</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescriptionextended>
+	</e2event>
+</e2eventlist>
 </e2currentserviceinformation>
 </e2:screen>
