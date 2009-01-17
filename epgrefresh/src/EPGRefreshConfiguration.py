@@ -18,8 +18,6 @@ from Components.config import config, getConfigListEntry
 
 from EPGRefresh import epgrefresh
 
-from sets import Set
-
 class EPGRefreshConfiguration(Screen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""
 
@@ -87,7 +85,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self.setTitle(_("Configure EPGRefresh"))
 
 	def forceRefresh(self):
-		epgrefresh.services = (Set(self.services[0]), Set(self.services[1]))
+		epgrefresh.services = (set(self.services[0]), set(self.services[1]))
 		epgrefresh.forceRefresh(self.session)
 
 	def editServices(self):
@@ -139,7 +137,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 			self.close(self.session)
 
 	def keySave(self):
-		epgrefresh.services = (Set(self.services[0]), Set(self.services[1]))
+		epgrefresh.services = (set(self.services[0]), set(self.services[1]))
 		epgrefresh.saveConfiguration()
 		
 		for x in self["config"].list:

@@ -1,4 +1,3 @@
-from sets import Set
 from TagStrip import strip, strip_readable
 from Components.Scanner import ScanFile
 

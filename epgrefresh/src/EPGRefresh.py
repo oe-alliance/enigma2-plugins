@@ -20,7 +20,6 @@ from os import path as path
 
 # We want a list of unique services
 from EPGRefreshService import EPGRefreshService
-from sets import Set
 
 # Configuration
 from Components.config import config
@@ -33,7 +32,7 @@ class EPGRefresh:
 
 	def __init__(self):
 		# Initialize 
-		self.services = (Set(), Set())
+		self.services = (set(), set())
 		self.previousService = None
 		self.forcedScan = False
 		self.session = None
