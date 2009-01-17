@@ -7,12 +7,9 @@ from Screens.Setup import SetupSummary
 
 # GUI (Components)
 from Components.ActionMap import ActionMap
-#from Components.Button import Button
 
 # Configuration
 from Components.config import config, getConfigListEntry
-
-from sets import Set
 
 class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 	"""Configuration of Startup To Standby"""
