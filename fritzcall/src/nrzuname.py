@@ -7,8 +7,8 @@
 
 import re, sys, os
 from xml.dom.minidom import parse
-from twisted.web.client import getPage
-from twisted.internet import reactor
+from twisted.web.client import getPage #@UnresolvedImport
+from twisted.internet import reactor #@UnresolvedImport
 
 debug = True
 def setDebug(what):

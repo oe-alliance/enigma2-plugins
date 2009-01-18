@@ -11,10 +11,6 @@ from Screens.InputBox import InputBox #@UnresolvedImport
 from Screens import Standby #@UnresolvedImport
 from Screens.HelpMenu import HelpableScreen #@UnresolvedImport
 
-from enigma import getDesktop #@UnresolvedImport
-DESKTOP_WIDTH = getDesktop(0).size().width()
-DESKTOP_HEIGHT = getDesktop(0).size().height()
-
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT #@UnresolvedImport
 
 from Components.MenuList import MenuList #@UnresolvedImport
@@ -32,10 +28,10 @@ from Plugins.Plugin import PluginDescriptor #@UnresolvedImport
 from Tools import Notifications #@UnresolvedImport
 from Tools.NumericalTextInput import NumericalTextInput #@UnresolvedImport
 
-from twisted.internet import reactor
-from twisted.internet.protocol import ReconnectingClientFactory
-from twisted.protocols.basic import LineReceiver
-from twisted.web.client import getPage
+from twisted.internet import reactor #@UnresolvedImport
+from twisted.internet.protocol import ReconnectingClientFactory #@UnresolvedImport
+from twisted.protocols.basic import LineReceiver #@UnresolvedImport
+from twisted.web.client import getPage #@UnresolvedImport
 
 from urllib import urlencode 
 import re, time, os
@@ -49,6 +45,21 @@ try:
 except IOError:
 	pass
 
+from enigma import getDesktop #@UnresolvedImport
+DESKTOP_WIDTH = getDesktop(0).size().width()
+DESKTOP_HEIGHT = getDesktop(0).size().height()
+#
+# this is pure magic.
+# It returns the first value, if HD (1280x1024),
+# the second if SD (720x576),
+# else something scaled accordingly
+#
+def scaleH(y2,y1):
+	return scale(y2,y1,1280,720,DESKTOP_WIDTH)
+def scaleV(y2,y1):
+	return scale(y2,y1,1024,576,DESKTOP_HEIGHT)
+def scale(y2,y1,x2,x1,x):
+	return (y2-y1)/(x2-x1)*(x-x1)+y1
 
 my_global_session = None
 
@@ -156,7 +167,6 @@ def html2utf8(in_html):
 		except UnicodeDecodeError:
 			pass
 	return in_html
-
 
 class FritzCallFBF:
 	def __init__(self):
@@ -563,34 +573,37 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 							150, 110, resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
 							)
 		else:
-			width = DESKTOP_WIDTH -150
-			height = DESKTOP_HEIGHT -156
-			self.width = width
-			self.height = height
+			self.width = scaleH(1100,570)
 			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.skin = """
 				<screen name="FritzDisplayCalls" position="%d,%d" size="%d,%d" title="%s" >
-					<widget name="statusbar" position="0,0" size="%d,22" font="Regular;21" />
-					<widget name="entries" position="0,22" size="%d,%d" scrollbarMode="showOnDemand" />
-					<ePixmap position="5,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-					<ePixmap position="145,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-					<ePixmap position="285,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-					<ePixmap position="425,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-					<widget name="key_red" position="5,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-					<widget name="key_green" position="145,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-					<widget name="key_yellow" position="285,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-					<widget name="key_blue" position="425,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+					<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
+					<widget name="statusbar" position="%d,%d" size="%d,%d" font="Regular;%d" backgroundColor="transpBlack" transparent="1" />
+					<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
+					<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="transpBlack" transparent="1" />
+					<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
+					<widget name="key_red" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="red" />
+					<widget name="key_green" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="green" />
+					<widget name="key_yellow" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="yellow" />
+					<widget name="key_blue" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="blue" />
 				</screen>""" % (
-							(DESKTOP_WIDTH - width) / 2,
-							(DESKTOP_HEIGHT - height) / 2,
-							width,
-							height,
+							scaleH(90,75), scaleV(100,78), # position 
+							scaleH(1100,570), scaleV(570,430), # size
 							_("Phone calls"),
-							width,
-							width,
-							height - 22 - 40,
-							height -40, height -40, height -40, height -40,
-							height -40, height -40, height -40, height -40
+							scaleH(1100,570), # eLabel width
+							scaleH(40,5), scaleV(10,5), # statusbar position
+							scaleH(1050,560), scaleV(25,22), # statusbar size
+							scaleV(22,21), # statusbar font size
+							scaleV(40,28), # eLabel position vertical
+							scaleH(1100,570), # eLabel width
+							scaleH(40,5), scaleV(55,40), # entries position
+							scaleH(1040,560), scaleV(458,340), # entries size
+							scaleV(518,390), # eLabel position vertical
+							scaleH(1100,570), # eLabel width
+							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget red
+							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget green
+							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget yellow
+							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget blue
 							)
 
 		Screen.__init__(self, session)
@@ -629,12 +642,10 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 
 		self["statusbar"] = Label(_("Getting calls from FRITZ!Box..."))
 		self["entries"] = MenuList([], True, content = eListboxPythonMultiContent)
-		if DESKTOP_WIDTH >= 1280:
-			self["entries"].l.setFont(0, gFont("Console", 22))
-			self["entries"].l.setItemHeight(24)
-		else:
-			self["entries"].l.setFont(0, gFont("Console", 16))
-			self["entries"].l.setItemHeight(20)
+		fontSize = scaleV(22,16)
+		fontHeight = scaleV(24,20)
+		self["entries"].l.setFont(0, gFont("Console", fontSize))
+		self["entries"].l.setItemHeight(fontHeight)
 
 		debug("[FritzDisplayCalls] init: '''%s'''" %config.plugins.FritzCall.fbfCalls.value)
 		self.display()
@@ -670,10 +681,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		self.updateStatus(self.header + " (" + str(len(callList)) + ")")
 		sortlist = []
 		# TODO: colculate number of chars, we can display
-		if DESKTOP_WIDTH >= 1280:
-			noChars = 60
-		else:
-			noChars = 40
+		noChars = scaleV(60,40)
 		for (number, date, remote, direct, here) in callList:
 			while (len(remote) + len(here)) > noChars:
 				if len(remote) > len(here):
@@ -930,31 +938,30 @@ class FritzCallPhonebook:
 								150, 110, resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
 								)
 			else:
-				self.width = DESKTOP_WIDTH -150 # 5 + 4x140 + 5
-				self.height = DESKTOP_HEIGHT -146 # 5 + ??? + 5 + 40 + 5
-				width = self.width
-				height = self.height
 				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+				self.width = scaleH(1100,570)
 				self.skin = """
 					<screen name="FritzDisplayPhonebook" position="%d,%d" size="%d,%d" title="%s" >
-						<widget name="entries" position="5,5" size="%d,%d" scrollbarMode="showOnDemand" />
-						<ePixmap position="5,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-						<ePixmap position="145,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-						<ePixmap position="285,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-						<ePixmap position="425,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-						<widget name="key_red" position="5,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-						<widget name="key_green" position="145,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-						<widget name="key_yellow" position="285,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-						<widget name="key_blue" position="425,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+						<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
+						<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="transpBlack" transparent="1" />
+						<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
+						<widget name="key_red" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="red" />
+						<widget name="key_green" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="green" />
+						<widget name="key_yellow" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="yellow" />
+						<widget name="key_blue" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="blue" />
 					</screen>""" % (
-								(DESKTOP_WIDTH - width) / 2,
-								(DESKTOP_HEIGHT - height) / 2,
-								width,
-								height,
-								_("Phonebook"),
-								width -5 -5, height -5 -40 -5, # entries size
-								height -5 -40, height -5 -40, height -5 -40, height -5 -40, # Pixmaps
-								height -5 -40, height -5 -40, height -5 -40, height -5 -40  # Buttons
+							scaleH(90,75), scaleV(100,73), # position 
+							scaleH(1100,570), scaleV(570,430), # size
+							_("Phonebook"),
+							scaleH(1100,570), # eLabel width
+							scaleH(40,5), scaleV(55,5), # entries position
+							scaleH(1040,560), scaleV(458,380), # entries size
+							scaleV(518,390), # eLabel position vertical
+							scaleH(1100,570), # eLabel width
+							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget red
+							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget green
+							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget yellow
+							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget blue
 								)
 
 			Screen.__init__(self, session)
@@ -993,12 +1000,10 @@ class FritzCallPhonebook:
 			self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("Search (case insensitive)"))]))
 
 			self["entries"] = MenuList([], True, content = eListboxPythonMultiContent)
-			if DESKTOP_WIDTH >= 1280:
-				self["entries"].l.setFont(0, gFont("Console", 22))
-				self["entries"].l.setItemHeight(24)
-			else:
-				self["entries"].l.setFont(0, gFont("Console", 16))
-				self["entries"].l.setItemHeight(20)
+			fontSize = scaleV(22,16)
+			fontHeight = scaleV(24,20)
+			self["entries"].l.setFont(0, gFont("Console", fontSize))
+			self["entries"].l.setItemHeight(fontHeight)
 			debug("[FritzCallPhonebook] displayPhonebook init")
 			self.display()
 
@@ -1023,14 +1028,10 @@ class FritzCallPhonebook:
 					else:
 						shortname = name
 					# TODO: colculate number of chars, we can display
-					if DESKTOP_WIDTH >= 1280:
-						if len(shortname) > 40:
-							shortname = shortname[:40]
-						message = u"%-40s  %-18s" %(shortname, number)
-					else:
-						if len(shortname) > 35:
-							shortname = shortname[:35]
-						message = u"%-35s  %-18s" %(shortname, number)
+					noChars = scaleV(40,35)
+					if len(shortname) > noChars:
+						shortname = shortname[:noChars]
+					message = u"%-35s  %-18s" %(shortname, number)
 					message = message.encode("utf-8")
 					# debug("[FritzCallPhonebook] displayPhonebook/display: add " + message
 					self.sortlist.append([(number.encode("utf-8","replace"),
@@ -1086,7 +1087,7 @@ class FritzCallPhonebook:
 			class addScreen(Screen, ConfigListScreen):
 				'''ConfiglistScreen with two ConfigTexts for Name and Number'''
 				width = 570
-				height = 75
+				height = 100
 				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 				skin = """
 					<screen position="%d,%d" size="%d,%d" title="%s" >
@@ -1260,35 +1261,39 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 								150, 110, resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
 								) 
 		else:
-			self.width = DESKTOP_WIDTH -150 # = 5 + 4x140 + 5
-			self.height = DESKTOP_HEIGHT -146 # = 5 + 330 + 50 + 40 + 5
-			width = self.width
-			height = self.height
 			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+			self.width = scaleH(1100,570)
 			self.skin = """
 				<screen name="FritzCallSetup" position="%d,%d" size="%d,%d" title="%s" >
-				<widget name="config" position="5,5" size="%d,%d" scrollbarMode="showOnDemand" />
-				<widget name="consideration" position="20,%d" font="Regular;20" halign="center" size="%d,50" />
-				<ePixmap position="5,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="145,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap position="285,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap position="425,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-				<widget name="key_red" position="5,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_green" position="145,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_yellow" position="285,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_blue" position="425,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
+				<widget name="consideration" position="%d,%d" halign="center" size="%d,%d" font="Regular;%d" backgroundColor="transpBlack" transparent="1" />
+				<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
+				<widget name="config" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="transpBlack" transparent="1" />
+				<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
+				<widget name="key_red" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="red" />
+				<widget name="key_green" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="green" />
+				<widget name="key_yellow" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="yellow" />
+				<widget name="key_blue" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="blue" />
 				</screen>""" % (
-							(DESKTOP_WIDTH - width) / 2,
-							(DESKTOP_HEIGHT - height) / 2,
-							width,
-							height,
-							_("FritzCall Setup"),
-							width -5 -5,
-							height -5 -5 -50 -5 -40 -5,
-							height -50 -5 -40 -5,
-							width -20 -20,
-							height -40 -5, height -40 -5, height -40 -5, height -40 -5,
-							height -40 -5, height -40 -5, height -40 -5, height -40 -5
+							scaleH(90,75), scaleV(100,73), # position 
+							scaleH(1100,570), scaleV(570,430), # size
+							_("FritzCall Setup") +
+							" (" + "$Revision$"[1:-1] +
+							"$Date$"[7:23] + ")",
+							scaleH(1100,570), # eLabel width
+							scaleH(40,20), scaleV(10,5), # consideration position
+							scaleH(1050,530), scaleV(25,45), # consideration size
+							scaleV(22,20), # consideration font size
+							scaleV(40,50), # eLabel position vertical
+							scaleH(1100,570), # eLabel width
+							scaleH(40,5), scaleV(60,57), # config position
+							scaleH(1040,560), scaleV(458,328), # config size
+							scaleV(518,390), # eLabel position vertical
+							scaleH(1100,570), # eLabel width
+							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget red
+							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget green
+							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget yellow
+							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget blue
 							)
 
 		Screen.__init__(self, session)
