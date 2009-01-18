@@ -34,7 +34,7 @@ class Toplevel(resource.Resource):
             self.putChild("hdd",static.File("/hdd"))
 
     def render(self, req):
-        fp = open(util.sibpath(WebInterface.__file__, "web-data")+"/index.html")
+        fp = open(util.sibpath(WebInterface.__file__, "web-data/tpl/default")+"/index.html")
         s = fp.read()
         fp.close()
         return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
@@ -42,9 +42,9 @@ class Toplevel(resource.Resource):
     def locateChild(self, request, segments):
         print "[WebIf]",request.remoteAddr.host,request.method,request.path,request.args
         return resource.Resource.locateChild(self, request, segments)
-    
+
 class RedirectorResource(resource.Resource):
-    """ 
+    """
         this class can be used to redirect a request to a specified uri
     """
     def __init__(self,uri):
