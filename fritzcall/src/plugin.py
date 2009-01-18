@@ -59,11 +59,10 @@ def scaleH(y2,y1):
 def scaleV(y2,y1):
 	return scale(y2,y1,1024,576,DESKTOP_HEIGHT)
 def scale(y2,y1,x2,x1,x):
-	return (y2-y1)/(x2-x1)*(x-x1)+y1
+	return (y2-y1)*(x-x1)/(x2-x1)+y1
 
 my_global_session = None
 
-# TODO: debug config option and then debug(to defined debug file...
 config.plugins.FritzCall = ConfigSubsection()
 config.plugins.FritzCall.enable = ConfigEnableDisable(default = False)
 config.plugins.FritzCall.muteOnCall = ConfigEnableDisable(default = False)
@@ -574,6 +573,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 							)
 		else:
 			self.width = scaleH(1100,570)
+			debug("[FritzDisplayCalls] width: " + str(self.width))
 			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.skin = """
 				<screen name="FritzDisplayCalls" position="%d,%d" size="%d,%d" title="%s" >
@@ -588,7 +588,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 					<widget name="key_blue" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="blue" />
 				</screen>""" % (
 							scaleH(90,75), scaleV(100,78), # position 
-							scaleH(1100,570), scaleV(570,430), # size
+							scaleH(1100,570), scaleV(560,430), # size
 							_("Phone calls"),
 							scaleH(1100,570), # eLabel width
 							scaleH(40,5), scaleV(10,5), # statusbar position
@@ -600,10 +600,10 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 							scaleH(1040,560), scaleV(458,340), # entries size
 							scaleV(518,390), # eLabel position vertical
 							scaleH(1100,570), # eLabel width
-							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget red
-							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget green
-							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget yellow
-							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget blue
+							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget red
+							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget green
+							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget yellow
+							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget blue
 							)
 
 		Screen.__init__(self, session)
@@ -938,8 +938,9 @@ class FritzCallPhonebook:
 								150, 110, resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
 								)
 			else:
-				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 				self.width = scaleH(1100,570)
+				debug("[FritzDisplayPhonebook] width: " + str(self.width))
+				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 				self.skin = """
 					<screen name="FritzDisplayPhonebook" position="%d,%d" size="%d,%d" title="%s" >
 						<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
@@ -951,17 +952,17 @@ class FritzCallPhonebook:
 						<widget name="key_blue" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="blue" />
 					</screen>""" % (
 							scaleH(90,75), scaleV(100,73), # position 
-							scaleH(1100,570), scaleV(570,430), # size
+							scaleH(1100,570), scaleV(560,430), # size
 							_("Phonebook"),
 							scaleH(1100,570), # eLabel width
-							scaleH(40,5), scaleV(55,5), # entries position
-							scaleH(1040,560), scaleV(458,380), # entries size
+							scaleH(40,5), scaleV(20,5), # entries position
+							scaleH(1040,560), scaleV(488,380), # entries size
 							scaleV(518,390), # eLabel position vertical
 							scaleH(1100,570), # eLabel width
-							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget red
-							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget green
-							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget yellow
-							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget blue
+							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget red
+							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget green
+							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget yellow
+							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget blue
 								)
 
 			Screen.__init__(self, session)
@@ -1261,8 +1262,9 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 								150, 110, resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
 								) 
 		else:
-			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.width = scaleH(1100,570)
+			debug("[FritzCallSetup] width: " + str(self.width))
+			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.skin = """
 				<screen name="FritzCallSetup" position="%d,%d" size="%d,%d" title="%s" >
 				<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
@@ -1276,7 +1278,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 				<widget name="key_blue" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="blue" />
 				</screen>""" % (
 							scaleH(90,75), scaleV(100,73), # position 
-							scaleH(1100,570), scaleV(570,430), # size
+							scaleH(1100,570), scaleV(560,430), # size
 							_("FritzCall Setup") +
 							" (" + "$Revision$"[1:-1] +
 							"$Date$"[7:23] + ")",
@@ -1290,10 +1292,10 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 							scaleH(1040,560), scaleV(458,328), # config size
 							scaleV(518,390), # eLabel position vertical
 							scaleH(1100,570), # eLabel width
-							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget red
-							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget green
-							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget yellow
-							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(22,21), # widget blue
+							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget red
+							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget green
+							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget yellow
+							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget blue
 							)
 
 		Screen.__init__(self, session)
