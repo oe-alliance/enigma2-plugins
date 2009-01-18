@@ -152,6 +152,10 @@ class AutoTimerEditorBase:
 			selection.append(default)
 		self.encoding = ConfigSelection(choices = selection, default = default)
 
+		# ...
+		self.searchType = ConfigSelection(choices = [("partial", _("partial match")), ("exact", _("exact match"))], default = timer.searchType)
+		self.searchCase = ConfigSelection(choices = [("sensitive", _("case-sensitive search")), ("insensitive", _("case-insensitive search"))], default = timer.searchCase)
+
 		# Justplay
 		self.justplay = ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)])
 
@@ -418,6 +422,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		self.list.extend([
 			getConfigListEntry(_("EPG Encoding"), self.encoding),
+			getConfigListEntry(_("Search Type"), self.searchType),
+			getConfigListEntry(_("Search strictness"), self.searchCase),
 			getConfigListEntry(_("Timer Type"), self.justplay),
 			getConfigListEntry(_("Only match during Timespan"), self.timespan)
 		])
@@ -573,6 +579,10 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Encoding
 		self.timer.encoding = self.encoding.value
+
+		# ...
+		self.timer.searchType = self.searchType.value
+		self.timer.searchCase = self.searchCase.value
 
 		# Enabled
 		self.timer.enabled = self.enabled.value

@@ -32,6 +32,16 @@ def getTimeDiff(timer, begin, end):
 		return timer.end - begin
 	return 0
 
+typeMap = {
+	"exact": eEPGCache.EXAKT_TITLE_SEARCH,
+	"partial": eEPGCache.PARTIAL_TITLE_SEARCH
+}
+
+caseMap = {
+	"sensitive": eEPGCache.CASE_CHECK,
+	"insensitive": eEPGCache.NO_CASE_CHECK
+}
+
 class AutoTimerIgnoreTimerException(Exception):
 	def __init__(self, cause):
 		self.cause = cause
@@ -171,7 +181,7 @@ class AutoTimer:
 					pass
 
 			# Search EPG, default to empty list
-			ret = self.epgcache.search(('RI', 100, eEPGCache.PARTIAL_TITLE_SEARCH, match, eEPGCache.NO_CASE_CHECK)) or []
+			ret = self.epgcache.search(('RI', 100, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or []
 
 			for serviceref, eit in ret:
 				eserviceref = eServiceReference(serviceref)

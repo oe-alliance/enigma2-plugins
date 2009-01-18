@@ -41,7 +41,7 @@ class AutoTimerComponent(object):
 			afterevent = [], exclude = None, maxduration = None, destination = None, \
 			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
 			lastBegin = 0, justplay = False, avoidDuplicateDescription = 0, bouquets = None, \
-			tags = None, encoding = 'UTF-8'):
+			tags = None, encoding = 'UTF-8', searchType = "partial", searchCase = "insensitive"):
 		self.name = name
 		self.match = match
 		self.enabled = enabled
@@ -63,6 +63,8 @@ class AutoTimerComponent(object):
 		self.bouquets = bouquets
 		self.tags = tags or []
 		self.encoding = encoding
+		self.searchType = searchType
+		self.searchCase = searchCase
 
 ### Attributes / Properties
 
@@ -123,6 +125,18 @@ class AutoTimerComponent(object):
 		self._match = match
 
 	match = property(lambda self: self._match, setMatch)
+
+	def setSearchCase(self, case):
+		assert case in ("sensitive", "insensitive"), "search case must be sensitive or insensitive"
+		self._searchCase = case
+
+	searchCase = property(lambda self: self._searchCase, setSearchCase)
+
+	def setSearchType(self, type):
+		assert type in ("exact", "partial"), "search type must be exact or partial"
+		self._searchType = type
+
+	searchType = property(lambda self: self._searchType, setSearchType)
 
 	def setServices(self, services):
 		if services:

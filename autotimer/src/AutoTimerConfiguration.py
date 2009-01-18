@@ -75,6 +75,10 @@ def parseEntry(element, baseTimer, defaults = False):
 	# Read out encoding (won't change if no value is set)
 	baseTimer.encoding = element.get("encoding")
 
+	# ...
+	baseTimer.searchType = element.get("searchType", "partial")
+	baseTimer.searchCase = element.get("searchCase", "insensitive")
+
 	# Read out timespan
 	start = element.get("from")
 	end = element.get("to")
@@ -489,6 +493,14 @@ def writeConfig(filename, defaultTimer, timers):
 	if defaultTimer.encoding != 'UTF-8':
 		list.extend([' encoding="', str(defaultTimer.encoding), '"'])
 
+	# Only display searchType if exact
+	if defaultTimer.searchType == "exact":
+		list.extend([' searchType="', str(defaultTimer.searchType), '"'])
+
+	# Only display searchCase if sensitive
+	if defaultTimer.searchCase == "sensitive":
+		list.extend([' searchCase="', str(defaultTimer.searchCase), '"'])
+
 	# Close still opened defaults tag
 	list.append('>\n')
 
@@ -588,6 +600,14 @@ def writeConfig(filename, defaultTimer, timers):
 		# Only display encoding if != utf-8
 		if timer.encoding != 'UTF-8':
 			list.extend([' encoding="', str(timer.encoding), '"'])
+
+		# Only display searchType if exact
+		if timer.searchType == "exact":
+			list.extend([' searchType="', str(timer.searchType), '"'])
+
+		# Only display searchCase if sensitive
+		if timer.searchCase == "sensitive":
+			list.extend([' searchCase="', str(timer.searchCase), '"'])
 
 		# Close still opened timer tag
 		list.append('>\n')
