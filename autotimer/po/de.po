@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-06 18:36+0100\n"
-"PO-Revision-Date: 2009-01-06 18:40+0100\n"
+"POT-Creation-Date: 2009-01-18 12:16+0100\n"
+"PO-Revision-Date: 2009-01-18 12:20+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -117,6 +117,9 @@ msgstr "Beschreibung"
 #, python-format
 msgid "Do you really want to delete %s?"
 msgstr "%s wirklich löschen?"
+
+msgid "EPG Encoding"
+msgstr "Zeichensatz des EPG"
 
 msgid "Edit AutoTimer"
 msgstr "AutoTimer bearbeiten"
@@ -326,6 +329,12 @@ msgstr "Samstag"
 msgid "Save"
 msgstr "Speichern"
 
+msgid "Search Type"
+msgstr "Suchtyp"
+
+msgid "Search strictness"
+msgstr "Genauigkeit der Suche"
+
 msgid "Select a Timer to Import"
 msgstr "Wähle zu importierende Aufnahme"
 
@@ -482,6 +491,12 @@ msgstr ""
 msgid "auto"
 msgstr "automatisch"
 
+msgid "case-insensitive search"
+msgstr "ignoriere Groß- und Kleinschreibung"
+
+msgid "case-sensitive search"
+msgstr "erzwinge Groß- und Kleinschreibung"
+
 msgid "delete"
 msgstr "Löschen"
 
@@ -493,6 +508,9 @@ msgstr "nichts"
 
 msgid "enable"
 msgstr "einschalten"
+
+msgid "exact match"
+msgstr "gesamter Title"
 
 msgid "go to deep standby"
 msgstr "in Deep Standby gehen"
@@ -514,6 +532,9 @@ msgstr "Minuten"
 
 msgid "on Weekday"
 msgstr "an einem Wochentag"
+
+msgid "partial match"
+msgstr "Teil des Titels"
 
 msgid "record"
 msgstr "aufnehmen"
