@@ -31,8 +31,8 @@ from time import localtime, mktime
 # Show ServiceName instead of ServiceReference
 from ServiceReference import ServiceReference
 
-# addAutotimerFromService
-from enigma import eServiceCenter, iServiceInformation
+# addAutotimerFromService, AutoTimerChannelSelection
+from enigma import eServiceCenter, eServiceReference, iServiceInformation
 
 # Default Record Directory
 from Tools import Directories
@@ -71,7 +71,7 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 		SimpleChannelSelection.__init__(self, session, title)
 		self.skinName = "SimpleChannelSelection"
 
-	def channelSelected(self): # just return selected service
+	def channelSelected(self):
 		ref = self.getCurrentSelection()
 		if (ref.flags & 7) == 7:
 			self.close(ref)
@@ -79,6 +79,28 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 			# We return the currently active path here
 			# Asking the user if this is what he wants might be better though
 			self.close(self.servicePath[-1])
+
+class AutoTimerChannelSelection(SimpleChannelSelection):
+	def __init__(self, session, autotimer):
+		SimpleChannelSelection.__init__(self, session, _("Channel Selection"))
+		self.skinName = "SimpleChannelSelection"
+		self.autotimer = autotimer
+
+		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
+			{
+				"showEPGList": self.channelSelected
+			}
+		)
+
+	def channelSelected(self):
+		ref = self.getCurrentSelection()
+		if (ref.flags & 7) == 7:
+			self.enterPath(ref)
+		elif not (ref.flags & eServiceReference.isMarker):
+			self.session.open(
+				AutoTimerEPGSelection,
+				ref
+			)
 
 class AutoTimerEPGSelection(EPGSelection):
 	def __init__(self, *args):

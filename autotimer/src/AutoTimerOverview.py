@@ -6,7 +6,7 @@ from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
-from AutoTimerEditor import AutoTimerEditor
+from AutoTimerEditor import AutoTimerEditor, AutoTimerChannelSelection
 from AutoTimerSettings import AutoTimerSettings
 from AutoTimerPreview import AutoTimerPreview
 from AutoTimerImporter import AutoTimerImportSelector
@@ -168,7 +168,8 @@ class AutoTimerOverview(Screen, HelpableScreen):
 	def menu(self):
 		list = [
 			(_("Preview"), "preview"),
-			(_("Import"), "import"),
+			(_("Import existing Timer"), "import"),
+			(_("Import from EPG"), "import_epg"),
 			(_("Setup"), "setup"),
 			(_("Edit new timer defaults"), "defaults"),
 		]
@@ -201,6 +202,11 @@ class AutoTimerOverview(Screen, HelpableScreen):
 					self.importCallback,
 					AutoTimerImportSelector,
 					newTimer
+				)
+			elif ret == "import_epg":
+				self.session.open(
+					AutoTimerChannelSelection,
+					self.autotimer
 				)
 			elif ret == "setup":
 				self.session.open(
