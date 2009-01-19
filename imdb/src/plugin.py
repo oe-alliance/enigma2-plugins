@@ -1,9 +1,10 @@
 # -*- coding: utf8 -*-
 from Plugins.Plugin import PluginDescriptor
 from twisted.web.client import downloadPage
-from enigma import ePicLoad
+from enigma import ePicLoad, eServiceReference
 from Screens.Screen import Screen
 from Screens.EpgSelection import EPGSelection
+from Screens.ChannelSelection import SimpleChannelSelection
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -18,11 +19,39 @@ import re
 import htmlentitydefs
 import urllib
 
+class IMDBChannelSelection(SimpleChannelSelection):
+	def __init__(self, session):
+		SimpleChannelSelection.__init__(self, session, _("Channel Selection"))
+		self.skinName = "SimpleChannelSelection"
+
+		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
+			{
+				"showEPGList": self.channelSelected
+			}
+		)
+
+	def channelSelected(self):
+		ref = self.getCurrentSelection()
+		if (ref.flags & 7) == 7:
+			self.enterPath(ref)
+		elif not (ref.flags & eServiceReference.isMarker):
+			self.session.openWithCallback(
+				self.epgClosed,
+				IMDBEPGSelection,
+				ref,
+				openPlugin = False
+			)
+
+	def epgClosed(self, ret = None):
+		if ret:
+			self.close(ret)
+
 class IMDBEPGSelection(EPGSelection):
-	def __init__(self, *args):
-		EPGSelection.__init__(self, *args)
+	def __init__(self, session, ref, openPlugin = True):
+		EPGSelection.__init__(self, session, ref)
 		self.skinName = "EPGSelection"
 		self["key_green"].setText(_("Lookup"))
+		self.openPlugin = openPlugin
 
 	def infoKeyPressed(self):
 		self.timerAdd()
@@ -34,10 +63,13 @@ class IMDBEPGSelection(EPGSelection):
 		if not evt: 
 			return
 
-		self.session.open(
-			IMDB,
-			evt.getEventName()
-		)
+		if self.openPlugin:
+			self.session.open(
+				IMDB,
+				evt.getEventName()
+			)
+		else:
+			self.close(evt.getEventName())
 
 	def onSelectionChanged(self):
 		pass
@@ -113,6 +145,7 @@ class IMDB(Screen):
 			"green": self.showMenu,
 			"yellow": self.showDetails,
 			"blue": self.showExtras,
+			"contextMenu": self.openChannelSelection,
 			"showEventInfo": self.showDetails
 		}, -1)
 
@@ -261,6 +294,17 @@ class IMDB(Screen):
 			self["starsbg"].hide()
 			self["ratinglabel"].hide()
 			self.Page = 2
+
+	def openChannelSelection(self):
+		self.session.openWithCallback(
+			self.channelSelectionClosed,
+			IMDBChannelSelection
+		)
+
+	def channelSelectionClosed(self, ret = None):
+		if ret:
+			self.eventName = ret
+			self.getIMDB()
 
 	def getIMDB(self):
 		self.resetLabels()
