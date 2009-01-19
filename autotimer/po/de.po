@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-18 12:16+0100\n"
-"PO-Revision-Date: 2009-01-18 12:20+0100\n"
+"POT-Creation-Date: 2009-01-19 13:30+0100\n"
+"PO-Revision-Date: 2009-01-19 13:32+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -70,6 +70,9 @@ msgstr "Bouquets"
 
 msgid "Cancel"
 msgstr "Abbruch"
+
+msgid "Channel Selection"
+msgstr "Kanalliste"
 
 msgid "Channels"
 msgstr "Kanäle"
@@ -200,11 +203,14 @@ msgstr "Freitag"
 msgid "Guess existing Timer based on Begin/End"
 msgstr "Bestimme existierende Timer anhand Anfang-/Endzeit"
 
-msgid "Import"
-msgstr "Importieren"
-
 msgid "Import AutoTimer"
 msgstr "AutoTimer importieren"
+
+msgid "Import existing Timer"
+msgstr "Importiere aus Timer"
+
+msgid "Import from EPG"
+msgstr "Importiere aus EPG"
 
 msgid "Include"
 msgstr "Einschließen"
