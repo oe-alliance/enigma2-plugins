@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 SimpleRSS Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-21 14:23+0100\n"
-"PO-Revision-Date: 2008-12-21 14:27+0100\n"
+"POT-Creation-Date: 2009-01-10 00:19+0100\n"
+"PO-Revision-Date: 2009-01-19 14:52+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -106,6 +106,16 @@ msgstr "Einstellungen"
 
 msgid "Show new Messages as"
 msgstr "Neue Nachrichten als"
+
+msgid "Simple RSS Reader"
+msgstr "Simple RSS Reader"
+
+msgid "Simple RSS Reader Setup"
+msgstr "Simple RSS Reader Einstellungen"
+
+#, python-format
+msgid "Simple RSS Reader: %s"
+msgstr "Simple RSS Reader: %s"
 
 #, python-format
 msgid ""
