@@ -50,7 +50,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self["key_blue"] = Button(_("Add"))
 
 		# Create List of Timers
-		self["entries"] = AutoTimerList(self.autotimer.getTupleTimerList())
+		self["entries"] = AutoTimerList(self.autotimer.getSortedTupleTimerList())
 
 		# Define Actions
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
