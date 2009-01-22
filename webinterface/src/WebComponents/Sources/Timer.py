@@ -27,13 +27,14 @@ class Timer( Source):
         self.recordtimer = session.nav.RecordTimer
         self.epgcache = eEPGCache.getInstance()
         self.result = False,"unknown command"
+        
 
-    def handleCommand(self,cmd):
+    def handleCommand(self, cmd):
         if self.func is self.ADDBYID:
             self.result = self.addTimerByEventID(cmd)
             self.writeTimerList()
         elif self.func is self.ADD:
-            self.result = self.addTimer(cmd)
+            self.result = self.editTimer(cmd)
             self.writeTimerList()
         elif self.func is self.TVBROWSER:
             self.result = self.tvBrowser(cmd)
@@ -42,7 +43,7 @@ class Timer( Source):
             self.result = self.delTimer(cmd)
             self.writeTimerList()
         elif self.func is self.CHANGE:
-            self.result = self.changeTimer(cmd)
+            self.result = self.editTimer(cmd)
             self.writeTimerList()
         elif self.func is self.WRITE:
             self.result = self.writeTimerList(force=True)
@@ -50,51 +51,43 @@ class Timer( Source):
             print "RECNOW"
             self.result = self.recordNow(cmd)
         else:
-            self.result = False,"unknown command cmd(%s) self.func(%s)" % (cmd, self.func)
+            self.result = False, _("Unknown command: cmd(%s) self.func(%s)" % (cmd, self.func) )
 
-    def delTimer(self,param):
-        # is there an easier and better way? :\ 
-        print "delTimer",param
+
+
+    def delTimer(self, param):
+        print "[WebComponents.Timer] delTimer"
         
-        if param['sRef'] is None:
-            return False,"ServiceReference missing"
+        if param.has_key('sRef'):
+            service_ref = ServiceReference(param['sRef'])            
         else: 
-            serviceref = ServiceReference(param['sRef'])
+            return False, _("Missing Parameter: sRef")
         
-        if param['begin'] is None:
-           return False,"begin missing"
+        if param.has_key('begin'):
+            begin = float(param['begin'])   
         else:
-            begin = float(param['begin'])
+            return False, _("Missing Parameter: begin")
         
-        if param['end'] is None:
-            return False,"end missing"
+        if param.has_key('end'):
+            end = float(param['end'])            
         else:
-        	end = float(param['end'])
+        	return False, _("Missing Parameter: end")
              
-        toDelete = None
         try:
-            print "timer_list ", self.recordtimer.timer_list
-            print "processed_timers", self.recordtimer.processed_timers
-            for x in self.recordtimer.timer_list + self.recordtimer.processed_timers:
-                #print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (x.begin, x.end, x.service_ref)
-                if str(x.service_ref) == str(serviceref) and float(x.begin) == begin and float(x.end) == end:
-	        	          toDelete = x
+            for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
+                if str(timer.service_ref) == str(service_ref) and float(timer.begin) == begin and float(timer.end) == end:
+                    self.recordtimer.removeEntry(timer)
+                    return True, _("The timer has been deleted successfully")
         except:
-            print "Fehler\n"
+            return False, _("The timer has NOT been deleted")
             
-        if toDelete is not None:
-        	self.recordtimer.removeEntry(toDelete)
-        	return True,"Timer removed"
-        else:
-        	return False,"Timer not found"
-        	print "Timer not found"
-        
-        #self.session.nav.RecordTimer.saveTimer()
+       	return False, _("No matching Timer not found")
+
     
-    def tvBrowser(self,param):
-        print "tvbrowser",param
+    def tvBrowser(self, param):
+        print "[WebComponents.Timer] tvbrowser"
         
-        """ Therefor the URL's for the tvBrowser-Capture-Driver are:
+        """ The URL's for the tvBrowser-Capture-Driver are:
         
             http://dreambox/web/tvbrowser? +
             
@@ -121,7 +114,7 @@ class Timer( Source):
             del param[element]
         
         if param['sRef'] is None:
-            return False,"sRef missing"
+            return False, _("Missing Parameter: sRef")
         else:
             takeApart = split(param['sRef'], '|')
             if len(takeApart) > 1:
@@ -143,15 +136,15 @@ class Timer( Source):
 
         if param['command'] == "add":
             del param['command']
-            return self.addTimer(param)
+            return self.editTimer(param)
         elif param['command'] == "del":
             del param['command']
             return self.delTimer(param)
         elif param['command'] == "change":
             del param['command']
-            return self.changeTimer(param)
+            return self.editTimer(param)
         else:
-            return False,"command missing"
+            return False, _("Unknown command: %s" %param['command'])
     
     def recordNow(self,param):
         print "recordNow ",param
@@ -190,91 +183,154 @@ class Timer( Source):
                 end = curEvent[1]
         else:
             if limitEvent:
-                return False, "No event found, started recording undefinitely"
+                return False, _("No event found, started infinite recording")
 
-        newtimer = RecordTimerEntry(serviceref, begin, end, name, description, eventid, False, False, 0)
-        newtimer.dontSave = True
-        self.recordtimer.record(newtimer)
+        timer = RecordTimerEntry(serviceref, begin, end, name, description, eventid, False, False, 0)
+        timer.dontSave = True
+        self.recordtimer.record(timer)
 
-        return True,"recording was startet"
+        return True, _("Instant recording started")
+
+
+#===============================================================================
+# This Function can add a new or edit an exisiting Timer
+# When the Parameter "channelOld" is not set, a new Timer will be added to the
+# Timerlist.
+# IF the parameters channelOld, beginOld and endOld are set
+# it's an existing timer will be changed (if possible with the given values)
+#===============================================================================
+    def editTimer(self, param):
+        print "[WebComponents.Timer] editTimer"
         
-    def addTimer(self,param):
-        # is there an easier and better way? :\ 
-        print "addTimer",param
-        if param['sRef'] is None:
-            return False,"ServiceReference missing"
-        else: 
-            serviceref = ServiceReference(param['sRef'])
-        
-        if param['begin'] is None:
-           return False,"begin missing"
+        #OK first we need to parse all of your Parameters
+        #For some of them (like afterEvent or justplay) we can use default values
+        #for others (the serviceReference or the Begin/End time of the timer 
+        #we have to quit if they are not set/have illegal values
+              
+        if param.has_key('sRef'):
+            service_ref = ServiceReference(param['sRef'])
         else:
-            begin = float(param['begin'])
-        
-        if param['end'] is None:
-            return False,"end missing"
-        elif float(param['end']) > time():
-            end = float(param['end'])
-        else:
-             return False,"end is in the past"
+            return False, _("Missing Parameter: sRef")
                 
-        if param['name'] is None:
-            return False,"name is missing"
-        else:
-            print "name1 ",param['name']
-            name = unescape(param['name'])#.encode("UTF-16LE")#.decode('utf-8')
-            print "name2 ",name
-            #).decode('utf_8')
-            
-        if param['description'] is not None:
-            print "description1 ",param['description']
-            description = unescape(param['description'])#.encode("UTF-16LE")#.decode('utf-8')
-            description = description.replace("\n"," ") # if a \n is in the timedescription, the resulting .meta breacks
-            print "description2 ",description
-        else: 
-            description = ""
-            
-        if param['disabled'] =="0":
-            disabled = False
-        elif param['disabled'] =="1":
-            disabled = True
-        else:
-            return False,"disabled incorrect"
-        
-        if param['justplay'] == "0":
-            justplay = False
-        elif param['justplay'] == "1":
-            justplay = True
-        else:
-            return False,"justplay incorrect"
-            
-        if param['afterevent'] == "0":
-            afterevent = 0
-        elif param['afterevent'] == "1":
-            afterevent = 1
-        elif param['afterevent'] == "2":
-            afterevent = 2
-        elif param['afterevent'] == "3":
-            afterevent = 3
-        else:
-            return False,"afterevent incorrect"
-        
         repeated = 0
         if param.has_key('repeated'):
             repeated = int(param['repeated'])
         
-        newtimer = RecordTimerEntry(serviceref, begin, end, name, description, 0, disabled, justplay, afterevent)
-        newtimer.repeated = repeated
-        self.recordtimer.record(newtimer)
-        #self.session.nav.RecordTimer.saveTimer()
-        return True,"Timer added"        
+            
+        if param.has_key('begin'):
+            begin = float(param['begin'])
+            if time() <= begin:                
+                pass
+            elif time() > float(begin) and repeated == 1:
+                begin = time()
+            else:
+                return False, _("Illegal Parameter value : { begin : %s }" %begin )             
+        else:
+            return False, _("Missing Parameter: begin")
+        
+        
+        if param.has_key('end'): 
+            end = float(param['end'])
+        else:
+            return False, _("Missing Parameter: end")
+          
+        if param.has_key('name'):
+            name = param['name']
+        else:
+            return False, _("Missing Parameter: name")
+        
+        if param.has_key('description'):
+            description = param['description'].replace("\n", " ")
+        else:
+            return False, _("Missing Parameter: description")
+                
+        disabled = False #Default to: Enabled
+        if param.has_key('disabled'):            
+            if param['disabled'] == "1":
+                disabled = True
+            else:
+                #TODO - maybe we can give the user some useful hint here
+                pass
+            
+        justplay = False #Default to: Record
+        if param.has_key('justplay'):
+            if param['justplay'] == "1":
+                justplay =  True
+            
+        afterEvent = 3 #Default to Afterevent: Auto
+        if param.has_key('afterevent'):
+            if ( param['afterevent'] == "0") or (param['afterevent'] == "1") or (param['afterevent'] == "2"):
+                afterEvent = int(param['afterevent'])
 
-    def addTimerByEventID(self,param):
-        print "addTimerByEventID",param
+        #Try to edit an existing Timer
+        if param.has_key('channelOld'):
+            print "ChannelOld: %s" %param['channelOld']
+            if param['channelOld'] != '':             
+                channelOld = ServiceReference(param['channelOld'])
+                
+                # We do need all of the following Parameters, too, for being able of finding the Timer.
+                # Therefore so we can neither use default values in this part nor can we 
+                # continue if a parameter is missing            
+                if param.has_key('beginOld'):
+                    beginOld = float(param['beginOld'])
+                else:
+                    return False, _("Missing Parameter: beginOld")
+                
+                if param.has_key('endOld'):
+                    endOld = float(param['endOld'])
+                else:
+                    return False, _("Missing Parameter: endOld")
+                
+                #let's try to find the timer
+                try:
+                    for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
+                        if str(timer.service_ref) == str(channelOld):
+                            if float(timer.begin) == beginOld:
+                                if float(timer.end) == endOld:
+                                    #we've found the timer we've been searching for
+                                    #Let's apply the new values
+                                    timer.service_ref = service_ref
+                                    timer.begin = int(begin)
+                                    timer.end = int(end)
+                                    timer.name = name
+                                    timer.description = description
+                                    timer.disabled = disabled
+                                    timer.justplay = justplay
+                                    timer.afterEvent = afterEvent
+                                    timer.repeated = repeated
+                                    
+                                    #send the changed timer back to enigma2 and hope it's good
+                                    self.session.nav.RecordTimer.timeChanged(timer)
+                                    print "[WebComponents.Timer] editTimer: Timer changed!"
+                                    return True, _("Timer %s has been changed!") %(timer.name)
+                except:
+                    #obviously some value was not good, return an error
+                    return False, _("Changing the timer for %s failed!") %name
+                
+                return False, _("Could not find timer %s with given start and end time!") %name
+        
+        #Try adding a new Timer
+
+        try:
+            #Create a new instance of recordtimerentry
+            timer = RecordTimerEntry(service_ref, begin, end, name, description, 0, disabled, justplay, afterEvent)
+            timer.repeated = repeated
+            #add the new timer
+            self.recordtimer.record(timer)
+            return True, _("Timer added successfully!")
+        except:
+            #something went wrong, most possibly one of the given paramater-values was wrong
+            return False, _("Could not add timer %s!") %name
+            
+        return False, _("Unexpected Error")
+                
+
+    def addTimerByEventID(self, param):
+        print "[WebComponents.Timer] addTimerByEventID", param
         if param['sRef'] is None:
-            return False,"ServiceReference not set"
+            return False, _("Missing Parameter: sRef")
         if param['eventid'] is None:
-            return False,"Eventid not set"
+            return False, _("Missing Parameter: eventid")
         
         justplay = False
         if param['justplay'] is not None:
@@ -284,132 +340,16 @@ class Timer( Source):
         epgcache = eEPGCache.getInstance()
         event = epgcache.lookupEventId(eServiceReference(param['sRef']),int(param['eventid']))
         if event is None:
-            return False,"Eventid not found"
+            return False, _("EventId not found")
+        
         (begin, end, name, description, eit) = parseEvent(event)
         
-        print "addTimerByEventID newtimer ", param['sRef'], begin, end, name, description, eit, False, justplay
-        newtimer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.NONE)                        
-                
-        self.recordtimer.record(newtimer)
-        return True,"Timer added"    
+        timer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.NONE)                                
+        self.recordtimer.record(timer)
+        return True, _("Timer added")    
             
-    def changeTimer(self, param):
         
-        print "changeTimer ", param
-        if param['deleteOldOnSave'] is not None:
-            if int(param['deleteOldOnSave']) == 1:
-                
-                if param['sRef'] is None:
-                    return [False, "ServiceReference missing"]
-                else: 
-                    serviceref = ServiceReference(param['sRef'])
-    
-                if param['repeated'] is not None:
-                    repeated = int(param['repeated'])
-                else: 
-                    repeated = 0
-                
-                if param['begin'] is None:
-                    return False,"begin missing"
-                elif time() <= float(param['begin']):
-                    begin = float(param['begin'])
-                elif time() > float(param['begin']) and repeated == 1:
-                    begin = time()
-                else:
-                    return False,"incorrect time begin"
-            
-                if param['end'] is None:
-                    return False,"end missing"
-                elif begin < float(param['end']):
-                    end = float(param['end'])
-                else:
-                    return False,"incorrect time end"
-                    
-                if param['name'] is None:
-                    return False,"name is missing"
-                else:
-                    name = param['name']
-                
-                if param['description'] is not None:
-                    description = param['description']
-                    description = description.replace("\n"," ") # if a \n is in the timedescription, the resulting .meta breacks
-                else: 
-                    description = ""
-    
-                if param['repeated'] is not None:
-                    repeated = int(param['repeated'])
-                else: 
-                    repeated = 0
-    
-                if param['disabled'] =="0":
-                    disabled = False
-                elif param['disabled'] =="1":
-                    disabled = True
-                else:
-                    return False,"disabled incorrect"
-            
-                if param['justplay'] == "0":
-                    justplay = False
-                elif param['justplay'] == "1":
-                    justplay = True
-                else:
-                    return False,"justplay incorrect"
-                
-                if param['afterevent'] == "0":
-                    afterevent = 0
-                elif param['afterevent'] == "1":
-                    afterevent = 1
-                elif param['afterevent'] == "2":
-                    afterevent = 2
-                else:
-                    return False,"afterevent incorrect"
-            
-                if param['channelOld'] is None:
-                    return False,"channelOld missing"
-                else: 
-                    channelOld = ServiceReference(param['channelOld'])
-                
-                if param['beginOld'] is None:
-                    return False,"beginOld missing"
-                else:
-                    beginOld = float(param['beginOld'])
-                
-                if param['endOld'] is None:
-                    return False,"endOld missing"
-                else:
-                    endOld = float(param['endOld'])
-                    
-                toChange = None
-                try:
-                    #print "beginOld(%s), endOld(%s), channelOld(%s)" % (beginOld, endOld, channelOld)
-                    for x in self.recordtimer.timer_list + self.recordtimer.processed_timers:
-                        #print "x.begin(%s), x.end(%s), x.service_ref(%s)" % (float(x.begin), float(x.end), x.service_ref)
-                        if str(x.service_ref) == str(channelOld) and float(x.begin) == beginOld and float(x.end) == endOld:
-                            #print "one found"
-                            toChange = x
-                            toChange.service_ref = ServiceReference(param['sRef'])
-                            toChange.begin = int(begin)
-                            toChange.end = int(end)
-                            toChange.name = name
-                            toChange.description = description
-                            toChange.disabled = disabled
-                            toChange.justplay = justplay
-                            toChange.afterEvent = afterevent
-                            toChange.repeated = repeated
-                            self.session.nav.RecordTimer.timeChanged(toChange)
-                            print "Timer changed"
-                            return True,"Timer changed"
-                            break
-                except:
-                    return False, "error searching for old Timer"            
-                if toChange is None:
-                    return False, "Timer not found"
-            else:
-                return self.addTimer(param)
-        else:
-                return False, "Parameter deleteOldOnSave not Set"
-        
-    def writeTimerList(self,force=False):
+    def writeTimerList(self, force=False):
         # is there an easier and better way? :\
         if config.plugins.Webinterface.autowritetimer.value or force: 
             print "Timer.py writing timer to flash"
@@ -418,9 +358,10 @@ class Timer( Source):
         else:
             return False, "TimerList was not saved "    
 
+
     def getText(self):
-        print self.result
-        (result,text) = self.result
+        print "[WebComponents.Timer] result: ", self.result
+        (result, text) = self.result
         xml  = "<e2simplexmlresult>\n"
         if result:
             xml += "<e2state>True</e2state>\n"
@@ -462,14 +403,6 @@ class Timer( Source):
 
             timer.append(item.afterEvent)
             
-            """
-No passing Logevents, because of error:
-XML-Verarbeitungsfehler: nicht wohlgeformt
-Adresse: http://dreambox/web/timerlist
-Zeile Nr. 374, Spalte 259:        <e2logentries>[(1171275272, 15, 'record time changed, start prepare is now: Mon Feb 12 12:29:40 2007'), (1171279780, 5, 'activating state 1'), (1171279780, 0, "Filename calculated as: '/hdd/movie/20070212 1230 - DISNEY CHANNEL - Quack Pack - Onkel Donald & Die Boys'"), (1171279780, 3, 'prepare ok, writing meta information to /hdd/movie/20070212 1230 - DISNEY CHANNEL - Quack Pack - Onkel Donald & Die Boys'), (1171279780, 6, 'prepare ok, waiting for begin'), (1171279800, 5, 'activating state 2'), (1171279800, 11, 'start recording'), (1171281900, 5, 'activating state 3'), (1171281900, 12, 'stop recording')]</e2logentries>
-------------------------------------------------------------------------------------------------------------
-No clue, what it could be.
-            """
             timer.append(item.log_entries)
             
             try:
@@ -518,29 +451,30 @@ No clue, what it could be.
         return timerlist
     
     list = property(command)
-    lut = {"ServiceReference":0
-           ,"ServiceName": 1
-           ,"EIT":2
-           ,"Name":3
-           ,"Description":4
-           ,"Directory":5
-           ,"Disabled":6
-           ,"TimeBegin":7
-           ,"TimeEnd":8
-           ,"Duration":9
-           ,"startPrepare":10
-           ,"justPlay":11
-           ,"afterEvent":12
-           ,"LogEntries":13
-           ,"Filename":14
-           ,"Backoff":15
-           ,"nextActivation":16
-           ,"firstTryPrepare":17
-           ,"State":18
-           ,"Repeated":19
-           ,"dontSave":20
-           ,"Cancled":21
-           ,"DescriptionExtended":22
-           ,"toggleDisabled":23
-           ,"toggleDisabledIMG":24
+    lut = {
+               "ServiceReference":0,
+               "ServiceName": 1,
+               "EIT":2,
+               "Name":3,
+               "Description":4,
+               "Directory":5,
+               "Disabled":6,
+               "TimeBegin":7,
+               "TimeEnd":8,
+               "Duration":9,
+               "startPrepare":10,
+               "justPlay":11,
+               "afterEvent":12,
+               "LogEntries":13,
+               "Filename":14,
+               "Backoff":15,
+               "nextActivation":16,
+               "firstTryPrepare":17,
+               "State":18,
+               "Repeated":19,
+               "dontSave":20,
+               "Cancled":21,
+               "DescriptionExtended":22,
+               "toggleDisabled":23,
+               "toggleDisabledIMG":24,
            }       
