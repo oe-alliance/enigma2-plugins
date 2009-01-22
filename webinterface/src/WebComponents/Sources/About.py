@@ -34,13 +34,22 @@ class About( Source):
                 retstr = "0.0.0.0"
             return retstr
 
-        iface = "eth0"
-        list.append(iNetwork.getAdapterAttribute(iface, "mac"))
-        list.append(iNetwork.getAdapterAttribute(iface, "dhcp"))
-        list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "ip")))
-        list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "netmask")))
-        list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "gateway")))
-
+        
+        if iNetwork.getNumberOfAdapters > 0:
+            iface = iNetwork.getAdapterList()[0]
+            print "[WebComponents.About] iface: %s" %iface
+            list.append(iNetwork.getAdapterAttribute(iface, "mac"))
+            list.append(iNetwork.getAdapterAttribute(iface, "dhcp"))
+            list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "ip")))
+            list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "netmask")))
+            list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "gateway")))
+        else:
+            print "[WebComponents.About] no network iface configured!"
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
+            list.append("N/A")
 
         #Get FrontProcessor Version
         fp_version = getFPVersion()
