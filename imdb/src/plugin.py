@@ -363,7 +363,7 @@ class IMDB(Screen):
 			self.IMDBparse()
 		else:
 			if re.search("<title>(?:IMDb.{0,9}Search|IMDb Titelsuche)</title>", self.inhtml):
-				searchresultmask = re.compile("href=\".*?/title/(tt\d{7,7})/\">(.*?)</td>", re.DOTALL)
+				searchresultmask = re.compile("<tr> <td.*?img src.*?>.*?<a href=\".*?/title/(tt\d{7,7})/\".*?>(.*?)</td>", re.DOTALL)
 				searchresults = searchresultmask.finditer(self.inhtml)
 				self.resultlist = []
 				if searchresults:
@@ -411,7 +411,7 @@ class IMDB(Screen):
 
 			genreblockmask = re.compile('<h5>Genre:</h5>(.*?)(?:mehr|more|</div>)', re.DOTALL)
 			genreblock = genreblockmask.findall(self.inhtml)
-			genremask = re.compile('\">(.*?)</a')
+			genremask = re.compile('(?:\">|\s)(.*?)(?:</a|\s)')
 			if genreblock:
 				genres = genremask.finditer(genreblock[0])
 				if genres:
@@ -427,12 +427,12 @@ class IMDB(Screen):
 			if self.generalinfos.group("alternativ"):
 				Detailstext += "\n" + self.generalinfos.group("g_alternativ") + ": " + self.htmltags.sub('',(self.generalinfos.group("alternativ").replace('\n','').replace("<br>",'\n').replace("  ",' ')))
 
-			ratingmask = re.compile('(?P<g_rating>Nutzer-Bewertung|User Rating):</b>.{0,2}<b>(?P<rating>.*?)/10</b>', re.DOTALL)
+			ratingmask = re.compile('<h5>(?P<g_rating>Nutzer-Bewertung|User Rating):</h5>.*?<b>(?P<rating>.*?)/10</b>', re.DOTALL)
 			rating = ratingmask.search(self.inhtml)
 			Ratingtext = self._("no user rating yet")
 			if rating:
 				Ratingtext = rating.group("g_rating") + ": " + rating.group("rating") + " / 10"
-				self.ratingstars = int(10*round(float(rating.group("rating")),1))
+				self.ratingstars = int(10*round(float(rating.group("rating").replace(',','.')),1))
 				self["stars"].show()
 				self["stars"].setValue(self.ratingstars)
 				self["starsbg"].show()
