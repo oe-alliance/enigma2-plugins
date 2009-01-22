@@ -4,7 +4,7 @@ from Components.config import config
 from Screens.MessageBox import MessageBox
 from WebIfConfig import WebIfConfigScreen
 from WebChilds.Toplevel import Toplevel
-from twisted.internet import reactor, defer
+from twisted.internet import reactor, defer, ssl
 from twisted.internet.error import CannotListenError
 from twisted.web2 import server, channel, http
 from twisted.web2.auth import digest, basic, wrapper
@@ -14,7 +14,7 @@ from twisted.cred import checkers, credentials, error
 from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname
 from OpenSSL import SSL
-from twisted.internet import reactor, defer, ssl
+
 
 DEBUG_TO_FILE=False # PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
 
