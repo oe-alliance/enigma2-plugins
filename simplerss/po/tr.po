@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SimpleRSS Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-21 14:23+0100\n"
+"POT-Creation-Date: 2009-01-10 00:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
@@ -16,7 +16,7 @@ msgstr ""
 #: ../src/plugin.py:89
 #, python-format
 msgid "%d Feed(s) were added to configuration."
-msgstr "%d besleme(leri) ayarlarınıza eklendi."
+msgstr "%d besleme(leri) eklendi."
 
 #: ../src/plugin.py:118
 msgid "A simple to use RSS reader"
@@ -27,16 +27,16 @@ msgid "Autoupdate"
 msgstr "Otomatik güncelleme"
 
 #: ../src/RSSSetup.py:32
-#: ../src/RSSSetup.py:92
+#: ../src/RSSSetup.py:97
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: ../src/RSSScreens.py:395
-#: ../src/RSSScreens.py:400
+#: ../src/RSSScreens.py:396
+#: ../src/RSSScreens.py:401
 msgid "Close"
 msgstr "Kapat"
 
-#: ../src/RSSSetup.py:95
+#: ../src/RSSSetup.py:100
 msgid "Delete"
 msgstr "Sil"
 
@@ -46,7 +46,7 @@ msgid "Enclosures"
 msgstr "İlişkili bildiri"
 
 #: ../src/RSSScreens.py:359
-#: ../src/RSSScreens.py:384
+#: ../src/RSSScreens.py:385
 msgid "Entries"
 msgstr "Bildirim"
 
@@ -61,13 +61,13 @@ msgstr "Bildiri %s/%s"
 msgid "Error while parsing Feed, this usually means there is something wrong with it."
 msgstr "Besleme ayrıştırılırken hata oluştu, bu durum genellikle hatalı yapılandırmadan kaynaklanır."
 
-#: ../src/RSSSetup.py:72
-#: ../src/RSSSetup.py:156
+#: ../src/RSSSetup.py:77
+#: ../src/RSSSetup.py:166
 msgid "Feed"
 msgstr "Besleme"
 
 #: ../src/RSSScreens.py:360
-#: ../src/RSSScreens.py:385
+#: ../src/RSSScreens.py:386
 #, python-format
 msgid "Feed %s/%s"
 msgstr "Besleme %s/%s"
@@ -84,11 +84,11 @@ msgstr "Besleme boş."
 msgid "Found no Enclosure we can display."
 msgstr "Gösterilmek üzere ilişkili bildiri bulunamadı."
 
-#: ../src/RSSSetup.py:81
+#: ../src/RSSSetup.py:86
 msgid "Keep running in background"
 msgstr "Arkaplanda çalışmaya devam et"
 
-#: ../src/RSSSetup.py:94
+#: ../src/RSSSetup.py:99
 msgid "New"
 msgstr "Yeni"
 
@@ -109,15 +109,15 @@ msgid "Notification"
 msgstr "Bilgilendirme"
 
 #: ../src/RSSSetup.py:33
-#: ../src/RSSSetup.py:93
+#: ../src/RSSSetup.py:98
 msgid "OK"
-msgstr "TAMAM"
+msgstr "Tamam"
 
 #: ../src/plugin.py:12
 msgid "Preview"
 msgstr "Önizleme"
 
-#: ../src/RSSSetup.py:123
+#: ../src/RSSSetup.py:133
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -130,14 +130,29 @@ msgstr ""
 msgid "Received %d new news item(s)."
 msgstr "%d yeni bildirim alındı."
 
-#: ../src/RSSScreens.py:394
-#: ../src/RSSScreens.py:399
+#: ../src/RSSScreens.py:395
+#: ../src/RSSScreens.py:400
 msgid "Setup"
 msgstr "Kurulum"
 
-#: ../src/RSSSetup.py:86
+#: ../src/RSSSetup.py:91
 msgid "Show new Messages as"
 msgstr "Yeni mesajların gösterilme şekli"
+
+#: ../src/RSSScreens.py:368
+msgid "Simple RSS Reader"
+msgstr "Kolay RSS Okuyucu"
+
+#: ../src/RSSSetup.py:46
+#: ../src/RSSSetup.py:114
+msgid "Simple RSS Reader Setup"
+msgstr "Kolay RSS Okuyucu Kurulumu"
+
+#: ../src/RSSScreens.py:116
+#: ../src/RSSScreens.py:256
+#, python-format
+msgid "Simple RSS Reader: %s"
+msgstr "Kolay RSS Okuyucu: %s"
 
 #: ../src/RSSPoller.py:83
 #, python-format
@@ -148,15 +163,15 @@ msgstr ""
 "Üzgünüm, bu besleme tipi desteklenmiyor:\n"
 "%s"
 
-#: ../src/RSSSetup.py:78
+#: ../src/RSSSetup.py:83
 msgid "Start automatically with Enigma2"
 msgstr "Enigma2 ile birlikte otomatik başlat"
 
-#: ../src/RSSScreens.py:393
+#: ../src/RSSScreens.py:394
 msgid "Update Feed"
 msgstr "Beslemeyi Güncelle"
 
-#: ../src/RSSSetup.py:87
+#: ../src/RSSSetup.py:92
 msgid "Update Interval (min)"
 msgstr "Güncelleme Aralığı (dk)"
 
@@ -168,7 +183,7 @@ msgstr ""
 "Güncelleme arkaplanda yapılıyor.\n"
 "Tamamlandığında, içerik otomatik olarak güncellenecektir."
 
-#: ../src/RSSScreens.py:406
+#: ../src/RSSScreens.py:407
 msgid "What to do?"
 msgstr "Ne yapmak istiyorsunuz?"
 

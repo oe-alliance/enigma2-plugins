@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 EPGRefresh plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-04 13:02+0100\n"
-"PO-Revision-Date: 2008-12-06 19:16+0200\n"
-"Last-Translator: Zülfikar Veyisoğlu <zveyis@gmail.com>\n"
+"POT-Creation-Date: 2009-01-09 18:30+0100\n"
+"PO-Revision-Date: 2009-01-23 22:30+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,62 +13,78 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/plugin.py:83
-#: ../src/plugin.py:93
+#: ../src/plugin.py:85
+#: ../src/plugin.py:95
 msgid "Automated EPGRefresher"
 msgstr "Otomatik EPG Yenileyici"
 
-#: ../src/EPGRefreshChannelEditor.py:64
+#: ../src/EPGRefreshChannelEditor.py:67
 msgid "Bouquets"
 msgstr "Buketler"
 
-#: ../src/EPGRefreshChannelEditor.py:72
-#: ../src/EPGRefreshConfiguration.py:65
+#: ../src/EPGRefreshChannelEditor.py:75
+#: ../src/EPGRefreshConfiguration.py:66
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: ../src/EPGRefreshChannelEditor.py:64
+#: ../src/EPGRefreshChannelEditor.py:67
 msgid "Channels"
 msgstr "Kanallar"
 
-#: ../src/EPGRefreshConfiguration.py:56
+#: ../src/EPGRefreshConfiguration.py:87
+msgid "Configure EPGRefresh"
+msgstr "EPG Yenileyici Yapılandır"
+
+#: ../src/EPGRefreshConfiguration.py:57
 msgid "Delay when not in Standby (in m)"
 msgstr "Uyku kipinde değilken ki gecikme (dk)"
 
-#: ../src/EPGRefreshConfiguration.py:68
+#: ../src/EPGRefreshConfiguration.py:42
+msgid "EPGRefresh Configuration"
+msgstr "EPG Yenileyici Ayarları"
+
+#: ../src/EPGRefreshChannelEditor.py:58
+msgid "EPGRefresh Services"
+msgstr "EPG Yenileyici - Kanallar"
+
+#: ../src/EPGRefreshConfiguration.py:69
 msgid "Edit Services"
 msgstr "Kanal Düzenle"
 
-#: ../src/EPGRefreshChannelEditor.py:108
+#: ../src/EPGRefreshChannelEditor.py:96
+msgid "Edit Services to refresh"
+msgstr "Yenilecek kanalları düzenle"
+
+#: ../src/EPGRefreshChannelEditor.py:116
 msgid "Editing"
 msgstr "Düzenleniyor"
 
-#: ../src/EPGRefreshConfiguration.py:57
+#: ../src/EPGRefreshConfiguration.py:58
 msgid "Force scan even if reciever is in use"
 msgstr "Alıcı kullanılırken dahi aramaya zorla"
 
-#: ../src/EPGRefreshConfiguration.py:58
+#: ../src/EPGRefreshConfiguration.py:59
 msgid "Inherit Services from AutoTimer if available"
 msgstr "Otomatik zamanlayıcı uygunsa kanalları devral"
 
-#: ../src/EPGRefreshChannelEditor.py:75
+#: ../src/EPGRefreshChannelEditor.py:78
 msgid "New"
 msgstr "Yeni"
 
-#: ../src/EPGRefreshChannelEditor.py:73
-#: ../src/EPGRefreshConfiguration.py:66
+#: ../src/EPGRefreshChannelEditor.py:76
+#: ../src/EPGRefreshConfiguration.py:67
 msgid "OK"
 msgstr "Tamam"
 
-#: ../src/EPGRefreshConfiguration.py:130
+#: ../src/EPGRefreshConfiguration.py:136
 msgid "Really close without saving settings?"
 msgstr "Kaydetmeden çıkmak istiyor musunuz?"
 
-#: ../src/EPGRefreshConfiguration.py:54
+#: ../src/EPGRefreshConfiguration.py:55
 msgid "Refresh EPG after"
 msgstr "EPG'yi sonrasında yenile"
 
-#: ../src/EPGRefreshConfiguration.py:55
+#: ../src/EPGRefreshConfiguration.py:56
 msgid "Refresh EPG before"
 msgstr "EPG'yi öncesinde yenile"
 
@@ -76,32 +92,36 @@ msgstr "EPG'yi öncesinde yenile"
 msgid "Refresh automatically"
 msgstr "Otomatik yenile"
 
-#: ../src/EPGRefreshConfiguration.py:67
+#: ../src/EPGRefreshConfiguration.py:68
 msgid "Refresh now"
 msgstr "Şimdi yenile"
 
-#: ../src/EPGRefreshChannelEditor.py:117
-#: ../src/EPGRefreshChannelEditor.py:168
+#: ../src/EPGRefreshChannelEditor.py:125
+#: ../src/EPGRefreshChannelEditor.py:176
 msgid "Refreshing"
 msgstr "Yenileniyor"
 
-#: ../src/EPGRefreshChannelEditor.py:161
+#: ../src/EPGRefreshChannelEditor.py:169
 msgid "Select bouquet to refresh"
 msgstr "Yenilemek için buket seçin"
 
-#: ../src/EPGRefreshChannelEditor.py:155
+#: ../src/EPGRefreshChannelEditor.py:163
 msgid "Select channel to refresh"
 msgstr "Yenilemek için kanal seçin"
 
-#: ../src/EPGRefreshConfiguration.py:59
+#: ../src/EPGRefreshConfiguration.py:60
 msgid "Shutdown after refresh"
 msgstr "Yenilemeden sonra Dreambox'ı kapat"
 
-#: ../src/EPGRefreshConfiguration.py:53
+#: ../src/EPGRefreshConfiguration.py:54
 msgid "Time to stay on service (in m)"
 msgstr "Kanalda kalma süresi (dk)"
 
-#: ../src/EPGRefreshChannelEditor.py:74
+#: ../src/EPGRefreshConfiguration.py:53
+msgid "Wakeup from Deep-Standby to refresh EPG"
+msgstr "Derin uyku kipinden açılış yapılırken EPG'yi yenile"
+
+#: ../src/EPGRefreshChannelEditor.py:77
 msgid "delete"
 msgstr "sil"
 

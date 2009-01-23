@@ -3,10 +3,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Enigma2 AutoTimer Plugin Turkish LocalePOT-Creation-Date: 2008-12-10 15:36+0100\n"
+"Project-Id-Version: Enigma2 AutoTimer Plugin Turkish Locale"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-21 12:04+0100\n"
-"PO-Revision-Date: 2008-12-22 11:39+0200\n"
+"POT-Creation-Date: 2009-01-19 13:30+0100\n"
+"PO-Revision-Date: 2009-01-23 21:25+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: http://www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,16 +20,16 @@ msgstr ""
 msgid "Add"
 msgstr "Ekle"
 
-#: ../src/plugin.py:146
 #: ../src/plugin.py:147
+#: ../src/plugin.py:148
 msgid "Add AutoTimer..."
 msgstr "Otomatik zamanlayıcı ekle..."
 
-#: ../src/AutoTimerEditor.py:354
+#: ../src/AutoTimerEditor.py:411
 msgid "Add Filters"
 msgstr "Filtre ekle"
 
-#: ../src/AutoTimerEditor.py:360
+#: ../src/AutoTimerEditor.py:417
 msgid "Add Services"
 msgstr "Kanal Ekle"
 
@@ -37,8 +37,12 @@ msgstr "Kanal Ekle"
 msgid "Add new AutoTimer"
 msgstr "Yeni otomatik zamanlayıcı ekle"
 
-#: ../src/AutoTimerEditor.py:415
-#: ../src/AutoTimerImporter.py:164
+#: ../src/AutoTimerSettings.py:41
+msgid "Add timer as disabled on conflict"
+msgstr "Çakışmalarda, zamanlayıcıyı devre dışı olarak ekle"
+
+#: ../src/AutoTimerEditor.py:475
+#: ../src/AutoTimerImporter.py:165
 msgid "After event"
 msgstr "Eylem bittikten sonra"
 
@@ -46,15 +50,15 @@ msgstr "Eylem bittikten sonra"
 msgid "All non-repeating Timers"
 msgstr "Tekrarlanmayan tüm zamanlayıcılar"
 
-#: ../src/AutoTimerEditor.py:433
+#: ../src/AutoTimerEditor.py:493
 msgid "Ammount of recordings left"
 msgstr "Kayıt sayacı"
 
-#: ../src/AutoTimerEditor.py:305
+#: ../src/AutoTimerEditor.py:362
 msgid "AutoTimer Editor"
 msgstr "Otomatik zamanlayıcı editörü"
 
-#: ../src/AutoTimerEditor.py:640
+#: ../src/AutoTimerEditor.py:716
 msgid "AutoTimer Filters"
 msgstr "Otomatik zamanlayıcı filtreleri"
 
@@ -62,7 +66,7 @@ msgstr "Otomatik zamanlayıcı filtreleri"
 msgid "AutoTimer Overview"
 msgstr "Otomatik zamanlayıcı incele"
 
-#: ../src/AutoTimerEditor.py:839
+#: ../src/AutoTimerEditor.py:915
 msgid "AutoTimer Services"
 msgstr "Otomatik zamanlayıcı kanalları"
 
@@ -70,34 +74,38 @@ msgstr "Otomatik zamanlayıcı kanalları"
 msgid "AutoTimer Settings"
 msgstr "Otomatik zamanlayıcı ayarları"
 
-#: ../src/AutoTimerEditor.py:396
+#: ../src/AutoTimerEditor.py:456
 #: ../src/AutoTimerWizard.py:91
 msgid "Begin of Timespan"
 msgstr "Zaman aralığı başlangıcı"
 
-#: ../src/AutoTimerEditor.py:424
+#: ../src/AutoTimerEditor.py:484
 msgid "Begin of after Event Timespan"
 msgstr "Zaman aralığı başlangıcı"
 
-#: ../src/AutoTimerEditor.py:848
+#: ../src/AutoTimerEditor.py:924
 msgid "Bouquets"
 msgstr "Bukette"
 
-#: ../src/AutoTimerEditor.py:322
-#: ../src/AutoTimerEditor.py:656
-#: ../src/AutoTimerEditor.py:856
+#: ../src/AutoTimerEditor.py:379
+#: ../src/AutoTimerEditor.py:732
+#: ../src/AutoTimerEditor.py:932
 #: ../src/AutoTimerImporter.py:41
-#: ../src/AutoTimerImporter.py:116
+#: ../src/AutoTimerImporter.py:117
 #: ../src/AutoTimerPreview.py:35
-#: ../src/AutoTimerSettings.py:47
+#: ../src/AutoTimerSettings.py:48
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: ../src/AutoTimerEditor.py:848
+#: ../src/AutoTimerEditor.py:85
+msgid "Channel Selection"
+msgstr "Kanal Seçimi"
+
+#: ../src/AutoTimerEditor.py:924
 msgid "Channels"
 msgstr "Kanalda"
 
-#: ../src/AutoTimerEditor.py:279
+#: ../src/AutoTimerEditor.py:322
 msgid "Choose target folder"
 msgstr "Hedef klasör seç"
 
@@ -113,28 +121,28 @@ msgstr "Değişiklikleri kaydetmeden kapat"
 msgid "Close and save changes"
 msgstr "Değişiklikleri kaydet ve kapat"
 
-#: ../src/AutoTimerSettings.py:64
+#: ../src/AutoTimerSettings.py:65
 msgid "Configure AutoTimer behavior"
 msgstr "Otomatik zamanlayıcı davranışını düzenle"
 
-#: ../src/AutoTimerOverview.py:177
+#: ../src/AutoTimerOverview.py:178
 msgid "Create a new timer using the classic editor"
 msgstr "Klasik editörü kullanarak yeni zamanlayıcı oluştur"
 
-#: ../src/AutoTimerOverview.py:179
+#: ../src/AutoTimerOverview.py:180
 msgid "Create a new timer using the wizard"
 msgstr "Sihirbazı kullanarak yeni zamanlayıcı oluştur"
 
-#: ../src/AutoTimerEditor.py:239
+#: ../src/AutoTimerEditor.py:278
 #, python-format
 msgid "Custom (%s)"
 msgstr "Özel (%s)"
 
-#: ../src/AutoTimerEditor.py:441
+#: ../src/AutoTimerEditor.py:501
 msgid "Custom Location"
 msgstr "Özel kayıt konumu"
 
-#: ../src/AutoTimerEditor.py:400
+#: ../src/AutoTimerEditor.py:460
 msgid "Custom offset"
 msgstr "Özel marj süresi"
 
@@ -142,7 +150,7 @@ msgstr "Özel marj süresi"
 msgid "Delete"
 msgstr "Sil"
 
-#: ../src/AutoTimerEditor.py:384
+#: ../src/AutoTimerEditor.py:441
 #: ../src/AutoTimerWizard.py:99
 msgid "Description"
 msgstr "Açıklama"
@@ -152,32 +160,36 @@ msgstr "Açıklama"
 msgid "Do you really want to delete %s?"
 msgstr "%s 'i silmek istediğinizden emin misiniz?"
 
-#: ../src/AutoTimerEditor.py:348
+#: ../src/AutoTimerEditor.py:446
+msgid "EPG Encoding"
+msgstr "EPG kodlaması"
+
+#: ../src/AutoTimerEditor.py:405
 msgid "Edit AutoTimer"
 msgstr "Otomatik zamanlayıcı düzenle"
 
-#: ../src/AutoTimerEditor.py:677
+#: ../src/AutoTimerEditor.py:753
 msgid "Edit AutoTimer Filters"
 msgstr "Otomatik zamanlayıcı filtrelerini düzenle"
 
-#: ../src/AutoTimerEditor.py:877
+#: ../src/AutoTimerEditor.py:953
 msgid "Edit AutoTimer Services"
 msgstr "Otomatik zamanlayıcı kanallarını düzenle"
 
-#: ../src/AutoTimerEditor.py:352
+#: ../src/AutoTimerEditor.py:409
 msgid "Edit Filters"
 msgstr "Filtreleri Düzenle"
 
-#: ../src/AutoTimerEditor.py:358
+#: ../src/AutoTimerEditor.py:415
 msgid "Edit Services"
 msgstr "Kanal Düzenle"
 
-#: ../src/plugin.py:144
 #: ../src/plugin.py:145
+#: ../src/plugin.py:146
 msgid "Edit Timers and scan for new Events"
 msgstr "Zamanlayıcı düzenle ve yeni eylemlerde ara"
 
-#: ../src/AutoTimerOverview.py:173
+#: ../src/AutoTimerOverview.py:174
 msgid "Edit new timer defaults"
 msgstr "Varsayılan yeni zamanlayıcı taslağını düzenleyin"
 
@@ -185,52 +197,52 @@ msgstr "Varsayılan yeni zamanlayıcı taslağını düzenleyin"
 msgid "Edit selected AutoTimer"
 msgstr "Seçilen otomatik zamanlayıcıyı düzenle"
 
-#: ../src/AutoTimerEditor.py:899
+#: ../src/AutoTimerEditor.py:975
 msgid "Editing"
 msgstr "Düzenleme"
 
-#: ../src/AutoTimerSettings.py:41
+#: ../src/AutoTimerSettings.py:42
 msgid "Editor for new AutoTimers"
 msgstr "Yeni otomatik zamanlayıcı editörü"
 
-#: ../src/AutoTimerEditor.py:721
+#: ../src/AutoTimerEditor.py:797
 msgid "Enable Filtering"
 msgstr "Filtreleme"
 
-#: ../src/AutoTimerEditor.py:898
+#: ../src/AutoTimerEditor.py:974
 msgid "Enable Service Restriction"
 msgstr "Kanal kısıtlaması"
 
-#: ../src/AutoTimerEditor.py:383
-#: ../src/AutoTimerImporter.py:126
+#: ../src/AutoTimerEditor.py:440
+#: ../src/AutoTimerImporter.py:127
 #: ../src/AutoTimerWizard.py:98
 msgid "Enabled"
 msgstr "Etkin"
 
-#: ../src/AutoTimerEditor.py:397
+#: ../src/AutoTimerEditor.py:457
 #: ../src/AutoTimerWizard.py:92
 msgid "End of Timespan"
 msgstr "Zaman aralığı sonu"
 
-#: ../src/AutoTimerEditor.py:425
+#: ../src/AutoTimerEditor.py:485
 msgid "End of after Event Timespan"
 msgstr "Zaman aralığı sonu"
 
-#: ../src/AutoTimerEditor.py:730
-#: ../src/AutoTimerEditor.py:747
-#: ../src/AutoTimerEditor.py:772
+#: ../src/AutoTimerEditor.py:806
+#: ../src/AutoTimerEditor.py:823
+#: ../src/AutoTimerEditor.py:848
 msgid "Exclude"
 msgstr "Dışla"
 
-#: ../src/AutoTimerEditor.py:419
+#: ../src/AutoTimerEditor.py:479
 msgid "Execute after Event during Timespan"
 msgstr "Zaman aralığındaki eylemden sonra çalıştır"
 
-#: ../src/AutoTimerEditor.py:722
+#: ../src/AutoTimerEditor.py:798
 msgid "Filter"
 msgstr "Filtre"
 
-#: ../src/plugin.py:109
+#: ../src/plugin.py:110
 #, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
@@ -239,7 +251,7 @@ msgstr ""
 "Toplam %d EPG eylemi eşleşmesi bulundu.\n"
 "%d zamanlayıcı eklendi ve %d düzenlendi."
 
-#: ../src/AutoTimerEditor.py:45
+#: ../src/AutoTimerEditor.py:48
 msgid "Friday"
 msgstr "Cuma"
 
@@ -247,40 +259,44 @@ msgstr "Cuma"
 msgid "Guess existing Timer based on Begin/End"
 msgstr "Başlangıç/Bitiş bilgisini mevcut zamanlayıcılardan tahmin et"
 
-#: ../src/AutoTimerOverview.py:171
-msgid "Import"
-msgstr "İçeri al"
-
-#: ../src/AutoTimerImporter.py:202
+#: ../src/AutoTimerImporter.py:212
 msgid "Import AutoTimer"
 msgstr "Otomatik zamanlayıcıyı içeri al"
 
-#: ../src/AutoTimerEditor.py:735
-#: ../src/AutoTimerEditor.py:752
-#: ../src/AutoTimerEditor.py:773
+#: ../src/AutoTimerOverview.py:171
+msgid "Import existing Timer"
+msgstr "Mevcut zamanlayıcıyı içeri al"
+
+#: ../src/AutoTimerOverview.py:172
+msgid "Import from EPG"
+msgstr "EPG'den içeri al"
+
+#: ../src/AutoTimerEditor.py:811
+#: ../src/AutoTimerEditor.py:828
+#: ../src/AutoTimerEditor.py:849
 msgid "Include"
 msgstr "İçer"
 
-#: ../src/AutoTimerImporter.py:182
+#: ../src/AutoTimerImporter.py:183
 msgid "Location"
 msgstr "Konum"
 
-#: ../src/AutoTimerImporter.py:146
+#: ../src/AutoTimerImporter.py:147
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr "Zaman aralığı eşleştir:  %02d:%02d - %02d:%02d"
 
-#: ../src/AutoTimerEditor.py:385
+#: ../src/AutoTimerEditor.py:442
 #: ../src/AutoTimerWizard.py:100
 msgid "Match Title"
 msgstr "Anahtar Kelime"
 
-#: ../src/AutoTimerImporter.py:135
+#: ../src/AutoTimerImporter.py:136
 #, python-format
 msgid "Match title: %s"
 msgstr "Anahtar Kelime: %s"
 
-#: ../src/AutoTimerEditor.py:413
+#: ../src/AutoTimerEditor.py:473
 msgid "Maximum Duration (in m)"
 msgstr "Maksimum Süre (dk.)"
 
@@ -288,53 +304,55 @@ msgstr "Maksimum Süre (dk.)"
 msgid "Modify existing Timers"
 msgstr "Zamanlayıcıları değiştir"
 
-#: ../src/AutoTimerEditor.py:41
+#: ../src/AutoTimerEditor.py:44
 msgid "Monday"
 msgstr "Pazartesi"
 
-#: ../src/AutoTimerEditor.py:237
+#: ../src/AutoTimerEditor.py:276
 msgid "Monthly"
 msgstr "Aylık"
 
-#: ../src/AutoTimerEditor.py:237
+#: ../src/AutoTimerEditor.py:276
 msgid "Never"
 msgstr "Hiç"
 
-#: ../src/AutoTimerEditor.py:659
-#: ../src/AutoTimerEditor.py:859
+#: ../src/AutoTimerEditor.py:735
+#: ../src/AutoTimerEditor.py:935
 msgid "New"
 msgstr "Yeni"
 
-#: ../src/AutoTimerEditor.py:244
+#: ../src/AutoTimerEditor.py:283
 #: ../src/
 msgid "No"
 msgstr "Hayır"
 
+#: ../src/AutoTimerEditor.py:307
+#: ../src/AutoTimerEditor.py:330
 #: ../src/plugin.py:16
 msgid "None"
 msgstr "Yok"
 
-#: ../src/AutoTimerEditor.py:323
-#: ../src/AutoTimerEditor.py:857
+#: ../src/AutoTimerEditor.py:380
+#: ../src/AutoTimerEditor.py:933
 #: ../src/AutoTimerImporter.py:42
-#: ../src/AutoTimerImporter.py:117
-#: ../src/AutoTimerSettings.py:48
+#: ../src/AutoTimerImporter.py:118
+#: ../src/AutoTimerSettings.py:49
 msgid "OK"
 msgstr "Tamam"
 
-#: ../src/AutoTimerEditor.py:406
+#: ../src/AutoTimerEditor.py:466
 msgid "Offset after recording (in m)"
 msgstr "Kayıt sonrası marj süresi (dk.)"
 
-#: ../src/AutoTimerEditor.py:405
+#: ../src/AutoTimerEditor.py:465
 msgid "Offset before recording (in m)"
 msgstr "Kayıt öncesi marj süresi (dk.)"
 
-#: ../src/AutoTimerEditor.py:246
+#: ../src/AutoTimerEditor.py:285
 msgid "On any service"
 msgstr "Herhangi bir kanalda"
 
-#: ../src/AutoTimerEditor.py:245
+#: ../src/AutoTimerEditor.py:284
 msgid "On same service"
 msgstr "Benzer kanalda"
 
@@ -342,12 +360,12 @@ msgstr "Benzer kanalda"
 msgid "Only AutoTimers created during this Session"
 msgstr "Yalnızca bu oturumda oluşturulan otomatik zamanlayıcılar"
 
-#: ../src/AutoTimerEditor.py:390
+#: ../src/AutoTimerEditor.py:450
 #: ../src/AutoTimerWizard.py:85
 msgid "Only match during Timespan"
 msgstr "Yalnızca belirtilen zaman aralığında"
 
-#: ../src/AutoTimerImporter.py:155
+#: ../src/AutoTimerImporter.py:156
 #, python-format
 msgid "Only on Service: %s"
 msgstr "Yalnızca %s kanalında"
@@ -356,7 +374,7 @@ msgstr "Yalnızca %s kanalında"
 msgid "Open Context Menu"
 msgstr "İçerik Menüsünü Aç"
 
-#: ../src/AutoTimerImporter.py:271
+#: ../src/AutoTimerImporter.py:283
 msgid "Please provide a Text to match"
 msgstr "Lütfen eşleşme için bir metin tanımlayın"
 
@@ -376,20 +394,20 @@ msgstr "Önizleme"
 msgid "Preview AutoTimer"
 msgstr "Otomatik zamanlayıcı önizleme"
 
-#: ../src/AutoTimerEditor.py:492
-#: ../src/AutoTimerEditor.py:802
-#: ../src/AutoTimerEditor.py:967
-#: ../src/AutoTimerImporter.py:208
+#: ../src/AutoTimerEditor.py:556
+#: ../src/AutoTimerEditor.py:878
+#: ../src/AutoTimerEditor.py:1043
+#: ../src/AutoTimerImporter.py:218
 #: ../src/AutoTimerOverview.py:155
 msgid "Really close without saving settings?"
 msgstr "Ayarlarınızı kaydetmeden çıkmak istediğinizden emin misiniz?"
 
-#: ../src/AutoTimerEditor.py:428
+#: ../src/AutoTimerEditor.py:488
 msgid "Record a maximum of x times"
 msgstr "Maksimum x defa kaydet"
 
-#: ../src/AutoTimerEditor.py:908
-#: ../src/AutoTimerEditor.py:959
+#: ../src/AutoTimerEditor.py:984
+#: ../src/AutoTimerEditor.py:1035
 msgid "Record on"
 msgstr "Kaydedilecek"
 
@@ -397,44 +415,52 @@ msgstr "Kaydedilecek"
 msgid "Remove selected AutoTimer"
 msgstr "Seçilen otomatik zamanlayıcıyı kaldır"
 
-#: ../src/AutoTimerEditor.py:436
+#: ../src/AutoTimerEditor.py:496
 msgid "Require Description to be unique"
 msgstr "Tekil açıklama gerekiyor"
 
-#: ../src/AutoTimerEditor.py:434
+#: ../src/AutoTimerEditor.py:494
 msgid "Reset Count"
 msgstr "Sayaç Sıfırlama"
 
-#: ../src/AutoTimerEditor.py:46
+#: ../src/AutoTimerEditor.py:49
 msgid "Saturday"
 msgstr "Cumartesi"
 
-#: ../src/AutoTimerEditor.py:657
+#: ../src/AutoTimerEditor.py:733
 #: ../src/AutoTimerOverview.py:48
 msgid "Save"
 msgstr "Kaydet"
+
+#: ../src/AutoTimerEditor.py:447
+msgid "Search Type"
+msgstr "Arama tipi"
+
+#: ../src/AutoTimerEditor.py:448
+msgid "Search strictness"
+msgstr "Arama hassasiyeti"
 
 #: ../src/AutoTimerImporter.py:56
 msgid "Select a Timer to Import"
 msgstr "İçeri almak için bir zamanlayıcı seçin"
 
-#: ../src/AutoTimerEditor.py:945
+#: ../src/AutoTimerEditor.py:1021
 msgid "Select bouquet to record on"
 msgstr "Kaydedilecek buketi seçin"
 
-#: ../src/AutoTimerEditor.py:939
+#: ../src/AutoTimerEditor.py:1015
 msgid "Select channel to record on"
 msgstr "Kaydedilecek kanalı seçin"
 
-#: ../src/AutoTimerEditor.py:770
+#: ../src/AutoTimerEditor.py:846
 msgid "Select type of Filter"
 msgstr "Filtre tipini seçin"
 
-#: ../src/AutoTimerEditor.py:409
+#: ../src/AutoTimerEditor.py:469
 msgid "Set maximum Duration"
 msgstr "Maksimum süre tanımla"
 
-#: ../src/AutoTimerOverview.py:172
+#: ../src/AutoTimerOverview.py:173
 msgid "Setup"
 msgstr "Kurulum"
 
@@ -446,49 +472,54 @@ msgstr "Sırala"
 msgid "Sort Time"
 msgstr "Zamana göre"
 
-#: ../src/AutoTimerEditor.py:47
+#: ../src/AutoTimerEditor.py:50
 msgid "Sunday"
 msgstr "Pazar"
 
-#: ../src/AutoTimerEditor.py:506
+#: ../src/AutoTimerEditor.py:503
+#: ../src/AutoTimerImporter.py:192
+msgid "Tags"
+msgstr "Etiketler"
+
+#: ../src/AutoTimerEditor.py:573
 msgid "The match attribute is mandatory."
 msgstr "Eşleştirme yapmak zorunludur."
 
-#: ../src/AutoTimerEditor.py:44
+#: ../src/AutoTimerEditor.py:47
 msgid "Thursday"
 msgstr "Perşembe"
 
-#: ../src/AutoTimerEditor.py:389
-#: ../src/AutoTimerImporter.py:173
+#: ../src/AutoTimerEditor.py:449
+#: ../src/AutoTimerImporter.py:174
 #: ../src/AutoTimerWizard.py:101
 msgid "Timer Type"
 msgstr "Zamanlayıcı tipi"
 
-#: ../src/AutoTimerEditor.py:42
+#: ../src/AutoTimerEditor.py:45
 msgid "Tuesday"
 msgstr "Salı"
 
-#: ../src/AutoTimerEditor.py:439
+#: ../src/AutoTimerEditor.py:499
 msgid "Use a custom location"
 msgstr "Özel kayıt konumu seç"
 
-#: ../src/AutoTimerEditor.py:43
+#: ../src/AutoTimerEditor.py:46
 msgid "Wednesday"
 msgstr "Çarşamba"
 
-#: ../src/AutoTimerEditor.py:49
+#: ../src/AutoTimerEditor.py:52
 msgid "Weekday"
 msgstr "Haftaiçi"
 
-#: ../src/AutoTimerEditor.py:48
+#: ../src/AutoTimerEditor.py:51
 msgid "Weekend"
 msgstr "Haftasonu"
 
-#: ../src/AutoTimerEditor.py:237
+#: ../src/AutoTimerEditor.py:276
 msgid "Weekly (Monday)"
 msgstr "Haftalık (Pazartesi)"
 
-#: ../src/AutoTimerEditor.py:237
+#: ../src/AutoTimerEditor.py:276
 msgid "Weekly (Sunday)"
 msgstr "Haftalık (Pazar)"
 
@@ -496,8 +527,8 @@ msgstr "Haftalık (Pazar)"
 msgid "Wizard"
 msgstr "Sihirbaz"
 
-#: ../src/AutoTimerEditor.py:515
-#: ../src/AutoTimerImporter.py:223
+#: ../src/AutoTimerEditor.py:582
+#: ../src/AutoTimerImporter.py:233
 #, python-format
 msgid ""
 "You entered \"%s\" as Text to match.\n"
@@ -506,7 +537,7 @@ msgstr ""
 "Metin eşleşmesi için \"%s\" girdiniz.\n"
 "Anahtar kelimeden sonra bırakılan boşluklar silinsin mi?"
 
-#: ../src/plugin.py:80
+#: ../src/plugin.py:81
 #, python-format
 msgid ""
 "Your config file is not well-formed:\n"
@@ -515,48 +546,60 @@ msgstr ""
 "Yapılandırma dosyası düzgün değil:\n"
 "%s"
 
-#: ../src/AutoTimerEditor.py:194
+#: ../src/AutoTimerEditor.py:232
 #: ../src/AutoTimerImporter.py:26
 msgid "auto"
 msgstr "otomatik"
 
-#: ../src/AutoTimerEditor.py:658
-#: ../src/AutoTimerEditor.py:858
+#: ../src/AutoTimerEditor.py:179
+msgid "case-insensitive search"
+msgstr "büyük-küçük harf duyarsız arama"
+
+#: ../src/AutoTimerEditor.py:179
+msgid "case-sensitive search"
+msgstr "büyük-küçük harf duyarlı arama"
+
+#: ../src/AutoTimerEditor.py:734
+#: ../src/AutoTimerEditor.py:934
 msgid "delete"
 msgstr "sil"
 
-#: ../src/AutoTimerImporter.py:126
+#: ../src/AutoTimerImporter.py:127
 msgid "disable"
-msgstr "devre dışı"
+msgstr "kapat"
 
-#: ../src/AutoTimerEditor.py:194
+#: ../src/AutoTimerEditor.py:232
 #: ../src/AutoTimerImporter.py:23
 msgid "do nothing"
 msgstr "birşey yapma"
 
-#: ../src/AutoTimerImporter.py:126
+#: ../src/AutoTimerImporter.py:127
 msgid "enable"
-msgstr "etkin"
+msgstr "etkinleştir"
 
-#: ../src/AutoTimerEditor.py:194
+#: ../src/AutoTimerEditor.py:178
+msgid "exact match"
+msgstr "tam eşleşme"
+
+#: ../src/AutoTimerEditor.py:232
 #: ../src/AutoTimerImporter.py:24
 msgid "go to deep standby"
 msgstr "derin uyku kipine geç"
 
-#: ../src/AutoTimerEditor.py:194
+#: ../src/AutoTimerEditor.py:232
 #: ../src/AutoTimerImporter.py:25
 msgid "go to standby"
 msgstr "uyku kipine geç"
 
-#: ../src/AutoTimerEditor.py:643
+#: ../src/AutoTimerEditor.py:719
 msgid "in Description"
 msgstr "Açıklamada"
 
-#: ../src/AutoTimerEditor.py:643
+#: ../src/AutoTimerEditor.py:719
 msgid "in Shortdescription"
 msgstr "Kısa açıklamada"
 
-#: ../src/AutoTimerEditor.py:643
+#: ../src/AutoTimerEditor.py:719
 msgid "in Title"
 msgstr "Başlıkta"
 
@@ -564,21 +607,25 @@ msgstr "Başlıkta"
 msgid "mins"
 msgstr "dakika"
 
-#: ../src/AutoTimerEditor.py:643
+#: ../src/AutoTimerEditor.py:719
 msgid "on Weekday"
 msgstr "Günde"
 
-#: ../src/AutoTimerEditor.py:144
-#: ../src/AutoTimerImporter.py:173
+#: ../src/AutoTimerEditor.py:178
+msgid "partial match"
+msgstr "kısmi eşleşme"
+
+#: ../src/AutoTimerEditor.py:182
+#: ../src/AutoTimerImporter.py:174
 msgid "record"
 msgstr "kaydet"
 
-#: ../src/AutoTimerEditor.py:194
+#: ../src/AutoTimerEditor.py:232
 msgid "standard"
 msgstr "standart"
 
-#: ../src/AutoTimerEditor.py:144
-#: ../src/AutoTimerImporter.py:173
+#: ../src/AutoTimerEditor.py:182
+#: ../src/AutoTimerImporter.py:174
 msgid "zap"
 msgstr "değiştir"
 
@@ -683,4 +730,7 @@ msgid ""
 msgstr ""
 "'Anahtar Kelime' den sonra bir boşluk bırakmışsınız.\n"
 "Lütfen boşluğu bilinçli olarak, tutmak isteyip istemediğinizi belirtiniz?"
+
+#~ msgid "Import"
+#~ msgstr "İçeri al"
 
