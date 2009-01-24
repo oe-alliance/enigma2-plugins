@@ -1,8 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 Webinterface locale\n"
-"POT-Creation-Date: 2009-01-06 14:34+0100\n"
-"PO-Revision-Date: 2009-01-07 00:33+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-09 03:17+0100\n"
+"PO-Revision-Date: 2009-01-13 10:26+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,96 +21,108 @@ msgstr "Web arayüzü"
 msgid "Configuration for the Webinterface"
 msgstr "Web arayüzünü yapılandırın"
 
-#: src/WebIfConfig.py:34
+#: src/WebIfConfig.py:31
+msgid "Webinterface: Main Setup"
+msgstr "Web arayüzü: Ana kurulum"
+
+#: src/WebIfConfig.py:36
 msgid "Start Webinterface"
 msgstr "Web arayüzünü başlat"
 
-#: src/WebIfConfig.py:35
+#: src/WebIfConfig.py:37
 msgid "Enable /hdd"
 msgstr "/hdd yönetimine izin ver"
 
-#: src/WebIfConfig.py:36
+#: src/WebIfConfig.py:38
 msgid "Allow zapping via Webinterface"
 msgstr "Web arayüzünden kanal değişimine izin ver"
 
-#: src/WebIfConfig.py:37
+#: src/WebIfConfig.py:39
 msgid "Autowrite timer"
 msgstr "Zamanlayıcı otomatik yazma"
 
-#: src/WebIfConfig.py:38
+#: src/WebIfConfig.py:40
 msgid "Load movie-length"
 msgstr "Kaydedilmiş dosyalarda süreyi göster"
 
-#: src/WebIfConfig.py:44
-#: src/WebIfConfig.py:199
+#: src/WebIfConfig.py:46
+#: src/WebIfConfig.py:201
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: src/WebIfConfig.py:45
-#: src/WebIfConfig.py:200
+#: src/WebIfConfig.py:47
+#: src/WebIfConfig.py:202
 msgid "OK"
 msgstr "Tamam"
 
-#: src/WebIfConfig.py:46
+#: src/WebIfConfig.py:48
 msgid "Interfaces"
 msgstr "Arayüzler"
 
-#: src/WebIfConfig.py:91
-#: src/WebIfConfig.py:220
+#: src/WebIfConfig.py:89
+msgid "Webinterface: List of configured Interfaces"
+msgstr "Web arayüzü: Yapılandırılmış arayüz listesi"
+
+#: src/WebIfConfig.py:93
+#: src/WebIfConfig.py:222
 msgid "Address"
 msgstr "Adres"
 
-#: src/WebIfConfig.py:92
-#: src/WebIfConfig.py:221
+#: src/WebIfConfig.py:94
+#: src/WebIfConfig.py:223
 msgid "Port"
 msgstr "Port"
 
-#: src/WebIfConfig.py:93
+#: src/WebIfConfig.py:95
 msgid "Authorization"
 msgstr "Oturum izni"
 
-#: src/WebIfConfig.py:94
+#: src/WebIfConfig.py:96
 msgid "SSL"
 msgstr "SSL"
 
-#: src/WebIfConfig.py:95
-#: src/WebIfConfig.py:219
+#: src/WebIfConfig.py:97
+#: src/WebIfConfig.py:221
 msgid "Disabled"
 msgstr "Devre dışı"
 
-#: src/WebIfConfig.py:96
+#: src/WebIfConfig.py:98
 msgid "Add"
 msgstr "Ekle"
 
-#: src/WebIfConfig.py:97
+#: src/WebIfConfig.py:99
 msgid "Change"
 msgstr "Değiştir"
-
-#: src/WebIfConfig.py:122
-#: src/WebIfConfig.py:127
-#: src/WebIfConfig.py:132
-msgid "yes"
-msgstr "evet"
 
 #: src/WebIfConfig.py:124
 #: src/WebIfConfig.py:129
 #: src/WebIfConfig.py:134
+msgid "yes"
+msgstr "evet"
+
+#: src/WebIfConfig.py:126
+#: src/WebIfConfig.py:131
+#: src/WebIfConfig.py:136
 msgid "no"
 msgstr "hayır"
 
-#: src/WebIfConfig.py:202
+#: src/WebIfConfig.py:189
+msgid "Webinterface: Edit Interface"
+msgstr "Web arayüzü: Arayüzleri düzenle"
+
+#: src/WebIfConfig.py:204
 msgid "Delete"
 msgstr "Sil"
 
-#: src/WebIfConfig.py:222
+#: src/WebIfConfig.py:224
 msgid "Require Authorization"
 msgstr "Oturum izni gerekli mi?"
 
-#: src/WebIfConfig.py:223
+#: src/WebIfConfig.py:225
 msgid "SSL Encryption"
 msgstr "SSL şifrelemesi"
 
-#: src/WebIfConfig.py:243
+#: src/WebIfConfig.py:245
 msgid "Really delete this Interface?"
 msgstr "Bu arayüzü silmek istiyor musunuz?"
 
