@@ -170,9 +170,7 @@ class HTTPAuthRealm(object):
 			return IHTTPUser, HTTPUser(avatarId)
 		raise NotImplementedError("Only IHTTPUser interface is supported")
 
-
-from string import find, split	
-from md5 import new as md5_new
+from hashlib import md5 as md5_new
 from crypt import crypt
 
 DES_SALT = list('./0123456789' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz') 
@@ -220,7 +218,7 @@ def check_passwd(name, passwd, pwfile=None):
     if not enc_passwd:
         return 0
     elif len(enc_passwd) >= 3 and enc_passwd[:3] == '$1$':
-        salt = enc_passwd[3:find(enc_passwd, '$', 3)]
+        salt = enc_passwd[3:enc_passwd.find('$', 3)]
         return enc_passwd == passcrypt(passwd, salt, 'md5')
        
     else:
@@ -244,7 +242,7 @@ def passcrypt_md5(passwd, salt=None, magic='$1$'):
         salt = salt[len(magic):]
 
     # salt only goes up to first '$'
-    salt = split(salt, '$')[0]
+    salt = salt.split('$')[0]
     # limit length of salt to 8
     salt = salt[:8]
 
