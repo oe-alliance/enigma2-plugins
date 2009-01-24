@@ -39,7 +39,7 @@ import re, time, os
 from nrzuname import ReverseLookupAndNotifier
 
 import gettext
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS #@UnresolvedImport
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
 try:
 	_ = gettext.translation('FritzCall', resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/locale"), [config.osd.language.getText()]).gettext
 except IOError:
@@ -48,6 +48,8 @@ except IOError:
 from enigma import getDesktop #@UnresolvedImport
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
+DESKTOP_SKIN = config.skin.primary_skin.value.replace("/skin.xml","")
+XXX = 0 # TODO: Platzhalter für fullscreen SD skin
 #
 # this is pure magic.
 # It returns the first value, if HD (1280x1024),
@@ -57,7 +59,7 @@ DESKTOP_HEIGHT = getDesktop(0).size().height()
 def scaleH(y2,y1):
 	return scale(y2,y1,1280,720,DESKTOP_WIDTH)
 def scaleV(y2,y1):
-	return scale(y2,y1,1024,576,DESKTOP_HEIGHT)
+	return scale(y2,y1,720,576,DESKTOP_HEIGHT)
 def scale(y2,y1,x2,x1,x):
 	return (y2-y1)*(x-x1)/(x2-x1)+y1
 
@@ -527,49 +529,58 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		if config.plugins.FritzCall.fullscreen.value:
 			self.width = DESKTOP_WIDTH
 			self.height = DESKTOP_HEIGHT
-			width = self.width
-			height = self.height
+			backMainPng = ""
+			if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/menu/back-main.png")):
+				backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
+			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
+				backMainPng = "Kerni-HD1-picon/menu/back-main.png"
+			if backMainPng:
+					backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" %(self.width, self.height, backMainPng)
+			else:
+				backMainLine = ""
+			debug("[FritzDisplayCalls] backMainLine: " + backMainLine)
+				
 			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.skin = """
-				<screen name="FritzDisplayCalls" position="0,0" size="%d,%d"	title="%s" flags="wfNoBorder">
-					<widget source="global.CurrentTime" render="Label" position="%d,40" size="80,26" font="Regular;26" halign="right" backgroundColor="#0b67a2" transparent="1">
+				<screen name="FritzDisplayCalls" position="0,0" size="%d,%d" title="%s" flags="wfNoBorder">
+					%s
+					<widget source="global.CurrentTime" render="Label" position="%d,%d" size="%d,%d" font="Regular;%d" halign="right" backgroundColor="#0b67a2" transparent="1">
 						<convert type="ClockToText">Default</convert>
 					</widget>
-					<widget source="global.CurrentTime" render="Label" position="%d,70" size="310,22" font="Regular;20" halign="right" backgroundColor="#0b67a2" transparent="1">
+					<widget source="global.CurrentTime" render="Label" position="%d,%d" size="%d,%d" font="Regular;%d" halign="right" backgroundColor="#0b67a2" transparent="1">
 						<convert type="ClockToText">Date</convert>
 					</widget>
-					<eLabel text="%s" position="%d,63" size="330,30" font="Regular;27" halign="center" backgroundColor="#0b67a2" transparent="1"/>
-					<widget name="statusbar" position="%d,%d"  size="%d,%d" 	font="Regular;22" backgroundColor="#353e575e" transparent="1" />
+					<eLabel text="%s" position="%d,%d" size="%d,%d" font="Regular;%d" halign="center" backgroundColor="#0b67a2" transparent="1"/>
+			
+					<widget name="statusbar" position="%d,%d"  size="%d,%d" font="Regular;%d" backgroundColor="#353e575e" transparent="1" />
 					<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" transparent="1" />
-					<ePixmap pixmap="skin_default/buttons/red.png" 		position="%d,%d" 	size="21,21" alphatest="on" />
-					<ePixmap pixmap="skin_default/buttons/green.png" 	position="%d,%d" 	size="21,21" alphatest="on" />
-					<ePixmap pixmap="skin_default/buttons/yellow.png" 	position="%d,%d" 	size="21,21" alphatest="on" />
-					<ePixmap pixmap="skin_default/buttons/blue.png" 	position="%d,%d" 	size="21,21" alphatest="on" />
-					<widget name="key_red" 		position="%d,%d" 		size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
-					<widget name="key_green" 	position="%d,%d" 		size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
-					<widget name="key_yellow" 	position="%d,%d" 		size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
-					<widget name="key_blue" 	position="%d,%d" 	size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
+			
+					<ePixmap pixmap="skin_default/buttons/red.png" 		position="%d,%d" 	size="%d,%d" alphatest="on" />
+					<ePixmap pixmap="skin_default/buttons/green.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+					<ePixmap pixmap="skin_default/buttons/yellow.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+					<ePixmap pixmap="skin_default/buttons/blue.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+					<widget name="key_red" 	position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
+					<widget name="key_green" 	position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
+					<widget name="key_yellow" 	position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
+					<widget name="key_blue" 	position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
 					<ePixmap position="%d,%d" size="%d,%d" zPosition="2" pixmap="%s" transparent="1" alphatest="blend" />		
 				</screen>""" % (
-							width, height, _("Phone calls"),
-							width -150,
-							width -380,
-							"FritzCall " + _("Phone calls"), width * 20 / 1280, # Label
-							width * 80 / 1280,	height * 150 / 720, # statusbar position
-							width * 250 / 1280, height * 200 / 720, # statusbar size
-							width * 420 / 1280,	height * 120 / 720, # entries position
-							width * 790 / 1280, height * 438 / 720, # entries size
-							25, height * 600 / 720, # red
-							25 + ((width-25)/4), height * 600 / 720, # green
-							25 + ((width-25)/4)*2, height * 600 / 720, # yellow
-							25 + ((width-25)/4)*3, height * 600 / 720, # blue
-							25+25,	height * 600 / 720, # red
-							25+25+((width-25)/4), height * 600 / 720, # green
-							25+25+((width-25)/4)*2,	height * 600 / 720, # yellow
-							25+25+((width-25)/4)*3,	height * 600 / 720, # blue
-							width * 50 / 1280,	height * 430 / 720, # Fritz Logo position
-							# width * 150 / 1280,	height * 110 / 720, # Fritz Logo size
-							150, 110, resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
+							self.width, self.height, _("Phone calls"),
+							backMainLine,
+							scaleH(1130,XXX), scaleV(40,XXX), scaleH(80,XXX), scaleV(26,XXX), scaleV(26,XXX), # time
+							scaleH(900,XXX), scaleV(70,XXX), scaleH(310,XXX), scaleV(22,XXX), scaleV(20,XXX), # date
+							"FritzCall " + _("Phone calls"), scaleH(500,XXX), scaleV(63,XXX), scaleH(330,XXX), scaleV(30,XXX), scaleV(27,XXX), # eLabel
+							scaleH(80,XXX), scaleV(150,XXX), scaleH(280,XXX), scaleV(200,XXX), scaleV(22,XXX), # statusbar
+							scaleH(420,XXX), scaleV(120,XXX), scaleH(790,XXX), scaleV(438,XXX), # entries
+							scaleH(450,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # red
+							scaleH(640,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # green
+							scaleH(830,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # yellow
+							scaleH(1020,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # blue
+							scaleH(480,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # red
+							scaleH(670,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # green
+							scaleH(860,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # yellow
+							scaleH(1050,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # blue
+							scaleH(120,XXX), scaleV(430,XXX), scaleH(150,XXX), scaleV(110,XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
 							)
 		else:
 			self.width = scaleH(1100,570)
@@ -578,9 +589,9 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 			self.skin = """
 				<screen name="FritzDisplayCalls" position="%d,%d" size="%d,%d" title="%s" >
 					<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
-					<widget name="statusbar" position="%d,%d" size="%d,%d" font="Regular;%d" backgroundColor="transpBlack" transparent="1" />
+					<widget name="statusbar" position="%d,%d" size="%d,%d" font="Regular;%d" backgroundColor="#aaaaaa" transparent="1" />
 					<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
-					<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="transpBlack" transparent="1" />
+					<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="#aaaaaa" transparent="1" />
 					<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
 					<widget name="key_red" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="red" />
 					<widget name="key_green" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="green" />
@@ -806,6 +817,17 @@ class FritzCallPhonebook:
 		if config.plugins.FritzCall.phonebook.value and os.path.exists(config.plugins.FritzCall.phonebookLocation.value):
 			phonebookTxtCorrupt = False
 			for line in open(config.plugins.FritzCall.phonebookLocation.value):
+				try:
+					line = line.decode("utf-8")
+				except UnicodeDecodeError:
+					try:
+						line = line.decode("iso-8859-1")
+						debug("[FritzCallPhonebook] Fallback to ISO-8859-1 in %s" %line)
+						phonebookTxtCorrupt = True
+					except:
+						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" %line)
+						phonebookTxtCorrupt = True
+				line = line.encode("utf-8")
 				if re.match("^\d+#.*$", line):
 					try:
 						number, name = line.split("#")
@@ -830,6 +852,10 @@ class FritzCallPhonebook:
 
 		if config.plugins.FritzCall.fritzphonebook.value:
 			fritzbox.loadFritzBoxPhonebook()
+
+		if DESKTOP_WIDTH <> 1280 or DESKTOP_HEIGHT <> 720:
+			config.plugins.FritzCall.fullscreen.value = False
+
 
 	def search(self, number):
 		# debug("[FritzCallPhonebook] Searching for %s" %number
@@ -894,48 +920,56 @@ class FritzCallPhonebook:
 			if config.plugins.FritzCall.fullscreen.value:
 				self.width = DESKTOP_WIDTH
 				self.height = DESKTOP_HEIGHT
-				width = self.width
-				height = self.height
+				backMainPng = ""
+				if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/menu/back-main.png")):
+					backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
+				elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
+					backMainPng = "Kerni-HD1-picon/menu/back-main.png"
+				if backMainPng:
+					backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" %(self.width, self.height, backMainPng)
+				else:
+					backMainLine = ""
+				debug("[FritzDisplayPhonebook] backMainLine: " + backMainLine)
+					
 				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 				self.skin = """
-					<screen name="FritzDisplayPhonebook" position="0,0" size="%d,%d" title="%s" flags="wfNoBorder">
-						<widget source="global.CurrentTime" render="Label" position="%d,40" size="80,26" font="Regular;26" halign="right" backgroundColor="#0b67a2" transparent="1">
+					<screen name="FritzdisplayPhonebook" position="0,0" size="%d,%d" title="%s" flags="wfNoBorder">
+						%s
+						<widget source="global.CurrentTime" render="Label" position="%d,%d" size="%d,%d" font="Regular;%d" halign="right" backgroundColor="#0b67a2" transparent="1">
 							<convert type="ClockToText">Default</convert>
 						</widget>
-						<widget source="global.CurrentTime" render="Label" position="%d,70" size="310,22" font="Regular;20" halign="right" backgroundColor="#0b67a2" transparent="1">
+						<widget source="global.CurrentTime" render="Label" position="%d,%d" size="%d,%d" font="Regular;%d" halign="right" backgroundColor="#0b67a2" transparent="1">
 							<convert type="ClockToText">Date</convert>
 						</widget>
-						<eLabel text="%s" position="%d,63" 	size="300,30" font="Regular;27" halign="center" backgroundColor="#0b67a2" transparent="1"/>
-	
-						<widget name="entries" 	position="%d,%d" size="%d,%d" 	scrollbarMode="showOnDemand" transparent="1" />
-	
-						<ePixmap pixmap="skin_default/buttons/red.png" 		position="%d,%d" 	size="21,21" alphatest="on" />
-						<ePixmap pixmap="skin_default/buttons/green.png" 	position="%d,%d" 	size="21,21" alphatest="on" />
-						<ePixmap pixmap="skin_default/buttons/yellow.png" 	position="%d,%d" 	size="21,21" alphatest="on" />
-						<ePixmap pixmap="skin_default/buttons/blue.png" 	position="%d,%d" 	size="21,21" alphatest="on" />
-						<widget name="key_red" 	position="%d,%d" 	size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
-						<widget name="key_green" 	position="%d,%d" 	size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
-						<widget name="key_yellow" 	position="%d,%d" 	size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
-						<widget name="key_blue" 	position="%d,%d" 	size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
+						<eLabel text="%s" position="%d,%d" size="%d,%d" font="Regular;%d" halign="center" backgroundColor="#0b67a2" transparent="1"/>
+				
+						<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" transparent="1" />
+				
+						<ePixmap pixmap="skin_default/buttons/red.png" 		position="%d,%d" 	size="%d,%d" alphatest="on" />
+						<ePixmap pixmap="skin_default/buttons/green.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+						<ePixmap pixmap="skin_default/buttons/yellow.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+						<ePixmap pixmap="skin_default/buttons/blue.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+						<widget name="key_red" 	position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
+						<widget name="key_green" 	position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
+						<widget name="key_yellow" 	position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
+						<widget name="key_blue" 	position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
 						<ePixmap position="%d,%d" size="%d,%d" zPosition="2" pixmap="%s" transparent="1" alphatest="blend" />	
 					</screen>""" % (
-								width, height, _("Phonebook"),
-								width -150,
-								width -380,
-								"FritzCall " + _("Phonebook"), width * 20 / 1280, # Label
-								width * 420 / 1280,	height * 120 / 720, # entries position
-								width * 790 / 1280, height * 438 / 720, # entries size
-								25, height * 600 / 720, # red
-								25 + ((width-25)/4), height * 600 / 720, # green
-								25 + ((width-25)/4)*2, height * 600 / 720, # yellow
-								25 + ((width-25)/4)*3, height * 600 / 720, # blue
-								25+25,	height * 600 / 720, # red
-								25+25+((width-25)/4), height * 600 / 720, # green
-								25+25+((width-25)/4)*2,	height * 600 / 720, # yellow
-								25+25+((width-25)/4)*3,	height * 600 / 720, # blue
-								width * 50 / 1280,	height * 430 / 720, # Fritz Logo position
-								# width * 150 / 1280,	height * 110 / 720, # Fritz Logo size
-								150, 110, resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
+								    self.width, self.height, _("Phonebook"),
+								    backMainLine,
+								    scaleH(1130,XXX), scaleV(40,XXX), scaleH(80,XXX), scaleV(26,XXX), scaleV(26,XXX), # time
+								    scaleH(900,XXX), scaleV(70,XXX), scaleH(310,XXX), scaleV(22,XXX), scaleV(20,XXX), # date
+								    "FritzCall " + _("Phonebook"), scaleH(80,XXX), scaleV(63,XXX), scaleH(300,XXX), scaleV(30,XXX), scaleV(27,XXX), # eLabel
+								    scaleH(420,XXX), scaleV(120,XXX), scaleH(790,XXX), scaleV(438,XXX), # entries
+								    scaleH(450,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # red
+								    scaleH(640,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # green
+								    scaleH(830,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # yellow
+								    scaleH(1020,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # blue
+								    scaleH(480,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # red
+								    scaleH(670,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # green
+								    scaleH(860,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # yellow
+								    scaleH(1050,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # blue
+								    scaleH(120,XXX), scaleV(430,XXX), scaleH(150,XXX), scaleV(110,XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
 								)
 			else:
 				self.width = scaleH(1100,570)
@@ -1017,6 +1051,15 @@ class FritzCallPhonebook:
 					continue
 				try:
 					low = low.decode("utf-8")
+				except UnicodeDecodeError:  # this should definitely not happen
+					try:
+						low = low.decode("iso-8859-1")
+					except:
+						debug("[FritzCallPhonebook] displayPhonebook/display: corrupt phonebook entry for %s" %number)
+						# self.session.open(MessageBox, _("Corrupt phonebook entry\nfor number %s\nDeleting.") %number, type = MessageBox.TYPE_ERROR)
+						phonebook.remove(number)
+						continue
+				else:
 					if filter:
 						filter = filter.lower()
 						if low.find(filter) == -1:
@@ -1038,11 +1081,6 @@ class FritzCallPhonebook:
 					self.sortlist.append([(number.encode("utf-8","replace"),
 								   name.encode("utf-8","replace")),
 								   (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, self.width-10, 20, 0, RT_HALIGN_LEFT, message)])
-				except UnicodeDecodeError:  # this should definitely not happen
-					debug("[FritzCallPhonebook] displayPhonebook/display: corrupt phonebook entry for %s" %number)
-					# self.session.open(MessageBox, _("Corrupt phonebook entry\nfor number %s\nDeleting.") %number, type = MessageBox.TYPE_ERROR)
-					phonebook.remove(number)
-					continue
 				
 			self["entries"].setList(self.sortlist)
 
@@ -1214,52 +1252,58 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		if config.plugins.FritzCall.fullscreen.value:
 			self.width = DESKTOP_WIDTH
 			self.height = DESKTOP_HEIGHT
-			width = self.width
-			height = self.height
+			backMainPng = ""
+			backMainLine = ""
+			if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/menu/back-main.png")):
+				backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
+			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
+				backMainPng = "Kerni-HD1-picon/menu/back-main.png"
+			if backMainPng:
+				backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" %(self.width, self.height, backMainPng)
+			else:
+				backMainLine = ""
+			debug("[FritzCallSetup] backMainLine: " + backMainLine)
 			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.skin = """
 				<screen name="FritzCallSetup" position="0,0" size="%d,%d" title="%s" flags="wfNoBorder">
-					<widget source="global.CurrentTime" render="Label" position="%d,40" size="80,26" font="Regular;26" halign="right" backgroundColor="#0b67a2" transparent="1">
+					%s
+					<widget source="global.CurrentTime" render="Label" position="%d,%d" size="%d,%d" font="Regular;%d" halign="right" backgroundColor="#0b67a2" transparent="1">
 						<convert type="ClockToText">Default</convert>
 					</widget>
-					<widget source="global.CurrentTime" render="Label" position="%d,70" size="310,22" font="Regular;20" halign="right" backgroundColor="#0b67a2" transparent="1">
+					<widget source="global.CurrentTime" render="Label" position="%d,%d" size="%d,%d" font="Regular;%d" halign="right" backgroundColor="#0b67a2" transparent="1">
 						<convert type="ClockToText">Date</convert>
 					</widget>
-					<eLabel text="%s" position="%d,63" size="330,30" font="Regular;27" halign="center" backgroundColor="#0b67a2" transparent="1"/>
+					<eLabel text="%s" position="%d,%d" size="%d,%d" font="Regular;%d" halign="center" backgroundColor="#0b67a2" transparent="1"/>
 			
-					<widget name="consideration" position="%d,%d" size="%d,%d" font="Regular;22" halign="center" backgroundColor="#353e575e" transparent="1" />
+					<widget name="consideration" position="%d,%d"  size="%d,%d" font="Regular;%d" halign="center" backgroundColor="#353e575e" transparent="1" />
 					<widget name="config" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" transparent="1" />
 			
-					<ePixmap pixmap="skin_default/buttons/red.png" 		position="%d,%d" 	size="21,21" alphatest="on" />
-					<ePixmap pixmap="skin_default/buttons/green.png" 	position="%d,%d" 	size="21,21" alphatest="on" />
-					<ePixmap pixmap="skin_default/buttons/yellow.png" 	position="%d,%d" 	size="21,21" alphatest="on" />
-					<ePixmap pixmap="skin_default/buttons/blue.png" 	position="%d,%d" 	size="21,21" alphatest="on" />
-					<widget name="key_red" 	position="%d,%d" 	size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
-					<widget name="key_green" 	position="%d,%d" 	size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
-					<widget name="key_yellow" 	position="%d,%d" 	size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
-					<widget name="key_blue" 	position="%d,%d" 	size="160,22" zPosition="1" font="Regular;20" halign="left" backgroundColor="black" transparent="1" />
+					<ePixmap pixmap="skin_default/buttons/red.png" 		position="%d,%d" 	size="%d,%d" alphatest="on" />
+					<ePixmap pixmap="skin_default/buttons/green.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+					<ePixmap pixmap="skin_default/buttons/yellow.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+					<ePixmap pixmap="skin_default/buttons/blue.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+					<widget name="key_red" position="%d,%d" 		size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
+					<widget name="key_green"  position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
+					<widget name="key_yellow" position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
+					<widget name="key_blue" position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
 					<ePixmap position="%d,%d" size="%d,%d" zPosition="2" pixmap="%s" transparent="1" alphatest="blend" />		
 				</screen>""" % (
-								width, height, # size
-								_("FritzCall Setup"),
-								width -150,
-								width -380,
-								_("FritzCall Setup"), width * 20 / 1280, # Label
-								width * 50 / 1280, height * 150 / 720, # consideration position
-								width * 250 / 1280,	height * 250 / 720, # consideration size
-								width * 300 / 1280,	height * 120 / 720, # config position
-								width * 950 / 1280, height * 438 / 720, # config size
-								25, height * 600 / 720, # red
-								25 + ((width-25)/4), height * 600 / 720, # green
-								25 + ((width-25)/4)*2, height * 600 / 720, # yellow
-								25 + ((width-25)/4)*3, height * 600 / 720, # blue
-								25+25,	height * 600 / 720, # red
-								25+25+((width-25)/4), height * 600 / 720, # green
-								25+25+((width-25)/4)*2,	height * 600 / 720, # yellow
-								25+25+((width-25)/4)*3,	height * 600 / 720, # blue
-								width * 50 / 1280,	height * 430 / 720, # Fritz Logo position
-								# width * 150 / 1280,	height * 110 / 720, # Fritz Logo size
-								150, 110, resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
+							    self.width, self.height, _("FritzCall Setup"),
+							    backMainLine,
+							    scaleH(1130,XXX), scaleV(40,XXX), scaleH(80,XXX), scaleV(26,XXX), scaleV(26,XXX), # time
+							    scaleH(900,XXX), scaleV(70,XXX), scaleH(310,XXX), scaleV(22,XXX), scaleV(20,XXX), # date
+							    _("FritzCall Setup"), scaleH(500,XXX), scaleV(63,XXX), scaleH(330,XXX), scaleV(30,XXX), scaleV(27,XXX), # eLabel
+							    scaleH(80,XXX), scaleV(150,XXX), scaleH(250,XXX), scaleV(200,XXX), scaleV(22,XXX), # consideration
+							    scaleH(420,XXX), scaleV(125,XXX), scaleH(790,XXX), scaleV(428,XXX), # config
+							    scaleH(450,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # red
+							    scaleH(640,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # green
+							    scaleH(830,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # yellow
+							    scaleH(1020,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # blue
+							    scaleH(480,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # red
+							    scaleH(670,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # green
+							    scaleH(860,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # yellow
+							    scaleH(1050,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # blue
+							    scaleH(120,XXX), scaleV(430,XXX), scaleH(150,XXX), scaleV(110,XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
 								) 
 		else:
 			self.width = scaleH(1100,570)
@@ -1289,7 +1333,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 							scaleV(40,50), # eLabel position vertical
 							scaleH(1100,570), # eLabel width
 							scaleH(40,5), scaleV(60,57), # config position
-							scaleH(1040,560), scaleV(458,328), # config size
+							scaleH(1040,560), scaleV(453,328), # config size
 							scaleV(518,390), # eLabel position vertical
 							scaleH(1100,570), # eLabel width
 							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget red
@@ -1390,7 +1434,8 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 			self.list.append(getConfigListEntry(_("Strip Leading 0"), config.plugins.FritzCall.internal))
 			# self.list.append(getConfigListEntry(_("Default display mode for FRITZ!Box calls"), config.plugins.FritzCall.fbfCalls))
-			# TODO: self.list.append(getConfigListEntry(_("Full screen display"), config.plugins.FritzCall.fullscreen))
+			if DESKTOP_WIDTH == 1280 and DESKTOP_HEIGHT == 720:
+				self.list.append(getConfigListEntry(_("Full screen display"), config.plugins.FritzCall.fullscreen))
 			self.list.append(getConfigListEntry(_("Debug"), config.plugins.FritzCall.debug))
 
 		self["config"].list = self.list
