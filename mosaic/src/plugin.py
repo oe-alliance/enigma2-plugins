@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 # Mosaic by AliAbdul
-# needs the aio-screengrabber v0.8 by seddi
 from Components.ActionMap import NumberActionMap
 from Components.config import config, ConfigSubsection, ConfigInteger
 from Components.Console import Console
@@ -14,7 +13,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.ChannelSelection import BouquetSelector
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 import gettext
 
@@ -159,23 +158,19 @@ class Mosaic(Screen):
 		self.checkTimer.start(500, 1)
 
 	def checkGrab(self):
-		if fileExists(grab_binary):
-			# Start the first service in the bouquet and show the service-name
-			ref = self.ref_list[0]
-			self.window_refs[0] = ref
-			info = self.serviceHandler.info(ref)
-			name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
-			event_name = self.getEventName(info, ref)
-			self["channel1"].setText(name)
-			self["event1"].setText(event_name)
-			self.session.nav.playService(ref)
-			self["count"].setText(_("Channel: ") + "1 / " + str(len(self.ref_list)))
-			self["playState"].instance.setPixmap(playingIcon)
-			
-			# Start updating the video-screenshots
-			self.updateTimer.start(1, 1)
-		else:
-			self.session.openWithCallback(self.exit, MessageBox, _("%s does not exist!") % grab_binary, MessageBox.TYPE_ERROR, timeout=5)
+		# Start the first service in the bouquet and show the service-name
+		ref = self.ref_list[0]
+		self.window_refs[0] = ref
+		info = self.serviceHandler.info(ref)
+		name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
+		event_name = self.getEventName(info, ref)
+		self["channel1"].setText(name)
+		self["event1"].setText(event_name)
+		self.session.nav.playService(ref)
+		self["count"].setText(_("Channel: ") + "1 / " + str(len(self.ref_list)))
+		self["playState"].instance.setPixmap(playingIcon)
+		# Start updating the video-screenshots
+		self.updateTimer.start(1, 1)
 
 	def exit(self, callback=None):
 		self.deleteConsoleCallbacks()
