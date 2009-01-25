@@ -39,7 +39,7 @@ msgid "EPGRefresh Services"
 msgstr "EPGRefresh Kanäle"
 
 msgid "Edit Services"
-msgstr "Kanäle bearbeiten"
+msgstr "Kanäle"
 
 msgid "Edit Services to refresh"
 msgstr "Kanal zur Aktualisierung auswählen"
@@ -72,7 +72,7 @@ msgid "Refresh automatically"
 msgstr "Automatisch aktualisieren"
 
 msgid "Refresh now"
-msgstr "Jetzt aktualisieren"
+msgstr "Aktualisieren"
 
 msgid "Refreshing"
 msgstr "Aktualisiere"
