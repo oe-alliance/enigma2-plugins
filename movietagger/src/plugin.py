@@ -1,7 +1,3 @@
-# this is free software. use it for whatever you what or modify it.
-# but dont remove these three lines and dont publish only .pyc-files of these files!
-# 3c5x9, 3c5x9@gmx.de
-
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.Label import Label

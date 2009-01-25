@@ -1,6 +1,3 @@
-# (c) 2006 3c5x9, dream@3c5x9.de
-# This Software is Free, use it where you want, when you want for whatever you want and modify it if you want. but don't remove my copyright!
-
 from Screens.Screen import Screen
 from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
@@ -14,25 +11,25 @@ from enigma import ePoint, eSize
 #############
 from ConfigParser import ConfigParser, DEFAULTSECT, DuplicateSectionError
 
-###############################################################################        
-myname = "AntiScrollbar"     
+###############################################################################
+myname = "AntiScrollbar"
 myversion = "0.1"
-###############################################################################        
+###############################################################################
 class AntiScrollMain(Screen):
-    step = 5    
+    step = 5
     def __init__(self, session, args = 0):
         config = AntiScrollConfig()
         try:
           profil = config.getLastProfile()
           self.size = [profil["sizex"],profil["sizey"]]
-          self.position = [profil["posx"],profil["posy"]]             
+          self.position = [profil["posx"],profil["posy"]]
         except Exception:
           config.setProfile("standard",[200,200],[200,200])
-          config = AntiScrollConfig()          
+          config = AntiScrollConfig()
           profil = config.getProfile("standard")
-          
+
         self.size = [profil["sizex"],profil["sizey"]]
-        self.position = [profil["posx"],profil["posy"]]           
+        self.position = [profil["posx"],profil["posy"]]
         ss  ="<screen position=\"%i,%i\" size=\"%i,%i\" title=\"%s\"  flags=\"wfNoBorder\" >" %(profil["posx"],profil["posy"],profil["sizex"],profil["sizey"],myname)
         ss +="<widget name=\"label\" position=\"0,0\" size=\"%i,%i\"  backgroundColor=\"black\"  />" %(profil["sizex"],profil["sizey"])
         ss +="</screen>"
@@ -41,7 +38,7 @@ class AntiScrollMain(Screen):
         Screen.__init__(self, session)
         self.menu = args
         self["label"] = Label()
-        self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions","NumberActions"], 
+        self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions","NumberActions"],
             {
              "ok":     self.go,
              "back":     self.close,
@@ -55,61 +52,61 @@ class AntiScrollMain(Screen):
              "4":    self.key4,
              "6":    self.key6,
                  }, -1)
-        
+
 
     def go(self):
       pass
-  
+
     def openmenu(self):
       self.session.open(AntiScrollMenu,callback=self.menuCallback,size=self.size,position=self.position)
-    
+
     def menuCallback(self,size,position):
       self.size = size
       self.position = position
       self.move(self.position[0],self.position[1])
       self.resize(self.size[0],self.size[1])
-       
+
     def key2(self):
       self.size= [self.size[0],self.size[1]-self.step]
       self.resize(self.size[0],self.size[1])
-    
+
     def key8(self):
       self.size= [self.size[0],self.size[1]+self.step]
       self.resize(self.size[0],self.size[1])
-    
+
     def key4(self):
       self.size= [self.size[0]-self.step,self.size[1]]
       self.resize(self.size[0],self.size[1])
-    
+
     def key6(self):
       self.size= [self.size[0]+self.step,self.size[1]]
       self.resize(self.size[0],self.size[1])
-    
+
     def down(self):
       self.position = [self.position[0],self.position[1]+self.step]
       self.move(self.position[0],self.position[1])
-    
+
     def up(self):
       self.position = [self.position[0],self.position[1]-self.step]
       self.move(self.position[0],self.position[1])
-    
+
     def left(self):
       self.position = [self.position[0]-self.step,self.position[1]]
       self.move(self.position[0],self.position[1])
-    
+
     def right(self):
       self.position = [self.position[0]+self.step,self.position[1]]
       self.move(self.position[0],self.position[1])
-    
+
     def move(self, x, y):
       print "["+myname+"] moving to", str(x) + ":" + str(y)
       self.instance.move(ePoint(x, y))
-      
+
     def resize(self, w, h):
       print "["+myname+"] resizing to", str(w) + "x" + str(h)
       self.instance.resize(eSize(*(w, h)))
       self["label"].instance.resize(eSize(*(w, h)))
-  
+
 #############################
 class  AntiScrollMenu(Screen):
   def __init__(self,session,callback=None,size=None,position=None,arg=0):
@@ -118,7 +115,7 @@ class  AntiScrollMenu(Screen):
     self.size= size
     self.position = position
     ss  ="<screen position=\"200,200\" size=\"300,200\" title=\"%s Menu\" >" % myname
-    ss +="<widget name=\"menu\" position=\"0,0\" size=\"300,150\" scrollbarMode=\"showOnDemand\" />" 
+    ss +="<widget name=\"menu\" position=\"0,0\" size=\"300,150\" scrollbarMode=\"showOnDemand\" />"
     ss +="<widget name=\"label\" position=\"0,150\" size=\"300,50\"  font=\"Regular;18\" valign=\"center\" halign=\"center\" />"
     ss +="</screen>"
     self.skin = ss
@@ -137,29 +134,29 @@ class  AntiScrollMenu(Screen):
   def go(self):
     selection = self["menu"].getCurrent()
     selection[1]()
-  
+
   def load(self):
     config = AntiScrollConfig()
     liste = []
     for i in config.getProfiles():
       liste.append((i,i))
     self.session.openWithCallback(self.loadProfile,ChoiceBox,_("select Profile to load"),liste)
-    
+
   def loadProfile(self,value):
     if value is not None:
       config = AntiScrollConfig()
       profil = config.getProfile(value[1])
       if profil is not False:
         self.callBack([profil["sizex"],profil["sizey"]],[profil["posx"],profil["posy"]])
-  
+
   def savenew(self):
     self.session.openWithCallback(self.profilnameEntered,InputBox, title=_("Please enter a name for the Profile"), text="Profil", maxSize=False, type=Input.TEXT)
-    
+
   def profilnameEntered(self,value):
     if value is not None:
       config = AntiScrollConfig()
-      config.setProfile(value,self.size,self.position)   
-  
+      config.setProfile(value,self.size,self.position)
+
   def save(self):
     config = AntiScrollConfig()
     liste = []
@@ -170,12 +167,12 @@ class  AntiScrollMenu(Screen):
     if value is not None:
       config = AntiScrollConfig()
       config.setProfile(value[1],self.size,self.position)
-                       
-                          
+
+
 ##############################
 class AntiScrollConfig:
     configfile = "/etc/enigma2/AntiScrollbar.conf"
-    
+
     def __init__(self):
         self.configparser = ConfigParser()
         self.configparser.read(self.configfile)
@@ -183,7 +180,7 @@ class AntiScrollConfig:
         self.configparser.set(DEFAULTSECT,"lastprofile",name)
         self.writeConfig()
     def getLastProfile(self):
-        last = self.configparser.get(DEFAULTSECT,"lastprofile")    
+        last = self.configparser.get(DEFAULTSECT,"lastprofile")
         return self.getProfile(last)
     def getProfiles(self):
         profiles=[]
@@ -217,7 +214,7 @@ class AntiScrollConfig:
         except DuplicateSectionError:
           self.deleteProfile(name)
           self.setProfile(name,size,position)
-                                                                                                    
+
     def deleteProfile(self,name):
         self.configparser.remove_section(name)
         self.writeConfig()
@@ -226,24 +223,24 @@ class AntiScrollConfig:
         fp = open(self.configfile,"w")
         self.configparser.write(fp)
         fp.close()
-                            
-    
-activebar = None 
+
+
+activebar = None
 #############################
 def showhide(session, **kwargs):
     global activebar
     if activebar is None:
         activebar = session.instantiateDialog(AntiScrollMain)
-    
+
     if activebar.shown:
         activebar.hide()
     else:
         activebar.show()
     print dir(activebar)
-    
+
 def main(session, **kwargs):
   session.open(AntiScrollMain)
-  
+
 def Plugins(**kwargs):
   return [PluginDescriptor(name=myname,description="overlay for scrolling bars",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main, icon="plugin.png"),
           PluginDescriptor(name=myname+" show/hide",where = PluginDescriptor.WHERE_EXTENSIONSMENU,fnc = showhide)]

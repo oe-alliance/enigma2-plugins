@@ -1,25 +1,3 @@
-###############################################################################
-# Copyright (c) 2008 Rico Schulte, 3c5x9. All rights reserved.
-#
-# Permission is hereby granted, free of charge, to any person obtaining a
-# copy of this software and associated documentation files (the "Software"),
-# to deal in the Software without restriction, including without limitation
-# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-# and/or sell copies of the Software, and to permit persons to whom the
-# Software is furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included
-# in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-# DEALINGS IN THE SOFTWARE.
-###############################################################################
-
 import urllib
 from twisted.web.client import getPage
 from xml.dom.minidom import parseString
@@ -70,10 +48,10 @@ def applySkinVars(skin,dict):
 def getURL(x,y,z):
     url = "http://khm1.google.com/kh?v=32&hl=de&x=%i&y=%i&z=%i"%(x,y,z)
     return url
-   
+
 def getMapURL(x,y,z):
     url = "http://mt1.google.com/mt?v=w2t.86&hl=de&x=%i&y=%i&z=%i&s=G"%(x,y,z)
-    return url   
+    return url
 
 def getMaptilesFromLonLat(lon,lat,zoomlevel):
     # calc map tiles
@@ -87,9 +65,9 @@ class GoogleMapsConfigScreen(ConfigListScreen,Screen):
     skin = """
         <screen position="100,100" size="550,400" title="Google Maps Setup" >
         <widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
-        <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/> 
-        <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/> 
-        <widget name="label" position="240,360" size="200,40"  valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/> 
+        <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
+        <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
+        <widget name="label" position="240,360" size="200,40"  valign="center" halign="center" zPosition="1"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
     def __init__(self, session, args = 0):
         self.session = session
@@ -102,7 +80,7 @@ class GoogleMapsConfigScreen(ConfigListScreen,Screen):
         self.list.append(getConfigListEntry(_("enable caching of Images in /tmp/"), config.plugins.GoogleMaps.cache_enabled))
         self.list.append(getConfigListEntry(_("show Preview Image for Searchresults"), config.plugins.GoogleMaps.show_preview_on_searchresults))
         self.list.append(getConfigListEntry(_("default Zoomlevel for Preview Images"), config.plugins.GoogleMaps.default_zoomlevel_for_searchresults))
-        
+
         ConfigListScreen.__init__(self, self.list)
         self["buttonred"] = Label(_("cancel"))
         self["buttongreen"] = Label(_("ok"))
@@ -150,80 +128,80 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
     <widget name="pic8o" position="{pixmap8.pos}" size="{pixmap.size}" zPosition="2" alphatest="blend"/>
     <widget name="pic9" position="{pixmap9.pos}" size="{pixmap.size}" zPosition="1" alphatest="blend"/>
     <widget name="pic9o" position="{pixmap9.pos}" size="{pixmap.size}" zPosition="2" alphatest="blend"/>
-    
+
     <!-- widget name="infopanel" position="{infopanel.pos}" size="{infopanel.size}" zPosition="0"  backgroundColor="blue" //-->
     <widget name="posx" position="{posx.pos}" size="{posx.size}" font="{font}" zPosition="1" />
     <widget name="posy" position="{posy.pos}" size="{posy.size}" font="{font}" zPosition="1" />
     <widget name="posz" position="{posz.pos}" size="{posz.size}" font="{font}" zPosition="1" />
     <widget name="placeslist" position="{placeslist.pos}" size="{placeslist.size}" zPosition="1"/>
-    <widget name="buttonmenu" position="{buttonmenu.pos}" size="{buttonmenu.size}" font="{font}" halign="center" valign="center"  zPosition="1"/>        
-    <widget name="buttonsearch" position="{buttonsearch.pos}" size="{buttonsearch.size}" font="{font}" halign="center" valign="center"  zPosition="1"  backgroundColor="red"/>        
+    <widget name="buttonmenu" position="{buttonmenu.pos}" size="{buttonmenu.size}" font="{font}" halign="center" valign="center"  zPosition="1"/>
+    <widget name="buttonsearch" position="{buttonsearch.pos}" size="{buttonsearch.size}" font="{font}" halign="center" valign="center"  zPosition="1"  backgroundColor="red"/>
     <widget name="buttonhelp" position="{buttonhelp.pos}" size="{buttonhelp.size}" font="{font}" halign="center" valign="center"  zPosition="1"/>
 
             </screen>
             """
     def __init__(self, session):
         self.session = session
-        size_w = int(getDesktop(0).size().width()*0.9)    
+        size_w = int(getDesktop(0).size().width()*0.9)
         size_h = int(getDesktop(0).size().height()*0.9)
         pos_w = int((getDesktop(0).size().width()-size_w)/2)
-        pos_h = int((getDesktop(0).size().height()-size_h)/2)        
+        pos_h = int((getDesktop(0).size().height()-size_h)/2)
         p_h = int(size_h/3)
-                
+
         infopanel_width = int(size_w - (p_h*3))
         infopanel_height = size_h
         label_height = 30
         font = "Regular;21"
         self.dict = {
-                
+
                 'font': font,
-                
+
                 'screen.size': "%i,%i"%(size_w,size_h),
                 'screen.position': "%i,%i"%(pos_w,pos_h),
                 'pixmap.size': '%i,%i'%(p_h,p_h),
-                
+
                 'pixmap1.pos': '0,0',
                 'pixmap2.pos': '%i,0'%(p_h),
                 'pixmap3.pos': '%i,0'%(int(p_h*2)),
-                
+
                 'pixmap4.pos': '0,%i'%(p_h),
                 'pixmap5.pos': '%i,%i'%(p_h,p_h),
                 'pixmap6.pos': '%i,%i'%(int(p_h*2),p_h),
-                
+
                 'pixmap7.pos': '0,%i'%(int(p_h*2)),
                 'pixmap8.pos': '%i,%i'%(p_h,int(p_h*2)),
                 'pixmap9.pos': '%i,%i'%(int(p_h*2),int(p_h*2)),
-                
+
                 'infopanel.pos': '%i,0'%(int(p_h*3)),
                 'infopanel.size': '%i,%i'%(infopanel_width,infopanel_height),
-                
+
                 'posx.pos': '%i,0'%(int(p_h*3)),
                 'posx.size': '%i,%i'%(infopanel_width,label_height),
-                
+
                 'posy.pos': '%i,%i'%(int(p_h*3),label_height),
                 'posy.size': '%i,%i'%(infopanel_width,label_height),
-                
+
                 'posz.pos': '%i,%i'%(int(p_h*3),int(label_height*2)),
                 'posz.size': '%i,%i'%(infopanel_width,label_height),
-                
+
                 'placeslist.pos': '%i,%i'%(int(p_h*3),int(label_height*3)),
                 'placeslist.size': '%i,%i'%(infopanel_width,int(infopanel_height-(label_height*4))),
 
                 'buttonmenu.pos': '%i,%i'%(int(p_h*3),int(infopanel_height-(label_height*4)+(label_height*3))),
                 'buttonmenu.size': '%i,%i'%(int(infopanel_width/3),label_height),
-                
+
                 'buttonsearch.pos': '%i,%i'%(int(p_h*3+(infopanel_width/3)),int(infopanel_height-(label_height*4)+(label_height*3))),
                 'buttonsearch.size': '%i,%i'%(int(infopanel_width/3),label_height),
-                
+
                 'buttonhelp.pos': '%i,%i'%(int(p_h*3+((infopanel_width/3)*2)),int(infopanel_height-(label_height*4)+(label_height*3))),
                 'buttonhelp.size': '%i,%i'%(int(infopanel_width/3),label_height),
-                
+
                 }
-        
+
         self.skin = applySkinVars(GoogleMapsMainScreen.raw_skin,self.dict)
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)
-    
+
         #self["infopanel"] = Label()
         self["posx"] = Label("")
         self["posy"] = Label("")
@@ -232,7 +210,7 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
         self["buttonmenu"] = Label(_("Menu"))
         self["buttonsearch"] = Label(_("Search"))
         self["buttonhelp"] = Label(_("Help"))
-        
+
         #self["pic1b"] = WebPixmap(default=plugin_path+not_found_pic)
         self["pic1"] = WebPixmap(default=plugin_path+not_found_pic)
         self["pic2"] = WebPixmap(default=plugin_path+not_found_pic)
@@ -243,7 +221,7 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
         self["pic7"] = WebPixmap(default=plugin_path+not_found_pic)
         self["pic8"] = WebPixmap(default=plugin_path+not_found_pic)
         self["pic9"] = WebPixmap(default=plugin_path+not_found_pic)
-        
+
         self["pic1o"] = WebPixmap(default=plugin_path+not_found_pic_overlay)
         self["pic2o"] = WebPixmap(default=plugin_path+not_found_pic_overlay)
         self["pic3o"] = WebPixmap(default=plugin_path+not_found_pic_overlay)
@@ -253,7 +231,7 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
         self["pic7o"] = WebPixmap(default=plugin_path+not_found_pic_overlay)
         self["pic8o"] = WebPixmap(default=plugin_path+not_found_pic_overlay)
         self["pic9o"] = WebPixmap(default=plugin_path+not_found_pic_overlay)
-        
+
         self["actionmap"] = ActionMap(["OkCancelActions", "NumberActions","DirectionActions","MenuActions","ColorActions","InfobarChannelSelection"],
             {
              "cancel": self.close,
@@ -271,9 +249,9 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
              "red": self.openSearchScreen,
              "menu": self.keymenu,
              "historyNext": self.toggleMapOverlay,
-             
+
              }, -1)
-        
+
         self.helpList.append((self["actionmap"], "OkCancelActions", [("cancel", _("quit Google Maps"))]))
         self.helpList.append((self["actionmap"], "DirectionActions", [("up", _("navigate thru Placemarks"))]))
         self.helpList.append((self["actionmap"], "DirectionActions", [("down", _("navigate thru Placemarks"))]))
@@ -292,20 +270,20 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
         self.helpList.append((self["actionmap"], "NumberActions", [("0",'zoom out')]))
         self.helpList.append((self["actionmap"], "ColorActions", [("red",'open Search Screen')]))
         self.helpList.append((self["actionmap"], "InfobarChannelSelection", [("historyNext",'show/unshow Map Overlay')]))
-        
+
         self.onLayoutFinish.append(self.onLayoutFinished)
 
     def getRandomNumber(self):
         """ returning a real random number """
         return 4 # fairly choosen by using a dice
-    
+
     def openSearchScreen(self):
         self.session.openWithCallback(self.searchCB,GoogleMapsGeoSearchScreen)
-    
+
     def searchCB(self,result,adress,x,y,zoomlevel):
         if result:
             self.setNewXYZ(x,y,zoomlevel)
-            
+
     def buildMenuRoot(self):
         list = []
         root = RootFolder()
@@ -324,13 +302,13 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
         for folderx in folderx.getFolders():
             l = lambda name,folder: self.openFolder(name,folder)
             list.append(("+ "+folderx.name,folderx,l))
-        
+
         for placex in folderx.getPlacemarks():
             l = lambda name,place: self.showPlace(name,place)
             list.append((""+placex.name,placex,l))
-        
+
         self["placeslist"].setList(list)
-    
+
     def openFolder(self,name,foldery):
         print  "open Folder",name,foldery
         list = []
@@ -340,28 +318,28 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
         else:
             l = lambda name,folder: self.openFolder(name,folder)
             list.append(("..",foldery.parent,l))
-            
+
         for folderx in foldery.getFolders():
             l = lambda name,folder: self.openFolder(name,folder)
             list.append(("+ "+folderx.name,folderx,l))
-        
+
         for placex in foldery.getPlacemarks():
             l = lambda name,place: self.showPlace(name,place)
             list.append((""+placex.name,placex,l))
-        
+
         self["placeslist"].setList(list)
-       
+
     def showPlace(self,name,place):
-        #print "show Place",name,place 
+        #print "show Place",name,place
         x,y,z = place.getTile(self.z)
-        self.setNewXYZ(x,y,z)  
-    
-    def onLayoutFinished(self):  
+        self.setNewXYZ(x,y,z)
+
+    def onLayoutFinished(self):
         self.buildMenuRoot()
         self.setNewXYZ(config.plugins.GoogleMaps.position.x.value,
                        config.plugins.GoogleMaps.position.y.value,
                        config.plugins.GoogleMaps.position.z.value)
-        
+
     #################
     def toggleMapOverlay(self):
         if config.plugins.GoogleMaps.load_map_overlay.value is True:
@@ -371,63 +349,63 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
         self.setNewXYZ(config.plugins.GoogleMaps.position.x.value,
                        config.plugins.GoogleMaps.position.y.value,
                        config.plugins.GoogleMaps.position.z.value)
-        
+
     def keymenu(self):
         self.session.openWithCallback(self.menuCB,GoogleMapsConfigScreen)
-    
+
     def menuCB(self,dummy):
         self.setNewXYZ(config.plugins.GoogleMaps.position.x.value,
                        config.plugins.GoogleMaps.position.y.value,
                        config.plugins.GoogleMaps.position.z.value)
-        
+
     def keyOk(self):
         listentry = self["placeslist"].getCurrent()
         if listentry is not None:
             if listentry[1] is not None:
                 listentry[2](listentry[0],listentry[1])
 
-    def key1(self):  
+    def key1(self):
         # northwest
         self.setNewXYZ(self.x-1,self.y-1,self.z)
-    
-    def key3(self):  
+
+    def key3(self):
         # northeast
         self.setNewXYZ(self.x+1,self.y-1,self.z)
-    
-    def key7(self):  
+
+    def key7(self):
         # southwest
         self.setNewXYZ(self.x-1,self.y+1,self.z)
-    
-    def key9(self):  
+
+    def key9(self):
         # southeast
         self.setNewXYZ(self.x+1,self.y+1,self.z)
-    
+
     #################
     def key2(self):
         # north
         self.setNewXYZ(self.x,self.y-1,self.z)
-        
+
     def key8(self):
         # south
         self.setNewXYZ(self.x,self.y+1,self.z)
-        
+
     def key4(self):
         # west
         self.setNewXYZ(self.x-1,self.y,self.z)
-        
+
     def key6(self):
         # east
         self.setNewXYZ(self.x+1,self.y,self.z)
-        
+
     #################
     def key5(self):
         #zoom in
-        self.setNewXYZ(self.x*2,self.y*2+1,self.z+1)        
-    
+        self.setNewXYZ(self.x*2,self.y*2+1,self.z+1)
+
     def key0(self):
         #zoom out
-        self.setNewXYZ(self.x/2,self.y/2,self.z-1)        
-       
+        self.setNewXYZ(self.x/2,self.y/2,self.z-1)
+
     #################
     def setNewXYZ(self,x,y,z):
         print x,y,z
@@ -437,14 +415,14 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
         self.y = y
         self.z = z
         if config.plugins.GoogleMaps.save_last_position.value:
-            config.plugins.GoogleMaps.position.x.value = x    
-            config.plugins.GoogleMaps.position.y.value = y 
-            config.plugins.GoogleMaps.position.z.value = z 
-        
+            config.plugins.GoogleMaps.position.x.value = x
+            config.plugins.GoogleMaps.position.y.value = y
+            config.plugins.GoogleMaps.position.z.value = z
+
         self["posx"].setText(_('Pos.')+" X: "+str(x))
         self["posy"].setText(_('Pos.')+" Y: "+str(y))
         self["posz"].setText(_('Zoom')+" : "+str(z))
-        
+
         self["pic1"].load(getURL(x-1,y-1,z))
         self["pic2"].load(getURL(x,y-1,z))
         self["pic3"].load(getURL(x+1,y-1,z))
@@ -485,7 +463,7 @@ class GoogleMapsMainScreen(Screen,HelpableScreen):
             self["pic8o"].hide()
             self["pic9o"].hide()
 
-        
+
 ##################################
 
 class GoogleMapsGeoSearchScreen(InputBox):
@@ -495,68 +473,68 @@ class GoogleMapsGeoSearchScreen(InputBox):
                 <widget name="input" position="{input.position}" size="{input.size}" font="Regular;23"/>
                 <widget name="list" position="{list.position}" size="{list.size}" />
                 <widget name="infotext" position="{infotext.position}" size="{infotext.size}"   font="Regular;20"/>
-                
+
                 <widget name="preview" position="{preview.position}" size="{preview.size}"  zPosition="1" alphatest="blend"/>
                 <widget name="previewo" position="{preview.position}" size="{preview.size}"  zPosition="2" alphatest="blend"/>
             </screen>
             """
     def __init__(self,session):
         self.session = session
-        screen_size_w = int(getDesktop(0).size().width()*0.9)    
+        screen_size_w = int(getDesktop(0).size().width()*0.9)
         screen_size_h = int(getDesktop(0).size().height()*0.9)
         screen_pos_w = int((getDesktop(0).size().width()-screen_size_w)/2)
         screen_pos_h = int((getDesktop(0).size().height()-screen_size_h)/2)
-        
+
         label_height = 30
         offset = 5
-        
+
         list_h = int(screen_size_h-(label_height*3)-(offset*5))
         list_w = int((screen_size_w/2)-offset)
         list_pos_x = offset
         list_pos_y = int((offset*3)+(label_height*2))
-                
+
         font = "Regular;21"
         skindict = {
-                
+
                 'font': font,
-                
+
                 'screen.size': "%i,%i"%(screen_size_w,screen_size_h),
                 'screen.position': "%i,%i"%(screen_pos_w,screen_pos_h),
-                
+
                 'text.position': "%i,%i"%(offset,offset),
                 'text.size': "%i,%i"%(list_w-offset,label_height),
-                
+
                 'input.position': "%i,%i"%(offset,(offset*2)+label_height),
                 'input.size': "%i,%i"%(list_w-offset,label_height),
-                
+
                 'list.position': "%i,%i"%(list_pos_x,list_pos_y),
                 'list.size': "%i,%i"%(list_w-offset,list_h),
-                
+
                 "infotext.position": "%i,%i"%(offset,list_pos_y+list_h+offset),
                 "infotext.size": "%i,%i"%(int(screen_size_w-(offset*2)),label_height),
-                
+
                 'preview.position': "%i,%i"%(offset+list_w,offset),
                 'preview.size': "%i,%i"%(list_w-offset,screen_size_h-(offset*3)-label_height),
-                
+
                 }
-        
+
         self.skin = applySkinVars(GoogleMapsGeoSearchScreen.raw_skin,skindict)
-        
+
         self["list"] = MenuList([])
         self["list"].onSelectionChanged.append(self.onListSelectionChanged)
         self["preview"] = WebPixmap(default=plugin_path+not_found_pic)
         self["previewo"] = WebPixmap(default=plugin_path+not_found_pic_overlay)
         self["infotext"] = Label("")
-                
+
         InputBox.__init__(self,session, title = "Please enter a City or Locationname:", windowTitle = _("GoogleMaps Search"),text=config.plugins.GoogleMaps.last_searchkey.value)
         self.onLayoutFinish.append(self.onLayoutFinished)
-        
+
         self.do_preview_timer = eTimer()
         self.do_search_timer = eTimer()
 
     def onLayoutFinished(self):
-        self.doSearch(self["input"].getText())    
-    
+        self.doSearch(self["input"].getText())
+
     def onListSelectionChanged(self):
         listitem = self["list"].getCurrent()
         self.do_preview_timer.stop()
@@ -569,14 +547,14 @@ class GoogleMapsGeoSearchScreen(InputBox):
             self.do_preview_timer.start(1500)
         else:
             pass #print "nothing selected"
-    
+
     def loadPreview(self,lon,lat):
         self.do_preview_timer.stop()
         if config.plugins.GoogleMaps.show_preview_on_searchresults.value:
             zoomlevel = config.plugins.GoogleMaps.default_zoomlevel_for_searchresults.value
             gx,gy = getMaptilesFromLonLat(lon,lat,zoomlevel)
             self["preview"].load(getURL(gx, gy, zoomlevel))
-            self["previewo"].load(getMapURL(gx, gy, zoomlevel))    
+            self["previewo"].load(getMapURL(gx, gy, zoomlevel))
 
     def keyNumberGlobal(self, number):
         self["input"].number(number)
@@ -587,7 +565,7 @@ class GoogleMapsGeoSearchScreen(InputBox):
         self.do_search_timer.start(1000)
 
         #self.doSearch(self["input"].getText())
-    
+
     def go(self):
         # overwritten from InputBox
         listitem = self["list"].getCurrent()
@@ -596,7 +574,7 @@ class GoogleMapsGeoSearchScreen(InputBox):
             zoomlevel = config.plugins.GoogleMaps.default_zoomlevel_for_searchresults.value
             gx,gy = getMaptilesFromLonLat(lon,lat,zoomlevel)
             self.close(True,adress,gx,gy,zoomlevel)
-    
+
     def cancel(self):
         # overwritten from InputBox
         rcinput = eRCInput.getInstance()
@@ -604,16 +582,16 @@ class GoogleMapsGeoSearchScreen(InputBox):
         self.do_preview_timer.stop()
         self.do_search_timer.stop()
         self.close(False,False,False,False,False)
-            
+
     def doSearch(self,searchkey):
         self.do_search_timer.stop()
         config.plugins.GoogleMaps.last_searchkey.value = searchkey
         self["infotext"].setText("searching with '%s' ..."%(searchkey))
         s = urllib.quote(searchkey)
         url = "http://maps.google.com/maps/geo?q=%s&output=xml&key=abcdefg&oe=utf8"%s
-        cb = lambda result: self.onLoadFinished(searchkey,result) 
+        cb = lambda result: self.onLoadFinished(searchkey,result)
         getPage(url).addCallback(cb).addErrback(self.onLoadFailed)
-    
+
     def onLoadFinished(self,searchkey,result):
         xmldoc = parseString(result)
         list = []
@@ -621,18 +599,18 @@ class GoogleMapsGeoSearchScreen(InputBox):
             adress = i.getElementsByTagName('address')[0].firstChild.data.encode('utf-8')
             lon,lat,unknown = i.getElementsByTagName('coordinates')[0].firstChild.data.encode("utf-8").split(",")
             list.append((adress,[adress,float(lon),float(lat)]))
-        
+
         self["list"].setList(list)
-        
+
         if len(list):
             self["infotext"].setText("found %i Locations with '%s'"%(len(list),searchkey))
         else:
             self["infotext"].setText("nothing found with '%s'"%(searchkey))
-    
+
     def onLoadFailed(self,reason):
         print reason
-        self["infotext"].setText(str(reason)) 
-    
+        self["infotext"].setText(str(reason))
+
 ##################################
 
 def start_from_mainmenu(menuid, **kwargs):
@@ -650,15 +628,15 @@ def start_from_pluginmenu(session,**kwargs):
     originalservice = session.nav.getCurrentlyPlayingServiceReference()
     if  config.plugins.GoogleMaps.stop_service_on_start.value:
         session.nav.stopService()
-    session.openWithCallback(mainCB,GoogleMapsMainScreen)    
+    session.openWithCallback(mainCB,GoogleMapsMainScreen)
 
 def mainCB():
     global originalservice,mysession
     mysession.nav.playService(originalservice)
-    config.plugins.GoogleMaps.position.x.save()    
-    config.plugins.GoogleMaps.position.y.save()    
-    config.plugins.GoogleMaps.position.z.save()    
-    
+    config.plugins.GoogleMaps.position.x.save()
+    config.plugins.GoogleMaps.position.y.save()
+    config.plugins.GoogleMaps.position.z.save()
+
 def Plugins(path,**kwargs):
     global plugin_path
     plugin_path = path+"/"
