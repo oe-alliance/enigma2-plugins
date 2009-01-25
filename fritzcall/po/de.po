@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-31 16:41+0100\n"
-"PO-Revision-Date: 2008-12-26 14:06+0100\n"
+"POT-Creation-Date: 2009-01-25 09:46+0100\n"
+"PO-Revision-Date: 2009-01-25 09:43+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. TRANSLATORS: this is a help text, keep it short
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Add entry to phonebook"
 msgstr "Neuer Telefonbucheintrag"
 
@@ -86,17 +85,6 @@ msgstr ""
 "neuer Versuch..."
 
 #, python-format
-msgid ""
-"Corrupt phonebook entry\n"
-"for number %d\n"
-"Deleting."
-msgstr ""
-"Fehlerhafter Eintrag im\n"
-"Telefonbuch für Nummer\n"
-"%d\n"
-"Wird entfernt."
-
-#, python-format
 msgid "Could not load calls from FRITZ!Box - Error: %s"
 msgstr "Konnte verpasste Anrufe nicht von FRITZ!Box laden - Fehler: %s"
 
@@ -110,6 +98,9 @@ msgstr "Konnte Eintrag in FRITZ!Box-Telefonbuch nicht lesen"
 msgid "Country"
 msgstr "Land"
 
+msgid "Debug"
+msgstr "Debug"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
 msgstr "Löschen"
@@ -117,6 +108,10 @@ msgstr "Löschen"
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Delete entry"
 msgstr "Eintrag löschen"
+
+#, python-format
+msgid "Dialling failed - Error: %s"
+msgstr "Wählen fehlgeschlagen! - Fehler: %s"
 
 msgid "Display FRITZ!box-Fon calls on screen"
 msgstr "Anzeige der Anrufe auf der FRITZ!Box Fon"
@@ -137,7 +132,6 @@ msgstr "Verpasste Anrufe"
 msgid "Display outgoing calls"
 msgstr "Abgehende Anrufe"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Do what?"
 msgstr "Aktion mit Nummer?"
 
@@ -206,9 +200,11 @@ msgstr "Flash"
 msgid "France"
 msgstr "Frankreich"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "FritzCall Setup"
 msgstr "FritzCall Einstellungen"
+
+msgid "Full screen display"
+msgstr "Vollbildanzeige"
 
 msgid "Germany"
 msgstr "Deutschland"
@@ -308,7 +304,6 @@ msgstr "Abgehende Anrufe"
 msgid "Password Accessing FRITZ!Box"
 msgstr "Passwort der FRITZ!Box"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
 msgstr "Telefonanrufe"
@@ -316,7 +311,6 @@ msgstr "Telefonanrufe"
 msgid "PhoneBook Location"
 msgstr "Speicherort des Telefonbuchs"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Telefonbuch"

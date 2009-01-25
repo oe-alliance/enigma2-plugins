@@ -1,10 +1,12 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 FRITZ!Box plugin italian locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-31 16:41+0100\n"
-"PO-Revision-Date: 2008-12-31 16:43+0100\n"
-"Last-Translator: Spaeleus <spaeleus#croci.org>\n"
+"POT-Creation-Date: 2009-01-25 09:46+0100\n"
+"PO-Revision-Date: 2009-01-25 01:22+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,13 +15,10 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: /home/dario/build800/build/tmp/work/enigma2-plugins-"
-"2.5cvs20081019-r0/enigma2-plugins/fritzcall\n"
-"X-Poedit-SearchPath-0: /home/dario/build800/build/tmp/work/enigma2-plugins-"
-"2.5cvs20081019-r0/enigma2-plugins/fritzcall\n"
+"X-Poedit-Basepath: /home/dario/Plugins/fritzcall\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/fritzcall\n"
 
 #. TRANSLATORS: this is a help text, keep it short
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Add entry to phonebook"
 msgstr "Aggiungere voce in rubrica"
 
@@ -89,16 +88,6 @@ msgstr ""
 "Nuovo tentativo in corso..."
 
 #, python-format
-msgid ""
-"Corrupt phonebook entry\n"
-"for number %d\n"
-"Deleting."
-msgstr ""
-"Voce in rubrica corrotta\n"
-"per il numero %d\n"
-"Cancellazione in corso."
-
-#, python-format
 msgid "Could not load calls from FRITZ!Box - Error: %s"
 msgstr "Impossibile caricare le chiamate dalla FRITZ!Box! - Errore: %s"
 
@@ -112,6 +101,9 @@ msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
 msgid "Country"
 msgstr "Nazione"
 
+msgid "Debug"
+msgstr "Debug"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
 msgstr "Cancell."
@@ -119,6 +111,10 @@ msgstr "Cancell."
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Delete entry"
 msgstr "Cancellare voce"
+
+#, python-format
+msgid "Dialling failed - Error: %s"
+msgstr "Composizione fallita - Errore: %s"
 
 msgid "Display FRITZ!box-Fon calls on screen"
 msgstr "Visualizza le chiamate telef. sulla TV"
@@ -139,9 +135,8 @@ msgstr "Chiamate perse"
 msgid "Display outgoing calls"
 msgstr "Chiamate in Uscita"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Do what?"
-msgstr "Cosa fare?"
+msgstr "Che fare?"
 
 #, python-format
 msgid ""
@@ -167,8 +162,7 @@ msgid ""
 "\n"
 "%(newname)s?"
 msgstr ""
-"Sovrascrivere la voce\n"
-"%(number)s\n"
+"Sovrascrivere la voce %(number)s\n"
 "\n"
 "%(name)s\n"
 "\n"
@@ -209,9 +203,11 @@ msgstr "Flash"
 msgid "France"
 msgstr "Francia"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "FritzCall Setup"
 msgstr "Configurazione FritzCall"
+
+msgid "Full screen display"
+msgstr "Mostrare a tutto schermo"
 
 msgid "Germany"
 msgstr "Germania"
@@ -266,7 +262,7 @@ msgid "Missed calls"
 msgstr "Chiamate perse"
 
 msgid "Mute on call"
-msgstr "\"Mute\" sulla chiamata"
+msgstr "Mute su Chiamata"
 
 msgid "Name"
 msgstr "Nome"
@@ -311,7 +307,6 @@ msgstr "Chiamate in Uscita"
 msgid "Password Accessing FRITZ!Box"
 msgstr "Password di accesso alla FRITZ!Box"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
 msgstr "Ch. Telef."
@@ -319,7 +314,6 @@ msgstr "Ch. Telef."
 msgid "PhoneBook Location"
 msgstr "Posizione Rubrica"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Rubrica"
@@ -458,12 +452,23 @@ msgstr "Nulla"
 msgid "work"
 msgstr "Ufficio"
 
-#~ msgid "Can't create PhoneBook.txt"
-#~ msgstr "Impossibile creare PhoneBook.txt!"
+#~ msgid ""
+#~ "Corrupt phonebook entry\n"
+#~ "for number %d\n"
+#~ "Deleting."
+#~ msgstr ""
+#~ "Voce in rubrica corrotta\n"
+#~ "per il numero %d\n"
+#~ "Cancellazione in corso."
+
+#~ msgid ""
+#~ "Do you want to add a phonebook entry for\n"
+#~ "\n"
+#~ "%s?"
+#~ msgstr ""
+#~ "Cancellare la voce in rubrica per\n"
+#~ "\n"
+#~ "%s?"
 
 #~ msgid "Edit phonebook entry"
 #~ msgstr "Modificare voce rubrica"
-
-#, fuzzy
-#~ msgid "display calls from FRITZ!Box"
-#~ msgstr "Recupero chiamate dalla FRITZ!Box in corso"
