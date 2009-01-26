@@ -22,7 +22,6 @@ var signalWin = '';
 var webRemoteWin = '';
 var signalPanelUpdatePoller = '';
 var EPGListWindow = '';
-var MessageAnswerPolling = '';
 
 var currentBouquet = bouquetsTv;
 
@@ -380,7 +379,9 @@ function doRequest(url, readyFunction, save){
 									doRequestMemory[url] = transport;
 								}
 							}
-							readyFunction(transport);
+							if(typeof(readyFunction) != "undefined"){
+								readyFunction(transport);
+							}
 						},
 				onComplete: requestFinished 
 			});
@@ -966,10 +967,9 @@ function incomingMessageResult(request){
 
 function getMessageAnswer() {
 	doRequest(url_messageanswer, incomingMessageResult, false);
-	clearInterval(MessageAnswerPolling);
 }
 
-function sendMessage(messagetext,messagetype,messagetimeout){
+function sendMessage(messagetext, messagetype, messagetimeout){
 	if(!messagetext){
 		messagetext = $('MessageSendFormText').value;
 	}	
@@ -981,9 +981,9 @@ function sendMessage(messagetext,messagetype,messagetimeout){
 		messagetype = $('MessageSendFormType').options[index].value;
 	}	
 	if(ownLazyNumber(messagetype) === 0){
-		var request = new Ajax.Request(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, { asynchronous: true, method: 'get' });
+		var request = doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout);
 		
-		MessageAnswerPolling = setInterval(getMessageAnswer, ownLazyNumber(messagetimeout)*1000);
+		setTimeout(getMessageAnswer, ownLazyNumber(messagetimeout)*1000);
 	} else {
 		doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult, false);
 	}
