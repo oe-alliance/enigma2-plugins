@@ -81,7 +81,7 @@ class Timer( Source):
         except:
             return False, "The timer has NOT been deleted"
             
-       	return False, "No matching Timer not found"
+       	return False, "No matching Timer found"
 
     
     def tvBrowser(self, param):
