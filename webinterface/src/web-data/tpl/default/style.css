@@ -20,6 +20,18 @@
 		margin: 2px;		
 	}
 
+	#notification{		
+		color: #000;
+		width: 500px;
+		height: 50px;
+		position: absolute;
+		top: 0px;
+		left: 250px;		
+		text-align: center;
+		vertical-align: bottom;
+		z-index: 2;		
+	}
+
 /***********************
  GENERAL
  ***********************/

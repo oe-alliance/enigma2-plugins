@@ -49,6 +49,28 @@ function getBoxtype(){
 	doRequest(url_about, incomingAboutBoxtype, false);
 }
 
+function notify(text, state){
+	switch(state){
+		case false:
+			$('notification').style.background = "#C00";
+			break;
+		default:
+			$('notification').style.background = "#85C247";
+	}
+		
+	set('notification', "<div>"+text+"</div>");
+	$('notification').appear({duration : 0.5, to: 0.9 });
+	setTimeout(hideNotifier, 3000);
+}
+
+function hideNotifier(){
+	$('notification').fade({duration : 0.5 })
+}
+
+function simpleResultHandler(simpleResult){
+	notify(simpleResult.statetext, simpleResult.state);
+}
+
 
 function startUpdateBouquetItemsPoller(){
 	debug("[startUpdateBouquetItemsPoller] called");

@@ -7,6 +7,7 @@
 	<title>Dreambox WebControl</title>
 	
 	<script type="text/javascript" src="/web-data/lib/prototype-1.6.0.3.js"></script>
+	<script type="text/javascript" src="/web-data/lib/scriptaculous.js"></script>
 	<script type="text/javascript" src="/web-data/lib/shadedborder.js"></script>
 	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
 
@@ -63,9 +64,11 @@
 
 	</script>
 </head>
-<body onresize="setMaxHeight('contentMain')">
+<body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">
+	
 	<div id="container">
 		<div id="banner">
+			<span id="notification"><div></div></span>
 			<div id="bannerLeft">
 				<div id="bannerText" style="font-size: 24px;"><img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web"></div>
 				<ul id="mainMenu">

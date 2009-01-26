@@ -62,9 +62,10 @@ function incomingTimerAddResult(request){
 		var addresult = new SimpleXMLResult(getXML(request));
 		if(addresult.getState()){
 			//timer has been added
+			notify(addresult.getStateText(), addresult.getState());
 			loadTimerList();
 		}else{
-			messageBox("Timer Error","Your Timer could not be added!\nReason: "+addresult.getStateText());
+			notify(addresult.getStateText(), addresult.getState());
 		}
 	}		
 }
@@ -184,6 +185,7 @@ function incomingTimerDelResult(request){
 	debug("[incomingTimerDelResult] called");
 	if(request.readyState == 4){
 		var delresult = new SimpleXMLResult(getXML(request));
+		notify(delresult.getStateText(), delresult.getState());
 		debug("[incomingTimerDelResult] Loading List");
 		loadTimerList();
 	}		
@@ -223,6 +225,7 @@ function loadTimerFormNow() {
 	loadTimerFormChannels();
 }
 
+
 function loadTimerEditForm(justplay, begin, end, repeated, channel, channelName, name, description, afterEvent, deleteOldOnSave, eit) {
 	debug('[loadTimerEditForm] justplay: ' + justplay + ',begin: ' + begin + ',end: ' + end + ',repeated: ' + repeated + ',channel: ' + channel + ',name: ' + name +',description: ' + description + ',afterEvent: ' + afterEvent + ',deleteOldOnSave: ' + deleteOldOnSave);
 	var start = new Date(Number(begin)*1000);
@@ -259,6 +262,7 @@ function loadTimerEditForm(justplay, begin, end, repeated, channel, channelName,
 	loadTimerFormChannels();
 }
 
+
 // startin to load for TV
 function loadTimerFormChannels() {
 	if(addTimerEditFormArray.TVListFilled === 1 && addTimerEditFormArray.RadioListFilled === 1) {
@@ -270,6 +274,7 @@ function loadTimerFormChannels() {
 		doRequest(url_getServices+favorites, addTimerListFormatTV, false);
 	}
 }
+
 
 function addTimerListFormatTV(request) {
 	if(addTimerEditFormArray.RadioListFilled === 0) {
