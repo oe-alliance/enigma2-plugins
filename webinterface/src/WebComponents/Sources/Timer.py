@@ -51,7 +51,7 @@ class Timer( Source):
             print "RECNOW"
             self.result = self.recordNow(cmd)
         else:
-            self.result = False, _("Unknown function: '%s'") %(self.func)
+            self.result = False, "Unknown function: '%s'" %(self.func)
 
 
 
@@ -61,27 +61,27 @@ class Timer( Source):
         if param.has_key('sRef'):
             service_ref = ServiceReference(param['sRef'])            
         else: 
-            return False, _("Missing Parameter: sRef")
+            return False, "Missing Parameter: sRef"
         
         if param.has_key('begin'):
             begin = int(param['begin'])   
         else:
-            return False, _("Missing Parameter: begin")
+            return False, "Missing Parameter: begin"
         
         if param.has_key('end'):
             end = int(param['end'])            
         else:
-        	return False, _("Missing Parameter: end")
+        	return False, "Missing Parameter: end"
              
         try:
             for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
                 if str(timer.service_ref) == str(service_ref) and int(timer.begin) == begin and int(timer.end) == end:
                     self.recordtimer.removeEntry(timer)
-                    return True, _("The timer '%s' has been deleted successfully") %(timer.name)
+                    return True, "The timer '%s' has been deleted successfully" %(timer.name)
         except:
-            return False, _("The timer has NOT been deleted")
+            return False, "The timer has NOT been deleted"
             
-       	return False, _("No matching Timer not found")
+       	return False, "No matching Timer not found"
 
     
     def tvBrowser(self, param):
@@ -114,7 +114,7 @@ class Timer( Source):
             del param[element]
         
         if param['sRef'] is None:
-            return False, _("Missing Parameter: sRef")
+            return False, "Missing Parameter: sRef"
         else:
             takeApart = split(param['sRef'], '|')
             if len(takeApart) > 1:
@@ -144,7 +144,7 @@ class Timer( Source):
             del param['command']
             return self.editTimer(param)
         else:
-            return False, _("Unknown command: '%s'" %param['command'])
+            return False, "Unknown command: '%s'" %param['command']
     
     def recordNow(self,param):
         print "recordNow ",param
@@ -183,13 +183,13 @@ class Timer( Source):
                 end = curEvent[1]
         else:
             if limitEvent:
-                return False, _("No event found, started infinite recording")
+                return False, "No event found, started infinite recording"
 
         timer = RecordTimerEntry(serviceref, begin, end, name, description, eventid, False, False, 0)
         timer.dontSave = True
         self.recordtimer.record(timer)
 
-        return True, _("Instant recording started")
+        return True, "Instant recording started"
 
 
 #===============================================================================
@@ -210,7 +210,7 @@ class Timer( Source):
         if param.has_key('sRef'):
             service_ref = ServiceReference(param['sRef'])
         else:
-            return False, _("Missing Parameter: sRef")
+            return False, "Missing Parameter: sRef"
                 
         repeated = 0
         if param.has_key('repeated'):
@@ -224,25 +224,25 @@ class Timer( Source):
             elif time() > int(begin) and repeated == 0:
                 begin = time()
             else:
-                return False, _("Illegal Parameter value for Parameter begin : '%s'" %begin )             
+                return False, "Illegal Parameter value for Parameter begin : '%s'" %begin              
         else:
-            return False, _("Missing Parameter: begin")
+            return False, "Missing Parameter: begin"
         
         
         if param.has_key('end'): 
             end = int(param['end'])
         else:
-            return False, _("Missing Parameter: end")
+            return False, "Missing Parameter: end"
           
         if param.has_key('name'):
             name = param['name']
         else:
-            return False, _("Missing Parameter: name")
+            return False, "Missing Parameter: name"
         
         if param.has_key('description'):
             description = param['description'].replace("\n", " ")
         else:
-            return False, _("Missing Parameter: description")
+            return False, "Missing Parameter: description"
                 
         disabled = False #Default to: Enabled
         if param.has_key('disabled'):            
@@ -274,12 +274,12 @@ class Timer( Source):
                 if param.has_key('beginOld'):
                     beginOld = int(param['beginOld'])
                 else:
-                    return False, _("Missing Parameter: beginOld")
+                    return False, "Missing Parameter: beginOld"
                 
                 if param.has_key('endOld'):
                     endOld = int(param['endOld'])
                 else:
-                    return False, _("Missing Parameter: endOld")
+                    return False, "Missing Parameter: endOld"
                 
                 #let's try to find the timer
                 try:
@@ -302,12 +302,12 @@ class Timer( Source):
                                     #send the changed timer back to enigma2 and hope it's good
                                     self.session.nav.RecordTimer.timeChanged(timer)
                                     print "[WebComponents.Timer] editTimer: Timer changed!"
-                                    return True, _("Timer %s has been changed!") %(timer.name)
+                                    return True, "Timer %s has been changed!" %(timer.name)
                 except:
                     #obviously some value was not good, return an error
-                    return False, _("Changing the timer for '%s' failed!") %name
+                    return False, "Changing the timer for '%s' failed!" %name
                 
-                return False, _("Could not find timer '%s' with given start and end time!") %name
+                return False, "Could not find timer '%s' with given start and end time!" %name
         
         #Try adding a new Timer
 
@@ -317,20 +317,20 @@ class Timer( Source):
             timer.repeated = repeated
             #add the new timer
             self.recordtimer.record(timer)
-            return True, _("Timer added successfully!")
+            return True, "Timer added successfully!"
         except:
             #something went wrong, most possibly one of the given paramater-values was wrong
-            return False, _("Could not add timer '%s'!") %name
+            return False, "Could not add timer '%s'!" %name
             
-        return False, _("Unexpected Error")
+        return False, "Unexpected Error"
                 
 
     def addTimerByEventID(self, param):
         print "[WebComponents.Timer] addTimerByEventID", param
         if param['sRef'] is None:
-            return False, _("Missing Parameter: sRef")
+            return False, "Missing Parameter: sRef"
         if param['eventid'] is None:
-            return False, _("Missing Parameter: eventid")
+            return False, "Missing Parameter: eventid"
         
         justplay = False
         if param['justplay'] is not None:
@@ -340,13 +340,13 @@ class Timer( Source):
         epgcache = eEPGCache.getInstance()
         event = epgcache.lookupEventId(eServiceReference(param['sRef']),int(param['eventid']))
         if event is None:
-            return False, _("EventId not found")
+            return False, "EventId not found"
         
         (begin, end, name, description, eit) = parseEvent(event)
         
         timer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.NONE)                                
         self.recordtimer.record(timer)
-        return True, _("Timer added")    
+        return True, "Timer '%s' added" %(timer.name)  
             
         
     def writeTimerList(self, force=False):

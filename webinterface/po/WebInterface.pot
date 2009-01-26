@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins-extensions-webinterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 21:28+0100\n"
+"POT-Creation-Date: 2009-01-26 22:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Stephan Reichholf <stephan@reichholf.net>\n"
 "Language-Team: \n"
@@ -125,114 +125,5 @@ msgstr ""
 
 #: src/WebIfConfig.py:245
 msgid "Really delete this Interface?"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:54
-#, python-format
-msgid "Unknown function: '%s'"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:64
-#: src/WebComponents/Sources/Timer.py:117
-#: src/WebComponents/Sources/Timer.py:213
-#: src/WebComponents/Sources/Timer.py:331
-msgid "Missing Parameter: sRef"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:69
-#: src/WebComponents/Sources/Timer.py:229
-msgid "Missing Parameter: begin"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:74
-#: src/WebComponents/Sources/Timer.py:235
-msgid "Missing Parameter: end"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:80
-#, python-format
-msgid "The timer '%s' has been deleted successfully"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:82
-msgid "The timer has NOT been deleted"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:84
-msgid "No matching Timer not found"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:147
-#, python-format
-msgid "Unknown command: '%s'"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:186
-msgid "No event found, started infinite recording"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:192
-msgid "Instant recording started"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:227
-#, python-format
-msgid "Illegal Parameter value for Parameter begin : '%s'"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:240
-msgid "Missing Parameter: name"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:245
-msgid "Missing Parameter: description"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:277
-msgid "Missing Parameter: beginOld"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:282
-msgid "Missing Parameter: endOld"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:305
-#, python-format
-msgid "Timer %s has been changed!"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:308
-#, python-format
-msgid "Changing the timer for '%s' failed!"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:310
-#, python-format
-msgid "Could not find timer '%s' with given start and end time!"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:320
-msgid "Timer added successfully!"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:323
-#, python-format
-msgid "Could not add timer '%s'!"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:325
-msgid "Unexpected Error"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:333
-msgid "Missing Parameter: eventid"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:343
-msgid "EventId not found"
-msgstr ""
-
-#: src/WebComponents/Sources/Timer.py:349
-msgid "Timer added"
 msgstr ""
 

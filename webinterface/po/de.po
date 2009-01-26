@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins-extension-webinterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 21:28+0100\n"
+"POT-Creation-Date: 2009-01-26 22:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Stephan Reichholf <stephan@reichholf.net>\n"
 "Language-Team:  <stephan@reichholf.net>\n"
@@ -129,115 +129,56 @@ msgstr "SSL Verschlüsselung"
 msgid "Really delete this Interface?"
 msgstr "Diese Schnittstelle wirklich löschen?"
 
-#: src/WebComponents/Sources/Timer.py:54
-#, python-format
-msgid "Unknown function: '%s'"
-msgstr "Unbekannte Funktion: '%s'"
-
-#: src/WebComponents/Sources/Timer.py:64
-#: src/WebComponents/Sources/Timer.py:117
-#: src/WebComponents/Sources/Timer.py:213
-#: src/WebComponents/Sources/Timer.py:331
-msgid "Missing Parameter: sRef"
-msgstr "Fehlender Parameter: sRef"
-
-#: src/WebComponents/Sources/Timer.py:69
-#: src/WebComponents/Sources/Timer.py:229
-msgid "Missing Parameter: begin"
-msgstr "Fehlender Parameter: begin"
-
-#: src/WebComponents/Sources/Timer.py:74
-#: src/WebComponents/Sources/Timer.py:235
-msgid "Missing Parameter: end"
-msgstr "Fehlender Parameter: end"
-
-#: src/WebComponents/Sources/Timer.py:80
-#, python-format
-msgid "The timer '%s' has been deleted successfully"
-msgstr "Der Timer %s wurde erfolgreich gelöscht"
-
-#: src/WebComponents/Sources/Timer.py:82
-msgid "The timer has NOT been deleted"
-msgstr "Der Timer wurde NICHT gelöscht"
-
-#: src/WebComponents/Sources/Timer.py:84
-msgid "No matching Timer not found"
-msgstr "Kein zutreffender Timer gefunden"
-
-#: src/WebComponents/Sources/Timer.py:147
-#, python-format
-msgid "Unknown command: '%s'"
-msgstr "Unbekannter Befehl: '%s'"
-
-#: src/WebComponents/Sources/Timer.py:186
-msgid "No event found, started infinite recording"
-msgstr "Kein Event gefunden, endlosaufnahme gestartet"
-
-#: src/WebComponents/Sources/Timer.py:192
-msgid "Instant recording started"
-msgstr "Sofortaufnahme gestartet"
-
-#: src/WebComponents/Sources/Timer.py:227
-#, python-format
-msgid "Illegal Parameter value for Parameter begin : '%s'"
-msgstr "Unerlabter Parameterwert für Parameter begin: '%s'"
-
-#: src/WebComponents/Sources/Timer.py:240
-msgid "Missing Parameter: name"
-msgstr "Fehelnder Parameter: name"
-
-#: src/WebComponents/Sources/Timer.py:245
-msgid "Missing Parameter: description"
-msgstr "Fehlender Parameter: description"
-
-#: src/WebComponents/Sources/Timer.py:277
-msgid "Missing Parameter: beginOld"
-msgstr "Fehlender Parameter: beginOld"
-
-#: src/WebComponents/Sources/Timer.py:282
-msgid "Missing Parameter: endOld"
-msgstr "Fehlender Parameter: endOld"
-
-#: src/WebComponents/Sources/Timer.py:305
-#, python-format
-msgid "Timer %s has been changed!"
-msgstr "Timer %s wurde geändert!"
-
-#: src/WebComponents/Sources/Timer.py:308
-#, python-format
-msgid "Changing the timer for '%s' failed!"
-msgstr "Timer '%s' konnte nich geändert werden!"
-
-#: src/WebComponents/Sources/Timer.py:310
-#, python-format
-msgid "Could not find timer '%s' with given start and end time!"
-msgstr "Timer '%s' mit der angegebenen Start- und Endzeit konnte nicht gefunden werden!"
-
-#: src/WebComponents/Sources/Timer.py:320
-msgid "Timer added successfully!"
-msgstr "Timer erfolgreich hinzugefügt!"
-
-#: src/WebComponents/Sources/Timer.py:323
-#, python-format
-msgid "Could not add timer '%s'!"
-msgstr "Timer '%s' konnte nicht hinzugefügt werden!"
-
-#: src/WebComponents/Sources/Timer.py:325
-msgid "Unexpected Error"
-msgstr "Unerwarteter Fehler"
-
-#: src/WebComponents/Sources/Timer.py:333
-msgid "Missing Parameter: eventid"
-msgstr "Fehlender Parameter: eventid"
-
-#: src/WebComponents/Sources/Timer.py:343
-msgid "EventId not found"
-msgstr "EventId nicht gefunden"
-
-#: src/WebComponents/Sources/Timer.py:349
-msgid "Timer added"
-msgstr "Timer hinzugefügt"
-
+#~ msgid "Unknown function: '%s'"
+#~ msgstr "Unbekannte Funktion: '%s'"
+#~ msgid "Missing Parameter: sRef"
+#~ msgstr "Fehlender Parameter: sRef"
+#~ msgid "Missing Parameter: begin"
+#~ msgstr "Fehlender Parameter: begin"
+#~ msgid "Missing Parameter: end"
+#~ msgstr "Fehlender Parameter: end"
+#~ msgid "The timer '%s' has been deleted successfully"
+#~ msgstr "Der Timer %s wurde erfolgreich gelöscht"
+#~ msgid "The timer has NOT been deleted"
+#~ msgstr "Der Timer wurde NICHT gelöscht"
+#~ msgid "No matching Timer not found"
+#~ msgstr "Kein zutreffender Timer gefunden"
+#~ msgid "Unknown command: '%s'"
+#~ msgstr "Unbekannter Befehl: '%s'"
+#~ msgid "No event found, started infinite recording"
+#~ msgstr "Kein Event gefunden, endlosaufnahme gestartet"
+#~ msgid "Instant recording started"
+#~ msgstr "Sofortaufnahme gestartet"
+#~ msgid "Illegal Parameter value for Parameter begin : '%s'"
+#~ msgstr "Unerlabter Parameterwert für Parameter begin: '%s'"
+#~ msgid "Missing Parameter: name"
+#~ msgstr "Fehelnder Parameter: name"
+#~ msgid "Missing Parameter: description"
+#~ msgstr "Fehlender Parameter: description"
+#~ msgid "Missing Parameter: beginOld"
+#~ msgstr "Fehlender Parameter: beginOld"
+#~ msgid "Missing Parameter: endOld"
+#~ msgstr "Fehlender Parameter: endOld"
+#~ msgid "Timer %s has been changed!"
+#~ msgstr "Timer %s wurde geändert!"
+#~ msgid "Changing the timer for '%s' failed!"
+#~ msgstr "Timer '%s' konnte nich geändert werden!"
+#~ msgid "Could not find timer '%s' with given start and end time!"
+#~ msgstr ""
+#~ "Timer '%s' mit der angegebenen Start- und Endzeit konnte nicht gefunden "
+#~ "werden!"
+#~ msgid "Timer added successfully!"
+#~ msgstr "Timer erfolgreich hinzugefügt!"
+#~ msgid "Could not add timer '%s'!"
+#~ msgstr "Timer '%s' konnte nicht hinzugefügt werden!"
+#~ msgid "Unexpected Error"
+#~ msgstr "Unerwarteter Fehler"
+#~ msgid "Missing Parameter: eventid"
+#~ msgstr "Fehlender Parameter: eventid"
+#~ msgid "EventId not found"
+#~ msgstr "EventId nicht gefunden"
+#~ msgid "Timer added"
+#~ msgstr "Timer hinzugefügt"
 #~ msgid "Ok"
 #~ msgstr "Ok"
 
