@@ -31,7 +31,7 @@ class EPGRefresh:
 	"""Simple Class to refresh EPGData"""
 
 	def __init__(self):
-		# Initialize 
+		# Initialize
 		self.services = (set(), set())
 		self.previousService = None
 		self.forcedScan = False
@@ -192,7 +192,7 @@ class EPGRefresh:
 			service = eServiceReference(str(scanservice.sref))
 			if not service.valid() \
 				or (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
-				
+
 				continue
 
 			channelID = '%08x%04x%04x' % (
@@ -244,7 +244,7 @@ class EPGRefresh:
 					not self.session.nav.RecordTimer.isRecording()):
 
 				self.nextService()
-			# We don't follow our rules here - If the Box is still in Standby and not recording we won't reach this line 
+			# We don't follow our rules here - If the Box is still in Standby and not recording we won't reach this line
 			else:
 				if not checkTimespan(
 					config.plugins.epgrefresh.begin.value,

@@ -107,7 +107,7 @@ class WerbeZapper:
 		self.zap_service = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.move_service = self.servicelist.getCurrentSelection()
 		self.root = self.servicelist.getRoot()
-		
+
 		#import ServiceReference
 		#print [str(ServiceReference.ServiceReference(x)) for x in self.servicelist.getCurrentServicePath()]
 		#print ServiceReference.ServiceReference(self.servicelist.getRoot())

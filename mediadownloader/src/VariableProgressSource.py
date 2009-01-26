@@ -26,7 +26,7 @@ class VariableProgressSource(Source):
 			self.range = max / self.factor
 
 		# Save pos
-		self.value = pos / self.factor		
+		self.value = pos / self.factor
 
 		# Trigger change
 		self.changed((self.CHANGED_ALL, ))

@@ -26,7 +26,7 @@ def checkTimespan(begin, end):
 			return True
 		return False
 	else:
-		# Check if event begins earlier than our timespan starts 
+		# Check if event begins earlier than our timespan starts
 		if time.tm_hour < begin[0] or (time.tm_hour == begin[0] and time.tm_min < begin[1]):
 			# Its out of our timespan then
 			return False
@@ -60,7 +60,7 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 				if config.plugins.epgrefresh.force.value or (Screens.Standby.inStandby and instance is not None and not instance.RecordTimer.isRecording()):
 					return True
 				else:
-					print "[EPGRefresh] Box still in use, rescheduling"	
+					print "[EPGRefresh] Box still in use, rescheduling"
 
 					# Recheck later
 					self.begin = time() + config.plugins.epgrefresh.delay_standby.value*60

@@ -72,7 +72,7 @@ def filescan(**kwargs):
 	return [
 		RemoteScanner(
 			mimetypes = None,
-			paths_to_scan = 
+			paths_to_scan =
 				[
 					ScanPath(path = "", with_subdirs = False),
 				],

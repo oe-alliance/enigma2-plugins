@@ -954,7 +954,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 
 	def saveCurrent(self):
 		del self.services[self.idx][:]
-		
+
 		# Warning, accessing a ConfigListEntry directly might be considered evil!
 
 		myl = self["config"].getList()[:]
@@ -974,7 +974,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 			getConfigListEntry(_("Enable Service Restriction"), self.enabled),
 			getConfigListEntry(_("Editing"), self.typeSelection)
 		]
-		
+
 		if self.typeSelection.value == "channels":
 			self.idx = 0
 		else: # self.typeSelection.value == "bouquets":
@@ -1061,7 +1061,7 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 	from AutoTimerComponent import AutoTimerComponent
 	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
-		
+
 	# Create instance if needed
 	if autotimer is None:
 		from AutoTimer import AutoTimer
@@ -1092,27 +1092,27 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 		importerCallback,
 		AutoTimerImporter,
 		AutoTimerComponent(
-			autotimer.getUniqueId(),	  	# Id
-			name,	   						# Name
-			"",								# Match
-			True							# Enabled
+			autotimer.getUniqueId(),
+			name,
+			'',		# Match
+			True	# Enabled
 		),
-		match,  	   	   # Proposed Match
-		begin,  	   	   # Proposed Begin
-		end,	   	   	   # Proposed End
-		None, 	   	   	   # Proposed Disabled
-		sref,   		   # Proposed ServiceReference
-		None,   	       # Proposed afterEvent
-		None,  	   	   	   # Proposed justplay
-		None,  	   	   	   # Proposed dirname, can we get anything useful here?
-		[]                 #
+		match,		# Proposed Match
+		begin,		# Proposed Begin
+		end,		# Proposed End
+		None,		# Proposed Disabled
+		sref,		# Proposed ServiceReference
+		None,		# Proposed afterEvent
+		None,		# Proposed justplay
+		None,		# Proposed dirname, can we get anything useful here?
+		[]			# Proposed tags
 	)
 
-def addAutotimerFromService(session, service = None):	
+def addAutotimerFromService(session, service = None):
 	from AutoTimerComponent import AutoTimerComponent
 	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
-		
+
 	# Create instance if needed
 	if autotimer is None:
 		from AutoTimer import AutoTimer
@@ -1152,26 +1152,26 @@ def addAutotimerFromService(session, service = None):
 		importerCallback,
 		AutoTimerImporter,
 		AutoTimerComponent(
-			autotimer.getUniqueId(),	  	# Id
-			name,	   						# Name
-			"",								# Match
-			True							# Enabled
+			autotimer.getUniqueId(),
+			name,
+			'',		# Match
+			True	# Enabled
 		),
-		match,	   	   	   # Proposed Match
-		begin,	   	   	   # Proposed Begin
-		end,	   	   	   # Proposed End
-		None, 	 	   	   # Proposed Disabled
-		sref,   		   # Proposed ServiceReference
-		None,   	       # Proposed afterEvent
-		None,  	   	   	   # Proposed justplay
-		path,  	   	   	   # Proposed dirname
-		tags               # Proposed tags
+		match,		# Proposed Match
+		begin,		# Proposed Begin
+		end,		# Proposed End
+		None,		# Proposed Disabled
+		sref,		# Proposed ServiceReference
+		None,		# Proposed afterEvent
+		None,		# Proposed justplay
+		path,		# Proposed dirname
+		tags		# Proposed tags
 	)
 
 def importerCallback(ret):
 	if ret:
 		ret, session = ret
-		
+
 		session.openWithCallback(
 			editorCallback,
 			AutoTimerEditor,
@@ -1186,7 +1186,7 @@ def importerCallback(ret):
 def editorCallback(ret):
 	if ret:
 		from plugin import autotimer
-		
+
 		# Create instance if needed (should have been created by addAutotimerFrom* above though)
 		if autotimer is None:
 			from AutoTimer import AutoTimer

@@ -121,7 +121,7 @@ def parseEntry(element, baseTimer, defaults = False):
 	baseTimer.avoidDuplicateDescription = int(element.get("avoidDuplicateDescription", 0))
 
 	# Read out allowed services
-	servicelist = baseTimer.services	
+	servicelist = baseTimer.services
 	for service in element.findall("serviceref"):
 		value = service.text
 		if value:
@@ -171,7 +171,7 @@ def parseEntry(element, baseTimer, defaults = False):
 
 	# Read out exclude
 	idx = {"title": 0, "shortdescription": 1, "description": 2, "dayofweek": 3}
-	excludes = (baseTimer.getExcludedTitle(), baseTimer.getExcludedShort(), baseTimer.getExcludedDescription(), baseTimer.getExcludedDays()) 
+	excludes = (baseTimer.getExcludedTitle(), baseTimer.getExcludedShort(), baseTimer.getExcludedDescription(), baseTimer.getExcludedDays())
 	for exclude in element.findall("exclude"):
 		where = exclude.get("where")
 		value = exclude.text
@@ -203,7 +203,7 @@ def parseEntry(element, baseTimer, defaults = False):
 
 		tags.append(value.encode("UTF-8"))
 	baseTimer.tags = tags
-	
+
 	return True
 
 def parseConfigOld(configuration, list, uniqueTimerId = 0):
@@ -377,7 +377,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 		# Read out exclude (V*)
 		idx = {"title": 0, "shortdescription": 1, "description": 2, "dayofweek": 3}
-		excludes = ([], [], [], []) 
+		excludes = ([], [], [], [])
 		for exclude in timer.findall("exclude"):
 			where = exclude.get("where")
 			value = exclude.text
@@ -388,7 +388,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				excludes[idx[where]].append(value.encode("UTF-8"))
 
 		# Read out includes (use same idx) (V4+ feature, should not harm V3-)
-		includes = ([], [], [], []) 
+		includes = ([], [], [], [])
 		for include in timer.findall("include"):
 			where = include.get("where")
 			value = include.text

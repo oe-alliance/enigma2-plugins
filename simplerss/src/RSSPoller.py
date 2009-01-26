@@ -62,9 +62,9 @@ class RSSPoller:
 				pass
 
 	def error(self, error = ""):
-		print "[SimpleRSS] failed to fetch feed:", error 
+		print "[SimpleRSS] failed to fetch feed:", error
 
-		# Assume its just a temporary failure and jump over to next feed                          
+		# Assume its just a temporary failure and jump over to next feed
 		self.next_feed()
 
 	def _gotPage(self, data, id = None, callback = False, errorback = None):
@@ -91,7 +91,7 @@ class RSSPoller:
 			if errorback is not None:
 				errorback()
 				return
-			# Assume its just a temporary failure and jump over to next feed                          
+			# Assume its just a temporary failure and jump over to next feed
 			self.next_feed()
 
 	def gotPage(self, data, id = None):

@@ -54,7 +54,7 @@ def closed():
 
 		# Get Global rssPoller-Object
 		global rssPoller
-		
+
 		rssPoller.shutdown()
 		rssPoller = None
 
@@ -73,7 +73,7 @@ def autostart(reason, **kwargs):
 			rssPoller.shutdown()
 			rssPoller = None
 
-# Filescan 
+# Filescan
 def filescan_open(item, session, **kwargs):
 	from RSSSetup import addFeed
 
@@ -103,7 +103,7 @@ def filescan(**kwargs):
 	return [
 		RemoteScanner(
 			mimetypes = ["application/rss+xml", "application/atom+xml"],
-			paths_to_scan = 
+			paths_to_scan =
 				[
 					ScanPath(path = "", with_subdirs = False),
 				],

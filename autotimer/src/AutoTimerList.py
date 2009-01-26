@@ -13,7 +13,7 @@ from Tools.FuzzyDate import FuzzyTime
 
 class AutoTimerList(MenuList):
 	"""Defines a simple Component to show Timer name"""
-	
+
 	def __init__(self, entries):
 		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
 
@@ -54,7 +54,7 @@ class AutoTimerList(MenuList):
 
 class AutoTimerPreviewList(MenuList):
 	"""Preview Timers, emulates TimerList"""
-	
+
 	def __init__(self, entries):
 		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
 

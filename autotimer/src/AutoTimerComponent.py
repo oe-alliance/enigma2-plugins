@@ -23,7 +23,7 @@ class AutoTimerComponent(object):
 		self.setValues('', '', enabled)
 
 	"""
-	 Create a deep copy of this instance 
+	 Create a deep copy of this instance
 	"""
 	def clone(self):
 		return self.__deepcopy__({})
@@ -216,7 +216,7 @@ class AutoTimerComponent(object):
 				return False
 			return True
 		else:
-			# Check if event begins earlier than our timespan starts 
+			# Check if event begins earlier than our timespan starts
 			if time.tm_hour < begin[0] or (time.tm_hour == begin[0] and time.tm_min < begin[1]):
 				# Its out of our timespan then
 				return True
@@ -295,7 +295,7 @@ class AutoTimerComponent(object):
 	getExcludedDays = lambda self: self.exclude[3]
 	getExcludedDescription = lambda self: [x.pattern for x in self.exclude[2]]
 	getExcludedShort = lambda self: [x.pattern for x in self.exclude[1]]
-	getExcludedTitle = lambda self: [x.pattern for x in self.exclude[0]]	
+	getExcludedTitle = lambda self: [x.pattern for x in self.exclude[0]]
 
 	getInclude = lambda self: self._include
 	getIncludedTitle = lambda self: [x.pattern for x in self.include[0]]
@@ -321,7 +321,7 @@ class AutoTimerComponent(object):
 	getTimespanEnd = lambda self: '%02d:%02d' % (self.timespan[1][0], self.timespan[1][1])
 
 	isOffsetEqual = lambda self: self.offset[0] == self.offset[1]
-	
+
 ### Actual functionality
 
 	def applyOffset(self, begin, end):
@@ -347,7 +347,7 @@ class AutoTimerComponent(object):
 		if self.maxduration is None:
 			return False
 		return length > self.maxduration
-	
+
 	def checkExcluded(self, title, short, extended, dayofweek):
 		if len(self.exclude[3]):
 			list = [x for x in self.exclude[3]]
@@ -398,7 +398,7 @@ class AutoTimerComponent(object):
 		return False
 
 	def checkServices(self, service):
-		if len(self.services) or len(self.bouquets): 
+		if len(self.services) or len(self.bouquets):
 			return service not in self.getFullServices()
 		return False
 

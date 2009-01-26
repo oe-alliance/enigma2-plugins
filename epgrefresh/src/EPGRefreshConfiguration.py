@@ -139,7 +139,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 	def keySave(self):
 		epgrefresh.services = (set(self.services[0]), set(self.services[1]))
 		epgrefresh.saveConfiguration()
-		
+
 		for x in self["config"].list:
 			x[1].save()
 

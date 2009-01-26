@@ -138,7 +138,7 @@ class AutoTimerImporter(Screen):
 					1,
 					True
 			))
-		
+
 		if begin and end:
 			begin = localtime(begin)
 			end = localtime(end)
@@ -149,7 +149,7 @@ class AutoTimerImporter(Screen):
 					2,
 					True
 			))
-		
+
 		if sref:
 			list.append(
 				SelectionEntryComponent(
@@ -158,7 +158,7 @@ class AutoTimerImporter(Screen):
 					3,
 					True
 			))
-		
+
 		if afterEvent is not None:
 			list.append(
 				SelectionEntryComponent(
@@ -167,7 +167,7 @@ class AutoTimerImporter(Screen):
 					4,
 					True
 			))
-			
+
 		if justplay is not None:
 			list.append(
 				SelectionEntryComponent(
@@ -198,7 +198,7 @@ class AutoTimerImporter(Screen):
 		self["list"] = SelectionList(list)
 
 		# Define Actions
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
 			"ok": self["list"].toggleSelection,
 			"cancel": self.cancel,

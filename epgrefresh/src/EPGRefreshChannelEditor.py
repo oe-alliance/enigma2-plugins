@@ -97,7 +97,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 
 	def saveCurrent(self):
 		del self.services[self.idx][:]
-		
+
 		# Warning, accessing a ConfigListEntry directly might be considered evil!
 
 		myl = self["config"].getList()
@@ -115,7 +115,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 		self.list = [
 			getConfigListEntry(_("Editing"), self.typeSelection)
 		]
-		
+
 		if self.typeSelection.value == "channels":
 			self.idx = 0
 		else: # self.typeSelection.value == "bouquets":

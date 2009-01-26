@@ -145,7 +145,7 @@ class UniversalFeed(BaseFeed):
 		for item in wrapper:
 			enclosures = []
 			link = ""
-			
+
 			# Try to read title, continue if none found
 			title = strip(item.title)
 			if not title:
@@ -162,7 +162,7 @@ class UniversalFeed(BaseFeed):
 			# Read out enclosures and link
 			for enclosure in item.enclosures:
 				enclosures.append(ScanFile(enclosure["href"], mimetype = enclosure["type"], size = enclosure["length"], autodetect = False))
-			
+
 			# Try to read summary, empty if none
 			summary = strip_readable(item.summary)
 
@@ -174,7 +174,7 @@ class UniversalFeed(BaseFeed):
 					enclosures
 			))
 			self.last_ids.add(id)
-			
+
 			idx += 1
 
 		# Eventually cut history

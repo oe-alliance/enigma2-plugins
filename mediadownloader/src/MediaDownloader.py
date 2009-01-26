@@ -61,7 +61,7 @@ def download(url, file, writeProgress = None, contextFactory = None, \
 	is accessible via http or https. Both Backends should offer supportPartial.
 	"""
 
-	scheme, host, port, path, username, password = _parse(url)	
+	scheme, host, port, path, username, password = _parse(url)
 
 	if scheme == 'ftp':
 		from FTPProgressDownloader import FTPProgressDownloader
