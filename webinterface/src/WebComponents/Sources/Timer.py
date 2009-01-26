@@ -51,7 +51,7 @@ class Timer( Source):
             print "RECNOW"
             self.result = self.recordNow(cmd)
         else:
-            self.result = False, _("Unknown command: cmd(%s) self.func(%s)" % (cmd, self.func) )
+            self.result = False, _("Unknown function: '%s'") %(self.func)
 
 
 
@@ -64,20 +64,20 @@ class Timer( Source):
             return False, _("Missing Parameter: sRef")
         
         if param.has_key('begin'):
-            begin = float(param['begin'])   
+            begin = int(param['begin'])   
         else:
             return False, _("Missing Parameter: begin")
         
         if param.has_key('end'):
-            end = float(param['end'])            
+            end = int(param['end'])            
         else:
         	return False, _("Missing Parameter: end")
              
         try:
             for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
-                if str(timer.service_ref) == str(service_ref) and float(timer.begin) == begin and float(timer.end) == end:
+                if str(timer.service_ref) == str(service_ref) and int(timer.begin) == begin and int(timer.end) == end:
                     self.recordtimer.removeEntry(timer)
-                    return True, _("The timer has been deleted successfully")
+                    return True, _("The timer '%s' has been deleted successfully") %(timer.name)
         except:
             return False, _("The timer has NOT been deleted")
             
@@ -144,7 +144,7 @@ class Timer( Source):
             del param['command']
             return self.editTimer(param)
         else:
-            return False, _("Unknown command: %s" %param['command'])
+            return False, _("Unknown command: '%s'" %param['command'])
     
     def recordNow(self,param):
         print "recordNow ",param
@@ -218,19 +218,19 @@ class Timer( Source):
         
             
         if param.has_key('begin'):
-            begin = float(param['begin'])
+            begin = int(param['begin'])
             if time() <= begin:                
                 pass
-            elif time() > float(begin) and repeated == 1:
+            elif time() > int(begin) and repeated == 1:
                 begin = time()
             else:
-                return False, _("Illegal Parameter value : { begin : %s }" %begin )             
+                return False, _("Illegal Parameter value for Parameter begin : '%s'" %begin )             
         else:
             return False, _("Missing Parameter: begin")
         
         
         if param.has_key('end'): 
-            end = float(param['end'])
+            end = int(param['end'])
         else:
             return False, _("Missing Parameter: end")
           
@@ -272,12 +272,12 @@ class Timer( Source):
                 # Therefore so we can neither use default values in this part nor can we 
                 # continue if a parameter is missing            
                 if param.has_key('beginOld'):
-                    beginOld = float(param['beginOld'])
+                    beginOld = int(param['beginOld'])
                 else:
                     return False, _("Missing Parameter: beginOld")
                 
                 if param.has_key('endOld'):
-                    endOld = float(param['endOld'])
+                    endOld = int(param['endOld'])
                 else:
                     return False, _("Missing Parameter: endOld")
                 
@@ -285,8 +285,8 @@ class Timer( Source):
                 try:
                     for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
                         if str(timer.service_ref) == str(channelOld):
-                            if float(timer.begin) == beginOld:
-                                if float(timer.end) == endOld:
+                            if int(timer.begin) == beginOld:
+                                if int(timer.end) == endOld:
                                     #we've found the timer we've been searching for
                                     #Let's apply the new values
                                     timer.service_ref = service_ref
@@ -305,9 +305,9 @@ class Timer( Source):
                                     return True, _("Timer %s has been changed!") %(timer.name)
                 except:
                     #obviously some value was not good, return an error
-                    return False, _("Changing the timer for %s failed!") %name
+                    return False, _("Changing the timer for '%s' failed!") %name
                 
-                return False, _("Could not find timer %s with given start and end time!") %name
+                return False, _("Could not find timer '%s' with given start and end time!") %name
         
         #Try adding a new Timer
 
@@ -320,7 +320,7 @@ class Timer( Source):
             return True, _("Timer added successfully!")
         except:
             #something went wrong, most possibly one of the given paramater-values was wrong
-            return False, _("Could not add timer %s!") %name
+            return False, _("Could not add timer '%s'!") %name
             
         return False, _("Unexpected Error")
                 
@@ -425,7 +425,6 @@ class Timer( Source):
                 timer.append(1)
             else:
                 timer.append(0)
-#            timer.append(item.dontSave)
 
             timer.append(item.cancelled)
             
