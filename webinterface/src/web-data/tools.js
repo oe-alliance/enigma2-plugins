@@ -920,14 +920,15 @@ function loadMovieList(tag){
 }
 
 
-function incomingdelMovieResult(request) {
-	debug("[incomingdelMovieResult] called");
+function incomingDelMovieResult(request) {
+	debug("[incomingDelMovieResult] called");
 	if(request.readyState == 4){
-		var delresult = new SimpleXMLResult(getXML(request));
-		if(delresult.getState()){
+		var result = new SimpleXMLResult(getXML(request));
+		if(result.getState()){
+			notify(result.getStateText(), result.getState());
 			loadMovieList('');
 		}else{
-			messageBox("Deletion Error","Reason: "+delresult.getStateText());
+			notify(result.getStateText(), result.getState());
 		}
 	}		
 }
@@ -944,7 +945,7 @@ function delMovie(sref ,servicename, title, description) {
 
 	if(result){
 		debug("[delMovie] ok confirm panel"); 
-		doRequest(url_moviedelete+"?sRef="+sref, incomingdelMovieResult, false); 
+		doRequest(url_moviedelete+"?sRef="+sref, incomingDelMovieResult, false); 
 		return true;
 	}
 	else{
@@ -1118,10 +1119,6 @@ if( typeof Array.prototype.splice==='undefined' ) {
 	
 		return d.slice( f, f + c );
 	};
-}
-
-function writeTimerListNow() {
-	var request = new Ajax.Request( url_timerlistwrite, { asynchronous: true, method: 'get' });
 }
 
 //Recording

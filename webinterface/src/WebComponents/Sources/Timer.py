@@ -221,7 +221,7 @@ class Timer( Source):
             begin = int(param['begin'])
             if time() <= begin:                
                 pass
-            elif time() > int(begin) and repeated == 1:
+            elif time() > int(begin) and repeated == 0:
                 begin = time()
             else:
                 return False, _("Illegal Parameter value for Parameter begin : '%s'" %begin )             

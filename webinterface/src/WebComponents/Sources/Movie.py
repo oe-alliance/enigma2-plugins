@@ -20,7 +20,7 @@ class Movie( Source):
 		self.movielist = movielist #MovieList(self.root)
 		self.movielist.load(self.root, None)
 		self.cmd = ""
-		self.result = [False, "Missing or Wrong Argument"]
+		self.result = False, "Missing or Wrong Argument"
 	
 	def handleCommand(self, cmd):
 		if cmd is not None:
@@ -31,10 +31,10 @@ class Movie( Source):
 
 		   
 	def delMovie(self, param):
-		print "delMovieFiles:", param
+#		print "[WebComponents.delMovie] %s" %param
 		
 		if param is None:
-			return False, "ServiceReference missing"
+			return False, "Missing Parameter: sRef"
 		
 		service = ServiceReference(param)
 		result = False
@@ -51,11 +51,11 @@ class Movie( Source):
 					result = True
 				
 			if result == False:
-				return result, "Could not delete Movie"
+				return result, "Could not delete Movie '%s'" %name
 			else: 
-				return result, "Movie deleted"
+				return result, "Movie '%s' deleted" %name
 		
-		return result, "Illegal ServiceReference %s" %(param)  
+		return result, "Illegal Parameter Value: sRef - '%s'" %param  
 		
 		
 

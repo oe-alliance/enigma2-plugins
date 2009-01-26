@@ -59,13 +59,13 @@ function addTimerByID(sRef,eventID,justplay){
 function incomingTimerAddResult(request){
 	debug("[incomingTimerAddResult] called");
 	if(request.readyState == 4){
-		var addresult = new SimpleXMLResult(getXML(request));
-		if(addresult.getState()){
+		var result = new SimpleXMLResult(getXML(request));
+		if(result.getState()){
 			//timer has been added
-			notify(addresult.getStateText(), addresult.getState());
+			notify(result.getStateText(), result.getState());
 			loadTimerList();
 		}else{
-			notify(addresult.getStateText(), addresult.getState());
+			notify(result.getStateText(), result.getState());
 		}
 	}		
 }
@@ -184,8 +184,8 @@ function delTimer(sRef, begin, end, servicename, title, description, readyFuncti
 function incomingTimerDelResult(request){
 	debug("[incomingTimerDelResult] called");
 	if(request.readyState == 4){
-		var delresult = new SimpleXMLResult(getXML(request));
-		notify(delresult.getStateText(), delresult.getState());
+		var result = new SimpleXMLResult(getXML(request));
+		notify(result.getStateText(), result.getState());
 		debug("[incomingTimerDelResult] Loading List");
 		loadTimerList();
 	}		
@@ -613,4 +613,13 @@ function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,descrip
 	 "&channelOld="+channel +
 	 "&beginOld="+begin+"&endOld="+end +
 	 "&deleteOldOnSave=1", incomingTimerAddResult, false);
+}
+
+function incomingWriteTimerListNow(request){
+	var result = new SimpleXMLResult(getXML(request));
+	notify(result.getStateText(), result.getState());
+}
+
+function writeTimerListNow() {
+	var request = doRequest(url_timerlistwrite, incomingWriteTimerListNow);
 }
