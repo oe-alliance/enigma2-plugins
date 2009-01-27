@@ -164,4 +164,7 @@ permanentclock/src/Makefile
 
 mediadownloader/Makefile
 mediadownloader/src/Makefile
+
+epgsearch/Makefile
+epgsearch/src/Makefile
 ])

@@ -6,6 +6,7 @@ SUBDIRS = \
 	cdinfo \
 	emailclient \
 	epgrefresh \
+	epgsearch \
 	fritzcall \
 	googlemaps \
 	httpproxy \
