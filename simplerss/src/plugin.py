@@ -6,7 +6,8 @@ from Components.config import config, ConfigSubsection, ConfigSubList, \
 
 # Initialize Configuration
 config.plugins.simpleRSS = ConfigSubsection()
-config.plugins.simpleRSS.update_notification = ConfigSelection(
+simpleRSS = config.plugins.simpleRSS
+simpleRSS.update_notification = ConfigSelection(
 	choices = [
 		("notification", _("Notification")),
 		("preview", _("Preview")),
@@ -14,15 +15,19 @@ config.plugins.simpleRSS.update_notification = ConfigSelection(
 	],
 	default = "preview"
 )
-config.plugins.simpleRSS.interval = ConfigNumber(default=15)
-config.plugins.simpleRSS.feedcount = ConfigNumber(default=0)
-config.plugins.simpleRSS.autostart = ConfigEnableDisable(default=False)
-config.plugins.simpleRSS.keep_running = ConfigEnableDisable(default=True)
-config.plugins.simpleRSS.feed = ConfigSubList()
-for i in range(0, config.plugins.simpleRSS.feedcount.value):
-	config.plugins.simpleRSS.feed.append(ConfigSubsection())
-	config.plugins.simpleRSS.feed[i].uri = ConfigText(default="http://", fixed_size = False)
-	config.plugins.simpleRSS.feed[i].autoupdate = ConfigEnableDisable(default=True)
+simpleRSS.interval = ConfigNumber(default=15)
+simpleRSS.feedcount = ConfigNumber(default=0)
+simpleRSS.autostart = ConfigEnableDisable(default=False)
+simpleRSS.keep_running = ConfigEnableDisable(default=True)
+simpleRSS.feed = ConfigSubList()
+for i in range(0, simpleRSS.feedcount.value):
+	s = ConfigSubsection()
+	s.uri = ConfigText(default="http://", fixed_size = False)
+	s.autoupdate = ConfigEnableDisable(default=True)
+	simpleRSS.feed.append(s)
+	del s
+
+del simpleRSS
 
 # Global Poller-Object
 rssPoller = None
@@ -49,8 +54,8 @@ def main(session, **kwargs):
 # Plugin window has been closed
 def closed():
 	# If SimpleRSS should not run in Background: shutdown
-	if not config.plugins.simpleRSS.autostart.value and \
-		not config.plugins.simpleRSS.keep_running.value:
+	if not (config.plugins.simpleRSS.autostart.value or \
+			config.plugins.simpleRSS.keep_running.value):
 
 		# Get Global rssPoller-Object
 		global rssPoller
@@ -115,7 +120,25 @@ def filescan(**kwargs):
 
 def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor
- 	return [ PluginDescriptor(name="RSS Reader", description=_("A simple to use RSS reader"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
- 		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
- 		PluginDescriptor(name="View RSS", description="Let's you view current RSS entries", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
- 		PluginDescriptor(where = PluginDescriptor.WHERE_FILESCAN, fnc = filescan)]
+ 	return [
+		PluginDescriptor(
+			name = "RSS Reader",
+			description = _("A simple to use RSS reader"),
+			where = PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main
+		),
+ 		PluginDescriptor(
+			where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART],
+			fnc = autostart
+		),
+ 		PluginDescriptor(
+			name = "View RSS",
+			description = "Let's you view current RSS entries",
+			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
+			fnc=main
+		),
+ 		PluginDescriptor(
+			where = PluginDescriptor.WHERE_FILESCAN,
+			fnc = filescan
+		)
+	]

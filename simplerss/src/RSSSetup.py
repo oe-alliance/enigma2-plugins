@@ -22,9 +22,10 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 	def __init__(self, session, id):
 		Screen.__init__(self, session)
 
+		s = config.plugins.simpleRSS.feed[id]
 		self.list = [
-			getConfigListEntry(_("Autoupdate"), config.plugins.simpleRSS.feed[id].autoupdate),
-			getConfigListEntry(_("Feed URI"), config.plugins.simpleRSS.feed[id].uri)
+			getConfigListEntry(_("Autoupdate"), s.autoupdate),
+			getConfigListEntry(_("Feed URI"), s.uri)
 		]
 
 		ConfigListScreen.__init__(self, self.list, session)
@@ -72,24 +73,26 @@ class RSSSetup(ConfigListScreen, Screen):
 
 		self.rssPoller = rssPoller
 
+		simpleRSS = config.plugins.simpleRSS
+
 		# Create List of all Feeds
 		self.list = [
-			getConfigListEntry(_("Feed"), config.plugins.simpleRSS.feed[i].uri)
-				for i in range(0, config.plugins.simpleRSS.feedcount.value)
+			getConfigListEntry(_("Feed"), x.uri)
+				for x in simpleRSS.feed
 		]
 
 		# Attach notifier to autostart and append ConfigListEntry to List
-		config.plugins.simpleRSS.autostart.addNotifier(self.autostartChanged, initial_call = False)
-		self.list.append(getConfigListEntry(_("Start automatically with Enigma2"), config.plugins.simpleRSS.autostart))
+		simpleRSS.autostart.addNotifier(self.autostartChanged, initial_call = False)
+		self.list.append(getConfigListEntry(_("Start automatically with Enigma2"), simpleRSS.autostart))
 
 		# Save keep_running in instance as we want to dynamically add/remove it
-		self.keep_running = getConfigListEntry(_("Keep running in background"), config.plugins.simpleRSS.keep_running)
-		if not config.plugins.simpleRSS.autostart.value:
+		self.keep_running = getConfigListEntry(_("Keep running in background"), simpleRSS.keep_running)
+		if not simpleRSS.autostart.value:
 			self.list.append(self.keep_running)
 
 		# Append Last two config Elements
-		self.list.append(getConfigListEntry(_("Show new Messages as"), config.plugins.simpleRSS.update_notification))
-		self.list.append(getConfigListEntry(_("Update Interval (min)"), config.plugins.simpleRSS.interval))
+		self.list.append(getConfigListEntry(_("Show new Messages as"), simpleRSS.update_notification))
+		self.list.append(getConfigListEntry(_("Update Interval (min)"), simpleRSS.interval))
 
 		# Initialize ConfigListScreen
 		ConfigListScreen.__init__(self, self.list, session)
@@ -151,19 +154,24 @@ class RSSSetup(ConfigListScreen, Screen):
 		pass
 
 	def new(self):
-		id = len(config.plugins.simpleRSS.feed)
-		config.plugins.simpleRSS.feed.append(ConfigSubsection())
-		config.plugins.simpleRSS.feed[id].uri = ConfigText(default="http://", fixed_size = False)
-		config.plugins.simpleRSS.feed[id].autoupdate = ConfigEnableDisable(default=True)
+		l = config.plugins.simpleRSS.feed
+		s = ConfigSubsection()
+		s.uri = ConfigText(default="http://", fixed_size = False)
+		s.autoupdate = ConfigEnableDisable(default=True)
+		id = len(l)
+		l.append(s)
+
 		self.session.openWithCallback(self.conditionalNew, RSSFeedEdit, id)
 
 	def conditionalNew(self):
 		id = len(config.plugins.simpleRSS.feed)-1
+		uri = config.plugins.simpleRSS.feed[id].uri
+
 		# Check if new feed differs from default
-		if config.plugins.simpleRSS.feed[id].uri.value == "http://":
+		if uri.value == "http://":
 			del config.plugins.simpleRSS.feed[id]
 		else:
-			self.list.insert(id, getConfigListEntry(_("Feed"), config.plugins.simpleRSS.feed[id].uri))
+			self.list.insert(id, getConfigListEntry(_("Feed"), uri))
 			config.plugins.simpleRSS.feedcount.value = id+1
 
 	def keySave(self):
@@ -174,27 +182,28 @@ class RSSSetup(ConfigListScreen, Screen):
 
 	def abort(self):
 		print "[SimpleRSS] Closing Setup Dialog"
+		simpleRSS = config.plugins.simpleRSS
 
 		# Remove Notifier
-		config.plugins.simpleRSS.autostart.notifiers.remove(self.autostartChanged)
+		simpleRSS.autostart.notifiers.remove(self.autostartChanged)
 
 		# Keep feedcount sane
-		config.plugins.simpleRSS.feedcount.value = len(config.plugins.simpleRSS.feed)
-		config.plugins.simpleRSS.feedcount.save()
+		simpleRSS.feedcount.value = len(simpleRSS.feed)
+		simpleRSS.feedcount.save()
 
 def addFeed(address, auto = False):
-	# Read out ID
-	id = len(config.plugins.simpleRSS.feed)
+	l = config.plugins.simpleRSS.feed
 
 	# Create new Item
-	config.plugins.simpleRSS.feed.append(ConfigSubsection())
-	config.plugins.simpleRSS.feed[id].uri = ConfigText(default="http://", fixed_size = False)
-	config.plugins.simpleRSS.feed[id].autoupdate = ConfigEnableDisable(default=True)
+	s = ConfigSubsection()
+	s.uri = ConfigText(default="http://", fixed_size = False)
+	s.autoupdate = ConfigEnableDisable(default=True)
 
 	# Set values
-	config.plugins.simpleRSS.feed[id].uri.value = address
-	config.plugins.simpleRSS.feed[id].autoupdate.value = auto
+	s.uri.value = address
+	s.autoupdate.value = auto
 
-	# Save (needed?)
-	config.plugins.simpleRSS.feed.save()
+	# Save
+	l.append(s)
+	l.save()
 

@@ -37,10 +37,10 @@ class RSSPoller:
 		# Generate Feeds
 		self.feeds = [
 			UniversalFeed(
-				config.plugins.simpleRSS.feed[i].uri.value,
-				config.plugins.simpleRSS.feed[i].autoupdate.value
+				x.uri.value,
+				x.autoupdate.value
 			)
-				for i in range(0, config.plugins.simpleRSS.feedcount.value)
+				for x in config.plugins.simpleRSS.feed
 		]
 
 		# Initialize Vars
@@ -130,7 +130,8 @@ class RSSPoller:
 				self.doCallback()
 
 				# Inform User
-				if config.plugins.simpleRSS.update_notification.value == "preview":
+				update_notification_value = config.plugins.simpleRSS.update_notification.value
+				if update_notification_value == "preview":
 					from RSSScreens import RSSFeedView
 
 					from Tools.Notifications import AddNotificationWithID, RemovePopup
@@ -143,7 +144,7 @@ class RSSPoller:
 						self.newItemFeed,
 						newItems = True
 					)
-				elif config.plugins.simpleRSS.update_notification.value == "notification":
+				elif update_notification_value == "notification":
 					from Tools.Notifications import AddPopup
 					from Screens.MessageBox import MessageBox
 
@@ -204,11 +205,11 @@ class RSSPoller:
 
 		newfeeds = []
 		found = False
-		for i in range(0, config.plugins.simpleRSS.feedcount.value):
+		for x in config.plugins.simpleRSS.feed:
 			for feed in self.feeds:
-				if config.plugins.simpleRSS.feed[i].uri.value == feed.uri:
+				if x.uri.value == feed.uri:
 					# Update possibly different autoupdate value
-					feed.autoupdate = config.plugins.simpleRSS.feed[i].autoupdate.value
+					feed.autoupdate = x.autoupdate.value
 					newfeeds.append(feed) # Append to new Feeds
 					self.feeds.remove(feed) # Remove from old Feeds
 					found = True
@@ -216,11 +217,12 @@ class RSSPoller:
 			if not found:
 				newfeeds.append(
 					UniversalFeed(
-						config.plugins.simpleRSS.feed[i].uri.value,
-						config.plugins.simpleRSS.feed[i].autoupdate.value
+						x.uri.value,
+						x.autoupdate.value
 				))
 			found = False
 
 		self.feeds = newfeeds
 
 		self.reloading = False
+
