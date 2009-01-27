@@ -130,25 +130,27 @@ class AutoTimerEditorBase:
 		self.editingDefaults = editingDefaults
 
 		# See if we are filtering some strings
-		self.excludes = (
+		excludes = (
 			timer.getExcludedTitle(),
 			timer.getExcludedShort(),
 			timer.getExcludedDescription(),
 			timer.getExcludedDays()
 		)
-		self.includes = (
+		includes = (
 			timer.getIncludedTitle(),
 			timer.getIncludedShort(),
 			timer.getIncludedDescription(),
 			timer.getIncludedDays()
 		)
-		if len(self.excludes[0]) or len(self.excludes[1]) \
-				or len(self.excludes[2]) or len(self.excludes[3]) \
-				or len(self.includes[0]) or len(self.includes[1]) \
-				or len(self.includes[2]) or len(self.includes[3]):
+		if len(excludes[0]) or len(excludes[1]) \
+				or len(excludes[2]) or len(excludes[3]) \
+				or len(includes[0]) or len(includes[1]) \
+				or len(includes[2]) or len(includes[3]):
 			self.filterSet = True
 		else:
 			self.filterSet = False
+		self.excludes = excludes
+		self.includes = includes
 
 		# See if services are restricted
 		self.services = timer.services
@@ -220,7 +222,7 @@ class AutoTimerEditorBase:
 
 		# AfterEvent
 		if timer.hasAfterEvent():
-			afterevent = {
+			default = {
 				None: "default",
 				AFTEREVENT.NONE: "nothing",
 				AFTEREVENT.DEEPSTANDBY: "deepstandby",
@@ -228,8 +230,8 @@ class AutoTimerEditorBase:
 				AFTEREVENT.AUTO: "auto"
 			}[timer.afterevent[0][0]]
 		else:
-			afterevent = "default"
-		self.afterevent = ConfigSelection(choices = [("default", _("standard")), ("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default = afterevent)
+			default = "default"
+		self.afterevent = ConfigSelection(choices = [("default", _("standard")), ("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default = default)
 
 		# AfterEvent (Timespan)
 		if timer.hasAfterEvent() and timer.afterevent[0][1][0] is not None:
