@@ -1,2 +1,38 @@
 AUTOMAKE_OPTIONS = gnu
-SUBDIRS = antiscrollbar movietagger webinterface wirelesslan netcaster lastfm logomanager vlcplayer simplerss trafficinfo fritzcall webcamviewer emailclient autotimer epgrefresh werbezapper httpproxy startuptostandby imdb ofdb networkwizard movieretitle moviecut tageditor cdinfo unwetterzentrale youtubeplayer zaphistorybrowser passwordchanger autoresolution mosaic googlemaps rsdownloader permanentclock mediadownloader
+SUBDIRS = \
+	antiscrollbar \
+	autoresolution \
+	autotimer \
+	cdinfo \
+	emailclient \
+	epgrefresh \
+	fritzcall \
+	googlemaps \
+	httpproxy \
+	imdb \
+	lastfm \
+	logomanager \
+	mediadownloader \
+	mosaic \
+	moviecut \
+	movieretitle \
+	movietagger \
+	netcaster \
+	networkwizard \
+	ofdb \
+	passwordchanger \
+	permanentclock \
+	rsdownloader \
+	simplerss \
+	startuptostandby \
+	tageditor \
+	trafficinfo \
+	unwetterzentrale \
+	vlcplayer \
+	webcamviewer \
+	webinterface \
+	werbezapper \
+	wirelesslan \
+	youtubeplayer \
+	zaphistorybrowser
+
