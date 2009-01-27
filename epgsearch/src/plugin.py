@@ -4,7 +4,7 @@ from Components.config import config, ConfigSet, ConfigSubsection, ConfigText
 config.plugins.epgsearch = ConfigSubsection()
 config.plugins.epgsearch.history = ConfigSet(choices = [])
 # XXX: configtext is more flexible but we cannot use this for a (not yet created) gui config
-config.plugins.epgsearch.history = ConfigText(default = 'ISO8859-15', fixed_size = False)
+config.plugins.epgsearch.encoding = ConfigText(default = 'ISO8859-15', fixed_size = False)
 
 # Plugin
 from EPGSearch import EPGSearch
