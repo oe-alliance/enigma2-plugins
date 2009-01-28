@@ -408,7 +408,31 @@ class AutoTimerComponent(object):
 
 	def checkServices(self, service):
 		if len(self.services) or len(self.bouquets):
-			return service not in self.getFullServices()
+			if service in self.services:
+				return False
+
+			from enigma import eServiceReference, eServiceCenter
+			serviceHandler = eServiceCenter.getInstance()
+			for bouquet in self.bouquets:
+				myref = eServiceReference(str(bouquet))
+				mylist = serviceHandler.list(myref)
+				if mylist is not None:
+					while 1:
+						s = mylist.getNext()
+						# TODO: I wonder if its sane to assume we get services here (and not just new lists)
+						# We can ignore markers & directorys here because they won't match any event's service :-)
+						if s.valid():
+							# strip all after last :
+							value = s.toString()
+							pos = value.rfind(':')
+							if pos != -1:
+								value = value[:pos+1]
+	
+							if service is value:
+								return False
+						else:
+							break
+			return True
 		return False
 
 	def checkTimespan(self, begin):
