@@ -29,7 +29,7 @@ class AutoTimerPreview(Screen):
 
 		self.timers = timers
 
-		self["timerlist"] = AutoTimerPreviewList(self.timers)
+		self["timerlist"] = AutoTimerPreviewList(timers)
 
 		# Initialize Buttons
 		self["key_red"] = Button(_("Cancel"))
@@ -58,15 +58,16 @@ class AutoTimerPreview(Screen):
 			self["key_yellow"].setText(_("Sort AutoTimer"))
 
 	def sort(self):
-		if len(self.timers):
+		timers = self.timers
+		if len(timers):
 			timer = self["timerlist"].getCurrent()
 			if self.sort_type == 1:
-				self.timers.sort(key=lambda x: x[1])
+				timers.sort(key=lambda x: x[1])
 				self.sort_type = 0
 			else:
-				self.timers.sort(key = lambda x: x[4].lower())
+				timers.sort(key = lambda x: x[4].lower())
 				self.sort_type = 1
-			self["timerlist"].setList(self.timers)
+			self["timerlist"].setList(timers)
 			self["timerlist"].moveToEntry(timer)
 			self.setSortDescription()
 

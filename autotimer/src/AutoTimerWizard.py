@@ -109,38 +109,39 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 		return []
 
 	def selectionMade(self):
+		timer = self.timer
 		if self.currStep == AutoTimerWizard.STEP_ID_BASIC: # Basic
-			self.timer.enabled = self.enabled.value
-			self.timer.name = self.name.value.strip() or self.match.value
-			self.timer.match = self.match.value
-			self.timer.justplay = self.justplay.value == "zap"
-			self.emptyMatch = not self.timer.match.strip()
-			self.trailingWhitespacesMatch = (self.timer.match[-1:] == " ")
+			timer.enabled = self.enabled.value
+			timer.name = self.name.value.strip() or self.match.value
+			timer.match = self.match.value
+			timer.justplay = self.justplay.value == "zap"
+			self.emptyMatch = not timer.match.strip()
+			self.trailingWhitespacesMatch = (timer.match[-1:] == " ")
 		elif self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN: # Timespan
 			if self.timespan.value:
 				start = self.timespanbegin.value
 				end = self.timespanend.value
-				self.timer.timespan = (start, end)
+				timer.timespan = (start, end)
 			else:
-				self.timer.timespan = None
+				timer.timespan = None
 		elif self.currStep == AutoTimerWizard.STEP_ID_SERVICES: # Services
 			self.servicesDlg.refresh()
 
 			if self.servicesDlg.enabled.value:
-				self.timer.services = self.servicesDlg.services[0]
-				self.timer.bouquets = self.servicesDlg.services[1]
+				timer.services = self.servicesDlg.services[0]
+				timer.bouquets = self.servicesDlg.services[1]
 			else:
-				self.timer.services = []
-				self.timer.bouquets = []
+				timer.services = []
+				timer.bouquets = []
 		elif self.currStep == AutoTimerWizard.STEP_ID_FILTER: # Filters
 			self.filterDlg.refresh()
 
 			if self.filterDlg.enabled.value:
-				self.timer.includes = self.filterDlg.includes
-				self.timer.excludes = self.filterDlg.excludes
+				timer.includes = self.filterDlg.includes
+				timer.excludes = self.filterDlg.excludes
 			else:
-				self.timer.includes = []
-				self.timer.excludes = []
+				timer.includes = []
+				timer.excludes = []
 
 	def keyNumberGlobal(self, number):
 		if self.currStep == AutoTimerWizard.STEP_ID_BASIC or self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN:

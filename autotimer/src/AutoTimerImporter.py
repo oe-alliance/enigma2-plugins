@@ -56,14 +56,15 @@ class AutoTimerImportSelector(Screen):
 		self.setTitle(_("Select a Timer to Import"))
 
 	def fillTimerList(self):
-		del self.list[:]
+		l = self.list
+		del l[:]
 
 		for timer in self.session.nav.RecordTimer.timer_list:
-			self.list.append((timer, False))
+			l.append((timer, False))
 
 		for timer in self.session.nav.RecordTimer.processed_timers:
-			self.list.append((timer, True))
-		self.list.sort(cmp = lambda x, y: x[0].begin < y[0].begin)
+			l.append((timer, True))
+		l.sort(key = lambda x: x[0].begin)
 
 	def importerClosed(self, ret):
 		ret = ret and ret[0]
@@ -250,14 +251,15 @@ class AutoTimerImporter(Screen):
 
 	def accept(self):
 		list = self["list"].getSelectionsList()
+		autotimer = self.autotimer
 
 		for item in list:
 			if item[2] == 0: # Enable
-				self.autotimer.enabled = item[1]
+				autotimer.enabled = item[1]
 			elif item[2] == 1: # Match
-				self.autotimer.match = item[1]
+				autotimer.match = item[1]
 			elif item[2] == 2: # Timespan
-				self.autotimer.timespan = item[1]
+				autotimer.timespan = item[1]
 			elif item[2] == 3: # Service
 				value = item[1]
 
@@ -266,17 +268,17 @@ class AutoTimerImporter(Screen):
 				if pos != -1:
 					value = value[:pos+1]
 
-				self.autotimer.services = [value]
+				autotimer.services = [value]
 			elif item[2] == 4: # AfterEvent
-				self.autotimer.afterevent = [(item[1], None)]
+				autotimer.afterevent = [(item[1], None)]
 			elif item[2] == 5: # Justplay
-				self.autotimer.justplay = item[1]
+				autotimer.justplay = item[1]
 			elif item[2] == 6: # Location
-				self.autotimer.destination = item[1]
+				autotimer.destination = item[1]
 			elif item[2] == 7: # Tags
-				self.autotimer.tags = item[1]
+				autotimer.tags = item[1]
 
-		if self.autotimer.match == "":
+		if autotimer.match == "":
 			self.session.openWithCallback(
 					self.gotCustomMatch,
 					InputBox,
@@ -284,7 +286,7 @@ class AutoTimerImporter(Screen):
 			)
 		else:
 			self.close((
-				self.autotimer,
+				autotimer,
 				self.session
 			))
 

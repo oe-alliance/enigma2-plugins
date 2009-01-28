@@ -33,7 +33,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 		self.setup_title = _("AutoTimer Settings")
 		self.onChangedEntry = []
 
-		self.list = [
+		list = [
 			getConfigListEntry(_("Poll automatically"), config.plugins.autotimer.autopoll),
 			getConfigListEntry(_("Poll Interval (in h)"), config.plugins.autotimer.interval),
 			getConfigListEntry(_("Modify existing Timers"), config.plugins.autotimer.refresh),
@@ -42,7 +42,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 			getConfigListEntry(_("Editor for new AutoTimers"), config.plugins.autotimer.editor),
 		]
 
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(self, list, session = session, on_change = self.changed)
 
 		# Initialize Buttons
 		self["key_red"] = Button(_("Cancel"))

@@ -56,9 +56,6 @@ class AutoTimer:
 	"""Read and save xml configuration, query EPGCache"""
 
 	def __init__(self):
-		# Keep EPGCache
-		self.epgcache = eEPGCache.getInstance()
-
 		# Initialize
 		self.timers = []
 		self.configMtime = -1
@@ -181,12 +178,13 @@ class AutoTimer:
 					pass
 
 			# Search EPG, default to empty list
-			ret = self.epgcache.search(('RI', 100, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or []
+			epgcache = eEPGCache.getInstance()
+			ret = epgcache.search(('RI', 100, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or []
 
 			for serviceref, eit in ret:
 				eserviceref = eServiceReference(serviceref)
 
-				evt = self.epgcache.lookupEventId(eserviceref, eit)
+				evt = epgcache.lookupEventId(eserviceref, eit)
 				if not evt:
 					print "[AutoTimer] Could not create Event!"
 					continue
