@@ -1,5 +1,6 @@
 from enigma import eEPGCache, eServiceReference
 
+from Screens.ChannelSelection import SimpleChannelSelection
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
 from Screens.InputBox import InputBox
@@ -38,8 +39,11 @@ class EPGSearch(EPGSelection):
 		)
 
 	def blueButtonPressed(self):
-		options = [(x, x) for x in config.plugins.epgsearch.history.value]
-		options.insert(0, (_("From Timer"), "xxImportFromTimer"))
+		options = [
+			(_("From Timer"), "xxImportFromTimer"),
+			(_("From EPG"), "xxImportFromEPG")
+		]
+		options.extend([(x, x) for x in config.plugins.epgsearch.history.value])
 
 		self.session.openWithCallback(
 			self.searchEPGWrapper,
@@ -55,6 +59,11 @@ class EPGSearch(EPGSelection):
 				self.session.openWithCallback(
 					self.searchEPG,
 					EPGSearchTimerImport
+				)
+			elif ret is "xxImportFromEPG":
+				self.session.openWithCallback(
+					self.searchEPG,
+					EPGSearchChannelSelection
 				)
 			else:
 				self.searchEPG(ret)
@@ -135,4 +144,48 @@ class EPGSearchTimerImport(Screen):
 
 	def cancel(self):
 		self.close(None)
+
+class EPGSearchChannelSelection(SimpleChannelSelection):
+	def __init__(self, session):
+		SimpleChannelSelection.__init__(self, session, _("Channel Selection"))
+		self.skinName = "SimpleChannelSelection"
+
+		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
+			{
+				"showEPGList": self.channelSelected
+			}
+		)
+
+	def channelSelected(self):
+		ref = self.getCurrentSelection()
+		if (ref.flags & 7) == 7:
+			self.enterPath(ref)
+		elif not (ref.flags & eServiceReference.isMarker):
+			self.session.openWithCallback(
+				self.epgClosed,
+				EPGSearchEPGSelection,
+				ref
+			)
+
+	def epgClosed(self, ret = None):
+		if ret:
+			self.close(ret)
+
+class EPGSearchEPGSelection(EPGSelection):
+	def __init__(self, session, ref):
+		EPGSelection.__init__(self, session, ref)
+		self.skinName = "EPGSelection"
+		self["key_green"].setText(_("Search"))
+
+	def infoKeyPressed(self):
+		self.timerAdd()
+
+	def timerAdd(self):
+		cur = self["list"].getCurrent()
+		evt = cur[0]
+		sref = cur[1]
+		if not evt: 
+			return
+
+		self.close(evt.getEventName())
 
