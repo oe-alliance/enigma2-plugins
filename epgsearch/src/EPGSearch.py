@@ -68,7 +68,7 @@ class EPGSearch(EPGSelection):
 			else:
 				self.searchEPG(ret)
 
-	def searchEPG(self, searchString):
+	def searchEPG(self, searchString = None):
 		if searchString:
 			# Maintain history
 			history = config.plugins.epgsearch.history.value
