@@ -12,7 +12,7 @@ from Components.config import config
 from Components.TimerList import TimerList
 
 class EPGSearch(EPGSelection):
-	def __init__(self, session):
+	def __init__(self, session, search = None):
 		EPGSelection.__init__(self, session, '')  # Empty string serviceref so we get EPG_TYPE_SINGLE
 		self.skinName = "EPGSelection"
 
@@ -20,11 +20,17 @@ class EPGSearch(EPGSelection):
 		self["key_yellow"].setText(_("New Search"))
 		self["key_blue"].setText(_("History"))
 
+		self.search = search
+
 	def onCreate(self):
-		l = self["list"]
-		l.recalcEntrySize()
-		l.list = []
-		l.l.setList(l.list)
+		if self.search:
+			self.searchEPG(self.search)
+		else:
+			l = self["list"]
+			l.recalcEntrySize()
+			l.list = []
+			l.l.setList(l.list)
+		del self.search
 
 	def closeScreen(self):
 		# Save our history

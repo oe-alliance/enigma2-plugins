@@ -1,3 +1,5 @@
+from enigma import eServiceCenter
+
 # Config
 from Components.config import config, ConfigSet, ConfigSubsection, ConfigText
 
@@ -16,6 +18,23 @@ from Plugins.Plugin import PluginDescriptor
 def main(session, *args, **kwargs):
 	session.open(EPGSearch)
 
+# Movielist
+def movielist(session, service, **kwargs):
+	serviceHandler = eServiceCenter.getInstance()
+	info = serviceHandler.info(service)
+	name = info and info.getName(service) or ''
+
+	session.open(EPGSearch, name)
+
+# Event Info
+def eventinfo(session, servicelist, **kwargs):
+	s = session.nav.getCurrentService()
+	info = s.info()
+	event = info.getEvent(0) # 0 = now, 1 = next
+	name = event and event.getEventName() or ''
+
+	session.open(EPGSearch, name)
+
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
@@ -27,6 +46,12 @@ def Plugins(**kwargs):
 		PluginDescriptor(
 			name = _("Search EPG"),
 			where = PluginDescriptor.WHERE_EVENTINFO,
-			fnc = main,
+			fnc = eventinfo,
+		),
+		PluginDescriptor(
+			name = "EPGSearch",
+			description = _("Search EPG"),
+			where = PluginDescriptor.WHERE_MOVIELIST,
+			fnc = movielist,
 		),
 	]
