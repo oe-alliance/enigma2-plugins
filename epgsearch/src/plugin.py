@@ -19,14 +19,13 @@ def main(session, *args, **kwargs):
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			name="EPGSearch",
-			description = _("Search the EPG"),
+			name = "EPGSearch",
+			description = _("Search EPG"),
 			where = PluginDescriptor.WHERE_PLUGINMENU,
 			fnc = main,
 		),
 		PluginDescriptor(
-			name="EPGSearch",
-			description = _("Search the EPG"),
+			name = _("Search EPG"),
 			where = PluginDescriptor.WHERE_EVENTINFO,
 			fnc = main,
 		),
