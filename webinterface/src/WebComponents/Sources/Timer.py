@@ -22,7 +22,7 @@ class Timer( Source):
     
     def __init__(self, session, func = LIST):
         self.func = func
-        Source.__init__(self)        
+        Source.__init__(self)
         self.session = session
         self.recordtimer = session.nav.RecordTimer
         self.epgcache = eEPGCache.getInstance()
@@ -64,12 +64,12 @@ class Timer( Source):
             return False, "Missing Parameter: sRef"
         
         if param.has_key('begin'):
-            begin = int(param['begin'])   
+            begin = int(param['begin'])
         else:
             return False, "Missing Parameter: begin"
         
         if param.has_key('end'):
-            end = int(param['end'])            
+            end = int(param['end'])
         else:
         	return False, "Missing Parameter: end"
              
@@ -265,7 +265,7 @@ class Timer( Source):
         #Try to edit an existing Timer
         if param.has_key('channelOld'):
             print "ChannelOld: %s" %param['channelOld']
-            if param['channelOld'] != '':             
+            if param['channelOld'] != '':
                 channelOld = ServiceReference(param['channelOld'])
                 
                 # We do need all of the following Parameters, too, for being able of finding the Timer.
@@ -366,7 +366,7 @@ class Timer( Source):
         if result:
             xml += "<e2state>True</e2state>\n"
         else:
-            xml += "<e2state>False</e2state>\n"            
+            xml += "<e2state>False</e2state>\n"
         xml += "<e2statetext>%s</e2statetext>\n" % text
         xml += "</e2simplexmlresult>\n"
         return xml
@@ -410,7 +410,7 @@ class Timer( Source):
             except:
                 timer.append("")
             
-            timer.append(item.backoff)       
+            timer.append(item.backoff)
             
             try:
                 timer.append(item.next_activation)
@@ -476,4 +476,4 @@ class Timer( Source):
                "DescriptionExtended":22,
                "toggleDisabled":23,
                "toggleDisabledIMG":24,
-           }       
+           }
