@@ -12,7 +12,7 @@ from Components.config import config
 from Components.TimerList import TimerList
 
 class EPGSearch(EPGSelection):
-	def __init__(self, session, search = None):
+	def __init__(self, session, *args):
 		EPGSelection.__init__(self, session, '')  # Empty string serviceref so we get EPG_TYPE_SINGLE
 		self.skinName = "EPGSelection"
 
@@ -20,17 +20,17 @@ class EPGSearch(EPGSelection):
 		self["key_yellow"].setText(_("New Search"))
 		self["key_blue"].setText(_("History"))
 
-		self.search = search
+		self.searchargs = args
 
 	def onCreate(self):
-		if self.search:
-			self.searchEPG(self.search)
+		if self.searchargs:
+			self.searchEPG(*self.searchargs)
 		else:
 			l = self["list"]
 			l.recalcEntrySize()
 			l.list = []
 			l.l.setList(l.list)
-		del self.search
+		del self.searchargs
 
 	def closeScreen(self):
 		# Save our history
@@ -74,17 +74,18 @@ class EPGSearch(EPGSelection):
 			else:
 				self.searchEPG(ret)
 
-	def searchEPG(self, searchString = None):
+	def searchEPG(self, searchString = None, searchSave = True):
 		if searchString:
-			# Maintain history
-			history = config.plugins.epgsearch.history.value
-			if searchString not in history:
-				history.insert(0, searchString)
-				if len(history) > 10:
-					history.pop(10)
-			else:
-				history.remove(searchString)
-				history.insert(0, searchString)
+			if searchSave:
+				# Maintain history
+				history = config.plugins.epgsearch.history.value
+				if searchString not in history:
+					history.insert(0, searchString)
+					if len(history) > 10:
+						history.pop(10)
+				else:
+					history.remove(searchString)
+					history.insert(0, searchString)
 
 			# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
 			encoding = config.plugins.epgsearch.encoding.value

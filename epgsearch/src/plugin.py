@@ -33,7 +33,7 @@ def eventinfo(session, servicelist, **kwargs):
 	event = info.getEvent(0) # 0 = now, 1 = next
 	name = event and event.getEventName() or ''
 
-	session.open(EPGSearch, name)
+	session.open(EPGSearch, name, False)
 
 def Plugins(**kwargs):
 	return [
