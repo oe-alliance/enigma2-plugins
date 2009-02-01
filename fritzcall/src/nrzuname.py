@@ -78,7 +78,7 @@ def out(number, caller):
 	else:
 		name = lines[0]
 	aktuell = 1
-	found = re.match("^(.+) (\d+)$", lines[1], re.S)
+	found = re.match("^(.+) ([-\d]+)$", lines[1], re.S)
 	if found:
 		strasse = found.group(1)
 		hnr = found.group(2)

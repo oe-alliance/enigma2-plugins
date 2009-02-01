@@ -52,7 +52,7 @@ DESKTOP_SKIN = config.skin.primary_skin.value.replace("/skin.xml","")
 XXX = 0 # TODO: Platzhalter für fullscreen SD skin
 #
 # this is pure magic.
-# It returns the first value, if HD (1280x1024),
+# It returns the first value, if HD (1280x720),
 # the second if SD (720x576),
 # else something scaled accordingly
 #
@@ -847,7 +847,7 @@ class FritzCallPhonebook:
 						config.plugins.FritzCall.phonebookLocation.value + ".bck")
 				fNew = open(config.plugins.FritzCall.phonebookLocation.value, 'w')
 				for (number, name) in self.phonebook.iteritems():
-					fNew.write(number + "#" + name)
+					fNew.write(number + "#" + name.encode("utf-8"))
 				fNew.close()
 
 		if config.plugins.FritzCall.fritzphonebook.value:
@@ -879,7 +879,7 @@ class FritzCallPhonebook:
 					f = open(config.plugins.FritzCall.phonebookLocation.value, 'a')
 					name = name.strip() + "\n"
 					string = "%s#%s" %(number, name)
-					f.write(string)
+					f.write(string.encode("utf-8"))
 					f.close()
 					debug("[FritzCallPhonebook] added %s with %s to Phonebook.txt" %(number, name))
 					return True
@@ -1584,7 +1584,7 @@ class FritzReverseLookupAndNotifier:
 		self.date = date
 
 		if number[0] != "0":
-			self.notifyAndReset()
+			self.notifyAndReset(number,caller)
 			return
 
 		ReverseLookupAndNotifier(number, self.notifyAndReset, "UTF-8", config.plugins.FritzCall.country.value)
