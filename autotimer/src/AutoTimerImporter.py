@@ -132,13 +132,20 @@ class AutoTimerImporter(Screen):
 			))
 
 		if name != "":
-			list.append(
+			list.extend([
 				SelectionEntryComponent(
 					_("Match title: %s") % (name),
 					name,
 					1,
 					True
-			))
+				),
+				SelectionEntryComponent(
+					_("Exact match"),
+					True,
+					8,
+					True
+				)
+			])
 
 		if begin and end:
 			begin = localtime(begin)
@@ -277,6 +284,9 @@ class AutoTimerImporter(Screen):
 				autotimer.destination = item[1]
 			elif item[2] == 7: # Tags
 				autotimer.tags = item[1]
+			elif item[2] == 8: # Exact match
+				autotimer.searchType = "exact"
+				autotimer.searchCase = "sensitive"
 
 		if autotimer.match == "":
 			self.session.openWithCallback(
