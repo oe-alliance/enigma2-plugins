@@ -284,13 +284,19 @@ class OFDB(Screen):
 			event = info.getEvent(0) # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
+
+		if self.eventName is not "":
 			try:
-				pos = self.eventName.index("(")
+				pos = self.eventName.index(" (")
 				self.eventName=self.eventName[0:pos]
 			except ValueError:
 				pass
-
-		if self.eventName is not "":
+			if self.eventName[-3:] == "...":
+				self.eventName = self.eventName[:-3]
+			for article in ["The", "Der", "Die", "Das"]:
+				if self.eventName[:4].capitalize() == article + " ":
+					self.eventName = self.eventName[4:] + ", " + article
+			
 			self["statusbar"].setText("Query OFDb: " + self.eventName + "...")
 			try:
 				self.eventName = urllib.quote(self.eventName)
