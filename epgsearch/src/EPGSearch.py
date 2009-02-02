@@ -13,14 +13,13 @@ from Components.TimerList import TimerList
 
 class EPGSearch(EPGSelection):
 	def __init__(self, session, *args):
-		EPGSelection.__init__(self, session, '')  # Empty string serviceref so we get EPG_TYPE_SINGLE
+		EPGSelection.__init__(self, session, '') # Empty string serviceref so we get EPG_TYPE_SINGLE
 		self.skinName = "EPGSelection"
 
 		self["MenuActions"] = ActionMap(["MenuActions"],
-			{
+		{
 				"menu": self.menu,
-			}
-		)
+		})
 
 		# XXX: we lose sort begin/end here
 		self["key_yellow"].setText(_("New Search"))
@@ -174,10 +173,9 @@ class EPGSearchChannelSelection(SimpleChannelSelection):
 		self.skinName = "SimpleChannelSelection"
 
 		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
-			{
+		{
 				"showEPGList": self.channelSelected
-			}
-		)
+		})
 
 	def channelSelected(self):
 		ref = self.getCurrentSelection()
