@@ -75,9 +75,9 @@ def parseEntry(element, baseTimer, defaults = False):
 	# Read out encoding (won't change if no value is set)
 	baseTimer.encoding = element.get("encoding")
 
-	# ...
-	baseTimer.searchType = element.get("searchType", "partial")
-	baseTimer.searchCase = element.get("searchCase", "insensitive")
+	# Read out search type/case
+	baseTimer.searchType = element.get("searchType", baseTimer.searchType)
+	baseTimer.searchCase = element.get("searchCase", baseTimer.searchCase)
 
 	# Read out timespan
 	start = element.get("from")
@@ -121,8 +121,11 @@ def parseEntry(element, baseTimer, defaults = False):
 	baseTimer.avoidDuplicateDescription = int(element.get("avoidDuplicateDescription", 0))
 
 	# Read out allowed services
-	servicelist = baseTimer.services
-	for service in element.findall("serviceref"):
+	l = element.findall("serviceref")
+	if l:
+		servicelist = []
+
+		for service in l:
 		value = service.text
 		if value:
 			# strip all after last :
@@ -131,78 +134,88 @@ def parseEntry(element, baseTimer, defaults = False):
 				value = value[:pos+1]
 
 			servicelist.append(value)
-	baseTimer.services = servicelist
+		baseTimer.services = servicelist
 
 	# Read out allowed bouquets
-	bouquets = baseTimer.bouquets
-	for bouquet in element.findall("bouquet"):
-		value = bouquet.text
-		if value:
-			bouquets.append(value)
-	baseTimer.bouquets = bouquets
+	l = element.findall("bouquet")
+	if services:
+		bouquets = []
+		for bouquet in l:
+			value = bouquet.text
+			if value:
+				bouquets.append(value)
+		baseTimer.bouquets = bouquets
 
 	# Read out afterevent
-	idx = {
-		"none": AFTEREVENT.NONE,
-		"deepstandby": AFTEREVENT.DEEPSTANDBY,
-		"shutdown": AFTEREVENT.DEEPSTANDBY,
-		"standby": AFTEREVENT.STANDBY,
-		"auto": AFTEREVENT.AUTO
-	}
-	afterevent = baseTimer.afterevent
-	for element in element.findall("afterevent"):
-		value = element.text
+	l = element.findall("afterevent")
+	if l:
+		idx = {
+			"none": AFTEREVENT.NONE,
+			"deepstandby": AFTEREVENT.DEEPSTANDBY,
+			"shutdown": AFTEREVENT.DEEPSTANDBY,
+			"standby": AFTEREVENT.STANDBY,
+			"auto": AFTEREVENT.AUTO
+		}
+		afterevent = []
+		for element in l:
+			value = element.text
 
-		if idx.has_key(value):
-			value = idx[value]
-		else:
-			print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
-			continue
+			if idx.has_key(value):
+				value = idx[value]
+			else:
+				print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
+				continue
 
-		start = element.get("from")
-		end = element.get("to")
-		if start and end:
-			start = [int(x) for x in start.split(':')]
-			end = [int(x) for x in end.split(':')]
-			afterevent.append((value, (start, end)))
-		else:
-			afterevent.append((value, None))
-	baseTimer.afterevent = afterevent
+			start = element.get("from")
+			end = element.get("to")
+			if start and end:
+				start = [int(x) for x in start.split(':')]
+				end = [int(x) for x in end.split(':')]
+				afterevent.append((value, (start, end)))
+			else:
+				afterevent.append((value, None))
+		baseTimer.afterevent = afterevent
 
 	# Read out exclude
+	l = element.findall("exclude")
 	idx = {"title": 0, "shortdescription": 1, "description": 2, "dayofweek": 3}
-	excludes = (baseTimer.getExcludedTitle(), baseTimer.getExcludedShort(), baseTimer.getExcludedDescription(), baseTimer.getExcludedDays())
-	for exclude in element.findall("exclude"):
-		where = exclude.get("where")
-		value = exclude.text
-		if not (value and where):
-			continue
+	if l:
+		excludes = ([], [], [], [])
+		for exclude in :
+			where = exclude.get("where")
+			value = exclude.text
+			if not (value and where):
+				continue
 
-		if idx.has_key(where):
-			excludes[idx[where]].append(value.encode("UTF-8"))
-	baseTimer.exclude = excludes
+			if idx.has_key(where):
+				excludes[idx[where]].append(value.encode("UTF-8"))
+		baseTimer.exclude = excludes
 
 	# Read out includes (use same idx)
-	includes = (baseTimer.getIncludedTitle(), baseTimer.getIncludedShort(), baseTimer.getIncludedDescription(), baseTimer.getIncludedDays())
-	for include in element.findall("include"):
-		where = include.get("where")
-		value = include.text
-		if not (value and where):
-			continue
+	l = element.findall("include")
+	if l:
+		includes = ([], [], [], [])
+		for include in l:
+			where = include.get("where")
+			value = include.text
+			if not (value and where):
+				continue
 
-		if idx.has_key(where):
-			includes[idx[where]].append(value.encode("UTF-8"))
-	baseTimer.include = includes
+			if idx.has_key(where):
+				includes[idx[where]].append(value.encode("UTF-8"))
+		baseTimer.include = includes
 
-	# Read out recording tags (needs my enhanced tag support patch)
-	tags = baseTimer.tags
-	for tag in element.findall("tag"):
-		value = tag.text
-		if not value:
-			continue
+	# Read out recording tags
+	l =  element.findall("tag")
+	if l:
+		tags = []
+		for tag in
+			value = tag.text
+			if not value:
+				continue
 
-		tags.append(value.encode("UTF-8"))
-	baseTimer.tags = tags
+			tags.append(value.encode("UTF-8"))
+		baseTimer.tags = tags
 
 	return True
 
@@ -415,7 +428,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 		# Read out recording path
 		destination = timer.get("destination", "").encode("UTF-8") or None
 
-		# Read out recording tags (needs my enhanced tag support patch)
+		# Read out recording tags
 		tags = []
 		for tag in timer.findall("tag"):
 			value = tag.text
