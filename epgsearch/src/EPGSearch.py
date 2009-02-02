@@ -16,6 +16,12 @@ class EPGSearch(EPGSelection):
 		EPGSelection.__init__(self, session, '')  # Empty string serviceref so we get EPG_TYPE_SINGLE
 		self.skinName = "EPGSelection"
 
+		self["MenuActions"] = ActionMap(["MenuActions"],
+			{
+				"menu": self.menu,
+			}
+		)
+
 		# XXX: we lose sort begin/end here
 		self["key_yellow"].setText(_("New Search"))
 		self["key_blue"].setText(_("History"))
@@ -44,12 +50,34 @@ class EPGSearch(EPGSelection):
 			title = _("Enter text to search for")
 		)
 
-	def blueButtonPressed(self):
+	def menu(self):
 		options = [
-			(_("From Timer"), "xxImportFromTimer"),
-			(_("From EPG"), "xxImportFromEPG")
+			(_("Import from Timer"), "importFromTimer"),
+			(_("Import from EPG"), "importFromEPG")
 		]
-		options.extend([(x, x) for x in config.plugins.epgsearch.history.value])
+
+		self.session.openWithCallback(
+			self.menuCallback,
+			ChoiceBox,
+			list = options
+		)
+
+	def menuCallback(self, ret):
+		if ret:
+			ret = ret[1]
+			if ret is "importFromTimer":
+				self.session.openWithCallback(
+					self.searchEPG,
+					EPGSearchTimerImport
+				)
+			elif ret is "importFromEPG":
+				self.session.openWithCallback(
+					self.searchEPG,
+					EPGSearchChannelSelection
+				)
+
+	def blueButtonPressed(self):
+		options = [(x, x) for x in config.plugins.epgsearch.history.value]
 
 		self.session.openWithCallback(
 			self.searchEPGWrapper,
@@ -60,19 +88,7 @@ class EPGSearch(EPGSelection):
 
 	def searchEPGWrapper(self, ret):
 		if ret:
-			ret = ret[1]
-			if ret is "xxImportFromTimer":
-				self.session.openWithCallback(
-					self.searchEPG,
-					EPGSearchTimerImport
-				)
-			elif ret is "xxImportFromEPG":
-				self.session.openWithCallback(
-					self.searchEPG,
-					EPGSearchChannelSelection
-				)
-			else:
-				self.searchEPG(ret)
+			self.searchEPG(ret[1])
 
 	def searchEPG(self, searchString = None, searchSave = True):
 		if searchString:
@@ -191,7 +207,7 @@ class EPGSearchEPGSelection(EPGSelection):
 		cur = self["list"].getCurrent()
 		evt = cur[0]
 		sref = cur[1]
-		if not evt: 
+		if not evt:
 			return
 
 		self.close(evt.getEventName())
