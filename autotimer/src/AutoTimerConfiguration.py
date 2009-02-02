@@ -126,19 +126,19 @@ def parseEntry(element, baseTimer, defaults = False):
 		servicelist = []
 
 		for service in l:
-		value = service.text
-		if value:
-			# strip all after last :
-			pos = value.rfind(':')
-			if pos != -1:
-				value = value[:pos+1]
+			value = service.text
+			if value:
+				# strip all after last :
+				pos = value.rfind(':')
+				if pos != -1:
+					value = value[:pos+1]
 
-			servicelist.append(value)
+				servicelist.append(value)
 		baseTimer.services = servicelist
 
 	# Read out allowed bouquets
 	l = element.findall("bouquet")
-	if services:
+	if l:
 		bouquets = []
 		for bouquet in l:
 			value = bouquet.text
@@ -181,7 +181,7 @@ def parseEntry(element, baseTimer, defaults = False):
 	idx = {"title": 0, "shortdescription": 1, "description": 2, "dayofweek": 3}
 	if l:
 		excludes = ([], [], [], [])
-		for exclude in :
+		for exclude in l:
 			where = exclude.get("where")
 			value = exclude.text
 			if not (value and where):
@@ -209,7 +209,7 @@ def parseEntry(element, baseTimer, defaults = False):
 	l =  element.findall("tag")
 	if l:
 		tags = []
-		for tag in
+		for tag in l:
 			value = tag.text
 			if not value:
 				continue
