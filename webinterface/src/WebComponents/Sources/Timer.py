@@ -92,24 +92,25 @@ class Timer( Source):
             http://dreambox/web/tvbrowser? +
             
         To add something:
-            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&sRef={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
+            &command=add&&year={year}&month={month}&day={day}&shour={start_hour}&smin={start_minute}&ehour={end_hour}&emin={end_minute}&sRef={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(descr, "utf8")}&dirname={dirname}&tags={urlencode("tag1 tag2...", "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
         
         to zap for some time:
-            &command=add&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&sRef={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, afterevent=0&eit=&disabled=0&justplay=1&repeated=0
+            &command=add&&year={year}&month={month}&day={day}&shour={start_hour}&smin={start_minute}&ehour={end_hour}&emin={end_minute}&sRef={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(descr, "utf8")}&dirname={dirname}&tags={urlencode("tag1 tag2...", "utf8")}&afterevent=0&eit=&disabled=0&justplay=1&repeated=0
         
         to delete something:
-            &command=del&&syear={start_year}&smonth={start_month}&sday={start_day}&shour={start_hour}&smin={start_minute}&eyear={end_year}&emonth={end_month}&eday={end_day}&ehour={end_hour}&emin={end_minute}&sRef={urlencode(channel_name_external, "utf8")}&name={urlencode(title, "utf8")}&description={urlencode(title, "utf8")}&afterevent=0&eit=&disabled=0&justplay=0&repeated=0
+            &command=del&&year={year}&month={month}&day={day}&shour={start_hour}&smin={start_minute}&ehour={end_hour}&emin={end_minute}&sRef={urlencode(channel_name_external, "utf8")}
         """
         
-        listDate = ['syear','smonth','sday','shour','smin','eyear','emonth','eday','ehour','emin']
+        listDate = ['year','month','day','shour','smin','ehour','emin']
         for element in listDate:
             if param[element] is None:
                 return False,"%s missing"%element
             else:
                 param[element] = int(param[element])
-        param['begin'] = int( strftime("%s",  localtime(mktime( (param['syear'], param['smonth'], param['sday'], param['shour'], param['smin'], 0, 0, 0, -1) ) ) ) )
-        param['end']   = int( strftime("%s",  localtime(mktime( (param['eyear'], param['emonth'], param['eday'], param['ehour'], param['emin'], 0, 0, 0, -1) ) ) ) )
-        
+        param['begin'] = int(mktime( (param['year'], param['month'], param['day'], param['shour'], param['smin'], 0, 0, 0, -1) ) )
+        param['end']   = int(mktime( (param['year'], param['month'], param['day'], param['ehour'], param['emin'], 0, 0, 0, -1) ) )
+        if param['end'] < param['begin']:
+            param['end'] += 86400
         for element in listDate:
             del param[element]
         
@@ -185,7 +186,8 @@ class Timer( Source):
             if limitEvent:
                 return False, "No event found, started infinite recording"
 
-        timer = RecordTimerEntry(serviceref, begin, end, name, description, eventid, False, False, 0)
+        location = config.movielist.last_videodir.value
+        timer = RecordTimerEntry(serviceref, begin, end, name, description, eventid, False, False, 0, dirname = location)
         timer.dontSave = True
         self.recordtimer.record(timer)
 
@@ -262,6 +264,14 @@ class Timer( Source):
             if ( param['afterevent'] == "0") or (param['afterevent'] == "1") or (param['afterevent'] == "2"):
                 afterEvent = int(param['afterevent'])
 
+        dirname = None
+        if param.has_key('dirname'):
+            dirname = param['dirname']
+
+        tags = None
+        if param.has_key('tags'):
+            tags = unescape(param['tags']).split(' ')
+
         #Try to edit an existing Timer
         if param.has_key('channelOld'):
             print "ChannelOld: %s" %param['channelOld']
@@ -298,6 +308,8 @@ class Timer( Source):
                                     timer.justplay = justplay
                                     timer.afterEvent = afterEvent
                                     timer.repeated = repeated
+                                    timer.dirname = dirname
+                                    timer.tags = tags
                                     
                                     #send the changed timer back to enigma2 and hope it's good
                                     self.session.nav.RecordTimer.timeChanged(timer)
@@ -313,7 +325,7 @@ class Timer( Source):
 
         try:
             #Create a new instance of recordtimerentry
-            timer = RecordTimerEntry(service_ref, begin, end, name, description, 0, disabled, justplay, afterEvent)
+            timer = RecordTimerEntry(service_ref, begin, end, name, description, 0, disabled, justplay, afterEvent, dirname = dirname, tags = tags)
             timer.repeated = repeated
             #add the new timer
             self.recordtimer.record(timer)
@@ -384,7 +396,6 @@ class Timer( Source):
             timer.append(item.eit)
             timer.append(item.name)
             timer.append(item.description)
-            timer.append(item.dirname)
 
             if item.disabled is True:
                 timer.append("1")
@@ -403,6 +414,9 @@ class Timer( Source):
 
             timer.append(item.afterEvent)
             
+            timer.append(item.dirname)
+            timer.append(" ".join(item.tags))
+
             timer.append(item.log_entries)
             
             try:
@@ -456,24 +470,25 @@ class Timer( Source):
                "EIT":2,
                "Name":3,
                "Description":4,
-               "Directory":5,
-               "Disabled":6,
-               "TimeBegin":7,
-               "TimeEnd":8,
-               "Duration":9,
-               "startPrepare":10,
-               "justPlay":11,
-               "afterEvent":12,
-               "LogEntries":13,
-               "Filename":14,
-               "Backoff":15,
-               "nextActivation":16,
-               "firstTryPrepare":17,
-               "State":18,
-               "Repeated":19,
-               "dontSave":20,
-               "Cancled":21,
-               "DescriptionExtended":22,
-               "toggleDisabled":23,
-               "toggleDisabledIMG":24,
+               "Disabled":5,
+               "TimeBegin":6,
+               "TimeEnd":7,
+               "Duration":8,
+               "startPrepare":9,
+               "justPlay":10,
+               "afterEvent":11,
+               "Location":12,
+               "Tags":13,
+               "LogEntries":14,
+               "Filename":15,
+               "Backoff":16,
+               "nextActivation":17,
+               "firstTryPrepare":18,
+               "State":19,
+               "Repeated":20,
+               "dontSave":21,
+               "Cancled":22,
+               "DescriptionExtended":23,
+               "toggleDisabled":24,
+               "toggleDisabledIMG":25,
            }

@@ -409,6 +409,16 @@ function Timer(xml){
 		this.afterevent = "0";
 	}
 	try{
+		this.dirname = xml.getElementsByTagName('e2dirname').item(0).firstChild.data;
+	} catch (e) {
+		this.dirname = "/hdd/movie/";
+	}
+	try{
+		this.tags = xml.getElementsByTagName('e2tags').item(0).firstChild.data;
+	} catch (e) {
+		this.tags = "";
+	}
+	try{
 		this.logentries = xml.getElementsByTagName('e2logentries').item(0).firstChild.data;
 	} catch (e) {
 		this.logentries = "N/A";
@@ -538,6 +548,14 @@ function Timer(xml){
 		return this.afterevent;
 	};
 	
+	this.getDirname = function(){
+		return this.dirname;
+	};
+
+	this.getTags = function(){
+		return this.tags;
+	};
+
 	this.getLogentries = function(){
 		return this.logentries;
 	};

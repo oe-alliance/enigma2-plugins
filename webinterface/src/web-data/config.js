@@ -42,11 +42,14 @@ var url_filelist = "/web/mediaplayerlist?path="; // plus full qualified path
 
 var url_timerlist= "/web/timerlist";
 var url_recordnow= "/web/recordnow";
-var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
-var url_timerchange= "/web/timerchange"; // plus serviceref,begin,end,name,description,eit,disabled,justplay,afterevent
+var url_timeradd= "/web/timeradd"; // plus serviceref,begin,end,name,description,dirname,tags,eit,disabled,justplay,afterevent
+var url_timerchange= "/web/timerchange"; // plus serviceref,begin,end,name,description,dirname,tags,eit,disabled,justplay,afterevent
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
-var url_timerdelete= "/web/timerdelete"; // plus serviceref,bedin,end
+var url_timerdelete= "/web/timerdelete"; // plus serviceref,begin,end
 var url_timerlistwrite="/web/timerlistwrite?write=saveWriteNow";
+
+var url_getLocations="/web/getlocations";
+var url_getTags="/web/gettags";
 
 var url_message = "/web/message"; // plus text,type,timeout
 var url_messageanswer = "/web/messageanswer?getanswer=now"; 

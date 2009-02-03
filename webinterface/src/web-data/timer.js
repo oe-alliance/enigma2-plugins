@@ -6,27 +6,10 @@ addTimerEditFormArray.TVListFilled = 0;
 addTimerEditFormArray.RadioListFilled = 0;
 addTimerEditFormArray.deleteOldOnSave = 0;
 addTimerEditFormArray.eventID = 0;
+addTimerEditFormArray.locationsList = [];
+addTimerEditFormArray.tagsList = [];
 
 days = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
-
-
-function addTimerFormChangeTime(which) {
-	var start = new Date( $('syear').value, ($('smonth').value -1), $('sday').value, $('shour').value, $('smin').value, 0);
-	var end = new Date($('eyear').value, ($('emonth').value -1), $('eday').value, $('ehour').value, $('emin').value, 0);
-//	debug("("+start+")(" + end+")");
-
-	if(start.getTime() > end.getTime()) {
-		opponent = (which.substr(0,1) == 's') ? 'e' +  which.substr(1, which.length -1) : 's' +  which.substr(1, which.length -1) ;
-		$(opponent).value = $(which).value;
-	}
-	var all = ['year','month','day','hour','min'];
-	for(i=0; i < all.length; i++) {
-		if(which.substr(1, which.length -1) == all[i]) {
-			addTimerFormChangeTime(which.substr(0,1) + all[i+1] );
-			break;
-		}
-	}
-}
 
 
 function addTimerFormChangeType() {
@@ -44,6 +27,70 @@ function addTimerFormChangeType() {
 			$('channel').options[i].value = element;
 		}
 	}
+}
+
+function addTimerFormChangeLocation(newloc) {
+        
+}
+
+function addTimerFormPrepareTagsMenu(currtags) {
+	result = {};
+        resultsuff = {};
+	taglist = addTimerEditFormArray.tagsList;
+
+        if (currtags == "") {
+        	i = 0;
+                result[""] = "<None>";
+                for (i = 0; i < taglist.length; i++) {
+                	result[taglist[i]] = taglist[i];
+        	}
+        } else {
+        	result[currtags] = currtags;
+                tags = currtags.split(" ");
+               	for (i = 0; i < taglist.length; i++) {
+                        var res = "";
+                        var found = false;
+                        for (j=0; j<tags.length; j++) {
+                              	if (tags[j] != taglist[i]) {
+                                       	res += " "+tags[j];
+				} else {
+                                	found = true;
+                                }
+                        }
+                        if (!found) {
+                        	res += " "+taglist[i];
+                        }
+                        if (res.length > 0) {
+                                res = res.substring(1,res.length);
+                        }
+                        if (found) {
+	                	resultsuff[res] = "- "+taglist[i];
+                        } else {
+	                	result[res] = "+ "+taglist[i];
+                        }
+                }
+                if (tags.length > 1) {
+                	for (ele in resultsuff) {
+                        	result[ele] = resultsuff[ele];
+                        }
+                }
+                result[""] = "<None>";
+        }
+        return result;
+}
+
+function addTimerFormChangeTags(newtags) {
+	lst = addTimerFormPrepareTagsMenu(newtags);
+
+	for (i = $('tags').options.length; i !== 0; i--) {
+		$('tags').options[i - 1] = null;
+	}
+	
+        for(element in lst) {
+               	$('tags').options[i] = new Option(lst[element]);
+               	$('tags').options[i].value = element;
+               	i++;
+        }
 }
 
 
@@ -114,6 +161,8 @@ function incomingTimerList(request){
 				'justplayReadable': justplayReadable[Number(timer.getJustplay())],
 				'afterevent': timer.getAfterevent(),
 				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
+				'dirname' : timer.getDirname(),
+				'tags' : timer.getTags(),
 				'disabled': timer.getDisabled(),
 				'onOff': timer.getToggleDisabledIMG(),
 				'enDis': timer.getToggleDisabledText(),
@@ -194,16 +243,13 @@ function incomingTimerDelResult(request){
 
 function loadTimerFormNow() {
 	var now = new Date();
-	addTimerEditFormArray.syear = now.getFullYear();
-	addTimerEditFormArray.smonth = now.getMonth() + 1;
-	addTimerEditFormArray.sday = now.getDate();
+	addTimerEditFormArray.year = now.getFullYear();
+	addTimerEditFormArray.month = now.getMonth() + 1;
+	addTimerEditFormArray.day = now.getDate();
 	addTimerEditFormArray.shour = now.getHours();
 	addTimerEditFormArray.smin = now.getMinutes();
 
 	var	plusTwoHours = new Date(now.getTime() + ((120 *60)*1000) );
-	addTimerEditFormArray.eyear = plusTwoHours.getFullYear();
-	addTimerEditFormArray.emonth = plusTwoHours.getMonth() + 1;
-	addTimerEditFormArray.eday = plusTwoHours.getDate();
 	addTimerEditFormArray.ehour = plusTwoHours.getHours();
 	addTimerEditFormArray.emin = plusTwoHours.getMinutes();
 		
@@ -213,6 +259,8 @@ function loadTimerFormNow() {
 	addTimerEditFormArray.channelSort = "tv";
 	addTimerEditFormArray.name = "";
 	addTimerEditFormArray.description = "";
+	addTimerEditFormArray.dirname = "/hdd/movie";
+	addTimerEditFormArray.tags = "";
 	addTimerEditFormArray.repeated = 0;
 	addTimerEditFormArray.afterEvent = "3";
 	addTimerEditFormArray.deleteOldOnSave = 0;
@@ -222,23 +270,20 @@ function loadTimerFormNow() {
 	
 	
 	debug("[loadTimerFormNow] done");
-	loadTimerFormChannels();
+	loadTimerFormTags();
 }
 
 
-function loadTimerEditForm(justplay, begin, end, repeated, channel, channelName, name, description, afterEvent, deleteOldOnSave, eit) {
-	debug('[loadTimerEditForm] justplay: ' + justplay + ',begin: ' + begin + ',end: ' + end + ',repeated: ' + repeated + ',channel: ' + channel + ',name: ' + name +',description: ' + description + ',afterEvent: ' + afterEvent + ',deleteOldOnSave: ' + deleteOldOnSave);
+function loadTimerEditForm(justplay, begin, end, repeated, channel, channelName, name, description, dirname, tags, afterEvent, deleteOldOnSave, eit) {
+	debug('[loadTimerEditForm] justplay: ' + justplay + ',begin: ' + begin + ',end: ' + end + ',repeated: ' + repeated + ',channel: ' + channel + ',name: ' + name +',description: ' + description +',dirname: ' + dirname +',tags: ' + tags + ',afterEvent: ' + afterEvent + ',deleteOldOnSave: ' + deleteOldOnSave);
 	var start = new Date(Number(begin)*1000);
-	addTimerEditFormArray.syear = start.getFullYear();
-	addTimerEditFormArray.smonth = start.getMonth() + 1;
-	addTimerEditFormArray.sday = start.getDate();
+	addTimerEditFormArray.year = start.getFullYear();
+	addTimerEditFormArray.month = start.getMonth() + 1;
+	addTimerEditFormArray.day = start.getDate();
 	addTimerEditFormArray.shour = start.getHours();
 	addTimerEditFormArray.smin = start.getMinutes();
 	
 	var	stopp = new Date(Number(end)*1000);
-	addTimerEditFormArray.eyear = stopp.getFullYear();
-	addTimerEditFormArray.emonth = stopp.getMonth() + 1;
-	addTimerEditFormArray.eday = stopp.getDate();
 	addTimerEditFormArray.ehour = stopp.getHours();
 	addTimerEditFormArray.emin = stopp.getMinutes();
 	
@@ -248,10 +293,12 @@ function loadTimerEditForm(justplay, begin, end, repeated, channel, channelName,
 	addTimerEditFormArray.channelSort = "";
 	addTimerEditFormArray.name = String(name);
 	addTimerEditFormArray.description = String(description);
+	addTimerEditFormArray.dirname = String(dirname);
+	addTimerEditFormArray.tags = String(tags);
 	addTimerEditFormArray.repeated = Number(repeated);
 	addTimerEditFormArray.afterEvent = Number(afterEvent);
 	
-	debug("[loadTimerEditForm]" + justplay + "|" + begin + "|" + end + "|" + repeated + "|"+channel+"|"+name+"|"+description+"|"+afterEvent);
+	debug("[loadTimerEditForm]" + justplay + "|" + begin + "|" + end + "|" + repeated + "|"+channel+"|"+name+"|"+description+"|"+dirname+"|"+tags+"|"+afterEvent);
 
 	addTimerEditFormArray.deleteOldOnSave = Number(deleteOldOnSave);
 	addTimerEditFormArray.beginOld = Number(begin);
@@ -259,7 +306,33 @@ function loadTimerEditForm(justplay, begin, end, repeated, channel, channelName,
 	
 	addTimerEditFormArray.eventID = Number(eit);
 	
-	loadTimerFormChannels();
+	loadTimerFormTags();
+}
+
+function loadTimerFormTags() {
+	doRequest(url_getTags, incomingTimerFormTags, false);
+}
+
+function incomingTimerFormTags(request){
+	debug("[incomingTimerFormTags] called");
+	if(request.readyState == 4){
+		var result = new SimpleXMLResult(getXML(request));
+		addTimerEditFormArray.tagsList = result.getStateText().split(" ");
+		loadTimerFormLocations();
+	}		
+}
+
+function loadTimerFormLocations() {
+	doRequest(url_getLocations, incomingTimerFormLocations, false);
+}
+
+function incomingTimerFormLocations(request){
+	debug("[incomingTimerFormLocations] called");
+	if(request.readyState == 4){
+		var result = new SimpleXMLResult(getXML(request));
+		addTimerEditFormArray.locationsList = result.getStateText().split(" ");
+		loadTimerFormChannels();
+	}		
 }
 
 
@@ -384,21 +457,28 @@ function loadTimerForm(){
 		channelObject[element.getServiceReference()] = element.getServiceName();
 	}
 
+	var locationsObject = {};
+	for (i = 0; i < addTimerEditFormArray.locationsList.length; i++) {
+		str = addTimerEditFormArray.locationsList[i];
+		locationsObject[str] = str;
+        }
+
+	var tagsObject = addTimerFormPrepareTagsMenu(addTimerEditFormArray.tags);
+
 	var namespace = { 					
-				syear: createOptions(2008,2015,addTimerEditFormArray.syear),
-				smonth: createOptions(1,12,addTimerEditFormArray.smonth),
-				sday: createOptions(1,31,addTimerEditFormArray.sday),
+				year: createOptions(2008,2015,addTimerEditFormArray.year),
+				month: createOptions(1,12,addTimerEditFormArray.month),
+				day: createOptions(1,31,addTimerEditFormArray.day),
 				shour: createOptions(0,23,addTimerEditFormArray.shour),
 				smin: createOptions(0,59,addTimerEditFormArray.smin),
-				eyear: createOptions(2008,2015,addTimerEditFormArray.eyear),
-				emonth: createOptions(1,12,addTimerEditFormArray.emonth),
-				eday: createOptions(1,31,addTimerEditFormArray.eday),
 				ehour: createOptions(0,23,addTimerEditFormArray.ehour),
 				emin: createOptions(0,59,addTimerEditFormArray.emin),
 				action: createOptionList(Action, addTimerEditFormArray.justplay),
 				channel: createOptionList(channelObject, addTimerEditFormArray.channel),
 				afterEvent: createOptionList(AfterEvent, addTimerEditFormArray.afterEvent),
 				repeated: createOptionListRepeated(Repeated, addTimerEditFormArray.repeated),
+				dirname: createOptionList(locationsObject, addTimerEditFormArray.dirname),
+				tags: createOptionList(tagsObject, addTimerEditFormArray.tags),
 
 				timer: {
 					name: addTimerEditFormArray.name,
@@ -420,10 +500,14 @@ function loadTimerForm(){
 	// Empty some stuff, but keep others to have the performance
 	var tmp1 = addTimerEditFormArray.RadioList;
 	var tmp2 = addTimerEditFormArray.TVList;
+	var tmp3 = addTimerEditFormArray.locationsList;
+	var tmp4 = addTimerEditFormArray.tagsList;
 	addTimerEditFormArray = [];
 	addTimerEditFormArray.deleteOldOnSave = 0;
 	addTimerEditFormArray.RadioList = tmp1;
 	addTimerEditFormArray.TVList = tmp2;
+	addTimerEditFormArray.locationsList = tmp3;
+	addTimerEditFormArray.tagsList = tmp4;
 	addTimerEditFormArray.TVListFilled = 1;
 	addTimerEditFormArray.RadioListFilled = 1;
 }
@@ -485,16 +569,14 @@ function createOptionListRepeated(Repeated, repeated) {
 			txt = txt.substr(0,1).toUpperCase() + txt.substr(1,1);
 		}
 		checked = " ";
-		if(num >= list[i]) {
-			num -= list[i];
+		if (!(~num & list[i])) {
 			checked = "checked";
 		}
-		
 		namespace[i] = { 'id': Repeated[String(list[i])],
 			'name': Repeated[String(list[i])],
 			'value': list[i],
 			'txt': txt,
-			'checked': checked 
+			'checked': checked
 		};
 	}
 	return namespace;
@@ -505,11 +587,14 @@ function sendAddTimer() {
 	debug("[sendAddTimer]" + "parentChannel:" +$('channel').value);
 	
 	if(parentPin($('channel').value)) {
-		beginD = new Date(ownLazyNumber($('syear').value), (ownLazyNumber($('smonth').value) - 1), ownLazyNumber($('sday').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
+		beginD = new Date(ownLazyNumber($('year').value), (ownLazyNumber($('month').value) - 1), ownLazyNumber($('day').value), ownLazyNumber($('shour').value), ownLazyNumber($('smin').value));
 		begin = beginD.getTime()/1000;
 		
-		endD = new Date(ownLazyNumber($('eyear').value), (ownLazyNumber($('emonth').value) - 1), ownLazyNumber($('eday').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
+		endD = new Date(ownLazyNumber($('year').value), (ownLazyNumber($('month').value) - 1), ownLazyNumber($('day').value), ownLazyNumber($('ehour').value), ownLazyNumber($('emin').value));
 		end = endD.getTime()/1000;
+		if(end<begin) {
+			end += 86400;
+		}
 
 		repeated = 0;
 		if( $('ms').checked ) {
@@ -541,6 +626,8 @@ function sendAddTimer() {
 			return;
 		}
 
+		dirname = $('dirname').value;
+		tags = $('tags').value;
 		repeated = 0;
 		if($('ms').checked) {
 			repeated = ownLazyNumber($('ms').value);
@@ -562,6 +649,7 @@ function sendAddTimer() {
 		//addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'False\');
 		doRequest(url_timerchange+"?"+"sRef="+($('channel').value).replace("&quot;", '"')+"&begin="+ begin +
 		  "&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean) +
+		  "&dirname="+dirname+"&tags="+escape(tags) +
 		  "&afterevent="+$('after_event').value+"&eit=0&disabled=0" +
 		  "&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated +
 		  "&channelOld="+$('channelOld').value +
@@ -600,7 +688,7 @@ function incomingJustDoNothing(request){
 }
 
 
-function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,description,afterEvent,disabled){
+function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,description,dirname,tags,afterEvent,disabled){
 	disabled = (ownLazyNumber(disabled) === 0) ? 1 : 0;
 	
 	var descriptionClean = (description == " " || description == "N/A") ? "" : description;
@@ -608,6 +696,7 @@ function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,descrip
 
 	doRequest(url_timerchange+"?"+"sRef="+channel.replace("&quot;", '"')+"&begin="+begin +
 	 "&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean) +
+	 "&dirname="+dirname+"&tags="+escape(tags) +
 	 "&afterevent="+afterEvent+"&eit=0&disabled="+disabled +
 	 "&justplay="+justplay+"&repeated="+repeated +
 	 "&channelOld="+channel +

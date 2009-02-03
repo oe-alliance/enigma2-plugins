@@ -778,7 +778,9 @@ function initVolumePanel(){
 
 function incomingChannellist(request){
 	var services = null;
-	if(request.readyState == 4) {
+	if(typeof(loadedChannellist[currentBouquet]) != "undefined"){
+		services = loadedChannellist[currentBouquet];
+	} else if(request.readyState == 4) {
 		services = new ServiceList(getXML(request)).getArray();
 		debug("[incomingChannellist] got "+services.length+" Services");
 	}
@@ -1149,6 +1151,8 @@ function incomingRecordingPushed(request) {
 				'endDate': endDate.toLocaleString(),
 				'state': timer.getState(),
 				'duration': Math.ceil((timer.getDuration()/60)),
+				'dirname': timer.getDirname(),
+				'tags': timer.getTags(),
 				'repeated': timer.getRepeated(),
 				'repeatedReadable': repeatedReadable(timer.getRepeated()),
 				'justplay': timer.getJustplay(),

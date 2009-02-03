@@ -39,6 +39,7 @@ from WebComponents.Sources.MP import MP
 from WebComponents.Sources.ServiceListReload import ServiceListReload
 from WebComponents.Sources.AT import AT
 from WebComponents.Sources.CurrentService import CurrentService
+from WebComponents.Sources.LocationsAndTags import LocationsAndTags
 
 from Components.Sources.FrontendStatus import FrontendStatus
 
@@ -135,6 +136,12 @@ class ServiceWebScreen(WebScreen):
 		ugly, but necessary :(
 		"""
 
+class LocationsAndTagsWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		self["Locations"] = LocationsAndTags(session,LocationsAndTags.LOCATIONS)
+		self["Tags"] = LocationsAndTags(session,LocationsAndTags.TAGS)
+
 class EPGWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
@@ -203,15 +210,11 @@ class ParentControlWebScreen(WebScreen):
 class WAPWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		self["WAPFillOptionListSyear"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		self["WAPFillOptionListSday"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		self["WAPFillOptionListSmonth"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListYear"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListDay"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListMonth"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListShour"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListSmin"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-
-		self["WAPFillOptionListEyear"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		self["WAPFillOptionListEday"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		self["WAPFillOptionListEmonth"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListEhour"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 		self["WAPFillOptionListEmin"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
 
@@ -220,6 +223,8 @@ class WAPWebScreen(WebScreen):
 
 		self["WAPFillValueName"] = WAPfunctions(session,func = WAPfunctions.FILLVALUE)
 		self["WAPFillValueDescr"] = WAPfunctions(session,func = WAPfunctions.FILLVALUE)
+		self["WAPFillLocation"] = WAPfunctions(session,func = WAPfunctions.LOCATIONLIST)
+		self["WAPFillTags"] = WAPfunctions(session,func = WAPfunctions.TAGLIST)
 
 		self["WAPFillOptionListRepeated"] = WAPfunctions(session,func = WAPfunctions.REPEATED)
 		self["WAPServiceList"] = WAPfunctions(session, func = WAPfunctions.SERVICELIST)
