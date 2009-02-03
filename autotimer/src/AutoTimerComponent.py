@@ -129,12 +129,6 @@ class AutoTimerComponent(object):
 
 	include = property(lambda self: self._include, setInclude)
 
-	def setMatch(self, match):
-		# XXX: a sanity check might be useful...
-		self._match = match
-
-	match = property(lambda self: self._match, setMatch)
-
 	def setSearchCase(self, case):
 		assert case in ("sensitive", "insensitive"), "search case must be sensitive or insensitive"
 		self._searchCase = case
@@ -316,6 +310,7 @@ class AutoTimerComponent(object):
 
 	getLastBegin = lambda self: self.lastBegin
 
+	getMatch = lambda self: self.match
 	getName = lambda self: self.name
 
 	getOffsetBegin = lambda self: self.offset[0]/60
@@ -427,7 +422,7 @@ class AutoTimerComponent(object):
 							pos = value.rfind(':')
 							if pos != -1:
 								value = value[:pos+1]
-	
+
 							if service is value:
 								return False
 						else:
