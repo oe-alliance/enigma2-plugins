@@ -26,7 +26,7 @@ class IPKGResource(resource.Resource):
                 return self.execFileCmd()
                 
             else:
-                return self.doErrorPage("Unkown command: ", self.command)
+                return self.doErrorPage("Unknown command: ", self.command)
         else:
             return self.doIndexPage()
             
