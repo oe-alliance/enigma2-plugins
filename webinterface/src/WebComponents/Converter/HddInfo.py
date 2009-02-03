@@ -1,30 +1,37 @@
 from Components.Converter.Converter import Converter
-from Components.Element import cached
 
 class HddInfo(Converter, object):
     MODEL = 0
-    SIZE = 1
+    CAPACITY = 1
     FREE = 2
     
-    def __init_(self, type):
-        Converter.__init__(self)
+    def __init__(self, type):
+        Converter.__init__(self, type)
         
         self.type = {
                      "Model" : self.MODEL,
-                     "Size" : self.SIZE,
+                     "Capacity" : self.CAPACITY,
                      "Free" : self.FREE,
-                     }[type]
+                     }[type]                    
                      
-    @cached
-    def getText(self):
+    def getText(self):        
         hdd = self.source.hdd
         
-        if self.type == self.MODEL:
-            return hdd.model
-        elif self.type == self.SIZE:
-            return hdd.size
-        elif self.type == self.FREE:
-            return hdd.free
-        
+        if hdd is not None:
+            if self.type == self.MODEL:
+                return "%s" %hdd.model()
+            elif self.type == self.CAPACITY:            
+                return "%s" %hdd.capacity()
+            elif self.type == self.FREE:                
+                if hdd.free() > 1024:
+                    free = float(hdd.free()) / float(1024)
+                    return "%.3f GB" %free
+                else:
+                    return "%i MB" %hdd.free()
+                     
+                
+        return _("N/A")
+
+                
     text = property(getText)
     
