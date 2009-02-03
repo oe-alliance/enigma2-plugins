@@ -473,7 +473,10 @@ class AutoTimerComponent(object):
 			justplay = self.justplay,
 			avoidDuplicateDescription = self.avoidDuplicateDescription,
 			bouquets = self.bouquets,
-			tags = self.tags
+			tags = self.tags,
+			encoding = self.encoding,
+			searchType = self.searchType,
+			searchCase = self.searchCase
 		)
 
 	def __deepcopy__(self, memo):
@@ -498,7 +501,10 @@ class AutoTimerComponent(object):
 			justplay = self.justplay,
 			avoidDuplicateDescription = self.avoidDuplicateDescription,
 			bouquets = self.bouquets[:],
-			tags = self.tags[:]
+			tags = self.tags[:],
+			encoding = self.encoding,
+			searchType = self.searchType,
+			searchCase = self.searchCase
 		)
 
 	def __eq__(self, other):
@@ -521,6 +527,9 @@ class AutoTimerComponent(object):
 			' (',
 			', '.join([
 					str(self.match),
+					str(self.encoding),
+					str(self.searchCase),
+					str(self.searchType),
 			 		str(self.timespan),
 			 		str(self.services),
 			 		str(self.offset),
