@@ -7,32 +7,34 @@ class NetworkInfo(Converter, object):
     DHCP = 1
     IP = 2
     GATEWAY = 3
-    NAMESERVER = 4
+    NETMASK = 4
     
     def __init__(self, type):
-        Converter.___init__(self)
+        Converter.__init__(self, type)
         self.type = {
                      "Mac" : self.MAC,
                      "Dhcp" : self.DHCP,
                      "Ip" : self.IP,
                      "Gateway" : self.GATEWAY,
-                     "Nameserver" : self.NAMESERVER,
+                     "Netmask" : self.NETMASK,
                      }[type]
     
     @cached
     def getText(self):
-        iface = iface.interface
+        iface = self.source.interface
         
         if self.type is self.MAC:
             return iface.mac
         elif self.type is self.DHCP:
             return iface.dhcp
         elif self.type is self.IP:
-            return iface.IP
+            return iface.ip
         elif self.type is self.GATEWAY:
             return iface.gateway
-        elif self.type is self.NAMESERVER:
-            return iface.nameserver
+        elif self.type is self.NETMASK:
+            return iface.netmask
+        else:
+            return _("N/A")
         
     text = property(getText)
     
