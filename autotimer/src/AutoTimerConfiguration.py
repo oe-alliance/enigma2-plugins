@@ -466,8 +466,8 @@ def writeConfig(filename, defaultTimer, timers):
 	# Generate List in RAM
 	list = ['<?xml version="1.0" ?>\n<autotimer version="', CURRENT_CONFIG_VERSION, '">\n\n']
 
-	# XXX: we might want to make sure that we don't save empty default here
-	list.extend([' <defaults'])
+	# This gets deleted afterwards if we do not have set any defaults
+	list.append(' <defaults')
 
 	# Timespan
 	if defaultTimer.hasTimespan():
@@ -568,8 +568,12 @@ def writeConfig(filename, defaultTimer, timers):
 	for tag in defaultTimer.tags:
 		list.extend(['  <tag>', stringToXML(tag), '</tag>\n'])
 
-	# End of Timer
-	list.append(' </defaults>\n\n')
+	# Keep the list clean
+	if len(list) == 5:
+		list.pop() # >
+		list.pop() # <defaults
+	else:
+		list.append(' </defaults>\n\n')
 
 	# Iterate timers
 	for timer in timers:
