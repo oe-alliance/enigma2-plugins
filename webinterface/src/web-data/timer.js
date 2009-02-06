@@ -259,7 +259,7 @@ function loadTimerFormNow() {
 	addTimerEditFormArray.channelSort = "tv";
 	addTimerEditFormArray.name = "";
 	addTimerEditFormArray.description = "";
-	addTimerEditFormArray.dirname = "/hdd/movie";
+	addTimerEditFormArray.dirname = "";
 	addTimerEditFormArray.tags = "";
 	addTimerEditFormArray.repeated = 0;
 	addTimerEditFormArray.afterEvent = "3";

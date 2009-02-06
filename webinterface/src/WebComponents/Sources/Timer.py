@@ -264,7 +264,7 @@ class Timer( Source):
             if ( param['afterevent'] == "0") or (param['afterevent'] == "1") or (param['afterevent'] == "2"):
                 afterEvent = int(param['afterevent'])
 
-        dirname = None
+        dirname = config.movielist.last_timer_videodir.value
         if param.has_key('dirname'):
             dirname = param['dirname']
 
@@ -272,55 +272,59 @@ class Timer( Source):
         if param.has_key('tags'):
             tags = unescape(param['tags']).split(' ')
 
+        delold = 0
+        if param.has_key('deleteOldOnSave'):
+            delold = int(param['deleteOldOnSave'])
+
         #Try to edit an existing Timer
-        if param.has_key('channelOld'):
-            print "ChannelOld: %s" %param['channelOld']
-            if param['channelOld'] != '':
+        if delold:
+            if param.has_key('channelOld') and param['channelOld'] != '':
                 channelOld = ServiceReference(param['channelOld'])
-                
-                # We do need all of the following Parameters, too, for being able of finding the Timer.
-                # Therefore so we can neither use default values in this part nor can we 
-                # continue if a parameter is missing            
-                if param.has_key('beginOld'):
-                    beginOld = int(param['beginOld'])
-                else:
-                    return False, "Missing Parameter: beginOld"
-                
-                if param.has_key('endOld'):
-                    endOld = int(param['endOld'])
-                else:
-                    return False, "Missing Parameter: endOld"
-                
-                #let's try to find the timer
-                try:
-                    for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
-                        if str(timer.service_ref) == str(channelOld):
-                            if int(timer.begin) == beginOld:
-                                if int(timer.end) == endOld:
-                                    #we've found the timer we've been searching for
-                                    #Let's apply the new values
-                                    timer.service_ref = service_ref
-                                    timer.begin = int(begin)
-                                    timer.end = int(end)
-                                    timer.name = name
-                                    timer.description = description
-                                    timer.disabled = disabled
-                                    timer.justplay = justplay
-                                    timer.afterEvent = afterEvent
-                                    timer.repeated = repeated
-                                    timer.dirname = dirname
-                                    timer.tags = tags
-                                    
-                                    #send the changed timer back to enigma2 and hope it's good
-                                    self.session.nav.RecordTimer.timeChanged(timer)
-                                    print "[WebComponents.Timer] editTimer: Timer changed!"
-                                    return True, "Timer %s has been changed!" %(timer.name)
-                except:
-                    #obviously some value was not good, return an error
-                    return False, "Changing the timer for '%s' failed!" %name
-                
-                return False, "Could not find timer '%s' with given start and end time!" %name
-        
+            else:
+                return False, "Missing Parameter: channelOld"
+            # We do need all of the following Parameters, too, for being able of finding the Timer.
+            # Therefore so we can neither use default values in this part nor can we 
+            # continue if a parameter is missing            
+            if param.has_key('beginOld'):
+                beginOld = int(param['beginOld'])
+            else:
+                return False, "Missing Parameter: beginOld"
+            
+            if param.has_key('endOld'):
+                endOld = int(param['endOld'])
+            else:
+                return False, "Missing Parameter: endOld"
+            
+            #let's try to find the timer
+            try:
+                for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
+                    if str(timer.service_ref) == str(channelOld):
+                        if int(timer.begin) == beginOld:
+                            if int(timer.end) == endOld:
+                                #we've found the timer we've been searching for
+                                #Let's apply the new values
+                                timer.service_ref = service_ref
+                                timer.begin = int(begin)
+                                timer.end = int(end)
+                                timer.name = name
+                                timer.description = description
+                                timer.disabled = disabled
+                                timer.justplay = justplay
+                                timer.afterEvent = afterEvent
+                                timer.repeated = repeated
+                                timer.dirname = dirname
+                                timer.tags = tags
+                                
+                                #send the changed timer back to enigma2 and hope it's good
+                                self.session.nav.RecordTimer.timeChanged(timer)
+                                print "[WebComponents.Timer] editTimer: Timer changed!"
+                                return True, "Timer %s has been changed!" %(timer.name)
+            except:
+                #obviously some value was not good, return an error
+                return False, "Changing the timer for '%s' failed!" %name
+            
+            return False, "Could not find timer '%s' with given start and end time!" %name
+
         #Try adding a new Timer
 
         try:
@@ -355,8 +359,9 @@ class Timer( Source):
             return False, "EventId not found"
         
         (begin, end, name, description, eit) = parseEvent(event)
-        
-        timer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.NONE)                                
+        location = config.movielist.last_timer_videodir.value
+
+        timer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.NONE, dirname=location)
         self.recordtimer.record(timer)
         return True, "Timer '%s' added" %(timer.name)  
             
