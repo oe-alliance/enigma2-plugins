@@ -166,5 +166,6 @@ mediadownloader/Makefile
 mediadownloader/src/Makefile
 
 epgsearch/Makefile
+epgsearch/po/Makefile
 epgsearch/src/Makefile
 ])
