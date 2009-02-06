@@ -1,6 +1,6 @@
 # Parts of Code and idea  by Homey
 from Components.Sources.Source import Source
-from Components.Harddisk import HarddiskManager
+from Components.Harddisk import harddiskmanager
 from Components.NimManager import nimmanager
 from Components.Network import iNetwork
 from Components.About import about
@@ -72,9 +72,8 @@ class About( Source):
         list.append(niminfo)
 
         #Get HDD Info
-        hddmgr = HarddiskManager()
-        if len(hddmgr.hdd):
-            hdddata = hddmgr.hdd[0] # TODO, list more than the first harddisc if there are more than one. but this requires many changes in the way the webif generates the responses
+        if len(harddiskmanager.hdd):
+            hdddata = harddiskmanager.hdd[0] # TODO, list more than the first harddisc if there are more than one. but this requires many changes in the way the webif generates the responses
             hddinfo = "\n\t\t\t<model>"+hdddata.model()+"</model>\n"
             hddinfo += "\t\t\t<capacity>"+hdddata.capacity()+"</capacity>\n"
             hddinfo += "\t\t\t<free>"+str(hdddata.free())+" MB</free>"
