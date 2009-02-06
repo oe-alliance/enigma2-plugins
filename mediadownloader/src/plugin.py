@@ -2,6 +2,9 @@
 # To be used as simple Downloading Application by other Plugins
 #
 
+# for localized messages
+from . import _
+
 from Components.config import config, ConfigSubsection, ConfigLocations
 from Tools.Directories import resolveFilename, SCOPE_HDD
 
@@ -77,7 +80,7 @@ def filescan(**kwargs):
 					ScanPath(path = "", with_subdirs = False),
 				],
 			name = "Download",
-			description = "Download...",
+			description = _("Download..."),
 			openfnc = filescan_open,
 		)
 	]
@@ -87,7 +90,7 @@ def Plugins(**kwargs):
 
 	return [
 		PluginDescriptor(
-			name="MediaDownloader",
+			name = "MediaDownloader",
 			where = PluginDescriptor.WHERE_FILESCAN,
 			fnc = filescan
 		)

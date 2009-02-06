@@ -163,6 +163,7 @@ permanentclock/po/Makefile
 permanentclock/src/Makefile
 
 mediadownloader/Makefile
+mediadownloader/po/Makefile
 mediadownloader/src/Makefile
 
 epgsearch/Makefile
