@@ -1,0 +1,43 @@
+# German translations for enigma package.
+# Copyright (C) 2009 THE enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 Plugin WerbeZapper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-07 12:44+0100\n"
+"PO-Revision-Date: 2009-02-07 12:47+0100\n"
+"Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Automatically zaps back to current service after given Time"
+msgstr "Automatisch nach Zeitintervall auf einen Sender zurückschalten"
+
+msgid "Custom"
+msgstr "Angepasst"
+
+msgid "How many minutes to wait until zapping back?"
+msgstr "Wie viele Minuten vor Zurückschalten warten?"
+
+msgid ""
+"Timer already running.\n"
+"Stop it?"
+msgstr ""
+"WerbeZapper bereits aktiv.\n"
+"Jetzt anhalten?"
+
+msgid "When to Zap back?"
+msgstr "Wann zurückschalten?"
+
+#, python-format
+msgid "Zapping back in %d Minutes"
+msgstr "Schalte zurück in %d Minuten"
+
+msgid "minutes"
+msgstr "Minuten"

@@ -98,6 +98,7 @@ epgrefresh/src/Makefile
 epgrefresh/po/Makefile
 
 werbezapper/Makefile
+werbezapper/po/Makefile
 werbezapper/src/Makefile
 
 httpproxy/Makefile

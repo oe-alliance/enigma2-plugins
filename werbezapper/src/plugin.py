@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 # Plugin
 from Plugins.Plugin import PluginDescriptor
 
@@ -21,9 +24,10 @@ def cleanup():
 def Plugins(**kwargs):
  	return [
 		PluginDescriptor(
-			name="Werbezapper",
-			description="Automatically zaps back to current service after given Time",
+			name = "Werbezapper",
+			description = _("Automatically zaps back to current service after given Time"),
 			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-			fnc=main
+			fnc = main
 		)
 	]
+

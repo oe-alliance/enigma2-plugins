@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
 
@@ -148,3 +151,4 @@ class WerbeZapper:
 	def shutdown(self):
 		self.zap_timer.callback.remove(self.zap)
 		self.zap_timer = None
+
