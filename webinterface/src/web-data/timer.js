@@ -317,7 +317,7 @@ function incomingTimerFormTags(request){
 	debug("[incomingTimerFormTags] called");
 	if(request.readyState == 4){
 		var result = new SimpleXMLResult(getXML(request));
-		addTimerEditFormArray.tagsList = result.getStateText().split(" ");
+		addTimerEditFormArray.tagsList = (typeof(result.getStateText()) != 'undefined' ? result.getStateText().split(" ") : []);
 		loadTimerFormLocations();
 	}		
 }
@@ -330,7 +330,7 @@ function incomingTimerFormLocations(request){
 	debug("[incomingTimerFormLocations] called");
 	if(request.readyState == 4){
 		var result = new SimpleXMLResult(getXML(request));
-		addTimerEditFormArray.locationsList = result.getStateText().split(" ");
+		addTimerEditFormArray.locationsList = (typeof(result.getStateText()) != 'undefined' ? result.getStateText().split(" ") : ["/hdd/movie"]);
 		loadTimerFormChannels();
 	}		
 }

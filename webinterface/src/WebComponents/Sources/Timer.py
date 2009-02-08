@@ -195,11 +195,10 @@ class Timer( Source):
 
 
 #===============================================================================
-# This Function can add a new or edit an exisiting Timer
-# When the Parameter "channelOld" is not set, a new Timer will be added to the
-# Timerlist.
-# IF the parameters channelOld, beginOld and endOld are set
-# it's an existing timer will be changed (if possible with the given values)
+# This Function can add a new or edit an exisiting Timer.
+# When the Parameter "deleteOldOnSave" is not set, a new Timer will be added.
+# Otherwise, and if the parameters channelOld, beginOld and endOld are set,
+# an existing timer with corresponding values will be changed.
 #===============================================================================
     def editTimer(self, param):
         print "[WebComponents.Timer] editTimer"
@@ -229,7 +228,6 @@ class Timer( Source):
                 return False, "Illegal Parameter value for Parameter begin : '%s'" %begin              
         else:
             return False, "Missing Parameter: begin"
-        
         
         if param.has_key('end'): 
             end = int(param['end'])
@@ -353,15 +351,21 @@ class Timer( Source):
             if param['justplay'] == "1":
                 justplay = True
 
+        location = config.movielist.last_timer_videodir.value
+        if param['dirname'] is not None and param['dirname'] != "":
+            location = param['dirname']
+        tags = None
+        if param['tags'] is not None and param['tags'] != "":
+            tags = param['tags']
+
         epgcache = eEPGCache.getInstance()
         event = epgcache.lookupEventId(eServiceReference(param['sRef']),int(param['eventid']))
         if event is None:
             return False, "EventId not found"
         
         (begin, end, name, description, eit) = parseEvent(event)
-        location = config.movielist.last_timer_videodir.value
 
-        timer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.NONE, dirname=location)
+        timer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.NONE, dirname=location, tags=tags)
         self.recordtimer.record(timer)
         return True, "Timer '%s' added" %(timer.name)  
             
