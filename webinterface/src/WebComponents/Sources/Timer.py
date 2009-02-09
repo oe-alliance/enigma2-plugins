@@ -104,7 +104,10 @@ class Timer( Source):
         listDate = ['year','month','day','shour','smin','ehour','emin']
         for element in listDate:
             if param[element] is None:
-                return False,"%s missing"%element
+                if param['s'+element] is None:
+                    return False,"%s missing"%element
+                else:
+                    param[element] = int(param['s'+element])
             else:
                 param[element] = int(param[element])
         param['begin'] = int(mktime( (param['year'], param['month'], param['day'], param['shour'], param['smin'], 0, 0, 0, -1) ) )
@@ -263,11 +266,11 @@ class Timer( Source):
                 afterEvent = int(param['afterevent'])
 
         dirname = config.movielist.last_timer_videodir.value
-        if param.has_key('dirname'):
+        if param.has_key('dirname') and param['dirname']:
             dirname = param['dirname']
 
-        tags = None
-        if param.has_key('tags'):
+        tags = []
+        if param.has_key('tags') and param['tags']:
             tags = unescape(param['tags']).split(' ')
 
         delold = 0
@@ -352,11 +355,11 @@ class Timer( Source):
                 justplay = True
 
         location = config.movielist.last_timer_videodir.value
-        if param['dirname'] is not None and param['dirname'] != "":
+        if param.has_key('dirname') and param['dirname']:
             location = param['dirname']
-        tags = None
-        if param['tags'] is not None and param['tags'] != "":
-            tags = param['tags']
+        tags = []
+        if param.has_key('tags') and param['tags']:
+            tags = unescape(param['tags']).split(' ')
 
         epgcache = eEPGCache.getInstance()
         event = epgcache.lookupEventId(eServiceReference(param['sRef']),int(param['eventid']))
@@ -406,7 +409,7 @@ class Timer( Source):
             timer.append(item.name)
             timer.append(item.description)
 
-            if item.disabled is True:
+            if item.disabled:
                 timer.append("1")
             else:
                 timer.append("0")
@@ -416,7 +419,7 @@ class Timer( Source):
             timer.append(item.end - item.begin)
             timer.append(item.start_prepare)
             
-            if item.justplay is True:
+            if item.justplay:
                 timer.append(1)
             else:
                 timer.append(0)
@@ -444,7 +447,7 @@ class Timer( Source):
             timer.append(item.state)
             timer.append(item.repeated)
             
-            if item.dontSave is True:
+            if item.dontSave:
                 timer.append(1)
             else:
                 timer.append(0)
@@ -461,7 +464,7 @@ class Timer( Source):
                 timer.append("N/A")
             
             #toggleDisabled
-            if item.disabled is True:
+            if item.disabled:
                 timer.append("0")
                 timer.append("on")
             else:
