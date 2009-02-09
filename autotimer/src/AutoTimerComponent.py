@@ -402,13 +402,15 @@ class AutoTimerComponent(object):
 		return False
 
 	def checkServices(self, service):
-		if len(self.services) or len(self.bouquets):
-			if service in self.services:
+		services = self.services
+		bouquets = self.bouquets
+		if len(services) or len(bouquets):
+			if service in services:
 				return False
 
 			from enigma import eServiceReference, eServiceCenter
 			serviceHandler = eServiceCenter.getInstance()
-			for bouquet in self.bouquets:
+			for bouquet in bouquets:
 				myref = eServiceReference(str(bouquet))
 				mylist = serviceHandler.list(myref)
 				if mylist is not None:
@@ -423,7 +425,7 @@ class AutoTimerComponent(object):
 							if pos != -1:
 								value = value[:pos+1]
 
-							if service is value:
+							if value == service:
 								return False
 						else:
 							break
