@@ -32,7 +32,7 @@ slower.
 
 Which Tags are important for this Plugin?
 
-This is an example of a KML-Docoment :
+This is an example of a KML-Document :
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2">
 <Document>
@@ -50,12 +50,12 @@ This is an example of a KML-Docoment :
 </kml>
 
 
-What I am doing, if i want some Placemarks be added to the standart Plugin 
+What I am doing, if I want some Placemarks be added to the standard Plugin 
 KML-Files?
 
 Just send me a email to 3c5x9%at%gmx.net .
 
 
-Who has portet this to Enigma2?
+Who has ported this to Enigma2?
 
 Rico 3c5x9 Schulte :D
