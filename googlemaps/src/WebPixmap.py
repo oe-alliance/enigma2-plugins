@@ -19,9 +19,9 @@ class WebPixmap(Pixmap):
 	def onShow(self):
 		Pixmap.onShow(self)
 		sc = AVSwitch().getFramebufferScale()
-		resize = True
+		resize = 1
 		background = '#ff000000'
-		self.picload.setPara((self.instance.size().height(), self.instance.size().width(), sc[0], sc[1], False, resize, background))
+		self.picload.setPara((self.instance.size().width(), self.instance.size().height(), sc[0], sc[1], False, resize, background))
 
 	def load(self, url = None):
 		tmpfile = ''.join((self.cachedir, quote_plus(url), '.jpg'))
