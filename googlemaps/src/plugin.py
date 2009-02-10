@@ -20,7 +20,7 @@ from Plugins.Extensions.GoogleMaps.WebPixmap import WebPixmap
 
 config.plugins.GoogleMaps = ConfigSubsection()
 config.plugins.GoogleMaps.stop_service_on_start = ConfigYesNo(default = False)
-config.plugins.GoogleMaps.add_mainmenu_entry = ConfigYesNo(default = True)
+config.plugins.GoogleMaps.add_mainmenu_entry = ConfigYesNo(default = False)
 config.plugins.GoogleMaps.save_last_position = ConfigYesNo(default = True)
 config.plugins.GoogleMaps.load_map_overlay = ConfigYesNo(default = True)
 config.plugins.GoogleMaps.cache_enabled = ConfigYesNo(default = False)
