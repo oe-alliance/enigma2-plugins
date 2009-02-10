@@ -1,0 +1,51 @@
+# Spanish translations for enigma2-plugins package.
+# Copyright (C) 2009 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-10 13:04+0100\n"
+"PO-Revision-Date: 2009-02-10 14:32+0100\n"
+"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/plugin.py:28
+msgid "Automatically zaps back to current service after given Time"
+msgstr "Automáticamente zapea atrás al canal actual después del Tiempo dado"
+
+#: ../src/WerbeZapper.py:55
+msgid "Custom"
+msgstr "Personalizado"
+
+#: ../src/WerbeZapper.py:81
+msgid "How many minutes to wait until zapping back?"
+msgstr "¿Cuántos minutos esperaramos hasta que vuelva el zapping?"
+
+#: ../src/WerbeZapper.py:38
+msgid ""
+"Timer already running.\n"
+"Stop it?"
+msgstr ""
+"La alarma ya está ejecutándose.\n"
+"¿La paramos?"
+
+#: ../src/WerbeZapper.py:47
+msgid "When to Zap back?"
+msgstr "¿Cuando volveremos al Zapping?"
+
+#: ../src/WerbeZapper.py:104
+#, python-format
+msgid "Zapping back in %d Minutes"
+msgstr "El Zapping volverá en %d Minutos"
+
+#: ../src/WerbeZapper.py:50
+msgid "minutes"
+msgstr "minutos"
+

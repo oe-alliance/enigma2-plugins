@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-06 18:36+0100\n"
-"PO-Revision-Date: 2009-01-09 13:20+0100\n"
+"POT-Creation-Date: 2009-02-10 13:04+0100\n"
+"PO-Revision-Date: 2009-02-10 14:27+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -73,6 +73,9 @@ msgstr "Listas"
 msgid "Cancel"
 msgstr "Cancelar"
 
+msgid "Channel Selection"
+msgstr "Seleccionar canal"
+
 msgid "Channels"
 msgstr "Canales"
 
@@ -120,6 +123,9 @@ msgstr "Descripción"
 msgid "Do you really want to delete %s?"
 msgstr "¿Seguro que quiere borrar %s?"
 
+msgid "EPG Encoding"
+msgstr "Codificación EPG"
+
 msgid "Edit AutoTimer"
 msgstr "Editar AutoProgramación"
 
@@ -165,6 +171,9 @@ msgstr "Fin de Tiempo"
 msgid "End of after Event Timespan"
 msgstr "Fin de Tiempo después del Evento"
 
+msgid "Exact match"
+msgstr "Coincidencia exacta"
+
 msgid "Exclude"
 msgstr "Excluir"
 
@@ -195,11 +204,14 @@ msgstr "Viernes"
 msgid "Guess existing Timer based on Begin/End"
 msgstr "Las programaciones existentes están basadas en Inicio/Fin"
 
-msgid "Import"
-msgstr "Importar"
-
 msgid "Import AutoTimer"
 msgstr "Importar AutoProgramación"
+
+msgid "Import existing Timer"
+msgstr "Importar Programación existente"
+
+msgid "Import from EPG"
+msgstr "Importar desde el EPG"
 
 msgid "Include"
 msgstr "Incluir"
@@ -320,6 +332,12 @@ msgstr "Sábado"
 
 msgid "Save"
 msgstr "Guardar"
+
+msgid "Search Type"
+msgstr "Tipo de Búsqueda"
+
+msgid "Search strictness"
+msgstr "Búsqueda extricta"
 
 msgid "Select a Timer to Import"
 msgstr "Seleccionar una Programación a Importar"
@@ -465,6 +483,12 @@ msgstr ""
 msgid "auto"
 msgstr "auto"
 
+msgid "case-insensitive search"
+msgstr "búsqueda sin-may/min"
+
+msgid "case-sensitive search"
+msgstr "búsqueda may/min"
+
 msgid "delete"
 msgstr "borrar"
 
@@ -476,6 +500,9 @@ msgstr "no hacer nada"
 
 msgid "enable"
 msgstr "activar"
+
+msgid "exact match"
+msgstr "coindencia exacta"
 
 msgid "go to deep standby"
 msgstr "ir a reposo profundo"
@@ -498,6 +525,9 @@ msgstr "mins"
 msgid "on Weekday"
 msgstr "en entre semana"
 
+msgid "partial match"
+msgstr "coincidencia parcial"
+
 msgid "record"
 msgstr "grabar"
 
@@ -506,4 +536,7 @@ msgstr "estándar"
 
 msgid "zap"
 msgstr "zapear"
+
+#~ msgid "Import"
+#~ msgstr "Importar"
 
