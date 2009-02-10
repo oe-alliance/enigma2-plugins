@@ -8,6 +8,16 @@ from os.path import isdir as os_path_isdir, isfile as os_isfile
 from Components.AVSwitch import AVSwitch
 from Components.config import config
 
+def getAspect():
+	val = AVSwitch().getAspectRatioSetting()
+	if val == 0 or val == 1:
+		r = (5*576, 4*720)
+	elif val == 2 or val == 3 or val == 6:
+		r = (16*576, 9*720)
+	elif val == 4 or val == 5:
+		r = (16*576, 10*720)
+	return r
+
 class WebPixmap(Pixmap):
 	def __init__(self, default = None):
 		Pixmap.__init__(self)
@@ -18,7 +28,7 @@ class WebPixmap(Pixmap):
 
 	def onShow(self):
 		Pixmap.onShow(self)
-		sc = AVSwitch().getFramebufferScale()
+		sc = getAspect()
 		resize = 1
 		background = '#ff000000'
 		self.picload.setPara((self.instance.size().width(), self.instance.size().height(), sc[0], sc[1], False, resize, background))
