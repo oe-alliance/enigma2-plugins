@@ -4,8 +4,8 @@
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 	<title>Enigma 2 Webinterface (ALPHA)</title>
 
-	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
-	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico"/>
+	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" />
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico"/>
 </head>
 <body>
 <p><center><a href="/web/powerstate?newstate=1">deepstandby Dreambox</a></center></p>

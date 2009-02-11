@@ -1,8 +1,8 @@
 Version = '$Header$';
 
 from Components.Sources.Source import Source
-from Components.Sources.Source import Source
 from Components.Sources.ServiceList import ServiceList
+from Components.config import config
 from enigma import eServiceReference
 
 from re import sub
@@ -14,7 +14,9 @@ class WAPfunctions( Source):
     SERVICELIST = 2
     OPTIONLIST = 3
     FILLVALUE = 4
-    DELETEOLD = 5
+    LOCATIONLIST = 5
+    TAGLIST = 6
+    DELETEOLD = 7
     
     lut = {"Name":0
           ,"Value":1
@@ -39,6 +41,10 @@ class WAPfunctions( Source):
             self.result = self.fillOptionList(cmd)
         elif self.func is self.FILLVALUE:
             self.result = self.fillValue(cmd)
+        elif self.func is self.LOCATIONLIST:
+            self.result = self.locationList(cmd)
+        elif self.func is self.TAGLIST:
+            self.result = self.tagList(cmd)
         elif self.func is self.DELETEOLD:
             self.result = self.deleteOldSaved(cmd)
         else:
@@ -68,15 +74,11 @@ class WAPfunctions( Source):
                 timePlusTwo = end
         
         t = {}
-        t["sday"]=strftime("%d", localtime(timeNow))
-        t["smonth"]=strftime("%m", localtime(timeNow))
-        t["syear"]=strftime("%Y", localtime(timeNow))
+        t["day"]=strftime("%d", localtime(timeNow))
+        t["month"]=strftime("%m", localtime(timeNow))
+        t["year"]=strftime("%Y", localtime(timeNow))
         t["smin"]=strftime("%M", localtime(timeNow))
         t["shour"]=strftime("%H", localtime(timeNow))
-        
-        t["eday"]=strftime("%d", localtime(timePlusTwo))
-        t["emonth"]=strftime("%m", localtime(timePlusTwo))
-        t["eyear"]=strftime("%Y", localtime(timePlusTwo))
         t["emin"]=strftime("%M", localtime(timePlusTwo))
         t["ehour"]=strftime("%H", localtime(timePlusTwo))
         
@@ -86,18 +88,16 @@ class WAPfunctions( Source):
             if p != "sRef":
                 key = p
 
-        cutKey = sub("^[es]", "", key, 1)
-        
-        if cutKey == "min":
+        if key == "smin" or key == "emin" :
             start = 0
             end = 59
-        elif cutKey == "hour":
+        elif key == "shour" or key == "ehour":
             start = 1
             end = 24
-        elif cutKey == "day":
+        elif key == "day":
             start = 1
             end = 31
-        elif cutKey == "month":
+        elif key == "month":
             start = 1
             end = 12
         else:
@@ -109,7 +109,6 @@ class WAPfunctions( Source):
         else:
             input = param[key] or 0
             input = int(input)
-        #print cutKey,param[key],input
         
         self.result = self.fillOptionListAny(input,start,end)
         return self.result
@@ -250,44 +249,51 @@ class WAPfunctions( Source):
 
     def getServiceList(self, ref):
         self.servicelist.root = ref
-    
+
+    def locationList(self,param):
+        print "locationList",param
+        dirname = param
+        lst = config.movielist.videodirs.value
+        if not dirname:
+            dirname = "/hdd/movie/"
+        if not dirname in lst:
+            lst = [dirname] + lst
+        returnList = [[lst[i], i, dirname == lst[i] and "selected" or ""] for i in range(len(lst))]
+        return returnList
+
+    def tagList(self,param):
+        print "tagList",param
+        tag = param
+        try:
+            file = open("/etc/enigma2/movietags")
+            taglist = [x.rstrip() for x in file.readlines()]
+            while "" in taglist:
+                taglist.remove("")
+            file.close()
+        except IOError, ioe:
+            taglist = []
+        if not tag in taglist:
+            taglist = [tag]+taglist
+        if not "" in taglist:
+            taglist.append("")
+        returnList = [[taglist[i], i, tag == taglist[i] and "selected" or ""] for i in range(len(taglist))]
+        return returnList
+
     def fillOptionList(self,param):
-         
         print "fillOptionList",param
         returnList = []
         if param.has_key("justplay"):
             number = param["justplay"] or 0
             number = int(number)
-            if number == 1:
-                returnList.append(["Record",0,""])
-                returnList.append(["Zap",1,"selected"])
-            else:
-                returnList.append(["Record",0,"selected"])
-                returnList.append(["Zap",1,""])
+            returnList.append(["Record",0,number==0 and "selected" or ""])
+            returnList.append(["Zap",1,number==1 and "selected" or ""])
         elif param.has_key("afterevent"):
             number = param["afterevent"] or 0
             number = int(number)
-            if number == 3:
-                returnList.append(["Nothing",0,""])
-                returnList.append(["Standby",1,""])
-                returnList.append(["Deepstandby/Shutdown",2,""])
-                returnList.append(["Auto",3,"selected"])
-            elif number == 2:
-                returnList.append(["Nothing",0,""])
-                returnList.append(["Standby",1,""])
-                returnList.append(["Deepstandby/Shutdown",2,"selected"])
-                returnList.append(["Auto",3,""])
-            elif number == 1:
-                returnList.append(["Nothing",0,""])
-                returnList.append(["Standby",1,"selected"])
-                returnList.append(["Deepstandby/Shutdown",2,""])
-                returnList.append(["Auto",3,""])
-            else:
-                returnList.append(["Nothing",0,"selected"])
-                returnList.append(["Standby",1,""])
-                returnList.append(["Deepstandby/Shutdown",2,""])
-                returnList.append(["Auto",3,""])
-        
+            returnList.append(["Nothing",0,number==0 and "selected" or ""])
+            returnList.append(["Standby",1,number==1 and "selected" or ""])
+            returnList.append(["Deepstandby/Shutdown",2,number==2 and "selected" or ""])
+            returnList.append(["Auto",3,number==3 and "selected" or ""])
         return returnList
     
     def deleteOldSaved(self,param):

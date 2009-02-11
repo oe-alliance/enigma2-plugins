@@ -3,13 +3,13 @@
 	&lt;meta content="text/html; charset=UTF-8" http-equiv="content-type">
 	&lt;title>Enigma 2 Webinterface (ALPHA)&lt;/title>
 
-	&lt;link href="/webdata/style.css" type="text/css" rel="stylesheet" >
-	&lt;link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico">
+	&lt;link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" >
+	&lt;link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
 &lt;/head>
 
 &lt;body>
 &lt;div style="text-align: center;">
-&lt;img border="0" usemap="#RemoteControl" src="/webdata/gfx/remotecontrol_static.jpg">
+&lt;img border="0" usemap="#RemoteControl" src="/web-data/gfx/remotecontrol_static.jpg">
 &lt;map name="RemoteControl"> 
 &lt;area shape=circle coords="65,8,7" href="/web/wap/wapremote.html?command=116" alt="onoff">
 

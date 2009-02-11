@@ -6,8 +6,8 @@ Version = '$Header$';
 	&lt;meta content="text/html; charset=UTF-8" http-equiv="content-type">
 	&lt;title>Enigma 2 Webinterface (ALPHA)&lt;/title>
 
-	&lt;link href="/webdata/style.css" type="text/css" rel="stylesheet" >
-	&lt;link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico">
+	&lt;link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" >
+	&lt;link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
 &lt;/head>
 
 &lt;body>
@@ -21,12 +21,12 @@ Version = '$Header$';
 		&lt;/tr>
 		&lt;tr>
 		<e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
-		&lt;td>&lt;font color=#<e2:item name="Color"/>><e2:item name="ServiceName"/> &lt;/font>&lt;/td>
-		&lt;td>&lt;font color=#<e2:item name="Color"/>><e2:item name="Name"/> &lt;/font>&lt;/td>
-		&lt;td>&lt;font color=#<e2:item name="Color"/>><e2:item name="Description"/> &lt;/font>&lt;/td>
-		&lt;td>&lt;a href=&quot;/web/timerdelete?sRef=<e2:item name="ServiceReference"/>&amp;begin=<e2:item name="TimeBegin"/>&amp;end=<e2:item name="TimeEnd"/>&quot;>&lt;img src=/webdata/gfx/trash.gif title=delete_timer_entry border=0>&lt;/a>
-		&lt;a href=&quot;/web/wap/timerchange.html?sRef=<e2:item name="ServiceReference"/>&amp;begin=<e2:item name="TimeBegin"/>&amp;end=<e2:item name="TimeEnd"/>&amp;name=<e2:item name="Name"/>&amp;description=<e2:item name="Description"/>&amp;afterevent=<e2:item name="afterEvent"/>&amp;justplay=<e2:item name="justPlay"/>&amp;repeated=<e2:item name="Repeated"/>&amp;disabled=<e2:item name="toggleDisabled"/>&amp;channelOld=<e2:item name="ServiceReference"/>&amp;beginOld=<e2:item name="TimeBegin"/>&amp;endOld=<e2:item name="TimeEnd"/>&amp;deleteOldOnSave=1&quot;>&lt;img src=/webdata/gfx/<e2:item name="toggleDisabledIMG"/>.png title=toggleOnOff border=0>&lt;/a>
-		&lt;a href=&quot;/web/wap/timeredit.html?bouquet=&amp;sRef=<e2:item name="ServiceReference"/>&amp;begin=<e2:item name="TimeBegin"/>&amp;end=<e2:item name="TimeEnd"/>&amp;name=<e2:item name="Name"/>&amp;description=<e2:item name="Description"/>&amp;afterevent=<e2:item name="afterEvent"/>&amp;justplay=<e2:item name="justPlay"/>&amp;repeated=<e2:item name="Repeated"/>&amp;disabled=<e2:item name="toggleDisabled"/>&amp;deleteOldOnSave=1&amp;command=change&amp;ehour=end&amp;emin=end&amp;eday=end&amp;emonth=end&amp;eyear=end&amp;shour=begin&amp;smin=begin&amp;sday=begin&amp;smonth=begin&amp;syear=begin&quot;>&lt;img src=/webdata/gfx/edit.gif title=EditTimer border=0>&lt;/a>
+		&lt;td>&lt;font><e2:item name="ServiceName"/> &lt;/font>&lt;/td>
+		&lt;td>&lt;font><e2:item name="Name"/> &lt;/font>&lt;/td>
+		&lt;td>&lt;font><e2:item name="Description"/> &lt;/font>&lt;/td>
+		&lt;td>&lt;a href=&quot;/web/timerdelete?sRef=<e2:item name="ServiceReference"/>&amp;begin=<e2:item name="TimeBegin"/>&amp;end=<e2:item name="TimeEnd"/>&quot;>&lt;img src=/web-data/img/delete.png title=delete_timer_entry border=0>&lt;/a>
+		&lt;a href=&quot;/web/wap/timerchange.html?sRef=<e2:item name="ServiceReference"/>&amp;begin=<e2:item name="TimeBegin"/>&amp;end=<e2:item name="TimeEnd"/>&amp;name=<e2:item name="Name"/>&amp;description=<e2:item name="Description"/>&amp;afterevent=<e2:item name="afterEvent"/>&amp;justplay=<e2:item name="justPlay"/>&amp;dirname=<e2:item name="Location"/>&amp;tags=<e2:item name="Tags"/>&amp;repeated=<e2:item name="Repeated"/>&amp;disabled=<e2:item name="toggleDisabled"/>&amp;channelOld=<e2:item name="ServiceReference"/>&amp;beginOld=<e2:item name="TimeBegin"/>&amp;endOld=<e2:item name="TimeEnd"/>&amp;deleteOldOnSave=1&quot;>&lt;img src=/web-data/img/<e2:item name="toggleDisabledIMG"/>.png title=toggleOnOff border=0>&lt;/a>
+		&lt;a href=&quot;/web/wap/timeredit.html?bouquet=&amp;sRef=<e2:item name="ServiceReference"/>&amp;begin=<e2:item name="TimeBegin"/>&amp;end=<e2:item name="TimeEnd"/>&amp;name=<e2:item name="Name"/>&amp;description=<e2:item name="Description"/>&amp;afterevent=<e2:item name="afterEvent"/>&amp;justplay=<e2:item name="justPlay"/>&amp;dirname=<e2:item name="Location"/>&amp;tags=<e2:item name="Tags"/>&amp;repeated=<e2:item name="Repeated"/>&amp;disabled=<e2:item name="toggleDisabled"/>&amp;deleteOldOnSave=1&amp;command=change&amp;ehour=end&amp;emin=end&amp;day=begin&amp;month=begin&amp;year=begin&amp;shour=begin&amp;smin=begin&quot;>&lt;img src=/web-data/img/edit.png title=EditTimer border=0>&lt;/a>
 			&lt;/td>
 		&lt;/tr>
 	</e2:convert>

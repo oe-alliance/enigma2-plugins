@@ -4,8 +4,8 @@
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 	<title>Enigma 2 Webinterface (ALPHA)</title>
 
-	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />
-	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico"/>
+	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" />
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico"/>
 </head>
 <body>
 <h1 style="text-align: center;"><big>Dreambox 7025</big></h1>
@@ -15,7 +15,7 @@
 <div style="text-align: center;">
 <a href="/web/wap/wapremote.html?command=0">Remote Control</a><br/>
 <a href="/web/wap/timerlist.html">Timerlist</a><br/>
-<a href="/web/wap/timeredit.html?name=&amp;description=&amp;justplay=&amp;afterevent=&amp;repeated=&amp;bouquet=&amp;sRef=&amp;ehour=now&amp;shour=now&amp;emin=now&amp;smin=now&amp;sday=now&amp;eday=now&amp;smonth=now&amp;emonth=now&amp;syear=now&amp;eyear=now&amp;end=&amp;begin=&amp;deleteOldOnSave=0&amp;command=add">Add Timer</a><br/>
+<a href="/web/wap/timeredit.html?name=&amp;description=&amp;dirname=&amp;tags=&amp;justplay=&amp;afterevent=&amp;repeated=&amp;bouquet=&amp;sRef=&amp;ehour=now&amp;shour=now&amp;emin=now&amp;smin=now&amp;day=now&amp;month=now&amp;year=now&amp;end=&amp;begin=&amp;deleteOldOnSave=0&amp;command=add">Add Timer</a><br/>
 <a href="/web/wap/power.html">PowerState</a><br/>
 </div>
 </body>

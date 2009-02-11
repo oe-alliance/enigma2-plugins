@@ -2,8 +2,8 @@
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 	<title>Enigma 2 Webinterface (ALPHA)</title>
-<!--	<link href="/webdata/style.css" type="text/css" rel="stylesheet" />-->
-	<link rel="shortcut icon" type="image/x-icon" href="/webdata/gfx/favicon.ico"/>
+<!--	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" />-->
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico"/>
 </head>
 <body>
 <form action="/web/wap/timeradd" method="get">
@@ -19,27 +19,29 @@
 	</td>
 </tr><tr>
 	<td colspan="3"></td>
-	<td colspan="3">Note: For recurring events start/end day/month are not required.</td>
+	<td colspan="3">Note: For recurring events date is not required.</td>
+</tr><tr>
+	<td colspan="3">Date:</td><td colspan="3">
+	<select name="year" size="1">
+		<e2:element source="WAPFillOptionListYear" id="year,sRef,begin"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+	</select>.
+	<select name="month">
+		<e2:element source="WAPFillOptionListMonth" id="month,sRef,begin"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+	</select>.
+	<select name="day">
+		<e2:element source="WAPFillOptionListDay" id="day,sRef,begin"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
+		</e2:convert>
+	<e2:convert type="web:TextToHTML"/></e2:element>
+	</select></td>
 </tr><tr>
 	<td colspan="3">Start:</td><td colspan="3">
-	<select name="syear" size="1">
-		<e2:element source="WAPFillOptionListSyear" id="syear,sRef,begin"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
-		</e2:convert>
-	<e2:convert type="web:TextToHTML"/></e2:element>
-	</select>.
-	<select name="smonth">
-		<e2:element source="WAPFillOptionListSmonth" id="smonth,sRef,begin"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
-		</e2:convert>
-	<e2:convert type="web:TextToHTML"/></e2:element>
-	</select>.
-	<select name="sday">
-		<e2:element source="WAPFillOptionListSday" id="sday,sRef,begin"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
-		</e2:convert>
-	<e2:convert type="web:TextToHTML"/></e2:element>
-</select>---
 	<select name="shour">
 		<e2:element source="WAPFillOptionListShour" id="shour,sRef,begin"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
@@ -53,24 +55,7 @@
 	<e2:convert type="web:TextToHTML"/></e2:element>
 	</select></td>
 </tr><tr>
-	<td colspan="3">End:</td><td colspan="3"><select name="eyear">
-		<e2:element source="WAPFillOptionListEyear" id="eyear,sRef,end"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
-		</e2:convert>
-	<e2:convert type="web:TextToHTML"/></e2:element>
-</select>.
-	<select name="emonth">
-		<e2:element source="WAPFillOptionListEmonth" id="emonth,sRef,end"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
-		</e2:convert>
-	<e2:convert type="web:TextToHTML"/></e2:element>
-</select>.
-	<select name="eday">
-		<e2:element source="WAPFillOptionListEday" id="eday,sRef,end"><e2:convert type="web:ListFiller" >
-		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
-		</e2:convert>
-	<e2:convert type="web:TextToHTML"/></e2:element>
-</select>---
+	<td colspan="3">End:</td><td colspan="3">
 	<select name="ehour">
 		<e2:element source="WAPFillOptionListEhour" id="ehour,sRef,end"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
@@ -118,6 +103,24 @@
 		&lt;input name=description type=text size=60 maxlength=60 value=&quot;<e2:item name="Value"/>&quot;>
 		</e2:convert>
 		<e2:convert type="web:TextToHTML"/></e2:element>
+	</td>
+</tr><tr>
+	<td colspan="3">Location:</td><td colspan="3">
+	<select name="dirname" size="1">
+	<e2:element source="WAPFillLocation" id="dirname"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Name"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
+		</e2:convert>
+		<e2:convert type="web:TextToHTML"/></e2:element>
+	</select>
+	</td>
+</tr><tr>
+	<td colspan="3">Tags:</td><td colspan="3">
+	<select name="tags" size="1">
+	<e2:element source="WAPFillTags" id="tags"><e2:convert type="web:ListFiller" >
+		&lt;option value=&quot;<e2:item name="Name"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
+		</e2:convert>
+		<e2:convert type="web:TextToHTML"/></e2:element>
+	</select>
 	</td>
 </tr><tr>
 	<td colspan="3">After event do:</td><td colspan="3"><select name="afterevent" size="1">
