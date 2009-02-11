@@ -8,7 +8,7 @@ from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.SelectionList import SelectionList
 from enigma import eServiceReference, eServiceCenter, iServiceInformation
-import os
+from os import path as os_path
 
 def main(session, service, **kwargs):
 	session.open(MovieTagEditor, service, session.current_dialog, **kwargs)
@@ -19,8 +19,7 @@ def Plugins(**kwargs):
 		setPreferredTagEditor(TagEditor)
 	except:
 		pass
-	return PluginDescriptor(name="TagEditor", description=_("Edit tags..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
-
+	return PluginDescriptor(name = "TagEditor", description = _("Edit tags..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = main)
 
 class TagEditor(Screen):
 	skin = """
@@ -77,9 +76,10 @@ class TagEditor(Screen):
 
 	def addCustomCallback(self, ret):
 		ret = ret and ret.strip().replace(" ","_").capitalize()
-		if ret and ret not in self.tags:
-			self.tags.append(ret)
-			self.updateMenuList(self.tags, [ret])
+		tags = self.tags
+		if ret and ret not in tags:
+			tags.append(ret)
+			self.updateMenuList(tags, [ret])
 
 	def loadTagsFile(self):
 		try:
@@ -106,7 +106,7 @@ class TagEditor(Screen):
 				taglist.append(tag)
 
 	def setTimerTags(self, timer, tags):
-		if hasattr(timer, "tags") and timer.tags != tags:
+		if timer.tags != tags:
 			timer.tags = tags
 			self.timerdirty = True
 
@@ -116,7 +116,7 @@ class TagEditor(Screen):
 			file = file + ".meta"
 		else:
 			file = file + ".ts.meta"
-		if os.path.exists(file):
+		if os_path.exists(file):
 			metafile = open(file, "r")
 			sid = metafile.readline()
 			title = metafile.readline()
@@ -133,7 +133,7 @@ class TagEditor(Screen):
 	def foreachTimerTags(self, func):
 		self.timerdirty = False
 		for timer in self.session.nav.RecordTimer.timer_list + self.session.nav.RecordTimer.processed_timers:
-			if hasattr(timer, "tags") and timer.tags:
+			if timer.tags:
 				func(timer, timer.tags[:])
 		if self.timerdirty:
 			self.session.nav.RecordTimer.saveTimer()
@@ -141,7 +141,7 @@ class TagEditor(Screen):
 	def foreachMovieTags(self, func):
 		serviceHandler = eServiceCenter.getInstance()
 		for dir in config.movielist.videodirs.value:
-			if os.path.isdir(dir):
+			if os_path.isdir(dir):
 				root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dir)
 				list = serviceHandler.list(root)
 				if list is None:
@@ -156,10 +156,9 @@ class TagEditor(Screen):
 					if info is None:
 						continue
 					tags = info.getInfoString(serviceref, iServiceInformation.sTags).split(' ')
-					if tags == ['']:
-						tags = []
-					if tags:
-						func(serviceref, tags)
+					if not tags or tags == ['']:
+						continue
+					func(serviceref, tags)
 
 	def updateMenuList(self, tags, extrasel = []):
 		seltags = [x[1] for x in self["list"].getSelectionsList()] + extrasel
@@ -167,7 +166,7 @@ class TagEditor(Screen):
 		self["list"].setList([])
 		for tag in tags:
 			self["list"].addSelection(tag, tag, 0, tag in seltags)
-		
+
 	def loadFromHdd(self):
 		tags = self.tags[:]
 		self.foreachTimerTags(lambda t, tg: self.joinTags(tags, tg))
@@ -182,7 +181,7 @@ class TagEditor(Screen):
 		self.updateMenuList(tags)
 		self.tags = tags
 
-	def listReplace(self, lst, fr, to=None):
+	def listReplace(self, lst, fr, to = None):
 		if fr in lst:
 			lst.remove(fr)
 			if to != None and not to in lst:
@@ -245,18 +244,18 @@ class TagEditor(Screen):
 			self.updateMenuList(self.tags)
 
 	def showMenu(self):
-		menu = []
-		menu.append((_("Add new tag"), self.addCustom))
-		menu.append((_("Rename this tag"), self.renameTag))
-		menu.append((_("Delete this tag"), self.removeTag))
-		menu.append((_("Delete unused tags"), self.removeUnused))
-		menu.append((_("Delete all tags"), self.removeAll))
-		self.session.openWithCallback(self.menuCallback, ChoiceBox, title="", list=menu)
+		menu = [
+			(_("Add new tag"), self.addCustom),
+			(_("Rename this tag"), self.renameTag),
+			(_("Delete this tag"), self.removeTag),
+			(_("Delete unused tags"), self.removeUnused),
+			(_("Delete all tags"), self.removeAll)
+		]
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, title = "", list = menu)
 
 	def menuCallback(self, choice):
-		if choice is None:
-			return
-		choice[1]()
+		if choice:
+			choice[1]()
 
 	def cancel(self):
 		if not self.origtags == self.ghosttags:
@@ -289,7 +288,7 @@ class MovieTagEditor(TagEditor):
 		TagEditor.__init__(self, session, tags, args)
 
 	def saveTags(self, file, tags):
-		if os.path.exists(file + ".ts.meta"):
+		if os_path.exists(file + ".ts.meta"):
 			metafile = open(file + ".ts.meta", "r")
 			sid = metafile.readline()
 			title = metafile.readline()
@@ -322,7 +321,9 @@ class MovieTagEditor(TagEditor):
 		# This will try to get back to an updated movie list.
 		# A proper way to do this should be provided in enigma2.
 		try:
-			self.parentscreen.csel.reloadList()
-			self.parentscreen.close()
+			parentscreen = self.parentscreen
+			parentscreen.csel.reloadList()
+			parentscreen.close()
 		except AttributeError:
 			pass
+
