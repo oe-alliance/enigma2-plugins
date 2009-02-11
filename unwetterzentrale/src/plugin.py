@@ -7,23 +7,20 @@
 #
 
 import xml.sax.saxutils as util
-import urllib, os, sys, string
 
 from Plugins.Plugin import PluginDescriptor
 from twisted.web.client import getPage
 from twisted.internet import reactor
 from Screens.Screen import Screen
 from Screens.Console import Console
-from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.Sources.List import List
 from Components.MenuList import MenuList
 from Components.AVSwitch import AVSwitch
-from Components.Pixmap import Pixmap, MovingPixmap
+from Components.Pixmap import Pixmap
 from enigma import eTimer, loadPic
-from re import sub, split, search, match, findall
-
+from re import sub, search, findall
+from os import unlink
 
 def getAspect():
 	val = AVSwitch().getAspectRatioSetting()
@@ -199,26 +196,27 @@ class UnwetterMain(Screen):
 				output= util.unescape(output,trans)
 			
 				if self.land == "de":
-						startpos = string.find(output,"<!-- Anfang Navigation -->")
-						endpos = string.find(output,"<!-- Ende Navigation -->")
+						startpos = output.find('<!-- Anfang Navigation -->')
+						endpos = output.find('<!-- Ende Navigation -->')
 						bereich = output[startpos:endpos]							
 						a = findall(r'href=(?P<text>.*?)</a>',bereich)						
 						for x in a[1:16]:
-							x = x.replace('">',"#").replace('"',"")
-							name = x.split("#")[1]
-							link = self.baseurl + x.split("#")[0]
+							x = x.replace('">',"#").replace('"',"").split('#')
+							name = x[1]
+							link = self.baseurl + x[0]
 							self.menueintrag.append(name)
 							self.link.append(link)		
 				else:
-						startpos = string.find(output,'<div id="mainWindow">')
-						endpos = string.find(output,'<a class="menua" href="http://www.austrowetter.at"')
+						startpos = output.find('<div id="mainWindow">')
+						endpos = output.find('<a class="menua" href="http://www.austrowetter.at"')
 						bereich = output[startpos:endpos]				
 						a = findall(r'<a class="menub" href=(?P<text>.*?)</a>',bereich)
 						for x in a[1:13]:
 							x = x.replace('">',"#").replace('"',"").replace(' style=font-weight:;',"")
 							if x != '#&nbsp;':
-									name = x.split("#")[1]
-									link = self.baseurl + x.split("#")[0]
+									x = x.split('#')
+									name = x[1]
+									link = self.baseurl + x[0]
 									self.menueintrag.append(name)
 									self.link.append(link)				
 
@@ -299,8 +297,8 @@ class UnwetterMain(Screen):
 		def getPicUrl(self,output):
 				self.loadinginprogress = False
 				if self.land == "de":	
-						startpos = string.find(output,"<!-- Anfang msg_Box Content -->")
-						endpos = string.find(output,"<!-- Ende msg_Box Content -->")
+						startpos = output.find('<!-- Anfang msg_Box Content -->')
+						endpos = output.find('<!-- Ende msg_Box Content -->')
 						bereich = output[startpos:endpos]
 						picurl = search(r'<img src="(?P<text>.*?)" width=',bereich)
 						picurl = self.baseurl + picurl.group(1)
@@ -320,12 +318,12 @@ class UnwetterMain(Screen):
 				if self.land == "de":
 						trans = { '&szlig;' : 'ß' , '&auml;' : 'ä' , '&ouml;' : 'ö' , '&uuml;' : 'ü' , '&Auml;' : 'Ä', '&Ouml;' : 'Ö' , '&Uuml;' : 'Ü'}
 						output= util.unescape(output,trans)
-						startpos = string.find(output,'<!-- Anfang msg_Box Content -->')
-						endpos = string.find(output,"<!-- Ende msg_Box Content -->")
+						startpos = output.find('<!-- Anfang msg_Box Content -->')
+						endpos = output.find('<!-- Ende msg_Box Content -->')
 						bereich = output[startpos:endpos]
 				else:
-						startpos = string.find(output,'<div class="content">')
-						endpos = string.find(output,'<div class="rs_title">Unwettermeldungen</div>')
+						startpos = output.find('<div class="content">')
+						endpos = output.find('<div class="rs_title">Unwettermeldungen</div>')
 						bereich = output[startpos:endpos]
 						u_bereich = bereich.decode("iso-8859-1")
 						bereich = u_bereich.encode("utf-8")
@@ -387,7 +385,8 @@ class UnwetterMain(Screen):
 				if self.loadinginprogress:
 					reactor.callLater(1,self.exit)
 				else:
-					os.system("rm %s %s" % (self.picfile, self.reportfile))
+					unlink(self.picfile)
+					unlink(self.reportfile)
 					self.close()
 
 
