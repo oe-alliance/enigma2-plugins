@@ -36,6 +36,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 		list = [
 			getConfigListEntry(_("Poll automatically"), config.plugins.autotimer.autopoll),
 			getConfigListEntry(_("Poll Interval (in h)"), config.plugins.autotimer.interval),
+			getConfigListEntry(_("Show in Extensionmenu"), config.plugins.autotimer.show_in_extensionsmenu),
 			getConfigListEntry(_("Modify existing Timers"), config.plugins.autotimer.refresh),
 			getConfigListEntry(_("Guess existing Timer based on Begin/End"), config.plugins.autotimer.try_guessing),
 			getConfigListEntry(_("Add timer as disabled on conflict"), config.plugins.autotimer.disabled_on_conflict),

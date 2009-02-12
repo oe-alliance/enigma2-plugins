@@ -6,7 +6,11 @@ from Screens.MessageBox import MessageBox
 
 # Config
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
-	ConfigNumber, ConfigSelection
+	ConfigNumber, ConfigSelection, ConfigYesNo
+
+# Plugin
+from Components.PluginComponent import plugins
+from Plugins.Plugin import PluginDescriptor
 
 # Initialize Configuration
 config.plugins.autotimer = ConfigSubsection()
@@ -25,6 +29,7 @@ config.plugins.autotimer.editor = ConfigSelection(choices = [
 	], default = "wizard"
 )
 config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default = False)
+config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default = False)
 
 autotimer = None
 autopoller = None
@@ -137,13 +142,28 @@ def eventinfo(session, servicelist, **kwargs):
 	ref = session.nav.getCurrentlyPlayingServiceReference()
 	session.open(AutoTimerEPGSelection, ref)
 
-def Plugins(**kwargs):
-	from Plugins.Plugin import PluginDescriptor
+# XXX: we need this helper function to identify the descriptor
+# Extensions menu
+def extensionsmenu(session, **kwargs):
+	main(session, **kwargs)
 
-	return [
+def housekeepingExtensionsmenu(el):
+	if el.value:
+		plugins.addPlugin(extDescriptor)
+	else:
+		plugins.removePlugin(extDescriptor)
+
+config.plugins.autotimer.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = False)
+extDescriptor = PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu)
+
+def Plugins(**kwargs):
+	l = [
 		PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = autostart),
 		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main),
 		PluginDescriptor(name="AutoTimer", description= _("Add AutoTimer..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist),
 		PluginDescriptor(name="AutoTimer", description= _("Add AutoTimer..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc = eventinfo),
 	]
+	if config.plugins.autotimer.show_in_extensionsmenu.value:
+		l.append(extDescriptor)
+	return l
 
