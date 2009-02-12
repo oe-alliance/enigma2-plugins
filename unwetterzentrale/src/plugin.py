@@ -18,7 +18,7 @@ from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap
-from enigma import eTimer, loadPic
+from enigma import eTimer, ePicLoad
 from re import sub, search, findall
 from os import unlink
 
@@ -52,17 +52,19 @@ class PictureView(Screen):
 			"showEventInfo": self.HelpView,
 				}, -1)
 
-				self.getPicTimer = eTimer()
-				self.getPicTimer.callback.append(self.getPic)
-				self.getPicTimer.start(300, True)
-				
+				self.picload = ePicLoad()
+				sc = AVSwitch().getFramebufferScale()
+				self.picload.setPara((550, 550, sc[0], sc[1], 0, 0, '#ff000000'))
+				self.picload.PictureData.get().append(self.gotPic)
+				self.onLayoutFinish.append(self.getPic)
+
 		def getPic(self):
-				self.currPic = loadPic(self.picfile, 550, 550, self.aspect, 0, 0, 1)
-				self.showPic()
-				
-		def showPic(self):
-				if self.currPic != None:
-					self["picture"].instance.setPixmap(self.currPic)
+				self.picload.startDecode(self.picfile)
+
+		def gotPic(self, picInfo = None):
+				ptr = self.picload.getData()
+				if ptr:
+					self["picture"].instance.setPixmap(ptr.__deref__())
 
 		def HelpView(self):
 				self.session.openWithCallback(self.getPic ,HelpPictureView)
@@ -94,23 +96,29 @@ class HelpPictureView(Screen):
 				}, -1)
 				
 				self.aspect = getAspect()
-				self.list = []
-				self.list.append(pluginpath + "/W_gruen.gif")
-				self.list.append(pluginpath + "/W_gelb.gif")
-				self.list.append(pluginpath + "/W_orange.gif")
-				self.list.append(pluginpath + "/W_rot.gif")
-				self.list.append(pluginpath + "/W_violett.gif")
+				self.list = (
+					pluginpath + "/W_gruen.gif",
+					pluginpath + "/W_gelb.gif",
+					pluginpath + "/W_orange.gif",
+					pluginpath + "/W_rot.gif",
+					pluginpath + "/W_violett.gif"
+				)
 				self.index = 0
-					
+
+				self.picload = ePicLoad()
+				sc = AVSwitch().getFramebufferScale()
+				self.picload.setPara((690, 225, sc[0], sc[1], 0, 0, '#ff000000'))
+				self.picload.PictureData.get().append(self.gotPic)
+
 				self.onShown.append(self.getPic)
 				
 		def getPic(self):
-				self.currPic = loadPic(self.list[self.index], 690, 225, self.aspect, 0, 0, 1)
-				self.showPic()
-				
-		def showPic(self):
-				if self.currPic != None:
-					self["picture"].instance.setPixmap(self.currPic)
+				self.picload.startDecode(self.list[self.index])
+
+		def gotPic(self, picInfo = None):
+				ptr = self.picload.getData()
+				if ptr:
+					self["picture"].instance.setPixmap(ptr.__deref__())
 	
 		def nextPic(self):
 				self.index += 1
@@ -184,6 +192,8 @@ class UnwetterMain(Screen):
 										
 				self.downloadMenu()
 
+				self.picload = ePicLoad()
+
 #				self.onLayoutFinish.append(self.go)	
 
 				self.ThumbTimer = eTimer()
@@ -202,6 +212,8 @@ class UnwetterMain(Screen):
 						a = findall(r'href=(?P<text>.*?)</a>',bereich)						
 						for x in a[1:16]:
 							x = x.replace('">',"#").replace('"',"").split('#')
+							if not len(x) > 1:
+								break
 							name = x[1]
 							link = self.baseurl + x[0]
 							self.menueintrag.append(name)
@@ -215,6 +227,8 @@ class UnwetterMain(Screen):
 							x = x.replace('">',"#").replace('"',"").replace(' style=font-weight:;',"")
 							if x != '#&nbsp;':
 									x = x.split('#')
+									if not len(x) > 1:
+										break
 									name = x[1]
 									link = self.baseurl + x[0]
 									self.menueintrag.append(name)
@@ -267,10 +281,19 @@ class UnwetterMain(Screen):
 				if self.land == "de":
 						picture = pluginpath + "/uwz.png"
 				else:
-						picture = pluginpath + "/uwzat.png"						
-				ptr = loadPic(picture, 90, 40, self.aspect, 0, 0, 1)
-				if ptr != None:
-						self["thumbland"].instance.setPixmap(ptr)
+						picture = pluginpath + "/uwzat.png"
+				picload = self.picload
+				sc = AVSwitch().getFramebufferScale()
+				picload.setPara((90, 40, sc[0], sc[1], 0, 0, '#ff000000'))
+				l = picload.PictureData.get()
+				del l[:]
+				l.append(self.gotThumbLand)
+				picload.startDecode(picture)
+
+		def gotThumbLand(self, picInfo = None):
+				ptr = self.picload.getData()
+				if ptr:
+						self["thumbland"].instance.setPixmap(ptr.__deref__())
 						
 		def showThumb(self):
 				picture = ""
@@ -286,11 +309,21 @@ class UnwetterMain(Screen):
 					else:
 						picture = self.picweatherfile	
 						height = 150				
-				ptr = loadPic(picture, width, height, self.aspect, 0, 0, 1)
-				if ptr != None:
+
+				picload = self.picload
+				sc = AVSwitch().getFramebufferScale()
+				picload.setPara((width, height, sc[0], sc[1], 0, 0, '#ff000000'))
+				l = picload.PictureData.get()
+				del l[:]
+				l.append(self.gotThumb)
+				picload.startDecode(picture)
+
+		def gotThumb(self, picInfo = None):
+				ptr = self.picload.getData()
+				if ptr:
 					self["statuslabel"].setText("")
 					self["thumbnail"].show()
-					self["thumbnail"].instance.setPixmap(ptr)
+					self["thumbnail"].instance.setPixmap(ptr.__deref__())
 				else:
 					self["thumbnail"].hide()
 			
@@ -385,8 +418,11 @@ class UnwetterMain(Screen):
 				if self.loadinginprogress:
 					reactor.callLater(1,self.exit)
 				else:
-					unlink(self.picfile)
-					unlink(self.reportfile)
+					try:
+						unlink(self.picfile)
+						unlink(self.reportfile)
+					except OSError:
+						pass
 					self.close()
 
 
