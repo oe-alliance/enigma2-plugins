@@ -8,7 +8,6 @@ from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT, parseEvent
 from Components.config import config
 from xml.sax.saxutils import unescape
 from time import time, strftime, localtime, mktime
-from string import split
 
 class Timer( Source):
     LIST = 0
@@ -120,7 +119,7 @@ class Timer( Source):
         if param['sRef'] is None:
             return False, "Missing Parameter: sRef"
         else:
-            takeApart = split(param['sRef'], '|')
+            takeApart = param['sRef'].split('|')
             if len(takeApart) > 1:
                 param['sRef'] = takeApart[1]
         
