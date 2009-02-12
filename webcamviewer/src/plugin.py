@@ -24,7 +24,6 @@ from re import compile
 ## XML
 from pyexpat import ExpatError
 import xml.dom.minidom
-from Tools.XMLTools import elementsWithTag
 
 ### my
 from WebcamViewConfig import WebcamViewerMenu
@@ -447,12 +446,16 @@ class WebcamViewer(Screen):
 		xloader = XMLloader()
 		self.menutitle = xloader.getScreenXMLTitle(self.xmlnode)
 		data =[]
-		for node in elementsWithTag(self.xmlnode._get_childNodes(), 'menu'):
+		for node in self.xmlnode.childNodes:
+			if node.nodeType != xml.dom.minidom.Element.nodeType or node.tagName != 'menu':
+				continue
 			nodex = {}
 			nodex['name'] = xloader.get_txt(node, "name", "no name")
 			data.append((_("*" + nodex['name']), ["node", node]))
 
-		for node in elementsWithTag(self.xmlnode._get_childNodes(), 'cam'):
+		for node in self.xmlnode.childNodes:
+			if node.nodeType != xml.dom.minidom.Element.nodeType or node.tagName != 'cam':
+				continue
 			nodex = {}
 			nodex['name'] = xloader.get_txt(node, "name", "no name")
 			nodex['url'] =xloader.get_txt(node, "url", "no url")
