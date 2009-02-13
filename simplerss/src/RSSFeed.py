@@ -12,15 +12,15 @@ class ElementWrapper:
 		self._ns = ns
 
 	def __getattr__(self, tag):
-		if tag.startswith("__"):
+		if tag.startswith('__'):
 			raise AttributeError(tag)
-		return self._element.findtext(self._ns + tag)
+		return self._element.findtext(''.join((self._ns, tag)))
 
 class RSSEntryWrapper(ElementWrapper):
 	def __getattr__(self, tag):
 		if tag == "enclosures":
 			myl = []
-			for elem in self._element.findall(self._ns + "enclosure"):
+			for elem in self._element.findall(''.join((self._ns, 'enclosure'))):
 				length = elem.get("length")
 				if length:
 					length = int(length) / 1048576
@@ -30,12 +30,9 @@ class RSSEntryWrapper(ElementWrapper):
 					"length": length
 					})
 			return myl
-		if tag == "id":
-			possibleId = self._element.findtext(self._ns + "guid")
-			if not possibleId:
-				possibleId = ''.join([self.title, self.link])
-			return possibleId
-		if tag == "updated":
+		elif tag == "id":
+			return self._element.findtext(''.join((self._ns, 'guid')), ''.join((self.title, self.link)))
+		elif tag == "updated":
 			tag = "lastBuildDate"
 		elif tag == "summary":
 			tag = "description"
@@ -44,13 +41,13 @@ class RSSEntryWrapper(ElementWrapper):
 class PEAEntryWrapper(ElementWrapper):
 	def __getattr__(self, tag):
 		if tag == "link":
-			for elem in self._element.findall(self._ns + tag):
+			for elem in self._element.findall(''.join((self._ns, tag))):
 				if not elem.get("rel") == "enclosure":
 					return elem.get("href")
-			return ""
-		if tag == "enclosures":
+			return ''
+		elif tag == "enclosures":
 			myl = []
-			for elem in self._element.findall(self._ns + "link"):
+			for elem in self._element.findall(''.join((self._ns, 'link'))):
 				if elem.get("rel") == "enclosure":
 					length = elem.get("length")
 					if length:
@@ -69,7 +66,16 @@ class RSSWrapper(ElementWrapper):
 		ElementWrapper.__init__(self, channel, ns)
 
 	def __iter__(self):
-		return iter([self[i] for i in range(len(self))])
+		self.idx = 0
+		self.len = len(self)-1
+		return self
+
+	def next(self):
+		idx = self.idx
+		if idx > self.len:
+			raise StopIteration
+		self.idx = idx+1
+		return self[idx]
 
 	def __len__(self):
 		return len(self._items)
@@ -80,23 +86,23 @@ class RSSWrapper(ElementWrapper):
 class RSS1Wrapper(RSSWrapper):
 	def __init__(self, feed, ns):
 		RSSWrapper.__init__(
-			self, feed.find(ns + "channel"),
-			feed.findall(ns + "item"), ns
-			)
+			self, feed.find(''.join((ns, 'channel'))),
+			feed.findall(''.join((ns, 'item'))), ns
+		)
 
 class RSS2Wrapper(RSSWrapper):
 	def __init__(self, feed, ns):
 		channel = feed.find("channel")
 		RSSWrapper.__init__(
 			self, channel, channel.findall("item")
-			)
+		)
 
 class PEAWrapper(RSSWrapper):
 	def __init__(self, feed, ns):
 		ns = feed.tag[:feed.tag.index("}")+1]
 		RSSWrapper.__init__(
-			self, feed, feed.findall(ns + "entry"), ns
-			)
+			self, feed, feed.findall(''.join((ns, 'entry'))), ns
+		)
 
 	def __getitem__(self, index):
 		return PEAEntryWrapper(self._items[index], self._ns)
@@ -142,10 +148,8 @@ class UniversalFeed(BaseFeed):
 			return []
 
 		idx = 0
+		ids = self.last_ids
 		for item in wrapper:
-			enclosures = []
-			link = ""
-
 			# Try to read title, continue if none found
 			title = strip(item.title)
 			if not title:
@@ -153,15 +157,14 @@ class UniversalFeed(BaseFeed):
 
 			# Try to read id, continue if none found (invalid feed or internal error) or to be excluded
 			id = item.id
-			if not id or id in self.last_ids:
+			if not id or id in ids:
 				continue
 
 			# Link
 			link = item.link
 
-			# Read out enclosures and link
-			for enclosure in item.enclosures:
-				enclosures.append(ScanFile(enclosure["href"], mimetype = enclosure["type"], size = enclosure["length"], autodetect = False))
+			# Read out enclosures
+			enclosures = [ScanFile(enclosure["href"], mimetype = enclosure["type"], size = enclosure["length"], autodetect = False) for enclosure in item.enclosures]
 
 			# Try to read summary, empty if none
 			summary = strip_readable(item.summary)
@@ -173,7 +176,7 @@ class UniversalFeed(BaseFeed):
 					summary.encode("UTF-8"),
 					enclosures
 			))
-			self.last_ids.add(id)
+			ids.add(id)
 
 			idx += 1
 

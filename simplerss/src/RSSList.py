@@ -10,9 +10,10 @@ class RSSBaseList(MenuList):
 	def __init__(self, entries, itemheight):
 		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
 
-		self.l.setFont(0, gFont("Regular", 22))
-		self.l.setFont(1, gFont("Regular", 18))
-		self.l.setItemHeight(itemheight)
+		l = self.l
+		l.setFont(0, gFont("Regular", 22))
+		l.setFont(1, gFont("Regular", 18))
+		l.setItemHeight(itemheight)
 
 	def connectSelChanged(self, fnc):
 		if not fnc in self.onSelectionChanged:
@@ -45,11 +46,12 @@ class RSSFeedList(RSSBaseList):
 			idx += 1
 
 	def buildListboxEntry(self, feed):
-		res = [ None ]
 		width = self.l.getItemSize().width()
-		res.append(MultiContentEntryText(pos=(0, 0), size=(width, 75), font=0, flags = RT_HALIGN_LEFT|RT_WRAP, text = feed.title))
-		res.append(MultiContentEntryText(pos=(0, 75), size=(width, 20), font=1, flags = RT_HALIGN_LEFT, text = feed.description))
-		return res
+		return [
+			None,
+			MultiContentEntryText(pos=(0, 0), size=(width, 75), font=0, flags = RT_HALIGN_LEFT|RT_WRAP, text = feed.title),
+			MultiContentEntryText(pos=(0, 75), size=(width, 20), font=1, flags = RT_HALIGN_LEFT, text = feed.description)
+		]
 
 	def getCurrent(self):
 		# We know that the list will never be empty...
@@ -72,7 +74,9 @@ class RSSEntryList(RSSBaseList):
 			idx += 1
 
 	def buildListboxEntry(self, title, link, summary, enclosures):
-		res = [ None ]
 		width = self.l.getItemSize().width()
-		res.append(MultiContentEntryText(pos=(0, 3), size=(width, 50), font=0, flags = RT_HALIGN_LEFT|RT_WRAP, text = title))
-		return res
+		return [
+			None,
+			MultiContentEntryText(pos=(0, 3), size=(width, 50), font=0, flags = RT_HALIGN_LEFT|RT_WRAP, text = title)
+		]
+

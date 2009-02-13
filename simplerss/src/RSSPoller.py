@@ -204,14 +204,15 @@ class RSSPoller:
 		self.reloading = True
 
 		newfeeds = []
+		oldfeeds = self.feeds
 		found = False
 		for x in config.plugins.simpleRSS.feed:
-			for feed in self.feeds:
+			for feed in oldfeeds:
 				if x.uri.value == feed.uri:
 					# Update possibly different autoupdate value
 					feed.autoupdate = x.autoupdate.value
 					newfeeds.append(feed) # Append to new Feeds
-					self.feeds.remove(feed) # Remove from old Feeds
+					oldfeeds.remove(feed) # Remove from old Feeds
 					found = True
 					break
 			if not found:

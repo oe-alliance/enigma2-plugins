@@ -107,11 +107,11 @@ def filescan(**kwargs):
 
 	return [
 		RemoteScanner(
-			mimetypes = ["application/rss+xml", "application/atom+xml"],
+			mimetypes = ("application/rss+xml", "application/atom+xml"),
 			paths_to_scan =
-				[
+				(
 					ScanPath(path = "", with_subdirs = False),
-				],
+				),
 			name = "RSS-Reader",
 			description = _("Subscribe Newsfeed..."),
 			openfnc = filescan_open,

@@ -2,7 +2,7 @@
 from re import sub
 
 # Entities to be converted
-entities = [
+entities = (
 	# ISO-8895-1 (most common)
 	("&#228;", u"ä"),
 	("&auml;", u"ä"),
@@ -36,7 +36,7 @@ entities = [
 	("&amp;", u"&"),
 	("&quot;", u"\""),
 	("&apos;", u"'"),
-]
+)
 
 def strip_readable(html):
 	# Newlines are rendered as whitespace in html
@@ -68,3 +68,4 @@ def strip(html):
 
 	# Return result with leading/trailing whitespaces removed
 	return html.strip()
+

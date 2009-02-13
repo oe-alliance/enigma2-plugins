@@ -390,16 +390,16 @@ class RSSOverview(RSSBaseView):
 
 		cur_idx = self["content"].getSelectedIndex()
 		if cur_idx > 0:
-			possible_actions = [
+			possible_actions = (
 				(_("Update Feed"), "update"),
 				(_("Setup"), "setup"),
 				(_("Close"), "close")
-			]
+			)
 		else:
-			possible_actions = [
+			possible_actions = (
 				(_("Setup"), "setup"),
 				(_("Close"), "close")
-			]
+			)
 
 		self.session.openWithCallback(
 			self.menuChoice,
