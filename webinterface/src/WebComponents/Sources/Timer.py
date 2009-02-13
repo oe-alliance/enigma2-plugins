@@ -123,9 +123,7 @@ class Timer( Source):
             if len(takeApart) > 1:
                 param['sRef'] = takeApart[1]
         
-        repeated = 0
-        if param.has_key('repeated'):
-            repeated = int(param['repeated'])
+        repeated = int(param.get('repeated') or 0)
         if repeated == 0:
             list = ["mo","tu","we","th","fr","sa","su","ms","mf"]
             for element in list:
@@ -214,12 +212,9 @@ class Timer( Source):
             service_ref = ServiceReference(param['sRef'])
         else:
             return False, "Missing Parameter: sRef"
-                
-        repeated = 0
-        if param.has_key('repeated'):
-            repeated = int(param['repeated'])
-        
-            
+
+        repeated = int(param.get('repeated') or 0)
+
         if param.has_key('begin'):
             begin = int(param['begin'])
             if time() <= begin:                
