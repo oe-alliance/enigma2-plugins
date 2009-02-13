@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-10 00:19+0100\n"
+"POT-Creation-Date: 2009-02-13 11:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,20 +16,20 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:89
+#: ../src/plugin.py:94
 #, python-format
 msgid "%d Feed(s) were added to configuration."
 msgstr ""
 
-#: ../src/plugin.py:118
+#: ../src/plugin.py:126
 msgid "A simple to use RSS reader"
 msgstr ""
 
-#: ../src/RSSSetup.py:26
+#: ../src/RSSSetup.py:27
 msgid "Autoupdate"
 msgstr ""
 
-#: ../src/RSSSetup.py:32 ../src/RSSSetup.py:97
+#: ../src/RSSSetup.py:33 ../src/RSSSetup.py:100
 msgid "Cancel"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: ../src/RSSSetup.py:100
+#: ../src/RSSSetup.py:103
 msgid "Delete"
 msgstr ""
 
@@ -60,7 +60,7 @@ msgid ""
 "it."
 msgstr ""
 
-#: ../src/RSSSetup.py:77 ../src/RSSSetup.py:166
+#: ../src/RSSSetup.py:80 ../src/RSSSetup.py:174
 msgid "Feed"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Feed %s/%s"
 msgstr ""
 
-#: ../src/RSSSetup.py:27
+#: ../src/RSSSetup.py:28
 msgid "Feed URI"
 msgstr ""
 
@@ -81,11 +81,11 @@ msgstr ""
 msgid "Found no Enclosure we can display."
 msgstr ""
 
-#: ../src/RSSSetup.py:86
+#: ../src/RSSSetup.py:89
 msgid "Keep running in background"
 msgstr ""
 
-#: ../src/RSSSetup.py:99
+#: ../src/RSSSetup.py:102
 msgid "New"
 msgstr ""
 
@@ -101,25 +101,25 @@ msgstr ""
 msgid "No such Item."
 msgstr ""
 
-#: ../src/plugin.py:11
+#: ../src/plugin.py:12
 msgid "Notification"
 msgstr ""
 
-#: ../src/RSSSetup.py:33 ../src/RSSSetup.py:98
+#: ../src/RSSSetup.py:34 ../src/RSSSetup.py:101
 msgid "OK"
 msgstr ""
 
-#: ../src/plugin.py:12
+#: ../src/plugin.py:13
 msgid "Preview"
 msgstr ""
 
-#: ../src/RSSSetup.py:133
+#: ../src/RSSSetup.py:136
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
 msgstr ""
 
-#: ../src/RSSPoller.py:151
+#: ../src/RSSPoller.py:152
 #, python-format
 msgid "Received %d new news item(s)."
 msgstr ""
@@ -128,7 +128,7 @@ msgstr ""
 msgid "Setup"
 msgstr ""
 
-#: ../src/RSSSetup.py:91
+#: ../src/RSSSetup.py:94
 msgid "Show new Messages as"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgstr ""
 msgid "Simple RSS Reader"
 msgstr ""
 
-#: ../src/RSSSetup.py:46 ../src/RSSSetup.py:114
+#: ../src/RSSSetup.py:47 ../src/RSSSetup.py:117
 msgid "Simple RSS Reader Setup"
 msgstr ""
 
@@ -152,15 +152,19 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../src/RSSSetup.py:83
+#: ../src/RSSSetup.py:86
 msgid "Start automatically with Enigma2"
+msgstr ""
+
+#: ../src/plugin.py:116
+msgid "Subscribe Newsfeed..."
 msgstr ""
 
 #: ../src/RSSScreens.py:394
 msgid "Update Feed"
 msgstr ""
 
-#: ../src/RSSSetup.py:92
+#: ../src/RSSSetup.py:95
 msgid "Update Interval (min)"
 msgstr ""
 
@@ -170,10 +174,14 @@ msgid ""
 "Contents will automatically be updated when it's done."
 msgstr ""
 
+#: ../src/plugin.py:135
+msgid "View RSS..."
+msgstr ""
+
 #: ../src/RSSScreens.py:407
 msgid "What to do?"
 msgstr ""
 
-#: ../src/plugin.py:13
+#: ../src/plugin.py:14
 msgid "none"
 msgstr ""

@@ -113,7 +113,7 @@ def filescan(**kwargs):
 					ScanPath(path = "", with_subdirs = False),
 				],
 			name = "RSS-Reader",
-			description = "Subscribe Newsfeed...",
+			description = _("Subscribe Newsfeed..."),
 			openfnc = filescan_open,
 		)
 	]
@@ -132,7 +132,7 @@ def Plugins(**kwargs):
 			fnc = autostart
 		),
  		PluginDescriptor(
-			name = "View RSS",
+			name = _("View RSS..."),
 			description = "Let's you view current RSS entries",
 			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
 			fnc=main
