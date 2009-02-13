@@ -14,13 +14,13 @@ class ElementWrapper:
 	def __getattr__(self, tag):
 		if tag.startswith('__'):
 			raise AttributeError(tag)
-		return self._element.findtext(''.join((self._ns, tag)))
+		return self._element.findtext(self._ns + tag)
 
 class RSSEntryWrapper(ElementWrapper):
 	def __getattr__(self, tag):
 		if tag == "enclosures":
 			myl = []
-			for elem in self._element.findall(''.join((self._ns, 'enclosure'))):
+			for elem in self._element.findall(self._ns + 'enclosure'):
 				length = elem.get("length")
 				if length:
 					length = int(length) / 1048576
@@ -31,7 +31,7 @@ class RSSEntryWrapper(ElementWrapper):
 					})
 			return myl
 		elif tag == "id":
-			return self._element.findtext(''.join((self._ns, 'guid')), ''.join((self.title, self.link)))
+			return self._element.findtext(self._ns + 'guid', self.title + self.link)
 		elif tag == "updated":
 			tag = "lastBuildDate"
 		elif tag == "summary":
@@ -41,13 +41,13 @@ class RSSEntryWrapper(ElementWrapper):
 class PEAEntryWrapper(ElementWrapper):
 	def __getattr__(self, tag):
 		if tag == "link":
-			for elem in self._element.findall(''.join((self._ns, tag))):
+			for elem in self._element.findall(self._ns + tag):
 				if not elem.get("rel") == "enclosure":
 					return elem.get("href")
 			return ''
 		elif tag == "enclosures":
 			myl = []
-			for elem in self._element.findall(''.join((self._ns, 'link'))):
+			for elem in self._element.findall(self._ns + 'link'):
 				if elem.get("rel") == "enclosure":
 					length = elem.get("length")
 					if length:
@@ -86,8 +86,8 @@ class RSSWrapper(ElementWrapper):
 class RSS1Wrapper(RSSWrapper):
 	def __init__(self, feed, ns):
 		RSSWrapper.__init__(
-			self, feed.find(''.join((ns, 'channel'))),
-			feed.findall(''.join((ns, 'item'))), ns
+			self, feed.find(ns + 'channel'),
+			feed.findall(ns + 'item'), ns
 		)
 
 class RSS2Wrapper(RSSWrapper):
@@ -101,7 +101,7 @@ class PEAWrapper(RSSWrapper):
 	def __init__(self, feed, ns):
 		ns = feed.tag[:feed.tag.index("}")+1]
 		RSSWrapper.__init__(
-			self, feed, feed.findall(''.join((ns, 'entry'))), ns
+			self, feed, feed.findall(ns + 'entry'), ns
 		)
 
 	def __getitem__(self, index):

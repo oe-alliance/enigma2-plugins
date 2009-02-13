@@ -93,7 +93,7 @@ class RSSEntryView(RSSBaseView):
 			self["info"] = Label()
 
 		if data is not None:
-			self["content"] = ScrollLabel("\n\n".join([data[0], data[2], " ".join([str(len(data[3])), _("Enclosures")])]))
+			self["content"] = ScrollLabel("\n\n".join((data[0], data[2], " ".join((str(len(data[3])), _("Enclosures"))))))
 		else:
 			self["content"] = ScrollLabel()
 
@@ -167,7 +167,7 @@ class RSSEntryView(RSSBaseView):
 		else:
 			self["info"].setText("")
 		if self.data is not None:
-			self["content"].setText("\n\n".join([self.data[0], self.data[2], " ".join([str(len(self.data[3])), _("Enclosures")])]))
+			self["content"].setText("\n\n".join((self.data[0], self.data[2], " ".join((str(len(self.data[3])), _("Enclosures"))))))
 		else:
 			self["content"].setText(_("No such Item."))
 
@@ -356,7 +356,7 @@ class RSSOverview(RSSBaseView):
 
 		# We always have at least "New Items"-Feed
 		self["content"] = RSSFeedList(self.feeds)
-		self["summary"] = Label(' '.join([str(len(self.feeds[0][0].history)), _("Entries")]))
+		self["summary"] = Label(' '.join((str(len(self.feeds[0][0].history)), _("Entries"))))
 		self["info"] = Label(_("Feed %s/%s") % (1, len(self.feeds)))
 
 		self["content"].connectSelChanged(self.updateInfo)
@@ -382,7 +382,7 @@ class RSSOverview(RSSBaseView):
 
 	def updateInfo(self):
 		current_entry = self["content"].getCurrent()
-		self["summary"].setText(' '.join([str(len(current_entry.history)), _("Entries")]))
+		self["summary"].setText(' '.join((str(len(current_entry.history)), _("Entries"))))
 		self["info"].setText(_("Feed %s/%s") % (self["content"].getSelectedIndex()+1, len(self.feeds)))
 
 	def menu(self):
