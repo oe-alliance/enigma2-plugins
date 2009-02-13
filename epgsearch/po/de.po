@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 17:13+0100\n"
-"PO-Revision-Date: 2009-02-06 17:20+0100\n"
+"POT-Creation-Date: 2009-02-13 15:04+0100\n"
+"PO-Revision-Date: 2009-02-13 15:06+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -37,6 +37,9 @@ msgstr "Importiere aus Timer"
 msgid "New Search"
 msgstr "Neue Suche"
 
+msgid "No history"
+msgstr "Verlauf ist leer"
+
 msgid "OK"
 msgstr "OK"
 
@@ -45,6 +48,9 @@ msgstr "Suche"
 
 msgid "Search EPG"
 msgstr "Durchsuche EPG"
+
+msgid "Search EPG..."
+msgstr "Durchsuche EPG..."
 
 msgid "Select a timer to search"
 msgstr "Wähle einen Timer aus"

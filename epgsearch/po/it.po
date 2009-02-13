@@ -66,6 +66,9 @@ msgstr "Cercare"
 msgid "Search EPG"
 msgstr "Cercare EPG"
 
+msgid "Search EPG..."
+msgstr "Cercare EPG..."
+
 #~ msgid "default"
 #~ msgstr "Predefinito"
 #~ msgid "auto"

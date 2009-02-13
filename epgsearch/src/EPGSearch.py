@@ -7,6 +7,7 @@ from Screens.ChannelSelection import SimpleChannelSelection
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
 from Screens.InputBox import InputBox
+from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 
 from Components.ActionMap import ActionMap
@@ -53,10 +54,10 @@ class EPGSearch(EPGSelection):
 		)
 
 	def menu(self):
-		options = [
+		options = (
 			(_("Import from Timer"), "importFromTimer"),
 			(_("Import from EPG"), "importFromEPG")
-		]
+		)
 
 		self.session.openWithCallback(
 			self.menuCallback,
@@ -81,12 +82,19 @@ class EPGSearch(EPGSelection):
 	def blueButtonPressed(self):
 		options = [(x, x) for x in config.plugins.epgsearch.history.value]
 
-		self.session.openWithCallback(
-			self.searchEPGWrapper,
-			ChoiceBox,
-			title = _("Select text to search for"),
-			list = options
-		)
+		if options:
+			self.session.openWithCallback(
+				self.searchEPGWrapper,
+				ChoiceBox,
+				title = _("Select text to search for"),
+				list = options
+			)
+		else:
+			self.session.open(
+				MessageBox,
+				_("No history"),
+				type = MessageBox.TYPE_INFO
+			)
 
 	def searchEPGWrapper(self, ret):
 		if ret:
