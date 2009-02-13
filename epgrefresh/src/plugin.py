@@ -34,6 +34,7 @@ del now, begin, end
 # Plugin
 from EPGRefresh import epgrefresh
 from EPGRefreshConfiguration import EPGRefreshConfiguration
+from EPGRefreshService import EPGRefreshService
 
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
@@ -80,10 +81,23 @@ def doneConfiguring(session, **kwargs):
 	if config.plugins.epgrefresh.enabled.value:
 		epgrefresh.start(session)
 
+# Eventinfo
+def eventinfo(session, servicelist, **kwargs):
+	ref = session.nav.getCurrentlyPlayingServiceReference()
+	if not ref:
+		return
+	sref = ref.toString()
+	# strip all after last :
+	pos = sref.rfind(':')
+	if pos != -1:
+		sref = sref[:pos+1]
+
+	epgrefresh.services[0].add(EPGRefreshService(sref, None))
+
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			name="EPGRefresh",
+			name = "EPGRefresh",
 			description = _("Automated EPGRefresher"),
 			where = [
 				PluginDescriptor.WHERE_AUTOSTART,
@@ -93,9 +107,14 @@ def Plugins(**kwargs):
 			wakeupfnc = getNextWakeup
 		),
 		PluginDescriptor(
-			name="EPGRefresh",
+			name = "EPGRefresh",
 			description = _("Automated EPGRefresher"),
 			where = PluginDescriptor.WHERE_PLUGINMENU,
 			fnc = main
-		)
+		),
+		PluginDescriptor(
+			name = _("Add to EPGRefresh"),
+			where = PluginDescriptor.WHERE_EVENTINFO,
+			fnc = eventinfo
+		),
 	]

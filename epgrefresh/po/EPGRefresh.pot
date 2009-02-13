@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-09 18:30+0100\n"
+"POT-Creation-Date: 2009-02-13 11:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:85 ../src/plugin.py:95
+#: ../src/plugin.py:116
+msgid "Add to EPGRefresh"
+msgstr ""
+
+#: ../src/plugin.py:101 ../src/plugin.py:111
 msgid "Automated EPGRefresher"
 msgstr ""
 
@@ -24,7 +28,7 @@ msgstr ""
 msgid "Bouquets"
 msgstr ""
 
-#: ../src/EPGRefreshChannelEditor.py:75 ../src/EPGRefreshConfiguration.py:66
+#: ../src/EPGRefreshChannelEditor.py:75 ../src/EPGRefreshConfiguration.py:64
 msgid "Cancel"
 msgstr ""
 
@@ -32,15 +36,15 @@ msgstr ""
 msgid "Channels"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:87
+#: ../src/EPGRefreshConfiguration.py:85
 msgid "Configure EPGRefresh"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:57
+#: ../src/EPGRefreshConfiguration.py:55
 msgid "Delay when not in Standby (in m)"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:42
+#: ../src/EPGRefreshConfiguration.py:40
 msgid "EPGRefresh Configuration"
 msgstr ""
 
@@ -48,7 +52,7 @@ msgstr ""
 msgid "EPGRefresh Services"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:69
+#: ../src/EPGRefreshConfiguration.py:67
 msgid "Edit Services"
 msgstr ""
 
@@ -60,11 +64,11 @@ msgstr ""
 msgid "Editing"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:58
+#: ../src/EPGRefreshConfiguration.py:56
 msgid "Force scan even if reciever is in use"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:59
+#: ../src/EPGRefreshConfiguration.py:57
 msgid "Inherit Services from AutoTimer if available"
 msgstr ""
 
@@ -72,27 +76,27 @@ msgstr ""
 msgid "New"
 msgstr ""
 
-#: ../src/EPGRefreshChannelEditor.py:76 ../src/EPGRefreshConfiguration.py:67
+#: ../src/EPGRefreshChannelEditor.py:76 ../src/EPGRefreshConfiguration.py:65
 msgid "OK"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:136
+#: ../src/EPGRefreshConfiguration.py:134
 msgid "Really close without saving settings?"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:55
+#: ../src/EPGRefreshConfiguration.py:53
 msgid "Refresh EPG after"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:56
+#: ../src/EPGRefreshConfiguration.py:54
 msgid "Refresh EPG before"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:52
+#: ../src/EPGRefreshConfiguration.py:50
 msgid "Refresh automatically"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:68
+#: ../src/EPGRefreshConfiguration.py:66
 msgid "Refresh now"
 msgstr ""
 
@@ -108,15 +112,15 @@ msgstr ""
 msgid "Select channel to refresh"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:60
+#: ../src/EPGRefreshConfiguration.py:58
 msgid "Shutdown after refresh"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:54
+#: ../src/EPGRefreshConfiguration.py:52
 msgid "Time to stay on service (in m)"
 msgstr ""
 
-#: ../src/EPGRefreshConfiguration.py:53
+#: ../src/EPGRefreshConfiguration.py:51
 msgid "Wakeup from Deep-Standby to refresh EPG"
 msgstr ""
 
