@@ -63,12 +63,12 @@ class Timer( Source):
             return False, "Missing Parameter: sRef"
         
         if param.has_key('begin'):
-            begin = int(param['begin'])
+            begin = int(float(param['begin']))
         else:
             return False, "Missing Parameter: begin"
         
         if param.has_key('end'):
-            end = int(param['end'])
+            end = int(float(param['end']))
         else:
         	return False, "Missing Parameter: end"
              
@@ -216,7 +216,7 @@ class Timer( Source):
         repeated = int(param.get('repeated') or 0)
 
         if param.has_key('begin'):
-            begin = int(param['begin'])
+            begin = int(float(param['begin']))
             if time() <= begin:                
                 pass
             elif time() > int(begin) and repeated == 0:
@@ -227,7 +227,7 @@ class Timer( Source):
             return False, "Missing Parameter: begin"
         
         if param.has_key('end'): 
-            end = int(param['end'])
+            end = int(float(param['end']))
         else:
             return False, "Missing Parameter: end"
           
