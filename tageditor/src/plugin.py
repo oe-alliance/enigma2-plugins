@@ -35,8 +35,8 @@ class TagEditor(Screen):
 		<widget name="key_blue" position="420,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
-	def __init__(self, session, tags, txt = None, args = 0):
-		Screen.__init__(self, session, args)
+	def __init__(self, session, tags, txt = None, args = 0, parent = None):
+		Screen.__init__(self, session, parent = parent)
 
 		# Initialize Buttons
 		self["key_red"] = Button(_("Cancel"))
@@ -273,7 +273,6 @@ class TagEditor(Screen):
 class MovieTagEditor(TagEditor):
 	def __init__(self, session, service, parent, args = 0):
 		self.service = service
-		self.parentscreen = parent
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(service)
 		path = service.getPath()
@@ -285,7 +284,7 @@ class MovieTagEditor(TagEditor):
 			tags = tags.split(' ')
 		else:
 			tags = []
-		TagEditor.__init__(self, session, tags, args)
+		TagEditor.__init__(self, session, tags, args, parent = parent)
 
 	def saveTags(self, file, tags):
 		if os_path.exists(file + ".ts.meta"):
@@ -321,7 +320,7 @@ class MovieTagEditor(TagEditor):
 		# This will try to get back to an updated movie list.
 		# A proper way to do this should be provided in enigma2.
 		try:
-			parentscreen = self.parentscreen
+			parentscreen = self.parent
 			parentscreen.csel.reloadList()
 			parentscreen.close()
 		except AttributeError:
