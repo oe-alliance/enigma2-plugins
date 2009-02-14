@@ -15,11 +15,11 @@ class EPGRefreshService(object):
 		return self.sref
 
 	def __repr__(self):
-		return ''.join([
+		return ''.join((
 			'<EPGRefreshService (',
-			', '.join([
+			', '.join((
 				self.sref,
 				str(self.duration or '?'),
-			]),
+			)),
 			')>'
-		])
+		))

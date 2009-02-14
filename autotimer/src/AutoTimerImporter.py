@@ -125,7 +125,7 @@ class AutoTimerImporter(Screen):
 		if disabled is not None:
 			list.append(
 				SelectionEntryComponent(
-					': '.join([_("Enabled"), {True: _("disable"), False: _("enable")}[bool(disabled)]]),
+					': '.join((_("Enabled"), {True: _("disable"), False: _("enable")}[bool(disabled)])),
 					not disabled,
 					0,
 					True
@@ -170,7 +170,7 @@ class AutoTimerImporter(Screen):
 		if afterEvent is not None:
 			list.append(
 				SelectionEntryComponent(
-					': '.join([_("After event"), afterevent[afterEvent]]),
+					': '.join((_("After event"), afterevent[afterEvent])),
 					afterEvent,
 					4,
 					True
@@ -179,7 +179,7 @@ class AutoTimerImporter(Screen):
 		if justplay is not None:
 			list.append(
 				SelectionEntryComponent(
-					': '.join([_("Timer Type"), {0: _("record"), 1: _("zap")}[int(justplay)]]),
+					': '.join((_("Timer Type"), {0: _("record"), 1: _("zap")}[int(justplay)])),
 					int(justplay),
 					5,
 					True
@@ -188,7 +188,7 @@ class AutoTimerImporter(Screen):
 		if dirname is not None:
 			list.append(
 				SelectionEntryComponent(
-					': '.join([_("Location"), dirname or "/hdd/movie/"]),
+					': '.join((_("Location"), dirname or "/hdd/movie/")),
 					dirname,
 					6,
 					True
@@ -197,7 +197,7 @@ class AutoTimerImporter(Screen):
 		if tags:
 			list.append(
 				SelectionEntryComponent(
-					': '.join([_("Tags"), ', '.join(tags)]),
+					': '.join((_("Tags"), ', '.join(tags))),
 					tags,
 					7,
 					True

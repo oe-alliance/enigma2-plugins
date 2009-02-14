@@ -92,8 +92,8 @@ class RSSEntryView(RSSBaseView):
 		else:
 			self["info"] = Label()
 
-		if data is not None:
-			self["content"] = ScrollLabel("\n\n".join((data[0], data[2], " ".join((str(len(data[3])), _("Enclosures"))))))
+		if data:
+			self["content"] = ScrollLabel(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures"))))
 		else:
 			self["content"] = ScrollLabel()
 
@@ -166,8 +166,9 @@ class RSSEntryView(RSSBaseView):
 			self["info"].setText(_("Entry %s/%s") % (self.cur_idx+1, self.entries))
 		else:
 			self["info"].setText("")
-		if self.data is not None:
-			self["content"].setText("\n\n".join((self.data[0], self.data[2], " ".join((str(len(self.data[3])), _("Enclosures"))))))
+		data = self.data
+		if data:
+			self["content"].setText(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures"))))
 		else:
 			self["content"].setText(_("No such Item."))
 

@@ -45,15 +45,18 @@ class WerbeZapper:
 				self.choiceCallback,
 				ChoiceBox,
 				_("When to Zap back?"),
-				[
-				 	(
-						' '.join([str(x), _("minutes")]),
-						x
-					)
-				 	for x in range(1, 10)
-				 ] + [
+				(
+					('1 ' + _('minute'), 1),
+					('2 ' + _('minutes'), 2),
+					('3 ' + _('minutes'), 3),
+					('4 ' + _('minutes'), 4),
+					('5 ' + _('minutes'), 5),
+					('6 ' + _('minutes'), 6),
+					('7 ' + _('minutes'), 7),
+					('8 ' + _('minutes'), 8),
+					('9 ' + _('minutes'), 9),
 					( _("Custom"), 'custom')
-				]
+				)
 			)
 
 	def confirmStop(self, result):

@@ -87,15 +87,15 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 		return False
 
 	def __repr__(self):
-		return ''.join([
+		return ''.join((
 				"<EPGRefreshTimerEntry (",
-				', '.join([
+				', '.join((
 					strftime("%c", localtime(self.begin)),
 					str(self.repeated),
 					str(self.function)
-				]),
+				)),
 				")>"
-			])
+			))
 
 class EPGRefreshTimer(timer.Timer):
 	def __init__(self):

@@ -523,11 +523,11 @@ class AutoTimerComponent(object):
 		return not self.__eq__(other)
 
 	def __repr__(self):
-		return ''.join([
+		return ''.join((
 			'<AutomaticTimer ',
 			self.name,
 			' (',
-			', '.join([
+			', '.join((
 					str(self.match),
 					str(self.encoding),
 					str(self.searchCase),
@@ -558,7 +558,7 @@ class AutoTimerComponent(object):
 			 		str(self.avoidDuplicateDescription),
 					str(self.bouquets),
 					str(self.tags)
-			 ]),
+			 )),
 			 ")>"
-		])
+		))
 

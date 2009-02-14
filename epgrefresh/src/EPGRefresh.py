@@ -207,7 +207,7 @@ class EPGRefresh:
 		del additionalServices[:]
 
 		# Debug
-		print "[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in scanServices])
+		#print "[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in scanServices])
 
 		self.scanServices = scanServices
 		self.refresh()
