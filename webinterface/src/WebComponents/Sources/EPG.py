@@ -36,30 +36,45 @@ class EPG( Source):
         else:
             return []
     
-    def getEPGNow(self, bouqetref):
-        return self.getEPGNowNext(bouqetref)
+    def getEPGNow(self, ref):
+        return self.getEPGNowNext(ref)
     
-    def getEPGNext(self, bouqetref):
-        return self.getEPGNowNext(bouqetref, False)
+    def getEPGNext(self, ref):
+        return self.getEPGNowNext(ref, False)
     
-    def getEPGNowNext(self, bouqetref, now=True):
-        print "getting EPG NOW/NEXT", bouqetref
-        serviceHandler = eServiceCenter.getInstance()
-        list = serviceHandler.list(eServiceReference(bouqetref))
-        services = list and list.getContent('S')
-        
+    def getEPGNowNext(self, ref, now=True):
+        print "getting EPG NOW/NEXT", ref
         search = ['IBDTSERN']
-        for service in services:
-            if now:
-                search.append((service,0,-1))
-            else:
-                search.append((service,1,-1))        
         
+        if now:
+            search.append((ref, 0, -1))
+        else:
+            search.append((ref, 1, -1))
+           
         events = self.epgcache.lookupEvent(search)
         if events:
-                return events
+            return events
+                
         else:
-                return []
+            serviceHandler = eServiceCenter.getInstance()
+            list = serviceHandler.list(eServiceReference(ref))
+            services = list and list.getContent('S')
+            search = ['IBDTSERN']
+            
+            if len(services) > 0: # It's a Bouquet
+                for service in services:
+                    if now:
+                        search.append((service,0,-1))
+                    else:
+                        search.append((service,1,-1))
+         
+            
+            events = self.epgcache.lookupEvent(search)
+            if events:
+                    return events
+
+        return []
+        
     
     def getEPGofService(self, ref, options = 'IBDTSERN'):
         print "getting EPG of Service", ref
