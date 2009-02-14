@@ -3,12 +3,10 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.LocationBox import MovieLocationBox
 import Screens.Standby
-from Components.config import *
+from Components.config import config, ConfigText, ConfigSelection, getConfigListEntry
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.Button import Button
 from Components.Label import Label
-from Components.Pixmap import Pixmap
 from enigma import eTimer, eServiceReference, eServiceCenter, iServiceInformation, eConsoleAppContainer
 import os
 
@@ -23,36 +21,31 @@ class MovieRetitle(Screen, ConfigListScreen):
 	skin = """
 	<screen name="TitleDescrInput" position="100,150" size="500,200" title="Name and Description Input">
 		<widget name="config" position="10,10" size="480,120" />
-		<widget name="ok" position="70,140" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
+		<ePixmap position="70,140" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
 		<widget name="oktext" position="70,140" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" />
-		<widget name="cancel" position="290,140" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
+		<ePixmap position="290,140" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
 		<widget name="canceltext" position="290,140" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" />
 	</screen>"""
 
 	def __init__(self, session, service, parent, args = 0):
-		Screen.__init__(self, session)
-		self.session = session
-		self.service = service
-		self.parentscreen = parent
-		Screen.__init__(self, session)
+		Screen.__init__(self, session, parent = parent)
 		serviceHandler = eServiceCenter.getInstance()
-		info = serviceHandler.info(self.service)
-		self.path = self.service.getPath()
-		if self.path.endswith(".ts") is True:
-			self.path = self.path[:-3]
-		self.dir = self.dirName(self.path)
-		self.file = self.baseName(self.path)
-		self.name = info.getName(self.service)
+		info = serviceHandler.info(service)
+		path = service.getPath()
+		if path.endswith(".ts") is True:
+			path = path[:-3]
+		self.path = path
+		self.dir = '/'.join(path.split('/')[:-1]) + '/'
+		self.file = self.baseName(path)
+		self.name = info.getName(service)
 		if self.file == self.baseName(self.name):
 			self.title = ""
 		else:
 			self.title = self.name
-		self.descr = info.getInfoString(self.service, iServiceInformation.sDescription)
+		self.descr = info.getInfoString(service, iServiceInformation.sDescription)
 
 		self["oktext"] = Label(_("OK"))
 		self["canceltext"] = Label(_("Cancel"))
-		self["ok"] = Pixmap()
-		self["cancel"] = Pixmap()
 
 		self.input_file = ConfigText(default = self.file, fixed_size = False, visible_width = 42)
 		self.input_title = ConfigText(default = self.title, fixed_size = False, visible_width = 42)
@@ -69,27 +62,26 @@ class MovieRetitle(Screen, ConfigListScreen):
 			"cancel": self.keyCancel,
 		}, -2)
 
-		self.list = []
-		ConfigListScreen.__init__(self, self.list)
-		self.createSetup(self["config"])
+		self.locationEl = getConfigListEntry(_("Location"), self.input_dir)
+		l = [
+			getConfigListEntry(_("Filename"), self.input_file),
+			getConfigListEntry(_("Title"), self.input_title),
+			getConfigListEntry(_("Description"), self.input_descr),
+			self.locationEl
+		]
 
-	def createSetup(self, configlist):
-		self.list = []
-		self.list.append(getConfigListEntry(_("Filename"), self.input_file))
-		self.list.append(getConfigListEntry(_("Title"), self.input_title))
-		self.list.append(getConfigListEntry(_("Description"), self.input_descr))
-		self.list.append(getConfigListEntry(_("Location"), self.input_dir))
-		configlist.list = self.list
-		configlist.l.setList(self.list)
+		ConfigListScreen.__init__(self, l)
 
 	def pathSelected(self, res):
 		if res is not None:
-			if config.movielist.videodirs.value != self.input_dir.choices:
-				self.input_dir.setChoices(config.movielist.videodirs.value, default=res)
+			videodirs = config.movielist.videodirs.value
+			if videodirs != self.input_dir.choices:
+				self.input_dir.setChoices(videodirs, default=res)
 			self.input_dir.value = res
 
 	def keySelectOrGo(self):
-		if self["config"].getCurrent() == self.list[3]:
+		cur = self["config"].getCurrent()
+		if cur is self.locationEl:
 			self.session.openWithCallback(
 				self.pathSelected,
 				MovieLocationBox,
@@ -134,7 +126,7 @@ class MovieRetitle(Screen, ConfigListScreen):
 		elif os.path.isdir(os.path.dirname(to)):
 			self.moveMovieFiles(fr, to)
 		else:
-			self.session.openWithCallback(self.exitDialog, MessageBox, _("The target directory is not found. The file is not renamed."), MessageBox.TYPE_ERROR) 
+			self.session.openWithCallback(self.exitDialog, MessageBox, _("The target directory is not found. The file is not renamed."), MessageBox.TYPE_ERROR)
 
 	def confirmedReplace(self, answer):
 		if answer == True:
@@ -148,7 +140,7 @@ class MovieRetitle(Screen, ConfigListScreen):
 			global_background_mover.enqueue(self.exitDialog, self.session, fr, to)
 		else:
 			print "Moving in foreground"
-			for suff in [".ts.meta", ".ts.cuts", ".ts.ap", ".eit"]:
+			for suff in (".ts.meta", ".ts.cuts", ".ts.ap", ".eit"):
 				if os.path.exists(fr + suff):
 					os.rename(fr + suff, to + suff)
 			self.exitDialog()
@@ -158,8 +150,9 @@ class MovieRetitle(Screen, ConfigListScreen):
 		# This will try to get back to an updated movie list.
 		# A proper way to do this should be provided in enigma2.
 		try:
-			self.parentscreen.csel.reloadList()
-			self.parentscreen.close()
+			parent = self.parent
+			parent.csel.reloadList()
+			parent.close()
 		except AttributeError:
 			pass
 
@@ -169,9 +162,6 @@ class MovieRetitle(Screen, ConfigListScreen):
 			return name[:-3]
 		else:
 			return name
-
-	def dirName(self, str):
-		return '/'.join(str.split('/')[:-1]) + '/'
 
 	def rejoinName(self, dir, name):
 		name = name.strip()
@@ -267,7 +257,7 @@ class MovieRetitleBackgroundMover:
 
 	def moveMovieFilesBackground(self, ele):
 		self.ele = ele
-		self.sufflst = [".ts.meta", ".ts.cuts", ".ts.ap", ".eit", ".ts"]
+		self.sufflst = (".ts.meta", ".ts.cuts", ".ts.ap", ".eit", ".ts")
 		self.sufflst2 = self.sufflst
 		self.moveNextSuffBG(0)
 
