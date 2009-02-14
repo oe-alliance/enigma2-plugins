@@ -119,6 +119,7 @@ networkwizard/po/Makefile
 
 movieretitle/Makefile
 movieretitle/src/Makefile
+movieretitle/po/Makefile
 
 moviecut/Makefile
 moviecut/src_cc/Makefile

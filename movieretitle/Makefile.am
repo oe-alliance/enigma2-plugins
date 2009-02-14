@@ -1,3 +1,3 @@
-SUBDIRS = src
+SUBDIRS = src po
 
 EXTRA_DIST = Readme-MovieRetitle-1.2.txt

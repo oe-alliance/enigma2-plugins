@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
