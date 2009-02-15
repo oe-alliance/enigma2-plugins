@@ -94,14 +94,14 @@ class EPGRefresh:
 			list.append(' <service')
 			if service.duration is not None:
 				list.extend([' duration="', str(service.duration), '"'])
-			list.extend(['>', str(service.sref), '</service>\n'])
+			list.extend(['>', service.sref, '</service>\n'])
 		for bouquet in self.services[1]:
 			ref = ServiceReference(bouquet.sref)
 			list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
 			list.append(' <bouquet')
 			if bouquet.duration is not None:
 				list.extend([' duration="', str(bouquet.duration), '"'])
-			list.extend(['>', str(bouquet.sref), '</bouquet>\n'])
+			list.extend(['>', bouquet.sref, '</bouquet>\n'])
 
 		list.append('\n</epgrefresh>')
 
@@ -174,7 +174,7 @@ class EPGRefresh:
 
 		serviceHandler = eServiceCenter.getInstance()
 		for bouquet in self.services[1].union(additionalBouquets):
-			myref = eServiceReference(str(bouquet.sref))
+			myref = eServiceReference(bouquet.sref)
 			list = serviceHandler.list(myref)
 			if list is not None:
 				while 1:
@@ -189,7 +189,7 @@ class EPGRefresh:
 		scanServices = []
 		channelIdList = []
 		for scanservice in self.services[0].union(additionalServices):
-			service = eServiceReference(str(scanservice.sref))
+			service = eServiceReference(scanservice.sref)
 			if not service.valid() \
 				or (service.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 

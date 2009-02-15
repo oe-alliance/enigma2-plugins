@@ -92,7 +92,7 @@ def eventinfo(session, servicelist, **kwargs):
 	if pos != -1:
 		sref = sref[:pos+1]
 
-	epgrefresh.services[0].add(EPGRefreshService(sref, None))
+	epgrefresh.services[0].add(EPGRefreshService(str(sref), None))
 
 def Plugins(**kwargs):
 	return [

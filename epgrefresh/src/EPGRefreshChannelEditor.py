@@ -175,7 +175,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			list.append(getConfigListEntry(
 				_("Refreshing"),
 				ConfigSelection(choices = [(
-					EPGRefreshService(args[0].toString(), None),
+					EPGRefreshService(str(args[0].toString()), None),
 					ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 				)])
 			))

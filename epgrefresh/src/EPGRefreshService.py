@@ -1,6 +1,6 @@
 class EPGRefreshService(object):
 	def __init__(self, sref, duration):
-		self.sref = sref
+		self.sref = str(sref)
 		self.duration = duration
 
 	def __eq__(self, other):
