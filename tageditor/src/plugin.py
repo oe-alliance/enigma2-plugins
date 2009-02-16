@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.InputBox import InputBox
@@ -245,11 +248,11 @@ class TagEditor(Screen):
 
 	def showMenu(self):
 		menu = [
-			(_("Add new tag"), self.addCustom),
-			(_("Rename this tag"), self.renameTag),
-			(_("Delete this tag"), self.removeTag),
+			(_("Add new tag..."), self.addCustom),
+			(_("Rename this tag..."), self.renameTag),
+			(_("Delete this tag..."), self.removeTag),
 			(_("Delete unused tags"), self.removeUnused),
-			(_("Delete all tags"), self.removeAll)
+			(_("Delete all tags..."), self.removeAll)
 		]
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title = "", list = menu)
 
