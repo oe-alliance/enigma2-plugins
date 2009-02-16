@@ -28,6 +28,9 @@ var currentBouquet = bouquetsTv;
 var updateBouquetItemsPoller = '';
 var updateCurrentPoller = setInterval(updateItems, 7500);
 
+var currentLocation = "/hdd/movie";
+var locationsList = [];
+var tagsList = [];
 
 var boxtype = "";
 
@@ -880,6 +883,69 @@ function initChannelList(){
 
 
 // Movies
+function initMovieList(){
+	// get videodirs, last_videodir, and all tags
+	doRequest(url_getcurrlocation, initMovieList1, false);
+}
+
+function initMovieList1(request){
+	if(request.readyState == 4){
+		result  = new SimpleXMLList(getXML(request));
+		currentLocation = result.getList()[0];
+		doRequest(url_getlocations, initMovieList2, false);
+	}
+}
+
+function initMovieList2(request){
+	if(request.readyState == 4){
+		result  = new SimpleXMLList(getXML(request));
+		locationsList = result.getList();
+                if (locationsList.length == 0) {
+			locationsList = ["/hdd/movie"];
+		}
+		doRequest(url_gettags, initMovieList3, false);
+	}
+}
+
+function initMovieList3(request){
+	if(request.readyState == 4){
+		result  = new SimpleXMLList(getXML(request));
+		tagsList = result.getList();
+	}
+}
+
+function createOptionList2(lst, selected) {
+	var namespace = Array();
+ 	var i = 0;
+        found = false;
+        for (i=0; i<lst.length; i++) {
+                if (lst[i] == selected) {
+                        found = true;
+                }
+        }
+        if (!found) {
+                lst = [selected].concat(lst);
+	}
+	for (i=0; i<lst.length; i++) {
+                namespace[i] = {
+			'value': lst[i],
+			'txt': lst[i],
+			'selected': (lst[i] == selected ? "selected" : " ")};
+	}
+
+	return namespace;
+}
+
+function loadMovieNav(){
+	// fill in menus
+	var namespace = {
+			dirname: createOptionList2(locationsList, currentLocation),
+			tags: createOptionList2(tagsList, "")
+			};
+	data = namespace;
+	processTpl('tplNavMovies', data, 'navContent');
+}
+
 function incomingMovieList(request){
 	if(request.readyState == 4){
 		
@@ -913,13 +979,15 @@ function incomingMovieList(request){
 	}		
 }
 
-
-function loadMovieList(tag){
+function loadMovieList(loc, tag){
+	if(typeof(loc) == 'undefined'){
+		loc = currentLocation;
+	}
 	if(typeof(tag) == 'undefined'){
 		tag = '';
 	}
-	debug("[loadMovieList] Loading movies with tag '"+tag+"'");
-	doRequest(url_movielist+tag, incomingMovieList, false);
+	debug("[loadMovieList] Loading movies in location '"+loc+"' with tag '"+tag+"'");
+	doRequest(url_movielist+"?dirname="+loc+"&tag="+tag, incomingMovieList, false);
 }
 
 
@@ -929,7 +997,7 @@ function incomingDelMovieResult(request) {
 		var result = new SimpleXMLResult(getXML(request));
 		if(result.getState()){
 			notify(result.getStateText(), result.getState());
-			loadMovieList('');
+			loadMovieList();
 		}else{
 			notify(result.getStateText(), result.getState());
 		}
@@ -1493,9 +1561,15 @@ function getBouquets(sRef){
  * @param title - The title to set for the navigation
  */
 function reloadNav(template, title){
-		setAjaxLoad('navContent');
-		processTpl(template, null, 'navContent');
-		setNavHd(title);
+	setAjaxLoad('navContent');
+	processTpl(template, null, 'navContent');
+	setNavHd(title);
+}
+
+function reloadNavDynamic(fnc, title){
+	setAjaxLoad('navContent');
+	setNavHd(title);
+	fnc();
 }
 
 function getBouquetsTv(){
@@ -1601,6 +1675,10 @@ function switchMode(mode){
 			break;
 		
 		case "Movies":
+			//The Navigation
+			reloadNavDynamic(loadMovieNav, 'Movies');
+			
+			//The Movie list
 			loadContentDynamic(loadMovieList, 'Movies');
 			break;
 			
@@ -1667,6 +1745,7 @@ function init(){
 	
 	initChannelList();
 	initVolumePanel();
+	initMovieList();
 	
 	updateItems();
 }

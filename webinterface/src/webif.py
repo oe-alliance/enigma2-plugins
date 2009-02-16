@@ -139,6 +139,7 @@ class ServiceWebScreen(WebScreen):
 class LocationsAndTagsWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
+		self["CurrentLocation"] = LocationsAndTags(session,LocationsAndTags.CURRLOCATION)
 		self["Locations"] = LocationsAndTags(session,LocationsAndTags.LOCATIONS)
 		self["Tags"] = LocationsAndTags(session,LocationsAndTags.TAGS)
 

@@ -16,6 +16,7 @@ class Movie( Source):
 		Source.__init__(self)
 		self.func = func
 		self.session = session
+		self.tagfilter = []
 		self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
 		self.movielist = movielist #MovieList(self.root)
 		self.movielist.load(self.root, None)
@@ -27,8 +28,9 @@ class Movie( Source):
 			self.cmd = cmd
 			if self.func is self.DEL:
 				self.result = self.delMovie(cmd)
-        
-
+			elif self.func is self.LIST:
+				self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + cmd['dirname'])
+				self.tagfilter = cmd['tag'] and [cmd['tag']] or []
 		   
 	def delMovie(self, param):
 #		print "[WebComponents.delMovie] %s" %param
@@ -61,7 +63,7 @@ class Movie( Source):
 
    
 	def command(self):
-		#self.movielist.reload(root=self.root)
+		self.movielist.reload(root=self.root,filter_tags = self.tagfilter)
 		list=[]
 
 		for (serviceref, info, begin, unknown) in self.movielist.list:
@@ -106,8 +108,9 @@ class Movie( Source):
 			filename = "/"+"/".join(serviceref.toString().split("/")[1:])
 			movie.append(filename)
 			movie.append(os_stat(filename)[6])
-			if info.getInfoString(serviceref, iServiceInformation.sTags).lower().find(self.cmd.lower())>=0:
-				""" add movie only to list, if a givven tag is applied to the movie """
+			tag = self.cmd['tag'].lower()
+			if not tag or info.getInfoString(serviceref, iServiceInformation.sTags).lower().find(tag)>=0:
+				""" add movie only to list, if a given tag is applied to the movie """
 				list.append(movie)
 		return list
 

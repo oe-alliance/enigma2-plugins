@@ -28,6 +28,7 @@
 		{ "url": "tpl/tplMediaPlayer.htm" },
 		{ "url": "tpl/tplMovieList.htm" },
 		{ "url": "tpl/tplNavBoxControl.htm" },
+		{ "url": "tpl/tplNavMovies.htm" },
 		{ "url": "tpl/tplNavRadio.htm" },
 		{ "url": "tpl/tplNavTimer.htm" },
 		{ "url": "tpl/tplNavTv.htm" },

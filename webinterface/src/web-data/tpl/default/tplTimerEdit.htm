@@ -15,7 +15,7 @@
 										</tr>
 										<tr>
 											<td colspan="3">&nbsp;</td>
-											<td colspan="3">Note: For recurring events date is not required.</td>
+											<td colspan="3" style="font-size: 12px;">Note: For recurring events date is not required.</td>
 										</tr>
 										<tr>
 											<td colspan="3">Date:</td>
@@ -73,7 +73,7 @@
 										</tr>
 										<tr>
 											<td colspan="3">&nbsp;</td>
-											<td colspan="3">Note: For one-time events the "days" field doesn't have to be specified.</td>
+											<td colspan="3" style="font-size: 12px;">Note: For one-time events the "days" field doesn't have to be specified.</td>
 										</tr>
 										<tr>
 											<td colspan="3">Days:</td>
@@ -85,12 +85,8 @@
 										</tr>
 										<tr>
 											<td colspan="3">Channel:</td>
-											<td>
-												<p><input type="radio" id="tvradio" name="tvradio" value="tv" checked onchange="javascript:addTimerFormChangeType();">TV</p>
-												<p><input type="radio" name="tvradio" value="radio" onchange="javascript:addTimerFormChangeType();">Radio</p>
-											<td>
-												<p>Channel:</p>
-												<select name="channel" id="channel" size="1" onchange="javascript:timerFormExtendChannellist($('channel').options[$('channel').selectedIndex].value)">
+											<td colspan="3">
+												<select name="channel" id="channel" size="1" onchange="javascript:addTimerFormChangeChannel($('channel').options[$('channel').selectedIndex].value)">
 													{for c in channel}
 													<option value="${c.value}" ${c.selected}>${c.txt}</option>
 													{/for}	
@@ -112,7 +108,7 @@
 										<tr>
 											<td colspan="3">Location:</td>
 											<td colspan="3">
-												<select id="dirname" name="dirname" size="1" onchange="javascript:addTimerFormChangeLocation($('dirname').options[$('dirname').selectedIndex].value)">
+												<select id="dirname" name="dirname" size="1">
 													{for d in dirname}
 													<option value="${d.value}" ${d.selected}>${d.txt}</option>
 													{/for}

@@ -5,12 +5,15 @@
 								<td class="${movie.cssclass}" >
 									<table class="sListItem">
 										<tr>
-											<td style="width: 740px;">										
+											<td style="width: 640px;">										
 												<div class="sListSName">
 													<a href="#" id="${movie.servicereference}" onclick="{ zap(this.id); }" class="sListSLink" title="Play ${movie.title}">
 														${movie.title} - ${movie.description} (${movie.servicename})
 													</a>
 												</div>
+											</td>
+											<td style="width: 100px;font-size: 12px;text-align: right;padding-right: 15px;">
+												${movie.tags}
 											</td>
 											<td>
 												<a target="_blank" href="/web/ts.m3u?file=${movie.filelink}">

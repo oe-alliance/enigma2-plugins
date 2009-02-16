@@ -2,8 +2,9 @@ from Components.Sources.Source import Source
 from Components.config import config
 
 class LocationsAndTags(Source):
-    LOCATIONS = 0
-    TAGS = 1
+    CURRLOCATION = 0
+    LOCATIONS = 1
+    TAGS = 2
     
     def __init__(self, session, func):
         self.func = func
@@ -12,15 +13,20 @@ class LocationsAndTags(Source):
         self.result = False,"one two three four unknown command"
 
     def handleCommand(self, cmd):
-        if self.func is self.LOCATIONS:
-            self.result = True,self.getLocations()
+        if self.func is self.CURRLOCATION:
+            self.result = [self.getCurrentLocation()]
+        elif self.func is self.LOCATIONS:
+            self.result = self.getLocations()
         elif self.func is self.TAGS:
-            self.result = True,self.getTags()
+            self.result = self.getTags()
         else:
-            self.result = False,"unknown command"
+            self.result = False
+
+    def getCurrentLocation(self):
+        return config.movielist.last_videodir.value
 
     def getLocations(self):
-        return " ".join(config.movielist.videodirs.value)
+        return config.movielist.videodirs.value
 
     def getTags(self):
         try:
@@ -31,19 +37,17 @@ class LocationsAndTags(Source):
             file.close()
         except IOError, ioe:
             tags = []
-        return " ".join(tags)
+        return tags
 
     def getText(self):
-        self.handleCommand("")
+        self.handleCommand(None)
         print self.result
-        (result,text) = self.result
-        xml  = "<e2simplexmlresult>\n"
-        if result:
-            xml += "<e2state>True</e2state>\n"
-        else:
-            xml += "<e2state>False</e2state>\n"            
-        xml += "<e2statetext>%s</e2statetext>\n" % text
-        xml += "</e2simplexmlresult>\n"
+        lst = self.result
+        xml  = "<e2simplexmllist>\n"
+        if self.result:
+            for ele in self.result:
+		xml += "<e2simplexmlitem>%s</e2simplexmlitem>\n"%ele
+        xml += "</e2simplexmllist>\n"
         return xml
     
     text = property(getText)

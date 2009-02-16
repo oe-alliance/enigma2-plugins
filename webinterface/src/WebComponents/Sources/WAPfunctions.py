@@ -74,9 +74,9 @@ class WAPfunctions( Source):
                 timePlusTwo = end
         
         t = {}
-        t["day"]=strftime("%d", localtime(timeNow))
-        t["month"]=strftime("%m", localtime(timeNow))
-        t["year"]=strftime("%Y", localtime(timeNow))
+        t["sday"]=t["day"]=strftime("%d", localtime(timeNow))
+        t["smonth"]=t["month"]=strftime("%m", localtime(timeNow))
+        t["syear"]=t["year"]=strftime("%Y", localtime(timeNow))
         t["smin"]=strftime("%M", localtime(timeNow))
         t["shour"]=strftime("%H", localtime(timeNow))
         t["emin"]=strftime("%M", localtime(timePlusTwo))
@@ -85,7 +85,7 @@ class WAPfunctions( Source):
         key = ""
         for i in param:
             p = str(i)
-            if p != "sRef":
+            if p != "sRef" and param[p] != None:
                 key = p
 
         if key == "smin" or key == "emin" :
@@ -94,10 +94,10 @@ class WAPfunctions( Source):
         elif key == "shour" or key == "ehour":
             start = 1
             end = 24
-        elif key == "day":
+        elif key == "day" or key == "sday":
             start = 1
             end = 31
-        elif key == "month":
+        elif key == "month" or key == "smonth":
             start = 1
             end = 12
         else:
@@ -217,33 +217,54 @@ class WAPfunctions( Source):
 
         return returnList
     
-    def serviceList(self,param):
-        print "serviceList: ",param
-        sRef = str(param["sRef"])
-        bouquet = str(param["bouquet"])
-        returnList = []
-        sRefFound = 0
-        
-        if bouquet == '':
-            bouquet = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'
+    def serviceListOne(self, bouquet, selref):
         ref = eServiceReference(bouquet)
         self.servicelist = ServiceList(ref, command_func = self.getServiceList, validate_commands=False)
         self.servicelist.setRoot(ref)
+        returnList = []
         for (ref2, name) in self.servicelist.getServicesAsList():
             print "ref2: (",ref2, ") name: (",name,")"
             returnListPart = []
             returnListPart.append(name)
             returnListPart.append(ref2)
-            if ref2 == str(sRef):
+            if ref2 == str(selref):
                 returnListPart.append("selected")
-                sRefFound = 1
+                self.sRefFound = 1
             else:
                 returnListPart.append("")
             returnList.append(returnListPart)
+        return returnList
 
-        if sRefFound == 0 and sRef != '':
+    def serviceList(self,param):
+        print "serviceList: ",param
+        sRef = str(param["sRef"])
+        bouquet = str(param["bouquet"])
+        self.sRefFound = 0
+        
+        if bouquet == '':
+            returnList = []
+            bouquet = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
+            ref = eServiceReference(bouquet)
+            self.servicelist = ServiceList(ref, command_func = self.getServiceList, validate_commands=False)
+            self.servicelist.setRoot(ref)
+            for (ref2, name) in self.servicelist.getServicesAsList():
+                part = self.serviceListOne(ref2, sRef)
+                if part:
+                    returnList = returnList + [["-- "+name+" --", "<"+name+">", ""]] + part
+            bouquet = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.radio" ORDER BY bouquet'
+            ref = eServiceReference(bouquet)
+            self.servicelist = ServiceList(ref, command_func = self.getServiceList, validate_commands=False)
+            self.servicelist.setRoot(ref)
+            for (ref2, name) in self.servicelist.getServicesAsList():
+                part = self.serviceListOne(ref2, sRef)
+                if part:
+                    returnList = returnList + [["-- "+name+" --", "<"+name+">", ""]] + part
+        else:
+            returnList = self.serviceListOne(bouquet, sRef)
+
+        if self.sRefFound == 0 and sRef != '':
             returnListPart = ["Inserted", sRef, "selected"]
-            returnList.append(returnListPart)
+            returnList = [returnListPart] + returnList
         #print returnList
         return returnList
 

@@ -215,22 +215,22 @@ class Timer( Source):
 
         repeated = int(param.get('repeated') or 0)
 
-        if param.has_key('begin'):
-            begin = int(float(param['begin']))
-            if time() <= begin:                
-                pass
-            elif time() > int(begin) and repeated == 0:
-                begin = time()
-            else:
-                return False, "Illegal Parameter value for Parameter begin : '%s'" %begin              
-        else:
+        if not param.has_key('begin'):
             return False, "Missing Parameter: begin"
-        
-        if param.has_key('end'): 
-            end = int(float(param['end']))
-        else:
+        begin = int(float(param['begin']))
+
+        if not param.has_key('end'): 
             return False, "Missing Parameter: end"
+        end = int(float(param['end']))
           
+        tm = time()
+        if tm <= begin:                
+            pass
+        elif tm > begin and tm < end and repeated == 0:
+            begin = time()
+        elif repeated == 0:
+            return False, "Illegal Parameter value for Parameter begin : '%s'" %begin              
+        
         if param.has_key('name'):
             name = param['name']
         else:
@@ -450,7 +450,7 @@ class Timer( Source):
             
             if item.eit is not None:
                 event = self.epgcache.lookupEvent(['EX',("%s" % item.service_ref ,2,item.eit)])
-                if event[0][0] is not None:
+                if event and event[0][0] is not None:
                     timer.append(event[0][0])
                 else:
                     timer.append("N/A")

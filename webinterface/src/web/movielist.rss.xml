@@ -5,7 +5,7 @@
 		&lt;link>http://<e2:element source="localip" filter="xml" />&lt;/link>
 		&lt;description>Eine automatische Liste aller Enigma2 Aufnahmen&lt;/description>
 		&lt;generator>Enigma2 WebInterface &lt;/generator>
-		<e2:element source="MovieList" id="tag"><e2:convert type="web:ListFiller" >
+		<e2:element source="MovieList" id="dirname,tag"><e2:convert type="web:ListFiller" >
 		&lt;item>
 			&lt;title><e2:item name="Title" filter="xml"/>&lt;/title>
 			&lt;description>Kanal: <e2:item name="ServiceName" filter="xml"/>\n

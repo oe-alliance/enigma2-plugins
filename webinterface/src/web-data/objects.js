@@ -232,7 +232,7 @@ function Movie(xml){
 	try{
 		this.tags = xml.getElementsByTagName('e2tags').item(0).firstChild.data;
 	} catch (e) {
-		this.tags = "no&nbsp;tags"; // no whitespaces... tags will be splittet later
+		this.tags = "&nbsp;"; // no whitespaces... tags will be splittet later
 	}
 	try{
 		this.filename = xml.getElementsByTagName('e2filename').item(0).firstChild.data;
@@ -625,6 +625,26 @@ function SimpleXMLResult(xml){
 	};
 }
 // END SimpleXMLResult
+
+// START SimpleXMLList
+function SimpleXMLList(xml){
+	// parsing values from xml-element
+	debug('[SimpleXMLList] init: '+xml);
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2simplexmllist").item(0).getElementsByTagName("e2simplexmlitem");
+		debug("[SimpleXMLList] count: " + xml.getElementsByTagName("e2simplexmllist").length);
+	} catch (e) {
+		debug("[SimpleXMLList] parsing e2simplexmllist"+e);
+	}
+	this.getList = function(){
+		var lst = [];
+		for(var i=0;i<this.xmlitems.length;i++){
+			lst.push(this.xmlitems.item(i).firstChild.data);			
+		}
+		return lst;
+	};
+}
+// END SimpleXMLList
 
 //START class Settings
 function Settings(xml){

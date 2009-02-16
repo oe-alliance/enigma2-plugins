@@ -23,19 +23,19 @@
 </tr><tr>
 	<td colspan="3">Date:</td><td colspan="3">
 	<select name="year" size="1">
-		<e2:element source="WAPFillOptionListYear" id="year,sRef,begin"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListYear" id="year,sRef,begin,syear"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 	</select>.
 	<select name="month">
-		<e2:element source="WAPFillOptionListMonth" id="month,sRef,begin"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListMonth" id="month,sRef,begin,smonth"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
 	</select>.
 	<select name="day">
-		<e2:element source="WAPFillOptionListDay" id="day,sRef,begin"><e2:convert type="web:ListFiller" >
+		<e2:element source="WAPFillOptionListDay" id="day,sRef,begin,sday"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>
 		</e2:convert>
 	<e2:convert type="web:TextToHTML"/></e2:element>
@@ -79,10 +79,7 @@
 		<e2:convert type="web:TextToHTML"/></e2:element>
 	</td>
 </tr><tr>
-	<td colspan="3">Channel:</td>
-	<td><p><input type="radio" name="tvradio" value="tv"/>TV</p>
-	<p><input type="radio" name="tvradio" value="radio"/>Radio</p></td>
-	<td><p>Channel:</p>
+	<td colspan="3">Channel:</td><td colspan="3">
 	<select name="sRef">
 	<e2:element source="WAPServiceList" id="sRef,bouquet"><e2:convert type="web:ListFiller" >
 		&lt;option value=&quot;<e2:item name="Value"/>&quot; <e2:item name="Selected"/>><e2:item name="Name"/>&lt;/option>

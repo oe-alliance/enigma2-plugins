@@ -9,7 +9,7 @@
 &lt;body>
 
 &lt;table width='100%'>
-		<e2:element source="MovieList" id="tag"><e2:convert type="web:ListFiller" >
+		<e2:element source="MovieList" id="dirname,tag"><e2:convert type="web:ListFiller" >
 		&lt;tr>
 			&lt;td class="pageHeader"><e2:item name="Title" filter="xml"/>&lt;/td>
 		&lt;/tr>

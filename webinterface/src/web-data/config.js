@@ -23,7 +23,7 @@ var url_subservices = "/web/subservices"; // subservices for current service
 
 var url_updates= "/web/updates.html";
 
-var url_movielist= "/web/movielist"; // plus tag as string
+var url_movielist= "/web/movielist"; // plus dirname,tag
 
 var url_about= "/web/about";
 
@@ -31,7 +31,7 @@ var url_settings= "/web/settings";
 
 var url_parentcontrol= "/web/parentcontrollist";
 
-var url_moviedelete= "/web/moviedelete"; // plus serviceref,eventid
+var url_moviedelete= "/web/moviedelete"; // plus serviceref
 
 var url_mediaplayerlist= "/web/mediaplayerlist?types=audio&path="; // plus full qualified path
 var url_mediaplayerplay= "/web/mediaplayerplay?file="; // plus file-serviceref
@@ -48,8 +48,9 @@ var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
 var url_timerdelete= "/web/timerdelete"; // plus serviceref,begin,end
 var url_timerlistwrite="/web/timerlistwrite?write=saveWriteNow";
 
-var url_getLocations="/web/getlocations";
-var url_getTags="/web/gettags";
+var url_getcurrlocation="/web/getcurrlocation";
+var url_getlocations="/web/getlocations";
+var url_gettags="/web/gettags";
 
 var url_message = "/web/message"; // plus text,type,timeout
 var url_messageanswer = "/web/messageanswer?getanswer=now"; 

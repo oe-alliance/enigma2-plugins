@@ -12,71 +12,170 @@ addTimerEditFormArray.tagsList = [];
 days = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
 
-function addTimerFormChangeType() {
-	selected = ($('tvradio').checked === true) ? addTimerEditFormArray.TVList: addTimerEditFormArray.RadioList;
-	
-	for (i = $('channel').options.length; i !== 0; i--) {
-		$('channel').options[i - 1] = null;
+// Channel menu consists of:
+//  1. The currently selected channel, unless it is contained in 2.
+//  2. The currently selected bouquet
+//  3. The TV bouquets and the Radio bouquets
+function addTimerFormPrepareChannelMenu() {
+	result = {};
+	tvblist = addTimerEditFormArray.TVList;
+	radioblist = addTimerEditFormArray.RadioList;
+	currbouquet = addTimerEditFormArray.currBouquetName;
+	currblist = addTimerEditFormArray.currBouquetList;
+
+	var found = false;
+	for (element in currblist) {
+		if (addTimerEditFormArray.channel == element) {
+			found = true;
+			break;
+		}
 	}
-	
-	i = -1;
-	for(element in selected) {
-		if(element != "extend") {
-			i++;
-			$('channel').options[i] = new Option(selected[element]);
-			$('channel').options[i].value = element;
+	if (!found) {
+		result[addTimerEditFormArray.channel] = addTimerEditFormArray.channelName;
+	}
+	if (currbouquet) {
+		result["<Currbouquet>"] = "-- "+currbouquet+" --";
+		for (element in currblist) {
+			result[element] = currblist[element];
+		}
+	}
+	result["<Bouquets>"] = "-- Bouquets --";
+	for (element in tvblist) {
+		result[element] = tvblist[element];
+	}
+	for (element in radioblist) {
+		result[element] = radioblist[element];
+	}
+	return result;
+}
+
+function addTimerFormChangeChannel(newchannel) {
+	tvblist = addTimerEditFormArray.TVList;
+	radioblist = addTimerEditFormArray.RadioList;
+	if (newchannel == "<Currbouquet>" || newchannel == "<Bouquets>") {
+		// reset selection to last valid channel
+		for (i=0; i<$('channel').options.length; i++) {
+			if ($('channel').options[i].value == addTimerEditFormArray.channel) {
+				$('channel').options[i].selected = true;
+				break;
+			}
+		}
+		return;
+	}
+	found = false;
+	for(element in tvblist) {
+		if (element == newchannel) {
+			found = true;
+			addTimerEditFormArray.currBouquetName = tvblist[element];
+			addTimerEditFormArray.currBouquetList = {};
+			break;
+		}
+	}
+	if (!found) {
+		for(element in radioblist) {
+			if (element == newchannel) {
+				found = true;
+				addTimerEditFormArray.currBouquetName = radioblist[element];
+				addTimerEditFormArray.currBouquetList = {};
+				break;
+			}
+		}
+	}
+	if (found) {
+		// bouquet selected, update menu
+		servicereftoloadepgnow = newchannel;
+		if(typeof(loadedChannellist[servicereftoloadepgnow]) == "undefined") {	
+			doRequest(url_getServices+servicereftoloadepgnow, incomingAddTimerFormChangeChannel, true);
+		} else {
+			incomingAddTimerFormChangeChannel();
+		}
+	} else {
+		// real channel selected, update channel and channelName
+		addTimerEditFormArray.channel = newchannel;
+		for (i=0; i<$('channel').options.length; i++) {
+			if ($('channel').options[i].value == newchannel) {
+				addTimerEditFormArray.channelName = $('channel').options[i].text;
+				break;
+			}
 		}
 	}
 }
 
-function addTimerFormChangeLocation(newloc) {
-        
+function incomingAddTimerFormChangeChannel(request) {
+	var services = null;
+	if(typeof(loadedChannellist[servicereftoloadepgnow]) != "undefined"){
+		services = loadedChannellist[servicereftoloadepgnow];
+	} else if(request.readyState == 4) {
+		services = new ServiceList(getXML(request)).getArray();
+		loadedChannellist[servicereftoloadepgnow] = services;	
+	}
+	if(services !== null) {
+		debug("[incomingAddTimerFormChangeChannel] Got "+services.length+" Services");
+		for(var i = 0; i < services.length ; i++) {
+			reference = services[i];
+			addTimerEditFormArray.currBouquetList[reference.getServiceReference()] = reference.getServiceName();
+		}
+	}
+
+	lst = addTimerFormPrepareChannelMenu();
+
+	for (i = $('channel').options.length; i !== 0; i--) {
+		$('channel').options[i - 1] = null;
+	}
+	for(element in lst) {
+	       	$('channel').options[i] = new Option(lst[element]);
+	       	$('channel').options[i].value = element;
+                if (element == addTimerEditFormArray.channel) {
+			$('channel').options[i].selected = true;
+		}
+	       	i++;
+	}
 }
 
 function addTimerFormPrepareTagsMenu(currtags) {
 	result = {};
-        resultsuff = {};
+	resultsuff = {};
 	taglist = addTimerEditFormArray.tagsList;
 
-        if (currtags == "") {
-        	i = 0;
-                result[""] = "<None>";
-                for (i = 0; i < taglist.length; i++) {
-                	result[taglist[i]] = taglist[i];
-        	}
-        } else {
-        	result[currtags] = currtags;
-                tags = currtags.split(" ");
-               	for (i = 0; i < taglist.length; i++) {
-                        var res = "";
-                        var found = false;
-                        for (j=0; j<tags.length; j++) {
-                              	if (tags[j] != taglist[i]) {
-                                       	res += " "+tags[j];
+	if (currtags == "") {
+		i = 0;
+		result[""] = "<None>";
+		for (i = 0; i < taglist.length; i++) {
+			result[taglist[i]] = taglist[i];
+		}
+	} else {
+		result[currtags] = currtags;
+		tags = currtags.split(" ");
+	       	for (i = 0; i < taglist.length; i++) {
+			var res = "";
+			var found = false;
+			for (j=0; j<tags.length; j++) {
+			      	if (tags[j] != taglist[i]) {
+				       	res += " "+tags[j];
 				} else {
-                                	found = true;
-                                }
-                        }
-                        if (!found) {
-                        	res += " "+taglist[i];
-                        }
-                        if (res.length > 0) {
-                                res = res.substring(1,res.length);
-                        }
-                        if (found) {
-	                	resultsuff[res] = "- "+taglist[i];
-                        } else {
-	                	result[res] = "+ "+taglist[i];
-                        }
-                }
-                if (tags.length > 1) {
-                	for (ele in resultsuff) {
-                        	result[ele] = resultsuff[ele];
-                        }
-                }
-                result[""] = "<None>";
-        }
-        return result;
+					found = true;
+				}
+			}
+			if (!found) {
+				res += " "+taglist[i];
+			}
+			if (res.length > 0) {
+				res = res.substring(1,res.length);
+			}
+			if (found) {
+				resultsuff[res] = "- "+taglist[i];
+			} else {
+				result[res] = "+ "+taglist[i];
+			}
+		}
+		if (tags.length > 1) {
+			for (ele in resultsuff) {
+				result[ele] = resultsuff[ele];
+			}
+		}
+		result[""] = "<None>";
+	}
+	return result;
 }
 
 function addTimerFormChangeTags(newtags) {
@@ -86,11 +185,11 @@ function addTimerFormChangeTags(newtags) {
 		$('tags').options[i - 1] = null;
 	}
 	
-        for(element in lst) {
-               	$('tags').options[i] = new Option(lst[element]);
-               	$('tags').options[i].value = element;
-               	i++;
-        }
+	for(element in lst) {
+	       	$('tags').options[i] = new Option(lst[element]);
+	       	$('tags').options[i].value = element;
+	       	i++;
+	}
 }
 
 
@@ -101,7 +200,6 @@ function addTimerByID(sRef,eventID,justplay){
 		doRequest(url_timeraddbyeventid+"?sRef="+sRef+"&eventid="+eventID+"&justplay="+justplay, incomingTimerAddResult, false);	
 	}
 }
-
 
 function incomingTimerAddResult(request){
 	debug("[incomingTimerAddResult] called");
@@ -114,9 +212,8 @@ function incomingTimerAddResult(request){
 		}else{
 			notify(result.getStateText(), result.getState());
 		}
-	}		
+	}
 }
-
 
 function loadTimerList(){
 	doRequest(url_timerlist, incomingTimerList, false);	
@@ -174,7 +271,6 @@ function incomingTimerList(request){
 	}
 }
 
-
 function repeatedReadable(num) {
 	num = Number(num);
 	if(num === 0) {
@@ -182,7 +278,7 @@ function repeatedReadable(num) {
 	}
 	
 	var retVal = "";
-	var Repeated = [];
+	var Repeated = {};
 	Repeated["Mo-Su"] =127;
 	Repeated["Mo-Fr"] = 31;
 	Repeated["Su"] =    64;
@@ -196,7 +292,7 @@ function repeatedReadable(num) {
 	for(rep in Repeated) {
 		if(rep.toString() != 'extend') {
 			var check = Number(Repeated[rep]);
-			if(check <= num) {
+			if(!(~num & check)) {
 				num -= check;
 				if(retVal === '') {
 					retVal += rep.toString();
@@ -208,7 +304,6 @@ function repeatedReadable(num) {
 	}
 	return retVal;
 }
-
 
 function delTimer(sRef, begin, end, servicename, title, description, readyFunction){
 	debug("[delTimer] sRef("+sRef+"),begin("+begin+"),end("+end+"),servicename("+servicename+"),title("+title+"),description("+description+")");
@@ -229,7 +324,6 @@ function delTimer(sRef, begin, end, servicename, title, description, readyFuncti
 	return false;
 }
 
-
 function incomingTimerDelResult(request){
 	debug("[incomingTimerDelResult] called");
 	if(request.readyState == 4){
@@ -239,7 +333,6 @@ function incomingTimerDelResult(request){
 		loadTimerList();
 	}		
 }
-
 
 function loadTimerFormNow() {
 	var now = new Date();
@@ -256,7 +349,6 @@ function loadTimerFormNow() {
 	addTimerEditFormArray.justplay = "0";
 	addTimerEditFormArray.channel = "";
 	addTimerEditFormArray.channelName = "";
-	addTimerEditFormArray.channelSort = "tv";
 	addTimerEditFormArray.name = "";
 	addTimerEditFormArray.description = "";
 	addTimerEditFormArray.dirname = "";
@@ -267,12 +359,11 @@ function loadTimerFormNow() {
 	
 	addTimerEditFormArray.beginOld = 0;
 	addTimerEditFormArray.endOld = 0;
-	
+	addTimerEditFormArray.eventID = 0;
 	
 	debug("[loadTimerFormNow] done");
 	loadTimerFormTags();
 }
-
 
 function loadTimerEditForm(justplay, begin, end, repeated, channel, channelName, name, description, dirname, tags, afterEvent, deleteOldOnSave, eit) {
 	debug('[loadTimerEditForm] justplay: ' + justplay + ',begin: ' + begin + ',end: ' + end + ',repeated: ' + repeated + ',channel: ' + channel + ',name: ' + name +',description: ' + description +',dirname: ' + dirname +',tags: ' + tags + ',afterEvent: ' + afterEvent + ',deleteOldOnSave: ' + deleteOldOnSave);
@@ -288,9 +379,8 @@ function loadTimerEditForm(justplay, begin, end, repeated, channel, channelName,
 	addTimerEditFormArray.emin = stopp.getMinutes();
 	
 	addTimerEditFormArray.justplay = String(justplay);
-	addTimerEditFormArray.channel = decodeURIComponent(String(channel));
+	addTimerEditFormArray.channel = String(channel);
 	addTimerEditFormArray.channelName = String(channelName);
-	addTimerEditFormArray.channelSort = "";
 	addTimerEditFormArray.name = String(name);
 	addTimerEditFormArray.description = String(description);
 	addTimerEditFormArray.dirname = String(dirname);
@@ -310,31 +400,33 @@ function loadTimerEditForm(justplay, begin, end, repeated, channel, channelName,
 }
 
 function loadTimerFormTags() {
-	doRequest(url_getTags, incomingTimerFormTags, false);
+	doRequest(url_gettags, incomingTimerFormTags, false);
 }
 
 function incomingTimerFormTags(request){
 	debug("[incomingTimerFormTags] called");
 	if(request.readyState == 4){
-		var result = new SimpleXMLResult(getXML(request));
-		addTimerEditFormArray.tagsList = (typeof(result.getStateText()) != 'undefined' ? result.getStateText().split(" ") : []);
+		var result = new SimpleXMLList(getXML(request));
+		addTimerEditFormArray.tagsList = result.getList();
 		loadTimerFormLocations();
 	}		
 }
 
 function loadTimerFormLocations() {
-	doRequest(url_getLocations, incomingTimerFormLocations, false);
+	doRequest(url_getlocations, incomingTimerFormLocations, false);
 }
 
 function incomingTimerFormLocations(request){
 	debug("[incomingTimerFormLocations] called");
 	if(request.readyState == 4){
-		var result = new SimpleXMLResult(getXML(request));
-		addTimerEditFormArray.locationsList = (typeof(result.getStateText()) != 'undefined' ? result.getStateText().split(" ") : ["/hdd/movie"]);
+		var result = new SimpleXMLList(getXML(request));
+		addTimerEditFormArray.locationsList = result.getList();
+                if (addTimerEditFormArray.locationsList.length == 0) {
+			addTimerEditFormArray.locationsList = ["/hdd/movie"];
+		}
 		loadTimerFormChannels();
 	}		
 }
-
 
 // startin to load for TV
 function loadTimerFormChannels() {
@@ -343,11 +435,9 @@ function loadTimerFormChannels() {
 	} else if(addTimerEditFormArray.TVListFilled === 1 && addTimerEditFormArray.RadioListFilled === 0) {
 		addTimerListFormatTV();
 	} else {
-		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.tv%22%20ORDER%20BY%20bouquet';
-		doRequest(url_getServices+favorites, addTimerListFormatTV, false);
+		doRequest(url_getServices+encodeURIComponent(bouquetsTv), addTimerListFormatTV, false);
 	}
 }
-
 
 function addTimerListFormatTV(request) {
 	if(addTimerEditFormArray.RadioListFilled === 0) {
@@ -356,7 +446,7 @@ function addTimerListFormatTV(request) {
 			var tv = {};
 			for ( var i = 0; i < services.length ; i++){
 				var reference = services[i];
-				tv[reference.servicereference] = reference.servicename;
+				tv[reference.getServiceReference()] = reference.getServiceName();
 			}
 			addTimerEditFormArray.TVListFilled = 1;
 			addTimerEditFormArray.TVList = tv;
@@ -365,11 +455,9 @@ function addTimerListFormatTV(request) {
 	if(addTimerEditFormArray.RadioListFilled == 1) {
 		loadTimerForm();
 	} else {
-		var favorites = '1%3A7%3A1%3A0%3A0%3A0%3A0%3A0%3A0%3A0%3AFROM%20BOUQUET%20%22userbouquet.favourites.radio%22%20ORDER%20BY%20bouquet';
-		doRequest(url_getServices+favorites, addTimerListFormatRadio, false);
+		doRequest(url_getServices+encodeURIComponent(bouquetsRadio), addTimerListFormatRadio, false);
 	}
 }
-
 
 function addTimerListFormatRadio(request) {
 	if(request.readyState == 4){
@@ -377,14 +465,15 @@ function addTimerListFormatRadio(request) {
 		var radio = {};
 		for ( var i = 0; i < services.length ; i++){
 			var reference = services[i];
-			radio[reference.servicereference] = reference.servicename;
+			radio[reference.getServiceReference()] = reference.getServiceName();
 		}
 		addTimerEditFormArray.RadioListFilled = 1;
 		addTimerEditFormArray.RadioList = radio;
 	}
+	addTimerEditFormArray.currBouquetName = "";
+	addTimerEditFormArray.currBouquetList = {};
 	loadTimerForm();
 }
-
 
 function loadTimerForm(){
 
@@ -392,7 +481,7 @@ function loadTimerForm(){
 	Action["0"] = "Record";
 	Action["1"] = "Zap";
 	
-	var Repeated = [];
+	var Repeated = {};
 	Repeated["1"] =  "mo";
 	Repeated["2"] = "tu";
 	Repeated["4"] =  "we";
@@ -415,53 +504,13 @@ function loadTimerForm(){
 	addTimerEditFormArray.description = (typeof(addTimerEditFormArray.description) != 'undefined') ? addTimerEditFormArray.description : '';
 	addTimerEditFormArray.description = (addTimerEditFormArray.description === '') ? ' ' : addTimerEditFormArray.description;
 
-	var channelObject = addTimerEditFormArray.TVList;
-	if(	addTimerEditFormArray.channelSort === 'tv') {
-		// already set
-	} else if( addTimerEditFormArray.channelSort === 'radio') {
-		channelObject = addTimerEditFormArray.RadioList;
-	} else {
-		var found = 0;
-		for( element in addTimerEditFormArray.TVList) {
-			if( element == addTimerEditFormArray.channel) {
-				found = 1;
-				break;
-			}
-		}
-		if(found === 0) {
-			for( element in addTimerEditFormArray.RadioList) {
-				if( element == addTimerEditFormArray.channel) {
-					channelObject = addTimerEditFormArray.RadioList;
-					found = 1;
-					break;
-				}
-			}
-		}
-		if(found === 0) {
-			addTimerEditFormArray.TVList[addTimerEditFormArray.channel] = addTimerEditFormArray.channelName;
-		}
-	}
-	
-	var dashString = "------";
-	
-	channelObject[dashString] = "- Bouquets -";
-	
-	var listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouquetsTv)])).getArray();
-	if(addTimerEditFormArray.channelSort == "radio") {
-		listeNeu = new ServiceList(getXML(doRequestMemory[url_getServices+encodeURIComponent(bouquetsRadio)])).getArray();
-	}
-	
-	for (i = 1; i < listeNeu.length; i++) {
-		element = listeNeu[i];
-		channelObject[String(dashString+i)] = "---";
-		channelObject[element.getServiceReference()] = element.getServiceName();
-	}
+	var channelObject = addTimerFormPrepareChannelMenu(addTimerEditFormArray.TVList, addTimerEditFormArray.RadioList);
 
 	var locationsObject = {};
 	for (i = 0; i < addTimerEditFormArray.locationsList.length; i++) {
 		str = addTimerEditFormArray.locationsList[i];
 		locationsObject[str] = str;
-        }
+	}
 
 	var tagsObject = addTimerFormPrepareTagsMenu(addTimerEditFormArray.tags);
 
@@ -496,22 +545,7 @@ function loadTimerForm(){
 	var listerHtml = RND(tplAddTimerForm, namespace);
 	$('BodyContent').innerHTML = listerHtml;
 	*/
-	
-	// Empty some stuff, but keep others to have the performance
-	var tmp1 = addTimerEditFormArray.RadioList;
-	var tmp2 = addTimerEditFormArray.TVList;
-	var tmp3 = addTimerEditFormArray.locationsList;
-	var tmp4 = addTimerEditFormArray.tagsList;
-	addTimerEditFormArray = [];
-	addTimerEditFormArray.deleteOldOnSave = 0;
-	addTimerEditFormArray.RadioList = tmp1;
-	addTimerEditFormArray.TVList = tmp2;
-	addTimerEditFormArray.locationsList = tmp3;
-	addTimerEditFormArray.tagsList = tmp4;
-	addTimerEditFormArray.TVListFilled = 1;
-	addTimerEditFormArray.RadioListFilled = 1;
 }
-
 
 function createOptions(start, end, number) {
 	var namespace =[];
@@ -527,12 +561,10 @@ function createOptions(start, end, number) {
 	return namespace;
 }
 
-
 function createOptionList(object, selected) {
 	var namespace = Array();
 	var i = 0;
-	
-	for(var element in object) {		
+	for(var element in object) {
 		var txt = String(object[element]);
 		var sel = " ";
 		
@@ -552,13 +584,20 @@ function createOptionList(object, selected) {
 	return namespace;
 }
 
-
 function createOptionListRepeated(Repeated, repeated) {
 	num = Number(repeated);
-		
+	
 	list = [1, 2, 4, 8, 16, 32, 64, 31, 127];
 	namespace = [];
-	
+	checked = [];
+
+	for(var i = 0; i < list.length; i++) {
+		checked[i] = " ";
+		if (!(~num & list[list.length-1-i])) {
+			num -= list[list.length-1-i];
+			checked[i] = "checked";
+		}
+	}
 	for(var i = 0; i < list.length; i++) {
 		txt = String(Repeated[String(list[i])]);
 		if( String(Repeated[String(list[i])]) == "mf") {
@@ -568,20 +607,15 @@ function createOptionListRepeated(Repeated, repeated) {
 		} else {
 			txt = txt.substr(0,1).toUpperCase() + txt.substr(1,1);
 		}
-		checked = " ";
-		if (!(~num & list[i])) {
-			checked = "checked";
-		}
 		namespace[i] = { 'id': Repeated[String(list[i])],
 			'name': Repeated[String(list[i])],
 			'value': list[i],
 			'txt': txt,
-			'checked': checked
+			'checked': checked[list.length-1-i]
 		};
 	}
 	return namespace;
 }
-
 
 function sendAddTimer() {
 	debug("[sendAddTimer]" + "parentChannel:" +$('channel').value);
@@ -596,26 +630,6 @@ function sendAddTimer() {
 			end += 86400;
 		}
 
-		repeated = 0;
-		if( $('ms').checked ) {
-			repeated = 127;
-		} else if($('mf').checked) {
-			repeated = 31;
-			if($('sa').checked) {
-				repeated += ownLazyNumber($('sa').value);
-			}
-			if($('su').checked) {
-				repeated += ownLazyNumber($('su').value);
-			}
-		} else {
-			check = ['mo', 'tu', 'we', 'th', 'fr'];
-			for(i = 0; i < check.length; i++) {
-				if($(check[i]).checked) {
-					repeated += Number($(check[i]).value);
-				}
-			}
-		}
-	
 		descriptionClean = ($('descr').value == " " || $('descr').value == "N/A") ? "" : $('descr').value;
 		nameClean = ($('name').value == " " || $('name').value == "N/A") ? "" : $('name').value;
 		
@@ -628,6 +642,7 @@ function sendAddTimer() {
 
 		dirname = $('dirname').value;
 		tags = $('tags').value;
+
 		repeated = 0;
 		if($('ms').checked) {
 			repeated = ownLazyNumber($('ms').value);
