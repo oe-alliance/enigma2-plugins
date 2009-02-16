@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 plugin movieretitle italian locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-15 18:22+0100\n"
+"PO-Revision-Date: 2009-02-15 18:22+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/movieretitle\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/movieretitle\n"
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:20
+msgid "Change name..."
+msgstr "Rinominare"
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:50
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:51
+msgid "Cancel"
+msgstr "Annull."
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:68
+msgid "Location"
+msgstr "Destinazione"
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:70
+msgid "Filename"
+msgstr "Nome File"
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:71
+msgid "Title"
+msgstr "Titolo"
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:72
+msgid "Description"
+msgstr "Descrizione"
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:91
+msgid "Choose target folder"
+msgstr "Cartella destinazione"
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:128
+#, python-format
+msgid ""
+"Target file %s.ts already exist.\n"
+"Do you want to replace it?"
+msgstr ""
+"File destinazione %s.ts esistente!\n"
+"Sovrascriverlo?"
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:132
+msgid "The target directory is not found. The file is not renamed."
+msgstr "Cartella destinazione non trovata. Il file non è stato rinominato."
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:240
+#, python-format
+msgid "The movie is moved in the background from %s to %s."
+msgstr "Il video verrà spostato in background da %s a %s."
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:281
+#, python-format
+msgid "Failed to move the movie %s to %s in the background"
+msgstr "Modifica di %s in %s in background fallita!"
+
+#: /home/dario/Plugins/movieretitle/src/plugin.py:288
+#, python-format
+msgid "Successfully moved the movie %s"
+msgstr "Modifica di %s terminata con successo!"
+
+#~ msgid "MovieRetitle"
+#~ msgstr "MovieRetitle"
+#~ msgid "Moving in background"
+#~ msgstr "Modifica in background in corso"
+#~ msgid "Moving in foreground"
+#~ msgstr "Modifica in primo piano in corso"
+#~ msgid "Moving %s to %s"
+#~ msgstr "Modifica di %s in %s in corso"
+
