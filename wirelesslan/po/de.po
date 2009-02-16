@@ -32,7 +32,7 @@ msgid "Choose a Wireless Network"
 msgstr "Wähle ein Funk-Netzwerk"
 
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Schließen"
 
 msgid "Connect"
 msgstr "Verbinden"
@@ -41,20 +41,20 @@ msgid "Connect to a Wireless Network"
 msgstr "Mit Funknetzwerk verbinden"
 
 msgid "Disabled"
-msgstr ""
+msgstr "Deaktiviert"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiviert"
 
 #, python-format
 msgid "Encrypted: %s"
 msgstr "verschlüsselt: %s"
 
 msgid "Encryption:"
-msgstr ""
+msgstr "Verschlüsselung:"
 
 msgid "Hidden networkname"
-msgstr ""
+msgstr "versteckte SSID"
 
 #, python-format
 msgid "Interface: %s"
@@ -80,10 +80,10 @@ msgid "No"
 msgstr "Nein"
 
 msgid "No Connection"
-msgstr ""
+msgstr "Keine Verbindung"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Bitte warten..."
 
 msgid "Refresh"
 msgstr "Aktualisieren"
@@ -98,7 +98,7 @@ msgid "Signal: "
 msgstr ""
 
 msgid "Unsupported"
-msgstr ""
+msgstr "Nicht unterstützt"
 
 msgid "Wireless LAN"
 msgstr "Funknetzwerk"
