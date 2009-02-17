@@ -15,6 +15,7 @@ from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname
 from OpenSSL import SSL
 
+from __init__ import _
 
 DEBUG_TO_FILE=False # PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
 
