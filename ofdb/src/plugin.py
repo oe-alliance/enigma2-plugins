@@ -15,9 +15,26 @@ from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
+from os import environ as os_environ
 import re
 import htmlentitydefs
 import urllib
+import gettext
+
+def localeInit():
+    lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
+    os_environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+    gettext.bindtextdomain("IMDb", resolveFilename(SCOPE_PLUGINS, "Extensions/IMDb/locale"))
+
+def _(txt):
+    t = gettext.dgettext("IMDb", txt)
+    if t == txt:
+        print "[IMDb] fallback to default translation for", txt 
+        t = gettext.gettext(txt)
+    return t
+
+localeInit()
+language.addCallback(localeInit)
 
 class OFDBChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
@@ -76,7 +93,7 @@ class OFDBEPGSelection(EPGSelection):
 
 class OFDB(Screen):
 	skin = """
-		<screen name="OFDb" position="90,95" size="560,420" title="Internet Movie Database Details Plugin" >
+		<screen name="OFDb" position="90,95" size="560,420" title="Online-Filmdatenbank Details Plugin" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
@@ -111,7 +128,7 @@ class OFDB(Screen):
 		self["stars"].hide()
 		self["starsbg"].hide()
 		self.ratingstars = -1
-		self["titellabel"] = Label("The Internet Movie Database")
+		self["titellabel"] = Label(_("The Online-Filmdatenbank"))
 		self["detailslabel"] = ScrollLabel("")
 		self["castlabel"] = ScrollLabel("")
 		self["extralabel"] = ScrollLabel("")
@@ -120,7 +137,7 @@ class OFDB(Screen):
 		self.resultlist = []
 		self["menu"] = MenuList(self.resultlist)
 		self["menu"].hide()
-		self["key_red"] = Button(self._("Exit"))
+		self["key_red"] = Button(_("Exit"))
 		self["key_green"] = Button("")
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
@@ -147,25 +164,10 @@ class OFDB(Screen):
 
 	def dictionary_init(self):
 		syslang = language.getLanguage()
-		if syslang.find("de") is -1:
+		if "de" not in syslang:
 			self.OFDBlanguage = ""  # set to empty ("") for english version
 		else:
 			self.OFDBlanguage = "german." # it's a subdomain, so add a '.' at the end
-
-		self.dict = {}
-		self.dict["of"]="von"
-		self.dict[" as "]=" als "
-		self.dict["Ambiguous results"]="Kein eindeutiger Treffer"
-		self.dict["Please select the matching entry"]="Bitte passenden Eintrag auswählen"
-		self.dict["No OFDb match."]="Keine passenden Einträge gefunden."
-		self.dict["OFDb query failed!"]="OFDb-Query fehlgeschlagen!"
-		self.dict["No details found."]="Keine Details gefunden."
-		self.dict["no user rating yet"]="noch keine Nutzerwertung"
-		self.dict["Cast: "]="Darsteller: "
-		self.dict["No cast list found in the database."]="Keine Darstellerliste in der Datenbank gefunden."
-		self.dict["Exit"]="Beenden"
-		self.dict["Extra Info"]="Zusatzinfos"
-		self.dict["Title Menu"]="Titelauswahl"
 
 		self.htmltags = re.compile('<.*?>')
 
@@ -176,12 +178,6 @@ class OFDB(Screen):
 		'(?:.*?(?P<g_year>Erscheinungsjahr):[\s\S]*?class="Daten">(?P<year>.*?)</td>)*'
 		'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*'
 		, re.DOTALL)
-
-	def _(self, in_string):
-		out_string = in_string
-		if ((self.OFDBlanguage).find("german")) != -1:
-			out_string = self.dict.get(in_string, in_string)
-		return out_string
 
 	def resetLabels(self):
 		self["detailslabel"].setText("")
@@ -219,12 +215,12 @@ class OFDB(Screen):
 			self["castlabel"].hide()
 			self["poster"].hide()
 			self["extralabel"].hide()
-			self["titellabel"].setText(self._("Ambiguous results"))
-			self["detailslabel"].setText(self._("Please select the matching entry"))
+			self["titellabel"].setText(_("Ambiguous results"))
+			self["detailslabel"].setText(_("Please select the matching entry"))
 			self["detailslabel"].show()
 			self["key_blue"].setText("")
-			self["key_green"].setText(self._("Title Menu"))
-			self["key_yellow"].setText(self._("Details"))
+			self["key_green"].setText(_("Title Menu"))
+			self["key_yellow"].setText(_("Details"))
 			self.Page = 0
 
 	def showDetails(self):
@@ -235,7 +231,7 @@ class OFDB(Screen):
 		if self.resultlist and self.Page == 0:
 			link = self["menu"].getCurrent()[1]
 			title = self["menu"].getCurrent()[0]
-			self["statusbar"].setText("Re-Query OFDb: "+title+"...")
+			self["statusbar"].setText(_("Re-Query OFDb: %s...") % (title))
 			localfile = "/tmp/ofdbquery2.html"
 			fetchurl = "http://www.ofdb.de/film/" + link
 			print "[OFDb] downloading query " + fetchurl + " to " + localfile
@@ -297,7 +293,7 @@ class OFDB(Screen):
 				if self.eventName[:4].capitalize() == article + " ":
 					self.eventName = self.eventName[4:] + ", " + article
 			
-			self["statusbar"].setText("Query OFDb: " + self.eventName + "...")
+			self["statusbar"].setText(_("Query OFDb: %s...") % (self.eventName))
 			try:
 				self.eventName = urllib.quote(self.eventName)
 			except:
@@ -307,11 +303,11 @@ class OFDB(Screen):
 			print "[OFDb] Downloading Query " + fetchurl + " to " + localfile
 			downloadPage(fetchurl,localfile).addCallback(self.OFDBquery).addErrback(self.fetchFailed)
 		else:
-			self["statusbar"].setText("Could't get Eventname -_-")
+			self["statusbar"].setText(_("Could't get Eventname"))
 
 	def fetchFailed(self,string):
 		print "[OFDb] fetch failed " + string
-		self["statusbar"].setText("OFDb Download failed -_-")
+		self["statusbar"].setText(_("OFDb Download failed"))
 
 	def html2utf8(self,in_html):
 		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
@@ -338,7 +334,7 @@ class OFDB(Screen):
 
 	def OFDBquery(self,string):
 		print "[OFDBquery]"
-		self["statusbar"].setText("OFDb Download completed")
+		self["statusbar"].setText(_("OFDb Download completed"))
 
 		self.html2utf8(open("/tmp/ofdbquery.html", "r").read())
 
@@ -363,13 +359,13 @@ class OFDB(Screen):
 					self.Page = 1
 					self.showMenu()
 				else:
-					self["detailslabel"].setText(self._("No OFDb match."))
-					self["statusbar"].setText("No OFDb match")
+					self["detailslabel"].setText(_("No OFDb match."))
+					self["statusbar"].setText(_("No OFDb match."))
 			else:
-				self["detailslabel"].setText(self._("OFDb query failed!"))
+				self["detailslabel"].setText(_("OFDb query failed!"))
 
 	def OFDBquery2(self,string):
-		self["statusbar"].setText("OFDb Re-Download completed")
+		self["statusbar"].setText(_("OFDb Re-Download completed"))
 		self.html2utf8(open("/tmp/ofdbquery2.html", "r").read())
 		self.generalinfos = self.generalinfomask.search(self.inhtml)
 		self.OFDBparse()
@@ -377,10 +373,10 @@ class OFDB(Screen):
 	def OFDBparse(self):
 		print "[OFDBparse]"
 		self.Page = 1
-		Detailstext = self._("No details found.")
+		Detailstext = _("No details found.")
 		if self.generalinfos:
-			self["key_yellow"].setText(self._("Details"))
-			self["statusbar"].setText("OFDb Details parsed ^^")
+			self["key_yellow"].setText(_("Details"))
+			self["statusbar"].setText(_("OFDb Details parsed"))
 			
 			Titeltext = self.generalinfos.group("title")
 			if len(Titeltext) > 57:
@@ -399,9 +395,7 @@ class OFDB(Screen):
 					for x in genres:
 						Detailstext += self.htmltags.sub('', x.group(1)) + " "
 
-			detailscategories = ["director", "year", "country", "original"]
-
-			for category in detailscategories:
+			for category in ("director", "year", "country", "original"):
 				if self.generalinfos.group('g_'+category):
 					Detailstext += "\n" + self.generalinfos.group('g_'+category) + ": " + self.htmltags.sub('', self.generalinfos.group(category).replace("<br>",' '))
 
@@ -412,7 +406,7 @@ class OFDB(Screen):
 
 			ratingmask = re.compile('<td>[\s\S]*notenskala.*(?P<g_rating>Note: )(?P<rating>\d.\d{2,2})[\s\S]*</td>', re.DOTALL)
 			rating = ratingmask.search(self.inhtml)
-			Ratingtext = self._("no user rating yet")
+			Ratingtext = _("no user rating yet")
 			if rating:
 				Ratingtext = rating.group("g_rating") + rating.group("rating") + " / 10"
 				self.ratingstars = int(10*round(float(rating.group("rating")),1))
@@ -431,28 +425,28 @@ class OFDB(Screen):
 					for x in cast:
 						Casttext += "\n" + self.htmltags.sub('', x.group(1))
 					if Casttext is not "":
-						Casttext = self._("Cast: ") + Casttext
+						Casttext = _("Cast: ") + Casttext
 					else:
-						Casttext = self._("No cast list found in the database.")
+						Casttext = _("No cast list found in the database.")
 					self["castlabel"].setText(Casttext)
 
 			postermask = re.compile('<img src=\"(http://img.ofdb.de/film.*?)\" alt', re.DOTALL)
 			posterurl = postermask.search(self.inhtml)
 			if posterurl and posterurl.group(1).find("jpg") > 0:
 				posterurl = posterurl.group(1)
-				self["statusbar"].setText("Downloading Movie Poster: "+posterurl+"...")
+				self["statusbar"].setText(_("Downloading Movie Poster: %s...") % (posterurl))
 				localfile = "/tmp/poster.jpg"
 				print "[OFDb] downloading poster " + posterurl + " to " + localfile
 				downloadPage(posterurl,localfile).addCallback(self.OFDBPoster).addErrback(self.fetchFailed)
 			else:
 				print "no jpg poster!"
-				self.OFDBPoster("kein Poster")
+				self.OFDBPoster(noPoster = True)
 
 		self["detailslabel"].setText(Detailstext)
 		
-	def OFDBPoster(self,string):
-		self["statusbar"].setText("OFDb Details parsed ^^")
-		if not string:
+	def OFDBPoster(self, noPoster = False):
+		self["statusbar"].setText(_("OFDb Details parsed"))
+		if not noPoster:
 			filename = "/tmp/poster.jpg"
 		else:
 			filename = resolveFilename(SCOPE_PLUGINS, "Extensions/OFDb/no_poster.png")
@@ -480,7 +474,7 @@ class OFDbLCDScreen(Screen):
 
 	def __init__(self, session, parent):
 		Screen.__init__(self, session)
-		self["headline"] = Label("OFDb Plugin")
+		self["headline"] = Label(_("OFDb Plugin"))
 
 def eventinfo(session, servicelist, **kwargs):
 	ref = session.nav.getCurrentlyPlayingServiceReference()

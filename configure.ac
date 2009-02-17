@@ -109,9 +109,11 @@ startuptostandby/src/Makefile
 
 imdb/Makefile
 imdb/src/Makefile
+imdb/po/Makefile
 
 ofdb/Makefile
 ofdb/src/Makefile
+ofdb/po/Makefile
 
 networkwizard/Makefile
 networkwizard/src/Makefile
