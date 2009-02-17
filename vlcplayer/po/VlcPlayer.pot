@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-22 14:42+0200\n"
+"POT-Creation-Date: 2009-02-17 13:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,184 +16,185 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/VlcServerConfig.py:248
+#: ../src/plugin.py:69
+msgid "A video streaming solution based on VLC"
+msgstr ""
+
+#: ../src/VlcServerConfig.py:318
 msgid "Audio Bitrate"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:250
+#: ../src/VlcServerConfig.py:320
 msgid "Audio Channels"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:247
+#: ../src/VlcServerConfig.py:317
 msgid "Audio Codec"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:249
+#: ../src/VlcServerConfig.py:319
 msgid "Audio Samplerate"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:223
+#: ../src/VlcServerConfig.py:294
 msgid "Cancel"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:243
-msgid "Correct aspect ratio to"
-msgstr ""
-
-#: ../src/VlcServerConfig.py:235
+#: ../src/VlcServerConfig.py:306
 msgid "DVD Device (leave empty for default)"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:230
+#: ../src/VlcServerConfig.py:301
 msgid "Enter VLC-Server as FQDN or IP-Address"
 msgstr ""
 
-#: ../src/VlcMediaList.py:182
+#: ../src/VlcMediaList.py:186
 #, python-format
 msgid ""
-"Error loading filelist into server %s:\n"
-"%s"
+"Error loading filelist into server %(server)s:\n"
+"%(error)s"
 msgstr ""
 
-#: ../src/VlcMediaList.py:160
+#: ../src/VlcMediaList.py:164
 #, python-format
 msgid ""
-"Error loading playlist %s into server %s:\n"
-"%s"
+"Error loading playlist %(media)s into server %(server)s:\n"
+"%(error)s"
 msgstr ""
 
-#: ../src/VlcMediaList.py:176 ../src/VlcMediaList.py:192
-#: ../src/VlcMediaList.py:197
+#: ../src/VlcMediaList.py:180 ../src/VlcMediaList.py:196
+#: ../src/VlcMediaList.py:201
 #, python-format
 msgid ""
-"Error loading playlist into server %s:\n"
-"%s"
+"Error loading playlist into server %(server)s:\n"
+"%(error)s"
 msgstr ""
 
-#: ../src/VlcMediaList.py:125
+#: ../src/VlcMediaList.py:127
 #, python-format
 msgid ""
-"Error updating filelist from server %s:\n"
-"%s"
+"Error updating filelist from server %(server)s:\n"
+"%(error)s"
 msgstr ""
 
-#: ../src/VlcPlayer.py:324 ../src/VlcPlayer.py:359 ../src/VlcPlayer.py:386
+#: ../src/VlcPlayer.py:330 ../src/VlcPlayer.py:365 ../src/VlcPlayer.py:393
 #, python-format
 msgid ""
 "Error with VLC server:\n"
 "%s"
 msgstr ""
 
-#: ../src/VlcMediaList.py:63
+#: ../src/VlcMediaList.py:62
 msgid "Filelist"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:233
+#: ../src/VlcServerConfig.py:304
 msgid "HTTP Port"
 msgstr ""
 
-#: ../src/VlcServerList.py:78
-msgid "List of known VLC-Servers"
+#: ../src/VlcServerList.py:80
+msgid "List of known VLC-Server Profiles"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:234
+#: ../src/VlcServerConfig.py:305
 msgid "Movie Directory"
 msgstr ""
 
-#: ../src/VlcPlayer.py:438
+#: ../src/VlcPlayer.py:445
 msgid "No more files in this directory"
 msgstr ""
 
-#: ../src/VlcPlayer.py:462
+#: ../src/VlcPlayer.py:472
 msgid "No previous file in this directory"
 msgstr ""
 
-#: ../src/VlcPlayer.py:315
+#: ../src/VlcPlayer.py:320
 msgid ""
 "No valid Enigma-Service to play a VLC-Stream\n"
 "Check your installation and try again!"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:224
+#: ../src/VlcServerConfig.py:295
 msgid "OK"
 msgstr ""
 
-#: ../src/VlcMediaList.py:64
+#: ../src/VlcServerConfig.py:312
+#, python-format
+msgid "Overscan Correction [in %(percentsign)s of Video width]"
+msgstr ""
+
+#: ../src/VlcMediaList.py:63
 msgid "Playlist"
 msgstr ""
 
-#: ../src/VlcServerList.py:115
+#: ../src/VlcServerList.py:126
 msgid "Really delete this Server?"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:231
+#: ../src/VlcServerConfig.py:302
 msgid "Server Address"
 msgstr ""
 
-#: ../src/VlcServerConfig.py:244
-msgid "Subtitle overlay"
-msgstr ""
-
-#: ../src/VlcServerConfig.py:229
-msgid "Symbolic Servername"
-msgstr ""
-
-#: ../src/VlcServerConfig.py:246
-msgid "Transcode MPEG/DVD Audio"
-msgstr ""
-
-#: ../src/VlcServerConfig.py:237
-msgid "Transcode MPEG/DVD Video"
-msgstr ""
-
-#: ../src/VlcServerConfig.py:239
-msgid "Video Bitrate"
-msgstr ""
-
-#: ../src/VlcServerConfig.py:238
-msgid "Video Codec"
-msgstr ""
-
-#: ../src/VlcServerConfig.py:241
-msgid "Video Height"
-msgstr ""
-
-#: ../src/VlcServerConfig.py:240
-msgid "Video Width"
-msgstr ""
-
-#: ../src/VlcServerList.py:81
-msgid "add server"
-msgstr ""
-
-#: ../src/VlcServerList.py:80
-msgid "delete server"
-msgstr ""
-
-#: ../src/VlcServerList.py:82
-msgid "edit server"
-msgstr ""
-
-#: ../src/VlcMediaList.py:56 ../src/VlcMediaList.py:117
-msgid "filter off"
-msgstr ""
-
-#: ../src/VlcMediaList.py:120
-msgid "filter on"
-msgstr ""
-
-#: ../src/VlcMediaList.py:59
-msgid "play DVD"
+#: ../src/VlcServerConfig.py:300
+msgid "Server Profile Name"
 msgstr ""
 
 #: ../src/VlcMediaList.py:57
+msgid "Serverlist"
+msgstr ""
+
+#: ../src/VlcServerConfig.py:314
+msgid "Subtitle overlay"
+msgstr ""
+
+#: ../src/VlcServerConfig.py:316
+msgid "Transcode MPEG/DVD Audio"
+msgstr ""
+
+#: ../src/VlcServerConfig.py:308
+msgid "Transcode MPEG/DVD Video"
+msgstr ""
+
+#: ../src/VlcServerConfig.py:310
+msgid "Video Bitrate"
+msgstr ""
+
+#: ../src/VlcServerConfig.py:309
+msgid "Video Codec"
+msgstr ""
+
+#: ../src/VlcServerConfig.py:311
+msgid "Video Norm"
+msgstr ""
+
+#: ../src/VlcServerList.py:83
+msgid "add server"
+msgstr ""
+
+#: ../src/VlcServerList.py:82
+msgid "delete server"
+msgstr ""
+
+#: ../src/VlcServerList.py:84
+msgid "edit server"
+msgstr ""
+
+#: ../src/VlcMediaList.py:55 ../src/VlcMediaList.py:119
+msgid "filter off"
+msgstr ""
+
+#: ../src/VlcMediaList.py:122
+msgid "filter on"
+msgstr ""
+
+#: ../src/VlcMediaList.py:58
+msgid "play DVD"
+msgstr ""
+
+#: ../src/VlcMediaList.py:56
 msgid "refresh"
 msgstr ""
 
-#: ../src/VlcMediaList.py:226
-msgid "show filelist"
-msgstr ""
-
-#: ../src/VlcMediaList.py:216
-msgid "show playlist"
+#: ../src/VlcServerList.py:85
+msgid "set default"
 msgstr ""
