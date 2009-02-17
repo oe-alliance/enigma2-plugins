@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin epgrefresh italian locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 01:20+0100\n"
-"PO-Revision-Date: 2009-01-25 01:20+0100\n"
+"POT-Creation-Date: 2009-02-17 11:54+0100\n"
+"PO-Revision-Date: 2009-02-17 11:54+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -82,10 +82,14 @@ msgstr "Configurare Agg. Automatizzato EPG"
 msgid "Really close without saving settings?"
 msgstr "Chiudere senza salvare le modifiche?"
 
-#: /home/dario/Plugins/epgrefresh/src/plugin.py:87
-#: /home/dario/Plugins/epgrefresh/src/plugin.py:97
+#: /home/dario/Plugins/epgrefresh/src/plugin.py:101
+#: /home/dario/Plugins/epgrefresh/src/plugin.py:111
 msgid "Automated EPGRefresher"
 msgstr "Agg. Automatizzato EPG"
+
+#: /home/dario/Plugins/epgrefresh/src/plugin.py:116
+msgid "Add to EPGRefresh"
+msgstr "Aggiungere a EPGRefresh"
 
 #: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:58
 msgid "EPGRefresh Services"
