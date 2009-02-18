@@ -57,7 +57,6 @@ class EPG( Source):
     
     def getEPGNowNext(self, ref, now=True, service=False):
         print "[WebComponents.EPG] getting EPG NOW/NEXT", ref
-        
 
         if service:
             search = ['IBDTSERNX']
@@ -71,7 +70,6 @@ class EPG( Source):
                 return events
                 
         else:
-            search = ['IBDTSERN']
             serviceHandler = eServiceCenter.getInstance()
             list = serviceHandler.list(eServiceReference(ref))
             services = list and list.getContent('S')
