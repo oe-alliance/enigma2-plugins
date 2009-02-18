@@ -16,6 +16,7 @@ from time import time
 
 # Plugin Config
 from xml.etree.cElementTree import parse as cet_parse
+from Tools.XMLTools import stringToXML
 from os import path as path
 
 # We want a list of unique services
@@ -90,18 +91,18 @@ class EPGRefresh:
 
 		for service in self.services[0]:
 			ref = ServiceReference(service.sref)
-			list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
+			list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
 			list.append(' <service')
 			if service.duration is not None:
 				list.extend([' duration="', str(service.duration), '"'])
-			list.extend(['>', service.sref, '</service>\n'])
+			list.extend(['>', stringToXML(service.sref), '</service>\n'])
 		for bouquet in self.services[1]:
 			ref = ServiceReference(bouquet.sref)
-			list.extend([' <!-- ', ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ' -->\n'])
+			list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
 			list.append(' <bouquet')
 			if bouquet.duration is not None:
 				list.extend([' duration="', str(bouquet.duration), '"'])
-			list.extend(['>', bouquet.sref, '</bouquet>\n'])
+			list.extend(['>', stringToXML(bouquet.sref), '</bouquet>\n'])
 
 		list.append('\n</epgrefresh>')
 
