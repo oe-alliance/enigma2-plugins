@@ -1,8 +1,8 @@
 Version = '$Header$';
 from Plugins.Plugin import PluginDescriptor
-from Components.config import config
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigSelection, ConfigSubList
 from Screens.MessageBox import MessageBox
-from WebIfConfig import WebIfConfigScreen
+from WebIfConfig import WebIfConfigScreen, initConfig
 from WebChilds.Toplevel import Toplevel
 from twisted.internet import reactor, defer, ssl
 from twisted.internet.error import CannotListenError
@@ -15,11 +15,26 @@ from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname
 from OpenSSL import SSL
 
-from __init__ import _
+from __init__ import _, __version__
 
 DEBUG_TO_FILE=False # PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
 
 DEBUGFILE= "/tmp/twisted.log"
+
+#CONFIG INIT
+
+#init the config
+config.plugins.Webinterface = ConfigSubsection()
+config.plugins.Webinterface.enable = ConfigYesNo(default = True)
+config.plugins.Webinterface.allowzapping = ConfigYesNo(default = True)
+config.plugins.Webinterface.includehdd = ConfigYesNo(default = False)
+config.plugins.Webinterface.autowritetimer = ConfigYesNo(default = False)
+config.plugins.Webinterface.loadmovielength = ConfigYesNo(default = False)
+config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI.
+config.plugins.Webinterface.interfacecount = ConfigInteger(0)
+config.plugins.Webinterface.interfaces = ConfigSubList()
+config.plugins.Webinterface.warningsslsend = ConfigYesNo(default = False)
+
 
 global running_defered,waiting_shutdown
 running_defered = []
@@ -28,14 +43,14 @@ server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revi","").re
 
 class Closer:
 	counter = 0
-	def __init__(self,session, callback):
+	def __init__(self,session, callback = None):
 		self.callback = callback
 		self.session = session
 		
 	def stop(self):
 		global running_defered
 		for d in running_defered:
-			print "[Webinterface] stopping interface on ",d.interface," with port",d.port
+			print "[Webinterface] stopping interface on ", d.interface, " with port", d.port
 			x = d.stopListening()
 			try:
 				x.addCallback(self.isDown)
@@ -44,12 +59,14 @@ class Closer:
 				pass
 		running_defered = []
 		if self.counter <1:
-			self.callback(self.session)
+			if self.callback is not None:
+				self.callback(self.session)
 		
 	def isDown(self,s):
 		self.counter-=1
 		if self.counter <1:
-			self.callback(self.session)
+			if self.callback is not None:
+				self.callback(self.session)
 			
 		
 def restartWebserver(session):
@@ -85,6 +102,20 @@ def startWebserver(session):
 			startServerInstance(session,c.address.value,c.port.value,c.useauth.value,c.usessl.value)
 		else:
 			print "[Webinterface] not starting disabled interface on %s:%i"%(c.address.value,c.port.value)
+
+
+def stopWebserver(session):
+	try:
+		del session.mediaplayer
+		del session.messageboxanswer
+	except NameError:
+		pass
+	except AttributeError:
+		pass
+
+	global running_defered
+	if len(running_defered) > 0:
+		Closer(session).stop()
 			
 def startServerInstance(session,ipaddress,port,useauth=False,usessl=False):
 	try:
@@ -109,30 +140,7 @@ def startServerInstance(session,ipaddress,port,useauth=False,usessl=False):
 			session.open(MessageBox,'Could not Listen on %s:%i!\n\n%s'%(ipaddress,port,str(e)), MessageBox.TYPE_ERROR)
 	except Exception,e:
 		print "[Webinterface] starting FAILED on %s:%i!"%(ipaddress,port),e
-		session.open(MessageBox,'starting FAILED on %s:%i!\n\n%s'%(ipaddress,port,str(e)), MessageBox.TYPE_ERROR)
-
-def autostart(reason, **kwargs):
-	if "session" in kwargs:
-		try:
-			startWebserver(kwargs["session"])
-		except ImportError,e:
-			print "[Webinterface] twisted not available, not starting web services",e
-			
-def openconfig(session, **kwargs):
-	session.openWithCallback(configCB,WebIfConfigScreen)
-
-def configCB(result,session):
-	if result is True:
-		print "[WebIf] config changed"
-		restartWebserver(session)
-	else:
-		print "[WebIf] config not changed"
-		
-
-def Plugins(**kwargs):
-	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
-		    PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),where = [PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png",fnc = openconfig)]
-	
+		session.open(MessageBox,'starting FAILED on %s:%i!\n\n%s'%(ipaddress,port,str(e)), MessageBox.TYPE_ERROR)	
 	
 	
 class PasswordDatabase:
@@ -363,4 +371,37 @@ def makeSSLContext(myKey,trustedCA):
      return ctx
 
 
+global_session = None
 
+def sessionstart(reason, session):
+	global global_session
+	global_session = session
+
+def autostart(reason, **kwargs):
+	if reason is True:
+		try:
+			initConfig()
+			startWebserver(global_session)
+		except ImportError,e:
+			print "[Webinterface] twisted not available, not starting web services", e
+	elif reason is False:
+		stopWebserver()
+		
+		
+			
+def openconfig(session, **kwargs):
+	session.openWithCallback(configCB, WebIfConfigScreen)
+
+def configCB(result, session):
+	if result is True:
+		print "[WebIf] config changed"
+		restartWebserver(session)
+	else:
+		print "[WebIf] config not changed"
+		
+
+def Plugins(**kwargs):
+	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = sessionstart),
+		    PluginDescriptor(where = [PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc = autostart),
+		    PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),
+							 where = [PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png",fnc = openconfig)]

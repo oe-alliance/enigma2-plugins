@@ -14,7 +14,56 @@ from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
 
 from Components.ActionMap import ActionMap
-from Plugins.Extensions.WebInterface import addInterfaceConfig,getCofiguredAndSpecialNetworkinterfaces
+
+from Components.Network import iNetwork
+def initInterfaceConfig(i = None):
+    choices = getConfiguredIPs()
+    if i is None:
+        i = config.plugins.Webinterface.interfacecount.value - 1
+    config.plugins.Webinterface.interfaces.append(ConfigSubsection())
+    config.plugins.Webinterface.interfaces[i].disabled = ConfigYesNo(default = False)
+    config.plugins.Webinterface.interfaces[i].address = ConfigSelection(choices, default=choices[0])
+    config.plugins.Webinterface.interfaces[i].port = ConfigInteger(80, (0, 65535))
+    config.plugins.Webinterface.interfaces[i].useauth = ConfigYesNo(default = False)
+    config.plugins.Webinterface.interfaces[i].usessl = ConfigYesNo(default = False)
+    
+    config.plugins.Webinterface.interfacecount.value = i+1
+    
+    return i
+
+def getConfiguredIPs():    
+    choices = []
+    choices.append('0.0.0.0')
+    choices.append('127.0.0.1')
+    for adaptername in iNetwork.ifaces:
+        extip = iNetwork.ifaces[adaptername]['ip']
+        if iNetwork.ifaces[adaptername]['up'] is True:
+            extip = "%i.%i.%i.%i"%(extip[0],extip[1],extip[2],extip[3])
+            choices.append(extip)
+    return choices
+
+def initConfig():
+    if config.plugins.Webinterface.interfacecount.value == 0:
+        # setting default interface
+        # 0.0.0.0:80 auth=False
+        config.plugins.Webinterface.interfaces.append(ConfigSubsection())
+        config.plugins.Webinterface.interfaces[0].disabled = ConfigYesNo(default = False)
+        
+        #needs to be refreshed before each call, because ifaces can be changed since e2 boot 
+        config.plugins.Webinterface.interfaces[0].address = ConfigSelection(getConfiguredIPs(),default='0.0.0.0')
+        
+        config.plugins.Webinterface.interfaces[0].port = ConfigInteger(80, (0,65535))
+        config.plugins.Webinterface.interfaces[0].useauth = ConfigYesNo(default = False)
+        config.plugins.Webinterface.interfaces[0].usessl = ConfigYesNo(default = False)
+        config.plugins.Webinterface.interfaces[0].save()
+        
+        config.plugins.Webinterface.interfacecount.value = 1
+        config.plugins.Webinterface.interfacecount.save()        
+    else:    
+        print "[WebInterface.init] %s" %config.plugins.Webinterface.interfaces
+        for i in range(0, config.plugins.Webinterface.interfacecount.value):
+            initInterfaceConfig(i)
+
 
 class WebIfConfigScreen(ConfigListScreen,Screen):
     skin = """
@@ -204,7 +253,7 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
         self["key_blue"] = Button(_("Delete"))
 
         if ifacenum is None:
-            i = addInterfaceConfig()
+            i = initInterfaceConfig()
         else:
             i = ifacenum
         cfglist = []
@@ -212,11 +261,11 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
             current = config.plugins.Webinterface.interfaces[i]
         except IndexError,e:
             print "[WebIf] iface config %i not found, adding it and setting default values"%i
-            addInterfaceConfig()
+            initInterfaceConfig()
             current = config.plugins.Webinterface.interfaces[ifacenum]
         
         #reloading current network devices
-        current.address = ConfigSelection(getCofiguredAndSpecialNetworkinterfaces(),default=current.address.value)
+        current.address = ConfigSelection(getConfiguredIPs(), default=current.address.value)
         
         cfglist.append(getConfigListEntry(_("Disabled"), current.disabled))
         cfglist.append(getConfigListEntry(_("Address"), current.address))
@@ -226,14 +275,16 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
         ConfigListScreen.__init__(self, cfglist, session)
         self.ifacenum = i
 
+
     def keySave(self):
         config.plugins.Webinterface.interfacecount.save()
         for x in self["config"].list:
             if isinstance(x[1].value, str):
                 x[1].value = x[1].value.strip()
             x[1].save()
+        config.plugins.Webinterface.save()
         self.close()
-        config.save()
+        
 
     def cancelConfirm(self, result):
         if result:
@@ -253,4 +304,3 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
         config.plugins.Webinterface.interfacecount.save()
         config.save()
         self.close()
-        

@@ -285,6 +285,13 @@ class GetPid(WebScreen):
 
 		 self["localip"] = RequestData(request,what=RequestData.HOST)
 
+class About2(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		from WebComponents.Sources.Network import Network
+		from WebComponents.Sources.Hdd import Hdd
+		self["network"] = Network()
+		self["hdd"] = Hdd()
 
 # implements the 'render'-call.
 # this will act as a downstream_element, like a renderer.
