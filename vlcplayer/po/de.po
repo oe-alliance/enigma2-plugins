@@ -53,7 +53,7 @@ msgid ""
 "Error loading playlist %(media)s into server %(server)s:\n"
 "%(error)s"
 msgstr ""
-"Fehler beim Laden der Playlist %s auf den Server %(server)s:\n"
+"Fehler beim Laden der Playlist %(media)s auf den Server %(server)s:\n"
 "%(error)s"
 
 #, python-format

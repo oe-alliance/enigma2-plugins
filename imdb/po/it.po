@@ -1,0 +1,131 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 plugin imdb italian locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-18 08:11+0100\n"
+"PO-Revision-Date: 2009-02-18 18:11+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/imdb\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/imdb\n"
+
+#: ../src/plugin.py:442
+msgid " as "
+msgstr " nel ruolo di  "
+
+#: ../src/plugin.py:248
+msgid "Ambiguous results"
+msgstr "Risultati ambigui"
+
+#: ../src/plugin.py:444
+msgid "Cast: "
+msgstr "Cast: "
+
+#: ../src/plugin.py:41
+msgid "Channel Selection"
+msgstr "Selezione Canale"
+
+#: ../src/plugin.py:321
+msgid "Could't get Eventname"
+msgstr "Nome evento non ottenibile!"
+
+#: ../src/plugin.py:253
+#: ../src/plugin.py:399
+msgid "Details"
+msgstr "Dettagli"
+
+#: ../src/plugin.py:452
+#, python-format
+msgid "Downloading Movie Poster: %s..."
+msgstr "Download Poster Film: %s"
+
+#: ../src/plugin.py:145
+msgid "Exit"
+msgstr "Uscire"
+
+#: ../src/plugin.py:471
+msgid "Extra Info"
+msgstr "Info Extra"
+
+#: ../src/plugin.py:400
+#: ../src/plugin.py:476
+msgid "IMDb Details parsed"
+msgstr "Dettagli IMDb analizzati"
+
+#: ../src/plugin.py:352
+msgid "IMDb Download completed"
+msgstr "Download IMDb completato!"
+
+#: ../src/plugin.py:325
+msgid "IMDb Download failed"
+msgstr "Download IMDb fallito!"
+
+#: ../src/plugin.py:505
+msgid "IMDb Plugin"
+msgstr "Plugin IMDb"
+
+#: ../src/plugin.py:389
+msgid "IMDb Re-Download completed"
+msgstr "Ripetizione Download IMDb completato"
+
+#: ../src/plugin.py:386
+msgid "IMDb query failed!"
+msgstr "Ricerca IMDb fallita!"
+
+#: ../src/plugin.py:70
+msgid "Lookup"
+msgstr "Ricerca"
+
+#: ../src/plugin.py:373
+#: ../src/plugin.py:374
+msgid "No IMDb match."
+msgstr "Nessun riscontro IMDb!"
+
+#: ../src/plugin.py:446
+msgid "No cast list found in the database."
+msgstr "Nessuna lista cast trovata nel database!"
+
+#: ../src/plugin.py:397
+msgid "No details found."
+msgstr "Nessun dettaglio trovato!"
+
+#: ../src/plugin.py:249
+msgid "Please select the matching entry"
+msgstr "Selezionare la voce di confronto"
+
+#: ../src/plugin.py:314
+#, python-format
+msgid "Query IMDb: %s..."
+msgstr "Ricerca IMDb: %s"
+
+#: ../src/plugin.py:517
+#: ../src/plugin.py:522
+#: ../src/plugin.py:529
+msgid "Query details from the Internet Movie Database"
+msgstr "Ricerca dettagli da \"Internet Movie Database\""
+
+#: ../src/plugin.py:264
+#: ../src/plugin.py:379
+#, python-format
+msgid "Re-Query IMDb: %s..."
+msgstr "Ripetere ricerca IMDb: %s"
+
+#: ../src/plugin.py:135
+msgid "The Internet Movie Database"
+msgstr "Il Database Internet dei Film"
+
+#: ../src/plugin.py:252
+msgid "Title Menu"
+msgstr "Menu Titolo"
+
+#: ../src/plugin.py:427
+msgid "no user rating yet"
+msgstr "Valutazioni non ancora disponibili!"
+
