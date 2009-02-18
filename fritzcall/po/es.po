@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-31 16:41+0100\n"
-"PO-Revision-Date: 2009-01-09 18:07+0100\n"
+"POT-Creation-Date: 2009-02-10 13:04+0100\n"
+"PO-Revision-Date: 2009-02-10 13:53+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: this is a help text, keep it short
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Add entry to phonebook"
 msgstr "Añadir entrada a la agenda"
 
@@ -87,16 +86,6 @@ msgstr ""
 "reintentando..."
 
 #, python-format
-msgid ""
-"Corrupt phonebook entry\n"
-"for number %d\n"
-"Deleting."
-msgstr ""
-"Posición en la agenda corrupta\n"
-"para el número %d\n"
-"Borrando."
-
-#, python-format
 msgid "Could not load calls from FRITZ!Box - Error: %s"
 msgstr "No puedo cargar llamadas desde FRITZ!Box - Error: %s"
 
@@ -110,6 +99,9 @@ msgstr "No puedo analizar las entradas de la agenda de FRITZ!Box"
 msgid "Country"
 msgstr "País"
 
+msgid "Debug"
+msgstr "Debugear"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
 msgstr "Borrar"
@@ -118,26 +110,29 @@ msgstr "Borrar"
 msgid "Delete entry"
 msgstr "Borrar entrada"
 
+#, python-format
+msgid "Dialling failed - Error: %s"
+msgstr "Falló la llamada - Error: %s"
+
 msgid "Display FRITZ!box-Fon calls on screen"
-msgstr "Visualizar llamadas FRITZ!Box-Fon en la pantalla"
+msgstr "Ver llamadas FRITZ!Box-Fon en la pantalla"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Display all calls"
-msgstr "Visualizar todas llamadas"
+msgstr "Ver todas llamadas"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Display incoming calls"
-msgstr "Visualizar llamadas entrantes"
+msgstr "Ver llamadas entrantes"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Display missed calls"
-msgstr "Visualizar llamadas perdidas"
+msgstr "Ver llamadas perdidas"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Display outgoing calls"
-msgstr "Visualizar llamadas salientes"
+msgstr "Ver llamadas salientes"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Do what?"
 msgstr "¿Qué hago?"
 
@@ -206,9 +201,11 @@ msgstr "Flash"
 msgid "France"
 msgstr "Francia"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "FritzCall Setup"
 msgstr "Configuración FritzCall"
+
+msgid "Full screen display"
+msgstr "Visualizar pantalla completa"
 
 msgid "Germany"
 msgstr "Alemania"
@@ -308,7 +305,6 @@ msgstr "Llamadas salientes"
 msgid "Password Accessing FRITZ!Box"
 msgstr "Contraseña accediendo a FRITZ!Box"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
 msgstr "Llamadas de teléfono"
@@ -316,7 +312,6 @@ msgstr "Llamadas de teléfono"
 msgid "PhoneBook Location"
 msgstr "Ubicación de la Agenda"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Agenda"
@@ -454,4 +449,13 @@ msgstr "no mostrar nada"
 
 msgid "work"
 msgstr "trabajo"
+
+#~ msgid ""
+#~ "Corrupt phonebook entry\n"
+#~ "for number %d\n"
+#~ "Deleting."
+#~ msgstr ""
+#~ "Posición en la agenda corrupta\n"
+#~ "para el número %d\n"
+#~ "Borrando."
 
