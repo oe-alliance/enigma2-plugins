@@ -149,8 +149,10 @@ class EPGWebScreen(WebScreen):
 		
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
 		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
-		self["EPGNOW"] = EPG(session,func=EPG.NOW)
-		self["EPGNEXT"] = EPG(session,func=EPG.NEXT)
+		self["EPGBOUQUETNOW"] = EPG(session,func=EPG.BOUQUETNOW)
+		self["EPGBOUQUETNEXT"] = EPG(session,func=EPG.BOUQUETNEXT)
+		self["EPGSERVICENOW"] = EPG(session,func=EPG.SERVICENOW)
+		self["EPGSERVICENEXT"] = EPG(session,func=EPG.SERVICENEXT)
 		self["EPGBOUQUET"] = EPG(session,func=EPG.BOUQUET)
 		
 	def getServiceList(self, sRef):
