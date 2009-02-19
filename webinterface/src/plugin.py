@@ -27,7 +27,7 @@ DEBUGFILE= "/tmp/twisted.log"
 config.plugins.Webinterface = ConfigSubsection()
 config.plugins.Webinterface.enable = ConfigYesNo(default = True)
 config.plugins.Webinterface.allowzapping = ConfigYesNo(default = True)
-config.plugins.Webinterface.includehdd = ConfigYesNo(default = False)
+config.plugins.Webinterface.includemedia = ConfigYesNo(default = False)
 config.plugins.Webinterface.autowritetimer = ConfigYesNo(default = False)
 config.plugins.Webinterface.loadmovielength = ConfigYesNo(default = False)
 config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI.

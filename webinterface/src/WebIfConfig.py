@@ -83,7 +83,7 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
         Screen.__init__(self, session)
         self.list = []
         self.list.append(getConfigListEntry(_("Start Webinterface"), config.plugins.Webinterface.enable))
-        self.list.append(getConfigListEntry(_("Enable /hdd"), config.plugins.Webinterface.includehdd))
+        self.list.append(getConfigListEntry(_("Enable /media"), config.plugins.Webinterface.includemedia))
         self.list.append(getConfigListEntry(_("Allow zapping via Webinterface"), config.plugins.Webinterface.allowzapping))
         self.list.append(getConfigListEntry(_("Autowrite timer"), config.plugins.Webinterface.autowritetimer))
         self.list.append(getConfigListEntry(_("Load movie-length"), config.plugins.Webinterface.loadmovielength))
@@ -302,5 +302,5 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
         config.plugins.Webinterface.interfaces.save()
         config.plugins.Webinterface.interfacecount.value = config.plugins.Webinterface.interfacecount.value - 1;
         config.plugins.Webinterface.interfacecount.save()
-        config.save()
+        config.plugins.Webinterface.save()
         self.close()

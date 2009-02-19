@@ -29,9 +29,9 @@ class Toplevel(resource.Resource):
         self.putChild("upload",UploadResource())
         self.putChild("servicelist",ServiceList(self.session))
         self.putChild("streamcurrent",RedirecToCurrentStreamResource(session))
-
-        if config.plugins.Webinterface.includehdd.value is True:
-            self.putChild("hdd",static.File("/hdd"))
+            
+        if config.plugins.Webinterface.includemedia.value is True:
+            self.putChild("media",static.File("/media"))
 
     def render(self, req):
         fp = open(util.sibpath(WebInterface.__file__, "web-data/tpl/default")+"/index.html")
