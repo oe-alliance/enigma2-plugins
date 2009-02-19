@@ -22,7 +22,7 @@ msgstr "Webinterface"
 
 #: src/plugin.py:406
 msgid "Configuration for the Webinterface"
-msgstr "Konfiguration des Webinterface"
+msgstr "Konfiguration des Webinterfaces"
 
 #: src/WebIfConfig.py:80
 msgid "Webinterface: Main Setup"
