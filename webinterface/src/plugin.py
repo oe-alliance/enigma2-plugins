@@ -385,7 +385,7 @@ def autostart(reason, **kwargs):
 		except ImportError,e:
 			print "[Webinterface] twisted not available, not starting web services", e
 	elif reason is False:
-		stopWebserver()
+		stopWebserver(global_session)
 		
 		
 			
