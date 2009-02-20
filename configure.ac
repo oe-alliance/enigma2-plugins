@@ -174,4 +174,10 @@ mediadownloader/src/Makefile
 epgsearch/Makefile
 epgsearch/po/Makefile
 epgsearch/src/Makefile
+
+networkbrowser/Makefile
+networkbrowser/src/Makefile
+networkbrowser/src/icons/Makefile
+networkbrowser/src/lib/Makefile
+networkbrowser/po/Makefile
 ])

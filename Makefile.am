@@ -20,6 +20,7 @@ SUBDIRS = \
 	movietagger \
 	netcaster \
 	networkwizard \
+	networkbrowser \
 	ofdb \
 	passwordchanger \
 	permanentclock \
