@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: enigma2 plugin WirelessLan italian locale v2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-20 10:16+0100\n"
-"PO-Revision-Date: 2008-11-14 12:30+0100\n"
+"PO-Revision-Date: 2009-02-20 22:07+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: WWW.Linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,195 +20,204 @@ msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
 msgstr ""
+"Voce di \"Mount\"  già esistente!\n"
+"Aggiornarla con la configurazione corrente e continuare?\n"
 
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 msgid ""
 "Active/\n"
 "Inactive"
 msgstr ""
+"Attivo\n"
+"Inattivo"
 
 msgid "Add a new NFS or CIFS mount point to your Dreambox."
-msgstr ""
+msgstr "Aggiungere un nuovo \"Mount Point\" NFS o CIFS al Dreambox"
 
 msgid "Add new network mount point"
-msgstr ""
+msgstr "Aggiungere un nuovo \"Mount Point\" di rete"
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
 msgstr ""
+"Salvare questo \"Mount Point\"?\n"
+"\n"
 
 msgid "Browse network neighbourhood"
-msgstr ""
+msgstr "Sfogliare le Risorse di Rete"
 
 msgid "CIFS share"
-msgstr ""
+msgstr "Condivisione CIFS"
 
 msgid "Change hostname"
-msgstr ""
+msgstr "Cambiare Nome Host"
 
 msgid "Change the hostname of your Dreambox."
-msgstr ""
+msgstr "cambiare Nome Host del Dreambox."
 
 msgid "Close"
 msgstr "Chiudere"
 
 msgid "Delete"
-msgstr ""
+msgstr "Cancellare"
 
 msgid "Delete selected mount"
-msgstr ""
+msgstr "Cancellare il \"Mount\" selezionato"
 
 msgid "Dir:"
-msgstr ""
+msgstr "Dir: "
 
 msgid "Do you want to enter a username and password for this host?\n"
-msgstr ""
+msgstr "Utilizzare Nome User e Password per questo Host?\n"
 
 msgid "Enter new hostname for your Dreambox"
-msgstr ""
+msgstr "Inserire il nuovo Nome Host per il Dreambox"
 
 msgid "Enter options:"
-msgstr ""
+msgstr "Inserire le opzioni: "
 
 msgid "Enter password:"
-msgstr ""
+msgstr "Inserire password: "
 
 msgid "Enter share directory:"
-msgstr ""
+msgstr "Inserire cartella condivisa: "
 
 msgid "Enter share name:"
-msgstr ""
+msgstr "Inserire nome condivisione: "
 
 msgid "Enter user and password for host: "
-msgstr ""
+msgstr "Inserire User e Password per l'Host: "
 
 msgid "Enter username:"
-msgstr ""
+msgstr "Inserire Nome User: "
 
 msgid "Finished restarting your network"
-msgstr ""
+msgstr "Riavvio Rete terminato"
 
 msgid "IP:"
-msgstr ""
+msgstr "IP:"
 
 msgid "Local share name"
-msgstr ""
+msgstr "Nome condivisione locale"
 
 msgid "Manage network shares"
-msgstr ""
+msgstr "Gestire condivisioni di rete"
 
 msgid "Manage your network shares..."
-msgstr ""
+msgstr "Gestire condivisioni di rete..."
 
 msgid "Mount informations"
-msgstr ""
+msgstr "Informazioni \"Mount\""
 
 msgid "Mount options"
-msgstr ""
+msgstr "Opzioni \"Mount\""
 
 msgid "Mount type"
-msgstr ""
+msgstr "Tipo \"Mount\""
 
 msgid "MountManager"
-msgstr ""
+msgstr "MountManager"
 
 msgid ""
 "Mounted/\n"
 "Unmounted"
 msgstr ""
+"Montata\n"
+"Non Montata"
 
 msgid "Mountpoints management"
-msgstr ""
+msgstr "Gestione \"Mount Point\""
 
 msgid "Mounts editor"
-msgstr ""
+msgstr "Editor \"Mount\""
 
 msgid "Mounts management"
-msgstr ""
+msgstr "Gestione \"Mount\""
 
 msgid "NFS share"
-msgstr ""
+msgstr "Condivisione NFS"
 
 msgid "NetworkBrowser"
-msgstr ""
+msgstr "NetworkBrowser"
 
 msgid "No network devices found!"
-msgstr ""
+msgstr "Nessun apparato di rete trovato!"
 
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 msgid "Please wait for activation of your network mount..."
-msgstr ""
+msgstr "Attendere l'attivazione \"Mount\" di rete..."
 
 msgid "Please wait while removing your network mount..."
-msgstr ""
+msgstr "Attendere la rimozione \"Mount\" di rete..."
 
 msgid "Please wait while updating your network mount..."
-msgstr ""
+msgstr "Attendere l'aggiornamento \"Mount\" di rete..."
 
 msgid "Please wait while your network is restarting..."
-msgstr ""
+msgstr "Attendere il riavvio della rete..."
 
 msgid "Press OK to activate the settings."
-msgstr ""
+msgstr "Ok -> Attivare la configurazione."
 
 msgid "Press OK to edit selected settings."
-msgstr ""
+msgstr "Ok -> Modificare la configurazione selezionata."
 
 msgid "Press OK to edit the settings."
-msgstr ""
+msgstr "Ok -> Modificare la configurazione."
 
 msgid "Press OK to mount!"
-msgstr ""
+msgstr "Ok -> Eseguire il \"Mount\"!"
 
 msgid "Press OK to save settings."
-msgstr ""
+msgstr "Ok -> Salvare la configurazione."
 
 msgid "Press OK to select."
-msgstr ""
+msgstr "Ok -> Selezionare."
 
 msgid "Rescan network"
-msgstr ""
+msgstr "Ripeter la ricerca sulla rete"
 
 msgid "Search for network shares"
-msgstr ""
+msgstr "Ricerca condivisioni di rete"
 
 msgid "Search for network shares..."
-msgstr ""
+msgstr "Ricerca condivisioni di rete..."
 
 msgid "Searching your network. Please wait..."
-msgstr ""
+msgstr "Ricerca sulla rete in corso. Attendere..."
 
 msgid "Server IP"
-msgstr ""
+msgstr "IP Server"
 
 msgid "Server share"
-msgstr ""
+msgstr "Condivisione Server"
 
 msgid "User management"
-msgstr ""
+msgstr "Gestione User"
 
 msgid "Usermanager"
-msgstr ""
+msgstr "Manager User"
 
 msgid "Username"
-msgstr ""
+msgstr "Nome User"
 
 msgid "View, edit or delete mountpoints on your Dreambox."
-msgstr ""
+msgstr "Vedere, modificare o cancellare \"Mount Point\" sul Dreambox."
 
 msgid "View, edit or delete usernames and passwords for your network."
-msgstr ""
+msgstr "Vedere, modificare o cancellare Nome User e Password per la rete."
 
 msgid "Your network mount has been activated."
-msgstr ""
+msgstr "Il \"Mount\" di rete è stato attivato."
 
 msgid "Your network mount has been removed."
-msgstr ""
+msgstr "Il \"Mount\" di rete è stato rimosso."
 
 msgid "Your network mount has been updated."
-msgstr ""
+msgstr "Il \"Mount\" di rete è stato aggiornato."
+
