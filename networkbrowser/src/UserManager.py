@@ -14,7 +14,7 @@ from os import path as os_path, system as os_system, unlink, stat, mkdir, listdi
 
 class UserManager(Screen):
 	skin = """
-		<screen name="UserManger" position="90,140" size="560,350" title="UserManager">
+		<screen name="UserManager" position="90,140" size="560,350" title="UserManager">
 			<widget source="config" render="Listbox" position="10,10" size="540,220" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 					{"template": [
