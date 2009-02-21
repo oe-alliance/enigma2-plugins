@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 17:26+0200\n"
-"PO-Revision-Date: 2009-01-09 14:10+0100\n"
+"POT-Creation-Date: 2009-02-10 13:04+0100\n"
+"PO-Revision-Date: 2009-02-10 13:43+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -28,9 +28,6 @@ msgstr "Punto de Acceso:"
 msgid "Bitrate:"
 msgstr "Velocidad:"
 
-msgid "Channel:"
-msgstr "Canal:"
-
 msgid "Choose a Wireless Network"
 msgstr "Elije una Red Inalámbrica"
 
@@ -43,24 +40,21 @@ msgstr "Conectar"
 msgid "Connect to a Wireless Network"
 msgstr "Conectar a una Red Inalámbrica"
 
-msgid "Edit Wireless Settings"
-msgstr "Editar Configuración Inalámbrica"
+msgid "Disabled"
+msgstr "Desactivado"
+
+msgid "Enabled"
+msgstr "Activado"
 
 #, python-format
 msgid "Encrypted: %s"
 msgstr "Encriptada: %s"
 
-msgid "Encryption"
-msgstr "Encriptación"
+msgid "Encryption:"
+msgstr "Encriptación:"
 
-msgid "Encryption Key"
-msgstr "Clave Encriptación"
-
-msgid "Encryption Type"
-msgstr "Tipo Encriptación"
-
-msgid "Interface: "
-msgstr "Dispositivo:"
+msgid "Hidden networkname"
+msgstr "Nombre de la red oculta"
 
 #, python-format
 msgid "Interface: %s"
@@ -79,20 +73,17 @@ msgstr "Velocidad Max.: %s"
 msgid "N/A"
 msgstr "N/D"
 
-msgid "Network SSID"
-msgstr "SSID Red"
-
 msgid "Network:"
 msgstr "Red:"
 
 msgid "No"
 msgstr "No"
 
-msgid "No Connection!"
-msgstr "No hay conexión!"
+msgid "No Connection"
+msgstr "Sin conexión"
 
-msgid "Press OK to activate the settings."
-msgstr "Pulse OK para activar la configuración"
+msgid "Please wait..."
+msgstr "Por favor, espere..."
 
 msgid "Refresh"
 msgstr "Refrescar"
@@ -100,26 +91,14 @@ msgstr "Refrescar"
 msgid "SSID:"
 msgstr "SSID:"
 
-msgid "Scan for Wireless Networks"
-msgstr "Buscar Redes Inalámbricas"
-
-msgid "Show WLAN Status"
-msgstr "Mostrar estado WLAN"
-
 msgid "Signal Strength:"
 msgstr "Potencia Señal:"
 
 msgid "Signal: "
 msgstr "Señal:"
 
-msgid "WEP"
-msgstr "WEP"
-
-msgid "WPA"
-msgstr "WPA"
-
-msgid "WPA2"
-msgstr "WPA2"
+msgid "Unsupported"
+msgstr "No soportado"
 
 msgid "Wireless LAN"
 msgstr "RED Inalámbrica"
@@ -129,4 +108,33 @@ msgstr "Estado Red Inalámbrica"
 
 msgid "Yes"
 msgstr "Si"
+
+#~ msgid "Channel:"
+#~ msgstr "Canal:"
+#~ msgid "Edit Wireless Settings"
+#~ msgstr "Editar Configuración Inalámbrica"
+#~ msgid "Encryption"
+#~ msgstr "Encriptación"
+#~ msgid "Encryption Key"
+#~ msgstr "Clave Encriptación"
+#~ msgid "Encryption Type"
+#~ msgstr "Tipo Encriptación"
+#~ msgid "Interface: "
+#~ msgstr "Dispositivo:"
+#~ msgid "Network SSID"
+#~ msgstr "SSID Red"
+#~ msgid "No Connection!"
+#~ msgstr "No hay conexión!"
+#~ msgid "Press OK to activate the settings."
+#~ msgstr "Pulse OK para activar la configuración"
+#~ msgid "Scan for Wireless Networks"
+#~ msgstr "Buscar Redes Inalámbricas"
+#~ msgid "Show WLAN Status"
+#~ msgstr "Mostrar estado WLAN"
+#~ msgid "WEP"
+#~ msgstr "WEP"
+#~ msgid "WPA"
+#~ msgstr "WPA"
+#~ msgid "WPA2"
+#~ msgstr "WPA2"
 
