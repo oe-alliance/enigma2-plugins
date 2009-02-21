@@ -19,19 +19,20 @@ class Toplevel(resource.Resource):
         self.session = session
         resource.Resource.__init__(self)
 
-        self.putChild("web",ScreenPage(self.session,util.sibpath(WebInterface.__file__, "web"))) # "/web/*"
-        self.putChild("web-data",static.File(util.sibpath(WebInterface.__file__, "web-data"))) # FIXME: web-data appears as webdata
-        self.putChild("file",FileStreamer())
-        self.putChild("grab",GrabResource())
-        self.putChild("ipkg",IPKGResource())
-        self.putChild("play",ServiceplayerResource(self.session))
-        self.putChild("wap",RedirectorResource("/web/wap/"))# shorten and simplify url to wap-pages
-        self.putChild("upload",UploadResource())
-        self.putChild("servicelist",ServiceList(self.session))
-        self.putChild("streamcurrent",RedirecToCurrentStreamResource(session))
+        self.putChild("web", ScreenPage(self.session,util.sibpath(WebInterface.__file__, "web"))) # "/web/*"
+        self.putChild("web-data", static.File(util.sibpath(WebInterface.__file__, "web-data"))) # FIXME: web-data appears as webdata
+        self.putChild("file", FileStreamer())
+        self.putChild("grab", GrabResource())
+        self.putChild("ipkg", IPKGResource())
+        self.putChild("play", ServiceplayerResource(self.session))
+        self.putChild("wap", RedirectorResource("/web/wap/"))# shorten and simplify url to wap-pages
+        self.putChild("upload", UploadResource())
+        self.putChild("servicelist", ServiceList(self.session))
+        self.putChild("streamcurrent", RedirecToCurrentStreamResource(session))
             
         if config.plugins.Webinterface.includemedia.value is True:
-            self.putChild("media",static.File("/media"))
+            self.putChild("media", static.File("/media"))
+            self.putChild("hdd", static.File("/media/hdd"))
 
     def render(self, req):
         fp = open(util.sibpath(WebInterface.__file__, "web-data/tpl/default")+"/index.html")
@@ -40,7 +41,7 @@ class Toplevel(resource.Resource):
         return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
 
     def locateChild(self, request, segments):
-        print "[WebIf]",request.remoteAddr.host,request.method,request.path,request.args
+        print "[WebIf]", request.remoteAddr.host,request.method,request.path,request.args
         return resource.Resource.locateChild(self, request, segments)
 
 class RedirectorResource(resource.Resource):
