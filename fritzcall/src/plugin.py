@@ -484,8 +484,8 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 			backMainPng = ""
 			if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/menu/back-main.png")):
 				backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
-			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
-				backMainPng = "Kerni-HD1-picon/menu/back-main.png"
+			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1/menu/back-main.png")):
+				backMainPng = "Kerni-HD1/menu/back-main.png"
 			if backMainPng:
 					backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" % (self.width, self.height, backMainPng)
 			else:
@@ -532,7 +532,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 							scaleH(670, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # green
 							scaleH(860, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # yellow
 							scaleH(1050, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # blue
-							scaleH(120, XXX), scaleV(430, XXX), scaleH(150, XXX), scaleV(110, XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
+							scaleH(120, XXX), scaleV(430, XXX), scaleH(150, XXX), scaleV(110, XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/fritz.png") # Fritz Logo size and pixmap
 														)
 		else:
 			self.width = scaleH(1100, 570)
@@ -660,17 +660,17 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				dir = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callin.png"))
 			else:
 				dir = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callinfailed.png"))
-			dateFieldWidth = 100
+			dateFieldWidth = scaleH(150,100)
 			dirFieldWidth = 16
-			remoteFieldWidth = 100
-			scrollbarWidth = 45
-			fieldWidth = self.width -dateFieldWidth -5 -dirFieldWidth -5 -remoteFieldWidth -scrollbarWidth
+			remoteFieldWidth = scaleH(250,100)
+			scrollbarWidth = scaleH(90,45)
+			fieldWidth = self.width -dateFieldWidth -5 -dirFieldWidth -5 -remoteFieldWidth -scrollbarWidth -5
 			# debug("[FritzDisplayCalls] gotCalls: d: %d; f: %d; d: %d; r: %d" %(dateFieldWidth, fieldWidth, dirFieldWidth, remoteFieldWidth))
 			sortlist.append([number,
-							 (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, dateFieldWidth, 20, 0, RT_HALIGN_LEFT, date),
+							 (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, dateFieldWidth, scaleV(24,20), 0, RT_HALIGN_LEFT, date),
 							 (eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, dateFieldWidth+5, 0, dirFieldWidth, 16, dir),
-							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5, 0, fieldWidth, 20, 0, RT_HALIGN_LEFT, here),
-							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5, 0, remoteFieldWidth, 20, 0, RT_HALIGN_RIGHT, remote)
+							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5, 0, fieldWidth, scaleV(24,20), 0, RT_HALIGN_LEFT, here),
+							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5, 0, remoteFieldWidth, scaleV(24,20), 0, RT_HALIGN_RIGHT, remote)
 							 ])
 
 		self["entries"].setList(sortlist)
@@ -848,7 +848,37 @@ class FritzCallPhonebook:
 					fNew.write(number + "#" + name.encode("utf-8"))
 				fNew.close()
 
-			# TODO: we could read PhoneBook.csv and PhoneBook.ldif here also...
+#===============================================================================
+#		#
+#		# needs python-textutils
+#		#
+#		# not reliable with coding yet
+#		# 
+#		# import csv exported from Outlook 2007 with csv(Windows)
+#		csvFilename = "/tmp/PhoneBook.csv"
+#		if config.plugins.FritzCall.phonebook.value and os.path.exists(csvFilename):
+#			try:
+#				readOutlookCSV(csvFilename, self.add)
+#				os.rename(csvFilename, csvFilename + ".done")
+#			except ImportError:
+#				debug("[FritzCallPhonebook] CSV import failed" %line)
+#===============================================================================
+
+		
+#===============================================================================
+#		#
+#		# we have to wait for python-ldap to appear...
+#		#
+#		# import ldif exported from Thunderbird 2.0.0.19
+#		ldifFilename = "/tmp/PhoneBook.ldif"
+#		if config.plugins.FritzCall.phonebook.value and os.path.exists(ldifFilename):
+#			try:
+#				parser = MyLDIF(open(ldifFilename), self.add)
+#				parser.parse()
+#				os.rename(ldifFilename, ldifFilename + ".done")
+#			except ImportError:
+#				debug("[FritzCallPhonebook] LDIF import failed" %line)
+#===============================================================================
 		
 		if config.plugins.FritzCall.fritzphonebook.value:
 			fritzbox.loadFritzBoxPhonebook()
@@ -922,8 +952,8 @@ class FritzCallPhonebook:
 				backMainPng = ""
 				if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/menu/back-main.png")):
 					backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
-				elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
-					backMainPng = "Kerni-HD1-picon/menu/back-main.png"
+				elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1/menu/back-main.png")):
+					backMainPng = "Kerni-HD1/menu/back-main.png"
 				if backMainPng:
 					backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" % (self.width, self.height, backMainPng)
 				else:
@@ -1078,12 +1108,12 @@ class FritzCallPhonebook:
 						shortname = found.group(1)
 					else:
 						shortname = name
-					numberFieldWidth = 150
-					fieldWidth = self.width -5 -numberFieldWidth -10
+					numberFieldWidth = scaleV(200,150)
+					fieldWidth = self.width -5 -numberFieldWidth -10 -scaleH(90,45)
 					self.sortlist.append([(number.encode("utf-8", "replace"),
 								   name.encode("utf-8", "replace")),
-								   (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, fieldWidth, 20, 0, RT_HALIGN_LEFT, shortname.encode('utf-8', 'replace')),
-								   (eListboxPythonMultiContent.TYPE_TEXT, fieldWidth +5, 0, numberFieldWidth, 20, 0, RT_HALIGN_LEFT, number.encode("utf-8", "replace"))
+								   (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, fieldWidth, scaleH(24,20), 0, RT_HALIGN_LEFT, shortname.encode('utf-8', 'replace')),
+								   (eListboxPythonMultiContent.TYPE_TEXT, fieldWidth +5, 0, numberFieldWidth, scaleH(24,20), 0, RT_HALIGN_LEFT, number.encode("utf-8", "replace"))
 								   ])
 				
 			self["entries"].setList(self.sortlist)
@@ -1259,8 +1289,8 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			backMainLine = ""
 			if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/menu/back-main.png")):
 				backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
-			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
-				backMainPng = "Kerni-HD1-picon/menu/back-main.png"
+			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1/menu/back-main.png")):
+				backMainPng = "Kerni-HD1/menu/back-main.png"
 			if backMainPng:
 				backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" % (self.width, self.height, backMainPng)
 			else:
