@@ -1,4 +1,4 @@
-SUBDIRS = images
+#SUBDIRS = images
 
 installdir = /usr/lib/enigma2/python/Plugins/Extensions/FritzCall
 
