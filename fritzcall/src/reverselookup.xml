@@ -906,7 +906,7 @@
 		</website>
 		<website name="www.dastelefonbuch.de" url="http://www.dastelefonbuch.de/?sourceid=Mozilla-search&amp;cmd=search&amp;kw=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;td\sclass=&quot;col1&quot;&gt;[^&gt;]*&gt;([^&lt;]*)&lt;</name>
+				<name>&lt;td\sclass=&quot;col1&quot;&gt;(?:&lt;b&gt;)?&lt;a href=[^&gt;]*&gt;([^&lt;]*)&lt;</name>
 				<street>&lt;td\sclass=&quot;col2&quot;&gt;([^&lt;]*)&lt;</street>
 				<city>&lt;td class=&quot;col3&quot;&gt;\d{5}&amp;nbsp;([^&lt;]*)&lt;</city>
 				<zipcode>&lt;td class=&quot;col3&quot;&gt;(\d{5})</zipcode>
@@ -932,10 +932,10 @@
 		</website>
 		<website name="www.11880.com" url="http://www.11880.com/Suche/index.cfm?fuseaction=Suche.rueckwaertssucheresult&amp;init=true&amp;tel=$NUMBER" prefix="0">
 	        <entry>
-	        	<name>&lt;a style=&quot;text-decoration: underline;&quot; href=&quot;[^&quot;]*&quot; onclick=&quot;[^&quot;]*&quot; class=&quot;popup&quot;[^&gt;]*&gt;([^&lt;]*)&lt;/a&gt;</name>
-	        	<street>^\s*([^,]*), [\d]{5} [^&lt;]*&lt;br /&gt;</street>
-	        	<city>^\s*[^,]*, [\d]{5} ([^&lt;]*)&lt;br /&gt;</city>
-	        	<zipcode>^\s*[^,]*, ([\d]{5}) [^&lt;]*&lt;br /&gt;</zipcode>
+	        	<name>&lt;a style=&quot;text-decoration: underline;&quot; href=&quot;[^&quot;]*?&quot; onclick=&quot;[^&quot;]*?&quot; class=&quot;popup&quot;[^&gt;]*?&gt;([^&lt;]*?)&lt;/a&gt;</name>
+	        	<street>^\t*?([^,\t]*?), [\d]{5} [^&lt;]*?&lt;br /&gt;</street>
+	        	<city>^\t*?[^,\t]*?, [\d]{5} ([^&lt;]*?)&lt;br /&gt;</city>
+	        	<zipcode>^\t*?[^,\t]*?, ([\d]{5}) [^&lt;]*?&lt;br /&gt;</zipcode>
 	        </entry>
 		</website>
 	</country>

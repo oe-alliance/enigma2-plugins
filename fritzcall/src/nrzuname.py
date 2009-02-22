@@ -30,19 +30,16 @@ def html2utf8(in_html):
 	else:
 		# first convert some WML codes; does not work?!?!
 		wmldefs = [
-				("&#xDF;", "ß"),
-				("&#xE4;", "ä"),
-				("&#xF6;", "ö"),
-				("&#xFC;", "ü"),
-				("&#xC4;", "Ä"),
-				("&#xD6;", "Ö"),
-				("&#xDC;", "Ü")
+				("&#xDF;", u"ß"),
+				("&#xE4;", u"ä"),
+				("&#xF6;", u"ö"),
+				("&#xFC;", u"ü"),
+				("&#xC4;", u"Ä"),
+				("&#xD6;", u"Ö"),
+				("&#xDC;", u"Ü")
 				]
 		for (a, b)in wmldefs:
-			try:
-				in_html = in_html.replace(a,b)
-			except UnicodeError:
-				pass
+			in_html = in_html.replace(a,b)
 
 		htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
 		entitydict = {}
@@ -69,6 +66,8 @@ def html2utf8(in_html):
 	return in_html
 
 def out(number, caller):
+	if not caller:
+		return
 	name = vorname = strasse = hnr = plz = ort = ""
 	lines = caller.split(', ')
 	found = re.match("(.+?)\s+(.+)", lines[0])
@@ -200,10 +199,10 @@ class ReverseLookupAndNotifier:
 		myprint("[ReverseLookupAndNotifier] Url to query: " + url)
 		url = url.encode("UTF-8", "replace")
 		self.currentWebsite = website
-		# I am not sure, whether setting the user-agent works this way
 		getPage(url,
 			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5"
 			).addCallback(self._gotPage).addErrback(self._gotError)
+
 
 	def _gotPage(self, page):
 		myprint("[ReverseLookupAndNotifier] _gotPage")
@@ -218,18 +217,18 @@ class ReverseLookupAndNotifier:
 			# myprint("[ReverseLookupAndNotifier] _gotPage: try entry")
 			details = []
 			for what in ["name", "street", "city", "zipcode"]:
-				# myprint("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( what, pat ))
 				pat = ".*?" + self.getPattern(entry, what)
+				myprint("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( what, pat ))
 				found = re.match(pat, page, re.S|re.M)
 				if found:
-					# myprint("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( what, found.group(2) ))
-					myprint(found.group(1))
+					myprint("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( what, found.group(1) ))
 					item = found.group(1).replace("&nbsp;"," ").replace("</b>","").replace(","," ")
-					item = html2utf8(item).decode("ISO-8859-1", "replace")
+					item = html2utf8(item)
 					newitem = item.replace("  ", " ")
 					while newitem != item:
 						item = newitem
 						newitem = item.replace("  ", " ")
+					myprint("[ReverseLookupAndNotifier] _gotPage: add to details: " + item)
 					details.append(item.strip())
 				else:
 					break
@@ -247,7 +246,6 @@ class ReverseLookupAndNotifier:
 				self.caller = self.caller.encode("UTF-8", "replace")
 				self.notifyAndReset()
 				return True
-				break
 		else:
 			self._gotError("[ReverseLookupAndNotifier] _gotPage: Nothing found at %s" %self.currentWebsite.getAttribute("name"))
 			
@@ -272,7 +270,11 @@ class ReverseLookupAndNotifier:
 	def notifyAndReset(self):
 		myprint("[ReverseLookupAndNotifier] notifyAndReset: Number: " + self.number + "; Caller: " + self.caller)
 		if self.caller:
-			self.outputFunction(self.number, self.caller.decode("utf-8").encode(self.charset))
+			try:
+				self.caller = self.caller.decode("utf-8").encode(self.charset)
+			except:
+				pass
+			self.outputFunction(self.number, self.caller)
 		else:
 			self.outputFunction(self.number, "")
 		if __name__ == '__main__':
@@ -285,7 +287,7 @@ if __name__ == '__main__':
 		ReverseLookupAndNotifier(sys.argv[1])
 		reactor.run() #@UndefinedVariable
 	elif (len(sys.argv) == 3):
-		# nrzuname.py Nummer SimpleOut
+		# nrzuname.py Nummer Charset
 		debug = False
-		ReverseLookupAndNotifier(sys.argv[1], simpleout)
+		ReverseLookupAndNotifier(sys.argv[1], simpleout, sys.argv[2])
 		reactor.run() #@UndefinedVariable

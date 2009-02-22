@@ -1,10 +1,11 @@
+# Zülfikar VEYİSOĞLU <zveyis@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-31 16:41+0100\n"
-"PO-Revision-Date: 2008-12-31 16:45+0100\n"
-"Last-Translator: Zülfikar Veyisoğlu <zveyis@gmail.com>\n"
+"PO-Revision-Date: 2009-02-08 12:17+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,9 +48,8 @@ msgid "CF Drive"
 msgstr "CF Sürücü"
 
 #. TRANSLATORS: keep it short, this is a button
-#, fuzzy
 msgid "Call"
-msgstr ""
+msgstr "Ara"
 
 msgid "Call monitoring"
 msgstr "Çağrı görüntüleme"
@@ -137,7 +137,7 @@ msgstr "Giden aramaları göster"
 
 #. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Do what?"
-msgstr ""
+msgstr "Ne yapılsın?"
 
 #, python-format
 msgid ""
@@ -153,7 +153,7 @@ msgstr ""
 "\n"
 "%(name)s?"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Do you really want to overwrite entry for %(number)s\n"
 "\n"
@@ -163,14 +163,13 @@ msgid ""
 "\n"
 "%(newname)s?"
 msgstr ""
-"Aşağıdaki kayıtta, belirtilen değişikliği yapmak istiyor musunuz?\n"
-"%(number)s\n"
+"%(number)s için tanımladığınız\n"
 "\n"
-"%(name)s\n"
+"%(name)s kaydını\n"
 "\n"
-"kaydını\n"
+"%(newname)s olarak\n"
 "\n"
-"%(newname)s kaydıyla?"
+"değiştirmek istiyor musunuz?"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Edit"
@@ -249,7 +248,7 @@ msgstr "Son 10 arama:\n"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Lookup"
-msgstr ""
+msgstr "Sorgula"
 
 msgid "MSN to show (separated by ,)"
 msgstr "MSN göster (virgülle ayrılmış)"
@@ -261,9 +260,8 @@ msgstr "Cevapsız"
 msgid "Missed calls"
 msgstr "Cevapsız aramalar"
 
-#, fuzzy
 msgid "Mute on call"
-msgstr "Giden aramalar"
+msgstr "Çağrı olduğunda sessize al"
 
 msgid "Name"
 msgstr "Ad"
@@ -333,7 +331,7 @@ msgstr "Caller ID'yi hizmet sağlayıcıdan sorgula (aşağıdan ülke seçin)"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Save"
-msgstr ""
+msgstr "Kaydet"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Search"
@@ -387,8 +385,7 @@ msgid "Vanity"
 msgstr "Belirleyici isim"
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr ""
-"FRITZ!Box'ta görüntülemeyi etkinleştirmek için #96*5* 'u aramanız gerekiyor!"
+msgstr "FRITZ!Box'ta görüntülemeyi etkinleştirmek için #96*5* 'u aramanız gerekiyor!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
@@ -468,10 +465,6 @@ msgstr "iş"
 #~ "%s(name)\n"
 #~ "\n"
 #~ "aransın mı?"
-
-#~ msgid "Can't create PhoneBook.txt"
-#~ msgstr "PhoneBook.txt oluşturulamıyor"
-
 #~ msgid ""
 #~ "Do you want to add a phonebook entry\n"
 #~ "\n"
@@ -488,7 +481,6 @@ msgstr "iş"
 #~ "olarak\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
-
 #~ msgid ""
 #~ "Do you want to add a phonebook entry for\n"
 #~ "\n"
@@ -497,6 +489,14 @@ msgstr "iş"
 #~ "%s kaydını\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
+#~ msgid "Reverse lookup for "
+#~ msgstr "Hizmet sağlayıcıdan isim sorgula : "
+#~ msgid "Reverse lookup not successful"
+#~ msgstr "İsim sorgulama başarısız"
+#~ msgid "Reverse lookup successful"
+#~ msgstr "İsim sorgulama başarılı"
+#~ msgid "Can't create PhoneBook.txt"
+#~ msgstr "PhoneBook.txt oluşturulamıyor"
 
 #, fuzzy
 #~ msgid ""
@@ -507,15 +507,6 @@ msgstr "iş"
 #~ "%s kaydını\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
-
 #~ msgid "Edit phonebook entry"
 #~ msgstr "Rehber kaydını düzelt"
 
-#~ msgid "Reverse lookup for "
-#~ msgstr "Hizmet sağlayıcıdan isim sorgula : "
-
-#~ msgid "Reverse lookup not successful"
-#~ msgstr "İsim sorgulama başarısız"
-
-#~ msgid "Reverse lookup successful"
-#~ msgstr "İsim sorgulama başarılı"
