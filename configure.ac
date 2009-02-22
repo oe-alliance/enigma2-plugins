@@ -74,6 +74,7 @@ vlcplayer/po/Makefile
 
 fritzcall/Makefile
 fritzcall/src/Makefile
+fritzcall/src/images/Makefile
 fritzcall/po/Makefile
 
 simplerss/Makefile
