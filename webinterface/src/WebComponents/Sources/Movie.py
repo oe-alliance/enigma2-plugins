@@ -76,7 +76,7 @@ class Movie( Source):
 				begin_string = "undefined"
 
 			if config.plugins.Webinterface.loadmovielength.value:
-				len =  info.getLength(serviceref)
+				len = info.getLength(serviceref)
 				if len > 0:
 					len = "%d:%02d" % (len / 60, len % 60)
 				else:
@@ -112,7 +112,7 @@ class Movie( Source):
 	def getText(self):
 		if self.func is self.DEL:
 			(result, text) = self.result
-			xml  = "<e2simplexmlresult>\n"
+			xml = "<e2simplexmlresult>\n"
 			if result:
 				xml += "<e2state>True</e2state>\n"
 			else:
@@ -131,14 +131,14 @@ class Movie( Source):
 
 	list = property(command)
 	lut = {"ServiceReference": 0
-		   ,"Title": 1
-		   ,"Description": 2
-		   ,"Time": 3
-		   ,"TimeString": 4
-		   ,"Length": 5
-		   ,"ServiceName": 6
-		   ,"Tags": 7
-		   ,"DescriptionExtended": 8
-		   ,"Filename": 9
-		   ,"Filesize": 10
-		   }
+			,"Title": 1
+			,"Description": 2
+			,"Time": 3
+			,"TimeString": 4
+			,"Length": 5
+			,"ServiceName": 6
+			,"Tags": 7
+			,"DescriptionExtended": 8
+			,"Filename": 9
+			,"Filesize": 10
+		}
