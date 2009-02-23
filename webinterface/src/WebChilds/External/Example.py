@@ -1,5 +1,5 @@
 #from Plugins.Extensions.WebInterface import __file__
-#from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild, RedirectorResource
+#from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 #
 #from twisted.python import util
 #
