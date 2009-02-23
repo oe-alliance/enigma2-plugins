@@ -13,6 +13,12 @@ from Uploader import UploadResource
 from ServiceListSave import ServiceList
 from RedirecToCurrentStream import RedirecToCurrentStreamResource
 
+from External.__init__ import importExternalModules
+externalChildren = []
+
+def addExternalChild(child):
+	externalChildren.append(child)
+
 class Toplevel(resource.Resource):
 	addSlash = True
 	def __init__(self,session):
@@ -20,7 +26,7 @@ class Toplevel(resource.Resource):
 		resource.Resource.__init__(self)
 
 		self.putChild("web", ScreenPage(self.session,util.sibpath(WebInterface.__file__, "web"))) # "/web/*"
-		self.putChild("web-data", static.File(util.sibpath(WebInterface.__file__, "web-data"))) # FIXME: web-data appears as webdata
+		self.putChild("web-data", static.File(util.sibpath(WebInterface.__file__, "web-data")))
 		self.putChild("file", FileStreamer())
 		self.putChild("grab", GrabResource())
 		self.putChild("ipkg", IPKGResource())
@@ -29,10 +35,18 @@ class Toplevel(resource.Resource):
 		self.putChild("upload", UploadResource())
 		self.putChild("servicelist", ServiceList(self.session))
 		self.putChild("streamcurrent", RedirecToCurrentStreamResource(session))
-
+			
 		if config.plugins.Webinterface.includemedia.value is True:
 			self.putChild("media", static.File("/media"))
 			self.putChild("hdd", static.File("/media/hdd"))
+			
+		
+		importExternalModules()
+
+		for child in externalChildren:
+			if len(child) == 2:
+				self.putChild(child[0], child[1])
+
 
 	def render(self, req):
 		fp = open(util.sibpath(WebInterface.__file__, "web-data/tpl/default")+"/index.html")
@@ -53,5 +67,4 @@ class RedirectorResource(resource.Resource):
 		resource.Resource.__init__(self)
 	def render(self, req):
 		return http.RedirectResponse(self.uri)
-
 
