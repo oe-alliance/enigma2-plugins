@@ -231,9 +231,9 @@ def check_passwd(name, passwd, pwfile=None):
 def _to64(v, n):
 	r = ''
 	while (n-1 >= 0):
-	r = r + DES_SALT[v & 0x3F]
-	v = v >> 6
-	n = n - 1
+		r = r + DES_SALT[v & 0x3F]
+		v = v >> 6
+		n = n - 1
 	return r
 
 def passcrypt_md5(passwd, salt=None, magic='$1$'):
@@ -261,32 +261,32 @@ def passcrypt_md5(passwd, salt=None, magic='$1$'):
 	final = ctx1.digest()
 
 	for i in range(len(passwd), 0 , -16):
-	if i > 16:
-		ctx.update(final)
-	else:
-		ctx.update(final[:i])
+		if i > 16:
+			ctx.update(final)
+		else:
+			ctx.update(final[:i])
 
 	i = len(passwd)
 	while i:
-	if i & 1:
-		ctx.update('\0')
-	else:
-		ctx.update(passwd[:1])
-	i = i >> 1
+		if i & 1:
+			ctx.update('\0')
+		else:
+			ctx.update(passwd[:1])
+		i = i >> 1
 	final = ctx.digest()
 
 	for i in range(1000):
-	ctx1 = md5_new()
-	if i & 1:
-		ctx1.update(passwd)
-	else:
-		ctx1.update(final)
-	if i % 3: ctx1.update(salt)
-	if i % 7: ctx1.update(passwd)
-	if i & 1:
-		ctx1.update(final)
-	else:
-		ctx1.update(passwd)
+		ctx1 = md5_new()
+		if i & 1:
+			ctx1.update(passwd)
+		else:
+			ctx1.update(final)
+		if i % 3: ctx1.update(salt)
+		if i % 7: ctx1.update(passwd)
+		if i & 1:
+			ctx1.update(final)
+		else:
+			ctx1.update(passwd)
 		final = ctx1.digest()
 
 	rv = magic + salt + '$'

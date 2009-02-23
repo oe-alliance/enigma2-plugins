@@ -46,7 +46,7 @@ class LocationsAndTags(Source):
 		xml = "<e2simplexmllist>\n"
 		if self.result:
 			for ele in self.result:
-		xml += "<e2simplexmlitem>%s</e2simplexmlitem>\n"%ele
+				xml += "<e2simplexmlitem>%s</e2simplexmlitem>\n"%ele
 		xml += "</e2simplexmllist>\n"
 		return xml
 

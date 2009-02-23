@@ -1,4 +1,4 @@
- Code for the AutoTimerPlugin
+# Code for the AutoTimerPlugin
 #from enigma import eServiceReference, iServiceInformation, eServiceCenter
 from Components.Sources.Source import Source
 #from ServiceReference import ServiceReference
