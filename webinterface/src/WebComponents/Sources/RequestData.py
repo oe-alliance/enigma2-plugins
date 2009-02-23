@@ -12,7 +12,7 @@ class RequestData(Source):
 	REMOTEPORT = 5
 	REMOTETYPE = 6
 	URI = 7
-	
+
 	def __init__(self, request, what = None):
 		Source.__init__(self)
 		self.request = request
@@ -20,7 +20,7 @@ class RequestData(Source):
 
 	def handleCommand(self, cmd):
 		pass
-		
+
 	def getHTML(self, id):
 		if self.what is self.HOST:
 			return self.request.host

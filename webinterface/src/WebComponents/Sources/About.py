@@ -1,4 +1,4 @@
-# Parts of Code and idea  by Homey
+# Parts of Code and idea by Homey
 from Components.Sources.Source import Source
 from Components.Harddisk import harddiskmanager
 from Components.NimManager import nimmanager
@@ -13,176 +13,170 @@ from enigma import iServiceInformation
 from Components.config import config
 
 class About( Source):
-    
-    def __init__(self, session):
-        Source.__init__(self)
-        self.session = session
-    
-    def handleCommand(self,cmd):
-        self.result = False,"unknown command"
-        
-    def command(self):
-        list = []
-        list.append(about.getVersionString()) 
+	def __init__(self, session):
+		Source.__init__(self)
+		self.session = session
 
+	def handleCommand(self,cmd):
+		self.result = False,"unknown command"
 
-        #Get Network Info
-        def ConvertIP(list):
-            if(len(list) == 4):
-                retstr = "%s.%s.%s.%s" %(list[0], list[1], list[2], list[3])
-            else:
-                retstr = "0.0.0.0"
-            return retstr
+	def command(self):
+		list = []
+		list.append(about.getVersionString())
 
-        
-        if iNetwork.getNumberOfAdapters > 0:
-            iface = iNetwork.getAdapterList()[0]
-            print "[WebComponents.About] iface: %s" %iface
-            list.append(iNetwork.getAdapterAttribute(iface, "mac"))
-            list.append(iNetwork.getAdapterAttribute(iface, "dhcp"))
-            list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "ip")))
-            list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "netmask")))
-            list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "gateway")))
-        else:
-            print "[WebComponents.About] no network iface configured!"
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
+		#Get Network Info
+		def ConvertIP(list):
+			if(len(list) == 4):
+				retstr = "%s.%s.%s.%s" %(list[0], list[1], list[2], list[3])
+			else:
+				retstr = "0.0.0.0"
+			return retstr
 
-        #Get FrontProcessor Version
-        fp_version = getFPVersion()
-        if fp_version is None:
-            fp_version = "?"
-        else:
-            fp_version = str(fp_version)
-        list.append(fp_version)
+		if iNetwork.getNumberOfAdapters > 0:
+			iface = iNetwork.getAdapterList()[0]
+			print "[WebComponents.About] iface: %s" %iface
+			list.append(iNetwork.getAdapterAttribute(iface, "mac"))
+			list.append(iNetwork.getAdapterAttribute(iface, "dhcp"))
+			list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "ip")))
+			list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "netmask")))
+			list.append(ConvertIP(iNetwork.getAdapterAttribute(iface, "gateway")))
+		else:
+			print "[WebComponents.About] no network iface configured!"
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
 
-        #Get Tuner Info
-        niminfo = ""
-        for nim in nimmanager.nimList():
-            info = nim.split(":")
-            
-            niminfo += "\n\t\t\t<e2nim>\n"
-            niminfo += "\t\t\t\t<name>%s</name>\n" %(info[0])
-            niminfo += "\t\t\t\t<type>%s</type>\n" %(info[1])
-            niminfo += "\t\t\t</e2nim>"
-            
-        list.append(niminfo)
+		#Get FrontProcessor Version
+		fp_version = getFPVersion()
+		if fp_version is None:
+			fp_version = "?"
+		else:
+			fp_version = str(fp_version)
+		list.append(fp_version)
 
-        #Get HDD Info
-        if len(harddiskmanager.hdd):
-            hdddata = harddiskmanager.hdd[0] # TODO, list more than the first harddisc if there are more than one. but this requires many changes in the way the webif generates the responses
-            hddinfo = "\n\t\t\t<model>"+hdddata.model()+"</model>\n"
-            hddinfo += "\t\t\t<capacity>"+hdddata.capacity()+"</capacity>\n"
-            hddinfo += "\t\t\t<free>"+str(hdddata.free())+" MB</free>"
-            list.append(hddinfo)
-        else:            
-            hddinfo = "\n\t\t\t<model>N/A</model>\n"
-            hddinfo += "\t\t\t<capacity>-</capacity>\n"
-            hddinfo += "\t\t\t<free>-</free>"
-            list.append(hddinfo)
+		#Get Tuner Info
+		niminfo = ""
+		for nim in nimmanager.nimList():
+			info = nim.split(":")
 
-        #Get Service Info
-        service = self.session.nav.getCurrentService()
+			niminfo += "\n\t\t\t<e2nim>\n"
+			niminfo += "\t\t\t\t<name>%s</name>\n" %(info[0])
+			niminfo += "\t\t\t\t<type>%s</type>\n" %(info[1])
+			niminfo += "\t\t\t</e2nim>"
 
-        if self.session.nav.getCurrentlyPlayingServiceReference() is not None:
-            Name = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()
-        else:
-            Name = "N/A"
-        list.append(Name)
+		list.append(niminfo)
 
-        if service is not None:
-            svinfo = service.info()
-            svfeinfo = service.frontendInfo()
-        else:
-            svinfo = None
-            svfeinfo = None
+		#Get HDD Info
+		if len(harddiskmanager.hdd):
+			hdddata = harddiskmanager.hdd[0] # TODO, list more than the first harddisc if there are more than one. but this requires many changes in the way the webif generates the responses
+			hddinfo = "\n\t\t\t<model>"+hdddata.model()+"</model>\n"
+			hddinfo += "\t\t\t<capacity>"+hdddata.capacity()+"</capacity>\n"
+			hddinfo += "\t\t\t<free>"+str(hdddata.free())+" MB</free>"
+			list.append(hddinfo)
+		else:
+			hddinfo = "\n\t\t\t<model>N/A</model>\n"
+			hddinfo += "\t\t\t<capacity>-</capacity>\n"
+			hddinfo += "\t\t\t<free>-</free>"
+			list.append(hddinfo)
 
-        # Get Service Info
-        if self.session.nav.getCurrentlyPlayingServiceReference() is not None:
-            list.append(svinfo.getInfoString(iServiceInformation.sProvider))
-            
-            aspect = svinfo.getInfo(iServiceInformation.sAspect)
-            if aspect in ( 1, 2, 5, 6, 9, 0xA, 0xD, 0xE ):
-                aspect = "4:3"
-            else:
-                aspect = "16:9"
-            list.append(aspect)
+		#Get Service Info
+		service = self.session.nav.getCurrentService()
 
-            width = svinfo and svinfo.getInfo(iServiceInformation.sVideoWidth) or -1
-            height = svinfo and svinfo.getInfo(iServiceInformation.sVideoHeight) or -1
-            videosize = "%dx%d" %(width, height)
-            list.append(videosize)
-            
-            list.append(hex(svinfo.getInfo(iServiceInformation.sNamespace)))
+		if self.session.nav.getCurrentlyPlayingServiceReference() is not None:
+			Name = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()
+		else:
+			Name = "N/A"
+		list.append(Name)
 
-            # Get PIDs
-            list.append(svinfo.getInfo(iServiceInformation.sVideoPID))
-            list.append(svinfo.getInfo(iServiceInformation.sAudioPID))
-            list.append(svinfo.getInfo(iServiceInformation.sPCRPID))
-            list.append(svinfo.getInfo(iServiceInformation.sPMTPID))
-            list.append(svinfo.getInfo(iServiceInformation.sTXTPID))
-            list.append(svinfo.getInfo(iServiceInformation.sTSID))
-            list.append(svinfo.getInfo(iServiceInformation.sONID))
-            list.append(svinfo.getInfo(iServiceInformation.sSID))
-        else:
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            list.append("N/A")
-            
-        ## webifversion
-        list.append(config.plugins.Webinterface.version.value)
-        
-        
-        #box model
-        fp = open("/proc/stb/info/model")
-        model = fp.read().lstrip().rstrip()
-        fp.close()
-        list.append(model)
-        #please remove unneeded debugoutpu while commiting #print list
-        
-        listR = []
-        listR.append(list)
-        
-        
-        return listR
+		if service is not None:
+			svinfo = service.info()
+			svfeinfo = service.frontendInfo()
+		else:
+			svinfo = None
+			svfeinfo = None
 
-    text = property(command)        
-    
-    list = property(command)
-    lut = {"enigmaVersion": 0
-           ,"lanMac": 1
-           ,"lanDHCP": 2
-           ,"lanIP": 3
-           ,"lanMask": 4
-           ,"lanGW": 5
-           ,"fpVersion": 6
-           ,"tunerInfo": 7
-           ,"hddInfo": 8
-           ,"serviceName": 9
-           ,"serviceProvider": 10
-           ,"serviceAspect": 11
-           ,"serviceVideosize": 12
-           ,"serviceNamespace": 13
-           ,"vPID": 14
-           ,"aPID": 15
-           ,"pcrID": 16
-           ,"pmtPID": 17
-           ,"txtPID": 18
-           ,"tsID": 19
-           ,"onID": 20
-           ,"sid": 21
-           ,"WebIfVersion": 22
-           ,"model": 23
-           }
+		# Get Service Info
+		if self.session.nav.getCurrentlyPlayingServiceReference() is not None:
+			list.append(svinfo.getInfoString(iServiceInformation.sProvider))
+
+			aspect = svinfo.getInfo(iServiceInformation.sAspect)
+			if aspect in ( 1, 2, 5, 6, 9, 0xA, 0xD, 0xE ):
+				aspect = "4:3"
+			else:
+				aspect = "16:9"
+			list.append(aspect)
+
+			width = svinfo and svinfo.getInfo(iServiceInformation.sVideoWidth) or -1
+			height = svinfo and svinfo.getInfo(iServiceInformation.sVideoHeight) or -1
+			videosize = "%dx%d" %(width, height)
+			list.append(videosize)
+
+			list.append(hex(svinfo.getInfo(iServiceInformation.sNamespace)))
+
+			# Get PIDs
+			list.append(svinfo.getInfo(iServiceInformation.sVideoPID))
+			list.append(svinfo.getInfo(iServiceInformation.sAudioPID))
+			list.append(svinfo.getInfo(iServiceInformation.sPCRPID))
+			list.append(svinfo.getInfo(iServiceInformation.sPMTPID))
+			list.append(svinfo.getInfo(iServiceInformation.sTXTPID))
+			list.append(svinfo.getInfo(iServiceInformation.sTSID))
+			list.append(svinfo.getInfo(iServiceInformation.sONID))
+			list.append(svinfo.getInfo(iServiceInformation.sSID))
+		else:
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+			list.append("N/A")
+
+		## webifversion
+		list.append(config.plugins.Webinterface.version.value)
+
+		#box model
+		fp = open("/proc/stb/info/model")
+		model = fp.read().lstrip().rstrip()
+		fp.close()
+		list.append(model)
+		#please remove unneeded debugoutpu while commiting #print list
+
+		listR = []
+		listR.append(list)
+
+		return listR
+
+	text = property(command)
+	list = property(command)
+	lut = {"enigmaVersion": 0
+			,"lanMac": 1
+			,"lanDHCP": 2
+			,"lanIP": 3
+			,"lanMask": 4
+			,"lanGW": 5
+			,"fpVersion": 6
+			,"tunerInfo": 7
+			,"hddInfo": 8
+			,"serviceName": 9
+			,"serviceProvider": 10
+			,"serviceAspect": 11
+			,"serviceVideosize": 12
+			,"serviceNamespace": 13
+			,"vPID": 14
+			,"aPID": 15
+			,"pcrID": 16
+			,"pmtPID": 17
+			,"txtPID": 18
+			,"tsID": 19
+			,"onID": 20
+			,"sid": 21
+			,"WebIfVersion": 22
+			,"model": 23
+			}

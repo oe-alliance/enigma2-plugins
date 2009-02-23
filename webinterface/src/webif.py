@@ -3,12 +3,12 @@ Version = '$Header$';
 
 # OK, this is more than a proof of concept
 # things to improve:
-#  - nicer code
-#  - screens need to be defined somehow else.
+#	- nicer code
+#	- screens need to be defined somehow else.
 #	I don't know how, yet. Probably each in an own file.
-#  - more components, like the channellist
-#  - better error handling
-#  - use namespace parser
+#	- more components, like the channellist
+#	- better error handling
+#	- use namespace parser
 from enigma import eServiceReference
 
 from Screens.Screen import Screen
@@ -146,7 +146,7 @@ class LocationsAndTagsWebScreen(WebScreen):
 class EPGWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		
+
 		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
 		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
 		self["EPGBOUQUETNOW"] = EPG(session,func=EPG.BOUQUETNOW)
@@ -154,7 +154,7 @@ class EPGWebScreen(WebScreen):
 		self["EPGSERVICENOW"] = EPG(session,func=EPG.SERVICENOW)
 		self["EPGSERVICENEXT"] = EPG(session,func=EPG.SERVICENEXT)
 		self["EPGBOUQUET"] = EPG(session,func=EPG.BOUQUET)
-		
+
 	def getServiceList(self, sRef):
 		self["ServiceList"].root = sRef
 
@@ -271,7 +271,7 @@ class RestartWebScreen(WebScreen):
 		plugin.restartWebserver(session)
 
 class GetPid(WebScreen):
-	  def __init__(self, session, request):
+	def __init__(self, session, request):
 		 WebScreen.__init__(self, session, request)
 		 from Components.Sources.StaticText import StaticText
 		 from enigma import iServiceInformation
@@ -524,7 +524,7 @@ class webifHandler(ContentHandler):
 	def start_convert(self, attrs):
 		ctype = attrs["type"]
 
-			# TODO: we need something better here
+		# TODO: we need something better here
 		if ctype[:4] == "web:": # for now
 			self.converter = eval(ctype[4:])
 		else:
@@ -623,7 +623,6 @@ class webifHandler(ContentHandler):
 		self.screens = [ ]
 
 def renderPage(stream, path, req, session):
-
 	# read in the template, create required screens
 	# we don't have persistense yet.
 	# if we had, this first part would only be done once.
