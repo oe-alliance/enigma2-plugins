@@ -19,7 +19,11 @@ from Plugins.Plugin import PluginDescriptor
 
 # Mainfunction
 def main(session, *args, **kwargs):
-	session.open(EPGSearch)
+	s = session.nav.getCurrentService()
+	info = s.info()
+	event = info.getEvent(0) # 0 = now, 1 = next
+	name = event and event.getEventName() or ''
+	session.open(EPGSearch, name, False)
 
 # Movielist
 def movielist(session, service, **kwargs):
@@ -28,15 +32,6 @@ def movielist(session, service, **kwargs):
 	name = info and info.getName(service) or ''
 
 	session.open(EPGSearch, name)
-
-# Event Info
-def eventinfo(session, servicelist, **kwargs):
-	s = session.nav.getCurrentService()
-	info = s.info()
-	event = info.getEvent(0) # 0 = now, 1 = next
-	name = event and event.getEventName() or ''
-
-	session.open(EPGSearch, name, False)
 
 def Plugins(**kwargs):
 	return [
@@ -49,7 +44,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(
 			name = _("Search EPG..."),
 			where = PluginDescriptor.WHERE_EVENTINFO,
-			fnc = eventinfo,
+			fnc = main,
 		),
 		PluginDescriptor(
 			name = "EPGSearch",
