@@ -11,7 +11,7 @@ class Movie( Source):
 	LIST = 0
 	DEL = 1
 	TAGS = 2
-	
+
 	def __init__(self, session, movielist, func = LIST):
 		Source.__init__(self)
 		self.func = func
@@ -22,66 +22,59 @@ class Movie( Source):
 		self.movielist.load(self.root, None)
 		self.cmd = ""
 		self.result = False, "Missing or Wrong Argument"
-	
+
 	def handleCommand(self, cmd):
 		if cmd is not None:
 			self.cmd = cmd
 			if self.func is self.DEL:
 				self.result = self.delMovie(cmd)
 			elif self.func is self.LIST:
-				self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + cmd['dirname'])
+				if cmd['dirname']:
+					self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + cmd['dirname'])
 				self.tagfilter = cmd['tag'] and [cmd['tag']] or []
-		   
+
 	def delMovie(self, param):
 #		print "[WebComponents.delMovie] %s" %param
-		
+
 		if param is None:
 			return False, "Missing Parameter: sRef"
-		
+
 		service = ServiceReference(param)
 		result = False
-		
+
 		if service is not None:
 			#mostly copied from Screens.MovieSelection
 			serviceHandler = eServiceCenter.getInstance()
 			offline = serviceHandler.offlineOperations(service.ref)
 			info = serviceHandler.info(service.ref)
 			name = info and info.getName(service.ref) or "this recording"
-			
+
 			if offline is not None:
 				if not offline.deleteFromDisk(0):
 					result = True
-				
+
 			if result == False:
 				return result, "Could not delete Movie '%s'" %name
-			else: 
+			else:
 				return result, "Movie '%s' deleted" %name
-		
-		return result, "Illegal Parameter Value: sRef - '%s'" %param  
-		
-		
 
-   
+		return result, "Illegal Parameter Value: sRef - '%s'" %param
+
 	def command(self):
 		self.movielist.reload(root=self.root,filter_tags = self.tagfilter)
 		list=[]
 
+		tag = self.cmd['tag']
+		tag = tag and tag.lower()
 		for (serviceref, info, begin, unknown) in self.movielist.list:
-			movie = []
-			movie.append(serviceref.toString())
-			movie.append(ServiceReference(serviceref).getServiceName())
-			movie.append(info.getInfoString(serviceref, iServiceInformation.sDescription))
 			rtime = info.getInfo(serviceref, iServiceInformation.sTimeCreate)
-			movie.append(rtime)
-			
+
 			if rtime > 0:
 				t = FuzzyTime(rtime)
 				begin_string = t[0] + ", " + t[1]
 			else:
 				begin_string = "undefined"
-			movie.append(begin_string)
-			
-			
+
 			if config.plugins.Webinterface.loadmovielength.value:
 				len =  info.getLength(serviceref)
 				if len > 0:
@@ -90,38 +83,40 @@ class Movie( Source):
 					len = "?:??"
 			else:
 				len="disabled"
-			movie.append(len)
-			
+
 			sourceERef =info.getInfoString(serviceref, iServiceInformation.sServiceref)
 			sourceRef= ServiceReference(sourceERef)
-			
-			movie.append(sourceRef.getServiceName())
-			movie.append(info.getInfoString(serviceref, iServiceInformation.sTags))
+
 			event = info.getEvent(serviceref)
-			if event is not None:
-				text = event.getEventName()
-				short = event.getShortDescription()
-				ext = event.getExtendedDescription()
-				movie.append(ext)
-			else:
-				movie.append("")
+			ext = event and event.getExtendedDescription() or ""
+
 			filename = "/"+"/".join(serviceref.toString().split("/")[1:])
-			movie.append(filename)
-			movie.append(os_stat(filename)[6])
-			tag = self.cmd['tag'].lower()
-			if not tag or info.getInfoString(serviceref, iServiceInformation.sTags).lower().find(tag)>=0:
+
+			if not tag or tag in info.getInfoString(serviceref, iServiceInformation.sTags).lower():
 				""" add movie only to list, if a given tag is applied to the movie """
-				list.append(movie)
+				list.append([
+					serviceref.toString(),
+					ServiceReference(serviceref).getServiceName(),
+					info.getInfoString(serviceref, iServiceInformation.sDescription),
+					rtime,
+					begin_string,
+					len,
+					sourceRef.getServiceName(),
+					info.getInfoString(serviceref, iServiceInformation.sTags),
+					ext,
+					filename,
+					os_stat(filename)[6]
+				])
 		return list
 
 	def getText(self):
-		if self.func is self.DEL: 
+		if self.func is self.DEL:
 			(result, text) = self.result
 			xml  = "<e2simplexmlresult>\n"
 			if result:
 				xml += "<e2state>True</e2state>\n"
 			else:
-				xml += "<e2state>False</e2state>\n"			
+				xml += "<e2state>False</e2state>\n"
 			xml += "<e2statetext>%s</e2statetext>\n" % text
 			xml += "</e2simplexmlresult>\n"
 			return xml
@@ -131,9 +126,9 @@ class Movie( Source):
 				xml += "<e2movietag>%s</e2movietag>\n"%tag
 			xml += "</e2movietags>\n"
 			return xml
-			
-	text = property(getText)		
-	
+
+	text = property(getText)
+
 	list = property(command)
 	lut = {"ServiceReference": 0
 		   ,"Title": 1
