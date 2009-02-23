@@ -3,7 +3,7 @@ from twisted.python import util
 
 from Components.config import config
 
-from Plugins.Extensions import WebInterface
+from Plugins.Extensions.WebInterface import __file__ 
 from Screenpage import ScreenPage
 from FileStreamer import FileStreamer
 from Screengrab import GrabResource
@@ -25,8 +25,8 @@ class Toplevel(resource.Resource):
 		self.session = session
 		resource.Resource.__init__(self)
 
-		self.putChild("web", ScreenPage(self.session,util.sibpath(WebInterface.__file__, "web"))) # "/web/*"
-		self.putChild("web-data", static.File(util.sibpath(WebInterface.__file__, "web-data")))
+		self.putChild("web", ScreenPage(self.session,util.sibpath(__file__, "web"))) # "/web/*"
+		self.putChild("web-data", static.File(util.sibpath(__file__, "web-data")))
 		self.putChild("file", FileStreamer())
 		self.putChild("grab", GrabResource())
 		self.putChild("ipkg", IPKGResource())
@@ -49,7 +49,7 @@ class Toplevel(resource.Resource):
 
 
 	def render(self, req):
-		fp = open(util.sibpath(WebInterface.__file__, "web-data/tpl/default")+"/index.html")
+		fp = open(util.sibpath(__file__, "web-data/tpl/default")+"/index.html")
 		s = fp.read()
 		fp.close()
 		return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
