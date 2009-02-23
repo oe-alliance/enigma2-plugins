@@ -16,10 +16,15 @@ from Components.MultiContent import MultiContentEntryText
 from Components.ActionMap import ActionMap
 
 from Components.Network import iNetwork
-def initInterfaceConfig(i = None):
+def initInterfaceConfig(i = None, new = False):
     choices = getConfiguredIPs()
-    if i is None:
+
+    if i is None and new is True:
+        i = config.plugins.Webinterface.interfacecount.value
+    elif i is None:
         i = config.plugins.Webinterface.interfacecount.value - 1
+        
+    print "[WebIfConfig.initInterfaceConfig] i is %s" %i
     config.plugins.Webinterface.interfaces.append(ConfigSubsection())
     config.plugins.Webinterface.interfaces[i].disabled = ConfigYesNo(default = False)
     config.plugins.Webinterface.interfaces[i].address = ConfigSelection(choices, default=choices[0])
@@ -59,9 +64,9 @@ def initConfig():
         
         config.plugins.Webinterface.interfacecount.value = 1
         config.plugins.Webinterface.interfacecount.save()        
-    else:    
-        print "[WebInterface.init] %s" %config.plugins.Webinterface.interfaces
-        for i in range(0, config.plugins.Webinterface.interfacecount.value):
+    else:           
+        for i in range(0, ( config.plugins.Webinterface.interfacecount.value ) ):
+            print "[WebIfConfig.initConfig] i is %s" %i
             initInterfaceConfig(i)
 
 
@@ -253,7 +258,7 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
         self["key_blue"] = Button(_("Delete"))
 
         if ifacenum is None:
-            i = initInterfaceConfig()
+            i = initInterfaceConfig(None, True)
         else:
             i = ifacenum
         cfglist = []
