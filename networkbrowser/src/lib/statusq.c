@@ -146,18 +146,18 @@ my_uint32_t get32(void* data) {
 };
 
 my_uint16_t get16(void* data) {
-        union {
-                char bytes[2];
-                my_uint16_t all;
-        } x;
+	union {
+		char bytes[2];
+		my_uint16_t all;
+	} x;
 
-        memcpy(x.bytes, data, 2);
-        return(ntohs(x.all));
+	memcpy(x.bytes, data, 2);
+	return(ntohs(x.all));
 };
 
 struct nb_host_info* parse_response(char* buff, int buffsize) {
 	struct nb_host_info* hostinfo = NULL;
-        nbname_response_footer_t* response_footer;
+	nbname_response_footer_t* response_footer;
 	nbname_response_header_t* response_header;
 	int name_table_size;
 	int offset = 0;
@@ -223,15 +223,16 @@ struct nb_host_info* parse_response(char* buff, int buffsize) {
         
 	if( offset+sizeof(response_header->number_of_names) >= buffsize) goto broken_packet;
 	response_header->number_of_names = *(typeof(response_header->number_of_names)*)(buff+offset);
-        offset+=sizeof(response_header->number_of_names);
+  offset+=sizeof(response_header->number_of_names);
 
 	/* Done with packet header - it is okay */
 	
 	name_table_size = (response_header->number_of_names) * (sizeof(struct nbname));
 	if( offset+name_table_size >= buffsize) goto broken_packet;
 	
-	if((hostinfo->names = malloc(name_table_size))==NULL) return NULL;
+	if((hostinfo->names = malloc(name_table_size))== NULL) return NULL;
 	memcpy(hostinfo->names, buff + offset, name_table_size);
+	//printf("DEBUG: %s , %d\n", hostinfo->names, name_table_size);
 	
 	offset+=name_table_size;
 

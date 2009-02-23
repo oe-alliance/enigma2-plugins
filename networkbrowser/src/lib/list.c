@@ -75,8 +75,7 @@ int compare(struct list_item* item1, struct list_item* item2) {
 	if(item1==NULL) return 1;
 	if(item1->content == item2->content) return 0;
 	if(item1->content > item2->content) return 1;
-	if(item1->content < item2->content) return -1;
-	return 0;
+	return -1;
 };
 
 int insert(struct list* lst, unsigned long content) {

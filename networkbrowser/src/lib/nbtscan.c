@@ -32,6 +32,7 @@
 #include <sys/time.h>
 #include <string.h>
 #include <unistd.h>
+#include <getopt.h>
 #if HAVE_STDINT_H
 #include <stdint.h>
 #endif
@@ -67,7 +68,7 @@ int python_hostinfo(struct in_addr addr, const struct nb_host_info* hostinfo, ne
 	strncpy(nInfo[pos].domain, hostinfo->names[1].ascii_name, 15);
 	sprintf(nInfo[pos].service,"%s", (char*)getnbservicename(service, unique, hostinfo->names[0].ascii_name));
 	if(hostinfo->footer) {
-		sprintf(nInfo[pos].mac,"%02x-%02x-%02x-%02x-%02x-%02x",
+		sprintf(nInfo[pos].mac,"%02x:%02x:%02x:%02x:%02x:%02x",
 		hostinfo->footer->adapter_address[0], hostinfo->footer->adapter_address[1],
 		hostinfo->footer->adapter_address[2], hostinfo->footer->adapter_address[3],
 		hostinfo->footer->adapter_address[4], hostinfo->footer->adapter_address[5]);
@@ -163,8 +164,10 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
   FD_SET(sock, fdsw);
 
   /* timeout is in milliseconds */
-  select_timeout.tv_sec = timeout / 1000;
-  select_timeout.tv_usec = (timeout % 1000) * 1000; /* Microseconds */
+  //select_timeout.tv_sec = timeout / 1000;
+  //select_timeout.tv_usec = (timeout % 1000) * 1000; /* Microseconds */
+	select_timeout.tv_sec = 60; /* Default 1 min to survive ARP timeouts */
+	select_timeout.tv_usec = 0;
 
   addr_size = sizeof(struct sockaddr_in);
 
@@ -207,6 +210,7 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
 	  continue;
 	};
 	gettimeofday(&recv_time, NULL);
+	memset(&hostinfo, 0, sizeof(hostinfo));
 	hostinfo = (struct nb_host_info*)parse_response(buff, size);
 	if(!hostinfo) {
 	  err_print("parse_response returned NULL", quiet);
@@ -223,9 +227,12 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
 	  srtt += delta / 8;
 	  if(delta < 0.0) delta = - delta;
 	  rttvar += (delta - rttvar) / 4 ;
-		python_hostinfo(dest_sockaddr.sin_addr, hostinfo, nInfo, pos);
-		pos ++;
-		
+		if (hostinfo->names == 0x0) {
+			printf("hostinfo->names == NULL\n");
+		} else {
+			python_hostinfo(dest_sockaddr.sin_addr, hostinfo, nInfo, pos);
+			pos ++;
+		}
 	};
 	free(hostinfo);
   };
@@ -303,6 +310,9 @@ int netzInfo(char *pythonIp, netinfo *nInfo) {
   };
 
   delete_list(scanned);
+	if(buff) {
+		free(buff);
+	}
 	return 0;
   exit(0);
 };

@@ -61,7 +61,7 @@ int is_ip(char* string, struct ip_range* range) {
    Returns 1 on success, 0 on failure */
 int is_range1(char* string, struct ip_range* range) {
 	char* separator;
-	unsigned long mask;
+	unsigned int mask;
 	char* ip;
 
 	if((ip = (char *)malloc(strlen(string)+1))==NULL) 
