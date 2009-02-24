@@ -12,7 +12,7 @@ config.plugins.epgsearch.history = ConfigSet(choices = [])
 config.plugins.epgsearch.encoding = ConfigText(default = 'ISO8859-15', fixed_size = False)
 
 # Plugin
-from EPGSearch import EPGSearch
+from EPGSearch import EPGSearch, EPGSearchEPGSelection
 
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
@@ -33,6 +33,11 @@ def movielist(session, service, **kwargs):
 
 	session.open(EPGSearch, name)
 
+# Event Info
+def eventinfo(session, *args, **kwargs):
+	ref = session.nav.getCurrentlyPlayingServiceReference()
+	session.open(EPGSearchEPGSelection, ref, True)
+
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
@@ -44,7 +49,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(
 			name = _("Search EPG..."),
 			where = PluginDescriptor.WHERE_EVENTINFO,
-			fnc = main,
+			fnc = eventinfo,
 		),
 		PluginDescriptor(
 			name = "EPGSearch",

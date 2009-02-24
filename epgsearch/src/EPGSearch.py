@@ -196,7 +196,8 @@ class EPGSearchChannelSelection(SimpleChannelSelection):
 			self.session.openWithCallback(
 				self.epgClosed,
 				EPGSearchEPGSelection,
-				ref
+				ref,
+				False
 			)
 
 	def epgClosed(self, ret = None):
@@ -204,10 +205,11 @@ class EPGSearchChannelSelection(SimpleChannelSelection):
 			self.close(ret)
 
 class EPGSearchEPGSelection(EPGSelection):
-	def __init__(self, session, ref):
+	def __init__(self, session, ref, openPlugin):
 		EPGSelection.__init__(self, session, ref)
 		self.skinName = "EPGSelection"
 		self["key_green"].setText(_("Search"))
+		self.openPlugin = openPlugin
 
 	def infoKeyPressed(self):
 		self.timerAdd()
@@ -219,5 +221,11 @@ class EPGSearchEPGSelection(EPGSelection):
 		if not evt:
 			return
 
-		self.close(evt.getEventName())
+		if self.openPlugin:
+			self.session.open(
+				EPGSearch,
+				evt.getEventName()
+			)
+		else:
+			self.close(evt.getEventName())
 
