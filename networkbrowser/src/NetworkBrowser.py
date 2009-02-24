@@ -259,7 +259,7 @@ class NetworkBrowser(Screen):
 			self.network[x[2]].append((NetworkDescriptor(name = x[1], description = x[2]), x))
 		self.network.keys().sort()
 		for x in self.network.keys():
-			if self.network[x][0][1][3] == '00-00-00-00-00-00':
+			if self.network[x][0][1][3] == '00:00:00:00:00:00':
 				self.device = 'unix'
 			else:
 				self.device = 'windows'
