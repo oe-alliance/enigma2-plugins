@@ -48,7 +48,8 @@ def getConfiguredIPs():
 	return choices
 
 def initConfig():
-	if config.plugins.Webinterface.interfacecount.value == 0:
+	interfacecount = config.plugins.Webinterface.interfacecount.value
+	if interfacecount == 0:
 		# setting default interface
 		# 0.0.0.0:80 auth=False
 		config.plugins.Webinterface.interfaces.append(ConfigSubsection())
@@ -65,9 +66,11 @@ def initConfig():
 		config.plugins.Webinterface.interfacecount.value = 1
 		config.plugins.Webinterface.interfacecount.save()
 	else:
-		for i in range(0, ( config.plugins.Webinterface.interfacecount.value ) ):
+		i = 0
+		while i < interfacecount:
 			print "[WebIfConfig.initConfig] i is %s" %i
 			initInterfaceConfig(i)
+			i += 1
 
 class WebIfConfigScreen(ConfigListScreen,Screen):
 	skin = """
@@ -84,19 +87,16 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
 		</screen>""" % _("Webinterface: Main Setup")
 
 	def __init__(self, session, args = 0):
-		self.session = session
 		Screen.__init__(self, session)
-		self.list = []
-		self.list.append(getConfigListEntry(_("Start Webinterface"), config.plugins.Webinterface.enable))
-		self.list.append(getConfigListEntry(_("Enable /media"), config.plugins.Webinterface.includemedia))
-		self.list.append(getConfigListEntry(_("Allow zapping via Webinterface"), config.plugins.Webinterface.allowzapping))
-		self.list.append(getConfigListEntry(_("Autowrite timer"), config.plugins.Webinterface.autowritetimer))
-		self.list.append(getConfigListEntry(_("Load movie-length"), config.plugins.Webinterface.loadmovielength))
+		l = [
+			getConfigListEntry(_("Start Webinterface"), config.plugins.Webinterface.enable),
+			getConfigListEntry(_("Enable /media"), config.plugins.Webinterface.includemedia),
+			getConfigListEntry(_("Allow zapping via Webinterface"), config.plugins.Webinterface.allowzapping),
+			getConfigListEntry(_("Autowrite timer"), config.plugins.Webinterface.autowritetimer),
+			getConfigListEntry(_("Load movie-length"), config.plugins.Webinterface.loadmovielength)
+		]
 
-		for i in range(0, config.plugins.Webinterface.interfacecount.value):
-			c = config.plugins.Webinterface.interfaces[i]
-
-		ConfigListScreen.__init__(self, self.list)
+		ConfigListScreen.__init__(self, l)
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
 		self["key_yellow"] = Button(_("Interfaces"))
@@ -168,11 +168,13 @@ class WebIfInterfaceListConfigScreen(Screen):
 
 	def updateList(self):
 		ifaceguilist = []
-		for i in range(0, config.plugins.Webinterface.interfacecount.value):
-			c= config.plugins.Webinterface.interfaces[i]
-			res = [ i ] #550,400
-			res.append(MultiContentEntryText(pos=(5, 0), size=(150, 25), font=0, text=c.address.value))
-			res.append(MultiContentEntryText(pos=(120, 0),size=(50, 25), font=0,text=str(c.port.value)))
+		i = 0
+		for c in config.plugins.Webinterface.interfaces:
+			res = [
+				i, #550,400
+				MultiContentEntryText(pos=(5, 0), size=(150, 25), font=0, text=c.address.value),
+				MultiContentEntryText(pos=(120, 0),size=(50, 25), font=0,text=str(c.port.value))
+			]
 
 			if c.usessl.value:
 				res.append(MultiContentEntryText(pos=(170, 0),size=(200, 25), font=0,text=_("yes"),color=0x0000FF00))
@@ -189,6 +191,8 @@ class WebIfInterfaceListConfigScreen(Screen):
 			else:
 				res.append(MultiContentEntryText(pos=(400, 0),size=(160, 25), font=0,text=_("no"),color=0x00FF0000))
 			ifaceguilist.append(res)
+			i += 1
+
 		ifaceguilist.sort()
 		self["ifacelist"].l.setList(ifaceguilist)
 
@@ -258,7 +262,7 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
 			i = initInterfaceConfig(None, True)
 		else:
 			i = ifacenum
-		cfglist = []
+
 		try:
 			current = config.plugins.Webinterface.interfaces[i]
 		except IndexError,e:
@@ -269,11 +273,13 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
 		#reloading current network devices
 		current.address = ConfigSelection(getConfiguredIPs(), default=current.address.value)
 
-		cfglist.append(getConfigListEntry(_("Disabled"), current.disabled))
-		cfglist.append(getConfigListEntry(_("Address"), current.address))
-		cfglist.append(getConfigListEntry(_("Port"), current.port))
-		cfglist.append(getConfigListEntry(_("Require Authorization"), current.useauth))
-		cfglist.append(getConfigListEntry(_("SSL Encryption"), current.usessl))
+		cfglist = [
+			getConfigListEntry(_("Disabled"), current.disabled),
+			getConfigListEntry(_("Address"), current.address),
+			getConfigListEntry(_("Port"), current.port),
+			getConfigListEntry(_("Require Authorization"), current.useauth),
+			getConfigListEntry(_("SSL Encryption"), current.usessl)
+		]
 		ConfigListScreen.__init__(self, cfglist, session)
 		self.ifacenum = i
 
