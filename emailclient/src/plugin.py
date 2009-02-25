@@ -518,7 +518,7 @@ def main(session, **kwargs):
         session2 = session
         session.openWithCallback(MessageCB, MessageBox, 'In order of missing standart python library files\ni have copied the nessary files now.\nBut you have to restart your Box\n to apply this!', type = MessageBox.TYPE_INFO)
     else:
-    session.open(EmailScreen)
+        session.open(EmailScreen)
 
 def MessageCB(*args):
     global session2
