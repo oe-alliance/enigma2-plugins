@@ -94,7 +94,8 @@ def startWebserver(session):
 		print "start twisted logfile, writing to %s" % DEBUGFILE
 		startLogging(open(DEBUGFILE,'w'))
 
-	for c in config.plugins.Webinterface.interfaces:
+	for i in range(0, config.plugins.Webinterface.interfacecount.value):
+		c = config.plugins.Webinterface.interfaces[i]
 		if c.disabled.value is False:
 			startServerInstance(session,c.address.value,c.port.value,c.useauth.value,c.usessl.value)
 		else:
