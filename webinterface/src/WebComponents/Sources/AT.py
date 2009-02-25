@@ -1,9 +1,5 @@
 # Code for the AutoTimerPlugin
-#from enigma import eServiceReference, iServiceInformation, eServiceCenter
 from Components.Sources.Source import Source
-#from ServiceReference import ServiceReference
-#from Components.FileList import FileList
-#from os import path as os_path
 
 class AT( Source ):
 	LIST = 0
@@ -25,113 +21,103 @@ class AT( Source ):
 			elif self.func is self.WRITE:
 				self.result = self.writeTimer(cmd)
 
-	def timerList(self,param):
-		print "timerList:",param
+	def timerList(self):
+		print "timerList"
+
+		try:
+			from Plugins.Extensions.AutoTimer.plugin import autotimer
+
+			if not autotimer:
+				from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+				autotimer = AutoTimer()
+		except ImportError:
+			return []
 
 		returnList = []
 
-		from Components.PluginComponent import plugins
-		from Plugins.Plugin import PluginDescriptor#, PluginEntryComponent
-		pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU)
-		autoTimerAvailable = False
-		for plugin in pluginlist:
-			if plugin.name == "AutoTimer":
-				#if PluginEntryComponent(plugin).name == "AutoTimer":
-				autoTimerAvailable = True
+		for timer in autotimer.getTimerList():
+			print "TIMER: ", timer
+			innerList = [
+				timer.getName(),
+				timer.getMatch()
+			]
 
-		if autoTimerAvailable:
-			print "AutoTimer vorhanden"
-			from Plugins.Extensions.AutoTimer.plugin import autotimer
+			if timer.hasAfterEvent():
+				innerList.append(timer.getAfterEvent()) # 2
+			else:
+				innerList.append("") # 2
 
-			if autotimer is None:
-				from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-				autotimer = AutoTimer()
-			#timers = autotimer.getTimerList
-			#AutoTimerComponent
-			from Plugins.Extensions.AutoTimer.AutoTimerComponent import AutoTimerComponent
-			for timer in autotimer.getTimerList():
-				print "TIMER: ", timer
-				innerList = []
-				innerList.append(timer.getName())
-				innerList.append(timer.getMatch())
+			#excludes
+			innerList.extend((
+				timer.getExcludedTitle(),
+				timer.getExcludedShort(),
+				timer.getExcludedDescription(),
+				timer.getExcludedDays(),
+			))
 
-				if timer.hasAfterEvent():
-					innerList.append(timer.getAfterEvent()) # 2
-				else:
-					innerList.append("") # 2
+			#includes
+			innerList.extend((
+				timer.getIncludedTitle(),
+				timer.getIncludedShort(),
+				timer.getIncludedDescription(),
+				timer.getIncludedDays(),
+			))
 
-				#excludes
-				innerList.append(timer.getExcludedTitle())
-				innerList.append(timer.getExcludedShort())
-				innerList.append(timer.getExcludedDescription())
-				innerList.append(timer.getExcludedDays())
+			# services
+			innerList.extend((
+				timer.getServices(), # 11
+				timer.getBouquets() # 12
+			))
 
-				#inclides
-				innerList.append(timer.getIncludedTitle())
-				innerList.append(timer.getIncludedShort())
-				innerList.append(timer.getIncludedDescription())
-				innerList.append(timer.getIncludedDays())
+			if timer.hasTimespan():
+				innerList.extend((
+					timer.getTimespanBegin(), # 13
+					timer.getTimespanEnd() # 14
+				))
+			else:
+				innerList.extend(("", "")) # 13, 14
 
-				# filterSET
-				self.excludes = (
-								 timer.getExcludedTitle(),
-								 timer.getExcludedShort(),
-								 timer.getExcludedDescription(),
-								 timer.getExcludedDays()
-				)
-				self.includes = (
-								 timer.getIncludedTitle(),
-								 timer.getIncludedShort(),
-								 timer.getIncludedDescription(),
-								 timer.getIncludedDays()
-				)
-				innerList.append(timer.getServices()) # 11
-				innerList.append(timer.getBouquets()) # 12
-				if timer.hasTimespan():
-					innerList.append(timer.getTimespanBegin()) # 13
-					innerList.append(timer.getTimespanEnd()) # 14
-				else:
-					innerList.append("") # 13
-					innerList.append("") # 14
+			if timer.hasDuration():
+				innerList.append(timer.getDuration()) # 15
+			else:
+				innerList.append("") # 15
 
-				if timer.hasDuration():
-					innerList.append(timer.getDuration()) # 15
-				else:
-					innerList.append("") # 15
+			if timer.hasCounter():
+				innerList.extend((
+					timer.getCounter(), # 16
+					timer.getCounterLeft() # 17
+				))
+			else:
+				innerList.extend((0, 0)) # 16, 17
 
-				if timer.hasCounter():
-					innerList.append(timer.getCounter()) # 16
-					innerList.append(timer.getCounterLeft()) # 17
-				else:
-					innerList.append(0) # 16
-					innerList.append(0) # 17
+			innerList.append(timer.getCounterLimit()) # 18
 
-				innerList.append(timer.getCounterLimit()) # 18
+			if timer.hasDestination():
+				innerList.append(timer.destination) # 19
+			else:
+				innerList.append("/hdd/movie/") # 19
 
-				if timer.hasDestination():
-					innerList.append(timer.hasDestination()) # 19
-				else:
-					innerList.append("/hdd/movie/") # 19
+			if timer.hasCounterFormatString():
+				innerList.append(timer.getCounterFormatString()) # 20
+			else:
+				innerList.append("") # 20
 
-				if timer.hasCounterFormatString():
-					innerList.append(timer.getCounterFormatString()) # 20
-				else:
-					innerList.append("") # 20
+			innerList.extend((
+				timer.getLastBegin(), # 21
+				timer.getJustplay(), # 22
+				timer.getAvoidDuplicateDescription() # 23
+			))
 
-				innerList.append(timer.getLastBegin()) # 21
-				innerList.append(timer.getJustplay()) # 22
-				innerList.append(timer.getAvoidDuplicateDescription()) # 23
+			if timer.hasTags():
+				innerList.append(timer.getTags()) # 24
+			else:
+				innerList.append("") # 24
 
-				if timer.hasTags():
-					innerList.append(timer.getTags()) # 24
-				else:
-					innerList.append("") # 24
+			print "Enabled", timer.getEnabled()
+			innerList.append(timer.getEnabled()) # 25
+			innerList.append("off") # 26
 
-				print "Enabled", timer.getEnabled()
-				innerList.append(timer.getEnabled()) # 25
-				innerList.append("off") # 26
-
-				returnList.append(innerList)
+			returnList.append(innerList)
 
 		return returnList
 
@@ -148,10 +134,7 @@ class AT( Source ):
 
 		# TODO: fix error handling
 
-	def getList(self):
-		return self.result
-
-	list = property(getList)
+	list = property(timerList)
 	lut = {"Name": 0
 			,"Match": 1
 			,"AfterEvent": 2
