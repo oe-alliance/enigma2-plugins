@@ -3,7 +3,6 @@
 # $Author$
 # $Revision$
 # $Date$
-# $Id$
 #==============================
 from Screens.Screen import Screen #@UnresolvedImport
 from Screens.MessageBox import MessageBox #@UnresolvedImport
@@ -12,7 +11,7 @@ from Screens.InputBox import InputBox #@UnresolvedImport
 from Screens import Standby #@UnresolvedImport
 from Screens.HelpMenu import HelpableScreen #@UnresolvedImport
 
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT #@UnresolvedImport
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT #@UnresolvedImport
 
 from Components.MenuList import MenuList #@UnresolvedImport
 from Components.ActionMap import ActionMap #@UnresolvedImport
@@ -28,8 +27,6 @@ from Components.ConfigList import ConfigListScreen #@UnresolvedImport
 from Plugins.Plugin import PluginDescriptor #@UnresolvedImport
 from Tools import Notifications #@UnresolvedImport
 from Tools.NumericalTextInput import NumericalTextInput #@UnresolvedImport
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
-from Tools.LoadPixmap import LoadPixmap #@UnresolvedImport
 
 from twisted.internet import reactor #@UnresolvedImport
 from twisted.internet.protocol import ReconnectingClientFactory #@UnresolvedImport
@@ -39,14 +36,19 @@ from twisted.web.client import getPage #@UnresolvedImport
 from urllib import urlencode 
 import re, time, os
 
-from nrzuname import ReverseLookupAndNotifier, html2utf8
-import FritzOutlookCSV, FritzLDIF
-from . import _, debug #@UnresolvedImport
+from nrzuname import ReverseLookupAndNotifier
+
+import gettext
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
+try:
+	_ = gettext.translation('FritzCall', resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/locale"), [config.osd.language.getText()]).gettext
+except IOError:
+	pass
 
 from enigma import getDesktop #@UnresolvedImport
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
-DESKTOP_SKIN = config.skin.primary_skin.value.replace("/skin.xml", "")
+DESKTOP_SKIN = config.skin.primary_skin.value.replace("/skin.xml","")
 XXX = 0 # TODO: Platzhalter für fullscreen SD skin
 #
 # this is pure magic.
@@ -54,41 +56,41 @@ XXX = 0 # TODO: Platzhalter für fullscreen SD skin
 # the second if SD (720x576),
 # else something scaled accordingly
 #
-def scaleH(y2, y1):
-	return scale(y2, y1, 1280, 720, DESKTOP_WIDTH)
-def scaleV(y2, y1):
-	return scale(y2, y1, 720, 576, DESKTOP_HEIGHT)
-def scale(y2, y1, x2, x1, x):
-	return (y2 - y1) * (x - x1) / (x2 - x1) + y1
+def scaleH(y2,y1):
+	return scale(y2,y1,1280,720,DESKTOP_WIDTH)
+def scaleV(y2,y1):
+	return scale(y2,y1,720,576,DESKTOP_HEIGHT)
+def scale(y2,y1,x2,x1,x):
+	return (y2-y1)*(x-x1)/(x2-x1)+y1
 
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.enable = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.muteOnCall = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.hostname = ConfigText(default="fritz.box", fixed_size=False)
-config.plugins.FritzCall.afterStandby = ConfigSelection(choices=[("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
-config.plugins.FritzCall.filter = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.filtermsn = ConfigText(default="", fixed_size=False)
+config.plugins.FritzCall.enable = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.muteOnCall = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.hostname = ConfigText(default = "fritz.box", fixed_size = False)
+config.plugins.FritzCall.afterStandby = ConfigSelection(choices = [("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
+config.plugins.FritzCall.filter = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.filtermsn = ConfigText(default = "", fixed_size = False)
 config.plugins.FritzCall.filtermsn.setUseableChars('0123456789,')
-config.plugins.FritzCall.showOutgoing = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.timeout = ConfigInteger(default=15, limits=(0, 60))
-config.plugins.FritzCall.lookup = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.internal = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.fritzphonebook = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.phonebook = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.addcallers = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.phonebookLocation = ConfigSelection(choices=[("/etc/enigma2", _("Flash")), ("/media/usb", _("USB Stick")), ("/media/cf", _("CF Drive")), ("/media/hdd", _("Harddisk"))])
-config.plugins.FritzCall.password = ConfigPassword(default="", fixed_size=False)
-config.plugins.FritzCall.extension = ConfigText(default='1', fixed_size=False)
+config.plugins.FritzCall.showOutgoing = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.timeout = ConfigInteger(default = 15, limits = (0,60))
+config.plugins.FritzCall.lookup = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.internal = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.fritzphonebook = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.phonebook = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.addcallers = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.phonebookLocation = ConfigSelection(choices = [("/etc/enigma2/PhoneBook.txt", _("Flash")), ("/media/usb/PhoneBook.txt", _("USB Stick")), ("/media/cf/PhoneBook.txt", _("CF Drive")), ("/media/hdd/PhoneBook.txt", _("Harddisk"))])
+config.plugins.FritzCall.password = ConfigPassword(default = "", fixed_size = False)
+config.plugins.FritzCall.extension = ConfigText(default = '1', fixed_size = False)
 config.plugins.FritzCall.extension.setUseableChars('0123456789')
-config.plugins.FritzCall.showType = ConfigEnableDisable(default=True)
-config.plugins.FritzCall.showShortcut = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.showVanity = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.prefix = ConfigText(default="", fixed_size=False)
+config.plugins.FritzCall.showType = ConfigEnableDisable(default = True)
+config.plugins.FritzCall.showShortcut = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.showVanity = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.prefix = ConfigText(default = "", fixed_size = False)
 config.plugins.FritzCall.prefix.setUseableChars('0123456789')
-config.plugins.FritzCall.fullscreen = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.fullscreen = ConfigEnableDisable(default = False)
+config.plugins.FritzCall.debug = ConfigEnableDisable(default = False)
 
 countryCodes = [
 	("0049", _("Germany")),
@@ -98,7 +100,7 @@ countryCodes = [
 	("0041", _("Switzerland")),
 	("0043", _("Austria"))
 	]
-config.plugins.FritzCall.country = ConfigSelection(choices=countryCodes)
+config.plugins.FritzCall.country = ConfigSelection(choices = countryCodes)
 
 FBF_ALL_CALLS = "."
 FBF_IN_CALLS = "1"
@@ -109,10 +111,10 @@ fbfCallsChoices = {FBF_ALL_CALLS: _("All calls"),
 				   FBF_MISSED_CALLS: _("Missed calls"),
 				   FBF_OUT_CALLS: _("Outgoing calls")
 				   }
-config.plugins.FritzCall.fbfCalls = ConfigSelection(choices=fbfCallsChoices)
+config.plugins.FritzCall.fbfCalls = ConfigSelection(choices = fbfCallsChoices)
 
-config.plugins.FritzCall.name = ConfigText(default="", fixed_size=False)
-config.plugins.FritzCall.number = ConfigText(default="", fixed_size=False)
+config.plugins.FritzCall.name = ConfigText(default = "", fixed_size = False)
+config.plugins.FritzCall.number= ConfigText(default = "", fixed_size = False)
 config.plugins.FritzCall.number.setUseableChars('0123456789')
 
 def initDebug():
@@ -121,10 +123,56 @@ def initDebug():
 	except:
 		pass
 
+# from time import localtime()
+def debug(message):
+	# ltim = localtime()
+	# headerstr = "%04d%02d%02d %02d:%02d " %(ltim[0],ltim[1],ltim[2],ltim[3],ltim[4])
+	# message = headerstr + message
+	if config.plugins.FritzCall.debug.value:
+		deb = open("/tmp/FritzDebug.log", "aw")
+		deb.write(message + "\n")
+		deb.close()
+
+def html2utf8(in_html):
+	try:
+		import htmlentitydefs
+
+		# TODO: first convert some WML codes; does not work?!?!
+		# in_html = in_html.replace("&#xDF;;", "ß").replace("&#xE4;", "ä").replace("&#xF6;", "ö").replace("&#xFC;", "ü").replace("&#xC4;", "Ä").replace("&#xD6;", "Ö").replace("&#xDC;", "Ü")
+
+		htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
+		entitydict = {}
+		entities = htmlentitynamemask.finditer(in_html)
+		for x in entities:
+			entitydict[x.group(1)] = x.group(2)
+		for key, name in entitydict.items():
+			try:
+				entitydict[key] = htmlentitydefs.name2codepoint[name]
+			except KeyError:
+				debug("[FritzCallhtml2utf8] KeyError " + key + "/" + name)
+				pass
+
+		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
+		entities = htmlentitynumbermask.finditer(in_html)
+		for x in entities:
+			entitydict[x.group(1)] = x.group(2)
+		for key, codepoint in entitydict.items():
+			try:
+				in_html = in_html.replace(key, (unichr(int(codepoint)).encode('utf8', "replace")))
+			except ValueError:
+				debug( "[FritzCallhtml2utf8] ValueError " + key + "/" + str(codepoint))
+				pass
+	except ImportError:
+		try:
+			return in_html.replace("&amp;", "&").replace("&szlig;", "ß").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
+		except UnicodeDecodeError:
+			pass
+	return in_html
+
 class FritzCallFBF:
 	def __init__(self):
 		debug("[FritzCallFBF] __init__")
-		self.callScreen = None
+		self.callScreen= None
 		self.loggedIn = False
 		self.Callback = None
 		self.timestamp = 0
@@ -140,7 +188,7 @@ class FritzCallFBF:
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 
 	def errorLogin(self, error):
-		text = _("FRITZ!Box Login failed! - Error: %s") % error
+		text = _("FRITZ!Box Login failed! - Error: %s") %error
 		self.notify(text)
 
 	def _gotPageLogin(self, html):
@@ -163,22 +211,22 @@ class FritzCallFBF:
 			traceback.print_exc(file=sys.stdout)
 			#raise e
 
-	def login(self, callback=None):
+	def login(self, callback = None):
 		debug("[FritzCallFBF] Login")
 		if config.plugins.FritzCall.password.value != "":
 			if self.callScreen:
 				self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("login"))
-			parms = "login:command/password=%s" % (config.plugins.FritzCall.password.value)
-			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
+			parms = "login:command/password=%s" %(config.plugins.FritzCall.password.value)
+			url = "http://%s/cgi-bin/webcm" %(config.plugins.FritzCall.hostname.value)
 			getPage(url,
 				method="POST",
-				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
+				headers = {'Content-Type': "application/x-www-form-urlencoded",'Content-Length': str(len(parms))
 						}, postdata=parms).addCallback(self._gotPageLogin).addCallback(callback).addErrback(self.errorLogin)
 		elif callback:
 			callback()
 
 	def errorLoad(self, error):
-		text = _("Could not load phonebook from FRITZ!Box - Error: %s") % error
+		text = _("Could not load phonebook from FRITZ!Box - Error: %s") %error
 		self.notify(text)
 
 	def _gotPageLoad(self, html):
@@ -198,15 +246,15 @@ class FritzCallFBF:
 			self.login(self._loadFritzBoxPhonebook)
 
 	def _loadFritzBoxPhonebook(self, html=None):
-			parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de', 'var:pagename':'fonbuch', 'var:menu':'fon'})
-			url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
+			parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de','var:pagename':'fonbuch','var:menu':'fon'})
+			url = "http://%s/cgi-bin/webcm?%s" %(config.plugins.FritzCall.hostname.value, parms)
 
 			getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
 
 	def parseFritzBoxPhonebook(self, html):
 		debug("[FritzCallFBF] parseFritzBoxPhonebook")
 
-		table = html2utf8(html.replace("\xa0", " ").decode("ISO-8859-1", "replace"))
+		table = html2utf8(html.replace("\xa0"," ").decode("ISO-8859-1", "replace"))
 		if re.search('TrFonName', table):
 			#===============================================================================
 			#				 New Style: 7170 / 7270 (FW 54.04.58, 54.04.63-11941) 
@@ -232,11 +280,11 @@ class FritzCallFBF:
 					type = found.group(1)
 					if config.plugins.FritzCall.showType.value:
 						if type == "mobile":
-							thisname = thisname + " (" + _("mobile") + ")"
+							thisname = thisname + " (" +_("mobile") + ")"
 						elif type == "home":
-							thisname = thisname + " (" + _("home") + ")"
+							thisname = thisname + " (" +_("home") + ")"
 						elif type == "work":
-							thisname = thisname + " (" + _("work") + ")"
+							thisname = thisname + " (" +_("work") + ")"
 
 					if config.plugins.FritzCall.showShortcut.value and found.group(3):
 						thisname = thisname + ", " + _("Shortcut") + ": " + found.group(3)
@@ -246,10 +294,10 @@ class FritzCallFBF:
 					thisnumber = found.group(2).strip()
 					thisname = html2utf8(thisname.strip())
 					if thisnumber:
-						debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname, thisnumber))
+						debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" %(thisname, thisnumber))
 						phonebook.phonebook[thisnumber] = thisname
 					else:
-						debug("[FritzCallFBF] ignoring empty number for %s" % thisname)
+						debug("[FritzCallFBF] ignoring empty number for %s" %thisname)
 					continue
 
 		elif re.search('TrFon', table):
@@ -265,25 +313,25 @@ class FritzCallFBF:
 				if config.plugins.FritzCall.showShortcut.value and found.group(3):
 					name = name + ", " + _("Shortcut") + ": " + found.group(3)
 				if config.plugins.FritzCall.showVanity.value and found.group(4):
-					name = name + ", " + _("Vanity") + ": " + found.group(4)
+					name = name + ", " +_("Vanity") +": " + found.group(4)
 				if thisnumber:
 					name = html2utf8(name)
-					debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (name, thisnumber))
+					debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" %(name, thisnumber))
 					phonebook.phonebook[thisnumber] = name
 				else:
-					debug("[FritzCallFBF] ignoring empty number for %s" % name)
+					debug("[FritzCallFBF] ignoring empty number for %s" %name)
 				continue
 		else:
 			self.notify(_("Could not parse FRITZ!Box Phonebook entry"))
 
 	def errorCalls(self, error):
-		text = _("Could not load calls from FRITZ!Box - Error: %s") % error
+		text = _("Could not load calls from FRITZ!Box - Error: %s") %error
 		self.notify(text)
 
-	def _gotPageCalls(self, csv=""):
+	def _gotPageCalls(self, csv = ""):
 		def _resolveNumber(number):
 			if number.isdigit():
-				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0] == "0": number = number[1:]
+				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0]=="0": number = number[1:]
 				# strip CbC prefix
 				if config.plugins.FritzCall.country.value == '0049':
 					if re.match('^0100\d\d', number):
@@ -315,7 +363,7 @@ class FritzCallFBF:
 				self.notify(text)
 				return
 
-			csv = csv.decode('iso-8859-1', 'replace').encode('utf-8', 'replace')
+			csv = csv.decode('iso-8859-1','replace').encode('utf-8','replace')
 			lines = csv.splitlines()
 			self.callList = lines
 		elif self.callList:
@@ -393,11 +441,11 @@ class FritzCallFBF:
 		debug("[FritzCallFBF] _getCalls")
 		if self.callScreen:
 			self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("preparing"))
-		parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de', 'var:pagename':'foncalls', 'var:menu':'fon'})
-		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
+		parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de','var:pagename':'foncalls','var:menu':'fon'})
+		url = "http://%s/cgi-bin/webcm?%s" %(config.plugins.FritzCall.hostname.value, parms)
 		getPage(url).addCallback(self._getCalls1).addErrback(self.errorCalls)
 
-	def _getCalls1(self, html=""):
+	def _getCalls1(self, html = ""):
 		#
 		# finally we should have successfully lgged in and filled the csv
 		#
@@ -405,7 +453,7 @@ class FritzCallFBF:
 		if self.callScreen:
 			self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("finishing"))
 		parms = urlencode({'getpage':'../html/de/FRITZ!Box_Anrufliste.csv'})
-		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
+		url = "http://%s/cgi-bin/webcm?%s" %(config.plugins.FritzCall.hostname.value, parms)
 		getPage(url).addCallback(self._gotPageCalls).addErrback(self.errorCalls)
 
 	def dial(self, number):
@@ -414,7 +462,7 @@ class FritzCallFBF:
 		self.login(self._dial)
 		
 	def _dial(self, html=None):
-		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+		url = "http://%s/cgi-bin/webcm" %config.plugins.FritzCall.hostname.value
 		parms = urlencode({
 			'getpage':'../html/de/menus/menu2.html',
 			# 'id':'uiPostForm',
@@ -430,28 +478,28 @@ class FritzCallFBF:
 		getPage(url,
 			method="POST",
 			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
-			headers={
+			headers = {
 					'Content-Type': "application/x-www-form-urlencoded",
 					'Content-Length': str(len(parms))},
 			postdata=parms).addCallback(self._okDial).addErrback(self._errorDial)
 
 	def _okDial(self, html):
 		debug("[FritzCallFBF] okDial")
-		linkP = open("/tmp/FritzCallDialOK.htm", "w")
+		linkP =  open("/tmp/FritzCallDialOK.htm", "w")
 		linkP.write(html)
 		linkP.close()
 
 	def _errorDial(self, error):
-		debug("[FritzCallFBF] errorDial: $s" % error)
-		linkP = open("/tmp/FritzCallDialError.htm", "w")
+		debug("[FritzCallFBF] errorDial: $s" %error)
+		linkP =  open("/tmp/FritzCallDialError.htm", "w")
 		linkP.write(error)
 		linkP.close()
-		text = _("Dialling failed - Error: %s") % error
+		text = _("Dialling failed - Error: %s") %error
 		self.notify(text)
 
 	def hangup(self):
 		''' hangup call on port; not used for now '''
-		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+		url = "http://%s/cgi-bin/webcm" %config.plugins.FritzCall.hostname.value
 		parms = urlencode({
 			#'getpage':'../html/de/menus/menu2.html',
 			'id':'uiPostForm',
@@ -466,28 +514,28 @@ class FritzCallFBF:
 		debug("[FritzCallFBF] hangup url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
 			method="POST",
-			headers={
+			headers = {
 					'Content-Type': "application/x-www-form-urlencoded",
 					'Content-Length': str(len(parms))},
 			postdata=parms)
 
-fritzbox = FritzCallFBF()
 
+fritzbox = FritzCallFBF()
 
 class FritzDisplayCalls(Screen, HelpableScreen):
 
 
-	def __init__(self, session, text=""):
+	def __init__(self, session, text = ""):
 		if config.plugins.FritzCall.fullscreen.value:
 			self.width = DESKTOP_WIDTH
 			self.height = DESKTOP_HEIGHT
 			backMainPng = ""
 			if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/menu/back-main.png")):
 				backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
-			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1/menu/back-main.png")):
-				backMainPng = "Kerni-HD1/menu/back-main.png"
+			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
+				backMainPng = "Kerni-HD1-picon/menu/back-main.png"
 			if backMainPng:
-					backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" % (self.width, self.height, backMainPng)
+					backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" %(self.width, self.height, backMainPng)
 			else:
 				backMainLine = ""
 			debug("[FritzDisplayCalls] backMainLine: " + backMainLine)
@@ -519,23 +567,23 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				</screen>""" % (
 							self.width, self.height, _("Phone calls"),
 							backMainLine,
-							scaleH(1130, XXX), scaleV(40, XXX), scaleH(80, XXX), scaleV(26, XXX), scaleV(26, XXX), # time
-							scaleH(900, XXX), scaleV(70, XXX), scaleH(310, XXX), scaleV(22, XXX), scaleV(20, XXX), # date
-							"FritzCall " + _("Phone calls"), scaleH(500, XXX), scaleV(63, XXX), scaleH(330, XXX), scaleV(30, XXX), scaleV(27, XXX), # eLabel
-							scaleH(80, XXX), scaleV(150, XXX), scaleH(280, XXX), scaleV(200, XXX), scaleV(22, XXX), # statusbar
-							scaleH(420, XXX), scaleV(120, XXX), scaleH(790, XXX), scaleV(438, XXX), # entries
-							scaleH(450, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # red
-							scaleH(640, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # green
-							scaleH(830, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # yellow
-							scaleH(1020, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # blue
-							scaleH(480, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # red
-							scaleH(670, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # green
-							scaleH(860, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # yellow
-							scaleH(1050, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # blue
-							scaleH(120, XXX), scaleV(430, XXX), scaleH(150, XXX), scaleV(110, XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/fritz.png") # Fritz Logo size and pixmap
-														)
+							scaleH(1130,XXX), scaleV(40,XXX), scaleH(80,XXX), scaleV(26,XXX), scaleV(26,XXX), # time
+							scaleH(900,XXX), scaleV(70,XXX), scaleH(310,XXX), scaleV(22,XXX), scaleV(20,XXX), # date
+							"FritzCall " + _("Phone calls"), scaleH(500,XXX), scaleV(63,XXX), scaleH(330,XXX), scaleV(30,XXX), scaleV(27,XXX), # eLabel
+							scaleH(80,XXX), scaleV(150,XXX), scaleH(280,XXX), scaleV(200,XXX), scaleV(22,XXX), # statusbar
+							scaleH(420,XXX), scaleV(120,XXX), scaleH(790,XXX), scaleV(438,XXX), # entries
+							scaleH(450,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # red
+							scaleH(640,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # green
+							scaleH(830,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # yellow
+							scaleH(1020,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # blue
+							scaleH(480,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # red
+							scaleH(670,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # green
+							scaleH(860,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # yellow
+							scaleH(1050,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # blue
+							scaleH(120,XXX), scaleV(430,XXX), scaleH(150,XXX), scaleV(110,XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
+							)
 		else:
-			self.width = scaleH(1100, 570)
+			self.width = scaleH(1100,570)
 			debug("[FritzDisplayCalls] width: " + str(self.width))
 			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.skin = """
@@ -545,80 +593,72 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 					<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
 					<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="#aaaaaa" transparent="1" />
 					<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
-					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-					<widget name="key_red" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-					<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-					<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-					<widget name="key_blue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+					<widget name="key_red" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="red" />
+					<widget name="key_green" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="green" />
+					<widget name="key_yellow" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="yellow" />
+					<widget name="key_blue" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="blue" />
 				</screen>""" % (
-							scaleH(90, 75), scaleV(100, 78), # position 
-							scaleH(1100, 570), scaleV(560, 430), # size
+							scaleH(90,75), scaleV(100,78), # position 
+							scaleH(1100,570), scaleV(560,430), # size
 							_("Phone calls"),
-							scaleH(1100, 570), # eLabel width
-							scaleH(40, 5), scaleV(10, 5), # statusbar position
-							scaleH(1050, 560), scaleV(25, 22), # statusbar size
-							scaleV(22, 21), # statusbar font size
-							scaleV(40, 28), # eLabel position vertical
-							scaleH(1100, 570), # eLabel width
-							scaleH(40, 5), scaleV(55, 40), # entries position
-							scaleH(1040, 560), scaleV(458, 340), # entries size
-							scaleV(518, 390), # eLabel position vertical
-							scaleH(1100, 570), # eLabel width
-							scaleH(20, 5), scaleV(525, 395), # widget red
-							scaleH(290, 145), scaleV(525, 395), # widget green
-							scaleH(560, 285), scaleV(525, 395), # widget yellow
-							scaleH(830, 425), scaleV(525, 395), # widget blue
-							scaleH(20, 5), scaleV(525, 395), scaleV(24, 21), # widget red
-							scaleH(290, 145), scaleV(525, 395), scaleV(24, 21), # widget green
-							scaleH(560, 285), scaleV(525, 395), scaleV(24, 21), # widget yellow
-							scaleH(830, 425), scaleV(525, 395), scaleV(24, 21), # widget blue
-														)
+							scaleH(1100,570), # eLabel width
+							scaleH(40,5), scaleV(10,5), # statusbar position
+							scaleH(1050,560), scaleV(25,22), # statusbar size
+							scaleV(22,21), # statusbar font size
+							scaleV(40,28), # eLabel position vertical
+							scaleH(1100,570), # eLabel width
+							scaleH(40,5), scaleV(55,40), # entries position
+							scaleH(1040,560), scaleV(458,340), # entries size
+							scaleV(518,390), # eLabel position vertical
+							scaleH(1100,570), # eLabel width
+							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget red
+							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget green
+							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget yellow
+							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget blue
+							)
 
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
 		# TRANSLATORS: keep it short, this is a button
-		self["key_yellow"] = Button(_("All"))
+		self["key_red"] = Button(_("All"))
 		# TRANSLATORS: keep it short, this is a button
-		self["key_red"] = Button(_("Missed"))
+		self["key_green"] = Button(_("Missed"))
 		# TRANSLATORS: keep it short, this is a button
-		self["key_blue"] = Button(_("Incoming"))
+		self["key_yellow"] = Button(_("Incoming"))
 		# TRANSLATORS: keep it short, this is a button
-		self["key_green"] = Button(_("Outgoing"))
+		self["key_blue"] = Button(_("Outgoing"))
 
 		self["setupActions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
-			"yellow": self.displayAllCalls,
-			"red": self.displayMissedCalls,
-			"blue": self.displayInCalls,
-			"green": self.displayOutCalls,
+			"red": self.displayAllCalls,
+			"green": self.displayMissedCalls,
+			"yellow": self.displayInCalls,
+			"blue": self.displayOutCalls,
 			"cancel": self.ok,
-			"ok": self.showEntry, }, - 2)
+			"ok": self.showEntry,}, -2)
 
 		# TRANSLATORS: this is a help text, keep it short
 		self.helpList.append((self["setupActions"], "OkCancelActions", [("ok", _("Show details of entry"))]))
 		# TRANSLATORS: this is a help text, keep it short
 		self.helpList.append((self["setupActions"], "OkCancelActions", [("cancel", _("Quit"))]))
 		# TRANSLATORS: this is a help text, keep it short
-		self.helpList.append((self["setupActions"], "ColorActions", [("yellow", _("Display all calls"))]))
+		self.helpList.append((self["setupActions"], "ColorActions", [("red", _("Display all calls"))]))
 		# TRANSLATORS: this is a help text, keep it short
-		self.helpList.append((self["setupActions"], "ColorActions", [("red", _("Display missed calls"))]))
+		self.helpList.append((self["setupActions"], "ColorActions", [("green", _("Display missed calls"))]))
 		# TRANSLATORS: this is a help text, keep it short
-		self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("Display incoming calls"))]))
+		self.helpList.append((self["setupActions"], "ColorActions", [("yellow", _("Display incoming calls"))]))
 		# TRANSLATORS: this is a help text, keep it short
-		self.helpList.append((self["setupActions"], "ColorActions", [("green", _("Display outgoing calls"))]))
+		self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("Display outgoing calls"))]))
 
 		self["statusbar"] = Label(_("Getting calls from FRITZ!Box..."))
-		self["entries"] = MenuList([], True, content=eListboxPythonMultiContent)
-		fontSize = scaleV(22, 18)
-		fontHeight = scaleV(24, 20)
-		self["entries"].l.setFont(0, gFont("Regular", fontSize))
+		self["entries"] = MenuList([], True, content = eListboxPythonMultiContent)
+		fontSize = scaleV(22,16)
+		fontHeight = scaleV(24,20)
+		self["entries"].l.setFont(0, gFont("Console", fontSize))
 		self["entries"].l.setItemHeight(fontHeight)
 
-		debug("[FritzDisplayCalls] init: '''%s'''" % config.plugins.FritzCall.fbfCalls.value)
+		debug("[FritzDisplayCalls] init: '''%s'''" %config.plugins.FritzCall.fbfCalls.value)
 		self.display()
 
 	def ok(self):
@@ -651,28 +691,21 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		debug("[FritzDisplayCalls] gotCalls")
 		self.updateStatus(self.header + " (" + str(len(callList)) + ")")
 		sortlist = []
+		# TODO: colculate number of chars, we can display
+		noChars = scaleV(60,40)
 		for (number, date, remote, direct, here) in callList:
+			while (len(remote) + len(here)) > noChars:
+				if len(remote) > len(here):
+					remote = remote[:-1]
+				else:
+					here = here[:-1]
 			found = re.match("(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
 			if found: date = found.group(1) + found.group(2)
 			if direct == FBF_OUT_CALLS:
-				dir = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callout.png"))
-			elif direct == FBF_IN_CALLS:
-				dir = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callin.png"))
+				message = date + " " + remote + " -> " + here
 			else:
-				dir = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callinfailed.png"))
-			dateFieldWidth = scaleH(150,100)
-			dirFieldWidth = 16
-			remoteFieldWidth = scaleH(250,100)
-			scrollbarWidth = scaleH(90,45)
-			fieldWidth = self.width -dateFieldWidth -5 -dirFieldWidth -5 -remoteFieldWidth -scrollbarWidth -5
-			# debug("[FritzDisplayCalls] gotCalls: d: %d; f: %d; d: %d; r: %d" %(dateFieldWidth, fieldWidth, dirFieldWidth, remoteFieldWidth))
-			sortlist.append([number,
-							 (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, dateFieldWidth, scaleV(24,20), 0, RT_HALIGN_LEFT, date),
-							 (eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, dateFieldWidth+5, 0, dirFieldWidth, 16, dir),
-							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5, 0, fieldWidth, scaleV(24,20), 0, RT_HALIGN_LEFT, here),
-							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5, 0, remoteFieldWidth, scaleV(24,20), 0, RT_HALIGN_RIGHT, remote)
-							 ])
-
+				message = date + " " + here + " -> " + remote
+			sortlist.append([number, (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, self.width-10, 20, 0, RT_HALIGN_LEFT, message)])
 		self["entries"].setList(sortlist)
 
 	def updateStatus(self, text):
@@ -697,7 +730,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				# we do not even have a number...
 				self.session.open(MessageBox,
 						  _("UNKNOWN"),
-						  type=MessageBox.TYPE_INFO)
+						  type = MessageBox.TYPE_INFO)
 
 
 class FritzOfferAction(Screen):
@@ -719,12 +752,12 @@ class FritzOfferAction(Screen):
 						width,
 						height,
 						_("Do what?"),
-						width - 10,
-						height - 10 - 40,
-						height - 5 - 40, height - 5 - 40, height - 5 - 40, height - 5 - 40, height - 5 - 40, height - 5 - 40 # Buttons
-												) 
+						width -10,
+						height -10 -40,
+						height -5 -40, height -5 -40, height -5 -40, height -5 -40, height -5 -40, height -5 -40 # Buttons
+						) 
 
-	def __init__(self, session, parent, number, name=""):
+	def __init__(self, session, parent, number, name = ""):
 		Screen.__init__(self, session)
 	
 		# TRANSLATORS: keep it short, this is a button
@@ -742,49 +775,20 @@ class FritzOfferAction(Screen):
 			"green": self.call,
 			"yellow": self.add,
 			"cancel": self.exit,
-			"ok": self.exit, }, - 2)
+			"ok": self.exit,}, -2)
 
-		self["text"] = Label(number + "\n\n" + name.replace(", ", "\n"))
+		self["text"] = Label(number + "\n\n" + name.replace(", ","\n"))
 		self.actualNumber = number
 		self.actualName = name
 		self.parent = parent
-		self.lookupState = 0
 
 	def lookup(self):
-		phonebookLocation = config.plugins.FritzCall.phonebookLocation.value
-		if self.lookupState == 0:
-			self.lookupState = 1
-			self["text"].setText(self.actualNumber + "\n\n" + _("Reverse searching..."))
-			ReverseLookupAndNotifier(self.actualNumber, self.lookedUp, "UTF-8", config.plugins.FritzCall.country.value)
-			return
-		if self.lookupState == 1 and os.path.exists(phonebookLocation + "/PhoneBook.csv"):
-			self["text"].setText(self.actualNumber + "\n\n" + _("Searching in Outlook export..."))
-			self.lookupState = 2
-			self.lookedUp(self.actualNumber, FritzOutlookCSV.findNumber(self.actualNumber, phonebookLocation + "/PhoneBook.csv")) #@UndefinedVariable
-			return
-		else:
-			self.lookupState = 2
-		if self.lookupState == 2 and os.path.exists(phonebookLocation + "/PhoneBook.ldif"):
-			self["text"].setText(self.actualNumber + "\n\n" + _("Searching in LDIF..."))
-			self.lookupState = 0
-			FritzLDIF.findNumber(self.actualNumber, open(phonebookLocation + "/PhoneBook.ldif"), self.lookedUp)
-			return
-		else:
-			self.lookupState = 0
-			self.lookup()
+		ReverseLookupAndNotifier(self.actualNumber, self.lookedUp, "UTF-8", config.plugins.FritzCall.country.value)
 
 	def lookedUp(self, number, name):
-		if not name:
-			if self.lookupState == 1:
-				name = _("No result from reverse lookup")
-			elif self.lookupState == 2:
-				name = _("No result from Outlook export")
-			else:
-				name = _("No result from LDIF")
 		self.actualNumber = number
 		self.actualName = name
-		message = number + "\n\n" + name.replace(", ", "\n")
-		self["text"].setText(str(message))
+		self["text"].setText(number + "\n\n" + name.replace(", ","\n"))
 
 	def call(self):
 		fritzbox.dial(self.actualNumber)
@@ -800,7 +804,6 @@ class FritzOfferAction(Screen):
 
 class FritzCallPhonebook:
 	def __init__(self):
-		debug("[FritzCallPhonebook] init")
 		self.phonebook = {}
 		self.reload()
 
@@ -811,19 +814,18 @@ class FritzCallPhonebook:
 		if not config.plugins.FritzCall.enable.value:
 			return
 
-		if config.plugins.FritzCall.phonebook.value and os.path.exists(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt"):
-			debug("[FritzCallPhonebook] reload: read PhoneBook.txt")
+		if config.plugins.FritzCall.phonebook.value and os.path.exists(config.plugins.FritzCall.phonebookLocation.value):
 			phonebookTxtCorrupt = False
-			for line in open(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt"):
+			for line in open(config.plugins.FritzCall.phonebookLocation.value):
 				try:
 					line = line.decode("utf-8")
 				except UnicodeDecodeError:
 					try:
 						line = line.decode("iso-8859-1")
-						debug("[FritzCallPhonebook] Fallback to ISO-8859-1 in %s" % line)
+						debug("[FritzCallPhonebook] Fallback to ISO-8859-1 in %s" %line)
 						phonebookTxtCorrupt = True
 					except:
-						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
+						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" %line)
 						phonebookTxtCorrupt = True
 				line = line.encode("utf-8")
 				if re.match("^\d+#.*$", line):
@@ -832,59 +834,28 @@ class FritzCallPhonebook:
 						if not self.phonebook.has_key(number):
 							self.phonebook[number] = name
 					except ValueError: # how could this possibly happen?!?!
-						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
+						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" %line)
 						phonebookTxtCorrupt = True
 				else:
-					debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
+					debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" %line)
 					phonebookTxtCorrupt = True
 
 			if phonebookTxtCorrupt:
 				# dump phonebook to PhoneBook.txt
 				debug("[FritzCallPhonebook] dump Phonebook.txt")
-				os.rename(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt",
-						config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt.bck")
-				fNew = open(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt", 'w')
+				os.rename(config.plugins.FritzCall.phonebookLocation.value,
+						config.plugins.FritzCall.phonebookLocation.value + ".bck")
+				fNew = open(config.plugins.FritzCall.phonebookLocation.value, 'w')
 				for (number, name) in self.phonebook.iteritems():
 					fNew.write(number + "#" + name.encode("utf-8"))
 				fNew.close()
 
-#===============================================================================
-#		#
-#		# needs python-textutils
-#		#
-#		# not reliable with coding yet
-#		# 
-#		# import csv exported from Outlook 2007 with csv(Windows)
-#		csvFilename = "/tmp/PhoneBook.csv"
-#		if config.plugins.FritzCall.phonebook.value and os.path.exists(csvFilename):
-#			try:
-#				readOutlookCSV(csvFilename, self.add)
-#				os.rename(csvFilename, csvFilename + ".done")
-#			except ImportError:
-#				debug("[FritzCallPhonebook] CSV import failed" %line)
-#===============================================================================
-
-		
-#===============================================================================
-#		#
-#		# we have to wait for python-ldap to appear...
-#		#
-#		# import ldif exported from Thunderbird 2.0.0.19
-#		ldifFilename = "/tmp/PhoneBook.ldif"
-#		if config.plugins.FritzCall.phonebook.value and os.path.exists(ldifFilename):
-#			try:
-#				parser = MyLDIF(open(ldifFilename), self.add)
-#				parser.parse()
-#				os.rename(ldifFilename, ldifFilename + ".done")
-#			except ImportError:
-#				debug("[FritzCallPhonebook] LDIF import failed" %line)
-#===============================================================================
-		
 		if config.plugins.FritzCall.fritzphonebook.value:
 			fritzbox.loadFritzBoxPhonebook()
 
 		if DESKTOP_WIDTH <> 1280 or DESKTOP_HEIGHT <> 720:
 			config.plugins.FritzCall.fullscreen.value = False
+
 
 	def search(self, number):
 		# debug("[FritzCallPhonebook] Searching for %s" %number
@@ -896,47 +867,47 @@ class FritzCallPhonebook:
 
 	def add(self, number, name):
 		debug("[FritzCallPhonebook] add")
-		name = name.replace("\n", ", ").replace('#','') # this is just for safety reasons. add should only be called with newlines converted into commas
-		self.remove(number)
+		#===============================================================================
+		#		It could happen, that two reverseLookups are running in parallel,
+		#		so check first, whether we have already added the number to the phonebook.
+		#===============================================================================
+		name = name.replace("\n", ", ") # this is just for safety reasons. add should only be called with newlines converted into commas
 		self.phonebook[number] = name;
-		if number and number <> 0:
+		if number and number <> 0 and config.plugins.FritzCall.addcallers.value:
 			if config.plugins.FritzCall.phonebook.value:
 				try:
-					f = open(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt", 'a')
+					f = open(config.plugins.FritzCall.phonebookLocation.value, 'a')
 					name = name.strip() + "\n"
-					string = "%s#%s" % (number, name)
-					try:
-						f.write(string.encode("utf-8"))
-						debug("[FritzCallPhonebook] added %s with %s to Phonebook.txt" % (number, name.strip()))
-					except UnicodeDecodeError:
-						f.write(string)
-						debug("[FritzCallPhonebook] error when adding %s with utf-8, writing raw" % name.strip())
+					string = "%s#%s" %(number, name)
+					f.write(string.encode("utf-8"))
 					f.close()
+					debug("[FritzCallPhonebook] added %s with %s to Phonebook.txt" %(number, name))
 					return True
 	
 				except IOError:
 					return False
 
 	def remove(self, number):
+		debug("[FritzCallPhonebook] remove")
 		if number in self.phonebook:
 			debug("[FritzCallPhonebook] remove entry in phonebook")
 			del self.phonebook[number]
 			if config.plugins.FritzCall.phonebook.value:
 				try:
-					phonebookFilename = config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt"
 					debug("[FritzCallPhonebook] remove entry in Phonebook.txt")
-					fOld = open(phonebookFilename, 'r')
-					fNew = open(phonebookFilename + str(os.getpid()), 'w')
+					fOld = open(config.plugins.FritzCall.phonebookLocation.value, 'r')
+					fNew = open(config.plugins.FritzCall.phonebookLocation.value + str(os.getpid()), 'w')
 					line = fOld.readline()
 					while (line):
-						if not re.match("^" + number + "#.*$", line):
+						if not re.match("^"+number+"#.*$", line):
 							fNew.write(line)
 						line = fOld.readline()
 					fOld.close()
 					fNew.close()
-					os.remove(phonebookFilename)
-					os.rename(phonebookFilename + str(os.getpid()),	phonebookFilename)
-					debug("[FritzCallPhonebook] removed %s from Phonebook.txt" % number)
+					os.remove(config.plugins.FritzCall.phonebookLocation.value)
+					os.rename(config.plugins.FritzCall.phonebookLocation.value + str(os.getpid()),
+							config.plugins.FritzCall.phonebookLocation.value)
+					debug("[FritzCallPhonebook] removed %s from Phonebook.txt" %number)
 					return True
 	
 				except IOError:
@@ -944,7 +915,7 @@ class FritzCallPhonebook:
 		return False
 
 	class FritzDisplayPhonebook(Screen, HelpableScreen, NumericalTextInput):
-	
+
 		def __init__(self, session):
 			if config.plugins.FritzCall.fullscreen.value:
 				self.width = DESKTOP_WIDTH
@@ -952,10 +923,10 @@ class FritzCallPhonebook:
 				backMainPng = ""
 				if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/menu/back-main.png")):
 					backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
-				elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1/menu/back-main.png")):
-					backMainPng = "Kerni-HD1/menu/back-main.png"
+				elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
+					backMainPng = "Kerni-HD1-picon/menu/back-main.png"
 				if backMainPng:
-					backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" % (self.width, self.height, backMainPng)
+					backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" %(self.width, self.height, backMainPng)
 				else:
 					backMainLine = ""
 				debug("[FritzDisplayPhonebook] backMainLine: " + backMainLine)
@@ -984,58 +955,50 @@ class FritzCallPhonebook:
 						<widget name="key_blue" 	position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
 						<ePixmap position="%d,%d" size="%d,%d" zPosition="2" pixmap="%s" transparent="1" alphatest="blend" />	
 					</screen>""" % (
-									self.width, self.height, _("Phonebook"),
-									backMainLine,
-									scaleH(1130, XXX), scaleV(40, XXX), scaleH(80, XXX), scaleV(26, XXX), scaleV(26, XXX), # time
-									scaleH(900, XXX), scaleV(70, XXX), scaleH(310, XXX), scaleV(22, XXX), scaleV(20, XXX), # date
-									"FritzCall " + _("Phonebook"), scaleH(80, XXX), scaleV(63, XXX), scaleH(300, XXX), scaleV(30, XXX), scaleV(27, XXX), # eLabel
-									scaleH(420, XXX), scaleV(120, XXX), scaleH(790, XXX), scaleV(438, XXX), # entries
-									scaleH(450, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # red
-									scaleH(640, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # green
-									scaleH(830, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # yellow
-									scaleH(1020, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # blue
-									scaleH(480, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # red
-									scaleH(670, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # green
-									scaleH(860, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # yellow
-									scaleH(1050, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # blue
-									scaleH(120, XXX), scaleV(430, XXX), scaleH(150, XXX), scaleV(110, XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/fritz.png") # Fritz Logo size and pixmap
-																)
+								    self.width, self.height, _("Phonebook"),
+								    backMainLine,
+								    scaleH(1130,XXX), scaleV(40,XXX), scaleH(80,XXX), scaleV(26,XXX), scaleV(26,XXX), # time
+								    scaleH(900,XXX), scaleV(70,XXX), scaleH(310,XXX), scaleV(22,XXX), scaleV(20,XXX), # date
+								    "FritzCall " + _("Phonebook"), scaleH(80,XXX), scaleV(63,XXX), scaleH(300,XXX), scaleV(30,XXX), scaleV(27,XXX), # eLabel
+								    scaleH(420,XXX), scaleV(120,XXX), scaleH(790,XXX), scaleV(438,XXX), # entries
+								    scaleH(450,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # red
+								    scaleH(640,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # green
+								    scaleH(830,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # yellow
+								    scaleH(1020,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # blue
+								    scaleH(480,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # red
+								    scaleH(670,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # green
+								    scaleH(860,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # yellow
+								    scaleH(1050,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # blue
+								    scaleH(120,XXX), scaleV(430,XXX), scaleH(150,XXX), scaleV(110,XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
+								)
 			else:
-				self.width = scaleH(1100, 570)
+				self.width = scaleH(1100,570)
 				debug("[FritzDisplayPhonebook] width: " + str(self.width))
 				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 				self.skin = """
 					<screen name="FritzDisplayPhonebook" position="%d,%d" size="%d,%d" title="%s" >
 						<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
-						<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="#20040404" transparent="1" />
+						<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="transpBlack" transparent="1" />
 						<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
-						<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-						<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-						<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-						<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-						<widget name="key_red" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-						<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-						<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-						<widget name="key_blue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+						<widget name="key_red" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="red" />
+						<widget name="key_green" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="green" />
+						<widget name="key_yellow" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="yellow" />
+						<widget name="key_blue" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="blue" />
 					</screen>""" % (
-							scaleH(90, 75), scaleV(100, 73), # position 
-							scaleH(1100, 570), scaleV(560, 430), # size
+							scaleH(90,75), scaleV(100,73), # position 
+							scaleH(1100,570), scaleV(560,430), # size
 							_("Phonebook"),
-							scaleH(1100, 570), # eLabel width
-							scaleH(40, 5), scaleV(20, 5), # entries position
-							scaleH(1040, 560), scaleV(488, 380), # entries size
-							scaleV(518, 390), # eLabel position vertical
-							scaleH(1100, 570), # eLabel width
-							scaleH(20, 5), scaleV(525, 395), # ePixmap red
-							scaleH(290, 145), scaleV(525, 395), # ePixmap green
-							scaleH(560, 285), scaleV(525, 395), # ePixmap yellow
-							scaleH(830, 425), scaleV(525, 395), # ePixmap blue
-							scaleH(20, 5), scaleV(525, 395), scaleV(24, 21), # widget red
-							scaleH(290, 145), scaleV(525, 395), scaleV(24, 21), # widget green
-							scaleH(560, 285), scaleV(525, 395), scaleV(24, 21), # widget yellow
-							scaleH(830, 425), scaleV(525, 395), scaleV(24, 21), # widget blue
-							)
-	
+							scaleH(1100,570), # eLabel width
+							scaleH(40,5), scaleV(20,5), # entries position
+							scaleH(1040,560), scaleV(488,380), # entries size
+							scaleV(518,390), # eLabel position vertical
+							scaleH(1100,570), # eLabel width
+							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget red
+							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget green
+							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget yellow
+							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget blue
+								)
+
 			Screen.__init__(self, session)
 			NumericalTextInput.__init__(self)
 			HelpableScreen.__init__(self)
@@ -1056,8 +1019,8 @@ class FritzCallPhonebook:
 				"yellow": self.edit,
 				"blue": self.search,
 				"cancel": self.exit,
-				"ok": self.showEntry, }, - 2)
-	
+				"ok": self.showEntry,}, -2)
+
 			# TRANSLATORS: this is a help text, keep it short
 			self.helpList.append((self["setupActions"], "OkCancelActions", [("ok", _("Show details of entry"))]))
 			# TRANSLATORS: this is a help text, keep it short
@@ -1070,15 +1033,15 @@ class FritzCallPhonebook:
 			self.helpList.append((self["setupActions"], "ColorActions", [("yellow", _("Edit selected entry"))]))
 			# TRANSLATORS: this is a help text, keep it short
 			self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("Search (case insensitive)"))]))
-	
-			self["entries"] = MenuList([], True, content=eListboxPythonMultiContent)
-			fontSize = scaleV(22, 18)
-			fontHeight = scaleV(24, 20)
-			self["entries"].l.setFont(0, gFont("Regular", fontSize))
+
+			self["entries"] = MenuList([], True, content = eListboxPythonMultiContent)
+			fontSize = scaleV(22,16)
+			fontHeight = scaleV(24,20)
+			self["entries"].l.setFont(0, gFont("Console", fontSize))
 			self["entries"].l.setItemHeight(fontHeight)
 			debug("[FritzCallPhonebook] displayPhonebook init")
 			self.display()
-	
+
 		def display(self, filter=""):
 			debug("[FritzCallPhonebook] displayPhonebook/display")
 			self.sortlist = []
@@ -1092,14 +1055,14 @@ class FritzCallPhonebook:
 					try:
 						low = low.decode("iso-8859-1")
 					except:
-						debug("[FritzCallPhonebook] displayPhonebook/display: corrupt phonebook entry for %s" % number)
+						debug("[FritzCallPhonebook] displayPhonebook/display: corrupt phonebook entry for %s" %number)
 						# self.session.open(MessageBox, _("Corrupt phonebook entry\nfor number %s\nDeleting.") %number, type = MessageBox.TYPE_ERROR)
 						phonebook.remove(number)
 						continue
 				else:
 					if filter:
 						filter = filter.lower()
-						if low.find(filter) == - 1:
+						if low.find(filter) == -1:
 							continue
 					name = name.strip().decode("utf-8")
 					number = number.strip().decode("utf-8")
@@ -1108,24 +1071,27 @@ class FritzCallPhonebook:
 						shortname = found.group(1)
 					else:
 						shortname = name
-					numberFieldWidth = scaleV(200,150)
-					fieldWidth = self.width -5 -numberFieldWidth -10 -scaleH(90,45)
-					self.sortlist.append([(number.encode("utf-8", "replace"),
-								   name.encode("utf-8", "replace")),
-								   (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, fieldWidth, scaleH(24,20), 0, RT_HALIGN_LEFT, shortname.encode('utf-8', 'replace')),
-								   (eListboxPythonMultiContent.TYPE_TEXT, fieldWidth +5, 0, numberFieldWidth, scaleH(24,20), 0, RT_HALIGN_LEFT, number.encode("utf-8", "replace"))
-								   ])
+					# TODO: colculate number of chars, we can display
+					noChars = scaleV(40,35)
+					if len(shortname) > noChars:
+						shortname = shortname[:noChars]
+					message = u"%-35s  %-18s" %(shortname, number)
+					message = message.encode("utf-8")
+					# debug("[FritzCallPhonebook] displayPhonebook/display: add " + message
+					self.sortlist.append([(number.encode("utf-8","replace"),
+								   name.encode("utf-8","replace")),
+								   (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, self.width-10, 20, 0, RT_HALIGN_LEFT, message)])
 				
 			self["entries"].setList(self.sortlist)
-	
+
 		def showEntry(self):
 			cur = self["entries"].getCurrent()
 			if cur and cur[0]:
-				debug("[FritzCallPhonebook] displayPhonebook/showEntry (%s,%s)" % (cur[0][0], cur[0][1]))
+				debug("[FritzCallPhonebook] displayPhonebook/showEntry (%s,%s)" % (cur[0][0],cur[0][1]))
 				number = cur[0][0]
-				name = phonebook.search(number).replace('\n', ', ')
+				name = phonebook.search(number).replace('\n',', ')
 				self.session.open(FritzOfferAction, self, number, name)
-	
+
 		def delete(self):
 			cur = self["entries"].getCurrent()
 			if cur and cur[0]:
@@ -1134,11 +1100,11 @@ class FritzCallPhonebook:
 					self.deleteConfirmed,
 					MessageBox,
 					_("Do you really want to delete entry for\n\n%(number)s\n\n%(name)s?") 
-					% { 'number':str(cur[0][0]), 'name':str(cur[0][1]).replace(", ", "\n") }
-								)
+					% { 'number':str(cur[0][0]), 'name':str(cur[0][1]).replace(", ","\n") }
+				)
 			else:
-				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
-	
+				self.session.open(MessageBox,_("No entry selected"), MessageBox.TYPE_INFO)
+
 		def deleteConfirmed(self, ret):
 			debug("[FritzCallPhonebook] displayPhonebook/deleteConfirmed")
 			#
@@ -1148,15 +1114,15 @@ class FritzCallPhonebook:
 			if cur:
 				if ret:
 					# delete number from sortlist, delete number from phonebook.phonebook and write it to disk
-					debug("[FritzCallPhonebook] displayPhonebook/deleteConfirmed: remove " + cur[0][0])
+					debug("[FritzCallPhonebook] displayPhonebook/deleteConfirmed: remove " +cur[0][0])
 					phonebook.remove(cur[0][0])
 					self.display()
 				# else:
 					# self.session.open(MessageBox, _("Not deleted."), MessageBox.TYPE_INFO)
 			else:
-				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
-	
-		def add(self, parent=None, number="", name=""):
+				self.session.open(MessageBox,_("No entry selected"), MessageBox.TYPE_INFO)
+
+		def add(self, parent = None, number = "", name=""):
 			class addScreen(Screen, ConfigListScreen):
 				'''ConfiglistScreen with two ConfigTexts for Name and Number'''
 				width = 570
@@ -1169,19 +1135,19 @@ class FritzCallPhonebook:
 					<ePixmap position="285,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 					<widget name="key_red" position="145,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 					<widget name="key_green" position="285,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-					</screen>""" % (
+					</screen>"""  % (
 									(DESKTOP_WIDTH - width) / 2,
 									(DESKTOP_HEIGHT - height) / 2,
 									width,
 									height,
 									_("Add entry to phonebook"),
-									width - 5 - 5,
-									height - 5 - 40 - 5,
-									height - 40 - 5, height - 40 - 5, height - 40 - 5, height - 40 - 5
-																		 )
-	
-	
-				def __init__(self, session, parent, number="", name=""):
+									width -5 -5,
+									height -5 -40 -5,
+									height -40 -5, height -40 -5, height -40 -5, height -40 -5
+									 )
+
+
+				def __init__(self, session, parent, number = "", name = ""):
 					#
 					# setup screen with two ConfigText and OK and ABORT button
 					# 
@@ -1198,73 +1164,74 @@ class FritzCallPhonebook:
 						"red": self.cancel,
 						"green": self.add,
 						"ok": self.add,
-					}, - 2)
-	
+					}, -2)
+
 					self.list = [ ]
-					ConfigListScreen.__init__(self, self.list, session=session)
+					ConfigListScreen.__init__(self, self.list, session = session)
 					config.plugins.FritzCall.name.value = name
 					config.plugins.FritzCall.number.value = number
 					self.list.append(getConfigListEntry(_("Name"), config.plugins.FritzCall.name))
 					self.list.append(getConfigListEntry(_("Number"), config.plugins.FritzCall.number))
 					self["config"].list = self.list
 					self["config"].l.setList(self.list)
-	
+
+
 				def add(self):
 					# get texts from Screen
 					# add (number,name) to sortlist and phonebook.phonebook and disk
 					self.number = config.plugins.FritzCall.number.value
 					self.name = config.plugins.FritzCall.name.value
 					if not self.number or not self.name:
-						self.session.open(MessageBox, _("Entry incomplete."), type=MessageBox.TYPE_ERROR)
+						self.session.open(MessageBox, _("Entry incomplete."), type = MessageBox.TYPE_ERROR)
 						return
 					# add (number,name) to sortlist and phonebook.phonebook and disk
-	#					oldname = phonebook.search(self.number)
-	#					if oldname:
-	#						self.session.openWithCallback(
-	#							self.overwriteConfirmed,
-	#							MessageBox,
-	#							_("Do you really want to overwrite entry for %(number)s\n\n%(name)s\n\nwith\n\n%(newname)s?")
-	#							% {
-	#							'number':self.number,
-	#							'name': oldname,
-	#							'newname':self.name.replace(", ","\n")
-	#							}
-	#							)
-	#						self.close()
-	#						return
+					oldname = phonebook.search(self.number)
+					if oldname:
+						self.session.openWithCallback(
+							self.overwriteConfirmed,
+							MessageBox,
+							_("Do you really want to overwrite entry for %(number)s\n\n%(name)s\n\nwith\n\n%(newname)s?")
+							% {
+							'number':self.number,
+							'name': oldname,
+							'newname':self.name.replace(", ","\n")
+							}
+							)
+						self.close()
+						return
 					phonebook.add(self.number, self.name)
 					self.close()
 					self.parent.display()
-	
+
 				def overwriteConfirmed(self, ret):
 					if ret:
 						phonebook.remove(self.number)
 						phonebook.add(self.number, self.name)
 						self.parent.display()
-	
+
 				def cancel(self):
 					self.close()
-	
+
 			debug("[FritzCallPhonebook] displayPhonebook/add")
 			if not parent:
 				parent = self
 			self.session.open(addScreen, parent, number, name)
-	
+
 		def edit(self):
 			debug("[FritzCallPhonebook] displayPhonebook/edit")
 			cur = self["entries"].getCurrent()
 			if cur is None:
-				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
+				self.session.open(MessageBox,_("No entry selected"), MessageBox.TYPE_INFO)
 			else:
 				(number, name) = cur[0]
 				self.add(self, number, name)
-	
+
 		def search(self):
 			debug("[FritzCallPhonebook] displayPhonebook/search")
 			self.help_window = self.session.instantiateDialog(NumericalTextInputHelpDialog, self)
 			self.help_window.show()
 			self.session.openWithCallback(self.doSearch, InputBox, _("Enter Search Terms"), _("Search phonebook"))
-	
+
 		def doSearch(self, searchTerms):
 			if not searchTerms: searchTerms = ""
 			debug("[FritzCallPhonebook] displayPhonebook/doSearch: " + searchTerms)
@@ -1272,7 +1239,7 @@ class FritzCallPhonebook:
 				self.session.deleteDialog(self.help_window)
 				self.help_window = None
 			self.display(searchTerms)
-	
+
 		def exit(self):
 			self.close()
 
@@ -1281,7 +1248,7 @@ phonebook = FritzCallPhonebook()
 
 class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
-	def __init__(self, session, args=None):
+	def __init__(self, session, args = None):
 		if config.plugins.FritzCall.fullscreen.value:
 			self.width = DESKTOP_WIDTH
 			self.height = DESKTOP_HEIGHT
@@ -1289,10 +1256,10 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			backMainLine = ""
 			if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/menu/back-main.png")):
 				backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
-			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1/menu/back-main.png")):
-				backMainPng = "Kerni-HD1/menu/back-main.png"
+			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
+				backMainPng = "Kerni-HD1-picon/menu/back-main.png"
 			if backMainPng:
-				backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" % (self.width, self.height, backMainPng)
+				backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" %(self.width, self.height, backMainPng)
 			else:
 				backMainLine = ""
 			debug("[FritzCallSetup] backMainLine: " + backMainLine)
@@ -1321,67 +1288,59 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 					<widget name="key_blue" position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
 					<ePixmap position="%d,%d" size="%d,%d" zPosition="2" pixmap="%s" transparent="1" alphatest="blend" />		
 				</screen>""" % (
-								self.width, self.height, _("FritzCall Setup"),
-								backMainLine,
-								scaleH(1130, XXX), scaleV(40, XXX), scaleH(80, XXX), scaleV(26, XXX), scaleV(26, XXX), # time
-								scaleH(900, XXX), scaleV(70, XXX), scaleH(310, XXX), scaleV(22, XXX), scaleV(20, XXX), # date
-								_("FritzCall Setup"), scaleH(500, XXX), scaleV(63, XXX), scaleH(330, XXX), scaleV(30, XXX), scaleV(27, XXX), # eLabel
-								scaleH(80, XXX), scaleV(150, XXX), scaleH(250, XXX), scaleV(200, XXX), scaleV(22, XXX), # consideration
-								scaleH(420, XXX), scaleV(125, XXX), scaleH(790, XXX), scaleV(428, XXX), # config
-								scaleH(450, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # red
-								scaleH(640, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # green
-								scaleH(830, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # yellow
-								scaleH(1020, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # blue
-								scaleH(480, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # red
-								scaleH(670, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # green
-								scaleH(860, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # yellow
-								scaleH(1050, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # blue
-								scaleH(120, XXX), scaleV(430, XXX), scaleH(150, XXX), scaleV(110, XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/fritz.png") # Fritz Logo size and pixmap
-																) 
+							    self.width, self.height, _("FritzCall Setup"),
+							    backMainLine,
+							    scaleH(1130,XXX), scaleV(40,XXX), scaleH(80,XXX), scaleV(26,XXX), scaleV(26,XXX), # time
+							    scaleH(900,XXX), scaleV(70,XXX), scaleH(310,XXX), scaleV(22,XXX), scaleV(20,XXX), # date
+							    _("FritzCall Setup"), scaleH(500,XXX), scaleV(63,XXX), scaleH(330,XXX), scaleV(30,XXX), scaleV(27,XXX), # eLabel
+							    scaleH(80,XXX), scaleV(150,XXX), scaleH(250,XXX), scaleV(200,XXX), scaleV(22,XXX), # consideration
+							    scaleH(420,XXX), scaleV(125,XXX), scaleH(790,XXX), scaleV(428,XXX), # config
+							    scaleH(450,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # red
+							    scaleH(640,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # green
+							    scaleH(830,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # yellow
+							    scaleH(1020,XXX), scaleV(588,XXX), scaleH(21,XXX), scaleV(21,XXX), # blue
+							    scaleH(480,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # red
+							    scaleH(670,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # green
+							    scaleH(860,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # yellow
+							    scaleH(1050,XXX), scaleV(587,XXX), scaleH(160,XXX), scaleV(22,XXX), scaleV(20,XXX), # blue
+							    scaleH(120,XXX), scaleV(430,XXX), scaleH(150,XXX), scaleV(110,XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/fritz.png") # Fritz Logo size and pixmap
+								) 
 		else:
-			self.width = scaleH(1100, 570)
+			self.width = scaleH(1100,570)
 			debug("[FritzCallSetup] width: " + str(self.width))
 			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.skin = """
 				<screen name="FritzCallSetup" position="%d,%d" size="%d,%d" title="%s" >
 				<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
-				<widget name="consideration" position="%d,%d" halign="center" size="%d,%d" font="Regular;%d" backgroundColor="#20040404" transparent="1" />
+				<widget name="consideration" position="%d,%d" halign="center" size="%d,%d" font="Regular;%d" backgroundColor="transpBlack" transparent="1" />
 				<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
-				<widget name="config" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="#20040404" transparent="1" />
+				<widget name="config" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="transpBlack" transparent="1" />
 				<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
-				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-				<widget name="key_red" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_blue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_red" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="red" />
+				<widget name="key_green" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="green" />
+				<widget name="key_yellow" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="yellow" />
+				<widget name="key_blue" position="%d,%d" size="%d,%d" valign="center" halign="center" font="Regular;%d" foregroundColor="blue" />
 				</screen>""" % (
-							scaleH(90, 75), scaleV(100, 73), # position 
-							scaleH(1100, 570), scaleV(560, 430), # size
-							_("FritzCall Setup") + 
-							" (" + "$Revision$"[1: - 1] + 
+							scaleH(90,75), scaleV(100,73), # position 
+							scaleH(1100,570), scaleV(560,430), # size
+							_("FritzCall Setup") +
+							" (" + "$Revision$"[1:-1] +
 							"$Date$"[7:23] + ")",
-							scaleH(1100, 570), # eLabel width
-							scaleH(40, 20), scaleV(10, 5), # consideration position
-							scaleH(1050, 530), scaleV(25, 45), # consideration size
-							scaleV(22, 20), # consideration font size
-							scaleV(40, 50), # eLabel position vertical
-							scaleH(1100, 570), # eLabel width
-							scaleH(40, 5), scaleV(60, 57), # config position
-							scaleH(1040, 560), scaleV(453, 328), # config size
-							scaleV(518, 390), # eLabel position vertical
-							scaleH(1100, 570), # eLabel width
-							scaleH(20, 5), scaleV(525, 395), # widget red
-							scaleH(290, 145), scaleV(525, 395), # widget green
-							scaleH(560, 285), scaleV(525, 395), # widget yellow
-							scaleH(830, 425), scaleV(525, 395), # widget blue
-							scaleH(20, 5), scaleV(525, 395), scaleV(24, 21), # widget red
-							scaleH(290, 145), scaleV(525, 395), scaleV(24, 21), # widget green
-							scaleH(560, 285), scaleV(525, 395), scaleV(24, 21), # widget yellow
-							scaleH(830, 425), scaleV(525, 395), scaleV(24, 21), # widget blue
-														)
+							scaleH(1100,570), # eLabel width
+							scaleH(40,20), scaleV(10,5), # consideration position
+							scaleH(1050,530), scaleV(25,45), # consideration size
+							scaleV(22,20), # consideration font size
+							scaleV(40,50), # eLabel position vertical
+							scaleH(1100,570), # eLabel width
+							scaleH(40,5), scaleV(60,57), # config position
+							scaleH(1040,560), scaleV(453,328), # config size
+							scaleV(518,390), # eLabel position vertical
+							scaleH(1100,570), # eLabel width
+							scaleH(20,5),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget red
+							scaleH(290,145),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget green
+							scaleH(560,285),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget yellow
+							scaleH(830,425),scaleV(525,395),scaleH(250,140),scaleV(30,40),scaleV(24,21), # widget blue
+							)
 
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
@@ -1409,7 +1368,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			"cancel": self.cancel,
 			"save": self.save,
 			"ok": self.save,
-		}, - 2)
+		}, -2)
 
 		# TRANSLATORS: this is a help text, keep it short
 		self.helpList.append((self["setupActions"], "SetupActions", [("ok", _("save and quit"))]))
@@ -1426,7 +1385,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		# TRANSLATORS: this is a help text, keep it short
 		self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("display phonebook"))]))
 
-		ConfigListScreen.__init__(self, self.list, session=session)
+		ConfigListScreen.__init__(self, self.list, session = session)
 		self.createSetup()
 
 
@@ -1557,13 +1516,13 @@ class FritzCallList:
 
 			while (len(caller) + len(phone)) > 40:
 				if len(caller) > len(phone):
-					caller = caller[: - 1]
+					caller = caller[:-1]
 				else:
-					phone = phone[: - 1]
+					phone = phone[:-1]
 
-			text = text + "%s %s %s %s\n" % (date, caller, direction, phone)
+			text = text + "%s %s %s %s\n" %(date, caller, direction, phone)
 
-		debug("[FritzCallList] display: '%s %s %s %s'" % (date, caller, direction, phone))
+		debug("[FritzCallList] display: '%s %s %s %s'" %(date, caller, direction, phone))
 		# display screen
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO)
 		# my_global_session.open(FritzDisplayCalls, text) # TODO please HELP: from where can I get a session?
@@ -1581,7 +1540,7 @@ def notifyCall(event, date, number, caller, phone):
 			text = _("Incoming Call on %(date)s from\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nto: %(phone)s") % { 'date':date, 'number':number, 'caller':caller, 'phone':phone }
 		else:
 			text = _("Outgoing Call on %(date)s to\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nfrom: %(phone)s") % { 'date':date, 'number':number, 'caller':caller, 'phone':phone }
-		debug("[FritzCall] notifyCall:\n%s" % text)
+		debug("[FritzCall] notifyCall:\n%s" %text)
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 	elif config.plugins.FritzCall.afterStandby.value == "inList":
 		#
@@ -1617,7 +1576,7 @@ class FritzReverseLookupAndNotifier:
 		@param phone: Number (and name) of or own phone
 		@param date: date of call
 		'''
-		debug("[FritzReverseLookupAndNotifier] reverse Lookup for %s!" % number)
+		debug("[FritzReverseLookupAndNotifier] reverse Lookup for %s!" %number)
 		self.event = event
 		self.number = number
 		self.caller = caller
@@ -1625,7 +1584,7 @@ class FritzReverseLookupAndNotifier:
 		self.date = date
 
 		if number[0] != "0":
-			self.notifyAndReset(number, caller)
+			self.notifyAndReset(number,caller)
 			return
 
 		ReverseLookupAndNotifier(number, self.notifyAndReset, "UTF-8", config.plugins.FritzCall.country.value)
@@ -1639,26 +1598,16 @@ class FritzReverseLookupAndNotifier:
 		@param caller: name and address of remote. it comes in with name, address and city separated by commas
 		'''
 		debug("[FritzReverseLookupAndNotifier] got: " + caller)
-#===============================================================================
-#		if not caller and os.path.exists(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.csv"):
-#			caller = FritzOutlookCSV.findNumber(number, config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.csv") #@UndefinedVariable
-#			debug("[FritzReverseLookupAndNotifier] got from Outlook csv: " + caller)
-#===============================================================================
-#===============================================================================
-#		if not caller and os.path.exists(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.ldif"):
-#			caller = FritzLDIF.findNumber(number, open(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.ldif"))
-#			debug("[FritzReverseLookupAndNotifier] got from ldif: " + caller)
-#===============================================================================
-
 		if caller:
-			self.caller = caller.replace(", ", "\n").replace('#','')
+			self.caller = caller.replace(", ", "\n")
 			if self.number != 0 and config.plugins.FritzCall.addcallers.value and self.event == "RING":
 				debug("[FritzReverseLookupAndNotifier] add to phonebook")
-				phonebook.add(self.number, self.caller)
+				phonebook.add(self.number, self.caller.replace("\n", ", "))
 		else:
 			self.caller = _("UNKNOWN")
 		notifyCall(self.event, self.date, self.number, self.caller, self.phone)
 		# kill that object...
+
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
@@ -1677,7 +1626,7 @@ class FritzProtocol(LineReceiver):
 		self.resetValues()
 
 	def lineReceived(self, line):
-		debug("[FritzProtocol] lineReceived: %s" % line)
+		debug("[FritzProtocol] lineReceived: %s" %line)
 #15.07.06 00:38:54;CALL;1;4;<from/extern>;<to/our msn>;
 #15.07.06 00:38:58;DISCONNECT;1;0;
 #15.07.06 00:39:22;RING;0;<from/extern>;<to/our msn>;
@@ -1702,11 +1651,11 @@ class FritzProtocol(LineReceiver):
 				debug("[FritzProtocol] lineReceived no filter hit")
 				phonename = phonebook.search(phone)		   # do we have a name for the number of our side?
 				if phonename is not None:
-					self.phone = "%s (%s)" % (phone, phonename)
+					self.phone = "%s (%s)" %(phone, phonename)
 				else:
 					self.phone = phone
 
-				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0] == "0":
+				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0]=="0":
 					debug("[FritzProtocol] lineReceived: strip leading 0")
 					self.number = number[1:]
 				else:
@@ -1725,9 +1674,9 @@ class FritzProtocol(LineReceiver):
 						self.number = self.number[5:]
 
 				if self.number is not "":
-					debug("[FritzProtocol] lineReceived phonebook.search: %s" % self.number)
+					debug("[FritzProtocol] lineReceived phonebook.search: %s" %self.number)
 					self.caller = phonebook.search(self.number)
-					debug("[FritzProtocol] lineReceived phonebook.search reault: %s" % self.caller)
+					debug("[FritzProtocol] lineReceived phonebook.search reault: %s" %self.caller)
 					if (self.caller is None) and config.plugins.FritzCall.lookup.value:
 						FritzReverseLookupAndNotifier(self.event, self.number, self.caller, self.phone, self.date)
 						return							# reverselookup is supposed to handle the message itself 
@@ -1815,7 +1764,7 @@ def Plugins(**kwargs):
 	what = _("Display FRITZ!box-Fon calls on screen")
 	what_calls = _("Phone calls")
 	what_phonebook = _("Phonebook")
-	return [ PluginDescriptor(name="FritzCall", description=what, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main),
-		PluginDescriptor(name=what_calls, description=what_calls, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayCalls),
-		PluginDescriptor(name=what_phonebook, description=what_phonebook, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayPhonebook),
-		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart) ]
+	return [ PluginDescriptor(name="FritzCall", description=what, where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc=main),
+		PluginDescriptor(name=what_calls, description=what_calls, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayCalls),
+		PluginDescriptor(name=what_phonebook, description=what_phonebook, where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayPhonebook),
+		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart) ]
