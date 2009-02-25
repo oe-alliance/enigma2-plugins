@@ -2,7 +2,7 @@ Version = '$Header$';
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigSelection, ConfigSubList
 from Screens.MessageBox import MessageBox
-from WebIfConfig import WebIfConfigScreen, initConfig
+from WebIfConfig import WebIfConfigScreen, initConfig, updateConfig
 from WebChilds.Toplevel import Toplevel
 from twisted.internet import reactor, defer, ssl
 from twisted.internet.error import CannotListenError
@@ -33,6 +33,7 @@ config.plugins.Webinterface.loadmovielength = ConfigYesNo(default = False)
 config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI.
 config.plugins.Webinterface.interfacecount = ConfigInteger(0)
 config.plugins.Webinterface.interfaces = ConfigSubList()
+initConfig()
 config.plugins.Webinterface.warningsslsend = ConfigYesNo(default = False)
 
 global running_defered,waiting_shutdown
@@ -94,8 +95,7 @@ def startWebserver(session):
 		print "start twisted logfile, writing to %s" % DEBUGFILE
 		startLogging(open(DEBUGFILE,'w'))
 
-	for i in range(0, config.plugins.Webinterface.interfacecount.value):
-		c = config.plugins.Webinterface.interfaces[i]
+	for c in config.plugins.Webinterface.interfaces:
 		if c.disabled.value is False:
 			startServerInstance(session,c.address.value,c.port.value,c.useauth.value,c.usessl.value)
 		else:
@@ -374,7 +374,7 @@ def sessionstart(reason, session):
 def autostart(reason, **kwargs):
 	if reason is True:
 		try:
-			initConfig()
+			updateConfig()
 			startWebserver(global_session)
 		except ImportError,e:
 			print "[Webinterface] twisted not available, not starting web services", e

@@ -36,10 +36,17 @@ def initInterfaceConfig(i = None, new = False):
 
 	return i
 
+def updateConfig():
+	choices = getConfiguredIPs()
+	default = choices[0]
+	for c in config.plugins.Webinterface.interfaces:
+		c.address.setChoices(choices, default = default)
+
 def getConfiguredIPs():
-	choices = []
-	choices.append('0.0.0.0')
-	choices.append('127.0.0.1')
+	choices = [
+		'0.0.0.0',
+		'127.0.0.1'
+	]
 	for adaptername in iNetwork.ifaces:
 		extip = iNetwork.ifaces[adaptername]['ip']
 		if iNetwork.ifaces[adaptername]['up'] is True:
