@@ -41,6 +41,7 @@ def updateConfig():
 	default = choices[0]
 	for c in config.plugins.Webinterface.interfaces:
 		c.address.setChoices(choices, default = default)
+		c.address.load()
 
 def getConfiguredIPs():
 	choices = [
