@@ -639,9 +639,10 @@ function sendAddTimer() {
 			alert("Please only use "+neverString+" in the name and the description field");
 			return;
 		}
-
-		dirname = $('dirname').value;
-		tags = $('tags').value;
+		
+		
+		dirname = $F($('timerDir').dirname);
+		tags = $F($('timerTags').tags);
 
 		repeated = 0;
 		if($('ms').checked) {
