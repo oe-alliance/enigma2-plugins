@@ -11,4 +11,4 @@ def importExternalModules():
 				print '[Toplevel.importExternalModules] Imported external module: %s' % (module_name)
 		
 			except ImportError:
-				pass
+				print '[Toplevel.importExternalModules] Could NOT import external module!'
