@@ -1,0 +1,25 @@
+<e2:screen name="About2">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2about>
+	<e2network>
+	<e2:element source="Network"><e2:convert type="web:ListFiller" >
+		&lt;e2interface>
+			&lt;e2name><e2:item name="Name" filter="xml"/>&lt;/e2name>
+			&lt;e2mac><e2:item name="Mac" filter="xml"/>&lt;/e2mac>
+			&lt;e2dhcp><e2:item name="Dhcp" filter="xml"/>&lt;/e2dhcp>
+			&lt;e2ip><e2:item name="Ip" filter="xml"/>&lt;/e2ip>
+			&lt;e2gateway><e2:item name="Gateway" filter="xml"/>&lt;/e2gateway>
+			&lt;e2netmask><e2:item name="Netmask" filter="xml"/>&lt;/e2netmask>
+		&lt;/e2interface>
+		</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+	</e2network>
+	<e2hdds>
+	<e2:element source="Hdd"><e2:convert type="web:ListFiller">
+		&lt;e2hdd>
+			&lt;e2model><e2:item name="Model" filter="xml"/>&lt;/e2model>
+			&lt;e2capacity><e2:item name="Capacity" filter="xml"/>&lt;/e2capacity>
+			&lt;e2free><e2:item name="Free" filter="xml"/>&lt;/e2free>
+		&lt;/e2hdd>
+	</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+	</e2hdds>
+</e2about>
+</e2:screen>
