@@ -42,20 +42,19 @@ class EPG( Source):
 		return []
 
 	def getBouquetEPGNow(self, ref):
-		return self.getEPGNowNext(ref)
+		return self.getEPGNowNext(ref, 0)
 
 	def getBouquetEPGNext(self, ref):
-		return self.getEPGNowNext(ref, False)
+		return self.getEPGNowNext(ref, 1)
 
 	def getServiceEPGNow(self, ref):
-		return self.getEPGNowNext(ref, True, True)
+		return self.getEPGNowNext(ref, 0, True)
 
 	def getServiceEPGNext(self, ref):
-		return self.getEPGNowNext(ref, False, True)
+		return self.getEPGNowNext(ref, 1, True)
 
-	def getEPGNowNext(self, ref, now=True, service=False):
+	def getEPGNowNext(self, ref, type, service = False):
 		print "[WebComponents.EPG] getting EPG NOW/NEXT", ref
-		type = now and 0 or 1
 
 		if service:
 			events = self.epgcache.lookupEvent(['IBDTSERNX', (ref, type, -1)])
