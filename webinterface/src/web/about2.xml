@@ -1,5 +1,13 @@
 <e2:screen name="About2">&lt;?xml version="1.0" encoding="UTF-8"?>
 <e2about>
+	<e2frontends>
+		<e2:element source="Frontends"><e2:convert type="web:ListFiller" >
+		&lt;e2frontend>
+			&lt;e2name><e2:item name="Name" filter="xml"/>&lt;/e2name>
+			&lt;e2type><e2:item name="Type" filter="xml"/>&lt;/e2type>
+		&lt;/e2frontend>
+		</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+	</e2frontends>
 	<e2network>
 	<e2:element source="Network"><e2:convert type="web:ListFiller" >
 		&lt;e2interface>

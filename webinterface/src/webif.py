@@ -292,8 +292,10 @@ class About2(WebScreen):
 		WebScreen.__init__(self, session, request)
 		from WebComponents.Sources.Network import Network
 		from WebComponents.Sources.Hdd import Hdd
+		from WebComponents.Sources.Frontend import Frontend
 		self["Network"] = Network()
 		self["Hdd"] = Hdd()
+		self["Frontends"] = Frontend()
 
 # implements the 'render'-call.
 # this will act as a downstream_element, like a renderer.
