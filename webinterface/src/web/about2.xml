@@ -21,5 +21,12 @@
 		&lt;/e2hdd>
 	</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
 	</e2hdds>
+	<e2service>	
+		<e2servicename><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2servicename>
+		<e2providername><e2:element source="session.CurrentService"><e2:convert type="ServiceName">Provider</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2providername>
+		<e2videowidth><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoWidth</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2videowidth>
+		<e2videoheight><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoHeight</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2videoheight>
+	</e2service>
+	
 </e2about>
 </e2:screen>
