@@ -1,0 +1,146 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AC3-LipSync-pot\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-28 13:48+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: L:\\Dreambox\\Plugins\\AC3LipSync\\locale\\pot\n"
+"X-Poedit-SearchPath-0: ..\\..\\src\n"
+
+#: ..\..\src/plugin.py:29
+#: ..\..\src/plugin.py:33
+#: ..\..\src/plugin.py:35
+msgid "AC3 Lip Sync"
+msgstr ""
+
+#: ..\..\src/plugin.py:33
+#: ..\..\src/plugin.py:35
+msgid "sets the AC3 audio Delay (LipSync)"
+msgstr ""
+
+#: ..\..\src/plugin.py:34
+msgid "AC3 Lip Sync Setup"
+msgstr ""
+
+#: ..\..\src/plugin.py:34
+msgid "Setup for the AC3 Lip Sync Plugin"
+msgstr ""
+
+#: ..\..\src/AC3main.py:74
+msgid "Use user delays"
+msgstr ""
+
+#: ..\..\src/AC3main.py:75
+msgid "Use calc. delays"
+msgstr ""
+
+#: ..\..\src/AC3main.py:82
+#: ..\..\src/AC3main.py:85
+#: ..\..\src/AC3main.py:136
+#: ..\..\src/AC3main.py:261
+#: ..\..\src/AC3main.py:262
+msgid "ms"
+msgstr ""
+
+#: ..\..\src/AC3main.py:83
+#, python-format
+msgid "%s delay:"
+msgstr ""
+
+#: ..\..\src/AC3main.py:84
+#, python-format
+msgid "%s:"
+msgstr ""
+
+#: ..\..\src/AC3main.py:88
+msgid "Channel audio:"
+msgstr ""
+
+#: ..\..\src/AC3main.py:94
+#: ..\..\src/AC3setup.py:56
+msgid " "
+msgstr ""
+
+#: ..\..\src/AC3main.py:96
+#: ..\..\src/AC3setup.py:54
+msgid "Save"
+msgstr ""
+
+#: ..\..\src/AC3main.py:97
+msgid "Switch audio"
+msgstr ""
+
+#: ..\..\src/AC3main.py:98
+msgid "Set user delay"
+msgstr ""
+
+#: ..\..\src/AC3main.py:205
+#: ..\..\src/AC3main.py:206
+#, python-format
+msgid "Save %s delay"
+msgstr ""
+
+#: ..\..\src/AC3main.py:207
+msgid "Save both delays"
+msgstr ""
+
+#: ..\..\src/AC3main.py:209
+msgid "Which delays do you want to set"
+msgstr ""
+
+#: ..\..\src/AC3main.py:244
+#, python-format
+msgid "Saved %(audio)s value: %(delay)i ms"
+msgstr ""
+
+#: ..\..\src/AC3main.py:248
+msgid "Invalid selection"
+msgstr ""
+
+#: ..\..\src/AC3main.py:291
+msgid "Select the key you want to set"
+msgstr ""
+
+#: ..\..\src/AC3main.py:296
+msgid "Key"
+msgstr ""
+
+#: ..\..\src/AC3main.py:301
+msgid "Setting key canceled"
+msgstr ""
+
+#: ..\..\src/AC3main.py:305
+#, python-format
+msgid "%(Key)s successfully set to %(delay)i ms"
+msgstr ""
+
+#: ..\..\src/AC3setup.py:42
+msgid "Minimum delay"
+msgstr ""
+
+#: ..\..\src/AC3setup.py:43
+msgid "Maximum delay"
+msgstr ""
+
+#: ..\..\src/AC3setup.py:44
+msgid "Step in ms for arrow keys"
+msgstr ""
+
+#: ..\..\src/AC3setup.py:46
+#, python-format
+msgid "Step in ms for key %i"
+msgstr ""
+
+#: ..\..\src/AC3setup.py:53
+msgid "Cancel"
+msgstr ""
+
+#: ..\..\src/AC3setup.py:55
+msgid "Recalculate..."
+msgstr ""
+

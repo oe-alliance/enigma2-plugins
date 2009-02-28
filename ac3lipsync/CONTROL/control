@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-ac3lipsync
+Version: 0.5-20090301-r0
+Description: Set AC3/PCM delay
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: Tode <sagichnet@gmx.net>
+Homepage: n/a
+Depends: 
+Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
