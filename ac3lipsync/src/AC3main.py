@@ -66,7 +66,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         # AC3delay instance
         self.AC3delay = AC3delay(self.session)
 
-        #Which Values do the number keys use (not implemented yet)
+        #Which Values do the number keys use
         self.whichKeys = "Computed" # Computed = computed Values of keys, User = User set values of keys
         self.whichKeyText = {}
         self.whichKeyText["Computed"] = _("Use user delays")
