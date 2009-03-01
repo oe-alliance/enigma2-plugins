@@ -74,8 +74,10 @@ class AutoTimerPreviewList(MenuList):
 	def __init__(self, entries):
 		MenuList.__init__(self, entries, False, content = eListboxPythonMultiContent)
 
-		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", 18))
+		self.serviceNameFont = gFont("Regular", 20)
+		self.l.setFont(0, self.serviceNameFont)
+		self.font = gFont("Regular", 18)
+		self.l.setFont(1, self.font)
 		self.l.setBuildFunc(self.buildListboxEntry)
 		self.l.setItemHeight(70)
 
@@ -84,9 +86,11 @@ class AutoTimerPreviewList(MenuList):
 		if self.skinAttributes is not None:
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "font":
-					self.l.setFont(1, parseFont(value, ((1,1),(1,1))))
+					self.font = parseFont(value, ((1,1),(1,1)))
+					self.l.setFont(1, self.font)
 				elif attrib == "serviceNameFont":
-					self.l.setFont(0, parseFont(value, ((1,1),(1,1))))
+					self.serviceNameFont = parseFont(value, ((1,1),(1,1)))
+					self.l.setFont(0, self.serviceNameFont)
 				elif attrib == "colorDisabled":
 					self.colorDisabled = int(parseColor(value))
 				elif attrib == "itemHeight":
@@ -103,16 +107,18 @@ class AutoTimerPreviewList(MenuList):
 	def buildListboxEntry(self, name, begin, end, serviceref, timername):
 		size = self.l.getItemSize()
 		width = size.width()
+		snameHeight = self.serviceNameFont.pointSize + 10
+		fontSize = self.font.pointSize + 2
+		lastRow = snameHeight + fontSize
 
-		# XXX: this does not scale very well yet
 		return [
 			None,
-			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, \
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, snameHeight, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, \
 					ServiceReference(serviceref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')),
-			(eListboxPythonMultiContent.TYPE_TEXT, 0, 30, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, name),
-			(eListboxPythonMultiContent.TYPE_TEXT, 0, 50, 400, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, \
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, snameHeight, width, fontSize, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, name),
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, lastRow, 400, fontSize, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, \
 					(("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(begin) + FuzzyTime(end)[1:] + ((end - begin) / 60,)))),
-			(eListboxPythonMultiContent.TYPE_TEXT, width - 245, 50, 240, 20, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, timername)
+			(eListboxPythonMultiContent.TYPE_TEXT, width - 245, lastRow, 240, fontSize, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, timername)
 		]
 
 	def invalidate(self):
