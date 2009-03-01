@@ -267,7 +267,8 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         else:
             self.currentValue[sAudio] = iDelay + self.lowerBound
         self[sAudio+"Slider"].setValue(iDelay)
-        self[sAudio+"SliderText"].setText(_("%i ms")%self.currentValue[sAudio])
+        iCurDelay = self.currentValue[sAudio]
+        self[sAudio+"SliderText"].setText(_("%i ms")%iCurDelay)
 
     def setChannelInfoText(self):
         sActiveAudio = str(self.AC3delay.selectedAudioInfo[0])
