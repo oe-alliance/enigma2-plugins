@@ -1,5 +1,6 @@
 AUTOMAKE_OPTIONS = gnu
 SUBDIRS = \
+	ac3lipsync \
 	antiscrollbar \
 	autoresolution \
 	autotimer \

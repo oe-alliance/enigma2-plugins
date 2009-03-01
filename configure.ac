@@ -182,4 +182,9 @@ networkbrowser/src/Makefile
 networkbrowser/src/icons/Makefile
 networkbrowser/src/lib/Makefile
 networkbrowser/po/Makefile
+
+ac3lipsync/Makefile
+ac3lipsync/po/Makefile
+ac3lipsync/img/Makefile
+ac3lipsync/src/Makefile
 ])
