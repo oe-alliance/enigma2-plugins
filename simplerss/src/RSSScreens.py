@@ -9,8 +9,9 @@ from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
+from Components.Sources.List import List
 
-from RSSList import RSSFeedList, RSSEntryList
+from RSSList import RSSFeedList
 
 class RSSBaseView(Screen):
 	"""Base Screen for all Screens used in SimpleRSS"""
@@ -182,7 +183,16 @@ class RSSFeedView(RSSBaseView):
 	skin = """
 		<screen position="100,100" size="460,415" title="Simple RSS Reader" >
 			<widget name="info" position="0,0" size="460,20" halign="right" font="Regular; 18" />
-			<widget name="content" position="0,20" size="460,300" scrollbarMode="showOnDemand" />
+			<widget source="content" render="Listbox" position="0,20" size="460,300" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos=(0, 3), size=(460, 294), font=0, flags = RT_HALIGN_LEFT|RT_WRAP, text = 0)
+						],
+					 "fonts": [gFont("Regular", 22)],
+					 "itemHeight": 50
+					}
+				</convert>
+			</widget>
 			<widget name="summary" position="0,320" size="460,95" font="Regular;16" />
 		</screen>"""
 
@@ -193,7 +203,7 @@ class RSSFeedView(RSSBaseView):
 		self.newItems = newItems
 		self.id = id
 
-		self["content"] = RSSEntryList(self.feed.history)
+		self["content"] = List(self.feed.history)
 		self["summary"] = Label()
 		self["info"] = Label()
 
@@ -221,7 +231,7 @@ class RSSFeedView(RSSBaseView):
 			self.timer.callback.append(self.timerTick)
 			self.onExecBegin.append(self.startTimer)
 
-		self["content"].connectSelChanged(self.updateInfo)
+		self["content"].onSelectionChanged.append(self.updateInfo)
 		self.onLayoutFinish.extend([self.updateInfo, self.setConditionalTitle])
 
 	def startTimer(self):
@@ -245,11 +255,7 @@ class RSSFeedView(RSSBaseView):
 		print "[SimpleRSS] SimpleRSSFeed called back"
 
 		if id is None or id+1 == self.id:
-			# TODO: do we really need this?
-			current_entry = self["content"].getCurrent()
-			self["content"].moveToEntry(current_entry)
-
-			self["content"].invalidate()
+			self["content"].updateList(self.feed.history)
 			self.setConditionalTitle()
 			self.updateInfo()
 
@@ -257,11 +263,11 @@ class RSSFeedView(RSSBaseView):
 		self.setTitle(_("Simple RSS Reader: %s") % (self.feed.title))
 
 	def updateInfo(self):
-		current_entry = self["content"].getCurrent()
+		current_entry = self["content"].current
 		if current_entry:
 			self["summary"].setText(current_entry[2])
 
-			cur_idx = self["content"].getSelectedIndex()
+			cur_idx = self["content"].index
 			self["info"].setText(_("Entry %s/%s") % (cur_idx+1, len(self.feed.history)))
 		else:
 			self["summary"].setText(_("Feed is empty."))
@@ -272,23 +278,20 @@ class RSSFeedView(RSSBaseView):
 			self.singleUpdate(self.id-1)
 
 	def nextEntry(self):
-		self["content"].down()
-		return (self["content"].getCurrent(), self["content"].getSelectedIndex(), len(self.feed.history))
+		self["content"].selectNext()
+		return (self["content"].current, self["content"].index, len(self.feed.history))
 
 	def previousEntry(self):
-		self["content"].up()
-		return (self["content"].getCurrent(), self["content"].getSelectedIndex(), len(self.feed.history))
+		self["content"].selectPrevious()
+		return (self["content"].current, self["content"].index, len(self.feed.history))
 
-	# TODO: Fix moving back to previously marked entry (same goes for self.previous)
 	def next(self):
 		# Show next Feed
 		if self.parent is not None:
 			(self.feed, self.id) = self.parent.nextFeed()
-			#current_entry = self["content"].getCurrent()
-			self["content"].setList(self.feed.history) # Update list
-			self["content"].moveToIndex(0)
-			#self["content"].moveToEntry(current_entry)
-			self.updateInfo() # In case entry is no longer in history
+			self["content"].list = self.feed.history
+			self["content"].index = 0
+			self.updateInfo()
 			self.setConditionalTitle() # Update title
 			return (self.feed.title, self.feed.history, self.id)
 		return (self.feed.title, self.feed.history, self.id)
@@ -297,11 +300,9 @@ class RSSFeedView(RSSBaseView):
 		# Show previous Feed
 		if self.parent is not None:
 			(self.feed, self.id) = self.parent.previousFeed()
-			#current_entry = self["content"].getCurrent()
-			self["content"].setList(self.feed.history) # Update list
-			self["content"].moveToIndex(0)
-			#self["content"].moveToEntry(current_entry)
-			self.updateInfo() # In case entry is no longer in history
+			self["content"].list = self.feed.history
+			self["content"].index = 0
+			self.updateInfo()
 			self.setConditionalTitle() # Update title
 			return (self.feed.title, self.feed.history, self.id)
 		return (self.feed.title, self.feed.history, self.id)
@@ -311,23 +312,23 @@ class RSSFeedView(RSSBaseView):
 			self.singleUpdate(self.id-1)
 
 	def showCurrentEntry(self):
-		current_entry = self["content"].getCurrent()
-		if current_entry is None: # empty list
+		current_entry = self["content"].current
+		if not current_entry: # empty list
 			return
 
 		self.session.openWithCallback(
 			self.updateInfo,
 			RSSEntryView,
 			current_entry,
-			cur_idx=self["content"].getSelectedIndex(),
-			entries=len(self.feed.history),
-			feedTitle=self.feed.title,
-			parent=self
+			cur_idx = self["content"].index,
+			entries = len(self.feed.history),
+			feedTitle = self.feed.title,
+			parent = self
 		)
 
 	def selectEnclosure(self):
-		current_entry = self["content"].getCurrent()
-		if current_entry is None: # empty list
+		current_entry = self["content"].current
+		if not current_entry: # empty list
 			return
 
 		RSSBaseView.selectEnclosure(self, current_entry[3])
