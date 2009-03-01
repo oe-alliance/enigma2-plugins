@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-31 16:41+0100\n"
-"PO-Revision-Date: 2008-12-31 16:44+0100\n"
+"POT-Creation-Date: 2009-03-01 10:17+0100\n"
+"PO-Revision-Date: 2009-01-31 10:55+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,6 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 #. TRANSLATORS: this is a help text, keep it short
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Add entry to phonebook"
 msgstr "Aan telefoonlijst toevoegen"
 
@@ -87,16 +86,6 @@ msgstr ""
 "probeert opnieuw"
 
 #, python-format
-msgid ""
-"Corrupt phonebook entry\n"
-"for number %d\n"
-"Deleting."
-msgstr ""
-"Ongeldige telefoonboek vermelding\n"
-"voor nummer %d\n"
-"Verwijderd..."
-
-#, python-format
 msgid "Could not load calls from FRITZ!Box - Error: %s"
 msgstr "Kon de gesprekken niet laden van FRITZ!Box - Fout: %s"
 
@@ -110,6 +99,9 @@ msgstr "Fout bij het verwerken van een FRITZ!Box telefoonboek regel"
 msgid "Country"
 msgstr "Land"
 
+msgid "Debug"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
 msgstr "Wissen"
@@ -117,6 +109,10 @@ msgstr "Wissen"
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Delete entry"
 msgstr "Wis regel"
+
+#, python-format
+msgid "Dialling failed - Error: %s"
+msgstr ""
 
 msgid "Display FRITZ!box-Fon calls on screen"
 msgstr "Laat FRITZ!Box-Fon gesprekken op het scherm zien"
@@ -137,7 +133,6 @@ msgstr "Laat gemiste gesprekken zien"
 msgid "Display outgoing calls"
 msgstr "Laat uitgaande gesprekken zien"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Do what?"
 msgstr "Wat nu te doen..."
 
@@ -154,25 +149,6 @@ msgstr ""
 "%(number)s\n"
 "\n"
 "%(name)s"
-
-#, python-format
-msgid ""
-"Do you really want to overwrite entry for %(number)s\n"
-"\n"
-"%(name)s\n"
-"\n"
-"with\n"
-"\n"
-"%(newname)s?"
-msgstr ""
-"Wilt u echt onderstaande regel overschrijven\n"
-"%(number)s\n"
-"\n"
-"%(name)s\n"
-"\n"
-"met\n"
-"\n"
-"%(newname)s"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Edit"
@@ -207,9 +183,11 @@ msgstr "Flash"
 msgid "France"
 msgstr "Frankrijk"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "FritzCall Setup"
 msgstr "Setup Fritzcall"
+
+msgid "Full screen display"
+msgstr ""
 
 msgid "Germany"
 msgstr "Duitsland"
@@ -276,6 +254,15 @@ msgstr "Nieuw"
 msgid "No entry selected"
 msgstr "Geen regel geselecteerd"
 
+msgid "No result from LDIF"
+msgstr ""
+
+msgid "No result from Outlook export"
+msgstr ""
+
+msgid "No result from reverse lookup"
+msgstr ""
+
 msgid "Number"
 msgstr "Nummer"
 
@@ -309,7 +296,6 @@ msgstr "Uitgaande gesprekken"
 msgid "Password Accessing FRITZ!Box"
 msgstr "Wachtwoord voor toegang FRITZ!Box"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
 msgstr "Telefoongesprekken"
@@ -317,7 +303,6 @@ msgstr "Telefoongesprekken"
 msgid "PhoneBook Location"
 msgstr "Telefoonboek locatie"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Telefoonboek"
@@ -331,6 +316,9 @@ msgstr "Lees telefoonboek van FRITZ!Box"
 
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Omgekeerd zoeken van een beller ID"
+
+msgid "Reverse searching..."
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Save"
@@ -346,6 +334,12 @@ msgstr "Zoeken (hoofdletter ongevoelig)"
 
 msgid "Search phonebook"
 msgstr "Doorzoek het telefoonboek"
+
+msgid "Searching in LDIF..."
+msgstr ""
+
+msgid "Searching in Outlook export..."
+msgstr ""
 
 msgid "Shortcut"
 msgstr "Snelkoppeling"
@@ -457,3 +451,21 @@ msgstr "laat niets zien"
 
 msgid "work"
 msgstr "werk"
+
+#~ msgid ""
+#~ "Do you really want to overwrite entry for %(number)s\n"
+#~ "\n"
+#~ "%(name)s\n"
+#~ "\n"
+#~ "with\n"
+#~ "\n"
+#~ "%(newname)s?"
+#~ msgstr ""
+#~ "Wilt u echt onderstaande regel overschrijven\n"
+#~ "%(number)s\n"
+#~ "\n"
+#~ "%(name)s\n"
+#~ "\n"
+#~ "met\n"
+#~ "\n"
+#~ "%(newname)s"

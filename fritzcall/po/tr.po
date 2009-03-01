@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-31 16:41+0100\n"
-"PO-Revision-Date: 2009-02-08 12:17+0200\n"
+"POT-Creation-Date: 2009-03-01 10:17+0100\n"
+"PO-Revision-Date: 2009-02-17 20:09+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,6 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #. TRANSLATORS: this is a help text, keep it short
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Add entry to phonebook"
 msgstr "Rehbere kayıt ekle"
 
@@ -85,16 +84,6 @@ msgstr ""
 "yeniden deneniyor..."
 
 #, python-format
-msgid ""
-"Corrupt phonebook entry\n"
-"for number %d\n"
-"Deleting."
-msgstr ""
-"%d numaralı\n"
-"bozuk rehber kaydı\n"
-"siliniyor."
-
-#, python-format
 msgid "Could not load calls from FRITZ!Box - Error: %s"
 msgstr "Aramalar, FRITZ!Box'dan yüklenemiyor - Hata: %s"
 
@@ -108,6 +97,9 @@ msgstr "FRITZ!Box rehber kaydı ayrıştırılamıyor"
 msgid "Country"
 msgstr "Ülke"
 
+msgid "Debug"
+msgstr "Hata ayıklama"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
 msgstr "Sil"
@@ -115,6 +107,10 @@ msgstr "Sil"
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Delete entry"
 msgstr "Kayıt sil"
+
+#, python-format
+msgid "Dialling failed - Error: %s"
+msgstr "Arama başlatılamadı! - Hata: %s"
 
 msgid "Display FRITZ!box-Fon calls on screen"
 msgstr "FRITZ!box-Fon aramalarını ekranda göster"
@@ -135,7 +131,6 @@ msgstr "Cevapsız aramaları göster"
 msgid "Display outgoing calls"
 msgstr "Giden aramaları göster"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Do what?"
 msgstr "Ne yapılsın?"
 
@@ -152,24 +147,6 @@ msgstr ""
 "%(number)s\n"
 "\n"
 "%(name)s?"
-
-#, python-format
-msgid ""
-"Do you really want to overwrite entry for %(number)s\n"
-"\n"
-"%(name)s\n"
-"\n"
-"with\n"
-"\n"
-"%(newname)s?"
-msgstr ""
-"%(number)s için tanımladığınız\n"
-"\n"
-"%(name)s kaydını\n"
-"\n"
-"%(newname)s olarak\n"
-"\n"
-"değiştirmek istiyor musunuz?"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Edit"
@@ -204,9 +181,11 @@ msgstr "Flaş"
 msgid "France"
 msgstr "Fransa"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "FritzCall Setup"
 msgstr "FritzCall Kurulumu"
+
+msgid "Full screen display"
+msgstr "Tam ekran göster"
 
 msgid "Germany"
 msgstr "Almanya"
@@ -273,6 +252,15 @@ msgstr "Yeni"
 msgid "No entry selected"
 msgstr "Seçim yapılmadı"
 
+msgid "No result from LDIF"
+msgstr ""
+
+msgid "No result from Outlook export"
+msgstr ""
+
+msgid "No result from reverse lookup"
+msgstr ""
+
 msgid "Number"
 msgstr "Numara"
 
@@ -306,7 +294,6 @@ msgstr "Giden aramalar"
 msgid "Password Accessing FRITZ!Box"
 msgstr "FRITZ!Box Parola Erişimi"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
 msgstr "Telefon aramaları"
@@ -314,7 +301,6 @@ msgstr "Telefon aramaları"
 msgid "PhoneBook Location"
 msgstr "Rehber Konumu"
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Rehber"
@@ -328,6 +314,9 @@ msgstr "FRITZ!Box Rehberini Oku"
 
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Caller ID'yi hizmet sağlayıcıdan sorgula (aşağıdan ülke seçin)"
+
+msgid "Reverse searching..."
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Save"
@@ -343,6 +332,12 @@ msgstr "Ara (büyük-küçük harf duyarlı)"
 
 msgid "Search phonebook"
 msgstr "Rehberde ara"
+
+msgid "Searching in LDIF..."
+msgstr ""
+
+msgid "Searching in Outlook export..."
+msgstr ""
 
 msgid "Shortcut"
 msgstr "Kısayol"
@@ -385,7 +380,8 @@ msgid "Vanity"
 msgstr "Belirleyici isim"
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr "FRITZ!Box'ta görüntülemeyi etkinleştirmek için #96*5* 'u aramanız gerekiyor!"
+msgstr ""
+"FRITZ!Box'ta görüntülemeyi etkinleştirmek için #96*5* 'u aramanız gerekiyor!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
@@ -465,6 +461,36 @@ msgstr "iş"
 #~ "%s(name)\n"
 #~ "\n"
 #~ "aransın mı?"
+
+#~ msgid "Can't create PhoneBook.txt"
+#~ msgstr "PhoneBook.txt oluşturulamıyor"
+
+#~ msgid ""
+#~ "Corrupt phonebook entry\n"
+#~ "for number %d\n"
+#~ "Deleting."
+#~ msgstr ""
+#~ "%d numaralı\n"
+#~ "bozuk rehber kaydı\n"
+#~ "siliniyor."
+
+#~ msgid ""
+#~ "Do you really want to overwrite entry for %(number)s\n"
+#~ "\n"
+#~ "%(name)s\n"
+#~ "\n"
+#~ "with\n"
+#~ "\n"
+#~ "%(newname)s?"
+#~ msgstr ""
+#~ "%(number)s için tanımladığınız\n"
+#~ "\n"
+#~ "%(name)s kaydını\n"
+#~ "\n"
+#~ "%(newname)s olarak\n"
+#~ "\n"
+#~ "değiştirmek istiyor musunuz?"
+
 #~ msgid ""
 #~ "Do you want to add a phonebook entry\n"
 #~ "\n"
@@ -481,6 +507,7 @@ msgstr "iş"
 #~ "olarak\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
+
 #~ msgid ""
 #~ "Do you want to add a phonebook entry for\n"
 #~ "\n"
@@ -489,14 +516,6 @@ msgstr "iş"
 #~ "%s kaydını\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
-#~ msgid "Reverse lookup for "
-#~ msgstr "Hizmet sağlayıcıdan isim sorgula : "
-#~ msgid "Reverse lookup not successful"
-#~ msgstr "İsim sorgulama başarısız"
-#~ msgid "Reverse lookup successful"
-#~ msgstr "İsim sorgulama başarılı"
-#~ msgid "Can't create PhoneBook.txt"
-#~ msgstr "PhoneBook.txt oluşturulamıyor"
 
 #, fuzzy
 #~ msgid ""
@@ -507,6 +526,15 @@ msgstr "iş"
 #~ "%s kaydını\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
+
 #~ msgid "Edit phonebook entry"
 #~ msgstr "Rehber kaydını düzelt"
 
+#~ msgid "Reverse lookup for "
+#~ msgstr "Hizmet sağlayıcıdan isim sorgula : "
+
+#~ msgid "Reverse lookup not successful"
+#~ msgstr "İsim sorgulama başarısız"
+
+#~ msgid "Reverse lookup successful"
+#~ msgstr "İsim sorgulama başarılı"

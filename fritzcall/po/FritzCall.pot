@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-31 16:41+0100\n"
+"POT-Creation-Date: 2009-03-01 10:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. TRANSLATORS: this is a help text, keep it short
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Add entry to phonebook"
 msgstr ""
 
@@ -81,13 +80,6 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Corrupt phonebook entry\n"
-"for number %d\n"
-"Deleting."
-msgstr ""
-
-#, python-format
 msgid "Could not load calls from FRITZ!Box - Error: %s"
 msgstr ""
 
@@ -101,12 +93,19 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+msgid "Debug"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
 msgstr ""
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Delete entry"
+msgstr ""
+
+#, python-format
+msgid "Dialling failed - Error: %s"
 msgstr ""
 
 msgid "Display FRITZ!box-Fon calls on screen"
@@ -128,7 +127,6 @@ msgstr ""
 msgid "Display outgoing calls"
 msgstr ""
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "Do what?"
 msgstr ""
 
@@ -139,17 +137,6 @@ msgid ""
 "%(number)s\n"
 "\n"
 "%(name)s?"
-msgstr ""
-
-#, python-format
-msgid ""
-"Do you really want to overwrite entry for %(number)s\n"
-"\n"
-"%(name)s\n"
-"\n"
-"with\n"
-"\n"
-"%(newname)s?"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -185,8 +172,10 @@ msgstr ""
 msgid "France"
 msgstr ""
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 msgid "FritzCall Setup"
+msgstr ""
+
+msgid "Full screen display"
 msgstr ""
 
 msgid "Germany"
@@ -248,6 +237,15 @@ msgstr ""
 msgid "No entry selected"
 msgstr ""
 
+msgid "No result from LDIF"
+msgstr ""
+
+msgid "No result from Outlook export"
+msgstr ""
+
+msgid "No result from reverse lookup"
+msgstr ""
+
 msgid "Number"
 msgstr ""
 
@@ -275,7 +273,6 @@ msgstr ""
 msgid "Password Accessing FRITZ!Box"
 msgstr ""
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
 msgstr ""
@@ -283,7 +280,6 @@ msgstr ""
 msgid "PhoneBook Location"
 msgstr ""
 
-#. TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr ""
@@ -296,6 +292,9 @@ msgid "Read PhoneBook from FRITZ!Box"
 msgstr ""
 
 msgid "Reverse Lookup Caller ID (select country below)"
+msgstr ""
+
+msgid "Reverse searching..."
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -311,6 +310,12 @@ msgid "Search (case insensitive)"
 msgstr ""
 
 msgid "Search phonebook"
+msgstr ""
+
+msgid "Searching in LDIF..."
+msgstr ""
+
+msgid "Searching in Outlook export..."
 msgstr ""
 
 msgid "Shortcut"
