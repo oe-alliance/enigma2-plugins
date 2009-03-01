@@ -1,8 +1,8 @@
 Package: enigma2-plugin-extensions-tageditor
-Version: 1.0-20080717
+Version: 1.1-20090216
 Description: Edit tags of movies, and in timers
 Section: extra
 Priority: optional
 Architecture: mipsel
 Maintainer: Anders Holst <aho@sics.se> and Moritz Venn <moritz.venn@freaque.net>
-Depends: enigma2(>2.5cvs200817)
+Depends: enigma2(>2.5cvs20081117)
