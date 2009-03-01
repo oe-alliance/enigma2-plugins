@@ -4,9 +4,10 @@ from . import _
 
 # GUI (Components)
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
 	RT_HALIGN_RIGHT, RT_VALIGN_CENTER
+
+from skin import parseColor, parseFont
 
 from ServiceReference import ServiceReference
 from Tools.FuzzyDate import FuzzyTime
@@ -20,22 +21,37 @@ class AutoTimerList(MenuList):
 		self.l.setFont(0, gFont("Regular", 22))
 		self.l.setBuildFunc(self.buildListboxEntry)
 		self.l.setItemHeight(25)
+		self.colorDisabled = 12368828
+
+	def applySkin(self, desktop, parent):
+		attribs = [ ] 
+		if self.skinAttributes is not None:
+			for (attrib, value) in self.skinAttributes:
+				if attrib == "font":
+					self.l.setFont(0, parseFont(value, ((1,1),(1,1))))
+				elif attrib == "itemHeight":
+					self.l.setItemHeight(int(value))
+				elif attrib == "colorDisabled":
+					self.colorDisabled = int(parseColor(value))
+				else:
+					attribs.append((attrib, value))
+		self.skinAttributes = attribs
+		return MenuList.applySkin(self, desktop, parent)
 
 	#
 	#  | <Name of AutoTimer> |
 	#
 	def buildListboxEntry(self, timer):
-		res = [ None ]
-		width = self.l.getItemSize().width()
+		size = self.l.getItemSize()
 
-		if timer.enabled:
-			# Append with default color
-			res.append(MultiContentEntryText(pos=(5, 0), size=(width, 25), font=0, flags = RT_HALIGN_LEFT, text = timer.name))
-		else:
-			# Append with grey as color
-			res.append(MultiContentEntryText(pos=(5, 0), size=(width, 25), font=0, flags = RT_HALIGN_LEFT, text = timer.name, color = 12368828, color_sel = 12368828))
+		color = None
+		if not timer.enabled:
+			color = self.colorDisabled
 
-		return res
+		return [
+			None,
+			(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, size.width() - 5, size.height(), 0, RT_HALIGN_LEFT, timer.name, color, color)
+		]
 
 	def getCurrent(self):
 		cur = self.l.getCurrentSelection()
@@ -63,22 +79,41 @@ class AutoTimerPreviewList(MenuList):
 		self.l.setBuildFunc(self.buildListboxEntry)
 		self.l.setItemHeight(70)
 
+	def applySkin(self, desktop, parent):
+		attribs = [ ] 
+		if self.skinAttributes is not None:
+			for (attrib, value) in self.skinAttributes:
+				if attrib == "font":
+					self.l.setFont(1, parseFont(value, ((1,1),(1,1))))
+				elif attrib == "serviceNameFont":
+					self.l.setFont(0, parseFont(value, ((1,1),(1,1))))
+				elif attrib == "colorDisabled":
+					self.colorDisabled = int(parseColor(value))
+				elif attrib == "itemHeight":
+					self.l.setItemHeight(int(value))
+				else:
+					attribs.append((attrib, value))
+		self.skinAttributes = attribs
+		return MenuList.applySkin(self, desktop, parent)
+
 	#
 	#  | <Service>     <Name of the Event>  |
 	#  | <start, end>  <Name of AutoTimer>  |
 	#
 	def buildListboxEntry(self, name, begin, end, serviceref, timername):
-		res = [ None ]
-		width = self.l.getItemSize().width()
+		size = self.l.getItemSize()
+		width = size.width()
 
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, ServiceReference(serviceref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 30, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, name))
-
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, 400, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(begin) + FuzzyTime(end)[1:] + ((end - begin) / 60,)))))
-
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, width-240, 50, 240, 20, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, timername))
-
-		return res
+		# XXX: this does not scale very well yet
+		return [
+			None,
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, \
+					ServiceReference(serviceref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')),
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, 30, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, name),
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, 50, 400, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, \
+					(("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(begin) + FuzzyTime(end)[1:] + ((end - begin) / 60,)))),
+			(eListboxPythonMultiContent.TYPE_TEXT, width - 245, 50, 240, 20, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, timername)
+		]
 
 	def invalidate(self):
 		self.l.invalidate()
