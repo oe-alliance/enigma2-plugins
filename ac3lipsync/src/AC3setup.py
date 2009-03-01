@@ -36,15 +36,16 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
 
     def __init__(self, session, args = None):
         Screen.__init__(self, session)
-                
+
         # nun erzeugen wir eine liste von elementen fuer die menu liste.
-        self.list = [ ]
-        self.list.append(getConfigListEntry(_("Minimum delay"), config.plugins.AC3LipSync.lowerBound))
-        self.list.append(getConfigListEntry(_("Maximum delay"), config.plugins.AC3LipSync.upperBound))
-        self.list.append(getConfigListEntry(_("Step in ms for arrow keys"), config.plugins.AC3LipSync.arrowStepSize))
+        self.list = [
+            getConfigListEntry(_("Minimum delay"), config.plugins.AC3LipSync.lowerBound),
+            getConfigListEntry(_("Maximum delay"), config.plugins.AC3LipSync.upperBound),
+            getConfigListEntry(_("Step in ms for arrow keys"), config.plugins.AC3LipSync.arrowStepSize)
+        ]
         for i in range(1 , 10):
             self.list.append(getConfigListEntry(_("Step in ms for key %i" %i), config.plugins.AC3LipSync.keySteps[i].stepSize))
-            
+
         ConfigListScreen.__init__(self, self.list)
 
         self["config"].list = self.list
@@ -53,7 +54,7 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
         self["key_red"] = Button(_("Cancel"))
         self["key_green"] = Button(_("Save"))
         self["key_yellow"] = Button(_("Recalculate..."))
-        self["key_blue"] = Button(_(" "))        
+        self["key_blue"] = Button(" ")
 
         self["setupActions"] = NumberActionMap(["SetupActions", "ColorActions"],
         {
@@ -72,7 +73,7 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
         for i in range(1 , 10):
             config.plugins.AC3LipSync.keySteps[i].stepSize.setValue(i*iStepSize)
         self["config"].setList(self.list)
-        
+
     def save(self):
         iLowerBound = int(config.plugins.AC3LipSync.lowerBound.getValue())
         iUpperBound = int(config.plugins.AC3LipSync.upperBound.getValue())
@@ -90,7 +91,3 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
             x[1].cancel()
         self.close()
 
-    def startPlugin(self):
-        self.save
-        AC3LipSync(self.session)
-        self.close()

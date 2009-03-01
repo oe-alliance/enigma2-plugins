@@ -5,8 +5,7 @@ from Tools.ISO639 import LanguageCodes
 import os
 import NavigationInstance
 
-class AC3delay():
-    
+class AC3delay:
     def __init__(self, session):
         self.iService = None
         self.iServiceReference = None
@@ -19,22 +18,21 @@ class AC3delay():
         self.lamedbDelay = {}
 
         self.getAudioInformation()
-        
+
         # Current value for movie start behaviour
         self.movieStart = config.usage.on_movie_start.getValue()
-        
-        
+
     def initAudio(self):
         self.iService = NavigationInstance.instance.getCurrentService()
         self.iServiceReference = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
         self.iAudioDelay = self.iService and self.iService.audioDelay()
         self.iSeek = self.iService and self.iService.seek()
-    
+
     def deleteAudio(self):
         self.iService = None
         self.iAudioDelay = None
         self.iSeek = None
-        
+
     def setChannelAudio(self, sAudio):
         self.channelAudio = sAudio
 
@@ -58,14 +56,14 @@ class AC3delay():
                     self.timer.start(400, False)
         else:
             self.deleteAudio()
-    
+
     def seekAfterWait(self):
         self.timer.stop()
         self.initAudio()
         if self.iSeek is not None:
             self.iSeek.seekTo(self.lCurPosition)
         self.deleteAudio()
-        
+
     def cueGetCurrentPosition(self):
         if self.iSeek is None:
             return None
@@ -90,7 +88,7 @@ class AC3delay():
         if bInitialized == True:
             self.deleteAudio()
         return iDelay
-    
+
     def getFileDelay(self, sAudio):
         sFileName = lFileDelay[sAudio]
         if os.path.exists(sFileName) == True:
@@ -113,7 +111,7 @@ class AC3delay():
             else:
                 self.iAudioDelay.setPCMDelay(iDelay)
         self.activateDelay()
-    
+
     def setFileDelay(self, sAudio, iDelay):
         hDelay = dec2hex(iDelay*90)
         sFileName = lFileDelay[sAudio]
@@ -122,7 +120,7 @@ class AC3delay():
             delayfile.write("%s\0" % hDelay)
             delayfile.close()
             self.activateDelay()
-            
+
     def getAudioInformation(self):
         bInitialized = False
         if self.iService == None:
@@ -165,3 +163,4 @@ class AC3delay():
         del oAudioTracks
         if bInitialized == True:
             self.deleteAudio()
+
