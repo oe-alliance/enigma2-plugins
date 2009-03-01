@@ -6,7 +6,7 @@
 #
 
 DOMAIN=AC3LipSync
-installdir = /usr/lib/enigma2/python/Plugins/SystemPlugins/$(DOMAIN)
+installdir = /usr/lib/enigma2/python/Plugins/Extensions/$(DOMAIN)
 #GETTEXT=./pygettext.py
 GETTEXT=xgettext
 
@@ -31,8 +31,6 @@ merge:
 # the TRANSLATORS: allows putting translation comments before the to-be-translated line.
 $(DOMAIN).pot:
 	$(GETTEXT) -L python --add-comments="TRANSLATORS:" -d $(DOMAIN) -s -o $(DOMAIN).pot ../src/*.py
-
-	#../../xml2po.py ../src/ >> $(DOMAIN).pot
 
 	msguniq -o $(DOMAIN)uniq.pot $(DOMAIN).pot
 	$(RM) $(DOMAIN).pot
