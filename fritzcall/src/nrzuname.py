@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: ISO-8859-1 -*-
+# -*- coding: UTF-8 -*-
 # $Id$
 # $Author$
 # $Revision$
@@ -10,7 +10,7 @@ from xml.dom.minidom import parse
 from twisted.web.client import getPage #@UnresolvedImport
 from twisted.internet import reactor #@UnresolvedImport
 
-debug = True
+debug = False
 def setDebug(what):
 	global debug
 	debug = what
@@ -19,56 +19,62 @@ def myprint(str):
 	if debug:
 		print str
 
-def html2utf8(in_html):
+import htmlentitydefs
+def html2unicode(in_html):
+	# sanity checks
 	try:
-		import htmlentitydefs
-	except ImportError:
+		in_html = in_html.decode('iso-8859-1')
+		myprint("[Callhtml2utf8] Converted from latin1")
+	except:
 		try:
-			return in_html.replace("&amp;", "&").replace("&szlig;", "ßŸ").replace("&auml;", "ä").replace("&ouml;", "ö").replace("&uuml;", "ü").replace("&Auml;", "Ä").replace("&Ouml;", "Ö").replace("&Uuml;", "Ü")
-		except UnicodeDecodeError:
+			in_html = in_html.decode('utf-8')
+			myprint("[Callhtml2utf8] Converted from utf-8")
+		except:
 			pass
-	else:
-		# first convert some WML codes; does not work?!?!
-		wmldefs = [
-				("&#xDF;", "ß"),
-				("&#xE4;", "ä"),
-				("&#xF6;", "ö"),
-				("&#xFC;", "ü"),
-				("&#xC4;", "Ä"),
-				("&#xD6;", "Ö"),
-				("&#xDC;", "Ü")
-				]
-		for (a, b)in wmldefs:
-			try:
-				in_html = in_html.replace(a,b)
-			except UnicodeError:
-				pass
+	# first convert some WML codes; does not work?!?!
+	wmldefs = [
+			("&#xDF;", "&szlig;"),
+			("&#xE4;", "&auml;"),
+			("&#xF6;", "&ouml;"),
+			("&#xFC;", "&uuml"),
+			("&#xC4;", "&Auml;"),
+			("&#xD6;", "&Ouml;"),
+			("&#xDC;", "&Uumml;")
+			]
+	for (a, b)in wmldefs:
+		in_html = in_html.replace(a,b)
 
-		htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
-		entitydict = {}
-		entities = htmlentitynamemask.finditer(in_html)
-		for x in entities:
-			entitydict[x.group(1)] = x.group(2)
-		for key, name in entitydict.items():
-			try:
-				entitydict[key] = htmlentitydefs.name2codepoint[name]
-			except KeyError:
-				myprint("[Callhtml2utf8] KeyError " + key + "/" + name)
-				pass
+	htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
+	entitydict = {}
+	entities = htmlentitynamemask.finditer(in_html)
+	for x in entities:
+		# myprint("[Callhtml2utf8] mask: found %s" %repr(x.group(2)))
+		entitydict[x.group(1)] = x.group(2)
+	for key, name in entitydict.items():
+		try:
+			entitydict[key] = htmlentitydefs.name2codepoint[str(name)]
+		except KeyError:
+			myprint("[Callhtml2utf8] KeyError " + key + "/" + name)
+			pass
 
-		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
-		entities = htmlentitynumbermask.finditer(in_html)
-		for x in entities:
-			entitydict[x.group(1)] = x.group(2)
-		for key, codepoint in entitydict.items():
-			try:
-				in_html = in_html.replace(key, (unichr(int(codepoint)).encode('utf8', "replace")))
-			except ValueError:
-				myprint("[Callhtml2utf8] ValueError " + key + "/" + str(codepoint))
-				pass
+	htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
+	entities = htmlentitynumbermask.finditer(in_html)
+	for x in entities:
+		# myprint("[Callhtml2utf8] number: found %s" %x.group(1))
+		entitydict[x.group(1)] = x.group(2)
+	for key, codepoint in entitydict.items():
+		try:
+			myprint("[Callhtml2utf8] replace %s with %s" %(repr(key), unichr(int(codepoint))))
+			in_html = in_html.replace(unicode(key), (unichr(int(codepoint))))
+		except ValueError:
+			myprint("[Callhtml2utf8] ValueError " + key + "/" + str(codepoint))
+			pass
 	return in_html
 
 def out(number, caller):
+	myprint("[out] %s: %s" %(number, caller))
+	if not caller:
+		return
 	name = vorname = strasse = hnr = plz = ort = ""
 	lines = caller.split(', ')
 	found = re.match("(.+?)\s+(.+)", lines[0])
@@ -114,14 +120,20 @@ countries = { }
 reverselookupMtime = 0
 
 class ReverseLookupAndNotifier:
-	def __init__(self, number, outputFunction=out, charset="ISO-8859-1", countrycode = "0049"):
+	def __init__(self, number, outputFunction=out, charset="cp1252", countrycode = "0049"):
 		myprint("[ReverseLookupAndNotifier] reverse Lookup for %s!" %number)
 		self.number = number
 		self.outputFunction = outputFunction
-		self.charset = charset
 		self.caller = ""
 		self.currentWebsite = None
 		self.nextWebsiteNo = 0
+#===============================================================================
+# sorry does not work at all
+#		if not charset:
+#			charset = sys.getdefaultencoding()
+#			myprint("[ReverseLookupAndNotifier] set charset from system: %s!" %charset)
+#===============================================================================
+		self.charset = charset
 
 		global reverselookupMtime
 		reverselookupMtimeAct = os.stat(reverseLookupFileName)[8]
@@ -200,10 +212,10 @@ class ReverseLookupAndNotifier:
 		myprint("[ReverseLookupAndNotifier] Url to query: " + url)
 		url = url.encode("UTF-8", "replace")
 		self.currentWebsite = website
-		# I am not sure, whether setting the user-agent works this way
 		getPage(url,
 			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5"
 			).addCallback(self._gotPage).addErrback(self._gotError)
+
 
 	def _gotPage(self, page):
 		myprint("[ReverseLookupAndNotifier] _gotPage")
@@ -218,18 +230,18 @@ class ReverseLookupAndNotifier:
 			# myprint("[ReverseLookupAndNotifier] _gotPage: try entry")
 			details = []
 			for what in ["name", "street", "city", "zipcode"]:
-				# myprint("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( what, pat ))
 				pat = ".*?" + self.getPattern(entry, what)
+				myprint("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( what, pat ))
 				found = re.match(pat, page, re.S|re.M)
 				if found:
-					# myprint("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( what, found.group(2) ))
-					myprint(found.group(1))
+					myprint("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( what, found.group(1) ))
 					item = found.group(1).replace("&nbsp;"," ").replace("</b>","").replace(","," ")
-					item = html2utf8(item).decode("ISO-8859-1", "replace")
+					item = html2unicode(item)
 					newitem = item.replace("  ", " ")
 					while newitem != item:
 						item = newitem
 						newitem = item.replace("  ", " ")
+					myprint("[ReverseLookupAndNotifier] _gotPage: add to details: " + item)
 					details.append(item.strip())
 				else:
 					break
@@ -244,10 +256,8 @@ class ReverseLookupAndNotifier:
 				# if self.number != 0 and config.plugins.Call.addcallers.value and self.event == "RING":
 					# phonebook.add(self.number, self.caller)
 
-				self.caller = self.caller.encode("UTF-8", "replace")
 				self.notifyAndReset()
 				return True
-				break
 		else:
 			self._gotError("[ReverseLookupAndNotifier] _gotPage: Nothing found at %s" %self.currentWebsite.getAttribute("name"))
 			
@@ -272,7 +282,15 @@ class ReverseLookupAndNotifier:
 	def notifyAndReset(self):
 		myprint("[ReverseLookupAndNotifier] notifyAndReset: Number: " + self.number + "; Caller: " + self.caller)
 		if self.caller:
-			self.outputFunction(self.number, self.caller.decode("utf-8").encode(self.charset))
+			myprint(repr(self.caller))
+			try:
+				self.caller = self.caller.encode(self.charset)
+			except:
+				myprint("[ReverseLookupAndNotifier] cannot encode?!?!")
+				pass
+			self.caller = unicode(self.caller)
+			myprint(repr(self.caller))
+			self.outputFunction(self.number, self.caller)
 		else:
 			self.outputFunction(self.number, "")
 		if __name__ == '__main__':
@@ -285,7 +303,7 @@ if __name__ == '__main__':
 		ReverseLookupAndNotifier(sys.argv[1])
 		reactor.run() #@UndefinedVariable
 	elif (len(sys.argv) == 3):
-		# nrzuname.py Nummer SimpleOut
+		# nrzuname.py Nummer Charset
 		debug = False
-		ReverseLookupAndNotifier(sys.argv[1], simpleout)
+		ReverseLookupAndNotifier(sys.argv[1], simpleout, sys.argv[2])
 		reactor.run() #@UndefinedVariable

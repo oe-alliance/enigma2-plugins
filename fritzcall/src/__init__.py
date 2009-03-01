@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Components.config import config #@UnresolvedImport
 import gettext
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport

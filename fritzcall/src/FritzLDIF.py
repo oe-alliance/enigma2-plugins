@@ -19,7 +19,6 @@ except ValueError:
 	def debug(text):
 		print text
 	
-	import re
 	def normalizePhoneNumber(intNo):
 		found = re.match('^\+49(.*)', intNo)
 		if found:
