@@ -1,5 +1,4 @@
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText
 
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
 	RT_WRAP
@@ -63,8 +62,8 @@ class RSSFeedList(MenuList):
 
 		return [
 			None,
-			MultiContentEntryText(pos=(0, 0), size=(width, titleHeight), font=0, flags = RT_HALIGN_LEFT|RT_WRAP, text = feed.title),
-			MultiContentEntryText(pos=(0, titleHeight), size=(width, descriptionHeight), font=1, flags = RT_HALIGN_LEFT, text = feed.description)
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, titleHeight, 0, RT_HALIGN_LEFT|RT_WRAP, feed.title),
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, titleHeight, width, descriptionHeight, 1, RT_HALIGN_LEFT, feed.description)
 		]
 
 	def getCurrent(self):

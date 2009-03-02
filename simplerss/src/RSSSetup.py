@@ -23,12 +23,12 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 
 		s = config.plugins.simpleRSS.feed[id]
-		self.list = [
+		list = [
 			getConfigListEntry(_("Autoupdate"), s.autoupdate),
 			getConfigListEntry(_("Feed URI"), s.uri)
 		]
 
-		ConfigListScreen.__init__(self, self.list, session)
+		ConfigListScreen.__init__(self, list, session)
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
@@ -69,33 +69,33 @@ class RSSSetup(ConfigListScreen, Screen):
 	def __init__(self, session, rssPoller = None):
 		Screen.__init__(self, session)
 
-		self.onClose.append(self.abort)
-
 		self.rssPoller = rssPoller
-
 		simpleRSS = config.plugins.simpleRSS
 
 		# Create List of all Feeds
-		self.list = [
+		list = [
 			getConfigListEntry(_("Feed"), x.uri)
 				for x in simpleRSS.feed
 		]
 
 		# Attach notifier to autostart and append ConfigListEntry to List
 		simpleRSS.autostart.addNotifier(self.autostartChanged, initial_call = False)
-		self.list.append(getConfigListEntry(_("Start automatically with Enigma2"), simpleRSS.autostart))
+		list.append(getConfigListEntry(_("Start automatically with Enigma2"), simpleRSS.autostart))
 
 		# Save keep_running in instance as we want to dynamically add/remove it
 		self.keep_running = getConfigListEntry(_("Keep running in background"), simpleRSS.keep_running)
 		if not simpleRSS.autostart.value:
-			self.list.append(self.keep_running)
+			list.append(self.keep_running)
 
 		# Append Last two config Elements
-		self.list.append(getConfigListEntry(_("Show new Messages as"), simpleRSS.update_notification))
-		self.list.append(getConfigListEntry(_("Update Interval (min)"), simpleRSS.interval))
+		list.extend((
+			getConfigListEntry(_("Show new Messages as"), simpleRSS.update_notification),
+			getConfigListEntry(_("Update Interval (min)"), simpleRSS.interval)
+		))
 
 		# Initialize ConfigListScreen
-		ConfigListScreen.__init__(self, self.list, session)
+		self.list = list
+		ConfigListScreen.__init__(self, list, session)
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
@@ -112,6 +112,7 @@ class RSSSetup(ConfigListScreen, Screen):
 		}, -1)
 
 		self.onLayoutFinish.append(self.setCustomTitle)
+		self.onClose.append(self.abort)
 
 	def setCustomTitle(self):
 		self.setTitle(_("Simple RSS Reader Setup"))
@@ -138,15 +139,16 @@ class RSSSetup(ConfigListScreen, Screen):
 
 	def deleteConfirm(self, result):
 		if result:
-			id = self["config"].instance.getCurrentIndex()
+			id = self["config"].getCurrentIndex()
 			del config.plugins.simpleRSS.feed[id]
 			config.plugins.simpleRSS.feedcount.value -= 1
 			self.list.pop(id)
+
 			# redraw list
-			self["config"].setList(self.list)
+			self["config"].l.invalidate()
 
 	def ok(self):
-		id = self["config"].instance.getCurrentIndex()
+		id = self["config"].getCurrentIndex()
 		self.session.openWithCallback(self.refresh, RSSFeedEdit, id)
 
 	def refresh(self):

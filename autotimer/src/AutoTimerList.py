@@ -4,8 +4,7 @@ from . import _
 
 # GUI (Components)
 from Components.MenuList import MenuList
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
-	RT_HALIGN_RIGHT, RT_VALIGN_CENTER
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT
 
 from skin import parseColor, parseFont
 
