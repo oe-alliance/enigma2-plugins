@@ -76,7 +76,7 @@ class SuggestionsListScreen(Screen):
 
 
 	def update(self, suggestions):
-		if suggestions:
+		if suggestions and len(suggestions[1]) > 0:
 			if not self.shown:
 				self.show()
 			self.suggestionlist.update(suggestions)
