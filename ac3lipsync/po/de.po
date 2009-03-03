@@ -136,8 +136,8 @@ msgstr "Schrittweite in ms für Pfeiltasten"
 
 #: ..\src/AC3setup.py:47
 #, python-format
-msgid "Step in ms for key %s"
-msgstr "Schrittweite in ms für Taste %s"
+msgid "Step in ms for key %i"
+msgstr "Schrittweite in ms für Taste %i"
 
 #: ..\src/AC3setup.py:54
 msgid "Cancel"

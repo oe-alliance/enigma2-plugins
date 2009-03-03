@@ -43,8 +43,11 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
             getConfigListEntry(_("Maximum delay"), config.plugins.AC3LipSync.upperBound),
             getConfigListEntry(_("Step in ms for arrow keys"), config.plugins.AC3LipSync.arrowStepSize)
         ]
-        for i in range(1 , 10):
-            self.list.append(getConfigListEntry(_("Step in ms for key %s" %(str(i))), config.plugins.AC3LipSync.keySteps[i].stepSize))
+        
+        self.list.extend([
+            getConfigListEntry(_("Step in ms for key %i") % (i), config.plugins.AC3LipSync.keySteps[i].stepSize)
+                for i in range(1 , 10)
+        ])
 
         ConfigListScreen.__init__(self, self.list)
 
