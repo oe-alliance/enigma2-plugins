@@ -9,6 +9,7 @@ from AutoTimerEditor import AutoTimerEditorBase, AutoTimerServiceEditor, \
 
 # GUI (Components)
 from Components.ActionMap import ActionMap
+from Components.Pixmap import Pixmap
 
 # Configuration
 from Components.config import getConfigListEntry, KEY_0, KEY_DELETE, \
@@ -23,29 +24,15 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 	STEP_ID_SERVICES = 7
 	STEP_ID_FILTER = 8
 
-	skin = """
-		<screen position="0,0" size="720,576" title="Welcome..." flags="wfNoBorder" >
-			<widget name="text" position="153,50" size="340,300" font="Regular;22" />
-			<widget source="list" render="Listbox" position="53,310" size="440,220" scrollbarMode="showOnDemand" >
-				<convert type="StringList" />
-			</widget>
-			<widget name="config" position="53,310" zPosition="1" size="440,220" transparent="1" scrollbarMode="showOnDemand" />
-			<ePixmap pixmap="skin_default/wizard.png" position="40,50" zPosition="10" size="110,174" transparent="1" alphatest="on"/>
-			<ePixmap pixmap="skin_default/buttons/button_red.png" position="40,225" zPosition="0" size="15,16" transparent="1" alphatest="on" />
-			<widget name="languagetext" position="55,225" size="95,30" font="Regular;18" />
-			<widget name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="500,50" zPosition="10" size="154,500" alphatest="on" />
-			<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="0,0" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
-			<widget name="arrowdown2" pixmap="skin_default/arrowdown.png" position="0,0" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
-			<widget name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
-			<widget name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" zPosition="11" size="37,70" transparent="1" alphatest="on"/>
-		</screen>"""
-
 	def __init__(self, session, newTimer):
 		self.xmlfile = Directories.resolveFilename(Directories.SCOPE_PLUGINS, "Extensions/AutoTimer/autotimerwizard.xml")
 
 		WizardLanguage.__init__(self, session, showSteps = False, showStepSlider = False)
 		AutoTimerEditorBase.__init__(self, newTimer)
 		Rc.__init__(self)
+
+		self.skinName = "StartWizard"
+		self["wizard"] = Pixmap()
 
 		self.doCancel = False
 		self.emptyMatch = False
