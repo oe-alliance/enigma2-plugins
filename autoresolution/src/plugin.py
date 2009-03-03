@@ -53,13 +53,13 @@ def build_switchdic():
 switchdic = build_switchdic()
 
 frqdic = { 23976: '24', \
-	   24000: '24', \
-	   25000: '25', \
-	   29970: '30', \
-	   30000: '30', \
-	   50000: '50', \
-	   59940: '60', \
-	   60000: '60'}
+		24000: '24', \
+		25000: '25', \
+		29970: '30', \
+		30000: '30', \
+		50000: '50', \
+		59940: '60', \
+		60000: '60'}
 
 progrdic = { 0: 'i', 1: 'p'}
 
@@ -73,7 +73,7 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 		self.list = [ ]
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
 
-		self["actions"] = ActionMap(["SetupActions"], 
+		self["actions"] = ActionMap(["SetupActions"],
 			{
 				"cancel": self.keyCancel,
 				"save": self.apply,
@@ -86,33 +86,36 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 
 		self["ok"] = Pixmap()
 		self["cancel"] = Pixmap()
-		
+
 		self.createSetup()
-		
+
 	def createSetup(self):
-		self.list = []
-		self.list.append(getConfigListEntry(_("Enable Autoresolution"), config.plugins.autoresolution.enable))
+		self.list = [
+			getConfigListEntry(_("Enable Autoresolution"), config.plugins.autoresolution.enable)
+		]
 		if config.plugins.autoresolution.enable.value:
-			self.list.append(getConfigListEntry(_("SD Interlace Mode"), config.plugins.autoresolution.sd_i))
-			self.list.append(getConfigListEntry(_("SD Progressive Mode"), config.plugins.autoresolution.sd_p))
-			self.list.append(getConfigListEntry(_("HD Interlace Mode"), config.plugins.autoresolution.hd_i))
-			self.list.append(getConfigListEntry(_("HD Progressive Mode"), config.plugins.autoresolution.hd_p))
-			self.list.append(getConfigListEntry(_("Enable 1080p24 Mode"), config.plugins.autoresolution.p1080_24))
-			self.list.append(getConfigListEntry(_("Enable 1080p25 Mode"), config.plugins.autoresolution.p1080_25))
-			self.list.append(getConfigListEntry(_("Enable 1080p30 Mode"), config.plugins.autoresolution.p1080_30))
-			self.list.append(getConfigListEntry(_("Show Info Screen"), config.plugins.autoresolution.showinfo))
-			self.list.append(getConfigListEntry(_("Running in Testmode"), config.plugins.autoresolution.testmode))
-		self.list.append(getConfigListEntry(_("Deinterlacer Mode"), config.plugins.autoresolution.deinterlacer))
+			self.list.extend((
+				getConfigListEntry(_("SD Interlace Mode"), config.plugins.autoresolution.sd_i),
+				getConfigListEntry(_("SD Progressive Mode"), config.plugins.autoresolution.sd_p),
+				getConfigListEntry(_("HD Interlace Mode"), config.plugins.autoresolution.hd_i),
+				getConfigListEntry(_("HD Progressive Mode"), config.plugins.autoresolution.hd_p),
+				getConfigListEntry(_("Enable 1080p24 Mode"), config.plugins.autoresolution.p1080_24),
+				getConfigListEntry(_("Enable 1080p25 Mode"), config.plugins.autoresolution.p1080_25),
+				getConfigListEntry(_("Enable 1080p30 Mode"), config.plugins.autoresolution.p1080_30),
+				getConfigListEntry(_("Show Info Screen"), config.plugins.autoresolution.showinfo),
+				getConfigListEntry(_("Running in Testmode"), config.plugins.autoresolution.testmode),
+				getConfigListEntry(_("Deinterlacer Mode"), config.plugins.autoresolution.deinterlacer)
+			))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
-	
+
 	def apply(self):
 		for x in self["config"].list:
 			x[1].save()
 			global switchdic
 			switchdic = build_switchdic()
 		self.close()
-	
+
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
 		self.createSetup()
@@ -120,7 +123,7 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		self.createSetup()
-	
+
 	# for summary:
 	def changedEntry(self):
 		for x in self.onChangedEntry:
@@ -162,14 +165,14 @@ class AutoRes(Screen):
 			self.timer.stop()
 		if config.plugins.autoresolution.enable.value:
 			self.timer.start(self.delayval)
-	
+
 	def __evVideoProgressiveChanged(self):
 		print "[AutoRes] got event evVideoProgressiveChanged"
 		if self.timer.isActive():
 			self.timer.stop()
 		if config.plugins.autoresolution.enable.value:
 			self.timer.start(self.delayval)
-			
+
 	def determineContent(self):
 		self.timer.stop()
 		service = session.nav.getCurrentService()
@@ -187,7 +190,7 @@ class AutoRes(Screen):
 			prog = 'i'
 		print "[AutoRes] new content is %sx%s%s%s" %(width, height, prog, frate)
 		self.determineVideoMode(width, height, prog, frate)
-	
+
 	def determineVideoMode(self, width, height, prog, frate):
 		if (height >= 900 or width >= 1600) and frate in ('24', '25', '30') and prog == 'p':
 			new_mode = '1080p%s' % frate
@@ -201,7 +204,7 @@ class AutoRes(Screen):
 			if new_mode != self.lastmode:
 				self.lastmode = new_mode
 				self.changeVideomode(new_mode)
-		
+
 	def changeVideomode(self, mode):
 		if mode.find("1080p") != -1:
 			print "[AutoRes] switching to", mode
@@ -221,8 +224,14 @@ class AutoRes(Screen):
 		if config.plugins.autoresolution.testmode.value:
 			from Screens.MessageBox import MessageBox
 			self.session.openWithCallback(
-				self.confirm, MessageBox, _("Autoresolution Plugin Testmode:\nIs %s videomode ok?" % (resolutionlabeltxt)), MessageBox.TYPE_YESNO, timeout = 15, default = False)
-		
+				self.confirm,
+				MessageBox,
+				_("Autoresolution Plugin Testmode:\nIs %s videomode ok?") % (resolutionlabeltxt),
+				MessageBox.TYPE_YESNO,
+				timeout = 15,
+				default = False
+			)
+
 	def confirm(self, confirmed):
 		if not confirmed:
 			port = config.av.videoport.value
@@ -240,15 +249,15 @@ class ResolutionLabel(Screen):
 		</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		
+
 		from Components.Label import Label
 		self["restxt"] = Label()
-		
+
 		self.hideTimer = eTimer()
 		self.hideTimer.callback.append(self.hide)
-		
+
 		self.onShow.append(self.hide_me)
-	
+
 	def hide_me(self):
 		self.hideTimer.start(config.usage.infobar_timeout.index * 1000, True)
 
@@ -260,7 +269,7 @@ def autostart(reason, **kwargs):
 		AutoRes(session)
 
 def startSetup(menuid):
-	if menuid != "system": 
+	if menuid != "system":
 		return [ ]
 	return [("Autoresolution...", autoresSetup, "autores_setup", 45)]
 
