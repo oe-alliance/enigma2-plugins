@@ -91,7 +91,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         # Buttons
         self["key_red"] = Label(_("Switch audio"))
         if self.AC3delay.bIsRecording == True:
-            self["key_green"] = Label(_(" "))
+            self["key_green"] = Label("")
         else:
             self["key_green"] = Label(_("Save"))
         self["key_yellow"] = Label(_("Set user delay"))
@@ -273,7 +273,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
     def setChannelInfoText(self):
         sActiveAudio = str(self.AC3delay.selectedAudioInfo[0])
         sBitstreamDelay = _("%i ms") %self.AC3delay.lamedbDelay[AC3]
-        sPCMDelay = ("%i ms") %self.AC3delay.lamedbDelay[PCM]
+        sPCMDelay = _("%i ms") %self.AC3delay.lamedbDelay[PCM]
 
         self["ServiceInfo"].setText(sActiveAudio)
         self["AC3DelayInfo"].setText(sBitstreamDelay)
