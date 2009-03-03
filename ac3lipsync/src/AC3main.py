@@ -89,11 +89,11 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         self.setChannelInfoText()
 
         # Buttons
+        self["key_red"] = Label(_("Switch audio"))
         if self.AC3delay.bIsRecording == True:
-            self["key_red"] = Label(_(" "))
+            self["key_green"] = Label(_(" "))
         else:
-            self["key_red"] = Label(_("Save"))
-        self["key_green"] = Label(_("Switch audio"))
+            self["key_green"] = Label(_("Save"))
         self["key_yellow"] = Label(_("Set user delay"))
         self["key_blue"] = Label(self.whichKeyText[self.whichKeys])
 
@@ -116,8 +116,8 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
             "right": self.keyRight,
             "up": self.keyUp,
             "down": self.keyDown,
-            "red": self.keySaveToLamedb,
-            "green": self.keyAudioSelection,
+            "red": self.keyAudioSelection,
+            "green": self.keySaveToLamedb,
             "yellow": self.keySaveDelayToKey,
             "blue": self.keySwitchKeyValues,
             "1": self.keyNumberGlobal,
