@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3LipSync-0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-01 02:40+0100\n"
+"POT-Creation-Date: 2009-03-01 15:16+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,8 +45,8 @@ msgstr "autom. Verz."
 #: ..\src/AC3main.py:81
 #: ..\src/AC3main.py:84
 #: ..\src/AC3main.py:140
-#: ..\src/AC3main.py:270
-#: ..\src/AC3main.py:274
+#: ..\src/AC3main.py:271
+#: ..\src/AC3main.py:275
 #, python-format
 msgid "%i ms"
 msgstr "%i ms"
@@ -105,19 +105,19 @@ msgstr "Gespeicherter %(audio)s Wert: %(delay)i ms"
 msgid "Invalid selection"
 msgstr "Ungültige Auswahl"
 
-#: ..\src/AC3main.py:303
+#: ..\src/AC3main.py:304
 msgid "Select the key you want to set"
 msgstr "Wählen Sie die Taste, die Sie belegen wollen"
 
-#: ..\src/AC3main.py:308
+#: ..\src/AC3main.py:309
 msgid "Key"
 msgstr "Taste"
 
-#: ..\src/AC3main.py:313
+#: ..\src/AC3main.py:314
 msgid "Setting key canceled"
 msgstr "Setzen der Taste abgebrochen"
 
-#: ..\src/AC3main.py:317
+#: ..\src/AC3main.py:318
 #, python-format
 msgid "%(Key)s successfully set to %(delay)i ms"
 msgstr "%(Key)s erfolgreich auf %(delay)i ms gesetzt"
@@ -136,8 +136,8 @@ msgstr "Schrittweite in ms für Pfeiltasten"
 
 #: ..\src/AC3setup.py:47
 #, python-format
-msgid "Step in ms for key %i"
-msgstr "Schrittweite in ms für Taste %i"
+msgid "Step in ms for key %s"
+msgstr "Schrittweite in ms für Taste %s"
 
 #: ..\src/AC3setup.py:54
 msgid "Cancel"

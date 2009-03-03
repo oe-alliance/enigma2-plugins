@@ -1,0 +1,148 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - AC3lipsync\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-28 13:48+0100\n"
+"PO-Revision-Date: 2009-03-01 05:11+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net - Italy <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ..\..\src/plugin.py:29
+#: ..\..\src/plugin.py:33
+#: ..\..\src/plugin.py:35
+msgid "AC3 Lip Sync"
+msgstr "AC3 Lip Sync"
+
+#: ..\..\src/plugin.py:33
+#: ..\..\src/plugin.py:35
+msgid "sets the AC3 audio Delay (LipSync)"
+msgstr "Configurare Ritardo Audio AC3 (LipSync)"
+
+#: ..\..\src/plugin.py:34
+msgid "AC3 Lip Sync Setup"
+msgstr "Configurazione AC3 Lip Sync"
+
+#: ..\..\src/plugin.py:34
+msgid "Setup for the AC3 Lip Sync Plugin"
+msgstr "Configurazione Plugin AC3 Lip Sync"
+
+#: ..\..\src/AC3main.py:74
+msgid "Use user delays"
+msgstr "Usare Ritardi Pers."
+
+#: ..\..\src/AC3main.py:75
+msgid "Use calc. delays"
+msgstr "Usare Ritardi Calc."
+
+#: ..\..\src/AC3main.py:82
+#: ..\..\src/AC3main.py:85
+#: ..\..\src/AC3main.py:136
+#: ..\..\src/AC3main.py:261
+#: ..\..\src/AC3main.py:262
+msgid "ms"
+msgstr "ms"
+
+#: ..\..\src/AC3main.py:83
+#, python-format
+msgid "%s delay:"
+msgstr "Ritardo %s: "
+
+#: ..\..\src/AC3main.py:84
+#, python-format
+msgid "%s:"
+msgstr "%s: "
+
+#: ..\..\src/AC3main.py:88
+msgid "Channel audio:"
+msgstr "Canale Audio: "
+
+#: ..\..\src/AC3main.py:94
+#: ..\..\src/AC3setup.py:56
+msgid " "
+msgstr " "
+
+#: ..\..\src/AC3main.py:96
+#: ..\..\src/AC3setup.py:54
+msgid "Save"
+msgstr "Salvare"
+
+#: ..\..\src/AC3main.py:97
+msgid "Switch audio"
+msgstr "Cambiare Audio"
+
+#: ..\..\src/AC3main.py:98
+msgid "Set user delay"
+msgstr "Conf. Ritardo Pers."
+
+#: ..\..\src/AC3main.py:205
+#: ..\..\src/AC3main.py:206
+#, python-format
+msgid "Save %s delay"
+msgstr "Salvare Ritardo %s"
+
+#: ..\..\src/AC3main.py:207
+msgid "Save both delays"
+msgstr "Salvare entrambi i Ritardi"
+
+#: ..\..\src/AC3main.py:209
+msgid "Which delays do you want to set"
+msgstr "Quale Ritardo Configurare"
+
+#: ..\..\src/AC3main.py:244
+#, python-format
+msgid "Saved %(audio)s value: %(delay)i ms"
+msgstr " Valore %(audio)s salvato: %(delay)i ms"
+
+#: ..\..\src/AC3main.py:248
+msgid "Invalid selection"
+msgstr "Selezione non valida!"
+
+#: ..\..\src/AC3main.py:291
+msgid "Select the key you want to set"
+msgstr "Selezionare il tasto da configurare"
+
+#: ..\..\src/AC3main.py:296
+msgid "Key"
+msgstr "Tasto"
+
+#: ..\..\src/AC3main.py:301
+msgid "Setting key canceled"
+msgstr "Configurazione Tasto cancellata!"
+
+#: ..\..\src/AC3main.py:305
+#, python-format
+msgid "%(Key)s successfully set to %(delay)i ms"
+msgstr "%(Key)s configurato con successo a %(delay)i ms"
+
+#: ..\..\src/AC3setup.py:42
+msgid "Minimum delay"
+msgstr "Ritardo Minimo"
+
+#: ..\..\src/AC3setup.py:43
+msgid "Maximum delay"
+msgstr "Ritardo massimo"
+
+#: ..\..\src/AC3setup.py:44
+msgid "Step in ms for arrow keys"
+msgstr "Passo in ms Tasti Cursore"
+
+#: ..\..\src/AC3setup.py:46
+#, python-format
+msgid "Step in ms for key %i"
+msgstr "Passo in ms per tasto %i"
+
+#: ..\..\src/AC3setup.py:53
+msgid "Cancel"
+msgstr "Annullare"
+
+#: ..\..\src/AC3setup.py:55
+msgid "Recalculate..."
+msgstr "Ricalcolare..."
+
