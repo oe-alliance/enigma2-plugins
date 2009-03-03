@@ -189,7 +189,7 @@ class AutoRes(Screen):
 		self.determineVideoMode(width, height, prog, frate)
 	
 	def determineVideoMode(self, width, height, prog, frate):
-		if (height >= 900  or width >= 1600) and frate in ('24', '25', '30') and prog == 'p':
+		if (height >= 900 or width >= 1600) and frate in ('24', '25', '30') and prog == 'p':
 			new_mode = '1080p%s' % frate
 		elif height > 576 or width > 720: #asume that, higher then 576 or greater then 720 is hd content
 			new_mode = 'hd_%s' % prog
