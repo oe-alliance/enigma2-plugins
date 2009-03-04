@@ -19,6 +19,10 @@ class AC3delay:
 
         self.getAudioInformation()
 
+        self.activateTimer = eTimer()
+        self.activateTimer.callback.append(self.activateDelay)
+        self.activateWait = config.plugins.AC3LipSync.activationDelay.getValue()
+        
         # Current value for movie start behaviour
         self.movieStart = config.usage.on_movie_start.getValue()
 
@@ -36,7 +40,14 @@ class AC3delay:
     def setChannelAudio(self, sAudio):
         self.channelAudio = sAudio
 
+    def delayedActivateDelay(self):
+        if self.activateTimer.isActive:
+            self.activateTimer.stop()
+        self.activateTimer.start(self.activateWait, False)
+
     def activateDelay(self):
+        if self.activateTimer.isActive:
+            self.activateTimer.stop()
         bInitialized = False
         if self.iService == None:
             self.initAudio()
@@ -52,11 +63,11 @@ class AC3delay:
                 if lCurPosition is not None:
                     self.lCurPosition = lCurPosition
                     self.timer = eTimer()
-                    self.timer.timeout.get().append(self.seekAfterWait)
-                    self.timer.start(400, False)
+                    self.timer.callback.append(self.seekAfterWait)
+                    self.timer.start(200, False)
         else:
             self.deleteAudio()
-
+        
     def seekAfterWait(self):
         self.timer.stop()
         self.initAudio()
@@ -110,16 +121,19 @@ class AC3delay:
                 self.iAudioDelay.setAC3Delay(iDelay)
             else:
                 self.iAudioDelay.setPCMDelay(iDelay)
-        self.activateDelay()
+        #self.activateDelay()
 
-    def setFileDelay(self, sAudio, iDelay):
+    def setFileDelay(self, sAudio, iDelay, bDelayStart):
         hDelay = dec2hex(iDelay*90)
         sFileName = lFileDelay[sAudio]
         if os.path.exists(sFileName) == True:
             delayfile = open(lFileDelay[sAudio],"w")
             delayfile.write("%s\0" % hDelay)
             delayfile.close()
-            self.activateDelay()
+            if bDelayStart == True:
+                self.delayedActivateDelay()
+            else:
+                self.activateDelay()
 
     def getAudioInformation(self):
         bInitialized = False

@@ -9,6 +9,7 @@ config.plugins.AC3LipSync.lowerBound = ConfigInteger(default = 0, limits = (0,10
 config.plugins.AC3LipSync.upperBound = ConfigInteger(default = 405, limits = (0,10000))
 config.plugins.AC3LipSync.arrowStepSize = ConfigInteger(default = 5, limits = (0,10000))
 config.plugins.AC3LipSync.stepSize = ConfigInteger(default = 45, limits = (0,10000))
+config.plugins.AC3LipSync.activationDelay = ConfigInteger(default = 800, limits = (0,10000))
 config.plugins.AC3LipSync.keySteps = ConfigSubList()
 for i in range(0, 10):
     s = ConfigSubsection()

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3LipSync-0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-01 15:16+0100\n"
+"POT-Creation-Date: 2009-03-04 23:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,22 +15,22 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ..\\src\n"
 
-#: ..\src/plugin.py:29
-#: ..\src/plugin.py:33
-#: ..\src/plugin.py:35
+#: ..\src/plugin.py:30
+#: ..\src/plugin.py:34
+#: ..\src/plugin.py:36
 msgid "AC3 Lip Sync"
 msgstr "AC3 Lip Sync"
 
-#: ..\src/plugin.py:33
-#: ..\src/plugin.py:35
+#: ..\src/plugin.py:34
+#: ..\src/plugin.py:36
 msgid "sets the AC3 audio Delay (LipSync)"
 msgstr "setzt die Audio- Verzögerung (Lippensynchronität)"
 
-#: ..\src/plugin.py:34
+#: ..\src/plugin.py:35
 msgid "AC3 Lip Sync Setup"
 msgstr "AC3 Lip Sync Setup"
 
-#: ..\src/plugin.py:34
+#: ..\src/plugin.py:35
 msgid "Setup for the AC3 Lip Sync Plugin"
 msgstr "Setup für das AC3 Lip Sync Plugin"
 
@@ -47,6 +47,7 @@ msgstr "autom. Verz."
 #: ..\src/AC3main.py:140
 #: ..\src/AC3main.py:271
 #: ..\src/AC3main.py:275
+#: ..\src/AC3main.py:276
 #, python-format
 msgid "%i ms"
 msgstr "%i ms"
@@ -65,18 +66,14 @@ msgstr "%s:"
 msgid "Channel audio:"
 msgstr "Tonspur Sender: "
 
-#: ..\src/AC3main.py:93
-msgid " "
-msgstr " "
-
-#: ..\src/AC3main.py:95
-#: ..\src/AC3setup.py:55
-msgid "Save"
-msgstr "Speichern"
-
-#: ..\src/AC3main.py:96
+#: ..\src/AC3main.py:92
 msgid "Switch audio"
 msgstr "Tonspur ..."
+
+#: ..\src/AC3main.py:96
+#: ..\src/AC3setup.py:59
+msgid "Save"
+msgstr "Speichern"
 
 #: ..\src/AC3main.py:97
 msgid "Set user delay"
@@ -134,19 +131,25 @@ msgstr "Maximale Verzögerung"
 msgid "Step in ms for arrow keys"
 msgstr "Schrittweite in ms für Pfeiltasten"
 
-#: ..\src/AC3setup.py:47
+#: ..\src/AC3setup.py:45
+msgid "Wait time in ms before activation:"
+msgstr "Wartezeit in ms vor Aktivierung"
+
+#: ..\src/AC3setup.py:49
 #, python-format
 msgid "Step in ms for key %i"
 msgstr "Schrittweite in ms für Taste %i"
 
-#: ..\src/AC3setup.py:54
+#: ..\src/AC3setup.py:58
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ..\src/AC3setup.py:56
+#: ..\src/AC3setup.py:60
 msgid "Recalculate..."
 msgstr "Neuberechnen"
 
+#~ msgid " "
+#~ msgstr " "
 #~ msgid "ms"
 #~ msgstr "ms"
 #~ msgid "OK"

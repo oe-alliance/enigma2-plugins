@@ -41,7 +41,8 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
         self.list = [
             getConfigListEntry(_("Minimum delay"), config.plugins.AC3LipSync.lowerBound),
             getConfigListEntry(_("Maximum delay"), config.plugins.AC3LipSync.upperBound),
-            getConfigListEntry(_("Step in ms for arrow keys"), config.plugins.AC3LipSync.arrowStepSize)
+            getConfigListEntry(_("Step in ms for arrow keys"), config.plugins.AC3LipSync.arrowStepSize),
+            getConfigListEntry(_("Wait time in ms before activation:"), config.plugins.AC3LipSync.activationDelay)
         ]
         
         self.list.extend([

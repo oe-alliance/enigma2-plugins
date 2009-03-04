@@ -26,12 +26,12 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/AC3LipSyncBarBG.png" zPosition="2" position="190,26" size="370,21" alphatest="on" transparent="1" />
             <widget name="PCMSlider" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/AC3LipSyncBar.png" zPosition="3" position="190,26" size="370,21" transparent="1" />
             <widget name="PCMSliderText" zPosition="4" position="190,26" size="370,21" font="Regular;18" halign="center" valign="center" transparent="1" />
-            <widget name="ServiceInfoText" zPosition="4" position="5,52" size="180,21" font="Regular;21" foregroundColor="#ffffff" />
-            <widget name="ServiceInfo" zPosition="4" position="190,52" size="180,21" font="Regular;21" foregroundColor="#cccccc" />
-            <widget name="AC3DelayInfoText" zPosition="4" position="380,52" size="40,21" font="Regular;21" foregroundColor="#ffffff" />
-            <widget name="AC3DelayInfo" zPosition="4" position="430,52" size="50,21" font="Regular;21" foregroundColor="#cccccc" />
-            <widget name="PCMDelayInfoText" zPosition="4" position="490,52" size="40,21" font="Regular;21" foregroundColor="#ffffff" />
-            <widget name="PCMDelayInfo" zPosition="4" position="540,52" size="50,21" font="Regular;21" foregroundColor="#cccccc" />
+            <widget name="ServiceInfoText" zPosition="4" position="5,52" size="180,21" font="Regular;18" foregroundColor="#ffffff" />
+            <widget name="ServiceInfo" zPosition="4" position="190,52" size="180,21" font="Regular;18" foregroundColor="#cccccc" />
+            <widget name="AC3DelayInfoText" zPosition="4" position="380,52" size="40,21" font="Regular;18" foregroundColor="#ffffff" />
+            <widget name="AC3DelayInfo" zPosition="4" position="430,52" size="50,21" font="Regular;18" foregroundColor="#cccccc" />
+            <widget name="PCMDelayInfoText" zPosition="4" position="490,52" size="40,21" font="Regular;18" foregroundColor="#ffffff" />
+            <widget name="PCMDelayInfo" zPosition="4" position="540,52" size="50,21" font="Regular;18" foregroundColor="#cccccc" />
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/key-red.png" position="5,78" zPosition="5" size="20,20" transparent="1" alphatest="on" />
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/key-green.png" position="150,78" zPosition="5" size="20,20" transparent="1" alphatest="on" />
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/key-yellow.png" position="295,78" zPosition="5" size="20,20" transparent="1" alphatest="on" />
@@ -164,7 +164,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         if iSliderValue < 0:
             iSliderValue = 0
         self.setSliderInfo(iSliderValue)
-        self.AC3delay.setFileDelay(sAudio, self.currentValue[sAudio])
+        self.AC3delay.setFileDelay(sAudio, self.currentValue[sAudio], True)
 
     def keyRight(self):
         sAudio = self.AC3delay.whichAudio
@@ -175,7 +175,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         if iSliderValue > self.upperBound:
             iSliderValue = self.upperBound
         self.setSliderInfo(iSliderValue)
-        self.AC3delay.setFileDelay(sAudio, self.currentValue[sAudio])
+        self.AC3delay.setFileDelay(sAudio, self.currentValue[sAudio], True)
 
     def keyNumberGlobal(self, number):
         sAudio = self.AC3delay.whichAudio
@@ -191,7 +191,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
                 if iSliderValue < 0:
                     iSliderValue = 0
         self.setSliderInfo(iSliderValue)
-        self.AC3delay.setFileDelay(sAudio, self.currentValue[sAudio])
+        self.AC3delay.setFileDelay(sAudio, self.currentValue[sAudio], True)
 
     def keyAudioSelection(self):
         self.audioSelection()
@@ -204,7 +204,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
             iSliderValue = self.currentValue[sAudio]
             if iSliderValue <> self.savedValue[sAudio]:
                 self.whichAudio = sAudio
-                self.AC3delay.setFileDelay(sAudio, self.savedValue[sAudio])
+                self.AC3delay.setFileDelay(sAudio, self.savedValue[sAudio], False)
         self.close()
 
     def keySaveToLamedb(self):
