@@ -25,19 +25,19 @@ class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 		self.setup_title = "StartupToStandby Configuration"
 		self.onChangedEntry = []
 
-		# -
-		self.list = [
-			getConfigListEntry(_("Enabled"), config.plugins.startuptostandby.enabled),
-		]
-
 		# Define Actions
-		self["actions"] = ActionMap(["SetupActions","ColorActions"],
+		self["actions"] = ActionMap(["SetupActions"],
 			{
 				"cancel": self.close,
 			}
 		)
 
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		ConfigListScreen.__init__(
+			self,
+			[getConfigListEntry(_("Enabled"), config.plugins.startuptostandby.enabled)],
+			session = session,
+			on_change = self.changed
+		)
 
 		# Trigger change
 		self.changed()
