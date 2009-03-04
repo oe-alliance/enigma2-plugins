@@ -270,6 +270,15 @@ class OFDB(Screen):
 	def channelSelectionClosed(self, ret = None):
 		if ret:
 			self.eventName = ret
+ 			self.Page = 0
+ 			self.resultlist = []
+			self["menu"].hide()
+			self["ratinglabel"].show()
+			self["castlabel"].show()
+			self["detailslabel"].show()
+			self["poster"].hide()
+			self["stars"].hide()
+			self["starsbg"].hide()
 			self.getOFDB()
 
 	def getOFDB(self):
@@ -346,11 +355,8 @@ class OFDB(Screen):
 			if re.search("<title>OFDb - Suchergebnis</title>", self.inhtml):
 				searchresultmask = re.compile("<br>(\d{1,3}\.) <a href=\"film/(.*?)\"(?:.*?)\)\">(.*?)</a>", re.DOTALL)
 				searchresults = searchresultmask.finditer(self.inhtml)
-				self.resultlist = []
-				if searchresults:
-					for x in searchresults:
-						self.resultlist.append((self.htmltags.sub('',x.group(3)), x.group(2)))
-					self["menu"].l.setList(self.resultlist)
+				self.resultlist = [(self.htmltags.sub('',x.group(3)), x.group(2)) for x in searchresults]
+				self["menu"].l.setList(self.resultlist)
 				if len(self.resultlist) == 1:
 					self.Page = 0
 					self["extralabel"].hide()

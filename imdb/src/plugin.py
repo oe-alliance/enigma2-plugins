@@ -300,6 +300,15 @@ class IMDB(Screen):
 	def channelSelectionClosed(self, ret = None):
 		if ret:
 			self.eventName = ret
+			self.Page = 0
+			self.resultlist = []
+			self["menu"].hide()
+			self["ratinglabel"].show()
+			self["castlabel"].show()
+			self["detailslabel"].show()
+			self["poster"].hide()
+			self["stars"].hide()
+			self["starsbg"].hide()
 			self.getIMDB()
 
 	def getIMDB(self):
@@ -361,11 +370,8 @@ class IMDB(Screen):
 			if re.search("<title>(?:IMDb.{0,9}Search|IMDb Titelsuche)</title>", self.inhtml):
 				searchresultmask = re.compile("<tr> <td.*?img src.*?>.*?<a href=\".*?/title/(tt\d{7,7})/\".*?>(.*?)</td>", re.DOTALL)
 				searchresults = searchresultmask.finditer(self.inhtml)
-				self.resultlist = []
-				if searchresults:
-					for x in searchresults:
-						self.resultlist.append((self.htmltags.sub('',x.group(2)), x.group(1)))
-					self["menu"].l.setList(self.resultlist)
+				self.resultlist = [(self.htmltags.sub('',x.group(2)), x.group(1)) for x in searchresults]
+				self["menu"].l.setList(self.resultlist)
 				if len(self.resultlist) > 1:
 					self.Page = 1
 					self.showMenu()
