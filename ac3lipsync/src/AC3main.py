@@ -28,9 +28,9 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
             <widget name="PCMSliderText" zPosition="4" position="190,26" size="370,21" font="Regular;18" halign="center" valign="center" transparent="1" />
             <widget name="ServiceInfoText" zPosition="4" position="5,52" size="180,21" font="Regular;18" foregroundColor="#ffffff" />
             <widget name="ServiceInfo" zPosition="4" position="190,52" size="180,21" font="Regular;18" foregroundColor="#cccccc" />
-            <widget name="AC3DelayInfoText" zPosition="4" position="380,52" size="40,21" font="Regular;18" foregroundColor="#ffffff" />
+            <widget name="AC3DelayInfoText" zPosition="4" position="380,52" size="48,21" font="Regular;18" foregroundColor="#ffffff" />
             <widget name="AC3DelayInfo" zPosition="4" position="430,52" size="50,21" font="Regular;18" foregroundColor="#cccccc" />
-            <widget name="PCMDelayInfoText" zPosition="4" position="490,52" size="40,21" font="Regular;18" foregroundColor="#ffffff" />
+            <widget name="PCMDelayInfoText" zPosition="4" position="490,52" size="48,21" font="Regular;18" foregroundColor="#ffffff" />
             <widget name="PCMDelayInfo" zPosition="4" position="540,52" size="50,21" font="Regular;18" foregroundColor="#cccccc" />
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/key-red.png" position="5,78" zPosition="5" size="20,20" transparent="1" alphatest="on" />
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/key-green.png" position="150,78" zPosition="5" size="20,20" transparent="1" alphatest="on" />
@@ -69,8 +69,8 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         #Which Values do the number keys use
         self.whichKeys = "Computed" # Computed = computed Values of keys, User = User set values of keys
         self.whichKeyText = {}
-        self.whichKeyText["Computed"] = _("Use user delays")
-        self.whichKeyText["User"] = _("Use calc. delays")
+        self.whichKeyText["Computed"] = _("Switch to user key- delays")
+        self.whichKeyText["User"] = _("Switch to calculated key- delays")
 
         #Screen elements
 
@@ -89,13 +89,13 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         self.setChannelInfoText()
 
         # Buttons
-        self["key_red"] = Label(_("Switch audio"))
+        self["key_red"] = Label(_("Cancel"))
+        self["key_green"] = Label(_("OK"))
+        self["key_yellow"] = Label(_("Switch audio"))
         if self.AC3delay.bIsRecording == True:
-            self["key_green"] = Label("")
+            self["key_blue"] = Label("")
         else:
-            self["key_green"] = Label(_("Save"))
-        self["key_yellow"] = Label(_("Set user delay"))
-        self["key_blue"] = Label(self.whichKeyText[self.whichKeys])
+            self["key_blue"] = Label(_("Save"))
 
         # Last saved values
         self.savedValue = {}
@@ -108,18 +108,19 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         self.currentValue[PCM] = 0
 
         # Actions
-        self["actions"] = NumberActionMap(["WizardActions", "NumberActions", "ColorActions"],
+        self["actions"] = NumberActionMap(["WizardActions", "NumberActions", "ColorActions", "MenuActions"],
         {
+            "menu": self.keyMenu,
             "ok": self.keyOk,
             "back": self.keyCancel,
             "left": self.keyLeft,
             "right": self.keyRight,
             "up": self.keyUp,
             "down": self.keyDown,
-            "red": self.keyAudioSelection,
-            "green": self.keySaveToLamedb,
-            "yellow": self.keySaveDelayToKey,
-            "blue": self.keySwitchKeyValues,
+            "red": self.keyCancel,
+            "green": self.keyOk,
+            "yellow": self.keyAudioSelection,
+            "blue": self.keySaveToLamedb,
             "1": self.keyNumberGlobal,
             "2": self.keyNumberGlobal,
             "3": self.keyNumberGlobal,
@@ -203,9 +204,42 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         for sAudio in lFileDelay.keys():
             iSliderValue = self.currentValue[sAudio]
             if iSliderValue <> self.savedValue[sAudio]:
-                self.whichAudio = sAudio
+                self.AC3delay.whichAudio = sAudio
                 self.AC3delay.setFileDelay(sAudio, self.savedValue[sAudio], False)
         self.close()
+
+    def keyMenu(self):
+        sAudio = self.AC3delay.whichAudio
+        iDelay = self.savedValue[sAudio]
+        keyList = [
+            (_("Save current %(audio)s delay of %(delay)i ms to key") %dict(audio=sAudio , delay=iDelay),"1"),
+            (self.whichKeyText[self.whichKeys],"2")
+        ]
+
+        self.session.openWithCallback(self.DoShowMenu,ChoiceBox,_("Menu"),keyList)
+
+    def DoShowMenu(self, answer):
+        if answer is not None:
+            if answer[1] == "1":
+                self.menuSaveDelayToKey()
+            elif answer[1] == "2":
+                self.menuSwitchKeyValues()
+            else:
+                sResponse = _("Invalid selection")
+                iType = MessageBox.TYPE_ERROR
+                self.session.open(MessageBox, sResponse , iType)
+                
+    def menuSwitchKeyValues(self):
+        if self.whichKeys == "Computed":
+            self.whichKeys = "User"
+        else:
+            self.whichKeys = "Computed"
+        self["key_blue"].setText(self.whichKeyText[self.whichKeys])
+
+    def menuSaveDelayToKey(self):
+        sAudio = self.AC3delay.whichAudio
+        iDelay = self[sAudio+"Slider"].getValue()+self.lowerBound
+        AC3SetCustomValue(self.session,iDelay)
 
     def keySaveToLamedb(self):
         if self.AC3delay.bIsRecording == False:
@@ -279,18 +313,6 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         self["AC3DelayInfo"].setText(sBitstreamDelay)
         self["PCMDelayInfo"].setText(sPCMDelay)
 
-    def keySwitchKeyValues(self):
-        if self.whichKeys == "Computed":
-            self.whichKeys = "User"
-        else:
-            self.whichKeys = "Computed"
-        self["key_blue"].setText(self.whichKeyText[self.whichKeys])
-
-    def keySaveDelayToKey(self):
-        sAudio = self.AC3delay.whichAudio
-        iDelay = self[sAudio+"Slider"].getValue()+self.lowerBound
-        AC3SetCustomValue(self.session,iDelay)
-
     def audioSelected(self, audio):
         InfoBarAudioSelection.audioSelected(self, audio)
         if audio is not None:
@@ -301,12 +323,13 @@ class AC3SetCustomValue:
     def __init__(self, session, iDelay):
         self.session = session
         self.iDelay = iDelay
-        self.session.openWithCallback(self.DoSetCustomValue,ChoiceBox,_("Select the key you want to set"),self.getKeyList())
+        self.session.openWithCallback(self.DoSetCustomValue,ChoiceBox,_("Select the key you want to set to %i ms") %(iDelay),self.getKeyList())
 
     def getKeyList(self):
         keyList = []
         for i in range(1, 10):
-            keyList.append((_("Key")+" "+str(i),str(i)))
+            iValue = int(config.plugins.AC3LipSync.keySteps[i].stepSize.getValue())
+            keyList.append((_("Key %(key)i (current value: %(value)i ms)") %dict(key=i, value=iValue),str(i)))
         return keyList
 
     def DoSetCustomValue(self,answer):

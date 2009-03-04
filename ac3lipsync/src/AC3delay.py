@@ -121,7 +121,6 @@ class AC3delay:
                 self.iAudioDelay.setAC3Delay(iDelay)
             else:
                 self.iAudioDelay.setPCMDelay(iDelay)
-        #self.activateDelay()
 
     def setFileDelay(self, sAudio, iDelay, bDelayStart):
         hDelay = dec2hex(iDelay*90)

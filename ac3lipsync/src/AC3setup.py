@@ -75,7 +75,7 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
         iUpperBound = int(config.plugins.AC3LipSync.upperBound.getValue())
         iStepSize = (iUpperBound - iLowerBound)/9
         for i in range(1 , 10):
-            config.plugins.AC3LipSync.keySteps[i].stepSize.setValue(i*iStepSize)
+            config.plugins.AC3LipSync.keySteps[i].stepSize.setValue(i*iStepSize+iLowerBound)
         self["config"].setList(self.list)
 
     def save(self):
