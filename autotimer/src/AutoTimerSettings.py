@@ -10,44 +10,42 @@ from Screens.Setup import SetupSummary
 
 # GUI (Components)
 from Components.ActionMap import ActionMap
-from Components.Button import Button
+from Components.Label import Label
+from Components.Pixmap import Pixmap
 
 # Configuration
 from Components.config import config, getConfigListEntry
 
 class AutoTimerSettings(Screen, ConfigListScreen):
-	"""Configuration of AutoTimer"""
-
-	skin = """<screen name="AutoTimerSettings" title="Configure AutoTimer behavior" position="75,155" size="565,280">
-		<widget name="config" position="5,5" size="555,225" scrollbarMode="showOnDemand" />
-		<ePixmap position="0,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="140,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-	</screen>"""
-
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.skinName = "Setup"
 
 		# Summary
 		self.setup_title = _("AutoTimer Settings")
 		self.onChangedEntry = []
 
-		list = [
-			getConfigListEntry(_("Poll automatically"), config.plugins.autotimer.autopoll),
-			getConfigListEntry(_("Poll Interval (in h)"), config.plugins.autotimer.interval),
-			getConfigListEntry(_("Show in Extensionmenu"), config.plugins.autotimer.show_in_extensionsmenu),
-			getConfigListEntry(_("Modify existing Timers"), config.plugins.autotimer.refresh),
-			getConfigListEntry(_("Guess existing Timer based on Begin/End"), config.plugins.autotimer.try_guessing),
-			getConfigListEntry(_("Add timer as disabled on conflict"), config.plugins.autotimer.disabled_on_conflict),
-			getConfigListEntry(_("Editor for new AutoTimers"), config.plugins.autotimer.editor),
-		]
+		ConfigListScreen.__init__(
+			self,
+			[
+				getConfigListEntry(_("Poll automatically"), config.plugins.autotimer.autopoll),
+				getConfigListEntry(_("Poll Interval (in h)"), config.plugins.autotimer.interval),
+				getConfigListEntry(_("Show in Extensionmenu"), config.plugins.autotimer.show_in_extensionsmenu),
+				getConfigListEntry(_("Modify existing Timers"), config.plugins.autotimer.refresh),
+				getConfigListEntry(_("Guess existing Timer based on Begin/End"), config.plugins.autotimer.try_guessing),
+				getConfigListEntry(_("Add timer as disabled on conflict"), config.plugins.autotimer.disabled_on_conflict),
+				getConfigListEntry(_("Editor for new AutoTimers"), config.plugins.autotimer.editor),
+			],
+			session = session,
+			on_change = self.changed
+		)
 
-		ConfigListScreen.__init__(self, list, session = session, on_change = self.changed)
-
-		# Initialize Buttons
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("OK"))
+		# Initialize widgets
+		self["oktext"] = Label(_("OK"))
+		self["canceltext"] = Label(_("Cancel"))
+		self["ok"] = Pixmap()
+		self["cancel"] = Pixmap()
+		self["title"] = Label(_("AutoTimer Settings"))
 
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions"],
