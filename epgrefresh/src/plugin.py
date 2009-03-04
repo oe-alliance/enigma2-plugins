@@ -98,7 +98,6 @@ def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
 			name = "EPGRefresh",
-			description = _("Automated EPGRefresher"),
 			where = [
 				PluginDescriptor.WHERE_AUTOSTART,
 				PluginDescriptor.WHERE_SESSIONSTART

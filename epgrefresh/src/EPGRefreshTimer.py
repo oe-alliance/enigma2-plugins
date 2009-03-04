@@ -124,8 +124,8 @@ class EPGRefreshTimer(timer.Timer):
 		# Add refresh Timer
 		now = localtime()
 		# XXX: basic workaround if the clock is not yet set
-		year = 2008
-		if now.tm_year > 2008:
+		year = 2009
+		if now.tm_year > 2009:
 			year = now.tm_year
 		begin = mktime(
 			(year, now.tm_mon, now.tm_mday,
@@ -142,8 +142,10 @@ class EPGRefreshTimer(timer.Timer):
 
 		refreshTimer = EPGRefreshTimerEntry(begin, tocall, nocheck = True)
 
-		for x in range(0,7):
-			refreshTimer.setRepeated(x)
+		i = 0
+		while i < 7:
+			refreshTimer.setRepeated(i)
+			i += 1
 
 		# We can be sure that whenever this function is called the timer list
 		# was wiped, so just add a new timer
