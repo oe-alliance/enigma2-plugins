@@ -39,12 +39,39 @@ from EPGRefreshService import EPGRefreshService
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
+def standbyQuestionCallback(session, res = None):
+	if res:
+		from Screens.Standby import Standby
+		session.open(Standby)
+
 # Autostart
 def autostart(reason, **kwargs):
 	if config.plugins.epgrefresh.enabled.value and reason == 0 \
 		and kwargs.has_key("session"):
 
-		epgrefresh.start(kwargs["session"])
+		session = kwargs["session"]
+		if config.plugins.epgrefresh.wakeup.value:
+			now = localtime()
+			begin = int(mktime(
+				(now.tm_year, now.tm_mon, now.tm_mday,
+				config.plugins.epgrefresh.begin.value[0],
+				config.plugins.epgrefresh.begin.value[1],
+				0, now.tm_wday, now.tm_yday, now.tm_isdst)
+			))
+			# booted +- 10min from begin of timespan
+			if abs(time() - begin) < 600:
+				from Screens.MessageBox import MessageBox
+				from Tools.Notifications import AddNotificationWithCallback
+				from Tools.BoundFunction import boundFunction
+				# XXX: we use a notification because this will be suppressed otherwise
+				AddNotificationWithCallback(
+					boundFunction(standbyQuestionCallback, session),
+					MessageBox,
+					_("This might have been an automated bootup to refresh the EPG. For this to happen it is recommmended to put the receiver to Standby.\nDo you want to do this now?"),
+					timeout = 15
+				)
+
+		epgrefresh.start(session)
 
 	elif reason == 1:
 		epgrefresh.stop()

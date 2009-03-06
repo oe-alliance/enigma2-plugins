@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 11:39+0100\n"
+"POT-Creation-Date: 2009-03-06 22:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:116
+#: ../src/plugin.py:143
 msgid "Add to EPGRefresh"
 msgstr ""
 
-#: ../src/plugin.py:101 ../src/plugin.py:111
+#: ../src/plugin.py:138
 msgid "Automated EPGRefresher"
 msgstr ""
 
@@ -114,6 +114,13 @@ msgstr ""
 
 #: ../src/EPGRefreshConfiguration.py:58
 msgid "Shutdown after refresh"
+msgstr ""
+
+#: ../src/plugin.py:71
+msgid ""
+"This might have been an automated bootup to refresh the EPG. For this to "
+"happen it is recommmended to put the receiver to Standby.\n"
+"Do you want to do this now?"
 msgstr ""
 
 #: ../src/EPGRefreshConfiguration.py:52
