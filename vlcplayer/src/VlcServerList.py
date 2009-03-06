@@ -23,38 +23,56 @@ from VlcServerConfig import VlcServerConfigScreen
 from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, gFont
 from . import _
 
-def VlcServerListEntry(vlcServer, defaultServer):
-	res = [ vlcServer ]
-	res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, vlcServer.getName()))
-
-	if defaultServer is not None and defaultServer.getName() == vlcServer.getName():
-		png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/vlc_default.png"))
-	else:
-		png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/vlc.png"))
-	if png is not None:
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 2, 20, 20, png))
-
-	return res
-
+from skin import parseFont
 
 class VlcServerList(MenuList):
 	def __init__(self):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 18))
+		self.font = gFont("Regular", 18)
+		self.l.setFont(0, self.font)
 		self.l.setItemHeight(23)
+		self.l.setBuildFunc(self.buildListboxEntry)
+
+	def applySkin(self, desktop, parent):
+		attribs = [ ]
+		if self.skinAttributes is not None:
+			for (attrib, value) in self.skinAttributes:
+				if attrib == "font":
+					self.font = parseFont(value, ((1,1),(1,1)))
+					self.l.setFont(0, self.font)
+				elif attrib == "itemHeight":
+					self.l.setItemHeight(int(value))
+				else:
+					attribs.append((attrib, value))
+			self.skinAttributes = attribs
+		return MenuList.applySkin(self, desktop, parent)
+
+	def buildListboxEntry(self, vlcServer, defaultServer):
+		size = self.l.getItemSize()
+		height = size.height()
+		res = [
+			vlcServer,
+			(eListboxPythonMultiContent.TYPE_TEXT, height + 15, 0, size.width() - height - 15, height, 0, RT_HALIGN_LEFT, vlcServer.getName())
+		]
+
+		if defaultServer is not None and defaultServer.getName() == vlcServer.getName():
+			png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/vlc_default.png"))
+		else:
+			png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/vlc.png"))
+
+		if png is not None:
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, height, height, png))
+
+		return res
 
 	def update(self, serverList, defaultServer):
-		self.list = []
-		for server in serverList:
-			self.list.append(VlcServerListEntry(server, defaultServer))
+		self.list = [(server, defaultServer) for server in serverList]
 		self.l.setList(self.list)
 		self.moveToIndex(0)
 
 	def getSelection(self):
-		if self.l.getCurrentSelection() is None:
-			return None
-		return self.l.getCurrentSelection()[0]
-
+		cur = self.l.getCurrentSelection()
+		return cur and cur[0]
 
 class VlcServerListScreen(Screen):
 	skin = """
@@ -97,7 +115,7 @@ class VlcServerListScreen(Screen):
 			 "right": 	self.right,
 			 "ok":		self.ok,
             }, -1)
-			
+
 		self.onLayoutFinish.append(self.initialServerlistUpdate)
 
 	def initialServerlistUpdate(self):
@@ -167,3 +185,4 @@ class VlcServerListScreen(Screen):
 
 	def ok(self):
 		self.close(self.serverlist.getSelection())
+

@@ -19,6 +19,7 @@ from Components.MenuList import MenuList
 
 from pyexpat import ExpatError
 
+from skin import parseFont
 
 MEDIA_EXTENSIONS = {
 		"mp3": "music",
@@ -43,34 +44,55 @@ PLAYLIST_EXTENSIONS = {
 	}
 
 
-def VlcFileListEntry(name, path, isDir = False):
-	res = [ (path, isDir) ]
-	res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, name))
-	if isDir:
-		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/directory.png"))
-	else:
-		extension = name.split('.')
-		extension = extension[-1].lower()
-		if MEDIA_EXTENSIONS.has_key(extension):
-			png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/" + MEDIA_EXTENSIONS[extension] + ".png"))
-		elif PLAYLIST_EXTENSIONS.has_key(extension):
-			png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/") + PLAYLIST_EXTENSIONS[extension])
-		else:
-			png = None
-	if png is not None:
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 2, 20, 20, png))
-
-	return res
-
-
 class VlcFileList(MenuList):
 	def __init__(self, getFilesAndDirsCB, baseDir, matchingPattern):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 18))
+		self.font = gFont("Regular", 18)
+		self.l.setFont(0, self.font)
 		self.l.setItemHeight(23)
+		self.l.setBuildFunc(self.buildListboxEntry)
 		self.currentDirectory = baseDir
 		self.getFilesAndDirsCB = getFilesAndDirsCB
 		self.changeRegex(matchingPattern)
+
+	def applySkin(self, desktop, parent):
+		attribs = [ ]
+		if self.skinAttributes is not None:
+			for (attrib, value) in self.skinAttributes:
+				if attrib == "font":
+					self.font = parseFont(value, ((1,1),(1,1)))
+					self.l.setFont(0, self.font)
+				elif attrib == "itemHeight":
+					self.l.setItemHeight(int(value))
+				else:
+					attribs.append((attrib, value))
+			self.skinAttributes = attribs
+		return MenuList.applySkin(self, desktop, parent)
+
+	def buildListboxEntry(self, path, isDir, name):
+		size = self.l.getItemSize()
+		height = size.height()
+		res = [
+			(path, isDir, name),
+			(eListboxPythonMultiContent.TYPE_TEXT, height + 15, 0, size.width() - height - 15, height, 0, RT_HALIGN_LEFT, name)
+		]
+
+		if isDir:
+			png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/directory.png"))
+		else:
+			extension = name.split('.')
+			extension = extension[-1].lower()
+			if MEDIA_EXTENSIONS.has_key(extension):
+				png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/" + MEDIA_EXTENSIONS[extension] + ".png"))
+			elif PLAYLIST_EXTENSIONS.has_key(extension):
+				png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/VlcPlayer/") + PLAYLIST_EXTENSIONS[extension])
+			else:
+				png = None
+
+		if png is not None:
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, height, height, png))
+
+		return res
 
 	def update(self):
 		success = False
@@ -80,11 +102,11 @@ class VlcFileList(MenuList):
 		if filelistEntries is not None:
 			files, directories = filelistEntries
 			for file in files:
-				[name, path] = file
-				fileEntries.append(VlcFileListEntry(name, path))
+				name, path = file
+				fileEntries.append((path, False, name))
 			for directory in directories:
-				[name, path] = directory
-				directoryEntries.append(VlcFileListEntry(name, path, True))
+				name, path = directory
+				directoryEntries.append((path, True, name))
 			fileEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
 			directoryEntries.sort(cmp = lambda x, y: cmp(x[0], y[0]))
 			success = True
@@ -95,7 +117,7 @@ class VlcFileList(MenuList):
 
 	def isVideoTS(self):
 		for e in self.list:
-			if e[0][1] == True and e[0][0].upper().endswith("VIDEO_TS"):
+			if e[1] == True and e[0].upper().endswith("VIDEO_TS"):
 				return True
 		return False
 
@@ -114,17 +136,19 @@ class VlcFileList(MenuList):
 				self.currentDirectory = previousDirectory
 				ret = None, None
 		except ExpatError, e:
+			print e
 			self.currentDirectory = previousDirectory
 			self.update()
 			ret = None, self.currentDirectory
 		return ret
 
 	def activate(self):
-		if self.getCurrent() is not None:
-			if self.getCurrent()[0][1]:
-				ret = self.changeDirectory(self.getCurrent()[0][0])
+		cur = self.getCurrent()
+		if cur is not None:
+			if cur[1]:
+				ret = self.changeDirectory(cur[0])
 			else:
-				ret = self.getCurrent()[0][0], self.getCurrent()[1][7]
+				ret = cur[0], cur[2]
 		else:
 			ret = None, None
 		return ret
@@ -137,18 +161,22 @@ class VlcFileList(MenuList):
 
 	def getNextFile(self):
 		i = self.getSelectedIndex() + 1
-		while i < len(self.list):
-			if self.list[i][0][1] == False:
+		Len = len(self.list)
+		while i < Len:
+			cur = self.list[i]
+			if cur[1] == False:
 				self.moveToIndex(i)
-				return self.getCurrent()[0][0], self.getCurrent()[1][7]
+				return cur[0], cur[2]
 			i = i + 1
 		return None, None
 
 	def getPrevFile(self):
 		i = self.getSelectedIndex() - 1
-		while i >= 0:
-			if self.list[i][0][1] == False:
+		while i > -1:
+			cur = self.list[i]
+			if cur[1] == False:
 				self.moveToIndex(i)
-				return self.getCurrent()[0][0], self.getCurrent()[1][7]
+				return cur[0], cur[2]
 			i = i - 1
 		return None, None
+
