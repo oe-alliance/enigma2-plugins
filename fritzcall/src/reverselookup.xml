@@ -830,9 +830,9 @@
 		<website name="herold.at (Privat)" url="http://www.herold.at/servlet/at.herold.sp.servlet.SPWPSearchServlet?searchmask=2&amp;phone=$NUMBER" prefix="0">
 			<entry>
 				<name>&lt;h[1-9]&gt;&lt;a href=&quot;[^&quot;]*&quot;(?:\s*class=&quot;bold&quot;)?&gt;([^&lt;]*)&lt;/a&gt;&lt;/h[1-9]&gt;</name>
-				<street>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?[^,]*,\s*([^&lt;]*)&lt;br&gt;&lt;/br&gt;&lt;/p&gt;</street>
-				<city>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?\d+ ([^,]*),\s*[^&lt;]*&lt;br&gt;&lt;/br&gt;&lt;/p&gt;</city>
-				<zipcode>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?(\d+) [^,]*,\s*[^&lt;]*&lt;br&gt;&lt;/br&gt;&lt;/p&gt;</zipcode>
+				<street>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?[^,]*,\s*([^&lt;]*)&lt;br /&gt;&lt;/p&gt;</street>
+				<city>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?\d+ ([^,]*),\s*[^&lt;]*&lt;br /&gt;&lt;/p&gt;</city>
+				<zipcode>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?(\d+) [^,]*,\s*[^&lt;]*&lt;br /&gt;&lt;/p&gt;</zipcode>
 			</entry>
 		</website>
 		<website name="herold.at (Firma)" url="http://www.herold.at/servlet/at.herold.sp.servlet.SPYPSearchServlet?searchmask=2&amp;phone=$NUMBER" prefix="0">
@@ -896,7 +896,7 @@
 		</website>
 	</country>
 	<country code="+49">
-		<website name="www.dasoertliche.de" url="http://dasoertliche.de/?form_name=search_inv&amp;page=RUECKSUCHE&amp;context=RUECKSUCHE&amp;action=STANDARDSUCHE&amp;la=de&amp;rci=no&amp;ph=$NUMBER" prefix="0">
+		<website name="www.dasoertliche.de" url="http://dasoertliche.de/Controller?form_name=search_inv&amp;ph=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>class=&quot;entry&quot;\s*(?:onmouseover=&quot;&quot;)?\s*&gt;([^&lt;]*)&lt;/a&gt;</name>
 	        	<street>^\s*([^,&gt;]+),&amp;nbsp;\d{5}&amp;nbsp;[^&lt;]*&lt;br/&gt;</street>

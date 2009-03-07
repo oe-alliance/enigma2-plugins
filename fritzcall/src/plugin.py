@@ -245,7 +245,7 @@ class FritzCallFBF:
 
 					thisnumber = found.group(2).strip()
 					if thisnumber:
-						thisname = html2unicode(thisname).encode('utf-8')
+						thisname = html2unicode(thisname)
 						debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						phonebook.phonebook[thisnumber] = thisname.strip()
@@ -1799,10 +1799,10 @@ class FritzCall:
 			self.d[1].disconnect()
 			self.d = None
 
-def displayCalls(session, servicelist):
+def displayCalls(session, servicelist=None):
 	session.open(FritzDisplayCalls)
 
-def displayPhonebook(session, servicelist):
+def displayPhonebook(session, servicelist=None):
 	session.open(phonebook.FritzDisplayPhonebook)
 
 def main(session):
