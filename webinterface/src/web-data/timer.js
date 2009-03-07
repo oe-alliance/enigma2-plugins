@@ -386,7 +386,7 @@ function loadTimerEditForm(justplay, begin, end, repeated, channel, channelName,
 	addTimerEditFormArray.dirname = String(dirname);
 	addTimerEditFormArray.tags = String(tags);
 	addTimerEditFormArray.repeated = Number(repeated);
-	addTimerEditFormArray.afterEvent = Number(afterEvent);
+	addTimerEditFormArray.afterEvent = afterEvent;
 	
 	debug("[loadTimerEditForm]" + justplay + "|" + begin + "|" + end + "|" + repeated + "|"+channel+"|"+name+"|"+description+"|"+dirname+"|"+tags+"|"+afterEvent);
 
