@@ -79,7 +79,7 @@ class Timer( Source):
 		except:
 			return False, "The timer has NOT been deleted"
 
-			return False, "No matching Timer found"
+		return False, "No matching Timer found"
 
 	def tvBrowser(self, param):
 		""" The URL's for the tvBrowser-Capture-Driver are:
