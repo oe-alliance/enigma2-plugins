@@ -144,27 +144,23 @@ class Timer( Source):
 		else:
 			return False, "Unknown command: '%s'" %param['command']
 
-	def recordNow(self,param):
-		print "recordNow ",param
-
+	def recordNow(self, param):
+		ret = (True, "Instant record for current Event started")
+		
 		limitEvent = True
-		if param == "undefinitely":
+		if param == "undefinitely" or param == "infinite":
+			ret = (True, "Infinite Instant recording started")
 			limitEvent = False
 
-		serviceref = self.session.nav.getCurrentlyPlayingServiceReference()
-		print serviceref
-		#assert isinstance(serviceref, ServiceReference)
-		serviceref = ServiceReference(serviceref.toString())
+		serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference().toString())
+		
 		event = None
+		
 		try:
 			service = self.session.nav.getCurrentService()
-			event = self.epgcache.lookupEventTime(serviceref, -1, 0)
-			if event is None:
-				info = service.info()
-				ev = info.getEvent(0)
-				event = ev
+			event = service.info().getEvent(0)
 		except:
-			pass
+			print "[Webcomponents.Timer] recordNow Exception!"			
 
 		begin = time()
 		end = begin + 3600 * 10
@@ -179,16 +175,18 @@ class Timer( Source):
 			eventid = curEvent[4]
 			if limitEvent:
 				end = curEvent[1]
+				
 		else:
 			if limitEvent:
-				return False, "No event found, started infinite recording"
-
-		location = config.movielist.last_videodir.value
-		timer = RecordTimerEntry(serviceref, begin, end, name, description, eventid, False, False, 0, dirname = location)
-		timer.dontSave = True
-		self.recordtimer.record(timer)
-
-		return True, "Instant recording started"
+				ret = (False, "No event found! Not recording!")
+		
+		if ret[0]:
+			location = config.movielist.last_videodir.value
+			timer = RecordTimerEntry(serviceref, begin, end, name, description, eventid, False, False, 0, dirname = location)
+			timer.dontSave = True
+			self.recordtimer.record(timer)
+		
+		return ret
 
 
 #===============================================================================
