@@ -724,6 +724,19 @@ function getBouquetEpg(){
 	loadServiceEPGNowNext(currentBouquet);
 	loadServiceEPGNowNext(currentBouquet, true);
 }
+
+
+function recordNowPopup(){
+	var result = confirm(	"OK: Record current event\n" +
+							"Cancel: Start infinite recording"
+	)
+	
+	if( result === true || result === false){
+		recordNowDecision(result);
+	}
+}
+
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++ volume functions                            ++++
@@ -1189,68 +1202,60 @@ if( typeof Array.prototype.splice==='undefined' ) {
 	};
 }
 
-//Recording
-function incomingRecordingPushed(request) {
-	if(request.readyState == 4){
-		var timers = new TimerList(getXML(request)).getArray();
-		debug("[incomingRecordingPushed] Got " + timers.length + " timers");
-		
-		var aftereventReadable = ['Nothing', 'Standby', 'Deepstandby/Shutdown', 'Auto'];
-		var justplayReadable = ['record', 'zap'];
-		var OnOff = ['on', 'off'];
-		
-		var namespace = [];
-		
-		for ( var i = 0; i <timers.length; i++){
-			var timer = timers[i];
+////Recording
+//function incomingRecordingPushed(request) {
+//	if(request.readyState == 4){
+//		var timers = new TimerList(getXML(request)).getArray();
+//		debug("[incomingRecordingPushed] Got " + timers.length + " timers");
+//		
+//		var aftereventReadable = ['Nothing', 'Standby', 'Deepstandby/Shutdown', 'Auto'];
+//		var justplayReadable = ['record', 'zap'];
+//		var OnOff = ['on', 'off'];
+//		
+//		var namespace = [];
+//		
+//		for ( var i = 0; i <timers.length; i++){
+//			var timer = timers[i];
+//
+//			if(ownLazyNumber(timer.getDontSave()) == 1) {
+//				var beginDate = new Date(Number(timer.getTimeBegin())*1000);
+//				var endDate = new Date(Number(timer.getTimeEnd())*1000);
+//				namespace[i] = {
+//				'servicereference': timer.getServiceReference(),
+//				'servicename': timer.getServiceName() ,
+//				'title': timer.getName(), 
+//				'description': timer.getDescription(), 
+//				'descriptionextended': timer.getDescriptionExtended(), 
+//				'begin': timer.getTimeBegin(),
+//				'beginDate': beginDate.toLocaleString(),
+//				'end': timer.getTimeEnd(),
+//				'endDate': endDate.toLocaleString(),
+//				'state': timer.getState(),
+//				'duration': Math.ceil((timer.getDuration()/60)),
+//				'dirname': timer.getDirname(),
+//				'tags': timer.getTags(),
+//				'repeated': timer.getRepeated(),
+//				'repeatedReadable': repeatedReadable(timer.getRepeated()),
+//				'justplay': timer.getJustplay(),
+//				'justplayReadable': justplayReadable[Number(timer.getJustplay())],
+//				'afterevent': timer.getAfterevent(),
+//				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
+//				'disabled': timer.getDisabled(),
+//				'onOff': OnOff[Number(timer.getDisabled())]
+//				};
+//			}
+//		}
+//		var data = { recordings : namespace };
+//		openPopup("Record Now", 'tplTimerListItem', data, 900, 500, "Record now window");
+//	}
+//}
+//
+//
+//function recordingPushed() {
+//	doRequest(url_timerlist, incomingRecordingPushed, false);
+//}
 
-			if(ownLazyNumber(timer.getDontSave()) == 1) {
-				var beginDate = new Date(Number(timer.getTimeBegin())*1000);
-				var endDate = new Date(Number(timer.getTimeEnd())*1000);
-				namespace[i] = {
-				'servicereference': timer.getServiceReference(),
-				'servicename': timer.getServiceName() ,
-				'title': timer.getName(), 
-				'description': timer.getDescription(), 
-				'descriptionextended': timer.getDescriptionExtended(), 
-				'begin': timer.getTimeBegin(),
-				'beginDate': beginDate.toLocaleString(),
-				'end': timer.getTimeEnd(),
-				'endDate': endDate.toLocaleString(),
-				'state': timer.getState(),
-				'duration': Math.ceil((timer.getDuration()/60)),
-				'dirname': timer.getDirname(),
-				'tags': timer.getTags(),
-				'repeated': timer.getRepeated(),
-				'repeatedReadable': repeatedReadable(timer.getRepeated()),
-				'justplay': timer.getJustplay(),
-				'justplayReadable': justplayReadable[Number(timer.getJustplay())],
-				'afterevent': timer.getAfterevent(),
-				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
-				'disabled': timer.getDisabled(),
-				'onOff': OnOff[Number(timer.getDisabled())]
-				};
-			}
-		}
-		var data = { recordings : namespace };
-		openPopup("Record Now", 'tplTimerListItem', data, 900, 500, "Record now window");
-	}
-}
 
-
-function recordingPushed() {
-	doRequest(url_timerlist, incomingRecordingPushed, false);
-}
-
-
-function recordingPushedDecision(recordNowNothing,recordNowUndefinitely,recordNowCurrent) {
-	var recordNow = recordNowNothing;
-	recordNow = (recordNow === "") ? recordNowUndefinitely: recordNow;
-	recordNow = (recordNow === "") ? recordNowCurrent: recordNow;
-	if(recordNow !== "nothing" && recordNow !== "") {
-		doRequest(url_recordnow+"?recordnow="+recordNow, incomingTimerAddResult, false);
-	}
-}
 
 function ifChecked(rObj) {
 	if(rObj.checked) {

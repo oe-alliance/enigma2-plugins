@@ -719,6 +719,14 @@ function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,descrip
 	 "&deleteOldOnSave=1", incomingTimerAddResult, false);
 }
 
+function recordNowDecision(recordNowCurrent) {
+	var recordNow = "infinite";
+	if(recordNowCurrent == true){
+		recordNow = "current" 
+	}
+	doRequest(url_recordnow+"?recordnow="+recordNow, incomingTimerAddResult, false);
+}
+
 function incomingWriteTimerListNow(request){
 	var result = new SimpleXMLResult(getXML(request));
 	notify(result.getStateText(), result.getState());
