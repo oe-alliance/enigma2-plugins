@@ -634,15 +634,17 @@ function sendAddTimer() {
 		nameClean = ($('name').value == " " || $('name').value == "N/A") ? "" : $('name').value;
 		
 		neverString = "[0-9a-zA-Z\\-_\\.\\!\\(\\)&=\\+$,;\\?/:\\\\ ]*";
-		if(descriptionClean != descriptionClean.match(neverString) ||
-			nameClean != nameClean.match(neverString)) {
-			alert("Please only use "+neverString+" in the name and the description field");
-			return;
-		}
+//		if(descriptionClean != descriptionClean.match(neverString) ||
+//			nameClean != nameClean.match(neverString)) {
+//			alert("Please only use "+neverString+" in the name and the description field");
+//			return;
+//		}
 		
-		
-		dirname = $F($('timerDir').dirname);
-		tags = $F($('timerTags').tags);
+		descriptionClean = encodeURIComponent(descriptionClean);
+		nameClean = encodeURIComponent(nameClean);
+	
+		dirname = encodeURIComponent($F($('timerDir').dirname));
+		tags = encodeURIComponent($F($('timerTags').tags));
 
 		repeated = 0;
 		if($('ms').checked) {
@@ -664,8 +666,8 @@ function sendAddTimer() {
 		}
 		//addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'False\');
 		doRequest(url_timerchange+"?"+"sRef="+($('channel').value).replace("&quot;", '"')+"&begin="+ begin +
-		  "&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean) +
-		  "&dirname="+dirname+"&tags="+escape(tags) +
+		  "&end="+end+"&name="+nameClean+"&description="+descriptionClean+
+		  "&dirname="+dirname+"&tags="+tags +
 		  "&afterevent="+$('after_event').value+"&eit=0&disabled=0" +
 		  "&justplay="+ownLazyNumber($('justplay').value)+"&repeated="+repeated +
 		  "&channelOld="+$('channelOld').value +
