@@ -633,13 +633,6 @@ function sendAddTimer() {
 		descriptionClean = ($('descr').value == " " || $('descr').value == "N/A") ? "" : $('descr').value;
 		nameClean = ($('name').value == " " || $('name').value == "N/A") ? "" : $('name').value;
 		
-		neverString = "[0-9a-zA-Z\\-_\\.\\!\\(\\)&=\\+$,;\\?/:\\\\ ]*";
-//		if(descriptionClean != descriptionClean.match(neverString) ||
-//			nameClean != nameClean.match(neverString)) {
-//			alert("Please only use "+neverString+" in the name and the description field");
-//			return;
-//		}
-		
 		descriptionClean = encodeURIComponent(descriptionClean);
 		nameClean = encodeURIComponent(nameClean);
 	
@@ -711,10 +704,14 @@ function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,descrip
 	
 	var descriptionClean = (description == " " || description == "N/A") ? "" : description;
 	var nameClean = (name == " " || name == "N/A") ? "" : name;
-
+	
+	nameClean = encodeURIComponent(nameClean);
+	descriptionClean = encodeURIComponent(descriptionClean);
+	tags = encodeURIComponent(tags);
+	
 	doRequest(url_timerchange+"?"+"sRef="+channel.replace("&quot;", '"')+"&begin="+begin +
-	 "&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean) +
-	 "&dirname="+dirname+"&tags="+escape(tags) +
+	 "&end="+end+"&name="+nameClean+"&description="+descriptionClean+
+	 "&dirname="+dirname+"&tags="+tags +
 	 "&afterevent="+afterEvent+"&eit=0&disabled="+disabled +
 	 "&justplay="+justplay+"&repeated="+repeated +
 	 "&channelOld="+channel +
