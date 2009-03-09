@@ -11,6 +11,8 @@ from xml.etree.cElementTree import fromstring as cElementTree_fromstring
 
 NOTIFICATIONID = 'SimpleRSSUpdateNotification'
 
+update_callbacks = []
+
 class RSSPoller:
 	"""Keeps all Feed and takes care of (automatic) updates"""
 
@@ -20,9 +22,6 @@ class RSSPoller:
 		self.poll_timer.callback.append(self.poll)
 		if poll:
 			self.poll_timer.start(0, 1)
-
-		# Functions to call when updates happened
-		self.update_callbacks = [ ]
 
 		# Save Session, Initialize Var to identify triggered Reload
 		self.session = session
@@ -47,15 +46,15 @@ class RSSPoller:
 		self.current_feed = 0
 
 	def addCallback(self, callback):
-		if callback not in self.update_callbacks:
-			self.update_callbacks.append(callback)
+		if callback not in update_callbacks:
+			update_callbacks.append(callback)
 
 	def removeCallback(self, callback):
-		if callback in self.update_callbacks:
-			self.update_callbacks.remove(callback)
+		if callback in update_callbacks:
+			update_callbacks.remove(callback)
 
 	def doCallback(self, id = None):
-		for callback in self.update_callbacks:
+		for callback in update_callbacks:
 			try:
 				callback(id)
 			except:
