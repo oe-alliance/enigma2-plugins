@@ -210,7 +210,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
 
     def keyMenu(self):
         sAudio = self.AC3delay.whichAudio
-        iDelay = self.savedValue[sAudio]
+        iDelay = self[sAudio+"Slider"].getValue()+self.lowerBound
         keyList = [
             (_("Save current %(audio)s delay of %(delay)i ms to key") %dict(audio=sAudio , delay=iDelay),"1"),
             (self.whichKeyText[self.whichKeys],"2")
