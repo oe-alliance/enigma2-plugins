@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 # for localized messages
 from __init__ import _
-from enigma import eTimer
+from enigma import eTimer, getDesktop
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Components.config import config, ConfigText, ConfigPassword, getConfigListEntry, ConfigNothing, ConfigSubsection, ConfigSubList, ConfigSubDict
+from Components.config import config, ConfigText, ConfigPassword, getConfigListEntry, ConfigNothing, ConfigSubsection, ConfigSubList, ConfigSubDict, ConfigIP
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Sources.List import List
 from Components.Network import iNetwork
+from Components.Input import Input
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from Tools.LoadPixmap import LoadPixmap
 from cPickle import dump, load
@@ -78,13 +79,15 @@ class NetworkBrowser(Screen):
 					}
 				</convert>
 			</widget>
-			<ePixmap pixmap="skin_default/buttons/button_green.png" position="30,375" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="mounttext" position="50,375" size="250,21" zPosition="10" font="Regular;21" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/button_green.png" position="30,370" zPosition="10" size="15,16" transparent="1" alphatest="on" />
+			<widget name="mounttext" position="50,370" size="250,21" zPosition="10" font="Regular;21" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/button_blue.png" position="30,395" zPosition="10" size="15,16" transparent="1" alphatest="on" />
+			<widget name="searchtext" position="50,395" size="150,21" zPosition="10" font="Regular;21" transparent="1" />
 			<widget name="infotext" position="300,375" size="250,21" zPosition="10" font="Regular;21" transparent="1" />
-			<ePixmap pixmap="skin_default/buttons/button_red.png" position="410,415" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="closetext" position="430,415" size="120,21" zPosition="10" font="Regular;21" transparent="1" />
-			<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="30,415" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="rescantext" position="50,415" size="300,21" zPosition="10" font="Regular;21" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/button_red.png" position="410,420" zPosition="10" size="15,16" transparent="1" alphatest="on" />
+			<widget name="closetext" position="430,420" size="120,21" zPosition="10" font="Regular;21" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="30,420" zPosition="10" size="15,16" transparent="1" alphatest="on" />
+			<widget name="rescantext" position="50,420" size="300,21" zPosition="10" font="Regular;21" transparent="1" />
 		</screen>"""
 		
 	def __init__(self, session, iface,plugin_path):
@@ -105,6 +108,7 @@ class NetworkBrowser(Screen):
 		self["mounttext"] = Label(_("Mounts management"))
 		self["rescantext"] = Label(_("Rescan network"))
 		self["infotext"] = Label(_("Press OK to mount!"))
+		self["searchtext"] = Label(_("Scan IP"))
 		
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
@@ -113,6 +117,7 @@ class NetworkBrowser(Screen):
 			"red": self.close,
 			"green": self.keyGreen,
 			"yellow": self.keyYellow,
+			"blue": self.keyBlue,
 		})
 		
 		self.list = []
@@ -158,15 +163,29 @@ class NetworkBrowser(Screen):
 			remove(self.cache_file)
 		self.startRun()	
 
+	def keyBlue(self):
+		self.session.openWithCallback(self.scanIPclosed,ScanIP)
+
+	def scanIPclosed(self,result):
+		if result:
+			print "got IP:",result
+			nwlist = []
+			if len(result):
+				strIP = str(result) + "/24"
+				nwlist.append(netscan.netzInfo(strIP))
+				self.networklist = nwlist[0]
+		if len(self.networklist) > 0:
+			self.updateHostsList()
+
 	def setStatus(self,status = None):
 		if status:
 			self.statuslist = []
 			if status == 'update':
-				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/updating.png"))
+				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/update.png"))
 				self.statuslist.append(( ['info'], statuspng, _("Searching your network. Please wait..."), None, None, None, None  ))
 				self['list'].setList(self.statuslist)	
 			elif status == 'error':
-				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/error.png"))
+				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/error.png"))
 				self.statuslist.append(( ['info'], statuspng, _("No network devices found!"), None, None, None, None  ))
 				self['list'].setList(self.statuslist)				
 	
@@ -429,3 +448,94 @@ class NetworkBrowser(Screen):
 	def MountEditClosed(self, returnValue = None):
 		if returnValue == None:
 			self.updateNetworkList()
+
+class ScanIP(Screen):
+	skin = """
+		<screen name="IPKGSource" position="100,100" size="550,80" title="IPKG source" >
+			<widget name="text" position="10,10" size="530,25" font="Regular;20" backgroundColor="background" foregroundColor="#cccccc" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="10,40" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+			<widget name="closetext" position="20,50" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="160,40" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+			<widget name="edittext" position="170,50" size="300,21" zPosition="10" font="Regular;21" transparent="1" />
+		</screen>"""
+		
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		text = ""
+
+		desk = getDesktop(0)
+		x= int(desk.size().width())
+		y= int(desk.size().height())
+		#print "[IPKGSource] mainscreen: current desktop size: %dx%d" % (x,y)
+
+		self["closetext"] = Label(_("Cancel"))
+		self["edittext"] = Label(_("OK"))
+		
+		if (y>=720):
+			self["text"] = Input(text, maxSize=False, type=Input.TEXT)
+		else:
+			self["text"] = Input(text, maxSize=False, visible_width = 55, type=Input.TEXT)
+			
+		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "TextEntryActions", "KeyboardInputActions","ShortcutActions"], 
+		{
+			"ok": self.go,
+			"back": self.exit,
+			"red": self.exit,
+			"green": self.go,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"home": self.keyHome,
+			"end": self.keyEnd,
+			"deleteForward": self.keyDeleteForward,
+			"deleteBackward": self.keyDeleteBackward,
+			"1": self.keyNumberGlobal,
+			"2": self.keyNumberGlobal,
+			"3": self.keyNumberGlobal,
+			"4": self.keyNumberGlobal,
+			"5": self.keyNumberGlobal,
+			"6": self.keyNumberGlobal,
+			"7": self.keyNumberGlobal,
+			"8": self.keyNumberGlobal,
+			"9": self.keyNumberGlobal,
+			"0": self.keyNumberGlobal
+		}, -1)
+
+		self.onLayoutFinish.append(self.layoutFinished)
+		
+	def exit(self):
+		self.close(None)
+
+	def layoutFinished(self):
+		self.setWindowTitle()
+		self["text"].right()
+
+	def setWindowTitle(self):
+		self.setTitle(_("Enter IP to scan..."))
+		
+	def go(self):
+		text = self["text"].getText()
+		if text:
+			self.close(text)
+		
+	def keyLeft(self):
+		self["text"].left()
+	
+	def keyRight(self):
+		self["text"].right()
+	
+	def keyHome(self):
+		self["text"].home()
+	
+	def keyEnd(self):
+		self["text"].end()
+	
+	def keyDeleteForward(self):
+		self["text"].delete()
+	
+	def keyDeleteBackward(self):
+		self["text"].deleteBackward()
+	
+	def keyNumberGlobal(self, number):
+		print "pressed", number
+		self["text"].number(number)
