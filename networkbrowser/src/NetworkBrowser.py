@@ -4,10 +4,7 @@ from __init__ import _
 from enigma import eTimer, getDesktop
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Components.config import config, ConfigText, ConfigPassword, getConfigListEntry, ConfigNothing, ConfigSubsection, ConfigSubList, ConfigSubDict, ConfigIP
-from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
-from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Sources.List import List
 from Components.Network import iNetwork
@@ -15,7 +12,7 @@ from Components.Input import Input
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from Tools.LoadPixmap import LoadPixmap
 from cPickle import dump, load
-from os import path as os_path, unlink, stat, mkdir,remove
+from os import path as os_path, stat, mkdir, remove
 from time import time
 from stat import ST_MTIME
 
@@ -31,7 +28,7 @@ def write_cache(cache_file, cache_data):
 		try:
 			mkdir( os_path.dirname(cache_file) )
 		except OSError:
-			    print os_path.dirname(cache_file), 'is a file'
+			print os_path.dirname(cache_file), 'is a file'
 	fd = open(cache_file, 'w')
 	dump(cache_data, fd, -1)
 	fd.close()
@@ -89,7 +86,7 @@ class NetworkBrowser(Screen):
 			<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="30,420" zPosition="10" size="15,16" transparent="1" alphatest="on" />
 			<widget name="rescantext" position="50,420" size="300,21" zPosition="10" font="Regular;21" transparent="1" />
 		</screen>"""
-		
+
 	def __init__(self, session, iface,plugin_path):
 		Screen.__init__(self, session)
 		self.skin_path = plugin_path
@@ -101,15 +98,15 @@ class NetworkBrowser(Screen):
 		self.device = None
 		self.mounts = None
 		self.expanded = []
-		self.cache_ttl = 604800  #Seconds cache is considered valid, 7 Days should be ok
-		self.cache_file = '/etc/enigma2/networkbrowser.cache' #Path to cache directory	 	
-		
+		self.cache_ttl = 604800 #Seconds cache is considered valid, 7 Days should be ok
+		self.cache_file = '/etc/enigma2/networkbrowser.cache' #Path to cache directory
+
 		self["closetext"] = Label(_("Close"))
 		self["mounttext"] = Label(_("Mounts management"))
 		self["rescantext"] = Label(_("Rescan network"))
 		self["infotext"] = Label(_("Press OK to mount!"))
 		self["searchtext"] = Label(_("Scan IP"))
-		
+
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"ok": self.go,
@@ -119,18 +116,18 @@ class NetworkBrowser(Screen):
 			"yellow": self.keyYellow,
 			"blue": self.keyBlue,
 		})
-		
+
 		self.list = []
 		self.statuslist = []
 		self.listindex = 0
 		self["list"] = List(self.list)
 		self["list"].onSelectionChanged.append(self.selectionChanged)
-		
+
 		self.onLayoutFinish.append(self.startRun)
 		self.onShown.append(self.setWindowTitle)
-		self.onClose.append(self.cleanup)	
+		self.onClose.append(self.cleanup)
 		self.Timer = eTimer()
-		self.Timer.callback.append(self.TimerFire)		
+		self.Timer.callback.append(self.TimerFire)
 
 	def cleanup(self):
 		del self.Timer
@@ -146,22 +143,22 @@ class NetworkBrowser(Screen):
 		if self.cache_ttl > 0 and self.vc != 0:
 			self.process_NetworkIPs()
 		else:
-			self.Timer.start(3000)		
-		
+			self.Timer.start(3000)
+
 	def TimerFire(self):
 		self.Timer.stop()
 		self.process_NetworkIPs()
-		
+
 	def setWindowTitle(self):
 		self.setTitle(_("Browse network neighbourhood"))
-		
+
 	def keyGreen(self):
 		self.session.open(AutoMountManager, None, self.skin_path)
 
 	def keyYellow(self):
 		if (os_path.exists(self.cache_file) == True):
 			remove(self.cache_file)
-		self.startRun()	
+		self.startRun()
 
 	def keyBlue(self):
 		self.session.openWithCallback(self.scanIPclosed,ScanIP)
@@ -182,13 +179,13 @@ class NetworkBrowser(Screen):
 			self.statuslist = []
 			if status == 'update':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/update.png"))
-				self.statuslist.append(( ['info'], statuspng, _("Searching your network. Please wait..."), None, None, None, None  ))
-				self['list'].setList(self.statuslist)	
+				self.statuslist.append(( ['info'], statuspng, _("Searching your network. Please wait..."), None, None, None, None ))
+				self['list'].setList(self.statuslist)
 			elif status == 'error':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/error.png"))
-				self.statuslist.append(( ['info'], statuspng, _("No network devices found!"), None, None, None, None  ))
-				self['list'].setList(self.statuslist)				
-	
+				self.statuslist.append(( ['info'], statuspng, _("No network devices found!"), None, None, None, None ))
+				self['list'].setList(self.statuslist)
+
 	def process_NetworkIPs(self):
 		self.inv_cache = 0
 		self.vc = valid_cache(self.cache_file, self.cache_ttl)
@@ -206,7 +203,7 @@ class NetworkBrowser(Screen):
 			self.updateHostsList()
 		else:
 			self.setStatus('error')
-			
+
 	def getNetworkIPs(self):
 		nwlist = []
 		sharelist = []
@@ -216,7 +213,7 @@ class NetworkBrowser(Screen):
 			nwlist.append(netscan.netzInfo(strIP))
 		tmplist = nwlist[0]
 		return tmplist
-	
+
 	def getNetworkShares(self,hostip,hostname,devicetype):
 		sharelist = []
 		self.sharecache_file = None
@@ -233,7 +230,7 @@ class NetworkBrowser(Screen):
 		else:
 			username = "username"
 			password = "password"
-			
+
 		if devicetype == 'unix':
 			smblist=netscan.smbShare(hostip,hostname,username,password)
 			for x in smblist:
@@ -249,7 +246,7 @@ class NetworkBrowser(Screen):
 			for x in smblist:
 				if len(x) == 6:
 					if x[3] != 'IPC$':
-						sharelist.append(x)			
+						sharelist.append(x)
 		return sharelist
 
 	def updateHostsList(self):
@@ -265,7 +262,7 @@ class NetworkBrowser(Screen):
 			name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
 			print hostentry
 			expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-			self.list.append(( hostentry, expandableIcon, name, None, None, None, None  ))
+			self.list.append(( hostentry, expandableIcon, name, None, None, None, None ))
 		self["list"].setList(self.list)
 		self["list"].setIndex(self.listindex)
 
@@ -287,14 +284,14 @@ class NetworkBrowser(Screen):
 				hostentry = self.network[x][0][1]
 				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
 				expandedIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-				self.list.append(( hostentry, expandedIcon, name,  None, None, None, None  ))
+				self.list.append(( hostentry, expandedIcon, name, None, None, None, None ))
 				for share in networkshares:
 					self.list.append(self.BuildNetworkShareEntry(share))
 			else: # HOSTLIST - VIEW
 				hostentry = self.network[x][0][1]
 				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
 				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
-				self.list.append(( hostentry, expandableIcon, name,  None, None, None, None  ))
+				self.list.append(( hostentry, expandableIcon, name, None, None, None, None ))
 		self["list"].setList(self.list)
 		self["list"].setIndex(self.listindex)
 
@@ -331,7 +328,7 @@ class NetworkBrowser(Screen):
 			isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/ok.png"))
 		else:
 			isMountedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/cancel.png"))
-			
+
 		return((share, verticallineIcon, None, sharedir, sharedescription, newpng, isMountedpng))
 
 	def selectionChanged(self):
@@ -339,11 +336,11 @@ class NetworkBrowser(Screen):
 		self.listindex = self["list"].getIndex()
 		print len(current)
 		if current:
-			if current[0][0] in ( "nfsShare", "smbShare"):
+			if current[0][0] in ("nfsShare", "smbShare"):
 				self["infotext"].show()
 			else:
 				self["infotext"].hide()
-		
+
 	def go(self):
 		sel = self["list"].getCurrent()
 		if sel is None:
@@ -395,13 +392,13 @@ class NetworkBrowser(Screen):
 	def UserDialogClosed(self, *ret):
 		if ret is not None and len(ret):
 			self.go()
-			
+
 	def openMountEdit(self, selection):
 		if selection is not None and len(selection):
 			mounts = iAutoMount.getMountsList()
 			if selection[0] == 'nfsShare': # share entry selected
 				#Initialize blank mount enty
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False } 
+				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
 				# add data
 				data['mounttype'] = 'nfs'
 				data['active'] = True
@@ -416,7 +413,7 @@ class NetworkBrowser(Screen):
 				self.session.openWithCallback(self.MountEditClosed,AutoMountEdit, self.skin_path, data)
 			if selection[0] == 'smbShare': # share entry selected
 				#Initialize blank mount enty
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False } 
+				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
 				# add data
 				data['mounttype'] = 'cifs'
 				data['active'] = True
@@ -458,7 +455,7 @@ class ScanIP(Screen):
 			<ePixmap pixmap="skin_default/buttons/green.png" position="160,40" zPosition="2" size="140,40" transparent="1" alphatest="on" />
 			<widget name="edittext" position="170,50" size="300,21" zPosition="10" font="Regular;21" transparent="1" />
 		</screen>"""
-		
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
@@ -471,13 +468,13 @@ class ScanIP(Screen):
 
 		self["closetext"] = Label(_("Cancel"))
 		self["edittext"] = Label(_("OK"))
-		
+
 		if (y>=720):
 			self["text"] = Input(text, maxSize=False, type=Input.TEXT)
 		else:
 			self["text"] = Input(text, maxSize=False, visible_width = 55, type=Input.TEXT)
-			
-		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "TextEntryActions", "KeyboardInputActions","ShortcutActions"], 
+
+		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "TextEntryActions", "KeyboardInputActions","ShortcutActions"],
 		{
 			"ok": self.go,
 			"back": self.exit,
@@ -502,7 +499,7 @@ class ScanIP(Screen):
 		}, -1)
 
 		self.onLayoutFinish.append(self.layoutFinished)
-		
+
 	def exit(self):
 		self.close(None)
 
@@ -512,30 +509,31 @@ class ScanIP(Screen):
 
 	def setWindowTitle(self):
 		self.setTitle(_("Enter IP to scan..."))
-		
+
 	def go(self):
 		text = self["text"].getText()
 		if text:
 			self.close(text)
-		
+
 	def keyLeft(self):
 		self["text"].left()
-	
+
 	def keyRight(self):
 		self["text"].right()
-	
+
 	def keyHome(self):
 		self["text"].home()
-	
+
 	def keyEnd(self):
 		self["text"].end()
-	
+
 	def keyDeleteForward(self):
 		self["text"].delete()
-	
+
 	def keyDeleteBackward(self):
 		self["text"].deleteBackward()
-	
+
 	def keyNumberGlobal(self, number):
 		print "pressed", number
 		self["text"].number(number)
+

@@ -4,22 +4,19 @@ from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from enigma import loadPNG, eListboxPythonMultiContent, gFont, eTimer
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Network import iNetwork
 from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
-from os import system, popen, path as os_path, listdir
+from os import path as os_path
 
 from MountView import AutoMountView
 from MountEdit import AutoMountEdit
 from AutoMount import iAutoMount, AutoMount
 from UserManager import UserManager
-
 
 class AutoMountManager(Screen):
 	skin = """
@@ -57,16 +54,16 @@ class AutoMountManager(Screen):
 		self["ButtonRed"] = Pixmap()
 		self["ButtonRedtext"] = Label(_("Close"))
 		self["introduction"] = Label(_("Press OK to select."))
-		
+
 		self.list = []
 		self["config"] = List(self.list)
 		self.updateList()
-		self.onClose.append(self.cleanup)	
+		self.onClose.append(self.cleanup)
 		self.onShown.append(self.setWindowTitle)
 
 	def setWindowTitle(self):
 		self.setTitle(_("MountManager"))
-		
+
 	def cleanup(self):
 		iNetwork.stopRestartConsole()
 		iNetwork.stopGetInterfacesConsole()
@@ -80,10 +77,9 @@ class AutoMountManager(Screen):
 		self.list.append((_("Change hostname"),"hostname", _("Change the hostname of your Dreambox."), okpng))
 		self["config"].setList(self.list)
 
-
 	def exit(self):
 		self.close()
-		
+
 	def keyOK(self, returnValue = None):
 		if returnValue == None:
 			returnValue = self["config"].getCurrent()[1]
@@ -95,12 +91,13 @@ class AutoMountManager(Screen):
 				self.userEdit()
 			elif returnValue is "hostname":
 				self.hostEdit()
+
 	def addMount(self):
 		self.session.open(AutoMountEdit, self.skin_path)
 
 	def viewMounts(self):
 		self.session.open(AutoMountView, self.skin_path)
-		
+
 	def userEdit(self):
 		self.session.open(UserManager, self.skin_path)
 
@@ -110,7 +107,7 @@ class AutoMountManager(Screen):
 			self.hostname = fp.read()
 			fp.close()
 			self.session.openWithCallback(self.hostnameCallback, VirtualKeyBoard, title = (_("Enter new hostname for your Dreambox")), text = self.hostname)
-	
+
 	def hostnameCallback(self, callback = None):
 		if callback is not None and len(callback):
 			fp = open('/etc/hostname', 'w+')
@@ -121,7 +118,7 @@ class AutoMountManager(Screen):
 	def restartLan(self):
 		iNetwork.restartNetwork(self.restartLanDataAvail)
 		self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type = MessageBox.TYPE_INFO, enable_input = False)
-			
+
 	def restartLanDataAvail(self, data):
 		if data is True:
 			iNetwork.getInterfaces(self.getInterfacesDataAvail)

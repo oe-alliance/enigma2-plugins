@@ -25,6 +25,6 @@ def _(txt):
 		print "[NetworkBrowser] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
-	
+
 localeInit()
 language.addCallback(localeInit)

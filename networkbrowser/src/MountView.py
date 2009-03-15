@@ -4,20 +4,13 @@ from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
-from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap
-from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Network import iNetwork
-from Components.Console import Console
 from Components.Sources.List import List
-from enigma import eListboxPythonMultiContent, gFont, eTimer
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
-from os import system, popen, path as os_path, listdir
 from AutoMount import iAutoMount, AutoMount
 from MountEdit import AutoMountEdit
-
 
 class AutoMountView(Screen):
         skin = """
@@ -25,7 +18,7 @@ class AutoMountView(Screen):
                         <widget name="legend1" position="0,0" zPosition="1" size="130,40" font="Regular;18" halign="center" valign="center" />
                         <widget name="legend2" position="130,0" zPosition="1" size="310,40" font="Regular;18" halign="center" valign="center" />
                         <widget name="legend3" position="410,0" zPosition="1" size="100,40" font="Regular;18" halign="center" valign="center" />
-                        <ePixmap pixmap="skin_default/div-h.png" position="0,40" zPosition="2" size="560,2" />  
+                        <ePixmap pixmap="skin_default/div-h.png" position="0,40" zPosition="2" size="560,2" />
                         <widget source="config" render="Listbox" position="5,50" size="555,200" scrollbarMode="showOnDemand">
                                 <convert type="TemplatedMultiContent">
                                         {"template": [
@@ -48,7 +41,7 @@ class AutoMountView(Screen):
                         <widget name="deletetext" position="50,305" size="350,21" zPosition="10" font="Regular;21" transparent="1" />
                         <ePixmap pixmap="skin_default/bottombar.png" position="10,250" size="540,120" zPosition="1" transparent="1" alphatest="on" />
                 </screen>"""
-                
+
         def __init__(self, session, plugin_path):
                 self.skin_path = plugin_path
                 self.session = session
@@ -69,7 +62,7 @@ class AutoMountView(Screen):
                 self["introduction"] = Label(_("Press OK to edit the settings."))
                 self["ButtonRedtext"] = Label(_("Close"))
                 self["deletetext"] = Label(_("Delete selected mount"))
-                
+
                 self.list = []
                 self["config"] = List(self.list)
                 self.showMountsList()
@@ -108,11 +101,10 @@ class AutoMountView(Screen):
                 if cur:
                         returnValue = cur[1]
                         self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, iAutoMount.automounts[returnValue])
-                
+
         def MountEditClosed(self, returnValue = None):
                 if returnValue == None:
                         self.showMountsList()
-          
 
         def delete(self, returnValue = None):
                 cur = self["config"].getCurrent()
@@ -134,11 +126,9 @@ class AutoMountView(Screen):
         def applyConfigfinishedCB(self,data):
                 if data is True:
                         self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network mount has been removed."), type = MessageBox.TYPE_INFO, timeout = 10)
-        
-                
+
         def ConfigfinishedCB(self,data):
                 if data is not None:
                         if data is True:
                                 self.showMountsList()
-                        
 

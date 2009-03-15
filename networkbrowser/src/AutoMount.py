@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # for localized messages
 from __init__ import _
-from re import compile as re_compile, search as re_search
-from os import system, popen, path as os_path, listdir, mkdir, rmdir, makedirs
+from re import compile as re_compile
+from os import path as os_path, mkdir, rmdir
 
-from enigma import eTimer, eConsoleAppContainer
+from enigma import eTimer
 from Components.Console import Console
-from Components.Harddisk import harddiskmanager			#global harddiskmanager
+from Components.Harddisk import harddiskmanager #global harddiskmanager
 
 from xml.etree.cElementTree import parse as cet_parse
 
@@ -25,7 +25,6 @@ class AutoMount():
 		self.timer = eTimer()
 		self.timer.callback.append(self.mountTimeout)
 
-
 		self.getAutoMountPoints()
 
 	def getAutoMountPoints(self, callback = None):
@@ -33,7 +32,7 @@ class AutoMount():
 		automounts = []
 		self.automounts = {}
 		self.activeMountsCounter = 0
-	
+
 		if not os_path.exists(XML_FSTAB):
 			return
 		tree = cet_parse(XML_FSTAB).getroot()
@@ -48,7 +47,7 @@ class AutoMount():
 		# Read out NFS Mounts
 		for nfs in tree.findall("nfs"):
 			for mount in nfs.findall("mount"):
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }            
+				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
 				try:
 					data['mounttype'] = 'nfs'.encode("UTF-8")
 					data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
@@ -59,13 +58,13 @@ class AutoMount():
 					data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
 					data['options'] = getValue(mount.findall("options"), "rw,nolock").encode("UTF-8")
 					print "NFSMOUNT",data
-					self.automounts[data['sharename']] = data 
+					self.automounts[data['sharename']] = data
 				except Exception, e:
 					print "[MountManager] Error reading Mounts:", e
 			# Read out CIFS Mounts
 		for nfs in tree.findall("cifs"):
 			for mount in nfs.findall("mount"):
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }            
+				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
 				try:
 					data['mounttype'] = 'cifs'.encode("UTF-8")
 					data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
@@ -78,25 +77,25 @@ class AutoMount():
 					data['username'] = getValue(mount.findall("username"), "guest").encode("UTF-8")
 					data['password'] = getValue(mount.findall("password"), "").encode("UTF-8")
 					print "CIFSMOUNT",data
-					self.automounts[data['sharename']] = data 
+					self.automounts[data['sharename']] = data
 				except Exception, e:
 					print "[MountManager] Error reading Mounts:", e
 
 		print "[AutoMount.py] -getAutoMountPoints:self.automounts -->",self.automounts
 		if len(self.automounts) == 0:
-			print "[AutoMount.py]  self.automounts without mounts",self.automounts
+			print "[AutoMount.py] self.automounts without mounts",self.automounts
 			if callback is not None:
 				callback(True)
 		else:
 			for sharename, sharedata in self.automounts.items():
-				self.CheckMountPoint(sharedata, callback)			
+				self.CheckMountPoint(sharedata, callback)
 
 	def CheckMountPoint(self, data, callback):
 		print "[AutoMount.py] CheckMountPoint"
 		print "[AutoMount.py] activeMounts:--->",self.activeMountsCounter
 		if not self.MountConsole:
 			self.MountConsole = Console()
-		
+
 		self.command = None
 		if self.activeMountsCounter == 0:
 			print "self.automounts without active mounts",self.automounts
@@ -109,7 +108,7 @@ class AutoMount():
 			if data['active'] == 'False' or data['active'] is False:
 				path = '/media/net/'+ data['sharename']
 				self.command = 'umount -f '+ path
-				
+
 			if data['active'] == 'True' or data['active'] is True:
 				path = '/media/net/'+ data['sharename']
 				if os_path.exists(path) is False:
@@ -118,12 +117,12 @@ class AutoMount():
 				if tmpsharedir[-1:] == "$":
 					tmpdir = tmpsharedir.replace("$", "\\$")
 					tmpsharedir = tmpdir
-					
+
 				if data['mounttype'] == 'nfs':
 					if not os_path.ismount(path):
 						tmpcmd = 'mount -t nfs -o tcp,'+ data['options'] +',rsize=8192,wsize=8192 ' + data['ip'] + ':' + tmpsharedir + ' ' + path
 						self.command = tmpcmd.encode("UTF-8")
-						
+
 				if data['mounttype'] == 'cifs':
 					if not os_path.ismount(path):
 						tmpusername = data['username'].replace(" ", "\\ ")
@@ -135,7 +134,7 @@ class AutoMount():
 				self.MountConsole.ePopen(self.command, self.CheckMountPointFinished, [data, callback])
 			else:
 				self.CheckMountPointFinished(None,None, [data, callback])
-					
+
 	def CheckMountPointFinished(self, result, retval, extra_args):
 		print "[AutoMount.py] CheckMountPointFinished"
 		print "[AutoMount.py] result",result
@@ -157,7 +156,7 @@ class AutoMount():
 					if not os_path.ismount(path):
 						rmdir(path)
 						harddiskmanager.removeMountedPartition(path)
-				
+
 		if self.MountConsole:
 			if len(self.MountConsole.appContainers) == 0:
 				if callback is not None:
@@ -167,7 +166,7 @@ class AutoMount():
 	def mountTimeout(self):
 		self.timer.stop()
 		if self.MountConsole:
-			if len(self.MountConsole.appContainers) == 0:		
+			if len(self.MountConsole.appContainers) == 0:
 				print "self.automounts after mounting",self.automounts
 				if self.callback is not None:
 					self.callback(True)
@@ -274,7 +273,7 @@ class AutoMount_Unused:
 		self.MountConsole = Console()
 		self.activeMountsCounter = 0
 		self.getAutoMountPoints()
-		
+
 	# helper function
 	def regExpMatch(self, pattern, string):
 		if string is None:
@@ -305,7 +304,7 @@ class AutoMount_Unused:
 			fp.close()
 		except:
 			print "[AutoMount.py] /etc/auto.network - opening failed"
-			
+
 		ipRegexp = '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 		cifsIpLinePattern = re_compile('://' + ipRegexp + '/')
 		nfsIpLinePattern = re_compile(ipRegexp + ':/')
@@ -318,7 +317,7 @@ class AutoMount_Unused:
 			if len(split) == 2 and split[0][0] == '*':
 				continue
 			if len(split) == 3:
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }            
+				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
 				currshare = ""
 				if split[0][0] == '#':
 					data['active'] = False
@@ -328,7 +327,7 @@ class AutoMount_Unused:
 					data['active'] = True
 					self.activeMountsCounter +=1
 					currshare = split[0]
-					data['sharename'] = currshare        
+					data['sharename'] = currshare
 				if '-fstype=cifs' in split[1]:
 					data['mounttype'] = 'cifs'
 					options = split[1][split[1].index('-fstype=cifs')+13 : split[1].index(',user=')]
@@ -352,7 +351,7 @@ class AutoMount_Unused:
 							tmpdir = tmpsharedir.replace("\$", "$")
 							tmpsharedir = tmpdir
 						data['sharedir'] = tmpsharedir
-						
+
 				if '-fstype=nfs' in split[1]:
 					data['mounttype'] = 'nfs'
 					options = split[1][split[1].index('-fstype=nfs')+12 : ]
@@ -368,16 +367,16 @@ class AutoMount_Unused:
 							tmpdir = tmpsharedir.replace("\$", "$")
 							tmpsharedir = tmpdir
 						data['sharedir'] = tmpsharedir
-						
-				self.automounts[currshare] = data                
+
+				self.automounts[currshare] = data
 		if len(self.automounts) == 0:
-			print "[AutoMount.py]  self.automounts without mounts",self.automounts
+			print "[AutoMount.py] self.automounts without mounts",self.automounts
 			if callback is not None:
 				callback(True)
 		else:
 			#print "automounts",self.automounts
 			for sharename, sharedata in self.automounts.items():
-				self.CheckMountPoint(sharedata, callback)			
+				self.CheckMountPoint(sharedata, callback)
 
 	def CheckMountPoint(self, data, callback):
 		print "[AutoMount.py] CheckMountPoint"
@@ -387,7 +386,7 @@ class AutoMount_Unused:
 		if self.activeMountsCounter == 0:
 		#if data['active'] is False:
 			if self.MountConsole:
-				if len(self.MountConsole.appContainers) == 0:		
+				if len(self.MountConsole.appContainers) == 0:
 					print "self.automounts without active mounts",self.automounts
 					if callback is not None:
 						callback(True)
@@ -416,8 +415,6 @@ class AutoMount_Unused:
 				print "[AutoMount.py] cifscmd--->",cifscmd
 				self.MountConsole.ePopen(cifscmd, self.CheckMountPointFinished, [data, callback])
 
-
-					
 	def CheckMountPointFinished(self, result, retval, extra_args):
 		print "[AutoMount.py] CheckMountPointFinished"
 		(data, callback ) = extra_args
@@ -431,7 +428,7 @@ class AutoMount_Unused:
 			if self.automounts.has_key(data['sharename']):
 				self.automounts[data['sharename']]['isMounted'] = False
 		umountcmd = 'umount /tmp/'+ data['sharename']
-		self.MountConsole.ePopen(umountcmd, self.CleanMountPointFinished, [data, callback])				
+		self.MountConsole.ePopen(umountcmd, self.CleanMountPointFinished, [data, callback])
 
 	def CleanMountPointFinished(self, result, retval, extra_args):
 		print "[AutoMount.py] CleanMountPointFinished"
@@ -440,7 +437,7 @@ class AutoMount_Unused:
 		if os_path.exists(path):
 			rmdir(path)
 		if self.MountConsole:
-			if len(self.MountConsole.appContainers) == 0:		
+			if len(self.MountConsole.appContainers) == 0:
 				print "self.automounts after mountcheck",self.automounts
 				if callback is not None:
 					callback(True)
@@ -499,7 +496,7 @@ class AutoMount_Unused:
 					tmpdir = tmpsharedir.replace("$", "\\$")
 					tmpsharedir = tmpdir
 				fp.write( tmpsharedir + "\n")
-		fp.write("\n")                          
+		fp.write("\n")
 		fp.close()
 
 	def restartAutoFS(self,callback = None):
@@ -511,7 +508,7 @@ class AutoMount_Unused:
 		self.commands.append("rm -rf /var/run/autofs")
 		self.commands.append("/etc/init.d/autofs start")
 		self.restartConsole.eBatch(self.commands, self.restartAutoFSFinished, callback, debug=True)
-	
+
 	def restartAutoFSFinished(self,extra_args):
 		print "[AutoMount.py] restartAutoFSFinished "
 		( callback ) = extra_args

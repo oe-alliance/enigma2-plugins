@@ -5,15 +5,14 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import ActionMap
-from Components.Button import Button
-from Components.config import config, ConfigText, ConfigPassword, NoSave, getConfigListEntry, ConfigNothing, ConfigSubsection, ConfigSubList, ConfigSubDict
+from Components.config import ConfigText, ConfigPassword, NoSave, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
-from Components.Label import Label,MultiColorLabel
-from Components.Pixmap import Pixmap,MultiPixmap
+from Components.Label import Label
+from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap, NumberActionMap
-from enigma import eTimer, ePoint, eSize, RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont
+from enigma import ePoint
 from cPickle import dump, load
-from os import path as os_path, system as os_system, unlink, stat, mkdir
+from os import path as os_path, unlink, stat, mkdir
 from time import time
 from stat import ST_MTIME
 
@@ -23,7 +22,7 @@ def write_cache(cache_file, cache_data):
 		try:
 			mkdir( os_path.dirname(cache_file) )
 		except OSError:
-			    print os_path.dirname(cache_file), 'is a file'
+			print os_path.dirname(cache_file), 'is a file'
 	fd = open(cache_file, 'w')
 	dump(cache_data, fd, -1)
 	fd.close()
@@ -56,7 +55,7 @@ class UserDialog(Screen, ConfigListScreen):
 			<widget name="ButtonRedtext" position="410,345" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
 			<widget name="ButtonRed" pixmap="skin_default/buttons/button_red.png" position="390,345" zPosition="10" size="15,16" transparent="1" alphatest="on" />
 			<widget name="VKeyIcon" pixmap="skin_default/vkey_icon.png" position="35,310" zPosition="10" size="60,48" transparent="1" alphatest="on" />
-			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="175,300" zPosition="1" size="1,1" transparent="1" alphatest="on" />	
+			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="175,300" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/bottombar.png" position="10,290" size="540,120" zPosition="1" transparent="1" alphatest="on" />
 		</screen>"""
 
@@ -65,10 +64,10 @@ class UserDialog(Screen, ConfigListScreen):
 		self.session = session
 		Screen.__init__(self, self.session)
 		self.hostinfo = hostinfo
-		self.cache_ttl = 86400  #600 is default, 0 disables, Seconds cache is considered valid
+		self.cache_ttl = 86400 #600 is default, 0 disables, Seconds cache is considered valid
 		self.cache_file = '/etc/enigma2/' + self.hostinfo + '.cache' #Path to cache directory
 		self.createConfig()
-		
+
 		self["shortcuts"] = ActionMap(["ShortcutActions","WizardActions"],
 		{
 			"red": self.close,
@@ -95,7 +94,7 @@ class UserDialog(Screen, ConfigListScreen):
 
 	def layoutFinished(self):
 		print self["config"].getCurrent()
-		self.setTitle(_("Enter user and password for host: ")+ self.hostinfo)	
+		self.setTitle(_("Enter user and password for host: ")+ self.hostinfo)
 		self["ButtonGreen"].show()
 		self["VKeyIcon"].show()
 		self["VirtualKB"].setEnabled(True)
@@ -114,7 +113,7 @@ class UserDialog(Screen, ConfigListScreen):
 		self.passwordEntry = None
 		self.username = None
 		self.password = None
-		
+
 		if os_path.exists(self.cache_file):
 			print 'Loading user cache from ',self.cache_file
 			try:
@@ -130,7 +129,7 @@ class UserDialog(Screen, ConfigListScreen):
 
 		self.username = NoSave(ConfigText(default = username, visible_width = 50, fixed_size = False))
 		self.password = NoSave(ConfigPassword(default = password, visible_width = 50, fixed_size = False))
-		
+
 	def createSetup(self):
 		self.list = []
 		self.usernameEntry = getConfigListEntry(_("Username"), self.username)
@@ -142,14 +141,12 @@ class UserDialog(Screen, ConfigListScreen):
 		self["config"].l.setList(self.list)
 		self["config"].onSelectionChanged.append(self.selectionChanged)
 
-
 	def KeyGreen(self):
 		if self["config"].getCurrent() == self.usernameEntry:
 			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'username'), VirtualKeyBoard, title = (_("Enter username:")), text = self.username.value)
 		if self["config"].getCurrent() == self.passwordEntry:
 			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'password'), VirtualKeyBoard, title = (_("Enter password:")), text = self.password.value)
 
-	
 	def VirtualKeyBoardCallback(self, callback = None, entry = None):
 		if callback is not None and len(callback) and entry is not None and len(entry):
 			if entry == 'username':
@@ -177,7 +174,7 @@ class UserDialog(Screen, ConfigListScreen):
 
 	def ok(self):
 		current = self["config"].getCurrent()
-		self.hostdata = { 'username': self.username.value, 'password': self.password.value } 
+		self.hostdata = { 'username': self.username.value, 'password': self.password.value }
 		write_cache(self.cache_file, self.hostdata)
 		self.close(True)
-		
+

@@ -6,7 +6,6 @@ from Plugins.Plugin import PluginDescriptor
 from NetworkBrowser import NetworkBrowser
 from Components.Network import iNetwork
 from MountManager import AutoMountManager
-from os import path
 
 plugin_path = ""
 

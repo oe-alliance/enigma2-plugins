@@ -10,7 +10,7 @@ from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from UserDialog import UserDialog
-from os import path as os_path, system as os_system, unlink, stat, mkdir, listdir
+from os import unlink, listdir
 
 class UserManager(Screen):
 	skin = """
@@ -50,7 +50,7 @@ class UserManager(Screen):
 		self["ButtonRedtext"] = Label(_("Close"))
 		self["introduction"] = Label(_("Press OK to edit selected settings."))
 		self["deletetext"] = Label(_("Delete"))
-		
+
 		self.list = []
 		self["config"] = List(self.list)
 		self.updateList()
@@ -72,7 +72,7 @@ class UserManager(Screen):
 
 	def exit(self):
 		self.close()
-		
+
 	def keyOK(self, returnValue = None):
 		cur = self["config"].getCurrent()
 		if cur:
@@ -89,3 +89,4 @@ class UserManager(Screen):
 			if os_path.exists(cachefile):
 				unlink(cachefile)
 				self.updateList()
+
