@@ -1100,7 +1100,7 @@ class FritzCallPhonebook:
 					continue
 				try:
 					low = low.decode("utf-8")
-				except UnicodeDecodeError:  # this should definitely not happen
+				except (UnicodeDecodeError, UnicodeEncodeError):  # this should definitely not happen
 					try:
 						low = low.decode("iso-8859-1")
 					except:
