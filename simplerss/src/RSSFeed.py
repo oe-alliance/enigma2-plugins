@@ -167,7 +167,7 @@ class UniversalFeed(BaseFeed):
 			enclosures = [ScanFile(enclosure["href"], mimetype = enclosure["type"], size = enclosure["length"], autodetect = False) for enclosure in item.enclosures]
 
 			# Try to read summary, empty if none
-			summary = strip_readable(item.summary)
+			summary = strip_readable(item.summary or "")
 
 			# Update Lists
 			self.history.insert(idx, (
