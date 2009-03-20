@@ -256,19 +256,26 @@ class NetworkBrowser(Screen):
 			if not self.network.has_key(x[2]):
 				self.network[x[2]] = []
 			self.network[x[2]].append((NetworkDescriptor(name = x[1], description = x[2]), x))
-		self.network.keys().sort()
+		
 		for x in self.network.keys():
 			hostentry = self.network[x][0][1]
 			name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
-			print hostentry
 			expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
 			self.list.append(( hostentry, expandableIcon, name, None, None, None, None ))
+
+		if len(self.list):
+			for entry in self.list:
+				entry[0][2]= "%3s.%3s.%3s.%3s" % tuple(entry[0][2].split("."))
+			self.list.sort(key=lambda x: x[0][2])
+			for entry in self.list:
+				entry[0][2]= entry[0][2].replace(" ", "")
 		self["list"].setList(self.list)
 		self["list"].setIndex(self.listindex)
 
 	def updateNetworkList(self):
 		self.list = []
 		self.network = {}
+		self.mounts = iAutoMount.getMountsList() # reloading mount list
 		for x in self.networklist:
 			if not self.network.has_key(x[2]):
 				self.network[x[2]] = []
@@ -292,6 +299,12 @@ class NetworkBrowser(Screen):
 				name = hostentry[2] + " ( " +hostentry[1].strip() + " )"
 				expandableIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkBrowser/icons/host.png"))
 				self.list.append(( hostentry, expandableIcon, name, None, None, None, None ))
+		if len(self.list):
+			for entry in self.list:
+				entry[0][2]= "%3s.%3s.%3s.%3s" % tuple(entry[0][2].split("."))
+			self.list.sort(key=lambda x: x[0][2])
+			for entry in self.list:
+				entry[0][2]= entry[0][2].replace(" ", "")
 		self["list"].setList(self.list)
 		self["list"].setIndex(self.listindex)
 
@@ -334,7 +347,6 @@ class NetworkBrowser(Screen):
 	def selectionChanged(self):
 		current = self["list"].getCurrent()
 		self.listindex = self["list"].getIndex()
-		print len(current)
 		if current:
 			if current[0][0] in ("nfsShare", "smbShare"):
 				self["infotext"].show()
@@ -427,7 +439,6 @@ class NetworkBrowser(Screen):
 					print 'Loading userinfo from ',self.sharecache_file
 					try:
 						self.hostdata = load_cache(self.sharecache_file)
-						print "self.hostdata", self.hostdata
 						data['username'] = self.hostdata['username']
 						data['password'] = self.hostdata['password']
 					except:
@@ -534,6 +545,5 @@ class ScanIP(Screen):
 		self["text"].deleteBackward()
 
 	def keyNumberGlobal(self, number):
-		print "pressed", number
 		self["text"].number(number)
 

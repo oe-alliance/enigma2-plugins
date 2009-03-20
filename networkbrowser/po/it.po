@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin WirelessLan italian locale v2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-20 10:16+0100\n"
-"PO-Revision-Date: 2009-02-21 19:59+0100\n"
+"POT-Creation-Date: 2009-03-15 17:00+0100\n"
+"PO-Revision-Date: 2009-03-15 17:00+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: WWW.Linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,192 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Basepath: /home/dario/Plugins/networkbrowser\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/networkbrowser\n"
 
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:104
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:55
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:68
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:93
+#: /home/dario/Plugins/networkbrowser/src/UserManager.py:50
+#: /home/dario/Plugins/networkbrowser/src/MountView.py:63
+msgid "Close"
+msgstr "Chiudere"
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:105
+msgid "Mounts management"
+msgstr "Gestione \"Mount\""
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:106
+msgid "Rescan network"
+msgstr "Ripetere ricerca sulla rete"
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:107
+msgid "Press OK to mount!"
+msgstr "Ok -> Eseguire \"Mount\"!"
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:108
+msgid "Scan IP"
+msgstr "Ricercare IP"
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:153
+msgid "Browse network neighbourhood"
+msgstr "Sfogliare Risorse di Rete"
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:182
+msgid "Searching your network. Please wait..."
+msgstr "Ricerca sulla rete in corso. Attendere..."
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:186
+msgid "No network devices found!"
+msgstr "Nessun apparato di rete trovato!"
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:366
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:368
+msgid "Do you want to enter a username and password for this host?\n"
+msgstr "Utilizzare Nome User e Password per questo Host?\n"
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:469
+msgid "Cancel"
+msgstr "Annull."
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:470
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:511
+msgid "Enter IP to scan..."
+msgstr "Inserire IP da ricercare..."
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:56
+msgid "Press OK to select."
+msgstr "Ok -> Selezionare."
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:65
+#: /home/dario/Plugins/networkbrowser/src/plugin.py:33
+msgid "MountManager"
+msgstr "MountManager"
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:74
+msgid "Add new network mount point"
+msgstr "Aggiungere nuovo \"Mount Point\" di rete"
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:74
+msgid "Add a new NFS or CIFS mount point to your Dreambox."
+msgstr "Aggiungere nuovo \"Mount Point\" NFS o CIFS al Dreambox"
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:75
+msgid "Mountpoints management"
+msgstr "Gestione \"Mount Point\""
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:75
+msgid "View, edit or delete mountpoints on your Dreambox."
+msgstr "Vedere, modificare o cancellare \"Mount Point\" sul Dreambox."
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:76
+msgid "User management"
+msgstr "Gestione User"
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:76
+msgid "View, edit or delete usernames and passwords for your network."
+msgstr "Vedere, modificare o cancellare Nome User e Password per la rete."
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:77
+msgid "Change hostname"
+msgstr "Cambiare Nome Host"
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:77
+msgid "Change the hostname of your Dreambox."
+msgstr "Cambiare Nome Host del Dreambox."
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:109
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:355
+msgid "Enter new hostname for your Dreambox"
+msgstr "Inserire il nuovo Nome Host per il Dreambox"
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:120
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:366
+msgid "Please wait while your network is restarting..."
+msgstr "Attendere: riavvio della rete in corso..."
+
+#: /home/dario/Plugins/networkbrowser/src/MountManager.py:133
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:379
+msgid "Finished restarting your network"
+msgstr "Riavvio Rete terminato"
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:66
+msgid "Press OK to activate the settings."
+msgstr "Ok -> Attivare la configurazione."
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:72
+msgid "Mounts editor"
+msgstr "Editor \"Mount\""
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:100
+msgid "NFS share"
+msgstr "Condivisione NFS"
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:101
+msgid "CIFS share"
+msgstr "Condivisione CIFS"
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:170
+msgid "Active"
+msgstr "Attivo"
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:172
+msgid "Local share name"
+msgstr "Nome condivisione locale"
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:174
+msgid "Mount type"
+msgstr "Tipo \"Mount\""
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:176
+msgid "Server IP"
+msgstr "IP Server"
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:178
+msgid "Server share"
+msgstr "Condivisione Server"
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:184
+msgid "Mount options"
+msgstr "Opzioni \"Mount\""
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:187
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:135
+msgid "Username"
+msgstr "Nome User"
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:189
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:137
+msgid "Password"
+msgstr "Password"
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:203
+msgid "Enter share name:"
+msgstr "Inserire nome condivisione: "
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:205
+msgid "Enter share directory:"
+msgstr "Inserire cartella condivisa: "
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:207
+msgid "Enter options:"
+msgstr "Inserire opzioni: "
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:209
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:146
+msgid "Enter username:"
+msgstr "Inserire Nome User: "
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:211
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:148
+msgid "Enter password:"
+msgstr "Inserire password: "
+
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:261
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -23,22 +208,7 @@ msgstr ""
 "Voce di \"Mount\"  già esistente!\n"
 "Aggiornarla con la configurazione corrente e continuare?\n"
 
-msgid "Active"
-msgstr "Attivo"
-
-msgid ""
-"Active/\n"
-"Inactive"
-msgstr ""
-"Attivo\n"
-"Inattivo"
-
-msgid "Add a new NFS or CIFS mount point to your Dreambox."
-msgstr "Aggiungere un nuovo \"Mount Point\" NFS o CIFS al Dreambox"
-
-msgid "Add new network mount point"
-msgstr "Aggiungere un nuovo \"Mount Point\" di rete"
-
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:263
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -46,81 +216,63 @@ msgstr ""
 "Salvare questo \"Mount Point\"?\n"
 "\n"
 
-msgid "Browse network neighbourhood"
-msgstr "Sfogliare le Risorse di Rete"
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:277
+msgid "Please wait while updating your network mount..."
+msgstr "Attendere aggiornamento \"Mount\" di rete..."
 
-msgid "CIFS share"
-msgstr "Condivisione CIFS"
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:289
+msgid "Your network mount has been updated."
+msgstr "\"Mount\" di rete aggiornato."
 
-msgid "Change hostname"
-msgstr "Cambiare Nome Host"
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:308
+msgid "Please wait for activation of your network mount..."
+msgstr "Attendere attivazione \"Mount\" di rete..."
 
-msgid "Change the hostname of your Dreambox."
-msgstr "Cambiare Nome Host del Dreambox."
+#: /home/dario/Plugins/networkbrowser/src/MountEdit.py:321
+msgid "Your network mount has been activated."
+msgstr "\"Mount\" di rete attivato."
 
-msgid "Close"
-msgstr "Chiudere"
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:91
+msgid "Press OK to save settings."
+msgstr "Ok -> Salvare configurazione."
 
-msgid "Delete"
-msgstr "Cancellare"
-
-msgid "Delete selected mount"
-msgstr "Cancellare il \"Mount\" selezionato"
-
-msgid "Dir:"
-msgstr "Dir: "
-
-msgid "Do you want to enter a username and password for this host?\n"
-msgstr "Utilizzare Nome User e Password per questo Host?\n"
-
-msgid "Enter new hostname for your Dreambox"
-msgstr "Inserire il nuovo Nome Host per il Dreambox"
-
-msgid "Enter options:"
-msgstr "Inserire opzioni: "
-
-msgid "Enter password:"
-msgstr "Inserire password: "
-
-msgid "Enter share directory:"
-msgstr "Inserire cartella condivisa: "
-
-msgid "Enter share name:"
-msgstr "Inserire nome condivisione: "
-
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:97
 msgid "Enter user and password for host: "
 msgstr "Inserire User e Password per l'Host: "
 
-msgid "Enter username:"
-msgstr "Inserire Nome User: "
+#: /home/dario/Plugins/networkbrowser/src/plugin.py:32
+msgid "NetworkBrowser"
+msgstr "NetworkBrowser"
 
-msgid "Finished restarting your network"
-msgstr "Riavvio Rete terminato"
+#: /home/dario/Plugins/networkbrowser/src/plugin.py:32
+msgid "Search for network shares"
+msgstr "Ricerca condivisioni di rete"
 
-msgid "IP:"
-msgstr "IP:"
+#: /home/dario/Plugins/networkbrowser/src/plugin.py:32
+msgid "Search for network shares..."
+msgstr "Ricerca condivisioni di rete..."
 
-msgid "Local share name"
-msgstr "Nome condivisione locale"
-
+#: /home/dario/Plugins/networkbrowser/src/plugin.py:33
 msgid "Manage network shares"
 msgstr "Gestire condivisioni di rete"
 
+#: /home/dario/Plugins/networkbrowser/src/plugin.py:33
 msgid "Manage your network shares..."
 msgstr "Gestire condivisioni di rete..."
 
-msgid "Mount informations"
-msgstr "Informazioni \"Mount\""
+#: /home/dario/Plugins/networkbrowser/src/UserManager.py:51
+msgid "Press OK to edit selected settings."
+msgstr "Ok -> Modificare configurazione selezionata."
 
-msgid "Mount options"
-msgstr "Opzioni \"Mount\""
+#: /home/dario/Plugins/networkbrowser/src/UserManager.py:52
+msgid "Delete"
+msgstr "Cancellare"
 
-msgid "Mount type"
-msgstr "Tipo \"Mount\""
+#: /home/dario/Plugins/networkbrowser/src/UserManager.py:60
+msgid "Usermanager"
+msgstr "Manager User"
 
-msgid "MountManager"
-msgstr "MountManager"
-
+#: /home/dario/Plugins/networkbrowser/src/MountView.py:59
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -128,96 +280,39 @@ msgstr ""
 "Montata\n"
 "Non Montata"
 
-msgid "Mountpoints management"
-msgstr "Gestione \"Mount Point\""
+#: /home/dario/Plugins/networkbrowser/src/MountView.py:60
+msgid "Mount informations"
+msgstr "Informazioni \"Mount\""
 
-msgid "Mounts editor"
-msgstr "Editor \"Mount\""
+#: /home/dario/Plugins/networkbrowser/src/MountView.py:61
+msgid ""
+"Active/\n"
+"Inactive"
+msgstr ""
+"Attivo\n"
+"Inattivo"
 
-msgid "Mounts management"
-msgstr "Gestione \"Mount\""
-
-msgid "NFS share"
-msgstr "Condivisione NFS"
-
-msgid "NetworkBrowser"
-msgstr "NetworkBrowser"
-
-msgid "No network devices found!"
-msgstr "Nessun apparato di rete trovato!"
-
-msgid "Password"
-msgstr "Password"
-
-msgid "Please wait for activation of your network mount..."
-msgstr "Attendere l'attivazione \"Mount\" di rete..."
-
-msgid "Please wait while removing your network mount..."
-msgstr "Attendere la rimozione \"Mount\" di rete..."
-
-msgid "Please wait while updating your network mount..."
-msgstr "Attendere l'aggiornamento \"Mount\" di rete..."
-
-msgid "Please wait while your network is restarting..."
-msgstr "Attendere il riavvio della rete..."
-
-msgid "Press OK to activate the settings."
-msgstr "Ok -> Attivare la configurazione."
-
-msgid "Press OK to edit selected settings."
-msgstr "Ok -> Modificare la configurazione selezionata."
-
+#: /home/dario/Plugins/networkbrowser/src/MountView.py:62
 msgid "Press OK to edit the settings."
-msgstr "Ok -> Modificare la configurazione."
+msgstr "Ok -> Modificare configurazione."
 
-msgid "Press OK to mount!"
-msgstr "Ok -> Eseguire il \"Mount\"!"
+#: /home/dario/Plugins/networkbrowser/src/MountView.py:64
+msgid "Delete selected mount"
+msgstr "Cancellare \"Mount\" selezionato"
 
-msgid "Press OK to save settings."
-msgstr "Ok -> Salvare la configurazione."
+#: /home/dario/Plugins/networkbrowser/src/MountView.py:84
+msgid "IP:"
+msgstr "IP:"
 
-msgid "Press OK to select."
-msgstr "Ok -> Selezionare."
+#: /home/dario/Plugins/networkbrowser/src/MountView.py:85
+msgid "Dir:"
+msgstr "Dir: "
 
-msgid "Rescan network"
-msgstr "Ripetere ricerca sulla rete"
+#: /home/dario/Plugins/networkbrowser/src/MountView.py:113
+msgid "Please wait while removing your network mount..."
+msgstr "Attendere: rimozione \"Mount\" di rete in corso..."
 
-msgid "Search for network shares"
-msgstr "Ricerca condivisioni di rete"
-
-msgid "Search for network shares..."
-msgstr "Ricerca condivisioni di rete..."
-
-msgid "Searching your network. Please wait..."
-msgstr "Ricerca sulla rete in corso. Attendere..."
-
-msgid "Server IP"
-msgstr "IP Server"
-
-msgid "Server share"
-msgstr "Condivisione Server"
-
-msgid "User management"
-msgstr "Gestione User"
-
-msgid "Usermanager"
-msgstr "Manager User"
-
-msgid "Username"
-msgstr "Nome User"
-
-msgid "View, edit or delete mountpoints on your Dreambox."
-msgstr "Vedere, modificare o cancellare \"Mount Point\" sul Dreambox."
-
-msgid "View, edit or delete usernames and passwords for your network."
-msgstr "Vedere, modificare o cancellare Nome User e Password per la rete."
-
-msgid "Your network mount has been activated."
-msgstr "Il \"Mount\" di rete è stato attivato."
-
+#: /home/dario/Plugins/networkbrowser/src/MountView.py:128
 msgid "Your network mount has been removed."
-msgstr "Il \"Mount\" di rete è stato rimosso."
-
-msgid "Your network mount has been updated."
-msgstr "Il \"Mount\" di rete è stato aggiornato."
+msgstr "\"Mount\" di rete rimosso."
 
