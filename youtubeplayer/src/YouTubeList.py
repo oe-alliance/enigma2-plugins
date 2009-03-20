@@ -564,7 +564,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 	def getVideoUrl(self, youTubeEntry, fmt):
 		mrl = youTubeEntry.getVideoUrl(fmt)
 		if mrl is None:
-			self.session.open(MessageBox, _("Could not retrive video url:\n%s") % e, MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Could not retrive video url for:\n%s") % youTubeEntry.getYouTubeId(), MessageBox.TYPE_ERROR)
 		return mrl
 
 
