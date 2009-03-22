@@ -536,7 +536,9 @@
 	</country>
 	<country code="+31">
 		<website name="www.nummerzoeker.com" url="http://www.nummerzoeker.com/?phone=$NUMBER&amp;maxrows=10&amp;page=0&amp;export=excel" prefix="0">
-			<entry>
+			<entry firstOccurance="lastname">
+				<firstname>^[^,]*,[^,]*,([^,]*),[^,]*,[^,]*,[^,]*$</firstname>
+				<lastname>^[^,]*,([^,]*),[^,]*,[^,]*,[^,]*,[^,]*$</lastname>
 				<name>^[^,]*,([^,]*,[^,]*),[^,]*,[^,]*,[^,]*$</name>
 				<street>^[^,]*,[^,]*,[^,]*,([^,]*),[^,]*,[^,]*$</street>
 				<city>^[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,([^,]*)$</city>
@@ -563,20 +565,15 @@
 		</website>
 	</country>
 	<country code="+33">
-		<website name="www.annuaireinverse.com" url="http://88.175.61.166/G118012/home.asp?RN=$NUMBER&amp;CO=RN&amp;FR=118012&amp;sm=rep" prefix="0">;
-			<entry>
-				<name>&lt;TD HEIGHT=&quot;15&quot; BGCOLOR=&quot;#ABEEFB&quot;  &gt;&lt;FONT CLASS=&quot;ctexte&quot;&gt;&amp;nbsp;([^&lt;]*)</name>
-				<street>&lt;TD HEIGHT=&quot;35&quot; VALIGN=&quot;TOP&quot;&gt;&lt;FONT CLASS=&quot;copytexte&quot;&gt;([^&lt;]*)&lt;br /&gt;[^&lt;]*</street>
-				<city>&lt;TD HEIGHT=&quot;35&quot; VALIGN=&quot;TOP&quot;&gt;&lt;FONT CLASS=&quot;copytexte&quot;&gt;[^&lt;]*&lt;br /&gt;\d* ([^&lt;]*)</city>
-				<zipcode>&lt;TD HEIGHT=&quot;35&quot; VALIGN=&quot;TOP&quot;&gt;&lt;FONT CLASS=&quot;copytexte&quot;&gt;[^&lt;]*&lt;br /&gt;(\d*) [^&lt;]*</zipcode>
-			</entry>
-		</website>
-		<website name="www.annuaireinverse.com" url="http://www.annuaireinverse.com/G118012/home.asp?RN=$NUMBER&amp;CO=RN&amp;FR=118012&amp;sm=rep" prefix="0">;
-			<entry>
-				<name>&lt;TD HEIGHT=&quot;15&quot; BGCOLOR=&quot;#ABEEFB&quot;  &gt;&lt;FONT CLASS=&quot;ctexte&quot;&gt;&amp;nbsp;([^&lt;]*)</name>
-				<street>&lt;TD HEIGHT=&quot;35&quot; VALIGN=&quot;TOP&quot;&gt;&lt;FONT CLASS=&quot;copytexte&quot;&gt;([^&lt;]*)&lt;br /&gt;[^&lt;]*</street>
-				<city>&lt;TD HEIGHT=&quot;35&quot; VALIGN=&quot;TOP&quot;&gt;&lt;FONT CLASS=&quot;copytexte&quot;&gt;[^&lt;]*&lt;br /&gt;\d* ([^&lt;]*)</city>
-				<zipcode>&lt;TD HEIGHT=&quot;35&quot; VALIGN=&quot;TOP&quot;&gt;&lt;FONT CLASS=&quot;copytexte&quot;&gt;[^&lt;]*&lt;br /&gt;(\d*) [^&lt;]*</zipcode>
+		<website name="www.annuaireinverse.com" url="http://www.annuaireinverse.com/reponses.asp?LANGUE=FRFR-XXXXX&amp;RECHERCHE=EXACTE&amp;image=RechercheV4&amp;RN=$NUMBER" prefix="0">
+			<entry firstOccurance="lastname">
+				<number>tblAdresses\[0\]\[5\] = "&lt;[^&gt;]*&gt;&lt;b&gt;[^&lt;]*&lt;/b&gt;&lt;br&gt;[^&lt;]*&lt;br&gt;[^&lt;]*&lt;br&gt;([^&lt;]*)&lt;/font&gt;&quot;</number>
+				<lastname>tblAdresses\[0\]\[0\] = &quot;([^&quot;]+)&quot;;</lastname>
+				<firstname>tblAdresses\[0\]\[1\] = &quot;([^&quot;]+)&quot;;</firstname>
+				<name>tblAdresses\[0\]\[5\] = "&lt;[^&gt;]*&gt;&lt;b&gt;([^&lt;]*)&lt;/b&gt;&lt;br&gt;[^&lt;]*&lt;br&gt;[^&lt;]*&lt;br&gt;[^&lt;]*&lt;/font&gt;&quot;</name>
+				<street>tblAdresses\[0\]\[2\] = &quot;([^&quot;]+)&quot;;</street>
+				<zipcode>tblAdresses\[0\]\[3\] = &quot;([^&quot;]+)&quot;;</zipcode>
+				<city>tblAdresses\[0\]\[4\] = &quot;([^&quot;]+)&quot;;</city>
 			</entry>
 		</website>
 	</country>
@@ -771,10 +768,10 @@
 	<country code="+39">
 		<website name="paginebianche.it" url="http://www.paginebianche.it/execute.cgi?btt=1&amp;ts=106&amp;cb=8&amp;mr=10&amp;rk=&amp;om=&amp;qs=$NUMBER" prefix="0">
 			<entry>
-				<name>class="org"&gt;([^&lt;]*)</name>
-				<street>class="street-address">([^&lt;]*)</street>
-				<city>class="locality">([^&lt;]*)</city>
-				<zipcode>class="postal-code">([^&lt;]*)</zipcode>
+				<name>class=&quot;org&quot;&gt;([^&lt;]*)&lt;</name>
+				<street>class=&quot;street-address&quot;>([^&lt;]*)&lt;</street>
+				<city>class=&quot;locality&quot;>([^&lt;]*)&lt;</city>
+				<zipcode>class=&quot;postal-code&quot;>([^&lt;]*)&lt;</zipcode>
 			</entry>
 			<entry>
 				<name>&lt;a [^&gt;]*&gt;&lt;img [^&gt;]*&gt;&lt;/a&gt;&lt;a [^&gt;]*&gt;([^&lt;]*)</name>
@@ -906,7 +903,7 @@
 		</website>
 		<website name="www.dastelefonbuch.de" url="http://www.dastelefonbuch.de/?sourceid=Mozilla-search&amp;cmd=search&amp;kw=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;td\sclass=&quot;col1&quot;&gt;(?:&lt;b&gt;)?&lt;a href=[^&gt;]*&gt;([^&lt;]*)&lt;</name>
+				<name>&lt;td\sclass=&quot;col1&quot;&gt;\s*(?:&lt;div class=&quot;short&quot;&gt;)?(?:&lt;b&gt;)?&lt;a href=[^&gt;]*&gt;([^&lt;]*)&lt;</name>
 				<street>&lt;td\sclass=&quot;col2&quot;&gt;([^&lt;]*)&lt;</street>
 				<city>&lt;td class=&quot;col3&quot;&gt;\d{5}&amp;nbsp;([^&lt;]*)&lt;</city>
 				<zipcode>&lt;td class=&quot;col3&quot;&gt;(\d{5})</zipcode>

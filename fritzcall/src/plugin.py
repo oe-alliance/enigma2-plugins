@@ -206,57 +206,56 @@ class FritzCallFBF:
 	def parseFritzBoxPhonebook(self, html):
 		debug("[FritzCallFBF] parseFritzBoxPhonebook")
 
-		table = html.replace("\xa0", " ").decode("ISO-8859-1", "replace")
-		if re.search('TrFonName', table):
+		if re.search('TrFonName', html):
 			#===============================================================================
-			#				 New Style: 7170 / 7270 (FW 54.04.58, 54.04.63-11941) 
+			#				 New Style: 7170 / 7270 (FW 54.04.58, 54.04.63-11941) / 7141 (FW 40.04.68) 
 			#	We expect one line with TrFonName followed by several lines with
 			#	TrFonNr(Type,Number,Shortcut,Vanity), which all belong to the name in TrFonName.
 			#===============================================================================
-			# entrymask = re.compile('(TrFonName\("[^"]+", "[^"]+", "[^"]+"\);</SCRIPT>\s+[<SCRIPT type=text/javascript>TrFonNr\("[^"]+", "[^"]+", "[^"]+", "[^"]+"\);</SCRIPT>\s+]+)<SCRIPT type=text/javascript>document.write(TrFon1());</SCRIPT>', re.DOTALL)
-			# entrymask = re.compile('(TrFonName\("[^"]+", "[^"]+", "[^"]+"\);.*?[.*?TrFonNr\("[^"]+", "[^"]+", "[^"]+", "[^"]+"\);.*?]+).*?document.write(TrFon1());', re.DOTALL)
+			html = html2unicode(html.decode('utf-8')).encode('utf-8')
 			entrymask = re.compile('(TrFonName\("[^"]+", "[^"]+", "[^"]*"\);.*?)TrFon1\(\)', re.S)
 			entries = entrymask.finditer(html)
 			for entry in entries:
 				# debug(entry.group(1)
+				# TrFonName (id, name, category)
 				found = re.match('TrFonName\("[^"]*", "([^"]+)", "[^"]*"\);', entry.group(1))
 				if found:
-					name = found.group(1)
+					name = found.group(1).strip()
 				else:
 					continue
+				# TrFonNr (type, rufnr, code, vanity)
 				detailmask = re.compile('TrFonNr\("([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)"\);', re.S)
 				details = detailmask.finditer(entry.group(1))
 				for found in details:
-					thisname = name
+					if not found.group(2).strip():
+						debug("[FritzCallFBF] Ignoring entry with empty number for '''%s'''" % (name))
+						continue
+					else:
+						thisname = name
+						type = found.group(1)
+						if config.plugins.FritzCall.showType.value:
+							if type == "mobile":
+								thisname = thisname + " (" + _("mobile") + ")"
+							elif type == "home":
+								thisname = thisname + " (" + _("home") + ")"
+							elif type == "work":
+								thisname = thisname + " (" + _("work") + ")"
 
-					type = found.group(1)
-					if config.plugins.FritzCall.showType.value:
-						if type == "mobile":
-							thisname = thisname + " (" + _("mobile") + ")"
-						elif type == "home":
-							thisname = thisname + " (" + _("home") + ")"
-						elif type == "work":
-							thisname = thisname + " (" + _("work") + ")"
+						if config.plugins.FritzCall.showShortcut.value and found.group(3):
+							thisname = thisname + ", " + _("Shortcut") + ": " + found.group(3)
+						if config.plugins.FritzCall.showVanity.value and found.group(4):
+							thisname = thisname + ", " + _("Vanity") + ": " + found.group(4)
 
-					if config.plugins.FritzCall.showShortcut.value and found.group(3):
-						thisname = thisname + ", " + _("Shortcut") + ": " + found.group(3)
-					if config.plugins.FritzCall.showVanity.value and found.group(4):
-						thisname = thisname + ", " + _("Vanity") + ": " + found.group(4)
-
-					thisnumber = found.group(2).strip()
-					if thisnumber:
-						thisname = html2unicode(thisname)
+						thisnumber = found.group(2).strip()
 						debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
-						phonebook.phonebook[thisnumber] = thisname.strip()
-					else:
-						debug("[FritzCallFBF] ignoring empty number for %s" % thisname)
-					continue
+						phonebook.phonebook[thisnumber] = thisname
 
-		elif re.search('TrFon', table):
+		elif re.search('TrFon', html):
 			#===============================================================================
 			#				Old Style: 7050 (FW 14.04.33)
 			#	We expect one line with TrFon(No,Name,Number,Shortcut,Vanity)
+			#   Encoding should be plain Ascii...
 			#===============================================================================				
 			entrymask = re.compile('TrFon\("[^"]*", "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)"\)', re.S)
 			entries = entrymask.finditer(html)
@@ -269,7 +268,7 @@ class FritzCallFBF:
 				if config.plugins.FritzCall.showVanity.value and found.group(4):
 					name = name + ", " + _("Vanity") + ": " + found.group(4)
 				if thisnumber:
-					name = html2unicode(name).encode('utf-8')
+					name = html2unicode(unicode(name)).encode('utf-8')
 					debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (name, thisnumber))
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
 					phonebook.phonebook[thisnumber] = name
@@ -816,10 +815,11 @@ class FritzCallPhonebook:
 		if not config.plugins.FritzCall.enable.value:
 			return
 
-		if config.plugins.FritzCall.phonebook.value and os.path.exists(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt"):
-			debug("[FritzCallPhonebook] reload: read PhoneBook.txt")
+		phonebookFilename = config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt"
+		if config.plugins.FritzCall.phonebook.value and os.path.exists(phonebookFilename):
+			debug("[FritzCallPhonebook] reload: read " + phonebookFilename)
 			phonebookTxtCorrupt = False
-			for line in open(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt"):
+			for line in open(phonebookFilename):
 				try:
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
 					line = line.decode("utf-8")
@@ -848,9 +848,8 @@ class FritzCallPhonebook:
 			if phonebookTxtCorrupt:
 				# dump phonebook to PhoneBook.txt
 				debug("[FritzCallPhonebook] dump Phonebook.txt")
-				os.rename(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt",
-						config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt.bck")
-				fNew = open(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt", 'w')
+				os.rename(phonebookFilename, phonebookFilename + ".bck")
+				fNew = open(phonebookFilename, 'w')
 				# Beware: strings in phonebook.phonebook are utf-8!
 				for (number, name) in self.phonebook.iteritems():
 					# Beware: strings in PhoneBook.txt have to be in utf-8!

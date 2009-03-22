@@ -10,30 +10,32 @@ from xml.dom.minidom import parse
 from twisted.web.client import getPage #@UnresolvedImport
 from twisted.internet import reactor #@UnresolvedImport
 
-debugSetting = True
+debugVal = True
 def setDebug(what):
-	global debugSetting
-	debugSetting = what
+	global debugVal
+	debugVal = what
 
 def debug(str):
-	if debugSetting:
+	if debugVal:
 		print str
 
 import htmlentitydefs
 def html2unicode(in_html):
-	# sanity checks
-	try:
-		in_html = in_html.decode('iso-8859-1')
-		debug("[Callhtml2utf8] Converted from latin1")
-	except:
-		debug("[Callhtml2utf8] lost in translation from latin1")
-		pass
-	try:
-		in_html = in_html.decode('utf-8')
-		debug("[Callhtml2utf8] Converted from utf-8")
-	except:
-		debug("[Callhtml2utf8] lost in translation from utf-8")
-		pass
+#===============================================================================
+#	# sanity checks
+#	try:
+#		in_html = in_html.decode('iso-8859-1')
+#		debug("[Callhtml2utf8] Converted from latin1")
+#	except:
+#		debug("[Callhtml2utf8] lost in translation from latin1")
+#		pass
+#	try:
+#		in_html = in_html.decode('utf-8')
+#		debug("[Callhtml2utf8] Converted from utf-8")
+#	except:
+#		debug("[Callhtml2utf8] lost in translation from utf-8")
+#		pass
+#===============================================================================
 
 	# first convert some WML codes from hex: e.g. &#xE4 -> &#228
 	htmlentityhexnumbermask = re.compile('(&#x(..);)')
@@ -41,31 +43,43 @@ def html2unicode(in_html):
 	for x in entities:
 		in_html = in_html.replace(x.group(1), '&#' + str(int(x.group(2),16)) + ';')
 
-	entitydict = {}
-	# catch &uuml; and colleagues here
 	htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
+	entitydict = {}
 	entities = htmlentitynamemask.finditer(in_html)
 	for x in entities:
 		# debug("[Callhtml2utf8] mask: found %s" %repr(x.group(2)))
-		entitydict[x.group(1)] = htmlentitydefs.name2codepoint[str(x.group(2))]
+		entitydict[x.group(1)] = x.group(2)
+	for key, name in entitydict.items():
+		try:
+			entitydict[key] = htmlentitydefs.name2codepoint[str(name)]
+		except KeyError:
+			debug("[Callhtml2utf8] KeyError " + key + "/" + name)
+			pass
 
-	# this is for &#288 and other numbers
 	htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
 	entities = htmlentitynumbermask.finditer(in_html)
 	for x in entities:
 		# debug("[Callhtml2utf8] number: found %s" %x.group(1))
 		entitydict[x.group(1)] = x.group(2)
-		
-	# no go and replace all occurrences
 	for key, codepoint in entitydict.items():
 		try:
 			debug("[Callhtml2utf8] replace %s with %s" %(repr(key), unichr(int(codepoint))))
 			in_html = in_html.replace(unicode(key), (unichr(int(codepoint))))
-			# in_html = in_html.replace(unicode(key), (unichr(int(codepoint))).decode('cp1252').encode('utf-8'))
 		except ValueError:
 			debug("[Callhtml2utf8] ValueError " + key + "/" + str(codepoint))
 			pass
 	return in_html
+
+def normalizePhoneNumber(intNo):
+	found = re.match('^\+(.*)', intNo)
+	if found:
+		intNo = '00' + found.group(1)
+	intNo = intNo.replace('(', '').replace(')', '').replace(' ', '').replace('/', '').replace('-', '')
+	found = re.match('.*?([0-9]+)', intNo)
+	if found:
+		return found.group(1)
+	else:
+		return '0'
 
 def out(number, caller):
 	debug("[out] %s: %s" %(number, caller))
@@ -214,6 +228,15 @@ class ReverseLookupAndNotifier:
 
 
 	def _gotPage(self, page):
+		def cleanName(text):
+			item = text.replace("&nbsp;"," ").replace("</b>","").replace(","," ")
+			item = html2unicode(item).decode('iso-8859-1')
+			newitem = item.replace("  ", " ")
+			while newitem != item:
+				item = newitem
+				newitem = item.replace("  ", " ")
+			return newitem.strip()
+			
 		debug("[ReverseLookupAndNotifier] _gotPage")
 		found = re.match('.*content=".*?charset=([^"]+)"',page,re.S)
 		if found:
@@ -223,20 +246,69 @@ class ReverseLookupAndNotifier:
 			page = page.replace("\xa0"," ").decode("ISO-8859-1", "replace")
 
 		for entry in self.currentWebsite.getElementsByTagName("entry"):
-			# debug("[ReverseLookupAndNotifier] _gotPage: try entry")
+			#
+			# for the sites delivering fuzzy matches, we check against the returned number
+			#
+			pat = self.getPattern(entry, "number")
+			if pat:
+				pat = ".*?" + pat
+				debug("[ReverseLookupAndNotifier] _gotPage: look for number with '''%s'''" %( pat ))
+				found = re.match(pat, page, re.S|re.M)
+				if found:
+					if self.number[:2] == '00':
+						number = '0' + self.number[4:]
+					else:
+						number = self.number
+					if number != normalizePhoneNumber(found.group(1)):
+						debug("[ReverseLookupAndNotifier] _gotPage: got unequal number '''%s''' for '''%s'''" %(found.group(1),self.number))
+						continue
 			details = []
-			for what in ["name", "street", "city", "zipcode"]:
+			
+			# look for <firstname> and <lastname> match, if not there look for <name>, if not there break
+			lastname = ''
+			firstname = ''
+			pat = self.getPattern(entry, "lastname")
+			if pat:
+				pat = ".*?" + pat 
+				debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( "lastname", pat ))
+				found = re.match(pat, page, re.S|re.M)
+				if found:
+					debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "lastname", repr(found.group(1)) ))
+					lastname = cleanName(found.group(1))
+
+					pat = self.getPattern(entry, "firstname")
+					if pat:
+						pat = ".*?" + pat
+						debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( "firstname", pat ))
+						found = re.match(pat, page, re.S|re.M)
+						if found:
+							debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "firstname", repr(found.group(1)) ))
+						firstname = cleanName(found.group(1))
+
+					if firstname:
+						details.append(lastname + ' ' + firstname)
+					else:
+						details.append(lastname)
+			else:
+				pat = ".*?" + self.getPattern(entry, "name")
+				debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( "name", pat ))
+				found = re.match(pat, page, re.S|re.M)
+				if found:
+					debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "name", repr(found.group(1)) ))
+					item = cleanName(found.group(1))
+					debug("[ReverseLookupAndNotifier] _gotPage: add to details: " + repr(item))
+					details.append(item)
+				else:
+					debug("[ReverseLookupAndNotifier] _gotPage: no name found, skipping")
+					continue
+
+			for what in ["street", "city", "zipcode"]:
 				pat = ".*?" + self.getPattern(entry, what)
 				debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( what, pat ))
 				found = re.match(pat, page, re.S|re.M)
 				if found:
 					debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( what, repr(found.group(1)) ))
-					item = found.group(1).replace("&nbsp;"," ").replace("</b>","").replace(","," ")
-					item = html2unicode(item)
-					newitem = item.replace("  ", " ")
-					while newitem != item:
-						item = newitem
-						newitem = item.replace("  ", " ")
+					item = cleanName(found.group(1))
 					debug("[ReverseLookupAndNotifier] _gotPage: add to details: " + repr(item))
 					details.append(item.strip())
 				else:
@@ -271,9 +343,12 @@ class ReverseLookupAndNotifier:
 
 	def getPattern(self, website, which):
 		pat1 = website.getElementsByTagName(which)
-		if len(pat1) > 1:
-			debug("[ReverseLookupAndNotifier] getPattern: Something strange: more than one %s for website %s" %(which, website.getAttribute("name")))
-		return pat1[0].childNodes[0].data
+		if len(pat1) == 0:
+			return ''
+		else:
+			if len(pat1) > 1:
+				debug("[ReverseLookupAndNotifier] getPattern: Something strange: more than one %s for website %s" %(which, website.getAttribute("name")))
+			return pat1[0].childNodes[0].data
 
 	def notifyAndReset(self):
 		debug("[ReverseLookupAndNotifier] notifyAndReset: Number: " + self.number + "; Caller: " + self.caller)

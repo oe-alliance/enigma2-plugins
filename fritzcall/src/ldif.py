@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 ldif - generate and parse LDIF data (see RFC 2849)
 
