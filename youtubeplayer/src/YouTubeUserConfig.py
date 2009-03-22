@@ -22,6 +22,7 @@ from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
 from Components.config import ConfigInteger
+from Components.config import ConfigSelection
 from Components.config import ConfigSubsection
 from Components.config import ConfigSubList
 from Components.config import ConfigText
@@ -35,6 +36,13 @@ from . import _
 # This should be executed only once during an enigma2-session
 config.plugins.youtubeplayer = ConfigSubsection()
 config.plugins.youtubeplayer.serverprofile = ConfigText("", False)
+config.plugins.youtubeplayer.quality = ConfigSelection(
+				[
+				 ("", _("Low Quality (Mono)")),
+				 ("&fmt=6", _("Medium Quality (Mono)")),
+				 ("&fmt=18", _("High Quality (Stereo)")),
+				 ("&fmt=22", _("HD Quality (Stereo)"))
+				], "&fmt=18")
 
 class __YouTubeUserConfig():
 	def __init__(self):

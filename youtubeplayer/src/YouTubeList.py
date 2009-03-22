@@ -306,7 +306,13 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 	def searchFeedReal(self, searchContext):
 		print "[YTB] searchFeedReal"
 		try:
-			feed = interface.search(searchContext.searchTerm.value)
+			feed = interface.search(searchContext.searchTerm.value, 
+					orderby = searchContext.orderBy.value,
+					racy = searchContext.racy.value,
+					time = searchContext.time.value,
+					lr = searchContext.lr.value,
+					categories = [ searchContext.categories.value ],
+					sortOrder = searchContext.sortOrder.value)
 		except Exception, e:
 			feed = None
 			self.session.open(MessageBox, _("Error querying feed for search term %s:\n%s" %
@@ -587,7 +593,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 	def play(self):
 		print "[YTB] Play()"
 		youTubeEntry = self["list"].getCurrent()[0]
-		mrl = self.getVideoUrl(youTubeEntry, "&fmt=18")
+		mrl = self.getVideoUrl(youTubeEntry, config.plugins.youtubeplayer.quality.value)
 ############## To be resolved
 #Traceback (most recent call last):
 #  File "/usr/lib/enigma2/python/Components/ActionMap.py", line 46, in action
@@ -638,7 +644,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		if i < len(self.list):
 			self["list"].moveToIndex(i)
 			youTubeEntry = self["list"].getCurrent()[0]
-			return self.getVideoUrl(youTubeEntry, "&fmt=18"), youTubeEntry.getTitle()
+			return self.getVideoUrl(youTubeEntry, config.plugins.youtubeplayer.quality.value), youTubeEntry.getTitle()
 		return None, None
 
 
@@ -647,7 +653,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		if i >= 0:
 			self["list"].moveToIndex(i)
 			youTubeEntry = self["list"].getCurrent()[0]
-			return self.getVideoUrl(youTubeEntry, "&fmt=18"), youTubeEntry.getTitle()
+			return self.getVideoUrl(youTubeEntry, config.plugins.youtubeplayer.quality.value), youTubeEntry.getTitle()
 		return None, None
 
 

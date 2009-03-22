@@ -61,13 +61,6 @@ class SuggestionsList(MenuList):
 
 
 class SuggestionsListScreen(Screen):
-	skin = """
-	<screen name="SuggestionsListScreen" position="170,120" zPosition="2" size="394,185" backgroundColor="#202020" flags="wfNoBorder">
-		<eLabel position="0,0" size="394,185" backgroundColor="#c0c0c0" zPosition="-1" />
-		<widget name="suggestionslist" position="2,2" size="390,181"  scrollbarMode="showOnDemand"/>
-	</screen>"""
-
-
 	def __init__(self, session, configTextWithSuggestion):
 		Screen.__init__(self, session)
 		self.suggestionlist = SuggestionsList()
@@ -150,7 +143,6 @@ class ConfigTextWithSuggestions(ConfigText):
 	def __init__(self, default = "", fixed_size = True, visible_width = False, threaded = False):
 		ConfigText.__init__(self, default, fixed_size, visible_width)
 		self.suggestions = GoogleSuggestions(self.propagateSuggestions, ds = "yt", hl = "en")
-		self.timeoutlistener = []
 		self.suggestionsThread = None
 		self.threaded = threaded
 		self.suggestionsListActivated = False

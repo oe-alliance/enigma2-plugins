@@ -479,12 +479,18 @@ class YouTubeInterface():
 
 	def search(self, searchTerms, startIndex = 1, maxResults = 25,
 					orderby = "relevance", time = "all_time", racy = "include", 
-					author = ""):
+					author = "", lr = "", categories = "", sortOrder = "ascending"):
 		print "[YTB] YouTubeInterface::search()"
 		query = gdata.youtube.service.YouTubeVideoQuery()
 		query.vq = searchTerms
 		query.orderby = orderby
 		query.racy = racy
+		query.sortorder = sortOrder
+		if lr is not None:
+			query.lr = lr
+		if categories[0] is not None:
+			query.categories = categories
+		query.time = time
 		query.start_index = startIndex
 		query.max_results = maxResults
 		try:
