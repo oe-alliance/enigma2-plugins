@@ -312,7 +312,8 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 					time = searchContext.time.value,
 					lr = searchContext.lr.value,
 					categories = [ searchContext.categories.value ],
-					sortOrder = searchContext.sortOrder.value)
+					sortOrder = searchContext.sortOrder.value,
+					format = config.plugins.youtubeplayer.quality)
 		except Exception, e:
 			feed = None
 			self.session.open(MessageBox, _("Error querying feed for search term %s:\n%s" %
