@@ -272,7 +272,7 @@ class YouTubeSearchDialog(Screen, ConfigListScreen):
 
 		searchContextEntries = []
 		searchContextEntries.append(getConfigListEntry(_("Search Term(s)"), searchContext.searchTerm))
-		searchContextEntries.append(getConfigListEntry(_("YouTube Video Quality"), config.plugins.youtubeplayer.quality))
+		searchContextEntries.append(getConfigListEntry(_("Video Quality"), config.plugins.youtubeplayer.quality))
 		searchContextEntries.append(getConfigListEntry(_("Order by"), searchContext.orderBy))
 #		searchContextEntries.append(getConfigListEntry(_("Sort Order"), searchContext.sortOrder))
 #		searchContextEntries.append(getConfigListEntry(_("Search Periode"), searchContext.time))
