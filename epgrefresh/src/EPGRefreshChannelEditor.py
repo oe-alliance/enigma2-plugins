@@ -15,7 +15,8 @@ from Components.ActionMap import ActionMap
 from Components.Button import Button
 
 # Configuration
-from Components.config import getConfigListEntry, ConfigSelection
+from Components.config import getConfigListEntry, ConfigSelection, \
+	NoSave
 
 from EPGRefreshService import EPGRefreshService
 
@@ -64,7 +65,10 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			services[1][:]
 		)
 
-		self.typeSelection = ConfigSelection(choices = [("channels", _("Channels")), ("bouquets", _("Bouquets"))])
+		self.typeSelection = NoSave(ConfigSelection(choices = [
+			("channels", _("Channels")),
+			("bouquets", _("Bouquets"))]
+		))
 		self.typeSelection.addNotifier(self.refresh, initial_call = False)
 
 		self.reloadList()
@@ -122,7 +126,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			self.idx = 1
 
 		self.list.extend([
-			getConfigListEntry(_("Refreshing"), ConfigSelection(choices = [(x, ServiceReference(x.sref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))
+			getConfigListEntry(_("Refreshing"), NoSave(ConfigSelection(choices = [(x, ServiceReference(x.sref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))])))
 				for x in self.services[self.idx]
 		])
 
@@ -174,10 +178,10 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			list = self["config"].getList()
 			list.append(getConfigListEntry(
 				_("Refreshing"),
-				ConfigSelection(choices = [(
+				NoSave(ConfigSelection(choices = [(
 					EPGRefreshService(str(args[0].toString()), None),
 					ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
-				)])
+				)]))
 			))
 			self["config"].setList(list)
 
