@@ -162,10 +162,7 @@ class AutoTimer:
 		# We include processed timers as we might search for duplicate descriptions
 		recorddict = {}
 		for timer in NavigationInstance.instance.RecordTimer.timer_list + NavigationInstance.instance.RecordTimer.processed_timers:
-			if not recorddict.has_key(str(timer.service_ref)):
-				recorddict[str(timer.service_ref)] = [timer]
-			else:
-				recorddict[str(timer.service_ref)].append(timer)
+			recorddict.setdefault(str(timer.service_ref), []).append(timer)
 
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
@@ -243,7 +240,7 @@ class AutoTimer:
 				# Check for double Timers
 				# We first check eit and if user wants us to guess event based on time
 				# we try this as backup. The allowed diff should be configurable though.
-				for rtimer in recorddict.get(serviceref, []):
+				for rtimer in recorddict.get(serviceref, ()):
 					if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, begin, end) > ((duration/10)*8):
 						oldExists = True
 
