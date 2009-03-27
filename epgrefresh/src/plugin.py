@@ -2,7 +2,7 @@
 from . import _
 
 # Config
-from Components.config import config, ConfigEnableDisable, ConfigNumber, \
+from Components.config import config, ConfigYesNo, ConfigNumber, \
 	ConfigSubsection, ConfigClock
 
 # Calculate default begin/end
@@ -18,16 +18,17 @@ end = mktime((
 )
 
 config.plugins.epgrefresh = ConfigSubsection()
-config.plugins.epgrefresh.enabled = ConfigEnableDisable(default = False)
+config.plugins.epgrefresh.enabled = ConfigYesNo(default = False)
 config.plugins.epgrefresh.begin = ConfigClock(default = int(begin))
 config.plugins.epgrefresh.end = ConfigClock(default = int(end))
 config.plugins.epgrefresh.interval = ConfigNumber(default = 2)
 config.plugins.epgrefresh.delay_standby = ConfigNumber(default = 10)
-config.plugins.epgrefresh.inherit_autotimer = ConfigEnableDisable(default = False)
-config.plugins.epgrefresh.afterevent = ConfigEnableDisable(default = False)
-config.plugins.epgrefresh.force = ConfigEnableDisable(default = False)
-config.plugins.epgrefresh.wakeup = ConfigEnableDisable(default = False)
+config.plugins.epgrefresh.inherit_autotimer = ConfigYesNo(default = False)
+config.plugins.epgrefresh.afterevent = ConfigYesNo(default = False)
+config.plugins.epgrefresh.force = ConfigYesNo(default = False)
+config.plugins.epgrefresh.wakeup = ConfigYesNo(default = False)
 config.plugins.epgrefresh.lastscan = ConfigNumber(default = 0)
+config.plugins.epgrefresh.parse_autotimer = ConfigYesNo(default = False)
 
 del now, begin, end
 

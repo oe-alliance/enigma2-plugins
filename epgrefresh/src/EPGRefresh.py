@@ -217,6 +217,28 @@ class EPGRefresh:
 		config.plugins.epgrefresh.lastscan.value = int(time())
 		config.plugins.epgrefresh.lastscan.save()
 
+		# Eventually force autotimer to parse epg
+		if config.plugins.epgrefresh.parse_autotimer.value:
+			removeInstance = False
+			try:
+				# Import Instance
+				from Plugins.Extensions.AutoTimer.plugin import autotimer
+
+				if autotimer is None:
+					removeInstance = True
+					# Create an instance
+					from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+					autotimer = AutoTimer()
+
+				# Parse EPG
+				autotimer.parseEPG()
+			except Exception, e:
+				print "[EPGRefresh] Could not start AutoTimer:", e
+			finally:
+				# Remove instance if there wasn't one before
+				if removeInstance:
+					autotimer = None
+
 		# shutdown if we're supposed to go to deepstandby and not recording
 		if not self.forcedScan and config.plugins.epgrefresh.afterevent.value \
 			and not Screens.Standby.inTryQuitMainloop:
