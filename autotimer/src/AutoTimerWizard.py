@@ -27,7 +27,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 	def __init__(self, session, newTimer):
 		self.xmlfile = Directories.resolveFilename(Directories.SCOPE_PLUGINS, "Extensions/AutoTimer/autotimerwizard.xml")
 
-		WizardLanguage.__init__(self, session, showSteps = False, showStepSlider = False)
+		WizardLanguage.__init__(self, session, showSteps = True, showStepSlider = True)
 		AutoTimerEditorBase.__init__(self, newTimer)
 		Rc.__init__(self)
 
