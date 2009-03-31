@@ -266,8 +266,7 @@ RESULT eServiceTS::start()
 	m_decoder->setAudioPID(m_apid, eDVBAudio::aMPEG);
 	m_streamthread = new eStreamThread();
 	CONNECT(m_streamthread->m_event, eServiceTS::recv_event);
-	m_decoder->freeze(0);
-	m_decoder->preroll();
+	m_decoder->pause();
 	if (unpause() != 0) return -1;
 	m_state = stRunning;
 	m_event(this, evStart);
@@ -297,7 +296,7 @@ void eServiceTS::recv_event(int evt)
 		break;
 	case eStreamThread::evtReadError:
 	case eStreamThread::evtWriteError:
-		m_decoder->freeze(0);
+		m_decoder->pause();
 		m_state = stStopped;
 		m_event((iPlayableService*)this, evEOF);
 		break;
@@ -330,7 +329,7 @@ RESULT eServiceTS::pause(ePtr<iPauseableService> &ptr)
 RESULT eServiceTS::pause()
 {
 	m_streamthread->stop();
-	m_decoder->freeze(0);
+	m_decoder->pause();
 	return 0;
 }
 
@@ -356,7 +355,7 @@ RESULT eServiceTS::unpause()
 	}
 	m_decodedemux->flush();
 	m_streamthread->start(srcfd, destfd);
-	m_decoder->unfreeze();
+	m_decoder->play();
 	return 0;
 }
 
@@ -435,7 +434,7 @@ RESULT eServiceTS::selectTrack(unsigned int i) {
 		eDebug("[servicets] audio track %d PID 0x%02x type %d\n", i, m_apid, m_audioInfo->audioStreams[i].type);
 		m_decoder->setAudioPID(m_apid, m_audioInfo->audioStreams[i].type);
 		if (m_state == stRunning)
-			m_decoder->preroll();
+			m_decoder->set();
 		return 0;
 	} else {
 		return -1;
