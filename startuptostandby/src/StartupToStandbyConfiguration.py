@@ -28,7 +28,7 @@ class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions"],
 			{
-				"cancel": self.close,
+				"cancel": self.keySave,
 			}
 		)
 
