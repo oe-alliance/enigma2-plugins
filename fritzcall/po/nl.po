@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-01 10:17+0100\n"
+"POT-Creation-Date: 2009-04-07 17:05+0200\n"
 "PO-Revision-Date: 2009-01-31 10:55+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
@@ -15,6 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+
+#. TRANSLATORS: this is a help text, keep it short
+#, fuzzy
+msgid "About FritzCall"
+msgstr "Setup Fritzcall"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Add entry to phonebook"
@@ -112,7 +117,7 @@ msgstr "Wis regel"
 
 #, python-format
 msgid "Dialling failed - Error: %s"
-msgstr ""
+msgstr "FRITZ!Box Login mislukt! - Error: %s"
 
 msgid "Display FRITZ!box-Fon calls on screen"
 msgstr "Laat FRITZ!Box-Fon gesprekken op het scherm zien"

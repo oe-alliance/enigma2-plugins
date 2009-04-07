@@ -9,13 +9,17 @@ except IOError:
 
 from time import localtime
 def debug(message):
-	ltim = localtime()
-	headerstr = "%04d%02d%02d %02d:%02d " %(ltim[0],ltim[1],ltim[2],ltim[3],ltim[4])
-	message = headerstr + message
 	if config.plugins.FritzCall.debug.value:
-		deb = open("/tmp/FritzDebug.log", "aw")
-		deb.write(message + "\n")
-		deb.close()
+		try:
+			# ltim = localtime()
+			# headerstr = u"%04d%02d%02d %02d:%02d " %(ltim[0],ltim[1],ltim[2],ltim[3],ltim[4])
+			deb = open("/tmp/FritzDebug.log", "aw")
+			# deb.write(headerstr + message.decode('utf-8') + u"\n")
+			deb.write(message + "\n")
+			deb.close()
+		except:
+			debug(repr(message) + " (retried debug)")
+		
 
 import re
 def normalizePhoneNumber(intNo):

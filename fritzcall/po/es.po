@@ -2,19 +2,24 @@
 # Copyright (C) 2009 THE enigma'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the enigma package.
 # Automatically generated, 2009.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-10 13:04+0100\n"
-"PO-Revision-Date: 2009-02-10 13:53+0100\n"
+"POT-Creation-Date: 2009-04-07 17:05+0200\n"
+"PO-Revision-Date: 2009-01-09 18:07+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: this is a help text, keep it short
+#, fuzzy
+msgid "About FritzCall"
+msgstr "Configuración FritzCall"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Add entry to phonebook"
@@ -100,7 +105,7 @@ msgid "Country"
 msgstr "País"
 
 msgid "Debug"
-msgstr "Debugear"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
@@ -110,28 +115,28 @@ msgstr "Borrar"
 msgid "Delete entry"
 msgstr "Borrar entrada"
 
-#, python-format
+#, fuzzy, python-format
 msgid "Dialling failed - Error: %s"
-msgstr "Falló la llamada - Error: %s"
+msgstr "Falló la identificación a FRITZ!Box - Error: %s"
 
 msgid "Display FRITZ!box-Fon calls on screen"
-msgstr "Ver llamadas FRITZ!Box-Fon en la pantalla"
+msgstr "Visualizar llamadas FRITZ!Box-Fon en la pantalla"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Display all calls"
-msgstr "Ver todas llamadas"
+msgstr "Visualizar todas llamadas"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Display incoming calls"
-msgstr "Ver llamadas entrantes"
+msgstr "Visualizar llamadas entrantes"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Display missed calls"
-msgstr "Ver llamadas perdidas"
+msgstr "Visualizar llamadas perdidas"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Display outgoing calls"
-msgstr "Ver llamadas salientes"
+msgstr "Visualizar llamadas salientes"
 
 msgid "Do what?"
 msgstr "¿Qué hago?"
@@ -149,24 +154,6 @@ msgstr ""
 "%(number)s\n"
 "\n"
 "%(name)s?"
-
-#, python-format
-msgid ""
-"Do you really want to overwrite entry for %(number)s\n"
-"\n"
-"%(name)s\n"
-"\n"
-"with\n"
-"\n"
-"%(newname)s?"
-msgstr ""
-"¿Quiere sobreescribir la entrada para %(number)s\n"
-"\n"
-"%(name)s\n"
-"\n"
-"con\n"
-"\n"
-"%(newname)s?"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Edit"
@@ -205,7 +192,7 @@ msgid "FritzCall Setup"
 msgstr "Configuración FritzCall"
 
 msgid "Full screen display"
-msgstr "Visualizar pantalla completa"
+msgstr ""
 
 msgid "Germany"
 msgstr "Alemania"
@@ -272,6 +259,15 @@ msgstr "Nuevo"
 msgid "No entry selected"
 msgstr "No hay entrada seleccionada"
 
+msgid "No result from LDIF"
+msgstr ""
+
+msgid "No result from Outlook export"
+msgstr ""
+
+msgid "No result from reverse lookup"
+msgstr ""
+
 msgid "Number"
 msgstr "Número"
 
@@ -326,6 +322,9 @@ msgstr "Leer Agenda desde FRITZ!Box"
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Búsqueda inversa del ID llamante (seleccionar país abajo)"
 
+msgid "Reverse searching..."
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Save"
 msgstr "Guardar"
@@ -340,6 +339,12 @@ msgstr "Buscar (may/min indistinto)"
 
 msgid "Search phonebook"
 msgstr "Buscar agenda"
+
+msgid "Searching in LDIF..."
+msgstr ""
+
+msgid "Searching in Outlook export..."
+msgstr ""
 
 msgid "Shortcut"
 msgstr "Acceso rápido"
@@ -459,3 +464,19 @@ msgstr "trabajo"
 #~ "para el número %d\n"
 #~ "Borrando."
 
+#~ msgid ""
+#~ "Do you really want to overwrite entry for %(number)s\n"
+#~ "\n"
+#~ "%(name)s\n"
+#~ "\n"
+#~ "with\n"
+#~ "\n"
+#~ "%(newname)s?"
+#~ msgstr ""
+#~ "¿Quiere sobreescribir la entrada para %(number)s\n"
+#~ "\n"
+#~ "%(name)s\n"
+#~ "\n"
+#~ "con\n"
+#~ "\n"
+#~ "%(newname)s?"

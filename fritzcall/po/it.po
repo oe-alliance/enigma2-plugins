@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 FRITZ!Box plugin italian locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-01 10:17+0100\n"
+"POT-Creation-Date: 2009-04-07 17:05+0200\n"
 "PO-Revision-Date: 2009-02-24 14:42+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,6 +17,11 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: /home/dario/Plugins/fritzcall\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/fritzcall\n"
+
+#. TRANSLATORS: this is a help text, keep it short
+#, fuzzy
+msgid "About FritzCall"
+msgstr "Configurazione FritzCall"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Add entry to phonebook"

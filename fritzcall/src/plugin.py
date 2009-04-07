@@ -121,6 +121,51 @@ def initDebug():
 	except:
 		pass
 
+class FritzAbout(Screen):
+	textFieldWidth = 250
+	width = 5 + 150 + 20 + textFieldWidth + 5 + 175 + 5
+	height = 5 + 175 + 5 + 25 + 5
+	# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+	skin = """
+		<screen name="FritzAbout" position="%d,%d" size="%d,%d" title="%s" >
+			<widget name="text" position="175,%d" size="%d,%d" font="Regular;%d" />
+			<ePixmap position="5,37" size="150,110" pixmap="%s" transparent="1" alphatest="blend" />
+			<ePixmap position="%d,5" size="175,175" pixmap="%s" transparent="1" alphatest="blend" />
+			<widget name="url" position="10,185" size="%d,25" font="Regular;%d" />
+		</screen>""" % (
+						(DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, # position
+						width, height, # size
+						_("About FritzCall"), # title
+						(height-scaleV(150,130)) / 2, # text vertical position
+						textFieldWidth,
+						scaleV(150,130), # text height
+						scaleV(24,21), # text font size
+						resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/fritz.png"), # 150x110
+						5 + 150 + 5 + textFieldWidth + 5, # qr code horizontal offset
+						resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/website.png"), # 175x175
+						width-20, # url width
+						scaleV(24,21) # url font size
+						)
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self["aboutActions"] = ActionMap(["OkCancelActions"],
+		{
+		"cancel": self.exit,
+		"ok": self.exit,
+		}, -2)
+		self["text"] = Label(
+							"FritzCall Plugin" + "\n\n" +
+							"$Author$"[1:-2] + "\n" +
+							"$Revision$"[1:-2] + "\n" + 
+							"$Date$"[1:23] + "\n"
+							)
+		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
+		
+	def exit(self):
+		self.close()
+
+
 class FritzCallFBF:
 	def __init__(self):
 		debug("[FritzCallFBF] __init__")
@@ -208,7 +253,10 @@ class FritzCallFBF:
 
 		if re.search('TrFonName', html):
 			#===============================================================================
-			#				 New Style: 7170 / 7270 (FW 54.04.58, 54.04.63-11941) / 7141 (FW 40.04.68) 
+			#				 New Style: 7170 / 7270 (FW 54.04.58, 54.04.63-11941)
+			#							7141 (FW 40.04.68) 22.03.2009
+			#							7170 (FW 29.04.70) 22.03.2009
+			#							7270: (FW 54.04.70)
 			#	We expect one line with TrFonName followed by several lines with
 			#	TrFonNr(Type,Number,Shortcut,Vanity), which all belong to the name in TrFonName.
 			#===============================================================================
@@ -220,14 +268,15 @@ class FritzCallFBF:
 				# TrFonName (id, name, category)
 				found = re.match('TrFonName\("[^"]*", "([^"]+)", "[^"]*"\);', entry.group(1))
 				if found:
-					name = found.group(1).strip()
+					name = found.group(1).strip().replace(',','')
 				else:
 					continue
 				# TrFonNr (type, rufnr, code, vanity)
 				detailmask = re.compile('TrFonNr\("([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)"\);', re.S)
 				details = detailmask.finditer(entry.group(1))
 				for found in details:
-					if not found.group(2).strip():
+					thisnumber = found.group(2).strip()
+					if not thisnumber:
 						debug("[FritzCallFBF] Ignoring entry with empty number for '''%s'''" % (name))
 						continue
 					else:
@@ -246,7 +295,6 @@ class FritzCallFBF:
 						if config.plugins.FritzCall.showVanity.value and found.group(4):
 							thisname = thisname + ", " + _("Vanity") + ": " + found.group(4)
 
-						thisnumber = found.group(2).strip()
 						debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (thisname.strip(), thisnumber))
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						phonebook.phonebook[thisnumber] = thisname
@@ -260,7 +308,7 @@ class FritzCallFBF:
 			entrymask = re.compile('TrFon\("[^"]*", "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)"\)', re.S)
 			entries = entrymask.finditer(html)
 			for found in entries:
-				name = found.group(1).strip()
+				name = found.group(1).strip().replace(',','')
 				# debug("[FritzCallFBF] pos: %s name: %s" %(found.group(0),name))
 				thisnumber = found.group(2).strip()
 				if config.plugins.FritzCall.showShortcut.value and found.group(3):
@@ -727,6 +775,7 @@ class FritzOfferAction(Screen):
 												) 
 
 	def __init__(self, session, parent, number, name=""):
+		debug("[FritzOfferAction] init: %s, %s" %(number, name))
 		Screen.__init__(self, session)
 	
 		# TRANSLATORS: keep it short, this is a button
@@ -748,7 +797,7 @@ class FritzOfferAction(Screen):
 
 		self["text"] = Label(number + "\n\n" + name.replace(", ", "\n"))
 		self.actualNumber = number
-		self.actualName = name
+		self.actualName = name.replace("\n", ", ")
 		self.parent = parent
 		self.lookupState = 0
 
@@ -789,10 +838,12 @@ class FritzOfferAction(Screen):
 		self["text"].setText(str(message))
 
 	def call(self):
+		debug("[FritzOfferAction] add: %s" %self.actualNumber)
 		fritzbox.dial(self.actualNumber)
 		self.exit()
 
 	def add(self):
+		debug("[FritzOfferAction] add: %s, %s" %(self.actualNumber, self.actualName))
 		phonebook.FritzDisplayPhonebook(self.session).add(self.parent, self.actualNumber, self.actualName)
 		self.exit()
 
@@ -1137,7 +1188,7 @@ class FritzCallPhonebook:
 			if cur and cur[0]:
 				debug("[FritzCallPhonebook] displayPhonebook/showEntry (%s,%s)" % (cur[0][0], cur[0][1]))
 				number = cur[0][0]
-				name = phonebook.search(number).replace('\n', ', ')
+				name = cur[0][1]
 				self.session.open(FritzOfferAction, self, number, name)
 	
 		def delete(self):
@@ -1414,7 +1465,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		# TRANSLATORS: keep it short, this is a button
 		self["key_blue"] = Button(_("Phonebook"))
 
-		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
 			"red": self.cancel,
 			"green": self.save,
@@ -1423,6 +1474,8 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			"cancel": self.cancel,
 			"save": self.save,
 			"ok": self.save,
+			"menu": self.about,
+			"info": self.about,
 		}, - 2)
 
 		# TRANSLATORS: this is a help text, keep it short
@@ -1439,6 +1492,10 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.helpList.append((self["setupActions"], "ColorActions", [("yellow", _("display calls"))]))
 		# TRANSLATORS: this is a help text, keep it short
 		self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("display phonebook"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "MenuActions", [("info", _("About FritzCall"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "MenuActions", [("menu", _("About FritzCall"))]))
 
 		ConfigListScreen.__init__(self, self.list, session=session)
 		self.createSetup()
@@ -1517,6 +1574,9 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def displayPhonebook(self):
 		self.session.open(phonebook.FritzDisplayPhonebook)
+
+	def about(self):
+		self.session.open(FritzAbout)
 
 
 standbyMode = False
@@ -1676,7 +1736,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] __init__")
+		debug("[FritzProtocol] " + "$Revision$"[1:-1]	+ "$Date$"[7:23] + " starting")
 		self.resetValues()
 
 	def resetValues(self):
@@ -1753,7 +1813,7 @@ class FritzProtocol(LineReceiver):
 
 class FritzClientFactory(ReconnectingClientFactory):
 	initialDelay = 20
-	maxDelay = 500
+	maxDelay = 30
 
 	def __init__(self):
 		self.hangup_ok = False
