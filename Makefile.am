@@ -26,6 +26,7 @@ SUBDIRS = \
 	ofdb \
 	passwordchanger \
 	permanentclock \
+	remotetimer \
 	rsdownloader \
 	simplerss \
 	startuptostandby \

@@ -192,4 +192,8 @@ ac3lipsync/src/Makefile
 dreamirc/Makefile
 dreamirc/src/Makefile
 dreamirc/src/protocols/Makefile
+
+remotetimer/Makefile
+remotetimer/src/Makefile
+
 ])
