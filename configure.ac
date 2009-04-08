@@ -188,4 +188,8 @@ ac3lipsync/Makefile
 ac3lipsync/po/Makefile
 ac3lipsync/img/Makefile
 ac3lipsync/src/Makefile
+
+dreamirc/Makefile
+dreamirc/src/Makefile
+dreamirc/src/protocols/Makefile
 ])

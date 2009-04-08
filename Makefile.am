@@ -5,6 +5,7 @@ SUBDIRS = \
 	autoresolution \
 	autotimer \
 	cdinfo \
+	dreamirc \
 	emailclient \
 	epgrefresh \
 	epgsearch \
