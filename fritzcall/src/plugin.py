@@ -268,7 +268,7 @@ class FritzCallFBF:
 				# TrFonName (id, name, category)
 				found = re.match('TrFonName\("[^"]*", "([^"]+)", "[^"]*"\);', entry.group(1))
 				if found:
-					name = found.group(1).strip().replace(',','')
+					name = found.group(1).replace(',','').strip()
 				else:
 					continue
 				# TrFonNr (type, rufnr, code, vanity)
@@ -593,7 +593,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 					<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
 					<widget name="statusbar" position="%d,%d" size="%d,%d" font="Regular;%d" backgroundColor="#aaaaaa" transparent="1" />
 					<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
-					<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="#aaaaaa" transparent="1" />
+					<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" />
 					<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
 					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 					<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
@@ -1068,7 +1068,7 @@ class FritzCallPhonebook:
 				self.skin = """
 					<screen name="FritzDisplayPhonebook" position="%d,%d" size="%d,%d" title="%s" >
 						<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
-						<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" backgroundColor="#20040404" transparent="1" />
+						<widget name="entries" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" />
 						<eLabel position="0,%d" size="%d,2" backgroundColor="#aaaaaa" />
 						<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 						<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
