@@ -24,11 +24,12 @@ class RSSEntryWrapper(ElementWrapper):
 				length = elem.get("length")
 				if length:
 					length = int(length) / 1048576
-				myl.append({
-					"href": elem.get("url"),
-					"type": elem.get("type"),
-					"length": length
-					})
+				myl.append(ScanFile(
+					elem.get("url"),
+					mimetype = elem.get("type"),
+					size = length,
+					autodetect = False)
+				)
 			return myl
 		elif tag == "id":
 			return self._element.findtext(self._ns + 'guid', self.title + self.link)
@@ -52,11 +53,12 @@ class PEAEntryWrapper(ElementWrapper):
 					length = elem.get("length")
 					if length:
 						length = int(length) / 1048576
-					myl.append({
-						"href": elem.get("href"),
-						"type": elem.get("type"),
-						"length": length
-						})
+					myl.append(ScanFile(
+						elem.get("href"),
+						mimetype = elem.get("type"),
+						size = length,
+						autodetect = False
+					))
 			return myl
 		return ElementWrapper.__getattr__(self, tag)
 
@@ -163,9 +165,6 @@ class UniversalFeed(BaseFeed):
 			# Link
 			link = item.link
 
-			# Read out enclosures
-			enclosures = [ScanFile(enclosure["href"], mimetype = enclosure["type"], size = enclosure["length"], autodetect = False) for enclosure in item.enclosures]
-
 			# Try to read summary, empty if none
 			summary = strip_readable(item.summary or "")
 
@@ -174,7 +173,7 @@ class UniversalFeed(BaseFeed):
 					title.encode("UTF-8"),
 					link.encode("UTF-8"),
 					summary.encode("UTF-8"),
-					enclosures
+					item.enclosures
 			))
 			ids.add(id)
 
