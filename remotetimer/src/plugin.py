@@ -252,7 +252,7 @@ def autostart(reason, **kwargs):
 			if config.plugins.remoteTimer.httpip.value:
 				timerInit()
 		except:
-			#print "####### NO remoteTimer.httpip.value"
+			print "####### NO remoteTimer.httpip.value"
 
 def main(session, **kwargs):
 	session.open(RemoteTimerSetup)
