@@ -213,9 +213,16 @@ def newnigma2KeyGo(self):
 			rt_repeated
 		)
 		print "######### debug remote", remoteurl
-		basicAuth = encodestring("%s:%s" % (username, password))
-		authHeader = "Basic " + basicAuth.strip()
-		headers = {"Authorization": authHeader}
+
+		username = config.plugins.remoteTimer.username.value
+		password = config.plugins.remoteTimer.password.value
+		if username and password:
+			basicAuth = encodestring("%s:%s" % (username, password))
+			authHeader = "Basic " + basicAuth.strip()
+			headers = {"Authorization": authHeader}
+		else:
+			headers = {}
+
 		defer = getPage(remoteurl, headers = headers)
 		defer.addCallback(boundFunction(_gotPageLoad, self.session, self))
 		defer.addErrback(boundFunction(errorLoad, self.session))
