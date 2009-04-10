@@ -23,7 +23,9 @@ from Components.ActionMap import NumberActionMap
 from Components.Button import Button
 
 from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import getConfigListEntry, config, ConfigSubsection, ConfigText, ConfigIP, ConfigYesNo, ConfigNumber, KEY_LEFT, KEY_RIGHT, KEY_0
+from Components.config import getConfigListEntry, config, \
+	ConfigSubsection, ConfigText, ConfigIP, ConfigYesNo, \
+	ConfigPassword, ConfigNumber, KEY_LEFT, KEY_RIGHT, KEY_0
 
 from Screens.TimerEntry import TimerEntry
 from Screens.MessageBox import MessageBox
@@ -36,14 +38,17 @@ from Tools.BoundFunction import boundFunction
 import time
 from twisted.web.client import getPage 
 from xml.dom.minidom import parseString
+from base64 import encodestring
 
 import urllib
 #------------------------------------------------------------------------------------------
 
 config.plugins.remoteTimer = ConfigSubsection()
-config.plugins.remoteTimer.httphost = ConfigText(default="" , fixed_size = False)
-config.plugins.remoteTimer.httpip = ConfigIP(default=[0, 0, 0, 0])
-config.plugins.remoteTimer.httpport = ConfigNumber(default="0")
+config.plugins.remoteTimer.httphost = ConfigText(default = "" , fixed_size = False)
+config.plugins.remoteTimer.httpip = ConfigIP(default = [0, 0, 0, 0])
+config.plugins.remoteTimer.httpport = ConfigNumber(default = "0")
+config.plugins.remoteTimer.username = ConfigText(default = "root", fixed_size = False)
+config.plugins.remoteTimer.password = ConfigPassword(default = "", fixed_size = False)
 
 class RemoteTimerSetup(Screen, ConfigListScreen):
 	skin = """
@@ -83,8 +88,10 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("Remote Timer - Hostname"), config.plugins.remoteTimer.httphost),
-			getConfigListEntry(_("Remote Timer - Netwerk-IP"), config.plugins.remoteTimer.httpip),
-			getConfigListEntry(_("Remote Timer - WebIf Port"), config.plugins.remoteTimer.httpport)
+			getConfigListEntry(_("Remote Timer - Network IP"), config.plugins.remoteTimer.httpip),
+			getConfigListEntry(_("Remote Timer - WebIf Port"), config.plugins.remoteTimer.httpport),
+			getConfigListEntry(_("Remote Timer - Username"), config.plugins.remoteTimer.username),
+			getConfigListEntry(_("Remote Timer - Password"), config.plugins.remoteTimer.password),
 		], session)
 		
 
@@ -206,7 +213,12 @@ def newnigma2KeyGo(self):
 			rt_repeated
 		)
 		print "######### debug remote", remoteurl
-		getPage(remoteurl).addCallback(boundFunction(_gotPageLoad, self.session, self)).addErrback(boundFunction(errorLoad, self.session))
+		basicAuth = encodestring("%s:%s" % (username, password))
+		authHeader = "Basic " + basicAuth.strip()
+		headers = {"Authorization": authHeader}
+		defer = getPage(remoteurl, headers = headers)
+		defer.addCallback(boundFunction(_gotPageLoad, self.session, self))
+		defer.addErrback(boundFunction(errorLoad, self.session))
 
 def _gotPageLoadCb(timerEntry, doClose, *args):
 	if doClose:
