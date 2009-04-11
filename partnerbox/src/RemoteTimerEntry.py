@@ -326,14 +326,14 @@ def RemoteTimerInit():
 	if baseTimercreateConfig is None:
 		baseTimercreateConfig  = TimerEntry.createConfig
 	
-	TimerEntry.createConfig = RemoteTimerCreateConfig
+	TimerEntry.createConfig = RemoteTimerConfig
 	TimerEntry.keyLeft = RemoteTimerkeyLeft 
 	TimerEntry.keyRight = RemoteTimerkeyRight
 	TimerEntry.createSetup = createRemoteTimerSetup
 	TimerEntry.keyGo = RemoteTimerGo
 	TimerEntry.newConfig = RemoteTimernewConfig
 	
-def RemoteTimerCreateConfig(self):
+def RemoteTimerConfig(self):
 	
 	self.password = config.plugins.partnerbox.password.value
 	self.username = "root"
@@ -357,8 +357,6 @@ def getLocationsCallback(self, xmlstring):
 		if node.nodeName == "e2simplexmlitem":
 			dirname = str(node.firstChild.data.strip().encode("utf-8"))
 			self.Locations.append(dirname)
-	RemoteTimercreateConfig(self)
-	RemoteTimerCreateSetup(self,"config")
 		
 def createRemoteTimerSetup(self, widget):
 	baseTimerEntrySetup(self, widget)
@@ -544,7 +542,7 @@ def RemoteTimerGo(self):
 				dirname = ""
 			else:
 				justplay = 0
-				dirname = self.timerentry_dirname.value
+				dirname = urllib.quote(self.timerentry_dirname.value)
 			afterevent = {
 			"deepstandby": AFTEREVENT.DEEPSTANDBY,
 			"standby": AFTEREVENT.STANDBY,
