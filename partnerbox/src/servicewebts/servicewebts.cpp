@@ -309,7 +309,7 @@ void eServiceWebTS::recv_event(int evt)
 		break;
 	case eStreamThreadWeb::evtReadError:
 	case eStreamThreadWeb::evtWriteError:
-		m_decoder->freeze(0);
+		m_decoder->pause();
 		m_state = stStopped;
 		m_event((iPlayableService*)this, evEOF);
 		break;
@@ -323,11 +323,10 @@ void eServiceWebTS::recv_event(int evt)
 			m_decodedemux->flush();
 			m_decoder->setVideoPID(VPID, eDVBVideo::MPEG2);
 			m_decoder->setAudioPID(APID, eDVBAudio::aMPEG);
-			m_decoder->freeze(0);
-			m_decoder->preroll();
+			m_decoder->pause();
 			m_state = stRunning;
 			m_event(this, evStart);
-			m_decoder->unfreeze();
+			m_decoder->play();
 			
 		}	
 		bool wasnull = !m_audioInfo;
@@ -356,7 +355,7 @@ RESULT eServiceWebTS::pause(ePtr<iPauseableService> &ptr)
 RESULT eServiceWebTS::pause()
 {
 	m_streamthread->stop();
-	m_decoder->freeze(0);
+	m_decoder->pause();
 	return 0;
 }
 
@@ -461,7 +460,7 @@ RESULT eServiceWebTS::selectTrack(unsigned int i) {
 		eDebug("[ServiceWebTS] audio track %d PID 0x%02x type %d\n", i, m_apid, m_audioInfo->audioStreams[i].type);
 		m_decoder->setAudioPID(m_apid, m_audioInfo->audioStreams[i].type);
 		if (m_state == stRunning)
-			m_decoder->preroll();
+			m_decoder->set();
 		return 0;
 	} else {
 		return -1;
