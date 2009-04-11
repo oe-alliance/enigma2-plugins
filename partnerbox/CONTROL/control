@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-partnerbox
+Version: 0.93
+Description: Partnerbox (Remote Timer and Remote TV Player)
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: Dr. Best <dr.best@dreambox-tools.info>
+Homepage: http://www.dreambox-tools.info
+Depends: enigma2, twisted-web
+Source: http://enigma2-plugins.schwerkraft.elitedvb.net/

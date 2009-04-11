@@ -24,6 +24,7 @@ SUBDIRS = \
 	networkwizard \
 	networkbrowser \
 	ofdb \
+	partnerbox \
 	passwordchanger \
 	permanentclock \
 	remotetimer \

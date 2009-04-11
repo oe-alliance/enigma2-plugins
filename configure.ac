@@ -196,4 +196,8 @@ dreamirc/src/protocols/Makefile
 remotetimer/Makefile
 remotetimer/src/Makefile
 
+partnerbox/Makefile
+partnerbox/src/Makefile
+partnerbox/src/servicewebts/Makefile
+
 ])
