@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - AC3lipsync\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-03 20:44+0100\n"
-"PO-Revision-Date: 2009-03-03 21:00+0100\n"
+"POT-Creation-Date: 2009-03-15 01:10+0100\n"
+"PO-Revision-Date: 2009-03-15 01:10+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net - Italy <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,138 +15,153 @@ msgstr ""
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Basepath: /home/dario/Plugins/AC3LipSync\n"
-"X-Poedit-SearchPath-0: /home/dario/Plugins/AC3LipSync\n"
+"X-Poedit-Basepath: /home/dario/Plugins/ac3lipsync\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/ac3lipsync\n"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:72
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:72
 msgid "Use user delays"
-msgstr "Usare Ritardi Pers."
+msgstr "Usare ritardi pers."
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:73
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:73
 msgid "Use calc. delays"
-msgstr "Usare Ritardi Calc."
+msgstr "Usare ritardi calc."
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:81
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:84
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:140
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:271
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:275
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:276
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:81
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:84
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:140
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:271
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:275
 #, python-format
 msgid "%i ms"
 msgstr "%i ms"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:82
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:82
 #, python-format
 msgid "%s delay:"
 msgstr "Ritardo %s: "
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:83
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:83
 #, python-format
 msgid "%s:"
 msgstr "%s: "
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:87
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:87
 msgid "Channel audio:"
 msgstr "Canale Audio: "
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:92
-msgid "Switch audio"
-msgstr "Cambiare Audio"
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:93
+msgid " "
+msgstr " "
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:96
-#: /home/dario/Plugins/AC3LipSync/AC3setup.py:58
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:95
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:55
 msgid "Save"
 msgstr "Salvare"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:97
-msgid "Set user delay"
-msgstr "Conf. Ritardo Pers."
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:96
+msgid "Switch audio"
+msgstr "Cambiare Audio"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:213
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:214
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:97
+msgid "Set user delay"
+msgstr "Conf. ritardi pers."
+
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:213
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:214
 #, python-format
 msgid "Save %s delay"
 msgstr "Salvare Ritardo %s"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:215
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:215
 msgid "Save both delays"
 msgstr "Salvare entrambi i Ritardi"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:218
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:218
 msgid "Which delays do you want to set"
 msgstr "Quale Ritardo Configurare"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:250
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:250
 #, python-format
 msgid "Saved %(audio)s value: %(delay)i ms"
-msgstr " Valore %(audio)s salvato: %(delay)i ms"
+msgstr "Valore %(audio)s salvato: %(delay)i ms"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:254
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:254
 msgid "Invalid selection"
 msgstr "Selezione non valida!"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:304
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:304
 msgid "Select the key you want to set"
-msgstr "Selezionare il tasto da configurare"
+msgstr "Selezionate il tasto da configurare"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:309
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:309
 msgid "Key"
 msgstr "Tasto"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:314
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:314
 msgid "Setting key canceled"
 msgstr "Configurazione Tasto cancellata!"
 
-#: /home/dario/Plugins/AC3LipSync/AC3main.py:318
+#: /home/dario/Plugins/ac3lipsync/src/AC3main.py:318
 #, python-format
 msgid "%(Key)s successfully set to %(delay)i ms"
 msgstr "%(Key)s configurato con successo a %(delay)i ms"
 
-#: /home/dario/Plugins/AC3LipSync/plugin.py:29
-#: /home/dario/Plugins/AC3LipSync/plugin.py:33
-#: /home/dario/Plugins/AC3LipSync/plugin.py:35
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:29
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:33
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:35
 msgid "AC3 Lip Sync"
 msgstr "AC3 Lip Sync"
 
-#: /home/dario/Plugins/AC3LipSync/plugin.py:33
-#: /home/dario/Plugins/AC3LipSync/plugin.py:35
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:33
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:35
 msgid "sets the AC3 audio Delay (LipSync)"
 msgstr "Configurare Ritardo Audio AC3 (LipSync)"
 
-#: /home/dario/Plugins/AC3LipSync/plugin.py:34
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:34
 msgid "AC3 Lip Sync Setup"
 msgstr "Configurazione AC3 Lip Sync"
 
-#: /home/dario/Plugins/AC3LipSync/plugin.py:34
+#: /home/dario/Plugins/ac3lipsync/src/plugin.py:34
 msgid "Setup for the AC3 Lip Sync Plugin"
 msgstr "Configurazione Plugin AC3 Lip Sync"
 
-#: /home/dario/Plugins/AC3LipSync/AC3setup.py:42
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:42
 msgid "Minimum delay"
-msgstr "Ritardo Minimo"
+msgstr "Ritardo Minimo (ms):"
 
-#: /home/dario/Plugins/AC3LipSync/AC3setup.py:43
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:43
 msgid "Maximum delay"
-msgstr "Ritardo massimo"
+msgstr "Ritardo massimo (ms):"
 
-#: /home/dario/Plugins/AC3LipSync/AC3setup.py:44
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:44
 msgid "Step in ms for arrow keys"
-msgstr "Passo in ms per i Tasti Cursore"
+msgstr "Passo Tasti Cursore (ms):"
 
-#: /home/dario/Plugins/AC3LipSync/AC3setup.py:48
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:47
 #, python-format
 msgid "Step in ms for key %i"
-msgstr "Passo in ms per il Tasto %i"
+msgstr "Passo Tasto %i (ms):"
 
-#: /home/dario/Plugins/AC3LipSync/AC3setup.py:57
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:54
 msgid "Cancel"
 msgstr "Annullare"
 
-#: /home/dario/Plugins/AC3LipSync/AC3setup.py:59
+#: /home/dario/Plugins/ac3lipsync/src/AC3setup.py:56
 msgid "Recalculate..."
 msgstr "Ricalcolare..."
 
-#~ msgid " "
-#~ msgstr " "
+#~ msgid "Switch to user key- delays"
+#~ msgstr "Tasti: Ritardi Pers."
+#~ msgid "Switch to calculated key- delays"
+#~ msgstr "Tasti: Ritardi Calc."
+#~ msgid "OK"
+#~ msgstr "Ok"
+#~ msgid "Save current %(audio)s delay of %(delay)i ms to key"
+#~ msgstr "Assegnare Ritardo %(delay)i ms Audio corrente %(audio)s al Tasto:"
+#~ msgid "Menu"
+#~ msgstr "Menu"
+#~ msgid "Key %(key)i (current value: %(value)i ms)"
+#~ msgstr "Tasto %(key)i (valore corrente: %(value)i ms)"
+#~ msgid "Wait time in ms before activation:"
+#~ msgstr "Attesa prima di attivare (ms):"
 
