@@ -1,0 +1,116 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AC3-LipSync\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-28 13:48+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Timo Jarvenpaa <timojarvenpaa@hotmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+
+msgid "AC3 Lip Sync"
+msgstr ""
+
+msgid "sets the AC3 audio Delay (LipSync)"
+msgstr "säätää ääniviivettä (lipsync)"
+
+msgid "AC3 Lip Sync Setup"
+msgstr "AC3 Lip Sync -asetukset"
+
+msgid "Setup for the AC3 Lip Sync Plugin"
+msgstr "AC3 Lip Sync -lisäosan asetukset"
+
+msgid "Use user delays"
+msgstr "Omat pikaval."
+
+msgid "Use calc. delays"
+msgstr "Vakiot pikaval."
+
+msgid "ms"
+msgstr ""
+
+#, python-format
+msgid "%s delay:"
+msgstr "%s-viive:"
+
+#, python-format
+msgid "%s:"
+msgstr ""
+
+msgid "Channel audio:"
+msgstr "Ääniraita:"
+
+msgid "Save"
+msgstr "Tallenna"
+
+msgid "Switch audio"
+msgstr "Ääniraita"
+
+msgid "Set user delay"
+msgstr "Tal.pikaval."
+
+#, python-format
+msgid "Save %s delay"
+msgstr "Tallenna %s-viive"
+
+msgid "Save both delays"
+msgstr "Tallenna molemmat viiveet"
+
+msgid "Which delays do you want to set"
+msgstr "Mitkä viiveet haluat tallentaa?"
+
+#, python-format
+msgid "Saved %(audio)s value: %(delay)i ms"
+msgstr "Tallennettiin %(audio)s-arvo: %(delay)i ms"
+
+msgid "Invalid selection"
+msgstr "Virheellinen valinta"
+
+msgid "Select the key you want to set"
+msgstr "Valitse näppäin viivearvon pikavalintaa varten"
+
+msgid "Key"
+msgstr "Näppäin"
+
+msgid "Setting key canceled"
+msgstr "Näppäimen määritys keskeytetty"
+
+#, python-format
+msgid "%(Key)s successfully set to %(delay)i ms"
+msgstr "%(Key)s näppäin tallennettu %(delay)i ms viiveelle"
+
+msgid "Save current %(audio)s delay of %(delay)i ms to key"
+msgstr "Tallenna nykyinen %(audio)s-viive (%(delay)i ms) pikavalintaan"
+
+msgid "Switch to user key- delays"
+msgstr "Ota itse määritellyt viiveen pikavalinnat käyttöön"
+
+msgid "Switch to calculated key- delays"
+msgstr "Ota oletusarvoiset viiveen pikavalinnat käyttöön"
+
+msgid "Minimum delay"
+msgstr "Minimiviive (ms)"
+
+msgid "Maximum delay"
+msgstr "Maksimiviive (ms)"
+
+msgid "Step in ms for arrow keys"
+msgstr "Nuolinäppäimien säätöporras (ms)"
+
+#, python-format
+msgid "Step in ms for key %i"
+msgstr "%i-näppäimen viive (ms)"
+
+msgid "Wait time in ms before activation:"
+msgstr "Odotusaika ennen viiveen aktivointia (ms)"
+
+msgid "Cancel"
+msgstr "Keskeytä"
+
+msgid "Recalculate..."
+msgstr "Päivitä..."
+
