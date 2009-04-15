@@ -49,6 +49,8 @@ webinterface/src/web-data/img/Makefile
 webinterface/src/web-data/lib/Makefile
 webinterface/src/web-data/tpl/Makefile
 webinterface/src/web-data/tpl/default/Makefile
+webinterface/src/web-data/tpl/default/streaminterface/Makefile
+webinterface/src/web-data/tpl/default/streaminterface/img/Makefile
 webinterface/po/Makefile
 
 wirelesslan/Makefile
