@@ -1,0 +1,6 @@
+<select id="channelSelect" onChange="onServiceSelected()" width="100px">
+	<option selected>choose Service</option>
+	{for s in services}
+	<option id="${s.servicereference}" >${s.servicename}</option>
+	{/for}
+</select>

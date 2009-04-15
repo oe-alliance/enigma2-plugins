@@ -428,7 +428,7 @@ function incomingTimerFormLocations(request){
 	}		
 }
 
-// startin to load for TV
+// starting to load for TV
 function loadTimerFormChannels() {
 	if(addTimerEditFormArray.TVListFilled === 1 && addTimerEditFormArray.RadioListFilled === 1) {
 		loadTimerForm();

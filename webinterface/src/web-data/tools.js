@@ -26,7 +26,7 @@ var EPGListWindow = '';
 var currentBouquet = bouquetsTv;
 
 var updateBouquetItemsPoller = '';
-var updateCurrentPoller = setInterval(updateItems, 7500);
+var updateCurrentPoller = '';
 
 var currentLocation = "/hdd/movie";
 var locationsList = [];
@@ -34,6 +34,9 @@ var tagsList = [];
 
 var boxtype = "";
 
+function pollCurrent(){
+	updateCurrentPoller = setInterval(updateItems, 7500);
+}
 /*
  * Set boxtype Variable for being able of determining model specific stuff correctly (like WebRemote)
  */
@@ -1744,8 +1747,7 @@ function init(){
 	setAjaxLoad('contentMain');
 	
 	fetchTpl('tplServiceListEPGItem');
-	fetchTpl('tplCurrent');
-	
+	fetchTpl('tplCurrent');	
 	reloadNav('tplNavTv', 'TeleVision');
 	
 	initChannelList();
@@ -1753,4 +1755,5 @@ function init(){
 	initMovieList();
 	
 	updateItems();
+	pollCurrent();
 }
