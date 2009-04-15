@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins-extension-webinterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 22:19+0100\n"
+"POT-Creation-Date: 2009-02-19 20:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team:  <stephan@reichholf.net>\n"
@@ -16,118 +16,122 @@ msgstr ""
 "X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-plugins\\webinterface\n"
 "X-Poedit-SearchPath-0: src\n"
 
-#: src/plugin.py:133
+#: src/plugin.py:406
 msgid "Webinterface"
 msgstr "Webgränssnitt"
 
-#: src/plugin.py:133
+#: src/plugin.py:406
 msgid "Configuration for the Webinterface"
 msgstr "Konfiguration för Webgränssnitt"
 
-#: src/WebIfConfig.py:31
+#: src/WebIfConfig.py:80
 msgid "Webinterface: Main Setup"
 msgstr "Webgränssnitt: Huvudinstallation"
 
-#: src/WebIfConfig.py:36
+#: src/WebIfConfig.py:85
 msgid "Start Webinterface"
 msgstr "Starta Webgränssnitt"
 
-#: src/WebIfConfig.py:37
-msgid "Enable /hdd"
-msgstr "Aktivera /hdd"
+#: src/WebIfConfig.py:86
+msgid "Enable /media"
+msgstr "Aktivera /media"
 
-#: src/WebIfConfig.py:38
+#: src/WebIfConfig.py:87
 msgid "Allow zapping via Webinterface"
 msgstr "Tillåt zappning via Webgränssnittet"
 
-#: src/WebIfConfig.py:39
+#: src/WebIfConfig.py:88
 msgid "Autowrite timer"
 msgstr "Automatskapa timer"
 
-#: src/WebIfConfig.py:40
+#: src/WebIfConfig.py:89
 msgid "Load movie-length"
 msgstr "Ladda filmlängd"
 
-#: src/WebIfConfig.py:46
-#: src/WebIfConfig.py:201
+#: src/WebIfConfig.py:95
+#: src/WebIfConfig.py:250
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/WebIfConfig.py:47
-#: src/WebIfConfig.py:202
+#: src/WebIfConfig.py:96
+#: src/WebIfConfig.py:251
 msgid "OK"
 msgstr "OK"
 
-#: src/WebIfConfig.py:48
+#: src/WebIfConfig.py:97
 msgid "Interfaces"
 msgstr "Gränssnitt"
 
-#: src/WebIfConfig.py:89
+#: src/WebIfConfig.py:138
 msgid "Webinterface: List of configured Interfaces"
 msgstr "Webgränssnitt: Lista konfigurerade Gränssnitt"
 
-#: src/WebIfConfig.py:93
-#: src/WebIfConfig.py:222
+#: src/WebIfConfig.py:142
+#: src/WebIfConfig.py:271
 msgid "Address"
 msgstr "Adress"
 
-#: src/WebIfConfig.py:94
-#: src/WebIfConfig.py:223
+#: src/WebIfConfig.py:143
+#: src/WebIfConfig.py:272
 msgid "Port"
 msgstr "Port"
 
-#: src/WebIfConfig.py:95
+#: src/WebIfConfig.py:144
 msgid "Authorization"
 msgstr "Tillstånd"
 
-#: src/WebIfConfig.py:96
+#: src/WebIfConfig.py:145
 msgid "SSL"
 msgstr "SSL"
 
-#: src/WebIfConfig.py:97
-#: src/WebIfConfig.py:221
+#: src/WebIfConfig.py:146
+#: src/WebIfConfig.py:270
 msgid "Disabled"
 msgstr "Avaktiverat"
 
-#: src/WebIfConfig.py:98
+#: src/WebIfConfig.py:147
 msgid "Add"
 msgstr "Lägg till"
 
-#: src/WebIfConfig.py:99
+#: src/WebIfConfig.py:148
 msgid "Change"
 msgstr "Ändra"
 
-#: src/WebIfConfig.py:124
-#: src/WebIfConfig.py:129
-#: src/WebIfConfig.py:134
+#: src/WebIfConfig.py:173
+#: src/WebIfConfig.py:178
+#: src/WebIfConfig.py:183
 msgid "yes"
 msgstr "ja"
 
-#: src/WebIfConfig.py:126
-#: src/WebIfConfig.py:131
-#: src/WebIfConfig.py:136
+#: src/WebIfConfig.py:175
+#: src/WebIfConfig.py:180
+#: src/WebIfConfig.py:185
 msgid "no"
 msgstr "nej"
 
-#: src/WebIfConfig.py:189
+#: src/WebIfConfig.py:238
 msgid "Webinterface: Edit Interface"
 msgstr "Webgränssnitt: Ändra Gränssnitt"
 
-#: src/WebIfConfig.py:204
+#: src/WebIfConfig.py:253
 msgid "Delete"
 msgstr "Ta bort"
 
-#: src/WebIfConfig.py:224
+#: src/WebIfConfig.py:273
 msgid "Require Authorization"
 msgstr "Kräv tillstånd"
 
-#: src/WebIfConfig.py:225
+#: src/WebIfConfig.py:274
 msgid "SSL Encryption"
 msgstr "SSL Kryptering"
 
-#: src/WebIfConfig.py:245
+#: src/WebIfConfig.py:296
 msgid "Really delete this Interface?"
 msgstr "Verkligen ta bort detta Gränssnitt?"
+
+#: src/WebComponents/Converter/HddInfo.py:33
+msgid "N/A"
+msgstr "N/A"
 
 #~ msgid "Unknown function: '%s'"
 #~ msgstr "Unbekannte Funktion: '%s'"
