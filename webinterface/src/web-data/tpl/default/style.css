@@ -80,12 +80,12 @@
 	}
 
 	#bannerLeft{
-		width: 800px;
+		width: 940px;
 		float: left;
 	}
 	
 	#bannerRight{
-		width: 190px;
+		width: 50px;
 		text-align: right;
 		height: 60px;
 		float: left;
@@ -129,7 +129,7 @@
 		background: #000; 
 		margin: 0; 
 		padding: 0; 
-		width: 850px;
+		width: 940px;
 	}
 
 	#mainMenu li{

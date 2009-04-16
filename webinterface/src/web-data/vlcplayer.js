@@ -205,7 +205,10 @@ function initWebTv(){
 	}
 	
 	vlc = $("vlc");
-	set('vlcVolume', vlc.audio.volume);
+	
+	try{
+		set('vlcVolume', vlc.audio.volume);
+	} catch (e){}
 //	vlc.log.verbosity = 0;
 	loadBouquets();
 }

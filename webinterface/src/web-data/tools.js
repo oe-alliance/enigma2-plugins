@@ -1715,6 +1715,9 @@ function switchMode(mode){
 	}
 }
 
+function openWebTV(){
+	window.open('/web-data/streaminterface.html', 'Dreambox WebTV', 'scrollbars=no, width=800, height=730');
+}
 
 
 
