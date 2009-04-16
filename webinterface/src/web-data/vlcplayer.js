@@ -12,9 +12,9 @@ function getVersion() {
 
 function onServiceSelected(){
 	var servicereference =$('channelSelect').options[$('channelSelect').selectedIndex].id;
-	$('currentName').innerHTML = $('channelSelect').options[$('channelSelect').selectedIndex].value;
+//	$('currentName').innerHTML = $('channelSelect').options[$('channelSelect').selectedIndex].value;
 
-	//	loadEPG(servicereference);	
+	loadEPG(servicereference);	
 	setStreamTarget(servicereference);
 }
 
@@ -32,11 +32,14 @@ function incomingVLCServiceEPG(request){
 		var EPGItems = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");			
 		var epg_current =new EPGEvent(EPGItems.item(0));
 		var namespace = {
-			 	'title': epg_current.getTitle(),
-				'starttime': epg_current.getTimeStartString(),
-				'duration': (parseInt(epg_current.duration)/60)				
+				'servicename' : epg_current.getServiceName(),
+			 	'eventname': epg_current.getTitle(),
+				'duration': (parseInt(epg_current.duration)/60, 10)				
 				};
-//		$('CurrentEvent').innerHTML =  RND(tplVLCEPGItem, namespace);
+		
+		var data = { 'current' : namespace };
+		
+		processTpl('streaminterface/tplCurrent', data, 'current');
 		
 	}
 }

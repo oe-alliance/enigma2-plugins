@@ -143,6 +143,7 @@
 	#vlcVolume{
 		width: 30px;
 	}
+	
 /**************
  Content
  **************/
@@ -151,6 +152,19 @@
 		min-height: 308px;
 		margin: 0px;
 		padding: 0px;
+	}
+	
+/**************
+ Current
+ **************/	
+	#currentTable{
+		padding-left: 2px;
+		padding-top: 3px;
+		width: 100%;
+	}
+	
+	#currentDuration{
+		text-align: right;
 	}
 			
 /***************
