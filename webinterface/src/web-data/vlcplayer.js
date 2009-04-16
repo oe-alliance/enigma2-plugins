@@ -14,7 +14,7 @@ function onServiceSelected(){
 	var servicereference =$('channelSelect').options[$('channelSelect').selectedIndex].id;
 //	$('currentName').innerHTML = $('channelSelect').options[$('channelSelect').selectedIndex].value;
 
-	loadEPG(servicereference);	
+	loadVLCEPGServiceNow(servicereference);	
 	setStreamTarget(servicereference);
 }
 
@@ -23,8 +23,8 @@ function onBouquetSelected(){
 	loadVLCBouquet(servicereference);
 }
 
-function loadEPG(servicereference){
-	doRequest(url_epgservice+servicereference, incomingVLCServiceEPG);
+function loadVLCEPGServiceNow(servicereference){
+	doRequest(url_epgservicenow + servicereference, incomingVLCServiceEPG);
 }
 
 function incomingVLCEpgNow(request){
