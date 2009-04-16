@@ -30,7 +30,7 @@ function loadEPG(servicereference){
 function incomingVLCServiceEPG(request){
 	if (request.readyState == 4) {
 		var EPGItems = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");			
-		var epg_current =new EPGEvent(EPGItems.item(0))
+		var epg_current =new EPGEvent(EPGItems.item(0));
 		var namespace = {
 			 	'title': epg_current.getTitle(),
 				'starttime': epg_current.getTimeStartString(),
@@ -52,7 +52,7 @@ function incomingVLCBouquetList(request){
 			namespace[i] = {
 					"servicereference" 	: bouquet.getServiceReference(),
 					"servicename"	 	: bouquet.getServiceName()
-			}
+			};
 		}
 		data = { bouquets : namespace };
 		
@@ -89,47 +89,47 @@ function incomingVLCChannellist(request){
 	}
 }
 
-function play(){
-	vlc.playlist.play();
-	
-	iterator = vlc.log.messages.iterator();
-	while(iterator.hasNext)
-	{
-		debug("Message: " + iterator.next().message);
+function vlcPlay(){
+	onServiceSelected();
+}
+
+function vlcPrev(){
+	if(	$('channelSelect').selectedIndex > 0 ){	
+		$('channelSelect').selectedIndex -= 1;
+		onServiceSelected();
 	}
 }
 
-function prev(){
-	vlc.playlist.prev();
+function vlcNext(){
+	if($('channelSelect').selectedIndex < $('channelSelect').length - 1 ){
+		$('channelSelect').selectedIndex += 1;
+		onServiceSelected();
+	}
 }
 
-function next(){
-	vlc.playlist.next();
+function vlcPause(){
+	vlc.playlist.togglePause();
 }
 
-function pause(){
-	vlc.playlist.togglePause()
-}
-
-function stop(){
+function vlcStop(){
 	vlc.playlist.stop();
 }
 
-function volumeUpVLC(){
+function vlcVolumeUp(){
 	debug("Volume: " + vlc.audio.volume);
 	vlc.audio.volume += 10;
 }
 
-function volumeDownVLC(){
+function vlcVolumeDown(){
 	debug("Volume: " + vlc.audio.volume);
 	vlc.audio.volume -= 10;
 }
 
-function toogleMuteVLC(){
+function vlcToogleMute(){
 	vlc.audio.mute = !vlc.audio.mute;
 }
 
-function fullscreen(){
+function vlcFullscreen(){
 	try{
 		vlc.video.fullscreen = true;
 	}catch(e){
@@ -137,7 +137,7 @@ function fullscreen(){
 	}
 }
 
-function teletext(){
+function vlcTeletext(){
 	try{
 		vlc.video.teletext = 100;
 	} catch(e) {
@@ -157,13 +157,13 @@ function setStreamTarget(servicereference){
 	if(vlc.playlist.isPlaying){
 		vlc.playlist.next();
 	} else {
-		play();
+		vlc.playlist.play();
 	}
 }
 
 function loadBouquets(){
 	url = url_getServices + bouquetsTv;
-	doRequest(url, incomingVLCBouquetList)
+	doRequest(url, incomingVLCBouquetList);
 }
 
 function initWebTv(){
