@@ -116,17 +116,36 @@ function vlcStop(){
 }
 
 function vlcVolumeUp(){
-	debug("Volume: " + vlc.audio.volume);
-	vlc.audio.volume += 10;
+	if(vlc.audio.volume < 200){
+		if(vlc.audio.volume + 10 > 200){
+			vlc.audio.volume = 200;
+		} else {
+			vlc.audio.volume += 10;
+		}
+	}
+	
+	set('vlcVolume', vlc.audio.volume);
 }
 
 function vlcVolumeDown(){
-	debug("Volume: " + vlc.audio.volume);
-	vlc.audio.volume -= 10;
+	if(vlc.audio.volume > 0){
+		if(vlc.audio.volume < 10){
+			vlc.audio.volume = 0;
+		} else {
+			vlc.audio.volume -= 10;
+		}
+	}
+	
+	set('vlcVolume', vlc.audio.volume);
 }
 
 function vlcToogleMute(){
 	vlc.audio.mute = !vlc.audio.mute;
+	if(vlc.audio.mute){
+		set('vlcVolume', 'Muted');
+	} else {
+		set('vlcVolume', vlc.audio.volume);
+	}
 }
 
 function vlcFullscreen(){
@@ -172,6 +191,7 @@ function initWebTv(){
 	}
 	
 	vlc = $("vlc");
+	set('vlcVolume', vlc.audio.volume);
 //	vlc.log.verbosity = 0;
 	loadBouquets();
 }

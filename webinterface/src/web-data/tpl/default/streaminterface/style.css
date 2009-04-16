@@ -120,6 +120,10 @@
 	#mainMenu li:hover, { background: #AAA; }
 	#mainMenu li.hover, { background: #AAA; }
 	
+/**************
+ vlcPlayer
+ **************/	
+
 	#vlcPlayer {
 		margin: 0px;
 		padding: 0px;
@@ -128,6 +132,15 @@
 	#vlcButtons{
 		background-color: #000;
 		border-top: 1px solid #FFF;
+	}
+	
+	#volumeTable{
+		width: 100%;
+		text-align: right;
+	}
+	
+	#vlcVolume{
+		width: 30px;
 	}
 /**************
  Content
