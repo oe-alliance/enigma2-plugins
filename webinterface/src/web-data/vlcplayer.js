@@ -136,9 +136,18 @@ function fullscreen(){
 		debug(e);
 	}
 }
+
+function teletext(){
+	try{
+		vlc.video.teletext = 100;
+	} catch(e) {
+		debug("Error - Could not set teletext");
+	}
+	debug("Current Teletext Page:" + vlc.video.teletext);
+}
+
 function setStreamTarget(servicereference){
 	host = top.location.host;
-	debug("Host: " + host);
 	
 	url = 'http://'+host+':8001/'+decodeURIComponent(servicereference);
 	debug("setStreamTarget " + url);
@@ -150,9 +159,6 @@ function setStreamTarget(servicereference){
 	} else {
 		play();
 	}
-	
-	debug("VLC-Version: " + vlc.VersionInfo);
-
 }
 
 function loadBouquets(){
