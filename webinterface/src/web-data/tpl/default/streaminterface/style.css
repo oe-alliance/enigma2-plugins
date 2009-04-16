@@ -23,7 +23,7 @@
 		height: 50px;
 		position: absolute;
 		top: 0px;
-		left: 250px;		
+		left: 134px;
 		text-align: center;
 		vertical-align: bottom;
 		z-index: 2;		
@@ -66,6 +66,7 @@
 		padding-left: 5px;
 		margin-bottom: 0px;
 		border-bottom: 1px solid #FFF;
+		position: relative;
 	}
 	
 	#banner a, #banner a:visited, #banner a:active{

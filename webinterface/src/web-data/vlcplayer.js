@@ -90,7 +90,11 @@ function incomingVLCChannellist(request){
 }
 
 function vlcPlay(){
-	onServiceSelected();
+	try{
+		onServiceSelected();
+	} catch(e){
+		notify("Nothing to play", false);
+	}
 }
 
 function vlcPrev(){
@@ -112,7 +116,11 @@ function vlcPause(){
 }
 
 function vlcStop(){
-	vlc.playlist.stop();
+	try{
+		vlc.playlist.stop();
+	} catch(e) {
+		notify("Nothing to stop", false);
+	}
 }
 
 function vlcVolumeUp(){
@@ -148,12 +156,15 @@ function vlcToogleMute(){
 	}
 }
 
-function vlcFullscreen(){
-	try{
-		vlc.video.fullscreen = true;
-	}catch(e){
-		debug(e);
+function vlcFullscreen(){	
+	if(vlc.playlist.isPlaying){
+		if(vlc.input.hasVout){
+			vlc.video.fullscreen = true;
+			return;
+		} 
 	}
+
+	notify("Cannot enable fullscreen mode when no Video is being played!", false);
 }
 
 function vlcTeletext(){
