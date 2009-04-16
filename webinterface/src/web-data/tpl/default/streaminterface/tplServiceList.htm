@@ -1,5 +1,5 @@
 <select id="channelSelect" onChange="onServiceSelected()" width="100px">
 	{for s in services}
-	<option id="${s.servicereference}" >${s.servicename}</option>
+	<option id="${s.servicereference}" >${s.servicename} (${s.eventname}) +${s.duration} min</option>
 	{/for}
 </select>

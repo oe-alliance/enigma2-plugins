@@ -26,21 +26,52 @@ function onBouquetSelected(){
 function loadEPG(servicereference){
 	doRequest(url_epgservice+servicereference, incomingVLCServiceEPG);
 }
- 
+
+function incomingVLCEpgNow(request){
+	if (request.readyState == 4) {
+		var events = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");			
+
+		var namespace = [];
+
+		for(var i = 0; i < events.length; i++){
+			var event = new EPGEvent(events.item(i));
+			var eventname = event.getTitle();
+		
+			if(eventname.length > 40){
+				eventname = eventname.substring(0, 40) + '...';
+			}
+			
+			namespace[i] = {
+			 	'servicereference' : event.getServiceReference(),
+			 	'servicename' : event.getServiceName(),
+			 	'eventname' : eventname,
+				'duration' : ( parseInt( (event.duration/60) , 10) )
+			};
+		}
+		
+		var data = { 'services' : namespace };		
+		processTpl('streaminterface/tplServiceList', data, 'channelList');
+	}	
+}
+
+function loadVLCEpgNow(bouquetreference){
+	doRequest(url_epgnow+bouquetreference, incomingVLCEpgNow);
+}
+
+
 function incomingVLCServiceEPG(request){
 	if (request.readyState == 4) {
-		var EPGItems = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");			
-		var epg_current =new EPGEvent(EPGItems.item(0));
+		var events = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");			
+		
+		var event =new EPGEvent(events.item(0));
 		var namespace = {
-				'servicename' : epg_current.getServiceName(),
-			 	'eventname': epg_current.getTitle(),
-				'duration': (parseInt(epg_current.duration)/60, 10)				
+				'servicename' : event.getServiceName(),
+			 	'eventname': event.getTitle(),
+				'duration': ( parseInt( (event.duration/60) , 10) )				
 				};
 		
-		var data = { 'current' : namespace };
-		
-		processTpl('streaminterface/tplCurrent', data, 'current');
-		
+		var data = { 'current' : namespace };		
+		processTpl('streaminterface/tplCurrent', data, 'current');		
 	}
 }
 
@@ -66,8 +97,7 @@ function incomingVLCBouquetList(request){
 
 
 function loadVLCBouquet(servicereference){ 
-	servicereftoloadepgnow = servicereference;
-	doRequest(url_getServices+servicereference, incomingVLCChannellist);
+	loadVLCEpgNow(servicereference);
 }
 
 function incomingVLCChannellist(request){
@@ -79,9 +109,9 @@ function incomingVLCChannellist(request){
 		namespace = [];
 		
 		for ( var i = 0; i < services.length ; i++){
-			var reference = services[i];
-			namespace[i] = { 	'servicereference': reference.getServiceReference(),
-								'servicename': reference.getServiceName() 
+			var service = services[i];
+			namespace[i] = { 	'servicereference': service.getServiceReference(),
+								'servicename': service.getServiceName() 
 							};
 			
 			
