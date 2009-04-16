@@ -97,7 +97,7 @@ function incomingVLCBouquetList(request){
 
 
 function loadVLCBouquet(servicereference){ 
-	loadVLCEpgNow(servicereference);
+	loadVLCEpgNow(servicereference);	
 }
 
 function incomingVLCChannellist(request){
