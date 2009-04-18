@@ -1,33 +1,71 @@
 var vlc = '';
-// current EPG Template
-var tplVLCEPGItem = '<div class="currentServiceEPGStarttime">%(starttime)</div><div  class="currentServiceEPGTitle">%(title)</div><div class="currentServiceEPGDuration">%(duration)&nbsp;Min.</div>';
 
-
-function getVersion() {
-	var vstr = vlc.VersionInfo;
-	var words = vstr.split(" ");
-	return words[0];
+/*
+ * incoming request-data for Current Service Epg
+ */
+function incomingVLCServiceEPG(request){
+	if (request.readyState == 4) {
+		var events = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");			
+		
+		var event =new EPGEvent(events.item(0));
+		var namespace = {
+				'servicename' : event.getServiceName(),
+			 	'eventname': event.getTitle(),
+				'duration': ( parseInt( (event.duration/60) , 10) )				
+				};
+		
+		var data = { 'current' : namespace };		
+		processTpl('streaminterface/tplCurrent', data, 'current');		
+	}
 }
 
 
-function onServiceSelected(){
-	var servicereference =$('channelSelect').options[$('channelSelect').selectedIndex].id;
-//	$('currentName').innerHTML = $('channelSelect').options[$('channelSelect').selectedIndex].value;
-
-	loadVLCEPGServiceNow(servicereference);	
-	setStreamTarget(servicereference);
-}
-
-function onBouquetSelected(){	
-	var servicereference =$('bouquetSelect').options[$('bouquetSelect').selectedIndex].id;	
-	loadVLCBouquet(servicereference);
-}
-
+/*
+* Load Now information for Service
+*/
 function loadVLCEPGServiceNow(servicereference){
 	doRequest(url_epgservicenow + servicereference, incomingVLCServiceEPG);
 }
 
-function incomingVLCEpgNow(request){
+function onServiceSelected(){
+	sref =$('channelSelect').options[$('channelSelect').selectedIndex].id;
+
+	//load epgNow
+	loadVLCEPGServiceNow(sref);	
+	
+	setStreamTarget(sref);
+}
+
+function incomingVLCBouquetList(request){
+	if (request.readyState == 4) {
+		var bouquets = new ServiceList(getXML(request)).getArray();
+		
+		var namespace = [];
+		for(var i = 0; i < bouquets.length; i++){
+			var bouquet = bouquets[i];
+			
+			namespace[i] = {
+					"servicereference" 	: bouquet.getServiceReference(),
+					"servicename"	 	: bouquet.getServiceName()
+			};
+		}
+		data = { bouquets : namespace };
+		
+		processTpl('streaminterface/tplBouquetList', data, 'bouquetList');
+		loadVLCBouquet(bouquets[0].getServiceReference());
+	}
+}
+
+
+function loadVLCBouquet(servicereference){ 
+	loadVLCChannelList(servicereference);	
+}
+
+/*
+* Incoming request-data for EPG Now information
+* Builds the Channellist
+*/
+function incomingVLCChannelList(request){
 	if (request.readyState == 4) {
 		var events = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");			
 
@@ -54,72 +92,11 @@ function incomingVLCEpgNow(request){
 	}	
 }
 
-function loadVLCEpgNow(bouquetreference){
-	doRequest(url_epgnow+bouquetreference, incomingVLCEpgNow);
-}
-
-
-function incomingVLCServiceEPG(request){
-	if (request.readyState == 4) {
-		var events = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");			
-		
-		var event =new EPGEvent(events.item(0));
-		var namespace = {
-				'servicename' : event.getServiceName(),
-			 	'eventname': event.getTitle(),
-				'duration': ( parseInt( (event.duration/60) , 10) )				
-				};
-		
-		var data = { 'current' : namespace };		
-		processTpl('streaminterface/tplCurrent', data, 'current');		
-	}
-}
-
-function incomingVLCBouquetList(request){
-	if (request.readyState == 4) {
-		var bouquets = new ServiceList(getXML(request)).getArray();
-		
-		var namespace = [];
-		for(var i = 0; i < bouquets.length; i++){
-			var bouquet = bouquets[i];
-			
-			namespace[i] = {
-					"servicereference" 	: bouquet.getServiceReference(),
-					"servicename"	 	: bouquet.getServiceName()
-			};
-		}
-		data = { bouquets : namespace };
-		
-		processTpl('streaminterface/tplBouquetList', data, 'bouquetList');
-		loadVLCBouquet(bouquets[0].getServiceReference());
-	}
-}
-
-
-function loadVLCBouquet(servicereference){ 
-	loadVLCEpgNow(servicereference);	
-}
-
-function incomingVLCChannellist(request){
-	if(request.readyState == 4){
-		var services = new ServiceList(getXML(request)).getArray();
-				
-		debug("got "+services.length+" Services");
-		
-		namespace = [];
-		
-		for ( var i = 0; i < services.length ; i++){
-			var service = services[i];
-			namespace[i] = { 	'servicereference': service.getServiceReference(),
-								'servicename': service.getServiceName() 
-							};
-			
-			
-		}
-		var data = { services : namespace };
-		
-		processTpl('streaminterface/tplServiceList', data, 'channelList');		
-	}
+/*
+* Load List of all Channels with epg now where available
+*/
+function loadVLCChannelList(bouquetreference){
+	doRequest(url_epgnow + bouquetreference, incomingVLCChannelList);
 }
 
 function vlcPlay(){
@@ -209,25 +186,37 @@ function vlcTeletext(){
 	debug("Current Teletext Page:" + vlc.video.teletext);
 }
 
-function setStreamTarget(servicereference){
-	host = top.location.host;
-	
-	url = 'http://'+host+':8001/'+decodeURIComponent(servicereference);
-	debug("setStreamTarget " + url);
-	
-	vlc.playlist.add(url);
-	
-	if(vlc.playlist.isPlaying){
-		vlc.playlist.next();
-	} else {
-		vlc.playlist.play();
-	}
+function playUrl(url){
+	debug("playUrl: " + url + "::" + vlc.playlist.items.count);
+	current = vlc.playlist.add(url);		
+	vlc.playlist.playItem(current);	
 }
 
-function loadBouquets(){
+function setStreamTarget(servicereference){
+	host = top.location.host;	
+	url = 'http://'+host+':8001/'+decodeURIComponent(servicereference);
+	
+	debug("setStreamTarget " + url);
+	vlc.playlist.clear();		
+	playUrl(url);
+}
+
+
+
+function loadVLCBouquets(){
 	url = url_getServices + bouquetsTv;
 	doRequest(url, incomingVLCBouquetList);
 }
+
+/*
+* Event when the user selected a Bouquet in the bouquets <select>
+*/
+function onBouquetSelected(){	
+	var servicereference =$('bouquetSelect').options[$('bouquetSelect').selectedIndex].id;	
+	loadVLCBouquet(servicereference);
+}
+
+
 
 function initWebTv(){
 	if(DBG){
@@ -239,8 +228,8 @@ function initWebTv(){
 	try{
 		set('vlcVolume', vlc.audio.volume);
 	} catch (e){}
-//	vlc.log.verbosity = 0;
-	loadBouquets();
+
+	loadVLCBouquets();
 }
 
 

@@ -61,16 +61,9 @@ var url_powerstate = "/web/powerstate"; // plus new powerstate
 var url_remotecontrol = "/web/remotecontrol"; // plus command
 var url_signal = "/web/signal";
 
-var url_notelist = "/notes";
-var url_note = "/notes?show="; //plus filename
-
 var bouquetsTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
 var bouquetsRadio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';
 var providerTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) FROM PROVIDERS ORDER BY name';
 var providerRadio ='1:7:2:0:0:0:0:0:0:0:(type == 2) FROM PROVIDERS ORDER BY name';
 var allTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25) ORDER BY name';
 var allRadio = '1:7:2:0:0:0:0:0:0:0:(type == 2) ORDER BY name';
-	
-var windowStyle = 'alphacube';
-
-var url_delfile = "/web/delfile?file="; // plus file
