@@ -7,20 +7,16 @@
 import string
 
 from protocols import irc
-#from twisted.words.protocols import irc
-#from twisted.words.im.locals import ONLINE
 from twisted.internet import defer, reactor, protocol
 from twisted.internet.defer import succeed
-#from twisted.words.im import e2support, interfaces, locals
 import e2support, interfaces,dreamIRCTools
 from zope.interface import implements
-
 
 class IRCPerson(e2support.AbstractPerson):
 
     def imperson_whois(self):
         if self.account.client is None:
-            raise locals.OfflineError
+            return 0
         self.account.client.sendLine("WHOIS %s" % self.name)
 
     ### interface impl
@@ -37,7 +33,7 @@ class IRCPerson(e2support.AbstractPerson):
 
     def sendMessage(self, text, meta=None):
         if self.account.client is None:
-            raise locals.OfflineError
+            return 0
         for line in string.split(text, '\n'):
             if meta and meta.get("style", None) == "emote":
                 self.account.client.ctcpMakeQuery(self.name,[('ACTION', line)])
@@ -61,7 +57,7 @@ class IRCGroup(e2support.AbstractGroup):
 
     def imtarget_kick(self, target):
         if self.account.client is None:
-            raise locals.OfflineError
+            return 0
         reason = "... and justice for all!"
         self.account.client.sendLine("KICK #%s %s :%s" % (
             self.name, target.name, reason))
@@ -70,12 +66,12 @@ class IRCGroup(e2support.AbstractGroup):
 
     def setTopic(self, topic):
         if self.account.client is None:
-            raise locals.OfflineError
+            return 0
         self.account.client.topic(self.name, topic)
 
     def sendGroupMessage(self, text, meta={}):
         if self.account.client is None:
-            raise locals.OfflineError
+            return 0
         if meta and meta.get("style", None) == "emote":
             self.account.client.me(self.name,text)
             return succeed(text)
@@ -86,7 +82,7 @@ class IRCGroup(e2support.AbstractGroup):
 
     def leave(self):
         if self.account.client is None:
-            raise locals.OfflineError
+            return 0
         self.account.client.leave(self.name)
         self.account.client.getGroupConversation(self.name,1)
         
@@ -94,7 +90,7 @@ class IRCGroup(e2support.AbstractGroup):
         if self.account.client is None:
             print "not connected"
         else:
-        		self.account.client.quit("user logged off")    	  
+        	self.account.client.quit("user logged off")    	  
 
 
 class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
