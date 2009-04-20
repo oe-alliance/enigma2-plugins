@@ -673,22 +673,17 @@ function sendAddTimer() {
 
 function cleanTimerListNow(){
 	debug("[cleanTimerListNow] called");
-	doRequest(url_timerlist, incomingCleanTimerListNow, false);	
+	result = confirm ("Do you really want to cleanup the List of Timers?");
+	if(result){
+		doRequest(url_timercleanup, incomingCleanTimerListNow, false);
+	}
 }
 
 
 function incomingCleanTimerListNow(request) {
 	if(request.readyState == 4){
-		var timers = new TimerList(getXML(request)).getArray();
-		debug("[cleanTimerListNow] Got "+timers.length+" timer");
-		for ( var i = 0; i <timers.length; i++){
-			var timer = timers[i];
-			debug("[cleanTimerListNow]" + timer.getState() + " " + quotes2html(timer.getName()));
-			if(timer.getState() != "0" && timer.getState() != "2") {
-				delTimer(timer.getServiceReference(),timer.getTimeBegin(),timer.getTimeEnd(),
-					quotes2html(timer.getServiceName()),quotes2html(timer.getName()),quotes2html(timer.getDescription()),incomingJustDoNothing);
-			}
-		}
+		var result = new SimpleXMLResult(getXML(request));
+		notify(result.getStateText(), result.getState());
 		loadTimerList();
 	}
 }

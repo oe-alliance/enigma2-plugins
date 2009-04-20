@@ -18,6 +18,7 @@ class Timer( Source):
 	CHANGE = 5
 	WRITE = 6
 	RECNOW = 7
+	CLEANUP = 8
 
 	def __init__(self, session, func = LIST):
 		self.func = func
@@ -25,33 +26,47 @@ class Timer( Source):
 		self.session = session
 		self.recordtimer = session.nav.RecordTimer
 		self.epgcache = eEPGCache.getInstance()
-		self.result = False,"unknown command"
+		self.result = False, "unknown command"
 
 	def handleCommand(self, cmd):
 		if self.func is self.ADDBYID:
 			self.result = self.addTimerByEventID(cmd)
 			self.writeTimerList()
+			
 		elif self.func is self.ADD:
 			self.result = self.editTimer(cmd)
 			self.writeTimerList()
+			
 		elif self.func is self.TVBROWSER:
 			self.result = self.tvBrowser(cmd)
 			self.writeTimerList()
+			
 		elif self.func is self.DEL:
 			self.result = self.delTimer(cmd)
 			self.writeTimerList()
+			
 		elif self.func is self.CHANGE:
 			self.result = self.editTimer(cmd)
 			self.writeTimerList()
+			
 		elif self.func is self.WRITE:
 			self.result = self.writeTimerList(force=True)
-		elif self.func is self.RECNOW:
-			print "RECNOW"
-			self.result = self.recordNow(cmd)
+			
+		elif self.func is self.RECNOW:			
+			self.result = self.recordNow(cmd)	
+					
+		elif self.func is self.CLEANUP:
+			self.result = self.cleanupTimer()
+					
 		else:
 			self.result = False, "Unknown function: '%s'" %(self.func)
 
-
+	def cleanupTimer(self):
+		print "[WebComponents.Timer] cleanupTimer"
+		
+		self.session.nav.RecordTimer.cleanup()
+		return True, "List of Timers has been cleaned"
+		
 
 	def delTimer(self, param):
 		print "[WebComponents.Timer] delTimer"

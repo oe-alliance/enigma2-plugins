@@ -49,6 +49,7 @@ var url_timerchange= "/web/timerchange"; // plus serviceref,begin,end,name,descr
 var url_timeraddbyeventid= "/web/timeraddbyeventid"; // plus serviceref,eventid
 var url_timerdelete= "/web/timerdelete"; // plus serviceref,begin,end
 var url_timerlistwrite="/web/timerlistwrite?write=saveWriteNow";
+var url_timercleanup="/web/timercleanup?cleanup=true";
 
 var url_getcurrlocation="/web/getcurrlocation";
 var url_getlocations="/web/getlocations";

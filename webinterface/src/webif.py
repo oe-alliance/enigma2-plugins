@@ -186,14 +186,15 @@ class AutoTimerWebScreen(WebScreen):
 class TimerWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		self["TimerList"] = Timer(session,func = Timer.LIST)
-		self["TimerAddEventID"] = Timer(session,func = Timer.ADDBYID)
-		self["TimerAdd"] = Timer(session,func = Timer.ADD)
-		self["TimerDel"] = Timer(session,func = Timer.DEL)
-		self["TimerChange"] = Timer(session,func = Timer.CHANGE)
-		self["TimerListWrite"] = Timer(session,func = Timer.WRITE)
-		self["TVBrowser"] = Timer(session,func = Timer.TVBROWSER)
-		self["RecordNow"] = Timer(session,func = Timer.RECNOW)
+		self["TimerList"] = Timer(session, func = Timer.LIST)
+		self["TimerAddEventID"] = Timer(session, func = Timer.ADDBYID)
+		self["TimerAdd"] = Timer(session, func = Timer.ADD)
+		self["TimerDel"] = Timer(session, func = Timer.DEL)
+		self["TimerChange"] = Timer(session, func = Timer.CHANGE)
+		self["TimerListWrite"] = Timer(session, func = Timer.WRITE)
+		self["TVBrowser"] = Timer(session, func = Timer.TVBROWSER)
+		self["RecordNow"] = Timer(session, func = Timer.RECNOW)
+		self["TimerCleanup"] = Timer(session, func = Timer.CLEANUP)
 
 class RemoteWebScreen(WebScreen):
 	def __init__(self, session, request):
