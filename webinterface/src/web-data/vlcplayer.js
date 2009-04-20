@@ -187,7 +187,6 @@ function vlcTeletext(){
 }
 
 function playUrl(url){
-	debug("playUrl: " + url + "::" + vlc.playlist.items.count);
 	current = vlc.playlist.add(url);		
 	vlc.playlist.playItem(current);	
 }
