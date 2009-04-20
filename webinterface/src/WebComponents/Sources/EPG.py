@@ -80,26 +80,38 @@ class EPG( Source):
 			return events
 		return []
 
-	def getEPGofBouquet(self, bouqetref):
-		print "[WebComponents.EPG] getting EPG for Bouquet", bouqetref
-
+	def getEPGofBouquet(self, param):
+		print "[WebComponents.EPG] getting EPG for Bouquet", param
+		
+		if not param.has_key('bRef'):
+			return []
+		
+		time = -1
+		if param.has_key('time'):
+			if param['time'] is not None:
+				time = int(float(param['time']))
+				if time < 0:
+					time = -1
+				
+		bRef = param['bRef']
+		
 		serviceHandler = eServiceCenter.getInstance()
-		sl = serviceHandler.list(eServiceReference(bouqetref))
+		sl = serviceHandler.list(eServiceReference(bRef))
 		services = sl and sl.getContent('S')
 
-		search = ['IBDTSERN']
-
-		search.extend([(service,0,-1,-1) for service in services])
-
+		search = ['IBDTSERN']		
+		search.extend([(service, 0, time) for service in services])
+		
 		events = self.epgcache.lookupEvent(search)
 
 		if events:
 			return events
 		return []
 
-	def searchEvent(self, cmd):
-		print "[WebComponents.EPG] getting EPG by title",cmd
-		events = self.epgcache.search(('IBDTSERN',256,eEPGCache.PARTIAL_TITLE_SEARCH,cmd,1));
+	def searchEvent(self, needle):
+		print "[WebComponents.EPG] searching EPG: ", needle		
+
+		events = self.epgcache.search(('IBDTSERN',256,eEPGCache.PARTIAL_TITLE_SEARCH,needle,1));
 		if events:
 			return events
 		return []
