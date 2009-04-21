@@ -336,24 +336,25 @@ class IMDB(Screen):
 	def html2utf8(self,in_html):
 		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
 		htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
-
 		entities = htmlentitynamemask.finditer(in_html)
 		entitydict = {}
 
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
-
 		for key, name in entitydict.items():
-			entitydict[key] = htmlentitydefs.name2codepoint[name]
-
+			if key[0:3] == "&#x":
+				try:
+					entitydict[key] = "%d" % int(key[3:5], 16)
+				except:
+					print "[IMDb] html2utf8 entity hex->dec conversion error"
+			else:
+				entitydict[key] = htmlentitydefs.name2codepoint[name]
 		entities = htmlentitynumbermask.finditer(in_html)
 
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
-
 		for key, codepoint in entitydict.items():
 			in_html = in_html.replace(key, (unichr(int(codepoint)).encode('latin-1')))
-
 		self.inhtml = in_html.decode('latin-1').encode('utf8')
 
 	def IMDBquery(self,string):
