@@ -1,12 +1,12 @@
-# Zülfikar VEYİSOĞLU <zveyis@gmail.com>, 2008.
+# Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-07 17:05+0200\n"
-"PO-Revision-Date: 2009-02-17 20:09+0200\n"
-"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
-"Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
+"PO-Revision-Date: 2009-04-20 02:00+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,13 +15,12 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #. TRANSLATORS: this is a help text, keep it short
-#, fuzzy
 msgid "About FritzCall"
-msgstr "FritzCall Kurulumu"
+msgstr "FritzCall Hakkında"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Add entry to phonebook"
-msgstr "Rehbere kayıt ekle"
+msgstr "Rehbere yeni kayit ekle"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "All"
@@ -31,13 +30,13 @@ msgid "All calls"
 msgstr "Tüm aramalar"
 
 msgid "Append shortcut number"
-msgstr "Kısayol tuşu ekle"
+msgstr "Çağrıda kısayol kodunu göster"
 
 msgid "Append type of number"
-msgstr "Numara tipi ekle"
+msgstr "Çağrıda numara tipini göster"
 
 msgid "Append vanity name"
-msgstr "Belirleyici isim ekle"
+msgstr "Çağrıda vanity kodunu göster"
 
 msgid "Areacode to add to Outgoing Calls (if necessary)"
 msgstr "Giden aramalara alan kodu ekle (gerekirse)"
@@ -46,7 +45,7 @@ msgid "Austria"
 msgstr "Avusturya"
 
 msgid "Automatically add new Caller to PhoneBook"
-msgstr "Kayıtsız arayan kişisini rehbere otomatik olarak ekle"
+msgstr "Kayıtsız arayan kişisini, rehbere otomatik olarak ekle"
 
 msgid "CF Drive"
 msgstr "CF Sürücü"
@@ -63,7 +62,7 @@ msgid "Cancel"
 msgstr "Vazgeç"
 
 msgid "Connected to FRITZ!Box!"
-msgstr "Fritz!Box! a bağlanıldı!"
+msgstr "FRITZ!Box'a bağlanıldı!"
 
 #, python-format
 msgid ""
@@ -71,12 +70,12 @@ msgid ""
 " (%s)\n"
 "retrying..."
 msgstr ""
-"Fritz!Box bağlantısı başarısız\n"
+"FRITZ!Box bağlantısı başarısız\n"
 " (%s)\n"
 "yeniden deneniyor..."
 
 msgid "Connecting to FRITZ!Box..."
-msgstr "Fritz!Box'a bağlanılıyor..."
+msgstr "FRITZ!Box'a bağlanılıyor..."
 
 #, python-format
 msgid ""
@@ -84,7 +83,7 @@ msgid ""
 " (%s)\n"
 "retrying..."
 msgstr ""
-"Fritz!Box! bağlantısı kayboldu\n"
+"FRITZ!Box bağlantısı kayboldu\n"
 " (%s)\n"
 "yeniden deneniyor..."
 
@@ -118,7 +117,7 @@ msgid "Dialling failed - Error: %s"
 msgstr "Arama başlatılamadı! - Hata: %s"
 
 msgid "Display FRITZ!box-Fon calls on screen"
-msgstr "FRITZ!box-Fon aramalarını ekranda göster"
+msgstr "FRITZ!Box aramalarını ekranda göster"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Display all calls"
@@ -137,7 +136,7 @@ msgid "Display outgoing calls"
 msgstr "Giden aramaları göster"
 
 msgid "Do what?"
-msgstr "Ne yapılsın?"
+msgstr "Ne yapmak istiyorsunuz?"
 
 #, python-format
 msgid ""
@@ -171,14 +170,14 @@ msgid "Extension number to initiate call on"
 msgstr "Dış hatta ulaşmak için çevrilen numara"
 
 msgid "FRITZ!Box FON address (Name or IP)"
-msgstr "Fritz!Box FON adresi (isim yada IP)"
+msgstr "FRITZ!Box adresi (isim yada IP)"
 
 #, python-format
 msgid "FRITZ!Box Login failed! - Error: %s"
-msgstr "FRITZ!Box Oturumu başlatılamadı! - Hata: %s"
+msgstr "FRITZ!Box oturumu başlatılamadı! - Hata: %s"
 
 msgid "FRITZ!Box Login failed! - Wrong Password!"
-msgstr "FRITZ!Box Oturumu başlatılamadı! - Parola yanlış!"
+msgstr "FRITZ!Box oturumu başlatılamadı! - Parola hatalı!"
 
 msgid "Flash"
 msgstr "Flaş"
@@ -196,7 +195,7 @@ msgid "Germany"
 msgstr "Almanya"
 
 msgid "Getting calls from FRITZ!Box..."
-msgstr "Aramalar FRITZ!Box 'tan alınıyor..."
+msgstr "Aramalar FRITZ!Box'tan alınıyor..."
 
 msgid "Harddisk"
 msgstr "Sabit disk"
@@ -258,13 +257,13 @@ msgid "No entry selected"
 msgstr "Seçim yapılmadı"
 
 msgid "No result from LDIF"
-msgstr ""
+msgstr "LDIF içeriğinde sonuç bulunamadı"
 
 msgid "No result from Outlook export"
-msgstr ""
+msgstr "Outlook adres defterinde sonuç bulunamadı"
 
 msgid "No result from reverse lookup"
-msgstr ""
+msgstr "Hizmet sağlayıcı rehberinde kayıt bulunamadı"
 
 msgid "Number"
 msgstr "Numara"
@@ -297,14 +296,14 @@ msgid "Outgoing calls"
 msgstr "Giden aramalar"
 
 msgid "Password Accessing FRITZ!Box"
-msgstr "FRITZ!Box Parola Erişimi"
+msgstr "FRITZ!Box yönetici parolası"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
-msgstr "Telefon aramaları"
+msgstr "Aramalar"
 
 msgid "PhoneBook Location"
-msgstr "Rehber Konumu"
+msgstr "Rehber konumu"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
@@ -315,13 +314,13 @@ msgid "Quit"
 msgstr "Çık"
 
 msgid "Read PhoneBook from FRITZ!Box"
-msgstr "FRITZ!Box Rehberini Oku"
+msgstr "FRITZ!Box telefon rehberini oku"
 
 msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Caller ID'yi hizmet sağlayıcıdan sorgula (aşağıdan ülke seçin)"
+msgstr "Arayan kimliğini hizmet sağlayıcıdan sorgula (ülke seçin)"
 
 msgid "Reverse searching..."
-msgstr ""
+msgstr "Hizmet sağlayıcı rehberi aranıyor..."
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Save"
@@ -339,10 +338,10 @@ msgid "Search phonebook"
 msgstr "Rehberde ara"
 
 msgid "Searching in LDIF..."
-msgstr ""
+msgstr "LDIF dosyası içinde aranıyor..."
 
 msgid "Searching in Outlook export..."
-msgstr ""
+msgstr "Outlook adres defteri içinde aranıyor..."
 
 msgid "Shortcut"
 msgstr "Kısayol"
@@ -351,14 +350,14 @@ msgid "Show Calls for specific MSN"
 msgstr "Belirlenen MSN aramalarını göster"
 
 msgid "Show Outgoing Calls"
-msgstr "Giden Aramaları Göster"
+msgstr "Giden aramalarda göster"
 
 msgid "Show after Standby"
-msgstr "Uyku kipine geçtikten sonra göster"
+msgstr "Hazırda bekletme kipine geçtikten sonra"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Show details of entry"
-msgstr "Seçimin detaylarını göster"
+msgstr "Kaydın detaylarını göster"
 
 msgid "Strip Leading 0"
 msgstr "Öndeki 0'ı ayır"
@@ -379,14 +378,13 @@ msgid "USB Stick"
 msgstr "USB Bellek"
 
 msgid "Use internal PhoneBook"
-msgstr "Dahili Rehberi Kullan"
+msgstr "FRITZ!Box rehberini kullan"
 
 msgid "Vanity"
-msgstr "Belirleyici isim"
+msgstr "Vanity"
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr ""
-"FRITZ!Box'ta görüntülemeyi etkinleştirmek için #96*5* 'u aramanız gerekiyor!"
+msgstr "FRITZ!Box'ta çağrı görüntülemeyi etkinleştirmek için #96*5* 'ı aramalısınız!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
@@ -420,7 +418,7 @@ msgid "home"
 msgstr "ev"
 
 msgid "login"
-msgstr "oturum aç"
+msgstr "oturum açılıyor"
 
 msgid "login ok"
 msgstr "oturum açıldı"
@@ -429,7 +427,7 @@ msgid "login verification"
 msgstr "oturum doğrulama"
 
 msgid "mobile"
-msgstr "mobil"
+msgstr "cep"
 
 msgid "preparing"
 msgstr "hazırlanıyor"
@@ -455,31 +453,6 @@ msgid "work"
 msgstr "iş"
 
 #~ msgid ""
-#~ "Call\n"
-#~ "\n"
-#~ "%s(number)\n"
-#~ "\n"
-#~ "%s(name)?"
-#~ msgstr ""
-#~ "%s(number)\n"
-#~ "\n"
-#~ "%s(name)\n"
-#~ "\n"
-#~ "aransın mı?"
-
-#~ msgid "Can't create PhoneBook.txt"
-#~ msgstr "PhoneBook.txt oluşturulamıyor"
-
-#~ msgid ""
-#~ "Corrupt phonebook entry\n"
-#~ "for number %d\n"
-#~ "Deleting."
-#~ msgstr ""
-#~ "%d numaralı\n"
-#~ "bozuk rehber kaydı\n"
-#~ "siliniyor."
-
-#~ msgid ""
 #~ "Do you really want to overwrite entry for %(number)s\n"
 #~ "\n"
 #~ "%(name)s\n"
@@ -495,7 +468,26 @@ msgstr "iş"
 #~ "%(newname)s olarak\n"
 #~ "\n"
 #~ "değiştirmek istiyor musunuz?"
-
+#~ msgid ""
+#~ "Corrupt phonebook entry\n"
+#~ "for number %d\n"
+#~ "Deleting."
+#~ msgstr ""
+#~ "%d numaralı\n"
+#~ "bozuk rehber kaydı\n"
+#~ "siliniyor."
+#~ msgid ""
+#~ "Call\n"
+#~ "\n"
+#~ "%s(number)\n"
+#~ "\n"
+#~ "%s(name)?"
+#~ msgstr ""
+#~ "%s(number)\n"
+#~ "\n"
+#~ "%s(name)\n"
+#~ "\n"
+#~ "aransın mı?"
 #~ msgid ""
 #~ "Do you want to add a phonebook entry\n"
 #~ "\n"
@@ -512,7 +504,6 @@ msgstr "iş"
 #~ "olarak\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
-
 #~ msgid ""
 #~ "Do you want to add a phonebook entry for\n"
 #~ "\n"
@@ -521,6 +512,14 @@ msgstr "iş"
 #~ "%s kaydını\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
+#~ msgid "Reverse lookup for "
+#~ msgstr "Hizmet sağlayıcıdan isim sorgula : "
+#~ msgid "Reverse lookup not successful"
+#~ msgstr "İsim sorgulama başarısız"
+#~ msgid "Reverse lookup successful"
+#~ msgstr "İsim sorgulama başarılı"
+#~ msgid "Can't create PhoneBook.txt"
+#~ msgstr "PhoneBook.txt oluşturulamıyor"
 
 #, fuzzy
 #~ msgid ""
@@ -531,15 +530,6 @@ msgstr "iş"
 #~ "%s kaydını\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
-
 #~ msgid "Edit phonebook entry"
 #~ msgstr "Rehber kaydını düzelt"
 
-#~ msgid "Reverse lookup for "
-#~ msgstr "Hizmet sağlayıcıdan isim sorgula : "
-
-#~ msgid "Reverse lookup not successful"
-#~ msgstr "İsim sorgulama başarısız"
-
-#~ msgid "Reverse lookup successful"
-#~ msgstr "İsim sorgulama başarılı"
