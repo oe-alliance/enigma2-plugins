@@ -335,22 +335,26 @@ class IMDB(Screen):
 
 	def html2utf8(self,in_html):
 		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
-		htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
-		entities = htmlentitynamemask.finditer(in_html)
+		htmlentityhexmask = re.compile('(&#x([0-9A-Fa-f]{2,2}?);)')
+		htmlentitynamemask = re.compile('(&([^#]\D{1,5}?);)')
 		entitydict = {}
+		entityhexdict = {}
+		entities = htmlentitynamemask.finditer(in_html)
 
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
 		for key, name in entitydict.items():
-			if key[0:3] == "&#x":
-				try:
-					entitydict[key] = "%d" % int(key[3:5], 16)
-				except:
-					print "[IMDb] html2utf8 entity hex->dec conversion error"
-			else:
-				entitydict[key] = htmlentitydefs.name2codepoint[name]
-		entities = htmlentitynumbermask.finditer(in_html)
+			entitydict[key] = htmlentitydefs.name2codepoint[name]
+		entities = htmlentityhexmask.finditer(in_html)
 
+		for x in entities:
+			entityhexdict[x.group(1)] = x.group(2)
+
+		for key, name in entityhexdict.items():
+			entitydict[key] = "%d" % int(key[3:5], 16)
+			print "key:", key, "before:", name, "after:", entitydict[key]
+		
+		entities = htmlentitynumbermask.finditer(in_html)
 		for x in entities:
 			entitydict[x.group(1)] = x.group(2)
 		for key, codepoint in entitydict.items():
