@@ -23,7 +23,6 @@ from twisted.internet import protocol
 from twisted.python import log
 from twisted.internet.defer import *
 
-#import e2chat, e2account, e2support, dreamIRCTools, dreamIRCSetup
 from e2chat import *
 from e2account import *
 from e2support import *
@@ -31,8 +30,6 @@ from dreamIRCTools import *
 from dreamIRCSetup import *
 from protocols import irc
 import ircsupport
-
-#from enigma import eLabel, eWidget, eSlider, fontRenderClass, ePoint, eSize, getDesktop
 
 import os 
 import string
@@ -122,8 +119,6 @@ class dreamIRCMainMenu(Screen):
 		self["yellow.pic"] = Pixmap()
 		self["blue.pic"] = Pixmap()
 		
-		self.checkStatus()
-		
 		self["actions"] = NumberActionMap(["dreamIRCActions", "InputBoxActions", "InputAsciiActions", "KeyboardInputActions"],
 		{
 			"gotAsciiCode": self.gotAsciiCode,
@@ -159,6 +154,8 @@ class dreamIRCMainMenu(Screen):
 		}, -1)
 		rcinput = eRCInput.getInstance()
 		rcinput.setKeyboardMode(rcinput.kmAscii)
+		
+		self.checkStatus()
 
 	def gotAsciiCode(self):
 		self["input"].handleAscii(getPrevAsciiCode())
@@ -231,31 +228,34 @@ class dreamIRCMainMenu(Screen):
 
 	def checkStatus(self):
 		status = self.account.getConnectionInfo()
-		if status[0]==1:
+		if status[0]==1 or len(self["buddy"].getText())>1:
 			self["disconnect.desc"].show()
 			self["red.pic"].show()
+			status[0]=1
 		elif status[0]==0:
 			self["disconnect.desc"].hide()
 			self["red.pic"].hide()
 		return status[0]
 	
 	def bluePressed(self):
+		self.checkStatus()
 		self.session.openWithCallback(self.VirtualKeyBoardTextEntry, VirtualKeyBoard, title = (_("Enter your text here:")), text = "")
 
 		
 	def yellowPressed(self):
+		self.checkStatus()
 		self.session.openWithCallback(self.resetKeyboard,dreamIRCSetupScreen)
 		
 	def resetKeyboard(self):
 		rcinput = eRCInput.getInstance()
 		rcinput.setKeyboardMode(rcinput.kmAscii)
 		
-
 	def go(self):
-		print " TEXT = %s   - laenge = %d  !!!!" % (self["input"].getText(),len(self["input"].getText()))
-		if (len(self["input"].getText()) >= 1):
-			self.pipe.addOutText(self["input"].getText())
-			self.clearInput()
+		if self.checkStatus()==1:
+			print " TEXT = %s   - laenge = %d  !!!!" % (self["input"].getText(),len(self["input"].getText()))
+			if (len(self["input"].getText()) >= 1):
+				self.pipe.addOutText(self["input"].getText())
+				self.clearInput()
 			
 	def clearInput(self):
 		self["input"].setText("")
