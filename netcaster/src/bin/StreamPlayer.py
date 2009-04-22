@@ -1,6 +1,5 @@
 from enigma import eServiceReference
-import os
-import sys
+from sys import exc_info
 
 class StreamPlayer:
     is_playing = False
@@ -29,7 +28,7 @@ class StreamPlayer:
             self.session.nav.playService(esref)
             self.is_playing = True
         except:
-            print "[NETcaster] Failed to start: %s: %s" % sys.exc_info()[:2]
+            print "[NETcaster] Failed to start: %s: %s" % exc_info()[:2]
 
     def stop(self,text=""):
         if self.is_playing:
