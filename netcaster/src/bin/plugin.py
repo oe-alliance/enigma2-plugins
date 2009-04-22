@@ -137,7 +137,6 @@ class NETcasterScreenBrowser(Screen):
         global streamplayer
         if self["streamlist"].l.getCurrentSelection() is not None:
             stream = self["streamlist"].l.getCurrentSelection()[0]
-            print "[",myname,"] stream_start",stream.getURL()
             streamplayer.play(stream)
             self["pixred"].setText(_("Stop"))
             self.setTitle("%s"%(stream.getName()))

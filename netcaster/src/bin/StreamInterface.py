@@ -1,4 +1,4 @@
-from urllib import urlopen
+from twisted.web.client import getPage
 
 valid_types = ("MP3","PLS") #list of playable mediatypes
 
@@ -44,32 +44,34 @@ class Stream:
         self.description = description
     def setURL(self,url):
         self.url = url
-    def getURL(self):
+    def getURL(self, callback):
+    	self.callback = callback
         if self.type.lower() == "pls":
-            return self.getPLSContent()
+            return self.getPLSContent(callback)
         else:
-            return self.url
+            callback(self.url)
 
     def getPLSContent(self):
         print "loading PLS of stream ",self.name,self.url
-        url = None
-        try:
-            fp = urlopen(self.url)
-            lines = fp.read(1024)
-            fp.close()
-            if lines.startswith("ICY "):
-                print "PLS expected, but got ICY stream"
-                url = self.url
-                self.type = "mp3"
-            else:
-                for line in lines.split('\n'):
-                    if line.startswith("File"):
-                        url = line.split("=")[1].rstrip().strip()
-                        break
-                    print "Skipping:", line
-        except Exception, e:
-            print "Error while loading PLS of stream ",self.getName(),"! ",e
-        return url
+    	getPage(self.url).addCallback(self._gotPLSContent).addErrback(self._errorPLSContent)
+    
+    def _gotPLSContent(self, lines):
+		if lines.startswith("ICY "):
+			print "PLS expected, but got ICY stream"			
+			self.type = "mp3"
+			self.callback(self.url)
+			
+		else:
+			for line in lines.split('\n'):
+			    if line.startswith("File"):
+			        url = line.split("=")[1].rstrip().strip()			        
+			        self.callback(url)
+			        break
+			    print "Skipping:", line
+			    
+    def _errorPLSContent(self, data, callback):
+    	callback(None)
+    		
         
     def setFavorite(self,TrueFalse):
         self.isfavorite = TrueFalse
