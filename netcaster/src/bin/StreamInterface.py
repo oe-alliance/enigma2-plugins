@@ -6,27 +6,27 @@ class StreamInterface:
     def __init__(self,session,cbListLoaded=None):
         self.session = session
         self.cbListLoaded = cbListLoaded
-        
+
         self.list= [] # contains the streams in this iface
-        
+
     def getList(self):
         #loads a list auf Streams into self.list
         pass
-    
+
     def getMenuItems(self,selectedStream,generic=False):
         # this return a list of MenuEntries of actions of this iterface
         # list=(("item1",func1),("item2",func2), ... )
         #
-        # generic=True indicates, that items of the returned list are services 
+        # generic=True indicates, that items of the returned list are services
         # in any context (like saving a stream to the favorites)
         return []
-    
+
     def OnListLoaded(self):
         # called from the interface, if list was loaded
         if self.cbListLoaded is not None:
             self.cbListLoaded(self.list)
-    
-############################################################################### 
+
+###############################################################################
 class Stream:
     isfavorite = False
     def __init__(self,name,description,url,type="mp3"):
@@ -47,32 +47,32 @@ class Stream:
     def getURL(self, callback):
     	self.callback = callback
         if self.type.lower() == "pls":
-            return self.getPLSContent(callback)
+            return self.getPLSContent()
         else:
             callback(self.url)
 
     def getPLSContent(self):
         print "loading PLS of stream ",self.name,self.url
     	getPage(self.url).addCallback(self._gotPLSContent).addErrback(self._errorPLSContent)
-    
+
     def _gotPLSContent(self, lines):
 		if lines.startswith("ICY "):
-			print "PLS expected, but got ICY stream"			
+			print "PLS expected, but got ICY stream"
 			self.type = "mp3"
 			self.callback(self.url)
-			
+
 		else:
 			for line in lines.split('\n'):
 			    if line.startswith("File"):
-			        url = line.split("=")[1].rstrip().strip()			        
+			        url = line.split("=")[1].rstrip().strip()
 			        self.callback(url)
 			        break
 			    print "Skipping:", line
-			    
+
     def _errorPLSContent(self, data, callback):
     	callback(None)
-    		
-        
+
+
     def setFavorite(self,TrueFalse):
         self.isfavorite = TrueFalse
     def isFavorite(self):
