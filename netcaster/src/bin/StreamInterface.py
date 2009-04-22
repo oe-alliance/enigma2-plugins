@@ -47,9 +47,9 @@ class Stream:
     def getURL(self, callback):
     	self.callback = callback
         if self.type.lower() == "pls":
-            return self.getPLSContent()
+        	self.getPLSContent()
         else:
-            callback(self.url)
+            self.callback(self.url)
 
     def getPLSContent(self):
         print "loading PLS of stream ",self.name,self.url
