@@ -8,10 +8,9 @@ class Interface(StreamInterface):
     description = "This is a Plugin to browse www.shoutcast.com and listen to webradios listed there."
     def __init__(self,session,cbListLoaded=None):
         StreamInterface.__init__(self,session,cbListLoaded=cbListLoaded)
-        self.genrefeed= GenreFeed()
+        self.genrefeed = GenreFeed()
     
     def getList(self):
-        
         glist=[]
         #self.genrefeed.fetch_genres()
         self.genrefeed.parse_genres()
@@ -26,17 +25,10 @@ class Interface(StreamInterface):
             feed.parse_stations()
             self.list=[]
             for station in feed.station_list:
-                print station
                 stream = Stream(str(station['Name']),"Bitrate: "+str(station['Bitrate'])+", Type: "+str(station['MimeType']),str(station['PLS_URL']),type="pls")
                 self.list.append(stream)
         self.OnListLoaded()
 
-
-    
-###################################################
-# API following
-####################################################
-####################################################
 ####################################################
 # feeds.py - Gets the current listings of Shoutcast stations
 # $Id$
@@ -62,7 +54,7 @@ from xml.sax import parseString
 from xml.sax.handler import ContentHandler
 from os import stat, mkdir
 from os.path import dirname,isdir
-from time import time
+import time
 from stat import ST_MTIME
 
 tmpxml='shout.xml'
@@ -81,19 +73,15 @@ def write_cache(cache_file, cache_data):
     dump(cache_data, fd, -1)
     fd.close()
 
-def valid_cache(cache_file, cache_ttl):
+def cacheTime(cache_file):
     """
-    See if the cache file exists and is still living
+    Returns None if no cache file, its MTIME otherwise
     """
     try:
         mtime = stat(cache_file)[ST_MTIME]
     except:
-        return 0
-    curr_time = time()
-    if (curr_time - mtime) > cache_ttl:
-        return 0
-    else:
-        return 1
+        return None
+    return mtime
 
 def load_cache(cache_file):
     """
@@ -177,6 +165,7 @@ class GenreFeed:
     def __init__(self, cache_ttl=3600, cache_dir = '/tmp/pyshout_cache'):
         self.cache_ttl = cache_ttl
         self.cache_file = cache_dir + '/genres.cache'
+	self.genre_list = ['Sorry, failed to load', '...try again later', 'Rock', 'Pop', 'Alternative']
     def fetch_genres(self):
         """
         Grabs genres and returns tuple of genres
@@ -189,23 +178,24 @@ class GenreFeed:
         return self.genre
 
     def parse_genres(self):
-        self.inv_cache = 0
-        self.vc = valid_cache(self.cache_file, self.cache_ttl)
-        if self.cache_ttl > 0 and self.vc != 0:
-            if DEBUG == 1:
-                print 'Loading cache from ',self.cache_file
+        ct = None
+        if self.cache_ttl:
+            ct = cacheTime(self.cache_file)
             try:
                 self.genre_list = load_cache(self.cache_file)
             except:
-                self.inv_cache = 1
-        if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
+                ct = None
+        if not ct or (time.time() - ct) > self.cache_ttl:
             if DEBUG == 1:
                 print 'Getting fresh feed'
-            parseXML = GenreParse()
-            self.genres = self.fetch_genres()
-            parseString( self.genres, parseXML )
-            self.genre_list = parseXML.genreList
-            write_cache(self.cache_file, self.genre_list)
+            try:
+	        parseXML = GenreParse()
+	        self.genres = self.fetch_genres()
+	        parseString( self.genres, parseXML )
+	        self.genre_list = parseXML.genreList
+	        write_cache(self.cache_file, self.genre_list)
+	    except:
+	    	print "Failed to get genres from server, sorry."
         return self.genre_list
 
 class ShoutcastFeed:
@@ -235,21 +225,21 @@ class ShoutcastFeed:
         return self.stations
 
     def parse_stations(self):
-        self.inv_cache = 0
-        self.vc = valid_cache(self.cache_file, self.cache_ttl)
-        if self.cache_ttl > 0 and self.vc != 0:
-            if DEBUG == 1:
-                print 'Loading cache from ', self.cache_file
+    	ct = None
+    	if self.cache_ttl:
+            ct = cacheTime(self.cache_file)
+        if ct:
             try:
                 self.station_list = load_cache(self.cache_file)
             except:
-                self.inv_cache = 1
-        if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
-            if DEBUG == 1:
-                print 'Getting fresh feed'
-            parseXML = StationParser(self.min_bitrate)
-            self.stations = self.fetch_stations()
-            parseString(self.stations, parseXML)
-            self.station_list = parseXML.station_list
-            write_cache(self.cache_file, self.station_list)
+            	print "Failed to load cache."
+        if not ct or (time.time() - ct) > self.cache_ttl:
+            try:
+                parseXML = StationParser(self.min_bitrate)
+                self.stations = self.fetch_stations()
+                parseString(self.stations, parseXML)
+                self.station_list = parseXML.station_list
+                write_cache(self.cache_file, self.station_list)
+            except:
+            	print "Failed to get a new station list, sorry."
         return self.station_list

@@ -27,29 +27,33 @@ def main(session,**kwargs):
     session.open(NETcasterScreenBrowser)
     global streamplayer
     streamplayer = StreamPlayer(session)
-        
+ 
 def Plugins(path,**kwargs):
     global plugin_path
     plugin_path = path
     return PluginDescriptor(
         name=myname, 
         description="play Network and Internet Streams", 
-        where = PluginDescriptor.WHERE_PLUGINMENU,
+        where = PluginDescriptor.WHERE_EXTENSIONSMENU,
         icon = "NETcaster.png",
         fnc = main
         )
-               
+        
 ############################################################################### 
 class NETcasterScreenBrowser(Screen):
     skin = """
-        <screen position="110,73" size="530,430" title="SHOUTcaster" >
-            <widget name="streamlist" position="0,0" size="530,400" scrollbarMode="showOnDemand" />            
-            <widget name="pixred" position="20,400" size="100,30" backgroundColor=\"red\" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
-            <widget name="pixgreen" position="140,400" size="100,30" backgroundColor=\"green\" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\"/>            
-            <widget name="pixyellow" position="260,400" size="100,30" backgroundColor=\"yellow\" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />            
-            <widget name="pixblue" position="380,400" size="100,30" backgroundColor=\"blue\" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />            
+        <screen position="80,73" size="560,440" title="SHOUTcaster" >
+		<widget name="streamlist" position="0,0" size="560,400" scrollbarMode="showOnDemand" />            
+		<ePixmap name="red"    position="0,400"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap name="green"  position="140,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap name="yellow" position="280,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap name="blue"   position="420,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget name="pixred"	 position="0,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />          
+		<widget name="pixgreen"	 position="140,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21"/>            
+		<widget name="pixyellow" position="280,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />            
+		<widget name="pixblue"	 position="420,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />            
         </screen>"""
-         
+  
     streamlist = []
     currentPlugin = None
     def __init__(self, session, args = 0):
@@ -57,70 +61,90 @@ class NETcasterScreenBrowser(Screen):
         self.session = session
         Screen.__init__(self, session)
         self["streamlist"] = StreamMenu([])
-        self["pixred"] = Label("play")
-        self["pixgreen"] = Label("%")
-        self["pixyellow"] = Label("%")
-        self["pixblue"] = Label("select")
+        self["pixred"] = Label("")
+        self["pixgreen"] = Label(_("Play"))
+        self["pixyellow"] = Label("")
+        self["pixblue"] = Label(_("Select"))
         self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions","ShortcutActions","GlobalActions","HelpActions"], 
             {
              "ok": self.ok,
              "back": self.exit,
-             "red": self.stream_startstop,
+             "red": self.stream_stop,
+             "green": self.stream_start,
+             "yellow": self.yellow,
              "blue": self.selectPlugin,
              "menu": self.showMainMenu,
+             "info": self.showAbout,
              "displayHelp": self.showHelp,
              }, -1)
         
         self.onClose.append(self.exit)
         self.getInterfaceList()
-        
+        for plugin in self.pluginlist:
+            if plugin.nameshort == "Favorites":
+                self.setCurrentPlugin(plugin)
+        self.onShown.append(self.updateTitle)
+
     def getInterfaceList(self):
         self.pluginlist = []
         global plugin_path,myname
         interfacepath = plugin_path+"/interface"
         for iface in os_listdir(interfacepath):
-            if iface.endswith(".py") and iface != "__init__.py":
+            if iface.endswith(".py") and not iface.startswith("_"):
                 pluginp = '.'.join(["Plugins", "Extensions", myname, "interface",iface.replace(".py","")])
                 plugin = my_import(pluginp)
                 self.pluginlist.append(plugin.Interface(self.session,cbListLoaded=self.onStreamlistLoaded))
-    
+
+    def updateTitle(self):
+        self.setTitle("%s (%s)"%(myname,self.currentPlugin.nameshort))
+
     def selectPlugin(self):
         glist=[]
         for i in self.pluginlist:
             glist.append((i.name,i))
         self.session.openWithCallback(self.selectedPlugin,ChoiceBox,_("select Plugin"),glist)
-    
+
     def selectedPlugin(self,splugin):
         if splugin is not None:
-            self.currentPlugin = splugin[1]
-            self.currentPlugin.getList()
-            self.setTitle("%s (%s)"%(myname,self.currentPlugin.nameshort))
-        
+            self.setCurrentPlugin(splugin[1])
+            self.updateTitle()
+
+    def setCurrentPlugin(self, plugin):
+        self.currentPlugin = plugin
+        plugin.getList()
+
     def ok(self):
         if self.shown is False:
             self.show()
-            
+
     def exit(self):
         global streamplayer 
         streamplayer.exit()       
         self.close()
-    
-    def stream_startstop(self):
+
+    def yellow(self):
+        pass
+
+    def stream_stop(self):
         global streamplayer
         if streamplayer.is_playing:
             print "[",myname,"] stream_startstop -> stop"
             streamplayer.stop()
-            self["pixred"].setText("start")
-        else:
-            if self["streamlist"].l.getCurrentSelection() is not None:
-                stream = self["streamlist"].l.getCurrentSelection()[0]
-                print "[",myname,"] stream_startstop ->start",stream.getURL()
-                streamplayer.play(stream)
-                self["pixred"].setText("stop")
+            self["pixred"].setText("")
+            self.setTitle("%s (%s)"%(myname,self.currentPlugin.nameshort))
+
+    def stream_start(self):
+        global streamplayer
+        if self["streamlist"].l.getCurrentSelection() is not None:
+            stream = self["streamlist"].l.getCurrentSelection()[0]
+            print "[",myname,"] stream_start",stream.getURL()
+            streamplayer.play(stream)
+            self["pixred"].setText(_("Stop"))
+            self.setTitle("%s"%(stream.getName()))
 
     def onStreamlistLoaded(self,list):
        self["streamlist"].buildList(list)
-    
+
     def showMainMenu(self):
         menu = []
         if self["streamlist"].l.getCurrentSelection() is not None:
@@ -131,30 +155,30 @@ class NETcasterScreenBrowser(Screen):
         for p in self.pluginlist:
             for i in p.getMenuItems(selectedStream,generic=True):
                 menu.append((i[0],i[1]))
-            
+
         # non generic menuitems
         if self.currentPlugin is not None:
             for i in self.currentPlugin.getMenuItems(selectedStream):
                 menu.append((i[0],i[1]))
-        
+
         # std menuitems    
         menu.append((_("hide"), self.hide))
         menu.append((_("info"), self.showAbout));
         menu.append((_("help"), self.showHelp));
         self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Menu"), list=menu)
-        
+
     def menuCallback(self,choice):
         if choice is not None:
             choice[1]()
 
     def showAbout(self):
-        self.session.open(MessageBox,_("%s Enigma2 Plugin V%s" % (myname,myversion)), MessageBox.TYPE_INFO)
+        self.session.open(MessageBox,_("%s Enigma2 Plugin V%s (Patched)" % (myname,myversion)), MessageBox.TYPE_INFO)
 
     def showHelp(self):
         self.session.open(NETcasterScreenHelp)
-            
-        
-        
+
+
+
 ############################################################################### 
 class NETcasterScreenHelp(Screen):
     skin = """

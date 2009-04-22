@@ -55,14 +55,19 @@ class Stream:
         url = None
         try:
             fp = urlopen(self.url)
-            plslines = fp.read()
+            lines = fp.read(1024)
             fp.close()
-            print plslines
-            plslines = plslines.split("\n")
-            for line in plslines:
-                if line.startswith("File"):
-                    url = line.split("=")[1].rstrip().strip()              
-        except IOError,e:
+            if lines.startswith("ICY "):
+                print "PLS expected, but got ICY stream"
+                url = self.url
+                self.type = "mp3"
+            else:
+                for line in lines.split('\n'):
+                    if line.startswith("File"):
+                        url = line.split("=")[1].rstrip().strip()
+                        break
+                    print "Skipping:", line
+        except Exception, e:
             print "Error while loading PLS of stream ",self.getName(),"! ",e
         return url
         
@@ -74,4 +79,4 @@ class Stream:
         self.type=type
     def getType(self):
         return self.type
-    
+
