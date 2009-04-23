@@ -40,8 +40,7 @@ class LocationsAndTags(Source):
 		return tags
 
 	def getText(self):
-		self.handleCommand(None)
-		print self.result
+		self.handleCommand(None)		
 		lst = self.result
 		xml = "<e2simplexmllist>\n"
 		if self.result:
@@ -50,4 +49,13 @@ class LocationsAndTags(Source):
 		xml += "</e2simplexmllist>\n"
 		return xml
 
+	def getList(self):
+		self.handleCommand(None)
+		list = self.result
+		if list is None:
+			list = []
+		
+		return list
+
 	text = property(getText)
+	list = property(getList)

@@ -419,6 +419,51 @@ class JavascriptUpdate(Converter):
 		#		 all other will replace this in JS
 		return '<script>parent.set("%s", "%s");</script>\n'%(id, self.source.text.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"').replace('\xb0', '&deg;'))
 
+# the performant 'one-dimensonial listfiller' engine (podlfe)
+class SimpleListFiller(Converter):
+	def __init__(self, arg):
+		Converter.__init__(self, arg)
+		
+	def getText(self):
+		l = self.source.list
+		conv_args = self.converter_arguments
+		print "[webif.py] conv_args: " %conv_args
+		
+		list = [ ]
+		for element in conv_args:
+			if isinstance(element, basestring):
+				list.append((element, None))
+			elif isinstance(element, ListItem):
+				list.append((element, element.filternum))
+			elif isinstance(element, ListMacroItem):
+				list.append(element.macrodict[element.macroname], None)
+			else:
+				raise Exception("neither string, ListItem nor ListMacroItem")
+			
+		strlist = [ ]
+		append = strlist.append
+		for item in l:
+			for (element, filternum) in list:
+				if not filternum:
+					append(element)
+				elif filternum == 2:
+					append(str(item).replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
+				elif filternum == 3:
+					append(escape_xml(str(item)))
+				elif filternum == 4:
+					append(str(item).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
+				elif filternum == 5:
+					append(quote(str(item)))
+				else:
+					append(str(item))
+		# (this will be done in c++ later!)
+
+		return ''.join(strlist)
+
+	text = property(getText)
+		
+				
+
 # the performant 'listfiller'-engine (plfe)
 class ListFiller(Converter):
 	def __init__(self, arg):
