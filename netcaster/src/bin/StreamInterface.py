@@ -43,7 +43,9 @@ class LimitedHTTPClientFactory(HTTPClientFactory):
 		self.buf += d
 
 	def pageEnd(self):
-		self.deferred.callback(self.buf)
+		if self.waiting:
+			self.waiting = 0
+			self.deferred.callback(self.buf)
 
 class StreamInterface:
     def __init__(self,session,cbListLoaded=None):
