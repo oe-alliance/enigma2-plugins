@@ -1,6 +1,49 @@
-from twisted.web.client import getPage
+from twisted.web.client import HTTPClientFactory, HTTPPageDownloader, _parse
 
 valid_types = ("MP3","PLS") #list of playable mediatypes
+
+def getPage(url, contextFactory=None, *args, **kwargs):
+	scheme, host, port, path = _parse(url)
+	factory = LimitedHTTPClientFactory(url, *args, **kwargs)
+	if scheme == 'https':
+		from twisted.internet import ssl 
+		if contextFactory is None:
+			contextFactory = ssl.ClientContextFactory()
+		reactor.connectSSL(host, port, factory, contextFactory)
+	else:
+		reactor.connectTCP(host, port, factory)
+	return factory.deferred
+
+class LimitedHTTPClientFactory(HTTPClientFactory):
+
+	LIMIT = 1024
+
+	protocol = HTTPPageDownloader
+
+	def __init__(self, *args, **kwargs):
+		HTTPClientFactory.__init__(self, *args, **kwargs)
+		self.curlength = 0
+		self.buf = ""
+
+	def buildProtocol(self, addr):
+		self.p = HTTPClientFactory.buildProtocol(self, addr)
+		return self.p
+
+	def pageStart(self, p):
+		pass
+
+	def pagePart(self, d):
+		if self.status == '200':
+			self.curlength += len(d)
+			if self.curlength >= self.LIMIT:
+				print "[LimitedHTTPClientFactory] reached limit"
+				# XXX: timing out here is pretty hackish imo
+				self.p.timeout()
+				return
+		self.buf += d
+
+	def pageEnd(self):
+		self.deferred.callback(self.buf)
 
 class StreamInterface:
     def __init__(self,session,cbListLoaded=None):
