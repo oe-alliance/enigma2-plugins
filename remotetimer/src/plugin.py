@@ -13,14 +13,15 @@
 # License: GPL
 #
 # $Id$
-#
 #===============================================================================
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 
-from Components.ActionMap import NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.Button import Button
+from Components.Label import Label
+from Components.TimerList import TimerList
 
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import getConfigListEntry, config, \
@@ -29,15 +30,14 @@ from Components.config import getConfigListEntry, config, \
 
 from Screens.TimerEntry import TimerEntry
 from Screens.MessageBox import MessageBox
-from Screens.MovieSelection import getPreferredTagEditor
 from RecordTimer import AFTEREVENT
+
 from enigma import eEPGCache
 
 from Tools.BoundFunction import boundFunction
 
-import time
-from twisted.web.client import getPage 
-from xml.dom.minidom import parseString
+from twisted.web.client import getPage
+from xml.etree.cElementTree import fromstring as cElementTree_fromstring
 from base64 import encodestring
 
 import urllib
@@ -46,41 +46,182 @@ import urllib
 config.plugins.remoteTimer = ConfigSubsection()
 config.plugins.remoteTimer.httphost = ConfigText(default = "" , fixed_size = False)
 config.plugins.remoteTimer.httpip = ConfigIP(default = [0, 0, 0, 0])
-config.plugins.remoteTimer.httpport = ConfigNumber(default = "0")
+config.plugins.remoteTimer.httpport = ConfigNumber(default = 80)
 config.plugins.remoteTimer.username = ConfigText(default = "root", fixed_size = False)
 config.plugins.remoteTimer.password = ConfigPassword(default = "", fixed_size = False)
 
+def localGetPage(url):
+	username = config.plugins.remoteTimer.username.value
+	password = config.plugins.remoteTimer.password.value
+	if username and password:
+		basicAuth = encodestring(username + ':' + password)
+		authHeader = "Basic " + basicAuth.strip()
+		headers = {"Authorization": authHeader}
+	else:
+		headers = {}
+
+	return getPage(url, headers = headers)
+
+class RemoteService:
+	def __init__(self, sref, sname):
+		self.sref = sref
+		self.sname = sname
+
+	getServiceName = lambda self: self.sname
+
+class RemoteTimerScreen(Screen):
+	skin = """
+		<screen position="60,80" size="585,410" title="Remote-Timer digest" >
+			<widget name="text" position="0,10" zPosition="1" size="585,20" font="Regular;20" halign="center" valign="center" />
+			<widget name="timerlist" position="5,40" size="560,275" scrollbarMode="showOnDemand" />
+			<ePixmap name="red" position="5,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<widget name="key_red" position="5,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<ePixmap name="green" position="150,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<widget name="key_green" position="150,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<ePixmap name="yellow" position="295,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<widget name="key_yellow" position="295,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<ePixmap name="blue" position="440,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget name="key_blue" position="440,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+
+		# XXX: any reason not to use the skin from the local screen?
+		# is the info line really that much of a gain to lose a skinned screen...
+
+		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
+		{
+			"green": self.settings,
+			"blue": self.clean,
+			"yellow": self.delete,
+			"cancel": self.close,
+		}, -1)
+
+		self["timerlist"] = TimerList([])
+		self["key_green"] = Button(_("Settings"))
+		self["key_blue"] = Button(_("Cleanup"))
+		self["key_yellow"] = Button(_("Delete"))
+		self["key_red"] = Button(_("Cancel"))
+		self["text"] = Label("")
+
+		remoteip = "%d.%d.%d.%d" % tuple(config.plugins.remoteTimer.httpip.value)
+		self.remoteurl = "%s:%s" % ( remoteip, str(config.plugins.remoteTimer.httpport.value))
+
+		self.onLayoutFinish.append(self.getInfo)
+
+	def getInfo(self, *args):
+		try:
+			info = _("fetching remote data...")
+			url = "http://%s/web/timerlist" % (self.remoteurl)
+			localGetPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
+		except:
+			info = _("not configured yet. please do so in the settings.")
+		self["text"].setText(info)
+
+	def _gotPageLoad(self, data):
+		# XXX: this call is not optimized away so it is easier to extend this functionality to support other kinds of receiver
+		self["timerlist"].l.setList(self.generateTimerE2(data))
+
+	def errorLoad(self, error):
+		print "[RemoteTimer] errorLoad ERROR:", error.getErrorMessage()
+
+	def clean(self):
+		try:
+			url = "http://%s/web/timercleanup?cleanup=true" % (self.remoteurl)
+			localGetPage(url).addCallback(self.getInfo).addErrback(self.errorLoad)
+		except:
+			print "[RemoteTimer] ERROR Cleanup"
+
+	def delete(self):
+		sel = self["timerlist"].getCurrent()
+		if not sel:
+			return
+		self.session.openWithCallback(
+			self.deleteTimerConfirmed,
+			MessageBox,
+			_("Do you really want to delete the timer \n%s ?") % sel.name
+		)
+
+	def deleteTimerConfirmed(self, val):
+		if val:
+			sel = self["timerlist"].getCurrent()
+			if not sel:
+				return
+			url = "http://%s/web/timerdelete?sRef=%s&begin=%s&end=%s" % (self.remoteurl, sel.service_ref.sref, sel.begin, sel.end)
+			localGetPage(url).addCallback(self.getInfo).addErrback(self.errorLoad)
+
+	def settings(self):
+		self.session.open(RemoteTimerSetup)
+
+	def generateTimerE2(self, data):
+		try:
+			root = cElementTree_fromstring(data)
+		except Exception, e:
+			print "[RemoteTimer] error: %s", e
+			self["text"].setText(_("error parsing incoming data."))
+		else:
+			return [
+				(
+					E2Timer(
+						sref = str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
+						sname = str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
+						name = str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
+						disabled = int(timer.findtext("e2disabled", 0)),
+						timebegin = int(timer.findtext("e2timebegin", 0)),
+						timeend = int(timer.findtext("e2timeend", 0)),
+						duration = int(timer.findtext("e2duration", 0)),
+						startprepare = int(timer.findtext("e2startprepare", 0)),
+						state = int(timer.findtext("e2state", 0)),
+						repeated = int(timer.findtext("e2repeated", 0)),
+						justplay = int(timer.findtext("e2justplay", 0)),
+						eventId = int(timer.findtext("e2eit", -1)),
+						afterevent = int(timer.findtext("e2afterevent", 0)),
+						dirname = str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
+						description = str(timer.findtext("e2description", '').encode("utf-8", 'ignore'))
+					),
+					False
+				)
+				for timer in root.findall("e2timer")
+			]
+
+class E2Timer:
+	def __init__(self, sref = "", sname = "", name = "", disabled = 0, \
+			timebegin = 0, timeend = 0, duration = 0, startprepare = 0, \
+			state = 0, repeated = 0, justplay = 0, eventId = 0, afterevent = 0, \
+			dirname = "", description = ""):
+		self.service_ref = RemoteService(sref, sname)
+		self.name = name
+		self.disabled = disabled
+		self.begin = timebegin
+		self.end = timeend
+		self.duration = duration
+		self.startprepare = startprepare
+		self.state = state
+		self.repeated = repeated
+		self.justplay = justplay
+		self.eventId = eventId
+		self.afterevent = afterevent
+		self.dirname = dirname
+		self.description = description
+
 class RemoteTimerSetup(Screen, ConfigListScreen):
 	skin = """
-		<screen position="80,160" size="560,330" title="Settings" >
+		<screen position="80,80" size="560,410" title="Settings" >
 			<widget name="config" position="5,40" size="480,335" scrollbarMode="showOnDemand" />
 			<ePixmap name="red" position="120,280" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green" position="320,280" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="120,280" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="key_green" position="320,280" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self["actions"] = NumberActionMap(["SetupActions", "ColorActions"],
+		self["SetupActions"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keySave,
-			"green": self.keySave,
-			"red": self.Exit,
 			"cancel": self.Exit,
-			"left": self.keyLeft,
-			"right": self.keyRight,
-			"0": self.keyNumber,
-			"1": self.keyNumber,
-			"2": self.keyNumber,
-			"3": self.keyNumber,
-			"4": self.keyNumber,
-			"5": self.keyNumber,
-			"6": self.keyNumber,
-			"7": self.keyNumber,
-			"8": self.keyNumber,
-			"9": self.keyNumber
 		}, -1)
 
 		self["key_red"] = Button(_("Cancel"))
@@ -93,25 +234,12 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 			getConfigListEntry(_("Remote Timer - Username"), config.plugins.remoteTimer.username),
 			getConfigListEntry(_("Remote Timer - Password"), config.plugins.remoteTimer.password),
 		], session)
-		
-
-	def keyLeft(self):
-		self["config"].handleKey(KEY_LEFT)
-
-	def keyRight(self):
-		self["config"].handleKey(KEY_RIGHT)
-		
-	def keyNumber(self, number):
-		self["config"].handleKey(KEY_0 + number)
 
 	def keySave(self):
-		#print "################################"
-		#print config.plugins.remoteTimer.httphost.value
-		#print "################################"
 		config.plugins.remoteTimer.save()
 		timerInit()
 		self.close()
-		
+
 	def Exit(self):
 		self.close()
 
@@ -179,12 +307,12 @@ def newnigma2KeyGo(self):
 		# when a timer end is set before the start, add 1 day
 		if end < begin:
 			end += 86400
-	
+
 		rt_name = urllib.quote(self.timerentry_name.value.decode('utf8').encode('utf8','ignore'))
 		rt_description = urllib.quote(self.timerentry_description.value.decode('utf8').encode('utf8','ignore'))
 		rt_disabled = 0 # XXX: do we really want to hardcode this? why do we offer this option then?
 		rt_repeated = 0 # XXX: same here
-	
+
 		if self.timerentry_justplay.value == "zap":
 			rt_justplay = 1
 		else:
@@ -212,18 +340,9 @@ def newnigma2KeyGo(self):
 			rt_afterEvent,
 			rt_repeated
 		)
-		print "######### debug remote", remoteurl
+		print "[RemoteTimer] debug remote", remoteurl
 
-		username = config.plugins.remoteTimer.username.value
-		password = config.plugins.remoteTimer.password.value
-		if username and password:
-			basicAuth = encodestring("%s:%s" % (username, password))
-			authHeader = "Basic " + basicAuth.strip()
-			headers = {"Authorization": authHeader}
-		else:
-			headers = {}
-
-		defer = getPage(remoteurl, headers = headers)
+		defer = localGetPage(remoteurl)
 		defer.addCallback(boundFunction(_gotPageLoad, self.session, self))
 		defer.addErrback(boundFunction(errorLoad, self.session))
 
@@ -233,7 +352,7 @@ def _gotPageLoadCb(timerEntry, doClose, *args):
 
 def _gotPageLoad(session, timerEntry, html):
 	remoteresponse = parseXml( html)
-	#print "_gotPageLoad remoteresponse:", remoteresponse
+	#print "print _gotPageLoad remoteresponse:", remoteresponse
 	# XXX: should be improved...
 	doClose = remoteresponse == "Timer added successfully!"
 	session.openWithCallback(
@@ -244,7 +363,7 @@ def _gotPageLoad(session, timerEntry, html):
 	)
 
 def errorLoad(session, error):
-	#print "errorLoad ERROR:", error
+	#print "[RemoteTimer] errorLoad ERROR:", error
 	session.open(
 		MessageBox,
 		_("ERROR - Set Timer on Remote DreamBox via WebIf:\n%s") % (error),
@@ -253,12 +372,11 @@ def errorLoad(session, error):
 
 def parseXml(string):
 	try:
-		dom = parseString(string)
-		for entry in dom.firstChild.childNodes:
-			if entry.nodeName == 'e2statetext':
-				result = entry.firstChild.data.encode("utf-8")
-		#print "parseXml debug result:", result
-		return result
+		dom = cElementTree_fromstring(string)
+		entry = dom.findtext('e2statetext')
+		if entry:
+			return entry.encode("utf-8", 'ignore')
+		return "No entry in XML from the webserver" 
 	except:
 		return "ERROR XML PARSE"
 
@@ -271,10 +389,10 @@ def autostart(reason, **kwargs):
 			if config.plugins.remoteTimer.httpip.value:
 				timerInit()
 		except:
-			print "####### NO remoteTimer.httpip.value"
+			print "[RemoteTimer] NO remoteTimer.httpip.value"
 
 def main(session, **kwargs):
-	session.open(RemoteTimerSetup)
+	session.open(RemoteTimerScreen)
 
 def Plugins(**kwargs):
  	return [
