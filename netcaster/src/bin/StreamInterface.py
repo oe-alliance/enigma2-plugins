@@ -1,3 +1,4 @@
+from twisted.internet import reactor
 from twisted.web.client import HTTPClientFactory, HTTPPageDownloader, _parse
 
 valid_types = ("MP3","PLS") #list of playable mediatypes
