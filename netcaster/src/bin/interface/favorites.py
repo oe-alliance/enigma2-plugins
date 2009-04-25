@@ -3,6 +3,7 @@ from Plugins.Extensions.NETcaster.StreamInterface import Stream
 from Plugins.Extensions.NETcaster.plugin import myname
 from ConfigParser import ConfigParser, DuplicateSectionError
 
+from Tools.BoundFunction import boundFunction
 
 ####################################################################
 
@@ -72,18 +73,26 @@ class SHOUTcasterFavorites:
             return stream
         else:
             return False
-    def addStream(self,stream):
+
+    def addStream(self, stream):
         print "["+myname+"] adding "+stream.getName()+" to config"
         try:
             self.configparser.add_section(stream.getName())
-            self.configparser.set(stream.getName(), "description", stream.getDescription())
-            self.configparser.set(stream.getName(), "url", stream.getURL())
-            self.configparser.set(stream.getName(), "type", stream.getType())
-            self.writeConfig()
-            return True,"Stream added"
         except DuplicateSectionError,e:
             print "["+myname+"] error while adding stream to config:",e
             return False,e
+        else:
+            # XXX: I hope this still works properly if we make a optimistic
+            # return here since otherwise the interface would need to be changed
+            # to work with a callback
+            stream.getURL(boundFunction(self.addStreamCb, stream))
+            return True,"Stream added"
+
+    def addStreamCb(self, stream, url = None):
+        self.configparser.set(stream.getName(), "description", stream.getDescription())
+        self.configparser.set(stream.getName(), "url", url)
+        self.configparser.set(stream.getName(), "type", stream.getType())
+        self.writeConfig()
 
     def changeStream(self,streamold,streamnew):
         if self.configparser.has_section(streamold.getName()) is False:
