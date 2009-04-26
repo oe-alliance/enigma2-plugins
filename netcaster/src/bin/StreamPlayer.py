@@ -1,4 +1,4 @@
-from enigma import eServiceReference
+from enigma import eServiceReference, iServiceInformation
 
 class StreamPlayer:
 	is_playing = False
@@ -9,29 +9,40 @@ class StreamPlayer:
 	    self.session = session
 	    self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
 	    self.session.nav.event.append(self.__event)
-	
+	    self.metadatachangelisteners = []
+
 	def __event(self, ev):
 	    print "[NETcaster.StreamPlayer] EVENT ==>", ev
-	
+	    if ev == 5: # can we use a constant here instead of just 5?
+   			currentServiceRef = self.session.nav.getCurrentService()
+   			if currentServiceRef is not None:
+   				#it seems, that only Title is avaible for now
+   				sTagTitle = currentServiceRef.info().getInfoString(iServiceInformation.sTagTitle)
+				self._onMetadataChanged(sTagTitle)
+
+	def _onMetadataChanged(self,title):
+		for i in self.metadatachangelisteners:
+			i(title)
+
 	def play(self, stream):
 	    if self.is_playing:
 	        self.stop()
 	    stream.getURL(self._playURL)
-	
+
 	def _playURL(self, url=None):
 		if not url:
 			print "no URL provided for play"
 			return
 		print "[NETcaster.StreamPlayer] playing stream", url
-		
+
 		esref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s" % url.replace(':', '%3a'))
-		
+
 		try:
 			self.session.nav.playService(esref)
 			self.is_playing = True
 		except:
 			print "[NETcaster.StreamPlayer] Could not play %s" % esref
-	
+
 	def stop(self, text=""):
 	    if self.is_playing:
 	        print "[NETcaster.StreamPlayer] stop streaming", text

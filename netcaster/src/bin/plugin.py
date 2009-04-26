@@ -13,8 +13,8 @@ from os import path as os_path, listdir as os_listdir
 from StreamPlayer import StreamPlayer
 from Tools.Import import my_import
 
-###############################################################################        
-myname = "NETcaster"     
+###############################################################################
+myname = "NETcaster"
 myversion = "0.2"
 streamingtargetfile = "/tmp/streaming.mpg"
 valid_types = ("MP3")
@@ -22,38 +22,39 @@ valid_types = ("MP3")
 streamplayer = None
 plugin_path = ""
 
-###############################################################################        
+###############################################################################
 def main(session,**kwargs):
     session.open(NETcasterScreenBrowser)
     global streamplayer
     streamplayer = StreamPlayer(session)
- 
+
 def Plugins(path,**kwargs):
     global plugin_path
     plugin_path = path
     return PluginDescriptor(
-        name=myname, 
-        description="play Network and Internet Streams", 
+        name=myname,
+        description="play Network and Internet Streams",
         where = PluginDescriptor.WHERE_EXTENSIONSMENU,
         icon = "NETcaster.png",
         fnc = main
         )
-        
-############################################################################### 
+
+###############################################################################
 class NETcasterScreenBrowser(Screen):
     skin = """
         <screen position="80,73" size="560,440" title="SHOUTcaster" >
-		<widget name="streamlist" position="0,0" size="560,400" scrollbarMode="showOnDemand" />            
-		<ePixmap name="red"    position="0,400"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap name="green"  position="140,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap name="yellow" position="280,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap name="blue"   position="420,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="pixred"	 position="0,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />          
-		<widget name="pixgreen"	 position="140,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21"/>            
-		<widget name="pixyellow" position="280,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />            
-		<widget name="pixblue"	 position="420,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />            
+        <widget name="streamlist" position="0,0" size="560,360" scrollbarMode="showOnDemand" />
+        <widget name="metadata"     position="0,360" size="560,40" transparent="1" valign="left" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />
+        <ePixmap name="red"    position="0,400"   zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+        <ePixmap name="green"  position="140,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+        <ePixmap name="yellow" position="280,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+        <ePixmap name="blue"   position="420,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+        <widget name="pixred"     position="0,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />
+        <widget name="pixgreen"     position="140,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21"/>
+        <widget name="pixyellow" position="280,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />
+        <widget name="pixblue"     position="420,400" size="140,40" transparent="1" valign="center" halign="center" zPosition="5"  foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font="Regular;21" />
         </screen>"""
-  
+
     streamlist = []
     currentPlugin = None
     def __init__(self, session, args = 0):
@@ -61,11 +62,12 @@ class NETcasterScreenBrowser(Screen):
         self.session = session
         Screen.__init__(self, session)
         self["streamlist"] = StreamMenu([])
+        self["metadata"] = Label("")
         self["pixred"] = Label("")
         self["pixgreen"] = Label(_("Play"))
         self["pixyellow"] = Label("")
         self["pixblue"] = Label(_("Select"))
-        self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions","ShortcutActions","GlobalActions","HelpActions"], 
+        self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions","ShortcutActions","GlobalActions","HelpActions"],
             {
              "ok": self.ok,
              "back": self.exit,
@@ -77,13 +79,33 @@ class NETcasterScreenBrowser(Screen):
              "info": self.showAbout,
              "displayHelp": self.showHelp,
              }, -1)
-        
+
         self.onClose.append(self.exit)
         self.getInterfaceList()
         for plugin in self.pluginlist:
             if plugin.nameshort == "Favorites":
                 self.setCurrentPlugin(plugin)
         self.onShown.append(self.updateTitle)
+
+        self.onClose.append(self.disconnectFromMetadataUpdates)
+
+    def connectToMetadataUpdates(self):
+        global streamplayer
+        if streamplayer is not None:
+             streamplayer.metadatachangelisteners.append(self.onMetadataChanged)
+
+    def disconnectFromMetadataUpdates(self):
+        global streamplayer
+        try:
+             streamplayer.metadatachangelisteners.remove(self.onMetadataChanged)
+        except Exception,e:
+            pass
+
+    def onMetadataChanged(self,title):
+        try:
+             self["metadata"].setText(title)
+        except Exception,e:
+            self.disconnectFromMetadataUpdates()
 
     def getInterfaceList(self):
         self.pluginlist = []
@@ -118,8 +140,8 @@ class NETcasterScreenBrowser(Screen):
             self.show()
 
     def exit(self):
-        global streamplayer 
-        streamplayer.exit()       
+        global streamplayer
+        streamplayer.exit()
         self.close()
 
     def yellow(self):
@@ -130,6 +152,7 @@ class NETcasterScreenBrowser(Screen):
         if streamplayer.is_playing:
             print "[",myname,"] stream_startstop -> stop"
             streamplayer.stop()
+            self.disconnectFromMetadataUpdates()
             self["pixred"].setText("")
             self.setTitle("%s (%s)"%(myname,self.currentPlugin.nameshort))
 
@@ -137,6 +160,7 @@ class NETcasterScreenBrowser(Screen):
         global streamplayer
         if self["streamlist"].l.getCurrentSelection() is not None:
             stream = self["streamlist"].l.getCurrentSelection()[0]
+            self.connectToMetadataUpdates()
             streamplayer.play(stream)
             self["pixred"].setText(_("Stop"))
             self.setTitle("%s"%(stream.getName()))
@@ -160,7 +184,7 @@ class NETcasterScreenBrowser(Screen):
             for i in self.currentPlugin.getMenuItems(selectedStream):
                 menu.append((i[0],i[1]))
 
-        # std menuitems    
+        # std menuitems
         menu.append((_("hide"), self.hide))
         menu.append((_("info"), self.showAbout));
         menu.append((_("help"), self.showHelp));
@@ -178,12 +202,12 @@ class NETcasterScreenBrowser(Screen):
 
 
 
-############################################################################### 
+###############################################################################
 class NETcasterScreenHelp(Screen):
     skin = """
         <screen position="103,73" size="500,400" title="NETcaster Help" >
-            <widget name="help" position="0,0" size="500,400" font="Regular;18"/>            
-        </screen>""" 
+            <widget name="help" position="0,0" size="500,400" font="Regular;18"/>
+        </screen>"""
 
     def __init__(self, session, args = 0):
         self.skin = NETcasterScreenHelp.skin
@@ -197,15 +221,15 @@ class NETcasterScreenHelp(Screen):
         else:
             text = "sorry, cant load helptext from file "+readme
         self["help"] = ScrollLabel(text)
-        self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions"], 
+        self["actions"] = ActionMap(["WizardActions", "DirectionActions","MenuActions"],
             {
              "ok": self.close,
              "back": self.close,
              "up": self["help"].pageUp,
              "down": self["help"].pageDown
              }, -1)
-        
-############################################################################### 
+
+###############################################################################
 class StreamMenu(MenuList):
     def __init__(self, list, enableWrapAround = False):
         MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
@@ -215,7 +239,7 @@ class StreamMenu(MenuList):
     def postWidgetCreate(self, instance):
         MenuList.postWidgetCreate(self, instance)
         instance.setItemHeight(50)
-    
+
     def buildList(self,listnew):
         list=[]
         for stream in listnew:
@@ -226,7 +250,7 @@ class StreamMenu(MenuList):
         self.l.setList(list)
         self.moveToIndex(0)
 
-###############################################################################        
+###############################################################################
 class NETcasterScreenStreamDelete(Screen):
     def __init__(self, session):
         self.session = session
@@ -236,7 +260,7 @@ class NETcasterScreenStreamDelete(Screen):
         for stream in streams:
             streamlist.append((_(stream.getName()),stream.getName()))
         self.session.openWithCallback(self.stream2deleteSelected,ChoiceBox,_("select stream to delete"),streamlist)
-        
+
     def stream2deleteSelected(self,selectedstreamname):
         if selectedstreamname is not None:
             self.stream2delete = selectedstreamname[1]
@@ -249,5 +273,5 @@ class NETcasterScreenStreamDelete(Screen):
             self.cancelWizzard()
         else:
             self.config.deleteStreamWithName(self.stream2delete)
-            
+
 ###############################################################################
