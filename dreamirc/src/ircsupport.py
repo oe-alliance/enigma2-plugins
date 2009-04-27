@@ -101,6 +101,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         self._ingroups={}
         self._groups={}
         self._topics={}
+        self.pipe = dreamIRCTools.MessagePipe()
 
     def getGroupConversation(self, name, hide=0):
         name=string.lower(name)
@@ -114,15 +115,16 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         # XXX: Why do I duplicate code in IRCClient.register?
         try:
             print 'connection made on irc service!?', self
+            self.pipe.debug("connection made on irc service!?")
             if self.account.password:
                 self.sendLine("PASS :%s" % self.account.password)
             self.setNick(self.account.username)
             self.sendLine("USER %s foo bar :dreamIRC e2 v1.0 user" % (self.nickname))
             for channel in self.account.channels:
-                print "joining channel: %s" % channel
+                self.pipe.debug("joining channel: %s" % channel)
                 self.joinGroup(channel)
             self.account._isOnline=1
-            print 'uh, registering irc acct'
+            self.pipe.debug("uh, registering irc acct")
             if self._logonDeferred is not None:
                 self._logonDeferred.callback(self)
             self.chat.getContactsList()
@@ -142,12 +144,12 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
     def kickedFrom(self, channel, kicker, message):
         """Called when I am kicked from a channel.
         """
-        print 'wow i was kicked', channel, kicker, message
+        self.pipe.debug('wow i was kicked form %s by %s cause of %s' %  (channel, kicker, message))
         return self.chat.getGroupConversation(
             self.chat.getGroup(channel[1:], self), 1)
 
     def userKicked(self, kickee, channel, kicker, message):
-        print 'whew somebody else', kickee, channel, kicker, message
+        self.pipe.debug('whew somebody else %s %s %s %s' % (kickee, channel, kicker, message))
 
     def noticed(self, username, channel, message):
         self.privmsg(username, channel, message, {"dontAutoRespond": 1})
@@ -230,7 +232,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
                 self._ingroups[nickname].remove(group)
                 self.getGroupConversation(group).memberLeft(nickname)
             else:
-                print "%s left %s, but wasn't in the room."%(nickname,group)
+                self.pipe.debug("%s left %s, but wasn't in the room."%(nickname,group))
 
     def irc_QUIT(self,prefix,params):
         nickname=string.split(prefix,"!")[0]
@@ -239,13 +241,13 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
                 self.getGroupConversation(group).memberLeft(nickname)
             self._ingroups[nickname]=[]
         else:
-            print '*** WARNING: ingroups had no such key %s' % nickname
+            self.pipe.debug('*** WARNING: ingroups had no such key %s' % nickname)
 
     def irc_NICK(self, prefix, params):
         fromNick = string.split(prefix, "!")[0]
         toNick = params[0]
         if not self._ingroups.has_key(fromNick):
-            print "%s changed nick to %s. But she's not in any groups!?" % (fromNick, toNick)
+            self.pipe.debug("%s changed nick to %s. But she's not in any groups!?" % (fromNick, toNick))
             return
         for group in self._ingroups[fromNick]:
             self.getGroupConversation(group).memberChangedNick(fromNick, toNick)
@@ -253,7 +255,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         del self._ingroups[fromNick]
 
     def irc_unknown(self, prefix, command, params):
-        print "unknown message from IRCserver. prefix: %s, command: %s, params: %s" % (prefix, command, params)
+        self.pipe.debug("unknown message from IRCserver. prefix: %s, command: %s, params: %s" % (prefix, command, params))
 
     # GTKIM calls
     def joinGroup(self,name):

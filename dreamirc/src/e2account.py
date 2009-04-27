@@ -22,13 +22,6 @@ class AccountManager:
 		self.chatui = e2chat.ChatUI()
 		self.config = dreamIRCSetup.dreamIRCConfig()
 		self.accounts = self.config.load()
-#		self.startConnect()	
-
-#        if self.accounts==False:
-#            print "You have defined no accounts."
-#        else:
-#            for acct in self.accounts:
-#				acct.logOn(self.chatui)
 
 	def startConnect(self):
 		if self.accounts==False:
@@ -45,7 +38,6 @@ class AccountManager:
 			boolean:autoLogin, string:gatewayType)
 		"""
 		data = []
-#		for account in self.accounts.values():
 		for account in self.accounts:
 			data.append((account.accountName, account.isOnline(),account.autoLogin, account.gatewayType))
 		return data

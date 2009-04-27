@@ -29,16 +29,14 @@ import time
 import datetime
 import sys
 
-import xml.dom.minidom
-from xml.dom.minidom import Node
-from xml.dom import EMPTY_NAMESPACE
-from Tools import XMLTools
-from Tools.XMLTools import elementsWithTag, mergeText
-
 import plugin
 from plugin import *
 
 import ircsupport
+import xml.dom.minidom
+from xml.dom.minidom import Node
+from Tools import XMLTools
+from Tools.XMLTools import elementsWithTag, mergeText
 
 ChatText=str()
 OutTextTmp=str()
@@ -48,6 +46,8 @@ Channel=str("ChatBox")
 
 x=0
 y=0
+
+accounts_xml="/etc/dreamIRC.xml"
 
 class ChatWindow(ScrollLabel):
 	def __init__(self,session):
@@ -97,6 +97,9 @@ class MessagePipe():
 	def __init__(self):
 		global BuddyList
 		self.logger=MessageLogger(open("/var/log/dreamIRC.log", "a"))
+		self.debug_state=debug()
+		if self.debug_state>0:
+			self.debuglogger=MessageLogger(open("/var/log/dreamIRC_debug.log", "a"))
 
 	def updateBuddyWindow(self):
 		global BuddyList 
@@ -134,6 +137,15 @@ class MessagePipe():
 		ChatText=ChatText+"%s %s\n" % (timestamp,text)
 		NewMsg="%s %s" % (timestamp,text)
 		self.logger.log("%s %s" %(timestamp,text))
+		if self.debug_state>0:
+			self.debuglogger.log("%s %s" %(timestamp,text))
+
+	def debug(self,text):
+		if self.debug_state>0:
+			timestamp = time.strftime("[%H:%M:%S]", time.localtime(time.time()))
+			self.debuglogger.log("%s %s" %(timestamp,text))
+		else:
+			print text
 
 	def clear(self):
 		global ChatText
@@ -201,4 +213,14 @@ def getMacAddress():
 			new_mac = mac.replace(":","")
 			break
 	return new_mac
-        
+
+def debug():
+		doc = xml.dom.minidom.parse(accounts_xml)
+		root = doc.childNodes[0]
+		for node in elementsWithTag(root.childNodes, "account"):
+			debug = node.getAttribute("debug")
+		if debug=="":
+			return 0
+		else:	
+			return 1
+#			return int(debug)

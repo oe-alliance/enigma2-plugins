@@ -92,7 +92,6 @@ class Conversation:
         self.chatui = chatui
         self.person = person
         self.pipe = MessagePipe()
-#        self.blist=ChatWindow()
         self.timer=eTimer()
         self.timer.timeout.get().append(self.sendOutPipe)
         self.timer.start(100)
@@ -107,25 +106,24 @@ class Conversation:
 
     def sendText(self, text):
         """Sends text to the person with whom the user is conversing.
-
         @returntype: L{Deferred<twisted.internet.defer.Deferred>}
         """
-       	self.person.sendMessage(text, None)
-       	self.pipe.add("%s" % text)
-       	self.pipe.clearOutText()
+        self.person.sendMessage(text, None)
+        self.pipe.add("%s" % text)
+        self.pipe.clearOutText()
 #        print"<%s> %s" % (self.nickname, text)
 
     def sendOutPipe(self):
         if len(str(self.pipe.getOutText())) > 0:
-        	if (self.pipe.getOutText()=="/QUIT"):
-         		print "/quit detected...."
-         		self.pipe.clearOutText()
-         		self.person.bye()
-       		else:
-         		print "sending chat : %s" % str(self.pipe.getOutText())
-         		self.sendText(str(self.pipe.getOutText()))
-         		self.pipe.clearOutText()
-            
+            if (self.pipe.getOutText()=="/QUIT"):
+                print "/quit detected...."
+                self.pipe.clearOutText()
+                self.person.bye()
+            else:
+                print "sending chat : %s" % str(self.pipe.getOutText())
+                self.sendText(str(self.pipe.getOutText()))
+                self.pipe.clearOutText()
+
     def showMessage(self, text, metadata=None):
         """Display a message sent from the person with whom she is conversing
 
@@ -180,13 +178,12 @@ class GroupConversation:
 
     def sendText(self, text):
         """Sends text to the group.
-
         @type text: string
         @returntype: L{Deferred<twisted.internet.defer.Deferred>}
         """
-       	self.group.sendGroupMessage(text, None)
-       	self.pipe.add("%s" % text)
-       	self.pipe.clearOutText()
+        self.group.sendGroupMessage(text, None)
+        self.pipe.add("%s" % text)
+        self.pipe.clearOutText()
 #        print "nach im sending nach sending : %s" % str(self.pipe.getOutText())
         
     
@@ -298,11 +295,11 @@ class ChatUI:
         @type client: L{Client<interfaces.IClient>}
         @returns: client, so that I may be used in a callback chain
         """
-        print "signing onto", client.accountName
+        self.pipe.debug("signing onto %s" % client.accountName)
         self.onlineClients.append(client)
         self.contactsList.registerAccountClient(client)
         self.helper=client
-        print " --- %s ---" % self.helper
+        self.pipe.debug(" --- %s ---" % self.helper)
         self.pipe.add("signing onto %s" % client)
         self.pipe.add("signing onto %s" % client.accountName)
         return client
@@ -312,7 +309,7 @@ class ChatUI:
 
         @type client: L{Client<interfaces.IClient>}
         """
-        print "signing off from", client.accountName
+        self.pipe.debug("signing off from %s" % client.accountName)
         self.onlineClients.remove(client)
         self.contactsList.unregisterAccountClient(client)
 
@@ -321,8 +318,8 @@ class ChatUI:
 
         @type client: L{Client<interfaces.IClient>}
         """
-        print " --- %s ---" % self.helper
-        print "signing off from", self.helper.accountName
+        self.pipe.debug(" --- %s ---" % self.helper)
+        self.pipe.debug("signing off from %s"  % self.helper.accountName)
         self.pipe.add("signing off %s" % helper)
         self.pipe.add("signing off %s" % helper.accountName)        
         self.onlineClients.remove(helper)
@@ -332,7 +329,7 @@ class ChatUI:
         """
         @returntype: L{ContactsList}
         """
-        print "contactlist = %s" % self.contactsList
+        self.pipe.debug("contactlist = %s" % self.contactsList)
         return self.contactsList
 
 

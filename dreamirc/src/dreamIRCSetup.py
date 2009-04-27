@@ -17,8 +17,6 @@ from socket import gethostbyname_ex
 
 from dreamIRCTools import *
 
-accounts_xml="/etc/dreamIRC.xml"
-
 class dreamIRCSetupScreen(ConfigListScreen, Screen):
 	from enigma import getDesktop
 	desk = getDesktop(0)
@@ -260,12 +258,6 @@ class dreamIRCConfig:
 			for node in elementsWithTag(root.childNodes, "account"):
 				self.channel = node.getAttribute("channel")
 			return self.channel
-		
 
-#def getMacAddress():
-#	for line in os.popen("/sbin/ifconfig"):
-#		if line.find('Ether') > -1:
-#			mac = line.split()[4]
-#			new_mac = mac.replace(":","")
-#			break
-#	return new_mac
+
+
