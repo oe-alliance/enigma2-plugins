@@ -9,6 +9,8 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Sources.List import List
 from Components.Network import iNetwork
 from Components.Input import Input
+from Components.config import getConfigListEntry, NoSave, config, ConfigIP
+from Components.ConfigList import ConfigList, ConfigListScreen
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from Tools.LoadPixmap import LoadPixmap
 from cPickle import dump, load
@@ -105,7 +107,7 @@ class NetworkBrowser(Screen):
 		self["mounttext"] = Label(_("Mounts management"))
 		self["rescantext"] = Label(_("Rescan network"))
 		self["infotext"] = Label(_("Press OK to mount!"))
-		self["searchtext"] = Label(_("Scan IP"))
+		self["searchtext"] = Label(_("Expert"))
 
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
@@ -164,13 +166,19 @@ class NetworkBrowser(Screen):
 		self.session.openWithCallback(self.scanIPclosed,ScanIP)
 
 	def scanIPclosed(self,result):
-		if result:
-			print "got IP:",result
-			nwlist = []
-			if len(result):
-				strIP = str(result) + "/24"
-				nwlist.append(netscan.netzInfo(strIP))
+		if result[0]:
+			if result[1] == "address":
+				print "got IP:",result[1]
+				nwlist = []
+				nwlist.append(netscan.netzInfo(result[0] + "/24"))
 				self.networklist = nwlist[0]
+				print "###################################"
+				print self.networklist
+			elif result[1] == "nfs":
+				self.networklist.append(['host', result[0], result[0] , '00:00:00:00:00:00', result[0], 'Master Browser'])
+				print "###################################"
+				print self.networklist
+
 		if len(self.networklist) > 0:
 			self.updateHostsList()
 
@@ -457,93 +465,58 @@ class NetworkBrowser(Screen):
 		if returnValue == None:
 			self.updateNetworkList()
 
-class ScanIP(Screen):
+class ScanIP(Screen, ConfigListScreen):
 	skin = """
-		<screen name="IPKGSource" position="100,100" size="550,80" title="IPKG source" >
-			<widget name="text" position="10,10" size="530,25" font="Regular;20" backgroundColor="background" foregroundColor="#cccccc" />
+		<screen name="ScanIP" position="100,100" size="550,80" title="Scan IP" >
+			<widget name="config" position="10,10" size="530,25" scrollbarMode="showOnDemand" />
 			<ePixmap pixmap="skin_default/buttons/red.png" position="10,40" zPosition="2" size="140,40" transparent="1" alphatest="on" />
 			<widget name="closetext" position="20,50" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="160,40" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-			<widget name="edittext" position="170,50" size="300,21" zPosition="10" font="Regular;21" transparent="1" />
+			<widget name="edittext" position="170,50" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="320,40" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+			<widget name="scanaddress" position="325,50" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		text = ""
-
-		desk = getDesktop(0)
-		x= int(desk.size().width())
-		y= int(desk.size().height())
-		#print "[IPKGSource] mainscreen: current desktop size: %dx%d" % (x,y)
 
 		self["closetext"] = Label(_("Cancel"))
-		self["edittext"] = Label(_("OK"))
+		self["edittext"] = Label(_("Scan NFS Share"))
+		self["scanaddress"] = Label(_("address range"))
 
-		if (y>=720):
-			self["text"] = Input(text, maxSize=False, type=Input.TEXT)
-		else:
-			self["text"] = Input(text, maxSize=False, visible_width = 55, type=Input.TEXT)
-
-		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "TextEntryActions", "KeyboardInputActions","ShortcutActions"],
+		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
-			"ok": self.go,
 			"back": self.exit,
 			"red": self.exit,
-			"green": self.go,
-			"left": self.keyLeft,
-			"right": self.keyRight,
-			"home": self.keyHome,
-			"end": self.keyEnd,
-			"deleteForward": self.keyDeleteForward,
-			"deleteBackward": self.keyDeleteBackward,
-			"1": self.keyNumberGlobal,
-			"2": self.keyNumberGlobal,
-			"3": self.keyNumberGlobal,
-			"4": self.keyNumberGlobal,
-			"5": self.keyNumberGlobal,
-			"6": self.keyNumberGlobal,
-			"7": self.keyNumberGlobal,
-			"8": self.keyNumberGlobal,
-			"9": self.keyNumberGlobal,
-			"0": self.keyNumberGlobal
+			"green": self.goNfs,
+			"yellow": self.goAddress,
 		}, -1)
+		self.ipAddress = ConfigIP(default=[0,0,0,0])
+		ConfigListScreen.__init__(self, [
+			getConfigListEntry(_("IP Address"), self.ipAddress),
+		], self.session)
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def exit(self):
-		self.close(None)
+		self.close(None,None)
 
 	def layoutFinished(self):
 		self.setWindowTitle()
-		self["text"].right()
 
 	def setWindowTitle(self):
 		self.setTitle(_("Enter IP to scan..."))
 
-	def go(self):
-		text = self["text"].getText()
-		if text:
-			self.close(text)
+	def goAddress(self):
+		if self.ipAddress.getText() != "0.0.0.0":
+			self.close((self.ipAddress.getText(), "address"))
+		else:
+			self.exit
 
-	def keyLeft(self):
-		self["text"].left()
-
-	def keyRight(self):
-		self["text"].right()
-
-	def keyHome(self):
-		self["text"].home()
-
-	def keyEnd(self):
-		self["text"].end()
-
-	def keyDeleteForward(self):
-		self["text"].delete()
-
-	def keyDeleteBackward(self):
-		self["text"].deleteBackward()
-
-	def keyNumberGlobal(self, number):
-		self["text"].number(number)
+	def goNfs(self):
+		if self.ipAddress.getText() != "0.0.0.0":
+			self.close((self.ipAddress.getText(), "nfs"))
+		else:
+			self.exit
 
