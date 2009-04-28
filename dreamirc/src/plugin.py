@@ -240,7 +240,6 @@ class dreamIRCMainMenu(Screen):
 	def bluePressed(self):
 		self.checkStatus()
 		self.session.openWithCallback(self.VirtualKeyBoardTextEntry, VirtualKeyBoard, title = (_("Enter your text here:")), text = "")
-
 		
 	def yellowPressed(self):
 		self.checkStatus()
@@ -252,7 +251,7 @@ class dreamIRCMainMenu(Screen):
 		
 	def go(self):
 		if self.checkStatus()==1:
-			print " TEXT = %s   - laenge = %d  !!!!" % (self["input"].getText(),len(self["input"].getText()))
+#			self.pipe.debug(" TEXT = %s   - laenge = %d  !!!!" % (self["input"].getText(),len(self["input"].getText())))
 			if (len(self["input"].getText()) >= 1):
 				self.pipe.addOutText(self["input"].getText())
 				self.clearInput()

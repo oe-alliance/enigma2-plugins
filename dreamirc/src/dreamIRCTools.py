@@ -124,7 +124,6 @@ class MessagePipe():
 	def addOutText(self,text):
 		global OutTextTmp
 		OutTextTmp =str(text)
-		print "OUTTEXT %s" % OutTextTmp
 
 	def clearOutText(self):
 		global OutTextTmp
@@ -166,7 +165,7 @@ class MessagePipe():
 
 	def showBuddyList(self):
 		global BuddyList    
-#		self["buddy"].setText(BuddyList)
+
 		return BuddyList
 
 	def updateDesc(self):
@@ -188,7 +187,6 @@ class MessageLogger:
 		print '[dreamIRC] %s  MESSAGE LOGGER = %s \n'% (time.strftime("[%H:%M:%S]", time.localtime(time.time())),self.file)
 
 	def log(self, message):
-#		timestamp = time.strftime("[%H:%M:%S]", time.localtime(time.time()))
 		print '[dreamIRC] %s\n' % (message)
 		self.file.write('%s\n' % (message))
 		self.file.flush()
@@ -225,4 +223,3 @@ def debug():
 			return False
 		else:	
 			return True
-#			return int(debug)

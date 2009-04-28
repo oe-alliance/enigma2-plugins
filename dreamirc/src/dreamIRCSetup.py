@@ -51,7 +51,6 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		self.device=self.hardware_info.get_device_name()
 		self.mac=getMacAddress()
 		self.mac_end=self.mac[6:]
-#		print "device : %s  -  mac : %s  -  mac_end : %s " %(self.device,self.mac,self.mac_end)
 		self.dreamIRCconf = ConfigSubsection()
 		self.reloadFile()
 		list = []
@@ -113,7 +112,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 			self.port = "06667"
 			self.channel = "#dreamirc"
 			self.debug = "False"
-#		self.dreamIRCconf = ConfigSubsection()
+
 		if self.debug != "True" or self.debug != "False":
 			self.debug="False"	
 		self.dreamIRCconf.nick = ConfigText(default = self.nick, fixed_size = False)
@@ -123,7 +122,6 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		self.dreamIRCconf.server3 = ConfigText(default = self.server3, fixed_size = False)
 		self.dreamIRCconf.port = ConfigInteger(default = string.atoi(self.port), limits = (0, 99999))
 		self.dreamIRCconf.channel = ConfigText(default = self.channel, fixed_size = False)
-#		self.dreamIRCconf.debug = ConfigText(default = self.debug, fixed_size = False)
 		self.dreamIRCconf.debug = ConfigSelection(default=self.debug, choices = ["False","True"])
 
 	def keySave(self):
@@ -147,22 +145,10 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		fp.close()
 		if self.server1:
 			self.checkServer(self.server1)
-#			try:
-#				self.result1=gethostbyname_ex(self.server1)
-#			except:
-#				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %self.server1), MessageBox.TYPE_ERROR)
 		if self.server2:
 			self.checkServer(self.server2)
-#			try:
-#				self.result2=gethostbyname_ex(self.server2)
-#			except:
-#				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %self.server2), MessageBox.TYPE_ERROR)
 		if self.server3:
 			self.checkServer(self.server3)
-##			try:
-#				self.result3=gethostbyname_ex(self.server3)
-#			except:
-#				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %self.server3), MessageBox.TYPE_ERROR)
 
 	def checkServer(self, server):
 			try:
@@ -191,7 +177,6 @@ class dreamIRCConfig:
 		self.device=self.hardware_info.get_device_name()
 		self.mac=getMacAddress()
 		self.mac_end=self.mac[6:]
-#		print "device : %s  -  mac : %s  -  mac_end : %s " %(self.device,self.mac,self.mac_end)			
 		try:
 			doc = xml.dom.minidom.parse(accounts_xml)
 			root = doc.childNodes[0]

@@ -111,16 +111,15 @@ class Conversation:
         self.person.sendMessage(text, None)
         self.pipe.add("%s" % text)
         self.pipe.clearOutText()
-#        print"<%s> %s" % (self.nickname, text)
 
     def sendOutPipe(self):
         if len(str(self.pipe.getOutText())) > 0:
             if (self.pipe.getOutText()=="/QUIT"):
-                print "/quit detected...."
+                self.pipe.debug("/quit detected....")
                 self.pipe.clearOutText()
                 self.person.bye()
             else:
-                print "sending chat : %s" % str(self.pipe.getOutText())
+                self.pipe.debug("sending chat : %s" % str(self.pipe.getOutText()))
                 self.sendText(str(self.pipe.getOutText()))
                 self.pipe.clearOutText()
 
@@ -131,7 +130,6 @@ class Conversation:
         @type metadata: dict
         """
         self.pipe.add("<%s> %s" % (self.person.name, text))
-#        raise NotImplementedError("Subclasses must implement this method")
 
     def contactChangedNick(self, person, newnick):
         """Change a person's name.
@@ -141,7 +139,6 @@ class Conversation:
         """
         self.person.name = newnick
         self.pipe.add("-!- %s is now known as %s" % (person.name, newnick))
-#        self.blist.updateBuddyWindow()
 
     def serverMsg(self, message):
         """Displays a serverMsg in the group conversation window
@@ -149,7 +146,6 @@ class Conversation:
         @type message: string
         """
         self.pipe.add("-!- %s " % (message))
-#        self.blist.updateBuddyWindow()
 
 class GroupConversation:
     """A conversation with a group of people."""
@@ -187,11 +183,11 @@ class GroupConversation:
     def sendOutPipe(self):
         if len(str(self.pipe.getOutText())) > 0:
          	if (self.pipe.getOutText()=="/QUIT"):
-#         		print "/quit detected...."
+         		self.pipe.debug("/quit detected....")
          		self.pipe.clearOutText()
          		self.group.bye()
          	else:
-         		print "sending group chat : %s" % str(self.pipe.getOutText())
+         		self.pipe.debug("sending group chat : %s" % str(self.pipe.getOutText()))
          		self.sendText(str(self.pipe.getOutText()))
          		self.pipe.clearOutText()
 
@@ -267,10 +263,7 @@ class GroupConversation:
         self.pipe.getCannelName(self.group.name)
         for member in self.members:
             self.pipe.buildBuddyList(str(member))
-#        print "Channel : #%s" % self.group.name
         print "Buddylist of #%s : \n%s" % (self.group.name, self.pipe.showBuddyList())
-#        self.pipe.showBuddyList()
-#        self.pipe.updateBuddyWindow(self.pipe.showBuddyList())
         self.pipe.updateBuddyWindow()
         
 class ChatUI:

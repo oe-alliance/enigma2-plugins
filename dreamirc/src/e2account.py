@@ -71,5 +71,4 @@ class AccountManager:
 
 	def quit(self):
 		pass
-		#for account in self.accounts.values():
-		#    account.logOff()  - not yet implemented
+
