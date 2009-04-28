@@ -244,8 +244,8 @@ class dreamIRCConfig:
 				print "unable to resolve hostname %s..." % self.server1
 				
 		if self.status1==False and self.status2==False and self.status3==False:
-				self.pipe.add("ERROR!!! no irc server was valid... please check settings...")
-				return False
+			self.pipe.add("ERROR!!! no irc server was valid... please check settings...")
+			return False
 		else:
 			print " account = type: %s login:%s nick:%s passwd:%s server:%s ip:%s port:%s channel:%s debug:%s " % (self.type, self.login, self.nick, self.passwd, self.server, self.ip, self.port, self.channel, self.debug)
 			self.accounts=[ircsupport.IRCAccount(self.type, string.atoi(self.login), str(self.nick), str(self.passwd), str(self.ip), string.atoi(self.port), str(self.channel))]

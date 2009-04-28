@@ -46,10 +46,14 @@ class AccountManager:
 		return len(self.accounts) == 0
 
 	def getConnectionInfo(self):
-		connectioninfo = []
-		for account in self.accounts:
-			connectioninfo.append(account.isOnline())
-		return connectioninfo
+		if self.accounts==False:
+			print "You have defined no accounts."
+			return [0]
+		else:
+			connectioninfo = []
+			for account in self.accounts:
+				connectioninfo.append(account.isOnline())
+			return connectioninfo
 
 	def addAccount(self, account):
 		self.accounts[account.accountName] = account
