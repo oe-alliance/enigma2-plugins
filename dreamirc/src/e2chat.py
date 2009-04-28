@@ -163,7 +163,6 @@ class GroupConversation:
         self.group = group
         self.members = []
         self.pipe = MessagePipe()
-#        self.blist=ChatWindow()
         self.timer=eTimer()
         self.timer.timeout.get().append(self.sendOutPipe)
         self.timer.start(100)
@@ -184,20 +183,18 @@ class GroupConversation:
         self.group.sendGroupMessage(text, None)
         self.pipe.add("%s" % text)
         self.pipe.clearOutText()
-#        print "nach im sending nach sending : %s" % str(self.pipe.getOutText())
-        
     
     def sendOutPipe(self):
         if len(str(self.pipe.getOutText())) > 0:
          	if (self.pipe.getOutText()=="/QUIT"):
-         		print "/quit detected...."
+#         		print "/quit detected...."
          		self.pipe.clearOutText()
          		self.group.bye()
          	else:
          		print "sending group chat : %s" % str(self.pipe.getOutText())
          		self.sendText(str(self.pipe.getOutText()))
          		self.pipe.clearOutText()
-            
+
     def showGroupMessage(self, sender, text, metadata=None):
         """Displays to the user a message sent to this group from the given sender
         @type sender: string (XXX: Not Person?)
@@ -219,7 +216,6 @@ class GroupConversation:
         @type author: string (XXX: Not Person?)
         """
         self.pipe.add("-!- %s set the topic of %s to: %s" % (author, self.group.name, topic))
-#        print "-!- %s set the topic of %s to: %s" % (author, self.group.name, topic)        
 
     def serverMsg(self, message):
         """Displays a serverMsg in the group conversation window

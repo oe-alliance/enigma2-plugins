@@ -112,8 +112,10 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 			self.server3 = "irc.tu-illmenau.de"
 			self.port = "06667"
 			self.channel = "#dreamirc"
-			self.debug = ""
+			self.debug = "False"
 #		self.dreamIRCconf = ConfigSubsection()
+		if self.debug != "True" or self.debug != "False":
+			self.debug="False"	
 		self.dreamIRCconf.nick = ConfigText(default = self.nick, fixed_size = False)
 		self.dreamIRCconf.passwd = ConfigText(default = self.passwd, fixed_size = False)
 		self.dreamIRCconf.server1 = ConfigText(default = self.server1, fixed_size = False)
@@ -121,7 +123,8 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		self.dreamIRCconf.server3 = ConfigText(default = self.server3, fixed_size = False)
 		self.dreamIRCconf.port = ConfigInteger(default = string.atoi(self.port), limits = (0, 99999))
 		self.dreamIRCconf.channel = ConfigText(default = self.channel, fixed_size = False)
-		self.dreamIRCconf.debug = ConfigText(default = self.debug, fixed_size = False)
+#		self.dreamIRCconf.debug = ConfigText(default = self.debug, fixed_size = False)
+		self.dreamIRCconf.debug = ConfigSelection(default=self.debug, choices = ["False","True"])
 
 	def keySave(self):
 		self.accounts=[]
@@ -143,21 +146,29 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 		fp.write("</accounts>\n")
 		fp.close()
 		if self.server1:
-			try:
-				self.result1=gethostbyname_ex(self.server1)
-			except:
-				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %self.server1), MessageBox.TYPE_ERROR)
+			self.checkServer(self.server1)
+#			try:
+#				self.result1=gethostbyname_ex(self.server1)
+#			except:
+#				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %self.server1), MessageBox.TYPE_ERROR)
 		if self.server2:
-			try:
-				self.result2=gethostbyname_ex(self.server2)
-			except:
-				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %self.server2), MessageBox.TYPE_ERROR)
+			self.checkServer(self.server2)
+#			try:
+#				self.result2=gethostbyname_ex(self.server2)
+#			except:
+#				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %self.server2), MessageBox.TYPE_ERROR)
 		if self.server3:
-			try:
-				self.result3=gethostbyname_ex(self.server3)
-			except:
-				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %self.server3), MessageBox.TYPE_ERROR)
+			self.checkServer(self.server3)
+##			try:
+#				self.result3=gethostbyname_ex(self.server3)
+#			except:
+#				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %self.server3), MessageBox.TYPE_ERROR)
 
+	def checkServer(self, server):
+			try:
+				result=gethostbyname_ex(server)
+			except:
+				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." %server), MessageBox.TYPE_ERROR)	
 
 	def saveAndExit(self):
 		for x in self["config"].list:

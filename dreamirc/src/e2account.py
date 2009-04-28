@@ -22,10 +22,11 @@ class AccountManager:
 		self.chatui = e2chat.ChatUI()
 		self.config = dreamIRCSetup.dreamIRCConfig()
 		self.accounts = self.config.load()
+		self.pipe = dreamIRCTools.MessagePipe()
 
 	def startConnect(self):
 		if self.accounts==False:
-			print "You have defined no accounts."
+			self.pipe.debug("You have defined no valid accounts.")
 		else:
 			for acct in self.accounts:
 				acct.logOn(self.chatui)
@@ -47,7 +48,7 @@ class AccountManager:
 
 	def getConnectionInfo(self):
 		if self.accounts==False:
-			print "You have defined no accounts."
+			self.pipe.debug("You have defined no valid accounts.")
 			return [0]
 		else:
 			connectioninfo = []
@@ -65,7 +66,7 @@ class AccountManager:
 		"""
 		@returntype: Deferred L{interfaces.IClient}
 		"""
-		print "----1---- %s" % accountName
+		self.pipe.debug("connecting to : %s" % accountName)
 		return self.accounts[accountName].logOn(chatui)
 
 	def quit(self):
