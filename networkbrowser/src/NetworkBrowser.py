@@ -380,8 +380,10 @@ class NetworkBrowser(Screen):
 						self.hostdata = load_cache(self.hostcache_file)
 						self.passwordQuestion(False)
 					except:
-						print '[Networkbrowser] exception Loading userinfo from cache'
-		print '[Networkbrowser] sel:' + sel[0][0]
+						self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n") ) )
+				else:
+					self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n") ) )
+
 		if sel[0][0] == 'nfsShare': # share entry selected
 			print '[Networkbrowser] sel nfsShare'
 			self.openMountEdit(sel[0])
@@ -488,6 +490,7 @@ class ScanIP(Screen, ConfigListScreen):
 		{
 			"back": self.exit,
 			"red": self.exit,
+			"cancel": self.exit,
 			"green": self.goNfs,
 			"yellow": self.goAddress,
 		}, -1)
@@ -499,7 +502,7 @@ class ScanIP(Screen, ConfigListScreen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def exit(self):
-		self.close(None,None)
+		self.close((None,None))
 
 	def layoutFinished(self):
 		self.setWindowTitle()
