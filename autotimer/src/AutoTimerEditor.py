@@ -314,9 +314,9 @@ class AutoTimerEditorBase:
 
 	def pathSelected(self, res):
 		if res is not None:
-			if res not in self.destination.choices:
-				self.destination.choices.append(res)
-				self.destination.description[res] = res
+			# I'm pretty sure this will always fail
+			if config.movielist.videodirs.value != self.destination.choices:
+					self.destination.setChoices(config.movielist.videodirs.value, default = res)
 			self.destination.value = res
 
 	def chooseDestination(self):
