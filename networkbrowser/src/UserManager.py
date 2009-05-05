@@ -10,7 +10,7 @@ from Components.Sources.List import List
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from UserDialog import UserDialog
-from os import unlink, listdir
+from os import unlink, listdir, path as os_path
 
 class UserManager(Screen):
 	skin = """
