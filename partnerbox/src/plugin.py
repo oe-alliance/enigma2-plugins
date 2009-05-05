@@ -1,6 +1,8 @@
 #
 #  Partnerbox E2
-#  Release: 0.93
+#
+#  $Id$
+#
 #  Coded by Dr.Best (c) 2009
 #  Support: www.dreambox-tools.info
 #
@@ -988,9 +990,15 @@ class RemoteTimerChannelList(Screen):
 			eventdescriptionextended = ""
 			if node.nodeName == "e2event":
 				for node2 in node.childNodes:
-					if node2.nodeName == "e2eventid": eventid= int(node2.firstChild.data.strip())
-					if node2.nodeName == "e2eventstart": eventstart = int(node2.firstChild.data.strip())
-					if node2.nodeName == "e2eventduration": eventduration = int(node2.firstChild.data.strip())
+					if node2.nodeName == "e2eventid": 
+						try:eventid= int(node2.firstChild.data.strip())
+						except:pass
+					if node2.nodeName == "e2eventstart": 
+						try:eventstart = int(node2.firstChild.data.strip())
+						except:pass
+					if node2.nodeName == "e2eventduration": 
+						try:eventduration = int(node2.firstChild.data.strip())
+						except:pass
 					if node2.nodeName == "e2eventtitle":
 						try:eventtitle = str(node2.firstChild.data.strip().encode("utf-8"))
 						except:eventtitle = ""
@@ -1120,8 +1128,12 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 						if node2.nodeName == "e2eventtitle":
 							try:e2eventtitle = str(node2.firstChild.data.strip().encode("utf-8"))
 							except:e2eventtitle = "n/a"
-						if node2.nodeName == "e2eventstart": e2eventstart = int(node2.firstChild.data.strip())
-						if node2.nodeName == "e2eventduration": e2eventduration = int(node2.firstChild.data.strip())
+						if node2.nodeName == "e2eventstart": 
+							try:e2eventstart = int(node2.firstChild.data.strip())
+							except:pass
+						if node2.nodeName == "e2eventduration": 
+							try:e2eventduration = int(node2.firstChild.data.strip())
+							except:pass
 		else:
 			for node in dom.firstChild.childNodes:
 				if node.nodeName == "service":
@@ -1134,8 +1146,12 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 						if node2.nodeName == "description":
 							try:e2eventtitle = str(node2.firstChild.data.strip().encode("utf-8"))
 							except:pass
-						if node2.nodeName == "duration": e2eventduration = int(node2.firstChild.data.strip())
-						if node2.nodeName == "start": e2eventstart = int(node2.firstChild.data.strip())
+						if node2.nodeName == "duration":
+							try:e2eventduration = int(node2.firstChild.data.strip())
+							except:pass
+						if node2.nodeName == "start": 
+							try:e2eventstart = int(node2.firstChild.data.strip())
+							except:pass
 		endtime = int(e2eventstart + e2eventduration)
 		if endtime != 0:
 			tt = ((": %s ... %s (+%d " + _("mins") + ")") % (FuzzyTime(e2eventstart)[1], FuzzyTime(endtime)[1], (endtime - time.time()) / 60))
@@ -1344,9 +1360,15 @@ class RemoteTimerEPGList(Screen):
 			eventdescriptionextended = ""
 			if node.nodeName == "e2event":
 				for node2 in node.childNodes:
-					if node2.nodeName == "e2eventid": eventid= int(node2.firstChild.data.strip())
-					if node2.nodeName == "e2eventstart": eventstart = int(node2.firstChild.data.strip())
-					if node2.nodeName == "e2eventduration": eventduration = int(node2.firstChild.data.strip())
+					if node2.nodeName == "e2eventid": 
+						try:eventid= int(node2.firstChild.data.strip())
+						except:pass
+					if node2.nodeName == "e2eventstart": 
+						try:eventstart = int(node2.firstChild.data.strip())
+						except:pass
+					if node2.nodeName == "e2eventduration": 
+						try:eventduration = int(node2.firstChild.data.strip())
+						except:pass
 					if node2.nodeName == "e2eventtitle":
 						try:eventtitle = str(node2.firstChild.data.strip().encode("utf-8"))
 						except:eventtitle = ""

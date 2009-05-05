@@ -1,6 +1,8 @@
 #
 #  Partnerbox E2
-#  Release: 0.93
+#
+#  $Id$
+#
 #  Coded by Dr.Best (c) 2009
 #  Support: www.dreambox-tools.info
 #
