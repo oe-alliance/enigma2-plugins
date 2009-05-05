@@ -13,6 +13,7 @@ from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap, NumberActionMap
 from enigma import ePoint
 from AutoMount import iAutoMount, AutoMount
+from re import sub as re_sub
 
 class AutoMountEdit(Screen, ConfigListScreen):
         skin = """
@@ -298,7 +299,8 @@ class AutoMountEdit(Screen, ConfigListScreen):
                         data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
                         data['active'] = self.activeConfigEntry.value
                         data['ip'] = self.ipConfigEntry.getText()
-                        data['sharename'] = self.sharenameConfigEntry.value
+                        data['sharename'] = re_sub("\W", "", self.sharenameConfigEntry.value)
+                        # "\W" matches everything that is "not numbers, letters, or underscores",where the alphabet defaults to ASCII.
                         data['sharedir'] = self.sharedirConfigEntry.value
                         data['options'] =  self.optionsConfigEntry.value
                         data['mounttype'] = self.mounttypeConfigEntry.value
