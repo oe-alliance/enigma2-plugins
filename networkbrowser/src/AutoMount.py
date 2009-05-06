@@ -2,11 +2,12 @@
 # for localized messages
 from __init__ import _
 from re import compile as re_compile
-from os import path as os_path, mkdir, rmdir
+from os import path as os_path, symlink, listdir, unlink, readlink, remove
 
 from enigma import eTimer
 from Components.Console import Console
 from Components.Harddisk import harddiskmanager #global harddiskmanager
+from Tools.Directories import isMount, removeDir, createDir
 
 from xml.etree.cElementTree import parse as cet_parse
 
@@ -47,12 +48,14 @@ class AutoMount():
 		# Read out NFS Mounts
 		for nfs in tree.findall("nfs"):
 			for mount in nfs.findall("mount"):
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
+				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
+							'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 				try:
 					data['mounttype'] = 'nfs'.encode("UTF-8")
 					data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 					if data["active"] == 'True' or data["active"] == True:
 						self.activeMountsCounter +=1
+					data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 					data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 					data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 					data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
@@ -64,12 +67,14 @@ class AutoMount():
 			# Read out CIFS Mounts
 		for nfs in tree.findall("cifs"):
 			for mount in nfs.findall("mount"):
-				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
+				data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, \
+							'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 				try:
 					data['mounttype'] = 'cifs'.encode("UTF-8")
 					data['active'] = getValue(mount.findall("active"), False).encode("UTF-8")
 					if data["active"] == 'True' or data["active"] == True:
 						self.activeMountsCounter +=1
+					data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False").encode("UTF-8")
 					data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 					data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 					data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
@@ -112,7 +117,7 @@ class AutoMount():
 			if data['active'] == 'True' or data['active'] is True:
 				path = '/media/net/'+ data['sharename']
 				if os_path.exists(path) is False:
-					mkdir(path)
+					createDir(path)
 				tmpsharedir = data['sharedir'].replace(" ", "\\ ")
 				if tmpsharedir[-1:] == "$":
 					tmpdir = tmpsharedir.replace("$", "\\$")
@@ -148,13 +153,15 @@ class AutoMount():
 				if self.automounts.has_key(data['sharename']):
 					self.automounts[data['sharename']]['isMounted'] = True
 					desc = data['sharename']
+					if self.automounts[data['sharename']]['hdd_replacement'] == 'True': #hdd replacement hack
+						self.makeHDDlink(path)
 					harddiskmanager.addMountedPartition(path, desc)
 			else:
 				if self.automounts.has_key(data['sharename']):
 					self.automounts[data['sharename']]['isMounted'] = False
 				if os_path.exists(path):
 					if not os_path.ismount(path):
-						rmdir(path)
+						removeDir(path)
 						harddiskmanager.removeMountedPartition(path)
 
 		if self.MountConsole:
@@ -162,6 +169,31 @@ class AutoMount():
 				if callback is not None:
 					self.callback = callback
 					self.timer.startLongTimer(10)
+
+	def makeHDDlink(self, path):
+		hdd_dir = '/media/hdd'
+		print "[AutoMount.py] symlink %s %s" % (path, hdd_dir)
+		if os_path.islink(hdd_dir):
+			if readlink(hdd_dir) != path:
+				remove(hdd_dir)
+				symlink(path, hdd_dir)
+		elif isMount(hdd_dir) is False:
+			if os_path.isdir(hdd_dir):
+				self.rm_rf(hdd_dir)
+		try:
+			symlink(path, hdd_dir)
+		except OSError:
+			print "[AutoMount.py] add symlink fails!"
+		if os_path.exists(hdd_dir + '/movie') is False:
+			createDir(hdd_dir + '/movie')
+
+	def rm_rf(self, d): # only for removing the ipkg stuff from /media/hdd subdirs
+		for path in (os_path.join(d,f) for f in listdir(d)):
+			if os_path.isdir(path):
+				self.rm_rf(path)
+			else:
+				unlink(path)
+		removeDir(d)
 
 	def mountTimeout(self):
 		self.timer.stop()
@@ -194,6 +226,7 @@ class AutoMount():
 				list.append('<nfs>\n')
 				list.append(' <mount>\n')
 				list.append(''.join(["  <active>", str(sharedata['active']), "</active>\n"]))
+				list.append(''.join(["  <hdd_replacement>", str(sharedata['hdd_replacement']), "</hdd_replacement>\n"]))
 				list.append(''.join(["  <ip>", sharedata['ip'], "</ip>\n"]))
 				list.append(''.join(["  <sharename>", sharedata['sharename'], "</sharename>\n"]))
 				list.append(''.join(["  <sharedir>", sharedata['sharedir'], "</sharedir>\n"]))
@@ -205,6 +238,7 @@ class AutoMount():
 				list.append('<cifs>\n')
 				list.append(' <mount>\n')
 				list.append(''.join(["  <active>", str(sharedata['active']), "</active>\n"]))
+				list.append(''.join(["  <hdd_replacement>", str(sharedata['hdd_replacement']), "</hdd_replacement>\n"]))
 				list.append(''.join(["  <ip>", sharedata['ip'], "</ip>\n"]))
 				list.append(''.join(["  <sharename>", sharedata['sharename'], "</sharename>\n"]))
 				list.append(''.join(["  <sharedir>", sharedata['sharedir'], "</sharedir>\n"]))
@@ -520,4 +554,3 @@ class AutoMount_Unused:
 			self.MountConsole = None """
 
 iAutoMount = AutoMount()
-

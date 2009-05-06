@@ -6,7 +6,7 @@ from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import ActionMap
 from Components.Button import Button
-from Components.config import config, ConfigIP, NoSave, ConfigText, ConfigEnableDisable, ConfigPassword, ConfigSelection, getConfigListEntry
+from Components.config import config, ConfigIP, NoSave, ConfigText, ConfigEnableDisable, ConfigPassword, ConfigSelection, getConfigListEntry, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
@@ -36,7 +36,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
                 self.mountinfo = mountinfo
                 if self.mountinfo is None:
                         #Initialize blank mount enty
-                        self.mountinfo = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
+                        self.mountinfo = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
 
                 self.applyConfigRef = None
                 self.updateConfigRef = None
@@ -96,6 +96,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
                 self.optionsEntry = None
                 self.usernameEntry = None
                 self.passwordEntry = None
+                self.hdd_replacementEntry = None
 
                 self.sharetypelist = []
                 self.sharetypelist.append(("nfs", _("NFS share")))
@@ -141,6 +142,14 @@ class AutoMountEdit(Screen, ConfigListScreen):
                         password = self.mountinfo['password']
                 else:
                         password = ""
+                if self.mountinfo.has_key('hdd_replacement'):
+                        hdd_replacement = self.mountinfo['hdd_replacement']
+                        if hdd_replacement == 'True':
+                                hdd_replacement = True
+                        if hdd_replacement == 'False':
+                                hdd_replacement = False
+                else:
+                        hdd_replacement = False
                 if sharename is False:
                         sharename = "Sharename"
                 if sharedir is False:
@@ -165,6 +174,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
                 self.usernameConfigEntry = NoSave(ConfigText(default = username, visible_width = 50, fixed_size = False))
                 self.passwordConfigEntry = NoSave(ConfigPassword(default = password, visible_width = 50, fixed_size = False))
                 self.mounttypeConfigEntry = NoSave(ConfigSelection(self.sharetypelist, default = mounttype ))
+                self.hdd_replacementConfigEntry = NoSave(ConfigYesNo(default = hdd_replacement))
 
         def createSetup(self):
                 self.list = []
@@ -178,6 +188,8 @@ class AutoMountEdit(Screen, ConfigListScreen):
                 self.list.append(self.ipEntry)
                 self.sharedirEntry = getConfigListEntry(_("Server share"), self.sharedirConfigEntry)
                 self.list.append(self.sharedirEntry)
+                self.hdd_replacementEntry = getConfigListEntry(_("use as HDD replacement"), self.hdd_replacementConfigEntry)
+                self.list.append(self.hdd_replacementEntry)
                 if self.mounttypeConfigEntry.value == "cifs":
                         self.optionsConfigEntry = NoSave(ConfigText(default = "rw", visible_width = 50, fixed_size = False))
                 else:
@@ -239,7 +251,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 
         def selectionChanged(self):
                 current = self["config"].getCurrent()
-                if current == self.activeEntry or current == self.ipEntry or current == self.mounttypeEntry:
+                if current == self.activeEntry or current == self.ipEntry or current == self.mounttypeEntry or current == self.hdd_replacementEntry:
                         self["ButtonGreen"].hide()
                         self["VKeyIcon"].hide()
                         self["VirtualKB"].setEnabled(False)
@@ -273,6 +285,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
                         iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "options", self.optionsConfigEntry.value)
                         iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "username", self.usernameConfigEntry.value)
                         iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "password", self.passwordConfigEntry.value)
+                        iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "hdd_replacement", self.hdd_replacementConfigEntry.value)
 
                         self.updateConfigRef = None
                         self.updateConfigRef = self.session.openWithCallback(self.updateConfigfinishedCB, MessageBox, _("Please wait while updating your network mount..."), type = MessageBox.TYPE_INFO, enable_input = False)
@@ -296,7 +309,8 @@ class AutoMountEdit(Screen, ConfigListScreen):
 
         def applyConfig(self, ret = False):
                 if (ret == True):
-                        data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, 'username': False, 'password': False, 'mounttype' : False, 'options' : False }
+                        data = { 'isMounted': False, 'active': False, 'ip': False, 'sharename': False, 'sharedir': False, \
+                                        'username': False, 'password': False, 'mounttype' : False, 'options' : False, 'hdd_replacement' : False }
                         data['active'] = self.activeConfigEntry.value
                         data['ip'] = self.ipConfigEntry.getText()
                         data['sharename'] = re_sub("\W", "", self.sharenameConfigEntry.value)
@@ -306,6 +320,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
                         data['mounttype'] = self.mounttypeConfigEntry.value
                         data['username'] = self.usernameConfigEntry.value
                         data['password'] = self.passwordConfigEntry.value
+                        data['hdd_replacement'] = self.hdd_replacementConfigEntry.value
                         self.applyConfigRef = None
                         self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait for activation of your network mount..."), type = MessageBox.TYPE_INFO, enable_input = False)
                         iAutoMount.automounts[self.sharenameConfigEntry.value] = data
@@ -326,4 +341,3 @@ class AutoMountEdit(Screen, ConfigListScreen):
                 if data is not None:
                         if data is True:
                                 self.close()
-
