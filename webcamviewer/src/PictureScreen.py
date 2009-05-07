@@ -188,9 +188,9 @@ class PictureScreen(Screen):
 
 	def setPicture(self, string):
 		if not self.paused:
-			self.setTitle(self.filename.split("/")[-1])
+			self.setTitle(self.screentitle)
 		else:
-			self.setTitle(_("pause") + ":" + self.filename.split("/")[-1])
+			self.setTitle(_("pause") + ":" + self.screentitle)
 		self.picload.startDecode(string)
 
 	def setPictureCB(self, picInfo = None):
