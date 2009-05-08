@@ -7,12 +7,12 @@ from Tools.FuzzyDate import FuzzyTime
 
 from os import stat as os_stat
 
-class Movie( Source):
+class Movie(Source):
 	LIST = 0
 	DEL = 1
 	TAGS = 2
 
-	def __init__(self, session, movielist, func = LIST):
+	def __init__(self, session, movielist, func=LIST):
 		Source.__init__(self)
 		self.func = func
 		self.session = session
@@ -21,13 +21,13 @@ class Movie( Source):
 		self.movielist = movielist #MovieList(self.root)
 		self.movielist.load(self.root, None)
 		self.cmd = ""
-		self.result = False, "Missing or Wrong Argument"
+		self.res = [ False, "Missing or Wrong Argument" ]
 
 	def handleCommand(self, cmd):
 		if cmd is not None:
 			self.cmd = cmd
 			if self.func is self.DEL:
-				self.result = self.delMovie(cmd)
+				self.res = self.delMovie(cmd)
 			elif self.func is self.LIST:
 				if cmd['dirname']:
 					self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + cmd['dirname'])
@@ -54,15 +54,15 @@ class Movie( Source):
 					result = True
 
 			if result == False:
-				return result, "Could not delete Movie '%s'" %name
+				return [ result, "Could not delete Movie '%s'" % name ]
 			else:
-				return result, "Movie '%s' deleted" %name
+				return [ result, "Movie '%s' deleted" % name ]
 
-		return result, "Illegal Parameter Value: sRef - '%s'" %param
+		return [ result, "Illegal Parameter Value: sRef - '%s'" % param ]
 
-	def command(self):
-		self.movielist.reload(root=self.root,filter_tags = self.tagfilter)
-		list=[]
+	def getMovieList(self):
+		self.movielist.reload(root=self.root, filter_tags=self.tagfilter)
+		list = []
 
 		tag = self.cmd['tag']
 		tag = tag and tag.lower()
@@ -82,15 +82,15 @@ class Movie( Source):
 				else:
 					len = "?:??"
 			else:
-				len="disabled"
+				len = "disabled"
 
-			sourceERef =info.getInfoString(serviceref, iServiceInformation.sServiceref)
-			sourceRef= ServiceReference(sourceERef)
+			sourceERef = info.getInfoString(serviceref, iServiceInformation.sServiceref)
+			sourceRef = ServiceReference(sourceERef)
 
 			event = info.getEvent(serviceref)
 			ext = event and event.getExtendedDescription() or ""
 
-			filename = "/"+"/".join(serviceref.toString().split("/")[1:])
+			filename = "/" + "/".join(serviceref.toString().split("/")[1:])
 
 			if not tag or tag in info.getInfoString(serviceref, iServiceInformation.sTags).lower():
 				""" add movie only to list, if a given tag is applied to the movie """
@@ -109,36 +109,25 @@ class Movie( Source):
 				])
 		return list
 
-	def getText(self):
+	def getResult(self):
 		if self.func is self.DEL:
-			(result, text) = self.result
-			xml = "<e2simplexmlresult>\n"
-			if result:
-				xml += "<e2state>True</e2state>\n"
-			else:
-				xml += "<e2state>False</e2state>\n"
-			xml += "<e2statetext>%s</e2statetext>\n" % text
-			xml += "</e2simplexmlresult>\n"
-			return xml
-		elif self.func is self.TAGS:
-			xml = "<e2movietags>\n"
-			for tag in self.movielist.tags:
-				xml += "<e2movietag>%s</e2movietag>\n"%tag
-			xml += "</e2movietags>\n"
-			return xml
+			return self.res
+		
+		return [ False, "illegal call" ]
+	
+	
+	result = property(getResult)	
 
-	text = property(getText)
-
-	list = property(command)
+	list = property(getMovieList)
 	lut = {"ServiceReference": 0
-			,"Title": 1
-			,"Description": 2
-			,"Time": 3
-			,"TimeString": 4
-			,"Length": 5
-			,"ServiceName": 6
-			,"Tags": 7
-			,"DescriptionExtended": 8
-			,"Filename": 9
-			,"Filesize": 10
+			, "Title": 1
+			, "Description": 2
+			, "Time": 3
+			, "TimeString": 4
+			, "Length": 5
+			, "ServiceName": 6
+			, "Tags": 7
+			, "DescriptionExtended": 8
+			, "Filename": 9
+			, "Filesize": 10
 		}

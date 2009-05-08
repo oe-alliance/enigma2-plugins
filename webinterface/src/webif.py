@@ -60,7 +60,7 @@ class WebScreen(Screen):
 		Screen.__init__(self, session)
 		self.stand_alone = True
 		self.request = request
-		self.instance = None
+		self.instance = None		
 
 class DummyWebScreen(WebScreen):
 	#use it, if you dont need any source, just to can do a static file with an xml-file
@@ -75,8 +75,8 @@ class UpdateWebScreen(WebScreen):
 class MessageWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		self["Message"] = Message(session,func = Message.PRINT)
-		self["GetAnswer"] = Message(session,func = Message.ANSWER)
+		self["Message"] = Message(session, func=Message.PRINT)
+		self["GetAnswer"] = Message(session, func=Message.ANSWER)
 
 class ServiceListReloadWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -92,7 +92,28 @@ class AudioWebScreen(WebScreen):
 class AboutWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		self["About"] = About(session)
+		
+		from WebComponents.Sources.Network import Network
+		from WebComponents.Sources.Hdd import Hdd
+		from WebComponents.Sources.Frontend import Frontend
+		from Components.config import config
+		from Components.About import about
+		from Components.Sources.StaticText import StaticText
+		from Tools.DreamboxHardware import getFPVersion
+		from Tools.HardwareInfo import HardwareInfo
+		
+		hw = HardwareInfo()
+		
+		self["About"] = About(session)		
+		
+		self["Network"] = Network()
+		self["Hdd"] = Hdd()
+		self["Frontends"] = Frontend()					
+		self["EnigmaVersion"] = StaticText(about.getEnigmaVersionString())
+		self["ImageVersion"] = StaticText(about.getVersionString())
+		self["WebIfVersion"] = StaticText(config.plugins.Webinterface.version.value)
+		self["FpVersion"] = StaticText(str(getFPVersion()))
+		self["DeviceName"] = StaticText(hw.get_device_name())		
 
 class VolumeWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -114,10 +135,10 @@ class ServiceWebScreen(WebScreen):
 		WebScreen.__init__(self, session, request)
 
 		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
-		self["SwitchService"] = ServiceList(fav, command_func = self.zapTo, validate_commands=False)
-		self["ServiceList"] = ServiceList(fav, command_func = self.getServiceList, validate_commands=False)
+		self["SwitchService"] = ServiceList(fav, command_func=self.zapTo, validate_commands=False)
+		self["ServiceList"] = ServiceList(fav, command_func=self.getServiceList, validate_commands=False)
 		self["ServiceListRecursive"] = ServiceListRecursive(session, func=ServiceListRecursive.FETCH)
-		self["localip"] = RequestData(request,what=RequestData.HOST)
+		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 	def getServiceList(self, sRef):
 		self["ServiceList"].root = sRef
@@ -139,21 +160,24 @@ class ServiceWebScreen(WebScreen):
 class LocationsAndTagsWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		self["CurrentLocation"] = LocationsAndTags(session,LocationsAndTags.CURRLOCATION)
-		self["Locations"] = LocationsAndTags(session,LocationsAndTags.LOCATIONS)
-		self["Tags"] = LocationsAndTags(session,LocationsAndTags.TAGS)
+		self["CurrentLocation"] = LocationsAndTags(session, LocationsAndTags.CURRLOCATION)
+		self["Locations"] = LocationsAndTags(session, LocationsAndTags.LOCATIONS)
+		self["Tags"] = LocationsAndTags(session, LocationsAndTags.TAGS)
 
 class EPGWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 
-		self["EPGTITLE"] = EPG(session,func=EPG.TITLE)
-		self["EPGSERVICE"] = EPG(session,func=EPG.SERVICE)
-		self["EPGBOUQUETNOW"] = EPG(session,func=EPG.BOUQUETNOW)
-		self["EPGBOUQUETNEXT"] = EPG(session,func=EPG.BOUQUETNEXT)
-		self["EPGSERVICENOW"] = EPG(session,func=EPG.SERVICENOW)
-		self["EPGSERVICENEXT"] = EPG(session,func=EPG.SERVICENEXT)
-		self["EPGBOUQUET"] = EPG(session,func=EPG.BOUQUET)
+		self["EPGTITLE"] = EPG(session, func=EPG.TITLE)
+		self["EPGSERVICE"] = EPG(session, func=EPG.SERVICE)		
+		self["EPGBOUQUETNOW"] = EPG(session, func=EPG.BOUQUETNOW)
+		self["EPGBOUQUETNEXT"] = EPG(session, func=EPG.BOUQUETNEXT)
+		self["EPGSERVICENOW"] = EPG(session, func=EPG.SERVICENOW)
+		self["EPGSERVICENEXT"] = EPG(session, func=EPG.SERVICENEXT)
+		self["EPGBOUQUET"] = EPG(session, func=EPG.BOUQUET)
+		self["localip"] = RequestData(request, what=RequestData.HOST)
+		
+		self["EPGSERVICEWAP"] = EPG(session, func=EPG.SERVICE, endtm=True)
 
 	def getServiceList(self, sRef):
 		self["ServiceList"].root = sRef
@@ -162,39 +186,38 @@ class MovieWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from Components.MovieList import MovieList
-		from Tools.Directories import resolveFilename,SCOPE_HDD
+		from Tools.Directories import resolveFilename, SCOPE_HDD
 		movielist = MovieList(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD)))
-		self["MovieList"] = Movie(session,movielist,func = Movie.LIST)
-		self["MovieFileDel"] = Movie(session,movielist,func = Movie.DEL)
-		self["MovieTags"] = Movie(session,movielist,func = Movie.TAGS)
-		self["localip"] = RequestData(request,what=RequestData.HOST)
+		self["MovieList"] = Movie(session, movielist, func=Movie.LIST)
+		self["MovieFileDel"] = Movie(session, movielist, func=Movie.DEL)
+		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class MediaPlayerWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		self["FileList"] = MP(session,func = MP.LIST)
-		self["PlayFile"] = MP(session,func = MP.PLAY)
-		self["Command"] = MP(session,func = MP.COMMAND)
-		self["WritePlaylist"] = MP(session,func = MP.WRITEPLAYLIST)
+		self["FileList"] = MP(session, func=MP.LIST)
+		self["PlayFile"] = MP(session, func=MP.PLAY)
+		self["Command"] = MP(session, func=MP.COMMAND)
+		self["WritePlaylist"] = MP(session, func=MP.WRITEPLAYLIST)
 
 class AutoTimerWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		self["AutoTimerList"] = AT(session,func = AT.LIST)
-		self["AutoTimerWrite"] = AT(session,func = AT.WRITE)
+		self["AutoTimerList"] = AT(session, func=AT.LIST)
+		self["AutoTimerWrite"] = AT(session, func=AT.WRITE)
 
 class TimerWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		self["TimerList"] = Timer(session, func = Timer.LIST)
-		self["TimerAddEventID"] = Timer(session, func = Timer.ADDBYID)
-		self["TimerAdd"] = Timer(session, func = Timer.ADD)
-		self["TimerDel"] = Timer(session, func = Timer.DEL)
-		self["TimerChange"] = Timer(session, func = Timer.CHANGE)
-		self["TimerListWrite"] = Timer(session, func = Timer.WRITE)
-		self["TVBrowser"] = Timer(session, func = Timer.TVBROWSER)
-		self["RecordNow"] = Timer(session, func = Timer.RECNOW)
-		self["TimerCleanup"] = Timer(session, func = Timer.CLEANUP)
+		self["TimerList"] = Timer(session, func=Timer.LIST)
+		self["TimerAddEventID"] = Timer(session, func=Timer.ADDBYID)
+		self["TimerAdd"] = Timer(session, func=Timer.ADD)
+		self["TimerDel"] = Timer(session, func=Timer.DEL)
+		self["TimerChange"] = Timer(session, func=Timer.CHANGE)
+		self["TimerListWrite"] = Timer(session, func=Timer.WRITE)
+		self["TVBrowser"] = Timer(session, func=Timer.TVBROWSER)
+		self["RecordNow"] = Timer(session, func=Timer.RECNOW)
+		self["TimerCleanup"] = Timer(session, func=Timer.CLEANUP)
 
 class RemoteWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -214,26 +237,26 @@ class ParentControlWebScreen(WebScreen):
 class WAPWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		self["WAPFillOptionListYear"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		self["WAPFillOptionListDay"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		self["WAPFillOptionListMonth"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		self["WAPFillOptionListShour"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		self["WAPFillOptionListSmin"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		self["WAPFillOptionListEhour"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
-		self["WAPFillOptionListEmin"] = WAPfunctions(session,func = WAPfunctions.LISTTIME)
+		self["WAPFillOptionListYear"] = WAPfunctions(session, func=WAPfunctions.LISTTIME)
+		self["WAPFillOptionListDay"] = WAPfunctions(session, func=WAPfunctions.LISTTIME)
+		self["WAPFillOptionListMonth"] = WAPfunctions(session, func=WAPfunctions.LISTTIME)
+		self["WAPFillOptionListShour"] = WAPfunctions(session, func=WAPfunctions.LISTTIME)
+		self["WAPFillOptionListSmin"] = WAPfunctions(session, func=WAPfunctions.LISTTIME)
+		self["WAPFillOptionListEhour"] = WAPfunctions(session, func=WAPfunctions.LISTTIME)
+		self["WAPFillOptionListEmin"] = WAPfunctions(session, func=WAPfunctions.LISTTIME)
 
-		self["WAPFillOptionListRecord"] = WAPfunctions(session,func = WAPfunctions.OPTIONLIST)
-		self["WAPFillOptionListAfterEvent"] = WAPfunctions(session,func = WAPfunctions.OPTIONLIST)
+		self["WAPFillOptionListRecord"] = WAPfunctions(session, func=WAPfunctions.OPTIONLIST)
+		self["WAPFillOptionListAfterEvent"] = WAPfunctions(session, func=WAPfunctions.OPTIONLIST)
 
-		self["WAPFillValueName"] = WAPfunctions(session,func = WAPfunctions.FILLVALUE)
-		self["WAPFillValueDescr"] = WAPfunctions(session,func = WAPfunctions.FILLVALUE)
-		self["WAPFillLocation"] = WAPfunctions(session,func = WAPfunctions.LOCATIONLIST)
-		self["WAPFillTags"] = WAPfunctions(session,func = WAPfunctions.TAGLIST)
+		self["WAPFillValueName"] = WAPfunctions(session, func=WAPfunctions.FILLVALUE)
+		self["WAPFillValueDescr"] = WAPfunctions(session, func=WAPfunctions.FILLVALUE)
+		self["WAPFillLocation"] = WAPfunctions(session, func=WAPfunctions.LOCATIONLIST)
+		self["WAPFillTags"] = WAPfunctions(session, func=WAPfunctions.TAGLIST)
 
-		self["WAPFillOptionListRepeated"] = WAPfunctions(session,func = WAPfunctions.REPEATED)
-		self["WAPServiceList"] = WAPfunctions(session, func = WAPfunctions.SERVICELIST)
+		self["WAPFillOptionListRepeated"] = WAPfunctions(session, func=WAPfunctions.REPEATED)
+		self["WAPServiceList"] = WAPfunctions(session, func=WAPfunctions.SERVICELIST)
 
-		self["WAPdeleteOldOnSave"] = WAPfunctions(session,func = WAPfunctions.DELETEOLD)
+		self["WAPdeleteOldOnSave"] = WAPfunctions(session, func=WAPfunctions.DELETEOLD)
 
 class StreamingWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -248,13 +271,13 @@ class M3UStreamingWebScreen(WebScreen):
 		from Components.Sources.Config import Config
 		from Components.config import config
 		self["ref"] = StaticText()
-		self["localip"] = RequestData(request,what=RequestData.HOST)
+		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class M3UStreamingCurrentServiceWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		self["CurrentService"] = CurrentService(session)
-		self["localip"] = RequestData(request,what=RequestData.HOST)
+		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class TsM3U(WebScreen):
 	def __init__(self, session, request):
@@ -263,7 +286,7 @@ class TsM3U(WebScreen):
 		from Components.Sources.Config import Config
 		from Components.config import config
 		self["file"] = StaticText()
-		self["localip"] = RequestData(request,what=RequestData.HOST)
+		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 class RestartWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -282,22 +305,35 @@ class GetPid(WebScreen):
 		 	VPID = hex(pidinfo.getInfo(iServiceInformation.sVideoPID))
 			APID = hex(pidinfo.getInfo(iServiceInformation.sAudioPID))
 			PPID = hex(pidinfo.getInfo(iServiceInformation.sPMTPID))
-			self["pids"] = StaticText("%s,%s,%s"%(PPID.lstrip("0x"),VPID.lstrip("0x"),APID.lstrip("0x")))
+			self["pids"] = StaticText("%s,%s,%s" % (PPID.lstrip("0x"), VPID.lstrip("0x"), APID.lstrip("0x")))
 		 else:
 			self["pids"] = StaticText("0x,0x,0x")
 
-		 self["localip"] = RequestData(request,what=RequestData.HOST)
+		 self["localip"] = RequestData(request, what=RequestData.HOST)
 
-class About2(WebScreen):
+class DeviceInfo(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from WebComponents.Sources.Network import Network
 		from WebComponents.Sources.Hdd import Hdd
-		from WebComponents.Sources.Frontend import Frontend
+		from WebComponents.Sources.Frontend import Frontend		
+		from Components.config import config
+		from Components.About import about
+		from Components.Sources.StaticText import StaticText
+		from Tools.DreamboxHardware import getFPVersion
+		from Tools.HardwareInfo import HardwareInfo
+		
+		hw = HardwareInfo()
+		
 		self["Network"] = Network()
 		self["Hdd"] = Hdd()
-		self["Frontends"] = Frontend()
-
+		self["Frontends"] = Frontend()				
+		self["EnigmaVersion"] = StaticText(about.getEnigmaVersionString())
+		self["ImageVersion"] = StaticText(about.getVersionString())
+		self["WebIfVersion"] = StaticText(config.plugins.Webinterface.version.value)
+		self["FpVersion"] = StaticText(str(getFPVersion()))
+		self["DeviceName"] = StaticText(hw.get_device_name())
+		
 # implements the 'render'-call.
 # this will act as a downstream_element, like a renderer.
 class OneTimeElement(Element):
@@ -307,9 +343,9 @@ class OneTimeElement(Element):
 
 	# CHECKME: is this ok performance-wise?
 	def handleCommand(self, args):
-		if self.source_id.find(",") >=0:
+		if self.source_id.find(",") >= 0:
 			paramlist = self.source_id.split(",")
-			list={}
+			list = {}
 			for key in paramlist:
 				arg = args.get(key, [])
 				if len(arg) == 0:
@@ -393,7 +429,7 @@ class TextToURL(Converter):
 		Converter.__init__(self, arg)
 
 	def getHTML(self, id):
-		return self.source.text.replace(" ","%20")
+		return self.source.text.replace(" ", "%20")
 
 class ReturnEmptyXML(Converter):
 	def __init__(self, arg):
@@ -417,7 +453,7 @@ class JavascriptUpdate(Converter):
 	def getHTML(self, id):
 		# 3c5x9, added parent. , this is because the ie loads this in a iframe. an the set is in index.html.xml
 		#		 all other will replace this in JS
-		return '<script>parent.set("%s", "%s");</script>\n'%(id, self.source.text.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"').replace('\xb0', '&deg;'))
+		return '<script>parent.set("%s", "%s");</script>\n' % (id, self.source.text.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"').replace('\xb0', '&deg;'))
 
 # the performant 'one-dimensonial listfiller' engine (podlfe)
 class SimpleListFiller(Converter):
@@ -425,9 +461,9 @@ class SimpleListFiller(Converter):
 		Converter.__init__(self, arg)
 		
 	def getText(self):
-		l = self.source.list
+		l = self.source.simplelist
 		conv_args = self.converter_arguments
-		print "[webif.py] conv_args: " %conv_args
+		print "[webif.py] conv_args: " % conv_args
 		
 		list = [ ]
 		for element in conv_args:
@@ -454,12 +490,20 @@ class SimpleListFiller(Converter):
 					append(str(item).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				elif filternum == 5:
 					append(quote(str(item)))
+				elif filternum == 6:
+					time = parseint(item) or 0
+					t = localtime(time)
+					append("%02d:%02d" % (t.tm_hour, t.tm_min))
+				elif filternum == 7:
+					time = parseint(item) or 0
+					t = localtime(time)
+					append("%d min" % (time / 60))
 				else:
 					append(str(item))
 		# (this will be done in c++ later!)
 
-		return ''.join(strlist)
-
+		return ''.join(strlist)		
+	
 	text = property(getText)
 		
 				
@@ -503,6 +547,16 @@ class ListFiller(Converter):
 					append(str(item[element]).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				elif filternum == 5:
 					append(quote(str(item[element])))
+				elif filternum == 6:
+					from time import localtime
+					time = int(float(item[element])) or 0
+					t = localtime(time)
+					append("%02d:%02d" % (t.tm_hour, t.tm_min))
+				elif filternum == 7:
+					from time import localtime
+					time = int(float(item[element])) or 0
+					t = localtime(time)
+					append("%d min" % (time / 60))					
 				else:
 					append(str(item[element]))
 		# (this will be done in c++ later!)
@@ -592,7 +646,7 @@ class webifHandler(ContentHandler):
 
 	def parse_item(self, attrs):
 		if "name" in attrs:
-			filter = {"": 1, "javascript_escape": 2, "xml": 3, "uri": 4, "urlencode": 5}[attrs.get("filter", "")]
+			filter = {"": 1, "javascript_escape": 2, "xml": 3, "uri": 4, "urlencode": 5, "time": 6, "minutes": 7}[attrs.get("filter", "")]
 			self.sub.append(ListItem(attrs["name"], filter))
 		else:
 			assert "macro" in attrs, "e2:item must have a name= or macro= attribute!"
@@ -600,14 +654,14 @@ class webifHandler(ContentHandler):
 
 	def startElement(self, name, attrs):
 		if name == "e2:screen":
-			self.screen = eval(attrs["name"])(self.session,self.request) # fixme
+			self.screen = eval(attrs["name"])(self.session, self.request) # fixme
 			self.screens.append(self.screen)
 			return
 
 		if name[:3] == "e2:":
 			self.mode += 1
 
-		tag = [' %s="%s"' %(key,val) for (key, val) in attrs.items()]
+		tag = [' %s="%s"' % (key, val) for (key, val) in attrs.items()]
 		tag.insert(0, name)
 		tag.insert(0, '<')
 		tag.append('>')
@@ -674,7 +728,7 @@ def renderPage(stream, path, req, session):
 	# read in the template, create required screens
 	# we don't have persistense yet.
 	# if we had, this first part would only be done once.
-	handler = webifHandler(session,req)
+	handler = webifHandler(session, req)
 	parser = make_parser()
 	parser.setFeature(feature_namespaces, 0)
 	parser.setContentHandler(handler)

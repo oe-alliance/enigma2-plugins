@@ -1,4 +1,5 @@
 
+<!-- tplMovieList -->
 						<table id="contentTable">
 							{for movie in movies}
 							<tr>
@@ -26,7 +27,7 @@
 												</a>
 											</td>
 											<td>
-												<a href="#" onclick="delMovie('${movie.servicereference}','${movie.servicename}','${movie.title}','${movie.description}');">
+												<a href="#" onclick="delMovie('${movie.servicereference}','${movie.servicename}','${movie.escapedTitle}','${movie.description}');">
 													<img src="/web-data/img/delete.png" title="Delete ${movie.title}" border="0">
 												</a>
 											</td>
@@ -57,3 +58,4 @@
 							</tr>
 							{/for}		
 						</table>
+<!-- /tplMovieList -->

@@ -1,11 +1,11 @@
 from Components.Sources.Source import Source
 from Tools.ISO639 import LanguageCodes
 
-class AudioTracks( Source ):
+class AudioTracks(Source):
 	GET = 0
 	SET = 1
 
-	text="False"
+	text = "False"
 
 	def __init__(self, session, func=GET):
 		self.cmd = None
@@ -25,7 +25,7 @@ class AudioTracks( Source ):
 			except ValueError:
 				cmd = -1
 
-			print "COMMAND is %s" %self.cmd
+			print "COMMAND is %s" % self.cmd
 			if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > cmd and cmd >= 0:
 				audio.selectTrack(cmd)
 				return "Success"
@@ -46,7 +46,7 @@ class AudioTracks( Source ):
 			currentTrack = audio.getCurrentTrack()
 
 			if n > 0:
-				print "[AudioTracks.py] got %s Audiotracks!" %(n)
+				print "[AudioTracks.py] got %s Audiotracks!" % (n)
 
 				for x in range(n):
 					i = audio.getTrackInfo(x)

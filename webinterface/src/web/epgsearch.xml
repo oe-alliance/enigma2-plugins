@@ -1,5 +1,5 @@
 <e2:screen name="EPGWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;e2eventlist><e2:element source="EPGTITLE" id="search"><e2:convert type="web:ListFiller" >
+<e2eventlist><e2:element source="EPGTITLE" id="search"><e2:convert type="web:ListFiller" >
 	&lt;e2event>
 		&lt;e2eventid><e2:item name="EventID"/>&lt;/e2eventid>
 		&lt;e2eventstart><e2:item name="TimeStart"/>&lt;/e2eventstart>
@@ -10,5 +10,5 @@
 		&lt;e2eventservicereference><e2:item name="ServiceReference" filter="xml"/>&lt;/e2eventservicereference>
 		&lt;e2eventservicename><e2:item name="ServiceName" filter="xml"/>&lt;/e2eventservicename>
 	&lt;/e2event></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
-&lt;/e2eventlist>
+</e2eventlist>
 </e2:screen>

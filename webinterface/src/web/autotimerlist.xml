@@ -1,5 +1,5 @@
 <e2:screen name="AutoTimerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;e2autotmerlist><e2:element source="AutoTimerList" id="gl"><e2:convert type="web:ListFiller" >
+<e2autotmerlist><e2:element source="AutoTimerList" id="gl"><e2:convert type="web:ListFiller" >
 	&lt;e2autotimer>
 		&lt;e2name><e2:item name="Name"  filter="xml"/>&lt;/e2name>
 		&lt;e2match><e2:item name="Match"  filter="xml"/>&lt;/e2match>
@@ -31,5 +31,5 @@
 	&lt;/e2autotimer>
 	</e2:convert>
 	<e2:convert type="web:TextToHTML" /></e2:element>
-&lt;/e2autotmerlist>
+</e2autotmerlist>
 </e2:screen>

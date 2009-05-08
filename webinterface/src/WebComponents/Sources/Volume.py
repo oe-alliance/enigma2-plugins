@@ -4,18 +4,19 @@ from GlobalActions import globalActionMap
 from Components.VolumeControl import VolumeControl
 
 class Volume(Source):
-	def __init__(self,session, command_default="state"):
+	def __init__(self, session, command_default="state"):
 		self.cmd = command_default
 		Source.__init__(self)
 		global globalActionMap # hackalert :)
 		self.actionmap = globalActionMap
 		self.volctrl = eDVBVolumecontrol.getInstance() # this is not nice
-		#self.volcontrol = VolumeControl(session)
+		self.vol = [ True, "State", self.volctrl.getVolume(), self.volctrl.isMuted() ]
 
 	def handleCommand(self, cmd):
 		self.cmd = cmd
+		self.vol = self.handleVolume()
 
-	def do_func(self):
+	def handleVolume(self):
 		list = []
 		if self.cmd == "state":
 			list.append(True)
@@ -35,9 +36,9 @@ class Volume(Source):
 		elif self.cmd.startswith("set"):
 			try:
 				targetvol = int(self.cmd[3:])
-				if targetvol>100:
+				if targetvol > 100:
 					targetvol = 100
-				if targetvol<0:
+				if targetvol < 0:
 					targetvol = 0
 
 				self.volctrl.setVolume(targetvol, targetvol)
@@ -46,19 +47,18 @@ class Volume(Source):
 				list.append("Volume set to %i" % targetvol)
 			except ValueError: # if cmd was set12NotInt
 				list.append(False)
-				list.append("Wrong parameter format 'set=%s'. Use set=set15 "%self.cmd)
+				list.append("Wrong parameter format 'set=%s'. Use set=set15 " % self.cmd)
 		else:
 			list.append(False)
-			list.append("Unknown Volume command %s" %self.cmd)
+			list.append("Unknown Volume command %s" % self.cmd)
+		
 		list.append(self.volctrl.getVolume())
 		list.append(self.volctrl.isMuted())
 
-		return [list]
-
-	list = property(do_func)
-	lut = {"Result": 0
-			,"ResultText": 1
-			,"Volume": 2
-			,"isMuted": 3
-			}
+		return list
+	
+	def getVolume(self):
+		return self.vol
+	
+	volume = property(getVolume)
 

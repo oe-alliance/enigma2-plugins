@@ -17,33 +17,33 @@ from OpenSSL import SSL
 
 from __init__ import _, __version__
 
-DEBUG_TO_FILE=False # PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
+DEBUG_TO_FILE = False # PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
 
-DEBUGFILE= "/tmp/twisted.log"
+DEBUGFILE = "/tmp/twisted.log"
 
 #CONFIG INIT
 
 #init the config
 config.plugins.Webinterface = ConfigSubsection()
-config.plugins.Webinterface.enable = ConfigYesNo(default = True)
-config.plugins.Webinterface.allowzapping = ConfigYesNo(default = True)
-config.plugins.Webinterface.includemedia = ConfigYesNo(default = False)
-config.plugins.Webinterface.autowritetimer = ConfigYesNo(default = False)
-config.plugins.Webinterface.loadmovielength = ConfigYesNo(default = False)
+config.plugins.Webinterface.enable = ConfigYesNo(default=True)
+config.plugins.Webinterface.allowzapping = ConfigYesNo(default=True)
+config.plugins.Webinterface.includemedia = ConfigYesNo(default=False)
+config.plugins.Webinterface.autowritetimer = ConfigYesNo(default=False)
+config.plugins.Webinterface.loadmovielength = ConfigYesNo(default=False)
 config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI.
 config.plugins.Webinterface.interfacecount = ConfigInteger(0)
 config.plugins.Webinterface.interfaces = ConfigSubList()
 initConfig()
-config.plugins.Webinterface.warningsslsend = ConfigYesNo(default = False)
+config.plugins.Webinterface.warningsslsend = ConfigYesNo(default=False)
 
-global running_defered,waiting_shutdown
+global running_defered, waiting_shutdown
 running_defered = []
 waiting_shutdown = 0
-server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revi","").replace("sion: ","").replace("$","")
+server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revi", "").replace("sion: ", "").replace("$", "")
 
 class Closer:
 	counter = 0
-	def __init__(self,session, callback = None):
+	def __init__(self, session, callback=None):
 		self.callback = callback
 		self.session = session
 
@@ -54,17 +54,17 @@ class Closer:
 			x = d.stopListening()
 			try:
 				x.addCallback(self.isDown)
-				self.counter +=1
+				self.counter += 1
 			except AttributeError:
 				pass
 		running_defered = []
-		if self.counter <1:
+		if self.counter < 1:
 			if self.callback is not None:
 				self.callback(self.session)
 
-	def isDown(self,s):
-		self.counter-=1
-		if self.counter <1:
+	def isDown(self, s):
+		self.counter -= 1
+		if self.counter < 1:
 			if self.callback is not None:
 				self.callback(self.session)
 
@@ -78,8 +78,8 @@ def restartWebserver(session):
 		pass
 
 	global running_defered
-	if len(running_defered) >0:
-		Closer(session,startWebserver).stop()
+	if len(running_defered) > 0:
+		Closer(session, startWebserver).stop()
 	else:
 		startWebserver(session)
 
@@ -93,13 +93,13 @@ def startWebserver(session):
 		return False
 	if DEBUG_TO_FILE:
 		print "start twisted logfile, writing to %s" % DEBUGFILE
-		startLogging(open(DEBUGFILE,'w'))
+		startLogging(open(DEBUGFILE, 'w'))
 
 	for c in config.plugins.Webinterface.interfaces:
 		if c.disabled.value is False:
-			startServerInstance(session,c.address.value,c.port.value,c.useauth.value,c.usessl.value)
+			startServerInstance(session, c.address.value, c.port.value, c.useauth.value, c.usessl.value)
 		else:
-			print "[Webinterface] not starting disabled interface on %s:%i"%(c.address.value,c.port.value)
+			print "[Webinterface] not starting disabled interface on %s:%i" % (c.address.value, c.port.value)
 
 def stopWebserver(session):
 	try:
@@ -114,30 +114,30 @@ def stopWebserver(session):
 	if len(running_defered) > 0:
 		Closer(session).stop()
 
-def startServerInstance(session,ipaddress,port,useauth=False,usessl=False):
+def startServerInstance(session, ipaddress, port, useauth=False, usessl=False):
 	try:
 		toplevel = Toplevel(session)
 		if useauth:
 			portal = Portal(HTTPAuthRealm())
 			portal.registerChecker(PasswordDatabase())
-			root = wrapper.HTTPAuthResource(toplevel,(basic.BasicCredentialFactory(socket_gethostname()),),portal, (IHTTPUser,))
+			root = wrapper.HTTPAuthResource(toplevel, (basic.BasicCredentialFactory(socket_gethostname()),), portal, (IHTTPUser,))
 			site = server.Site(root)
 		else:
 			site = server.Site(toplevel)
 		try:
 			if usessl:
-				ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem','/etc/enigma2/cacert.pem',sslmethod=SSL.SSLv23_METHOD)
-				d = reactor.listenSSL(port, channel.HTTPFactory(site),ctx,interface=ipaddress)
+				ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem', '/etc/enigma2/cacert.pem', sslmethod=SSL.SSLv23_METHOD)
+				d = reactor.listenSSL(port, channel.HTTPFactory(site), ctx, interface=ipaddress)
 			else:
-				d = reactor.listenTCP(port, channel.HTTPFactory(site),interface=ipaddress)
+				d = reactor.listenTCP(port, channel.HTTPFactory(site), interface=ipaddress)
 			running_defered.append(d)
-			print "[Webinterface] started on %s:%i"%(ipaddress,port),"auth=",useauth,"ssl=",usessl
+			print "[Webinterface] started on %s:%i" % (ipaddress, port), "auth=", useauth, "ssl=", usessl
 		except CannotListenError, e:
-			print "[Webinterface] Could not Listen on %s:%i!"%(ipaddress,port)
-			session.open(MessageBox,'Could not Listen on %s:%i!\n\n%s'%(ipaddress,port,str(e)), MessageBox.TYPE_ERROR)
-	except Exception,e:
-		print "[Webinterface] starting FAILED on %s:%i!"%(ipaddress,port),e
-		session.open(MessageBox,'starting FAILED on %s:%i!\n\n%s'%(ipaddress,port,str(e)), MessageBox.TYPE_ERROR)
+			print "[Webinterface] Could not Listen on %s:%i!" % (ipaddress, port)
+			session.open(MessageBox, 'Could not Listen on %s:%i!\n\n%s' % (ipaddress, port, str(e)), MessageBox.TYPE_ERROR)
+	except Exception, e:
+		print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e
+		session.open(MessageBox, 'starting FAILED on %s:%i!\n\n%s' % (ipaddress, port, str(e)), MessageBox.TYPE_ERROR)
 
 class PasswordDatabase:
 	"""
@@ -145,7 +145,7 @@ class PasswordDatabase:
 	"""
 	passwordfile = "/etc/passwd"
 	implements(checkers.ICredentialsChecker)
-	credentialInterfaces = (credentials.IUsernamePassword,credentials.IUsernameHashedPassword)
+	credentialInterfaces = (credentials.IUsernamePassword, credentials.IUsernameHashedPassword)
 
 	def _cbPasswordMatch(self, matched, username):
 		if matched:
@@ -154,8 +154,8 @@ class PasswordDatabase:
 			return failure.Failure(error.UnauthorizedLogin())
 
 	def requestAvatarId(self, credentials):
-		if check_passwd(credentials.username,credentials.password,self.passwordfile) is True:
-			return defer.maybeDeferred(credentials.checkPassword,credentials.password).addCallback(self._cbPasswordMatch, str(credentials.username))
+		if check_passwd(credentials.username, credentials.password, self.passwordfile) is True:
+			return defer.maybeDeferred(credentials.checkPassword, credentials.password).addCallback(self._cbPasswordMatch, str(credentials.username))
 		else:
 			return defer.fail(error.UnauthorizedLogin())
 
@@ -165,7 +165,7 @@ class IHTTPUser(Interface):
 class HTTPUser(object):
 	implements(IHTTPUser)
 	username = None
-	def __init__(self,username):
+	def __init__(self, username):
 		self.username = username
 
 class HTTPAuthRealm(object):
@@ -212,7 +212,7 @@ def check_passwd(name, passwd, pwfile=None):
 	"""Validate given user, passwd pair against password database."""
 
 	if not pwfile or type(pwfile) == type(''):
-		getuser = lambda x,pwfile=pwfile: getpwnam(x,pwfile)[1]
+		getuser = lambda x, pwfile = pwfile: getpwnam(x, pwfile)[1]
 	else:
 		getuser = pwfile.get_passwd
 
@@ -230,7 +230,7 @@ def check_passwd(name, passwd, pwfile=None):
 
 def _to64(v, n):
 	r = ''
-	while (n-1 >= 0):
+	while (n - 1 >= 0):
 		r = r + DES_SALT[v & 0x3F]
 		v = v >> 6
 		n = n - 1
@@ -307,7 +307,7 @@ def passcrypt_md5(passwd, salt=None, magic='$1$'):
 	return rv
 
 #### stuff for SSL Support
-def makeSSLContext(myKey,trustedCA):
+def makeSSLContext(myKey, trustedCA):
 	 '''Returns an ssl Context Object
 	@param myKey a pem formated key and certifcate with for my current host
 			the other end of this connection must have the cert from the CA
@@ -321,11 +321,11 @@ def makeSSLContext(myKey,trustedCA):
 	 # or listenSSL
 
 	 # Why these functioins... Not sure...
-	 fd = open(myKey,'r')
+	 fd = open(myKey, 'r')
 	 ss = fd.read()
 	 theCert = ssl.PrivateCertificate.loadPEM(ss)
 	 fd.close()
-	 fd = open(trustedCA,'r')
+	 fd = open(trustedCA, 'r')
 	 theCA = ssl.Certificate.loadPEM(fd.read())
 	 fd.close()
 	 #ctx = theCert.options(theCA)
@@ -376,7 +376,7 @@ def autostart(reason, **kwargs):
 		try:
 			updateConfig()
 			startWebserver(global_session)
-		except ImportError,e:
+		except ImportError, e:
 			print "[Webinterface] twisted not available, not starting web services", e
 	elif reason is False:
 		stopWebserver(global_session)
@@ -392,7 +392,7 @@ def configCB(result, session):
 		print "[WebIf] config not changed"
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = sessionstart),
-			PluginDescriptor(where = [PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc = autostart),
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+			PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=autostart),
 			PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),
-							where = [PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png",fnc = openconfig)]
+							where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=openconfig)]

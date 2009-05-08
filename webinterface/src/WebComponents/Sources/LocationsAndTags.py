@@ -10,11 +10,11 @@ class LocationsAndTags(Source):
 		self.func = func
 		Source.__init__(self)
 		self.session = session
-		self.result = False,"one two three four unknown command"
+		self.result = [ False, "one two three four unknown command" ]
 
 	def handleCommand(self, cmd):
 		if self.func is self.CURRLOCATION:
-			self.result = [self.getCurrentLocation()]
+			self.result = self.getCurrentLocation()
 		elif self.func is self.LOCATIONS:
 			self.result = self.getLocations()
 		elif self.func is self.TAGS:
@@ -40,14 +40,12 @@ class LocationsAndTags(Source):
 		return tags
 
 	def getText(self):
-		self.handleCommand(None)		
-		lst = self.result
-		xml = "<e2simplexmllist>\n"
+		self.handleCommand(None)
+
 		if self.result:
-			for ele in self.result:
-				xml += "<e2simplexmlitem>%s</e2simplexmlitem>\n"%ele
-		xml += "</e2simplexmllist>\n"
-		return xml
+			return str(self.result)
+		else:
+			return ""
 
 	def getList(self):
 		self.handleCommand(None)
@@ -58,4 +56,4 @@ class LocationsAndTags(Source):
 		return list
 
 	text = property(getText)
-	list = property(getList)
+	simplelist = property(getList)

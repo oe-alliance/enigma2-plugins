@@ -1,11 +1,11 @@
 # Code for the AutoTimerPlugin
 from Components.Sources.Source import Source
 
-class AT( Source ):
+class AT(Source):
 	LIST = 0
 	WRITE = 1
 
-	def __init__(self, session, func = LIST):
+	def __init__(self, session, func=LIST):
 		print "AutoTimer: init: ", func
 		Source.__init__(self)
 		self.func = func
@@ -53,7 +53,7 @@ class AT( Source ):
 				timer.getExcludedShort(),
 				timer.getExcludedDescription(),
 				timer.getExcludedDays(),
-			))
+												))
 
 			#includes
 			innerList.extend((
@@ -61,19 +61,19 @@ class AT( Source ):
 				timer.getIncludedShort(),
 				timer.getIncludedDescription(),
 				timer.getIncludedDays(),
-			))
+												))
 
 			# services
 			innerList.extend((
 				timer.getServices(), # 11
 				timer.getBouquets() # 12
-			))
+												))
 
 			if timer.hasTimespan():
 				innerList.extend((
 					timer.getTimespanBegin(), # 13
 					timer.getTimespanEnd() # 14
-				))
+												))
 			else:
 				innerList.extend(("", "")) # 13, 14
 
@@ -86,7 +86,7 @@ class AT( Source ):
 				innerList.extend((
 					timer.getCounter(), # 16
 					timer.getCounterLeft() # 17
-				))
+												))
 			else:
 				innerList.extend((0, 0)) # 16, 17
 
@@ -106,7 +106,7 @@ class AT( Source ):
 				timer.getLastBegin(), # 21
 				timer.getJustplay(), # 22
 				timer.getAvoidDuplicateDescription() # 23
-			))
+												))
 
 			if timer.hasTags():
 				innerList.append(timer.getTags()) # 24
@@ -121,13 +121,13 @@ class AT( Source ):
 
 		return returnList
 
-	def writeTimer(self,param):
-		print "writeTimer: ",param
+	def writeTimer(self, param):
+		print "writeTimer: ", param
 		# TODO: fix error handling
 		return
 
-	def command(self,param):
-		print "command: ",param
+	def command(self, param):
+		print "command: ", param
 		return
 
 		param = int(param)
@@ -136,30 +136,30 @@ class AT( Source ):
 
 	list = property(timerList)
 	lut = {"Name": 0
-			,"Match": 1
-			,"AfterEvent": 2
-			,"ExcludedTitle": 3
-			,"ExcludedShort": 4
-			,"ExcludedDescription": 5
-			,"ExcludedDays": 6
-			,"IncludedTitle": 7
-			,"IncludedShort": 8
-			,"IncludedDescription": 9
-			,"IncludedDays": 10
-			,"Services": 11
-			,"Bouquets": 12
-			,"TimespanBegin": 13
-			,"TimespanEnd": 14
-			,"Duration": 15
-			,"Counter": 16
-			,"CounterLeft": 17
-			,"CounterLimit": 18
-			,"Destination": 19
-			,"CounterFormatString": 20
-			,"LastBegin": 21
-			,"Justplay": 22
-			,"AvoidDuplicateDescription": 23
-			,"Tags": 24
-			,"Enabled": 25
-			,"toggleDisabledIMG": 26
+			, "Match": 1
+			, "AfterEvent": 2
+			, "ExcludedTitle": 3
+			, "ExcludedShort": 4
+			, "ExcludedDescription": 5
+			, "ExcludedDays": 6
+			, "IncludedTitle": 7
+			, "IncludedShort": 8
+			, "IncludedDescription": 9
+			, "IncludedDays": 10
+			, "Services": 11
+			, "Bouquets": 12
+			, "TimespanBegin": 13
+			, "TimespanEnd": 14
+			, "Duration": 15
+			, "Counter": 16
+			, "CounterLeft": 17
+			, "CounterLimit": 18
+			, "Destination": 19
+			, "CounterFormatString": 20
+			, "LastBegin": 21
+			, "Justplay": 22
+			, "AvoidDuplicateDescription": 23
+			, "Tags": 24
+			, "Enabled": 25
+			, "toggleDisabledIMG": 26
 			}

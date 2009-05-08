@@ -14,7 +14,7 @@ class Network(Source):
 	LAN = 0
 	WLAN = 1
 	
-	def __init__(self, device = LAN):
+	def __init__(self, device=LAN):
 		Source.__init__(self)
 		if device is self.LAN:
 			self.iface = "eth0"
@@ -24,7 +24,7 @@ class Network(Source):
 
 	def ConvertIP(self, list):
 		if(len(list) == 4):
-			retstr = "%s.%s.%s.%s" %(list[0], list[1], list[2], list[3])
+			retstr = "%s.%s.%s.%s" % (list[0], list[1], list[2], list[3])
 		else:
 			retstr = "0.0.0.0"
 		return retstr
@@ -32,7 +32,7 @@ class Network(Source):
 		
 	def getInterface(self):
 		iface = Interface(self.iface)
-		iface.mac =  iNetwork.getAdapterAttribute(self.iface, "mac")
+		iface.mac = iNetwork.getAdapterAttribute(self.iface, "mac")
 		iface.dhcp = iNetwork.getAdapterAttribute(self.iface, "dhcp")
 		iface.ip = self.ConvertIP(iNetwork.getAdapterAttribute(self.iface, "ip"))
 		iface.netmask = self.ConvertIP(iNetwork.getAdapterAttribute(self.iface, "netmask"))

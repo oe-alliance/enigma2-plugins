@@ -1,10 +1,10 @@
 <e2:screen name="MovieWebScreen"><e2:element source="localip" macro="ipadress" />&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;rss version="2.0" >
-	&lt;channel>
-		&lt;title>Enigma2 Movielist&lt;/title>
-		&lt;link>http://<e2:element source="localip" filter="xml" />&lt;/link>
-		&lt;description>Eine automatische Liste aller Enigma2 Aufnahmen&lt;/description>
-		&lt;generator>Enigma2 WebInterface &lt;/generator>
+<rss version="2.0" >
+	<channel>
+		<title>Enigma2 Movielist</title>
+		<link>http://<e2:element source="localip" filter="xml" /></link>
+		<description>Eine automatische Liste aller Enigma2 Aufnahmen</description>
+		<generator>Enigma2 WebInterface</generator>
 		<e2:element source="MovieList" id="dirname,tag"><e2:convert type="web:ListFiller" >
 		&lt;item>
 			&lt;title><e2:item name="Title" filter="xml"/>&lt;/title>
@@ -21,6 +21,6 @@
 			&lt;category><e2:item name="ServiceName" filter="xml" />&lt;/category>
 			&lt;author>Dreambox Enigma2&lt;/author>
 		&lt;/item></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
-	&lt;/channel>
-&lt;/rss>
+	</channel>
+</rss>
 </e2:screen>

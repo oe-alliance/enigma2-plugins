@@ -1,7 +1,4 @@
 * Remove all os.system calls
-* Fix potential security issues in all shell operations (deleting unwanted files etc)
-** done for IPKG.py, Screengrab.py
-* Decide whether the MediaPlayer Menu should stay and if how.
-* Fix some smaller IE Bugs
-** Exception on Movielist
-* Move Timer Cleaning to Python Side
+* Fix Timer Pre-/Posttime
+* Unixtimestamps in EPG Requests
+* Implement Timer Sanity Check with proper Handling on Webinterface side

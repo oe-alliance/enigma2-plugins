@@ -1,8 +1,7 @@
 <e2:screen name="MessageWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;e2simplexmlresult>
-	<e2:element source="GetAnswer" id="getanswer"><e2:convert type="web:ListFiller" >
-	&lt;e2state><e2:item name="Result" filter="xml"/>&lt;/e2state>
-	&lt;e2statetext><e2:item name="ResultText" filter="xml"/>&lt;/e2statetext>
-	</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
-&lt;/e2simplexmlresult>
+<e2:element source="GetAnswer" id="getanswer"><e2:convert type="web:Null" /></e2:element>
+<e2simplexmlresult>
+	<e2state><e2:element source="GetAnswer"><e2:convert type="SimpleResult">Result</e2:convert><e2:convert type="web:TextToHTML" /></e2:element></e2state>
+	<e2statetext><e2:element source="GetAnswer"><e2:convert type="SimpleResult">ResultText</e2:convert><e2:convert type="web:TextToHTML" /></e2:element></e2statetext>
+</e2simplexmlresult>
 </e2:screen>

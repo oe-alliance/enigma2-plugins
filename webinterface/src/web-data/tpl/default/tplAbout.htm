@@ -1,4 +1,5 @@
 
+<!-- tplAbout -->
 						<table id="contentTable">
 							<tr>
 								<td>
@@ -10,23 +11,28 @@
 														<td class="fullwidth">
 															<table cellspacing="0" class="about">
 																<tr>
-																	<th colspan="2" class="aboutHeader">Hard- & Software</th>
+																	<th colspan="2" class="aboutHeader">Device- &amp; Versioninformation</th>
 																</tr>
 																<tr>
-																	<td class="aboutElementLeft">Box Model:</td>
-																	<td class="aboutElementRight">${about.model}</td>
+																	<td class="aboutElementLeft">Devicename:</td>
+																	<td class="aboutElementRight">${info.devicename}</td>
 																</tr>
 																<tr>
 																	<td class="aboutElementLeft">Enigma Version:</td>
-																	<td class="aboutElementRight">${about.enigmaVersion}</td>
+																	<td class="aboutElementRight">${info.enigmaVersion}</td>
 																</tr>
 																<tr>
+																	<td class="aboutElementLeft">Image Version:</td>
+																	<td class="aboutElementRight">${info.imageVersion}</td>
+																</tr>
+																
+																<tr>
 																	<td class="aboutElementLeft">Frontprozessor Version:</td>
-																	<td class="aboutElementRight">${about.fpVersion}</td>
+																	<td class="aboutElementRight">${info.fpVersion}</td>
 																</tr>
 																<tr>
 																	<td class="aboutElementLeft">Webinterface Version:</td>
-																	<td class="aboutElementRight">${about.webifversion}</td>
+																	<td class="aboutElementRight">${info.webifversion}</td>
 																</tr>
 															</table>
 														</td>
@@ -35,66 +41,67 @@
 														<td class="fullwidth">
 															<table cellspacing="0" class="about">
 																<tr>
-																	<th colspan="2" class="aboutHeader">Detected Tuners</th>
+																	<th colspan="2" class="aboutHeader">Tuners</th>
 																</tr>
-																{for t in tuner}
+																{for nim in nims}
 																<tr>
-																	<td class="aboutElementLeft">${t.name}:</td>
-																	<td class="aboutElementRight">${t.type}</td>
+																	<td class="aboutElementLeft">${nim.name}:</td>
+																	<td class="aboutElementRight">${nim.model}</td>
 																</tr>
 																{/for}
 															</table>
 														</td>
 													</tr>
+													{for hdd in hdds}
 													<tr>
 														<td class="fullwidth">
-															<table cellspacing="0" class="about">
+															<table cellspacing="0" class="about">																
 																<tr>
-																	<th colspan="2" class="aboutHeader">Harddisk</th>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">Model:</td>
-																	<td class="aboutElementRight">${about.hddmodel}</td>
+																	<th colspan="2" class="aboutHeader">Harddisk (${hdd.model})</th>
 																</tr>
 																<tr>
 																	<td class="aboutElementLeft">Capacity:</td>
-																	<td class="aboutElementRight">${about.hddcapacity}</td>
+																	<td class="aboutElementRight">${hdd.capacity}</td>
 																</tr>
 																<tr>
 																	<td class="aboutElementLeft">Free:</td>
-																	<td class="aboutElementRight">${about.hddfree}</td>
+																	<td class="aboutElementRight">${hdd.free}</td>
 																</tr>
 															</table>
 														</td>
 													</tr>
+													{/for}
+													{for nic in nics}
 													<tr>
 														<td class="fullwidth">
 															<table cellspacing="0" class="about">
 																<tr>
-																	<th colspan="2" class="aboutHeader">Internal Network</th>
-																</tr>																													<tr>
+																	<th colspan="2" class="aboutHeader">Network Interface (${nic.name})</th>
+																</tr>
+																<tr>
 																	<td class="aboutElementLeft">Mac Address:</td>
-																	<td class="aboutElementRight">${about.lanMac}</td>
+																	<td class="aboutElementRight">${nic.mac}</td>
 																</tr>
 																<tr>
 																	<td class="aboutElementLeft">DHCP enabled:</td>
-																	<td class="aboutElementRight">${about.lanDHCP}</td>
+																	<td class="aboutElementRight">${nic.dhcp}</td>
 																</tr>
 																<tr>
 																	<td class="aboutElementLeft">IP:</td>
-																	<td class="aboutElementRight">${about.lanIP}</td>
+																	<td class="aboutElementRight">${nic.ip}</td>
 																</tr>
 																<tr>
 																	<td class="aboutElementLeft">Netmask:</td>
-																	<td class="aboutElementRight">${about.lanNetmask}</td>
+																	<td class="aboutElementRight">${nic.netmask}</td>
 																</tr>
 																<tr>
 																	<td class="aboutElementLeft">Gateway:</td>
-																	<td class="aboutElementRight">${about.lanGateway}</td>
+																	<td class="aboutElementRight">${nic.gateway}</td>
 																</tr>
 															</table>
 														</td>
 													</tr>
+													{/for}
 												</table>
 											</td>
 											<td class="aboutSectionRight">
@@ -103,68 +110,40 @@
 														<td class="fullwidth">
 															<table cellspacing="0" class="about">
 																<tr>
-																	<th colspan="2" class="aboutHeader">Serviceinfo</th>
+																	<th colspan="2" class="aboutHeader">Gears Support</th>
 																</tr>
 																<tr>
-																	<td class="aboutElementLeft">Name:</td>
-																	<td class="aboutElementRight">${about.serviceName}</td>
+																	<td colspan="2"> 
+																		<p>
+																			Enigma2 WebControl supports (Google) Gears to minimize the load caused on your Dreambox.
+																		</p>
+																		<p>
+																			It uses the LocalServer of Gears to store all static content on your Computer instead of loading it from your Dreambox all the time.
+																			Enabling Gears can speed up enigma2 WebControl quite a lot (the less power your Box has the more you will profit).
+																		</p>
+																		<p>
+																			To install Gears please go to <a style="text-decoration: underline" href="http://gears.google.com/" target="_blank">gears.google.com</a>.
+																		</p>
+																		<p>
+																			For technical information about Gears please read the API Doc at <a style="text-decoration: underline" href="http://code.google.com/intl/de-DE/apis/gears/" target="_blank">code.google.com/intl/de-DE/apis/gears/</a>
+																		</p>
+																	</td>
 																</tr>
 																<tr>
-																	<td class="aboutElementLeft">Provider:</td>
-																	<td class="aboutElementRight">${about.serviceProvider}</td>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">Videoformat:</td>
-																	<td class="aboutElementRight">${about.serviceAspect}</td>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">Videosize:</td>
-																	<td class="aboutElementRight">${about.serviceVideosize}</td>
+																	<td class="aboutElementLeft">
+																	{if info.useGears}
+																		<button onClick="disableGears(reloadAbout)">Disable Gears</button>
+																	{else}
+																		<button onClick="enableGears(reloadAbout)">Enable Gears</button>
+																	{/if}
+																	</td>
+																	<td class="aboutElementRight">
+																		<div id="gearsProcess"></div>
+																	</td>
 																</tr>
 															</table>
 														</td>
-													</tr>	 
-													<tr>
-														<td class="fullwidth">
-															<table cellspacing="0" class="about">
-																<tr>
-																	<th colspan="2" class="aboutHeader">Pids</th>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">VideoPid:</td>
-																	<td class="aboutElementRight">${about.vPidh} (${about.vPid}d)</td>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">AudioPid:</td>
-																	<td class="aboutElementRight">${about.aPidh} (${about.aPid}d)</td>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">PCRPid:</td>
-																	<td class="aboutElementRight">${about.pcrPidh} (${about.pcrPid}d)</td>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">PMTPid:</td>
-																	<td class="aboutElementRight">${about.pmtPidh} (${about.pmtPid}d)</td>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">TXTPid:</td>
-																	<td class="aboutElementRight">${about.txtPidh} (${about.txtPid}d)</td>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">TSID:</td>
-																	<td class="aboutElementRight">${about.tsidh} (${about.tsid}d)</td>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">ONID:</td>
-																	<td class="aboutElementRight">${about.onidh} (${about.onid}d)</td>
-																</tr>
-																<tr>
-																	<td class="aboutElementLeft">SID:</td>
-																	<td class="aboutElementRight">${about.sidh} (${about.sid}d)</td>
-																</tr>
-															</table>
-														</td>
-													</tr>
+													</tr>													
 												</table>
 											</td>
 										</tr>
@@ -172,3 +151,4 @@
 								</tr>
 							</td>
 						</table>
+<!-- /tplAbout -->

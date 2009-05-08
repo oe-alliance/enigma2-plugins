@@ -3,7 +3,7 @@ from Components.ParentalControl import parentalControl
 from Components.config import config
 from ServiceReference import ServiceReference
 
-class ParentControl( Source):
+class ParentControl(Source):
 	def __init__(self, session):
 		Source.__init__(self)
 		self.session = session
@@ -21,13 +21,13 @@ class ParentControl( Source):
 				servicelist = parentalControl.blacklist
 
 			for service_ref in servicelist:
-				list.append( [str(service_ref),ServiceReference(service_ref).getServiceName()] )
+				list.append([str(service_ref), ServiceReference(service_ref).getServiceName()])
 
-		print "list",list
+		print "list", list
 		return list
 
 	list = property(command)
 	lut = {"ServiceReference": 0
-			,"ServiceName":1
+			, "ServiceName":1
 			}
 

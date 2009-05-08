@@ -1,14 +1,14 @@
-<e2:screen name="TimerWebScreen">&lt;html>
-&lt;head>
-	&lt;meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
-	&lt;title>Enigma 2 Webinterface (ALPHA)&lt;/title>
-	&lt;meta http-equiv="refresh" content="1; URL=/web/wap/timerlist.html">
-	&lt;link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico"/>
-&lt;/head>
-&lt;body>
-&lt;p>&lt;center>You will be redirected in a second&lt;/center>&lt;/p>
-&lt;/body>
-&lt;/html>
+<e2:screen name="TimerWebScreen"><html>
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+	<title>Enigma 2 Webinterface (ALPHA)</title>
+	<meta http-equiv="refresh" content="1; URL=/web/wap/timerlist.html"/>
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico"/>
+</head>
+<body>
+<p><center>You will be redirected in a second</center></p>
+</body>
+</html>
 <e2:element source="TimerChange" id="sRef,begin,end,name,description,dirname,tags,eit,disabled,justplay,afterevent,repeated,channelOld,beginOld,endOld,deleteOldOnSave">
 		<e2:convert type="web:TextToHTML" />
 	</e2:element>

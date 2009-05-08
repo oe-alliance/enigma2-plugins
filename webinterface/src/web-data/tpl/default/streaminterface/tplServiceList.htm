@@ -1,4 +1,7 @@
+
+<!-- tplServiceList -->
 <select id="channelSelect" onChange="onServiceSelected()" width="100px">
+	<option id="vlcemptyservice"></option>
 	{for s in services}
 	<option id="${s.servicereference}" >
 	${s.servicename}	
@@ -8,3 +11,4 @@
 	</option>
 	{/for}
 </select>
+<!-- /tplServiceList -->

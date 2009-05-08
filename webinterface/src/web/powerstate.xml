@@ -1,7 +1,7 @@
 <e2:screen name="PowerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;e2powerstate>
-	&lt;e2instandby><e2:element source="PowerState" id="newstate">
-		<e2:convert type="web:TextToHTML" />
-	</e2:element>&lt;/e2instandby>
-&lt;/e2powerstate>
+<e2powerstate>
+	<e2instandby><e2:element source="PowerState" id="newstate">
+		<e2:convert type="web:TextToHTML" /></e2:element>
+	</e2instandby>
+</e2powerstate>
 </e2:screen>

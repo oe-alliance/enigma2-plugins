@@ -6,7 +6,7 @@ from enigma import eListboxPythonMultiContent, gFont
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger,ConfigYesNo,ConfigText,ConfigSelection
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Button import Button
@@ -16,7 +16,8 @@ from Components.MultiContent import MultiContentEntryText
 from Components.ActionMap import ActionMap
 
 from Components.Network import iNetwork
-def initInterfaceConfig(i = None, new = False):
+
+def initInterfaceConfig(i=None, new=False):
 	choices = getConfiguredIPs()
 
 	if i is None and new is True:
@@ -24,15 +25,15 @@ def initInterfaceConfig(i = None, new = False):
 	elif i is None:
 		i = config.plugins.Webinterface.interfacecount.value - 1
 
-	print "[WebIfConfig.initInterfaceConfig] i is %s" %i
+	print "[WebIfConfig.initInterfaceConfig] i is %s" % i
 	config.plugins.Webinterface.interfaces.append(ConfigSubsection())
-	config.plugins.Webinterface.interfaces[i].disabled = ConfigYesNo(default = False)
+	config.plugins.Webinterface.interfaces[i].disabled = ConfigYesNo(default=False)
 	config.plugins.Webinterface.interfaces[i].address = ConfigSelection(choices, default=choices[0])
 	config.plugins.Webinterface.interfaces[i].port = ConfigInteger(80, (0, 65535))
-	config.plugins.Webinterface.interfaces[i].useauth = ConfigYesNo(default = False)
-	config.plugins.Webinterface.interfaces[i].usessl = ConfigYesNo(default = False)
+	config.plugins.Webinterface.interfaces[i].useauth = ConfigYesNo(default=False)
+	config.plugins.Webinterface.interfaces[i].usessl = ConfigYesNo(default=False)
 
-	config.plugins.Webinterface.interfacecount.value = i+1
+	config.plugins.Webinterface.interfacecount.value = i + 1
 
 	return i
 
@@ -40,7 +41,7 @@ def updateConfig():
 	choices = getConfiguredIPs()
 	default = choices[0]
 	for c in config.plugins.Webinterface.interfaces:
-		c.address.setChoices(choices, default = default)
+		c.address.setChoices(choices, default=default)
 		c.address.load()
 
 def getConfiguredIPs():
@@ -51,7 +52,7 @@ def getConfiguredIPs():
 	for adaptername in iNetwork.ifaces:
 		extip = iNetwork.ifaces[adaptername]['ip']
 		if iNetwork.ifaces[adaptername]['up'] is True:
-			extip = "%i.%i.%i.%i"%(extip[0],extip[1],extip[2],extip[3])
+			extip = "%i.%i.%i.%i" % (extip[0], extip[1], extip[2], extip[3])
 			choices.append(extip)
 	return choices
 
@@ -61,14 +62,14 @@ def initConfig():
 		# setting default interface
 		# 0.0.0.0:80 auth=False
 		config.plugins.Webinterface.interfaces.append(ConfigSubsection())
-		config.plugins.Webinterface.interfaces[0].disabled = ConfigYesNo(default = False)
+		config.plugins.Webinterface.interfaces[0].disabled = ConfigYesNo(default=False)
 
 		#needs to be refreshed before each call, because ifaces can be changed since e2 boot
-		config.plugins.Webinterface.interfaces[0].address = ConfigSelection(getConfiguredIPs(),default='0.0.0.0')
+		config.plugins.Webinterface.interfaces[0].address = ConfigSelection(getConfiguredIPs(), default='0.0.0.0')
 
-		config.plugins.Webinterface.interfaces[0].port = ConfigInteger(80, (0,65535))
-		config.plugins.Webinterface.interfaces[0].useauth = ConfigYesNo(default = False)
-		config.plugins.Webinterface.interfaces[0].usessl = ConfigYesNo(default = False)
+		config.plugins.Webinterface.interfaces[0].port = ConfigInteger(80, (0, 65535))
+		config.plugins.Webinterface.interfaces[0].useauth = ConfigYesNo(default=False)
+		config.plugins.Webinterface.interfaces[0].usessl = ConfigYesNo(default=False)
 		config.plugins.Webinterface.interfaces[0].save()
 
 		config.plugins.Webinterface.interfacecount.value = 1
@@ -76,11 +77,11 @@ def initConfig():
 	else:
 		i = 0
 		while i < interfacecount:
-			print "[WebIfConfig.initConfig] i is %s" %i
+			print "[WebIfConfig.initConfig] i is %s" % i
 			initInterfaceConfig(i)
 			i += 1
 
-class WebIfConfigScreen(ConfigListScreen,Screen):
+class WebIfConfigScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen position="100,100" size="550,400" title="%s">
 			<widget name="config" position="5,5" size="540,360" scrollbarMode="showOnDemand" zPosition="1"/>
@@ -94,7 +95,7 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
 			<ePixmap name="yellow" pixmap="skin_default/buttons/yellow.png" position="280,360" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
 		</screen>""" % _("Webinterface: Main Setup")
 
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
 		l = [
 			getConfigListEntry(_("Start Webinterface"), config.plugins.Webinterface.enable),
@@ -126,13 +127,13 @@ class WebIfConfigScreen(ConfigListScreen,Screen):
 		print "saving"
 		for x in self["config"].list:
 			x[1].save()
-		self.close(True,self.session)
+		self.close(True, self.session)
 
 	def cancel(self):
 		print "cancel"
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close(False,self.session)
+		self.close(False, self.session)
 
 class WebIfInterfaceListConfigScreen(Screen):
 	skin = """
@@ -160,7 +161,7 @@ class WebIfInterfaceListConfigScreen(Screen):
 		self["key_red"] = Button(_("Add"))
 		self["key_yellow"] = Button(_("Change"))
 		self["ifacelist"] = WebIfInterfaceList([])
-		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
 			 "ok"	:	self.keyGreen,
 			 "back"	:	self.close,
@@ -181,23 +182,23 @@ class WebIfInterfaceListConfigScreen(Screen):
 			res = [
 				i, #550,400
 				MultiContentEntryText(pos=(5, 0), size=(150, 25), font=0, text=c.address.value),
-				MultiContentEntryText(pos=(120, 0),size=(50, 25), font=0,text=str(c.port.value))
+				MultiContentEntryText(pos=(120, 0), size=(50, 25), font=0, text=str(c.port.value))
 			]
 
 			if c.usessl.value:
-				res.append(MultiContentEntryText(pos=(170, 0),size=(200, 25), font=0,text=_("yes"),color=0x0000FF00))
+				res.append(MultiContentEntryText(pos=(170, 0), size=(200, 25), font=0, text=_("yes"), color=0x0000FF00))
 			else:
-				res.append(MultiContentEntryText(pos=(170, 0),size=(200, 25), font=0,text=_("no"),color=0x00FF0000))
+				res.append(MultiContentEntryText(pos=(170, 0), size=(200, 25), font=0, text=_("no"), color=0x00FF0000))
 
 			if c.useauth.value:
-				res.append(MultiContentEntryText(pos=(230, 0),size=(170, 25), font=0,text=_("yes"),color=0x0000FF00))
+				res.append(MultiContentEntryText(pos=(230, 0), size=(170, 25), font=0, text=_("yes"), color=0x0000FF00))
 			else:
-				res.append(MultiContentEntryText(pos=(230, 0),size=(170, 25), font=0,text=_("no"),color=0x00FF0000))
+				res.append(MultiContentEntryText(pos=(230, 0), size=(170, 25), font=0, text=_("no"), color=0x00FF0000))
 
 			if c.disabled.value:
-				res.append(MultiContentEntryText(pos=(400, 0),size=(160, 25), font=0,text=_("yes"),color=0x0000FF00))
+				res.append(MultiContentEntryText(pos=(400, 0), size=(160, 25), font=0, text=_("yes"), color=0x0000FF00))
 			else:
-				res.append(MultiContentEntryText(pos=(400, 0),size=(160, 25), font=0,text=_("no"),color=0x00FF0000))
+				res.append(MultiContentEntryText(pos=(400, 0), size=(160, 25), font=0, text=_("no"), color=0x00FF0000))
 			ifaceguilist.append(res)
 			i += 1
 
@@ -206,15 +207,15 @@ class WebIfInterfaceListConfigScreen(Screen):
 
 	def keyRed(self):
 		print "KEYRED"
-		self.session.openWithCallback(self.updateList,WebIfInterfaceConfigScreen,None)
+		self.session.openWithCallback(self.updateList, WebIfInterfaceConfigScreen, None)
 
 	def keyGreen(self):
 		print "KEYGREEN"
 
 	def keyYellow(self):
 		x = self["ifacelist"].getCurrent()[0]
-		print "current list index",x
-		self.session.openWithCallback(self.updateList,WebIfInterfaceConfigScreen,int(x))
+		print "current list index", x
+		self.session.openWithCallback(self.updateList, WebIfInterfaceConfigScreen, int(x))
 
 	def up(self):
 		self["ifacelist"].up()
@@ -229,7 +230,7 @@ class WebIfInterfaceListConfigScreen(Screen):
 		self["ifacelist"].pageDown()
 
 class WebIfInterfaceList(MenuList):
-	def __init__(self, list, enableWrapAround = False):
+	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		#self.l.setFont(1, gFont("Regular", 25))
@@ -273,8 +274,8 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
 
 		try:
 			current = config.plugins.Webinterface.interfaces[i]
-		except IndexError,e:
-			print "[WebIf] iface config %i not found, adding it and setting default values"%i
+		except IndexError, e:
+			print "[WebIf] iface config %i not found, adding it and setting default values" % i
 			initInterfaceConfig()
 			current = config.plugins.Webinterface.interfaces[ifacenum]
 

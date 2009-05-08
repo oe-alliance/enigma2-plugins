@@ -1,10 +1,10 @@
-<e2:screen name="EPGWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:admin="http://webns.net/mvcb/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-	&lt;channel>
-		&lt;title>EPG Suche&lt;/title>
-		&lt;description>Eine automatische Suche nach EPG-Titeln&lt;/description>
-		&lt;generator>Enigma2 WebInterface&lt;/generator>
-		
+<e2:screen name="EPGWebScreen"><e2:element source="localip" macro="ipadress" />&lt;?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<channel>
+		<title>EPG Suche</title>
+		<link>http://<e2:element source="localip" filter="xml" /></link>
+		<description>Eine automatische Suche nach EPG-Titeln</description>
+		<generator>Enigma2 WebInterface</generator>		
 		<e2:element source="EPGTITLE" id="search"><e2:convert type="web:ListFiller" >
 		&lt;item>
 			&lt;title><e2:item name="Title" filter="xml"/>&lt;/title>
@@ -20,6 +20,6 @@
 		</e2:convert>
 		<e2:convert type="web:TextToHTML" />
 		</e2:element>
-	&lt;/channel>
-&lt;/rss>
+	</channel>
+</rss>
 </e2:screen>

@@ -1,14 +1,11 @@
 <e2:screen name="MovieWebScreen">
-&lt;html>
-	&lt;head>
-		&lt;title>Enigma2 Movielist&lt;/title>
-		&lt;link href="/webdata/style.css" type="text/css" rel="stylesheet" />
-	
-	&lt;/head>
-	
-&lt;body>
-
-&lt;table width='100%'>
+<html>
+	<head>
+		<title>Enigma2 Movielist</title>
+		<link href="/webdata/style.css" type="text/css" rel="stylesheet" />	
+	</head>
+<body>
+	<table width="100%">
 		<e2:element source="MovieList" id="dirname,tag"><e2:convert type="web:ListFiller" >
 		&lt;tr>
 			&lt;td class="pageHeader"><e2:item name="Title" filter="xml"/>&lt;/td>
@@ -28,8 +25,8 @@
 		&lt;/tr>
 				
 		</e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
-&lt;/table>
+	</table>
 
-&lt;/body>
-&lt;/html>
+</body>
+</html>
 </e2:screen>

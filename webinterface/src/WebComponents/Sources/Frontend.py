@@ -1,7 +1,6 @@
 from Components.Sources.Source import Source
 from Components.NimManager import nimmanager
 
-
 class Frontend(Source, object):
 	def __init__(self):
 		Source.__init__(self)
@@ -17,8 +16,7 @@ class Frontend(Source, object):
 		return nims
 			
 			
-	list = property(getList)
-	
+	list = property(getList)	
 	lut = {
 		"Name" : 0,
 		"Type" : 1

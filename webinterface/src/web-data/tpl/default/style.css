@@ -32,6 +32,13 @@
 		vertical-align: bottom;
 		z-index: 2;		
 	}
+/***********************
+ WAP
+ ***********************/
+
+	.wap a, .wap a:visited, .wap a:active{
+		color: #fff;		
+	}
 
 /***********************
  GENERAL

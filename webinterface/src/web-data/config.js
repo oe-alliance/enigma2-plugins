@@ -1,7 +1,7 @@
 // $Header$
 
 var DBG = true;
-DBG = false;
+//DBG = false;
 
 var url_tpl = '/web-data/tpl/default/';
 
@@ -61,6 +61,7 @@ var url_messageanswer = "/web/messageanswer?getanswer=now";
 var url_powerstate = "/web/powerstate"; // plus new powerstate
 var url_remotecontrol = "/web/remotecontrol"; // plus command
 var url_signal = "/web/signal";
+var url_deviceinfo = "/web/deviceinfo";
 
 var bouquetsTv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 195) || (type == 25)FROM BOUQUET "bouquets.tv" ORDER BY bouquet';
 var bouquetsRadio = '1:7:2:0:0:0:0:0:0:0:(type == 2)FROM BOUQUET "bouquets.radio" ORDER BY bouquet';

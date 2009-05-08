@@ -1,10 +1,9 @@
 <e2:screen name="VolumeWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;e2volume><e2:element source="Volume" id="set"><e2:convert type="web:ListFiller" >
-		&lt;e2result><e2:item name="Result"/>&lt;/e2result>
-		&lt;e2resulttext><e2:item name="ResultText"/>&lt;/e2resulttext>
-		&lt;e2current><e2:item name="Volume"/>&lt;/e2current>
-		&lt;e2ismuted><e2:item name="isMuted"/>&lt;/e2ismuted>
-	</e2:convert>
-	<e2:convert type="web:TextToHTML" /></e2:element>
-&lt;/e2volume>
+<e2:element source="Volume" id="set"><e2:convert type="web:Null" /></e2:element>
+<e2volume>
+	<e2result><e2:element source="Volume"><e2:convert type="VolumeInfo">Result</e2:convert><e2:convert type="web:TextToHTML" /></e2:element></e2result>
+	<e2resulttext><e2:element source="Volume"><e2:convert type="VolumeInfo">ResultText</e2:convert><e2:convert type="web:TextToHTML" /></e2:element></e2resulttext>
+	<e2current><e2:element source="Volume"><e2:convert type="VolumeInfo">Volume</e2:convert><e2:convert type="web:TextToHTML" /></e2:element></e2current>
+	<e2ismuted><e2:element source="Volume"><e2:convert type="VolumeInfo">IsMuted</e2:convert><e2:convert type="web:TextToHTML" /></e2:element></e2ismuted>
+</e2volume>
 </e2:screen>

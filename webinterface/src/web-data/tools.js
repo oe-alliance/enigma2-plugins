@@ -1,32 +1,34 @@
-// $Header$
+//$Header$
 
-var doRequestMemory = {};
-var doRequestMemorySave = {};
-var signalPanelData = {};
-var epgListData = {};
-var bouquetsMemory = {};
-var loadedChannellist = {};
 var templates = {};
+var loadedChannellist = {};
 
-var mediaPlayerStarted = false;
+var epgListData = {};
+var signalPanelData = {};
+
+var mediaPlayerStarted = false; 
 var popUpBlockerHinted = false;
 
 var settings = null;
 var parentControlList = null;
-
 
 var requestcounter = 0;
 
 var debugWin = '';
 var signalWin = '';
 var webRemoteWin = '';
-var signalPanelUpdatePoller = '';
-var EPGListWindow = '';
+var EPGListWin = '';
 
 var currentBouquet = bouquetsTv;
 
 var updateBouquetItemsPoller = '';
 var updateCurrentPoller = '';
+var signalPanelUpdatePoller = '';
+
+var hideNotifierTimeout = '';
+
+var isActive = {};
+isActive.getCurrent = false;
 
 var currentLocation = "/hdd/movie";
 var locationsList = [];
@@ -34,48 +36,79 @@ var tagsList = [];
 
 var boxtype = "";
 
-function pollCurrent(){
-	updateCurrentPoller = setInterval(updateItems, 7500);
+function startUpdateCurrentPoller(){
+	updateCurrentPoller = setInterval(updateItems, 10000);
+}
+
+function stopUpdateCurrentPoller(){
+	clearInterval(updateCurrentPoller);
+}
+
+function getXML(request){
+	var xmlDoc = "";
+
+	if(window.ActiveXObject){ // we're on IE
+		xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+	xmlDoc.async="false";
+	xmlDoc.loadXML(request.responseText);
+	} else { //we're not on IE
+		if (!window.google || !google.gears){
+			xmlDoc = request.responseXML;
+		} else { //no responseXML on gears
+			xmlDoc = (new DOMParser()).parseFromString(request.responseText, "text/xml");
+		}
+	}
+
+	return xmlDoc;
 }
 /*
- * Set boxtype Variable for being able of determining model specific stuff correctly (like WebRemote)
- */
-function incomingAboutBoxtype(request){
+* Set boxtype Variable for being able of determining model specific stuff correctly (like WebRemote)
+*/
+function incomingDeviceInfoBoxtype(request){
 	debug("[incomingAboutBoxtype] returned");
-	var xml = getXML(request).getElementsByTagName("e2abouts").item(0).getElementsByTagName("e2about");
-	xml = xml.item(0);
-	
-	boxtype = xml.getElementsByTagName('e2model').item(0).firstChild.data;
+	var boxtype = getXML(request).getElementsByTagName("e2devicename").item(0).firstChild.data;
+
 	debug("[incomingAboutBoxtype] Boxtype: " + boxtype);
 }
 
 
 function getBoxtype(){
-	doRequest(url_about, incomingAboutBoxtype, false);
+	doRequest(url_deviceinfo, incomingDeviceInfoBoxtype, false);
 }
 
-function notify(text, state){
-	switch(state){
-		case false:
-			$('notification').style.background = "#C00";
-			break;
-		default:
-			$('notification').style.background = "#85C247";
+function set(element, value){
+	element = parent.$(element);
+	if (element){
+		element.innerHTML = value;
 	}
-		
-	set('notification', "<div>"+text+"</div>");
-	$('notification').appear({duration : 0.5, to: 0.9 });
-	setTimeout(hideNotifier, 3000);
 }
 
 function hideNotifier(){
-	$('notification').fade({duration : 0.5 })
+	$('notification').fade({duration : 0.5 });
 }
+
+function notify(text, state){
+	notif = $('notification');
+
+	if(notif !== null){
+		//clear possibly existing hideNotifier Timeout from previous notfication
+		clearTimeout(hideNotifierTimeout);
+		if(state === false){
+			notif.style.background = "#C00";
+		} else {
+			notif.style.background = "#85C247";
+		}				
+
+		set('notification', "<div>"+text+"</div>");
+		notif.appear({duration : 0.5, to: 0.9 });
+		hideNotifierTimeout = setTimeout(hideNotifier, 7500);
+	}
+}
+
 
 function simpleResultHandler(simpleResult){
 	notify(simpleResult.statetext, simpleResult.state);
 }
-
 
 function startUpdateBouquetItemsPoller(){
 	debug("[startUpdateBouquetItemsPoller] called");
@@ -89,7 +122,7 @@ function stopUpdateBouquetItemsPoller(){
 }
 
 //General Helpers
-function ownLazyNumber(num) {
+function parseNr(num) {
 	if(isNaN(num)){
 		return 0;
 	} else {
@@ -107,14 +140,21 @@ function dec2hex(nr, len){
 				hex = "0"+hex;
 			}
 		} 
-		catch(e){}
+		catch(e){
+			//something went wrong, return -1
+			hex = -1;
+		}
 	} 
 	return hex;
 }
 
 
 function quotes2html(txt) {
-	return txt.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+	if(typeof(txt) != "undefined"){
+		return txt.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+	} else {
+		return "";
+	}
 }
 
 function addLeadingZero(nr){
@@ -127,81 +167,45 @@ function addLeadingZero(nr){
 function dateToString(date){
 
 	var dateString = "";
-	
+
 	dateString += date.getFullYear();
 	dateString += "-" + addLeadingZero(date.getMonth()+1);
 	dateString += "-" + addLeadingZero(date.getDate());
 	dateString += " " + addLeadingZero(date.getHours());
 	dateString += ":" + addLeadingZero(date.getMinutes());
-		
+
 	return dateString;
 }
 
 
 function showhide(id){
- 	var o = $(id).style;
- 	o.display = (o.display!="none")? "none":"";
+	var s = $(id).style;
+	s.display = (s.display!="none")? "none":"";
 }
 
 
 function show(id){
 	try{
 		$(id).style.display = "";
-	} catch(e) {}
+	} catch(e) {
+//		debug("[show] Could not show element with id: " + id);
+	}
 }
 
 
 function hide(id){
 	try{
 		$(id).style.display = "none";
-	} catch(e) {}
-}
-
-
-function set(element, value){
-	if(element == "CurrentService") {
-		if(value.search(/^MP3 File:/) != -1) {
-			value = value.replace(/.*\//, '');
-		}
-	}
-	element = parent.$(element);
-	if(value.length > 550) {
-		value = value.substr(0,550) + "[...]";
-	}
-	if (element){
-		element.innerHTML = value;
-	}
-	if(navigator.userAgent.indexOf("MSIE") >=0) {
-		try{
-			var elementscript = $('UpdateStreamReaderIEFixIFrame').$('scriptzone');
-			if(elementscript){
-				elementscript.innerHTML = ""; // deleting set() from page, to keep the page short and to save memory			
-			}
-		}
-		catch(e){}
-	}
-}
-
-
-function setComplete(element, value){
-	//debug(element+"-"+value);
-	element = parent.$(element);
-	if (element){
-		element.innerHTML = value;
-	}
-	if(navigator.userAgent.indexOf("MSIE") >= 0) {
-		elementscript= $('UpdateStreamReaderIEFixIFrame').$('scriptzone');
-		if(elementscript){
-			elementscript.innerHTML = ""; // deleting set() from page, to keep the page short and to save memory			
-		}
+	} catch(e) {
+//		debug("[hide] Could not hide element with id: " + id);
 	}
 }
 
 
 /*
- * Sets the Loading Notification to the given HTML Element
- * @param targetElement - The element the Ajax-Loader should be set in
- */
+* Sets the Loading Notification to the given HTML Element
+* @param targetElement - The element the Ajax-Loader should be set in
+*/
 function setAjaxLoad(targetElement){
 	$(targetElement).innerHTML = getAjaxLoad();
 }
@@ -237,8 +241,9 @@ function messageBox(m){
 
 function popUpBlockerHint(){
 	if(!popUpBlockerHinted){
-		messageBox("Please disable your Popup-Blocker for enigma2 WebControl to work flawlessly!");
 		popUpBlockerHinted = true;
+		messageBox("Please disable your Popup-Blocker for enigma2 WebControl to work flawlessly!");
+
 	}
 }
 
@@ -249,7 +254,7 @@ function setWindowContent(window, html){
 
 function openPopup(title, html, width, height, x, y){
 	try {
-		var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height);
+		var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height);		
 		setWindowContent(popup, html);
 		return popup;
 	} catch(e){
@@ -257,6 +262,31 @@ function openPopup(title, html, width, height, x, y){
 		return "";
 	}
 }
+
+function openPopupPage(title, uri, width, height, x, y){
+	try {
+		var popup = window.open(uri,title,'scrollbars=yes, width='+width+',height='+height);
+		return popup;
+	} catch(e){
+		popUpBlockerHint();
+		return "";
+	}
+}
+
+function debug(text){
+	if(DBG){
+		try{
+			if(!debugWin.closed && debugWin.location){
+				var inner = debugWin.document.getElementById('debugContent').innerHTML;
+				debugWin.document.getElementById('debugContent').innerHTML = new Date().toLocaleString() + ": "+text+"<br>" + inner;
+			}
+		} catch (Exception) {
+			popUpBlockerHint();
+		}
+
+	}
+}
+
 
 //Template Helpers
 function saveTpl(request, tplName){
@@ -271,7 +301,7 @@ function renderTpl(tpl, data, domElement) {
 	try{
 		$(domElement).innerHTML = result;
 	}catch(ex){
-//		debug("[renderTpl] exception: " + ex);
+		//		debug("[renderTpl] exception: " + ex);
 	}
 }
 
@@ -279,26 +309,18 @@ function renderTpl(tpl, data, domElement) {
 function fetchTpl(tplName, callback){
 	if(typeof(templates[tplName]) == "undefined") {
 		var url = url_tpl+tplName+".htm";
-		var options = {
-				asynchronous: true,
-				method: 'GET',
-				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
-				onException: function(o, e){ 
-								debug("[fetchTpl] exception "+ e); 
-								throw(e); 
-							},				
-				onSuccess: function(transport){
-								saveTpl(transport, tplName);
-								if(typeof(callback) == 'function'){
-									callback();
-								}
-							},
-				onComplete: requestFinished 
-			};
-			
-		var request = new Ajax.Request(url, options);
+
+		doRequest(
+				url, 
+				function(transport){
+					saveTpl(transport, tplName);
+					if(typeof(callback) == 'function'){
+						callback();
+					}
+				}
+		);
 	} else {
-		if(typeof(callback) != 'undefined'){
+		if(typeof(callback) == 'function'){
 			callback();
 		}
 	}
@@ -315,100 +337,68 @@ function incomingProcessTpl(request, data, domElement, callback){
 
 function processTpl(tplName, data, domElement, callback){
 	var url = url_tpl+tplName+".htm";
-		var request = new Ajax.Request(url,
-			{
-				asynchronous: true,
-				method: 'GET',
-				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
-				onException: function(o, e){ 
-								debug("[processTpl] exception " + e);
-								debug("[processTpl] exception " + typeof(o));
-								throw(e); 
-							},				
-				onSuccess: function(transport){
-								incomingProcessTpl(transport, data, domElement, callback);
-							},
-				onComplete: requestFinished 
-			});
+
+	doRequest(url, 
+			function(transport){
+		incomingProcessTpl(transport, data, domElement, callback);
+	}
+	);
 }
 
 //Debugging Window
 
 
 function openDebug(){
-	debugWin = openPopup("Debug", templates.tplDebug, 500, 300);
+	var uri = url_tpl+'tplDebug.htm';
+	debugWin = openPopupPage("Debug", uri, 500, 300);
 }
 
-
-function loadAndOpenDebug(){
-	fetchTpl('tplDebug', openDebug);
-}
-
-
-function debug(text){
-	if(DBG){
-		try{
-			if(!debugWin.closed && debugWin.location){
-				var inner = debugWin.document.getElementById('debugContent').innerHTML;
-				debugWin.document.getElementById('debugContent').innerHTML = new Date().toLocaleString() + ": "+text+"<br>" + inner;
-			}
-		} catch (Exception) {
-			popUpBlockerHint();
-		}
-			
-	}
-}
-
-
-
-// end requestindikator
-function doRequest(url, readyFunction, save){
+function doRequest(url, readyFunction){
 	requestStarted();
-	doRequestMemorySave[url] = save;
-//	debug("[doRequest] Requesting: "+url);
-/*	
-	if(save == true && typeof(doRequestMemory[url]) != "undefined") {
-		readyFunction(doRequestMemory[url]);
-	} else {
-*/
+	// gears or not that's the question here
+	if (!window.google || !google.gears){ //no gears, how sad
+//		debug("NO GEARS!!");
+		var request = '';
 	try{
-		var request = new Ajax.Request(url,
-			{
-				asynchronous: true,
-				method: 'GET',
-				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
-				onException: function(o,e){ throw(e); },				
-				onSuccess: function (transport, json) {
-							if(typeof(doRequestMemorySave[url]) != "undefined") {
-								if(doRequestMemorySave[url]) {
-//									debug("[doRequest] saving request"); 
-									doRequestMemory[url] = transport;
-								}
-							}
-							if(typeof(readyFunction) != "undefined"){
-								readyFunction(transport);
-							}
-						},
-				onComplete: requestFinished 
-			});
+		request = new Ajax.Request(url,
+				{
+			asynchronous: true,
+			method: 'GET',
+			requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
+			onException: function(o,e){ throw(e); },				
+			onSuccess: function (transport, json) {						
+				if(typeof(readyFunction) != "undefined"){
+					readyFunction(transport);
+				}
+			},
+			onComplete: requestFinished 
+				});
 	} catch(e) {}
-//	}
-}
+	} else { //we're on gears!
+		try{
+			request = google.gears.factory.create('beta.httprequest');
+			request.open('GET', url);
 
-function getXML(request){
-	var xmlDoc = "";
-	
-	if(window.ActiveXObject){ // we're on IE
-		xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-		xmlDoc.async="false";
-		xmlDoc.loadXML(request.responseText);
-	} else { //we're not on IE			
-		xmlDoc = request.responseXML;
+//			request.setRequestHeader('Pragma', 'no-cache');
+//			request.setRequestHeader('Cache-Control', 'must-revalidate');
+//			request.setRequestHeader('If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00
+//			GMT');
+
+			if( typeof(readyFunction) != "undefined" ){
+				request.onreadystatechange = function(){				
+					if(request.readyState == 4){
+						if(request.status == 200){			
+							readyFunction(request);
+						} else {
+							//we COULD do some error handling here
+						}
+					}
+				};
+			}
+			request.send();
+		} catch(e) {}
 	}
-
-	return xmlDoc;
 }
-
 
 //Parental Control
 function incomingParentControl(request) {
@@ -435,8 +425,20 @@ function getParentControlByRef(txt) {
 }
 
 
+//Settings
+function getSettingByName(txt) {
+	debug("[getSettingByName] (" + txt + ")");
+	for(var i = 0; i < settings.length; i++) {
+		debug("("+settings[i].getSettingName()+") (" +settings[i].getSettingValue()+")");
+		if(String(settings[i].getSettingName()) == String(txt)) {
+			return settings[i].getSettingValue().toLowerCase();
+		} 
+	}
+	return "";
+}
+
 function parentPin(servicereference) {
-    debug ("parentPin: parentControlList");
+	debug("[parentPin] parentControlList");
 	servicereference = decodeURIComponent(servicereference);
 	if(parentControlList === null || String(getSettingByName("config.ParentalControl.configured")) != "true") {
 		return true;
@@ -466,27 +468,19 @@ function parentPin(servicereference) {
 }
 
 
-//Settings
-function getSettingByName(txt) {
-	debug("[getSettingByName] (" + txt + ")");
-	for(var i = 0; i < settings.length; i++) {
-		debug("("+settings[i].getSettingName()+") (" +settings[i].getSettingValue()+")");
-		if(String(settings[i].getSettingName()) == String(txt)) {
-			return settings[i].getSettingValue().toLowerCase();
-		} 
-	}
-	return "";
-}
-
-
 function incomingGetDreamboxSettings(request){
 	if(request.readyState == 4){
-		var settings = new Settings(getXML(request)).getArray();
+		settings = new Settings(getXML(request)).getArray();
+
+		debug("[incomingGetDreamboxSettings] config.ParentalControl.configured="+ getSettingByName("config.ParentalControl.configured"));
+
+		if(String(getSettingByName("config.ParentalControl.configured")) == "true") {
+			getParentControl();
+		}
 	}
-	debug ("starte getParentControl " + getSettingByName("config.ParentalControl.configured"));
-	if(String(getSettingByName("config.ParentalControl.configured")) == "true") {
-		getParentControl();
-	}
+
+
+
 }
 
 
@@ -500,25 +494,24 @@ function incomingSubServiceRequest(request){
 	if(request.readyState == 4){
 		var services = new ServiceList(getXML(request)).getArray();
 		debug("[incomingSubServiceRequest] Got " + services.length + " SubServices");
-		
-		if(services.length > 1) {
-			
-			var first = services[0];
 
-			var last = false;
+		if(services.length > 1) {
+
+			var first = services[0];
 			var namespace = [];
-			
-			//we already have the main service in our servicelist so we'll start with the second element
+
+			// we already have the main service in our servicelist so we'll
+			// start with the second element
 			for ( var i = 1; i < services.length ; i++){
 				var reference = services[i];
 				namespace[i] = { 	
-					'servicereference': reference.getServiceReference(),
-					'servicename': reference.getServiceName()
+						'servicereference': reference.getServiceReference(),
+						'servicename': reference.getServiceName()
 				};
 			}
 			var data = { subservices : namespace };
-			
-			
+
+
 			var id = 'SUB'+first.getServiceReference();
 			show('tr' + id);
 			processTpl('tplSubServices', data, id);
@@ -538,20 +531,16 @@ function delayedGetSubservices(){
 
 //zap zap
 function zap(servicereference){
-	var request = new Ajax.Request( "/web/zap?sRef=" + servicereference, 
-						{
-							asynchronous: true,
-							method: 'get'
-						}
-					);
+	doRequest("/web/zap?sRef=" + servicereference);
 	delayedGetSubservices();
+	updateItems();
 }
 
 //SignalPanel
 
 function updateSignalPanel(){	
 	var html = templates.tplSignalPanel.process(signalPanelData);
-	
+
 	if (!signalWin.closed && signalWin.location) {
 		setWindowContent(signalWin, html);
 	} else {
@@ -562,17 +551,17 @@ function updateSignalPanel(){
 
 function incomingSignalPanel(request){
 	var namespace = {};
-	
+
 	if (request.readyState == 4){
 		var xml = getXML(request).getElementsByTagName("e2frontendstatus").item(0);
 		namespace = {
-			snrdb : xml.getElementsByTagName('e2snrdb').item(0).firstChild.data,
-			snr : xml.getElementsByTagName('e2snr').item(0).firstChild.data,
-			ber : xml.getElementsByTagName('e2ber').item(0).firstChild.data,
-			acg : xml.getElementsByTagName('e2acg').item(0).firstChild.data
+				snrdb : xml.getElementsByTagName('e2snrdb').item(0).firstChild.data,
+				snr : xml.getElementsByTagName('e2snr').item(0).firstChild.data,
+				ber : xml.getElementsByTagName('e2ber').item(0).firstChild.data,
+				acg : xml.getElementsByTagName('e2acg').item(0).firstChild.data
 		};
 	}
-	
+
 	signalPanelData = { signal : namespace };
 	fetchTpl('tplSignalPanel', updateSignalPanel); 	
 }
@@ -596,11 +585,11 @@ function openSignalPanel(){
 
 function showEpgList(){
 	var html = templates.tplEpgList.process(epgListData);
-	
-	if (!EPGListWindow.closed && EPGListWindow.location) {
-		setWindowContent(EPGListWindow, html);
+
+	if (!EPGListWin.closed && EPGListWin.location) {
+		setWindowContent(EPGListWin, html);
 	} else {
-		EPGListWindow = openPopup("EPG", html, 900, 500);
+		EPGListWin = openPopup("EPG", html, 900, 500);
 	}
 }
 
@@ -615,27 +604,27 @@ function incomingEPGrequest(request){
 				try{
 					var item = EPGItems[i];				
 					namespace[i] = {	
-						'date': item.getTimeDay(),
-						'eventid': item.getEventId(),
-						'servicereference': item.getServiceReference(),
-						'servicename': quotes2html(item.getServiceName()),
-						'title': quotes2html(item.getTitle()),
-						'titleESC': escape(item.getTitle()),
-						'starttime': item.getTimeStartString(), 
-						'duration': Math.ceil(item.getDuration()/60000), 
-						'description': quotes2html(item.getDescription()),
-						'endtime': item.getTimeEndString(), 
-						'extdescription': quotes2html(item.getDescriptionExtended()),
-						'number': String(i),
-						'start': item.getTimeBegin(),
-						'end': item.getTimeEnd()
+							'date': item.getTimeDay(),
+							'eventid': item.getEventId(),
+							'servicereference': item.getServiceReference(),
+							'servicename': quotes2html(item.getServiceName()),
+							'title': quotes2html(item.getTitle()),
+							'titleESC': escape(item.getTitle()),
+							'starttime': item.getTimeStartString(), 
+							'duration': Math.ceil(item.getDuration()/60000), 
+							'description': quotes2html(item.getDescription()),
+							'endtime': item.getTimeEndString(), 
+							'extdescription': quotes2html(item.getDescriptionExtended()),
+							'number': String(i),
+							'start': item.getTimeBegin(),
+							'end': item.getTimeEnd()
 					};
-					
+
 				} catch (Exception) { 
 					debug("[incomingEPGrequest] Error rendering: " + Exception);	
 				}
 			}
-			
+
 			epgListData = {epg : namespace};
 			fetchTpl('tplEpgList', showEpgList);
 		} else {
@@ -653,37 +642,37 @@ function loadEPGByServiceReference(servicereference){
 }
 
 //function extdescriptionSmall(txt,num) {
-//	if(txt.length > 410) {
-//		var shortTxt = txt.substr(0,410);
-//		txt = txt.replace(/\'\'/g, '&quot;');
-//		txt = txt.replace(/\\/g, '\\\\');
-//		txt = txt.replace(/\'/g, '\\\'');
-//		txt = txt.replace(/\"/g, '&quot;');
-//		var smallNamespace = { 'txt':txt,'number':num, 'shortTxt':shortTxt};
-//		return RND(tplEPGListItemExtend, smallNamespace);
-//	} else {
-//		return txt;
-//	}
-//}	
+//if(txt.length > 410) {
+//var shortTxt = txt.substr(0,410);
+//txt = txt.replace(/\'\'/g, '&quot;');
+//txt = txt.replace(/\\/g, '\\\\');
+//txt = txt.replace(/\'/g, '\\\'');
+//txt = txt.replace(/\"/g, '&quot;');
+//var smallNamespace = { 'txt':txt,'number':num, 'shortTxt':shortTxt};
+//return RND(tplEPGListItemExtend, smallNamespace);
+//} else {
+//return txt;
+//}
+//}
 
 function buildServiceListEPGItem(epgevent, type){
 	var namespace = { 	
-		'starttime': epgevent.getTimeStartString(), 
-		'title': epgevent.getTitle(), 
-		'length': Math.ceil(epgevent.duration/60) 
+			'starttime': epgevent.getTimeStartString(), 
+			'title': epgevent.getTitle(), 
+			'length': Math.ceil(epgevent.duration/60) 
 	};
 	var data = {epg : namespace};
-	//e.innerHTML = RND(tplServiceListEPGItem, namespace);
-	
+	// e.innerHTML = RND(tplServiceListEPGItem, namespace);
+
 	var id = type + epgevent.getServiceReference();
-	
+
 	show('tr' + id);
-	
-		if(typeof(templates.tplServiceListEPGItem) != "undefined"){
-			renderTpl(templates.tplServiceListEPGItem, data, id, true);
-		} else {
-			debug("[buildServiceListEPGItem] tplServiceListEPGItem N/A");
-		}
+
+	if(typeof(templates.tplServiceListEPGItem) != "undefined"){
+		renderTpl(templates.tplServiceListEPGItem, data, id, true);
+	} else {
+		debug("[buildServiceListEPGItem] tplServiceListEPGItem N/A");
+	}
 }
 
 function incomingServiceEPGNowNext(request, type){
@@ -695,7 +684,7 @@ function incomingServiceEPGNowNext(request, type){
 			} catch (e){
 				debug("[incomingServiceEPGNowNext]" + e);
 			}
-			
+
 			if (epgEvt.getEventId() != 'None'){
 				buildServiceListEPGItem(epgEvt, type);
 			}
@@ -713,7 +702,7 @@ function incomingServiceEPGNext(request){
 
 function loadServiceEPGNowNext(servicereference, next){
 	var url = url_epgnow+servicereference;
-	
+
 	if(typeof(next) == 'undefined'){
 		doRequest(url, incomingServiceEPGNow, false);
 	} else {
@@ -730,10 +719,11 @@ function getBouquetEpg(){
 
 
 function recordNowPopup(){
-	var result = confirm(	"OK: Record current event\n" +
-							"Cancel: Start infinite recording"
-	)
-	
+	var result = confirm(	
+			"OK: Record current event\n" +
+			"Cancel: Start infinite recording"
+	);
+
 	if( result === true || result === false){
 		recordNowDecision(result);
 	}
@@ -742,7 +732,7 @@ function recordNowPopup(){
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//++++ volume functions                            ++++
+//++++ volume functions ++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 function handleVolumeRequest(request){
@@ -751,7 +741,7 @@ function handleVolumeRequest(request){
 		var newvalue = b.item(0).getElementsByTagName('e2current').item(0).firstChild.data;
 		var mute = b.item(0).getElementsByTagName('e2ismuted').item(0).firstChild.data;
 		debug("[handleVolumeRequest] Volume " + newvalue + " | Mute: " + mute);
-		
+
 		for (var i = 1; i <= 10; i++)		{
 			if ( (newvalue/10)>=i){
 				$("volume"+i).src = "/web-data/img/led_on.png";
@@ -792,8 +782,9 @@ function initVolumePanel(){
 	getVolume(); 
 }
 
-//Channels and Bouquets
 
+
+//Channels and Bouquets
 
 function incomingChannellist(request){
 	var services = null;
@@ -806,22 +797,22 @@ function incomingChannellist(request){
 	if(services !== null) {
 		var namespace = {};
 		var cssclass = "even";
-		
+
 		for ( var i = 0; i < services.length ; i++){
-			
+
 			cssclass = cssclass == 'even' ? 'odd' : 'even';
-			
+
 			var service = services[i];
 			namespace[i] = { 	
-				'servicereference' : service.getServiceReference(),
-				'servicename' : service.getServiceName(),
-				'cssclass' : cssclass
+					'servicereference' : service.getServiceReference(),
+					'servicename' : service.getServiceName(),
+					'cssclass' : cssclass
 			};
 		}
 		var data = { 
-			services : namespace 
+				services : namespace 
 		};
-		
+
 		processTpl('tplServiceList', data, 'contentMain', getBouquetEpg);
 		delayedGetSubservices();
 	} else {
@@ -834,12 +825,12 @@ function loadBouquet(servicereference, name){
 	debug("[loadBouquet] called");
 
 	currentBouquet = servicereference;
-		
+
 	setContentHd(name);
 	setAjaxLoad('contentMain');
-		
+
 	startUpdateBouquetItemsPoller();
-	
+
 	doRequest(url_getServices+servicereference, incomingChannellist, true);
 }
 
@@ -849,7 +840,7 @@ function incomingBouquetListInitial(request){
 		var bouquetList = new ServiceList(getXML(request)).getArray();
 		debug("[incomingBouquetListInitial] Got " + bouquetList.length + " TV Bouquets!");	
 
-		//loading first entry of TV Favorites as default for ServiceList
+		// loading first entry of TV Favorites as default for ServiceList
 		loadBouquet(bouquetList[0].getServiceReference(), bouquetList[0].getServiceName());
 	}
 }
@@ -857,7 +848,7 @@ function incomingBouquetListInitial(request){
 
 function renderBouquetTable(list, target){
 	debug("[renderBouquetTable] Rendering " + list.length + " Bouquets");	
-	
+
 	var namespace = [];
 	if (list.length < 1){
 		debug("[renderBouquetTable] NO BOUQUETS!");
@@ -866,15 +857,15 @@ function renderBouquetTable(list, target){
 		try{
 			var bouquet = list[i];
 			namespace[i] = {
-				'servicereference': bouquet.getServiceReference(), 
-				'bouquetname': bouquet.getServiceName()
+					'servicereference': bouquet.getServiceReference(), 
+					'bouquetname': bouquet.getServiceName()
 			};
 		} catch (e) { }
 	}
 	var data = { 
-		services : namespace 
+			services : namespace 
 	};
-	
+
 	processTpl('tplBouquetList', data, 'contentMain');
 }	
 
@@ -892,61 +883,66 @@ function incomingBouquetList(request){
 function initChannelList(){
 	var url = url_getServices+encodeURIComponent(bouquetsTv);
 	currentBouquet = bouquetsTv;
-	
+
 	doRequest(url, incomingBouquetListInitial, true);
 }
 
 
 
-// Movies
+//Movies
 function initMovieList(){
 	// get videodirs, last_videodir, and all tags
-	doRequest(url_getcurrlocation, initMovieList1, false);
+	doRequest(url_getcurrlocation, incomingMovieListCurrentLocation, false);
 }
 
-function initMovieList1(request){
+function incomingMovieListCurrentLocation(request){
 	if(request.readyState == 4){
-		result  = new SimpleXMLList(getXML(request));
+		result  = new SimpleXMLList(getXML(request), "e2location");
 		currentLocation = result.getList()[0];
-		doRequest(url_getlocations, initMovieList2, false);
+		debug("[incomingMovieListCurrentLocation].currentLocation" + currentLocation);
+		doRequest(url_getlocations, incomingMovieListLocations, false);
 	}
 }
 
-function initMovieList2(request){
+function incomingMovieListLocations(request){
 	if(request.readyState == 4){
-		result  = new SimpleXMLList(getXML(request));
+		result  = new SimpleXMLList(getXML(request), "e2location");
 		locationsList = result.getList();
-                if (locationsList.length == 0) {
+
+		if (locationsList.length === 0) {
 			locationsList = ["/hdd/movie"];
 		}
-		doRequest(url_gettags, initMovieList3, false);
+		doRequest(url_gettags, incomingMovieListTags, false);
 	}
 }
 
-function initMovieList3(request){
+function incomingMovieListTags(request){
 	if(request.readyState == 4){
-		result  = new SimpleXMLList(getXML(request));
+		result  = new SimpleXMLList(getXML(request), "e2tag");
 		tagsList = result.getList();
 	}
 }
 
-function createOptionList2(lst, selected) {
+function createOptionListSimple(lst, selected) {
 	var namespace = Array();
- 	var i = 0;
-        found = false;
-        for (i=0; i<lst.length; i++) {
-                if (lst[i] == selected) {
-                        found = true;
-                }
-        }
-        if (!found) {
-                lst = [selected].concat(lst);
+	var i = 0;
+	var found = false;
+
+	for (i = 0; i < lst.length; i++) {
+		if (lst[i] == selected) {
+			found = true;
+		}
 	}
-	for (i=0; i<lst.length; i++) {
-                namespace[i] = {
-			'value': lst[i],
-			'txt': lst[i],
-			'selected': (lst[i] == selected ? "selected" : " ")};
+
+	if (!found) {
+		lst = [ selected ].concat(lst);
+	}
+
+	for (i = 0; i < lst.length; i++) {
+		namespace[i] = {
+				'value': lst[i],
+				'txt': lst[i],
+				'selected': (lst[i] == selected ? "selected" : " ")};
 	}
 
 	return namespace;
@@ -954,40 +950,41 @@ function createOptionList2(lst, selected) {
 
 function loadMovieNav(){
 	// fill in menus
-	var namespace = {
-			dirname: createOptionList2(locationsList, currentLocation),
-			tags: createOptionList2(tagsList, "")
-			};
-	data = namespace;
+	var data = {
+			dirname: createOptionListSimple(locationsList, currentLocation),
+			tags: createOptionListSimple(tagsList, "")
+	};
+
 	processTpl('tplNavMovies', data, 'navContent');
 }
 
 function incomingMovieList(request){
 	if(request.readyState == 4){
-		
+
 		var movies = new MovieList(getXML(request)).getArray();
 		debug("[incomingMovieList] Got "+movies.length+" movies");
 		namespace = [];	
-		
+
 		var cssclass = "even";
-		
+
 		for ( var i = 0; i < movies.length; i++){
 			cssclass = cssclass == 'even' ? 'odd' : 'even';
-			
+
 			var movie = movies[i];
 			namespace[i] = { 	
-				'servicereference': movie.getServiceReference(),
-				'servicename': movie.getServiceName() ,
-				'title': movie.getTitle(), 
-				'description': movie.getDescription(), 
-				'descriptionextended': movie.getDescriptionExtended(),
-				'filelink': String(movie.getFilename()).substr(17,movie.getFilename().length),
-				'filename': String(movie.getFilename()),
-				'filesize': movie.getFilesizeMB(),
-				'tags': movie.getTags().join(', ') ,
-				'length': movie.getLength() ,
-				'time': movie.getTimeDay()+"&nbsp;"+ movie.getTimeStartString(),
-				'cssclass' : cssclass
+					'servicereference': escape(movie.getServiceReference()),
+					'servicename': movie.getServiceName(),
+					'title': movie.getTitle(),
+					'escapedTitle': escape(movie.getTitle()),
+					'description': movie.getDescription(), 
+					'descriptionextended': movie.getDescriptionExtended(),
+					'filelink': String(movie.getFilename()).substr(17,movie.getFilename().length),
+					'filename': String(movie.getFilename()),
+					'filesize': movie.getFilesizeMB(),
+					'tags': movie.getTags().join(', ') ,
+					'length': movie.getLength() ,
+					'time': movie.getTimeDay()+"&nbsp;"+ movie.getTimeStartString(),
+					'cssclass' : cssclass
 			};
 		}
 		var data = { movies : namespace };
@@ -1022,17 +1019,17 @@ function incomingDelMovieResult(request) {
 
 
 function delMovie(sref ,servicename, title, description) {
-	debug("[delMovie] File(" + sref + "), servicename(" + servicename + ")," +
-			"title(" + title + "), description(" + description + ")");
-	
+	debug("[delMovie] File(" + unescape(sref) + "), servicename(" + servicename + ")," +
+			"title(" + unescape(title) + "), description(" + description + ")");
+
 	result = confirm( "Are you sure want to delete the Movie?\n" +
-		"Servicename: "+servicename+"\n" +
-		"Title: "+title+"\n" + 
-		"Description: "+description+"\n");
+			"Servicename: " + servicename + "\n" +
+			"Title: " + unescape(title) + "\n" + 
+			"Description: " + description + "\n");
 
 	if(result){
 		debug("[delMovie] ok confirm panel"); 
-		doRequest(url_moviedelete+"?sRef="+sref, incomingDelMovieResult, false); 
+		doRequest(url_moviedelete+"?sRef="+unescape(sref), incomingDelMovieResult, false); 
 		return true;
 	}
 	else{
@@ -1066,10 +1063,9 @@ function sendMessage(messagetext, messagetype, messagetimeout){
 		var index = $('MessageSendFormType').selectedIndex;
 		messagetype = $('MessageSendFormType').options[index].value;
 	}	
-	if(ownLazyNumber(messagetype) === 0){
-		var request = doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout);
-		
-		setTimeout(getMessageAnswer, ownLazyNumber(messagetimeout)*1000);
+	if(parseNr(messagetype) === 0){
+		doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout);
+		setTimeout(getMessageAnswer, parseNr(messagetimeout)*1000);
 	} else {
 		doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult, false);
 	}
@@ -1079,37 +1075,37 @@ function sendMessage(messagetext, messagetype, messagetimeout){
 //Screenshots
 function getScreenShot(what) {
 	debug("[getScreenShot] called");
-	
+
 	var buffer = new Image();
 	var downloadStart;
 	var data = {};
-	
+
 	buffer.onload = function () { 
 		debug("[getScreenShot] image assigned");
-		
+
 		data = { img : { src : buffer.src } };	
 		processTpl('tplGrab', data, 'contentMain');
 
 		return true;
 	};
-	
+
 	buffer.onerror = function (meldung) { 
 		debug("[getScreenShot] Loading image failed"); 
 		return true;
 	};
-	
+
 	switch(what){
-		case "o":
-			what = "&o&n";
-			break;
-		case "v":
-			what = "&v";
-			break;
-		default:
-			what = "";
-			break;
+	case "o":
+		what = "&o&n";
+		break;
+	case "v":
+		what = "&v";
+		break;
+	default:
+		what = "";
+	break;
 	}
-	
+
 	downloadStart = new Date().getTime();
 	buffer.src = '/grab?format=jpg&r=720&' + what + '&filename=/tmp/' + downloadStart;
 }
@@ -1122,32 +1118,30 @@ function getOsdShot(){
 	getScreenShot("o");
 }
 
-// RemoteControl Code
+//RemoteControl Code
 
 function incomingRemoteControlResult(request){
-	if(request.readyState == 4){
-		var b = getXML(request).getElementsByTagName("e2remotecontrol");
-		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
-		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
-	} //else {
-		//TODO Some Error Handling
+//	if(request.readyState == 4){
+//		var b = getXML(request).getElementsByTagName("e2remotecontrol");
+//		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
+//		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
 //	}
 }
 
 function openWebRemote(){
 	var template = templates.tplWebRemoteOld;
-	
+
 	if(boxtype == "dm8000"){
 		template = templates.tplWebRemote;
 	}
-	
-	
+
+
 	if (!webRemoteWin.closed && webRemoteWin.location) {
 		setWindowContent(webRemoteWin, template);
 	} else {
 		webRemoteWin = openPopup('WebRemote', template, 250, 600);
 	}
-	
+
 }
 
 
@@ -1171,8 +1165,6 @@ function sendRemoteControlRequest(command){
 }
 
 
-
-
 // Array.insert( index, value ) - Insert value at index, without overwriting existing keys
 Array.prototype.insert = function( j, v ) {
 	if( j>=0 ) {
@@ -1182,80 +1174,83 @@ Array.prototype.insert = function( j, v ) {
 	}
 };
 
-// Array.splice() - Remove or replace several elements and return any deleted elements
+//Array.splice() - Remove or replace several elements and return any deleted
+//elements
 if( typeof Array.prototype.splice==='undefined' ) {
 	Array.prototype.splice = function( a, c ) {
 		var e = arguments, d = this.copy(), f = a, l = this.length;
-	
+
 		if( !c ) { 
 			c = l - a; 
 		}
-		
+
 		for( var i = 0; i < e.length - 2; i++ ) { 
 			this[a + i] = e[i + 2]; 
 		}
-		
-		
+
+
 		for( var j = a; j < l - c; j++ ) { 
 			this[j + e.length - 2] = d[j - c]; 
 		}
 		this.length -= c - e.length + 2;
-	
+
 		return d.slice( f, f + c );
 	};
 }
 
 ////Recording
 //function incomingRecordingPushed(request) {
-//	if(request.readyState == 4){
-//		var timers = new TimerList(getXML(request)).getArray();
-//		debug("[incomingRecordingPushed] Got " + timers.length + " timers");
-//		
-//		var aftereventReadable = ['Nothing', 'Standby', 'Deepstandby/Shutdown', 'Auto'];
-//		var justplayReadable = ['record', 'zap'];
-//		var OnOff = ['on', 'off'];
-//		
-//		var namespace = [];
-//		
-//		for ( var i = 0; i <timers.length; i++){
-//			var timer = timers[i];
-//
-//			if(ownLazyNumber(timer.getDontSave()) == 1) {
-//				var beginDate = new Date(Number(timer.getTimeBegin())*1000);
-//				var endDate = new Date(Number(timer.getTimeEnd())*1000);
-//				namespace[i] = {
-//				'servicereference': timer.getServiceReference(),
-//				'servicename': timer.getServiceName() ,
-//				'title': timer.getName(), 
-//				'description': timer.getDescription(), 
-//				'descriptionextended': timer.getDescriptionExtended(), 
-//				'begin': timer.getTimeBegin(),
-//				'beginDate': beginDate.toLocaleString(),
-//				'end': timer.getTimeEnd(),
-//				'endDate': endDate.toLocaleString(),
-//				'state': timer.getState(),
-//				'duration': Math.ceil((timer.getDuration()/60)),
-//				'dirname': timer.getDirname(),
-//				'tags': timer.getTags(),
-//				'repeated': timer.getRepeated(),
-//				'repeatedReadable': repeatedReadable(timer.getRepeated()),
-//				'justplay': timer.getJustplay(),
-//				'justplayReadable': justplayReadable[Number(timer.getJustplay())],
-//				'afterevent': timer.getAfterevent(),
-//				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
-//				'disabled': timer.getDisabled(),
-//				'onOff': OnOff[Number(timer.getDisabled())]
-//				};
-//			}
-//		}
-//		var data = { recordings : namespace };
-//		openPopup("Record Now", 'tplTimerListItem', data, 900, 500, "Record now window");
-//	}
+//if(request.readyState == 4){
+//var timers = new TimerList(getXML(request)).getArray();
+//debug("[incomingRecordingPushed] Got " + timers.length + " timers");
+
+//var aftereventReadable = ['Nothing', 'Standby', 'Deepstandby/Shutdown',
+//'Auto'];
+//var justplayReadable = ['record', 'zap'];
+//var OnOff = ['on', 'off'];
+
+//var namespace = [];
+
+//for ( var i = 0; i <timers.length; i++){
+//var timer = timers[i];
+
+//if(parseNr(timer.getDontSave()) == 1) {
+//var beginDate = new Date(Number(timer.getTimeBegin())*1000);
+//var endDate = new Date(Number(timer.getTimeEnd())*1000);
+//namespace[i] = {
+//'servicereference': timer.getServiceReference(),
+//'servicename': timer.getServiceName() ,
+//'title': timer.getName(),
+//'description': timer.getDescription(),
+//'descriptionextended': timer.getDescriptionExtended(),
+//'begin': timer.getTimeBegin(),
+//'beginDate': beginDate.toLocaleString(),
+//'end': timer.getTimeEnd(),
+//'endDate': endDate.toLocaleString(),
+//'state': timer.getState(),
+//'duration': Math.ceil((timer.getDuration()/60)),
+//'dirname': timer.getDirname(),
+//'tags': timer.getTags(),
+//'repeated': timer.getRepeated(),
+//'repeatedReadable': repeatedReadable(timer.getRepeated()),
+//'justplay': timer.getJustplay(),
+//'justplayReadable': justplayReadable[Number(timer.getJustplay())],
+//'afterevent': timer.getAfterevent(),
+//'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
+//'disabled': timer.getDisabled(),
+//'onOff': OnOff[Number(timer.getDisabled())]
+//};
 //}
-//
-//
+//}
+//var data = { recordings : namespace };
+//openPopup("Record Now", 'tplTimerListItem', data, 900, 500, "Record now
+//window");
+//}
+//}
+
+
 //function recordingPushed() {
-//	doRequest(url_timerlist, incomingRecordingPushed, false);
+//doRequest(url_timerlist, incomingRecordingPushed, false);
 //}
 
 
@@ -1270,88 +1265,100 @@ function ifChecked(rObj) {
 
 //About
 /*
- * Handles an incoming request for /web/about
- * Parses the Data, and calls everything needed to render the 
- * Template using the parsed data and set the result into contentMain
- * @param request - the XHR
+ * Handles an incoming request for /web/deviceinfo Parses the Data, and calls
+ * everything needed to render the Template using the parsed data and set the
+ * result into contentMain @param request - the XHR
  */
 function incomingAbout(request) {
 	if(request.readyState == 4){
-		debug("[incomingAbout] returned");
-		var xml = getXML(request).getElementsByTagName("e2abouts").item(0).getElementsByTagName("e2about");
+		debug("[incomingAbout] called");
+		var xml = getXML(request).getElementsByTagName("e2deviceinfo").item(0);
 
-		xml = xml.item(0);
-		
-		var namespace = {};
-		var ns = [];
-		
-		try{
-			var fptext = "V"+xml.getElementsByTagName('e2fpversion').item(0).firstChild.data;
-			
-			
-			var nims = xml.getElementsByTagName('e2tunerinfo').item(0).getElementsByTagName("e2nim");
-			debug("[incomingAbout] nims: "+nims.length);
-			for(var i = 0; i < nims.length; i++){
-				
-				var name = nims.item(i).getElementsByTagName("name").item(0).firstChild.data;
-				var type = nims.item(i).getElementsByTagName("type").item(0).firstChild.data;
-				debug("[incomingAbout]" + name);
-				debug("[incomingAbout]" + type);
-				ns[i] = { 'name' : name, 'type' : type};
-				
+		var info = {};
+
+		var nims = [];
+		var hdds = [];
+		var nics = [];
+
+		var fpversion = "V"+xml.getElementsByTagName('e2fpversion').item(0).firstChild.data;
+
+		var nimnodes = xml.getElementsByTagName('e2frontends').item(0).getElementsByTagName("e2frontend");			
+		for(var i = 0; i < nimnodes.length; i++){					
+			try {
+				var name = nimnodes.item(i).getElementsByTagName("e2name").item(0).firstChild.data;
+				var model = nimnodes.item(i).getElementsByTagName("e2model").item(0).firstChild.data;
+				nims[i] = { 
+						'name' : name, 
+						'model' : model
+				};					
+			} catch (e) {
+				debug("[incomingAbout] error parsing NIM data: " + e);
 			}
-			
-			
-			var hdddata = xml.getElementsByTagName('e2hddinfo').item(0);
-			
-			var hddmodel 	= hdddata.getElementsByTagName("model").item(0).firstChild.data;
-			var hddcapacity = hdddata.getElementsByTagName("capacity").item(0).firstChild.data;
-			var hddfree		= hdddata.getElementsByTagName("free").item(0).firstChild.data;
+		}
 
-			namespace = {
-				'model' : xml.getElementsByTagName('e2model').item(0).firstChild.data,	
-				'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data,
-				'fpVersion': fptext,
-				'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data,	
-				'lanMac' : xml.getElementsByTagName('e2lanmac').item(0).firstChild.data,
-				'lanDHCP': xml.getElementsByTagName('e2landhcp').item(0).firstChild.data,
-				'lanIP': xml.getElementsByTagName('e2lanip').item(0).firstChild.data,
-				'lanNetmask': xml.getElementsByTagName('e2lanmask').item(0).firstChild.data,
-				'lanGateway': xml.getElementsByTagName('e2langw').item(0).firstChild.data,
 
-				'hddmodel': hddmodel,
-				'hddcapacity': hddcapacity,
-				'hddfree': hddfree,
-				
-				'serviceName': xml.getElementsByTagName('e2servicename').item(0).firstChild.data,
-				'serviceProvider': xml.getElementsByTagName('e2serviceprovider').item(0).firstChild.data,
-				'serviceAspect': xml.getElementsByTagName('e2serviceaspect').item(0).firstChild.data,
-				'serviceVideosize': xml.getElementsByTagName('e2servicevideosize').item(0).firstChild.data,
-				'serviceNamespace': xml.getElementsByTagName('e2servicenamespace').item(0).firstChild.data,
-				
-				'vPidh': '0x'+dec2hex(xml.getElementsByTagName('e2vpid').item(0).firstChild.data, 4),
-				'vPid': ownLazyNumber(xml.getElementsByTagName('e2vpid').item(0).firstChild.data),
-				'aPidh': '0x'+dec2hex(xml.getElementsByTagName('e2apid').item(0).firstChild.data, 4),
-				'aPid': ownLazyNumber(xml.getElementsByTagName('e2apid').item(0).firstChild.data),
-				'pcrPidh': '0x'+dec2hex(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data, 4),
-				'pcrPid': ownLazyNumber(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data),
-				'pmtPidh': '0x'+dec2hex(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data, 4),
-				'pmtPid': ownLazyNumber(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data),
-				'txtPidh': '0x'+dec2hex(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data, 4),
-				'txtPid': ownLazyNumber(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data),
-				'tsidh': '0x'+dec2hex(xml.getElementsByTagName('e2tsid').item(0).firstChild.data, 4),
-				'tsid': ownLazyNumber(xml.getElementsByTagName('e2tsid').item(0).firstChild.data),
-				'onidh': '0x'+dec2hex(xml.getElementsByTagName('e2onid').item(0).firstChild.data, 4),
-				'onid': ownLazyNumber(xml.getElementsByTagName('e2onid').item(0).firstChild.data),
-				'sidh': '0x'+dec2hex(xml.getElementsByTagName('e2sid').item(0).firstChild.data, 4),
-				'sid': ownLazyNumber(xml.getElementsByTagName('e2sid').item(0).firstChild.data)
-			};				  
+		var hddnodes = xml.getElementsByTagName('e2hdd');			
+		for( var i = 0; i < hddnodes.length; i++){
+			try{			
+				var hdd = hddnodes.item(i);
+
+				var model 	= hdd.getElementsByTagName("e2model").item(0).firstChild.data;
+				var capacity = hdd.getElementsByTagName("e2capacity").item(0).firstChild.data;
+				var free		= hdd.getElementsByTagName("e2free").item(0).firstChild.data;
+
+				hdds[i] = {	
+						'model'		: model,
+						'capacity' 	: capacity,
+						'free'		: free
+				};
+			} catch(e){
+				debug("[incomingAbout] error parsing HDD data: " + e);
+			}
+		}
+
+		var nicnodes = xml.getElementsByTagName('e2interface');
+		for( var i = 0; i < nicnodes.length; i++){
+			try {
+				var nic = nicnodes.item(i);
+				var name = nic.getElementsByTagName("e2name").item(0).firstChild.data;
+				var mac = nic.getElementsByTagName("e2mac").item(0).firstChild.data;
+				var dhcp = nic.getElementsByTagName("e2dhcp").item(0).firstChild.data;
+				var ip = nic.getElementsByTagName("e2ip").item(0).firstChild.data;
+				var gateway = nic.getElementsByTagName("e2gateway").item(0).firstChild.data;
+				var netmask = nic.getElementsByTagName("e2netmask").item(0).firstChild.data;
+
+				nics[i] = {
+						'name' : name,
+						'mac' : mac,
+						'dhcp' : dhcp,
+						'ip' : ip,
+						'gateway' : gateway,
+						'netmask' : netmask
+				};
+			} catch (e) {
+				debug("[incomingAbout] error parsing NIC data: " + e);
+			}
+		}
+
+		try{
+			info = {
+					'useGears' : gearsEnabled(),
+					'devicename' : xml.getElementsByTagName('e2devicename').item(0).firstChild.data,	
+					'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data,
+					'imageVersion': xml.getElementsByTagName('e2imageversion').item(0).firstChild.data,
+					'fpVersion': fpversion,
+					'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data			
+			};
 		} catch (e) {
 			debug("[incomingAbout] About parsing Error" + e);
 		}
 
-		var data = { about : namespace,
-				 tuner : ns};
+		var data = { 	
+				"info" : info,
+				"hdds" : hdds,		
+				"nics" : nics,
+				"nims" : nims				 					 	 
+		};
 		processTpl('tplAbout', data, 'contentMain');
 	}
 }
@@ -1361,7 +1368,7 @@ function incomingAbout(request) {
  * Show About Information in contentMain
  */
 function showAbout() {
-	doRequest(url_about, incomingAbout, false);
+	doRequest(url_deviceinfo, incomingAbout, false);
 }
 
 
@@ -1378,24 +1385,24 @@ function startDebugWindow() {
 
 
 function restartTwisted() {
-	var request = new Ajax.Request( "/web/restarttwisted", { asynchronous: true, method: "get" });
+	doRequest( "/web/restarttwisted" );
 }
 
 
 //MediaPlayer
 function sendMediaPlayer(command) {
 	debug("[playFile] loading sendMediaPlayer");
-	var request = new Ajax.Request( url_mediaplayercmd+command, { asynchronous: true, method: 'get' });
+	doRequest( url_mediaplayercmd+command );
 }
 
 
 function incomingMediaPlayer(request){
 	if(request.readyState == 4){
 		var files = new FileList(getXML(request)).getArray();
-		
+
 		debug("[loadMediaPlayer] Got "+files.length+" entries in mediaplayer filelist");
-		//listerHtml 	= tplMediaPlayerHeader;
-		
+		// listerHtml = tplMediaPlayerHeader;
+
 		var namespace = {};
 
 		var root = files[0].getRoot();
@@ -1419,7 +1426,7 @@ function incomingMediaPlayer(request){
 				};	
 			}
 		}
-		
+
 		var itemnamespace = Array();
 		for ( var i = 0; i <files.length; i++){
 			var file = files[i];
@@ -1430,39 +1437,39 @@ function incomingMediaPlayer(request){
 			var exec_description = 'Change to directory' + file.getServiceReference();
 			var color = '000000';			
 			var isdir = 'true';
-			
+
 			if (file.getIsDirectory() == "False") {
 				exec = 'playFile';
 				exec_description = 'play file';
 				color = '00BCBC';
 				isdir = 'false';
 			}
-			
+
 			itemnamespace[i] = {
-				'isdir' : isdir,
-				'servicereference': file.getServiceReference(),
-				'exec': exec,
-				'exec_description': exec_description,
-				'color': color,							
-				'root': file.getRoot(),
-				'name': file.getNameOnly()
+					'isdir' : isdir,
+					'servicereference': file.getServiceReference(),
+					'exec': exec,
+					'exec_description': exec_description,
+					'color': color,							
+					'root': file.getRoot(),
+					'name': file.getNameOnly()
 			};
-			
+
 		}
 		/*
 		if (root == "playlist") {
 			listerHtml += tplMediaPlayerFooterPlaylist;
 		}
-		*/
-		
+		 */
+
 		var data = { mp : namespace,
-				 items: itemnamespace
+				items: itemnamespace
 		};
-		
+
 		processTpl('tplMediaPlayer', data, 'contentMain');
 		var sendMediaPlayerTMP = sendMediaPlayer;
 		sendMediaPlayer = false;
-		//setBodyMainContent('BodyContent');
+		// setBodyMainContent('BodyContent');
 		sendMediaPlayer = sendMediaPlayerTMP;
 	}		
 }
@@ -1477,7 +1484,7 @@ function loadMediaPlayer(directory){
 function playFile(file,root) {
 	debug("[playFile] called");
 	mediaPlayerStarted = true;
-	var request = new Ajax.Request( url_mediaplayerplay+file+"&root="+root, { asynchronous: true, method: 'get' });
+	doRequest( url_mediaplayerplay+file+"&root="+root );
 }
 
 
@@ -1489,53 +1496,45 @@ function openMediaPlayerPlaylist() {
 
 function writePlaylist() {
 	debug("[playFile] loading writePlaylist");
-	var filename = prompt("Please enter a name for the playlist", "");
+	var filename = '';
+	filename = prompt("Please enter a name for the playlist", "");
+
 	if(filename !== "") {
-		var request = new Ajax.Request( url_mediaplayerwrite+filename, { asynchronous: true, method: 'get' });
+		doRequest( url_mediaplayerwrite+filename );
 	}
 }
 
 
 //Powerstate
 /*
- * Sets the Powerstate
- * @param newState - the new Powerstate
- * Possible Values (also see WebComponents/Sources/PowerState.py)
- * #-1: get current state
- * # 0: toggle standby
- * # 1: poweroff/deepstandby
- * # 2: rebootdreambox
- * # 3: rebootenigma
+ * Sets the Powerstate @param newState - the new Powerstate Possible Values
+ * (also see WebComponents/Sources/PowerState.py) #-1: get current state # 0:
+ * toggle standby # 1: poweroff/deepstandby # 2: rebootdreambox # 3:
+ * rebootenigma
  */
 function sendPowerState(newState){
-	var request = new Ajax.Request( url_powerstate+'?newstate='+newState, { asynchronous: true, method: 'get' });
-}
-
-
-
-function delFile(file,root) {
-	debug("[delFile] called");
-	doRequest(url_delfile+root+file, incomingDelFileResult, false);
+	doRequest( url_powerstate+'?newstate='+newState);
 }
 
 
 //Currently Running Service
 function incomingCurrent(request){
-//	debug("[incomingCurrent called]");
+	//	debug("[incomingCurrent called]");
 	if(request.readyState == 4){
 		try{
 			var xml = getXML(request).getElementsByTagName("e2currentserviceinformation").item(0);
-			
-			
+
+			var duration = '+' + parseInt( (xml.getElementsByTagName('e2eventduration').item(0).firstChild.data / 60), 10 ) + " min";
+
 			namespace = {
-				"servicereference" : encodeURIComponent(xml.getElementsByTagName('e2servicereference').item(0).firstChild.data),
-				"servicename" : xml.getElementsByTagName('e2servicename').item(0).firstChild.data,
-				"eventname" : xml.getElementsByTagName('e2eventname').item(0).firstChild.data,
-				"duration" : xml.getElementsByTagName('e2eventduration').item(0).firstChild.data
+					"servicereference" : encodeURIComponent(xml.getElementsByTagName('e2servicereference').item(0).firstChild.data),
+					"servicename" : xml.getElementsByTagName('e2servicename').item(0).firstChild.data,
+					"eventname" : xml.getElementsByTagName('e2eventname').item(0).firstChild.data,
+					"duration" : duration 
 			};
-			
-			data = { current : namespace };
-			
+
+			var data = { current : namespace };
+
 			if(typeof(templates.tplCurrent) != "undefined"){
 				renderTpl(templates.tplCurrent, data, "currentContent");
 			} else {
@@ -1543,20 +1542,25 @@ function incomingCurrent(request){
 			}
 
 		} catch (e){}
-		
+		isActive.getCurrent = false;
 	}
 }
 
 
 function getCurrent(){
-	doRequest(url_getcurrent, incomingCurrent, false);
+	if(!isActive.getCurrent){
+		isActive.getCurrent = true;
+		doRequest(url_getcurrent, incomingCurrent, false);
+	}
 }
 
 
 //Navigation and Content Helper Functions
+
 /*
- * Loads all Bouquets for the given enigma2 servicereference and sets the according contentHeader
- * @param sRef - the Servicereference for the bouquet to load
+ * Loads all Bouquets for the given enigma2 servicereference and sets the
+ * according contentHeader @param sRef - the Servicereference for the bouquet to
+ * load
  */
 function getBouquets(sRef){	
 	var url = url_getServices+encodeURIComponent(sRef);
@@ -1605,6 +1609,8 @@ function getAllRadio(){
 	loadBouquet(allRadio, "All (Radio)");
 }
 
+
+
 /*
  * Loads dynamic content to $(contentMain) by calling a execution function
  * @param fnc - The function used to load the content
@@ -1614,7 +1620,15 @@ function loadContentDynamic(fnc, title){
 	setAjaxLoad('contentMain');
 	setContentHd(title);
 	stopUpdateBouquetItemsPoller();
-	
+
+	fnc();
+}
+
+/*
+ * like loadContentDynamic but without the AjaxLoaderAnimation being shown
+ */
+function reloadContentDynamic(fnc, title){
+	setContentHd(title);
 	fnc();
 }
 
@@ -1638,33 +1652,37 @@ function loadContentStatic(template, title){
  */
 function loadControl(control){
 	switch(control){
-		case "power":
-			loadContentStatic('tplPower', 'PowerControl');
-			break;
-		
-		case "message":
-			loadContentStatic('tplSendMessage', 'Send a Message');
-			break;
-		
-		case "remote":
-			loadAndOpenWebRemote();
-			break;
-			
-		case "screenshot":
-			loadContentDynamic(getScreenShot, 'Screenshot');
-			break;
-			
-		case "videoshot":
-			loadContentDynamic(getVideoShot, 'Videoshot');
-			break;
-			
-		case "osdshot":
-			loadContentDynamic(getOsdShot, 'OSDshot');
-			break;
-			
-		default:
-			break;
+	case "power":
+		loadContentStatic('tplPower', 'PowerControl');
+		break;
+
+	case "message":
+		loadContentStatic('tplSendMessage', 'Send a Message');
+		break;
+
+	case "remote":
+		loadAndOpenWebRemote();
+		break;
+
+	case "screenshot":
+		loadContentDynamic(getScreenShot, 'Screenshot');
+		break;
+
+	case "videoshot":
+		loadContentDynamic(getVideoShot, 'Videoshot');
+		break;
+
+	case "osdshot":
+		loadContentDynamic(getOsdShot, 'OSDshot');
+		break;
+
+	default:
+		break;
 	}
+}
+
+function reloadAbout(){
+	reloadContentDynamic(showAbout, 'About');
 }
 
 /*
@@ -1674,44 +1692,44 @@ function loadControl(control){
  */
 function switchMode(mode){
 	switch(mode){
-		case "TV":
-			reloadNav('tplNavTv', 'TeleVision');
-			break;
-		
-		case "Radio":
-			reloadNav('tplNavRadio', 'Radio');
-			break;
-		
-		case "Movies":
-			//The Navigation
-			reloadNavDynamic(loadMovieNav, 'Movies');
-			
-			//The Movie list
-			loadContentDynamic(loadMovieList, 'Movies');
-			break;
-			
-		case "Timer":
-			//The Navigation
-			reloadNav('tplNavTimer', 'Timer');
-			
-			//The Timerlist
-			loadContentDynamic(loadTimerList, 'Timer');
-			break;
-		
-		case "MediaPlayer":
-			loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
-			break;
-			
-		case "BoxControl":
-			reloadNav('tplNavBoxControl', 'BoxControl');
-			break;
-			
-		case "About":
-			loadContentDynamic(showAbout, 'About');
-			break;
-		
-		default:
-			break;
+	case "TV":
+		reloadNav('tplNavTv', 'TeleVision');
+		break;
+
+	case "Radio":
+		reloadNav('tplNavRadio', 'Radio');
+		break;
+
+	case "Movies":
+		//The Navigation
+		reloadNavDynamic(loadMovieNav, 'Movies');
+
+		// The Movie list
+		loadContentDynamic(loadMovieList, 'Movies');
+		break;
+
+	case "Timer":
+		//The Navigation
+		reloadNav('tplNavTimer', 'Timer');
+
+		// The Timerlist
+		loadContentDynamic(loadTimerList, 'Timer');
+		break;
+
+	case "MediaPlayer":
+		loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
+		break;
+
+	case "BoxControl":
+		reloadNav('tplNavBoxControl', 'BoxControl');
+		break;
+
+	case "About":
+		loadContentDynamic(showAbout, 'About');
+		break;
+
+	default:
+		break;
 	}
 }
 
@@ -1736,27 +1754,27 @@ function updateItemsLazy(bouquet){
 
 function init(){
 	if(DBG){
-		loadAndOpenDebug();
+		openDebug();
 	}
-	
+
 	if (typeof document.body.style.maxHeight == "undefined") {
 		alert("Due to the tremendous amount of work needed to get everthing to " +
-				"work properly, there is (for now) no support for Internet Explorer Versions below 7");
+		"work properly, there is (for now) no support for Internet Explorer Versions below 7");
 	}
-	
+
 	getBoxtype();
-	
+
 	setAjaxLoad('navContent');
 	setAjaxLoad('contentMain');
-	
+
 	fetchTpl('tplServiceListEPGItem');
 	fetchTpl('tplCurrent');	
 	reloadNav('tplNavTv', 'TeleVision');
-	
+
 	initChannelList();
 	initVolumePanel();
 	initMovieList();
-	
+
 	updateItems();
-	pollCurrent();
+	startUpdateCurrentPoller();
 }

@@ -8,7 +8,7 @@ from enigma import eServiceReference
 from re import sub
 from time import strftime, localtime, time
 
-class WAPfunctions( Source):
+class WAPfunctions(Source):
 	LISTTIME = 0
 	REPEATED = 1
 	SERVICELIST = 2
@@ -18,18 +18,18 @@ class WAPfunctions( Source):
 	TAGLIST = 6
 	DELETEOLD = 7
 	
-	lut = {"Name":0
-			,"Value":1
-			,"Selected":2
+	lut = {	"Name":0,
+			"Value":1,
+			"Selected":2
 	}
 	
-	def __init__(self, session,func = LISTTIME):
+	def __init__(self, session, func=LISTTIME):
 		self.func = func
 		Source.__init__(self)		
 		self.session = session
 		self.result = ["unknown command (%s)" % self.func]
 
-	def handleCommand(self,cmd):
+	def handleCommand(self, cmd):
 		print "WAPfunctions: handleCommand", cmd
 		if self.func is self.LISTTIME:
 			self.result = self.fillListTime(cmd)
@@ -50,8 +50,8 @@ class WAPfunctions( Source):
 		else:
 			self.result = ["unknown command cmd(%s) self.func(%s)" % (cmd, self.func)]
 
-	def fillListTime(self,param):
-		print "fillListTime",param
+	def fillListTime(self, param):
+		print "fillListTime", param
 		
 		input = 0
 		start = 1
@@ -74,13 +74,13 @@ class WAPfunctions( Source):
 				timePlusTwo = end
 		
 		t = {}
-		t["sday"]=t["day"]=strftime("%d", localtime(timeNow))
-		t["smonth"]=t["month"]=strftime("%m", localtime(timeNow))
-		t["syear"]=t["year"]=strftime("%Y", localtime(timeNow))
-		t["smin"]=strftime("%M", localtime(timeNow))
-		t["shour"]=strftime("%H", localtime(timeNow))
-		t["emin"]=strftime("%M", localtime(timePlusTwo))
-		t["ehour"]=strftime("%H", localtime(timePlusTwo))
+		t["sday"] = t["day"] = strftime("%d", localtime(timeNow))
+		t["smonth"] = t["month"] = strftime("%m", localtime(timeNow))
+		t["syear"] = t["year"] = strftime("%Y", localtime(timeNow))
+		t["smin"] = strftime("%M", localtime(timeNow))
+		t["shour"] = strftime("%H", localtime(timeNow))
+		t["emin"] = strftime("%M", localtime(timePlusTwo))
+		t["ehour"] = strftime("%H", localtime(timePlusTwo))
 		
 		key = ""
 		for i in param:
@@ -102,7 +102,7 @@ class WAPfunctions( Source):
 			end = 12
 		else:
 			start = int(t[key])
-			end = int(t[key])+2
+			end = int(t[key]) + 2
 		
 		if param[key] == "now" or param[key] == "end" or param[key] == "begin":
 			input = int(t[key])
@@ -110,40 +110,40 @@ class WAPfunctions( Source):
 			input = param[key] or 0
 			input = int(input)
 		
-		self.result = self.fillOptionListAny(input,start,end)
+		self.result = self.fillOptionListAny(input, start, end)
 		return self.result
 	
-	def fillOptionListAny(self,input,start,end):
+	def fillOptionListAny(self, input, start, end):
 		returnList = []
-		for i in range(start,end+1,1):
+		for i in range(start, end + 1, 1):
 			returnList1 = []
 			j = str(i)
 			if len(j) == 1:
 				j = "0%s" % j
 			returnList1.append(j)
 			returnList1.append(i)
-			if i==input:
+			if i == input:
 				returnList1.append("selected")
 			else:
 				returnList1.append("")
 			returnList.append(returnList1)
 		return returnList
 		
-	def fillRepeated(self,param):
-		print "fillRepeated",param
+	def fillRepeated(self, param):
+		print "fillRepeated", param
 		repeated = param or 0
 		repeated = int(repeated)
 		
 		self.lut = {"Name":0
-			,"Value":1
-			,"Description":2
-			,"Selected":3
+			, "Value":1
+			, "Description":2
+			, "Selected":3
 		}
 		
-		mo = ["mo",	1, "Mo "]#"Monday"]
-		tu = ["tu",	2, "Tu "]#"Tuesday"]
-		we = ["we",	4, "We "]#"Wednesday"]
-		th = ["th",	8, "Th "]#"Thursday"]
+		mo = ["mo", 	1, "Mo "]#"Monday"]
+		tu = ["tu", 	2, "Tu "]#"Tuesday"]
+		we = ["we", 	4, "We "]#"Wednesday"]
+		th = ["th", 	8, "Th "]#"Thursday"]
 		fr = ["fr", 16, "Fr "]#"Friday"]
 		sa = ["sa", 32, "Sa "]#"Saturday"]
 		su = ["su", 64, "Su "]#"Sunday"]
@@ -219,11 +219,11 @@ class WAPfunctions( Source):
 	
 	def serviceListOne(self, bouquet, selref):
 		ref = eServiceReference(bouquet)
-		self.servicelist = ServiceList(ref, command_func = self.getServiceList, validate_commands=False)
+		self.servicelist = ServiceList(ref, command_func=self.getServiceList, validate_commands=False)
 		self.servicelist.setRoot(ref)
 		returnList = []
 		for (ref2, name) in self.servicelist.getServicesAsList():
-			print "ref2: (",ref2, ") name: (",name,")"
+			print "ref2: (", ref2, ") name: (", name, ")"
 			returnListPart = []
 			returnListPart.append(name)
 			returnListPart.append(ref2)
@@ -235,8 +235,8 @@ class WAPfunctions( Source):
 			returnList.append(returnListPart)
 		return returnList
 
-	def serviceList(self,param):
-		print "serviceList: ",param
+	def serviceList(self, param):
+		print "serviceList: ", param
 		sRef = str(param["sRef"])
 		bouquet = str(param["bouquet"])
 		self.sRefFound = 0
@@ -245,20 +245,20 @@ class WAPfunctions( Source):
 			returnList = []
 			bouquet = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
 			ref = eServiceReference(bouquet)
-			self.servicelist = ServiceList(ref, command_func = self.getServiceList, validate_commands=False)
+			self.servicelist = ServiceList(ref, command_func=self.getServiceList, validate_commands=False)
 			self.servicelist.setRoot(ref)
 			for (ref2, name) in self.servicelist.getServicesAsList():
 				part = self.serviceListOne(ref2, sRef)
 				if part:
-					returnList = returnList + [["-- "+name+" --", "<"+name+">", ""]] + part
+					returnList = returnList + [["-- " + name + " --", "<" + name + ">", ""]] + part
 			bouquet = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.radio" ORDER BY bouquet'
 			ref = eServiceReference(bouquet)
-			self.servicelist = ServiceList(ref, command_func = self.getServiceList, validate_commands=False)
+			self.servicelist = ServiceList(ref, command_func=self.getServiceList, validate_commands=False)
 			self.servicelist.setRoot(ref)
 			for (ref2, name) in self.servicelist.getServicesAsList():
 				part = self.serviceListOne(ref2, sRef)
 				if part:
-					returnList = returnList + [["-- "+name+" --", "<"+name+">", ""]] + part
+					returnList = returnList + [["-- " + name + " --", "<" + name + ">", ""]] + part
 		else:
 			returnList = self.serviceListOne(bouquet, sRef)
 
@@ -271,8 +271,8 @@ class WAPfunctions( Source):
 	def getServiceList(self, ref):
 		self.servicelist.root = ref
 
-	def locationList(self,param):
-		print "locationList",param
+	def locationList(self, param):
+		print "locationList", param
 		dirname = param
 		lst = config.movielist.videodirs.value
 		if not dirname:
@@ -282,8 +282,8 @@ class WAPfunctions( Source):
 		returnList = [[lst[i], i, dirname == lst[i] and "selected" or ""] for i in range(len(lst))]
 		return returnList
 
-	def tagList(self,param):
-		print "tagList",param
+	def tagList(self, param):
+		print "tagList", param
 		tag = param
 		try:
 			file = open("/etc/enigma2/movietags")
@@ -294,47 +294,47 @@ class WAPfunctions( Source):
 		except IOError, ioe:
 			taglist = []
 		if not tag in taglist:
-			taglist = [tag]+taglist
+			taglist = [tag] + taglist
 		if not "" in taglist:
 			taglist.append("")
 		returnList = [[taglist[i], i, tag == taglist[i] and "selected" or ""] for i in range(len(taglist))]
 		return returnList
 
-	def fillOptionList(self,param):
-		print "fillOptionList",param
+	def fillOptionList(self, param):
+		print "fillOptionList", param
 		returnList = []
 		if param.has_key("justplay"):
 			number = param["justplay"] or 0
 			number = int(number)
-			returnList.append(["Record",0,number==0 and "selected" or ""])
-			returnList.append(["Zap",1,number==1 and "selected" or ""])
+			returnList.append(["Record", 0, number == 0 and "selected" or ""])
+			returnList.append(["Zap", 1, number == 1 and "selected" or ""])
 		elif param.has_key("afterevent"):
 			number = param["afterevent"] or 0
 			number = int(number)
-			returnList.append(["Nothing",0,number==0 and "selected" or ""])
-			returnList.append(["Standby",1,number==1 and "selected" or ""])
-			returnList.append(["Deepstandby/Shutdown",2,number==2 and "selected" or ""])
-			returnList.append(["Auto",3,number==3 and "selected" or ""])
+			returnList.append(["Nothing", 0, number == 0 and "selected" or ""])
+			returnList.append(["Standby", 1, number == 1 and "selected" or ""])
+			returnList.append(["Deepstandby/Shutdown", 2, number == 2 and "selected" or ""])
+			returnList.append(["Auto", 3, number == 3 and "selected" or ""])
 		return returnList
 	
-	def deleteOldSaved(self,param):
-		print "deleteOldSaved",param
+	def deleteOldSaved(self, param):
+		print "deleteOldSaved", param
 		returnList = []
-		returnList.append(["deleteOldOnSave",param["deleteOldOnSave"],""])
-		returnList.append(["command",param["command"],""])
+		returnList.append(["deleteOldOnSave", param["deleteOldOnSave"], ""])
+		returnList.append(["command", param["command"], ""])
 		if int(param["deleteOldOnSave"]) == 1:
-			returnList.append(["channelOld",param["sRef"],""])
-			returnList.append(["beginOld",param["begin"],""])
-			returnList.append(["endOld",param["end"],""])
+			returnList.append(["channelOld", param["sRef"], ""])
+			returnList.append(["beginOld", param["begin"], ""])
+			returnList.append(["endOld", param["end"], ""])
 		return returnList
 			
 	
-	def fillValue(self,param):
-		print "fillValue: ",param
-		return [["",param,""]]
+	def fillValue(self, param):
+		print "fillValue: ", param
+		return [["", param, ""]]
 
 	def getText(self):
-		(result,text) = self.result
+		(result, text) = self.result
 		return text
 	
 	def filterXML(self, item):

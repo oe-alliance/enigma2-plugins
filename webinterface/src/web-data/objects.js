@@ -1,63 +1,41 @@
 // $Header$
 // store all objects here
 
-//START class EPGList
-function EPGList(xml){
-	// parsing values from xml-element
-	//debug('init EPGList'+xml);
+//START class EPGList 
+
+function getNodeContent(xml, nodename, defaultString){	
+	var	node = xml.getElementsByTagName(nodename);
 	try{
-		this.xmlitems = xml.getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
-	} catch (e) { debug("[EPGList] parsing Error");}
-	
-	this.getArray = function(sortbytime){
-		debug("[EPGList] Sort by time "+sortbytime);
-		if (sortbytime === true){
-			var sort1 = [];
-			for(var i=0;i<this.xmlitems.length;i++){
-				var xv = new EPGEvent(this.xmlitems.item(i));
-				sort1.push( [xv.startTime, xv] );
-			}
-			sort1.sort(this.sortFunction);
-			var sort2 = [];
-			for(i=0;i<sort1.length;i++){
-				sort2.push(sort1[i][1]);
-			}
-			return sort2;
-		}else{
-			var listxy = [];
-			for (i=0;i<this.xmlitems.length;i++){
-				xv = new EPGEvent(this.xmlitems.item(i));
-				listxy.push(xv);			
-			}
-			return listxy;
+		return node.item(0).firstChild.data;
+	} catch(e){
+//		debug('[getNodeContent] Error getting content of node "'+ nodename +'" :: ' + e);
+		if(defaultString !== null) {
+			return defaultString;
 		}
-	};
-	this.sortFunction = function(a,b){
-	  return a[0] - b[0];
-	};
+		return 'N/A';
+	}
 }
-//END class EPGList
+
+function getNamedChildren(xml, parentname, childname){
+	try {
+		var ret = xml.getElementsByTagName(parentname).item(0).getElementsByTagName(childname);
+		return ret;
+	} catch (e) {
+		return {};
+	}
+}
 
 //START class EPGEvent
 function EPGEvent(xml){	
-	// parsing values from xml-element
-	try{
-		this.eventID = xml.getElementsByTagName('e2eventid').item(0).firstChild.data;
-		this.startTime = xml.getElementsByTagName('e2eventstart').item(0).firstChild.data;
-		this.duration = xml.getElementsByTagName('e2eventduration').item(0).firstChild.data;
-		this.title = xml.getElementsByTagName('e2eventtitle').item(0).firstChild.data;
-		this.serviceRef = xml.getElementsByTagName('e2eventservicereference').item(0).firstChild.data;
-		this.serviceName = xml.getElementsByTagName('e2eventservicename').item(0).firstChild.data;
-		this.fileName = xml.getElementsByTagName('e2filename').item(0).firstChild.data;
-	} catch (e) {
-	}	
-	try{
-		this.description = xml.getElementsByTagName('e2eventdescription').item(0).firstChild.data;
-	} catch (e) {	this.description= 'N/A';	}
-	
-	try{
-		this.descriptionE = xml.getElementsByTagName('e2eventdescriptionextended').item(0).firstChild.data;
-	} catch (e) {	this.descriptionE = 'N/A';	}
+	this.eventID = getNodeContent(xml, 'e2eventid', '');
+	this.startTime = getNodeContent(xml, 'e2eventstart', '');
+	this.duration = getNodeContent(xml, 'e2eventduration', '');
+	this.title = getNodeContent(xml, 'e2eventtitle', '');
+	this.serviceRef = getNodeContent(xml, 'e2eventservicereference', '');
+	this.serviceName = getNodeContent(xml, 'e2eventservicename', '');
+	this.fileName = getNodeContent(xml, 'e2filename', '');	
+	this.description = getNodeContent(xml, 'e2eventdescription');
+	this.descriptionE = getNodeContent(xml, 'e2eventdescriptionextended');
 
 	this.getFilename = function (){
 		return this.fileName;
@@ -78,8 +56,8 @@ function EPGEvent(xml){
 		return h+":"+m;
 	};
 	this.getTimeDay = function (){
-		var Wochentag = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
-		var wday = Wochentag[this.getTimeStart().getDay()];
+		var weekday = ["So", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+		var wday = weekday[this.getTimeStart().getDay()];
 		var day = this.getTimeStart().getDate();
 		var month = this.getTimeStart().getMonth()+1;
 		var year = this.getTimeStart().getFullYear();
@@ -103,7 +81,8 @@ function EPGEvent(xml){
 		return h+":"+m;
 	};
 	this.getDuration = function (){
-		return  new Date(parseInt(this.duration, 10)*1000);
+		var date = new Date(parseInt(this.duration, 10)*1000);
+		return date;
 	};
 	this.getTitle = function (){
 		return this.title;
@@ -123,16 +102,52 @@ function EPGEvent(xml){
 }
 //END class EPGEvent
 
-//START class Service
-function ServiceReference(xml){	
+
+function EPGList(xml){
 	// parsing values from xml-element
-	//debug('init ServiceReference'+xml);
 	try{
-		this.servicereference = xml.getElementsByTagName('e2servicereference').item(0).firstChild.data;
-		this.servicename = xml.getElementsByTagName('e2servicename').item(0).firstChild.data;
-	} catch (e) {
-		//debug("Service parsing Error "+e);
-	}
+		this.xmlitems = xml.getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
+	} catch (e) { debug("[EPGList] parsing Error");}
+	
+	this.getArray = function(sortbytime){
+		debug("[EPGList] Sort by time "+sortbytime);
+		var list = [];
+		
+		if (sortbytime === true){
+			var sortList = [];
+			for(var i=0;i<this.xmlitems.length;i++){
+				var event = new EPGEvent(this.xmlitems.item(i));
+				sortList.push( [event.startTime, event] );
+			}
+			sortList.sort(this.sortFunction);
+			
+			list = [];
+			for(i=0;i<sortList.length;i++){
+				list.push(sortList[i][1]);
+			}
+			
+			return list;
+			
+		}else{
+			list = [];
+			for (i=0;i<this.xmlitems.length;i++){
+				xv = new EPGEvent(this.xmlitems.item(i));
+				list.push(xv);			
+			}
+			return list;
+		}
+	};
+	
+	this.sortFunction = function(a, b){
+	  return a[0] - b[0];
+	};
+}
+//END class EPGList
+
+// START class Service
+function Service(xml){	
+	this.servicereference = getNodeContent(xml, 'e2servicereference', '');
+	this.servicename = getNodeContent(xml, 'e2servicename');
 	
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
@@ -146,117 +161,46 @@ function ServiceReference(xml){
 		return this.servicename.replace('&quot;', '"');
 	};
 	
-	this.setServiceReference = function(toInsert){
-		this.servicereference = toInsert;
+	this.setServiceReference = function(sref){
+		this.servicereference = sref;
 	};
 		
-	this.setServiceName = function(toInsert){
-		this.servicename = toInsert.replace('&quot;', '"');
+	this.setServiceName = function(sname){
+		this.servicename = sname.replace('&quot;', '"');
 	};
 }	
 //END class Service
 
-//START class ServiceList
+// START class ServiceList
 function ServiceList(xml){
-	// parsing values from xml-element
-	//debug('init ServiceList'+xml);
-	try{
-		this.xmlitems = xml.getElementsByTagName("e2servicelist").item(0).getElementsByTagName("e2service");
-	} catch (e) {
-		//debug("Service parsing Error");
-	}
+	this.xmlitems = getNamedChildren(xml, "e2servicelist", "e2service");
+	this.servicelist = [];
 	this.getArray = function(){
-		var listxy = [];
-		try{
+		if(this.servicelist.length === 0){
 			for (var i=0;i<this.xmlitems.length;i++){
-				var xv = new ServiceReference(this.xmlitems.item(i));
-				listxy.push(xv);
-			}			
-		}catch (e){}
+				var service = new Service(this.xmlitems.item(i));
+				this.servicelist.push(service);
+			}
+		}
 		
-		return listxy;
+		return this.servicelist;
 	};
 }
 //END class ServiceList
 
-//START class MovieList
-function MovieList(xml){
-	// parsing values from xml-element
-	debug('[MovieList] init: ' + xml);
-	try{
-		this.xmlitems = xml.getElementsByTagName("e2movielist").item(0).getElementsByTagName("e2movie");
-	} catch (e) {
-		debug("[MovieList] parsing Error");
-	}
-	this.getArray = function(){
-		var listxy = [];
-		for(var i=0;i<this.xmlitems.length;i++){
-			//debug("parsing movie "+i+" of "+this.xmlitems.length);
-			var xv = new Movie(this.xmlitems.item(i));
-			listxy.push(xv);			
-		}
-		return listxy;
-	};
-}
-//END class MovieList
 
-//START class Movie
+// START class Movie
 function Movie(xml){	
-	// parsing values from xml-element
-	//debug('init Movie');
-	try{
-		this.servicereference = xml.getElementsByTagName('e2servicereference').item(0).firstChild.data;
-	} catch (e) {
-		this.servicereference = "N/A";
-	}
-	try{
-		this.servicename = xml.getElementsByTagName('e2servicename').item(0).firstChild.data;
-	} catch (e) {
-		this.servicename = "N/A";
-	}
-	try{
-		this.title = xml.getElementsByTagName('e2title').item(0).firstChild.data;
-	} catch (e) {
-		this.title = "N/A";
-	}
-	try{
-		this.descriptionextended = xml.getElementsByTagName('e2descriptionextended').item(0).firstChild.data;
-	} catch (e) {
-		this.descriptionextended = "N/A";
-	}
-	try{
-		this.description = xml.getElementsByTagName('e2description').item(0).firstChild.data;
-	} catch (e) {
-		this.description = "N/A";
-	}
-	try{
-		this.tags = xml.getElementsByTagName('e2tags').item(0).firstChild.data;
-	} catch (e) {
-		this.tags = "&nbsp;"; // no whitespaces... tags will be splittet later
-	}
-	try{
-		this.filename = xml.getElementsByTagName('e2filename').item(0).firstChild.data;
-	} catch (e) {
-		this.filename = "n/a";
-	}
-	try{
-		this.filesize = xml.getElementsByTagName('e2filesize').item(0).firstChild.data;
-	} catch (e) {
-		this.filesize = 0;
-	}
-	try{
-		this.startTime = xml.getElementsByTagName('e2time').item(0).firstChild.data;
-	} catch (e) {
-		this.startTime = "0";
-	}
-	try{
-		this.length = xml.getElementsByTagName('e2length').item(0).firstChild.data;
-	} catch (e) {
-		this.length = "0";
-	}
-	
-		
-	
+	this.servicereference = getNodeContent(xml, 'e2servicereference');
+	this.servicename = getNodeContent(xml, 'e2servicename');
+	this.title = getNodeContent(xml, 'e2title');
+	this.descriptionextended = getNodeContent(xml, 'e2descriptionextended');
+	this.description = getNodeContent(xml, 'e2description');
+	this.tags = getNodeContent(xml, 'e2tags', '&nbsp;');
+	this.filename = getNodeContent(xml, 'e2filename');
+	this.filesize = getNodeContent(xml, 'e2filesize', 0);
+	this.startTime = getNodeContent(xml, 'e2time', 0);
+	this.length = getNodeContent(xml, 'e2length', 0);
 
 	this.getLength = function (){
 		return this.length;
@@ -319,165 +263,57 @@ function Movie(xml){
 }	
 //END class Movie
 
-//START class TimerList
-function TimerList(xml){
-	// parsing values from xml-element
-	try{
-		this.xmlitems = xml.getElementsByTagName("e2timerlist").item(0).getElementsByTagName("e2timer");
-	} catch (e) {
-		debug("[TimerList] parsing Error");
-	}
+
+// START class MovieList
+function MovieList(xml){
+	this.xmlitems = getNamedChildren(xml, "e2movielist", "e2movie");
+	this.movielist = [];
+	
 	this.getArray = function(){
-		var listxy = [];
-		for(var i=0;i<this.xmlitems.length;i++){
-			//debug("parsing timer "+i+" of "+this.xmlitems.length);
-			var xv = new Timer(this.xmlitems.item(i));
-			listxy.push(xv);			
+		if(this.movielist.length === 0){			
+			for(var i=0;i<this.xmlitems.length;i++){
+				//debug("parsing movie "+i+" of "+this.xmlitems.length);
+				var movie = new Movie(this.xmlitems.item(i));
+				this.movielist.push(movie);			
+			}
 		}
-		return listxy;
+		
+		return this.movielist;
 	};
 }
-//END class TimerList
+//END class MovieList
 
-//START class Timer
+
+
+// START class Timer
 function Timer(xml){	
-	// parsing values from xml-element
-	//debug('init Timer');
-	try{
-		this.servicereference = xml.getElementsByTagName('e2servicereference').item(0).firstChild.data;
-	} catch (e) {
-		this.servicereference = "N/A";
-	}
-	try{
-		this.servicename = xml.getElementsByTagName('e2servicename').item(0).firstChild.data;
-	} catch (e) {
-		this.servicename = "N/A";
-	}
-	try{
-		this.eventid = xml.getElementsByTagName('e2eit').item(0).firstChild.data;
-	} catch (e) {
-		this.eventid = "N/A";
-	}
-	try{
-		this.name = xml.getElementsByTagName('e2name').item(0).firstChild.data;
-	} catch (e) {
-		this.name = "N/A";
-	}
-	try{
-		this.description = xml.getElementsByTagName('e2description').item(0).firstChild.data;
-	} catch (e) {
-		this.description = "N/A";
-	}
-	try{
-		this.descriptionextended = xml.getElementsByTagName('e2descriptionextended').item(0).firstChild.data;
-	} catch (e) {
-		this.descriptionextended = "N/A";
-	}
-	try{
-		this.disabled = xml.getElementsByTagName('e2disabled').item(0).firstChild.data;
-	} catch (e) {
-		this.disabled = "0";
-	}
-	try{
-		this.timebegin = xml.getElementsByTagName('e2timebegin').item(0).firstChild.data;
-	} catch (e) {
-		this.timebegin = "N/A";
-	}
-	try{
-		this.timeend = xml.getElementsByTagName('e2timeend').item(0).firstChild.data;
-	} catch (e) {
-		this.timeend = "N/A";
-	}
-	try{
-		this.duration = xml.getElementsByTagName('e2duration').item(0).firstChild.data;
-	} catch (e) {		
-		this.duration = "0";
-	}
-	try{
-		this.startprepare = xml.getElementsByTagName('e2startprepare').item(0).firstChild.data;
-	} catch (e) {
-		this.startprepare = "N/A";
-	}
-	try{
-		this.justplay = xml.getElementsByTagName('e2justplay').item(0).firstChild.data;
-	} catch (e) {
-		this.justplay = "";
-	}
-	try{
-		this.afterevent = xml.getElementsByTagName('e2afterevent').item(0).firstChild.data;
-	} catch (e) {
-		this.afterevent = "0";
-	}
-	try{
-		this.dirname = xml.getElementsByTagName('e2dirname').item(0).firstChild.data;
-	} catch (e) {
-		this.dirname = "/hdd/movie/";
-	}
-	try{
-		this.tags = xml.getElementsByTagName('e2tags').item(0).firstChild.data;
-	} catch (e) {
-		this.tags = "";
-	}
-	try{
-		this.logentries = xml.getElementsByTagName('e2logentries').item(0).firstChild.data;
-	} catch (e) {
-		this.logentries = "N/A";
-	}
-	try{
-		this.tfilename = xml.getElementsByTagName('e2filename').item(0).firstChild.data;
-	} catch (e) {
-		this.tfilename = "N/A";
-	}
-	try{
-		this.backoff = xml.getElementsByTagName('e2backoff').item(0).firstChild.data;
-	} catch (e) {
-		this.backoff = "N/A";
-	}
-	try{
-		this.nextactivation = xml.getElementsByTagName('e2nextactivation').item(0).firstChild.data;
-	} catch (e) {
-		this.nextactivation = "N/A";
-	}
-	try{
-		this.firsttryprepare = xml.getElementsByTagName('e2firsttryprepare').item(0).firstChild.data;
-	} catch (e) {
-		this.firsttryprepare = "N/A";
-	}
-	try{
-		this.state = xml.getElementsByTagName('e2state').item(0).firstChild.data;
-	} catch (e) {
-		this.state = "N/A";
-	}
-	try{
-		this.repeated = xml.getElementsByTagName('e2repeated').item(0).firstChild.data;
-	} catch (e) {
-		this.repeated = "0";
-	}
-	try{
-		this.dontsave = xml.getElementsByTagName('e2dontsave').item(0).firstChild.data;
-	} catch (e) {
-		this.dontsave = "N/A";
-	}
-	try{
-		this.cancled = xml.getElementsByTagName('e2cancled').item(0).firstChild.data;
-	} catch (e) {
-		this.cancled = "N/A";
-	}
-	try{
-		this.color = xml.getElementsByTagName('e2color').item(0).firstChild.data;
-	} catch (e) {
-		this.color = "N/A";
-	}
-	try{
-		this.toggledisabled = xml.getElementsByTagName('e2toggledisabled').item(0).firstChild.data;
-	} catch (e) {
-		this.toggledisabled = "N/A";
-	}
-	try{
-		this.toggledisabledimg = xml.getElementsByTagName('e2toggledisabledimg').item(0).firstChild.data;
-	} catch (e) {
-		this.toggledisabledimg = "N/A";
-	}
+	this.servicereference = getNodeContent(xml, 'e2servicereference');
+	this.servicename = getNodeContent(xml, 'e2servicename');
+	this.eventid = getNodeContent(xml, 'e2eit');
+	this.name = getNodeContent(xml, 'e2name');
+	this.description = getNodeContent(xml, 'e2description');
+	this.descriptionextended = getNodeContent(xml, 'e2descriptionextended');
+	this.disabled = getNodeContent(xml, 'e2disabled', '0');
+	this.timebegin = getNodeContent(xml, 'e2timebegin');
+	this.timeend = getNodeContent(xml, 'e2timeend');
+	this.duration = getNodeContent(xml, 'e2duration', '0');
+	this.startprepare = getNodeContent(xml, 'e2startprepare');
+	this.justplay = getNodeContent(xml, 'e2justplay', '');
+	this.afterevent = getNodeContent(xml, 'e2afterevent', '0');
+	this.dirname = getNodeContent(xml, 'e2dirname', '/hdd/movie/');
+	this.tags = getNodeContent(xml, 'e2tags', '');
+	this.logentries = getNodeContent(xml, 'e2logentries');
+	this.tfilename = getNodeContent(xml, 'e2filename');
+	this.backoff = getNodeContent(xml, 'e2backoff');
+	this.nextactivation = getNodeContent(xml, 'e2nextactivation');
+	this.firsttryprepare = getNodeContent(xml, 'e2firsttryprepare');
+	this.state = getNodeContent(xml, 'e2state');
+	this.repeated = getNodeContent(xml, 'e2repeated', '0');
+	this.dontsave = getNodeContent(xml, 'e2dontsave');
+	this.cancled = getNodeContent(xml, 'e2cancled');
+	this.color = getNodeContent(xml, 'e2color');
+	this.toggledisabled = getNodeContent(xml, 'e2toggledisabled');
+	this.toggledisabledimg = getNodeContent(xml, 'e2toggledisabledimg');
 
 	this.getColor = function(){
 		return this.color;
@@ -592,27 +428,37 @@ function Timer(xml){
 		return this.cancled;
 	};	
 }
-// START SimpleXMLResult ehemals TimerAddResult
-function SimpleXMLResult(xml){
-	// parsing values from xml-element
-	debug('[SimpleXMLResult] init: '+xml);
+
+
+// START class TimerList
+function TimerList(xml){
+	this.xmlitems = getNamedChildren(xml, "e2timerlist", "e2timer");
+	this.timerlist = [];
+	
+	this.getArray = function(){
+		if(this.timerlist.length === 0){
+			for(var i=0;i<this.xmlitems.length;i++){
+				var timer = new Timer(this.xmlitems.item(i));
+				this.timerlist.push(timer);			
+			}
+		}
+		
+		return this.timerlist;
+	};
+}
+//END class TimerList
+
+
+function SimpleXMLResult(xml){		
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2simplexmlresult").item(0);
-		debug("[SimpleXMLResult] count: " + xml.getElementsByTagName("e2simplexmlresult").length);
 	} catch (e) {
-		debug("[SimpleXMLResult] parsing e2simplexmlresult"+e);
+		debug("[SimpleXMLResult] parsing e2simplexmlresult" + e);
 	}
-	try{
-		this.state = this.xmlitems.getElementsByTagName("e2state").item(0).firstChild.data;
-	} catch (e) {
-		debug("[SimpleXMLResult] parsing e2state"+e);
-	}
-	try{
-		this.statetext = this.xmlitems.getElementsByTagName("e2statetext").item(0).firstChild.data;
-	} catch (e) {
-		debug("[SimpleXMLResult] parsing e2statetext"+e);
-	}
-	
+
+	this.state = getNodeContent(this.xmlitems, 'e2state', 'False');
+	this.statetext = getNodeContent(this.xmlitems, 'e2statetext', 'Error Parsing XML');
+
 	this.getState = function(){
 		if(this.state == 'True'){
 			return true;
@@ -620,6 +466,7 @@ function SimpleXMLResult(xml){
 			return false;
 		}
 	};
+	
 	this.getStateText = function(){
 			return this.statetext;
 	};
@@ -627,57 +474,32 @@ function SimpleXMLResult(xml){
 // END SimpleXMLResult
 
 // START SimpleXMLList
-function SimpleXMLList(xml){
+function SimpleXMLList(xml, tagname){
 	// parsing values from xml-element
-	debug('[SimpleXMLList] init: '+xml);
 	try{
-		this.xmlitems = xml.getElementsByTagName("e2simplexmllist").item(0).getElementsByTagName("e2simplexmlitem");
-		debug("[SimpleXMLList] count: " + xml.getElementsByTagName("e2simplexmllist").length);
+		this.xmlitems = xml.getElementsByTagName(tagname);
 	} catch (e) {
 		debug("[SimpleXMLList] parsing e2simplexmllist"+e);
 	}
+	this.xmllist = [];
+	
 	this.getList = function(){
-		var lst = [];
-		for(var i=0;i<this.xmlitems.length;i++){
-			lst.push(this.xmlitems.item(i).firstChild.data);			
+		if(this.xmllist.length === 0){
+			for(var i=0;i<this.xmlitems.length;i++){
+				this.xmllist.push(this.xmlitems.item(i).firstChild.data);			
+			}
 		}
-		return lst;
+		
+		return this.xmllist;
 	};
 }
 // END SimpleXMLList
 
-//START class Settings
-function Settings(xml){
-	// parsing values from xml-element
-	//debug('init ServiceList'+xml);
-	try{
-		this.xmlitems = xml.getElementsByTagName("e2settings").item(0).getElementsByTagName("e2setting");
-		debug("[Settings] Number of items: " + this.xmlitems);
-	} catch (e) {
-		//debug("Service parsing Error");
-	}
-	this.getArray = function(){
-		var listxy = [];
-		for (var i=0;i<this.xmlitems.length;i++){
-			var xv = new Setting(this.xmlitems.item(i));
-			listxy.push(xv);			
-		}
-		return listxy;
-	};
-}
-//END class Settings
 
-//START class Setting
+// START class Setting
 function Setting(xml){	
-	// parsing values from xml-element
-	//debug('init ServiceReference'+xml);
-	try{
-		this.settingvalue = xml.getElementsByTagName('e2settingvalue').item(0).firstChild.data;
-		this.settingname = xml.getElementsByTagName('e2settingname').item(0).firstChild.data;
-		
-	} catch (e) {
-		//debug("Service parsing Error "+e);
-	}
+	this.settingvalue = getNodeContent(xml, 'e2settingvalue');
+	this.settingname = getNodeContent(xml, 'e2settingname');
 	
 	this.getSettingValue = function(){
 		return this.settingvalue;
@@ -688,145 +510,28 @@ function Setting(xml){
 	};
 	
 }
-//START class FileList
-function FileList(xml){
+
+
+// START class Settings
+function Settings(xml){
 	// parsing values from xml-element
-	debug('[FileList] init: ' + xml);
 	try{
-		this.xmlitems = xml.getElementsByTagName("e2filelist").item(0).getElementsByTagName("e2file");
+		this.xmlitems = xml.getElementsByTagName("e2settings").item(0).getElementsByTagName("e2setting");
+		debug("[Settings] Number of items: " + this.xmlitems);
 	} catch (e) {
-		debug("[FileList] parsing Error");
-	}
+		debug("[Settings] parsing Error");
+	}	
+	this.settings = [];
+	
 	this.getArray = function(){
-		var listxy = [];
-		for(var i=0;i<this.xmlitems.length;i++){
-			//debug("parsing File "+i+" of "+this.xmlitems.length);
-			var xv = new File(this.xmlitems.item(i));
-			listxy.push(xv);			
+		if(this.settings.length === 0){
+			for (var i=0;i<this.xmlitems.length;i++){
+				var setting = new Setting(this.xmlitems.item(i));
+				this.settings.push(setting);			
+			}
 		}
-		return listxy;
+		
+		return this.settings;		
 	};
 }
-//END class FileList
-
-//START class File
-function File(xml){	
-	// parsing values from xml-element
-	//debug('init Movie');
-	try{
-		this.servicereference = xml.getElementsByTagName('e2servicereference').item(0).firstChild.data;
-	} catch (e) {
-		this.servicereference = "N/A";
-	}
-	this.getServiceReference = function(){
-		return this.servicereference;
-	};
-	
-	this.getNameOnly = function(){
-		if(this.root == '/') {
-			return this.servicereference;
-		} else {
-			return this.servicereference.replace(new RegExp('.*'+this.root, "i"), '');
-		}
-	};
-	
-	try{
-		this.isdirectory = xml.getElementsByTagName('e2isdirectory').item(0).firstChild.data;
-	} catch (e) {
-		this.isdirectory = "N/A";
-	}
-	
-	this.getIsDirectory = function(){
-		return this.isdirectory;
-	};
-	
-	try{
-		this.root = xml.getElementsByTagName('e2root').item(0).firstChild.data;
-	} catch (e) {
-		this.root = "N/A";
-	}
-	
-	this.getRoot = function(){
-		return this.root;
-	};
-}	
-//END class File
-
-
-
-//START class NoteList
-function NoteList(xml){
-	// parsing values from xml-element
-	try{
-		this.xmlitems = xml.getElementsByTagName("e2noteslist").item(0).getElementsByTagName("e2note");
-	} catch (e) {
-		debug("[NoteList] parsing Error");
-	}
-	this.getArray = function(){
-		var listxy = [];
-		for(var i=0;i<this.xmlitems.length;i++){
-			var xv = new Note(this.xmlitems.item(i));
-			listxy.push(xv);			
-		}
-		return listxy;
-	};
-}
-//END class NoteList
-
-//START class Note
-function Note(xml){	
-	try{
-		this.filename = xml.getElementsByTagName('e2notename').item(0).firstChild.data;
-	} catch (e) {
-		this.filename = "N/A";
-	}
-	try{
-		this.saved = xml.getElementsByTagName('e2notesaved').item(0).firstChild.data;
-	} catch (e) {
-		this.saved = "N/A";
-	}
-	try{
-		this.nameold = xml.getElementsByTagName('e2notenameold').item(0).firstChild.data;
-	} catch (e) {
-		this.nameold = "False";
-	}
-	try{
-		this.content = xml.getElementsByTagName('e2notecontent').item(0).firstChild.data;
-	} catch (e) {
-		this.content = " ";
-	}
-	try{
-		this.size = xml.getElementsByTagName('e2notesize').item(0).firstChild.data;
-	} catch (e) {
-		this.size = "N/A";
-	}
-	try{
-		this.mtime = new Date(parseInt(xml.getElementsByTagName('e2notemtime').item(0).firstChild.data, 10)*1000);
-	} catch (e) {
-		this.mtime = "N/A";
-	}
-	try{
-		this.ctime = new Date(parseInt(xml.getElementsByTagName('e2notectime').item(0).firstChild.data, 10)*1000);
-	} catch (e) {
-		this.ctime = "N/A";
-	}
-
-	this.getMTime = function(){
-		var Wochentag = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
-		var wday = Wochentag[this.mtime.getDay()];
-		var day = this.mtime.getDate();
-		var month = this.mtime.getMonth()+1;
-		var year = this.mtime.getFullYear();
-		return wday+".&nbsp;"+day+"."+month+"."+year+" "+this.mtime.getHours()+":"+this.mtime.getMinutes();
-	};
-	
-	this.getCTime = function(){
-		var Wochentag = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
-		var wday = Wochentag[this.ctime.getDay()];
-		var day = this.ctime.getDate();
-		var month = this.ctime.getMonth()+1;
-		var year = this.ctime.getFullYear();
-		return wday+".&nbsp;"+day+"."+month+"."+year+" "+this.ctime.getHours()+":"+this.ctime.getMinutes();
-	};
-}
-//END class NoteList
+//END class Settings

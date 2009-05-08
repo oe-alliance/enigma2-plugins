@@ -3,8 +3,8 @@
 <e2:element source="Settings">				
 	<e2:convert type="web:ListFiller">
 	&lt;e2setting>
-		&lt;e2settingvalue><e2:item name="Value" filter="xml" />&lt;/e2settingvalue>
 		&lt;e2settingname><e2:item name="Name" filter="xml" />&lt;/e2settingname>
+		&lt;e2settingvalue><e2:item name="Value" filter="xml" />&lt;/e2settingvalue>		
 	&lt;/e2setting>
 	</e2:convert>
 	<e2:convert type="web:TextToHTML" />			

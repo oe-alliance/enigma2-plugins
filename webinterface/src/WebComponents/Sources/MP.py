@@ -4,20 +4,20 @@ from ServiceReference import ServiceReference
 from Components.FileList import FileList
 from os import path as os_path
 
-class MP( Source):
+class MP(Source):
 	LIST = 0
 	PLAY = 1
 	COMMAND = 3
 	WRITEPLAYLIST = 4
 
-	def __init__(self, session,func = LIST):
+	def __init__(self, session, func=LIST):
 		Source.__init__(self)
 		self.func = func
 		self.session = session
 		error = "unknown command (%s)" % func
-		self.result = [[error,error,error]]
+		self.result = [[error, error, error]]
 
-	def handleCommand(self,cmd):
+	def handleCommand(self, cmd):
 		self.cmd = cmd
 		if self.func is self.LIST:
 			self.result = self.getFileList(cmd)
@@ -48,24 +48,24 @@ class MP( Source):
 		except ImportError, ie:
 			return False
 
-	def getFileList(self,param):
-		print "getFileList:",param
+	def getFileList(self, param):
+		print "getFileList:", param
 
 		returnList = []
 
 		if param["path"] == "playlist":
 			# TODO: Fix dummy return if unable to load mp
 			if not self.tryOpenMP():
-				returnList.append(["empty","True","playlist"])
+				returnList.append(["empty", "True", "playlist"])
 				return returnList
 
 			mp = self.session.mediaplayer
 			if len(mp.playlist) != 0:
 				serviceRefList = mp.playlist.getServiceRefList()
 				for count in range(len(serviceRefList)):
-					returnList.append([serviceRefList[count].toString(),"True","playlist"])
+					returnList.append([serviceRefList[count].toString(), "True", "playlist"])
 			else:
-				returnList.append(["empty","True","playlist"])
+				returnList.append(["empty", "True", "playlist"])
 
 			return returnList
 
@@ -82,24 +82,24 @@ class MP( Source):
 		else:
 			matchingPattern = param["types"]
 
-		filelist = FileList(param["path"], showDirectories = True, showFiles = True, matchingPattern = matchingPattern, useServiceRef = useServiceRef, isTop = False)
+		filelist = FileList(param["path"], showDirectories=True, showFiles=True, matchingPattern=matchingPattern, useServiceRef=useServiceRef, isTop=False)
 		list = filelist.getFileList()
 		for x in list:
 			if useServiceRef == True:
 				if x[0][1] == False: #isDir
-					returnList.append([x[0][0].toString(),x[0][1],param["path"]])
+					returnList.append([x[0][0].toString(), x[0][1], param["path"]])
 				else:
-					returnList.append([x[0][0],x[0][1],param["path"]])
+					returnList.append([x[0][0], x[0][1], param["path"]])
 			else:
 				if x[0][1] == False: #isDir
-					returnList.append([param["path"]+x[0][0],x[0][1],param["path"]])
+					returnList.append([param["path"] + x[0][0], x[0][1], param["path"]])
 				else:
-					returnList.append([x[0][0],x[0][1],param["path"]])
+					returnList.append([x[0][0], x[0][1], param["path"]])
 
 		return returnList
 
-	def playFile(self,param):
-		print "playFile: ",param
+	def playFile(self, param):
+		print "playFile: ", param
 		# TODO: fix error handling
 		if not self.tryOpenMP():
 			return
@@ -118,9 +118,9 @@ class MP( Source):
 		mp.playlist.addFile(ref)
 
 		#mp.playServiceRefEntry(ref)
-		print "len len(mp.playlist.getServiceRefList()): ",len(mp.playlist.getServiceRefList())
+		print "len len(mp.playlist.getServiceRefList()): ", len(mp.playlist.getServiceRefList())
 		if len(mp.playlist.getServiceRefList()):
-			lastEntry = len(mp.playlist.getServiceRefList()) -1
+			lastEntry = len(mp.playlist.getServiceRefList()) - 1
 			currref = mp.playlist.getServiceRefList()[lastEntry]
 			if self.session.nav.getCurrentlyPlayingServiceReference() is None or currref != self.session.nav.getCurrentlyPlayingServiceReference():
 				self.session.nav.playService(mp.playlist.getServiceRefList()[lastEntry])
@@ -134,8 +134,8 @@ class MP( Source):
 		mp.infoTimerFire()
 		return
 
-	def writePlaylist(self,param):
-		print "writePlaylist: ",param
+	def writePlaylist(self, param):
+		print "writePlaylist: ", param
 		filename = "playlist/%s.e2pls" % param
 		from Tools.Directories import resolveFilename, SCOPE_CONFIG
 
@@ -146,8 +146,8 @@ class MP( Source):
 		mp = self.session.mediaplayer
 		mp.playlistIOInternal.save(resolveFilename(SCOPE_CONFIG, filename))
 
-	def command(self,param):
-		print "command: ",param
+	def command(self, param):
+		print "command: ", param
 
 		# TODO: fix error handling
 		if not self.tryOpenMP():
@@ -175,6 +175,6 @@ class MP( Source):
 
 	list = property(getList)
 	lut = {"ServiceReference": 0
-			,"IsDirectory": 1
-			,"Root": 2
+			, "IsDirectory": 1
+			, "Root": 2
 			}

@@ -3,10 +3,10 @@ from Components.Sources.ServiceList import ServiceList
 from Screens.ChannelSelection import service_types_tv
 from enigma import eServiceReference
 
-class ServiceListRecursive( Source ):
+class ServiceListRecursive(Source):
 	FETCH = 0
 	
-	def __init__(self, session, func = FETCH):
+	def __init__(self, session, func=FETCH):
 		Source.__init__(self)
 		
 		self.session = session
@@ -15,7 +15,7 @@ class ServiceListRecursive( Source ):
 		self.xml = ""
 		self.command = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 	
-	def handleCommand(self,cmd):
+	def handleCommand(self, cmd):
 		self.command = eServiceReference(cmd)
 	
 	def do_func(self):
@@ -27,7 +27,7 @@ class ServiceListRecursive( Source ):
 		return func(self.command)
 	
 	def buildList(self, ref):
-		self.servicelist = ServiceList(ref, command_func = self.getServiceList, validate_commands=False)
+		self.servicelist = ServiceList(ref, command_func=self.getServiceList, validate_commands=False)
 		list = self.servicelist.getServicesAsList()
 		for index in range(len(list)): 
 			item = list[index]
@@ -43,14 +43,14 @@ class ServiceListRecursive( Source ):
 				subxml = ""
 				for (ref, name) in sub:
 					subxml += "\t\t\t<e2service>\n"
-					subxml += "\t\t\t\t<e2servicereference>%s</e2servicereference>\n\t\t\t\t<e2servicename>%s</e2servicename>\n" %(self.filterXML(ref), self.filterXML(name))
+					subxml += "\t\t\t\t<e2servicereference>%s</e2servicereference>\n\t\t\t\t<e2servicename>%s</e2servicename>\n" % (self.filterXML(ref), self.filterXML(name))
 					subxml += "\t\t\t</e2service>\n"
 			
 			else:
 				self.xml += "\t\t<e2service>\n"
 				bouquet = False
 			
-			self.xml += "\t\t<e2servicereference>%s</e2servicereference>\n\t\t<e2servicename>%s</e2servicename>\n" %(self.filterXML(item[0]), self.filterXML(item[1]))
+			self.xml += "\t\t<e2servicereference>%s</e2servicereference>\n\t\t<e2servicename>%s</e2servicename>\n" % (self.filterXML(item[0]), self.filterXML(item[1]))
 			
 			if bouquet:
 				self.xml += "\t\t<e2servicelist>\n"

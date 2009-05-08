@@ -1,5 +1,5 @@
 <e2:screen name="TimerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;e2timerlist><e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
+<e2timerlist><e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
 	&lt;e2timer>
 		&lt;e2servicereference><e2:item name="ServiceReference" />&lt;/e2servicereference>
 		&lt;e2servicename><e2:item name="ServiceName" filter="xml"/>&lt;/e2servicename>
@@ -14,7 +14,7 @@
 		&lt;e2startprepare><e2:item name="startPrepare" />&lt;/e2startprepare>
 		&lt;e2justplay><e2:item name="justPlay" />&lt;/e2justplay>
 		&lt;e2afterevent><e2:item name="afterEvent" />&lt;/e2afterevent>
-		&lt;e2dirname><e2:item name="Location" />&lt;/e2dirname>
+		&lt;e2location><e2:item name="Location" />&lt;/e2location>
 		&lt;e2tags><e2:item name="Tags" filter="xml"/>&lt;/e2tags>
 		&lt;e2logentries><e2:item name="LogEntries" filter="xml"/>&lt;/e2logentries>
 		&lt;e2filename><e2:item name="Filename" filter="xml"/>&lt;/e2filename>
@@ -27,8 +27,6 @@
 		&lt;e2cancled><e2:item name="Cancled" />&lt;/e2cancled>
 		&lt;e2toggledisabled><e2:item name="toggleDisabled" />&lt;/e2toggledisabled>
 		&lt;e2toggledisabledimg><e2:item name="toggleDisabledIMG" />&lt;/e2toggledisabledimg>
-	&lt;/e2timer>
-	</e2:convert>
-	<e2:convert type="web:TextToHTML" /></e2:element>
-&lt;/e2timerlist>
+	&lt;/e2timer></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+</e2timerlist>
 </e2:screen>

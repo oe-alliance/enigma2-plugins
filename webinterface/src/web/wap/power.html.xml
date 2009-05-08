@@ -8,10 +8,12 @@
 	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico"/>
 </head>
 <body>
-<p><center><a href="/web/powerstate?newstate=1">deepstandby Dreambox</a></center></p>
-<p><center><a href="/web/powerstate?newstate=2">reboot Dreambox</a></center></p>
-<hr/>
-<p><center><a href="/web/powerstate?newstate=3">restart Enigma2</a></center></p>
+<div class="wap">
+	<p><center><a href="/web/powerstate?newstate=1">Deepstandby Dreambox</a></center></p>
+	<p><center><a href="/web/powerstate?newstate=2">Reboot Dreambox</a></center></p>
+	<hr/>
+	<p><center><a href="/web/powerstate?newstate=3">Restart Enigma2</a></center></p>
+</div>
 </body>
 </html>
 </e2:screen>

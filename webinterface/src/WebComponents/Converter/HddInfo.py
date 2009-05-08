@@ -19,15 +19,15 @@ class HddInfo(Converter, object):
 
 		if hdd is not None:
 			if self.type == self.MODEL:
-				return "%s" %hdd.model()
+				return "%s" % hdd.model()
 			elif self.type == self.CAPACITY:
-				return "%s" %hdd.capacity()
+				return "%s" % hdd.capacity()
 			elif self.type == self.FREE:
 				if hdd.free() > 1024:
 					free = float(hdd.free()) / float(1024)
-					return "%.3f GB" %free
+					return "%.3f GB" % free
 				else:
-					return "%i MB" %hdd.free()
+					return "%i MB" % hdd.free()
 
 		return _("N/A")
 

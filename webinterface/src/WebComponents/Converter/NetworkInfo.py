@@ -13,12 +13,12 @@ class NetworkInfo(Converter, object):
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		self.type = {
-					 "Name" : self.NAME,				 
+					 "Name" : self.NAME, 				 
 					 "Mac" : self.MAC,
 					 "Dhcp" : self.DHCP,
 					 "Ip" : self.IP,
 					 "Gateway" : self.GATEWAY,
-					 "Netmask" : self.NETMASK,					 
+					 "Netmask" : self.NETMASK, 					 
 					 }[type]
 	
 	@cached

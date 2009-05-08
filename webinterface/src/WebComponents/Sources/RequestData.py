@@ -13,7 +13,7 @@ class RequestData(Source):
 	REMOTETYPE = 6
 	URI = 7
 
-	def __init__(self, request, what = None):
+	def __init__(self, request, what=None):
 		Source.__init__(self)
 		self.request = request
 		self.what = what

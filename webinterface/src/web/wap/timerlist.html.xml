@@ -1,26 +1,26 @@
-<e2:screen name="TimerWebScreen">&lt;html>
-&lt;head>
+<e2:screen name="TimerWebScreen"><html>
+<head>
 <!--
 Version = '$Header$';
 -->
-	&lt;meta content="text/html; charset=UTF-8" http-equiv="content-type">
-	&lt;title>Enigma 2 Webinterface (ALPHA)&lt;/title>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>Enigma 2 Webinterface (ALPHA)</title>
 
-	&lt;link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" >
-	&lt;link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico">
-&lt;/head>
+	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" />
+	<link rel="shortcut icon" type="image/x-icon" href="/web-data/img/favicon.ico" />
+</head>
 
-&lt;body>
-&lt;div style="text-align: center;">
-&lt;table border="1">
-		&lt;tr>
-		&lt;td>&lt;b>Channel&lt;/b>&lt;/td>
-		&lt;td>&lt;b>Name&lt;/b>&lt;/td>
-		&lt;td>&lt;b>Description&lt;/b>&lt;/td>
-		&lt;td>&lt;b>Action&lt;/b>&lt;/td>
-		&lt;/tr>
-		&lt;tr>
+<body>
+<div class="wap" style="text-align: center;">
+<table border="1">
+		<tr>
+		<td><b>Channel</b></td>
+		<td><b>Name</b></td>
+		<td><b>Description</b></td>
+		<td><b>Action</b></td>
+		</tr>		
 		<e2:element source="TimerList" ><e2:convert type="web:ListFiller" >
+		&lt;tr>
 		&lt;td>&lt;font><e2:item name="ServiceName"/> &lt;/font>&lt;/td>
 		&lt;td>&lt;font><e2:item name="Name"/> &lt;/font>&lt;/td>
 		&lt;td>&lt;font><e2:item name="Description"/> &lt;/font>&lt;/td>
@@ -31,9 +31,9 @@ Version = '$Header$';
 		&lt;/tr>
 	</e2:convert>
 	<e2:convert type="web:TextToHTML" /></e2:element>
-&lt;/table>
+</table>
 
-&lt;/div>
-&lt;/body>
-&lt;/html>
+</div>
+</body>
+</html>
 </e2:screen>

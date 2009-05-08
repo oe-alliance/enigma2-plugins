@@ -1,7 +1,7 @@
 from Components.Sources.Source import Source
 
 class PowerState(Source):
-	def __init__(self,session):
+	def __init__(self, session):
 		self.cmd = None
 		self.session = session
 		Source.__init__(self)
@@ -9,10 +9,16 @@ class PowerState(Source):
 	def handleCommand(self, cmd):
 		self.cmd = cmd
 
-	def do_func(self):
+	def getStandby(self):
+		from Screens.Standby import inStandby
+		if inStandby == None:
+			return "false"
+		else:
+			return "true"
+
+	def getText(self):
 		if self.cmd == "" or self.cmd is None:
-			print "[PowerState.py] cmd was empty or None"
-			return "error"
+			return self.getStandby()
 
 		#-1: get current state
 		# 0: toggle standby
@@ -22,11 +28,7 @@ class PowerState(Source):
 		try:
 			type = int(self.cmd)
 			if type == -1:
-				from Screens.Standby import inStandby
-				if inStandby == None:
-					return "false"
-				else:
-					return "true"
+				return self.getStandby()
 
 			elif type == 0:
 				print "[PowerState.py] Standby 0"
@@ -50,4 +52,4 @@ class PowerState(Source):
 		except ValueError:
 			return "error"
 
-	text = property(do_func)
+	text = property(getText)
