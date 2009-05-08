@@ -1,4 +1,5 @@
 * Remove all os.system calls
 * Fix Timer Pre-/Posttime
-* Unixtimestamps in EPG Requests
 * Implement Timer Sanity Check with proper Handling on Webinterface side
+* Add standby indicator to index.html
+* Move bouquetlist into channellist
