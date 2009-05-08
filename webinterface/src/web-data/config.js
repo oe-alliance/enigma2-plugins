@@ -1,7 +1,7 @@
 // $Header$
 
 var DBG = true;
-//DBG = false;
+DBG = false;
 
 var url_tpl = '/web-data/tpl/default/';
 
