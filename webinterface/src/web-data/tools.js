@@ -379,10 +379,9 @@ function doRequest(url, readyFunction){
 			request = google.gears.factory.create('beta.httprequest');
 			request.open('GET', url);
 
-//			request.setRequestHeader('Pragma', 'no-cache');
-//			request.setRequestHeader('Cache-Control', 'must-revalidate');
-//			request.setRequestHeader('If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00
-//			GMT');
+			request.setRequestHeader('Pragma', 'no-cache');
+			request.setRequestHeader('Cache-Control', 'must-revalidate');
+			request.setRequestHeader('If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT');
 
 			if( typeof(readyFunction) != "undefined" ){
 				request.onreadystatechange = function(){				
@@ -1263,15 +1262,15 @@ function ifChecked(rObj) {
 	}
 }
 
-//About
+//Device Info
 /*
  * Handles an incoming request for /web/deviceinfo Parses the Data, and calls
  * everything needed to render the Template using the parsed data and set the
  * result into contentMain @param request - the XHR
  */
-function incomingAbout(request) {
+function incomingDeviceInfo(request) {
 	if(request.readyState == 4){
-		debug("[incomingAbout] called");
+		debug("[incomingDeviceInfo] called");
 		var xml = getXML(request).getElementsByTagName("e2deviceinfo").item(0);
 
 		var info = {};
@@ -1292,7 +1291,7 @@ function incomingAbout(request) {
 						'model' : model
 				};					
 			} catch (e) {
-				debug("[incomingAbout] error parsing NIM data: " + e);
+				debug("[incomingDeviceInfo] error parsing NIM data: " + e);
 			}
 		}
 
@@ -1312,7 +1311,7 @@ function incomingAbout(request) {
 						'free'		: free
 				};
 			} catch(e){
-				debug("[incomingAbout] error parsing HDD data: " + e);
+				debug("[incomingDeviceInfo] error parsing HDD data: " + e);
 			}
 		}
 
@@ -1336,13 +1335,12 @@ function incomingAbout(request) {
 						'netmask' : netmask
 				};
 			} catch (e) {
-				debug("[incomingAbout] error parsing NIC data: " + e);
+				debug("[incomingDeviceInfo] error parsing NIC data: " + e);
 			}
 		}
 
 		try{
 			info = {
-					'useGears' : gearsEnabled(),
 					'devicename' : xml.getElementsByTagName('e2devicename').item(0).firstChild.data,	
 					'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data,
 					'imageVersion': xml.getElementsByTagName('e2imageversion').item(0).firstChild.data,
@@ -1350,7 +1348,7 @@ function incomingAbout(request) {
 					'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data			
 			};
 		} catch (e) {
-			debug("[incomingAbout] About parsing Error" + e);
+			debug("[incomingDeviceInfo] parsing Error" + e);
 		}
 
 		var data = { 	
@@ -1359,19 +1357,24 @@ function incomingAbout(request) {
 				"nics" : nics,
 				"nims" : nims				 					 	 
 		};
-		processTpl('tplAbout', data, 'contentMain');
+		processTpl('tplDeviceInfo', data, 'contentMain');
 	}
 }
 
 
 /*
- * Show About Information in contentMain
+ * Show Device Info Information in contentMain
  */
-function showAbout() {
-	doRequest(url_deviceinfo, incomingAbout, false);
+function showDeviceInfo() {
+	doRequest(url_deviceinfo, incomingDeviceInfo, false);
 }
 
-
+function showGears(){
+	data = { 'useGears' : gearsEnabled() };
+	processTpl('tplGears', data, 'contentMain');
+}
+ 
+ 
 // Spezial functions, mostly for testing purpose
 function openHiddenFunctions(){
 	openPopup("Extra Hidden Functions",tplExtraHiddenFunctions,300,100,920,0);
@@ -1648,7 +1651,7 @@ function loadContentStatic(template, title){
 /*
  * Opens the given Control
  * @param control - Control Page as String
- * Possible Values: power, about, message, screenshot, videoshot, osdshot
+ * Possible Values: power, extras, message, screenshot, videoshot, osdshot
  */
 function loadControl(control){
 	switch(control){
@@ -1681,9 +1684,23 @@ function loadControl(control){
 	}
 }
 
-function reloadAbout(){
-	reloadContentDynamic(showAbout, 'About');
+
+function loadDeviceInfo(){
+	loadContentDynamic(showDeviceInfo, 'Device Information');
 }
+
+function loadAbout(){
+	loadContentStatic('tplAbout', 'About');
+}
+
+function loadGearsInfo(){
+	loadContentDynamic(showGears, 'Google Gears');
+}
+
+function reloadGearsInfo(){
+	loadContentDynamic(showGears, 'Google Gears');
+}
+
 
 /*
  * Switches Navigation Modes
@@ -1724,10 +1741,10 @@ function switchMode(mode){
 		reloadNav('tplNavBoxControl', 'BoxControl');
 		break;
 
-	case "About":
-		loadContentDynamic(showAbout, 'About');
+	case "Extras":
+		reloadNav('tplNavExtras', 'Extras');
 		break;
-
+		
 	default:
 		break;
 	}

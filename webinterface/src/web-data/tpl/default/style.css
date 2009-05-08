@@ -389,6 +389,19 @@
 * About
 ******************/	
 	
+	#about{
+		font-size: 12px;
+		text-align: center;
+	}
+	
+	#about h1{
+		font-size: 14px;
+	}
+	
+	#about a, #about a:hover, #about a:visited{
+		text-decoration: underline;
+	}
+	
 	.aboutHeader {
 		width:100%;
 		color:#FFF;
@@ -400,7 +413,7 @@
 		border: 1px solid #CCC;
 		width: 100%;
 		margin: 0px;
-		padding: 0px;
+		padding: 0px;		
 	}
 	
 	.about td{

@@ -11,8 +11,9 @@ Version = '$Header$';
 </head>
 
 <body>
+<p>Enigma2 WAP - EPG</p>
 <div class="wap" style="text-align: center;">
-<table border="1">
+<table border="1" cellspacing="0" cellpadding="0">
 		<tr>
 		<td><b>Channel</b></td>
 		<td><b>Name</b></td>

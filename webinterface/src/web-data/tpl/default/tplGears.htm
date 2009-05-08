@@ -1,0 +1,27 @@
+
+<!-- tplGears -->
+			<p>
+				Enigma2 WebControl supports (Google) Gears to minimize the load caused on your Dreambox.
+			</p>
+			<p>
+				It uses the LocalServer of Gears to store all static content on your Computer instead of loading it from your Dreambox all the time.
+				Enabling Gears can speed up enigma2 WebControl quite a lot (the less power your Box has the more you will profit).
+			</p>
+			<p>
+				To install Gears please go to <a style="text-decoration: underline" href="http://gears.google.com/" target="_blank">gears.google.com</a>.
+			</p>
+			<p>
+				For technical information about Gears please read the API Doc at <a style="text-decoration: underline" href="http://code.google.com/intl/de-DE/apis/gears/" target="_blank">code.google.com/intl/de-DE/apis/gears/</a>
+			</p>
+			<p>
+			{if useGears}
+				<button onClick="disableGears(reloadGearsInfo)">Disable Gears</button>
+			{else}
+				<button onClick="enableGears(reloadGearsInfo)">Enable Gears</button>
+			{/if}
+			</p>
+			<p>						
+				<div id="gearsProcess">&nbsp;</div>
+			</p>
+<!-- /tplGears -->
+				
