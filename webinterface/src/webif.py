@@ -481,8 +481,7 @@ class SimpleListFiller(Converter):
 		
 	def getText(self):
 		l = self.source.simplelist
-		conv_args = self.converter_arguments
-		print "[webif.py] conv_args: " % conv_args
+		conv_args = self.converter_arguments		
 		
 		list = [ ]
 		for element in conv_args:
