@@ -1,18 +1,16 @@
 # -*- coding: UTF-8 -*-
 Version = '$Header$';
 
-# OK, this is more than a proof of concept
 # things to improve:
 #	- nicer code
 #	- screens need to be defined somehow else.
-#	I don't know how, yet. Probably each in an own file.
-#	- more components, like the channellist
+#	  I don't know how, yet. Probably each in an own file.
 #	- better error handling
 #	- use namespace parser
+
 from enigma import eServiceReference
 
 from Screens.Screen import Screen
-from Screens.ChannelSelection import service_types_tv, service_types_radio
 from Tools.Import import my_import
 
 from Components.Sources.Source import ObsoleteSource
@@ -130,7 +128,8 @@ class ServiceWebScreen(WebScreen):
 		WebScreen.__init__(self, session, request)
 		from WebComponents.Sources.ServiceListRecursive import ServiceListRecursive
 		from Components.Sources.ServiceList import ServiceList
-
+		from Screens.ChannelSelection import service_types_tv
+		
 		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 		self["SwitchService"] = ServiceList(fav, command_func=self.zapTo, validate_commands=False)
 		self["ServiceList"] = ServiceList(fav, command_func=self.getServiceList, validate_commands=False)
