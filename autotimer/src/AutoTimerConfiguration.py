@@ -156,9 +156,9 @@ def parseEntry(element, baseTimer, defaults = False):
 			"standby": AFTEREVENT.STANDBY,
 			"auto": AFTEREVENT.AUTO
 		}
-		afterevent = []
-		for element in l:
-			value = element.text
+		afterevents = []
+		for afterevent in l:
+			value = afterevent.text
 
 			if idx.has_key(value):
 				value = idx[value]
@@ -166,15 +166,15 @@ def parseEntry(element, baseTimer, defaults = False):
 				print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
 				continue
 
-			start = element.get("from")
-			end = element.get("to")
+			start = afterevent.get("from")
+			end = afterevent.get("to")
 			if start and end:
 				start = [int(x) for x in start.split(':')]
 				end = [int(x) for x in end.split(':')]
-				afterevent.append((value, (start, end)))
+				afterevents.append((value, (start, end)))
 			else:
-				afterevent.append((value, None))
-		baseTimer.afterevent = afterevent
+				afterevents.append((value, None))
+		baseTimer.afterevent = afterevents
 
 	# Read out exclude
 	l = element.findall("exclude")
