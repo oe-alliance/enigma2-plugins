@@ -434,7 +434,34 @@
 		width: 200px;
 		height: 50px;
 	}
+
+/*****************
+* Gears
+******************/	
+	.gearsButton{
+		width: 125px;
+		height: 50px;		
+	}
 	
+	.gearsEnabled{
+		background-color: #85C247;
+	}
+	
+	.gearsDisabled{
+		background-color: #FA3;
+	}
+	
+	.textRight{
+		text-align: right;
+	}
+	
+	.textLeft{
+		text-align: left;
+	}
+	
+	.textCenter{
+		text-align: center;
+	}
 	
 /*****************
 * Timer
