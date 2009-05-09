@@ -1,6 +1,6 @@
 {
   "betaManifestVersion": 1,
-  "version": "v21",
+  "version": "v22",
   "entries": [
 		{ "url": "IEFixes.htc" },		
 		{ "url": "img/arrow_down.png" },
@@ -36,7 +36,9 @@
 		{ "url": "tpl/default/tplBouquetList.htm" },
 		{ "url": "tpl/default/tplCurrent.htm" },
 		{ "url": "tpl/default/tplDebug.htm" },
+		{ "url": "tpl/default/tplDeviceInfo.htm" },
 		{ "url": "tpl/default/tplEpgList.htm" },
+		{ "url": "tpl/default/tplGears.htm" },
 		{ "url": "tpl/default/tplGrab.htm" },
 		{ "url": "tpl/default/tplMediaPlayer.htm" },
 		{ "url": "tpl/default/tplMovieList.htm" },
