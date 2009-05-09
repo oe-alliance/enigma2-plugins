@@ -35,5 +35,16 @@
 			<e2eventdescriptionextended><e2:element source="session.Event_Next"><e2:convert type="EventName">ExtendedDescription</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescriptionextended>
 		</e2event>
 	</e2eventlist>
+	<e2videowidth><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoWidth</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2videowidth>
+	<e2videoheight><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoHeight</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2videoheight>
+	<e2servicevideosize><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoWidth</e2:convert><e2:convert type="web:TextToXML" /></e2:element>x<e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoHeight</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2servicevideosize>
+	<e2apid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">AudioPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2apid>
+	<e2vpid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">VideoPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2vpid>
+	<e2pcrpid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">PcrPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2pcrpid>
+	<e2pmtpid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">PmtPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2pmtpid>
+	<e2txtpid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">TxtPid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2txtpid>
+	<e2tsid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">TsId</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2tsid>
+	<e2onid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">OnId</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2onid>
+	<e2sid><e2:element source="session.CurrentService"><e2:convert type="ServiceInfo">Sid</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2sid>
 </e2currentserviceinformation>
 </e2:screen>
