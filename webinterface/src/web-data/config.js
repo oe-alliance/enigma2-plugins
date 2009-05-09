@@ -22,6 +22,7 @@ var url_epgnext = "/web/epgnext?bRef="; // plus bouquetRev
 
 var url_getServices = "/web/getservices?sRef="; // plus serviceref
 var url_subservices = "/web/subservices"; // subservices for current service
+var url_streamsubservices = "/web/streamsubservices?sRef="; // subservices for streaming service
 
 var url_updates= "/web/updates.html";
 

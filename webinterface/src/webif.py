@@ -130,6 +130,11 @@ class SubServiceWebScreen(WebScreen):
 		WebScreen.__init__(self, session, request)
 		self["SubServices"] = SubServices(session)
 
+class StreamSubServiceWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		self["StreamSubServices"] = SubServices(session, streamingScreens)
+
 class ServiceWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
@@ -258,11 +263,25 @@ class WAPWebScreen(WebScreen):
 
 		self["WAPdeleteOldOnSave"] = WAPfunctions(session, func=WAPfunctions.DELETEOLD)
 
+streamingScreens = []
+
 class StreamingWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
 		from Components.Sources.StreamService import StreamService
-		self["StreamService"] = StreamService(self.session.nav)
+		self["StreamService"] = StreamService(self.session.nav)		
+		streamingScreens.append(self)
+		self.screenIndex = len(streamingScreens) - 1
+	
+	def getRecordService(self):
+		if self.has_key("StreamService"):
+			return self["StreamService"].getService()
+		return None
+	
+	def getRecordServiceRef(self):
+		if self.has_key("StreamService"):
+			return self["StreamService"].ref
+		return None
 
 class M3UStreamingWebScreen(WebScreen):
 	def __init__(self, session, request):

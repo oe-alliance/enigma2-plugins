@@ -1,5 +1,7 @@
 var vlc = '';
-
+var currentServiceRef = '';
+var bouquetUpdatePoller = '';
+var currentBouquetRef = '';
 /*
  * incoming request-data for Current Service Epg
  */
@@ -30,14 +32,14 @@ function loadVLCEPGServiceNow(servicereference) {
 }
 
 function onServiceSelected() {
-	var sref = $('channelSelect').options[$('channelSelect').selectedIndex].id;
+	currentServiceRef = $('channelSelect').options[$('channelSelect').selectedIndex].id;
 	
-	if(sref !== "vlcemptyservice"){
-		loadVLCEPGServiceNow(sref);
-		setStreamTarget(sref);
+	if(currentServiceRef !== "vlcemptyservice"){
+		loadVLCEPGServiceNow(currentServiceRef);
+		setStreamTarget(currentServiceRef);
 		
 		if($('vlcZap').checked){			
-			doRequest("/web/zap?sRef=" + sref);			
+			doRequest("/web/zap?sRef=" + currentServiceRef);			
 		}
 		delayedLoadVlcSubservices();
 	} else {
@@ -66,9 +68,18 @@ function incomingVLCBouquetList(request) {
 		loadVLCBouquet(bouquets[0].getServiceReference());
 	}
 }
+function reloadVLCBouquet(){
+	loadVLCBouquet(currentBouquetRef);
+}
+
 
 function loadVLCBouquet(servicereference) {
+//	clearInterval(bouquetUpdatePoller);	
+	currentBouquetRef = servicereference;
+	
 	loadVLCChannelList(servicereference);
+	
+//	bouquetUpdatePoller = setInterval(reloadVLCBouquet, 30000);
 }
 
 function incomingVLCSubservices(request){
@@ -106,7 +117,8 @@ function incomingVLCSubservices(request){
 }
 
 function loadVlcSubservices(){
-	doRequest(url_subservices, incomingVLCSubservices);
+	var url = url_streamsubservices + currentServiceRef;
+	doRequest(url, incomingVLCSubservices);
 }
 
 function delayedLoadVlcSubservices(){
@@ -259,6 +271,7 @@ function setStreamTarget(servicereference) {
 function loadVLCBouquets() {
 	url = url_getServices + bouquetsTv;
 	doRequest(url, incomingVLCBouquetList);
+	
 }
 
 /*
