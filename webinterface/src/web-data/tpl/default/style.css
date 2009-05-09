@@ -420,25 +420,6 @@
 		font-size:12px;
 	}
 
-	.aboutSection{
-		width:100%;
-		margin: 0 0 0 0;
-	}
-
-	.aboutSectionLeft{
-		width:50%;
-		vertical-align: top;
-	}
-
-	.aboutSectionRight{
-		width:50%;
-		vertical-align: top;
-	}
-
-	.aboutElement{
-		float: none;
-	}
-
 	.aboutElementLeft{
 		font-weight:bold;
 		width: 50%;
