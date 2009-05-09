@@ -498,12 +498,15 @@ class SimpleListFiller(Converter):
 		strlist = [ ]
 		append = strlist.append
 		for item in l:
+			if item is None:
+				item = ""
+				
 			for (element, filternum) in list:
 				if not filternum:
 					append(element)
 				elif filternum == 2:
 					append(str(item).replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
-				elif filternum == 3:
+				elif filternum == 3:					
 					append(escape_xml(str(item)))
 				elif filternum == 4:
 					append(str(item).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
@@ -555,29 +558,39 @@ class ListFiller(Converter):
 		strlist = [ ]
 		append = strlist.append
 		for item in l:
-			for (element, filternum) in lutlist:
+			for (element, filternum) in lutlist:			
+				#None becomes ""
+				curitem = ""
+				if filternum:
+					curitem = item[element]
+					if curitem is None:
+						curitem = ""
+				else:
+					if element is None:
+						element = ""
+						
 				if not filternum:
 					append(element)
 				elif filternum == 2:
-					append(str(item[element]).replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
+					append(str(curitem).replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 				elif filternum == 3:
-					append(escape_xml(str(item[element])))
+					append(escape_xml(str(curitem)))
 				elif filternum == 4:
-					append(str(item[element]).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
+					append(str(curitem).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				elif filternum == 5:
-					append(quote(str(item[element])))
+					append(quote(str(curitem)))
 				elif filternum == 6:
 					from time import localtime
-					time = int(float(item[element])) or 0
+					time = int(float(curitem)) or 0
 					t = localtime(time)
 					append("%02d:%02d" % (t.tm_hour, t.tm_min))
 				elif filternum == 7:
 					from time import localtime
-					time = int(float(item[element])) or 0
+					time = int(float(curitem)) or 0
 					t = localtime(time)
 					append("%d min" % (time / 60))					
 				else:
-					append(str(item[element]))
+					append(str(curitem))
 		# (this will be done in c++ later!)
 
 		return ''.join(strlist)

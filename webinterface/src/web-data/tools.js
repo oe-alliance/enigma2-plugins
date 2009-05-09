@@ -684,7 +684,7 @@ function incomingServiceEPGNowNext(request, type){
 				debug("[incomingServiceEPGNowNext]" + e);
 			}
 
-			if (epgEvt.getEventId() != 'None'){
+			if (epgEvt.getEventId() != ''){
 				buildServiceListEPGItem(epgEvt, type);
 			}
 		}
@@ -1433,7 +1433,7 @@ function incomingMediaPlayer(request){
 		var itemnamespace = Array();
 		for ( var i = 0; i <files.length; i++){
 			var file = files[i];
-			if(file.getNameOnly() == 'None') {
+			if(file.getNameOnly() == '') {
 				continue;
 			}
 			var exec = 'loadMediaPlayer';
