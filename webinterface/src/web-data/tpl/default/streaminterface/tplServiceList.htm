@@ -5,7 +5,7 @@
 	{for s in services}
 	<option id="${s.servicereference}" >
 	${s.servicename}	
-	{if s.eventname != 'None'} 
+	{if s.eventname != ''} 
 		(${s.eventname}) +${s.duration} min
 	{/if}
 	</option>
