@@ -379,9 +379,9 @@ function doRequest(url, readyFunction){
 			request = google.gears.factory.create('beta.httprequest');
 			request.open('GET', url);
 
-			request.setRequestHeader('Pragma', 'no-cache');
-			request.setRequestHeader('Cache-Control', 'must-revalidate');
-			request.setRequestHeader('If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT');
+//			request.setRequestHeader('Pragma', 'no-cache');
+//			request.setRequestHeader('Cache-Control', 'must-revalidate');
+//			request.setRequestHeader('If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT');
 
 			if( typeof(readyFunction) != "undefined" ){
 				request.onreadystatechange = function(){				
@@ -530,9 +530,9 @@ function delayedGetSubservices(){
 
 //zap zap
 function zap(servicereference){
-	doRequest("/web/zap?sRef=" + servicereference);
-	delayedGetSubservices();
-	updateItems();
+	doRequest("/web/zap?sRef=" + servicereference);	
+	setTimeout(updateItemsLazy, 7000); //reload epg and subservices
+	setTimeout(updateItems, 3000);
 }
 
 //SignalPanel
