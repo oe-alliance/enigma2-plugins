@@ -14,12 +14,19 @@ function initGears() {
 	if(gearsEnabled()){
 		if (!window.google || !google.gears) {
 			notify("[GEARS] NOTE: You must install Gears first.", false);
+			return false;
 		} else {
 			localServer = google.gears.factory.create("beta.localserver");
 			store = localServer.createManagedStore(STORE_NAME);
-			createStore();
+			if(createStore() ){
+				return true;
+			} else {
+				return false;
+			}
 		}
-	}
+	} else {
+		return false;
+	}	
 }
 
 //Create the managed resource store
@@ -27,7 +34,7 @@ function createStore() {
 	if (gearsEnabled()) {		
 		if (!window.google || !google.gears) {
 			notify("[GEARS] NOTE: You must install Gears first.", false);
-			return;
+			return false;
 		}
 
 		store.manifestUrl = MANIFEST_FILENAME;
@@ -52,44 +59,53 @@ function createStore() {
 					}
 				}
 			}, 500);
-
-	} 
+		return true;
+	} else {
+		return false;
+	}
 }
 
 //Remove the managed resource store.
 function removeStore() {
 	if (!window.google || !google.gears) {
 		if(typeof(debug) == "function"){
-			notify("[GEARS] NOTE: You must install Gears first.", false);
+			notify("[GEARS] NOTE: You must install Gears first.", false);			
 		}
-		return;
+		return false;
 	}
 
 	localServer.removeManagedStore(STORE_NAME);
 	if(typeof(debug) == "function"){
 		notify("[GEARS] Done. The local GEARS-Store for enigma2 WebControl has been removed.");
 	}
+	return true;
 }
 
 function enableGears(callback) {
 	if(!gearsEnabled()){
 		userprefs.data.useGears = true;
 		userprefs.save();
-		initGears();		
-	}
-	if(typeof(callback) == 'function'){
-		callback();
+		
+		if(initGears()){			
+			if(typeof(callback) == 'function'){
+				callback();
+			}
+		} else { //could not enable Gears
+			userprefs.data.useGears = false;
+			userprefs.save();
+		}
 	}
 }
 
 function disableGears(callback) {
 	if(gearsEnabled()){
-		userprefs.data.useGears = false;
-		userprefs.save();
-		removeStore();
-	}
-	if(typeof(callback) == 'function'){
-		callback();
+		if(removeStore()){
+			userprefs.data.useGears = false;
+			userprefs.save();
+			if(typeof(callback) == 'function'){
+				callback();
+			}
+		}
 	}
 }
 
