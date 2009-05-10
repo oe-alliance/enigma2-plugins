@@ -8,7 +8,7 @@ class EPG(Source):
 	SERVICENOW = 2
 	SERVICENEXT = 3
 	SERVICE = 4
-	TITLE = 5
+	SEARCH = 5
 	BOUQUET = 6
 	
 	def __init__(self, navcore, func=BOUQUETNOW, endtm=False):
@@ -24,7 +24,7 @@ class EPG(Source):
 
 	def do_func(self):
 		if not self.command is None:
-			if self.func is self.TITLE:
+			if self.func is self.SEARCH:
 				func = self.searchEvent
 			elif self.func is self.SERVICE:
 				func = self.getEPGofService

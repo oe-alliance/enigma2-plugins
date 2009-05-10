@@ -1,5 +1,5 @@
-<e2:screen name="EPGWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
-<e2eventlist><e2:element source="EPGSERVICENOW" id="sRef">
+<e2:screen name="EpgWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2eventlist><e2:element source="EpgServiceNow" id="sRef">
 	<e2:convert type="web:ListFiller" >
 	&lt;e2event>
 		&lt;e2eventid><e2:item name="EventID"/>&lt;/e2eventid>

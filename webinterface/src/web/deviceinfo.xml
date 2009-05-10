@@ -1,4 +1,4 @@
-<e2:screen name="DeviceInfo">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:screen name="DeviceInfoWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
 <e2deviceinfo>
 	<e2enigmaversion><e2:element source="EnigmaVersion"><e2:convert type="web:TextToHTML" /></e2:element></e2enigmaversion>
 	<e2imageversion><e2:element source="ImageVersion"><e2:convert type="web:TextToHTML" /></e2:element></e2imageversion>
