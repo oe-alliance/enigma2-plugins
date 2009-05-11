@@ -288,7 +288,7 @@ class AutoMount():
 		(path, callback ) = extra_args
 		if os_path.exists(path):
 			if not os_path.ismount(path):
-				rmdir(path)
+				removeDir(path)
 				harddiskmanager.removeMountedPartition(path)
 
 		if self.removeConsole:
