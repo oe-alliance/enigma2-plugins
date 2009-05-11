@@ -49,14 +49,22 @@ class AudioTracks(Source):
 				print "[AudioTracks.py] got %s Audiotracks!" % (n)
 
 				for x in range(n):
+					cnt = 0
 					i = audio.getTrackInfo(x)
 
-					language = i.getLanguage()
+					languages = i.getLanguage().split('/')
 					description = i.getDescription()
 					pid = i.getPID()
+					language = ''
 
-					if LanguageCodes.has_key(language):
-						language = LanguageCodes[language][0]
+					for lang in languages:
+						if cnt:
+							language += ' / '
+						if LanguageCodes.has_key(lang):
+							language += LanguageCodes[lang][0]
+						else:
+							language += lang
+						cnt += 1
 
 					if len(description):
 						description += " (" + language + ")"
