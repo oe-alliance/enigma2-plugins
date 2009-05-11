@@ -201,5 +201,6 @@ remotetimer/src/Makefile
 partnerbox/Makefile
 partnerbox/src/Makefile
 partnerbox/src/servicewebts/Makefile
+partnerbox/src/icons/Makefile
 
 ])

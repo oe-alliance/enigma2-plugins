@@ -1,4 +1,4 @@
-SUBDIRS = servicewebts
+SUBDIRS = servicewebts icons
 
 installdir = /usr/lib/enigma2/python/Plugins/Extensions/Partnerbox
 
