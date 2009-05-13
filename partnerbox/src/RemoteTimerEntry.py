@@ -40,7 +40,7 @@ from Screens.MessageBox import MessageBox
 from Tools.BoundFunction import boundFunction
 import urllib
 
-import xml.dom.minidom
+import xml.etree.cElementTree
 from Components.ActionMap import ActionMap
 
 from PartnerboxFunctions import PlaylistEntry, SetPartnerboxTimerlist, sendPartnerBoxWebCommand
@@ -297,12 +297,12 @@ def RemoteTimerConfig(self):
 	
 def getLocationsCallback(self, xmlstring):
 	self.Locations = []
-	dom = xml.dom.minidom.parseString(xmlstring)
-	for node in dom.firstChild.childNodes:
-		dirname = ""
-		if node.nodeName == "e2simplexmlitem" or node.nodeName == "e2location": # vorerst Kompatibilitaet zum alten Webinterface-Api aufrecht erhalten (e2simplexmlitem)
-			dirname = str(node.firstChild.data.strip().encode("utf-8"))
-			self.Locations.append(dirname)
+	try: root = xml.etree.cElementTree.fromstring(xmlstring)
+	except: return 
+	for location in root.findall("e2location"):
+		self.Locations.append(location.text.encode("utf-8", 'ignore'))
+	for location in root.findall("e2simplexmlitem"):  # vorerst Kompatibilitaet zum alten Webinterface-Api aufrecht erhalten (e2simplexmlitem)
+		self.Locations.append(location.text.encode("utf-8", 'ignore'))
 		
 def createRemoteTimerSetup(self, widget):
 	baseTimerEntrySetup(self, widget)
@@ -511,10 +511,11 @@ def RemoteTimerGo(self):
 
 def AddTimerE2Callback(self, session, answer):
 	text = ""
-	dom = xml.dom.minidom.parseString(answer)
-	for node in dom.firstChild.childNodes:
-		if node.nodeName == "e2statetext":
-			text = str(node.firstChild.data.strip().encode("utf-8"))
+	try: root = xml.etree.cElementTree.fromstring(answer)
+	except: pass
+	statetext = root.findtext("e2statetext")
+	if statetext:
+		text =  statetext.encode("utf-8", 'ignore')
 	ok = text == "Timer added successfully!"
 	session.open(MessageBox,_("Partnerbox Answer: \n%s") % (text),MessageBox.TYPE_INFO, timeout = 3)
 	if ok:

@@ -39,7 +39,7 @@ from timer import TimerEntry
 from enigma import eTimer
 from time import localtime
 import time
-import xml.dom.minidom
+import xml.etree.cElementTree
 import urllib
 import SocketServer
 import servicewebts
@@ -140,12 +140,12 @@ def Plugins(**kwargs):
 			
 def FillLocationList(xmlstring):
 	Locations = []
-	dom = xml.dom.minidom.parseString(xmlstring)
-	for node in dom.firstChild.childNodes:
-		dirname = ""
-		if node.nodeName == "e2simplexmlitem" or node.nodeName == "e2location": # vorerst Kompatibilitaet zum alten Webinterface-Api aufrecht erhalten (e2simplexmlitem)
-			dirname = str(node.firstChild.data.strip().encode("utf-8"))
-			Locations.append(dirname)
+	try: root = xml.etree.cElementTree.fromstring(xmlstring)
+	except: Locations 
+	for location in root.findall("e2location"):
+		Locations.append(location.text.encode("utf-8", 'ignore'))
+	for location in root.findall("e2simplexmlitem"):  # vorerst Kompatibilitaet zum alten Webinterface-Api aufrecht erhalten (e2simplexmlitem)
+		Locations.append(location.text.encode("utf-8", 'ignore'))
 	return Locations
 		
 	
@@ -182,12 +182,9 @@ class CurrentRemoteTV(Screen):
 		url = ""
 		servicereference = ""
 		if self.enigma_type == 0:
-			dom = xml.dom.minidom.parseString(xmlstring)
-			for node in dom.firstChild.childNodes:
-				if node.nodeName == "e2service":
-					for node2 in node.childNodes:
-						if node2.nodeName == "e2servicereference": servicereference = str(node2.firstChild.data.strip().encode("utf-8"))
-			
+			root = xml.etree.cElementTree.fromstring(xmlstring)
+			for service in root.findall("e2service"):
+				servicereference = str(service.findtext("e2servicereference", '').encode("utf-8", 'ignore'))
 			if len(servicereference) > 0:
 				url = "http://" + self.ip + ":8001/" + servicereference
 			else:
@@ -460,33 +457,20 @@ class RemoteTimerBouquetList(Screen):
 	def readXMLE1(self,xmlstring):
 		self.E1XMLString = xmlstring
 		BouquetList = []
-		dom = xml.dom.minidom.parseString(xmlstring)
-		for node in dom.firstChild.childNodes:
-			if node.nodeName == "bouquet":
-				servicereference = ""
-				servicename = ""
-				for node2 in node.childNodes:
-					if node2.nodeName == "reference": servicereference = str(node2.firstChild.data.strip().encode("utf-8"))
-					if node2.nodeName == "name":
-						try:servicename = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:servicename = "n/a"
-						BouquetList.append(E2ServiceList(servicereference = servicereference, servicename = servicename))
+		root = xml.etree.cElementTree.fromstring(xmlstring)
+		for bouquets in root.findall("bouquet"):
+			BouquetList.append(E2ServiceList(
+			servicereference = str(bouquets.findtext("reference", '').encode("utf-8", 'ignore')),
+			servicename = str(bouquets.findtext("name", 'n/a').encode("utf-8", 'ignore'))))
 		self["bouquetlist"].buildList(BouquetList)
-			
-			
+
 	def readXML(self, xmlstring):
 		BouquetList = []
-		dom = xml.dom.minidom.parseString(xmlstring)
-		for node in dom.firstChild.childNodes:
-			servicereference = ""
-			servicename = ""
-			if node.nodeName == "e2service":
-				for node2 in node.childNodes:
-					if node2.nodeName == "e2servicereference": servicereference = str(node2.firstChild.data.strip().encode("utf-8"))
-					if node2.nodeName == "e2servicename":
-						try:servicename = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:servicename = "n/a"
-						BouquetList.append(E2ServiceList(servicereference = servicereference, servicename = servicename))
+		root = xml.etree.cElementTree.fromstring(xmlstring)
+		for servives in root.findall("e2service"):
+			BouquetList.append(E2ServiceList(
+			servicereference = str(servives.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
+			servicename = str(servives.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore'))))
 		self["bouquetlist"].buildList(BouquetList)
 
 class RemoteTimerChannelList(Screen):
@@ -700,37 +684,23 @@ class RemoteTimerChannelList(Screen):
 				sel = self["channellist"].moveSelectionTo(self.ChannelListCurrentIndex)
 				self.ChannelListCurrentIndex = 0
 			self["channellist"].instance.show()
+
 	def readXMLServiceListE1(self):
 		self.E2ChannelList = []
-		dom = xml.dom.minidom.parseString(self.E1XMLString)
-		for node in dom.firstChild.childNodes:
-			if node.nodeName == "bouquet":
-				for node2 in node.childNodes:
-					if node2.nodeName == "reference": 
-						if self.servicereference  == str(node2.firstChild.data.strip().encode("utf-8")):
-							proceed = True
-						else:
-							proceed = False
-					if node2.nodeName == "service":
-						if proceed:
-							servicereference = ""
-							servicename = ""
-							eventstart = 0
-							eventduration = 0
-							eventtitle = ""
-							eventdescriptionextended = ""
-							eventdescription = ""
-							for node3 in node2.childNodes:
-								if node3.nodeName == "reference": servicereference = str(node3.firstChild.data.strip().encode("utf-8"))
-								if node3.nodeName == "name":
-									try:servicename = str(node3.firstChild.data.strip().encode("utf-8"))
-									except:servicename = "n/a"
-									http_ = "%s:%d" % (self.ip,self.port)
-									url = "http://" + self.username + ":" + self.password + "@" + http_ + "/xml/serviceepg?ref=" + servicereference + "&entries=1"
-									f = urllib.urlopen(url)
-									sxml = f.read()
-									eventstart, eventduration, eventtitle, eventdescriptionextended, eventdescription = self.XMLReadEPGDataE1(sxml)
-									self.E2ChannelList.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename, eventstart = eventstart, eventduration = eventduration, eventtitle = eventtitle, eventid = 1, eventdescription= eventdescription, eventdescriptionextended = eventdescriptionextended))
+		root = xml.etree.cElementTree.fromstring(self.E1XMLString)
+		for bouquets in root.findall("bouquet"):
+			tempref = str(bouquets.findtext("reference", '').encode("utf-8", 'ignore'))
+			print "----------->tempref = %s, service = %s"%(tempref, self.servicereference)
+			if tempref == self.servicereference:
+				for services in bouquets.findall("service"):
+					servicereference = str(services.findtext("reference", '').encode("utf-8", 'ignore'))
+					servicename = str(services.findtext("name", 'n/a').encode("utf-8", 'ignore'))
+					http_ = "%s:%d" % (self.ip,self.port)
+					url = "http://" + self.username + ":" + self.password + "@" + http_ + "/xml/serviceepg?ref=" + servicereference + "&entries=1"
+					f = urllib.urlopen(url)
+					sxml = f.read()
+					eventstart, eventduration, eventtitle, eventdescriptionextended, eventdescription, eventid = self.XMLReadEPGDataE1(sxml)
+					self.E2ChannelList.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename, eventstart = eventstart, eventduration = eventduration, eventtitle = eventtitle, eventid = eventid , eventdescription= eventdescription, eventdescriptionextended = eventdescriptionextended))
 		self["channellist"].buildList(self.E2ChannelList)
 		
 	def XMLReadEPGDataE1(self,xmlstring):
@@ -739,64 +709,47 @@ class RemoteTimerChannelList(Screen):
 		eventtitle = ""
 		eventdescriptionextended = ""
 		eventdescription = ""
+		eventid = 0
 		xmlstring = xmlstring.replace("""<?xml-stylesheet type="text/xsl" href="/xml/serviceepg.xsl"?>""","")
-		dom = xml.dom.minidom.parseString(xmlstring)
-		for node in dom.firstChild.childNodes:
-			servicereference = ""
-			servicename = ""
-			if node.nodeName == "event":
-				for node2 in node.childNodes:
-					if node2.nodeName == "description":
-						try:eventtitle = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:pass
-					if node2.nodeName == "details":
-						try:eventdescriptionextended = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:pass
-					if node2.nodeName == "genre":
-						try:eventdescription = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:pass
-					if node2.nodeName == "duration": eventduration = int(node2.firstChild.data.strip())
-					if node2.nodeName == "start": eventstart = int(node2.firstChild.data.strip())
-		return eventstart, eventduration, eventtitle, eventdescriptionextended, eventdescription
+		root = xml.etree.cElementTree.fromstring(xmlstring)
+		for events in root.findall("event"):
+			try:eventtitle = str(events.findtext("description", '').encode("utf-8", 'ignore'))
+			except:eventtitle = ""
+			try:eventdescriptionextended = str(events.findtext("details", '').encode("utf-8", 'ignore'))
+			except:eventdescriptionextended = ""
+			try:eventdescription = str(events.findtext("genre", '').encode("utf-8", 'ignore'))
+			except:eventdescription = ""
+			try:eventstart = int(events.findtext("start", 0))
+			except:eventstart = 0
+			try:eventduration = int(events.findtext("duration", 0))
+			except:eventduration = 0
+		if eventstart != 0:
+			eventid = 1
+
+		return eventstart, eventduration, eventtitle, eventdescriptionextended, eventdescription,eventid
 
 	def readXMLServiceList(self, xmlstring):
 		self.E2ChannelList = []
-		dom = xml.dom.minidom.parseString(xmlstring)
-		for node in dom.firstChild.childNodes:
-			servicereference = ""
-			servicename = ""
-			eventid = 0
-			eventstart = 0
-			eventduration = 0
-			eventtitle = ""
-			eventdescription = ""
-			eventdescriptionextended = ""
-			if node.nodeName == "e2event":
-				for node2 in node.childNodes:
-					if node2.nodeName == "e2eventid": 
-						try:eventid= int(node2.firstChild.data.strip())
-						except:pass
-					if node2.nodeName == "e2eventstart": 
-						try:eventstart = int(node2.firstChild.data.strip())
-						except:pass
-					if node2.nodeName == "e2eventduration": 
-						try:eventduration = int(node2.firstChild.data.strip())
-						except:pass
-					if node2.nodeName == "e2eventtitle":
-						try:eventtitle = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:eventtitle = ""
-					if node2.nodeName == "e2eventdescription":
-						try:eventdescription = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:eventdescription = ""
-					if node2.nodeName == "e2eventdescriptionextended":
-						try:eventdescriptionextended = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:eventdescriptionextended = "n/a"
-					if node2.nodeName == "e2eventservicereference": servicereference = str(node2.firstChild.data.strip().encode("utf-8"))
-					if node2.nodeName == "e2eventservicename":
-						try:
-							servicename = str(node2.firstChild.data.strip().encode("utf-8"))
-							self.E2ChannelList.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename, eventstart = eventstart, eventduration = eventduration, eventtitle = eventtitle, eventid = eventid, eventdescription= eventdescription, eventdescriptionextended = eventdescriptionextended))
-						except:pass
+		root = xml.etree.cElementTree.fromstring(xmlstring)
+		for events in root.findall("e2event"):
+			servicereference = str(events.findtext("e2eventservicereference", '').encode("utf-8", 'ignore'))
+			servicename = str(events.findtext("e2eventservicename", 'n/a').encode("utf-8", 'ignore'))
+			try:eventstart = int(events.findtext("e2eventstart", 0))
+			except:eventstart = 0
+			try:eventduration = int(events.findtext("e2eventduration", 0))
+			except:eventduration  = 0
+			try:eventtitle = str(events.findtext("e2eventtitle", '').encode("utf-8", 'ignore'))
+			except:eventtitle = ""
+			try:eventid = int(events.findtext("e2eventid", 0))
+			except:eventid = 0
+			try:eventdescription = str(events.findtext("e2eventdescription", '').encode("utf-8", 'ignore'))
+			except:eventdescription = ""
+			try:eventdescriptionextended = str(events.findtext("e2eventdescriptionextended", '').encode("utf-8", 'ignore'))
+			except:eventdescriptionextended = ""
+			self.E2ChannelList.append(E2EPGListAllData(
+					servicereference = servicereference, servicename = servicename, eventstart = eventstart,
+					eventduration = eventduration, eventtitle = eventtitle, eventid = eventid, eventdescription= eventdescription, 
+					eventdescriptionextended = eventdescriptionextended))
 		self["channellist"].buildList(self.E2ChannelList)
 
 	def EPGSelection(self):
@@ -892,45 +845,32 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 
 	def CurrentEPGCallback(self, xmlstring):
 		xmlstring = xmlstring.replace("""<?xml-stylesheet type="text/xsl" href="/xml/serviceepg.xsl"?>""","")
-		dom = xml.dom.minidom.parseString(xmlstring)
+		root = xml.etree.cElementTree.fromstring(xmlstring)
 		e2eventtitle = ""
 		e2eventservicename = ""
 		e2eventstart = 0
 		e2eventduration = 0
 		if self.enigma_type == 0:
-			for node in dom.firstChild.childNodes:
-				if node.nodeName == "e2event":
-					for node2 in node.childNodes:
-						if node2.nodeName == "e2eventservicename":
-							try:e2eventservicename = str(node2.firstChild.data.strip().encode("utf-8"))
-							except:e2eventservicename = "n/a"
-						if node2.nodeName == "e2eventtitle":
-							try:e2eventtitle = str(node2.firstChild.data.strip().encode("utf-8"))
-							except:e2eventtitle = "n/a"
-						if node2.nodeName == "e2eventstart": 
-							try:e2eventstart = int(node2.firstChild.data.strip())
-							except:pass
-						if node2.nodeName == "e2eventduration": 
-							try:e2eventduration = int(node2.firstChild.data.strip())
-							except:pass
+			for events in root.findall("e2event"):
+				try:e2eventservicename = str(events.findtext("e2eventservicename", 'n/a').encode("utf-8", 'ignore'))
+				except:e2eventservicename = "n/a"
+				try:e2eventstart = int(events.findtext("e2eventstart", 0))
+				except:e2eventstart = 0
+				try:e2eventduration = int(events.findtext("e2eventduration", 0))
+				except:e2eventduration  = 0
+				try:e2eventtitle = str(events.findtext("e2eventtitle", '').encode("utf-8", 'ignore'))
+				except:e2eventtitle = ""
 		else:
-			for node in dom.firstChild.childNodes:
-				if node.nodeName == "service":
-					for node2 in node.childNodes:
-						if node2.nodeName == "name":
-							try:e2eventservicename = str(node2.firstChild.data.strip().encode("utf-8"))
-							except:e2eventservicename = "n/a"
-				if node.nodeName == "event":
-					for node2 in node.childNodes:
-						if node2.nodeName == "description":
-							try:e2eventtitle = str(node2.firstChild.data.strip().encode("utf-8"))
-							except:pass
-						if node2.nodeName == "duration":
-							try:e2eventduration = int(node2.firstChild.data.strip())
-							except:pass
-						if node2.nodeName == "start": 
-							try:e2eventstart = int(node2.firstChild.data.strip())
-							except:pass
+			for services in root.findall("service"):
+				try:e2eventservicename = str(services.findtext("name", 'n/a').encode("utf-8", 'ignore'))
+				except:e2eventservicename = "n/a"
+			for events in root.findall("event"):
+				try:e2eventstart = int(events.findtext("start", 0))
+				except:e2eventstart = 0
+				try:e2eventduration = int(events.findtext("duration", 0))
+				except:e2eventduration  = 0
+				try:e2eventtitle = str(events.findtext("description", '').encode("utf-8", 'ignore'))
+				except:e2eventtitle = ""
 		endtime = int(e2eventstart + e2eventduration)
 		if endtime != 0:
 			tt = ((": %s ... %s (+%d " + _("mins") + ")") % (FuzzyTime(e2eventstart)[1], FuzzyTime(endtime)[1], (endtime - time.time()) / 60))
@@ -942,22 +882,22 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 	def CurrentEPGCallbackError(self, error = None):
 		print "[RemotePlayer] Error: ",error.getErrorMessage()
 		
-	def readXMSubChanelList(self, xmlstring):
-		BouquetList = []
-		counter = 0
-		dom = xml.dom.minidom.parseString(xmlstring)
-		for node in dom.firstChild.childNodes:
-			servicereference = ""
-			servicename = ""
-			if node.nodeName == "e2service":
-				for node2 in node.childNodes:
-					if node2.nodeName == "e2servicereference": servicereference = str(node2.firstChild.data.strip().encode("utf-8"))
-					if node2.nodeName == "e2servicename":
-						try:servicename = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:servicename = "n/a"
-						if counter != 0: # erster Eintrag ist der aktuelle Sedner, nicht aufnehmen
-							BouquetList.append(E2ServiceList(servicereference = servicereference, servicename = servicename))
-						counter += 1
+#	def readXMSubChanelList(self, xmlstring):
+#		BouquetList = []
+#		counter = 0
+#		dom = xml.dom.minidom.parseString(xmlstring)
+#		for node in dom.firstChild.childNodes:
+#			servicereference = ""
+#			servicename = ""
+#			if node.nodeName == "e2service":
+#				for node2 in node.childNodes:
+#					if node2.nodeName == "e2servicereference": servicereference = str(node2.firstChild.data.strip().encode("utf-8"))
+#					if node2.nodeName == "e2servicename":
+#						try:servicename = str(node2.firstChild.data.strip().encode("utf-8"))
+#						except:servicename = "n/a"
+#						if counter != 0: # erster Eintrag ist der aktuelle Sedner, nicht aufnehmen
+#							BouquetList.append(E2ServiceList(servicereference = servicereference, servicename = servicename))
+#						counter += 1
 	
 	def Infobar(self):
 		if self.isVisible:
@@ -1094,35 +1034,23 @@ class RemoteTimerEPGList(Screen):
 	def readXMLEPGListE1(self, xmlstring):
 		E1ListEPG = []
 		xmlstring = xmlstring.replace("""<?xml-stylesheet type="text/xsl" href="/xml/serviceepg.xsl"?>""","")
-		dom = xml.dom.minidom.parseString(xmlstring)
-		servicereference = ""
-		servicename = ""
-		for node in dom.firstChild.childNodes:
-			eventstart = 0
-			eventduration = 0
-			eventtitle = ""
-			eventdescriptionextended = ""
-			eventdescription = ""
-			if node.nodeName == "service":
-				for node2 in node.childNodes:
-					if node2.nodeName == "reference": servicereference = str(node2.firstChild.data.strip().encode("utf-8"))
-					if node2.nodeName == "name":
-						try:servicename = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:servicename = "n/a"
-			if node.nodeName == "event":
-				for node2 in node.childNodes:
-					if node2.nodeName == "description":
-						try:eventtitle = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:pass
-					if node2.nodeName == "duration": eventduration = int(node2.firstChild.data.strip())
-					if node2.nodeName == "start": eventstart = int(node2.firstChild.data.strip())
-					if node2.nodeName == "genre":
-						try:eventdescription = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:pass
-					if node2.nodeName == "details":
-						try:eventdescriptionextended = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:pass
-						E1ListEPG.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename, eventid = 1, eventstart = eventstart, eventduration = eventduration, eventtitle = eventtitle, eventdescription = eventdescription, eventdescriptionextended = eventdescriptionextended  ))
+		root = xml.etree.cElementTree.fromstring(xmlstring)
+		for services in root.findall("service"):
+			servicereference = str(services.findtext("reference", 'n/a').encode("utf-8", 'ignore'))
+			try:servicename = str(services.findtext("name", 'n/a').encode("utf-8", 'ignore'))
+			except:servicename = "n/a"
+		for events in root.findall("event"):
+			try:eventstart = int(events.findtext("start", 0))
+			except:eventstart = 0
+			try:eventduration = int(events.findtext("duration", 0))
+			except:eventduration  = 0
+			try:eventtitle = str(events.findtext("description", '').encode("utf-8", 'ignore'))
+			except:eventtitle = ""
+			try:eventdescription = str(events.findtext("genre", '').encode("utf-8", 'ignore'))
+			except:eventdescription = ""
+			try:eventdescriptionextended = str(events.findtext("details", '').encode("utf-8", 'ignore'))
+			except:eventdescriptionextended = ""
+			E1ListEPG.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename, eventid = 1, eventstart = eventstart, eventduration = eventduration, eventtitle = eventtitle, eventdescription = eventdescription, eventdescriptionextended = eventdescriptionextended  ))
 		self["epglist"].buildList(E1ListEPG, self.E2TimerList)
 		if self.ListCurrentIndex != 0:
 			sel = self["epglist"].moveSelectionTo(self.ListCurrentIndex)
@@ -1130,42 +1058,23 @@ class RemoteTimerEPGList(Screen):
 	
 	def readXMLEPGList(self, xmlstring):
 		E2ListEPG = []
-		dom = xml.dom.minidom.parseString(xmlstring)
-		for node in dom.firstChild.childNodes:
-			servicereference = ""
-			servicename = ""
-			eventid = 0
-			eventstart = 0
-			eventduration = 0
-			eventtitle = ""
-			eventdescription = ""
-			eventdescriptionextended = ""
-			if node.nodeName == "e2event":
-				for node2 in node.childNodes:
-					if node2.nodeName == "e2eventid": 
-						try:eventid= int(node2.firstChild.data.strip())
-						except:pass
-					if node2.nodeName == "e2eventstart": 
-						try:eventstart = int(node2.firstChild.data.strip())
-						except:pass
-					if node2.nodeName == "e2eventduration": 
-						try:eventduration = int(node2.firstChild.data.strip())
-						except:pass
-					if node2.nodeName == "e2eventtitle":
-						try:eventtitle = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:eventtitle = ""
-					if node2.nodeName == "e2eventdescription":
-						try:eventdescription = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:eventdescription = ""
-					if node2.nodeName == "e2eventdescriptionextended":
-						try:eventdescriptionextended = str(node2.firstChild.data.strip().encode("utf-8"))
-						except:eventdescriptionextended = "n/a"
-					if node2.nodeName == "e2eventservicereference": servicereference = str(node2.firstChild.data.strip().encode("utf-8"))
-					if node2.nodeName == "e2eventservicename":
-						try:
-							servicename = str(node2.firstChild.data.strip().encode("utf-8"))
-							E2ListEPG.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename, eventid = eventid, eventstart = eventstart, eventduration = eventduration, eventtitle = eventtitle, eventdescription = eventdescription, eventdescriptionextended = eventdescriptionextended  ))
-						except:pass
+		root = xml.etree.cElementTree.fromstring(xmlstring)
+		for events in root.findall("e2event"):
+			servicereference = str(events.findtext("e2eventservicereference", '').encode("utf-8", 'ignore'))
+			servicename = str(events.findtext("e2eventservicename", 'n/a').encode("utf-8", 'ignore'))
+			try:eventstart = int(events.findtext("e2eventstart", 0))
+			except:eventstart = 0
+			try:eventduration = int(events.findtext("e2eventduration", 0))
+			except:eventduration  = 0
+			try:eventtitle = str(events.findtext("e2eventtitle", '').encode("utf-8", 'ignore'))
+			except:eventtitle = ""
+			try:eventid = int(events.findtext("e2eventid", 0))
+			except:eventid = 0
+			try:eventdescription = str(events.findtext("e2eventdescription", '').encode("utf-8", 'ignore'))
+			except:eventdescription = ""
+			try:eventdescriptionextended = str(events.findtext("e2eventdescriptionextended", '').encode("utf-8", 'ignore'))
+			except:eventdescriptionextended = ""
+			E2ListEPG.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename, eventid = eventid, eventstart = eventstart, eventduration = eventduration, eventtitle = eventtitle, eventdescription = eventdescription, eventdescriptionextended = eventdescriptionextended  ))
 		self["epglist"].buildList(E2ListEPG, self.E2TimerList)
 		if self.ListCurrentIndex != 0:
 			sel = self["epglist"].moveSelectionTo(self.ListCurrentIndex)

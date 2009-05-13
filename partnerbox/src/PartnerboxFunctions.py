@@ -22,7 +22,7 @@ from twisted.internet import reactor
 from twisted.web import client
 from twisted.web.client import HTTPClientFactory
 from base64 import encodestring
-import xml.dom.minidom
+import xml.etree.cElementTree
 
 remote_timer_list = None
 oldIP = None
@@ -116,92 +116,43 @@ class E2Timer:
 
 def FillE2TimerList(xmlstring):
 	E2TimerList = []
-	dom = xml.dom.minidom.parseString(xmlstring)
-	for node in dom.firstChild.childNodes:
-		servicereference = ""
-		servicename = ""
-		name = ""
-		disabled = 0
-		timebegin = 0
-		timeend = 0
-		duration = 0
-		startprepare = 0
-		state = 0
-		repeated = 0
-		justplay = 0
-		eventId = -1
-		afterevent = 0
-		dirname = ""
-		description = ""
-		if node.nodeName == "e2timer":
-			for node2 in node.childNodes:
-				if node2.nodeName == "e2servicereference": servicereference = str(node2.firstChild.data.strip().encode("utf-8"))
-				if node2.nodeName == "e2servicename":
-					try:servicename = str(node2.firstChild.data.strip().encode("utf-8"))
-					except:servicename = "n/a"
-				if node2.nodeName == "e2eit": 
-					try: eventId = int(node2.firstChild.data.strip())
-					except: pass
-				if node2.nodeName == "e2name":
-					try:name = str(node2.firstChild.data.strip().encode("utf-8"))
-					except:name = ""
-				if node2.nodeName == "e2description":
-					try:description = str(node2.firstChild.data.strip().encode("utf-8"))
-					except:description = ""
-				if node2.nodeName == "e2dirname" or node2.nodeName == "e2location": # vorerst Kompatibilitaet zum alten Webinterface-Api aufrecht erhalten (e2dirname)
-					try:dirname = str(node2.firstChild.data.strip().encode("utf-8"))
-					except:dirname = ""
-				if node2.nodeName == "e2afterevent": afterevent = int(node2.firstChild.data.strip())
-				if node2.nodeName == "e2disabled": disabled = int(node2.firstChild.data.strip())
-				if node2.nodeName == "e2timebegin": timebegin = int(node2.firstChild.data.strip())
-				if node2.nodeName == "e2timeend": timeend = int(node2.firstChild.data.strip())
-				if node2.nodeName == "e2duration": duration = int(node2.firstChild.data.strip())
-				if node2.nodeName == "e2startprepare": startprepare = int(node2.firstChild.data.strip())
-				if node2.nodeName == "e2state":  state= int(node2.firstChild.data.strip())
-				if node2.nodeName == "e2justplay":  justplay= int(node2.firstChild.data.strip())
-				if node2.nodeName == "e2repeated":
-					repeated= int(node2.firstChild.data.strip())
-					E2TimerList.append(E2Timer(servicereference = servicereference, servicename = servicename, name = name, disabled = disabled, timebegin = timebegin, timeend = timeend, duration = duration, startprepare = startprepare, state = state , repeated = repeated, justplay= justplay, eventId = eventId, afterevent = afterevent, dirname = dirname, description = description, type = 0 ))
+	try: root = xml.etree.cElementTree.fromstring(xmlstring)
+	except: return E2TimerList
+	for timer in root.findall("e2timer"):
+		E2TimerList.append(E2Timer(
+			servicereference = str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
+			servicename = str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
+			name = str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
+			disabled = int(timer.findtext("e2disabled", 0)),
+			timebegin = int(timer.findtext("e2timebegin", 0)),
+			timeend = int(timer.findtext("e2timeend", 0)),
+			duration = int(timer.findtext("e2duration", 0)),
+			startprepare = int(timer.findtext("e2startprepare", 0)),
+			state = int(timer.findtext("e2state", 0)),
+			repeated = int(timer.findtext("e2repeated", 0)),
+			justplay = int(timer.findtext("e2justplay", 0)),
+			eventId = int(timer.findtext("e2eit", -1)),
+			afterevent = int(timer.findtext("e2afterevent", 0)),
+			dirname = str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
+			description = str(timer.findtext("e2description", '').encode("utf-8", 'ignore')),
+			type = 0))
 	return E2TimerList
 
 
 def FillE1TimerList(xmlstring):
 	E1TimerList = []
-	dom = xml.dom.minidom.parseString(xmlstring)
-	for node in dom.firstChild.childNodes:
-		type = 0
-		servicereference = ""
-		servicename = ""
-		name = ""
-		disabled = 0
-		timebegin = 0
-		timeend = 0
-		duration = 0
-		startprepare = 0
-		state = 0
-		repeated = 0
-		justplay = 0
-		eventId = -1
-		afterevent = 0
-		dirname = ""
-		description = ""
-		if node.nodeName == "timer":
-			for node2 in node.childNodes:
-				if node2.nodeName == "typedata": type = int(node2.firstChild.data.strip())
-				if node2.nodeName == "service":
-					for node3 in node2.childNodes:
-						if node3.nodeName == "reference": servicereference = str(node3.firstChild.data.strip().encode("utf-8"))
-						if node3.nodeName == "name":
-							try:servicename = str(node3.firstChild.data.strip().encode("utf-8"))
-							except:servicename = "n/a"
-				if node2.nodeName == "event":
-					for node3 in node2.childNodes:
-						if node3.nodeName == "start": timebegin = int(node3.firstChild.data.strip())
-						if node3.nodeName == "duration": duration = int(node3.firstChild.data.strip())
-						if node3.nodeName == "description":
-							try:description = str(node3.firstChild.data.strip().encode("utf-8"))
-							except:description = ""
-							E1TimerList.append(E2Timer(servicereference = servicereference, servicename = servicename, name = name, disabled = disabled, timebegin = timebegin, timeend = timeend, duration = duration, startprepare = startprepare, state = state , repeated = repeated, justplay= justplay, eventId = eventId, afterevent = afterevent, dirname = dirname, description = description, type = type))
+	try: root = xml.etree.cElementTree.fromstring(xmlstring)
+	except: return E1TimerList
+	for timer in root.findall("timer"):
+		typedata = int(timer.findtext("typedata", 0))
+		for service in timer.findall("service"):
+			servicereference = str(service.findtext("reference", '').encode("utf-8", 'ignore'))
+			servicename = str(service.findtext("name", 'n/a').encode("utf-8", 'ignore'))
+		for event in timer.findall("event"):
+			timebegin = int(event.findtext("start", 0))
+			duration = int(event.findtext("duration", 0))
+			description = str(event.findtext("description", '').encode("utf-8", 'ignore'))
+		E1TimerList.append(E2Timer(servicereference = servicereference, servicename = servicename, name = "", disabled = 0, timebegin = timebegin, timeend = 0, duration = duration, startprepare = 0, state = 0 , repeated = 0, justplay= 0, eventId = -1, afterevent = 0, dirname = "", description = description, type = typedata))
 	return E1TimerList
 
 class myHTTPClientFactory(HTTPClientFactory):
