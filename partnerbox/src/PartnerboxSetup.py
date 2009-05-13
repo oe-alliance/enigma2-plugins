@@ -20,6 +20,7 @@
 from enigma import eListboxPythonMultiContent, eListbox, gFont, \
 	RT_HALIGN_LEFT, RT_VALIGN_CENTER
 from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
 from Components.MenuList import MenuList
 from Components.Button import Button
 from Components.config import config
