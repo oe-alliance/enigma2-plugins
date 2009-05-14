@@ -31,7 +31,7 @@ class Toplevel(resource.Resource):
 		self.putChild("grab", GrabResource())
 		self.putChild("ipkg", IPKGResource())
 		self.putChild("play", ServiceplayerResource(self.session))
-		self.putChild("wap", RedirectorResource("/web/mobile"))
+		self.putChild("wap", RedirectorResource("/mobile/"))
 		self.putChild("mobile", ScreenPage(self.session,util.sibpath(__file__, "mobile")))
 		self.putChild("upload", UploadResource())
 		self.putChild("servicelist", ServiceList(self.session))
