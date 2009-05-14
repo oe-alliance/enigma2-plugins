@@ -23,11 +23,11 @@
 
 	#notification{		
 		color: #000;
-		width: 500px;
-		height: 50px;
+		width: 600px;
+		height: 32px;
 		position: absolute;
 		top: 0px;
-		left: 250px;		
+		left: 200px;		
 		text-align: center;
 		vertical-align: bottom;
 		z-index: 2;		
