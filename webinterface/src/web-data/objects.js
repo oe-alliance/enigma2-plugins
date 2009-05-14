@@ -3,17 +3,22 @@
 
 //START class EPGList 
 
-function getNodeContent(xml, nodename, defaultString){	
-	var	node = xml.getElementsByTagName(nodename);
+function getNodeContent(xml, nodename, defaultString){
 	try{
-		return node.item(0).firstChild.data;
+		var node = xml.getElementsByTagName(nodename);
+		var retVal = node.item(0).firstChild.data;
+
+		if(retVal === "" || retVal === null){
+			return 'N/A';		
+		}		
+		return retVal;
 	} catch(e){
-//		debug('[getNodeContent] Error getting content of node "'+ nodename +'" :: ' + e);
-		if(defaultString !== null) {
+		if(typeof(defaultString) !== 'undefined') {
 			return defaultString;
-		}
-		return 'N/A';
+		}		
 	}
+	
+	return 'N/A';
 }
 
 function getNamedChildren(xml, parentname, childname){
@@ -291,8 +296,8 @@ function Timer(xml){
 	this.servicename = getNodeContent(xml, 'e2servicename');
 	this.eventid = getNodeContent(xml, 'e2eit');
 	this.name = getNodeContent(xml, 'e2name');
-	this.description = getNodeContent(xml, 'e2description');
-	this.descriptionextended = getNodeContent(xml, 'e2descriptionextended');
+	this.description = getNodeContent(xml, 'e2description', '');
+	this.descriptionextended = getNodeContent(xml, 'e2descriptionextended', '');
 	this.disabled = getNodeContent(xml, 'e2disabled', '0');
 	this.timebegin = getNodeContent(xml, 'e2timebegin');
 	this.timeend = getNodeContent(xml, 'e2timeend');
