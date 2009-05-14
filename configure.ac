@@ -36,7 +36,7 @@ webinterface/Makefile
 webinterface/etc/Makefile
 webinterface/src/Makefile
 webinterface/src/web/Makefile
-webinterface/src/web/wap/Makefile
+webinterface/src/mobile/Makefile
 webinterface/src/WebChilds/Makefile
 webinterface/src/WebChilds/External/Makefile
 webinterface/src/WebComponents/Makefile
