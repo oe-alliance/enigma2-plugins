@@ -4,7 +4,7 @@
 </head>
 <body>
 
-<p>Enigma2 WAP - Bouquets</p>
+<p>E2mobile - Bouquets</p>
 <table border="1" cellspacing="0" cellpadding="0">
 	<tr>
 		<td><b>Bouquet</b></td>
@@ -14,7 +14,7 @@
 	&lt;tr>
 		&lt;td><e2:item name="Name" filter="xml"/>&lt;/td>
 		&lt;td>
-			&lt;a href='/web/wap/services.html?sRef=<e2:item name="Reference" filter="uri"/>'>
+			&lt;a href='/mobile/services.html?sRef=<e2:item name="Reference" filter="uri"/>'>
 				&lt;img src="/web-data/img/epg.png" title="Channellist" border="0">
 			&lt;/a>
 		&lt;/td> 

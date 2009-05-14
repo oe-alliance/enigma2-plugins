@@ -5,29 +5,29 @@
 
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
-	<title>Dreambox WebControl</title>
+	<title>Dreambox WebControl</title><!--
 	
-	<!-- External libs  -->
+	 External libs  
 	<script type="text/javascript" src="/web-data/lib/prototype-1.6.0.3.js"></script>
-	<script type="text/javascript" src="/web-data/lib/scriptaculous.js"></script>
+	<script type="text/javascript" src="/web-data/lib/scriptaculous.js?load=effects"></script>
 	<script type="text/javascript" src="/web-data/lib/shadedborder.js"></script>
 	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
 	
-	<!-- userprefs Object -->
+	 userprefs Object 
 	<script type="text/javascript" src="/web-data/userprefs.js"></script>
 		
-	<!-- our stuff //-->
+	 our stuff //
 	<script type="text/javascript" src="/web-data/objects.js" ></script>
 	<script type="text/javascript" src="/web-data/config.js" ></script>
 	<script type="text/javascript" src="/web-data/tools.js" ></script>
 	<script type="text/javascript" src="/web-data/timer.js" ></script>
 
-	<!-- Gears-->
+	 Gears
 	<script type="text/javascript" src="/web-data/lib/gears_init.js"></script>
 	<script type="text/javascript" src="/web-data/gears_handler.js" ></script>
 
 	
-	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
+	--><link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" type="/web-data/image/x-icon" href="/web-data/img/favicon.ico">
 
 	<!-- Live RSS Feeds //-->
@@ -71,6 +71,10 @@
 			} catch (e) {}
 		}
 
+		function loadScript(uri){
+			document.write('<script type="text/javascript" src="'+uri+'"><\/script>');
+		}
+		
 	</script>
 </head>
 <body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">
@@ -183,33 +187,77 @@
 			</div>	
 		</div>
 	</div>
-	<script language="javascript" type="text/javascript">			
-		/****************
-		Rounded Corners 
-		*****************/
-		var menuBorder = RUZEE.ShadedBorder.create({ corner:5, border: 1 });
 
-		var buttons = $('mainMenu').getElementsByTagName("li");
+<!--	 External libs  
+		<script type="text/javascript" src="/web-data/lib/prototype-1.6.0.3.js"></script>
+		<script type="text/javascript" src="/web-data/lib/scriptaculous.js?load=effects"></script>
+		<script type="text/javascript" src="/web-data/lib/shadedborder.js"></script>
+		<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
+		
+		 userprefs Object 
+		<script type="text/javascript" src="/web-data/userprefs.js"></script>
+			
+		 our stuff //
+		<script type="text/javascript" src="/web-data/objects.js" ></script>
+		<script type="text/javascript" src="/web-data/config.js" ></script>
+		<script type="text/javascript" src="/web-data/tools.js" ></script>
+		<script type="text/javascript" src="/web-data/timer.js" ></script>
 
-		for (var i=0; i < buttons.length; ++i) {			
-			menuBorder.render(buttons[i]);
+		 Gears
+		<script type="text/javascript" src="/web-data/lib/gears_init.js"></script>
+		<script type="text/javascript" src="/web-data/gears_handler.js" ></script>
+-->
+	
+	<script language="javascript" type="text/javascript">
+		function loadScripts(){
+			loadScript("/web-data/lib/shadedborder.js");
+
+			loadScript("/web-data/lib/gears_init.js");
+			loadScript("/web-data/gears_handler.js");
+			
+			loadScript("/web-data/lib/prototype-1.6.0.3.js");
+			loadScript("/web-data/lib/scriptaculous.js?load=effects");
+			loadScript("/web-data/lib/trimpath-template-1.0.38.js");
+							
+			loadScript("/web-data/userprefs.js");
+			loadScript("/web-data/objects.js");
+			loadScript("/web-data/config.js");
+			loadScript("/web-data/tools.js");
+			loadScript("/web-data/timer.js");
 		}
+	 	loadScripts();
+		setTimeout(roundCorners, 5000);
 
-		var bannerBorder = RUZEE.ShadedBorder.create({corner:5, shadow:10});
-		bannerBorder.render('banner');
-		bannerBorder.render('current');
-
-		var contentBorder = RUZEE.ShadedBorder.create({corner:5, border: 2, shadow:10});
-		contentBorder.render('nav');
-		contentBorder.render('navSearch');
-		contentBorder.render('navVolume');
-		contentBorder.render('content');
-
-		var hdBorder = RUZEE.ShadedBorder.create({corner:5, edges:"tlr"});
-		hdBorder.render('navHd');
-		hdBorder.render('searchHd');
-		hdBorder.render('volHd');
-		hdBorder.render('contentHd');
+		var hdBorder = '';
+		
+		function roundCorners(){
+			/****************
+			Rounded Corners 
+			*****************/
+			var menuBorder = RUZEE.ShadedBorder.create({ corner:5, border: 1 });
+	
+			var buttons = $('mainMenu').getElementsByTagName("li");
+	
+			for (var i=0; i < buttons.length; ++i) {			
+				menuBorder.render(buttons[i]);
+			}
+	
+			var bannerBorder = RUZEE.ShadedBorder.create({corner:5, shadow:10});
+			bannerBorder.render('banner');
+			bannerBorder.render('current');
+	
+			var contentBorder = RUZEE.ShadedBorder.create({corner:5, border: 2, shadow:10});
+			contentBorder.render('nav');
+			contentBorder.render('navSearch');
+			contentBorder.render('navVolume');
+			contentBorder.render('content');
+	
+			hdBorder = RUZEE.ShadedBorder.create({corner:5, edges:"tlr"});
+			hdBorder.render('navHd');
+			hdBorder.render('searchHd');
+			hdBorder.render('volHd');
+			hdBorder.render('contentHd');
+		}
 		
 		function setNavHd(content){
 			set("navHd", "<div>"+content+"</div>");
@@ -226,8 +274,14 @@
 		}
 		
 		setMaxHeight('contentMain');		
+
+		setTimeout(finished, 5000);
+
+		function finished(){
+			init();
+		}
+
 		
-		init();
 	</script>
 
 </body>
