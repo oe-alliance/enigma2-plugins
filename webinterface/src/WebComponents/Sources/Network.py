@@ -65,8 +65,8 @@ class Network(Source):
 			"Mac" : 1,
 			"Dhcp" : 2,
 			"Ip" : 3,
-			"Gateway" : 4,
-			"Netmask" : 5,
+			"Netmask" : 4,
+			"Gateway" : 5,
 		   }
 	
 	
