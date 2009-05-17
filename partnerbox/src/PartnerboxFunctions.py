@@ -124,6 +124,7 @@ def FillE2TimerList(xmlstring, sreference = None):
 		go = False
 		state = int(timer.findtext("e2state", 0))
 		disabled = int(timer.findtext("e2disabled", 0))
+		servicereference = str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore'))
 		if sreference is None:
 			go = True
 		else:
@@ -131,7 +132,7 @@ def FillE2TimerList(xmlstring, sreference = None):
 				go = True
 		if go:
 			E2TimerList.append(E2Timer(
-				servicereference = str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
+				servicereference = servicereference,
 				servicename = str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
 				name = str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
 				disabled = disabled,

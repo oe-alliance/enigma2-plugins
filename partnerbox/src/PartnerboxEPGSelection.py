@@ -119,7 +119,7 @@ def Partnerbox_onCreate(self):
 		port = self.partnerboxentry.port.value
 		http = "http://%s:%d" % (ip,port)
 		if int(self.partnerboxentry.enigma.value) == 0:
-			sCommand = http + "web/timerlist"
+			sCommand = http + "/web/timerlist"
 		else:
 			sCommand = http + "/xml/timers"
 		print "[Partnerbox] %s"%sCommand
