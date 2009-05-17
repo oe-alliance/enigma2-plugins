@@ -27,6 +27,7 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
+	quickbutton \
 	remotetimer \
 	rsdownloader \
 	simplerss \
