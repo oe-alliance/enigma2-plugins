@@ -27,7 +27,6 @@ from time import localtime
 
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
-from PartnerboxFunctions import FillE1TimerList, E2Timer, FillE2TimerList, SetPartnerboxTimerlist, sendPartnerBoxWebCommand
 import PartnerboxFunctions as partnerboxfunctions
 
 baseEPGList__init__ = None
@@ -45,8 +44,6 @@ def Partnerbox_EPGListInit():
 		basebuildSimilarEntry = EPGList.buildSimilarEntry
 	if basebuildMultiEntry is None:
 		basebuildMultiEntry = EPGList.buildMultiEntry
-	if partnerboxfunctions.remote_timer_list is None:
-		partnerboxfunctions.remote_timer_list = []
 	EPGList.__init__ = Partnerbox_EPGList__init__
 	EPGList.buildSingleEntry = Partnerbox_SingleEntry
 	EPGList.buildSimilarEntry = Partnerbox_SimilarEntry
@@ -54,40 +51,12 @@ def Partnerbox_EPGListInit():
 
 def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer = None):
 	baseEPGList__init__(self, type, selChangedCB, timer)
-	partnerboxfunctions.remote_timer_list = []
-	if int(config.plugins.Partnerbox.entriescount.value) >= 1:
-		try:
-			partnerboxentry = config.plugins.Partnerbox.Entries[0]
-			partnerboxfunctions.CurrentIP = partnerboxentry.ip.value
-			ip = "%d.%d.%d.%d" % tuple(partnerboxentry.ip.value)
-			port = partnerboxentry.port.value
-			http = "http://%s:%d" % (ip,port)
-			if int(partnerboxentry.enigma.value) == 0:
-				sCommand = http + "web/timerlist"
-			else:
-				sCommand = http + "/xml/timers"
-			sendPartnerBoxWebCommand(sCommand, None,3, "root", partnerboxentry.password.value).addCallback(boundFunction(GetPartnerboxTimerlistCallback,self, int(partnerboxentry.enigma.value))).addErrback(boundFunction(GetPartnerboxTimerlistCallbackError,self))
-		except: pass
 	# Partnerbox Clock Icons
 	self.remote_clock_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock.png')
 	self.remote_clock_add_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock_add.png')
 	self.remote_clock_pre_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock_pre.png')
 	self.remote_clock_post_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock_post.png')
 	self.remote_clock_prepost_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock_prepost.png')
-
-def GetPartnerboxTimerlistCallback(self, enigma_type, sxml = None):
-	if sxml is not None:
-		if enigma_type == 0:
-			partnerboxfunctions.remote_timer_list = FillE2TimerList(sxml)
-		else:
-			partnerboxfunctions.remote_timer_list = FillE1TimerList(sxml)
-	if len(partnerboxfunctions.remote_timer_list) != 0:
-		self.l.invalidate()
-
-def GetPartnerboxTimerlistCallbackError(self, error = None):
-	if error is not None:
-		print str(error.getErrorMessage())
-
 
 def Partnerbox_SingleEntry(self, service, eventId, beginTime, duration, EventName):
 	rec1=beginTime and (self.timer.isInTimer(eventId, beginTime, duration, service))

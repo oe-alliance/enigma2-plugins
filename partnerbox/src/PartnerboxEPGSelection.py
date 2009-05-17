@@ -22,8 +22,9 @@ from Screens.MessageBox import MessageBox
 from Components.config import config
 from PartnerboxSetup import PartnerboxEntriesListConfigScreen
 from Screens.EpgSelection import EPGSelection
+from Components.EpgList import EPG_TYPE_SINGLE, EPG_TYPE_SIMILAR, EPG_TYPE_MULTI
 from Tools.BoundFunction import boundFunction
-from PartnerboxFunctions import  SetPartnerboxTimerlist, isInTimerList, sendPartnerBoxWebCommand
+from PartnerboxFunctions import  SetPartnerboxTimerlist, isInTimerList, sendPartnerBoxWebCommand, FillE1TimerList, FillE2TimerList
 import PartnerboxFunctions as partnerboxfunctions
 
 baseEPGSelection__init__ = None
@@ -31,9 +32,10 @@ baseEPGSelection_zapTo = None
 baseonSelectionChanged = None
 basetimerAdd = None
 basefinishedAdd = None
+baseonCreate = None
 
 def Partnerbox_EPGSelectionInit():
-	global baseEPGSelection__init__, baseEPGSelection_zapTo, baseonSelectionChanged, basetimerAdd, basefinishedAdd
+	global baseEPGSelection__init__, baseEPGSelection_zapTo, baseonSelectionChanged, basetimerAdd, basefinishedAdd, baseonCreate
 	if baseEPGSelection__init__ is None:
 		baseEPGSelection__init__ = EPGSelection.__init__
 	if baseEPGSelection_zapTo is None:
@@ -44,19 +46,24 @@ def Partnerbox_EPGSelectionInit():
 		basetimerAdd = EPGSelection.timerAdd
 	if basefinishedAdd is None:
 		basefinishedAdd = EPGSelection.finishedAdd
-	if partnerboxfunctions.remote_timer_list is None:
-		partnerboxfunctions.remote_timer_list = []
+	if baseonCreate is None:
+		baseonCreate = EPGSelection.onCreate
+
 	EPGSelection.__init__ = Partnerbox_EPGSelection__init__
 	EPGSelection.zapTo = Partnerbox_EPGSelection_zapTo
 	EPGSelection.onSelectionChanged = Partnerbox_onSelectionChanged
 	EPGSelection.timerAdd = Partnerbox_timerAdd
 	EPGSelection.finishedAdd = Partnerbox_finishedAdd
+	EPGSelection.onCreate = Partnerbox_onCreate
 
 
 def Partnerbox_EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None):
-
+	self.partnerboxentry = None
+	partnerboxfunctions.remote_timer_list = []
 	if int(config.plugins.Partnerbox.entriescount.value) >= 1:
-		try: self.partnerboxentry = config.plugins.Partnerbox.Entries[0]
+		try: 
+			self.partnerboxentry = config.plugins.Partnerbox.Entries[0]
+			partnerboxfunctions.CurrentIP = self.partnerboxentry.ip.value
 		except: self.partnerboxentry = None
 	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
 	try:self["key_red"].setText(config.plugins.Partnerbox.Entries[0].name.value)
@@ -72,10 +79,13 @@ def Partnerbox_EPGSelection_zapTo(self): # just used in multiepg
 def NewPartnerBoxSelected(self, session, what, partnerboxentry = None):
 	if partnerboxentry is not None:
 		self.partnerboxentry = partnerboxentry
-		SetPartnerboxTimerlist(partnerboxentry)
+		curService = None
+		if self.type == EPG_TYPE_SINGLE:
+			curService = self.currentService.ref.toString()
+		SetPartnerboxTimerlist(partnerboxentry, curService)
 		Partnerbox_onSelectionChanged(self)
 		self["key_red"].setText(partnerboxentry.name.value)
-		self["list"].l.invalidate()
+		self["list"].l.invalidate() # immer zeichnen, da neue Box ausgewaehlt wurde
 
 def Partnerbox_onSelectionChanged(self):
 	baseonSelectionChanged(self)
@@ -102,6 +112,37 @@ def Partnerbox_finishedAdd(self, answer):
 	basefinishedAdd(self,answer)
 	CheckRemoteTimer(self)
 
+def Partnerbox_onCreate(self):
+	baseonCreate(self)
+	if self.partnerboxentry is not None:
+		ip = "%d.%d.%d.%d" % tuple(self.partnerboxentry.ip.value)
+		port = self.partnerboxentry.port.value
+		http = "http://%s:%d" % (ip,port)
+		if int(self.partnerboxentry.enigma.value) == 0:
+			sCommand = http + "web/timerlist"
+		else:
+			sCommand = http + "/xml/timers"
+		print "[Partnerbox] %s"%sCommand
+		sendPartnerBoxWebCommand(sCommand, None,3, "root", self.partnerboxentry.password.value).addCallback(boundFunction(GetPartnerboxTimerlistCallback,self, int(self.partnerboxentry.enigma.value))).addErrback(boundFunction(GetPartnerboxTimerlistCallbackError,self))
+
+
+def GetPartnerboxTimerlistCallback(self, enigma_type, sxml = None):
+	if sxml is not None:
+		curService = None
+		if self.type == EPG_TYPE_SINGLE:
+			curService = self.currentService.ref.toString()
+		if enigma_type == 0:
+			partnerboxfunctions.remote_timer_list = FillE2TimerList(sxml, curService)
+		else:
+			partnerboxfunctions.remote_timer_list = FillE1TimerList(sxml, curService)
+	if len(partnerboxfunctions.remote_timer_list) != 0:
+		Partnerbox_onSelectionChanged(self)
+		self["list"].l.invalidate()
+
+def GetPartnerboxTimerlistCallbackError(self, error = None):
+	if error is not None:
+		print str(error.getErrorMessage())
+
 def CheckRemoteTimer(self):
 	if self.key_green_choice != self.REMOVE_TIMER:
 		cur = self["list"].getCurrent()
@@ -127,9 +168,12 @@ def DeleteTimerConfirmed (self, timerentry, answer):
 		sendPartnerBoxWebCommand(sCommand, None,3, "root", self.partnerboxentry.password.value).addCallback(boundFunction(DeleteTimerCallback,self)).addErrback(boundFunction(DeleteTimerCallbackError,self))
 
 def DeleteTimerCallback(self, callback = None):
-	SetPartnerboxTimerlist(self.partnerboxentry)
+	curService = None
+	if self.type == EPG_TYPE_SINGLE:
+		curService = self.currentService.ref.toString()
+	SetPartnerboxTimerlist(self.partnerboxentry, curService)
 	Partnerbox_onSelectionChanged(self)
-	self["list"].l.invalidate()
+	self["list"].l.invalidate() # immer zeichnen, da ja was geloescht wurde
 
 def DeleteTimerCallbackError(self, error = None):
 	if error is not None:

@@ -18,11 +18,13 @@
 #
 
 import urllib
+from timer import TimerEntry
 from twisted.internet import reactor
 from twisted.web import client
 from twisted.web.client import HTTPClientFactory
 from base64 import encodestring
 import xml.etree.cElementTree
+
 
 remote_timer_list = None
 oldIP = None
@@ -114,32 +116,41 @@ class E2Timer:
 				self.repeated = 1
 			self.dirname = "/hdd/movie/"
 
-def FillE2TimerList(xmlstring):
+def FillE2TimerList(xmlstring, sreference = None):
 	E2TimerList = []
 	try: root = xml.etree.cElementTree.fromstring(xmlstring)
 	except: return E2TimerList
 	for timer in root.findall("e2timer"):
-		E2TimerList.append(E2Timer(
-			servicereference = str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
-			servicename = str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
-			name = str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
-			disabled = int(timer.findtext("e2disabled", 0)),
-			timebegin = int(timer.findtext("e2timebegin", 0)),
-			timeend = int(timer.findtext("e2timeend", 0)),
-			duration = int(timer.findtext("e2duration", 0)),
-			startprepare = int(timer.findtext("e2startprepare", 0)),
-			state = int(timer.findtext("e2state", 0)),
-			repeated = int(timer.findtext("e2repeated", 0)),
-			justplay = int(timer.findtext("e2justplay", 0)),
-			eventId = int(timer.findtext("e2eit", -1)),
-			afterevent = int(timer.findtext("e2afterevent", 0)),
-			dirname = str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
-			description = str(timer.findtext("e2description", '').encode("utf-8", 'ignore')),
-			type = 0))
+		go = False
+		state = int(timer.findtext("e2state", 0))
+		disabled = int(timer.findtext("e2disabled", 0))
+		if sreference is None:
+			go = True
+		else:
+			if sreference.upper() == servicereference.upper() and state != TimerEntry.StateEnded and not disabled:
+				go = True
+		if go:
+			E2TimerList.append(E2Timer(
+				servicereference = str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')),
+				servicename = str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
+				name = str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
+				disabled = disabled,
+				timebegin = int(timer.findtext("e2timebegin", 0)),
+				timeend = int(timer.findtext("e2timeend", 0)),
+				duration = int(timer.findtext("e2duration", 0)),
+				startprepare = int(timer.findtext("e2startprepare", 0)),
+				state = state,
+				repeated = int(timer.findtext("e2repeated", 0)),
+				justplay = int(timer.findtext("e2justplay", 0)),
+				eventId = int(timer.findtext("e2eit", -1)),
+				afterevent = int(timer.findtext("e2afterevent", 0)),
+				dirname = str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
+				description = str(timer.findtext("e2description", '').encode("utf-8", 'ignore')),
+				type = 0))
 	return E2TimerList
 
 
-def FillE1TimerList(xmlstring):
+def FillE1TimerList(xmlstring, sreference = None):
 	E1TimerList = []
 	try: root = xml.etree.cElementTree.fromstring(xmlstring)
 	except: return E1TimerList
@@ -152,7 +163,14 @@ def FillE1TimerList(xmlstring):
 			timebegin = int(event.findtext("start", 0))
 			duration = int(event.findtext("duration", 0))
 			description = str(event.findtext("description", '').encode("utf-8", 'ignore'))
-		E1TimerList.append(E2Timer(servicereference = servicereference, servicename = servicename, name = "", disabled = 0, timebegin = timebegin, timeend = 0, duration = duration, startprepare = 0, state = 0 , repeated = 0, justplay= 0, eventId = -1, afterevent = 0, dirname = "", description = description, type = typedata))
+		go = False
+		if sreference is None:
+			go = True
+		else:
+			if sreference.upper() == servicereference.upper() and ( (typedata & PlaylistEntry.stateWaiting) or (typedata & PlaylistEntry.stateRunning)):
+				go = True
+		if go:
+			E1TimerList.append(E2Timer(servicereference = servicereference, servicename = servicename, name = "", disabled = 0, timebegin = timebegin, timeend = 0, duration = duration, startprepare = 0, state = 0 , repeated = 0, justplay= 0, eventId = -1, afterevent = 0, dirname = "", description = description, type = typedata))
 	return E1TimerList
 
 class myHTTPClientFactory(HTTPClientFactory):
@@ -214,7 +232,7 @@ class PlaylistEntry:
 	Sa=33554432
 
 
-def SetPartnerboxTimerlist(partnerboxentry = None):
+def SetPartnerboxTimerlist(partnerboxentry = None, sreference = None):
 	global remote_timer_list
 	global CurrentIP
 	if partnerboxentry is None:
@@ -233,7 +251,7 @@ def SetPartnerboxTimerlist(partnerboxentry = None):
 		f = urllib.urlopen(sCommand)
 		sxml = f.read()
 		if int(partnerboxentry.enigma.value) == 0:
-			remote_timer_list = FillE2TimerList(sxml)
+			remote_timer_list = FillE2TimerList(sxml, sreference)
 		else:
-			remote_timer_list = FillE1TimerList(sxml)
+			remote_timer_list = FillE1TimerList(sxml, sreference)
 	except: pass
