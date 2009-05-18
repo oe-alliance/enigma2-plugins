@@ -122,6 +122,8 @@ class RemoteTimerScreen(Screen):
 	def _gotPageLoad(self, data):
 		# XXX: this call is not optimized away so it is easier to extend this functionality to support other kinds of receiver
 		self["timerlist"].l.setList(self.generateTimerE2(data))
+		info = _("finish fetching remote data...")
+		self["text"].setText(info)
 
 	def errorLoad(self, error):
 		print "[RemoteTimer] errorLoad ERROR:", error.getErrorMessage()
@@ -218,10 +220,11 @@ class RemoteTimerSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self["SetupActions"] = ActionMap(["SetupActions"],
+		self["SetupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.Exit,
+			"green": self.keySave,
 		}, -1)
 
 		self["key_red"] = Button(_("Cancel"))
@@ -376,7 +379,7 @@ def parseXml(string):
 		entry = dom.findtext('e2statetext')
 		if entry:
 			return entry.encode("utf-8", 'ignore')
-		return "No entry in XML from the webserver" 
+		return "No entry in XML from the webserver"
 	except:
 		return "ERROR XML PARSE"
 
@@ -396,8 +399,7 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
  	return [
-		PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], fnc = main),
+		PluginDescriptor(name="Remote Timer",description="Remote Timer Setup", where = [ PluginDescriptor.WHERE_PLUGINMENU ], icon="remotetimer.png", fnc = main),
 		PluginDescriptor(name="Remote Timer", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
 		PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)
 	]
-
