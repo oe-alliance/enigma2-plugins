@@ -31,6 +31,7 @@ SUBDIRS = \
 	remotetimer \
 	rsdownloader \
 	simplerss \
+	setpasswd \
 	startuptostandby \
 	tageditor \
 	trafficinfo \

@@ -206,4 +206,6 @@ partnerbox/src/icons/Makefile
 quickbutton/Makefile
 quickbutton/src/Makefile
 
+setpasswd/Makefile
+setpasswd/src/Makefile
 ])
