@@ -523,9 +523,7 @@ class MyTubeTasksScreen(Screen):
 			</widget>
 			<ePixmap position="100,500" size="100,40" zPosition="0" pixmap="~/plugin.png" alphatest="on" transparent="1" />
 			<ePixmap position="220,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="360,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="220,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="360,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
 	def __init__(self, session, plugin_path, tasklist):
@@ -540,7 +538,6 @@ class MyTubeTasksScreen(Screen):
 			"ok": self.keyOK,
 			"back": self.keyCancel,
 			"red": self.keyCancel,
-			"green": self.keySave,
 		}, -1)
 		
 		self["key_red"] = Button(_("Close"))
