@@ -435,6 +435,9 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					(_("MyTube Settings"), "settings"),
 					(_("View standard feed"), "stdfeed"),
 				)
+			self.hideSuggestions()
+			self.session.openWithCallback(self.openMenu, ChoiceBox, title=_("Select your choice."), list = menulist)
+
 		elif self.currList == "feedlist":
 			menulist = [(_("MyTube Settings"), "settings")]
 			menulist.extend((
@@ -448,9 +451,9 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					(_("View Downloads"), "downview")
 				))
 								
+			self.hideSuggestions()
+			self.session.openWithCallback(self.openMenu, ChoiceBox, title=_("Select your choice."), list = menulist)
 		
-		self.hideSuggestions()
-		self.session.openWithCallback(self.openMenu, ChoiceBox, title=_("Select your choice."), list = menulist)
 
 	def openMenu(self, answer):
 		answer = answer and answer[1]
