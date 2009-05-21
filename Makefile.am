@@ -20,6 +20,7 @@ SUBDIRS = \
 	moviecut \
 	movieretitle \
 	movietagger \
+	mytube \
 	netcaster \
 	networkwizard \
 	networkbrowser \

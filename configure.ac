@@ -208,4 +208,9 @@ quickbutton/src/Makefile
 
 setpasswd/Makefile
 setpasswd/src/Makefile
+
+mytube/Makefile
+mytube/po/Makefile
+mytube/src/Makefile
+
 ])
