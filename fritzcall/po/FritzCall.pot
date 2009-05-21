@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-07 17:05+0200\n"
+"POT-Creation-Date: 2009-05-19 17:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: this is a help text, keep it short
 msgid "About FritzCall"
 msgstr ""
@@ -63,6 +64,9 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+msgid "Connected since"
+msgstr ""
+
 msgid "Connected to FRITZ!Box!"
 msgstr ""
 
@@ -95,6 +99,9 @@ msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr ""
 
 msgid "Country"
+msgstr ""
+
+msgid "DECT phones registered"
 msgstr ""
 
 msgid "Debug"
@@ -163,6 +170,11 @@ msgstr ""
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr ""
 
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: this is a help text, keep it short
+msgid "FRITZ!Box Fon Status"
+msgstr ""
+
 #, python-format
 msgid "FRITZ!Box Login failed! - Error: %s"
 msgstr ""
@@ -188,7 +200,13 @@ msgstr ""
 msgid "Getting calls from FRITZ!Box..."
 msgstr ""
 
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr ""
+
 msgid "Harddisk"
+msgstr ""
+
+msgid "IP Address:"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -221,6 +239,9 @@ msgstr ""
 msgid "MSN to show (separated by ,)"
 msgstr ""
 
+msgid "Mailbox"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr ""
@@ -238,7 +259,13 @@ msgstr ""
 msgid "New"
 msgstr ""
 
+msgid "No DECT phone registered"
+msgstr ""
+
 msgid "No entry selected"
+msgstr ""
+
+msgid "No mailbox active"
 msgstr ""
 
 msgid "No result from LDIF"
@@ -255,6 +282,12 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "OK"
+msgstr ""
+
+msgid "One DECT phone registered"
+msgstr ""
+
+msgid "One mailbox active"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -293,6 +326,10 @@ msgid "Quit"
 msgstr ""
 
 msgid "Read PhoneBook from FRITZ!Box"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Reset"
 msgstr ""
 
 msgid "Reverse Lookup Caller ID (select country below)"
@@ -350,6 +387,14 @@ msgstr ""
 msgid "Timeout for Call Notifications (seconds)"
 msgstr ""
 
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle Mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle WLAN"
+msgstr ""
+
 msgid "UNKNOWN"
 msgstr ""
 
@@ -386,6 +431,9 @@ msgstr ""
 msgid "done, using last list"
 msgstr ""
 
+msgid "encrypted"
+msgstr ""
+
 msgid "finishing"
 msgstr ""
 
@@ -401,7 +449,13 @@ msgstr ""
 msgid "login verification"
 msgstr ""
 
+msgid "mailboxes active"
+msgstr ""
+
 msgid "mobile"
+msgstr ""
+
+msgid "not encrypted"
 msgstr ""
 
 msgid "preparing"

@@ -1,7 +1,5 @@
-SUBDIRS = images
-
 installdir = /usr/lib/enigma2/python/Plugins/Extensions/FritzCall
 
-install_PYTHON = *.py
-install_DATA = plugin.png reverselookup.xml maintainer.info
+install_PYTHON = __init__.py plugin.py
+install_DATA = plugin.png reverselookup.xml
 

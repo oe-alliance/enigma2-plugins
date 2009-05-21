@@ -2,13 +2,13 @@
 # Copyright (C) 2009 THE enigma'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the enigma package.
 # Automatically generated, 2009.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-07 17:05+0200\n"
-"PO-Revision-Date: 2009-01-09 18:07+0100\n"
+"POT-Creation-Date: 2009-05-18 17:08+0200\n"
+"PO-Revision-Date: 2009-05-19 17:11+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: this is a help text, keep it short
-#, fuzzy
 msgid "About FritzCall"
-msgstr "Configuración FritzCall"
+msgstr "Sobre FritzCall"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Add entry to phonebook"
@@ -64,6 +64,9 @@ msgstr "Monitorizar llamada"
 msgid "Cancel"
 msgstr "Cancelar"
 
+msgid "Connected since"
+msgstr "Conectado desde"
+
 msgid "Connected to FRITZ!Box!"
 msgstr "Conectado a FRITZ!Box!"
 
@@ -104,8 +107,11 @@ msgstr "No puedo analizar las entradas de la agenda de FRITZ!Box"
 msgid "Country"
 msgstr "País"
 
+msgid "DECT phones registered"
+msgstr "Teléfonos DECT registrados"
+
 msgid "Debug"
-msgstr ""
+msgstr "Testear"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
@@ -115,9 +121,9 @@ msgstr "Borrar"
 msgid "Delete entry"
 msgstr "Borrar entrada"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Dialling failed - Error: %s"
-msgstr "Falló la identificación a FRITZ!Box - Error: %s"
+msgstr "Falló la llamada - Error: %s"
 
 msgid "Display FRITZ!box-Fon calls on screen"
 msgstr "Visualizar llamadas FRITZ!Box-Fon en la pantalla"
@@ -175,6 +181,11 @@ msgstr "Número de extensión para iniciar la llamada"
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "Dirección FRITZ!Box FON (Nombre o IP)"
 
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: this is a help text, keep it short
+msgid "FRITZ!Box Fon Status"
+msgstr "Estado de Fon FRITZ!Box"
+
 #, python-format
 msgid "FRITZ!Box Login failed! - Error: %s"
 msgstr "Falló la identificación a FRITZ!Box - Error: %s"
@@ -192,7 +203,7 @@ msgid "FritzCall Setup"
 msgstr "Configuración FritzCall"
 
 msgid "Full screen display"
-msgstr ""
+msgstr "Visualización a pantalla completa"
 
 msgid "Germany"
 msgstr "Alemania"
@@ -200,8 +211,14 @@ msgstr "Alemania"
 msgid "Getting calls from FRITZ!Box..."
 msgstr "Consiguiendo llamadas desde FRITZ!Box..."
 
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr "Consiguiendo estado desde Fon FRITZ!Box..."
+
 msgid "Harddisk"
 msgstr "Disco duro"
+
+msgid "IP Address:"
+msgstr "Dirección IP:"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Incoming"
@@ -239,6 +256,9 @@ msgstr "Buscar"
 msgid "MSN to show (separated by ,)"
 msgstr "MSN a mostrar (separado por ,)"
 
+msgid "Mailbox"
+msgstr "Carpeta de correo"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Perdidas"
@@ -256,17 +276,23 @@ msgstr "Nombre"
 msgid "New"
 msgstr "Nuevo"
 
+msgid "No DECT phone registered"
+msgstr "No hay teléfono DECT registrado"
+
 msgid "No entry selected"
 msgstr "No hay entrada seleccionada"
 
+msgid "No mailbox active"
+msgstr "No cuenta de correo activa"
+
 msgid "No result from LDIF"
-msgstr ""
+msgstr "No hay resultado desde LDIF"
 
 msgid "No result from Outlook export"
-msgstr ""
+msgstr "No hay resultado desde la exportación de Outlook"
 
 msgid "No result from reverse lookup"
-msgstr ""
+msgstr "No hay resultado de resolución inversa"
 
 msgid "Number"
 msgstr "Número"
@@ -274,6 +300,12 @@ msgstr "Número"
 #. TRANSLATORS: keep it short, this is a button
 msgid "OK"
 msgstr "OK"
+
+msgid "One DECT phone registered"
+msgstr "Un teléfono DECT registrado"
+
+msgid "One mailbox active"
+msgstr "Una cuenta de correo activa"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Outgoing"
@@ -319,11 +351,15 @@ msgstr "Salir"
 msgid "Read PhoneBook from FRITZ!Box"
 msgstr "Leer Agenda desde FRITZ!Box"
 
+#. TRANSLATORS: keep it short, this is a button
+msgid "Reset"
+msgstr "Resetear"
+
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Búsqueda inversa del ID llamante (seleccionar país abajo)"
 
 msgid "Reverse searching..."
-msgstr ""
+msgstr "Búsqueda inversa..."
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Save"
@@ -341,10 +377,10 @@ msgid "Search phonebook"
 msgstr "Buscar agenda"
 
 msgid "Searching in LDIF..."
-msgstr ""
+msgstr "Buscando en LDIF..."
 
 msgid "Searching in Outlook export..."
-msgstr ""
+msgstr "Buscando en la exportación de Outlook..."
 
 msgid "Shortcut"
 msgstr "Acceso rápido"
@@ -373,6 +409,14 @@ msgstr "Holanda"
 
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Tiempo cumplido para Notificaciones de Llamadas (segundos)"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle Mailbox"
+msgstr "Marcar Cuenta de Correo"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle WLAN"
+msgstr "Marcar WLAN"
 
 msgid "UNKNOWN"
 msgstr "DESCONOCIDO"
@@ -414,6 +458,9 @@ msgstr "hecho"
 msgid "done, using last list"
 msgstr "hecho, usando la última lista"
 
+msgid "encrypted"
+msgstr "encriptado"
+
 msgid "finishing"
 msgstr "terminando"
 
@@ -429,8 +476,14 @@ msgstr "identificación ok"
 msgid "login verification"
 msgstr "verificación de entrada"
 
+msgid "mailboxes active"
+msgstr "cuentas activas"
+
 msgid "mobile"
 msgstr "móvil"
+
+msgid "not encrypted"
+msgstr "no encriptado"
 
 msgid "preparing"
 msgstr "preparando"
@@ -463,7 +516,6 @@ msgstr "trabajo"
 #~ "Posición en la agenda corrupta\n"
 #~ "para el número %d\n"
 #~ "Borrando."
-
 #~ msgid ""
 #~ "Do you really want to overwrite entry for %(number)s\n"
 #~ "\n"
@@ -480,3 +532,12 @@ msgstr "trabajo"
 #~ "con\n"
 #~ "\n"
 #~ "%(newname)s?"
+
+#, fuzzy
+#~ msgid "FRITZ!Box Fon has no mailbox"
+#~ msgstr "Estado de Fon FRITZ!Box"
+#~ msgid "WLAN off"
+#~ msgstr "WLAN apagado"
+#~ msgid "WLAN on"
+#~ msgstr "WLAN encendido"
+

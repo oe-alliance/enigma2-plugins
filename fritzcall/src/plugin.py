@@ -12,12 +12,13 @@ from Screens.InputBox import InputBox #@UnresolvedImport
 from Screens import Standby #@UnresolvedImport
 from Screens.HelpMenu import HelpableScreen #@UnresolvedImport
 
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT #@UnresolvedImport
+from enigma import eTimer, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT #@UnresolvedImport
 
 from Components.MenuList import MenuList #@UnresolvedImport
 from Components.ActionMap import ActionMap #@UnresolvedImport
 from Components.Label import Label #@UnresolvedImport
 from Components.Button import Button #@UnresolvedImport
+from Components.Pixmap import Pixmap #@UnresolvedImport
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger #@UnresolvedImport
 try:
 	from Components.config import ConfigPassword
@@ -122,7 +123,7 @@ def initDebug():
 		pass
 
 class FritzAbout(Screen):
-	textFieldWidth = 250
+	textFieldWidth = scaleV(350,250)
 	width = 5 + 150 + 20 + textFieldWidth + 5 + 175 + 5
 	height = 5 + 175 + 5 + 25 + 5
 	# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
@@ -131,7 +132,7 @@ class FritzAbout(Screen):
 			<widget name="text" position="175,%d" size="%d,%d" font="Regular;%d" />
 			<ePixmap position="5,37" size="150,110" pixmap="%s" transparent="1" alphatest="blend" />
 			<ePixmap position="%d,5" size="175,175" pixmap="%s" transparent="1" alphatest="blend" />
-			<widget name="url" position="10,185" size="%d,25" font="Regular;%d" />
+			<widget name="url" position="20,185" size="%d,25" font="Regular;%d" />
 		</screen>""" % (
 						(DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, # position
 						width, height, # size
@@ -143,7 +144,7 @@ class FritzAbout(Screen):
 						resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/fritz.png"), # 150x110
 						5 + 150 + 5 + textFieldWidth + 5, # qr code horizontal offset
 						resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/website.png"), # 175x175
-						width-20, # url width
+						width-40, # url width
 						scaleV(24,21) # url font size
 						)
 
@@ -165,7 +166,6 @@ class FritzAbout(Screen):
 	def exit(self):
 		self.close()
 
-
 class FritzCallFBF:
 	def __init__(self):
 		debug("[FritzCallFBF] __init__")
@@ -175,6 +175,14 @@ class FritzCallFBF:
 		self.timestamp = 0
 		self.callList = []
 		self.callType = config.plugins.FritzCall.fbfCalls.value
+		self.hasMailbox = False
+		self.hasDect = False
+		self.getInfo(self.setProperties)
+
+	def setProperties(self, status):
+		(boxInfo, upTime, ipAddress, wlanState, wlanEncrypt, dslState, dslSpeed, tamActive, dectActive) = status #@UnusedVariable
+		self.hasMailbox = tamActive != None
+		self.hasDect = dectActive != None
 
 	def notify(self, text):
 		debug("[FritzCallFBF] notify")
@@ -379,12 +387,12 @@ class FritzCallFBF:
 			
 		callList = []
 		for line in lines:
-			# debug(line
 			# Typ;Datum;Name;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
-			found = re.match("^(" + self.callType + ");([^;]*);([^;]*);([^;]*);([^;]*);([^;]*)", line)
+			found = re.match("^(" + self.callType + ");([^;]*);([^;]*);([^;]*);([^;]*);([^;]*);([^;]*)", line)
 			if found:
 				direct = found.group(1)
 				date = found.group(2)
+				length = found.group(7)
 				remote = _resolveNumber(found.group(4))
 				if not remote and direct != FBF_OUT_CALLS and found.group(3):
 					remote = found.group(3)
@@ -403,7 +411,7 @@ class FritzCallFBF:
 						number = number[5:]
 				if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
 					number = config.plugins.FritzCall.prefix.value + number
-				callList.append((number, date, here, direct, remote))
+				callList.append((number, date, here, direct, remote, length))
 
 		# debug("[FritzCallFBF] _gotPageCalls result:\n" + text
 
@@ -499,6 +507,199 @@ class FritzCallFBF:
 		text = _("Dialling failed - Error: %s") % error
 		self.notify(text)
 
+	def changeWLAN(self, statusWLAN):
+		''' get status info from FBF '''
+		if not statusWLAN or (statusWLAN <> '1' and statusWLAN <> '0'):
+			return
+		self.statusWLAN = statusWLAN
+		self.login(self._changeWLAN)
+		
+	def _changeWLAN(self, html=None):
+		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+		parms = urlencode({
+			'getpage':'../html/de/menus/menu2.html',
+			'var:lang':'de',
+			'var:pagename':'wlan',
+			'var:menu':'wlan',
+			'wlan:settings/ap_enabled':str(self.statusWLAN),
+			})
+		debug("[FritzCallFBF] changeWLAN url: '" + url + "' parms: '" + parms + "'")
+		getPage(url,
+			method="POST",
+			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+			headers={
+					'Content-Type': "application/x-www-form-urlencoded",
+					'Content-Length': str(len(parms))},
+			postdata=parms).addCallback(self._okChangeWLAN).addErrback(self._errorChangeWLAN)
+
+	def _okChangeWLAN(self, html):
+		debug("[FritzCallFBF] okDial")
+		linkP = open("/tmp/FritzCall_okChangeWLAN.htm", "w")
+		linkP.write(html)
+		linkP.close()
+
+	def _errorChangeWLAN(self, error):
+		debug("[FritzCallFBF] _errorChangeWLAN: $s" % error)
+		linkP = open("/tmp/FritzCall_errorChangeWLAN.htm", "w")
+		linkP.write(error)
+		linkP.close()
+
+	def changeMailbox(self, statusMailbox):
+		''' switch mailbox on/off '''
+		debug("[FritzCallFBF] changeMailbox start")
+		if not statusMailbox or (statusMailbox <> '1' and statusMailbox <> '0'):
+			return
+		self.statusMailbox = statusMailbox
+		self.login(self._changeMailbox)
+		
+	def _changeMailbox(self, html=None):
+		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+		for i in ['0', '1', '2', '3', '4']:
+			parms = urlencode({
+				'tam:settings/TAM'+i+'/Active':self.statusMailbox,
+				})
+			debug("[FritzCallFBF] changeMailbox url: '" + url + "' parms: '" + parms + "'")
+			getPage(url,
+				method="POST",
+				agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+				headers={
+						'Content-Type': "application/x-www-form-urlencoded",
+						'Content-Length': str(len(parms))},
+				postdata=parms)
+
+	def getInfo(self, callback):
+		''' get status info from FBF '''
+		self.callback = callback
+		self.login(self._getInfo)
+		
+	def _getInfo(self, html=None):
+		# http://192.168.178.1/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:pagename=home&var:menu=home
+		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+		parms = urlencode({
+			'getpage':'../html/de/menus/menu2.html',
+			'var:lang':'de',
+			'var:pagename':'home',
+			'var:menu':'home'
+			})
+		debug("[FritzCallFBF] _getInfo url: '" + url + "' parms: '" + parms + "'")
+		getPage(url,
+			method="POST",
+			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+			headers={
+					'Content-Type': "application/x-www-form-urlencoded",
+					'Content-Length': str(len(parms))},
+			postdata=parms).addCallback(self._okGetInfo).addErrback(self._errorGetInfo)
+
+	def _okGetInfo(self, html):
+		def readInfo(html):
+			boxInfo = None
+			upTime = None
+			ipAddress = None
+			wlanState = None
+			wlanEncrypt = None
+			dslState = None
+			dslSpeed = None
+			tamActive = None
+			dectActive = None
+			
+			found = re.match('.*<table class="tborder" id="tProdukt">\s*<tr>\s*<td style="padding-top:2px;">([^<]*)</td>\s*<td style="padding-top:2px;text-align:right;">\s*([^\s]*)\s*</td>', html, re.S)
+			if found:
+				boxInfo = found.group(1)+ ', ' + found.group(2)
+				boxInfo = boxInfo.replace('&nbsp;',' ')
+				debug("[FritzCallFBF] _okGetInfo Boxinfo: " + boxInfo)
+			else:
+				found = re.match('.*<p class="ac">([^<]*)</p>', html, re.S)
+				if found:
+					debug("[FritzCallFBF] _okGetInfo Boxinfo: " + found.group(1))
+					boxInfo = found.group(1)
+		
+			found = re.match('.*if \(isNaN\(jetzt\)\)\s*return "";\s*var str = "([^"]*)";', html, re.S)
+			if found:
+				debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
+				upTime = found.group(1)
+			else:
+				found = re.match('.*str = g_pppSeit \+"([^<]*)<br>"\+mldIpAdr;', html, re.S)
+				if found:
+					debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
+					upTime = found.group(1)
+		
+			found = re.match(".*IpAdrDisplay\('([.\d]+)'\)", html, re.S)
+			if found:
+				debug("[FritzCallFBF] _okGetInfo IpAdrDisplay: " + found.group(1))
+				ipAddress = found.group(1)
+		
+			found = re.match('.*function WlanStateLed \(state\){.*?return StateLed\("(\d+)"\);\s*}', html, re.S)
+			if found:
+				debug("[FritzCallFBF] _okGetInfo WlanState: " + found.group(1))
+				wlanState = found.group(1)
+		
+			found = re.match('.*var (?:g_)?encryption = "(\d+)";', html, re.S)
+			if found:
+				debug("[FritzCallFBF] _okGetInfo WlanEncrypt: " + found.group(1))
+				wlanEncrypt = found.group(1)
+		
+			found = re.match('.*function DslStateDisplay \(state\){\s*var state = "(\d+)";', html, re.S)
+			if found:
+				debug("[FritzCallFBF] _okGetInfo DslState: " + found.group(1))
+				dslState = found.group(1)
+		
+			found = re.match('.*function DslStateDisplay \(state\){\s*var state = "\d+";.*?if \("3130" != "0"\) str = "([^"]*)";', html, re.S)
+			if found:
+				debug("[FritzCallFBF] _okGetInfo DslSpeed: " + found.group(1).strip())
+				dslSpeed = found.group(1).strip()
+		
+			if html.find('g_tamActive') != -1:
+				entries = re.compile('if \("1" == "1"\) {\s*g_tamActive \+= 1;\s*}', re.S).findall(html)
+				tamActive = len(entries)
+				debug("[FritzCallFBF] _okGetInfo tamActive: " + str(tamActive))
+		
+			if html.find('countDect2') != -1:
+				entries = re.compile('if \("1" == "1"\) countDect2\+\+;', re.S).findall(html)
+				dectActive = len(entries)
+				debug("[FritzCallFBF] _okGetInfo dectActive: " + str(dectActive))
+		
+			return (boxInfo, upTime, ipAddress, wlanState, wlanEncrypt, dslState, dslSpeed, tamActive, dectActive)
+
+		debug("[FritzCallFBF] _okGetInfo")
+		# linkP = open("/tmp/FritzCall_okGetInfo.htm", "w")
+		# linkP.write(html)
+		# linkP.close()
+		info = readInfo(html)
+		self.setProperties(info)
+		self.callback(readInfo(html))
+
+	def _errorGetInfo(self, error):
+		debug("[FritzCallFBF] _errorGetInfo: $s" % error)
+		# linkP = open("/tmp/FritzCall_errorGetInfo.htm", "w")
+		# linkP.write(error)
+		# linkP.close()
+
+	def reset(self):
+		self.login(self._reset)
+
+	def _reset(self, html=None):
+		# POSTDATA=getpage=../html/reboot.html&errorpage=../html/de/menus/menu2.html&var:lang=de&var:pagename=home&var:errorpagename=home&var:menu=home&var:pagemaster=&time:settings/time=1242207340%2C-120&var:tabReset=0&logic:command/reboot=../gateway/commands/saveconfig.html
+		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+		parms = urlencode({
+			'getpage':'../html/reboot.html',
+			# 'errorpage':'../html/de/menus/menu2.html',
+			'var:lang':'de',
+			'var:pagename':'reset',
+			# 'var:errorpagename':'home',
+			'var:menu':'system',
+			# 'var:pagemaster':'',
+			# 'var:tabReset':'0',
+			'logic:command/reboot':'../gateway/commands/saveconfig.html'
+			})
+		debug("[FritzCallFBF] _reset url: '" + url + "' parms: '" + parms + "'")
+		getPage(url,
+			method="POST",
+			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+			headers={
+					'Content-Type': "application/x-www-form-urlencoded",
+					'Content-Length': str(len(parms))},
+			postdata=parms)
+
 	def hangup(self):
 		''' hangup call on port; not used for now '''
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
@@ -524,8 +725,247 @@ class FritzCallFBF:
 fritzbox = FritzCallFBF()
 
 
-class FritzDisplayCalls(Screen, HelpableScreen):
+class FritzMenu(Screen):
+	def __init__(self, session):
+		fontSize = scaleV(24,21) # indeed this is font size +2
+		noButtons = 2 # reset, wlan
+		if fritzbox.hasMailbox:
+			noButtons += 1
+		width = max(DESKTOP_WIDTH - scaleH(500,250), noButtons*140+(noButtons+1)*10)
+		height = 5 + 2*fontSize + 10 + 2*fontSize + 10 + 2*fontSize + 10 + 40 + 5
+		if fritzbox.hasMailbox:
+			height += fontSize
+		if fritzbox.hasDect:
+			height += fontSize
+		buttonsGap = (width-noButtons*140)/(noButtons+1)
+		buttonsVPos = height-40-5
+		if fritzbox.hasMailbox:
+			mailboxLine = """
+				<widget name="FBFMailbox" position="%d,%d" size="%d,%d" font="Regular;%d" />
+				<widget name="mailbox_inactive" pixmap="skin_default/buttons/button_green_off.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				<widget name="mailbox_active" pixmap="skin_default/buttons/button_green.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				""" % (
+						40, 5+2*fontSize+10+4*fontSize+10, # position mailbox
+						width-40-20, fontSize, # size mailbox
+						fontSize-2,
+						20, 5+2*fontSize+10+4*fontSize+10+(fontSize-16)/2, # position button mailbox
+						20, 5+2*fontSize+10+4*fontSize+10+(fontSize-16)/2, # position button mailbox
+						noButtons*buttonsGap+(noButtons-1)*140, buttonsVPos,
+						noButtons*buttonsGap+(noButtons-1)*140, buttonsVPos,
+				)
+		else:
+			mailboxLine = ""
+		if fritzbox.hasDect: # it is assumed here, that, when DECT, then also mailbox...
+			dectLine = """
+				<widget name="FBFDect" position="%d,%d" size="%d,%d" font="Regular;%d" />
+				<widget name="dect_inactive" pixmap="skin_default/buttons/button_green_off.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				<widget name="dect_active" pixmap="skin_default/buttons/button_green.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				""" %(
+						40, 5+2*fontSize+10+5*fontSize+10, # position dect
+						width-40-20, fontSize, # size dect
+						fontSize-2,
+						20, 5+2*fontSize+10+5*fontSize+10+(fontSize-16)/2, # position button dect
+						20, 5+2*fontSize+10+5*fontSize+10+(fontSize-16)/2, # position button dect
+				)
+		else:
+			dectLine = ""
+	
+		self.skin = """
+			<screen name="FritzMenu" position="%d,%d" size="%d,%d" title="%s" >
+				<widget name="FBFInfo" position="%d,%d" size="%d,%d" font="Regular;%d" />
+				<widget name="FBFInternet" position="%d,%d" size="%d,%d" font="Regular;%d" />
+				<widget name="internet_inactive" pixmap="skin_default/buttons/button_green_off.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				<widget name="internet_active" pixmap="skin_default/buttons/button_green.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				<widget name="FBFDsl" position="%d,%d" size="%d,%d" font="Regular;%d" />
+				<widget name="dsl_inactive" pixmap="skin_default/buttons/button_green_off.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				<widget name="dsl_active" pixmap="skin_default/buttons/button_green.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				<widget name="FBFWlan" position="%d,%d" size="%d,%d" font="Regular;%d" />
+				<widget name="wlan_inactive" pixmap="skin_default/buttons/button_green_off.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				<widget name="wlan_active" pixmap="skin_default/buttons/button_green.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				%s
+				%s
+				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<widget name="key_red" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			</screen>""" % (
+						(DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, # position
+						width, height, # size
+						_("FRITZ!Box Fon Status"),
+						40, 5, # position info
+						width-2*40, 2*fontSize, # size info
+						fontSize-2,
+						40, 5+2*fontSize+10, # position internet
+						width-40, 2*fontSize, # size internet
+						fontSize-2,
+						20, 5+2*fontSize+10+(fontSize-16)/2, # position button internet
+						20, 5+2*fontSize+10+(fontSize-16)/2, # position button internet
+						40, 5+2*fontSize+10+2*fontSize+10, # position dsl
+						width-40-20, fontSize, # size dsl
+						fontSize-2,
+						20, 5+2*fontSize+10+2*fontSize+10+(fontSize-16)/2, # position button dsl
+						20, 5+2*fontSize+10+2*fontSize+10+(fontSize-16)/2, # position button dsl
+						40, 5+2*fontSize+10+3*fontSize+10, # position wlan
+						width-40-20, fontSize, # size wlan
+						fontSize-2,
+						20, 5+2*fontSize+10+3*fontSize+10+(fontSize-16)/2, # position button wlan
+						20, 5+2*fontSize+10+3*fontSize+10+(fontSize-16)/2, # position button wlan
+						mailboxLine,
+						dectLine,
+						buttonsGap, buttonsVPos, buttonsGap, buttonsVPos,
+						buttonsGap+140+buttonsGap, buttonsVPos, buttonsGap+140+buttonsGap, buttonsVPos,
+						)
 
+		Screen.__init__(self, session)
+		# TRANSLATORS: keep it short, this is a button
+		self["key_red"] = Button(_("Reset"))
+		# TRANSLATORS: keep it short, this is a button
+		self["key_green"] = Button(_("Toggle WLAN"))
+		self.mailboxActive = False
+		if fritzbox.hasMailbox:
+			# TRANSLATORS: keep it short, this is a button
+			self["key_yellow"] = Button(_("Toggle Mailbox"))
+			self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions"],
+											{
+											"cancel": self.exit,
+											"ok": self.exit,
+											"red": self.reset,
+											"green": self.toggleWlan,
+											"yellow": self.toggleMailbox,
+											}, -2)
+			self["FBFMailbox"] = Label(_('Mailbox'))
+			self["mailbox_inactive"] = Pixmap()
+			self["mailbox_active"] = Pixmap()
+			self["mailbox_active"].hide()
+		else:
+			self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions"],
+											{
+											"cancel": self.exit,
+											"ok": self.exit,
+											"red": self.toggleWlan,
+											"green": self.reset,
+											}, -2)
+		
+		self["FBFInfo"] = Label(_('Getting status from FRITZ!Box Fon...'))
+
+		self["FBFInternet"] = Label('Internet')
+		self["internet_inactive"] = Pixmap()
+		self["internet_active"] = Pixmap()
+		self["internet_active"].hide()
+
+		self["FBFDsl"] = Label('DSL')
+		self["dsl_inactive"] = Pixmap()
+		self["dsl_active"] = Pixmap()
+		self["dsl_active"].hide()
+
+		self["FBFWlan"] = Label('WLAN ')
+		self["wlan_inactive"] = Pixmap()
+		self["wlan_active"] = Pixmap()
+		self["wlan_active"].hide()
+		self.wlanActive = False
+
+		if fritzbox.hasDect: 
+			self["FBFDect"] = Label('DECT')
+			self["dect_inactive"] = Pixmap()
+			self["dect_active"] = Pixmap()
+			self["dect_active"].hide()
+
+		self.timer = eTimer()
+		self.timer.callback.append(self._getInfo)
+		self.onShown.append(lambda: self.timer.start(5000))
+		self._getInfo()
+
+	def _getInfo(self):
+		fritzbox.getInfo(self._fillMenu)
+
+	def _fillMenu(self, status):
+		(boxInfo, upTime, ipAddress, wlanState, wlanEncrypt, dslState, dslSpeed, tamActive, dectActive) = status
+		self.wlanActive = (wlanState == '1')
+		self.mailboxActive = False
+		self["FBFInfo"].setText(boxInfo.replace(', ', '\n'))
+		if ipAddress:
+			if upTime:
+				self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress + '\n' + _('Connected since') + ' ' + upTime)
+			else:
+				self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress)
+			self["internet_inactive"].hide()
+			self["internet_active"].show()
+		else:
+			self["internet_active"].hide()
+			self["internet_inactive"].show()
+		if dslState=='5':
+			self["dsl_inactive"].hide()
+			self["dsl_active"].show()
+		else:
+			self["dsl_active"].hide()
+			self["dsl_inactive"].show()
+		if dslSpeed:
+			self["FBFDsl"].setText('DSL ' + dslSpeed)
+		if wlanState=='1':
+			self["wlan_inactive"].hide()
+			self["wlan_active"].show()
+			if wlanEncrypt:
+				if wlanEncrypt=='0':
+					self["FBFWlan"].setText('WLAN ' + _('not encrypted'))
+				else:
+					self["FBFWlan"].setText('WLAN ' + _('encrypted'))
+		else:
+			self["wlan_active"].hide()
+			self["wlan_inactive"].show()
+
+		if fritzbox.hasMailbox:
+			if  not tamActive or tamActive == 0:
+				self.mailboxActive = False
+				self["mailbox_active"].hide()
+				self["mailbox_inactive"].show()
+				self["FBFMailbox"].setText(_('No mailbox active'))
+			else:
+				self.mailboxActive = True
+				self["mailbox_inactive"].hide()
+				self["mailbox_active"].show()
+				if tamActive == 1:
+					self["FBFMailbox"].setText(_('One mailbox active'))
+				else:
+					self["FBFMailbox"].setText(str(tamActive) + ' ' + _('mailboxes active'))
+
+		if fritzbox.hasDect and dectActive:
+			self["dect_inactive"].hide()
+			self["dect_active"].show()
+			if dectActive == 0:
+				self["FBFDect"].setText(_('No DECT phone registered'))
+			else:
+				if dectActive == 1:
+					self["FBFDect"].setText(_('One DECT phone registered'))
+				else:
+					self["FBFDect"].setText(str(dectActive) + ' ' + _('DECT phones registered'))
+
+	def reset(self):
+		fritzbox.reset()
+		fritzbox.getInfo(self._fillMenu)
+
+	def toggleWlan(self):
+		if self.wlanActive:
+			fritzbox.changeWLAN('0')
+		else:
+			fritzbox.changeWLAN('1')
+		fritzbox.getInfo(self._fillMenu)
+
+	def toggleMailbox(self):
+		if fritzbox.hasMailbox:
+			if self.mailboxActive:
+				fritzbox.changeMailbox('0')
+			else:
+				fritzbox.changeMailbox('1')
+			fritzbox.getInfo(self._fillMenu)
+
+	def exit(self):
+		self.timer.stop()
+		self.close()
+
+
+class FritzDisplayCalls(Screen, HelpableScreen):
 
 	def __init__(self, session, text=""):
 		if config.plugins.FritzCall.fullscreen.value:
@@ -536,6 +976,8 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
 			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1/menu/back-main.png")):
 				backMainPng = "Kerni-HD1/menu/back-main.png"
+			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
+				backMainPng = "Kerni-HD1-picon/menu/back-main.png"
 			if backMainPng:
 					backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" % (self.width, self.height, backMainPng)
 			else:
@@ -621,10 +1063,10 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 							scaleH(290, 145), scaleV(525, 395), # widget green
 							scaleH(560, 285), scaleV(525, 395), # widget yellow
 							scaleH(830, 425), scaleV(525, 395), # widget blue
-							scaleH(20, 5), scaleV(525, 395), scaleV(24, 21), # widget red
-							scaleH(290, 145), scaleV(525, 395), scaleV(24, 21), # widget green
-							scaleH(560, 285), scaleV(525, 395), scaleV(24, 21), # widget yellow
-							scaleH(830, 425), scaleV(525, 395), scaleV(24, 21), # widget blue
+							scaleH(20, 5), scaleV(525, 395), scaleV(22, 21), # widget red
+							scaleH(290, 145), scaleV(525, 395), scaleV(22, 21), # widget green
+							scaleH(560, 285), scaleV(525, 395), scaleV(22, 21), # widget yellow
+							scaleH(830, 425), scaleV(525, 395), scaleV(22, 21), # widget blue
 														)
 
 		Screen.__init__(self, session)
@@ -701,7 +1143,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		debug("[FritzDisplayCalls] gotCalls")
 		self.updateStatus(self.header + " (" + str(len(callList)) + ")")
 		sortlist = []
-		for (number, date, remote, direct, here) in callList:
+		for (number, date, remote, direct, here, length) in callList:
 			found = re.match("(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
 			if found: date = found.group(1) + found.group(2)
 			if direct == FBF_OUT_CALLS:
@@ -712,15 +1154,17 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				dir = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callinfailed.png"))
 			dateFieldWidth = scaleH(150,100)
 			dirFieldWidth = 16
+			lengthFieldWidth = scaleH(75,50)
 			remoteFieldWidth = scaleH(250,100)
 			scrollbarWidth = scaleH(90,45)
-			fieldWidth = self.width -dateFieldWidth -5 -dirFieldWidth -5 -remoteFieldWidth -scrollbarWidth -5
+			fieldWidth = self.width -dateFieldWidth -5 -dirFieldWidth -5 -lengthFieldWidth -5 -remoteFieldWidth -scrollbarWidth -5
 			# debug("[FritzDisplayCalls] gotCalls: d: %d; f: %d; d: %d; r: %d" %(dateFieldWidth, fieldWidth, dirFieldWidth, remoteFieldWidth))
 			sortlist.append([number,
 							 (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, dateFieldWidth, scaleV(24,20), 0, RT_HALIGN_LEFT, date),
 							 (eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, dateFieldWidth+5, 0, dirFieldWidth, 16, dir),
 							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5, 0, fieldWidth, scaleV(24,20), 0, RT_HALIGN_LEFT, here),
-							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5, 0, remoteFieldWidth, scaleV(24,20), 0, RT_HALIGN_RIGHT, remote)
+							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5, 0, lengthFieldWidth, scaleV(24,20), 0, RT_HALIGN_LEFT, length),
+							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5+lengthFieldWidth+5, 0, remoteFieldWidth, scaleV(24,20), 0, RT_HALIGN_RIGHT, remote)
 							 ])
 
 		self["entries"].setList(sortlist)
@@ -1015,6 +1459,8 @@ class FritzCallPhonebook:
 					backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
 				elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1/menu/back-main.png")):
 					backMainPng = "Kerni-HD1/menu/back-main.png"
+				elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
+					backMainPng = "Kerni-HD1-picon/menu/back-main.png"
 				if backMainPng:
 					backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" % (self.width, self.height, backMainPng)
 				else:
@@ -1091,10 +1537,10 @@ class FritzCallPhonebook:
 							scaleH(290, 145), scaleV(525, 395), # ePixmap green
 							scaleH(560, 285), scaleV(525, 395), # ePixmap yellow
 							scaleH(830, 425), scaleV(525, 395), # ePixmap blue
-							scaleH(20, 5), scaleV(525, 395), scaleV(24, 21), # widget red
-							scaleH(290, 145), scaleV(525, 395), scaleV(24, 21), # widget green
-							scaleH(560, 285), scaleV(525, 395), scaleV(24, 21), # widget yellow
-							scaleH(830, 425), scaleV(525, 395), scaleV(24, 21), # widget blue
+							scaleH(20, 5), scaleV(525, 395), scaleV(22, 21), # widget red
+							scaleH(290, 145), scaleV(525, 395), scaleV(22, 21), # widget green
+							scaleH(560, 285), scaleV(525, 395), scaleV(22, 21), # widget yellow
+							scaleH(830, 425), scaleV(525, 395), scaleV(22, 21), # widget blue
 							)
 	
 			Screen.__init__(self, session)
@@ -1356,6 +1802,8 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 				backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
 			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1/menu/back-main.png")):
 				backMainPng = "Kerni-HD1/menu/back-main.png"
+			elif os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, "Kerni-HD1-picon/menu/back-main.png")):
+				backMainPng = "Kerni-HD1-picon/menu/back-main.png"
 			if backMainPng:
 				backMainLine = """<ePixmap position="0,0" zPosition="-10" size="%d,%d" pixmap="%s" transparent="1" />""" % (self.width, self.height, backMainPng)
 			else:
@@ -1380,6 +1828,8 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 					<ePixmap pixmap="skin_default/buttons/green.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
 					<ePixmap pixmap="skin_default/buttons/yellow.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
 					<ePixmap pixmap="skin_default/buttons/blue.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+					<ePixmap pixmap="skin_default/buttons/key_info.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
+					<ePixmap pixmap="skin_default/buttons/key_menu.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
 					<widget name="key_red" position="%d,%d" 		size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
 					<widget name="key_green"  position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
 					<widget name="key_yellow" position="%d,%d" 	size="%d,%d" zPosition="1" font="Regular;%d" halign="left" backgroundColor="black" transparent="1" />
@@ -1393,18 +1843,21 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 								_("FritzCall Setup"), scaleH(500, XXX), scaleV(63, XXX), scaleH(330, XXX), scaleV(30, XXX), scaleV(27, XXX), # eLabel
 								scaleH(80, XXX), scaleV(150, XXX), scaleH(250, XXX), scaleV(200, XXX), scaleV(22, XXX), # consideration
 								scaleH(420, XXX), scaleV(125, XXX), scaleH(790, XXX), scaleV(428, XXX), # config
-								scaleH(450, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # red
-								scaleH(640, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # green
-								scaleH(830, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # yellow
-								scaleH(1020, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # blue
-								scaleH(480, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # red
-								scaleH(670, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # green
-								scaleH(860, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # yellow
-								scaleH(1050, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # blue
+								scaleH(150, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # red
+								scaleH(350, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # green
+								scaleH(550, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # yellow
+								scaleH(750, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # blue
+								scaleH(1050, XXX), scaleV(586, XXX), scaleH(35, XXX), scaleV(24, XXX), # info
+								scaleH(1150, XXX), scaleV(586, XXX), scaleH(35, XXX), scaleV(24, XXX), # menu
+								scaleH(175, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # red
+								scaleH(375, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # green
+								scaleH(575, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # yellow
+								scaleH(775, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # blue
 								scaleH(120, XXX), scaleV(430, XXX), scaleH(150, XXX), scaleV(110, XXX), resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/fritz.png") # Fritz Logo size and pixmap
 																) 
 		else:
-			self.width = scaleH(1100, 570)
+			self.width = scaleH(20+4*(140+90)+2*(35+40)+20, 4*140+2*35)
+			width = self.width
 			debug("[FritzCallSetup] width: " + str(self.width))
 			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.skin = """
@@ -1422,30 +1875,34 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 				<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_blue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<ePixmap position="%d,%d" zPosition="4" size="35,25" pixmap="skin_default/buttons/key_info.png" transparent="1" alphatest="on" />
+				<ePixmap position="%d,%d" zPosition="4" size="35,25" pixmap="skin_default/buttons/key_menu.png" transparent="1" alphatest="on" />
 				</screen>""" % (
-							scaleH(90, 75), scaleV(100, 73), # position 
-							scaleH(1100, 570), scaleV(560, 430), # size
+							(DESKTOP_WIDTH-width)/2, scaleV(100, 73), # position 
+							width, scaleV(560, 430), # size
 							_("FritzCall Setup") + 
 							" (" + "$Revision$"[1: - 1] + 
 							"$Date$"[7:23] + ")",
-							scaleH(1100, 570), # eLabel width
+							width, # eLabel width
 							scaleH(40, 20), scaleV(10, 5), # consideration position
-							scaleH(1050, 530), scaleV(25, 45), # consideration size
+							scaleH(width-80, width-40), scaleV(25, 45), # consideration size
 							scaleV(22, 20), # consideration font size
 							scaleV(40, 50), # eLabel position vertical
-							scaleH(1100, 570), # eLabel width
+							width, # eLabel width
 							scaleH(40, 5), scaleV(60, 57), # config position
-							scaleH(1040, 560), scaleV(453, 328), # config size
+							scaleH(width-80, width-10), scaleV(453, 328), # config size
 							scaleV(518, 390), # eLabel position vertical
-							scaleH(1100, 570), # eLabel width
-							scaleH(20, 5), scaleV(525, 395), # widget red
-							scaleH(290, 145), scaleV(525, 395), # widget green
-							scaleH(560, 285), scaleV(525, 395), # widget yellow
-							scaleH(830, 425), scaleV(525, 395), # widget blue
-							scaleH(20, 5), scaleV(525, 395), scaleV(24, 21), # widget red
-							scaleH(290, 145), scaleV(525, 395), scaleV(24, 21), # widget green
-							scaleH(560, 285), scaleV(525, 395), scaleV(24, 21), # widget yellow
-							scaleH(830, 425), scaleV(525, 395), scaleV(24, 21), # widget blue
+							width, # eLabel width
+							scaleH(20, 0), scaleV(525, 395), # pixmap red
+							scaleH(20+140+90, 140), scaleV(525, 395), # pixmap green
+							scaleH(20+2*(140+90), 2*140), scaleV(525, 395), # pixmap yellow
+							scaleH(20+3*(140+90), 3*140), scaleV(525, 395), # pixmap blue
+							scaleH(20, 0), scaleV(525, 395), scaleV(21, 21), # pixmap red
+							scaleH(20+(140+90), 140), scaleV(525, 395), scaleV(21, 21), # widget green
+							scaleH(20+2*(140+90), 2*140), scaleV(525, 395), scaleV(21, 21), # widget yellow
+							scaleH(20+3*(140+90), 3*140), scaleV(525, 395), scaleV(21, 21), # widget blue
+							scaleH(20+4*(140+90), 4*140), scaleV(532, 402), # button info
+							scaleH(20+4*(140+90)+(35+40), 4*140+35), scaleV(532, 402) # button menu
 														)
 
 		Screen.__init__(self, session)
@@ -1464,26 +1921,23 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		self["key_yellow"] = Button(_("Phone calls"))
 		# TRANSLATORS: keep it short, this is a button
 		self["key_blue"] = Button(_("Phonebook"))
+		# TRANSLATORS: keep it short, this is a button
+		self["key_info"] = Button(_("About FritzCall"))
+		# TRANSLATORS: keep it short, this is a button
+		self["key_menu"] = Button(_("FRITZ!Box Fon Status"))
 
-		self["setupActions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
+		self["setupActions"] = ActionMap(["ColorActions", "OkCancelActions", "MenuActions", "EPGSelectActions"],
 		{
 			"red": self.cancel,
 			"green": self.save,
 			"yellow": self.displayCalls,
 			"blue": self.displayPhonebook,
 			"cancel": self.cancel,
-			"save": self.save,
 			"ok": self.save,
-			"menu": self.about,
+			"menu": self.menu,
 			"info": self.about,
 		}, - 2)
 
-		# TRANSLATORS: this is a help text, keep it short
-		self.helpList.append((self["setupActions"], "SetupActions", [("ok", _("save and quit"))]))
-		# TRANSLATORS: this is a help text, keep it short
-		self.helpList.append((self["setupActions"], "SetupActions", [("save", _("save and quit"))]))
-		# TRANSLATORS: this is a help text, keep it short
-		self.helpList.append((self["setupActions"], "SetupActions", [("cancel", _("quit"))]))
 		# TRANSLATORS: this is a help text, keep it short
 		self.helpList.append((self["setupActions"], "ColorActions", [("red", _("quit"))]))
 		# TRANSLATORS: this is a help text, keep it short
@@ -1493,9 +1947,13 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		# TRANSLATORS: this is a help text, keep it short
 		self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("display phonebook"))]))
 		# TRANSLATORS: this is a help text, keep it short
-		self.helpList.append((self["setupActions"], "MenuActions", [("info", _("About FritzCall"))]))
+		self.helpList.append((self["setupActions"], "OkCancelActions", [("ok", _("save and quit"))]))
 		# TRANSLATORS: this is a help text, keep it short
-		self.helpList.append((self["setupActions"], "MenuActions", [("menu", _("About FritzCall"))]))
+		self.helpList.append((self["setupActions"], "OkCancelActions", [("cancel", _("quit"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "MenuActions", [("menu", _("FRITZ!Box Fon Status"))]))
+		# TRANSLATORS: this is a help text, keep it short
+		self.helpList.append((self["setupActions"], "EPGSelectActions", [("info", _("About FritzCall"))]))
 
 		ConfigListScreen.__init__(self, self.list, session=session)
 		self.createSetup()
@@ -1578,6 +2036,8 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 	def about(self):
 		self.session.open(FritzAbout)
 
+	def menu(self):
+		self.session.open(FritzMenu)
 
 standbyMode = False
 
@@ -1864,6 +2324,9 @@ def displayCalls(session, servicelist=None):
 def displayPhonebook(session, servicelist=None):
 	session.open(phonebook.FritzDisplayPhonebook)
 
+def displayFBFStatus(session, servicelist=None):
+	session.open(FritzMenu)
+
 def main(session):
 	session.open(FritzCallSetup)
 
@@ -1889,7 +2352,9 @@ def Plugins(**kwargs):
 	what = _("Display FRITZ!box-Fon calls on screen")
 	what_calls = _("Phone calls")
 	what_phonebook = _("Phonebook")
+	what_status = _("FRITZ!Box Fon Status")
 	return [ PluginDescriptor(name="FritzCall", description=what, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main),
 		PluginDescriptor(name=what_calls, description=what_calls, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayCalls),
 		PluginDescriptor(name=what_phonebook, description=what_phonebook, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayPhonebook),
+		PluginDescriptor(name=what_status, description=what_status, where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=displayFBFStatus),
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart) ]

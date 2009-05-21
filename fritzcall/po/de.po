@@ -7,14 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-02 20:12+0200\n"
-"PO-Revision-Date: 2009-04-02 20:24+0200\n"
+"POT-Creation-Date: 2009-05-18 17:08+0200\n"
+"PO-Revision-Date: 2009-05-18 21:48+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: this is a help text, keep it short
 msgid "About FritzCall"
 msgstr "FritzCall Plugin"
@@ -62,6 +63,9 @@ msgstr "Anrufanzeige"
 msgid "Cancel"
 msgstr "Abbruch"
 
+msgid "Connected since"
+msgstr "Verbunden seit"
+
 msgid "Connected to FRITZ!Box!"
 msgstr "Verbunden mit FRITZ!Box!"
 
@@ -101,6 +105,9 @@ msgstr "Konnte Eintrag in FRITZ!Box-Telefonbuch nicht lesen"
 
 msgid "Country"
 msgstr "Land"
+
+msgid "DECT phones registered"
+msgstr "Schnurlostelefone angemeldet"
 
 msgid "Debug"
 msgstr "Debug"
@@ -173,6 +180,11 @@ msgstr "Nebenstelle für Anrufe"
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
 
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: this is a help text, keep it short
+msgid "FRITZ!Box Fon Status"
+msgstr "FRITZ!Box Fon Status"
+
 #, python-format
 msgid "FRITZ!Box Login failed! - Error: %s"
 msgstr "FRITZ!Box Login fehlgeschlagen! - Fehler: %s"
@@ -198,8 +210,14 @@ msgstr "Deutschland"
 msgid "Getting calls from FRITZ!Box..."
 msgstr "Hole Liste der Anrufe von der FRITZ!Box..."
 
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr "Hole Status von der FRITZ!Box..."
+
 msgid "Harddisk"
 msgstr "Festplatte"
+
+msgid "IP Address:"
+msgstr "IP Adresse:"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Incoming"
@@ -237,6 +255,9 @@ msgstr "Suchen"
 msgid "MSN to show (separated by ,)"
 msgstr "anzuzeigende MSNs (getrennt durch ,)"
 
+msgid "Mailbox"
+msgstr "Anrufbeantworter"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Verpasst"
@@ -254,8 +275,14 @@ msgstr "Name"
 msgid "New"
 msgstr "Neu"
 
+msgid "No DECT phone registered"
+msgstr "Kein Schnurlostelefon angemeldet"
+
 msgid "No entry selected"
 msgstr "Kein Eintrag ausgewählt"
+
+msgid "No mailbox active"
+msgstr "Kein Anrufbeantworter aktiv"
 
 msgid "No result from LDIF"
 msgstr "Kein Ergebnis von LDIF"
@@ -272,6 +299,12 @@ msgstr "Nummer"
 #. TRANSLATORS: keep it short, this is a button
 msgid "OK"
 msgstr "OK"
+
+msgid "One DECT phone registered"
+msgstr "Ein Schnurlostelefon angemeldet"
+
+msgid "One mailbox active"
+msgstr "Ein Anrufbeantworter aktiv"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Outgoing"
@@ -316,6 +349,10 @@ msgstr "Beenden"
 
 msgid "Read PhoneBook from FRITZ!Box"
 msgstr "Telefonbuch der FRITZ!Box auslesen"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Reset"
+msgstr "Reset"
 
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Rückwärtssuche (bitte Land auswählen)"
@@ -372,6 +409,15 @@ msgstr "Niederlande"
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Anzeigedauer in Sekunden"
 
+# Toggle
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle Mailbox"
+msgstr "Toggle AB"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle WLAN"
+msgstr "Toggle WLAN"
+
 msgid "UNKNOWN"
 msgstr "UNBEKANNT"
 
@@ -415,6 +461,9 @@ msgstr "fertig"
 msgid "done, using last list"
 msgstr "fertig, benutze letzte Liste"
 
+msgid "encrypted"
+msgstr "verschlüsselt"
+
 msgid "finishing"
 msgstr "Fertigstellung"
 
@@ -430,8 +479,14 @@ msgstr "Login OK"
 msgid "login verification"
 msgstr "Login Verifikation"
 
+msgid "mailboxes active"
+msgstr "Anrufbeantworter aktiv"
+
 msgid "mobile"
 msgstr "Handy"
+
+msgid "not encrypted"
+msgstr "nicht verschlüsselt"
 
 msgid "preparing"
 msgstr "Vorbereitung"

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-07 17:05+0200\n"
-"PO-Revision-Date: 2009-04-20 02:00+0200\n"
+"POT-Creation-Date: 2009-05-18 17:08+0200\n"
+"PO-Revision-Date: 2009-05-20 17:25+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "MIME-Version: 1.0\n"
@@ -14,9 +14,10 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: this is a help text, keep it short
 msgid "About FritzCall"
-msgstr "FritzCall Hakkında"
+msgstr "FritzCall hakkında"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Add entry to phonebook"
@@ -61,6 +62,9 @@ msgstr "Çağrı görüntüleme"
 msgid "Cancel"
 msgstr "Vazgeç"
 
+msgid "Connected since"
+msgstr "Bağlanılan saat"
+
 msgid "Connected to FRITZ!Box!"
 msgstr "FRITZ!Box'a bağlanıldı!"
 
@@ -100,6 +104,9 @@ msgstr "FRITZ!Box rehber kaydı ayrıştırılamıyor"
 
 msgid "Country"
 msgstr "Ülke"
+
+msgid "DECT phones registered"
+msgstr "DECT telefon tanıtılmış"
 
 msgid "Debug"
 msgstr "Hata ayıklama"
@@ -172,6 +179,11 @@ msgstr "Dış hatta ulaşmak için çevrilen numara"
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box adresi (isim yada IP)"
 
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: this is a help text, keep it short
+msgid "FRITZ!Box Fon Status"
+msgstr "FRITZ!Box Fon Durumu"
+
 #, python-format
 msgid "FRITZ!Box Login failed! - Error: %s"
 msgstr "FRITZ!Box oturumu başlatılamadı! - Hata: %s"
@@ -197,8 +209,14 @@ msgstr "Almanya"
 msgid "Getting calls from FRITZ!Box..."
 msgstr "Aramalar FRITZ!Box'tan alınıyor..."
 
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr "Durum bilgisi FRITZ!Box'tan alınıyor..."
+
 msgid "Harddisk"
 msgstr "Sabit disk"
+
+msgid "IP Address:"
+msgstr "IP Adresi:"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Incoming"
@@ -236,6 +254,9 @@ msgstr "Sorgula"
 msgid "MSN to show (separated by ,)"
 msgstr "MSN göster (virgülle ayrılmış)"
 
+msgid "Mailbox"
+msgstr "Posta kutusu"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Cevapsız"
@@ -253,8 +274,14 @@ msgstr "Ad"
 msgid "New"
 msgstr "Yeni"
 
+msgid "No DECT phone registered"
+msgstr "DECT telefon tanıtılmamış"
+
 msgid "No entry selected"
 msgstr "Seçim yapılmadı"
+
+msgid "No mailbox active"
+msgstr "Etkin posta kutusu yok"
 
 msgid "No result from LDIF"
 msgstr "LDIF içeriğinde sonuç bulunamadı"
@@ -271,6 +298,12 @@ msgstr "Numara"
 #. TRANSLATORS: keep it short, this is a button
 msgid "OK"
 msgstr "Tamam"
+
+msgid "One DECT phone registered"
+msgstr "Bir DECT telefon tanıtılmış"
+
+msgid "One mailbox active"
+msgstr "Bir posta kutusu etkin"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Outgoing"
@@ -315,6 +348,10 @@ msgstr "Çık"
 
 msgid "Read PhoneBook from FRITZ!Box"
 msgstr "FRITZ!Box telefon rehberini oku"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Reset"
+msgstr "Sıfırla"
 
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Arayan kimliğini hizmet sağlayıcıdan sorgula (ülke seçin)"
@@ -371,6 +408,14 @@ msgstr "Hollanda"
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Arama uyarıları için zaman aşımı süresi (saniye)"
 
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle Mailbox"
+msgstr "Posta kutusu aç/kapat"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle WLAN"
+msgstr "WLAN aç/kapat"
+
 msgid "UNKNOWN"
 msgstr "BİLİNMİYOR"
 
@@ -411,6 +456,9 @@ msgstr "tamamlandı"
 msgid "done, using last list"
 msgstr "tamamlandı, son liste kullanıyor"
 
+msgid "encrypted"
+msgstr "şifrelenmiş"
+
 msgid "finishing"
 msgstr "sonlandırılıyor"
 
@@ -426,8 +474,14 @@ msgstr "oturum açıldı"
 msgid "login verification"
 msgstr "oturum doğrulama"
 
+msgid "mailboxes active"
+msgstr "posta kutusu etkin"
+
 msgid "mobile"
 msgstr "cep"
+
+msgid "not encrypted"
+msgstr "şifrelenmemiş"
 
 msgid "preparing"
 msgstr "hazırlanıyor"
@@ -453,6 +507,28 @@ msgid "work"
 msgstr "iş"
 
 #~ msgid ""
+#~ "Call\n"
+#~ "\n"
+#~ "%s(number)\n"
+#~ "\n"
+#~ "%s(name)?"
+#~ msgstr ""
+#~ "%s(number)\n"
+#~ "\n"
+#~ "%s(name)\n"
+#~ "\n"
+#~ "aransın mı?"
+#~ msgid "Can't create PhoneBook.txt"
+#~ msgstr "PhoneBook.txt oluşturulamıyor"
+#~ msgid ""
+#~ "Corrupt phonebook entry\n"
+#~ "for number %d\n"
+#~ "Deleting."
+#~ msgstr ""
+#~ "%d numaralı\n"
+#~ "bozuk rehber kaydı\n"
+#~ "siliniyor."
+#~ msgid ""
 #~ "Do you really want to overwrite entry for %(number)s\n"
 #~ "\n"
 #~ "%(name)s\n"
@@ -468,26 +544,6 @@ msgstr "iş"
 #~ "%(newname)s olarak\n"
 #~ "\n"
 #~ "değiştirmek istiyor musunuz?"
-#~ msgid ""
-#~ "Corrupt phonebook entry\n"
-#~ "for number %d\n"
-#~ "Deleting."
-#~ msgstr ""
-#~ "%d numaralı\n"
-#~ "bozuk rehber kaydı\n"
-#~ "siliniyor."
-#~ msgid ""
-#~ "Call\n"
-#~ "\n"
-#~ "%s(number)\n"
-#~ "\n"
-#~ "%s(name)?"
-#~ msgstr ""
-#~ "%s(number)\n"
-#~ "\n"
-#~ "%s(name)\n"
-#~ "\n"
-#~ "aransın mı?"
 #~ msgid ""
 #~ "Do you want to add a phonebook entry\n"
 #~ "\n"
@@ -512,14 +568,6 @@ msgstr "iş"
 #~ "%s kaydını\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
-#~ msgid "Reverse lookup for "
-#~ msgstr "Hizmet sağlayıcıdan isim sorgula : "
-#~ msgid "Reverse lookup not successful"
-#~ msgstr "İsim sorgulama başarısız"
-#~ msgid "Reverse lookup successful"
-#~ msgstr "İsim sorgulama başarılı"
-#~ msgid "Can't create PhoneBook.txt"
-#~ msgstr "PhoneBook.txt oluşturulamıyor"
 
 #, fuzzy
 #~ msgid ""
@@ -532,4 +580,18 @@ msgstr "iş"
 #~ "rehbere eklemek istiyor musunuz?"
 #~ msgid "Edit phonebook entry"
 #~ msgstr "Rehber kaydını düzelt"
+
+#, fuzzy
+#~ msgid "FRITZ!Box Fon has no mailbox"
+#~ msgstr "FRITZ!Box Fon Durumu"
+#~ msgid "Reverse lookup for "
+#~ msgstr "Hizmet sağlayıcıdan isim sorgula : "
+#~ msgid "Reverse lookup not successful"
+#~ msgstr "İsim sorgulama başarısız"
+#~ msgid "Reverse lookup successful"
+#~ msgstr "İsim sorgulama başarılı"
+#~ msgid "WLAN off"
+#~ msgstr "WLAN kapat"
+#~ msgid "WLAN on"
+#~ msgstr "WLAN aç"
 

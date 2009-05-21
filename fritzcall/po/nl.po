@@ -1,25 +1,26 @@
-# translation of nl.po to gerrit
+# translation of nl.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# gerrit <gerrit@nedlinux.nl>, 2008.
+# gerrit <gerrit@nedlinux.nl>, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-07 17:05+0200\n"
-"PO-Revision-Date: 2009-01-31 10:55+0100\n"
-"Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
-"Language-Team: gerrit <fy@li.org>\n"
+"POT-Creation-Date: 2009-05-18 17:08+0200\n"
+"PO-Revision-Date: 2009-05-19 17:58+0200\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: this is a help text, keep it short
-#, fuzzy
 msgid "About FritzCall"
-msgstr "Setup Fritzcall"
+msgstr "Over FritzCall"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Add entry to phonebook"
@@ -30,16 +31,16 @@ msgid "All"
 msgstr "Alles"
 
 msgid "All calls"
-msgstr "Alle telefoontjes"
+msgstr "Alle oproepen"
 
 msgid "Append shortcut number"
-msgstr "Snelkiesnummer toewijzen"
+msgstr "Snelkiesnummer toevoegen"
 
 msgid "Append type of number"
-msgstr "Nummersoort toewijzen"
+msgstr "Nummersoort toevoegen"
 
 msgid "Append vanity name"
-msgstr "Alias toewijzen"
+msgstr "Alias toevoegen"
 
 msgid "Areacode to add to Outgoing Calls (if necessary)"
 msgstr "Netnummer bij uitgaande gesprekken  (indien nodig)"
@@ -63,6 +64,9 @@ msgstr "Gespreksmonitoring"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
 msgstr "Annuleren"
+
+msgid "Connected since"
+msgstr "Verbonden sinds"
 
 msgid "Connected to FRITZ!Box!"
 msgstr "Verbonden met Fritzbox"
@@ -104,8 +108,11 @@ msgstr "Fout bij het verwerken van een FRITZ!Box telefoonboek regel"
 msgid "Country"
 msgstr "Land"
 
+msgid "DECT phones registered"
+msgstr "geregistreerde DECT telefoons"
+
 msgid "Debug"
-msgstr ""
+msgstr "Debug"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
@@ -120,7 +127,7 @@ msgid "Dialling failed - Error: %s"
 msgstr "FRITZ!Box Login mislukt! - Error: %s"
 
 msgid "Display FRITZ!box-Fon calls on screen"
-msgstr "Laat FRITZ!Box-Fon gesprekken op het scherm zien"
+msgstr "Laat FRITZ!Box gesprekken op het scherm zien"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Display all calls"
@@ -139,7 +146,7 @@ msgid "Display outgoing calls"
 msgstr "Laat uitgaande gesprekken zien"
 
 msgid "Do what?"
-msgstr "Wat nu te doen..."
+msgstr "Wat te doen..."
 
 #, python-format
 msgid ""
@@ -161,7 +168,7 @@ msgstr "Bewerken"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "Edit selected entry"
-msgstr "Gesel. regels bewerken"
+msgstr "Gesel. regel bewerken"
 
 msgid "Enter Search Terms"
 msgstr "Geef de zoekterm in"
@@ -173,7 +180,12 @@ msgid "Extension number to initiate call on"
 msgstr "Voorkies nummer voor een telefoonoproep"
 
 msgid "FRITZ!Box FON address (Name or IP)"
-msgstr "FRITZ!Box FON adres (Naam of IP)"
+msgstr "FRITZ!Box adres (Naam of IP)"
+
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: this is a help text, keep it short
+msgid "FRITZ!Box Fon Status"
+msgstr "FRITZ!Box Status"
 
 #, python-format
 msgid "FRITZ!Box Login failed! - Error: %s"
@@ -192,16 +204,22 @@ msgid "FritzCall Setup"
 msgstr "Setup Fritzcall"
 
 msgid "Full screen display"
-msgstr ""
+msgstr "Volledig scherm"
 
 msgid "Germany"
 msgstr "Duitsland"
 
 msgid "Getting calls from FRITZ!Box..."
-msgstr "Ontvangt een gesprek van de FRITZ!Box..."
+msgstr "Ontvangt gesprekken van de FRITZ!Box..."
+
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr "Ophalen van status van de FRITZ!Box..."
 
 msgid "Harddisk"
 msgstr "Harde schijf"
+
+msgid "IP Address:"
+msgstr "IP Adres:"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Incoming"
@@ -239,6 +257,9 @@ msgstr "Zoek"
 msgid "MSN to show (separated by ,)"
 msgstr "Laat MSN zien (door een komma gescheiden)"
 
+msgid "Mailbox"
+msgstr "Mailbox"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Gemist"
@@ -256,17 +277,23 @@ msgstr "Naam"
 msgid "New"
 msgstr "Nieuw"
 
+msgid "No DECT phone registered"
+msgstr "Geen DECT telefoon geregistreerd"
+
 msgid "No entry selected"
 msgstr "Geen regel geselecteerd"
 
+msgid "No mailbox active"
+msgstr "Geen mailbox actief"
+
 msgid "No result from LDIF"
-msgstr ""
+msgstr "Geen resultaat uit LDIF"
 
 msgid "No result from Outlook export"
-msgstr ""
+msgstr "Geen Resultaat van Outlook export"
 
 msgid "No result from reverse lookup"
-msgstr ""
+msgstr "Geen resultaat uit omgekeerd zoeken"
 
 msgid "Number"
 msgstr "Nummer"
@@ -274,6 +301,12 @@ msgstr "Nummer"
 #. TRANSLATORS: keep it short, this is a button
 msgid "OK"
 msgstr "Ok"
+
+msgid "One DECT phone registered"
+msgstr "Eén DECT telefoon geregistreerd"
+
+msgid "One mailbox active"
+msgstr "Eén mailbox actief"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Outgoing"
@@ -319,11 +352,15 @@ msgstr "Afbreken"
 msgid "Read PhoneBook from FRITZ!Box"
 msgstr "Lees telefoonboek van FRITZ!Box"
 
+#. TRANSLATORS: keep it short, this is a button
+msgid "Reset"
+msgstr "Reset"
+
 msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Omgekeerd zoeken van een beller ID"
+msgstr "Omgekeerd zoeken van een beller ID (select land hieronder)"
 
 msgid "Reverse searching..."
-msgstr ""
+msgstr "Zoekt omgekeerd..."
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Save"
@@ -341,10 +378,10 @@ msgid "Search phonebook"
 msgstr "Doorzoek het telefoonboek"
 
 msgid "Searching in LDIF..."
-msgstr ""
+msgstr "Zoekt in LDIF..."
 
 msgid "Searching in Outlook export..."
-msgstr ""
+msgstr "Zoekt in Outlook export..."
 
 msgid "Shortcut"
 msgstr "Snelkoppeling"
@@ -373,6 +410,14 @@ msgstr "Nederland"
 
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Timeout voor gespreksnotificatie (seconden)"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle Mailbox"
+msgstr "Mailbox Aan/Uit"
+
+#. TRANSLATORS: keep it short, this is a button
+msgid "Toggle WLAN"
+msgstr "WLAN Aan/Uit"
 
 msgid "UNKNOWN"
 msgstr "ONBEKEND"
@@ -404,11 +449,11 @@ msgstr ""
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "display calls"
-msgstr "laat de gesprekken zien"
+msgstr "Toon gesprekken"
 
 #. TRANSLATORS: this is a help text, keep it short
 msgid "display phonebook"
-msgstr "laat het telefoonboek zien"
+msgstr "Toon telefoonboek"
 
 msgid "done"
 msgstr "klaar"
@@ -416,8 +461,11 @@ msgstr "klaar"
 msgid "done, using last list"
 msgstr "klaar, gebruikt nu de laatste lijst"
 
+msgid "encrypted"
+msgstr "gecodeerd"
+
 msgid "finishing"
-msgstr "beëindigen"
+msgstr "wordt beëindigd"
 
 msgid "home"
 msgstr "home"
@@ -431,8 +479,14 @@ msgstr "login ok"
 msgid "login verification"
 msgstr "login verificatie"
 
+msgid "mailboxes active"
+msgstr "mailboxen actief"
+
 msgid "mobile"
 msgstr "mobiel"
+
+msgid "not encrypted"
+msgstr "ongecodeerd "
 
 msgid "preparing"
 msgstr "aan het voorbereiden"
@@ -452,25 +506,8 @@ msgid "show each call"
 msgstr "alle gesprekken tonen"
 
 msgid "show nothing"
-msgstr "laat niets zien"
+msgstr "niets weergeven"
 
 msgid "work"
 msgstr "werk"
 
-#~ msgid ""
-#~ "Do you really want to overwrite entry for %(number)s\n"
-#~ "\n"
-#~ "%(name)s\n"
-#~ "\n"
-#~ "with\n"
-#~ "\n"
-#~ "%(newname)s?"
-#~ msgstr ""
-#~ "Wilt u echt onderstaande regel overschrijven\n"
-#~ "%(number)s\n"
-#~ "\n"
-#~ "%(name)s\n"
-#~ "\n"
-#~ "met\n"
-#~ "\n"
-#~ "%(newname)s"

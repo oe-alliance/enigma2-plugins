@@ -11,7 +11,7 @@ from twisted.web.client import getPage #@UnresolvedImport
 from twisted.internet import reactor #@UnresolvedImport
 
 try:
-	from . import debug
+	from . import debug #@UnresolvedImport
 	def setDebug(what):
 		pass
 except ValueError:
@@ -160,6 +160,12 @@ class ReverseLookupAndNotifier:
 
 		self.countrycode = countrycode
 
+		if re.match('^\+', self.number):
+			self.number = '00' + self.number[1:]
+
+		if self.number[:len(countrycode)] == countrycode:
+			self.number = '0' + self.number[len(countrycode):]
+
 		if number[0] != "0":
 			# self.caller = _("UNKNOWN")
 			self.notifyAndReset()
@@ -232,7 +238,7 @@ class ReverseLookupAndNotifier:
 	def _gotPage(self, page):
 		def cleanName(text):
 			try:
-				item = text.replace("&nbsp;"," ").replace("</b>","").replace(","," ")
+				item = text.replace("&nbsp;"," ").replace("</b>","").replace(","," ").replace('\n',' ').replace('\t',' ')
 				item = html2unicode(item).decode('iso-8859-1')
 				# item = html2unicode(item)
 				newitem = item.replace("  ", " ")
@@ -362,7 +368,7 @@ class ReverseLookupAndNotifier:
 		if self.caller:
 			try:
 				# debug("2: " + repr(self.caller))
-				self.caller = self.caller.encode(self.charset)
+				self.caller = self.caller.encode(self.charset, 'replace')
 				# debug("3: " + repr(self.caller))
 			except:
 				debug("[ReverseLookupAndNotifier] cannot encode?!?!")
