@@ -485,8 +485,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					myentry = current[0]
 					if myentry:
 						myurl = myentry.getVideoUrl()
-						filename = str(config.plugins.mytube.general.videodir.value)+ str(myentry.getTubeId()) + '.mp4'
-						job_manager.AddJob(downloadJob(myurl,filename, str(myentry.getTubeId())))
+						filename = str(config.plugins.mytube.general.videodir.value)+ str(myentry.getTitle()) + '.mp4'
+						job_manager.AddJob(downloadJob(myurl,filename, str(myentry.getTitle())[:30]))
 		elif answer == "downview":
 			self.tasklist = []
 			for job in job_manager.getPendingJobs():
