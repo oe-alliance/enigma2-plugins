@@ -541,7 +541,6 @@ class MyTubeTasksScreen(Screen):
 		}, -1)
 		
 		self["key_red"] = Button(_("Close"))
-		self["key_green"] = Button(_("Save"))
 		self["title"] = Label()
 		
 		self.onLayoutFinish.append(self.layoutFinished)
