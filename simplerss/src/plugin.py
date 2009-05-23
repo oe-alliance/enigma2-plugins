@@ -43,7 +43,7 @@ def main(session, **kwargs):
 		rssPoller = RSSPoller(session)
 
 	# Show Overview when we have feeds
-	if len(rssPoller.feeds):
+	if rssPoller.feeds:
 		from RSSScreens import RSSOverview
 		session.openWithCallback(closed, RSSOverview, rssPoller)
 	# Show Setup otherwise

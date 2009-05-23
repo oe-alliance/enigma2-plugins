@@ -353,7 +353,7 @@ class AutoTimerComponent(object):
 		return length > self.maxduration
 
 	def checkExcluded(self, title, short, extended, dayofweek):
-		if len(self.exclude[3]):
+		if self.exclude[3]:
 			list = [x for x in self.exclude[3]]
 			if "weekend" in list:
 				list.extend(["5", "6"])
@@ -380,7 +380,7 @@ class AutoTimerComponent(object):
 		return self.checkIncluded(title, short, extended, dayofweek)
 
 	def checkIncluded(self, title, short, extended, dayofweek):
-		if len(self.include[3]):
+		if self.include[3]:
 			list = [x for x in self.include[3]]
 			if "weekend" in list:
 				list.extend(["5", "6"])
@@ -404,7 +404,7 @@ class AutoTimerComponent(object):
 	def checkServices(self, service):
 		services = self.services
 		bouquets = self.bouquets
-		if len(services) or len(bouquets):
+		if services or bouquets:
 			if service in services:
 				return False
 

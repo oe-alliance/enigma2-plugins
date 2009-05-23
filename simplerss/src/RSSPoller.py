@@ -57,7 +57,7 @@ class RSSPoller:
 		for callback in update_callbacks:
 			try:
 				callback(id)
-			except:
+			except Exception:
 				pass
 
 	def error(self, error = ""):
@@ -124,7 +124,7 @@ class RSSPoller:
 		# End of List
 		elif len(self.feeds) <= self.current_feed:
 			# New Items
-			if len(self.newItemFeed.history):
+			if self.newItemFeed.history:
 				print "[SimpleRSS] got new items, calling back"
 				self.doCallback()
 

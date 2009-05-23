@@ -58,7 +58,7 @@ class ExtendedConfigText(ConfigText):
 
 		# Workaround some characters currently not "typeable" using NumericalTextInput
 		mapping = self.mapping
-		if len(mapping):
+		if mapping:
 			if "&" not in mapping[0]:
 				mapping[0] += "&"
 			if ";" not in mapping[0]:
@@ -142,10 +142,10 @@ class AutoTimerEditorBase:
 			timer.getIncludedDescription(),
 			timer.getIncludedDays()
 		)
-		if len(excludes[0]) or len(excludes[1]) \
-				or len(excludes[2]) or len(excludes[3]) \
-				or len(includes[0]) or len(includes[1]) \
-				or len(includes[2]) or len(includes[3]):
+		if excludes[0] or excludes[1] \
+				or excludes[2] or excludes[3] \
+				or includes[0] or includes[1] \
+				or includes[2] or includes[3]:
 			self.filterSet = True
 		else:
 			self.filterSet = False
@@ -155,7 +155,7 @@ class AutoTimerEditorBase:
 		# See if services are restricted
 		self.services = timer.services
 		self.bouquets = timer.bouquets
-		if len(self.services) or len(self.bouquets):
+		if self.services or self.bouquets:
 			self.serviceRestriction = True
 		else:
 			self.serviceRestriction = False
@@ -426,7 +426,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		for x in self.onChangedEntry:
 			try:
 				x()
-			except:
+			except Exception:
 				pass
 
 	def getCurrentEntry(self):
@@ -770,7 +770,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		for x in self.onChangedEntry:
 			try:
 				x()
-			except:
+			except Exception:
 				pass
 
 	def getCurrentEntry(self):
@@ -1005,7 +1005,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		for x in self.onChangedEntry:
 			try:
 				x()
-			except:
+			except Exception:
 				pass
 
 	def getCurrentEntry(self):
@@ -1038,7 +1038,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 			)
 
 	def finishedServiceSelection(self, *args):
-		if len(args):
+		if args:
 			list = self["config"].getList()
 			sname = args[0].toString()
 

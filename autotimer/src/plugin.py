@@ -61,6 +61,7 @@ def autostart(reason, **kwargs):
 			try:
 				autotimer.readXml()
 			except:
+				# XXX: we should at least dump the error
 				pass
 
 			# Save xml

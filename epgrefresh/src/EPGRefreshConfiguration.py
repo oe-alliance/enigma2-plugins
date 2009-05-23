@@ -104,7 +104,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		for x in self.onChangedEntry:
 			try:
 				x()
-			except:
+			except Exception:
 				pass
 
 	def getCurrentEntry(self):

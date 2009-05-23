@@ -134,7 +134,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 		for x in self.onChangedEntry:
 			try:
 				x()
-			except:
+			except Exception:
 				pass
 
 	def getCurrentEntry(self):
@@ -174,7 +174,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 			)
 
 	def finishedServiceSelection(self, *args):
-		if len(args):
+		if args:
 			list = self["config"].getList()
 			list.append(getConfigListEntry(
 				_("Refreshing"),

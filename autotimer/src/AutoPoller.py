@@ -29,10 +29,10 @@ class AutoPoller:
 	def query(self):
 		from plugin import autotimer
 
-		# Ignore any exceptions
+		# Ignore any program errors
 		try:
 			autotimer.parseEPG()
-		except:
+		except Exception:
 			# Dump error to stdout
 			import traceback, sys
 			traceback.print_exc(file=sys.stdout)

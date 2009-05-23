@@ -267,7 +267,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 		# V1
 		else:
 			elements = timer.findall("enabled")
-			if len(elements):
+			if elements:
 				if getValue(elements, "yes") == "no":
 					enabled = False
 				else:
@@ -302,7 +302,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 
 		# Read out allowed services (V*)
 		elements = timer.findall("serviceref")
-		if len(elements):
+		if elements:
 			servicelist = []
 			for service in elements:
 				value = service.text
@@ -418,7 +418,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 		# V3-
 		else:
 			elements = timer.findall("maxduration")
-			if len(elements):
+			if elements:
 				maxlen = getValue(elements, None)
 				if maxlen is not None:
 					maxlen = int(maxlen)*60
