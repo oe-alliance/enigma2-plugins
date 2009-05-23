@@ -44,6 +44,8 @@ def Partnerbox_EPGListInit():
 		basebuildSimilarEntry = EPGList.buildSimilarEntry
 	if basebuildMultiEntry is None:
 		basebuildMultiEntry = EPGList.buildMultiEntry
+	if partnerboxfunctions.remote_timer_list is None:
+		partnerboxfunctions.remote_timer_list = []
 	EPGList.__init__ = Partnerbox_EPGList__init__
 	EPGList.buildSingleEntry = Partnerbox_SingleEntry
 	EPGList.buildSimilarEntry = Partnerbox_SimilarEntry
