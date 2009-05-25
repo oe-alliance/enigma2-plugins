@@ -88,7 +88,7 @@ config.plugins.mytube.search.lr = ConfigSelection(
 				[
 				 (None, _("All")),
 				 ("au", _("Australia")),
-				 ("br", _("Brazil")),				 
+				 ("br", _("Brazil")),
 				 ("ca", _("Canada")),
 				 ("cz", _("Czech Republic")),
 				 ("fr", _("France")),
@@ -114,7 +114,7 @@ config.plugins.mytube.search.lr = ConfigSelection(
 				], None)
 config.plugins.mytube.search.sortOrder = ConfigSelection(
 				[
-				 ("ascending", _("Ascanding")),
+				 ("ascending", _("Ascending")),
 				 ("descending", _("Descending"))
 				], "ascending")
 
@@ -123,10 +123,10 @@ config.plugins.mytube.general.showHelpOnOpen = ConfigYesNo(default = True)
 config.plugins.mytube.general.startFeed = ConfigSelection(
 				[
 				 ("top_rated", _("Top rated")),
-				 ("top_favorites", _("Top favorites")),				 
+				 ("top_favorites", _("Top favorites")),
 				 ("most_viewed", _("Most viewed")),
 				 ("most_popular", _("Most popular")),
-				 ("most_recent", _("Most recent")),				 
+				 ("most_recent", _("Most recent")),
 				 ("most_discussed", _("Most discussed")),
 				 ("top_favorites", _("Most linked")),
 				 ("most_linked", _("Most responded"))
@@ -466,7 +466,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		elif answer == "stdfeed":
 			menulist = [(_("Top rated"), "top_rated")]
 			menulist.extend((
-				(_("Top favorites"), "top_favorites"),				
+				(_("Top favorites"), "top_favorites"),
 				(_("Most viewed"), "most_viewed"),
 				(_("Most popular"), "most_popular"),
 				(_("Most recent"), "most_recent"),
@@ -612,7 +612,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				searchContext = config.plugins.mytube.search.searchTerm.value
 				print "Search searchcontext",searchContext
 				self.setState('getSearchFeed')
-				self.runSearch(searchContext)				
+				self.runSearch(searchContext)
 		elif self.currList == "feedlist":
 			current = self[self.currList].getCurrent()
 			if current:
@@ -689,7 +689,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.hideSuggestions()
 		menulist = [(_("Top rated"), "top_rated")]
 		menulist.extend((
-			(_("Top favorites"), "top_favorites"),				
+			(_("Top favorites"), "top_favorites"),
 			(_("Most viewed"), "most_viewed"),
 			(_("Most popular"), "most_popular"),
 			(_("Most recent"), "most_recent"),
@@ -724,7 +724,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["config"].invalidateCurrent()
 		if self.HistoryWindow is not None and self.HistoryWindow.shown:
 			self.HistoryWindow.deactivate()
-			self.HistoryWindow.instance.hide()			
+			self.HistoryWindow.instance.hide()
 	
 	def switchToConfigList(self):
 		print "switchToConfigList"
@@ -741,14 +741,14 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		helpwindowpos = self["HelpWindow"].getPosition()
 		if current[1].help_window.instance is not None:
 			current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
-			current[1].help_window.instance.show()	
+			current[1].help_window.instance.show()
 		if current[1].suggestionsWindow.instance is not None:
 			current[1].suggestionsWindow.instance.show()
 		self.propagateUpDownNormally = True
 		if self.HistoryWindow is not None and self.HistoryWindow.shown:
 			self.HistoryWindow.deactivate()
 			self.HistoryWindow.instance.hide()
-		if self.FirstRun == True:	
+		if self.FirstRun == True:
 			self.handleFirstHelpWindow()
 
 
@@ -1104,7 +1104,7 @@ class MyTubeVideoInfoScreen(Screen):
 							MultiContentEntryPixmapAlphaTest(pos = (0, 4), size = (130, 98), png = 0), # index 0 is the thumbnail
 							MultiContentEntryPixmapAlphaTest(pos = (130, 4), size = (130, 98), png = 1), # index 0 is the thumbnail
 							MultiContentEntryPixmapAlphaTest(pos = (260, 4), size = (130, 98), png = 2), # index 0 is the thumbnail
-							MultiContentEntryPixmapAlphaTest(pos = (390, 4), size = (130, 98), png = 3), # index 0 is the thumbnail							
+							MultiContentEntryPixmapAlphaTest(pos = (390, 4), size = (130, 98), png = 3), # index 0 is the thumbnail
 						]),
 					"state": (110,[
 							MultiContentEntryText(pos = (10, 40), size = (550, 38), font=2, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 0), # index 0 is the name
@@ -1188,7 +1188,7 @@ class MyTubeVideoInfoScreen(Screen):
 			self["stars"].setValue(ratingStars)
 		else:
 			self["stars"].hide()
-			self["starsbg"].hide()			
+			self["starsbg"].hide()
 		
 		if self.videoinfo["Duration"] is not "not available":
 			durationInSecs = int(self.videoinfo["Duration"])
@@ -1434,7 +1434,7 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 		self.lastservice = lastservice
 
 		self.hidetimer = eTimer()
-		self.hidetimer.timeout.get().append(self.ok)		
+		self.hidetimer.timeout.get().append(self.ok)
 		self.returning = False
 
 		self.state = self.STATE_PLAYING
@@ -1586,7 +1586,7 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 		if wantstate == self.STATE_PAUSED:
 			print "trying to switch to Pause- state:",self.STATE_PAUSED
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:",self.STATE_PLAYING		
+			print "trying to switch to playing- state:",self.STATE_PLAYING
 		service = self.session.nav.getCurrentService()
 		if service is None:
 			print "No Service found"
@@ -1617,7 +1617,7 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 					self.__setHideTimer()
 
 		for c in self.onPlayStateChanged:
-			c(self.state)		
+			c(self.state)
 		
 		return True
 
@@ -1629,7 +1629,7 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 				(_("No"), "continue"),
 				(_("Yes, but play next video"), "playnext"),
 				(_("Yes, but play previous video"), "playprev"),
-			)					
+			)
 
 			if error is False:
 				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list = list)
