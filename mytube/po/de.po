@@ -20,178 +20,178 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid " Results"
-msgstr ""
+msgstr "Ergebnisse"
 
 msgid "Added: "
-msgstr ""
+msgstr "Hinzugefügt:"
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "All Time"
 msgstr ""
 
 msgid "An error occured."
-msgstr ""
+msgstr "Es ist ein Fehler aufgetreten."
 
-msgid "Ascanding"
-msgstr ""
+msgid "Ascending"
+msgstr "aufsteigend"
 
 msgid "Ask user"
-msgstr ""
+msgstr "Nutzer fragen"
 
 msgid "Australia"
-msgstr ""
+msgstr "Australien"
 
 msgid "Author: "
-msgstr ""
+msgstr "Author: "
 
 msgid "Autos & Vehicles"
-msgstr ""
+msgstr "Autos und Fahrzeuge"
 
 msgid "Brazil"
-msgstr ""
+msgstr "Brasilien"
 
 msgid "Canada"
-msgstr ""
+msgstr "Kanada"
 
 msgid "Choose target folder"
-msgstr ""
+msgstr "Wähle Zielverzeichnis"
 
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 msgid "Comedy"
 msgstr ""
 
 msgid "Czech Republic"
-msgstr ""
+msgstr "Tschechien"
 
 msgid "Descending"
-msgstr ""
+msgstr "absteigend"
 
 msgid "Display search results by:"
-msgstr ""
+msgstr "Suchergebnisse anzeigen:"
 
 msgid "Do you want to see more entries?"
-msgstr ""
+msgstr "Weitere Videos?"
 
 msgid "Download Video"
-msgstr ""
+msgstr "Video runterladen"
 
 msgid "Download location"
-msgstr ""
+msgstr "Download Verzeichnis"
 
 msgid "Downloading screenshots. Please wait..."
-msgstr ""
+msgstr "Bilder werden geladen. Bitte warten..."
 
 msgid "Duration: "
-msgstr ""
+msgstr "Dauer:"
 
 msgid "Education"
-msgstr ""
+msgstr "Bildung"
 
 msgid "Enter your search term(s)"
-msgstr ""
+msgstr "Suchterm eingeben"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Unterhaltung"
 
 msgid "Fetching feed entries"
-msgstr ""
+msgstr "Lade feeds"
 
 msgid "Fetching search entries"
-msgstr ""
+msgstr "Lade Suchergebnisse"
 
 msgid "Film & Animation"
 msgstr ""
 
 msgid "France"
-msgstr ""
+msgstr "Frankreich"
 
 msgid "Gaming"
-msgstr ""
+msgstr "Spiele"
 
 msgid "Germany"
-msgstr ""
+msgstr "Deutschland"
 
 msgid "Great Britain"
-msgstr ""
+msgstr "England"
 
 msgid "Help"
-msgstr ""
+msgstr "Hilfe"
 
 msgid "History"
-msgstr ""
+msgstr "Verlauf"
 
 msgid "Holland"
-msgstr ""
+msgstr "Holland"
 
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 msgid "Howto & Style"
-msgstr ""
+msgstr "Tipps & Tricks"
 
 msgid "India"
-msgstr ""
+msgstr "Indien"
 
 msgid "Ireland"
-msgstr ""
+msgstr "Irland"
 
 msgid "Israel"
-msgstr ""
+msgstr "Israel"
 
 msgid "Italy"
-msgstr ""
+msgstr "Italien"
 
 msgid "Japan"
-msgstr ""
+msgstr "Japan"
 
 msgid "Mexico"
-msgstr ""
+msgstr "Mexiko"
 
 msgid "More video entries."
-msgstr ""
+msgstr "Weitere Video Einträge."
 
 msgid "Most discussed"
-msgstr ""
+msgstr "Heiß diskutiert"
 
 msgid "Most linked"
-msgstr ""
+msgstr "Am meisten verlinkt"
 
 msgid "Most popular"
-msgstr ""
+msgstr "Beliebteste Videos"
 
 msgid "Most recent"
-msgstr ""
+msgstr "Neueste Videos"
 
 msgid "Most responded"
-msgstr ""
+msgstr "Meiste Antworten"
 
 msgid "Most viewed"
-msgstr ""
+msgstr "Meistgesehen"
 
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 msgid "My TubePlayer"
 msgstr ""
 
 msgid "MyTube Settings"
-msgstr ""
+msgstr "MyTube Einstellungen"
 
 msgid "MyTubePlayer"
 msgstr ""
 
 msgid "MyTubePlayer Help"
-msgstr ""
+msgstr "MyTubePlayer Hilfe"
 
 msgid "MyTubePlayer active video downloads"
-msgstr ""
+msgstr "aktive Video downloads"
 
 msgid "MyTubePlayer settings"
-msgstr ""
+msgstr "MyTubePlayer Einstellungen"
 
 msgid "MyTubeVideoInfoScreen"
 msgstr ""
@@ -200,181 +200,181 @@ msgid "MyTubeVideohelpScreen"
 msgstr ""
 
 msgid "New Zealand"
-msgstr ""
+msgstr "Neu Seeland"
 
 msgid "News & Politics"
-msgstr ""
+msgstr "Nachrichten & Politik"
 
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 msgid "No playable video found! Stop playing this movie?"
-msgstr ""
+msgstr "Kein abspielbares Video gefunden! Wiedergabe beenden?"
 
 msgid "No, but switch to video entries."
-msgstr ""
+msgstr "Nein, aber zu den Videos zurück."
 
 msgid "No, but switch to video search."
-msgstr ""
+msgstr "Nein, aber zur Videosuche zurück"
 
 msgid "Nonprofits & Activism"
-msgstr ""
+msgstr "Non-Profit"
 
 msgid "People & Blogs"
-msgstr ""
+msgstr "Leute & Blogs"
 
 msgid "Pets & Animals"
-msgstr ""
+msgstr "Tiere"
 
 msgid "Play YouTube movies"
-msgstr ""
+msgstr "YouTube Videos abspielen"
 
 msgid "Play next video"
-msgstr ""
+msgstr "nächste Video"
 
 msgid "Player Stop/Exit behavior:"
-msgstr ""
+msgstr "Verhalten beim Beenden:"
 
 msgid "Poland"
-msgstr ""
+msgstr "Polen"
 
 msgid "Published"
-msgstr ""
+msgstr "Veröffentlicht"
 
 msgid "Rating"
-msgstr ""
+msgstr "Bewertung"
 
 msgid "Ratings: "
-msgstr ""
+msgstr "Bewertungen"
 
 msgid "Really quit MyTube Player?"
-msgstr ""
+msgstr "MyTube Player wirklich beenden?"
 
 msgid "Related video entries."
-msgstr ""
+msgstr "Ähnliche Videos"
 
 msgid "Relevance"
-msgstr ""
+msgstr "Relevanz"
 
 msgid "Response video entries."
-msgstr ""
+msgstr "Video Antworten"
 
 msgid "Return to movie list"
-msgstr ""
+msgstr "Zurück zur Videoliste"
 
 msgid "Russia"
-msgstr ""
+msgstr "Russland"
 
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 msgid "Science & Technology"
-msgstr ""
+msgstr "Wissenschaft & Technik"
 
 msgid "Search"
-msgstr ""
+msgstr "Suche"
 
 msgid "Search Term(s)"
-msgstr ""
+msgstr "Suchwort(e)"
 
 msgid "Search category:"
-msgstr ""
+msgstr "Such-Kategorie:"
 
 msgid "Search region:"
-msgstr ""
+msgstr "Such-Region:"
 
 msgid "Search restricted content:"
-msgstr ""
+msgstr "Suche mit Altersbeschränkung:"
 
 msgid "Select new feed to view."
-msgstr ""
+msgstr "Neuen feed auswählen"
 
 msgid "Select your choice."
-msgstr ""
+msgstr "Treffen Sie Ihre Wahl."
 
 msgid "Short Movies"
-msgstr ""
+msgstr "Kurzvideos"
 
 msgid "Sorry, video is not available!"
-msgstr ""
+msgstr "Video nicht verfügbar!"
 
 msgid "South Korea"
-msgstr ""
+msgstr "Süd Korea"
 
 msgid "Spain"
-msgstr ""
+msgstr "Spanien"
 
 msgid "Sports"
-msgstr ""
+msgstr "Sport"
 
 msgid "Start with following feed:"
-msgstr ""
+msgstr "Beginne mit folgendem feed:"
 
 msgid "Std. Feeds"
-msgstr ""
+msgstr "Std. Feeds"
 
 msgid "Stop playing this movie?"
-msgstr ""
+msgstr "Wiedergabe beenden?"
 
 msgid "Sweden"
-msgstr ""
+msgstr "Schweden"
 
 msgid "Tags: "
-msgstr ""
+msgstr "Tags: "
 
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 msgid "There was an error getting the feed entries. Try again..."
-msgstr ""
+msgstr "Fehler beim Laden der Suchergebnisse. Noch mal probieren..."
 
 msgid "This Month"
-msgstr ""
+msgstr "Diesen Monat"
 
 msgid "This Week"
-msgstr ""
+msgstr "Diese Woche"
 
 msgid "This is the help screen. Feed me with something to display."
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 msgid "Top favorites"
-msgstr ""
+msgstr "Top-Favoriten"
 
 msgid "Top rated"
-msgstr ""
+msgstr "Beste Bewertung"
 
 msgid "Travel & Events"
-msgstr ""
+msgstr "Reisen & Events"
 
 msgid "Trying to download the Youtube feed entries. Please wait..."
-msgstr ""
+msgstr "Youtube feeds werden geladen, bitte warten..."
 
 msgid "Trying to download the Youtube search results. Please wait..."
-msgstr ""
+msgstr "Youtube Suchergebnisse werden geladen, bitte warten..."
 
 msgid "United States"
-msgstr ""
+msgstr "USA"
 
 msgid "View Count"
-msgstr ""
+msgstr "Aufrufe"
 
 msgid "View Downloads"
-msgstr ""
+msgstr "Downloads anzeigen"
 
 msgid "View related videos"
-msgstr ""
+msgstr "Ähnliche Videos"
 
 msgid "View response videos"
-msgstr ""
+msgstr "Videoantworten"
 
 msgid "View standard feed"
-msgstr ""
+msgstr "Standard feed anzeigen"
 
 msgid "Views: "
-msgstr ""
+msgstr "Aufrufe:"
 
 msgid ""
 "Welcome to the MyTube Youtube Player.\n"
@@ -390,6 +390,18 @@ msgid ""
 "\n"
 "The Help button shows this help again."
 msgstr ""
+"Herzlich Willkommen beim MyTube Youtube Player.\n"
+"\n"
+"Nutzen Sie die Bouqet+ Taste um zur Sucheingabe zu gelangen und die Bouqet- Taste"
+"für die Video Einträge.\n"
+"\n"
+"Um ein Video abzuspielen drücken Sie die OK-Taste auf Ihrer Fernbedienung.\n"
+"\n"
+"Mit der Info-Taste erhalten Sie die erweiterte Beschreibung zu einem Video.\n"
+"\n"
+"Für weitere Einstellungen drücken Sie die Menü-Taste.\n"
+"\n"
+"Um diese Hilfe erneut anzuzeigen, drücken Sie die Hilfe-Taste."
 
 msgid ""
 "Welcome to the MyTube Youtube Player.\n"
@@ -402,12 +414,20 @@ msgid ""
 "\n"
 "Press exit to get back to the input field."
 msgstr ""
+"Herzlich Willkommen beim MyTube Youtube Player.\n"
+"\n"
+"Während der Eingabe Ihres Suchwortes erhalten Sie passende Vorschläge zu Ihrer Sucheingabe.\n"
+"\n"
+"Um einen Vorschlag auszuwählen drücken Sie die NACH UNTEN-Taste, wählen den entsprechenden Eintrag aus"
+"und drücken die OK-Taste um die Suche zu starten.\n"
+"\n"
+"Um zur Such-Eingabemaske zurück zu gelangen drücken Sie die EXIT-Taste."
 
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 msgid "Yes, but play next video"
-msgstr ""
+msgstr "Ja, aber nächstes Video abspielen"
 
 msgid "Yes, but play previous video"
-msgstr ""
+msgstr "Ja, aber vorheriges Video abspielen"
