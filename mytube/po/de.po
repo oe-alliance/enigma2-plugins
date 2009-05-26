@@ -83,7 +83,7 @@ msgid "Download Video"
 msgstr "Video runterladen"
 
 msgid "Download location"
-msgstr "Download Verzeichnis"
+msgstr "Download Verzeichnis:"
 
 msgid "Downloading screenshots. Please wait..."
 msgstr "Bilder werden geladen. Bitte warten..."
@@ -191,13 +191,13 @@ msgid "MyTubePlayer"
 msgstr ""
 
 msgid "MyTubePlayer Help"
-msgstr "MyTubePlayer Hilfe"
+msgstr "MyTube Player Hilfe"
 
 msgid "MyTubePlayer active video downloads"
 msgstr "aktive Video downloads"
 
 msgid "MyTubePlayer settings"
-msgstr "MyTubePlayer Einstellungen"
+msgstr "MyTube Player Einstellungen"
 
 msgid "MyTubeVideoInfoScreen"
 msgstr ""
@@ -368,7 +368,7 @@ msgid "United States"
 msgstr "USA"
 
 msgid "Videobrowser exit behavior:"
-msgstr "Verhalten nach Verlassen der Videoliste"
+msgstr "Verhalten nach Verlassen der Videoliste:"
 
 msgid "Videoplayer stop/exit behavior:"
 msgstr "Verhalten beim Drücken der STOPP/EXIT-Taste:"
@@ -383,7 +383,7 @@ msgid "View related videos"
 msgstr "Ähnliche Videos"
 
 msgid "View response videos"
-msgstr "Videoantworten"
+msgstr "Video Antworten"
 
 msgid "View standard feed"
 msgstr "Standard feed anzeigen"
@@ -408,7 +408,7 @@ msgstr ""
 "Herzlich Willkommen beim MyTube Youtube Player.\n"
 "\n"
 "Nutzen Sie die Bouqet+ Taste um zur Sucheingabe zu gelangen und die Bouqet- "
-"Tastefür die Video Einträge.\n"
+"Taste für die Video Einträge.\n"
 "\n"
 "Um ein Video abzuspielen drücken Sie die OK-Taste auf Ihrer Fernbedienung.\n"
 "\n"
