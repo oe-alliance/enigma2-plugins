@@ -25,8 +25,6 @@ HTTPConnection.debuglevel = 1
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
 #config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
 
-
-
 class MyOpener(FancyURLopener):
 	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
 
@@ -44,9 +42,7 @@ class GoogleSuggestions():
 			self.prepQuerry = self.prepQuerry + "hl=" + hl + "&"
 		self.prepQuerry = self.prepQuerry + "jsonp=self.gotSuggestions&q="
 
-
 	def gotSuggestions(self, suggestslist):
-		#print "suggestslist",suggestslist
 		self.callback(suggestslist)
 
 	def getSuggestions(self, querryString):
@@ -74,7 +70,6 @@ class GoogleSuggestions():
 			self.callback(None)
 
 
-
 class MyTubeFeedEntry():
 	def __init__(self, feed, entry, favoritesFeed = False):
 		self.feed = feed
@@ -90,7 +85,6 @@ class MyTubeFeedEntry():
 		else:
 			self.myopener = MyOpener()
 			urllib.urlopen = MyOpener().open"""
-
 		
 	def isPlaylistEntry(self):
 		return False
@@ -137,7 +131,7 @@ class MyTubeFeedEntry():
 	def getRatingAverage(self):
 		if self.entry.rating is not None:
 			return self.entry.rating.average
-		return "not available"
+		return 0
 
 
 	def getNumRaters(self):
@@ -159,10 +153,10 @@ class MyTubeFeedEntry():
 		EntryDetails['Description'] = self.getDescription()
 		EntryDetails['Category'] = self.entry.media.category[0].text
 		EntryDetails['Tags'] = self.entry.media.keywords.text
-		EntryDetails['Published'] = self.entry.published.text
-		EntryDetails['Views'] = self.entry.statistics.view_count
-		EntryDetails['Duration'] = self.entry.media.duration.seconds
-		EntryDetails['Rating'] = self.entry.rating.num_raters
+		EntryDetails['Published'] = self.getPublishedDate()
+		EntryDetails['Views'] = self.getViews()
+		EntryDetails['Duration'] = self.getDuration()
+		EntryDetails['Rating'] = self.getNumRaters()
 		EntryDetails['RatingAverage'] = self.getRatingAverage()
 		EntryDetails['Author'] = self.getAuthor()
 		# show thumbnails
@@ -171,8 +165,7 @@ class MyTubeFeedEntry():
 			print 'Thumbnail url: %s' % thumbnail.url
 			list.append(str(thumbnail.url))
 		EntryDetails['Thumbnails'] = list
-		print self.entry.media
-		print EntryDetails
+		#print EntryDetails
 		return EntryDetails
 
 
@@ -202,8 +195,6 @@ class MyTubeFeedEntry():
 				data = response.readline()
 				if data == "":
 					break
-				
-				#m = re.search('video_id=(.+?)&.+&t=(.+?)&hl=', data)
 
 				if "isHDAvailable = true" in data:
 					isHDAvailable = True
@@ -229,7 +220,6 @@ class MyTubeFeedEntry():
 		#urllib.urlopen = MyOpener().open
 		return mrl
 
-
 	def getRelatedVideos(self):
 		print "[MyTubeFeedEntry] getResponseVideos()"
 		for link in self.entry.link:
@@ -237,7 +227,6 @@ class MyTubeFeedEntry():
 			if link.rel.endswith("video.related"):
 				print "Found Related: ", link.href
 				return link.href
-
 
 	def getResponseVideos(self):
 		print "[MyTubeFeedEntry] getResponseVideos()"
@@ -329,7 +318,6 @@ class MyTubePlayerService():
 			if link.rel == "next":
 				return link.href
 		return None
-
 
 
 myTubeService = MyTubePlayerService()

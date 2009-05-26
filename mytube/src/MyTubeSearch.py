@@ -12,7 +12,8 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Sources.List import List
 from Components.Pixmap import Pixmap
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
-from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, gFont, eListbox,ePoint
+from Components.Task import Task, Job, job_manager
+from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, gFont, eListbox,ePoint,eTimer
 from Components.Task import job_manager
 from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_HDD
 from threading import Thread
@@ -66,11 +67,9 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 		self.threaded = threaded
 		self.suggestionsListActivated = False
 
-
 	def propagateSuggestions(self, suggestionsList):
 		if self.suggestionsWindow:
 			self.suggestionsWindow.update(suggestionsList)
-
 
 	def getSuggestions(self):
 		if self.suggestionsThread is not None:
@@ -78,16 +77,16 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 		else:
 			self.suggestions.getSuggestions(self.value)
 
-
 	def handleKey(self, key):
 		if not self.suggestionsListActivated:
 			ConfigText.handleKey(self, key)
 			if key in [KEY_DELETE, KEY_BACKSPACE, KEY_ASCII, KEY_TIMEOUT]:
 				self.getSuggestions()
 
-
 	def onSelect(self, session):
 		if self.threaded:
+			if self.suggestionsThread is not None:
+				self.suggestionsThread.stop()
 			self.suggestionsThread = ConfigTextWithGoogleSuggestions.SuggestionsThread(self.suggestions)
 			self.suggestionsThread.start()
 		else:
@@ -99,7 +98,6 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 			self.suggestionsWindow.hide()
 		self.suggestions.getSuggestions(self.value)
 
-
 	def onDeselect(self, session):
 		if self.suggestionsThread is not None:
 			self.suggestionsThread.stop()
@@ -108,22 +106,21 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 			session.deleteDialog(self.suggestionsWindow)
 			self.suggestionsWindow = None
 
-
 	def suggestionListUp(self):
-		self.value = self.suggestionsWindow.up()
-
+		if self.suggestionsWindow.getlistlenght() > 0:
+			self.value = self.suggestionsWindow.up()
 
 	def suggestionListDown(self):
-		self.value = self.suggestionsWindow.down()
-
+		if self.suggestionsWindow.getlistlenght() > 0:
+			self.value = self.suggestionsWindow.down()
 
 	def suggestionListPageDown(self):
-		self.value = self.suggestionsWindow.pageDown()
-
+		if self.suggestionsWindow.getlistlenght() > 0:
+			self.value = self.suggestionsWindow.pageDown()
 
 	def suggestionListPageUp(self):
-		self.value = self.suggestionsWindow.pageUp()
-
+		if self.suggestionsWindow.getlistlenght() > 0:
+			self.value = self.suggestionsWindow.pageUp()
 
 	def activateSuggestionList(self):
 		ret = False
@@ -136,7 +133,6 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 			ret = True
 		return ret
 
-
 	def deactivateSuggestionList(self):
 		ret = False
 		if self.suggestionsWindow is not None:
@@ -146,7 +142,6 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 			self.suggestionsListActivated = False
 			ret = True
 		return ret
-
 
 	def cancelSuggestionList(self):
 		self.value = self.tmpValue
@@ -238,18 +233,22 @@ config.plugins.mytube.general = ConfigSubsection()
 config.plugins.mytube.general.showHelpOnOpen = ConfigYesNo(default = True)
 config.plugins.mytube.general.startFeed = ConfigSelection(
 				[
+				 ("hd", _("High definition")),
 				 ("top_rated", _("Top rated")),
-				 ("top_favorites", _("Top favorites")),				 
+				 ("top_favorites", _("Top favorites")),
 				 ("most_viewed", _("Most viewed")),
 				 ("most_popular", _("Most popular")),
-				 ("most_recent", _("Most recent")),				 
+				 ("most_recent", _("Most recent")),
 				 ("most_discussed", _("Most discussed")),
 				 ("top_favorites", _("Most linked")),
 				 ("most_linked", _("Most responded"))
 				], "most_popular")
 
 config.plugins.mytube.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
-	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")) ])
+	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
+
+config.plugins.mytube.general.on_exit = ConfigSelection(default = "ask", choices = [
+	("ask", _("Ask user")), ("quit", _("Return to movie list"))])
 
 
 default = resolveFilename(SCOPE_HDD)
@@ -257,7 +256,6 @@ tmp = config.movielist.videodirs.value
 if default not in tmp:
 	tmp.append(default)
 config.plugins.mytube.general.videodir = ConfigSelection(default = default, choices = tmp)
-#config.plugins.mytube.general.history = ConfigSelection(choices = [])
 config.plugins.mytube.general.history = ConfigText(default="")
 
 
@@ -313,25 +311,32 @@ class MyTubeSuggestionsListScreen(Screen):
 		else:
 			self.hide()
 
+	def getlistlenght(self):
+		return len(self.list)
+
 	def up(self):
 		print "up"
-		self["suggestionslist"].selectPrevious()
-		return self.getSelection()
+		if self.list and len(self.list) > 0:
+			self["suggestionslist"].selectPrevious()
+			return self.getSelection()
 
 	def down(self):
 		print "down"
-		self["suggestionslist"].selectNext()
-		return self.getSelection()
+		if self.list and len(self.list) > 0:
+			self["suggestionslist"].selectNext()
+			return self.getSelection()
 	
 	def pageUp(self):
 		print "up"
-		self["suggestionslist"].selectPrevious()
-		return self.getSelection()
+		if self.list and len(self.list) > 0:
+			self["suggestionslist"].selectPrevious()
+			return self.getSelection()
 
 	def pageDown(self):
 		print "down"
-		self["suggestionslist"].selectNext()
-		return self.getSelection()
+		if self.list and len(self.list) > 0:
+			self["suggestionslist"].selectNext()
+			return self.getSelection()
 
 	def activate(self):
 		print "activate"
@@ -351,7 +356,6 @@ class MyTubeSuggestionsListScreen(Screen):
 
 	def enableSelection(self,value):
 		self["suggestionslist"].selectionEnabled(value)
-
 
 
 class MyTubeSettingsScreen(Screen, ConfigListScreen):
@@ -385,7 +389,6 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 			"right": self.keyRight,
 		}, -1)
 		
-
 		self["key_red"] = Button(_("Close"))
 		self["key_green"] = Button(_("Save"))
 		self["title"] = Label()
@@ -401,7 +404,6 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 	def layoutFinished(self):
 		self["title"].setText(_("MyTubePlayer settings"))
 
-
 	def setWindowTitle(self):
 		self.setTitle(_("MyTubePlayer settings"))
 
@@ -412,7 +414,8 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		self.searchContextEntries.append(getConfigListEntry(_("Search category:"), config.plugins.mytube.search.categories))
 		self.searchContextEntries.append(getConfigListEntry(_("Search region:"), config.plugins.mytube.search.lr))
 		self.searchContextEntries.append(getConfigListEntry(_("Start with following feed:"), config.plugins.mytube.general.startFeed))
-		self.searchContextEntries.append(getConfigListEntry(_("Player Stop/Exit behavior:"), config.plugins.mytube.general.on_movie_stop))
+		self.searchContextEntries.append(getConfigListEntry(_("Videoplayer stop/exit behavior:"), config.plugins.mytube.general.on_movie_stop))
+		self.searchContextEntries.append(getConfigListEntry(_("Videobrowser exit behavior:"), config.plugins.mytube.general.on_exit))
 		"""self.ProxyEntry = getConfigListEntry(_("Use HTTP Proxy Server:"), config.plugins.mytube.general.useHTTPProxy)
 		self.searchContextEntries.append(self.ProxyEntry)
 		if config.plugins.mytube.general.useHTTPProxy.value:
@@ -484,6 +487,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		config.plugins.mytube.search.lr.save()
 		config.plugins.mytube.general.startFeed.save()
 		config.plugins.mytube.general.on_movie_stop.save()
+		config.plugins.mytube.general.on_exit.save()
 		config.plugins.mytube.general.videodir.save()
 		#config.plugins.mytube.general.useHTTPProxy.save()
 		#config.plugins.mytube.general.ProxyIP.save()
@@ -545,9 +549,29 @@ class MyTubeTasksScreen(Screen):
 		
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.onShown.append(self.setWindowTitle)
+		self.onClose.append(self.__onClose)
+		self.Timer = eTimer()
+		self.Timer.callback.append(self.TimerFire)
+		
+	def __onClose(self):
+		del self.Timer
 
 	def layoutFinished(self):
 		self["title"].setText(_("MyTubePlayer active video downloads"))
+		self.Timer.startLongTimer(2)
+		#self.Timer.start(1000)
+
+	def TimerFire(self):
+		self.Timer.stop()
+		self.rebuildTaskList()
+	
+	def rebuildTaskList(self):
+		self.tasklist = []
+		for job in job_manager.getPendingJobs():
+			self.tasklist.append((job,job.name,job.getStatustext(),int(100*job.progress/float(job.end)) ,str(100*job.progress/float(job.end)) + "%" ))
+		self['tasklist'].setList(self.tasklist)
+		self['tasklist'].updateList(self.tasklist)
+		self.Timer.startLongTimer(2)
 
 	def setWindowTitle(self):
 		self.setTitle(_("MyTubePlayer active video downloads"))
@@ -558,12 +582,10 @@ class MyTubeTasksScreen(Screen):
 		if current:
 			job = current[0]
 			from Screens.TaskView import JobView
-			#job_manager.in_background = False
 			self.session.openWithCallback(self.JobViewCB, JobView, job)
 	
 	def JobViewCB(self, why):
 		print "WHY---",why
-		#job_manager.in_background = in_background
 
 	def keyCancel(self):
 		self.close()	
