@@ -23,7 +23,7 @@ msgid " Results"
 msgstr "Ergebnisse"
 
 msgid "Added: "
-msgstr "Hinzugefügt:"
+msgstr "Hinzugefügt: "
 
 msgid "All"
 msgstr "Alle"
@@ -89,7 +89,7 @@ msgid "Downloading screenshots. Please wait..."
 msgstr "Bilder werden geladen. Bitte warten..."
 
 msgid "Duration: "
-msgstr "Dauer:"
+msgstr "Dauer: "
 
 msgid "Education"
 msgstr "Bildung"
@@ -125,7 +125,7 @@ msgid "Help"
 msgstr "Hilfe"
 
 msgid "High definition"
-msgstr ""
+msgstr "HD-Videos"
 
 msgid "History"
 msgstr "Verlauf"
@@ -218,7 +218,7 @@ msgid "No playable video found! Stop playing this movie?"
 msgstr "Kein abspielbares Video gefunden! Wiedergabe beenden?"
 
 msgid "No, but play video again"
-msgstr ""
+msgstr "Nein, aber Video noch mal abspielen"
 
 msgid "No, but switch to video entries."
 msgstr "Nein, aber zu den Videos zurück."
@@ -242,7 +242,7 @@ msgid "Play next video"
 msgstr "nächste Video"
 
 msgid "Play video again"
-msgstr ""
+msgstr "Video noch mal abspielen"
 
 msgid "Poland"
 msgstr "Polen"
@@ -254,7 +254,7 @@ msgid "Rating"
 msgstr "Bewertung"
 
 msgid "Ratings: "
-msgstr "Bewertungen"
+msgstr "Bewertungen: "
 
 msgid "Really quit MyTube Player?"
 msgstr "MyTube Player wirklich beenden?"
@@ -368,10 +368,10 @@ msgid "United States"
 msgstr "USA"
 
 msgid "Videobrowser exit behavior:"
-msgstr ""
+msgstr "Verhalten nach Verlassen der Videoliste"
 
 msgid "Videoplayer stop/exit behavior:"
-msgstr ""
+msgstr "Verhalten beim Drücken der STOPP/EXIT-Taste:"
 
 msgid "View Count"
 msgstr "Aufrufe"
@@ -389,7 +389,7 @@ msgid "View standard feed"
 msgstr "Standard feed anzeigen"
 
 msgid "Views: "
-msgstr "Aufrufe:"
+msgstr "Aufrufe: "
 
 msgid ""
 "Welcome to the MyTube Youtube Player.\n"
