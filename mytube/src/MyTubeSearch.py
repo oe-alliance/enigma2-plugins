@@ -225,7 +225,7 @@ config.plugins.mytube.search.lr = ConfigSelection(
 				], None)
 config.plugins.mytube.search.sortOrder = ConfigSelection(
 				[
-				 ("ascending", _("Ascanding")),
+				 ("ascending", _("Ascending")),
 				 ("descending", _("Descending"))
 				], "ascending")
 
