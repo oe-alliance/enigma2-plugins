@@ -1,3 +1,3 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web/mobile/
+installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/mobile/
 
 install_DATA = *.xml
