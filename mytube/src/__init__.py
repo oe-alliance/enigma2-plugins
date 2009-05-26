@@ -1,8 +1,9 @@
+# -*- coding: ISO-8859-1 -*-
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os,gettext,locale
+import os,gettext
 PluginLanguageDomain = "MyTube"
-PluginLanguagePath = "Extensions/Mytube/po"
+PluginLanguagePath = "Extensions/MyTube/po"
 
 def localeInit():
 	lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
@@ -13,7 +14,7 @@ def localeInit():
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
-		#print "[MyTube] fallback to default translation for", txt
+		print "[MyTube] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 
