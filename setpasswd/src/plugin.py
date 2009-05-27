@@ -2,6 +2,7 @@ from enigma import eConsoleAppContainer
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 from Screens.Setup import SetupSummary
 from Components.ConfigList import ConfigList
@@ -25,17 +26,19 @@ title=_("Change Root Password")
 
 class ChangePasswdScreen(Screen):
 	skin = """
-		<screen position="110,145" size="490,260" title="%s" >
-		<widget name="passwd" position="10,10" size="470,200" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="10,205" size="470,2" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/red.png" position="10,210" size="150,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="170,210" size="150,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" position="330,210" size="150,40" alphatest="on" />
-		<widget source="key_red" render="Label" position="10,210" zPosition="1" size="150,40" font="Regular;17" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		<widget source="key_green" render="Label" position="170,210" zPosition="1" size="150,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget source="key_yellow" render="Label" position="330,210" zPosition="1" size="150,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-	</screen>""" % _("Change Root Password")
-	
+		<screen position="65,160" size="585,250" title="%s" >
+		<widget name="passwd" position="10,10" size="565,200" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/div-h.png" position="10,205" size="565,2" transparent="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/red.png" position="5,210" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/green.png" position="150,210" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="295,210" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/blue.png" position="440,210" size="140,40" alphatest="on" />
+		<widget source="key_red" render="Label" position="5,210" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+		<widget source="key_green" render="Label" position="150,210" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget source="key_yellow" render="Label" position="295,210" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget source="key_blue" render="Label" position="440,210" zPosition="1" size="140,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+	</screen>""" % title
+
 	def __init__(self, session, args = 0):
 		Screen.__init__(self, session)
 		self.skin = ChangePasswdScreen.skin
@@ -51,10 +54,12 @@ class ChangePasswdScreen(Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Set Password"))
 		self["key_yellow"] = StaticText(_("new Random"))
+		self["key_blue"] = StaticText(_("virt. Keyboard"))
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 				{
 						"green": self.SetPasswd,
+						"blue": self.bluePressed,
 						"red": self.close,
 						"yellow": self.buildList,
 						"cancel": self.close
@@ -101,6 +106,16 @@ class ChangePasswdScreen(Screen):
 		del self.container.appClosed[:]
 		del self.container
 		self.close()
+		
+	def bluePressed(self):
+		self.session.openWithCallback(self.VirtualKeyBoardTextEntry, VirtualKeyBoard, title = (_("Enter your password here:")), text = self.password)
+	
+	def VirtualKeyBoardTextEntry(self, callback = None):
+		if callback is not None and len(callback):
+			self.password=callback
+			self.list = []
+			self.list.append(getConfigListEntry(_('Enter new Password'), ConfigText(default = self.password, fixed_size = False)))
+			self["passwd"].setList(self.list)
 
 def startChange(menuid):
 	if menuid != "system": 
