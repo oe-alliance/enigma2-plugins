@@ -14,6 +14,8 @@ from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Plugins.Plugin import PluginDescriptor
 
+from __init__ import _
+
 import string
 import sys 
 import time
@@ -29,9 +31,9 @@ class ChangePasswdScreen(Screen):
 		<ePixmap pixmap="skin_default/buttons/red.png" position="10,210" size="150,40" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/green.png" position="170,210" size="150,40" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/yellow.png" position="330,210" size="150,40" alphatest="on" />
-		<widget source="key_red" render="Label" position="10,210" zPosition="1" size="150,40" font="Regular;19" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		<widget source="key_green" render="Label" position="170,210" zPosition="1" size="150,40" font="Regular;19" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget source="key_yellow" render="Label" position="330,210" zPosition="1" size="150,40" font="Regular;19" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget source="key_red" render="Label" position="10,210" zPosition="1" size="150,40" font="Regular;17" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+		<widget source="key_green" render="Label" position="170,210" zPosition="1" size="150,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget source="key_yellow" render="Label" position="330,210" zPosition="1" size="150,40" font="Regular;17" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 	</screen>""" % _("Change Root Password")
 	
 	def __init__(self, session, args = 0):
@@ -77,7 +79,7 @@ class ChangePasswdScreen(Screen):
 		self.container.dataAvail.append(self.dataAvail)
 		retval = self.container.execute("passwd %s" % self.user)
 		if retval==0:
-			self.session.open(MessageBox, _("Sucessfully changed password for root user to:\n%s " % self.password), MessageBox.TYPE_INFO)	
+			self.session.open(MessageBox, _("Sucessfully changed password for root user to: %s " % self.password), MessageBox.TYPE_INFO)	
 		else:
 			self.session.open(MessageBox, _("Unable to change/reset password for root user"), MessageBox.TYPE_ERROR)	
 
