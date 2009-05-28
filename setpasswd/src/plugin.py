@@ -45,11 +45,8 @@ class ChangePasswdScreen(Screen):
 
 		self.user="root"
 		self.output_line = ""
-		
-		self.password=self.GeneratePassword()
 		self.list = []
-		self.list.append(getConfigListEntry(_('Enter new Password'), ConfigText(default = self.password, fixed_size = False)))      
-
+		
 		self["passwd"] = ConfigList(self.list)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Set Password"))
@@ -58,22 +55,26 @@ class ChangePasswdScreen(Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 				{
-						"green": self.SetPasswd,
-						"blue": self.bluePressed,
 						"red": self.close,
-						"yellow": self.buildList,
+						"green": self.SetPasswd,
+						"yellow": self.newRandom,
+						"blue": self.bluePressed,
 						"cancel": self.close
 				}, -1)
+	
+		self.buildList(self.GeneratePassword())
 
-	def buildList(self):
-		self.password=self.GeneratePassword()
+	def newRandom(self):
+		self.buildList(self.GeneratePassword())
+	
+	def buildList(self, password):
+		self.password=password
 		self.list = []
 		self.list.append(getConfigListEntry(_('Enter new Password'), ConfigText(default = self.password, fixed_size = False)))
 		self["passwd"].setList(self.list)
 		
 	def GeneratePassword(self): 
 		passwdChars = string.letters + string.digits
-#		passwdChars = string.letters + string.digits + '~!@#$%^&*-_=+?'   # use for more security :)
 		passwdLength = 8
 		return ''.join(Random().sample(passwdChars, passwdLength)) 
 
@@ -112,10 +113,7 @@ class ChangePasswdScreen(Screen):
 	
 	def VirtualKeyBoardTextEntry(self, callback = None):
 		if callback is not None and len(callback):
-			self.password=callback
-			self.list = []
-			self.list.append(getConfigListEntry(_('Enter new Password'), ConfigText(default = self.password, fixed_size = False)))
-			self["passwd"].setList(self.list)
+			self.buildList(callback)
 
 def startChange(menuid):
 	if menuid != "system": 
