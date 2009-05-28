@@ -106,13 +106,13 @@ class AutoMount():
 			print "self.automounts without active mounts",self.automounts
 			if data['active'] == 'False' or data['active'] is False:
 				path = '/media/net/'+ data['sharename']
-				umountcmd = 'umount -f '+ path
+				umountcmd = 'umount -fl '+ path
 				print "[AutoMount.py] UMOUNT-CMD--->",umountcmd
 				self.MountConsole.ePopen(umountcmd, self.CheckMountPointFinished, [data, callback])
 		else:
 			if data['active'] == 'False' or data['active'] is False:
 				path = '/media/net/'+ data['sharename']
-				self.command = 'umount -f '+ path
+				self.command = 'umount -fl '+ path
 
 			if data['active'] == 'True' or data['active'] is True:
 				path = '/media/net/'+ data['sharename']
@@ -277,7 +277,7 @@ class AutoMount():
 		if not self.removeConsole:
 			self.removeConsole = Console()
 		path = '/media/net/'+ mountpoint
-		umountcmd = 'umount -f '+ path
+		umountcmd = 'umount -fl '+ path
 		print "[AutoMount.py] UMOUNT-CMD--->",umountcmd
 		self.removeConsole.ePopen(umountcmd, self.removeMountPointFinished, [path, callback])
 
@@ -461,7 +461,7 @@ class AutoMount_Unused:
 		else:
 			if self.automounts.has_key(data['sharename']):
 				self.automounts[data['sharename']]['isMounted'] = False
-		umountcmd = 'umount /tmp/'+ data['sharename']
+		umountcmd = 'umount -fl /tmp/'+ data['sharename']
 		self.MountConsole.ePopen(umountcmd, self.CleanMountPointFinished, [data, callback])
 
 	def CleanMountPointFinished(self, result, retval, extra_args):
