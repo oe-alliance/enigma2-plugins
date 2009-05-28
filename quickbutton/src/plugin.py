@@ -29,19 +29,32 @@ from Components.config import config
 from Components.Button import Button
 from Screens.MessageBox import MessageBox
 
-
 config.plugins.Quickbutton = ConfigSubsection()
-config.plugins.Quickbutton.red = ConfigText(default = "", visible_width = 50, fixed_size = False)
-config.plugins.Quickbutton.green = ConfigText(default = "", visible_width = 50, fixed_size = False)
-config.plugins.Quickbutton.yellow = ConfigText(default = "", visible_width = 50, fixed_size = False)
-config.plugins.Quickbutton.blue = ConfigText(default = "", visible_width = 50, fixed_size = False)
+config.plugins.Quickbutton.red = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
+config.plugins.Quickbutton.green = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
+config.plugins.Quickbutton.yellow = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
+config.plugins.Quickbutton.blue = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 
-EPGListTitle = _("EPG List")
+
+from  Screens.InfoBarGenerics import InfoBarPlugins
+baseInfoBarPlugins__init__ = None
+baserunPlugin = None
+
 
 def autostart(reason, **kwargs):
+	global baseInfoBarPlugins__init__, baserunPlugin
 	if "session" in kwargs:
 		session = kwargs["session"]
-		Quickbutton(session)
+		if baseInfoBarPlugins__init__ is None:
+			baseInfoBarPlugins__init__ = InfoBarPlugins.__init__
+		if baserunPlugin is None:
+			baserunPlugin = InfoBarPlugins.runPlugin
+		InfoBarPlugins.__init__ = InfoBarPlugins__init__
+		InfoBarPlugins.runPlugin = runPlugin
+		InfoBarPlugins.greenlong = greenlong
+		InfoBarPlugins.yellowlong = yellowlong
+		InfoBarPlugins.redlong = redlong
+		InfoBarPlugins.bluelong = bluelong
 
 def setup(session,**kwargs):
 	session.open(QuickbuttonSetup)
@@ -51,6 +64,78 @@ def Plugins(**kwargs):
 	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]	
 	list.append(PluginDescriptor(name="Setup Quickbutton", description=_("setup for Quickbutton"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
 	return list
+
+def InfoBarPlugins__init__(self):
+
+	QuickbuttonActionMap = ActionMap(["QuickbuttonActions"])
+	QuickbuttonActionMap.execBegin()
+	QuickbuttonActionMap.actions["green_l"] = self.greenlong
+	QuickbuttonActionMap.actions["yellow_l"] = self.yellowlong
+	QuickbuttonActionMap.actions["red_l"] = self.redlong 
+	QuickbuttonActionMap.actions["blue_l"] = self.bluelong
+	baseInfoBarPlugins__init__(self)
+
+def runPlugin(self, plugin):
+	baserunPlugin(self,plugin)
+
+def greenlong(self):
+	startPlugin(self,str(config.plugins.Quickbutton.green.value))
+
+def yellowlong(self):
+	startPlugin(self, str(config.plugins.Quickbutton.yellow.value))
+
+def redlong(self):
+	startPlugin(self, str(config.plugins.Quickbutton.red.value))
+
+def bluelong(self):
+	startPlugin(self, str(config.plugins.Quickbutton.blue.value))
+
+def startPlugin(self,pname):
+	msgText = _("Unknown Error")
+	no_plugin = True
+	if pname != _("Nothing"):
+		if pname == _("EPG List"):
+			from Screens.EpgSelection import EPGSelection
+			self.session.open(EPGSelection, self.session.nav.getCurrentlyPlayingServiceReference())
+			no_plugin = False
+		elif pname == _("MediaPlayer"):
+			try: # falls es nicht installiert ist
+				from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
+				self.session.open(MediaPlayer)
+				no_plugin = false
+			except Exception, e:
+				msgText = _("Error!\nError Text: %s"%e)
+		elif pname == _("Plugin browser"):
+			from Screens.PluginBrowser import PluginBrowser
+			self.session.open(PluginBrowser)
+			no_plugin = False
+		elif pname == _("switch 4:3 content display"):
+			ar = {	"pillarbox": _("Pillarbox"), 
+				"panscan": _("Pan&Scan"),  
+				"scale": _("Just Scale")}
+			switch = { "pillarbox":"panscan", "panscan":"scale", "scale":"pillarbox" }
+			config.av.policy_43.value =  switch[config.av.policy_43.value]
+			config.av.policy_43.save()
+			self.session.open(MessageBox,_("Display 4:3 content as") + " " + ar[config.av.policy_43.value], MessageBox.TYPE_INFO, timeout = 3)
+			no_plugin = False
+		else:
+			plugin = None
+			for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
+				if pname == str(p.name):
+					plugin = p
+			if plugin is not None:
+				try:
+					runPlugin(self,plugin)
+					no_plugin = False
+				except Exception, e:
+					msgText = _("Error!\nError Text: %s"%e)
+			else: 
+				msgText = _("Plugin not found!")
+	else:
+		msgText = _("No plugin assigned!")
+	if no_plugin:
+		self.session.open(MessageBox,msgText, MessageBox.TYPE_INFO)
+
 
 class QuickbuttonSetup(ConfigListScreen, Screen):
 	skin = """
@@ -67,24 +152,19 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
 		self.entryguilist = []
-		red_selectedindex = "0"
-		if config.plugins.Quickbutton.red.value == EPGListTitle:
-			red_selectedindex = "1"
-		green_selectedindex = "0"
-		if config.plugins.Quickbutton.green.value == EPGListTitle:
-			green_selectedindex = "1"
-		yellow_selectedindex = "0"
-		if config.plugins.Quickbutton.yellow.value == EPGListTitle:
-			yellow_selectedindex = "1"
-		blue_selectedindex = "0"
-		if config.plugins.Quickbutton.blue.value == EPGListTitle:
-			blue_selectedindex = "1"
+		red_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.red.value)
+		green_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.green.value)
+		yellow_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.yellow.value)
+		blue_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.blue.value)
 		# feste Vorgaben...koennte man noch erweitern, da hole ich mir sinnvolle Vorschlaege aus Foren noch ein...
 		self.entryguilist.append(("0",_("Nothing")))
-		self.entryguilist.append(("1",EPGListTitle))
-		# Vorgaben aus EXTENSIONSMENU
-		index = 2
-		for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EXTENSIONSMENU):
+		self.entryguilist.append(("1",_("EPG List")))
+		self.entryguilist.append(("2",_("MediaPlayer")))
+		self.entryguilist.append(("3",_("Plugin browser")))
+		self.entryguilist.append(("4",_("switch 4:3 content display")))
+		# Vorgaben aus EXTENSIONSMENU, PLUGINMENU
+		index = 5
+		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
 			self.entryguilist.append((str(index),str(p.name)))
 			if config.plugins.Quickbutton.red.value == str(p.name):
 				red_selectedindex = str(index)
@@ -95,6 +175,7 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			if config.plugins.Quickbutton.blue.value == str(p.name):
 				blue_selectedindex = str(index)
 			index = index + 1
+		
 
 		self.redchoice = ConfigSelection(default = red_selectedindex, choices = self.entryguilist)
 		self.greenchoice = ConfigSelection(default = green_selectedindex, choices = self.entryguilist)
@@ -116,6 +197,18 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			"ok": self.keySave,
 		}, -2)
 
+	def getStaticPluginName(self,value):
+		if value == _("EPG List"):
+			return "1"
+		elif value == _("MediaPlayer"):
+			return "2"
+		elif value == _("Plugin browser"):
+			return "3"
+		elif value == _("switch 4:3 content display"):
+			return "4"
+		else:
+			return "0"
+
 	def keySave(self):
 		config.plugins.Quickbutton.red.value = self.entryguilist[int(self.redchoice.value)][1]
 		config.plugins.Quickbutton.green.value = self.entryguilist[int(self.greenchoice.value)][1]
@@ -127,55 +220,3 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 
 	def keyClose(self):
 		self.close()
-
-class Quickbutton(object):
-	def __init__(self, session):
-		self.session = session
-		QuickbuttonActionMap = ActionMap(["QuickbuttonActions"])
-		QuickbuttonActionMap.execBegin()
-		QuickbuttonActionMap.actions["green_l"] = self.greenlong
-		QuickbuttonActionMap.actions["yellow_l"] = self.yellowlong
-		QuickbuttonActionMap.actions["red_l"] = self.redlong 
-		QuickbuttonActionMap.actions["blue_l"] = self.bluelong
-
-	def greenlong(self):
-		self.getPlugin(str(config.plugins.Quickbutton.green.value))
-	
-	def yellowlong(self):
-		self.getPlugin(str(config.plugins.Quickbutton.yellow.value))
-	
-	def redlong(self):
-		self.getPlugin(str(config.plugins.Quickbutton.red.value))
-
-	def bluelong(self):
-		self.getPlugin(str(config.plugins.Quickbutton.blue.value))
-	
-	def getPlugin(self, pname):
-		msgText = _("Unknown Error")
-		error = True
-		if pname != "":
-			if pname == EPGListTitle:
-				print "[Quickbutton] EPG List"
-				from Screens.EpgSelection import EPGSelection
-				self.session.open(EPGSelection, self.session.nav.getCurrentlyPlayingServiceReference())
-				error = False
-			else:
-				ca = None
-				for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EXTENSIONSMENU):
-					if pname == str(p.name):
-						print "[Quickbutton] %s"%p.name
-						ca = p
-				if ca is not None:
-					try: 
-						servicelist = self.session.instantiateDialog(ChannelSelection)
-						ca(session = self.session, servicelist = servicelist)
-						error = False
-					except Exception, e:
-						msgText = _("Error!\nError Text: %s"%e)
-				else: 
-					msgText = _("Plugin not found!")
-		else:
-			msgText = _("No plugin assigned!")
-		if error:
-			self.session.open(MessageBox,msgText, MessageBox.TYPE_INFO)
-
