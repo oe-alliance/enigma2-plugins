@@ -119,18 +119,19 @@ config.plugins.mytube.search.sortOrder = ConfigSelection(
 
 config.plugins.mytube.general = ConfigSubsection()
 config.plugins.mytube.general.showHelpOnOpen = ConfigYesNo(default = True)
+config.plugins.mytube.general.loadFeedOnOpen = ConfigYesNo(default = True)
 config.plugins.mytube.general.startFeed = ConfigSelection(
 				[
-				 ("hd", _("High definition")),
-				 ("top_rated", _("Top rated")),
-				 ("top_favorites", _("Top favorites")),
+				 ("hd", _("HD videos")),
 				 ("most_viewed", _("Most viewed")),
-				 ("most_popular", _("Most popular")),
-				 ("most_recent", _("Most recent")),
+				 ("top_rated", _("Top rated")),
+				 ("recently_featured", _("Recently featured")),
 				 ("most_discussed", _("Most discussed")),
-				 ("top_favorites", _("Most linked")),
-				 ("most_linked", _("Most responded"))
-				], "most_popular")
+				 ("top_favorites", _("Top favorites")),
+				 ("most_linked", _("Most linked")),
+				 ("most_responded", _("Most responded")),
+				 ("most_recent", _("Most recent"))
+				], "most_viewed")
 config.plugins.mytube.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
 	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
 
@@ -143,6 +144,7 @@ if default not in tmp:
 	tmp.append(default)
 config.plugins.mytube.general.videodir = ConfigSelection(default = default, choices = tmp)
 config.plugins.mytube.general.history = ConfigText(default="")
+config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
 #config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
 #config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
@@ -207,8 +209,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 							MultiContentEntryText(pos = (400, 43), size = (200, 18), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 8), # index 8 is the ratingcount
 						]),
 					"state": (77,[
-							MultiContentEntryText(pos = (10, 1), size = (500, 28), font=2, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 0), # index 0 is the name
-							MultiContentEntryText(pos = (10, 22), size = (500, 46), font=3, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 1), # index 2 is the description
+							MultiContentEntryText(pos = (10, 1), size = (560, 28), font=2, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 0), # index 0 is the name
+							MultiContentEntryText(pos = (10, 22), size = (560, 46), font=3, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 1), # index 2 is the description
 						])
 					},
 					"fonts": [gFont("Regular", 22),gFont("Regular", 18),gFont("Regular", 26),gFont("Regular", 20)],
@@ -294,7 +296,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"ok": self.keyOK,
 			"back": self.switchToConfigList,
 			"red": self.switchToConfigList,
-			#"prevBouquet": self.switchToFeedList,
+			"nextBouquet": self.switchToConfigList,
+			"prevBouquet": self.switchToFeedList,
 			"up": self.keyUp,
 			"down": self.keyDown,
 			"left": self.keyLeft,
@@ -317,19 +320,35 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"menu" : self.handleMenu,
 		}, -2)
 
-		self["statusactions"] = ActionMap(["WizardActions"],
+		self["statusactions"] = ActionMap(["ShortcutActions", "WizardActions", "HelpActions", "MediaPlayerActions"],
 		{
 			"back": self.leavePlayer,
 			"red": self.leavePlayer,
 			"nextBouquet": self.switchToConfigList,
+			"green": self.keyStdFeed,
+			"yellow": self.handleHistory,
+		}, -2)
+
+		self["historyactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "MovieSelectionActions", "HelpActions"],
+		{
+			"ok": self.keyOK,
+			"back": self.closeHistory,
+			"red": self.closeHistory,
+			"yellow": self.handleHistory,
+			"up": self.keyUp,
+			"down": self.keyDown,	
+			"left": self.keyLeft,
+			"right": self.keyRight,
 		}, -2)
 
 		self["videoactions"].setEnabled(False)
 		self["statusactions"].setEnabled(False)
+		self["historyactions"].setEnabled(False)
 		self.timer = eTimer()
 		self.timer.callback.append(self.picloadTimeout)
 		self.SearchConfigEntry = None
 		self.searchContextEntries = []
+		config.plugins.mytube.search.searchTerm.value = ""
 		ConfigListScreen.__init__(self, self.searchContextEntries, session)
 		self.createSetup()		
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -345,34 +364,93 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		
 	def layoutFinished(self):
 		self.currList = "status"
-		self["key_green"].hide()
-		self.statuslist = []
-		self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
-		self["feedlist"].style = "state"
-		self['feedlist'].setList(self.statuslist)
+		#self["key_green"].hide()
 		current = self["config"].getCurrent()
 		if current[1].help_window.instance is not None:
 			current[1].help_window.instance.hide()
-		self.Timer.start(500)
+		self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+		self["feedlist"].style = "state"
+		self['feedlist'].setList(self.statuslist)
+		self.Timer.start(200)
 
 	def TimerFire(self):
 		self.Timer.stop()
-		self.setState('getFeed')
+		if config.plugins.mytube.general.loadFeedOnOpen.value:
+			self.setState('getFeed')
+		else:
+			self.setState('byPass')
 		
 	def setWindowTitle(self):
 		self.setTitle(_("MyTubePlayer"))
+
+	def createSetup(self):
+		self.searchContextEntries = []
+		self.SearchConfigEntry = getConfigListEntry(_("Search Term(s)"), config.plugins.mytube.search.searchTerm)
+		self.searchContextEntries.append(self.SearchConfigEntry)
+		self["config"].list = self.searchContextEntries
+		self["config"].l.setList(self.searchContextEntries)
+
+	def setState(self,status = None):
+		if status:
+			if self.FirstRun == True:
+				self.appendEntries = False
+				myTubeService.startService()
+			self.currList = "status"
+			self.statuslist = []
+			self["videoactions"].setEnabled(False)
+			self["searchactions"].setEnabled(False)
+			#self["key_green"].hide()
+			self["config_actions"].setEnabled(False)
+			self["historyactions"].setEnabled(False)
+			self["statusactions"].setEnabled(True)
+			self["ButtonBlue"].hide()
+			self["VKeyIcon"].hide()	
+			if self.HistoryWindow is not None:
+				self.HistoryWindow.deactivate()
+				self.HistoryWindow.instance.hide()
+			if status == 'getFeed':
+				self.hideSuggestions()
+				self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+				self["feedlist"].style = "state"
+				self['feedlist'].setList(self.statuslist)
+			elif status == 'getSearchFeed':
+				self.hideSuggestions()
+				self.statuslist.append(( _("Fetching search entries"), _("Trying to download the Youtube search results. Please wait..." ) ))
+				self["feedlist"].style = "state"
+				self['feedlist'].setList(self.statuslist)
+			elif status == 'Error':
+				self.hideSuggestions()
+				self.statuslist.append(( _("An error occured."), _("There was an error getting the feed entries. Please try again." ) ))
+				self["feedlist"].style = "state"
+				self['feedlist'].setList(self.statuslist)
+			elif status == 'noVideos':
+				self["key_green"].show()
+				self.hideSuggestions()
+				self.statuslist.append(( _("No videos to display"), _("Please select a standard feed or try searching for videos." ) ))
+				self["feedlist"].style = "state"
+				self['feedlist'].setList(self.statuslist)
+			elif status == 'byPass':
+				self.statuslist.append(( _("Not fetching feed entries"), _("Please enter your search term." ) ))
+				self["feedlist"].style = "state"
+				self['feedlist'].setList(self.statuslist)
+				self.switchToConfigList()
+			if self.FirstRun == True:
+				if config.plugins.mytube.general.loadFeedOnOpen.value:
+					if config.plugins.mytube.general.startFeed.value == 'hd':
+						self.FeedURL = "http://gdata.youtube.com/feeds/api/videos/-/HD"
+					else:
+						self.FeedURL = self.BASE_STD_FEEDURL + str(config.plugins.mytube.general.startFeed.value)
+					self.getFeed(self.FeedURL, str(config.plugins.mytube.general.startFeed.value))
+
 
 	def handleHelpWindow(self):
 		print "[handleHelpWindow]"
 		if self.currList == "configlist":
 			self.hideSuggestions()
-			self.session.openWithCallback(self.searchHelpClosed, MyTubeVideoHelpScreen, self.skin_path, wantedinfo = self.searchtext, wantedtitle = _("MyTubePlayer Help") )
+			self.session.openWithCallback(self.ScreenClosed, MyTubeVideoHelpScreen, self.skin_path, wantedinfo = self.searchtext, wantedtitle = _("MyTubePlayer Help") )
 		elif self.currList == "feedlist":
-			self.session.open(MyTubeVideoHelpScreen, self.skin_path, wantedinfo = self.feedtext, wantedtitle = _("MyTubePlayer Help") )
+			self.session.openWithCallback(self.ScreenClosed, MyTubeVideoHelpScreen, self.skin_path, wantedinfo = self.feedtext, wantedtitle = _("MyTubePlayer Help") )
 			
-	def searchHelpClosed(self):
-		self.switchToConfigList()
-
 	def handleFirstHelpWindow(self):
 		print "[handleFirstHelpWindow]"
 		if config.plugins.mytube.general.showHelpOnOpen.value is True:
@@ -386,61 +464,12 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if self.FirstRun == True:	
 			self.FirstRun = False
 			self.switchToConfigList()
-	
-	def setState(self,status = None):
-		if status:
-			self["videoactions"].setEnabled(False)
-			self["searchactions"].setEnabled(False)
-			self["key_green"].hide()
-			self.hideSuggestions()
-			self["config_actions"].setEnabled(False)
-			self["statusactions"].setEnabled(True)
-			if self.HistoryWindow is not None:
-				self.HistoryWindow.deactivate()
-				self.HistoryWindow.instance.hide()
-			self.currList = "status"
-			self.statuslist = []
-			if status == 'getFeed':
-				self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
-				print "self.statuslist",self.statuslist
-				self["feedlist"].style = "state"
-				self['feedlist'].setList(self.statuslist)
-			if status == 'getSearchFeed':
-				self.statuslist.append(( _("Fetching search entries"), _("Trying to download the Youtube search results. Please wait..." ) ))
-				self["feedlist"].style = "state"
-				self['feedlist'].setList(self.statuslist)
-			if status == 'Error':
-				self.statuslist.append(( _("An error occured."), _("There was an error getting the feed entries. Try again..." ) ))
-				self["feedlist"].style = "state"
-				self['feedlist'].setList(self.statuslist)
-			if self.FirstRun == True:
-				self.appendEntries = False
-				myTubeService.startService()
-				self.FeedURL = self.BASE_STD_FEEDURL + str(config.plugins.mytube.general.startFeed.value)
-				self.getFeed(self.FeedURL, str(config.plugins.mytube.general.startFeed.value))
-
-	def createSetup(self):
-		self.searchContextEntries = []
-		self.SearchConfigEntry = getConfigListEntry(_("Search Term(s)"), config.plugins.mytube.search.searchTerm)
-		self.searchContextEntries.append(self.SearchConfigEntry)
-		self["config"].list = self.searchContextEntries
-		self["config"].l.setList(self.searchContextEntries)
-		self["config"].onSelectionChanged.append(self.selectionChanged)
-
-	def selectionChanged(self):
-		current = self["config"].getCurrent()
-		if current:
-			if current == self.SearchConfigEntry:
-				helpwindowpos = self["HelpWindow"].getPosition()
-				if current[1].help_window.instance is not None:
-					current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
 
 	def handleMenu(self):
 		print "currlist im HandleMenu:",self.currList
 		if self.currList == "configlist":
 			menulist = (
 					(_("MyTube Settings"), "settings"),
-					(_("View standard feed"), "stdfeed"),
 				)
 			self.hideSuggestions()
 			self.session.openWithCallback(self.openMenu, ChoiceBox, title=_("Select your choice."), list = menulist)
@@ -449,15 +478,14 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			menulist = [(_("MyTube Settings"), "settings")]
 			menulist.extend((
 					(_("View related videos"), "related"),
-					(_("View response videos"), "response"),
-					(_("View standard feed"), "stdfeed")
+					(_("View response videos"), "response")
 				))
 			if config.usage.setup_level.index >= 2: # expert+
 				menulist.extend((
 					(_("Download Video"), "download"),
 					(_("View Downloads"), "downview")
 				))
-								
+						
 			self.hideSuggestions()
 			self.session.openWithCallback(self.openMenu, ChoiceBox, title=_("Select your choice."), list = menulist)
 
@@ -466,9 +494,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		print "openMenu - ANSWER",answer
 		if answer == "settings":
 			print "settings selected"
-			self.session.open(MyTubeSettingsScreen, self.skin_path )
-		elif answer == "stdfeed":
-			self.keyStdFeed()
+			self.session.openWithCallback(self.ScreenClosed,MyTubeSettingsScreen, self.skin_path )
 		elif answer == "related":
 			current = self["feedlist"].getCurrent()[0]
 			self.setState('getFeed')
@@ -491,10 +517,26 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			for job in job_manager.getPendingJobs():
 				self.tasklist.append((job,job.name,job.getStatustext(),int(100*job.progress/float(job.end)) ,str(100*job.progress/float(job.end)) + "%" ))
 			self.session.open(MyTubeTasksScreen, self.skin_path , self.tasklist)		
-			
+		elif answer == None:
+			print "No menuentry selected, we should just switch back to old state."
+			self.ScreenClosed()
+	
 	def openKeyboard(self):
 		self.hideSuggestions()
 		self.session.openWithCallback(self.SearchEntryCallback, VirtualKeyBoard, title = (_("Enter your search term(s)")), text = config.plugins.mytube.search.searchTerm.value)
+
+	def ScreenClosed(self):
+		print "ScreenCLosed, restoring old window state"
+		if self.currList == "historylist":
+			if self.HistoryWindow.status() is False:
+				print "status is FALSE"
+				self.HistoryWindow.activate()
+				self.HistoryWindow.instance.show()
+		elif self.currList == "configlist":
+			self.switchToConfigList()
+			ConfigListScreen.keyOK(self)
+		elif self.currList == "feedlist":
+			self.switchToFeedList()
 
 	def SearchEntryCallback(self, callback = None):
 		if callback is not None and len(callback):
@@ -513,15 +555,12 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		print "openStandardFeedClosed - ANSWER",answer
 		if answer is not None:
 			if answer == 'hd':
-				self.setState('getFeed')
-				self.appendEntries = False
 				self.FeedURL = "http://gdata.youtube.com/feeds/api/videos/-/HD"
-				self.getFeed(self.FeedURL, str(answer))
 			else:
-				self.setState('getFeed')
-				self.appendEntries = False
 				self.FeedURL = self.BASE_STD_FEEDURL + str(answer)
-				self.getFeed(self.FeedURL, str(answer))
+			self.setState('getFeed')
+			self.appendEntries = False
+			self.getFeed(self.FeedURL, str(answer))
 
 	def handleLeave(self, how):
 		self.is_closing = True
@@ -602,8 +641,11 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			config.plugins.mytube.general.showHelpOnOpen.value = False
 			config.plugins.mytube.general.showHelpOnOpen.save()
 		print "self.History im doQuit:",self.History
-		if self.History and len(self.History):
-			config.plugins.mytube.general.history.value = ",".join(self.History)
+		if not config.plugins.mytube.general.clearHistoryOnClose.value:
+			if self.History and len(self.History):
+				config.plugins.mytube.general.history.value = ",".join(self.History)
+		else:
+			config.plugins.mytube.general.history.value = ""
 		config.plugins.mytube.general.history.save()
 		config.plugins.mytube.general.save()
 		config.plugins.mytube.save()
@@ -626,14 +668,6 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self["config"].getCurrent()[1].deactivateSuggestionList()
 				self.setState('getSearchFeed')
 				self.runSearch(searchContext)
-		elif self.currList == "historylist":
-			config.plugins.mytube.search.searchTerm.value = self.HistoryWindow.getSelection()
-			self["config"].invalidateCurrent()
-			if config.plugins.mytube.search.searchTerm.value != "":
-				searchContext = config.plugins.mytube.search.searchTerm.value
-				print "Search searchcontext",searchContext
-				self.setState('getSearchFeed')
-				self.runSearch(searchContext)
 		elif self.currList == "feedlist":
 			current = self[self.currList].getCurrent()
 			if current:
@@ -648,6 +682,15 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 						self.session.open(MyTubePlayer, myreference, self.lastservice, infoCallback = self.showVideoInfo, nextCallback = self.getNextEntry, prevCallback = self.getPrevEntry )
 					else:
 						self.session.open(MessageBox, _("Sorry, video is not available!"), MessageBox.TYPE_INFO)
+		elif self.currList == "historylist":
+			if self.HistoryWindow is not None:
+				config.plugins.mytube.search.searchTerm.value = self.HistoryWindow.getSelection()
+			self["config"].invalidateCurrent()
+			if config.plugins.mytube.search.searchTerm.value != "":
+				searchContext = config.plugins.mytube.search.searchTerm.value
+				print "Search searchcontext",searchContext
+				self.setState('getSearchFeed')
+				self.runSearch(searchContext)
 
 	def keyUp(self):
 		print "self.currList im KeyUp",self.currList
@@ -656,11 +699,11 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				if not self.propagateUpDownNormally:
 					self["config"].getCurrent()[1].suggestionListUp()
 					self["config"].invalidateCurrent()
+		elif self.currList == "feedlist":
+			self[self.currList].selectPrevious()
 		elif self.currList == "historylist":
 			if self.HistoryWindow is not None and self.HistoryWindow.shown:
 				self.HistoryWindow.up()
-		elif self.currList == "feedlist":
-			self[self.currList].selectPrevious()
 
 	def keyDown(self):
 		print "self.currList im KeyDown",self.currList
@@ -669,9 +712,6 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				if not self.propagateUpDownNormally:
 					self["config"].getCurrent()[1].suggestionListDown()
 					self["config"].invalidateCurrent()
-		elif self.currList == "historylist":
-			if self.HistoryWindow is not None and self.HistoryWindow.shown:
-				self.HistoryWindow.down()
 		elif self.currList == "feedlist":
 			print self[self.currList].count()
 			print self[self.currList].index
@@ -679,7 +719,9 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				self.session.openWithCallback(self.getNextEntries, MessageBox, _("Do you want to see more entries?"))
 			else:
 				self[self.currList].selectNext()
-
+		elif self.currList == "historylist":
+			if self.HistoryWindow is not None and self.HistoryWindow.shown:
+				self.HistoryWindow.down()
 	def keyRight(self):
 		print "self.currList im KeyRight",self.currList
 		if self.propagateUpDownNormally:
@@ -707,7 +749,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self.HistoryWindow.pageDown()
 	def keyStdFeed(self):
 		self.hideSuggestions()
-		menulist = [(_("High definition"), "hd")]
+		menulist = [(_("HD videos"), "hd")]
 		menulist.extend((
 			(_("Top rated"), "top_rated"),
 			(_("Top favorites"), "top_favorites"),
@@ -716,6 +758,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			(_("Most recent"), "most_recent"),
 			(_("Most discussed"), "most_discussed"),
 			(_("Most linked"), "most_linked"),
+			(_("Recently featured"), "recently_featured"),
 			(_("Most responded"), "most_responded")
 		))
 		self.session.openWithCallback(self.openStandardFeedClosed, ChoiceBox, title=_("Select new feed to view."), list = menulist)
@@ -739,6 +782,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["videoactions"].setEnabled(False)
 		self["searchactions"].setEnabled(False)
 		self["suggestionactions"].setEnabled(True)
+		self["historyactions"].setEnabled(False)
 		self["key_green"].hide()
 		self.propagateUpDownNormally = False
 		self["config"].invalidateCurrent()
@@ -749,16 +793,18 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def switchToConfigList(self):
 		print "switchToConfigList"
 		self.currList = "configlist"
-		self["statusactions"].setEnabled(False)
 		self["config_actions"].setEnabled(True)	
+		self["historyactions"].setEnabled(False)
+		self["statusactions"].setEnabled(False)
 		self["videoactions"].setEnabled(False)
 		self["suggestionactions"].setEnabled(False)
 		self["searchactions"].setEnabled(True)
 		self["key_green"].hide()
 		self["ButtonBlue"].show()
-		self["VKeyIcon"].show()	
-		current = self["config"].getCurrent()
+		self["VKeyIcon"].show()
+		self["config"].invalidateCurrent()
 		helpwindowpos = self["HelpWindow"].getPosition()
+		current = self["config"].getCurrent()
 		if current[1].help_window.instance is not None:
 			current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
 			current[1].help_window.instance.show()
@@ -774,61 +820,70 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 	def switchToFeedList(self, append = False):
 		print "switchToFeedList"
-		self.currList = "feedlist"
-		self["ButtonBlue"].hide()
-		self["VKeyIcon"].hide()	
-		self["videoactions"].setEnabled(True)
-		self["suggestionactions"].setEnabled(False)
-		self["searchactions"].setEnabled(False)
-		self["statusactions"].setEnabled(False)
-		self["key_green"].show()
-		self["config_actions"].setEnabled(False)
-		if not append:
-			self[self.currList].setIndex(0)
+		print "switching to feedlist from:",self.currList
+		print "len(self.videolist):",len(self.videolist)
 		if self.HistoryWindow is not None and self.HistoryWindow.shown:
 			self.HistoryWindow.deactivate()
 			self.HistoryWindow.instance.hide()
 		self.hideSuggestions()
-		
+		if len(self.videolist):
+			self.currList = "feedlist"
+			self["ButtonBlue"].hide()
+			self["VKeyIcon"].hide()	
+			self["videoactions"].setEnabled(True)
+			self["suggestionactions"].setEnabled(False)
+			self["searchactions"].setEnabled(False)
+			self["statusactions"].setEnabled(False)
+			self["historyactions"].setEnabled(False)
+			self["key_green"].show()
+			self["config_actions"].setEnabled(False)
+			if not append:
+				self[self.currList].setIndex(0)
+		else:
+			self.setState('noVideos')
+
+
+	def switchToHistory(self):
+		print "switchToHistory"
+		self.oldlist = self.currList
+		self.currList = "historylist"
+		print "switchToHistory currentlist",self.currList
+		print "switchToHistory oldlist",self.oldlist
+		self.hideSuggestions()
+		self["ButtonBlue"].hide()
+		self["VKeyIcon"].hide()	
+		self["key_green"].hide()
+		self["videoactions"].setEnabled(False)
+		self["suggestionactions"].setEnabled(False)
+		self["searchactions"].setEnabled(False)
+		self["statusactions"].setEnabled(False)
+		self["config_actions"].setEnabled(False)
+		self["historyactions"].setEnabled(True)
+		self.HistoryWindow.activate()
+		self.HistoryWindow.instance.show()	
+
 	def handleHistory(self):
 		if self.HistoryWindow is None:
 			self.HistoryWindow = self.session.instantiateDialog(MyTubeHistoryScreen)
-		if self.currList == "configlist":
-			print "handle history currentlist",self.currList
-			print "handle history oldlist",self.oldlist
+		if self.currList in ("configlist","feedlist"):
 			if self.HistoryWindow.status() is False:
-				print "status is FALSE"
-				self.oldlist = self.currList
-				self.currList = "historylist"
-				self.hideSuggestions()
-				self.HistoryWindow.activate()
-				self.HistoryWindow.instance.show()
-		elif self.currList == "feedlist":
-			print "handle history currentlist",self.currList
-			print "handle history oldlist",self.oldlist
-			if self.HistoryWindow.status() is False:
-				print "status is FALSE"
-				self.oldlist = self.currList
-				self.currList = "historylist"
-				self.HistoryWindow.activate()
-				self.HistoryWindow.instance.show()
+				print "status is FALSE,switchToHistory"
+				self.switchToHistory()
 		elif self.currList == "historylist":
-			print "handle history currentlist",self.currList
-			print "handle history oldlist",self.oldlist
+			self.closeHistory()
+
+	def closeHistory(self):
+		print "closeHistory currentlist",self.currList
+		print "closeHistory oldlist",self.oldlist
+		if self.currList == "historylist":
 			if self.HistoryWindow.status() is True:
-				print "status is TRUE"
-				self.currList = self.oldlist
+				print "status is TRUE, closing historyscreen"
 				self.HistoryWindow.deactivate()
 				self.HistoryWindow.instance.hide()
-				if self.oldlist == 'configlist':
-					current = self["config"].getCurrent()
-					helpwindowpos = self["HelpWindow"].getPosition()
-					if current[1].help_window.instance is not None:
-						current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
-						current[1].help_window.instance.show()	
-					if current[1].suggestionsWindow.instance is not None:
-						current[1].suggestionsWindow.instance.show()
-					self.propagateUpDownNormally = True
+				if self.oldlist == "configlist":
+					self.switchToConfigList()
+				elif self.oldlist == "feedlist":
+					self.switchToFeedList()
 
 	def add2History(self):
 		if self.History is None:
@@ -1138,9 +1193,7 @@ class MyTubeVideoInfoScreen(Screen):
 			<widget name="detailtext" position="60,300" size="610,200" zPosition="10" font="Regular;21" transparent="1" halign="left" valign="top"/>
 			<ePixmap position="100,500" size="100,40" zPosition="0" pixmap="~/plugin.png" alphatest="on" transparent="1" />
 			<ePixmap position="220,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="360,500" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="220,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="360,500" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="thumbnail" position="0,0" size="130,98" alphatest="on"/> # fake entry for dynamic thumbnail resizing, currently there is no other way doing this.
 		</screen>"""
 		
@@ -1154,7 +1207,6 @@ class MyTubeVideoInfoScreen(Screen):
 		self.picloads = {}
 		self["title"] = Label()
 		self["key_red"] = Button(_("Close"))
-		self["key_green"] = Button(_("Search"))
 		self["thumbnail"] = Pixmap()
 		self["thumbnail"].hide()
 		self["detailtext"] = ScrollLabel()

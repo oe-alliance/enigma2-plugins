@@ -231,18 +231,19 @@ config.plugins.mytube.search.sortOrder = ConfigSelection(
 
 config.plugins.mytube.general = ConfigSubsection()
 config.plugins.mytube.general.showHelpOnOpen = ConfigYesNo(default = True)
+config.plugins.mytube.general.loadFeedOnOpen = ConfigYesNo(default = True)
 config.plugins.mytube.general.startFeed = ConfigSelection(
 				[
-				 ("hd", _("High definition")),
-				 ("top_rated", _("Top rated")),
-				 ("top_favorites", _("Top favorites")),
+				 ("hd", _("HD videos")),
 				 ("most_viewed", _("Most viewed")),
-				 ("most_popular", _("Most popular")),
-				 ("most_recent", _("Most recent")),
+				 ("top_rated", _("Top rated")),
+				 ("recently_featured", _("Recently featured")),
 				 ("most_discussed", _("Most discussed")),
-				 ("top_favorites", _("Most linked")),
-				 ("most_linked", _("Most responded"))
-				], "most_popular")
+				 ("top_favorites", _("Top favorites")),
+				 ("most_linked", _("Most linked")),
+				 ("most_responded", _("Most responded")),
+				 ("most_recent", _("Most recent"))
+				], "most_viewed")
 
 config.plugins.mytube.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
 	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
@@ -257,7 +258,7 @@ if default not in tmp:
 	tmp.append(default)
 config.plugins.mytube.general.videodir = ConfigSelection(default = default, choices = tmp)
 config.plugins.mytube.general.history = ConfigText(default="")
-
+config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
 
 #config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
@@ -395,6 +396,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		
 		self.searchContextEntries = []
 		self.ProxyEntry = None
+		self.loadFeedEntry = None
 		self.VideoDirname = None
 		ConfigListScreen.__init__(self, self.searchContextEntries, session)
 		self.createSetup()
@@ -413,7 +415,10 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		self.searchContextEntries.append(getConfigListEntry(_("Search restricted content:"), config.plugins.mytube.search.racy))
 		self.searchContextEntries.append(getConfigListEntry(_("Search category:"), config.plugins.mytube.search.categories))
 		self.searchContextEntries.append(getConfigListEntry(_("Search region:"), config.plugins.mytube.search.lr))
-		self.searchContextEntries.append(getConfigListEntry(_("Start with following feed:"), config.plugins.mytube.general.startFeed))
+		self.loadFeedEntry = getConfigListEntry(_("Load feed on startup:"), config.plugins.mytube.general.loadFeedOnOpen)
+		self.searchContextEntries.append(self.loadFeedEntry)
+		if config.plugins.mytube.general.loadFeedOnOpen.value:
+			self.searchContextEntries.append(getConfigListEntry(_("Start with following feed:"), config.plugins.mytube.general.startFeed))
 		self.searchContextEntries.append(getConfigListEntry(_("Videoplayer stop/exit behavior:"), config.plugins.mytube.general.on_movie_stop))
 		self.searchContextEntries.append(getConfigListEntry(_("Videobrowser exit behavior:"), config.plugins.mytube.general.on_exit))
 		"""self.ProxyEntry = getConfigListEntry(_("Use HTTP Proxy Server:"), config.plugins.mytube.general.useHTTPProxy)
@@ -425,6 +430,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		self.VideoDirname = getConfigListEntry(_("Download location"), config.plugins.mytube.general.videodir)
 		if config.usage.setup_level.index >= 2: # expert+
 			self.searchContextEntries.append(self.VideoDirname)
+		self.searchContextEntries.append(getConfigListEntry(_("Clear history on Exit:"), config.plugins.mytube.general.clearHistoryOnClose))
 
 		self["config"].list = self.searchContextEntries
 		self["config"].l.setList(self.searchContextEntries)
@@ -437,8 +443,8 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 
 	def newConfig(self):
 		print "newConfig", self["config"].getCurrent()
-		#if self["config"].getCurrent() == self.ProxyEntry:
-		#	self.createSetup()
+		if self["config"].getCurrent() == self.loadFeedEntry:
+			self.createSetup()
 
 	def keyOK(self):
 		cur = self["config"].getCurrent()
@@ -467,11 +473,11 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		#self.newConfig()
+		self.newConfig()
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		#self.newConfig()
+		self.newConfig()
 
 	def keyCancel(self):
 		print "cancel"
@@ -485,10 +491,15 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 		config.plugins.mytube.search.racy.save()
 		config.plugins.mytube.search.categories.save()
 		config.plugins.mytube.search.lr.save()
+		config.plugins.mytube.general.loadFeedOnOpen.save()
 		config.plugins.mytube.general.startFeed.save()
 		config.plugins.mytube.general.on_movie_stop.save()
 		config.plugins.mytube.general.on_exit.save()
 		config.plugins.mytube.general.videodir.save()
+		config.plugins.mytube.general.clearHistoryOnClose.save()
+		if config.plugins.mytube.general.clearHistoryOnClose.value:
+			config.plugins.mytube.general.history.value = ""
+			config.plugins.mytube.general.history.save()
 		#config.plugins.mytube.general.useHTTPProxy.save()
 		#config.plugins.mytube.general.ProxyIP.save()
 		#config.plugins.mytube.general.ProxyPort.save()

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-26 11:40+0200\n"
+"POT-Creation-Date: 2009-05-28 09:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/MyTubeSearch.py:308
+#: ../src/MyTubeSearch.py:309
 msgid " Results"
 msgstr ""
 
-#: ../src/plugin.py:1049 ../src/plugin.py:1218
+#: ../src/plugin.py:1104 ../src/plugin.py:1270
 msgid "Added: "
 msgstr ""
 
@@ -33,20 +33,16 @@ msgstr ""
 msgid "All Time"
 msgstr ""
 
-#: ../src/plugin.py:413
+#: ../src/plugin.py:423
 msgid "An error occured."
 msgstr ""
 
-#: ../src/MyTubeSearch.py:228
-msgid "Ascanding"
-msgstr ""
-
-#: ../src/plugin.py:116
+#: ../src/MyTubeSearch.py:228 ../src/plugin.py:116
 msgid "Ascending"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:248 ../src/MyTubeSearch.py:251 ../src/plugin.py:135
-#: ../src/plugin.py:138
+#: ../src/MyTubeSearch.py:249 ../src/MyTubeSearch.py:252 ../src/plugin.py:136
+#: ../src/plugin.py:139
 msgid "Ask user"
 msgstr ""
 
@@ -55,7 +51,7 @@ msgstr ""
 msgid "Australia"
 msgstr ""
 
-#: ../src/plugin.py:1215
+#: ../src/plugin.py:1267
 msgid "Author: "
 msgstr ""
 
@@ -71,12 +67,16 @@ msgstr ""
 msgid "Canada"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:449
+#: ../src/MyTubeSearch.py:455
 msgid "Choose target folder"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:392 ../src/MyTubeSearch.py:547 ../src/plugin.py:267
-#: ../src/plugin.py:1156 ../src/plugin.py:1346
+#: ../src/MyTubeSearch.py:433
+msgid "Clear history on Exit:"
+msgstr ""
+
+#: ../src/MyTubeSearch.py:393 ../src/MyTubeSearch.py:558 ../src/plugin.py:269
+#: ../src/plugin.py:1209 ../src/plugin.py:1398
 msgid "Close"
 msgstr ""
 
@@ -92,27 +92,27 @@ msgstr ""
 msgid "Descending"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:412
+#: ../src/MyTubeSearch.py:414
 msgid "Display search results by:"
 msgstr ""
 
-#: ../src/plugin.py:679
+#: ../src/plugin.py:719
 msgid "Do you want to see more entries?"
 msgstr ""
 
-#: ../src/plugin.py:457
+#: ../src/plugin.py:485
 msgid "Download Video"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:425
+#: ../src/MyTubeSearch.py:430
 msgid "Download location"
 msgstr ""
 
-#: ../src/plugin.py:1186
+#: ../src/plugin.py:1238
 msgid "Downloading screenshots. Please wait..."
 msgstr ""
 
-#: ../src/plugin.py:1049 ../src/plugin.py:1212
+#: ../src/plugin.py:1104 ../src/plugin.py:1264
 msgid "Duration: "
 msgstr ""
 
@@ -120,7 +120,7 @@ msgstr ""
 msgid "Education"
 msgstr ""
 
-#: ../src/plugin.py:497
+#: ../src/plugin.py:526
 msgid "Enter your search term(s)"
 msgstr ""
 
@@ -128,11 +128,11 @@ msgstr ""
 msgid "Entertainment"
 msgstr ""
 
-#: ../src/plugin.py:350 ../src/plugin.py:404
+#: ../src/plugin.py:371 ../src/plugin.py:413
 msgid "Fetching feed entries"
 msgstr ""
 
-#: ../src/plugin.py:409
+#: ../src/plugin.py:418
 msgid "Fetching search entries"
 msgstr ""
 
@@ -156,15 +156,15 @@ msgstr ""
 msgid "Great Britain"
 msgstr ""
 
-#: ../src/plugin.py:1364
+#: ../src/MyTubeSearch.py:237 ../src/plugin.py:125 ../src/plugin.py:752
+msgid "HD videos"
+msgstr ""
+
+#: ../src/plugin.py:1416
 msgid "Help"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:236 ../src/plugin.py:124 ../src/plugin.py:710
-msgid "High definition"
-msgstr ""
-
-#: ../src/plugin.py:269
+#: ../src/plugin.py:271
 msgid "History"
 msgstr ""
 
@@ -200,35 +200,39 @@ msgstr ""
 msgid "Japan"
 msgstr ""
 
+#: ../src/MyTubeSearch.py:418
+msgid "Load feed on startup:"
+msgstr ""
+
 #: ../src/MyTubeSearch.py:216 ../src/plugin.py:104
 msgid "Mexico"
 msgstr ""
 
-#: ../src/plugin.py:874
+#: ../src/plugin.py:929
 msgid "More video entries."
 msgstr ""
 
-#: ../src/MyTubeSearch.py:242 ../src/plugin.py:130 ../src/plugin.py:717
+#: ../src/MyTubeSearch.py:241 ../src/plugin.py:129 ../src/plugin.py:759
 msgid "Most discussed"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:243 ../src/plugin.py:131 ../src/plugin.py:718
+#: ../src/MyTubeSearch.py:243 ../src/plugin.py:131 ../src/plugin.py:760
 msgid "Most linked"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:240 ../src/plugin.py:128 ../src/plugin.py:715
+#: ../src/plugin.py:757
 msgid "Most popular"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:241 ../src/plugin.py:129 ../src/plugin.py:716
+#: ../src/MyTubeSearch.py:245 ../src/plugin.py:133 ../src/plugin.py:758
 msgid "Most recent"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:244 ../src/plugin.py:132 ../src/plugin.py:719
+#: ../src/MyTubeSearch.py:244 ../src/plugin.py:132 ../src/plugin.py:762
 msgid "Most responded"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:239 ../src/plugin.py:127 ../src/plugin.py:714
+#: ../src/MyTubeSearch.py:238 ../src/plugin.py:126 ../src/plugin.py:756
 msgid "Most viewed"
 msgstr ""
 
@@ -236,35 +240,35 @@ msgstr ""
 msgid "Music"
 msgstr ""
 
-#: ../src/plugin.py:1686
+#: ../src/plugin.py:1738
 msgid "My TubePlayer"
 msgstr ""
 
-#: ../src/plugin.py:442 ../src/plugin.py:449
+#: ../src/plugin.py:472 ../src/plugin.py:478
 msgid "MyTube Settings"
 msgstr ""
 
-#: ../src/plugin.py:363
+#: ../src/plugin.py:384
 msgid "MyTubePlayer"
 msgstr ""
 
-#: ../src/plugin.py:369 ../src/plugin.py:371 ../src/plugin.py:381
+#: ../src/plugin.py:450 ../src/plugin.py:452 ../src/plugin.py:459
 msgid "MyTubePlayer Help"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:560 ../src/MyTubeSearch.py:577
+#: ../src/MyTubeSearch.py:571 ../src/MyTubeSearch.py:588
 msgid "MyTubePlayer active video downloads"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:405 ../src/MyTubeSearch.py:408
+#: ../src/MyTubeSearch.py:407 ../src/MyTubeSearch.py:410
 msgid "MyTubePlayer settings"
 msgstr ""
 
-#: ../src/plugin.py:1227
+#: ../src/plugin.py:1279
 msgid "MyTubeVideoInfoScreen"
 msgstr ""
 
-#: ../src/plugin.py:1373
+#: ../src/plugin.py:1425
 msgid "MyTubeVideohelpScreen"
 msgstr ""
 
@@ -276,29 +280,37 @@ msgstr ""
 msgid "News & Politics"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:176 ../src/plugin.py:64 ../src/plugin.py:532
-#: ../src/plugin.py:538
+#: ../src/MyTubeSearch.py:176 ../src/plugin.py:64 ../src/plugin.py:571
+#: ../src/plugin.py:577
 msgid "No"
 msgstr ""
 
-#: ../src/plugin.py:1650
+#: ../src/plugin.py:1702
 msgid "No playable video found! Stop playing this movie?"
 msgstr ""
 
-#: ../src/plugin.py:1643
+#: ../src/plugin.py:429
+msgid "No videos to display"
+msgstr ""
+
+#: ../src/plugin.py:1695
 msgid "No, but play video again"
 msgstr ""
 
-#: ../src/plugin.py:533
+#: ../src/plugin.py:572
 msgid "No, but switch to video entries."
 msgstr ""
 
-#: ../src/plugin.py:539
+#: ../src/plugin.py:578
 msgid "No, but switch to video search."
 msgstr ""
 
 #: ../src/MyTubeSearch.py:195 ../src/plugin.py:83
 msgid "Nonprofits & Activism"
+msgstr ""
+
+#: ../src/plugin.py:433
+msgid "Not fetching feed entries"
 msgstr ""
 
 #: ../src/MyTubeSearch.py:190 ../src/plugin.py:78
@@ -309,16 +321,24 @@ msgstr ""
 msgid "Pets & Animals"
 msgstr ""
 
-#: ../src/plugin.py:1687
+#: ../src/plugin.py:1739
 msgid "Play YouTube movies"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:248 ../src/plugin.py:135
+#: ../src/MyTubeSearch.py:249 ../src/plugin.py:136
 msgid "Play next video"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:248 ../src/plugin.py:135
+#: ../src/MyTubeSearch.py:249 ../src/plugin.py:136
 msgid "Play video again"
+msgstr ""
+
+#: ../src/plugin.py:433
+msgid "Please enter your search term."
+msgstr ""
+
+#: ../src/plugin.py:429
+msgid "Please select a standard feed or try searching for videos."
 msgstr ""
 
 #: ../src/MyTubeSearch.py:218 ../src/plugin.py:106
@@ -333,15 +353,19 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: ../src/plugin.py:1049
+#: ../src/plugin.py:1104
 msgid "Ratings: "
 msgstr ""
 
-#: ../src/plugin.py:541
+#: ../src/plugin.py:580
 msgid "Really quit MyTube Player?"
 msgstr ""
 
-#: ../src/plugin.py:881
+#: ../src/MyTubeSearch.py:240 ../src/plugin.py:128 ../src/plugin.py:761
+msgid "Recently featured"
+msgstr ""
+
+#: ../src/plugin.py:936
 msgid "Related video entries."
 msgstr ""
 
@@ -349,12 +373,12 @@ msgstr ""
 msgid "Relevance"
 msgstr ""
 
-#: ../src/plugin.py:888
+#: ../src/plugin.py:943
 msgid "Response video entries."
 msgstr ""
 
-#: ../src/MyTubeSearch.py:248 ../src/MyTubeSearch.py:251 ../src/plugin.py:135
-#: ../src/plugin.py:138
+#: ../src/MyTubeSearch.py:249 ../src/MyTubeSearch.py:252 ../src/plugin.py:136
+#: ../src/plugin.py:139
 msgid "Return to movie list"
 msgstr ""
 
@@ -362,7 +386,7 @@ msgstr ""
 msgid "Russia"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:393
+#: ../src/MyTubeSearch.py:394
 msgid "Save"
 msgstr ""
 
@@ -370,31 +394,27 @@ msgstr ""
 msgid "Science & Technology"
 msgstr ""
 
-#: ../src/plugin.py:1157
-msgid "Search"
-msgstr ""
-
-#: ../src/plugin.py:424
+#: ../src/plugin.py:388
 msgid "Search Term(s)"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:414
+#: ../src/MyTubeSearch.py:416
 msgid "Search category:"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:415
+#: ../src/MyTubeSearch.py:417
 msgid "Search region:"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:413
+#: ../src/MyTubeSearch.py:415
 msgid "Search restricted content:"
 msgstr ""
 
-#: ../src/plugin.py:721
+#: ../src/plugin.py:764
 msgid "Select new feed to view."
 msgstr ""
 
-#: ../src/plugin.py:446 ../src/plugin.py:462
+#: ../src/plugin.py:475 ../src/plugin.py:490
 msgid "Select your choice."
 msgstr ""
 
@@ -402,7 +422,7 @@ msgstr ""
 msgid "Short Movies"
 msgstr ""
 
-#: ../src/plugin.py:650
+#: ../src/plugin.py:684
 msgid "Sorry, video is not available!"
 msgstr ""
 
@@ -418,15 +438,15 @@ msgstr ""
 msgid "Sports"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:416
+#: ../src/MyTubeSearch.py:421
 msgid "Start with following feed:"
 msgstr ""
 
-#: ../src/plugin.py:268
+#: ../src/plugin.py:270
 msgid "Std. Feeds"
 msgstr ""
 
-#: ../src/plugin.py:1648
+#: ../src/plugin.py:1700
 msgid "Stop playing this movie?"
 msgstr ""
 
@@ -434,7 +454,7 @@ msgstr ""
 msgid "Sweden"
 msgstr ""
 
-#: ../src/plugin.py:1224
+#: ../src/plugin.py:1276
 msgid "Tags: "
 msgstr ""
 
@@ -442,8 +462,8 @@ msgstr ""
 msgid "Taiwan"
 msgstr ""
 
-#: ../src/plugin.py:413
-msgid "There was an error getting the feed entries. Try again..."
+#: ../src/plugin.py:423
+msgid "There was an error getting the feed entries. Please try again."
 msgstr ""
 
 #: ../src/MyTubeSearch.py:169 ../src/plugin.py:57
@@ -454,7 +474,7 @@ msgstr ""
 msgid "This Week"
 msgstr ""
 
-#: ../src/plugin.py:1368
+#: ../src/plugin.py:1420
 msgid "This is the help screen. Feed me with something to display."
 msgstr ""
 
@@ -462,11 +482,11 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:238 ../src/plugin.py:126 ../src/plugin.py:713
+#: ../src/MyTubeSearch.py:242 ../src/plugin.py:130 ../src/plugin.py:755
 msgid "Top favorites"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:237 ../src/plugin.py:125 ../src/plugin.py:712
+#: ../src/MyTubeSearch.py:239 ../src/plugin.py:127 ../src/plugin.py:754
 msgid "Top rated"
 msgstr ""
 
@@ -474,11 +494,11 @@ msgstr ""
 msgid "Travel & Events"
 msgstr ""
 
-#: ../src/plugin.py:350 ../src/plugin.py:404
+#: ../src/plugin.py:371 ../src/plugin.py:413
 msgid "Trying to download the Youtube feed entries. Please wait..."
 msgstr ""
 
-#: ../src/plugin.py:409
+#: ../src/plugin.py:418
 msgid "Trying to download the Youtube search results. Please wait..."
 msgstr ""
 
@@ -486,11 +506,11 @@ msgstr ""
 msgid "United States"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:418
+#: ../src/MyTubeSearch.py:423
 msgid "Videobrowser exit behavior:"
 msgstr ""
 
-#: ../src/MyTubeSearch.py:417
+#: ../src/MyTubeSearch.py:422
 msgid "Videoplayer stop/exit behavior:"
 msgstr ""
 
@@ -498,27 +518,23 @@ msgstr ""
 msgid "View Count"
 msgstr ""
 
-#: ../src/plugin.py:458
+#: ../src/plugin.py:486
 msgid "View Downloads"
 msgstr ""
 
-#: ../src/plugin.py:451
+#: ../src/plugin.py:480
 msgid "View related videos"
 msgstr ""
 
-#: ../src/plugin.py:452
+#: ../src/plugin.py:481
 msgid "View response videos"
 msgstr ""
 
-#: ../src/plugin.py:443 ../src/plugin.py:453
-msgid "View standard feed"
-msgstr ""
-
-#: ../src/plugin.py:1049 ../src/plugin.py:1221
+#: ../src/plugin.py:1104 ../src/plugin.py:1273
 msgid "Views: "
 msgstr ""
 
-#: ../src/plugin.py:258
+#: ../src/plugin.py:260
 msgid ""
 "Welcome to the MyTube Youtube Player.\n"
 "\n"
@@ -534,7 +550,7 @@ msgid ""
 "The Help button shows this help again."
 msgstr ""
 
-#: ../src/plugin.py:257
+#: ../src/plugin.py:259
 msgid ""
 "Welcome to the MyTube Youtube Player.\n"
 "\n"
@@ -547,15 +563,15 @@ msgid ""
 "Press exit to get back to the input field."
 msgstr ""
 
-#: ../src/MyTubeSearch.py:175 ../src/plugin.py:63 ../src/plugin.py:531
-#: ../src/plugin.py:537 ../src/plugin.py:1642
+#: ../src/MyTubeSearch.py:175 ../src/plugin.py:63 ../src/plugin.py:570
+#: ../src/plugin.py:576 ../src/plugin.py:1694
 msgid "Yes"
 msgstr ""
 
-#: ../src/plugin.py:1644
+#: ../src/plugin.py:1696
 msgid "Yes, but play next video"
 msgstr ""
 
-#: ../src/plugin.py:1645
+#: ../src/plugin.py:1697
 msgid "Yes, but play previous video"
 msgstr ""

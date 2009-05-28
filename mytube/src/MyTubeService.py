@@ -11,7 +11,7 @@ from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_LEFT, KEY_RIGHT, KE
 from twisted.web import client
 from twisted.internet import reactor
 from urllib2 import Request, URLError, HTTPError
-from socket import gaierror
+from socket import gaierror,error
 import re, os, sys, socket
 import urllib
 from urllib import FancyURLopener, quote
@@ -50,7 +50,7 @@ class GoogleSuggestions():
 			querry = self.prepQuerry + quote(querryString)
 			try:
 				self.conn.request("GET", querry)
-			except (CannotSendRequest, socket.gaierror, socket.error):
+			except (CannotSendRequest, gaierror, error):
 				print "[YTB] Can not send request for suggestions"
 				self.callback(None)
 			else:

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-26 11:14+0200\n"
+"POT-Creation-Date: 2009-05-28 09:30+0200\n"
 "PO-Revision-Date: 2008-05-16 17:15+0100\n"
 "Last-Translator: Stefan Pluecken <mladen.horvat@multimedia-labs.de>\n"
 "Language-Team: none\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid " Results"
-msgstr "Ergebnisse"
+msgstr " Ergebnisse"
 
 msgid "Added: "
 msgstr "Hinzugefügt: "
@@ -33,9 +33,6 @@ msgstr ""
 
 msgid "An error occured."
 msgstr "Es ist ein Fehler aufgetreten."
-
-msgid "Ascanding"
-msgstr ""
 
 msgid "Ascending"
 msgstr "aufsteigend"
@@ -61,11 +58,14 @@ msgstr "Kanada"
 msgid "Choose target folder"
 msgstr "Wähle Zielverzeichnis"
 
+msgid "Clear history on Exit:"
+msgstr "Verlauf beim verlassen löschen:"
+
 msgid "Close"
 msgstr "Schließen"
 
 msgid "Comedy"
-msgstr ""
+msgstr "Komödien"
 
 msgid "Czech Republic"
 msgstr "Tschechien"
@@ -95,7 +95,7 @@ msgid "Education"
 msgstr "Bildung"
 
 msgid "Enter your search term(s)"
-msgstr "Suchterm eingeben"
+msgstr "Suchbegriff eingeben"
 
 msgid "Entertainment"
 msgstr "Unterhaltung"
@@ -107,7 +107,7 @@ msgid "Fetching search entries"
 msgstr "Lade Suchergebnisse"
 
 msgid "Film & Animation"
-msgstr ""
+msgstr "Film & Animation"
 
 msgid "France"
 msgstr "Frankreich"
@@ -121,11 +121,11 @@ msgstr "Deutschland"
 msgid "Great Britain"
 msgstr "England"
 
+msgid "HD videos"
+msgstr "HD Videos"
+
 msgid "Help"
 msgstr "Hilfe"
-
-msgid "High definition"
-msgstr "HD-Videos"
 
 msgid "History"
 msgstr "Verlauf"
@@ -153,6 +153,9 @@ msgstr "Italien"
 
 msgid "Japan"
 msgstr "Japan"
+
+msgid "Load feed on startup:"
+msgstr "Feed beim starten laden:"
 
 msgid "Mexico"
 msgstr "Mexiko"
@@ -182,13 +185,13 @@ msgid "Music"
 msgstr "Musik"
 
 msgid "My TubePlayer"
-msgstr ""
+msgstr "My TubePlayer"
 
 msgid "MyTube Settings"
 msgstr "MyTube Einstellungen"
 
 msgid "MyTubePlayer"
-msgstr ""
+msgstr "My TubePlayer"
 
 msgid "MyTubePlayer Help"
 msgstr "MyTube Player Hilfe"
@@ -200,10 +203,10 @@ msgid "MyTubePlayer settings"
 msgstr "MyTube Player Einstellungen"
 
 msgid "MyTubeVideoInfoScreen"
-msgstr ""
+msgstr "MyTubeVideoInfoScreen"
 
 msgid "MyTubeVideohelpScreen"
-msgstr ""
+msgstr "MyTubeVideohelpScreen"
 
 msgid "New Zealand"
 msgstr "Neu Seeland"
@@ -217,6 +220,9 @@ msgstr "Nein"
 msgid "No playable video found! Stop playing this movie?"
 msgstr "Kein abspielbares Video gefunden! Wiedergabe beenden?"
 
+msgid "No videos to display"
+msgstr "Keine Videos zum anzeigen"
+
 msgid "No, but play video again"
 msgstr "Nein, aber Video noch mal abspielen"
 
@@ -228,6 +234,9 @@ msgstr "Nein, aber zur Videosuche zurück"
 
 msgid "Nonprofits & Activism"
 msgstr "Non-Profit"
+
+msgid "Not fetching feed entries"
+msgstr "Lade keine feed Einträge"
 
 msgid "People & Blogs"
 msgstr "Leute & Blogs"
@@ -244,6 +253,12 @@ msgstr "nächste Video"
 msgid "Play video again"
 msgstr "Video noch mal abspielen"
 
+msgid "Please enter your search term."
+msgstr "Bitte geben Sie einen Suchbegriff ein."
+
+msgid "Please select a standard feed or try searching for videos."
+msgstr "Wählen Sie einen Standard Feed oder suchen Sie nach Videos."
+
 msgid "Poland"
 msgstr "Polen"
 
@@ -258,6 +273,9 @@ msgstr "Bewertungen: "
 
 msgid "Really quit MyTube Player?"
 msgstr "MyTube Player wirklich beenden?"
+
+msgid "Recently featured"
+msgstr "Kürzlich featured"
 
 msgid "Related video entries."
 msgstr "Ähnliche Videos"
@@ -280,9 +298,6 @@ msgstr "Speichern"
 msgid "Science & Technology"
 msgstr "Wissenschaft & Technik"
 
-msgid "Search"
-msgstr "Suche"
-
 msgid "Search Term(s)"
 msgstr "Suchwort(e)"
 
@@ -293,7 +308,7 @@ msgid "Search region:"
 msgstr "Such-Region:"
 
 msgid "Search restricted content:"
-msgstr "Suche mit Altersbeschränkung:"
+msgstr "Suche ohne Altersbeschränkung:"
 
 msgid "Select new feed to view."
 msgstr "Neuen feed auswählen"
@@ -334,8 +349,8 @@ msgstr "Tags: "
 msgid "Taiwan"
 msgstr "Taiwan"
 
-msgid "There was an error getting the feed entries. Try again..."
-msgstr "Fehler beim Laden der Suchergebnisse. Noch mal probieren..."
+msgid "There was an error getting the feed entries. Please try again."
+msgstr "Fehler beim Laden der Suchergebnisse. Noch mal probieren."
 
 msgid "This Month"
 msgstr "Diesen Monat"
@@ -385,9 +400,6 @@ msgstr "Ähnliche Videos"
 msgid "View response videos"
 msgstr "Video Antworten"
 
-msgid "View standard feed"
-msgstr "Standard feed anzeigen"
-
 msgid "Views: "
 msgstr "Aufrufe: "
 
@@ -435,7 +447,7 @@ msgstr ""
 "Ihrer Sucheingabe.\n"
 "\n"
 "Um einen Vorschlag auszuwählen drücken Sie die NACH UNTEN-Taste, wählen den "
-"entsprechenden Eintrag ausund drücken die OK-Taste um die Suche zu starten.\n"
+"entsprechenden Eintrag aus und drücken die OK-Taste um die Suche zu starten.\n"
 "\n"
 "Um zur Such-Eingabemaske zurück zu gelangen drücken Sie die EXIT-Taste."
 
