@@ -66,7 +66,7 @@ function getXML(request){
 */
 function incomingDeviceInfoBoxtype(request){
 	debug("[incomingAboutBoxtype] returned");
-	var boxtype = getXML(request).getElementsByTagName("e2devicename").item(0).firstChild.data;
+	boxtype = getXML(request).getElementsByTagName("e2devicename").item(0).firstChild.data;
 
 	debug("[incomingAboutBoxtype] Boxtype: " + boxtype);
 }
@@ -1147,8 +1147,10 @@ function openWebRemote(){
 function loadAndOpenWebRemote(){
 	if(boxtype == "dm8000"){
 		fetchTpl('tplWebRemote', openWebRemote);
+		
+	} else {
+		fetchTpl('tplWebRemoteOld', openWebRemote);
 	}
-	fetchTpl('tplWebRemoteOld', openWebRemote);
 }
 
 
