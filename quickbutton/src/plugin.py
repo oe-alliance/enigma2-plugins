@@ -39,6 +39,7 @@ config.plugins.Quickbutton.blue = ConfigText(default = _("Nothing"), visible_wid
 from  Screens.InfoBarGenerics import InfoBarPlugins
 baseInfoBarPlugins__init__ = None
 baserunPlugin = None
+StartOnlyOneTime = False
 
 
 def autostart(reason, **kwargs):
@@ -66,13 +67,23 @@ def Plugins(**kwargs):
 	return list
 
 def InfoBarPlugins__init__(self):
-
-	QuickbuttonActionMap = ActionMap(["QuickbuttonActions"])
-	QuickbuttonActionMap.execBegin()
-	QuickbuttonActionMap.actions["green_l"] = self.greenlong
-	QuickbuttonActionMap.actions["yellow_l"] = self.yellowlong
-	QuickbuttonActionMap.actions["red_l"] = self.redlong 
-	QuickbuttonActionMap.actions["blue_l"] = self.bluelong
+	global StartOnlyOneTime
+	if not StartOnlyOneTime: 
+		StartOnlyOneTime = True # nur einmal...z.b. wegen dem Movieplayer...
+		QuickbuttonActionMap = ActionMap(["QuickbuttonActions"])
+		QuickbuttonActionMap.execBegin()
+		QuickbuttonActionMap.actions["green_l"] = self.greenlong
+		QuickbuttonActionMap.actions["yellow_l"] = self.yellowlong
+		QuickbuttonActionMap.actions["red_l"] = self.redlong 
+		QuickbuttonActionMap.actions["blue_l"] = self.bluelong
+		
+	else:
+		InfoBarPlugins.__init__ = InfoBarPlugins.__init__
+		InfoBarPlugins.runPlugin = InfoBarPlugins.runPlugin
+		InfoBarPlugins.greenlong = None
+		InfoBarPlugins.yellowlong = None
+		InfoBarPlugins.redlong = None
+		InfoBarPlugins.bluelong = None
 	baseInfoBarPlugins__init__(self)
 
 def runPlugin(self, plugin):
