@@ -483,7 +483,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			if config.usage.setup_level.index >= 2: # expert+
 				menulist.extend((
 					(_("Download Video"), "download"),
-					(_("View Downloads"), "downview")
+					(_("View active downloads"), "downview")
 				))
 						
 			self.hideSuggestions()
