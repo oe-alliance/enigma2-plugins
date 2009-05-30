@@ -99,7 +99,7 @@ class TravelWebcamviewer(Screen):
 			 "yellow": self.onYellow,
 			 "back": self.close
 			 }, -1)
-
+		self.finish_loading = True
 		self.timer_default = eTimer()
 		self.timer_default.timeout.callback.append(self.buildCamList)
 
@@ -131,13 +131,16 @@ class TravelWebcamviewer(Screen):
 		self.session.openWithCallback(self.onSearchkeyEntered,InputBox, title=_("Please enter a searchkey:"), text="Search Webcams", maxSize=False, type=Input.TEXT)
 
 	def onSearchkeyEntered(self,value):
-		if value is not None:
+		if value is not None and self.finish_loading != False:
  			self.timer_status.start(1)
  			WebcamTravelerAPI().search(self.onDataLoaded,value)
+ 			self.finish_loading = False
 
 	def loadData(self):
-		self.timer_status.start(1)
-		WebcamTravelerAPI().list_popular(self.onDataLoaded)
+		if self.finish_loading != False:
+			self.timer_status.start(1)
+			WebcamTravelerAPI().list_popular(self.onDataLoaded)
+			self.finish_loading = False
 
 	def onDataLoaded(self,list,count=0,page=0,per_page=0):
 		print "onDataLoaded",list,count,page,per_page
@@ -208,8 +211,11 @@ class TravelWebcamviewer(Screen):
 		print "buildCamList"
 		statuslist = []
 		for cam in self.list:
-			x= self.buildEntryCam(cam)
-			statuslist.append(x)
+			try:
+				x= self.buildEntryCam(cam)
+				statuslist.append(x)
+			except KeyError:
+				pass
 
 		self["list"].style = "default"
 		self["list"].disable_callbacks = True
@@ -234,6 +240,8 @@ class TravelWebcamviewer(Screen):
 		self["count"].setText(_("Cams: ")+str(self.count))
 		self["page"].setText(_("Page: ")+str(self.page)+"/"+str(self.count/self.per_page))
 		self["currentnumbers"].setText(_("current: ")+str(((self.page-1)*self.per_page)+1)+"-"+str(((self.page-1)*self.per_page)+len(self.list)))
+
+		self.finish_loading = True
 
 	def buildEntryCam(self, cam):
 		return ((cam, cam.title, cam.webcamid,"last update",self.thumbnails[cam.webcamid], _("Last updated: ")+cam.last_update, _("Views: ")+cam.view_count, _("User: ")+cam.user, _("Ratings: ")+cam.rating_avg ))
