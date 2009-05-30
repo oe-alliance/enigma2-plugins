@@ -1,8 +1,5 @@
 # -*- coding: UTF-8 -*-
-##
-## Zap-History Browser
-## by AliAbdul
-##
+## Zap-History Browser by AliAbdul
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Language import language
@@ -16,11 +13,12 @@ import gettext
 
 ################################################
 
-lang = language.getLanguage()
-environ["LANGUAGE"] = lang[:2]
-gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-gettext.textdomain("enigma2")
-gettext.bindtextdomain("ZapHistoryBrowser", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/ZapHistoryBrowser/locale/"))
+def localeInit():
+	lang = language.getLanguage()
+	environ["LANGUAGE"] = lang[:2]
+	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
+	gettext.textdomain("enigma2")
+	gettext.bindtextdomain("ZapHistoryBrowser", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/ZapHistoryBrowser/locale/"))
 
 def _(txt):
 	t = gettext.dgettext("ZapHistoryBrowser", txt)
@@ -28,30 +26,23 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-############################################
-
-class TitleScreen(Screen):
-	def __init__(self, session, parent=None):
-		Screen.__init__(self, session, parent)
-		self.onLayoutFinish.append(self.setScreenTitle)
-
-	def setScreenTitle(self):
-		self.setTitle(_("Zap-History Browser"))
+localeInit()
+language.addCallback(localeInit)
 
 ################################################
 
-class ZapHistoryBrowser(TitleScreen):
+class ZapHistoryBrowser(Screen):
 	skin = """
-	<screen position="200,80" size="320,440" title="Zap-History Browser" >
+	<screen position="200,80" size="320,440" title="%s" >
 		<ePixmap pixmap="skin_default/buttons/red.png" position="10,0" size="140,40" transparent="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/green.png" position="170,0" size="140,40" transparent="1" alphatest="on" />
 		<widget name="key_red" position="10,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="key_green" position="170,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="list" position="0,40" size="320,400" scrollbarMode="showOnDemand" />
-	</screen>"""
+	</screen>""" % _("Zap-History Browser")
 
 	def __init__(self, session, servicelist):
-		TitleScreen.__init__(self, session)
+		Screen.__init__(self, session)
 		self.session = session
 		
 		self.servicelist = servicelist
