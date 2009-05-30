@@ -15,15 +15,6 @@ import gettext
 
 ##############################################################################
 
-SKIN = """
-	<screen position="0,0" size="92,26" zPosition="10" backgroundColor="#ff000000" title="Permanent Clock" flags="wfNoBorder">
-		<widget source="global.CurrentTime" render="Label" position="1,1" size="90,24" font="Regular;24" valign="center" halign="center" backgroundColor="#ff000000" transparent="1">
-			<convert type="ClockToText">Default</convert>
-		</widget>
-	</screen>"""
-
-##############################################################################
-
 config.plugins.PermanentClock = ConfigSubsection()
 config.plugins.PermanentClock.enabled = ConfigYesNo(default=False)
 config.plugins.PermanentClock.position_x = ConfigInteger(default=590)
@@ -31,11 +22,12 @@ config.plugins.PermanentClock.position_y = ConfigInteger(default=35)
 
 ##############################################################################
 
-lang = language.getLanguage()
-environ["LANGUAGE"] = lang[:2]
-gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-gettext.textdomain("enigma2")
-gettext.bindtextdomain("PermanentClock", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PermanentClock/locale/"))
+def localeInit():
+	lang = language.getLanguage()
+	environ["LANGUAGE"] = lang[:2]
+	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
+	gettext.textdomain("enigma2")
+	gettext.bindtextdomain("PermanentClock", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PermanentClock/locale/"))
 
 def _(txt):
 	t = gettext.dgettext("PermanentClock", txt)
@@ -43,15 +35,17 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
+localeInit()
+language.addCallback(localeInit)
+
 ##############################################################################
 
-class TitleScreen(Screen):
-	def __init__(self, session, parent=None):
-		Screen.__init__(self, session, parent)
-		self.onLayoutFinish.append(self.setScreenTitle)
-
-	def setScreenTitle(self):
-		self.setTitle(_("Permanent Clock"))
+SKIN = """
+	<screen position="0,0" size="92,30" zPosition="10" backgroundColor="#ff000000" title="%s" flags="wfNoBorder">
+		<widget source="global.CurrentTime" render="Label" position="1,1" size="120,30" font="Regular;26" valign="center" halign="center" backgroundColor="#ff000000" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+	</screen>""" % _("Permanent Clock")
 
 ##############################################################################
 
@@ -160,14 +154,14 @@ class PermanentClockPositioner(Screen):
 
 ##############################################################################
 
-class PermanentClockMenu(TitleScreen):
+class PermanentClockMenu(Screen):
 	skin = """
-		<screen position="150,235" size="420,105" title="Permanent Clock">
+		<screen position="150,235" size="420,105" title="%s">
 			<widget name="list" position="10,10" size="400,85" />
-		</screen>"""
+		</screen>""" % _("Permanent Clock")
 
 	def __init__(self, session):
-		TitleScreen.__init__(self, session)
+		Screen.__init__(self, session)
 		self.session = session
 		self["list"] = MenuList([])
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
@@ -202,12 +196,17 @@ def sessionstart(reason, **kwargs):
 	if reason == 0:
 		pClock.gotSession(kwargs["session"])
 
-def main(session, **kwargs):
+def startConfig(session, **kwargs):
 	session.open(PermanentClockMenu)
+
+def main(menuid):
+	if menuid != "system": 
+		return [ ]
+	return [(_("Permanent Clock"), startConfig, "permanent_clock", None)]
 
 ##############################################################################
 
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-		PluginDescriptor(name=_("Permanent Clock"), description=_("Shows the clock permanent on the screen"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)]
+		PluginDescriptor(name=_("Permanent Clock"), description=_("Shows the clock permanent on the screen"), where=PluginDescriptor.WHERE_MENU, fnc=main)]
