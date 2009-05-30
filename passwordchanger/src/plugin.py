@@ -17,17 +17,21 @@ import gettext
 
 ############################################
 
-lang = language.getLanguage()
-environ["LANGUAGE"] = lang[:2]
-gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-gettext.textdomain("enigma2")
-gettext.bindtextdomain("PasswordChanger", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PasswordChanger/locale/"))
+def localeInit():
+	lang = language.getLanguage()
+	environ["LANGUAGE"] = lang[:2]
+	gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
+	gettext.textdomain("enigma2")
+	gettext.bindtextdomain("PasswordChanger", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/PasswordChanger/locale/"))
 
 def _(txt):
 	t = gettext.dgettext("PasswordChanger", txt)
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t
+
+localeInit()
+language.addCallback(localeInit)
 
 ############################################
 
@@ -37,24 +41,14 @@ config.plugins.PasswordChanger.new_password = ConfigText(default="", fixed_size=
 
 ############################################
 
-class TitleScreen(Screen):
-	def __init__(self, session, parent=None):
-		Screen.__init__(self, session, parent)
-		self.onLayoutFinish.append(self.setScreenTitle)
-
-	def setScreenTitle(self):
-		self.setTitle(_("Password Changer"))
-
-############################################
-
-class PasswordChanger(ConfigListScreen, TitleScreen):
+class PasswordChanger(ConfigListScreen, Screen):
 	skin = """
-		<screen position="150,265" size="420,70" title="Password Changer" >
+		<screen position="150,265" size="420,70" title="%s" >
 			<widget name="config" position="0,0" size="420,70" scrollbarMode="showOnDemand" />
-		</screen>"""
+		</screen>""" % _("Password Changer")
 
 	def __init__(self, session, args=None):
-		TitleScreen.__init__(self, session)
+		Screen.__init__(self, session)
 		self.session = session
 		
 		ConfigListScreen.__init__(self, [
@@ -80,14 +74,14 @@ class PasswordChanger(ConfigListScreen, TitleScreen):
 
 ############################################
 
-class PasswordChangerConsole(TitleScreen):
+class PasswordChangerConsole(Screen):
 	skin = """
-		<screen position="100,100" size="520,400" title="Password Changer" >
+		<screen position="100,100" size="520,400" title="%s" >
 			<widget name="label" position="0,0" size="520,400" font="Regular;20" />
-		</screen>"""
+		</screen>""" % _("Password Changer")
 
 	def __init__(self, session, old_pass, new_pass):
-		TitleScreen.__init__(self, session)
+		Screen.__init__(self, session)
 		
 		self.working = True
 		self.old_pass = old_pass
@@ -165,10 +159,15 @@ class PasswordChangerConsole(TitleScreen):
 
 ############################################
 
-def main(session, **kwargs):
+def start(session, **kwargs):
 	session.open(PasswordChanger)
+
+def main(menuid):
+	if menuid != "system": 
+		return [ ]
+	return [(_("Password Changer"), start, "password_changer", None)]
 
 ############################################
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name=_("Password Changer"), description=_("Change your ftp and telnet password"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+	return PluginDescriptor(name=_("Password Changer"), description=_("Change your ftp and telnet password"), where=PluginDescriptor.WHERE_MENU, fnc=main)
