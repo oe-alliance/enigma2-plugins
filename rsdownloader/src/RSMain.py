@@ -9,6 +9,7 @@ from RS import rapidshare
 from RSConfig import RSConfig, config
 from RSDownloadBrowser import RSDownloadBrowser
 from RSListBrowser import RSListBrowser
+from RSLog import RSLogScreen
 from RSProgress import RSProgress
 from RSSearch import RSSearch
 from RSTranslation import _, TitleScreen
@@ -90,7 +91,7 @@ class RSMain(TitleScreen):
 					self.session.open(MessageBox, _("Stopped!"), MessageBox.TYPE_INFO)
 			
 			elif selected == (_("Show log...")):
-				self.session.open(Console, "RS Downloader", ["cat /tmp/rapidshare.log"])
+				self.session.open(RSLogScreen)
 			
 			elif selected == (_("Delete log...")):
 				self.session.open(Console, "RS Downloader", ["rm -f /tmp/rapidshare.log"])
