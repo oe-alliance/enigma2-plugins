@@ -34,8 +34,8 @@ myname = "Webcam/Picture Viewer"
 myversion = "1.1"
 
 config.plugins.pictureviewer = ConfigSubsection()
-config.plugins.pictureviewer.slideshowtime = ConfigSelection(default="5000", choices = [("5000", _("5 Sekunden")), ("10000", _("10 Sekunden")), ("20000", _("20 Sekunden")), ("60000", _("1 Minute"))])
-config.plugins.pictureviewer.slideshowmode = ConfigSelection(default="0", choices = [("0", _("normal")), ("1", _("endlos"))])
+config.plugins.pictureviewer.slideshowtime = ConfigSelection(default="5000", choices = [("5000", _("5 Seconds")), ("10000", _("10 Seconds")), ("20000", _("20 Seconds")), ("60000", _("1 Minute"))])
+config.plugins.pictureviewer.slideshowmode = ConfigSelection(default="0", choices = [("0", _("normal")), ("1", _("endless"))])
 #not editable configs
 config.plugins.pictureviewer.slideshowext = ConfigText(default=".3ssl")
 config.plugins.pictureviewer.matchingPattern = ConfigText(default="(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif)")
