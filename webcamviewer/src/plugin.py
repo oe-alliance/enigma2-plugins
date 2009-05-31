@@ -421,7 +421,6 @@ class PictureViewer(Screen):
 		ptr = self.picload.getData()
 		if ptr is not None:
 			self["pixmap"].instance.setPixmap(ptr.__deref__())
-			self["pixmap"].move(275,0)
 		else:
 			pass
 
