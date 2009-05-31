@@ -12,6 +12,7 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.FileList import EXTENSIONS
+from Components.AVSwitch import AVSwitch
 ## configmenu
 from Components.config import config, ConfigSubsection,ConfigSelection,ConfigText,ConfigYesNo
 ####
@@ -193,7 +194,7 @@ class PictureViewer(Screen):
 	def __init__(self, session, args = 0):
 		skin =  """<screen position="93,70" size="550,450" title="%s">
 		<widget name="menu" position="1,1" size="275,400"  scrollbarMode="showOnDemand" />
-		<widget name="pixmap" position="550,450" size="275,200" backgroundColor="red" />
+		<widget name="pixmap" position="275,1" size="275,200" backgroundColor="red" />
 		<widget name="slist" position="275,200" size="275,200"  scrollbarMode="showOnDemand" />
 		<widget name="buttonred" position="6,405" size="130,40" backgroundColor="red" valign="center" halign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
 		<widget name="buttongreen" position="142,405" size="130,40" backgroundColor="green" valign="center" halign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
@@ -206,11 +207,13 @@ class PictureViewer(Screen):
 		self.filelist = PictureList(config.plugins.pictureviewer.rootdir.value, matchingPattern = config.plugins.pictureviewer.matchingPattern.value)
 		self["menu"] = self.filelist
 
-		self.picload = ePicLoad()
-		self.picload.PictureData.get().append(self.updateInfoPanelCB)
-		self.picload.setPara((275, 200, 1, 1, False, 1, "#ff000000"))
 		self.preview = Pixmap()
 		self["pixmap"] = self.preview
+
+		#self.picload = ePicLoad()
+		#self.picload.PictureData.get().append(self.updateInfoPanelCB)
+		#self.picload.setPara((275, 200, 1, 1, False, 1, "#ff000000"))
+
 
 		self.slideshowfiles = []
 		self.slideshowlist =MenuList(self.slideshowfiles)
@@ -412,10 +415,16 @@ class PictureViewer(Screen):
 			selectedfile = self["menu"].getSelection()[0]
 		else:
 			selectedfile = self["slist"].l.getCurrentSelection()[1]
+		sc=AVSwitch().getFramebufferScale()
+		self.picload = ePicLoad()
+		self.picload.PictureData.get().append(self.updateInfoPanelCB)
+		self.picload.setPara((self["pixmap"].instance.size().width(), self["pixmap"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
 		self.picload.startDecode(selectedfile)
+
 
 	def updateInfoPanelCB(self, picInfo = None):
 		ptr = self.picload.getData()
+		print "updateInfoPanelCB",ptr,picInfo
 		if ptr is not None:
 			self["pixmap"].instance.setPixmap(ptr.__deref__())
 			self["pixmap"].move(275,0)
