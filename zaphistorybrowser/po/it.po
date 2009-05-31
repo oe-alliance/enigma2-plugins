@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 plugin zaphistorybrowser italian locale\n"
+"Project-Id-Version: enigma2 - zaphistorybrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-28 09:16+0100\n"
-"PO-Revision-Date: 2008-11-28 09:16+0100\n"
+"POT-Creation-Date: 2009-05-31 01:43+0100\n"
+"PO-Revision-Date: 2009-05-31 02:28+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/zaphistorybrowser\n"
 
-#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:38
-#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:111
+#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:42
+#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:118
 msgid "Zap-History Browser"
 msgstr "Zap-History Browser"
 
-#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:59
+#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:52
 msgid "Clear"
 msgstr "Pulire"
 
-#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:60
+#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:53
 msgid "Delete"
 msgstr "Cancellare"
 

@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 plugin rsdownloader italian locale\n"
+"Project-Id-Version: enigma2 - rsdownloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-06 23:43+0100\n"
-"PO-Revision-Date: 2008-12-06 23:43+0100\n"
+"POT-Creation-Date: 2009-05-31 01:41+0100\n"
+"PO-Revision-Date: 2009-05-31 02:27+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgid "Clear"
 msgstr "Pulire"
 
 #: /home/dario/Plugins/rsdownloader/src/RSListBrowser.py:62
-#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:40
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:49
 msgid "Save"
 msgstr "Salvare"
 
@@ -73,88 +73,88 @@ msgstr "Scaricato"
 msgid "Failed"
 msgstr "Fallito"
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:40
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:56
-msgid "Start downloading..."
-msgstr "Avviare download..."
-
 #: /home/dario/Plugins/rsdownloader/src/RSMain.py:41
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:66
-msgid "Show lists..."
-msgstr "Lista..."
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:57
+msgid "Start downloading..."
+msgstr "Avviare il download..."
 
 #: /home/dario/Plugins/rsdownloader/src/RSMain.py:42
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:73
-msgid "Show downloads..."
-msgstr "Mostrare downloads..."
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:67
+msgid "Show lists..."
+msgstr "Elenco..."
 
 #: /home/dario/Plugins/rsdownloader/src/RSMain.py:43
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:80
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:74
+msgid "Show downloads..."
+msgstr "Mostrare i download..."
+
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:44
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:81
 msgid "Show progress..."
 msgstr "Mostrare avanzamento"
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:44
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:83
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:45
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:84
 msgid "Edit configs..."
 msgstr "Configurazione..."
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:45
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:86
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:46
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:87
 msgid "Show status..."
 msgstr "Stato..."
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:46
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:92
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:47
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:93
 msgid "Show log..."
 msgstr "Log..."
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:47
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:95
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:48
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:96
 msgid "Delete log..."
 msgstr "Cancellare log..."
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:48
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:98
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:49
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:99
 msgid "Use search-engine..."
 msgstr "Usare motore di ricerca..."
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:49
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:105
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:50
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:106
 msgid "Show info..."
 msgstr "Info..."
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:60
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:61
 msgid "Started downloading..."
 msgstr "Download avviato..."
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:62
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:63
 msgid "Could not start downloading!"
 msgstr "Avvio download fallito!"
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:64
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:65
 msgid "Already downloading!"
 msgstr "Download già in corso!"
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:71
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:78
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:72
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:79
 #, python-format
 msgid "Couldn't find the directory %s!"
 msgstr "Cartella %s non trovata!"
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:88
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:89
 #, python-format
 msgid "Downloading %s."
 msgstr "Download di %s in corso"
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:90
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:91
 msgid "Stopped!"
 msgstr "Arrestato!"
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:99
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:100
 msgid "Search http://rapidshare-search-engine.com for:"
 msgstr "Ricerca su http://rapidshare-search-engine.com per: "
 
-#: /home/dario/Plugins/rsdownloader/src/RSMain.py:106
+#: /home/dario/Plugins/rsdownloader/src/RSMain.py:107
 msgid ""
 "RS Downloader\n"
 "by AliAbdul\n"
@@ -214,35 +214,71 @@ msgstr "Caricamento pagina precedente in corso. Attendere..."
 msgid "Loading next page... please wait!"
 msgstr "Caricamento pagina seguente in corso. Attendere..."
 
-#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:43
-msgid "Username:"
-msgstr "Username: "
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:52
+msgid "Download in the background:"
+msgstr "Scaricare in background:"
 
-#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:44
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:53
+msgid "Username:"
+msgstr "Nome User: "
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:54
 msgid "Password:"
 msgstr "Password: "
 
-#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:45
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:55
 msgid "Lists directory:"
 msgstr "Elenco cartelle: "
 
-#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:46
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:56
 msgid "Downloads directory:"
 msgstr "Cartella download: "
 
-#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:47
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:57
+msgid "Ignore download times:"
+msgstr "Ignorare orari download:"
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:58
+msgid "Allow downloading on monday:"
+msgstr "Consentire download di Lunedì:"
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:59
+msgid "Allow downloading on tuesday:"
+msgstr "Consentire download di Martedì:"
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:60
+msgid "Allow downloading on wednesday:"
+msgstr "Consentire download di Mercoledì:"
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:61
+msgid "Allow downloading on thursday:"
+msgstr "Consentire download di Giovedì:"
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:62
+msgid "Allow downloading on friday:"
+msgstr "Consentire download di Venerdì:"
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:63
+msgid "Allow downloading on saturday:"
+msgstr "Consentire download di Sabato:"
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:64
+msgid "Allow downloading on sunday:"
+msgstr "Consentire download di Domenica:"
+
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:65
 msgid "Don't download before:"
 msgstr "Non scaricare prima delle: "
 
-#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:48
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:66
 msgid "Don't download after:"
 msgstr "Non scaricare dopo le: "
 
-#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:49
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:67
 msgid "Write log:"
 msgstr "Creare log: "
 
-#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:50
+#: /home/dario/Plugins/rsdownloader/src/RSConfig.py:68
 msgid "Reconnect fritz.Box before downloading:"
 msgstr "Ricollegare la Fritz.Box prima di scaricare: "
 

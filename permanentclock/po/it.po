@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 plugin permanentclock italian locale\n"
+"Project-Id-Version: enigma2 - permanentclock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-28 09:15+0100\n"
-"PO-Revision-Date: 2008-11-28 09:15+0100\n"
+"POT-Creation-Date: 2009-05-31 01:41+0100\n"
+"PO-Revision-Date: 2009-05-31 02:27+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,26 +16,28 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/permanentclock\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/permanentclock\n"
 
-#: /home/dario/Plugins/permanentclock/src/plugin.py:54
-#: /home/dario/Plugins/permanentclock/src/plugin.py:210
+#: /home/dario/Plugins/permanentclock/src/plugin.py:48
+#: /home/dario/Plugins/permanentclock/src/plugin.py:161
+#: /home/dario/Plugins/permanentclock/src/plugin.py:205
+#: /home/dario/Plugins/permanentclock/src/plugin.py:212
 msgid "Permanent Clock"
 msgstr "Permanent Clock"
 
-#: /home/dario/Plugins/permanentclock/src/plugin.py:178
-#: /home/dario/Plugins/permanentclock/src/plugin.py:186
+#: /home/dario/Plugins/permanentclock/src/plugin.py:173
+#: /home/dario/Plugins/permanentclock/src/plugin.py:183
 msgid "Deactivate permanent clock"
-msgstr "Attivare orologio permanente"
+msgstr "Disattivare l'orologio permanente"
 
-#: /home/dario/Plugins/permanentclock/src/plugin.py:180
-#: /home/dario/Plugins/permanentclock/src/plugin.py:186
+#: /home/dario/Plugins/permanentclock/src/plugin.py:175
+#: /home/dario/Plugins/permanentclock/src/plugin.py:183
 msgid "Activate permanent clock"
-msgstr "Disattivare orologio permanente"
+msgstr "Attivare l'orologio permanente"
 
-#: /home/dario/Plugins/permanentclock/src/plugin.py:181
+#: /home/dario/Plugins/permanentclock/src/plugin.py:176
 msgid "Change permanent clock position"
-msgstr "Cambiare posizione orologio"
+msgstr "Cambiare la posizione dell'orologio"
 
-#: /home/dario/Plugins/permanentclock/src/plugin.py:210
+#: /home/dario/Plugins/permanentclock/src/plugin.py:212
 msgid "Shows the clock permanent on the screen"
 msgstr "Mostrare sullo schermo un orologio permanente"
 
