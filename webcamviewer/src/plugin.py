@@ -210,11 +210,6 @@ class PictureViewer(Screen):
 		self.preview = Pixmap()
 		self["pixmap"] = self.preview
 
-		#self.picload = ePicLoad()
-		#self.picload.PictureData.get().append(self.updateInfoPanelCB)
-		#self.picload.setPara((275, 200, 1, 1, False, 1, "#ff000000"))
-
-
 		self.slideshowfiles = []
 		self.slideshowlist =MenuList(self.slideshowfiles)
 		self["slist"] = self.slideshowlist
@@ -424,7 +419,6 @@ class PictureViewer(Screen):
 
 	def updateInfoPanelCB(self, picInfo = None):
 		ptr = self.picload.getData()
-		print "updateInfoPanelCB",ptr,picInfo
 		if ptr is not None:
 			self["pixmap"].instance.setPixmap(ptr.__deref__())
 			self["pixmap"].move(275,0)
