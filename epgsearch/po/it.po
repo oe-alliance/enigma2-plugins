@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: epgsearch\n"
+"Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 23:35+0100\n"
-"PO-Revision-Date: 2009-02-08 23:36+0100\n"
+"POT-Creation-Date: 2009-05-31 01:36+0100\n"
+"PO-Revision-Date: 2009-05-31 02:26+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,111 +16,60 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/epgsearch\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/epgsearch\n"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:28
-msgid "New Search"
-msgstr "Nuova Ricerca"
-
 #: /home/dario/Plugins/epgsearch/src/EPGSearch.py:29
+msgid "New Search"
+msgstr "Nuova ricerca"
+
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:30
 msgid "History"
 msgstr "History"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:52
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:53
 msgid "Enter text to search for"
 msgstr "Inserire il testo da cercare"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:57
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:58
 msgid "Import from Timer"
 msgstr "Importare da Timer"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:58
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:59
 msgid "Import from EPG"
 msgstr "Importare da EPG"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:87
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:89
 msgid "Select text to search for"
 msgstr "Selezionare il testo da cercare"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:137
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:95
+msgid "No history"
+msgstr "Nessuna \"History\""
+
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:145
 msgid "Cancel"
 msgstr "Annull."
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:138
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:146
 msgid "OK"
 msgstr "Ok"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:152
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:160
 msgid "Select a timer to search"
 msgstr "Selezionare un timer da cercare"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:175
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:183
 msgid "Channel Selection"
-msgstr "Selezione Canale"
+msgstr "Selezione canale"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:202
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:211
 msgid "Search"
 msgstr "Cercare"
 
 #: /home/dario/Plugins/epgsearch/src/plugin.py:45
-#: /home/dario/Plugins/epgsearch/src/plugin.py:50
-#: /home/dario/Plugins/epgsearch/src/plugin.py:56
 msgid "Search EPG"
 msgstr "Cercare EPG"
 
+#: /home/dario/Plugins/epgsearch/src/plugin.py:50
+#: /home/dario/Plugins/epgsearch/src/plugin.py:56
 msgid "Search EPG..."
-msgstr "Cercare EPG..."
-
-#~ msgid "default"
-#~ msgstr "Predefinito"
-#~ msgid "auto"
-#~ msgstr "Auto"
-#~ msgid "off"
-#~ msgstr "Off"
-#~ msgid "on"
-#~ msgstr "On"
-#~ msgid "Autoresolution Settings"
-#~ msgstr "Configurazione"
-#~ msgid "Enable Autoresolution"
-#~ msgstr "Abilitare Autoresolution"
-#~ msgid "SD Interlace Mode"
-#~ msgstr "Modalità Interlacciamento SD"
-#~ msgid "SD Progressive Mode"
-#~ msgstr "Modalità Progressiva SD"
-#~ msgid "HD Interlace Mode"
-#~ msgstr "Modalità Interlacciamento HD"
-#~ msgid "HD Progressive Mode"
-#~ msgstr "Modalità Progressiva HD"
-#~ msgid "Enable 1080p24 Mode"
-#~ msgstr "Abilitare Modalità 1080p24"
-#~ msgid "Enable 1080p25 Mode"
-#~ msgstr "Abilitare Modalità 1080p25"
-#~ msgid "Enable 1080p30 Mode"
-#~ msgstr "Abilitare Modalità 1080p30"
-#~ msgid "Show Info Screen"
-#~ msgstr "Mostrare finestra informazioni"
-#~ msgid "Running in Testmode"
-#~ msgstr "Utilizzare Modalità Test"
-#~ msgid "Deinterlacer Mode"
-#~ msgstr "Modalità \"Deinterlacer\""
-#~ msgid ""
-#~ "Autoresolution Plugin Testmode:\n"
-#~ "Is %s videomode ok?"
-#~ msgstr ""
-#~ "Plugin Autoresolution in Modalità Test:\n"
-#~ "Modalità Video %s OK?"
-#~ msgid "Autoresolution Switch"
-#~ msgstr "Switch Autoresolution"
-#~ msgid "%s Content"
-#~ msgstr "Contenuti %s"
-#~ msgid "720p Content"
-#~ msgstr "Contenuti 720p"
-#~ msgid "576i Content"
-#~ msgstr "Contenuti 576i"
-#~ msgid "576p Content"
-#~ msgstr "Contenuti 576p"
-#~ msgid "480p Content"
-#~ msgstr "Contenuti 480p"
-#~ msgid "480i Content"
-#~ msgstr "Contenuti 480i"
-#~ msgid "Autoresolution"
-#~ msgstr "Autoresolution"
+msgstr "Ricerca EPG in corso..."
 

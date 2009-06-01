@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mediadownloader\n"
+"Project-Id-Version: enigma2 - mediadownloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 23:31+0100\n"
-"PO-Revision-Date: 2009-02-08 23:36+0100\n"
+"POT-Creation-Date: 2009-05-31 01:37+0100\n"
+"PO-Revision-Date: 2009-05-31 02:26+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr "Errore durante il download di %s!"
 
 #: /home/dario/Plugins/mediadownloader/src/plugin.py:58
 msgid "Which file do you want to download?"
-msgstr "Quale file si vuole scaricare?"
+msgstr "Quale file scaricare?"
 
 #: /home/dario/Plugins/mediadownloader/src/plugin.py:83
 msgid "Download..."

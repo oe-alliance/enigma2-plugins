@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 ofdb plugin italian locale\n"
+"Project-Id-Version: enigma2 - ofdb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-18 18:10+0100\n"
-"PO-Revision-Date: 2009-02-18 18:11+0100\n"
+"POT-Creation-Date: 2009-05-31 01:39+0100\n"
+"PO-Revision-Date: 2009-05-31 02:27+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -42,10 +42,10 @@ msgstr "Selezionare la voce di confronto"
 
 #: /home/dario/Plugins/ofdb/src/plugin.py:222
 msgid "Title Menu"
-msgstr "Menu Titolo"
+msgstr "Menu titolo"
 
 #: /home/dario/Plugins/ofdb/src/plugin.py:223
-#: /home/dario/Plugins/ofdb/src/plugin.py:378
+#: /home/dario/Plugins/ofdb/src/plugin.py:384
 msgid "Details"
 msgstr "Dettagli"
 
@@ -54,69 +54,69 @@ msgstr "Dettagli"
 msgid "Re-Query OFDb: %s..."
 msgstr "Ripetere ricerca OFDb: %s"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:296
+#: /home/dario/Plugins/ofdb/src/plugin.py:305
 #, python-format
 msgid "Query OFDb: %s..."
 msgstr "Ricerca OFDb: %s"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:306
+#: /home/dario/Plugins/ofdb/src/plugin.py:315
 msgid "Could't get Eventname"
 msgstr "Nome evento non ottenibile!"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:310
+#: /home/dario/Plugins/ofdb/src/plugin.py:319
 msgid "OFDb Download failed"
 msgstr "Download OFDb fallito!"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:337
+#: /home/dario/Plugins/ofdb/src/plugin.py:346
 msgid "OFDb Download completed"
 msgstr "Download OFDb completato"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:362
-#: /home/dario/Plugins/ofdb/src/plugin.py:363
+#: /home/dario/Plugins/ofdb/src/plugin.py:368
+#: /home/dario/Plugins/ofdb/src/plugin.py:369
 msgid "No OFDb match."
 msgstr "Nessun riscontro OFDb."
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:365
+#: /home/dario/Plugins/ofdb/src/plugin.py:371
 msgid "OFDb query failed!"
 msgstr "Ricerca OFDb fallita!"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:368
+#: /home/dario/Plugins/ofdb/src/plugin.py:374
 msgid "OFDb Re-Download completed"
-msgstr "Ripetizione Download OFDb completato"
+msgstr "Ripetizione download OFDb completato"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:376
+#: /home/dario/Plugins/ofdb/src/plugin.py:382
 msgid "No details found."
 msgstr "Nessun dettaglio trovato!"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:379
-#: /home/dario/Plugins/ofdb/src/plugin.py:448
+#: /home/dario/Plugins/ofdb/src/plugin.py:385
+#: /home/dario/Plugins/ofdb/src/plugin.py:454
 msgid "OFDb Details parsed"
 msgstr "Dettagli OFDb analizzati"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:409
+#: /home/dario/Plugins/ofdb/src/plugin.py:415
 msgid "no user rating yet"
 msgstr "Valutazioni non ancora disponibili!"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:428
+#: /home/dario/Plugins/ofdb/src/plugin.py:434
 msgid "Cast: "
 msgstr "Cast: "
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:430
+#: /home/dario/Plugins/ofdb/src/plugin.py:436
 msgid "No cast list found in the database."
 msgstr "Nessuna lista cast trovata nel database!"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:437
+#: /home/dario/Plugins/ofdb/src/plugin.py:443
 #, python-format
 msgid "Downloading Movie Poster: %s..."
-msgstr "Download Poster Film: %s"
+msgstr "Download poster film: %s"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:477
+#: /home/dario/Plugins/ofdb/src/plugin.py:483
 msgid "OFDb Plugin"
 msgstr "Plugin OFDb"
 
-#: /home/dario/Plugins/ofdb/src/plugin.py:489
-#: /home/dario/Plugins/ofdb/src/plugin.py:494
-#: /home/dario/Plugins/ofdb/src/plugin.py:501
+#: /home/dario/Plugins/ofdb/src/plugin.py:495
+#: /home/dario/Plugins/ofdb/src/plugin.py:500
+#: /home/dario/Plugins/ofdb/src/plugin.py:507
 msgid "Query details from the Online-Filmdatenbank"
 msgstr "Ricerca dettagli da \"Online-Filmdatenbank\""
 

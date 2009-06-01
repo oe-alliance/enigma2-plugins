@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 plugin movieretitle italian locale\n"
+"Project-Id-Version: enigma2 - movieretitle\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 18:22+0100\n"
-"PO-Revision-Date: 2009-02-15 18:22+0100\n"
+"POT-Creation-Date: 2009-05-31 01:37+0100\n"
+"PO-Revision-Date: 2009-05-31 02:26+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr "Destinazione"
 
 #: /home/dario/Plugins/movieretitle/src/plugin.py:70
 msgid "Filename"
-msgstr "Nome File"
+msgstr "Nome file"
 
 #: /home/dario/Plugins/movieretitle/src/plugin.py:71
 msgid "Title"
@@ -75,13 +75,4 @@ msgstr "Modifica di %s in %s in background fallita!"
 #, python-format
 msgid "Successfully moved the movie %s"
 msgstr "Modifica di %s terminata con successo!"
-
-#~ msgid "MovieRetitle"
-#~ msgstr "MovieRetitle"
-#~ msgid "Moving in background"
-#~ msgstr "Modifica in background in corso"
-#~ msgid "Moving in foreground"
-#~ msgstr "Modifica in primo piano in corso"
-#~ msgid "Moving %s to %s"
-#~ msgstr "Modifica di %s in %s in corso"
 

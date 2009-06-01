@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 werbezapper plugin italian locale\n"
+"Project-Id-Version: enigma2 - werbezapper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 23:37+0100\n"
-"PO-Revision-Date: 2009-02-08 23:37+0100\n"
+"POT-Creation-Date: 2009-05-31 01:42+0100\n"
+"PO-Revision-Date: 2009-05-31 02:28+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,22 +30,33 @@ msgstr ""
 
 #: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:47
 msgid "When to Zap back?"
-msgstr "Quando eseguire lo \"Zap\"?"
+msgstr "Quando eseguire lo Zap?"
+
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:49
+msgid "minute"
+msgstr "Minuto"
 
 #: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:50
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:51
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:52
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:53
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:54
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:55
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:56
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:57
 msgid "minutes"
 msgstr "Minuti"
 
-#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:55
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:58
 msgid "Custom"
 msgstr "Personalizzato"
 
-#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:81
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:84
 msgid "How many minutes to wait until zapping back?"
-msgstr "Quanti minuti attendere prima dello \"Zap\" indietro?"
+msgstr "Quanti minuti attendere prima dello Zap indietro?"
 
-#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:104
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:107
 #, python-format
 msgid "Zapping back in %d Minutes"
-msgstr "\"Zap\" indietro tra %d minuti"
+msgstr "Zap indietro tra %d minuti"
 

@@ -1,0 +1,135 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-05-31 01:42+0100\n"
+"PO-Revision-Date: 2009-05-31 02:27+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/webinterface\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/webinterface\n"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:96
+msgid "Webinterface: Main Setup"
+msgstr "Interfaccia web - Configurazione"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:101
+msgid "Start Webinterface"
+msgstr "Avviare Interfaccia web"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:102
+msgid "Enable /media"
+msgstr "Abilitare /media"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:103
+msgid "Allow zapping via Webinterface"
+msgstr "Consentire zapping via webif"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:104
+msgid "Autowrite timer"
+msgstr "Scrittura automatica timer"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:105
+msgid "Load movie-length"
+msgstr "Caricare durata registrazioni"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:109
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:265
+msgid "Cancel"
+msgstr "Annull."
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:110
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:266
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:111
+msgid "Interfaces"
+msgstr "Interfacce"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:152
+msgid "Webinterface: List of configured Interfaces"
+msgstr "Interfaccia web - Elenco interfacce configurate"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:156
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:287
+msgid "Address"
+msgstr "Indirizzo"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:157
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:288
+msgid "Port"
+msgstr "Porta"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:158
+msgid "Authorization"
+msgstr "Autorizzazione"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:159
+msgid "SSL"
+msgstr "SSL"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:160
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:286
+msgid "Disabled"
+msgstr "Disabilitato"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:161
+msgid "Add"
+msgstr "Agg."
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:162
+msgid "Change"
+msgstr "Camb."
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:189
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:194
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:199
+msgid "yes"
+msgstr "Sì"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:191
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:196
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:201
+msgid "no"
+msgstr "No"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:253
+msgid "Webinterface: Edit Interface"
+msgstr "Interfaccia web - Modifica interfaccia"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:268
+msgid "Delete"
+msgstr "Canc."
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:289
+msgid "Require Authorization"
+msgstr "Richiedere autorizzazione"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:290
+msgid "SSL Encryption"
+msgstr "Codifica SSL"
+
+#: /home/dario/Plugins/webinterface/src/WebIfConfig.py:311
+msgid "Really delete this Interface?"
+msgstr "Cancellare l'interfaccia?"
+
+#: /home/dario/Plugins/webinterface/src/plugin.py:397
+msgid "Webinterface"
+msgstr "Webinterface"
+
+#: /home/dario/Plugins/webinterface/src/plugin.py:397
+msgid "Configuration for the Webinterface"
+msgstr "Configurazione Interfaccia web"
+
+#: /home/dario/Plugins/webinterface/src/WebComponents/Converter/HddInfo.py:32
+msgid "N/A"
+msgstr "N/A"
+
