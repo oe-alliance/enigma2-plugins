@@ -13,13 +13,22 @@ CONFIGS = [("1", _("layer 1")),
 	   ("8", _("layer 4")),
 	   ("f", _("any RC"))]
 
-config.plugins.MultiRC = ConfigSubsection()
-config.plugins.MultiRC.mask = ConfigSelection(choices = CONFIGS, default = "f")
+CONFIGS1 = [("100", _("DM8000-RC layer 1")),
+	     ("200", _("DM8000-RC layer 2")),
+	     ("400", _("DM8000-RC layer 3")),
+	     ("800", _("DM8000-RC layer 4"))]
 
 # config file for IR mask, default is DM7025 or later, fallback to DM500/600
+# new-gen boxes also support DM8000 RCs via mask1
 MASK = "/proc/stb/ir/rc/mask0"
-if not path.exists(MASK):
+if path.exists(MASK):
+	MASK1 = "/proc/stb/ir/rc/mask1"
+	CONFIGS += CONFIGS1
+else:
 	MASK = "/proc/stb/ir/rc/mask"
+
+config.plugins.MultiRC = ConfigSubsection()
+config.plugins.MultiRC.mask = ConfigSelection(choices = CONFIGS, default = "f")
 
 class MultiRCSetup(ConfigListScreen, Screen):
 	skin = """
@@ -80,6 +89,24 @@ def set_mask(mask=None):
 	if not mask:
 		mask = config.plugins.MultiRC.mask.value
 	try:
+		# for two-mask boxes, we have to separate
+		# old-rc values (1..8) to mask0 and new-rc
+		# values (100..800) to mask1. the special
+		# case "any RC" (f) must be set to both.
+		if MASK1:
+			if mask == "f":
+				mask1 = "f00"
+			elif int(mask, 16) >= 0x100:
+				mask1 = mask
+				mask = "0"
+			else:
+				mask1 = "0"
+			print "mask1", mask1
+			f = open(MASK1, "w")
+			f.write(mask1)
+			f.close()
+
+		print "mask0", mask
 		f = open(MASK, "w")
 		f.write(mask)
 		f.close()
