@@ -20,7 +20,7 @@
 from Screens.Screen import Screen
 from Screens.ChannelSelection import ChannelSelection
 from Plugins.Plugin import PluginDescriptor
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Components.ConfigList import ConfigList, ConfigListScreen
@@ -69,14 +69,14 @@ def Plugins(**kwargs):
 def InfoBarPlugins__init__(self):
 	global StartOnlyOneTime
 	if not StartOnlyOneTime: 
-		StartOnlyOneTime = True # nur einmal...z.b. wegen dem Movieplayer...
-		QuickbuttonActionMap = ActionMap(["QuickbuttonActions"])
-		QuickbuttonActionMap.execBegin()
-		QuickbuttonActionMap.actions["green_l"] = self.greenlong
-		QuickbuttonActionMap.actions["yellow_l"] = self.yellowlong
-		QuickbuttonActionMap.actions["red_l"] = self.redlong 
-		QuickbuttonActionMap.actions["blue_l"] = self.bluelong
-		
+		StartOnlyOneTime = True
+		self["QuickbuttonActions"] = HelpableActionMap(self, "QuickbuttonActions",
+			{
+				"green_l": (self.greenlong, _("Assign plugin to long green key pressed")),
+				"yellow_l": (self.yellowlong, _("Assign plugin to long yellow key pressed")),
+				"red_l": (self.redlong, _("Assign plugin to long red key pressed")),
+				"blue_l": (self.bluelong, _("Assign plugin to long blue key pressed")),
+			})
 	else:
 		InfoBarPlugins.__init__ = InfoBarPlugins.__init__
 		InfoBarPlugins.runPlugin = InfoBarPlugins.runPlugin
@@ -113,7 +113,7 @@ def startPlugin(self,pname):
 			try: # falls es nicht installiert ist
 				from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
 				self.session.open(MediaPlayer)
-				no_plugin = false
+				no_plugin = False
 			except Exception, e:
 				msgText = _("Error!\nError Text: %s"%e)
 		elif pname == _("Plugin browser"):
