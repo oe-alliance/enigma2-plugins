@@ -16,35 +16,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:49
+
+#: ../src/plugin.py:51
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../src/plugin.py:22 ../src/plugin.py:35
+#: ../src/plugin.py:25
 msgid "Change Root Password"
 msgstr "Root Passwort aendern"
 
-#: ../src/plugin.py:114
+#: ../src/plugin.py:131
 msgid "Change or reset the root password of your dreambox"
-msgstr "Aendern Sie das RootPasswort ihrer Dreambox"
+msgstr "Aendern oder resetten sie das RootPasswort ihrer Dreambox"
 
-#: ../src/plugin.py:46 ../src/plugin.py:64
+#: ../src/plugin.py:73
 msgid "Enter new Password"
 msgstr "Neues Passwort eingeben"
 
-#: ../src/plugin.py:50
+#: ../src/plugin.py:114
+msgid "Enter your password here:"
+msgstr "Neues Passwort hier eingeben:"
+
+#: ../src/plugin.py:52
 msgid "Set Password"
 msgstr "Passwd setzten"
 
-#: ../src/plugin.py:80
-#, python-format
-msgid "Sucessfully changed password for root user to: %s"
-msgstr "Passwort fuer root wurde erfolgreich geaendert auf: %s"
+#: ../src/plugin.py:88
+msgid "Sucessfully changed password for root user to: "
+msgstr "Passwort fuer root wurde erfolgreich geaendert auf: "
 
-#: ../src/plugin.py:82
+#: ../src/plugin.py:90
 msgid "Unable to change/reset password for root user"
 msgstr "Konnte das Passwort nicht aendern"
 
-#: ../src/plugin.py:51
+#: ../src/plugin.py:53
 msgid "new Random"
 msgstr "Zufallspasswd"
+
+#: ../src/plugin.py:54
+msgid "virt. Keyboard"
+msgstr ""

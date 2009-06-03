@@ -85,9 +85,10 @@ class ChangePasswdScreen(Screen):
 		self.container.dataAvail.append(self.dataAvail)
 		retval = self.container.execute("passwd %s" % self.user)
 		if retval==0:
-			self.session.open(MessageBox, _("Sucessfully changed password for root user to: %s " % self.password), MessageBox.TYPE_INFO)	
+			message=_("Sucessfully changed password for root user to: ") + self.password
 		else:
-			self.session.open(MessageBox, _("Unable to change/reset password for root user"), MessageBox.TYPE_ERROR)	
+			message=_("Unable to change/reset password for root user")
+		self.session.open(MessageBox, message , MessageBox.TYPE_ERROR)
 
 	def dataAvail(self,data):
 		self.output_line += data
