@@ -78,6 +78,7 @@ public:
 	RESULT audioDelay(ePtr<iAudioDelay> &ptr) { ptr = 0; return -1; };
 	RESULT rdsDecoder(ePtr<iRdsDecoder> &ptr) { ptr = 0; return -1; };
 	RESULT stream(ePtr<iStreamableService> &ptr) { ptr = 0; return -1; };
+	RESULT streamed(ePtr<iStreamedService> &ptr) { ptr = 0; return -1; };
 	RESULT keys(ePtr<iServiceKeys> &ptr) { ptr = 0; return -1; };
 
 	// iPausableService
