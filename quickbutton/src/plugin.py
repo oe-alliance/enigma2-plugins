@@ -28,9 +28,11 @@ from Components.config import ConfigSubsection, ConfigText, configfile, ConfigSe
 from Components.config import config
 from Components.Button import Button
 from Screens.MessageBox import MessageBox
+from Tools.HardwareInfo import HardwareInfo
 
 config.plugins.Quickbutton = ConfigSubsection()
 config.plugins.Quickbutton.red = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
+config.plugins.Quickbutton.red_b = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.Quickbutton.green = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.Quickbutton.yellow = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.Quickbutton.blue = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
@@ -40,10 +42,11 @@ from  Screens.InfoBarGenerics import InfoBarPlugins
 baseInfoBarPlugins__init__ = None
 baserunPlugin = None
 StartOnlyOneTime = False
+DM8000 = False
 
 
 def autostart(reason, **kwargs):
-	global baseInfoBarPlugins__init__, baserunPlugin
+	global baseInfoBarPlugins__init__, baserunPlugin, DM8000
 	if "session" in kwargs:
 		session = kwargs["session"]
 		if baseInfoBarPlugins__init__ is None:
@@ -56,6 +59,9 @@ def autostart(reason, **kwargs):
 		InfoBarPlugins.yellowlong = yellowlong
 		InfoBarPlugins.redlong = redlong
 		InfoBarPlugins.bluelong = bluelong
+		if HardwareInfo().get_device_name() == "dm8000":
+			DM8000 = True		
+			InfoBarPlugins.red = red
 
 def setup(session,**kwargs):
 	session.open(QuickbuttonSetup)
@@ -70,13 +76,13 @@ def InfoBarPlugins__init__(self):
 	global StartOnlyOneTime
 	if not StartOnlyOneTime: 
 		StartOnlyOneTime = True
-		self["QuickbuttonActions"] = HelpableActionMap(self, "QuickbuttonActions",
-			{
-				"green_l": (self.greenlong, _("Assign plugin to long green key pressed")),
-				"yellow_l": (self.yellowlong, _("Assign plugin to long yellow key pressed")),
-				"red_l": (self.redlong, _("Assign plugin to long red key pressed")),
-				"blue_l": (self.bluelong, _("Assign plugin to long blue key pressed")),
-			})
+		x = {	"green_l": (self.greenlong, _("Assign plugin to long green key pressed")),
+			"yellow_l": (self.yellowlong, _("Assign plugin to long yellow key pressed")),
+			"red_l": (self.redlong, _("Assign plugin to long red key pressed")),
+			"blue_l": (self.bluelong, _("Assign plugin to long blue key pressed"))}
+		if DM8000:
+			x["red_b"] = (self.red, _("Assign plugin to red key pressed"))
+		self["QuickbuttonActions"] = HelpableActionMap(self, "QuickbuttonActions",x)
 	else:
 		InfoBarPlugins.__init__ = InfoBarPlugins.__init__
 		InfoBarPlugins.runPlugin = InfoBarPlugins.runPlugin
@@ -84,6 +90,8 @@ def InfoBarPlugins__init__(self):
 		InfoBarPlugins.yellowlong = None
 		InfoBarPlugins.redlong = None
 		InfoBarPlugins.bluelong = None
+		if DM8000:
+			InfoBarPlugins.red = None
 	baseInfoBarPlugins__init__(self)
 
 def runPlugin(self, plugin):
@@ -100,6 +108,9 @@ def redlong(self):
 
 def bluelong(self):
 	startPlugin(self, str(config.plugins.Quickbutton.blue.value))
+
+def red(self):
+	startPlugin(self, str(config.plugins.Quickbutton.red_b.value))
 
 def startPlugin(self,pname):
 	msgText = _("Unknown Error")
@@ -163,6 +174,7 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
 		self.entryguilist = []
+		red_b_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.red_b.value)
 		red_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.red.value)
 		green_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.green.value)
 		yellow_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.yellow.value)
@@ -179,6 +191,8 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			self.entryguilist.append((str(index),str(p.name)))
 			if config.plugins.Quickbutton.red.value == str(p.name):
 				red_selectedindex = str(index)
+			if config.plugins.Quickbutton.red_b.value == str(p.name):
+				red_b_selectedindex = str(index)
 			if config.plugins.Quickbutton.green.value == str(p.name):
 				green_selectedindex = str(index)
 			if config.plugins.Quickbutton.yellow.value == str(p.name):
@@ -186,13 +200,11 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			if config.plugins.Quickbutton.blue.value == str(p.name):
 				blue_selectedindex = str(index)
 			index = index + 1
-		
 
 		self.redchoice = ConfigSelection(default = red_selectedindex, choices = self.entryguilist)
 		self.greenchoice = ConfigSelection(default = green_selectedindex, choices = self.entryguilist)
 		self.yellowchoice = ConfigSelection(default = yellow_selectedindex, choices = self.entryguilist)
 		self.bluechoice = ConfigSelection(default = blue_selectedindex, choices = self.entryguilist)
-
 		cfglist = [
 			getConfigListEntry(_("assigned to long red"), self.redchoice),
 			getConfigListEntry(_("assigned to long green"), self.greenchoice),
@@ -200,6 +212,9 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			getConfigListEntry(_("assigned to long blue"), self.bluechoice)
 
 			]
+		if DM8000:
+			self.red_b_choice = ConfigSelection(default = red_b_selectedindex, choices = self.entryguilist)
+			cfglist.append(getConfigListEntry(_("assigned to red"), self.red_b_choice))
 		ConfigListScreen.__init__(self, cfglist, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -225,6 +240,8 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		config.plugins.Quickbutton.green.value = self.entryguilist[int(self.greenchoice.value)][1]
 		config.plugins.Quickbutton.yellow.value = self.entryguilist[int(self.yellowchoice.value)][1]
 		config.plugins.Quickbutton.blue.value = self.entryguilist[int(self.bluechoice.value)][1]
+		if DM8000:
+			config.plugins.Quickbutton.red_b.value = self.entryguilist[int(self.red_b_choice.value)][1]
 		config.plugins.Quickbutton.save()
 		configfile.save()
 		self.close()
