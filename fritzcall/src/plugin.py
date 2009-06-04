@@ -38,7 +38,7 @@ from twisted.protocols.basic import LineReceiver #@UnresolvedImport
 from twisted.web.client import getPage #@UnresolvedImport
 
 from urllib import urlencode 
-import re, time, os
+import re, time, os, hashlib, traceback
 
 from nrzuname import ReverseLookupAndNotifier, html2unicode
 import FritzOutlookCSV, FritzLDIF
@@ -54,10 +54,19 @@ XXX = 0 # TODO: Platzhalter für fullscreen SD skin
 # It returns the first value, if HD (1280x720),
 # the second if SD (720x576),
 # else something scaled accordingly
+# if one of the parameters is -1, scale proportionally
 #
 def scaleH(y2, y1):
+	if y2 == -1:
+		y2 = y1/720*1280
+	elif y1 == -1:
+		y1 = y2/1280*720
 	return scale(y2, y1, 1280, 720, DESKTOP_WIDTH)
 def scaleV(y2, y1):
+	if y2 == -1:
+		y2 = y1/576*720
+	elif y1 == -1:
+		y1 = y2/720*576
 	return scale(y2, y1, 720, 576, DESKTOP_HEIGHT)
 def scale(y2, y1, x2, x1, x):
 	return (y2 - y1) * (x - x1) / (x2 - x1) + y1
@@ -123,32 +132,32 @@ def initDebug():
 		pass
 
 class FritzAbout(Screen):
-	textFieldWidth = scaleV(350,250)
-	width = 5 + 150 + 20 + textFieldWidth + 5 + 175 + 5
-	height = 5 + 175 + 5 + 25 + 5
-	# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
-	skin = """
-		<screen name="FritzAbout" position="%d,%d" size="%d,%d" title="%s" >
-			<widget name="text" position="175,%d" size="%d,%d" font="Regular;%d" />
-			<ePixmap position="5,37" size="150,110" pixmap="%s" transparent="1" alphatest="blend" />
-			<ePixmap position="%d,5" size="175,175" pixmap="%s" transparent="1" alphatest="blend" />
-			<widget name="url" position="20,185" size="%d,25" font="Regular;%d" />
-		</screen>""" % (
-						(DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, # position
-						width, height, # size
-						_("About FritzCall"), # title
-						(height-scaleV(150,130)) / 2, # text vertical position
-						textFieldWidth,
-						scaleV(150,130), # text height
-						scaleV(24,21), # text font size
-						resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/fritz.png"), # 150x110
-						5 + 150 + 5 + textFieldWidth + 5, # qr code horizontal offset
-						resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/website.png"), # 175x175
-						width-40, # url width
-						scaleV(24,21) # url font size
-						)
 
 	def __init__(self, session):
+		textFieldWidth = scaleV(350,250)
+		width = 5 + 150 + 20 + textFieldWidth + 5 + 175 + 5
+		height = 5 + 175 + 5 + 25 + 5
+		# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+		self.skin = """
+			<screen name="FritzAbout" position="%d,%d" size="%d,%d" title="%s" >
+				<widget name="text" position="175,%d" size="%d,%d" font="Regular;%d" />
+				<ePixmap position="5,37" size="150,110" pixmap="%s" transparent="1" alphatest="blend" />
+				<ePixmap position="%d,5" size="175,175" pixmap="%s" transparent="1" alphatest="blend" />
+				<widget name="url" position="20,185" size="%d,25" font="Regular;%d" />
+			</screen>""" % (
+							(DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, # position
+							width, height, # size
+							_("About FritzCall"), # title
+							(height-scaleV(150,130)) / 2, # text vertical position
+							textFieldWidth,
+							scaleV(150,130), # text height
+							scaleV(24,21), # text font size
+							resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/fritz.png"), # 150x110
+							5 + 150 + 5 + textFieldWidth + 5, # qr code horizontal offset
+							resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/website.png"), # 175x175
+							width-40, # url width
+							scaleV(24,21) # url font size
+							)
 		Screen.__init__(self, session)
 		self["aboutActions"] = ActionMap(["OkCancelActions"],
 		{
@@ -167,108 +176,207 @@ class FritzAbout(Screen):
 		self.close()
 
 class FritzCallFBF:
-	def __init__(self):
+	def __init__(self, init=True):
 		debug("[FritzCallFBF] __init__")
-		self.callScreen = None
-		self.loggedIn = False
-		self.Callback = None
-		self.timestamp = 0
-		self.callList = []
-		self.callType = config.plugins.FritzCall.fbfCalls.value
-		self.hasMailbox = False
+		self._callScreen = None
+		self._md5LoginTimestamp = None
+		self._md5Sid = '0000000000000000'
+		self._callCallback = None
+		self._loginCallback = None
+		self._timestampCalls = 0
+		self._callList = []
+		self._callType = config.plugins.FritzCall.fbfCalls.value
+		self.hasMailbox = None # Holds (no of mailboxes, state0, state1, state2, state3, state4)
 		self.hasDect = False
-		self.getInfo(self.setProperties)
+		if init:
+			self.getInfo(None, self._setProperties)
 
-	def setProperties(self, status):
+	def _setProperties(self, status):
 		(boxInfo, upTime, ipAddress, wlanState, wlanEncrypt, dslState, dslSpeed, tamActive, dectActive) = status #@UnusedVariable
-		self.hasMailbox = tamActive != None
+		self.boxInfo = boxInfo
+		self.hasMailbox = tamActive
 		self.hasDect = dectActive != None
+		debug("[FritzCallFBF] _setProperties: " + str(boxInfo))
 
-	def notify(self, text):
-		debug("[FritzCallFBF] notify")
-		if self.callScreen:
+	def _notify(self, text):
+		debug("[FritzCallFBF] notify: " + text)
+		self._md5LoginTimestamp = None
+		if self._callScreen:
 			debug("[FritzCallFBF] notify: try to close callScreen")
-			self.callScreen.close()
-			self.callScreen = None
+			self._callScreen.close()
+			self._callScreen = None
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
-
-	def errorLogin(self, error):
-		text = _("FRITZ!Box Login failed! - Error: %s") % error
-		self.notify(text)
-
-	def _gotPageLogin(self, html):
-#		debug("[FritzCallPhonebook] _gotPageLogin"
-		# workaround: exceptions in gotPage-callback were ignored
-		if self.callScreen:
-			self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("login verification"))
-		try:
-			debug("[FritzCallFBF] _gotPageLogin: verify login")
-			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;Das angegebene Kennwort', html, re.S)
-			if found:
-				text = _("FRITZ!Box Login failed! - Wrong Password!")
-				self.notify(text)
-			else:
-				if self.callScreen:
-					self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("login ok"))
-				self.loggedIn = True
-		except:
-			import traceback, sys
-			traceback.print_exc(file=sys.stdout)
-			#raise e
-
-	def login(self, callback=None):
-		debug("[FritzCallFBF] Login")
-		if config.plugins.FritzCall.password.value != "":
-			if self.callScreen:
-				self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("login"))
-			parms = "login:command/password=%s" % (config.plugins.FritzCall.password.value)
+			
+	def _login(self, callback=None):
+		debug("[FritzCallFBF] _login")
+		if self._callScreen:
+			self._callScreen.updateStatus(_("login"))
+		if self._md5LoginTimestamp and ((time.time() - self._md5LoginTimestamp) < float(9.5*60)): # new login after 9.5 minutes inactivity 
+			debug("[FritzCallFBF] _login: renew timestamp: " + str(self._md5LoginTimestamp) + " time: " + str(time.time()))
+			self._md5LoginTimestamp = time.time()
+			callback()
+		else:
+			debug("[FritzCallFBF] _login: not logged in or outdated login, renew: timestamp: " + str(self._md5LoginTimestamp) + " time: " + str(time.time()))
+			self._loginCallback = callback
+			# http://fritz.box/cgi-bin/webcm?getpage=../html/login_sid.xml
+			parms = urlencode({'getpage':'../html/login_sid.xml'})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
+			debug("[FritzCallFBF] _login: '" + url + "' parms: '" + parms + "'")
 			getPage(url,
 				method="POST",
 				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
-						}, postdata=parms).addCallback(self._gotPageLogin).addCallback(callback).addErrback(self.errorLogin)
-		elif callback:
-			callback()
+						}, postdata=parms).addCallback(self._md5Login).addErrback(self._oldLogin)
 
-	def errorLoad(self, error):
-		text = _("Could not load phonebook from FRITZ!Box - Error: %s") % error
-		self.notify(text)
+	def _oldLogin(self, error): 
+		debug("[FritzCallFBF] _oldLogin: " + repr(error))
+		if config.plugins.FritzCall.password.value != "":
+			parms = "login:command/password=%s" % (config.plugins.FritzCall.password.value)
+			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
+			debug("[FritzCallFBF] _oldLogin: '" + url + "' parms: '" + parms + "'")
+			getPage(url,
+				method="POST",
+				agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
+						}, postdata=parms).addCallback(self._gotPageLogin).addCallback(self._loginCallback).addErrback(self._errorLogin)
+		elif self._loginCallback:
+			debug("[FritzCallFBF] _oldLogin: no password, calling " + repr(self._loginCallback))
+			self._loginCallback()
 
-	def _gotPageLoad(self, html):
-		debug("[FritzCallFBF] _gotPageLoad")
-		# workaround: exceptions in gotPage-callback were ignored
-		try:
-			self.parseFritzBoxPhonebook(html)
-		except:
-			import traceback, sys
-			traceback.print_exc(file=sys.stdout)
-			#raise e
+	def _md5Login(self, sidXml):
+		def buildResponse(challenge, text):
+			debug("[FritzCallFBF] _md5Login7buildResponse: challenge: " + challenge + ' text: ' + text)
+			text = (challenge + '-' + text).decode('utf-8','ignore').encode('utf-16-le')
+			for i in range(len(text)):
+				if ord(text[i]) > 255:
+					text[i] = '.'
+			m = hashlib.md5()
+			m.update(text)
+			debug("[FritzCallFBF] md5Login/buildResponse: " + m.hexdigest())
+			return challenge + '-' + m.hexdigest()
+
+		debug("[FritzCallFBF] _md5Login")
+		found = re.match('.*<SID>([^<]*)</SID>', sidXml, re.S)
+		if found:
+			self._md5Sid = found.group(1)
+			debug("[FritzCallFBF] _md5Login: SID "+ self._md5Sid)
+		else:
+			debug("[FritzCallFBF] _md5Login: no sid! That must be an old firmware.")
+			self._oldLogin('No error')
+			return
+
+		if sidXml.find('<iswriteaccess>0</iswriteaccess>') != -1:
+			debug("[FritzCallFBF] _md5Login: logging in")
+			found = re.match('.*<Challenge>([^<]*)</Challenge>', sidXml, re.S)
+			if found:
+				challenge = found.group(1)
+				debug("[FritzCallFBF] _md5Login: challenge " + challenge)
+			else:
+				challenge = None
+				debug("[FritzCallFBF] _md5Login: login necessary and no challenge! That is terribly wrong.")
+			debug("[FritzCallFBF] _md5Login: renew timestamp: " + str(time.time()))
+			self._md5LoginTimestamp = time.time()
+			parms = urlencode({
+							'getpage':'../html/de/menus/menu2.html', # 'var:pagename':'home', 'var:menu':'home', 
+							'login:command/response': buildResponse(challenge, config.plugins.FritzCall.password.value),
+							})
+			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
+			debug("[FritzCallFBF] _md5Login: '" + url + "' parms: '" + parms + "'")
+			getPage(url,
+				method="POST",
+				agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
+						}, postdata=parms).addCallback(self._gotPageLogin).addCallback(self._loginCallback).addErrback(self._errorLogin)
+		else: # we assume value 1 here, no login necessary
+			debug("[FritzCallFBF] _md5Login: no login necessary: " + str(time.time()))
+			self._md5LoginTimestamp = time.time()
+			self._loginCallback()
+
+	def _gotPageLogin(self, html):
+		if self._callScreen:
+			self._callScreen.updateStatus(_("login verification"))
+		debug("[FritzCallFBF] _gotPageLogin: verify login")
+		found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+		if found:
+			text = _("FRITZ!Box - Error logging in: %s") + found.group(1)
+			self._notify(text)
+		else:
+			if self._callScreen:
+				self._callScreen.updateStatus(_("login ok"))
+
+		found = re.match('.*<input type="hidden" name="sid" value="([^\"]*)"', html, re.S)
+		if found:
+			self._md5Sid = found.group(1)
+			debug("[FritzCallFBF] _gotPageLogin: found sid: " + self._md5Sid)
+
+	def _errorLogin(self, error):
+		debug("[FritzCallFBF] _errorLogin: %s" % (error))
+		text = _("FRITZ!Box - Error logging in: %s") % error
+		self._notify(text)
+
+	def _logout(self):
+		if self._md5LoginTimestamp:
+			self._md5LoginTimestamp = None
+			parms = urlencode({
+							'getpage':'../html/de/menus/menu2.html', # 'var:pagename':'home', 'var:menu':'home', 
+							'login:command/logout':'bye bye Fritz'
+							})
+			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
+			debug("[FritzCallFBF] logout: '" + url + "' parms: '" + parms + "'")
+			getPage(url,
+				method="POST",
+				agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
+						}, postdata=parms).addErrback(self._errorLogout)
+
+	def _errorLogout(self, error):
+		debug("[FritzCallFBF] _errorLogout: %s" % (error))
+		text = _("FRITZ!Box - Error logging out: %s") % error
+		self._notify(text)
 
 	def loadFritzBoxPhonebook(self):
 		debug("[FritzCallFBF] loadFritzBoxPhonebook")
 		if config.plugins.FritzCall.fritzphonebook.value:
 			debug("[FritzCallFBF] loadFritzBoxPhonebook: logging in")
-			self.login(self._loadFritzBoxPhonebook)
+			self._login(self._loadFritzBoxPhonebook)
 
 	def _loadFritzBoxPhonebook(self, html=None):
-			parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de', 'var:pagename':'fonbuch', 'var:menu':'fon'})
-			url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
+			parms = urlencode({
+							'getpage':'../html/de/menus/menu2.html',
+							'var:lang':'de',
+							'var:pagename':'fonbuch',
+							'var:menu':'fon',
+							'sid':self._md5Sid,
+							'telcfg:settings/Phonebook/Books/Select':'0', # this selects always the first phonbook
+							})
+			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
+			debug("[FritzCallFBF] _loadFritzBoxPhonebook: '" + url + "' parms: '" + parms + "'")
+			getPage(url,
+				method="POST",
+				agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+				headers={'Content-Type': "application/x-www-form-urlencoded", 'Content-Length': str(len(parms))
+						}, postdata=parms).addCallback(self._parseFritzBoxPhonebook).addErrback(self._errorLoad)
 
-			getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
-
-	def parseFritzBoxPhonebook(self, html):
-		debug("[FritzCallFBF] parseFritzBoxPhonebook")
-
+	def _parseFritzBoxPhonebook(self, html):
+		debug("[FritzCallFBF] _parseFritzBoxPhonebook")
+		self._logout()
 		if re.search('TrFonName', html):
 			#===============================================================================
-			#				 New Style: 7170 / 7270 (FW 54.04.58, 54.04.63-11941)
-			#							7141 (FW 40.04.68) 22.03.2009
+			#				 New Style: 7270 (FW 54.04.58, 54.04.63-11941, 54.04.70, 54.04.74-14371)
 			#							7170 (FW 29.04.70) 22.03.2009
-			#							7270: (FW 54.04.70)
+			#							7141 (FW 40.04.68) 22.03.2009
 			#	We expect one line with TrFonName followed by several lines with
 			#	TrFonNr(Type,Number,Shortcut,Vanity), which all belong to the name in TrFonName.
 			#===============================================================================
-			html = html2unicode(html.decode('utf-8')).encode('utf-8')
+			found = re.match('.*<meta http-equiv=content-type content="text/html; charset=([^"]*)">', html, re.S)
+			if found:
+				charset = found.group(1)
+				debug("[FritzCallFBF] _parseFritzBoxPhonebook: found charset: " + charset)
+				html = html2unicode(html.decode(charset)).encode('utf-8') # this looks silly, but has to be
+			else: # this is kind of emergency conversion...
+				try:
+					html = html2unicode(html.decode('utf-8')).encode('utf-8') # this looks silly, but has to be
+				except UnicodeDecodeError:
+					html = html2unicode(html.decode('iso-8859-1')).encode('utf-8') # this looks silly, but has to be
 			entrymask = re.compile('(TrFonName\("[^"]+", "[^"]+", "[^"]*"\);.*?)TrFon1\(\)', re.S)
 			entries = entrymask.finditer(html)
 			for entry in entries:
@@ -332,11 +440,65 @@ class FritzCallFBF:
 					debug("[FritzCallFBF] ignoring empty number for %s" % name)
 				continue
 		else:
-			self.notify(_("Could not parse FRITZ!Box Phonebook entry"))
+			self._notify(_("Could not parse FRITZ!Box Phonebook entry"))
 
-	def errorCalls(self, error):
-		text = _("Could not load calls from FRITZ!Box - Error: %s") % error
-		self.notify(text)
+	def _errorLoad(self, error):
+		debug("[FritzCallFBF] _errorLoad: %s" % (error))
+		text = _("FRITZ!Box - Could not load phonebook: %s") % error
+		self._notify(text)
+		self._logout()
+
+	def getCalls(self, callScreen, callback, type):
+		#
+		# call sequence must be:
+		# - login
+		# - getPage -> _gotPageLogin
+		# - loginCallback (_getCalls)
+		# - getPage -> _getCalls1
+		debug("[FritzCallFBF] getCalls")
+		self._callScreen = callScreen
+		self._callType = type
+		self._callCallback = callback
+		if (time.time() - self._timestampCalls) > 180: 
+			debug("[FritzCallFBF] getCalls: outdated data, login and get new ones")
+			self._timestampCalls = time.time()
+			self._login(self._getCalls)
+		elif not self._callList:
+			debug("[FritzCallFBF] getCalls: time is ok, but no callList")
+			self._getCalls1()
+		else:
+			debug("[FritzCallFBF] getCalls: time is ok, callList is ok")
+			self._gotPageCalls()
+
+	def _getCalls(self, html=None):
+		#
+		# we need this to fill Anrufliste.csv
+		# http://repeater1/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:menu=fon&var:pagename=foncalls
+		#
+		debug("[FritzCallFBF] _getCalls")
+		if html:
+			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			if found:
+				text = _("FRITZ!Box - Error logging in: %s") + found.group(1)
+				self._notify(text)
+				return
+
+		if self._callScreen:
+			self._callScreen.updateStatus(_("preparing"))
+		parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de', 'var:pagename':'foncalls', 'var:menu':'fon', 'sid':self._md5Sid})
+		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
+		getPage(url).addCallback(self._getCalls1).addErrback(self._errorCalls)
+
+	def _getCalls1(self, html=""):
+		#
+		# finally we should have successfully lgged in and filled the csv
+		#
+		debug("[FritzCallFBF] _getCalls1")
+		if self._callScreen:
+			self._callScreen.updateStatus(_("finishing"))
+		parms = urlencode({'getpage':'../html/de/FRITZ!Box_Anrufliste.csv', 'sid':self._md5Sid})
+		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
+		getPage(url).addCallback(self._gotPageCalls).addErrback(self._errorCalls)
 
 	def _gotPageCalls(self, csv=""):
 		def _resolveNumber(number):
@@ -361,34 +523,35 @@ class FritzCallFBF:
 			# if len(number) > 20: number = number[:20]
 			return number
 
+		self._logout()
 		if csv:
 			debug("[FritzCallFBF] _gotPageCalls: got csv, setting callList")
-			if self.callScreen:
-				self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("done"))
+			if self._callScreen:
+				self._callScreen.updateStatus(_("done"))
 			# check for error: wrong password or password not set... TODO
 			found = re.search('Melden Sie sich mit dem Kennwort der FRITZ!Box an', csv)
 			if found:
 				text = _("You need to set the password of the FRITZ!Box\nin the configuration dialog to display calls\n\nIt could be a communication issue, just try again.")
 				# self.session.open(MessageBox, text, MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
-				self.notify(text)
+				self._notify(text)
 				return
 
 			csv = csv.decode('iso-8859-1', 'replace').encode('utf-8', 'replace')
 			lines = csv.splitlines()
-			self.callList = lines
-		elif self.callList:
+			self._callList = lines
+		elif self._callList:
 			debug("[FritzCallFBF] _gotPageCalls: got no csv, but have callList")
-			if self.callScreen:
-				self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("done, using last list"))
-			lines = self.callList
+			if self._callScreen:
+				self._callScreen.updateStatus(_("done, using last list"))
+			lines = self._callList
 		else:
 			debug("[FritzCallFBF] _gotPageCalls: got no csv, no callList, leaving")
 			return
 			
-		callList = []
+		_callList = []
 		for line in lines:
 			# Typ;Datum;Name;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
-			found = re.match("^(" + self.callType + ");([^;]*);([^;]*);([^;]*);([^;]*);([^;]*);([^;]*)", line)
+			found = re.match("^(" + self._callType + ");([^;]*);([^;]*);([^;]*);([^;]*);([^;]*);([^;]*)", line)
 			if found:
 				direct = found.group(1)
 				date = found.group(2)
@@ -411,78 +574,37 @@ class FritzCallFBF:
 						number = number[5:]
 				if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
 					number = config.plugins.FritzCall.prefix.value + number
-				callList.append((number, date, here, direct, remote, length))
+				_callList.append((number, date, here, direct, remote, length))
 
 		# debug("[FritzCallFBF] _gotPageCalls result:\n" + text
 
-		if self.Callback is not None:
+		if self._callCallback is not None:
 			# debug("[FritzCallFBF] _gotPageCalls call callback with\n" + text
-			self.Callback(callList)
-			self.Callback = None
-		self.callScreen = None
+			self._callCallback(_callList)
+			self._callCallback = None
+		self._callScreen = None
 
-	def getCalls(self, callScreen, callback, type):
-		#
-		# call sequence must be:
-		# - login
-		# - getPage -> _gotPageLogin
-		# - loginCallback (_getCalls)
-		# - getPage -> _getCalls1
-		debug("[FritzCallFBF] getCalls")
-		self.callScreen = callScreen
-		self.callType = type
-		self.Callback = callback
-		if (time.time() - self.timestamp) > 180: 
-			debug("[FritzCallFBF] getCalls: outdated data, login and get new ones")
-			self.timestamp = time.time()
-			self.login(self._getCalls)
-		elif not self.callList:
-			debug("[FritzCallFBF] getCalls: time is ok, but no callList")
-			self._getCalls1()
-		else:
-			debug("[FritzCallFBF] getCalls: time is ok, callList is ok")
-			self._gotPageCalls()
-
-	def _getCalls(self, html=None):
-		#
-		# we need this to fill Anrufliste.csv
-		# http://repeater1/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:menu=fon&var:pagename=foncalls
-		#
-		debug("[FritzCallFBF] _getCalls")
-		if self.callScreen:
-			self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("preparing"))
-		parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de', 'var:pagename':'foncalls', 'var:menu':'fon'})
-		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
-		getPage(url).addCallback(self._getCalls1).addErrback(self.errorCalls)
-
-	def _getCalls1(self, html=""):
-		#
-		# finally we should have successfully lgged in and filled the csv
-		#
-		debug("[FritzCallFBF] _getCalls1")
-		if self.callScreen:
-			self.callScreen.updateStatus(_("Getting calls from FRITZ!Box...") + _("finishing"))
-		parms = urlencode({'getpage':'../html/de/FRITZ!Box_Anrufliste.csv'})
-		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
-		getPage(url).addCallback(self._gotPageCalls).addErrback(self.errorCalls)
+	def _errorCalls(self, error):
+		debug("[FritzCallFBF] _errorCalls: %s" % (error))
+		text = _("FRITZ!Box - Could not load calls: %s") % error
+		self._notify(text)
+		self._logout()
 
 	def dial(self, number):
 		''' initiate a call to number '''
 		self.number = number
-		self.login(self._dial)
+		self._login(self._dial)
 		
 	def _dial(self, html=None):
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
 		parms = urlencode({
 			'getpage':'../html/de/menus/menu2.html',
-			# 'id':'uiPostForm',
-			# 'name':'uiPostForm',
-			'login:command/password': config.plugins.FritzCall.password.value,
 			'var:pagename':'fonbuch',
 			'var:menu':'home',
 			'telcfg:settings/UseClickToDial':'1',
 			'telcfg:settings/DialPort':config.plugins.FritzCall.extension.value,
-			'telcfg:command/Dial':self.number
+			'telcfg:command/Dial':self.number,
+			'sid':self._md5Sid
 			})
 		debug("[FritzCallFBF] dial url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
@@ -495,24 +617,21 @@ class FritzCallFBF:
 
 	def _okDial(self, html):
 		debug("[FritzCallFBF] okDial")
-		linkP = open("/tmp/FritzCallDialOK.htm", "w")
-		linkP.write(html)
-		linkP.close()
+		self._logout()
 
 	def _errorDial(self, error):
 		debug("[FritzCallFBF] errorDial: $s" % error)
-		linkP = open("/tmp/FritzCallDialError.htm", "w")
-		linkP.write(error)
-		linkP.close()
-		text = _("Dialling failed - Error: %s") % error
-		self.notify(text)
+		text = _("FRITZ!Box - Dialling failed: %s") % error
+		self._notify(text)
+		self._logout()
 
 	def changeWLAN(self, statusWLAN):
 		''' get status info from FBF '''
+		debug("[FritzCallFBF] changeWLAN start")
 		if not statusWLAN or (statusWLAN <> '1' and statusWLAN <> '0'):
 			return
 		self.statusWLAN = statusWLAN
-		self.login(self._changeWLAN)
+		self._login(self._changeWLAN)
 		
 	def _changeWLAN(self, html=None):
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
@@ -522,6 +641,7 @@ class FritzCallFBF:
 			'var:pagename':'wlan',
 			'var:menu':'wlan',
 			'wlan:settings/ap_enabled':str(self.statusWLAN),
+			'sid':self._md5Sid
 			})
 		debug("[FritzCallFBF] changeWLAN url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
@@ -534,29 +654,51 @@ class FritzCallFBF:
 
 	def _okChangeWLAN(self, html):
 		debug("[FritzCallFBF] okDial")
-		linkP = open("/tmp/FritzCall_okChangeWLAN.htm", "w")
-		linkP.write(html)
-		linkP.close()
+		self._logout()
 
 	def _errorChangeWLAN(self, error):
 		debug("[FritzCallFBF] _errorChangeWLAN: $s" % error)
-		linkP = open("/tmp/FritzCall_errorChangeWLAN.htm", "w")
-		linkP.write(error)
-		linkP.close()
+		text = _("FRITZ!Box - Failed changing WLAN: %s") % error
+		self._notify(text)
+		self._logout()
 
-	def changeMailbox(self, statusMailbox):
+	def changeMailbox(self, whichMailbox):
 		''' switch mailbox on/off '''
-		debug("[FritzCallFBF] changeMailbox start")
-		if not statusMailbox or (statusMailbox <> '1' and statusMailbox <> '0'):
-			return
-		self.statusMailbox = statusMailbox
-		self.login(self._changeMailbox)
-		
+		debug("[FritzCallFBF] changeMailbox start: " + str(whichMailbox))
+		self.whichMailbox = whichMailbox
+		self._login(self._changeMailbox)
+
 	def _changeMailbox(self, html=None):
+		debug("[FritzCallFBF] _changeMailbox")
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
-		for i in ['0', '1', '2', '3', '4']:
+		if self.whichMailbox == -1:
+			for i in range(5):
+				if fritzbox.hasMailbox[i+1]: # we have to reference the global object here!
+					state = '0'
+				else:
+					state = '1'
+				parms = urlencode({
+					'tam:settings/TAM'+str(i)+'/Active':state,
+					'sid':self._md5Sid
+					})
+				debug("[FritzCallFBF] changeMailbox url: '" + url + "' parms: '" + parms + "'")
+				getPage(url,
+					method="POST",
+					agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+					headers={
+							'Content-Type': "application/x-www-form-urlencoded",
+							'Content-Length': str(len(parms))},
+					postdata=parms).addCallback(self._okChangeMailbox).addErrback(self._errorChangeMailbox)
+		elif self.whichMailbox > 4:
+			debug("[FritzCallFBF] changeMailbox invalid mailbox number")
+		else:
+			if fritzbox.hasMailbox[self.whichMailbox+1]:
+				state = '0'
+			else:
+				state = '1'
 			parms = urlencode({
-				'tam:settings/TAM'+i+'/Active':self.statusMailbox,
+				'tam:settings/TAM'+str(self.whichMailbox)+'/Active':state,
+				'sid':self._md5Sid
 				})
 			debug("[FritzCallFBF] changeMailbox url: '" + url + "' parms: '" + parms + "'")
 			getPage(url,
@@ -565,21 +707,43 @@ class FritzCallFBF:
 				headers={
 						'Content-Type': "application/x-www-form-urlencoded",
 						'Content-Length': str(len(parms))},
-				postdata=parms)
+				postdata=parms).addCallback(self._okChangeMailbox).addErrback(self._errorChangeMailbox)
 
-	def getInfo(self, callback):
+	def _okChangeMailbox(self, html):
+		debug("[FritzCallFBF] _okChangeMailbox")
+		self._logout()
+
+	def _errorChangeMailbox(self, error):
+		debug("[FritzCallFBF] _errorChangeMailbox: $s" % error)
+		text = _("FRITZ!Box - Failed changing Mailbox: %s") % error
+		self._notify(text)
+		self._logout()
+
+	def getInfo(self, callscreen, callback):
 		''' get status info from FBF '''
-		self.callback = callback
-		self.login(self._getInfo)
+		debug("[FritzCallFBF] getInfo")
+		self._callScreen = callscreen
+		self.infoCallback = callback
+		self._login(self._getInfo)
 		
 	def _getInfo(self, html=None):
 		# http://192.168.178.1/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:pagename=home&var:menu=home
+		debug("[FritzCallFBF] _getInfo: verify login")
+		if html:
+			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			if found:
+				debug("[FritzCallFBF] _getInfo: Login failed: " + found.group(1))
+				text = _("FRITZ!Box - Error logging in: %s") + found.group(1)
+				self._notify(text)
+				return
+
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
 		parms = urlencode({
 			'getpage':'../html/de/menus/menu2.html',
 			'var:lang':'de',
 			'var:pagename':'home',
-			'var:menu':'home'
+			'var:menu':'home',
+			'sid':self._md5Sid
 			})
 		debug("[FritzCallFBF] _getInfo url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
@@ -601,95 +765,104 @@ class FritzCallFBF:
 			dslSpeed = None
 			tamActive = None
 			dectActive = None
-			
+
+			debug("[FritzCallFBF] _okGetInfo/readinfo")
 			found = re.match('.*<table class="tborder" id="tProdukt">\s*<tr>\s*<td style="padding-top:2px;">([^<]*)</td>\s*<td style="padding-top:2px;text-align:right;">\s*([^\s]*)\s*</td>', html, re.S)
 			if found:
 				boxInfo = found.group(1)+ ', ' + found.group(2)
 				boxInfo = boxInfo.replace('&nbsp;',' ')
-				debug("[FritzCallFBF] _okGetInfo Boxinfo: " + boxInfo)
+				# debug("[FritzCallFBF] _okGetInfo Boxinfo: " + boxInfo)
 			else:
 				found = re.match('.*<p class="ac">([^<]*)</p>', html, re.S)
 				if found:
-					debug("[FritzCallFBF] _okGetInfo Boxinfo: " + found.group(1))
+					# debug("[FritzCallFBF] _okGetInfo Boxinfo: " + found.group(1))
 					boxInfo = found.group(1)
 		
 			found = re.match('.*if \(isNaN\(jetzt\)\)\s*return "";\s*var str = "([^"]*)";', html, re.S)
 			if found:
-				debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
+				# debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
 				upTime = found.group(1)
 			else:
 				found = re.match('.*str = g_pppSeit \+"([^<]*)<br>"\+mldIpAdr;', html, re.S)
 				if found:
-					debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
+					# debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
 					upTime = found.group(1)
 		
 			found = re.match(".*IpAdrDisplay\('([.\d]+)'\)", html, re.S)
 			if found:
-				debug("[FritzCallFBF] _okGetInfo IpAdrDisplay: " + found.group(1))
+				# debug("[FritzCallFBF] _okGetInfo IpAdrDisplay: " + found.group(1))
 				ipAddress = found.group(1)
 		
 			found = re.match('.*function WlanStateLed \(state\){.*?return StateLed\("(\d+)"\);\s*}', html, re.S)
 			if found:
-				debug("[FritzCallFBF] _okGetInfo WlanState: " + found.group(1))
+				# debug("[FritzCallFBF] _okGetInfo WlanState: " + found.group(1))
 				wlanState = found.group(1)
 		
 			found = re.match('.*var (?:g_)?encryption = "(\d+)";', html, re.S)
 			if found:
-				debug("[FritzCallFBF] _okGetInfo WlanEncrypt: " + found.group(1))
+				# debug("[FritzCallFBF] _okGetInfo WlanEncrypt: " + found.group(1))
 				wlanEncrypt = found.group(1)
 		
 			found = re.match('.*function DslStateDisplay \(state\){\s*var state = "(\d+)";', html, re.S)
 			if found:
-				debug("[FritzCallFBF] _okGetInfo DslState: " + found.group(1))
+				# debug("[FritzCallFBF] _okGetInfo DslState: " + found.group(1))
 				dslState = found.group(1)
 		
 			found = re.match('.*function DslStateDisplay \(state\){\s*var state = "\d+";.*?if \("3130" != "0"\) str = "([^"]*)";', html, re.S)
 			if found:
-				debug("[FritzCallFBF] _okGetInfo DslSpeed: " + found.group(1).strip())
+				# debug("[FritzCallFBF] _okGetInfo DslSpeed: " + found.group(1).strip())
 				dslSpeed = found.group(1).strip()
 		
 			if html.find('g_tamActive') != -1:
-				entries = re.compile('if \("1" == "1"\) {\s*g_tamActive \+= 1;\s*}', re.S).findall(html)
-				tamActive = len(entries)
-				debug("[FritzCallFBF] _okGetInfo tamActive: " + str(tamActive))
+				entries = re.compile('if \("(\d)" == "1"\) {\s*g_tamActive \+= 1;\s*}', re.S).finditer(html)
+				tamActive = [0, False, False, False, False, False]
+				i=1
+				for entry in entries:
+					state = entry.group(1)
+					if state == '1':
+						tamActive[0] += 1
+						tamActive[i] = True
+					i += 1
+
+				# debug("[FritzCallFBF] _okGetInfo tamActive: " + str(tamActive))
 		
 			if html.find('countDect2') != -1:
 				entries = re.compile('if \("1" == "1"\) countDect2\+\+;', re.S).findall(html)
 				dectActive = len(entries)
-				debug("[FritzCallFBF] _okGetInfo dectActive: " + str(dectActive))
+				# debug("[FritzCallFBF] _okGetInfo dectActive: " + str(dectActive))
 		
 			return (boxInfo, upTime, ipAddress, wlanState, wlanEncrypt, dslState, dslSpeed, tamActive, dectActive)
 
 		debug("[FritzCallFBF] _okGetInfo")
-		# linkP = open("/tmp/FritzCall_okGetInfo.htm", "w")
-		# linkP.write(html)
-		# linkP.close()
 		info = readInfo(html)
-		self.setProperties(info)
-		self.callback(readInfo(html))
+		debug("[FritzCallFBF] _okGetInfo info: " + str(info))
+		self._setProperties(info)
+		self.infoCallback(info)
+		self._logout()
 
 	def _errorGetInfo(self, error):
-		debug("[FritzCallFBF] _errorGetInfo: $s" % error)
+		debug("[FritzCallFBF] _errorGetInfo: %s" % (error))
+		text = _("FRITZ!Box - Error getting status: %s") % error
+		self._notify(text)
+		self._logout()
 		# linkP = open("/tmp/FritzCall_errorGetInfo.htm", "w")
 		# linkP.write(error)
 		# linkP.close()
 
 	def reset(self):
-		self.login(self._reset)
+		self._login(self._reset)
 
 	def _reset(self, html=None):
 		# POSTDATA=getpage=../html/reboot.html&errorpage=../html/de/menus/menu2.html&var:lang=de&var:pagename=home&var:errorpagename=home&var:menu=home&var:pagemaster=&time:settings/time=1242207340%2C-120&var:tabReset=0&logic:command/reboot=../gateway/commands/saveconfig.html
+		self._callScreen.close()
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
 		parms = urlencode({
 			'getpage':'../html/reboot.html',
-			# 'errorpage':'../html/de/menus/menu2.html',
 			'var:lang':'de',
 			'var:pagename':'reset',
-			# 'var:errorpagename':'home',
 			'var:menu':'system',
-			# 'var:pagemaster':'',
-			# 'var:tabReset':'0',
-			'logic:command/reboot':'../gateway/commands/saveconfig.html'
+			'logic:command/reboot':'../gateway/commands/saveconfig.html',
+			'sid':self._md5Sid
 			})
 		debug("[FritzCallFBF] _reset url: '" + url + "' parms: '" + parms + "'")
 		getPage(url,
@@ -700,32 +873,41 @@ class FritzCallFBF:
 					'Content-Length': str(len(parms))},
 			postdata=parms)
 
-	def hangup(self):
-		''' hangup call on port; not used for now '''
-		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
-		parms = urlencode({
-			#'getpage':'../html/de/menus/menu2.html',
-			'id':'uiPostForm',
-			'name':'uiPostForm',
-			'login:command/password': config.plugins.FritzCall.password.value,
-			#'var:pagename':'fonbuch',
-			#'var:menu':'home',
-			'telcfg:settings/UseClickToDial':'1',
-			'telcfg:settings/DialPort':config.plugins.FritzCall.extension.value,
-			'telcfg:command/Hangup':''
-			})
-		debug("[FritzCallFBF] hangup url: '" + url + "' parms: '" + parms + "'")
-		getPage(url,
-			method="POST",
-			headers={
-					'Content-Type': "application/x-www-form-urlencoded",
-					'Content-Length': str(len(parms))},
-			postdata=parms)
+	def _okReset(self, html):
+		debug("[FritzCallFBF] _okReset")
+		self._logout()
 
-fritzbox = FritzCallFBF()
+	def _errorReset(self, error):
+		debug("[FritzCallFBF] _errorReset: %s" % (error))
+		text = _("FRITZ!Box - Error resetting: %s") % error
+		self._notify(text)
+		self._logout()
 
+#===============================================================================
+#	def hangup(self):
+#		''' hangup call on port; not used for now '''
+#		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+#		parms = urlencode({
+#			'id':'uiPostForm',
+#			'name':'uiPostForm',
+#			'login:command/password': config.plugins.FritzCall.password.value,
+#			'telcfg:settings/UseClickToDial':'1',
+#			'telcfg:settings/DialPort':config.plugins.FritzCall.extension.value,
+#			'telcfg:command/Hangup':'',
+#			'sid':self._md5Sid
+#			})
+#		debug("[FritzCallFBF] hangup url: '" + url + "' parms: '" + parms + "'")
+#		getPage(url,
+#			method="POST",
+#			headers={
+#					'Content-Type': "application/x-www-form-urlencoded",
+#					'Content-Length': str(len(parms))},
+#			postdata=parms)
+#===============================================================================
 
-class FritzMenu(Screen):
+# fritzbox = FritzCallFBF()
+
+class FritzMenu(Screen,HelpableScreen):
 	def __init__(self, session):
 		fontSize = scaleV(24,21) # indeed this is font size +2
 		noButtons = 2 # reset, wlan
@@ -819,6 +1001,7 @@ class FritzMenu(Screen):
 						)
 
 		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
 		# TRANSLATORS: keep it short, this is a button
 		self["key_red"] = Button(_("Reset"))
 		# TRANSLATORS: keep it short, this is a button
@@ -827,27 +1010,57 @@ class FritzMenu(Screen):
 		if fritzbox.hasMailbox:
 			# TRANSLATORS: keep it short, this is a button
 			self["key_yellow"] = Button(_("Toggle Mailbox"))
-			self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions"],
+			self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions", "NumberActions", "EPGSelectActions"],
 											{
 											"cancel": self.exit,
 											"ok": self.exit,
 											"red": self.reset,
 											"green": self.toggleWlan,
-											"yellow": self.toggleMailbox,
+											"yellow": (lambda: self.toggleMailbox(-1)),
+											"0": (lambda: self.toggleMailbox(0)),
+											"1": (lambda: self.toggleMailbox(1)),
+											"2": (lambda: self.toggleMailbox(2)),
+											"3": (lambda: self.toggleMailbox(3)),
+											"4": (lambda: self.toggleMailbox(4)),
+											"info": self._getInfo,
 											}, -2)
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "ColorActions", [("yellow", _("Toggle all mailboxes"))]))
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "NumberActions", [("0", _("Toggle 1. mailbox"))]))
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "NumberActions", [("1", _("Toggle 2. mailbox"))]))
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "NumberActions", [("2", _("Toggle 3. mailbox"))]))
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "NumberActions", [("3", _("Toggle 4. mailbox"))]))
+			# TRANSLATORS: keep it short, this is a help text
+			self.helpList.append((self["menuActions"], "NumberActions", [("4", _("Toggle 5. mailbox"))]))
 			self["FBFMailbox"] = Label(_('Mailbox'))
 			self["mailbox_inactive"] = Pixmap()
 			self["mailbox_active"] = Pixmap()
 			self["mailbox_active"].hide()
 		else:
-			self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions"],
+			self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions", "EPGSelectActions"],
 											{
 											"cancel": self.exit,
 											"ok": self.exit,
-											"red": self.toggleWlan,
-											"green": self.reset,
+											"green": self.toggleWlan,
+											"red": self.reset,
+											"info": self._getInfo,
 											}, -2)
-		
+
+		# TRANSLATORS: keep it short, this is a help text
+		self.helpList.append((self["menuActions"], "OkCancelActions", [("cancel", _("Quit"))]))
+		# TRANSLATORS: keep it short, this is a help text
+		self.helpList.append((self["menuActions"], "OkCancelActions", [("ok", _("Quit"))]))
+		# TRANSLATORS: keep it short, this is a help text
+		self.helpList.append((self["menuActions"], "ColorActions", [("green", _("Toggle WLAN"))]))
+		# TRANSLATORS: keep it short, this is a help text
+		self.helpList.append((self["menuActions"], "ColorActions", [("red", _("Reset"))]))
+		# TRANSLATORS: keep it short, this is a help text
+		self.helpList.append((self["menuActions"], "EPGSelectActions", [("info", _("Refresh status"))]))
+
 		self["FBFInfo"] = Label(_('Getting status from FRITZ!Box Fon...'))
 
 		self["FBFInternet"] = Label('Internet')
@@ -873,92 +1086,108 @@ class FritzMenu(Screen):
 			self["dect_active"].hide()
 
 		self.timer = eTimer()
-		self.timer.callback.append(self._getInfo)
+		self.timer.callback.append(self._getInfo1)
 		self.onShown.append(lambda: self.timer.start(5000))
+		self.onHide.append(lambda: self.timer.stop())
 		self._getInfo()
 
 	def _getInfo(self):
-		fritzbox.getInfo(self._fillMenu)
+		self._getInfo1(self)
+
+	def _getInfo1(self, screen=None):
+		fritzbox.getInfo(screen, self._fillMenu)
+
+	def updateStatus(self, text):
+		self["FBFInfo"].setText(_("Getting status from FRITZ!Box Fon...") + text)
 
 	def _fillMenu(self, status):
 		(boxInfo, upTime, ipAddress, wlanState, wlanEncrypt, dslState, dslSpeed, tamActive, dectActive) = status
+		if not boxInfo:
+			return
 		self.wlanActive = (wlanState == '1')
 		self.mailboxActive = False
-		self["FBFInfo"].setText(boxInfo.replace(', ', '\n'))
-		if ipAddress:
-			if upTime:
-				self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress + '\n' + _('Connected since') + ' ' + upTime)
-			else:
-				self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress)
-			self["internet_inactive"].hide()
-			self["internet_active"].show()
-		else:
-			self["internet_active"].hide()
-			self["internet_inactive"].show()
-		if dslState=='5':
-			self["dsl_inactive"].hide()
-			self["dsl_active"].show()
-		else:
-			self["dsl_active"].hide()
-			self["dsl_inactive"].show()
-		if dslSpeed:
-			self["FBFDsl"].setText('DSL ' + dslSpeed)
-		if wlanState=='1':
-			self["wlan_inactive"].hide()
-			self["wlan_active"].show()
-			if wlanEncrypt:
-				if wlanEncrypt=='0':
-					self["FBFWlan"].setText('WLAN ' + _('not encrypted'))
+		try:
+			self["FBFInfo"].setText(boxInfo.replace(', ', '\n'))
+			if ipAddress:
+				if upTime:
+					self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress + '\n' + _('Connected since') + ' ' + upTime)
 				else:
-					self["FBFWlan"].setText('WLAN ' + _('encrypted'))
-		else:
-			self["wlan_active"].hide()
-			self["wlan_inactive"].show()
-
-		if fritzbox.hasMailbox:
-			if  not tamActive or tamActive == 0:
-				self.mailboxActive = False
-				self["mailbox_active"].hide()
-				self["mailbox_inactive"].show()
-				self["FBFMailbox"].setText(_('No mailbox active'))
+					self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress)
+				self["internet_inactive"].hide()
+				self["internet_active"].show()
 			else:
-				self.mailboxActive = True
-				self["mailbox_inactive"].hide()
-				self["mailbox_active"].show()
-				if tamActive == 1:
-					self["FBFMailbox"].setText(_('One mailbox active'))
-				else:
-					self["FBFMailbox"].setText(str(tamActive) + ' ' + _('mailboxes active'))
-
-		if fritzbox.hasDect and dectActive:
-			self["dect_inactive"].hide()
-			self["dect_active"].show()
-			if dectActive == 0:
-				self["FBFDect"].setText(_('No DECT phone registered'))
+				self["internet_active"].hide()
+				self["internet_inactive"].show()
+			if dslState=='5':
+				self["dsl_inactive"].hide()
+				self["dsl_active"].show()
 			else:
-				if dectActive == 1:
-					self["FBFDect"].setText(_('One DECT phone registered'))
+				self["dsl_active"].hide()
+				self["dsl_inactive"].show()
+			if dslSpeed:
+				self["FBFDsl"].setText('DSL ' + dslSpeed)
+			if wlanState=='1':
+				self["wlan_inactive"].hide()
+				self["wlan_active"].show()
+				if wlanEncrypt:
+					if wlanEncrypt=='0':
+						self["FBFWlan"].setText('WLAN ' + _('not encrypted'))
+					else:
+						self["FBFWlan"].setText('WLAN ' + _('encrypted'))
+			else:
+				self["wlan_active"].hide()
+				self["wlan_inactive"].show()
+	
+			if fritzbox.hasMailbox:
+				if  not tamActive or tamActive[0] == 0:
+					self.mailboxActive = False
+					self["mailbox_active"].hide()
+					self["mailbox_inactive"].show()
+					self["FBFMailbox"].setText(_('No mailbox active'))
 				else:
-					self["FBFDect"].setText(str(dectActive) + ' ' + _('DECT phones registered'))
-
-	def reset(self):
-		fritzbox.reset()
-		fritzbox.getInfo(self._fillMenu)
+					self.mailboxActive = True
+					message = '('
+					for i in range(5):
+						if tamActive[i+1]:
+							message = message + str(i) + ','
+					message = message[:-1] + ')'
+					self["mailbox_inactive"].hide()
+					self["mailbox_active"].show()
+					if tamActive[0] == 1:
+						self["FBFMailbox"].setText(_('One mailbox active') + ' ' + message)
+					else:
+						self["FBFMailbox"].setText(str(tamActive[0]) + ' ' + _('mailboxes active') + ' ' + message)
+	
+			if fritzbox.hasDect and dectActive:
+				self["dect_inactive"].hide()
+				self["dect_active"].show()
+				if dectActive == 0:
+					self["FBFDect"].setText(_('No DECT phone registered'))
+				else:
+					if dectActive == 1:
+						self["FBFDect"].setText(_('One DECT phone registered'))
+					else:
+						self["FBFDect"].setText(str(dectActive) + ' ' + _('DECT phones registered'))
+		except KeyError:
+			debug("[FritzCallFBF] _fillMenu: " + traceback.format_exc())
 
 	def toggleWlan(self):
 		if self.wlanActive:
-			fritzbox.changeWLAN('0')
+			debug("[FritzMenu] toggleWlan off")
+			FritzCallFBF(False).changeWLAN('0') # we need a separate container so we do not collide with getInfo
 		else:
-			fritzbox.changeWLAN('1')
-		fritzbox.getInfo(self._fillMenu)
+			debug("[FritzMenu] toggleWlan off")
+			FritzCallFBF(False).changeWLAN('1') # we need a separate container so we do not collide with getInfo
 
-	def toggleMailbox(self):
+	def toggleMailbox(self, which):
+		debug("[FritzMenu] toggleMailbox")
 		if fritzbox.hasMailbox:
-			if self.mailboxActive:
-				fritzbox.changeMailbox('0')
-			else:
-				fritzbox.changeMailbox('1')
-			fritzbox.getInfo(self._fillMenu)
+			debug("[FritzMenu] toggleMailbox off")
+			FritzCallFBF(False).changeMailbox(which) # we need a separate container so we do not collide with getInfo
+
+	def reset(self):
+		fritzbox.reset()
+		self.exit()
 
 	def exit(self):
 		self.timer.stop()
@@ -1083,24 +1312,24 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 
 		self["setupActions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
-			"yellow": self.displayAllCalls,
-			"red": self.displayMissedCalls,
-			"blue": self.displayInCalls,
-			"green": self.displayOutCalls,
+			"yellow": (lambda: self.display(FBF_ALL_CALLS)),
+			"red": (lambda: self.display(FBF_MISSED_CALLS)),
+			"blue": (lambda: self.display(FBF_IN_CALLS)),
+			"green": (lambda: self.display(FBF_OUT_CALLS)),
 			"cancel": self.ok,
 			"ok": self.showEntry, }, - 2)
 
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "OkCancelActions", [("ok", _("Show details of entry"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "OkCancelActions", [("cancel", _("Quit"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "ColorActions", [("yellow", _("Display all calls"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "ColorActions", [("red", _("Display missed calls"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("Display incoming calls"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "ColorActions", [("green", _("Display outgoing calls"))]))
 
 		self["statusbar"] = Label(_("Getting calls from FRITZ!Box..."))
@@ -1115,22 +1344,6 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 
 	def ok(self):
 		self.close()
-
-	def displayAllCalls(self):
-		debug("[FritzDisplayCalls] displayAllCalls")
-		self.display(FBF_ALL_CALLS)
-
-	def displayMissedCalls(self):
-		debug("[FritzDisplayCalls] displayMissedCalls")
-		self.display(FBF_MISSED_CALLS)
-
-	def displayInCalls(self):
-		debug("[FritzDisplayCalls] displayInCalls")
-		self.display(FBF_IN_CALLS)
-
-	def displayOutCalls(self):
-		debug("[FritzDisplayCalls] displayOutCalls")
-		self.display(FBF_OUT_CALLS)
 
 	def display(self, which=config.plugins.FritzCall.fbfCalls.value):
 		debug("[FritzDisplayCalls] display")
@@ -1170,7 +1383,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		self["entries"].setList(sortlist)
 
 	def updateStatus(self, text):
-		self["statusbar"].setText(text)
+		self["statusbar"].setText(_("Getting calls from FRITZ!Box...") + text)
 
 	def showEntry(self):
 		debug("[FritzDisplayCalls] showEntry")
@@ -1195,30 +1408,40 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 
 
 class FritzOfferAction(Screen):
-	# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
-	width = 430 # = 5 + 3x140 + 5; 3 Buttons
-	height = 176 # = 5 + 126 + 40 + 5; 6 lines of text possible
-	skin = """
-		<screen name="FritzOfferAction" position="%d,%d" size="%d,%d" title="%s" >
-			<widget name="text" position="5,5" size="%d,%d" font="Regular;21" />
-			<ePixmap position="5,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap position="145,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap position="285,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<widget name="key_red" position="5,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="145,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="285,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		</screen>""" % (
-						(DESKTOP_WIDTH - width) / 2,
-						(DESKTOP_HEIGHT - height) / 2,
-						width,
-						height,
-						_("Do what?"),
-						width - 10,
-						height - 10 - 40,
-						height - 5 - 40, height - 5 - 40, height - 5 - 40, height - 5 - 40, height - 5 - 40, height - 5 - 40 # Buttons
-												) 
 
 	def __init__(self, session, parent, number, name=""):
+		# TODO: scaling for HD
+		noButtons = 3
+		width = max(scaleH(440,440), noButtons*140)
+		height = scaleV(176,176) # = 5 + 126 + 40 + 5; 6 lines of text possible
+		buttonsGap = (width-noButtons*140)/(noButtons+1)
+		buttonsVPos = height-40-5
+		# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+		self.skin = """
+			<screen name="FritzOfferAction" position="%d,%d" size="%d,%d" title="%s" >
+				<widget name="text" position="5,5" size="%d,%d" font="Regular;%d" />
+				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<widget name="key_red" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			</screen>""" % (
+							(DESKTOP_WIDTH - width) / 2,
+							(DESKTOP_HEIGHT - height) / 2,
+							width,
+							height,
+							_("Do what?"),
+							width - 10,
+							height - 10 - 40,
+							scaleH(21,21),
+							buttonsGap, buttonsVPos,
+							buttonsGap+140+buttonsGap, buttonsVPos,
+							buttonsGap+2*(140+buttonsGap), buttonsVPos,
+							buttonsGap, buttonsVPos,
+							buttonsGap+140+buttonsGap, buttonsVPos,
+							buttonsGap+2*(140+buttonsGap), buttonsVPos,
+							) 
 		debug("[FritzOfferAction] init: %s, %s" %(number, name))
 		Screen.__init__(self, session)
 	
@@ -1384,7 +1607,7 @@ class FritzCallPhonebook:
 #===============================================================================
 		
 		if config.plugins.FritzCall.fritzphonebook.value:
-			fritzbox.loadFritzBoxPhonebook()
+			FritzCallFBF(False).loadFritzBoxPhonebook()
 
 		if DESKTOP_WIDTH <> 1280 or DESKTOP_HEIGHT <> 720:
 			config.plugins.FritzCall.fullscreen.value = False
@@ -1565,17 +1788,17 @@ class FritzCallPhonebook:
 				"cancel": self.exit,
 				"ok": self.showEntry, }, - 2)
 	
-			# TRANSLATORS: this is a help text, keep it short
+			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["setupActions"], "OkCancelActions", [("ok", _("Show details of entry"))]))
-			# TRANSLATORS: this is a help text, keep it short
+			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["setupActions"], "OkCancelActions", [("cancel", _("Quit"))]))
-			# TRANSLATORS: this is a help text, keep it short
+			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["setupActions"], "ColorActions", [("red", _("Delete entry"))]))
-			# TRANSLATORS: this is a help text, keep it short
+			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["setupActions"], "ColorActions", [("green", _("Add entry to phonebook"))]))
-			# TRANSLATORS: this is a help text, keep it short
+			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["setupActions"], "ColorActions", [("yellow", _("Edit selected entry"))]))
-			# TRANSLATORS: this is a help text, keep it short
+			# TRANSLATORS: keep it short, this is a help text
 			self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("Search (case insensitive)"))]))
 	
 			self["entries"] = MenuList([], True, content=eListboxPythonMultiContent)
@@ -1670,32 +1893,38 @@ class FritzCallPhonebook:
 		def add(self, parent=None, number="", name=""):
 			class addScreen(Screen, ConfigListScreen):
 				'''ConfiglistScreen with two ConfigTexts for Name and Number'''
-				width = 570
-				height = 100
-				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
-				skin = """
-					<screen position="%d,%d" size="%d,%d" title="%s" >
-					<widget name="config" position="5,5" size="%d,%d" scrollbarMode="showOnDemand" />
-					<ePixmap position="145,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-					<ePixmap position="285,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-					<widget name="key_red" position="145,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-					<widget name="key_green" position="285,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-					</screen>""" % (
-									(DESKTOP_WIDTH - width) / 2,
-									(DESKTOP_HEIGHT - height) / 2,
-									width,
-									height,
-									_("Add entry to phonebook"),
-									width - 5 - 5,
-									height - 5 - 40 - 5,
-									height - 40 - 5, height - 40 - 5, height - 40 - 5, height - 40 - 5
-																		 )
-	
 	
 				def __init__(self, session, parent, number="", name=""):
 					#
 					# setup screen with two ConfigText and OK and ABORT button
 					# 
+					# TODO: scaling for HD
+					noButtons = 2
+					width = max(scaleH(570,570), noButtons*140)
+					height = scaleV(100,100) # = 5 + 126 + 40 + 5; 6 lines of text possible
+					buttonsGap = (width-noButtons*140)/(noButtons+1)
+					buttonsVPos = height-40-5
+					# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
+					self.skin = """
+						<screen position="%d,%d" size="%d,%d" title="%s" >
+						<widget name="config" position="5,5" size="%d,%d" scrollbarMode="showOnDemand" />
+						<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+						<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+						<widget name="key_red" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+						<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+						</screen>""" % (
+										(DESKTOP_WIDTH - width) / 2,
+										(DESKTOP_HEIGHT - height) / 2,
+										width,
+										height,
+										_("Add entry to phonebook"),
+										width - 5 - 5,
+										height - 5 - 40 - 5,
+										buttonsGap, buttonsVPos,
+										buttonsGap+140+buttonsGap, buttonsVPos,
+										buttonsGap, buttonsVPos,
+										buttonsGap+140+buttonsGap, buttonsVPos,
+										)
 					Screen.__init__(self, session)
 					self.session = session
 					self.parent = parent
@@ -1786,8 +2015,6 @@ class FritzCallPhonebook:
 	
 		def exit(self):
 			self.close()
-
-phonebook = FritzCallPhonebook()
 
 
 class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
@@ -1938,21 +2165,21 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			"info": self.about,
 		}, - 2)
 
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "ColorActions", [("red", _("quit"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "ColorActions", [("green", _("save and quit"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "ColorActions", [("yellow", _("display calls"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "ColorActions", [("blue", _("display phonebook"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "OkCancelActions", [("ok", _("save and quit"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "OkCancelActions", [("cancel", _("quit"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "MenuActions", [("menu", _("FRITZ!Box Fon Status"))]))
-		# TRANSLATORS: this is a help text, keep it short
+		# TRANSLATORS: keep it short, this is a help text
 		self.helpList.append((self["setupActions"], "EPGSelectActions", [("info", _("About FritzCall"))]))
 
 		ConfigListScreen.__init__(self, self.list, session=session)
@@ -2012,13 +2239,12 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		self["config"].l.setList(self.list)
 
 	def save(self):
+		global fritzbox
 #		debug("[FritzCallSetup] save"
 		for x in self["config"].list:
 			x[1].save()
-		if fritz_call is not None:
+		if fritz_call:
 			fritz_call.connect()
-			debug("[FritzCallSetup] called phonebook.reload()")
-			phonebook.reload()
 		self.close()
 
 	def cancel(self):
@@ -2282,8 +2508,12 @@ class FritzClientFactory(ReconnectingClientFactory):
 		Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
 
 	def buildProtocol(self, addr):
+		global fritzbox, phonebook
 		Notifications.AddNotification(MessageBox, _("Connected to FRITZ!Box!"), type=MessageBox.TYPE_INFO, timeout=4)
 		self.resetDelay()
+		initDebug()
+		fritzbox = FritzCallFBF()
+		phonebook = FritzCallPhonebook()
 		return FritzProtocol()
 
 	def clientConnectionLost(self, connector, reason):
@@ -2306,7 +2536,6 @@ class FritzCall:
 		if config.plugins.FritzCall.enable.value:
 			f = FritzClientFactory()
 			self.d = (f, reactor.connectTCP(config.plugins.FritzCall.hostname.value, 1012, f)) #@UndefinedVariable
-			initDebug()
 
 	def shutdown(self):
 		self.abort()

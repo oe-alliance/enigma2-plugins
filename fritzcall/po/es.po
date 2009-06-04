@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-18 17:08+0200\n"
-"PO-Revision-Date: 2009-05-19 17:11+0100\n"
+"POT-Creation-Date: 2009-06-04 20:26+0200\n"
+"PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "About FritzCall"
 msgstr "Sobre FritzCall"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Add entry to phonebook"
 msgstr "Añadir entrada a la agenda"
 
@@ -93,14 +93,6 @@ msgstr ""
 "(%s)\n"
 "reintentando..."
 
-#, python-format
-msgid "Could not load calls from FRITZ!Box - Error: %s"
-msgstr "No puedo cargar llamadas desde FRITZ!Box - Error: %s"
-
-#, python-format
-msgid "Could not load phonebook from FRITZ!Box - Error: %s"
-msgstr "No puedo cargar la agenda desde FRITZ!Box - Error: %s"
-
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr "No puedo analizar las entradas de la agenda de FRITZ!Box"
 
@@ -117,30 +109,26 @@ msgstr "Testear"
 msgid "Delete"
 msgstr "Borrar"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Delete entry"
 msgstr "Borrar entrada"
-
-#, python-format
-msgid "Dialling failed - Error: %s"
-msgstr "Falló la llamada - Error: %s"
 
 msgid "Display FRITZ!box-Fon calls on screen"
 msgstr "Visualizar llamadas FRITZ!Box-Fon en la pantalla"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Display all calls"
 msgstr "Visualizar todas llamadas"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Display incoming calls"
 msgstr "Visualizar llamadas entrantes"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Display missed calls"
 msgstr "Visualizar llamadas perdidas"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Display outgoing calls"
 msgstr "Visualizar llamadas salientes"
 
@@ -165,7 +153,7 @@ msgstr ""
 msgid "Edit"
 msgstr "Editar"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Edit selected entry"
 msgstr "Editar entrada seleccionada"
 
@@ -178,20 +166,49 @@ msgstr "Entrada incompleta."
 msgid "Extension number to initiate call on"
 msgstr "Número de extensión para iniciar la llamada"
 
+#, python-format
+msgid "FRITZ!Box - Could not load calls: %s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "FRITZ!Box - Could not load phonebook: %s"
+msgstr "No puedo cargar la agenda desde FRITZ!Box - Error: %s"
+
+#, python-format
+msgid "FRITZ!Box - Dialling failed: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error getting status: %s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "FRITZ!Box - Error logging in: %s"
+msgstr "Falló la identificación a FRITZ!Box - Error: %s"
+
+#, python-format
+msgid "FRITZ!Box - Error logging out: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error resetting: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Failed changing Mailbox: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Failed changing WLAN: %s"
+msgstr ""
+
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "Dirección FRITZ!Box FON (Nombre o IP)"
 
 #. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "Estado de Fon FRITZ!Box"
-
-#, python-format
-msgid "FRITZ!Box Login failed! - Error: %s"
-msgstr "Falló la identificación a FRITZ!Box - Error: %s"
-
-msgid "FRITZ!Box Login failed! - Wrong Password!"
-msgstr "Falló la identificación FRITZ!Box - Contraseña errónea!"
 
 msgid "Flash"
 msgstr "Flash"
@@ -344,14 +361,19 @@ msgstr "Ubicación de la Agenda"
 msgid "Phonebook"
 msgstr "Agenda"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Quit"
 msgstr "Salir"
 
 msgid "Read PhoneBook from FRITZ!Box"
 msgstr "Leer Agenda desde FRITZ!Box"
 
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Refresh status"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Reset"
 msgstr "Resetear"
 
@@ -369,7 +391,7 @@ msgstr "Guardar"
 msgid "Search"
 msgstr "Buscar"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Search (case insensitive)"
 msgstr "Buscar (may/min indistinto)"
 
@@ -394,7 +416,7 @@ msgstr "Mostrar Llamadas Salientes"
 msgid "Show after Standby"
 msgstr "Mostrar después del inicio"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
 msgstr "Mostrar detalles de la entrada"
 
@@ -410,13 +432,39 @@ msgstr "Holanda"
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Tiempo cumplido para Notificaciones de Llamadas (segundos)"
 
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 1. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 2. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 3. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 4. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 5. mailbox"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Toggle Mailbox"
 msgstr "Marcar Cuenta de Correo"
 
 #. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Toggle WLAN"
 msgstr "Marcar WLAN"
+
+#. TRANSLATORS: keep it short, this is a help text
+#, fuzzy
+msgid "Toggle all mailboxes"
+msgstr "Marcar Cuenta de Correo"
 
 msgid "UNKNOWN"
 msgstr "DESCONOCIDO"
@@ -444,11 +492,11 @@ msgstr ""
 "\n"
 "Puede hacer un problema de comunicación, sólo reintente otra vez."
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "display calls"
 msgstr "visualizar llamadas"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "display phonebook"
 msgstr "visualizar agenda"
 
@@ -488,11 +536,11 @@ msgstr "no encriptado"
 msgid "preparing"
 msgstr "preparando"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "quit"
 msgstr "salir"
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "save and quit"
 msgstr "guardar y salir"
 
@@ -516,6 +564,13 @@ msgstr "trabajo"
 #~ "Posición en la agenda corrupta\n"
 #~ "para el número %d\n"
 #~ "Borrando."
+
+#~ msgid "Could not load calls from FRITZ!Box - Error: %s"
+#~ msgstr "No puedo cargar llamadas desde FRITZ!Box - Error: %s"
+
+#~ msgid "Dialling failed - Error: %s"
+#~ msgstr "Falló la llamada - Error: %s"
+
 #~ msgid ""
 #~ "Do you really want to overwrite entry for %(number)s\n"
 #~ "\n"
@@ -536,8 +591,20 @@ msgstr "trabajo"
 #, fuzzy
 #~ msgid "FRITZ!Box Fon has no mailbox"
 #~ msgstr "Estado de Fon FRITZ!Box"
+
+#~ msgid "FRITZ!Box Login failed! - Wrong Password!"
+#~ msgstr "Falló la identificación FRITZ!Box - Contraseña errónea!"
+
+#, fuzzy
+#~ msgid "FRITZ!Box Login failed: "
+#~ msgstr "Falló la identificación a FRITZ!Box - Error: %s"
+
+#, fuzzy
+#~ msgid "Toggle "
+#~ msgstr "Marcar WLAN"
+
 #~ msgid "WLAN off"
 #~ msgstr "WLAN apagado"
+
 #~ msgid "WLAN on"
 #~ msgstr "WLAN encendido"
-

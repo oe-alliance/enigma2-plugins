@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-19 17:24+0200\n"
+"POT-Creation-Date: 2009-06-04 20:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "About FritzCall"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Add entry to phonebook"
 msgstr ""
 
@@ -87,14 +87,6 @@ msgid ""
 "retrying..."
 msgstr ""
 
-#, python-format
-msgid "Could not load calls from FRITZ!Box - Error: %s"
-msgstr ""
-
-#, python-format
-msgid "Could not load phonebook from FRITZ!Box - Error: %s"
-msgstr ""
-
 msgid "Could not parse FRITZ!Box Phonebook entry"
 msgstr ""
 
@@ -111,30 +103,26 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Delete entry"
-msgstr ""
-
-#, python-format
-msgid "Dialling failed - Error: %s"
 msgstr ""
 
 msgid "Display FRITZ!box-Fon calls on screen"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Display all calls"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Display incoming calls"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Display missed calls"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Display outgoing calls"
 msgstr ""
 
@@ -154,7 +142,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Edit selected entry"
 msgstr ""
 
@@ -167,19 +155,48 @@ msgstr ""
 msgid "Extension number to initiate call on"
 msgstr ""
 
+#, python-format
+msgid "FRITZ!Box - Could not load calls: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Could not load phonebook: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Dialling failed: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error getting status: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error logging in: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error logging out: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error resetting: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Failed changing Mailbox: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Failed changing WLAN: %s"
+msgstr ""
+
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
-msgstr ""
-
-#, python-format
-msgid "FRITZ!Box Login failed! - Error: %s"
-msgstr ""
-
-msgid "FRITZ!Box Login failed! - Wrong Password!"
 msgstr ""
 
 msgid "Flash"
@@ -321,14 +338,19 @@ msgstr ""
 msgid "Phonebook"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Quit"
 msgstr ""
 
 msgid "Read PhoneBook from FRITZ!Box"
 msgstr ""
 
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Refresh status"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Reset"
 msgstr ""
 
@@ -346,7 +368,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Search (case insensitive)"
 msgstr ""
 
@@ -371,7 +393,7 @@ msgstr ""
 msgid "Show after Standby"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
 msgstr ""
 
@@ -387,12 +409,37 @@ msgstr ""
 msgid "Timeout for Call Notifications (seconds)"
 msgstr ""
 
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 1. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 2. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 3. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 4. mailbox"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle 5. mailbox"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Toggle Mailbox"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
 msgid "Toggle WLAN"
+msgstr ""
+
+#. TRANSLATORS: keep it short, this is a help text
+msgid "Toggle all mailboxes"
 msgstr ""
 
 msgid "UNKNOWN"
@@ -417,11 +464,11 @@ msgid ""
 "It could be a communication issue, just try again."
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "display calls"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "display phonebook"
 msgstr ""
 
@@ -461,11 +508,11 @@ msgstr ""
 msgid "preparing"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "quit"
 msgstr ""
 
-#. TRANSLATORS: this is a help text, keep it short
+#. TRANSLATORS: keep it short, this is a help text
 msgid "save and quit"
 msgstr ""
 
