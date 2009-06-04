@@ -31,7 +31,7 @@ merge:
 
 # the TRANSLATORS: allows putting translation comments before the to-be-translated line.
 $(DOMAIN).pot:
-	$(GETTEXT) -L python --add-comments="TRANSLATORS:" -d $(DOMAIN) -s -o $(DOMAIN).pot ../src/*.py
+	$(GETTEXT) --from-code=utf-8 -L python --add-comments="TRANSLATORS:" -d $(DOMAIN) -s -o $(DOMAIN).pot ../src/*.py
 	msguniq -o $(DOMAIN)uniq.pot $(DOMAIN).pot
 	$(RM) $(DOMAIN).pot
 	mv $(DOMAIN)uniq.pot $(DOMAIN).pot
