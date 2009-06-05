@@ -336,6 +336,7 @@ class FritzCallFBF:
 	def loadFritzBoxPhonebook(self):
 		debug("[FritzCallFBF] loadFritzBoxPhonebook")
 		if config.plugins.FritzCall.fritzphonebook.value:
+			self._phoneBookID = '0'
 			debug("[FritzCallFBF] loadFritzBoxPhonebook: logging in")
 			self._login(self._loadFritzBoxPhonebook)
 
@@ -346,7 +347,7 @@ class FritzCallFBF:
 							'var:pagename':'fonbuch',
 							'var:menu':'fon',
 							'sid':self._md5Sid,
-							'telcfg:settings/Phonebook/Books/Select':'0', # this selects always the first phonbook
+							'telcfg:settings/Phonebook/Books/Select':self._phoneBookID, # this selects always the first phonbook
 							})
 			url = "http://%s/cgi-bin/webcm" % (config.plugins.FritzCall.hostname.value)
 			debug("[FritzCallFBF] _loadFritzBoxPhonebook: '" + url + "' parms: '" + parms + "'")
@@ -367,6 +368,16 @@ class FritzCallFBF:
 			#	We expect one line with TrFonName followed by several lines with
 			#	TrFonNr(Type,Number,Shortcut,Vanity), which all belong to the name in TrFonName.
 			#===============================================================================
+			found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name(\d+)" value="[Dd]reambox" id="uiPostPhonebookName\d+" disabled>', html, re.S)
+			if found:
+				phoneBookID = found.group(1)
+				debug("[FritzCallFBF] _parseFritzBoxPhonebook: found dreambox phonebook with id: " + phoneBookID)
+				if self._phoneBookID != phoneBookID:
+					self._phoneBookID = phoneBookID
+					debug("[FritzCallFBF] _parseFritzBoxPhonebook: reload phonebook")
+					self._loadFritzBoxPhonebook(self._phoneBookID) # reload with dreambox phonebook
+					return
+
 			found = re.match('.*<meta http-equiv=content-type content="text/html; charset=([^"]*)">', html, re.S)
 			if found:
 				charset = found.group(1)
