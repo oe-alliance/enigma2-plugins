@@ -215,7 +215,7 @@ def getMacAddress():
 	return new_mac
 
 def debug():
-	try:
+	try:	
 		doc = xml.dom.minidom.parse(accounts_xml)
 		root = doc.childNodes[0]
 		for node in elementsWithTag(root.childNodes, "account"):
@@ -224,5 +224,5 @@ def debug():
 			return False
 		else:	
 			return True
-	except:
+	except IOError:
 		return False
