@@ -23,11 +23,11 @@ class RS:
 		self.downloading = False
 		
 		self.downloadTimer = eTimer()
-		self.downloadTimer.timeout.get().append(self.download)
+		self.downloadTimer.callback.append(self.download)
 		self.freeDownloadTimer = eTimer()
-		self.freeDownloadTimer.timeout.get().append(self.freeDownload)
+		self.freeDownloadTimer.callback.append(self.freeDownload)
 		self.reloadTimer = eTimer()
-		self.reloadTimer.timeout.get().append(self.startDownloading)
+		self.reloadTimer.callback.append(self.startDownloading)
 
 	def addFile(self, file):
 		writeLog("Adding %s to download-list..." % file)
