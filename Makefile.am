@@ -25,6 +25,7 @@ SUBDIRS = \
 	networkwizard \
 	networkbrowser \
 	ofdb \
+	orfat \
 	partnerbox \
 	passwordchanger \
 	permanentclock \

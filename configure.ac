@@ -214,4 +214,7 @@ mytube/Makefile
 mytube/po/Makefile
 mytube/src/Makefile
 
+orfat/Makefile
+orfat/src/Makefile
+
 ])
