@@ -18,6 +18,7 @@
 #
 
 import urllib
+from time import localtime
 from timer import TimerEntry
 from twisted.internet import reactor
 from twisted.web import client
