@@ -29,6 +29,8 @@ from Components.config import config
 from Components.Button import Button
 from Screens.MessageBox import MessageBox
 from Tools.HardwareInfo import HardwareInfo
+# for localized messages
+from . import _
 
 config.plugins.Quickbutton = ConfigSubsection()
 config.plugins.Quickbutton.red = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
@@ -140,6 +142,10 @@ def startPlugin(self,pname):
 			config.av.policy_43.save()
 			self.session.open(MessageBox,_("Display 4:3 content as") + " " + ar[config.av.policy_43.value], MessageBox.TYPE_INFO, timeout = 3)
 			no_plugin = False
+		elif pname == _("Timer"):
+			from Screens.TimerEdit import TimerEditList
+			self.session.open(TimerEditList)
+			no_plugin = False
 		else:
 			plugin = None
 			for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
@@ -185,8 +191,9 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		self.entryguilist.append(("2",_("MediaPlayer")))
 		self.entryguilist.append(("3",_("Plugin browser")))
 		self.entryguilist.append(("4",_("switch 4:3 content display")))
+		self.entryguilist.append(("5",_("Timer")))
 		# Vorgaben aus EXTENSIONSMENU, PLUGINMENU
-		index = 5
+		index = 6
 		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
 			self.entryguilist.append((str(index),str(p.name)))
 			if config.plugins.Quickbutton.red.value == str(p.name):
@@ -232,6 +239,8 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 			return "3"
 		elif value == _("switch 4:3 content display"):
 			return "4"
+		if value == _("Timer"):
+			return "5"
 		else:
 			return "0"
 

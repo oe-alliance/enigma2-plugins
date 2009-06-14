@@ -204,6 +204,7 @@ partnerbox/src/servicewebts/Makefile
 partnerbox/src/icons/Makefile
 
 quickbutton/Makefile
+quickbutton/po/Makefile
 quickbutton/src/Makefile
 
 setpasswd/Makefile
