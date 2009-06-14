@@ -132,6 +132,8 @@ def FillE2TimerList(xmlstring, sreference = None):
 			if sreference.upper() == servicereference.upper() and state != TimerEntry.StateEnded and not disabled:
 				go = True
 		if go:
+			eventId = timer.findtext("e2eit", -1)
+			if eventId is None: eventId = -1
 			E2TimerList.append(E2Timer(
 				servicereference = servicereference,
 				servicename = str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
@@ -144,7 +146,7 @@ def FillE2TimerList(xmlstring, sreference = None):
 				state = state,
 				repeated = int(timer.findtext("e2repeated", 0)),
 				justplay = int(timer.findtext("e2justplay", 0)),
-				eventId = int(timer.findtext("e2eit", -1)),
+				eventId = eventId,
 				afterevent = int(timer.findtext("e2afterevent", 0)),
 				dirname = str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
 				description = str(timer.findtext("e2description", '').encode("utf-8", 'ignore')),
