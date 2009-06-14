@@ -8,7 +8,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo
-from Components.Network import Network
+from Components.Network import iNetwork
 from Plugins.Plugin import PluginDescriptor
 
 from twisted.web import proxy, http
@@ -131,24 +131,24 @@ def main(session, **kwargs):
     """ open config screen """
     session.open(HTTPProxyConfigScreen)
 
-def autostart(**kwargs):
+def autostart(reason,**kwargs):
     """ start proxy in background """
-    if config.plugins.httpproxy.enable.value:
+    if reason is True and config.plugins.httpproxy.enable.value is True:
         try:
-            nw = Network()
-            for adaptername in nw.ifaces:
-                extip = nw.ifaces[adaptername]['ip']
-                if nw.ifaces[adaptername]['up'] is True:
-                    extip = "%i.%i.%i.%i"%(extip[0],extip[1],extip[2],extip[3])
+            for adaptername in iNetwork.ifaces:
+                extip = iNetwork.ifaces[adaptername]['ip']
+                if iNetwork.ifaces[adaptername]['up'] is True:
+                    extip = "%i.%i.%i.%i" % (extip[0], extip[1], extip[2], extip[3])
                     print "starting proxy on ",extip,":", config.plugins.httpproxy.port.value
                     reactor.listenTCP(int(config.plugins.httpproxy.port.value), ProxyFactory(),interface=extip)
         except Exception,e:
             print "starting the http proxy failed!"
             print e
 
+
 def Plugins(**kwargs):
   return [
           PluginDescriptor(name="HTTP Proxy",description="use your Dreambox as Web Proxy",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main),
-          PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)
+          PluginDescriptor(where = [PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc = autostart)
           ]
 
