@@ -20,7 +20,6 @@ class EPG(Source):
         self.endtime = endtm
 
     def handleCommand(self, cmd):
-        print "#"*20,"handleCommand",cmd
         self.command = cmd
 
     def do_func(self):
