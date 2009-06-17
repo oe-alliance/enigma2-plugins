@@ -167,7 +167,7 @@ def startPlugin(self,pname):
 
 class QuickbuttonSetup(ConfigListScreen, Screen):
 	skin = """
-		<screen position="100,100" size="550,400" title="Quickbutton Setup" >
+		<screen position="center,center" size="550,400" title="Quickbutton Setup" >
 			<widget name="config" position="20,10" size="510,330" scrollbarMode="showOnDemand" />
 			<widget name="key_red" position="0,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
 			<widget name="key_green" position="140,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
