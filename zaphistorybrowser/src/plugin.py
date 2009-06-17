@@ -33,7 +33,7 @@ language.addCallback(localeInit)
 
 class ZapHistoryBrowser(Screen):
 	skin = """
-	<screen position="200,80" size="320,440" title="%s" >
+	<screen position="center,center" size="320,440" title="%s" >
 		<ePixmap pixmap="skin_default/buttons/red.png" position="10,0" size="140,40" transparent="1" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/green.png" position="170,0" size="140,40" transparent="1" alphatest="on" />
 		<widget name="key_red" position="10,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />

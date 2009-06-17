@@ -29,7 +29,7 @@ else:
 
 class RSMain(TitleScreen):
 	skin = """
-		<screen position="200,165" size="320,270" title="RS Downloader">
+		<screen position="center,center" size="320,270" title="RS Downloader">
 			<widget name="list" position="10,10" size="300,250" />
 		</screen>"""
 

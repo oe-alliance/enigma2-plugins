@@ -35,7 +35,7 @@ def writeLog(message):
 
 class RSLogScreen(TitleScreen):
 	skin = """
-		<screen position="100,100" size="520,400" title="RS Downloader" >
+		<screen position="center,center" size="520,400" title="RS Downloader" >
 			<widget name="label" position="0,0" size="520,400" font="Regular;20" />
 		</screen>"""
 

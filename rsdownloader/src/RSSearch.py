@@ -13,7 +13,7 @@ from twisted.web.client import getPage
 
 class RSSearch(TitleScreen):
 	skin = """
-		<screen position="75,75" size="570,425" title="Searching... please wait!">
+		<screen position="center,center" size="570,425" title="Searching... please wait!">
 			<widget name="list" position="0,0" size="570,425" scrollbarMode="showOnDemand" />
 		</screen>"""
 

@@ -10,7 +10,7 @@ from RSTranslation import TitleScreen
 
 class RSDownloadBrowser(TitleScreen):
 	skin = """
-		<screen position="80,100" size="560,400" title="RS Downloader">
+		<screen position="center,center" size="560,400" title="RS Downloader">
 			<widget name="list" position="0,0" size="560,395" scrollbarMode="showOnDemand" />
 		</screen>"""
 

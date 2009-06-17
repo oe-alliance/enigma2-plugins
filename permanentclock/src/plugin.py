@@ -156,7 +156,7 @@ class PermanentClockPositioner(Screen):
 
 class PermanentClockMenu(Screen):
 	skin = """
-		<screen position="150,235" size="420,105" title="%s">
+		<screen position="center,center" size="420,105" title="%s">
 			<widget name="list" position="10,10" size="400,85" />
 		</screen>""" % _("Permanent Clock")
 
