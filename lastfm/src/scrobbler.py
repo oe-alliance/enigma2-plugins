@@ -184,9 +184,9 @@ class EventListener:
                 r= seek.getLength()
                 if not r[0]:
                     tracklength = r[1] / 90000
-            return self.getTrack( artist = currPlay.info().getInfoString(iServiceInformation.sArtist),
-                                  title = currPlay.info().getInfoString(iServiceInformation.sTitle),
-                                  album = currPlay.info().getInfoString(iServiceInformation.sAlbum),
+            return self.getTrack( artist = currPlay.info().getInfoString(iServiceInformation.sTagArtist),
+                                  title = currPlay.info().getInfoString(iServiceInformation.sTagTitle),
+                                  album = currPlay.info().getInfoString(iServiceInformation.sTagAlbum),
                                   length = tracklength,
                                  )
              
