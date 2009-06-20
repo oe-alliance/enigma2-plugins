@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - zaphistorybrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-31 01:43+0100\n"
-"PO-Revision-Date: 2009-05-31 02:28+0100\n"
+"POT-Creation-Date: 2009-06-20 05:56-0000\n"
+"PO-Revision-Date: 2009-06-20 11:37+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -11,21 +11,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: /home/dario/Plugins/zaphistorybrowser\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/zaphistorybrowser\n"
 
-#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:42
-#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:118
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:39
+msgid "disabled"
+msgstr "Disabilitato"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:39
+msgid "enabled"
+msgstr "Abilitato"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:39
+msgid "disabled at parental lock"
+msgstr "Disabilitato su blocco parentale"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:72
+msgid "Zap-History Configurator"
+msgstr "Configuratore di Zap-History"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:79
+msgid "Enable zap history:"
+msgstr "Abilitare "
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:80
+msgid "Maximum zap history entries:"
+msgstr "Numero massimo di voci nella history: "
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:123
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:217
 msgid "Zap-History Browser"
 msgstr "Zap-History Browser"
 
-#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:52
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:133
 msgid "Clear"
 msgstr "Pulire"
 
-#: /home/dario/Plugins/zaphistorybrowser/src/plugin.py:53
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:134
 msgid "Delete"
 msgstr "Cancellare"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:135
+msgid "Zap & Close"
+msgstr "Zap & chiudere"
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src/plugin.py:136
+msgid "Config"
+msgstr "Configurare"
 
