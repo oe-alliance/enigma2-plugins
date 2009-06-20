@@ -41,8 +41,6 @@ config.plugins.ZapHistoryConfigurator.maxEntries_zap_history = ConfigInteger(def
 
 ################################################
 
-AddToHistory = ChannelSelection.addToHistory
-
 def addToHistory(instance, ref):
 	if config.plugins.ZapHistoryConfigurator.enable_zap_history.value == "off":
 		return
