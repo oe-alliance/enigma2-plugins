@@ -6,9 +6,9 @@ from Components.ActionMap import ActionMap
 from Components.Pixmap import MovingPixmap
 from enigma import ePoint, eSize
 from Plugins.Extensions.VlcPlayer.VlcServerConfig import vlcServerConfig
+from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from SimpleMenu import SimpleMenu
 from Tools.Directories import fileExists
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
@@ -56,12 +56,12 @@ class ORFMain(Screen):
 				else:
 					list = []
 					for x in serverList:
-						list.append([x.getName(), x])
-					self.session.openWithCallback(self.serverChosen, SimpleMenu, list)
+						list.append((x.getName(), x))
+					self.session.openWithCallback(self.serverChosen, ChoiceBox, title="Waehle den vlc-Server...", list=list)
 
 	def serverChosen(self, server):
 		if server is not None:
-			server.play(self.session, self.movies[self.selectedEntry], "ORF.at IPTV")
+			server[1].play(self.session, self.movies[self.selectedEntry], "ORF.at IPTV")
 
 	def downloadList(self):
 		self.working = True

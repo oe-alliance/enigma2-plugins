@@ -3,9 +3,9 @@
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Plugins.Extensions.VlcPlayer.VlcServerConfig import vlcServerConfig
+from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from SimpleMenu import SimpleMenu
 from Tools.Directories import fileExists
 from twisted.web.client import getPage
 
@@ -96,12 +96,12 @@ class ORFSub(Screen):
 			else:
 				list = []
 				for x in serverList:
-					list.append([x.getName(), x])
-				self.session.openWithCallback(self.serverChosen, SimpleMenu, list)
+					list.append((x.getName(), x))
+				self.session.openWithCallback(self.serverChosen, ChoiceBox, title="Waehle den vlc-Server...", list=list)
 
 	def serverChosen(self, server):
 		if server is not None:
-			server.play(self.session, self.urls[self["list"].getSelectedIndex()], self["list"].getCurrent())
+			server[1].play(self.session, self.urls[self["list"].getSelectedIndex()], self["list"].getCurrent())
 
 	def downloadList(self):
 		getPage(self.url).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
