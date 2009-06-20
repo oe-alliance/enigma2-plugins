@@ -28,6 +28,9 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import ConfigSubsection, ConfigSubList, ConfigIP, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, getConfigListEntry, configfile
 
+# for localized messages
+from . import _
+
 def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries.append(ConfigSubsection())
 	i = len(config.plugins.Partnerbox.Entries) -1
@@ -49,7 +52,7 @@ def initConfig():
 
 class PartnerboxSetup(ConfigListScreen, Screen):
 	skin = """
-		<screen position="100,100" size="550,400" title="Partnerbox Setup" >
+		<screen position="center,center" size="550,400" title="Partnerbox Setup" >
 			<widget name="config" position="20,10" size="510,330" scrollbarMode="showOnDemand" />
 			<widget name="key_red" position="0,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
 			<widget name="key_green" position="140,350" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
@@ -99,7 +102,7 @@ class PartnerboxSetup(ConfigListScreen, Screen):
 
 class PartnerboxEntriesListConfigScreen(Screen):
 	skin = """
-		<screen position="100,100" size="550,400" title="%s" >
+		<screen position="center,center" size="550,400" title="%s" >
 			<widget name="name" position="5,0" size="150,50" font="Regular;20" halign="left"/>
 			<widget name="ip" position="120,0" size="50,50" font="Regular;20" halign="left"/>
 			<widget name="port" position="270,0" size="100,50" font="Regular;20" halign="left"/>
@@ -205,7 +208,7 @@ class PartnerboxEntryList(MenuList):
 
 class PartnerboxEntryConfigScreen(ConfigListScreen, Screen):
 	skin = """
-		<screen name="PartnerboxEntryConfigScreen" position="100,100" size="550,400" title="%s">
+		<screen name="PartnerboxEntryConfigScreen" position="center,center" size="550,400" title="%s">
 			<widget name="config" position="20,10" size="520,330" scrollbarMode="showOnDemand" />
 			<ePixmap name="red"	position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green" position="140,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />

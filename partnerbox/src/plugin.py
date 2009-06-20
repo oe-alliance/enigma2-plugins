@@ -60,6 +60,9 @@ from Screens.ChannelSelection import service_types_tv
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import ConfigSubsection, ConfigSubList, ConfigIP, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, getConfigListEntry, configfile
 
+# for localized messages
+from . import _
+
 
 config.plugins.Partnerbox = ConfigSubsection()
 config.plugins.Partnerbox.showremotetvinextensionsmenu= ConfigYesNo(default = True)
@@ -151,7 +154,7 @@ def FillLocationList(xmlstring):
 	
 class CurrentRemoteTV(Screen):
 	skin = """
-		<screen name="CurrentRemoteTV" position="210,160" size="300,240" title="Remote Player">
+		<screen name="CurrentRemoteTV" position="center,center" size="300,240" title="Remote Player">
 		<widget name="text" position="10,10" zPosition="1" size="290,225" font="Regular;20" halign="center" valign="center" />
 	</screen>"""
 	def __init__(self, session, partnerboxentry):
@@ -209,7 +212,7 @@ class CurrentRemoteTV(Screen):
 class RemoteTimer(Screen):
 	global CurrentParnerBoxName
 	skin = """
-		<screen name="RemoteTimer" position="90,95" size="560,430" title="RemoteTimer Timerlist">
+		<screen name="RemoteTimer" position="center,center" size="560,430" title="RemoteTimer Timerlist">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on"/>
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on"/>
@@ -385,7 +388,7 @@ class RemoteTimer(Screen):
 
 class RemoteTimerBouquetList(Screen):
 	skin = """
-		<screen name="RemoteTimerBouquetList" position="210,160" size="300,240" title="Choose bouquet">
+		<screen name="RemoteTimerBouquetList" position="center,center" size="300,240" title="Choose bouquet">
 		<widget name="text" position="10,10" zPosition="1" size="290,225" font="Regular;20" halign="center" valign="center" />
 		<widget name="bouquetlist" position="10,10" zPosition="2" size="290,225" scrollbarMode="showOnDemand" />
 	</screen>"""
@@ -480,7 +483,7 @@ class RemoteTimerChannelList(Screen):
 	REMOTE_TIMER_MODE = 0
 	REMOTE_TV_MODE = 1
 	skin = """
-		<screen name="RemoteTimerChannelList" position="90,95" size="560,430" title ="Bouquet List">
+		<screen name="RemoteTimerChannelList" position="center,center" size="560,430" title ="Bouquet List">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -919,7 +922,7 @@ class RemoteTimerEPGList(Screen):
 	ADD_TIMER = 1
 	REMOVE_TIMER = 2
 	skin = """
-		<screen name="RemoteTimerEPGList" position="90,95" size="560,430" title ="EPG Selection">
+		<screen name="RemoteTimerEPGList" position="center,center" size="560,430" title ="EPG Selection">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -1506,7 +1509,7 @@ class RemoteTimerEventView(Screen):
 	ADD_TIMER = 1
 	REMOVE_TIMER = 2
 	skin = """
-		<screen name="RemoteTimerEventView" position="90,95" size="560,430" title="Eventview">
+		<screen name="RemoteTimerEventView" position="center,center" size="560,430" title="Eventview">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />

@@ -27,6 +27,9 @@ from Tools.BoundFunction import boundFunction
 from PartnerboxFunctions import  SetPartnerboxTimerlist, isInTimerList, sendPartnerBoxWebCommand, FillE1TimerList, FillE2TimerList
 import PartnerboxFunctions as partnerboxfunctions
 
+# for localized messages
+from . import _
+
 baseEPGSelection__init__ = None
 baseEPGSelection_zapTo = None
 baseonSelectionChanged = None

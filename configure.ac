@@ -202,6 +202,7 @@ partnerbox/Makefile
 partnerbox/src/Makefile
 partnerbox/src/servicewebts/Makefile
 partnerbox/src/icons/Makefile
+partnerbox/po/Makefile
 
 quickbutton/Makefile
 quickbutton/po/Makefile
