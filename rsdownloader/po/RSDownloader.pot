@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RS Downloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-09 18:12+0100\n"
-"PO-Revision-Date: 2009-01-09 18:12+0100\n"
+"POT-Creation-Date: 2009-06-20 09:35-0000\n"
+"PO-Revision-Date: 2009-06-20 09:35-0000\n"
 "Last-Translator: Nabil Hanna <nabil1978@web.de>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
 "MIME-Version: 1.0\n"
@@ -13,165 +13,148 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src\n"
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/plugin.py:25
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSTranslation.py:33
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:200
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:234
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:292
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:365
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:372
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:514
+msgid "Waiting"
+msgstr ""
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:218
+msgid "Checking"
+msgstr ""
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:246
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:252
+msgid "Downloading"
+msgstr ""
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:263
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:435
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:491
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:835
+msgid "Finished"
+msgstr ""
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:271
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:286
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:499
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:509
+msgid "Failed"
+msgstr ""
+
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:530
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:891
 msgid "RS Downloader"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/plugin.py:25
-msgid "Download files from rapidshare in the background"
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSListBrowser.py:61
-msgid "Clear"
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSListBrowser.py:62
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:49
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:548
 msgid "Save"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSListBrowser.py:63
-msgid "Reload"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:551
+msgid "Download in the background:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSListBrowser.py:64
-msgid "Delete"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:552
+msgid "Username:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSListBrowser.py:95
-#, python-format
-msgid "%s saved."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:553
+msgid "Password:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSListBrowser.py:97
-#, python-format
-msgid "Error while writing %s!"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:554
+msgid "Lists directory:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSListBrowser.py:121
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSListBrowser.py:123
-msgid "Edit:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:555
+msgid "Downloads directory:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:40
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:56
-msgid "Start downloading..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:556
+msgid "Ignore download times:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:41
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:66
-msgid "Show lists..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:557
+msgid "Allow downloading on monday:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:42
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:73
-msgid "Show downloads..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:558
+msgid "Allow downloading on tuesday:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:43
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:80
-msgid "Show progress..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:559
+msgid "Allow downloading on wednesday:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:44
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:83
-msgid "Edit configs..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:560
+msgid "Allow downloading on thursday:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:45
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:86
-msgid "Show status..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:561
+msgid "Allow downloading on friday:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:46
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:92
-msgid "Show log..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:562
+msgid "Allow downloading on saturday:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:47
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:95
-msgid "Delete log..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:563
+msgid "Allow downloading on sunday:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:48
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:98
-msgid "Use search-engine..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:564
+msgid "Don't download before:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:49
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:105
-msgid "Show info..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:565
+msgid "Don't download after:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:60
-msgid "Started downloading..."
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:566
+msgid "Maximal downloads:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:62
-msgid "Could not start downloading!"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:567
+msgid "Write log:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:64
-msgid "Already downloading!"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:568
+msgid "Reconnect fritz.Box before downloading:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:71
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:78
-#, python-format
-msgid "Couldn't find the directory %s!"
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:88
-#, python-format
-msgid "Downloading %s."
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:90
-msgid "Stopped!"
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:99
-msgid "Search http://rapidshare-search-engine.com for:"
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSMain.py:106
-msgid ""
-"RS Downloader\n"
-"by AliAbdul\n"
-"\n"
-"This plugin allows you to download files from rapidshare in the background."
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSSearch.py:61
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:628
 #, python-format
 msgid "Added %s to the download-list."
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSSearch.py:63
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:630
 #, python-format
 msgid "Error while adding %s to the download-list!"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSSearch.py:73
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:640
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
 "\n"
 "Error: Nothing found, sorry."
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSSearch.py:74
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:641
 msgid "Nothing found, sorry."
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSSearch.py:90
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:657
 #, python-format
 msgid "Page %d / %d. Push < > to switch the page..."
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSSearch.py:117
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:684
 #, python-format
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
@@ -179,95 +162,80 @@ msgid ""
 "Error: %s"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSSearch.py:122
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:689
 msgid "Loading previous page... please wait!"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSSearch.py:128
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:695
 msgid "Loading next page... please wait!"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:52
-msgid "Download in the background:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:767
+msgid "Delete"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:53
-msgid "Username:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:768
+msgid "Search"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:54
-msgid "Password:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:769
+msgid "Add"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:55
-msgid "Lists directory:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:770
+msgid "Config"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:56
-msgid "Downloads directory:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:791
+msgid "Delete download"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:57
-msgid "Ignore download times:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:792
+msgid "Use search engine"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:58
-msgid "Allow downloading on monday:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:793
+msgid "Add downloads from txt files"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:59
-msgid "Allow downloading on tuesday:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:794
+msgid "Delete failed downloads"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:60
-msgid "Allow downloading on wednesday:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:795
+msgid "Restart failed downloads"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:61
-msgid "Allow downloading on thursday:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:796
+msgid "Clear finished downloads"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:62
-msgid "Allow downloading on friday:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:797
+msgid "Show log"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:63
-msgid "Allow downloading on saturday:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:798
+msgid "Delete log"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:64
-msgid "Allow downloading on sunday:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:799
+msgid "Close plugin"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:65
-msgid "Don't download before:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:800
+msgid "Please choose a function..."
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:66
-msgid "Don't download after:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:838
+#, python-format
+msgid "Delete %s?"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:67
-msgid "Write log:"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:847
+msgid "Search http://rapidshare-search-engine.com for:"
 msgstr ""
 
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSConfig.py:68
-msgid "Reconnect fritz.Box before downloading:"
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSProgress.py:30
-msgid "Downloading"
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSProgress.py:31
-msgid "Files"
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSProgress.py:32
-msgid "Downloaded"
-msgstr ""
-
-#: /home/aliabdul/dream/e2/enigma2-plugins/rsdownloader/src/RSProgress.py:33
-msgid "Failed"
+#: /home/aliabdul/dream/enigma2/enigma2-plugins/rsdownloader/src/plugin.py:891
+msgid "Download files from rapidshare"
 msgstr ""
 
