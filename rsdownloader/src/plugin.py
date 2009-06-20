@@ -23,9 +23,9 @@ from time import localtime, sleep, strftime, time
 from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.Downloader import HTTPProgressDownloader
 from Tools.LoadPixmap import LoadPixmap
-from twisted.web.client import getPage
 from twisted.internet import reactor
 from twisted.python import failure
+from twisted.web.client import getPage
 from urlparse import urlparse, urlunparse
 import gettext, re, socket, urllib2
 
