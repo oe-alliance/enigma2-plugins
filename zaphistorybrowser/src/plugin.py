@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 ## Zap-History Browser by AliAbdul
 from Components.ActionMap import ActionMap
+from Components.config import config, ConfigInteger, ConfigSelection, ConfigSubsection, getConfigListEntry
+from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Language import language
 from Components.MenuList import MenuList
@@ -8,6 +10,7 @@ from Components.MultiContent import MultiContentEntryText
 from enigma import eListboxPythonMultiContent, eServiceCenter, gFont
 from os import environ
 from Plugins.Plugin import PluginDescriptor
+from Screens.ChannelSelection import ChannelSelection
 from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import gettext
@@ -29,6 +32,64 @@ def _(txt):
 
 localeInit()
 language.addCallback(localeInit)
+
+################################################
+
+config.plugins.ZapHistoryConfigurator = ConfigSubsection()
+config.plugins.ZapHistoryConfigurator.enable_zap_history = ConfigSelection(choices = {"off": _("disabled"), "on": _("enabled"), "parental_lock": _("disabled at parental lock")}, default="on")
+config.plugins.ZapHistoryConfigurator.maxEntries_zap_history = ConfigInteger(default=20, limits=(1, 60))
+
+################################################
+
+AddToHistory = ChannelSelection.addToHistory
+
+def addToHistory(instance, ref):
+	if config.plugins.ZapHistoryConfigurator.enable_zap_history.value == "off":
+		return
+	if config.ParentalControl.configured.value and config.plugins.ZapHistoryConfigurator.enable_zap_history.value == "parental_lock":
+		if parentalControl.getProtectionLevel(ref.toCompareString()) != -1:
+			return
+	if instance.servicePath is not None:
+		tmp = instance.servicePath[:]
+		tmp.append(ref)
+		try: del instance.history[instance.history_pos+1:]
+		except: pass
+		instance.history.append(tmp)
+		hlen = len(instance.history)
+		if hlen > config.plugins.ZapHistoryConfigurator.maxEntries_zap_history.value:
+			del instance.history[0]
+			hlen -= 1
+		instance.history_pos = hlen-1
+
+ChannelSelection.addToHistory = addToHistory
+
+################################################
+
+class ZapHistoryConfigurator(ConfigListScreen, Screen):
+	skin = """
+		<screen position="center,center" size="420,70" title="%s" >
+			<widget name="config" position="0,0" size="420,70" scrollbarMode="showOnDemand" />
+		</screen>""" % _("Zap-History Configurator")
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		
+		ConfigListScreen.__init__(self, [
+			getConfigListEntry(_("Enable zap history:"), config.plugins.ZapHistoryConfigurator.enable_zap_history),
+			getConfigListEntry(_("Maximum zap history entries:"), config.plugins.ZapHistoryConfigurator.maxEntries_zap_history)])
+		
+		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.save, "cancel": self.exit}, -2)
+
+	def save(self):
+		for x in self["config"].list:
+			x[1].save()
+		self.close()
+
+	def exit(self):
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close()
 
 ################################################
 
@@ -72,7 +133,7 @@ class ZapHistoryBrowser(Screen):
 		self["key_red"] = Label(_("Clear"))
 		self["key_green"] = Label(_("Delete"))
 		self["key_yellow"] = Label(_("Zap & Close"))
-		self["key_blue"] = Label("")
+		self["key_blue"] = Label(_("Config"))
 		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
@@ -80,7 +141,8 @@ class ZapHistoryBrowser(Screen):
 				"cancel": self.close,
 				"red": self.clear,
 				"green": self.delete,
-				"yellow": self.zapAndClose
+				"yellow": self.zapAndClose,
+				"blue": self.config
 			}, prio=-1)
 		
 		self.onLayoutFinish.append(self.buildList)
@@ -142,6 +204,9 @@ class ZapHistoryBrowser(Screen):
 	def zapAndClose(self):
 		self.zap()
 		self.close()
+
+	def config(self):
+		self.session.open(ZapHistoryConfigurator)
 
 ################################################
 
