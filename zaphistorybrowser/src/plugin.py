@@ -33,12 +33,16 @@ language.addCallback(localeInit)
 
 class ZapHistoryBrowser(Screen):
 	skin = """
-	<screen position="center,center" size="320,440" title="%s" >
-		<ePixmap pixmap="skin_default/buttons/red.png" position="10,0" size="140,40" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="170,0" size="140,40" transparent="1" alphatest="on" />
-		<widget name="key_red" position="10,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget name="key_green" position="170,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget name="list" position="0,40" size="320,400" scrollbarMode="showOnDemand" />
+	<screen position="center,center" size="560,440" title="%s" >
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
+		<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget name="list" position="0,40" size="560,400" scrollbarMode="showOnDemand" />
 	</screen>""" % _("Zap-History Browser")
 
 	def __init__(self, session, servicelist):
@@ -51,13 +55,16 @@ class ZapHistoryBrowser(Screen):
 		self["list"] = MenuList([])
 		self["key_red"] = Label(_("Clear"))
 		self["key_green"] = Label(_("Delete"))
+		self["key_yellow"] = Label(_("Zap & Close"))
+		self["key_blue"] = Label("")
 		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
 				"ok": self.zap,
 				"cancel": self.close,
 				"red": self.clear,
-				"green": self.delete
+				"green": self.delete,
+				"yellow": self.zapAndClose
 			}, prio=-1)
 		
 		self.onLayoutFinish.append(self.buildList)
@@ -108,6 +115,10 @@ class ZapHistoryBrowser(Screen):
 					break
 				else:
 					idx += 1
+
+	def zapAndClose(self):
+		self.zap()
+		self.close()
 
 ################################################
 
