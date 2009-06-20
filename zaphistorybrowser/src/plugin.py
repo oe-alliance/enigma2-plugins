@@ -4,7 +4,8 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Language import language
 from Components.MenuList import MenuList
-from enigma import eServiceCenter
+from Components.MultiContent import MultiContentEntryText
+from enigma import eListboxPythonMultiContent, eServiceCenter, gFont
 from os import environ
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
@@ -31,6 +32,21 @@ language.addCallback(localeInit)
 
 ################################################
 
+class ZapHistoryBrowserList(MenuList):
+	def __init__(self, list, enableWrapAround=False):
+		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
+		self.l.setItemHeight(40)
+		self.l.setFont(0, gFont("Regular", 20))
+		self.l.setFont(1, gFont("Regular", 18))
+
+def ZapHistoryBrowserListEntry(serviceName, eventName):
+	res = [serviceName]
+	res.append(MultiContentEntryText(pos=(0, 0), size=(560, 22), font=0, text=serviceName))
+	res.append(MultiContentEntryText(pos=(0, 22), size=(560, 18), font=1, text=eventName))
+	return res
+
+################################################
+
 class ZapHistoryBrowser(Screen):
 	skin = """
 	<screen position="center,center" size="560,440" title="%s" >
@@ -52,7 +68,7 @@ class ZapHistoryBrowser(Screen):
 		self.servicelist = servicelist
 		self.serviceHandler = eServiceCenter.getInstance()
 		
-		self["list"] = MenuList([])
+		self["list"] = ZapHistoryBrowserList([])
 		self["key_red"] = Label(_("Clear"))
 		self["key_green"] = Label(_("Delete"))
 		self["key_yellow"] = Label(_("Zap & Close"))
@@ -78,7 +94,14 @@ class ZapHistoryBrowser(Screen):
 				ref = x[2]
 			info = self.serviceHandler.info(ref)
 			name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
-			list.append(name)
+			event = info.getEvent(ref)
+			if event is not None:
+				eventName = event.getEventName()
+				if eventName is None:
+					eventName = ""
+			else:
+				eventName = ""
+			list.append(ZapHistoryBrowserListEntry(name, eventName))
 		list.reverse()
 		self["list"].setList(list)
 
