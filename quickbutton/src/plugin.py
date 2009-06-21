@@ -119,8 +119,9 @@ def startPlugin(self,pname):
 	no_plugin = True
 	if pname != _("Nothing"):
 		if pname == _("EPG List"):
-			from Screens.EpgSelection import EPGSelection
-			self.session.open(EPGSelection, self.session.nav.getCurrentlyPlayingServiceReference())
+			from  Screens.InfoBarGenerics import InfoBarEPG
+			if isinstance(self, InfoBarEPG):
+				self.openSingleServiceEPG()
 			no_plugin = False
 		elif pname == _("MediaPlayer"):
 			try: # falls es nicht installiert ist
