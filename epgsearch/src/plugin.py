@@ -17,6 +17,15 @@ from EPGSearch import EPGSearch, EPGSearchEPGSelection, EPGSelectionInit
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
+# Autostart
+def autostart(reason, **kwargs):
+	if "session" in kwargs:
+		try:
+			# for blue key activating in EPGSelection
+			EPGSelectionInit()
+		except:
+			pass
+
 # Mainfunction
 def main(session, *args, **kwargs):
 	s = session.nav.getCurrentService()
@@ -25,6 +34,11 @@ def main(session, *args, **kwargs):
 	name = event and event.getEventName() or ''
 	session.open(EPGSearch, name, False)
 
+# Event Info
+def eventinfo(session, *args, **kwargs):
+	ref = session.nav.getCurrentlyPlayingServiceReference()
+	session.open(EPGSearchEPGSelection, ref, True)
+
 # Movielist
 def movielist(session, service, **kwargs):
 	serviceHandler = eServiceCenter.getInstance()
@@ -32,15 +46,6 @@ def movielist(session, service, **kwargs):
 	name = info and info.getName(service) or ''
 
 	session.open(EPGSearch, name)
-
-# Autostart
-def autostart(reason, **kwargs):
-	if "session" in kwargs:
-		session = kwargs["session"]
-		try: 
-			EPGSelectionInit() # for blue key activating in EPGSelection
-		except: pass
-
 
 def Plugins(**kwargs):
 	return [
