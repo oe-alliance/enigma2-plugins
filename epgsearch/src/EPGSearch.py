@@ -1,49 +1,51 @@
 # for localized messages  	 
- from . import _
+from . import _
 
-from enigma import eEPGCache, eServiceReference
+from enigma import eEPGCache, eServiceReference, RT_HALIGN_LEFT, \
+		RT_HALIGN_RIGHT, eListboxPythonMultiContent
+
+from Tools.LoadPixmap import LoadPixmap
+from ServiceReference import ServiceReference
 
 from Screens.ChannelSelection import SimpleChannelSelection
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
-from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.config import config
+from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_MULTI
 from Components.TimerList import TimerList
-
-from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
-from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_MULTI
-from ServiceReference import ServiceReference
-from Components.GUIComponent import GUIComponent
-from enigma import eEPGCache, eListbox, eListboxPythonMultiContent, gFont, \
-	RT_HALIGN_LEFT, RT_HALIGN_RIGHT
-from Tools.LoadPixmap import LoadPixmap
-from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE
-from time import localtime, time
 
+from time import localtime
 
 # Partnerbox installed?
 try:
-	from Plugins.Extensions.Partnerbox.PartnerboxEPGList import isInRemoteTimer, getRemoteClockPixmap
-	from Plugins.Extensions.Partnerbox.PartnerboxFunctions import  SetPartnerboxTimerlist, isInTimerList, sendPartnerBoxWebCommand, FillE1TimerList, FillE2TimerList
-	import Plugins.Extensions.Partnerbox.PartnerboxFunctions as partnerboxfunctions
-	from Plugins.Extensions.Partnerbox.PartnerboxSetup import PartnerboxEntriesListConfigScreen
+	from Plugins.Extensions.Partnerbox.PartnerboxEPGList import \
+			isInRemoteTimer, getRemoteClockPixmap
+	from Plugins.Extensions.Partnerbox.PartnerboxFunctions import \
+			SetPartnerboxTimerlist, isInTimerList, sendPartnerBoxWebCommand, \
+			FillE1TimerList, FillE2TimerList
+	import Plugins.Extensions.Partnerbox.PartnerboxFunctions \
+			as partnerboxfunctions
+	from Plugins.Extensions.Partnerbox.PartnerboxSetup import \
+			PartnerboxEntriesListConfigScreen
 	PartnerBoxInstalled = True
 except:
 	PartnerBoxInstalled = False
 
 #AutoTimer installed?
 try:
-	from Plugins.Extensions.AutoTimer.AutoTimerEditor import addAutotimerFromEvent
-	AutoTimerInstalled = True
-except:
-	AutoTimerInstalled = False
+	from Plugins.Extensions.AutoTimer.AutoTimerEditor import \
+			addAutotimerFromEvent, addAutotimerFromSearchString
+	autoTimerAvailable = True
+except ImportError:
+	autoTimerAvailable = False
 
 baseEPGSelection__init__ = None
 def EPGSelectionInit():
@@ -63,33 +65,19 @@ def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bou
 		self["key_blue"].setText(_("EPG Search"))
 
 def bluePressed(self):
-	try: 	# EPGList could be empty
+	try:
+		# EPGList could be empty
 		cur = self["list"].getCurrent()
-		event = cur[0]
-		name = event.getEventName()
-	except:
+	except: # XXX: is this an IndexError? always be as specific as possible ;-)
 		name = ''
+	else:
+		name = cur[0].getEventName()
 	self.session.open(EPGSearch,name , False)
 
 class EPGSearchList(EPGList):
-	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer = None):
-		self.days = (_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun"))
-		self.timer = timer
-		self.onSelChanged = [ ]
-		if selChangedCB is not None:
-			self.onSelChanged.append(selChangedCB)
-		GUIComponent.__init__(self)
-		self.type=type
-		self.l = eListboxPythonMultiContent()
-		self.l.setFont(0, gFont("Regular", 22))
-		self.l.setFont(1, gFont("Regular", 16))
+	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
+		EPGList.__init__(self, type, selChangedCB, timer)
 		self.l.setBuildFunc(self.buildEPGSearchEntry)
-		self.epgcache = eEPGCache.getInstance()
-		self.clock_pixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/icons/epgclock.png'))
-		self.clock_add_pixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/icons/epgclock_add.png'))
-		self.clock_pre_pixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/icons/epgclock_pre.png'))
-		self.clock_post_pixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/icons/epgclock_post.png'))
-		self.clock_prepost_pixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/icons/epgclock_prepost.png'))
 
 		if PartnerBoxInstalled:
 			# Partnerbox Clock Icons
@@ -100,14 +88,15 @@ class EPGSearchList(EPGList):
 			self.remote_clock_prepost_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock_prepost.png')
 
 	def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
-		rec1=beginTime and (self.timer.isInTimer(eventId, beginTime, duration, service))
+		rec1 = beginTime and self.timer.isInTimer(eventId, beginTime, duration, service)
 		# Partnerbox 
 		if PartnerBoxInstalled:
-			rec2=beginTime and (isInRemoteTimer(self,beginTime, duration, service))
-		else:rec2=False
-		r1=self.weekday_rect
-		r2=self.datetime_rect
-		r3=self.descr_rect
+			rec2 = beginTime and isInRemoteTimer(self,beginTime, duration, service)
+		else:
+			rec2 = False
+		r1 = self.weekday_rect
+		r2 = self.datetime_rect
+		r3 = self.descr_rect
 		t = localtime(beginTime)
 		serviceref = ServiceReference(service) # for Servicename
 		res = [
@@ -137,17 +126,19 @@ class EPGSearchList(EPGList):
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, serviceref.getServiceName() + ": " + EventName))
 		return res
 
-
-
 class EPGSearch(EPGSelection):
-	EMPTY = 0
-	ADD_TIMER = 1
-	REMOVE_TIMER = 2
-	
-	ZAP = 1
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
 		self.skinName = "EPGSelection"
+
+		self.searchargs = args
+		self.currSearch = ""
+
+		# XXX: we lose sort begin/end here
+		self["key_yellow"] = Button(_("New Search"))
+		self["key_blue"] = Button(_("History"))
+
+# begin stripped copy of EPGSelection.__init__
 		self.bouquetChangeCB = None
 		self.serviceChangeCB = None
 		self.ask_time = -1 #now
@@ -157,19 +148,16 @@ class EPGSearch(EPGSelection):
 		self["Service"] = ServiceEvent()
 		self["Event"] = Event()
 		self.type = EPG_TYPE_SINGLE
-		# XXX: we lose sort begin/end here
-		self["key_yellow"] = Button(_("New Search"))
-		self["key_blue"] = Button(_("History"))
 		self.currentService=None
 		self.zapFunc = None
 		self.sort_type = 0
-		self.setSortDescription()
 		self["key_green"] = Button(_("Add timer"))
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
 		self["list"] = EPGSearchList(type = self.type, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
-		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions"],
+		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions", "MenuActions"],
 			{
+				"menu": self.menu,
 				"cancel": self.closeScreen,
 				"ok": self.eventSelected,
 				"timerAdd": self.timerAdd,
@@ -177,7 +165,6 @@ class EPGSearch(EPGSelection):
 				"blue": self.blueButtonPressed,
 				"info": self.infoKeyPressed,
 				"red": self.zapTo, # needed --> Partnerbox
-				"input_date_time": self.enterDateTime,
 				"nextBouquet": self.nextBouquet, # just used in multi epg yet
 				"prevBouquet": self.prevBouquet, # just used in multi epg yet
 				"nextService": self.nextService, # just used in single epg yet
@@ -186,11 +173,8 @@ class EPGSearch(EPGSelection):
 
 		self["actions"].csel = self
 		self.onLayoutFinish.append(self.onCreate)
-		self["MenuActions"] = ActionMap(["MenuActions"],
-		{
-				"menu": self.menu,
-		})
-		self.searchargs = args
+# end stripped copy of EPGSelection.__init__
+
 		# Partnerbox
 		if PartnerBoxInstalled:
 			EPGSelection.PartnerboxInit(self, False)
@@ -204,6 +188,7 @@ class EPGSearch(EPGSelection):
 			l.list = []
 			l.l.setList(l.list)
 		del self.searchargs
+
 		# Partnerbox
 		if PartnerBoxInstalled:
 			EPGSelection.GetPartnerboxTimerlist(self)
@@ -214,15 +199,25 @@ class EPGSearch(EPGSelection):
 		EPGSelection.closeScreen(self)
 
 	def yellowButtonPressed(self):
-		self.session.openWithCallback(self.searchEPG, VirtualKeyBoard, title = _("Enter text to search for"))
+		self.session.openWithCallback(
+			self.searchEPG,
+			VirtualKeyBoard,
+			title = _("Enter text to search for")
+		)
 
 	def menu(self):
-		options = []
-		options.append([_("Import from Timer"), "importFromTimer"])
-		options.append([_("Import from EPG"), "importFromEPG"])
-		# AutoTimer
-		if AutoTimerInstalled:
-			options.append([_("Add AutoTimer..."), "addAutoTimer"])
+		options = [
+			(_("Import from Timer"), self.importFromTimer),
+			(_("Import from EPG"), self.importFromEPG),
+		]
+
+		if autoTimerAvailable:
+			options.extend((
+				(_("Import from AutoTimer"), self.importFromAutoTimer),
+				(_("Save search as AutoTimer"), self.addAutoTimer),
+				(_("Export selected as AutoTimer"), self.exportAutoTimer),
+			))
+
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
@@ -230,26 +225,64 @@ class EPGSearch(EPGSelection):
 		)
 
 	def menuCallback(self, ret):
-		if ret:
-			ret = ret[1]
-			if ret is "importFromTimer":
-				self.session.openWithCallback(
-					self.searchEPG,
-					EPGSearchTimerImport
-				)
-			elif ret is "importFromEPG":
-				self.session.openWithCallback(
-					self.searchEPG,
-					EPGSearchChannelSelection
-				)
-			elif ret is "addAutoTimer":
-				cur = self["list"].getCurrent()
-				if cur is None:
-					return
-				serviceref = cur[1]
-				event = cur[0]
-				addAutotimerFromEvent(self.session, event,serviceref) 
+		ret and ret[1]()
 
+	def importFromTimer(self):
+		self.session.openWithCallback(
+			self.searchEPG,
+			EPGSearchTimerImport
+		)
+
+	def importFromEPG(self):
+		self.session.openWithCallback(
+			self.searchEPG,
+			EPGSearchChannelSelection
+		)
+
+	def importFromAutoTimer(self):
+		removeInstance = False
+		try:
+			# Import Instance
+			from Plugins.Extensions.AutoTimer.plugin import autotimer
+
+			if autotimer is None:
+				removeInstance = True
+				# Create an instance
+				from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+				autotimer = AutoTimer()
+
+			# Read in configuration
+			autotimer.readXml()
+		except Exception, e:
+			self.session.open(
+				MessageBox,
+				_("Could not read AutoTimer timer list: %s") % e,
+				type = MessageBox.TYPE_ERROR
+			)
+		else:
+			# Fetch match strings
+			# XXX: we could use the timer title as description
+			options = [(x.match, x.match) for x in autotimer.getTimerList()]
+
+			self.session.openWithCallback(
+				self.searchEPGWrapper,
+				ChoiceBox,
+				title = _("Select text to search for"),
+				list = options
+			)
+		finally:
+			# Remove instance if there wasn't one before
+			if removeInstance:
+				autotimer = None
+
+	def addAutoTimer(self):
+		addAutotimerFromSearchString(self.session, self.currSearch)
+
+	def exportAutoTimer(self):
+		cur = self['list'].getCurrent()
+		if cur is None:
+			return
+		addAutotimerFromEvent(self.session, cur[0], cur[1])
 
 	def blueButtonPressed(self):
 		options = [(x, x) for x in config.plugins.epgsearch.history.value]
@@ -274,6 +307,7 @@ class EPGSearch(EPGSelection):
 
 	def searchEPG(self, searchString = None, searchSave = True):
 		if searchString:
+			self.currSearch = searchString
 			if searchSave:
 				# Maintain history
 				history = config.plugins.epgsearch.history.value
