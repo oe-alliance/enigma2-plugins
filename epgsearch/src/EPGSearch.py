@@ -1,3 +1,6 @@
+# for localized messages  	 
+ from . import _
+
 from enigma import eEPGCache, eServiceReference
 
 from Screens.ChannelSelection import SimpleChannelSelection
