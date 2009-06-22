@@ -58,15 +58,15 @@ XXX = 0 # TODO: Platzhalter für fullscreen SD skin
 #
 def scaleH(y2, y1):
 	if y2 == -1:
-		y2 = y1/720*1280
+		y2 = y1*1280/720
 	elif y1 == -1:
-		y1 = y2/1280*720
+		y1 = y2*720/1280
 	return scale(y2, y1, 1280, 720, DESKTOP_WIDTH)
 def scaleV(y2, y1):
 	if y2 == -1:
-		y2 = y1/576*720
+		y2 = y1*720/576
 	elif y1 == -1:
-		y1 = y2/720*576
+		y1 = y2*576/720
 	return scale(y2, y1, 720, 576, DESKTOP_HEIGHT)
 def scale(y2, y1, x2, x1, x):
 	return (y2 - y1) * (x - x1) / (x2 - x1) + y1
@@ -1431,8 +1431,8 @@ class FritzOfferAction(Screen):
 	def __init__(self, session, parent, number, name=""):
 		# TODO: scaling for HD
 		noButtons = 3
-		width = max(scaleH(440,440), noButtons*140)
-		height = scaleV(176,176) # = 5 + 126 + 40 + 5; 6 lines of text possible
+		width = max(scaleH(-1,440), noButtons*140)
+		height = scaleV(-1,176) # = 5 + 126 + 40 + 5; 6 lines of text possible
 		buttonsGap = (width-noButtons*140)/(noButtons+1)
 		buttonsVPos = height-40-5
 		# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
@@ -1453,7 +1453,7 @@ class FritzOfferAction(Screen):
 							_("Do what?"),
 							width - 10,
 							height - 10 - 40,
-							scaleH(21,21),
+							scaleH(22,21),
 							buttonsGap, buttonsVPos,
 							buttonsGap+140+buttonsGap, buttonsVPos,
 							buttonsGap+2*(140+buttonsGap), buttonsVPos,
@@ -1919,8 +1919,8 @@ class FritzCallPhonebook:
 					# 
 					# TODO: scaling for HD
 					noButtons = 2
-					width = max(scaleH(570,570), noButtons*140)
-					height = scaleV(100,100) # = 5 + 126 + 40 + 5; 6 lines of text possible
+					width = max(scaleH(-1,570), noButtons*140)
+					height = scaleV(-1,100) # = 5 + 126 + 40 + 5; 6 lines of text possible
 					buttonsGap = (width-noButtons*140)/(noButtons+1)
 					buttonsVPos = height-40-5
 					# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
