@@ -1073,6 +1073,37 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 			self.services
 		))
 
+def addAutotimerFromSearchString(session, match):
+	from AutoTimerComponent import AutoTimerComponent
+	from AutoTimerImporter import AutoTimerImporter
+	from plugin import autotimer
+
+	# Create instance if needed
+	if autotimer is None:
+		from AutoTimer import AutoTimer
+		autotimer = AutoTimer()
+		autotimer.readXml()
+
+	session.openWithCallback(
+		importerCallback,
+		AutoTimerImporter,
+		AutoTimerComponent(
+			autotimer.getUniqueId(),
+			match,
+			'',		# Match
+			True	# Enabled
+		),
+		match,		# Proposed Match
+		None,		# Proposed Begin
+		None,		# Proposed End
+		None,		# Proposed Disabled
+		None,		# Proposed ServiceReference
+		None,		# Proposed afterEvent
+		None,		# Proposed justplay
+		None,		# Proposed dirname, can we get anything useful here?
+		[]			# Proposed tags
+	)
+
 def addAutotimerFromEvent(session, evt = None, service = None):
 	from AutoTimerComponent import AutoTimerComponent
 	from AutoTimerImporter import AutoTimerImporter
