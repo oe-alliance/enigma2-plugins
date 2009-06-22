@@ -1,6 +1,3 @@
-# for localized messages
-from . import _
-
 from enigma import eServiceCenter
 
 # Config
@@ -12,7 +9,7 @@ config.plugins.epgsearch.history = ConfigSet(choices = [])
 config.plugins.epgsearch.encoding = ConfigText(default = 'ISO8859-15', fixed_size = False)
 
 # Plugin
-from EPGSearch import EPGSearch, EPGSearchEPGSelection
+from EPGSearch import EPGSearch, EPGSearchEPGSelection, EPGSelectionInit
 
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
@@ -33,13 +30,21 @@ def movielist(session, service, **kwargs):
 
 	session.open(EPGSearch, name)
 
-# Event Info
-def eventinfo(session, *args, **kwargs):
-	ref = session.nav.getCurrentlyPlayingServiceReference()
-	session.open(EPGSearchEPGSelection, ref, True)
+# Autostart
+def autostart(reason, **kwargs):
+	if "session" in kwargs:
+		session = kwargs["session"]
+		try: 
+			EPGSelectionInit() # for blue key activating in EPGSelection
+		except: pass
+
 
 def Plugins(**kwargs):
 	return [
+		PluginDescriptor(
+			where = PluginDescriptor.WHERE_SESSIONSTART,
+			fnc = autostart,
+		),
 		PluginDescriptor(
 			name = "EPGSearch",
 			description = _("Search EPG"),
