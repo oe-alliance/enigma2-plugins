@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 15:04+0100\n"
+"POT-Creation-Date: 2009-06-23 18:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,58 +16,83 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/EPGSearch.py:145
+#: ../src/EPGSearch.py:154
+msgid "Add timer"
+msgstr ""
+
+#: ../src/EPGSearch.py:351
 msgid "Cancel"
 msgstr ""
 
-#: ../src/EPGSearch.py:183
+#: ../src/EPGSearch.py:389
 msgid "Channel Selection"
 msgstr ""
 
-#: ../src/EPGSearch.py:53
+#: ../src/EPGSearch.py:259
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr ""
+
+#: ../src/EPGSearch.py:65
+msgid "EPG Search"
+msgstr ""
+
+#: ../src/EPGSearch.py:205
 msgid "Enter text to search for"
 msgstr ""
 
-#: ../src/EPGSearch.py:30
+#: ../src/EPGSearch.py:218
+msgid "Export selected as AutoTimer"
+msgstr ""
+
+#: ../src/EPGSearch.py:139
 msgid "History"
 msgstr ""
 
-#: ../src/EPGSearch.py:59
+#: ../src/EPGSearch.py:216
+msgid "Import from AutoTimer"
+msgstr ""
+
+#: ../src/EPGSearch.py:211
 msgid "Import from EPG"
 msgstr ""
 
-#: ../src/EPGSearch.py:58
+#: ../src/EPGSearch.py:210
 msgid "Import from Timer"
 msgstr ""
 
-#: ../src/EPGSearch.py:29
+#: ../src/EPGSearch.py:138
 msgid "New Search"
 msgstr ""
 
-#: ../src/EPGSearch.py:95
+#: ../src/EPGSearch.py:300
 msgid "No history"
 msgstr ""
 
-#: ../src/EPGSearch.py:146
+#: ../src/EPGSearch.py:352
 msgid "OK"
 msgstr ""
 
-#: ../src/EPGSearch.py:210
+#: ../src/EPGSearch.py:217
+msgid "Save search as AutoTimer"
+msgstr ""
+
+#: ../src/EPGSearch.py:417
 msgid "Search"
 msgstr ""
 
-#: ../src/plugin.py:45
+#: ../src/plugin.py:58
 msgid "Search EPG"
 msgstr ""
 
-#: ../src/plugin.py:50 ../src/plugin.py:56
+#: ../src/plugin.py:63 ../src/plugin.py:69
 msgid "Search EPG..."
 msgstr ""
 
-#: ../src/EPGSearch.py:160
+#: ../src/EPGSearch.py:366
 msgid "Select a timer to search"
 msgstr ""
 
-#: ../src/EPGSearch.py:89
+#: ../src/EPGSearch.py:270 ../src/EPGSearch.py:294
 msgid "Select text to search for"
 msgstr ""

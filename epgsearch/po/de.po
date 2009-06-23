@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 15:04+0100\n"
-"PO-Revision-Date: 2009-02-13 15:06+0100\n"
+"POT-Creation-Date: 2009-06-23 18:41+0200\n"
+"PO-Revision-Date: 2009-06-23 18:44+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -16,17 +16,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "Add timer"
+msgstr "Timer hinzufügen"
+
 msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "Channel Selection"
 msgstr "Kanalliste"
 
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Liste der AutoTimer konnte nicht abgerufen werden: %s"
+
+msgid "EPG Search"
+msgstr ""
+
 msgid "Enter text to search for"
 msgstr "Gib den zu suchenden Text ein"
 
+msgid "Export selected as AutoTimer"
+msgstr "Auswahl als AutoTimer exportieren"
+
 msgid "History"
 msgstr "Verlauf"
+
+msgid "Import from AutoTimer"
+msgstr "Importiere aus AutoTimer"
 
 msgid "Import from EPG"
 msgstr "Importiere aus EPG"
@@ -42,6 +58,9 @@ msgstr "Verlauf ist leer"
 
 msgid "OK"
 msgstr "OK"
+
+msgid "Save search as AutoTimer"
+msgstr "Suchbegriff als AutoTimer speichern"
 
 msgid "Search"
 msgstr "Suche"
