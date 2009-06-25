@@ -191,6 +191,7 @@ class MyTubeFeedEntry():
 			print "[MyTube] We failed to reach a server."
 			print "[MyTube] Reason: ", e
 		else:
+			m = None
 			while not None:
 				data = response.readline()
 				if data == "":
