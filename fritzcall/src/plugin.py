@@ -1111,6 +1111,7 @@ class FritzMenu(Screen,HelpableScreen):
 
 		self["FBFDsl"] = Label('DSL')
 		self["dsl_inactive"] = Pixmap()
+		self["dsl_inactive"].hide()
 		self["dsl_active"] = Pixmap()
 		self["dsl_active"].hide()
 
@@ -1161,6 +1162,7 @@ class FritzMenu(Screen,HelpableScreen):
 					self["dsl_active"].hide()
 					self["dsl_inactive"].show()
 			else:
+				self["FBFDsl"].setText('DSL ' + _('Status not available'))
 				self["dsl_active"].hide()
 				self["dsl_inactive"].hide()
 				self["FBFDsl"].hide()
