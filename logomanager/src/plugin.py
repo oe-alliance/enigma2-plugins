@@ -33,7 +33,7 @@ def start_from_filescan(**kwargs):
                     ScanPath(path = "", with_subdirs = False),
                 ],
             name = "Logo Manager",
-            description = "manage logos to display at boottime",
+            description = "view Bootlogo/MVI",
             openfnc = filescan_open,
         )
 
