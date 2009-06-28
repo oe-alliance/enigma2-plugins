@@ -9,6 +9,7 @@ SUBDIRS = \
 	emailclient \
 	epgrefresh \
 	epgsearch \
+	filebrowser \
 	fritzcall \
 	googlemaps \
 	httpproxy \

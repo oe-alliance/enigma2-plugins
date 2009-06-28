@@ -219,4 +219,7 @@ mytube/src/Makefile
 orfat/Makefile
 orfat/src/Makefile
 
+filebrowser/Makefile
+filebrowser/src/Makefile
+
 ])
