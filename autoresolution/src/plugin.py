@@ -30,7 +30,7 @@ for mode in resolutions:
 	if mode[0].startswith('p1080'):
 		choices = ['1080p24', '1080p25', '1080p30'] + preferedmodes
 	elif mode[0] == 'p720_24':
-		choices = ['720p24'] + preferedmodes
+		choices = ['720p24', '1080p24'] + preferedmodes
 	else:
 		choices = preferedmodes
 	config.plugins.autoresolution.videoresolution[mode[0]] = ConfigSelection(default = default[0], choices = choices)
@@ -39,6 +39,10 @@ config.plugins.autoresolution.showinfo = ConfigYesNo(default = True)
 config.plugins.autoresolution.testmode = ConfigYesNo(default = False)
 config.plugins.autoresolution.deinterlacer = ConfigSelection(default = "auto", choices =
 		[("auto", _("auto")), ("off", _("off")), ("on", _("on"))])
+config.plugins.autoresolution.delay_switch_mode = ConfigSelection(default = "500", choices = [
+		("500", _("immeadetly")), ("1000", "1 " + _("second")), ("2000", "2 " + _("seconds")), ("3000", "3 " + _("seconds")),
+		("4000", "4 " + _("seconds")), ("5000", "5 " + _("seconds")), ("6000", "6 " + _("seconds")), ("7000", "7 " + _("seconds")),
+		("8000", "8 " + _("seconds")), ("9000", "9 " + _("seconds")), ("10000", "10 " + _("seconds"))])
 
 def setDeinterlacer(configElement):
 	mode = config.plugins.autoresolution.deinterlacer.value
@@ -64,33 +68,39 @@ class AutoRes(Screen):
 			{
 				iPlayableService.evVideoSizeChanged: self.__evVideoSizeChanged,
 				iPlayableService.evVideoProgressiveChanged: self.__evVideoProgressiveChanged,
-				iPlayableService.evVideoFramerateChanged: self.__evVideoFramerateChanged
+				iPlayableService.evVideoFramerateChanged: self.__evVideoFramerateChanged,
+				iPlayableService.evStart: self.__evStart
 			})
 		self.timer = eTimer()
 		self.timer.callback.append(self.determineContent)
-		self.delayval = 400
 		self.lastmode = config.av.videomode[config.av.videoport.value].value
+	
+	def __evStart(self):
+		if self.timer.isActive():
+			self.timer.stop()
+		if config.plugins.autoresolution.enable.value:
+			self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
 
 	def __evVideoFramerateChanged(self):
 		print "[AutoRes] got event evFramerateChanged"
 		if self.timer.isActive():
 			self.timer.stop()
 		if config.plugins.autoresolution.enable.value:
-			self.timer.start(self.delayval)
+			self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
 
 	def __evVideoSizeChanged(self):
 		print "[AutoRes] got event evVideoSizeChanged"
 		if self.timer.isActive():
 			self.timer.stop()
 		if config.plugins.autoresolution.enable.value:
-			self.timer.start(self.delayval)
+			self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
 
 	def __evVideoProgressiveChanged(self):
 		print "[AutoRes] got event evVideoProgressiveChanged"
 		if self.timer.isActive():
 			self.timer.stop()
 		if config.plugins.autoresolution.enable.value:
-			self.timer.start(self.delayval)
+			self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
 
 	def determineContent(self):
 		self.timer.stop()
@@ -228,6 +238,7 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 				self.list.append(getConfigListEntry(label, videoresolution_dictionary[mode]))
 			self.list.extend((
 				getConfigListEntry(_("Show info screen"), config.plugins.autoresolution.showinfo),
+				getConfigListEntry(_("Delay x seconds after service started"), config.plugins.autoresolution.delay_switch_mode),
 				getConfigListEntry(_("Running in testmode"), config.plugins.autoresolution.testmode),
 				getConfigListEntry(_("Deinterlacer mode"), config.plugins.autoresolution.deinterlacer)
 			))
