@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-04 20:26+0200\n"
+"POT-Creation-Date: 2009-06-29 13:07+0200\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -52,15 +52,15 @@ msgstr "Austria"
 msgid "Automatically add new Caller to PhoneBook"
 msgstr "Ins. autom. nuovo chiamante in rubrica"
 
-msgid "CF Drive"
-msgstr "Drive CF"
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Call"
 msgstr "Chiam."
 
 msgid "Call monitoring"
 msgstr "Monitoraggio chiamate"
+
+msgid "Call redirection"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -233,9 +233,6 @@ msgstr "Recupero chiamate dalla FRITZ!Box in corso"
 msgid "Getting status from FRITZ!Box Fon..."
 msgstr "Recupero stato dalla FRITZ!Box Fon in corso..."
 
-msgid "Harddisk"
-msgstr "Harddisk"
-
 msgid "IP Address:"
 msgstr "Indirizzo IP:"
 
@@ -298,6 +295,10 @@ msgstr "Nuovo"
 msgid "No DECT phone registered"
 msgstr "Nessun telefono DECT registrato"
 
+#, fuzzy
+msgid "No call redirection active"
+msgstr "Nessuna casella di posta attiva"
+
 msgid "No entry selected"
 msgstr "Nessuna voce selezionata"
 
@@ -322,6 +323,10 @@ msgstr "Ok"
 
 msgid "One DECT phone registered"
 msgstr "Un telefono DECT registrato"
+
+#, fuzzy
+msgid "One call redirection active"
+msgstr "Una casella di posta attiva"
 
 msgid "One mailbox active"
 msgstr "Una casella di posta attiva"
@@ -422,6 +427,13 @@ msgstr "Mostrare chiamate dopo lo standby"
 msgid "Show details of entry"
 msgstr "Mostrare dettagli voce"
 
+#, fuzzy
+msgid "Software fax active"
+msgstr "Nessuna casella di posta attiva"
+
+msgid "Status not available"
+msgstr ""
+
 msgid "Strip Leading 0"
 msgstr "Sopprimere \"0\" iniziali"
 
@@ -470,9 +482,6 @@ msgstr "Comm. tutte le caselle"
 msgid "UNKNOWN"
 msgstr "SCONOSCIUTO"
 
-msgid "USB Stick"
-msgstr "Penna USB"
-
 msgid "Use internal PhoneBook"
 msgstr "Usare la rubrica interna"
 
@@ -492,6 +501,13 @@ msgstr ""
 "nel menu configurazione per mostrare le chiamate.\n"
 "\n"
 "Potrebbe trattarsi di un problema di comunicazione, riprovare."
+
+msgid "call redirections active"
+msgstr ""
+
+#, fuzzy
+msgid "devices active"
+msgstr "caselle di posta attive"
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "display calls"
@@ -531,8 +547,16 @@ msgstr "caselle di posta attive"
 msgid "mobile"
 msgstr "Cellulare"
 
+#, fuzzy
+msgid "no device active"
+msgstr "Una casella di posta attiva"
+
 msgid "not encrypted"
 msgstr "non codificato"
+
+#, fuzzy
+msgid "one device active"
+msgstr "Una casella di posta attiva"
 
 msgid "preparing"
 msgstr "Preparazione in corso"
@@ -557,5 +581,14 @@ msgstr "Nulla"
 msgid "work"
 msgstr "Ufficio"
 
+#~ msgid "CF Drive"
+#~ msgstr "Drive CF"
+
 #~ msgid "FRITZ!Box Login failed: "
 #~ msgstr "FRITZ!Box - Login fallito: "
+
+#~ msgid "Harddisk"
+#~ msgstr "Harddisk"
+
+#~ msgid "USB Stick"
+#~ msgstr "Penna USB"

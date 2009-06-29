@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-04 20:26+0200\n"
+"POT-Creation-Date: 2009-06-29 13:07+0200\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -50,15 +50,15 @@ msgstr "Austria"
 msgid "Automatically add new Caller to PhoneBook"
 msgstr "Añadir el Llamante automáticamente a la Agenda"
 
-msgid "CF Drive"
-msgstr "Unidad CF"
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Call"
 msgstr "Llamar"
 
 msgid "Call monitoring"
 msgstr "Monitorizar llamada"
+
+msgid "Call redirection"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -231,9 +231,6 @@ msgstr "Consiguiendo llamadas desde FRITZ!Box..."
 msgid "Getting status from FRITZ!Box Fon..."
 msgstr "Consiguiendo estado desde Fon FRITZ!Box..."
 
-msgid "Harddisk"
-msgstr "Disco duro"
-
 msgid "IP Address:"
 msgstr "Dirección IP:"
 
@@ -296,6 +293,10 @@ msgstr "Nuevo"
 msgid "No DECT phone registered"
 msgstr "No hay teléfono DECT registrado"
 
+#, fuzzy
+msgid "No call redirection active"
+msgstr "No cuenta de correo activa"
+
 msgid "No entry selected"
 msgstr "No hay entrada seleccionada"
 
@@ -320,6 +321,10 @@ msgstr "OK"
 
 msgid "One DECT phone registered"
 msgstr "Un teléfono DECT registrado"
+
+#, fuzzy
+msgid "One call redirection active"
+msgstr "Una cuenta de correo activa"
 
 msgid "One mailbox active"
 msgstr "Una cuenta de correo activa"
@@ -420,6 +425,13 @@ msgstr "Mostrar después del inicio"
 msgid "Show details of entry"
 msgstr "Mostrar detalles de la entrada"
 
+#, fuzzy
+msgid "Software fax active"
+msgstr "No cuenta de correo activa"
+
+msgid "Status not available"
+msgstr ""
+
 msgid "Strip Leading 0"
 msgstr "Quitar el 0 al inicio"
 
@@ -469,9 +481,6 @@ msgstr "Marcar Cuenta de Correo"
 msgid "UNKNOWN"
 msgstr "DESCONOCIDO"
 
-msgid "USB Stick"
-msgstr "Lápiz USB"
-
 msgid "Use internal PhoneBook"
 msgstr "Usar Agenda interna"
 
@@ -491,6 +500,13 @@ msgstr ""
 "en el diálogo de configuración para visualizar las llamadas\n"
 "\n"
 "Puede hacer un problema de comunicación, sólo reintente otra vez."
+
+msgid "call redirections active"
+msgstr ""
+
+#, fuzzy
+msgid "devices active"
+msgstr "cuentas activas"
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "display calls"
@@ -530,8 +546,16 @@ msgstr "cuentas activas"
 msgid "mobile"
 msgstr "móvil"
 
+#, fuzzy
+msgid "no device active"
+msgstr "Una cuenta de correo activa"
+
 msgid "not encrypted"
 msgstr "no encriptado"
+
+#, fuzzy
+msgid "one device active"
+msgstr "Una cuenta de correo activa"
 
 msgid "preparing"
 msgstr "preparando"
@@ -555,6 +579,9 @@ msgstr "no mostrar nada"
 
 msgid "work"
 msgstr "trabajo"
+
+#~ msgid "CF Drive"
+#~ msgstr "Unidad CF"
 
 #~ msgid ""
 #~ "Corrupt phonebook entry\n"
@@ -599,9 +626,15 @@ msgstr "trabajo"
 #~ msgid "FRITZ!Box Login failed: "
 #~ msgstr "Falló la identificación a FRITZ!Box - Error: %s"
 
+#~ msgid "Harddisk"
+#~ msgstr "Disco duro"
+
 #, fuzzy
 #~ msgid "Toggle "
 #~ msgstr "Marcar WLAN"
+
+#~ msgid "USB Stick"
+#~ msgstr "Lápiz USB"
 
 #~ msgid "WLAN off"
 #~ msgstr "WLAN apagado"

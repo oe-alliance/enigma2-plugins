@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-04 20:26+0200\n"
+"POT-Creation-Date: 2009-06-29 13:07+0200\n"
 "PO-Revision-Date: 2009-06-04 08:36+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -48,15 +48,15 @@ msgstr "Avusturya"
 msgid "Automatically add new Caller to PhoneBook"
 msgstr "Kayıtsız arayan kişisini, rehbere otomatik olarak ekle"
 
-msgid "CF Drive"
-msgstr "CF Sürücü"
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Call"
 msgstr "Ara"
 
 msgid "Call monitoring"
 msgstr "Çağrı görüntüleme"
+
+msgid "Call redirection"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -229,9 +229,6 @@ msgstr "Aramalar FRITZ!Box'tan alınıyor..."
 msgid "Getting status from FRITZ!Box Fon..."
 msgstr "Durum bilgisi FRITZ!Box'tan alınıyor..."
 
-msgid "Harddisk"
-msgstr "Sabit disk"
-
 msgid "IP Address:"
 msgstr "IP Adresi:"
 
@@ -294,6 +291,10 @@ msgstr "Yeni"
 msgid "No DECT phone registered"
 msgstr "DECT telefon tanıtılmamış"
 
+#, fuzzy
+msgid "No call redirection active"
+msgstr "Etkin posta kutusu yok"
+
 msgid "No entry selected"
 msgstr "Seçim yapılmadı"
 
@@ -318,6 +319,10 @@ msgstr "Tamam"
 
 msgid "One DECT phone registered"
 msgstr "Bir DECT telefon tanıtılmış"
+
+#, fuzzy
+msgid "One call redirection active"
+msgstr "Bir posta kutusu etkin"
 
 msgid "One mailbox active"
 msgstr "Bir posta kutusu etkin"
@@ -418,6 +423,13 @@ msgstr "Hazırda bekletme kipine geçtikten sonra"
 msgid "Show details of entry"
 msgstr "Kaydın detaylarını göster"
 
+#, fuzzy
+msgid "Software fax active"
+msgstr "Etkin posta kutusu yok"
+
+msgid "Status not available"
+msgstr ""
+
 msgid "Strip Leading 0"
 msgstr "Öndeki 0'ı ayır"
 
@@ -466,9 +478,6 @@ msgstr "Posta kutularını aç/kapat"
 msgid "UNKNOWN"
 msgstr "BİLİNMİYOR"
 
-msgid "USB Stick"
-msgstr "USB Bellek"
-
 msgid "Use internal PhoneBook"
 msgstr "FRITZ!Box rehberini kullan"
 
@@ -489,6 +498,13 @@ msgstr ""
 "FRITZ!Box parolanızı girmeniz gerekiyor\n"
 "\n"
 "Bağlantı sorunu yaşarsanız, tekrar deneyin."
+
+msgid "call redirections active"
+msgstr ""
+
+#, fuzzy
+msgid "devices active"
+msgstr "posta kutusu etkin"
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "display calls"
@@ -528,8 +544,16 @@ msgstr "posta kutusu etkin"
 msgid "mobile"
 msgstr "cep"
 
+#, fuzzy
+msgid "no device active"
+msgstr "Bir posta kutusu etkin"
+
 msgid "not encrypted"
 msgstr "şifrelenmemiş"
+
+#, fuzzy
+msgid "one device active"
+msgstr "Bir posta kutusu etkin"
 
 msgid "preparing"
 msgstr "hazırlanıyor"
@@ -553,6 +577,9 @@ msgstr "birşey gösterme"
 
 msgid "work"
 msgstr "iş"
+
+#~ msgid "CF Drive"
+#~ msgstr "CF Sürücü"
 
 #~ msgid ""
 #~ "Call\n"
@@ -651,6 +678,9 @@ msgstr "iş"
 #~ msgid "FRITZ!Box Login failed: "
 #~ msgstr "FRITZ!Box oturumu başlatılamadı: "
 
+#~ msgid "Harddisk"
+#~ msgstr "Sabit disk"
+
 #~ msgid "Minuten"
 #~ msgstr "dakika"
 
@@ -672,6 +702,9 @@ msgstr "iş"
 #, fuzzy
 #~ msgid "Toggle "
 #~ msgstr "WLAN aç/kapa"
+
+#~ msgid "USB Stick"
+#~ msgstr "USB Bellek"
 
 #~ msgid "WLAN off"
 #~ msgstr "WLAN kapat"

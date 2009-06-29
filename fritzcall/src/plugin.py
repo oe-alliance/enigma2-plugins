@@ -5,32 +5,34 @@
 # $Date$
 # $Id$
 #==============================
-from Screens.Screen import Screen #@UnresolvedImport
-from Screens.MessageBox import MessageBox #@UnresolvedImport
-from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog #@UnresolvedImport
-from Screens.InputBox import InputBox #@UnresolvedImport
-from Screens import Standby #@UnresolvedImport
-from Screens.HelpMenu import HelpableScreen #@UnresolvedImport
+from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
+from Screens.NumericalTextInputHelpDialog import NumericalTextInputHelpDialog
+from Screens.InputBox import InputBox
+from Screens import Standby
+from Screens.HelpMenu import HelpableScreen
 
-from enigma import eTimer, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT #@UnresolvedImport
+from enigma import eTimer #@UnresolvedImport
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT
 
-from Components.MenuList import MenuList #@UnresolvedImport
-from Components.ActionMap import ActionMap #@UnresolvedImport
-from Components.Label import Label #@UnresolvedImport
-from Components.Button import Button #@UnresolvedImport
-from Components.Pixmap import Pixmap #@UnresolvedImport
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger #@UnresolvedImport
+from Components.MenuList import MenuList
+from Components.ActionMap import ActionMap
+from Components.Label import Label
+from Components.Button import Button
+from Components.Pixmap import Pixmap
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger
 try:
 	from Components.config import ConfigPassword
 except ImportError:
 	ConfigPassword = ConfigText
-from Components.ConfigList import ConfigListScreen #@UnresolvedImport
+from Components.ConfigList import ConfigListScreen
+from Components.Harddisk import harddiskmanager
 
-from Plugins.Plugin import PluginDescriptor #@UnresolvedImport
-from Tools import Notifications #@UnresolvedImport
-from Tools.NumericalTextInput import NumericalTextInput #@UnresolvedImport
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
-from Tools.LoadPixmap import LoadPixmap #@UnresolvedImport
+from Plugins.Plugin import PluginDescriptor
+from Tools import Notifications
+from Tools.NumericalTextInput import NumericalTextInput
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
+from Tools.LoadPixmap import LoadPixmap
 
 from twisted.internet import reactor #@UnresolvedImport
 from twisted.internet.protocol import ReconnectingClientFactory #@UnresolvedImport
@@ -44,7 +46,7 @@ from nrzuname import ReverseLookupAndNotifier, html2unicode
 import FritzOutlookCSV, FritzLDIF
 from . import _, debug #@UnresolvedImport
 
-from enigma import getDesktop #@UnresolvedImport
+from enigma import getDesktop
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
 DESKTOP_SKIN = config.skin.primary_skin.value.replace("/skin.xml", "")
@@ -73,8 +75,9 @@ def scale(y2, y1, x2, x1, x):
 
 my_global_session = None
 
+
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.enable = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.muteOnCall = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.hostname = ConfigText(default="fritz.box", fixed_size=False)
 config.plugins.FritzCall.afterStandby = ConfigSelection(choices=[("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
@@ -88,7 +91,7 @@ config.plugins.FritzCall.internal = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.fritzphonebook = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.phonebook = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.addcallers = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.phonebookLocation = ConfigSelection(choices=[("/etc/enigma2", _("Flash")), ("/media/usb", _("USB Stick")), ("/media/cf", _("CF Drive")), ("/media/hdd", _("Harddisk"))])
+config.plugins.FritzCall.enable = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.password = ConfigPassword(default="", fixed_size=False)
 config.plugins.FritzCall.extension = ConfigText(default='1', fixed_size=False)
 config.plugins.FritzCall.extension.setUseableChars('0123456789')
@@ -98,7 +101,15 @@ config.plugins.FritzCall.showVanity = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.prefix = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 config.plugins.FritzCall.fullscreen = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
+
+mountedDevs= [("/etc/enigma2", _("Flash"))]
+for p in harddiskmanager.getMountedPartitions(True):
+	mp = p.mountpoint[:-1]
+	if p.description:
+		mountedDevs.append((mp, _(p.description)+ ' (' + mp + ')'))
+	else:
+		mountedDevs.append((mp, mp))
+config.plugins.FritzCall.phonebookLocation = ConfigSelection(choices=mountedDevs)
 
 countryCodes = [
 	("0049", _("Germany")),
@@ -182,11 +193,11 @@ FBF_boxInfo = 0
 FBF_upTime = 1
 FBF_ipAddress = 2
 FBF_wlanState = 3
-FBF_wlanEncrypt = 4
-FBF_dslState = 5
-FBF_dslSpeed = 6
-FBF_tamActive = 7
-FBF_dectActive = 8
+FBF_dslState = 4
+FBF_tamActive = 5
+FBF_dectActive = 6
+FBF_faxActive = 7
+FBF_rufumlActive = 8
 
 class FritzCallFBF:
 	def __init__(self):
@@ -197,7 +208,7 @@ class FritzCallFBF:
 		self._callTimestamp = 0
 		self._callList = []
 		self._callType = config.plugins.FritzCall.fbfCalls.value
-		self.info = None # (boxInfo, upTime, ipAddress, wlanState, wlanEncrypt, dslState, dslSpeed, tamActive, dectActive)
+		self.info = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive)
 		self.getInfo(None)
 
 	def _notify(self, text):
@@ -367,7 +378,7 @@ class FritzCallFBF:
 		debug("[FritzCallFBF] _parseFritzBoxPhonebook")
 		if re.search('TrFonName', html):
 			#===============================================================================
-			#				 New Style: 7270 (FW 54.04.58, 54.04.63-11941, 54.04.70, 54.04.74-14371)
+			#				 New Style: 7270 (FW 54.04.58, 54.04.63-11941, 54.04.70, 54.04.74-14371, 54.04.76)
 			#							7170 (FW 29.04.70) 22.03.2009
 			#							7141 (FW 40.04.68) 22.03.2009
 			#	We expect one line with TrFonName followed by several lines with
@@ -780,15 +791,10 @@ class FritzCallFBF:
 
 	def _okGetInfo(self, callback, html):
 		def readInfo(html):
-			boxInfo = None
-			upTime = None
-			ipAddress = None
-			wlanState = None
-			wlanEncrypt = None
-			dslState = None
-			dslSpeed = None
-			tamActive = None
-			dectActive = None
+			if self.info:
+				(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive) = self.info
+			else:
+				(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive) = (None, None, None, None, None, None, None, None, None)
 
 			debug("[FritzCallFBF] _okGetInfo/readinfo")
 			found = re.match('.*<table class="tborder" id="tProdukt">\s*<tr>\s*<td style="padding-top:2px;">([^<]*)</td>\s*<td style="padding-top:2px;text-align:right;">\s*([^\s]*)\s*</td>', html, re.S)
@@ -801,7 +807,7 @@ class FritzCallFBF:
 				if found:
 					# debug("[FritzCallFBF] _okGetInfo Boxinfo: " + found.group(1))
 					boxInfo = found.group(1)
-		
+
 			found = re.match('.*if \(isNaN\(jetzt\)\)\s*return "";\s*var str = "([^"]*)";', html, re.S)
 			if found:
 				# debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
@@ -816,32 +822,7 @@ class FritzCallFBF:
 			if found:
 				# debug("[FritzCallFBF] _okGetInfo IpAdrDisplay: " + found.group(1))
 				ipAddress = found.group(1)
-		
-			found = re.match('.*function WlanStateLed \(state\){.*?return StateLed\("(\d+)"\);\s*}', html, re.S)
-			if found:
-				# debug("[FritzCallFBF] _okGetInfo WlanState: " + found.group(1))
-				wlanState = found.group(1)
-		
-			found = re.match('.*var (?:g_)?encryption = "(\d+)";', html, re.S)
-			if found:
-				# debug("[FritzCallFBF] _okGetInfo WlanEncrypt: " + found.group(1))
-				wlanEncrypt = found.group(1)
-		
-			found = re.match('.*function DslStateDisplay \(state\){\s*var state = "(\d+)";', html, re.S)
-			if found:
-				debug("[FritzCallFBF] _okGetInfo DslState: " + found.group(1))
-				dslState = found.group(1)
-			else:
-				found = re.match('.*function uiDoOnLoad\(\) {\s*document.title = "[^"]*";\s*(?:var atamode = "[^"]*";\s*)?var connection = "[^"]*";\s*var status = "(\d+)";', html, re.S)
-				if found:
-					debug("[FritzCallFBF] _okGetInfo DslState: " + found.group(1))
-					dslState = found.group(1)
 
-			found = re.match('.*function DslStateDisplay \(state\){\s*var state = "\d+";.*?if \("3130" != "0"\) str = "([^"]*)";', html, re.S)
-			if found:
-				# debug("[FritzCallFBF] _okGetInfo DslSpeed: " + found.group(1).strip())
-				dslSpeed = found.group(1).strip()
-		
 			if html.find('g_tamActive') != -1:
 				entries = re.compile('if \("(\d)" == "1"\) {\s*g_tamActive \+= 1;\s*}', re.S).finditer(html)
 				tamActive = [0, False, False, False, False, False]
@@ -859,17 +840,75 @@ class FritzCallFBF:
 				dectActive = len(entries)
 				# debug("[FritzCallFBF] _okGetInfo dectActive: " + str(dectActive))
 
+			# not used for now
 			found = re.match('.*var g_intFaxActive = "0";\s*if \("1" != ""\) {\s*g_intFaxActive = "1";\s*}\s*', html, re.S)
 			if found:
-				debug("[FritzCallFBF] _okGetInfo faxActive")
-				# faxActive = found.group(1).strip()
+				faxActive = True
+				# debug("[FritzCallFBF] _okGetInfo faxActive")
 
+			# not used for now
 			if html.find('cntRufumleitung') != -1:
 				entries = re.compile('mode = "1";\s*ziel = "[^"]+";\s*if \(mode == "1" \|\| ziel != ""\)\s*{\s*g_RufumleitungAktiv = true;', re.S).findall(html)
 				rufumlActive = len(entries)
-				debug("[FritzCallFBF] _okGetInfo rufumlActive: " + str(rufumlActive))
+				entries = re.compile('if \("([^"]*)"=="([^"]*)"\) isAllIncoming\+\+;', re.S).finditer(html)
+				isAllIncoming = 0
+				for entry in entries:
+					# debug("[FritzCallFBF] _okGetInfo rufumlActive add isAllIncoming")
+					if entry.group(1) == entry.group(2): isAllIncoming += 1
+				if isAllIncoming==2 and rufumlActive>0: rufumlActive -= 1
+				# debug("[FritzCallFBF] _okGetInfo rufumlActive: " + str(rufumlActive))
+
+			# /cgi-bin/webcm?getpage=../html/de/home/home_dsl.txt
+			# { "dsl_carrier_state": "5", "umts_enabled": "0", "ata_mode": "0", "isusbgsm": "", "dsl_ds_nrate": "3130", "dsl_us_nrate": "448", "hint_dsl_no_cable": "0", "wds_enabled": "0", "wds_hop": "0", "isata": "" } 
+			found = re.match('.*function DslStateDisplay \(state\){\s*var state = "(\d+)";', html, re.S)
+			if found:
+				# debug("[FritzCallFBF] _okGetInfo DslState: " + found.group(1))
+				dslState = [ found.group(1), None ] # state, speed
+				found = re.match('.*function DslStateDisplay \(state\){\s*var state = "\d+";.*?if \("3130" != "0"\) str = "([^"]*)";', html, re.S)
+				if found:
+					# debug("[FritzCallFBF] _okGetInfo DslSpeed: " + found.group(1).strip())
+					dslState[1] = found.group(1).strip()
+			else:
+				url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+				parms = urlencode({
+					'getpage':'../html/de/home/home_dsl.txt',
+					'sid':self._md5Sid
+					})
+				# debug("[FritzCallFBF] get dsl state: url: '" + url + "' parms: '" + parms + "'")
+				getPage(url,
+					method="POST",
+					agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+					headers={
+							'Content-Type': "application/x-www-form-urlencoded",
+							'Content-Length': str(len(parms))},
+					postdata=parms).addCallback(lambda x:self._okSetDslState(callback,x)).addErrback(self._errorGetInfo)
 		
-			return (boxInfo, upTime, ipAddress, wlanState, wlanEncrypt, dslState, dslSpeed, tamActive, dectActive)
+			# /cgi-bin/webcm?getpage=../html/de/home/home_wlan.txt
+			# { "ap_enabled": "1", "active_stations": "0", "encryption": "4", "wireless_stickandsurf_enabled": "0", "is_macfilter_active": "0", "wmm_enabled": "1", "wlan_state": [ "end" ] }
+			found = re.match('.*function WlanStateLed \(state\){.*?return StateLed\("(\d+)"\);\s*}', html, re.S)
+			if found:
+				# debug("[FritzCallFBF] _okGetInfo WlanState: " + found.group(1))
+				wlanState = [ found.group(1), 0, 0 ] # state, encryption, number of devices
+				found = re.match('.*var (?:g_)?encryption = "(\d+)";', html, re.S)
+				if found:
+					# debug("[FritzCallFBF] _okGetInfo WlanEncrypt: " + found.group(1))
+					wlanState[1] = found.group(1)
+			else:
+				url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+				parms = urlencode({
+					'getpage':'../html/de/home/home_wlan.txt',
+					'sid':self._md5Sid
+					})
+				# debug("[FritzCallFBF] get wlan state: url: '" + url + "' parms: '" + parms + "'")
+				getPage(url,
+					method="POST",
+					agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+					headers={
+							'Content-Type': "application/x-www-form-urlencoded",
+							'Content-Length': str(len(parms))},
+					postdata=parms).addCallback(lambda x:self._okSetWlanState(callback,x)).addErrback(self._errorGetInfo)
+
+			return (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive)
 
 		debug("[FritzCallFBF] _okGetInfo")
 		info = readInfo(html)
@@ -877,6 +916,46 @@ class FritzCallFBF:
 		self.info = info
 		if callback:
 			callback(info)
+
+	def _okSetWlanState(self, callback, html):
+		# debug("[FritzCallFBF] _okSetWlanState: " + html)
+		found = re.match('.*"ap_enabled": "(\d+)"', html, re.S)
+		if found:
+			# debug("[FritzCallFBF] _okSetWlanState: ap_enabled: " + found.group(1))
+			wlanState = [ found.group(1), None, None ]
+			found = re.match('.*"encryption": "(\d+)"', html, re.S)
+			if found:
+				# debug("[FritzCallFBF] _okSetWlanState: encryption: " + found.group(1))
+				wlanState[1] = found.group(1)
+			found = re.match('.*"active_stations": "(\d+)"', html, re.S)
+			if found:
+				# debug("[FritzCallFBF] _okSetWlanState: active_stations: " + found.group(1))
+				wlanState[2] = found.group(1)
+			(boxInfo, upTime, ipAddress, dummy, dslState, tamActive, dectActive, faxActive, rufumlActive) = self.info
+			self.info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive)
+			debug("[FritzCallFBF] _okSetWlanState info: " + str(self.info))
+		if callback:
+			callback(self.info)
+
+	def _okSetDslState(self, callback, html):
+		# debug("[FritzCallFBF] _okSetDslState: " + html)
+		found = re.match('.*"dsl_carrier_state": "(\d+)"', html, re.S)
+		if found:
+			# debug("[FritzCallFBF] _okSetDslState: dsl_carrier_state: " + found.group(1))
+			dslState = [ found.group(1), None ]
+			found = re.match('.*"dsl_ds_nrate": "(\d+)"', html, re.S)
+			if found:
+				# debug("[FritzCallFBF] _okSetDslState: dsl_ds_nrate: " + found.group(1))
+				dslState[1] = found.group(1)
+			found = re.match('.*"dsl_us_nrate": "(\d+)"', html, re.S)
+			if found:
+				# debug("[FritzCallFBF] _okSetDslState: dsl_us_nrate: " + found.group(1))
+				dslState[1] = dslState[1] + '/' + found.group(1)
+			(boxInfo, upTime, ipAddress, wlanState, dummy, tamActive, dectActive, faxActive, rufumlActive) = self.info
+			self.info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive)
+			debug("[FritzCallFBF] _okSetDslState info: " + str(self.info))
+		if callback:
+			callback(self.info)
 
 	def _errorGetInfo(self, error):
 		debug("[FritzCallFBF] _errorGetInfo: %s" % (error))
@@ -952,17 +1031,23 @@ class FritzMenu(Screen,HelpableScreen):
 	def __init__(self, session):
 		fontSize = scaleV(24,21) # indeed this is font size +2
 		noButtons = 2 # reset, wlan
+
+		if not fritzbox or not fritzbox.info: return
+
 		if fritzbox.info[FBF_tamActive]:
-			noButtons += 1
+			noButtons += 1 # toggle mailboxes
 		width = max(DESKTOP_WIDTH - scaleH(500,250), noButtons*140+(noButtons+1)*10)
+		# boxInfo 2 lines, gap, internet 2 lines, gap, dsl/wlan each 1 line, gap, buttons
 		height = 5 + 2*fontSize + 10 + 2*fontSize + 10 + 2*fontSize + 10 + 40 + 5
-		if fritzbox.info[FBF_tamActive]:
-			height += fontSize
-		if fritzbox.info[FBF_dectActive]:
-			height += fontSize
+		if fritzbox.info[FBF_tamActive] is not None: height += fontSize
+		if fritzbox.info[FBF_dectActive] is not None: height += fontSize
+		if fritzbox.info[FBF_faxActive] is not None: height += fontSize
+		if fritzbox.info[FBF_rufumlActive] is not None: height += fontSize
 		buttonsGap = (width-noButtons*140)/(noButtons+1)
 		buttonsVPos = height-40-5
-		if fritzbox.info[FBF_tamActive]:
+
+		varLinePos = 4
+		if fritzbox.info[FBF_tamActive] is not None:
 			mailboxLine = """
 				<widget name="FBFMailbox" position="%d,%d" size="%d,%d" font="Regular;%d" />
 				<widget name="mailbox_inactive" pixmap="skin_default/buttons/button_green_off.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
@@ -970,30 +1055,65 @@ class FritzMenu(Screen,HelpableScreen):
 				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 				<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				""" % (
-						40, 5+2*fontSize+10+4*fontSize+10, # position mailbox
+						40, 5+2*fontSize+10+varLinePos*fontSize+10, # position mailbox
 						width-40-20, fontSize, # size mailbox
 						fontSize-2,
-						20, 5+2*fontSize+10+4*fontSize+10+(fontSize-16)/2, # position button mailbox
-						20, 5+2*fontSize+10+4*fontSize+10+(fontSize-16)/2, # position button mailbox
+						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button mailbox
+						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button mailbox
 						noButtons*buttonsGap+(noButtons-1)*140, buttonsVPos,
 						noButtons*buttonsGap+(noButtons-1)*140, buttonsVPos,
 				)
+			varLinePos += 1
 		else:
 			mailboxLine = ""
-		if fritzbox.info[FBF_dectActive]: # it is assumed here, that, when DECT, then also mailbox...
+
+		if fritzbox.info[FBF_dectActive] is not None:
 			dectLine = """
 				<widget name="FBFDect" position="%d,%d" size="%d,%d" font="Regular;%d" />
 				<widget name="dect_inactive" pixmap="skin_default/buttons/button_green_off.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
 				<widget name="dect_active" pixmap="skin_default/buttons/button_green.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
 				""" %(
-						40, 5+2*fontSize+10+5*fontSize+10, # position dect
+						40, 5+2*fontSize+10+varLinePos*fontSize+10, # position dect
 						width-40-20, fontSize, # size dect
 						fontSize-2,
-						20, 5+2*fontSize+10+5*fontSize+10+(fontSize-16)/2, # position button dect
-						20, 5+2*fontSize+10+5*fontSize+10+(fontSize-16)/2, # position button dect
+						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
 				)
+			varLinePos += 1
 		else:
 			dectLine = ""
+
+		if fritzbox.info[FBF_faxActive] is not None:
+			faxLine = """
+				<widget name="FBFFax" position="%d,%d" size="%d,%d" font="Regular;%d" />
+				<widget name="fax_inactive" pixmap="skin_default/buttons/button_green_off.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				<widget name="fax_active" pixmap="skin_default/buttons/button_green.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				""" %(
+						40, 5+2*fontSize+10+varLinePos*fontSize+10, # position dect
+						width-40-20, fontSize, # size dect
+						fontSize-2,
+						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+				)
+			varLinePos += 1
+		else:
+			faxLine = ""
+
+		if fritzbox.info[FBF_rufumlActive] is not None:
+			rufumlLine = """
+				<widget name="FBFRufuml" position="%d,%d" size="%d,%d" font="Regular;%d" />
+				<widget name="rufuml_inactive" pixmap="skin_default/buttons/button_green_off.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				<widget name="rufuml_active" pixmap="skin_default/buttons/button_green.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				""" %(
+						40, 5+2*fontSize+10+varLinePos*fontSize+10, # position dect
+						width-40-20, fontSize, # size dect
+						fontSize-2,
+						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+						20, 5+2*fontSize+10+varLinePos*fontSize+10+(fontSize-16)/2, # position button dect
+				)
+			varLinePos += 1
+		else:
+			rufumlLine = ""
 	
 		self.skin = """
 			<screen name="FritzMenu" position="%d,%d" size="%d,%d" title="%s" >
@@ -1007,6 +1127,8 @@ class FritzMenu(Screen,HelpableScreen):
 				<widget name="FBFWlan" position="%d,%d" size="%d,%d" font="Regular;%d" />
 				<widget name="wlan_inactive" pixmap="skin_default/buttons/button_green_off.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
 				<widget name="wlan_active" pixmap="skin_default/buttons/button_green.png" position="%d,%d" size="15,16" transparent="1" alphatest="on"/>
+				%s
+				%s
 				%s
 				%s
 				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
@@ -1037,6 +1159,8 @@ class FritzMenu(Screen,HelpableScreen):
 						20, 5+2*fontSize+10+3*fontSize+10+(fontSize-16)/2, # position button wlan
 						mailboxLine,
 						dectLine,
+						faxLine,
+						rufumlLine,
 						buttonsGap, buttonsVPos, buttonsGap, buttonsVPos,
 						buttonsGap+140+buttonsGap, buttonsVPos, buttonsGap+140+buttonsGap, buttonsVPos,
 						)
@@ -1047,22 +1171,22 @@ class FritzMenu(Screen,HelpableScreen):
 		self["key_red"] = Button(_("Reset"))
 		# TRANSLATORS: keep it short, this is a button
 		self["key_green"] = Button(_("Toggle WLAN"))
-		self.mailboxActive = False
-		if fritzbox.info[FBF_tamActive]:
+		self._mailboxActive = False
+		if fritzbox.info[FBF_tamActive] is not None:
 			# TRANSLATORS: keep it short, this is a button
 			self["key_yellow"] = Button(_("Toggle Mailbox"))
 			self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions", "NumberActions", "EPGSelectActions"],
 											{
-											"cancel": self.exit,
-											"ok": self.exit,
-											"red": self.reset,
-											"green": self.toggleWlan,
-											"yellow": (lambda: self.toggleMailbox(-1)),
-											"0": (lambda: self.toggleMailbox(0)),
-											"1": (lambda: self.toggleMailbox(1)),
-											"2": (lambda: self.toggleMailbox(2)),
-											"3": (lambda: self.toggleMailbox(3)),
-											"4": (lambda: self.toggleMailbox(4)),
+											"cancel": self._exit,
+											"ok": self._exit,
+											"red": self._reset,
+											"green": self._toggleWlan,
+											"yellow": (lambda: self._toggleMailbox(-1)),
+											"0": (lambda: self._toggleMailbox(0)),
+											"1": (lambda: self._toggleMailbox(1)),
+											"2": (lambda: self._toggleMailbox(2)),
+											"3": (lambda: self._toggleMailbox(3)),
+											"4": (lambda: self._toggleMailbox(4)),
 											"info": self._getInfo,
 											}, -2)
 			# TRANSLATORS: keep it short, this is a help text
@@ -1084,10 +1208,10 @@ class FritzMenu(Screen,HelpableScreen):
 		else:
 			self["menuActions"] = ActionMap(["OkCancelActions", "ColorActions", "EPGSelectActions"],
 											{
-											"cancel": self.exit,
-											"ok": self.exit,
-											"green": self.toggleWlan,
-											"red": self.reset,
+											"cancel": self._exit,
+											"ok": self._exit,
+											"green": self._toggleWlan,
+											"red": self._reset,
 											"info": self._getInfo,
 											}, -2)
 
@@ -1117,33 +1241,48 @@ class FritzMenu(Screen,HelpableScreen):
 
 		self["FBFWlan"] = Label('WLAN ')
 		self["wlan_inactive"] = Pixmap()
+		self["wlan_inactive"].hide()
 		self["wlan_active"] = Pixmap()
 		self["wlan_active"].hide()
-		self.wlanActive = False
+		self._wlanActive = False
 
-		if fritzbox.info[FBF_dectActive]: 
+		if fritzbox.info[FBF_dectActive] is not None: 
 			self["FBFDect"] = Label('DECT')
 			self["dect_inactive"] = Pixmap()
 			self["dect_active"] = Pixmap()
 			self["dect_active"].hide()
 
-		self.timer = eTimer()
-		self.timer.callback.append(self._getInfo)
-		self.onShown.append(lambda: self.timer.start(5000))
-		self.onHide.append(lambda: self.timer.stop())
+		if fritzbox.info[FBF_faxActive] is not None: 
+			self["FBFFax"] = Label('Fax')
+			self["fax_inactive"] = Pixmap()
+			self["fax_active"] = Pixmap()
+			self["fax_active"].hide()
+
+		if fritzbox.info[FBF_rufumlActive] is not None: 
+			self["FBFRufuml"] = Label(_('Call redirection'))
+			self["rufuml_inactive"] = Pixmap()
+			self["rufuml_active"] = Pixmap()
+			self["rufuml_active"].hide()
+
+		self._timer = eTimer()
+		self._timer.callback.append(self._getInfo)
+		self.onShown.append(lambda: self._timer.start(5000))
+		self.onHide.append(lambda: self._timer.stop())
 		self._getInfo()
 
 	def _getInfo(self):
 		fritzbox.getInfo(self._fillMenu)
 
 	def _fillMenu(self, status):
-		(boxInfo, upTime, ipAddress, wlanState, wlanEncrypt, dslState, dslSpeed, tamActive, dectActive) = status
-		if not boxInfo:
-			return
-		self.wlanActive = (wlanState == '1')
-		self.mailboxActive = False
+		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive) = status
+		self._wlanActive = (wlanState[0] == '1')
+		self._mailboxActive = False
 		try:
-			self["FBFInfo"].setText(boxInfo.replace(', ', '\n'))
+			if boxInfo:
+				self["FBFInfo"].setText(boxInfo.replace(', ', '\n'))
+			else:
+				self["FBFInfo"].setText('BoxInfo ' + _('Status not available'))
+
 			if ipAddress:
 				if upTime:
 					self["FBFInternet"].setText('Internet ' + _('IP Address:') + ' ' + ipAddress + '\n' + _('Connected since') + ' ' + upTime)
@@ -1154,10 +1293,13 @@ class FritzMenu(Screen,HelpableScreen):
 			else:
 				self["internet_active"].hide()
 				self["internet_inactive"].show()
+
 			if dslState:
-				if dslState=='5':
+				if dslState[0]=='5':
 					self["dsl_inactive"].hide()
 					self["dsl_active"].show()
+					if dslState[1]:
+						self["FBFDsl"].setText('DSL ' + dslState[1])
 				else:
 					self["dsl_active"].hide()
 					self["dsl_inactive"].show()
@@ -1165,29 +1307,41 @@ class FritzMenu(Screen,HelpableScreen):
 				self["FBFDsl"].setText('DSL ' + _('Status not available'))
 				self["dsl_active"].hide()
 				self["dsl_inactive"].hide()
-				self["FBFDsl"].hide()
-			if dslSpeed:
-				self["FBFDsl"].setText('DSL ' + dslSpeed)
-			if wlanState=='1':
-				self["wlan_inactive"].hide()
-				self["wlan_active"].show()
-				if wlanEncrypt:
-					if wlanEncrypt=='0':
-						self["FBFWlan"].setText('WLAN ' + _('not encrypted'))
+
+			if wlanState:
+				if wlanState[0]=='1':
+					self["wlan_inactive"].hide()
+					self["wlan_active"].show()
+					message = 'WLAN'
+					if wlanState[1]=='0':
+						message += ' ' + _('not encrypted')
 					else:
-						self["FBFWlan"].setText('WLAN ' + _('encrypted'))
+						message += ' ' + _('encrypted')
+					if wlanState[2]:
+						if wlanState[2]=='0':
+							message = message + ', ' + _('no device active')
+						elif wlanState[2]=='1':
+							message = message + ', ' + _('one device active')
+						else:
+							message = message + ', ' + wlanState[2] + ' ' + _('devices active')
+					self["FBFWlan"].setText(message)
+				else:
+					self["wlan_active"].hide()
+					self["wlan_inactive"].show()
+					self["FBFWlan"].setText('WLAN')
 			else:
+				self["FBFWlan"].setText('WLAN ' + _('Status not available'))
 				self["wlan_active"].hide()
-				self["wlan_inactive"].show()
-	
+				self["wlan_inactive"].hide()
+
 			if fritzbox.info[FBF_tamActive]:
 				if  not tamActive or tamActive[0] == 0:
-					self.mailboxActive = False
+					self._mailboxActive = False
 					self["mailbox_active"].hide()
 					self["mailbox_inactive"].show()
 					self["FBFMailbox"].setText(_('No mailbox active'))
 				else:
-					self.mailboxActive = True
+					self._mailboxActive = True
 					message = '('
 					for i in range(5):
 						if tamActive[i+1]:
@@ -1210,29 +1364,48 @@ class FritzMenu(Screen,HelpableScreen):
 						self["FBFDect"].setText(_('One DECT phone registered'))
 					else:
 						self["FBFDect"].setText(str(dectActive) + ' ' + _('DECT phones registered'))
+
+			if fritzbox.info[FBF_faxActive] and faxActive:
+				self["fax_inactive"].hide()
+				self["fax_active"].show()
+				self["FBFFax"].setText(_('Software fax active'))
+
+			if fritzbox.info[FBF_rufumlActive] is not None and rufumlActive is not None:
+				if rufumlActive == 0:
+					self["rufuml_active"].hide()
+					self["rufuml_inactive"].show()
+					self["FBFRufuml"].setText(_('No call redirection active'))
+				else:
+					self["rufuml_inactive"].hide()
+					self["rufuml_active"].show()
+					if rufumlActive == 1:
+						self["FBFRufuml"].setText(_('One call redirection active'))
+					else:
+						self["FBFRufuml"].setText(str(rufumlActive) + ' ' + _('call redirections active'))
+
 		except KeyError:
 			debug("[FritzCallFBF] _fillMenu: " + traceback.format_exc())
 
-	def toggleWlan(self):
-		if self.wlanActive:
+	def _toggleWlan(self):
+		if self._wlanActive:
 			debug("[FritzMenu] toggleWlan off")
-			fritzbox.changeWLAN('0') # we need a separate container so we do not collide with getInfo
+			fritzbox.changeWLAN('0')
 		else:
 			debug("[FritzMenu] toggleWlan off")
-			fritzbox.changeWLAN('1') # we need a separate container so we do not collide with getInfo
+			fritzbox.changeWLAN('1')
 
-	def toggleMailbox(self, which):
+	def _toggleMailbox(self, which):
 		debug("[FritzMenu] toggleMailbox")
 		if fritzbox.info[FBF_tamActive]:
 			debug("[FritzMenu] toggleMailbox off")
-			fritzbox.changeMailbox(which) # we need a separate container so we do not collide with getInfo
+			fritzbox.changeMailbox(which)
 
-	def reset(self):
+	def _reset(self):
 		fritzbox.reset()
-		self.exit()
+		self._exit()
 
-	def exit(self):
-		self.timer.stop()
+	def _exit(self):
+		self._timer.stop()
 		self.close()
 
 
@@ -1323,7 +1496,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 							scaleH(1100, 570), # eLabel width
 							scaleH(40, 5), scaleV(10, 5), # statusbar position
 							scaleH(1050, 560), scaleV(25, 22), # statusbar size
-							scaleV(22, 21), # statusbar font size
+							scaleV(21, 21), # statusbar font size
 							scaleV(40, 28), # eLabel position vertical
 							scaleH(1100, 570), # eLabel width
 							scaleH(40, 5), scaleV(55, 40), # entries position
@@ -1397,6 +1570,17 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 	def gotCalls(self, callList):
 		debug("[FritzDisplayCalls] gotCalls")
 		self.updateStatus(self.header + " (" + str(len(callList)) + ")")
+		dateFieldWidth = scaleH(140,100)
+		dirFieldWidth = 16
+		lengthFieldWidth = scaleH(50,50)
+		remoteFieldWidth = scaleH(140,100)
+		scrollbarWidth = scaleH(35,35)
+		if config.plugins.FritzCall.fullscreen.value:
+			fieldWidth = 790 -dateFieldWidth -5 -dirFieldWidth -5 -lengthFieldWidth -5 -remoteFieldWidth -scrollbarWidth -5
+			fontSize = scaleV(22,20)
+		else:
+			fieldWidth = self.width -scaleH(60, 5) -dateFieldWidth -5 -dirFieldWidth -5 -lengthFieldWidth -5 -remoteFieldWidth -scrollbarWidth -5
+			fontSize = scaleV(24,20)
 		sortlist = []
 		for (number, date, remote, direct, here, length) in callList:
 			found = re.match("(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
@@ -1407,25 +1591,19 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				dir = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callin.png"))
 			else:
 				dir = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callinfailed.png"))
-			dateFieldWidth = scaleH(150,100)
-			dirFieldWidth = 16
-			lengthFieldWidth = scaleH(75,50)
-			remoteFieldWidth = scaleH(250,100)
-			scrollbarWidth = scaleH(90,45)
-			fieldWidth = self.width -dateFieldWidth -5 -dirFieldWidth -5 -lengthFieldWidth -5 -remoteFieldWidth -scrollbarWidth -5
 			# debug("[FritzDisplayCalls] gotCalls: d: %d; f: %d; d: %d; r: %d" %(dateFieldWidth, fieldWidth, dirFieldWidth, remoteFieldWidth))
 			sortlist.append([number,
-							 (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, dateFieldWidth, scaleV(24,20), 0, RT_HALIGN_LEFT, date),
+							 (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, dateFieldWidth, fontSize, 0, RT_HALIGN_LEFT, date),
 							 (eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, dateFieldWidth+5, 0, dirFieldWidth, 16, dir),
-							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5, 0, fieldWidth, scaleV(24,20), 0, RT_HALIGN_LEFT, here),
-							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5, 0, lengthFieldWidth, scaleV(24,20), 0, RT_HALIGN_LEFT, length),
-							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5+lengthFieldWidth+5, 0, remoteFieldWidth, scaleV(24,20), 0, RT_HALIGN_RIGHT, remote)
+							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5, 0, fieldWidth, fontSize, 0, RT_HALIGN_LEFT, here),
+							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5, 0, lengthFieldWidth, fontSize, 0, RT_HALIGN_LEFT, length),
+							 (eListboxPythonMultiContent.TYPE_TEXT, dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5+lengthFieldWidth+5, 0, remoteFieldWidth, fontSize, 0, RT_HALIGN_RIGHT, remote)
 							 ])
 
 		self["entries"].setList(sortlist)
 
 	def updateStatus(self, text):
-		self["statusbar"].setText(_("Getting calls from FRITZ!Box...") + text)
+		self["statusbar"].setText(_("Getting calls from FRITZ!Box...") + ' ' + text)
 
 	def showEntry(self):
 		debug("[FritzDisplayCalls] showEntry")
@@ -1452,7 +1630,6 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 class FritzOfferAction(Screen):
 
 	def __init__(self, session, parent, number, name=""):
-		# TODO: scaling for HD
 		noButtons = 3
 		width = max(scaleH(-1,440), noButtons*140)
 		height = scaleV(-1,176) # = 5 + 126 + 40 + 5; 6 lines of text possible
@@ -1940,7 +2117,6 @@ class FritzCallPhonebook:
 					#
 					# setup screen with two ConfigText and OK and ABORT button
 					# 
-					# TODO: scaling for HD
 					noButtons = 2
 					width = max(scaleH(-1,570), noButtons*140)
 					height = scaleV(-1,100) # = 5 + 126 + 40 + 5; 6 lines of text possible
@@ -2374,7 +2550,7 @@ class FritzCallList:
 
 callList = FritzCallList()
 
-from GlobalActions import globalActionMap #@UnresolvedImport
+from GlobalActions import globalActionMap
 def notifyCall(event, date, number, caller, phone):
 	if Standby.inStandby is None or config.plugins.FritzCall.afterStandby.value == "each":
 		if config.plugins.FritzCall.muteOnCall.value:
@@ -2391,7 +2567,7 @@ def notifyCall(event, date, number, caller, phone):
 		global standbyMode
 		if not standbyMode :
 			standbyMode = True
-			Standby.inStandby.onHide.append(callList.display)
+			Standby.inStandby.onHide.append(callList.display) #@UndefinedVariable
 		# add text/timeout to call list
 		callList.add(event, date, number, caller, phone)
 		debug("[FritzCall] notifyCall: added to callList")

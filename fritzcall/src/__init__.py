@@ -1,11 +1,20 @@
 # -*- coding: utf-8 -*-
 from Components.config import config #@UnresolvedImport
-import gettext
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
-try:
-	_ = gettext.translation('FritzCall', resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/locale"), [config.osd.language.getText()]).gettext
-except IOError:
-	pass
+from Components.Language import language
+from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
+import gettext, os
+
+lang = language.getLanguage()
+os.environ["LANGUAGE"] = lang[:2]
+gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
+gettext.textdomain("enigma2")
+gettext.bindtextdomain("FritzCall", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/FritzCall/locale/"))
+
+def _(txt):
+	t = gettext.dgettext("FritzCall", txt)
+	if t == txt:
+		t = gettext.gettext(txt)
+	return t
 
 from time import localtime
 def debug(message):

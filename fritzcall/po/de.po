@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-25 16:04+0200\n"
-"PO-Revision-Date: 2009-06-25 16:05+0200\n"
+"POT-Creation-Date: 2009-06-29 13:07+0200\n"
+"PO-Revision-Date: 2009-06-28 10:55+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -49,15 +49,15 @@ msgstr "Österreich"
 msgid "Automatically add new Caller to PhoneBook"
 msgstr "Anrufer automatisch dem Telefonbuch hinzufügen"
 
-msgid "CF Drive"
-msgstr "CF Laufwerk"
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Call"
 msgstr "Anrufen"
 
 msgid "Call monitoring"
 msgstr "Anrufanzeige"
+
+msgid "Call redirection"
+msgstr "Rufumleitung"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
@@ -230,9 +230,6 @@ msgstr "Hole Liste der Anrufe von der FRITZ!Box..."
 msgid "Getting status from FRITZ!Box Fon..."
 msgstr "Hole Status von der FRITZ!Box..."
 
-msgid "Harddisk"
-msgstr "Festplatte"
-
 msgid "IP Address:"
 msgstr "IP Adresse:"
 
@@ -295,6 +292,9 @@ msgstr "Neu"
 msgid "No DECT phone registered"
 msgstr "Kein Schnurlostelefon angemeldet"
 
+msgid "No call redirection active"
+msgstr "Keine Rufumleitung aktiv"
+
 msgid "No entry selected"
 msgstr "Kein Eintrag ausgewählt"
 
@@ -319,6 +319,9 @@ msgstr "OK"
 
 msgid "One DECT phone registered"
 msgstr "Ein Schnurlostelefon angemeldet"
+
+msgid "One call redirection active"
+msgstr "Eine Rufumleitung aktiv"
 
 msgid "One mailbox active"
 msgstr "Ein Anrufbeantworter aktiv"
@@ -419,6 +422,9 @@ msgstr "Anzeige nach Standby"
 msgid "Show details of entry"
 msgstr "Details des Eintrags anzeigen"
 
+msgid "Software fax active"
+msgstr "Software Fax aktiv"
+
 msgid "Status not available"
 msgstr "Status nicht verfügbar"
 
@@ -470,9 +476,6 @@ msgstr "Toggle AB"
 msgid "UNKNOWN"
 msgstr "UNBEKANNT"
 
-msgid "USB Stick"
-msgstr "USB Stick"
-
 msgid "Use internal PhoneBook"
 msgstr "Benutze internes Telefonbuch"
 
@@ -495,6 +498,12 @@ msgstr ""
 "\n"
 "Es könnte eine Kommunikationsproblem mit der FRITZ!Box sein.\n"
 "Versuchen Sie es nochmal."
+
+msgid "call redirections active"
+msgstr "Rufumleitungen aktiv"
+
+msgid "devices active"
+msgstr "WLAN-Stationen aktiv"
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "display calls"
@@ -534,8 +543,14 @@ msgstr "Anrufbeantworter aktiv"
 msgid "mobile"
 msgstr "Handy"
 
+msgid "no device active"
+msgstr "keine WLAN-Station aktiv"
+
 msgid "not encrypted"
 msgstr "nicht verschlüsselt"
+
+msgid "one device active"
+msgstr "eine WLAN-Station aktiv"
 
 msgid "preparing"
 msgstr "Vorbereitung"
@@ -559,3 +574,12 @@ msgstr "keine Anzeige"
 
 msgid "work"
 msgstr "Büro"
+
+#~ msgid "CF Drive"
+#~ msgstr "CF Laufwerk"
+
+#~ msgid "Harddisk"
+#~ msgstr "Festplatte"
+
+#~ msgid "USB Stick"
+#~ msgstr "USB Stick"

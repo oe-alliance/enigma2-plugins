@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-04 20:26+0200\n"
+"POT-Creation-Date: 2009-06-29 15:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,14 +50,14 @@ msgstr ""
 msgid "Automatically add new Caller to PhoneBook"
 msgstr ""
 
-msgid "CF Drive"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Call"
 msgstr ""
 
 msgid "Call monitoring"
+msgstr ""
+
+msgid "Call redirection"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
@@ -220,9 +220,6 @@ msgstr ""
 msgid "Getting status from FRITZ!Box Fon..."
 msgstr ""
 
-msgid "Harddisk"
-msgstr ""
-
 msgid "IP Address:"
 msgstr ""
 
@@ -279,6 +276,9 @@ msgstr ""
 msgid "No DECT phone registered"
 msgstr ""
 
+msgid "No call redirection active"
+msgstr ""
+
 msgid "No entry selected"
 msgstr ""
 
@@ -302,6 +302,9 @@ msgid "OK"
 msgstr ""
 
 msgid "One DECT phone registered"
+msgstr ""
+
+msgid "One call redirection active"
 msgstr ""
 
 msgid "One mailbox active"
@@ -397,6 +400,12 @@ msgstr ""
 msgid "Show details of entry"
 msgstr ""
 
+msgid "Software fax active"
+msgstr ""
+
+msgid "Status not available"
+msgstr ""
+
 msgid "Strip Leading 0"
 msgstr ""
 
@@ -445,9 +454,6 @@ msgstr ""
 msgid "UNKNOWN"
 msgstr ""
 
-msgid "USB Stick"
-msgstr ""
-
 msgid "Use internal PhoneBook"
 msgstr ""
 
@@ -462,6 +468,12 @@ msgid ""
 "in the configuration dialog to display calls\n"
 "\n"
 "It could be a communication issue, just try again."
+msgstr ""
+
+msgid "call redirections active"
+msgstr ""
+
+msgid "devices active"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -502,7 +514,13 @@ msgstr ""
 msgid "mobile"
 msgstr ""
 
+msgid "no device active"
+msgstr ""
+
 msgid "not encrypted"
+msgstr ""
+
+msgid "one device active"
 msgstr ""
 
 msgid "preparing"
