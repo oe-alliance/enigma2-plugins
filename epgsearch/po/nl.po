@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - epgsearch\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-06 13:11+0200\n"
+"PO-Revision-Date: 2009-06-07 19:04+0100\n"
+"Last-Translator: \n"
+"Language-Team:  <Benny.DeTandt@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/EPGSearch.py:145
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: ../src/EPGSearch.py:183
+msgid "Channel Selection"
+msgstr "Zenderkeuze"
+
+#: ../src/EPGSearch.py:53
+msgid "Enter text to search for"
+msgstr "Voer te zoeken tekst in:"
+
+#: ../src/EPGSearch.py:30
+msgid "History"
+msgstr "Historiek"
+
+#: ../src/EPGSearch.py:59
+msgid "Import from EPG"
+msgstr "Importeren vanuit de EPG"
+
+#: ../src/EPGSearch.py:58
+msgid "Import from Timer"
+msgstr "Import van Timer"
+
+#: ../src/EPGSearch.py:29
+msgid "New Search"
+msgstr "Nieuw"
+
+#: ../src/EPGSearch.py:95
+msgid "No history"
+msgstr "Geen historiek"
+
+#: ../src/EPGSearch.py:146
+msgid "OK"
+msgstr "OK"
+
+#: ../src/EPGSearch.py:211
+msgid "Search"
+msgstr "Zoeken"
+
+#: ../src/plugin.py:45
+msgid "Search EPG"
+msgstr "EPG doorzoeken"
+
+#: ../src/plugin.py:50
+#: ../src/plugin.py:56
+msgid "Search EPG..."
+msgstr "EPG doorzoeken..."
+
+#: ../src/EPGSearch.py:160
+msgid "Select a timer to search"
+msgstr "Selecteer te zoeken timer..."
+
+#: ../src/EPGSearch.py:89
+msgid "Select text to search for"
+msgstr "Selecteer te zoeken tekst..."
+
