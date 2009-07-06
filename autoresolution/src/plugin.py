@@ -78,8 +78,6 @@ class AutoRes(Screen):
 	def __evStart(self):
 		if self.timer.isActive():
 			self.timer.stop()
-		if config.plugins.autoresolution.enable.value:
-			self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
 
 	def __evVideoFramerateChanged(self):
 		print "[AutoRes] got event evFramerateChanged"
