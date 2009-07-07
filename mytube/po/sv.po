@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-24 13:22+0200\n"
-"PO-Revision-Date: 2009-02-06 09:34+0100\n"
+"PO-Revision-Date: 2009-07-07 09:49+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: WeeGull <weegull@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,226 +20,227 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid " Results"
-msgstr ""
+msgstr " Resultat"
 
 msgid "All"
-msgstr ""
+msgstr "Alla"
 
 msgid "All Time"
 msgstr ""
 
 msgid "Ascanding"
-msgstr ""
+msgstr "Stigande"
 
 msgid "Australia"
-msgstr ""
+msgstr "Australien"
 
 msgid "Autos & Vehicles"
-msgstr ""
+msgstr "Motor & Fordon"
 
 msgid "Brazil"
-msgstr ""
+msgstr "Brasilien"
 
 msgid "Canada"
-msgstr ""
+msgstr "Kanada"
 
 msgid "Category"
-msgstr ""
+msgstr "Kategori"
 
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
 msgid "Comedy"
-msgstr ""
+msgstr "Komedi"
 
 msgid "Czech Republic"
-msgstr ""
+msgstr "Tjeckien"
 
 msgid "Descending"
-msgstr ""
+msgstr "Fallande"
 
 msgid "Do you want to see more entries?"
-msgstr ""
+msgstr "Vill du se flera bidrag?"
 
 msgid "Education"
-msgstr ""
+msgstr "Utbildning"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Underhållning"
 
 msgid "Fetching feed entries"
-msgstr ""
+msgstr "Hämtar feed poster"
 
 msgid "Fetching search entries"
-msgstr ""
+msgstr "Hämtar sökning poster"
 
 msgid "Film & Animation"
-msgstr ""
+msgstr "Film & Animerat"
 
 msgid "France"
-msgstr ""
+msgstr "Frankrike"
 
 msgid "From Region"
-msgstr ""
+msgstr "Från Region"
 
 msgid "Gaming"
-msgstr ""
+msgstr "Spel"
 
 msgid "Germany"
-msgstr ""
+msgstr "Tyskland"
 
 msgid "Great Britain"
-msgstr ""
+msgstr "Storbritannien"
 
 msgid "Holland"
-msgstr ""
+msgstr "Holland"
 
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 msgid "Howto & Style"
 msgstr ""
 
 msgid "India"
-msgstr ""
+msgstr "India"
 
 msgid "Ireland"
-msgstr ""
+msgstr "Irland"
 
 msgid "Israel"
-msgstr ""
+msgstr "Israel"
 
 msgid "Italy"
-msgstr ""
+msgstr "Italien"
 
 msgid "Japan"
-msgstr ""
+msgstr "Japan"
 
 msgid "Mexico"
-msgstr ""
+msgstr "Mexiko"
 
 msgid "More video entries."
-msgstr ""
+msgstr "Fler video poster."
 
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 msgid "My TubePlayer"
-msgstr ""
+msgstr "My TubePlayer"
 
 msgid "MyTubePlayer"
-msgstr ""
+msgstr "MyTubePlayer"
 
 msgid "MyTubeVideoInfoScreen"
-msgstr ""
+msgstr "MyTubeVideoInfoScreen"
 
 msgid "New Zealand"
-msgstr ""
+msgstr "Nya Zeeland"
 
 msgid "News & Politics"
-msgstr ""
+msgstr "Nyheter & Politik"
 
 msgid "No"
-msgstr ""
+msgstr "Nej"
 
 msgid "No playable video found! Stop playing this movie?"
-msgstr ""
+msgstr "Inga spelbara video hittas! Sluta spela denna film?"
 
 msgid "No, but play next video"
-msgstr ""
+msgstr "Nej, men spela nästa video"
 
 msgid "No, but play previous video"
-msgstr ""
+msgstr "Nej, men spela föregående video"
 
 msgid "Nonprofits & Activism"
 msgstr ""
 
 msgid "Order by"
-msgstr ""
+msgstr "Sortera efter"
 
 msgid "People & Blogs"
-msgstr ""
+msgstr "Folk & Bloggar"
 
 msgid "Pets & Animals"
-msgstr ""
+msgstr "Husdjur & Vilddjur"
 
 msgid "Play YouTube movies"
-msgstr ""
+msgstr "Spela YouTube filmer"
 
 msgid "Poland"
-msgstr ""
+msgstr "Polen"
 
 msgid "Published"
-msgstr ""
+msgstr "Publiserad"
 
 msgid "Rating"
-msgstr ""
+msgstr "Betyg"
 
 msgid "Relevance"
-msgstr ""
+msgstr "Relevance"
 
 msgid "Restricted Content"
-msgstr ""
+msgstr "Begränsat innehåll"
 
 msgid "Russia"
-msgstr ""
+msgstr "Russia"
 
 msgid "Science & Technology"
-msgstr ""
+msgstr "Vetenskap & Teknik"
 
 msgid "Search"
-msgstr ""
+msgstr "Sök"
 
 msgid "Search Term(s)"
-msgstr ""
+msgstr "Sökterm(er)"
 
 msgid "Short Movies"
-msgstr ""
+msgstr "Kortfilmer"
 
 msgid "Sorry, video is not available!"
-msgstr ""
+msgstr "Ledsen, video är ej tillgänglig!"
 
 msgid "South Korea"
-msgstr ""
+msgstr "Syd Korea"
 
 msgid "Spain"
-msgstr ""
+msgstr "Spanien"
 
 msgid "Sports"
-msgstr ""
+msgstr "Sport"
 
 msgid "Stop playing this movie?"
-msgstr ""
+msgstr "Suta spela den här filmen?"
 
 msgid "Sweden"
-msgstr ""
+msgstr "Sverige"
 
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 msgid "This Month"
-msgstr ""
+msgstr "Den här månaden"
 
 msgid "This Week"
-msgstr ""
+msgstr "Den här veckan"
 
 msgid "Today"
-msgstr ""
+msgstr "Idag"
 
 msgid "Travel & Events"
-msgstr ""
+msgstr "Resa & Äventyr"
 
 msgid "Trying to download the Youtube feed entries. Please wait..."
-msgstr ""
+msgstr "Försöker ladda ner Youtube feed poster. Vänligen vänta..."
 
 msgid "Trying to download the Youtube search results. Please wait..."
-msgstr ""
+msgstr "Försöker ladda ner Youtube sökresultat. Vänligen vänta..."
 
 msgid "United States"
-msgstr ""
+msgstr "USA"
 
 msgid "View Count"
-msgstr ""
+msgstr "Visa antal"
 
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
+
