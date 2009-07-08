@@ -977,7 +977,6 @@ function incomingMovieList(request){
 					'escapedTitle': escape(movie.getTitle()),
 					'description': movie.getDescription(), 
 					'descriptionextended': movie.getDescriptionExtended(),
-					'filelink': String(movie.getFilename()).substr(17,movie.getFilename().length),
 					'filename': String(movie.getFilename()),
 					'filesize': movie.getFilesizeMB(),
 					'tags': movie.getTags().join(', ') ,

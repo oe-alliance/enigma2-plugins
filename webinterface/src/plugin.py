@@ -121,7 +121,7 @@ def startServerInstance(session, ipaddress, port, useauth=False, usessl=False):
 			portal = Portal(HTTPAuthRealm())
 			portal.registerChecker(PasswordDatabase())
 			root = wrapper.HTTPAuthResource(toplevel, (basic.BasicCredentialFactory(socket_gethostname()),), portal, (IHTTPUser,))
-			site = server.Site(root)
+			site = server.Site(root)			
 		else:
 			site = server.Site(toplevel)
 		try:

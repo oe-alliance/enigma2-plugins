@@ -9,20 +9,24 @@ class FileStreamer(resource.Resource):
 		try:
 			w1 = req.uri.split("?")[1]
 			w2 = w1.split("&")
-			parts= {}
+			parts = {}
 			for i in w2:
 				w3 = i.split("=")
 				parts[w3[0]] = w3[1]
 		except:
 			return http.Response(responsecode.OK, stream="no file given with file=???")
-		root = "/hdd/movie/"
+		dir = ""
+		
 		if parts.has_key("root"):
 			#root = parts["root"].replace("%20"," ")
-			root = unquote_plus(parts["root"])
+			dir = unquote_plus(parts["root"])
+		if parts.has_key("dir"):
+			dir = unquote_plus(parts["dir"])
 		if parts.has_key("file"):
 			#filename = parts["file"].replace("%20"," ")
 			filename = unquote_plus(parts["file"])
-			path = root+filename
+			path = "%s%s" %(dir, filename)
+			
 			if os_path.exists(path):
 				s = stream.FileStream(open(path,"r"))
 				type = path.split(".")[-1]
