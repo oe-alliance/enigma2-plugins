@@ -25,7 +25,11 @@ class FileStreamer(resource.Resource):
 		if parts.has_key("file"):
 			#filename = parts["file"].replace("%20"," ")
 			filename = unquote_plus(parts["file"])
+			
 			path = "%s%s" %(dir, filename)
+			#dirty backwards compatibility hack
+			if not os_path.exists(path):
+				path = "/hdd/movie/%s" %filename
 			
 			if os_path.exists(path):
 				s = stream.FileStream(open(path,"r"))
