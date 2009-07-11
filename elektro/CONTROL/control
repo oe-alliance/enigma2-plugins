@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-elektro
+Version: 20090711
+Description: Automatically shut down your box when you don't need it.
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: Morty <morty@gmx.net>
+Homepage: http://wiki.blue-panel.com/index.php/Elektro
+Depends: enigma2
+Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
