@@ -1,0 +1,300 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 plugin youtubeplayer italian locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-10-15 15:54+0100\n"
+"PO-Revision-Date: 2008-10-15 15:54+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer\n"
+"X-Poedit-SearchPath-0: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer\n"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/plugin.py:94
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/plugin.py:114
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:442
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:464
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:486
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:512
+msgid "Login not successful"
+msgstr "Login fallito!"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/plugin.py:138
+msgid "Search and play YouTube movies"
+msgstr "Ricarcare e riprodurre filmati YouTube"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:79
+msgid "To use the selected feature you have to login to YouTube. Select a user-profile to login!"
+msgstr "Per utilizzare l'opzione prescelta è necessario effettuare il login a YouTube. Selezionare un profilo Utente!"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:81
+msgid "delete user"
+msgstr "Canc. User"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:82
+msgid "add user"
+msgstr "Agg. User"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:83
+msgid "edit user"
+msgstr "Mod. user"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:84
+msgid "set default"
+msgstr "Predefiniti"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserList.py:122
+#, python-format
+msgid "Really delete %(user)s?"
+msgstr "Cancellare %(user)s?"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:40
+msgid "Most Viewed"
+msgstr "Più visti"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:41
+msgid "Top Rated"
+msgstr "Più votati"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:42
+msgid "Recently Featured"
+msgstr "Aggiunti recentemente"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:43
+msgid "Watch On Mobile"
+msgstr "Visualizzare su dispositivo mobile"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:44
+msgid "Most Discussed"
+msgstr "Più discussi"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:45
+msgid "Top Favorites"
+msgstr "Top Preferiti"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:46
+msgid "Most Linked"
+msgstr "Più Linkati"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:47
+msgid "Most Responded"
+msgstr "Più affidabili"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeStdFeedSelection.py:48
+msgid "Most Recent"
+msgstr "Più recenti"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeSearchDialog.py:67
+msgid "Std.Feeds"
+msgstr "Feed Std."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeSearchDialog.py:68
+msgid "Search"
+msgstr "Cercare"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeSearchDialog.py:69
+msgid "Playlists"
+msgstr "Playlist"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeSearchDialog.py:70
+msgid "Favorites"
+msgstr "Preferiti"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeSearchDialog.py:73
+msgid "Search Term(s)"
+msgstr "Criteri di ricerca"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserConfig.py:119
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:53
+msgid "Cancel"
+msgstr "Annullare"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserConfig.py:120
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:54
+msgid "Save"
+msgstr "Salvare"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserConfig.py:125
+msgid "User Profile Name"
+msgstr "Profilo utente"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserConfig.py:126
+msgid "E-Mail Address"
+msgstr "Indirizzo E-Mail"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeUserConfig.py:127
+msgid "Password"
+msgstr "Password"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubePlayList.py:57
+msgid "Delete Playlist"
+msgstr "Cancellare Playlist"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubePlayList.py:58
+msgid "Add new Playlist"
+msgstr "Aggiungere nuova Playlist"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubePlayList.py:87
+#, python-format
+msgid "Really delete %(playlist)s?"
+msgstr "Cancellare %(playlist)s?"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:83
+msgid "Duration"
+msgstr "Durata"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:86
+msgid "Rate"
+msgstr "Valutaz."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:90
+msgid "Ratings"
+msgstr "Voti"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:93
+msgid "Favorited"
+msgstr "Preferito"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:96
+msgid "Views"
+msgstr "Visite"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:99
+msgid "Author:"
+msgstr "Autore:"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:102
+msgid "Added"
+msgstr "Aggiunto"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:105
+msgid "Category"
+msgstr "Categoria"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:107
+msgid "Tags"
+msgstr "Tags"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:211
+msgid "Select a VLC-Server"
+msgstr "Selez. Server VLC"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:212
+msgid "New YouTube search"
+msgstr "Nuova ricerca"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:217
+msgid "Total results"
+msgstr "Trovati"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:220
+msgid "Shown"
+msgstr "Elencati"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:253
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:264
+msgid "Load further entries of current Feed?"
+msgstr "Caricare altre voci dal Feed corrente?"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:312
+msgid "Searching, be patient ..."
+msgstr "Ricerca in corso, pazientare..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:324
+msgid "Loading playlist, be patient ..."
+msgstr "Caricamento Playlist in corso, pazientare..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:335
+msgid "Loading favorits, be patient ..."
+msgstr "Caricamento Preferiti in corso, pazientare..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:341
+msgid "Loading standard feed, be patient ..."
+msgstr "Caricamento feed standard in corso, pazientare..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:362
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:370
+msgid "Loading additional videos, be patient ..."
+msgstr "Caricamento video aggiuntivi in corso, pazientare..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:374
+msgid "Loading related videos, be patient ..."
+msgstr "Caricamento video correlati in corso, pazientare..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:379
+msgid "Loading response videos, be patient ..."
+msgstr "Caricamento risposte video in corso, pazientare..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:386
+msgid "Back in history, be patient ..."
+msgstr "Indietro nella History, pazientare..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:392
+msgid "Forward in history, be patient ..."
+msgstr "Avanti nella History, pazientare..."
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:570
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:609
+msgid "Show video detail info"
+msgstr "Informazioni sul video"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:572
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:611
+msgid "Remove from favorites"
+msgstr "Cancellare da preferiti"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:574
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:613
+msgid "Add to favorites"
+msgstr "Aggiungere a preferiti"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:577
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:615
+msgid "Remove from playlist"
+msgstr "Cancellare dalla Playlist"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:579
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:617
+msgid "Add to playlist"
+msgstr "Aggiungere alla Playlist"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:580
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:618
+msgid "Get related videos"
+msgstr "Video correlati"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:581
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeList.py:619
+msgid "Get video responses"
+msgstr "Risposte disponibili"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:36
+msgid "Name"
+msgstr "Nome"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:37
+msgid "Description"
+msgstr "Descrizione"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:59
+msgid "Playlist Name"
+msgstr "Titolo Playlist"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:60
+msgid "Playlist Description"
+msgstr "Descrizione Playlist"
+
+#: /home/dario/build800/build/tmp/work/enigma2-plugins-2.5cvs20081016-r0/enigma2-plugins/youtubeplayer/src/YouTubeAddPlayList.py:61
+msgid "private"
+msgstr "Privato"
+
