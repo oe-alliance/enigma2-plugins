@@ -27,6 +27,19 @@
 	<country code="+1">
 		<website name="whitepages.com" url="http://www.whitepages.com/search/ReversePhone?phone=$NUMBER" prefix="1">
 			<entry>
+				<firstname>'FIRST'\s*: &quot;([^&quot;]*)&quot;,</firstname>
+				<lastname>'LAST'\s*: &quot;([^&quot;]*)&quot;,</lastname>
+				<street>'ADDRESS'\s*: &quot;([^&quot;]*)&quot;,</street>
+				<city>'CITY'\s*: &quot;([^&quot;]*)&quot;,</city>
+				<zipcode>'ZIP'\s*: &quot;([^&quot;]*)&quot;,</zipcode>
+			</entry>
+			<entry>
+				<name>&lt;p class=&quot;name&quot;&gt;&lt;a href[^&gt;]*&gt;([^&lt;]*)&lt;/a&gt;&lt;/p&gt;</name>
+				<street>&lt;li class=&quot;col_address&quot;&gt;\s*&lt;span.*?&lt;/span&gt;\s*([^&lt;\n]*)\s*&lt;/li&gt;</street>
+				<city>&lt;li class=&quot;col_location&quot;&gt;\s*([^&lt;\n]*)\s*&lt;/li&gt;</city>
+				<zipcode>()</zipcode>
+			</entry>
+			<entry>
 				<name>&lt;a href=&quot;[^&quot;]*&quot; class=&quot;fn n&quot; title=&quot;[^&quot;]*&quot;&gt;([^&lt;]*)&lt;/a&gt;</name>
 				<street>&lt;span class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
 				<city>&lt;span class=&quot;locality&quot;&gt;([^&lt;]*)&lt;/span&gt;</city>
