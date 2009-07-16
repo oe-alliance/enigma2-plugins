@@ -114,11 +114,14 @@ class IMDB(Screen):
 			<widget name="stars" position="340,40" size="210,21" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/IMDb/starsbar_filled.png" transparent="1" />
 		</screen>"""
 
-	def __init__(self, session, eventName, args = None):
-		self.skin = IMDB.skin
+	def __init__(self, session, eventName, callbackNeeded=False):
 		Screen.__init__(self, session)
 
 		self.eventName = eventName
+		
+		self.callbackNeeded = callbackNeeded
+		self.callbackData = ""
+		self.callbackGenre = ""
 
 		self.dictionary_init()
 
@@ -155,10 +158,10 @@ class IMDB(Screen):
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MovieSelectionActions", "DirectionActions"],
 		{
 			"ok": self.showDetails,
-			"cancel": self.close,
+			"cancel": self.exit,
 			"down": self.pageDown,
 			"up": self.pageUp,
-			"red": self.close,
+			"red": self.exit,
 			"green": self.showMenu,
 			"yellow": self.showDetails,
 			"blue": self.showExtras,
@@ -167,6 +170,12 @@ class IMDB(Screen):
 		}, -1)
 
 		self.getIMDB()
+
+	def exit(self):
+		if self.callbackNeeded:
+			self.close([self.callbackData, self.callbackGenre])
+		else:
+			self.close()
 
 	def dictionary_init(self):
 		syslang = language.getLanguage()
@@ -423,8 +432,10 @@ class IMDB(Screen):
 				genres = genremask.finditer(genreblock[0])
 				if genres:
 					Detailstext += "Genre: "
+					self.callbackGenre = ""
 					for x in genres:
 						Detailstext += x.group(1) + " "
+						self.callbackGenre += x.group(1) + " "
 
 			for category in ("director", "creator", "writer", "premiere", "seasons", "country"):
 				if self.generalinfos.group('g_'+category):
@@ -482,6 +493,7 @@ class IMDB(Screen):
 				self["key_blue"].setText(_("Extra Info"))
 
 		self["detailslabel"].setText(Detailstext)
+		self.callbackData = Detailstext
 
 	def IMDBPoster(self,string):
 		self["statusbar"].setText(_("IMDb Details parsed"))
