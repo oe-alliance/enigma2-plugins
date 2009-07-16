@@ -1,5 +1,5 @@
 /**
- * RUZEE.ShadedBorder 0.6.1
+ * RUZEE.ShadedBorder 0.6.2
  * (c) 2006 Steffen Rusitschka
  *
  * RUZEE.ShadedBorder is freely distributable under the terms of an MIT-style license.
@@ -206,6 +206,7 @@ create: function(opts) {
   corner(tl, true, true); corner(tr, true, false);
   corner(bl, false, true); corner(br, false, false);
   mid(mw); tb(t, true); tb(b, false);
+  needsCloning = false;
 
   return {
     render: function(el) {
@@ -228,27 +229,40 @@ create: function(opts) {
 
       var iel = el.firstChild;
 
-      var twc = tw.cloneNode(true);
-      var mwc = mw.cloneNode(true);
-      var bwc = bw.cloneNode(true);
+      var twc = needsCloning ? tw.cloneNode(true) : tw;
+      var mwc = needsCloning ? mw.cloneNode(true) : mw;
+      var bwc = needsCloning ? bw.cloneNode(true) : bw;
+      var tlc = needsCloning ? tl.cloneNode(true) : tl;
+      var trc = needsCloning ? tr.cloneNode(true) : tr;
+      var blc = needsCloning ? bl.cloneNode(true) : bl;
+      var brc = needsCloning ? br.cloneNode(true) : br;
       
-      el.insertBefore(tl.cloneNode(true), iel); el.insertBefore(tr.cloneNode(true), iel);
-      el.insertBefore(bl.cloneNode(true), iel); el.insertBefore(br.cloneNode(true), iel);
+      el.insertBefore(tlc, iel); el.insertBefore(trc, iel);
+      el.insertBefore(blc, iel); el.insertBefore(brc, iel);
       el.insertBefore(twc, iel); el.insertBefore(mwc, iel);
       el.insertBefore(bwc, iel);
 
       if (isie6) {
-        el.onmouseover=function() { this.className+=" hover"; }
-        el.onmouseout=function() { this.className=this.className.replace(/ hover/,""); }
+        el.onmouseover=function() { this.className += " hover"; }
+        el.onmouseout=function() { this.className = this.className.replace(/ hover/,""); }
       }
       if (isie) {
         function resize() {
           twc.style.width = bwc.style.width = mwc.style.width = el.offsetWidth + "px";
-          mwc.firstChild.style.height = el.offsetHeight + "px";
+          if (isie6) {
+            mwc.firstChild.style.height = el.offsetHeight + "px";
+          } else {
+            for (var i=0; i<mwc.childNodes.length; ++i) {
+              mwc.childNodes[i].style.height = (el.offsetHeight - bh - th)  + "px";
+            }
+          }
+          trc.style.right = brc.style.right = null;
+          trc.style.left  = brc.style.left  = (el.offsetWidth - rw) + "px";
         }
         el.onresize=resize;
         resize();
       }
+      needsCloning = true;
     }
   };
 }
