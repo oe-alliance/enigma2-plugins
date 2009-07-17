@@ -149,7 +149,8 @@ class RSSSetup(ConfigListScreen, Screen):
 
 	def ok(self):
 		id = self["config"].getCurrentIndex()
-		self.session.openWithCallback(self.refresh, RSSFeedEdit, id)
+		if id < len(config.plugins.simpleRSS.feed):
+			self.session.openWithCallback(self.refresh, RSSFeedEdit, id)
 
 	def refresh(self):
 		# TODO: anything to be done here?
