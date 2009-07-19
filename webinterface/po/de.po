@@ -78,7 +78,7 @@ msgstr "Port"
 
 #: src/WebIfConfig.py:144
 msgid "Authorization"
-msgstr "Authorisierung"
+msgstr "Autorisierung"
 
 #: src/WebIfConfig.py:145
 msgid "SSL"
@@ -119,7 +119,7 @@ msgstr "Löschen"
 
 #: src/WebIfConfig.py:273
 msgid "Require Authorization"
-msgstr "Authorisierung erfolderlich"
+msgstr "Autorisierung erforderlich"
 
 #: src/WebIfConfig.py:274
 msgid "SSL Encryption"
