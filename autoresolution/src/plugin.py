@@ -39,8 +39,8 @@ config.plugins.autoresolution.showinfo = ConfigYesNo(default = True)
 config.plugins.autoresolution.testmode = ConfigYesNo(default = False)
 config.plugins.autoresolution.deinterlacer = ConfigSelection(default = "auto", choices =
 		[("auto", _("auto")), ("off", _("off")), ("on", _("on"))])
-config.plugins.autoresolution.delay_switch_mode = ConfigSelection(default = "500", choices = [
-		("500", _("immeadetly")), ("1000", "1 " + _("second")), ("2000", "2 " + _("seconds")), ("3000", "3 " + _("seconds")),
+config.plugins.autoresolution.delay_switch_mode = ConfigSelection(default = "1000", choices = [
+		("1000", "1 " + _("second")), ("2000", "2 " + _("seconds")), ("3000", "3 " + _("seconds")),
 		("4000", "4 " + _("seconds")), ("5000", "5 " + _("seconds")), ("6000", "6 " + _("seconds")), ("7000", "7 " + _("seconds")),
 		("8000", "8 " + _("seconds")), ("9000", "9 " + _("seconds")), ("10000", "10 " + _("seconds"))])
 
@@ -69,15 +69,10 @@ class AutoRes(Screen):
 				iPlayableService.evVideoSizeChanged: self.__evVideoSizeChanged,
 				iPlayableService.evVideoProgressiveChanged: self.__evVideoProgressiveChanged,
 				iPlayableService.evVideoFramerateChanged: self.__evVideoFramerateChanged,
-				iPlayableService.evStart: self.__evStart
 			})
 		self.timer = eTimer()
 		self.timer.callback.append(self.determineContent)
 		self.lastmode = config.av.videomode[config.av.videoport.value].value
-	
-	def __evStart(self):
-		if self.timer.isActive():
-			self.timer.stop()
 
 	def __evVideoFramerateChanged(self):
 		print "[AutoRes] got event evFramerateChanged"
