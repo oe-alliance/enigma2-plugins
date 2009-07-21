@@ -85,7 +85,6 @@ public:
 	RESULT pause();
 	RESULT unpause();
 
-
 	// iSeekableService
 	RESULT getLength(pts_t &SWIG_OUTPUT);
 	RESULT seekTo(pts_t to);
@@ -113,7 +112,7 @@ private:
 	friend class eServiceFactoryTS;
 	std::string m_filename;
 	int m_vpid, m_apid;
-	int m_srcfd, m_destfd;
+	int m_destfd;
 	ePtr<iDVBDemux> m_decodedemux;
 	ePtr<iTSMPEGDecoder> m_decoder;
 	ePtr<eStreamThread> m_streamthread;
