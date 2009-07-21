@@ -38,6 +38,9 @@ Release infos
       available
 3.3.2 Fixed some problems shutting down on latest
 	  versions of enigma2.
+3.3.3 Added patch to installer to fix enigma2. It 
+	  should now be possible to run Elektro and 
+	  EPG refresh in parallel.	  
 ====================================================
 The English Documentation follows the German one 
 ====================================================
@@ -53,9 +56,8 @@ wirklich unterstützt.
 2) Installation
 ---------------
 
-Zuerst kopiert das elektro*.ipk File vom 
-elektro*.zip auf /tmp mit ftp (TCP/IP muss
-natürlich schon funktionieren). 
+Zuerst kopiert das elektro*.ipk File vom  auf /tmp mit 
+ftp (TCP/IP muss natürlich schon funktionieren). 
 
 Wenn Ihr ein Image geflashed habt, das ein Blue 
 Pannel hat könnt Ihr damit mit Manual Install das
@@ -67,11 +69,9 @@ Kommandos im Telnet:
 cd /
 ipkg install /tmp/elektro*.ipk
 
-Beim ipk install wird enigma auch gleich 
-restarted, um das Elektro Plugin bei den 
-Spielen/Erweiterungen angezeigt zu bekommen. 
-Wenn es dort nicht auftaucht, 
-probieren sie einen manuellen Reboot.
+Damit Elektro zuverlässig funktioniert muss die Box 
+neu gestartet werden. 
+
 
 3) Funktionsweise
 -----------------
@@ -165,10 +165,9 @@ following commands in a Telnet session:
 cd /
 ipkg install /tmp/elektro*.ipk
 
-The ipkg install will also restart enigma for 
-you to get the Elektro Plugin shown in addons 
-menu. If it doesn't show up try to reboot 
-manually.
+To ensure proper operation of Elektro please reboot
+the box. 
+
 
 3) Mode of operation    
 --------------------

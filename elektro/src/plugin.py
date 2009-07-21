@@ -76,7 +76,7 @@ except IOError:
 # Globals
 session = None
 ElektroWakeUpTime = -1
-elektro_pluginversion = "3.3.2"
+elektro_pluginversion = "3.3.3"
 elektro_readme = "/usr/lib/enigma2/python/Plugins/Extensions/Elektro/readme.txt"
 elektrostarttime = 60 
 elektrosleeptime = 5

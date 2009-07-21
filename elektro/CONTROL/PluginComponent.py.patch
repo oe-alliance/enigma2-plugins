@@ -1,0 +1,11 @@
+--- /usr/lib/enigma2/python/Components/PluginComponent.py	2009-03-31 19:32:46.000000000 +0200
++++ /usr/lib/enigma2/python/Components/PluginComponent.py	2009-07-20 20:02:32.000000000 +0200
+@@ -121,7 +121,7 @@
+ 		wakeup = -1
+ 		for p in self.pluginList:
+ 			current = p.getWakeupTime()
+-			if current > -1 and wakeup < current:
++			if current > -1 and (wakeup > current or wakeup == -1):
+ 				wakeup = current
+ 		return int(wakeup)
+ 
