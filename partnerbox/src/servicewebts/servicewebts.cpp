@@ -122,13 +122,13 @@ eServiceWebTS::eServiceWebTS(const eServiceReference &url): m_pump(eApp, 1)
 	m_apid = url.getData(1) == 0 ? 0x45 : url.getData(1);
 	m_state = stIdle;
 	m_audioInfo = 0;
+	m_destfd = -1;
 }
 
 eServiceWebTS::~eServiceWebTS()
 {
 	eDebug("ServiceWebTS destruct!");
-	if (m_state == stRunning)
-		stop();
+	stop();
 }
 
 DEFINE_REF(eServiceWebTS);
@@ -263,13 +263,22 @@ RESULT eServiceWebTS::start()
 	ePtr<eDVBResourceManager> rmgr;
 	eDVBResourceManager::getInstance(rmgr);
 	eDVBChannel dvbChannel(rmgr, 0);
+	if (m_destfd == -1)
+	{
+		m_destfd = ::open("/dev/misc/pvr", O_WRONLY);
+		if (m_destfd < 0)
+		{
+			eDebug("Cannot open /dev/misc/pvr");
+			return -1;
+		}
+	}
 	if (dvbChannel.getDemux(m_decodedemux, iDVBChannel::capDecode) != 0) {
 		eDebug("Cannot allocate decode-demux");
-		return 1;
+		return -1;
 	}
 	if (m_decodedemux->getMPEGDecoder(m_decoder, 1) != 0) {
 		eDebug("Cannot allocate MPEGDecoder");
-		return 1;
+		return -1;
 	}
 	//m_decoder->setVideoPID(m_vpid, eDVBVideo::MPEG2);
 	//m_decoder->setAudioPID(m_apid, eDVBAudio::aMPEG);
@@ -285,6 +294,11 @@ RESULT eServiceWebTS::start()
 
 RESULT eServiceWebTS::stop()
 {
+	if (m_destfd >= 0)
+	{
+		::close(m_destfd);
+		m_destfd = -1;
+	}
 	if (m_state != stRunning)
 		return -1;
 	printf("TS: %s stop\n", m_filename.c_str());
@@ -372,15 +386,8 @@ RESULT eServiceWebTS::unpause()
 		eDebug("Cannot open source stream: %s", m_filename.c_str());
 		return 1;
 	}
-
-	int destfd = ::open("/dev/misc/pvr", O_WRONLY);
-	if (destfd < 0) {
-		eDebug("Cannot open /dev/misc/pvr");
-		::close(srcfd);
-		return 1;
-	}
 	//m_decodedemux->flush();
-	m_streamthread->start(srcfd, destfd);
+	m_streamthread->start(srcfd, m_destfd);
 	//m_decoder->unfreeze();
 	return 0;
 }
@@ -508,6 +515,7 @@ void eStreamThreadWeb::start(int srcfd, int destfd) {
 	m_audioInfo = 0;
 	run(IOPRIO_CLASS_RT);
 }
+
 void eStreamThreadWeb::stop() {
 	m_stop = true;
 	kill();
@@ -717,8 +725,6 @@ void eStreamThreadWeb::thread() {
 			}
 		}
 		if (eof && (r==w)) {
-			::close(m_destfd);
-			m_destfd = -1;
 			::close(m_srcfd);
 			m_srcfd = -1;
 			m_messagepump.send(evtEOS);
@@ -730,7 +736,6 @@ void eStreamThreadWeb::thread() {
 
 void eStreamThreadWeb::thread_finished() {
 	if (m_srcfd >= 0) ::close(m_srcfd);
-	if (m_destfd >= 0) ::close(m_destfd);
 	eDebug("eStreamThreadWeb closed");
 }
 

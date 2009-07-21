@@ -138,7 +138,7 @@ private:
 	friend class eServiceFactoryWebTS;
 	std::string m_filename;
 	int m_vpid, m_apid;
-	int m_srcfd, m_destfd;
+	int m_destfd;
 	ePtr<iDVBDemux> m_decodedemux;
 	ePtr<iTSMPEGDecoder> m_decoder;
 	ePtr<eStreamThreadWeb> m_streamthread;
