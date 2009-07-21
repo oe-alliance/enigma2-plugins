@@ -257,7 +257,8 @@ RESULT eServiceTS::start()
 	if (m_destfd == -1)
 	{
 		m_destfd = ::open("/dev/misc/pvr", O_WRONLY);
-		if (m_destfd < 0) {
+		if (m_destfd < 0)
+		{
 			eDebug("Cannot open /dev/misc/pvr");
 			return -1;
 		}
@@ -284,7 +285,10 @@ RESULT eServiceTS::start()
 RESULT eServiceTS::stop()
 {
 	if (m_destfd >= 0)
+	{
 		::close(m_destfd);
+		m_destfd = -1;
+	}
 	if (m_state != stRunning)
 		return -1;
 	printf("TS: %s stop\n", m_filename.c_str());
