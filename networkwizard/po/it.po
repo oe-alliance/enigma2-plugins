@@ -7,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Enigma2 Networkwizard italian locale\n"
+"Project-Id-Version: Enigma2 - networkwizard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-14 11:33+0100\n"
-"PO-Revision-Date: 2008-11-14 12:24+0100\n"
+"POT-Creation-Date: 2009-05-31 00:09+0200\n"
+"PO-Revision-Date: 2009-05-31 02:27+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,45 +20,47 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /home/dario/Plugins/networkwizard\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/networkwizard\n"
 
 #: ../src/NetworkWizard.py:77
 #: ../src/
 msgid "Exit network wizard"
-msgstr "Uscire da Configurazione Guidata"
+msgstr "Uscire dalla configurazione guidata"
 
 #: ../src/plugin.py:19
 #: ../src/plugin.py:28
 #: ../src/
 msgid "Network Wizard"
-msgstr "Configurazione Guidata"
+msgstr "Configurazione guidata"
 
-#: ../src/NetworkWizard.py:182
-#: ../src/NetworkWizard.py:183
+#: ../src/NetworkWizard.py:205
+#: ../src/NetworkWizard.py:206
 msgid "No networks found"
-msgstr "Nessuna Rete rilevata!"
+msgstr "Nessuna rete rilevata!"
 
-#: ../src/NetworkWizard.py:101
-#: ../src/NetworkWizard.py:104
-#: ../src/NetworkWizard.py:107
-#: ../src/NetworkWizard.py:110
+#: ../src/NetworkWizard.py:103
+#: ../src/NetworkWizard.py:113
+#: ../src/NetworkWizard.py:123
+#: ../src/NetworkWizard.py:133
 msgid "Please wait while we prepare your network interfaces..."
 msgstr "Attendere: preparazione interfacce di rete in corso..."
 
-#: ../src/NetworkWizard.py:139
-#: ../src/NetworkWizard.py:159
+#: ../src/NetworkWizard.py:162
+#: ../src/NetworkWizard.py:182
 msgid "Please wait while we test your network..."
 msgstr "Attendere: test della rete in corso..."
 
-#: ../src/NetworkWizard.py:198
+#: ../src/NetworkWizard.py:221
 msgid "enter hidden network SSID"
 msgstr "Inserire SSID di rete nascosto"
 
-#: ../src/NetworkWizard.py:198
-#: ../src/NetworkWizard.py:199
+#: ../src/NetworkWizard.py:221
+#: ../src/NetworkWizard.py:222
 msgid "hidden..."
 msgstr "Nascosto..."
 
-#: ../src/NetworkWizard.py:182
+#: ../src/NetworkWizard.py:205
 msgid "unavailable"
 msgstr "Non disponibile!"
 
@@ -68,7 +70,7 @@ msgstr "Configurare l'interfaccia."
 
 #: ../src/
 msgid "Configure nameservers"
-msgstr "Configurare i Nameserver"
+msgstr "Configurare i nameserver"
 
 #: ../src/
 msgid "Configure your internal LAN"
@@ -87,7 +89,7 @@ msgid ""
 "Please configure or verify your Nameservers by filling out the required values.\n"
 "When you are ready press OK to continue."
 msgstr ""
-"Configurare o verificare i Nameserver inserendo i parametri richiesti.\n"
+"Configurare o verificare i nameserver inserendo i parametri richiesti.\n"
 "Quando pronti, premere OK per continuare."
 
 #: ../src/
@@ -128,14 +130,14 @@ msgstr "Selezionare l'interfaccia"
 
 #: ../src/
 msgid "Select wireless network"
-msgstr "Selezionare una Rete Wireless"
+msgstr "Selezionare una rete wireless"
 
 #: ../src/
 msgid ""
 "Thank you for using the wizard.\n"
 "Please press OK to continue."
 msgstr ""
-"Grazie per aver utilizzato questa Configurazione guidata.\n"
+"Grazie per aver utilizzato questa configurazione guidata.\n"
 "Premere OK per continuare."
 
 #: ../src/
@@ -143,7 +145,7 @@ msgid ""
 "The wireless LAN plugin is not installed!\n"
 "Please install it and choose what you want to do next."
 msgstr ""
-"Il plugin 'WirelessLan' non è installato!\n"
+"Il plugin \"WirelessLan\" non è installato!\n"
 "Installarlo per poterlo configurare."
 
 #: ../src/

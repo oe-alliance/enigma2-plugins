@@ -77,7 +77,7 @@ msgid "Network:"
 msgstr "Netzwerk"
 
 msgid "No"
-msgstr "Nein"
+msgstr "Kein(e)"
 
 msgid "No Connection"
 msgstr "Keine Verbindung"
