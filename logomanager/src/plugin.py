@@ -27,7 +27,7 @@ def start_from_filescan(**kwargs):
     from Components.Scanner import Scanner, ScanPath
     print "start_from_filescan",kwargs
     return \
-        Scanner(mimetypes="image/mvi",
+        Scanner(mimetypes=["image/jpeg","image/mvi"],
             paths_to_scan =
                 [
                     ScanPath(path = "", with_subdirs = False),
