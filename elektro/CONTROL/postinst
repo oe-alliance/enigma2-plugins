@@ -7,7 +7,7 @@ if [ `grep 'if current > -1 and wakeup < current:' /usr/lib/enigma2/python/Compo
    ls -ll /usr/lib/enigma2/python/Components/PluginComponent.py*
    
    echo "Patching"
-   patch -p0 < PluginComponent.py.patch
+   patch -p0 < /usr/lib/enigma2/python/Plugins/Extensions/Elektro/PluginComponent.py.patch
    ls /usr/lib/enigma2/python/Components/PluginComponent.py*
 else
    echo "PluginComponent.py already patched"
