@@ -14,7 +14,7 @@ def localeInit():
 def _(txt):
     t = gettext.dgettext(PluginLanguageDomain, txt)
     if t == txt:
-        print "[AC3LipSync] fallback to default translation for", txt
+        print "[AC3LipSync] fallback to default translation for ", txt
         t = gettext.gettext(txt)
     return t
 

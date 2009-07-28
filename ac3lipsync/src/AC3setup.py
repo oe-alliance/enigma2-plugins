@@ -39,17 +39,17 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
 
         # nun erzeugen wir eine liste von elementen fuer die menu liste.
         self.list = [
-            getConfigListEntry(_("Minimum delay"), config.plugins.AC3LipSync.lowerBound),
-            getConfigListEntry(_("Maximum delay"), config.plugins.AC3LipSync.upperBound),
+            getConfigListEntry(_("Outer Bound (+/-)"), config.plugins.AC3LipSync.outerBounds),
             getConfigListEntry(_("Step in ms for arrow keys"), config.plugins.AC3LipSync.arrowStepSize),
-            getConfigListEntry(_("Wait time in ms before activation:"), config.plugins.AC3LipSync.activationDelay)
+            getConfigListEntry(_("Wait time in ms before activation:"), config.plugins.AC3LipSync.activationDelay),
+            getConfigListEntry(_("Step in ms for keys '%s'") % ("1/3"), config.plugins.AC3LipSync.stepSize13),
+            getConfigListEntry(_("Step in ms for keys '%s'") % ("4/6"), config.plugins.AC3LipSync.stepSize46),
+            getConfigListEntry(_("Step in ms for keys '%s'") % ("7/9"), config.plugins.AC3LipSync.stepSize79),
+            getConfigListEntry(_("Step in ms for key %i") % (2), config.plugins.AC3LipSync.absoluteStep2),
+            getConfigListEntry(_("Step in ms for key %i") % (5), config.plugins.AC3LipSync.absoluteStep5),
+            getConfigListEntry(_("Step in ms for key %i") % (8), config.plugins.AC3LipSync.absoluteStep8)
         ]
         
-        self.list.extend([
-            getConfigListEntry(_("Step in ms for key %i") % (i), config.plugins.AC3LipSync.keySteps[i].stepSize)
-                for i in range(1 , 10)
-        ])
-
         ConfigListScreen.__init__(self, self.list)
 
         self["config"].list = self.list
@@ -57,7 +57,7 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
         # DO NOT ASK.
         self["key_red"] = Button(_("Cancel"))
         self["key_green"] = Button(_("Save"))
-        self["key_yellow"] = Button(_("Recalculate..."))
+        self["key_yellow"] = Button(_(" "))
         self["key_blue"] = Button(" ")
 
         self["setupActions"] = NumberActionMap(["SetupActions", "ColorActions"],
@@ -66,26 +66,10 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
             "cancel": self.cancel,
             "green": self.save,
             "red": self.cancel,
-            "yellow": self.recalculateKeys,
             "ok": self.save,
         }, -2)
 
-    def recalculateKeys(self):
-        iLowerBound = int(config.plugins.AC3LipSync.lowerBound.getValue())
-        iUpperBound = int(config.plugins.AC3LipSync.upperBound.getValue())
-        iStepSize = (iUpperBound - iLowerBound)/9
-        for i in range(1 , 10):
-            config.plugins.AC3LipSync.keySteps[i].stepSize.setValue(i*iStepSize+iLowerBound)
-        self["config"].setList(self.list)
-
     def save(self):
-        iLowerBound = int(config.plugins.AC3LipSync.lowerBound.getValue())
-        iUpperBound = int(config.plugins.AC3LipSync.upperBound.getValue())
-        iStepSize = (iUpperBound - iLowerBound)/9
-        config.plugins.AC3LipSync.stepSize.setValue(iStepSize)
-        config.plugins.AC3LipSync.stepSize.save()
-        iUpperBound = iLowerBound + (iStepSize*9)
-        config.plugins.AC3LipSync.upperBound.setValue(iUpperBound)
         for x in self.list:
             x[1].save()
         self.close()
@@ -94,4 +78,3 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
         for x in self["config"].list:
             x[1].cancel()
         self.close()
-

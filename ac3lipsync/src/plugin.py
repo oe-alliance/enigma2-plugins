@@ -5,17 +5,15 @@ import AC3main
 import AC3setup
 
 config.plugins.AC3LipSync = ConfigSubsection()
-config.plugins.AC3LipSync.lowerBound = ConfigInteger(default = 0, limits = (0,10000))
-config.plugins.AC3LipSync.upperBound = ConfigInteger(default = 405, limits = (0,10000))
-config.plugins.AC3LipSync.arrowStepSize = ConfigInteger(default = 5, limits = (0,10000))
-config.plugins.AC3LipSync.stepSize = ConfigInteger(default = 45, limits = (0,10000))
-config.plugins.AC3LipSync.activationDelay = ConfigInteger(default = 800, limits = (0,10000))
-config.plugins.AC3LipSync.keySteps = ConfigSubList()
-for i in range(0, 10):
-    s = ConfigSubsection()
-    s.stepSize = ConfigInteger(default = i*45, limits = (0,10000))
-    config.plugins.AC3LipSync.keySteps.append(s)
-    del s
+config.plugins.AC3LipSync.outerBounds = ConfigInteger(default = 1000, limits = (-10000,10000))
+config.plugins.AC3LipSync.arrowStepSize = ConfigInteger(default = 5, limits = (-10000,10000))
+config.plugins.AC3LipSync.activationDelay = ConfigInteger(default = 800, limits = (-10000,10000))
+config.plugins.AC3LipSync.stepSize13 = ConfigInteger(default = 50, limits = (-10000,10000))
+config.plugins.AC3LipSync.stepSize46 = ConfigInteger(default = 200, limits = (-10000,10000))
+config.plugins.AC3LipSync.stepSize79 = ConfigInteger(default = 500, limits = (-10000,10000))
+config.plugins.AC3LipSync.absoluteStep2 = ConfigInteger(default = 0, limits = (-10000,10000))
+config.plugins.AC3LipSync.absoluteStep5 = ConfigInteger(default = 0, limits = (-10000,10000))
+config.plugins.AC3LipSync.absoluteStep8 = ConfigInteger(default = 0, limits = (-10000,10000))
 
 def main(session, **kwargs):
 #    reload(AC3main)
