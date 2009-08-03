@@ -88,6 +88,8 @@ class AntiScrollOverlay(Screen):
                 self.resize(data[0],data[1])
                 self.move(data[2],data[3])
                 self.show()
+            else:
+                self.hide()
         else:
             self.hide()
 
