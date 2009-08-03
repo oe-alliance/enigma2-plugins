@@ -11,7 +11,6 @@ from enigma import iPlayableService
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSubList, ConfigInteger, ConfigYesNo, ConfigText, ConfigSelection
 from Components.ConfigList import ConfigListScreen
-
 #############
 from enigma import ePoint, eSize
 
@@ -63,8 +62,8 @@ class AntiScrollOverlay(Screen):
     def __init__(self, session):
         self.size = [0,0]
         self.position = [0,0]
-        ss  ="<screen position=\"0,0\" size=\"0,0\" title=\"AntiScrollOverlay\"  flags=\"wfNoBorder\" zPosition=\"-1\">"
-        ss +="<widget name=\"label\" position=\"0,0\" size=\"0,0\"  backgroundColor=\"black\"  />"
+        ss  ="<screen position=\"0,0\" size=\"0,0\" title=\"AntiScrollOverlay\"  flags=\"wfNoBorder\" zPosition=\"-1\" backgroundColor=\"#FF000000\">"
+        ss +="<widget name=\"label\" position=\"1,1\" size=\"0,0\"  backgroundColor=\"#00000000\" />"
         ss +="</screen>"
         self.skin = ss
         self.session = session
@@ -98,7 +97,7 @@ class AntiScrollOverlay(Screen):
 
     def resize(self, w, h):
       self.instance.resize(eSize(*(w, h)))
-      self["label"].instance.resize(eSize(*(w, h)))
+      self["label"].instance.resize(eSize(*(w-2, h-2)))
 
 
 #############################
