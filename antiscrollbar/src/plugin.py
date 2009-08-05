@@ -71,7 +71,7 @@ class AntiScrollOverlay(Screen):
         self["label"] = Label()
         self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
             {
-                iPlayableService.evTunedIn: self.evStart,
+                iPlayableService.evUpdatedInfo: self.evStart,
                 iPlayableService.evEOF: self.hide,
             })
         self.hide()
