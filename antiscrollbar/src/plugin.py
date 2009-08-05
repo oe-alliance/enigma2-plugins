@@ -118,7 +118,7 @@ class AntiScrollConfig(ConfigListScreen, Screen):
     def __init__(self, session, args=0):
         Screen.__init__(self, session)
         l = [
-            getConfigListEntry(_("Start on Sessionstart"), config.plugins.Webinterface.enable),
+            getConfigListEntry(_("Start on Sessionstart"), config.plugins.antiscrollbar.autostart),
         ]
 
         ConfigListScreen.__init__(self, l)
