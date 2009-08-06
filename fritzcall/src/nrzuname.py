@@ -250,7 +250,7 @@ class ReverseLookupAndNotifier:
 				return text
 	
 		debug("[ReverseLookupAndNotifier] _gotPage")
-		found = re.match('.*content=".*?charset=([^"]+)"',page,re.S)
+		found = re.match('.*content=".*?charset=([^"]+)"',page)
 		if found:
 			debug("[ReverseLookupAndNotifier] Charset: " + found.group(1))
 			page = page.replace("\xa0"," ").decode(found.group(1), "replace")

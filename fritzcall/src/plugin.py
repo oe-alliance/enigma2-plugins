@@ -103,6 +103,10 @@ config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 config.plugins.FritzCall.fullscreen = ConfigEnableDisable(default=False)
 
 mountedDevs= [("/etc/enigma2", _("Flash"))]
+if os.path.isdir("/media/cf"):
+	mountedDevs.append(("/media/cf", _("Compact Flash")))
+if os.path.isdir("/media/usb"):
+	mountedDevs.append(("/media/usb", _("USB Device")))
 for p in harddiskmanager.getMountedPartitions(True):
 	mp = p.mountpoint[:-1]
 	if p.description:
@@ -1694,17 +1698,17 @@ class FritzOfferAction(Screen):
 			self["text"].setText(self.actualNumber + "\n\n" + _("Reverse searching..."))
 			ReverseLookupAndNotifier(self.actualNumber, self.lookedUp, "UTF-8", config.plugins.FritzCall.country.value)
 			return
-		if self.lookupState == 1 and os.path.exists(phonebookLocation + "/PhoneBook.csv"):
+		if self.lookupState == 1 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.csv")):
 			self["text"].setText(self.actualNumber + "\n\n" + _("Searching in Outlook export..."))
 			self.lookupState = 2
-			self.lookedUp(self.actualNumber, FritzOutlookCSV.findNumber(self.actualNumber, phonebookLocation + "/PhoneBook.csv")) #@UndefinedVariable
+			self.lookedUp(self.actualNumber, FritzOutlookCSV.findNumber(self.actualNumber, os.path.join(phonebookLocation, "PhoneBook.csv"))) #@UndefinedVariable
 			return
 		else:
 			self.lookupState = 2
-		if self.lookupState == 2 and os.path.exists(phonebookLocation + "/PhoneBook.ldif"):
+		if self.lookupState == 2 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.ldif")):
 			self["text"].setText(self.actualNumber + "\n\n" + _("Searching in LDIF..."))
 			self.lookupState = 0
-			FritzLDIF.findNumber(self.actualNumber, open(phonebookLocation + "/PhoneBook.ldif"), self.lookedUp)
+			FritzLDIF.findNumber(self.actualNumber, open(os.path.join(phonebookLocation, "PhoneBook.ldif")), self.lookedUp)
 			return
 		else:
 			self.lookupState = 0
@@ -1752,7 +1756,7 @@ class FritzCallPhonebook:
 		if not config.plugins.FritzCall.enable.value:
 			return
 
-		phonebookFilename = config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt"
+		phonebookFilename = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.txt")
 		if config.plugins.FritzCall.phonebook.value and os.path.exists(phonebookFilename):
 			debug("[FritzCallPhonebook] reload: read " + phonebookFilename)
 			phonebookTxtCorrupt = False
@@ -1855,7 +1859,7 @@ class FritzCallPhonebook:
 					name = name.strip() + "\n"
 					string = "%s#%s" % (number, name)
 					# Beware: strings in PhoneBook.txt have to be in utf-8!
-					f = open(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt", 'a')
+					f = open(os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.txt"), 'a')
 					f.write(string)
 					f.close()
 					debug("[FritzCallPhonebook] added %s with %s to Phonebook.txt" % (number, name.strip()))
@@ -1870,7 +1874,7 @@ class FritzCallPhonebook:
 			del self.phonebook[number]
 			if config.plugins.FritzCall.phonebook.value:
 				try:
-					phonebookFilename = config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.txt"
+					phonebookFilename = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "PhoneBook.txt")
 					debug("[FritzCallPhonebook] remove entry in Phonebook.txt")
 					fOld = open(phonebookFilename, 'r')
 					fNew = open(phonebookFilename + str(os.getpid()), 'w')
@@ -1896,6 +1900,7 @@ class FritzCallPhonebook:
 			if config.plugins.FritzCall.fullscreen.value:
 				self.width = DESKTOP_WIDTH
 				self.height = DESKTOP_HEIGHT
+				self.entriesWidth = 790
 				backMainPng = ""
 				if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/menu/back-main.png")):
 					backMainPng = DESKTOP_SKIN + "/menu/back-main.png"
@@ -1938,7 +1943,7 @@ class FritzCallPhonebook:
 									scaleH(1130, XXX), scaleV(40, XXX), scaleH(80, XXX), scaleV(26, XXX), scaleV(26, XXX), # time
 									scaleH(900, XXX), scaleV(70, XXX), scaleH(310, XXX), scaleV(22, XXX), scaleV(20, XXX), # date
 									"FritzCall " + _("Phonebook"), scaleH(80, XXX), scaleV(63, XXX), scaleH(300, XXX), scaleV(30, XXX), scaleV(27, XXX), # eLabel
-									scaleH(420, XXX), scaleV(120, XXX), scaleH(790, XXX), scaleV(438, XXX), # entries
+									scaleH(420, XXX), scaleV(120, XXX), scaleH(self.entriesWidth, XXX), scaleV(438, XXX), # entries
 									scaleH(450, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # red
 									scaleH(640, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # green
 									scaleH(830, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # yellow
@@ -1951,6 +1956,7 @@ class FritzCallPhonebook:
 																)
 			else:
 				self.width = scaleH(1100, 570)
+				self.entriesWidth = scaleH(1040, 560)
 				debug("[FritzDisplayPhonebook] width: " + str(self.width))
 				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 				self.skin = """
@@ -1972,7 +1978,7 @@ class FritzCallPhonebook:
 							_("Phonebook"),
 							scaleH(1100, 570), # eLabel width
 							scaleH(40, 5), scaleV(20, 5), # entries position
-							scaleH(1040, 560), scaleV(488, 380), # entries size
+							self.entriesWidth, scaleV(488, 380), # entries size
 							scaleV(518, 390), # eLabel position vertical
 							scaleH(1100, 570), # eLabel width
 							scaleH(20, 5), scaleV(525, 395), # ePixmap red
@@ -2059,12 +2065,11 @@ class FritzCallPhonebook:
 					else:
 						shortname = name
 					numberFieldWidth = scaleV(200,150)
-					fieldWidth = self.width -5 -numberFieldWidth -10 -scaleH(90,45)
+					fieldWidth = self.entriesWidth -5 -numberFieldWidth -10 -scaleH(90,45)
 					number = number.encode("utf-8", "replace")
 					name = name.encode("utf-8", "replace")
 					shortname = shortname.encode('utf-8', 'replace')
-					self.sortlist.append([(number,
-								   name),
+					self.sortlist.append([(number, name),
 								   (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, fieldWidth, scaleH(24,20), 0, RT_HALIGN_LEFT, shortname),
 								   (eListboxPythonMultiContent.TYPE_TEXT, fieldWidth +5, 0, numberFieldWidth, scaleH(24,20), 0, RT_HALIGN_LEFT, number)
 								   ])
@@ -2550,6 +2555,36 @@ class FritzCallList:
 
 callList = FritzCallList()
 
+class MessageBoxPixmap(MessageBox):
+	def __init__(self, session, text, number = "", name = "", timeout = -1):
+		debug("[FritzCall] MessageBoxPixmap number: %s" % number)
+		MessageBox.__init__(self, session, text, type=MessageBox.TYPE_INFO, timeout=timeout)
+		self.skinName = "MessageBox"
+		self.number = number
+		self.name = name
+		self.onLayoutFinish.append(self.setInfoPixmap)
+
+	def setInfoPixmap(self):
+		debug("[FritzCall] MessageBoxPixmap/setInfoPixmap number: %s/%s" % (self.number, self.name))
+		facesDir = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")
+		numberFile = os.path.join(facesDir, self.number)
+		nameFile = os.path.join(facesDir, self.name)
+		facesFile = None
+		if os.path.exists(numberFile):
+			facesFile = numberFile
+		elif os.path.exists(numberFile + ".png"):
+			facesFile = numberFile + ".png"
+		elif os.path.exists(numberFile + ".PNG"):
+			facesFile = numberFile + ".PNG"
+		elif os.path.exists(nameFile):
+			facesFile = nameFile
+		elif os.path.exists(nameFile + ".png"):
+			facesFile = nameFile + ".png"
+		elif os.path.exists(nameFile + ".PNG"):
+			facesFile = nameFile + ".PNG"
+		if facesFile:
+			self["InfoPixmap"].instance.setPixmapFromFile(facesFile)
+
 from GlobalActions import globalActionMap
 def notifyCall(event, date, number, caller, phone):
 	if Standby.inStandby is None or config.plugins.FritzCall.afterStandby.value == "each":
@@ -2560,7 +2595,8 @@ def notifyCall(event, date, number, caller, phone):
 		else:
 			text = _("Outgoing Call on %(date)s to\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nfrom: %(phone)s") % { 'date':date, 'number':number, 'caller':caller, 'phone':phone }
 		debug("[FritzCall] notifyCall:\n%s" % text)
-		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
+		# Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
+		Notifications.AddNotification(MessageBoxPixmap, text, number=number, name=caller, timeout=config.plugins.FritzCall.timeout.value)
 	elif config.plugins.FritzCall.afterStandby.value == "inList":
 		#
 		# if not yet done, register function to show call list
