@@ -23,8 +23,8 @@ class DynDNSScreenMain(ConfigListScreen,Screen):
     skin = """
         <screen position="100,100" size="550,400" title="DynDNS Setup" >
         <widget name="config" position="0,0" size="550,300" scrollbarMode="showOnDemand" />
-        <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
-        <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
+        <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
+        <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/>
         </screen>"""
     def __init__(self, session, args = 0):
         self.session = session
@@ -65,7 +65,7 @@ class DynDNSService:
 	def __init__(self):
 		self.timer = eTimer()
 		self.timer.timeout.get().append(self.checkCurrentIP)
-		
+
 	def enable(self):
 		if config.plugins.DynDNS.enable.value:
 			self.enabled = True
@@ -75,10 +75,10 @@ class DynDNSService:
 		if self.enabled:
 			self.timer.stop()
 			self.enabled = False
-		
+
 	def addSession(self,session):
 		self.sessions.append(session)
-	
+
 	def checkCurrentIP(self):
 		print "[DynDNS] checking IP"
 		try:
@@ -87,15 +87,15 @@ class DynDNSService:
 			str = str.split("</body>")[0]
 			str = str.split(":")[1]
 			str = str.lstrip().rstrip()
-			
-			if self.lastip is not str:
+
+			if self.lastip != str:
 				self.lastip=str
 				reactor.callLater(1, self.onIPchanged)
 			self.timer.start(int(config.plugins.DynDNS.interval.value)*60000)
 		except Exception,e:
 			print "[DynDNS]",e
 			str = "coundnotgetip"
-			
+
 	def onIPchanged(self):
 		print "[DynDNS] IP change, setting new one",self.lastip
 		try:
@@ -104,7 +104,7 @@ class DynDNSService:
 				print "[DynDNS] ip changed"
 		except Exception,e:
 			print "[DynDNS] ip was not changed",e
-			
+
 	def getURL(self,url):
 		request =  Request(url)
    		base64string = encodestring('%s:%s' % (config.plugins.DynDNS.user.value,config.plugins.DynDNS.password.value))[:-1]
@@ -123,7 +123,7 @@ def onPluginStartCB(changed):
 	if changed:
 		dyndnsservice.disable()
 		dyndnsservice.enable()
-		
+
 global dyndnsservice
 dyndnsservice = DynDNSService()
 
@@ -136,7 +136,7 @@ def onSessionStart(reason, **kwargs):
 			dyndnsservice.enable()
 		elif reason == 1:
 			dyndnsservice.disable()
-			
+
 def Plugins(path,**kwargs):
 	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = onSessionStart),
 		    PluginDescriptor(name=_("DynDNS"), description=_("use www.DynDNS.org on your Box"),where = [PluginDescriptor.WHERE_PLUGINMENU], fnc = onPluginStart, icon="icon.png")]
