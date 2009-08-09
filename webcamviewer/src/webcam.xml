@@ -246,6 +246,15 @@
 					<name>Rosenheim Bayern</name>
 					<url>http://www.klinikum-rosenheim.de/sonstiges/kliroinfo/webcam.jpg</url>
 				</cam>
+
+                <cam>
+                    <name>Villingen</name>
+                    <url>http://www.villingen-schwenningen.de/cam/rietstr.jpg</url>
+                </cam>
+                <cam>
+                    <name>Schwenningen</name>
+                    <url>http://www.villingen-schwenningen.de/cam/muslen.jpg</url>
+                </cam>
 			</menu>
 			<menu>
 				<name>Finland</name>
