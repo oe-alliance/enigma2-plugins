@@ -56,14 +56,14 @@ TPMD_CMD_COMPUTE_SIGNATURE = 0x0003
 
 class genuineDreambox(Screen):
     skin = """
-        <screen position="60,80" size="420,420" title="%s" >
-        <widget name="infotext" position="10,20" zPosition="1" size="400,150" font="Regular;20" halign="center" valign="center" />
-        <widget name="resulttext" position="10,170" zPosition="1" size="400,60" font="Regular;20" halign="center" valign="center" />
-        <widget name="infotext2" position="10,240" zPosition="1" size="400,100" font="Regular;20" halign="center" valign="center" />
-        <widget name="kRed" position="55,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />       
-        <ePixmap name="red" position="55,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-        <widget name="kGreen" position="200,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-        <ePixmap name="green" position="200,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+        <screen position="60,80" size="620,420" title="%s" >
+        <widget name="infotext" position="10,20" zPosition="1" size="600,150" font="Regular;20" halign="center" valign="center" />
+        <widget name="resulttext" position="10,160" zPosition="1" size="600,110" font="Regular;20" halign="center" valign="center" />
+        <widget name="infotext2" position="10,280" zPosition="1" size="600,80" font="Regular;20" halign="center" valign="center" />
+        <widget name="kRed" position="185,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />       
+        <ePixmap name="red" position="185,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+        <widget name="kGreen" position="330,365" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+        <ePixmap name="green" position="330,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
         </screen>"""% _("Genuine Dreambox")
 
     def __init__(self, session):
@@ -75,7 +75,7 @@ class genuineDreambox(Screen):
          }, -1)
         self["kGreen"] = Button(_("Restart"))
         self["kRed"] = Button(_("Cancel"))
-        self["infotext"] = Label("With this plugin you can verify the authenticity of your Dreambox.\n\nFor additional information, \nplease visit our website \nhttps://www.dream-multimedia-tv.de.")
+        self["infotext"] = Label("With this plugin you can verify the authenticity of your Dreambox.\nFor additional information, \nplease visit our website \nhttps://www.dream-multimedia-tv.de.")
         self["resulttext"] = Label("... Please wait ...")
         self["infotext2"] = Label("Please visit our website and follow the instructions.\nAlternatively you can call our customer service hotline.")
         self.onLayoutFinish.append(self.start)
@@ -115,7 +115,7 @@ class genuineDreambox(Screen):
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad) 
 
     def errorLoad(self, error):
-        self["resulttext"].setText("Invalid response from server. Please report!", error.getErrorMessage())
+        self["resulttext"].setText("Invalid response from server. Please report: %s" % str(error))
 
     def buildUrl(self):
         # NOTE: this is a modified base64 which uses -_ instead of +/ to avoid the need for escpaing + when using urlencode 
