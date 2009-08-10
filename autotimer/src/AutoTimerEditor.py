@@ -180,6 +180,9 @@ class AutoTimerEditorBase:
 		self.searchType = NoSave(ConfigSelection(choices = [("partial", _("partial match")), ("exact", _("exact match"))], default = timer.searchType))
 		self.searchCase = NoSave(ConfigSelection(choices = [("sensitive", _("case-sensitive search")), ("insensitive", _("case-insensitive search"))], default = timer.searchCase))
 
+		# Alternatives override
+		self.overrideAlternatives = NoSave(ConfigYesNo(default = timer.overrideAlternatives))
+
 		# Justplay
 		self.justplay = NoSave(ConfigSelection(choices = [("zap", _("zap")), ("record", _("record"))], default = {0: "record", 1: "zap"}[int(timer.justplay)]))
 
@@ -453,6 +456,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			getConfigListEntry(_("Search Type"), self.searchType),
 			getConfigListEntry(_("Search strictness"), self.searchCase),
 			getConfigListEntry(_("Timer Type"), self.justplay),
+			getConfigListEntry(_("Override found with alternative Service"), self.overrideAlternatives),
 			getConfigListEntry(_("Only match during Timespan"), self.timespan)
 		))
 
@@ -613,6 +617,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		# ...
 		self.timer.searchType = self.searchType.value
 		self.timer.searchCase = self.searchCase.value
+
+		# Alternatives
+		self.timer.overrideAlternatives = self.overrideAlternatives.value
 
 		# Enabled
 		self.timer.enabled = self.enabled.value
@@ -1042,8 +1049,8 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 			list = self["config"].getList()
 			sname = args[0].toString()
 
-			if self.typeSelection.value == "channels":
-				# strip all after last : when adding a channel
+			if self.typeSelection.value == "channels" and not (args[0].flags & eServiceReference.isGroup):
+				# strip all after last : when adding a (non alternative) channel
 				pos = sname.rfind(':')
 				if pos != -1:
 					sname = sname[:pos+1]
@@ -1120,12 +1127,14 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 	sref = None
 	if service is not None:
 		service = str(service)
-		# strip all after last :
-		pos = service.rfind(':')
-		if pos != -1:
-			service = service[:pos+1]
+		myref = eServiceReference(service)
+		if not (myref.flags & eServiceReference.isGroup):
+			# strip all after last :
+			pos = service.rfind(':')
+			if pos != -1:
+				service = service[:pos+1]
 
-		sref = ServiceReference(service)
+		sref = ServiceReference(myref)
 	if evt:
 		# timespan defaults to +- 1h
 		begin = evt.getBeginTime()-3600

@@ -225,6 +225,10 @@ class AutoTimer:
 					begin -= config.recording.margin_before.value * 60
 					end += config.recording.margin_after.value * 60
 
+				# Eventually change service to alternative
+				if timer.overrideAlternatives:
+					serviceref = timer.getAlternative(serviceref)
+
 				total += 1
 
 				# Append to timerlist and abort if simulating

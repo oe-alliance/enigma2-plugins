@@ -1,8 +1,11 @@
-# Format Counter
+# Format counter
 from time import strftime
 
 # regular expression
 from re import compile as re_compile
+
+# Alternatives and service restriction
+from enigma import eServiceReference, eServiceCenter
 
 class AutoTimerComponent(object):
 	"""AutoTimer Component which also handles validity checks"""
@@ -41,7 +44,8 @@ class AutoTimerComponent(object):
 			afterevent = [], exclude = None, maxduration = None, destination = None, \
 			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
 			lastBegin = 0, justplay = False, avoidDuplicateDescription = 0, bouquets = None, \
-			tags = None, encoding = 'UTF-8', searchType = "partial", searchCase = "insensitive"):
+			tags = None, encoding = 'UTF-8', searchType = "partial", searchCase = "insensitive", \
+			overrideAlternatives = False):
 		self.name = name
 		self.match = match
 		self.enabled = enabled
@@ -65,6 +69,7 @@ class AutoTimerComponent(object):
 		self.encoding = encoding
 		self.searchType = searchType
 		self.searchCase = searchCase
+		self.overrideAlternatives = overrideAlternatives
 
 ### Attributes / Properties
 
@@ -316,6 +321,8 @@ class AutoTimerComponent(object):
 	getOffsetBegin = lambda self: self.offset[0]/60
 	getOffsetEnd = lambda self: self.offset[1]/60
 
+	getOverrideAlternatives = lambda self: self.overrideAlternatives and "1" or "0"
+
 	getServices = lambda self: self._services
 
 	getTags = lambda self: self.tags
@@ -401,16 +408,22 @@ class AutoTimerComponent(object):
 
 		return False
 
-	def checkServices(self, service):
+	def checkServices(self, check_service):
 		services = self.services
 		bouquets = self.bouquets
 		if services or bouquets:
-			if service in services:
-				return False
+			addbouquets = []
 
-			from enigma import eServiceReference, eServiceCenter
+			for service in services:
+				if service == check_service:
+					return False
+
+				myref = eServiceReference(str(service))
+				if myref.flags & eServiceReference.isGroup:
+					addbouquets.append(service)
+
 			serviceHandler = eServiceCenter.getInstance()
-			for bouquet in bouquets:
+			for bouquet in bouquets + addbouquets:
 				myref = eServiceReference(str(bouquet))
 				mylist = serviceHandler.list(myref)
 				if mylist is not None:
@@ -425,12 +438,45 @@ class AutoTimerComponent(object):
 							if pos != -1:
 								value = value[:pos+1]
 
-							if value == service:
+							if value == check_service:
 								return False
 						else:
 							break
 			return True
 		return False
+
+	"""
+	Return alternative service including a given ref.
+	Note that this only works for alternatives that the autotimer is restricted to.
+	"""
+	def getAlternative(self, override_service):
+		services = self.services
+		print "[AutoTimerComponent] looking for", override_service
+		if services:
+			serviceHandler = eServiceCenter.getInstance()
+
+			for service in services:
+				myref = eServiceReference(str(service))
+				print "[AutoTimerComponent] checking", service
+				if myref.flags & eServiceReference.isGroup:
+					print "[AutoTimerComponent] isGroup!"
+					mylist = serviceHandler.list(myref)
+					if mylist is not None:
+						while 1:
+							s = mylist.getNext()
+							if s.valid():
+								# strip all after last :
+								value = s.toString()
+								pos = value.rfind(':')
+								if pos != -1:
+									value = value[:pos+1]
+
+								if value == override_service:
+									print "[AutoTimerComponent] found match, returning", service
+									return service
+							else:
+								break
+		return override_service
 
 	def checkTimespan(self, begin):
 		return self.checkAnyTimespan(begin, *self.timespan)
@@ -478,7 +524,8 @@ class AutoTimerComponent(object):
 			tags = self.tags,
 			encoding = self.encoding,
 			searchType = self.searchType,
-			searchCase = self.searchCase
+			searchCase = self.searchCase,
+			overrideAlternatives = self.overrideAlternatives
 		)
 
 	def __deepcopy__(self, memo):
@@ -506,7 +553,8 @@ class AutoTimerComponent(object):
 			tags = self.tags[:],
 			encoding = self.encoding,
 			searchType = self.searchType,
-			searchCase = self.searchCase
+			searchCase = self.searchCase,
+			overrideAlternatives = self.overrideAlternatives
 		)
 
 	def __eq__(self, other):
@@ -557,7 +605,8 @@ class AutoTimerComponent(object):
 			 		str(self.justplay),
 			 		str(self.avoidDuplicateDescription),
 					str(self.bouquets),
-					str(self.tags)
+					str(self.tags),
+					str(self.overrideAlternatives),
 			 )),
 			 ")>"
 		))

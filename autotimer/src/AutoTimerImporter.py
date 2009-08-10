@@ -19,6 +19,8 @@ from RecordTimer import AFTEREVENT
 # Needed to convert our timestamp back and forth
 from time import localtime
 
+from enigma import eServiceReference
+
 afterevent = {
 	AFTEREVENT.NONE: _("do nothing"),
 	AFTEREVENT.DEEPSTANDBY: _("go to deep standby"),
@@ -270,10 +272,12 @@ class AutoTimerImporter(Screen):
 			elif item[2] == 3: # Service
 				value = item[1]
 
-				# strip all after last :
-				pos = value.rfind(':')
-				if pos != -1:
-					value = value[:pos+1]
+				myref = eServiceReference(value)
+				if not (myref.flags & eServiceReference.isGroup):
+					# strip all after last :
+					pos = value.rfind(':')
+					if pos != -1:
+						value = value[:pos+1]
 
 				autotimer.services = [value]
 			elif item[2] == 4: # AfterEvent

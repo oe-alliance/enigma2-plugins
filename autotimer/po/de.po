@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-19 13:30+0100\n"
-"PO-Revision-Date: 2009-01-19 13:32+0100\n"
+"POT-Creation-Date: 2009-08-10 22:01+0200\n"
+"PO-Revision-Date: 2009-08-10 22:03+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -169,6 +169,9 @@ msgstr "Ende der Zeitspanne"
 msgid "End of after Event Timespan"
 msgstr "Ende der Zeitspanne"
 
+msgid "Exact match"
+msgstr "Exakter Treffer"
+
 msgid "Exclude"
 msgstr "Ausschließen"
 
@@ -296,6 +299,9 @@ msgstr "Nur auf Sender: %s"
 msgid "Open Context Menu"
 msgstr "Öffne Kontext-Menü"
 
+msgid "Override found with alternative Service"
+msgstr "Service mit alternative ersetzen"
+
 msgid "Please provide a Text to match"
 msgstr "Bitte zu findenden Text eingeben"
 
@@ -358,6 +364,9 @@ msgstr "Finde maximale Länge"
 
 msgid "Setup"
 msgstr "Einstellungen"
+
+msgid "Show in Extensionmenu"
+msgstr "In Erweiterunsmenü anzeigen"
 
 msgid "Sort AutoTimer"
 msgstr "Sortiere AutoTimer"
