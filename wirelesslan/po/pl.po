@@ -1,108 +1,111 @@
-# PL translations for tuxbox-enigma package.
-# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the tuxbox-enigma package.
-# Automatically generated, 2005.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Project-Id-Version: enigma2-plugins-extension-WirelessLan\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 14:59+0100\n"
-"PO-Revision-Date: 2008-04-06 16:20+0100\n"
-"Last-Translator: Sebastian <zbigzbig2@op.pl> Corrections: SileliS "
-"<silelis@tlen.pl> \n"
+"POT-Creation-Date: 2009-08-10 09:16+0200\n"
+"PO-Revision-Date: 2009-06-22 16:41+0100\n"
+"Last-Translator: Sebastian <zbigzbig2@op.pl>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Poland\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-"
+"plugins\\WirelessLan\n"
+"X-Poedit-SearchPath-0: src\n"
 
 msgid " Wireless Network(s) found!"
 msgstr ""
 
 msgid "Accesspoint:"
-msgstr ""
+msgstr "Punkt dostępowy:"
 
 msgid "Bitrate:"
-msgstr ""
+msgstr "Bitrate:"
 
 msgid "Choose a Wireless Network"
-msgstr ""
+msgstr "Wybierz sieć bezprzewodową"
 
 msgid "Close"
-msgstr ""
+msgstr "Zamknij"
 
 msgid "Connect"
-msgstr ""
+msgstr "Połącz"
 
 msgid "Connect to a Wireless Network"
-msgstr ""
+msgstr "Połącz z siecią bezprzewodową"
 
 msgid "Disabled"
-msgstr ""
+msgstr "Wyłączony"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Włączony"
 
 #, python-format
 msgid "Encrypted: %s"
-msgstr ""
+msgstr "Zakodowana: %s"
 
 msgid "Encryption:"
-msgstr ""
+msgstr "Kodowanie:"
 
 msgid "Hidden networkname"
-msgstr ""
+msgstr "Ukryta nazwa sieci"
 
 #, python-format
 msgid "Interface: %s"
-msgstr ""
+msgstr "Interfejs: %s"
 
 msgid "Link Quality:"
-msgstr ""
+msgstr "Jakość sygnału:"
 
 msgid "Link:"
-msgstr ""
+msgstr "Połączenie:"
 
 #, python-format
 msgid "Max. Bitrate: %s"
-msgstr ""
+msgstr "Max. Bitrate: %s"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 msgid "Network:"
-msgstr ""
+msgstr "Sieć:"
 
 msgid "No"
-msgstr ""
+msgstr "Nie"
 
 msgid "No Connection"
-msgstr ""
+msgstr "Brak połączenia"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Proszę czekać..."
 
 msgid "Refresh"
-msgstr ""
+msgstr "Odśwież"
 
 msgid "SSID:"
-msgstr ""
+msgstr "SSID:"
 
 msgid "Signal Strength:"
-msgstr ""
+msgstr "Siła sygnału:"
 
 msgid "Signal: "
-msgstr ""
+msgstr "Sygnał:"
 
 msgid "Unsupported"
-msgstr ""
+msgstr "Nieobsługiwany"
 
 msgid "Wireless LAN"
-msgstr ""
+msgstr "Sieć bezprzewodowa"
 
 msgid "Wireless Network State"
-msgstr ""
+msgstr "Status sieci bezprzewodowej"
 
 msgid "Yes"
-msgstr ""
+msgstr "Tak"
+
+#~ msgid "Wireless Network(s) found!"
+#~ msgstr "Sieć bezprzewodowa znaleziona!"
