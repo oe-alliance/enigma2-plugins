@@ -366,7 +366,7 @@ msgid "Setup"
 msgstr "Einstellungen"
 
 msgid "Show in Extensionmenu"
-msgstr "In Erweiterunsmenü anzeigen"
+msgstr "In Erweiterungsmenü anzeigen"
 
 msgid "Sort AutoTimer"
 msgstr "Sortiere AutoTimer"
