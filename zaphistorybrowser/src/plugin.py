@@ -11,6 +11,7 @@ from enigma import eListboxPythonMultiContent, eServiceCenter, gFont
 from os import environ
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChannelSelection import ChannelSelection
+from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import gettext
@@ -106,7 +107,7 @@ def ZapHistoryBrowserListEntry(serviceName, eventName):
 
 ################################################
 
-class ZapHistoryBrowser(Screen):
+class ZapHistoryBrowser(Screen, ProtectedScreen):
 	skin = """
 	<screen position="center,center" size="560,440" title="%s" >
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
@@ -122,10 +123,12 @@ class ZapHistoryBrowser(Screen):
 
 	def __init__(self, session, servicelist):
 		Screen.__init__(self, session)
+		ProtectedScreen.__init__(self)
 		self.session = session
 		
 		self.servicelist = servicelist
 		self.serviceHandler = eServiceCenter.getInstance()
+		self.allowChanges = True
 		
 		self["list"] = ZapHistoryBrowserList([])
 		self["key_red"] = Label(_("Clear"))
@@ -172,39 +175,50 @@ class ZapHistoryBrowser(Screen):
 			self.servicelist.setHistoryPath()
 
 	def clear(self):
-		for i in range(0, len(self.servicelist.history)):
-			del self.servicelist.history[0]
-		self.buildList()
-		self.servicelist.history_pos = 0
+		if self.allowChanges:
+			for i in range(0, len(self.servicelist.history)):
+				del self.servicelist.history[0]
+			self.buildList()
+			self.servicelist.history_pos = 0
 
 	def delete(self):
-		length = len(self.servicelist.history)
-		if length > 0:
-			idx = (length - self["list"].getSelectionIndex()) - 1
-			del self.servicelist.history[idx]
-			self.buildList()
-			
-			# We must check if the current service is still in the zap-history
-			currRef = self.session.nav.getCurrentlyPlayingServiceReference()
-			idx = 0
-			for x in self.servicelist.history:
-				if len(x) == 2: # Single-Bouquet
-					ref = x[1]
-				else: # Multi-Bouquet
-					ref = x[2]
-				
-				if ref == currRef:
-					self.servicelist.history_pos = idx
-					break
-				else:
-					idx += 1
+		if self.allowChanges:
+			length = len(self.servicelist.history)
+			if length > 0:
+				idx = (length - self["list"].getSelectionIndex()) - 1
+				del self.servicelist.history[idx]
+				self.buildList()
+				currRef = self.session.nav.getCurrentlyPlayingServiceReference()
+				idx = 0
+				for x in self.servicelist.history:
+					if len(x) == 2: # Single-Bouquet
+						ref = x[1]
+					else: # Multi-Bouquet
+						ref = x[2]
+					if ref == currRef:
+						self.servicelist.history_pos = idx
+						break
+					else:
+						idx += 1
 
 	def zapAndClose(self):
 		self.zap()
 		self.close()
 
 	def config(self):
-		self.session.open(ZapHistoryConfigurator)
+		if self.allowChanges:
+			self.session.open(ZapHistoryConfigurator)
+
+	def isProtected(self):
+		return config.ParentalControl.setuppinactive.value and config.ParentalControl.configured.value
+	
+	def pinEntered(self, result):
+		if result is None:
+			self.allowChanges = False
+		elif not result:
+			self.allowChanges = False
+		else:
+			self.allowChanges = True
 
 ################################################
 
