@@ -2,6 +2,9 @@ AC3 = "AC3"
 PCM = "PCM"
 AC3PCM = (AC3,PCM)
 
+PLUGIN_BASE = "AC3LipSync"
+PLUGIN_VERSION = "0.8"
+
 lFileDelay = {}
 lFileDelay[AC3] = "/proc/stb/audio/audio_delay_bitstream"
 lFileDelay[PCM] = "/proc/stb/audio/audio_delay_pcm"
@@ -17,7 +20,6 @@ def dec2hex(n):
 
 def hex2dec(s):
     """return the signed integer value of a hexadecimal string s"""
-    print "[AC3LipSync] hex2dec String: ",s
     if s[:2] == "0x":
         s = s[2:]
     if s[:1] < '8':

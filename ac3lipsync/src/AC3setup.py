@@ -1,5 +1,5 @@
 from AC3main import AC3LipSync
-from AC3utils import dec2hex, hex2dec
+from AC3utils import dec2hex, hex2dec, PLUGIN_BASE, PLUGIN_VERSION
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
@@ -32,12 +32,13 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
         font="Regular;20" valign="center" halign="center" backgroundColor="#18188b" transparent="1"
         shadowColor="#000000" shadowOffset="-1,-1" />
       <widget name="config" position="10,40" size="540,320" scrollbarMode="showOnDemand" />
+      <widget name="PluginInfo" position="10,370" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
     </screen>"""
 
-    def __init__(self, session, args = None):
+    def __init__(self, session, plugin_path):
         Screen.__init__(self, session)
 
-        # nun erzeugen wir eine liste von elementen fuer die menu liste.
+        # Lets get a list of elements for the config list
         self.list = [
             getConfigListEntry(_("Outer Bound (+/-)"), config.plugins.AC3LipSync.outerBounds),
             getConfigListEntry(_("Step in ms for arrow keys"), config.plugins.AC3LipSync.arrowStepSize),
@@ -54,7 +55,12 @@ class AC3LipSyncSetup(ConfigListScreen, Screen):
 
         self["config"].list = self.list
 
-        # DO NOT ASK.
+        self.skin_path = plugin_path
+
+        # Plugin Information
+        self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") %dict(plugin=PLUGIN_BASE,version=PLUGIN_VERSION))
+
+        # BUTTONS
         self["key_red"] = Button(_("Cancel"))
         self["key_green"] = Button(_("Save"))
         self["key_yellow"] = Button(_(" "))

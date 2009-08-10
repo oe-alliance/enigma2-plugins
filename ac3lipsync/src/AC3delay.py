@@ -2,6 +2,7 @@ from AC3utils import AC3, PCM, AC3PCM, lFileDelay, dec2hex, hex2dec
 from Components.config import config
 from enigma import eTimer
 from Tools.ISO639 import LanguageCodes
+from Tools.HardwareInfo import HardwareInfo
 import os
 import NavigationInstance
 
@@ -26,6 +27,13 @@ class AC3delay:
         # Current value for movie start behaviour
         self.movieStart = config.usage.on_movie_start.getValue()
 
+        # find out box type
+        self.oHWInfo = HardwareInfo()
+        if self.oHWInfo.get_device_name() in ("dm800","dm8000"):
+            self.bHasToRestartService = False
+        else:
+            self.bHasToRestartService = True
+        
     def initAudio(self):
         self.iService = NavigationInstance.instance.getCurrentService()
         self.iServiceReference = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
@@ -48,25 +56,26 @@ class AC3delay:
     def activateDelay(self):
         if self.activateTimer.isActive:
             self.activateTimer.stop()
-        bInitialized = False
-        if self.iService == None:
-            self.initAudio()
-            bInitialized = True
-        if self.iServiceReference is not None:
-            lCurPosition = self.cueGetCurrentPosition()
-            self.deleteAudio()
-            if self.whichAudio == self.channelAudio:
-                config.usage.on_movie_start.setValue("beginning")
-                NavigationInstance.instance.stopService()
-                NavigationInstance.instance.playService(self.iServiceReference)
-                config.usage.on_movie_start.setValue(self.movieStart)
-                if lCurPosition is not None:
-                    self.lCurPosition = lCurPosition
-                    self.timer = eTimer()
-                    self.timer.callback.append(self.seekAfterWait)
-                    self.timer.start(200, False)
-        else:
-            self.deleteAudio()
+        if self.bHasToRestartService == True:
+            bInitialized = False
+            if self.iService == None:
+                self.initAudio()
+                bInitialized = True
+            if self.iServiceReference is not None:
+                lCurPosition = self.cueGetCurrentPosition()
+                self.deleteAudio()
+                if self.whichAudio == self.channelAudio:
+                    config.usage.on_movie_start.setValue("beginning")
+                    NavigationInstance.instance.stopService()
+                    NavigationInstance.instance.playService(self.iServiceReference)
+                    config.usage.on_movie_start.setValue(self.movieStart)
+                    if lCurPosition is not None:
+                        self.lCurPosition = lCurPosition
+                        self.timer = eTimer()
+                        self.timer.callback.append(self.seekAfterWait)
+                        self.timer.start(200, False)
+            else:
+                self.deleteAudio()
         
     def seekAfterWait(self):
         self.timer.stop()
@@ -139,10 +148,18 @@ class AC3delay:
         if self.iService == None:
             self.initAudio()
             bInitialized = True
-        self.initAudio()
+
+        # check if we are in a recording
         lCurPosition = self.cueGetCurrentPosition()
         if lCurPosition is not None:
             self.bIsRecording = True
+            
+        # check if downmix is enabled
+        try:
+            bDownmixEnabled = config.av.downmix_ac3.value
+        except:
+            bDownmixEnabled = False
+
         oAudioTracks = self.iService and self.iService.audioTracks()
         n = oAudioTracks and oAudioTracks.getNumberOfTracks() or 0
         tlist = []
@@ -161,7 +178,7 @@ class AC3delay:
 
                 tlist.append((description, x))
                 if x == self.selectedAudioIndex:
-                    if description.find("AC3") != -1 or description.find("DTS") != -1:
+                    if (description.find("AC3") != -1 or description.find("DTS") != -1) and bDownmixEnabled == False:
                         self.whichAudio = AC3
                         self.channelAudio = AC3
                     else:

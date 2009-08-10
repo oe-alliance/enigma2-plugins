@@ -21,14 +21,16 @@ def main(session, **kwargs):
 
 def setup(session, **kwargs):
 #    reload(AC3setup)
-    session.open(AC3setup.AC3LipSyncSetup)
+    session.open(AC3setup.AC3LipSyncSetup, plugin_path)
 
 def mainSetup(menuid, **kwargs):
     if menuid == "setup":
         return [(_("AC3 Lip Sync"), main, "ac3_lipsync", 99)]
     return [ ]
 
-def Plugins(**kwargs):
+def Plugins(path,**kwargs):
+    global plugin_path
+    plugin_path = path
     return [ PluginDescriptor(name=_("AC3 Lip Sync"), description=_("sets the AC3 audio Delay (LipSync)"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
         PluginDescriptor(name=_("AC3 Lip Sync Setup"), description=_("Setup for the AC3 Lip Sync Plugin"), icon = "AC3LipSync.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup),
         PluginDescriptor(name=_("AC3 Lip Sync"), description=_("sets the AC3 audio Delay (LipSync)"), where = PluginDescriptor.WHERE_MENU, fnc=mainSetup)]
