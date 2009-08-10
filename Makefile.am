@@ -12,6 +12,7 @@ SUBDIRS = \
 	filebrowser \
 	fritzcall \
 	googlemaps \
+	genuinedreambox \
 	httpproxy \
 	imdb \
 	lastfm \

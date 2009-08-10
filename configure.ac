@@ -226,4 +226,7 @@ podcast/etc/Makefile
 podcast/po/Makefile
 podcast/src/Makefile
 
+genuinedreambox/Makefile
+genuinedreambox/src/Makefile
+
 ])
