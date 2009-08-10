@@ -1,0 +1,155 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - podcast\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-10 15:12+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@118como.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/Podcast\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/Podcast\n"
+
+#: /home/dario/Plugins/Podcast/plugin.py:52
+msgid "Stop playing this movie?"
+msgstr "Arrestare la riproduzione?"
+
+#: /home/dario/Plugins/Podcast/plugin.py:64
+#: /home/dario/Plugins/Podcast/plugin.py:140
+#: /home/dario/Plugins/Podcast/plugin.py:191
+#: /home/dario/Plugins/Podcast/plugin.py:315
+#: /home/dario/Plugins/Podcast/plugin.py:345
+#: /home/dario/Plugins/Podcast/plugin.py:374
+#: /home/dario/Plugins/Podcast/plugin.py:406
+#: /home/dario/Plugins/Podcast/plugin.py:469
+#: /home/dario/Plugins/Podcast/plugin.py:525
+#: /home/dario/Plugins/Podcast/plugin.py:579
+#: /home/dario/Plugins/Podcast/plugin.py:632
+#: /home/dario/Plugins/Podcast/plugin.py:688
+#: /home/dario/Plugins/Podcast/plugin.py:706
+#: /home/dario/Plugins/Podcast/plugin.py:790
+#: /home/dario/Plugins/Podcast/plugin.py:847
+#: /home/dario/Plugins/Podcast/plugin.py:900
+#: /home/dario/Plugins/Podcast/plugin.py:952
+#: /home/dario/Plugins/Podcast/plugin.py:983
+msgid "Podcast"
+msgstr "Podcast"
+
+#: /home/dario/Plugins/Podcast/plugin.py:76
+msgid "delete"
+msgstr "Cancellare"
+
+#: /home/dario/Plugins/Podcast/plugin.py:76
+msgid "keep on device"
+msgstr "Conservare sul supporto"
+
+#: /home/dario/Plugins/Podcast/plugin.py:76
+msgid "ask me"
+msgstr "Chiedere"
+
+#: /home/dario/Plugins/Podcast/plugin.py:152
+#, python-format
+msgid "Downloading movie: %s"
+msgstr "Download filamto in corso: %s"
+
+#: /home/dario/Plugins/Podcast/plugin.py:237
+#: /home/dario/Plugins/Podcast/plugin.py:746
+msgid "Delete this movie?"
+msgstr "Cancellare il filmato?"
+
+#: /home/dario/Plugins/Podcast/plugin.py:270
+msgid "Error getting movies"
+msgstr "Errore in acquisizione filmati"
+
+#: /home/dario/Plugins/Podcast/plugin.py:279
+msgid "Date"
+msgstr "Data"
+
+#: /home/dario/Plugins/Podcast/plugin.py:279
+msgid "Length"
+msgstr "Durata"
+
+#: /home/dario/Plugins/Podcast/plugin.py:279
+msgid "Type"
+msgstr "Tipo"
+
+#: /home/dario/Plugins/Podcast/plugin.py:455
+#: /home/dario/Plugins/Podcast/plugin.py:516
+#: /home/dario/Plugins/Podcast/plugin.py:565
+msgid "Error getting genres"
+msgstr "Errore in acquisizione generi"
+
+#: /home/dario/Plugins/Podcast/plugin.py:460
+msgid "Error getting rss feed"
+msgstr "Errore in acquisizione feed rss"
+
+#: /home/dario/Plugins/Podcast/plugin.py:584
+msgid "Select"
+msgstr "Selezionare"
+
+#: /home/dario/Plugins/Podcast/plugin.py:637
+msgid "Save"
+msgstr "Salvare"
+
+#: /home/dario/Plugins/Podcast/plugin.py:649
+msgid "Buffer:"
+msgstr "Buffer:"
+
+#: /home/dario/Plugins/Podcast/plugin.py:650
+msgid "Buffer device:"
+msgstr "Supporto buffer:"
+
+#: /home/dario/Plugins/Podcast/plugin.py:651
+msgid "Buffer file handling:"
+msgstr "Gestione buffer file:"
+
+#: /home/dario/Plugins/Podcast/plugin.py:776
+msgid "Error getting episodes"
+msgstr "Errore in acquisizione episodi"
+
+#: /home/dario/Plugins/Podcast/plugin.py:781
+msgid "Error getting podcast url"
+msgstr "Errore in acquisizione url podcast"
+
+#: /home/dario/Plugins/Podcast/plugin.py:828
+msgid " (Audio)"
+msgstr " (Audio)"
+
+#: /home/dario/Plugins/Podcast/plugin.py:830
+msgid " (Video)"
+msgstr " (Video)"
+
+#: /home/dario/Plugins/Podcast/plugin.py:838
+msgid "Error getting podcasts"
+msgstr "Errore in acquisizione podcast"
+
+#: /home/dario/Plugins/Podcast/plugin.py:891
+#: /home/dario/Plugins/Podcast/plugin.py:943
+msgid "Error getting categories"
+msgstr "Errore in acquisizione categorie"
+
+#: /home/dario/Plugins/Podcast/plugin.py:961
+#: /home/dario/Plugins/Podcast/plugin.py:968
+msgid "podcast.de"
+msgstr "podcast.de"
+
+#: /home/dario/Plugins/Podcast/plugin.py:962
+#: /home/dario/Plugins/Podcast/plugin.py:970
+msgid "podcast.com"
+msgstr "podcast.com"
+
+#: /home/dario/Plugins/Podcast/plugin.py:963
+#: /home/dario/Plugins/Podcast/plugin.py:972
+msgid "from xml"
+msgstr "da xml"
+
+#: /home/dario/Plugins/Podcast/plugin.py:964
+msgid "configuration"
+msgstr "Configurazione"
+
