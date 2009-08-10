@@ -727,5 +727,13 @@
 			<name>Blids.de, Blitze</name>
 			<url>http://www.blids.de/spion/bilder/aktkarteger.jpg</url>
 		</cam>
+		<cam>
+         <name>Blitzortung.ORG - Intensitaet -</name>
+         <url>http://www.blitzortung.net/image_d_de.png</url>
+        </cam>
+        <cam>
+         <name>Blitzortung.ORG - Blitzkarte -</name>
+         <url>http://www.blitzortung.net/image_b_de.png</url>
+        </cam>
 	</menu>
 </xml>
