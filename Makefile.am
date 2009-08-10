@@ -30,6 +30,7 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
+	podcast \
 	quickbutton \
 	remotetimer \
 	rsdownloader \

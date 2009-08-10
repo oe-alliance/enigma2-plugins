@@ -1,0 +1,89 @@
+<podcasts>
+	<language name="German" >
+		<provider name="ARD" >
+			<podcast name="Deppendorfs Woche" url="http://www.tagesschau.de/export/video-podcast/deppendorfswoche/" />
+			<podcast name="Tagesschau" url="http://www.tagesschau.de/export/video-podcast/tagesschau/" />
+			<podcast name="Tagesschau in 100 Sekunden" url="http://www.tagesschau.de/export/video-podcast/tagesschau-in-100-sekunden/" />
+			<podcast name="Tagesthemen" url="http://www.tagesschau.de/export/video-podcast/tagesthemen/" />
+			<podcast name="Nachtmagazin" url="http://www.tagesschau.de/export/video-podcast/nachtmagazin/" />
+			<podcast name="Bericht aus Berlin" url="http://www.tagesschau.de/export/video-podcast/bab/" />
+			<podcast name="Wochenspiegel" url="http://www.tagesschau.de/export/video-podcast/wochenspiegel/" />
+		</provider>
+		<provider name="Pro 7" >
+			<podcast name="Germany's next Topmodel" url="http://pro7-topmodel.feedplace.de/rss+all" />
+			<podcast name="Look of Love - Neuer Style für die Liebe" url="http://prosieben-look-of-love.feedplace.de/rss+all" />
+			<podcast name="Mascerade - Deutschland verbiegt sich" url="http://prosieben-mascerade.feedplace.de/rss+all" />
+			<podcast name="Deine Chance! 3 Bewerber - 1 Job" url="http://prosieben-deinechance.feedplace.de/rss+all" />
+			<podcast name="Galileo - 100 Sekunden" url="http://prosieben-galileo-100sek.feedplace.de/rss+all" />
+			<podcast name="We are Family! So lebt Deutschland." url="http://prosieben-wearefamily.feedplace.de/rss+all" />
+			<podcast name="WipeOut - Heul nicht, lauf!" url="http://prosieben-wipeout.feedplace.de/rss+all" />
+			<podcast name="red! Stylomat" url="http://prosieben-red-stylomat.feedplace.de/rss+all" />
+			<podcast name="Comedystreet" url="http://prosieben-comedystreet.feedplace.de/rss+all" />
+			<podcast name="Queensberry TV" url="http://prosieben-queensberry.feedplace.de/rss+all" />
+			<podcast name="Switch reloaded" url="http://prosieben-switch-reloaded.feedplace.de/rss+all" />
+			<podcast name="U 20 - Deutschland, Deine Teenies" url="http://prosieben-u20.feedplace.de/rss+all" />
+			<podcast name="Kalkofes Mattscheibe" url="http://prosieben-kalkofes-mattscheibe.feedplace.de/rss+all" />
+			<podcast name="Galileo" url="http://pro7-galileo.feedplace.de/rss+all" />
+			<podcast name="Quatsch Comedy Club" url="http://pro7-quatschcomedyclub.feedplace.de/rss+all" />
+			<podcast name="Blockbuster TV" url="http://pro7-blockbuster-tv.feedplace.de/rss+all" />
+			<podcast name="SevenGames TV" url="http://pro7-sevengames.feedplace.de/rss+all" />
+			<podcast name="taff" url="http://pro7-taff.feedplace.de/rss" />
+			<podcast name="SAM" url="http://pro7-sam.feedplace.de/rss" />
+			<podcast name="The next Uri Geller" url="http://pro7-urigeller.feedplace.de/rss+all" />
+			<podcast name="POPSTARS - Just 4 Girls!" url="http://pro7-popstars.feedplace.de/rss" />
+			<podcast name="Sexreport 2008" url="http://prosieben-sexreport.feedplace.de/rss+all" />
+			<podcast name="Jana Ina und Giovanni - Wir sind schwanger" url="http://prosieben-janaina-und-giovanni.feedplace.de/rss+all" />
+			<podcast name="Sarah und Marc crazy in Love" url="http://prosieben-sarah-marc-crazy-in-love.feedplace.de/rss+all" />
+			<podcast name="Gülcan und Collien ziehen aufs Land" url="http://prosieben-guelcan-und-collien-ziehen-aufs-lan.feedplace.de/rss+all" />
+			<podcast name="Das Model und der Freak" url="http://pro7-modelfreak.feedplace.de/rss" />
+			<podcast name="The Next Fashion Talent" url="http://prosieben-thenextfashiontalent.feedplace.de/rss+all" />
+			<podcast name="Afterworld" url="http://prosieben-afterworld.feedplace.de/rss+all" />
+			<podcast name="Check It Out" url="http://prosieben-check-it-out.feedplace.de/rss+all" />
+			<podcast name="Hot Shots" url="http://prosieben-hotshots.feedplace.de/rss+all" />
+			<podcast name="Gina-Lisas Welt!" url="http://prosieben-gina-lisas-welt.feedplace.de/rss+all" />
+			<podcast name="Deutschlands sexiest Platte" url="http://prosieben-sam-sexiest-platte.feedplace.de/rss+all" />
+			<podcast name="UNSCHULDIG" url="http://prosieben-unschuldig.feedplace.de/rss+all" />
+			<podcast name="WE LOVE in concert: iTunes Live: Berlin Festival" url="http://prosieben-we-love-in-concert.feedplace.de/rss+all" />
+			<podcast name="Schlüsselreiz" url="http://pro7-schluesselreiz.feedplace.de/rss+all" />
+			<podcast name="FC Bayern München" url="http://pro7-fcbayern.feedplace.de/rss+all" />
+		</provider>
+		<provider name="RTL" >
+			<podcast name="RTL Aktuell" url="http://rtl-rtl-aktuell.feedplace.de/rss" />
+			<podcast name="RTL Nachtjournal" url="http://rtl-rtl-nachtjournal.feedplace.de/rss" />
+			<podcast name="RTL News kompakt" url="http://rtl-rtl-news-kompakt.feedplace.de/rss" />
+			<podcast name="RTL Aktuell (Audio)" url="http://rtl-rtl-aktuell-audio.feedplace.de/rss" />
+			<podcast name="Die Punkt 12 Reporter" url="http://rtl-punkt-12-reporter.feedplace.de/rss" />
+			<podcast name="Der Punkt 12 Test!" url="http://rtl-punkt-12-test.feedplace.de/rss" />
+			<podcast name="Punkt 12 kompakt" url="http://rtl-punkt-12-kompakt.feedplace.de/rss" />
+			<podcast name="RTL Exclusiv" url="http://rtl-rtl-exclusiv.feedplace.de/rss" />
+			<podcast name="RTL Exclusiv kompakt" url="http://rtl-exclusiv-kompakt.feedplace.de/rss" />
+			<podcast name="RTL Explosiv" url="http://rtl-rtl-explosiv.feedplace.de/rss" />
+			<podcast name="EXTRA kompakt - Das RTL Magazin" url="http://rtl-extra-kompakt.feedplace.de/rss" />
+			<podcast name="AWZ (Vorschau)" url="http://rtl-awz-folgenvorschau.feedplace.de/rss" />
+			<podcast name="GZSZ (Vorschau)" url="http://rtl-gzsz.feedplace.de/rss" />
+			<podcast name="Unter uns (Vorschau)" url="http://rtl-unteruns-folgenvorschau.feedplace.de/rss" />
+		</provider>
+		<provider name="Sat 1" >
+			<podcast name="Bunkershow" url="http://sat1comedy-bunkershow.feedplace.de/rss+all" />
+			<podcast name="Slam Tour mit Kuttner" url="http://sat1comedy-slamtour.feedplace.de/rss+all" />
+			<podcast name="Sat.1 Comedy on Stage" url="http://sat1comedy-onstage.feedplace.de/rss+all" />
+			<podcast name="Poetry Comedy" url="http://sat1-poetrycomedy.feedplace.de/rss+all" />
+			<podcast name="Slam Palast" url="http://sat1comedy-slampalast.feedplace.de/rss+all" />
+		</provider>
+		<provider name="ZDF" >
+			<podcast name="Berlinale 2008" url="http://www.zdf.de/ZDFmediathek/content/426566?view=podcast" />
+			<podcast name="Das aktuelle sportstudio" url="http://www.zdf.de/ZDFmediathek/content/440294?view=podcast" />
+			<podcast name="Forum am freitag" url="http://content.zdf.de/podcast/zdf_podcasts/forum_v.xml" />
+			<podcast name="heute - die aktuelle 19 Uhr-Nachrichtensendung" url="http://content.zdf.de/podcast/zdf_heute/heute.xml" />
+			<podcast name="heute-journal - das aktuelle Nachrichtenmagazin" url="http://content.zdf.de/podcast/zdf_hjo/hjo.xml" />
+			<podcast name="Lanz kocht" url="http://www.zdf.de/ZDFmediathek/content/362696?view=podcast" />
+			<podcast name="logo! Deine Nachrichten" url="http://content.zdf.de/podcast/zdf_logo/logo_v.xml" />
+			<podcast name="Momasurfer vom Morgenmagazin" url="http://www.zdf.de/ZDFmediathek/content/399788?view=podcast" />
+			<podcast name="Neues aus der Anstalt" url="http://content.zdf.de/podcast/zdf_neuada/neuada_v.xml" />
+			<podcast name="Godpod" url="http://content.zdf.de/podcast/zdf_kirche/kirche_v.xml" />
+			<podcast name="Toll! Satire von Doyé und Wiemers" url="http://content.zdf.de/podcast/zdf_f21/f21toll_v.xml" />
+			<podcast name="Wetten, dass...?" url="http://content.zdf.de/podcast/zdf_wd/wd_v.xml" />
+			<podcast name="German Dream - Träumen für Deutschland" url="http://modul.germandream.zdf.de/RSS/" />
+		</provider>
+	</language>
+</podcasts>

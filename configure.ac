@@ -221,4 +221,9 @@ orfat/src/Makefile
 filebrowser/Makefile
 filebrowser/src/Makefile
 
+podcast/Makefile
+podcast/etc/Makefile
+podcast/po/Makefile
+podcast/src/Makefile
+
 ])
