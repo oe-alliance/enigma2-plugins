@@ -94,6 +94,7 @@ emailclient/src/Makefile
 
 autotimer/Makefile
 autotimer/src/Makefile
+autotimer/src/webinterface/Makefile
 autotimer/po/Makefile
 
 epgrefresh/Makefile
