@@ -323,8 +323,8 @@ class EPGSearch(EPGSelection):
 			encoding = config.plugins.epgsearch.encoding.value
 			if encoding != 'UTF-8':
 				try:
-					searchString = searchString.decode('UTF-8', 'replace').encode(encoding)
-				except UnicodeDecodeError:
+					searchString = searchString.decode('UTF-8', 'replace').encode(encoding, 'replace')
+				except (UnicodeDecodeError, UnicodeEncodeError):
 					pass
 
 			# Search EPG, default to empty list
