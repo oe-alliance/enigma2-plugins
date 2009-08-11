@@ -12,6 +12,7 @@ from Components.Language import language
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.ScrollLabel import ScrollLabel
+from decrypt import decrypt
 from enigma import eListboxPythonMultiContent, eTimer, gFont, RT_HALIGN_CENTER, RT_HALIGN_RIGHT
 from os import environ, listdir, remove
 from Plugins.Plugin import PluginDescriptor
@@ -195,6 +196,8 @@ class RSDownload():
 		self.freeDownloadUrl = ""
 		self.freeDownloadTimer = eTimer()
 		self.freeDownloadTimer.callback.append(self.freeDownloadStart)
+		self.checkTimer = eTimer()
+		self.checkTimer.callback.append(self.doCheckTimer)
 		
 		self.finishCallbacks = []
 
@@ -256,11 +259,18 @@ class RSDownload():
 			self.execFinishCallbacks()
 
 	def httpFinished(self, string=""):
-		self.downloading = False
 		if string is not None:
 			writeLog("Failed: %s"%self.url)
 			writeLog("Error: %s"%string)
+		self.status = _("Checking")
+		self.checkTimer.start(10000, 1)
+
+	def doCheckTimer(self):
+		if self.size == 0:
 			self.status = _("Failed")
+		elif self.progress == 100:
+			self.status = _("Finished")
+		self.downloading = False
 		self.execFinishCallbacks()
 
 	def execFinishCallbacks(self):
@@ -268,15 +278,14 @@ class RSDownload():
 			x()
 
 	def httpFailed(self, failure=None, error=""):
-		self.downloading = False
 		if failure:
 			if error == "":
 				error = failure.getErrorMessage()
 			if error != "" and not error.startswith("[Errno 2]"):
 				writeLog("Failed: %s"%self.url)
 				writeLog("Error: %s"%error)
-				self.status = _("Failed")
-		self.execFinishCallbacks()
+				self.status = _("Checking")
+		self.checkTimer.start(10000, 1)
 
 	def stop(self):
 		self.progress = 0
@@ -352,11 +361,12 @@ class RS():
 			for download in self.downloads:
 				if download.downloading == True:
 					downloadCount += 1 # Count the downloaded files
-			if config.plugins.RSDownloader.username.value == "" and config.plugins.RSDownloader.password.value == "" and downloadCount == 0: # Allow one download if without account
-				for download in self.downloads:
-					if download.downloading == False and download.status.startswith(_("Waiting")):
-						download.start() # Start first download in the list
-						break
+			if config.plugins.RSDownloader.username.value == "" and config.plugins.RSDownloader.password.value == "":
+				if downloadCount < 1: # Allow one download if without account
+					for download in self.downloads:
+						if download.downloading == False and download.status.startswith(_("Waiting")):
+							download.start() # Start first download in the list
+							break
 			else:
 				mayDownloadCount = config.plugins.RSDownloader.count_downloads.value - downloadCount
 				for download in self.downloads:
@@ -604,18 +614,9 @@ class RSSearch(Screen):
 		if len(self.files) > 0:
 			idx = self["list"].getSelectedIndex()
 			url = self.files[idx]
-			list = ("%s/search.txt" % config.plugins.RSDownloader.lists_directory.value).replace("//", "/")
 			try:
-				f = open(list, "r")
-				content = f.read()
-				f.close()
-				if not content.endswith("\n"):
-					content += "\n"
-			except:
-				content = ""
-			try:
-				f = open(list, "w")
-				f.write("%s%s\n" % (content, url))
+				f = open(("%s/search.txt" % config.plugins.RSDownloader.lists_directory.value).replace("//", "/"), "a")
+				f.write("%s\n"%url)
 				f.close()
 				self.session.open(MessageBox, (_("Added %s to the download-list.") % url), MessageBox.TYPE_INFO)
 			except:
@@ -718,6 +719,23 @@ class RSLogScreen(ChangedScreen):
 
 ##############################################################################
 
+class RSContainerSelector(ChangedScreen):
+	skin = """
+		<screen position="center,center" size="560,450" title="RS Downloader">
+			<widget name="list" position="0,0" size="560,450" />
+		</screen>"""
+
+	def __init__(self, session, list):
+		ChangedScreen.__init__(self, session)
+		self["list"] = MenuList(list)
+		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
+
+	def okClicked(self):
+		cur = self["list"].getCurrent()
+		self.close(cur)
+
+##############################################################################
+
 class RSList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -783,6 +801,7 @@ class RSMain(ChangedScreen):
 		list.append((_("Delete download"), self.delete))
 		list.append((_("Use search engine"), self.search))
 		list.append((_("Add downloads from txt files"), self.add))
+		list.append((_("Add files from container"), self.addContainer))
 		list.append((_("Delete failed downloads"), self.deleteFailed))
 		list.append((_("Restart failed downloads"), self.restartFailed))
 		list.append((_("Clear finished downloads"), self.clearFinished))
@@ -845,16 +864,12 @@ class RSMain(ChangedScreen):
 
 	def searchScreenCallback(self):
 		self.refreshTimer.stop()
-		rapidshare.readLists()
-		if config.plugins.RSDownloader.onoff.value:
-			rapidshare.startDownloading()
+		rapidshare.startDownloading()
 		self.updateList()
 
 	def add(self):
 		self.refreshTimer.stop()
-		rapidshare.readLists()
-		if config.plugins.RSDownloader.onoff.value:
-			rapidshare.startDownloading()
+		rapidshare.startDownloading()
 		self.updateList()
 
 	def config(self):
@@ -868,6 +883,38 @@ class RSMain(ChangedScreen):
 				if download.downloading:
 					download.stop()
 		self.updateList()
+
+	def addContainer(self):
+		try:
+			file_list = listdir(config.plugins.RSDownloader.lists_directory.value)
+		except:
+			file_list = []
+		list = []
+		for file in file_list:
+			if file.lower().endswith(".ccf") or file.lower().endswith(".dlc") or file.lower().endswith(".rsdf"):
+				list.append(file)
+		list.sort()
+		self.session.openWithCallback(self.addContainerCallback, RSContainerSelector, list)
+
+	def addContainerCallback(self, callback=None):
+		if callback:
+			file = "%s/%s"%(config.plugins.RSDownloader.lists_directory.value, callback)
+			file = file.replace("//", "/")
+			links = decrypt(file)
+			try:
+				f = open(("%s/%s.txt" % (config.plugins.RSDownloader.lists_directory.value, callback)).replace("//", "/"), "w")
+				for link in links:
+					if link.endswith(".html"):
+						link = link[:-5]
+					elif link.endswith(".htm"):
+						link = link[:-4]
+					f.write("%s\n"%link)
+				f.close()
+			except:
+				pass
+			self.refreshTimer.stop()
+			rapidshare.startDownloading()
+			self.updateList()
 
 ##############################################################################
 
