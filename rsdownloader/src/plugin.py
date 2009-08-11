@@ -73,17 +73,9 @@ language.addCallback(localeInit)
 
 def writeLog(message):
 	if config.plugins.RSDownloader.write_log.value:
-		log_file = "/tmp/rapidshare.log"
 		try:
-			f = open(log_file, "r")
-			log = f.read()
-			f.close()
-		except:
-			log = ""
-		log = log + strftime("%c", localtime(time())) + " - " + message + "\n"
-		try:
-			f = open(log_file, "w")
-			f.write(log)
+			f = open("/tmp/rapidshare.log", "a")
+			f.write(strftime("%c", localtime(time())) + " - " + message + "\n")
 			f.close()
 		except:
 			pass
@@ -384,7 +376,6 @@ class RS():
 			download = RSDownload(url)
 			download.finishCallbacks.append(self.cleanLists)
 			self.downloads.append(download)
-			self.startDownloading()
 			return True
 
 	def readLists(self):
@@ -416,6 +407,7 @@ class RS():
 					writeLog("Added %d files from list %s..."%(count, list))
 			except:
 				writeLog("Error while reading list %s!"%list)
+
 	def cleanLists(self):
 		writeLog("Cleaning lists...")
 		path = config.plugins.RSDownloader.lists_directory.value
@@ -853,11 +845,16 @@ class RSMain(ChangedScreen):
 
 	def searchScreenCallback(self):
 		self.refreshTimer.stop()
+		rapidshare.readLists()
+		if config.plugins.RSDownloader.onoff.value:
+			rapidshare.startDownloading()
 		self.updateList()
 
 	def add(self):
 		self.refreshTimer.stop()
 		rapidshare.readLists()
+		if config.plugins.RSDownloader.onoff.value:
+			rapidshare.startDownloading()
 		self.updateList()
 
 	def config(self):
