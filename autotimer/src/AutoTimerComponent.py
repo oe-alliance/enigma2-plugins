@@ -451,15 +451,12 @@ class AutoTimerComponent(object):
 	"""
 	def getAlternative(self, override_service):
 		services = self.services
-		print "[AutoTimerComponent] looking for", override_service
 		if services:
 			serviceHandler = eServiceCenter.getInstance()
 
 			for service in services:
 				myref = eServiceReference(str(service))
-				print "[AutoTimerComponent] checking", service
 				if myref.flags & eServiceReference.isGroup:
-					print "[AutoTimerComponent] isGroup!"
 					mylist = serviceHandler.list(myref)
 					if mylist is not None:
 						while 1:
@@ -472,7 +469,6 @@ class AutoTimerComponent(object):
 									value = value[:pos+1]
 
 								if value == override_service:
-									print "[AutoTimerComponent] found match, returning", service
 									return service
 							else:
 								break
