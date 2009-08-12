@@ -354,9 +354,17 @@ class RS():
 				else:
 					return False
 
+	def allDownloadsFinished(self):
+		allDone = True
+		for download in self.downloads:
+			if (download.status != _("Failed")) and (download.status != _("Finished")):
+				allDone = False
+		return allDone
+
 	def startDownloading(self):
 		if self.mayDownload() == True:
-			self.readLists()
+			if self.allDownloadsFinished() == True:
+				self.readLists()
 			downloadCount = 0
 			for download in self.downloads:
 				if download.downloading == True:
