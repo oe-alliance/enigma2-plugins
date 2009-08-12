@@ -787,11 +787,13 @@ class RSMain(ChangedScreen):
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="10,420" size="35,25" transparent="1" alphatest="on" />
 			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="list" position="0,40" size="560,400" scrollbarMode="showNever" />
+			<widget name="key_menu" position="50,422" size="300,25" font="Regular;20" transparent="1" />
+			<widget name="list" position="0,40" size="560,375" scrollbarMode="showNever" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -802,6 +804,7 @@ class RSMain(ChangedScreen):
 		self["key_green"] = Label(_("Search"))
 		self["key_yellow"] = Label(_("Add"))
 		self["key_blue"] = Label(_("Config"))
+		self["key_menu"] = Label(_("Menu"))
 		self["list"] = RSList([])
 		
 		self.refreshTimer = eTimer()
