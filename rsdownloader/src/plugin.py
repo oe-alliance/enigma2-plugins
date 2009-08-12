@@ -236,6 +236,25 @@ class RSDownload():
 					else:
 						self.freeDownloadUrl = url
 						self.freeDownloadTimer.start((int(seconds) + 2) * 1000, 1)
+		elif self.url.__contains__("youtube.com"):
+			writeLog("Getting youtube video link: %s"%self.url)
+			self.status = _("Checking")
+			downloadLink = self.getYoutubeDownloadLink()
+			if downloadLink:
+				self.status = _("Downloading")
+				writeLog("Downloading video: %s"%downloadLink)
+				req = urllib2.Request(downloadLink)
+				url_handle = urllib2.urlopen(req)
+				headers = url_handle.info()
+				if headers.getheader("content-type") == "video/mp4":
+					ext = "mp4"
+				else:
+					ext = "flv"
+				self.download = ProgressDownload(downloadLink, ("%s/%s.%s"%(config.plugins.RSDownloader.downloads_directory.value, self.name, ext)).replace("//", "/"))
+				self.download.addProgress(self.httpProgress)
+				self.download.start().addCallback(self.httpFinished).addErrback(self.httpFailed)
+			else:
+				self.httpFailed(True, "Failed to get video url: %s"%self.url)
 		else:
 			if self.url.__contains__("rapidshare.com"):
 				url = self.url.replace("http://", "http://" + username + ":" + password + "@")
@@ -251,6 +270,14 @@ class RSDownload():
 		self.download = ProgressDownload(self.freeDownloadUrl, ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/").replace(".html", ""))
 		self.download.addProgress(self.httpProgress)
 		self.download.start().addCallback(self.httpFinished).addErrback(self.httpFailed)
+
+	def stop(self):
+		self.progress = 0
+		self.downloading = False
+		self.status = _("Waiting")
+		if self.download:
+			writeLog("Stopping download: %s"%self.url)
+			self.download.stop()
 
 	def httpProgress(self, recvbytes, totalbytes):
 		if self.size == 0:
@@ -297,13 +324,37 @@ class RSDownload():
 				self.status = _("Checking")
 		self.checkTimer.start(10000, 1)
 
-	def stop(self):
-		self.progress = 0
-		self.downloading = False
-		self.status = _("Waiting")
-		if self.download:
-			writeLog("Stopping download: %s"%self.url)
-			self.download.stop()
+	def getYoutubeDownloadLink(self):
+		mrl = None
+		html = get(self.url)
+		if html != "":
+			isHDAvailable = False
+			video_id = None
+			t = None
+			reonecat = re.compile(r'<title>(.+?)</title>', re.DOTALL)
+			titles = reonecat.findall(html)
+			if titles:
+				self.name = titles[0]
+				if self.name.startswith("YouTube - "):
+					self.name = (self.name[10:]).replace("&amp;", "&")
+			if html.__contains__("isHDAvailable = true"):
+				isHDAvailable = True
+			for line in html.split('\n'):
+				if 'swfArgs' in line:
+					line = line.strip().split()
+					x = 0
+					for thing in line:
+						if 'video_id' in thing:
+							video_id = line[x+1][1:-2]
+						elif '"t":' == thing:
+							t = line[x+1][1:-2]
+						x += 1
+			if video_id and t:
+				if isHDAvailable == True:
+					mrl = "http://www.youtube.com/get_video?video_id=%s&t=%s&fmt=22" % (video_id, t)
+				else:
+					mrl = "http://www.youtube.com/get_video?video_id=%s&t=%s&fmt=18" % (video_id, t)
+		return mrl
 
 ##############################################################################
 
