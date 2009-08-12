@@ -402,21 +402,22 @@ class RS():
 			writeLog("Could not find any list!")
 		for x in file_list:
 			list = path + x
-			try:
-				writeLog("Reading list %s..."%list)
-				f = open(list, "r")
-				count = 0
-				for l in f:
-					if l.startswith("http://"):
-						self.addDownload(l.replace("\n", "").replace("\r", ""))
-						count += 1
-				f.close()
-				if count == 0:
-					writeLog("Empty list: %s"%list)
-				else:
-					writeLog("Added %d files from list %s..."%(count, list))
-			except:
-				writeLog("Error while reading list %s!"%list)
+			if list.endswith(".txt"):
+				try:
+					writeLog("Reading list %s..."%list)
+					f = open(list, "r")
+					count = 0
+					for l in f:
+						if l.startswith("http://"):
+							self.addDownload(l.replace("\n", "").replace("\r", ""))
+							count += 1
+					f.close()
+					if count == 0:
+						writeLog("Empty list: %s"%list)
+					else:
+						writeLog("Added %d files from list %s..."%(count, list))
+				except:
+					writeLog("Error while reading list %s!"%list)
 
 	def cleanLists(self):
 		writeLog("Cleaning lists...")
