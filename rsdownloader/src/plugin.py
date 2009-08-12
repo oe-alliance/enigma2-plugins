@@ -345,6 +345,8 @@ class RS():
 						return True
 					elif hour_now == hour_end and minute_now < minute_end:
 						return True
+					else:
+						return False
 				elif hour_now > hour_start and hour_now < hour_end: # Same day...
 					return True
 				elif hour_now == hour_start and minute_now > minute_start: # Same day, same start-hour...
