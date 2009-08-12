@@ -51,6 +51,7 @@ config.plugins.RSDownloader.download_sunday = ConfigYesNo(default=True)
 config.plugins.RSDownloader.count_downloads = ConfigInteger(default=3, limits=(1, 6))
 config.plugins.RSDownloader.write_log = ConfigYesNo(default=True)
 config.plugins.RSDownloader.reconnect_fritz = ConfigYesNo(default=False)
+config.plugins.RSDownloader.autorestart_failed = ConfigYesNo(default=False)
 
 ##############################################################################
 
@@ -198,6 +199,8 @@ class RSDownload():
 		self.freeDownloadTimer.callback.append(self.freeDownloadStart)
 		self.checkTimer = eTimer()
 		self.checkTimer.callback.append(self.doCheckTimer)
+		self.restartFailedTimer = eTimer()
+		self.restartFailedTimer.callback.append(self.restartFailedCheck)
 		
 		self.finishCallbacks = []
 
@@ -268,10 +271,17 @@ class RSDownload():
 	def doCheckTimer(self):
 		if self.size == 0:
 			self.status = _("Failed")
+			if config.plugins.RSDownloader.autorestart_failed.value:
+				self.restartFailedTimer.start(10000*60, 1)
 		elif self.progress == 100:
 			self.status = _("Finished")
 		self.downloading = False
 		self.execFinishCallbacks()
+
+	def restartFailedCheck(self):
+		if self.status == _("Failed"): # check if user didn't restart already
+			self.download = None
+			self.status = _("Waiting")
 
 	def execFinishCallbacks(self):
 		for x in self.finishCallbacks:
@@ -419,15 +429,17 @@ class RS():
 					count = 0
 					for l in f:
 						if l.startswith("http://"):
-							self.addDownload(l.replace("\n", "").replace("\r", ""))
-							count += 1
+							if (self.addDownload(l.replace("\n", "").replace("\r", ""))) == True:
+								count += 1
 					f.close()
 					if count == 0:
-						writeLog("Empty list: %s"%list)
+						writeLog("Empty list or downloads already in download list: %s"%list)
 					else:
 						writeLog("Added %d files from list %s..."%(count, list))
 				except:
 					writeLog("Error while reading list %s!"%list)
+			else:
+				writeLog("No *.txt file: %s!"%list)
 
 	def cleanLists(self):
 		writeLog("Cleaning lists...")
@@ -578,7 +590,8 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 			getConfigListEntry(_("Don't download after:"), config.plugins.RSDownloader.end_time),
 			getConfigListEntry(_("Maximal downloads:"), config.plugins.RSDownloader.count_downloads),
 			getConfigListEntry(_("Write log:"), config.plugins.RSDownloader.write_log),
-			getConfigListEntry(_("Reconnect fritz.Box before downloading:"), config.plugins.RSDownloader.reconnect_fritz)])
+			getConfigListEntry(_("Reconnect fritz.Box before downloading:"), config.plugins.RSDownloader.reconnect_fritz),
+			getConfigListEntry(_("Restart failed after 10 minutes:"), config.plugins.RSDownloader.autorestart_failed)])
 		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {"green": self.save, "cancel": self.exit}, -1)
 
