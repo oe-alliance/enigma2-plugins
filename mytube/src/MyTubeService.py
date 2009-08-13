@@ -10,14 +10,21 @@ from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_LEFT, KEY_RIGHT, KE
 
 from twisted.web import client
 from twisted.internet import reactor
-from urllib2 import Request, URLError, HTTPError
+from urllib2 import Request, URLError, HTTPError, urlopen as urlopen2
 from socket import gaierror,error
 import re, os, sys, socket
 import urllib
 from urllib import FancyURLopener, quote
 import cookielib
-from httplib import HTTPConnection,CannotSendRequest,BadStatusLine
+from httplib import HTTPConnection,CannotSendRequest,BadStatusLine,HTTPException
 HTTPConnection.debuglevel = 1
+
+std_headers = {
+	'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2',
+	'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+	'Accept': 'text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5',
+	'Accept-Language': 'en-us,en;q=0.5',
+}
 
 #config.plugins.mytube = ConfigSubsection()
 #config.plugins.mytube.general = ConfigSubsection()
@@ -172,53 +179,56 @@ class MyTubeFeedEntry():
 	def getVideoUrl(self):
 		mrl = None
 		isHDAvailable = False
-		req = "http://www.youtube.com/watch?v=" + str(self.getTubeId())
+		video_id = str(self.getTubeId())
+		watch_url = "http://www.youtube.com/watch?v=" + video_id
+		watchrequest = Request(watch_url, None, std_headers)
 		try:
-			response = urllib.urlopen(req)
-			"""if config.plugins.mytube.general.useHTTPProxy.value is True:
-				proxy = {'http': str(config.plugins.mytube.general.ProxyIP.getText())+':'+str(config.plugins.mytube.general.ProxyPort.value)}
-				print "USING PRXY---->",proxy
-				response = urllib.urlopen(req,proxies=proxy)
-			else:
-				response = urllib.urlopen(req)"""
-		except HTTPError, e:
-			print "[MyTube] The server coundn't fulfill the request."
-			print "[MyTube] Error code: ", e.code
-		except URLError, e:
-			print "[MyTube] We failed to reach a server."
-			print "[MyTube] Reason: ", e.reason
-		except IOError, e:
-			print "[MyTube] We failed to reach a server."
-			print "[MyTube] Reason: ", e
+			print "trying to find out if a HD Stream is available"
+			watchvideopage = urlopen2(watchrequest).read()
+		except (urllib2.URLError, httplib.HTTPException, socket.error), err:
+			print "[MyTube] Error: Unable to retrieve watchpage"
+			print "[MyTube] Error code: ", str(err)
+			print "[MyTube] No valid mp4-url found"
+			return mrl
+
+		if "isHDAvailable = true" in watchvideopage:
+			isHDAvailable = True
+			print "HD AVAILABLE"
 		else:
-			m = None
-			while not None:
-				data = response.readline()
-				if data == "":
-					break
+			print "HD Stream NOT AVAILABLE"
 
-				if "isHDAvailable = true" in data:
-					isHDAvailable = True
-					print "HD AVAILABLE"
-				else:
-					pass
-				m = re.search("watch_fullscreen\\?(?P<vid_query>.*?)&title=(?P<name>.*)';\n", data)
-				if m:
-					break
-			response.close
-			if m:
-				t= re.match (".*[?&]t=([^&]+)", m.group('vid_query')).groups()[0]
-				if isHDAvailable is True:
-					mrl = "http://www.youtube.com/get_video?video_id=" + quote(self.getTubeId()) + "&t=" + t + "&fmt=22"
-					print "[MyTube] GOT HD URL: ", mrl
-				else:
-					mrl = "http://www.youtube.com/get_video?video_id=" + quote(self.getTubeId()) + "&t=" + t + "&fmt=18"
-					print "[MyTube] GOT SD URL: ", mrl
+		# Get video info
+		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en' % video_id
+		inforequest = Request(info_url, None, std_headers)
+		try:
+			print "getting video_info_webpage",info_url
+			infopage = urlopen2(inforequest).read()
+		except (urllib2.URLError, httplib.HTTPException, socket.error), err:
+			print "[MyTube] Error: Unable to retrieve infopage"
+			print "[MyTube] Error code: ", str(err)
+			print "[MyTube] No valid mp4-url found"
+			return mrl
 
+		mobj = re.search(r'(?m)&token=([^&]+)(?:&|$)', infopage)
+		if mobj is None:
+			# was there an error ?
+			mobj = re.search(r'(?m)&reason=([^&]+)(?:&|$)', infopage)
+			if mobj is None:
+				print 'ERROR: unable to extract "t" parameter for unknown reason'
 			else:
-				print "[MyTube] No valid mp4-url found"
-		#self.myopener = MyOpener()
-		#urllib.urlopen = MyOpener().open
+				reason = urllib.unquote_plus(mobj.group(1))
+				print 'ERROR: YouTube said: %s' % reason.decode('utf-8')
+			return mrl
+	
+		token = urllib.unquote(mobj.group(1))
+		myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
+		if isHDAvailable is True:
+			mrl = '%s&fmt=%s' % (myurl, '22')
+			print "[MyTube] GOT HD URL: ", mrl
+		else:
+			mrl = '%s&fmt=%s' % (myurl, '18')
+			print "[MyTube] GOT SD URL: ", mrl
+
 		return mrl
 
 	def getRelatedVideos(self):
