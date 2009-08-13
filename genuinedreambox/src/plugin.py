@@ -85,6 +85,7 @@ class genuineDreambox(Screen):
             self.start()
    
     def start(self):
+        udsError = False
         self.isStart = True
         try:
             self["resulttext"].setText("Please wait (Step 1)")
@@ -92,12 +93,14 @@ class genuineDreambox(Screen):
             self.uds.connect(("/var/run/tpmd_socket"))
         except:
             self["resulttext"].setText("Security service not running.")
-        if (self.stepFirst(TPMD_CMD_GET_DATA,[TPMD_DT_PROTOCOL_VERSION,TPMD_DT_TPM_VERSION,TPMD_DT_SERIAL])):
-            try:  
-                url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial,self.tpmdVersion))
-                getPage(url).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
-            except:
-                 self["resulttext"].setText("Can't connect to server. Please check your network!")
+            udsError = True
+        if not udsError:
+            if (self.stepFirst(TPMD_CMD_GET_DATA,[TPMD_DT_PROTOCOL_VERSION,TPMD_DT_TPM_VERSION,TPMD_DT_SERIAL])):
+                try:  
+                    url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial,self.tpmdVersion))
+                    getPage(url).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
+                except:
+                    self["resulttext"].setText("Can't connect to server. Please check your network!")
 
     def _gotPageLoad(self, data):
         authcode = data.strip().replace('+', '')
