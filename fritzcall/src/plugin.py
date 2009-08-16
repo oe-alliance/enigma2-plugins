@@ -228,7 +228,7 @@ class FritzCallFBF:
 		debug("[FritzCallFBF] _login")
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login"))
-		if self._md5LoginTimestamp and((time.time() - self._md5LoginTimestamp) < float(9.5*60)) and self._md5Sid != '0000000000000000': # new login after 9.5 minutes inactivity 
+		if self._md5LoginTimestamp and ((time.time() - self._md5LoginTimestamp) < float(9.5*60)) and self._md5Sid != '0000000000000000': # new login after 9.5 minutes inactivity 
 			debug("[FritzCallFBF] _login: renew timestamp: " + time.ctime(self._md5LoginTimestamp) + " time: " + time.ctime())
 			self._md5LoginTimestamp = time.time()
 			callback(None)
@@ -813,20 +813,35 @@ class FritzCallFBF:
 					# debug("[FritzCallFBF] _okGetInfo Boxinfo: " + found.group(1))
 					boxInfo = found.group(1)
 
-			found = re.match('.*if \(isNaN\(jetzt\)\)\s*return "";\s*var str = "([^"]*)";', html, re.S)
-			if found:
-				# debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
-				upTime = found.group(1)
+			if html.find('home_coninf.txt') != -1:
+				url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+				parms = urlencode({
+					'getpage':'../html/de/home/home_coninf.txt',
+					'sid':self._md5Sid
+					})
+				# debug("[FritzCallFBF] get coninfo: url: '" + url + "' parms: '" + parms + "'")
+				getPage(url,
+					method="POST",
+					agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+					headers={
+							'Content-Type': "application/x-www-form-urlencoded",
+							'Content-Length': str(len(parms))},
+					postdata=parms).addCallback(lambda x:self._okSetConInfo(callback,x)).addErrback(self._errorGetInfo)
 			else:
-				found = re.match('.*str = g_pppSeit \+"([^<]*)<br>"\+mldIpAdr;', html, re.S)
+				found = re.match('.*if \(isNaN\(jetzt\)\)\s*return "";\s*var str = "([^"]*)";', html, re.S)
 				if found:
 					# debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
 					upTime = found.group(1)
-		
-			found = re.match(".*IpAdrDisplay\('([.\d]+)'\)", html, re.S)
-			if found:
-				# debug("[FritzCallFBF] _okGetInfo IpAdrDisplay: " + found.group(1))
-				ipAddress = found.group(1)
+				else:
+					found = re.match('.*str = g_pppSeit \+"([^<]*)<br>"\+mldIpAdr;', html, re.S)
+					if found:
+						# debug("[FritzCallFBF] _okGetInfo Uptime: " + found.group(1))
+						upTime = found.group(1)
+	
+				found = re.match(".*IpAdrDisplay\('([.\d]+)'\)", html, re.S)
+				if found:
+					# debug("[FritzCallFBF] _okGetInfo IpAdrDisplay: " + found.group(1))
+					ipAddress = found.group(1)
 
 			if html.find('g_tamActive') != -1:
 				entries = re.compile('if \("(\d)" == "1"\) {\s*g_tamActive \+= 1;\s*}', re.S).finditer(html)
@@ -840,18 +855,31 @@ class FritzCallFBF:
 					i += 1
 				# debug("[FritzCallFBF] _okGetInfo tamActive: " + str(tamActive))
 		
-			if html.find('countDect2') != -1:
-				entries = re.compile('if \("1" == "1"\) countDect2\+\+;', re.S).findall(html)
-				dectActive = len(entries)
-				# debug("[FritzCallFBF] _okGetInfo dectActive: " + str(dectActive))
+			if html.find('home_dect.txt') != -1:
+				url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+				parms = urlencode({
+					'getpage':'../html/de/home/home_dect.txt',
+					'sid':self._md5Sid
+					})
+				# debug("[FritzCallFBF] get coninfo: url: '" + url + "' parms: '" + parms + "'")
+				getPage(url,
+					method="POST",
+					agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+					headers={
+							'Content-Type': "application/x-www-form-urlencoded",
+							'Content-Length': str(len(parms))},
+					postdata=parms).addCallback(lambda x:self._okSetDect(callback,x)).addErrback(self._errorGetInfo)
+			else:
+				if html.find('countDect2') != -1:
+					entries = re.compile('if \("1" == "1"\) countDect2\+\+;', re.S).findall(html)
+					dectActive = len(entries)
+					# debug("[FritzCallFBF] _okGetInfo dectActive: " + str(dectActive))
 
-			# not used for now
 			found = re.match('.*var g_intFaxActive = "0";\s*if \("1" != ""\) {\s*g_intFaxActive = "1";\s*}\s*', html, re.S)
 			if found:
 				faxActive = True
 				# debug("[FritzCallFBF] _okGetInfo faxActive")
 
-			# not used for now
 			if html.find('cntRufumleitung') != -1:
 				entries = re.compile('mode = "1";\s*ziel = "[^"]+";\s*if \(mode == "1" \|\| ziel != ""\)\s*{\s*g_RufumleitungAktiv = true;', re.S).findall(html)
 				rufumlActive = len(entries)
@@ -865,15 +893,7 @@ class FritzCallFBF:
 
 			# /cgi-bin/webcm?getpage=../html/de/home/home_dsl.txt
 			# { "dsl_carrier_state": "5", "umts_enabled": "0", "ata_mode": "0", "isusbgsm": "", "dsl_ds_nrate": "3130", "dsl_us_nrate": "448", "hint_dsl_no_cable": "0", "wds_enabled": "0", "wds_hop": "0", "isata": "" } 
-			found = re.match('.*function DslStateDisplay \(state\){\s*var state = "(\d+)";', html, re.S)
-			if found:
-				# debug("[FritzCallFBF] _okGetInfo DslState: " + found.group(1))
-				dslState = [ found.group(1), None ] # state, speed
-				found = re.match('.*function DslStateDisplay \(state\){\s*var state = "\d+";.*?if \("3130" != "0"\) str = "([^"]*)";', html, re.S)
-				if found:
-					# debug("[FritzCallFBF] _okGetInfo DslSpeed: " + found.group(1).strip())
-					dslState[1] = found.group(1).strip()
-			else:
+			if html.find('home_dsl.txt') != -1:
 				url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
 				parms = urlencode({
 					'getpage':'../html/de/home/home_dsl.txt',
@@ -887,18 +907,19 @@ class FritzCallFBF:
 							'Content-Type': "application/x-www-form-urlencoded",
 							'Content-Length': str(len(parms))},
 					postdata=parms).addCallback(lambda x:self._okSetDslState(callback,x)).addErrback(self._errorGetInfo)
+			else:
+				found = re.match('.*function DslStateDisplay \(state\){\s*var state = "(\d+)";', html, re.S)
+				if found:
+					# debug("[FritzCallFBF] _okGetInfo DslState: " + found.group(1))
+					dslState = [ found.group(1), None ] # state, speed
+					found = re.match('.*function DslStateDisplay \(state\){\s*var state = "\d+";.*?if \("3130" != "0"\) str = "([^"]*)";', html, re.S)
+					if found:
+						# debug("[FritzCallFBF] _okGetInfo DslSpeed: " + found.group(1).strip())
+						dslState[1] = found.group(1).strip()
 		
 			# /cgi-bin/webcm?getpage=../html/de/home/home_wlan.txt
 			# { "ap_enabled": "1", "active_stations": "0", "encryption": "4", "wireless_stickandsurf_enabled": "0", "is_macfilter_active": "0", "wmm_enabled": "1", "wlan_state": [ "end" ] }
-			found = re.match('.*function WlanStateLed \(state\){.*?return StateLed\("(\d+)"\);\s*}', html, re.S)
-			if found:
-				# debug("[FritzCallFBF] _okGetInfo WlanState: " + found.group(1))
-				wlanState = [ found.group(1), 0, 0 ] # state, encryption, number of devices
-				found = re.match('.*var (?:g_)?encryption = "(\d+)";', html, re.S)
-				if found:
-					# debug("[FritzCallFBF] _okGetInfo WlanEncrypt: " + found.group(1))
-					wlanState[1] = found.group(1)
-			else:
+			if html.find('home_wlan.txt') != -1:
 				url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
 				parms = urlencode({
 					'getpage':'../html/de/home/home_wlan.txt',
@@ -912,6 +933,15 @@ class FritzCallFBF:
 							'Content-Type': "application/x-www-form-urlencoded",
 							'Content-Length': str(len(parms))},
 					postdata=parms).addCallback(lambda x:self._okSetWlanState(callback,x)).addErrback(self._errorGetInfo)
+			else:
+				found = re.match('.*function WlanStateLed \(state\){.*?return StateLed\("(\d+)"\);\s*}', html, re.S)
+				if found:
+					# debug("[FritzCallFBF] _okGetInfo WlanState: " + found.group(1))
+					wlanState = [ found.group(1), 0, 0 ] # state, encryption, number of devices
+					found = re.match('.*var (?:g_)?encryption = "(\d+)";', html, re.S)
+					if found:
+						# debug("[FritzCallFBF] _okGetInfo WlanEncrypt: " + found.group(1))
+						wlanState[1] = found.group(1)
 
 			return (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive)
 
@@ -921,6 +951,36 @@ class FritzCallFBF:
 		self.info = info
 		if callback:
 			callback(info)
+
+	def _okSetDect(self, callback, html):
+		# debug("[FritzCallFBF] _okSetDect: " + html)
+		# found = re.match('.*"connection_status":"(\d+)".*"connection_ip":"([.\d]+)".*"connection_detail":"([^"]+)".*"connection_uptime":"([^"]+)"', html, re.S)
+		if html.find('"dect_enabled": "1"') != -1:
+			# debug("[FritzCallFBF] _okSetDect: dect_enabled")
+			found = re.match('.*"dect_device_list":.*\[([^\]]*)\]', html, re.S)
+			if found:
+				# debug("[FritzCallFBF] _okSetDect: dect_device_list: %s" %(found.group(1)))
+				entries = re.compile('"1"', re.S).findall(found.group(1))
+				dectActive = len(entries)
+				(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dummy, faxActive, rufumlActive) = self.info
+				self.info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive)
+				debug("[FritzCallFBF] _okSetDect info: " + str(self.info))
+		if callback:
+			callback(self.info)
+
+	def _okSetConInfo(self, callback, html):
+		# debug("[FritzCallFBF] _okSetConInfo: " + html)
+		# found = re.match('.*"connection_status":"(\d+)".*"connection_ip":"([.\d]+)".*"connection_detail":"([^"]+)".*"connection_uptime":"([^"]+)"', html, re.S)
+		found = re.match('.*"connection_ip": "([.\d]+)".*"connection_uptime": "([^"]+)"', html, re.S)
+		if found:
+			# debug("[FritzCallFBF] _okSetConInfo: ipAddress: %s upTime: %s" %( found.group(1), found.group(2)))
+			ipAddress = found.group(1)
+			upTime = found.group(2)
+			(boxInfo, dummy, dummy, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive) = self.info
+			self.info = (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive)
+			debug("[FritzCallFBF] _okSetWlanState info: " + str(self.info))
+		if callback:
+			callback(self.info)
 
 	def _okSetWlanState(self, callback, html):
 		# debug("[FritzCallFBF] _okSetWlanState: " + html)
@@ -1687,11 +1747,7 @@ class FritzOfferAction(Screen):
 		self.onLayoutFinish.append(self.setFace)
 
 	def setFace(self):
-		sep = self.actualName.find(',')
-		if sep == -1:
-			faceFile = findFace(self.actualNumber, self.actualName)
-		else:
-			faceFile = findFace(self.actualNumber, self.actualName[:sep])
+		faceFile = findFace(self.actualNumber, self.actualName)
 		if faceFile:
 			self["FacePixmap"].instance.setPixmapFromFile(faceFile)
 		
@@ -2562,6 +2618,12 @@ callList = FritzCallList()
 
 def findFace(number,name):
 	debug("[FritzCall] findFace number/name: %s/%s" % (number, name))
+	sep = name.find(',')
+	if sep != -1:
+		name = name[:sep]
+	sep = name.find('\n')
+	if sep != -1:
+		name = name[:sep]
 	facesDir = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")
 	numberFile = os.path.join(facesDir, number)
 	nameFile = os.path.join(facesDir, name)
