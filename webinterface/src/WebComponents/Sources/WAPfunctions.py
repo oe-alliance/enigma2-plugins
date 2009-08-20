@@ -92,8 +92,8 @@ class WAPfunctions(Source):
 			start = 0
 			end = 59
 		elif key == "shour" or key == "ehour":
-			start = 1
-			end = 24
+			start = 0
+			end = 23
 		elif key == "day" or key == "sday":
 			start = 1
 			end = 31
