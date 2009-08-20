@@ -114,11 +114,15 @@ class EPGRefresh:
 
 	def forceRefresh(self, session = None):
 		print "[EPGRefresh] Forcing start of EPGRefresh"
-		if session is not None:
-			self.session = session
+		if self.session is None:
+			if session is not None:
+				self.session = session
+			else:
+				return False
 
 		self.forcedScan = True
 		self.prepareRefresh()
+		return True
 
 	def start(self, session = None):
 		if session is not None:

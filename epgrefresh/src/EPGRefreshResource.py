@@ -9,10 +9,11 @@ class EPGRefreshResource(resource.Resource):
 
 	def render(self, req):
 		if req.args.has_key("refresh"):
-			# XXX: we assume we already know the session
-			epgrefresh.forceRefresh()
-			output = "initiated refresh"
+			if epgrefresh.forceRefresh():
+				output = "initiated refresh"
+			else:
+				output = "could not initiate refresh"
 		else:
 			output = "unknown command"
-		return http.Response(responsecode.OK ,stream = output)
+		return http.Response(responsecode.OK, stream = output)
 
