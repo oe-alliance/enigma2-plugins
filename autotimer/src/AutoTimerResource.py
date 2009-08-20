@@ -1,6 +1,5 @@
 from twisted.web2 import resource, responsecode, http
 from AutoTimer import AutoTimer
-from plugin import autotimer
 from . import _
 
 # pretty basic resource which is just present to have a way to start a
@@ -10,6 +9,7 @@ class AutoTimerResource(resource.Resource):
 		resource.Resource.__init__(self)
 
 	def render(self, req):
+		from plugin import autotimer
 		remove = False
 		if autotimer is None:
 			autotimer = AutoTimer()
