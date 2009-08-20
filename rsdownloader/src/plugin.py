@@ -106,7 +106,7 @@ def _parse(url):
 		path = "/"
 	return scheme, host, port, path, username, password
 
-class ProgressDownload():
+class ProgressDownload:
 	def __init__(self, url, outputfile, contextFactory=None, *args, **kwargs):
 		scheme, host, port, path, username, password = _parse(url)
 		if username and password:
@@ -183,7 +183,7 @@ def reconnect(host='fritz.box', port=49000):
 
 ##############################################################################
 
-class RSDownload():
+class RSDownload:
 	def __init__(self, url):
 		writeLog("Adding: %s"%url)
 		self.url = url
@@ -358,7 +358,7 @@ class RSDownload():
 
 ##############################################################################
 
-class RS():
+class RS:
 	def __init__(self):
 		self.downloads = []
 		self.checkTimer = eTimer()
