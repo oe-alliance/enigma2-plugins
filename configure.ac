@@ -167,6 +167,7 @@ googlemaps/src/Makefile
 rsdownloader/Makefile
 rsdownloader/po/Makefile
 rsdownloader/src/Makefile
+rsdownloader/src/container/Makefile
 
 permanentclock/Makefile
 permanentclock/po/Makefile
