@@ -122,11 +122,6 @@ private:
 	int openHttpConnection(std::string url);
 
 	Signal2<void,iPlayableService*,int> m_event;
-	enum
-	{
-		stIdle, stRunning, stStopped
-	};
-	int m_state;
 	eFixedMessagePump<int> m_pump;
 	void recv_event(int evt);
 	void setAudioPid(int pid, int type);
@@ -139,6 +134,7 @@ public:
 	virtual ~eStreamThread();
 	void start(int srcfd, int destfd);
 	void stop();
+	bool running() { return m_running; }
 
 	virtual void thread();
 	virtual void thread_finished();
@@ -149,6 +145,7 @@ public:
 	Signal1<void,int> m_event;
 private:
 	bool m_stop;
+	bool m_running;
 	int m_srcfd, m_destfd;
 	ePtr<TSAudioInfo> m_audioInfo;
 	eFixedMessagePump<int> m_messagepump;
