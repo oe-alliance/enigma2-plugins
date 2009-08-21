@@ -63,7 +63,7 @@ def autostart(reason, **kwargs):
 				# booted +- 10min from begin of timespan
 				if abs(time() - begin) < 600:
 					from Screens.MessageBox import MessageBox
-				from Tools.Notifications import AddNotificationWithCallback
+					from Tools.Notifications import AddNotificationWithCallback
 					from Tools.BoundFunction import boundFunction
 					# XXX: we use a notification because this will be suppressed otherwise
 					AddNotificationWithCallback(
