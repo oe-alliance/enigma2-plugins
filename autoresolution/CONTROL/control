@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: domino <dom.nehls@web.de>
 Homepage: n/a
-Depends: enigma2(>=2.5cvs20081218), enigma2-plugin-systemplugins-videomode
+Depends: enigma2(>=2.5git20081218), enigma2-plugin-systemplugins-videomode
 Source: http://schwerkraft.elitedvb.net/scm/?group_id=11

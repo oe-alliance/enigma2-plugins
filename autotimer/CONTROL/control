@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
 Homepage: http://www.ritzmo.de
-Depends: enigma2(>=2.5cvs20081203), python-codecs, python-re, python-xml
+Depends: enigma2(>=2.5git20081203), python-codecs, python-re, python-xml
 Source: http://enigma2-plugins.schwerkraft.elitedvb.net/

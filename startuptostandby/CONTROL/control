@@ -5,5 +5,5 @@ Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: Marcus Groﬂ <mail@marcus-gross.eu>
-Depends: enigma2(>1.0cvs20071006)
+Depends: enigma2(>1.0git20071006)
 Source: http://schwerkraft.elitedvb.net/scm/?group_id=11

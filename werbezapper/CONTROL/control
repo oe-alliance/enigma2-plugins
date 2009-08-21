@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
 Homepage: http://www.ritzmo.de
-Depends: enigma2(>2.3cvs20080214)
+Depends: enigma2(>2.3git20080214)
 Source: http://www.ritzmo.de

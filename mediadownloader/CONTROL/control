@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
 Homepage: http://www.ritzmo.de
-Depends: enigma2(>=2.5cvs20080416), twisted-web, python-netclient, python-shell
+Depends: enigma2(>=2.5git20080416), twisted-web, python-netclient, python-shell
 Source: http://www.ritzmo.de

@@ -5,4 +5,4 @@ Section: extra
 Priority: optional
 Architecture: mipsel
 Maintainer: Georg Lukas <georg@op-co.de>
-Depends: enigma2(>2.5cvs20080628)
+Depends: enigma2(>2.5git20080628)

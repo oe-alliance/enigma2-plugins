@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: fraxinas <andreas.frisch@multimedia-labs.de>
 Homepage: n/a
-Depends: enigma2(>=2.5cvs20080727), libcddb(>=1.3.0), libcdio(>=0.80)
+Depends: enigma2(>=2.5git20080727), libcddb(>=1.3.0), libcdio(>=0.80)
 Source: http://schwerkraft.elitedvb.net/

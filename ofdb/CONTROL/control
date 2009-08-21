@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: fraxinas <andreas.frisch@multimedia-labs.de>
 Homepage: n/a
-Depends: enigma2(>1.0cvs20070908), python-html, twisted-web
+Depends: enigma2(>1.0git20070908), python-html, twisted-web
 Source: http://schwerkraft.elitedvb.net/scm/?group_id=11
