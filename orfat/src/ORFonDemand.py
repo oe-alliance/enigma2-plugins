@@ -17,7 +17,7 @@ main_url = "http://ondemand.orf.at"
 
 class ORFMain(Screen):
 	skin = """
-	<screen position="100,130" size="520,320" title="ORF.at onDemand" >
+	<screen position="center,center" size="520,320" title="ORF.at onDemand" >
 		<widget name="list" position="10,10" size="500,300" scrollbarMode="showOnDemand" />
 	</screen>"""
 
@@ -67,7 +67,7 @@ class ORFMain(Screen):
 
 class ORFSub(Screen):
 	skin = """
-	<screen position="100,130" size="520,320" title="ORF.at onDemand" >
+	<screen position="center,center" size="520,320" title="ORF.at onDemand" >
 		<widget name="list" position="10,10" size="500,300" scrollbarMode="showOnDemand" />
 	</screen>"""
 

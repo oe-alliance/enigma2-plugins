@@ -17,7 +17,7 @@ from twisted.web.client import downloadPage, getPage
 
 class ORFMain(Screen):
 	skin = """
-	<screen position="85,65" size="550,450" title="ORF.at IPTV" backgroundColor="#6699cc" >
+	<screen position="center,center" size="550,450" title="ORF.at IPTV" backgroundColor="#6699cc" >
 		<ePixmap pixmap="skin_default/arrowup.png" position="256,10" size="37,70" alphatest="blend" />
 		<widget name="pic" position="0,0" size="0,0" />
 		<ePixmap pixmap="skin_default/arrowdown.png" position="256,370" size="37,70" alphatest="blend" />
