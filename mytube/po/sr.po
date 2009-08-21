@@ -1,0 +1,465 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Srpski Enigma2 MyTube\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-21 08:55+0200\n"
+"PO-Revision-Date: 2009-08-17 18:47+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica www.crnaberza.com <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Srpski (Serbian)\n"
+"X-Poedit-Country: SRBIJA (SERBIA)\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-"
+"plugins\\MyTube\n"
+"X-Poedit-SearchPath-0: src\n"
+
+msgid " Results"
+msgstr ""
+
+msgid "Added: "
+msgstr "Dodato: "
+
+msgid "All"
+msgstr ""
+
+msgid "All Time"
+msgstr ""
+
+msgid "An error occured."
+msgstr ""
+
+msgid "Ascending"
+msgstr ""
+
+msgid "Ask user"
+msgstr ""
+
+msgid "Australia"
+msgstr ""
+
+msgid "Author: "
+msgstr ""
+
+msgid "Autos & Vehicles"
+msgstr ""
+
+msgid "Brazil"
+msgstr ""
+
+msgid "Canada"
+msgstr ""
+
+msgid "Choose target folder"
+msgstr ""
+
+msgid "Clear history on Exit:"
+msgstr "Briši istoriju na izlazu:"
+
+msgid "Close"
+msgstr "Zatvori"
+
+msgid "Comedy"
+msgstr ""
+
+msgid "Czech Republic"
+msgstr ""
+
+msgid "Descending"
+msgstr ""
+
+msgid "Display search results by:"
+msgstr "Prikaži rezultate pretrage po:"
+
+msgid "Do you want to see more entries?"
+msgstr "Da li želite da vidite još unosa?"
+
+msgid "Download Video"
+msgstr "Skini video"
+
+msgid "Download location"
+msgstr "Lokacija za skidanje:"
+
+msgid "Downloading screenshots. Please wait..."
+msgstr "Skidam skrinšotove. Molim sačekajte..."
+
+msgid "Duration: "
+msgstr "Trajanje: "
+
+msgid "Education"
+msgstr ""
+
+msgid "Enter your search term(s)"
+msgstr "Ubacite svoj izraz(e) za traženje..."
+
+msgid "Entertainment"
+msgstr ""
+
+msgid "Fetching feed entries"
+msgstr "Dobavljanje fid unosa"
+
+msgid "Fetching search entries"
+msgstr "Dobavljanje unosa traženja..."
+
+msgid "Film & Animation"
+msgstr ""
+
+msgid "France"
+msgstr ""
+
+msgid "Gaming"
+msgstr ""
+
+msgid "Germany"
+msgstr ""
+
+msgid "Great Britain"
+msgstr ""
+
+msgid "HD videos"
+msgstr "HD video"
+
+msgid "Help"
+msgstr ""
+
+msgid "History"
+msgstr "Istorija"
+
+msgid "Holland"
+msgstr ""
+
+msgid "Hong Kong"
+msgstr ""
+
+msgid "Howto & Style"
+msgstr ""
+
+msgid "India"
+msgstr ""
+
+msgid "Ireland"
+msgstr ""
+
+msgid "Israel"
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "Japan"
+msgstr ""
+
+msgid "Load feed on startup:"
+msgstr "Učitaj fid kod pokretanja:"
+
+msgid "Mexico"
+msgstr ""
+
+msgid "More video entries."
+msgstr ""
+
+msgid "Most discussed"
+msgstr "Najviše diskutovan"
+
+msgid "Most linked"
+msgstr "Najpovezaniji"
+
+msgid "Most popular"
+msgstr "Najpopularniji"
+
+msgid "Most recent"
+msgstr "Najnoviji"
+
+msgid "Most responded"
+msgstr "Najviše odgovora"
+
+msgid "Most viewed"
+msgstr "Najviše pregleda"
+
+msgid "Music"
+msgstr ""
+
+msgid "My TubePlayer"
+msgstr ""
+
+msgid "MyTube Settings"
+msgstr "MyTube postavke"
+
+msgid "MyTubePlayer"
+msgstr ""
+
+msgid "MyTubePlayer Help"
+msgstr ""
+
+msgid "MyTubePlayer active video downloads"
+msgstr "MyTube plejer aktivna skidanja videa"
+
+msgid "MyTubePlayer settings"
+msgstr "MyTube plejer postavke"
+
+msgid "MyTubeVideoInfoScreen"
+msgstr ""
+
+msgid "MyTubeVideohelpScreen"
+msgstr ""
+
+msgid "New Zealand"
+msgstr ""
+
+msgid "News & Politics"
+msgstr ""
+
+msgid "No"
+msgstr "Ne"
+
+msgid "No playable video found! Stop playing this movie?"
+msgstr ""
+
+msgid "No videos to display"
+msgstr "Nema videa za prikaz"
+
+msgid "No, but play video again"
+msgstr "Ne, ali reprodukuj video ponovo"
+
+msgid "No, but switch to video entries."
+msgstr "Ne, ali prebaci na video unose."
+
+msgid "No, but switch to video search."
+msgstr "Ne, ali prebaci na traženje videa."
+
+msgid "Nonprofits & Activism"
+msgstr ""
+
+msgid "Not fetching feed entries"
+msgstr "Ne dobavljam fid unose"
+
+msgid "People & Blogs"
+msgstr ""
+
+msgid "Pets & Animals"
+msgstr ""
+
+msgid "Play YouTube movies"
+msgstr "Reprodukuj YouTube filmove"
+
+msgid "Play next video"
+msgstr "Reprodukuj sledeći video"
+
+msgid "Play video again"
+msgstr "Ponovo reprodukuj video"
+
+msgid "Please enter your search term."
+msgstr "Molim ubacite vaš izraz za traženje."
+
+msgid "Please select a standard feed or try searching for videos."
+msgstr "Molim,izaberite standardni fid ili pokušajte traženje videa."
+
+msgid "Poland"
+msgstr ""
+
+msgid "Published"
+msgstr "Objavljeno"
+
+msgid "Rating"
+msgstr "Ocena"
+
+msgid "Ratings: "
+msgstr "Ocena: "
+
+msgid "Really quit MyTube Player?"
+msgstr "Stvarno napustiti MyTube plejer?"
+
+msgid "Recently featured"
+msgstr "Nedavno uobličeni"
+
+msgid "Related video entries."
+msgstr ""
+
+msgid "Relevance"
+msgstr "Važnost"
+
+msgid "Response video entries."
+msgstr ""
+
+msgid "Return to movie list"
+msgstr ""
+
+msgid "Russia"
+msgstr ""
+
+msgid "Save"
+msgstr "Sačuvaj"
+
+msgid "Science & Technology"
+msgstr ""
+
+msgid "Search Term(s)"
+msgstr "Traži izraz(e)"
+
+msgid "Search category:"
+msgstr "Traži kategoriju:"
+
+msgid "Search region:"
+msgstr "Traži regiju:"
+
+msgid "Search restricted content:"
+msgstr "Traži ograničeni sadržaj:"
+
+msgid "Select new feed to view."
+msgstr "Izaberi novi fid za pregled."
+
+msgid "Select your choice."
+msgstr "Izaberite vašu alternativu."
+
+msgid "Short Movies"
+msgstr ""
+
+msgid "Sorry, video is not available!"
+msgstr "Žao nam je,video je nedostupan!"
+
+msgid "South Korea"
+msgstr ""
+
+msgid "Spain"
+msgstr ""
+
+msgid "Sports"
+msgstr ""
+
+msgid "Start with following feed:"
+msgstr "Počni sa sledećim fidom:"
+
+msgid "Std. Feeds"
+msgstr "Std fidovi"
+
+msgid "Stop playing this movie?"
+msgstr "Zaustavi reprodukciju filma?"
+
+msgid "Sweden"
+msgstr ""
+
+msgid "Tags: "
+msgstr ""
+
+msgid "Taiwan"
+msgstr ""
+
+msgid "There was an error getting the feed entries. Please try again."
+msgstr ""
+
+msgid "This Month"
+msgstr ""
+
+msgid "This Week"
+msgstr ""
+
+msgid "This is the help screen. Feed me with something to display."
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Top favorites"
+msgstr "Top favoriti"
+
+msgid "Top rated"
+msgstr "Najbolje ocenjeni"
+
+msgid "Travel & Events"
+msgstr ""
+
+msgid "Trying to download the Youtube feed entries. Please wait..."
+msgstr "Pokušavam skidanje YouTube fid unosa. Molim sačekajte..."
+
+msgid "Trying to download the Youtube search results. Please wait..."
+msgstr "Pokušavam skidanje YouTube rezultata traženja. Molim sačekajte..."
+
+msgid "United States"
+msgstr ""
+
+msgid "Videobrowser exit behavior:"
+msgstr "Ponašanje video pretraživača kod izlaza:"
+
+msgid "Videoplayer stop/exit behavior:"
+msgstr "Video plejer zaustavi/izađi ponašanje :"
+
+msgid "View Count"
+msgstr "Vidi brojanje"
+
+msgid "View active downloads"
+msgstr "Vidi aktivna skidanja"
+
+msgid "View related videos"
+msgstr "Vidi srodne video zapise"
+
+msgid "View response videos"
+msgstr "Vidi odgovarajuće video zapise"
+
+msgid "Views: "
+msgstr "Pregleda: "
+
+msgid ""
+"Welcome to the MyTube Youtube Player.\n"
+"\n"
+"Use the Bouqet+ button to navigate to the search field and the Bouqet- to "
+"navigate to the video entries.\n"
+"\n"
+"To play a movie just press OK on your remote control.\n"
+"\n"
+"Press info to see the movie description.\n"
+"\n"
+"Press the Menu button for additional options.\n"
+"\n"
+"The Help button shows this help again."
+msgstr ""
+"Dobro došli u MyTube Youtube plejer.\n"
+"\n"
+"Koristite bouquet+ tipku da navedete na polje za traženje i bouquet- da "
+"navedete na video unose.\n"
+"\n"
+"Da reprodukujete film samo stisnite OK na vašem daljinskom.\n"
+"\n"
+"Pritisnite info da vidite opis filma.\n"
+"\n"
+"Pritisnite Meni tipku za dodatne opcije.\n"
+"\n"
+"Help tipka pokazuje opet ovu pomoć."
+
+msgid ""
+"Welcome to the MyTube Youtube Player.\n"
+"\n"
+"While entering your search term(s) you will get suggestions displayed "
+"matching your search term.\n"
+"\n"
+"To select a suggestion press DOWN on your remote, select the desired result "
+"and press OK on your remote to start the search.\n"
+"\n"
+"Press exit to get back to the input field."
+msgstr ""
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "Yes, but play next video"
+msgstr "Da, ali reprodukuj sledeći video"
+
+msgid "Yes, but play previous video"
+msgstr "Da, ali reprodukuj prethodni video"
+
+#~ msgid "MyTube Player Main Screen..."
+#~ msgstr "MyTube plejer Glavni ekran..."
+
+#~ msgid "Please wait..."
+#~ msgstr "Molim čekajte..."
+
+#~ msgid "Press OK to save changes!!!"
+#~ msgstr "Pritisnite OK da sačuvate promene!!!"
+
+#~ msgid "Search"
+#~ msgstr "Traži"
+
+#~ msgid "There was an error getting the feed entries. Try again..."
+#~ msgstr "Desila se greška kod uzimanja fid unosa. Pokušajte ponovo..."
