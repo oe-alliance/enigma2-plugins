@@ -71,7 +71,7 @@ class genuineDreambox(Screen):
         self["actions"] = ActionMap(["SetupActions", "ColorActions"],
         {
             "green": self.restart,
-            "cancel": self.close,
+            "cancel": self.exit,
          }, -1)
         self["kGreen"] = Button(_("Restart"))
         self["kRed"] = Button(_("Cancel"))
@@ -82,6 +82,7 @@ class genuineDreambox(Screen):
 
     def restart(self):
         if not self.isStart:
+            self.closeUds()
             self.start()
    
     def start(self):
@@ -91,6 +92,7 @@ class genuineDreambox(Screen):
             self["resulttext"].setText("Please wait (Step 1)")
             self.uds = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
             self.uds.connect(("/var/run/tpmd_socket"))
+            self.uds.settimeout(5.0)
         except:
             self["resulttext"].setText("Security service not running.")
             udsError = True
@@ -101,10 +103,6 @@ class genuineDreambox(Screen):
                     getPage(url).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
                 except:
                     self["resulttext"].setText("Can't connect to server. Please check your network!")
-        try:
-            self.uds.close()
-        except:
-            pass
 
     def _gotPageLoad(self, data):
         authcode = data.strip().replace('+', '')
@@ -122,6 +120,7 @@ class genuineDreambox(Screen):
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad) 
 
     def errorLoad(self, error):
+	print str(error)
         self["resulttext"].setText("Invalid response from server. Please report: %s" % str(error))
 
     def buildUrl(self):
@@ -184,7 +183,6 @@ class genuineDreambox(Screen):
             return False
 
     def udsSend(self, cmdTyp, data, length):
-        self.uds.settimeout(2)
         sbuf = [(cmdTyp >> 8) & 0xff,(cmdTyp >> 0) & 0xff,(length >> 8) & 0xff,(length >> 0) & 0xff]
         sbuf.extend(data[:length])
         sbuf = struct.pack(str((length + 4))+"B", *sbuf)
@@ -202,6 +200,16 @@ class genuineDreambox(Screen):
         else:
             return -1
         return res
+
+    def closeUds(self):
+       try:
+            self.uds.close()
+       except:
+            pass
+
+    def exit(self):
+        self.closeUds()
+        self.close() 
 
 def main(session, **kwargs):
         session.open(genuineDreambox)
