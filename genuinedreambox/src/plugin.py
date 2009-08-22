@@ -101,6 +101,10 @@ class genuineDreambox(Screen):
                     getPage(url).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
                 except:
                     self["resulttext"].setText("Can't connect to server. Please check your network!")
+        try:
+            self.uds.close()
+        except:
+            pass
 
     def _gotPageLoad(self, data):
         authcode = data.strip().replace('+', '')
@@ -180,14 +184,21 @@ class genuineDreambox(Screen):
             return False
 
     def udsSend(self, cmdTyp, data, length):
+        self.uds.settimeout(2)
         sbuf = [(cmdTyp >> 8) & 0xff,(cmdTyp >> 0) & 0xff,(length >> 8) & 0xff,(length >> 0) & 0xff]
         sbuf.extend(data[:length])
         sbuf = struct.pack(str((length + 4))+"B", *sbuf)
-        self.uds.send(sbuf)
+        try:
+            self.uds.send(sbuf)
+        except socket.timeout:
+            self["resulttext"].setText("Invalid response from Security service pls restart your Dreambox" )
         rbuf = self.uds.recv(4)
         leng = [ord(rbuf[2]) << 8 | ord(rbuf[3])]
         if (leng != 4):
-            res = self.uds.recv(leng[0])
+            try:
+                res = self.uds.recv(leng[0])
+            except socket.timeout:
+                self["resulttext"].setText("Invalid response from Security service pls restart your Dreambox")
         else:
             return -1
         return res
