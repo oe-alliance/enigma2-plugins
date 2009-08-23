@@ -114,13 +114,13 @@ class genuineDreambox(Screen):
         self["resulttext"].setText("Please wait (Step 2)")
         self.back = data.strip()
         self.random = (self.formatList(base64.b64decode(self.back)))
-        self.stepSecond(TPMD_CMD_GET_DATA,[TPMD_DT_PROTOCOL_VERSION,TPMD_DT_TPM_VERSION,TPMD_DT_SERIAL,TPMD_DT_LEVEL2_CERT,
-                TPMD_DT_LEVEL3_CERT,TPMD_DT_FAB_CA_CERT,TPMD_DT_DATABLOCK_SIGNED] )
-        url = self.buildUrl()
-        getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad) 
+        if (self.stepSecond(TPMD_CMD_GET_DATA,[TPMD_DT_PROTOCOL_VERSION,TPMD_DT_TPM_VERSION,TPMD_DT_SERIAL,TPMD_DT_LEVEL2_CERT,
+                TPMD_DT_LEVEL3_CERT,TPMD_DT_FAB_CA_CERT,TPMD_DT_DATABLOCK_SIGNED] )):
+            url = self.buildUrl()
+            getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad) 
 
     def errorLoad(self, error):
-	print str(error)
+        print str(error)
         self["resulttext"].setText("Invalid response from server. Please report: %s" % str(error))
 
     def buildUrl(self):
@@ -152,8 +152,11 @@ class genuineDreambox(Screen):
         return (self.parseResult (self.udsSend(typ,daten,len(daten)), 1))
 
     def stepSecond(self,typ,daten):
-        self.parseResult(self.udsSend(typ,daten,len(daten)),2)
-        self.parseResult(self.udsSend(TPMD_CMD_COMPUTE_SIGNATURE,self.random,8),3)
+        if (self.parseResult(self.udsSend(typ,daten,len(daten)),2) == False):
+            return False
+        if (self.parseResult(self.udsSend(TPMD_CMD_COMPUTE_SIGNATURE,self.random,8),3) == False):
+            return False
+        return True     
 
     def parseResult(self,rbuf,art):
         if (rbuf != -1):
@@ -176,27 +179,41 @@ class genuineDreambox(Screen):
                 self.level2_cert = tpmdata.get(4)
                 self.level3_cert = tpmdata.get(5) # can be None
                 self.fab_ca_cert = tpmdata.get(6)
-                self.datablock_signed = tpmdata.get(7)                
+                self.datablock_signed = tpmdata.get(7)
+                return True            
             elif (art == 3):
                 self.r = self.formatString(buf)
+                return True
         else:
             return False
 
     def udsSend(self, cmdTyp, data, length):
+        udsError = False
         sbuf = [(cmdTyp >> 8) & 0xff,(cmdTyp >> 0) & 0xff,(length >> 8) & 0xff,(length >> 0) & 0xff]
         sbuf.extend(data[:length])
         sbuf = struct.pack(str((length + 4))+"B", *sbuf)
         try:
             self.uds.send(sbuf)
+            udsError = False
         except socket.timeout:
+            udsError = True
             self["resulttext"].setText("Invalid response from Security service pls restart your Dreambox" )
-        rbuf = self.uds.recv(4)
-        leng = [ord(rbuf[2]) << 8 | ord(rbuf[3])]
-        if (leng != 4):
-            try:
-                res = self.uds.recv(leng[0])
-            except socket.timeout:
-                self["resulttext"].setText("Invalid response from Security service pls restart your Dreambox")
+        try:
+            rbuf = self.uds.recv(4)
+            udsError = False
+        except socket.timeout:
+            udsError = True
+            self["resulttext"].setText("Invalid response from Security service pls restart your Dreambox" )
+        
+        if (udsError == False):
+            leng = [ord(rbuf[2]) << 8 | ord(rbuf[3])]
+            if (leng != 4):
+                try:
+                    res = self.uds.recv(leng[0])
+                except socket.timeout:
+                    self["resulttext"].setText("Invalid response from Security service pls restart your Dreambox")
+            else:
+                return -1
         else:
             return -1
         return res
