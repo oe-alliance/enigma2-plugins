@@ -82,7 +82,6 @@ class genuineDreambox(Screen):
 
     def restart(self):
         if not self.isStart:
-            self.closeUds()
             self.start()
    
     def start(self):
@@ -108,6 +107,7 @@ class genuineDreambox(Screen):
         authcode = data.strip().replace('+', '')
         self.finish = "%s-%s-%s" % (authcode[0:4], authcode[4:8], authcode[8:12])
         self["resulttext"].setText(self.finish)
+        self.closeUds()
         self.isStart = False
         
     def _gotPageLoadRandom(self, data):
