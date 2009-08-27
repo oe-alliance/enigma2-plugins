@@ -1,4 +1,4 @@
-from twisted.web2 import resource, responsecode, http
+from twisted.web2 import http, http_headers, resource, responsecode
 from AutoTimer import AutoTimer
 from . import _
 
@@ -10,7 +10,9 @@ class AutoTimerResource(resource.Resource):
 
 	def render(self, req):
 		from plugin import autotimer
+
 		remove = False
+		res = False
 		if autotimer is None:
 			autotimer = AutoTimer()
 			remove = True
@@ -18,10 +20,21 @@ class AutoTimerResource(resource.Resource):
 		if req.args.has_key("parse"):
 			ret = autotimer.parseEPG()
 			output = _("Found a total of %d matching Events.\n%d Timer were added and %d modified.") % (ret[0], ret[1], ret[2])
+			res = True
 		else:
 			output = "unknown command"
 
 		if remove:
+			autotimer.writeXml()
 			autotimer = None
-		return http.Response(responsecode.OK ,stream = output)
+
+		result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n
+			<e2simplexmlresult>\n
+				<e2state>%s</e2state>\n
+				<e2statetext>%s</e2statetext>\n
+			</e2simplexmlresult>
+			""" % ('true' if res else 'false', output)
+
+		XML_HEADER = {'Content-type': http_headers.MimeType('application', 'xhtml+xml', (('charset', 'UTF-8'),))}
+		return http.Response(responsecode.OK, XML_HEADER, stream = result)
 
