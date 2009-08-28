@@ -25,6 +25,8 @@ class EPGRefreshResource(resource.Resource):
 			</e2simplexmlresult>
 			""" % ('true' if res else 'false', output)
 
-		XML_HEADER = {'Content-type': http_headers.MimeType('application', 'xhtml+xml', (('charset', 'UTF-8'),))}
-		return http.Response(responsecode.OK, XML_HEADER, stream = result)
-
+		request.setResponseCode(http.OK)
+		request.setHeader('Content-type', 'application; xhtml+xml')
+		request.setHeader('charset', 'UTF-8')
+		
+		return result

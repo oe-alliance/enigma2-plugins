@@ -1,4 +1,4 @@
-from twisted.web2 import http, http_headers, resource, responsecode
+from twisted.web import http, resource
 from AutoTimer import AutoTimer
 from . import _
 
@@ -34,7 +34,10 @@ class AutoTimerResource(resource.Resource):
 				<e2statetext>%s</e2statetext>\n
 			</e2simplexmlresult>
 			""" % ('true' if res else 'false', output)
-
-		XML_HEADER = {'Content-type': http_headers.MimeType('application', 'xhtml+xml', (('charset', 'UTF-8'),))}
-		return http.Response(responsecode.OK, XML_HEADER, stream = result)
+	
+		request.setResponseCode(http.OK)
+		request.setHeader('Content-type', 'application; xhtml+xml')
+		request.setHeader('charset', 'UTF-8')
+		
+		return result
 
