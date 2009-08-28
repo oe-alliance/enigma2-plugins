@@ -23,12 +23,13 @@ TextHtmlHeaderFiles = ['wapremote.xml', 'stream.xml', ]
 NoExplicitHeaderFiles = ['getpid.xml', 'tvbrowser.xml', ]
 
 class ScreenPage(resource.Resource):
-	def __init__(self, session, path):		
+	def __init__(self, session, path, addSlash = False):		
 		resource.Resource.__init__(self)
-		
+				
 		self.session = session
 		self.path = path
-
+		self.addSlash = addSlash
+		
 	def render(self, request):	
 		if os.path.isfile(self.path):	
 			
@@ -52,7 +53,7 @@ class ScreenPage(resource.Resource):
 			# request.finish() is called inside webif.py (requestFinish() which is called via renderPage())			
 			webif.renderPage(request, self.path, self.session) # login?		
 		
-		elif os.path.isdir(self.path):			
+		elif os.path.isdir(self.path) and self.addSlash is True:			
 			return self.getChild("/", request).render(request)
 			
 		else:

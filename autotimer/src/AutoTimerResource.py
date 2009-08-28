@@ -35,9 +35,9 @@ class AutoTimerResource(resource.Resource):
 			</e2simplexmlresult>
 			""" % ('true' if res else 'false', output)
 	
-		request.setResponseCode(http.OK)
-		request.setHeader('Content-type', 'application; xhtml+xml')
-		request.setHeader('charset', 'UTF-8')
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
 		
 		return result
 

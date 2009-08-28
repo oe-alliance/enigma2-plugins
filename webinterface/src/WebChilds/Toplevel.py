@@ -24,14 +24,14 @@ def getToplevel(session):
 		
 	root = static.File(util.sibpath(__file__, "web-data/tpl/default"))
 	
-	root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"))) # "/web/*"
+	root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True) ) # "/web/*"
 	root.putChild("web-data", static.File(util.sibpath(__file__, "web-data")))
 	root.putChild("file", FileStreamer())
 	root.putChild("grab", GrabResource())
 	root.putChild("ipkg", IPKGResource())
 	root.putChild("play", ServiceplayerResource(session))
 	root.putChild("wap", RedirectorResource("/mobile/"))
-	root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile")))
+	root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True) )
 	#root.putChild("upload", UploadResource())
 	root.putChild("servicelist", ServiceList(session))
 	root.putChild("streamcurrent", RedirecToCurrentStreamResource(session))

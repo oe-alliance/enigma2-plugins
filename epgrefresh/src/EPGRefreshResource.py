@@ -1,4 +1,4 @@
-from twisted.web2 import http, http_headers, resource, responsecode
+from twisted.web import http, resource
 from EPGRefresh import epgrefresh
 
 # pretty basic resource which is just present to have a way to start a
@@ -25,8 +25,8 @@ class EPGRefreshResource(resource.Resource):
 			</e2simplexmlresult>
 			""" % ('true' if res else 'false', output)
 
-		request.setResponseCode(http.OK)
-		request.setHeader('Content-type', 'application; xhtml+xml')
-		request.setHeader('charset', 'UTF-8')
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
 		
 		return result
