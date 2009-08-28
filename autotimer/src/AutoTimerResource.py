@@ -28,10 +28,10 @@ class AutoTimerResource(resource.Resource):
 			autotimer.writeXml()
 			autotimer = None
 
-		result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n
-			<e2simplexmlresult>\n
-				<e2state>%s</e2state>\n
-				<e2statetext>%s</e2statetext>\n
+		result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+			<e2simplexmlresult>
+				<e2state>%s</e2state>
+				<e2statetext>%s</e2statetext>
 			</e2simplexmlresult>
 			""" % ('true' if res else 'false', output)
 	
