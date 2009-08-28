@@ -1695,28 +1695,23 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 class FritzOfferAction(Screen):
 
 	def __init__(self, session, parent, number, name=""):
-		noButtons = 3
-		width = max(scaleH(620,545), noButtons*140)
-		height = scaleV(-1,176) # = 5 + 126 + 40 + 5; 6 lines of text possible
-		buttonsGap = (width-noButtons*140)/(noButtons+1)
-		buttonsVPos = height-40-5
+		# the layout will completely be recalculated in finishLayout
 		# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 		self.skin = """
-			<screen name="FritzOfferAction" position="%d,%d" size="%d,%d" title="%s" >
-				<widget name="text" position="%d,5" size="%d,%d" font="Regular;%d" />
-				<widget name="FacePixmap" pixmap="skin_default/icons/input_question.png" position="%d,%d" size="100,100" alphatest="on" />
-				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-				<widget name="key_red" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_green" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_yellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<screen name="FritzOfferAction" title="%s" >
+				<widget name="text" size="%d,%d" font="Regular;%d" />
+				<widget name="FacePixmap" size="%d,%d" alphatest="on" />
+				<widget name="key_red_p" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<widget name="key_green_p" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<widget name="key_yellow_p" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<widget name="key_red" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_green" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_yellow" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>""" % (
-							(DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, width, height, _("Do what?"),
-							5+100+10, width -5 -100 -5, height -5 -40 -5, scaleH(22,21), # text
-							5, (height -5 -100 -5 -40 -5)/2, # FacePixmap
-							buttonsGap, buttonsVPos, buttonsGap+140+buttonsGap, buttonsVPos, buttonsGap+2*(140+buttonsGap), buttonsVPos,
-							buttonsGap, buttonsVPos, buttonsGap+140+buttonsGap, buttonsVPos, buttonsGap+2*(140+buttonsGap), buttonsVPos,
+							_("Do what?"),
+							DESKTOP_WIDTH, DESKTOP_HEIGHT, # set maximum size
+							scaleH(22,21), # text
+							DESKTOP_WIDTH, DESKTOP_HEIGHT, # set maximum size
 							) 
 		debug("[FritzOfferAction] init: %s, %s" %(number, name))
 		Screen.__init__(self, session)
@@ -1738,38 +1733,84 @@ class FritzOfferAction(Screen):
 			"cancel": self.exit,
 			"ok": self.exit, }, - 2)
 
+		self.number = number
+		self.name = name.replace("\n", ", ")
 		self["text"] = Label(number + "\n\n" + name.replace(", ", "\n"))
-		self.actualNumber = number
-		self.actualName = name.replace("\n", ", ")
 		self.parent = parent
 		self.lookupState = 0
+		self["key_red_p"] = Pixmap()
+		self["key_green_p"] = Pixmap()
+		self["key_yellow_p"] = Pixmap()
 		self["FacePixmap"] = Pixmap()
-		self.onLayoutFinish.append(self.setFace)
+		self.onLayoutFinish.append(self.finishLayout)
 
-	def setFace(self):
-		faceFile = findFace(self.actualNumber, self.actualName)
-		if faceFile:
-			self["FacePixmap"].instance.setPixmapFromFile(faceFile)
-		
+	def finishLayout(self):
+		debug("[FritzCall] FritzOfferAction/finishLayout number: %s/%s" % (self.number, self.name))
+
+		picPixmap = LoadPixmap(findFace(self.number, self.name))
+		picSize = picPixmap.size()
+		self["FacePixmap"].instance.setPixmap(picPixmap)
+
+		noButtons = 3
+		# recalculate window size
+		textSize = self["text"].getSize()
+		textSize = (textSize[0]+20, textSize[1]+20) # don't know, why, but size is too small
+		debug("[FritzCall] FritzOfferAction/finishLayout textsize: %s/%s" % textSize)
+		textSize = eSize(*textSize)
+		width = max(scaleH(620,545), noButtons*145, picSize.width() + textSize.width() + 30)
+		height = max(picSize.height()+5, textSize.height()+5, scaleV(-1,136)) + 5 + 40 + 5
+		buttonsGap = (width-noButtons*140)/(noButtons+1)
+		buttonsVPos = height-40-5
+		wSize = (width,	height)
+		wSize = eSize(*wSize)
+
+		# center the smaller vertically
+		hGap = (width-picSize.width()-textSize.width())/3
+		picPos = (hGap,(height-50-picSize.height())/2+5)
+		textPos = (hGap+picSize.width()+hGap, (height-50-textSize.height())/2+5)
+
+		# resize screen
+		self.instance.resize(wSize)
+		# resize text
+		self["text"].instance.resize(textSize)
+		# resize pixmap
+		self["FacePixmap"].instance.resize(picSize)
+		# move buttons
+		buttonPos = (buttonsGap, buttonsVPos)
+		self["key_red_p"].instance.move(ePoint(*buttonPos))
+		self["key_red"].instance.move(ePoint(*buttonPos))
+		buttonPos = (buttonsGap+140+buttonsGap, buttonsVPos)
+		self["key_green_p"].instance.move(ePoint(*buttonPos))
+		self["key_green"].instance.move(ePoint(*buttonPos))
+		buttonPos = (buttonsGap+140+buttonsGap+140+buttonsGap, buttonsVPos)
+		self["key_yellow_p"].instance.move(ePoint(*buttonPos))
+		self["key_yellow"].instance.move(ePoint(*buttonPos))
+		# move text
+		self["text"].instance.move(ePoint(*textPos))
+		# move pixmap
+		self["FacePixmap"].instance.move(ePoint(*picPos))
+		# center window
+		self.instance.move(ePoint((DESKTOP_WIDTH-wSize.width())/2, (DESKTOP_HEIGHT-wSize.height())/2))
+
 
 	def lookup(self):
 		phonebookLocation = config.plugins.FritzCall.phonebookLocation.value
 		if self.lookupState == 0:
 			self.lookupState = 1
-			self["text"].setText(self.actualNumber + "\n\n" + _("Reverse searching..."))
-			ReverseLookupAndNotifier(self.actualNumber, self.lookedUp, "UTF-8", config.plugins.FritzCall.country.value)
+			self["text"].setText(self.number + "\n\n" + _("Reverse searching..."))
+			ReverseLookupAndNotifier(self.number, self.lookedUp, "UTF-8", config.plugins.FritzCall.country.value)
 			return
 		if self.lookupState == 1 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.csv")):
-			self["text"].setText(self.actualNumber + "\n\n" + _("Searching in Outlook export..."))
+			self["text"].setText(self.number + "\n\n" + _("Searching in Outlook export..."))
 			self.lookupState = 2
-			self.lookedUp(self.actualNumber, FritzOutlookCSV.findNumber(self.actualNumber, os.path.join(phonebookLocation, "PhoneBook.csv"))) #@UndefinedVariable
+			self.lookedUp(self.number, FritzOutlookCSV.findNumber(self.number, os.path.join(phonebookLocation, "PhoneBook.csv"))) #@UndefinedVariable
 			return
 		else:
 			self.lookupState = 2
 		if self.lookupState == 2 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.ldif")):
-			self["text"].setText(self.actualNumber + "\n\n" + _("Searching in LDIF..."))
+			self["text"].setText(self.number + "\n\n" + _("Searching in LDIF..."))
 			self.lookupState = 0
-			FritzLDIF.findNumber(self.actualNumber, open(os.path.join(phonebookLocation, "PhoneBook.ldif")), self.lookedUp)
+			FritzLDIF.findNumber(self.number, open(os.path.join(phonebookLocation, "PhoneBook.ldif")), self.lookedUp)
 			return
 		else:
 			self.lookupState = 0
@@ -1783,19 +1824,19 @@ class FritzOfferAction(Screen):
 				name = _("No result from Outlook export")
 			else:
 				name = _("No result from LDIF")
-		self.actualNumber = number
-		self.actualName = name
+		self.number = number
+		self.name = name
 		message = number + "\n\n" + name.replace(", ", "\n")
 		self["text"].setText(str(message))
 
 	def call(self):
-		debug("[FritzOfferAction] add: %s" %self.actualNumber)
-		fritzbox.dial(self.actualNumber)
+		debug("[FritzOfferAction] add: %s" %self.number)
+		fritzbox.dial(self.number)
 		self.exit()
 
 	def add(self):
-		debug("[FritzOfferAction] add: %s, %s" %(self.actualNumber, self.actualName))
-		phonebook.FritzDisplayPhonebook(self.session).add(self.parent, self.actualNumber, self.actualName)
+		debug("[FritzOfferAction] add: %s, %s" %(self.number, self.name))
+		phonebook.FritzDisplayPhonebook(self.session).add(self.parent, self.number, self.name)
 		self.exit()
 
 	def exit(self):
@@ -2619,11 +2660,20 @@ callList = FritzCallList()
 def findFace(number,name):
 	debug("[FritzCall] findFace number/name: %s/%s" % (number, name))
 	sep = name.find(',')
-	if sep != -1:
-		name = name[:sep]
+	if sep != -1: name = name[:sep]
 	sep = name.find('\n')
-	if sep != -1:
-		name = name[:sep]
+	if sep != -1: name = name[:sep]
+
+	#===========================================================================
+	# facesFile = ""
+	# for filename in os.listdir(os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")):
+	#	debug("[FritzCall] findFace check: %s name: %s" % (repr(filename.decode('utf-8')), repr(name.decode('utf-8'))))
+	#	if re.match("^" + number + "\.(png|PNG|jpg|JPG)$", filename) or re.match("^" + name.decode('utf-8') + "\.(png|PNG|jpg|JPG)$", filename.decode('utf-8')):
+	#		facesFile = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces", filename)
+	#		break
+	# else:
+	#	facesFile = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
+	#===========================================================================
 	facesDir = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")
 	numberFile = os.path.join(facesDir, number)
 	nameFile = os.path.join(facesDir, name)
@@ -2640,6 +2690,9 @@ def findFace(number,name):
 		facesFile = nameFile + ".png"
 	elif os.path.exists(nameFile + ".PNG"):
 		facesFile = nameFile + ".PNG"
+	else:
+		facesFile = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
+
 	debug("[FritzCall] findFace result: %s" % (facesFile))
 	return facesFile
 
@@ -2647,11 +2700,12 @@ class MessageBoxPixmap(Screen):
 	def __init__(self, session, text, number = "", name = "", timeout = -1):
 		self.skin = """
 	<screen name="MessageBoxPixmap" position="%d,%d" size="600,10" title="Message">
-		<widget name="text" position="115,8" size="520,0" font="Regular;22" />
+		<widget name="text" position="115,8" size="520,0" font="Regular;%d" />
 		<widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="5,5" size="100,100" alphatest="on" />
 	</screen>
 		""" %(
-			scaleH(350,60), scaleV(175,245)
+			scaleH(350,60), scaleV(175,245),
+			scaleV(24,22)
 			)
 		debug("[FritzCall] MessageBoxPixmap number: %s" % number)
 		Screen.__init__(self, session)
@@ -2671,27 +2725,36 @@ class MessageBoxPixmap(Screen):
 	def finishLayout(self):
 		debug("[FritzCall] MessageBoxPixmap/setInfoPixmap number: %s/%s" % (self.number, self.name))
 
-		orgwidth = self.instance.size().width()
-		orgpos = self.instance.position()
-		textsize = self["text"].getSize()
-		# y size still must be fixed in font stuff...
-		textsize = (textsize[0] + 115, textsize[1] + 115)
-		wsizex = textsize[0] + scaleH(100,20)
-		wsizey = textsize[1] + scaleV(20,0)
-		if (scaleH(600,280) > wsizex):
-			wsizex = scaleH(600,280)
-		wsize = (wsizex, wsizey)
-		# resize
-		self.instance.resize(eSize(*wsize))
-		# resize label
-		self["text"].instance.resize(eSize(*textsize))
-		# center window
-		newwidth = wsize[0]
-		self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
+		picPixmap = LoadPixmap(findFace(self.number, self.name))
+		picSize = picPixmap.size()
+		self["InfoPixmap"].instance.setPixmap(picPixmap)
 
-		facesFile = findFace(self.number, self.name)
-		if facesFile:
-			self["InfoPixmap"].instance.setPixmapFromFile(facesFile)
+		# recalculate window size
+		textSize = self["text"].getSize()
+		textSize = (textSize[0]+20, textSize[1]+20) # don't know, why, but size is too small
+		textSize = eSize(*textSize)
+		width = max(scaleH(600,280), picSize.width() + textSize.width() + 30),
+		height = max(scaleV(300,250), picSize.height()+10, textSize.height()+10)
+		wSize = (width, height)
+		wSize = eSize(*wSize)
+
+		# center the smaller vertically
+		hGap = (width-picSize.width()-textSize.width())/3
+		picPos = (hGap,(height-picSize.height())/2+1)
+		textPos = (hGap+picSize.width()+hGap, (height-textSize.height())/2+1)
+
+		# resize screen
+		self.instance.resize(wSize)
+		# resize text
+		self["text"].instance.resize(textSize)
+		# resize pixmap
+		self["InfoPixmap"].instance.resize(picSize)
+		# move text
+		self["text"].instance.move(ePoint(*textPos))
+		# move pixmap
+		self["InfoPixmap"].instance.move(ePoint(*picPos))
+		# center window
+		self.instance.move(ePoint((DESKTOP_WIDTH-wSize.width())/2, (DESKTOP_HEIGHT-wSize.height())/2))
 
 	def initTimeout(self, timeout):
 		self.timeout = timeout
