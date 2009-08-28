@@ -224,11 +224,11 @@ msgstr "Dateien aus Kontainer hinzufügen"
 
 #: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:832
 msgid "Delete failed downloads"
-msgstr "Fehlgeschlagene Downlaods löschen"
+msgstr "Fehlgeschlagene Downloads löschen"
 
 #: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:833
 msgid "Restart failed downloads"
-msgstr "Fehlgeschlagene Downlaods neu starten"
+msgstr "Fehlgeschlagene Downloads neu starten"
 
 #: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:834
 msgid "Clear finished downloads"
