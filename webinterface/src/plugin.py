@@ -1,16 +1,14 @@
 Version = '$Header$';
 from Plugins.Plugin import PluginDescriptor
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigSelection, ConfigSubList
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigSubList
 from Screens.MessageBox import MessageBox
 from WebIfConfig import WebIfConfigScreen, initConfig, updateConfig
-from WebChilds.Toplevel import Toplevel
-from twisted.internet import reactor, defer, ssl
-from twisted.internet.error import CannotListenError
-from twisted.web2 import server, channel, http
-from twisted.web2.auth import digest, basic, wrapper
+from WebChilds.Toplevel import getToplevel
+
+from twisted.internet import reactor, ssl
+from twisted.web import server, http, util, static, resource
 from twisted.python.log import startLogging
-from twisted.cred.portal import Portal, IRealm
-from twisted.cred import checkers, credentials, error
+
 from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname
 from OpenSSL import SSL
@@ -89,10 +87,10 @@ def startWebserver(session):
 	session.messageboxanswer = None
 
 	if config.plugins.Webinterface.enable.value is not True:
-		print "not starting Werbinterface"
+		print "[Webinterface] is disabled!"
 		return False
 	if DEBUG_TO_FILE:
-		print "start twisted logfile, writing to %s" % DEBUGFILE
+		print "[Webinterface] start twisted logfile, writing to %s" % DEBUGFILE
 		startLogging(open(DEBUGFILE, 'w'))
 
 	for c in config.plugins.Webinterface.interfaces:
@@ -116,64 +114,81 @@ def stopWebserver(session):
 
 def startServerInstance(session, ipaddress, port, useauth=False, usessl=False):
 	try:
-		toplevel = Toplevel(session)
+		toplevel = getToplevel(session)
 		if useauth:
-			portal = Portal(HTTPAuthRealm())
-			portal.registerChecker(PasswordDatabase())
-			root = wrapper.HTTPAuthResource(toplevel, (basic.BasicCredentialFactory(socket_gethostname()),), portal, (IHTTPUser,))
+			root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
 			site = server.Site(root)			
 		else:
 			site = server.Site(toplevel)
-		try:
-			if usessl:
-				ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem', '/etc/enigma2/cacert.pem', sslmethod=SSL.SSLv23_METHOD)
-				d = reactor.listenSSL(port, channel.HTTPFactory(site), ctx, interface=ipaddress)
-			else:
-				d = reactor.listenTCP(port, channel.HTTPFactory(site), interface=ipaddress)
-			running_defered.append(d)
-			print "[Webinterface] started on %s:%i" % (ipaddress, port), "auth=", useauth, "ssl=", usessl
-		except CannotListenError, e:
-			print "[Webinterface] Could not Listen on %s:%i!" % (ipaddress, port)
-			session.open(MessageBox, 'Could not Listen on %s:%i!\n\n%s' % (ipaddress, port, str(e)), MessageBox.TYPE_ERROR)
+	
+		if usessl:
+			ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem', '/etc/enigma2/cacert.pem', sslmethod=SSL.SSLv23_METHOD)
+			d = reactor.listenSSL(port, site, ctx, interface=ipaddress)
+		else:
+			d = reactor.listenTCP(port, site, interface=ipaddress)
+		running_defered.append(d)
+		print "[Webinterface] started on %s:%i" % (ipaddress, port), "auth=", useauth, "ssl=", usessl
+	
 	except Exception, e:
 		print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e
 		session.open(MessageBox, 'starting FAILED on %s:%i!\n\n%s' % (ipaddress, port, str(e)), MessageBox.TYPE_ERROR)
+	
+class HTTPAuthResource(resource.Resource):
+	def __init__(self, res, realm):
+		resource.Resource.__init__(self)
+		self.resource = res
+		self.realm = realm
+		self.authorized = False
+		self.tries = 0
+		self.unauthorizedResource = UnauthorizedResource(self.realm)		
+	
+	def unautorized(self, request):
+		print "[Webinterface] Unauthorized!"
+		request.setResponseCode(http.UNAUTHORIZED)
+		request.setHeader('WWW-authenticate', 'basic realm="%s"' % self.realm)
 
-class PasswordDatabase:
-	"""
-		this checks webiflogins agains /etc/passwd
-	"""
-	passwordfile = "/etc/passwd"
-	implements(checkers.ICredentialsChecker)
-	credentialInterfaces = (credentials.IUsernamePassword, credentials.IUsernameHashedPassword)
-
-	def _cbPasswordMatch(self, matched, username):
-		if matched:
-			return username
+		return self.unauthorizedResource
+	
+	def isAuthenticated(self, request):
+		# get the Session from the Request
+		sessionNs = request.getSession().sessionNamespaces
+		
+		# if the auth-information has not yet been stored to the session
+		if not sessionNs.has_key('authenticated'):
+			sessionNs['authenticated'] = check_passwd(request.getUser(), request.getPassword())
+		
+		#if the auth-information already is in the session				
 		else:
-			return failure.Failure(error.UnauthorizedLogin())
-
-	def requestAvatarId(self, credentials):
-		if check_passwd(credentials.username, credentials.password, self.passwordfile) is True:
-			return defer.maybeDeferred(credentials.checkPassword, credentials.password).addCallback(self._cbPasswordMatch, str(credentials.username))
+			if sessionNs['authenticated'] is False:
+				sessionNs['authenticated'] = check_passwd(request.getUser(), request.getPassword() )
+		
+		#return the current authentication status						
+		return sessionNs['authenticated']
+													
+													
+	def render(self, request):			
+		if self.isAuthenticated(request) is True:	
+			return self.resource.render(request)
+		
 		else:
-			return defer.fail(error.UnauthorizedLogin())
+			return self.unautorized(request)
+	
+	
+	def getChildWithDefault(self, path, request):
+		if self.isAuthenticated(request) is True:
+			return self.resource.getChildWithDefault(path, request)
+		
+		else:
+			return self.unautorized(request)
 
-class IHTTPUser(Interface):
-	pass
-
-class HTTPUser(object):
-	implements(IHTTPUser)
-	username = None
-	def __init__(self, username):
-		self.username = username
-
-class HTTPAuthRealm(object):
-	implements(IRealm)
-	def requestAvatar(self, avatarId, mind, *interfaces):
-		if IHTTPUser in interfaces:
-			return IHTTPUser, HTTPUser(avatarId)
-		raise NotImplementedError("Only IHTTPUser interface is supported")
+class UnauthorizedResource(resource.Resource):
+	def __init__(self, realm):
+		resource.Resource.__init__(self)
+		self.realm = realm
+		self.errorpage = static.Data('<html><body>Access Denied.</body></html>', 'text/html')
+		
+	def render(self, request):	
+		return self.errorpage.render(request)
 
 from hashlib import md5 as md5_new
 from crypt import crypt
@@ -208,7 +223,7 @@ def passcrypt(passwd, salt=None, method='des', magic='$1$'):
 	elif method.lower() == 'clear':
 		return passwd
 
-def check_passwd(name, passwd, pwfile=None):
+def check_passwd(name, passwd, pwfile='/etc/passwd'):
 	"""Validate given user, passwd pair against password database."""
 
 	if not pwfile or type(pwfile) == type(''):
@@ -219,9 +234,11 @@ def check_passwd(name, passwd, pwfile=None):
 	try:
 		enc_passwd = getuser(name)
 	except (KeyError, IOError):
-		return 0
+		print "!!! EXCEPT"
+		return False
 	if not enc_passwd:
-		return 0
+		"!!! NOT ENC_PASSWD"
+		return False
 	elif len(enc_passwd) >= 3 and enc_passwd[:3] == '$1$':
 		salt = enc_passwd[3:enc_passwd.find('$', 3)]
 		return enc_passwd == passcrypt(passwd, salt, 'md5')
@@ -373,11 +390,11 @@ def sessionstart(reason, session):
 
 def autostart(reason, **kwargs):
 	if reason is True:
-		try:
-			updateConfig()
-			startWebserver(global_session)
-		except ImportError, e:
-			print "[Webinterface] twisted not available, not starting web services", e
+#		try:
+		updateConfig()
+		startWebserver(global_session)
+#		except ImportError, e:
+#			print "[Webinterface] twisted not available, not starting web services", e
 	elif reason is False:
 		stopWebserver(global_session)
 

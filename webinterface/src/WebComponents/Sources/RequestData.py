@@ -23,19 +23,19 @@ class RequestData(Source):
 
 	def getHTML(self, id):
 		if self.what is self.HOST:
-			return self.request.host
+			return self.request.host.host
 		elif self.what is self.PORT:
-			return self.request.port
+			return str(self.request.host.port)
 		elif self.what is self.METHOD:
 			return self.request.method
 		elif self.what is self.PATH:
 			return self.request.path
 		elif self.what is self.REMOTEADRESS:
-			return self.request.remoteAddr.host
+			return self.request.client.ip
 		elif self.what is self.REMOTEPORT:
-			return self.request.remoteAddr.port
+			return str(self.request.client.port)
 		elif self.what is self.REMOTETYPE:
-			return self.request.remoteAddr.type
+			return self.request.client.type
 		elif self.what is self.URI:
 			return self.request.uri
 		else:

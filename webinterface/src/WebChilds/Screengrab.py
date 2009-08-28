@@ -1,6 +1,6 @@
 from enigma import eConsoleAppContainer
 
-from twisted.web2 import resource, stream, responsecode, http, http_headers
+from twisted.web import resource, http, http_headers, server
 
 from os import path as os_path, remove as os_remove
 
@@ -10,8 +10,11 @@ class GrabResource(resource.Resource):
 	'''
 	GRAB_BIN = '/usr/bin/grab'
 	SPECIAL_ARGS = ['format', 'filename', 'save']
-
-	def render(self, req):
+	
+	def __init__(self):
+		resource.Resource.__init__(self)
+	
+	def render(self, request):
 		self.baseCmd = ['/usr/bin/grab', '/usr/bin/grab']
 		self.args = []
 
@@ -22,10 +25,10 @@ class GrabResource(resource.Resource):
 		videoOnly = False
 		save = False
 
-		for key, value in req.args.items():
+		for key, value in request.args.items():
 			if key in GrabResource.SPECIAL_ARGS:
 				if key == 'format':
-					format = req.args['format'][0]
+					format = request.args['format'][0]
 
 					if format == 'png':
 						#-p produce png files instead of bmp
@@ -37,13 +40,14 @@ class GrabResource(resource.Resource):
 						imageformat = format
 						self.args.append('-j')
 						#Quality Setting
-						if req.args.has_key("jpgquali"):
-							self.args.append("%s" %(req.args["jpgquali"][0]) )
+						if request.args.has_key("jpgquali"):
+							self.args.append("%s" %(request.args["jpgquali"][0]) )
 						else:
 							self.args.append('80')
 
 				elif key == 'filename':
-					filename = req.args['filename'][0]
+					filename = request.args['filename'][0]
+
 				elif key == 'save':
 					save = True
 			else:
@@ -59,28 +63,32 @@ class GrabResource(resource.Resource):
 						self.args.append("%s" %value[0])
 
 		if not os_path.exists(self.GRAB_BIN):
-			return http.Response(responsecode.OK,stream='Grab is not installed at %s. Please install package aio-grab.' %self.GRAB_BIN)
+			request.setResponseCode(http.OK)
+			request.write('Grab is not installed at %s. Please install package aio-grab.' %self.GRAB_BIN)
+			request.finish()			
+			
 		else:
-			headers = http_headers.Headers()
-			headers.addRawHeader('Content-Disposition', 'inline; filename=screenshot.%s;' %imageformat)
-			headers.addRawHeader('Content-Type','image/%s' %imageformat)
+			request.setHeader('Content-Disposition', 'inline; filename=screenshot.%s;' %imageformat)			
+			request.setHeader('Content-Type','image/%s' %imageformat)
 
 			filename = filename+imageformat
 			self.args.append(filename)
 			cmd = self.baseCmd + self.args
-
-			return http.Response(responsecode.OK,headers,stream=GrabStream(cmd, filename, save))
-
-class GrabStream(stream.ProducerStream):
+					
+			GrabStream(request, cmd, filename, save)
+		
+		return server.NOT_DONE_YET
+	
+class GrabStream:
 	'''
 		used to start the grab-bin in the console in the background
 		while this takes some time, the browser must wait until the grabis finished
 	'''
-	def __init__(self, cmd, target=None, save=False):
+	def __init__(self, request, cmd, target=None, save=False):
 		self.target = target
 		self.save = save
 		self.output = ''
-		stream.ProducerStream.__init__(self)
+		self.request = request		
 
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.cmdFinished)
@@ -94,20 +102,21 @@ class GrabStream(stream.ProducerStream):
 		if int(data) is 0 and self.target is not None:
 			try:
 				fp = open(self.target)
-				self.write(fp.read())
+				self.request.write(fp.read())
 				fp.close()
 				if self.save is False:
 					os_remove(self.target)
 					print '[Screengrab.py] %s removed' %self.target
 			except Exception,e:
-				self.write('Internal error while reading target file')
+				self.request.write('Internal error while reading target file')
 		elif int(data) is 0 and self.target is None:
-			self.write(self.output)
+			self.request.write(self.output)
 		elif int(data) is 1:
-			self.write(self.output)
+			self.request.write(self.output)
 		else:
-			self.write('Internal error')
-		self.finish()
+			self.request.write('Internal error')
+			
+		self.request.finish()
 
 	def dataAvail(self, data):
 		print '[Screengrab.py] data Available ', data

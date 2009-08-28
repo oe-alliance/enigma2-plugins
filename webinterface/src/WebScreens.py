@@ -295,6 +295,7 @@ class TsM3uWebScreen(WebScreen):
 		from Components.config import config
 		self["file"] = StaticText()
 		self["localip"] = RequestData(request, what=RequestData.HOST)
+		self["localport"] = RequestData(request, what=RequestData.PORT)
 
 class RestartWebScreen(WebScreen):
 	def __init__(self, session, request):

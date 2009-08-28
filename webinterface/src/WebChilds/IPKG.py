@@ -1,6 +1,6 @@
 from enigma import eConsoleAppContainer
 
-from twisted.web2 import resource, stream, responsecode, http
+from twisted.web import server, resource, http
 
 class IPKGResource(resource.Resource):
 	IPKG_PATH = "/usr/bin/ipkg"
@@ -8,52 +8,58 @@ class IPKGResource(resource.Resource):
 	SIMPLECMDS = [ "list", "list_installed", "update", "upgrade" ]
 	PACKAGECMDS = [ "info", "status", "install", "remove" ]
 	FILECMDS = [ "search" ]
-
+	
+	def __init__(self):
+		resource.Resource.__init__(self)
+	
 	def render(self, request):
 		self.args = request.args
 		self.command = self.getArg("command")
 
 		if self.command is not None:
 			if self.command in IPKGResource.SIMPLECMDS:
-				return self.execSimpleCmd()
+				return self.execSimpleCmd(request)
 			elif self.command in IPKGResource.PACKAGECMDS:
-				return self.execPackageCmd()
+				return self.execPackageCmd(request)
 			elif self.command in IPKGResource.FILECMDS:
-				return self.execFileCmd()
+				return self.execFileCmd(request)
 			else:
-				return self.doErrorPage("Unknown command: ", self.command)
+				return self.doErrorPage(request, "Unknown command: ", self.command)
 		else:
-			return self.doIndexPage()
+			return self.doIndexPage(request)
 
-	def buildCmd(self, parms = []):
+	def buildCmd(self, parms=[]):
 		cmd = [IPKGResource.IPKG_PATH, "ipkg", self.command] + parms
-		print "[IPKG.py] cmd: %s" %cmd
+		print "[IPKG.py] cmd: %s" % cmd
 		return cmd
 
-	def execCmd(self, parms = []):
+	def execCmd(self, request, parms=[]):
 		cmd = self.buildCmd(parms)
-		return http.Response(responsecode.OK,stream=IPKGConsoleStream(cmd) )
+		
+		request.setResponseCode(http.OK)
+		IPKGConsoleStream(request, cmd)
+		
 
-	def execSimpleCmd(self):
-		 return self.execCmd()
+	def execSimpleCmd(self, request):
+		 return self.execCmd(request)
 
-	def execPackageCmd(self):
+	def execPackageCmd(self, request):
 		package = self.getArg("package")
 		if package is not None:
-			return self.execCmd([package])
+			self.execCmd(request, [package])
 		else:
-			return self.doErrorPage("Missing parameter: package")
+			self.doErrorPage(request, "Missing parameter: package")
 
-	def execFileCmd(self):
+	def execFileCmd(self, request):
 		file = self.getArg("file")
 		if file is not None:
-			return self.execCmd([file])
+			return self.execCmd(request, [file])
 
 		else:
 			return self.doErrorPage("Missing parameter: file")
 
-	def doIndexPage(self):
-		html  = "<html><body>"
+	def doIndexPage(self, request):
+		html = "<html><body>"
 		html += "<h1>Interface to IPKG</h1>"
 		html += "update, ?command=update<br>"
 		html += "upgrade, ?command=upgrade<br>"
@@ -65,20 +71,31 @@ class IPKGResource(resource.Resource):
 		html += "install, ?command=install&package=&lt;packagename&gt;<br>"
 		html += "remove, ?command=remove&package=&lt;packagename&gt;<br>"
 		html += "</body></html>"
-		return http.Response(responsecode.OK,stream=html)
+		
+		request.setResponseCode(http.OK)
+		request.write(html)
+		request.finish()
+		
+		return server.NOT_DONE_YET
+						
 
-	def doErrorPage(self, errormsg):
-		return http.Response(responsecode.OK,stream=errormsg)
-
+	def doErrorPage(self, request, errormsg):
+		request.setResponseCode(http.OK)
+		request.write(errormsg)
+		request.finish()		
+		
+		return server.NOT_DONE_YET
+		
 	def getArg(self, key):
 		if self.args.has_key(key):
 			return self.args[key][0]
 		else:
 			return None
 
-class IPKGConsoleStream(stream.ProducerStream):
-	def __init__(self, cmd):
-		stream.ProducerStream.__init__(self)
+class IPKGConsoleStream:
+	def __init__(self, request, cmd):
+		self.request = request
+		
 		self.container = eConsoleAppContainer()
 
 		self.container.dataAvail.append(self.dataAvail)
@@ -87,8 +104,10 @@ class IPKGConsoleStream(stream.ProducerStream):
 		self.container.execute(*cmd)
 
 	def cmdFinished(self, data):
-		self.finish()
+		self.request.finish()
+		
+		return server.NOT_DONE_YET
 
 	def dataAvail(self, data):
-		self.write(data)
+		self.request.write(data)
 

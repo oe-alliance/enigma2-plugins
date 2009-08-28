@@ -50,9 +50,9 @@ class OneTimeElement(Element):
 			for c in args.get(self.source_id, []):
 				self.source.handleCommand(c)
 
-	def render(self, stream):
+	def render(self, request):
 		t = self.source.getHTML(self.source_id)
-		stream.write(t)
+		request.write(t)
 
 	def execBegin(self):
 		self.suspended = False
@@ -75,20 +75,20 @@ class MacroElement(OneTimeElement):
 		self.macro_dict = macro_dict
 		self.macro_name = macro_name
 
-	def render(self, stream):
+	def render(self, request):
 		self.macro_dict[self.macro_name] = self.source.getHTML(self.source_id)
 
 class StreamingElement(OneTimeElement):
 	def __init__(self, id):
 		OneTimeElement.__init__(self, id)
-		self.stream = None
+		self.request = None
 
 	def changed(self, what):
-		if self.stream:
-			self.render(self.stream)
+		if self.request:
+			self.render(self.request)
 
-	def setStream(self, stream):
-		self.stream = stream
+	def setRequest(self, request):
+		self.request = request
 
 # a to-be-filled list item
 class ListItem:
@@ -427,11 +427,11 @@ class webifHandler(ContentHandler):
 			screen.doClose()
 		self.screens = [ ]
 
-def renderPage(stream, path, req, session):
+def renderPage(request, path, session):
 	# read in the template, create required screens
 	# we don't have persistense yet.
 	# if we had, this first part would only be done once.
-	handler = webifHandler(session, req)
+	handler = webifHandler(session, request)
 	parser = make_parser()
 	parser.setFeature(feature_namespaces, 0)
 	parser.setContentHandler(handler)
@@ -443,26 +443,21 @@ def renderPage(stream, path, req, session):
 	# first, apply "commands" (aka. URL argument)
 	for x in handler.res:
 		if isinstance(x, Element):
-			x.handleCommand(req.args)
+			x.handleCommand(request.args)
 
 	handler.execBegin()
 
 	# now, we have a list with static texts mixed
 	# with non-static Elements.
-	# flatten this list, write into the stream.
+	# flatten this list, write into the request.
 	for x in handler.res:
 		if isinstance(x, Element):
 			if isinstance(x, StreamingElement):
 				finish = False
-				x.setStream(stream)
-			x.render(stream)
+				x.setRequest(request)
+			x.render(request)
 		else:
-			stream.write(str(x))
-
-	def ping(s):
-		from twisted.internet import reactor
-		s.write("\n");
-		reactor.callLater(3, ping, s)
+			request.write(str(x))
 
 	# if we met a "StreamingElement", there is at least one
 	# element which wants to output data more than once,
@@ -470,18 +465,21 @@ def renderPage(stream, path, req, session):
 	# in this case, don't finish yet, don't cleanup yet,
 	# but instead do that when the client disconnects.
 	if finish:
-		streamFinish(handler, stream)
-	else:
-		# ok.
-		# you *need* something which constantly sends something in a regular interval,
-		# in order to detect disconnected clients.
-		# i agree that this "ping" sucks terrible, so better be sure to have something
-		# similar. A "CurrentTime" is fine. Or anything that creates *some* output.
-		ping(stream)
-		stream.closed_callback = lambda : streamFinish(handler, stream)
+		requestFinish(handler, request)
+	
+	else:	
+		def requestFinishDeferred(nothing, handler, request):
+			from twisted.internet import reactor
+			reactor.callLater(1, requestFinish, handler, request)				
+		
+		d = request.notifyFinish()
 
-def streamFinish(handler, stream):
+		d.addErrback( requestFinishDeferred, handler, request )
+		d.addCallback( requestFinishDeferred, handler, request )
+							
+		
+def requestFinish(handler, request):
 	handler.cleanup()
-	stream.finish()
+	request.finish()	
+	
 	del handler
-	del stream
