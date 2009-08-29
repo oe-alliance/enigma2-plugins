@@ -193,15 +193,6 @@ class RSDownload:
 		self.size = 0
 		self.status = _("Waiting")
 		self.name = self.url.split("/")[-1]
-		
-		self.freeDownloadUrl = ""
-		self.freeDownloadTimer = eTimer()
-		self.freeDownloadTimer.callback.append(self.freeDownloadStart)
-		self.checkTimer = eTimer()
-		self.checkTimer.callback.append(self.doCheckTimer)
-		self.restartFailedTimer = eTimer()
-		self.restartFailedTimer.callback.append(self.restartFailedCheck)
-		
 		self.finishCallbacks = []
 
 	def start(self):
@@ -235,6 +226,8 @@ class RSDownload:
 						self.httpFailed(True, "Failed to get download page url: %s"%self.url)
 					else:
 						self.freeDownloadUrl = url
+						self.freeDownloadTimer = eTimer()
+						self.freeDownloadTimer.callback.append(self.freeDownloadStart)
 						self.freeDownloadTimer.start((int(seconds) + 2) * 1000, 1)
 		elif self.url.__contains__("youtube.com"):
 			writeLog("Getting youtube video link: %s"%self.url)
@@ -293,12 +286,16 @@ class RSDownload:
 			writeLog("Failed: %s"%self.url)
 			writeLog("Error: %s"%string)
 		self.status = _("Checking")
+		self.checkTimer = eTimer()
+		self.checkTimer.callback.append(self.doCheckTimer)
 		self.checkTimer.start(10000, 1)
 
 	def doCheckTimer(self):
 		if self.size == 0:
 			self.status = _("Failed")
 			if config.plugins.RSDownloader.autorestart_failed.value:
+				self.restartFailedTimer = eTimer()
+				self.restartFailedTimer.callback.append(self.restartFailedCheck)
 				self.restartFailedTimer.start(10000*60, 1)
 		elif self.progress == 100:
 			self.status = _("Finished")
@@ -322,6 +319,8 @@ class RSDownload:
 				writeLog("Failed: %s"%self.url)
 				writeLog("Error: %s"%error)
 				self.status = _("Checking")
+		self.checkTimer = eTimer()
+		self.checkTimer.callback.append(self.doCheckTimer)
 		self.checkTimer.start(10000, 1)
 
 	def getYoutubeDownloadLink(self):
