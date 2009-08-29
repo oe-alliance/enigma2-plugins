@@ -9,7 +9,7 @@ from FileStreamer import FileStreamer
 from Screengrab import GrabResource
 from IPKG import IPKGResource
 from PlayService import ServiceplayerResource
-from Uploader import UploadResource
+#from Uploader import UploadResource
 from ServiceListSave import ServiceList
 from RedirecToCurrentStream import RedirecToCurrentStreamResource
 
