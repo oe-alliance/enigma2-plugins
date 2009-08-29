@@ -7,17 +7,12 @@ from WebChilds.Toplevel import getToplevel
 
 from twisted.internet import reactor, ssl
 from twisted.web import server, http, util, static, resource
-from twisted.python.log import startLogging
 
 from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname
 from OpenSSL import SSL
 
 from __init__ import _, __version__
-
-DEBUG_TO_FILE = False # PLEASE DONT ENABLE LOGGING BY DEFAULT (OR COMMIT TO PLUGIN CVS)
-
-DEBUGFILE = "/tmp/twisted.log"
 
 #CONFIG INIT
 
@@ -89,9 +84,6 @@ def startWebserver(session):
 	if config.plugins.Webinterface.enable.value is not True:
 		print "[Webinterface] is disabled!"
 		return False
-	if DEBUG_TO_FILE:
-		print "[Webinterface] start twisted logfile, writing to %s" % DEBUGFILE
-		startLogging(open(DEBUGFILE, 'w'))
 
 	for c in config.plugins.Webinterface.interfaces:
 		if c.disabled.value is False:
