@@ -500,21 +500,27 @@ class RS:
 			file_list = listdir(path)
 		except:
 			file_list = []
+		
+		finished_downloads = []
+		for download in self.downloads:
+			if download.status == _("Finished"):
+				finished_downloads.append(download)
 		for x in file_list:
 			list = path + x
-			try:
-				f = open(list, "r")
-				content = f.read()
-				f.close()
-				for download in self.downloads:
-					if download.status == _("Finished") and content.__contains__(download.url):
-						content = content.replace(download.url, "")
-						content = content.replace("\n\n", "\n").replace("\r\r", "\r")
-				f = open(list, "w")
-				f.write(content)
-				f.close()
-			except:
-				writeLog("Error while cleaning list %s!"%list)
+			if list.endswith(".txt"):
+				try:
+					f = open(list, "r")
+					content = f.read()
+					f.close()
+					for finished in finished_downloads:
+						if content.__contains__(finished.url):
+							content = content.replace(finished.url, "")
+							content = content.replace("\n\n", "\n").replace("\r\r", "\r")
+					f = open(list, "w")
+					f.write(content)
+					f.close()
+				except:
+					writeLog("Error while cleaning list %s!"%list)
 		self.startDownloading()
 
 	def removeDownload(self, url):
