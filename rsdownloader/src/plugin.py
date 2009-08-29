@@ -219,7 +219,7 @@ class RSDownload:
 				if not seconds:
 					self.httpFailed(True, "Failed to get download page url: %s"%self.url)
 				else:
-					writeLog("Free RS-download... must wait %s seconds: %s"%(seconds, self.url))
+					writeLog("Free RS-Download... must wait %s seconds: %s"%(seconds, self.url))
 					self.status = "%s %s"%(_("Waiting"), seconds)
 					url = matchGet('"dlf" action="([^"]+)', data)
 					if not url:
@@ -229,6 +229,28 @@ class RSDownload:
 						self.freeDownloadTimer = eTimer()
 						self.freeDownloadTimer.callback.append(self.freeDownloadStart)
 						self.freeDownloadTimer.start((int(seconds) + 2) * 1000, 1)
+		elif self.url.__contains__("uploaded.to") or self.url.__contains__("ul.to"):
+			writeLog("Free Uploaded.to-Download: %s"%self.url)
+			self.status = _("Checking")
+			if config.plugins.RSDownloader.reconnect_fritz.value:
+				reconnect()
+				sleep(3)
+			data = get(self.url)
+			tmp = re.search(r"Or wait (\d+) minutes", data)
+			if tmp:
+				minutes = tmp.group(1)
+				writeLog("Free Uploaded.to-Download... must wait %s minutes: %s"%(minutes, self.url))
+				self.status = "%s %s"%(_("Waiting"), minutes)
+				self.freeDownloadTimer = eTimer()
+				self.freeDownloadTimer.callback.append(self.start)
+				self.freeDownloadTimer.start((int(minutes) + 1) * 60000, 1)
+			else:
+				url = re.search(r".*<form name=\"download_form\" method=\"post\" action=\"(.*)\">", data).group(1)
+				self.name = re.search(r"<td><b>\s+(.+)\s", data).group(1) + re.search(r"</td><td>(\..+)</td></tr>", data).group(1)
+				self.status = _("Downloading")
+				self.download = ProgressDownload(url, ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/"))
+				self.download.addProgress(self.httpProgress)
+				self.download.start().addCallback(self.httpFinished).addErrback(self.httpFailed)
 		elif self.url.__contains__("youtube.com"):
 			writeLog("Getting youtube video link: %s"%self.url)
 			self.status = _("Checking")
