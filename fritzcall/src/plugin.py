@@ -2678,17 +2678,15 @@ def findFace(number,name):
 	numberFile = os.path.join(facesDir, number)
 	nameFile = os.path.join(facesDir, name)
 	facesFile = ""
-	if os.path.exists(numberFile):
+	if number and os.path.exists(numberFile):
 		facesFile = numberFile
-	elif os.path.exists(numberFile + ".png"):
+	elif number and os.path.exists(numberFile + ".png"):
 		facesFile = numberFile + ".png"
-	elif os.path.exists(numberFile + ".PNG"):
+	elif number and os.path.exists(numberFile + ".PNG"):
 		facesFile = numberFile + ".PNG"
-	elif os.path.exists(nameFile):
-		facesFile = nameFile
-	elif os.path.exists(nameFile + ".png"):
+	elif name and os.path.exists(nameFile + ".png"):
 		facesFile = nameFile + ".png"
-	elif os.path.exists(nameFile + ".PNG"):
+	elif name and os.path.exists(nameFile + ".PNG"):
 		facesFile = nameFile + ".PNG"
 	else:
 		facesFile = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
@@ -2733,7 +2731,7 @@ class MessageBoxPixmap(Screen):
 		textSize = self["text"].getSize()
 		textSize = (textSize[0]+20, textSize[1]+20) # don't know, why, but size is too small
 		textSize = eSize(*textSize)
-		width = max(scaleH(600,280), picSize.width() + textSize.width() + 30),
+		width = max(scaleH(600,280), picSize.width() + textSize.width() + 30)
 		height = max(scaleV(300,250), picSize.height()+10, textSize.height()+10)
 		wSize = (width, height)
 		wSize = eSize(*wSize)
