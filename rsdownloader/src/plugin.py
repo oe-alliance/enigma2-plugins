@@ -1013,6 +1013,7 @@ class RSMain(ChangedScreen):
 						link = link[:-4]
 					f.write("%s\n"%link)
 				f.close()
+				remove(file)
 			except:
 				pass
 			self.refreshTimer.stop()
