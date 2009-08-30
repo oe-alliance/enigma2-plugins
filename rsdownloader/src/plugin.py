@@ -298,12 +298,8 @@ class RSDownload:
 		if self.size == 0:
 			self.size = int((totalbytes / 1024) / 1024)
 		self.progress = int(100.0 * float(recvbytes) / float(totalbytes))
-		if self.progress == 100:
-			writeLog("Finished: %s"%self.url)
-			self.status = _("Finished")
-			self.execFinishCallbacks()
 
-	def httpFinished(self, string=""):
+	def httpFinished(self, string=None):
 		if string is not None:
 			writeLog("Failed: %s"%self.url)
 			writeLog("Error: %s"%string)
@@ -313,7 +309,7 @@ class RSDownload:
 		self.checkTimer.start(10000, 1)
 
 	def doCheckTimer(self):
-		if self.size == 0:
+		if (self.size == 0) or (self.progress < 100):
 			self.status = _("Failed")
 			if config.plugins.RSDownloader.autorestart_failed.value:
 				self.restartFailedTimer = eTimer()
@@ -321,6 +317,7 @@ class RSDownload:
 				self.restartFailedTimer.start(10000*60, 1)
 		elif self.progress == 100:
 			self.status = _("Finished")
+			writeLog("Finished: %s"%self.url)
 		self.downloading = False
 		self.execFinishCallbacks()
 
