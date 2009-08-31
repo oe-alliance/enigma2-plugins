@@ -1,0 +1,106 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - kiddytimer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-29 12:59+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: L:\\Dreambox\\Eclipse\\kiddytimer\\po\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: Italy\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ..\\src\n"
+
+#: ..\src/plugin.py:49
+msgid "KiddyTimer"
+msgstr "KiddyTimer"
+
+#: ..\src/plugin.py:49
+msgid "Allows to controls your kids' daily TV usage"
+msgstr "Utilizzo giornaliero della TV da parte dei bambini"
+
+#: ..\src/KTmain.py:21
+msgid "??:??"
+msgstr "??:??"
+
+#: ..\src/KTglob.py:6
+msgid "Sunday"
+msgstr "Domenica"
+
+#: ..\src/KTglob.py:7
+msgid "Monday"
+msgstr "Lunedì"
+
+#: ..\src/KTglob.py:8
+msgid "Tuesday"
+msgstr "Martedì"
+
+#: ..\src/KTglob.py:9
+msgid "Wednesday"
+msgstr "Mercoledì"
+
+#: ..\src/KTglob.py:10
+msgid "Thursday"
+msgstr "Giovedì"
+
+#: ..\src/KTglob.py:11
+msgid "Friday"
+msgstr "Venerdì"
+
+#: ..\src/KTglob.py:12
+msgid "Saturday"
+msgstr "Sabato"
+
+#: ..\src/KTsetup.py:48
+msgid "Enabled"
+msgstr "Abilitato"
+
+#: ..\src/KTsetup.py:49
+msgid "PIN"
+msgstr "PIN"
+
+#: ..\src/KTsetup.py:50
+msgid "Don't monitor TV started after"
+msgstr "Non monitorare la TV accesa dopo le "
+
+#: ..\src/KTsetup.py:70
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Plugin: %(plugin)s , Versione: %(version)s"
+
+#: ..\src/KTsetup.py:71
+#: ..\src/KTsetup.py:97
+#, python-format
+msgid "Remaining time: %s"
+msgstr "Tempo residuo: %s"
+
+#: ..\src/KTsetup.py:72
+#, python-format
+msgid "Last day started: %s"
+msgstr "Ultimo avvio: %s"
+
+#: ..\src/KTsetup.py:75
+msgid "Cancel"
+msgstr "Annullare"
+
+#: ..\src/KTsetup.py:76
+msgid "Save"
+msgstr "Salvare"
+
+#: ..\src/KTsetup.py:77
+msgid "Reset clock"
+msgstr "Reset orologio"
+
+#: ..\src/KTsetup.py:78
+msgid "Move clock"
+msgstr "Spost. orologio"
+
+#: ..\src/KTpositioner.py:18
+msgid "01:00"
+msgstr "01:00"
+
