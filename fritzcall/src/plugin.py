@@ -1798,10 +1798,12 @@ class FritzOfferAction(Screen):
 		if self.lookupState == 0:
 			self.lookupState = 1
 			self["text"].setText(self.number + "\n\n" + _("Reverse searching..."))
+			self.finishLayout()
 			ReverseLookupAndNotifier(self.number, self.lookedUp, "UTF-8", config.plugins.FritzCall.country.value)
 			return
 		if self.lookupState == 1 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.csv")):
 			self["text"].setText(self.number + "\n\n" + _("Searching in Outlook export..."))
+			self.finishLayout()
 			self.lookupState = 2
 			self.lookedUp(self.number, FritzOutlookCSV.findNumber(self.number, os.path.join(phonebookLocation, "PhoneBook.csv"))) #@UndefinedVariable
 			return
@@ -1809,6 +1811,7 @@ class FritzOfferAction(Screen):
 			self.lookupState = 2
 		if self.lookupState == 2 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.ldif")):
 			self["text"].setText(self.number + "\n\n" + _("Searching in LDIF..."))
+			self.finishLayout()
 			self.lookupState = 0
 			FritzLDIF.findNumber(self.number, open(os.path.join(phonebookLocation, "PhoneBook.ldif")), self.lookedUp)
 			return
@@ -1828,6 +1831,7 @@ class FritzOfferAction(Screen):
 		self.name = name
 		message = number + "\n\n" + name.replace(", ", "\n")
 		self["text"].setText(str(message))
+		self.finishLayout()
 
 	def call(self):
 		debug("[FritzOfferAction] add: %s" %self.number)
