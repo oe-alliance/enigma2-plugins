@@ -231,4 +231,9 @@ podcast/src/Makefile
 genuinedreambox/Makefile
 genuinedreambox/src/Makefile
 
+kiddytimer/Makefile
+kiddytimer/img/Makefile
+kiddytimer/po/Makefile
+kiddytimer/src/Makefile
+
 ])

@@ -15,6 +15,7 @@ SUBDIRS = \
 	genuinedreambox \
 	httpproxy \
 	imdb \
+	kiddytimer \
 	lastfm \
 	logomanager \
 	mediadownloader \
