@@ -85,8 +85,7 @@ class EPGRefresh:
 				duration = duration and int(duration)
 				self.services[1].add(EPGRefreshService(value, duration))
 
-	def saveConfiguration(self):
-		# Generate List in RAM
+	def buildConfiguration(self):
 		list = ['<?xml version="1.0" ?>\n<epgrefresh>\n\n']
 
 		for service in self.services[0]:
@@ -106,9 +105,11 @@ class EPGRefresh:
 
 		list.append('\n</epgrefresh>')
 
-		# Save to Flash
+		return list
+
+	def saveConfiguration(self):
 		file = open(CONFIG, 'w')
-		file.writelines(list)
+		file.writelines(self.buildConfiguration())
 
 		file.close()
 
