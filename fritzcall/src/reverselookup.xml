@@ -878,6 +878,13 @@
 	<country code="+46">
 		<website name="privatpersoner.eniro.se" url="http://privatpersoner.eniro.se/query?what=wp&amp;search_word=$NUMBER&amp;geo_area=" prefix="0">
 			<entry>
+				<firstname>&lt;span class=&quot;given-name&quot;&gt;([^&lt;]*)&lt;/span&gt;</firstname>
+				<lastname>&lt;span class=&quot;family-name&quot;&gt;([^&lt;]*)&lt;/span&gt;</lastname>
+				<street>&lt;span class=&quot;street-address&quot;&gt;([^&lt;]*)&lt;/span&gt;</street>
+				<city>&lt;span class=&quot;locality&quot;&gt;([^&lt;]*)&lt;/span&gt;</city>
+				<zipcode>&lt;span class=&quot;postal-code&quot;&gt;([^&lt;]*)&lt;/span&gt;</zipcode>
+			</entry>
+			<entry>
 				<name>fn expand(?:(?:.*owner-of-cell)|[^&gt;]*&gt;)[^&gt;]*&gt;([^&lt;]*)&lt;</name>
 				<street>street-address&quot;?&gt;([^&lt;]*)&lt;</street>
 				<city>locality&quot;?&gt;([^&lt;]*)&lt;</city>
@@ -922,10 +929,10 @@
 		</website>
 		<website name="www.dastelefonbuch.de" url="http://www.dastelefonbuch.de/?sourceid=Mozilla-search&amp;cmd=search&amp;kw=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;td\sclass=&quot;col1&quot;&gt;\s*(?:&lt;div class=&quot;short&quot;&gt;)?(?:&lt;b&gt;)?&lt;a href=[^&gt;]*&gt;([^&lt;]*)&lt;</name>
-				<street>&lt;td\sclass=&quot;col2&quot;&gt;([^&lt;]*)&lt;</street>
-				<city>&lt;td class=&quot;col3&quot;&gt;\d{5}&amp;nbsp;([^&lt;]*)&lt;</city>
-				<zipcode>&lt;td class=&quot;col3&quot;&gt;(\d{5})</zipcode>
+				<name>&lt;div class=&quot;(?:short|long)&quot;&gt;(?:&lt;b&gt;)?&lt;a href=[^&gt;]*&gt;([^&lt;]*)&lt;</name>
+				<street>&lt;td\sclass=&quot;col2&quot;(?: onclick=&quot;[^&quot;]*&quot;)?&gt;([^&lt;]*)&lt;</street>
+				<city>&lt;td class=&quot;col3&quot;(?: onclick=&quot;[^&quot;]*&quot;)?&gt;\d{5}&amp;nbsp;([^&lt;]*)&lt;</city>
+				<zipcode>&lt;td class=&quot;col3&quot;(?: onclick=&quot;[^&quot;]*&quot;)?&gt;(\d{5})</zipcode>
 			</entry>
 		</website>
 <!-- this appears not to be working correctly. Klicktel tries to "guess" numbers by stripping the last digits

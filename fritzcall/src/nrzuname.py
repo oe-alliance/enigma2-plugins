@@ -5,7 +5,7 @@
 # $Revision$
 # $Date$
 
-import re, sys, os
+import re, sys, os, traceback
 from xml.dom.minidom import parse
 from twisted.web.client import getPage #@UnresolvedImport
 from twisted.internet import reactor #@UnresolvedImport
@@ -237,8 +237,8 @@ class ReverseLookupAndNotifier:
 
 	def _gotPage(self, page):
 		def cleanName(text):
+			item = text.replace("&nbsp;"," ").replace("</b>","").replace(","," ").replace('\n',' ').replace('\t',' ')
 			try:
-				item = text.replace("&nbsp;"," ").replace("</b>","").replace(","," ").replace('\n',' ').replace('\t',' ')
 				item = html2unicode(item).decode('iso-8859-1')
 				# item = html2unicode(item)
 				newitem = item.replace("  ", " ")
@@ -247,14 +247,16 @@ class ReverseLookupAndNotifier:
 					newitem = item.replace("  ", " ")
 				return newitem.strip()
 			except:
-				return text
+				debug("[ReverseLookupAndNotifier] cleanName: " + traceback.format_exc())
+				return item
 	
 		debug("[ReverseLookupAndNotifier] _gotPage")
-		found = re.match('.*content=".*?charset=([^"]+)"',page)
+		found = re.match('.*content=".*?charset=([^"]+)"',page, re.S)
 		if found:
 			debug("[ReverseLookupAndNotifier] Charset: " + found.group(1))
 			page = page.replace("\xa0"," ").decode(found.group(1), "replace")
 		else:
+			debug("[ReverseLookupAndNotifier] Charset: iso-8859-1")
 			page = page.replace("\xa0"," ").decode("ISO-8859-1", "replace")
 
 		for entry in self.currentWebsite.getElementsByTagName("entry"):

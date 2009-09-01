@@ -1792,26 +1792,27 @@ class FritzOfferAction(Screen):
 		# center window
 		self.instance.move(ePoint((DESKTOP_WIDTH-wSize.width())/2, (DESKTOP_HEIGHT-wSize.height())/2))
 
+	def setTextAndResize(self, message):
+		self["text"].instance.resize(eSize(*(DESKTOP_WIDTH,DESKTOP_HEIGHT)))
+		self["text"].setText(self.number + "\n\n" + message)
+		self.finishLayout()
 
 	def lookup(self):
 		phonebookLocation = config.plugins.FritzCall.phonebookLocation.value
 		if self.lookupState == 0:
 			self.lookupState = 1
-			self["text"].setText(self.number + "\n\n" + _("Reverse searching..."))
-			self.finishLayout()
+			self.setTextAndResize(_("Reverse searching..."))
 			ReverseLookupAndNotifier(self.number, self.lookedUp, "UTF-8", config.plugins.FritzCall.country.value)
 			return
 		if self.lookupState == 1 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.csv")):
-			self["text"].setText(self.number + "\n\n" + _("Searching in Outlook export..."))
-			self.finishLayout()
+			self.setTextAndResize(_("Searching in Outlook export..."))
 			self.lookupState = 2
 			self.lookedUp(self.number, FritzOutlookCSV.findNumber(self.number, os.path.join(phonebookLocation, "PhoneBook.csv"))) #@UndefinedVariable
 			return
 		else:
 			self.lookupState = 2
 		if self.lookupState == 2 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.ldif")):
-			self["text"].setText(self.number + "\n\n" + _("Searching in LDIF..."))
-			self.finishLayout()
+			self.setTextAndResize(_("Searching in LDIF..."))
 			self.lookupState = 0
 			FritzLDIF.findNumber(self.number, open(os.path.join(phonebookLocation, "PhoneBook.ldif")), self.lookedUp)
 			return
@@ -1829,9 +1830,8 @@ class FritzOfferAction(Screen):
 				name = _("No result from LDIF")
 		self.number = number
 		self.name = name
-		message = number + "\n\n" + name.replace(", ", "\n")
-		self["text"].setText(str(message))
-		self.finishLayout()
+		debug("[FritzOfferAction] lookedUp: " + str(name.replace(", ", "\n")))
+		self.setTextAndResize(str(name.replace(", ", "\n")))
 
 	def call(self):
 		debug("[FritzOfferAction] add: %s" %self.number)
