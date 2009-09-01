@@ -1094,10 +1094,10 @@ function getScreenShot(what) {
 
 	switch(what){
 	case "o":
-		what = "&o&n";
+		what = "&o=&n=";
 		break;
 	case "v":
-		what = "&v";
+		what = "&v=";
 		break;
 	default:
 		what = "";
