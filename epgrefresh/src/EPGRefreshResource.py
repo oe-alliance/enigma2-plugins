@@ -3,99 +3,116 @@ from EPGRefresh import epgrefresh
 from EPGRefreshService import EPGRefreshService
 from enigma import eServiceReference
 
-# pretty basic resource which is just present to have a way to start a
-# forced refresh through the webif
-class EPGRefreshResource(resource.Resource):
-	def __init__(self):
-		resource.Resource.__init__(self)
-
+class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
-		do_add = req.args.has_key("add")
-		do_del = req.args.has_key("del")
 		state = False
 
-		if req.args.has_key("refresh"):
-			# forced refresh
-			if epgrefresh.forceRefresh():
-				output = "initiated refresh"
-				state = True
-			else:
-				output = "could not initiate refresh"
-		elif do_add or do_del:
-			# add/remove service/bouquet
-			if do_add:
-				sref = req.args["add"][0]
-				# strip all after last : (custom name)
-				pos = sref.rfind(':')
-				if pos != -1:
-					sref = sref[:pos+1]
-			else:
-				sref = req.args["del"][0]
-
-			duration = req.args.get("duration", None)
-			duration = duration and int(duration)
-			epgservice = EPGRefreshService(sref, duration)
-
-			if sref:
-				ref = eServiceReference(str(sref))
-				if not ref.valid():
-					output = "invalid argument"
-				elif (ref.flags & 7) == 7:
-					# bouquet
-					if epgservice in epgrefresh.services[1]:
-						if do_add:
-							output = "bouquet already in list"
-						else:
-							epgrefresh.services[1].remove(epgservice)
-							output = "bouquet removed from list"
-							state = True
-					else:
-						if do_del:
-							output = "bouquet not in list"
-						else:
-							epgrefresh.services[1].add(epgservice)
-							output = "bouquet added to list"
-							state = True
-				else:
-					# assume service
-					if epgservice in epgrefresh.services[0]:
-						if do_add:
-							output = "service already in list"
-						else:
-							epgrefresh.services[0].remove(epgservice)
-							output = "service removed from list"
-							state = True
-					else:
-						if do_del:
-							output = "service not in list"
-						else:
-							epgrefresh.services[0].add(epgservice)
-							output = "service added to list"
-							state = True
-
-				# save if list changed
-				if state:
-					epgrefresh.saveConfiguration()
-			else:
-				output = "invalid argument"
-		elif req.args.has_key("list"):
-			# show xml
-			req.setResponseCode(http.OK)
-			req.setHeader('Content-type', 'application; xhtml+xml')
-			req.setHeader('charset', 'UTF-8')
-			return ''.join(epgrefresh.buildConfiguration())
+		if epgrefresh.forceRefresh():
+			output = "initiated refresh"
+			state = True
 		else:
-			output = "unknown command"
+			output = "could not initiate refresh"
 
-		result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
+
+		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 			<e2simplexmlresult>
 				<e2state>%s</e2state>
 				<e2statetext>%s</e2statetext>
 			</e2simplexmlresult>
 			""" % ('true' if state else 'false', output)
 
+class EPGRefreshAddRemoveServiceResource(resource.Resource):
+	TYPE_ADD = 0
+	TYPE_DEL = 1
+
+	def __init__(self, type):
+		assert(type in (self.TYPE_ADD, self.TYPE_DEL))
+		self.type = type
+
+	def render(self, req):
+		do_add = self.type == self.TYPE_ADD
+		state = False
+
+		if 'sref' in req.args:
+			sref = req.args["sref"][0]
+			if do_add:
+				# strip all after last : (custom name)
+				pos = sref.rfind(':')
+				if pos != -1:
+					sref = sref[:pos+1]
+
+			duration = req.args.get("duration", None)
+			try:
+				duration = duration and int(duration)
+			except ValueError, ve:
+				output = 'invalid value for "duration": ' + str(duration)
+			else:
+				epgservice = EPGRefreshService(sref, duration)
+
+				if sref:
+					ref = eServiceReference(str(sref))
+					if not ref.valid():
+						output = 'invalid value for "sref": ' + str(sref)
+					elif (ref.flags & 7) == 7:
+						# bouquet
+						if epgservice in epgrefresh.services[1]:
+							if do_add:
+								output = "bouquet already in list"
+							else:
+								epgrefresh.services[1].remove(epgservice)
+								output = "bouquet removed from list"
+								state = True
+						else:
+							if do_add:
+								epgrefresh.services[1].add(epgservice)
+								output = "bouquet added to list"
+								state = True
+							else:
+								output = "bouquet not in list"
+					else:
+						# assume service
+						if epgservice in epgrefresh.services[0]:
+							if do_add:
+								output = "service already in list"
+							else:
+								epgrefresh.services[0].remove(epgservice)
+								output = "service removed from list"
+								state = True
+						else:
+							if do_add:
+								epgrefresh.services[0].add(epgservice)
+								output = "service added to list"
+								state = True
+							else:
+								output = "service not in list"
+
+					# save if list changed
+					if state:
+						epgrefresh.saveConfiguration()
+				else:
+					output = 'invalid value for "sref": ' + str(sref)
+		else:
+			output = 'missing argument "sref"'
+
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application; xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		
-		return result
+		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+			<e2simplexmlresult>
+				<e2state>%s</e2state>
+				<e2statetext>%s</e2statetext>
+			</e2simplexmlresult>
+			""" % ('true' if state else 'false', output)
+
+class EPGRefreshListServicesResource(resource.Resource):
+	def render(self, req):
+		# show xml
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
+		return ''.join(epgrefresh.buildConfiguration())
+
