@@ -20,7 +20,7 @@ msgstr "Konfiguration för Webgränssnitt"
 
 #: src/WebIfConfig.py:80
 msgid "Webinterface: Main Setup"
-msgstr "Webgränssnitt: Huvudinstallation"
+msgstr "Webinterface: Huvudinstallation"
 
 #: src/WebIfConfig.py:85
 msgid "Start Webinterface"
