@@ -50,3 +50,14 @@ SUBDIRS = \
 	youtubeplayer \
 	zaphistorybrowser
 
+
+# please leave this untouched -acid-burn-!
+#LANGS := $(shell cat $(srcdir)/LINGUAS)
+
+#install-exec-hook:
+#	for lang in $(LANGS); do \
+#		$(PYTHON) $(srcdir)/genmetaindex.py $$lang $(DESTDIR)$(datadir)/meta/plugin_*.xml > $(DESTDIR)$(datadir)/meta/index-enigma2-plugins_$$lang.xml; \
+#	done
+
+#uninstall-hook:
+#	$(RM) $(DESTDIR)$(datadir)/meta/index-enigma2-plugins_*.xml

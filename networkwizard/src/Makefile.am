@@ -5,8 +5,7 @@ install_PYTHON =	\
 	plugin.py \
 	NetworkWizard.py \
 	networkwizard.xml \
-	WizardPluginLanguage.py \
-	LICENSE
+	WizardPluginLanguage.py
 
-install_DATA = *.info
+dist_install_DATA = maintainer.info LICENSE
 	
