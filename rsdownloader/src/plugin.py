@@ -49,6 +49,7 @@ config.plugins.RSDownloader.download_friday = ConfigYesNo(default=True)
 config.plugins.RSDownloader.download_saturday = ConfigYesNo(default=True)
 config.plugins.RSDownloader.download_sunday = ConfigYesNo(default=True)
 config.plugins.RSDownloader.count_downloads = ConfigInteger(default=3, limits=(1, 6))
+config.plugins.RSDownloader.count_maximal_downloads = ConfigInteger(default=40, limits=(1, 400))
 config.plugins.RSDownloader.write_log = ConfigYesNo(default=True)
 config.plugins.RSDownloader.reconnect_fritz = ConfigYesNo(default=False)
 config.plugins.RSDownloader.autorestart_failed = ConfigYesNo(default=False)
@@ -490,6 +491,7 @@ class RS:
 		except:
 			file_list = []
 			writeLog("Could not find any list!")
+		added_downloads = 0
 		for x in file_list:
 			list = path + x
 			if list.endswith(".txt"):
@@ -499,8 +501,12 @@ class RS:
 					count = 0
 					for l in f:
 						if l.startswith("http://"):
-							if (self.addDownload(l.replace("\n", "").replace("\r", ""))) == True:
-								count += 1
+							if added_downloads < config.plugins.RSDownloader.count_maximal_downloads.value:
+								if (self.addDownload(l.replace("\n", "").replace("\r", ""))) == True:
+									count += 1
+									added_downloads += 1
+							else:
+								break
 					f.close()
 					if count == 0:
 						writeLog("Empty list or downloads already in download list: %s"%list)
@@ -665,6 +671,7 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 			getConfigListEntry(_("Don't download before:"), config.plugins.RSDownloader.start_time),
 			getConfigListEntry(_("Don't download after:"), config.plugins.RSDownloader.end_time),
 			getConfigListEntry(_("Maximal downloads:"), config.plugins.RSDownloader.count_downloads),
+			getConfigListEntry(_("Take x downloads to list:"), config.plugins.RSDownloader.count_maximal_downloads),
 			getConfigListEntry(_("Write log:"), config.plugins.RSDownloader.write_log),
 			getConfigListEntry(_("Reconnect fritz.Box before downloading:"), config.plugins.RSDownloader.reconnect_fritz),
 			getConfigListEntry(_("Restart failed after 10 minutes:"), config.plugins.RSDownloader.autorestart_failed)])
