@@ -29,7 +29,7 @@ for file in sys.argv[2:]:
 			info.remove(i)
 
 	for i in info[:]:
-		package.set(str(i.tag), str(i.text))
+		package.set(i.tag, i.text)
 		
 	root.append(package)
 
