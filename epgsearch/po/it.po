@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-31 01:36+0100\n"
-"PO-Revision-Date: 2009-05-31 02:26+0100\n"
+"POT-Creation-Date: 2009-08-27 03:53+0100\n"
+"PO-Revision-Date: 2009-08-27 03:53+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,60 +16,86 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/epgsearch\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/epgsearch\n"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:29
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:65
+msgid "EPG Search"
+msgstr "Ricerca EPG"
+
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:138
 msgid "New Search"
 msgstr "Nuova ricerca"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:30
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:139
 msgid "History"
 msgstr "History"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:53
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:154
+msgid "Add timer"
+msgstr "Agg. timer"
+
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:205
 msgid "Enter text to search for"
 msgstr "Inserire il testo da cercare"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:58
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:210
 msgid "Import from Timer"
-msgstr "Importare da Timer"
+msgstr "Importare da timer"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:59
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:211
 msgid "Import from EPG"
 msgstr "Importare da EPG"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:89
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:216
+msgid "Import from AutoTimer"
+msgstr "Importare da AutoTimer"
+
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:217
+msgid "Save search as AutoTimer"
+msgstr "Salvare la ricerca come AutoTimer"
+
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:218
+msgid "Export selected as AutoTimer"
+msgstr "Esportare la selezione come AutoTimer"
+
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:259
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Impossibile leggere la lista timer AutoTimer: %s"
+
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:270
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:294
 msgid "Select text to search for"
 msgstr "Selezionare il testo da cercare"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:95
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:300
 msgid "No history"
-msgstr "Nessuna \"History\""
+msgstr "Nessuna history"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:145
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:351
 msgid "Cancel"
 msgstr "Annull."
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:146
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:352
 msgid "OK"
 msgstr "Ok"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:160
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:366
 msgid "Select a timer to search"
 msgstr "Selezionare un timer da cercare"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:183
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:389
 msgid "Channel Selection"
 msgstr "Selezione canale"
 
-#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:211
+#: /home/dario/Plugins/epgsearch/src/EPGSearch.py:417
 msgid "Search"
 msgstr "Cercare"
 
-#: /home/dario/Plugins/epgsearch/src/plugin.py:45
+#: /home/dario/Plugins/epgsearch/src/plugin.py:58
 msgid "Search EPG"
 msgstr "Cercare EPG"
 
-#: /home/dario/Plugins/epgsearch/src/plugin.py:50
-#: /home/dario/Plugins/epgsearch/src/plugin.py:56
+#: /home/dario/Plugins/epgsearch/src/plugin.py:63
+#: /home/dario/Plugins/epgsearch/src/plugin.py:69
 msgid "Search EPG..."
 msgstr "Ricerca EPG in corso..."
 
