@@ -17,7 +17,7 @@ class AutoTimerPreview(Screen):
 	"""Preview Timers which would be set"""
 
 	skin = """<screen name="AutoTimerPreview" title="Preview AutoTimer" position="75,155" size="565,265">
-		<widget source="timerlist" render="Listbox" position="5,5" size="555,210" scrollbarMode="showOnDemand">
+		<widget source="timerlist" render="Listbox" position="5,5" size="555,210" scrollbarMode="showAlways">
 			<convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos=(2,2), size=(550,24), text = 3, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
