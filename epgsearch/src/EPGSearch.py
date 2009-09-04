@@ -40,7 +40,7 @@ try:
 except:
 	PartnerBoxInstalled = False
 
-#AutoTimer installed?
+# AutoTimer installed?
 try:
 	from Plugins.Extensions.AutoTimer.AutoTimerEditor import \
 			addAutotimerFromEvent, addAutotimerFromSearchString
@@ -48,33 +48,33 @@ try:
 except ImportError:
 	autoTimerAvailable = False
 
+# Overwrite EPGSelection.__init__ with our modified one
 baseEPGSelection__init__ = None
 def EPGSelectionInit():
 	global baseEPGSelection__init__
 	if baseEPGSelection__init__ is None:
 		baseEPGSelection__init__ = EPGSelection.__init__
 	EPGSelection.__init__ = EPGSelection__init__
-	EPGSelection.bluePressed = bluePressed
 
+# Modified EPGSelection __init__
 def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None):
 	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
 	if self.type != EPG_TYPE_MULTI:
+		def bluePressed():
+			cur = self["list"].getCurrent()
+			if cur[0] is not None:
+				name = cur[0].getEventName()
+			else:
+				name = ''
+			self.session.open(EPGSearch, name, False)
+
 		self["epgsearch_actions"] = ActionMap(["EPGSelectActions"],
 				{
-					"blue": self.bluePressed,
+					"blue": bluePressed,
 				})
 		self["key_blue"].setText(_("EPG Search"))
 
-def bluePressed(self):
-	try:
-		# EPGList could be empty
-		cur = self["list"].getCurrent()
-	except: # XXX: is this an IndexError? always be as specific as possible ;-)
-		name = ''
-	else:
-		name = cur[0].getEventName()
-	self.session.open(EPGSearch,name , False)
-
+# Modified EPGSearchList with support for PartnerBox
 class EPGSearchList(EPGList):
 	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
 		EPGList.__init__(self, type, selChangedCB, timer)
@@ -127,7 +127,7 @@ class EPGSearchList(EPGList):
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, serviceref.getServiceName() + ": " + EventName))
 		return res
 
-# VKeyboard with NumericalTextInput
+# customized VirtualKeyBoard with NumericalTextInput
 class EPGSearchVirtualKeyBoard(VirtualKeyBoard, NumericalTextInput):
 	def __init__(self, session, title = ""):
 		VirtualKeyBoard.__init__(self, session, title = title)
@@ -135,7 +135,6 @@ class EPGSearchVirtualKeyBoard(VirtualKeyBoard, NumericalTextInput):
 
 		self.skinName = "VirtualKeyBoard"
 
-		# Actions used by quickselect
 		self["NumberActions"] = NumberActionMap(["NumberActions"],
 		{
 			"1": self.keyNumberGlobal,
@@ -173,6 +172,7 @@ class EPGSearchVirtualKeyBoard(VirtualKeyBoard, NumericalTextInput):
 		self.text = self["text"].getText()
 		self.editing = False
 
+# main class of plugin
 class EPGSearch(EPGSelection):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
@@ -227,6 +227,8 @@ class EPGSearch(EPGSelection):
 			EPGSelection.PartnerboxInit(self, False)
 
 	def onCreate(self):
+		self.setTitle(_("EPG Search"))
+
 		if self.searchargs:
 			self.searchEPG(*self.searchargs)
 		else:
