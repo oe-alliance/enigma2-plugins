@@ -39,16 +39,17 @@ class OneTimeElement(Element):
 		self.source_id = id
 
 	def handleCommand(self, args):
-		if self.source_id.find(",") >= 0:
+		if ',' in self.source_id:
 			paramlist = self.source_id.split(",")
 			list = {}
 			for key in paramlist:
 				arg = args.get(key, [])
-				if len(arg) == 0:
+				Len = len(arg)
+				if Len == 0:
 					list[key] = None
-				elif len(arg) == 1:
+				elif Len == 1:
 					list[key] = "".join(arg)
-				elif len(arg) == 2:
+				elif Len == 2:
 					list[key] = arg[0]
 			self.source.handleCommand(list)
 		else:
