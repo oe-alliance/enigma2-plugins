@@ -350,7 +350,7 @@ class AutoTimerEditorBase:
 class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	"""Edit AutoTimer"""
 
-	skin = """<screen name="AutoTimerEdit" title="Edit AutoTimer" position="75,155" size="565,280">
+	skin = """<screen name="AutoTimerEditor" title="Edit AutoTimer" position="75,155" size="565,280">
 		<widget name="config" position="5,5" size="555,225" scrollbarMode="showOnDemand" />
 		<ePixmap position="0,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
@@ -712,7 +712,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 class AutoTimerFilterEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer Filter"""
 
-	skin = """<screen name="AutoFilterEditor" title="Edit AutoTimer Filters" position="75,150" size="565,245">
+	skin = """<screen name="AutoTimerFilterEditor" title="Edit AutoTimer Filters" position="75,150" size="565,245">
 		<widget name="config" position="5,5" size="555,200" scrollbarMode="showOnDemand" />
 		<ePixmap position="5,205" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="145,205" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
