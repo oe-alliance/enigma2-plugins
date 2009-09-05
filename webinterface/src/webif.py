@@ -2,9 +2,6 @@
 Version = '$Header$';
 
 # things to improve:
-#	- nicer code
-#	- screens need to be defined somehow else.
-#	  I don't know how, yet. Probably each in an own file.
 #	- better error handling
 #	- use namespace parser
 
@@ -25,14 +22,22 @@ from urllib2 import quote
 from WebScreens import *
 #DO NOT REMOVE THIS IMPORT
 		
-# implements the 'render'-call.
-# this will act as a downstream_element, like a renderer.
+
+# The classes and Function in File handle all ScreenPage-based requests
+# ScreenPages use enigma2 standard functionality to bring contents to a webfrontend
+#
+# Like Skins a ScreenPage can consist of several Elements and Converters
+
+#===============================================================================
+# OneTimeElement
+#
+# This is the Standard Element for Rendering a "standard" WebElement
+#===============================================================================
 class OneTimeElement(Element):
 	def __init__(self, id):
 		Element.__init__(self)
 		self.source_id = id
 
-	# CHECKME: is this ok performance-wise?
 	def handleCommand(self, args):
 		if self.source_id.find(",") >= 0:
 			paramlist = self.source_id.split(",")
@@ -69,6 +74,11 @@ class OneTimeElement(Element):
 	def destroy(self):
 		pass
 
+#===============================================================================
+# MacroElement
+#
+# A MacroElement helps using OneTimeElements inside a (Simple)ListFiller Loop
+#===============================================================================
 class MacroElement(OneTimeElement):
 	def __init__(self, id, macro_dict, macro_name):
 		OneTimeElement.__init__(self, id)
@@ -78,6 +88,12 @@ class MacroElement(OneTimeElement):
 	def render(self, request):
 		self.macro_dict[self.macro_name] = self.source.getHTML(self.source_id)
 
+#===============================================================================
+# StreamingElement
+#
+# In difference to an OneTimeElement a StreamingElement sends an ongoing Stream
+# of Data. The end of the Streaming is usually when the client disconnects
+#===============================================================================
 class StreamingElement(OneTimeElement):
 	def __init__(self, id):
 		OneTimeElement.__init__(self, id)
@@ -90,17 +106,32 @@ class StreamingElement(OneTimeElement):
 	def setRequest(self, request):
 		self.request = request
 
+#===============================================================================
+# ListItem
+#
 # a to-be-filled list item
+#===============================================================================
 class ListItem:
 	def __init__(self, name, filternum):
 		self.name = name
 		self.filternum = filternum
 
+#===============================================================================
+# ListMacroItem
+#
+# MacroItem inside a (Simple)ListFiller
+#===============================================================================
 class ListMacroItem:
 	def __init__(self, macrodict, macroname):
 		self.macrodict = macrodict
 		self.macroname = macroname
 
+
+#===============================================================================
+# TextToHTML
+#
+# Returns the String as is
+#===============================================================================
 class TextToHTML(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
@@ -108,6 +139,11 @@ class TextToHTML(Converter):
 	def getHTML(self, id):
 		return self.source.text # encode & etc. here!
 
+#===============================================================================
+# TextToXML
+#
+# Escapes the given Text to be XML conform
+#===============================================================================
 class TextToXML(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
@@ -115,6 +151,11 @@ class TextToXML(Converter):
 	def getHTML(self, id):
 		return escape_xml(self.source.text).replace("\x19", "").replace("\x1c", "").replace("\x1e", "")
 
+#===============================================================================
+# TextToURL
+#
+# Escapes the given Text so it can be used inside a URL
+#===============================================================================
 class TextToURL(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
@@ -122,14 +163,23 @@ class TextToURL(Converter):
 	def getHTML(self, id):
 		return self.source.text.replace(" ", "%20")
 
+#===============================================================================
+# ReturnEmptyXML
+# 
+# Returns a XML only consisting of <rootElement />
+#===============================================================================
 class ReturnEmptyXML(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
 
 	def getHTML(self, id):
-		return "<rootElement></rootElement>"
+		return "<rootElement />"
 
-# a null-output. Useful if you only want to issue a command.
+#===============================================================================
+# Null
+# Return simply NOTHING
+# Useful if you only want to issue a command.
+#===============================================================================
 class Null(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
@@ -137,6 +187,12 @@ class Null(Converter):
 	def getHTML(self, id):
 		return ""
 
+
+#===============================================================================
+# JavascriptUpdate
+#
+# Transforms a string into a javascript update pattern
+#===============================================================================
 class JavascriptUpdate(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
@@ -146,7 +202,11 @@ class JavascriptUpdate(Converter):
 		#		 all other will replace this in JS
 		return '<script>parent.set("%s", "%s");</script>\n' % (id, self.source.text.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"').replace('\xb0', '&deg;'))
 
-# the performant 'one-dimensonial listfiller' engine (podlfe)
+#===============================================================================
+# SimpleListFiller
+#
+# The performant 'one-dimensonial listfiller' engine (podlfe)
+#===============================================================================
 class SimpleListFiller(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
@@ -198,10 +258,10 @@ class SimpleListFiller(Converter):
 		return ''.join(strlist)		
 	
 	text = property(getText)
-		
-				
-
+			
+#===============================================================================
 # the performant 'listfiller'-engine (plfe)
+#===============================================================================
 class ListFiller(Converter):
 	def __init__(self, arg):
 		Converter.__init__(self, arg)
@@ -268,6 +328,12 @@ class ListFiller(Converter):
 
 	text = property(getText)
 
+#===============================================================================
+# webifHandler
+#
+# Handles the Content of a Web-Request
+# It looks up the source, instantiates the Element and Calls the Converter
+#===============================================================================
 class webifHandler(ContentHandler):
 	def __init__(self, session, request):
 		self.res = [ ]
@@ -427,6 +493,12 @@ class webifHandler(ContentHandler):
 			screen.doClose()
 		self.screens = [ ]
 
+#===============================================================================
+# renderPage
+#
+# Creates the Handler for a Request and calls it
+# Also ensures that the Handler is finished after the Request is done
+#===============================================================================
 def renderPage(request, path, session):
 	# read in the template, create required screens
 	# we don't have persistense yet.
@@ -477,7 +549,11 @@ def renderPage(request, path, session):
 		d.addErrback( requestFinishDeferred, handler, request )
 		d.addCallback( requestFinishDeferred, handler, request )
 							
-		
+#===============================================================================
+# requestFinish
+#
+# This has to be/is called at the end of every ScreenPage-based Request
+#===============================================================================
 def requestFinish(handler, request):
 	handler.cleanup()
 	request.finish()	

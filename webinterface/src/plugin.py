@@ -34,12 +34,18 @@ running_defered = []
 waiting_shutdown = 0
 server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revi", "").replace("sion: ", "").replace("$", "")
 
+#===============================================================================
+# Helperclass to close running Instances of the Webinterface
+#===============================================================================
 class Closer:
 	counter = 0
 	def __init__(self, session, callback=None):
 		self.callback = callback
 		self.session = session
 
+#===============================================================================
+# Closes all running Instances of the Webinterface
+#===============================================================================
 	def stop(self):
 		global running_defered
 		for d in running_defered:
@@ -55,12 +61,18 @@ class Closer:
 			if self.callback is not None:
 				self.callback(self.session)
 
+#===============================================================================
+# #Is it already down?
+#===============================================================================
 	def isDown(self, s):
 		self.counter -= 1
 		if self.counter < 1:
 			if self.callback is not None:
 				self.callback(self.session)
 
+#===============================================================================
+# restart the Webinterface for all configured Interfaces
+#===============================================================================
 def restartWebserver(session):
 	try:
 		del session.mediaplayer
@@ -76,6 +88,9 @@ def restartWebserver(session):
 	else:
 		startWebserver(session)
 
+#===============================================================================
+# start the Webinterface for all configured Interfaces
+#===============================================================================
 def startWebserver(session):
 	global running_defered
 	session.mediaplayer = None
@@ -91,6 +106,9 @@ def startWebserver(session):
 		else:
 			print "[Webinterface] not starting disabled interface on %s:%i" % (c.address.value, c.port.value)
 
+#===============================================================================
+# stop the Webinterface for all configured Interfaces
+#===============================================================================
 def stopWebserver(session):
 	try:
 		del session.mediaplayer
@@ -104,10 +122,16 @@ def stopWebserver(session):
 	if len(running_defered) > 0:
 		Closer(session).stop()
 
+#===============================================================================
+# startServerInstance
+# Starts an Instance of the Webinterface
+# on given ipaddress, port, w/o auth, w/o ssl
+#===============================================================================
 def startServerInstance(session, ipaddress, port, useauth=False, usessl=False):
 	try:
 		toplevel = getToplevel(session)
 		if useauth:
+# HTTPAuthResource handles the authentication for every Resource you want it to			
 			root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
 			site = server.Site(root)			
 		else:
@@ -124,7 +148,11 @@ def startServerInstance(session, ipaddress, port, useauth=False, usessl=False):
 	except Exception, e:
 		print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e
 		session.open(MessageBox, 'starting FAILED on %s:%i!\n\n%s' % (ipaddress, port, str(e)), MessageBox.TYPE_ERROR)
-	
+
+#===============================================================================
+# HTTPAuthResource
+# Handles HTTP Authorization for a given Resource
+#===============================================================================
 class HTTPAuthResource(resource.Resource):
 	def __init__(self, res, realm):
 		resource.Resource.__init__(self)
@@ -135,7 +163,6 @@ class HTTPAuthResource(resource.Resource):
 		self.unauthorizedResource = UnauthorizedResource(self.realm)		
 	
 	def unautorized(self, request):
-		print "[Webinterface] Unauthorized!"
 		request.setResponseCode(http.UNAUTHORIZED)
 		request.setHeader('WWW-authenticate', 'basic realm="%s"' % self.realm)
 
@@ -157,15 +184,19 @@ class HTTPAuthResource(resource.Resource):
 		#return the current authentication status						
 		return sessionNs['authenticated']
 													
-													
+#===============================================================================
+# Call render of self.resource (if authenticated)													
+#===============================================================================
 	def render(self, request):			
 		if self.isAuthenticated(request) is True:	
 			return self.resource.render(request)
 		
 		else:
-			return self.unautorized(request)
-	
-	
+			return self.unautorized(request).render(request)
+
+#===============================================================================
+# Override to call getChildWithDefault of self.resource (if authenticated)	
+#===============================================================================
 	def getChildWithDefault(self, path, request):
 		if self.isAuthenticated(request) is True:
 			return self.resource.getChildWithDefault(path, request)
@@ -173,25 +204,34 @@ class HTTPAuthResource(resource.Resource):
 		else:
 			return self.unautorized(request)
 
+#===============================================================================
+# UnauthorizedResource
+# Returns a simple html-ified "Access Denied"
+#===============================================================================
 class UnauthorizedResource(resource.Resource):
 	def __init__(self, realm):
 		resource.Resource.__init__(self)
 		self.realm = realm
 		self.errorpage = static.Data('<html><body>Access Denied.</body></html>', 'text/html')
+	
+	def getChild(self, path, request):
+		return self.errorpage
 		
 	def render(self, request):	
 		return self.errorpage.render(request)
 
+# Password verfication stuff
+
 from hashlib import md5 as md5_new
 from crypt import crypt
 
-DES_SALT = list('./0123456789' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz')
+#===============================================================================
+# getpwnam
+# 
+# Get a password database entry for the given user name
+# Example from the Python Library Reference.
+#===============================================================================
 def getpwnam(name, pwfile=None):
-	"""Return pasword database entry for the given user name.
-
-	Example from the Python Library Reference.
-	"""
-
 	if not pwfile:
 		pwfile = '/etc/passwd'
 
@@ -206,6 +246,11 @@ def getpwnam(name, pwfile=None):
 			f.close()
 			return entry
 
+#===============================================================================
+# passcrypt
+#
+# Encrypt a password
+#===============================================================================
 def passcrypt(passwd, salt=None, method='des', magic='$1$'):
 	"""Encrypt a string according to rules in crypt(3)."""
 	if method.lower() == 'des':
@@ -215,6 +260,12 @@ def passcrypt(passwd, salt=None, method='des', magic='$1$'):
 	elif method.lower() == 'clear':
 		return passwd
 
+#===============================================================================
+# check_passwd
+#
+# Checks username and Password against a given Unix Password file 
+# The default path is '/etc/passwd'
+#===============================================================================
 def check_passwd(name, passwd, pwfile='/etc/passwd'):
 	"""Validate given user, passwd pair against password database."""
 
@@ -238,6 +289,7 @@ def check_passwd(name, passwd, pwfile='/etc/passwd'):
 		return enc_passwd == passcrypt(passwd, enc_passwd[:2])
 
 def _to64(v, n):
+	DES_SALT = list('./0123456789' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz')
 	r = ''
 	while (n - 1 >= 0):
 		r = r + DES_SALT[v & 0x3F]
@@ -245,9 +297,11 @@ def _to64(v, n):
 		n = n - 1
 	return r
 
+#===============================================================================
+# passcrypt_md5
+# Encrypt a password via md5
+#===============================================================================
 def passcrypt_md5(passwd, salt=None, magic='$1$'):
-	"""Encrypt passwd with MD5 algorithm."""
-
 	if not salt:
 		pass
 	elif salt[:len(magic)] == magic:
@@ -315,7 +369,9 @@ def passcrypt_md5(passwd, salt=None, magic='$1$'):
 
 	return rv
 
-#### stuff for SSL Support
+#===============================================================================
+# Creates an SSL Context to use with twisted.web
+#===============================================================================
 def makeSSLContext(myKey, trustedCA):
 	 '''Returns an ssl Context Object
 	@param myKey a pem formated key and certifcate with for my current host
@@ -376,11 +432,19 @@ def makeSSLContext(myKey, trustedCA):
 
 global_session = None
 
+#===============================================================================
+# sessionstart
+# Actions to take place on Session start 
+#===============================================================================
 def sessionstart(reason, session):
 	global global_session
 	global_session = session
 
-def autostart(reason, **kwargs):
+#===============================================================================
+# networkstart
+# Actions to take place after Network is up (startup the Webserver)
+#===============================================================================
+def networkstart(reason, **kwargs):
 	if reason is True:
 #		try:
 		updateConfig()
@@ -402,6 +466,6 @@ def configCB(result, session):
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-			PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=autostart),
+			PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkstart),
 			PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),
 							where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=openconfig)]
