@@ -1,5 +1,5 @@
 from Components.ActionMap import ActionMap, NumberActionMap
-from Components.config import config, ConfigInteger, ConfigSubsection, \
+from Components.config import config, ConfigInteger, ConfigSubsection, ConfigSelection, \
     ConfigSubList, ConfigText, ConfigYesNo, ConfigDateTime, ConfigClock, ConfigPIN
 from KTmain import KiddyTimer
 from KTsetup import KiddyTimerSetup
@@ -13,6 +13,7 @@ config.plugins.KiddyTimer = ConfigSubsection()
 config.plugins.KiddyTimer.enabled = ConfigYesNo(default=False)
 config.plugins.KiddyTimer.position_x = ConfigInteger(default=590)
 config.plugins.KiddyTimer.position_y = ConfigInteger(default=35)
+config.plugins.KiddyTimer.timerStyle = ConfigSelection(choices = [("clock", _("Clock")), ("smiley", _("Smiley"))])
 config.plugins.KiddyTimer.lastStartDay = ConfigText(default="")
 config.plugins.KiddyTimer.monitorEndTime = ConfigClock(default=KTglob.EIGHTOCLOCKNOON)
 config.plugins.KiddyTimer.pin = ConfigPIN(default = 1111 , censor = "*")

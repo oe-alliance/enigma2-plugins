@@ -1,5 +1,6 @@
 from Components.ActionMap import ActionMap
 from Components.Label import Label
+from Components.ProgressBar import ProgressBar
 from KTMultiPixmap import KTmultiPixmap
 from Components.config import config
 from Screens.Screen import Screen
@@ -16,6 +17,19 @@ class KiddyTimerPositioner(Screen):
 
         self["TimerGraph"] = KTmultiPixmap()
         self["TimerText"] = Label(_("01:00"))
+        self["TimerSlider"] = ProgressBar()
+        self["TimerSliderText"] = Label(_("01:00"))
+        
+        if config.plugins.KiddyTimer.timerStyle.value == "clock":
+            self["TimerGraph"].show()
+            self["TimerText"].show()
+            self["TimerSlider"].hide()    
+            self["TimerSliderText"].hide()
+        else:
+            self["TimerGraph"].hide()
+            self["TimerText"].hide()
+            self["TimerSlider"].show()
+            self["TimerSliderText"].show()
         
         self["actions"] = ActionMap(["WizardActions"],
         {

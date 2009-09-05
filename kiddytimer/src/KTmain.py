@@ -1,6 +1,9 @@
 from Components.Label import Label
+from Components.ProgressBar import ProgressBar
 from KTMultiPixmap import KTmultiPixmap
 from Components.config import config
+from Screens.MessageBox import MessageBox
+from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
 from Screens import Standby
 from enigma import ePoint, eTimer
@@ -14,17 +17,31 @@ class KiddyTimerScreen(Screen):
         Screen.__init__(self, session)
         self.skin = KTglob.SKIN
         self.onShow.append(self.movePosition)
-
+        
         self.skin_path = KTglob.plugin_path
 
         self["TimerGraph"] = KTmultiPixmap()
         self["TimerText"] = Label(_("??:??"))
+        self["TimerSlider"] = ProgressBar()
+        self["TimerSliderText"] = Label(_("??:??"))
         
     def renderScreen(self):
+        self["TimerSlider"].setValue(int(KTglob.oKiddyTimer.remainingPercentage*100)) 
         self["TimerGraph"].setPixmapNum(KTglob.oKiddyTimer.curImg)
-        self["TimerGraph"].show()
         self.sTimeLeft = KTglob.getTimeFromSeconds( (KTglob.oKiddyTimer.remainingTime + 59) , False ) # Add 59 Seconds to show one minute if less than 1 minute left...
         self["TimerText"].setText(self.sTimeLeft)
+        self["TimerSliderText"].setText(self.sTimeLeft)
+
+        if config.plugins.KiddyTimer.timerStyle.value == "clock":
+            self["TimerGraph"].show()
+            self["TimerText"].show()
+            self["TimerSlider"].hide()    
+            self["TimerSliderText"].hide()
+        else:
+            self["TimerGraph"].hide()
+            self["TimerText"].hide()
+            self["TimerSlider"].show()
+            self["TimerSliderText"].show()
 
     def movePosition(self):
         if self.instance:
@@ -36,7 +53,7 @@ class KiddyTimerScreen(Screen):
         for sPixmap in self["TimerGraph"].pixmapFiles:
             i = int(sPixmap[-8:-4])
             self.percentageList.append(i)
-
+      
 ##############################################################################
 
 class KiddyTimer():
@@ -74,14 +91,31 @@ class KiddyTimer():
             if self.currentDay != config.plugins.KiddyTimer.lastStartDay.getValue():
                 #Reset all Timers
                 self.resetTimer()
-
+            
             if self.dialog == None:
                 self.dialog = self.session.instantiateDialog(KiddyTimerScreen)
                 self.dialog.hide()
-
-            self.setDialogStatus(self.timerHasToRun())            
+                
+            self.setDialogStatus(self.timerHasToRun())
             self.calculateTimer()
+            
+    def askForActivation(self):
+        self.session.openWithCallback(self.activationCallback, MessageBox, _("Do you want to start the kiddytimer- plugin now."), MessageBox.TYPE_YESNO)
 
+    def activationCallback(self, value):
+        self.setDialogStatus(self.timerHasToRun())
+
+        if value:
+            self.setDialogStatus( True )
+            if self.dialog == None:
+                self.dialog = self.session.instantiateDialog(KiddyTimerScreen)
+                self.dialog.hide()
+        else:
+            self.setDialogStatus( False )
+                                       
+        self.calculateTimer()
+
+    
     def startLoop(self):
         self.loopTimer.start(self.loopTimerStep,1)
     
@@ -140,7 +174,7 @@ class KiddyTimer():
             self.startLoop()
 
     def showHide(self):
-        if config.plugins.KiddyTimer.enabled.value:
+        if config.plugins.KiddyTimer.enabled.value and self.timerHasToRun():
             self.setDialogStatus(True)
         else:
             self.setDialogStatus(False)

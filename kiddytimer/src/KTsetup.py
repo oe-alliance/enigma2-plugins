@@ -15,7 +15,7 @@ import time
 
 class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
     skin = ("""
-    <screen position="75,90" size="560,370" title="%s Setup">
+    <screen position="75,90" size="560,380" title="%s Setup">
       <ePixmap pixmap="~/img/button-red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
       <ePixmap pixmap="~/img/button-green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
       <ePixmap pixmap="~/img/button-yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
@@ -32,10 +32,10 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
       <widget name="key_blue" position="420,0" zPosition="1" size="140,40"
         font="Regular;20" valign="center" halign="center" backgroundColor="#18188b" transparent="1"
         shadowColor="#000000" shadowOffset="-1,-1" />
-      <widget name="config" position="10,40" size="540,260" scrollbarMode="showOnDemand" />
-      <widget name="LastDayStarted" position="10,300" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
-      <widget name="RemainingTime" position="10,320" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
-      <widget name="PluginInfo" position="10,340" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
+      <widget name="config" position="10,40" size="540,280" scrollbarMode="showOnDemand" />
+      <widget name="LastDayStarted" position="10,320" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
+      <widget name="RemainingTime" position="10,340" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
+      <widget name="PluginInfo" position="10,360" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
     </screen>""") %KTglob.PLUGIN_BASE
 
     def __init__(self, session):
@@ -47,7 +47,8 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self.list = [
             getConfigListEntry(_("Enabled"), config.plugins.KiddyTimer.enabled),
             getConfigListEntry(_("PIN"), config.plugins.KiddyTimer.pin),
-            getConfigListEntry(_("Don't monitor TV started after"), config.plugins.KiddyTimer.monitorEndTime )
+            getConfigListEntry(_("Don't monitor TV started after"), config.plugins.KiddyTimer.monitorEndTime ), 
+            getConfigListEntry(_("Style of timer"), config.plugins.KiddyTimer.timerStyle )
             ]
         for i in range(0,7):
             self.list.append(getConfigListEntry(KTglob.DAYNAMES[i], config.plugins.KiddyTimer.dayTimes[i].timeValue))                
@@ -107,7 +108,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
             if self.enabled_old != config.plugins.KiddyTimer.enabled.value:
                 KTglob.oKiddyTimer.gotSession(KTglob.oKiddyTimer.session)
             else:
-                KTglob.oKiddyTimer.setDialogStatus(True)
+                KTglob.oKiddyTimer.setDialogStatus(KTglob.oKiddyTimer.timerHasToRun())
         self.close()
 
     def cancel(self):

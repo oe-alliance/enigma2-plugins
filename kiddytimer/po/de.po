@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KiddyTimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-29 13:00+0100\n"
+"POT-Creation-Date: 2009-09-05 23:33+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,17 +13,30 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-SearchPath-0: ..\\src\n"
 
-#: ..\src/plugin.py:49
+#: ..\src/plugin.py:16
+msgid "Clock"
+msgstr "Uhr"
+
+#: ..\src/plugin.py:16
+msgid "Smiley"
+msgstr "Smiley"
+
+#: ..\src/plugin.py:50
 msgid "KiddyTimer"
 msgstr "KiddyTimer"
 
-#: ..\src/plugin.py:49
+#: ..\src/plugin.py:50
 msgid "Allows to controls your kids' daily TV usage"
 msgstr "Ermöglicht,  den täglichen TV- Konsum Ihrer Kinder zu steuern"
 
-#: ..\src/KTmain.py:21
+#: ..\src/KTmain.py:24
+#: ..\src/KTmain.py:26
 msgid "??:??"
 msgstr "??:??"
+
+#: ..\src/KTmain.py:103
+msgid "Do you want to start the kiddytimer- plugin now."
+msgstr "Wollen Sie das KiddyTimer- Plugin jetzt starten?"
 
 #: ..\src/KTglob.py:6
 msgid "Sunday"
@@ -65,39 +78,44 @@ msgstr "PIN"
 msgid "Don't monitor TV started after"
 msgstr "Nicht mehr überwachen nach"
 
-#: ..\src/KTsetup.py:70
+#: ..\src/KTsetup.py:51
+msgid "Style of timer"
+msgstr "Aussehen des Timers"
+
+#: ..\src/KTsetup.py:71
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Version: %(version)s"
 
-#: ..\src/KTsetup.py:71
-#: ..\src/KTsetup.py:97
+#: ..\src/KTsetup.py:72
+#: ..\src/KTsetup.py:98
 #, python-format
 msgid "Remaining time: %s"
 msgstr "Verbleibende Zeit: %s"
 
-#: ..\src/KTsetup.py:72
+#: ..\src/KTsetup.py:73
 #, python-format
 msgid "Last day started: %s"
 msgstr "Zuletzt gestartet am: %s"
 
-#: ..\src/KTsetup.py:75
+#: ..\src/KTsetup.py:76
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ..\src/KTsetup.py:76
+#: ..\src/KTsetup.py:77
 msgid "Save"
 msgstr "Speichern"
 
-#: ..\src/KTsetup.py:77
+#: ..\src/KTsetup.py:78
 msgid "Reset clock"
 msgstr "Zurücksetzen"
 
-#: ..\src/KTsetup.py:78
+#: ..\src/KTsetup.py:79
 msgid "Move clock"
 msgstr "Pos.ändern"
 
-#: ..\src/KTpositioner.py:18
+#: ..\src/KTpositioner.py:19
+#: ..\src/KTpositioner.py:21
 msgid "01:00"
 msgstr "01:00"
 

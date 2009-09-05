@@ -1,7 +1,7 @@
 import time
 
 PLUGIN_BASE = "KiddyTimer"
-PLUGIN_VERSION = "0.3"
+PLUGIN_VERSION = "0.4"
 
 DAYNAMES= (_("Sunday"),
           _("Monday"),
@@ -29,9 +29,12 @@ plugin_path = ""
 ##############################################################################
 
 SKIN = """
-    <screen flags="wfNoBorder" position="0,0" size="82,82" title="Kiddy Timer" backgroundColor="#ff000000">
-        <widget name="TimerGraph" pixmaps="~/img/Timer1000.png,~/img/Timer0950.png,~/img/Timer0900.png,~/img/Timer0850.png,~/img/Timer0800.png,~/img/Timer0750.png,~/img/Timer0700.png,~/img/Timer0650.png,~/img/Timer0600.png,~/img/Timer0550.png,~/img/Timer0500.png,~/img/Timer0450.png,~/img/Timer0400.png,~/img/Timer0350.png,~/img/Timer0300.png,~/img/Timer0250.png,~/img/Timer0200.png,~/img/Timer0150.png,~/img/Timer0100.png,~/img/Timer0050.png,~/img/Timer0000.png" position="0,0" zPosition="1" size="130,130" transparent="1" alphatest="on" />
-        <widget name="TimerText" zPosition="2" position="0,30" size="82,21" font="Regular;18" halign="center" valign="center" foregroundColor="#000000" transparent = "1" />
+    <screen flags="wfNoBorder" position="0,0" size="82,104" title="Kiddy Timer" backgroundColor="#ff000000">
+        <ePixmap pixmap="~/img/Smiley-Background.png" position="0,0" zPosition="1" size="82,82" alphatest="on" transparent="1"/>
+        <widget name="TimerSlider" pixmap="~/img/Smiley-Slider.png" zPosition="2" position="0,0" size="82,82" transparent="1" orientation="orBottomToTop" />
+        <widget name="TimerSliderText" zPosition="3" position="0,75" size="82,21" font="Regular;18" halign="center" valign="center" foregroundColor="#000000" backgroundColor="#aaffffff" />
+        <widget name="TimerGraph" pixmaps="~/img/Timer1000.png,~/img/Timer0950.png,~/img/Timer0900.png,~/img/Timer0850.png,~/img/Timer0800.png,~/img/Timer0750.png,~/img/Timer0700.png,~/img/Timer0650.png,~/img/Timer0600.png,~/img/Timer0550.png,~/img/Timer0500.png,~/img/Timer0450.png,~/img/Timer0400.png,~/img/Timer0350.png,~/img/Timer0300.png,~/img/Timer0250.png,~/img/Timer0200.png,~/img/Timer0150.png,~/img/Timer0100.png,~/img/Timer0050.png,~/img/Timer0000.png" position="0,0" zPosition="2" size="82,82" transparent="1" alphatest="on" />
+        <widget name="TimerText" zPosition="3" position="0,30" size="82,21" font="Regular;18" halign="center" valign="center" foregroundColor="#000000" transparent = "1" />
     </screen>"""
 
 ##############################################################################
