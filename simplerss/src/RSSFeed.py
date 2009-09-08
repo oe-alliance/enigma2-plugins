@@ -132,11 +132,14 @@ class BaseFeed:
 
 class UniversalFeed(BaseFeed):
 	"""Feed which can handle rdf, rss and atom feeds utilizing abstraction wrappers."""
-	def __init__(self, uri, autoupdate):
+	def __init__(self, uri, autoupdate, sync = False):
 		BaseFeed.__init__(self, uri)
 
 		# Set Autoupdate
 		self.autoupdate = autoupdate
+		
+		# Is this a synced feed?
+		self.sync = sync
 
 		# Initialize
 		self.last_update = None

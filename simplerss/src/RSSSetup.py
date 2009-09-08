@@ -68,34 +68,14 @@ class RSSSetup(ConfigListScreen, Screen):
 
 	def __init__(self, session, rssPoller = None):
 		Screen.__init__(self, session)
-
 		self.rssPoller = rssPoller
-		simpleRSS = config.plugins.simpleRSS
 
-		# Create List of all Feeds
-		list = [
-			getConfigListEntry(_("Feed"), x.uri)
-				for x in simpleRSS.feed
-		]
-
-		# Attach notifier to autostart and append ConfigListEntry to List
-		simpleRSS.autostart.addNotifier(self.autostartChanged, initial_call = False)
-		list.append(getConfigListEntry(_("Start automatically with Enigma2"), simpleRSS.autostart))
-
-		# Save keep_running in instance as we want to dynamically add/remove it
-		self.keep_running = getConfigListEntry(_("Keep running in background"), simpleRSS.keep_running)
-		if not simpleRSS.autostart.value:
-			list.append(self.keep_running)
-
-		# Append Last two config Elements
-		list.extend((
-			getConfigListEntry(_("Show new Messages as"), simpleRSS.update_notification),
-			getConfigListEntry(_("Update Interval (min)"), simpleRSS.interval)
-		))
+		self.createSetup()
+		config.plugins.simpleRSS.autostart.addNotifier(self.elementChanged, initial_call = False)
+		config.plugins.simpleRSS.enable_google_reader.addNotifier(self.elementChanged, initial_call = False)
 
 		# Initialize ConfigListScreen
-		self.list = list
-		ConfigListScreen.__init__(self, list, session)
+		ConfigListScreen.__init__(self, self.list, session)
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("OK"))
@@ -117,15 +97,39 @@ class RSSSetup(ConfigListScreen, Screen):
 	def setCustomTitle(self):
 		self.setTitle(_("Simple RSS Reader Setup"))
 
-	def autostartChanged(self, instance):
-		# Remove keep_running from list if autostart is active
-		if instance.value:
-			self.list.remove(self.keep_running)
-		# Otherwise add it at third position from behind
-		else:
-			self.list.insert(-2, self.keep_running)
+	def createSetup(self):
+		simpleRSS = config.plugins.simpleRSS
 
-		# Assign new List to ConfigList
+		# Create List of all Feeds
+		list = [
+			getConfigListEntry(_("Feed"), x.uri)
+				for x in simpleRSS.feed
+		]
+
+		list.append(getConfigListEntry(_("Start automatically with Enigma2"), simpleRSS.autostart))
+
+		# Save keep_running in instance as we want to dynamically add/remove it
+		self.keep_running = getConfigListEntry(_("Keep running in background"), simpleRSS.keep_running)
+		if not simpleRSS.autostart.value:
+			list.append(self.keep_running)
+
+		# Append Last two config Elements
+		list.extend((
+			getConfigListEntry(_("Show new Messages as"), simpleRSS.update_notification),
+			getConfigListEntry(_("Update Interval (min)"), simpleRSS.interval),
+			getConfigListEntry(_("Fetch feed from Google Reader?"), simpleRSS.enable_google_reader),
+		))
+
+		if simpleRSS.enable_google_reader.value:
+			list.extend((
+				getConfigListEntry(_("Google Username"), simpleRSS.google_username),
+				getConfigListEntry(_("Google Password"), simpleRSS.google_password),
+			))
+
+		self.list = list
+
+	def elementChanged(self, instance):
+		self.createSetup()
 		self["config"].setList(self.list)
 
 	def delete(self):
@@ -142,10 +146,9 @@ class RSSSetup(ConfigListScreen, Screen):
 			id = self["config"].getCurrentIndex()
 			del config.plugins.simpleRSS.feed[id]
 			config.plugins.simpleRSS.feedcount.value -= 1
-			self.list.pop(id)
 
-			# redraw list
-			self["config"].l.invalidate()
+			self.createSetup()
+			self["config"].setList(self.list)
 
 	def ok(self):
 		id = self["config"].getCurrentIndex()
@@ -174,8 +177,9 @@ class RSSSetup(ConfigListScreen, Screen):
 		if uri.value == "http://":
 			del config.plugins.simpleRSS.feed[id]
 		else:
-			self.list.insert(id, getConfigListEntry(_("Feed"), uri))
 			config.plugins.simpleRSS.feedcount.value = id+1
+			self.createSetup()
+			self["config"].setList(self.list)
 
 	def keySave(self):
 		# Tell Poller to recreate List if present
@@ -188,7 +192,8 @@ class RSSSetup(ConfigListScreen, Screen):
 		simpleRSS = config.plugins.simpleRSS
 
 		# Remove Notifier
-		simpleRSS.autostart.notifiers.remove(self.autostartChanged)
+		simpleRSS.autostart.notifiers.remove(self.elementChanged)
+		simpleRSS.enable_google_reader.notifiers.remove(self.elementChanged)
 
 		# Keep feedcount sane
 		simpleRSS.feedcount.value = len(simpleRSS.feed)

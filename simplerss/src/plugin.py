@@ -2,7 +2,8 @@
 from . import _
 
 from Components.config import config, ConfigSubsection, ConfigSubList, \
-	ConfigEnableDisable, ConfigNumber, ConfigText, ConfigSelection
+	ConfigEnableDisable, ConfigNumber, ConfigText, ConfigSelection, \
+	ConfigYesNo, ConfigPassword
 
 # Initialize Configuration
 config.plugins.simpleRSS = ConfigSubsection()
@@ -22,10 +23,13 @@ simpleRSS.keep_running = ConfigEnableDisable(default=True)
 simpleRSS.feed = ConfigSubList()
 for i in range(0, simpleRSS.feedcount.value):
 	s = ConfigSubsection()
-	s.uri = ConfigText(default="http://", fixed_size = False)
+	s.uri = ConfigText(default="http://", fixed_size=False)
 	s.autoupdate = ConfigEnableDisable(default=True)
 	simpleRSS.feed.append(s)
 	del s
+simpleRSS.enable_google_reader = ConfigYesNo(default=False)
+simpleRSS.google_username = ConfigText(default="", fixed_size=False)
+simpleRSS.google_password = ConfigPassword(default="")
 
 del simpleRSS
 

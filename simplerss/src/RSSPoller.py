@@ -4,10 +4,15 @@ from . import _
 from Components.config import config
 from enigma import eTimer
 
+from Tools.Notifications import AddPopup
+from Screens.MessageBox import MessageBox
+
 from RSSFeed import BaseFeed, UniversalFeed
 
 from twisted.web.client import getPage
 from xml.etree.cElementTree import fromstring as cElementTree_fromstring
+
+from GoogleReader import GoogleReader
 
 NOTIFICATIONID = 'SimpleRSSUpdateNotification'
 
@@ -20,8 +25,7 @@ class RSSPoller:
 		# Timer
 		self.poll_timer = eTimer()
 		self.poll_timer.callback.append(self.poll)
-		if poll:
-			self.poll_timer.start(0, 1)
+		self.do_poll = poll
 
 		# Save Session, Initialize Var to identify triggered Reload
 		self.session = session
@@ -42,8 +46,47 @@ class RSSPoller:
 				for x in config.plugins.simpleRSS.feed
 		]
 
+		if not config.plugins.simpleRSS.enable_google_reader.value:
+			if poll:
+				self.poll_timer.start(0, 1)
+		else:
+			self.googleReader = GoogleReader(config.plugins.simpleRSS.google_username.value, config.plugins.simpleRSS.google_password.value)
+			self.googleReader.login().addCallback(self.googleLoggedIn).addErrback(self.googleLoginFailed)
+
 		# Initialize Vars
 		self.current_feed = 0
+
+	def googleLoggedIn(self, sid = None):
+		self.googleReader.getSubscriptionList().addCallback(self.googleSubscriptionList).addErrback(self.googleSubscriptionFailed)
+
+	def googleLoginFailed(self, res = None):
+		AddPopup(
+			_("Failed to login to GoogleReader."),
+			MessageBox.TYPE_ERROR,
+			5,
+		)
+
+		self.reloading = False
+		if self.do_poll:
+			self.poll_timer.start(0, 1)
+
+	def googleSubscriptionList(self, subscriptions = None):
+		self.feeds.extend(subscriptions)
+
+		self.reloading = False
+		if self.do_poll:
+			self.poll_timer.start(0, 1)
+
+	def googleSubscriptionFailed(self, res = None):
+		AddPopup(
+			_("Failed to get subscriptions from GoogleReader."),
+			MessageBox.TYPE_ERROR,
+			5,
+		)
+
+		self.reloading = False
+		if self.do_poll:
+			self.poll_timer.start(0, 1)
 
 	def addCallback(self, callback):
 		if callback not in update_callbacks:
@@ -144,9 +187,6 @@ class RSSPoller:
 						newItems = True
 					)
 				elif update_notification_value == "notification":
-					from Tools.Notifications import AddPopup
-					from Screens.MessageBox import MessageBox
-
 					AddPopup(
 						_("Received %d new news item(s).") % (len(self.newItemFeed.history)),
 						MessageBox.TYPE_INFO,
@@ -224,5 +264,9 @@ class RSSPoller:
 
 		self.feeds = newfeeds
 
-		self.reloading = False
+		if config.plugins.simpleRSS.enable_google_reader.value:
+			self.googleReader = GoogleReader(config.plugins.simpleRSS.google_username.value, config.plugins.simpleRSS.google_password.value)
+			self.googleReader.login().addCallback(self.googleLoggedIn).addErrback(self.googleLoginFailed)
+		else:
+			self.reloading = False
 
