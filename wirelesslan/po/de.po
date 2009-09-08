@@ -29,7 +29,7 @@ msgid "Bitrate:"
 msgstr ""
 
 msgid "Choose a Wireless Network"
-msgstr "Wähle ein Funk-Netzwerk"
+msgstr "Wählen Sie ein Funk-Netzwerk"
 
 msgid "Close"
 msgstr "Schließen"
