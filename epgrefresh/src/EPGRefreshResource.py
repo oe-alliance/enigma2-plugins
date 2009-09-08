@@ -114,5 +114,5 @@ class EPGRefreshListServicesResource(resource.Resource):
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application; xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
-		return ''.join(epgrefresh.buildConfiguration())
+		return ''.join(epgrefresh.buildConfiguration(webif = True))
 

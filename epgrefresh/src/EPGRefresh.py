@@ -85,23 +85,32 @@ class EPGRefresh:
 				duration = duration and int(duration)
 				self.services[1].add(EPGRefreshService(value, duration))
 
-	def buildConfiguration(self):
+	def buildConfiguration(self, webif = False):
 		list = ['<?xml version="1.0" ?>\n<epgrefresh>\n\n']
+
+		if webif:
+			TAGSERVICE='e2servicereference'
+			TAGBOUQUET='e2servicereference'
+			TAGNAME='e2servicename'
+		else:
+			TAGSERVICE='service'
+			TAGBOUQUET='bouquet'
+			TAGNAME='!--'
 
 		for service in self.services[0]:
 			ref = ServiceReference(service.sref)
-			list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
-			list.append(' <service')
+			list.extend((' <', TAGNAME, '>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</', TAGNAME, '>\n'))
+			list.extend((' <', TAGSERVICE))
 			if service.duration is not None:
-				list.extend([' duration="', str(service.duration), '"'])
-			list.extend(['>', stringToXML(service.sref), '</service>\n'])
+				list.extend((' duration="', str(service.duration), '"'))
+			list.extend(('>', stringToXML(service.sref), '</', TAGSERVICE, '>\n'))
 		for bouquet in self.services[1]:
 			ref = ServiceReference(bouquet.sref)
-			list.extend([' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'])
-			list.append(' <bouquet')
+			list.extend((' <', TAGNAME, '>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</', TAGNAME, '>\n'))
+			list.extend((' <', TAGBOUQUET))
 			if bouquet.duration is not None:
-				list.extend([' duration="', str(bouquet.duration), '"'])
-			list.extend(['>', stringToXML(bouquet.sref), '</bouquet>\n'])
+				list.extend((' duration="', str(bouquet.duration), '"'))
+			list.extend(('>', stringToXML(bouquet.sref), '</', TAGBOUQUET, '>\n'))
 
 		list.append('\n</epgrefresh>')
 
