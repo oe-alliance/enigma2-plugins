@@ -355,33 +355,29 @@ function openDebug(){
 
 function doRequest(url, readyFunction){
 	requestStarted();
+	var request = '';
 	// gears or not that's the question here
 	if (!window.google || !google.gears){ //no gears, how sad
-//		debug("NO GEARS!!");
-		var request = '';
-	try{
-		request = new Ajax.Request(url,
-				{
-			asynchronous: true,
-			method: 'GET',
-			requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
-			onException: function(o,e){ throw(e); },				
-			onSuccess: function (transport, json) {						
-				if(typeof(readyFunction) != "undefined"){
-					readyFunction(transport);
-				}
-			},
-			onComplete: requestFinished 
-				});
-	} catch(e) {}
+//		debug("NO GEARS!!");		
+		try{
+			request = new Ajax.Request(url,
+					{
+				asynchronous: true,
+				method: 'GET',
+				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'Expires', '0'],
+				onException: function(o,e){ throw(e); },				
+				onSuccess: function (transport, json) {						
+					if(typeof(readyFunction) != "undefined"){
+						readyFunction(transport);
+					}
+				},
+				onComplete: requestFinished 
+					});
+		} catch(e) {}
 	} else { //we're on gears!
 		try{
 			request = google.gears.factory.create('beta.httprequest');
 			request.open('GET', url);
-
-//			request.setRequestHeader('Pragma', 'no-cache');
-//			request.setRequestHeader('Cache-Control', 'must-revalidate');
-//			request.setRequestHeader('If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT');
 
 			if( typeof(readyFunction) != "undefined" ){
 				request.onreadystatechange = function(){				
@@ -1596,6 +1592,10 @@ function getProviderTv(){
 	getBouquets(providerTv);
 }
 
+function getSatellitesTv(){
+	getBouquets(satellitesTv);
+}
+
 function getAllTv(){
 	loadBouquet(allTv, "All (TV)");
 }
@@ -1607,6 +1607,10 @@ function getBouquetsRadio(){
 
 function getProviderRadio(){
 	getBouquets(providerRadio);
+}
+
+function getSatellitesRadio(){
+	getBouquets(satellitesRadio);
 }
 
 function getAllRadio(){

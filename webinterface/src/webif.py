@@ -543,12 +543,11 @@ def renderPage(request, path, session):
 	else:	
 		def requestFinishDeferred(nothing, handler, request):
 			from twisted.internet import reactor
-			reactor.callLater(1, requestFinish, handler, request)				
+			reactor.callLater(0, requestFinish, handler, request)				
 		
 		d = request.notifyFinish()
 
-		d.addErrback( requestFinishDeferred, handler, request )
-		d.addCallback( requestFinishDeferred, handler, request )
+		d.addBoth( requestFinishDeferred, handler, request )
 							
 #===============================================================================
 # requestFinish
