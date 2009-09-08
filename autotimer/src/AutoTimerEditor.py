@@ -550,6 +550,22 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.bouquets = ret[1][1]
 			self.renameServiceButton()
 
+	def keyLeft(self):
+		cur = self["config"].getCurrent()
+		cur = cur and cur[1]
+		if cur == self.tags:
+			self.chooseTags()
+		else:
+			ConfigListScreen.keyLeft(self)
+
+	def keyRight(self):
+		cur = self["config"].getCurrent()
+		cur = cur and cur[1]
+		if cur == self.tags:
+			self.chooseTags()
+		else:
+			ConfigListScreen.keyRight(self)
+
 	def ok(self):
 		cur = self["config"].getCurrent()
 		cur = cur and cur[1]
