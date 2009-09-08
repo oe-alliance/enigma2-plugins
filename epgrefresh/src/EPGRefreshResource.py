@@ -2,6 +2,7 @@ from twisted.web import http, resource
 from EPGRefresh import epgrefresh
 from EPGRefreshService import EPGRefreshService
 from enigma import eServiceReference
+from Components.config import config
 
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
@@ -115,4 +116,47 @@ class EPGRefreshListServicesResource(resource.Resource):
 		req.setHeader('Content-type', 'application; xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(epgrefresh.buildConfiguration(webif = True))
+
+class EPGRefreshSettingsResource(resource.Resource):
+	def render(self, req):
+		for key, value in req.args.iteritems():
+			value = value[0]
+			if key == "enabled":
+				config.plugins.epgrefresh.enabled.value = True if value == "true" else False
+			elif key == "begin":
+				config.plugins.epgrefresh.begin.value = int(value)
+			elif key == "end":
+				config.plugins.epgrefresh.end.value = int(value)
+			elif key == "interval":
+				config.plugins.epgrefresh.interval.value = int(value)
+			elif key == "delay_standby":
+				config.plugins.epgrefresh.delay_standby.value = int(value)
+			elif key == "inherit_autotimer":
+				config.plugins.epgrefresh.inherit_autotimer.value = True if value == "true" else False
+			elif key == "afterevent":
+				config.plugins.epgrefresh.afterevent.value = True if value == "true" else False
+			elif key == "force":
+				config.plugins.epgrefresh.force.value = True if value == "true" else False
+			elif key == "wakeup":
+				config.plugins.epgrefresh.wakeup.value = True if value == "true" else False
+			elif key == "pase_autotimer":
+				config.plugins.epgrefresh.parse_autotimer.value = True if value == "true" else False
+
+		config.plugins.epgrefresh.save()
+
+		if config.plugins.epgrefresh.enabled.value:
+			epgrefresh.start()
+		else:
+			epgrefresh.stop()
+
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
+
+		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+			<e2simplexmlresult>
+				<e2state>true</e2state>
+				<e2statetext>config changed.</e2statetext>
+			</e2simplexmlresult>
+			"""
 
