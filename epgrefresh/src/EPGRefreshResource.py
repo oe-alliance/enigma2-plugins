@@ -117,7 +117,7 @@ class EPGRefreshListServicesResource(resource.Resource):
 		req.setHeader('charset', 'UTF-8')
 		return ''.join(epgrefresh.buildConfiguration(webif = True))
 
-class EPGRefreshSettingsResource(resource.Resource):
+class EPGRefreshChangeSettingsResource(resource.Resource):
 	def render(self, req):
 		for key, value in req.args.iteritems():
 			value = value[0]
@@ -159,4 +159,79 @@ class EPGRefreshSettingsResource(resource.Resource):
 				<e2statetext>config changed.</e2statetext>
 			</e2simplexmlresult>
 			"""
+
+class EPGRefreshSettingsResource(resource.Resource):
+	def render(self, req):
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
+
+		from time import time, localtime, mktime
+		now = localtime()
+		begin_h = config.plugins.epgrefresh.begin.value
+		begin = mktime((
+			now.tm_year, now.tm_mon, now.tm_mday, begin_h[0], begin_h[1],
+			0, now.tm_wday, now.tm_yday, now.tm_isdst)
+		)
+		end_h = config.plugins.epgrefresh.end.value
+		end = mktime((
+			now.tm_year, now.tm_mon, now.tm_mday, end_h[0], end_h[1],
+			0, now.tm_wday, now.tm_yday, now.tm_isdst)
+		)
+
+		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+			<e2settings>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.enabled</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.begin</e2settingname>
+					<e2settingvalue>%d</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.end</e2settingname>
+					<e2settingvalue>%d</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.interval</e2settingname>
+					<e2settingvalue>%d</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.delay_standby</e2settingname>
+					<e2settingvalue>%d</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.inherit_autotimer</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.afterevent</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.force</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.wakeup</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.parse_autotimer</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
+			</e2settings>
+			""" % (
+				config.plugins.epgrefresh.enabled.value,
+				begin,
+				end,
+				config.plugins.epgrefresh.interval.value,
+				config.plugins.epgrefresh.delay_standby.value,
+				config.plugins.epgrefresh.inherit_autotimer.value,
+				config.plugins.epgrefresh.afterevent.value,
+				config.plugins.epgrefresh.force.value,
+				config.plugins.epgrefresh.wakeup.value,
+				config.plugins.epgrefresh.parse_autotimer.value,
+			)
 
