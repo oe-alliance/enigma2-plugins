@@ -126,6 +126,9 @@ class RSSPoller:
 					type = MessageBox.TYPE_INFO,
 					timeout = 5
 				)
+			else:
+				# We don't want to stop updating just because one feed is broken
+				self.next_feed()
 		except:
 			import traceback, sys
 			traceback.print_exc(file=sys.stdout)
