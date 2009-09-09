@@ -77,20 +77,14 @@ class AutoTimerComponent(object):
 		if afterevent is not self._afterevent:
 			del self._afterevent[:]
 
-		Len = len(afterevent)
-		if Len:
-			for x in range(0, Len):
-				action, timespan = afterevent[x]
-
-				# Remove original entry
-				del afterevent[x]
-				# If the second argument is a tuple we assume the entry is already parsed
-				if isinstance(timespan, tuple):
-					self._afterevent.insert(x, (action, timespan))
-				elif timespan is None:
-					self._afterevent.insert(x, (action, (None,)))
-				else:
-					self._afterevent.insert(x, (action, self.calculateDayspan(*timespan)))
+		for action, timespan in afterevent:
+			# If the second argument is a tuple we assume the entry is already parsed
+			if isinstance(timespan, tuple):
+				self._afterevent.insert(x, (action, timespan))
+			elif timespan is None:
+				self._afterevent.insert(x, (action, (None,)))
+			else:
+				self._afterevent.insert(x, (action, self.calculateDayspan(*timespan)))
 
 	afterevent = property(lambda self: self._afterevent, setAfterEvent)
 
@@ -155,7 +149,7 @@ class AutoTimerComponent(object):
 	services = property(lambda self: self._services, setServices)
 
 	def setTimespan(self, timespan):
-		if timespan is None or len(timespan) and timespan[0] is None:
+		if timespan is None or timespan and timespan[0] is None:
 			self._timespan = (None,)
 		else:
 			self._timespan = self.calculateDayspan(*timespan)
@@ -186,7 +180,7 @@ class AutoTimerComponent(object):
 		return self.maxduration is not None
 
 	def hasTags(self):
-		return len(self.tags) > 0
+		return len(self.tags)
 
 	def hasTimespan(self):
 		return self.timespan[0] is not None
@@ -233,35 +227,6 @@ class AutoTimerComponent(object):
 				# Its out of our timespan then
 				return True
 			return False
-
-	"""
-	 Returns a list of all allowed services by listing the bouquets
-	"""
-	def getFullServices(self):
-		list = self.services[:]
-
-		from enigma import eServiceReference, eServiceCenter
-		serviceHandler = eServiceCenter.getInstance()
-		for bouquet in self.bouquets:
-			myref = eServiceReference(str(bouquet))
-			mylist = serviceHandler.list(myref)
-			if mylist is not None:
-				while 1:
-					s = mylist.getNext()
-					# TODO: I wonder if its sane to assume we get services here (and not just new lists)
-					# We can ignore markers & directorys here because they won't match any event's service :-)
-					if s.valid():
-						# strip all after last :
-						value = s.toString()
-						pos = value.rfind(':')
-						if pos != -1:
-							value = value[:pos+1]
-
-						list.append(value)
-					else:
-						break
-
-		return list
 
 	"""
 	 Called when a timer based on this component was added
@@ -361,12 +326,12 @@ class AutoTimerComponent(object):
 
 	def checkExcluded(self, title, short, extended, dayofweek):
 		if self.exclude[3]:
-			list = [x for x in self.exclude[3]]
-			if "weekend" in list:
-				list.extend(["5", "6"])
-			if "weekday" in list:
-				list.extend(["0", "1", "2", "3", "4"])
+			list = self.exclude[3]
 			if dayofweek in list:
+				return True
+			if "weekend" in list and dayofweek in ("5", "6"):
+				return True
+			if "weekday" in list and dayofweek in ("0", "1", "2", "3", "4"):
 				return True
 
 		for exclude in self.exclude[0]:
@@ -388,11 +353,11 @@ class AutoTimerComponent(object):
 
 	def checkIncluded(self, title, short, extended, dayofweek):
 		if self.include[3]:
-			list = [x for x in self.include[3]]
+			list = self.include[3][:]
 			if "weekend" in list:
-				list.extend(["5", "6"])
+				list.extend(("5", "6"))
 			if "weekday" in list:
-				list.extend(["0", "1", "2", "3", "4"])
+				list.extend(("0", "1", "2", "3", "4"))
 			if dayofweek not in list:
 				return True
 
