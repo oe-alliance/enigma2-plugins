@@ -236,4 +236,9 @@ kiddytimer/img/Makefile
 kiddytimer/po/Makefile
 kiddytimer/src/Makefile
 
+elektro/Makefile
+elektro/po/Makefile
+elektro/src/Makefile
+
+
 ])
