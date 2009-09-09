@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-ac3lipsync
-Version: 0.6-20090305-r0
+Version: 0.8-20090811-r0
 Description: Set AC3/PCM delay
 Architecture: mipsel
 Section: extra
