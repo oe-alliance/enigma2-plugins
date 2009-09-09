@@ -80,11 +80,11 @@ class AutoTimerComponent(object):
 		for action, timespan in afterevent:
 			# If the second argument is a tuple we assume the entry is already parsed
 			if isinstance(timespan, tuple):
-				self._afterevent.insert(x, (action, timespan))
+				self._afterevent.append((action, timespan))
 			elif timespan is None:
-				self._afterevent.insert(x, (action, (None,)))
+				self._afterevent.append((action, (None,)))
 			else:
-				self._afterevent.insert(x, (action, self.calculateDayspan(*timespan)))
+				self._afterevent.append((action, self.calculateDayspan(*timespan)))
 
 	afterevent = property(lambda self: self._afterevent, setAfterEvent)
 
