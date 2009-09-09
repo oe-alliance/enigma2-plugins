@@ -258,6 +258,8 @@ class WlanList(HTMLComponent, GUIComponent):
 		
 		self.length = 0
 		self.aplist = None
+		self.list = None
+		self.oldlist = None
 		self.l = None
 		self.l = eListboxPythonMultiContent()
 		
@@ -287,21 +289,30 @@ class WlanList(HTMLComponent, GUIComponent):
 			
 	def reload(self):
 		aps = self.w.getNetworkList()
-		list = []
+
+		self.list = []
 		self.aplist = []
 		if aps is not None:
 			print "[Wlan.py] got Accespoints!"
 			for ap in aps:
 				a = aps[ap]
 				if a['active']:
-					if a['essid'] == "":
-						a['essid'] = a['bssid']
-					list.append( (a['essid'], a['bssid'], a['encrypted'], a['iface'], a['maxrate'], a['signal']) )
-					self.aplist.append( a['essid'])
+					if a['essid'] != '':
+					#	a['essid'] = a['bssid']
+						self.list.append( (a['essid'], a['bssid'], a['encrypted'], a['iface'], a['maxrate'], a['signal']) )
+					#self.aplist.append( a['essid'])
+		if self.oldlist is not None:
+			for entry in self.oldlist:
+				if entry not in self.list:
+					self.list.append(entry)
 		
-		self.length = len(list)
+		if len(self.list):
+			for entry in self.list:
+				self.aplist.append( entry[0])
+		self.length = len(self.list)
+		self.oldlist = self.list
 		self.l.setList([])
-		self.l.setList(list)
+		self.l.setList(self.list)
 		 	
 	GUI_WIDGET = eListbox
 

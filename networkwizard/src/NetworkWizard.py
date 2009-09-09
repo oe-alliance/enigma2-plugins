@@ -213,10 +213,10 @@ class NetworkWizard(WizardPluginLanguage, Rc):
 				for ap in aps:
 					a = aps[ap]
 					if a['active']:
-						if a['essid'] == "":
-							a['essid'] = a['bssid']
-						list.append( (a['essid'], a['essid']) )
-						self.WlanList.append(a['essid'])	
+						if a['essid'] != "":
+							#a['essid'] = a['bssid']
+							list.append( (a['essid'], a['essid']) )
+							self.WlanList.append(a['essid'])	
 			if "hidden..." not in list:
 				list.append( ( _("enter hidden network SSID"),_("hidden...") ) )
 				self.WlanList.append(_("hidden..."))	

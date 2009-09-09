@@ -166,8 +166,6 @@ class WlanStatus(Screen):
 				self["statuspic_inactive"].hide()		
 
 
-
-
 class WlanScan(Screen):
 	skin = """
 	<screen position="70,90" size="600,400" title="Choose a Wireless Network" >
@@ -183,10 +181,8 @@ class WlanScan(Screen):
 		<widget name="rescantext" position="80,355" size="150,21" zPosition="10" font="Regular;21" transparent="1" />
 	</screen>
 	"""
-
 	
 	def __init__(self, session, iface):
-	
 		Screen.__init__(self, session)
 		self.session = session
 		self.iface = iface
@@ -265,8 +261,11 @@ class WlanScan(Screen):
 		length = self["list"].getLength()
 		
 		if length == 0:
-			length = _("No") 
-		self["info"].setText(str(length)+_(" Wireless Network(s) found!"))	
+			self["info"].setText(_("No wireless networks found! Please refresh."))
+		elif length == 1:
+			self["info"].setText(_("1 wireless network found!"))
+		else:
+			self["info"].setText(str(length)+_(" wireless networks found!"))	
 
 
 def WlanStatusScreenMain(session, iface):
