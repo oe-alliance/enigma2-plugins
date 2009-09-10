@@ -251,12 +251,12 @@ class ReverseLookupAndNotifier:
 				return item
 	
 		debug("[ReverseLookupAndNotifier] _gotPage")
-		found = re.match('.*content=".*?charset=([^"]+)"',page, re.S)
+		found = re.match('.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />',page, re.S)
 		if found:
 			debug("[ReverseLookupAndNotifier] Charset: " + found.group(1))
 			page = page.replace("\xa0"," ").decode(found.group(1), "replace")
 		else:
-			debug("[ReverseLookupAndNotifier] Charset: iso-8859-1")
+			debug("[ReverseLookupAndNotifier] Default Charset: iso-8859-1")
 			page = page.replace("\xa0"," ").decode("ISO-8859-1", "replace")
 
 		for entry in self.currentWebsite.getElementsByTagName("entry"):

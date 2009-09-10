@@ -915,7 +915,7 @@
 	<country code="+49">
 		<website name="www.dasoertliche.de" url="http://dasoertliche.de/Controller?form_name=search_inv&amp;ph=$NUMBER" prefix="0">
 	        <entry>
-	        	<name>class=&quot;preview&quot;&gt;([^&lt;]*)&lt;span class="preview_box"&gt;</name>
+	        	<name>class=&quot;preview\s*&quot;.*?&gt;([^&lt;]*)&lt;span class="preview_box"&gt;</name>
 	        	<street>^\s*([^,&gt;]+),&amp;nbsp;\d{5}&amp;nbsp;[^&lt;]*&lt;/div&gt;</street>
 	        	<city>^[^,]*,&amp;nbsp;\d{5}&amp;nbsp;([^&lt;]*)&lt;/div&gt;</city>
 	        	<zipcode>^[^,]*,&amp;nbsp;(\d{5})&amp;nbsp;[^&lt;]*&lt;/div&gt;</zipcode>

@@ -75,7 +75,6 @@ def scale(y2, y1, x2, x1, x):
 
 my_global_session = None
 
-
 config.plugins.FritzCall = ConfigSubsection()
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.muteOnCall = ConfigEnableDisable(default=False)
@@ -148,6 +147,55 @@ def initDebug():
 		os.remove("/tmp/FritzDebug.log")
 	except:
 		pass
+
+avon = {}
+
+def initAvon():
+	avonFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/avon.dat")
+	if os.path.exists(avonFileName):
+		for line in open(avonFileName):
+			line = line.decode("iso-8859-1").encode('utf-8')
+			if line[0] == '#':
+				continue
+			parts = line.split(':')
+			if len(parts) == 2:
+				avon[parts[0].replace('-','').replace('*','').replace('/','')] = parts[1]
+
+def resolveNumberWithAvon(number, countrycode):
+	countrycode = countrycode.replace('00','+')
+	found = re.match('^00(\d.*)', number)
+	if found:
+		normNumber = '+' + found.group(1)
+	else:
+		found = re.match('^0(\d*)', number)
+		if found:
+			normNumber = countrycode + found.group(1)
+	# debug('normNumer: ' + str(normNumber))
+	for i in reversed(range(min(10, len(number)))):
+		if avon.has_key(normNumber[:i]):
+			return '[' + avon[normNumber[:i]].strip() + ']'
+	return ""
+
+from xml.dom.minidom import parse
+cbcInfos = {}
+def initCbC():
+	callbycallFileName = resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/callbycall_world.xml")
+	if os.path.exists(callbycallFileName):
+		dom = parse(callbycallFileName)
+		for top in dom.getElementsByTagName("callbycalls"):
+			for cbc in top.getElementsByTagName("country"):
+				code = cbc.getAttribute("code").replace("+","00")
+				cbcInfos[code] = cbc.getElementsByTagName("callbycall")
+
+def stripCbCPrefix(number, countrycode):
+	if number and number[:2]!="00" and cbcInfos.has_key(countrycode):
+		for cbc in cbcInfos[countrycode]:
+			length = int(cbc.getElementsByTagName("length")[0].childNodes[0].data)
+			prefix = cbc.getElementsByTagName("prefix")[0].childNodes[0].data
+			# if re.match('^'+prefix, number):
+			if number[:len(prefix)] == prefix:
+				return number[length:]
+	return number
 
 class FritzAbout(Screen):
 
@@ -543,11 +591,7 @@ class FritzCallFBF:
 			if number.isdigit():
 				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0] == "0": number = number[1:]
 				# strip CbC prefix
-				if config.plugins.FritzCall.country.value == '0049':
-					if re.match('^0100\d\d', number):
-						number = number[6:]
-					elif re.match('^010\d\d', number):
-						number = number[5:]
+				number = stripCbCPrefix(number, config.plugins.FritzCall.country.value)
 				if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
 					number = config.plugins.FritzCall.prefix.value + number
 				name = phonebook.search(number)
@@ -556,6 +600,10 @@ class FritzCallFBF:
 					if found:
 						name = found.group(1)
 					number = name
+				else:
+					name = resolveNumberWithAvon(number, config.plugins.FritzCall.country.value)
+					if name:
+						number = number + ' ' + name
 			elif number == "":
 				number = _("UNKNOWN")
 			# if len(number) > 20: number = number[:20]
@@ -602,13 +650,7 @@ class FritzCallFBF:
 				else:
 					here = _resolveNumber(found.group(6))
 				
-				# strip CbC prefix for Germany
-				number = found.group(4)
-				if config.plugins.FritzCall.country.value == '0049':
-					if re.match('^0100\d\d', number):
-						number = number[6:]
-					elif re.match('^010\d\d', number):
-						number = number[5:]
+				number = stripCbCPrefix(found.group(4), config.plugins.FritzCall.country.value)
 				if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
 					number = config.plugins.FritzCall.prefix.value + number
 				_callList.append((number, date, here, direct, remote, length))
@@ -1635,15 +1677,16 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 	def gotCalls(self, callList):
 		debug("[FritzDisplayCalls] gotCalls")
 		self.updateStatus(self.header + " (" + str(len(callList)) + ")")
-		dateFieldWidth = scaleH(140,100)
+		dateFieldWidth = scaleH(130,100)
 		dirFieldWidth = 16
-		lengthFieldWidth = scaleH(50,50)
-		remoteFieldWidth = scaleH(140,100)
+		lengthFieldWidth = scaleH(45,45)
 		scrollbarWidth = scaleH(35,35)
 		if config.plugins.FritzCall.fullscreen.value:
+			remoteFieldWidth = scaleH(140,100)
 			fieldWidth = 790 -dateFieldWidth -5 -dirFieldWidth -5 -lengthFieldWidth -5 -remoteFieldWidth -scrollbarWidth -5
-			fontSize = scaleV(22,20)
+			fontSize = scaleV(24,20)
 		else:
+			remoteFieldWidth = scaleH(160,100)
 			fieldWidth = self.width -scaleH(60, 5) -dateFieldWidth -5 -dirFieldWidth -5 -lengthFieldWidth -5 -remoteFieldWidth -scrollbarWidth -5
 			fontSize = scaleV(24,20)
 		sortlist = []
@@ -1684,7 +1727,12 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 					self.session.open(FritzOfferAction, self, number, name)
 				else:
 					# we don't
-					self.session.open(FritzOfferAction, self, number)
+					fullname = resolveNumberWithAvon(number, config.plugins.FritzCall.country.value)
+					if fullname:
+						name = fullname
+						self.session.open(FritzOfferAction, self, number, name)
+					else:
+						self.session.open(FritzOfferAction, self, number)
 			else:
 				# we do not even have a number...
 				self.session.open(MessageBox,
@@ -1748,6 +1796,8 @@ class FritzOfferAction(Screen):
 		debug("[FritzCall] FritzOfferAction/finishLayout number: %s/%s" % (self.number, self.name))
 
 		picPixmap = LoadPixmap(findFace(self.number, self.name))
+		if not picPixmap:	# that means most probably, that the picture is not 8 bit...
+			picPixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_question.png"))
 		picSize = picPixmap.size()
 		self["FacePixmap"].instance.setPixmap(picPixmap)
 
@@ -2888,7 +2938,9 @@ class FritzReverseLookupAndNotifier:
 				debug("[FritzReverseLookupAndNotifier] add to phonebook")
 				phonebook.add(self.number, self.caller)
 		else:
-			self.caller = _("UNKNOWN")
+			self.caller = resolveNumberWithAvon(self.number, config.plugins.FritzCall.country.value)
+			if not self.caller:
+				self.caller = _("UNKNOWN")
 		notifyCall(self.event, self.date, self.number, self.caller, self.phone)
 		# kill that object...
 
@@ -2947,14 +2999,9 @@ class FritzProtocol(LineReceiver):
 						debug("[FritzProtocol] lineReceived: add local prefix")
 						self.number = config.plugins.FritzCall.prefix.value + self.number
 
-				# check, whether we are in Germany and number has call-by-call prefix. If so strip it
-				if self.event == "CALL" and config.plugins.FritzCall.country.value == '0049':
-					if re.match('^0100\d\d', self.number):
-						debug("[FritzProtocol] lineReceived: strip CbC 0100.. prefix")
-						self.number = self.number[6:]
-					elif re.match('^010\d\d', self.number):
-						debug("[FritzProtocol] lineReceived: strip CbC 010.. prefix")
-						self.number = self.number[5:]
+				# strip CbC prefixes
+				if self.event == "CALL":
+					number = stripCbCPrefix(self.number, config.plugins.FritzCall.country.value)
 
 				if self.number is not "":
 					debug("[FritzProtocol] lineReceived phonebook.search: %s" % self.number)
@@ -2984,6 +3031,8 @@ class FritzClientFactory(ReconnectingClientFactory):
 		Notifications.AddNotification(MessageBox, _("Connected to FRITZ!Box!"), type=MessageBox.TYPE_INFO, timeout=4)
 		self.resetDelay()
 		initDebug()
+		initCbC()
+		initAvon()
 		fritzbox = FritzCallFBF()
 		phonebook = FritzCallPhonebook()
 		return FritzProtocol()
