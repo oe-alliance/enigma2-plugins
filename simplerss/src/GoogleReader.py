@@ -42,7 +42,6 @@ class GoogleReader:
 		return defer
 
 	def loginFinished(self, res = None, defer = None):
-		print "[GoogleReader] loginFinished:", res
 		pos_beg = res.find('SID=')
 		pos_end = res.find('\n',pos_beg)
 		self.sid = res[pos_beg+4:pos_end]
@@ -56,7 +55,6 @@ class GoogleReader:
 			defer.errback()
 
 	def getToken(self):
-		print "[GoogleReader] getToken"
 		if not self.sid:
 			return
 
@@ -65,7 +63,6 @@ class GoogleReader:
 		return defer
 
 	def gotToken(self, res = None, defer = None):
-		print "[GoogleReader] gotToken", res
 		self.token = res
 		if defer:
 			defer.callback(res)
@@ -78,7 +75,6 @@ class GoogleReader:
 			defer.errback()
 
 	def getSubscriptionList(self):
-		print "[GoogleReader] getSubscriptionList"
 		if not self.sid:
 			return
 
@@ -87,7 +83,6 @@ class GoogleReader:
 		return defer
 
 	def gotSubscriptionList(self, res = None, defer = None):
-		print "[GoogleReader] gotSubscriptionList", res
 		l = []
 		if res:
 			dom = cet_fromstring(res)
