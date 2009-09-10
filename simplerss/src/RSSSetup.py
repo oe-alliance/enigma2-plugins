@@ -117,7 +117,7 @@ class RSSSetup(ConfigListScreen, Screen):
 		list.extend((
 			getConfigListEntry(_("Show new Messages as"), simpleRSS.update_notification),
 			getConfigListEntry(_("Update Interval (min)"), simpleRSS.interval),
-			getConfigListEntry(_("Fetch feed from Google Reader?"), simpleRSS.enable_google_reader),
+			getConfigListEntry(_("Fetch feeds from Google Reader?"), simpleRSS.enable_google_reader),
 		))
 
 		if simpleRSS.enable_google_reader.value:

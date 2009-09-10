@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 SimpleRSS Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 11:44+0100\n"
-"PO-Revision-Date: 2009-01-19 11:45+0100\n"
+"POT-Creation-Date: 2009-09-10 23:20+0200\n"
+"PO-Revision-Date: 2009-09-10 23:22+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -50,6 +50,12 @@ msgstr ""
 "Fehler während der Verarbeitung. Dies beudetet in der Regel, dass etwas mit "
 "dem Kanal nicht stimmt."
 
+msgid "Failed to get subscriptions from Google Reader."
+msgstr "Konnte Abonnements nicht von Google Reader auslesen."
+
+msgid "Failed to login to Google Reader."
+msgstr "Anmeldung bei Google Reader fehlgeschlagen."
+
 msgid "Feed"
 msgstr "Kanal"
 
@@ -63,8 +69,17 @@ msgstr "Adresse"
 msgid "Feed is empty."
 msgstr "Kanal ist leer."
 
+msgid "Fetch feeds from Google Reader?"
+msgstr "Abonnements bei Google Reader auslesen?"
+
 msgid "Found no Enclosure we can display."
 msgstr "Keine anzeigbaren Anhänge gefunden."
+
+msgid "Google Password"
+msgstr "Google Passwort"
+
+msgid "Google Username"
+msgstr "Google Benutzername"
 
 msgid "Keep running in background"
 msgstr "Im Hintergrund aktiv bleiben"

@@ -61,7 +61,7 @@ class RSSPoller:
 
 	def googleLoginFailed(self, res = None):
 		AddPopup(
-			_("Failed to login to GoogleReader."),
+			_("Failed to login to Google Reader."),
 			MessageBox.TYPE_ERROR,
 			5,
 		)
@@ -79,7 +79,7 @@ class RSSPoller:
 
 	def googleSubscriptionFailed(self, res = None):
 		AddPopup(
-			_("Failed to get subscriptions from GoogleReader."),
+			_("Failed to get subscriptions from Google Reader."),
 			MessageBox.TYPE_ERROR,
 			5,
 		)
