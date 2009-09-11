@@ -1,0 +1,226 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - AC3lipsync\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-29 01:17+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: L:\\Dreambox\\Eclipse\\ac3lipsync\\po\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: Serbia\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ..\\src\n"
+
+#: ..\src/plugin.py:28
+#: ..\src/plugin.py:32
+#: ..\src/plugin.py:34
+msgid "AC3 Lip Sync"
+msgstr "AC3 Lip Sync"
+
+#: ..\src/plugin.py:32
+#: ..\src/plugin.py:34
+msgid "sets the AC3 audio Delay (LipSync)"
+msgstr "podešava  AC3 audio kašnjenje (LipSync)"
+
+#: ..\src/plugin.py:33
+msgid "AC3 Lip Sync Setup"
+msgstr "AC3 Lip Sync podešavanje"
+
+#: ..\src/plugin.py:33
+msgid "Setup for the AC3 Lip Sync Plugin"
+msgstr "Podešavanje AC3 Lip Sync dodatka"
+
+#: ..\src/AC3main.py:82
+#: ..\src/AC3main.py:85
+#: ..\src/AC3main.py:88
+#: ..\src/AC3main.py:146
+#: ..\src/AC3main.py:152
+#: ..\src/AC3main.py:172
+#: ..\src/AC3main.py:296
+#: ..\src/AC3main.py:298
+#: ..\src/AC3main.py:302
+#: ..\src/AC3main.py:303
+#, python-format
+msgid "%i ms"
+msgstr "%i ms"
+
+#: ..\src/AC3main.py:83
+#: ..\src/AC3main.py:89
+#: ..\src/AC3main.py:173
+#, python-format
+msgid "%s delay:"
+msgstr "%s kašnjenje:"
+
+#: ..\src/AC3main.py:84
+#, python-format
+msgid "%s:"
+msgstr "%s:"
+
+#: ..\src/AC3main.py:92
+msgid "Channel audio:"
+msgstr "Audio kanal: "
+
+#: ..\src/AC3main.py:97
+#: ..\src/AC3setup.py:58
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: ..\src/AC3main.py:98
+msgid "OK"
+msgstr "OK"
+
+#: ..\src/AC3main.py:99
+msgid "Switch audio"
+msgstr "Zameni audio"
+
+#: ..\src/AC3main.py:103
+#: ..\src/AC3setup.py:59
+msgid "Save"
+msgstr "Sačuvaj"
+
+#: ..\src/AC3main.py:221
+#, python-format
+msgid "Save current %(audio)s delay of %(delay)i ms to key"
+msgstr "Sačuvaj sadašnje %(audio)s kašnjenje (%(delay)i ms na tipku"
+
+#: ..\src/AC3main.py:224
+msgid "Menu"
+msgstr "Meni"
+
+#: ..\src/AC3main.py:231
+#: ..\src/AC3main.py:285
+#: ..\src/AC3main.py:346
+msgid "Invalid selection"
+msgstr "Izbor nije validan"
+
+#: ..\src/AC3main.py:244
+#: ..\src/AC3main.py:245
+#, python-format
+msgid "Save %s delay"
+msgstr "Sačuvaj %s kašnjenje"
+
+#: ..\src/AC3main.py:246
+msgid "Save both delays"
+msgstr "Sačuvaj oba kašnjenja"
+
+#: ..\src/AC3main.py:249
+msgid "Which delays do you want to set"
+msgstr "Koja kašnjenja želite podesiti"
+
+#: ..\src/AC3main.py:281
+#, python-format
+msgid "Saved %(audio)s value: %(delay)i ms"
+msgstr "Sačuvana %(audio)s vrednost: %(delay)i ms"
+
+#: ..\src/AC3main.py:321
+#, python-format
+msgid "Select the key you want to set to %i ms"
+msgstr "Izaberite tipku koju želite podesiti u %i ms "
+
+#: ..\src/AC3main.py:327
+#, python-format
+msgid "Key %(key)s (current value: %(value)i ms)"
+msgstr "Tipka %(key)s (sad.vrednost: %(value)i ms)"
+
+#: ..\src/AC3main.py:332
+msgid "Setting key canceled"
+msgstr "Podešavanje tipke otkazano"
+
+#: ..\src/AC3main.py:344
+#, python-format
+msgid "Key %(Key)s successfully set to %(delay)i ms"
+msgstr "Tipka %(Key)s uspešno podešena na %(delay)i ms "
+
+#: ..\src/AC3setup.py:42
+msgid "Outer Bound (+/-)"
+msgstr "Krajnje ograničen (+/-)"
+
+#: ..\src/AC3setup.py:43
+msgid "Step in ms for arrow keys"
+msgstr "Korak u ms za tipke strelice"
+
+#: ..\src/AC3setup.py:44
+msgid "Wait time in ms before activation:"
+msgstr "Vreme čekanja u ms pre aktiviranja: "
+
+#: ..\src/AC3setup.py:45
+#: ..\src/AC3setup.py:46
+#: ..\src/AC3setup.py:47
+#, python-format
+msgid "Step in ms for keys '%s'"
+msgstr "Korak u ms za tipke  '%s'"
+
+#: ..\src/AC3setup.py:48
+#: ..\src/AC3setup.py:49
+#: ..\src/AC3setup.py:50
+#, python-format
+msgid "Step in ms for key %i"
+msgstr "Korak u ms za tipku %i"
+
+#: ..\src/AC3setup.py:60
+msgid " "
+msgstr " "
+
+#~ msgid "Switch to user key- delays"
+#~ msgstr "Verwende benutzerdefinierte Werte für Zahlentasten"
+#~ msgid "Switch to calculated key- delays"
+#~ msgstr "Verwende berechnete Werte für Zahlentasten"
+#~ msgid "Minimum delay"
+#~ msgstr "Minimale Verzögerung"
+#~ msgid "Maximum delay"
+#~ msgstr "Maximale Verzögerung"
+#~ msgid "Recalculate..."
+#~ msgstr "Neuberechnen"
+#~ msgid "Use user delays"
+#~ msgstr "Benutzer Verz."
+#~ msgid "Use calc. delays"
+#~ msgstr "autom. Verz."
+#~ msgid "Key"
+#~ msgstr "Taste"
+#~ msgid "ms"
+#~ msgstr "ms"
+#~ msgid "Bitstream delay:"
+#~ msgstr "Bitstream Verzögerung:"
+#~ msgid "lamedb..."
+#~ msgstr "lamedb..."
+#~ msgid "AC3 Delay: "
+#~ msgstr "AC3 Verzögerung: "
+#~ msgid "PCM Delay: "
+#~ msgstr "PCM Verzögerung: "
+#~ msgid "Save Bitstream delay"
+#~ msgstr "Bitstream Delay speichern"
+#~ msgid "Backup lamedb"
+#~ msgstr "lamedb sichern"
+#~ msgid "Restore lamedb"
+#~ msgstr "lamedb wiederherstellen"
+#~ msgid "Remove lamedb backup"
+#~ msgstr "lamedb- Sicherung löschen"
+#~ msgid "What you want to do with your lamedb"
+#~ msgstr "Welche Aktion wollen Sie durchführen"
+#~ msgid "Saved Bitstream value: "
+#~ msgstr "Gespeicherter Bitstream Wert:"
+#~ msgid ""
+#~ "There is already a backup of the lamedb\n"
+#~ "Do you want to overwrite it?"
+#~ msgstr ""
+#~ "Es gibt bereits eine Sicherung der lamedb\n"
+#~ "Wollen Sie diese überschreiben?"
+#~ msgid "lamedb backup successful"
+#~ msgstr "Sicherung der lamedb erfolgreich"
+#~ msgid "There is no backup of the lamedb. Action canceled"
+#~ msgstr "Es gibt keine Sicherung der lamedb. Aktion abgebrochen"
+#~ msgid "Do you really want to restore the lamedb?"
+#~ msgstr "Wollen Sie die lamedb wirklich wiederherstellen?"
+#~ msgid "lamedb backup successfully restored"
+#~ msgstr "lamedb wurde erfolgreich wiederhergestellt"
+#~ msgid "Do you really want to remove the lamedb- backup?"
+#~ msgstr "Wollen Sie die Sicherung der lamedb wirklich löschen?"
+#~ msgid "lamedb backup successfully removed"
+#~ msgstr "Sicherung der lamedb erfolgreich gelöscht"
+#~ msgid "Set delay"
+#~ msgstr "Verzögerung setzen"
+
