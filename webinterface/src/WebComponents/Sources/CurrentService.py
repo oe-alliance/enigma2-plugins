@@ -1,5 +1,4 @@
 from Components.Sources.Source import Source
-from ServiceReference import ServiceReference
 
 class CurrentService(Source):
 	def __init__(self, session):

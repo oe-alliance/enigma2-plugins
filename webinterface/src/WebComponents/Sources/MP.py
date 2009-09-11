@@ -15,7 +15,7 @@ class MP(Source):
 		self.func = func
 		self.session = session
 		error = "unknown command (%s)" % func
-		self.result = [[error, error, error]]
+		self.result = ((error, error, error),)
 
 	def handleCommand(self, cmd):
 		self.cmd = cmd
@@ -51,23 +51,18 @@ class MP(Source):
 	def getFileList(self, param):
 		print "getFileList:", param
 
-		returnList = []
-
 		if param["path"] == "playlist":
 			# TODO: Fix dummy return if unable to load mp
 			if not self.tryOpenMP():
-				returnList.append(["empty", "True", "playlist"])
-				return returnList
+				return (("empty", "True", "playlist"),)
 
 			mp = self.session.mediaplayer
-			if len(mp.playlist) != 0:
-				serviceRefList = mp.playlist.getServiceRefList()
-				for count in range(len(serviceRefList)):
-					returnList.append([serviceRefList[count].toString(), "True", "playlist"])
+			if mp.playlist:
+				return [(serviceRef.toString(), "True", "playlist") for serviceRef in mp.playlist.getServiceRefList()]
 			else:
-				returnList.append(["empty", "True", "playlist"])
+				return (("empty", "True", "playlist"),)
 
-			return returnList
+		returnList = []
 
 		matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)" #MediaPlayer-Match
 		useServiceRef = False
@@ -87,14 +82,14 @@ class MP(Source):
 		for x in list:
 			if useServiceRef == True:
 				if x[0][1] == False: #isDir
-					returnList.append([x[0][0].toString(), x[0][1], param["path"]])
+					returnList.append((x[0][0].toString(), x[0][1], param["path"]))
 				else:
-					returnList.append([x[0][0], x[0][1], param["path"]])
+					returnList.append((x[0][0], x[0][1], param["path"]))
 			else:
 				if x[0][1] == False: #isDir
-					returnList.append([param["path"] + x[0][0], x[0][1], param["path"]])
+					returnList.append((param["path"] + x[0][0], x[0][1], param["path"]))
 				else:
-					returnList.append([x[0][0], x[0][1], param["path"]])
+					returnList.append((x[0][0], x[0][1], param["path"]))
 
 		return returnList
 
@@ -118,12 +113,14 @@ class MP(Source):
 		mp.playlist.addFile(ref)
 
 		#mp.playServiceRefEntry(ref)
+		sRefList = mp.playlist.getServiceRefList()
+		Len = len(sRefList)
 		print "len len(mp.playlist.getServiceRefList()): ", len(mp.playlist.getServiceRefList())
-		if len(mp.playlist.getServiceRefList()):
-			lastEntry = len(mp.playlist.getServiceRefList()) - 1
-			currref = mp.playlist.getServiceRefList()[lastEntry]
+		if Len:
+			lastEntry = Len - 1
+			currref = sRefList[lastEntry]
 			if self.session.nav.getCurrentlyPlayingServiceReference() is None or currref != self.session.nav.getCurrentlyPlayingServiceReference():
-				self.session.nav.playService(mp.playlist.getServiceRefList()[lastEntry])
+				self.session.nav.playService(sRefList[lastEntry])
 				info = eServiceCenter.getInstance().info(currref)
 				description = info and info.getInfoString(currref, iServiceInformation.sDescription) or ""
 				mp["title"].setText(description)
@@ -132,7 +129,6 @@ class MP(Source):
 
 		mp.playlist.updateList()
 		mp.infoTimerFire()
-		return
 
 	def writePlaylist(self, param):
 		print "writePlaylist: ", param
@@ -168,12 +164,7 @@ class MP(Source):
 		elif param == "exit":
 			mp.exit()
 
-		return
-
-	def getList(self):
-		return self.result
-
-	list = property(getList)
+	list = property(lambda self: self.result)
 	lut = {"ServiceReference": 0
 			, "IsDirectory": 1
 			, "Root": 2

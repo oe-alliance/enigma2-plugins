@@ -1,5 +1,4 @@
 from Components.Sources.Source import Source
-from ServiceReference import ServiceReference
 from enigma import eServiceCenter, eServiceReference, eEPGCache
 
 class EPG(Source):
@@ -42,7 +41,7 @@ class EPG(Source):
                 func = self.getServiceEPGNext
 
             return func(self.command)
-        return []
+        return ()
 
     def getBouquetEPGNow(self, ref):
         return self.getEPGNowNext(ref, 0)
@@ -74,7 +73,7 @@ class EPG(Source):
 
         if events:
             return events
-        return []
+        return ()
 
     def getEPGofService(self, ref, options='IBDTSERN'):
         print "getting EPG of Service", ref
@@ -85,7 +84,7 @@ class EPG(Source):
                 return list
 
             return events
-        return []
+        return ()
 
     def insertEndTime(self, events):
         list = []
@@ -109,7 +108,7 @@ class EPG(Source):
         print "[WebComponents.EPG] getting EPG for Bouquet", param
 
         if not param.has_key('bRef'):
-            return []
+            return ()
 
         time = -1
         if param.has_key('time'):
@@ -131,7 +130,7 @@ class EPG(Source):
 
         if events:
             return events
-        return []
+        return ()
 
     def searchEvent(self, needle):
         print "[WebComponents.EPG] searching EPG: ", needle
@@ -139,7 +138,7 @@ class EPG(Source):
         events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1));
         if events:
             return events
-        return []
+        return ()
 
     def searchSimilarEvent(self, needle):
         print "[WebComponents.EPG] searching similar eventid: ",needle
@@ -147,7 +146,7 @@ class EPG(Source):
         events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, needle['sRef'], int(needle['eventid'])));
         if events:
             return events
-        return []
+        return ()
 
     def getLut(self):
         if self.endtime:

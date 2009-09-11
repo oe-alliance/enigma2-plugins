@@ -21,9 +21,9 @@ class Settings(Source):
 			if isinstance(val, dict):
 				self.pickle_this(name, val, result)
 			elif isinstance(val, tuple):
-				result.append([name, val[0]])
+				result.append((name, val[0]))
 			else:
-				result.append([name, val])
+				result.append((name, val))
 
 	list = property(do_func)
 	lut = {"Name": 0

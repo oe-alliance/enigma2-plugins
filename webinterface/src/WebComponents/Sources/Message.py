@@ -14,7 +14,7 @@ class Message(Source):
 		self.func = func
 		Source.__init__(self)
 		error = "unknown command (%s)" % func
-		self.res = [False, error]
+		self.res = (False, error)
 
 	def handleCommand(self, cmd):
 		self.cmd = cmd
@@ -27,14 +27,14 @@ class Message(Source):
 		print "printMessage"
 
 		if self.cmd['text'] == "" or self.cmd['text'] is None:
-			return [ False, "No Messagetext given" ]
+			return ( False, "No Messagetext given" )
 		else:
 			mtext = self.cmd['text']
 
 		try:
 			typeint = int(self.cmd['type'])
 		except ValueError, e:
-			return [ False, "type %s is not a number" % self.cmd['type'] ]
+			return ( False, "type %s is not a number" % self.cmd['type'] )
 
 		if typeint == MessageBox.TYPE_YESNO:
 			#dont know how to give the result to the webif back
@@ -46,7 +46,7 @@ class Message(Source):
 		elif typeint == MessageBox.TYPE_ERROR:
 			mtype = MessageBox.TYPE_ERROR
 		else:
-			return [ False, "Unsupported Messagetype %s" % self.cmd['type'] ]
+			return ( False, "Unsupported Messagetype %s" % self.cmd['type'] )
 
 		try:
 			mtimeout = int(self.cmd['timeout'])
@@ -58,7 +58,7 @@ class Message(Source):
 		else:
 			self.session.open(MessageBox, mtext, type=mtype , timeout=mtimeout)
 
-		return [ True, "Message sent successfully!" ]
+		return ( True, "Message sent successfully!" )
 
 	def yesNoAnswer(self, confirmed):
 		print "yesNoAnswer", confirmed
@@ -83,13 +83,10 @@ class Message(Source):
 			system(cmdstr)
 			print "Answer: (%s)" % lines[0]
 			if lines[0] == "yes":
-				return [ True, "Answer is YES!" ]
+				return ( True, "Answer is YES!" )
 			else:
-				return [ True, "Answer is NO!" ]
+				return ( True, "Answer is NO!" )
 		else:
-			return [ False, "No answer in time" ]
-	
-	def getResult(self):
-		return self.res
-		
-	result = property(getResult)
+			return ( False, "No answer in time" )
+
+	result = property(lambda self: self.res)

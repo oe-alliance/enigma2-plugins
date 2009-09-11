@@ -10,7 +10,7 @@ class LocationsAndTags(Source):
 		self.func = func
 		Source.__init__(self)
 		self.session = session
-		self.result = [ False, "one two three four unknown command" ]
+		self.result = ( False, "one two three four unknown command" )
 
 	def handleCommand(self, cmd):
 		if self.func is self.CURRLOCATION:
@@ -36,7 +36,7 @@ class LocationsAndTags(Source):
 				tags.remove("")
 			file.close()
 		except IOError, ioe:
-			tags = []
+			tags = ()
 		return tags
 
 	def getText(self):
@@ -51,8 +51,8 @@ class LocationsAndTags(Source):
 		self.handleCommand(None)
 		list = self.result
 		if list is None:
-			list = []
-		
+			list = ()
+
 		return list
 
 	text = property(getText)

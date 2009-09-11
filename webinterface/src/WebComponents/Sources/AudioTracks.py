@@ -48,7 +48,8 @@ class AudioTracks(Source):
 			if n > 0:
 				print "[AudioTracks.py] got %s Audiotracks!" % (n)
 
-				for x in range(n):
+				x = 0
+				while x < n:
 					cnt = 0
 					i = audio.getTrackInfo(x)
 
@@ -66,7 +67,7 @@ class AudioTracks(Source):
 							language += lang
 						cnt += 1
 
-					if len(description):
+					if description:
 						description += " (" + language + ")"
 					else:
 						description = language
@@ -77,6 +78,7 @@ class AudioTracks(Source):
 						active = "False"
 
 					tracklist.append((description, x, pid, active))
+					x += 1
 
 		return tracklist
 

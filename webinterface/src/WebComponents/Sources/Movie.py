@@ -21,7 +21,7 @@ class Movie(Source):
 		self.movielist = movielist #MovieList(self.root)
 		self.movielist.load(self.root, None)
 		self.cmd = ""
-		self.res = [ False, "Missing or Wrong Argument" ]
+		self.res = ( False, "Missing or Wrong Argument" )
 
 	def handleCommand(self, cmd):
 		if cmd is not None:
@@ -54,11 +54,11 @@ class Movie(Source):
 					result = True
 
 			if result == False:
-				return [ result, "Could not delete Movie '%s'" % name ]
+				return ( result, "Could not delete Movie '%s'" % name )
 			else:
-				return [ result, "Movie '%s' deleted" % name ]
+				return ( result, "Movie '%s' deleted" % name )
 
-		return [ result, "Illegal Parameter Value: sRef - '%s'" % param ]
+		return ( result, "Illegal Parameter Value: sRef - '%s'" % param )
 
 	def getMovieList(self):
 		self.movielist.reload(root=self.root, filter_tags=self.tagfilter)
@@ -94,7 +94,7 @@ class Movie(Source):
 
 			if not tag or tag in info.getInfoString(serviceref, iServiceInformation.sTags).lower():
 				""" add movie only to list, if a given tag is applied to the movie """
-				list.append([
+				list.append((
 					serviceref.toString(),
 					ServiceReference(serviceref).getServiceName(),
 					info.getInfoString(serviceref, iServiceInformation.sDescription),
@@ -106,17 +106,16 @@ class Movie(Source):
 					ext,
 					filename,
 					os_stat(filename)[6]
-				])
+				))
 		return list
 
 	def getResult(self):
 		if self.func is self.DEL:
 			return self.res
-		
-		return [ False, "illegal call" ]
-	
-	
-	result = property(getResult)	
+
+		return ( False, "illegal call" )
+
+	result = property(getResult)
 
 	list = property(getMovieList)
 	lut = {"ServiceReference": 0

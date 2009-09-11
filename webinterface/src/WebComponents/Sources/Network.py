@@ -13,14 +13,13 @@ class Interface:
 class Network(Source):
 	LAN = 0
 	WLAN = 1
-	
+
 	def __init__(self, device=LAN):
 		Source.__init__(self)
 		if device is self.LAN:
 			self.iface = "eth0"
 		elif device is self.WLAN:
 			self.iface = "ath0"
-			
 
 	def ConvertIP(self, list):
 		if(len(list) == 4):
@@ -29,7 +28,6 @@ class Network(Source):
 			retstr = "0.0.0.0"
 		return retstr
 
-		
 	def getInterface(self):
 		iface = Interface(self.iface)
 		iface.mac = iNetwork.getAdapterAttribute(self.iface, "mac")
@@ -37,30 +35,27 @@ class Network(Source):
 		iface.ip = self.ConvertIP(iNetwork.getAdapterAttribute(self.iface, "ip"))
 		iface.netmask = self.ConvertIP(iNetwork.getAdapterAttribute(self.iface, "netmask"))
 		iface.gateway = self.ConvertIP(iNetwork.getAdapterAttribute(self.iface, "gateway"))
-		
+
 		return iface
-	
+
 	interface = property(getInterface)
-	
+
 	def getList(self):
-		ifaces = []
-		for ifname in iNetwork.getConfiguredAdapters():
-			iface = [
+		return [
+			(
 					ifname,
 					iNetwork.getAdapterAttribute(ifname, "mac"),
 					iNetwork.getAdapterAttribute(ifname, "dhcp"),
 					self.ConvertIP(iNetwork.getAdapterAttribute(ifname, "ip")),
 					self.ConvertIP(iNetwork.getAdapterAttribute(ifname, "netmask")),
 					self.ConvertIP(iNetwork.getAdapterAttribute(ifname, "gateway"))
-				]			
-			ifaces.append(iface)
-		
-		return ifaces
+			)
+			for ifname in iNetwork.getConfiguredAdapters()
+		]
 
-		
 	list = property(getList)
-	
-	lut = { 
+
+	lut = {
 			"Name": 0,
 			"Mac" : 1,
 			"Dhcp" : 2,
@@ -68,7 +63,4 @@ class Network(Source):
 			"Netmask" : 4,
 			"Gateway" : 5,
 		   }
-	
-	
-	def destroy(self):
-		Source.destroy(self)
+

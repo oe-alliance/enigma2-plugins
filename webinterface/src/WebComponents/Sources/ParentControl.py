@@ -21,7 +21,7 @@ class ParentControl(Source):
 				servicelist = parentalControl.blacklist
 
 			for service_ref in servicelist:
-				list.append([str(service_ref), ServiceReference(service_ref).getServiceName()])
+				list.append((str(service_ref), ServiceReference(service_ref).getServiceName()))
 
 		print "list", list
 		return list

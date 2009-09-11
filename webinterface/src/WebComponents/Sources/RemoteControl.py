@@ -7,7 +7,7 @@ class RemoteControl(Source):
         self.cmd = None
         self.session = session
         Source.__init__(self)
-        self.res = [ False, "Missing or wrong argument" ]
+        self.res = ( False, "Missing or wrong argument" )
 
     def handleCommand(self, cmd):
         self.cmd = cmd
@@ -21,7 +21,7 @@ class RemoteControl(Source):
         type = int(self.cmd)
         if type <= 0:
             print "[RemoteControl.py] command <= 0 (%s)" % type
-            return  [ False, "the command was not > 0" ]
+            return ( False, "the command was not > 0" )
 
         dataon = pack('iiHHi', 0, 0, 1, type, 1)
         dataoff = pack('iiHHi', 0, 0, 1, type, 0)
@@ -35,10 +35,6 @@ class RemoteControl(Source):
         fp.close()
 
         print "[RemoteControl.py] command was was sent (%s)" % type
-        return [ True, "command was was sent" ]
+        return ( True, "command was was sent" )
 
-    def getResult(self):
-        return self.res
-
-
-    result = property(getResult)
+	result = property(lambda self: self.res)
