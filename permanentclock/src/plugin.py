@@ -41,7 +41,7 @@ language.addCallback(localeInit)
 ##############################################################################
 
 SKIN = """
-	<screen position="0,0" size="92,30" zPosition="10" backgroundColor="#ff000000" title="%s" flags="wfNoBorder">
+	<screen position="0,0" size="120,30" zPosition="10" backgroundColor="#ff000000" title="%s" flags="wfNoBorder">
 		<widget source="global.CurrentTime" render="Label" position="1,1" size="120,30" font="Regular;26" valign="center" halign="center" backgroundColor="#ff000000" transparent="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
