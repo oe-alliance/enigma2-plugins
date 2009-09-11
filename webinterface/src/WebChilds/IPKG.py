@@ -5,13 +5,10 @@ from twisted.web import server, resource, http
 class IPKGResource(resource.Resource):
 	IPKG_PATH = "/usr/bin/ipkg"
 
-	SIMPLECMDS = [ "list", "list_installed", "update", "upgrade" ]
-	PACKAGECMDS = [ "info", "status", "install", "remove" ]
-	FILECMDS = [ "search" ]
-	
-	def __init__(self):
-		resource.Resource.__init__(self)
-	
+	SIMPLECMDS = ( "list", "list_installed", "update", "upgrade" )
+	PACKAGECMDS = ( "info", "status", "install", "remove" )
+	FILECMDS = ( "search" )
+
 	def render(self, request):
 		self.args = request.args
 		self.command = self.getArg("command")
@@ -35,10 +32,11 @@ class IPKGResource(resource.Resource):
 
 	def execCmd(self, request, parms=[]):
 		cmd = self.buildCmd(parms)
-		
+
 		request.setResponseCode(http.OK)
 		IPKGConsoleStream(request, cmd)
-		
+
+		return server.NOT_DONE_YET
 
 	def execSimpleCmd(self, request):
 		 return self.execCmd(request)
@@ -46,9 +44,9 @@ class IPKGResource(resource.Resource):
 	def execPackageCmd(self, request):
 		package = self.getArg("package")
 		if package is not None:
-			self.execCmd(request, [package])
+			return self.execCmd(request, [package])
 		else:
-			self.doErrorPage(request, "Missing parameter: package")
+			return self.doErrorPage(request, "Missing parameter: package")
 
 	def execFileCmd(self, request):
 		file = self.getArg("file")
@@ -66,26 +64,25 @@ class IPKGResource(resource.Resource):
 		html += "list_installed, ?command=list_installed<br>"
 		html += "list, ?command=list<br>"
 		html += "search, ?command=search&file=&lt;filename&gt;<br>"
-		html += "info, ?command=search&package=&lt;packagename&gt;<br>"
-		html += "status, ?command=search&package=&lt;packagename&gt;<br>"
+		html += "info, ?command=info&package=&lt;packagename&gt;<br>"
+		html += "status, ?command=status&package=&lt;packagename&gt;<br>"
 		html += "install, ?command=install&package=&lt;packagename&gt;<br>"
 		html += "remove, ?command=remove&package=&lt;packagename&gt;<br>"
 		html += "</body></html>"
-		
+
 		request.setResponseCode(http.OK)
 		request.write(html)
 		request.finish()
-		
+
 		return server.NOT_DONE_YET
-						
 
 	def doErrorPage(self, request, errormsg):
 		request.setResponseCode(http.OK)
 		request.write(errormsg)
-		request.finish()		
-		
+		request.finish()
+
 		return server.NOT_DONE_YET
-		
+
 	def getArg(self, key):
 		if self.args.has_key(key):
 			return self.args[key][0]
@@ -95,7 +92,7 @@ class IPKGResource(resource.Resource):
 class IPKGConsoleStream:
 	def __init__(self, request, cmd):
 		self.request = request
-		
+
 		self.container = eConsoleAppContainer()
 
 		self.container.dataAvail.append(self.dataAvail)
@@ -105,8 +102,6 @@ class IPKGConsoleStream:
 
 	def cmdFinished(self, data):
 		self.request.finish()
-		
-		return server.NOT_DONE_YET
 
 	def dataAvail(self, data):
 		self.request.write(data)
