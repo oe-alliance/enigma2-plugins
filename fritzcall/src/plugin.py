@@ -162,15 +162,18 @@ def initAvon():
 				avon[parts[0].replace('-','').replace('*','').replace('/','')] = parts[1]
 
 def resolveNumberWithAvon(number, countrycode):
+	if not number or number[0]!='0':
+		return ""
+		
 	countrycode = countrycode.replace('00','+')
-	found = re.match('^00(\d.*)', number)
-	if found:
-		normNumber = '+' + found.group(1)
-	else:
-		found = re.match('^0(\d*)', number)
-		if found:
-			normNumber = countrycode + found.group(1)
-	# debug('normNumer: ' + str(normNumber))
+	if number[:2] == '00':
+		normNumber = '+' + number[2:]
+	elif number[:1] == '0':
+		normNumber = countrycode + number[1:]
+	else: # this should can not happen, but safety first
+		return ""
+	
+	# debug('normNumer: ' + normNumber)
 	for i in reversed(range(min(10, len(number)))):
 		if avon.has_key(normNumber[:i]):
 			return '[' + avon[normNumber[:i]].strip() + ']'
@@ -186,10 +189,15 @@ def initCbC():
 			for cbc in top.getElementsByTagName("country"):
 				code = cbc.getAttribute("code").replace("+","00")
 				cbcInfos[code] = cbc.getElementsByTagName("callbycall")
+	else:
+		debug("[FritzCall] initCbC: callbycallFileName does not exist?!?!")
 
 def stripCbCPrefix(number, countrycode):
 	if number and number[:2]!="00" and cbcInfos.has_key(countrycode):
 		for cbc in cbcInfos[countrycode]:
+			if len(cbc.getElementsByTagName("length"))<1 or len(cbc.getElementsByTagName("prefix"))<1:
+				debug("[FritzCall] stripCbCPrefix: entries for " + countrycode + " %s invalid")
+				return number
 			length = int(cbc.getElementsByTagName("length")[0].childNodes[0].data)
 			prefix = cbc.getElementsByTagName("prefix")[0].childNodes[0].data
 			# if re.match('^'+prefix, number):
