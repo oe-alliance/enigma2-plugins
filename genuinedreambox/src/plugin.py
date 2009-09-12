@@ -38,6 +38,7 @@ from Components.Label import Label
 import socket
 import struct
 import base64
+import os
 
 from twisted.web.client import getPage
 
@@ -105,8 +106,11 @@ class genuineDreambox(Screen):
 
     def _gotPageLoad(self, data):
         authcode = data.strip().replace('+', '')
-        self.finish = "%s-%s-%s" % (authcode[0:4], authcode[4:8], authcode[8:12])
-        self["resulttext"].setText(self.finish)
+        if len(authcode) == 12:
+            self.finish = "%s-%s-%s" % (authcode[0:4], authcode[4:8], authcode[8:12])
+            self["resulttext"].setText(self.finish)
+        else:
+            self["resulttext"].setText("Invalid response from server.")
         self.closeUds()
         self.isStart = False
         
@@ -197,13 +201,11 @@ class genuineDreambox(Screen):
             udsError = False
         except socket.timeout:
             udsError = True
-            self["resulttext"].setText("Invalid response from Security service pls restart your Dreambox" )
         try:
             rbuf = self.uds.recv(4)
             udsError = False
         except socket.timeout:
             udsError = True
-            self["resulttext"].setText("Invalid response from Security service pls restart your Dreambox" )
         
         if (udsError == False):
             leng = [ord(rbuf[2]) << 8 | ord(rbuf[3])]
@@ -211,10 +213,12 @@ class genuineDreambox(Screen):
                 try:
                     res = self.uds.recv(leng[0])
                 except socket.timeout:
-                    self["resulttext"].setText("Invalid response from Security service pls restart your Dreambox")
+                    udsError = True
             else:
                 return -1
         else:
+            self["resulttext"].setText("Invalid response from Security service pls restart again")
+            os.system("kill -9 $(pidof tpmd)")
             return -1
         return res
 
