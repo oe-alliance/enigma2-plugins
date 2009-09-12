@@ -276,7 +276,7 @@ activebar = None
 
 def main(session, **kwargs):
     global activebar
-    if activebar.shown:
+    if activebar.show:
         activebar.hide()
     session.openWithCallback(mainCB,AntiScrollConfig)
 
