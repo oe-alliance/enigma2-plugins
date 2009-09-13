@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KiddyTimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-05 23:33+0100\n"
+"POT-Creation-Date: 2009-09-13 16:38+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,14 +29,22 @@ msgstr "KiddyTimer"
 msgid "Allows to controls your kids' daily TV usage"
 msgstr "Ermöglicht,  den täglichen TV- Konsum Ihrer Kinder zu steuern"
 
-#: ..\src/KTmain.py:24
 #: ..\src/KTmain.py:26
+#: ..\src/KTmain.py:28
 msgid "??:??"
 msgstr "??:??"
 
-#: ..\src/KTmain.py:103
+#: ..\src/KTmain.py:105
 msgid "Do you want to start the kiddytimer- plugin now."
 msgstr "Wollen Sie das KiddyTimer- Plugin jetzt starten?"
+
+#: ..\src/KTmain.py:121
+msgid "Please enter the correct pin code"
+msgstr "Bitte geben Sie den korrekten pin code ein"
+
+#: ..\src/KTmain.py:121
+msgid "Enter pin code"
+msgstr "Pin code eingeben"
 
 #: ..\src/KTglob.py:6
 msgid "Sunday"
