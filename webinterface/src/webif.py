@@ -43,7 +43,7 @@ class OneTimeElement(Element):
 			paramlist = self.source_id.split(",")
 			list = {}
 			for key in paramlist:
-				arg = args.get(key, [])
+				arg = args.get(key, ())
 				Len = len(arg)
 				if Len == 0:
 					list[key] = None
@@ -53,7 +53,7 @@ class OneTimeElement(Element):
 					list[key] = arg[0]
 			self.source.handleCommand(list)
 		else:
-			for c in args.get(self.source_id, []):
+			for c in args.get(self.source_id, ()):
 				self.source.handleCommand(c)
 
 	def render(self, request):
@@ -401,9 +401,9 @@ class webifHandler(ContentHandler):
 			self.converter = eval(ctype[4:])
 		else:
 			try:
-				self.converter = my_import('.'.join(["Components", "Converter", ctype])).__dict__.get(ctype)
+				self.converter = my_import('.'.join(("Components", "Converter", ctype))).__dict__.get(ctype)
 			except ImportError:
-				self.converter = my_import('.'.join(["Plugins", "Extensions", "WebInterface", "WebComponents", "Converter", ctype])).__dict__.get(ctype)
+				self.converter = my_import('.'.join(("Plugins", "Extensions", "WebInterface", "WebComponents", "Converter", ctype))).__dict__.get(ctype)
 		self.sub = [ ]
 
 	def end_convert(self):
@@ -431,11 +431,8 @@ class webifHandler(ContentHandler):
 		if name[:3] == "e2:":
 			self.mode += 1
 
-		tag = [' %s="%s"' % (key, val) for (key, val) in attrs.items()]
-		tag.insert(0, name)
-		tag.insert(0, '<')
-		tag.append('>')
-		tag = ''.join(tag)#.encode('utf-8')
+		tag = '<' + name + ''.join([' %s="%s"' % x for x in attrs.items()]) + '>'
+		#tag = tag.encode('utf-8')
 
 		if self.mode == 0:
 			self.res.append(tag)
