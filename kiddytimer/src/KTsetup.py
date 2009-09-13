@@ -109,6 +109,8 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
                 KTglob.oKiddyTimer.gotSession(KTglob.oKiddyTimer.session)
             else:
                 KTglob.oKiddyTimer.setDialogStatus(KTglob.oKiddyTimer.timerHasToRun())
+                if KTglob.oKiddyTimer.dialogEnabled == True:
+                    KTglob.oKiddyTimer.askForActivation()
         self.close()
 
     def cancel(self):

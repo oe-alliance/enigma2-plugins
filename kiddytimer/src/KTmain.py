@@ -2,10 +2,12 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from KTMultiPixmap import KTmultiPixmap
 from Components.config import config
+from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
-from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
 from Screens import Standby
+from Tools.BoundFunction import boundFunction
+from Tools import Notifications
 from enigma import ePoint, eTimer
 import KTglob
 import NavigationInstance
@@ -72,9 +74,6 @@ class KiddyTimer():
     
     def gotSession(self, session):
         self.session = session
-        self.initVars()
-    
-    def initVars(self):
         self.enabled = config.plugins.KiddyTimer.enabled.value
         # Start- Time of the plugin, used for calculating the remaining time
         self.pluginStartTime = time.localtime()            
@@ -97,10 +96,13 @@ class KiddyTimer():
                 self.dialog.hide()
                 
             self.setDialogStatus(self.timerHasToRun())
-            self.calculateTimer()
-            
+            if self.dialogEnabled == True:
+                self.askForActivation()
+            else:
+                self.calculateTimer()
+    
     def askForActivation(self):
-        self.session.openWithCallback(self.activationCallback, MessageBox, _("Do you want to start the kiddytimer- plugin now."), MessageBox.TYPE_YESNO)
+        Notifications.AddNotificationWithCallback(self.activationCallback, MessageBox, _("Do you want to start the kiddytimer- plugin now."), MessageBox.TYPE_YESNO, 5)
 
     def activationCallback(self, value):
         self.setDialogStatus(self.timerHasToRun())
@@ -111,10 +113,23 @@ class KiddyTimer():
                 self.dialog = self.session.instantiateDialog(KiddyTimerScreen)
                 self.dialog.hide()
         else:
-            self.setDialogStatus( False )
+            self.askForPassword()
                                        
         self.calculateTimer()
 
+    def askForPassword(self):
+        self.session.openWithCallback( self.pinEntered, PinInput, pinList = [config.plugins.KiddyTimer.pin.getValue()], triesEntry = self.getTriesEntry(), title = _("Please enter the correct pin code"), windowTitle = _("Enter pin code"))
+    
+    def getTriesEntry(self):
+        return config.ParentalControl.retries.setuppin
+        
+    def pinEntered(self, result):
+        if result is None:
+            pass
+        elif not result:
+            pass
+        else:
+            self.setDialogStatus( False )        
     
     def startLoop(self):
         self.loopTimer.start(self.loopTimerStep,1)
