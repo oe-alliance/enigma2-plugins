@@ -123,8 +123,8 @@ class FTPFileList(FileList):
 class FTPBrowser(Screen, Protocol):
 	skin = """
 		<screen name="FTPBrowser" position="100,100" size="560,410" title="FTP Browser" >
-			<widget name="local" position="20,10" size="220,320" scrollbarMode="showOnDemand" />
-			<widget name="remote" position="245,10" size="220,320" scrollbarMode="showOnDemand" />
+			<widget name="local" position="20,10" size="255,320" scrollbarMode="showOnDemand" />
+			<widget name="remote" position="285,10" size="255,320" scrollbarMode="showOnDemand" />
 			<widget source="progress" render="Progress" position="20,360" size="520,10" />
 			<widget name="eta" position="20,330" size="200,30" font="Regular;23" />
 			<widget name="speed" position="330,330" size="200,30" halign="right" font="Regular;23" />
