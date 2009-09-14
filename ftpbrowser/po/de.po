@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-13 18:01+0200\n"
-"PO-Revision-Date: 2009-09-13 18:05+0200\n"
+"POT-Creation-Date: 2009-09-14 22:10+0200\n"
+"PO-Revision-Date: 2009-09-14 22:12+0200\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -11,30 +11,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/FTPBrowser.py:202
-msgid ""
-"Could not connect to ftp server!\n"
-"Closing."
+#, python-format
+msgid "%d kb/s"
 msgstr ""
-"Konnte nicht mit FTP-Server verbinden!\n"
-"Plugin wird automatisch geschlossen."
 
-#: ../src/FTPBrowser.py:77 ../src/FTPBrowser.py:82
+msgid ""
+"A file with this name already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Eine Datei mit diesem Namen existiert bereis lokal.\n"
+"Soll diese Datei überschrieben werden?"
+
+msgid ""
+"A transfer is currently in progress.\n"
+"Abort?"
+msgstr ""
+"Es ist zur Zeit ein Transfer aktiv."
+"Soll der Transfer abgebrochen werden?"
+
+msgid "Could not connect to ftp server!"
+msgstr "Konnte nicht mit FTP-Server verbinden!"
+
+msgid "Download finished."
+msgstr "Download abgeschloßen."
+
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr ""
+
+msgid "Error during download."
+msgstr "Fehlerhafter Download."
+
+msgid "Not yet implemented."
+msgstr "Noch nicht implementiert."
+
 msgid "Parent Directory"
 msgstr "übergeordnetes Verzeichnis"
 
-#: ../src/FTPBrowser.py:124
 msgid "Select local file list"
 msgstr "Lokale Dateiliste auswählen"
 
-#: ../src/FTPBrowser.py:125
 msgid "Select remote file list"
 msgstr "Entfernte Dateiliste auswählen"
 
-#: ../src/FTPBrowser.py:119
+msgid "There already is an active transfer."
+msgstr "Es ist bereits ein Transfer aktiv."
+
 msgid "close"
 msgstr "Schließen"
 
-#: ../src/FTPBrowser.py:118
 msgid "enter directory/get file/put file"
 msgstr "Verzeichnis betreten/Datei herunterladen/Datei hochladen"

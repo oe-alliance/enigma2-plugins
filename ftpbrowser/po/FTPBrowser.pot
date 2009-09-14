@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-13 18:01+0200\n"
+"POT-Creation-Date: 2009-09-14 22:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,28 +16,64 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/FTPBrowser.py:202
-msgid ""
-"Could not connect to ftp server!\n"
-"Closing."
+#: ../src/FTPBrowser.py:291
+#, python-format
+msgid "%d kb/s"
 msgstr ""
 
-#: ../src/FTPBrowser.py:77 ../src/FTPBrowser.py:82
+#: ../src/FTPBrowser.py:222
+msgid ""
+"A file with this name already exists locally.\n"
+"Do you want to overwrite it?"
+msgstr ""
+
+#: ../src/FTPBrowser.py:322
+msgid ""
+"A transfer is currently in progress.\n"
+"Abort?"
+msgstr ""
+
+#: ../src/FTPBrowser.py:366
+msgid "Could not connect to ftp server!"
+msgstr ""
+
+#: ../src/FTPBrowser.py:253
+msgid "Download finished."
+msgstr ""
+
+#: ../src/FTPBrowser.py:290
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr ""
+
+#: ../src/FTPBrowser.py:266
+msgid "Error during download."
+msgstr ""
+
+#: ../src/FTPBrowser.py:246
+msgid "Not yet implemented."
+msgstr ""
+
+#: ../src/FTPBrowser.py:113 ../src/FTPBrowser.py:118
 msgid "Parent Directory"
 msgstr ""
 
-#: ../src/FTPBrowser.py:124
+#: ../src/FTPBrowser.py:175
 msgid "Select local file list"
 msgstr ""
 
-#: ../src/FTPBrowser.py:125
+#: ../src/FTPBrowser.py:176
 msgid "Select remote file list"
 msgstr ""
 
-#: ../src/FTPBrowser.py:119
+#: ../src/FTPBrowser.py:206
+msgid "There already is an active transfer."
+msgstr ""
+
+#: ../src/FTPBrowser.py:170
 msgid "close"
 msgstr ""
 
-#: ../src/FTPBrowser.py:118
+#: ../src/FTPBrowser.py:169
 msgid "enter directory/get file/put file"
 msgstr ""
