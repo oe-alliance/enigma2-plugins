@@ -23,6 +23,7 @@ from VariableProgressSource import VariableProgressSource
 from twisted.internet import reactor, defer
 from twisted.internet.protocol import Protocol, ClientCreator
 from twisted.protocols.ftp import FTPClient, FTPFileListProtocol
+from twisted.protocols.basic import FileSender
 
 # For new and improved _parse
 from urlparse import urlparse, urlunparse
@@ -151,7 +152,7 @@ class FTPBrowser(Screen, Protocol):
 		self.lastApprox = 0
 		self.fileSize = 0
 
-		self["local"] = FileList("/media/hdd")
+		self["local"] = FileList("/media/hdd/")
 		self["remote"] = FTPFileList()
 		self["eta"] = Label("")
 		self["speed"] = Label("")
@@ -233,19 +234,77 @@ class FTPBrowser(Screen, Protocol):
 					except IOError, ie:
 						# TODO: handle this
 						raise ie
-					d = self.ftpclient.retrieveFile(absRemoteFile, self, offset = 0)
-					d.addCallback(self.getFinished).addErrback(self.getFailed)
+					else:
+						d = self.ftpclient.retrieveFile(absRemoteFile, self, offset = 0)
+						d.addCallback(self.getFinished).addErrback(self.getFailed)
 		else:
 			# Put file/change directory
 			assert(self.currlist == "local")
 			if self["local"].canDescent():
 				self["local"].descent()
 			else:
-				self.session.open(
-					MessageBox,
-					_("Not yet implemented."),
-					type = MessageBox.TYPE_WARNING
-				)
+				if self.file:
+					self.session.open(
+						MessageBox,
+						_("There already is an active transfer."),
+						type = MessageBox.TYPE_WARNING
+					)
+					return
+
+				localFile = self["local"].getSelection()
+				if not localFile:
+					return
+
+				def remoteFileExists(absName):
+					for file in self["remote"].getFileList():
+						if file[0] == absName:
+							return True
+					return False
+
+				# XXX: isn't this supposed to be an absolute filename? well, it's not for me :-/
+				fileName = localFile[0]
+				absLocalFile = self["local"].getCurrentDirectory() + fileName
+				directory = self["remote"].getCurrentDirectory()
+				sep = '/' if directory != '/' else ''
+				remoteFile = directory + sep + fileName
+				if not force and remoteFileExists(remoteFile):
+					self.session.openWithCallback(
+						self.okQuestion,
+						MessageBox,
+						_("A file with this name already exists on the remote host.\nDo you want to overwrite it?"),
+					)
+				else:
+					def sendfile(consumer, fileObj):
+						FileSender().beginFileTransfer(fileObj, consumer).addCallback(  
+							lambda _: consumer.finish()).addCallback(
+							self.putComplete).addErrback(self.putFailed)
+
+					try:
+						self.file = open(absLocalFile, 'rb')
+					except IOError, ie:
+						# TODO: handle this
+						raise ie
+					else:
+						dC, dL = self.ftpclient.storeFile(remoteFile)
+						dC.addCallback(sendfile, self.file)
+
+	def putComplete(self, *args):
+		self.session.open(
+			MessageBox,
+			_("Upload finished."),
+			type = MessageBox.TYPE_INFO
+		)
+		self.file.close()
+		self.file = None
+
+	def putFailed(self, *args):
+		self.session.open(
+			MessageBox,
+			_("Error during download."),
+			type = MessageBox.TYPE_ERROR
+		)
+		self.file.close()
+		self.file = None
 
 	def getFinished(self, *args):
 		self.session.open(
