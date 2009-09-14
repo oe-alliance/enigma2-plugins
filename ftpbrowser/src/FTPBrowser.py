@@ -1,6 +1,13 @@
 # for localized messages
 from . import _
 
+# Core
+from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent
+
+# Tools
+from Tools.Directories import SCOPE_SKIN_IMAGE, resolveFilename
+from Tools.LoadPixmap import LoadPixmap
+
 # GUI (Screens)
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -8,7 +15,7 @@ from Screens.MessageBox import MessageBox
 # GUI (Components)
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Label import Label
-from Components.FileList import FileList, FileEntryComponent
+from Components.FileList import FileList, FileEntryComponent, EXTENSIONS
 from Components.Button import Button
 
 # FTP Client
@@ -18,6 +25,9 @@ from twisted.protocols.ftp import FTPClient, FTPFileListProtocol
 
 # For new and improved _parse
 from urlparse import urlparse, urlunparse
+
+# System
+from os import path as os_path
 
 def _parse(url, defaultPort = None):
 	url = url.strip()
@@ -54,6 +64,27 @@ def _parse(url, defaultPort = None):
 
 	return scheme, host, port, path, username, password
 
+def FTPFileEntryComponent(file, directory):
+	isDir = True if file['filetype'] == 'd' else False
+	name = file['filename']
+
+	sep = '/' if directory != '/' else ''
+	res = [ (directory + sep + name, isDir, file['size']) ]
+	res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, name))
+	if isDir:
+		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/directory.png"))
+	else:
+		extension = name.split('.')
+		extension = extension[-1].lower()
+		if EXTENSIONS.has_key(extension):
+			png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/" + EXTENSIONS[extension] + ".png"))
+		else:
+			png = None
+	if png is not None:
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 2, 20, 20, png))
+
+	return res
+
 class FTPFileList(FileList):
 	def __init__(self):
 		self.ftpclient = None
@@ -75,7 +106,7 @@ class FTPFileList(FileList):
 
 	def listRcvd(self, *args):
 		# XXX: we might want to sort this list and/or implement any other feature than 'list directories'
-		self.list = [FileEntryComponent(name = file['filename'], absolute = self.current_directory + '/' + file['filename'], isDir = True if file['filetype'] == 'd' else False) for file in self.filelist.files]
+		self.list = [FTPFileEntryComponent(file, self.current_directory) for file in self.filelist.files]
 		if self.current_directory != "/":
 			self.list.insert(0, FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-1]) + '/', isDir = True))
 		self.l.setList(self.list)
@@ -87,7 +118,7 @@ class FTPFileList(FileList):
 			self.list = []
 		self.l.setList(self.list)
 
-class FTPBrowser(Screen):
+class FTPBrowser(Screen, Protocol):
 	skin = """
 		<screen name="FTPBrowser" position="100,100" size="550,400" title="FTP Browser" >
 			<widget name="local" position="20,10" size="220,350" scrollbarMode="showOnDemand" />
@@ -105,6 +136,7 @@ class FTPBrowser(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.ftpclient = None
+		self.file = None
 		self.currlist = "remote"
 		self["local"] = FileList("/media/hdd")
 		self["remote"] = FTPFileList()
@@ -142,25 +174,107 @@ class FTPBrowser(Screen):
 	def setRemote(self):
 		self.currlist = "remote"
 
-	def ok(self):
+	def okQuestion(self, res = None):
+		if res:
+			self.ok(force = True)
+
+	def ok(self, force = False):
 		if self.currlist == "remote":
 			# Get file/change directory
 			if self["remote"].canDescent():
 				self["remote"].descent()
 			else:
-				# XXX: implement
-				pass
+				if self.file:
+					self.session.open(
+						MessageBox,
+						_("There already is an active transfer."),
+						type = MessageBox.TYPE_WARNING
+					)
+					return
+
+				absRemoteFile = self["remote"].getSelection()
+				if not absRemoteFile:
+					return
+
+				absRemoteFile = absRemoteFile[0]
+				fileName = absRemoteFile.split('/')[-1]
+				localFile = self["local"].getCurrentDirectory() + fileName
+				if not force and os_path.exists(localFile):
+					self.session.openWithCallback(
+						self.okQuestion,
+						MessageBox,
+						_("A file with this name already exists locally.\nDo you want to overwrite it?"),
+					)
+				else:
+					try:
+						self.file = open(localFile, 'w')
+					except IOError, ie:
+						# TODO: handle this
+						raise ie
+					d = self.ftpclient.retrieveFile(absRemoteFile, self, offset = 0)
+					d.addCallback(self.getFinished).addErrback(self.getFailed)
 		else:
 			# Put file/change directory
 			assert(self.currlist == "local")
 			if self["local"].canDescent():
 				self["local"].descent()
 			else:
-				# XXX: implement
-				pass
+				self.session.open(
+					MessageBox,
+					_("Not yet implemented."),
+					type = MessageBox.TYPE_WARNING
+				)
+
+	def getFinished(self, *args):
+		self.session.open(
+			MessageBox,
+			_("Download finished."),
+			type = MessageBox.TYPE_INFO
+		)
+
+		self.file.close()
+		self.file = None
+
+	def getFailed(self, *args):
+		self.session.open(
+			MessageBox,
+			_("Error during download."),
+			type = MessageBox.TYPE_ERROR
+		)
+
+		self.file.close()
+		self.file = None
+
+	def dataReceived(self, data):
+		if not self.file:
+			return
+
+		# TODO: implement progress indicator, eventually speed approximation and eta
+		# see MediaDownloader for this :-)
+
+		try:
+			self.file.write(data)
+		except IOError, ie:
+			# TODO: handle this
+			self.file = None
+			raise ie
+
+	def cancelQuestion(self, res = None):
+		if res:
+			self.file.close()
+			self.file = None
+			self.cancel()
 
 	def cancel(self):
-		# TODO: anything else?
+		if self.file is not None:
+			self.session.openWithCallback(
+				self.cancelQuestion,
+				MessageBox,
+				_("A transfer is currently in progress.\nAbort?"),
+			)
+			return
+
+		self.ftpclient.quit()
 		self.close()
 
 	def up(self):
@@ -198,11 +312,9 @@ class FTPBrowser(Screen):
 
 	def connectionFailed(self, *args):
 		print "[FTPBrowser] connection failed", args
-		if args:
-			print args[0]
 		self.session.open(
 				MessageBox,
-				_("Could not connect to ftp server!\nClosing."),
+				_("Could not connect to ftp server!"),
 				type = MessageBox.TYPE_ERROR,
 				timeout = 3,
 		)
