@@ -17,6 +17,7 @@ from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Label import Label
 from Components.FileList import FileList, FileEntryComponent, EXTENSIONS
 from Components.Button import Button
+from VariableProgressSource import VariableProgressSource
 
 # FTP Client
 from twisted.internet import reactor, defer
@@ -28,6 +29,7 @@ from urlparse import urlparse, urlunparse
 
 # System
 from os import path as os_path
+from time import time
 
 def _parse(url, defaultPort = None):
 	url = url.strip()
@@ -120,17 +122,20 @@ class FTPFileList(FileList):
 
 class FTPBrowser(Screen, Protocol):
 	skin = """
-		<screen name="FTPBrowser" position="100,100" size="550,400" title="FTP Browser" >
-			<widget name="local" position="20,10" size="220,350" scrollbarMode="showOnDemand" />
-			<widget name="remote" position="245,10" size="220,350" scrollbarMode="showOnDemand" />
-			<ePixmap name="red" position="0,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="420,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<widget name="key_red" position="0,360" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="140,360" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="280,360" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="420,360" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<screen name="FTPBrowser" position="100,100" size="560,410" title="FTP Browser" >
+			<widget name="local" position="20,10" size="220,320" scrollbarMode="showOnDemand" />
+			<widget name="remote" position="245,10" size="220,320" scrollbarMode="showOnDemand" />
+			<widget source="progress" render="Progress" position="20,360" size="520,10" />
+			<widget name="eta" position="20,330" size="200,30" font="Regular;23" />
+			<widget name="speed" position="330,330" size="200,30" halign="right" font="Regular;23" />
+			<ePixmap name="red" position="0,370" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="140,370" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="280,370" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue" position="420,370" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget name="key_red" position="0,370" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_green" position="140,370" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_yellow" position="280,370" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_blue" position="420,370" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -138,8 +143,19 @@ class FTPBrowser(Screen, Protocol):
 		self.ftpclient = None
 		self.file = None
 		self.currlist = "remote"
+
+		# Init what we need for dl progress
+		self.currentLength = 0
+		self.lastLength = 0
+		self.lastTime = 0
+		self.lastApprox = 0
+		self.fileSize = 0
+
 		self["local"] = FileList("/media/hdd")
 		self["remote"] = FTPFileList()
+		self["eta"] = Label("")
+		self["speed"] = Label("")
+		self["progress"] = VariableProgressSource()
 		self["key_red"] = Button("")
 		self["key_green"] = Button("")
 		self["key_yellow"] = Button("")
@@ -148,19 +164,19 @@ class FTPBrowser(Screen, Protocol):
 		URI = "ftp://root@localhost:21" # TODO: make configurable
 		self.connect(URI)
 
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions", 
+		self["ftpbrowserBaseActions"] = HelpableActionMap(self, "ftpbrowserBaseActions",
 			{
 				"ok": (self.ok, _("enter directory/get file/put file")),
 				"cancel": (self.cancel , _("close")),
 			}, -2)
 
-		self["ChannelSelectBaseActions"] = HelpableActionMap(self, "ChannelSelectBaseActions",
+		self["ftpbrowserListActions"] = HelpableActionMap(self, "ftpbrowserListActions",
 			{
-				"nextBouquet": (self.setLocal, _("Select local file list")),
-				"prevBouquet": (self.setRemote, _("Select remote file list")),
+				"channelUp": (self.setLocal, _("Select local file list")),
+				"channelDown": (self.setRemote, _("Select remote file list")),
 			})
 
-		self["actions"] = ActionMap(["DirectionActions"],
+		self["actions"] = ActionMap(["ftpbrowserDirectionActions"],
 			{
 				"up": self.up,
 				"down": self.down,
@@ -192,11 +208,11 @@ class FTPBrowser(Screen, Protocol):
 					)
 					return
 
-				absRemoteFile = self["remote"].getSelection()
-				if not absRemoteFile:
+				remoteFile = self["remote"].getSelection()
+				if not remoteFile:
 					return
 
-				absRemoteFile = absRemoteFile[0]
+				absRemoteFile = remoteFile[0]
 				fileName = absRemoteFile.split('/')[-1]
 				localFile = self["local"].getCurrentDirectory() + fileName
 				if not force and os_path.exists(localFile):
@@ -206,6 +222,12 @@ class FTPBrowser(Screen, Protocol):
 						_("A file with this name already exists locally.\nDo you want to overwrite it?"),
 					)
 				else:
+					self.currentLength = 0
+					self.lastLength = 0
+					self.lastTime = 0
+					self.lastApprox = 0
+					self.fileSize = remoteFile[2]
+
 					try:
 						self.file = open(localFile, 'w')
 					except IOError, ie:
@@ -232,6 +254,9 @@ class FTPBrowser(Screen, Protocol):
 			type = MessageBox.TYPE_INFO
 		)
 
+		self["eta"].setText("")
+		self["speed"].setText("")
+		self["progress"].invalidate()
 		self.file.close()
 		self.file = None
 
@@ -242,15 +267,39 @@ class FTPBrowser(Screen, Protocol):
 			type = MessageBox.TYPE_ERROR
 		)
 
+		self["eta"].setText("")
+		self["speed"].setText("")
+		self["progress"].writeValues(0, 0)
 		self.file.close()
 		self.file = None
+
+	def gotProgress(self, pos, max):
+		self["progress"].writeValues(pos, max)
+
+		newTime = time()
+		# Check if we're called the first time (got total)
+		lastTime = self.lastTime
+		if lastTime == 0:
+			self.lastTime = newTime
+
+		# We dont want to update more often than every two sec (could be done by a timer, but this should give a more accurate result though it might lag)
+		elif int(newTime - lastTime) >= 1:
+			lastApprox = round(((pos - self.lastLength) / (newTime - lastTime) / 1024), 2)
+
+			secLen = int(round(((max-pos) / 1024) / lastApprox))
+			self["eta"].setText(_("ETA %d:%02d min") % (secLen / 60, secLen % 60))
+			self["speed"].setText(_("%d kb/s") % (lastApprox))
+
+			self.lastApprox = lastApprox
+			self.lastLength = pos
+			self.lastTime = newTime
 
 	def dataReceived(self, data):
 		if not self.file:
 			return
 
-		# TODO: implement progress indicator, eventually speed approximation and eta
-		# see MediaDownloader for this :-)
+		self.currentLength += len(data)
+		self.gotProgress(self.currentLength, self.fileSize)
 
 		try:
 			self.file.write(data)
