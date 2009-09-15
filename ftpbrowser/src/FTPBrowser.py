@@ -142,20 +142,22 @@ class FTPFileList(FileList):
 
 class FTPBrowser(Screen, Protocol):
 	skin = """
-		<screen name="FTPBrowser" position="100,100" size="560,410" title="FTP Browser" >
-			<widget name="local" position="20,10" size="255,320" scrollbarMode="showOnDemand" />
-			<widget name="remote" position="285,10" size="255,320" scrollbarMode="showOnDemand" />
-			<widget source="progress" render="Progress" position="20,360" size="520,10" />
-			<widget name="eta" position="20,330" size="200,30" font="Regular;23" />
-			<widget name="speed" position="330,330" size="200,30" halign="right" font="Regular;23" />
-			<ePixmap name="red" position="0,370" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,370" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,370" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="420,370" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<widget name="key_red" position="0,370" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="140,370" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="280,370" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="420,370" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<screen name="FTPBrowser" position="center,center" size="560,440" title="FTP Browser">
+			<widget name="localText" position="20,10" size="200,20" font="Regular;18" />
+			<widget name="local" position="20,40" size="255,320" scrollbarMode="showOnDemand" />
+			<widget name="remoteText" position="285,10" size="200,20" font="Regular;18" />
+			<widget name="remote" position="285,40" size="255,320" scrollbarMode="showOnDemand" />
+			<widget name="eta" position="20,360" size="200,30" font="Regular;23" />
+			<widget name="speed" position="330,360" size="200,30" halign="right" font="Regular;23" />
+			<widget source="progress" render="Progress" position="20,370" size="520,10" />
+			<ePixmap name="red" position="0,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="140,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="280,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue" position="420,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget name="key_red" position="0,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_green" position="140,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_yellow" position="280,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_blue" position="420,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -171,7 +173,9 @@ class FTPBrowser(Screen, Protocol):
 		self.lastApprox = 0
 		self.fileSize = 0
 
+		self["localText"] = Label(_("Local"))
 		self["local"] = FileList("/media/hdd/", showMountpoints = False)
+		self["remoteText"] = Label(_("Remote"))
 		self["remote"] = FTPFileList()
 		self["eta"] = Label("")
 		self["speed"] = Label("")
