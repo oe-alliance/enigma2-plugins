@@ -257,7 +257,7 @@ class FTPBrowser(Screen, Protocol):
 
 				def remoteFileExists(absName):
 					for file in self["remote"].getFileList():
-						if file[0] == absName:
+						if file[0][0] == absName:
 							return True
 					return False
 
@@ -274,43 +274,31 @@ class FTPBrowser(Screen, Protocol):
 						_("A file with this name already exists on the remote host.\nDo you want to overwrite it?"),
 					)
 				else:
+					self.currentLength = 0
+					self.lastLength = 0
+					self.lastTime = 0
+					self.lastApprox = 0
+
 					def sendfile(consumer, fileObj):
-						FileSender().beginFileTransfer(fileObj, consumer).addCallback(  
+						FileSender().beginFileTransfer(fileObj, consumer, transform = self.putProgress).addCallback(  
 							lambda _: consumer.finish()).addCallback(
 							self.putComplete).addErrback(self.putFailed)
 
 					try:
+						self.fileSize = int(os_path.getsize(absLocalFile))
 						self.file = open(absLocalFile, 'rb')
-					except IOError, ie:
+					except (IOError, OSError), e:
 						# TODO: handle this
-						raise ie
+						raise e
 					else:
 						dC, dL = self.ftpclient.storeFile(remoteFile)
 						dC.addCallback(sendfile, self.file)
 
-	def putComplete(self, *args):
+	def transferFinished(self, msg, type):
 		self.session.open(
 			MessageBox,
-			_("Upload finished."),
-			type = MessageBox.TYPE_INFO
-		)
-		self.file.close()
-		self.file = None
-
-	def putFailed(self, *args):
-		self.session.open(
-			MessageBox,
-			_("Error during download."),
-			type = MessageBox.TYPE_ERROR
-		)
-		self.file.close()
-		self.file = None
-
-	def getFinished(self, *args):
-		self.session.open(
-			MessageBox,
-			_("Download finished."),
-			type = MessageBox.TYPE_INFO
+			msg,
+			type = type
 		)
 
 		self["eta"].setText("")
@@ -319,18 +307,34 @@ class FTPBrowser(Screen, Protocol):
 		self.file.close()
 		self.file = None
 
-	def getFailed(self, *args):
-		self.session.open(
-			MessageBox,
-			_("Error during download."),
-			type = MessageBox.TYPE_ERROR
+	def putComplete(self, *args):
+		self.transferFinished(
+			_("Upload finished."),
+			MessageBox.TYPE_INFO
 		)
 
-		self["eta"].setText("")
-		self["speed"].setText("")
-		self["progress"].writeValues(0, 0)
-		self.file.close()
-		self.file = None
+	def putFailed(self, *args):
+		self.transferFinished(
+			_("Error during download."),
+			MessageBox.TYPE_ERROR
+		)
+
+	def getFinished(self, *args):
+		self.transferFinished(
+			_("Download finished."),
+			MessageBox.TYPE_INFO
+		)
+
+	def getFailed(self, *args):
+		self.transferFinished(
+			_("Error during download."),
+			MessageBox.TYPE_ERROR
+		)
+
+	def putProgress(self, chunk):
+		self.currentLength += len(chunk)
+		self.gotProgress(self.currentLength, self.fileSize)
+		return chunk
 
 	def gotProgress(self, pos, max):
 		self["progress"].writeValues(pos, max)
@@ -342,7 +346,7 @@ class FTPBrowser(Screen, Protocol):
 			self.lastTime = newTime
 
 		# We dont want to update more often than every two sec (could be done by a timer, but this should give a more accurate result though it might lag)
-		elif int(newTime - lastTime) >= 1:
+		elif int(newTime - lastTime) >= 2:
 			lastApprox = round(((pos - self.lastLength) / (newTime - lastTime) / 1024), 2)
 
 			secLen = int(round(((max-pos) / 1024) / lastApprox))
