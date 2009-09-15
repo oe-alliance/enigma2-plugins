@@ -500,14 +500,16 @@ DEFINE_REF(eStreamThreadWeb)
 
 eStreamThreadWeb::eStreamThreadWeb(): m_messagepump(eApp, 0) {
 	CONNECT(m_messagepump.recv_msg, eStreamThreadWeb::recvEvent);
+	m_running = false;
 }
+
 eStreamThreadWeb::~eStreamThreadWeb() {
 }
 
 void eStreamThreadWeb::start(int srcfd, int destfd) {
 	m_srcfd = srcfd;
 	m_destfd = destfd;
-	m_stop = m_running = false;
+	m_stop = false;
 	m_audioInfo = 0;
 	run(IOPRIO_CLASS_RT);
 }

@@ -478,14 +478,16 @@ DEFINE_REF(eStreamThread)
 
 eStreamThread::eStreamThread(): m_messagepump(eApp, 0) {
 	CONNECT(m_messagepump.recv_msg, eStreamThread::recvEvent);
+	m_running = false;
 }
+
 eStreamThread::~eStreamThread() {
 }
 
 void eStreamThread::start(int srcfd, int destfd) {
 	m_srcfd = srcfd;
 	m_destfd = destfd;
-	m_stop = m_running = false;
+	m_stop = false;
 	m_audioInfo = 0;
 	run(IOPRIO_CLASS_RT);
 }
