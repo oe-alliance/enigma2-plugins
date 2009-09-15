@@ -3,12 +3,14 @@
 #
 
 from FTPBrowser import FTPBrowser
-#import FTPBrowser
+
+ftpbrowser = None
 
 def main(session, **kwargs):
-	session.open(FTPBrowser)
-	#reload(FTPBrowser)
-	#session.open(FTPBrowser.FTPBrowser)
+	global ftpbrowser
+	if not ftpbrowser:
+		ftpbrowser = session.instantiateDialog(FTPBrowser)
+	session.execDialog(ftpbrowser)
 
 def Plugins(**kwargs):
 	from Plugins.Plugin import PluginDescriptor

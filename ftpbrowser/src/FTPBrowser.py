@@ -7,10 +7,13 @@ from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent
 # Tools
 from Tools.Directories import SCOPE_SKIN_IMAGE, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
+from Tools.Notifications import AddPopup
 
 # GUI (Screens)
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens.ChoiceBox import ChoiceBox
+from Screens.InfoBarGenerics import InfoBarNotifications
 
 # GUI (Components)
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -140,7 +143,7 @@ class FTPFileList(FileList):
 			self.list = []
 		self.l.setList(self.list)
 
-class FTPBrowser(Screen, Protocol):
+class FTPBrowser(Screen, Protocol, InfoBarNotifications):
 	skin = """
 		<screen name="FTPBrowser" position="center,center" size="560,440" title="FTP Browser">
 			<widget name="localText" position="20,10" size="200,20" font="Regular;18" />
@@ -149,7 +152,7 @@ class FTPBrowser(Screen, Protocol):
 			<widget name="remote" position="285,40" size="255,320" scrollbarMode="showOnDemand" />
 			<widget name="eta" position="20,360" size="200,30" font="Regular;23" />
 			<widget name="speed" position="330,360" size="200,30" halign="right" font="Regular;23" />
-			<widget source="progress" render="Progress" position="20,370" size="520,10" />
+			<widget source="progress" render="Progress" position="20,390" size="520,10" />
 			<ePixmap name="red" position="0,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green" position="140,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<ePixmap name="yellow" position="280,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -162,6 +165,7 @@ class FTPBrowser(Screen, Protocol):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		InfoBarNotifications.__init__(self)
 		self.ftpclient = None
 		self.file = None
 		self.currlist = "remote"
@@ -185,8 +189,7 @@ class FTPBrowser(Screen, Protocol):
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
 
-		URI = "ftp://root@localhost:21" # TODO: make configurable
-		self.connect(URI)
+		self.URI = "ftp://root@localhost:21" # TODO: make configurable
 
 		self["ftpbrowserBaseActions"] = HelpableActionMap(self, "ftpbrowserBaseActions",
 			{
@@ -207,6 +210,17 @@ class FTPBrowser(Screen, Protocol):
 				"left": self.left,
 				"right": self.right,
 			}, -2)
+
+		self.onExecBegin.append(self.reinitialize)
+
+	def reinitialize(self):
+		# NOTE: this will clear the remote file list if we are not currently connected. this behavior is intended.
+		self["remote"].refresh()
+		self["local"].refresh()
+
+		if not self.ftpclient:
+			self.connect(self.URI)
+		# XXX: Actually everything else should be taken care of... recheck this!
 
 	def setLocal(self):
 		self.currlist = "local"
@@ -318,11 +332,7 @@ class FTPBrowser(Screen, Protocol):
 						dC.addCallback(sendfile, self.file)
 
 	def transferFinished(self, msg, type, toRefresh):
-		self.session.open(
-			MessageBox,
-			msg,
-			type = type
-		)
+		AddPopup(msg, type, -1)
 
 		self["eta"].setText("")
 		self["speed"].setText("")
@@ -401,20 +411,29 @@ class FTPBrowser(Screen, Protocol):
 
 	def cancelQuestion(self, res = None):
 		if res:
-			self.file.close()
-			self.file = None
-			self.cancel()
+			if res == 1:
+				self.file.close()
+				self.file = None
+				self.ftpclient.quit()
+				self.ftpclient = None
+			self.close()
 
 	def cancel(self):
 		if self.file is not None:
 			self.session.openWithCallback(
 				self.cancelQuestion,
-				MessageBox,
-				_("A transfer is currently in progress.\nAbort?"),
+				ChoiceBox,
+				title = _("A transfer is currently in progress.\nWhat do you want to do?"),
+				list = (
+					(_("Abort transfer"), 1),
+					(_("Run in Background"), 2),
+					(_("Cancel"), 0)
+				)
 			)
 			return
 
 		self.ftpclient.quit()
+		self.ftpclient = None
 		self.close()
 
 	def up(self):
