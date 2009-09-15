@@ -70,10 +70,14 @@ def _parse(url, defaultPort = None):
 def FTPFileEntryComponent(file, directory):
 	isDir = True if file['filetype'] == 'd' else False
 	name = file['filename']
+	absolute = directory + name
+	if isDir:
+		absolute += '/'
 
-	sep = '/' if directory != '/' else ''
-	res = [ (directory + sep + name, isDir, file['size']) ]
-	res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, name))
+	res = [
+		(absolute, isDir, file['size']),
+		(eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 470, 20, 0, RT_HALIGN_LEFT, name)
+	]
 	if isDir:
 		png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "extensions/directory.png"))
 	else:
@@ -108,15 +112,30 @@ class FTPFileList(FileList):
 		d.addCallback(self.listRcvd).addErrback(self.listFailed)
 
 	def listRcvd(self, *args):
-		# XXX: we might want to sort this list and/or implement any other feature than 'list directories'
-		self.list = [FTPFileEntryComponent(file, self.current_directory) for file in self.filelist.files]
+		# TODO: is any of the 'advanced' features useful (and more of all can they be implemented) here?
+		list = [FTPFileEntryComponent(file, self.current_directory) for file in self.filelist.files]
+		list.sort(key = lambda x: (not x[0][1], x[0][0]))
 		if self.current_directory != "/":
-			self.list.insert(0, FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-1]) + '/', isDir = True))
-		self.l.setList(self.list)
+			list.insert(0, FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-2]) + '/', isDir = True))
+
+		self.l.setList(list)
+		self.list = list
+
+		select = self.select
+		if select is not None:
+			i = 0
+			self.moveToIndex(0)
+			for x in list:
+				p = x[0][0]
+
+				if p == select:
+					self.moveToIndex(i)
+					break
+				i += 1
 
 	def listFailed(self, *args):
 		if self.current_directory != "/":
-			self.list = [FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-1]) + '/', isDir = True)]
+			self.list = [FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-2]) + '/', isDir = True)]
 		else:
 			self.list = []
 		self.l.setList(self.list)
@@ -152,7 +171,7 @@ class FTPBrowser(Screen, Protocol):
 		self.lastApprox = 0
 		self.fileSize = 0
 
-		self["local"] = FileList("/media/hdd/")
+		self["local"] = FileList("/media/hdd/", showMountpoints = False)
 		self["remote"] = FTPFileList()
 		self["eta"] = Label("")
 		self["speed"] = Label("")
@@ -294,7 +313,7 @@ class FTPBrowser(Screen, Protocol):
 						dC, dL = self.ftpclient.storeFile(remoteFile)
 						dC.addCallback(sendfile, self.file)
 
-	def transferFinished(self, msg, type):
+	def transferFinished(self, msg, type, toRefresh):
 		self.session.open(
 			MessageBox,
 			msg,
@@ -304,31 +323,36 @@ class FTPBrowser(Screen, Protocol):
 		self["eta"].setText("")
 		self["speed"].setText("")
 		self["progress"].invalidate()
+		self[toRefresh].refresh()
 		self.file.close()
 		self.file = None
 
 	def putComplete(self, *args):
 		self.transferFinished(
 			_("Upload finished."),
-			MessageBox.TYPE_INFO
+			MessageBox.TYPE_INFO,
+			"remote"
 		)
 
 	def putFailed(self, *args):
 		self.transferFinished(
 			_("Error during download."),
-			MessageBox.TYPE_ERROR
+			MessageBox.TYPE_ERROR,
+			"remote"
 		)
 
 	def getFinished(self, *args):
 		self.transferFinished(
 			_("Download finished."),
-			MessageBox.TYPE_INFO
+			MessageBox.TYPE_INFO,
+			"local"
 		)
 
 	def getFailed(self, *args):
 		self.transferFinished(
 			_("Error during download."),
-			MessageBox.TYPE_ERROR
+			MessageBox.TYPE_ERROR,
+			"local"
 		)
 
 	def putProgress(self, chunk):
