@@ -12,6 +12,7 @@ SUBDIRS = \
 	epgsearch \
 	filebrowser \
 	fritzcall \
+	ftpbrowser \
 	googlemaps \
 	genuinedreambox \
 	httpproxy \

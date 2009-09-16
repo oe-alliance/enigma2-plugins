@@ -240,5 +240,7 @@ elektro/Makefile
 elektro/po/Makefile
 elektro/src/Makefile
 
-
+ftpbrowser/Makefile
+ftpbrowser/po/Makefile
+ftpbrowser/src/Makefile
 ])
