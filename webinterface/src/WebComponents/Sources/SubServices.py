@@ -28,7 +28,7 @@ class SubServices(Source):
 
 				currentService = self.session.nav.getCurrentService()
 				subservices = currentService and currentService.subServices()
-				if subservices or subservices.getNumberOfSubservices() != 0:
+				if subservices and subservices.getNumberOfSubservices() != 0:
 					n = subservices and subservices.getNumberOfSubservices()
 					x = 0
 					while x < n:
@@ -55,7 +55,7 @@ class SubServices(Source):
 							list.append((sref.__str__(), sref.getServiceName()))
 							print "[SubServices] Matching recordSerivce found!"
 							subservices = service and service.subServices()
-							if subservices or subservices.getNumberOfSubservices() != 0:
+							if subservices and subservices.getNumberOfSubservices() != 0:
 								n = subservices and subservices.getNumberOfSubservices()
 								x = 0
 								while x < n:
