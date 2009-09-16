@@ -153,14 +153,13 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications):
 			<widget name="eta" position="20,360" size="200,30" font="Regular;23" />
 			<widget name="speed" position="330,360" size="200,30" halign="right" font="Regular;23" />
 			<widget source="progress" render="Progress" position="20,390" size="520,10" />
-			<ePixmap name="red" position="0,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="420,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<widget name="key_red" position="0,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="140,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="280,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="420,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<ePixmap name="green" position="10,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="180,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue" position="350,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget name="key_green" position="10,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_yellow" position="180,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_blue" position="350,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<ePixmap position="515,408" zPosition="1" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -189,12 +188,13 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications):
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
 
-		self.URI = "ftp://root@localhost:21" # TODO: make configurable
+		self.URI = "ftp://"
 
 		self["ftpbrowserBaseActions"] = HelpableActionMap(self, "ftpbrowserBaseActions",
 			{
 				"ok": (self.ok, _("enter directory/get file/put file")),
 				"cancel": (self.cancel , _("close")),
+				"menu": (self.menu, _("open menu")),
 			}, -2)
 
 		self["ftpbrowserListActions"] = HelpableActionMap(self, "ftpbrowserListActions",
@@ -221,6 +221,20 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications):
 		if not self.ftpclient:
 			self.connect(self.URI)
 		# XXX: Actually everything else should be taken care of... recheck this!
+
+	def inputCallback(self, res):
+		if res:
+			self.connect(res)
+
+	def menu(self):
+		# TODO: add more options, currently only input for URI
+		from Screens.InputBox import InputBox
+		self.session.openWithCallback(
+			self.inputCallback,
+			InputBox,
+			title = _("Enter URI of FTP Server:"),
+			text = self.URI,
+		)
 
 	def setLocal(self):
 		self.currlist = "local"
@@ -415,8 +429,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications):
 			if res == 1:
 				self.file.close()
 				self.file = None
-				self.ftpclient.quit()
-				self.ftpclient = None
+				self.disconnect()
 			self.close()
 
 	def cancel(self):
@@ -426,15 +439,14 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications):
 				ChoiceBox,
 				title = _("A transfer is currently in progress.\nWhat do you want to do?"),
 				list = (
-					(_("Abort transfer"), 1),
 					(_("Run in Background"), 2),
+					(_("Abort transfer"), 1),
 					(_("Cancel"), 0)
 				)
 			)
 			return
 
-		self.ftpclient.quit()
-		self.ftpclient = None
+		self.disconnect()
 		self.close()
 
 	def up(self):
@@ -449,11 +461,20 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications):
 	def right(self):
 		self[self.currlist].pageDown()
 
-	def connect(self, address):
+	def disconnect(self):
+		self.ftpclient.quit()
 		self.ftpclient = None
 		self["remote"].ftpclient = None
 
+	def connect(self, address):
+		self.ftpclient = None
+		self["remote"].ftpclient = None
+		self.URI = address
+
 		scheme, host, port, path, username, password = _parse(address)
+		if not host:
+			return
+
 		if not username:
 			username = 'anonymous'
 			password = 'my@email.com'
@@ -468,7 +489,9 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications):
 		print "[FTPBrowser] connection established"
 		self.ftpclient = ftpclient
 		self["remote"].ftpclient = ftpclient
-		self["remote"].changeDir("/")
+
+		scheme, host, port, path, username, password = _parse(self.URI)
+		self["remote"].changeDir(path)
 
 	def connectionFailed(self, *args):
 		print "[FTPBrowser] connection failed", args
