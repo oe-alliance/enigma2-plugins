@@ -410,6 +410,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications):
 			raise ie
 
 	def cancelQuestion(self, res = None):
+		res = res and res[1]
 		if res:
 			if res == 1:
 				self.file.close()
