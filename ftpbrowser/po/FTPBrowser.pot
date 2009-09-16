@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 22:10+0200\n"
+"POT-Creation-Date: 2009-09-16 19:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,64 +16,116 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/FTPBrowser.py:291
+#: ../src/FTPBrowser.py:408
 #, python-format
 msgid "%d kb/s"
 msgstr ""
 
-#: ../src/FTPBrowser.py:222
+#: ../src/plugin.py:85
+msgid "A basic FTP client"
+msgstr ""
+
+#: ../src/FTPBrowser.py:276
 msgid ""
 "A file with this name already exists locally.\n"
 "Do you want to overwrite it?"
 msgstr ""
 
-#: ../src/FTPBrowser.py:322
+#: ../src/FTPBrowser.py:327
 msgid ""
-"A transfer is currently in progress.\n"
-"Abort?"
+"A file with this name already exists on the remote host.\n"
+"Do you want to overwrite it?"
 msgstr ""
 
-#: ../src/FTPBrowser.py:366
+#: ../src/FTPBrowser.py:442
+msgid ""
+"A transfer is currently in progress.\n"
+"What do you want to do?"
+msgstr ""
+
+#: ../src/FTPBrowser.py:445
+msgid "Abort transfer"
+msgstr ""
+
+#: ../src/FTPBrowser.py:446
+msgid "Cancel"
+msgstr ""
+
+#: ../src/plugin.py:74
+msgid "Connect to FTP..."
+msgstr ""
+
+#: ../src/FTPBrowser.py:502
 msgid "Could not connect to ftp server!"
 msgstr ""
 
-#: ../src/FTPBrowser.py:253
+#: ../src/FTPBrowser.py:376
 msgid "Download finished."
 msgstr ""
 
-#: ../src/FTPBrowser.py:290
+#: ../src/FTPBrowser.py:407
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr ""
 
-#: ../src/FTPBrowser.py:266
+#: ../src/FTPBrowser.py:237
+msgid "Enter URI of FTP Server:"
+msgstr ""
+
+#: ../src/FTPBrowser.py:369 ../src/FTPBrowser.py:383
 msgid "Error during download."
 msgstr ""
 
-#: ../src/FTPBrowser.py:246
-msgid "Not yet implemented."
+#: ../src/FTPBrowser.py:181
+msgid "Local"
 msgstr ""
 
-#: ../src/FTPBrowser.py:113 ../src/FTPBrowser.py:118
+#: ../src/FTPBrowser.py:123 ../src/FTPBrowser.py:142
 msgid "Parent Directory"
 msgstr ""
 
-#: ../src/FTPBrowser.py:175
+#: ../src/FTPBrowser.py:183
+msgid "Remote"
+msgstr ""
+
+#: ../src/FTPBrowser.py:444
+msgid "Run in Background"
+msgstr ""
+
+#: ../src/FTPBrowser.py:204
 msgid "Select local file list"
 msgstr ""
 
-#: ../src/FTPBrowser.py:176
+#: ../src/FTPBrowser.py:205
 msgid "Select remote file list"
 msgstr ""
 
-#: ../src/FTPBrowser.py:206
+#: ../src/plugin.py:39
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+
+#: ../src/FTPBrowser.py:260 ../src/FTPBrowser.py:302
 msgid "There already is an active transfer."
 msgstr ""
 
-#: ../src/FTPBrowser.py:170
+#: ../src/FTPBrowser.py:362
+msgid "Upload finished."
+msgstr ""
+
+#: ../src/plugin.py:52
+msgid "Which server do you want to connect to?"
+msgstr ""
+
+#: ../src/FTPBrowser.py:198
 msgid "close"
 msgstr ""
 
-#: ../src/FTPBrowser.py:169
+#: ../src/FTPBrowser.py:197
 msgid "enter directory/get file/put file"
+msgstr ""
+
+#: ../src/FTPBrowser.py:199
+msgid "open menu"
 msgstr ""

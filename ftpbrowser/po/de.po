@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 22:10+0200\n"
-"PO-Revision-Date: 2009-09-14 22:12+0200\n"
+"POT-Creation-Date: 2009-09-16 19:12+0200\n"
+"PO-Revision-Date: 2009-09-15 19:15+0200\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -15,19 +15,38 @@ msgstr ""
 msgid "%d kb/s"
 msgstr ""
 
+msgid "A basic FTP client"
+msgstr "Ein FTP-Client"
+
 msgid ""
 "A file with this name already exists locally.\n"
 "Do you want to overwrite it?"
 msgstr ""
-"Eine Datei mit diesem Namen existiert bereis lokal.\n"
+"Eine Datei mit diesem Namen existiert bereits lokal.\n"
+"Soll diese Datei überschrieben werden?"
+
+msgid ""
+"A file with this name already exists on the remote host.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Eine Datei mit diesem Namen existiert bereits auf dem Host.\n"
 "Soll diese Datei überschrieben werden?"
 
 msgid ""
 "A transfer is currently in progress.\n"
-"Abort?"
+"What do you want to do?"
 msgstr ""
-"Es ist zur Zeit ein Transfer aktiv."
-"Soll der Transfer abgebrochen werden?"
+"Ein Transfer ist zur Zeit aktiv.\n"
+"Was möchten Sie tun="
+
+msgid "Abort transfer"
+msgstr "Transfer abbrechen"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Connect to FTP..."
+msgstr "Zu FTP verbinden..."
 
 msgid "Could not connect to ftp server!"
 msgstr "Konnte nicht mit FTP-Server verbinden!"
@@ -39,14 +58,23 @@ msgstr "Download abgeschloßen."
 msgid "ETA %d:%02d min"
 msgstr ""
 
+msgid "Enter URI of FTP Server:"
+msgstr "URI des FTP-Server angeben:"
+
 msgid "Error during download."
 msgstr "Fehlerhafter Download."
 
-msgid "Not yet implemented."
-msgstr "Noch nicht implementiert."
+msgid "Local"
+msgstr "Lokal"
 
 msgid "Parent Directory"
 msgstr "übergeordnetes Verzeichnis"
+
+msgid "Remote"
+msgstr "FTP"
+
+msgid "Run in Background"
+msgstr "Plugin in den Hintergrund"
 
 msgid "Select local file list"
 msgstr "Lokale Dateiliste auswählen"
@@ -54,11 +82,27 @@ msgstr "Lokale Dateiliste auswählen"
 msgid "Select remote file list"
 msgstr "Entfernte Dateiliste auswählen"
 
+msgid ""
+"There already is an active connection.\n"
+"Do you want to abort it?"
+msgstr ""
+"Es ist bereits eine Verbindung aktiv.\n"
+"Soll diese unterbrochen werden?"
+
 msgid "There already is an active transfer."
 msgstr "Es ist bereits ein Transfer aktiv."
+
+msgid "Upload finished."
+msgstr "Upload abgeschloßen."
+
+msgid "Which server do you want to connect to?"
+msgstr "Zu welchem Server möchten Sie sich verbinden?"
 
 msgid "close"
 msgstr "Schließen"
 
 msgid "enter directory/get file/put file"
 msgstr "Verzeichnis betreten/Datei herunterladen/Datei hochladen"
+
+msgid "open menu"
+msgstr "Menü öffnen"
