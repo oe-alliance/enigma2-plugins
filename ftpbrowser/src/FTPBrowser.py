@@ -11,6 +11,7 @@ from Tools.Notifications import AddPopup
 
 # GUI (Screens)
 from Screens.Screen import Screen
+from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications
@@ -143,7 +144,7 @@ class FTPFileList(FileList):
 			self.list = []
 		self.l.setList(self.list)
 
-class FTPBrowser(Screen, Protocol, InfoBarNotifications):
+class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 	skin = """
 		<screen name="FTPBrowser" position="center,center" size="560,440" title="FTP Browser">
 			<widget name="localText" position="20,10" size="200,20" font="Regular;18" />
@@ -164,6 +165,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
 		InfoBarNotifications.__init__(self)
 		self.ftpclient = None
 		self.file = None
