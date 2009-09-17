@@ -1,9 +1,9 @@
 Package: enigma2-plugin-extensions-ftpbrowser
-Version: 0.1-20090913-r0
+Version: 0.2-20090917-r0
 Description: FTP-Browser-Plugin for Enigma2
 Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
 Homepage: http://www.ritzmo.de
-Depends: enigma2(>=2.6git20090000), twisted-protocols, python-shell
+Depends: enigma2(>=2.6git20090615), twisted, python-shell
