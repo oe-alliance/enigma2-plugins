@@ -16,6 +16,7 @@ config.plugins.KiddyTimer.position_y = ConfigInteger(default=35)
 config.plugins.KiddyTimer.timerStyle = ConfigSelection(choices = [("clock", _("Clock")), ("smiley", _("Smiley"))])
 config.plugins.KiddyTimer.lastStartDay = ConfigText(default="")
 config.plugins.KiddyTimer.monitorEndTime = ConfigClock(default=KTglob.EIGHTOCLOCKNOON)
+config.plugins.KiddyTimer.activationDialogTimeout = ConfigInteger(default=10)
 config.plugins.KiddyTimer.pin = ConfigPIN(default = 1111 , censor = "*")
 config.plugins.KiddyTimer.remainingTime = ConfigInteger(default=int(KTglob.ONEHOUR), limits = (0,86400) )
 

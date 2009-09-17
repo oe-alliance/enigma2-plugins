@@ -102,7 +102,8 @@ class KiddyTimer():
                 self.calculateTimer()
     
     def askForActivation(self):
-        Notifications.AddNotificationWithCallback(self.activationCallback, MessageBox, _("Do you want to start the kiddytimer- plugin now."), MessageBox.TYPE_YESNO, 5)
+        iTimeOut = config.plugins.KiddyTimer.activationDialogTimeout.getValue()
+        Notifications.AddNotificationWithCallback(self.activationCallback, MessageBox, _("Do you want to start the kiddytimer- plugin now."), MessageBox.TYPE_YESNO, iTimeOut)
 
     def activationCallback(self, value):
         self.setDialogStatus(self.timerHasToRun())
