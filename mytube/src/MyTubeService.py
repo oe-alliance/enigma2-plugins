@@ -100,7 +100,12 @@ class MyTubeFeedEntry():
 		#print "[MyTubeFeedEntry] getTubeId"
 		ret = None
 		if self.entry.media.player:
-			ret = self.entry.media.player.url.split("=").pop()
+			split = self.entry.media.player.url.split("=")
+			ret = split.pop()
+			if ret == 'youtube_gdata':
+				tmpval=split.pop()
+				if tmpval.endswith("&feature"):
+					ret = tmpval.strip("&feature")
 		return ret
 
 	def getTitle(self):
