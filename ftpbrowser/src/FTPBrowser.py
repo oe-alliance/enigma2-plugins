@@ -138,6 +138,7 @@ class FTPFileList(FileList):
 				i += 1
 
 	def listFailed(self, *args):
+		# XXX: we might end up here if login fails, we might want to add some check for this (e.g. send a dummy command before doing actual work)
 		if self.current_directory != "/":
 			self.list = [FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-2]) + '/', isDir = True)]
 		else:
@@ -185,7 +186,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self["eta"] = Label("")
 		self["speed"] = Label("")
 		self["progress"] = VariableProgressSource()
-		self["key_red"] = Button("")
+		self["key_red"] = Button(_("Exit"))
 		self["key_green"] = Button("")
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
@@ -466,13 +467,14 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 	def disconnect(self):
 		if self.ftpclient:
+			# XXX: according to the docs we should wait for the servers answer to our quit request, we just hope everything goes well here
 			self.ftpclient.quit()
 			self.ftpclient = None
 			self["remote"].ftpclient = None
 
 	def connect(self, address):
-		self.ftpclient = None
-		self["remote"].ftpclient = None
+		self.disconnect()
+
 		self.URI = address
 
 		scheme, host, port, path, username, password = _parse(address)
@@ -485,8 +487,8 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 		timeout = 30 # TODO: make configurable
 		passive = True # TODO: make configurable
-		creator = ClientCreator(reactor, FTPClient, username, password, passive = passive)
 
+		creator = ClientCreator(reactor, FTPClient, username, password, passive = passive)
 		creator.connectTCP(host, port, timeout).addCallback(self.controlConnectionMade).addErrback(self.connectionFailed)
 
 	def controlConnectionMade(self, ftpclient):
@@ -500,7 +502,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 	def connectionFailed(self, *args):
 		print "[FTPBrowser] connection failed", args
 
-		self.URI = ""
+		self.URI = "ftp://"
 		self.session.open(
 				MessageBox,
 				_("Could not connect to ftp server!"),
