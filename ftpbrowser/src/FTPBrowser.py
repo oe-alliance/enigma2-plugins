@@ -217,6 +217,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 	def reinitialize(self):
 		# NOTE: this will clear the remote file list if we are not currently connected. this behavior is intended.
+		# XXX: but do we also want to do this when we just returned from a notification?
 		self["remote"].refresh()
 		self["local"].refresh()
 
@@ -498,6 +499,8 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 	def connectionFailed(self, *args):
 		print "[FTPBrowser] connection failed", args
+
+		self.URI = ""
 		self.session.open(
 				MessageBox,
 				_("Could not connect to ftp server!"),
