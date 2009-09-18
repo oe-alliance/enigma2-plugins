@@ -1,6 +1,6 @@
 Package: enigma2-plugin-extensions-epgrefresh
 Version: 0.2.0-20090123-r0
-Description: Plugin to refresh EPG Data when Reciever is inactive
+Description: Plugin to refresh EPG Data when Receiver is inactive
 Architecture: mipsel
 Section: extra
 Priority: optional

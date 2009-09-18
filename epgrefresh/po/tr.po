@@ -64,7 +64,7 @@ msgid "Editing"
 msgstr "Düzenleniyor"
 
 #: ../src/EPGRefreshConfiguration.py:56
-msgid "Force scan even if reciever is in use"
+msgid "Force scan even if receiver is in use"
 msgstr "Alıcı kullanılırken dahi aramaya zorla"
 
 #: ../src/EPGRefreshConfiguration.py:57
