@@ -154,11 +154,13 @@ class EPGSearchVirtualKeyBoard(VirtualKeyBoard, NumericalTextInput):
 	def backClicked(self):
 		self.nextKey()
 		self.editing = False
+		self["text"].setMarkedPos(-1)
 		VirtualKeyBoard.backClicked(self)
 
 	def okClicked(self):
 		self.nextKey()
 		self.editing = False
+		self["text"].setMarkedPos(-1)
 		VirtualKeyBoard.okClicked(self)
 
 	def keyNumberGlobal(self, number):
@@ -166,11 +168,13 @@ class EPGSearchVirtualKeyBoard(VirtualKeyBoard, NumericalTextInput):
 		if not self.editing:
 			self.text = self["text"].getText()
 			self.editing = True
+			self["text"].setMarkedPos(len(self.text))
 		self["text"].setText(self.text + unichar.encode('utf-8', 'ignore'))
 
 	def nextFunc(self):
 		self.text = self["text"].getText()
 		self.editing = False
+		self["text"].setMarkedPos(-1)
 
 # main class of plugin
 class EPGSearch(EPGSelection):
