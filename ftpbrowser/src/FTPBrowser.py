@@ -464,9 +464,10 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self[self.currlist].pageDown()
 
 	def disconnect(self):
-		self.ftpclient.quit()
-		self.ftpclient = None
-		self["remote"].ftpclient = None
+		if self.ftpclient:
+			self.ftpclient.quit()
+			self.ftpclient = None
+			self["remote"].ftpclient = None
 
 	def connect(self, address):
 		self.ftpclient = None
