@@ -104,9 +104,13 @@ class FTPFileList(FileList):
 	def __init__(self):
 		self.ftpclient = None
 		self.select = None
+		self.isValid = False
 		FileList.__init__(self, "/")
 
 	def changeDir(self, directory, select = None):
+		if not directory:
+			return
+
 		if self.ftpclient is None:
 			self.list = []
 			self.l.setList(self.list)
@@ -126,6 +130,7 @@ class FTPFileList(FileList):
 		if self.current_directory != "/":
 			list.insert(0, FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-2]) + '/', isDir = True))
 
+		self.isValid = True
 		self.l.setList(list)
 		self.list = list
 
@@ -144,9 +149,16 @@ class FTPFileList(FileList):
 	def listFailed(self, *args):
 		# XXX: we might end up here if login fails, we might want to add some check for this (e.g. send a dummy command before doing actual work)
 		if self.current_directory != "/":
-			self.list = [FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-2]) + '/', isDir = True)]
+			self.list = [
+				FileEntryComponent(name = "<" +_("Parent Directory") + ">", absolute = '/'.join(self.current_directory.split('/')[:-2]) + '/', isDir = True),
+				FileEntryComponent(name = "<" + _("Error") + ">", absolute = None, isDir = False),
+			]
 		else:
-			self.list = []
+			self.list = [
+				FileEntryComponent(name = "<" + _("Error") + ">", absolute = None, isDir = False),
+			]
+
+		self.isValid = False
 		self.l.setList(self.list)
 
 class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
@@ -298,7 +310,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 					return
 
 				remoteFile = self["remote"].getSelection()
-				if not remoteFile:
+				if not remoteFile or not remoteFile[0]:
 					return
 
 				absRemoteFile = remoteFile[0]
@@ -337,6 +349,9 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 						_("There already is an active transfer."),
 						type = MessageBox.TYPE_WARNING
 					)
+					return
+
+				if not self["remote"].isValid:
 					return
 
 				localFile = self["local"].getSelection()
