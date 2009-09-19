@@ -174,7 +174,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		InfoBarNotifications.__init__(self)
 		self.ftpclient = None
 		self.file = None
-		self.currlist = "remote"
+		self.currlist = "local"
 
 		# Init what we need for dl progress
 		self.currentLength = 0
@@ -185,7 +185,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 		self["localText"] = Label(_("Local"))
 		self["local"] = FileList("/media/hdd/", showMountpoints = False)
-		self["remoteText"] = Label(_("Remote"))
+		self["remoteText"] = Label(_("Remote (not connected)"))
 		self["remote"] = FTPFileList()
 		self["eta"] = Label("")
 		self["speed"] = Label("")
@@ -506,6 +506,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.ftpclient.quit()
 			self.ftpclient = None
 			self["remote"].ftpclient = None
+		self["remoteText"].setText(_("Remote (not connected)"))
 
 	def connectWrapper(self, ret):
 		if ret:
@@ -544,6 +545,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		print "[FTPBrowser] connection established"
 		self.ftpclient = ftpclient
 		self["remote"].ftpclient = ftpclient
+		self["remoteText"].setText(_("Remote"))
 
 		scheme, host, port, path, username, password = _parse(self.URI)
 		self["remote"].changeDir(path)
@@ -552,6 +554,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		print "[FTPBrowser] connection failed", args
 
 		self.URI = "ftp://"
+		self["remoteText"].setText(_("Remote (not connected)"))
 		self.session.open(
 				MessageBox,
 				_("Could not connect to ftp server!"),
