@@ -5,7 +5,6 @@ from enigma import eEPGCache, eServiceReference, RT_HALIGN_LEFT, \
 		RT_HALIGN_RIGHT, eListboxPythonMultiContent
 
 from Tools.LoadPixmap import LoadPixmap
-from Tools.NumericalTextInput import NumericalTextInput
 from ServiceReference import ServiceReference
 
 from Screens.ChannelSelection import SimpleChannelSelection
@@ -13,9 +12,9 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Screens.VirtualKeyBoard import VirtualKeyBoard
+from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.config import config
 from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_MULTI
@@ -127,55 +126,6 @@ class EPGSearchList(EPGList):
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, serviceref.getServiceName() + ": " + EventName))
 		return res
 
-# customized VirtualKeyBoard with NumericalTextInput
-class EPGSearchVirtualKeyBoard(VirtualKeyBoard, NumericalTextInput):
-	def __init__(self, session, title = ""):
-		VirtualKeyBoard.__init__(self, session, title = title)
-		NumericalTextInput.__init__(self, nextFunc = self.nextFunc)
-
-		self.skinName = "VirtualKeyBoard"
-
-		self["NumberActions"] = NumberActionMap(["NumberActions"],
-		{
-			"1": self.keyNumberGlobal,
-			"2": self.keyNumberGlobal,
-			"3": self.keyNumberGlobal,
-			"4": self.keyNumberGlobal,
-			"5": self.keyNumberGlobal,
-			"6": self.keyNumberGlobal,
-			"7": self.keyNumberGlobal,
-			"8": self.keyNumberGlobal,
-			"9": self.keyNumberGlobal,
-			"0": self.keyNumberGlobal
-		})
-
-		self.editing = False
-
-	def backClicked(self):
-		self.nextKey()
-		self.editing = False
-		self["text"].setMarkedPos(-1)
-		VirtualKeyBoard.backClicked(self)
-
-	def okClicked(self):
-		self.nextKey()
-		self.editing = False
-		self["text"].setMarkedPos(-1)
-		VirtualKeyBoard.okClicked(self)
-
-	def keyNumberGlobal(self, number):
-		unichar = self.getKey(number)
-		if not self.editing:
-			self.text = self["text"].getText()
-			self.editing = True
-			self["text"].setMarkedPos(len(self.text))
-		self["text"].setText(self.text + unichar.encode('utf-8', 'ignore'))
-
-	def nextFunc(self):
-		self.text = self["text"].getText()
-		self.editing = False
-		self["text"].setMarkedPos(-1)
-
 # main class of plugin
 class EPGSearch(EPGSelection):
 	def __init__(self, session, *args):
@@ -254,7 +204,7 @@ class EPGSearch(EPGSelection):
 	def yellowButtonPressed(self):
 		self.session.openWithCallback(
 			self.searchEPG,
-			EPGSearchVirtualKeyBoard,
+			NTIVirtualKeyBoard,
 			title = _("Enter text to search for")
 		)
 
