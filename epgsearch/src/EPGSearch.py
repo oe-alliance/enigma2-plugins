@@ -24,20 +24,15 @@ from Components.Sources.Event import Event
 
 from time import localtime
 
-# Partnerbox installed?
+# Partnerbox installed and icons in epglist enabled?
 try:
 	from Plugins.Extensions.Partnerbox.PartnerboxEPGList import \
 			isInRemoteTimer, getRemoteClockPixmap
-	from Plugins.Extensions.Partnerbox.PartnerboxFunctions import \
-			SetPartnerboxTimerlist, isInTimerList, sendPartnerBoxWebCommand, \
-			FillE1TimerList, FillE2TimerList
-	import Plugins.Extensions.Partnerbox.PartnerboxFunctions \
-			as partnerboxfunctions
 	from Plugins.Extensions.Partnerbox.PartnerboxSetup import \
-			PartnerboxEntriesListConfigScreen
-	PartnerBoxInstalled = True
+			showPartnerboxIconsinEPGList
+	PartnerBoxIconsEnabled = showPartnerboxIconsinEPGList()
 except:
-	PartnerBoxInstalled = False
+	PartnerBoxIconsEnabled = False
 
 # AutoTimer installed?
 try:
@@ -79,7 +74,7 @@ class EPGSearchList(EPGList):
 		EPGList.__init__(self, type, selChangedCB, timer)
 		self.l.setBuildFunc(self.buildEPGSearchEntry)
 
-		if PartnerBoxInstalled:
+		if PartnerBoxIconsEnabled:
 			# Partnerbox Clock Icons
 			self.remote_clock_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock.png')
 			self.remote_clock_add_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock_add.png')
@@ -90,7 +85,7 @@ class EPGSearchList(EPGList):
 	def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
 		rec1 = beginTime and self.timer.isInTimer(eventId, beginTime, duration, service)
 		# Partnerbox 
-		if PartnerBoxInstalled:
+		if PartnerBoxIconsEnabled:
 			rec2 = beginTime and isInRemoteTimer(self,beginTime, duration, service)
 		else:
 			rec2 = False
@@ -177,7 +172,7 @@ class EPGSearch(EPGSelection):
 # end stripped copy of EPGSelection.__init__
 
 		# Partnerbox
-		if PartnerBoxInstalled:
+		if PartnerBoxIconsEnabled:
 			EPGSelection.PartnerboxInit(self, False)
 
 	def onCreate(self):
@@ -193,7 +188,7 @@ class EPGSearch(EPGSelection):
 		del self.searchargs
 
 		# Partnerbox
-		if PartnerBoxInstalled:
+		if PartnerBoxIconsEnabled:
 			EPGSelection.GetPartnerboxTimerlist(self)
 
 	def closeScreen(self):
