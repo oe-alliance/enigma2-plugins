@@ -8,7 +8,6 @@ class RedirecToCurrentStreamResource(resource.Resource):
 	def __init__(self, session):
 		resource.Resource.__init__(self)
 		self.session = session
-		resource.Resource.__init__(self)
 
 	def render(self, request):
 		currentServiceRef = self.session.nav.getCurrentlyPlayingServiceReference()
@@ -16,7 +15,7 @@ class RedirecToCurrentStreamResource(resource.Resource):
 			sref = currentServiceRef.toString()
 		else:
 			sref = "N/A"
-		
+
 		request.redirect("http://%s:8001/%s" % (request.getHost().host, sref))
 		request.finish()
 		return server.NOT_DONE_YET
