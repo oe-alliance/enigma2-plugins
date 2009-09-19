@@ -2,6 +2,15 @@
 # POC FTP Browser for Enigma2
 #
 
+# for localized messages  	 
+from . import _
+
+# Config
+from Components.config import config, ConfigSet, ConfigSubsection, ConfigText
+
+config.plugins.ftpbrowser = ConfigSubsection()
+config.plugins.ftpbrowser.history = ConfigSet(choices = [])
+
 from FTPBrowser import FTPBrowser
 
 ftpbrowser = None

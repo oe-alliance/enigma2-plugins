@@ -15,6 +15,7 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications
+from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 # GUI (Components)
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -35,6 +36,9 @@ from urlparse import urlparse, urlunparse
 # System
 from os import path as os_path
 from time import time
+
+# Config
+from Components.config import config
 
 def _parse(url, defaultPort = None):
 	url = url.strip()
@@ -226,16 +230,45 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.connect(self.URI)
 		# XXX: Actually everything else should be taken care of... recheck this!
 
+	def menuCallback(self, ret):
+		ret and ret[1]()
+
+	def menu(self):
+		self.session.openWithCallback(
+			self.menuCallback,
+			ChoiceBox,
+			title = _("What do you want to do?"),
+			list = (
+				(_("Connect to server from history"), self.connectHistory),
+				(_("Connect to new server"), self.connectNew),
+			)
+		)
+
+	def connectHistory(self):
+		options = [(x, x) for x in config.plugins.ftpbrowser.history.value]
+
+		if options:
+			self.session.openWithCallback(
+				self.connectWrapper,
+				ChoiceBox,
+				title = _("Select server to connect to"),
+				list = options
+			)
+		else:
+			self.session.open(
+				MessageBox,
+				_("No history"),
+				type = MessageBox.TYPE_INFO
+			)
+
 	def inputCallback(self, res):
 		if res:
 			self.connect(res)
 
-	def menu(self):
-		# TODO: add more options, currently only input for URI
-		from Screens.InputBox import InputBox
+	def connectNew(self):
 		self.session.openWithCallback(
 			self.inputCallback,
-			InputBox,
+			NTIVirtualKeyBoard,
 			title = _("Enter URI of FTP Server:"),
 			text = self.URI,
 		)
@@ -437,6 +470,8 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.close()
 
 	def cancel(self):
+		config.plugins.ftpbrowser.save()
+
 		if self.file is not None:
 			self.session.openWithCallback(
 				self.cancelQuestion,
@@ -472,6 +507,10 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.ftpclient = None
 			self["remote"].ftpclient = None
 
+	def connectWrapper(self, ret):
+		if ret:
+			self.connect(ret[1])
+
 	def connect(self, address):
 		self.disconnect()
 
@@ -480,6 +519,16 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		scheme, host, port, path, username, password = _parse(address)
 		if not host:
 			return
+
+		# Maintain history
+		history = config.plugins.ftpbrowser.history.value
+		if address not in history:
+			history.insert(0, address)
+			if len(history) > 10:
+				history.pop(10)
+		else:
+			history.remove(address)
+			history.insert(0, address)
 
 		if not username:
 			username = 'anonymous'
