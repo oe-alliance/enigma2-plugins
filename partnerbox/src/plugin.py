@@ -573,7 +573,10 @@ class RemoteTimerChannelList(Screen):
 			self.EPGSelection()
 			
 	def Zap(self):
-		sel = self["channellist"].l.getCurrentSelection()[0]
+		sel = None
+		try:
+			sel = self["channellist"].l.getCurrentSelection()[0]
+		except:return
 		if sel is None:
 			return
 		self["channellist"].instance.hide()
@@ -693,7 +696,6 @@ class RemoteTimerChannelList(Screen):
 		root = xml.etree.cElementTree.fromstring(self.E1XMLString)
 		for bouquets in root.findall("bouquet"):
 			tempref = str(bouquets.findtext("reference", '').encode("utf-8", 'ignore'))
-			print "----------->tempref = %s, service = %s"%(tempref, self.servicereference)
 			if tempref == self.servicereference:
 				for services in bouquets.findall("service"):
 					servicereference = str(services.findtext("reference", '').encode("utf-8", 'ignore'))
