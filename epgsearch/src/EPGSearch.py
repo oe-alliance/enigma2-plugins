@@ -31,7 +31,7 @@ try:
 	from Plugins.Extensions.Partnerbox.PartnerboxSetup import \
 			showPartnerboxIconsinEPGList
 	PartnerBoxIconsEnabled = showPartnerboxIconsinEPGList()
-except:
+except ImportError:
 	PartnerBoxIconsEnabled = False
 
 # AutoTimer installed?
