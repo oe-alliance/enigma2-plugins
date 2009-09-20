@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-16 19:12+0200\n"
-"PO-Revision-Date: 2009-09-15 19:15+0200\n"
+"POT-Creation-Date: 2009-09-20 13:24+0200\n"
+"PO-Revision-Date: 2009-09-20 13:27+0200\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -42,14 +42,26 @@ msgstr ""
 msgid "Abort transfer"
 msgstr "Transfer abbrechen"
 
+msgid "Add"
+msgstr "Hinzufügen"
+
+msgid "Address:"
+msgstr "Adresse:"
+
 msgid "Cancel"
 msgstr "Abbrechen"
+
+msgid "Configuration saved."
+msgstr "Konfiguration gesichert."
 
 msgid "Connect to FTP..."
 msgstr "Zu FTP verbinden..."
 
 msgid "Could not connect to ftp server!"
 msgstr "Konnte nicht mit FTP-Server verbinden!"
+
+msgid "Delete"
+msgstr "Löschen"
 
 msgid "Download finished."
 msgstr "Download abgeschloßen."
@@ -58,23 +70,66 @@ msgstr "Download abgeschloßen."
 msgid "ETA %d:%02d min"
 msgstr ""
 
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Enter URI"
+msgstr "URI eingeben"
+
 msgid "Enter URI of FTP Server:"
 msgstr "URI des FTP-Server angeben:"
+
+msgid "Error"
+msgstr "Fehler"
 
 msgid "Error during download."
 msgstr "Fehlerhafter Download."
 
+msgid "Exit"
+msgstr "Beenden"
+
+msgid "FTP Server Editor"
+msgstr "FTP-Server Editor"
+
+msgid "FTP Server Manager"
+msgstr "FTP-Server Verwaltung"
+
 msgid "Local"
 msgstr "Lokal"
+
+msgid "Name:"
+msgstr "Name:"
+
+msgid "OK"
+msgstr "OK"
 
 msgid "Parent Directory"
 msgstr "übergeordnetes Verzeichnis"
 
+msgid "Password:"
+msgstr "Passwort:"
+
+msgid "Port:"
+msgstr "Port:"
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Diesen Eintrag wirklich entfernen?\n"
+"Diese Aktion ist unwiderruflich!"
+
 msgid "Remote"
 msgstr "FTP"
 
+msgid "Remote (not connected)"
+msgstr "FTP (nicht verbunden)"
+
 msgid "Run in Background"
 msgstr "Plugin in den Hintergrund"
+
+msgid "Save"
+msgstr "Sichern"
 
 msgid "Select local file list"
 msgstr "Lokale Dateiliste auswählen"
@@ -94,6 +149,9 @@ msgstr "Es ist bereits ein Transfer aktiv."
 
 msgid "Upload finished."
 msgstr "Upload abgeschloßen."
+
+msgid "Username:"
+msgstr "Benutzername:"
 
 msgid "Which server do you want to connect to?"
 msgstr "Zu welchem Server möchten Sie sich verbinden?"
