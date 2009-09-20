@@ -15,7 +15,7 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications
-from NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from FTPServerManager import FTPServerManager
 
 # GUI (Components)
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -30,50 +30,9 @@ from twisted.internet.protocol import Protocol, ClientCreator
 from twisted.protocols.ftp import FTPClient, FTPFileListProtocol
 from twisted.protocols.basic import FileSender
 
-# For new and improved _parse
-from urlparse import urlparse, urlunparse
-
 # System
 from os import path as os_path
 from time import time
-
-# Config
-from Components.config import config
-
-def _parse(url, defaultPort = None):
-	url = url.strip()
-	parsed = urlparse(url)
-	scheme = parsed[0]
-	path = urlunparse(('','')+parsed[2:])
-
-	if defaultPort is None:
-		if scheme == 'https':
-			defaultPort = 443
-		elif scheme == 'ftp':
-			defaultPort = 21
-		else:
-			defaultPort = 80
-
-	host, port = parsed[1], defaultPort
-
-	if '@' in host:
-		username, host = host.split('@')
-		if ':' in username:
-			username, password = username.split(':')
-		else:
-			password = ""
-	else:
-		username = ""
-		password = ""
-
-	if ':' in host:
-		host, port = host.split(':')
-		port = int(port)
-
-	if path == "":
-		path = "/"
-
-	return scheme, host, port, path, username, password
 
 def FTPFileEntryComponent(file, directory):
 	isDir = True if file['filetype'] == 'd' else False
@@ -207,7 +166,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
 
-		self.URI = "ftp://"
+		self.server = None
 
 		self["ftpbrowserBaseActions"] = HelpableActionMap(self, "ftpbrowserBaseActions",
 			{
@@ -239,50 +198,17 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self["local"].refresh()
 
 		if not self.ftpclient:
-			self.connect(self.URI)
+			self.connect(self.server)
 		# XXX: Actually everything else should be taken care of... recheck this!
 
-	def menuCallback(self, ret):
-		ret and ret[1]()
+	def managerCallback(self, uri):
+		if uri:
+			self.connect(uri)
 
 	def menu(self):
 		self.session.openWithCallback(
-			self.menuCallback,
-			ChoiceBox,
-			title = _("What do you want to do?"),
-			list = (
-				(_("Connect to server from history"), self.connectHistory),
-				(_("Connect to new server"), self.connectNew),
-			)
-		)
-
-	def connectHistory(self):
-		options = [(x, x) for x in config.plugins.ftpbrowser.history.value]
-
-		if options:
-			self.session.openWithCallback(
-				self.connectWrapper,
-				ChoiceBox,
-				title = _("Select server to connect to"),
-				list = options
-			)
-		else:
-			self.session.open(
-				MessageBox,
-				_("No history"),
-				type = MessageBox.TYPE_INFO
-			)
-
-	def inputCallback(self, res):
-		if res:
-			self.connect(res)
-
-	def connectNew(self):
-		self.session.openWithCallback(
-			self.inputCallback,
-			NTIVirtualKeyBoard,
-			title = _("Enter URI of FTP Server:"),
-			text = self.URI,
+			self.managerCallback,
+			FTPServerManager,
 		)
 
 	def setLocal(self):
@@ -485,8 +411,6 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.close()
 
 	def cancel(self):
-		config.plugins.ftpbrowser.save()
-
 		if self.file is not None:
 			self.session.openWithCallback(
 				self.cancelQuestion,
@@ -527,31 +451,27 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		if ret:
 			self.connect(ret[1])
 
-	def connect(self, address):
+	def connect(self, server):
 		self.disconnect()
 
-		self.URI = address
+		self.server = server
 
-		scheme, host, port, path, username, password = _parse(address)
-		if not host:
+		if not server:
 			return
 
-		# Maintain history
-		history = config.plugins.ftpbrowser.history.value
-		if address not in history:
-			history.insert(0, address)
-			if len(history) > 10:
-				history.pop(10)
-		else:
-			history.remove(address)
-			history.insert(0, address)
-
+		username = server.getUsername()
 		if not username:
 			username = 'anonymous'
 			password = 'my@email.com'
+		else:
+			password = server.getPassword()
 
+		host = server.getAddress()
+		passive = server.getPassive()
+		port = server.getPort()
 		timeout = 30 # TODO: make configurable
-		passive = True # TODO: make configurable
+
+		# XXX: we might want to add a guard so we don't try to connect to another host while a previous attempt is not timed out
 
 		creator = ClientCreator(reactor, FTPClient, username, password, passive = passive)
 		creator.connectTCP(host, port, timeout).addCallback(self.controlConnectionMade).addErrback(self.connectionFailed)
@@ -562,13 +482,12 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self["remote"].ftpclient = ftpclient
 		self["remoteText"].setText(_("Remote"))
 
-		scheme, host, port, path, username, password = _parse(self.URI)
-		self["remote"].changeDir(path)
+		self["remote"].changeDir(self.server.getPath())
 
 	def connectionFailed(self, *args):
 		print "[FTPBrowser] connection failed", args
 
-		self.URI = "ftp://"
+		self.server = None
 		self["remoteText"].setText(_("Remote (not connected)"))
 		self.session.open(
 				MessageBox,

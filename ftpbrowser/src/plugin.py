@@ -6,10 +6,27 @@
 from . import _
 
 # Config
-from Components.config import config, ConfigSet, ConfigSubsection, ConfigText
+from Components.config import config, ConfigInteger, ConfigSubList, \
+		ConfigSubsection, ConfigText, ConfigPassword, ConfigYesNo
 
 config.plugins.ftpbrowser = ConfigSubsection()
-config.plugins.ftpbrowser.history = ConfigSet(choices = [])
+config.plugins.ftpbrowser.server = ConfigSubList()
+config.plugins.ftpbrowser.servercount = ConfigInteger(0)
+i = 0
+append = config.plugins.ftpbrowser.server.append
+while i < config.plugins.ftpbrowser.servercount.value:
+	newServer = ConfigSubsection()
+	append(newServer)
+	newServer.name = ConfigText("Name", fixed_size=False)
+	newServer.address = ConfigText("192.168.2.12", fixed_size=False)
+	newServer.username = ConfigText("root", fixed_size=False)
+	newServer.password = ConfigPassword("dreambox")
+	newServer.port = ConfigInteger(21, (1, 65535))
+	newServer.passive = ConfigYesNo(False)
+	i += 1
+	del newServer
+
+del append, i
 
 from FTPBrowser import FTPBrowser
 
