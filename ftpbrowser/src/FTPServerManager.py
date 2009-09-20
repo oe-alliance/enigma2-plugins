@@ -96,11 +96,12 @@ class FTPServer:
 	def cancel(self):
 		self.cfg.cancel()
 
-def ftpserverFromURI(uri, name = ""):
+def ftpserverFromURI(uri, name = "", save = True):
 	scheme, host, port, path, username, password = _parse(uri, defaultPort = 21)
 	
 	newServer = ConfigSubsection()
-	config.plugins.ftpbrowser.server.append(newServer)
+	if save:
+		config.plugins.ftpbrowser.server.append(newServer)
 	newServer.name = ConfigText(fixed_size = False)
 	newServer.name.value = name or host
 	newServer.address = ConfigText(fixed_size = False)
@@ -113,11 +114,12 @@ def ftpserverFromURI(uri, name = ""):
 	newServer.port.value = port
 	newServer.passive = ConfigYesNo(False)
 
-	newServer.save()
-	config.plugins.ftpbrowser.servercount.value += 1
-	config.plugins.ftpbrowser.servercount.save()
+	if save:
+		newServer.save()
+		config.plugins.ftpbrowser.servercount.value += 1
+		config.plugins.ftpbrowser.servercount.save()
 
-	return newServer
+	return FTPServer(newServer)
 
 class FTPServerEditor(ConfigListScreen, Screen):
 	skin = """

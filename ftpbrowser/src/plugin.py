@@ -29,6 +29,7 @@ while i < config.plugins.ftpbrowser.servercount.value:
 del append, i
 
 from FTPBrowser import FTPBrowser
+from FTPServerManager import ftpserverFromURI
 
 ftpbrowser = None
 
@@ -46,7 +47,7 @@ def main(session, **kwargs):
 def filescan_chosen(session, item):
 	if item:
 		createSingleton(session)
-		ftpbrowser.connect(item[1])
+		ftpbrowser.connect(ftpserverFromURI(item[1], save = False))
 		session.execDialog(ftpbrowser)
 
 def filescan_open_connected(res, items, session, **kwargs):
