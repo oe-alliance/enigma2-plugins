@@ -412,7 +412,7 @@ class EmailScreen(Screen, EmailHandler):
 			color = 0x00FF6666 # redish :)
 		else:
 			font = 2
-			color = 0x00CCCCCC # grey
+			color = 0x00888888 # grey
 		return [
 			message,
 			MultiContentEntryText(pos=(5, 0), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.getSenderString(), color=color, color_sel=color),
