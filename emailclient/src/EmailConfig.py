@@ -4,47 +4,77 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 
+from enigma import getDesktop
+DESKTOP_WIDTH = getDesktop(0).size().width()
+DESKTOP_HEIGHT = getDesktop(0).size().height()
+def scaleH(y2, y1):
+	if y2 == -1:
+		y2 = y1*1280/720
+	elif y1 == -1:
+		y1 = y2*720/1280
+	return scale(y2, y1, 1280, 720, DESKTOP_WIDTH)
+def scaleV(y2, y1):
+	if y2 == -1:
+		y2 = y1*720/576
+	elif y1 == -1:
+		y1 = y2*576/720
+	return scale(y2, y1, 720, 576, DESKTOP_HEIGHT)
+def scale(y2, y1, x2, x1, x):
+	return (y2 - y1) * (x - x1) / (x2 - x1) + y1
+
 class EmailConfigScreen(ConfigListScreen,Screen):
-    skin = """
-        <screen position="100,100" size="550,400" title="Email Setup" >
-        <widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
-        <widget name="buttonred" position="10,360" size="100,40" backgroundColor="red" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
-        <widget name="buttongreen" position="120,360" size="100,40" backgroundColor="green" valign="center" halign="center" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
-        <widget name="info" position="240,360" size="100,40" halign="right" zPosition="2"  foregroundColor="white" font="Regular;18"/> 
-        </screen>"""
+	width = max(2*140+100, 550)
+	height = 5*30+50
+	buttonsGap = (width-2*140)/3
+	skin = """
+		<screen position="%d,%d" size="%d,%d" title="Email Setup" >
+		<widget name="config" position="0,0" size="%d,%d" scrollbarMode="showOnDemand" />
+		<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<widget name="buttonred" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="buttongreen" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="info" position="%d,%d" size="100,40" halign="right" zPosition="2"  foregroundColor="white" font="Regular;%d"/> 
+		</screen>""" %(
+					(DESKTOP_WIDTH-width)/2, (DESKTOP_HEIGHT-height)/2, width, height,
+					width, height-50,  # config
+					buttonsGap, height-45,
+					2*buttonsGap+140, height-45,
+					buttonsGap, height-45, scaleV(22,18),
+					2*buttonsGap+140, height-45, scaleV(22,18),
+					3*buttonsGap+2*140, height-45, scaleV(22,18)
+					)
 
-    def __init__(self, session, args = 0):
-        Screen.__init__(self, session)
-        l = [
-            getConfigListEntry(_("Username"), config.plugins.emailimap.username),
-            getConfigListEntry(_("Password"), config.plugins.emailimap.password),
-            getConfigListEntry(_("IMAP Server"), config.plugins.emailimap.server),
-            getConfigListEntry(_("IMAP Port"), config.plugins.emailimap.port),
-            getConfigListEntry(_("max of Headers to load"), config.plugins.emailimap.maxheadertoload)
-        ]
-        
-        ConfigListScreen.__init__(self, l)
-        self["buttonred"] = Label(_("cancel"))
-        self["buttongreen"] = Label(_("ok"))
-        self["info"] = Label('by 3c5x9')
-        self["setupActions"] = ActionMap(["SetupActions"],
-        {
-            "green": self.save,
-            "red": self.cancel,
-            "save": self.save,
-            "cancel": self.cancel,
-            "ok": self.save,
-        }, -2)
+	def __init__(self, session, args = 0):
+		Screen.__init__(self, session)
+		l = [
+			getConfigListEntry(_("Username"), config.plugins.emailimap.username),
+			getConfigListEntry(_("Password"), config.plugins.emailimap.password),
+			getConfigListEntry(_("IMAP Server"), config.plugins.emailimap.server),
+			getConfigListEntry(_("IMAP Port"), config.plugins.emailimap.port),
+			getConfigListEntry(_("max of Headers to load"), config.plugins.emailimap.maxheadertoload)
+		]
+		
+		ConfigListScreen.__init__(self, l)
+		self["buttonred"] = Label(_("cancel"))
+		self["buttongreen"] = Label(_("ok"))
+		self["info"] = Label('by 3c5x9')
+		self["setupActions"] = ActionMap(["SetupActions"],
+		{
+			"green": self.save,
+			"red": self.cancel,
+			"save": self.save,
+			"cancel": self.cancel,
+			"ok": self.save,
+		}, -2)
 
-    def save(self):
-        print "saving"
-        for x in self["config"].list:
-            x[1].save()
-        self.close(True)
+	def save(self):
+		print "saving"
+		for x in self["config"].list:
+			x[1].save()
+		self.close(True)
 
-    def cancel(self):
-        print "cancel"
-        for x in self["config"].list:
-            x[1].cancel()
-        self.close(False)
-
+	def cancel(self):
+		print "cancel"
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close(False)
