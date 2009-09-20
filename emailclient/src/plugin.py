@@ -215,7 +215,11 @@ class EmailScreen(Screen, EmailHandler):
 	def onMessageLoaded(self, result, message, proto):
 		self["infolabel"].setText("parsing message")
 		print "onMessageLoaded"#,result,message
-		msgstr = result[message.uid]['RFC822']
+		try:
+			msgstr = result[message.uid]['RFC822']
+		except KeyError:
+			self.loadMessage(message)
+			return
 		msg = email.Parser.Parser().parsestr(msgstr)
 		msg.messagebodys = []
 		msg.attachments = []
@@ -405,7 +409,7 @@ class EmailScreen(Screen, EmailHandler):
 			color = 0x00FFFFFF # white
 		elif state == IS_DELETED:
 			font = 1 
-			color = 0x00FF4444 # redish :)
+			color = 0x00FF6666 # redish :)
 		else:
 			font = 2
 			color = 0x00CCCCCC # grey
