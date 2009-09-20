@@ -4,10 +4,10 @@ from Components.HTMLComponent import HTMLComponent
 from Components.Label import Label
 from Screens.MessageBox import MessageBox
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText
+from Components.MultiContent import MultiContentEntryText, MultiContentTemplateColor
 from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
-from Components.config import config, ConfigSubsection, ConfigInteger, ConfigText
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigText, ConfigEnableDisable
 from EmailConfig import EmailConfigScreen
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
@@ -26,6 +26,7 @@ config.plugins.emailimap.username = ConfigText("user", fixed_size=False)
 config.plugins.emailimap.password = ConfigText("password", fixed_size=False)
 config.plugins.emailimap.server = ConfigText("please.config.first", fixed_size=False)
 config.plugins.emailimap.port = ConfigInteger(143, limits = (1, 65536))
+config.plugins.emailimap.showDeleted = ConfigEnableDisable(default=False)
 
 # 0= fetch all header , 10= fetch only the last 10 headers/messages of a mailbox
 config.plugins.emailimap.maxheadertoload = ConfigInteger(0, limits = (1, 100))
@@ -58,15 +59,25 @@ def scale(y2, y1, x2, x1, x):
 def decodeHeader(text, default=''):
 	if text is None:
 		return _(default)
+	text = text.replace('\r',' ').replace('\n',' ').replace('\t',' ')
+	while text.find('  ') != -1:
+		text = text.replace('  ',' ')
 	textNew = ""
 	for part in decode_header(text):
 		(content, charset) = part
+		# print("decodeHeader content/charset: %s/%s" %(repr(content),charset))
 		if charset:
 			textNew += content.decode(charset)
 		else:
 			textNew += content
-	return textNew.encode('utf-8')
+	try:
+		return textNew.encode('utf-8')
+	except: # for faulty mail software systems
+		return textNew.decode('iso-8859-1').encode('utf-8')
 
+IS_UNSEEN = 0
+IS_SEEN = 1
+IS_DELETED = 2 
 
 class EmailHandler:
 	def __init__(self):
@@ -125,7 +136,7 @@ class EmailScreen(Screen, EmailHandler):
 		self.onLayoutFinish.append(self.selectBoxlist)
 
 	def action_menu(self):
-		self.session.open(EmailConfigScreen)
+		self.session.open(EmailConfigScreen).onHide.append(self.onBoxSelected)
 
 	def selectBoxlist(self):
 		self.currList = "boxlist"
@@ -158,7 +169,7 @@ class EmailScreen(Screen, EmailHandler):
 	def onBoxSelected(self):
 		c = self["boxlist"].getCurrent()
 		if c is not None:
-			self.proto.examine(UTF7toUTF8(c[1][2])
+			self.proto.select(UTF7toUTF8(c[1][2]) # select instead of examine to get write access
 							   ).addCallback(self.onExamine, c[0] , self.proto
 							  ).addErrback(self.onExamineFailed, self.proto
 							  )
@@ -225,7 +236,7 @@ class EmailScreen(Screen, EmailHandler):
 					msg.attachments.append(EmailAttachment(part.get_filename(), part.get_content_type(), part.get_payload()))
 		else:
 			msg.messagebodys.append(EmailBody(msg))
-		self.session.open(ScreenMailView, msg)
+		self.session.open(ScreenMailView, msg, message.uid, proto, self.flagsList[message.uid]['FLAGS']).onHide.append(self.onBoxSelected)
 
 	def onMessageLoadFailed(self, failure, message, proto):
 		print "onMessageLoadFailed", failure, message
@@ -233,10 +244,7 @@ class EmailScreen(Screen, EmailHandler):
 
 	def action_exit(self):
 		if self.proto is not None:
-			self.proto.logout(
-							).addCallback(self.onLogedOut, self.proto
-				).addErrback(self.onLogedOut, self.proto
-							)
+			self.proto.logout().addCallback(self.onLogedOut, self.proto).addErrback(self.onLogedOut, self.proto)
 		else:
 			self.close()
 
@@ -267,9 +275,8 @@ class EmailScreen(Screen, EmailHandler):
 	def onAuthentication(self, result, proto):
 		self.proto = proto
 		self["infolabel"].setText("logged in")
-		proto.list("", "*"
-		).addCallback(self.onMailboxList, proto
-		)
+		# better use LSUB here to get only the subscribed to mailboxes
+		proto.lsub("", "*").addCallback(self.onMailboxList, proto)
 
 	def doLogin(self, proto):
 		print "login secure"
@@ -308,11 +315,14 @@ class EmailScreen(Screen, EmailHandler):
 	def onMailboxList(self, result, proto):
 		print "onMailboxList", result, proto
 		list = []
+		inboxPos = 0
 		for i in result:
 			flags, hierarchy_delimiter, name = i #@UnusedVariable
 			list.append((UTF7toUTF8(name).encode('utf-8'), i))
-		self["boxlist"].l.setList(list)
-		# TODO: set current on INBOX? Or last mailbox (through config... item?
+			if name.lower() == 'inbox':
+				inboxPos = len(list)
+		self["boxlist"].setList(list)
+		self["boxlist"].moveToIndex(inboxPos-1)
 
 	def onExamine(self, result, mboxname, proto):
 		print "onExamine", result, mboxname
@@ -338,36 +348,72 @@ class EmailScreen(Screen, EmailHandler):
 #				proto.fetchEnvelope('%i:%i'%(rangeToFetch[0], rangeToFetch[1])	#'1:*'
 #						   ).addCallback(self.onEnvelopeList, proto
 #						   )
-				proto.fetchHeaders('%i:%i'%(rangeToFetch[0], rangeToFetch[1])	#'1:*'
-						   ).addCallback(self.onHeaderList, proto
-						   )
+				self.proto = proto
+				self.rangeToFetch = rangeToFetch
+				proto.fetchFlags('%i:%i'%(rangeToFetch[0], rangeToFetch[1])	#'1:*'
+						   ).addCallback(self.onFlagsList)
 
 			except imap4.IllegalServerResponse, e:
 				print e
+			self.selectMessagelist()
+
+	def onFlagsList(self, result):
+		self.flagsList = result
+		self.proto.fetchHeaders('%i:%i'%(self.rangeToFetch[0], self.rangeToFetch[1])	#'1:*'
+				   ).addCallback(self.onHeaderList, self.proto
+				   )
 
 	def onExamineFailed(self, failure, proto):
 		print "onExamineFailed", failure, proto
 		self["infolabel"].setText(failure.getErrorMessage())
+
+	def cbOk(self, result):
+		print("cbOk result: %s" %repr(result))
+
+	def cbNotOk(self, result):
+		print("cbNotOk result: %s" %(result))
 
 	def onHeaderList(self, result, proto):
 		print "onHeaderList"#,result,proto
 		self["infolabel"].setText("headers loaded, now parsing ...")
 		list = []
 		for m in result:
+			state = IS_UNSEEN
+			# print("onHeaderList :" + repr(self.flagsList[m]['FLAGS']))
+			if '\\Seen' in self.flagsList[m]['FLAGS']:
+				state = IS_SEEN
+			if '\\Deleted' in self.flagsList[m]['FLAGS']:
+				if not config.plugins.emailimap.showDeleted.value:
+					continue
+				else:
+					state = IS_DELETED
 			try:
-				list.append(self.buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER'])))
+				list.append(self.buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER']), state))
 			except Exception,e:
-				print e
+				try:
+					list.append(self.buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER'].decode('iso8859-1', 'replace'), state)))
+				except:
+					# this appear to be errors in the formatting of the mail itself...
+					print "onHeaderList error: %s with: %s" %(e,result[m]['RFC822.HEADER'])
 		list.reverse()
 		self["messagelist"].l.setList(list)
-		self["infolabel"].setText("have "+str(len(result))+" messages ")
+		self["infolabel"].setText("have "+str(len(list))+" messages ")
 
-	def buildMessageListItem(self, message):
+	def buildMessageListItem(self, message, state):
+		if state == IS_UNSEEN:
+			font = 0
+			color = 0x00FFFFFF # white
+		elif state == IS_DELETED:
+			font = 1 
+			color = 0x00FF4444 # redish :)
+		else:
+			font = 2
+			color = 0x00CCCCCC # grey
 		return [
 			message,
-			MultiContentEntryText(pos=(5, 0), size=(self.messagelistWidth, scaleV(20,18)+5), font=0, text=message.getSenderString()),
-			MultiContentEntryText(pos=(5, scaleV(20,18)+1), size=(self.messagelistWidth, scaleV(20,18)+5), font=0, text=message.get('date', default='kein Datum')),
-			MultiContentEntryText(pos=(5, 2*(scaleV(20,18)+1)), size=(self.messagelistWidth, scaleV(20,18)+5), font=0, text=message.getSubject())
+			MultiContentEntryText(pos=(5, 0), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.getSenderString(), color=color, color_sel=color),
+			MultiContentEntryText(pos=(5, scaleV(20,18)+1), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.get('date', default='kein Datum'), color=color, color_sel=color),
+			MultiContentEntryText(pos=(5, 2*(scaleV(20,18)+1)), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.getSubject(), color=color, color_sel=color)
 		]
 	#
 	# IMailboxListener methods
@@ -383,9 +429,10 @@ class EmailScreen(Screen, EmailHandler):
 
 class ScreenMailView(Screen):
 	skin=""
-	def __init__(self, session, email, args = 0):
+	def __init__(self, session, email, uid, proto, flags):
 		self.session = session
 		self.email = email
+		# print('ScreenMailView ' + repr(email) + ' dir: ' + repr(dir(email)))
 		width = max(4*140,scaleH(-1,550))
 		height = scaleV(-1,476)
 		fontSize = scaleV(24,20)
@@ -429,13 +476,18 @@ class ScreenMailView(Screen):
 		self["body"] = ScrollLabel(_(self.email.messagebodys[0].getData()))
 		self["buttonred"] = Button(_(""))
 		self["buttongreen"] = Button("")
-		self["buttonyellow"] = Button(_("Headers"))
-		self["buttonblue"] = Button(_("delete"))
+		# TODO: show headers
+		self["buttonyellow"] = Button("")
+		if '\\Deleted' in flags:
+			self["buttonblue"] = Button(_("undelete"))
+		else:
+			self["buttonblue"] = Button(_("delete"))
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "MenuActions", "ShortcutActions"],
 			{
 			 "back": self.close,
 			 "up": self["body"].pageUp,
 			 "down": self["body"].pageDown,
+			 # TODO: perhaps better use left/right for previous/next message
 			 "left": self["body"].pageUp,
 			 "right": self["body"].pageDown,
 			 "red": self.selectBody,
@@ -444,14 +496,32 @@ class ScreenMailView(Screen):
 			 "blue": self.delete,
 
 			 }, -1)
+		self.flags = flags
+		self.proto = proto
+		self.uid = uid
+		proto.fetchFlags(self.uid).addCallback(self.cbOk).addErrback(self.cbNotOk)
 		self.onLayoutFinish.append(self.updateButtons)
 
+	def cbOk(self, result):
+		print("cbOk result: %s" %repr(result))
+
+	def cbNotOk(self, result):
+		print("cbNotOk result: %s" %(result))
+
 	def delete(self):
-		pass #self.session.openWithCallback(self.deleteCB, ChoiceBox, title="really delete Mail?", list=[(_("yes"), True),(_("no"), False)])
+		if '\\Deleted' in self.flags:
+			self.session.openWithCallback(self.deleteCB, ChoiceBox, title=_("really undelete Mail?"), list=[(_("yes"), True),(_("no"), False)])
+		else:
+			self.session.openWithCallback(self.deleteCB, ChoiceBox, title=_("really delete Mail?"), list=[(_("yes"), True),(_("no"), False)])
 
 	def deleteCB(self, returnValue):
 		if returnValue[1] is True:
-			pass
+			if '\\Deleted' in self.flags:
+				self.proto.removeFlags(self.uid, ["\\Deleted"]).addCallback(self.cbOk).addErrback(self.cbNotOk)
+			else:
+				self.proto.addFlags(self.uid, ["\\Deleted"]).addCallback(self.cbOk).addErrback(self.cbNotOk)
+			print("deleteCB: %s"  %repr(self.email))
+			self.close()
 
 	def openMessagesHeaders(self):
 		pass #self.session.open(ScreenMailViewHeader,self.profil,self.email)
@@ -459,7 +529,7 @@ class ScreenMailView(Screen):
 	def updateButtons(self):
 		self["buttonred"].setText(_("Bodys"))
 		if len(self.email.attachments):
-			self["buttongreen"].setText("Attachments")
+			self["buttongreen"].setText(_("Attachments"))
 		else:
 			self["buttongreen"].setText("")
 
@@ -478,7 +548,12 @@ class ScreenMailView(Screen):
 		if len(self.email.attachments):
 			list = []
 			for a in self.email.attachments:
-				list.append((a.getFilename(), a))
+				name = a.getFilename()
+				if name:
+					list.append((a.getFilename(), a))
+				else:
+					list.append((_("no filename"), a))
+			print("selectAttachment : " + repr(list))
 			self.session.openWithCallback(self.selectAttachmentCB, ChoiceBox, _("select Attachment"), list)
 
 	def selectAttachmentCB(self, choice):
@@ -489,8 +564,9 @@ class ScreenMailView(Screen):
 class MailList(MenuList):
 	def __init__(self, list, enableWrapAround = False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", scaleV(20,18)))
-		self.l.setFont(1, gFont("Regular", scaleV(22,20)))
+		self.l.setFont(0, gFont("Regular", scaleV(20,18))) # new
+		self.l.setFont(1, gFont("Regular", scaleV(18,16))) # deleted
+		self.l.setFont(2, gFont("Regular", scaleV(18,16))) # seen
 
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
@@ -523,17 +599,26 @@ class EmailBody:
 
 	def getData(self):
 		text = self.data.get_payload(decode=True)
-		if self.getEncoding() is not None:
-			print "decoding text with charset ",self.getEncoding()
-			text = text.decode(self.getEncoding())
+		if self.getEncoding():
+			try:
+				text = text.decode(self.getEncoding())
+			except UnicodeDecodeError:
+				pass	
+		# print('EmailBody/getData text: ' +  text)
+		#=======================================================================
+		# if self.getEncoding():
+		#	text = text.decode(self.getEncoding())
+		#=======================================================================
 		if self.getContenttype() == "text/html":
 			print "stripping html"
 			text = strip_readable(text)
+			# print('EmailBody/getData text: ' +  text)
+
 		try:
 			return text.encode('utf-8')
-		except Exception,e:
-			print e
+		except UnicodeDecodeError:
 			return text
+		
 
 	def getContenttype(self):
 		return self.data.get_content_type()

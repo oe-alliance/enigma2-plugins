@@ -51,7 +51,8 @@ class EmailConfigScreen(ConfigListScreen,Screen):
 			getConfigListEntry(_("Password"), config.plugins.emailimap.password),
 			getConfigListEntry(_("IMAP Server"), config.plugins.emailimap.server),
 			getConfigListEntry(_("IMAP Port"), config.plugins.emailimap.port),
-			getConfigListEntry(_("max of Headers to load"), config.plugins.emailimap.maxheadertoload)
+			getConfigListEntry(_("max of Headers to load"), config.plugins.emailimap.maxheadertoload),
+			getConfigListEntry(_("show deleted entries"), config.plugins.emailimap.showDeleted)			
 		]
 		
 		ConfigListScreen.__init__(self, l)
