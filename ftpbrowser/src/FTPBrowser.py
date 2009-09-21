@@ -391,12 +391,20 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 	
 	def nextQueue(self):
 		if self.queue:
+			# NOTE: put this transfer back if there already is an active one,
+			# it will be picked up again when the active transfer is done
+			if self.file:
+				return
+
 			top = self.queue[0]
 			self.queue = self.queue[1:]
 			if top[0]:
 				self.getFile(*top[1:])
 			else:
 				self.putFile(*top[1:])
+		elif self.queue is not None:
+			self.queue = None
+			AddPopup(_("Queue processed."), MessageBox.TYPE_INFO, -1)
 
 	def transferListFailed(self, res = None):
 		self.queue = None
@@ -576,7 +584,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self.file = None
 
 	def putComplete(self, *args):
-		if self.queue:
+		if self.queue is not None:
 			self.file.close()
 			self.file = None
 
@@ -596,11 +604,11 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			MessageBox.TYPE_ERROR,
 			"remote"
 		)
-		if self.queue:
+		if self.queue is not None:
 			self.nextQueue()
 
 	def getFinished(self, *args):
-		if self.queue:
+		if self.queue is not None:
 			self.file.close()
 			self.file = None
 
@@ -620,7 +628,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			MessageBox.TYPE_ERROR,
 			"local"
 		)
-		if self.queue:
+		if self.queue is not None:
 			self.nextQueue()
 
 	def putProgress(self, chunk):
