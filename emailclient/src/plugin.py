@@ -478,10 +478,10 @@ class ScreenMailView(Screen):
 		self["date"] = Label(_("Date") +": %s" %self.email.get('date', 'no-date'))
 		self["subject"] = Label(decodeHeader(_("Subject") +": %s" %self.email.get('subject', 'no-subject')))
 		self["body"] = ScrollLabel(_(self.email.messagebodys[0].getData()))
+		# TODO: show headers
 		self["buttonred"] = Button(_(""))
 		self["buttongreen"] = Button("")
-		# TODO: show headers
-		self["buttonyellow"] = Button("")
+		self["buttonyellow"] = Button(_("leave unread"))
 		if '\\Deleted' in flags:
 			self["buttonblue"] = Button(_("undelete"))
 		else:
@@ -496,7 +496,7 @@ class ScreenMailView(Screen):
 			 "right": self["body"].pageDown,
 			 "red": self.selectBody,
 			 "green": self.selectAttachment,
-			 "yellow": self.openMessagesHeaders,
+			 "yellow": self.markUnread,
 			 "blue": self.delete,
 
 			 }, -1)
@@ -526,6 +526,10 @@ class ScreenMailView(Screen):
 				self.proto.addFlags(self.uid, ["\\Deleted"]).addCallback(self.cbOk).addErrback(self.cbNotOk)
 			print("deleteCB: %s"  %repr(self.email))
 			self.close()
+
+	def markUnread(self):
+		self.proto.removeFlags(self.uid, ["\\Seen"]).addCallback(self.cbOk).addErrback(self.cbNotOk)
+		self.close()
 
 	def openMessagesHeaders(self):
 		pass #self.session.open(ScreenMailViewHeader,self.profil,self.email)
