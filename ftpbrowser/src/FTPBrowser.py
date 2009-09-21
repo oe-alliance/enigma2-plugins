@@ -7,7 +7,7 @@ from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent
 # Tools
 from Tools.Directories import SCOPE_SKIN_IMAGE, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
-from Tools.Notifications import AddPopup
+from Tools.Notifications import AddPopup, AddNotificationWithCallback
 
 # GUI (Screens)
 from Screens.Screen import Screen
@@ -16,6 +16,7 @@ from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications
 from FTPServerManager import FTPServerManager
+from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 # GUI (Components)
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -31,7 +32,8 @@ from twisted.protocols.ftp import FTPClient, FTPFileListProtocol
 from twisted.protocols.basic import FileSender
 
 # System
-from os import path as os_path
+from os import path as os_path, unlink as os_unlink, rename as os_rename, \
+		listdir as os_listdir
 from time import time
 
 def FTPFileEntryComponent(file, directory):
@@ -145,6 +147,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		InfoBarNotifications.__init__(self)
 		self.ftpclient = None
 		self.file = None
+		self.queue = None
 		self.currlist = "local"
 
 		# Init what we need for dl progress
@@ -162,9 +165,9 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self["speed"] = Label("")
 		self["progress"] = VariableProgressSource()
 		self["key_red"] = Button(_("Exit"))
-		self["key_green"] = Button("")
-		self["key_yellow"] = Button("")
-		self["key_blue"] = Button("")
+		self["key_green"] = Button(_("Rename"))
+		self["key_yellow"] = Button(_("Delete"))
+		self["key_blue"] = Button(_("Download"))
 
 		self.server = None
 
@@ -181,12 +184,15 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				"channelDown": (self.setRemote, _("Select remote file list")),
 			})
 
-		self["actions"] = ActionMap(["ftpbrowserDirectionActions"],
+		self["actions"] = ActionMap(["ftpbrowserDirectionActions", "ColorActions"],
 			{
 				"up": self.up,
 				"down": self.down,
 				"left": self.left,
 				"right": self.right,
+				"green": self.rename,
+				"yellow": self.delete,
+				"blue": self.transfer,
 			}, -2)
 
 		self.onExecBegin.append(self.reinitialize)
@@ -221,8 +227,287 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		if res:
 			self.ok(force = True)
 
-	def ok(self, force = False):
+	def getRemoteFile(self):
+		remoteFile = self["remote"].getSelection()
+		if not remoteFile or not remoteFile[0]:
+			return None, None, None
+
+		absRemoteFile = remoteFile[0]
+		if remoteFile[1]:
+			fileName = absRemoteFile.split('/')[-2]
+		else:
+			fileName = absRemoteFile.split('/')[-1]
+
+		if len(remoteFile) == 3:
+			fileSize = remoteFile[2]
+		else:
+			fileSize = 0
+
+		return absRemoteFile, fileName, fileSize
+
+	def getLocalFile(self):
+		# XXX: isn't this supposed to be an absolute filename? well, it's not for me :-/
+		localFile = self["local"].getSelection()
+		if not localFile:
+			return None, None
+
+		if localFile[1]:
+			absLocalFile = localFile[0]
+			fileName = absLocalFile.split('/')[-2]
+		else:
+			fileName = localFile[0]
+			absLocalFile = self["local"].getCurrentDirectory() + fileName
+
+		return absLocalFile, fileName
+
+	def renameCallback(self, newName = None):
+		if not newName:
+			return
+
 		if self.currlist == "remote":
+			absRemoteFile, fileName, fileSize = self.getRemoteFile()
+			if not fileName:
+				return
+
+			directory = self["remote"].getCurrentDirectory()
+			sep = '/' if directory != '/' else ''
+			newRemoteFile = directory + sep + newName
+
+			def callback(ret = None):
+				AddPopup(_("Renamed %s to %s.") % (fileName, newName), MessageBox.TYPE_INFO, -1)
+			def errback(ret = None):
+				AddPopup(_("Could not rename %s.") % (fileName), MessageBox.TYPE_ERROR, -1)
+
+			self.ftpclient.rename(absRemoteFile, newRemoteFile).addCallback(callback).addErrback(errback)
+		else:
+			assert(self.currlist == "local")
+			absLocalFile, fileName = self.getLocalFile()
+			if not fileName:
+				return
+
+			directory = self["local"].getCurrentDirectory()
+			newLocalFile = os_path.join(directory, newName)
+
+			try:
+				os_rename(absLocalFile, newLocalFile)
+			except OSError, ose:
+				AddPopup(_("Could not rename %s.") % (fileName), MessageBox.TYPE_ERROR, -1)
+			else:
+				AddPopup(_("Renamed %s to %s.") % (fileName, newName), MessageBox.TYPE_INFO, -1)
+
+	def rename(self):
+		if not self.ftpclient or self.queue:
+			return
+
+		if self.currlist == "remote":
+			absRemoteFile, fileName, fileSize = self.getRemoteFile()
+			if not fileName:
+				return
+		else:
+			assert(self.currlist == "local")
+			absLocalFile, fileName = self.getLocalFile()
+			if not fileName:
+				return
+
+		self.session.openWithCallback(
+			self.renameCallback,
+			NTIVirtualKeyBoard,
+			title = _("Enter new filename:"),
+			text = fileName,
+		)
+
+	def deleteConfirmed(self, ret):
+		if not ret:
+			return
+
+		if self.currlist == "remote":
+			absRemoteFile, fileName, fileSize = self.getRemoteFile()
+			if not fileName:
+				return
+
+			def callback(ret = None):
+				AddPopup(_("Removed %s.") % (fileName), MessageBox.TYPE_INFO, -1)
+			def errback(ret = None):
+				AddPopup(_("Could not delete %s.") % (fileName), MessageBox.TYPE_ERROR, -1)
+
+			self.ftpclient.removeFile(absRemoteFile).addCallback(callback).addErrback(errback)
+		else:
+			assert(self.currlist == "local")
+			absLocalFile, fileName = self.getLocalFile()
+			if not fileName:
+				return
+
+			try:
+				os_unlink(absLocalFile)
+			except OSError, oe:
+				AddPopup(_("Could not delete %s.") % (fileName), MessageBox.TYPE_ERROR, -1)
+			else:
+				AddPopup(_("Removed %s.") % (fileName), MessageBox.TYPE_INFO, -1)
+
+	def delete(self):
+		if not self.ftpclient or self.queue:
+			return
+
+		if self.currlist == "remote":
+			if self["remote"].canDescent():
+				self.session.open(
+					MessageBox,
+					_("Removing directories is not supported."),
+					MessageBox.TYPE_WARNING
+				)
+				return
+
+			absRemoteFile, fileName, fileSize = self.getRemoteFile()
+			if not fileName:
+				return
+		else:
+			assert(self.currlist == "local")
+			if self["local"].canDescent():
+				self.session.open(
+					MessageBox,
+					_("Removing directories is not supported."),
+					MessageBox.TYPE_WARNING
+				)
+				return
+
+			absLocalFile, fileName = self.getLocalFile()
+			if not fileName:
+				return
+
+		self.session.openWithCallback(
+			self.deleteConfirmed,
+			MessageBox,
+			_("Are you sure you want to delete %s?") % (fileName)
+		)
+
+	def transferListRcvd(self, res, filelist):
+		remoteDirectory, _, _ = self.getRemoteFile()
+		localDirectory = self["local"].getCurrentDirectory()
+
+		self.queue = [(True, remoteDirectory + file["filename"], localDirectory + file["filename"], file["size"]) for file in filelist.files if file["filetype"] == "-"]
+		self.nextQueue()
+	
+	def nextQueue(self):
+		if self.queue:
+			top = self.queue[0]
+			self.queue = self.queue[1:]
+			if top[0]:
+				self.getFile(*top[1:])
+			else:
+				self.putFile(*top[1:])
+
+	def transferListFailed(self, res = None):
+		self.queue = None
+		AddPopup(_("Could not obtain list of files."), MessageBox.TYPE_ERROR, -1)
+
+	def transfer(self):
+		if not self.ftpclient or self.queue:
+			return
+
+		if self.currlist == "remote":
+			# single file transfer is implemented in self.ok
+			if not self["remote"].canDescent():
+				return self.ok()
+			else:
+				absRemoteFile, fileName, fileSize = self.getRemoteFile()
+				if not fileName:
+					return
+
+				filelist = FTPFileListProtocol()
+				d = self.ftpclient.list(absRemoteFile, filelist)
+				d.addCallback(self.transferListRcvd, filelist).addErrback(self.transferListFailed)
+		else:
+			assert(self.currlist == "local")
+			# single file transfer is implemented in self.ok
+			if not self["local"].canDescent():
+				return self.ok()
+			else:
+				localDirectory, _ = self.getLocalFile()
+				remoteDirectory = self["remote"].getCurrentDirectory()
+
+				def remoteFileExists(absName):
+					for file in self["remote"].getFileList():
+						if file[0][0] == absName:
+							return True
+					return False
+
+				self.queue = [(False, remoteDirectory + file, localDirectory + file, remoteFileExists(remoteDirectory + file)) for file in os_listdir(localDirectory) if os_path.isfile(localDirectory + file)]
+				self.nextQueue()
+
+
+	def getFileCallback(self, ret, absRemoteFile, absLocalFile, fileSize):
+		if not ret:
+			self.nextQueue()
+		else:
+			self.getFile(absRemoteFile, absLocalFile, fileSize, force=True)
+
+	def getFile(self, absRemoteFile, absLocalFile, fileSize, force=False):
+		if not force and os_path.exists(absLocalFile):
+			fileName = absRemoteFile.split('/')[-1]
+			AddNotificationWithCallback(
+				lambda ret: self.getFileCallback(ret, absRemoteFile, absLocalFile, fileSize),
+				MessageBox,
+				_("A file with this name (%s) already exists locally.\nDo you want to overwrite it?") % (fileName),
+			)
+		else:
+			self.currentLength = 0
+			self.lastLength = 0
+			self.lastTime = 0
+			self.lastApprox = 0
+			self.fileSize = fileSize
+
+			try:
+				self.file = open(absLocalFile, 'w')
+			except IOError, ie:
+				# TODO: handle this
+				raise ie
+			else:
+				d = self.ftpclient.retrieveFile(absRemoteFile, self, offset = 0)
+				d.addCallback(self.getFinished).addErrback(self.getFailed)
+
+	def putFileCallback(self, ret, absRemoteFile, absLocalFile, remoteFileExists):
+		if not ret:
+			self.nextQueue()
+		else:
+			self.putFile(absRemoteFile, absLocalFile, remoteFileExists, force=True)
+
+	def putFile(self, absRemoteFile, absLocalFile, remoteFileExists, force=False):
+		if not force and remoteFileExists:
+			fileName = absRemoteFile.split('/')[-1]
+			AddNotificationWithCallback(
+				lambda ret: self.putFileCallback(ret, absRemoteFile, absLocalFile, remoteFileExists),
+				MessageBox,
+				_("A file with this name (%s) already exists on the remote host.\nDo you want to overwrite it?") % (fileName),
+			)
+		else:
+			self.currentLength = 0
+			self.lastLength = 0
+			self.lastTime = 0
+			self.lastApprox = 0
+
+			def sendfile(consumer, fileObj):
+				FileSender().beginFileTransfer(fileObj, consumer, transform = self.putProgress).addCallback(  
+					lambda _: consumer.finish()).addCallback(
+					self.putComplete).addErrback(self.putFailed)
+
+			try:
+				self.fileSize = int(os_path.getsize(absLocalFile))
+				self.file = open(absLocalFile, 'rb')
+			except (IOError, OSError), e:
+				# TODO: handle this
+				raise e
+			else:
+				dC, dL = self.ftpclient.storeFile(absRemoteFile)
+				dC.addCallback(sendfile, self.file)
+
+	def ok(self, force = False):
+		if self.queue:
+			return
+
+		if self.currlist == "remote":
+			if not self.ftpclient:
+				return
+
 			# Get file/change directory
 			if self["remote"].canDescent():
 				self["remote"].descent()
@@ -235,40 +520,22 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 					)
 					return
 
-				remoteFile = self["remote"].getSelection()
-				if not remoteFile or not remoteFile[0]:
+				absRemoteFile, fileName, fileSize = self.getRemoteFile()
+				if not fileName:
 					return
 
-				absRemoteFile = remoteFile[0]
-				fileName = absRemoteFile.split('/')[-1]
-				localFile = self["local"].getCurrentDirectory() + fileName
-				if not force and os_path.exists(localFile):
-					self.session.openWithCallback(
-						self.okQuestion,
-						MessageBox,
-						_("A file with this name already exists locally.\nDo you want to overwrite it?"),
-					)
-				else:
-					self.currentLength = 0
-					self.lastLength = 0
-					self.lastTime = 0
-					self.lastApprox = 0
-					self.fileSize = remoteFile[2]
+				absLocalFile = self["local"].getCurrentDirectory() + fileName
 
-					try:
-						self.file = open(localFile, 'w')
-					except IOError, ie:
-						# TODO: handle this
-						raise ie
-					else:
-						d = self.ftpclient.retrieveFile(absRemoteFile, self, offset = 0)
-						d.addCallback(self.getFinished).addErrback(self.getFailed)
+				self.getFile(absRemoteFile, absLocalFile, fileSize)
 		else:
 			# Put file/change directory
 			assert(self.currlist == "local")
 			if self["local"].canDescent():
 				self["local"].descent()
 			else:
+				if not self.ftpclient:
+					return
+
 				if self.file:
 					self.session.open(
 						MessageBox,
@@ -280,9 +547,13 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				if not self["remote"].isValid:
 					return
 
-				localFile = self["local"].getSelection()
-				if not localFile:
+				absLocalFile, fileName = self.getLocalFile()
+				if not fileName:
 					return
+
+				directory = self["remote"].getCurrentDirectory()
+				sep = '/' if directory != '/' else ''
+				absRemoteFile = directory + sep + fileName
 
 				def remoteFileExists(absName):
 					for file in self["remote"].getFileList():
@@ -290,38 +561,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 							return True
 					return False
 
-				# XXX: isn't this supposed to be an absolute filename? well, it's not for me :-/
-				fileName = localFile[0]
-				absLocalFile = self["local"].getCurrentDirectory() + fileName
-				directory = self["remote"].getCurrentDirectory()
-				sep = '/' if directory != '/' else ''
-				remoteFile = directory + sep + fileName
-				if not force and remoteFileExists(remoteFile):
-					self.session.openWithCallback(
-						self.okQuestion,
-						MessageBox,
-						_("A file with this name already exists on the remote host.\nDo you want to overwrite it?"),
-					)
-				else:
-					self.currentLength = 0
-					self.lastLength = 0
-					self.lastTime = 0
-					self.lastApprox = 0
-
-					def sendfile(consumer, fileObj):
-						FileSender().beginFileTransfer(fileObj, consumer, transform = self.putProgress).addCallback(  
-							lambda _: consumer.finish()).addCallback(
-							self.putComplete).addErrback(self.putFailed)
-
-					try:
-						self.fileSize = int(os_path.getsize(absLocalFile))
-						self.file = open(absLocalFile, 'rb')
-					except (IOError, OSError), e:
-						# TODO: handle this
-						raise e
-					else:
-						dC, dL = self.ftpclient.storeFile(remoteFile)
-						dC.addCallback(sendfile, self.file)
+				self.putFile(absRemoteFile, absLocalFile, remoteFileExists(absRemoteFile))
 
 	def transferFinished(self, msg, type, toRefresh):
 		AddPopup(msg, type, -1)
@@ -334,32 +574,52 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self.file = None
 
 	def putComplete(self, *args):
-		self.transferFinished(
-			_("Upload finished."),
-			MessageBox.TYPE_INFO,
-			"remote"
-		)
+		if self.queue:
+			self.file.close()
+			self.file = None
+
+			self.nextQueue()
+		else:
+			self.transferFinished(
+				_("Upload finished."),
+				MessageBox.TYPE_INFO,
+				"remote"
+			)
 
 	def putFailed(self, *args):
+		# NOTE: we continue uploading but notify the user of every error though
+		# we only display one success notification
 		self.transferFinished(
 			_("Error during download."),
 			MessageBox.TYPE_ERROR,
 			"remote"
 		)
+		if self.queue:
+			self.nextQueue()
 
 	def getFinished(self, *args):
-		self.transferFinished(
-			_("Download finished."),
-			MessageBox.TYPE_INFO,
-			"local"
-		)
+		if self.queue:
+			self.file.close()
+			self.file = None
+
+			self.nextQueue()
+		else:
+			self.transferFinished(
+				_("Download finished."),
+				MessageBox.TYPE_INFO,
+				"local"
+			)
 
 	def getFailed(self, *args):
+		# NOTE: we continue downloading but notify the user of every error though
+		# we only display one success notification
 		self.transferFinished(
 			_("Error during download."),
 			MessageBox.TYPE_ERROR,
 			"local"
 		)
+		if self.queue:
+			self.nextQueue()
 
 	def putProgress(self, chunk):
 		self.currentLength += len(chunk)
