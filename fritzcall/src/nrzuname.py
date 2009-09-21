@@ -85,41 +85,28 @@ def normalizePhoneNumber(intNo):
 
 def out(number, caller):
 	debug("[nrzuname] out: %s: %s" %(number, caller))
-	if not caller:
+	found = re.match("NA: ([^;]*);VN: ([^;]*);STR: ([^;]*);HNR: ([^;]*);PLZ: ([^;]*);ORT: ([^;]*)", caller)
+	if not found:
 		return
-	name = vorname = strasse = hnr = plz = ort = ""
-	lines = caller.split(', ')
-	found = re.match("(.+?)\s+(.+)", lines[0])
-	if found:
-		name = found.group(1)
-		vorname = found.group(2)
-	else:
-		name = lines[0]
+	( name,vorname,strasse,hnr,plz,ort ) = (found.group(1),
+											found.group(2),
+											found.group(3),
+											found.group(4),
+											found.group(5),
+											found.group(6)
+											)
+	if vorname: name += ' ' + vorname
+	if strasse or hnr or plz or ort: name += ', '
+	if strasse: name += strasse
+	if hnr:	name += ' ' + hnr
+	if (strasse or hnr) and (plz or ort): name += ', '
+	if plz and ort: name += plz + ' ' + ort
+	elif plz: name += plz
+	elif ort: name += ort
 
-	if len(lines) > 1:
-		if len(lines) > 2: # this means, we have street and city
-			found = re.match("^(.+) ([-\d]+)$", lines[1], re.S)
-			if found:
-				strasse = found.group(1)
-				hnr = found.group(2)
-			else:
-				found = re.match("^(\d+) (.+)$", lines[1], re.S)
-				if found:
-					strasse = found.group(2)
-					hnr = found.group(1)
-				else:
-					strasse = lines[1]
-			for i in range(2, len(lines)):
-				found = re.match("(\S+)\s+(.+)", lines[i], re.S)
-				if found and re.search('\d', found.group(1)):
-					plz = found.group(1)
-					ort = found.group(2)
-					break
-		else: # only two lines, the second must be the city...
-			ort = lines[1].strip()
-	print "NA: %s;VN: %s;STR: %s;HNR: %s;PLZ: %s;ORT: %s" %( name,vorname,strasse,hnr,plz,ort )
+	print(name)
 
-def simpleout(number, caller):
+def simpleout(number, caller): #@UnusedVariable
 	print caller
 
 try:
@@ -237,18 +224,26 @@ class ReverseLookupAndNotifier:
 
 	def _gotPage(self, page):
 		def cleanName(text):
-			item = text.replace("&nbsp;"," ").replace("</b>","").replace(","," ").replace('\n',' ').replace('\t',' ')
-			try:
-				item = html2unicode(item).decode('iso-8859-1')
-				# item = html2unicode(item)
-				newitem = item.replace("  ", " ")
-				while newitem != item:
-					item = newitem
-					newitem = item.replace("  ", " ")
-				return newitem.strip()
+			item = text.replace("%20"," ").replace("&nbsp;"," ").replace("</b>","").replace(","," ").replace('\n',' ').replace('\t',' ')
+
+			item = html2unicode(item)
+			try: # this works under Windows
+				item = item.decode('iso-8859-1')
 			except:
-				debug("[ReverseLookupAndNotifier] cleanName: " + traceback.format_exc())
-				return item
+				try: # this works under Enigma2
+					item = item.decode('utf-8')
+				except:
+					try: # fall back
+						item = item.decode(self.charset)
+					except:
+						# debug("[ReverseLookupAndNotifier] cleanName: " + traceback.format_exc())
+						debug("[ReverseLookupAndNotifier] cleanName: encoding problem")
+
+			newitem = item.replace("  ", " ")
+			while newitem != item:
+				item = newitem
+				newitem = item.replace("  ", " ")
+			return newitem.strip()
 	
 		debug("[ReverseLookupAndNotifier] _gotPage")
 		found = re.match('.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />',page, re.S)
@@ -278,8 +273,12 @@ class ReverseLookupAndNotifier:
 						continue
 			
 			# look for <firstname> and <lastname> match, if not there look for <name>, if not there break
-			lastname = ''
+			name = ''
 			firstname = ''
+			street = ''
+			streetno = ''
+			city = ''
+			zipcode = ''
 			pat = self.getPattern(entry, "lastname")
 			if pat:
 				pat = ".*?" + pat
@@ -287,7 +286,7 @@ class ReverseLookupAndNotifier:
 				found = re.match(pat, page, re.S|re.M)
 				if found:
 					debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "lastname", found.group(1)))
-					lastname = cleanName(found.group(1))
+					name = cleanName(found.group(1))
 
 					pat = self.getPattern(entry, "firstname")
 					if pat:
@@ -296,12 +295,8 @@ class ReverseLookupAndNotifier:
 						found = re.match(pat, page, re.S|re.M)
 						if found:
 							debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "firstname", found.group(1)))
-						firstname = cleanName(found.group(1))
+						firstname = cleanName(found.group(1)).strip()
 
-					if firstname:
-						name = lastname + ' ' + firstname
-					else:
-						name = lastname
 			else:
 				pat = ".*?" + self.getPattern(entry, "name")
 				debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( "name", pat ))
@@ -309,52 +304,69 @@ class ReverseLookupAndNotifier:
 				if found:
 					debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "name", found.group(1)))
 					item = cleanName(found.group(1))
-					debug("[ReverseLookupAndNotifier] _gotPage: name: " + item)
-					name = item
+					# debug("[ReverseLookupAndNotifier] _gotPage: name: " + item)
+					name = item.strip()
+					firstNameFirst = entry.getElementsByTagName('name')[0].getAttribute('swapFirstAndLastName')
+					# debug("[ReverseLookupAndNotifier] _gotPage: swapFirstAndLastName: " + firstNameFirst)
+					if firstNameFirst == 'true': # that means, the name is of the form "firstname lastname"
+						found = re.match('(.*?)\s+(.*)', name)
+						if found:
+							firstname = found.group(1)
+							name = found.group(2)
 				else:
 					debug("[ReverseLookupAndNotifier] _gotPage: no name found, skipping")
 					continue
 
-			address = ""
-			if name:
-				pat = ".*?" + self.getPattern(entry, "city")
-				debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( "city", pat ))
-				found = re.match(pat, page, re.S|re.M)
-				if found:
-					debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "city", found.group(1)))
-					item = cleanName(found.group(1))
-					debug("[ReverseLookupAndNotifier] _gotPage: city: " + item)
-					address = item.strip()
-
-					pat = ".*?" + self.getPattern(entry, "zipcode")
-					debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( "zipcode", pat ))
-					found = re.match(pat, page, re.S|re.M)
-					if found and found.group(1):
-						debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "zipcode", found.group(1)))
-						item = cleanName(found.group(1))
-						debug("[ReverseLookupAndNotifier] _gotPage: zipcode: " + item)
-						address = item.strip() + ' ' + address
-
-					pat = ".*?" + self.getPattern(entry, "street")
-					debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( "street", pat ))
-					found = re.match(pat, page, re.S|re.M)
-					if found and found.group(1):
-						debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "street", found.group(1)))
-						item = cleanName(found.group(1))
-						debug("[ReverseLookupAndNotifier] _gotPage: street: " + item)
-						address = item.strip() + ', ' + address
-
-				if address:
-					debug("[ReverseLookupAndNotifier] _gotPage: Reverse lookup succeeded:\nName: %s\nAddress: %s" %(name, address))
-					self.caller = "%s, %s" %(name, address)
-				else:
-					debug("[ReverseLookupAndNotifier] _gotPage: Reverse lookup succeeded:\nName: %s" %(name))
-					self.caller = name
-
-				self.notifyAndReset()
-				return True
-			else:
+			if not name:
 				continue
+
+			pat = ".*?" + self.getPattern(entry, "city")
+			debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( "city", pat ))
+			found = re.match(pat, page, re.S|re.M)
+			if found:
+				debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "city", found.group(1)))
+				item = cleanName(found.group(1))
+				debug("[ReverseLookupAndNotifier] _gotPage: city: " + item)
+				city = item.strip()
+
+			if not city:
+				continue
+
+			pat = ".*?" + self.getPattern(entry, "zipcode")
+			debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( "zipcode", pat ))
+			found = re.match(pat, page, re.S|re.M)
+			if found and found.group(1):
+				debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "zipcode", found.group(1)))
+				item = cleanName(found.group(1))
+				debug("[ReverseLookupAndNotifier] _gotPage: zipcode: " + item)
+				zipcode = item.strip()
+
+			pat = ".*?" + self.getPattern(entry, "street")
+			debug("[ReverseLookupAndNotifier] _gotPage: look for '''%s''' with '''%s'''" %( "street", pat ))
+			found = re.match(pat, page, re.S|re.M)
+			if found and found.group(1):
+				debug("[ReverseLookupAndNotifier] _gotPage: found for '''%s''': '''%s'''" %( "street", found.group(1)))
+				item = cleanName(found.group(1))
+				debug("[ReverseLookupAndNotifier] _gotPage: street: " + item)
+				street = item.strip()
+				streetno = ''
+				found = re.match("^(.+) ([-\d]+)$", street, re.S)
+				if found:
+					street = found.group(1)
+					streetno= found.group(2)
+				#===============================================================
+				# else:
+				#	found = re.match("^(\d+) (.+)$", street, re.S)
+				#	if found:
+				#		street = found.group(2)
+				#		streetno = found.group(1)
+				#===============================================================
+
+			self.caller = "NA: %s;VN: %s;STR: %s;HNR: %s;PLZ: %s;ORT: %s" %( name,firstname,street,streetno,zipcode,city )
+			debug("[ReverseLookupAndNotifier] _gotPage: Reverse lookup succeeded:\nName: %s" %(self.caller))
+
+			self.notifyAndReset()
+			return True
 		else:
 			self._gotError("[ReverseLookupAndNotifier] _gotPage: Nothing found at %s" %self.currentWebsite.getAttribute("name"))
 			return False
@@ -403,10 +415,10 @@ if __name__ == '__main__':
 	cwd = os.path.dirname(sys.argv[0])
 	if (len(sys.argv) == 2):
 		# nrzuname.py Nummer
-		ReverseLookupAndNotifier(sys.argv[1])
+		ReverseLookupAndNotifier(sys.argv[1], simpleout)
 		reactor.run() #@UndefinedVariable
 	elif (len(sys.argv) == 3):
 		# nrzuname.py Nummer Charset
 		setDebug(False)
-		ReverseLookupAndNotifier(sys.argv[1], simpleout, sys.argv[2])
+		ReverseLookupAndNotifier(sys.argv[1], out, sys.argv[2])
 		reactor.run() #@UndefinedVariable

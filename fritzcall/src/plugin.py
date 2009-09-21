@@ -21,17 +21,17 @@ from Components.Label import Label
 from Components.Button import Button
 from Components.Pixmap import Pixmap
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigEnableDisable, getConfigListEntry, ConfigText, ConfigInteger
+from Components.ConfigList import ConfigListScreen
+from Components.Harddisk import harddiskmanager
 try:
 	from Components.config import ConfigPassword
 except ImportError:
 	ConfigPassword = ConfigText
-from Components.ConfigList import ConfigListScreen
-from Components.Harddisk import harddiskmanager
 
 from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
 from Tools.NumericalTextInput import NumericalTextInput
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_CONFIG, SCOPE_MEDIA
 from Tools.LoadPixmap import LoadPixmap
 
 from twisted.internet import reactor #@UnresolvedImport
@@ -101,11 +101,11 @@ config.plugins.FritzCall.prefix = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 config.plugins.FritzCall.fullscreen = ConfigEnableDisable(default=False)
 
-mountedDevs= [("/etc/enigma2", _("Flash"))]
-if os.path.isdir("/media/cf"):
-	mountedDevs.append(("/media/cf", _("Compact Flash")))
-if os.path.isdir("/media/usb"):
-	mountedDevs.append(("/media/usb", _("USB Device")))
+mountedDevs= [(resolveFilename(SCOPE_CONFIG), _("Flash") + " (" + resolveFilename(SCOPE_CONFIG) + ")")]
+if os.path.isdir(resolveFilename(SCOPE_MEDIA, "cf")):
+	mountedDevs.append((resolveFilename(SCOPE_MEDIA, "cf"), _("Compact Flash") + " (" + resolveFilename(SCOPE_MEDIA, "cf") + ")"))
+if os.path.isdir(resolveFilename(SCOPE_MEDIA, "usb")):
+	mountedDevs.append((resolveFilename(SCOPE_MEDIA, "usb"), _("USB Device") + " (" + resolveFilename(SCOPE_MEDIA, "usb") + ")"))
 for p in harddiskmanager.getMountedPartitions(True):
 	mp = p.mountpoint[:-1]
 	if p.description:
@@ -178,6 +178,26 @@ def resolveNumberWithAvon(number, countrycode):
 		if avon.has_key(normNumber[:i]):
 			return '[' + avon[normNumber[:i]].strip() + ']'
 	return ""
+
+def handleReverseLookupResult(name):
+	found = re.match("NA: ([^;]*);VN: ([^;]*);STR: ([^;]*);HNR: ([^;]*);PLZ: ([^;]*);ORT: ([^;]*)", name)
+	if found:
+		( name,firstname,street,streetno,zipcode,city ) = (found.group(1),
+												found.group(2),
+												found.group(3),
+												found.group(4),
+												found.group(5),
+												found.group(6)
+												)
+		if firstname: name += ' ' + firstname
+		if street or streetno or zipcode or city: name += ', '
+		if street: name += street
+		if streetno:	name += ' ' + streetno
+		if (street or streetno) and (zipcode or city): name += ', '
+		if zipcode and city: name += zipcode + ' ' + city
+		elif zipcode: name += zipcode
+		elif city: name += city
+	return name
 
 from xml.dom.minidom import parse
 cbcInfos = {}
@@ -581,7 +601,7 @@ class FritzCallFBF:
 			self._callScreen.updateStatus(_("preparing"))
 		parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de', 'var:pagename':'foncalls', 'var:menu':'fon', 'sid':self._md5Sid})
 		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
-		getPage(url).addCallback(lambda x:self._getCalls1(callback)).addErrback(self._errorCalls)
+		getPage(url).addCallback(lambda x:self._getCalls1(callback)).addErrback(self._errorCalls) #@UnusedVariable
 
 	def _getCalls1(self, callback):
 		#
@@ -705,7 +725,7 @@ class FritzCallFBF:
 					'Content-Length': str(len(parms))},
 			postdata=parms).addCallback(self._okDial).addErrback(self._errorDial)
 
-	def _okDial(self, html):
+	def _okDial(self, html): #@UnusedVariable
 		debug("[FritzCallFBF] okDial")
 
 	def _errorDial(self, error):
@@ -745,7 +765,7 @@ class FritzCallFBF:
 					'Content-Length': str(len(parms))},
 			postdata=parms).addCallback(self._okChangeWLAN).addErrback(self._errorChangeWLAN)
 
-	def _okChangeWLAN(self, html):
+	def _okChangeWLAN(self, html): #@UnusedVariable
 		debug("[FritzCallFBF] okDial")
 
 	def _errorChangeWLAN(self, error):
@@ -805,7 +825,7 @@ class FritzCallFBF:
 						'Content-Length': str(len(parms))},
 				postdata=parms).addCallback(self._okChangeMailbox).addErrback(self._errorChangeMailbox)
 
-	def _okChangeMailbox(self, html):
+	def _okChangeMailbox(self, html): #@UnusedVariable
 		debug("[FritzCallFBF] _okChangeMailbox")
 
 	def _errorChangeMailbox(self, error):
@@ -1110,7 +1130,7 @@ class FritzCallFBF:
 					'Content-Length': str(len(parms))},
 			postdata=parms)
 
-	def _okReset(self, html):
+	def _okReset(self, html): #@UnusedVariable
 		debug("[FritzCallFBF] _okReset")
 
 	def _errorReset(self, error):
@@ -1526,7 +1546,7 @@ class FritzMenu(Screen,HelpableScreen):
 
 class FritzDisplayCalls(Screen, HelpableScreen):
 
-	def __init__(self, session, text=""):
+	def __init__(self, session, text=""): #@UnusedVariable
 		if config.plugins.FritzCall.fullscreen.value:
 			self.width = DESKTOP_WIDTH
 			self.height = DESKTOP_HEIGHT
@@ -1571,7 +1591,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 							self.width, self.height, _("Phone calls"),
 							backMainLine,
 							scaleH(1130, XXX), scaleV(40, XXX), scaleH(80, XXX), scaleV(26, XXX), scaleV(26, XXX), # time
-							scaleH(900, XXX), scaleV(70, XXX), scaleH(310, XXX), scaleV(22, XXX), scaleV(20, XXX), # date
+							scaleH(890, XXX), scaleV(70, XXX), scaleH(320, XXX), scaleV(22, XXX), scaleV(20, XXX), # date
 							"FritzCall " + _("Phone calls"), scaleH(500, XXX), scaleV(63, XXX), scaleH(330, XXX), scaleV(30, XXX), scaleV(27, XXX), # eLabel
 							scaleH(80, XXX), scaleV(150, XXX), scaleH(280, XXX), scaleV(200, XXX), scaleV(22, XXX), # statusbar
 							scaleH(420, XXX), scaleV(120, XXX), scaleH(790, XXX), scaleV(438, XXX), # entries
@@ -1879,6 +1899,7 @@ class FritzOfferAction(Screen):
 			self.lookup()
 
 	def lookedUp(self, number, name):
+		name = handleReverseLookupResult(name)
 		if not name:
 			if self.lookupState == 1:
 				name = _("No result from reverse lookup")
@@ -1886,8 +1907,8 @@ class FritzOfferAction(Screen):
 				name = _("No result from Outlook export")
 			else:
 				name = _("No result from LDIF")
-		self.number = number
 		self.name = name
+		self.number = number
 		debug("[FritzOfferAction] lookedUp: " + str(name.replace(", ", "\n")))
 		self.setTextAndResize(str(name.replace(", ", "\n")))
 
@@ -2105,7 +2126,7 @@ class FritzCallPhonebook:
 									self.width, self.height, _("Phonebook"),
 									backMainLine,
 									scaleH(1130, XXX), scaleV(40, XXX), scaleH(80, XXX), scaleV(26, XXX), scaleV(26, XXX), # time
-									scaleH(900, XXX), scaleV(70, XXX), scaleH(310, XXX), scaleV(22, XXX), scaleV(20, XXX), # date
+									scaleH(890, XXX), scaleV(70, XXX), scaleH(320, XXX), scaleV(22, XXX), scaleV(20, XXX), # date
 									"FritzCall " + _("Phonebook"), scaleH(80, XXX), scaleV(63, XXX), scaleH(300, XXX), scaleV(30, XXX), scaleV(27, XXX), # eLabel
 									scaleH(420, XXX), scaleV(120, XXX), scaleH(self.entriesWidth, XXX), scaleV(438, XXX), # entries
 									scaleH(450, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # red
@@ -2407,7 +2428,7 @@ phonebook = FritzCallPhonebook()
 
 class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
-	def __init__(self, session, args=None):
+	def __init__(self, session, args=None): #@UnusedVariable
 		if config.plugins.FritzCall.fullscreen.value:
 			self.width = DESKTOP_WIDTH
 			self.height = DESKTOP_HEIGHT
@@ -2454,7 +2475,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 								self.width, self.height, _("FritzCall Setup"),
 								backMainLine,
 								scaleH(1130, XXX), scaleV(40, XXX), scaleH(80, XXX), scaleV(26, XXX), scaleV(26, XXX), # time
-								scaleH(900, XXX), scaleV(70, XXX), scaleH(310, XXX), scaleV(22, XXX), scaleV(20, XXX), # date
+								scaleH(890, XXX), scaleV(70, XXX), scaleH(320, XXX), scaleV(22, XXX), scaleV(20, XXX), # date
 								_("FritzCall Setup"), scaleH(500, XXX), scaleV(63, XXX), scaleH(330, XXX), scaleV(30, XXX), scaleV(27, XXX), # eLabel
 								scaleH(80, XXX), scaleV(150, XXX), scaleH(250, XXX), scaleV(200, XXX), scaleV(22, XXX), # consideration
 								scaleH(420, XXX), scaleV(125, XXX), scaleH(790, XXX), scaleV(428, XXX), # config
@@ -2929,6 +2950,7 @@ class FritzReverseLookupAndNotifier:
 		@param caller: name and address of remote. it comes in with name, address and city separated by commas
 		'''
 		debug("[FritzReverseLookupAndNotifier] got: " + caller)
+		self.number = number
 #===============================================================================
 #		if not caller and os.path.exists(config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.csv"):
 #			caller = FritzOutlookCSV.findNumber(number, config.plugins.FritzCall.phonebookLocation.value + "/PhoneBook.csv") #@UndefinedVariable
@@ -2940,8 +2962,9 @@ class FritzReverseLookupAndNotifier:
 #			debug("[FritzReverseLookupAndNotifier] got from ldif: " + caller)
 #===============================================================================
 
-		if caller:
-			self.caller = caller.replace(", ", "\n").replace('#','')
+		name = handleReverseLookupResult(caller)
+		if name:
+			self.caller = name.replace(", ", "\n").replace('#','')
 			if self.number != 0 and config.plugins.FritzCall.addcallers.value and self.event == "RING":
 				debug("[FritzReverseLookupAndNotifier] add to phonebook")
 				phonebook.add(self.number, self.caller)
@@ -2964,7 +2987,7 @@ class FritzProtocol(LineReceiver):
 		self.phone = None
 		self.date = '0'
 
-	def notifyAndReset(self, timeout=config.plugins.FritzCall.timeout.value):
+	def notifyAndReset(self):
 		notifyCall(self.event, self.date, self.number, self.caller, self.phone)
 		self.resetValues()
 
@@ -3031,10 +3054,10 @@ class FritzClientFactory(ReconnectingClientFactory):
 	def __init__(self):
 		self.hangup_ok = False
 
-	def startedConnecting(self, connector):
+	def startedConnecting(self, connector): #@UnusedVariable
 		Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
 
-	def buildProtocol(self, addr):
+	def buildProtocol(self, addr): #@UnusedVariable
 		global fritzbox, phonebook
 		Notifications.AddNotification(MessageBox, _("Connected to FRITZ!Box!"), type=MessageBox.TYPE_INFO, timeout=4)
 		self.resetDelay()
@@ -3076,13 +3099,13 @@ class FritzCall:
 			self.d[1].disconnect()
 			self.d = None
 
-def displayCalls(session, servicelist=None):
+def displayCalls(session, servicelist=None): #@UnusedVariable
 	session.open(FritzDisplayCalls)
 
-def displayPhonebook(session, servicelist=None):
+def displayPhonebook(session, servicelist=None): #@UnusedVariable
 	session.open(phonebook.FritzDisplayPhonebook)
 
-def displayFBFStatus(session, servicelist=None):
+def displayFBFStatus(session, servicelist=None): #@UnusedVariable
 	session.open(FritzMenu)
 
 def main(session):
@@ -3106,7 +3129,7 @@ def autostart(reason, **kwargs):
 		fritz_call.shutdown()
 		fritz_call = None
 
-def Plugins(**kwargs):
+def Plugins(**kwargs): #@UnusedVariable
 	what = _("Display FRITZ!box-Fon calls on screen")
 	what_calls = _("Phone calls")
 	what_phonebook = _("Phonebook")
