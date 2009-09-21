@@ -167,7 +167,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self["key_red"] = Button(_("Exit"))
 		self["key_green"] = Button(_("Rename"))
 		self["key_yellow"] = Button(_("Delete"))
-		self["key_blue"] = Button(_("Download"))
+		self["key_blue"] = Button(_("Upload"))
 
 		self.server = None
 
@@ -219,9 +219,11 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 	def setLocal(self):
 		self.currlist = "local"
+		self["key_blue"].setText(_("Upload"))
 
 	def setRemote(self):
 		self.currlist = "remote"
+		self["key_blue"].setText(_("Download"))
 
 	def okQuestion(self, res = None):
 		if res:
