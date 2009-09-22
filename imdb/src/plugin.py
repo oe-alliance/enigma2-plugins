@@ -194,7 +194,7 @@ class IMDB(Screen):
 		'(?:.*?<h5>(?P<g_writer>Drehbuch|Writer).*?</h5>.*?>(?P<writer>.*?)</a>)*'
 		'(?:.*?<h5>(?P<g_premiere>Premiere|Release Date).*?</h5>\s.*?\n?(?P<premiere>.*?)\n\s.*?<)*'
 		'(?:.*?<h5>(?P<g_alternativ>Alternativ|Also Known As):</h5>(?P<alternativ>.*?)<br>\s{0,8}<a.*?>(?:mehr|more))*'
-		'(?:.*?<h5>(?P<g_country>Produktionsland|Country):</h5>.*?<a.*?>(?P<country>.*?)</a>(?:.*?mehr|\n</div>))*'
+		'(?:.*?<h5>(?P<g_country>Produktionsland|Country):</h5>.*?<a.*?>\n?(?P<country>.*?)</a>(?:.*?mehr|\s+?</div>))*'
 		, re.DOTALL)
 
 		self.extrainfomask = re.compile(
@@ -339,7 +339,7 @@ class IMDB(Screen):
 			self["statusbar"].setText(_("Could't get Eventname"))
 
 	def fetchFailed(self,string):
-		print "[IMDB] fetch failed " + string
+		print "[IMDB] fetch failed", string
 		self["statusbar"].setText(_("IMDb Download failed"))
 
 	def html2utf8(self,in_html):
@@ -425,17 +425,14 @@ class IMDB(Screen):
 
 			Detailstext = ""
 
-			genreblockmask = re.compile('<h5>Genre:</h5>(.*?)(?:mehr|more|</div>)', re.DOTALL)
+			genreblockmask = re.compile('<h5>Genre:</h5>\s+?(.*?)\s+?(?:mehr|more|<a class|</div>)', re.DOTALL)
 			genreblock = genreblockmask.findall(self.inhtml)
-			genremask = re.compile('(?:\">|\s)(.*?)(?:</a|\s)')
 			if genreblock:
-				genres = genremask.finditer(genreblock[0])
+				genres = self.htmltags.sub('', genreblock[0])
 				if genres:
 					Detailstext += "Genre: "
-					self.callbackGenre = ""
-					for x in genres:
-						Detailstext += x.group(1) + " "
-						self.callbackGenre += x.group(1) + " "
+					Detailstext += genres
+					self.callbackGenre = genres
 
 			for category in ("director", "creator", "writer", "premiere", "seasons", "country"):
 				if self.generalinfos.group('g_'+category):
