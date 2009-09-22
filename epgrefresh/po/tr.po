@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 EPGRefresh plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-13 11:39+0100\n"
-"PO-Revision-Date: 2009-02-17 18:59+0200\n"
-"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
-"Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
+"POT-Creation-Date: 2009-03-06 22:24+0100\n"
+"PO-Revision-Date: 2009-09-22 13:14+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,12 +13,11 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/plugin.py:116
+#: ../src/plugin.py:143
 msgid "Add to EPGRefresh"
 msgstr "Otomatik EPG yenileyiciye ekle"
 
-#: ../src/plugin.py:101
-#: ../src/plugin.py:111
+#: ../src/plugin.py:138
 msgid "Automated EPGRefresher"
 msgstr "Otomatik EPG Yenileyici"
 
@@ -116,6 +115,14 @@ msgstr "Yenilemek için kanal seçin"
 #: ../src/EPGRefreshConfiguration.py:58
 msgid "Shutdown after refresh"
 msgstr "Yenilemeden sonra Dreambox'ı kapat"
+
+#: ../src/plugin.py:71
+msgid ""
+"This might have been an automated bootup to refresh the EPG. For this to happen it is recommmended to put the receiver to Standby.\n"
+"Do you want to do this now?"
+msgstr ""
+"Elektronik program rehberinin (EPG) tezelenebilmesi için Dreambox'ınızın hazırda bekleme kipinde olması önerilir.\n"
+"Dreambox'ınızı şimdi hazırda bekleme kipine almak istiyor musunuz?"
 
 #: ../src/EPGRefreshConfiguration.py:52
 msgid "Time to stay on service (in m)"

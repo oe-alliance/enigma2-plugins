@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 EPGSearch plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 17:13+0100\n"
-"PO-Revision-Date: 2009-02-08 10:17+0200\n"
-"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
-"Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
+"POT-Creation-Date: 2009-06-23 18:41+0200\n"
+"PO-Revision-Date: 2009-09-22 13:15+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,56 +13,86 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/EPGSearch.py:137
+#: ../src/EPGSearch.py:154
+msgid "Add timer"
+msgstr "Zamanlayıcı eke"
+
+#: ../src/EPGSearch.py:351
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: ../src/EPGSearch.py:175
+#: ../src/EPGSearch.py:389
 msgid "Channel Selection"
 msgstr "Kanal Seçimi"
 
-#: ../src/EPGSearch.py:52
+#: ../src/EPGSearch.py:259
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "AutoTimer zamanlayıcı listesi okunamıyor : %s"
+
+#: ../src/EPGSearch.py:65
+msgid "EPG Search"
+msgstr "EPG Arama"
+
+#: ../src/EPGSearch.py:205
 msgid "Enter text to search for"
 msgstr "Arama metnini girin"
 
-#: ../src/EPGSearch.py:29
+#: ../src/EPGSearch.py:218
+msgid "Export selected as AutoTimer"
+msgstr "Seçililenleri AutoTimer olarak dışarı ver"
+
+#: ../src/EPGSearch.py:139
 msgid "History"
 msgstr "Geçmiş"
 
-#: ../src/EPGSearch.py:58
+#: ../src/EPGSearch.py:216
+msgid "Import from AutoTimer"
+msgstr "Otomatik zamanlayıcıdan içeri al"
+
+#: ../src/EPGSearch.py:211
 msgid "Import from EPG"
 msgstr "EPG'den içeri al"
 
-#: ../src/EPGSearch.py:57
+#: ../src/EPGSearch.py:210
 msgid "Import from Timer"
 msgstr "Zamanlayıcıdan içeri al"
 
-#: ../src/EPGSearch.py:28
+#: ../src/EPGSearch.py:138
 msgid "New Search"
 msgstr "Yeni Arama"
 
-#: ../src/EPGSearch.py:138
+#: ../src/EPGSearch.py:300
+msgid "No history"
+msgstr "Geçmiş kaydı yok"
+
+#: ../src/EPGSearch.py:352
 msgid "OK"
 msgstr "Tamam"
 
-#: ../src/EPGSearch.py:202
+#: ../src/EPGSearch.py:217
+msgid "Save search as AutoTimer"
+msgstr "Aramayı AutoTimer olarak kaydet"
+
+#: ../src/EPGSearch.py:417
 msgid "Search"
 msgstr "Ara"
 
-#: ../src/plugin.py:45
-#: ../src/plugin.py:50
-#: ../src/plugin.py:56
+#: ../src/plugin.py:58
 msgid "Search EPG"
 msgstr "EPG Arama"
 
+#: ../src/plugin.py:63
+#: ../src/plugin.py:69
 msgid "Search EPG..."
 msgstr "EPG Arama..."
 
-#: ../src/EPGSearch.py:152
+#: ../src/EPGSearch.py:366
 msgid "Select a timer to search"
 msgstr "Arama zamanını seçin"
 
-#: ../src/EPGSearch.py:87
+#: ../src/EPGSearch.py:270
+#: ../src/EPGSearch.py:294
 msgid "Select text to search for"
 msgstr "Arama metnini seçin"
 
