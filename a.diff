@@ -1,0 +1,2126 @@
+? Makefile
+? Makefile.in
+? a.dif
+? a.diff
+? aclocal.m4
+? autom4te.cache
+? config.guess
+? config.log
+? config.status
+? config.sub
+? configure
+? depcomp
+? install-sh
+? m4
+? missing
+? py-compile
+? ac3lipsync/Makefile
+? ac3lipsync/Makefile.in
+? ac3lipsync/img/Makefile
+? ac3lipsync/img/Makefile.in
+? ac3lipsync/po/Makefile
+? ac3lipsync/po/Makefile.in
+? ac3lipsync/po/de
+? ac3lipsync/po/de.mo
+? ac3lipsync/po/fi
+? ac3lipsync/po/fi.mo
+? ac3lipsync/po/it
+? ac3lipsync/po/it.mo
+? ac3lipsync/po/nl
+? ac3lipsync/po/nl.mo
+? ac3lipsync/po/sr
+? ac3lipsync/po/sr.mo
+? ac3lipsync/po/tr
+? ac3lipsync/po/tr.mo
+? ac3lipsync/src/Makefile
+? ac3lipsync/src/Makefile.in
+? antiscrollbar/Makefile
+? antiscrollbar/Makefile.in
+? antiscrollbar/src/Makefile
+? antiscrollbar/src/Makefile.in
+? autoresolution/Makefile
+? autoresolution/Makefile.in
+? autoresolution/src/Makefile
+? autoresolution/src/Makefile.in
+? autotimer/Makefile
+? autotimer/Makefile.in
+? autotimer/po/Makefile
+? autotimer/po/Makefile.in
+? autotimer/po/de
+? autotimer/po/de.mo
+? autotimer/po/es
+? autotimer/po/es.mo
+? autotimer/po/fy
+? autotimer/po/fy.mo
+? autotimer/po/it
+? autotimer/po/it.mo
+? autotimer/po/nl
+? autotimer/po/nl.mo
+? autotimer/po/sr.po
+? autotimer/po/tr
+? autotimer/po/tr.mo
+? autotimer/src/Makefile
+? autotimer/src/Makefile.in
+? autotimer/src/webinterface/Makefile
+? autotimer/src/webinterface/Makefile.in
+? cdinfo/Makefile
+? cdinfo/Makefile.in
+? cdinfo/src/Makefile
+? cdinfo/src/Makefile.in
+? dreamirc/Makefile
+? dreamirc/Makefile.in
+? dreamirc/src/Makefile
+? dreamirc/src/Makefile.in
+? dreamirc/src/protocols/Makefile
+? dreamirc/src/protocols/Makefile.in
+? elektro/Makefile
+? elektro/Makefile.in
+? elektro/po/Elektro.pot
+? elektro/po/Makefile
+? elektro/po/Makefile.in
+? elektro/po/de
+? elektro/po/de.mo
+? elektro/po/it
+? elektro/po/it.mo
+? elektro/src/Makefile
+? elektro/src/Makefile.in
+? emailclient/Makefile
+? emailclient/Makefile.in
+? emailclient/src/Makefile
+? emailclient/src/Makefile.in
+? epgrefresh/Makefile
+? epgrefresh/Makefile.in
+? epgrefresh/po/Makefile
+? epgrefresh/po/Makefile.in
+? epgrefresh/po/de
+? epgrefresh/po/de.mo
+? epgrefresh/po/es
+? epgrefresh/po/es.mo
+? epgrefresh/po/fy
+? epgrefresh/po/fy.mo
+? epgrefresh/po/it
+? epgrefresh/po/it.mo
+? epgrefresh/po/nl
+? epgrefresh/po/nl.mo
+? epgrefresh/po/sr.po
+? epgrefresh/po/sv
+? epgrefresh/po/sv.mo
+? epgrefresh/po/tr
+? epgrefresh/po/tr.mo
+? epgrefresh/src/Makefile
+? epgrefresh/src/Makefile.in
+? epgrefresh/src/webinterface/Makefile
+? epgrefresh/src/webinterface/Makefile.in
+? epgsearch/Makefile
+? epgsearch/Makefile.in
+? epgsearch/po/Makefile
+? epgsearch/po/Makefile.in
+? epgsearch/po/de
+? epgsearch/po/de.mo
+? epgsearch/po/es
+? epgsearch/po/es.mo
+? epgsearch/po/it
+? epgsearch/po/it.mo
+? epgsearch/po/nl
+? epgsearch/po/nl.mo
+? epgsearch/po/tr
+? epgsearch/po/tr.mo
+? epgsearch/src/Makefile
+? epgsearch/src/Makefile.in
+? filebrowser/Makefile
+? filebrowser/Makefile.in
+? filebrowser/src/Makefile
+? filebrowser/src/Makefile.in
+? fritzcall/Makefile
+? fritzcall/Makefile.in
+? fritzcall/po/Makefile
+? fritzcall/po/Makefile.in
+? fritzcall/po/de
+? fritzcall/po/de.mo
+? fritzcall/po/es
+? fritzcall/po/es.mo
+? fritzcall/po/it
+? fritzcall/po/it.mo
+? fritzcall/po/nl
+? fritzcall/po/nl.mo
+? fritzcall/po/sr.po
+? fritzcall/po/tr
+? fritzcall/po/tr.mo
+? fritzcall/src/Makefile
+? fritzcall/src/Makefile.in
+? fritzcall/src/images/Makefile
+? fritzcall/src/images/Makefile.in
+? ftpbrowser/Makefile
+? ftpbrowser/Makefile.in
+? ftpbrowser/po/Makefile
+? ftpbrowser/po/Makefile.in
+? ftpbrowser/po/de
+? ftpbrowser/po/de.mo
+? ftpbrowser/src/Makefile
+? ftpbrowser/src/Makefile.in
+? genuinedreambox/Makefile
+? genuinedreambox/Makefile.in
+? genuinedreambox/src/Makefile
+? genuinedreambox/src/Makefile.in
+? googlemaps/Makefile
+? googlemaps/Makefile.in
+? googlemaps/src/Makefile
+? googlemaps/src/Makefile.in
+? httpproxy/Makefile
+? httpproxy/Makefile.in
+? httpproxy/src/Makefile
+? httpproxy/src/Makefile.in
+? imdb/Makefile
+? imdb/Makefile.in
+? imdb/po/Makefile
+? imdb/po/Makefile.in
+? imdb/po/de
+? imdb/po/de.mo
+? imdb/po/it
+? imdb/po/it.mo
+? imdb/po/sr.po
+? imdb/po/sv
+? imdb/po/sv.mo
+? imdb/po/tr
+? imdb/po/tr.mo
+? imdb/src/Makefile
+? imdb/src/Makefile.in
+? kiddytimer/Makefile
+? kiddytimer/Makefile.in
+? kiddytimer/img/Makefile
+? kiddytimer/img/Makefile.in
+? kiddytimer/po/Makefile
+? kiddytimer/po/Makefile.in
+? kiddytimer/po/de
+? kiddytimer/po/de.mo
+? kiddytimer/po/it
+? kiddytimer/po/it.mo
+? kiddytimer/src/Makefile
+? kiddytimer/src/Makefile.in
+? lastfm/Makefile
+? lastfm/Makefile.in
+? lastfm/src/Makefile
+? lastfm/src/Makefile.in
+? logomanager/Makefile
+? logomanager/Makefile.in
+? logomanager/logodir_hdd/Makefile
+? logomanager/logodir_hdd/Makefile.in
+? logomanager/src/Makefile
+? logomanager/src/Makefile.in
+? mediadownloader/Makefile
+? mediadownloader/Makefile.in
+? mediadownloader/po/Makefile
+? mediadownloader/po/Makefile.in
+? mediadownloader/po/de
+? mediadownloader/po/de.mo
+? mediadownloader/po/es
+? mediadownloader/po/es.mo
+? mediadownloader/po/it
+? mediadownloader/po/it.mo
+? mediadownloader/po/nl
+? mediadownloader/po/nl.mo
+? mediadownloader/po/tr
+? mediadownloader/po/tr.mo
+? mediadownloader/src/Makefile
+? mediadownloader/src/Makefile.in
+? mosaic/Makefile
+? mosaic/Makefile.in
+? mosaic/po/Makefile
+? mosaic/po/Makefile.in
+? mosaic/po/de
+? mosaic/po/de.mo
+? mosaic/po/es
+? mosaic/po/es.mo
+? mosaic/po/fy
+? mosaic/po/fy.mo
+? mosaic/po/it
+? mosaic/po/it.mo
+? mosaic/po/nl
+? mosaic/po/nl.mo
+? mosaic/po/sv
+? mosaic/po/sv.mo
+? mosaic/po/tr
+? mosaic/po/tr.mo
+? mosaic/src/Makefile
+? mosaic/src/Makefile.in
+? moviecut/Makefile
+? moviecut/Makefile.in
+? moviecut/src_cc/.deps
+? moviecut/src_cc/Makefile
+? moviecut/src_cc/Makefile.in
+? moviecut/src_cc/mcut
+? moviecut/src_py/Makefile
+? moviecut/src_py/Makefile.in
+? movieretitle/Makefile
+? movieretitle/Makefile.in
+? movieretitle/po/Makefile
+? movieretitle/po/Makefile.in
+? movieretitle/po/de
+? movieretitle/po/de.mo
+? movieretitle/po/it
+? movieretitle/po/it.mo
+? movieretitle/po/nl
+? movieretitle/po/nl.mo
+? movieretitle/po/sr.po
+? movieretitle/po/tr
+? movieretitle/po/tr.mo
+? movieretitle/src/Makefile
+? movieretitle/src/Makefile.in
+? movietagger/Makefile
+? movietagger/Makefile.in
+? movietagger/etc/Makefile
+? movietagger/etc/Makefile.in
+? movietagger/src/Makefile
+? movietagger/src/Makefile.in
+? mytube/Makefile
+? mytube/Makefile.in
+? mytube/po/el
+? mytube/po/fy
+? mytube/po/lt
+? mytube/po/pl
+? mytube/po/pt
+? mytube/po/ru
+? mytube/po/sr
+? mytube/src/Makefile
+? mytube/src/Makefile.in
+? netcaster/Makefile
+? netcaster/Makefile.in
+? netcaster/src/Makefile
+? netcaster/src/Makefile.in
+? netcaster/src/bin/Makefile
+? netcaster/src/bin/Makefile.in
+? netcaster/src/bin/interface/Makefile
+? netcaster/src/bin/interface/Makefile.in
+? netcaster/src/etc/Makefile
+? netcaster/src/etc/Makefile.in
+? networkbrowser/Makefile
+? networkbrowser/Makefile.in
+? networkbrowser/po/Makefile
+? networkbrowser/po/Makefile.in
+? networkbrowser/po/ar
+? networkbrowser/po/ar.mo
+? networkbrowser/po/ca
+? networkbrowser/po/ca.mo
+? networkbrowser/po/cs
+? networkbrowser/po/cs.mo
+? networkbrowser/po/da
+? networkbrowser/po/da.mo
+? networkbrowser/po/de
+? networkbrowser/po/de.mo
+? networkbrowser/po/el
+? networkbrowser/po/el.mo
+? networkbrowser/po/en
+? networkbrowser/po/en.mo
+? networkbrowser/po/es
+? networkbrowser/po/es.mo
+? networkbrowser/po/fi
+? networkbrowser/po/fi.mo
+? networkbrowser/po/fr
+? networkbrowser/po/fr.mo
+? networkbrowser/po/hr
+? networkbrowser/po/hr.mo
+? networkbrowser/po/hu
+? networkbrowser/po/hu.mo
+? networkbrowser/po/is
+? networkbrowser/po/is.mo
+? networkbrowser/po/it
+? networkbrowser/po/it.mo
+? networkbrowser/po/lt
+? networkbrowser/po/lt.mo
+? networkbrowser/po/nl
+? networkbrowser/po/nl.mo
+? networkbrowser/po/no
+? networkbrowser/po/no.mo
+? networkbrowser/po/pl
+? networkbrowser/po/pl.mo
+? networkbrowser/po/pt
+? networkbrowser/po/pt.mo
+? networkbrowser/po/ru
+? networkbrowser/po/ru.mo
+? networkbrowser/po/sr.po
+? networkbrowser/po/sv
+? networkbrowser/po/sv.mo
+? networkbrowser/po/tr
+? networkbrowser/po/tr.mo
+? networkbrowser/src/Makefile
+? networkbrowser/src/Makefile.in
+? networkbrowser/src/icons/Makefile
+? networkbrowser/src/icons/Makefile.in
+? networkbrowser/src/lib/Makefile
+? networkbrowser/src/lib/Makefile.in
+? networkwizard/Makefile
+? networkwizard/Makefile.in
+? networkwizard/po/el
+? networkwizard/po/fy
+? networkwizard/po/lt
+? networkwizard/po/pl
+? networkwizard/po/pt
+? networkwizard/po/ru
+? networkwizard/po/sr
+? networkwizard/po/sr.po
+? networkwizard/src/Makefile
+? networkwizard/src/Makefile.in
+? ofdb/Makefile
+? ofdb/Makefile.in
+? ofdb/po/Makefile
+? ofdb/po/Makefile.in
+? ofdb/po/de
+? ofdb/po/de.mo
+? ofdb/po/it
+? ofdb/po/it.mo
+? ofdb/po/sr.po
+? ofdb/po/tr
+? ofdb/po/tr.mo
+? ofdb/src/Makefile
+? ofdb/src/Makefile.in
+? orfat/Makefile
+? orfat/Makefile.in
+? orfat/src/Makefile
+? orfat/src/Makefile.in
+? partnerbox/Makefile
+? partnerbox/Makefile.in
+? partnerbox/a.diff
+? partnerbox/po/Makefile
+? partnerbox/po/Makefile.in
+? partnerbox/po/de
+? partnerbox/po/de.mo
+? partnerbox/src/Makefile
+? partnerbox/src/Makefile.in
+? partnerbox/src/icons/Makefile
+? partnerbox/src/icons/Makefile.in
+? partnerbox/src/servicewebts/Makefile
+? partnerbox/src/servicewebts/Makefile.in
+? partnerbox/src/servicewebts/servicewebts.d
+? passwordchanger/Makefile
+? passwordchanger/Makefile.in
+? passwordchanger/po/Makefile
+? passwordchanger/po/Makefile.in
+? passwordchanger/po/de
+? passwordchanger/po/de.mo
+? passwordchanger/po/es
+? passwordchanger/po/es.mo
+? passwordchanger/po/fy
+? passwordchanger/po/fy.mo
+? passwordchanger/po/it
+? passwordchanger/po/it.mo
+? passwordchanger/po/nl
+? passwordchanger/po/nl.mo
+? passwordchanger/po/sr.po
+? passwordchanger/po/sv
+? passwordchanger/po/sv.mo
+? passwordchanger/po/tr
+? passwordchanger/po/tr.mo
+? passwordchanger/src/Makefile
+? passwordchanger/src/Makefile.in
+? permanentclock/Makefile
+? permanentclock/Makefile.in
+? permanentclock/po/Makefile
+? permanentclock/po/Makefile.in
+? permanentclock/po/de
+? permanentclock/po/de.mo
+? permanentclock/po/es
+? permanentclock/po/es.mo
+? permanentclock/po/fy
+? permanentclock/po/fy.mo
+? permanentclock/po/it
+? permanentclock/po/it.mo
+? permanentclock/po/nl
+? permanentclock/po/nl.mo
+? permanentclock/po/sv
+? permanentclock/po/sv.mo
+? permanentclock/po/tr
+? permanentclock/po/tr.mo
+? permanentclock/src/Makefile
+? permanentclock/src/Makefile.in
+? podcast/Makefile
+? podcast/Makefile.in
+? podcast/etc/Makefile
+? podcast/etc/Makefile.in
+? podcast/po/Makefile
+? podcast/po/Makefile.in
+? podcast/po/de
+? podcast/po/de.mo
+? podcast/po/it
+? podcast/po/it.mo
+? podcast/po/tr
+? podcast/po/tr.mo
+? podcast/src/Makefile
+? podcast/src/Makefile.in
+? quickbutton/Makefile
+? quickbutton/Makefile.in
+? quickbutton/po/Makefile
+? quickbutton/po/Makefile.in
+? quickbutton/po/de
+? quickbutton/po/de.mo
+? quickbutton/po/it
+? quickbutton/po/it.mo
+? quickbutton/po/sr.po
+? quickbutton/po/tr
+? quickbutton/po/tr.mo
+? quickbutton/src/Makefile
+? quickbutton/src/Makefile.in
+? remotetimer/Makefile
+? remotetimer/Makefile.in
+? remotetimer/src/Makefile
+? remotetimer/src/Makefile.in
+? rsdownloader/Makefile
+? rsdownloader/Makefile.in
+? rsdownloader/po/Makefile
+? rsdownloader/po/Makefile.in
+? rsdownloader/po/de
+? rsdownloader/po/de.mo
+? rsdownloader/po/es
+? rsdownloader/po/es.mo
+? rsdownloader/po/it
+? rsdownloader/po/it.mo
+? rsdownloader/po/nl
+? rsdownloader/po/nl.mo
+? rsdownloader/po/tr
+? rsdownloader/po/tr.mo
+? rsdownloader/src/Makefile
+? rsdownloader/src/Makefile.in
+? rsdownloader/src/container/Makefile
+? rsdownloader/src/container/Makefile.in
+? setpasswd/Makefile
+? setpasswd/Makefile.in
+? setpasswd/po/Makefile
+? setpasswd/po/Makefile.in
+? setpasswd/po/ar
+? setpasswd/po/ar.mo
+? setpasswd/po/ar.po
+? setpasswd/po/ca
+? setpasswd/po/ca.mo
+? setpasswd/po/ca.po
+? setpasswd/po/cs
+? setpasswd/po/cs.mo
+? setpasswd/po/cs.po
+? setpasswd/po/da
+? setpasswd/po/da.mo
+? setpasswd/po/da.po
+? setpasswd/po/de
+? setpasswd/po/de.mo
+? setpasswd/po/el
+? setpasswd/po/el.mo
+? setpasswd/po/el.po
+? setpasswd/po/en
+? setpasswd/po/en.mo
+? setpasswd/po/en.po
+? setpasswd/po/es
+? setpasswd/po/es.mo
+? setpasswd/po/es.po
+? setpasswd/po/fi
+? setpasswd/po/fi.mo
+? setpasswd/po/fi.po
+? setpasswd/po/fr
+? setpasswd/po/fr.mo
+? setpasswd/po/fr.po
+? setpasswd/po/hr
+? setpasswd/po/hr.mo
+? setpasswd/po/hr.po
+? setpasswd/po/hu
+? setpasswd/po/hu.mo
+? setpasswd/po/hu.po
+? setpasswd/po/is
+? setpasswd/po/is.mo
+? setpasswd/po/is.po
+? setpasswd/po/it
+? setpasswd/po/it.mo
+? setpasswd/po/lt
+? setpasswd/po/lt.mo
+? setpasswd/po/lt.po
+? setpasswd/po/nl
+? setpasswd/po/nl.mo
+? setpasswd/po/no
+? setpasswd/po/no.mo
+? setpasswd/po/no.po
+? setpasswd/po/pl
+? setpasswd/po/pl.mo
+? setpasswd/po/pl.po
+? setpasswd/po/pt
+? setpasswd/po/pt.mo
+? setpasswd/po/pt.po
+? setpasswd/po/ru
+? setpasswd/po/ru.mo
+? setpasswd/po/ru.po
+? setpasswd/po/sv
+? setpasswd/po/sv.mo
+? setpasswd/po/sv.po
+? setpasswd/po/tr
+? setpasswd/po/tr.mo
+? setpasswd/src/Makefile
+? setpasswd/src/Makefile.in
+? simplerss/Makefile
+? simplerss/Makefile.in
+? simplerss/po/Makefile
+? simplerss/po/Makefile.in
+? simplerss/po/de
+? simplerss/po/de.mo
+? simplerss/po/es
+? simplerss/po/es.mo
+? simplerss/po/it
+? simplerss/po/it.mo
+? simplerss/po/nl
+? simplerss/po/nl.mo
+? simplerss/po/tr
+? simplerss/po/tr.mo
+? simplerss/src/Makefile
+? simplerss/src/Makefile.in
+? startuptostandby/Makefile
+? startuptostandby/Makefile.in
+? startuptostandby/src/Makefile
+? startuptostandby/src/Makefile.in
+? tageditor/Makefile
+? tageditor/Makefile.in
+? tageditor/po/Makefile
+? tageditor/po/Makefile.in
+? tageditor/po/de
+? tageditor/po/de.mo
+? tageditor/po/it
+? tageditor/po/it.mo
+? tageditor/po/nl
+? tageditor/po/nl.mo
+? tageditor/po/tr
+? tageditor/po/tr.mo
+? tageditor/src/Makefile
+? tageditor/src/Makefile.in
+? trafficinfo/Makefile
+? trafficinfo/Makefile.in
+? trafficinfo/src/Makefile
+? trafficinfo/src/Makefile.in
+? unwetterzentrale/Makefile
+? unwetterzentrale/Makefile.in
+? unwetterzentrale/src/Makefile
+? unwetterzentrale/src/Makefile.in
+? vlcplayer/Makefile
+? vlcplayer/Makefile.in
+? vlcplayer/po/Makefile
+? vlcplayer/po/Makefile.in
+? vlcplayer/po/de
+? vlcplayer/po/de.mo
+? vlcplayer/po/es
+? vlcplayer/po/es.mo
+? vlcplayer/po/it
+? vlcplayer/po/it.mo
+? vlcplayer/po/sr.po
+? vlcplayer/po/sv
+? vlcplayer/po/sv.mo
+? vlcplayer/po/tr
+? vlcplayer/po/tr.mo
+? vlcplayer/src/Makefile
+? vlcplayer/src/Makefile.in
+? vlcplayer/src/servicets/servicets.d
+? webcamviewer/Makefile
+? webcamviewer/Makefile.in
+? webcamviewer/src/Makefile
+? webcamviewer/src/Makefile.in
+? webinterface/Makefile
+? webinterface/Makefile.in
+? webinterface/etc/Makefile
+? webinterface/etc/Makefile.in
+? webinterface/po/Makefile
+? webinterface/po/Makefile.in
+? webinterface/po/de
+? webinterface/po/de.mo
+? webinterface/po/es
+? webinterface/po/es.mo
+? webinterface/po/fy
+? webinterface/po/fy.mo
+? webinterface/po/it
+? webinterface/po/it.mo
+? webinterface/po/nl
+? webinterface/po/nl.mo
+? webinterface/po/pl
+? webinterface/po/pl.mo
+? webinterface/po/sr
+? webinterface/po/sr.mo
+? webinterface/po/sv
+? webinterface/po/sv.mo
+? webinterface/po/tr
+? webinterface/po/tr.mo
+? webinterface/src/Makefile
+? webinterface/src/Makefile.in
+? webinterface/src/WebChilds/Makefile
+? webinterface/src/WebChilds/Makefile.in
+? webinterface/src/WebChilds/External/Makefile
+? webinterface/src/WebChilds/External/Makefile.in
+? webinterface/src/WebComponents/Makefile
+? webinterface/src/WebComponents/Makefile.in
+? webinterface/src/WebComponents/Converter/Makefile
+? webinterface/src/WebComponents/Converter/Makefile.in
+? webinterface/src/WebComponents/Sources/Makefile
+? webinterface/src/WebComponents/Sources/Makefile.in
+? webinterface/src/mobile/Makefile
+? webinterface/src/mobile/Makefile.in
+? webinterface/src/web/Makefile
+? webinterface/src/web/Makefile.in
+? webinterface/src/web/wap/Makefile
+? webinterface/src/web/wap/Makefile.in
+? webinterface/src/web-data/Makefile
+? webinterface/src/web-data/Makefile.in
+? webinterface/src/web-data/gfx/Makefile
+? webinterface/src/web-data/gfx/Makefile.in
+? webinterface/src/web-data/img/Makefile
+? webinterface/src/web-data/img/Makefile.in
+? webinterface/src/web-data/lib/Makefile
+? webinterface/src/web-data/lib/Makefile.in
+? webinterface/src/web-data/lib/ptwindow/Makefile
+? webinterface/src/web-data/lib/ptwindow/Makefile.in
+? webinterface/src/web-data/lib/ptwindow/javascripts/Makefile
+? webinterface/src/web-data/lib/ptwindow/javascripts/Makefile.in
+? webinterface/src/web-data/lib/ptwindow/themes/Makefile
+? webinterface/src/web-data/lib/ptwindow/themes/Makefile.in
+? webinterface/src/web-data/lib/ptwindow/themes/alert/Makefile
+? webinterface/src/web-data/lib/ptwindow/themes/alert/Makefile.in
+? webinterface/src/web-data/lib/ptwindow/themes/alphacube/Makefile
+? webinterface/src/web-data/lib/ptwindow/themes/alphacube/Makefile.in
+? webinterface/src/web-data/lib/ptwindow/themes/default/Makefile
+? webinterface/src/web-data/lib/ptwindow/themes/default/Makefile.in
+? webinterface/src/web-data/lib/ptwindow/themes/iefix/Makefile
+? webinterface/src/web-data/lib/ptwindow/themes/iefix/Makefile.in
+? webinterface/src/web-data/tpl/Makefile
+? webinterface/src/web-data/tpl/Makefile.in
+? webinterface/src/web-data/tpl/default/Makefile
+? webinterface/src/web-data/tpl/default/Makefile.in
+? webinterface/src/web-data/tpl/default/streaminterface/Makefile
+? webinterface/src/web-data/tpl/default/streaminterface/Makefile.in
+? webinterface/src/web-data/tpl/default/streaminterface/img/Makefile
+? webinterface/src/web-data/tpl/default/streaminterface/img/Makefile.in
+? werbezapper/Makefile
+? werbezapper/Makefile.in
+? werbezapper/po/Makefile
+? werbezapper/po/Makefile.in
+? werbezapper/po/de
+? werbezapper/po/de.mo
+? werbezapper/po/es
+? werbezapper/po/es.mo
+? werbezapper/po/it
+? werbezapper/po/it.mo
+? werbezapper/po/nl
+? werbezapper/po/nl.mo
+? werbezapper/po/tr
+? werbezapper/po/tr.mo
+? werbezapper/src/Makefile
+? werbezapper/src/Makefile.in
+? wirelesslan/Makefile
+? wirelesslan/Makefile.in
+? wirelesslan/po/el
+? wirelesslan/po/fy
+? wirelesslan/po/lt
+? wirelesslan/po/pl
+? wirelesslan/po/pt
+? wirelesslan/po/ru
+? wirelesslan/po/sr
+? wirelesslan/src/Makefile
+? wirelesslan/src/Makefile.in
+? youtubeplayer/Makefile
+? youtubeplayer/Makefile.in
+? youtubeplayer/src/Makefile
+? youtubeplayer/src/Makefile.in
+? youtubeplayer/src/Nemesis.GlassLine_Mod/Makefile
+? youtubeplayer/src/Nemesis.GlassLine_Mod/Makefile.in
+? zaphistorybrowser/Makefile
+? zaphistorybrowser/Makefile.in
+? zaphistorybrowser/po/Makefile
+? zaphistorybrowser/po/Makefile.in
+? zaphistorybrowser/po/de
+? zaphistorybrowser/po/de.mo
+? zaphistorybrowser/po/es
+? zaphistorybrowser/po/es.mo
+? zaphistorybrowser/po/fy
+? zaphistorybrowser/po/fy.mo
+? zaphistorybrowser/po/it
+? zaphistorybrowser/po/it.mo
+? zaphistorybrowser/po/nl
+? zaphistorybrowser/po/nl.mo
+? zaphistorybrowser/po/sv
+? zaphistorybrowser/po/sv.mo
+? zaphistorybrowser/po/tr
+? zaphistorybrowser/po/tr.mo
+? zaphistorybrowser/src/Makefile
+? zaphistorybrowser/src/Makefile.in
+Index: autotimer/po/Makefile.am
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/autotimer/po/Makefile.am,v
+retrieving revision 1.7
+diff -u -r1.7 Makefile.am
+--- autotimer/po/Makefile.am	9 Jan 2009 18:31:56 -0000	1.7
++++ autotimer/po/Makefile.am	22 Sep 2009 08:17:28 -0000
+@@ -13,7 +13,7 @@
+ #MSGFMT = ./msgfmt.py
+ MSGFMT = msgfmt
+ 
+-LANGS := de es fy it nl tr
++LANGS := de es fy it nl tr sr
+ LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
+ LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
+ 
+Index: epgrefresh/po/Makefile.am
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/epgrefresh/po/Makefile.am,v
+retrieving revision 1.6
+diff -u -r1.6 Makefile.am
+--- epgrefresh/po/Makefile.am	4 Sep 2009 10:59:56 -0000	1.6
++++ epgrefresh/po/Makefile.am	22 Sep 2009 08:17:28 -0000
+@@ -13,7 +13,7 @@
+ #MSGFMT = ./msgfmt.py
+ MSGFMT = msgfmt
+ 
+-LANGS := de es fy it nl tr sv
++LANGS := de es fy it nl tr sv sr
+ LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
+ LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
+ 
+Index: fritzcall/po/Makefile.am
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/fritzcall/po/Makefile.am,v
+retrieving revision 1.8
+diff -u -r1.8 Makefile.am
+--- fritzcall/po/Makefile.am	4 Jun 2009 20:33:40 -0000	1.8
++++ fritzcall/po/Makefile.am	22 Sep 2009 08:17:28 -0000
+@@ -13,7 +13,7 @@
+ #MSGFMT = ./msgfmt.py
+ MSGFMT = msgfmt
+ 
+-LANGS := de it nl tr es
++LANGS := de it nl tr es sr
+ LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
+ LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
+ 
+Index: imdb/po/Makefile.am
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/imdb/po/Makefile.am,v
+retrieving revision 1.3
+diff -u -r1.3 Makefile.am
+--- imdb/po/Makefile.am	15 Apr 2009 18:41:42 -0000	1.3
++++ imdb/po/Makefile.am	22 Sep 2009 08:17:28 -0000
+@@ -13,7 +13,7 @@
+ #MSGFMT = ./msgfmt.py
+ MSGFMT = msgfmt
+ 
+-LANGS := de it sv tr
++LANGS := de it sv tr sr
+ LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
+ LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
+ 
+Index: movieretitle/po/Makefile.am
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/movieretitle/po/Makefile.am,v
+retrieving revision 1.4
+diff -u -r1.4 Makefile.am
+--- movieretitle/po/Makefile.am	1 Mar 2009 01:34:12 -0000	1.4
++++ movieretitle/po/Makefile.am	22 Sep 2009 08:17:28 -0000
+@@ -13,7 +13,7 @@
+ #MSGFMT = ./msgfmt.py
+ MSGFMT = msgfmt
+ 
+-LANGS := de it nl tr
++LANGS := de it nl tr sr
+ LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
+ LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
+ 
+Index: mytube/po/sr.po
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/mytube/po/sr.po,v
+retrieving revision 1.1
+diff -u -r1.1 sr.po
+--- mytube/po/sr.po	21 Aug 2009 06:59:08 -0000	1.1
++++ mytube/po/sr.po	22 Sep 2009 08:17:28 -0000
+@@ -1,411 +1,638 @@
++# German translations for tuxbox-enigma package.
++# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the tuxbox-enigma package.
++# Automatically generated, 2005.
++#
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: Srpski Enigma2 MyTube\n"
++"Project-Id-Version: Enigma2 plugin - MyTube\n"
+ "Report-Msgid-Bugs-To: \n"
+-"POT-Creation-Date: 2009-08-21 08:55+0200\n"
+-"PO-Revision-Date: 2009-08-17 18:47+0100\n"
++"POT-Creation-Date: 2009-05-29 17:38+0200\n"
++"PO-Revision-Date: 2009-09-10 23:04+0100\n"
+ "Last-Translator: maja <jovanovic@gmx.ch>\n"
+-"Language-Team: veselin & majevica www.crnaberza.com <jovanovic@gmx.ch>\n"
++"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+ "MIME-Version: 1.0\n"
+-"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Type: text/plain; charset=utf-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+-"X-Poedit-Language: Srpski (Serbian)\n"
+-"X-Poedit-Country: SRBIJA (SERBIA)\n"
++"X-Poedit-Language: Serbian\n"
++"X-Poedit-Country: SERBIA\n"
+ "X-Poedit-SourceCharset: utf-8\n"
+-"X-Poedit-KeywordsList: _\n"
+-"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-"
+-"plugins\\MyTube\n"
+-"X-Poedit-SearchPath-0: src\n"
+ 
++#: ../src/MyTubeSearch.py:309
+ msgid " Results"
+-msgstr ""
++msgstr "Rezultati"
+ 
++#: ../src/plugin.py:1104
++#: ../src/plugin.py:1270
+ msgid "Added: "
+ msgstr "Dodato: "
+ 
++#: ../src/MyTubeSearch.py:180
++#: ../src/MyTubeSearch.py:200
++#: ../src/plugin.py:68
++#: ../src/plugin.py:88
+ msgid "All"
+-msgstr ""
++msgstr "Svi"
+ 
++#: ../src/MyTubeSearch.py:168
++#: ../src/plugin.py:56
+ msgid "All Time"
+-msgstr ""
++msgstr "Sve vreme"
+ 
++#: ../src/plugin.py:423
+ msgid "An error occured."
+-msgstr ""
++msgstr "Desila se greška."
+ 
++#: ../src/MyTubeSearch.py:228
++#: ../src/plugin.py:116
+ msgid "Ascending"
+-msgstr ""
++msgstr "Naviše"
+ 
++#: ../src/MyTubeSearch.py:249
++#: ../src/MyTubeSearch.py:252
++#: ../src/plugin.py:136
++#: ../src/plugin.py:139
+ msgid "Ask user"
+-msgstr ""
++msgstr "Pitati korisnika"
+ 
++#: ../src/MyTubeSearch.py:201
++#: ../src/MyTubeSearch.py:208
++#: ../src/plugin.py:89
++#: ../src/plugin.py:96
+ msgid "Australia"
+-msgstr ""
++msgstr "Australija"
+ 
++#: ../src/plugin.py:1267
+ msgid "Author: "
+-msgstr ""
++msgstr "Autor: "
+ 
++#: ../src/MyTubeSearch.py:182
++#: ../src/plugin.py:70
+ msgid "Autos & Vehicles"
+-msgstr ""
++msgstr "Automobili i vozila"
+ 
++#: ../src/MyTubeSearch.py:202
++#: ../src/plugin.py:90
+ msgid "Brazil"
+-msgstr ""
++msgstr "Brazil"
+ 
++#: ../src/MyTubeSearch.py:203
++#: ../src/plugin.py:91
+ msgid "Canada"
+-msgstr ""
++msgstr "Kanada"
+ 
++#: ../src/MyTubeSearch.py:455
+ msgid "Choose target folder"
+-msgstr ""
++msgstr "Izaberi ciljnu datoteku"
+ 
++#: ../src/MyTubeSearch.py:433
+ msgid "Clear history on Exit:"
+-msgstr "Briši istoriju na izlazu:"
++msgstr "Obriši istoriju kod izlaska:"
+ 
++#: ../src/MyTubeSearch.py:393
++#: ../src/MyTubeSearch.py:558
++#: ../src/plugin.py:269
++#: ../src/plugin.py:1209
++#: ../src/plugin.py:1398
+ msgid "Close"
+ msgstr "Zatvori"
+ 
++#: ../src/MyTubeSearch.py:189
++#: ../src/plugin.py:77
+ msgid "Comedy"
+-msgstr ""
++msgstr "Komedije"
+ 
++#: ../src/MyTubeSearch.py:204
++#: ../src/plugin.py:92
+ msgid "Czech Republic"
+-msgstr ""
++msgstr "Češka Republika"
+ 
++#: ../src/MyTubeSearch.py:229
++#: ../src/plugin.py:117
+ msgid "Descending"
+-msgstr ""
++msgstr "Naniže"
+ 
++#: ../src/MyTubeSearch.py:414
+ msgid "Display search results by:"
+-msgstr "Prikaži rezultate pretrage po:"
++msgstr "Prikaži rezultate traženja po:"
+ 
++#: ../src/plugin.py:719
+ msgid "Do you want to see more entries?"
+-msgstr "Da li želite da vidite još unosa?"
++msgstr "Želite li videti još unosa?"
+ 
++#: ../src/plugin.py:485
+ msgid "Download Video"
+-msgstr "Skini video"
++msgstr "Preuzmi video"
+ 
++#: ../src/MyTubeSearch.py:430
+ msgid "Download location"
+-msgstr "Lokacija za skidanje:"
++msgstr "Mesto preuzimanja:"
+ 
++#: ../src/plugin.py:1238
+ msgid "Downloading screenshots. Please wait..."
+-msgstr "Skidam skrinšotove. Molim sačekajte..."
++msgstr "Preuzimam snimke ekrana. Molim sačekajte..."
+ 
++#: ../src/plugin.py:1104
++#: ../src/plugin.py:1264
+ msgid "Duration: "
+ msgstr "Trajanje: "
+ 
++#: ../src/MyTubeSearch.py:193
++#: ../src/plugin.py:81
+ msgid "Education"
+-msgstr ""
++msgstr "Obrazovanje"
+ 
++#: ../src/plugin.py:526
+ msgid "Enter your search term(s)"
+-msgstr "Ubacite svoj izraz(e) za traženje..."
++msgstr "Unesi svoj termin(e) za traženje"
+ 
++#: ../src/MyTubeSearch.py:192
++#: ../src/plugin.py:80
+ msgid "Entertainment"
+-msgstr ""
++msgstr "Zabava"
+ 
++#: ../src/plugin.py:371
++#: ../src/plugin.py:413
+ msgid "Fetching feed entries"
+-msgstr "Dobavljanje fid unosa"
++msgstr "Dobavljam fid unose"
+ 
++#: ../src/plugin.py:418
+ msgid "Fetching search entries"
+-msgstr "Dobavljanje unosa traženja..."
++msgstr "Dobavljam unose traženja"
+ 
++#: ../src/MyTubeSearch.py:181
++#: ../src/plugin.py:69
+ msgid "Film & Animation"
+-msgstr ""
++msgstr "Film & Animacija"
+ 
++#: ../src/MyTubeSearch.py:205
++#: ../src/plugin.py:93
+ msgid "France"
+-msgstr ""
++msgstr "Francuska"
+ 
++#: ../src/MyTubeSearch.py:188
++#: ../src/plugin.py:76
+ msgid "Gaming"
+-msgstr ""
++msgstr "Igranje"
+ 
++#: ../src/MyTubeSearch.py:206
++#: ../src/plugin.py:94
+ msgid "Germany"
+-msgstr ""
++msgstr "Nemačka"
+ 
++#: ../src/MyTubeSearch.py:207
++#: ../src/plugin.py:95
+ msgid "Great Britain"
+-msgstr ""
++msgstr "Velika Britanija"
+ 
++#: ../src/MyTubeSearch.py:237
++#: ../src/plugin.py:125
++#: ../src/plugin.py:752
+ msgid "HD videos"
+-msgstr "HD video"
++msgstr "HD Video "
+ 
++#: ../src/plugin.py:1416
+ msgid "Help"
+-msgstr ""
++msgstr "Pomoć"
+ 
++#: ../src/plugin.py:271
+ msgid "History"
+ msgstr "Istorija"
+ 
++#: ../src/MyTubeSearch.py:209
++#: ../src/plugin.py:97
+ msgid "Holland"
+-msgstr ""
++msgstr "Holandija"
+ 
++#: ../src/MyTubeSearch.py:210
++#: ../src/plugin.py:98
+ msgid "Hong Kong"
+-msgstr ""
++msgstr "Hong Kong"
+ 
++#: ../src/MyTubeSearch.py:194
++#: ../src/plugin.py:82
+ msgid "Howto & Style"
+-msgstr ""
++msgstr "Kako da... & Stil"
+ 
++#: ../src/MyTubeSearch.py:211
++#: ../src/plugin.py:99
+ msgid "India"
+-msgstr ""
++msgstr "Indija"
+ 
++#: ../src/MyTubeSearch.py:212
++#: ../src/plugin.py:100
+ msgid "Ireland"
+-msgstr ""
++msgstr "Irska"
+ 
++#: ../src/MyTubeSearch.py:213
++#: ../src/plugin.py:101
+ msgid "Israel"
+-msgstr ""
++msgstr "Izrael"
+ 
++#: ../src/MyTubeSearch.py:214
++#: ../src/plugin.py:102
+ msgid "Italy"
+-msgstr ""
++msgstr "Italija"
+ 
++#: ../src/MyTubeSearch.py:215
++#: ../src/plugin.py:103
+ msgid "Japan"
+-msgstr ""
++msgstr "Japan"
+ 
++#: ../src/MyTubeSearch.py:418
+ msgid "Load feed on startup:"
+-msgstr "Učitaj fid kod pokretanja:"
++msgstr "Učitaj fid na startu:"
+ 
++#: ../src/MyTubeSearch.py:216
++#: ../src/plugin.py:104
+ msgid "Mexico"
+-msgstr ""
++msgstr "Meksiko"
+ 
++#: ../src/plugin.py:929
+ msgid "More video entries."
+-msgstr ""
++msgstr "Još video unosa."
+ 
++#: ../src/MyTubeSearch.py:241
++#: ../src/plugin.py:129
++#: ../src/plugin.py:759
+ msgid "Most discussed"
+-msgstr "Najviše diskutovan"
++msgstr "Najviše komentarisani"
+ 
++#: ../src/MyTubeSearch.py:243
++#: ../src/plugin.py:131
++#: ../src/plugin.py:760
+ msgid "Most linked"
+-msgstr "Najpovezaniji"
++msgstr "Najviše povezivani"
+ 
++#: ../src/plugin.py:757
+ msgid "Most popular"
+ msgstr "Najpopularniji"
+ 
++#: ../src/MyTubeSearch.py:245
++#: ../src/plugin.py:133
++#: ../src/plugin.py:758
+ msgid "Most recent"
+-msgstr "Najnoviji"
++msgstr "Najsvežiji"
+ 
++#: ../src/MyTubeSearch.py:244
++#: ../src/plugin.py:132
++#: ../src/plugin.py:762
+ msgid "Most responded"
+-msgstr "Najviše odgovora"
++msgstr "Najprikladniji"
+ 
++#: ../src/MyTubeSearch.py:238
++#: ../src/plugin.py:126
++#: ../src/plugin.py:756
+ msgid "Most viewed"
+-msgstr "Najviše pregleda"
++msgstr "Najgledaniji"
+ 
++#: ../src/MyTubeSearch.py:183
++#: ../src/plugin.py:71
+ msgid "Music"
+-msgstr ""
++msgstr "Muzika"
+ 
++#: ../src/plugin.py:1738
+ msgid "My TubePlayer"
+-msgstr ""
++msgstr "MyTube Plejer"
+ 
++#: ../src/plugin.py:472
++#: ../src/plugin.py:478
+ msgid "MyTube Settings"
+-msgstr "MyTube postavke"
++msgstr "MyTube Podešavanja"
+ 
++#: ../src/plugin.py:384
+ msgid "MyTubePlayer"
+-msgstr ""
++msgstr "MyTube Plejer"
+ 
++#: ../src/plugin.py:450
++#: ../src/plugin.py:452
++#: ../src/plugin.py:459
+ msgid "MyTubePlayer Help"
+-msgstr ""
++msgstr "MyTube Plejer pomoć"
+ 
++#: ../src/MyTubeSearch.py:571
++#: ../src/MyTubeSearch.py:588
+ msgid "MyTubePlayer active video downloads"
+-msgstr "MyTube plejer aktivna skidanja videa"
++msgstr "MyTube Plejer aktivna preuzimanja"
+ 
++#: ../src/MyTubeSearch.py:407
++#: ../src/MyTubeSearch.py:410
+ msgid "MyTubePlayer settings"
+-msgstr "MyTube plejer postavke"
++msgstr "MyTube Plejer podešavanja"
+ 
++#: ../src/plugin.py:1279
+ msgid "MyTubeVideoInfoScreen"
+-msgstr ""
++msgstr "MyTube video info ekran"
+ 
++#: ../src/plugin.py:1425
+ msgid "MyTubeVideohelpScreen"
+-msgstr ""
++msgstr "MyTube video ekran pomoći"
+ 
++#: ../src/MyTubeSearch.py:217
++#: ../src/plugin.py:105
+ msgid "New Zealand"
+-msgstr ""
++msgstr "Novi Zeland"
+ 
++#: ../src/MyTubeSearch.py:191
++#: ../src/plugin.py:79
+ msgid "News & Politics"
+-msgstr ""
++msgstr "Vesti & Politika"
+ 
++#: ../src/MyTubeSearch.py:176
++#: ../src/plugin.py:64
++#: ../src/plugin.py:571
++#: ../src/plugin.py:577
+ msgid "No"
+ msgstr "Ne"
+ 
++#: ../src/plugin.py:1702
+ msgid "No playable video found! Stop playing this movie?"
+-msgstr ""
++msgstr "Nijedan video nije nađen! Zaustavi reprodukciju ovog filma?"
+ 
++#: ../src/plugin.py:429
+ msgid "No videos to display"
+-msgstr "Nema videa za prikaz"
++msgstr "Nema videa za prikazivanje"
+ 
++#: ../src/plugin.py:1695
+ msgid "No, but play video again"
+-msgstr "Ne, ali reprodukuj video ponovo"
++msgstr "Ne, ali pusti video ponovo"
+ 
++#: ../src/plugin.py:572
+ msgid "No, but switch to video entries."
+ msgstr "Ne, ali prebaci na video unose."
+ 
++#: ../src/plugin.py:578
+ msgid "No, but switch to video search."
+ msgstr "Ne, ali prebaci na traženje videa."
+ 
++#: ../src/MyTubeSearch.py:195
++#: ../src/plugin.py:83
+ msgid "Nonprofits & Activism"
+-msgstr ""
++msgstr "Neprofitni & Aktivan"
+ 
++#: ../src/plugin.py:433
+ msgid "Not fetching feed entries"
+-msgstr "Ne dobavljam fid unose"
++msgstr "Ne dobijam fid unose"
+ 
++#: ../src/MyTubeSearch.py:190
++#: ../src/plugin.py:78
+ msgid "People & Blogs"
+-msgstr ""
++msgstr "Ljudi & Blogovi"
+ 
++#: ../src/MyTubeSearch.py:184
++#: ../src/plugin.py:72
+ msgid "Pets & Animals"
+-msgstr ""
++msgstr "Kućni ljub.& životinje"
+ 
++#: ../src/plugin.py:1739
+ msgid "Play YouTube movies"
+-msgstr "Reprodukuj YouTube filmove"
++msgstr "reprodukuj YouTube filmove"
+ 
++#: ../src/MyTubeSearch.py:249
++#: ../src/plugin.py:136
+ msgid "Play next video"
+ msgstr "Reprodukuj sledeći video"
+ 
++#: ../src/MyTubeSearch.py:249
++#: ../src/plugin.py:136
+ msgid "Play video again"
+-msgstr "Ponovo reprodukuj video"
++msgstr "Reprodukuj video ponovo"
+ 
++#: ../src/plugin.py:433
+ msgid "Please enter your search term."
+-msgstr "Molim ubacite vaš izraz za traženje."
++msgstr "Molim unesi svoj termin za traženje."
+ 
++#: ../src/plugin.py:429
+ msgid "Please select a standard feed or try searching for videos."
+-msgstr "Molim,izaberite standardni fid ili pokušajte traženje videa."
++msgstr "Molim izaberi standardni fid ili pokušaj traženje videa."
+ 
++#: ../src/MyTubeSearch.py:218
++#: ../src/plugin.py:106
+ msgid "Poland"
+-msgstr ""
++msgstr "Poljska"
+ 
++#: ../src/MyTubeSearch.py:163
++#: ../src/plugin.py:51
+ msgid "Published"
+-msgstr "Objavljeno"
++msgstr "Publikovano"
+ 
++#: ../src/MyTubeSearch.py:164
++#: ../src/plugin.py:52
+ msgid "Rating"
+ msgstr "Ocena"
+ 
++#: ../src/plugin.py:1104
+ msgid "Ratings: "
+-msgstr "Ocena: "
++msgstr "Ocene: "
+ 
++#: ../src/plugin.py:580
+ msgid "Really quit MyTube Player?"
+-msgstr "Stvarno napustiti MyTube plejer?"
++msgstr "Stvarno napustiti MyTube Plejer?"
+ 
++#: ../src/MyTubeSearch.py:240
++#: ../src/plugin.py:128
++#: ../src/plugin.py:761
+ msgid "Recently featured"
+-msgstr "Nedavno uobličeni"
++msgstr "Nedavno izveden"
+ 
++#: ../src/plugin.py:936
+ msgid "Related video entries."
+-msgstr ""
++msgstr "Povezani video unosi."
+ 
++#: ../src/MyTubeSearch.py:161
++#: ../src/plugin.py:49
+ msgid "Relevance"
+-msgstr "Važnost"
++msgstr "Važnbost"
+ 
++#: ../src/plugin.py:943
+ msgid "Response video entries."
+-msgstr ""
++msgstr "Odjeknuli video unosi."
+ 
++#: ../src/MyTubeSearch.py:249
++#: ../src/MyTubeSearch.py:252
++#: ../src/plugin.py:136
++#: ../src/plugin.py:139
+ msgid "Return to movie list"
+-msgstr ""
++msgstr "Vratiti se na video listu"
+ 
++#: ../src/MyTubeSearch.py:219
++#: ../src/plugin.py:107
+ msgid "Russia"
+-msgstr ""
++msgstr "Rusija"
+ 
++#: ../src/MyTubeSearch.py:394
+ msgid "Save"
+ msgstr "Sačuvaj"
+ 
++#: ../src/MyTubeSearch.py:196
++#: ../src/plugin.py:84
+ msgid "Science & Technology"
+-msgstr ""
++msgstr "Nauka & Tehnika"
+ 
++#: ../src/plugin.py:388
+ msgid "Search Term(s)"
+-msgstr "Traži izraz(e)"
++msgstr "Termin(i) za traženje"
+ 
++#: ../src/MyTubeSearch.py:416
+ msgid "Search category:"
+-msgstr "Traži kategoriju:"
++msgstr "Kategorije za traženje:"
+ 
++#: ../src/MyTubeSearch.py:417
+ msgid "Search region:"
+-msgstr "Traži regiju:"
++msgstr "Region za traženje:"
+ 
++#: ../src/MyTubeSearch.py:415
+ msgid "Search restricted content:"
+ msgstr "Traži ograničeni sadržaj:"
+ 
++#: ../src/plugin.py:764
+ msgid "Select new feed to view."
+-msgstr "Izaberi novi fid za pregled."
++msgstr "Izaberi novi fid da pregledaš."
+ 
++#: ../src/plugin.py:475
++#: ../src/plugin.py:490
+ msgid "Select your choice."
+-msgstr "Izaberite vašu alternativu."
++msgstr "Označi svoj izbor."
+ 
++#: ../src/MyTubeSearch.py:187
++#: ../src/plugin.py:75
+ msgid "Short Movies"
+-msgstr ""
++msgstr "Kratki filmovi"
+ 
++#: ../src/plugin.py:684
+ msgid "Sorry, video is not available!"
+-msgstr "Žao nam je,video je nedostupan!"
++msgstr "Video nije dostupan,žao mi je!"
+ 
++#: ../src/MyTubeSearch.py:220
++#: ../src/plugin.py:108
+ msgid "South Korea"
+-msgstr ""
++msgstr "Južna Koreja"
+ 
++#: ../src/MyTubeSearch.py:221
++#: ../src/plugin.py:109
+ msgid "Spain"
+-msgstr ""
++msgstr "Španija"
+ 
++#: ../src/MyTubeSearch.py:185
++#: ../src/plugin.py:73
+ msgid "Sports"
+-msgstr ""
++msgstr "Sport"
+ 
++#: ../src/MyTubeSearch.py:421
+ msgid "Start with following feed:"
+ msgstr "Počni sa sledećim fidom:"
+ 
++#: ../src/plugin.py:270
+ msgid "Std. Feeds"
+-msgstr "Std fidovi"
++msgstr "Std. fidovi"
+ 
++#: ../src/plugin.py:1700
+ msgid "Stop playing this movie?"
+-msgstr "Zaustavi reprodukciju filma?"
++msgstr "Zaustavi ovaj film?"
+ 
++#: ../src/MyTubeSearch.py:222
++#: ../src/plugin.py:110
+ msgid "Sweden"
+-msgstr ""
++msgstr "Švedska"
+ 
++#: ../src/plugin.py:1276
+ msgid "Tags: "
+-msgstr ""
++msgstr "Oznake: "
+ 
++#: ../src/MyTubeSearch.py:223
++#: ../src/plugin.py:111
+ msgid "Taiwan"
+-msgstr ""
++msgstr "Tajvan"
+ 
++#: ../src/plugin.py:423
+ msgid "There was an error getting the feed entries. Please try again."
+-msgstr ""
++msgstr "Desila se greška kod dobijanja fidova.Pokušaj opet."
+ 
++#: ../src/MyTubeSearch.py:169
++#: ../src/plugin.py:57
+ msgid "This Month"
+-msgstr ""
++msgstr "Ovog meseca"
+ 
++#: ../src/MyTubeSearch.py:170
++#: ../src/plugin.py:58
+ msgid "This Week"
+-msgstr ""
++msgstr "Ove nedelje"
+ 
++#: ../src/plugin.py:1420
+ msgid "This is the help screen. Feed me with something to display."
+-msgstr ""
++msgstr "Ovo je pomoćni ekran.Daj mi nešto da prikažem."
+ 
++#: ../src/MyTubeSearch.py:171
++#: ../src/plugin.py:59
+ msgid "Today"
+-msgstr ""
++msgstr "Danas"
+ 
++#: ../src/MyTubeSearch.py:242
++#: ../src/plugin.py:130
++#: ../src/plugin.py:755
+ msgid "Top favorites"
+-msgstr "Top favoriti"
++msgstr "Top-Favoriti"
+ 
++#: ../src/MyTubeSearch.py:239
++#: ../src/plugin.py:127
++#: ../src/plugin.py:754
+ msgid "Top rated"
+ msgstr "Najbolje ocenjeni"
+ 
++#: ../src/MyTubeSearch.py:186
++#: ../src/plugin.py:74
+ msgid "Travel & Events"
+-msgstr ""
++msgstr "Putovanje & Dogadjaji"
+ 
++#: ../src/plugin.py:371
++#: ../src/plugin.py:413
+ msgid "Trying to download the Youtube feed entries. Please wait..."
+-msgstr "Pokušavam skidanje YouTube fid unosa. Molim sačekajte..."
++msgstr "Pokušavam da preuzmem YouTube fid unose, molim sačekaj..."
+ 
++#: ../src/plugin.py:418
+ msgid "Trying to download the Youtube search results. Please wait..."
+-msgstr "Pokušavam skidanje YouTube rezultata traženja. Molim sačekajte..."
++msgstr "Pokušavam da preuzmem YouTube rezultate pretrage, molim sačekaj..."
+ 
++#: ../src/MyTubeSearch.py:224
++#: ../src/plugin.py:112
+ msgid "United States"
+-msgstr ""
++msgstr "SAD"
+ 
++#: ../src/MyTubeSearch.py:423
+ msgid "Videobrowser exit behavior:"
+ msgstr "Ponašanje video pretraživača kod izlaza:"
+ 
++#: ../src/MyTubeSearch.py:422
+ msgid "Videoplayer stop/exit behavior:"
+-msgstr "Video plejer zaustavi/izađi ponašanje :"
++msgstr "Ponašanje video plejera kod  Zaustavi /Izađi:"
+ 
++#: ../src/MyTubeSearch.py:162
++#: ../src/plugin.py:50
+ msgid "View Count"
+-msgstr "Vidi brojanje"
++msgstr "Vidi brojač"
+ 
++#: ../src/plugin.py:486
+ msgid "View active downloads"
+-msgstr "Vidi aktivna skidanja"
++msgstr "Vidi aktivna preuzimanja"
+ 
++#: ../src/plugin.py:480
+ msgid "View related videos"
+-msgstr "Vidi srodne video zapise"
++msgstr "Vidi povezana videa"
+ 
++#: ../src/plugin.py:481
+ msgid "View response videos"
+-msgstr "Vidi odgovarajuće video zapise"
++msgstr "Vidi odjeknula videa"
+ 
++#: ../src/plugin.py:1104
++#: ../src/plugin.py:1273
+ msgid "Views: "
+ msgstr "Pregleda: "
+ 
++#: ../src/plugin.py:260
+ msgid ""
+ "Welcome to the MyTube Youtube Player.\n"
+ "\n"
+-"Use the Bouqet+ button to navigate to the search field and the Bouqet- to "
+-"navigate to the video entries.\n"
++"Use the Bouqet+ button to navigate to the search field and the Bouqet- to navigate to the video entries.\n"
+ "\n"
+ "To play a movie just press OK on your remote control.\n"
+ "\n"
+@@ -415,51 +642,52 @@
+ "\n"
+ "The Help button shows this help again."
+ msgstr ""
+-"Dobro došli u MyTube Youtube plejer.\n"
++"Dobrodošli u MyTube Youtube Plejer.\n"
+ "\n"
+-"Koristite bouquet+ tipku da navedete na polje za traženje i bouquet- da "
+-"navedete na video unose.\n"
++"Koristi Bouqet+ tipku  za navođenje na polje traženja i Bouqet- tipku za video unose.\n"
+ "\n"
+-"Da reprodukujete film samo stisnite OK na vašem daljinskom.\n"
++"Da reprodukuješ film samo pritisni OK tipku na svom daljinskom upravljaču.\n"
+ "\n"
+-"Pritisnite info da vidite opis filma.\n"
++"Pritisni info tipku da vidiš opis filma.\n"
+ "\n"
+-"Pritisnite Meni tipku za dodatne opcije.\n"
++"Pritisni  Meni tipku za dodatne opcije .\n"
+ "\n"
+-"Help tipka pokazuje opet ovu pomoć."
++"Tipka Pomoć,pokazuje pomoć ponovo."
+ 
++#: ../src/plugin.py:259
+ msgid ""
+ "Welcome to the MyTube Youtube Player.\n"
+ "\n"
+-"While entering your search term(s) you will get suggestions displayed "
+-"matching your search term.\n"
++"While entering your search term(s) you will get suggestions displayed matching your search term.\n"
+ "\n"
+-"To select a suggestion press DOWN on your remote, select the desired result "
+-"and press OK on your remote to start the search.\n"
++"To select a suggestion press DOWN on your remote, select the desired result and press OK on your remote to start the search.\n"
+ "\n"
+ "Press exit to get back to the input field."
+ msgstr ""
++"Dobrodošli u MyTube Youtube Plejer..\n"
++"\n"
++"Dok unosite vaš termin(e) za traženje,dobićete na ekranu sugestije koje se slažu sa vašim traženjem.\n"
++"\n"
++"Da izaberete sugestiju,pritisnite tipku Dole na daljinskom,izaberite željeni rezultat i stisnite OK da počnete pretragu.\n"
++"\n"
++"Pritisnite Izlaz da se vratite na ulazno polje."
+ 
++#: ../src/MyTubeSearch.py:175
++#: ../src/plugin.py:63
++#: ../src/plugin.py:570
++#: ../src/plugin.py:576
++#: ../src/plugin.py:1694
+ msgid "Yes"
+ msgstr "Da"
+ 
++#: ../src/plugin.py:1696
+ msgid "Yes, but play next video"
+-msgstr "Da, ali reprodukuj sledeći video"
++msgstr "Da, ali pusti sledeći video"
+ 
++#: ../src/plugin.py:1697
+ msgid "Yes, but play previous video"
+-msgstr "Da, ali reprodukuj prethodni video"
+-
+-#~ msgid "MyTube Player Main Screen..."
+-#~ msgstr "MyTube plejer Glavni ekran..."
+-
+-#~ msgid "Please wait..."
+-#~ msgstr "Molim čekajte..."
+-
+-#~ msgid "Press OK to save changes!!!"
+-#~ msgstr "Pritisnite OK da sačuvate promene!!!"
++msgstr "Da, ali pusti prethodni video"
+ 
+-#~ msgid "Search"
+-#~ msgstr "Traži"
++#~ msgid "View Downloads"
++#~ msgstr "Downloads anzeigen"
+ 
+-#~ msgid "There was an error getting the feed entries. Try again..."
+-#~ msgstr "Desila se greška kod uzimanja fid unosa. Pokušajte ponovo..."
+Index: networkbrowser/po/Makefile.am
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/networkbrowser/po/Makefile.am,v
+retrieving revision 1.1
+diff -u -r1.1 Makefile.am
+--- networkbrowser/po/Makefile.am	20 Feb 2009 12:45:54 -0000	1.1
++++ networkbrowser/po/Makefile.am	22 Sep 2009 08:17:28 -0000
+@@ -6,7 +6,7 @@
+ #MSGFMT = ./msgfmt.py
+ MSGFMT = msgfmt
+ 
+-LANGS := de en ar nl es is it da sv no fr fi tr ca cs hr hu ru pt el lt pl
++LANGS := de en ar nl es is it da sv no fr fi tr ca cs hr hu ru pt el lt pl sr
+ LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
+ LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
+ 
+Index: ofdb/po/Makefile.am
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/ofdb/po/Makefile.am,v
+retrieving revision 1.2
+diff -u -r1.2 Makefile.am
+--- ofdb/po/Makefile.am	18 Feb 2009 18:25:39 -0000	1.2
++++ ofdb/po/Makefile.am	22 Sep 2009 08:17:28 -0000
+@@ -13,7 +13,7 @@
+ #MSGFMT = ./msgfmt.py
+ MSGFMT = msgfmt
+ 
+-LANGS := de it tr
++LANGS := de it tr sr
+ LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
+ LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
+ 
+Index: passwordchanger/po/Makefile.am
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/passwordchanger/po/Makefile.am,v
+retrieving revision 1.7
+diff -u -r1.7 Makefile.am
+--- passwordchanger/po/Makefile.am	16 Jan 2009 08:07:35 -0000	1.7
++++ passwordchanger/po/Makefile.am	22 Sep 2009 08:17:28 -0000
+@@ -13,7 +13,7 @@
+ #MSGFMT = ./msgfmt.py
+ MSGFMT = msgfmt
+ 
+-LANGS := de es fy it nl tr sv
++LANGS := de es fy it nl tr sv sr
+ LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
+ LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
+ 
+Index: quickbutton/po/Makefile.am
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/quickbutton/po/Makefile.am,v
+retrieving revision 1.3
+diff -u -r1.3 Makefile.am
+--- quickbutton/po/Makefile.am	20 Jun 2009 09:41:14 -0000	1.3
++++ quickbutton/po/Makefile.am	22 Sep 2009 08:17:28 -0000
+@@ -13,7 +13,7 @@
+ #MSGFMT = ./msgfmt.py
+ MSGFMT = msgfmt
+ 
+-LANGS := de tr it
++LANGS := de tr it sr
+ LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
+ LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
+ 
+Index: vlcplayer/po/Makefile.am
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/vlcplayer/po/Makefile.am,v
+retrieving revision 1.5
+diff -u -r1.5 Makefile.am
+--- vlcplayer/po/Makefile.am	7 Jul 2009 08:27:05 -0000	1.5
++++ vlcplayer/po/Makefile.am	22 Sep 2009 08:17:28 -0000
+@@ -6,7 +6,7 @@
+ #MSGFMT = ./msgfmt.py
+ MSGFMT = msgfmt
+ 
+-LANGS := de es it tr sv
++LANGS := de es it tr sv sr
+ LANGPO := $(foreach LANG, $(LANGS),$(LANG).po)
+ LANGMO := $(foreach LANG, $(LANGS),$(LANG).mo)
+ 
+Index: webinterface/po/sr.po
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/webinterface/po/sr.po,v
+retrieving revision 1.1
+diff -u -r1.1 sr.po
+--- webinterface/po/sr.po	21 Aug 2009 06:59:13 -0000	1.1
++++ webinterface/po/sr.po	22 Sep 2009 08:17:28 -0000
+@@ -1,99 +1,188 @@
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: Srpski enigma2 WebInterface\n"
++"Project-Id-Version: enigma2-plugins-extension-webinterface\n"
+ "Report-Msgid-Bugs-To: \n"
+-"POT-Creation-Date: 2009-08-21 08:56+0200\n"
+-"PO-Revision-Date: 2009-08-17 18:42+0100\n"
++"POT-Creation-Date: 2009-02-19 20:41+0100\n"
++"PO-Revision-Date: \n"
+ "Last-Translator: maja <jovanovic@gmx.ch>\n"
+-"Language-Team: veselin & majevica www.crnaberza.com <JOVANOVIC@GMX.CH>\n"
++"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+-"X-Poedit-Language: Srpski ( Serbian ) \n"
+-"X-Poedit-Country: SRBIJA ( SERBIA ) \n"
++"X-Poedit-Language: Serbian\n"
++"X-Poedit-Country: SERBIA\n"
+ "X-Poedit-SourceCharset: utf-8\n"
+ "X-Poedit-KeywordsList: _\n"
+-"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-"
+-"plugins\\WebInterface\n"
++"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-plugins\\webinterface\n"
+ "X-Poedit-SearchPath-0: src\n"
+ 
+-msgid "Add"
+-msgstr "Dodaj"
+-
+-msgid "Address"
+-msgstr "Adresa"
++#: src/plugin.py:406
++msgid "Webinterface"
++msgstr "Vebinterfejs"
+ 
+-msgid "Allow zapping via Webinterface"
+-msgstr "Dopusti promenu kanala preko veb interfejsa"
++#: src/plugin.py:406
++msgid "Configuration for the Webinterface"
++msgstr "Konfigurisanje vebinterfejsa"
+ 
+-msgid "Authorization"
+-msgstr "Odobrenje"
++#: src/WebIfConfig.py:80
++msgid "Webinterface: Main Setup"
++msgstr "Vebinterfejs: Glavna podešavanja"
+ 
+-msgid "Autowrite timer"
+-msgstr "Autom. upisivanje tajmera"
++#: src/WebIfConfig.py:85
++msgid "Start Webinterface"
++msgstr "Pokreni vebinterfejs"
+ 
+-msgid "Cancel"
+-msgstr "Otkaži"
++#: src/WebIfConfig.py:86
++msgid "Enable /media"
++msgstr "Aktiviraj /media"
+ 
+-msgid "Change"
+-msgstr "Izmeni"
++#: src/WebIfConfig.py:87
++msgid "Allow zapping via Webinterface"
++msgstr "Dozvoli promenu kanala preko vebinterfejsa"
+ 
+-msgid "Configuration for the Webinterface"
+-msgstr "Konfigracija vebinterfejsa"
++#: src/WebIfConfig.py:88
++msgid "Autowrite timer"
++msgstr "Automatski tajmer"
+ 
+-msgid "Delete"
+-msgstr "Obriši"
++#: src/WebIfConfig.py:89
++msgid "Load movie-length"
++msgstr "Učitaj dužinu filma"
+ 
+-msgid "Disabled"
+-msgstr "Onemogućen"
++#: src/WebIfConfig.py:95
++#: src/WebIfConfig.py:250
++msgid "Cancel"
++msgstr "Otkaži"
+ 
+-msgid "Enable /media"
+-msgstr "Uključi  /media"
++#: src/WebIfConfig.py:96
++#: src/WebIfConfig.py:251
++msgid "OK"
++msgstr "OK"
+ 
++#: src/WebIfConfig.py:97
+ msgid "Interfaces"
+ msgstr "Interfejsi"
+ 
+-msgid "Load movie-length"
+-msgstr "Učitaj dužinu filma"
++#: src/WebIfConfig.py:138
++msgid "Webinterface: List of configured Interfaces"
++msgstr "Vebinterfejs: Lista konfigurisanih interfejsa"
+ 
+-msgid "OK"
+-msgstr "OK"
++#: src/WebIfConfig.py:142
++#: src/WebIfConfig.py:271
++msgid "Address"
++msgstr "Adresa"
+ 
++#: src/WebIfConfig.py:143
++#: src/WebIfConfig.py:272
+ msgid "Port"
+ msgstr "Port"
+ 
+-msgid "Really delete this Interface?"
+-msgstr "Stvarno brisati ovaj interfejs?"
+-
+-msgid "Require Authorization"
+-msgstr "Traži odobrenje"
++#: src/WebIfConfig.py:144
++msgid "Authorization"
++msgstr "Odobrenje"
+ 
++#: src/WebIfConfig.py:145
+ msgid "SSL"
+ msgstr "SSL"
+ 
+-msgid "SSL Encryption"
+-msgstr "SSL kodiranje"
++#: src/WebIfConfig.py:146
++#: src/WebIfConfig.py:270
++msgid "Disabled"
++msgstr "Isključeno"
+ 
+-msgid "Start Webinterface"
+-msgstr "Pokreni veb interfejs"
++#: src/WebIfConfig.py:147
++msgid "Add"
++msgstr "Dodaj"
+ 
+-msgid "Webinterface"
+-msgstr "Veb interfejs"
++#: src/WebIfConfig.py:148
++msgid "Change"
++msgstr "Promeni"
++
++#: src/WebIfConfig.py:173
++#: src/WebIfConfig.py:178
++#: src/WebIfConfig.py:183
++msgid "yes"
++msgstr "da"
+ 
++#: src/WebIfConfig.py:175
++#: src/WebIfConfig.py:180
++#: src/WebIfConfig.py:185
++msgid "no"
++msgstr "ne"
++
++#: src/WebIfConfig.py:238
+ msgid "Webinterface: Edit Interface"
+-msgstr "Veb interfejs: Uredi interfejs"
++msgstr "Vebinterfejs: Uredi interfejs"
+ 
+-msgid "Webinterface: List of configured Interfaces"
+-msgstr "Veb interfejs: Lista konfigurisanih interfejsa"
++#: src/WebIfConfig.py:253
++msgid "Delete"
++msgstr "Izbriši"
+ 
+-msgid "Webinterface: Main Setup"
+-msgstr "Veb interfejs: Glavne postavke"
++#: src/WebIfConfig.py:273
++msgid "Require Authorization"
++msgstr "Potrebno odobrenje"
+ 
+-msgid "no"
+-msgstr "Ne"
++#: src/WebIfConfig.py:274
++msgid "SSL Encryption"
++msgstr "SSL enkripcija"
+ 
+-msgid "yes"
+-msgstr "Da"
++#: src/WebIfConfig.py:296
++msgid "Really delete this Interface?"
++msgstr "Stvarno izbrisati ovaj interfejs?"
++
++#: src/WebComponents/Converter/HddInfo.py:33
++msgid "N/A"
++msgstr "N/A"
++
++#~ msgid "Unknown function: '%s'"
++#~ msgstr "Unbekannte Funktion: '%s'"
++#~ msgid "Missing Parameter: sRef"
++#~ msgstr "Fehlender Parameter: sRef"
++#~ msgid "Missing Parameter: begin"
++#~ msgstr "Fehlender Parameter: begin"
++#~ msgid "Missing Parameter: end"
++#~ msgstr "Fehlender Parameter: end"
++#~ msgid "The timer '%s' has been deleted successfully"
++#~ msgstr "Der Timer %s wurde erfolgreich gelöscht"
++#~ msgid "The timer has NOT been deleted"
++#~ msgstr "Der Timer wurde NICHT gelöscht"
++#~ msgid "No matching Timer not found"
++#~ msgstr "Kein zutreffender Timer gefunden"
++#~ msgid "Unknown command: '%s'"
++#~ msgstr "Unbekannter Befehl: '%s'"
++#~ msgid "No event found, started infinite recording"
++#~ msgstr "Kein Event gefunden, endlosaufnahme gestartet"
++#~ msgid "Instant recording started"
++#~ msgstr "Sofortaufnahme gestartet"
++#~ msgid "Illegal Parameter value for Parameter begin : '%s'"
++#~ msgstr "Unerlabter Parameterwert für Parameter begin: '%s'"
++#~ msgid "Missing Parameter: name"
++#~ msgstr "Fehelnder Parameter: name"
++#~ msgid "Missing Parameter: description"
++#~ msgstr "Fehlender Parameter: description"
++#~ msgid "Missing Parameter: beginOld"
++#~ msgstr "Fehlender Parameter: beginOld"
++#~ msgid "Missing Parameter: endOld"
++#~ msgstr "Fehlender Parameter: endOld"
++#~ msgid "Timer %s has been changed!"
++#~ msgstr "Timer %s wurde geändert!"
++#~ msgid "Changing the timer for '%s' failed!"
++#~ msgstr "Timer '%s' konnte nich geändert werden!"
++#~ msgid "Could not find timer '%s' with given start and end time!"
++#~ msgstr ""
++#~ "Timer '%s' mit der angegebenen Start- und Endzeit konnte nicht gefunden "
++#~ "werden!"
++#~ msgid "Timer added successfully!"
++#~ msgstr "Timer erfolgreich hinzugefügt!"
++#~ msgid "Could not add timer '%s'!"
++#~ msgstr "Timer '%s' konnte nicht hinzugefügt werden!"
++#~ msgid "Unexpected Error"
++#~ msgstr "Unerwarteter Fehler"
++#~ msgid "Missing Parameter: eventid"
++#~ msgstr "Fehlender Parameter: eventid"
++#~ msgid "EventId not found"
++#~ msgstr "EventId nicht gefunden"
++#~ msgid "Timer added"
++#~ msgstr "Timer hinzugefügt"
++#~ msgid "Ok"
++#~ msgstr "Ok"
+ 
+-#~ msgid "Enable /hdd"
+-#~ msgstr "Uključi /hdd"
+Index: wirelesslan/po/sr.po
+===================================================================
+RCS file: /cvsroot/enigma2-plugins/enigma2-plugins/wirelesslan/po/sr.po,v
+retrieving revision 1.1
+diff -u -r1.1 sr.po
+--- wirelesslan/po/sr.po	21 Aug 2009 06:59:15 -0000	1.1
++++ wirelesslan/po/sr.po	22 Sep 2009 08:17:28 -0000
+@@ -1,24 +1,25 @@
++# German translations for tuxbox-enigma package.
++# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the tuxbox-enigma package.
++# Automatically generated, 2005.
++#
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: Srpski Enigma2 WirelessLan\n"
++"Project-Id-Version: Enigma2 - Plugin wireless\n"
+ "Report-Msgid-Bugs-To: \n"
+-"POT-Creation-Date: 2009-08-21 08:56+0200\n"
+-"PO-Revision-Date: 2009-08-17 18:45+0100\n"
++"POT-Creation-Date: 2008-11-06 14:59+0100\n"
++"PO-Revision-Date: 2009-09-10 20:34+0100\n"
+ "Last-Translator: maja <jovanovic@gmx.ch>\n"
+-"Language-Team: veaelin & majevica www.crnaberza.com <jovanovic@gmx.ch>\n"
++"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+-"X-Poedit-Language: Srpski (Serbian)\n"
+-"X-Poedit-Country: SRBIJA (SERBIA)\n"
++"X-Poedit-Language: Serbian\n"
++"X-Poedit-Country: SERBIA\n"
+ "X-Poedit-SourceCharset: utf-8\n"
+-"X-Poedit-KeywordsList: _\n"
+-"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-"
+-"plugins\\WirelessLan\n"
+-"X-Poedit-SearchPath-0: src\n"
+ 
+ msgid " Wireless Network(s) found!"
+-msgstr ""
++msgstr "Bežična mreža(e) pronađena!"
+ 
+ msgid "Accesspoint:"
+ msgstr "Pristupna tačka:"
+@@ -27,7 +28,7 @@
+ msgstr "Bitrejt:"
+ 
+ msgid "Choose a Wireless Network"
+-msgstr "Izaberite bežičnu mrežu"
++msgstr "Izaberi bežičnu mrežu"
+ 
+ msgid "Close"
+ msgstr "Zatvori"
+@@ -36,23 +37,23 @@
+ msgstr "Poveži"
+ 
+ msgid "Connect to a Wireless Network"
+-msgstr "Poveži na bežičnu mrežu"
++msgstr "Poveži se na bežičnu mrežu"
+ 
+ msgid "Disabled"
+-msgstr "Onemogućen"
++msgstr "Isključeno "
+ 
+ msgid "Enabled"
+-msgstr "Omogućen"
++msgstr "Uključeno"
+ 
+ #, python-format
+ msgid "Encrypted: %s"
+-msgstr "Kodiran: %s"
++msgstr "Kodirano: %s"
+ 
+ msgid "Encryption:"
+ msgstr "Kodiranje:"
+ 
+ msgid "Hidden networkname"
+-msgstr "Skriveno mrežno ime"
++msgstr "Skriveno ime mreže"
+ 
+ #, python-format
+ msgid "Interface: %s"
+@@ -66,10 +67,10 @@
+ 
+ #, python-format
+ msgid "Max. Bitrate: %s"
+-msgstr "Max. bitrejt: %s"
++msgstr "Maks. bitrejt: %s"
+ 
+ msgid "N/A"
+-msgstr "N/A "
++msgstr "N/A"
+ 
+ msgid "Network:"
+ msgstr "Mreža:"
+@@ -78,10 +79,10 @@
+ msgstr "Ne"
+ 
+ msgid "No Connection"
+-msgstr "Nema veze"
++msgstr "Ne postoji veza"
+ 
+ msgid "Please wait..."
+-msgstr "Molim,sačekajte..."
++msgstr "Molim sačekajte..."
+ 
+ msgid "Refresh"
+ msgstr "Osveži"
+@@ -93,7 +94,7 @@
+ msgstr "Jačina signala:"
+ 
+ msgid "Signal: "
+-msgstr "Signał:"
++msgstr "Signal: "
+ 
+ msgid "Unsupported"
+ msgstr "Nije podržano"
+@@ -107,5 +108,3 @@
+ msgid "Yes"
+ msgstr "Da"
+ 
+-#~ msgid "Wireless Network(s) found!"
+-#~ msgstr "Bežična mreža(e) nađena!"

@@ -1,24 +1,25 @@
+# German translations for tuxbox-enigma package.
+# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2005.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Srpski Enigma2 WirelessLan\n"
+"Project-Id-Version: Enigma2 - Plugin wireless\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-21 08:56+0200\n"
-"PO-Revision-Date: 2009-08-17 18:45+0100\n"
+"POT-Creation-Date: 2008-11-06 14:59+0100\n"
+"PO-Revision-Date: 2009-09-10 20:34+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
-"Language-Team: veaelin & majevica www.crnaberza.com <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Srpski (Serbian)\n"
-"X-Poedit-Country: SRBIJA (SERBIA)\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: _\n"
-"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-"
-"plugins\\WirelessLan\n"
-"X-Poedit-SearchPath-0: src\n"
 
 msgid " Wireless Network(s) found!"
-msgstr ""
+msgstr "Bežična mreža(e) pronađena!"
 
 msgid "Accesspoint:"
 msgstr "Pristupna tačka:"
@@ -27,7 +28,7 @@ msgid "Bitrate:"
 msgstr "Bitrejt:"
 
 msgid "Choose a Wireless Network"
-msgstr "Izaberite bežičnu mrežu"
+msgstr "Izaberi bežičnu mrežu"
 
 msgid "Close"
 msgstr "Zatvori"
@@ -36,23 +37,23 @@ msgid "Connect"
 msgstr "Poveži"
 
 msgid "Connect to a Wireless Network"
-msgstr "Poveži na bežičnu mrežu"
+msgstr "Poveži se na bežičnu mrežu"
 
 msgid "Disabled"
-msgstr "Onemogućen"
+msgstr "Isključeno "
 
 msgid "Enabled"
-msgstr "Omogućen"
+msgstr "Uključeno"
 
 #, python-format
 msgid "Encrypted: %s"
-msgstr "Kodiran: %s"
+msgstr "Kodirano: %s"
 
 msgid "Encryption:"
 msgstr "Kodiranje:"
 
 msgid "Hidden networkname"
-msgstr "Skriveno mrežno ime"
+msgstr "Skriveno ime mreže"
 
 #, python-format
 msgid "Interface: %s"
@@ -66,10 +67,10 @@ msgstr "Veza:"
 
 #, python-format
 msgid "Max. Bitrate: %s"
-msgstr "Max. bitrejt: %s"
+msgstr "Maks. bitrejt: %s"
 
 msgid "N/A"
-msgstr "N/A "
+msgstr "N/A"
 
 msgid "Network:"
 msgstr "Mreža:"
@@ -78,10 +79,10 @@ msgid "No"
 msgstr "Ne"
 
 msgid "No Connection"
-msgstr "Nema veze"
+msgstr "Ne postoji veza"
 
 msgid "Please wait..."
-msgstr "Molim,sačekajte..."
+msgstr "Molim sačekajte..."
 
 msgid "Refresh"
 msgstr "Osveži"
@@ -93,7 +94,7 @@ msgid "Signal Strength:"
 msgstr "Jačina signala:"
 
 msgid "Signal: "
-msgstr "Signał:"
+msgstr "Signal: "
 
 msgid "Unsupported"
 msgstr "Nije podržano"
@@ -107,5 +108,3 @@ msgstr "Stanje bežične mreže"
 msgid "Yes"
 msgstr "Da"
 
-#~ msgid "Wireless Network(s) found!"
-#~ msgstr "Bežična mreža(e) nađena!"
