@@ -1,0 +1,164 @@
+# Enigma2 Plugin EmailClient Messages
+# Copyright (C) 2009 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-22 17:39+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Attachments"
+msgstr ""
+
+msgid "Bodys"
+msgstr ""
+
+#, python-format
+msgid "Box '%s' is empty"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Email Client"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "IMAP Port"
+msgstr ""
+
+msgid "IMAP Server"
+msgstr ""
+
+msgid "In"
+msgstr ""
+
+msgid ""
+"In order of missing standart python library files\n"
+"i have copied the nessary files now.\n"
+"But you have to restart your Box\n"
+" to apply this!"
+msgstr ""
+
+msgid "Mailbox"
+msgstr ""
+
+msgid ""
+"New mail arrived:\n"
+"\n"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "cancel"
+msgstr ""
+
+msgid "connected"
+msgstr ""
+
+msgid "delete"
+msgstr ""
+
+#, python-format
+msgid "have %d messages "
+msgstr ""
+
+msgid "headers loaded, now parsing ..."
+msgstr ""
+
+msgid "interval to check for new mails"
+msgstr ""
+
+msgid "leave unread"
+msgstr ""
+
+#, python-format
+msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
+msgstr ""
+
+msgid "loading message"
+msgstr ""
+
+msgid "logged in"
+msgstr ""
+
+msgid "mail check process stopped"
+msgstr ""
+
+msgid "max of Headers to load"
+msgstr ""
+
+msgid "no"
+msgstr ""
+
+msgid "no date"
+msgstr ""
+
+msgid "no filename"
+msgstr ""
+
+msgid "no from"
+msgstr ""
+
+msgid "no sender"
+msgstr ""
+
+msgid "no subject"
+msgstr ""
+
+msgid "notify about new mails"
+msgstr ""
+
+msgid "ok"
+msgstr ""
+
+msgid "parsing message"
+msgstr ""
+
+msgid "really delete Mail?"
+msgstr ""
+
+msgid "really undelete Mail?"
+msgstr ""
+
+msgid "select Attachment"
+msgstr ""
+
+msgid "select Body"
+msgstr ""
+
+msgid "show deleted entries"
+msgstr ""
+
+msgid "timeout displaying new mails"
+msgstr ""
+
+msgid "undelete"
+msgstr ""
+
+msgid "unread messages in mailbox"
+msgstr ""
+
+msgid "view Emails via IMAP4"
+msgstr ""
+
+msgid "yes"
+msgstr ""

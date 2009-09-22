@@ -1,10 +1,8 @@
 from Components.ActionMap import ActionMap
-from Components.GUIComponent import GUIComponent
-from Components.HTMLComponent import HTMLComponent
 from Components.Label import Label
 from Screens.MessageBox import MessageBox
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText, MultiContentTemplateColor
+from Components.MultiContent import MultiContentEntryText
 from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigText, ConfigEnableDisable
@@ -12,22 +10,26 @@ from EmailConfig import EmailConfigScreen
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
-from enigma import eListboxPythonMultiContent, eListbox, gFont
+from Tools import Notifications
+from enigma import eListboxPythonMultiContent, gFont, eTimer
 from twisted.mail import imap4
 from zope.interface import implements
 import email
-import email.Parser
 from email.header import decode_header
 from TagStrip import strip_readable
 from protocol import createFactory
+
+from . import _
 
 config.plugins.emailimap = ConfigSubsection()
 config.plugins.emailimap.username = ConfigText("user", fixed_size=False)
 config.plugins.emailimap.password = ConfigText("password", fixed_size=False)
 config.plugins.emailimap.server = ConfigText("please.config.first", fixed_size=False)
-config.plugins.emailimap.port = ConfigInteger(143, limits = (1, 65536))
+config.plugins.emailimap.port = ConfigInteger(default=143, limits = (1, 65536))
 config.plugins.emailimap.showDeleted = ConfigEnableDisable(default=False)
-
+config.plugins.emailimap.checkForNewMails = ConfigEnableDisable(default=True)
+config.plugins.emailimap.checkPeriod = ConfigInteger(default=10000, limits=(10000, 1000000)) # in milliseconds, 600000 are 10 minutes (10*60*1000)
+config.plugins.emailimap.timeout = ConfigInteger(default=0, limits=(0, 90)) # in seconds
 # 0= fetch all header , 10= fetch only the last 10 headers/messages of a mailbox
 config.plugins.emailimap.maxheadertoload = ConfigInteger(0, limits = (1, 100))
 
@@ -173,6 +175,7 @@ class EmailScreen(Screen, EmailHandler):
 							   ).addCallback(self.onExamine, c[0] , self.proto
 							  ).addErrback(self.onExamineFailed, self.proto
 							  )
+		# self.proto.search(imap4.Query(unseen=1)).addCallback(self.cbOk).addErrback(self.cbNotOk)
 
 	def onMessageSelected(self):
 		c = self["messagelist"].getCurrent()
@@ -205,7 +208,7 @@ class EmailScreen(Screen, EmailHandler):
 
 	def loadMessage(self, message):
 		print "loadMessage",message
-		self["infolabel"].setText("loading message")
+		self["infolabel"].setText(_("loading message"))
 
 		self.proto.fetchMessage(message.uid
 			).addCallback(self.onMessageLoaded, message, self.proto
@@ -213,7 +216,7 @@ class EmailScreen(Screen, EmailHandler):
 			)
 
 	def onMessageLoaded(self, result, message, proto):
-		self["infolabel"].setText("parsing message")
+		self["infolabel"].setText(_("parsing message"))
 		print "onMessageLoaded"#,result,message
 		try:
 			msgstr = result[message.uid]['RFC822']
@@ -257,7 +260,7 @@ class EmailScreen(Screen, EmailHandler):
 		self.close()
 
 	def onConnect(self, proto):
-		self["infolabel"].setText("connected")
+		self["infolabel"].setText(_("connected"))
 		proto.getCapabilities(
 						).addCallback(self.cbCapabilities, proto
 						).addErrback(self.ebCapabilities, proto
@@ -278,7 +281,7 @@ class EmailScreen(Screen, EmailHandler):
 
 	def onAuthentication(self, result, proto):
 		self.proto = proto
-		self["infolabel"].setText("logged in")
+		self["infolabel"].setText(_("logged in"))
 		# better use LSUB here to get only the subscribed to mailboxes
 		proto.lsub("", "*").addCallback(self.onMailboxList, proto)
 
@@ -330,11 +333,11 @@ class EmailScreen(Screen, EmailHandler):
 
 	def onExamine(self, result, mboxname, proto):
 		print "onExamine", result, mboxname
-		self.setTitle("Mailbox: "+mboxname)
+		self.setTitle(_("Mailbox")+": "+mboxname)
 		self.currentmailbox = mboxname
 		numMessagesinFolder = int(result['EXISTS'])
 		if numMessagesinFolder <= 0:
-			self["infolabel"].setText("Box '"+mboxname+"' is empty")
+			self["infolabel"].setText(_("Box '%s' is empty") %(mboxname))
 			self["messagelist"].l.setList([])
 
 		else:
@@ -346,7 +349,7 @@ class EmailScreen(Screen, EmailHandler):
 				rangeToFetch = [startmsg, numMessagesinFolder]
 			else:
 				rangeToFetch = [1, numMessagesinFolder]
-			self["infolabel"].setText("loading headers "+str(rangeToFetch[0])+"-"+str(rangeToFetch[1])+" of Box '"+mboxname+"'")
+			self["infolabel"].setText(_("loading headers %(from)d-%(to)d of Box '%(name)s'") % {'from': rangeToFetch[0], 'to': rangeToFetch[1], 'name': mboxname})
 
 			try:
 #				proto.fetchEnvelope('%i:%i'%(rangeToFetch[0], rangeToFetch[1])	#'1:*'
@@ -379,7 +382,7 @@ class EmailScreen(Screen, EmailHandler):
 
 	def onHeaderList(self, result, proto):
 		print "onHeaderList"#,result,proto
-		self["infolabel"].setText("headers loaded, now parsing ...")
+		self["infolabel"].setText(_("headers loaded, now parsing ..."))
 		list = []
 		for m in result:
 			state = IS_UNSEEN
@@ -401,7 +404,7 @@ class EmailScreen(Screen, EmailHandler):
 					print "onHeaderList error: %s with: %s" %(e,result[m]['RFC822.HEADER'])
 		list.reverse()
 		self["messagelist"].l.setList(list)
-		self["infolabel"].setText("have "+str(len(list))+" messages ")
+		self["infolabel"].setText(_("have %d messages") %(len(list)))
 
 	def buildMessageListItem(self, message, state):
 		if state == IS_UNSEEN:
@@ -416,7 +419,7 @@ class EmailScreen(Screen, EmailHandler):
 		return [
 			message,
 			MultiContentEntryText(pos=(5, 0), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.getSenderString(), color=color, color_sel=color),
-			MultiContentEntryText(pos=(5, scaleV(20,18)+1), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.get('date', default='kein Datum'), color=color, color_sel=color),
+			MultiContentEntryText(pos=(5, scaleV(20,18)+1), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.get('date', default=_('no date')), color=color, color_sel=color),
 			MultiContentEntryText(pos=(5, 2*(scaleV(20,18)+1)), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.getSubject(), color=color, color_sel=color)
 		]
 	#
@@ -474,12 +477,12 @@ class ScreenMailView(Screen):
                        4*buttonsGap+3*140, height-30-5, scaleV(18,16),
 					   )
 		Screen.__init__(self, session)
-		self["from"] = Label(decodeHeader(_("From") +": %s" %self.email.get('from', 'no-from')))
+		self["from"] = Label(decodeHeader(_("From") +": %s" %self.email.get('from', _('no from'))))
 		self["date"] = Label(_("Date") +": %s" %self.email.get('date', 'no-date'))
-		self["subject"] = Label(decodeHeader(_("Subject") +": %s" %self.email.get('subject', 'no-subject')))
+		self["subject"] = Label(decodeHeader(_("Subject") +": %s" %self.email.get('subject', _('no subject'))))
 		self["body"] = ScrollLabel(_(self.email.messagebodys[0].getData()))
 		# TODO: show headers
-		self["buttonred"] = Button(_(""))
+		self["buttonred"] = Button("")
 		self["buttongreen"] = Button("")
 		self["buttonyellow"] = Button(_("leave unread"))
 		if '\\Deleted' in flags:
@@ -595,7 +598,7 @@ class MessageHeader(object):
 		return self.message.get(key,failobj=default)
 
 	def __str__(self):
-		return "<MessageHeader uid="+str(self.uid)+", subject="+self.get("subject","no-subject")+">"
+		return "<MessageHeader uid="+str(self.uid)+", subject="+self.get("subject",_("no subject"))+">"
 
 ############
 class EmailBody:
@@ -669,7 +672,7 @@ def main(session, **kwargs):
 		shutil.copy('/usr/lib/enigma2/python/Plugins/Extensions/EmailClient/uu.py', '/usr/lib/python2.5/uu.py')
 		global session2
 		session2 = session
-		session.openWithCallback(MessageCB, MessageBox, 'In order of missing standart python library files\ni have copied the nessary files now.\nBut you have to restart your Box\n to apply this!', type = MessageBox.TYPE_INFO)
+		session.openWithCallback(MessageCB, MessageBox, _('In order of missing standart python library files\ni have copied the nessary files now.\nBut you have to restart your Box\n to apply this!'), type = MessageBox.TYPE_INFO)
 	else:
 		session.open(EmailScreen)
 
@@ -677,13 +680,132 @@ def MessageCB(*args):
 	global session2
 	session2.open(EmailScreen)
 
+class CheckMail:
+	implements(imap4.IMailboxListener)
+	
+	def __init__(self):
+		print('[CheckMail] __init__')
+		createFactory(self, config.plugins.emailimap.username.value, config.plugins.emailimap.server.value, config.plugins.emailimap.port.value)
+		self._timer = eTimer()
+		# self._timer.timeout.get().append(self._checkMail)
+		self._timer.callback.append(self._checkMail)
+		self._timer.start(config.plugins.emailimap.checkPeriod.value)
+		self._unseenList = None
+		self._proto = None
+
+	def exit(self):
+		if self._proto:
+			self._proto.logout()
+			self._proto = None
+		self._timer.stop()
+
+	def _checkMail(self):
+		print('[CheckMail] _checkMail ')
+		if self._proto:
+			self._proto.search(imap4.Query(unseen=1)).addCallback(self._cbNotify).addErrback(self._ebNotify, "search")
+
+	def _cbNotify(self, newUnseenList):
+		def haveSeenBefore(messageNo): return messageNo not in self._unseenList
+
+		print("[CheckMail] _cbNotify newUnseenList: %s" %repr(newUnseenList))
+		if self._unseenList is None:
+			Notifications.AddNotification(MessageBox, str(len(newUnseenList)) + ' ' + _("unread messages in mailbox"), type=MessageBox.TYPE_INFO, timeout=config.plugins.emailimap.timeout.value)
+		else:
+			newMessages = filter(haveSeenBefore, newUnseenList)
+			if newMessages:
+				print("[CheckMail] _cbNotify newMessages: %s" %repr(newMessages))
+				newMessageSet = imap4.MessageSet()
+				for messageNo in newMessages:
+					newMessageSet.add(messageNo)
+				self._proto.fetchHeaders(newMessageSet).addCallback(self._onHeaderList).addErrback(self._ebNotify, "fetchHeaders")
+		self._unseenList = newUnseenList
+
+	def _onHeaderList(self, headers):
+		# print("[CheckMail] _onHeaderList headers: %s" %repr(headers))
+		message = _("New mail arrived:\n\n")
+		for h in headers:
+			m = MessageHeader(h, headers[h]['RFC822.HEADER'])
+			message += m.getSenderString() + '\n' + m.getSubject() + '\n\n'
+		Notifications.AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=config.plugins.emailimap.timeout.value)
+
+	def _ebNotify(self, result, where):
+		print("[CheckMail] _ebNotify result: %s" %(result.getErrorMessage()))
+		Notifications.AddNotification(MessageBox, _("In") + " " + where + ": " +result.getErrorMessage() + '\n' + _("mail check process stopped"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+		self.exit()
+
+	def _cbOk(self, result):
+		print("[CheckMail] _cbOk result: %s" %repr(result))
+
+	def onConnect(self, proto=None):
+		print('[CheckMail] onConnect ')
+		if not proto:
+			proto = self._proto
+		else:
+			self._proto = proto
+		proto.getCapabilities().addCallback(self._cbCapabilities).addErrback(self._ebNotify)
+
+	def onConnectFailed(self, reason):
+		print('[CheckMail] onConnectFailed: ' + reason.getErrorMessage())
+		self._ebNotify(reason, "onConnectFailed")
+
+	def _cbCapabilities(self,reason):
+		print "#"*30
+		print "# If you have problems to log into your imap-server, please send me the output of the following line"
+		print "# cbCapabilities",reason
+		print "#"*30
+		self._doLogin()
+		
+	def _doLogin(self):
+		useTLS = False #True
+		if useTLS:
+			#d = self._proto.startTLS().addCallback(self._proto.authenticate, config.plugins.emailimap.password.value)
+			d = self._proto.startTLS().addCallback(self._proto.authenticate) # don't know, why authenticate wants no param...
+		else:
+			d = self._proto.authenticate(config.plugins.emailimap.password.value)
+		d.addCallback(self._onAuthentication).addErrback(self._onAuthenticationFailed)
+		
+	def _onAuthentication(self, result):
+		print("[CheckMail] onAuthentication: logged in")
+		self._proto.examine('inbox').addCallback(self._cbOk).addErrback(self._ebNotify, "examine")
+		self._checkMail()
+
+	def _onAuthenticationFailed(self, failure):
+		# If it failed because no SASL mechanisms match
+		print("[CheckMail] onAuthenticationFailed: " + failure.getErrorMessage() + ' ' + str(self._proto))
+		try:
+			failure.trap(imap4.NoSupportedAuthentication)
+			self._doLoginInsecure()
+		except Exception,e:
+			print e,e.message
+
+	def _doLoginInsecure(self):
+		print("[CheckMail] doLoginInsecure")
+		self._proto.login(config.plugins.emailimap.username.value, config.plugins.emailimap.password.value
+				).addCallback(self._onAuthentication).addErrback(self._ebNotify, "login")
+
+mailChecker = None
+def autostart(reason, **kwargs):
+	#	ouch, this is a hack
+	#===========================================================================
+	# if kwargs.has_key("session"):
+	#	global my_global_session
+	#	my_global_session = kwargs["session"]
+	#	return
+	#===========================================================================
+	print("[EmailClient] - Autostart")
+	global mailChecker
+	if config.plugins.emailimap.checkForNewMails.value and not mailChecker:
+		mailChecker = CheckMail()
+
+
 def Plugins(path, **kwargs):
 	global plugin_path
 	plugin_path = path
 	return [
-			 PluginDescriptor(name="Email Client", description="view Emails via IMAP4",
+			 PluginDescriptor(name=_("Email Client"), description=_("view Emails via IMAP4"),
 			 where = PluginDescriptor.WHERE_PLUGINMENU,
 			 fnc = main,
 			 icon="plugin.png"
 			 ),
+			 PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)
 		]

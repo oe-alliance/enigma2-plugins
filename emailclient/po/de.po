@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 EmailClient Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-22 19:08+0200\n"
+"PO-Revision-Date: 2009-09-22 19:08+0200\n"
+"Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
+"Language-Team: de <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Attachments"
+msgstr "Anhänge"
+
+msgid "Bodys"
+msgstr ""
+
+#, python-format
+msgid "Box '%s' is empty"
+msgstr "Mailbox %s ist leer"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Email Client"
+msgstr "Email Client"
+
+msgid "From"
+msgstr "Von"
+
+msgid "IMAP Port"
+msgstr "IMAP Port"
+
+msgid "IMAP Server"
+msgstr "IMAP Server"
+
+msgid "In"
+msgstr "In"
+
+msgid ""
+"In order of missing standart python library files\n"
+"i have copied the nessary files now.\n"
+"But you have to restart your Box\n"
+" to apply this!"
+msgstr ""
+"Da Standard-Python-Library-Dateien fehlten,\n"
+"wurden diese kopiert.\n"
+"Ein Neustart könnte notwendig sein."
+
+msgid "Mailbox"
+msgstr "Mailbox"
+
+msgid ""
+"New mail arrived:\n"
+"\n"
+msgstr ""
+"Neue Mail ist angekommen:\n"
+"\n"
+
+msgid "Password"
+msgstr "Passwort"
+
+msgid "Subject"
+msgstr "Betreff"
+
+msgid "Username"
+msgstr "Benutzername"
+
+msgid "cancel"
+msgstr "Abbruch"
+
+msgid "connected"
+msgstr "verbunden"
+
+msgid "delete"
+msgstr "Löschen"
+
+#, python-format
+msgid "have %d messages"
+msgstr "habe %d Mails"
+
+msgid "headers loaded, now parsing ..."
+msgstr "Header geladen, analysiere diese nun ..."
+
+msgid "interval to check for new mails"
+msgstr "Intervall zur Prüfung auf neue Mails"
+
+msgid "leave unread"
+msgstr "Ungelesen lassen"
+
+#, python-format
+msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
+msgstr "lade Header %(from)d-%(to)d von Mailbox '%(name)s'"
+
+msgid "loading message"
+msgstr "lade Mail"
+
+msgid "logged in"
+msgstr "angemeldet"
+
+msgid "mail check process stopped"
+msgstr "Abfrage neuer Mails angehalten"
+
+msgid "max of Headers to load"
+msgstr "Maximale Anzahl zu ladende Header"
+
+msgid "no"
+msgstr "Nein"
+
+msgid "no date"
+msgstr "kein Datum"
+
+msgid "no filename"
+msgstr "kein Dateiname"
+
+msgid "no from"
+msgstr "kein Absender"
+
+msgid "no sender"
+msgstr "kein Sender"
+
+msgid "no subject"
+msgstr "kein Betreff"
+
+msgid "notify about new mails"
+msgstr "Benachrichtige bei neuen Mails"
+
+msgid "ok"
+msgstr "OK"
+
+msgid "parsing message"
+msgstr "Analysiere Mail"
+
+msgid "really delete Mail?"
+msgstr "Mail wirklich löschen?"
+
+msgid "really undelete Mail?"
+msgstr "Mail wiederherstellen?"
+
+msgid "select Attachment"
+msgstr "wähle Anhang"
+
+msgid "select Body"
+msgstr "wähle Textteil"
+
+msgid "show deleted entries"
+msgstr "Anzeige gelöschter Mails"
+
+msgid "timeout displaying new mails"
+msgstr "Timeout bei Anzeige neuer Mails"
+
+msgid "undelete"
+msgstr "Löschen rückgängig"
+
+msgid "unread messages in mailbox"
+msgstr "ungelesene Mails in Mailbox"
+
+msgid "view Emails via IMAP4"
+msgstr "Lesen von Emails via IMAP4"
+
+msgid "yes"
+msgstr "Ja"

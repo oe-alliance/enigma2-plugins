@@ -4,6 +4,9 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 
+from . import _
+import plugin
+
 from enigma import getDesktop
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
@@ -46,16 +49,8 @@ class EmailConfigScreen(ConfigListScreen,Screen):
 
 	def __init__(self, session, args = 0):
 		Screen.__init__(self, session)
-		l = [
-			getConfigListEntry(_("Username"), config.plugins.emailimap.username),
-			getConfigListEntry(_("Password"), config.plugins.emailimap.password),
-			getConfigListEntry(_("IMAP Server"), config.plugins.emailimap.server),
-			getConfigListEntry(_("IMAP Port"), config.plugins.emailimap.port),
-			getConfigListEntry(_("max of Headers to load"), config.plugins.emailimap.maxheadertoload),
-			getConfigListEntry(_("show deleted entries"), config.plugins.emailimap.showDeleted)			
-		]
-		
-		ConfigListScreen.__init__(self, l)
+		self.list = []
+		ConfigListScreen.__init__(self, self.list)
 		self["buttonred"] = Label(_("cancel"))
 		self["buttongreen"] = Label(_("ok"))
 		self["info"] = Label('by 3c5x9')
@@ -67,11 +62,41 @@ class EmailConfigScreen(ConfigListScreen,Screen):
 			"cancel": self.cancel,
 			"ok": self.save,
 		}, -2)
+		self.createSetup()
+
+	def createSetup(self):
+		self.list = [
+			getConfigListEntry(_("Username"), config.plugins.emailimap.username),
+			getConfigListEntry(_("Password"), config.plugins.emailimap.password),
+			getConfigListEntry(_("IMAP Server"), config.plugins.emailimap.server),
+			getConfigListEntry(_("IMAP Port"), config.plugins.emailimap.port),
+			getConfigListEntry(_("max of Headers to load"), config.plugins.emailimap.maxheadertoload),
+			getConfigListEntry(_("show deleted entries"), config.plugins.emailimap.showDeleted),
+			getConfigListEntry(_("notify about new mails"), config.plugins.emailimap.checkForNewMails)
+		]
+		if config.plugins.emailimap.checkForNewMails.value:
+			self.list.append(getConfigListEntry(_("interval to check for new mails"), config.plugins.emailimap.checkPeriod))
+			self.list.append(getConfigListEntry(_("timeout displaying new mails"), config.plugins.emailimap.timeout))
+		self["config"].list = self.list
+		self["config"].l.setList(self.list)
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.createSetup()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.createSetup()
 
 	def save(self):
 		print "saving"
 		for x in self["config"].list:
 			x[1].save()
+		if plugin.mailChecker:
+			plugin.mailChecker.exit()
+		if config.plugins.emailimap.checkForNewMails.value:
+			plugin.mailChecker = plugin.CheckMail()
+			
 		self.close(True)
 
 	def cancel(self):
