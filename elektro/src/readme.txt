@@ -40,7 +40,8 @@ Release infos
 	  versions of enigma2.
 3.3.3 Added patch to installer to fix enigma2. It 
 	  should now be possible to run Elektro and 
-	  EPG refresh in parallel.	  
+	  EPG refresh in parallel.
+3.4.4 Added Turkish locale by MytHoLoG	  
 ====================================================
 The English Documentation follows the German one 
 ====================================================
