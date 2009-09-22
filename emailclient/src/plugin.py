@@ -28,7 +28,7 @@ config.plugins.emailimap.server = ConfigText("please.config.first", fixed_size=F
 config.plugins.emailimap.port = ConfigInteger(default=143, limits = (1, 65536))
 config.plugins.emailimap.showDeleted = ConfigEnableDisable(default=False)
 config.plugins.emailimap.checkForNewMails = ConfigEnableDisable(default=True)
-config.plugins.emailimap.checkPeriod = ConfigInteger(default=600000, limits=(10000, 1000000)) # in milliseconds, 600000 are 10 minutes (10*60*1000)
+config.plugins.emailimap.checkPeriod = ConfigInteger(default=60, limits=(0, 900)) #  in minutes
 config.plugins.emailimap.timeout = ConfigInteger(default=0, limits=(0, 90)) # in seconds
 # 0= fetch all header , 10= fetch only the last 10 headers/messages of a mailbox
 config.plugins.emailimap.maxheadertoload = ConfigInteger(0, limits = (1, 100))
@@ -689,7 +689,7 @@ class CheckMail:
 		self._timer = eTimer()
 		# self._timer.timeout.get().append(self._checkMail)
 		self._timer.callback.append(self._checkMail)
-		self._timer.start(config.plugins.emailimap.checkPeriod.value)
+		self._timer.start(config.plugins.emailimap.checkPeriod.value*60*1000) # it is minutes
 		self._unseenList = None
 		self._proto = None
 

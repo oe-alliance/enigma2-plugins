@@ -1,5 +1,5 @@
-# Enigma2 Plugin EmailClient Messages
-# Copyright (C) 2009 THE PACKAGE'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-22 17:39+0200\n"
+"POT-Creation-Date: 2009-09-22 22:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,13 +78,13 @@ msgid "delete"
 msgstr ""
 
 #, python-format
-msgid "have %d messages "
+msgid "have %d messages"
 msgstr ""
 
 msgid "headers loaded, now parsing ..."
 msgstr ""
 
-msgid "interval to check for new mails"
+msgid "interval to check for new mails (minutes)"
 msgstr ""
 
 msgid "leave unread"
@@ -148,7 +148,7 @@ msgstr ""
 msgid "show deleted entries"
 msgstr ""
 
-msgid "timeout displaying new mails"
+msgid "timeout displaying new mails (seconds)"
 msgstr ""
 
 msgid "undelete"

@@ -75,8 +75,8 @@ class EmailConfigScreen(ConfigListScreen,Screen):
 			getConfigListEntry(_("notify about new mails"), config.plugins.emailimap.checkForNewMails)
 		]
 		if config.plugins.emailimap.checkForNewMails.value:
-			self.list.append(getConfigListEntry(_("interval to check for new mails"), config.plugins.emailimap.checkPeriod))
-			self.list.append(getConfigListEntry(_("timeout displaying new mails"), config.plugins.emailimap.timeout))
+			self.list.append(getConfigListEntry(_("interval to check for new mails (minutes)"), config.plugins.emailimap.checkPeriod))
+			self.list.append(getConfigListEntry(_("timeout displaying new mails (seconds)"), config.plugins.emailimap.timeout))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
