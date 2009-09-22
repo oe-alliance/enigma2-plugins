@@ -16,6 +16,7 @@ from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications
 from FTPServerManager import FTPServerManager
+from FTPQueueManager import FTPQueueManager
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 # GUI (Components)
@@ -146,6 +147,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		HelpableScreen.__init__(self)
 		InfoBarNotifications.__init__(self)
 		self.ftpclient = None
+		self.queueManagerInstance = None
 		self.file = None
 		self.queue = None
 		self.currlist = "local"
@@ -207,14 +209,37 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.connect(self.server)
 		# XXX: Actually everything else should be taken care of... recheck this!
 
-	def managerCallback(self, uri):
+	def serverManagerCallback(self, uri):
 		if uri:
 			self.connect(uri)
 
+	def serverManager(self):
+		self.session.openWithCallback(
+			self.serverManagerCallback,
+			FTPServerManager,
+		)
+
+	def queueManagerCallback(self):
+		self.queueManagerInstance = None
+
+	def queueManager(self):
+		self.queueManagerInstance = self.session.openWithCallback(
+			self.queueManagerCallback,
+			FTPQueueManager,
+			self.queue,
+		)
+
+	def menuCallback(self, ret):
+		ret and ret[1]()
+
 	def menu(self):
 		self.session.openWithCallback(
-			self.managerCallback,
-			FTPServerManager,
+			self.menuCallback,
+			ChoiceBox,
+			list = [
+				(_("Server Manager"), self.serverManager),
+				(_("Queue Manager"), self.queueManager),
+			]
 		)
 
 	def setLocal(self):
@@ -397,7 +422,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				return
 
 			top = self.queue[0]
-			self.queue = self.queue[1:]
+			del self.queue[0]
 			if top[0]:
 				self.getFile(*top[1:])
 			else:
@@ -405,6 +430,9 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		elif self.queue is not None:
 			self.queue = None
 			AddPopup(_("Queue processed."), MessageBox.TYPE_INFO, -1)
+
+		if self.queueManagerInstance:
+			self.queueManagerInstance.updateList(self.queue)
 
 	def transferListFailed(self, res = None):
 		self.queue = None
