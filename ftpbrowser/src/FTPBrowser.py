@@ -161,6 +161,11 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self.queue = None
 		self.currlist = "local"
 
+		# # NOTE: having self.checkNotifications in onExecBegin might make our gui
+		# disappear, so let's move it to onShow
+		self.onExecBegin.remove(self.checkNotifications)
+		self.onShow.append(self.checkNotifications)
+
 		# Init what we need for dl progress
 		self.currentLength = 0
 		self.lastLength = 0
