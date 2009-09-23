@@ -6,20 +6,20 @@ class FileStreamer(resource.Resource):
 	addSlash = True
 
 	def render(self, request):
-		dir = request.args.get("dir", request.args.get("root"))
-		if dir and dir[0]:
-			dir = unquote_plus(dir[0])
+		if 'dir' in request.args:
+			dir = unquote_plus(request.args['dir'][0])
+		elif 'root' in request.args:
+			dir = unquote_plus(request.args['root'][0])
 		else:
 			dir = ''
 
-		if 'file' in request:
+		if 'file' in request.args:
 			filename = unquote_plus(request.args["file"][0])
-
-			path = "%s%s" %(dir, filename)
+			path = dir + filename
 
 			#dirty backwards compatibility hack
 			if not os_path.exists(path):
-				path = "/hdd/movie/%s" %filename
+				path = "/hdd/movie/%s" % (filename)
 
 			if os_path.exists(path):
 				file = static.File(path)
@@ -27,7 +27,7 @@ class FileStreamer(resource.Resource):
 
 			else:
 				request.setResponseCode(http.OK)
-				request.write("file '%s' was not found"%path)
+				request.write("file '%s' was not found"% (dir + filename))
 				request.finish()
 		else:
 			request.setResponseCode(http.OK)
