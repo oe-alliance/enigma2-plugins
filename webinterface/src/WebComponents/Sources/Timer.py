@@ -71,17 +71,17 @@ class Timer(Source):
 	def delTimer(self, param):
 		print "[WebComponents.Timer] delTimer"
 
-		if param.has_key('sRef'):
+		if 'sRef' in param:
 			service_ref = ServiceReference(param['sRef'])
 		else:
 			return ( False, "Missing Parameter: sRef" )
 
-		if param.has_key('begin'):
+		if 'begin' in param:
 			begin = int(float(param['begin']))
 		else:
 			return ( False, "Missing Parameter: begin" )
 
-		if param.has_key('end'):
+		if 'end' in param:
 			end = int(float(param['end']))
 		else:
 			return ( False, "Missing Parameter: end" )
@@ -138,7 +138,7 @@ class Timer(Source):
 		repeated = int(param.get('repeated') or 0)
 		if repeated == 0:
 			for element in ("mo", "tu", "we", "th", "fr", "sa", "su", "ms", "mf"):
-				if param.has_key(element):
+				if element in param:
 					number = param[element] or 0
 					del param[element]
 					repeated = repeated + int(number)
@@ -216,18 +216,17 @@ class Timer(Source):
 		#for others (the serviceReference or the Begin/End time of the timer
 		#we have to quit if they are not set/have illegal values
 
-		if param.has_key('sRef'):
-			service_ref = ServiceReference(param['sRef'])
-		else:
+		if 'sRef' not in param:
 			return ( False, "Missing Parameter: sRef" )
+		service_ref = ServiceReference(param['sRef'])
 
 		repeated = int(param.get('repeated') or 0)
 
-		if not param.has_key('begin'):
+		if 'begin' not in param:
 			return ( False, "Missing Parameter: begin" )
 		begin = int(float(param['begin']))
 
-		if not param.has_key('end'):
+		if 'end' not in param:
 			return ( False, "Missing Parameter: end" )
 		end = int(float(param['end']))
 
@@ -239,18 +238,16 @@ class Timer(Source):
 		elif repeated == 0:
 			return ( False, "Illegal Parameter value for Parameter begin : '%s'" % begin )
 
-		if param.has_key('name'):
-			name = param['name']
-		else:
+		if 'name' not in param:
 			return ( False, "Missing Parameter: name" )
+		name = param['name']
 
-		if param.has_key('description'):
-			description = param['description'].replace("\n", " ")
-		else:
+		if 'description' not in param:
 			return ( False, "Missing Parameter: description" )
+		description = param['description'].replace("\n", " ")
 
 		disabled = False #Default to: Enabled
-		if param.has_key('disabled'):
+		if 'disabled' in param:
 			if param['disabled'] == "1":
 				disabled = True
 			else:
@@ -258,45 +255,43 @@ class Timer(Source):
 				pass
 
 		justplay = False #Default to: Record
-		if param.has_key('justplay'):
+		if 'justplay' in param:
 			if param['justplay'] == "1":
 				justplay = True
 
 		afterEvent = 3 #Default to Afterevent: Auto
-		if param.has_key('afterevent'):
+		if 'afterevent' in param:
 			if (param['afterevent'] == "0") or (param['afterevent'] == "1") or (param['afterevent'] == "2"):
 				afterEvent = int(param['afterevent'])
 
 		dirname = config.movielist.last_timer_videodir.value
-		if param.has_key('dirname') and param['dirname']:
+		if 'dirname' in param and param['dirname']:
 			dirname = param['dirname']
 
 		tags = []
-		if param.has_key('tags') and param['tags']:
+		if 'tags' in param and param['tags']:
 			tags = unescape(param['tags']).split(' ')
 
 		delold = 0
-		if param.has_key('deleteOldOnSave'):
+		if 'deleteOldOnSave' in param:
 			delold = int(param['deleteOldOnSave'])
 
 		#Try to edit an existing Timer
 		if delold:
-			if param.has_key('channelOld') and param['channelOld'] != '':
+			if 'channelOld' in param and param['channelOld']:
 				channelOld = ServiceReference(param['channelOld'])
 			else:
 				return ( False, "Missing Parameter: channelOld" )
 			# We do need all of the following Parameters, too, for being able of finding the Timer.
 			# Therefore so we can neither use default values in this part nor can we
 			# continue if a parameter is missing
-			if param.has_key('beginOld'):
-				beginOld = int(param['beginOld'])
-			else:
+			if 'beginOld' not in param:
 				return ( False, "Missing Parameter: beginOld" )
+			beginOld = int(param['beginOld'])
 
-			if param.has_key('endOld'):
-				endOld = int(param['endOld'])
-			else:
+			if 'endOld' not in param:
 				return ( False, "Missing Parameter: endOld" )
+			endOld = int(param['endOld'])
 
 			#let's try to find the timer
 			try:
@@ -356,10 +351,11 @@ class Timer(Source):
 				justplay = True
 
 		location = config.movielist.last_timer_videodir.value
-		if param.has_key('dirname') and param['dirname']:
+		if 'dirname' in param and param['dirname']:
 			location = param['dirname']
+
 		tags = []
-		if param.has_key('tags') and param['tags']:
+		if 'tags' in param and param['tags']:
 			tags = unescape(param['tags']).split(' ')
 
 		epgcache = eEPGCache.getInstance()

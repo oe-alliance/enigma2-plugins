@@ -84,7 +84,7 @@ class IPKGResource(resource.Resource):
 		return server.NOT_DONE_YET
 
 	def getArg(self, key):
-		if self.args.has_key(key):
+		if key in self.args:
 			return self.args[key][0]
 		else:
 			return None

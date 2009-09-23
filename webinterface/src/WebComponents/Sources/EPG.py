@@ -107,11 +107,11 @@ class EPG(Source):
     def getEPGofBouquet(self, param):
         print "[WebComponents.EPG] getting EPG for Bouquet", param
 
-        if not param.has_key('bRef'):
+        if 'bRef' not in param:
             return ()
 
         time = -1
-        if param.has_key('time'):
+        if 'time' in param:
             if param['time'] is not None:
                 time = int(float(param['time']))
                 if time < 0:

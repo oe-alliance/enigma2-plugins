@@ -9,11 +9,11 @@ class ServiceplayerResource(resource.Resource):
 		self.oldservice = None
 	
 	def render(self, request):
-		if request.args.has_key("file"):
+		if 'file' in request.args:
 			output = self.playFile(request.args['file'][0])
-		elif request.args.has_key("url"):
+		elif 'url' in request.args:
 			output = self.playURL(request.args['url'][0])
-		elif request.args.has_key("stop"):
+		elif 'stop' in request.args:
 			output = self.stopServicePlay()
 		else:
 			output = True, "unknown command"

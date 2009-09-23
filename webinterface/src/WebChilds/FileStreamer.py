@@ -12,7 +12,7 @@ class FileStreamer(resource.Resource):
 		else:
 			dir = ''
 
-		if request.args.has_key("file"):
+		if 'file' in request:
 			filename = unquote_plus(request.args["file"][0])
 
 			path = "%s%s" %(dir, filename)

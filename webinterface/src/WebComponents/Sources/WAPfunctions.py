@@ -60,13 +60,13 @@ class WAPfunctions(Source):
 		timeNow = time()
 		timePlusTwo = timeNow + 7200
 
-		if param.has_key('begin'):
+		if 'begin' in param:
 			begin = param['begin'] or 0
 			begin = int(begin)
 			del param['begin']
 			if begin > 0:
 				timeNow = begin
-		if param.has_key('end'):
+		if 'end' in param:
 			end = param['end'] or 0
 			end = int(end)
 			del param['end']
@@ -301,14 +301,14 @@ class WAPfunctions(Source):
 
 	def fillOptionList(self, param):
 		print "fillOptionList", param
-		if param.has_key("justplay"):
+		if "justplay" in param:
 			number = param["justplay"] or 0
 			number = int(number)
 			return (
 				("Record", 0, number == 0 and "selected" or ""),
 				("Zap", 1, number == 1 and "selected" or "")
 			)
-		elif param.has_key("afterevent"):
+		elif "afterevent" in param:
 			number = param["afterevent"] or 0
 			number = int(number)
 			return (
