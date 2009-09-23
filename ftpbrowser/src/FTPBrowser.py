@@ -589,16 +589,13 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				if not fileName:
 					return
 
-				directory = self["remote"].getCurrentDirectory()
-				sep = '/' if directory != '/' else ''
-				absRemoteFile = directory + sep + fileName
-
 				def remoteFileExists(absName):
 					for file in self["remote"].getFileList():
 						if file[0][0] == absName:
 							return True
 					return False
 
+				absRemoteFile = self["remote"].getCurrentDirectory() + fileName
 				self.putFile(absRemoteFile, absLocalFile, remoteFileExists(absRemoteFile))
 
 	def transferFinished(self, msg, type, toRefresh):
