@@ -202,7 +202,14 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 	def reinitialize(self):
 		# NOTE: this will clear the remote file list if we are not currently connected. this behavior is intended.
 		# XXX: but do we also want to do this when we just returned from a notification?
-		self["remote"].refresh()
+		try:
+			self["remote"].refresh()
+		except AttributeError, ae:
+			# NOTE: we assume the connection was timed out by the server
+			self.ftpclient = None
+			self["remote"].ftpclient = None
+			self["remote"].refresh()
+
 		self["local"].refresh()
 
 		if not self.ftpclient:
