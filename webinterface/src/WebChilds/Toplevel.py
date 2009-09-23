@@ -1,4 +1,4 @@
-from twisted.web import resource, static
+from twisted.web import resource, server, static
 from twisted.python import util
 
 from Components.config import config
@@ -59,5 +59,5 @@ class RedirectorResource(resource.Resource):
 	
 	def render(self, request):
 		request.redirect(self.uri)
-		request.NOT_DONE_YET		
+		request.finish()
 
