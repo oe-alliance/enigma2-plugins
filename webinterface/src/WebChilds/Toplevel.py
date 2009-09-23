@@ -1,4 +1,4 @@
-from twisted.web import resource, server, static
+from twisted.web import resource, static
 from twisted.python import util
 
 from Components.config import config
