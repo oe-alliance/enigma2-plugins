@@ -36,6 +36,7 @@ from twisted.protocols.basic import FileSender
 from os import path as os_path, unlink as os_unlink, rename as os_rename, \
 		listdir as os_listdir
 from time import time
+import re
 
 def FTPFileEntryComponent(file, directory):
 	isDir = True if file['filetype'] == 'd' else False
@@ -62,6 +63,14 @@ def FTPFileEntryComponent(file, directory):
 
 	return res
 
+class ModifiedFTPFileListProtocol(FTPFileListProtocol):
+    fileLinePattern = re.compile(
+        r'^(?P<filetype>.)(?P<perms>.{9})\s+(?P<nlinks>\d*)\s*'
+        r'(?P<owner>\S+)\s+(?P<group>\S+)\s+(?P<size>\d+)\s+'
+        r'(?P<date>...\s+\d+\s+[\d:]+)\s+(?P<filename>.*?)'
+        r'( -> (?P<linktarget>[^\r]*))?\r?$'
+    )
+
 class FTPFileList(FileList):
 	def __init__(self):
 		self.ftpclient = None
@@ -81,7 +90,7 @@ class FTPFileList(FileList):
 		self.current_directory = directory
 		self.select = select
 
-		self.filelist = FTPFileListProtocol()
+		self.filelist = ModifiedFTPFileListProtocol()
 		d = self.ftpclient.list(directory, self.filelist)
 		d.addCallback(self.listRcvd).addErrback(self.listFailed)
 
@@ -458,7 +467,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				if not fileName:
 					return
 
-				filelist = FTPFileListProtocol()
+				filelist = ModifiedFTPFileListProtocol()
 				d = self.ftpclient.list(absRemoteFile, filelist)
 				d.addCallback(self.transferListRcvd, filelist).addErrback(self.transferListFailed)
 		else:
