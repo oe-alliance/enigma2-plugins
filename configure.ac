@@ -91,6 +91,7 @@ webcamviewer/src/Makefile
 
 emailclient/Makefile
 emailclient/src/Makefile
+emailclient/po/Makefile
 
 autotimer/Makefile
 autotimer/src/Makefile
