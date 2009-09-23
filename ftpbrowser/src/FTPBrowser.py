@@ -344,10 +344,13 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				AddPopup(_("Renamed %s to %s.") % (fileName, newName), MessageBox.TYPE_INFO, -1)
 
 	def rename(self):
-		if not self.ftpclient or self.queue:
+		if self.queue:
 			return
 
 		if self.currlist == "remote":
+			if not self.ftpclient:
+				return
+
 			absRemoteFile, fileName, fileSize = self.getRemoteFile()
 			if not fileName:
 				return
@@ -393,10 +396,13 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				AddPopup(_("Removed %s.") % (fileName), MessageBox.TYPE_INFO, -1)
 
 	def delete(self):
-		if not self.ftpclient or self.queue:
+		if self.queue:
 			return
 
 		if self.currlist == "remote":
+			if not self.ftpclient:
+				return
+
 			if self["remote"].canDescent():
 				self.session.open(
 					MessageBox,
@@ -450,6 +456,9 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				self.putFile(*top[1:])
 		elif self.queue is not None:
 			self.queue = None
+			self["eta"].setText("")
+			self["speed"].setText("")
+			self["progress"].invalidate()
 			AddPopup(_("Queue processed."), MessageBox.TYPE_INFO, -1)
 
 		if self.queueManagerInstance:
