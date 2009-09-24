@@ -1,23 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: Enigma2 AutoTimer Plugin\n"
+"Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-06 22:24+0100\n"
-"PO-Revision-Date: 2009-03-06 22:25+0100\n"
+"POT-Creation-Date: 2009-09-24 16:10+0200\n"
+"PO-Revision-Date: 2009-09-24 16:15+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
-"Language-Team: german <de@li.org>\n"
+"Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Add to EPGRefresh"
-msgstr "Zu EPGRefresh hinzufügen"
-
-msgid "Automated EPGRefresher"
+msgid "Automatically refresh EPG"
 msgstr "Automatisierte EPG Aktualisierung"
 
 msgid "Bouquets"
@@ -55,6 +48,9 @@ msgstr "Aktualisierung erzwingen"
 
 msgid "Inherit Services from AutoTimer if available"
 msgstr "Zusätzlich Sender vom AutoTimer verwenden"
+
+msgid "Make AutoTimer parse EPG if available"
+msgstr "AutoTimer nach Aktualisierung aktivieren"
 
 msgid "New"
 msgstr "Neu"
@@ -103,6 +99,9 @@ msgstr "Verbleibe auf Sender für (min)"
 
 msgid "Wakeup from Deep-Standby to refresh EPG"
 msgstr "Aus dem Deep-Standby hochfahren"
+
+msgid "add to EPGRefresh"
+msgstr "Zu EPGRefresh hinzufügen"
 
 msgid "delete"
 msgstr "Löschen"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-16 23:05+0100\n"
+"POT-Creation-Date: 2009-09-24 16:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,10 +49,6 @@ msgid ""
 "(Note that 'Cancel' will not undo this!)"
 msgstr ""
 
-#: ../src/plugin.py:25
-msgid "Edit tags..."
-msgstr ""
-
 #: ../src/plugin.py:48
 msgid "Load"
 msgstr ""
@@ -78,4 +74,8 @@ msgstr ""
 msgid ""
 "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
 "this!)"
+msgstr ""
+
+#: ../src/plugin.py:25
+msgid "edit tags..."
 msgstr ""

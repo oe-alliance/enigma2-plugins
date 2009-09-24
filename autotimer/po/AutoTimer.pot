@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-10 22:01+0200\n"
+"POT-Creation-Date: 2009-09-24 16:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,6 @@ msgstr ""
 
 #: ../src/AutoTimerOverview.py:50
 msgid "Add"
-msgstr ""
-
-#: ../src/plugin.py:164 ../src/plugin.py:165
-msgid "Add AutoTimer..."
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:420
@@ -40,7 +36,7 @@ msgstr ""
 msgid "Add timer as disabled on conflict"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:485 ../src/AutoTimerImporter.py:175
+#: ../src/AutoTimerEditor.py:485 ../src/AutoTimerImporter.py:172
 msgid "After event"
 msgstr ""
 
@@ -56,7 +52,7 @@ msgstr ""
 msgid "AutoTimer Editor"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:731
+#: ../src/AutoTimerEditor.py:747
 msgid "AutoTimer Filters"
 msgstr ""
 
@@ -64,7 +60,7 @@ msgstr ""
 msgid "AutoTimer Overview"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:935
+#: ../src/AutoTimerEditor.py:951
 msgid "AutoTimer Services"
 msgstr ""
 
@@ -80,13 +76,13 @@ msgstr ""
 msgid "Begin of after Event Timespan"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:946
+#: ../src/AutoTimerEditor.py:962
 msgid "Bouquets"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:388 ../src/AutoTimerEditor.py:752
-#: ../src/AutoTimerEditor.py:955 ../src/AutoTimerImporter.py:43
-#: ../src/AutoTimerImporter.py:120 ../src/AutoTimerPreview.py:57
+#: ../src/AutoTimerEditor.py:388 ../src/AutoTimerEditor.py:768
+#: ../src/AutoTimerEditor.py:971 ../src/AutoTimerImporter.py:43
+#: ../src/AutoTimerImporter.py:117 ../src/AutoTimerPreview.py:57
 #: ../src/AutoTimerSettings.py:45
 msgid "Cancel"
 msgstr ""
@@ -95,7 +91,7 @@ msgstr ""
 msgid "Channel Selection"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:945
+#: ../src/AutoTimerEditor.py:961
 msgid "Channels"
 msgstr ""
 
@@ -161,11 +157,11 @@ msgstr ""
 msgid "Edit AutoTimer"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:773
+#: ../src/AutoTimerEditor.py:789
 msgid "Edit AutoTimer Filters"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:976
+#: ../src/AutoTimerEditor.py:992
 msgid "Edit AutoTimer Services"
 msgstr ""
 
@@ -189,7 +185,7 @@ msgstr ""
 msgid "Edit selected AutoTimer"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:998
+#: ../src/AutoTimerEditor.py:1014
 msgid "Editing"
 msgstr ""
 
@@ -197,15 +193,15 @@ msgstr ""
 msgid "Editor for new AutoTimers"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:817
+#: ../src/AutoTimerEditor.py:833
 msgid "Enable Filtering"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:997
+#: ../src/AutoTimerEditor.py:1013
 msgid "Enable Service Restriction"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:449 ../src/AutoTimerImporter.py:130
+#: ../src/AutoTimerEditor.py:449 ../src/AutoTimerImporter.py:127
 #: ../src/AutoTimerWizard.py:85
 msgid "Enabled"
 msgstr ""
@@ -218,12 +214,12 @@ msgstr ""
 msgid "End of after Event Timespan"
 msgstr ""
 
-#: ../src/AutoTimerImporter.py:145
+#: ../src/AutoTimerImporter.py:142
 msgid "Exact match"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:826 ../src/AutoTimerEditor.py:843
-#: ../src/AutoTimerEditor.py:868
+#: ../src/AutoTimerEditor.py:842 ../src/AutoTimerEditor.py:859
+#: ../src/AutoTimerEditor.py:884
 msgid "Exclude"
 msgstr ""
 
@@ -231,11 +227,11 @@ msgstr ""
 msgid "Execute after Event during Timespan"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:818
+#: ../src/AutoTimerEditor.py:834
 msgid "Filter"
 msgstr ""
 
-#: ../src/plugin.py:116
+#: ../src/AutoTimerResource.py:22 ../src/plugin.py:116
 #, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
@@ -250,7 +246,7 @@ msgstr ""
 msgid "Guess existing Timer based on Begin/End"
 msgstr ""
 
-#: ../src/AutoTimerImporter.py:222
+#: ../src/AutoTimerImporter.py:219
 msgid "Import AutoTimer"
 msgstr ""
 
@@ -262,16 +258,16 @@ msgstr ""
 msgid "Import from EPG"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:831 ../src/AutoTimerEditor.py:848
-#: ../src/AutoTimerEditor.py:869
+#: ../src/AutoTimerEditor.py:847 ../src/AutoTimerEditor.py:864
+#: ../src/AutoTimerEditor.py:885
 msgid "Include"
 msgstr ""
 
-#: ../src/AutoTimerImporter.py:193
+#: ../src/AutoTimerImporter.py:190
 msgid "Location"
 msgstr ""
 
-#: ../src/AutoTimerImporter.py:157
+#: ../src/AutoTimerImporter.py:154
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr ""
@@ -280,7 +276,7 @@ msgstr ""
 msgid "Match Title"
 msgstr ""
 
-#: ../src/AutoTimerImporter.py:139
+#: ../src/AutoTimerImporter.py:136
 #, python-format
 msgid "Match title: %s"
 msgstr ""
@@ -305,7 +301,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:755 ../src/AutoTimerEditor.py:958
+#: ../src/AutoTimerEditor.py:771 ../src/AutoTimerEditor.py:974
 msgid "New"
 msgstr ""
 
@@ -318,8 +314,8 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:389 ../src/AutoTimerEditor.py:956
-#: ../src/AutoTimerImporter.py:44 ../src/AutoTimerImporter.py:121
+#: ../src/AutoTimerEditor.py:389 ../src/AutoTimerEditor.py:972
+#: ../src/AutoTimerImporter.py:44 ../src/AutoTimerImporter.py:118
 #: ../src/AutoTimerSettings.py:44
 msgid "OK"
 msgstr ""
@@ -348,7 +344,7 @@ msgstr ""
 msgid "Only match during Timespan"
 msgstr ""
 
-#: ../src/AutoTimerImporter.py:166
+#: ../src/AutoTimerImporter.py:163
 #, python-format
 msgid "Only on Service: %s"
 msgstr ""
@@ -361,7 +357,7 @@ msgstr ""
 msgid "Override found with alternative Service"
 msgstr ""
 
-#: ../src/AutoTimerImporter.py:299
+#: ../src/AutoTimerImporter.py:296
 msgid "Please provide a Text to match"
 msgstr ""
 
@@ -381,8 +377,8 @@ msgstr ""
 msgid "Preview AutoTimer"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:568 ../src/AutoTimerEditor.py:898
-#: ../src/AutoTimerEditor.py:1066 ../src/AutoTimerImporter.py:228
+#: ../src/AutoTimerEditor.py:584 ../src/AutoTimerEditor.py:914
+#: ../src/AutoTimerEditor.py:1082 ../src/AutoTimerImporter.py:225
 #: ../src/AutoTimerOverview.py:155
 msgid "Really close without saving settings?"
 msgstr ""
@@ -391,7 +387,7 @@ msgstr ""
 msgid "Record a maximum of x times"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:1007 ../src/AutoTimerEditor.py:1058
+#: ../src/AutoTimerEditor.py:1023 ../src/AutoTimerEditor.py:1074
 msgid "Record on"
 msgstr ""
 
@@ -411,7 +407,7 @@ msgstr ""
 msgid "Saturday"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:753 ../src/AutoTimerOverview.py:48
+#: ../src/AutoTimerEditor.py:769 ../src/AutoTimerOverview.py:48
 msgid "Save"
 msgstr ""
 
@@ -427,15 +423,15 @@ msgstr ""
 msgid "Select a Timer to Import"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:1044
+#: ../src/AutoTimerEditor.py:1060
 msgid "Select bouquet to record on"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:1038
+#: ../src/AutoTimerEditor.py:1054
 msgid "Select channel to record on"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:866
+#: ../src/AutoTimerEditor.py:882
 msgid "Select type of Filter"
 msgstr ""
 
@@ -463,11 +459,11 @@ msgstr ""
 msgid "Sunday"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:513 ../src/AutoTimerImporter.py:202
+#: ../src/AutoTimerEditor.py:513 ../src/AutoTimerImporter.py:199
 msgid "Tags"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:585
+#: ../src/AutoTimerEditor.py:601
 msgid "The match attribute is mandatory."
 msgstr ""
 
@@ -475,7 +471,7 @@ msgstr ""
 msgid "Thursday"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:458 ../src/AutoTimerImporter.py:184
+#: ../src/AutoTimerEditor.py:458 ../src/AutoTimerImporter.py:181
 #: ../src/AutoTimerWizard.py:88
 msgid "Timer Type"
 msgstr ""
@@ -512,7 +508,7 @@ msgstr ""
 msgid "Wizard"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:594 ../src/AutoTimerImporter.py:243
+#: ../src/AutoTimerEditor.py:610 ../src/AutoTimerImporter.py:240
 #, python-format
 msgid ""
 "You entered \"%s\" as Text to match.\n"
@@ -524,6 +520,10 @@ msgstr ""
 msgid ""
 "Your config file is not well-formed:\n"
 "%s"
+msgstr ""
+
+#: ../src/plugin.py:164 ../src/plugin.py:165
+msgid "add AutoTimer..."
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:241 ../src/AutoTimerImporter.py:28
@@ -538,11 +538,11 @@ msgstr ""
 msgid "case-sensitive search"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:754 ../src/AutoTimerEditor.py:957
+#: ../src/AutoTimerEditor.py:770 ../src/AutoTimerEditor.py:973
 msgid "delete"
 msgstr ""
 
-#: ../src/AutoTimerImporter.py:130
+#: ../src/AutoTimerImporter.py:127
 msgid "disable"
 msgstr ""
 
@@ -550,7 +550,7 @@ msgstr ""
 msgid "do nothing"
 msgstr ""
 
-#: ../src/AutoTimerImporter.py:130
+#: ../src/AutoTimerImporter.py:127
 msgid "enable"
 msgstr ""
 
@@ -566,15 +566,15 @@ msgstr ""
 msgid "go to standby"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:737
+#: ../src/AutoTimerEditor.py:753
 msgid "in Description"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:736
+#: ../src/AutoTimerEditor.py:752
 msgid "in Shortdescription"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:735
+#: ../src/AutoTimerEditor.py:751
 msgid "in Title"
 msgstr ""
 
@@ -582,7 +582,7 @@ msgstr ""
 msgid "mins"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:738
+#: ../src/AutoTimerEditor.py:754
 msgid "on Weekday"
 msgstr ""
 
@@ -590,7 +590,7 @@ msgstr ""
 msgid "partial match"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:187 ../src/AutoTimerImporter.py:184
+#: ../src/AutoTimerEditor.py:187 ../src/AutoTimerImporter.py:181
 msgid "record"
 msgstr ""
 
@@ -598,7 +598,7 @@ msgstr ""
 msgid "standard"
 msgstr ""
 
-#: ../src/AutoTimerEditor.py:187 ../src/AutoTimerImporter.py:184
+#: ../src/AutoTimerEditor.py:187 ../src/AutoTimerImporter.py:181
 msgid "zap"
 msgstr ""
 

@@ -22,7 +22,7 @@ msgstr "Dizze gûcheler ôfbrekke"
 msgid "Add"
 msgstr "Tafoegje"
 
-msgid "Add AutoTimer..."
+msgid "add AutoTimer..."
 msgstr "AutoTimer Tafoegje..."
 
 msgid "Add Filters"

@@ -58,7 +58,7 @@ msgstr "Buscar"
 msgid "Search EPG"
 msgstr "Buscar EPG"
 
-msgid "Search EPG..."
+msgid "search EPG..."
 msgstr "Buscar EPG..."
 
 #: ../src/EPGSearch.py:152

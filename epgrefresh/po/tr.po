@@ -14,11 +14,11 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../src/plugin.py:143
-msgid "Add to EPGRefresh"
+msgid "add to EPGRefresh"
 msgstr "Otomatik EPG yenileyiciye ekle"
 
 #: ../src/plugin.py:138
-msgid "Automated EPGRefresher"
+msgid "Automatically refresh EPG"
 msgstr "Otomatik EPG Yenileyici"
 
 #: ../src/EPGRefreshChannelEditor.py:67

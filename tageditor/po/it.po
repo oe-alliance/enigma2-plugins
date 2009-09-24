@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: /home/dario/Plugins/tageditor\n"
 
 #: /home/dario/Plugins/tageditor/src/plugin.py:25
-msgid "Edit tags..."
+msgid "edit tags..."
 msgstr "Mod. etich...."
 
 #: /home/dario/Plugins/tageditor/src/plugin.py:45

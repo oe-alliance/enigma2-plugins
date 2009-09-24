@@ -20,7 +20,7 @@ msgstr "Den Wizard beenden."
 msgid "Add"
 msgstr "Hinzufügen"
 
-msgid "Add AutoTimer..."
+msgid "add AutoTimer..."
 msgstr "AutoTimer hinzufügen..."
 
 msgid "Add Filters"

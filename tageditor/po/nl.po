@@ -56,7 +56,7 @@ msgstr ""
 "(Merk op dat 'Annulleer' dit niet ongedaan kan maken!)"
 
 #: ../src/plugin.py:25
-msgid "Edit tags..."
+msgid "edit tags..."
 msgstr "Bewerk tags..."
 
 #: ../src/plugin.py:48

@@ -161,8 +161,8 @@ def Plugins(**kwargs):
 	l = [
 		PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = autostart),
 		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main),
-		PluginDescriptor(name="AutoTimer", description= _("Add AutoTimer..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist),
-		PluginDescriptor(name="AutoTimer", description= _("Add AutoTimer..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc = eventinfo),
+		PluginDescriptor(name="AutoTimer", description= _("add AutoTimer..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist),
+		PluginDescriptor(name=_("add AutoTimer..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc = eventinfo),
 	]
 	if config.plugins.autotimer.show_in_extensionsmenu.value:
 		l.append(extDescriptor)

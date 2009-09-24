@@ -96,6 +96,6 @@ msgstr "Cercare EPG"
 
 #: /home/dario/Plugins/epgsearch/src/plugin.py:63
 #: /home/dario/Plugins/epgsearch/src/plugin.py:69
-msgid "Search EPG..."
+msgid "search EPG..."
 msgstr "Ricerca EPG in corso..."
 

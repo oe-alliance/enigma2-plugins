@@ -51,7 +51,7 @@ msgstr ""
 "(Onaylarsanız, bir sonraki ekrandaki 'Vazgeç' seçimiyle iptal edemezsiniz!)"
 
 #: ../src/plugin.py:25
-msgid "Edit tags..."
+msgid "edit tags..."
 msgstr "Etiketleri düzenle..."
 
 #: ../src/plugin.py:48

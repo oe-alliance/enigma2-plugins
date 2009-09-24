@@ -84,7 +84,7 @@ msgstr "EPG Arama"
 
 #: ../src/plugin.py:63
 #: ../src/plugin.py:69
-msgid "Search EPG..."
+msgid "search EPG..."
 msgstr "EPG Arama..."
 
 #: ../src/EPGSearch.py:366

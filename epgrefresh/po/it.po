@@ -95,11 +95,11 @@ msgstr ""
 "Farlo ora?"
 
 #: /home/dario/Plugins/epgrefresh/src/plugin.py:138
-msgid "Automated EPGRefresher"
+msgid "Automatically refresh EPG"
 msgstr "Agg. automatizzato EPG"
 
 #: /home/dario/Plugins/epgrefresh/src/plugin.py:143
-msgid "Add to EPGRefresh"
+msgid "add to EPGRefresh"
 msgstr "Aggiungere a EPGRefresh"
 
 #: /home/dario/Plugins/epgrefresh/src/EPGRefreshChannelEditor.py:59

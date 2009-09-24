@@ -21,7 +21,7 @@ msgstr "Deze Wizard afsluiten"
 msgid "Add"
 msgstr "Toevoegen"
 
-msgid "Add AutoTimer..."
+msgid "add AutoTimer..."
 msgstr "Autotimer toevoegen..."
 
 msgid "Add Filters"

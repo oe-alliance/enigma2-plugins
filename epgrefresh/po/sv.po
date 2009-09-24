@@ -15,11 +15,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../src/plugin.py:143
-msgid "Add to EPGRefresh"
+msgid "add to EPGRefresh"
 msgstr "Lägg till i EPGRefresh"
 
 #: ../src/plugin.py:138
-msgid "Automated EPGRefresher"
+msgid "Automatically refresh EPG"
 msgstr "Automatisk EPGRefresh"
 
 #: ../src/EPGRefreshChannelEditor.py:67

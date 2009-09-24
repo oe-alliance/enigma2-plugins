@@ -64,7 +64,7 @@ msgstr "EPG doorzoeken"
 
 #: ../src/plugin.py:50
 #: ../src/plugin.py:56
-msgid "Search EPG..."
+msgid "search EPG..."
 msgstr "EPG doorzoeken..."
 
 #: ../src/EPGSearch.py:160

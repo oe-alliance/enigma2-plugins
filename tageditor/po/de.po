@@ -46,7 +46,7 @@ msgstr ""
 "Wirklich den Tag \"%s\" überall entfernen?\n"
 "('Abbrechen' kann dies nicht rückgängig machen!)"
 
-msgid "Edit tags..."
+msgid "edit tags..."
 msgstr "Tags bearbeiten..."
 
 msgid "Load"

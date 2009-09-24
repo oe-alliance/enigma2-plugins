@@ -24,7 +24,7 @@ msgstr "Aggiungere"
 
 #: ../src/plugin.py:164
 #: ../src/plugin.py:165
-msgid "Add AutoTimer..."
+msgid "add AutoTimer..."
 msgstr "Agg. AutoTimer"
 
 #: ../src/AutoTimerEditor.py:420

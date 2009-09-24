@@ -136,12 +136,12 @@ def Plugins(**kwargs):
 		),
 		PluginDescriptor(
 			name = "EPGRefresh",
-			description = _("Automated EPGRefresher"),
+			description = _("Automatically refresh EPG"),
 			where = PluginDescriptor.WHERE_PLUGINMENU,
 			fnc = main
 		),
 		PluginDescriptor(
-			name = _("Add to EPGRefresh"),
+			name = _("add to EPGRefresh"),
 			where = PluginDescriptor.WHERE_EVENTINFO,
 			fnc = eventinfo
 		),

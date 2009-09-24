@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-msgid "Automated EPGRefresher"
+msgid "Automatically refresh EPG"
 msgstr "Automatyske EPG ferfasker"
 
 msgid "Bouquets"
