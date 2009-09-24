@@ -5,10 +5,10 @@
 # gerrit <gerrit@nedlinux.nl>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2 - wirelesslan\n"
+"Project-Id-Version: Enigma2 - WirelessLan\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 14:59+0100\n"
-"PO-Revision-Date: 2009-06-07 11:32+0100\n"
+"POT-Creation-Date: 2009-09-13 12:36+0200\n"
+"PO-Revision-Date: 2009-09-23 13:07+0100\n"
 "Last-Translator: \n"
 "Language-Team:  <Benny.DeTandt@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -19,8 +19,11 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid " Wireless Network(s) found!"
-msgstr " Draadloze netwerk(en) gevonden!"
+msgid " wireless networks found!"
+msgstr "draadloze netwerken gevonden!"
+
+msgid "1 wireless network found!"
+msgstr "1 draadloos netwerk gevonden!"
 
 msgid "Accesspoint:"
 msgstr "Toegangspunt:"
@@ -82,11 +85,14 @@ msgstr "Nee"
 msgid "No Connection"
 msgstr "Geen verbinding"
 
+msgid "No wireless networks found! Please refresh."
+msgstr "Geen draadloze netwerken gevonden! Verniew."
+
 msgid "Please wait..."
 msgstr "Even geduld..."
 
 msgid "Refresh"
-msgstr "Verversen"
+msgstr "Vernieuwen"
 
 msgid "SSID:"
 msgstr "SSID:"
@@ -108,4 +114,7 @@ msgstr "Status draadloos netwerk"
 
 msgid "Yes"
 msgstr "Ja"
+
+#~ msgid " Wireless Network(s) found!"
+#~ msgstr " Draadloze netwerk(en) gevonden!"
 
