@@ -2021,12 +2021,27 @@ class FritzCallPhonebook:
 			config.plugins.FritzCall.fullscreen.value = False
 
 	def search(self, number):
-		# debug("[FritzCallPhonebook] Searching for %s" %number
-		name = None
-		if config.plugins.FritzCall.phonebook.value or config.plugins.FritzCall.fritzphonebook.value:
-			if self.phonebook.has_key(number):
-				name = self.phonebook[number].replace(", ", "\n").strip()
-		return name
+		debug("[FritzCallPhonebook] Searching for %s" %number)
+		name = ""
+		if not self.phonebook:
+			return
+
+		if config.plugins.FritzCall.prefix.value:
+			prefix = config.plugins.FritzCall.prefix.value
+			if number[0] != '0':
+				number = prefix + number
+				debug("[FritzCallPhonebook] search: added prefix: %s" %number)
+			elif number[:len(prefix)] == prefix and self.phonebook.has_key(number[len(prefix):]):
+				debug("[FritzCallPhonebook] search: same prefix")
+				name = self.phonebook[number[len(prefix):]]
+				debug("[FritzCallPhonebook] search: result: %s" %name)
+		else:
+			prefix = ""
+				
+		if not name and self.phonebook.has_key(number):
+			name = self.phonebook[number]
+				
+		return name.replace(", ", "\n").strip()
 
 	def add(self, number, name):
 		'''
@@ -2617,8 +2632,8 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 				self.list.append(getConfigListEntry(_("MSN to show (separated by ,)"), config.plugins.FritzCall.filtermsn))
 
 			self.list.append(getConfigListEntry(_("Show Outgoing Calls"), config.plugins.FritzCall.showOutgoing))
-			if config.plugins.FritzCall.showOutgoing.value:
-				self.list.append(getConfigListEntry(_("Areacode to add to Outgoing Calls (if necessary)"), config.plugins.FritzCall.prefix))
+			# not only for outgoing: config.plugins.FritzCall.showOutgoing.value:
+			self.list.append(getConfigListEntry(_("Areacode to add to calls without one (if necessary)"), config.plugins.FritzCall.prefix))
 			self.list.append(getConfigListEntry(_("Timeout for Call Notifications (seconds)"), config.plugins.FritzCall.timeout))
 			self.list.append(getConfigListEntry(_("Reverse Lookup Caller ID (select country below)"), config.plugins.FritzCall.lookup))
 			if config.plugins.FritzCall.lookup.value:
