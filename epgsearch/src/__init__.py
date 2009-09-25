@@ -12,7 +12,6 @@ def localeInit():
 def _(txt):
 	t = gettext.dgettext("EPGSearch", txt)
 	if t == txt:
-		print "[EPGSearch] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 
