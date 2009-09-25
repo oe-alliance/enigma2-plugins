@@ -544,7 +544,7 @@ class ScreenMailView(Screen):
 			self.session.openWithCallback(self.deleteCB, ChoiceBox, title=_("really delete Mail?"), list=[(_("yes"), True),(_("no"), False)])
 
 	def deleteCB(self, returnValue):
-		if returnValue[1] is True:
+		if returnValue and returnValue[1] is True:
 			if '\\Deleted' in self.flags:
 				self.proto.removeFlags(self.uid, ["\\Deleted"]).addCallback(self.cbOk).addErrback(self.cbNotOk)
 			else:
