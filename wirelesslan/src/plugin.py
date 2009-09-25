@@ -4,8 +4,9 @@ from __init__ import _
 from enigma import eTimer
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Pixmap import Pixmap
+from Components.Pixmap import Pixmap,MultiPixmap
 from Components.Label import Label
+from Components.Sources.StaticText import StaticText
 from Components.MenuList import MenuList
 from Components.config import config, getConfigListEntry, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, ConfigSelection, ConfigPassword
 from Components.ConfigList import ConfigListScreen
@@ -41,66 +42,58 @@ config.plugins.wlan.encryption.psk = NoSave(ConfigPassword(default = "mysecurewl
 
 class WlanStatus(Screen):
 	skin = """
-	<screen position="90,150" size="550,300" title="Wireless Network State" >
-		<widget name="LabelBSSID" position="10,10" size="250,25" valign="left" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="LabelESSID" position="10,38" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="LabelQuality" position="10,66" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="LabelSignal" position="10,94" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="LabelBitrate" position="10,122" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="LabelEnc" position="10,150" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		
-		<widget name="BSSID" position="320,10" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="ESSID" position="320,38" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="quality" position="320,66" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="signal" position="320,94" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="bitrate" position="320,122" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="enc" position="320,150" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
-		
-		<widget name="BottomBG" pixmap="skin_default/bottombar.png" position="5,210" size="540,120" zPosition="1" transparent="1" alphatest="on" />
-		<widget name="IFtext" position="20,225" size="100,21" zPosition="10" font="Regular;19" transparent="1" />
-		<widget name="IF" position="110,225" size="300,21" zPosition="10" font="Regular;19" transparent="1" />
-		<widget name="Statustext" position="20,250" size="115,21" zPosition="10" font="Regular;19" transparent="1"/>
-		<widget name="statuspic_inactive" pixmap="skin_default/buttons/button_green_off.png" position="120,250" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
-		<widget name="statuspic_active" pixmap="skin_default/buttons/button_green.png" position="120,250" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
-		<widget name="ButtonRedtext" position="430,225" size="120,21" zPosition="10" font="Regular;21" transparent="1" />
-		<widget name="ButtonRed" pixmap="skin_default/buttons/button_red.png" position="410,225" zPosition="10" size="15,16" transparent="1" alphatest="on" />
+	<screen position="center,center" size="560,400" title="Wireless Network State" >
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 
+		<widget source="LabelBSSID" render="Label" position="10,60" size="250,25" valign="left" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget source="LabelESSID" render="Label" position="10,100" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget source="LabelQuality" render="Label" position="10,140" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget source="LabelSignal" render="Label" position="10,180" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget source="LabelBitrate" render="Label" position="10,220" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget source="LabelEnc" render="Label" position="10,260" size="250,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		
+		<widget source="BSSID" render="Label" position="320,60" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget source="ESSID" render="Label" position="320,100" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget source="quality" render="Label" position="320,140" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget source="signal" render="Label" position="320,180" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget source="bitrate" render="Label" position="320,220" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+		<widget source="enc" render="Label" position="320,260" size="180,25" valign="center" font="Regular;20" transparent="1" foregroundColor="#FFFFFF" />
+
+		<ePixmap pixmap="skin_default/div-h.png" position="0,350" zPosition="1" size="560,2" />		
+		<widget source="IFtext" render="Label" position="10,355" size="120,21" zPosition="10" font="Regular;20" halign="left" backgroundColor="#25062748" transparent="1" />
+		<widget source="IF" render="Label" position="120,355" size="400,21" zPosition="10" font="Regular;20" halign="left" backgroundColor="#25062748" transparent="1" />
+		<widget source="Statustext" render="Label" position="10,375" size="115,21" zPosition="10" font="Regular;20" halign="left" backgroundColor="#25062748" transparent="1"/>
+		<widget name="statuspic" pixmaps="skin_default/buttons/button_green.png,skin_default/buttons/button_green_off.png" position="130,380" zPosition="10" size="15,16" transparent="1" alphatest="on"/>
 	</screen>
 	"""
 	
-	
 	def __init__(self, session, iface):
-		
 		Screen.__init__(self, session)
-		
 		self.session = session
 		self.iface = iface
 		self.skin = WlanStatus.skin
 				    
-		self["LabelBSSID"] = Label(_('Accesspoint:'))
-		self["LabelESSID"] = Label(_('SSID:'))
-		self["LabelQuality"] = Label(_('Link Quality:'))
-		self["LabelSignal"] = Label(_('Signal Strength:'))
-		self["LabelBitrate"] = Label(_('Bitrate:'))
-		self["LabelEnc"] = Label(_('Encryption:'))
+		self["LabelBSSID"] = StaticText(_('Accesspoint:'))
+		self["LabelESSID"] = StaticText(_('SSID:'))
+		self["LabelQuality"] = StaticText(_('Link Quality:'))
+		self["LabelSignal"] = StaticText(_('Signal Strength:'))
+		self["LabelBitrate"] = StaticText(_('Bitrate:'))
+		self["LabelEnc"] = StaticText(_('Encryption:'))
 			
-		self["BSSID"] = Label()
-		self["ESSID"] = Label()
-		self["quality"] = Label()
-		self["signal"] = Label()
-		self["bitrate"] = Label()
-		self["enc"] = Label()
+		self["BSSID"] = StaticText()
+		self["ESSID"] = StaticText()
+		self["quality"] = StaticText()
+		self["signal"] = StaticText()
+		self["bitrate"] = StaticText()
+		self["enc"] = StaticText()
 
-		self["IFtext"] = Label()
-		self["IF"] = Label()
-		self["Statustext"] = Label()
-		self["statuspic_active"] = Pixmap()
-		self["statuspic_active"].hide()
-		self["statuspic_inactive"] = Pixmap()
-		self["statuspic_inactive"].hide()
-		self["BottomBG"] = Pixmap()
-		self["ButtonRed"] = Pixmap()
-		self["ButtonRedtext"] = Label(_("Close"))
+		self["IFtext"] = StaticText()
+		self["IF"] = StaticText()
+		self["Statustext"] = StaticText()
+		self["statuspic"] = MultiPixmap()
+		self["statuspic"].hide()
+		self["key_red"] = StaticText(_("Close"))
 
 		self.resetList()
 		self.updateStatusbar()
@@ -156,32 +149,28 @@ class WlanStatus(Screen):
 		self["Statustext"].setText(_("Link:"))
 
 	def updateStatusLink(self,status):
-		
 		if status is not None:
 			if status[self.iface]["acesspoint"] == "No Connection" or status[self.iface]["acesspoint"] == "Not-Associated" or status[self.iface]["acesspoint"] == False:
-				self["statuspic_active"].hide()
-				self["statuspic_inactive"].show()
+				self["statuspic"].setPixmapNum(1)
 			else:
-				self["statuspic_active"].show()
-				self["statuspic_inactive"].hide()		
-
+				self["statuspic"].setPixmapNum(0)
+			self["statuspic"].show()		
 
 class WlanScan(Screen):
 	skin = """
-	<screen position="70,90" size="600,400" title="Choose a Wireless Network" >
-		<widget name="info" position="10,10" size="580,30" font="Regular;24" transparent="1" foregroundColor="#FFFFFF" />
-		<widget name="list" position="10,50" size="580,240" scrollbarMode="showOnDemand" />
-
-		<ePixmap pixmap="skin_default/bottombar.png" position="30,310" size="540,120" zPosition="1" transparent="1" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/button_red.png" position="430,325" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-		<widget name="canceltext" position="450,325" size="120,21" zPosition="10" font="Regular;21" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/button_green.png" position="50,325" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-		<widget name="selecttext" position="80,325" size="150,21" zPosition="10" font="Regular;21" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="50,355" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-		<widget name="rescantext" position="80,355" size="150,21" zPosition="10" font="Regular;21" transparent="1" />
+	<screen position="center,center" size="560,400" title="Choose a Wireless Network" >
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+		<widget name="list" position="5,50" size="550,280" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,340" zPosition="1" size="560,2" />		
+		<widget source="info" render="Label" position="0,350" size="560,50" font="Regular;24" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
 	</screen>
 	"""
-	
+
 	def __init__(self, session, iface):
 		Screen.__init__(self, session)
 		self.session = session
@@ -190,16 +179,16 @@ class WlanScan(Screen):
 		self.skin_path = plugin_path
 		self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
 		
-		self["info"] = Label()
+		self["info"] = StaticText()
 		
 		self.list = []	
 		self["list"] = WlanList(self.session, self.iface)
 		
 		self.setInfo()
 
-		self["canceltext"] = Label(_("Close"))
-		self["selecttext"] = Label(_("Connect"))
-		self["rescantext"] = Label(_("Refresh"))
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Connect"))
+		self["key_yellow"] = StaticText(_("Refresh"))
 			
 		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "EPGSelectActions"],
 		{
@@ -216,7 +205,7 @@ class WlanScan(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 		
 	def layoutFinished(self):
-		self.setTitle(_("Choose a Wireless Network"))
+		self.setTitle(_("Choose a wireless network"))
 	
 	def select(self):
 		cur = self["list"].getCurrent()
@@ -278,7 +267,7 @@ def callFunction(iface):
 	i = w.getWirelessInterfaces()
 	if i:
 		if iface in i:
-			return WlanStatusScreenMain	
+			return WlanStatusScreenMain
 	
 	return None
 
