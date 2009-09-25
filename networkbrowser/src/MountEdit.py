@@ -5,10 +5,9 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import ActionMap
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigIP, NoSave, ConfigText, ConfigEnableDisable, ConfigPassword, ConfigSelection, getConfigListEntry, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
-from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap, NumberActionMap
 from enigma import ePoint
@@ -17,15 +16,14 @@ from re import sub as re_sub
 
 class AutoMountEdit(Screen, ConfigListScreen):
         skin = """
-                <screen name="AutoMountEdit" position="90,110" size="560,400" title="MountEdit">
-                        <widget name="config" position="10,10" size="540,200" zPosition="1" scrollbarMode="showOnDemand" />
-                        <widget name="ButtonGreen" pixmap="skin_default/buttons/button_green.png" position="30,365" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-                        <widget name="introduction2" position="110,330" size="300,20" zPosition="10" font="Regular;21" halign="center" transparent="1" />
-                        <widget name="ButtonRedtext" position="410,365" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
-                        <widget name="ButtonRed" pixmap="skin_default/buttons/button_red.png" position="390,365" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-                        <widget name="VKeyIcon" pixmap="skin_default/vkey_icon.png" position="40,345" zPosition="10" size="60,48" transparent="1" alphatest="on" />
-                        <widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="175,325" zPosition="1" size="1,1" transparent="1" alphatest="on" />
-                        <ePixmap pixmap="skin_default/bottombar.png" position="10,310" size="540,120" zPosition="1" transparent="1" alphatest="on" />
+                <screen name="AutoMountEdit" position="center,center" size="560,450" title="MountEdit">
+                        <ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+                        <widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+                        <widget name="config" position="5,50" size="550,250" zPosition="1" scrollbarMode="showOnDemand" />
+                        <ePixmap pixmap="skin_default/div-h.png" position="0,420" zPosition="1" size="560,2" />
+                        <widget source="introduction" render="Label" position="10,430" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
+                        <widget name="VKeyIcon" pixmap="skin_default/buttons/key_text.png" position="10,430" zPosition="10" size="35,25" transparent="1" alphatest="on" />
+                        <widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,350" zPosition="1" size="1,1" transparent="1" alphatest="on" />	
                 </screen>"""
 
         def __init__(self, session, plugin_path, mountinfo = None ):
@@ -51,9 +49,9 @@ class AutoMountEdit(Screen, ConfigListScreen):
                         "red": self.close,
                 }, -2)
 
-                self["VirtualKB"] = ActionMap(["ShortcutActions"],
+                self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
                 {
-                        "green": self.KeyGreen,
+                        "showVirtualKeyboard": self.KeyText,
                 }, -2)
 
                 self.list = []
@@ -61,17 +59,14 @@ class AutoMountEdit(Screen, ConfigListScreen):
                 self.createSetup()
                 self.onLayoutFinish.append(self.layoutFinished)
                 # Initialize Buttons
-                self["ButtonGreen"] = Pixmap()
                 self["VKeyIcon"] = Pixmap()
                 self["HelpWindow"] = Pixmap()
-                self["introduction2"] = Label(_("Press OK to activate the settings."))
-                self["ButtonRed"] = Pixmap()
-                self["ButtonRedtext"] = Label(_("Close"))
+                self["introduction"] = StaticText(_("Press OK to activate the settings."))
+                self["key_red"] = StaticText(_("Cancel"))
 
 
         def layoutFinished(self):
                 self.setTitle(_("Mounts editor"))
-                self["ButtonGreen"].hide()
                 self["VKeyIcon"].hide()
                 self["VirtualKB"].setEnabled(False)
                 self["HelpWindow"].hide()
@@ -210,7 +205,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
                 if self["config"].getCurrent() == self.mounttypeEntry:
                         self.createSetup()
 
-        def KeyGreen(self):
+        def KeyText(self):
                 print "Green Pressed"
                 if self["config"].getCurrent() == self.sharenameEntry:
                         self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'sharename'), VirtualKeyBoard, title = (_("Enter share name:")), text = self.sharenameConfigEntry.value)
@@ -226,20 +221,20 @@ class AutoMountEdit(Screen, ConfigListScreen):
         def VirtualKeyBoardCallback(self, callback = None, entry = None):
                 if callback is not None and len(callback) and entry is not None and len(entry):
                         if entry == 'sharename':
-                                self.sharenameConfigEntry = NoSave(ConfigText(default = callback, visible_width = 50, fixed_size = False))
-                                self.createSetup()
+                                self.sharenameConfigEntry.setValue(callback)
+                                self["config"].invalidate(self.sharenameConfigEntry)
                         if entry == 'sharedir':
-                                self.sharedirConfigEntry = NoSave(ConfigText(default = callback, visible_width = 50, fixed_size = False))
-                                self.createSetup()
+                                self.sharedirConfigEntry.setValue(callback)
+                                self["config"].invalidate(self.sharedirConfigEntry)
                         if entry == 'options':
-                                self.optionsConfigEntry = NoSave(ConfigText(default = callback, visible_width = 50, fixed_size = False))
-                                self.createSetup()
+                                self.optionsConfigEntry.setValue(callback)
+                                self["config"].invalidate(self.optionsConfigEntry)                                
                         if entry == 'username':
-                                self.usernameConfigEntry = NoSave(ConfigText(default = callback, visible_width = 50, fixed_size = False))
-                                self.createSetup()
+                                self.usernameConfigEntry.setValue(callback)
+                                self["config"].invalidate(self.usernameConfigEntry)
                         if entry == 'password':
-                                self.passwordConfigEntry = NoSave(ConfigPassword(default = callback, visible_width = 50, fixed_size = False))
-                                self.createSetup()
+                                self.passwordConfigEntry.setValue(callback)
+                                self["config"].invalidate(self.passwordConfigEntry)
 
         def keyLeft(self):
                 ConfigListScreen.keyLeft(self)
@@ -252,14 +247,12 @@ class AutoMountEdit(Screen, ConfigListScreen):
         def selectionChanged(self):
                 current = self["config"].getCurrent()
                 if current == self.activeEntry or current == self.ipEntry or current == self.mounttypeEntry or current == self.hdd_replacementEntry:
-                        self["ButtonGreen"].hide()
                         self["VKeyIcon"].hide()
                         self["VirtualKB"].setEnabled(False)
                 else:
                         helpwindowpos = self["HelpWindow"].getPosition()
                         if current[1].help_window.instance is not None:
                                 current[1].help_window.instance.move(ePoint(helpwindowpos[0],helpwindowpos[1]))
-                                self["ButtonGreen"].show()
                                 self["VKeyIcon"].show()
                                 self["VirtualKB"].setEnabled(True)
 
@@ -277,10 +270,15 @@ class AutoMountEdit(Screen, ConfigListScreen):
 
         def updateConfig(self, ret = False):
                 if (ret == True):
+                        sharedir = None
+                        if self.sharedirConfigEntry.value.startswith("/"):
+                                sharedir = self.sharedirConfigEntry.value[1:]
+                        else:
+                                sharedir = self.sharedirConfigEntry.value
                         iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "sharename", self.sharenameConfigEntry.value)
                         iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "active", self.activeConfigEntry.value)
                         iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "ip", self.ipConfigEntry.getText())
-                        iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "sharedir", self.sharedirConfigEntry.value)
+                        iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "sharedir", sharedir)
                         iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "mounttype", self.mounttypeConfigEntry.value)
                         iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "options", self.optionsConfigEntry.value)
                         iAutoMount.setMountsAttribute(self.sharenameConfigEntry.value, "username", self.usernameConfigEntry.value)
@@ -315,7 +313,10 @@ class AutoMountEdit(Screen, ConfigListScreen):
                         data['ip'] = self.ipConfigEntry.getText()
                         data['sharename'] = re_sub("\W", "", self.sharenameConfigEntry.value)
                         # "\W" matches everything that is "not numbers, letters, or underscores",where the alphabet defaults to ASCII.
-                        data['sharedir'] = self.sharedirConfigEntry.value
+                        if self.sharedirConfigEntry.value.startswith("/"):
+                                data['sharedir'] = self.sharedirConfigEntry.value[1:]
+                        else:
+                                data['sharedir'] = self.sharedirConfigEntry.value
                         data['options'] =  self.optionsConfigEntry.value
                         data['mounttype'] = self.mounttypeConfigEntry.value
                         data['username'] = self.usernameConfigEntry.value

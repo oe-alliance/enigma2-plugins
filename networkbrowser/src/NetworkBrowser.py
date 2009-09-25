@@ -7,6 +7,7 @@ from Screens.MessageBox import MessageBox
 from Components.Label import Label
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
 from Components.Input import Input
 from Components.config import getConfigListEntry, NoSave, config, ConfigIP
@@ -62,8 +63,15 @@ class NetworkDescriptor:
 class NetworkBrowser(Screen):
 	skin = """
 		<screen name="NetworkBrowser" position="90,80" size="560,450" title="Network Neighbourhood">
-			<ePixmap pixmap="skin_default/bottombar.png" position="10,360" size="540,120" zPosition="1" transparent="1" alphatest="on" />
-			<widget source="list" render="Listbox" position="10,10" size="540,350" zPosition="10" scrollbarMode="showOnDemand">
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+			<widget source="list" render="Listbox" position="5,50" size="540,350" zPosition="10" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 					{"template": [
 							MultiContentEntryPixmapAlphaTest(pos = (0, 0), size = (48, 48), png = 1), # index 1 is the expandable/expanded/verticalline icon
@@ -78,15 +86,8 @@ class NetworkBrowser(Screen):
 					}
 				</convert>
 			</widget>
-			<ePixmap pixmap="skin_default/buttons/button_green.png" position="30,370" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="mounttext" position="50,370" size="250,21" zPosition="10" font="Regular;21" transparent="1" />
-			<ePixmap pixmap="skin_default/buttons/button_blue.png" position="30,395" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="searchtext" position="50,395" size="150,21" zPosition="10" font="Regular;21" transparent="1" />
-			<widget name="infotext" position="300,375" size="250,21" zPosition="10" font="Regular;21" transparent="1" />
-			<ePixmap pixmap="skin_default/buttons/button_red.png" position="410,420" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="closetext" position="430,420" size="120,21" zPosition="10" font="Regular;21" transparent="1" />
-			<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="30,420" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="rescantext" position="50,420" size="300,21" zPosition="10" font="Regular;21" transparent="1" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,410" zPosition="1" size="560,2" />		
+			<widget source="infotext" render="Label" position="0,420" size="560,30" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session, iface,plugin_path):
@@ -103,12 +104,12 @@ class NetworkBrowser(Screen):
 		self.cache_ttl = 604800 #Seconds cache is considered valid, 7 Days should be ok
 		self.cache_file = '/etc/enigma2/networkbrowser.cache' #Path to cache directory
 
-		self["closetext"] = Label(_("Close"))
-		self["mounttext"] = Label(_("Mounts management"))
-		self["rescantext"] = Label(_("Rescan network"))
-		self["infotext"] = Label(_("Press OK to mount!"))
-		self["searchtext"] = Label(_("Expert"))
-
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Mounts management"))
+		self["key_yellow"] = StaticText(_("Rescan"))
+		self["key_blue"] = StaticText(_("Expert"))
+		self["infotext"] = StaticText(_("Press OK to mount!"))
+		
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"ok": self.go,
@@ -138,9 +139,10 @@ class NetworkBrowser(Screen):
 		iNetwork.stopGetInterfacesConsole()
 
 	def startRun(self):
+		self.expanded = []
 		self.setStatus('update')
 		self.mounts = iAutoMount.getMountsList()
-		self["infotext"].hide()
+		self["infotext"].setText("")
 		self.vc = valid_cache(self.cache_file, self.cache_ttl)
 		if self.cache_ttl > 0 and self.vc != 0:
 			self.process_NetworkIPs()
@@ -353,10 +355,15 @@ class NetworkBrowser(Screen):
 		current = self["list"].getCurrent()
 		self.listindex = self["list"].getIndex()
 		if current:
-			if current[0][0] in ("nfsShare", "smbShare"):
-				self["infotext"].show()
-			else:
-				self["infotext"].hide()
+			if len(current[0]) >= 2:
+				if current[0][0] in ("nfsShare", "smbShare"):
+					self["infotext"].setText(_("Press OK to mount this share!"))
+				else:
+					selectedhost = current[0][2]
+					if selectedhost in self.expanded:
+						self["infotext"].setText(_("Press OK to collapse this host"))
+					else:
+						self["infotext"].setText(_("Press OK to expand this host"))
 
 	def go(self):
 		sel = self["list"].getCurrent()
@@ -373,6 +380,7 @@ class NetworkBrowser(Screen):
 				self.expanded.remove(selectedhost)
 				self.updateNetworkList()
 			else:
+				self.hostcache_file = None
 				self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
 				if os_path.exists(self.hostcache_file):
 					print '[Networkbrowser] Loading userinfo cache from ',self.hostcache_file
@@ -388,9 +396,14 @@ class NetworkBrowser(Screen):
 			print '[Networkbrowser] sel nfsShare'
 			self.openMountEdit(sel[0])
 		if sel[0][0] == 'smbShare': # share entry selected
-			print '[Networkbrowser] sel nfsShare'
-			self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n") ) )
-			self.openMountEdit(sel[0])
+			print '[Networkbrowser] sel cifsShare'
+			self.hostcache_file = None
+			self.hostcache_file = '/etc/enigma2/' + selectedhostname.strip() + '.cache' #Path to cache directory
+			if os_path.exists(self.hostcache_file):
+				print '[Networkbrowser] userinfo found from ',self.sharecache_file
+				self.openMountEdit(sel[0])
+			else:
+				self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n") ) )
 
 	def passwordQuestion(self, ret = False):
 		sel = self["list"].getCurrent()
@@ -468,23 +481,23 @@ class NetworkBrowser(Screen):
 
 class ScanIP(Screen, ConfigListScreen):
 	skin = """
-		<screen name="ScanIP" position="100,100" size="550,80" title="Scan IP" >
-			<widget name="config" position="10,10" size="530,25" scrollbarMode="showOnDemand" />
-			<ePixmap pixmap="skin_default/buttons/red.png" position="10,40" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-			<widget name="closetext" position="20,50" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="160,40" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-			<widget name="edittext" position="170,50" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="320,40" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-			<widget name="scanaddress" position="325,50" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
+		<screen name="ScanIP" position="center,center" size="560,80" title="Scan IP" >
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget name="config" position="5,50" size="540,25" scrollbarMode="showOnDemand" />
 		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
 
-		self["closetext"] = Label(_("Cancel"))
-		self["edittext"] = Label(_("Scan NFS Share"))
-		self["scanaddress"] = Label(_("address range"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Scan NFS share"))
+		self["key_yellow"] = StaticText(_("Scan range"))
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -494,7 +507,9 @@ class ScanIP(Screen, ConfigListScreen):
 			"green": self.goNfs,
 			"yellow": self.goAddress,
 		}, -1)
+		
 		self.ipAddress = ConfigIP(default=[0,0,0,0])
+		
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("IP Address"), self.ipAddress),
 		], self.session)

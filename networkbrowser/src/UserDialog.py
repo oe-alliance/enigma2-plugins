@@ -7,7 +7,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import ActionMap
 from Components.config import ConfigText, ConfigPassword, NoSave, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
-from Components.Label import Label
+from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap, NumberActionMap
 from enigma import ePoint
@@ -48,15 +48,14 @@ def load_cache(cache_file):
 
 class UserDialog(Screen, ConfigListScreen):
 	skin = """
-		<screen name="UserDialog" position="90,110" size="560,380" title="UserDialog">
-			<widget name="config" position="10,10" size="540,200" zPosition="1" scrollbarMode="showOnDemand" />
-			<widget name="ButtonGreen" pixmap="skin_default/buttons/button_green.png" position="20,330" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="introduction2" position="90,300" size="300,20" zPosition="10" font="Regular;21" halign="center" transparent="1" />
-			<widget name="ButtonRedtext" position="410,345" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
-			<widget name="ButtonRed" pixmap="skin_default/buttons/button_red.png" position="390,345" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="VKeyIcon" pixmap="skin_default/vkey_icon.png" position="35,310" zPosition="10" size="60,48" transparent="1" alphatest="on" />
-			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="175,300" zPosition="1" size="1,1" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/bottombar.png" position="10,290" size="540,120" zPosition="1" transparent="1" alphatest="on" />
+		<screen name="UserDialog" position="center,center" size="560,300" title="UserDialog">
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget name="config" position="5,50" size="550,200" zPosition="1" scrollbarMode="showOnDemand" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,270" zPosition="1" size="560,2" />
+			<widget source="introduction" render="Label" position="10,280" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
+			<widget name="VKeyIcon" pixmap="skin_default/buttons/key_text.png" position="10,280" zPosition="10" size="35,25" transparent="1" alphatest="on" />
+			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,250" zPosition="1" size="1,1" transparent="1" alphatest="on" />	
 		</screen>"""
 
 	def __init__(self, session, plugin_path, hostinfo = None ):
@@ -68,16 +67,17 @@ class UserDialog(Screen, ConfigListScreen):
 		self.cache_file = '/etc/enigma2/' + self.hostinfo + '.cache' #Path to cache directory
 		self.createConfig()
 
-		self["shortcuts"] = ActionMap(["ShortcutActions","WizardActions"],
+		self["actions"] = NumberActionMap(["SetupActions"],
 		{
-			"red": self.close,
-			"back": self.close,
 			"ok": self.ok,
+			"back": self.close,
+			"cancel": self.close,
+			"red": self.close,
 		}, -2)
 
-		self["VirtualKB"] = ActionMap(["ShortcutActions","WizardActions"],
+		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
 		{
-			"green": self.KeyGreen,
+			"showVirtualKeyboard": self.KeyText,
 		}, -2)
 
 		self.list = []
@@ -85,20 +85,16 @@ class UserDialog(Screen, ConfigListScreen):
 		self.createSetup()
 		self.onLayoutFinish.append(self.layoutFinished)
 		# Initialize Buttons
-		self["ButtonGreen"] = Pixmap()
 		self["VKeyIcon"] = Pixmap()
 		self["HelpWindow"] = Pixmap()
-		self["introduction2"] = Label(_("Press OK to save settings."))
-		self["ButtonRed"] = Pixmap()
-		self["ButtonRedtext"] = Label(_("Close"))
+		self["introduction"] = StaticText(_("Press OK to save settings."))
+		self["key_red"] = StaticText(_("Close"))
 
 	def layoutFinished(self):
-		print self["config"].getCurrent()
 		self.setTitle(_("Enter user and password for host: ")+ self.hostinfo)
-		self["ButtonGreen"].show()
-		self["VKeyIcon"].show()
-		self["VirtualKB"].setEnabled(True)
-		self["HelpWindow"].show()
+		self["VKeyIcon"].hide()
+		self["VirtualKB"].setEnabled(False)
+		self["HelpWindow"].hide()
 
 	# helper function to convert ips from a sring to a list of ints
 	def convertIP(self, ip):
@@ -141,7 +137,7 @@ class UserDialog(Screen, ConfigListScreen):
 		self["config"].l.setList(self.list)
 		self["config"].onSelectionChanged.append(self.selectionChanged)
 
-	def KeyGreen(self):
+	def KeyText(self):
 		if self["config"].getCurrent() == self.usernameEntry:
 			self.session.openWithCallback(lambda x : self.VirtualKeyBoardCallback(x, 'username'), VirtualKeyBoard, title = (_("Enter username:")), text = self.username.value)
 		if self["config"].getCurrent() == self.passwordEntry:
@@ -150,11 +146,15 @@ class UserDialog(Screen, ConfigListScreen):
 	def VirtualKeyBoardCallback(self, callback = None, entry = None):
 		if callback is not None and len(callback) and entry is not None and len(entry):
 			if entry == 'username':
-				self.username = NoSave(ConfigText(default = callback, visible_width = 50, fixed_size = False))
-				self.createSetup()
+				self.usernameEntry.setValue(callback)
+				self["config"].invalidate(self.usernameEntry)
+				#self.username = NoSave(ConfigText(default = callback, visible_width = 50, fixed_size = False))
+				#self.createSetup()
 			if entry == 'password':
-				self.password = NoSave(ConfigPassword(default = callback, visible_width = 50, fixed_size = False))
-				self.createSetup()
+				self.passwordEntry.setValue(callback)
+				self["config"].invalidate(self.passwordEntry)
+				#self.password = NoSave(ConfigPassword(default = callback, visible_width = 50, fixed_size = False))
+				#self.createSetup()
 
 	def newConfig(self):
 		if self["config"].getCurrent() == self.InterfaceEntry:

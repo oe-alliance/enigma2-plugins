@@ -4,7 +4,7 @@ from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Components.Label import Label
+from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap
 from Components.Network import iNetwork
@@ -20,8 +20,10 @@ from UserManager import UserManager
 
 class AutoMountManager(Screen):
 	skin = """
-		<screen name="AutoMountManager" position="90,140" size="560,350" title="AutoMountManager">
-			<widget source="config" render="Listbox" position="10,10" size="540,220" scrollbarMode="showOnDemand" >
+		<screen name="AutoMountManager" position="center,center" size="560,400" title="AutoMountManager">
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="config" render="Listbox" position="5,50" size="540,300" scrollbarMode="showOnDemand" >
 				<convert type="TemplatedMultiContent">
 					{"template": [
 							MultiContentEntryText(pos = (0, 3), size = (480, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
@@ -33,10 +35,8 @@ class AutoMountManager(Screen):
 					}
 				</convert>
 			</widget>
-			<widget name="introduction" position="90,260" size="300,20" zPosition="10" font="Regular;21" halign="center" transparent="1" />
-			<widget name="ButtonRedtext" position="410,305" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
-			<widget name="ButtonRed" pixmap="skin_default/buttons/button_red.png" position="390,305" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/bottombar.png" position="10,250" size="540,120" zPosition="1" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,360" zPosition="1" size="560,2" />
+			<widget source="introduction" render="Label" position="10,370" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
 		</screen>"""
 	def __init__(self, session, iface ,plugin_path):
 		self.skin_path = plugin_path
@@ -51,9 +51,8 @@ class AutoMountManager(Screen):
 			"cancel": self.exit,
 			"red": self.exit,
 		})
-		self["ButtonRed"] = Pixmap()
-		self["ButtonRedtext"] = Label(_("Close"))
-		self["introduction"] = Label(_("Press OK to select."))
+		self["key_red"] = StaticText(_("Close"))
+		self["introduction"] = StaticText(_("Press OK to select."))
 
 		self.list = []
 		self["config"] = List(self.list)

@@ -2,7 +2,7 @@
 # for localized messages
 from __init__ import _
 from Screens.Screen import Screen
-from Components.Label import Label
+from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap
 from Components.Sources.List import List
@@ -14,8 +14,12 @@ from os import unlink, listdir, path as os_path
 
 class UserManager(Screen):
 	skin = """
-		<screen name="UserManager" position="90,140" size="560,350" title="UserManager">
-			<widget source="config" render="Listbox" position="10,10" size="540,220" scrollbarMode="showOnDemand">
+		<screen name="UserManager" position="center,center" size="560,400" title="UserManager">
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget source="config" render="Listbox" position="5,50" size="540,220" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 					{"template": [
 							MultiContentEntryText(pos = (80, 5), size = (400, 50), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
@@ -26,12 +30,8 @@ class UserManager(Screen):
 					}
 				</convert>
 			</widget>
-			<widget name="introduction" position="50,270" size="500,20" zPosition="10" font="Regular;21" halign="center" transparent="1" />
-			<widget name="ButtonRedtext" position="410,305" size="140,21" zPosition="10" font="Regular;21" transparent="1" />
-			<widget name="ButtonRed" pixmap="skin_default/buttons/button_red.png" position="390,305" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/button_yellow.png" position="30,305" zPosition="10" size="15,16" transparent="1" alphatest="on" />
-			<widget name="deletetext" position="50,305" size="350,21" zPosition="10" font="Regular;21" transparent="1" />
-			<ePixmap pixmap="skin_default/bottombar.png" position="10,250" size="540,120" zPosition="1" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,360" zPosition="1" size="560,2" />
+			<widget source="introduction" render="Label" position="10,370" size="540,21" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
 		</screen>"""
 
 	def __init__(self, session, plugin_path):
@@ -46,10 +46,10 @@ class UserManager(Screen):
 			"red": self.exit,
 			"yellow": self.delete,
 		})
-		self["ButtonRed"] = Pixmap()
-		self["ButtonRedtext"] = Label(_("Close"))
-		self["introduction"] = Label(_("Press OK to edit selected settings."))
-		self["deletetext"] = Label(_("Delete"))
+
+		self["key_red"] = StaticText(_("Close"))
+		self["introduction"] = StaticText(_("Press OK to edit selected settings."))
+		self["key_yellow"] = StaticText(_("Delete"))
 
 		self.list = []
 		self["config"] = List(self.list)
