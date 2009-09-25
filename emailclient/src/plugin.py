@@ -5,7 +5,7 @@ from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText
 from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
-from Components.config import config, ConfigSubsection, ConfigInteger, ConfigText, ConfigEnableDisable
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigText, ConfigEnableDisable, ConfigSelection
 from EmailConfig import EmailConfigScreen
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
@@ -19,7 +19,9 @@ from email.header import decode_header
 from TagStrip import strip_readable
 from protocol import createFactory
 
-from . import _
+import logging
+
+from . import _, initLog
 
 config.plugins.emailimap = ConfigSubsection()
 config.plugins.emailimap.username = ConfigText("user", fixed_size=False)
@@ -32,6 +34,15 @@ config.plugins.emailimap.checkPeriod = ConfigInteger(default=60, limits=(0, 900)
 config.plugins.emailimap.timeout = ConfigInteger(default=0, limits=(0, 90)) # in seconds
 # 0= fetch all header , 10= fetch only the last 10 headers/messages of a mailbox
 config.plugins.emailimap.maxheadertoload = ConfigInteger(0, limits = (1, 100))
+
+logLevels = [
+	(logging.ERROR, logging.getLevelName(logging.ERROR)),
+	(logging.CRITICAL, logging.getLevelName(logging.CRITICAL)),
+	(logging.WARNING, logging.getLevelName(logging.WARNING)),
+	(logging.INFO, logging.getLevelName(logging.INFO)),
+	(logging.DEBUG, logging.getLevelName(logging.DEBUG))
+	]
+config.plugins.emailimap.debug = ConfigSelection(choices=logLevels)
 
 from enigma import getDesktop
 DESKTOP_WIDTH = getDesktop(0).size().width()
@@ -111,6 +122,7 @@ class EmailScreen(Screen, EmailHandler):
 	proto = None
 
 	def __init__(self, session, args = 0):
+		self.logging = logging.getLogger('EmailScreen')
 		EmailHandler.__init__(self)
 		self.session = session
 
@@ -173,7 +185,7 @@ class EmailScreen(Screen, EmailHandler):
 		if c is not None:
 			self.proto.select(UTF7toUTF8(c[1][2]) # select instead of examine to get write access
 							   ).addCallback(self.onExamine, c[0] , self.proto
-							  ).addErrback(self.onExamineFailed, self.proto
+							  ).addErrback(self.onExamineFailed, c[0], self.proto
 							  )
 		# self.proto.search(imap4.Query(unseen=1)).addCallback(self.cbOk).addErrback(self.cbNotOk)
 
@@ -183,19 +195,19 @@ class EmailScreen(Screen, EmailHandler):
 			self.fetchMessageSize(c[0])
 
 	def fetchMessageSize(self, message):
-		print "fetchMessageSize",message
+		self.logging.debug("fetchMessageSize: " + str(message))
 		self.proto.fetchSize(message.uid
 			).addCallback(self.onMessageSizeLoaded, message, self.proto
 			).addErrback(self.onMessageLoadFailed, message, self.proto
 			)
 
 	def onMessageSizeLoaded(self, result, message, proto):
-		print "onMessageSizeLoaded", result, message
+		self.logging.debug("onMessageSizeLoaded: " + str(result) + ' ' + str(message))
 		size = int(result[message.uid]['RFC822.SIZE'])
 		self.MAX_MESSAGE_SIZE_TO_OPEN = 4000000
 		if size >= self.MAX_MESSAGE_SIZE_TO_OPEN:
 			#ask here to open message
-			print "message to large to open (size=", size, ")"
+			self.logging.error("message to large to open (size=%d" %size)
 		else:
 			self.loadMessage(message)
 
@@ -207,7 +219,7 @@ class EmailScreen(Screen, EmailHandler):
 #			)
 
 	def loadMessage(self, message):
-		print "loadMessage",message
+		self.logging.debug("loadMessage: " + str(message))
 		self["infolabel"].setText(_("loading message"))
 
 		self.proto.fetchMessage(message.uid
@@ -217,7 +229,7 @@ class EmailScreen(Screen, EmailHandler):
 
 	def onMessageLoaded(self, result, message, proto):
 		self["infolabel"].setText(_("parsing message"))
-		print "onMessageLoaded"#,result,message
+		self.logging.debug("onMessageLoaded") #,result,message
 		try:
 			msgstr = result[message.uid]['RFC822']
 		except KeyError:
@@ -237,17 +249,17 @@ class EmailScreen(Screen, EmailHandler):
 					elif part.get_content_subtype() == "plain":
 						msg.messagebodys.append(EmailBody(part))
 					else:
-						print "unkown content type= ", part.get_content_maintype(), "/", part.get_content_subtype()
+						self.logging.error("unkown content type= " + part.get_content_maintype() + "/", part.get_content_subtype())
 				else:
-					print "found Attachment with  ", part.get_content_type(), "and name", part.get_filename()
+					self.logging.info("found Attachment with  " + part.get_content_type() + " and name " + part.get_filename())
 					msg.attachments.append(EmailAttachment(part.get_filename(), part.get_content_type(), part.get_payload()))
 		else:
 			msg.messagebodys.append(EmailBody(msg))
 		self.session.open(ScreenMailView, msg, message.uid, proto, self.flagsList[message.uid]['FLAGS']).onHide.append(self.onBoxSelected)
 
 	def onMessageLoadFailed(self, failure, message, proto):
-		print "onMessageLoadFailed", failure, message
-		self["infolabel"].setText(failure.getErrorMessage())
+		self.logging.error("onMessageLoadFailed: " + str(failure) + ' ' + str(message))
+		self["infolabel"].setText(_("failed to load message") + ': ' + failure.getErrorMessage())
 
 	def action_exit(self):
 		if self.proto is not None:
@@ -256,7 +268,7 @@ class EmailScreen(Screen, EmailHandler):
 			self.close()
 
 	def onLogedOut(self, result, proto):
-		print "onLogedOut", result
+		self.logging.info("onLogedOut: " + str(result))
 		self.close()
 
 	def onConnect(self, proto):
@@ -267,17 +279,20 @@ class EmailScreen(Screen, EmailHandler):
 						)
 
 	def cbCapabilities(self,reason,proto):
-		print "#"*30
-		print "# If you have problems to log into your imap-server, please send me the output of the following line"
-		print "# cbCapabilities",reason
-		print "#"*30
+		self.logging.info("\n\
+####################################################################################################\n\
+# If you have problems to log into your imap-server, please send me the output of the following line\n\
+# cbCapabilities: " + str(reason) +"\n\
+####################################################################################################")
 		self.doLogin(proto)
 
 	def ebCapabilities(self,reason,proto):
-		print "ebCapabilities",reason
+		self.logging.debug("ebCapabilities: " + str(reason))
 
 	def onConnectFailed(self, reason):
-		self["infolabel"].setText(reason.getErrorMessage())
+		self.logging.critical("onConnectFailed: " + reason.getErrorMessage())
+		if self.has_key('infolabel'):
+			self["infolabel"].setText(_("connection to %(server)s:%(port)d failed") %{'server':config.plugins.emailimap.server.value,'port':config.plugins.emailimap.port.value}) # + ': ' + reason.getErrorMessage()) # the messages provided by twisted are crap here
 
 	def onAuthentication(self, result, proto):
 		self.proto = proto
@@ -286,7 +301,7 @@ class EmailScreen(Screen, EmailHandler):
 		proto.lsub("", "*").addCallback(self.onMailboxList, proto)
 
 	def doLogin(self, proto):
-		print "login secure"
+		self.logging.debug("login secure")
 		useTLS = False #True
 		if useTLS:
 			context = proto.context.getContext()
@@ -300,8 +315,8 @@ class EmailScreen(Screen, EmailHandler):
 
 	def onAuthenticationFailed(self, failure, proto):
 		# If it failed because no SASL mechanisms match
-		print "onAuthenticationFailed", failure, proto
-		self["infolabel"].setText(failure.getErrorMessage())
+		self.logging.info("onAuthenticationFailed: " + failure.getErrorMessage())
+		self["infolabel"].setText(_("encrypted login failed, trying without encryption"))
 		try:
 			failure.trap(imap4.NoSupportedAuthentication)
 			self.doLoginInsecure(proto)
@@ -309,18 +324,18 @@ class EmailScreen(Screen, EmailHandler):
 			print e,e.message
 
 	def doLoginInsecure(self, proto):
-		print "login INSECURE"
+		self.logging.info("login INSECURE")
 		proto.login(config.plugins.emailimap.username.value, config.plugins.emailimap.password.value
 				).addCallback(self.onAuthentication, proto
 				).addErrback(self.onInsecureAuthenticationFailed, proto
 				)
 
 	def onInsecureAuthenticationFailed(self, failure, proto):
-		print "onInsecureAuthenticationFailed", failure, proto
-		self["infolabel"].setText(failure.getErrorMessage())
+		self.logging.critical("onInsecureAuthenticationFailed: " + failure.getErrorMessage())
+		self["infolabel"].setText(_("login failed") + ': ' + failure.getErrorMessage())
 
 	def onMailboxList(self, result, proto):
-		print "onMailboxList", result, proto
+		self.logging.debug("onMailboxList: " + str(result) + ' ' + str(proto))
 		list = []
 		inboxPos = 0
 		for i in result:
@@ -332,7 +347,7 @@ class EmailScreen(Screen, EmailHandler):
 		self["boxlist"].moveToIndex(inboxPos-1)
 
 	def onExamine(self, result, mboxname, proto):
-		print "onExamine", result, mboxname
+		self.logging.debug("onExamine: " + str(result) + ' ' + mboxname)
 		self.setTitle(_("Mailbox")+": "+mboxname)
 		self.currentmailbox = mboxname
 		numMessagesinFolder = int(result['EXISTS'])
@@ -353,7 +368,7 @@ class EmailScreen(Screen, EmailHandler):
 
 			try:
 #				proto.fetchEnvelope('%i:%i'%(rangeToFetch[0], rangeToFetch[1])	#'1:*'
-#						   ).addCallback(self.onEnvelopeList, proto
+#						   ).addCallback(self.onnvelopeList, proto
 #						   )
 				self.proto = proto
 				self.rangeToFetch = rangeToFetch
@@ -361,7 +376,7 @@ class EmailScreen(Screen, EmailHandler):
 						   ).addCallback(self.onFlagsList)
 
 			except imap4.IllegalServerResponse, e:
-				print e
+				self.logging.exception("onExamine exception: ", exc_inf=e)
 			self.selectMessagelist()
 
 	def onFlagsList(self, result):
@@ -370,23 +385,23 @@ class EmailScreen(Screen, EmailHandler):
 				   ).addCallback(self.onHeaderList, self.proto
 				   )
 
-	def onExamineFailed(self, failure, proto):
-		print "onExamineFailed", failure, proto
-		self["infolabel"].setText(failure.getErrorMessage())
+	def onExamineFailed(self, failure, mboxname, proto):
+		self.logging.error("onExamineFailed: " + mboxname + ' ' + str(failure) + ' ' + str(proto))
+		self["infolabel"].setText(_("cannot access mailbox '%(mboxname)s'") % {'mboxname':mboxname})
 
 	def cbOk(self, result):
-		print("cbOk result: %s" %repr(result))
+		self.logging.debug("cbOk result: %s" %repr(result))
 
 	def cbNotOk(self, result):
-		print("cbNotOk result: %s" %(result))
+		self.logging.warning("cbNotOk result: %s" %(str(result)))
 
 	def onHeaderList(self, result, proto):
-		print "onHeaderList"#,result,proto
+		self.logging.debug("onHeaderList") #,result,proto
 		self["infolabel"].setText(_("headers loaded, now parsing ..."))
 		list = []
 		for m in result:
 			state = IS_UNSEEN
-			# print("onHeaderList :" + repr(self.flagsList[m]['FLAGS']))
+			# self.logging.debug("onHeaderList :" + repr(self.flagsList[m]['FLAGS']))
 			if '\\Seen' in self.flagsList[m]['FLAGS']:
 				state = IS_SEEN
 			if '\\Deleted' in self.flagsList[m]['FLAGS']:
@@ -401,10 +416,16 @@ class EmailScreen(Screen, EmailHandler):
 					list.append(self.buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER'].decode('iso8859-1', 'replace'), state)))
 				except:
 					# this appear to be errors in the formatting of the mail itself...
-					print "onHeaderList error: %s with: %s" %(e,result[m]['RFC822.HEADER'])
-		list.reverse()
-		self["messagelist"].l.setList(list)
-		self["infolabel"].setText(_("have %d messages") %(len(list)))
+					self.logging.exception("onHeaderList error: %s" %(result[m]['RFC822.HEADER']), exc_inf=e)
+		if list:
+			list.reverse()
+			self["messagelist"].l.setList(list)
+			self["infolabel"].setText(_("have %d messages") %(len(list)))
+		else:
+			self["messagelist"].l.setList([])
+			self["infolabel"].setText(_("have no messages"))
+			self.onBoxSelected()
+
 
 	def buildMessageListItem(self, message, state):
 		if state == IS_UNSEEN:
@@ -426,20 +447,21 @@ class EmailScreen(Screen, EmailHandler):
 	# IMailboxListener methods
 	#
 	def modeChanged(self, writeable):
-		print "modeChanged", writeable
+		self.logging.debug("modeChanged: " + str(writeable))
 
 	def flagsChanged(self, newFlags):
-		print "flagsChanged", newFlags
+		self.logging.debug("flagsChanged: " + str(newFlags))
 
 	def newMessages(self, exists, recent):
-		print "newMessages", exists, recent
+		self.logging.debug("newMessages: " + str(exists) + ' ' +  str(recent))
 
 class ScreenMailView(Screen):
 	skin=""
 	def __init__(self, session, email, uid, proto, flags):
 		self.session = session
 		self.email = email
-		# print('ScreenMailView ' + repr(email) + ' dir: ' + repr(dir(email)))
+		self.logging = logging.getLogger('ScreenMailView')
+		# self.logging.debug('ScreenMailView ' + repr(email) + ' dir: ' + repr(dir(email)))
 		width = max(4*140,scaleH(-1,550))
 		height = scaleV(-1,476)
 		fontSize = scaleV(24,20)
@@ -510,10 +532,10 @@ class ScreenMailView(Screen):
 		self.onLayoutFinish.append(self.updateButtons)
 
 	def cbOk(self, result):
-		print("cbOk result: %s" %repr(result))
+		self.logging.debug("cbOk result: %s" %repr(result))
 
 	def cbNotOk(self, result):
-		print("cbNotOk result: %s" %(result))
+		self.logging.warning("cbNotOk result: %s" %(str(result)))
 
 	def delete(self):
 		if '\\Deleted' in self.flags:
@@ -527,7 +549,7 @@ class ScreenMailView(Screen):
 				self.proto.removeFlags(self.uid, ["\\Deleted"]).addCallback(self.cbOk).addErrback(self.cbNotOk)
 			else:
 				self.proto.addFlags(self.uid, ["\\Deleted"]).addCallback(self.cbOk).addErrback(self.cbNotOk)
-			print("deleteCB: %s"  %repr(self.email))
+			self.logging.debug("deleteCB: %s"  %repr(self.email))
 			self.close()
 
 	def markUnread(self):
@@ -564,12 +586,12 @@ class ScreenMailView(Screen):
 					list.append((a.getFilename(), a))
 				else:
 					list.append((_("no filename"), a))
-			print("selectAttachment : " + repr(list))
+			self.logging.debug("selectAttachment : " + repr(list))
 			self.session.openWithCallback(self.selectAttachmentCB, ChoiceBox, _("select Attachment"), list)
 
 	def selectAttachmentCB(self, choice):
 		if choice is not None:
-			print "Attachment selected", choice[1].getFilename()
+			self.logging.info("Attachment selected: " + choice[1].getFilename())
 			#showMessageBox(self.session)
 
 class MailList(MenuList):
@@ -615,15 +637,15 @@ class EmailBody:
 				text = text.decode(self.getEncoding())
 			except UnicodeDecodeError:
 				pass	
-		# print('EmailBody/getData text: ' +  text)
+		# self.logging.debug('EmailBody/getData text: ' +  text)
 		#=======================================================================
 		# if self.getEncoding():
 		#	text = text.decode(self.getEncoding())
 		#=======================================================================
 		if self.getContenttype() == "text/html":
-			print "stripping html"
+			self.logging.debug("stripping html")
 			text = strip_readable(text)
-			# print('EmailBody/getData text: ' +  text)
+			# self.logging.debug('EmailBody/getData text: ' +  text)
 
 		try:
 			return text.encode('utf-8')
@@ -647,7 +669,7 @@ class EmailAttachment:
 			fp.write(self.data)
 			fp.close()
 		except Exception,e:
-			print e
+			self.logging.exception("save", exc_inf=e)
 			return False
 		return True
 
@@ -684,7 +706,8 @@ class CheckMail:
 	implements(imap4.IMailboxListener)
 	
 	def __init__(self):
-		print('[CheckMail] __init__')
+		self.logging = logging.getLogger('CheckMail')
+		self.logging.debug('__init__')
 		createFactory(self, config.plugins.emailimap.username.value, config.plugins.emailimap.server.value, config.plugins.emailimap.port.value)
 		self._timer = eTimer()
 		# self._timer.timeout.get().append(self._checkMail)
@@ -700,59 +723,60 @@ class CheckMail:
 		self._timer.stop()
 
 	def _checkMail(self):
-		print('[CheckMail] _checkMail ')
+		self.logging.debug('_checkMail ')
 		if self._proto:
-			self._proto.search(imap4.Query(unseen=1)).addCallback(self._cbNotify).addErrback(self._ebNotify, "search")
+			self._proto.search(imap4.Query(unseen=1)).addCallback(self._cbNotify).addErrback(self._ebNotify, _("cannot get list of new messages"))
 
 	def _cbNotify(self, newUnseenList):
-		def haveSeenBefore(messageNo): return messageNo not in self._unseenList
+		def haveNotSeenBefore(messageNo): return messageNo not in self._unseenList
 
-		print("[CheckMail] _cbNotify newUnseenList: %s" %repr(newUnseenList))
+		self.logging.debug("_cbNotify newUnseenList: %s" %repr(newUnseenList))
 		if self._unseenList is None:
 			Notifications.AddNotification(MessageBox, str(len(newUnseenList)) + ' ' + _("unread messages in mailbox"), type=MessageBox.TYPE_INFO, timeout=config.plugins.emailimap.timeout.value)
 		else:
-			newMessages = filter(haveSeenBefore, newUnseenList)
+			newMessages = filter(haveNotSeenBefore, newUnseenList)
 			if newMessages:
-				print("[CheckMail] _cbNotify newMessages: %s" %repr(newMessages))
+				self.logging.info("_cbNotify newMessages: %s" %repr(newMessages))
 				newMessageSet = imap4.MessageSet()
 				for messageNo in newMessages:
 					newMessageSet.add(messageNo)
-				self._proto.fetchHeaders(newMessageSet).addCallback(self._onHeaderList).addErrback(self._ebNotify, "fetchHeaders")
+				self._proto.fetchHeaders(newMessageSet).addCallback(self._onHeaderList).addErrback(self._ebNotify, _("cannot get headers of new messages"))
 		self._unseenList = newUnseenList
 
 	def _onHeaderList(self, headers):
-		# print("[CheckMail] _onHeaderList headers: %s" %repr(headers))
+		# self.logging.debug("_onHeaderList headers: %s" %repr(headers))
 		message = _("New mail arrived:\n\n")
 		for h in headers:
 			m = MessageHeader(h, headers[h]['RFC822.HEADER'])
 			message += m.getSenderString() + '\n' + m.getSubject() + '\n\n'
 		Notifications.AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=config.plugins.emailimap.timeout.value)
 
-	def _ebNotify(self, result, where):
-		print("[CheckMail] _ebNotify result: %s" %(result.getErrorMessage()))
-		Notifications.AddNotification(MessageBox, _("In") + " " + where + ": " +result.getErrorMessage() + '\n' + _("mail check process stopped"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+	def _ebNotify(self, result, where, what):
+		self.logging.error("_ebNotify error in %s: %s: %s" %(where, what, result.getErrorMessage()))
+		Notifications.AddNotification(MessageBox, what + '\n' + _("mail check process stopped"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
 		self.exit()
 
 	def _cbOk(self, result):
-		print("[CheckMail] _cbOk result: %s" %repr(result))
+		self.logging.debug("_cbOk result: %s" %repr(result))
 
 	def onConnect(self, proto=None):
-		print('[CheckMail] onConnect ')
+		self.logging.debug('onConnect ')
 		if not proto:
 			proto = self._proto
 		else:
 			self._proto = proto
-		proto.getCapabilities().addCallback(self._cbCapabilities).addErrback(self._ebNotify)
+		proto.getCapabilities().addCallback(self._cbCapabilities).addErrback(self._ebNotify, "getCapabilities", _("cannot get capabilities of mailserver"))
 
 	def onConnectFailed(self, reason):
-		print('[CheckMail] onConnectFailed: ' + reason.getErrorMessage())
-		self._ebNotify(reason, "onConnectFailed")
+		self.logging.critical('onConnectFailed: ' + reason.getErrorMessage())
+		self._ebNotify(reason, "onConnectFailed", _("connection failed"))
 
 	def _cbCapabilities(self,reason):
-		print "#"*30
-		print "# If you have problems to log into your imap-server, please send me the output of the following line"
-		print "# cbCapabilities",reason
-		print "#"*30
+		self.logging.info("\n\
+####################################################################################################\n\
+# If you have problems to log into your imap-server, please send me the output of the following line\n\
+# cbCapabilities: " + str(reason) +"\n\
+####################################################################################################")
 		self._doLogin()
 		
 	def _doLogin(self):
@@ -765,38 +789,38 @@ class CheckMail:
 		d.addCallback(self._onAuthentication).addErrback(self._onAuthenticationFailed)
 		
 	def _onAuthentication(self, result):
-		print("[CheckMail] onAuthentication: logged in")
-		self._proto.examine('inbox').addCallback(self._cbOk).addErrback(self._ebNotify, "examine")
+		self.logging.debug("onAuthentication: logged in")
+		self._proto.examine('inbox').addCallback(self._cbOk).addErrback(self._ebNotify, "examine", _("cannot access inbox"))
 		self._checkMail()
 
 	def _onAuthenticationFailed(self, failure):
 		# If it failed because no SASL mechanisms match
-		print("[CheckMail] onAuthenticationFailed: " + failure.getErrorMessage() + ' ' + str(self._proto))
+		self.logging.info("onAuthenticationFailed: " + failure.getErrorMessage())
 		try:
 			failure.trap(imap4.NoSupportedAuthentication)
 			self._doLoginInsecure()
 		except Exception,e:
-			print e,e.message
+			self.logging.exception("onAuthenticationFailed", exc_inf=e)
 
 	def _doLoginInsecure(self):
-		print("[CheckMail] doLoginInsecure")
+		self.logging.debug("doLoginInsecure")
 		self._proto.login(config.plugins.emailimap.username.value, config.plugins.emailimap.password.value
-				).addCallback(self._onAuthentication).addErrback(self._ebNotify, "login")
+				).addCallback(self._onAuthentication).addErrback(self._ebNotify, "login", _("login failed"))
 
 mailChecker = None
 def autostart(reason, **kwargs):
-	#	ouch, this is a hack
-	#===========================================================================
-	# if kwargs.has_key("session"):
-	#	global my_global_session
-	#	my_global_session = kwargs["session"]
-	#	return
-	#===========================================================================
-	print("[EmailClient] - Autostart")
+	# ouch, this is a hack
+	if kwargs.has_key("session"):
+		global my_global_session
+		my_global_session = kwargs["session"]
+		return
+
+	logging.info("[EmailClient] - Autostart")
 	global mailChecker
 	if config.plugins.emailimap.checkForNewMails.value and not mailChecker:
 		mailChecker = CheckMail()
 
+initLog()
 
 def Plugins(path, **kwargs):
 	global plugin_path

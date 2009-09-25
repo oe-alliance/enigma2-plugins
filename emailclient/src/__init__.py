@@ -1,6 +1,8 @@
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from Components.Language import language
+from Components.config import config
 import os, gettext
+import logging
 
 lang = language.getLanguage()
 os.environ["LANGUAGE"] = lang[:2]
@@ -13,3 +15,7 @@ def _(txt):
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t
+
+LOG_FILENAME = '/tmp/EmailClient.log'
+def initLog():
+	logging.basicConfig(filename=LOG_FILENAME,filemode='w',level=config.plugins.emailimap.debug.value)

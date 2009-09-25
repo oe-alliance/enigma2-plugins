@@ -4,7 +4,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 
-from . import _
+from . import _, initLog
 import plugin
 
 from enigma import getDesktop
@@ -77,6 +77,7 @@ class EmailConfigScreen(ConfigListScreen,Screen):
 		if config.plugins.emailimap.checkForNewMails.value:
 			self.list.append(getConfigListEntry(_("interval to check for new mails (minutes)"), config.plugins.emailimap.checkPeriod))
 			self.list.append(getConfigListEntry(_("timeout displaying new mails (seconds)"), config.plugins.emailimap.timeout))
+		self.list.append(getConfigListEntry(_("Debug"), config.plugins.emailimap.debug))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -96,6 +97,7 @@ class EmailConfigScreen(ConfigListScreen,Screen):
 			plugin.mailChecker.exit()
 		if config.plugins.emailimap.checkForNewMails.value:
 			plugin.mailChecker = plugin.CheckMail()
+		initLog()
 			
 		self.close(True)
 
