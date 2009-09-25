@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 TagEditor plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-16 23:05+0100\n"
-"PO-Revision-Date: 2009-02-17 18:56+0200\n"
-"Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
-"Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
+"POT-Creation-Date: 2009-09-24 16:19+0200\n"
+"PO-Revision-Date: 2009-09-24 20:41+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,7 +15,7 @@ msgstr ""
 
 #: ../src/plugin.py:251
 msgid "Add new tag..."
-msgstr "Yeni etiket ekle..."
+msgstr "Etiket ekle..."
 
 #: ../src/plugin.py:45
 msgid "Cancel"
@@ -50,10 +50,6 @@ msgstr ""
 "Bütün \"%s\" etiketlerini silmek istediğinizden emin misiniz?\n"
 "(Onaylarsanız, bir sonraki ekrandaki 'Vazgeç' seçimiyle iptal edemezsiniz!)"
 
-#: ../src/plugin.py:25
-msgid "edit tags..."
-msgstr "Etiketleri düzenle..."
-
 #: ../src/plugin.py:48
 msgid "Load"
 msgstr "Yükle"
@@ -80,4 +76,8 @@ msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo t
 msgstr ""
 "Tüm \"%s\" etiketlerinin adını aşağıdaki şekilde değiştir:\n"
 "(Onaylarsanız, bir sonraki ekrandaki 'Vazgeç' seçimiyle iptal edemezsiniz!)"
+
+#: ../src/plugin.py:25
+msgid "edit tags..."
+msgstr "etiket düzenle..."
 
