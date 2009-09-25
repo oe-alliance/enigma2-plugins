@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - kiddytimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-15 15:44+0100\n"
+"POT-Creation-Date: 2009-09-24 12:51+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -26,15 +26,15 @@ msgstr "01:00"
 msgid "??:??"
 msgstr "??:??"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:105
+#: /home/dario/Plugins/kiddytimer/src/KTmain.py:106
 msgid "Do you want to start the kiddytimer- plugin now."
 msgstr "Avviare il plugin kiddytimer ora?"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:121
+#: /home/dario/Plugins/kiddytimer/src/KTmain.py:122
 msgid "Please enter the correct pin code"
 msgstr "Inserire correttamente il codice PIN"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:121
+#: /home/dario/Plugins/kiddytimer/src/KTmain.py:122
 msgid "Enter pin code"
 msgstr "Inserire il codice PIN"
 
@@ -46,11 +46,11 @@ msgstr "Orologio"
 msgid "Smiley"
 msgstr "Smiley"
 
-#: /home/dario/Plugins/kiddytimer/src/plugin.py:50
+#: /home/dario/Plugins/kiddytimer/src/plugin.py:51
 msgid "KiddyTimer"
 msgstr "KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/src/plugin.py:50
+#: /home/dario/Plugins/kiddytimer/src/plugin.py:51
 msgid "Allows to controls your kids' daily TV usage"
 msgstr "Utilizzo giornaliero della TV da parte dei bambini"
 
@@ -70,35 +70,39 @@ msgstr "Non monitorare la TV accesa dopo le "
 msgid "Style of timer"
 msgstr "Stile timer"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:71
+#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:52
+msgid "Timeout for activation dialog"
+msgstr "Timeout di attivazione finestra di dialogo"
+
+#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:72
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Versione: %(version)s"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:72
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:98
+#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:73
+#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:99
 #, python-format
 msgid "Remaining time: %s"
 msgstr "Tempo residuo: %s"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:73
+#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:74
 #, python-format
 msgid "Last day started: %s"
 msgstr "Ultimo avvio: %s"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:76
+#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:77
 msgid "Cancel"
 msgstr "Annullare"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:77
+#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:78
 msgid "Save"
 msgstr "Salvare"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:78
+#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:79
 msgid "Reset clock"
 msgstr "Reset orologio"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:79
+#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:80
 msgid "Move clock"
 msgstr "Spost. orologio"
 
