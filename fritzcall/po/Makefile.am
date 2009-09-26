@@ -25,7 +25,7 @@ default: $(DOMAIN).pot $(LANGPO) merge $(LANGMO)
 
 merge:
 	for lang in $(LANGS); do \
-		msgmerge --no-location -s -N -U $$lang.po $(DOMAIN).pot; \
+		msgmerge --no-location -s -U $$lang.po $(DOMAIN).pot; \
 	done
 
 
