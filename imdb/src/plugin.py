@@ -434,12 +434,15 @@ class IMDB(Screen):
 					Detailstext += genres
 					self.callbackGenre = genres
 
-			for category in ("director", "creator", "writer", "premiere", "seasons", "country"):
+			for category in ("director", "creator", "writer", "premiere", "seasons"):
 				if self.generalinfos.group('g_'+category):
 					Detailstext += "\n" + self.generalinfos.group('g_'+category) + ": " + self.generalinfos.group(category)
 
+			if self.generalinfos.group("country"):
+				Detailstext += "\n" + self.generalinfos.group("g_country") + ":" + self.htmltags.sub('', self.generalinfos.group("country").replace('\n','').replace("<br>",'\n').replace("  ",' '))
+
 			if self.generalinfos.group("alternativ"):
-				Detailstext += "\n" + self.generalinfos.group("g_alternativ") + ": " + self.htmltags.sub('',(self.generalinfos.group("alternativ").replace('\n','').replace("<br>",'\n').replace("  ",' ')))
+				Detailstext += "\n" + self.generalinfos.group("g_alternativ") + ": " + self.htmltags.sub('', self.generalinfos.group("alternativ").replace('\n','').replace("<br>",'\n').replace("  ",' '))
 
 			ratingmask = re.compile('<h5>(?P<g_rating>Nutzer-Bewertung|User Rating):</h5>.*?<b>(?P<rating>.*?)/10</b>', re.DOTALL)
 			rating = ratingmask.search(self.inhtml)
