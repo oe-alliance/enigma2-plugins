@@ -60,7 +60,7 @@ def autostart(reason, **kwargs):
 			# We re-read the config so we won't save wrong information
 			try:
 				autotimer.readXml()
-			except:
+			except Exception:
 				# XXX: we should at least dump the error
 				pass
 

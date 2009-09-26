@@ -19,12 +19,11 @@ from Plugins.Plugin import PluginDescriptor
 
 # Autostart
 def autostart(reason, **kwargs):
-	if "session" in kwargs:
-		try:
-			# for blue key activating in EPGSelection
-			EPGSelectionInit()
-		except:
-			pass
+	try:
+		# for blue key activating in EPGSelection
+		EPGSelectionInit()
+	except Esception:
+		pass
 
 # Mainfunction
 def main(session, *args, **kwargs):

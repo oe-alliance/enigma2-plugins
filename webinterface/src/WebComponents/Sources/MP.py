@@ -34,7 +34,7 @@ class MP(Source):
 			try:
 				test = len(self.session.mediaplayer.playlist)
 				return True
-			except:
+			except Exception:
 				pass
 
 		# Link inactive, instantiate new MP

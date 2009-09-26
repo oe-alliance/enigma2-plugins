@@ -91,7 +91,7 @@ class Timer(Source):
 				if str(timer.service_ref) == str(service_ref) and int(timer.begin) == begin and int(timer.end) == end:
 					self.recordtimer.removeEntry(timer)
 					return True, "The timer '%s' has been deleted successfully" % (timer.name)
-		except:
+		except Exception:
 			return ( False, "The timer has NOT been deleted" )
 
 		return False, "No matching Timer found"
@@ -173,7 +173,7 @@ class Timer(Source):
 		try:
 			service = self.session.nav.getCurrentService()
 			event = service.info().getEvent(0)
-		except:
+		except Exception:
 			print "[Webcomponents.Timer] recordNow Exception!"
 
 		begin = time()
@@ -317,7 +317,7 @@ class Timer(Source):
 								self.session.nav.RecordTimer.timeChanged(timer)
 								print "[WebComponents.Timer] editTimer: Timer changed!"
 								return ( True, "Timer %s has been changed!" % (timer.name) )
-			except:
+			except Exception:
 				#obviously some value was not good, return an error
 				return ( False, "Changing the timer for '%s' failed!" % name )
 
@@ -332,7 +332,7 @@ class Timer(Source):
 			#add the new timer
 			self.recordtimer.record(timer)
 			return ( True, "Timer added successfully!" )
-		except:
+		except Exception:
 			#something went wrong, most possibly one of the given paramater-values was wrong
 			return ( False, "Could not add timer '%s'!" % name )
 
@@ -415,12 +415,12 @@ class Timer(Source):
 
 			try:
 				timer.append(item.Filename)
-			except:
+			except AttributeError:
 				timer.append("")
 
 			try:
 				timer.append(item.next_activation)
-			except:
+			except AttributeError:
 				timer.append("")
 
 			if item.eit is not None:

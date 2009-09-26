@@ -20,7 +20,7 @@ def Plugins(**kwargs):
 	try:
 		from Screens.MovieSelection import setPreferredTagEditor
 		setPreferredTagEditor(TagEditor)
-	except:
+	except Exception:
 		pass
 	return PluginDescriptor(name = "TagEditor", description = _("edit tags..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = main)
 
