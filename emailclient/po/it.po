@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - emailclient\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-23 15:20+0100\n"
-"PO-Revision-Date: 2009-09-23 15:35+0100\n"
+"POT-Creation-Date: 2009-09-26 18:45+0100\n"
+"PO-Revision-Date: 2009-09-26 19:07+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,126 +16,153 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/emailclient\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/emailclient\n"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:211
+#: /home/dario/Plugins/emailclient/src/plugin.py:223
 msgid "loading message"
 msgstr "Caricamento messaggio"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:219
+#: /home/dario/Plugins/emailclient/src/plugin.py:231
 msgid "parsing message"
-msgstr "nalisi messaggio"
+msgstr "Analisi messaggio"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:263
+#: /home/dario/Plugins/emailclient/src/plugin.py:262
+msgid "failed to load message"
+msgstr "Caricamento messaggio fallito"
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:275
 msgid "connected"
 msgstr "Connesso"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:284
+#: /home/dario/Plugins/emailclient/src/plugin.py:295
+#, python-format
+msgid "connection to %(server)s:%(port)d failed"
+msgstr "Connessione a %(server)s:%(port)d fallita"
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:299
 msgid "logged in"
 msgstr "Registrato"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:336
+#: /home/dario/Plugins/emailclient/src/plugin.py:319
+msgid "encrypted login failed, trying without encryption"
+msgstr "Accesso criptato fallito, nuovo tentativo in chiaro..."
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:335
+#: /home/dario/Plugins/emailclient/src/plugin.py:808
+msgid "login failed"
+msgstr "Login fallito"
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:351
 msgid "Mailbox"
 msgstr "Mailbox"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:340
+#: /home/dario/Plugins/emailclient/src/plugin.py:355
 #, python-format
 msgid "Box '%s' is empty"
 msgstr "Il box \"%s\" è vuoto"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:352
+#: /home/dario/Plugins/emailclient/src/plugin.py:367
 #, python-format
 msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
 msgstr "Caricamento intestazioni %(from)d-%(to)d dal Box \"%(name)s\""
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:385
+#: /home/dario/Plugins/emailclient/src/plugin.py:390
+#, python-format
+msgid "cannot access mailbox '%(mboxname)s'"
+msgstr "Impossibile accedere alla mailbox \"%(mboxname)s\""
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:400
 msgid "headers loaded, now parsing ..."
 msgstr "Intestazioni caricate, analisi in corso"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:407
+#: /home/dario/Plugins/emailclient/src/plugin.py:423
 #, python-format
 msgid "have %d messages"
 msgstr "Ricevuti %d messaggi"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:422
+#: /home/dario/Plugins/emailclient/src/plugin.py:426
+msgid "have no messages"
+msgstr "Nessun messaggio"
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:443
 msgid "no date"
 msgstr "Nessuna data"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:480
+#: /home/dario/Plugins/emailclient/src/plugin.py:502
 msgid "From"
 msgstr "Da"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:480
+#: /home/dario/Plugins/emailclient/src/plugin.py:502
 msgid "no from"
 msgstr "Nessuna origine"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:481
+#: /home/dario/Plugins/emailclient/src/plugin.py:503
 msgid "Date"
 msgstr "Data"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:482
+#: /home/dario/Plugins/emailclient/src/plugin.py:504
 msgid "Subject"
 msgstr "Soggetto"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:482
-#: /home/dario/Plugins/emailclient/src/plugin.py:595
-#: /home/dario/Plugins/emailclient/src/plugin.py:601
+#: /home/dario/Plugins/emailclient/src/plugin.py:504
+#: /home/dario/Plugins/emailclient/src/plugin.py:617
+#: /home/dario/Plugins/emailclient/src/plugin.py:623
 msgid "no subject"
 msgstr "Nessun soggetto"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:487
+#: /home/dario/Plugins/emailclient/src/plugin.py:509
 msgid "leave unread"
 msgstr "Lasciare non letto"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:489
+#: /home/dario/Plugins/emailclient/src/plugin.py:511
 msgid "undelete"
 msgstr "Ripristinare"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:491
+#: /home/dario/Plugins/emailclient/src/plugin.py:513
 msgid "delete"
 msgstr "Cancellare"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:520
+#: /home/dario/Plugins/emailclient/src/plugin.py:542
 msgid "really undelete Mail?"
 msgstr "Ripristinare il messaggio"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:520
-#: /home/dario/Plugins/emailclient/src/plugin.py:522
+#: /home/dario/Plugins/emailclient/src/plugin.py:542
+#: /home/dario/Plugins/emailclient/src/plugin.py:544
 msgid "yes"
 msgstr "Sì"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:520
-#: /home/dario/Plugins/emailclient/src/plugin.py:522
+#: /home/dario/Plugins/emailclient/src/plugin.py:542
+#: /home/dario/Plugins/emailclient/src/plugin.py:544
 msgid "no"
 msgstr "No"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:522
+#: /home/dario/Plugins/emailclient/src/plugin.py:544
 msgid "really delete Mail?"
 msgstr "Cancellare il messaggio?"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:541
+#: /home/dario/Plugins/emailclient/src/plugin.py:563
 msgid "Bodys"
 msgstr "Corpi"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:543
+#: /home/dario/Plugins/emailclient/src/plugin.py:565
 msgid "Attachments"
 msgstr "Allegati"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:552
+#: /home/dario/Plugins/emailclient/src/plugin.py:574
 msgid "select Body"
 msgstr "Selezionare corpo"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:566
+#: /home/dario/Plugins/emailclient/src/plugin.py:588
 msgid "no filename"
 msgstr "Nessun nome file"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:568
+#: /home/dario/Plugins/emailclient/src/plugin.py:590
 msgid "select Attachment"
 msgstr "Sel. allegato"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:592
+#: /home/dario/Plugins/emailclient/src/plugin.py:614
 msgid "no sender"
 msgstr "Nessun mittente"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:675
+#: /home/dario/Plugins/emailclient/src/plugin.py:697
 msgid ""
 "In order of missing standart python library files\n"
 "i have copied the nessary files now.\n"
@@ -147,11 +174,19 @@ msgstr ""
 "Ora si rende necessario io riavvio del Dreambox\n"
 "per la loro attivazione!"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:712
+#: /home/dario/Plugins/emailclient/src/plugin.py:728
+msgid "cannot get list of new messages"
+msgstr "Impossibile ottenere l'elenco dei nuovi messaggi"
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:735
 msgid "unread messages in mailbox"
 msgstr "Messaggi non letti"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:725
+#: /home/dario/Plugins/emailclient/src/plugin.py:743
+msgid "cannot get headers of new messages"
+msgstr "Impossibile ottenere l'elenco intestazioni nuovi messaggi"
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:748
 msgid ""
 "New mail arrived:\n"
 "\n"
@@ -159,19 +194,27 @@ msgstr ""
 "Nuovo messaggio ricevuto:\n"
 "\n"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:733
-msgid "In"
-msgstr "In"
-
-#: /home/dario/Plugins/emailclient/src/plugin.py:733
+#: /home/dario/Plugins/emailclient/src/plugin.py:756
 msgid "mail check process stopped"
 msgstr "Processo di verifica mail interrotto"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:805
+#: /home/dario/Plugins/emailclient/src/plugin.py:768
+msgid "cannot get capabilities of mailserver"
+msgstr "Impossibile ottenere le caratteristiche del mailserver"
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:772
+msgid "connection failed"
+msgstr "Connessione fallita"
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:793
+msgid "cannot access inbox"
+msgstr "Impossibile accedere alla inbox"
+
+#: /home/dario/Plugins/emailclient/src/plugin.py:829
 msgid "Email Client"
 msgstr "Client email"
 
-#: /home/dario/Plugins/emailclient/src/plugin.py:805
+#: /home/dario/Plugins/emailclient/src/plugin.py:829
 msgid "view Emails via IMAP4"
 msgstr "Leggere email (prot. IMAP4)"
 
@@ -218,4 +261,11 @@ msgstr "Intervallo verifica nuovi messaggi (minuti)"
 #: /home/dario/Plugins/emailclient/src/EmailConfig.py:79
 msgid "timeout displaying new mails (seconds)"
 msgstr "Marcare come letto dopo (secondi)"
+
+#: /home/dario/Plugins/emailclient/src/EmailConfig.py:80
+msgid "Debug"
+msgstr "Debug"
+
+#~ msgid "In"
+#~ msgstr "In"
 

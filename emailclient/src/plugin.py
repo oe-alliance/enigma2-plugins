@@ -414,7 +414,7 @@ class EmailScreen(Screen, EmailHandler):
 			self["messagelist"].l.setList([])
 			self["infolabel"].setText(_("have no messages"))
 			# self.onBoxSelected() # brings us into endless loop, when still deleted messages are in there...
-
+			self.selectBoxlist()
 
 	def buildMessageListItem(self, message, state):
 		if state == IS_UNSEEN:
