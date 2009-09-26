@@ -21,17 +21,19 @@ simpleRSS.feedcount = ConfigNumber(default=0)
 simpleRSS.autostart = ConfigEnableDisable(default=False)
 simpleRSS.keep_running = ConfigEnableDisable(default=True)
 simpleRSS.feed = ConfigSubList()
-for i in range(0, simpleRSS.feedcount.value):
+i = 0
+while i < simpleRSS.feedcount.value:
 	s = ConfigSubsection()
 	s.uri = ConfigText(default="http://", fixed_size=False)
 	s.autoupdate = ConfigEnableDisable(default=True)
 	simpleRSS.feed.append(s)
+	i += 1
 	del s
 simpleRSS.enable_google_reader = ConfigYesNo(default=False)
 simpleRSS.google_username = ConfigText(default="", fixed_size=False)
 simpleRSS.google_password = ConfigPassword(default="")
 
-del simpleRSS
+del simpleRSS, i
 
 # Global Poller-Object
 rssPoller = None
