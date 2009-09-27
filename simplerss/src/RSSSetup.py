@@ -5,18 +5,18 @@ from Screens.Screen import Screen
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
 	ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 
 class RSSFeedEdit(ConfigListScreen, Screen):
 	"""Edit an RSS-Feed"""
 	skin = """
-		<screen name="RSSFeedEdit" position="100,100" size="550,120" title="Simple RSS Reader Setup" >
+		<screen name="RSSFeedEdit" position="center,center" size="550,120" title="Simple RSS Reader Setup" >
 			<widget name="config" position="20,10" size="510,75" scrollbarMode="showOnDemand" />
-			<ePixmap name="red" position="0,75" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,75" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<widget name="key_red" position="0,75" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="140,75" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<ePixmap name="red" position="0,75" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="140,75" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,75" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_green" render="Label" position="140,75" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
 	def __init__(self, session, id):
@@ -30,8 +30,8 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 
 		ConfigListScreen.__init__(self, list, session)
 
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("OK"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
 
 		self["setupActions"] = ActionMap(["SetupActions"],
 		{
@@ -54,16 +54,16 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 class RSSSetup(ConfigListScreen, Screen):
 	"""Setup for SimpleRSS, quick-edit for Feed-URIs and settings present."""
 	skin = """
-		<screen name="RSSSetup" position="100,100" size="550,400" title="Simple RSS Reader Setup" >
+		<screen name="RSSSetup" position="center,center" size="550,400" title="Simple RSS Reader Setup" >
 			<widget name="config" position="20,10" size="510,350" scrollbarMode="showOnDemand" />
-			<ePixmap name="red" position="0,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="420,360" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<widget name="key_red" position="0,360" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="140,360" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="280,360" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="420,360" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<ePixmap name="red" position="0,360" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="140,360" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="280,360" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue" position="420,360" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,360" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_green" render="Label" position="140,360" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_yellow" render="Label" position="280,360" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_blue" render="Label" position="420,360" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
 	def __init__(self, session, rssPoller = None):
@@ -77,10 +77,10 @@ class RSSSetup(ConfigListScreen, Screen):
 		# Initialize ConfigListScreen
 		ConfigListScreen.__init__(self, self.list, session)
 
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("OK"))
-		self["key_yellow"] = Button(_("New"))
-		self["key_blue"] = Button(_("Delete"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_yellow"] = StaticText(_("New"))
+		self["key_blue"] = StaticText(_("Delete"))
 
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{

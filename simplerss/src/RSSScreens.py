@@ -7,19 +7,50 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 
 from Components.ActionMap import ActionMap
-from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
 
 from RSSList import RSSFeedList
+
+class RSSSummary(Screen):
+	skin = """
+	<screen position="0,0" size="132,64">
+		<widget source="parent.title" render="Label" position="6,4" size="120,21" font="Regular;18" />
+		<widget source="entry" render="Label" position="6,25" size="120,21" font="Regular;16" />
+		<widget source="global.CurrentTime" render="Label" position="56,46" size="82,18" font="Regular;16" >
+			<convert type="ClockToText">WithSeconds</convert>
+		</widget>
+	</screen>"""
+
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent = parent)
+		self["entry"] = StaticText("")
+		parent.onChangedEntry.append(self.selectionChanged)
+		self.onClose.append(self.removeWatcher)
+
+	def removeWatcher(self):
+		self.parent.onChangedEntry.remove(self.selectionChanged)
+
+	def selectionChanged(self, text):
+		self["entry"].setText(text)
 
 class RSSBaseView(Screen):
 	"""Base Screen for all Screens used in SimpleRSS"""
 
 	def __init__(self, session, poller, parent = None):
 		Screen.__init__(self, session, parent)
+		self["title"] = StaticText()
+		self.onChangedEntry = []
 		self.rssPoller = poller
 		self.pollDialog = None
+
+	def createSummary(self):
+		return RSSSummary
+
+	def setTitle(self, title):
+		Screen.setTitle(self, title)
+		self["title"].setText(title)
 
 	def errorPolling(self, errmsg = ""):
 		# An error occured while polling
@@ -76,7 +107,7 @@ class RSSEntryView(RSSBaseView):
 
 	skin = """
 		<screen position="100,100" size="460,420" title="Simple RSS Reader" >
-			<widget name="info" position="0,0" size="460, 20" halign="right" font="Regular; 18" />
+			<widget source="info" render="Label" position="0,0" size="460, 20" halign="right" font="Regular; 18" />
 			<widget name="content" position="0,20" size="460,400" font="Regular; 22" />
 		</screen>"""
 
@@ -89,9 +120,9 @@ class RSSEntryView(RSSBaseView):
 		self.entries = entries
 
 		if cur_idx is not None and entries is not None:
-			self["info"] = Label(_("Entry %s/%s") % (cur_idx+1, entries))
+			self["info"] = StaticText(_("Entry %s/%s") % (cur_idx+1, entries))
 		else:
-			self["info"] = Label()
+			self["info"] = StaticText()
 
 		if data:
 			self["content"] = ScrollLabel(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures"))))
@@ -112,9 +143,22 @@ class RSSEntryView(RSSBaseView):
 		})
 
 		self.onLayoutFinish.append(self.setConditionalTitle)
+		self.onShow.append(self.refreshSummary)
 
 	def setConditionalTitle(self):
 		self.setTitle(_("Simple RSS Reader: %s") % (self.feedTitle))
+
+	def refreshSummary(self):
+		if self.data:
+			text = self.data[0]
+		else:
+			text = _("No such Item.")
+
+		for x in self.onChangedEntry:
+			try:
+				x(text)
+			except Exception:
+				pass
 
 	def up(self):
 		self["content"].pageUp()
@@ -172,6 +216,7 @@ class RSSEntryView(RSSBaseView):
 			self["content"].setText(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures"))))
 		else:
 			self["content"].setText(_("No such Item."))
+		self.refreshSummary()
 
 	def selectEnclosure(self):
 		if self.data is not None:
@@ -182,7 +227,7 @@ class RSSFeedView(RSSBaseView):
 
 	skin = """
 		<screen position="100,100" size="460,415" title="Simple RSS Reader" >
-			<widget name="info" position="0,0" size="460,20" halign="right" font="Regular; 18" />
+			<widget source="info" render="Label" position="0,0" size="460,20" halign="right" font="Regular; 18" />
 			<widget source="content" render="Listbox" position="0,20" size="460,300" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 					{"template": [
@@ -193,7 +238,7 @@ class RSSFeedView(RSSBaseView):
 					}
 				</convert>
 			</widget>
-			<widget name="summary" position="0,320" size="460,95" font="Regular;16" />
+			<widget source="summary" render="Label" position="0,320" size="460,95" font="Regular;16" />
 		</screen>"""
 
 	def __init__(self, session, feed=None, newItems=False, parent=None, rssPoller=None,id=None):
@@ -204,8 +249,8 @@ class RSSFeedView(RSSBaseView):
 		self.id = id
 
 		self["content"] = List(self.feed.history)
-		self["summary"] = Label()
-		self["info"] = Label()
+		self["summary"] = StaticText()
+		self["info"] = StaticText()
 
 		if not newItems:
 			self["actions"] = ActionMap([ "OkCancelActions", "ChannelSelectBaseActions", "MenuActions", "ColorActions" ],
@@ -232,7 +277,11 @@ class RSSFeedView(RSSBaseView):
 			self.onExecBegin.append(self.startTimer)
 
 		self["content"].onSelectionChanged.append(self.updateInfo)
-		self.onLayoutFinish.extend([self.updateInfo, self.setConditionalTitle])
+		self.onLayoutFinish.extend((
+			self.updateInfo,
+			self.setConditionalTitle
+		))
+		self.onShow.append(self.updateInfo) # XXX: workaround to get full summary
 
 	def startTimer(self):
 		self.timer.startLongTimer(5)
@@ -269,9 +318,17 @@ class RSSFeedView(RSSBaseView):
 
 			cur_idx = self["content"].index
 			self["info"].setText(_("Entry %s/%s") % (cur_idx+1, len(self.feed.history)))
+			summary_text = current_entry[0]
 		else:
 			self["summary"].setText(_("Feed is empty."))
 			self["info"].setText("")
+			summary_text = _("Feed is empty.")
+
+		for x in self.onChangedEntry:
+			try:
+				x(summary_text)
+			except Exception:
+				pass
 
 	def menu(self):
 		if self.id > 0:
@@ -338,9 +395,9 @@ class RSSOverview(RSSBaseView):
 
 	skin = """
 		<screen position="100,100" size="460,415" title="Simple RSS Reader" >
-			<widget name="info" position="0,0" size="460,20" halign="right" font="Regular; 18" />
+			<widget source="info" render="Label" position="0,0" size="460,20" halign="right" font="Regular; 18" />
 			<widget name="content" position="0,20" size="460,300" scrollbarMode="showOnDemand" />
-			<widget name="summary" position="0,320" size="460,95" font="Regular;16" />
+			<widget source="summary" render="Label" position="0,320" size="460,95" font="Regular;16" />
 		</screen>"""
 
 	def __init__(self, session, poller):
@@ -358,11 +415,12 @@ class RSSOverview(RSSBaseView):
 
 		# We always have at least "New Items"-Feed
 		self["content"] = RSSFeedList(self.feeds)
-		self["summary"] = Label(' '.join((str(len(self.feeds[0][0].history)), _("Entries"))))
-		self["info"] = Label(_("Feed %s/%s") % (1, len(self.feeds)))
+		self["summary"] = StaticText(' '.join((str(len(self.feeds[0][0].history)), _("Entries"))))
+		self["info"] = StaticText(_("Feed %s/%s") % (1, len(self.feeds)))
 
 		self["content"].connectSelChanged(self.updateInfo)
 		self.onLayoutFinish.append(self.__show)
+		self.onShow.append(self.updateInfo) # XXX: workaround to get full summary
 		self.onClose.append(self.__close)
 
 	def __show(self):
@@ -386,6 +444,13 @@ class RSSOverview(RSSBaseView):
 		current_entry = self["content"].getCurrent()
 		self["summary"].setText(' '.join((str(len(current_entry.history)), _("Entries"))))
 		self["info"].setText(_("Feed %s/%s") % (self["content"].getSelectedIndex()+1, len(self.feeds)))
+		summary_text = current_entry.title
+
+		for x in self.onChangedEntry:
+			try:
+				x(summary_text)
+			except Exception:
+				pass
 
 	def menu(self):
 		from Screens.ChoiceBox import ChoiceBox
