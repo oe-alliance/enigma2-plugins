@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-06 13:11+0200\n"
-"PO-Revision-Date: 2009-06-07 19:04+0100\n"
+"POT-Creation-Date: 2009-09-26 14:41+0200\n"
+"PO-Revision-Date: 2009-09-27 11:07+0100\n"
 "Last-Translator: \n"
 "Language-Team:  <Benny.DeTandt@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -18,60 +18,64 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/EPGSearch.py:145
+msgid "Add timer"
+msgstr "Voeg timer toe"
+
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../src/EPGSearch.py:183
 msgid "Channel Selection"
 msgstr "Zenderkeuze"
 
-#: ../src/EPGSearch.py:53
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr "Kan AutoTimer timer lijst niet lezen : %s"
+
+msgid "EPG Search"
+msgstr "EPG doorzoeken"
+
 msgid "Enter text to search for"
 msgstr "Voer te zoeken tekst in:"
 
-#: ../src/EPGSearch.py:30
+msgid "Export selected as AutoTimer"
+msgstr "Exporteer het geselecteerde als AutoTimer"
+
 msgid "History"
 msgstr "Historiek"
 
-#: ../src/EPGSearch.py:59
+msgid "Import from AutoTimer"
+msgstr "Importeren uit AutoTimer"
+
 msgid "Import from EPG"
-msgstr "Importeren vanuit de EPG"
+msgstr "Uit de EPG importeren"
 
-#: ../src/EPGSearch.py:58
 msgid "Import from Timer"
-msgstr "Import van Timer"
+msgstr "Importeren uit de timer"
 
-#: ../src/EPGSearch.py:29
 msgid "New Search"
 msgstr "Nieuw"
 
-#: ../src/EPGSearch.py:95
 msgid "No history"
 msgstr "Geen historiek"
 
-#: ../src/EPGSearch.py:146
 msgid "OK"
 msgstr "OK"
 
-#: ../src/EPGSearch.py:211
+msgid "Save search as AutoTimer"
+msgstr "Bewaar als AutoTimer"
+
 msgid "Search"
 msgstr "Zoeken"
 
-#: ../src/plugin.py:45
 msgid "Search EPG"
 msgstr "EPG doorzoeken"
 
-#: ../src/plugin.py:50
-#: ../src/plugin.py:56
-msgid "search EPG..."
-msgstr "EPG doorzoeken..."
-
-#: ../src/EPGSearch.py:160
 msgid "Select a timer to search"
 msgstr "Selecteer te zoeken timer..."
 
-#: ../src/EPGSearch.py:89
 msgid "Select text to search for"
 msgstr "Selecteer te zoeken tekst..."
+
+msgid "search EPG..."
+msgstr "EPG doorzoeken..."
 
