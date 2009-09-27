@@ -27,6 +27,7 @@ class RSSSummary(Screen):
 		Screen.__init__(self, session, parent = parent)
 		self["entry"] = StaticText("")
 		parent.onChangedEntry.append(self.selectionChanged)
+		self.onShow.append(parent.updateInfo)
 		self.onClose.append(self.removeWatcher)
 
 	def removeWatcher(self):
@@ -143,12 +144,11 @@ class RSSEntryView(RSSBaseView):
 		})
 
 		self.onLayoutFinish.append(self.setConditionalTitle)
-		self.onShow.append(self.refreshSummary)
 
 	def setConditionalTitle(self):
 		self.setTitle(_("Simple RSS Reader: %s") % (self.feedTitle))
 
-	def refreshSummary(self):
+	def updateInfo(self):
 		if self.data:
 			text = self.data[0]
 		else:
@@ -216,7 +216,7 @@ class RSSEntryView(RSSBaseView):
 			self["content"].setText(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures"))))
 		else:
 			self["content"].setText(_("No such Item."))
-		self.refreshSummary()
+		self.updateInfo()
 
 	def selectEnclosure(self):
 		if self.data is not None:
@@ -281,7 +281,6 @@ class RSSFeedView(RSSBaseView):
 			self.updateInfo,
 			self.setConditionalTitle
 		))
-		self.onShow.append(self.updateInfo) # XXX: workaround to get full summary
 
 	def startTimer(self):
 		self.timer.startLongTimer(5)
@@ -420,7 +419,6 @@ class RSSOverview(RSSBaseView):
 
 		self["content"].connectSelChanged(self.updateInfo)
 		self.onLayoutFinish.append(self.__show)
-		self.onShow.append(self.updateInfo) # XXX: workaround to get full summary
 		self.onClose.append(self.__close)
 
 	def __show(self):
