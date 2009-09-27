@@ -1,0 +1,67 @@
+# Spanish translations for enigma2-plugins package.
+# Copyright (C) 2009 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins mediadownloader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-07 00:43+0100\n"
+"PO-Revision-Date: 2009-09-27 18:05+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/MediaDownloader.py:215
+#, python-format
+msgid "%d kb/s"
+msgstr "%d kb/s"
+
+#: ../src/MediaDownloader.py:148
+msgid "?? kb/s"
+msgstr "?? kb/s "
+
+#: ../src/MediaDownloader.py:245
+msgid "Do you want to try to open the downloaded file?"
+msgstr "Želite li da probate otvoriti preuzetu datoteku?"
+
+#: ../src/plugin.py:83
+msgid "Download..."
+msgstr "Preuzimanje..."
+
+#: ../src/MediaDownloader.py:145
+msgid "Downloading..."
+msgstr "Preuzimam..."
+
+#: ../src/MediaDownloader.py:214
+#, python-format
+msgid "ETA %d:%02d min"
+msgstr "Falta %d:%02d min "
+
+#: ../src/MediaDownloader.py:147
+msgid "ETA ??:?? h"
+msgstr "Falta ??:?? h "
+
+#: ../src/MediaDownloader.py:262
+#, python-format
+msgid "Error while downloading file %s"
+msgstr "Greška kod preuzimanja datoteke %s"
+
+#: ../src/MediaDownloader.py:228
+msgid "No suitable Viewer found!"
+msgstr "Nema odgovarajućeg pregledača!"
+
+#: ../src/MediaDownloader.py:172
+msgid "Where to save?"
+msgstr "Gde sačuvati?"
+
+#: ../src/plugin.py:58
+msgid "Which file do you want to download?"
+msgstr "Koju datoteku želite da preuzmete?"
+

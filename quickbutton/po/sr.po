@@ -1,0 +1,145 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quickbutton\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-14 14:29+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/plugin.py:84
+msgid "Assign plugin to long blue key pressed"
+msgstr "Dodeli dodatak dugom stisku plave tipke"
+
+#: ../src/plugin.py:81
+msgid "Assign plugin to long green key pressed"
+msgstr "Dodeli dodatak dugom stisku zelene tipke"
+
+#: ../src/plugin.py:83
+msgid "Assign plugin to long red key pressed"
+msgstr "Dodeli dodatak dugom stisku crvene tipke"
+
+#: ../src/plugin.py:82
+msgid "Assign plugin to long yellow key pressed"
+msgstr "Dodeli dodatak dugom stisku žute tipke"
+
+#: ../src/plugin.py:86
+msgid "Assign plugin to red key pressed"
+msgstr "Dodeli dodatak stisku crvene tipke"
+
+#: ../src/plugin.py:180
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: ../src/plugin.py:143
+msgid "Display 4:3 content as"
+msgstr "Prikaži 4:3 sadržaj kao"
+
+#: ../src/plugin.py:121
+#: ../src/plugin.py:190
+#: ../src/plugin.py:234
+msgid "EPG List"
+msgstr "EPG lista"
+
+#: ../src/plugin.py:131
+#: ../src/plugin.py:159
+#, python-format
+msgid ""
+"Error!\n"
+"Error Text: %s"
+msgstr ""
+"Greška!\n"
+"Tekst greške: %s"
+
+#: ../src/plugin.py:139
+msgid "Just Scale"
+msgstr "Samo razmeri"
+
+#: ../src/plugin.py:125
+#: ../src/plugin.py:191
+#: ../src/plugin.py:236
+msgid "MediaPlayer"
+msgstr "Media plejer"
+
+#: ../src/plugin.py:163
+msgid "No plugin assigned!"
+msgstr "Nijedan dodatak nije dodeljen"
+
+#: ../src/plugin.py:36
+#: ../src/plugin.py:37
+#: ../src/plugin.py:38
+#: ../src/plugin.py:39
+#: ../src/plugin.py:40
+#: ../src/plugin.py:120
+#: ../src/plugin.py:189
+msgid "Nothing"
+msgstr "Ništa"
+
+#: ../src/plugin.py:181
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:138
+msgid "Pan&Scan"
+msgstr "Pan&Scan"
+
+#: ../src/plugin.py:137
+msgid "Pillarbox"
+msgstr "Pillarbox"
+
+#: ../src/plugin.py:132
+#: ../src/plugin.py:192
+#: ../src/plugin.py:238
+msgid "Plugin browser"
+msgstr "Pretraživač dodataka"
+
+#: ../src/plugin.py:161
+msgid "Plugin not found!"
+msgstr "Dodatak nije pronađen!"
+
+#: ../src/plugin.py:145
+#: ../src/plugin.py:194
+#: ../src/plugin.py:242
+msgid "Timer"
+msgstr "Tajmer"
+
+#: ../src/plugin.py:118
+msgid "Unknown Error"
+msgstr "Nepoznata greška"
+
+#: ../src/plugin.py:219
+msgid "assigned to long blue"
+msgstr "Dodeljen dugom plavom"
+
+#: ../src/plugin.py:217
+msgid "assigned to long green"
+msgstr "Dodeljen dugom zelenom"
+
+#: ../src/plugin.py:216
+msgid "assigned to long red"
+msgstr "Dodeljen dugom crvenom "
+
+#: ../src/plugin.py:218
+msgid "assigned to long yellow"
+msgstr "Dodeljen dugom žutom"
+
+#: ../src/plugin.py:224
+msgid "assigned to red"
+msgstr "Dodeljen crvenom"
+
+#: ../src/plugin.py:74
+msgid "setup for Quickbutton"
+msgstr "Podešavanje za Brzu tipku"
+
+#: ../src/plugin.py:136
+#: ../src/plugin.py:193
+#: ../src/plugin.py:240
+msgid "switch 4:3 content display"
+msgstr "Zameni sadržaj 4:3 prikaza"
+

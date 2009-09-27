@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - werbezapper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-05-31 01:42+0100\n"
+"PO-Revision-Date: 2009-09-27 18:18+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/werbezapper\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/werbezapper\n"
+
+#: /home/dario/Plugins/werbezapper/src/plugin.py:28
+msgid "Automatically zaps back to current service after given Time"
+msgstr "Automatski prebaci na aktuelni kanal posle datog vremena"
+
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:38
+msgid ""
+"Timer already running.\n"
+"Stop it?"
+msgstr ""
+"Tajmer još radi.\n"
+"Zaustaviti?"
+
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:47
+msgid "When to Zap back?"
+msgstr "Kada prebaciti nazad?"
+
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:49
+msgid "minute"
+msgstr "Minuta"
+
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:50
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:51
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:52
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:53
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:54
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:55
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:56
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:57
+msgid "minutes"
+msgstr "Minuti"
+
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:58
+msgid "Custom"
+msgstr "Personalizovan"
+
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:84
+msgid "How many minutes to wait until zapping back?"
+msgstr "Koliko vremena čekati pre prebacivanja nazad?"
+
+#: /home/dario/Plugins/werbezapper/src/WerbeZapper.py:107
+#, python-format
+msgid "Zapping back in %d Minutes"
+msgstr "Prebacivanje nazad %d minuta"
+

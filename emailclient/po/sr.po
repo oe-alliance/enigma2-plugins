@@ -1,0 +1,173 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 - Plugin EmailClient\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-22 22:02+0200\n"
+"PO-Revision-Date: 2009-09-27 17:49+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Attachments"
+msgstr "Dodatci"
+
+msgid "Bodys"
+msgstr "Oblici"
+
+#, python-format
+msgid "Box '%s' is empty"
+msgstr "Sanduče %s je prazno"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Email Client"
+msgstr "Imejl klijent"
+
+msgid "From"
+msgstr "Od"
+
+msgid "IMAP Port"
+msgstr "IMAP Port"
+
+msgid "IMAP Server"
+msgstr "IMAP Server"
+
+msgid "In"
+msgstr "U"
+
+msgid ""
+"In order of missing standart python library files\n"
+"i have copied the nessary files now.\n"
+"But you have to restart your Box\n"
+" to apply this!"
+msgstr ""
+"Zbog nedostatka stand. python lib. datoteka\n"
+"sada sam kopirao potrebne datoteke.\n"
+"Ali vi treba da restartujete vaš boks\n"
+"da ovo primenite!"
+
+msgid "Mailbox"
+msgstr "Pošt. sand."
+
+msgid ""
+"New mail arrived:\n"
+"\n"
+msgstr ""
+"Nova poruka stigla:\n"
+"\n"
+
+msgid "Password"
+msgstr "Lozinka"
+
+msgid "Subject"
+msgstr "Subjekt"
+
+msgid "Username"
+msgstr "Korisn. ime"
+
+msgid "cancel"
+msgstr "otkaži"
+
+msgid "connected"
+msgstr "spojen"
+
+msgid "delete"
+msgstr "obriši"
+
+#, python-format
+msgid "have %d messages"
+msgstr "ima %d poruka"
+
+msgid "headers loaded, now parsing ..."
+msgstr "Zaglavlja učitana, sad raščlanjujem ..."
+
+msgid "interval to check for new mails (minutes)"
+msgstr "Interval za proveru novih poruka (u minutima)"
+
+msgid "leave unread"
+msgstr "ostavi nepročitano"
+
+#, python-format
+msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
+msgstr "učitavam zaglavlja %(from)d-%(to)d iz sand.'%(name)s'"
+
+msgid "loading message"
+msgstr "učitavam poruku"
+
+msgid "logged in"
+msgstr "regstrovan"
+
+msgid "mail check process stopped"
+msgstr "proces provere poruka zaustavljen"
+
+msgid "max of Headers to load"
+msgstr "maksimum zaglavlja za učitavanje"
+
+msgid "no"
+msgstr "ne"
+
+msgid "no date"
+msgstr "bez datuma"
+
+msgid "no filename"
+msgstr "bez imena datoteke"
+
+msgid "no from"
+msgstr "bez odakle"
+
+msgid "no sender"
+msgstr "bez pošiljaoca"
+
+msgid "no subject"
+msgstr "bez subjekta"
+
+msgid "notify about new mails"
+msgstr "obavesti o novim porukama"
+
+msgid "ok"
+msgstr "ok"
+
+msgid "parsing message"
+msgstr "analiziram poruku"
+
+msgid "really delete Mail?"
+msgstr "stvarno obrisati poruku?"
+
+msgid "really undelete Mail?"
+msgstr "stvarno restaurirati poruku?"
+
+msgid "select Attachment"
+msgstr "izaberi dodatak"
+
+msgid "select Body"
+msgstr "Izaberi oblik"
+
+msgid "show deleted entries"
+msgstr "pokaži obrisane unose"
+
+msgid "timeout displaying new mails (seconds)"
+msgstr "vreme prikazivanja nove poruke (sekunde)"
+
+msgid "undelete"
+msgstr "restauriraj"
+
+msgid "unread messages in mailbox"
+msgstr "nepročitane poruke u sandučetu"
+
+msgid "view Emails via IMAP4"
+msgstr "vidi imejlove preko IMAP4"
+
+msgid "yes"
+msgstr "da"
+

@@ -1,0 +1,787 @@
+# FritzCall plugin german localization
+# Copyright (C) 2009 Michael Schmidt
+# This file is distributed under the same license as the PACKAGE package.
+# Michael Schmidt <michael@schmidt-schmitten.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 FritzCall Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-28 23:41+0200\n"
+"PO-Revision-Date: 2009-09-10 22:47+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:164
+#: ../src/plugin.py:2371
+#: ../src/plugin.py:2402
+msgid "About FritzCall"
+msgstr "O FritzCall dodatku"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:2017
+#: ../src/plugin.py:2138
+msgid "Add entry to phonebook"
+msgstr "Dodaj unos u tel. imenik"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1520
+msgid "All"
+msgstr "Svi "
+
+#: ../src/plugin.py:128
+msgid "All calls"
+msgstr "Svi pozivi"
+
+#: ../src/plugin.py:2442
+msgid "Append shortcut number"
+msgstr "Priključi broj prečice "
+
+#: ../src/plugin.py:2441
+msgid "Append type of number"
+msgstr "Priključi tip broja"
+
+#: ../src/plugin.py:2443
+msgid "Append vanity name"
+msgstr "Priključi ništavno ime"
+
+#: ../src/plugin.py:2431
+msgid "Areacode to add to Outgoing Calls (if necessary)"
+msgstr "Pozivni broj za dodati izlaznim pozivima (ako je potrebno)"
+
+#: ../src/plugin.py:120
+msgid "Austria"
+msgstr "Austrija"
+
+#: ../src/plugin.py:2449
+msgid "Automatically add new Caller to PhoneBook"
+msgstr "Automatski dodaj novog pozivaoca u imenik"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1670
+msgid "Call"
+msgstr "Pozovi"
+
+#: ../src/plugin.py:2418
+msgid "Call monitoring"
+msgstr "Kontrola poziva"
+
+#: ../src/plugin.py:1262
+msgid "Call redirection"
+msgstr "Preusmerenje poziva"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:2150
+#: ../src/plugin.py:2363
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: ../src/plugin.py:1288
+msgid "Connected since"
+msgstr "Spojen od"
+
+#: ../src/plugin.py:2730
+msgid "Connected to FRITZ!Box!"
+msgstr "Spojen sa  FRITZ!Box!"
+
+#: ../src/plugin.py:2743
+#, python-format
+msgid ""
+"Connecting to FRITZ!Box failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Spajanje sa FRITZ!Box nije uspelo\n"
+" (%s)\n"
+"Pokušavam ponovo..."
+
+#: ../src/plugin.py:2726
+msgid "Connecting to FRITZ!Box..."
+msgstr "Spajanje na FRITZ!Box..."
+
+#: ../src/plugin.py:2739
+#, python-format
+msgid ""
+"Connection to FRITZ!Box! lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Veza sa FRITZ!Box izgubljena \n"
+" (%s)\n"
+"pokušavam ponovo..."
+
+#: ../src/plugin.py:473
+msgid "Could not parse FRITZ!Box Phonebook entry"
+msgstr "Ne mogu tumačiti unos FRITZ!Box imenika"
+
+#: ../src/plugin.py:2435
+msgid "Country"
+msgstr "Država"
+
+#: ../src/plugin.py:1366
+msgid "DECT phones registered"
+msgstr "DECT telefoni registrovani"
+
+#: ../src/plugin.py:2455
+msgid "Debug"
+msgstr "Debag"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1993
+msgid "Delete"
+msgstr "Obriši"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:2015
+msgid "Delete entry"
+msgstr "Obriši unos"
+
+#: ../src/plugin.py:2799
+msgid "Display FRITZ!box-Fon calls on screen"
+msgstr "Prikaži  FRITZ!Box tel. pozive na ekranu"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1542
+msgid "Display all calls"
+msgstr "Prikaži sve pozive"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1546
+msgid "Display incoming calls"
+msgstr "Prikaži dolazne pozive"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1544
+msgid "Display missed calls"
+msgstr "Prikaži propuštene pozive"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1548
+msgid "Display outgoing calls"
+msgstr "Prikaži odlazne pozive"
+
+#: ../src/plugin.py:1653
+msgid "Do what?"
+msgstr "Šta raditi?"
+
+#: ../src/plugin.py:2089
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+"Da li stvarno želite obrisati unos za\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1997
+msgid "Edit"
+msgstr "Uredi"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:2019
+msgid "Edit selected entry"
+msgstr "Uredi izabrani unos"
+
+#: ../src/plugin.py:2224
+msgid "Enter Search Terms"
+msgstr "Unesi termin za pretragu"
+
+#: ../src/plugin.py:2176
+msgid "Entry incomplete."
+msgstr "Unos nekompletan."
+
+#: ../src/plugin.py:2438
+msgid "Extension number to initiate call on"
+msgstr "Dodatni broj za početak poziva"
+
+#: ../src/plugin.py:620
+#, python-format
+msgid "FRITZ!Box - Could not load calls: %s"
+msgstr "FRITZ!Box - Ne mogu učitati pozive: %s"
+
+#: ../src/plugin.py:477
+#, python-format
+msgid "FRITZ!Box - Could not load phonebook: %s"
+msgstr "\"FRITZ!Box - Ne mogu učitati imenik: %s"
+
+#: ../src/plugin.py:658
+#, python-format
+msgid "FRITZ!Box - Dialling failed: %s"
+msgstr "FRITZ!Box - Pozivanje nije uspelo: %s"
+
+#: ../src/plugin.py:962
+#, python-format
+msgid "FRITZ!Box - Error getting status: %s"
+msgstr "FRITZ!Box - Greška kod dobijanja stanja: %s"
+
+#: ../src/plugin.py:312
+#: ../src/plugin.py:325
+#: ../src/plugin.py:515
+#, python-format
+msgid "FRITZ!Box - Error logging in: %s"
+msgstr "FRITZ!Box - Greška kod upisa: %s"
+
+#: ../src/plugin.py:345
+#, python-format
+msgid "FRITZ!Box - Error logging out: %s"
+msgstr "FRITZ!Box - Greška kod ispisa: %s"
+
+#: ../src/plugin.py:1003
+#, python-format
+msgid "FRITZ!Box - Error resetting: %s"
+msgstr "FRITZ!Box -Greška kod resetovanja: %s"
+
+#: ../src/plugin.py:758
+#, python-format
+msgid "FRITZ!Box - Failed changing Mailbox: %s"
+msgstr "FRITZ!Box - Nije uspela promena pošt. sand.: %s"
+
+#: ../src/plugin.py:698
+#, python-format
+msgid "FRITZ!Box - Failed changing WLAN: %s"
+msgstr "FRITZ!Box -Nije uspela promena WLAN-a: %s"
+
+#: ../src/plugin.py:2421
+msgid "FRITZ!Box FON address (Name or IP)"
+msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
+
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1141
+#: ../src/plugin.py:2373
+#: ../src/plugin.py:2400
+#: ../src/plugin.py:2802
+msgid "FRITZ!Box Fon Status"
+msgstr "FRITZ!Box Stanje telefona"
+
+#: ../src/plugin.py:105
+msgid "Flash"
+msgstr "Fleš"
+
+#: ../src/plugin.py:117
+msgid "France"
+msgstr "Francuska"
+
+#: ../src/plugin.py:2285
+#: ../src/plugin.py:2289
+#: ../src/plugin.py:2329
+msgid "FritzCall Setup"
+msgstr "FritzCall Podešavanje"
+
+#: ../src/plugin.py:2454
+msgid "Full screen display"
+msgstr "Prikaži ceo ekran"
+
+#: ../src/plugin.py:115
+msgid "Germany"
+msgstr "Nemačka"
+
+#: ../src/plugin.py:1550
+#: ../src/plugin.py:1606
+msgid "Getting calls from FRITZ!Box..."
+msgstr "Uzimanje poziva sa FRITZ!Box..."
+
+#: ../src/plugin.py:1229
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr "Dobijanje stanja FRITZ!Box telefona..."
+
+#: ../src/plugin.py:1288
+#: ../src/plugin.py:1290
+msgid "IP Address:"
+msgstr "IP Adresa:"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1524
+msgid "Incoming"
+msgstr "Dolazni"
+
+#: ../src/plugin.py:2559
+#, python-format
+msgid ""
+"Incoming Call on %(date)s from\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"to: %(phone)s"
+msgstr ""
+"Dolazni poziv %(date)s od\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"za: %(phone)s"
+
+#: ../src/plugin.py:129
+msgid "Incoming calls"
+msgstr "Dolazni pozivi"
+
+#: ../src/plugin.py:118
+msgid "Italy"
+msgstr "Italija"
+
+#: ../src/plugin.py:2510
+msgid "Last 10 calls:\n"
+msgstr "Poslednjih 10 poziva:\n"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1668
+msgid "Lookup"
+msgstr "Traženje"
+
+#: ../src/plugin.py:2427
+msgid "MSN to show (separated by ,)"
+msgstr "Pokazati MSN (odvojen sa  ,)"
+
+#: ../src/plugin.py:1204
+msgid "Mailbox"
+msgstr "Poštansko sanduče"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1522
+msgid "Missed"
+msgstr "Propušten"
+
+#: ../src/plugin.py:130
+msgid "Missed calls"
+msgstr "Propušteni pozivi"
+
+#: ../src/plugin.py:2420
+msgid "Mute on call"
+msgstr "Priguši kod poziva"
+
+#: ../src/plugin.py:2165
+msgid "Name"
+msgstr "Ime"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1995
+msgid "New"
+msgstr "Neu"
+
+#: ../src/plugin.py:1361
+msgid "No DECT phone registered"
+msgstr "Nijedan DECT tel. nije registrovan "
+
+#: ../src/plugin.py:1377
+msgid "No call redirection active"
+msgstr "Nema aktivnih preusmerenja poziva"
+
+#: ../src/plugin.py:2093
+#: ../src/plugin.py:2110
+#: ../src/plugin.py:2215
+msgid "No entry selected"
+msgstr "Nijedan unos nije izabran"
+
+#: ../src/plugin.py:1342
+msgid "No mailbox active"
+msgstr "Nema aktivnog pošz. sand."
+
+#: ../src/plugin.py:1720
+msgid "No result from LDIF"
+msgstr "Nema rezultata iz LDIF"
+
+#: ../src/plugin.py:1718
+msgid "No result from Outlook export"
+msgstr "Nema rezultata iz Outlook-Export"
+
+#: ../src/plugin.py:1716
+msgid "No result from reverse lookup"
+msgstr "Nema rezultata traženja unazad"
+
+#: ../src/plugin.py:2166
+msgid "Number"
+msgstr "Broj"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:2152
+#: ../src/plugin.py:2365
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:1364
+msgid "One DECT phone registered"
+msgstr "Jedan DECT tel. je registrovan "
+
+#: ../src/plugin.py:1382
+msgid "One call redirection active"
+msgstr "Jedno preusmerenje poziva je aktivno"
+
+#: ../src/plugin.py:1353
+msgid "One mailbox active"
+msgstr "Jedno pošt. sand. je aktivno"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1526
+msgid "Outgoing"
+msgstr "Odlazni"
+
+#: ../src/plugin.py:2561
+#, python-format
+msgid ""
+"Outgoing Call on %(date)s to\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"from: %(phone)s"
+msgstr ""
+"Odlazni poziv  %(date)s za\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"od: %(phone)s"
+
+#: ../src/plugin.py:131
+msgid "Outgoing calls"
+msgstr "Odlazni pozivi"
+
+#: ../src/plugin.py:2437
+msgid "Password Accessing FRITZ!Box"
+msgstr "Lozinka za pristup FRITZ!Box-u"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1456
+#: ../src/plugin.py:1460
+#: ../src/plugin.py:1495
+#: ../src/plugin.py:2367
+#: ../src/plugin.py:2800
+msgid "Phone calls"
+msgstr "Telefonski pozivi"
+
+#: ../src/plugin.py:2447
+msgid "PhoneBook Location"
+msgstr "Lokacija tel. imenika"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1936
+#: ../src/plugin.py:1940
+#: ../src/plugin.py:1972
+#: ../src/plugin.py:2369
+#: ../src/plugin.py:2801
+msgid "Phonebook"
+msgstr "Telefonski imenik"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1219
+#: ../src/plugin.py:1221
+#: ../src/plugin.py:1540
+#: ../src/plugin.py:2013
+msgid "Quit"
+msgstr "Završi"
+
+#: ../src/plugin.py:2439
+msgid "Read PhoneBook from FRITZ!Box"
+msgstr "Pročitaj tel. imenik iz FRITZ!Box-a"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1227
+msgid "Refresh status"
+msgstr "Stanje osvežavanja"
+
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1171
+#: ../src/plugin.py:1225
+msgid "Reset"
+msgstr "Resetuj"
+
+#: ../src/plugin.py:2433
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr "Traženje ID pozivaoca unazad (odaberi zemlju ispod)"
+
+#: ../src/plugin.py:1694
+msgid "Reverse searching..."
+msgstr "Pretraživanje unazad..."
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1672
+msgid "Save"
+msgstr "Sačuvaj"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1999
+msgid "Search"
+msgstr "Traži"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:2021
+msgid "Search (case insensitive)"
+msgstr "Traži ( isto velika i mala slova)"
+
+#: ../src/plugin.py:2224
+msgid "Search phonebook"
+msgstr "Pretraži imenik"
+
+#: ../src/plugin.py:1705
+msgid "Searching in LDIF..."
+msgstr "Traži u  LDIF..."
+
+#: ../src/plugin.py:1698
+msgid "Searching in Outlook export..."
+msgstr "Tražim u Outlook-Export..."
+
+#: ../src/plugin.py:437
+#: ../src/plugin.py:458
+msgid "Shortcut"
+msgstr "Prečica"
+
+#: ../src/plugin.py:2425
+msgid "Show Calls for specific MSN"
+msgstr "Pokaži pozive za spec. MSN"
+
+#: ../src/plugin.py:2429
+msgid "Show Outgoing Calls"
+msgstr "Prikaži odlazne pozive"
+
+#: ../src/plugin.py:2423
+msgid "Show after Standby"
+msgstr "Pokaži posle stend baja"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1538
+#: ../src/plugin.py:2011
+msgid "Show details of entry"
+msgstr "Pokaži detalje unosa"
+
+#: ../src/plugin.py:1371
+msgid "Software fax active"
+msgstr "Aktivan faks softver"
+
+#: ../src/plugin.py:1284
+#: ../src/plugin.py:1307
+#: ../src/plugin.py:1333
+msgid "Status not available"
+msgstr "Status nije dostupan"
+
+#: ../src/plugin.py:2451
+msgid "Strip Leading 0"
+msgstr "Führende 0 entfernen"
+
+#: ../src/plugin.py:119
+msgid "Switzerland"
+msgstr "Švajcarska"
+
+#: ../src/plugin.py:116
+msgid "The Netherlands"
+msgstr "Holandija"
+
+#: ../src/plugin.py:2432
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Prekid za obaveštenja o pozivima (sekundi) "
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1195
+msgid "Toggle 1. mailbox"
+msgstr "Prebaci 1. pošt.sanduče"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1197
+msgid "Toggle 2. mailbox"
+msgstr "Prebaci  2. pošt.sanduče"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1199
+msgid "Toggle 3. mailbox"
+msgstr "Prebaci 3. pošt.sanduče"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1201
+msgid "Toggle 4. mailbox"
+msgstr "Prebaci 4. pošt.sanduče"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1203
+msgid "Toggle 5. mailbox"
+msgstr "Prebaci 5. pošt.sanduče"
+
+#. TRANSLATORS: keep it short, this is a button
+#: ../src/plugin.py:1177
+msgid "Toggle Mailbox"
+msgstr "Prebac pošt.sanduče"
+
+#. TRANSLATORS: keep it short, this is a button
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1173
+#: ../src/plugin.py:1223
+msgid "Toggle WLAN"
+msgstr "Prebaci WLAN"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:1193
+msgid "Toggle all mailboxes"
+msgstr "Prebaci sve pošt. sand."
+
+#: ../src/plugin.py:555
+#: ../src/plugin.py:1626
+#: ../src/plugin.py:2529
+#: ../src/plugin.py:2637
+#: ../src/plugin.py:2714
+msgid "UNKNOWN"
+msgstr "NEPOZNATO"
+
+#: ../src/plugin.py:2445
+msgid "Use internal PhoneBook"
+msgstr "Koristi interni tel. imenik"
+
+#: ../src/plugin.py:439
+#: ../src/plugin.py:460
+msgid "Vanity"
+msgstr "Ništavnost"
+
+#: ../src/plugin.py:2358
+msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
+msgstr "Treba da uključite kontrolu vašeg FRITZ!box-a pozivanjem #96*5*!"
+
+#: ../src/plugin.py:566
+msgid ""
+"You need to set the password of the FRITZ!Box\n"
+"in the configuration dialog to display calls\n"
+"\n"
+"It could be a communication issue, just try again."
+msgstr ""
+"Treba da postavite lozinku za FRITZ!box\n"
+"u konfiguracijskom meniju za prikaz poziva.\n"
+"\n"
+"To može biti problem veza,samo opet probajte."
+
+#: ../src/FritzLDIF.py:70
+#: ../src/FritzLDIF.py:148
+msgid "business"
+msgstr "posao"
+
+#: ../src/plugin.py:1384
+msgid "call redirections active"
+msgstr "Preusmerenje poziva aktivno"
+
+#: ../src/plugin.py:1326
+msgid "devices active"
+msgstr "Aktivni uređaji"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:2392
+msgid "display calls"
+msgstr "Prikaži pozive"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:2394
+msgid "display phonebook"
+msgstr "Prikaži imenik"
+
+#: ../src/plugin.py:562
+msgid "done"
+msgstr "Završeno"
+
+#: ../src/plugin.py:577
+msgid "done, using last list"
+msgstr "Završeno,koristim zadnju listu"
+
+#: ../src/plugin.py:1319
+msgid "encrypted"
+msgstr "kodirano"
+
+#: ../src/plugin.py:531
+msgid "finishing"
+msgstr "završavam"
+
+#: ../src/FritzLDIF.py:102
+#: ../src/FritzLDIF.py:175
+#: ../src/FritzOutlookCSV.py:116
+#: ../src/FritzOutlookCSV.py:185
+#: ../src/plugin.py:432
+msgid "home"
+msgstr "Kuđni"
+
+#: ../src/plugin.py:226
+msgid "login"
+msgstr "Upis"
+
+#: ../src/plugin.py:316
+msgid "login ok"
+msgstr "Upis OK"
+
+#: ../src/plugin.py:308
+msgid "login verification"
+msgstr "Provera upisa"
+
+#: ../src/plugin.py:1355
+msgid "mailboxes active"
+msgstr "Sandučići aktivni"
+
+#: ../src/FritzLDIF.py:100
+#: ../src/FritzLDIF.py:173
+#: ../src/FritzOutlookCSV.py:114
+#: ../src/FritzOutlookCSV.py:183
+#: ../src/plugin.py:430
+msgid "mobile"
+msgstr "Mobilni"
+
+#: ../src/plugin.py:1322
+msgid "no device active"
+msgstr "Nijedan urećaj nije aktivan"
+
+#: ../src/plugin.py:1317
+msgid "not encrypted"
+msgstr "Nije kodirano"
+
+#: ../src/plugin.py:1324
+msgid "one device active"
+msgstr "Jedan aktivan uređaj"
+
+#: ../src/plugin.py:520
+msgid "preparing"
+msgstr "Pripremam"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:2388
+#: ../src/plugin.py:2398
+msgid "quit"
+msgstr "napusti"
+
+#. TRANSLATORS: keep it short, this is a help text
+#: ../src/plugin.py:2390
+#: ../src/plugin.py:2396
+msgid "save and quit"
+msgstr "Sačuvaj i napusti"
+
+#: ../src/plugin.py:83
+msgid "show as list"
+msgstr "Pokaži kao listu"
+
+#: ../src/plugin.py:83
+msgid "show each call"
+msgstr "Pokaži svaki poziv"
+
+#: ../src/plugin.py:83
+msgid "show nothing"
+msgstr "Ništa ne pokazuj"
+
+#: ../src/FritzOutlookCSV.py:90
+#: ../src/FritzOutlookCSV.py:161
+#: ../src/plugin.py:434
+msgid "work"
+msgstr "Posao"
+
+#~ msgid "CF Drive"
+#~ msgstr "CF Laufwerk"
+#~ msgid "Harddisk"
+#~ msgstr "Festplatte"
+#~ msgid "USB Stick"
+#~ msgstr "USB Stick"
+

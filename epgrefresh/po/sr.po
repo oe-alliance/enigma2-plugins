@@ -1,0 +1,145 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 AutoTimer Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-28 23:41+0200\n"
+"PO-Revision-Date: 2009-09-10 20:30+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+
+#: ../src/plugin.py:143
+msgid "Add to EPGRefresh"
+msgstr "Dodaj u  EPG osvežavanje"
+
+#: ../src/plugin.py:138
+msgid "Automated EPGRefresher"
+msgstr "Automatski EPG osveživač"
+
+#: ../src/EPGRefreshChannelEditor.py:70
+msgid "Bouquets"
+msgstr "Buketi"
+
+#: ../src/EPGRefreshChannelEditor.py:79
+#: ../src/EPGRefreshConfiguration.py:65
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: ../src/EPGRefreshChannelEditor.py:69
+msgid "Channels"
+msgstr "Kanali"
+
+#: ../src/EPGRefreshConfiguration.py:86
+msgid "Configure EPGRefresh"
+msgstr "Konfiguriši EPG osvežavanje"
+
+#: ../src/EPGRefreshConfiguration.py:55
+msgid "Delay when not in Standby (in m)"
+msgstr "Kašnjenje kad nije u pripravnosti (u m)"
+
+#: ../src/EPGRefreshConfiguration.py:40
+msgid "EPGRefresh Configuration"
+msgstr "Konfiguracija EPG osvežavanja"
+
+#: ../src/EPGRefreshChannelEditor.py:59
+msgid "EPGRefresh Services"
+msgstr "EPG osvežavanje kanala"
+
+#: ../src/EPGRefreshConfiguration.py:68
+msgid "Edit Services"
+msgstr "Uredi kanale"
+
+#: ../src/EPGRefreshChannelEditor.py:100
+msgid "Edit Services to refresh"
+msgstr "Uredi kanale za osvežavanje"
+
+#: ../src/EPGRefreshChannelEditor.py:120
+msgid "Editing"
+msgstr "Uređivanje"
+
+#: ../src/EPGRefreshConfiguration.py:56
+msgid "Force scan even if reciever is in use"
+msgstr "Izvrši skeniranje iako je prijemnik u upotrebi"
+
+#: ../src/EPGRefreshConfiguration.py:57
+msgid "Inherit Services from AutoTimer if available"
+msgstr "Nasledi kanale iz auto tajmera ako je moguće"
+
+#: ../src/EPGRefreshConfiguration.py:58
+msgid "Make AutoTimer parse EPG if available"
+msgstr "Učini da auto tajmer raščlani EPG ako je moguće"
+
+#: ../src/EPGRefreshChannelEditor.py:82
+msgid "New"
+msgstr "Novi"
+
+#: ../src/EPGRefreshChannelEditor.py:80
+#: ../src/EPGRefreshConfiguration.py:66
+msgid "OK"
+msgstr "OK"
+
+#: ../src/EPGRefreshConfiguration.py:135
+msgid "Really close without saving settings?"
+msgstr "Stvarno zatvoriti bez čuvanja postavki?"
+
+#: ../src/EPGRefreshConfiguration.py:53
+msgid "Refresh EPG after"
+msgstr "Osveži EPG posle"
+
+#: ../src/EPGRefreshConfiguration.py:54
+msgid "Refresh EPG before"
+msgstr "Osveži EPG pre"
+
+#: ../src/EPGRefreshConfiguration.py:50
+msgid "Refresh automatically"
+msgstr "Osveži automatski"
+
+#: ../src/EPGRefreshConfiguration.py:67
+msgid "Refresh now"
+msgstr "Osveži sada"
+
+#: ../src/EPGRefreshChannelEditor.py:129
+#: ../src/EPGRefreshChannelEditor.py:180
+msgid "Refreshing"
+msgstr "Osvežavanje"
+
+#: ../src/EPGRefreshChannelEditor.py:173
+msgid "Select bouquet to refresh"
+msgstr "Izaberi buket za osvežavanje"
+
+#: ../src/EPGRefreshChannelEditor.py:167
+msgid "Select channel to refresh"
+msgstr "Izaberi kanal za osvežavanje"
+
+#: ../src/EPGRefreshConfiguration.py:59
+msgid "Shutdown after refresh"
+msgstr "Ugasi posle osvežavanja"
+
+#: ../src/plugin.py:71
+msgid ""
+"This might have been an automated bootup to refresh the EPG. For this to happen it is recommmended to put the receiver to Standby.\n"
+"Do you want to do this now?"
+msgstr ""
+"Ovo je moglo biti automatsko podizanje da se EPG osveži. Da bi se ovo desilo preporučljivo je da stavite prijemnik u stanje pripravnosti.\n"
+"Želite li to sada učiniti?"
+
+#: ../src/EPGRefreshConfiguration.py:52
+msgid "Time to stay on service (in m)"
+msgstr "Vreme da stoji na kanalu (u min)"
+
+#: ../src/EPGRefreshConfiguration.py:51
+msgid "Wakeup from Deep-Standby to refresh EPG"
+msgstr "Buđenje iz ugašenog stanja da se osveži EPG"
+
+#: ../src/EPGRefreshChannelEditor.py:81
+msgid "delete"
+msgstr "obriši"
+

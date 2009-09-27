@@ -1,0 +1,321 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 Plugin - RS Downloader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-03 15:11-0000\n"
+"PO-Revision-Date: 2009-09-27 18:11+0100\n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/e2-plugins/enigma2-plugins/rsdownloader/src\n"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:195
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:224
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:244
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:293
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:328
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:457
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:464
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:621
+msgid "Waiting"
+msgstr "Čekam"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:208
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:235
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:257
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:307
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:341
+msgid "Checking"
+msgstr "Proveravam"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:251
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:260
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:279
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:285
+msgid "Downloading"
+msgstr "Preuzimam"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:314
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:326
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:442
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:606
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:616
+msgid "Failed"
+msgstr "Neuspelo"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:320
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:442
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:532
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:598
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:956
+msgid "Finished"
+msgstr "Završeno"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:637
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1046
+msgid "RS Downloader"
+msgstr "RS Preuzimač"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:655
+msgid "Save"
+msgstr "Sačuvaj"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:658
+msgid "Download in the background:"
+msgstr "Preuzmi u pozadini:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:659
+msgid "Username:"
+msgstr "Korisničko ime:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:660
+msgid "Password:"
+msgstr "Lozinka:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:661
+msgid "Lists directory:"
+msgstr "Direktorijum listi:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:662
+msgid "Downloads directory:"
+msgstr "Direktorijum preuzimanja:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:663
+msgid "Ignore download times:"
+msgstr "Ignoriši vremena preuzimanja:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:664
+msgid "Allow downloading on monday:"
+msgstr "Dopusti preuzimanje u ponedeljak:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:665
+msgid "Allow downloading on tuesday:"
+msgstr "Dopusti preuzimanje u utorak:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:666
+msgid "Allow downloading on wednesday:"
+msgstr "Dopusti preuzimanje u sredu:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:667
+msgid "Allow downloading on thursday:"
+msgstr "Dopusti preuzimanje u četvrtak:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:668
+msgid "Allow downloading on friday:"
+msgstr "Dopusti preuzimanje u petak:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:669
+msgid "Allow downloading on saturday:"
+msgstr "Dopusti preuzimanje u subotu:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:670
+msgid "Allow downloading on sunday:"
+msgstr "Dopusti preuzimanje u nedelju:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:671
+msgid "Don't download before:"
+msgstr "Ne preuzimati pre:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:672
+msgid "Don't download after:"
+msgstr "Ne preuzimati posle:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:673
+msgid "Maximal downloads:"
+msgstr "Maksimalna pruzimanja:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:674
+msgid "Take x downloads to list:"
+msgstr "Uzmi x preuzimanja u listu:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:675
+msgid "Write log:"
+msgstr "Napiši zapis:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:676
+msgid "Reconnect fritz.Box before downloading:"
+msgstr "Ponovo spoji fritz.Box pre preuzimanja:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:677
+msgid "Restart failed after 10 minutes:"
+msgstr "Restart nije uspeo posle 10 minuta:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:728
+#, python-format
+msgid "Added %s to the download-list."
+msgstr "Dodato %s u listu preuzimanja."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:730
+#, python-format
+msgid "Error while adding %s to the download-list!"
+msgstr "Greška kod dodavanja %s u listu preuzimanja!"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:740
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: Nothing found, sorry."
+msgstr ""
+"Greška kod traženja http://rapidshare-search-engine.com!\n"
+"\n"
+"Greška:Ništa nije nađeno,žao mi je."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:741
+msgid "Nothing found, sorry."
+msgstr "Ništa nije nađeno,žao mi je."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:757
+#, python-format
+msgid "Page %d / %d. Push < > to switch the page..."
+msgstr "Strana %d / %d. Pritisni < > da promeniš stranu..."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:784
+#, python-format
+msgid ""
+"Error while searching http://rapidshare-search-engine.com!\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Greška kod traženja http://rapidshare-search-engine.com!\n"
+"\n"
+"Greška: %s"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:789
+msgid "Loading previous page... please wait!"
+msgstr "Učitavam prethodnu stranu...molim sačekajte!"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:795
+msgid "Loading next page... please wait!"
+msgstr "Učitavam narednu stranu...molim sačekajte!"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:886
+msgid "Delete"
+msgstr "Obriši"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:887
+msgid "Search"
+msgstr "Traži"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:888
+msgid "Add"
+msgstr "Dodaj"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:889
+msgid "Config"
+msgstr "Konfig."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:890
+msgid "Menu"
+msgstr "Meni"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:911
+msgid "Delete download"
+msgstr "Obriši preuzimanje"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:912
+msgid "Use search engine"
+msgstr "Koristi mašinu za traženje"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:913
+msgid "Add downloads from txt files"
+msgstr "Dodaj preuzimanja iz txt datoteka"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:914
+msgid "Add files from container"
+msgstr "Dodaj datoteke iz sanduka"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:915
+msgid "Delete failed downloads"
+msgstr "Obriši neuspela preuzimanja"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:916
+msgid "Restart failed downloads"
+msgstr "Restartuj neuspela preuzimanja"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:917
+msgid "Clear finished downloads"
+msgstr "Obriši završena preuzimanja"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:918
+msgid "Show log"
+msgstr "Prikaži zapis"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:919
+msgid "Delete log"
+msgstr "Obriši zapis"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:920
+msgid "Close plugin"
+msgstr "Zatvori dodatak"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:921
+msgid "Please choose a function..."
+msgstr "Molim izaberite svrhu..."
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:959
+#, python-format
+msgid "Delete %s?"
+msgstr "Obriši %s?"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:968
+msgid "Search http://rapidshare-search-engine.com for:"
+msgstr "Pretraži http://rapidshare-search-engine.com za:"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1046
+msgid "Download files from rapidshare"
+msgstr "Pruzmi datoteke sa rapidšera"
+
+#~ msgid "%s saved."
+#~ msgstr "%s guardado."
+#~ msgid "Clear"
+#~ msgstr "Limpiar"
+#~ msgid "Could not start downloading!"
+#~ msgstr "¡No puedo comenzar la descarga!"
+#~ msgid "Couldn't find the directory %s!"
+#~ msgstr "¡No puedo encontrar el directorio %s!"
+#~ msgid "Downloaded"
+#~ msgstr "Descargados"
+#~ msgid "Downloading %s."
+#~ msgstr "Descargando %s."
+#~ msgid "Edit configs..."
+#~ msgstr "Editar configuración..."
+#~ msgid "Edit:"
+#~ msgstr "Editar:"
+#~ msgid "Error while writing %s!"
+#~ msgstr "¡Error mientras escribía %s!"
+#~ msgid "Files"
+#~ msgstr "Ficheros"
+#~ msgid ""
+#~ "RS Downloader\n"
+#~ "by AliAbdul\n"
+#~ "\n"
+#~ "This plugin allows you to download files from rapidshare in the "
+#~ "background."
+#~ msgstr ""
+#~ "RS Downloader\n"
+#~ "por AliAbdul\n"
+#~ "\n"
+#~ "Este plugin permite descargar ficheros desde rapidshare en segundo plano."
+#~ msgid "Reload"
+#~ msgstr "Recargar"
+#~ msgid "Show downloads..."
+#~ msgstr "Mostrar descargas..."
+#~ msgid "Show info..."
+#~ msgstr "Mostrar info..."
+#~ msgid "Show lists..."
+#~ msgstr "Mostrar listas..."
+#~ msgid "Show progress..."
+#~ msgstr "Mostrar progreso..."
+#~ msgid "Show status..."
+#~ msgstr "Mostrar estado..."
+#~ msgid "Start downloading..."
+#~ msgstr "Comenzar descarga..."
+#~ msgid "Stopped!"
+#~ msgstr "¡Parado!"
+
