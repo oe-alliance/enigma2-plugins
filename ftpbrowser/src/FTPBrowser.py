@@ -21,9 +21,8 @@ from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 # GUI (Components)
 from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.Label import Label
 from Components.FileList import FileList, FileEntryComponent, EXTENSIONS
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from VariableProgressSource import VariableProgressSource
 
 # FTP Client
@@ -135,20 +134,20 @@ class FTPFileList(FileList):
 class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 	skin = """
 		<screen name="FTPBrowser" position="center,center" size="560,440" title="FTP Browser">
-			<widget name="localText" position="20,10" size="200,20" font="Regular;18" />
+			<widget source="localText" render="Label" position="20,10" size="200,20" font="Regular;18" />
 			<widget name="local" position="20,40" size="255,320" scrollbarMode="showOnDemand" />
-			<widget name="remoteText" position="285,10" size="200,20" font="Regular;18" />
+			<widget source="remoteText" render="Label" position="285,10" size="200,20" font="Regular;18" />
 			<widget name="remote" position="285,40" size="255,320" scrollbarMode="showOnDemand" />
-			<widget name="eta" position="20,360" size="200,30" font="Regular;23" />
-			<widget name="speed" position="330,360" size="200,30" halign="right" font="Regular;23" />
+			<widget source="eta" render="Label" position="20,360" size="200,30" font="Regular;23" />
+			<widget source="speed" render="Label" position="330,360" size="200,30" halign="right" font="Regular;23" />
 			<widget source="progress" render="Progress" position="20,390" size="520,10" />
-			<ePixmap name="green" position="10,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="180,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="350,400" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<widget name="key_green" position="10,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="180,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="350,400" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap position="515,408" zPosition="1" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+			<ePixmap name="green" position="10,400" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="180,400" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue" position="350,400" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget source="key_green" render="Label" position="10,400" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_yellow" render="Label" position="180,400" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_blue" render="Label" position="350,400" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<ePixmap position="515,408" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -173,17 +172,17 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		self.lastApprox = 0
 		self.fileSize = 0
 
-		self["localText"] = Label(_("Local"))
+		self["localText"] = StaticText(_("Local"))
 		self["local"] = FileList("/media/hdd/", showMountpoints = False)
-		self["remoteText"] = Label(_("Remote (not connected)"))
+		self["remoteText"] = StaticText(_("Remote (not connected)"))
 		self["remote"] = FTPFileList()
-		self["eta"] = Label("")
-		self["speed"] = Label("")
+		self["eta"] = StaticText("")
+		self["speed"] = StaticText("")
 		self["progress"] = VariableProgressSource()
-		self["key_red"] = Button(_("Exit"))
-		self["key_green"] = Button(_("Rename"))
-		self["key_yellow"] = Button(_("Delete"))
-		self["key_blue"] = Button(_("Upload"))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_green"] = StaticText(_("Rename"))
+		self["key_yellow"] = StaticText(_("Delete"))
+		self["key_blue"] = StaticText(_("Upload"))
 
 		self.server = None
 
@@ -265,11 +264,11 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 
 	def setLocal(self):
 		self.currlist = "local"
-		self["key_blue"].setText(_("Upload"))
+		self["key_blue"].text = _("Upload")
 
 	def setRemote(self):
 		self.currlist = "remote"
-		self["key_blue"].setText(_("Download"))
+		self["key_blue"].text = _("Download")
 
 	def okQuestion(self, res = None):
 		if res:
@@ -456,8 +455,8 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 				self.putFile(*top[1:])
 		elif self.queue is not None:
 			self.queue = None
-			self["eta"].setText("")
-			self["speed"].setText("")
+			self["eta"].text = ""
+			self["speed"].text = ""
 			self["progress"].invalidate()
 			AddPopup(_("Queue processed."), MessageBox.TYPE_INFO, -1)
 
@@ -631,8 +630,8 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 	def transferFinished(self, msg, type, toRefresh):
 		AddPopup(msg, type, -1)
 
-		self["eta"].setText("")
-		self["speed"].setText("")
+		self["eta"].text = ""
+		self["speed"].text = ""
 		self["progress"].invalidate()
 		self[toRefresh].refresh()
 		self.file.close()
@@ -705,8 +704,8 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			lastApprox = round(((pos - self.lastLength) / (newTime - lastTime) / 1024), 2)
 
 			secLen = int(round(((max-pos) / 1024) / lastApprox))
-			self["eta"].setText(_("ETA %d:%02d min") % (secLen / 60, secLen % 60))
-			self["speed"].setText(_("%d kb/s") % (lastApprox))
+			self["eta"].text = _("ETA %d:%02d min") % (secLen / 60, secLen % 60)
+			self["speed"].text = _("%d kb/s") % (lastApprox)
 
 			self.lastApprox = lastApprox
 			self.lastLength = pos
@@ -770,7 +769,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 			self.ftpclient.quit()
 			self.ftpclient = None
 			self["remote"].ftpclient = None
-		self["remoteText"].setText(_("Remote (not connected)"))
+		self["remoteText"].text = _("Remote (not connected)")
 
 	def connectWrapper(self, ret):
 		if ret:
@@ -805,7 +804,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		print "[FTPBrowser] connection established"
 		self.ftpclient = ftpclient
 		self["remote"].ftpclient = ftpclient
-		self["remoteText"].setText(_("Remote"))
+		self["remoteText"].text = _("Remote")
 
 		self["remote"].changeDir(self.server.getPath())
 
@@ -813,7 +812,7 @@ class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 		print "[FTPBrowser] connection failed", args
 
 		self.server = None
-		self["remoteText"].setText(_("Remote (not connected)"))
+		self["remoteText"].text = _("Remote (not connected)")
 		self.session.open(
 				MessageBox,
 				_("Could not connect to ftp server!"),

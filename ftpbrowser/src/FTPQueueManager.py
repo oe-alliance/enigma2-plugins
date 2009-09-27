@@ -13,6 +13,18 @@ from Components.Sources.StaticText import StaticText
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
+class FTPQueueManagerSummary(Screen):
+	skin = """
+	<screen position="0,0" size="132,64">
+		<widget source="parent.title" render="Label" position="6,4" size="120,21" font="Regular;18" />
+		<widget source="parent.list" render="Label" position="6,25" size="120,21" font="Regular;16">
+			<convert type="StringListSelection" />
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="56,46" size="82,18" font="Regular;16" >
+			<convert type="ClockToText">WithSeconds</convert>
+		</widget>
+	</screen>"""
+
 class FTPQueueManager(Screen):
 	skin = """
 		<screen position="center,center" size="560,420" title="FTP Queue Manager" >
@@ -27,9 +39,9 @@ class FTPQueueManager(Screen):
 			<widget source="list" render="Listbox" position="0,50" size="560,360" scrollbarMode="showAlways">
 				<convert type="TemplatedMultiContent">
 					{"template": [
-							MultiContentEntryText(pos=(35,1), size=(510,19), text = 1, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
-							MultiContentEntryText(pos=(35,20), size=(510,18), text = 2, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
-							<!--MultiContentEntryPixmapAlphaTest(pos=(2,2), size=(32,32), png = 0),-->
+							MultiContentEntryText(pos=(35,1), size=(510,19), text = 0, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
+							MultiContentEntryText(pos=(35,20), size=(510,18), text = 1, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
+							<!--MultiContentEntryPixmapAlphaTest(pos=(2,2), size=(32,32), png = 2),-->
 						],
 					  "fonts": [gFont("Regular", 18)],
 					  "itemHeight": 37
@@ -47,6 +59,7 @@ class FTPQueueManager(Screen):
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText("")
 		self['list'] = List([])
+		self['title'] = StaticText()
 
 		self.pixmaps = (
 			0, #LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FTPBrowser/images/up.png")),
@@ -64,19 +77,26 @@ class FTPQueueManager(Screen):
 			self.updateList,
 		))
 
+	def createSummary(self):
+		return FTPQueueManagerSummary
+
 	def updateList(self, queue = None):
 		if not queue:
 			queue = self.queue
 
 		pixmaps = self.pixmaps
 
-		list = [(pixmaps[item[0]], item[1], "-> " + item[2]) for item in queue]
+		list = [(item[1], "-> " + item[2], pixmaps[item[0]]) for item in queue]
 
 		# XXX: this is a little ugly but this way we have the least
 		# visible distortion :-)
 		index = min(self['list'].index, len(list)-1)
 		self['list'].setList(list)
 		self['list'].index = index
+
+	def setTitle(self, title):
+		Screen.setTitle(self, title)
+		self['title'].text = title
 
 	def layoutFinished(self):
 		self.setTitle(_("FTP Queue Manager"))

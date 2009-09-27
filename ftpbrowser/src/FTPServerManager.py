@@ -7,10 +7,13 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
+# GUI (Summary)
+from Screens.Setup import SetupSummary
+
 # GUI (Components)
-from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
-from Components.Label import Label
+from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
 
 # Config
 from Components.config import config, ConfigInteger, ConfigSubsection, \
@@ -128,22 +131,24 @@ class FTPServerEditor(ConfigListScreen, Screen):
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
-			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_blue" render="Label"  position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="config" position="10,50" size="550,130" scrollbarMode="showOnDemand" />
 		</screen>"""
 
 	def __init__(self, session, server):
 		Screen.__init__(self, session)
 
+		self.onChangedEntry = []
+		self.setup_title = _("FTP Server Editor")
 		self.server = server
 
-		self["key_red"] = Label(_("Exit"))
-		self["key_green"] = Label(_("OK"))
-		self["key_yellow"] = Label("")
-		self["key_blue"] = Label(_("Enter URI"))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText(_("Enter URI"))
 
 		ConfigListScreen.__init__(self, [
 			getConfigListEntry(_("Name:"), server.cfg.name),
@@ -164,6 +169,22 @@ class FTPServerEditor(ConfigListScreen, Screen):
 
 	def layoutFinished(self):
 		self.setTitle(_("FTP Server Editor"))
+
+	def changed(self):
+		for x in self.onChangedEntry:
+			try:
+				x()
+			except Exception:
+				pass
+
+	def getCurrentEntry(self):
+		return self["config"].getCurrent()[0]
+
+	def getCurrentValue(self):
+		return str(self["config"].getCurrent()[1].getText())
+
+	def createSummary(self):
+		return SetupSummary
 
 	def gotURI(self, res):
 		if res:
@@ -191,6 +212,18 @@ class FTPServerEditor(ConfigListScreen, Screen):
 		self.saveAll()
 		self.close(True)
 
+class FTPServerManagerSummary(Screen):
+	skin = """
+	<screen position="0,0" size="132,64">
+		<widget source="parent.title" render="Label" position="6,4" size="120,21" font="Regular;18" />
+		<widget source="parent.list" render="Label" position="6,25" size="120,21" font="Regular;16">
+			<convert type="StringListSelection" />
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="56,46" size="82,18" font="Regular;16" >
+			<convert type="ClockToText">WithSeconds</convert>
+		</widget>
+	</screen>"""
+
 class FTPServerManager(Screen):
 	skin = """
 		<screen position="center,center" size="560,420" title="FTP Server Manager" >
@@ -198,23 +231,32 @@ class FTPServerManager(Screen):
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
-			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="list" position="0,50" size="560,360" scrollbarMode="showOnDemand" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="list" render="Listbox" position="0,50" size="560,360" scrollbarMode="showAlways">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos=(1,1), size=(540,22), text = 0, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
+						],
+					  "fonts": [gFont("Regular", 20)],
+					  "itemHeight": 24
+					 }
+				</convert>
+			</widget>
 		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.session = session
 		self.changed = False
-		
-		self["key_red"] = Label(_("Delete"))
-		self["key_green"] = Label(_("Add"))
-		self["key_yellow"] = Label(_("Edit"))
-		self["key_blue"] = Label(_("Save"))
-		self["list"] = MenuList([])
+
+		self["key_red"] = StaticText(_("Delete"))
+		self["key_green"] = StaticText(_("Add"))
+		self["key_yellow"] = StaticText(_("Edit"))
+		self["key_blue"] = StaticText(_("Save"))
+		self["list"] = List([])
+		self["title"] = StaticText()
 		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
@@ -231,11 +273,18 @@ class FTPServerManager(Screen):
 			self.layoutFinished,
 		))
 
+	def createSummary(self):
+		return FTPServerManagerSummary
+
+	def setTitle(self, title):
+		Screen.setTitle(self, title)
+		self["title"].text = title
+
 	def layoutFinished(self):
 		self.setTitle(_("FTP Server Manager"))
 
 	def updateServerList(self):
-		list = [server.name.value for server in config.plugins.ftpbrowser.server]
+		list = [(server.name.value,) for server in config.plugins.ftpbrowser.server]
 		self["list"].setList(list)
 
 	def exit(self, server=None):
@@ -244,7 +293,10 @@ class FTPServerManager(Screen):
 		self.close(server)
 
 	def okClicked(self):
-		idx = self["list"].getSelectedIndex()
+		idx = self["list"].index
+		if idx is None:
+			return
+
 		ftpserverconfig = config.plugins.ftpbrowser
 		Len = ftpserverconfig.servercount.value
 
@@ -253,6 +305,10 @@ class FTPServerManager(Screen):
 			self.exit(server)
 
 	def delete(self):
+		idx = self["list"].index
+		if idx is None:
+			return
+
 		self.session.openWithCallback(
 			self.deleteConfirm,
 			MessageBox,
@@ -263,7 +319,7 @@ class FTPServerManager(Screen):
 		if not ret:
 			return
 
-		idx = self["list"].getSelectedIndex()
+		idx = self["list"].index
 		ftpserverconfig = config.plugins.ftpbrowser
 		Len = ftpserverconfig.servercount.value
 
@@ -289,11 +345,11 @@ class FTPServerManager(Screen):
 		self.changed = True
 
 	def edit(self):
-		idx = self["list"].getSelectedIndex()
+		idx = self["list"].index
 		ftpserverconfig = config.plugins.ftpbrowser
 		Len = ftpserverconfig.servercount.value
 
-		if Len and idx < Len:
+		if idx is not None and Len and idx < Len:
 			self.session.openWithCallback(
 				self.editCallback,
 				FTPServerEditor,
