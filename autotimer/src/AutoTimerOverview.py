@@ -15,24 +15,50 @@ from AutoTimerWizard import AutoTimerWizard
 # GUI (Components)
 from AutoTimerList import AutoTimerList
 from Components.ActionMap import HelpableActionMap
-from Components.Button import Button
 from Components.config import config
+from Components.Sources.StaticText import StaticText
 
 # Plugin
 from AutoTimerComponent import AutoTimerComponent
 
+class AutoTimerOverviewSummary(Screen):
+	skin = """
+	<screen position="0,0" size="132,64">
+		<widget source="parent.title" render="Label" position="6,4" size="120,21" font="Regular;18" />
+		<widget source="entry" render="Label" position="6,25" size="120,21" font="Regular;16" />
+		<widget source="global.CurrentTime" render="Label" position="56,46" size="82,18" font="Regular;16" >
+			<convert type="ClockToText">WithSeconds</convert>
+		</widget>
+	</screen>"""
+
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent = parent)
+		self["entry"] = StaticText("")
+		self.onShow.append(self.addWatcher)
+		self.onHide.append(self.removeWatcher)
+
+	def addWatcher(self):
+		self.parent.onChangedEntry.append(self.selectionChanged)
+		self.parent.selectionChanged()
+
+	def removeWatcher(self):
+		self.parent.onChangedEntry.remove(self.selectionChanged)
+
+	def selectionChanged(self, text):
+		self["entry"].setText(text)
+
 class AutoTimerOverview(Screen, HelpableScreen):
 	"""Overview of AutoTimers"""
 
-	skin = """<screen name="AutoTimerOverview" position="140,148" size="460,265" title="AutoTimer Overview">
-			<widget name="entries" position="5,5" size="450,200" scrollbarMode="showOnDemand" />
-			<ePixmap position="0,220" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
-			<ePixmap position="140,220" zPosition="1" size="140,40" pixmap="skin_default/buttons/yellow.png" alphatest="on" />
-			<ePixmap position="280,220" zPosition="1" size="140,40" pixmap="skin_default/buttons/blue.png" alphatest="on" />
-			<ePixmap position="422,230" zPosition="1" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
-			<widget name="key_green" position="0,220" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="140,220" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="280,220" zPosition="2" size="140,40" halign="center" valign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+	skin = """<screen name="AutoTimerOverview" position="center,center" size="460,280" title="AutoTimer Overview">
+			<widget name="entries" position="5,5" size="450,225" scrollbarMode="showOnDemand" />
+			<ePixmap position="0,235" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,235" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="280,235" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap position="422,245" zPosition="1" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+			<widget source="key_green" render="Label" position="0,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_yellow" render="Label" position="140,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_blue" render="Label" position="280,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
 	def __init__(self, session, autotimer):
@@ -45,12 +71,17 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self.changed = False
 
 		# Button Labels
-		self["key_green"] = Button(_("Save"))
-		self["key_yellow"] = Button(_("Delete"))
-		self["key_blue"] = Button(_("Add"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText(_("Delete"))
+		self["key_blue"] = StaticText(_("Add"))
 
 		# Create List of Timers
 		self["entries"] = AutoTimerList(autotimer.getSortedTupleTimerList())
+
+		# Summary
+		self.onChangedEntry = []
+		self["title"] = StaticText()
+		self["entries"].onSelectionChanged.append(self.selectionChanged)
 
 		# Define Actions
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
@@ -76,8 +107,24 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 		self.onLayoutFinish.append(self.setCustomTitle)
 
+	def setTitle(self, title):
+		Screen.setTitle(self, title)
+		self["title"].setText(title)
+
 	def setCustomTitle(self):
 		self.setTitle(_("AutoTimer Overview"))
+
+	def createSummary(self):
+		return AutoTimerOverviewSummary
+
+	def selectionChanged(self):
+		sel = self["entries"].getCurrent()
+		text = sel and sel.name or ""
+		for x in self.onChangedEntry:
+			try:
+				x(text)
+			except Exception:
+				pass
 
 	def add(self):
 		newTimer = self.autotimer.defaultTimer.clone()

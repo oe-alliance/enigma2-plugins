@@ -15,7 +15,7 @@ from Screens.Setup import SetupSummary
 
 # GUI (Components)
 from Components.ActionMap import ActionMap
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 
 # Configuration
 from Components.config import getConfigListEntry, ConfigEnableDisable, \
@@ -350,16 +350,16 @@ class AutoTimerEditorBase:
 class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	"""Edit AutoTimer"""
 
-	skin = """<screen name="AutoTimerEditor" title="Edit AutoTimer" position="75,155" size="565,280">
+	skin = """<screen name="AutoTimerEditor" title="Edit AutoTimer" position="center,center" size="565,280">
 		<widget name="config" position="5,5" size="555,225" scrollbarMode="showOnDemand" />
-		<ePixmap position="0,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="140,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" position="280,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" position="420,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<ePixmap position="0,235" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,235" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,235" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,235" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_green" render="Label" position="140,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_yellow" render="Label" position="280,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_blue" render="Label" position="420,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
 	def __init__(self, session, timer, editingDefaults = False):
@@ -385,10 +385,10 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
 
 		# Initialize Buttons
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("OK"))
-		self["key_yellow"] = Button()
- 		self["key_blue"] = Button()
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_yellow"] = StaticText()
+ 		self["key_blue"] = StaticText()
 
 		# Set Button texts
 		self.renameServiceButton()
@@ -728,16 +728,16 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 class AutoTimerFilterEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer Filter"""
 
-	skin = """<screen name="AutoTimerFilterEditor" title="Edit AutoTimer Filters" position="75,150" size="565,245">
-		<widget name="config" position="5,5" size="555,200" scrollbarMode="showOnDemand" />
-		<ePixmap position="5,205" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="145,205" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="285,205" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="425,205" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="5,205" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="145,205" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" position="285,205" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" position="425,205" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+	skin = """<screen name="AutoTimerFilterEditor" title="Edit AutoTimer Filters" position="center,center" size="565,280">
+		<widget name="config" position="5,5" size="555,225" scrollbarMode="showOnDemand" />
+		<ePixmap position="0,235" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,235" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,235" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,235" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_green" render="Label" position="140,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_yellow" render="Label" position="280,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_blue" render="Label" position="420,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
 	def __init__(self, session, filterset, excludes, includes):
@@ -765,10 +765,10 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
 
 		# Initialize Buttons
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Save"))
-		self["key_yellow"] = Button(_("delete"))
-		self["key_blue"] = Button(_("New"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText(_("delete"))
+		self["key_blue"] = StaticText(_("New"))
 
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -932,16 +932,16 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 class AutoTimerServiceEditor(Screen, ConfigListScreen):
 	"""Edit allowed Services of a AutoTimer"""
 
-	skin = """<screen name="AutoTimerServiceEditor" title="Edit AutoTimer Services" position="75,150" size="565,245">
-		<widget name="config" position="5,5" size="555,200" scrollbarMode="showOnDemand" />
-		<ePixmap position="5,205" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="145,205" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="285,205" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="425,205" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="5,205" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="145,205" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" position="285,205" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" position="425,205" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+	skin = """<screen name="AutoTimerServiceEditor" title="Edit AutoTimer Services" position="center,center" size="565,280">
+		<widget name="config" position="5,5" size="555,225" scrollbarMode="showOnDemand" />
+		<ePixmap position="0,235" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,235" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,235" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,235" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_green" render="Label" position="140,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_yellow" render="Label" position="280,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_blue" render="Label" position="420,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
 	def __init__(self, session, servicerestriction, servicelist, bouquetlist):
@@ -968,10 +968,10 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
 
 		# Initialize Buttons
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("OK"))
-		self["key_yellow"] = Button(_("delete"))
-		self["key_blue"] = Button(_("New"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_yellow"] = StaticText(_("delete"))
+		self["key_blue"] = StaticText(_("New"))
 
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],

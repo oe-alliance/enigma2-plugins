@@ -7,8 +7,8 @@ from Screens.Screen import Screen
 
 # GUI (Components)
 from Components.ActionMap import ActionMap
-from Components.Button import Button
 from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
 
 from ServiceReference import ServiceReference
 from Tools.FuzzyDate import FuzzyTime
@@ -16,8 +16,8 @@ from Tools.FuzzyDate import FuzzyTime
 class AutoTimerPreview(Screen):
 	"""Preview Timers which would be set"""
 
-	skin = """<screen name="AutoTimerPreview" title="Preview AutoTimer" position="75,155" size="565,265">
-		<widget source="timerlist" render="Listbox" position="5,5" size="555,210" scrollbarMode="showAlways">
+	skin = """<screen name="AutoTimerPreview" title="Preview AutoTimer" position="center,center" size="565,280">
+		<widget source="timerlist" render="Listbox" position="5,5" size="555,220" scrollbarMode="showAlways">
 			<convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos=(2,2), size=(550,24), text = 3, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
@@ -30,10 +30,14 @@ class AutoTimerPreview(Screen):
 				}
 			</convert>
 		</widget>
-		<ePixmap position="0,220" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,220" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,220" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" position="280,220" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<ePixmap position="0,235" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,235" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,235" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,235" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<!--<widget source="key_green" render="Label" position="140,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" /> -->
+		<widget source="key_yellow" render="Label" position="280,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<!--<widget source="key_blue" render="Label" position="420,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" /> -->
 	</screen>"""
 
 	def __init__(self, session, timers):
@@ -54,8 +58,8 @@ class AutoTimerPreview(Screen):
 		self["timerlist"] = List(self.timers)
 
 		# Initialize Buttons
-		self["key_red"] = Button(_("Cancel"))
-		self["key_yellow"] = Button()
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_yellow"] = StaticText()
 
 		self.setSortDescription()
 
