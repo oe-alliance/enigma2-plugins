@@ -16,5 +16,5 @@ def mainORFonDemand(session, **kwargs):
 
 def Plugins(**kwargs):
 	return [
-		PluginDescriptor(name="IPTV-Sendungen von ORF.at anschauen", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=mainORFIPTV),
-		PluginDescriptor(name="onDemand-Sendungen von ORF.at anschauen", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=mainORFonDemand)]
+		PluginDescriptor(name="ORF.at IPTV", description="IPTV-Sendungen von ORF.at anschauen", where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], fnc=mainORFIPTV),
+		PluginDescriptor(name="ORF.at onDemand", description="onDemand-Sendungen von ORF.at anschauen", where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], fnc=mainORFonDemand)]
