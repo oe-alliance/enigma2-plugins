@@ -6,36 +6,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-06 22:24+0100\n"
-"PO-Revision-Date: 2009-09-04 12:58+0100\n"
+"POT-Creation-Date: 2009-09-24 16:14+0200\n"
+"PO-Revision-Date: 2009-09-28 09:12+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:143
-msgid "add to EPGRefresh"
-msgstr "Lägg till i EPGRefresh"
-
-#: ../src/plugin.py:138
+#: ../src/plugin.py:139
 msgid "Automatically refresh EPG"
 msgstr "Automatisk EPGRefresh"
 
-#: ../src/EPGRefreshChannelEditor.py:67
+#: ../src/EPGRefreshChannelEditor.py:70
 msgid "Bouquets"
 msgstr "Favoritlistor"
 
-#: ../src/EPGRefreshChannelEditor.py:75
-#: ../src/EPGRefreshConfiguration.py:64
+#: ../src/EPGRefreshChannelEditor.py:79
+#: ../src/EPGRefreshConfiguration.py:65
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: ../src/EPGRefreshChannelEditor.py:67
+#: ../src/EPGRefreshChannelEditor.py:69
 msgid "Channels"
 msgstr "Kanaler"
 
-#: ../src/EPGRefreshConfiguration.py:85
+#: ../src/EPGRefreshConfiguration.py:86
 msgid "Configure EPGRefresh"
 msgstr "EPGRefresh Konfiguration"
 
@@ -47,19 +43,19 @@ msgstr "Fördröjning när inte i Standby (i min)"
 msgid "EPGRefresh Configuration"
 msgstr "EPGRefresh Konfiguration"
 
-#: ../src/EPGRefreshChannelEditor.py:58
+#: ../src/EPGRefreshChannelEditor.py:59
 msgid "EPGRefresh Services"
 msgstr "EPGRefresh Kanaler"
 
-#: ../src/EPGRefreshConfiguration.py:67
+#: ../src/EPGRefreshConfiguration.py:68
 msgid "Edit Services"
 msgstr "Ändra kanaler"
 
-#: ../src/EPGRefreshChannelEditor.py:96
+#: ../src/EPGRefreshChannelEditor.py:100
 msgid "Edit Services to refresh"
 msgstr "Ändra kanaler för uppdatering"
 
-#: ../src/EPGRefreshChannelEditor.py:116
+#: ../src/EPGRefreshChannelEditor.py:120
 msgid "Editing"
 msgstr "Ändra"
 
@@ -71,16 +67,20 @@ msgstr "Tvinga sökning även om mottagare används"
 msgid "Inherit Services from AutoTimer if available"
 msgstr "Använd kanaler från AutoTimer om möjligt"
 
-#: ../src/EPGRefreshChannelEditor.py:78
+#: ../src/EPGRefreshConfiguration.py:58
+msgid "Make AutoTimer parse EPG if available"
+msgstr "Få AutoTimer läsa EPG om tillgängligt"
+
+#: ../src/EPGRefreshChannelEditor.py:82
 msgid "New"
 msgstr "Ny"
 
-#: ../src/EPGRefreshChannelEditor.py:76
-#: ../src/EPGRefreshConfiguration.py:65
+#: ../src/EPGRefreshChannelEditor.py:80
+#: ../src/EPGRefreshConfiguration.py:66
 msgid "OK"
 msgstr "OK"
 
-#: ../src/EPGRefreshConfiguration.py:134
+#: ../src/EPGRefreshConfiguration.py:135
 msgid "Really close without saving settings?"
 msgstr "Verkligen avsluta utan att spara inställningarna?"
 
@@ -96,28 +96,28 @@ msgstr "Uppdatera EPG före"
 msgid "Refresh automatically"
 msgstr "Uppdatera automatiskt"
 
-#: ../src/EPGRefreshConfiguration.py:66
+#: ../src/EPGRefreshConfiguration.py:67
 msgid "Refresh now"
 msgstr "Uppdatera nu"
 
-#: ../src/EPGRefreshChannelEditor.py:125
-#: ../src/EPGRefreshChannelEditor.py:176
+#: ../src/EPGRefreshChannelEditor.py:129
+#: ../src/EPGRefreshChannelEditor.py:180
 msgid "Refreshing"
 msgstr "Uppdaterar"
 
-#: ../src/EPGRefreshChannelEditor.py:169
+#: ../src/EPGRefreshChannelEditor.py:173
 msgid "Select bouquet to refresh"
 msgstr "Välj favoritlista att uppdatera"
 
-#: ../src/EPGRefreshChannelEditor.py:163
+#: ../src/EPGRefreshChannelEditor.py:167
 msgid "Select channel to refresh"
 msgstr "Välj kanal att uppdatera"
 
-#: ../src/EPGRefreshConfiguration.py:58
+#: ../src/EPGRefreshConfiguration.py:59
 msgid "Shutdown after refresh"
 msgstr "Stäng av efter uppdatering"
 
-#: ../src/plugin.py:71
+#: ../src/plugin.py:72
 msgid ""
 "This might have been an automated bootup to refresh the EPG. For this to happen it is recommmended to put the receiver to Standby.\n"
 "Do you want to do this now?"
@@ -133,7 +133,11 @@ msgstr "Ange länge på tid för kanal (i min)"
 msgid "Wakeup from Deep-Standby to refresh EPG"
 msgstr "Starta upp från Deep-Standby för uppdatera EPG"
 
-#: ../src/EPGRefreshChannelEditor.py:77
+#: ../src/plugin.py:144
+msgid "add to EPGRefresh"
+msgstr "Lägg till i EPGRefresh"
+
+#: ../src/EPGRefreshChannelEditor.py:81
 msgid "delete"
 msgstr "ta bort"
 
