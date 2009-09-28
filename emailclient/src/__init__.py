@@ -22,7 +22,7 @@ def initLog():
 		pass
 
 def debug(message):
-	if config.plugins.FritzCall.debug.value:
+	if config.plugins.emailimap.debug.value:
 		try:
 			deb = open("/tmp/EmailClient.log", "aw")
 			deb.write(message + "\n")
