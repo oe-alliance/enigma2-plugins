@@ -2021,7 +2021,7 @@ class FritzCallPhonebook:
 			config.plugins.FritzCall.fullscreen.value = False
 
 	def search(self, number):
-		debug("[FritzCallPhonebook] Searching for %s" %number)
+		# debug("[FritzCallPhonebook] Searching for %s" %number)
 		name = ""
 		if not self.phonebook:
 			return
@@ -2030,11 +2030,11 @@ class FritzCallPhonebook:
 			prefix = config.plugins.FritzCall.prefix.value
 			if number[0] != '0':
 				number = prefix + number
-				debug("[FritzCallPhonebook] search: added prefix: %s" %number)
+				# debug("[FritzCallPhonebook] search: added prefix: %s" %number)
 			elif number[:len(prefix)] == prefix and self.phonebook.has_key(number[len(prefix):]):
-				debug("[FritzCallPhonebook] search: same prefix")
+				# debug("[FritzCallPhonebook] search: same prefix")
 				name = self.phonebook[number[len(prefix):]]
-				debug("[FritzCallPhonebook] search: result: %s" %name)
+				# debug("[FritzCallPhonebook] search: result: %s" %name)
 		else:
 			prefix = ""
 				
@@ -2677,16 +2677,28 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.close()
 
 	def displayCalls(self):
-		self.session.open(FritzDisplayCalls)
+		if config.plugins.FritzCall.enable.value:
+			self.session.open(FritzDisplayCalls)
+		else:
+			self.session.open(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
 	def displayPhonebook(self):
-		self.session.open(phonebook.FritzDisplayPhonebook)
+		if phonebook:
+			if config.plugins.FritzCall.enable.value:
+				self.session.open(phonebook.FritzDisplayPhonebook)
+			else:
+				self.session.open(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
+		else:
+			self.session.open(MessageBox, _("No phonebook"), type=MessageBox.TYPE_INFO)
 
 	def about(self):
 		self.session.open(FritzAbout)
 
 	def menu(self):
-		self.session.open(FritzMenu)
+		if config.plugins.FritzCall.enable.value:
+			self.session.open(FritzMenu)
+		else:
+			self.session.open(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
 standbyMode = False
 
@@ -3031,7 +3043,7 @@ class FritzProtocol(LineReceiver):
 			if not (config.plugins.FritzCall.filter.value and phone not in filtermsns):
 				debug("[FritzProtocol] lineReceived no filter hit")
 				phonename = phonebook.search(phone)		   # do we have a name for the number of our side?
-				if phonename is not None:
+				if phonename:
 					self.phone = "%s (%s)" % (phone, phonename)
 				else:
 					self.phone = phone
@@ -3053,7 +3065,7 @@ class FritzProtocol(LineReceiver):
 					debug("[FritzProtocol] lineReceived phonebook.search: %s" % self.number)
 					self.caller = phonebook.search(self.number)
 					debug("[FritzProtocol] lineReceived phonebook.search reault: %s" % self.caller)
-					if (self.caller is None) and config.plugins.FritzCall.lookup.value:
+					if (not self.caller) and config.plugins.FritzCall.lookup.value:
 						FritzReverseLookupAndNotifier(self.event, self.number, self.caller, self.phone, self.date)
 						return							# reverselookup is supposed to handle the message itself 
 
@@ -3115,13 +3127,25 @@ class FritzCall:
 			self.d = None
 
 def displayCalls(session, servicelist=None): #@UnusedVariable
-	session.open(FritzDisplayCalls)
+	if config.plugins.FritzCall.enable.value:
+		session.open(FritzDisplayCalls)
+	else:
+		Notifications.AddNotification(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
 def displayPhonebook(session, servicelist=None): #@UnusedVariable
-	session.open(phonebook.FritzDisplayPhonebook)
+	if phonebook:
+		if config.plugins.FritzCall.enable.value:
+			session.open(phonebook.FritzDisplayPhonebook)
+		else:
+			Notifications.AddNotification(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
+	else:
+		Notifications.AddNotification(MessageBox, _("No phonebook"), type=MessageBox.TYPE_INFO)
 
 def displayFBFStatus(session, servicelist=None): #@UnusedVariable
-	session.open(FritzMenu)
+	if config.plugins.FritzCall.enable.value:
+		session.open(FritzMenu)
+	else:
+		Notifications.AddNotification(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
 def main(session):
 	session.open(FritzCallSetup)
