@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 KiddyTimer plugin Turkish Locale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-13 16:39+0100\n"
+"PO-Revision-Date: 2009-09-22 13:12+0200\n"
+"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ..\src/plugin.py:16
+msgid "Clock"
+msgstr "Saat"
+
+#: ..\src/plugin.py:16
+msgid "Smiley"
+msgstr "Animasyon"
+
+#: ..\src/plugin.py:50
+msgid "KiddyTimer"
+msgstr "Çocuk saati"
+
+#: ..\src/plugin.py:50
+msgid "Allows to controls your kids' daily TV usage"
+msgstr "Çocuğunuzun TV kullanımını kontrol edin"
+
+#: ..\src/KTmain.py:26
+#: ..\src/KTmain.py:28
+msgid "??:??"
+msgstr "??:??"
+
+#: ..\src/KTmain.py:105
+msgid "Do you want to start the kiddytimer- plugin now."
+msgstr "Çocuk saati eklentisini şimdi çalıştırmak istiyor musunuz?"
+
+#: ..\src/KTmain.py:121
+msgid "Please enter the correct pin code"
+msgstr "Lütfen geçerli şifreyi girin"
+
+#: ..\src/KTmain.py:121
+msgid "Enter pin code"
+msgstr "Şifreyi girin"
+
+#: ..\src/KTglob.py:6
+msgid "Sunday"
+msgstr "Pazar"
+
+#: ..\src/KTglob.py:7
+msgid "Monday"
+msgstr "Pazartesi"
+
+#: ..\src/KTglob.py:8
+msgid "Tuesday"
+msgstr "Salı"
+
+#: ..\src/KTglob.py:9
+msgid "Wednesday"
+msgstr "Çarşamba"
+
+#: ..\src/KTglob.py:10
+msgid "Thursday"
+msgstr "Perşembe"
+
+#: ..\src/KTglob.py:11
+msgid "Friday"
+msgstr "Cuma"
+
+#: ..\src/KTglob.py:12
+msgid "Saturday"
+msgstr "Cumartesi"
+
+#: ..\src/KTsetup.py:48
+msgid "Enabled"
+msgstr "Etkin"
+
+#: ..\src/KTsetup.py:49
+msgid "PIN"
+msgstr "Şifre"
+
+#: ..\src/KTsetup.py:50
+msgid "Don't monitor TV started after"
+msgstr "TV izlemeye başladıktan sonra gösterme"
+
+#: ..\src/KTsetup.py:51
+msgid "Style of timer"
+msgstr "Zamanlayıcı şekli"
+
+#: ..\src/KTsetup.py:71
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Eklenti: %(plugin)s , Sürüm: %(version)s"
+
+#: ..\src/KTsetup.py:72
+#: ..\src/KTsetup.py:98
+#, python-format
+msgid "Remaining time: %s"
+msgstr "Kalan süre: %s"
+
+#: ..\src/KTsetup.py:73
+#, python-format
+msgid "Last day started: %s"
+msgstr "En son başlangıç zamanı: %s"
+
+#: ..\src/KTsetup.py:76
+msgid "Cancel"
+msgstr "Vazgeç"
+
+#: ..\src/KTsetup.py:77
+msgid "Save"
+msgstr "Kaydet"
+
+#: ..\src/KTsetup.py:78
+msgid "Reset clock"
+msgstr "Saati sıfırla"
+
+#: ..\src/KTsetup.py:79
+msgid "Move clock"
+msgstr "Saati taşı"
+
+#: ..\src/KTpositioner.py:19
+#: ..\src/KTpositioner.py:21
+msgid "01:00"
+msgstr "01:00"
+
