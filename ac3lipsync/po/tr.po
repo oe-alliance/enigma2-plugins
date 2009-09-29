@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: e2 AC3 Lip Sync Turkish Locale\n"
+"Project-Id-Version: enigma2 AC3 Lip Sync Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-05 00:27+0100\n"
-"PO-Revision-Date: 2009-04-20 13:00+0200\n"
+"POT-Creation-Date: 2009-07-29 01:13+0100\n"
+"PO-Revision-Date: 2009-09-22 13:11+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://www.hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
 "MIME-Version: 1.0\n"
@@ -13,159 +13,172 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:30
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:34
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:36
+#: src/plugin.py:28
+#: src/plugin.py:32
+#: src/plugin.py:34
 msgid "AC3 Lip Sync"
 msgstr "AC3 Dudak senkronu"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:34
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:36
+#: src/plugin.py:32
+#: src/plugin.py:34
 msgid "sets the AC3 audio Delay (LipSync)"
 msgstr "AC3 ses gecikmesini ayarlayın"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:35
+#: src/plugin.py:33
 msgid "AC3 Lip Sync Setup"
 msgstr "AC3 Dudak senkron ayarları"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:35
+#: src/plugin.py:33
 msgid "Setup for the AC3 Lip Sync Plugin"
 msgstr "AC3 dudak senkron eklentisi"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:72
-msgid "Switch to user key- delays"
-msgstr "Kullanıcı tuş gecikmelerine geç"
-
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:73
-msgid "Switch to calculated key- delays"
-msgstr "Hesaplanan tuş gecikmelerine geç"
-
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:81
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:84
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:141
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:305
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:309
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:310
+#: src/AC3main.py:82
+#: src/AC3main.py:85
+#: src/AC3main.py:88
+#: src/AC3main.py:146
+#: src/AC3main.py:152
+#: src/AC3main.py:172
+#: src/AC3main.py:296
+#: src/AC3main.py:298
+#: src/AC3main.py:302
+#: src/AC3main.py:303
 #, python-format
 msgid "%i ms"
 msgstr "%i ms"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:82
+#: src/AC3main.py:83
+#: src/AC3main.py:89
+#: src/AC3main.py:173
 #, python-format
 msgid "%s delay:"
 msgstr "%s gecikmesi:"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:83
+#: src/AC3main.py:84
 #, python-format
 msgid "%s:"
 msgstr "%s:"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:87
+#: src/AC3main.py:92
 msgid "Channel audio:"
 msgstr "Ses izi:"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:92
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:58
+#: src/AC3main.py:97
+#: src/AC3setup.py:58
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:93
+#: src/AC3main.py:98
 msgid "OK"
 msgstr "Tamam"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:94
+#: src/AC3main.py:99
 msgid "Switch audio"
 msgstr "Ses izini seç"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:98
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:59
+#: src/AC3main.py:103
+#: src/AC3setup.py:59
 msgid "Save"
 msgstr "Kaydet"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:215
+#: src/AC3main.py:221
 #, python-format
 msgid "Save current %(audio)s delay of %(delay)i ms to key"
 msgstr "Geçerli %(audio)s izi için %(delay)i ms gecikmeyi, tuşa kaydet"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:219
+#: src/AC3main.py:224
 msgid "Menu"
 msgstr "Menü"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:228
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:288
+#: src/AC3main.py:231
+#: src/AC3main.py:285
+#: src/AC3main.py:346
 msgid "Invalid selection"
 msgstr "Geçersiz seçim"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:247
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:248
+#: src/AC3main.py:244
+#: src/AC3main.py:245
 #, python-format
 msgid "Save %s delay"
 msgstr "%s gecikmesini kaydet"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:249
+#: src/AC3main.py:246
 msgid "Save both delays"
 msgstr "İki gecikmeyide kaydet"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:252
+#: src/AC3main.py:249
 msgid "Which delays do you want to set"
 msgstr "Hangi gecikmeyi kaydetmek istiyorsunuz?"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:284
+#: src/AC3main.py:281
 #, python-format
 msgid "Saved %(audio)s value: %(delay)i ms"
 msgstr "%(audio)s izi için %(delay)i ms gecikme kaydedildi"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:326
+#: src/AC3main.py:321
+#, python-format
 msgid "Select the key you want to set to %i ms"
 msgstr "%i ms gecikmeyi atamak istediğiniz tuşu seçin"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:332
+#: src/AC3main.py:327
 #, python-format
-msgid "Key %(key)i (current value: %(value)i ms)"
-msgstr "%(key)i tuşu (mevcut değer: %(value)i ms)"
+msgid "Key %(key)s (current value: %(value)i ms)"
+msgstr "%(key)s tuşu (mevcut değer: %(value)i ms)"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:337
+#: src/AC3main.py:332
 msgid "Setting key canceled"
 msgstr "Tuş tanımlama iptal edildi"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:341
+#: src/AC3main.py:344
 #, python-format
-msgid "%(Key)s successfully set to %(delay)i ms"
+msgid "Key %(Key)s successfully set to %(delay)i ms"
 msgstr "%(Key)s tuşuna %(delay)i ms gecikme süresi atandı"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:42
-msgid "Minimum delay"
-msgstr "Minimum gecikme"
+#: src/AC3setup.py:42
+msgid "Outer Bound (+/-)"
+msgstr "Azami Gecikme (+/-)"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:43
-msgid "Maximum delay"
-msgstr "Maksimum gecikme"
-
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:44
+#: src/AC3setup.py:43
 msgid "Step in ms for arrow keys"
 msgstr "<> tuşlarına basıldığında atlanacak süre (ms)"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:45
+#: src/AC3setup.py:44
 msgid "Wait time in ms before activation:"
 msgstr "Aktivasyondan önce bekleme süresi (ms):"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:49
+#: src/AC3setup.py:45
+#: src/AC3setup.py:46
+#: src/AC3setup.py:47
+#, python-format
+msgid "Step in ms for keys '%s'"
+msgstr "'%s' tuşuna basıldığında atlanacak süre (ms)"
+
+#: src/AC3setup.py:48
+#: src/AC3setup.py:49
+#: src/AC3setup.py:50
 #, python-format
 msgid "Step in ms for key %i"
 msgstr "%i tuşuna basıldığında atlanacak süre (ms)"
 
-#: L:\Dreambox\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:60
-msgid "Recalculate..."
-msgstr "Tekr. hesapla"
+#: src/AC3setup.py:60
+msgid " "
+msgstr " "
 
+#~ msgid "Switch to user key- delays"
+#~ msgstr "Kullanıcı tuş gecikmelerine geç"
+#~ msgid "Switch to calculated key- delays"
+#~ msgstr "Hesaplanan tuş gecikmelerine geç"
+#~ msgid "Minimum delay"
+#~ msgstr "Minimum gecikme"
+#~ msgid "Maximum delay"
+#~ msgstr "Maksimum gecikme"
+#~ msgid "Recalculate..."
+#~ msgstr "Tekr. hesapla"
 #~ msgid "Use user delays"
 #~ msgstr "Kullanıcı gecikmesini kullan"
 #~ msgid "Use calc. delays"
 #~ msgstr "Hesaplanmış gecikmeyi kullan"
 #~ msgid "ms"
 #~ msgstr "ms"
-#~ msgid " "
-#~ msgstr " "
 #~ msgid "Key"
 #~ msgstr "Tuş"
 
