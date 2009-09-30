@@ -1,42 +1,7 @@
 # -*- coding: utf-8 -*-
-from re import sub
+from re import sub, finditer
 
-# Entities to be converted
-entities = (
-	# ISO-8895-1 (most common)
-	("&#228;", u"ä"),
-	("&auml;", u"ä"),
-	("&#252;", u"ü"),
-	("&uuml;", u"ü"),
-	("&#246;", u"ö"),
-	("&ouml;", u"ö"),
-	("&#196;", u"Ä"),
-	("&Auml;", u"Ä"),
-	("&#220;", u"Ü"),
-	("&Uuml;", u"Ü"),
-	("&#214;", u"Ö"),
-	("&Ouml;", u"Ö"),
-	("&#223;", u"ß"),
-	("&szlig;", u"ß"),
-
-	# Rarely used entities
-	("&#8230;", u"..."),
-	("&#8211;", u"-"),
-	("&#160;", u" "),
-	("&#34;", u"\""),
-	("&#38;", u"&"),
-	("&#39;", u"'"),
-	("&#60;", u"<"),
-	("&#62;", u">"),
-
-	# Common entities
-	("&lt;", u"<"),
-	("&gt;", u">"),
-	("&nbsp;", u" "),
-	("&amp;", u"&"),
-	("&quot;", u"\""),
-	("&apos;", u"'"),
-)
+import htmlentitydefs
 
 def strip_readable(html):
 	# Newlines are rendered as whitespace in html
@@ -60,11 +25,30 @@ def strip_readable(html):
 
 def strip(html):
 	# Strip enclosed tags
-	html = sub('<(.*?)>', '', html)
+	html = sub('<.*?>', '', html)
 
-	# Convert html entities
-	for escaped, unescaped in entities:
-		html = html.replace(escaped, unescaped)
+	entitydict = {}
+
+	entities = finditer('&([^#]\D{1,5}?);', html)
+	for x in entities:
+		key = x.group(0)
+		if key not in entitydict:
+			entitydict[key] = htmlentitydefs.name2codepoint[x.group(1)]
+
+	entities = finditer('&#x([0-9A-Fa-f]{2,2}?);', html)
+	for x in entities:
+		key = x.group(0)
+		if key not in entitydict:
+			entitydict[key] = "%d" % int(key[3:5], 16)
+
+	entities = finditer('&#(\d{1,5}?);', html)
+	for x in entities:
+		key = x.group(0)
+		if key not in entitydict:
+			entitydict[key] = x.group(1)
+
+	for key, codepoint in entitydict.items():
+		html = html.replace(key, unichr(int(codepoint)))
 
 	# Return result with leading/trailing whitespaces removed
 	return html.strip()
