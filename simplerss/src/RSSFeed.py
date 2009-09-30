@@ -65,7 +65,7 @@ class PEAEntryWrapper(ElementWrapper):
 			if not text:
 				# NOTE: if we don't have a summary we use the full content instead
 				elem = self._element.find(self._ns + 'content')
-				if elem.get('type') == "html":
+				if elem is not None and elem.get('type') == "html":
 					text = elem.text
 			return text
 
