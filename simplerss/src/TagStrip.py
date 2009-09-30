@@ -7,9 +7,6 @@ def strip_readable(html):
 	# Newlines are rendered as whitespace in html
 	html = html.replace('\n', ' ')
 
-	# Multiple whitespaces are rendered as a single one
-	html = sub('\s\s+', ' ', html)
-
 	# Replace <br> by newlines
 	html = sub('<br(\s+/)?>', '\n', html)
 
@@ -20,12 +17,19 @@ def strip_readable(html):
 	html = sub('<li(\s+.*?)?>', '-', html)
 	html = html.replace('</li>', '\n')
 
+	# Replace </div> by newline
+	html = html.replace('</div>', '\n')
+
 	# And 'normal' stripping
 	return strip(html)
 
 def strip(html):
-	# Strip enclosed tags
+	# Strip remaining enclosed tags
 	html = sub('<.*?>', '', html)
+
+	# Multiple whitespaces are rendered as a single one
+	html = sub('[ \t\r\f\v]{2,}', ' ', html)
+	html = html.replace('\n ', '\n')
 
 	entitydict = {}
 
