@@ -60,6 +60,15 @@ class PEAEntryWrapper(ElementWrapper):
 						autodetect = False
 					))
 			return myl
+		elif tag == "summary":
+			text = self._element.findtext(self._ns + 'summary')
+			if not text:
+				# NOTE: if we don't have a summary we use the full content instead
+				elem = self._element.find(self._ns + 'content')
+				if elem.get('type') == "html":
+					text = elem.text
+			return text
+
 		return ElementWrapper.__getattr__(self, tag)
 
 class RSSWrapper(ElementWrapper):
