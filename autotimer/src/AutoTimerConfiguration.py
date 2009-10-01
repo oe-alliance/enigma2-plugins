@@ -139,6 +139,8 @@ def parseEntry(element, baseTimer, defaults = False):
 					# strip all after last :
 					pos = value.rfind(':')
 					if pos != -1:
+						if value[pos-1] == ':'
+							pos -= 1
 						value = value[:pos+1]
 
 				servicelist.append(value)
@@ -320,6 +322,8 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 						# strip all after last :
 						pos = value.rfind(':')
 						if pos != -1:
+							if value[pos-1] == ':'
+								pos -= 1
 							value = value[:pos+1]
 
 					servicelist.append(value)

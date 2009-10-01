@@ -1069,6 +1069,8 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 				# strip all after last : when adding a (non alternative) channel
 				pos = sname.rfind(':')
 				if pos != -1:
+					if sname[pos-1] == ':'
+						pos -= 1
 					sname = sname[:pos+1]
 
 			list.append(getConfigListEntry(_("Record on"), NoSave(ConfigSelection(choices = [(sname, ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))))
@@ -1148,6 +1150,8 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 			# strip all after last :
 			pos = service.rfind(':')
 			if pos != -1:
+				if service[pos-1] == ':'
+					pos -= 1
 				service = service[:pos+1]
 
 		sref = ServiceReference(myref)
@@ -1201,6 +1205,8 @@ def addAutotimerFromService(session, service = None):
 		# strip all after last :
 		pos = sref.rfind(':')
 		if pos != -1:
+			if sref[pos-1] == ':'
+				pos -= 1
 			sref = sref[:pos+1]
 
 		sref = ServiceReference(sref)

@@ -401,6 +401,8 @@ class AutoTimerComponent(object):
 							value = s.toString()
 							pos = value.rfind(':')
 							if pos != -1:
+								if value[pos-1] == ':'
+									pos -= 1
 								value = value[:pos+1]
 
 							if value == check_service:
@@ -431,6 +433,8 @@ class AutoTimerComponent(object):
 								value = s.toString()
 								pos = value.rfind(':')
 								if pos != -1:
+									if value[pos-1] == ':'
+										pos -= 1
 									value = value[:pos+1]
 
 								if value == override_service:
