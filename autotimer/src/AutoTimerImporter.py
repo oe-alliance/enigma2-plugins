@@ -275,7 +275,7 @@ class AutoTimerImporter(Screen):
 					# strip all after last :
 					pos = value.rfind(':')
 					if pos != -1:
-						if value[pos-1] == ':'
+						if value[pos-1] == ':':
 							pos -= 1
 						value = value[:pos+1]
 

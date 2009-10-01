@@ -1069,7 +1069,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 				# strip all after last : when adding a (non alternative) channel
 				pos = sname.rfind(':')
 				if pos != -1:
-					if sname[pos-1] == ':'
+					if sname[pos-1] == ':':
 						pos -= 1
 					sname = sname[:pos+1]
 
@@ -1150,7 +1150,7 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 			# strip all after last :
 			pos = service.rfind(':')
 			if pos != -1:
-				if service[pos-1] == ':'
+				if service[pos-1] == ':':
 					pos -= 1
 				service = service[:pos+1]
 
@@ -1205,7 +1205,7 @@ def addAutotimerFromService(session, service = None):
 		# strip all after last :
 		pos = sref.rfind(':')
 		if pos != -1:
-			if sref[pos-1] == ':'
+			if sref[pos-1] == ':':
 				pos -= 1
 			sref = sref[:pos+1]
 
