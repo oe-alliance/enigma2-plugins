@@ -251,7 +251,8 @@ class AutoTimerOverview(Screen, HelpableScreen):
 					newTimer
 				)
 			elif ret == "import_epg":
-				self.session.open(
+				self.session.openWithCallback(
+					self.refresh,
 					AutoTimerChannelSelection,
 					self.autotimer
 				)
