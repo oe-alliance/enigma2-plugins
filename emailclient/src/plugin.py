@@ -740,7 +740,7 @@ class CheckMail:
 
 	def _ebNotify(self, result, where, what):
 		debug("[CheckMail] _ebNotify error in %s: %s: %s" %(where, what, result.getErrorMessage()))
-		Notifications.AddNotification(MessageBox, what + '\n' + _("mail check process stopped"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+		Notifications.AddNotification(MessageBox, "EmailClient:\n\n" + what + '\n\n' + _("mail check process stopped"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
 		self.exit()
 
 	def _cbOk(self, result):
@@ -756,7 +756,7 @@ class CheckMail:
 
 	def onConnectFailed(self, reason):
 		debug('[CheckMail] onConnectFailed: ' + reason.getErrorMessage())
-		self._ebNotify(reason, "onConnectFailed", _("connection failed"))
+		self._ebNotify(reason, "onConnectFailed", _("connection to %(server)s:%(port)d failed:\n%(reason)s") %{'server':config.plugins.emailimap.server.value,'port':config.plugins.emailimap.port.value,'reason':reason.getErrorMessage()})
 
 	def _cbCapabilities(self,reason):
 		debug("[CheckMail] _cbCapabilities\n\
