@@ -7,7 +7,7 @@ from Screens.MessageBox import MessageBox
 
 # GUI (Components)
 from Components.ActionMap import ActionMap
-from Components.Label import Label
+from Components.Sources.StaticText import StaticText
 
 # Download
 from VariableProgressSource import VariableProgressSource
@@ -121,10 +121,10 @@ class MediaDownloader(Screen):
 	for a location (see LocationBox). If doOpen is True the Plugin will try to open it after downloading."""
 
 	skin = """<screen name="MediaDownloader" position="100,150" size="540,95" >
-			<widget name="wait" position="2,10" size="500,30" valign="center" font="Regular;23" />
+			<widget source="wait" render="Label" position="2,10" size="500,30" valign="center" font="Regular;23" />
 			<widget source="progress" render="Progress" position="2,40" size="536,20" />
-			<widget name="eta" position="2,65" size="200,30" font="Regular;23" />
-			<widget name="speed" position="338,65" size="200,30" halign="right" font="Regular;23" />
+			<widget source="eta" render="Label" position="2,65" size="200,30" font="Regular;23" />
+			<widget source="speed" render="Label" position="338,65" size="200,30" halign="right" font="Regular;23" />
 		</screen>"""
 
 	def __init__(self, session, file, askOpen = False, downloadTo = None, callback = None):
@@ -142,10 +142,10 @@ class MediaDownloader(Screen):
 		self.lastApprox = 0
 
 		# Inform user about whats currently done
-		self["wait"] = Label(_("Downloading..."))
+		self["wait"] = StaticText(_("Downloading..."))
 		self["progress"] = VariableProgressSource()
-		self["eta"] = Label(_("ETA ??:?? h")) # XXX: we could just leave eta and speed empty
-		self["speed"] = Label(_("?? kb/s"))
+		self["eta"] = StaticText(_("ETA ??:?? h")) # XXX: we could just leave eta and speed empty
+		self["speed"] = StaticText(_("?? kb/s"))
 
 		# Set Limit if we know it already (Server might not tell it)
 		if self.file.size:
