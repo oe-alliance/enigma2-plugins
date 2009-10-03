@@ -56,7 +56,7 @@ class AutoTimerImportSelector(Screen):
 		self.onLayoutFinish.append(self.setCustomTitle)
 
 	def setCustomTitle(self):
-		self.setTitle(_("Select a Timer to Import"))
+		self.setTitle(_("Select a timer to import"))
 
 	def fillTimerList(self):
 		l = self.list
@@ -179,7 +179,7 @@ class AutoTimerImporter(Screen):
 		if justplay is not None:
 			list.append(
 				SelectionEntryComponent(
-					': '.join((_("Timer Type"), {0: _("record"), 1: _("zap")}[int(justplay)])),
+					': '.join((_("Timer type"), {0: _("record"), 1: _("zap")}[int(justplay)])),
 					int(justplay),
 					5,
 					True

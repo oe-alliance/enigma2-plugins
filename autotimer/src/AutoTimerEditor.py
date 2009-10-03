@@ -422,15 +422,15 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 	def renameFilterButton(self):
 		if self.filterSet:
-			self["key_yellow"].setText(_("Edit Filters"))
+			self["key_yellow"].setText(_("edit filters"))
 		else:
-			self["key_yellow"].setText(_("Add Filters"))
+			self["key_yellow"].setText(_("add filters"))
 
 	def renameServiceButton(self):
 		if self.serviceRestriction:
-			self["key_blue"].setText(_("Edit Services"))
+			self["key_blue"].setText(_("edit services"))
 		else:
-			self["key_blue"].setText(_("Add Services"))
+			self["key_blue"].setText(_("add services"))
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
@@ -461,18 +461,18 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.encoding: _("Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."),
 			self.searchType: _("Select \"exact match\" to enforce the \"Match title\" to match exactly or \"partial match\" if you only want to search for a part of the event title."),
 			self.searchCase: _("Select whether or not you want to enforce case correctness."),
-			self.justplay: _("Add Switch-Timers instead of Record timers?"),
+			self.justplay: _("Add zap timer instead of record timer?"),
 			self.overrideAlternatives: _("With this option enabled the channel to record on can be changed to a alternative service it is restricted on."),
 			self.timespan: _("Should this AutoTimer be restricted to a timespan?"),
 			self.timespanbegin: _("Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"),
 			self.timespanend: _("Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"),
-			self.offset: _("Changed default recording offset?"),
+			self.offset: _("Change default recording offset?"),
 			self.offsetbegin: _("Time in minutes to prepend to recording."),
 			self.offsetend: _("Time in minutes to append to recording."),
 			self.duration: _("Should this AutoTimer only match up to a certain event duration?"),
 			self.durationlength: _("Maximum event duration to match. If an event is longer than this ammount of time (without offset) it won't be matched."),
 			self.afterevent: _("Power state to change to after recordings. Select \"standard\" to not change the default behaviour of enigma2 or values changed by yourself."),
-			self.afterevent_timespan: _("Restrict after Event to a certain timespan?"),
+			self.afterevent_timespan: _("Restrict \"after event\" to a certain timespan?"),
 			self.afterevent_timespanbegin: _("Lower bound of timespan."),
 			self.afterevent_timespanend: _("Upper bound of timespan."),
 			self.counter: _("With this option you can restrict the AutoTimer to a certain ammount of scheduled recordings. Set this to 0 to disable this functionality."),
@@ -491,23 +491,23 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			list.extend((
 				getConfigListEntry(_("Enabled"), self.enabled),
 				getConfigListEntry(_("Description"), self.name),
-				getConfigListEntry(_("Match Title"), self.match),
+				getConfigListEntry(_("Match title"), self.match),
 			))
 
 		list.extend((
-			getConfigListEntry(_("EPG Encoding"), self.encoding),
-			getConfigListEntry(_("Search Type"), self.searchType),
+			getConfigListEntry(_("EPG encoding"), self.encoding),
+			getConfigListEntry(_("Search type"), self.searchType),
 			getConfigListEntry(_("Search strictness"), self.searchCase),
-			getConfigListEntry(_("Timer Type"), self.justplay),
-			getConfigListEntry(_("Override found with alternative Service"), self.overrideAlternatives),
-			getConfigListEntry(_("Only match during Timespan"), self.timespan)
+			getConfigListEntry(_("Timer type"), self.justplay),
+			getConfigListEntry(_("Override found with alternative service"), self.overrideAlternatives),
+			getConfigListEntry(_("Only match during timespan"), self.timespan)
 		))
 
 		# Only allow editing timespan when it's enabled
 		if self.timespan.value:
 			list.extend((
-				getConfigListEntry(_("Begin of Timespan"), self.timespanbegin),
-				getConfigListEntry(_("End of Timespan"), self.timespanend)
+				getConfigListEntry(_("Begin of timespan"), self.timespanbegin),
+				getConfigListEntry(_("End of timespan"), self.timespanend)
 			))
 
 		list.append(getConfigListEntry(_("Custom offset"), self.offset))
@@ -519,23 +519,23 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 				getConfigListEntry(_("Offset after recording (in m)"), self.offsetend)
 			))
 
-		list.append(getConfigListEntry(_("Set maximum Duration"), self.duration))
+		list.append(getConfigListEntry(_("Set maximum duration"), self.duration))
 
 		# Only allow editing maxduration when it's enabled
 		if self.duration.value:
-			list.append(getConfigListEntry(_("Maximum Duration (in m)"), self.durationlength))
+			list.append(getConfigListEntry(_("Maximum duration (in m)"), self.durationlength))
 
 		list.append(getConfigListEntry(_("After event"), self.afterevent))
 
 		# Only allow setting afterevent timespan when afterevent is active
 		if self.afterevent.value != "default":
-			list.append(getConfigListEntry(_("Execute after Event during Timespan"), self.afterevent_timespan))
+			list.append(getConfigListEntry(_("Execute \"after event\" during timespan"), self.afterevent_timespan))
 
 			# Only allow editing timespan when it's enabled
 			if self.afterevent_timespan.value:
 				list.extend((
-					getConfigListEntry(_("Begin of after Event Timespan"), self.afterevent_timespanbegin),
-					getConfigListEntry(_("End of after Event Timespan"), self.afterevent_timespanend)
+					getConfigListEntry(_("Begin of \"after event\" timespan"), self.afterevent_timespanbegin),
+					getConfigListEntry(_("End of \"after event\" timespan"), self.afterevent_timespanend)
 				))
 
 		list.append(getConfigListEntry(_("Record a maximum of x times"), self.counter))
@@ -544,14 +544,14 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		if self.counter.value:
 			if not self.editingDefaults:
 				list.append(getConfigListEntry(_("Ammount of recordings left"), self.counterLeft))
-			list.append(getConfigListEntry(_("Reset Count"), self.counterFormatString))
+			list.append(getConfigListEntry(_("Reset count"), self.counterFormatString))
 
-		list.append(getConfigListEntry(_("Require Description to be unique"), self.avoidDuplicateDescription))
+		list.append(getConfigListEntry(_("Require description to be unique"), self.avoidDuplicateDescription))
 
 		# We always add this option though its expert only in enigma2
 		list.append(getConfigListEntry(_("Use a custom location"), self.useDestination))
 		if self.useDestination.value:
-			list.append(getConfigListEntry(_("Custom Location"), self.destination))
+			list.append(getConfigListEntry(_("Custom location"), self.destination))
 
 		list.append(getConfigListEntry(_("Tags"), self.tags))
 
@@ -829,7 +829,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		self.onLayoutFinish.append(self.setCustomTitle)
 
 	def setCustomTitle(self):
-		self.setTitle(_("Edit AutoTimer Filters"))
+		self.setTitle(_("Edit AutoTimer filters"))
 
 
 	def changed(self):
@@ -1032,7 +1032,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		self.onLayoutFinish.append(self.setCustomTitle)
 
 	def setCustomTitle(self):
-		self.setTitle(_("Edit AutoTimer Services"))
+		self.setTitle(_("Edit AutoTimer services"))
 
 	def saveCurrent(self):
 		del self.services[self.idx][:]

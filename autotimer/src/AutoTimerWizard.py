@@ -69,14 +69,14 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 
 	def generateTimespanList(self):
 		self.timespanList = [
-			getConfigListEntry(_("Only match during Timespan"), self.timespan)
+			getConfigListEntry(_("Only match during timespan"), self.timespan)
 		]
 
 		# Only allow editing timespan when it's enabled
 		if self.timespan.value:
 			self.timespanList.extend([
-				getConfigListEntry(_("Begin of Timespan"), self.timespanbegin),
-				getConfigListEntry(_("End of Timespan"), self.timespanend)
+				getConfigListEntry(_("Begin of timespan"), self.timespanbegin),
+				getConfigListEntry(_("End of timespan"), self.timespanend)
 			])
 
 	def getConfigList(self):
@@ -84,8 +84,8 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 			return [
 				getConfigListEntry(_("Enabled"), self.enabled),
 				getConfigListEntry(_("Description"), self.name),
-				getConfigListEntry(_("Match Title"), self.match),
-				getConfigListEntry(_("Timer Type"), self.justplay),
+				getConfigListEntry(_("Match title"), self.match),
+				getConfigListEntry(_("Timer type"), self.justplay),
 			]
 		elif self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN: # Timespan
 			return self.timespanList

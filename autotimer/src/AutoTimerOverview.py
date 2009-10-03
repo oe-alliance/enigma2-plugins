@@ -112,7 +112,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self["title"].setText(title)
 
 	def setCustomTitle(self):
-		self.setTitle(_("AutoTimer Overview"))
+		self.setTitle(_("AutoTimer overview"))
 
 	def createSummary(self):
 		return AutoTimerOverviewSummary
