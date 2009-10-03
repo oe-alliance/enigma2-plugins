@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: autotimer_fy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-09 20:07+0100\n"
+"POT-Creation-Date: 2009-10-03 18:36+0200\n"
 "PO-Revision-Date: 2009-01-09 20:55+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
@@ -22,20 +22,14 @@ msgstr "Dizze gûcheler ôfbrekke"
 msgid "Add"
 msgstr "Tafoegje"
 
-msgid "add AutoTimer..."
-msgstr "AutoTimer Tafoegje..."
-
-msgid "Add Filters"
-msgstr "Filters Tafoegje"
-
-msgid "Add Services"
-msgstr "Services Tafoegje"
-
 msgid "Add new AutoTimer"
 msgstr "Nije AutoTimer tafoegje"
 
 msgid "Add timer as disabled on conflict"
 msgstr "Tiidsbarren tafoegje as 'útskeakele by conflict'"
+
+msgid "Add zap timer instead of record timer?"
+msgstr ""
 
 msgid "After event"
 msgstr "Nei it barren"
@@ -52,26 +46,32 @@ msgstr "AutoTimer bewurker"
 msgid "AutoTimer Filters"
 msgstr "AutoTimer Filters"
 
-msgid "AutoTimer Overview"
-msgstr "AutoTimer Oersjoch"
-
 msgid "AutoTimer Services"
 msgstr "AutoTimer Services"
 
 msgid "AutoTimer Settings"
 msgstr "AutoTimer ynstellingen"
 
-msgid "Begin of Timespan"
-msgstr "Begjin fan Tiidsspan"
+msgid "AutoTimer overview"
+msgstr "AutoTimer Oersjoch"
 
-msgid "Begin of after Event Timespan"
+msgid "Begin of \"after event\" timespan"
 msgstr "Begjin fan Tiidspan nei in barren"
+
+msgid "Begin of timespan"
+msgstr "Begjin fan Tiidsspan"
 
 msgid "Bouquets"
 msgstr "Boeketten"
 
 msgid "Cancel"
 msgstr "Ôfbrekke"
+
+msgid "Change default recording offset?"
+msgstr ""
+
+msgid "Channel Selection"
+msgstr ""
 
 msgid "Channels"
 msgstr "Kanalen"
@@ -104,7 +104,7 @@ msgstr "Nei Tiidsbarren ynstelle mei de gûcheler"
 msgid "Custom (%s)"
 msgstr "Eigen (%s)"
 
-msgid "Custom Location"
+msgid "Custom location"
 msgstr "Eigen lokaasje"
 
 msgid "Custom offset"
@@ -120,20 +120,17 @@ msgstr "Beskriuwing"
 msgid "Do you really want to delete %s?"
 msgstr "Wolle jo wier %s ferwiderje?"
 
+msgid "EPG encoding"
+msgstr ""
+
 msgid "Edit AutoTimer"
 msgstr "Autotimer bewurkje"
 
-msgid "Edit AutoTimer Filters"
+msgid "Edit AutoTimer filters"
 msgstr "Autotimer Filters bewurkje"
 
-msgid "Edit AutoTimer Services"
+msgid "Edit AutoTimer services"
 msgstr "Autotimer Services bewurkje"
-
-msgid "Edit Filters"
-msgstr "Bewurkje Filters"
-
-msgid "Edit Services"
-msgstr "Bewurkje Services"
 
 msgid "Edit Timers and scan for new Events"
 msgstr "Bewurkje Tiidstjoeringen en sykje nei nije Barrens"
@@ -159,16 +156,24 @@ msgstr "Service beperking ynskeakelje"
 msgid "Enabled"
 msgstr "Ynskeakele"
 
-msgid "End of Timespan"
+msgid ""
+"Encoding the channel uses for it's EPG data. You only need to change this if "
+"you're searching for special characters like the german umlauts."
+msgstr ""
+
+msgid "End of \"after event\" timespan"
+msgstr "Ein fan Tiidsspan nei in barren"
+
+msgid "End of timespan"
 msgstr "Ein fan Tiidsspan"
 
-msgid "End of after Event Timespan"
-msgstr "Ein fan Tiidsspan nei in barren"
+msgid "Exact match"
+msgstr ""
 
 msgid "Exclude"
 msgstr "Utslúte"
 
-msgid "Execute after Event during Timespan"
+msgid "Execute \"after event\" during timespan"
 msgstr "Utfiere tiidens in barren yn Tiidsspan"
 
 msgid "Filter"
@@ -180,8 +185,11 @@ msgid ""
 "it's Description.\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"In Filter is in kreftig ark foar it fergelykjen fan tiidsbarren. In AutoTimer kin beperkt wurde ta bepaalde wiekdagen of allinne barren mei in bepaalde tekst bijv yn in beskriuwing.\n"
-"Druk BLAU foar in nije filter rigele en GIEL om in selektearre te ferwiderjen."
+"In Filter is in kreftig ark foar it fergelykjen fan tiidsbarren. In "
+"AutoTimer kin beperkt wurde ta bepaalde wiekdagen of allinne barren mei in "
+"bepaalde tekst bijv yn in beskriuwing.\n"
+"Druk BLAU foar in nije filter rigele en GIEL om in selektearre te "
+"ferwiderjen."
 
 #, python-format
 msgid ""
@@ -197,11 +205,14 @@ msgstr "Freed"
 msgid "Guess existing Timer based on Begin/End"
 msgstr "In gok nei in besteand Tiidsbarren besjoen nei Begjin/EinTiid"
 
-msgid "Import"
-msgstr "Ymport"
-
 msgid "Import AutoTimer"
 msgstr "Ymport AutoTimer"
+
+msgid "Import existing Timer"
+msgstr ""
+
+msgid "Import from EPG"
+msgstr ""
 
 msgid "Include"
 msgstr "Ynclusief"
@@ -213,26 +224,41 @@ msgid ""
 "Service (inside a Bouquet).\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"It is mooglik om in AutoTimer te beperken ta bepaalde Services of Boeketten of ta wiigerje fan bepaalde items.\n"
-"In barren komt allinne oerien mei in AutoTimer wanneer it in bepaalde en net wiigere Service (yn in boeket).\n"
+"It is mooglik om in AutoTimer te beperken ta bepaalde Services of Boeketten "
+"of ta wiigerje fan bepaalde items.\n"
+"In barren komt allinne oerien mei in AutoTimer wanneer it in bepaalde en net "
+"wiigere Service (yn in boeket).\n"
 "Druk BLAU om in nije foarwaarde en GIEL om in selektearre te ferwiderjen."
 
 msgid "Location"
 msgstr "Lokaasje"
 
+msgid "Lower bound of timespan."
+msgstr ""
+
+msgid ""
+"Lower bound of timespan. Nothing before this time will be matched. Offsets "
+"are not taken into account!"
+msgstr ""
+
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr "Sjoch nei Tiidsspan : %02d:%02d - %02d:%02d"
 
-msgid "Match Title"
+msgid "Match title"
 msgstr "Sjoch nei Titel"
 
 #, python-format
 msgid "Match title: %s"
 msgstr "Sjoch nei titel %s"
 
-msgid "Maximum Duration (in m)"
+msgid "Maximum duration (in m)"
 msgstr "Maximaal Tiidspan (yn min)"
+
+msgid ""
+"Maximum event duration to match. If an event is longer than this ammount of "
+"time (without offset) it won't be matched."
+msgstr ""
 
 msgid "Modify existing Timers"
 msgstr "Bewurkje besteande Tiidsbarren"
@@ -258,6 +284,9 @@ msgstr "Nee, gewoan ferwiderje"
 msgid "None"
 msgstr "Gjin"
 
+msgid "Number of scheduled recordings left."
+msgstr ""
+
 msgid "OK"
 msgstr "OK"
 
@@ -276,7 +305,7 @@ msgstr "By lykese service"
 msgid "Only AutoTimers created during this Session"
 msgstr "Allinee AutoTimers makke yn dizze sesje"
 
-msgid "Only match during Timespan"
+msgid "Only match during timespan"
 msgstr "Allinne sjoen yn Tiidsspan"
 
 #, python-format
@@ -286,6 +315,9 @@ msgstr "Alinne by service %s"
 msgid "Open Context Menu"
 msgstr "Iepenje context menu"
 
+msgid "Override found with alternative service"
+msgstr ""
+
 msgid "Please provide a Text to match"
 msgstr "Jou in tekst om mei te sykjen"
 
@@ -294,6 +326,11 @@ msgstr "Poll ynterfal (yn oeren)"
 
 msgid "Poll automatically"
 msgstr "Automatyske poll"
+
+msgid ""
+"Power state to change to after recordings. Select \"standard\" to not change "
+"the default behaviour of enigma2 or values changed by yourself."
+msgstr ""
 
 msgid "Preview"
 msgstr "Foar-oanskouwing"
@@ -313,11 +350,14 @@ msgstr "Opnimme op"
 msgid "Remove selected AutoTimer"
 msgstr "Ferwiderje koazen AutoTimer"
 
-msgid "Require Description to be unique"
+msgid "Require description to be unique"
 msgstr "Unyke beskriuwing needich foar sykjen"
 
-msgid "Reset Count"
+msgid "Reset count"
 msgstr "Teller werom sette"
+
+msgid "Restrict \"after event\" to a certain timespan?"
+msgstr ""
 
 msgid "Saturday"
 msgstr "Sneon"
@@ -325,7 +365,18 @@ msgstr "Sneon"
 msgid "Save"
 msgstr "Opslaan"
 
-msgid "Select a Timer to Import"
+msgid "Search strictness"
+msgstr ""
+
+msgid "Search type"
+msgstr ""
+
+msgid ""
+"Select \"exact match\" to enforce the \"Match title\" to match exactly or "
+"\"partial match\" if you only want to search for a part of the event title."
+msgstr ""
+
+msgid "Select a timer to import"
 msgstr "Kies yn tiidsbarren foar ymport"
 
 msgid "Select bouquet to record on"
@@ -334,14 +385,36 @@ msgstr "Kies yn boeket foar opslach"
 msgid "Select channel to record on"
 msgstr "Kies kanaal om op te nimmen"
 
+msgid "Select the location to save the recording to."
+msgstr ""
+
 msgid "Select type of Filter"
 msgstr "Kies type fan Filter"
 
-msgid "Set maximum Duration"
+msgid "Select whether or not you want to enforce case correctness."
+msgstr ""
+
+msgid "Set maximum duration"
 msgstr "Kies maximaal tiidsspan"
+
+msgid "Set this NO to disable this AutoTimer."
+msgstr ""
 
 msgid "Setup"
 msgstr "Ynstellingen"
+
+msgid "Should this AutoTimer be restricted to a timespan?"
+msgstr ""
+
+msgid "Should this AutoTimer only match up to a certain event duration?"
+msgstr ""
+
+msgid ""
+"Should timers created by this AutoTimer be recorded into a custom location?"
+msgstr ""
+
+msgid "Show in Extensionmenu"
+msgstr ""
 
 msgid "Sort AutoTimer"
 msgstr "Sorteer AutoTimer"
@@ -355,12 +428,16 @@ msgstr "Snein"
 msgid "Tags"
 msgstr "Merkers"
 
+msgid "Tags the Timer/Recording will have."
+msgstr ""
+
 msgid ""
 "Thank you for using the wizard. Your new AutoTimer has been added to the "
 "List.\n"
 "Please press OK to continue."
 msgstr ""
-"Bedankt foar it brûken fan de gûcheler. De nije AutoTimer is tafoege oan de lyst.\n"
+"Bedankt foar it brûken fan de gûcheler. De nije AutoTimer is tafoege oan de "
+"lyst.\n"
 "Druk OK om troch te gean."
 
 msgid ""
@@ -374,19 +451,51 @@ msgid ""
 "The Timespan of an AutoTimer is the first 'advanced' attribute. If a "
 "timespan is specified an event will only match this AutoTimer if it lies "
 "inside of this timespan."
-msgstr "It Tiidsspan fan in AutoTimer is de eerst afansjearre attributen. Ot in tiidsspan opjûn is, sil in tiidbarren allinne oerien komme ot it binnen dit tiidsspan falt."
+msgstr ""
+"It Tiidsspan fan in AutoTimer is de eerst afansjearre attributen. Ot in "
+"tiidsspan opjûn is, sil in tiidbarren allinne oerien komme ot it binnen dit "
+"tiidsspan falt."
+
+msgid ""
+"The counter can automatically be reset to the limit at certain intervals."
+msgstr ""
 
 msgid "The match attribute is mandatory."
 msgstr "It syk attribuut is ferplicht."
 
+msgid ""
+"This is a name you can give the AutoTimer. It will be shown in the Overview "
+"and the Preview."
+msgstr ""
+
+msgid ""
+"This is what will be looked for in event titles. Note that looking for e.g. "
+"german umlauts can be tricky as you have to know the encoding the channel "
+"uses."
+msgstr ""
+
 msgid "Thursday"
 msgstr "Tongersdei"
 
-msgid "Timer Type"
+msgid "Time in minutes to append to recording."
+msgstr ""
+
+msgid "Time in minutes to prepend to recording."
+msgstr ""
+
+msgid "Timer type"
 msgstr "Tiidsbarren type"
 
 msgid "Tuesday"
 msgstr "Tiisdei"
+
+msgid "Upper bound of timespan."
+msgstr ""
+
+msgid ""
+"Upper bound of timespan. Nothing after this time will be matched. Offsets "
+"are not taken into account!"
+msgstr ""
 
 msgid "Use a custom location"
 msgstr "Kies in eigen lokaasje"
@@ -414,8 +523,23 @@ msgid ""
 msgstr ""
 "Wolkom\n"
 "\n"
-"Dizze gûcheler helpt jo by it meitsjen fan in AutoTimer troch in beskriuwing te jaan "
-"foar algemiene ynstellingen."
+"Dizze gûcheler helpt jo by it meitsjen fan in AutoTimer troch in beskriuwing "
+"te jaan foar algemiene ynstellingen."
+
+msgid ""
+"When this option is enabled the AutoTimer won't match events where another "
+"timer with the same description already exists in the timer list."
+msgstr ""
+
+msgid ""
+"With this option enabled the channel to record on can be changed to a "
+"alternative service it is restricted on."
+msgstr ""
+
+msgid ""
+"With this option you can restrict the AutoTimer to a certain ammount of "
+"scheduled recordings. Set this to 0 to disable this functionality."
+msgstr ""
 
 msgid "Wizard"
 msgstr "Gûcheler"
@@ -432,15 +556,16 @@ msgid ""
 "in title' is what is looked for in the EPG."
 msgstr ""
 "Hjir kinne standaard ynstellingen foar in AutoTimer dien wurde.\n"
-"'Namme' is in namme dy't yn de lyst toant wurd, 'Match' is een titel wêr nei "
-" sjoen wurd yn de EPG."
+"'Namme' is in namme dy't yn de lyst toant wurd, 'Match' is een titel wêr "
+"nei  sjoen wurd yn de EPG."
 
 msgid ""
 "You did not provide a valid 'Match in title' Attribute for your new "
 "AutoTimer.\n"
 "As this is a mandatory Attribute you cannot continue without doing so."
 msgstr ""
-"Der is gjin jildige opjefte dien foar 'Match in titel', foar de nije AutoTimer.\n"
+"Der is gjin jildige opjefte dien foar 'Match in titel', foar de nije "
+"AutoTimer.\n"
 "Whylst dizze ferplicht is, kinne jo net fjierder sunder ien te jaan."
 
 #, python-format
@@ -457,7 +582,8 @@ msgid ""
 "\n"
 "You can go back a step by pressing EXIT on your remote."
 msgstr ""
-"Der is mei sukses in nije AutoTimer ynstelt. Wolle jo it tafoegje oan de lyst ?\n"
+"Der is mei sukses in nije AutoTimer ynstelt. Wolle jo it tafoegje oan de "
+"lyst ?\n"
 "\n"
 "Jo kinne ien stap wêrom troch de EXIT knop te brûken."
 
@@ -476,8 +602,23 @@ msgstr ""
 "De konfiguraasje triem is net goed fan formaat:\n"
 "%s"
 
+msgid "add AutoTimer..."
+msgstr "AutoTimer Tafoegje..."
+
+msgid "add filters"
+msgstr "Filters Tafoegje"
+
+msgid "add services"
+msgstr "Services Tafoegje"
+
 msgid "auto"
 msgstr "auto"
+
+msgid "case-insensitive search"
+msgstr ""
+
+msgid "case-sensitive search"
+msgstr ""
 
 msgid "delete"
 msgstr "ferwiderje"
@@ -488,8 +629,17 @@ msgstr "útskeakelje"
 msgid "do nothing"
 msgstr "neat dwaan"
 
+msgid "edit filters"
+msgstr "Bewurkje Filters"
+
+msgid "edit services"
+msgstr "Bewurkje Services"
+
 msgid "enable"
 msgstr "ynskeakelje"
+
+msgid "exact match"
+msgstr ""
 
 msgid "go to deep standby"
 msgstr "gjin nei djip paraatstand"
@@ -512,6 +662,9 @@ msgstr "min"
 msgid "on Weekday"
 msgstr "op wykdei"
 
+msgid "partial match"
+msgstr ""
+
 msgid "record"
 msgstr "opnimme"
 
@@ -520,4 +673,3 @@ msgstr "standert"
 
 msgid "zap"
 msgstr "knip"
-

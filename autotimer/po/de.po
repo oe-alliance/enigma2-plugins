@@ -1,15 +1,11 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-10 22:01+0200\n"
-"PO-Revision-Date: 2009-08-10 22:03+0100\n"
+"POT-Creation-Date: 2009-10-03 18:36+0200\n"
+"PO-Revision-Date: 2009-10-03 18:15+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
-"Language-Team: german <de@li.org>\n"
+"Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,20 +16,14 @@ msgstr "Den Wizard beenden."
 msgid "Add"
 msgstr "Hinzufügen"
 
-msgid "add AutoTimer..."
-msgstr "AutoTimer hinzufügen..."
-
-msgid "Add Filters"
-msgstr "Neue Filter"
-
-msgid "Add Services"
-msgstr "Neue Sender"
-
 msgid "Add new AutoTimer"
 msgstr "Neuen AutoTimer hinzufügen"
 
 msgid "Add timer as disabled on conflict"
 msgstr "Timer bei Konflikt als deaktiviert hinzufügen"
+
+msgid "Add zap timer instead of record timer?"
+msgstr "Umschalt-Timer anstelle von Aufnahme-Timern erstellen?"
 
 msgid "After event"
 msgstr "Nach dem Event"
@@ -50,19 +40,19 @@ msgstr "AutoTimer Editor"
 msgid "AutoTimer Filters"
 msgstr "AutoTimer Filter"
 
-msgid "AutoTimer Overview"
-msgstr "AutoTimer Übersicht"
-
 msgid "AutoTimer Services"
 msgstr "AutoTimer Sender"
 
 msgid "AutoTimer Settings"
 msgstr "AutoTimer Einstellungen"
 
-msgid "Begin of Timespan"
+msgid "AutoTimer overview"
+msgstr "AutoTimer Übersicht"
+
+msgid "Begin of \"after event\" timespan"
 msgstr "Anfang der Zeitspanne"
 
-msgid "Begin of after Event Timespan"
+msgid "Begin of timespan"
 msgstr "Anfang der Zeitspanne"
 
 msgid "Bouquets"
@@ -70,6 +60,9 @@ msgstr "Bouquets"
 
 msgid "Cancel"
 msgstr "Abbruch"
+
+msgid "Change default recording offset?"
+msgstr "Angepasster Vor-/Nachlauf?"
 
 msgid "Channel Selection"
 msgstr "Kanalliste"
@@ -105,7 +98,7 @@ msgstr "Neuen Timer mit dem Wizard erstellen"
 msgid "Custom (%s)"
 msgstr "Speziell (%s)"
 
-msgid "Custom Location"
+msgid "Custom location"
 msgstr "Aufnahmeverzeichnis"
 
 msgid "Custom offset"
@@ -121,23 +114,17 @@ msgstr "Beschreibung"
 msgid "Do you really want to delete %s?"
 msgstr "%s wirklich löschen?"
 
-msgid "EPG Encoding"
+msgid "EPG encoding"
 msgstr "Zeichensatz des EPG"
 
 msgid "Edit AutoTimer"
 msgstr "AutoTimer bearbeiten"
 
-msgid "Edit AutoTimer Filters"
+msgid "Edit AutoTimer filters"
 msgstr "AutoTimer Filter bearbeiten"
 
-msgid "Edit AutoTimer Services"
+msgid "Edit AutoTimer services"
 msgstr "AutoTimer Sender bearbeiten"
-
-msgid "Edit Filters"
-msgstr "Filter bearbeiten"
-
-msgid "Edit Services"
-msgstr "Sender bearbeiten"
 
 msgid "Edit Timers and scan for new Events"
 msgstr "Automatisch Aufnahmen erstellen"
@@ -163,10 +150,17 @@ msgstr "Sender-Beschränkungen"
 msgid "Enabled"
 msgstr "Eingeschaltet"
 
-msgid "End of Timespan"
+msgid ""
+"Encoding the channel uses for it's EPG data. You only need to change this if "
+"you're searching for special characters like the german umlauts."
+msgstr ""
+"Dieser Wert  muss dann angepasst werden, wenn z.B. nach Umlauten gesucht "
+"wird. Bei deutschsprachigen Sendern ist dies in der Regel ISO8859-15."
+
+msgid "End of \"after event\" timespan"
 msgstr "Ende der Zeitspanne"
 
-msgid "End of after Event Timespan"
+msgid "End of timespan"
 msgstr "Ende der Zeitspanne"
 
 msgid "Exact match"
@@ -175,7 +169,7 @@ msgstr "Exakter Treffer"
 msgid "Exclude"
 msgstr "Ausschließen"
 
-msgid "Execute after Event during Timespan"
+msgid "Execute \"after event\" during timespan"
 msgstr "Führe innerhalb der Zeitspanne aus"
 
 msgid "Filter"
@@ -233,19 +227,37 @@ msgstr ""
 msgid "Location"
 msgstr "Zielverzeichnis"
 
+msgid "Lower bound of timespan."
+msgstr "Untere Grenze der Zeitspanne."
+
+msgid ""
+"Lower bound of timespan. Nothing before this time will be matched. Offsets "
+"are not taken into account!"
+msgstr ""
+"Untere Grenze der Zeitspanne. Vor diesem Zeitpunkt wird keine "
+"Übereinstimmung gefunden. Vorlauf wird hier nicht eingerechnet!"
+
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr "Finde in Zeitspanne: %02d:%02d - %02d:%02d"
 
-msgid "Match Title"
+msgid "Match title"
 msgstr "Finde in Titel"
 
 #, python-format
 msgid "Match title: %s"
 msgstr "Finde Titel: %s"
 
-msgid "Maximum Duration (in m)"
-msgstr "Maximale Länge (in Min)"
+msgid "Maximum duration (in m)"
+msgstr "Maximale Länge (in Min.)"
+
+msgid ""
+"Maximum event duration to match. If an event is longer than this ammount of "
+"time (without offset) it won't be matched."
+msgstr ""
+"Maximale Sendungsdauer eines Treffers. Wenn eine Sendung länger als dieses "
+"Intervall ist wird diese nicht aufgenommen. Vor-/Nachlauf wird hier nicht "
+"eingerechnet."
 
 msgid "Modify existing Timers"
 msgstr "Ändere existierende Timer"
@@ -271,14 +283,17 @@ msgstr "Nein, entfernen."
 msgid "None"
 msgstr "Keine"
 
+msgid "Number of scheduled recordings left."
+msgstr "Anzahl verbleibender Treffer."
+
 msgid "OK"
 msgstr "OK"
 
 msgid "Offset after recording (in m)"
-msgstr "Nachlauf der Aufnahme (in Min)"
+msgstr "Nachlauf der Aufnahme (in Min.)"
 
 msgid "Offset before recording (in m)"
-msgstr "Vorlauf der Aufnahme (in Min)"
+msgstr "Vorlauf der Aufnahme (in Min.)"
 
 msgid "On any service"
 msgstr "Auf jedem Sender"
@@ -289,7 +304,7 @@ msgstr "Auf dem gleichen Sender"
 msgid "Only AutoTimers created during this Session"
 msgstr "Nur die dieser Sitzung"
 
-msgid "Only match during Timespan"
+msgid "Only match during timespan"
 msgstr "Finde nur innerhalb einer Zeitspanne"
 
 #, python-format
@@ -299,7 +314,7 @@ msgstr "Nur auf Sender: %s"
 msgid "Open Context Menu"
 msgstr "Öffne Kontext-Menü"
 
-msgid "Override found with alternative Service"
+msgid "Override found with alternative service"
 msgstr "Service mit alternative ersetzen"
 
 msgid "Please provide a Text to match"
@@ -310,6 +325,13 @@ msgstr "Abfrageintervall (in Stunden)"
 
 msgid "Poll automatically"
 msgstr "Frage automatisch ab"
+
+msgid ""
+"Power state to change to after recordings. Select \"standard\" to not change "
+"the default behaviour of enigma2 or values changed by yourself."
+msgstr ""
+"Systemzustand nach der Aufnahme. Wähle \"standard\" um die Standardauswahl "
+"von enigma2 oder eigens geänderte Werte nicht zu verändern."
 
 msgid "Preview"
 msgstr "Vorschau"
@@ -329,11 +351,14 @@ msgstr "Aufnahme von"
 msgid "Remove selected AutoTimer"
 msgstr "Markierten AutoTimer löschen"
 
-msgid "Require Description to be unique"
+msgid "Require description to be unique"
 msgstr "Beschreibung muss eindeutig sein"
 
-msgid "Reset Count"
+msgid "Reset count"
 msgstr "Setze Zähler zurück"
+
+msgid "Restrict \"after event\" to a certain timespan?"
+msgstr "\"Nach dem Event\" nur in einem bestimmten Zeitraum setzen?"
 
 msgid "Saturday"
 msgstr "Samstag"
@@ -341,13 +366,21 @@ msgstr "Samstag"
 msgid "Save"
 msgstr "Speichern"
 
-msgid "Search Type"
-msgstr "Suchtyp"
-
 msgid "Search strictness"
 msgstr "Genauigkeit der Suche"
 
-msgid "Select a Timer to Import"
+msgid "Search type"
+msgstr "Suchtyp"
+
+msgid ""
+"Select \"exact match\" to enforce the \"Match title\" to match exactly or "
+"\"partial match\" if you only want to search for a part of the event title."
+msgstr ""
+"Wähle \"gesamter Titel\" damit \"Finde in Titel\" genau mit dem "
+"Sendungstitel übereinstimmen muss, oder \"Teil des Titels\" wenn dies nur "
+"ein Teil des Sendungstitels sein soll."
+
+msgid "Select a timer to import"
 msgstr "Wähle zu importierende Aufnahme"
 
 msgid "Select bouquet to record on"
@@ -356,14 +389,38 @@ msgstr "Wähle Bouquet für Aufnahme"
 msgid "Select channel to record on"
 msgstr "Wähle Kanal für Aufnahme"
 
+msgid "Select the location to save the recording to."
+msgstr "Wähle das Aufnahmeverzeichnis aus."
+
 msgid "Select type of Filter"
 msgstr "Typ des Filters auswählen"
 
-msgid "Set maximum Duration"
+msgid "Select whether or not you want to enforce case correctness."
+msgstr ""
+"Wähle aus ob Groß- und Kleinschreibung im Sendungstitel mit \"Finde im Titel"
+"\" übereinstimmen muss."
+
+msgid "Set maximum duration"
 msgstr "Finde maximale Länge"
+
+msgid "Set this NO to disable this AutoTimer."
+msgstr "Setze das auf NEIN um den AutoTimer zu deaktivieren."
 
 msgid "Setup"
 msgstr "Einstellungen"
+
+msgid "Should this AutoTimer be restricted to a timespan?"
+msgstr "Soll dieser AutoTimer auf einen Zeitraum beschränkt werden?"
+
+msgid "Should this AutoTimer only match up to a certain event duration?"
+msgstr ""
+"Soll dieser AutoTimer nur bis zu einer gewissen Sendungslänge zutreffen?"
+
+msgid ""
+"Should timers created by this AutoTimer be recorded into a custom location?"
+msgstr ""
+"Sollen durch diesen AutoTimer erstellte Timer in ein bestimmtes Verzeichnis "
+"gespeichert werden?"
 
 msgid "Show in Extensionmenu"
 msgstr "In Erweiterungsmenü anzeigen"
@@ -379,6 +436,9 @@ msgstr "Sonntag"
 
 msgid "Tags"
 msgstr "Tags"
+
+msgid "Tags the Timer/Recording will have."
+msgstr "Tags die der Aufnahme zugewiesen werden."
 
 msgid ""
 "Thank you for using the wizard. Your new AutoTimer has been added to the "
@@ -404,17 +464,55 @@ msgstr ""
 "Wenn ein Zeitraum angegeben ist wird eine Sendung nur hinzugefügt wenn sie "
 "innerhalb dieser Zeitspanne liegt."
 
+msgid ""
+"The counter can automatically be reset to the limit at certain intervals."
+msgstr ""
+"Der Zähler kann automatisiert zu bestimmten Intervallen zurückegsetzt werden."
+
 msgid "The match attribute is mandatory."
 msgstr "Das Attribut 'Finde in Titel' muss angegeben werden!"
+
+msgid ""
+"This is a name you can give the AutoTimer. It will be shown in the Overview "
+"and the Preview."
+msgstr ""
+"Dies ist ein Name des AutoTimers. Er wird in der Übersicht und Vorschau "
+"angezeigt."
+
+msgid ""
+"This is what will be looked for in event titles. Note that looking for e.g. "
+"german umlauts can be tricky as you have to know the encoding the channel "
+"uses."
+msgstr ""
+"Hiernach wird im Sendungstitel gesucht. Die Suche z.B. nach Umlauten ist "
+"etwas komplizierter, da man dazu den Zeichensatz des Sender-EPGs wissen muss."
 
 msgid "Thursday"
 msgstr "Donnerstag"
 
-msgid "Timer Type"
+msgid "Time in minutes to append to recording."
+msgstr ""
+"Zusätzliche zeit in Minuten die nach der Sendung aufgezeichnet werden soll."
+
+msgid "Time in minutes to prepend to recording."
+msgstr ""
+"Zusätzliche zeit in Minuten die vor der Sendung aufgezeichnet werden soll."
+
+msgid "Timer type"
 msgstr "Timer-Typ"
 
 msgid "Tuesday"
 msgstr "Dienstag"
+
+msgid "Upper bound of timespan."
+msgstr "Obere Grenze der Zeitspanne."
+
+msgid ""
+"Upper bound of timespan. Nothing after this time will be matched. Offsets "
+"are not taken into account!"
+msgstr ""
+"Obere Grenze der Zeitspanne. Nach diesem Zeitpunkt wird keine "
+"Übereinstimmung gefunden. Nachlauf wird hier nicht eingerechnet!"
 
 msgid "Use a custom location"
 msgstr "Angepasstes Aufnahmeverzeichnis"
@@ -443,6 +541,27 @@ msgstr ""
 "Willkommen\n"
 "Dieser Assistent wird Ihnen helfen einen neuen AutoTimer zu erstellen indem "
 "er für häufig genutzte Einstellungen eine Beschreibung liefert."
+
+msgid ""
+"When this option is enabled the AutoTimer won't match events where another "
+"timer with the same description already exists in the timer list."
+msgstr ""
+"Ist diese Option aktiv wird keine Sendung hinzugefügt bei der bereits ein "
+"Timer mit gleicher Beschreibung in der Timer-Liste existiert."
+
+msgid ""
+"With this option enabled the channel to record on can be changed to a "
+"alternative service it is restricted on."
+msgstr ""
+"Wenn diese Option aktiv ist kann der Sender auf eine \"Alternative\" "
+"geändert werden wenn dieser als Beschränkung hinzugefügt wurde."
+
+msgid ""
+"With this option you can restrict the AutoTimer to a certain ammount of "
+"scheduled recordings. Set this to 0 to disable this functionality."
+msgstr ""
+"Mit dieser Einstellung kann die Anzahl der Aufnahmen durch diesen AutoTimer "
+"begrenzt werden. Bei 0 ist diese Funktion inaktiv."
 
 msgid "Wizard"
 msgstr "Assistent"
@@ -503,6 +622,15 @@ msgstr ""
 "Ihre Konfigurationsdatei ist nicht wohlgeformt:\n"
 "%s"
 
+msgid "add AutoTimer..."
+msgstr "AutoTimer hinzufügen..."
+
+msgid "add filters"
+msgstr "Neue Filter"
+
+msgid "add services"
+msgstr "Neue Sender"
+
 msgid "auto"
 msgstr "automatisch"
 
@@ -520,6 +648,12 @@ msgstr "ausgeschalten"
 
 msgid "do nothing"
 msgstr "nichts"
+
+msgid "edit filters"
+msgstr "Filter bearbeiten"
+
+msgid "edit services"
+msgstr "Sender bearbeiten"
 
 msgid "enable"
 msgstr "einschalten"
