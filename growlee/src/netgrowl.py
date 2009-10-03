@@ -125,8 +125,6 @@ if __name__ == '__main__':
   print "Sending standard notification packet"
   s.sendto(p.payload(), addr)
 
-  s.close()
-"""
   print "Assembling priority -2 (Very Low) notification packet"
   p = GrowlNotificationPacket(priority=-2)
   print "Sending priority -2 notification packet"
@@ -138,4 +136,3 @@ if __name__ == '__main__':
   s.sendto(p.payload(), addr)
   s.close()
   print "Done."
-"""
