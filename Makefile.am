@@ -13,8 +13,9 @@ SUBDIRS = \
 	filebrowser \
 	fritzcall \
 	ftpbrowser \
-	googlemaps \
 	genuinedreambox \
+	googlemaps \
+	growlee \
 	httpproxy \
 	imdb \
 	kiddytimer \
