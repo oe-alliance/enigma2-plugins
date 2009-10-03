@@ -350,16 +350,18 @@ class AutoTimerEditorBase:
 class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	"""Edit AutoTimer"""
 
-	skin = """<screen name="AutoTimerEditor" title="Edit AutoTimer" position="center,center" size="565,280">
-		<widget name="config" position="5,5" size="555,225" scrollbarMode="showOnDemand" />
-		<ePixmap position="0,235" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,235" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,235" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,235" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget source="key_red" render="Label" position="0,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget source="key_green" render="Label" position="140,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget source="key_yellow" render="Label" position="280,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget source="key_blue" render="Label" position="420,235" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+	skin = """<screen name="AutoTimerEditor" title="Edit AutoTimer" position="center,center" size="565,350">
+		<ePixmap position="0,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,5" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_green" render="Label" position="140,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_yellow" render="Label" position="280,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_blue" render="Label" position="420,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="config" position="5,50" size="555,225" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,275" zPosition="1" size="565,2" />
+		<widget source="help" render="Label" position="5,280" size="555,63" font="Regular;21" />
 	</screen>"""
 
 	def __init__(self, session, timer, editingDefaults = False):
@@ -381,14 +383,19 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.useDestination.addNotifier(self.reloadList, initial_call = False)
 
 		self.refresh()
+		self.initHelpTexts()
 
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		# XXX: no help for numericaltextinput since it is shown on top of our help
+		ConfigListScreen.__init__(self, self.list, on_change = self.changed)
+		self["config"].onSelectionChanged.append(self.updateHelp)
 
 		# Initialize Buttons
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText()
  		self["key_blue"] = StaticText()
+
+		self["help"] = StaticText()
 
 		# Set Button texts
 		self.renameServiceButton()
@@ -425,6 +432,11 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		else:
 			self["key_blue"].setText(_("Add Services"))
 
+	def updateHelp(self):
+		cur = self["config"].getCurrent()
+		if cur:
+			self["help"].text = self.helpDict[cur[1]]
+
 	def changed(self):
 		for x in self.onChangedEntry:
 			try:
@@ -440,6 +452,37 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 	def createSummary(self):
 		return SetupSummary
+
+	def initHelpTexts(self):
+		self.helpDict = {
+			self.enabled: _("Set this NO to disable this AutoTimer."),
+			self.name: _("This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."),
+			self.match: _("This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."),
+			self.encoding: _("Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."),
+			self.searchType: _("Select \"exact match\" to enforce the \"Match title\" to match exactly or \"partial match\" if you only want to search for a part of the event title."),
+			self.searchCase: _("Select whether or not you want to enforce case correctness."),
+			self.justplay: _("Add Switch-Timers instead of Record timers?"),
+			self.overrideAlternatives: _("With this option enabled the channel to record on can be changed to a alternative service it is restricted on."),
+			self.timespan: _("Should this AutoTimer be restricted to a timespan?"),
+			self.timespanbegin: _("Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"),
+			self.timespanend: _("Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"),
+			self.offset: _("Changed default recording offset?"),
+			self.offsetbegin: _("Time in minutes to prepend to recording."),
+			self.offsetend: _("Time in minutes to append to recording."),
+			self.duration: _("Should this AutoTimer only match up to a certain event duration?"),
+			self.durationlength: _("Maximum event duration to match. If an event is longer than this ammount of time (without offset) it won't be matched."),
+			self.afterevent: _("Power state to change to after recordings. Select \"standard\" to not change the default behaviour of enigma2 or values changed by yourself."),
+			self.afterevent_timespan: _("Restrict after Event to a certain timespan?"),
+			self.afterevent_timespanbegin: _("Lower bound of timespan."),
+			self.afterevent_timespanend: _("Upper bound of timespan."),
+			self.counter: _("With this option you can restrict the AutoTimer to a certain ammount of scheduled recordings. Set this to 0 to disable this functionality."),
+			self.counterLeft: _("Number of scheduled recordings left."),
+			self.counterFormatString: _("The counter can automatically be reset to the limit at certain intervals."),
+			self.avoidDuplicateDescription: _("When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."),
+			self.useDestination: _("Should timers created by this AutoTimer be recorded into a custom location?"),
+			self.destination: _("Select the location to save the recording to."),
+			self.tags: _("Tags the Timer/Recording will have."),
+		}
 
 	def refresh(self):
 		# First three entries are only showed when not editing defaults
