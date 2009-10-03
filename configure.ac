@@ -244,4 +244,5 @@ elektro/src/Makefile
 ftpbrowser/Makefile
 ftpbrowser/po/Makefile
 ftpbrowser/src/Makefile
+ftpbrowser/src/images/Makefile
 ])

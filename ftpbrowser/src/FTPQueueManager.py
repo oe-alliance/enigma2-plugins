@@ -41,7 +41,7 @@ class FTPQueueManager(Screen):
 					{"template": [
 							MultiContentEntryText(pos=(35,1), size=(510,19), text = 0, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
 							MultiContentEntryText(pos=(35,20), size=(510,18), text = 1, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
-							<!--MultiContentEntryPixmapAlphaTest(pos=(2,2), size=(32,32), png = 2),-->
+							MultiContentEntryPixmapAlphaTest(pos=(2,2), size=(32,32), png = 2),
 						],
 					  "fonts": [gFont("Regular", 18)],
 					  "itemHeight": 37
@@ -62,8 +62,8 @@ class FTPQueueManager(Screen):
 		self['title'] = StaticText()
 
 		self.pixmaps = (
-			0, #LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FTPBrowser/images/up.png")),
-			0 #LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FTPBrowser/images/down.png"))
+			LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FTPBrowser/images/up.png")),
+			LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FTPBrowser/images/down.png"))
 		)
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
