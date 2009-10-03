@@ -129,6 +129,12 @@ class ServiceWebScreen(WebScreen):
 		ugly, but necessary :(
 		"""
 
+class ReadPluginListWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		from WebComponents.Sources.ReadPluginList import ReadPluginList
+		self["ReadPluginList"] = ReadPluginList(session)
+
 class LocationsAndTagsWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
@@ -136,6 +142,8 @@ class LocationsAndTagsWebScreen(WebScreen):
 
 		self["CurrentLocation"] = LocationsAndTags(session, LocationsAndTags.CURRLOCATION)
 		self["Locations"] = LocationsAndTags(session, LocationsAndTags.LOCATIONS)
+		self["AddLocation"] = LocationsAndTags(session, LocationsAndTags.ADDLOCATION)
+		self["RemoveLocation"] = LocationsAndTags(session, LocationsAndTags.REMOVELOCATION)
 		self["Tags"] = LocationsAndTags(session, LocationsAndTags.TAGS)
 
 class EpgWebScreen(WebScreen):
