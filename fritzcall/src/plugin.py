@@ -401,8 +401,11 @@ class FritzCallFBF:
 			debug("[FritzCallFBF] _gotPageLogin: found sid: " + self._md5Sid)
 
 	def _errorLogin(self, error):
+		global fritzbox
 		debug("[FritzCallFBF] _errorLogin: %s" % (error))
-		text = _("FRITZ!Box - Error logging in: %s") % error
+		text = _("FRITZ!Box - Error logging in: %s\nDisabling plugin.") % error.getErrorMessage()
+		# config.plugins.FritzCall.enable.value = False
+		fritzbox = None
 		self._notify(text)
 
 	def _logout(self):
@@ -422,7 +425,7 @@ class FritzCallFBF:
 
 	def _errorLogout(self, error):
 		debug("[FritzCallFBF] _errorLogout: %s" % (error))
-		text = _("FRITZ!Box - Error logging out: %s") % error
+		text = _("FRITZ!Box - Error logging out: %s") % error.getErrorMessage()
 		self._notify(text)
 
 	def loadFritzBoxPhonebook(self):
@@ -555,7 +558,7 @@ class FritzCallFBF:
 
 	def _errorLoad(self, error):
 		debug("[FritzCallFBF] _errorLoad: %s" % (error))
-		text = _("FRITZ!Box - Could not load phonebook: %s") % error
+		text = _("FRITZ!Box - Could not load phonebook: %s") % error.getErrorMessage()
 		self._notify(text)
 
 	def getCalls(self, callScreen, callback, type):
@@ -692,7 +695,7 @@ class FritzCallFBF:
 
 	def _errorCalls(self, error):
 		debug("[FritzCallFBF] _errorCalls: %s" % (error))
-		text = _("FRITZ!Box - Could not load calls: %s") % error
+		text = _("FRITZ!Box - Could not load calls: %s") % error.getErrorMessage()
 		self._notify(text)
 
 	def dial(self, number):
@@ -730,7 +733,7 @@ class FritzCallFBF:
 
 	def _errorDial(self, error):
 		debug("[FritzCallFBF] errorDial: $s" % error)
-		text = _("FRITZ!Box - Dialling failed: %s") % error
+		text = _("FRITZ!Box - Dialling failed: %s") % error.getErrorMessage()
 		self._notify(text)
 
 	def changeWLAN(self, statusWLAN):
@@ -770,7 +773,7 @@ class FritzCallFBF:
 
 	def _errorChangeWLAN(self, error):
 		debug("[FritzCallFBF] _errorChangeWLAN: $s" % error)
-		text = _("FRITZ!Box - Failed changing WLAN: %s") % error
+		text = _("FRITZ!Box - Failed changing WLAN: %s") % error.getErrorMessage()
 		self._notify(text)
 
 	def changeMailbox(self, whichMailbox):
@@ -830,7 +833,7 @@ class FritzCallFBF:
 
 	def _errorChangeMailbox(self, error):
 		debug("[FritzCallFBF] _errorChangeMailbox: $s" % error)
-		text = _("FRITZ!Box - Failed changing Mailbox: %s") % error
+		text = _("FRITZ!Box - Failed changing Mailbox: %s") % error.getErrorMessage()
 		self._notify(text)
 
 	def getInfo(self, callback):
@@ -1094,7 +1097,7 @@ class FritzCallFBF:
 
 	def _errorGetInfo(self, error):
 		debug("[FritzCallFBF] _errorGetInfo: %s" % (error))
-		text = _("FRITZ!Box - Error getting status: %s") % error
+		text = _("FRITZ!Box - Error getting status: %s") % error.getErrorMessage()
 		self._notify(text)
 		# linkP = open("/tmp/FritzCall_errorGetInfo.htm", "w")
 		# linkP.write(error)
@@ -1135,7 +1138,7 @@ class FritzCallFBF:
 
 	def _errorReset(self, error):
 		debug("[FritzCallFBF] _errorReset: %s" % (error))
-		text = _("FRITZ!Box - Error resetting: %s") % error
+		text = _("FRITZ!Box - Error resetting: %s") % error.getErrorMessage()
 		self._notify(text)
 
 #===============================================================================
@@ -1160,7 +1163,7 @@ class FritzCallFBF:
 #			postdata=parms)
 #===============================================================================
 
-fritzbox = FritzCallFBF()
+fritzbox = None
 
 class FritzMenu(Screen,HelpableScreen):
 	def __init__(self, session):
@@ -2014,7 +2017,7 @@ class FritzCallPhonebook:
 #				debug("[FritzCallPhonebook] LDIF import failed" %line)
 #===============================================================================
 		
-		if config.plugins.FritzCall.fritzphonebook.value:
+		if fritzbox and config.plugins.FritzCall.fritzphonebook.value:
 			fritzbox.loadFritzBoxPhonebook()
 
 		if DESKTOP_WIDTH <> 1280 or DESKTOP_HEIGHT <> 720:
@@ -2667,7 +2670,10 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		for x in self["config"].list:
 			x[1].save()
 		if fritz_call:
-			fritz_call.connect()
+			if config.plugins.FritzCall.enable.value:
+				fritz_call.connect()
+			else:
+				fritz_call.shutdown()
 		self.close()
 
 	def cancel(self):
@@ -2678,7 +2684,10 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def displayCalls(self):
 		if config.plugins.FritzCall.enable.value:
-			self.session.open(FritzDisplayCalls)
+			if fritzbox:
+				self.session.open(FritzDisplayCalls)
+			else:
+				self.session.open(MessageBox, _("Cannot get calls from FRITZ!Box"), type=MessageBox.TYPE_INFO)
 		else:
 			self.session.open(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
@@ -2696,7 +2705,10 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def menu(self):
 		if config.plugins.FritzCall.enable.value:
-			self.session.open(FritzMenu)
+			if fritzbox and fritzbox.info:
+				self.session.open(FritzMenu)
+			else:
+				self.session.open(MessageBox, _("Cannot get infos from FRITZ!Box"), type=MessageBox.TYPE_INFO)
 		else:
 			self.session.open(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
@@ -3099,16 +3111,21 @@ class FritzClientFactory(ReconnectingClientFactory):
 		if not self.hangup_ok:
 			Notifications.AddNotification(MessageBox, _("Connection to FRITZ!Box! lost\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
+		# config.plugins.FritzCall.enable.value = False
+		fritzbox = None
 
 	def clientConnectionFailed(self, connector, reason):
 		Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box failed\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		ReconnectingClientFactory.clientConnectionFailed(self, connector, reason)
-
+		# config.plugins.FritzCall.enable.value = False
+		fritzbox = None
+		
 class FritzCall:
 	def __init__(self):
 		self.dialog = None
 		self.d = None
-		self.connect()
+		if config.plugins.FritzCall.enable.value:
+			self.connect()
 
 	def connect(self):
 		self.abort()
@@ -3128,7 +3145,10 @@ class FritzCall:
 
 def displayCalls(session, servicelist=None): #@UnusedVariable
 	if config.plugins.FritzCall.enable.value:
-		session.open(FritzDisplayCalls)
+		if fritzbox:
+			session.open(FritzDisplayCalls)
+		else:
+			Notifications.AddNotification(MessageBox, _("Cannot get calls from FRITZ!Box"), type=MessageBox.TYPE_INFO)
 	else:
 		Notifications.AddNotification(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
@@ -3143,7 +3163,10 @@ def displayPhonebook(session, servicelist=None): #@UnusedVariable
 
 def displayFBFStatus(session, servicelist=None): #@UnusedVariable
 	if config.plugins.FritzCall.enable.value:
-		session.open(FritzMenu)
+		if fritzbox and fritzbox.info:
+			session.open(FritzMenu)
+		else:
+			Notifications.AddNotification(MessageBox, _("Cannot get infos from FRITZ!Box"), type=MessageBox.TYPE_INFO)
 	else:
 		Notifications.AddNotification(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
