@@ -6,6 +6,7 @@ from netgrowl import GrowlRegistrationPacket, GrowlNotificationPacket, \
 from twisted.internet.protocol import DatagramProtocol
 from twisted.internet import reactor
 from struct import unpack
+from socket import gaierror
 
 from Screens.Setup import SetupSummary
 from Screens.Screen import Screen
@@ -75,9 +76,17 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 		if self["config"].isChanged():
 			global port
 			if port:
-				port.stopListening()
+				def maybeConnect(*args, **kwargs):
+					if config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
+						global port
+						port = reactor.listenUDP(GROWL_UDP_PORT, growlProtocolOneWrapper)
 
-			if config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
+				d = port.stopListening()
+				if d is not None:
+					d.addCallback(maybeConnect).addErrback(emergencyDisable)
+				else:
+					maybeConnect()
+			elif config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
 				port = reactor.listenUDP(GROWL_UDP_PORT, growlProtocolOneWrapper)
 
 		self.saveAll()
@@ -86,13 +95,30 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 def configuration(session, **kwargs):
 	session.open(GrowleeConfiguration)
 
+def emergencyDisable(*args, **kwargs):
+	global port
+	if port:
+		port.stopListening()
+		port = None
+
+	if gotNotification in Notifications.notificationAdded:
+		Notifications.notificationAdded.remove(gotNotification)
+	Notifications.AddPopup(
+		_("Network error.\nDisabling Growlee!"),
+		MessageBox.TYPE_ERROR,
+		10
+	)
+
 class GrowlProtocolOneWrapper(DatagramProtocol):
 	def startProtocol(self):
 		if config.plugins.growlee.enable_outgoing.value:
 			addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
 			p = GrowlRegistrationPacket(password=config.plugins.growlee.password.value)
 			p.addNotification()
-			self.transport.write(p.payload(), addr)
+			try:
+				self.transport.write(p.payload(), addr)
+			except gaierror:
+				emergencyDisable()
 
 	def sendNotification(self, *args, **kwargs):
 		if not self.transport or not config.plugins.growlee.enable_outgoing.value:
@@ -100,7 +126,10 @@ class GrowlProtocolOneWrapper(DatagramProtocol):
 
 		addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
 		p = GrowlNotificationPacket(*args, **kwargs)
-		self.transport.write(p.payload(), addr)
+		try:
+			self.transport.write(p.payload(), addr)
+		except gaierror:
+			emergencyDisable()
 
 	def datagramReceived(self, data, addr):
 		Len = len(data)
