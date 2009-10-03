@@ -145,6 +145,7 @@ def gotNotification():
 				description = kwargs["text"]
 			else:
 				description = args[0]
+			description = description.decode('utf-8')
 
 			growlProtocolOneWrapper.sendNotification(title="Dreambox", description=description, password=config.plugins.growlee.password.value)
 
