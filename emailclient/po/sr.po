@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Plugin EmailClient\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-22 22:02+0200\n"
+"POT-Creation-Date: 2009-10-03 17:26+0200\n"
 "PO-Revision-Date: 2009-09-27 17:49+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -31,6 +31,9 @@ msgstr "Sanduče %s je prazno"
 msgid "Date"
 msgstr "Datum"
 
+msgid "Debug"
+msgstr ""
+
 msgid "Email Client"
 msgstr "Imejl klijent"
 
@@ -42,9 +45,6 @@ msgstr "IMAP Port"
 
 msgid "IMAP Server"
 msgstr "IMAP Server"
-
-msgid "In"
-msgstr "U"
 
 msgid ""
 "In order of missing standart python library files\n"
@@ -79,21 +79,63 @@ msgstr "Korisn. ime"
 msgid "cancel"
 msgstr "otkaži"
 
+msgid "cannot access inbox"
+msgstr ""
+
+#, python-format
+msgid "cannot access mailbox '%(mboxname)s'"
+msgstr ""
+
+msgid "cannot get capabilities of mailserver"
+msgstr ""
+
+msgid "cannot get headers of new messages"
+msgstr ""
+
+msgid "cannot get list of new messages"
+msgstr ""
+
+#, fuzzy
+msgid "check interval (minutes)"
+msgstr "Interval za proveru novih poruka (u minutima)"
+
 msgid "connected"
 msgstr "spojen"
 
+#, python-format
+msgid "connection to %(server)s:%(port)d failed"
+msgstr ""
+
+#, python-format
+msgid ""
+"connection to %(server)s:%(port)d failed:\n"
+"%(reason)s"
+msgstr ""
+
 msgid "delete"
 msgstr "obriši"
+
+#, fuzzy
+msgid "display timeout (seconds)"
+msgstr "vreme prikazivanja nove poruke (sekunde)"
+
+msgid "encrypted login failed, trying without encryption"
+msgstr ""
+
+#, fuzzy
+msgid "failed to load message"
+msgstr "učitavam poruku"
 
 #, python-format
 msgid "have %d messages"
 msgstr "ima %d poruka"
 
+#, fuzzy
+msgid "have no messages"
+msgstr "ima %d poruka"
+
 msgid "headers loaded, now parsing ..."
 msgstr "Zaglavlja učitana, sad raščlanjujem ..."
-
-msgid "interval to check for new mails (minutes)"
-msgstr "Interval za proveru novih poruka (u minutima)"
 
 msgid "leave unread"
 msgstr "ostavi nepročitano"
@@ -108,8 +150,8 @@ msgstr "učitavam poruku"
 msgid "logged in"
 msgstr "regstrovan"
 
-msgid "mail check process stopped"
-msgstr "proces provere poruka zaustavljen"
+msgid "login failed"
+msgstr ""
 
 msgid "max of Headers to load"
 msgstr "maksimum zaglavlja za učitavanje"
@@ -156,9 +198,6 @@ msgstr "Izaberi oblik"
 msgid "show deleted entries"
 msgstr "pokaži obrisane unose"
 
-msgid "timeout displaying new mails (seconds)"
-msgstr "vreme prikazivanja nove poruke (sekunde)"
-
 msgid "undelete"
 msgstr "restauriraj"
 
@@ -171,3 +210,8 @@ msgstr "vidi imejlove preko IMAP4"
 msgid "yes"
 msgstr "da"
 
+#~ msgid "In"
+#~ msgstr "U"
+
+#~ msgid "mail check process stopped"
+#~ msgstr "proces provere poruka zaustavljen"

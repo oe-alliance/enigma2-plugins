@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-22 22:02+0200\n"
+"POT-Creation-Date: 2009-10-03 17:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,6 +29,9 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
+msgid "Debug"
+msgstr ""
+
 msgid "Email Client"
 msgstr ""
 
@@ -39,9 +42,6 @@ msgid "IMAP Port"
 msgstr ""
 
 msgid "IMAP Server"
-msgstr ""
-
-msgid "In"
 msgstr ""
 
 msgid ""
@@ -71,20 +71,58 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
+msgid "cannot access inbox"
+msgstr ""
+
+#, python-format
+msgid "cannot access mailbox '%(mboxname)s'"
+msgstr ""
+
+msgid "cannot get capabilities of mailserver"
+msgstr ""
+
+msgid "cannot get headers of new messages"
+msgstr ""
+
+msgid "cannot get list of new messages"
+msgstr ""
+
+msgid "check interval (minutes)"
+msgstr ""
+
 msgid "connected"
 msgstr ""
 
+#, python-format
+msgid "connection to %(server)s:%(port)d failed"
+msgstr ""
+
+#, python-format
+msgid ""
+"connection to %(server)s:%(port)d failed:\n"
+"%(reason)s"
+msgstr ""
+
 msgid "delete"
+msgstr ""
+
+msgid "display timeout (seconds)"
+msgstr ""
+
+msgid "encrypted login failed, trying without encryption"
+msgstr ""
+
+msgid "failed to load message"
 msgstr ""
 
 #, python-format
 msgid "have %d messages"
 msgstr ""
 
-msgid "headers loaded, now parsing ..."
+msgid "have no messages"
 msgstr ""
 
-msgid "interval to check for new mails (minutes)"
+msgid "headers loaded, now parsing ..."
 msgstr ""
 
 msgid "leave unread"
@@ -100,7 +138,7 @@ msgstr ""
 msgid "logged in"
 msgstr ""
 
-msgid "mail check process stopped"
+msgid "login failed"
 msgstr ""
 
 msgid "max of Headers to load"
@@ -146,9 +184,6 @@ msgid "select Body"
 msgstr ""
 
 msgid "show deleted entries"
-msgstr ""
-
-msgid "timeout displaying new mails (seconds)"
 msgstr ""
 
 msgid "undelete"

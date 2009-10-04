@@ -14,7 +14,7 @@ from Tools import Notifications
 from enigma import eListboxPythonMultiContent, gFont, eTimer
 from twisted.mail import imap4
 from zope.interface import implements
-import email
+import email, time
 from email.header import decode_header
 from TagStrip import strip_readable
 from protocol import createFactory
@@ -117,7 +117,7 @@ class EmailScreen(Screen, EmailHandler):
 
 		self.skin = EmailScreen.skin
 		Screen.__init__(self, session)
-		createFactory(self, config.plugins.emailimap.username.value, config.plugins.emailimap.server.value, config.plugins.emailimap.port.value)
+		self.factory = createFactory(self, config.plugins.emailimap.username.value, config.plugins.emailimap.server.value, config.plugins.emailimap.port.value)
 
 		self["actions"] = ActionMap(["InfobarChannelSelection", "WizardActions", "DirectionActions", "MenuActions", "ShortcutActions", "GlobalActions", "HelpActions", "NumberActions", "ChannelSelectBaseActions"],
 			{
@@ -251,13 +251,16 @@ class EmailScreen(Screen, EmailHandler):
 		self["infolabel"].setText(_("failed to load message") + ': ' + failure.getErrorMessage())
 
 	def action_exit(self):
-		if self.proto is not None:
+		global mailChecker
+		if not mailChecker and self.proto is not None:
 			self.proto.logout().addCallback(self.onLogedOut, self.proto).addErrback(self.onLogedOut, self.proto)
 		else:
+			self.factory.stopFactory()
 			self.close()
 
 	def onLogedOut(self, result, proto):
 		debug("[EmailScreen] onLogedOut: " + str(result))
+		self.factory.stopFactory()()
 		self.close()
 
 	def onConnect(self, proto):
@@ -266,13 +269,14 @@ class EmailScreen(Screen, EmailHandler):
 						).addCallback(self.cbCapabilities, proto
 						).addErrback(self.ebCapabilities, proto
 						)
+		self.factory.resetDelay()
 
 	def cbCapabilities(self,reason,proto):
 		debug("[EmailScreen] \n\
 ####################################################################################################\n\
 # If you have problems to log into your imap-server, please send me the output of the following line\n\
 # cbCapabilities: " + str(reason) +"\n\
-####################################################################################################")
+####################################################################################################\n")
 		self.doLogin(proto)
 
 	def ebCapabilities(self,reason,proto):
@@ -282,6 +286,7 @@ class EmailScreen(Screen, EmailHandler):
 		debug("[EmailScreen] onConnectFailed: " + reason.getErrorMessage())
 		if self.has_key('infolabel'):
 			self["infolabel"].setText(_("connection to %(server)s:%(port)d failed") %{'server':config.plugins.emailimap.server.value,'port':config.plugins.emailimap.port.value}) # + ': ' + reason.getErrorMessage()) # the messages provided by twisted are crap here
+		self.action_exit()
 
 	def onAuthentication(self, result, proto):
 		self.proto = proto
@@ -692,14 +697,17 @@ def MessageCB(*args):
 
 class CheckMail:
 	implements(imap4.IMailboxListener)
-	
+	_timer = None
+
 	def __init__(self):
-		debug('[CheckMail] __init__')
-		createFactory(self, config.plugins.emailimap.username.value, config.plugins.emailimap.server.value, config.plugins.emailimap.port.value)
-		self._timer = eTimer()
-		# self._timer.timeout.get().append(self._checkMail)
-		self._timer.callback.append(self._checkMail)
-		self._timer.start(config.plugins.emailimap.checkPeriod.value*60*1000) # it is minutes
+		debug('[CheckMail] __init__ on %s' %time.ctime())
+		self.factory = createFactory(self, config.plugins.emailimap.username.value, config.plugins.emailimap.server.value, config.plugins.emailimap.port.value)
+		if not self._timer:
+			debug('[CheckMail] __init__ creatings timer: %s' %time.ctime())
+			self._timer = eTimer()
+			# self._timer.timeout.get().append(self._checkMail)
+			self._timer.callback.append(self._checkMail)
+			self._timer.start(config.plugins.emailimap.checkPeriod.value*60*1000) # it is minutes
 		self._unseenList = None
 		self._proto = None
 
@@ -708,11 +716,14 @@ class CheckMail:
 			self._proto.logout()
 			self._proto = None
 		self._timer.stop()
+		self.factory.stopFactory()
 
 	def _checkMail(self):
-		debug('[CheckMail] _checkMail ')
+		debug('[CheckMail] _checkMail on %s' %time.ctime())
 		if self._proto:
 			self._proto.search(imap4.Query(unseen=1)).addCallback(self._cbNotify).addErrback(self._ebNotify, _("cannot get list of new messages"))
+		else:
+			self.factory.retry()
 
 	def _cbNotify(self, newUnseenList):
 		def haveNotSeenBefore(messageNo): return messageNo not in self._unseenList
@@ -740,30 +751,28 @@ class CheckMail:
 
 	def _ebNotify(self, result, where, what):
 		debug("[CheckMail] _ebNotify error in %s: %s: %s" %(where, what, result.getErrorMessage()))
-		Notifications.AddNotification(MessageBox, "EmailClient:\n\n" + what + '\n\n' + _("mail check process stopped"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
-		self.exit()
+		Notifications.AddNotification(MessageBox, "EmailClient:\n\n" + what, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+		# self.exit()
 
 	def _cbOk(self, result):
 		debug("[CheckMail] _cbOk result: %s" %repr(result))
 
-	def onConnect(self, proto=None):
-		debug('[CheckMail] onConnect ')
-		if not proto:
-			proto = self._proto
-		else:
-			self._proto = proto
+	def onConnect(self, proto):
+		debug('[CheckMail] onConnect ' + str(proto))
+		self._proto = proto
 		proto.getCapabilities().addCallback(self._cbCapabilities).addErrback(self._ebNotify, "getCapabilities", _("cannot get capabilities of mailserver"))
 
 	def onConnectFailed(self, reason):
 		debug('[CheckMail] onConnectFailed: ' + reason.getErrorMessage())
 		self._ebNotify(reason, "onConnectFailed", _("connection to %(server)s:%(port)d failed:\n%(reason)s") %{'server':config.plugins.emailimap.server.value,'port':config.plugins.emailimap.port.value,'reason':reason.getErrorMessage()})
+		self._proto = None
 
 	def _cbCapabilities(self,reason):
 		debug("[CheckMail] _cbCapabilities\n\
 ####################################################################################################\n\
 # If you have problems to log into your imap-server, please send me the output of the following line\n\
 # cbCapabilities: " + str(reason) +"\n\
-####################################################################################################")
+####################################################################################################\n")
 		self._doLogin()
 		
 	def _doLogin(self):

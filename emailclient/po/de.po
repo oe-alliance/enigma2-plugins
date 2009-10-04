@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EmailClient Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-22 22:02+0200\n"
-"PO-Revision-Date: 2009-09-22 22:04+0200\n"
+"POT-Creation-Date: 2009-10-03 17:26+0200\n"
+"PO-Revision-Date: 2009-10-03 17:27+0200\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: de <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgid "Attachments"
 msgstr "Anhänge"
 
 msgid "Bodys"
-msgstr "Intervall zur Prüfung auf neue Mails"
+msgstr "Textkörper"
 
 #, python-format
 msgid "Box '%s' is empty"
@@ -27,6 +27,9 @@ msgstr "Mailbox %s ist leer"
 
 msgid "Date"
 msgstr "Datum"
+
+msgid "Debug"
+msgstr "Debug"
 
 msgid "Email Client"
 msgstr "Email Client"
@@ -39,9 +42,6 @@ msgstr "IMAP Port"
 
 msgid "IMAP Server"
 msgstr "IMAP Server"
-
-msgid "In"
-msgstr "In"
 
 msgid ""
 "In order of missing standart python library files\n"
@@ -60,7 +60,7 @@ msgid ""
 "New mail arrived:\n"
 "\n"
 msgstr ""
-"Neue Mail ist angekommen:\n"
+"Neue Nachricht ist angekommen:\n"
 "\n"
 
 msgid "Password"
@@ -75,37 +75,77 @@ msgstr "Benutzername"
 msgid "cancel"
 msgstr "Abbruch"
 
+msgid "cannot access inbox"
+msgstr "Kein Zugriff auf INBOX"
+
+#, python-format
+msgid "cannot access mailbox '%(mboxname)s'"
+msgstr "Kein Zugriff auf Mailbox '%(mboxname)s'"
+
+msgid "cannot get capabilities of mailserver"
+msgstr "Kann Eigenschaften des Mailservers nicht auslesen"
+
+msgid "cannot get headers of new messages"
+msgstr "Kann Header der neuen Nachrichten nicht lesen"
+
+msgid "cannot get list of new messages"
+msgstr "Kann Liste neuer Nachrichten nicht bekommen"
+
+msgid "check interval (minutes)"
+msgstr "Check-Intervall (in Minuten)"
+
 msgid "connected"
-msgstr "verbunden"
+msgstr "Verbunden"
+
+#, python-format
+msgid "connection to %(server)s:%(port)d failed"
+msgstr "Verbindung zu  %(server)s:%(port)d fehlgeschlagen"
+
+#, python-format
+msgid ""
+"connection to %(server)s:%(port)d failed:\n"
+"%(reason)s"
+msgstr ""
+"Verbindung zu  %(server)s:%(port)d fehlgeschlagen\n"
+"%(reason)s"
 
 msgid "delete"
 msgstr "Löschen"
 
+msgid "display timeout (seconds)"
+msgstr "Anzeige-Timeout (in Sekunden)"
+
+msgid "encrypted login failed, trying without encryption"
+msgstr "Verschlüsselte Anmeldung fehlgeschlagen, versuche es unverschlüsselt"
+
+msgid "failed to load message"
+msgstr "Konnte Nachricht nicht laden"
+
 #, python-format
 msgid "have %d messages"
-msgstr "habe %d Mails"
+msgstr "%d Nachrichten"
+
+msgid "have no messages"
+msgstr "Keine Nachrichten"
 
 msgid "headers loaded, now parsing ..."
 msgstr "Header geladen, analysiere diese nun ..."
-
-msgid "interval to check for new mails (minutes)"
-msgstr "Intervall zur Prüfung auf neue Mails (in Minuten)"
 
 msgid "leave unread"
 msgstr "Ungelesen lassen"
 
 #, python-format
 msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
-msgstr "lade Header %(from)d-%(to)d von Mailbox '%(name)s'"
+msgstr "Lade Header %(from)d-%(to)d von Mailbox '%(name)s'"
 
 msgid "loading message"
-msgstr "lade Mail"
+msgstr "Lade Nachricht"
 
 msgid "logged in"
-msgstr "angemeldet"
+msgstr "Angemeldet"
 
-msgid "mail check process stopped"
-msgstr "Abfrage neuer Mails angehalten"
+msgid "login failed"
+msgstr "Anmeldung fehlgeschlagen"
 
 msgid "max of Headers to load"
 msgstr "Maximale Anzahl zu ladende Header"
@@ -129,7 +169,7 @@ msgid "no subject"
 msgstr "kein Betreff"
 
 msgid "notify about new mails"
-msgstr "Benachrichtige bei neuen Mails"
+msgstr "Benachrichtige bei neuen Nachrichten"
 
 msgid "ok"
 msgstr "OK"
@@ -144,16 +184,13 @@ msgid "really undelete Mail?"
 msgstr "Mail wiederherstellen?"
 
 msgid "select Attachment"
-msgstr "wähle Anhang"
+msgstr "Wähle Anhang"
 
 msgid "select Body"
-msgstr "wähle Textteil"
+msgstr "Wähle Textteil"
 
 msgid "show deleted entries"
 msgstr "Anzeige gelöschter Mails"
-
-msgid "timeout displaying new mails (seconds)"
-msgstr "Intervall zur Prüfung auf neue Mails (in Sekunden)"
 
 msgid "undelete"
 msgstr "Löschen rückgängig"
