@@ -3,7 +3,8 @@ from enigma import eConsoleAppContainer
 from twisted.web import resource, http, http_headers, server
 
 from os import path as os_path, remove as os_remove
-
+from os.path import getsize as os_path_getsize
+				
 class GrabResource(resource.Resource):
 	'''
 		this is a interface to Seddis AiO Dreambox Screengrabber
@@ -99,6 +100,7 @@ class GrabStream:
 		print '[Screengrab.py] cmdFinished'
 		if int(data) is 0 and self.target is not None:
 			try:
+				self.request.setHeader('Content-Length', '%i' %os_path_getsize(self.target))
 				fp = open(self.target)
 				self.request.write(fp.read())
 				fp.close()
