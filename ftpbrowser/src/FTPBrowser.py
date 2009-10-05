@@ -133,21 +133,23 @@ class FTPFileList(FileList):
 
 class FTPBrowser(Screen, Protocol, InfoBarNotifications, HelpableScreen):
 	skin = """
-		<screen name="FTPBrowser" position="center,center" size="560,440" title="FTP Browser">
-			<widget source="localText" render="Label" position="20,10" size="200,20" font="Regular;18" />
-			<widget name="local" position="20,40" size="255,320" scrollbarMode="showOnDemand" />
-			<widget source="remoteText" render="Label" position="285,10" size="200,20" font="Regular;18" />
-			<widget name="remote" position="285,40" size="255,320" scrollbarMode="showOnDemand" />
-			<widget source="eta" render="Label" position="20,360" size="200,30" font="Regular;23" />
-			<widget source="speed" render="Label" position="330,360" size="200,30" halign="right" font="Regular;23" />
-			<widget source="progress" render="Progress" position="20,390" size="520,10" />
-			<ePixmap name="green" position="10,400" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="180,400" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="350,400" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<widget source="key_green" render="Label" position="10,400" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget source="key_yellow" render="Label" position="180,400" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget source="key_blue" render="Label" position="350,400" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap position="515,408" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+		<screen name="FTPBrowser" position="center,center" size="600,440" title="FTP Browser">
+			<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap position="565,10" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="localText" render="Label" position="10,50" size="200,20" font="Regular;18" />
+			<widget name="local" position="10,80" size="290,320" scrollbarMode="showOnDemand" />
+			<widget source="remoteText" render="Label" position="300,50" size="200,20" font="Regular;18" />
+			<widget name="remote" position="300,80" size="290,320" scrollbarMode="showOnDemand" />
+			<widget source="eta" render="Label" position="20,410" size="200,30" font="Regular;23" />
+			<widget source="speed" render="Label" position="380,410" size="200,30" halign="right" font="Regular;23" />
+			<widget source="progress" render="Progress" position="20,440" size="560,10" />
 		</screen>"""
 
 	def __init__(self, session):
