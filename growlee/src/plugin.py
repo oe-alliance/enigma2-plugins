@@ -23,7 +23,7 @@ config.plugins.growlee.address = ConfigText(fixed_size=False)
 config.plugins.growlee.password = ConfigPassword()
 
 class GrowleeConfiguration(Screen, ConfigListScreen):
-	skin = """<screen title="Growlee Configuration" position="75,155" size="565,280">
+	skin = """<screen title="Growlee Configuration" position="center,center" size="565,280">
 		<widget name="config" position="5,5" size="555,100" scrollbarMode="showOnDemand" />
 	</screen>"""
 
