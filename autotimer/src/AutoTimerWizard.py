@@ -163,6 +163,11 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, Rc):
 	def deleteBackward(self):
 		self["config"].handleKey(KEY_BACKSPACE)
 
+	def exitWizardQuestion(self, ret = False):
+		if ret:
+			self.doCancel = True
+			self.close()
+
 	def cancel(self):
 		self.doCancel = True
 		self.currStep = len(self.wizard)
