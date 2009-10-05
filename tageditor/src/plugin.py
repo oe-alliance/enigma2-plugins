@@ -8,7 +8,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Components.config import config
 from Components.ActionMap import ActionMap
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.SelectionList import SelectionList
 from enigma import eServiceReference, eServiceCenter, iServiceInformation
 from os import path as os_path
@@ -26,26 +26,26 @@ def Plugins(**kwargs):
 
 class TagEditor(Screen):
 	skin = """
-	<screen name="TagEditor" title="Edit Tags" position="75,155" size="565,280">
-		<widget name="list" position="5,5" size="555,225" scrollbarMode="showOnDemand" />
-		<ePixmap position="0,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,235" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="140,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" position="280,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" position="420,235" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+	<screen name="TagEditor" position="center,center" size="565,280">
+		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="list" position="5,40" size="555,240" scrollbarMode="showOnDemand" />
 	</screen>"""
 
 	def __init__(self, session, tags, txt = None, args = 0, parent = None):
 		Screen.__init__(self, session, parent = parent)
 
 		# Initialize Buttons
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("OK"))
-		self["key_yellow"] = Button(_("New"))
-		self["key_blue"] = Button(_("Load"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_yellow"] = StaticText(_("New"))
+		self["key_blue"] = StaticText(_("Load"))
 
 		self["list"] = SelectionList()
 
@@ -69,6 +69,11 @@ class TagEditor(Screen):
 			"blue": self.loadFromHdd,
 			"menu": self.showMenu
 		}, -1)
+
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("Edit Tags"))
 
 	def addCustom(self):
 		self.session.openWithCallback(
