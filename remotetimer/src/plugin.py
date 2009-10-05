@@ -71,7 +71,7 @@ class RemoteService:
 
 class RemoteTimerScreen(Screen):
 	skin = """
-		<screen position="60,80" size="585,410" title="Remote-Timer digest" >
+		<screen position="center,center" size="585,410" title="Remote-Timer digest" >
 			<widget name="text" position="0,10" zPosition="1" size="585,20" font="Regular;20" halign="center" valign="center" />
 			<widget name="timerlist" position="5,40" size="560,275" scrollbarMode="showOnDemand" />
 			<ePixmap name="red" position="5,365" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
@@ -209,7 +209,7 @@ class E2Timer:
 
 class RemoteTimerSetup(Screen, ConfigListScreen):
 	skin = """
-		<screen position="80,80" size="560,410" title="Settings" >
+		<screen position="center,center" size="560,410" title="Settings" >
 			<widget name="config" position="5,40" size="480,335" scrollbarMode="showOnDemand" />
 			<ePixmap name="red" position="120,280" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green" position="320,280" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />

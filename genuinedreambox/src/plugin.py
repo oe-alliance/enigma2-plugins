@@ -57,7 +57,7 @@ TPMD_CMD_COMPUTE_SIGNATURE = 0x0003
 
 class genuineDreambox(Screen):
     skin = """
-        <screen position="60,80" size="620,420" title="%s" >
+        <screen position="center,center" size="620,420" title="%s" >
         <widget name="infotext" position="10,20" zPosition="1" size="600,150" font="Regular;20" halign="center" valign="center" />
         <widget name="resulttext" position="10,160" zPosition="1" size="600,110" font="Regular;20" halign="center" valign="center" />
         <widget name="infotext2" position="10,280" zPosition="1" size="600,80" font="Regular;20" halign="center" valign="center" />
