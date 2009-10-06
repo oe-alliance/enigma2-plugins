@@ -211,8 +211,8 @@ class MediaDownloader(Screen):
 			lastApprox = round(((newLength - self.lastLength) / (newTime - lastTime) / 1024), 2)
 
 			secLen = int(round(((max-pos) / 1024) / lastApprox))
-			self["eta"].setText(_("ETA %d:%02d min") % (secLen / 60, secLen % 60))
-			self["speed"].setText(_("%d kb/s") % (lastApprox))
+			self["eta"].text = _("ETA %d:%02d min") % (secLen / 60, secLen % 60)
+			self["speed"].text = _("%d kb/s") % (lastApprox)
 
 			self.lastApprox = lastApprox
 			self.lastLength = newLength

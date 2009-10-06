@@ -66,7 +66,7 @@ def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bou
 				{
 					"blue": bluePressed,
 				})
-		self["key_blue"].setText(_("EPG Search"))
+		self["key_blue"].text = _("EPG Search")
 
 # Modified EPGSearchList with support for PartnerBox
 class EPGSearchList(EPGList):
@@ -412,7 +412,7 @@ class EPGSearchEPGSelection(EPGSelection):
 	def __init__(self, session, ref, openPlugin):
 		EPGSelection.__init__(self, session, ref)
 		self.skinName = "EPGSelection"
-		self["key_green"].setText(_("Search"))
+		self["key_green"].text = _("Search")
 		self.openPlugin = openPlugin
 
 	def infoKeyPressed(self):

@@ -34,7 +34,7 @@ class RSSSummary(Screen):
 		self.parent.onChangedEntry.remove(self.selectionChanged)
 
 	def selectionChanged(self, text):
-		self["entry"].setText(text)
+		self["entry"].text = text
 
 class RSSBaseView(Screen):
 	"""Base Screen for all Screens used in SimpleRSS"""
@@ -51,7 +51,7 @@ class RSSBaseView(Screen):
 
 	def setTitle(self, title):
 		Screen.setTitle(self, title)
-		self["title"].setText(title)
+		self["title"].text = title
 
 	def errorPolling(self, errmsg = ""):
 		# An error occured while polling
@@ -208,14 +208,14 @@ class RSSEntryView(RSSBaseView):
 
 	def setContent(self):
 		if self.cur_idx is not None and self.entries is not None:
-			self["info"].setText(_("Entry %s/%s") % (self.cur_idx+1, self.entries))
+			self["info"].text = _("Entry %s/%s") % (self.cur_idx+1, self.entries)
 		else:
-			self["info"].setText("")
+			self["info"].text = ""
 		data = self.data
 		if data:
-			self["content"].setText(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures"))))
+			self["content"].text = ''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures")))
 		else:
-			self["content"].setText(_("No such Item."))
+			self["content"].text = _("No such Item.")
 		self.updateInfo()
 
 	def selectEnclosure(self):
@@ -313,14 +313,14 @@ class RSSFeedView(RSSBaseView):
 	def updateInfo(self):
 		current_entry = self["content"].current
 		if current_entry:
-			self["summary"].setText(current_entry[2])
+			self["summary"].text = current_entry[2]
 
 			cur_idx = self["content"].index
-			self["info"].setText(_("Entry %s/%s") % (cur_idx+1, len(self.feed.history)))
+			self["info"].text = _("Entry %s/%s") % (cur_idx+1, len(self.feed.history))
 			summary_text = current_entry[0]
 		else:
-			self["summary"].setText(_("Feed is empty."))
-			self["info"].setText("")
+			self["summary"].text = _("Feed is empty.")
+			self["info"].text = ""
 			summary_text = _("Feed is empty.")
 
 		for x in self.onChangedEntry:
@@ -440,8 +440,8 @@ class RSSOverview(RSSBaseView):
 
 	def updateInfo(self):
 		current_entry = self["content"].getCurrent()
-		self["summary"].setText(' '.join((str(len(current_entry.history)), _("Entries"))))
-		self["info"].setText(_("Feed %s/%s") % (self["content"].getSelectedIndex()+1, len(self.feeds)))
+		self["summary"].text = ' '.join((str(len(current_entry.history)), _("Entries")))
+		self["info"].text = _("Feed %s/%s") % (self["content"].getSelectedIndex()+1, len(self.feeds))
 		summary_text = current_entry.title
 
 		for x in self.onChangedEntry:
