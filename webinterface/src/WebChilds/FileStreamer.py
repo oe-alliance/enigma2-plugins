@@ -22,7 +22,12 @@ class FileStreamer(resource.Resource):
 				path = "/hdd/movie/%s" % (filename)
 
 			if os_path.exists(path):
-				file = static.File(path)
+				basename = filename.encode('ascii', 'ignore')
+				if '/' in basename:
+					basename = basename.split('/')[-1]
+
+				request.setHeader("content-disposition", "attachment;filename=\"%s\"" % (basename))
+				file = static.File(path, defaultType = "application/octet-stream")
 				return file.render(request)
 
 			else:
