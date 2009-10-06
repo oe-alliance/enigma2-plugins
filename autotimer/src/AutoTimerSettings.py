@@ -10,16 +10,24 @@ from Screens.Setup import SetupSummary
 
 # GUI (Components)
 from Components.ActionMap import ActionMap
-from Components.Label import Label
-from Components.Pixmap import Pixmap
+from Components.Sources.StaticText import StaticText
 
 # Configuration
 from Components.config import config, getConfigListEntry
 
 class AutoTimerSettings(Screen, ConfigListScreen):
+	skin = """<screen name="AutoTimerSettings" title="AutoTimer Settings" position="center,center" size="565,370">
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget name="config" position="5,50" size="555,250" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,301" zPosition="1" size="565,2" />
+		<widget source="help" render="Label" position="5,305" size="555,63" font="Regular;21" />
+	</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = "Setup"
 
 		# Summary
 		self.setup_title = _("AutoTimer Settings")
@@ -28,24 +36,23 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(
 			self,
 			[
-				getConfigListEntry(_("Poll automatically"), config.plugins.autotimer.autopoll),
-				getConfigListEntry(_("Poll Interval (in h)"), config.plugins.autotimer.interval),
-				getConfigListEntry(_("Show in Extensionmenu"), config.plugins.autotimer.show_in_extensionsmenu),
-				getConfigListEntry(_("Modify existing Timers"), config.plugins.autotimer.refresh),
-				getConfigListEntry(_("Guess existing Timer based on Begin/End"), config.plugins.autotimer.try_guessing),
-				getConfigListEntry(_("Add timer as disabled on conflict"), config.plugins.autotimer.disabled_on_conflict),
-				getConfigListEntry(_("Editor for new AutoTimers"), config.plugins.autotimer.editor),
+				getConfigListEntry(_("Poll automatically"), config.plugins.autotimer.autopoll, _("Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button.")),
+				getConfigListEntry(_("Poll Interval (in h)"), config.plugins.autotimer.interval, _("This is the delay in hours that the AutoTimer will wait after a search to search the EPG again.")),
+				getConfigListEntry(_("Show in extension menu"), config.plugins.autotimer.show_in_extensionsmenu, _("Enable this to be able to access the AutoTimer Overview from within the extension menu.")),
+				getConfigListEntry(_("Modify existing timers"), config.plugins.autotimer.refresh, _("This setting controls the behaviour when a timer matches a found event.")),
+				getConfigListEntry(_("Guess existing timer based on begin/end"), config.plugins.autotimer.try_guessing, _("If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it.")),
+				getConfigListEntry(_("Add timer as disabled on conflict"), config.plugins.autotimer.disabled_on_conflict, _("This toggles the behaviour on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled.")),
+				getConfigListEntry(_("Editor for new AutoTimers"), config.plugins.autotimer.editor, _("The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor.")),
 			],
 			session = session,
 			on_change = self.changed
 		)
+		self["config"].onSelectionChanged.append(self.updateHelp)
 
 		# Initialize widgets
-		self["oktext"] = Label(_("OK"))
-		self["canceltext"] = Label(_("Cancel"))
-		self["ok"] = Pixmap()
-		self["cancel"] = Pixmap()
-		self["title"] = Label(_("AutoTimer Settings"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["help"] = StaticText()
 
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions"],
@@ -63,12 +70,14 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 	def setCustomTitle(self):
 		self.setTitle(_("Configure AutoTimer behavior"))
 
+	def updateHelp(self):
+		cur = self["config"].getCurrent()
+		if cur:
+			self["help"].text = cur[2]
+
 	def changed(self):
 		for x in self.onChangedEntry:
-			try:
-				x()
-			except Exception:
-				pass
+			x()
 
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
