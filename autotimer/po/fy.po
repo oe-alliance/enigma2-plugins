@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: autotimer_fy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-03 18:36+0200\n"
+"POT-Creation-Date: 2009-10-06 19:53+0200\n"
 "PO-Revision-Date: 2009-01-09 20:55+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
@@ -34,7 +34,7 @@ msgstr ""
 msgid "After event"
 msgstr "Nei it barren"
 
-msgid "All non-repeating Timers"
+msgid "All non-repeating timers"
 msgstr "Alle net-herhelle Tiidstjoeringen"
 
 msgid "Ammount of recordings left"
@@ -153,6 +153,11 @@ msgstr "Filterjen ynskeakelje"
 msgid "Enable Service Restriction"
 msgstr "Service beperking ynskeakelje"
 
+msgid ""
+"Enable this to be able to access the AutoTimer Overview from within the "
+"extension menu."
+msgstr ""
+
 msgid "Enabled"
 msgstr "Ynskeakele"
 
@@ -202,8 +207,14 @@ msgstr ""
 msgid "Friday"
 msgstr "Freed"
 
-msgid "Guess existing Timer based on Begin/End"
+msgid "Guess existing timer based on begin/end"
 msgstr "In gok nei in besteand Tiidsbarren besjoen nei Begjin/EinTiid"
+
+#, python-format
+msgid ""
+"If this is enabled an existing timer will also be considered recording an "
+"event if it records at least 80% of the it."
+msgstr ""
 
 msgid "Import AutoTimer"
 msgstr "Ymport AutoTimer"
@@ -260,7 +271,7 @@ msgid ""
 "time (without offset) it won't be matched."
 msgstr ""
 
-msgid "Modify existing Timers"
+msgid "Modify existing timers"
 msgstr "Bewurkje besteande Tiidsbarren"
 
 msgid "Monday"
@@ -302,7 +313,7 @@ msgstr "By eltse service"
 msgid "On same service"
 msgstr "By lykese service"
 
-msgid "Only AutoTimers created during this Session"
+msgid "Only AutoTimers created during this session"
 msgstr "Allinee AutoTimers makke yn dizze sesje"
 
 msgid "Only match during timespan"
@@ -372,7 +383,7 @@ msgid "Search type"
 msgstr ""
 
 msgid ""
-"Select \"exact match\" to enforce the \"Match title\" to match exactly or "
+"Select \"exact match\" to enforce \"Match title\" to match exactly or "
 "\"partial match\" if you only want to search for a part of the event title."
 msgstr ""
 
@@ -410,10 +421,10 @@ msgid "Should this AutoTimer only match up to a certain event duration?"
 msgstr ""
 
 msgid ""
-"Should timers created by this AutoTimer be recorded into a custom location?"
+"Should timers created by this AutoTimer be recorded to a custom location?"
 msgstr ""
 
-msgid "Show in Extensionmenu"
+msgid "Show in extension menu"
 msgstr ""
 
 msgid "Sort AutoTimer"
@@ -460,6 +471,11 @@ msgid ""
 "The counter can automatically be reset to the limit at certain intervals."
 msgstr ""
 
+msgid ""
+"The editor to be used for new AutoTimers. This can either be the Wizard or "
+"the classic editor."
+msgstr ""
+
 msgid "The match attribute is mandatory."
 msgstr "It syk attribuut is ferplicht."
 
@@ -469,9 +485,23 @@ msgid ""
 msgstr ""
 
 msgid ""
+"This is the delay in hours that the AutoTimer will wait after a search to "
+"search the EPG again."
+msgstr ""
+
+msgid ""
 "This is what will be looked for in event titles. Note that looking for e.g. "
 "german umlauts can be tricky as you have to know the encoding the channel "
 "uses."
+msgstr ""
+
+msgid "This setting controls the behaviour when a timer matches a found event."
+msgstr ""
+
+msgid ""
+"This toggles the behaviour on timer conflicts. If an AutoTimer matches an "
+"event that conflicts with an existing timer it will not ignore this event "
+"but add it disabled."
 msgstr ""
 
 msgid "Thursday"
@@ -488,6 +518,12 @@ msgstr "Tiidsbarren type"
 
 msgid "Tuesday"
 msgstr "Tiisdei"
+
+msgid ""
+"Unless this is enabled AutoTimer will NOT automatically look for events "
+"matching your AutoTimers but only when you leave the GUI with the green "
+"button."
+msgstr ""
 
 msgid "Upper bound of timespan."
 msgstr ""
@@ -533,7 +569,7 @@ msgstr ""
 
 msgid ""
 "With this option enabled the channel to record on can be changed to a "
-"alternative service it is restricted on."
+"alternative service it is restricted to."
 msgstr ""
 
 msgid ""

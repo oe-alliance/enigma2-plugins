@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-03 18:52+0200\n"
+"POT-Creation-Date: 2009-10-06 19:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Add new AutoTimer"
 msgstr ""
 
-#: ../src/AutoTimerSettings.py:36
+#: ../src/AutoTimerSettings.py:44
 msgid "Add timer as disabled on conflict"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgid "After event"
 msgstr ""
 
 #: ../src/plugin.py:22
-msgid "All non-repeating Timers"
+msgid "All non-repeating timers"
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:546
@@ -56,7 +56,7 @@ msgstr ""
 msgid "AutoTimer Services"
 msgstr ""
 
-#: ../src/AutoTimerSettings.py:25 ../src/AutoTimerSettings.py:48
+#: ../src/AutoTimerSettings.py:33
 msgid "AutoTimer Settings"
 msgstr ""
 
@@ -78,8 +78,8 @@ msgstr ""
 
 #: ../src/AutoTimerEditor.py:393 ../src/AutoTimerEditor.py:811
 #: ../src/AutoTimerEditor.py:1014 ../src/AutoTimerImporter.py:44
-#: ../src/AutoTimerImporter.py:118 ../src/AutoTimerPreview.py:61
-#: ../src/AutoTimerSettings.py:45
+#: ../src/AutoTimerImporter.py:118 ../src/AutoTimerPreview.py:59
+#: ../src/AutoTimerSettings.py:54
 msgid "Cancel"
 msgstr ""
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Close and save changes"
 msgstr ""
 
-#: ../src/AutoTimerSettings.py:64
+#: ../src/AutoTimerSettings.py:71
 msgid "Configure AutoTimer behavior"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Editing"
 msgstr ""
 
-#: ../src/AutoTimerSettings.py:37
+#: ../src/AutoTimerSettings.py:45
 msgid "Editor for new AutoTimers"
 msgstr ""
 
@@ -191,6 +191,12 @@ msgstr ""
 
 #: ../src/AutoTimerEditor.py:1056
 msgid "Enable Service Restriction"
+msgstr ""
+
+#: ../src/AutoTimerSettings.py:41
+msgid ""
+"Enable this to be able to access the AutoTimer Overview from within the "
+"extension menu."
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:492 ../src/AutoTimerImporter.py:128
@@ -240,8 +246,15 @@ msgstr ""
 msgid "Friday"
 msgstr ""
 
-#: ../src/AutoTimerSettings.py:35
-msgid "Guess existing Timer based on Begin/End"
+#: ../src/AutoTimerSettings.py:43
+msgid "Guess existing timer based on begin/end"
+msgstr ""
+
+#: ../src/AutoTimerSettings.py:43
+#, python-format
+msgid ""
+"If this is enabled an existing timer will also be considered recording an "
+"event if it records at least 80% of the it."
 msgstr ""
 
 #: ../src/AutoTimerImporter.py:220
@@ -299,8 +312,8 @@ msgid ""
 "time (without offset) it won't be matched."
 msgstr ""
 
-#: ../src/AutoTimerSettings.py:34
-msgid "Modify existing Timers"
+#: ../src/AutoTimerSettings.py:42
+msgid "Modify existing timers"
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:44
@@ -334,7 +347,7 @@ msgstr ""
 
 #: ../src/AutoTimerEditor.py:394 ../src/AutoTimerEditor.py:1015
 #: ../src/AutoTimerImporter.py:45 ../src/AutoTimerImporter.py:119
-#: ../src/AutoTimerSettings.py:44
+#: ../src/AutoTimerSettings.py:53
 msgid "OK"
 msgstr ""
 
@@ -355,7 +368,7 @@ msgid "On same service"
 msgstr ""
 
 #: ../src/plugin.py:21
-msgid "Only AutoTimers created during this Session"
+msgid "Only AutoTimers created during this session"
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:503 ../src/AutoTimerWizard.py:72
@@ -379,11 +392,11 @@ msgstr ""
 msgid "Please provide a Text to match"
 msgstr ""
 
-#: ../src/AutoTimerSettings.py:32
+#: ../src/AutoTimerSettings.py:40
 msgid "Poll Interval (in h)"
 msgstr ""
 
-#: ../src/AutoTimerSettings.py:31
+#: ../src/AutoTimerSettings.py:39
 msgid "Poll automatically"
 msgstr ""
 
@@ -397,7 +410,7 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: ../src/AutoTimerPreview.py:78
+#: ../src/AutoTimerPreview.py:76
 msgid "Preview AutoTimer"
 msgstr ""
 
@@ -449,7 +462,7 @@ msgstr ""
 
 #: ../src/AutoTimerEditor.py:462
 msgid ""
-"Select \"exact match\" to enforce the \"Match title\" to match exactly or "
+"Select \"exact match\" to enforce \"Match title\" to match exactly or "
 "\"partial match\" if you only want to search for a part of the event title."
 msgstr ""
 
@@ -499,18 +512,18 @@ msgstr ""
 
 #: ../src/AutoTimerEditor.py:482
 msgid ""
-"Should timers created by this AutoTimer be recorded into a custom location?"
+"Should timers created by this AutoTimer be recorded to a custom location?"
 msgstr ""
 
-#: ../src/AutoTimerSettings.py:33
-msgid "Show in Extensionmenu"
-msgstr ""
-
-#: ../src/AutoTimerPreview.py:84
-msgid "Sort AutoTimer"
+#: ../src/AutoTimerSettings.py:41
+msgid "Show in extension menu"
 msgstr ""
 
 #: ../src/AutoTimerPreview.py:82
+msgid "Sort AutoTimer"
+msgstr ""
+
+#: ../src/AutoTimerPreview.py:80
 msgid "Sort Time"
 msgstr ""
 
@@ -531,6 +544,12 @@ msgid ""
 "The counter can automatically be reset to the limit at certain intervals."
 msgstr ""
 
+#: ../src/AutoTimerSettings.py:45
+msgid ""
+"The editor to be used for new AutoTimers. This can either be the Wizard or "
+"the classic editor."
+msgstr ""
+
 #: ../src/AutoTimerEditor.py:644
 msgid "The match attribute is mandatory."
 msgstr ""
@@ -541,11 +560,28 @@ msgid ""
 "and the Preview."
 msgstr ""
 
+#: ../src/AutoTimerSettings.py:40
+msgid ""
+"This is the delay in hours that the AutoTimer will wait after a search to "
+"search the EPG again."
+msgstr ""
+
 #: ../src/AutoTimerEditor.py:460
 msgid ""
 "This is what will be looked for in event titles. Note that looking for e.g. "
 "german umlauts can be tricky as you have to know the encoding the channel "
 "uses."
+msgstr ""
+
+#: ../src/AutoTimerSettings.py:42
+msgid "This setting controls the behaviour when a timer matches a found event."
+msgstr ""
+
+#: ../src/AutoTimerSettings.py:44
+msgid ""
+"This toggles the behaviour on timer conflicts. If an AutoTimer matches an "
+"event that conflicts with an existing timer it will not ignore this event "
+"but add it disabled."
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:47
@@ -567,6 +603,13 @@ msgstr ""
 
 #: ../src/AutoTimerEditor.py:45
 msgid "Tuesday"
+msgstr ""
+
+#: ../src/AutoTimerSettings.py:39
+msgid ""
+"Unless this is enabled AutoTimer will NOT automatically look for events "
+"matching your AutoTimers but only when you leave the GUI with the green "
+"button."
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:477
@@ -612,7 +655,7 @@ msgstr ""
 #: ../src/AutoTimerEditor.py:465
 msgid ""
 "With this option enabled the channel to record on can be changed to a "
-"alternative service it is restricted on."
+"alternative service it is restricted to."
 msgstr ""
 
 #: ../src/AutoTimerEditor.py:478
@@ -711,7 +754,7 @@ msgstr ""
 msgid "in Title"
 msgstr ""
 
-#: ../src/AutoTimerPreview.py:54
+#: ../src/AutoTimerPreview.py:52
 msgid "mins"
 msgstr ""
 
