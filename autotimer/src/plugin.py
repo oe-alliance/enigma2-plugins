@@ -18,8 +18,8 @@ config.plugins.autotimer.autopoll = ConfigEnableDisable(default = False)
 config.plugins.autotimer.interval = ConfigNumber(default = 3)
 config.plugins.autotimer.refresh = ConfigSelection(choices = [
 		("none", _("None")),
-		("auto", _("Only AutoTimers created during this Session")),
-		("all", _("All non-repeating Timers"))
+		("auto", _("Only AutoTimers created during this session")),
+		("all", _("All non-repeating timers"))
 	], default = "none"
 )
 config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = True)
