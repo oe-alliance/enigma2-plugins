@@ -45,7 +45,7 @@ class AutoTimerOverviewSummary(Screen):
 		self.parent.onChangedEntry.remove(self.selectionChanged)
 
 	def selectionChanged(self, text):
-		self["entry"].setText(text)
+		self["entry"].text = text
 
 class AutoTimerOverview(Screen, HelpableScreen):
 	"""Overview of AutoTimers"""
@@ -109,7 +109,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 	def setTitle(self, title):
 		Screen.setTitle(self, title)
-		self["title"].setText(title)
+		self["title"].text = title
 
 	def setCustomTitle(self):
 		self.setTitle(_("AutoTimer overview"))

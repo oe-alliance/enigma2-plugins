@@ -422,15 +422,15 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 	def renameFilterButton(self):
 		if self.filterSet:
-			self["key_yellow"].setText(_("edit filters"))
+			self["key_yellow"].text = _("edit filters")
 		else:
-			self["key_yellow"].setText(_("add filters"))
+			self["key_yellow"].text = _("add filters")
 
 	def renameServiceButton(self):
 		if self.serviceRestriction:
-			self["key_blue"].setText(_("edit services"))
+			self["key_blue"].text = _("edit services")
 		else:
-			self["key_blue"].setText(_("add services"))
+			self["key_blue"].text = _("add services")
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()

@@ -77,9 +77,9 @@ class AutoTimerPreview(Screen):
 
 	def setSortDescription(self):
 		if self.sort_type == 1:
-			self["key_yellow"].setText(_("Sort Time"))
+			self["key_yellow"].text = _("Sort Time")
 		else:
-			self["key_yellow"].setText(_("Sort AutoTimer"))
+			self["key_yellow"].text = _("Sort AutoTimer")
 
 	def sort(self):
 		timers = self.timers
