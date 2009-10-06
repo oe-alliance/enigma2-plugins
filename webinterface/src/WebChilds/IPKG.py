@@ -7,7 +7,7 @@ class IPKGResource(resource.Resource):
 
 	SIMPLECMDS = ( "list", "list_installed", "update", "upgrade" )
 	PACKAGECMDS = ( "info", "status", "install", "remove" )
-	FILECMDS = ( "search" )
+	FILECMDS = ( "search", )
 
 	def render(self, request):
 		self.args = request.args
@@ -21,7 +21,7 @@ class IPKGResource(resource.Resource):
 			elif self.command in IPKGResource.FILECMDS:
 				return self.execFileCmd(request)
 			else:
-				return self.doErrorPage(request, "Unknown command: ", self.command)
+				return self.doErrorPage(request, "Unknown command: "+ self.command)
 		else:
 			return self.doIndexPage(request)
 
