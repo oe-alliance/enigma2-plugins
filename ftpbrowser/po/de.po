@@ -39,7 +39,7 @@ msgid ""
 "What do you want to do?"
 msgstr ""
 "Ein Transfer ist zur Zeit aktiv.\n"
-"Was möchten Sie tun="
+"Was möchten Sie tun?"
 
 msgid "Abort transfer"
 msgstr "Transfer abbrechen"
