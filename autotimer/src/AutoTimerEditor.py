@@ -471,7 +471,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.offsetend: _("Time in minutes to append to recording."),
 			self.duration: _("Should this AutoTimer only match up to a certain event duration?"),
 			self.durationlength: _("Maximum event duration to match. If an event is longer than this ammount of time (without offset) it won't be matched."),
-			self.afterevent: _("Power state to change to after recordings. Select \"standard\" to not change the default behaviour of enigma2 or values changed by yourself."),
+			self.afterevent: _("Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."),
 			self.afterevent_timespan: _("Restrict \"after event\" to a certain timespan?"),
 			self.afterevent_timespanbegin: _("Lower bound of timespan."),
 			self.afterevent_timespanend: _("Upper bound of timespan."),
