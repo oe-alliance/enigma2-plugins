@@ -805,12 +805,6 @@ class CheckMail:
 
 mailChecker = None
 def autostart(reason, **kwargs):
-	# ouch, this is a hack
-	if kwargs.has_key("session"):
-		global my_global_session
-		my_global_session = kwargs["session"]
-		return
-
 	debug("[EmailClient] - Autostart")
 	global mailChecker
 	if config.plugins.emailimap.checkForNewMails.value and not mailChecker:
@@ -819,13 +813,11 @@ def autostart(reason, **kwargs):
 initLog()
 
 def Plugins(path, **kwargs):
-	global plugin_path
-	plugin_path = path
 	return [
 			 PluginDescriptor(name=_("Email Client"), description=_("view Emails via IMAP4"),
 			 where = PluginDescriptor.WHERE_PLUGINMENU,
 			 fnc = main,
 			 icon="plugin.png"
 			 ),
-			 PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)
+			 PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)
 		]
