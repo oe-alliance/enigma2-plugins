@@ -1826,8 +1826,10 @@ class FritzOfferAction(Screen):
 	def finishLayout(self):
 		debug("[FritzCall] FritzOfferAction/finishLayout number: %s/%s" % (self.number, self.name))
 
-		picPixmap = LoadPixmap(findFace(self.number, self.name))
+		faceFile = findFace(self.number, self.name)
+		picPixmap = LoadPixmap(faceFile)
 		if not picPixmap:	# that means most probably, that the picture is not 8 bit...
+			self.session.open(MessageBox, _("Found picture (%s), but did not load.\nProbably not PNG, 8-bit") %faceFile, type = MessageBox.TYPE_ERROR)
 			picPixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_question.png"))
 		picSize = picPixmap.size()
 		self["FacePixmap"].instance.setPixmap(picPixmap)
@@ -2786,16 +2788,6 @@ def findFace(number,name):
 	sep = name.find('\n')
 	if sep != -1: name = name[:sep]
 
-	#===========================================================================
-	# facesFile = ""
-	# for filename in os.listdir(os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")):
-	#	debug("[FritzCall] findFace check: %s name: %s" % (repr(filename.decode('utf-8')), repr(name.decode('utf-8'))))
-	#	if re.match("^" + number + "\.(png|PNG|jpg|JPG)$", filename) or re.match("^" + name.decode('utf-8') + "\.(png|PNG|jpg|JPG)$", filename.decode('utf-8')):
-	#		facesFile = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces", filename)
-	#		break
-	# else:
-	#	facesFile = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_info.png")
-	#===========================================================================
 	facesDir = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")
 	numberFile = os.path.join(facesDir, number)
 	nameFile = os.path.join(facesDir, name)
@@ -2845,7 +2837,11 @@ class MessageBoxPixmap(Screen):
 	def finishLayout(self):
 		debug("[FritzCall] MessageBoxPixmap/setInfoPixmap number: %s/%s" % (self.number, self.name))
 
-		picPixmap = LoadPixmap(findFace(self.number, self.name))
+		faceFile = findFace(self.number, self.name)
+		picPixmap = LoadPixmap(faceFile)
+		if not picPixmap:	# that means most probably, that the picture is not 8 bit...
+			self.session.open(MessageBox, _("Found picture (%s), but did not load.\nProbably not PNG, 8-bit") %faceFile, type = MessageBox.TYPE_ERROR)
+			picPixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_question.png"))
 		picSize = picPixmap.size()
 		self["InfoPixmap"].instance.setPixmap(picPixmap)
 
