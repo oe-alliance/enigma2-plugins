@@ -21,14 +21,13 @@ update_callbacks = []
 class RSSPoller:
 	"""Keeps all Feed and takes care of (automatic) updates"""
 
-	def __init__(self, session, poll = True):
+	def __init__(self, poll = True):
 		# Timer
 		self.poll_timer = eTimer()
 		self.poll_timer.callback.append(self.poll)
 		self.do_poll = poll
 
-		# Save Session, Initialize Var to identify triggered Reload
-		self.session = session
+		# this indicates we're reloading the list of feeds
 		self.reloading = False
 
 		self.newItemFeed = BaseFeed(
@@ -118,13 +117,10 @@ class RSSPoller:
 		except NotImplementedError, errmsg:
 			# Don't show this error when updating in background
 			if id is not None:
-				from Screens.MessageBox import MessageBox
-
-				self.session.open(
-					MessageBox,
+				AddPopup(
 					_("Sorry, this type of feed is unsupported:\n%s") % (str(errmsg)),
-					type = MessageBox.TYPE_INFO,
-					timeout = 5
+					MessageBox.TYPE_INFO,
+					5,
 				)
 			else:
 				# We don't want to stop updating just because one feed is broken

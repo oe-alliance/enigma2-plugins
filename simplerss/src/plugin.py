@@ -46,7 +46,7 @@ def main(session, **kwargs):
 	# Create one if we have none (no autostart)
 	if rssPoller is None:
 		from RSSPoller import RSSPoller
-		rssPoller = RSSPoller(session)
+		rssPoller = RSSPoller()
 
 	# Show Overview when we have feeds
 	if rssPoller.feeds:
@@ -78,7 +78,7 @@ def autostart(reason, **kwargs):
 		kwargs.has_key("session") and reason == 0:
 
 		from RSSPoller import RSSPoller
-		rssPoller = RSSPoller(kwargs["session"])
+		rssPoller = RSSPoller()
 	elif reason == 1:
 		if rssPoller is not None:
 			rssPoller.shutdown()
