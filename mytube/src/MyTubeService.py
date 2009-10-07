@@ -105,7 +105,8 @@ class MyTubeFeedEntry():
 			if ret == 'youtube_gdata':
 				tmpval=split.pop()
 				if tmpval.endswith("&feature"):
-					ret = tmpval.strip("&feature")
+					tmp = tmpval.split("&")
+					ret = tmp.pop(0)
 		return ret
 
 	def getTitle(self):
