@@ -92,9 +92,6 @@ class UserDialog(Screen, ConfigListScreen):
 
 	def layoutFinished(self):
 		self.setTitle(_("Enter user and password for host: ")+ self.hostinfo)
-		self["VKeyIcon"].hide()
-		self["VirtualKB"].setEnabled(False)
-		self["HelpWindow"].hide()
 
 	# helper function to convert ips from a sring to a list of ints
 	def convertIP(self, ip):
@@ -146,15 +143,11 @@ class UserDialog(Screen, ConfigListScreen):
 	def VirtualKeyBoardCallback(self, callback = None, entry = None):
 		if callback is not None and len(callback) and entry is not None and len(entry):
 			if entry == 'username':
-				self.usernameEntry.setValue(callback)
+				self.username.setValue(callback)
 				self["config"].invalidate(self.usernameEntry)
-				#self.username = NoSave(ConfigText(default = callback, visible_width = 50, fixed_size = False))
-				#self.createSetup()
 			if entry == 'password':
-				self.passwordEntry.setValue(callback)
+				self.password.setValue(callback)
 				self["config"].invalidate(self.passwordEntry)
-				#self.password = NoSave(ConfigPassword(default = callback, visible_width = 50, fixed_size = False))
-				#self.createSetup()
 
 	def newConfig(self):
 		if self["config"].getCurrent() == self.InterfaceEntry:
