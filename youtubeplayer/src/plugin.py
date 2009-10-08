@@ -19,7 +19,6 @@
 ############################################################################
 
 from Plugins.Plugin import PluginDescriptor
-from Tools.BoundFunction import boundFunction
 
 from YouTubeList import YouTubeListScreen
 from YouTubePlayList import YouTubePlaylistScreen
@@ -142,4 +141,4 @@ def Plugins(**kwargs):
 		name="YouTube Player",
 		description=_("Search and play YouTube movies"),
 		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-		icon = "plugin.png", fnc = boundFunction(main))
+		icon = "plugin.png", fnc = main)

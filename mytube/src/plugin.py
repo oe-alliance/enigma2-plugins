@@ -1738,4 +1738,4 @@ def Plugins(path, **kwargs):
 		name=_("My TubePlayer"),
 		description=_("Play YouTube movies"),
 		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-		icon = "plugin.png", fnc = boundFunction(MyTubeMain))
+		icon = "plugin.png", fnc = MyTubeMain)
