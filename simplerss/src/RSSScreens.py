@@ -213,9 +213,9 @@ class RSSEntryView(RSSBaseView):
 			self["info"].text = ""
 		data = self.data
 		if data:
-			self["content"].text = ''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures")))
+			self["content"].setText(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ',  _("Enclosures"))))
 		else:
-			self["content"].text = _("No such Item.")
+			self["content"].setText(_("No such Item."))
 		self.updateInfo()
 
 	def selectEnclosure(self):
