@@ -11,7 +11,6 @@
 
 
 from Plugins.Plugin import PluginDescriptor
-from Tools.BoundFunction import boundFunction
 
 from VlcServerList import VlcServerListScreen
 from VlcMediaList import VlcMediaListScreen

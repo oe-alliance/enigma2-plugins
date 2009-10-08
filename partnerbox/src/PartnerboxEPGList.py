@@ -17,8 +17,6 @@
 #  GNU General Public License for more details.
 #
 
-from Screens.Screen import Screen
-from Components.config import config
 from Components.EpgList import EPGList
 from enigma import eListboxPythonMultiContent, \
 	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_HALIGN_CENTER
@@ -26,7 +24,6 @@ from enigma import eListboxPythonMultiContent, \
 from time import localtime
 
 from Tools.LoadPixmap import LoadPixmap
-from Tools.BoundFunction import boundFunction
 import PartnerboxFunctions as partnerboxfunctions
 
 baseEPGList__init__ = None
