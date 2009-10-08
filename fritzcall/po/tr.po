@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-29 15:34+0200\n"
+"POT-Creation-Date: 2009-10-08 10:16+0200\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -39,8 +39,8 @@ msgstr "Çağrıda numara tipini göster"
 msgid "Append vanity name"
 msgstr "Çağrıda vanity kodunu göster"
 
-msgid "Areacode to add to Outgoing Calls (if necessary)"
-msgstr "Giden aramalara alan kodu ekle (gerekirse)"
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr ""
 
 msgid "Austria"
 msgstr "Avusturya"
@@ -61,6 +61,15 @@ msgstr "Çağrı yönlendirme"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
 msgstr "Vazgeç"
+
+msgid "Cannot get calls from FRITZ!Box"
+msgstr ""
+
+msgid "Cannot get infos from FRITZ!Box"
+msgstr ""
+
+msgid "Compact Flash"
+msgstr ""
 
 msgid "Connected since"
 msgstr "Bağlantı süresi : "
@@ -185,6 +194,12 @@ msgid "FRITZ!Box - Error logging in: %s"
 msgstr "FRITZ!Box oturumu başlatılamadı: %s"
 
 #, python-format
+msgid ""
+"FRITZ!Box - Error logging in: %s\n"
+"Disabling plugin."
+msgstr ""
+
+#, python-format
 msgid "FRITZ!Box - Error logging out: %s"
 msgstr "FRITZ!Box oturumu kapatılamadı: %s"
 
@@ -210,6 +225,15 @@ msgstr "FRITZ!Box durumu"
 
 msgid "Flash"
 msgstr "Flaş"
+
+#, python-format
+msgid ""
+"Found picture\n"
+"\n"
+"%s\n"
+"\n"
+"But did not load. Probably not PNG, 8-bit"
+msgstr ""
 
 msgid "France"
 msgstr "Fransa"
@@ -300,6 +324,9 @@ msgstr "Seçim yapılmadı"
 msgid "No mailbox active"
 msgstr "Etkin posta kutusu yok"
 
+msgid "No phonebook"
+msgstr ""
+
 msgid "No result from LDIF"
 msgstr "LDIF içeriğinde sonuç bulunamadı"
 
@@ -361,6 +388,9 @@ msgstr "Rehber konumu"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Rehber"
+
+msgid "Plugin not active"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Quit"
@@ -475,6 +505,10 @@ msgstr "Posta kutularını aç/kapat"
 msgid "UNKNOWN"
 msgstr "BİLİNMİYOR"
 
+#, fuzzy
+msgid "USB Device"
+msgstr "USB Bellek"
+
 msgid "Use internal PhoneBook"
 msgstr "FRITZ!Box rehberini kullan"
 
@@ -482,7 +516,8 @@ msgid "Vanity"
 msgstr "Vanity"
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr "FRITZ!Box'ta çağrı görüntülemeyi etkinleştirmek için #96*5* 'ı aramalısınız!"
+msgstr ""
+"FRITZ!Box'ta çağrı görüntülemeyi etkinleştirmek için #96*5* 'ı aramalısınız!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
@@ -571,14 +606,12 @@ msgstr "birşey gösterme"
 msgid "work"
 msgstr "iş"
 
+#~ msgid "Areacode to add to Outgoing Calls (if necessary)"
+#~ msgstr "Giden aramalara alan kodu ekle (gerekirse)"
+
 #~ msgid "CF Drive"
 #~ msgstr "CF Sürücü"
-#~ msgid "FRITZ!Box Login failed: "
-#~ msgstr "FRITZ!Box oturumu başlatılamadı: "
-#~ msgid "Harddisk"
-#~ msgstr "Sabit disk"
-#~ msgid "USB Stick"
-#~ msgstr "USB Bellek"
+
 #~ msgid ""
 #~ "Call\n"
 #~ "\n"
@@ -591,8 +624,10 @@ msgstr "iş"
 #~ "%s(name)\n"
 #~ "\n"
 #~ "aransın mı?"
+
 #~ msgid "Can't create PhoneBook.txt"
 #~ msgstr "PhoneBook.txt oluşturulamıyor"
+
 #~ msgid ""
 #~ "Corrupt phonebook entry\n"
 #~ "for number %d\n"
@@ -601,10 +636,13 @@ msgstr "iş"
 #~ "%d numaralı\n"
 #~ "bozuk rehber kaydı\n"
 #~ "siliniyor."
+
 #~ msgid "Could not load calls from FRITZ!Box - Error: %s"
 #~ msgstr "Aramalar, FRITZ!Box'dan yüklenemiyor - Hata: %s"
+
 #~ msgid "Dialling failed - Error: %s"
 #~ msgstr "Arama başlatılamadı! - Hata: %s"
+
 #~ msgid ""
 #~ "Do you really want to overwrite entry for %(number)s\n"
 #~ "\n"
@@ -621,6 +659,7 @@ msgstr "iş"
 #~ "%(newname)s olarak\n"
 #~ "\n"
 #~ "değiştirmek istiyor musunuz?"
+
 #~ msgid ""
 #~ "Do you want to add a phonebook entry\n"
 #~ "\n"
@@ -637,6 +676,7 @@ msgstr "iş"
 #~ "olarak\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
+
 #~ msgid ""
 #~ "Do you want to add a phonebook entry for\n"
 #~ "\n"
@@ -655,32 +695,47 @@ msgstr "iş"
 #~ "%s kaydını\n"
 #~ "\n"
 #~ "rehbere eklemek istiyor musunuz?"
+
 #~ msgid "Edit phonebook entry"
 #~ msgstr "Rehber kaydını düzelt"
 
 #, fuzzy
 #~ msgid "FRITZ!Box Fon has no mailbox"
 #~ msgstr "FRITZ!Box Fon Durumu"
+
 #~ msgid "FRITZ!Box Login failed! - Wrong Password!"
 #~ msgstr "FRITZ!Box oturumu başlatılamadı! - Parola hatalı!"
+
+#~ msgid "FRITZ!Box Login failed: "
+#~ msgstr "FRITZ!Box oturumu başlatılamadı: "
+
+#~ msgid "Harddisk"
+#~ msgstr "Sabit disk"
+
+#~ msgid "Minuten"
+#~ msgstr "dakika"
+
 #~ msgid "Reverse lookup for "
 #~ msgstr "Hizmet sağlayıcıdan isim sorgula : "
+
 #~ msgid "Reverse lookup not successful"
 #~ msgstr "İsim sorgulama başarısız"
+
 #~ msgid "Reverse lookup successful"
 #~ msgstr "İsim sorgulama başarılı"
+
+#~ msgid "Sekunden"
+#~ msgstr "saniye"
+
+#~ msgid "Stunden"
+#~ msgstr "saat"
 
 #, fuzzy
 #~ msgid "Toggle "
 #~ msgstr "WLAN aç/kapa"
+
 #~ msgid "WLAN off"
 #~ msgstr "WLAN kapat"
+
 #~ msgid "WLAN on"
 #~ msgstr "WLAN aç"
-#~ msgid "Stunden"
-#~ msgstr "saat"
-#~ msgid "Minuten"
-#~ msgstr "dakika"
-#~ msgid "Sekunden"
-#~ msgstr "saniye"
-

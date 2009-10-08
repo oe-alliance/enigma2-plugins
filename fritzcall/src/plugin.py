@@ -1806,31 +1806,32 @@ class FritzOfferAction(Screen):
 
 		self["FritzOfferActions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
-			"red": self.lookup,
-			"green": self.call,
-			"yellow": self.add,
-			"cancel": self.exit,
-			"ok": self.exit, }, - 2)
+			"red": self._lookup,
+			"green": self._call,
+			"yellow": self._add,
+			"cancel": self._exit,
+			"ok": self._exit, }, - 2)
 
-		self.number = number
-		self.name = name.replace("\n", ", ")
+		self._session = session
+		self._number = number
+		self._name = name.replace("\n", ", ")
 		self["text"] = Label(number + "\n\n" + name.replace(", ", "\n"))
-		self.parent = parent
-		self.lookupState = 0
+		self._parent = parent
+		self._lookupState = 0
 		self["key_red_p"] = Pixmap()
 		self["key_green_p"] = Pixmap()
 		self["key_yellow_p"] = Pixmap()
 		self["FacePixmap"] = Pixmap()
-		self.onLayoutFinish.append(self.finishLayout)
+		self.onLayoutFinish.append(self._finishLayout)
 
-	def finishLayout(self):
-		debug("[FritzCall] FritzOfferAction/finishLayout number: %s/%s" % (self.number, self.name))
+	def _finishLayout(self):
+		debug("[FritzCall] FritzOfferAction/finishLayout number: %s/%s" % (self._number, self._name))
 
-		faceFile = findFace(self.number, self.name)
+		faceFile = findFace(self._number, self._name)
 		picPixmap = LoadPixmap(faceFile)
 		if not picPixmap:	# that means most probably, that the picture is not 8 bit...
-			self.session.open(MessageBox, _("Found picture (%s), but did not load.\nProbably not PNG, 8-bit") %faceFile, type = MessageBox.TYPE_ERROR)
-			picPixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_question.png"))
+			Notifications.AddNotification(MessageBox, _("Found picture\n\n%s\n\nBut did not load. Probably not PNG, 8-bit") %faceFile, type = MessageBox.TYPE_ERROR)
+			picPixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_error.png"))
 		picSize = picPixmap.size()
 		self["FacePixmap"].instance.setPixmap(picPixmap)
 
@@ -1875,59 +1876,59 @@ class FritzOfferAction(Screen):
 		# center window
 		self.instance.move(ePoint((DESKTOP_WIDTH-wSize.width())/2, (DESKTOP_HEIGHT-wSize.height())/2))
 
-	def setTextAndResize(self, message):
+	def _setTextAndResize(self, message):
 		self["text"].instance.resize(eSize(*(DESKTOP_WIDTH,DESKTOP_HEIGHT)))
-		self["text"].setText(self.number + "\n\n" + message)
-		self.finishLayout()
+		self["text"].setText(self._number + "\n\n" + message)
+		self._finishLayout()
 
-	def lookup(self):
+	def _lookup(self):
 		phonebookLocation = config.plugins.FritzCall.phonebookLocation.value
-		if self.lookupState == 0:
-			self.lookupState = 1
-			self.setTextAndResize(_("Reverse searching..."))
-			ReverseLookupAndNotifier(self.number, self.lookedUp, "UTF-8", config.plugins.FritzCall.country.value)
+		if self._lookupState == 0:
+			self._lookupState = 1
+			self._setTextAndResize(_("Reverse searching..."))
+			ReverseLookupAndNotifier(self._number, self._lookedUp, "UTF-8", config.plugins.FritzCall.country.value)
 			return
-		if self.lookupState == 1 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.csv")):
-			self.setTextAndResize(_("Searching in Outlook export..."))
-			self.lookupState = 2
-			self.lookedUp(self.number, FritzOutlookCSV.findNumber(self.number, os.path.join(phonebookLocation, "PhoneBook.csv"))) #@UndefinedVariable
-			return
-		else:
-			self.lookupState = 2
-		if self.lookupState == 2 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.ldif")):
-			self.setTextAndResize(_("Searching in LDIF..."))
-			self.lookupState = 0
-			FritzLDIF.findNumber(self.number, open(os.path.join(phonebookLocation, "PhoneBook.ldif")), self.lookedUp)
+		if self._lookupState == 1 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.csv")):
+			self._setTextAndResize(_("Searching in Outlook export..."))
+			self._lookupState = 2
+			self._lookedUp(self._number, FritzOutlookCSV.findNumber(self._number, os.path.join(phonebookLocation, "PhoneBook.csv"))) #@UndefinedVariable
 			return
 		else:
-			self.lookupState = 0
-			self.lookup()
+			self._lookupState = 2
+		if self._lookupState == 2 and os.path.exists(os.path.join(phonebookLocation, "PhoneBook.ldif")):
+			self._setTextAndResize(_("Searching in LDIF..."))
+			self._lookupState = 0
+			FritzLDIF.findNumber(self._number, open(os.path.join(phonebookLocation, "PhoneBook.ldif")), self._lookedUp)
+			return
+		else:
+			self._lookupState = 0
+			self._lookup()
 
-	def lookedUp(self, number, name):
+	def _lookedUp(self, number, name):
 		name = handleReverseLookupResult(name)
 		if not name:
-			if self.lookupState == 1:
+			if self._lookupState == 1:
 				name = _("No result from reverse lookup")
-			elif self.lookupState == 2:
+			elif self._lookupState == 2:
 				name = _("No result from Outlook export")
 			else:
 				name = _("No result from LDIF")
-		self.name = name
-		self.number = number
+		self._name = name
+		self._number = number
 		debug("[FritzOfferAction] lookedUp: " + str(name.replace(", ", "\n")))
-		self.setTextAndResize(str(name.replace(", ", "\n")))
+		self._setTextAndResize(str(name.replace(", ", "\n")))
 
-	def call(self):
-		debug("[FritzOfferAction] add: %s" %self.number)
-		fritzbox.dial(self.number)
-		self.exit()
+	def _call(self):
+		debug("[FritzOfferAction] add: %s" %self._number)
+		fritzbox.dial(self._number)
+		self._exit()
 
-	def add(self):
-		debug("[FritzOfferAction] add: %s, %s" %(self.number, self.name))
-		phonebook.FritzDisplayPhonebook(self.session).add(self.parent, self.number, self.name)
-		self.exit()
+	def _add(self):
+		debug("[FritzOfferAction] add: %s, %s" %(self._number, self._name))
+		phonebook.FritzDisplayPhonebook(self._session).add(self._parent, self._number, self._name)
+		self._exit()
 
-	def exit(self):
+	def _exit(self):
 		self.close()
 
 
@@ -2824,24 +2825,25 @@ class MessageBoxPixmap(Screen):
 		# MessageBox.__init__(self, session, text, type=MessageBox.TYPE_INFO, timeout=timeout)
 		self["text"] = Label(text)
 		self["InfoPixmap"] = Pixmap()
-		self.number = number
-		self.name = name
-		self.timerRunning = False
-		self.initTimeout(timeout)
-		self.onLayoutFinish.append(self.finishLayout)
+		self._session = session
+		self._number = number
+		self._name = name
+		self._timerRunning = False
+		self._initTimeout(timeout)
+		self.onLayoutFinish.append(self._finishLayout)
 		self["actions"] = ActionMap(["OkCancelActions"],
 		{
-			"cancel": self.exit,
-			"ok": self.exit, }, - 2)
+			"cancel": self._exit,
+			"ok": self._exit, }, - 2)
 
-	def finishLayout(self):
-		debug("[FritzCall] MessageBoxPixmap/setInfoPixmap number: %s/%s" % (self.number, self.name))
+	def _finishLayout(self):
+		debug("[FritzCall] MessageBoxPixmap/setInfoPixmap number: %s/%s" % (self._number, self._name))
 
-		faceFile = findFace(self.number, self.name)
+		faceFile = findFace(self._number, self._name)
 		picPixmap = LoadPixmap(faceFile)
 		if not picPixmap:	# that means most probably, that the picture is not 8 bit...
-			self.session.open(MessageBox, _("Found picture (%s), but did not load.\nProbably not PNG, 8-bit") %faceFile, type = MessageBox.TYPE_ERROR)
-			picPixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_question.png"))
+			Notifications.AddNotification(MessageBox, _("Found picture\n\n%s\n\nBut did not load. Probably not PNG, 8-bit") %faceFile, type = MessageBox.TYPE_ERROR)
+			picPixmap = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/input_error.png"))
 		picSize = picPixmap.size()
 		self["InfoPixmap"].instance.setPixmap(picPixmap)
 
@@ -2872,48 +2874,48 @@ class MessageBoxPixmap(Screen):
 		# center window
 		self.instance.move(ePoint((DESKTOP_WIDTH-wSize.width())/2, (DESKTOP_HEIGHT-wSize.height())/2))
 
-	def initTimeout(self, timeout):
-		self.timeout = timeout
+	def _initTimeout(self, timeout):
+		self._timeout = timeout
 		if timeout > 0:
-			self.timer = eTimer()
-			self.timer.callback.append(self.timerTick)
-			self.onExecBegin.append(self.startTimer)
-			self.origTitle = None
+			self._timer = eTimer()
+			self._timer.callback.append(self._timerTick)
+			self.onExecBegin.append(self._startTimer)
+			self._origTitle = None
 			if self.execing:
-				self.timerTick()
+				self._timerTick()
 			else:
 				self.onShown.append(self.__onShown)
-			self.timerRunning = True
+			self._timerRunning = True
 		else:
-			self.timerRunning = False
+			self._timerRunning = False
 
 	def __onShown(self):
 		self.onShown.remove(self.__onShown)
-		self.timerTick()
+		self._timerTick()
 
-	def startTimer(self):
-		self.timer.start(1000)
+	def _startTimer(self):
+		self._timer.start(1000)
 
 #===============================================================================
 #	def stopTimer(self):
-#		if self.timerRunning:
-#			del self.timer
-#			self.setTitle(self.origTitle)
-#			self.timerRunning = False
+#		if self._timerRunning:
+#			del self._timer
+#			self.setTitle(self._origTitle)
+#			self._timerRunning = False
 #===============================================================================
 
-	def timerTick(self):
+	def _timerTick(self):
 		if self.execing:
-			self.timeout -= 1
-			if self.origTitle is None:
-				self.origTitle = self.instance.getTitle()
-			self.setTitle(self.origTitle + " (" + str(self.timeout) + ")")
-			if self.timeout == 0:
-				self.timer.stop()
-				self.timerRunning = False
-				self.exit()
+			self._timeout -= 1
+			if self._origTitle is None:
+				self._origTitle = self.instance.getTitle()
+			self.setTitle(self._origTitle + " (" + str(self._timeout) + ")")
+			if self._timeout == 0:
+				self._timer.stop()
+				self._timerRunning = False
+				self._exit()
 
-	def exit(self):
+	def _exit(self):
 		self.close()
 
 

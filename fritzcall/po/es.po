@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-29 13:07+0200\n"
+"POT-Creation-Date: 2009-10-08 10:16+0200\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -41,8 +41,8 @@ msgstr "Añadir tipo de número"
 msgid "Append vanity name"
 msgstr "Añadir nombre de vanidad"
 
-msgid "Areacode to add to Outgoing Calls (if necessary)"
-msgstr "Añadir código de área a las llamadas salientes (si es necesario)"
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr ""
 
 msgid "Austria"
 msgstr "Austria"
@@ -63,6 +63,15 @@ msgstr ""
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
 msgstr "Cancelar"
+
+msgid "Cannot get calls from FRITZ!Box"
+msgstr ""
+
+msgid "Cannot get infos from FRITZ!Box"
+msgstr ""
+
+msgid "Compact Flash"
+msgstr ""
 
 msgid "Connected since"
 msgstr "Conectado desde"
@@ -187,6 +196,12 @@ msgid "FRITZ!Box - Error logging in: %s"
 msgstr "Falló la identificación a FRITZ!Box - Error: %s"
 
 #, python-format
+msgid ""
+"FRITZ!Box - Error logging in: %s\n"
+"Disabling plugin."
+msgstr ""
+
+#, python-format
 msgid "FRITZ!Box - Error logging out: %s"
 msgstr ""
 
@@ -212,6 +227,15 @@ msgstr "Estado de Fon FRITZ!Box"
 
 msgid "Flash"
 msgstr "Flash"
+
+#, python-format
+msgid ""
+"Found picture\n"
+"\n"
+"%s\n"
+"\n"
+"But did not load. Probably not PNG, 8-bit"
+msgstr ""
 
 msgid "France"
 msgstr "Francia"
@@ -303,6 +327,9 @@ msgstr "No hay entrada seleccionada"
 msgid "No mailbox active"
 msgstr "No cuenta de correo activa"
 
+msgid "No phonebook"
+msgstr ""
+
 msgid "No result from LDIF"
 msgstr "No hay resultado desde LDIF"
 
@@ -365,6 +392,9 @@ msgstr "Ubicación de la Agenda"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Agenda"
+
+msgid "Plugin not active"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Quit"
@@ -481,6 +511,10 @@ msgstr "Marcar Cuenta de Correo"
 msgid "UNKNOWN"
 msgstr "DESCONOCIDO"
 
+#, fuzzy
+msgid "USB Device"
+msgstr "Lápiz USB"
+
 msgid "Use internal PhoneBook"
 msgstr "Usar Agenda interna"
 
@@ -580,6 +614,9 @@ msgstr "no mostrar nada"
 msgid "work"
 msgstr "trabajo"
 
+#~ msgid "Areacode to add to Outgoing Calls (if necessary)"
+#~ msgstr "Añadir código de área a las llamadas salientes (si es necesario)"
+
 #~ msgid "CF Drive"
 #~ msgstr "Unidad CF"
 
@@ -632,9 +669,6 @@ msgstr "trabajo"
 #, fuzzy
 #~ msgid "Toggle "
 #~ msgstr "Marcar WLAN"
-
-#~ msgid "USB Stick"
-#~ msgstr "Lápiz USB"
 
 #~ msgid "WLAN off"
 #~ msgstr "WLAN apagado"

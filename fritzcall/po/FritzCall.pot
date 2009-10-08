@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-29 15:34+0200\n"
+"POT-Creation-Date: 2009-10-08 10:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "Append vanity name"
 msgstr ""
 
-msgid "Areacode to add to Outgoing Calls (if necessary)"
+msgid "Areacode to add to calls without one (if necessary)"
 msgstr ""
 
 msgid "Austria"
@@ -62,6 +62,15 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
+msgstr ""
+
+msgid "Cannot get calls from FRITZ!Box"
+msgstr ""
+
+msgid "Cannot get infos from FRITZ!Box"
+msgstr ""
+
+msgid "Compact Flash"
 msgstr ""
 
 msgid "Connected since"
@@ -176,6 +185,12 @@ msgid "FRITZ!Box - Error logging in: %s"
 msgstr ""
 
 #, python-format
+msgid ""
+"FRITZ!Box - Error logging in: %s\n"
+"Disabling plugin."
+msgstr ""
+
+#, python-format
 msgid "FRITZ!Box - Error logging out: %s"
 msgstr ""
 
@@ -200,6 +215,15 @@ msgid "FRITZ!Box Fon Status"
 msgstr ""
 
 msgid "Flash"
+msgstr ""
+
+#, python-format
+msgid ""
+"Found picture\n"
+"\n"
+"%s\n"
+"\n"
+"But did not load. Probably not PNG, 8-bit"
 msgstr ""
 
 msgid "France"
@@ -285,6 +309,9 @@ msgstr ""
 msgid "No mailbox active"
 msgstr ""
 
+msgid "No phonebook"
+msgstr ""
+
 msgid "No result from LDIF"
 msgstr ""
 
@@ -339,6 +366,9 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
+msgstr ""
+
+msgid "Plugin not active"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
@@ -452,6 +482,9 @@ msgid "Toggle all mailboxes"
 msgstr ""
 
 msgid "UNKNOWN"
+msgstr ""
+
+msgid "USB Device"
 msgstr ""
 
 msgid "Use internal PhoneBook"

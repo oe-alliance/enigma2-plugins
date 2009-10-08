@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-29 13:07+0200\n"
+"POT-Creation-Date: 2009-10-08 10:16+0200\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -42,8 +42,8 @@ msgstr "Nummersoort toevoegen"
 msgid "Append vanity name"
 msgstr "Alias toevoegen"
 
-msgid "Areacode to add to Outgoing Calls (if necessary)"
-msgstr "Netnummer bij uitgaande gesprekken  (indien nodig)"
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr ""
 
 msgid "Austria"
 msgstr "Oostenrijk"
@@ -64,6 +64,15 @@ msgstr ""
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
 msgstr "Annuleren"
+
+msgid "Cannot get calls from FRITZ!Box"
+msgstr ""
+
+msgid "Cannot get infos from FRITZ!Box"
+msgstr ""
+
+msgid "Compact Flash"
+msgstr ""
 
 msgid "Connected since"
 msgstr "Verbonden sinds"
@@ -187,6 +196,12 @@ msgstr ""
 msgid "FRITZ!Box - Error logging in: %s"
 msgstr "FRITZ!Box Login mislukt! - Error: %s"
 
+#, python-format
+msgid ""
+"FRITZ!Box - Error logging in: %s\n"
+"Disabling plugin."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "FRITZ!Box - Error logging out: %s"
 msgstr "FRITZ!Box Logout mislukt! - Error: %s"
@@ -213,6 +228,15 @@ msgstr "FRITZ!Box Status"
 
 msgid "Flash"
 msgstr "Flash"
+
+#, python-format
+msgid ""
+"Found picture\n"
+"\n"
+"%s\n"
+"\n"
+"But did not load. Probably not PNG, 8-bit"
+msgstr ""
 
 msgid "France"
 msgstr "Frankrijk"
@@ -304,6 +328,9 @@ msgstr "Geen regel geselecteerd"
 msgid "No mailbox active"
 msgstr "Geen mailbox actief"
 
+msgid "No phonebook"
+msgstr ""
+
 msgid "No result from LDIF"
 msgstr "Geen resultaat uit LDIF"
 
@@ -366,6 +393,9 @@ msgstr "Telefoonboek locatie"
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Telefoonboek"
+
+msgid "Plugin not active"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Quit"
@@ -481,6 +511,10 @@ msgstr "Mailbox Aan/Uit"
 msgid "UNKNOWN"
 msgstr "ONBEKEND"
 
+#, fuzzy
+msgid "USB Device"
+msgstr "USB Stick"
+
 msgid "Use internal PhoneBook"
 msgstr "Gebruik het interne telefoonboek"
 
@@ -582,6 +616,9 @@ msgstr "niets weergeven"
 msgid "work"
 msgstr "werk"
 
+#~ msgid "Areacode to add to Outgoing Calls (if necessary)"
+#~ msgstr "Netnummer bij uitgaande gesprekken  (indien nodig)"
+
 #~ msgid "CF Drive"
 #~ msgstr "CF kaart"
 
@@ -604,6 +641,3 @@ msgstr "werk"
 #, fuzzy
 #~ msgid "Toggle "
 #~ msgstr "WLAN Aan/Uit"
-
-#~ msgid "USB Stick"
-#~ msgstr "USB Stick"
