@@ -4,13 +4,11 @@ from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.LocationBox import MovieLocationBox
 import Screens.Standby
-from Components.config import *
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.config import config, ConfigText, ConfigSelection, ConfigNothing, getConfigListEntry
+from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.Button import Button
-from Components.Label import Label
-from Components.Pixmap import Pixmap
-from enigma import eTimer, eServiceReference, eServiceCenter, iServiceInformation, eConsoleAppContainer
+from Components.Sources.StaticText import StaticText
+from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer
 from os import access, chmod, X_OK
 
 mcut_path = "/usr/lib/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut"
@@ -35,11 +33,12 @@ class MovieCut(ChoiceBox):
 			self.name = path
 		else:
 			self.name = info.getName(self.service)
-		tlist = []
-		tlist.append((_("Don't cut"), "CALLFUNC", self.confirmed0))
-		tlist.append((_("Replace the original movie with the cut movie"), "CALLFUNC", self.confirmed1))
-		tlist.append((_("Place the cut movie in a new file ending with \" cut\""), "CALLFUNC", self.confirmed2))
-		tlist.append((_("Advanced cut specification..."), "CALLFUNC", self.confirmed3))
+		tlist = [
+			(_("Don't cut"), "CALLFUNC", self.confirmed0),
+			(_("Replace the original movie with the cut movie"), "CALLFUNC", self.confirmed1),
+			(_("Place the cut movie in a new file ending with \" cut\""), "CALLFUNC", self.confirmed2),
+			(_("Advanced cut specification..."), "CALLFUNC", self.confirmed3),
+		]
 		ChoiceBox.__init__(self, session, _("How would you like to cut \"%s\"?") % (self.name), list = tlist, selection = 0)
 		self.skinName = "ChoiceBox"
 
@@ -81,22 +80,21 @@ class MovieCut(ChoiceBox):
 		
 class AdvancedCutInput(Screen, ConfigListScreen):
 	skin = """
-	<screen name="AdvancedCutInput" position="80,100" size="550,320" title="Cut Parameter Input">
-		<widget name="config" position="5,10" size="530,250" />
-		<widget name="ok" position="90,265" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
-		<widget name="oktext" position="90,265" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" />
-		<widget name="cancel" position="320,265" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
-		<widget name="canceltext" position="320,265" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" />
+	<screen name="AdvancedCutInput" position="center,center" size="560,300" title="Cut Parameter Input">
+		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,0" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" />
+		<widget source="key_green" render="Label" position="140,0" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" />
+		<widget name="config" position="5,50" size="550,250" />
 	</screen>"""
 
 	def __init__(self, session, name, path, descr):
-		self.skin = AdvancedCutInput.skin
 		Screen.__init__(self, session)
 
-		self["oktext"] = Label(_("OK"))
-		self["canceltext"] = Label(_("Cancel"))
-		self["ok"] = Pixmap()
-		self["cancel"] = Pixmap()
+		self["key_green"] = StaticText(_("OK"))
+		self["key_red"] = StaticText(_("Cancel"))
 
 		if self.baseName(path) == self.baseName(name):
 			self.title = ""
@@ -117,7 +115,7 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 		self.input_space = ConfigNothing()
 		self.input_manualcuts = ConfigText(default = "", fixed_size = False)
 		self.input_manualcuts.setUseableChars(" 0123456789:.")
-		self["actions"] = NumberActionMap(["SetupActions"],
+		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keySelectOrGo,
 			"save": self.keyGo,
@@ -137,19 +135,27 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 		self.createSetup(self["config"])
 
 	def createSetup(self, configlist):
-		self.list = []
-		self.list.append(self.entry_replace)
+		list = [
+			self.entry_replace
+		]
 		if self.input_replace.value == "no":
-			self.list.append(self.entry_file)
-			self.list.append(self.entry_dir)
-		self.list.append(self.entry_title)
-		self.list.append(self.entry_descr)
-		self.list.append(self.entry_manual)
+			list.extend((
+				self.entry_file,
+				self.entry_dir,
+			))
+		list.extend((
+			self.entry_title,
+			self.entry_descr,
+			self.entry_manual,
+		))
 		if self.input_manual.value == "yes":
-			self.list.append(self.entry_space)
-			self.list.append(self.entry_manualcuts)
-		configlist.list = self.list
-		configlist.l.setList(self.list)
+			list.extend((
+				self.entry_space,
+				self.entry_manualcuts,
+			))
+		self.list = list
+		configlist.list = list
+		configlist.l.setList(list)
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)

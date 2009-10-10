@@ -7,11 +7,11 @@ from Screens.MessageBox import MessageBox
 from Screens.LocationBox import MovieLocationBox
 import Screens.Standby
 from Components.config import config, ConfigText, ConfigSelection, getConfigListEntry
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.Label import Label
-from enigma import eTimer, eServiceReference, eServiceCenter, iServiceInformation, eConsoleAppContainer
-import os
+from Components.ActionMap import ActionMap
+from Components.ConfigList import ConfigListScreen
+from Components.Sources.StaticText import StaticText
+from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer
+from os import path as os_path, rename as os_rename, unlink as os_unlink
 
 def main(session, service, **kwargs):
 	session.open(MovieRetitle, service, session.current_dialog, **kwargs)
@@ -22,12 +22,14 @@ def Plugins(**kwargs):
 
 class MovieRetitle(Screen, ConfigListScreen):
 	skin = """
-	<screen name="TitleDescrInput" position="100,150" size="500,200" title="Name and Description Input">
-		<widget name="config" position="10,10" size="480,120" />
-		<ePixmap position="70,140" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
-		<widget name="oktext" position="70,140" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" />
-		<ePixmap position="290,140" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
-		<widget name="canceltext" position="290,140" size="140,40" valign="center" halign="center" zPosition="2" font="Regular;20" transparent="1" />
+	<screen name="TitleDescrInput" position="center,center" size="560,170" title="Name and Description Input">
+		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,0" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" />
+		<widget source="key_green" render="Label" position="140,0" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" />
+		<widget name="config" position="5,50" size="550,120" />
 	</screen>"""
 
 	def __init__(self, session, service, parent, args = 0):
@@ -47,8 +49,8 @@ class MovieRetitle(Screen, ConfigListScreen):
 			self.title = self.name
 		self.descr = info.getInfoString(service, iServiceInformation.sDescription)
 
-		self["oktext"] = Label(_("OK"))
-		self["canceltext"] = Label(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_red"] = StaticText(_("Cancel"))
 
 		self.input_file = ConfigText(default = self.file, fixed_size = False, visible_width = 42)
 		self.input_title = ConfigText(default = self.title, fixed_size = False, visible_width = 42)
@@ -58,7 +60,7 @@ class MovieRetitle(Screen, ConfigListScreen):
 			tmp.append(self.dir)
 		self.input_dir = ConfigSelection(choices = tmp, default = self.dir)
 
-		self["actions"] = NumberActionMap(["SetupActions"],
+		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keySelectOrGo,
 			"save": self.keyGo,
@@ -74,6 +76,11 @@ class MovieRetitle(Screen, ConfigListScreen):
 		]
 
 		ConfigListScreen.__init__(self, l)
+
+		self.onLayoutFinish.append(self.setCustomTitle)
+		
+	def setCustomTitle(self):
+		self.setTitle(_("Name and Description Input"))
 
 	def pathSelected(self, res):
 		if res is not None:
@@ -106,7 +113,7 @@ class MovieRetitle(Screen, ConfigListScreen):
 		self.close()
 
 	def setTitleDescr(self, file, title, descr):
-		if os.path.exists(file + ".ts.meta"):
+		if os_path.exists(file + ".ts.meta"):
 			metafile = open(file + ".ts.meta", "r")
 			sid = metafile.readline()
 			oldtitle = metafile.readline().rstrip()
@@ -122,11 +129,11 @@ class MovieRetitle(Screen, ConfigListScreen):
 			metafile.close()
 
 	def maybeMoveMovieFiles(self, fr, to):
-		if os.path.exists(to+".ts"):
+		if os_path.exists(to+".ts"):
 			self.inter_fr = fr
 			self.inter_to = to
 			self.session.openWithCallback(self.confirmedReplace, MessageBox, _("Target file %s.ts already exist.\nDo you want to replace it?") % (to), MessageBox.TYPE_YESNO)
-		elif os.path.isdir(os.path.dirname(to)):
+		elif os_path.isdir(os_path.dirname(to)):
 			self.moveMovieFiles(fr, to)
 		else:
 			self.session.openWithCallback(self.exitDialog, MessageBox, _("The target directory is not found. The file is not renamed."), MessageBox.TYPE_ERROR)
@@ -137,15 +144,15 @@ class MovieRetitle(Screen, ConfigListScreen):
 
 	def moveMovieFiles(self, fr, to):
 		try:
-			os.rename(fr + ".ts", to + ".ts")
+			os_rename(fr + ".ts", to + ".ts")
 		except OSError:
 			print "Moving in background"
 			global_background_mover.enqueue(self.exitDialog, self.session, fr, to)
 		else:
 			print "Moving in foreground"
 			for suff in (".ts.meta", ".ts.cuts", ".ts.ap", ".eit"):
-				if os.path.exists(fr + suff):
-					os.rename(fr + suff, to + suff)
+				if os_path.exists(fr + suff):
+					os_rename(fr + suff, to + suff)
 			self.exitDialog()
 
 	def exitDialog(self, dummy=None):
@@ -237,7 +244,7 @@ class MovieRetitleBackgroundMover:
 
 	def enqueue(self, cb, session, fr, to):
 		self.currid += 1
-		mess = _("The movie is moved in the background from %s to %s.") % (os.path.dirname(fr), os.path.dirname(to))
+		mess = _("The movie is moved in the background from %s to %s.") % (os_path.dirname(fr), os_path.dirname(to))
 		self.message(session, self.currid, cb, mess)
 		self.queue.append((session, self.currid, fr, to))
 		if not self.running:
@@ -270,21 +277,21 @@ class MovieRetitleBackgroundMover:
 			to = self.ele[3] + self.sufflst[0]
 			self.sufflst = self.sufflst[1:]
 			print "Moving %s to %s" % (fr, to)
-			if os.path.exists(fr):
+			if os_path.exists(fr):
 				self.container.execute("/bin/cp", "/bin/cp", fr, to)
 			else:
 				self.moveNextSuffBG(0)
 		elif retval:
 			for suff in self.sufflst2:
-				if os.path.exists(self.ele[3] + suff) and os.path.exists(self.ele[2] + suff):
-					os.unlink(self.ele[3] + suff)
+				if os_path.exists(self.ele[3] + suff) and os_path.exists(self.ele[2] + suff):
+					os_unlink(self.ele[3] + suff)
 			mess = _("Failed to move the movie %s to %s in the background") % (self.ele[2], self.ele[3])
 			self.message(self.ele[0], self.ele[1], None, mess)
 			self.runDone(1)
 		else:
 			for suff in self.sufflst2:
-				if os.path.exists(self.ele[2] + suff) and os.path.exists(self.ele[3] + suff):
-					os.unlink(self.ele[2] + suff)
+				if os_path.exists(self.ele[2] + suff) and os_path.exists(self.ele[3] + suff):
+					os_unlink(self.ele[2] + suff)
 			mess = _("Successfully moved the movie %s") % (self.ele[2])
 			self.message(self.ele[0], self.ele[1], None, mess)
 			self.runDone(0)
