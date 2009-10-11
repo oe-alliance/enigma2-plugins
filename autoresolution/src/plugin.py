@@ -38,19 +38,27 @@ for mode in resolutions:
 config.plugins.autoresolution.showinfo = ConfigYesNo(default = True)
 config.plugins.autoresolution.testmode = ConfigYesNo(default = False)
 config.plugins.autoresolution.deinterlacer = ConfigSelection(default = "auto", choices =
-		[("auto", _("auto")), ("off", _("off")), ("on", _("on"))])
+		[("off", _("off")), ("auto", _("auto")), ("on", _("on")), ("bob", _("bob"))])
+config.plugins.autoresolution.deinterlacer_progressive = ConfigSelection(default = "auto", choices =
+		[("off", _("off")), ("auto", _("auto")), ("on", _("on")), ("bob", _("bob"))])
 config.plugins.autoresolution.delay_switch_mode = ConfigSelection(default = "1000", choices = [
 		("1000", "1 " + _("second")), ("2000", "2 " + _("seconds")), ("3000", "3 " + _("seconds")),
 		("4000", "4 " + _("seconds")), ("5000", "5 " + _("seconds")), ("6000", "6 " + _("seconds")), ("7000", "7 " + _("seconds")),
 		("8000", "8 " + _("seconds")), ("9000", "9 " + _("seconds")), ("10000", "10 " + _("seconds"))])
 
-def setDeinterlacer(configElement):
-	mode = config.plugins.autoresolution.deinterlacer.value
+def setDeinterlacer(mode):
 	print "[AutoRes] switch deinterlacer mode to %s" % mode
 	f = open('/proc/stb/vmpeg/deinterlace' , "w")
 	f.write("%s\n" % mode)
 	f.close()
-config.plugins.autoresolution.deinterlacer.addNotifier(setDeinterlacer)
+
+def setDeinterlacerInterlaced(configElement):
+	setDeinterlacer(config.plugins.autoresolution.deinterlacer.value)
+config.plugins.autoresolution.deinterlacer.addNotifier(setDeinterlacerInterlaced)
+
+def setDeinterlacerProgressive(configElement):
+	setDeinterlacer(config.plugins.autoresolution.deinterlacer_progressive.value)
+config.plugins.autoresolution.deinterlacer_progressive.addNotifier(setDeinterlacerProgressive)
 
 frqdic = { 23976: '24', \
 		24000: '24', \
@@ -73,7 +81,7 @@ class AutoRes(Screen):
 		self.timer = eTimer()
 		self.timer.callback.append(self.determineContent)
 		self.lastmode = config.av.videomode[config.av.videoport.value].value
-
+	
 	def __evVideoFramerateChanged(self):
 		print "[AutoRes] got event evFramerateChanged"
 		if self.timer.isActive():
@@ -118,20 +126,26 @@ class AutoRes(Screen):
 			new_mode = 'p1080_%s' % frate
 		elif (height >= 576 or width >= 720) and frate == '24' and prog == 'p': 		# 720p24 detection
 			new_mode = 'p720_24'
-		elif height > 576 or width > 720: 							#asume higher then 576 or greater then 720 is hd content
+		elif (height == 576 or height == 288) and frate in ('25', '50'):
+			new_mode = 'sd_%s_50' % prog
+		elif (height == 480 or height == 240) and frate in ('24', '30', '60'):
+			new_mode = 'sd_%s_60' % prog
+		else:
 			new_mode = 'hd_%s' % prog
-		else:											# SD Content
-			if frate in ('25', '50'):
-				new_mode = 'sd_%s_50' % prog
-			else:
-				new_mode = 'sd_%s_60' % prog
 		if videoresolution_dictionary.has_key(new_mode):
 			new_mode = videoresolution_dictionary[new_mode].value
 			print '[AutoRes] determined videomode', new_mode
+			self.contentlabeltxt = "Videocontent: %sx%s%s %sHZ" % (width, height, prog, frate)
 			if new_mode != self.lastmode:
 				self.lastmode = new_mode
-				self.contentlabeltxt = "Videocontent: %sx%s%s %sHZ" % (width, height, prog, frate)
 				self.changeVideomode(new_mode)
+			if config.plugins.autoresolution.showinfo.value:
+				resolutionlabel["content"].setText(self.contentlabeltxt)
+				resolutionlabel.show()
+		if prog == 'p':
+		    setDeinterlacer(config.plugins.autoresolution.deinterlacer_progressive.value)
+		else:
+		    setDeinterlacer(config.plugins.autoresolution.deinterlacer.value)
 
 	def changeVideomode(self, mode):
 		if mode.find("1080p") != -1 or mode.find("720p24") != -1:
@@ -192,7 +206,7 @@ class ResolutionLabel(Screen):
 		self.hideTimer.start(config.usage.infobar_timeout.index * 1500, True)
 
 	def clean_me(self):
-		self["restxt"].setText("")
+#		self["restxt"].setText("")
 		self["content"].setText("")
 
 
@@ -233,7 +247,8 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 				getConfigListEntry(_("Show info screen"), config.plugins.autoresolution.showinfo),
 				getConfigListEntry(_("Delay x seconds after service started"), config.plugins.autoresolution.delay_switch_mode),
 				getConfigListEntry(_("Running in testmode"), config.plugins.autoresolution.testmode),
-				getConfigListEntry(_("Deinterlacer mode"), config.plugins.autoresolution.deinterlacer)
+				getConfigListEntry(_("Deinterlacer mode"), config.plugins.autoresolution.deinterlacer),
+				getConfigListEntry(_("Deinterlacer mode for progressive content"), config.plugins.autoresolution.deinterlacer_progressive)
 			))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
