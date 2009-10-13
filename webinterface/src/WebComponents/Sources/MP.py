@@ -1,6 +1,5 @@
 from enigma import eServiceReference, iServiceInformation, eServiceCenter
 from Components.Sources.Source import Source
-from ServiceReference import ServiceReference
 from Components.FileList import FileList
 from os import path as os_path
 
@@ -29,24 +28,32 @@ class MP(Source):
 			self.result = self.writePlaylist(cmd)
 
 	def tryOpenMP(self):
-		# See is the Link is still active
-		if self.session.mediaplayer is not None:
+		# check if there is an active link
+		if hasattr(self.session, "mediaplayer"):
+			mp = self.session.mediaplayer
 			try:
-				test = len(self.session.mediaplayer.playlist)
-				return True
-			except Exception:
+				len(mp.playlist)
+			except Exception, e:
 				pass
+			else:
+				return True
 
-		# Link inactive, instantiate new MP
+		# check if we actually have the mp installed
 		try:
 			from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer, MyPlayList
-			self.session.mediaplayer = self.session.open(MediaPlayer)
-			self.session.mediaplayer.playlist = MyPlayList()
-			return True
-
-		# No MP installed
+		# nope, bail out
 		except ImportError, ie:
 			return False
+		else:
+			# mp installed, see if it's running
+			if isinstance(self.session.current_dialog, MediaPlayer):
+				self.session.mediaplayer = self.session.current_dialog
+				return True
+
+			# start new mp
+			self.session.mediaplayer = self.session.open(MediaPlayer)
+			return True
+
 
 	def getFileList(self, param):
 		print "getFileList:", param
@@ -61,8 +68,6 @@ class MP(Source):
 				return [(serviceRef.toString(), "True", "playlist") for serviceRef in mp.playlist.getServiceRefList()]
 			else:
 				return (("empty", "True", "playlist"),)
-
-		returnList = []
 
 		matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)" #MediaPlayer-Match
 		useServiceRef = False
@@ -79,17 +84,10 @@ class MP(Source):
 
 		filelist = FileList(param["path"], showDirectories=True, showFiles=True, matchingPattern=matchingPattern, useServiceRef=useServiceRef, isTop=False)
 		list = filelist.getFileList()
-		for x in list:
-			if useServiceRef == True:
-				if x[0][1] == False: #isDir
-					returnList.append((x[0][0].toString(), x[0][1], param["path"]))
-				else:
-					returnList.append((x[0][0], x[0][1], param["path"]))
-			else:
-				if x[0][1] == False: #isDir
-					returnList.append((param["path"] + x[0][0], x[0][1], param["path"]))
-				else:
-					returnList.append((x[0][0], x[0][1], param["path"]))
+		if useServiceRef is True:
+			returnList = [ (x[0][0].toString(), x[0][1], param["path"]) if x[0][1] is False else (x[0][0], x[0][1], param["path"]) for x in list ]
+		else:
+			returnList = [ (param["path"] + x[0][0], x[0][1], param["path"]) if x[0][1] is False else (x[0][0], x[0][1], param["path"]) for x in list ]
 
 		return returnList
 
@@ -99,36 +97,19 @@ class MP(Source):
 		if not self.tryOpenMP():
 			return
 
+		# TODO: what's the root for?
 		root = param["root"]
 		file = param["file"]
 
+		if not file:
+			return
+
 		mp = self.session.mediaplayer
-		ref = eServiceReference(file)
-
-		mp.switchToPlayList()
-
-		if len(mp.playlist) == 1:
-				mp.changeEntry(0)
+		ref = eServiceReference(4097, 0, file)
 
 		mp.playlist.addFile(ref)
-
-		#mp.playServiceRefEntry(ref)
-		sRefList = mp.playlist.getServiceRefList()
-		Len = len(sRefList)
-		print "len len(mp.playlist.getServiceRefList()): ", len(mp.playlist.getServiceRefList())
-		if Len:
-			lastEntry = Len - 1
-			currref = sRefList[lastEntry]
-			if self.session.nav.getCurrentlyPlayingServiceReference() is None or currref != self.session.nav.getCurrentlyPlayingServiceReference():
-				self.session.nav.playService(sRefList[lastEntry])
-				info = eServiceCenter.getInstance().info(currref)
-				description = info and info.getInfoString(currref, iServiceInformation.sDescription) or ""
-				mp["title"].setText(description)
-			mp.unPauseService()
-			#mp.playEntry(len(self.playlist.getServiceRefList()))
-
+		mp.playServiceRefEntry(ref)
 		mp.playlist.updateList()
-		mp.infoTimerFire()
 
 	def writePlaylist(self, param):
 		print "writePlaylist: ", param
