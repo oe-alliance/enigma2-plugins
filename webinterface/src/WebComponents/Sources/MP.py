@@ -1,4 +1,4 @@
-from enigma import eServiceReference, iServiceInformation, eServiceCenter
+from enigma import eServiceReference
 from Components.Sources.Source import Source
 from Components.FileList import FileList
 from os import path as os_path
@@ -82,12 +82,19 @@ class MP(Source):
 		else:
 			matchingPattern = param["types"]
 
-		filelist = FileList(param["path"], showDirectories=True, showFiles=True, matchingPattern=matchingPattern, useServiceRef=useServiceRef, isTop=False)
+		path = param["path"]
+		if path == "undefined":
+			path = None
+		elif path is not None and not os_path.exists(path):
+			# TODO: returning something is better than just dying but is this return sane?
+			return ((None, True, path),)
+
+		filelist = FileList(path, showDirectories=True, showFiles=True, matchingPattern=matchingPattern, useServiceRef=useServiceRef, isTop=False)
 		list = filelist.getFileList()
 		if useServiceRef is True:
-			returnList = [ (x[0][0].toString(), x[0][1], param["path"]) if x[0][1] is False else (x[0][0], x[0][1], param["path"]) for x in list ]
+			returnList = [ (x[0][0].toString(), x[0][1], path) if x[0][1] is False else (x[0][0], x[0][1], path) for x in list ]
 		else:
-			returnList = [ (param["path"] + x[0][0], x[0][1], param["path"]) if x[0][1] is False else (x[0][0], x[0][1], param["path"]) for x in list ]
+			returnList = [ (param["path"] + x[0][0], x[0][1], path) if x[0][1] is False else (x[0][0], x[0][1], path) for x in list ]
 
 		return returnList
 
@@ -105,7 +112,9 @@ class MP(Source):
 			return
 
 		mp = self.session.mediaplayer
-		ref = eServiceReference(4097, 0, file)
+		ref = eServiceReference(file)
+		if not ref.valid():
+			ref = eServiceReference(4097, 0, file)
 
 		mp.playlist.addFile(ref)
 		mp.playServiceRefEntry(ref)
