@@ -10,18 +10,17 @@ class ParentControl(Source):
 
 	def command(self):
 		print "ParentControl was called"
-		list = []
 
 		if config.ParentalControl.configured.value:
 			parentalControl.open()
-			servicelist = None
 			if config.ParentalControl.type.value == "whitelist":
 				servicelist = parentalControl.whitelist
 			else:
 				servicelist = parentalControl.blacklist
 
-			for service_ref in servicelist:
-				list.append((str(service_ref), ServiceReference(service_ref).getServiceName()))
+			list = [(str(service_ref), ServiceReference(service_ref).getServiceName()) for service_ref in servicelist]
+		else:
+			list = []
 
 		print "list", list
 		return list

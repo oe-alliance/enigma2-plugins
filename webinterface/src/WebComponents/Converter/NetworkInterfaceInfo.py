@@ -1,7 +1,7 @@
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 
-class NetworkInfo(Converter, object):
+class NetworkInfo(Converter):
 	MAC = 0
 	DHCP = 1
 	IP = 2

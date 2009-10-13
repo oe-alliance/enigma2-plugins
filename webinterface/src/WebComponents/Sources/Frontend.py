@@ -1,10 +1,7 @@
 from Components.Sources.Source import Source
 from Components.NimManager import nimmanager
 
-class Frontend(Source, object):
-	def __init__(self):
-		Source.__init__(self)
-
+class Frontend(Source):
 	def getList(self):
 		nims = []
 		for nim in nimmanager.nimList():
