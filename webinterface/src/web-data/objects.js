@@ -540,3 +540,55 @@ function Settings(xml){
 	};
 }
 //END class Settings
+
+//START class FileList
+function FileList(xml){
+	// parsing values from xml-element
+	try{
+		this.xmlitems = xml.getElementsByTagName("e2filelist").item(0).getElementsByTagName("e2file");
+	} catch (e) {
+		debug("[FileList] parsing Error");
+	}
+	this.filelist = [];
+
+	this.getArray = function(){
+		if(this.filelist.length === 0){
+			for(var i=0;i<this.xmlitems.length;i++){
+				var file = new File(this.xmlitems.item(i));
+				this.filelist.push(file);			
+			}
+		}
+
+		return this.filelist;
+	};
+}
+//END class FileList
+
+//START class File
+function File(xml){	
+	// parsing values from xml-element
+	this.servicereference = getNodeContent(xml, 'e2servicereference');
+	this.isdirectory = getNodeContent(xml, 'e2isdirectory');
+	this.root = getNodeContent(xml, 'e2root', 'undefined');
+
+	this.getServiceReference = function(){
+		return this.servicereference;
+	};
+	
+	this.getNameOnly = function(){
+		if(this.root == '/') {
+			return this.servicereference;
+		} else {
+			return this.servicereference.replace(new RegExp('.*'+this.root, "i"), '');
+		}
+	};
+	
+	this.getIsDirectory = function(){
+		return this.isdirectory;
+	};
+	
+	this.getRoot = function(){
+		return this.root;
+	};
+}	
+//END class File
