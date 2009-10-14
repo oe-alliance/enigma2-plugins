@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 MovieRetitle Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 21:40+0100\n"
+"POT-Creation-Date: 2009-10-14 18:35+0200\n"
 "PO-Revision-Date: 2009-09-10 20:38+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -19,9 +19,6 @@ msgstr ""
 
 msgid "Cancel"
 msgstr "Otkaži"
-
-msgid "Change name..."
-msgstr "Promeni ime..."
 
 msgid "Choose target folder"
 msgstr "Izaberi ciljnu fasciklu"
@@ -38,6 +35,9 @@ msgstr "Ime datoteke"
 
 msgid "Location"
 msgstr "Lokacija"
+
+msgid "Name and Description Input"
+msgstr ""
 
 msgid "OK"
 msgstr "OK"
@@ -64,3 +64,5 @@ msgstr "Ciljni direktorijum nije pronađen. Datoteka nije preimenovana."
 msgid "Title"
 msgstr "Naziv"
 
+msgid "change name..."
+msgstr "Promeni ime..."

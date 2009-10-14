@@ -17,7 +17,7 @@ def main(session, service, **kwargs):
 	session.open(MovieRetitle, service, session.current_dialog, **kwargs)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="MovieRetitle", description=_("Change name..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+	return PluginDescriptor(name="MovieRetitle", description=_("change name..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main)
 
 
 class MovieRetitle(Screen, ConfigListScreen):
