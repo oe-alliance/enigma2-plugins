@@ -7,6 +7,7 @@ from Screens.Setup import SetupSummary
 
 # GUI (Components)
 from Components.ActionMap import ActionMap
+from Components.Sources.StaticText import StaticText
 
 # Configuration
 from Components.config import config, getConfigListEntry
@@ -14,27 +15,31 @@ from Components.config import config, getConfigListEntry
 class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 	"""Configuration of Startup To Standby"""
 
-	skin = """<screen name="StartupToStandbyConfiguration" title="Configure StartupToStandby" position="75,155" size="565,280">
-		<widget name="config" position="5,5" size="555,100" scrollbarMode="showOnDemand" />
-	</screen>"""
-
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.skinName = [ "StartupToStandbyConfiguration", "Setup" ]
 
 		# Summary
-		self.setup_title = "StartupToStandby Configuration"
+		self.setup_title = _("StartupToStandby Configuration")
 		self.onChangedEntry = []
+
+		# Buttons
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
 
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions"],
 			{
-				"cancel": self.keySave,
+				"cancel": self.keyCancel,
+				"save": self.keySave,
 			}
 		)
 
 		ConfigListScreen.__init__(
 			self,
-			[getConfigListEntry(_("Enabled"), config.plugins.startuptostandby.enabled)],
+			[
+				getConfigListEntry(_("Enabled"), config.plugins.startuptostandby.enabled)
+			],
 			session = session,
 			on_change = self.changed
 		)
@@ -42,12 +47,14 @@ class StartupToStandbyConfiguration(Screen, ConfigListScreen):
 		# Trigger change
 		self.changed()
 
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(self.setup_title)
+
 	def changed(self):
 		for x in self.onChangedEntry:
-			try:
-				x()
-			except:
-				pass
+			x()
 
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
