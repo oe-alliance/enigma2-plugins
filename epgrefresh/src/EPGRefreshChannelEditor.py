@@ -132,10 +132,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 
 	def changed(self):
 		for x in self.onChangedEntry:
-			try:
-				x()
-			except Exception:
-				pass
+			x()
 
 	def getCurrentEntry(self):
 		cur = self["config"].getCurrent()
@@ -154,7 +151,7 @@ class EPGRefreshServiceEditor(Screen, ConfigListScreen):
 
 	def removeService(self):
 		cur = self["config"].getCurrent()
-		if cur:
+		if cur and cur[1] is not self.typeSelection:
 			list = self["config"].getList()
 			list.remove(cur)
 			self["config"].setList(list)
