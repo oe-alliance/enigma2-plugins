@@ -142,7 +142,9 @@ class MP(Source):
 		if mp is None:
 			return (False, "mediaplayer not installed")
 
+		fullPath = resolveFilename(SCOPE_CONFIG, filename)
 		mp.playlistIOInternal.save(resolveFilename(SCOPE_CONFIG, filename))
+		return (True, "playlist saved to %s" % fullPath)
 
 	def command(self, param):
 		# TODO: fix error handling
