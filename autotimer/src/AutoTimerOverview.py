@@ -24,7 +24,7 @@ from AutoTimerComponent import AutoTimerComponent
 class AutoTimerOverviewSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
-		<widget source="parent.title" render="Label" position="6,4" size="120,21" font="Regular;18" />
+		<widget source="parent.Title" render="Label" position="6,4" size="120,21" font="Regular;18" />
 		<widget source="entry" render="Label" position="6,25" size="120,21" font="Regular;16" />
 		<widget source="global.CurrentTime" render="Label" position="56,46" size="82,18" font="Regular;16" >
 			<convert type="ClockToText">WithSeconds</convert>
@@ -80,7 +80,6 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 		# Summary
 		self.onChangedEntry = []
-		self["title"] = StaticText()
 		self["entries"].onSelectionChanged.append(self.selectionChanged)
 
 		# Define Actions
@@ -106,10 +105,6 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		)
 
 		self.onLayoutFinish.append(self.setCustomTitle)
-
-	def setTitle(self, title):
-		Screen.setTitle(self, title)
-		self["title"].text = title
 
 	def setCustomTitle(self):
 		self.setTitle(_("AutoTimer overview"))

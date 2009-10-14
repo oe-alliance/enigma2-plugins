@@ -16,7 +16,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 class FTPQueueManagerSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
-		<widget source="parent.title" render="Label" position="6,4" size="120,21" font="Regular;18" />
+		<widget source="parent.Title" render="Label" position="6,4" size="120,21" font="Regular;18" />
 		<widget source="parent.list" render="Label" position="6,25" size="120,21" font="Regular;16">
 			<convert type="StringListSelection" />
 		</widget>
@@ -59,7 +59,6 @@ class FTPQueueManager(Screen):
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText("")
 		self['list'] = List([])
-		self['title'] = StaticText()
 
 		self.pixmaps = (
 			LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FTPBrowser/images/up.png")),
@@ -93,10 +92,6 @@ class FTPQueueManager(Screen):
 		index = min(self['list'].index, len(list)-1)
 		self['list'].setList(list)
 		self['list'].index = index
-
-	def setTitle(self, title):
-		Screen.setTitle(self, title)
-		self['title'].text = title
 
 	def layoutFinished(self):
 		self.setTitle(_("FTP Queue Manager"))
