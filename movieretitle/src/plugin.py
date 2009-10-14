@@ -21,19 +21,10 @@ def Plugins(**kwargs):
 
 
 class MovieRetitle(Screen, ConfigListScreen):
-	skin = """
-	<screen name="TitleDescrInput" position="center,center" size="560,170" title="Name and Description Input">
-		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget source="key_red" render="Label" position="0,0" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" />
-		<widget source="key_green" render="Label" position="140,0" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" />
-		<widget name="config" position="5,50" size="550,120" />
-	</screen>"""
-
 	def __init__(self, session, service, parent, args = 0):
 		Screen.__init__(self, session, parent = parent)
+		self.skinName = [ "MovieRetitle", "Setup" ]
+
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(service)
 		path = service.getPath()

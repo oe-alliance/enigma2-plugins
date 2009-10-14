@@ -79,19 +79,9 @@ class MovieCut(ChoiceBox):
 		MovieCutSpawn(self.session, self, clist, self.name)
 		
 class AdvancedCutInput(Screen, ConfigListScreen):
-	skin = """
-	<screen name="AdvancedCutInput" position="center,center" size="560,300" title="Cut Parameter Input">
-		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget source="key_red" render="Label" position="0,0" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" />
-		<widget source="key_green" render="Label" position="140,0" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" />
-		<widget name="config" position="5,50" size="550,250" />
-	</screen>"""
-
 	def __init__(self, session, name, path, descr):
 		Screen.__init__(self, session)
+		self.skinName = [ "AdvancedCutInput", "Setup" ]
 
 		self["key_green"] = StaticText(_("OK"))
 		self["key_red"] = StaticText(_("Cancel"))
@@ -115,6 +105,7 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 		self.input_space = ConfigNothing()
 		self.input_manualcuts = ConfigText(default = "", fixed_size = False)
 		self.input_manualcuts.setUseableChars(" 0123456789:.")
+
 		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keySelectOrGo,
@@ -133,6 +124,11 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 		self.entry_space = getConfigListEntry(_("Cuts (an IN OUT IN OUT ... sequence of hour:min:sec)"), self.input_space)
 		self.entry_manualcuts = getConfigListEntry(":", self.input_manualcuts)
 		self.createSetup(self["config"])
+
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(_("Cut Parameter Input"))
 
 	def createSetup(self, configlist):
 		list = [
