@@ -16,7 +16,7 @@ from RSSList import RSSFeedList
 class RSSSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
-		<widget source="parent.title" render="Label" position="6,4" size="120,21" font="Regular;18" />
+		<widget source="parent.Title" render="Label" position="6,4" size="120,21" font="Regular;18" />
 		<widget source="entry" render="Label" position="6,25" size="120,21" font="Regular;16" />
 		<widget source="global.CurrentTime" render="Label" position="56,46" size="82,18" font="Regular;16" >
 			<convert type="ClockToText">WithSeconds</convert>
@@ -41,17 +41,12 @@ class RSSBaseView(Screen):
 
 	def __init__(self, session, poller, parent = None):
 		Screen.__init__(self, session, parent)
-		self["title"] = StaticText()
 		self.onChangedEntry = []
 		self.rssPoller = poller
 		self.pollDialog = None
 
 	def createSummary(self):
 		return RSSSummary
-
-	def setTitle(self, title):
-		Screen.setTitle(self, title)
-		self["title"].text = title
 
 	def errorPolling(self, errmsg = ""):
 		# An error occured while polling
