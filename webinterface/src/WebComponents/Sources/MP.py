@@ -8,24 +8,31 @@ class MP(Source):
 	PLAY = 1
 	COMMAND = 3
 	WRITEPLAYLIST = 4
+	ADD = 5
 
 	def __init__(self, session, func=LIST):
 		Source.__init__(self)
 		self.func = func
 		self.session = session
 		error = "unknown command (%s)" % func
-		self.result = ((error, error, error),)
+		if func is self.LIST:
+			self.result = ((error, error, error),)
+		else:
+			self.result = (False, error)
 
 	def handleCommand(self, cmd):
 		self.cmd = cmd
-		if self.func is self.LIST:
+		func = self.func
+		if func is self.LIST:
 			self.result = self.getFileList(cmd)
-		elif self.func is self.PLAY:
+		elif func is self.PLAY:
 			self.result = self.playFile(cmd)
-		elif self.func is self.COMMAND:
+		elif func is self.COMMAND:
 			self.result = self.command(cmd)
-		elif self.func is self.WRITEPLAYLIST:
+		elif func is self.WRITEPLAYLIST:
 			self.result = self.writePlaylist(cmd)
+		elif func is self.ADD:
+			self.result = self.addFile(cmd)
 
 	def tryOpenMP(self):
 		# check if there is an active link
@@ -36,34 +43,30 @@ class MP(Source):
 			except Exception, e:
 				pass
 			else:
-				return True
+				return mp
 
 		# check if we actually have the mp installed
 		try:
 			from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer, MyPlayList
 		# nope, bail out
 		except ImportError, ie:
-			return False
+			return None
 		else:
 			# mp installed, see if it's running
 			if isinstance(self.session.current_dialog, MediaPlayer):
 				self.session.mediaplayer = self.session.current_dialog
-				return True
-
 			# start new mp
-			self.session.mediaplayer = self.session.open(MediaPlayer)
-			return True
-
+			else:
+				self.session.mediaplayer = self.session.open(MediaPlayer)
+			return self.session.mediaplayer
 
 	def getFileList(self, param):
-		print "getFileList:", param
-
 		if param["path"] == "playlist":
+			mp = self.tryOpenMP()
 			# TODO: Fix dummy return if unable to load mp
-			if not self.tryOpenMP():
+			if mp is None:
 				return (("empty", "True", "playlist"),)
 
-			mp = self.session.mediaplayer
 			if mp.playlist:
 				return [(serviceRef.toString(), "True", "playlist") for serviceRef in mp.playlist.getServiceRefList()]
 			else:
@@ -99,50 +102,56 @@ class MP(Source):
 		return returnList
 
 	def playFile(self, param):
-		print "playFile: ", param
+		return self.addFile(param, play=True)
+
+	def addFile(self, param, play=False):
 		# TODO: fix error handling
-		if not self.tryOpenMP():
-			return
+		mp = self.tryOpenMP()
+		if mp is None:
+			return (False, "mediaplayer not installed")
 
 		# TODO: what's the root for?
 		root = param["root"]
 		file = param["file"]
 
 		if not file:
-			return
+			return (False, "missing or invalid parameter file")
 
-		mp = self.session.mediaplayer
 		ref = eServiceReference(file)
 		if not ref.valid():
+			if not os_path.exists(file):
+				return (False, "%s is neither a valid reference nor a valid file" % file)
 			ref = eServiceReference(4097, 0, file)
 
 		mp.playlist.addFile(ref)
-		mp.playServiceRefEntry(ref)
+		if play:
+			mp.playServiceRefEntry(ref)
+			ret = (True, "%s added to playlist and playback started" % file)
+		else:
+			ret = (True, "%s added to playlist" % file)
+
 		mp.playlist.updateList()
+		return ret
 
 	def writePlaylist(self, param):
-		print "writePlaylist: ", param
 		filename = "playlist/%s.e2pls" % param
 		from Tools.Directories import resolveFilename, SCOPE_CONFIG
 
 		# TODO: fix error handling
-		if not self.tryOpenMP():
-			return
+		mp = self.tryOpenMP()
+		if mp is None:
+			return (False, "mediaplayer not installed")
 
-		mp = self.session.mediaplayer
 		mp.playlistIOInternal.save(resolveFilename(SCOPE_CONFIG, filename))
 
 	def command(self, param):
-		print "command: ", param
-
 		# TODO: fix error handling
-		if not self.tryOpenMP():
-			return
-
-		mp = self.session.mediaplayer
+		mp = self.tryOpenMP()
+		if mp is None:
+			return (False, "mediaplayer not installed")
 
 		if param == "previous":
-			mp.previousEntry()
+			mp.previousMarkOrEntry()
 		elif param == "play":
 			mp.playEntry()
 		elif param == "pause":
@@ -153,6 +162,9 @@ class MP(Source):
 			mp.stopEntry()
 		elif param == "exit":
 			mp.exit()
+		else:
+			return (False, "unknown parameter %s" % param)
+		return (True, "executed %s" % param)
 
 	list = property(lambda self: self.result)
 	lut = {"ServiceReference": 0
