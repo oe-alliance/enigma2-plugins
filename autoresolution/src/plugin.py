@@ -6,7 +6,7 @@ from Components.config import config, getConfigListEntry, ConfigSelection, Confi
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.Pixmap import Pixmap
+from Components.Sources.StaticText import StaticText
 from enigma import iPlayableService, iServiceInformation, eTimer
 from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
@@ -213,7 +213,7 @@ class ResolutionLabel(Screen):
 class AutoResSetupMenu(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = "Setup"
+		self.skinName = [ "AutoResSetupMenu", "Setup" ]
 		self.setup_title = _("Autoresolution videomode setup")
 
 		self.onChangedEntry = [ ]
@@ -226,15 +226,14 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 				"save": self.apply,
 			}, -2)
 
-		self["title"] = Label(_("Autoresolution settings"))
-
-		self["oktext"] = Label(_("OK"))
-		self["canceltext"] = Label(_("Cancel"))
-
-		self["ok"] = Pixmap()
-		self["cancel"] = Pixmap()
+		self["key_green"] = StaticText(_("OK"))
+		self["key_red"] = StaticText(_("Cancel"))
 
 		self.createSetup()
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(_("Autoresolution settings"))
 
 	def createSetup(self):
 		self.list = [
