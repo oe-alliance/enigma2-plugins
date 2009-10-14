@@ -15,6 +15,7 @@ from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry, ConfigSubsection, \
 		ConfigText, ConfigPassword, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
+from Components.Sources.StaticText import StaticText
 
 config.plugins.growlee = ConfigSubsection()
 config.plugins.growlee.enable_incoming = ConfigYesNo(default=False)
@@ -23,12 +24,13 @@ config.plugins.growlee.address = ConfigText(fixed_size=False)
 config.plugins.growlee.password = ConfigPassword()
 
 class GrowleeConfiguration(Screen, ConfigListScreen):
-	skin = """<screen title="Growlee Configuration" position="center,center" size="565,280">
-		<widget name="config" position="5,5" size="555,100" scrollbarMode="showOnDemand" />
-	</screen>"""
-
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.skinName = [ "GrowleeConfiguration", "Setup" ]
+
+		# Buttons
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
 
 		# Summary
 		self.setup_title = "Growlee Configuration"
@@ -37,7 +39,8 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions"],
 			{
-				"cancel": self.keySave,
+				"cancel": self.keyCancel,
+				"save": self.keySave,
 			}
 		)
 
@@ -58,10 +61,7 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 
 	def changed(self):
 		for x in self.onChangedEntry:
-			try:
-				x()
-			except:
-				pass
+			x()
 
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
