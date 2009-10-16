@@ -40,6 +40,7 @@ def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries[i].enigma = ConfigSelection(default="0", choices = [("0", _("Enigma 2")),("1", _("Enigma 1"))])
 	config.plugins.Partnerbox.Entries[i].password = ConfigText(default = "dreambox", visible_width = 50, fixed_size = False)
 	config.plugins.Partnerbox.Entries[i].useinternal = ConfigSelection(default="1", choices = [("0", _("use external")),("1", _("use internal"))])
+	config.plugins.Partnerbox.Entries[i].zaptoservicewhenstreaming = ConfigYesNo(default = True)
 	return config.plugins.Partnerbox.Entries[i]
 
 def initConfig():
@@ -252,7 +253,8 @@ class PartnerboxEntryConfigScreen(ConfigListScreen, Screen):
 			getConfigListEntry(_("Port"), self.current.port),
 			getConfigListEntry(_("Enigma Type"), self.current.enigma),
 			getConfigListEntry(_("Password"), self.current.password),
-			getConfigListEntry(_("Servicelists/EPG"), self.current.useinternal)
+			getConfigListEntry(_("Servicelists/EPG"), self.current.useinternal),
+			getConfigListEntry(_("Zap to service when streaming"), self.current.zaptoservicewhenstreaming)
 		]
 
 		ConfigListScreen.__init__(self, cfglist, session)

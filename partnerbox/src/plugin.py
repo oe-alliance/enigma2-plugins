@@ -533,6 +533,7 @@ class RemoteTimerChannelList(Screen):
 		self.http = "http://%s:%d" % (self.ip,self.port)
 		self.enigma_type = int(partnerboxentry.enigma.value)
 		self.useinternal = int(partnerboxentry.useinternal.value)
+		self.zaptoservicewhenstreaming = partnerboxentry.zaptoservicewhenstreaming.value
 		self.key_green_choice = self.ADD_TIMER
 		self.zapTimer = eTimer()
 		self.zapTimer.timeout.get().append(self.zapTimerTimeout)
@@ -564,7 +565,10 @@ class RemoteTimerChannelList(Screen):
 		if self.playeronly == 1:
 			if self.mode == self.REMOTE_TIMER_MODE:
 				self.mode = self.REMOTE_TV_MODE
-				self.Zap()
+				if self.zaptoservicewhenstreaming == False and self.enigma_type == 0:
+					self.GetStreamInfosCallback()
+				else:
+					self.Zap()
 			else:
 				self.session.nav.playService(self.CurrentService)
 				self.mode = self.REMOTE_TIMER_MODE

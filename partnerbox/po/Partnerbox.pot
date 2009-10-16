@@ -392,3 +392,7 @@ msgstr ""
 #: ../src/plugin.py:1249 ../src/plugin.py:1304
 msgid "zapped"
 msgstr ""
+
+#: ../src/PartnerboxSetup.py:257 
+msgid "Zap to service when streaming"
+msgstr ""
