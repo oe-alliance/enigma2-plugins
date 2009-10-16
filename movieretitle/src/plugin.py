@@ -141,7 +141,7 @@ class MovieRetitle(Screen, ConfigListScreen):
 			global_background_mover.enqueue(self.exitDialog, self.session, fr, to)
 		else:
 			print "Moving in foreground"
-			for suff in (".ts.meta", ".ts.cuts", ".ts.ap", ".eit"):
+			for suff in (".ts.meta", ".ts.cuts", ".ts.ap", ".ts.sc", ".eit"):
 				if os_path.exists(fr + suff):
 					os_rename(fr + suff, to + suff)
 			self.exitDialog()
@@ -258,7 +258,7 @@ class MovieRetitleBackgroundMover:
 
 	def moveMovieFilesBackground(self, ele):
 		self.ele = ele
-		self.sufflst = (".ts.meta", ".ts.cuts", ".ts.ap", ".eit", ".ts")
+		self.sufflst = (".ts.meta", ".ts.cuts", ".ts.ap", ".ts.sc", ".eit", ".ts")
 		self.sufflst2 = self.sufflst
 		self.moveNextSuffBG(0)
 
