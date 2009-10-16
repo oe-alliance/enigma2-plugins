@@ -54,10 +54,10 @@ class MovieCut(ChoiceBox):
 	def confirmed3(self, arg):
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(self.service)
-		self.path = self.service.getPath()
+		path = self.service.getPath()
 		self.name = info.getName(self.service)
-		self.descr = info.getInfoString(self.service, iServiceInformation.sDescription)
-		self.session.openWithCallback(self.advcutConfirmed, AdvancedCutInput, self.name, self.path, self.descr)
+		descr = info.getInfoString(self.service, iServiceInformation.sDescription)
+		self.session.openWithCallback(self.advcutConfirmed, AdvancedCutInput, self.name, path, descr)
 
 	def advcutConfirmed(self, ret):
 		if len(ret) <= 1 or not ret[0]:
@@ -87,20 +87,19 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 
 		if self.baseName(path) == self.baseName(name):
-			self.title = ""
+			title = ""
 		else:
-			self.title = name
-		self.dir = self.dirName(path)
-		self.file = self.baseName(path) + " cut"
-		self.descr = descr
+			title = name
+		dir = self.dirName(path)
+		file = self.baseName(path) + " cut"
 		self.input_replace = ConfigSelection(choices = [("no", _("No")), ("yes", _("Yes"))], default = "no")
-		self.input_file = ConfigText(default = self.file, fixed_size = False, visible_width = 45)
-		self.input_title = ConfigText(default = self.title, fixed_size = False, visible_width = 45)
-		self.input_descr = ConfigText(default = self.descr, fixed_size = False, visible_width = 45)
+		self.input_file = ConfigText(default = file, fixed_size = False, visible_width = 45)
+		self.input_title = ConfigText(default = title, fixed_size = False, visible_width = 45)
+		self.input_descr = ConfigText(default = descr, fixed_size = False, visible_width = 45)
 		tmp = config.movielist.videodirs.value
-		if not self.dir in tmp:
-			tmp.append(self.dir)
-		self.input_dir = ConfigSelection(choices = tmp, default = self.dir)
+		if not dir in tmp:
+			tmp.append(dir)
+		self.input_dir = ConfigSelection(choices = tmp, default = dir)
 		self.input_manual = ConfigSelection(choices = [("no", _("Cutlist")), ("yes", _("Manual specification"))], default = "no")
 		self.input_space = ConfigNothing()
 		self.input_manualcuts = ConfigText(default = "", fixed_size = False)

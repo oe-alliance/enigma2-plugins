@@ -35,16 +35,16 @@ class MovieRetitle(Screen, ConfigListScreen):
 		self.file = self.baseName(path)
 		self.name = info.getName(service)
 		if self.file == self.baseName(self.name):
-			self.title = ""
+			self.orig_title = ""
 		else:
-			self.title = self.name
+			self.orig_title = self.name
 		self.descr = info.getInfoString(service, iServiceInformation.sDescription)
 
 		self["key_green"] = StaticText(_("OK"))
 		self["key_red"] = StaticText(_("Cancel"))
 
 		self.input_file = ConfigText(default = self.file, fixed_size = False, visible_width = 42)
-		self.input_title = ConfigText(default = self.title, fixed_size = False, visible_width = 42)
+		self.input_title = ConfigText(default = self.orig_title, fixed_size = False, visible_width = 42)
 		self.input_descr = ConfigText(default = self.descr, fixed_size = False, visible_width = 42)
 		tmp = config.movielist.videodirs.value
 		if not self.dir in tmp:
@@ -93,7 +93,7 @@ class MovieRetitle(Screen, ConfigListScreen):
 			self.keyGo()
 
 	def keyGo(self):
-		if self.input_title.value != self.title or self.input_descr.value != self.descr:
+		if self.input_title.value != self.orig_title or self.input_descr.value != self.descr:
 			self.setTitleDescr(self.path, self.input_title.value, self.input_descr.value)
 		if self.input_file.value != self.file or self.input_dir.value != self.dir:
 			self.maybeMoveMovieFiles(self.path, self.rejoinName(self.input_dir.value, self.input_file.value))
