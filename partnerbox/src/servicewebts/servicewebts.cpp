@@ -34,6 +34,7 @@
 int VPID = 0;
 int PID_SET = 0;
 int APID = 0;
+int H264=0;
 
 
 /********************************************************************/
@@ -235,7 +236,7 @@ int eServiceWebTS::openHttpConnection(std::string url)
 	char statusmsg[100];
 	rc = sscanf(linebuf, "%99s %d %99s", proto, &statuscode, statusmsg);
 	if (rc != 3 || statuscode != 200) {
-		eDebug("wrong response: \"200 OK\" expected.");
+		eDebug("wrong response: \"200 OK\" expected.\n %d --- %d",rc,statuscode);
 		free(linebuf);
 		close(fd);
 		return -1;
@@ -305,6 +306,7 @@ RESULT eServiceWebTS::stop()
 	APID = 0;
 	VPID = 0;
 	PID_SET = 0;
+	H264 = 0;
 	return 0;
 }
 
@@ -329,7 +331,10 @@ void eServiceWebTS::recv_event(int evt)
 		{
 			PID_SET = 1;
 			m_decodedemux->flush();
-			m_decoder->setVideoPID(VPID, eDVBVideo::MPEG2);
+			if (H264)
+				m_decoder->setVideoPID(VPID, eDVBVideo::MPEG4_H264);
+			else
+				m_decoder->setVideoPID(VPID, eDVBVideo::MPEG2);
 			m_decoder->setAudioPID(APID, eDVBAudio::aMPEG);
 			m_decoder->pause();
 			m_event(this, evStart);
@@ -610,12 +615,16 @@ bool eStreamThreadWeb::scanAudioInfo(unsigned char buf[], int len)
 		case 1:
 		case 2: // MPEG Video
 			//addVideo(pid, "MPEG2");
+			H264 = 0;
 			if (VPID == 0)
 				VPID= pid;
 			break;
 
 		case 0x1B: // H.264 Video
 			//addVideo(pid, "H.264");
+			H264 = 1;
+			if (VPID == 0)
+				VPID= pid;
 			break;
 		case 3:
 		case 4: // MPEG Audio
@@ -635,7 +644,11 @@ bool eStreamThreadWeb::scanAudioInfo(unsigned char buf[], int len)
 			//if (pd_type == "AC-3")
 			// dirty dirty :-) Aber es funktioniert...
 			if (lang.length() != 0)
+			{
 				ainfo->addAudio(pid, lang, "AC-3", eDVBAudio::aAC3);
+				if (APID == 0)
+					APID =pid;
+			}
 			break;
 		}
 		b += 4 + pmt[b+4];
