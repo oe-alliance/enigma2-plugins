@@ -9,13 +9,13 @@
 						<th>
 							<div class="sListHeader">MediaPlayer ${mp.root}
 								<map name="mpcontrols">
-								<area shape="circle" coords="17, 17, 14" nohref onclick="sendMediaPlayer('back')" alt="jump back">
+								<area shape="circle" coords="17, 17, 14" nohref onclick="sendMediaPlayer('previous')" alt="jump back">
 								<area shape="circle" coords="54, 17, 14" nohref onclick="sendMediaPlayer('play')" alt="play">
 								<area shape="circle" coords="88, 17, 14" nohref onclick="sendMediaPlayer('pause')" alt="pause">
 								<area shape="circle" coords="125, 17, 14" nohref onclick="sendMediaPlayer('next')" alt="jump forward">
 								<area shape="circle" coords="161, 17, 14" nohref onclick="sendMediaPlayer('stop')" alt="stop">
-								</map><img src="/web-data/img/dvr-buttons-small-fs8.png" align="top" title="Control MediaPlayer" border="0" usemap="#mpcontrols">
-								<!--  <img src="/web-data/img/edit.gif" onclick="openMediaPlayerPlaylist()">
+								</map><img src="/web-data/gfx/dvr-buttons-small-fs8.png" align="top" title="Control MediaPlayer" border="0" usemap="#mpcontrols">
+								<!--  <img src="/web-data/img/edit.png" onclick="openMediaPlayerPlaylist()">
 								 still need some work for editing --> 
 							</div>
 							<div class="sListSearch">
@@ -34,8 +34,8 @@
 						<td>
 							{if item.isdir == "false"}							
 							<div class="sListExt">
-								<img src="/web-data/img/play.png" onclick="${item.exec}('${item.servicereference}','${item.root}');" title="${item.exec_description}" border="0">
-								<a target="_blank" href="/file/?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="Download File" border="0"></a>
+								<img src="/web-data/gfx/play.png" onclick="${item.exec}('${item.servicereference}','${item.root}');" title="${item.exec_description}" border="0">
+								<a target="_blank" href="/file?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="Download File" border="0"></a>
 							</div>
 							{/if}
 						</td>
