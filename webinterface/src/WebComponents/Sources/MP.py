@@ -34,7 +34,7 @@ class MP(Source):
 		elif func is self.ADD:
 			self.result = self.addFile(cmd)
 
-	def tryOpenMP(self):
+	def tryOpenMP(self, noCreate = False):
 		# check if there is an active link
 		if hasattr(self.session, "mediaplayer"):
 			mp = self.session.mediaplayer
@@ -57,6 +57,9 @@ class MP(Source):
 				self.session.mediaplayer = self.session.current_dialog
 			# start new mp
 			else:
+				# bail out if we don't want to open a new mp
+				if noCreate:
+					return False
 				self.session.mediaplayer = self.session.open(MediaPlayer)
 			return self.session.mediaplayer
 
@@ -148,9 +151,12 @@ class MP(Source):
 
 	def command(self, param):
 		# TODO: fix error handling
-		mp = self.tryOpenMP()
+		noCreate = True if param == "exit" else False
+		mp = self.tryOpenMP(noCreate=noCreate)
 		if mp is None:
 			return (False, "mediaplayer not installed")
+		elif mp is False:
+			return (True, "mediaplayer was not active")
 
 		if param == "previous":
 			mp.previousMarkOrEntry()
