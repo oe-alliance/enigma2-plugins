@@ -89,7 +89,7 @@ class MP(Source):
 			matchingPattern = param["types"]
 
 		path = param["path"]
-		if path == "undefined":
+		if path == "Filesystems":
 			path = None
 		elif path is not None and not os_path.exists(path):
 			# TODO: returning something is better than just dying but is this return sane?
@@ -175,7 +175,8 @@ class MP(Source):
 		return (True, "executed %s" % param)
 
 	list = property(lambda self: self.result)
-	lut = {"ServiceReference": 0
-			, "IsDirectory": 1
-			, "Root": 2
-			}
+	lut = {
+		"ServiceReference": 0,
+		"IsDirectory": 1,
+		"Root": 2,
+	}

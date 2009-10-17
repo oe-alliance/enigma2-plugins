@@ -567,9 +567,9 @@ function FileList(xml){
 //START class File
 function File(xml){	
 	// parsing values from xml-element
-	this.servicereference = getNodeContent(xml, 'e2servicereference');
+	this.servicereference = getNodeContent(xml, 'e2servicereference', 'Filesystems');
 	this.isdirectory = getNodeContent(xml, 'e2isdirectory');
-	this.root = getNodeContent(xml, 'e2root', 'undefined');
+	this.root = getNodeContent(xml, 'e2root', 'Filesystems');
 
 	this.getServiceReference = function(){
 		return this.servicereference;

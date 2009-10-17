@@ -1477,6 +1477,7 @@ function incomingMediaPlayer(request){
 
 function loadMediaPlayer(directory){
 	debug("[loadMediaPlayer] called");
+	if(typeof(directory) == 'undefined') directory = 'Filesystems';
 	doRequest(url_mediaplayerlist+directory, incomingMediaPlayer, false);
 }
 
