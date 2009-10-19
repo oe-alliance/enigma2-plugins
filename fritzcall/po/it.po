@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-08 10:16+0200\n"
-"PO-Revision-Date: 2009-09-01 13:39+0100\n"
+"POT-Creation-Date: 2009-10-19 09:53+0200\n"
+"PO-Revision-Date: 2009-10-13 11:37+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: /home/dario/Plugins/FritzCall\n"
-"X-Poedit-SearchPath-0: /home/dario/Plugins/FritzCall\n"
+"X-Poedit-Basepath: /home/dario/Plugins/fritzcall\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/fritzcall\n"
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
@@ -44,7 +44,7 @@ msgid "Append vanity name"
 msgstr "Aggiungere nome \"Vanity\""
 
 msgid "Areacode to add to calls without one (if necessary)"
-msgstr ""
+msgstr "Prefisso per le chiamate in uscita (se necessario)"
 
 msgid "Austria"
 msgstr "Austria"
@@ -67,10 +67,10 @@ msgid "Cancel"
 msgstr "Annull."
 
 msgid "Cannot get calls from FRITZ!Box"
-msgstr ""
+msgstr "Recupero chiamate dalla FRITZ!Box impossibile"
 
 msgid "Cannot get infos from FRITZ!Box"
-msgstr ""
+msgstr "Recupero informazioni dalla FRITZ!Box impossibile"
 
 msgid "Compact Flash"
 msgstr "work"
@@ -202,6 +202,8 @@ msgid ""
 "FRITZ!Box - Error logging in: %s\n"
 "Disabling plugin."
 msgstr ""
+"FRITZ!Box - Errore in esecuzione log: %s\n"
+"Il plugin verrà disabilitato."
 
 #, python-format
 msgid "FRITZ!Box - Error logging out: %s"
@@ -238,6 +240,11 @@ msgid ""
 "\n"
 "But did not load. Probably not PNG, 8-bit"
 msgstr ""
+"Trovata immagine\n"
+"\n"
+"%s\n"
+"\n"
+"Impossibile caricarla. Il formato deve esserecpng, 8 bit."
 
 msgid "France"
 msgstr "Francia"
@@ -329,7 +336,7 @@ msgid "No mailbox active"
 msgstr "Nessuna casella di posta attiva"
 
 msgid "No phonebook"
-msgstr ""
+msgstr "Nessuna rubrica"
 
 msgid "No result from LDIF"
 msgstr "Ricerca in LDIF: nessun risultato!"
@@ -394,7 +401,7 @@ msgid "Phonebook"
 msgstr "Rubrica"
 
 msgid "Plugin not active"
-msgstr ""
+msgstr "Plugin non attivo"
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Quit"
@@ -607,18 +614,6 @@ msgstr "Nulla"
 
 msgid "work"
 msgstr "Ufficio"
-
-#~ msgid "Areacode to add to Outgoing Calls (if necessary)"
-#~ msgstr "Prefisso per le chiamate in uscita (se necessario)"
-
-#~ msgid "CF Drive"
-#~ msgstr "Drive CF"
-
-#~ msgid "FRITZ!Box Login failed: "
-#~ msgstr "FRITZ!Box - Login fallito: "
-
-#~ msgid "Harddisk"
-#~ msgstr "Harddisk"
 
 #~ msgid "business"
 #~ msgstr "Affari"
