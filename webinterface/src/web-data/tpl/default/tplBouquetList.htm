@@ -7,13 +7,13 @@
 									<tr>
 										<td>
 											<a target="_blank" onclick="return parentPin( '${service.servicereference}' );" href="/web/services.m3u?bRef=${service.servicereference}">
-												<img src="/web-data/img/screen.png" title="Open ${service.bouquetname} as Playlist" border="0">
+												<img src="/web-data/img/screen.png" title="Open ${service.servicename} as Playlist" border="0">
 											</a>
 										</td>									
 										<td>										
 											<div class="sListSName">
-												<a href="#" id="${service.servicereference}" onclick="{ loadBouquet(this.id, this.innerHTML); }" class="sListSLink" title="Load Bouquet ${service.bouquetname}">
-													${service.bouquetname}
+												<a href="#" id="${service.servicereference}" onclick="{ loadBouquet(this.id, this.innerHTML); }" class="sListSLink" title="Load Bouquet ${service.servicename}">
+													${service.servicename}
 												</a>
 											</div>
 										</td>

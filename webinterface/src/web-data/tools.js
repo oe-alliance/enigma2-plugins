@@ -110,6 +110,7 @@ function simpleResultHandler(simpleResult){
 	notify(simpleResult.statetext, simpleResult.state);
 }
 
+
 function startUpdateBouquetItemsPoller(){
 	debug("[startUpdateBouquetItemsPoller] called");
 	updateBouquetItemsPoller = setInterval(updateItemsLazy, 60000);
@@ -120,6 +121,7 @@ function stopUpdateBouquetItemsPoller(){
 	debug("[stopUpdateBouquetItemsPoller] called");
 	clearInterval(updateBouquetItemsPoller);
 }
+
 
 //General Helpers
 function parseNr(num) {
@@ -593,34 +595,9 @@ function incomingEPGrequest(request){
 	if (request.readyState == 4){
 		var EPGItems = new EPGList(getXML(request)).getArray(true);
 		debug("[incomingEPGrequest] got "+EPGItems.length+" e2events");
-		if(EPGItems.length > 0){			
-			var namespace = [];
-			for (var i=0; i < EPGItems.length; i++){
-				try{
-					var item = EPGItems[i];				
-					namespace[i] = {	
-							'date': item.getTimeDay(),
-							'eventid': item.getEventId(),
-							'servicereference': item.getServiceReference(),
-							'servicename': quotes2html(item.getServiceName()),
-							'title': quotes2html(item.getTitle()),
-							'titleESC': escape(item.getTitle()),
-							'starttime': item.getTimeStartString(), 
-							'duration': Math.ceil(item.getDuration()/60000), 
-							'description': quotes2html(item.getDescription()),
-							'endtime': item.getTimeEndString(), 
-							'extdescription': quotes2html(item.getDescriptionExtended()),
-							'number': String(i),
-							'start': item.getTimeBegin(),
-							'end': item.getTimeEnd()
-					};
 
-				} catch (Exception) { 
-					debug("[incomingEPGrequest] Error rendering: " + Exception);	
-				}
-			}
-
-			epgListData = {epg : namespace};
+		if( EPGItems.length > 0){
+			epgListData = {epg : EPGItems};
 			fetchTpl('tplEpgList', showEpgList);
 		} else {
 			messageBox('No Items found!', 'Sorry but I could not find any EPG Content containing your search value');
@@ -651,15 +628,10 @@ function loadEPGByServiceReference(servicereference){
 //}
 
 function buildServiceListEPGItem(epgevent, type){
-	var namespace = { 	
-			'starttime': epgevent.getTimeStartString(), 
-			'title': epgevent.getTitle(), 
-			'length': Math.ceil(epgevent.duration/60) 
-	};
-	var data = {epg : namespace};
+	var data = {epg : epgevent};
 	// e.innerHTML = RND(tplServiceListEPGItem, namespace);
 
-	var id = type + epgevent.getServiceReference();
+	var id = type + epgevent.servicereference;
 
 	show('tr' + id);
 
@@ -675,12 +647,12 @@ function incomingServiceEPGNowNext(request, type){
 		var epgevents = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
 		for (var c = 0; c < epgevents.length; c++){
 			try{
-				var epgEvt = new EPGEvent(epgevents.item(c));
+				var epgEvt = new EPGEvent(epgevents.item(c), c).toJSON();
 			} catch (e){
 				debug("[incomingServiceEPGNowNext]" + e);
 			}
 
-			if (epgEvt.getEventId() != ''){
+			if (epgEvt.eventid != ''){
 				buildServiceListEPGItem(epgEvt, type);
 			}
 		}
@@ -782,31 +754,15 @@ function initVolumePanel(){
 //Channels and Bouquets
 
 function incomingChannellist(request){
-	var services = null;
+	var serviceList = null;
 	if(typeof(loadedChannellist[currentBouquet]) != "undefined"){
-		services = loadedChannellist[currentBouquet];
+		serviceList = loadedChannellist[currentBouquet];
 	} else if(request.readyState == 4) {
-		services = new ServiceList(getXML(request)).getArray();
-		debug("[incomingChannellist] got "+services.length+" Services");
+		serviceList = new ServiceList(getXML(request)).getArray();
+		debug("[incomingChannellist] got "+serviceList.length+" Services");
 	}
-	if(services !== null) {
-		var namespace = {};
-		var cssclass = "even";
-
-		for ( var i = 0; i < services.length ; i++){
-
-			cssclass = cssclass == 'even' ? 'odd' : 'even';
-
-			var service = services[i];
-			namespace[i] = { 	
-					'servicereference' : service.getServiceReference(),
-					'servicename' : service.getServiceName(),
-					'cssclass' : cssclass
-			};
-		}
-		var data = { 
-				services : namespace 
-		};
+	if(serviceList !== null) {		
+		var data = { services : serviceList };
 
 		processTpl('tplServiceList', data, 'contentMain', getBouquetEpg);
 		delayedGetSubservices();
@@ -836,41 +792,19 @@ function incomingBouquetListInitial(request){
 		debug("[incomingBouquetListInitial] Got " + bouquetList.length + " TV Bouquets!");	
 
 		// loading first entry of TV Favorites as default for ServiceList
-		loadBouquet(bouquetList[0].getServiceReference(), bouquetList[0].getServiceName());
+		loadBouquet(bouquetList[0].servicereference, bouquetList[0].servicename);
 	}
 }
-
-
-function renderBouquetTable(list, target){
-	debug("[renderBouquetTable] Rendering " + list.length + " Bouquets");	
-
-	var namespace = [];
-	if (list.length < 1){
-		debug("[renderBouquetTable] NO BOUQUETS!");
-	}
-	for (var i=0; i < list.length; i++){
-		try{
-			var bouquet = list[i];
-			namespace[i] = {
-					'servicereference': bouquet.getServiceReference(), 
-					'bouquetname': bouquet.getServiceName()
-			};
-		} catch (e) { }
-	}
-	var data = { 
-			services : namespace 
-	};
-
-	processTpl('tplBouquetList', data, 'contentMain');
-}	
-
 
 
 function incomingBouquetList(request){
 	if (request.readyState == 4) {
 		var bouquetList = new ServiceList(getXML(request)).getArray();
 		debug("[incomingBouquetList] got " + bouquetList.length + " TV Bouquets!");	
-		renderBouquetTable(bouquetList, 'contentMain');		
+		
+		var data = { services : bouquetList };
+
+		processTpl('tplBouquetList', data, 'contentMain');
 	}
 }
 
@@ -956,32 +890,32 @@ function loadMovieNav(){
 function incomingMovieList(request){
 	if(request.readyState == 4){
 
-		var movies = new MovieList(getXML(request)).getArray();
-		debug("[incomingMovieList] Got "+movies.length+" movies");
-		namespace = [];	
+		var movieList = new MovieList(getXML(request)).getArray();
+		debug("[incomingMovieList] Got "+movieList.length+" movies");
+//		namespace = [];	
 
-		var cssclass = "even";
-
-		for ( var i = 0; i < movies.length; i++){
-			cssclass = cssclass == 'even' ? 'odd' : 'even';
-
-			var movie = movies[i];
-			namespace[i] = { 	
-					'servicereference': escape(movie.getServiceReference()),
-					'servicename': movie.getServiceName(),
-					'title': movie.getTitle(),
-					'escapedTitle': escape(movie.getTitle()),
-					'description': movie.getDescription(), 
-					'descriptionextended': movie.getDescriptionExtended(),
-					'filename': String(movie.getFilename()),
-					'filesize': movie.getFilesizeMB(),
-					'tags': movie.getTags().join(', ') ,
-					'length': movie.getLength() ,
-					'time': movie.getTimeDay()+"&nbsp;"+ movie.getTimeStartString(),
-					'cssclass' : cssclass
-			};
-		}
-		var data = { movies : namespace };
+//		var cssclass = "even";
+//
+//		for ( var i = 0; i < movies.length; i++){
+//			cssclass = cssclass == 'even' ? 'odd' : 'even';
+//
+//			var movie = movies[i];
+//			namespace[i] = { 	
+//					'servicereference': escape(movie.getServiceReference()),
+//					'servicename': movie.getServiceName(),
+//					'title': movie.getTitle(),
+//					'escapedTitle': escape(movie.getTitle()),
+//					'description': movie.getDescription(), 
+//					'descriptionextended': movie.getDescriptionExtended(),
+//					'filename': String(movie.getFilename()),
+//					'filesize': movie.getFilesizeMB(),
+//					'tags': movie.getTags().join(', ') ,
+//					'length': movie.getLength() ,
+//					'time': movie.getTimeDay()+"&nbsp;"+ movie.getTimeStartString(),
+//					'cssclass' : cssclass
+//			};
+//		}
+		var data = { movies : movieList };
 		processTpl('tplMovieList', data, 'contentMain');
 	}		
 }
@@ -1002,12 +936,10 @@ function incomingDelMovieResult(request) {
 	debug("[incomingDelMovieResult] called");
 	if(request.readyState == 4){
 		var result = new SimpleXMLResult(getXML(request));
-		if(result.getState()){
-			notify(result.getStateText(), result.getState());
+		if(result.getState()){			
 			loadMovieList();
-		}else{
-			notify(result.getStateText(), result.getState());
 		}
+		simpleResultHandler(result);
 	}		
 }
 
@@ -1038,7 +970,7 @@ function delMovie(sref ,servicename, title, description) {
 function incomingMessageResult(request){
 	if(request.readyState== 4){
 		var result = new SimpleXMLResult(getXML(request));
-		notify(result.getStateText(), result.getState());
+		simpleResultHandler(result);
 	}
 }
 
@@ -1268,93 +1200,9 @@ function ifChecked(rObj) {
 function incomingDeviceInfo(request) {
 	if(request.readyState == 4){
 		debug("[incomingDeviceInfo] called");
-		var xml = getXML(request).getElementsByTagName("e2deviceinfo").item(0);
+		var deviceInfo = new DeviceInfo(getXML(request));
 
-		var info = {};
-
-		var nims = [];
-		var hdds = [];
-		var nics = [];
-
-		var fpversion = "V"+xml.getElementsByTagName('e2fpversion').item(0).firstChild.data;
-
-		var nimnodes = xml.getElementsByTagName('e2frontends').item(0).getElementsByTagName("e2frontend");			
-		for(var i = 0; i < nimnodes.length; i++){					
-			try {
-				var name = nimnodes.item(i).getElementsByTagName("e2name").item(0).firstChild.data;
-				var model = nimnodes.item(i).getElementsByTagName("e2model").item(0).firstChild.data;
-				nims[i] = { 
-						'name' : name, 
-						'model' : model
-				};					
-			} catch (e) {
-				debug("[incomingDeviceInfo] error parsing NIM data: " + e);
-			}
-		}
-
-
-		var hddnodes = xml.getElementsByTagName('e2hdd');			
-		for( var i = 0; i < hddnodes.length; i++){
-			try{			
-				var hdd = hddnodes.item(i);
-
-				var model 	= hdd.getElementsByTagName("e2model").item(0).firstChild.data;
-				var capacity = hdd.getElementsByTagName("e2capacity").item(0).firstChild.data;
-				var free		= hdd.getElementsByTagName("e2free").item(0).firstChild.data;
-
-				hdds[i] = {	
-						'model'		: model,
-						'capacity' 	: capacity,
-						'free'		: free
-				};
-			} catch(e){
-				debug("[incomingDeviceInfo] error parsing HDD data: " + e);
-			}
-		}
-
-		var nicnodes = xml.getElementsByTagName('e2interface');
-		for( var i = 0; i < nicnodes.length; i++){
-			try {
-				var nic = nicnodes.item(i);
-				var name = nic.getElementsByTagName("e2name").item(0).firstChild.data;
-				var mac = nic.getElementsByTagName("e2mac").item(0).firstChild.data;
-				var dhcp = nic.getElementsByTagName("e2dhcp").item(0).firstChild.data;
-				var ip = nic.getElementsByTagName("e2ip").item(0).firstChild.data;
-				var gateway = nic.getElementsByTagName("e2gateway").item(0).firstChild.data;
-				var netmask = nic.getElementsByTagName("e2netmask").item(0).firstChild.data;
-
-				nics[i] = {
-						'name' : name,
-						'mac' : mac,
-						'dhcp' : dhcp,
-						'ip' : ip,
-						'gateway' : gateway,
-						'netmask' : netmask
-				};
-			} catch (e) {
-				debug("[incomingDeviceInfo] error parsing NIC data: " + e);
-			}
-		}
-
-		try{
-			info = {
-					'devicename' : xml.getElementsByTagName('e2devicename').item(0).firstChild.data,	
-					'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data,
-					'imageVersion': xml.getElementsByTagName('e2imageversion').item(0).firstChild.data,
-					'fpVersion': fpversion,
-					'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data			
-			};
-		} catch (e) {
-			debug("[incomingDeviceInfo] parsing Error" + e);
-		}
-
-		var data = { 	
-				"info" : info,
-				"hdds" : hdds,		
-				"nics" : nics,
-				"nims" : nims				 					 	 
-		};
-		processTpl('tplDeviceInfo', data, 'contentMain');
+		processTpl('tplDeviceInfo', deviceInfo, 'contentMain');
 	}
 }
 

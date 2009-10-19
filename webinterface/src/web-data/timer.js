@@ -209,11 +209,9 @@ function incomingTimerAddResult(request) {
 		var result = new SimpleXMLResult(getXML(request));
 		if (result.getState()) {
 			//timer has been added
-			notify(result.getStateText(), result.getState());
 			loadTimerList();
-		} else {
-			notify(result.getStateText(), result.getState());
 		}
+		simpleResultHandler(result);
 	}
 }
 
@@ -223,54 +221,11 @@ function loadTimerList() {
 
 function incomingTimerList(request) {
 	if (request.readyState == 4) {
-		var timers = new TimerList(getXML(request)).getArray();
-		debug("[incomingTimerList] Got " + timers.length + " timers");
+		var timerList = new TimerList(getXML(request)).getArray();
+		debug("[incomingTimerList] Got " + timerList.length + " timers");
 
-		var aftereventReadable = [ 'Nothing', 'Standby',
-				'Deepstandby/Shutdown', 'Auto' ];
-		var justplayReadable = [ 'record', 'zap' ];
-
-		var namespace = [];
-		var cssclass = "even";
-
-		for ( var i = 0; i < timers.length; i++) {
-			var timer = timers[i];
-			var beginDate = new Date(Number(timer.getTimeBegin()) * 1000);
-			var endDate = new Date(Number(timer.getTimeEnd()) * 1000);
-
-			cssclass = cssclass == 'even' ? 'odd' : 'even';
-
-			namespace[i] = {
-				'servicereference' : timer.getServiceReference(),
-				'servicename' : quotes2html(timer.getServiceName()),
-				'title' : quotes2html(timer.getName()),
-				'description' : quotes2html(timer.getDescription()),
-				'descriptionextended' : quotes2html(timer
-						.getDescriptionExtended()),
-				'begin' : timer.getTimeBegin(),
-				'beginDate' : dateToString(beginDate),
-				'end' : timer.getTimeEnd(),
-				'endDate' : dateToString(endDate),
-				'state' : timer.getState(),
-				'duration' : Math.ceil((timer.getDuration() / 60)),
-				'repeated' : timer.getRepeated(),
-				'repeatedReadable' : repeatedReadable(timer.getRepeated()),
-				'justplay' : timer.getJustplay(),
-				'justplayReadable' : justplayReadable[Number(timer
-						.getJustplay())],
-				'afterevent' : timer.getAfterevent(),
-				'aftereventReadable' : aftereventReadable[Number(timer
-						.getAfterevent())],
-				'dirname' : timer.getDirname(),
-				'tags' : timer.getTags(),
-				'disabled' : timer.getDisabled(),
-				'onOff' : timer.getToggleDisabledIMG(),
-				'enDis' : timer.getToggleDisabledText(),
-				'cssclass' : cssclass
-			};
-		}
 		var data = {
-			timer : namespace
+			timer : timerList
 		};
 		processTpl('tplTimerList', data, 'contentMain');
 	}
@@ -334,7 +289,7 @@ function incomingTimerDelResult(request) {
 	debug("[incomingTimerDelResult] called");
 	if (request.readyState == 4) {
 		var result = new SimpleXMLResult(getXML(request));
-		notify(result.getStateText(), result.getState());
+		simpleResultHandler(result);
 		debug("[incomingTimerDelResult] Loading List");
 		loadTimerList();
 	}
@@ -459,13 +414,14 @@ function loadTimerFormChannels() {
 function addTimerListFormatTV(request) {
 	if (addTimerEditFormArray.RadioListFilled === 0) {
 		if (request.readyState == 4) {
-			var services = new ServiceList(getXML(request)).getArray();
-			var tv = {};
-			for ( var i = 0; i < services.length; i++) {
-				var reference = services[i];
-				tv[reference.getServiceReference()] = reference
-						.getServiceName();
+			var serviceList = new ServiceList(getXML(request)).getArray();
+			var tv = [];
+			
+			for ( var i = 0; i < serviceList.length; i++) {
+				var service = serviceList[i];
+				tv[service.servicereference] = service.servicename;
 			}
+			
 			addTimerEditFormArray.TVListFilled = 1;
 			addTimerEditFormArray.TVList = tv;
 		}
@@ -480,12 +436,14 @@ function addTimerListFormatTV(request) {
 
 function addTimerListFormatRadio(request) {
 	if (request.readyState == 4) {
-		var services = new ServiceList(getXML(request)).getArray();
-		var radio = {};
-		for ( var i = 0; i < services.length; i++) {
-			var reference = services[i];
-			radio[reference.getServiceReference()] = reference.getServiceName();
+		var serviceList = new ServiceList(getXML(request)).getArray();
+		var radio = [];
+		
+		for ( var i = 0; i < serviceList.length; i++) {
+			var service = serviceList[i];
+			radio[service.servicereference] = service.servicename;
 		}
+		
 		addTimerEditFormArray.RadioListFilled = 1;
 		addTimerEditFormArray.RadioList = radio;
 	}
@@ -539,7 +497,7 @@ function loadTimerForm() {
 	var tagsObject = addTimerFormPrepareTagsMenu(addTimerEditFormArray.tags);
 
 	var namespace = {
-		'year' : createOptions(2008, 2015, addTimerEditFormArray.year),
+		'year' : createOptions(2009, 2015, addTimerEditFormArray.year),
 		'month' : createOptions(1, 12, addTimerEditFormArray.month),
 		'day' : createOptions(1, 31, addTimerEditFormArray.day),
 		'shour' : createOptions(0, 23, addTimerEditFormArray.shour),
@@ -716,7 +674,7 @@ function cleanTimerListNow() {
 function incomingCleanTimerListNow(request) {
 	if (request.readyState == 4) {
 		var result = new SimpleXMLResult(getXML(request));
-		notify(result.getStateText(), result.getState());
+		simpleResultHandler(result);
 		loadTimerList();
 	}
 }
@@ -758,7 +716,7 @@ function recordNowDecision(recordNowCurrent) {
 
 function incomingWriteTimerListNow(request) {
 	var result = new SimpleXMLResult(getXML(request));
-	notify(result.getStateText(), result.getState());
+	simpleResultHandler(result);
 }
 
 function writeTimerListNow() {

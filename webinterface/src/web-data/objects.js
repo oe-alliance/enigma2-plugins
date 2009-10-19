@@ -31,7 +31,7 @@ function getNamedChildren(xml, parentname, childname){
 }
 
 //START class EPGEvent
-function EPGEvent(xml){	
+function EPGEvent(xml, number){	
 	this.eventID = getNodeContent(xml, 'e2eventid', '');
 	this.startTime = getNodeContent(xml, 'e2eventstart', '');
 	this.duration = getNodeContent(xml, 'e2eventduration', '');
@@ -41,18 +41,24 @@ function EPGEvent(xml){
 	this.fileName = getNodeContent(xml, 'e2filename', '');	
 	this.description = getNodeContent(xml, 'e2eventdescription');
 	this.descriptionE = getNodeContent(xml, 'e2eventdescriptionextended');
-
-	this.getFilename = function (){
+	
+	if(typeof(number) != "undefined"){
+		this.number = number;
+	} else {
+		this.number = 0;
+	}
+	
+	this.getFilename = function() {
 		return this.fileName;
 	};
-	this.getEventId = function (){
+	this.getEventId = function() {
 		return this.eventID;
 	};
-	this.getTimeStart = function (){
+	this.getTimeStart = function() {
 		var date = new Date(parseInt(this.startTime, 10)*1000);
 		return date;
 	};
-	this.getTimeStartString = function (){
+	this.getTimeStartString = function() {
 		var h = this.getTimeStart().getHours();
 		var m = this.getTimeStart().getMinutes();
 		if (m < 10){
@@ -60,7 +66,7 @@ function EPGEvent(xml){
 		}
 		return h+":"+m;
 	};
-	this.getTimeDay = function (){
+	this.getTimeDay = function() {
 		var weekday = ["So", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 		var wday = weekday[this.getTimeStart().getDay()];
 		var day = this.getTimeStart().getDate();
@@ -72,11 +78,11 @@ function EPGEvent(xml){
 	this.getTimeBegin = function(){
 		return this.getTimeStart().getTime()/1000;
 	};
-	this.getTimeEnd = function (){
+	this.getTimeEnd = function() {
 		var date = new Date((parseInt(this.startTime, 10)+parseInt(this.duration, 10))*1000);
 		return date.getTime()/1000;
 	};
-	this.getTimeEndString = function (){
+	this.getTimeEndString = function() {
 		var date = new Date((parseInt(this.startTime, 10)+parseInt(this.duration, 10))*1000);
 		var h = date.getHours();
 		var m = date.getMinutes();
@@ -85,25 +91,47 @@ function EPGEvent(xml){
 		}
 		return h+":"+m;
 	};
-	this.getDuration = function (){
+	this.getDuration = function() {
 		var date = new Date(parseInt(this.duration, 10)*1000);
 		return date;
 	};
-	this.getTitle = function (){
+	this.getTitle = function() {
 		return this.title;
 	};
-	this.getDescription = function (){
+	this.getDescription = function() {
 		return this.description;
 	};
-	this.getDescriptionExtended = function (){
+	this.getDescriptionExtended = function() {
 		return this.descriptionE;
 	};
-	this.getServiceReference = function (){
+	this.getServiceReference = function() {
 		return encodeURIComponent(this.serviceRef);
 	};
-	this.getServiceName = function (){
+	this.getServiceName = function() {
 		return this.serviceName.replace(" ","&nbsp;");
 	};
+	
+	this.json = {
+			'date': this.getTimeDay(),
+			'eventid': this.getEventId(),
+			'servicereference': this.getServiceReference(),
+			'servicename': quotes2html(this.getServiceName()),
+			'title': quotes2html(this.getTitle()),
+			'titleESC': escape(this.getTitle()),
+			'starttime': this.getTimeStartString(), 
+			'duration': Math.ceil(this.getDuration()/60000), 
+			'description': quotes2html(this.getDescription()),
+			'endtime': this.getTimeEndString(), 
+			'extdescription': quotes2html(this.getDescriptionExtended()),
+			'number': String(this.number),
+			'start': this.getTimeBegin(),
+			'end': this.getTimeEnd()
+			};
+	
+	this.toJSON = function() {
+		return this.json;
+	};
+	
 }
 //END class EPGEvent
 
@@ -121,7 +149,7 @@ function EPGList(xml){
 		if (sortbytime === true){
 			var sortList = [];
 			for(var i=0;i<this.xmlitems.length;i++){
-				var event = new EPGEvent(this.xmlitems.item(i));
+				var event = new EPGEvent(this.xmlitems.item(i), i).toJSON();
 				sortList.push( [event.startTime, event] );
 			}
 			sortList.sort(this.sortFunction);
@@ -150,7 +178,7 @@ function EPGList(xml){
 //END class EPGList
 
 // START class Service
-function Service(xml){	
+function Service(xml, cssclass){	
 	this.servicereference = getNodeContent(xml, 'e2servicereference', '');
 	this.servicename = getNodeContent(xml, 'e2servicename');
 	
@@ -173,6 +201,20 @@ function Service(xml){
 	this.setServiceName = function(sname){
 		this.servicename = sname.replace('&quot;', '"');
 	};
+	
+	if( typeof( cssclass ) == "undefined" ){
+		cssclass = 'odd';
+	}
+	
+	this.json = { 	
+			'servicereference' : this.getServiceReference(),
+			'servicename' : this.getServiceName(),
+			'cssclass' : cssclass
+	};
+	
+	this.toJSON = function(){
+		return this.json;
+	};
 }	
 //END class Service
 
@@ -182,8 +224,11 @@ function ServiceList(xml){
 	this.servicelist = [];
 	this.getArray = function(){
 		if(this.servicelist.length === 0){
+			var cssclass = 'even';
+			
 			for (var i=0;i<this.xmlitems.length;i++){
-				var service = new Service(this.xmlitems.item(i));
+				cssclass = cssclass == 'even' ? 'odd' : 'even';
+				var service = new Service(this.xmlitems.item(i), cssclass).toJSON();
 				this.servicelist.push(service);
 			}
 		}
@@ -195,7 +240,7 @@ function ServiceList(xml){
 
 
 // START class Movie
-function Movie(xml){	
+function Movie(xml, cssclass){	
 	this.servicereference = getNodeContent(xml, 'e2servicereference');
 	this.servicename = getNodeContent(xml, 'e2servicename');
 	this.title = getNodeContent(xml, 'e2title');
@@ -207,16 +252,16 @@ function Movie(xml){
 	this.startTime = getNodeContent(xml, 'e2time', 0);
 	this.length = getNodeContent(xml, 'e2length', 0);
 
-	this.getLength = function (){
+	this.getLength = function() {
 		return this.length;
 	};
 	
-	this.getTimeStart = function (){
+	this.getTimeStart = function() {
 		var date = new Date(parseInt(this.startTime, 10)*1000);
 		return date;
 	};
 	
-	this.getTimeStartString = function (){
+	this.getTimeStartString = function() {
 		var h = this.getTimeStart().getHours();
 		var m = this.getTimeStart().getMinutes();
 		if (m < 10){
@@ -225,7 +270,7 @@ function Movie(xml){
 		return h+":"+m;
 	};
 	
-	this.getTimeDay = function (){
+	this.getTimeDay = function() {
 		var Wochentag = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 		var wday = Wochentag[this.getTimeStart().getDay()];
 		var day = this.getTimeStart().getDate();
@@ -264,7 +309,30 @@ function Movie(xml){
 	
 	this.getFilesizeMB = function(){		
 		return Math.round((parseInt(this.filesize, 10)/1024)/1024)+"MB";
-	};	
+	};
+	
+	if( typeof( cssclass) == 'undefined'){
+		cssclass = 'odd';
+	}
+	
+	this.json = {
+			'servicereference': escape(this.getServiceReference()),
+			'servicename': this.getServiceName(),
+			'title': this.getTitle(),
+			'escapedTitle': escape(this.getTitle()),
+			'description': this.getDescription(), 
+			'descriptionextended': this.getDescriptionExtended(),
+			'filename': String(this.getFilename()),
+			'filesize': this.getFilesizeMB(),
+			'tags': this.getTags().join(', ') ,
+			'length': this.getLength() ,
+			'time': this.getTimeDay()+"&nbsp;"+ this.getTimeStartString(),
+			'cssclass' : cssclass
+	};
+	
+	this.toJSON = function(){
+		return this.json;
+	};
 }	
 //END class Movie
 
@@ -275,10 +343,13 @@ function MovieList(xml){
 	this.movielist = [];
 	
 	this.getArray = function(){
-		if(this.movielist.length === 0){			
+		if(this.movielist.length === 0){
+			var cssclass = "even";
+			
 			for(var i=0;i<this.xmlitems.length;i++){
-				//debug("parsing movie "+i+" of "+this.xmlitems.length);
-				var movie = new Movie(this.xmlitems.item(i));
+				cssclass = cssclass == 'even' ? 'odd' : 'even';
+				
+				var movie = new Movie(this.xmlitems.item(i), cssclass).toJSON();
 				this.movielist.push(movie);			
 			}
 		}
@@ -291,7 +362,7 @@ function MovieList(xml){
 
 
 // START class Timer
-function Timer(xml){	
+function Timer(xml, cssclass){	
 	this.servicereference = getNodeContent(xml, 'e2servicereference');
 	this.servicename = getNodeContent(xml, 'e2servicename');
 	this.eventid = getNodeContent(xml, 'e2eit');
@@ -431,7 +502,52 @@ function Timer(xml){
 	
 	this.isCancled = function(){
 		return this.cancled;
-	};	
+	};
+	
+	if( typeof( cssclass == 'undefined')){
+		cssclass = 'odd';
+	}
+	
+	this.beginDate = new Date(Number(this.getTimeBegin()) * 1000);
+	this.endDate = new Date(Number(this.getTimeEnd()) * 1000);
+	
+	this.aftereventReadable = [ 'Nothing', 'Standby',
+	                            'Deepstandby/Shutdown', 'Auto' ];
+	
+	this.justplayReadable = [ 'record', 'zap' ];
+	
+	this.json = {
+			'servicereference' : this.getServiceReference(),
+			'servicename' : quotes2html(this.getServiceName()),
+			'title' : quotes2html(this.getName()),
+			'description' : quotes2html(this.getDescription()),
+			'descriptionextended' : quotes2html(this
+					.getDescriptionExtended()),
+			'begin' : this.getTimeBegin(),
+			'beginDate' : dateToString(this.beginDate),
+			'end' : this.getTimeEnd(),
+			'endDate' : dateToString(this.endDate),
+			'state' : this.getState(),
+			'duration' : Math.ceil((this.getDuration() / 60)),
+			'repeated' : this.getRepeated(),
+			'repeatedReadable' : repeatedReadable(this.getRepeated()),
+			'justplay' : this.getJustplay(),
+			'justplayReadable' : this.justplayReadable[Number(this
+					.getJustplay())],
+			'afterevent' : this.getAfterevent(),
+			'aftereventReadable' : this.aftereventReadable[Number(this
+					.getAfterevent())],
+			'dirname' : this.getDirname(),
+			'tags' : this.getTags(),
+			'disabled' : this.getDisabled(),
+			'onOff' : this.getToggleDisabledIMG(),
+			'enDis' : this.getToggleDisabledText(),
+			'cssclass' : cssclass
+	};
+	
+	this.toJSON = function(){
+		return this.json;
+	};
 }
 
 
@@ -442,8 +558,10 @@ function TimerList(xml){
 	
 	this.getArray = function(){
 		if(this.timerlist.length === 0){
+			var cssclass = 'even';
+			
 			for(var i=0;i<this.xmlitems.length;i++){
-				var timer = new Timer(this.xmlitems.item(i));
+				var timer = new Timer(this.xmlitems.item(i), cssclass).toJSON();
 				this.timerlist.push(timer);			
 			}
 		}
@@ -452,7 +570,100 @@ function TimerList(xml){
 	};
 }
 //END class TimerList
-
+function DeviceInfo(xml){
+	xml = xml.getElementsByTagName("e2deviceinfo").item(0)
+	
+	this.info = {};
+	
+	this.nims = [];
+	this.hdds = [];
+	this.nics = [];
+	
+	this.fpversion = "V"+xml.getElementsByTagName('e2fpversion').item(0).firstChild.data;
+	
+	var nimnodes = xml.getElementsByTagName('e2frontends').item(0).getElementsByTagName('e2frontend');			
+	for(var i = 0; i < nimnodes.length; i++){					
+		try {
+			var name = nimnodes.item(i).getElementsByTagName('e2name').item(0).firstChild.data;
+			var model = nimnodes.item(i).getElementsByTagName('e2model').item(0).firstChild.data;
+			this.nims[i] = { 
+					'name' : name, 
+					'model' : model
+			};					
+		} catch (e) {
+			debug("[incomingDeviceInfo] error parsing NIM data: " + e);
+		}
+	}
+	
+	
+	var hddnodes = xml.getElementsByTagName('e2hdd');			
+	for( var i = 0; i < hddnodes.length; i++){
+		try{			
+			var hdd = hddnodes.item(i);
+	
+			var model 	= hdd.getElementsByTagName('e2model').item(0).firstChild.data;
+			var capacity = hdd.getElementsByTagName('e2capacity').item(0).firstChild.data;
+			var free		= hdd.getElementsByTagName('e2free').item(0).firstChild.data;
+	
+			this.hdds[i] = {	
+					'model'		: model,
+					'capacity' 	: capacity,
+					'free'		: free
+			};
+		} catch(e){
+			debug("[incomingDeviceInfo] error parsing HDD data: " + e);
+		}
+	}
+	
+	
+	var nicnodes = xml.getElementsByTagName('e2interface');
+	for( var i = 0; i < nicnodes.length; i++){
+		try {
+			var nic = nicnodes.item(i);
+			var name = nic.getElementsByTagName('e2name').item(0).firstChild.data;
+			var mac = nic.getElementsByTagName('e2mac').item(0).firstChild.data;
+			var dhcp = nic.getElementsByTagName('e2dhcp').item(0).firstChild.data;
+			var ip = nic.getElementsByTagName('e2ip').item(0).firstChild.data;
+			var gateway = nic.getElementsByTagName('e2gateway').item(0).firstChild.data;
+			var netmask = nic.getElementsByTagName('e2netmask').item(0).firstChild.data;
+	
+			this.nics[i] = {
+					'name' : name,
+					'mac' : mac,
+					'dhcp' : dhcp,
+					'ip' : ip,
+					'gateway' : gateway,
+					'netmask' : netmask
+			};
+		} catch (e) {
+			debug("[incomingDeviceInfo] error parsing NIC data: " + e);
+		}
+	}
+	
+	try{
+		this.info = {
+				'devicename' : xml.getElementsByTagName('e2devicename').item(0).firstChild.data,	
+				'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data,
+				'imageVersion': xml.getElementsByTagName('e2imageversion').item(0).firstChild.data,
+				'fpVersion': this.fpversion,
+				'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data			
+		};
+	} catch (e) {
+		debug("[incomingDeviceInfo] parsing Error" + e);
+	}
+	
+	this.json = {
+			info : this.info,
+			hdds : this.hdds,		
+			nics : this.nics,
+			nims : this.nims
+	};
+	
+	this.toJSON = function(){
+		return this.json;
+	};
+	
+}
 
 function SimpleXMLResult(xml){		
 	try{
