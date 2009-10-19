@@ -171,7 +171,7 @@ class WebIfInterfaceListConfigScreen(Screen):
 
 		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
 			{
-			 "ok"	:	self.keyGreen,
+			 "ok"	:	self.keyYellow,
 			 "back"	:	self.close,
 			 "red"	:	self.close,
 			 "green":	self.keyGreen,
@@ -284,7 +284,8 @@ class WebIfInterfaceConfigScreen(Screen, ConfigListScreen):
 			"green": self.keySave,
 			"red": self.keyCancel,
 			"blue": self.keyDelete,
-			"cancel": self.keyCancel
+			"cancel": self.keyCancel,
+			"ok": self.keySave
 		}, -2)
 
 		self["key_red"] = StaticText(_("Cancel"))
