@@ -17,7 +17,7 @@ import os
 
 class AC3LipSync(Screen,InfoBarAudioSelection):
     skin = """
-        <screen position="60,472" size="600,74" title="AC3 Lip Sync" zPosition="1" >
+        <screen position="center,472" size="600,74" title="AC3 Lip Sync" zPosition="1" >
             <widget name="AudioDelayText" zPosition="2" position="5,0" size="180,21" font="Regular;21" foregroundColors="#ffffff,#ffa323" />
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/AC3LipSyncBarBG.png" zPosition="2" position="190,0" size="370,21" alphatest="on" transparent="1" />
             <widget name="AudioSlider" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/AC3LipSyncBar.png" zPosition="3" position="190,0" size="370,21" transparent="1" />
