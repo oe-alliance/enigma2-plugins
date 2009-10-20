@@ -15,7 +15,7 @@ import time
 
 class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
     skin = ("""
-    <screen position="100,80" size="560,400" title="%s Setup">
+    <screen position="center,center" size="560,400" title="%s Setup">
       <ePixmap pixmap="~/img/button-red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
       <ePixmap pixmap="~/img/button-green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
       <ePixmap pixmap="~/img/button-yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
