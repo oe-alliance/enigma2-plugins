@@ -22,7 +22,7 @@ class FileStreamer(resource.Resource):
 				path = "/hdd/movie/%s" % (filename)
 
 			if os_path.exists(path):
-				basename = filename.encode('ascii', 'ignore')
+				basename = filename.decode('utf-8', 'ignore').encode('ascii', 'ignore')
 				if '/' in basename:
 					basename = basename.split('/')[-1]
 
