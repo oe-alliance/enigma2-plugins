@@ -68,12 +68,12 @@ class MP(Source):
 			mp = self.tryOpenMP()
 			# TODO: Fix dummy return if unable to load mp
 			if mp is None:
-				return (("empty", "True", "playlist"),)
+				return (("empty", True, "playlist"),)
 
 			if mp.playlist:
-				return [(serviceRef.toString(), "True", "playlist") for serviceRef in mp.playlist.getServiceRefList()]
+				return [(serviceRef.getPath(), False, "playlist") for serviceRef in mp.playlist.getServiceRefList()]
 			else:
-				return (("empty", "True", "playlist"),)
+				return (("empty", True, "playlist"),)
 
 		matchingPattern = "(?i)^.*\.(mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob)" #MediaPlayer-Match
 		useServiceRef = False
@@ -91,7 +91,7 @@ class MP(Source):
 		path = param["path"]
 		if path == "Filesystems":
 			path = None
-		elif path is not None and not os_path.exists(path):
+		elif path is not None and not os_path.isdir(path):
 			# TODO: returning something is better than just dying but is this return sane?
 			return ((None, True, path),)
 
@@ -105,36 +105,33 @@ class MP(Source):
 		return returnList
 
 	def playFile(self, param):
-		return self.addFile(param, play=True)
+		return self.addFile(param, doPlay=True)
 
-	def addFile(self, param, play=False):
+	def addFile(self, param, doPlay=False)
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
 			return (False, "mediaplayer not installed")
 
-		# TODO: what's the root for?
-		root = param["root"]
 		file = param["file"]
+		doAdd = False if param["root"] == "playlist" else True
 
 		if not file:
 			return (False, "missing or invalid parameter file")
 
 		ref = eServiceReference(file)
 		if not ref.valid():
-			if not os_path.exists(file):
+			if not os_path.isfile(file):
 				return (False, "%s is neither a valid reference nor a valid file" % file)
 			ref = eServiceReference(4097, 0, file)
 
-		mp.playlist.addFile(ref)
-		if play:
+		if doAdd:
+			mp.playlist.addFile(ref)
+		if doPlay:
 			mp.playServiceRefEntry(ref)
-			ret = (True, "%s added to playlist and playback started" % file)
-		else:
-			ret = (True, "%s added to playlist" % file)
 
 		mp.playlist.updateList()
-		return ret
+		return (True, "%s added to playlist and/or playback started" % (file))
 
 	def writePlaylist(self, param):
 		filename = "playlist/%s.e2pls" % param
