@@ -107,7 +107,7 @@ class MP(Source):
 	def playFile(self, param):
 		return self.addFile(param, doPlay=True)
 
-	def addFile(self, param, doPlay=False)
+	def addFile(self, param, doPlay=False):
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
