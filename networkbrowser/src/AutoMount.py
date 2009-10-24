@@ -125,7 +125,7 @@ class AutoMount():
 
 				if data['mounttype'] == 'nfs':
 					if not os_path.ismount(path):
-						tmpcmd = 'mount -t nfs -o tcp,'+ data['options'] +',rsize=8192,wsize=8192 ' + data['ip'] + ':' + tmpsharedir + ' ' + path
+						tmpcmd = 'mount -t nfs -o tcp,'+ data['options'] +',rsize=8192,wsize=8192 ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
 						self.command = tmpcmd.encode("UTF-8")
 
 				if data['mounttype'] == 'cifs':
