@@ -49,23 +49,14 @@ function onServiceSelected() {
 
 function incomingVLCBouquetList(request) {
 	if (request.readyState == 4) {
-		var bouquets = new ServiceList(getXML(request)).getArray();
+		var services = new ServiceList(getXML(request)).getArray();
 
-		var namespace = [];
-		for ( var i = 0; i < bouquets.length; i++) {
-			var bouquet = bouquets[i];
-
-			namespace[i] = {
-				"servicereference" : bouquet.getServiceReference(),
-				"servicename" : bouquet.getServiceName()
-			};
-		}
 		data = {
-			bouquets : namespace
+			bouquets : services
 		};
 
 		processTpl('streaminterface/tplBouquetList', data, 'bouquetList');
-		loadVLCBouquet(bouquets[0].getServiceReference());
+		loadVLCBouquet(services[0].servicereference);
 	}
 }
 function reloadVLCBouquet(){
