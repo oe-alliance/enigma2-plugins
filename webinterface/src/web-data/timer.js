@@ -2,6 +2,7 @@
 
 // TimerEdit variables:
 var addTimerEditFormArray = [];
+addTimerEditFormArray.TVList = []
 addTimerEditFormArray.TVListFilled = 0;
 addTimerEditFormArray.RadioListFilled = 0;
 addTimerEditFormArray.deleteOldOnSave = 0;
@@ -24,27 +25,32 @@ function addTimerFormPrepareChannelMenu() {
 	var currblist = addTimerEditFormArray.currBouquetList;
 
 	var found = false;
-	for (var element in currblist) {
-		if (addTimerEditFormArray.channel == element) {
+	for (var i = 0; i < currblist.length; i++) {
+		var service = currblist[i];
+		if (addTimerEditFormArray.channel == service.servicename) {
 			found = true;
 			break;
-		}
+		}		
 	}
 	if (!found) {
 		result[addTimerEditFormArray.channel] = addTimerEditFormArray.channelName;
 	}
+	
 	if (currbouquet) {
 		result["<Currbouquet>"] = "-- " + currbouquet + " --";
-		for (var element in currblist) {
-			result[element] = currblist[element];
+		for (var i = 0; i < currblist.length; i++) {
+			var service = currblist[i];
+			result[service.servicereference] = service.servicename;
 		}
 	}
 	result["<Bouquets>"] = "-- Bouquets --";
-	for (var element in tvblist) {
-		result[element] = tvblist[element];
+	for (var i = 0; i < tvblist.length; i++) {
+		service = tvblist[i];
+		result[service.servicereference] = service.servicename;		
 	}
-	for (var element in radioblist) {
-		result[element] = radioblist[element];
+	for (var i = 0; i < radioblist.length; i++) {
+		service = radioblist[i];
+		result[service.servicereference] = service.servicename;	
 	}
 	return result;
 }
@@ -63,27 +69,29 @@ function addTimerFormChangeChannel(newchannel) {
 		return;
 	}
 	var found = false;
-	for (var element in tvblist) {
-		if (element == newchannel) {
+	for (var i = 0; i < tvblist.length; i++) {
+		var service = tvblist[i]
+		if (service.servicereference == newchannel) {
 			found = true;
-			addTimerEditFormArray.currBouquetName = tvblist[element];
-			addTimerEditFormArray.currBouquetList = {};
+			addTimerEditFormArray.currBouquetName = service.servicename;
+			addTimerEditFormArray.currBouquetList = [];
 			break;
 		}
 	}
 	if (!found) {
-		for (var element in radioblist) {
-			if (element == newchannel) {
+		for (var i = 0; i < radioblist.length; i++) {
+			var service = radioblist[i];
+			if (service.servicereference == newchannel) {
 				found = true;
-				addTimerEditFormArray.currBouquetName = radioblist[element];
-				addTimerEditFormArray.currBouquetList = {};
+				addTimerEditFormArray.currBouquetName = service.servicename;
+				addTimerEditFormArray.currBouquetList = [];
 				break;
 			}
 		}
 	}
 	if (found) {
 		// bouquet selected, update menu
-		servicereftoloadepgnow = newchannel;
+		servicereftoloadepgnow = service.servicereference;
 		if (typeof (loadedChannellist[servicereftoloadepgnow]) == "undefined") {
 			doRequest(url_getServices + servicereftoloadepgnow,
 					incomingAddTimerFormChangeChannel, true);
@@ -113,9 +121,8 @@ function incomingAddTimerFormChangeChannel(request) {
 	if (services !== null) {
 		debug("[incomingAddTimerFormChangeChannel] Got " + services.length + " Services");
 		for ( var i = 0; i < services.length; i++) {
-			var reference = services[i];
-			addTimerEditFormArray.currBouquetList[reference
-					.getServiceReference()] = reference.getServiceName();
+			var service = services[i];
+			addTimerEditFormArray.currBouquetList[i] = service;
 		}
 	}
 
@@ -419,7 +426,7 @@ function addTimerListFormatTV(request) {
 			
 			for ( var i = 0; i < serviceList.length; i++) {
 				var service = serviceList[i];
-				tv[service.servicereference] = service.servicename;
+				tv[i] = service;
 			}
 			
 			addTimerEditFormArray.TVListFilled = 1;
@@ -441,7 +448,7 @@ function addTimerListFormatRadio(request) {
 		
 		for ( var i = 0; i < serviceList.length; i++) {
 			var service = serviceList[i];
-			radio[service.servicereference] = service.servicename;
+			radio[i] = service;
 		}
 		
 		addTimerEditFormArray.RadioListFilled = 1;
