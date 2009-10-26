@@ -65,6 +65,7 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 		
 		if config.plugins.Webinterface.http.enabled.value == True:
 			sublist = [
+				getConfigListEntry(_("Listening Port (HTTP)"), config.plugins.Webinterface.http.port),
 				getConfigListEntry(_("Enable Authentication (HTTP)"), config.plugins.Webinterface.http.auth)				
 			]
 			

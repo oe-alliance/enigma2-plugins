@@ -28,6 +28,7 @@ config.plugins.Webinterface.version = ConfigText(__version__) # used to make the
 
 config.plugins.Webinterface.http = ConfigSubsection()
 config.plugins.Webinterface.http.enabled = ConfigYesNo(default=True)
+config.plugins.Webinterface.http.port = ConfigInteger(default = 80, limits=(1, 65535) )
 config.plugins.Webinterface.http.auth = ConfigYesNo(default=False)
 
 config.plugins.Webinterface.https = ConfigSubsection()
@@ -116,7 +117,7 @@ def startWebserver(session):
 				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
 				print "[Webinterface] Starting HTTP-Listener for IP %s" %ip
 				 		
-				startServerInstance(session, ip, 80, config.plugins.Webinterface.http.auth.value)		
+				startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value)		
 		else:
 			print "[Webinterface] HTTP is disabled - not starting!"
 	
