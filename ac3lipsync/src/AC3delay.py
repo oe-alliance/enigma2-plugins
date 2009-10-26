@@ -178,7 +178,7 @@ class AC3delay:
 
                 tlist.append((description, x))
                 if x == self.selectedAudioIndex:
-                    if (description.find("AC3") != -1 or description.find("DTS") != -1) and bDownmixEnabled == False:
+                    if (description.find("AC3") != -1 and not bDownmixEnabled) or description.find("DTS") != -1:
                         self.whichAudio = AC3
                         self.channelAudio = AC3
                     else:
