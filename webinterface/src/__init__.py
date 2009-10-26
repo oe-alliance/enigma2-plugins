@@ -1,18 +1,9 @@
 import Plugins.Plugin
-from Components.config import config
-from Components.config import ConfigSubsection
-from Components.config import ConfigSelection
-from Components.config import ConfigInteger
-from Components.config import ConfigSubList
-from Components.config import ConfigSubDict
-from Components.config import ConfigText
-from Components.config import configfile
-from Components.config import ConfigYesNo
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os,gettext
 
-__version__ = "1.6rc2"
+__version__ = "1.6rc3"
 
 PluginLanguageDomain = "WebInterface"
 PluginLanguagePath = "Extensions/WebInterface/locale"
