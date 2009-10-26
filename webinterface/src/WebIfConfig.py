@@ -93,8 +93,7 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 		self.setTitle(_("Webinterface: Main Setup"))
 
 	def save(self):
-		print "[Webinterface] Saving Configuration"
-		
+		print "[Webinterface] Saving Configuration"		
 		for x in self["config"].list:
 			x[1].save()
 		self.close(True, self.session)

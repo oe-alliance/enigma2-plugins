@@ -38,9 +38,11 @@ config.plugins.Webinterface.https.auth = ConfigYesNo(default=True)
 
 config.plugins.Webinterface.streamauth = ConfigYesNo(default=False)
 
-global running_defered, waiting_shutdown
+global running_defered, waiting_shutdown, toplevel
+
 running_defered = []
 waiting_shutdown = 0
+toplevel = None
 server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revi", "").replace("sion: ", "").replace("$", "")
 
 #===============================================================================
@@ -104,8 +106,13 @@ def startWebserver(session):
 	print "[Webinterface] startWebserver - iNetwork.ifaces: %s" %(iNetwork.ifaces)
 	
 	global running_defered
+	global toplevel
+	
 	session.mediaplayer = None
 	session.messageboxanswer = None
+	if toplevel is None:
+		toplevel = getToplevel(session)
+	
 	
 	if config.plugins.Webinterface.enabled.value is not True:
 		print "[Webinterface] is disabled!"
@@ -114,9 +121,7 @@ def startWebserver(session):
 	#HTTP	
 		if config.plugins.Webinterface.http.enabled.value is True:
 			for adaptername in iNetwork.ifaces:				
-				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
-				print "[Webinterface] Starting HTTP-Listener for IP %s" %ip
-				 		
+				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])				 		
 				startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value)		
 		else:
 			print "[Webinterface] HTTP is disabled - not starting!"
@@ -124,15 +129,12 @@ def startWebserver(session):
 	#HTTPS		
 		if config.plugins.Webinterface.http.enabled.value is True:
 			for adaptername in iNetwork.ifaces:
-				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
-				print "[Webinterface] Starting HTTPS-Listener for IP %s" %ip
-						
+				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])						
 				startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, True)
 		else:
 			print "[Webinterface] HTTPS is disabled - not starting!"
 	
 	#LOCAL HTTP Connections (Streamproxy)
-		print "[Webinterface] Starting Local Http-Listener"
 		startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.streamauth.value)	
 		
 #===============================================================================
@@ -158,7 +160,6 @@ def stopWebserver(session):
 #===============================================================================
 def startServerInstance(session, ipaddress, port, useauth=False, usessl=False):
 	try:
-		toplevel = getToplevel(session)
 		if useauth:
 # HTTPAuthResource handles the authentication for every Resource you want it to			
 			root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
