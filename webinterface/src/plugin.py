@@ -1,8 +1,9 @@
 Version = '$Header$';
 from Plugins.Plugin import PluginDescriptor
-from Components.config import config, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigSubList
+from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
+from Components.Network import iNetwork
 from Screens.MessageBox import MessageBox
-from WebIfConfig import WebIfConfigScreen, initConfig, updateConfig
+from WebIfConfig import WebIfConfigScreen
 from WebChilds.Toplevel import getToplevel
 
 from twisted.internet import reactor, ssl
@@ -18,16 +19,23 @@ from __init__ import _, __version__
 
 #init the config
 config.plugins.Webinterface = ConfigSubsection()
-config.plugins.Webinterface.enable = ConfigYesNo(default=True)
+config.plugins.Webinterface.enabled = ConfigYesNo(default=True)
 config.plugins.Webinterface.allowzapping = ConfigYesNo(default=True)
 config.plugins.Webinterface.includemedia = ConfigYesNo(default=False)
 config.plugins.Webinterface.autowritetimer = ConfigYesNo(default=False)
-config.plugins.Webinterface.loadmovielength = ConfigYesNo(default=False)
+config.plugins.Webinterface.loadmovielength = ConfigYesNo(default=True)
 config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI.
-config.plugins.Webinterface.interfacecount = ConfigInteger(0)
-config.plugins.Webinterface.interfaces = ConfigSubList()
-initConfig()
-config.plugins.Webinterface.warningsslsend = ConfigYesNo(default=False)
+
+config.plugins.Webinterface.http = ConfigSubsection()
+config.plugins.Webinterface.http.enabled = ConfigYesNo(default=True)
+config.plugins.Webinterface.http.auth = ConfigYesNo(default=False)
+
+config.plugins.Webinterface.https = ConfigSubsection()
+config.plugins.Webinterface.https.enabled = ConfigYesNo(default=True)
+config.plugins.Webinterface.https.port = ConfigInteger(default = 443, limits=(1, 65535) )
+config.plugins.Webinterface.https.auth = ConfigYesNo(default=True)
+
+config.plugins.Webinterface.streamauth = ConfigYesNo(default=False)
 
 global running_defered, waiting_shutdown
 running_defered = []
@@ -92,20 +100,40 @@ def restartWebserver(session):
 # start the Webinterface for all configured Interfaces
 #===============================================================================
 def startWebserver(session):
+	print "[Webinterface] startWebserver - iNetwork.ifaces: %s" %(iNetwork.ifaces)
+	
 	global running_defered
 	session.mediaplayer = None
 	session.messageboxanswer = None
-
-	if config.plugins.Webinterface.enable.value is not True:
+	
+	if config.plugins.Webinterface.enabled.value is not True:
 		print "[Webinterface] is disabled!"
-		return False
-
-	for c in config.plugins.Webinterface.interfaces:
-		if c.disabled.value is False:
-			startServerInstance(session, c.address.value, c.port.value, c.useauth.value, c.usessl.value)
+	
+	else:
+	#HTTP	
+		if config.plugins.Webinterface.http.enabled.value is True:
+			for adaptername in iNetwork.ifaces:				
+				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
+				print "[Webinterface] Starting HTTP-Listener for IP %s" %ip
+				 		
+				startServerInstance(session, ip, 80, config.plugins.Webinterface.http.auth.value)		
 		else:
-			print "[Webinterface] not starting disabled interface on %s:%i" % (c.address.value, c.port.value)
-
+			print "[Webinterface] HTTP is disabled - not starting!"
+	
+	#HTTPS		
+		if config.plugins.Webinterface.http.enabled.value is True:
+			for adaptername in iNetwork.ifaces:
+				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
+				print "[Webinterface] Starting HTTPS-Listener for IP %s" %ip
+						
+				startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, True)
+		else:
+			print "[Webinterface] HTTPS is disabled - not starting!"
+	
+	#LOCAL HTTP Connections (Streamproxy)
+		print "[Webinterface] Starting Local Http-Listener"
+		startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.streamauth.value)	
+		
 #===============================================================================
 # stop the Webinterface for all configured Interfaces
 #===============================================================================
@@ -446,11 +474,8 @@ def sessionstart(reason, session):
 #===============================================================================
 def networkstart(reason, **kwargs):
 	if reason is True:
-#		try:
-		updateConfig()
 		startWebserver(global_session)
-#		except ImportError, e:
-#			print "[Webinterface] twisted not available, not starting web services", e
+
 	elif reason is False:
 		stopWebserver(global_session)
 
