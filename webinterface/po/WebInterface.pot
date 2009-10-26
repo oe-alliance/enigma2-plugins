@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins-extensions-webinterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 20:40+0100\n"
+"POT-Creation-Date: 2009-10-26 23:16+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Stephan Reichholf <stephan@reichholf.net>\n"
 "Language-Team: \n"
@@ -11,123 +11,78 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: _\n"
-"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-plugins\\webinterface\n"
+"X-Poedit-Basepath: V:\\eclipse\\workspaces\\pydev\\enigma2-plugins\\enigma2-plugins\\webinterface\n"
 "X-Poedit-SearchPath-0: src\n"
 
-#: src/plugin.py:406
+#: src/plugin.py:496
 msgid "Webinterface"
 msgstr ""
 
-#: src/plugin.py:406
+#: src/plugin.py:496
 msgid "Configuration for the Webinterface"
 msgstr ""
 
-#: src/WebIfConfig.py:80
-msgid "Webinterface: Main Setup"
-msgstr ""
-
-#: src/WebIfConfig.py:85
-msgid "Start Webinterface"
-msgstr ""
-
-#: src/WebIfConfig.py:86
-msgid "Enable /media"
-msgstr ""
-
-#: src/WebIfConfig.py:87
-msgid "Allow zapping via Webinterface"
-msgstr ""
-
-#: src/WebIfConfig.py:88
-msgid "Autowrite timer"
-msgstr ""
-
-#: src/WebIfConfig.py:89
-msgid "Load movie-length"
-msgstr ""
-
-#: src/WebIfConfig.py:95
-#: src/WebIfConfig.py:250
+#: src/WebIfConfig.py:34
 msgid "Cancel"
 msgstr ""
 
-#: src/WebIfConfig.py:96
-#: src/WebIfConfig.py:251
+#: src/WebIfConfig.py:35
 msgid "OK"
 msgstr ""
 
-#: src/WebIfConfig.py:97
-msgid "Interfaces"
+#: src/WebIfConfig.py:58
+msgid "Start Webinterface"
 msgstr ""
 
-#: src/WebIfConfig.py:138
-msgid "Webinterface: List of configured Interfaces"
+#: src/WebIfConfig.py:59
+msgid "Enable /media"
 msgstr ""
 
-#: src/WebIfConfig.py:142
-#: src/WebIfConfig.py:271
-msgid "Address"
+#: src/WebIfConfig.py:60
+msgid "Allow zapping via Webinterface"
 msgstr ""
 
-#: src/WebIfConfig.py:143
-#: src/WebIfConfig.py:272
-msgid "Port"
+#: src/WebIfConfig.py:61
+msgid "Autowrite timer"
 msgstr ""
 
-#: src/WebIfConfig.py:144
-msgid "Authorization"
+#: src/WebIfConfig.py:62
+msgid "Load movie-length"
 msgstr ""
 
-#: src/WebIfConfig.py:145
-msgid "SSL"
+#: src/WebIfConfig.py:63
+msgid "Enable HTTP Access"
 msgstr ""
 
-#: src/WebIfConfig.py:146
-#: src/WebIfConfig.py:270
-msgid "Disabled"
+#: src/WebIfConfig.py:68
+msgid "HTTP Port"
 msgstr ""
 
-#: src/WebIfConfig.py:147
-msgid "Add"
+#: src/WebIfConfig.py:69
+msgid "Enable HTTP Authentication"
 msgstr ""
 
-#: src/WebIfConfig.py:148
-msgid "Change"
+#: src/WebIfConfig.py:74
+msgid "Enable HTTPS Access"
 msgstr ""
 
-#: src/WebIfConfig.py:173
-#: src/WebIfConfig.py:178
-#: src/WebIfConfig.py:183
-msgid "yes"
+#: src/WebIfConfig.py:78
+msgid "HTTPS Port"
 msgstr ""
 
-#: src/WebIfConfig.py:175
-#: src/WebIfConfig.py:180
-#: src/WebIfConfig.py:185
-msgid "no"
+#: src/WebIfConfig.py:79
+msgid "Enable HTTPS Authentication"
 msgstr ""
 
-#: src/WebIfConfig.py:238
-msgid "Webinterface: Edit Interface"
+#: src/WebIfConfig.py:85
+msgid "Enable Streaming Authentication"
 msgstr ""
 
-#: src/WebIfConfig.py:253
-msgid "Delete"
+#: src/WebIfConfig.py:91
+msgid "Webinterface: Main Setup"
 msgstr ""
 
-#: src/WebIfConfig.py:273
-msgid "Require Authorization"
-msgstr ""
-
-#: src/WebIfConfig.py:274
-msgid "SSL Encryption"
-msgstr ""
-
-#: src/WebIfConfig.py:296
-msgid "Really delete this Interface?"
-msgstr ""
-
-#: src/WebComponents/Converter/HddInfo.py:33
+#: src/WebComponents/Converter/HddInfo.py:32
 msgid "N/A"
 msgstr ""
 

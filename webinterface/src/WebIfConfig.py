@@ -65,8 +65,8 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 		
 		if config.plugins.Webinterface.http.enabled.value == True:
 			sublist = [
-				getConfigListEntry(_("Listening Port (HTTP)"), config.plugins.Webinterface.http.port),
-				getConfigListEntry(_("Enable Authentication (HTTP)"), config.plugins.Webinterface.http.auth)				
+				getConfigListEntry(_("HTTP Port"), config.plugins.Webinterface.http.port),
+				getConfigListEntry(_("Enable HTTP Authentication"), config.plugins.Webinterface.http.auth)				
 			]
 			
 			list.extend(sublist)
@@ -75,8 +75,8 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 		
 		if config.plugins.Webinterface.https.enabled.value == True:
 			sublist = [
-				getConfigListEntry(_("Listening Port (HTTPS)"), config.plugins.Webinterface.https.port),
-				getConfigListEntry(_("Enable Authentication (HTTPS)"), config.plugins.Webinterface.https.auth)				
+				getConfigListEntry(_("HTTPS Port"), config.plugins.Webinterface.https.port),
+				getConfigListEntry(_("Enable HTTPS Authentication"), config.plugins.Webinterface.https.auth)				
 			]
 			
 			list.extend(sublist)
