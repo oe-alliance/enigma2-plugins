@@ -22,6 +22,7 @@ SUBDIRS = \
 	lastfm \
 	logomanager \
 	mediadownloader \
+	meteoitalia \
 	mosaic \
 	moviecut \
 	movieretitle \
