@@ -185,6 +185,7 @@ class MediaPlayerWebScreen(WebScreen):
 
 		self["FileList"] = MP(session, func=MP.LIST)
 		self["PlayFile"] = MP(session, func=MP.PLAY)
+		self["RemoveFile"] = MP(session, func=MP.REMOVE)
 		self["Command"] = MP(session, func=MP.COMMAND)
 		self["WritePlaylist"] = MP(session, func=MP.WRITEPLAYLIST)
 

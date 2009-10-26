@@ -15,8 +15,7 @@
 								<area shape="circle" coords="125, 17, 14" nohref onclick="sendMediaPlayer('next')" alt="jump forward">
 								<area shape="circle" coords="161, 17, 14" nohref onclick="sendMediaPlayer('stop')" alt="stop">
 								</map><img src="/web-data/gfx/dvr-buttons-small-fs8.png" align="top" title="Control MediaPlayer" border="0" usemap="#mpcontrols">
-								<!--  <img src="/web-data/img/edit.png" onclick="openMediaPlayerPlaylist()">
-								 still need some work for editing --> 
+								<img src="/web-data/img/edit.png" onclick="openMediaPlayerPlaylist()">
 							</div>
 							<div class="sListSearch">
 								<img src="/web-data/img/nok.png" align="top" title="Close MediaPlayer" border="0" onclick="sendMediaPlayer('exit')">
@@ -32,7 +31,13 @@
 							<div style="color: #${item.color};" onclick="${item.exec}('${item.servicereference}','${item.root}');" class="sListSName" title="${item.servicereference}">${item.name}</div>
 						</td>
 						<td>
-							{if item.isdir == "false"}							
+							{if item.root == "playlist"}
+							<div class="sListExt">
+								<img src="/web-data/gfx/play.png" onclick="${item.exec}('${item.servicereference}','${item.root}');" title="${item.exec_description}" border="0">
+								<img src="/web-data/img/nok.png" onclick="deleteFile('${item.servicereference}');" title="remove file" border="0">
+								<a target="_blank" href="/file?file=${item.name}"><img src="/web-data/img/save.png" title="Download File" border="0"></a>
+							</div>
+							{elseif item.isdir == "false"}							
 							<div class="sListExt">
 								<img src="/web-data/gfx/play.png" onclick="${item.exec}('${item.servicereference}','${item.root}');" title="${item.exec_description}" border="0">
 								<a target="_blank" href="/file?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="Download File" border="0"></a>

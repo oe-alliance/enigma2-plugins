@@ -38,8 +38,9 @@ var url_moviedelete= "/web/moviedelete"; // plus serviceref
 
 var url_mediaplayerlist= "/web/mediaplayerlist?types=audio&path="; // plus full qualified path
 var url_mediaplayerplay= "/web/mediaplayerplay?file="; // plus file-serviceref
+var url_mediaplayerremove= "/web/mediaplayerremove?file="; // plus file-serviceref
 var url_mediaplayercmd= "/web/mediaplayercmd?command="; // plus command
-var url_mediaplayerwrite= "/web/mediaplayerwrite?filename="; // plus command
+var url_mediaplayerwrite= "/web/mediaplayerwrite?filename="; // plus filename
 
 var url_filelist = "/web/mediaplayerlist?path="; // plus full qualified path
 

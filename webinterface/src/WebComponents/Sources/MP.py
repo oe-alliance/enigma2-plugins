@@ -9,6 +9,7 @@ class MP(Source):
 	COMMAND = 3
 	WRITEPLAYLIST = 4
 	ADD = 5
+	REMOVE = 6
 
 	def __init__(self, session, func=LIST):
 		Source.__init__(self)
@@ -31,6 +32,8 @@ class MP(Source):
 			self.result = self.command(cmd)
 		elif func is self.WRITEPLAYLIST:
 			self.result = self.writePlaylist(cmd)
+		elif func is self.REMOVE:
+			self.result = self.removeFile(cmd)
 		elif func is self.ADD:
 			self.result = self.addFile(cmd)
 
@@ -132,6 +135,29 @@ class MP(Source):
 
 		mp.playlist.updateList()
 		return (True, "%s added to playlist and/or playback started" % (file))
+
+	def removeFile(self, file):
+		# TODO: fix error handling
+		mp = self.tryOpenMP()
+		if mp is None:
+			return (False, "mediaplayer not installed")
+
+		ref = eServiceReference(file)
+		if not ref.valid():
+			if not os_path.isfile(file):
+				return (False, "%s is neither a valid reference nor a valid file" % file)
+			ref = eServiceReference(4097, 0, file)
+
+		serviceRefList = mp.playlist.getServiceRefList()
+		i = 0
+		for mpref in serviceRefList:
+			if mpref == ref:
+				mp.playlist.deleteFile(i)
+				mp.playlist.updateList()
+				return (True, "%s removed from playlist" % file)
+			i += 1
+
+		return (False, "%s not found in playlist" % file)
 
 	def writePlaylist(self, param):
 		filename = "playlist/%s.e2pls" % param

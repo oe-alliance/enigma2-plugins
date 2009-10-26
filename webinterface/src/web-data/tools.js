@@ -1239,7 +1239,7 @@ function restartTwisted() {
 
 //MediaPlayer
 function sendMediaPlayer(command) {
-	debug("[playFile] loading sendMediaPlayer");
+	debug("[sendMediaPlayer] called");
 	doRequest( url_mediaplayercmd+command );
 }
 
@@ -1337,14 +1337,21 @@ function playFile(file,root) {
 }
 
 
+function deleteFile(sref) {
+	debug("[deleteFile] called");
+	mediaPlayerStarted = true;
+	doRequest( url_mediaplayerremove+sref );
+}
+
+
 function openMediaPlayerPlaylist() {
-	debug("[playFile] loading openMediaPlayerPlaylist");
+	debug("[openMediaPlayerPlaylist] called");
 	doRequest(url_mediaplayerlist+"playlist", incomingMediaPlayer, false);
 }
 
 
 function writePlaylist() {
-	debug("[playFile] loading writePlaylist");
+	debug("[writePlaylist] called");
 	var filename = '';
 	filename = prompt("Please enter a name for the playlist", "");
 
