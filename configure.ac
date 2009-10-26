@@ -248,4 +248,7 @@ ftpbrowser/src/images/Makefile
 
 growlee/Makefile
 growlee/src/Makefile
+
+meteoitalia/Makefile
+meteoitalia/src/Makefile
 ])
