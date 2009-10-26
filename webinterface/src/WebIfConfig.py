@@ -33,7 +33,9 @@ class WebIfConfigScreen(ConfigListScreen, Screen):
 		
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
+		# SKIN Compat HACK!
 		self["key_yellow"] = StaticText("")
+		# EO SKIN Compat HACK!
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"red": self.cancel,
