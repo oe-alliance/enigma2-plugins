@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma2 EmailClient Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-03 17:26+0200\n"
+"PO-Revision-Date: 2009-10-26 09:42+0100\n"
+"Last-Translator: WeeGull <weegull@hotmail.com>\n"
+"Language-Team: de <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Attachments"
+msgstr "Bifogade"
+
+msgid "Bodys"
+msgstr "Textkropp"
+
+#, python-format
+msgid "Box '%s' is empty"
+msgstr "Epostlåda %s är tom"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Debug"
+msgstr "Debug"
+
+msgid "Email Client"
+msgstr "Epost Klient"
+
+msgid "From"
+msgstr "Från"
+
+msgid "IMAP Port"
+msgstr "IMAP Port"
+
+msgid "IMAP Server"
+msgstr "IMAP Server"
+
+msgid ""
+"In order of missing standart python library files\n"
+"i have copied the nessary files now.\n"
+"But you have to restart your Box\n"
+" to apply this!"
+msgstr ""
+"Då det saknades vissa standard python librarys filer,\n"
+"har dessa nu kopierats.\n"
+"En omstart av din Dreambox är nödvändig\n"
+"för att aktivera dessa."
+
+msgid "Mailbox"
+msgstr "Epostlåda"
+
+msgid ""
+"New mail arrived:\n"
+"\n"
+msgstr ""
+"Nytt epost inkommet:\n"
+"\n"
+
+msgid "Password"
+msgstr "Lösenord"
+
+msgid "Subject"
+msgstr "Ämne"
+
+msgid "Username"
+msgstr "Användarnamn"
+
+msgid "cancel"
+msgstr "Avbryt"
+
+msgid "cannot access inbox"
+msgstr "ingen åtkomst till INBOX"
+
+#, python-format
+msgid "cannot access mailbox '%(mboxname)s'"
+msgstr "ingen åtkomst till epostlådan '%(mboxname)s'"
+
+msgid "cannot get capabilities of mailserver"
+msgstr "kan inte erhålla tjänster fråm epostserver"
+
+msgid "cannot get headers of new messages"
+msgstr "kan inte erhålla brevhuvuden på nya meddelanden"
+
+msgid "cannot get list of new messages"
+msgstr "kan inte erhålla lista över nya meddelanden"
+
+msgid "check interval (minutes)"
+msgstr "Kontroll-Intervall (i Minuter)"
+
+msgid "connected"
+msgstr "Ansluten"
+
+#, python-format
+msgid "connection to %(server)s:%(port)d failed"
+msgstr "anslutning till %(server)s:%(port)d misslyckades"
+
+#, python-format
+msgid ""
+"connection to %(server)s:%(port)d failed:\n"
+"%(reason)s"
+msgstr ""
+"anslutning till %(server)s:%(port)d misslyckades:\n"
+"%(reason)s"
+
+msgid "delete"
+msgstr "Ta bort"
+
+msgid "display timeout (seconds)"
+msgstr "visa timeout (i Sekunder)"
+
+msgid "encrypted login failed, trying without encryption"
+msgstr "krypterad inloggning misslyckades, försöker utan kryptering"
+
+msgid "failed to load message"
+msgstr "misslyckades med att ladda meddelandet"
+
+#, python-format
+msgid "have %d messages"
+msgstr "har %d meddelanden"
+
+msgid "have no messages"
+msgstr "inga meddelanden"
+
+msgid "headers loaded, now parsing ..."
+msgstr "Brevhuvuden laddade, bearbetar nu..."
+
+msgid "leave unread"
+msgstr "lämna oläst"
+
+#, python-format
+msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
+msgstr "laddar brevhuvuden %(from)d-%(to)d från epostlåda '%(name)s'"
+
+msgid "loading message"
+msgstr "laddar meddelanden"
+
+msgid "logged in"
+msgstr "inloggad"
+
+msgid "login failed"
+msgstr "Inloggning missluckades"
+
+msgid "max of Headers to load"
+msgstr "Max anntal brevhuvuden att ladda"
+
+msgid "no"
+msgstr "nej"
+
+msgid "no date"
+msgstr "inget datum"
+
+msgid "no filename"
+msgstr "inget filnamn"
+
+msgid "no from"
+msgstr "inegn avsändare"
+
+msgid "no sender"
+msgstr "ingen skickare"
+
+msgid "no subject"
+msgstr "inget ämne"
+
+msgid "notify about new mails"
+msgstr "Meddela om nya epost"
+
+msgid "ok"
+msgstr "OK"
+
+msgid "parsing message"
+msgstr "Bearbetar epost"
+
+msgid "really delete Mail?"
+msgstr "verkligen ta bort epost?"
+
+msgid "really undelete Mail?"
+msgstr "verkligen återskapa epost?"
+
+msgid "select Attachment"
+msgstr "välj bifogad"
+
+msgid "select Body"
+msgstr "välj textkropp"
+
+msgid "show deleted entries"
+msgstr "visa borttagna epost"
+
+msgid "undelete"
+msgstr "återskapa"
+
+msgid "unread messages in mailbox"
+msgstr "olästa meddelanden i epostlådan"
+
+msgid "view Emails via IMAP4"
+msgstr "läs epost med hjälp av IMAP4"
+
+msgid "yes"
+msgstr "ja"
+
