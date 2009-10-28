@@ -23,10 +23,10 @@
 			<e2eventname><e2:element source="session.Event_Now"><e2:convert type="EventName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventname>
 			<e2eventtitle><e2:element source="session.Event_Now"><e2:convert type="EventName">Name</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventtitle>
 			<e2eventdescription><e2:element source="session.Event_Now"><e2:convert type="EventName">Description</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescription>
-			<e2eventdescriptionextended><e2:element source="session.Event_Now"><e2:convert type="EventName">ExtendedDescription</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescriptionextended>
 			<e2eventstart><e2:element source="session.Event_Now"><e2:convert type="EventTime">StartTime</e2:convert><e2:convert type="ClockToText">Timestamp</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventstart>
 			<e2eventduration><e2:element source="session.Event_Now"><e2:convert type="EventTime">Duration</e2:convert><e2:convert type="ClockToText">Timestamp</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventduration>
 			<e2eventremaining><e2:element source="session.Event_Now"><e2:convert type="EventTime">Remaining</e2:convert><e2:convert type="RemainingToText">InSeconds</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventremaining>
+			<e2eventdescriptionextended><e2:element source="session.Event_Now"><e2:convert type="EventName">ExtendedDescription</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventdescriptionextended>			
 		</e2event>
 		<e2event>
 			<e2eventid><e2:element source="session.Event_Next"><e2:convert type="EventName">ID</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2eventid>
