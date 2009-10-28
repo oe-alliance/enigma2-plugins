@@ -82,7 +82,7 @@ function incomingVLCSubservices(request){
 
 			var first = services[0];
 			
-			var lastoption = $(services[0].getServiceReference());
+			var lastoption = $(services[0].servicereference);
 			
 			if(lastoption !== null){
 				// we already have the main service in our servicelist so we'll
@@ -91,12 +91,12 @@ function incomingVLCSubservices(request){
 					var service = services[i];
 					
 					//TODO: FIX THIS UGLY CODE
-					var option = $(service.getServiceReference());
+					var option = $(service.servicereference);
 					if(option !== null){
 						option.remove();
 					}
-					option = new Option(' |- ' + service.getServiceName());
-					option.id =  service.getServiceReference();
+					option = new Option(' |- ' + service.servicename);
+					option.id =  service.servicereference;
 					
 					lastoption.insert( { after : option } );
 					
@@ -122,29 +122,10 @@ function delayedLoadVlcSubservices(){
  */
 function incomingVLCChannelList(request) {
 	if (request.readyState == 4) {
-		var events = getXML(request).getElementsByTagName("e2eventlist")
-				.item(0).getElementsByTagName("e2event");
-
-		var namespace = [];
-
-		for ( var i = 0; i < events.length; i++) {
-			var event = new EPGEvent(events.item(i));
-			var eventname = event.getTitle();
-
-			if (eventname.length > 40) {
-				eventname = eventname.substring(0, 40) + '...';
-			}
-
-			namespace[i] = {
-				'servicereference' : event.getServiceReference(),
-				'servicename' : event.getServiceName(),
-				'eventname' : eventname,
-				'duration' : (parseInt((event.duration / 60), 10))
-			};
-		}
+		var events = new EPGList(getXML(request)).getArray();
 
 		var data = {
-			'services' : namespace
+			'events' : events
 		};
 		processTpl('streaminterface/tplServiceList', data, 'channelList');
 	}

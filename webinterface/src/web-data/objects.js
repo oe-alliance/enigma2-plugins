@@ -117,6 +117,7 @@ function EPGEvent(xml, number){
 			'servicereference': this.getServiceReference(),
 			'servicename': quotes2html(this.getServiceName()),
 			'title': quotes2html(this.getTitle()),
+			'shorttitle': quotes2html(this.getTitle().substring(0, 40) ) + '...',
 			'titleESC': escape(this.getTitle()),
 			'starttime': this.getTimeStartString(), 
 			'duration': Math.ceil(this.getDuration()/60000), 
@@ -150,7 +151,7 @@ function EPGList(xml){
 			var sortList = [];
 			for(var i=0;i<this.xmlitems.length;i++){
 				var event = new EPGEvent(this.xmlitems.item(i), i).toJSON();
-				sortList.push( [event.startTime, event] );
+				sortList.push( [event.starttime, event] );
 			}
 			sortList.sort(this.sortFunction);
 			
@@ -164,7 +165,7 @@ function EPGList(xml){
 		}else{
 			list = [];
 			for (i=0;i<this.xmlitems.length;i++){
-				xv = new EPGEvent(this.xmlitems.item(i));
+				xv = new EPGEvent(this.xmlitems.item(i)).toJSON();
 				list.push(xv);			
 			}
 			return list;

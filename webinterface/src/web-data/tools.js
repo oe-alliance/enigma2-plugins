@@ -495,21 +495,15 @@ function incomingSubServiceRequest(request){
 		if(services.length > 1) {
 
 			var first = services[0];
-			var namespace = [];
 
 			// we already have the main service in our servicelist so we'll
-			// start with the second element
-			for ( var i = 1; i < services.length ; i++){
-				var reference = services[i];
-				namespace[i] = { 	
-						'servicereference': reference.getServiceReference(),
-						'servicename': reference.getServiceName()
-				};
-			}
-			var data = { subservices : namespace };
+			// start with the second element			
+			services.shift()
+			
+			var data = { subservices : services };
+			
 
-
-			var id = 'SUB'+first.getServiceReference();
+			var id = 'SUB'+first.servicereference;
 			show('tr' + id);
 			processTpl('tplSubServices', data, id);
 		}
