@@ -113,29 +113,43 @@ def startWebserver(session):
 	if toplevel is None:
 		toplevel = getToplevel(session)
 	
+	errors = ""
 	
 	if config.plugins.Webinterface.enabled.value is not True:
 		print "[Webinterface] is disabled!"
 	
 	else:
-	#HTTP	
+	#HTTP
 		if config.plugins.Webinterface.http.enabled.value is True:
 			for adaptername in iNetwork.ifaces:				
-				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])				 		
-				startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value)		
+				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
+				#Network.py sets the IP of inactive Adapters to 0.0.0.0, we do not want to listen on 0.0.0.0
+				if ip != '0.0.0.0': 		
+					ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value)
+					if ret == False:
+						errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.http.port.value)
 		else:
 			print "[Webinterface] HTTP is disabled - not starting!"
 	
 	#HTTPS		
-		if config.plugins.Webinterface.http.enabled.value is True:
+		if config.plugins.Webinterface.https.enabled.value is True:
 			for adaptername in iNetwork.ifaces:
-				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])						
-				startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, True)
+				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
+				#Network.py sets the IP of inactive Adapters to 0.0.0.0, we do not want to listen on 0.0.0.0
+				if ip != '0.0.0.0':						
+					ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, True)
+					if ret == False:
+						errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.https.port.value)
 		else:
 			print "[Webinterface] HTTPS is disabled - not starting!"
 	
 	#LOCAL HTTP Connections (Streamproxy)
-		startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.streamauth.value)	
+		ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.streamauth.value)			
+		if ret == False:
+			errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
+		
+		if errors != "":
+			session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), MessageBox.TYPE_ERROR)
 		
 #===============================================================================
 # stop the Webinterface for all configured Interfaces
@@ -172,13 +186,13 @@ def startServerInstance(session, ipaddress, port, useauth=False, usessl=False):
 			d = reactor.listenSSL(port, site, ctx, interface=ipaddress)
 		else:
 			d = reactor.listenTCP(port, site, interface=ipaddress)
-		running_defered.append(d)
+		running_defered.append(d)		
 		print "[Webinterface] started on %s:%i" % (ipaddress, port), "auth=", useauth, "ssl=", usessl
+		return True
 	
 	except Exception, e:
-		print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e
-		session.open(MessageBox, 'starting FAILED on %s:%i!\n\n%s' % (ipaddress, port, str(e)), MessageBox.TYPE_ERROR)
-
+		print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e		
+		return False
 #===============================================================================
 # HTTPAuthResource
 # Handles HTTP Authorization for a given Resource
