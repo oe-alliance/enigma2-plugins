@@ -119,29 +119,21 @@ def startWebserver(session):
 		print "[Webinterface] is disabled!"
 	
 	else:
-	#HTTP
-		if config.plugins.Webinterface.http.enabled.value is True:
-			for adaptername in iNetwork.ifaces:				
-				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
-				#Network.py sets the IP of inactive Adapters to 0.0.0.0, we do not want to listen on 0.0.0.0
-				if ip != '0.0.0.0': 		
+
+		for adaptername in iNetwork.ifaces:				
+			ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
+			#Network.py sets the IP of inactive Adapters to 0.0.0.0, we do not want to listen on 0.0.0.0
+			if ip != '0.0.0.0':
+			#HTTP
+				if config.plugins.Webinterface.http.enabled.value is True:
 					ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value)
 					if ret == False:
 						errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.http.port.value)
-		else:
-			print "[Webinterface] HTTP is disabled - not starting!"
-	
-	#HTTPS		
-		if config.plugins.Webinterface.https.enabled.value is True:
-			for adaptername in iNetwork.ifaces:
-				ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
-				#Network.py sets the IP of inactive Adapters to 0.0.0.0, we do not want to listen on 0.0.0.0
-				if ip != '0.0.0.0':						
+			#HTTPS		
+				if config.plugins.Webinterface.https.enabled.value is True:
 					ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, True)
 					if ret == False:
 						errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.https.port.value)
-		else:
-			print "[Webinterface] HTTPS is disabled - not starting!"
 	
 	#LOCAL HTTP Connections (Streamproxy)
 		ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.streamauth.value)			
