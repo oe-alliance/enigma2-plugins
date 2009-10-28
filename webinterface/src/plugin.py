@@ -119,9 +119,9 @@ def startWebserver(session):
 		print "[Webinterface] is disabled!"
 	
 	else:
-
 		for adaptername in iNetwork.ifaces:				
 			ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
+						
 			#Network.py sets the IP of inactive Adapters to 0.0.0.0, we do not want to listen on 0.0.0.0
 			if ip != '0.0.0.0':
 			#HTTP

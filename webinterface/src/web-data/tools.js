@@ -1373,14 +1373,16 @@ function incomingCurrent(request){
 	if(request.readyState == 4){
 		try{
 			var xml = getXML(request).getElementsByTagName("e2currentserviceinformation").item(0);
-
-			var duration = '+' + parseInt( (xml.getElementsByTagName('e2eventduration').item(0).firstChild.data / 60), 10 ) + " min";
+			
+			var duration = parseInt( (xml.getElementsByTagName('e2eventduration').item(0).firstChild.data / 60), 10 );
+			var remaining = parseInt( (xml.getElementsByTagName('e2eventremaining').item(0).firstChild.data / 60), 10 );
 
 			namespace = {
 					"servicereference" : encodeURIComponent(xml.getElementsByTagName('e2servicereference').item(0).firstChild.data),
 					"servicename" : xml.getElementsByTagName('e2servicename').item(0).firstChild.data,
 					"eventname" : xml.getElementsByTagName('e2eventname').item(0).firstChild.data,
-					"duration" : duration 
+					"remaining" : remaining,
+					"duration" : duration
 			};
 
 			var data = { current : namespace };
