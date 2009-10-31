@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-03 17:26+0200\n"
+"POT-Creation-Date: 2009-10-31 11:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,14 +16,17 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, python-format
+msgid "%(name)s (%(user)s@%(server)s)"
+msgstr ""
+
+msgid "Accounts list"
+msgstr ""
+
 msgid "Attachments"
 msgstr ""
 
 msgid "Bodys"
-msgstr ""
-
-#, python-format
-msgid "Box '%s' is empty"
 msgstr ""
 
 msgid "Date"
@@ -35,6 +38,16 @@ msgstr ""
 msgid "Email Client"
 msgstr ""
 
+msgid "Email setup"
+msgstr ""
+
+#, python-format
+msgid ""
+"EmailClient for %(account)s:\n"
+"\n"
+"%(error)s"
+msgstr ""
+
 msgid "From"
 msgstr ""
 
@@ -44,28 +57,40 @@ msgstr ""
 msgid "IMAP Server"
 msgstr ""
 
+#, python-format
 msgid ""
-"In order of missing standart python library files\n"
-"i have copied the nessary files now.\n"
-"But you have to restart your Box\n"
-" to apply this!"
-msgstr ""
-
-msgid "Mailbox"
-msgstr ""
-
-msgid ""
-"New mail arrived:\n"
+"New mail arrived for account %s:\n"
 "\n"
 msgstr ""
 
-msgid "Password"
+#, python-format
+msgid "Really delete account %s?"
 msgstr ""
 
 msgid "Subject"
 msgstr ""
 
-msgid "Username"
+#, python-format
+msgid ""
+"[EmailAccount] %(name)s: _cbCapabilities:\n"
+"####################################################################################################\n"
+"# If you have problems to log into your imap-server, please send me the "
+"output of the following line\n"
+"# cbCapabilities: %(capa)s\n"
+"####################################################################################################\n"
+msgstr ""
+
+#, python-format
+msgid "account %s is not connected"
+msgstr ""
+
+msgid "account name"
+msgstr ""
+
+msgid "account not connected"
+msgstr ""
+
+msgid "add"
 msgstr ""
 
 msgid "cancel"
@@ -74,33 +99,13 @@ msgstr ""
 msgid "cannot access inbox"
 msgstr ""
 
-#, python-format
-msgid "cannot access mailbox '%(mboxname)s'"
-msgstr ""
-
-msgid "cannot get capabilities of mailserver"
-msgstr ""
-
 msgid "cannot get headers of new messages"
 msgstr ""
 
 msgid "cannot get list of new messages"
 msgstr ""
 
-msgid "check interval (minutes)"
-msgstr ""
-
-msgid "connected"
-msgstr ""
-
-#, python-format
-msgid "connection to %(server)s:%(port)d failed"
-msgstr ""
-
-#, python-format
-msgid ""
-"connection to %(server)s:%(port)d failed:\n"
-"%(reason)s"
+msgid "connection failed - retrying"
 msgstr ""
 
 msgid "delete"
@@ -109,10 +114,22 @@ msgstr ""
 msgid "display timeout (seconds)"
 msgstr ""
 
-msgid "encrypted login failed, trying without encryption"
+msgid "edit"
+msgstr ""
+
+msgid "empty values - retry"
+msgstr ""
+
+#, python-format
+msgid ""
+"error logging %(who)s in:\n"
+"%(failure)s"
 msgstr ""
 
 msgid "failed to load message"
+msgstr ""
+
+msgid "getting message ..."
 msgstr ""
 
 #, python-format
@@ -125,26 +142,26 @@ msgstr ""
 msgid "headers loaded, now parsing ..."
 msgstr ""
 
+#, python-format
+msgid "importing configurations from %s"
+msgstr ""
+
 msgid "leave unread"
 msgstr ""
 
-#, python-format
-msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
+msgid "loading headers ..."
 msgstr ""
 
-msgid "loading message"
+msgid "mail check interval (minutes)"
 msgstr ""
 
-msgid "logged in"
+msgid "maximum mail size to fetch"
 msgstr ""
 
-msgid "login failed"
+msgid "message too large"
 msgstr ""
 
-msgid "max of Headers to load"
-msgstr ""
-
-msgid "no"
+msgid "no account selected"
 msgstr ""
 
 msgid "no date"
@@ -154,6 +171,9 @@ msgid "no filename"
 msgstr ""
 
 msgid "no from"
+msgstr ""
+
+msgid "no mailbox?!?!"
 msgstr ""
 
 msgid "no sender"
@@ -168,13 +188,19 @@ msgstr ""
 msgid "ok"
 msgstr ""
 
-msgid "parsing message"
+msgid "parsing message ..."
 msgstr ""
 
-msgid "really delete Mail?"
+msgid "password"
 msgstr ""
 
-msgid "really undelete Mail?"
+msgid "really delete mail?"
+msgstr ""
+
+msgid "really undelete mail?"
+msgstr ""
+
+msgid "remove"
 msgstr ""
 
 msgid "select Attachment"
@@ -189,11 +215,8 @@ msgstr ""
 msgid "undelete"
 msgstr ""
 
-msgid "unread messages in mailbox"
+msgid "user name"
 msgstr ""
 
 msgid "view Emails via IMAP4"
-msgstr ""
-
-msgid "yes"
 msgstr ""

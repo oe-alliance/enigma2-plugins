@@ -1,25 +1,14 @@
-from twisted.internet import reactor
-from twisted.internet import protocol
-from twisted.internet import ssl
-from twisted.internet import defer
+from twisted.internet import reactor, protocol, ssl
 from twisted.mail import imap4
 
-from Tools import Notifications
-from Screens.MessageBox import MessageBox
-from twisted.internet.protocol import ReconnectingClientFactory
-
-import time
+# from twisted.internet import defer
 # from twisted.python import log
 # log.startLogging(open("/tmp/twisted.log","w"))
-from . import debug
 # defer.setDebugging(True)
+from . import debug #@UnresolvedImport
 
 class SimpleIMAP4Client(imap4.IMAP4Client):
 	greetDeferred = None
-	def __init__(self,e2session, contextFac = None):
-		self.e2session = e2session
-		imap4.IMAP4Client.__init__(self,contextFactory = contextFac)
-		
 	def serverGreeting(self, caps):
 		debug("[SimpleIMAP4Client] serverGreeting: %s" %caps)
 		self.serverCapabilities = caps
@@ -39,7 +28,7 @@ class SimpleIMAP4ClientFactory(protocol.ReconnectingClientFactory):
 
 	def buildProtocol(self, addr):
 		debug("[SimpleIMAP4ClientFactory] building protocol: %s" %addr)
-		p = self.protocol(self.e2session,contextFac = self.ctx)
+		p = self.protocol(contextFactory = self.ctx)
 		p.factory = self
 		p.greetDeferred = self.e2session.onConnect
 		auth = imap4.CramMD5ClientAuthenticator(self.username)
@@ -47,27 +36,27 @@ class SimpleIMAP4ClientFactory(protocol.ReconnectingClientFactory):
 		return p
 
 	def startedConnecting(self, connector):
-		debug("[SimpleIMAP4ClientFactory] startedConnecting: %s" %time.ctime())
+		debug("[SimpleIMAP4ClientFactory] startedConnecting")
 
 	def clientConnectionFailed(self, connector, reason):
-		debug("[SimpleIMAP4ClientFactory] clientConnectionFailed: %s" %reason.getErrorMessage())
-		self.e2session.onConnectFailed(reason)
-		ReconnectingClientFactory.clientConnectionFailed(self, connector, reason)
+		# debug("[SimpleIMAP4ClientFactory] clientConnectionFailed: %s" %reason.getErrorMessage())
+		self.e2session.onConnectionFailed(reason)
+		protocol.ReconnectingClientFactory.clientConnectionFailed(self, connector, reason)
 
 	def clientConnectionLost(self, connector, reason):
-		debug("[SimpleIMAP4ClientFactory] clientConnectionLost: %s" %reason.getErrorMessage())
-		self.e2session.onConnectFailed(reason)
-		ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
+		# debug("[SimpleIMAP4ClientFactory] clientConnectionLost: %s" %reason.getErrorMessage())
+		self.e2session.onConnectionLost(reason)
+		protocol.ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
 
 def createFactory( e2session,username,hostname, port):
-	debug("createFactory: for %s@%s:%s at %s" %(username,hostname,port, "time: %s" %time.ctime()))
+	debug("createFactory: for %s@%s:%s" %(username,hostname,port))
 
 	f2 = ssl.ClientContextFactory()
 	factory = SimpleIMAP4ClientFactory(e2session, username, f2)
 	if port == 993:
-		c = reactor.connectSSL( hostname, port,factory,f2)
+		reactor.connectSSL( hostname, port,factory,f2) #@UndefinedVariable
 	else:
-		c = reactor.connectTCP( hostname, port,factory)
+		reactor.connectTCP( hostname, port,factory) #@UndefinedVariable
 
 	debug("createFactory: factory started")
 	return factory
