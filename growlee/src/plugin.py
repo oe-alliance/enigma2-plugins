@@ -23,6 +23,8 @@ config.plugins.growlee.enable_outgoing = ConfigYesNo(default=False)
 config.plugins.growlee.address = ConfigText(fixed_size=False)
 config.plugins.growlee.password = ConfigPassword()
 
+NOTIFICATIONID = 'GrowleeReceivedNotification'
+
 class GrowleeConfiguration(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -150,14 +152,14 @@ class GrowlProtocolOneWrapper(DatagramProtocol):
 			nlen, tlen, dlen, alen = unpack("!HHHH",str(data[4:12]))
 			notification, title, description = unpack(("%ds%ds%ds") % (nlen, tlen, dlen), data[12:Len-alen-16])
 
-			# XXX: we should add a proper fix :-)
-			Notifications.notificationAdded.remove(gotNotification)
-			Notifications.AddPopup(
-				title + '\n' + description,
-				MessageBox.TYPE_INFO,
-				5
+			Notifications.AddNotificationWithID(
+				NOTIFICATIONID,
+				MessageBox,
+				text = title + '\n' + description,
+				type = MessageBox.TYPE_INFO,
+				timeout = 5,
+				close_on_any_key = True,
 			)
-			Notifications.notificationAdded.insert(0, gotNotification)
 
 		# TODO: do we want to handle register packets? :-)
 
@@ -167,8 +169,8 @@ port = None
 def gotNotification():
 	notifications = Notifications.notifications
 	if notifications:
-		_, screen, args, kwargs, _ = notifications[-1]
-		if screen is MessageBox:
+		_, screen, args, kwargs, id = notifications[-1]
+		if screen is MessageBox and id != NOTIFICATIONID:
 
 			if "text" in kwargs:
 				description = kwargs["text"]
