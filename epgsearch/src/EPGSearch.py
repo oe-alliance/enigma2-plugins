@@ -125,7 +125,7 @@ class EPGSearchList(EPGList):
 class EPGSearch(EPGSelection):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
-		self.skinName = "EPGSelection"
+		self.skinName = ["EPGSearch", "EPGSelection"]
 
 		self.searchargs = args
 		self.currSearch = ""
@@ -339,7 +339,7 @@ class EPGSearch(EPGSelection):
 class EPGSearchTimerImport(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = "TimerEditList"
+		self.skinName = ["EPGSearchTimerImport", "TimerEditList"]
 
 		self.list = []
 		self.fillTimerList()
@@ -385,7 +385,7 @@ class EPGSearchTimerImport(Screen):
 class EPGSearchChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
 		SimpleChannelSelection.__init__(self, session, _("Channel Selection"))
-		self.skinName = "SimpleChannelSelection"
+		self.skinName = ["EPGSearchChannelSelection", "SimpleChannelSelection"]
 
 		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
 		{
@@ -411,7 +411,7 @@ class EPGSearchChannelSelection(SimpleChannelSelection):
 class EPGSearchEPGSelection(EPGSelection):
 	def __init__(self, session, ref, openPlugin):
 		EPGSelection.__init__(self, session, ref)
-		self.skinName = "EPGSelection"
+		self.skinName = ["EPGSearchEPGSelection", "EPGSelection"]
 		self["key_green"].text = _("Search")
 		self.openPlugin = openPlugin
 
