@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extensions-webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-26 23:16+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Stephan Reichholf <stephan@reichholf.net>\n"
+"Language-Team: humsat\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse\\workspaces\\pydev\\enigma2-plugins\\enigma2-plugins\\webinterface\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-SearchPath-0: src\n"
+
+#: src/plugin.py:496
+msgid "Webinterface"
+msgstr "WebInterface"
+
+#: src/plugin.py:496
+msgid "Configuration for the Webinterface"
+msgstr "Konfiguration af WebInterface"
+
+#: src/WebIfConfig.py:34
+msgid "Cancel"
+msgstr "Annuller"
+
+#: src/WebIfConfig.py:35
+msgid "OK"
+msgstr "OK"
+
+#: src/WebIfConfig.py:58
+msgid "Start Webinterface"
+msgstr "Start WebInterface"
+
+#: src/WebIfConfig.py:59
+msgid "Enable /media"
+msgstr "Aktiver /medier"
+
+#: src/WebIfConfig.py:60
+msgid "Allow zapping via Webinterface"
+msgstr "Tillad at zappe via WebInterface"
+
+#: src/WebIfConfig.py:61
+msgid "Autowrite timer"
+msgstr "Skriv timer automatisk"
+
+#: src/WebIfConfig.py:62
+msgid "Load movie-length"
+msgstr "Vis film længde"
+
+#: src/WebIfConfig.py:63
+msgid "Enable HTTP Access"
+msgstr "Aktiver HTTP adgang"
+
+#: src/WebIfConfig.py:68
+msgid "HTTP Port"
+msgstr "HTTP Port"
+
+#: src/WebIfConfig.py:69
+msgid "Enable HTTP Authentication"
+msgstr "Aktiver HTTP autorisation"
+
+#: src/WebIfConfig.py:74
+msgid "Enable HTTPS Access"
+msgstr "Aktiver HTTPS adgang"
+
+#: src/WebIfConfig.py:78
+msgid "HTTPS Port"
+msgstr "HTTPS Port"
+
+#: src/WebIfConfig.py:79
+msgid "Enable HTTPS Authentication"
+msgstr "Aktiver HTTPS autorisation"
+
+#: src/WebIfConfig.py:85
+msgid "Enable Streaming Authentication"
+msgstr "Aktiver Streaming autorisation"
+
+#: src/WebIfConfig.py:91
+msgid "Webinterface: Main Setup"
+msgstr "WebInterface: Hoved konfiguration."
+
+#: src/WebComponents/Converter/HddInfo.py:32
+msgid "N/A"
+msgstr "N/A"
+
