@@ -572,7 +572,7 @@ function TimerList(xml){
 }
 //END class TimerList
 function DeviceInfo(xml){
-	xml = xml.getElementsByTagName("e2deviceinfo").item(0)
+	xml = xml.getElementsByTagName("e2deviceinfo").item(0);
 	
 	this.info = {};
 	

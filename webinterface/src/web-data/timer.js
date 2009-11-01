@@ -2,7 +2,7 @@
 
 // TimerEdit variables:
 var addTimerEditFormArray = [];
-addTimerEditFormArray.TVList = []
+addTimerEditFormArray.TVList = [];
 addTimerEditFormArray.TVListFilled = 0;
 addTimerEditFormArray.RadioListFilled = 0;
 addTimerEditFormArray.deleteOldOnSave = 0;
@@ -70,7 +70,7 @@ function addTimerFormChangeChannel(newchannel) {
 	}
 	var found = false;
 	for (var i = 0; i < tvblist.length; i++) {
-		var service = tvblist[i]
+		var service = tvblist[i];
 		if (service.servicereference == newchannel) {
 			found = true;
 			addTimerEditFormArray.currBouquetName = service.servicename;

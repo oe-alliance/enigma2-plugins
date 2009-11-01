@@ -15,8 +15,8 @@ var url_volumemute = '/web/vol?set=mute';
 
 var url_epgservice = "/web/epgservice?sRef="; // plus serviceRef
 var url_epgsearch = "/web/epgsearch?search="; // plus serviceRef
-var url_epgservicenow = "/web/epgservicenow?sRef=" // plus serviceRef
-var url_epgservicenext = "/web/epgservicenext?sRef=" // plus serviceRef
+var url_epgservicenow = "/web/epgservicenow?sRef="; // plus serviceRef
+var url_epgservicenext = "/web/epgservicenext?sRef="; // plus serviceRef
 var url_epgnow = "/web/epgnow?bRef="; // plus bouquetRev
 var url_epgnext = "/web/epgnext?bRef="; // plus bouquetRev
 
