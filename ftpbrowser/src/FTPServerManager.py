@@ -155,7 +155,8 @@ class FTPServerEditor(ConfigListScreen, Screen):
 			getConfigListEntry(_("Address:"), server.cfg.address),
 			getConfigListEntry(_("Username:"), server.cfg.username),
 			getConfigListEntry(_("Password:"), server.cfg.password),
-			getConfigListEntry(_("Port:"), server.cfg.port)
+			getConfigListEntry(_("Port:"), server.cfg.port),
+			getConfigListEntry(_("Passive:"), server.cfg.passive),
 		])
 		
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
