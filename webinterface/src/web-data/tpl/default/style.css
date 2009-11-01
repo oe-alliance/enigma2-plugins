@@ -81,7 +81,7 @@
 	#banner, #banner .sb-inner { background:#000 }
 	#banner .sb-border { background: #FFF }
 	#bannerText{
-		margin-bottom: 10px;
+		margin-bottom: 5px;
 		padding-left: 2px;
 		padding-top: 6px;
 	}
@@ -89,6 +89,12 @@
 	#bannerLeft{
 		width: 940px;
 		float: left;
+	}
+	
+	#powerState{
+		border: 0px;
+		margin-left: 93px;
+		text-algin: right;
 	}
 	
 	#bannerRight{

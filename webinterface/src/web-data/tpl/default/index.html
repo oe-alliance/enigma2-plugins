@@ -80,7 +80,10 @@
 		<div id="banner">
 			<span id="notification"><div></div></span>
 			<div id="bannerLeft">
-				<div id="bannerText" style="font-size: 24px;"><img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web"></div>
+				<div id="bannerText" style="font-size: 24px;">
+					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
+					<img id="powerState" src="/web-data/img/running.png" alt="Running" title="Box is running">
+				</div>
 				<ul id="mainMenu">
 					<li><a href="#" onClick="switchMode('TV')">TeleVision</a></li>
 					<li><a href="#" onClick="switchMode('Radio')">Radio</a></li>
@@ -96,7 +99,7 @@
 				</ul>
 			</div>
 			<div id="bannerRight">
-				<div>
+				<div>					
 					<a href="#" onClick="openSignalPanel()">
 						<img border="0" src="/web-data/img/signal.png" alt="Signal" title="Show Signal Panel">
 					</a><br>

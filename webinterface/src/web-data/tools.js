@@ -76,6 +76,25 @@ function getBoxtype(){
 	doRequest(url_deviceinfo, incomingDeviceInfoBoxtype, false);
 }
 
+function incomingPowerState(request){
+	standby = getXML(request).getElementsByTagName("e2instandby").item(0).firstChild.data;
+	
+	img = $('powerState');
+	
+	if(standby.trim() == "false"){
+		img.src = "/web-data/img/running.png";
+		img.title = "Box is running";
+	} else {
+		img.src = "/web-data/img/standby.png";
+		img.title = "Box is in Standby";
+	}
+		
+}
+
+function getPowerState(){
+	doRequest(url_powerstate, incomingPowerState);
+}
+
 function set(element, value){
 	element = parent.$(element);
 	if (element){
@@ -498,7 +517,7 @@ function incomingSubServiceRequest(request){
 
 			// we already have the main service in our servicelist so we'll
 			// start with the second element			
-			services.shift()
+			services.shift();
 			
 			var data = { subservices : services };
 			
@@ -1120,63 +1139,6 @@ if( typeof Array.prototype.splice==='undefined' ) {
 	};
 }
 
-////Recording
-//function incomingRecordingPushed(request) {
-//if(request.readyState == 4){
-//var timers = new TimerList(getXML(request)).getArray();
-//debug("[incomingRecordingPushed] Got " + timers.length + " timers");
-
-//var aftereventReadable = ['Nothing', 'Standby', 'Deepstandby/Shutdown',
-//'Auto'];
-//var justplayReadable = ['record', 'zap'];
-//var OnOff = ['on', 'off'];
-
-//var namespace = [];
-
-//for ( var i = 0; i <timers.length; i++){
-//var timer = timers[i];
-
-//if(parseNr(timer.getDontSave()) == 1) {
-//var beginDate = new Date(Number(timer.getTimeBegin())*1000);
-//var endDate = new Date(Number(timer.getTimeEnd())*1000);
-//namespace[i] = {
-//'servicereference': timer.getServiceReference(),
-//'servicename': timer.getServiceName() ,
-//'title': timer.getName(),
-//'description': timer.getDescription(),
-//'descriptionextended': timer.getDescriptionExtended(),
-//'begin': timer.getTimeBegin(),
-//'beginDate': beginDate.toLocaleString(),
-//'end': timer.getTimeEnd(),
-//'endDate': endDate.toLocaleString(),
-//'state': timer.getState(),
-//'duration': Math.ceil((timer.getDuration()/60)),
-//'dirname': timer.getDirname(),
-//'tags': timer.getTags(),
-//'repeated': timer.getRepeated(),
-//'repeatedReadable': repeatedReadable(timer.getRepeated()),
-//'justplay': timer.getJustplay(),
-//'justplayReadable': justplayReadable[Number(timer.getJustplay())],
-//'afterevent': timer.getAfterevent(),
-//'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
-//'disabled': timer.getDisabled(),
-//'onOff': OnOff[Number(timer.getDisabled())]
-//};
-//}
-//}
-//var data = { recordings : namespace };
-//openPopup("Record Now", 'tplTimerListItem', data, 900, 500, "Record now
-//window");
-//}
-//}
-
-
-//function recordingPushed() {
-//doRequest(url_timerlist, incomingRecordingPushed, false);
-//}
-
-
-
 function ifChecked(rObj) {
 	if(rObj.checked) {
 		return rObj.value;
@@ -1363,7 +1325,7 @@ function writePlaylist() {
  * rebootenigma
  */
 function sendPowerState(newState){
-	doRequest( url_powerstate+'?newstate='+newState);
+	doRequest( url_powerstate+'?newstate='+newState, incomingPowerState);
 }
 
 
@@ -1615,6 +1577,7 @@ function openWebTV(){
 
 function updateItems(){
 	getCurrent();
+	getPowerState();
 }
 
 function updateItemsLazy(bouquet){
@@ -1637,6 +1600,7 @@ function init(){
 	}
 
 	getBoxtype();
+	getPowerState();
 
 	setAjaxLoad('navContent');
 	setAjaxLoad('contentMain');
