@@ -1,4 +1,6 @@
 Version = '$Header$';
+
+from enigma import eConsoleAppContainer
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
 from Components.Network import iNetwork
@@ -6,12 +8,18 @@ from Screens.MessageBox import MessageBox
 from WebIfConfig import WebIfConfigScreen
 from WebChilds.Toplevel import getToplevel
 
+from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG
+
 from twisted.internet import reactor, ssl
 from twisted.web import server, http, util, static, resource
 
 from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname
 from OpenSSL import SSL
+
+from os.path import isfile as os_isfile
+
+
 
 from __init__ import _, __version__
 
@@ -32,7 +40,7 @@ config.plugins.Webinterface.http.port = ConfigInteger(default = 80, limits=(1, 6
 config.plugins.Webinterface.http.auth = ConfigYesNo(default=False)
 
 config.plugins.Webinterface.https = ConfigSubsection()
-config.plugins.Webinterface.https.enabled = ConfigYesNo(default=False)
+config.plugins.Webinterface.https.enabled = ConfigYesNo(default=True)
 config.plugins.Webinterface.https.port = ConfigInteger(default = 443, limits=(1, 65535) )
 config.plugins.Webinterface.https.auth = ConfigYesNo(default=True)
 
@@ -81,6 +89,47 @@ class Closer:
 			if self.callback is not None:
 				self.callback(self.session)
 
+def checkCertificates():
+	print "[WebInterface] checking for SSL Certificates"
+	srvcert = '%sserver.pem' %resolveFilename(SCOPE_CONFIG) 
+	cacert = '%scacert.pem' %resolveFilename(SCOPE_CONFIG)
+
+	# Check whether there are regular certificates, if not copy the default ones over
+	if not os_isfile(srvcert) or not os_isfile(cacert):
+		return False
+	
+	else:
+		return True
+		
+def installCertificates(session, callback = None):
+	print "[WebInterface] Installing SSL Certificates to %s" %resolveFilename(SCOPE_CONFIG)
+	
+	srvcert = '%sserver.pem' %resolveFilename(SCOPE_CONFIG) 
+	cacert = '%scacert.pem' %resolveFilename(SCOPE_CONFIG)	
+	scope_webif = '%sExtensions/WebInterface/' %resolveFilename(SCOPE_PLUGINS)
+	
+	source = '%setc/server.pem' %scope_webif
+	target = srvcert
+	ret = copyfile(source, target)
+	
+	if ret == 0:
+		source = '%setc/cacert.pem' %scope_webif
+		target = cacert
+		ret = copyfile(source, target)
+		
+		if ret == 0 and callback != None:
+			callback(session)
+	
+	if ret < 0:
+		config.plugins.Webinterface.https.enabled.value = False
+		config.plugins.Webinterface.https.enabled.save()
+		
+		# Start without https
+		callback(session)
+		
+		#Inform the user
+		session.open(MessageBox, "Couldn't install SSL-Certifactes for https access\nHttps access is now disabled!", MessageBox.TYPE_ERROR)
+	
 #===============================================================================
 # restart the Webinterface for all configured Interfaces
 #===============================================================================
@@ -98,13 +147,11 @@ def restartWebserver(session):
 		Closer(session, startWebserver).stop()
 	else:
 		startWebserver(session)
-
+	
 #===============================================================================
 # start the Webinterface for all configured Interfaces
 #===============================================================================
 def startWebserver(session):
-	print "[Webinterface] startWebserver - iNetwork.ifaces: %s" %(iNetwork.ifaces)
-	
 	global running_defered
 	global toplevel
 	
@@ -119,6 +166,15 @@ def startWebserver(session):
 		print "[Webinterface] is disabled!"
 	
 	else:
+		# IF SSL is enabled we need to check for the certs first
+		# If they're not there we'll exit via return here 
+		# and get called after Certificates are installed properly
+		if config.plugins.Webinterface.https.enabled.value:
+			if not checkCertificates():
+				print "[Webinterface] Installing Webserver Certificates for SSL encryption"
+				installCertificates(session, startWebserver)
+				return
+				
 		for adaptername in iNetwork.ifaces:				
 			ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
 						
@@ -130,7 +186,7 @@ def startWebserver(session):
 					if ret == False:
 						errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.http.port.value)
 			#HTTPS		
-				if config.plugins.Webinterface.https.enabled.value is True:
+				if config.plugins.Webinterface.https.enabled.value is True:					
 					ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, True)
 					if ret == False:
 						errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.https.port.value)
@@ -174,6 +230,7 @@ def startServerInstance(session, ipaddress, port, useauth=False, usessl=False):
 			site = server.Site(toplevel)
 	
 		if usessl:
+			
 			ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem', '/etc/enigma2/cacert.pem', sslmethod=SSL.SSLv23_METHOD)
 			d = reactor.listenSSL(port, site, ctx, interface=ipaddress)
 		else:
@@ -404,67 +461,6 @@ def passcrypt_md5(passwd, salt=None, magic='$1$'):
 	rv = rv + _to64(l, 2)
 
 	return rv
-
-#===============================================================================
-# Creates an SSL Context to use with twisted.web
-#===============================================================================
-def makeSSLContext(myKey, trustedCA):
-	 '''Returns an ssl Context Object
-	@param myKey a pem formated key and certifcate with for my current host
-			the other end of this connection must have the cert from the CA
-			that signed this key
-	@param trustedCA a pem formated certificat from a CA you trust
-			you will only allow connections from clients signed by this CA
-			and you will only allow connections to a server signed by this CA
-	 '''
-
-	 # our goal in here is to make a SSLContext object to pass to connectSSL
-	 # or listenSSL
-
-	 # Why these functioins... Not sure...
-	 fd = open(myKey, 'r')
-	 ss = fd.read()
-	 theCert = ssl.PrivateCertificate.loadPEM(ss)
-	 fd.close()
-	 fd = open(trustedCA, 'r')
-	 theCA = ssl.Certificate.loadPEM(fd.read())
-	 fd.close()
-	 #ctx = theCert.options(theCA)
-	 ctx = theCert.options()
-
-	 # Now the options you can set look like Standard OpenSSL Library options
-
-	 # The SSL protocol to use, one of SSLv23_METHOD, SSLv2_METHOD,
-	 # SSLv3_METHOD, TLSv1_METHOD. Defaults to TLSv1_METHOD.
-	 ctx.method = ssl.SSL.TLSv1_METHOD
-
-	 # If True, verify certificates received from the peer and fail
-	 # the handshake if verification fails. Otherwise, allow anonymous
-	 # sessions and sessions with certificates which fail validation.
-	 ctx.verify = True
-
-	 # Depth in certificate chain down to which to verify.
-	 ctx.verifyDepth = 1
-
-	 # If True, do not allow anonymous sessions.
-	 ctx.requireCertification = True
-
-	 # If True, do not re-verify the certificate on session resumption.
-	 ctx.verifyOnce = True
-
-	 # If True, generate a new key whenever ephemeral DH parameters are used
-	 # to prevent small subgroup attacks.
-	 ctx.enableSingleUseKeys = True
-
-	 # If True, set a session ID on each context. This allows a shortened
-	 # handshake to be used when a known client reconnects.
-	 ctx.enableSessions = True
-
-	 # If True, enable various non-spec protocol fixes for broken
-	 # SSL implementations.
-	 ctx.fixBrokenPeers = False
-
-	 return ctx
 
 global_session = None
 
