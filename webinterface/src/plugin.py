@@ -32,7 +32,7 @@ config.plugins.Webinterface.http.port = ConfigInteger(default = 80, limits=(1, 6
 config.plugins.Webinterface.http.auth = ConfigYesNo(default=False)
 
 config.plugins.Webinterface.https = ConfigSubsection()
-config.plugins.Webinterface.https.enabled = ConfigYesNo(default=True)
+config.plugins.Webinterface.https.enabled = ConfigYesNo(default=False)
 config.plugins.Webinterface.https.port = ConfigInteger(default = 443, limits=(1, 65535) )
 config.plugins.Webinterface.https.auth = ConfigYesNo(default=True)
 
