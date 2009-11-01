@@ -72,7 +72,7 @@ class GrabResource(resource.Resource):
 
 			filename = filename+imageformat
 			append(filename)
-			cmd = ['/usr/bin/grab', '/usr/bin/grab'] + args
+			cmd = [self.GRAB_BIN, self.GRAB_BIN] + args
 
 			GrabStream(request, cmd, filename, save)
 
