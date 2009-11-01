@@ -1,4 +1,6 @@
 //$Header$
+var DBG = true;
+DBG = false;
 
 var templates = {};
 var loadedChannellist = {};
@@ -73,7 +75,7 @@ function incomingDeviceInfoBoxtype(request){
 
 
 function getBoxtype(){
-	doRequest(url_deviceinfo, incomingDeviceInfoBoxtype, false);
+	doRequest(URL.deviceinfo, incomingDeviceInfoBoxtype, false);
 }
 
 function incomingPowerState(request){
@@ -92,7 +94,7 @@ function incomingPowerState(request){
 }
 
 function getPowerState(){
-	doRequest(url_powerstate, incomingPowerState);
+	doRequest(URL.powerstate, incomingPowerState);
 }
 
 function set(element, value){
@@ -329,7 +331,7 @@ function renderTpl(tpl, data, domElement) {
 
 function fetchTpl(tplName, callback){
 	if(typeof(templates[tplName]) == "undefined") {
-		var url = url_tpl+tplName+".htm";
+		var url = URL.tpl+tplName+".htm";
 
 		doRequest(
 				url, 
@@ -357,7 +359,7 @@ function incomingProcessTpl(request, data, domElement, callback){
 }
 
 function processTpl(tplName, data, domElement, callback){
-	var url = url_tpl+tplName+".htm";
+	var url = URL.tpl+tplName+".htm";
 
 	doRequest(url, 
 			function(transport){
@@ -370,7 +372,7 @@ function processTpl(tplName, data, domElement, callback){
 
 
 function openDebug(){
-	var uri = url_tpl+'tplDebug.htm';
+	var uri = URL.tpl+'tplDebug.htm';
 	debugWin = openPopupPage("Debug", uri, 500, 300);
 }
 
@@ -425,7 +427,7 @@ function incomingParentControl(request) {
 }
 
 function getParentControl() {
-	doRequest(url_parentcontrol, incomingParentControl, false);
+	doRequest(URL.parentcontrol, incomingParentControl, false);
 }
 
 
@@ -501,7 +503,7 @@ function incomingGetDreamboxSettings(request){
 
 
 function getDreamboxSettings(){
-	doRequest(url_settings, incomingGetDreamboxSettings, false);
+	doRequest(URL.settings, incomingGetDreamboxSettings, false);
 }
 
 
@@ -531,7 +533,7 @@ function incomingSubServiceRequest(request){
 
 
 function getSubServices(bouquet) {
-	doRequest(url_subservices, incomingSubServiceRequest, false);
+	doRequest(URL.subservices, incomingSubServiceRequest, false);
 }
 
 
@@ -577,7 +579,7 @@ function incomingSignalPanel(request){
 }
 
 function reloadSignalPanel(){
-	doRequest(url_signal, incomingSignalPanel, false);
+	doRequest(URL.signal, incomingSignalPanel, false);
 }
 
 function openSignalPanel(){
@@ -619,11 +621,11 @@ function incomingEPGrequest(request){
 }
 
 function loadEPGBySearchString(string){
-	doRequest(url_epgsearch+escape(string),incomingEPGrequest, false);
+	doRequest(URL.epgsearch+escape(string),incomingEPGrequest, false);
 }
 
 function loadEPGByServiceReference(servicereference){
-	doRequest(url_epgservice+servicereference,incomingEPGrequest, false);
+	doRequest(URL.epgservice+servicereference,incomingEPGrequest, false);
 }
 
 //function extdescriptionSmall(txt,num) {
@@ -681,12 +683,12 @@ function incomingServiceEPGNext(request){
 }
 
 function loadServiceEPGNowNext(servicereference, next){
-	var url = url_epgnow+servicereference;
+	var url = URL.epgnow+servicereference;
 
 	if(typeof(next) == 'undefined'){
 		doRequest(url, incomingServiceEPGNow, false);
 	} else {
-		url = url_epgnext+servicereference;
+		url = URL.epgnext+servicereference;
 		doRequest(url, incomingServiceEPGNext, false);
 	}
 }
@@ -739,23 +741,23 @@ function handleVolumeRequest(request){
 
 
 function getVolume(){
-	doRequest(url_getvolume, handleVolumeRequest, false);
+	doRequest(URL.getvolume, handleVolumeRequest, false);
 }
 
 function volumeSet(val){
-	doRequest(url_setvolume+val, handleVolumeRequest, false);
+	doRequest(URL.setvolume+val, handleVolumeRequest, false);
 }
 
 function volumeUp(){
-	doRequest(url_volumeup, handleVolumeRequest, false);
+	doRequest(URL.volumeup, handleVolumeRequest, false);
 }
 
 function volumeDown(){
-	doRequest(url_volumedown, handleVolumeRequest, false);
+	doRequest(URL.volumedown, handleVolumeRequest, false);
 }
 
 function volumeMute(){
-	doRequest(url_volumemute, handleVolumeRequest, false);
+	doRequest(URL.volumemute, handleVolumeRequest, false);
 }
 
 function initVolumePanel(){
@@ -795,7 +797,7 @@ function loadBouquet(servicereference, name){
 
 	startUpdateBouquetItemsPoller();
 
-	doRequest(url_getServices+servicereference, incomingChannellist, true);
+	doRequest(URL.getServices+servicereference, incomingChannellist, true);
 }
 
 
@@ -823,7 +825,7 @@ function incomingBouquetList(request){
 
 
 function initChannelList(){
-	var url = url_getServices+encodeURIComponent(bouquetsTv);
+	var url = URL.getServices+encodeURIComponent(bouquetsTv);
 	currentBouquet = bouquetsTv;
 
 	doRequest(url, incomingBouquetListInitial, true);
@@ -834,7 +836,7 @@ function initChannelList(){
 //Movies
 function initMovieList(){
 	// get videodirs, last_videodir, and all tags
-	doRequest(url_getcurrlocation, incomingMovieListCurrentLocation, false);
+	doRequest(URL.getcurrlocation, incomingMovieListCurrentLocation, false);
 }
 
 function incomingMovieListCurrentLocation(request){
@@ -842,7 +844,7 @@ function incomingMovieListCurrentLocation(request){
 		result  = new SimpleXMLList(getXML(request), "e2location");
 		currentLocation = result.getList()[0];
 		debug("[incomingMovieListCurrentLocation].currentLocation" + currentLocation);
-		doRequest(url_getlocations, incomingMovieListLocations, false);
+		doRequest(URL.getlocations, incomingMovieListLocations, false);
 	}
 }
 
@@ -854,7 +856,7 @@ function incomingMovieListLocations(request){
 		if (locationsList.length === 0) {
 			locationsList = ["/hdd/movie"];
 		}
-		doRequest(url_gettags, incomingMovieListTags, false);
+		doRequest(URL.gettags, incomingMovieListTags, false);
 	}
 }
 
@@ -941,7 +943,7 @@ function loadMovieList(loc, tag){
 		tag = '';
 	}
 	debug("[loadMovieList] Loading movies in location '"+loc+"' with tag '"+tag+"'");
-	doRequest(url_movielist+"?dirname="+loc+"&tag="+tag, incomingMovieList, false);
+	doRequest(URL.movielist+"?dirname="+loc+"&tag="+tag, incomingMovieList, false);
 }
 
 
@@ -968,7 +970,7 @@ function delMovie(sref ,servicename, title, description) {
 
 	if(result){
 		debug("[delMovie] ok confirm panel"); 
-		doRequest(url_moviedelete+"?sRef="+unescape(sref), incomingDelMovieResult, false); 
+		doRequest(URL.moviedelete+"?sRef="+unescape(sref), incomingDelMovieResult, false); 
 		return true;
 	}
 	else{
@@ -988,7 +990,7 @@ function incomingMessageResult(request){
 }
 
 function getMessageAnswer() {
-	doRequest(url_messageanswer, incomingMessageResult, false);
+	doRequest(URL.messageanswer, incomingMessageResult, false);
 }
 
 function sendMessage(messagetext, messagetype, messagetimeout){
@@ -1003,10 +1005,10 @@ function sendMessage(messagetext, messagetype, messagetimeout){
 		messagetype = $('MessageSendFormType').options[index].value;
 	}	
 	if(parseNr(messagetype) === 0){
-		doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout);
+		doRequest(URL.message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout);
 		setTimeout(getMessageAnswer, parseNr(messagetimeout)*1000);
 	} else {
-		doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult, false);
+		doRequest(URL.message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult, false);
 	}
 }
 
@@ -1095,7 +1097,7 @@ function loadAndOpenWebRemote(){
 
 
 function sendRemoteControlRequest(command){
-	doRequest(url_remotecontrol+'?command='+command, incomingRemoteControlResult, false);
+	doRequest(URL.remotecontrol+'?command='+command, incomingRemoteControlResult, false);
 	if(webRemoteWin.document.getElementById('getScreen').checked) {
 		if(webRemoteWin.document.getElementById('getVideo').checked){
 			getScreenShot();
@@ -1167,7 +1169,7 @@ function incomingDeviceInfo(request) {
  * Show Device Info Information in contentMain
  */
 function showDeviceInfo() {
-	doRequest(url_deviceinfo, incomingDeviceInfo, false);
+	doRequest(URL.deviceinfo, incomingDeviceInfo, false);
 }
 
 function showGears(){
@@ -1196,7 +1198,7 @@ function restartTwisted() {
 //MediaPlayer
 function sendMediaPlayer(command) {
 	debug("[sendMediaPlayer] called");
-	doRequest( url_mediaplayercmd+command );
+	doRequest( URL.mediaplayercmd+command );
 }
 
 
@@ -1282,27 +1284,27 @@ function incomingMediaPlayer(request){
 function loadMediaPlayer(directory){
 	debug("[loadMediaPlayer] called");
 	if(typeof(directory) == 'undefined') directory = 'Filesystems';
-	doRequest(url_mediaplayerlist+directory, incomingMediaPlayer, false);
+	doRequest(URL.mediaplayerlist+directory, incomingMediaPlayer, false);
 }
 
 
 function playFile(file,root) {
 	debug("[playFile] called");
 	mediaPlayerStarted = true;
-	doRequest( url_mediaplayerplay+file+"&root="+root );
+	doRequest( URL.mediaplayerplay+file+"&root="+root );
 }
 
 
 function deleteFile(sref) {
 	debug("[deleteFile] called");
 	mediaPlayerStarted = true;
-	doRequest( url_mediaplayerremove+sref );
+	doRequest( URL.mediaplayerremove+sref );
 }
 
 
 function openMediaPlayerPlaylist() {
 	debug("[openMediaPlayerPlaylist] called");
-	doRequest(url_mediaplayerlist+"playlist", incomingMediaPlayer, false);
+	doRequest(URL.mediaplayerlist+"playlist", incomingMediaPlayer, false);
 }
 
 
@@ -1312,7 +1314,7 @@ function writePlaylist() {
 	filename = prompt("Please enter a name for the playlist", "");
 
 	if(filename !== "") {
-		doRequest( url_mediaplayerwrite+filename );
+		doRequest( URL.mediaplayerwrite+filename );
 	}
 }
 
@@ -1325,7 +1327,7 @@ function writePlaylist() {
  * rebootenigma
  */
 function sendPowerState(newState){
-	doRequest( url_powerstate+'?newstate='+newState, incomingPowerState);
+	doRequest( URL.powerstate+'?newstate='+newState, incomingPowerState);
 }
 
 
@@ -1364,7 +1366,7 @@ function incomingCurrent(request){
 function getCurrent(){
 	if(!isActive.getCurrent){
 		isActive.getCurrent = true;
-		doRequest(url_getcurrent, incomingCurrent, false);
+		doRequest(URL.getcurrent, incomingCurrent, false);
 	}
 }
 
@@ -1377,7 +1379,7 @@ function getCurrent(){
  * load
  */
 function getBouquets(sRef){	
-	var url = url_getServices+encodeURIComponent(sRef);
+	var url = URL.getServices+encodeURIComponent(sRef);
 	doRequest(url, incomingBouquetList, true);
 }
 

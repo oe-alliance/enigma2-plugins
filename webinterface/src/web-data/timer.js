@@ -93,7 +93,7 @@ function addTimerFormChangeChannel(newchannel) {
 		// bouquet selected, update menu
 		servicereftoloadepgnow = service.servicereference;
 		if (typeof (loadedChannellist[servicereftoloadepgnow]) == "undefined") {
-			doRequest(url_getServices + servicereftoloadepgnow,
+			doRequest(URL.getServices + servicereftoloadepgnow,
 					incomingAddTimerFormChangeChannel, true);
 		} else {
 			incomingAddTimerFormChangeChannel();
@@ -205,7 +205,7 @@ function addTimerFormChangeTags(newtags) {
 function addTimerByID(sRef, eventID, justplay) {
 	if (parentPin(sRef)) {
 		debug("[addTimerByID] eventID: " + eventID);
-		doRequest(url_timeraddbyeventid + "?sRef=" + sRef + "&eventid="	+ 
+		doRequest(URL.timeraddbyeventid + "?sRef=" + sRef + "&eventid="	+ 
 				eventID + "&justplay=" + justplay, incomingTimerAddResult, false);
 	}
 }
@@ -223,7 +223,7 @@ function incomingTimerAddResult(request) {
 }
 
 function loadTimerList() {
-	doRequest(url_timerlist, incomingTimerList, false);
+	doRequest(URL.timerlist, incomingTimerList, false);
 }
 
 function incomingTimerList(request) {
@@ -282,7 +282,7 @@ function delTimer(sRef, begin, end, servicename, title, description,
 			"Are you sure that you want to delete the Timer?");
 	if (result) {
 		debug("[delTimer] ok confirm panel");
-		doRequest(url_timerdelete + "?sRef=" + sRef + "&begin=" + begin + 
+		doRequest(URL.timerdelete + "?sRef=" + sRef + "&begin=" + begin + 
 				"&end=" + end, readyFunction, false);
 		return true;
 
@@ -376,7 +376,7 @@ function loadTimerEditForm(justplay, begin, end, repeated, channel,
 }
 
 function loadTimerFormTags() {
-	doRequest(url_gettags, incomingTimerFormTags, false);
+	doRequest(URL.gettags, incomingTimerFormTags, false);
 }
 
 function incomingTimerFormTags(request) {
@@ -389,7 +389,7 @@ function incomingTimerFormTags(request) {
 }
 
 function loadTimerFormLocations() {
-	doRequest(url_getlocations, incomingTimerFormLocations, false);
+	doRequest(URL.getlocations, incomingTimerFormLocations, false);
 }
 
 function incomingTimerFormLocations(request) {
@@ -413,7 +413,7 @@ function loadTimerFormChannels() {
 			addTimerEditFormArray.RadioListFilled === 0) {
 		addTimerListFormatTV();
 	} else {
-		doRequest(url_getServices + encodeURIComponent(bouquetsTv),
+		doRequest(URL.getServices + encodeURIComponent(bouquetsTv),
 				addTimerListFormatTV, false);
 	}
 }
@@ -436,7 +436,7 @@ function addTimerListFormatTV(request) {
 	if (addTimerEditFormArray.RadioListFilled == 1) {
 		loadTimerForm();
 	} else {
-		doRequest(url_getServices + encodeURIComponent(bouquetsRadio),
+		doRequest(URL.getServices + encodeURIComponent(bouquetsRadio),
 				addTimerListFormatRadio, false);
 	}
 }
@@ -656,7 +656,7 @@ function sendAddTimer() {
 			}
 		}
 		//addTimerByID(\'%(servicereference)\',\'%(eventid)\',\'False\');
-		doRequest(url_timerchange + "?" + "sRef=" + 
+		doRequest(URL.timerchange + "?" + "sRef=" + 
 				($('channel').value).replace("&quot;", '"') + "&begin="	+ 
 				begin + "&end=" + end + "&name=" + nameClean + 
 				"&description=" + descriptionClean + "&dirname=" + dirname+ 
@@ -674,7 +674,7 @@ function cleanTimerListNow() {
 	debug("[cleanTimerListNow] called");
 	var result = confirm("Do you really want to cleanup the List of Timers?");
 	if (result) {
-		doRequest(url_timercleanup, incomingCleanTimerListNow, false);
+		doRequest(URL.timercleanup, incomingCleanTimerListNow, false);
 	}
 }
 
@@ -702,7 +702,7 @@ function sendToggleTimerDisable(justplay, begin, end, repeated, channel, name,
 	descriptionClean = encodeURIComponent(descriptionClean);
 	tags = encodeURIComponent(tags);
 
-	doRequest(url_timerchange + "?" + "sRef=" + channel.replace("&quot;", '"') + 
+	doRequest(URL.timerchange + "?" + "sRef=" + channel.replace("&quot;", '"') + 
 			"&begin=" + begin + "&end=" + end + "&name=" + nameClean+ 
 			"&description=" + descriptionClean + "&dirname=" + dirname + 
 			"&tags=" + tags + "&afterevent=" + afterEvent + "&eit=0&disabled=" + 
@@ -717,7 +717,7 @@ function recordNowDecision(recordNowCurrent) {
 	if (recordNowCurrent === true) {
 		recordNow = "current";
 	}
-	doRequest(url_recordnow + "?recordnow=" + recordNow,
+	doRequest(URL.recordnow + "?recordnow=" + recordNow,
 			incomingTimerAddResult, false);
 }
 
@@ -727,5 +727,5 @@ function incomingWriteTimerListNow(request) {
 }
 
 function writeTimerListNow() {
-	doRequest(url_timerlistwrite, incomingWriteTimerListNow);
+	doRequest(URL.timerlistwrite, incomingWriteTimerListNow);
 }

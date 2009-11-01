@@ -28,7 +28,7 @@ function incomingVLCServiceEPG(request) {
  * Load Now information for Service
  */
 function loadVLCEPGServiceNow(servicereference) {
-	doRequest(url_epgservicenow + servicereference, incomingVLCServiceEPG);
+	doRequest(URL.epgservicenow + servicereference, incomingVLCServiceEPG);
 }
 
 function onServiceSelected() {
@@ -108,7 +108,7 @@ function incomingVLCSubservices(request){
 }
 
 function loadVlcSubservices(){
-	var url = url_streamsubservices + currentServiceRef;
+	var url = URL.streamsubservices + currentServiceRef;
 	doRequest(url, incomingVLCSubservices);
 }
 
@@ -135,7 +135,7 @@ function incomingVLCChannelList(request) {
  * Load List of all Channels with epg now where available
  */
 function loadVLCChannelList(bouquetreference) {
-	doRequest(url_epgnow + bouquetreference, incomingVLCChannelList);
+	doRequest(URL.epgnow + bouquetreference, incomingVLCChannelList);
 }
 
 function vlcPlay() {
@@ -241,7 +241,7 @@ function setStreamTarget(servicereference) {
 }
 
 function loadVLCBouquets() {
-	url = url_getServices + bouquetsTv;
+	url = URL.getServices + bouquetsTv;
 	doRequest(url, incomingVLCBouquetList);
 	
 }
