@@ -93,7 +93,7 @@ function addTimerFormChangeChannel(newchannel) {
 		// bouquet selected, update menu
 		servicereftoloadepgnow = service.servicereference;
 		if (typeof (loadedChannellist[servicereftoloadepgnow]) == "undefined") {
-			doRequest(URL.getServices + servicereftoloadepgnow,
+			doRequest(URL.getservices + servicereftoloadepgnow,
 					incomingAddTimerFormChangeChannel, true);
 		} else {
 			incomingAddTimerFormChangeChannel();
@@ -413,7 +413,7 @@ function loadTimerFormChannels() {
 			addTimerEditFormArray.RadioListFilled === 0) {
 		addTimerListFormatTV();
 	} else {
-		doRequest(URL.getServices + encodeURIComponent(bouquetsTv),
+		doRequest(URL.getservices + encodeURIComponent(bouquetsTv),
 				addTimerListFormatTV, false);
 	}
 }
@@ -436,7 +436,7 @@ function addTimerListFormatTV(request) {
 	if (addTimerEditFormArray.RadioListFilled == 1) {
 		loadTimerForm();
 	} else {
-		doRequest(URL.getServices + encodeURIComponent(bouquetsRadio),
+		doRequest(URL.getservices + encodeURIComponent(bouquetsRadio),
 				addTimerListFormatRadio, false);
 	}
 }

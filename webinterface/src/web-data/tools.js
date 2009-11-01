@@ -797,7 +797,7 @@ function loadBouquet(servicereference, name){
 
 	startUpdateBouquetItemsPoller();
 
-	doRequest(URL.getServices+servicereference, incomingChannellist, true);
+	doRequest(URL.getservices+servicereference, incomingChannellist, true);
 }
 
 
@@ -825,7 +825,7 @@ function incomingBouquetList(request){
 
 
 function initChannelList(){
-	var url = URL.getServices+encodeURIComponent(bouquetsTv);
+	var url = URL.getservices+encodeURIComponent(bouquetsTv);
 	currentBouquet = bouquetsTv;
 
 	doRequest(url, incomingBouquetListInitial, true);
@@ -1379,7 +1379,7 @@ function getCurrent(){
  * load
  */
 function getBouquets(sRef){	
-	var url = URL.getServices+encodeURIComponent(sRef);
+	var url = URL.getservices+encodeURIComponent(sRef);
 	doRequest(url, incomingBouquetList, true);
 }
 

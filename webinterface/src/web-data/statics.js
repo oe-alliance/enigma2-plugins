@@ -18,7 +18,7 @@ function url() {
 	this.epgnow = "/web/epgnow?bRef="; // plus bouquetRev
 	this.epgnext = "/web/epgnext?bRef="; // plus bouquetRev
 	
-	this.getServices = "/web/getservices?sRef="; // plus serviceref
+	this.getservices = "/web/getservices?sRef="; // plus serviceref
 	this.subservices = "/web/subservices"; // subservices for current service
 	this.streamsubservices = "/web/streamsubservices?sRef="; // subservices for streaming service
 	

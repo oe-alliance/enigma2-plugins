@@ -241,7 +241,7 @@ function setStreamTarget(servicereference) {
 }
 
 function loadVLCBouquets() {
-	url = URL.getServices + bouquetsTv;
+	url = URL.getservices + bouquetsTv;
 	doRequest(url, incomingVLCBouquetList);
 	
 }
