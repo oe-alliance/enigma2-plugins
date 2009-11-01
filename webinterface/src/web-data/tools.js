@@ -1600,7 +1600,6 @@ function init(){
 	}
 
 	getBoxtype();
-	getPowerState();
 
 	setAjaxLoad('navContent');
 	setAjaxLoad('contentMain');
