@@ -298,23 +298,20 @@ class Timer(Source):
 				for timer in self.recordtimer.timer_list + self.recordtimer.processed_timers:
 					if str(timer.service_ref) == str(channelOld):
 						if int(timer.begin) == beginOld:
-							if int(timer.end) == endOld:
-								#we've found the timer we've been searching for
-								#Let's apply the new values
-								timer.service_ref = service_ref
-								timer.begin = int(begin)
-								timer.end = int(end)
-								timer.name = name
-								timer.description = description
-								timer.disabled = disabled
-								timer.justplay = justplay
-								timer.afterEvent = afterEvent
+							if int(timer.end) == endOld:								
+								#we've found the timer we've been searching for								
+								
+								#Delete the old entry
+								self.recordtimer.removeEntry(timer)
+								old = timer
+								
+								timer = RecordTimerEntry(service_ref, begin, end, name, description, 0, disabled, justplay, afterEvent, dirname=dirname, tags=tags)
 								timer.repeated = repeated
-								timer.dirname = dirname
-								timer.tags = tags
-
+								timer.log_entries = old.log_entries								
+								
+								timer.processRepeated()								
 								#send the changed timer back to enigma2 and hope it's good
-								self.session.nav.RecordTimer.timeChanged(timer)
+								self.recordtimer.record(timer)
 								print "[WebComponents.Timer] editTimer: Timer changed!"
 								return ( True, "Timer %s has been changed!" % (timer.name) )
 			except Exception:
