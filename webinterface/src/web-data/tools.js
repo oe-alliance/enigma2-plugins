@@ -51,8 +51,8 @@ function getXML(request){
 
 	if(window.ActiveXObject){ // we're on IE
 		xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-	xmlDoc.async="false";
-	xmlDoc.loadXML(request.responseText);
+		xmlDoc.async="false";
+		xmlDoc.loadXML(request.responseText);
 	} else { //we're not on IE
 		if (!window.google || !google.gears){
 			xmlDoc = request.responseXML;
@@ -78,25 +78,28 @@ function getBoxtype(){
 	doRequest(URL.deviceinfo, incomingDeviceInfoBoxtype, false);
 }
 
+function toggleStandby(){
+	sendPowerState(0);
+}
+
 function incomingPowerState(request){
 	var standby = getXML(request).getElementsByTagName("e2instandby").item(0).firstChild.data;
 	
-	var img = $('powerState');
 	var signal = $('openSignalPanel');
 	var signalImg = $('openSignalPanelImg');
 	
 	if(standby.strip() == "false"){
-		img.src = "/web-data/img/running.png";
-		img.title = "Box is running (Doubleclick swichtes to standby)";
+		signal.stopObserving('click', openSignalPanel);
+		signal.observe('click', openSignalPanel);
 		
-		signal.onclick = "openSignalPanel()";
+		signal.onclick = function(){ openSignalPanel(); };
 		signalImg.src = "/web-data/img/signal.png";
+		signalImg.title = "Show Signal Panel";
 		
 	} else {
-		img.src = "/web-data/img/standby.png";
-		img.title = "Box is in standby (Doubleclick swichtes out of Standby)";
+		signal.stopObserving('click', openSignalPanel);		
 		
-		signal.onclick = "return false;";
+		signal.onclick = "";
 		signalImg.src = "/web-data/img/signal_off.png";
 		signalImg.title = "Please disable standby first";
 	}
