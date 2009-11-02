@@ -628,20 +628,6 @@ function loadEPGByServiceReference(servicereference){
 	doRequest(URL.epgservice+servicereference,incomingEPGrequest, false);
 }
 
-//function extdescriptionSmall(txt,num) {
-//if(txt.length > 410) {
-//var shortTxt = txt.substr(0,410);
-//txt = txt.replace(/\'\'/g, '&quot;');
-//txt = txt.replace(/\\/g, '\\\\');
-//txt = txt.replace(/\'/g, '\\\'');
-//txt = txt.replace(/\"/g, '&quot;');
-//var smallNamespace = { 'txt':txt,'number':num, 'shortTxt':shortTxt};
-//return RND(tplEPGListItemExtend, smallNamespace);
-//} else {
-//return txt;
-//}
-//}
-
 function buildServiceListEPGItem(epgevent, type){
 	var data = {epg : epgevent};
 	// e.innerHTML = RND(tplServiceListEPGItem, namespace);
@@ -907,29 +893,7 @@ function incomingMovieList(request){
 
 		var movieList = new MovieList(getXML(request)).getArray();
 		debug("[incomingMovieList] Got "+movieList.length+" movies");
-//		namespace = [];	
 
-//		var cssclass = "even";
-//
-//		for ( var i = 0; i < movies.length; i++){
-//			cssclass = cssclass == 'even' ? 'odd' : 'even';
-//
-//			var movie = movies[i];
-//			namespace[i] = { 	
-//					'servicereference': escape(movie.getServiceReference()),
-//					'servicename': movie.getServiceName(),
-//					'title': movie.getTitle(),
-//					'escapedTitle': escape(movie.getTitle()),
-//					'description': movie.getDescription(), 
-//					'descriptionextended': movie.getDescriptionExtended(),
-//					'filename': String(movie.getFilename()),
-//					'filesize': movie.getFilesizeMB(),
-//					'tags': movie.getTags().join(', ') ,
-//					'length': movie.getLength() ,
-//					'time': movie.getTimeDay()+"&nbsp;"+ movie.getTimeStartString(),
-//					'cssclass' : cssclass
-//			};
-//		}
 		var data = { movies : movieList };
 		processTpl('tplMovieList', data, 'contentMain');
 	}		

@@ -5,7 +5,7 @@ function url() {
 	
 	this.getcurrent = '/web/getcurrent';
 	
-	this.getvolume = '/web/vol?set=state'; 
+	this.getvolume = '/web/vol'; 
 	this.setvolume = '/web/vol?set=set'; // plus new value eg: set=set15
 	this.volumeup = '/web/vol?set=up';
 	this.volumedown = '/web/vol?set=down';
