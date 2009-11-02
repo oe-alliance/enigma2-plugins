@@ -1137,7 +1137,13 @@ function showDeviceInfo() {
 }
 
 function showGears(){
-	data = { 'useGears' : gearsEnabled() };
+	var enabled = false;
+	
+	if (window.google && google.gears){
+		enabled = gearsEnabled();
+	}
+	
+	data = { 'useGears' : enabled };
 	processTpl('tplGears', data, 'contentMain');
 }
  

@@ -4,6 +4,15 @@ var STORE_NAME = "enigma2_web";
 var localServer;
 var store;
 
+function gearsAvailable(){
+	if(!window.google || !google.gears){
+		return false;
+	} else {
+		return true;
+	}
+		
+}
+
 function gearsEnabled(){
 	var useGears = userprefs.data.useGears || false;
 	return useGears;
@@ -11,22 +20,17 @@ function gearsEnabled(){
 
 //	Called onload to initialize local server and store variables
 function initGears() {	
-	if(gearsEnabled()){
-		if (!window.google || !google.gears) {
-			notify("[GEARS] NOTE: You must install Gears first.", false);
-			return false;
+	if( gearsAvailable() && gearsEnabled() ){
+		localServer = google.gears.factory.create("beta.localserver");
+		store = localServer.createManagedStore(STORE_NAME);
+		if(createStore() ){
+			return true;
 		} else {
-			localServer = google.gears.factory.create("beta.localserver");
-			store = localServer.createManagedStore(STORE_NAME);
-			if(createStore() ){
-				return true;
-			} else {
-				return false;
-			}
+			return false;
 		}
-	} else {
-		return false;
-	}	
+	}
+	
+	return false;
 }
 
 //Create the managed resource store
@@ -82,6 +86,10 @@ function removeStore() {
 }
 
 function enableGears(callback) {
+	if(!gearsAvailable()){
+		notify("You must install GEARS first.", false);
+		return;
+	}
 	if(!gearsEnabled()){
 		userprefs.data.useGears = true;
 		userprefs.save();
