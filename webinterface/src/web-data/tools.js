@@ -92,14 +92,12 @@ function incomingPowerState(request){
 		signal.stopObserving('click', openSignalPanel);
 		signal.observe('click', openSignalPanel);
 		
-		signal.onclick = function(){ openSignalPanel(); };
 		signalImg.src = "/web-data/img/signal.png";
 		signalImg.title = "Show Signal Panel";
 		
 	} else {
 		signal.stopObserving('click', openSignalPanel);		
 		
-		signal.onclick = "";
 		signalImg.src = "/web-data/img/signal_off.png";
 		signalImg.title = "Please disable standby first";
 	}
