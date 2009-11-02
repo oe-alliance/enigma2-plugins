@@ -79,22 +79,33 @@ function getBoxtype(){
 }
 
 function incomingPowerState(request){
-	standby = getXML(request).getElementsByTagName("e2instandby").item(0).firstChild.data;
+	var standby = getXML(request).getElementsByTagName("e2instandby").item(0).firstChild.data;
 	
-	img = $('powerState');
+	var img = $('powerState');
+	var signal = $('openSignalPanel');
+	var signalImg = $('openSignalPanelImg');
 	
 	if(standby.strip() == "false"){
 		img.src = "/web-data/img/running.png";
-		img.title = "Box is running";
+		img.title = "Box is running (Doubleclick swichtes to standby)";
+		
+		signal.onclick = "openSignalPanel()";
+		signalImg.src = "/web-data/img/signal.png";
+		
 	} else {
 		img.src = "/web-data/img/standby.png";
-		img.title = "Box is in Standby";
+		img.title = "Box is in standby (Doubleclick swichtes out of Standby)";
+		
+		signal.onclick = "return false;";
+		signalImg.src = "/web-data/img/signal_off.png";
+		signalImg.title = "Please disable standby first";
 	}
 		
 }
 
 function getPowerState(){
 	doRequest(URL.powerstate, incomingPowerState);
+	
 }
 
 function set(element, value){

@@ -82,7 +82,7 @@
 			<div id="bannerLeft">
 				<div id="bannerText" style="font-size: 24px;">
 					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
-					<img id="powerState" src="/web-data/img/running.png" alt="Running" title="Box is running">
+					<img id="powerState" src="/web-data/img/running.png" alt="Running" title="Box is running (Doubleclick swaps Standby)" onDblClick="sendPowerState(0)">
 				</div>
 				<ul id="mainMenu">
 					<li><a href="#" onClick="switchMode('TV')">TeleVision</a></li>
@@ -100,11 +100,11 @@
 			</div>
 			<div id="bannerRight">
 				<div>					
-					<a href="#" onClick="openSignalPanel()">
-						<img border="0" src="/web-data/img/signal.png" alt="Signal" title="Show Signal Panel">
+					<a id="openSignalPanel" href="#" onClick="openSignalPanel()">
+						<img id="openSignalPanelImg" border="0" src="/web-data/img/signal.png" alt="Signal" title="Show Signal Panel">
 					</a><br>
-					<a href="#" onClick="recordNowPopup()">
-						<img border="0" src="/web-data/img/record.png" alt="R" title="Instant Record">
+					<a id="doInstantRecord" href="#" onClick="recordNowPopup()">
+						<img  id="doInstantRecordImg" border="0" src="/web-data/img/record.png" alt="R" title="Instant Record">
 					</a>
 				</div>			
 			</div>
