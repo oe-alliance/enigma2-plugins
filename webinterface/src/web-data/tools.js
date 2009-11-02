@@ -83,7 +83,7 @@ function incomingPowerState(request){
 	
 	img = $('powerState');
 	
-	if(standby.trim() == "false"){
+	if(standby.strip() == "false"){
 		img.src = "/web-data/img/running.png";
 		img.title = "Box is running";
 	} else {
