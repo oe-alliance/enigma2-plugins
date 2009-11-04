@@ -80,7 +80,7 @@ class AutoTimerComponent(object):
 			self._afterevent = []
 
 		for action, timespan in afterevent:
-			if timespan is None:
+			if timespan is None or timespan[0] is None:
 				self._afterevent.append((action, (None,)))
 			else:
 				self._afterevent.append((action, self.calculateDayspan(*timespan)))
