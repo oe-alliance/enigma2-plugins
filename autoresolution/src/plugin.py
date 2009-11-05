@@ -12,10 +12,11 @@ from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
 
 session = [ ]
+preferedmodes = None
+default = None
+port = None
+videoresolution_dictionary = {}
 
-default = (config.av.videomode[config.av.videoport.value].value, _("default"))
-preferedmodes = [mode[0] for mode in video_hw.getModeList(config.av.videoport.value) if mode[0] != default[0]]
-preferedmodes.append(default)
 resolutions = (('sd_i_50', (_("SD 25/50HZ Interlace Mode"))), ('sd_i_60', (_("SD 30/60HZ Interlace Mode"))), \
 			('sd_p_50', (_("SD 25/50HZ Progressive Mode"))), ('sd_p_60', (_("SD 30/60HZ Progressive Mode"))), \
 			('hd_i', (_("HD Interlace Mode"))), ('hd_p', (_("HD Progressive Mode"))), \
@@ -24,17 +25,6 @@ resolutions = (('sd_i_50', (_("SD 25/50HZ Interlace Mode"))), ('sd_i_60', (_("SD
 
 config.plugins.autoresolution = ConfigSubsection()
 config.plugins.autoresolution.enable = ConfigYesNo(default = False)
-config.plugins.autoresolution.videoresolution = ConfigSubDict()
-videoresolution_dictionary = {}
-for mode in resolutions:
-	if mode[0].startswith('p1080'):
-		choices = ['1080p24', '1080p25', '1080p30'] + preferedmodes
-	elif mode[0] == 'p720_24':
-		choices = ['720p24', '1080p24'] + preferedmodes
-	else:
-		choices = preferedmodes
-	config.plugins.autoresolution.videoresolution[mode[0]] = ConfigSelection(default = default[0], choices = choices)
-	videoresolution_dictionary[mode[0]] = (config.plugins.autoresolution.videoresolution[mode[0]])
 config.plugins.autoresolution.showinfo = ConfigYesNo(default = True)
 config.plugins.autoresolution.testmode = ConfigYesNo(default = False)
 config.plugins.autoresolution.deinterlacer = ConfigSelection(default = "auto", choices =
@@ -52,14 +42,6 @@ def setDeinterlacer(mode):
 	f.write("%s\n" % mode)
 	f.close()
 
-def setDeinterlacerInterlaced(configElement):
-	setDeinterlacer(config.plugins.autoresolution.deinterlacer.value)
-config.plugins.autoresolution.deinterlacer.addNotifier(setDeinterlacerInterlaced)
-
-def setDeinterlacerProgressive(configElement):
-	setDeinterlacer(config.plugins.autoresolution.deinterlacer_progressive.value)
-config.plugins.autoresolution.deinterlacer_progressive.addNotifier(setDeinterlacerProgressive)
-
 frqdic = { 23976: '24', \
 		24000: '24', \
 		25000: '25', \
@@ -71,6 +53,7 @@ frqdic = { 23976: '24', \
 
 class AutoRes(Screen):
 	def __init__(self, session):
+		global port
 		Screen.__init__(self, session)
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
 			{
@@ -81,27 +64,70 @@ class AutoRes(Screen):
 		self.timer = eTimer()
 		self.timer.callback.append(self.determineContent)
 		self.lastmode = config.av.videomode[config.av.videoport.value].value
-	
+		config.av.videoport.addNotifier(self.defaultModeChanged)
+		config.plugins.autoresolution.enable.addNotifier(self.enableChanged, initial_call = False)
+		config.plugins.autoresolution.deinterlacer.addNotifier(self.enableChanged, initial_call = False, immediate_feedback = False)
+		config.plugins.autoresolution.deinterlacer_progressive.addNotifier(self.enableChanged, initial_call = False, immediate_feedback = False)
+		self.lastmode = default[0]
+
+	def defaultModeChanged(self, configEntry):
+		global preferedmodes
+		global port
+		global default
+		port_changed = configEntry == config.av.videoport
+		if port_changed:
+			print "port changed to", configEntry.value
+			if port:
+				config.av.videomode[port].notifiers.remove(self.defaultModeChanged)
+			port = config.av.videoport.value
+			config.av.videomode[port].addNotifier(self.defaultModeChanged)
+		else: # videomode changed in normal av setup
+			global videoresolution_dictionary
+			print "mode changed to", configEntry.value
+			default = (configEntry.value, _("default"))
+			preferedmodes = [mode[0] for mode in video_hw.getModeList(port) if mode[0] != default[0]]
+			preferedmodes.append(default)
+			print "default", default
+			print "preferedmodes", preferedmodes
+			videoresolution_dictionary = {}
+			config.plugins.autoresolution.videoresolution = ConfigSubDict()
+			for mode in resolutions:
+				if mode[0].startswith('p1080'):
+					choices = ['1080p24', '1080p25', '1080p30'] + preferedmodes
+				elif mode[0] == 'p720_24':
+					choices = ['720p24', '1080p24'] + preferedmodes
+				else:
+					choices = preferedmodes
+				config.plugins.autoresolution.videoresolution[mode[0]] = ConfigSelection(default = default[0], choices = choices)
+				config.plugins.autoresolution.videoresolution[mode[0]].addNotifier(self.modeConfigChanged, initial_call = False, immediate_feedback = False)
+				videoresolution_dictionary[mode[0]] = (config.plugins.autoresolution.videoresolution[mode[0]])
+
+	def modeConfigChanged(self, configElement):
+		self.determineContent()
+
+	def enableChanged(self, configElement):
+		if configElement.value:
+			self.determineContent()
+		else:
+			self.changeVideomode()
+
 	def __evVideoFramerateChanged(self):
 		print "[AutoRes] got event evFramerateChanged"
 		if self.timer.isActive():
 			self.timer.stop()
-		if config.plugins.autoresolution.enable.value:
-			self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
+		self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
 
 	def __evVideoSizeChanged(self):
 		print "[AutoRes] got event evVideoSizeChanged"
 		if self.timer.isActive():
 			self.timer.stop()
-		if config.plugins.autoresolution.enable.value:
-			self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
+		self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
 
 	def __evVideoProgressiveChanged(self):
 		print "[AutoRes] got event evVideoProgressiveChanged"
 		if self.timer.isActive():
 			self.timer.stop()
-		if config.plugins.autoresolution.enable.value:
-			self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
+		self.timer.start(int(config.plugins.autoresolution.delay_switch_mode.value))
 
 	def determineContent(self):
 		self.timer.stop()
@@ -119,6 +145,11 @@ class AutoRes(Screen):
 		else:
 			prog = 'i'
 		print "[AutoRes] new content is %sx%s%s%s" %(width, height, prog, frate)
+		if config.plugins.autoresolution.enable.value:
+			if progressive:
+				setDeinterlacer(config.plugins.autoresolution.deinterlacer_progressive.value)
+			else:
+				setDeinterlacer(config.plugins.autoresolution.deinterlacer.value)
 		self.determineVideoMode(width, height, prog, frate)
 
 	def determineVideoMode(self, width, height, prog, frate):
@@ -136,43 +167,51 @@ class AutoRes(Screen):
 			new_mode = videoresolution_dictionary[new_mode].value
 			print '[AutoRes] determined videomode', new_mode
 			self.contentlabeltxt = "Videocontent: %sx%s%s %sHZ" % (width, height, prog, frate)
-			if new_mode != self.lastmode:
+			if new_mode != self.lastmode and config.plugins.autoresolution.enable.value:
 				self.lastmode = new_mode
-				self.changeVideomode(new_mode)
+				self.changeVideomode()
+
+	def changeVideomode(self):
+		if config.plugins.autoresolution.enable.value:
+			mode = self.lastmode
+			if mode.find("1080p") != -1 or mode.find("720p24") != -1:
+				print "[AutoRes] switching to", mode
+				v = open('/proc/stb/video/videomode' , "w")
+				v.write("%s\n" % mode)
+				v.close()
+				resolutionlabeltxt = "Videomode: %s" % mode
+			else:
+				port = config.av.videoport.value
+				rate = config.av.videorate[mode].value
+				print "[AutoRes] switching to %s %s %s" % (port, mode, rate)
+				video_hw.setMode(port, mode, rate)
+				resolutionlabeltxt = 'Videomode: %s %s %s' % (port, mode, rate)
 			if config.plugins.autoresolution.showinfo.value:
+				resolutionlabel["restxt"].setText(resolutionlabeltxt)
 				resolutionlabel["content"].setText(self.contentlabeltxt)
 				resolutionlabel.show()
-		if prog == 'p':
-		    setDeinterlacer(config.plugins.autoresolution.deinterlacer_progressive.value)
+			if config.plugins.autoresolution.testmode.value:
+				self.session.openWithCallback(
+					self.confirm,
+					MessageBox,
+					_("Autoresolution Plugin Testmode:\nIs %s ok?") % (resolutionlabeltxt),
+					MessageBox.TYPE_YESNO,
+					timeout = 15,
+					default = False
+				)
 		else:
-		    setDeinterlacer(config.plugins.autoresolution.deinterlacer.value)
-
-	def changeVideomode(self, mode):
-		if mode.find("1080p") != -1 or mode.find("720p24") != -1:
-			print "[AutoRes] switching to", mode
-			v = open('/proc/stb/video/videomode' , "w")
-			v.write("%s\n" % mode)
-			v.close()
-			resolutionlabeltxt = "Videomode: %s" % mode
-		else:
-			port = config.av.videoport.value
-			rate = config.av.videorate[mode].value
-			print "[AutoRes] switching to %s %s %s" % (port, mode, rate)
-			video_hw.setMode(port, mode, rate)
-			resolutionlabeltxt = 'Videomode: %s %s %s' % (port, mode, rate)
-		if config.plugins.autoresolution.showinfo.value:
-			resolutionlabel["restxt"].setText(resolutionlabeltxt)
-			resolutionlabel["content"].setText(self.contentlabeltxt)
-			resolutionlabel.show()
-		if config.plugins.autoresolution.testmode.value:
-			self.session.openWithCallback(
-				self.confirm,
-				MessageBox,
-				_("Autoresolution Plugin Testmode:\nIs %s ok?") % (resolutionlabeltxt),
-				MessageBox.TYPE_YESNO,
-				timeout = 15,
-				default = False
-			)
+			setDeinterlacer("auto")
+			mode = default[0]
+			if mode != self.lastmode:
+				port = config.av.videoport.value
+				rate = config.av.videorate[mode].value
+				resolutionlabeltxt = "Videomode: %s" % mode
+				if config.plugins.autoresolution.showinfo.value:
+					resolutionlabeltxt = "Videomode: %s" % mode
+					resolutionlabel["restxt"].setText(resolutionlabeltxt)
+					resolutionlabel.show()
+				video_hw.setMode(port, mode, rate)
+				self.lastmode = mode
 
 	def confirm(self, confirmed):
 		if not confirmed:
@@ -259,11 +298,13 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.createSetup()
+		if self["config"].getCurrent()[1] == config.plugins.autoresolution.enable:
+			self.createSetup()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.createSetup()
+		if self["config"].getCurrent()[1] == config.plugins.autoresolution.enable:
+			self.createSetup()
 
 	# for summary:
 	def changedEntry(self):
