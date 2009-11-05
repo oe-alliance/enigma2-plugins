@@ -66,8 +66,8 @@ class AutoRes(Screen):
 		self.lastmode = config.av.videomode[config.av.videoport.value].value
 		config.av.videoport.addNotifier(self.defaultModeChanged)
 		config.plugins.autoresolution.enable.addNotifier(self.enableChanged, initial_call = False)
-		config.plugins.autoresolution.deinterlacer.addNotifier(self.enableChanged, initial_call = False, immediate_feedback = False)
-		config.plugins.autoresolution.deinterlacer_progressive.addNotifier(self.enableChanged, initial_call = False, immediate_feedback = False)
+		config.plugins.autoresolution.deinterlacer.addNotifier(self.enableChanged, initial_call = False)
+		config.plugins.autoresolution.deinterlacer_progressive.addNotifier(self.enableChanged, initial_call = False)
 		self.lastmode = default[0]
 
 	def defaultModeChanged(self, configEntry):
@@ -131,45 +131,43 @@ class AutoRes(Screen):
 
 	def determineContent(self):
 		self.timer.stop()
-		service = session.nav.getCurrentService()
-		info = service and service.info()
-		height = info and info.getInfo(iServiceInformation.sVideoHeight)
-		width = info and info.getInfo(iServiceInformation.sVideoWidth)
-		framerate = info and info.getInfo(iServiceInformation.sFrameRate)
-		frate = str(framerate)[:2] #fallback?
-		if frqdic.has_key(framerate):
-			frate = frqdic[framerate]
-		progressive = info and info.getInfo(iServiceInformation.sProgressive)
-		if progressive == 1:
-			prog = 'p'
-		else:
-			prog = 'i'
-		print "[AutoRes] new content is %sx%s%s%s" %(width, height, prog, frate)
 		if config.plugins.autoresolution.enable.value:
-			if progressive:
+			service = session.nav.getCurrentService()
+			info = service and service.info()
+			height = info and info.getInfo(iServiceInformation.sVideoHeight)
+			width = info and info.getInfo(iServiceInformation.sVideoWidth)
+			framerate = info and info.getInfo(iServiceInformation.sFrameRate)
+			frate = str(framerate)[:2] #fallback?
+			if frqdic.has_key(framerate):
+				frate = frqdic[framerate]
+			progressive = info and info.getInfo(iServiceInformation.sProgressive)
+			if progressive == 1:
+				prog = 'p'
 				setDeinterlacer(config.plugins.autoresolution.deinterlacer_progressive.value)
 			else:
+				prog = 'i'
 				setDeinterlacer(config.plugins.autoresolution.deinterlacer.value)
-		self.determineVideoMode(width, height, prog, frate)
 
-	def determineVideoMode(self, width, height, prog, frate):
-		if (height >= 900 or width >= 1600) and frate in ('24', '25', '30') and prog == 'p': 	# 1080p content
-			new_mode = 'p1080_%s' % frate
-		elif (height >= 576 or width >= 720) and frate == '24' and prog == 'p': 		# 720p24 detection
-			new_mode = 'p720_24'
-		elif (height == 576 or height == 288) and frate in ('25', '50'):
-			new_mode = 'sd_%s_50' % prog
-		elif (height == 480 or height == 240) and frate in ('24', '30', '60'):
-			new_mode = 'sd_%s_60' % prog
-		else:
-			new_mode = 'hd_%s' % prog
-		if videoresolution_dictionary.has_key(new_mode):
-			new_mode = videoresolution_dictionary[new_mode].value
-			print '[AutoRes] determined videomode', new_mode
-			self.contentlabeltxt = "Videocontent: %sx%s%s %sHZ" % (width, height, prog, frate)
-			if new_mode != self.lastmode and config.plugins.autoresolution.enable.value:
-				self.lastmode = new_mode
-				self.changeVideomode()
+			print "[AutoRes] new content is %sx%s%s%s" %(width, height, prog, frate)
+
+			if (height >= 900 or width >= 1600) and frate in ('24', '25', '30') and prog == 'p': 	# 1080p content
+				new_mode = 'p1080_%s' % frate
+			elif (height >= 576 or width >= 720) and frate == '24' and prog == 'p': 		# 720p24 detection
+				new_mode = 'p720_24'
+			elif (height == 576 or height == 288) and frate in ('25', '50'):
+				new_mode = 'sd_%s_50' % prog
+			elif (height == 480 or height == 240) and frate in ('24', '30', '60'):
+				new_mode = 'sd_%s_60' % prog
+			else:
+				new_mode = 'hd_%s' % prog
+
+			if videoresolution_dictionary.has_key(new_mode):
+				new_mode = videoresolution_dictionary[new_mode].value
+				print '[AutoRes] determined videomode', new_mode
+				self.contentlabeltxt = "Videocontent: %sx%s%s %sHZ" % (width, height, prog, frate)
+				if new_mode != self.lastmode and config.plugins.autoresolution.enable.value:
+					self.lastmode = new_mode
+					self.changeVideomode()
 
 	def changeVideomode(self):
 		if config.plugins.autoresolution.enable.value:
