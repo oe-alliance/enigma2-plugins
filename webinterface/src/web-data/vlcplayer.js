@@ -10,15 +10,10 @@ function incomingVLCServiceEPG(request) {
 		var events = getXML(request).getElementsByTagName("e2eventlist")
 				.item(0).getElementsByTagName("e2event");
 
-		var event = new EPGEvent(events.item(0));
-		var namespace = {
-			'servicename' : event.getServiceName(),
-			'eventname' : event.getTitle(),
-			'duration' : (parseInt((event.duration / 60), 10))
-		};
+		var event = new EPGEvent(events.item(0)).toJSON();
 
 		var data = {
-			'current' : namespace
+			'current' : event
 		};
 		processTpl('streaminterface/tplCurrent', data, 'current');
 	}

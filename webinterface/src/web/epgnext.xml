@@ -5,6 +5,7 @@
 		&lt;e2eventid><e2:item name="EventID"/>&lt;/e2eventid>
 		&lt;e2eventstart><e2:item name="TimeStart"/>&lt;/e2eventstart>
 		&lt;e2eventduration><e2:item name="Duration"/>&lt;/e2eventduration>
+		&lt;e2eventcurrenttime><e2:item name="CurrentTime"/>&lt;/e2eventcurrenttime>
 		&lt;e2eventtitle><e2:item name="Title" filter="xml"/>&lt;/e2eventtitle>
 		&lt;e2eventdescription><e2:item name="Description" filter="xml"/>&lt;/e2eventdescription>
 		&lt;e2eventdescriptionextended><e2:item name="DescriptionExtended" filter="xml"/>&lt;/e2eventdescriptionextended>

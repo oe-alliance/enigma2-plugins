@@ -59,12 +59,12 @@ class EPG(Source):
         print "[WebComponents.EPG] getting EPG NOW/NEXT", ref
 
         if service:
-            events = self.epgcache.lookupEvent(['IBDTSERNX', (ref, type, -1)])
+            events = self.epgcache.lookupEvent(['IBDCTSERNX', (ref, type, -1)])
         else:
             serviceHandler = eServiceCenter.getInstance()
             list = serviceHandler.list(eServiceReference(ref))
             services = list and list.getContent('S')
-            search = ['IBDTSERNX']
+            search = ['IBDCTSERNX']
 
             if services: # It's a Bouquet
                 search.extend([(service, type, -1) for service in services])
@@ -75,7 +75,7 @@ class EPG(Source):
             return events
         return ()
 
-    def getEPGofService(self, ref, options='IBDTSERN'):
+    def getEPGofService(self, ref, options='IBDCTSERN'):
         print "getting EPG of Service", ref
         events = self.epgcache.lookupEvent([options , (ref, 0, -1, -1)]);
         if events:
@@ -123,7 +123,7 @@ class EPG(Source):
         sl = serviceHandler.list(eServiceReference(bRef))
         services = sl and sl.getContent('S')
 
-        search = ['IBDTSERN']
+        search = ['IBDCTSERN']
         search.extend([(service, 0, time) for service in services])
 
         events = self.epgcache.lookupEvent(search)
@@ -135,7 +135,7 @@ class EPG(Source):
     def searchEvent(self, needle):
         print "[WebComponents.EPG] searching EPG: ", needle
 
-        events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1));
+        events = self.epgcache.search(('IBDCTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1));
         if events:
             return events
         return ()
@@ -143,7 +143,7 @@ class EPG(Source):
     def searchSimilarEvent(self, needle):
         print "[WebComponents.EPG] searching similar eventid: ",needle
 
-        events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, needle['sRef'], int(needle['eventid'])));
+        events = self.epgcache.search(('IBDCTSERN', 256, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, needle['sRef'], int(needle['eventid'])));
         if events:
             return events
         return ()
@@ -155,11 +155,12 @@ class EPG(Source):
                     "TimeStart": 1,
                     "Duration": 2,
                     "TimeEnd": 3,
-                    "Title": 4,
-                    "Description": 5,
-                    "DescriptionExtended": 6,
-                    "ServiceReference": 7,
-                    "ServiceName": 8
+                    "CurrentTime": 4,
+                    "Title": 5,
+                    "Description": 6,
+                    "DescriptionExtended": 7,
+                    "ServiceReference": 8,
+                    "ServiceName": 9
                 }
             return lut
         else:
@@ -167,11 +168,12 @@ class EPG(Source):
                 "EventID": 0,
                 "TimeStart": 1,
                 "Duration": 2,
-                "Title": 3,
-                "Description": 4,
-                "DescriptionExtended": 5,
-                "ServiceReference": 6,
-                "ServiceName": 7
+                "CurrentTime": 3,
+                "Title": 4,
+                "Description": 5,
+                "DescriptionExtended": 6,
+                "ServiceReference": 7,
+                "ServiceName": 8
             }
 
             return lut

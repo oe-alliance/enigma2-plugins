@@ -35,6 +35,7 @@ function EPGEvent(xml, number){
 	this.eventID = getNodeContent(xml, 'e2eventid', '');
 	this.startTime = getNodeContent(xml, 'e2eventstart', '');
 	this.duration = getNodeContent(xml, 'e2eventduration', '');
+	this.currentTime = getNodeContent(xml, 'e2eventcurrenttime'),
 	this.title = getNodeContent(xml, 'e2eventtitle', '');
 	this.serviceRef = getNodeContent(xml, 'e2eventservicereference', '');
 	this.serviceName = getNodeContent(xml, 'e2eventservicename', '');
@@ -91,10 +92,19 @@ function EPGEvent(xml, number){
 		}
 		return h+":"+m;
 	};
-	this.getDuration = function() {
+	this.getDuration = function() {		
 		var date = new Date(parseInt(this.duration, 10)*1000);
 		return date;
 	};
+	this.getTimeRemainingString = function() {
+		if( parseInt(this.currentTime, 10) < parseInt(this.startTime, 10) ){
+			return Math.ceil(this.getDuration()/60000);
+		} else {
+			var remaining = parseInt( ( (this.getTimeEnd() - parseInt(this.currentTime, 10) ) / 60), 10);
+			return remaining;
+		}
+	};
+	
 	this.getTitle = function() {
 		return this.title;
 	};
@@ -123,6 +133,7 @@ function EPGEvent(xml, number){
 			'duration': Math.ceil(this.getDuration()/60000), 
 			'description': quotes2html(this.getDescription()),
 			'endtime': this.getTimeEndString(), 
+			'remaining': this.getTimeRemainingString(),
 			'extdescription': quotes2html(this.getDescriptionExtended()),
 			'number': String(this.number),
 			'start': this.getTimeBegin(),

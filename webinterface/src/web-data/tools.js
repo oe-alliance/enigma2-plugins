@@ -101,12 +101,10 @@ function incomingPowerState(request){
 		signalImg.src = "/web-data/img/signal_off.png";
 		signalImg.title = "Please disable standby first";
 	}
-		
 }
 
 function getPowerState(){
-	doRequest(URL.powerstate, incomingPowerState);
-	
+	doRequest(URL.powerstate, incomingPowerState);	
 }
 
 function set(element, value){
@@ -124,7 +122,7 @@ function notify(text, state){
 	notif = $('notification');
 
 	if(notif !== null){
-		//clear possibly existing hideNotifier Timeout from previous notfication
+		//clear possibly existing hideNotifier timeout of a previous notfication
 		clearTimeout(hideNotifierTimeout);
 		if(state === false){
 			notif.style.background = "#C00";

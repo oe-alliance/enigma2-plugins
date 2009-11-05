@@ -356,12 +356,12 @@
 	}
 	
 	.epgTitle{
-		width: 680px;
+		width: 630px;
 		color: #485052;
 	}
 	
 	.epgLength{
-		width: 50px;
+		width: 100px;
 		text-align: right;
 		color: #485052;
 	}
