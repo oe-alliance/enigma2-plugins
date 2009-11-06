@@ -125,11 +125,11 @@ class AutoRes(Screen):
 	def enableChanged(self, configElement):
 		global usable
 		if configElement.value:
-			usable = config.plugins.autoresolution.enable and not port in ('DVI-PC', 'Scart')
+			usable = not port in ('DVI-PC', 'Scart')
 			self.determineContent()
 		else:
-			self.changeVideomode()
 			usable = False
+			self.changeVideomode()
 
 	def __evVideoFramerateChanged(self):
 		print "[AutoRes] got event evFramerateChanged"
