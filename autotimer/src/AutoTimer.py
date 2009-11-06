@@ -1,7 +1,7 @@
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
-from AutoTimerConfiguration import parseConfig, writeConfig
+from AutoTimerConfiguration import parseConfig, buildConfig
 
 # Navigation (RecordTimer)
 import NavigationInstance
@@ -100,8 +100,13 @@ class AutoTimer:
 		)
 		self.uniqueTimerId = len(self.timers)
 
+	def getXml(self):
+		return buildConfig(self.defaultTimer, self.timers, webif = True)
+
 	def writeXml(self):
-		writeConfig(XML_CONFIG, self.defaultTimer, self.timers)
+		file = open(XML_CONFIG, 'w')
+		file.writelines(buildConfig(self.defaultTimer, self.timers))
+		file.close()
 
 # Manage List
 

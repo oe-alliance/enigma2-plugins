@@ -476,7 +476,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 				tags = tags
 		))
 
-def writeConfig(filename, defaultTimer, timers):
+def buildConfig(defaultTimer, timers, webif = False):
 	# Generate List in RAM
 	list = ['<?xml version="1.0" ?>\n<autotimer version="', CURRENT_CONFIG_VERSION, '">\n\n']
 
@@ -531,17 +531,30 @@ def writeConfig(filename, defaultTimer, timers):
 	# Close still opened defaults tag
 	list.append('>\n')
 
-	# Services
-	for serviceref in defaultTimer.services:
-		list.extend(('  <serviceref>', serviceref, '</serviceref>'))
-		ref = ServiceReference(str(serviceref))
-		list.extend((' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'))
+	if webif:
+		# Services + Bouquets
+		for serviceref in defaultTimer.services + defaultTimer.bouquets:
+			ref = ServiceReference(str(serviceref))
+			list.extend((
+				'  <e2service>\n',
+				'   <e2servicereference>', str(serviceref), '</e2servicereference>\n',
+				'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+				'  </e2service>\n',
+			))
+	else:
+		# Services
+		for serviceref in defaultTimer.services:
+			ref = ServiceReference(str(serviceref))
+			list.extend(('  <serviceref>', serviceref, '</serviceref>',
+						' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
+			))
 
-	# Bouquets
-	for bouquet in defaultTimer.bouquets:
-		list.extend(('  <bouquet>', str(bouquet), '</bouquet>'))
-		ref = ServiceReference(str(bouquet))
-		list.extend((' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'))
+		# Bouquets
+		for bouquet in defaultTimer.bouquets:
+			ref = ServiceReference(str(bouquet))
+			list.extend(('  <bouquet>', str(bouquet), '</bouquet>',
+						' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
+			))
 
 	# AfterEvent
 	if defaultTimer.hasAfterEvent():
@@ -647,17 +660,30 @@ def writeConfig(filename, defaultTimer, timers):
 		# Close still opened timer tag
 		list.append('>\n')
 
-		# Services
-		for serviceref in timer.services:
-			list.extend(('  <serviceref>', serviceref, '</serviceref>'))
-			ref = ServiceReference(str(serviceref))
-			list.extend((' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'))
+		if webif:
+			# Services + Bouquets
+			for serviceref in timer.services + timer.bouquets:
+				ref = ServiceReference(str(serviceref))
+				list.extend((
+					'  <e2service>\n',
+					'   <e2servicereference>', str(serviceref), '</e2servicereference>\n',
+					'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+					'  </e2service>\n',
+				))
+		else:
+			# Services
+			for serviceref in timer.services:
+				ref = ServiceReference(str(serviceref))
+				list.extend(('  <serviceref>', serviceref, '</serviceref>',
+							' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
+				))
 
-		# Bouquets
-		for bouquet in timer.bouquets:
-			list.extend(('  <bouquet>', str(bouquet), '</bouquet>'))
-			ref = ServiceReference(str(bouquet))
-			list.extend((' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n'))
+			# Bouquets
+			for bouquet in timer.bouquets:
+				ref = ServiceReference(str(bouquet))
+				list.extend(('  <bouquet>', str(bouquet), '</bouquet>',
+							' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
+				))
 
 		# AfterEvent
 		if timer.hasAfterEvent():
@@ -704,9 +730,5 @@ def writeConfig(filename, defaultTimer, timers):
 	# End of Configuration
 	list.append('</autotimer>\n')
 
-	# Save to Flash
-	file = open(filename, 'w')
-	file.writelines(list)
-
-	file.close()
+	return list
 

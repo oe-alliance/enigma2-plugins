@@ -1,5 +1,8 @@
 from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
-from Plugins.Extensions.AutoTimer.AutoTimerResource import AutoTimerResource
+from Plugins.Extensions.AutoTimer.AutoTimerResource import AutoTimerDoParseResource, \
+	AutoTimerListAutoTimerResource
 
-addExternalChild( ("autotimer", AutoTimerResource()) )
+root = AutoTimerListAutoTimerResource()
+root.putChild('parse', AutoTimerDoParseResource())
+addExternalChild( ("autotimer", root ) )
 
