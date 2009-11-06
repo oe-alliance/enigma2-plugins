@@ -97,7 +97,7 @@ class AutoRes(Screen):
 				config.av.videomode[port].notifiers.remove(self.defaultModeChanged)
 			port = config.av.videoport.value
 			config.av.videomode[port].addNotifier(self.defaultModeChanged)
-			usable = config.plugins.autoresolution.enable and not port in ('DVI-PC', 'Scart')
+			usable = config.plugins.autoresolution.enable.value and not port in ('DVI-PC', 'Scart')
 		else: # videomode changed in normal av setup
 			global videoresolution_dictionary
 			print "mode changed to", configEntry.value
