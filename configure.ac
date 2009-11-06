@@ -52,10 +52,6 @@ webinterface/src/web-data/tpl/default/streaminterface/Makefile
 webinterface/src/web-data/tpl/default/streaminterface/img/Makefile
 webinterface/po/Makefile
 
-wirelesslan/Makefile
-wirelesslan/src/Makefile
-wirelesslan/po/Makefile
-
 netcaster/Makefile
 netcaster/src/Makefile
 netcaster/src/etc/Makefile
@@ -120,10 +116,6 @@ imdb/po/Makefile
 ofdb/Makefile
 ofdb/src/Makefile
 ofdb/po/Makefile
-
-networkwizard/Makefile
-networkwizard/src/Makefile
-networkwizard/po/Makefile
 
 movieretitle/Makefile
 movieretitle/src/Makefile

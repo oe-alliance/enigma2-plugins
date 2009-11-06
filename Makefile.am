@@ -29,7 +29,6 @@ SUBDIRS = \
 	movietagger \
 	mytube \
 	netcaster \
-	networkwizard \
 	networkbrowser \
 	ofdb \
 	orfat \
@@ -50,7 +49,6 @@ SUBDIRS = \
 	webcamviewer \
 	webinterface \
 	werbezapper \
-	wirelesslan \
 	youtubeplayer \
 	zaphistorybrowser
 
