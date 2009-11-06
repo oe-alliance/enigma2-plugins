@@ -30,8 +30,6 @@ config.plugins.autoresolution.showinfo = ConfigYesNo(default = True)
 config.plugins.autoresolution.testmode = ConfigYesNo(default = False)
 config.plugins.autoresolution.deinterlacer = ConfigSelection(default = "auto", choices =
 		[("off", _("off")), ("auto", _("auto")), ("on", _("on")), ("bob", _("bob"))])
-config.plugins.autoresolution.deinterlacer_hd = ConfigSelection(default = "auto", choices =
-		[("off", _("off")), ("auto", _("auto")), ("on", _("on")), ("bob", _("bob"))])
 config.plugins.autoresolution.deinterlacer_progressive = ConfigSelection(default = "auto", choices =
 		[("off", _("off")), ("auto", _("auto")), ("on", _("on")), ("bob", _("bob"))])
 config.plugins.autoresolution.delay_switch_mode = ConfigSelection(default = "1000", choices = [
@@ -72,7 +70,6 @@ class AutoRes(Screen):
 		config.av.videoport.addNotifier(self.defaultModeChanged)
 		config.plugins.autoresolution.enable.addNotifier(self.enableChanged, initial_call = False)
 		config.plugins.autoresolution.deinterlacer.addNotifier(self.enableChanged, initial_call = False)
-		config.plugins.autoresolution.deinterlacer_hd.addNotifier(self.enableChanged, initial_call = False)
 		config.plugins.autoresolution.deinterlacer_progressive.addNotifier(self.enableChanged, initial_call = False)
 		self.setMode(default[0], False)
 		self.after_switch_delay = False
@@ -154,7 +151,6 @@ class AutoRes(Screen):
 		self.timer.stop()
 		self.after_switch_delay = True
 		if usable:
-			hd = 1
 			service = session.nav.getCurrentService()
 			info = service and service.info()
 			height = info and info.getInfo(iServiceInformation.sVideoHeight)
@@ -174,20 +170,15 @@ class AutoRes(Screen):
 					new_mode = 'p720_24'
 				elif (height == 576 or height == 288) and frate in ('25', '50'):
 					new_mode = 'sd_%s_50' % prog
-					hd = 0
 				elif (height == 480 or height == 240) and frate in ('24', '30', '60'):
 					new_mode = 'sd_%s_60' % prog
-					hd = 0
 				else:
 					new_mode = 'hd_%s' % prog
 
 				if progressive == 1:
 					setDeinterlacer(config.plugins.autoresolution.deinterlacer_progressive.value)
 				else:
-					if hd:
-						setDeinterlacer(config.plugins.autoresolution.deinterlacer_hd.value)
-					else:
-						setDeinterlacer(config.plugins.autoresolution.deinterlacer.value)
+					setDeinterlacer(config.plugins.autoresolution.deinterlacer.value)
 
 				print "[AutoRes] new content is %sx%s%s%s" %(width, height, prog, frate)
 
@@ -300,8 +291,7 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 					getConfigListEntry(_("Show info screen"), config.plugins.autoresolution.showinfo),
 					getConfigListEntry(_("Delay x seconds after service started"), config.plugins.autoresolution.delay_switch_mode),
 					getConfigListEntry(_("Running in testmode"), config.plugins.autoresolution.testmode),
-					getConfigListEntry(_("Deinterlacer mode for interlaced SD content"), config.plugins.autoresolution.deinterlacer),
-					getConfigListEntry(_("Deinterlacer mode for interlaced HD content"), config.plugins.autoresolution.deinterlacer_hd),
+					getConfigListEntry(_("Deinterlacer mode for interlaced content"), config.plugins.autoresolution.deinterlacer),
 					getConfigListEntry(_("Deinterlacer mode for progressive content"), config.plugins.autoresolution.deinterlacer_progressive)
 				))
 			else:
