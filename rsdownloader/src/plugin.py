@@ -612,6 +612,21 @@ class RS:
 		del self.downloads
 		self.downloads = tmp
 
+	def abortAllDownloads(self):
+		tmp = []
+		for download in self.downloads:
+			if download.status == _("Downloading"):
+				download.stop()
+				download.download = None
+				download.downloading = False
+				download.progress = 0
+				download.size = 0
+				download.status = _("Waiting")
+			tmp.append(download)
+		del self.downloads
+		self.downloads = tmp
+		self.startDownloading()
+
 	def restartFailedDownloads(self):
 		tmp = []
 		for download in self.downloads:
@@ -916,6 +931,7 @@ class RSMain(ChangedScreen):
 		list.append((_("Add downloads from txt files"), self.add))
 		list.append((_("Add files from container"), self.addContainer))
 		list.append((_("Delete failed downloads"), self.deleteFailed))
+		list.append((_("Abort all downloads"), self.abortDownloads))
 		list.append((_("Restart failed downloads"), self.restartFailed))
 		list.append((_("Clear finished downloads"), self.clearFinished))
 		list.append((_("Show log"), self.showLog))
@@ -929,6 +945,9 @@ class RSMain(ChangedScreen):
 
 	def deleteFailed(self):
 		rapidshare.deleteFailedDownloads()
+
+	def abortDownloads(self):
+		rapidshare.abortAllDownloads()
 
 	def restartFailed(self):
 		rapidshare.restartFailedDownloads()
