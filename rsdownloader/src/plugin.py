@@ -53,6 +53,7 @@ config.plugins.RSDownloader.count_maximal_downloads = ConfigInteger(default=40, 
 config.plugins.RSDownloader.write_log = ConfigYesNo(default=True)
 config.plugins.RSDownloader.reconnect_fritz = ConfigYesNo(default=False)
 config.plugins.RSDownloader.autorestart_failed = ConfigYesNo(default=False)
+config.plugins.RSDownloader.mark_small_as_failed = ConfigYesNo(default=True)
 
 ##############################################################################
 
@@ -310,7 +311,7 @@ class RSDownload:
 		self.checkTimer.start(10000, 1)
 
 	def doCheckTimer(self):
-		if (self.size == 0) or (self.progress < 100):
+		if (self.size == 0) or (self.progress < 100) or ((config.plugins.RSDownloader.mark_small_as_failed.value == True) and (self.size < 1)):
 			self.status = _("Failed")
 			if config.plugins.RSDownloader.autorestart_failed.value:
 				self.restartFailedTimer = eTimer()
@@ -674,7 +675,8 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 			getConfigListEntry(_("Take x downloads to list:"), config.plugins.RSDownloader.count_maximal_downloads),
 			getConfigListEntry(_("Write log:"), config.plugins.RSDownloader.write_log),
 			getConfigListEntry(_("Reconnect fritz.Box before downloading:"), config.plugins.RSDownloader.reconnect_fritz),
-			getConfigListEntry(_("Restart failed after 10 minutes:"), config.plugins.RSDownloader.autorestart_failed)])
+			getConfigListEntry(_("Restart failed after 10 minutes:"), config.plugins.RSDownloader.autorestart_failed),
+			getConfigListEntry(_("Mark files < 1 MB as failed:"), config.plugins.RSDownloader.mark_small_as_failed)])
 		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {"green": self.save, "cancel": self.exit}, -1)
 
