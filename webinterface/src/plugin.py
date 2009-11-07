@@ -178,8 +178,8 @@ def startWebserver(session):
 		for adaptername in iNetwork.ifaces:				
 			ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
 						
-			#Network.py sets the IP of inactive Adapters to 0.0.0.0, we do not want to listen on 0.0.0.0
-			if ip != '0.0.0.0':
+			#Only if it's up and has a "good" IP
+			if ip != '0.0.0.0' and iNetwork.ifaces[adaptername]['up'] == True:
 			#HTTP
 				if config.plugins.Webinterface.http.enabled.value is True:
 					ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value)
@@ -197,7 +197,7 @@ def startWebserver(session):
 			errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
 		
 		if errors != "":
-			session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), MessageBox.TYPE_ERROR)
+			session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
 		
 #===============================================================================
 # stop the Webinterface for all configured Interfaces
