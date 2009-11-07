@@ -27,8 +27,9 @@ from Tools.LoadPixmap import LoadPixmap
 from twisted.internet import reactor
 from twisted.python import failure
 from twisted.web.client import getPage
+from urllib2 import Request
 from urlparse import urlparse, urlunparse
-import gettext, re, socket, urllib2
+import gettext, re, socket, urllib, urllib2
 
 ##############################################################################
 
@@ -184,6 +185,13 @@ def reconnect(host='fritz.box', port=49000):
 		pass
 
 ##############################################################################
+
+std_headers = {
+	'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2',
+	'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+	'Accept': 'text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5',
+	'Accept-Language': 'en-us,en;q=0.5',
+}
 
 class RSDownload:
 	def __init__(self, url):
@@ -344,36 +352,55 @@ class RSDownload:
 		self.checkTimer.callback.append(self.doCheckTimer)
 		self.checkTimer.start(10000, 1)
 
+	def getTubeId(self):
+		url = self.url
+		if url.__contains__("&feature="):
+			idx = url.index("&feature=")
+			url = url[:idx]
+		split = url.split("=")
+		ret = split.pop()
+		if ret == 'youtube_gdata':
+			tmpval = split.pop()
+			if tmpval.endswith("&feature"):
+				tmp = tmpval.split("&")
+				ret = tmp.pop(0)
+		return ret
+
 	def getYoutubeDownloadLink(self):
-		mrl = None
 		html = get(self.url)
 		if html != "":
-			isHDAvailable = False
-			video_id = None
-			t = None
 			reonecat = re.compile(r'<title>(.+?)</title>', re.DOTALL)
 			titles = reonecat.findall(html)
 			if titles:
 				self.name = titles[0]
-				if self.name.startswith("YouTube - "):
-					self.name = (self.name[10:]).replace("&amp;", "&")
-			if html.__contains__("isHDAvailable = true"):
-				isHDAvailable = True
-			for line in html.split('\n'):
-				if 'swfArgs' in line:
-					line = line.strip().split()
-					x = 0
-					for thing in line:
-						if 'video_id' in thing:
-							video_id = line[x+1][1:-2]
-						elif '"t":' == thing:
-							t = line[x+1][1:-2]
-						x += 1
-			if video_id and t:
-				if isHDAvailable == True:
-					mrl = "http://www.youtube.com/get_video?video_id=%s&t=%s&fmt=22" % (video_id, t)
-				else:
-					mrl = "http://www.youtube.com/get_video?video_id=%s&t=%s&fmt=18" % (video_id, t)
+				if self.name.__contains__("\t- "):
+					idx = self.name.index("\t- ")
+					self.name = (self.name[idx+3:]).replace("&amp;", "&").replace("\t", "").replace("\n", "")
+		mrl = None
+		isHDAvailable = False
+		video_id = str(self.getTubeId())
+		watch_url = "http://www.youtube.com/watch?v="+video_id
+		watchrequest = Request(watch_url, None, std_headers)
+		try:
+			watchvideopage = urllib2.urlopen(watchrequest).read()
+		except:
+			watchvideopage = ""
+		if "isHDAvailable = true" in watchvideopage:
+			isHDAvailable = True
+		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en'%video_id
+		inforequest = Request(info_url, None, std_headers)
+		try:
+			infopage = urllib2.urlopen(inforequest).read()
+		except:
+			infopage = ""
+		mobj = re.search(r'(?m)&token=([^&]+)(?:&|$)', infopage)
+		if mobj:
+			token = urllib.unquote(mobj.group(1))
+			myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en'%(video_id, token)
+			if isHDAvailable is True:
+				mrl = '%s&fmt=%s'%(myurl, '22')
+			else:
+				mrl = '%s&fmt=%s'%(myurl, '18')
 		return mrl
 
 ##############################################################################
