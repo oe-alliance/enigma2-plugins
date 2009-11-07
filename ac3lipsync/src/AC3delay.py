@@ -1,4 +1,4 @@
-from AC3utils import AC3, PCM, AC3PCM, lFileDelay, dec2hex, hex2dec
+from AC3utils import AC3, PCM, AC3PCM
 from Components.config import config
 from enigma import eTimer
 from Tools.ISO639 import LanguageCodes
@@ -7,7 +7,7 @@ import os
 import NavigationInstance
 
 class AC3delay:
-    def __init__(self, session):
+    def __init__(self):
         self.iService = None
         self.iServiceReference = None
         self.iAudioDelay = None
@@ -29,7 +29,7 @@ class AC3delay:
 
         # find out box type
         self.oHWInfo = HardwareInfo()
-        if self.oHWInfo.get_device_name() in ("dm800","dm8000"):
+        if self.oHWInfo.get_device_name() in ("dm800","dm8000","dm500hd"):
             self.bHasToRestartService = False
         else:
             self.bHasToRestartService = True
@@ -103,26 +103,17 @@ class AC3delay:
                 iDelay = self.iAudioDelay.getAC3Delay()
             else:
                 iDelay = self.iAudioDelay.getPCMDelay()
-            if iDelay == -1:
-                iDelay = 0
         if bInitialized == True:
             self.deleteAudio()
+        if iDelay == -1:
+            iDelay = 0
         return iDelay
 
-    def getFileDelay(self, sAudio):
-        sFileName = lFileDelay[sAudio]
-        if os.path.exists(sFileName) == True:
-            delayfile = open(sFileName,"r")
-            delay = 0
-            delay = delayfile.readline()
-            delayfile.close()
-            iDelay = hex2dec(delay)/90
-        else:
-            iDelay = 0
-        return int(iDelay)
-
-    def setLamedbDelay(self, sAudio, iDelay):
-        self.initAudio()
+    def setLamedbDelay(self, sAudio, iDelay, bDelayStart):
+        bInitialized = False
+        if self.iService == None:
+            self.initAudio()
+            bInitialized = True
         if self.iAudioDelay is not None:
             if iDelay == 0:
                 iDelay = -1
@@ -130,18 +121,8 @@ class AC3delay:
                 self.iAudioDelay.setAC3Delay(iDelay)
             else:
                 self.iAudioDelay.setPCMDelay(iDelay)
-
-    def setFileDelay(self, sAudio, iDelay, bDelayStart):
-        hDelay = dec2hex(iDelay*90)
-        sFileName = lFileDelay[sAudio]
-        if os.path.exists(sFileName) == True:
-            delayfile = open(lFileDelay[sAudio],"w")
-            delayfile.write("%s\0" % hDelay)
-            delayfile.close()
-            if bDelayStart == True:
-                self.delayedActivateDelay()
-            else:
-                self.activateDelay()
+        if bInitialized == True:
+            self.deleteAudio()
 
     def getAudioInformation(self):
         bInitialized = False
@@ -193,4 +174,3 @@ class AC3delay:
         del oAudioTracks
         if bInitialized == True:
             self.deleteAudio()
-

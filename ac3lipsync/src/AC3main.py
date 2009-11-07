@@ -1,4 +1,4 @@
-from AC3utils import AC3, PCM, AC3PCM, lFileDelay, dec2hex, hex2dec
+from AC3utils import AC3, PCM, AC3PCM
 from AC3delay import AC3delay
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
@@ -71,7 +71,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         self.keyStep["8"] = int(config.plugins.AC3LipSync.absoluteStep8.getValue()) 
 
         # AC3delay instance
-        self.AC3delay = AC3delay(self.session)
+        self.AC3delay = AC3delay()
 
         #Screen elements
 
@@ -97,10 +97,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         self["key_red"] = Label(_("Cancel"))
         self["key_green"] = Label(_("OK"))
         self["key_yellow"] = Label(_("Switch audio"))
-        if self.AC3delay.bIsRecording == True:
-            self["key_blue"] = Label("")
-        else:
-            self["key_blue"] = Label(_("Save"))
+        self["key_blue"] = Label("")
 
         # Last saved values
         self.savedValue = {}
@@ -125,7 +122,6 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
             "red": self.keyCancel,
             "green": self.keyOk,
             "yellow": self.keyAudioSelection,
-            "blue": self.keySaveToLamedb,
             "1": self.keyNumberRelative,
             "3": self.keyNumberRelative,
             "4": self.keyNumberRelative,
@@ -139,8 +135,8 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         }, -1)
 
     def __onShow(self):
-        for sAudio in lFileDelay.keys():
-            iDelay = self.AC3delay.getFileDelay(sAudio)
+        for sAudio in AC3PCM:
+            iDelay = self.AC3delay.getLamedbDelay(sAudio)
             self[sAudio + "Slider"].setRange([(self.lowerBound), (self.upperBound)])
             self[sAudio + "Slider"].setValue(iDelay-self.lowerBound)
             self[sAudio + "SliderText"].setText(_("%i ms") %iDelay)
@@ -183,7 +179,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         sNumber = str(number)
         iSliderValue = self.keyStep[sNumber]-self.lowerBound
         self.setSliderInfo(iSliderValue)
-        self.AC3delay.setFileDelay(sAudio, self.currentValue[sAudio], True)
+        self.AC3delay.setLamedbDelay(sAudio, self.currentValue[sAudio], True)
 
     def keyNumberRelative(self, number):
         sNumber = str(number)
@@ -198,7 +194,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         elif iSliderValue > (self.upperBound - self.lowerBound):
             iSliderValue = (self.upperBound - self.lowerBound)
         self.setSliderInfo(iSliderValue)
-        self.AC3delay.setFileDelay(sAudio, self.currentValue[sAudio], True)        
+        self.AC3delay.setLamedbDelay(sAudio, self.currentValue[sAudio], True)        
 
     def keyAudioSelection(self):
         self.audioSelection()
@@ -207,11 +203,11 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         self.close()
 
     def keyCancel(self):
-        for sAudio in lFileDelay.keys():
+        for sAudio in AC3PCM:
             iSliderValue = self.currentValue[sAudio]
             if iSliderValue <> self.savedValue[sAudio]:
                 self.AC3delay.whichAudio = sAudio
-                self.AC3delay.setFileDelay(sAudio, self.savedValue[sAudio], False)
+                self.AC3delay.setLamedbDelay(sAudio, self.savedValue[sAudio], False)
         self.close()
 
     def keyMenu(self):
@@ -237,56 +233,6 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         iDelay = self[sAudio+"Slider"].getValue()+self.lowerBound
 
         AC3SetCustomValue(self.session,iDelay,self.keyStep)
-        
-    def keySaveToLamedb(self):
-        if self.AC3delay.bIsRecording == False:
-            keyList = [
-                (_("Save %s delay")%AC3,"1"),
-                (_("Save %s delay")%PCM,"2"),
-                (_("Save both delays"),"3")
-            ]
-
-            self.session.openWithCallback(self.DoSaveLamedb,ChoiceBox,_("Which delays do you want to set"),keyList)
-
-    def DoSaveLamedb(self, answer):
-        sNewLine = ""
-        sResponse = ""
-        bOk = True
-        iType = MessageBox.TYPE_INFO
-        aSetAudio = []
-        if answer is not None:
-            if answer[1] in ("1","2","3"):
-                bSetAC3 = False
-                bSetPCM = False
-                self.AC3delay.initAudio()
-                if self.AC3delay.iAudioDelay is not None:
-                    if answer[1] in ("1","3"):
-                        iDelay = int( self.AC3delay.getLamedbDelay(AC3) )
-                        aSetAudio.append((AC3,iDelay))
-                        bSetAC3 = True
-                    if answer[1] in ("2","3"):
-                        iDelay = int( self.AC3delay.getLamedbDelay(PCM) )
-                        aSetAudio.append((PCM,iDelay))
-                        bSetPCM = True
-                    for vAudio in aSetAudio:
-                        sAudio = vAudio[0]
-                        iChannelDelay = int(vAudio[1])
-                        iCurDelay = self.currentValue[sAudio]
-                        iNewDelay = iCurDelay
-                        if sAudio == AC3:
-                            self.AC3delay.iAudioDelay.setAC3Delay(iNewDelay)
-                        else:
-                            self.AC3delay.iAudioDelay.setPCMDelay(iNewDelay)
-                        self.AC3delay.lamedbDelay[sAudio] = iNewDelay
-                        sResponse = sResponse + sNewLine + _("Saved %(audio)s value: %(delay)i ms") %dict(audio=sAudio,delay=iNewDelay)
-                        sNewLine = "\n"
-                self.AC3delay.deleteAudio()
-            else:
-                sResponse = _("Invalid selection")
-                iType = MessageBox.TYPE_ERROR
-            if bOk == True:
-                self.session.open(MessageBox, sResponse , iType)
-        self.setChannelInfoText()
 
     def setSliderInfo(self, iDelay):
         sAudio = self.AC3delay.whichAudio
