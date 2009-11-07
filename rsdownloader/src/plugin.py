@@ -442,6 +442,7 @@ class RS:
 		for download in self.downloads:
 			if (download.status != _("Failed")) and (download.status != _("Finished")):
 				allDone = False
+				break
 		return allDone
 
 	def startDownloading(self):
