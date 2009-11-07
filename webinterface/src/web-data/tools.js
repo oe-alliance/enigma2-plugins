@@ -397,7 +397,7 @@ function doRequest(url, readyFunction){
 					{
 				asynchronous: true,
 				method: 'GET',
-				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'Expires', '0'],
+				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'no-cache', 'Cache-Control', 'no-store', 'Expires', '0'],
 				onException: function(o,e){ throw(e); },				
 				onSuccess: function (transport, json) {						
 					if(typeof(readyFunction) != "undefined"){
