@@ -110,6 +110,9 @@
 		padding-top: 5px;
 	}
 	
+	#current a{
+		color: #FFF;
+	}
 	
 	#current{
 		width: 999px;

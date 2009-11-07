@@ -184,7 +184,7 @@ function dec2hex(nr, len){
 
 function quotes2html(txt) {
 	if(typeof(txt) != "undefined"){
-		return txt.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+		return txt.escapeHTML().replace('\n', '<br>');
 	} else {
 		return "";
 	}
@@ -221,7 +221,7 @@ function show(id){
 	try{
 		$(id).style.display = "";
 	} catch(e) {
-//		debug("[show] Could not show element with id: " + id);
+		debug("[show] Could not show element with id: " + id);
 	}
 }
 
@@ -230,7 +230,7 @@ function hide(id){
 	try{
 		$(id).style.display = "none";
 	} catch(e) {
-//		debug("[hide] Could not hide element with id: " + id);
+		debug("[hide] Could not hide element with id: " + id);
 	}
 }
 
@@ -506,9 +506,6 @@ function incomingGetDreamboxSettings(request){
 			getParentControl();
 		}
 	}
-
-
-
 }
 
 
@@ -639,7 +636,9 @@ function loadEPGByServiceReference(servicereference){
 }
 
 function buildServiceListEPGItem(epgevent, type){
-	var data = {epg : epgevent};
+	var data = { epg : epgevent,
+				 nownext: type
+				};
 	// e.innerHTML = RND(tplServiceListEPGItem, namespace);
 
 	var id = type + epgevent.servicereference;
@@ -1298,7 +1297,6 @@ function writePlaylist() {
 	}
 }
 
-
 //Powerstate
 /*
  * Sets the Powerstate @param newState - the new Powerstate Possible Values
@@ -1316,28 +1314,25 @@ function incomingCurrent(request){
 	//	debug("[incomingCurrent called]");
 	if(request.readyState == 4){
 		try{
-			var xml = getXML(request).getElementsByTagName("e2currentserviceinformation").item(0);
-			
-			var duration = parseInt( (xml.getElementsByTagName('e2eventduration').item(0).firstChild.data / 60), 10 );
-			var remaining = parseInt( (xml.getElementsByTagName('e2eventremaining').item(0).firstChild.data / 60), 10 );
+			var epg = new EPGList(getXML(request)).getArray();
+			epg = epg[0];
 
-			namespace = {
-					"servicereference" : encodeURIComponent(xml.getElementsByTagName('e2servicereference').item(0).firstChild.data),
-					"servicename" : xml.getElementsByTagName('e2servicename').item(0).firstChild.data,
-					"eventname" : xml.getElementsByTagName('e2eventname').item(0).firstChild.data,
-					"remaining" : remaining,
-					"duration" : duration
-			};
-
-			var data = { current : namespace };
+			var data = { current : epg };
 
 			if(typeof(templates.tplCurrent) != "undefined"){
+				var display = 'none';
+				try{
+					var display = $('trExtCurrent').style.display;
+				} catch(e){}
+				
 				renderTpl(templates.tplCurrent, data, "currentContent");
+				$('trExtCurrent').style.display = display;
 			} else {
 				debug("[incomingCurrent] tplCurrent N/A");
 			}
 
 		} catch (e){}
+		
 		isActive.getCurrent = false;
 	}
 }
@@ -1412,8 +1407,6 @@ function getSatellitesRadio(){
 function getAllRadio(){
 	loadBouquet(allRadio, "All (Radio)");
 }
-
-
 
 /*
  * Loads dynamic content to $(contentMain) by calling a execution function
@@ -1580,7 +1573,7 @@ function init(){
 		alert("Due to the tremendous amount of work needed to get everthing to " +
 		"work properly, there is (for now) no support for Internet Explorer Versions below 7");
 	}
-
+	
 	getBoxtype();
 
 	setAjaxLoad('navContent');

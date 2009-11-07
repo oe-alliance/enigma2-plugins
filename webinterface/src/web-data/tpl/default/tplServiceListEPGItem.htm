@@ -1,16 +1,21 @@
 
 <!-- tplServiceListEPGItem -->	
-	{if epg.title != 'None'} 
-	<table cellspacing="0">
-		<tr>
-			<td class="epgStart">${epg.starttime}</td>
-			<td class="epgTitle">${epg.title}</td>
-			{if epg.duration != epg.remaining}
-			<td class="epgLength">+${epg.remaining} of ${epg.duration}</td>
-			{else}
-			<td class="epgLength">${epg.duration}</td>
-			{/if}
-		</tr>
-	</table>
+	{if epg.title != 'None'}
+	<a href="#" onclick="showhide('trExt${nownext}${epg.servicereference}')" title="Click to show/hide extended Description">
+		<table cellspacing="0">
+			<tr>
+				<td class="epgStart">${epg.starttime}</td>
+				<td class="epgTitle">${epg.title}</td>
+				{if epg.duration != epg.remaining}
+				<td class="epgLength">+${epg.remaining} of ${epg.duration}</td>
+				{else}
+				<td class="epgLength">${epg.duration}</td>
+				{/if}
+			</tr>
+			<tr id="trExt${nownext}${epg.servicereference}" style="display:none">
+				<td colspan="4" class="epgLong">${epg.extdescription}</td>
+			</tr>
+		</table>
+	</a>
 	{/if}
 <!-- /tplServiceListEPGItem -->

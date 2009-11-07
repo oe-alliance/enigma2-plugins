@@ -118,7 +118,7 @@ function EPGEvent(xml, number){
 		return encodeURIComponent(this.serviceRef);
 	};
 	this.getServiceName = function() {
-		return this.serviceName.replace(" ","&nbsp;");
+		return this.serviceName;
 	};
 	
 	this.json = {
