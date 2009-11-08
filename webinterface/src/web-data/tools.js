@@ -1,7 +1,4 @@
 //$Header$
-var DBG = true;
-DBG = false;
-
 var templates = {};
 var loadedChannellist = {};
 
@@ -307,19 +304,45 @@ function openPopupPage(title, uri, width, height, x, y){
 }
 
 function debug(text){
+	var DBG = userprefs.data.debug || false;
+	
 	if(DBG){
 		try{
 			if(!debugWin.closed && debugWin.location){
 				var inner = debugWin.document.getElementById('debugContent').innerHTML;
 				debugWin.document.getElementById('debugContent').innerHTML = new Date().toLocaleString() + ": "+text+"<br>" + inner;
+			} else { 			
+				openDebug();
+				
+				setTimeout(	function(){
+									var inner = debugWin.document.getElementById('debugContent').innerHTML;
+									debugWin.document.getElementById('debugContent').innerHTML = new Date().toLocaleString() + ": "+text+"<br>" + inner;
+								}, 
+								1000
+						  	);
 			}
-		} catch (Exception) {
-			popUpBlockerHint();
-		}
-
+		} catch (Exception) {}
 	}
 }
 
+function saveSettings(){
+	userprefs.load();
+	
+	var debug = $('enableDebug').checked;
+	if(typeof(debug) != undefined){
+		if( userprefs.data.debug != debug ){
+			userprefs.data.debug = debug;
+			userprefs.save();
+			
+			if(debug){
+				openDebug();
+			}
+		}
+		
+		
+	}
+	
+}
 
 //Template Helpers
 function saveTpl(request, tplName){
@@ -1155,7 +1178,18 @@ function showGears(){
 	data = { 'useGears' : enabled };
 	processTpl('tplGears', data, 'contentMain');
 }
- 
+
+function showSettings(){
+	var debug = userprefs.data.debug;
+	var debugChecked = "";
+	if(debug){
+		debugChecked = 'checked';
+	}
+
+	data = { 'debug' : debugChecked };
+	processTpl('tplSettings', data, 'contentMain');
+}
+
  
 // Spezial functions, mostly for testing purpose
 function openHiddenFunctions(){
@@ -1487,6 +1521,10 @@ function loadAbout(){
 	loadContentStatic('tplAbout', 'About');
 }
 
+function loadSettings(){
+	loadContentDynamic(showSettings, 'Settings');
+}
+
 function loadGearsInfo(){
 	loadContentDynamic(showGears, 'Google Gears');
 }
@@ -1565,6 +1603,7 @@ function updateItemsLazy(bouquet){
  */
 
 function init(){
+	var DBG = userprefs.data.debug || false;
 	if(DBG){
 		openDebug();
 	}

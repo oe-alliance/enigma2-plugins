@@ -1,6 +1,6 @@
 {
   "betaManifestVersion": 1,
-  "version": "v34",
+  "version": "v36",
   "entries": [
 		{ "url": "IEFixes.htc" },		
 		{ "url": "img/arrow_down.png" },
@@ -51,6 +51,7 @@
 		{ "url": "tpl/default/tplSendMessage.htm" },
 		{ "url": "tpl/default/tplServiceList.htm" },
 		{ "url": "tpl/default/tplServiceListEPGItem.htm" },
+		{ "url": "tpl/default/tplSettings.htm" },
 		{ "url": "tpl/default/tplSignalPanel.htm" },
 		{ "url": "tpl/default/tplSubServices.htm" },
 		{ "url": "tpl/default/tplTimerEdit.htm" },
