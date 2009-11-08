@@ -243,4 +243,7 @@ growlee/src/Makefile
 
 meteoitalia/Makefile
 meteoitalia/src/Makefile
+
+weatherplugin/Makefile
+weatherplugin/src/Makefile
 ])

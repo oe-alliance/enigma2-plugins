@@ -46,6 +46,7 @@ SUBDIRS = \
 	trafficinfo \
 	unwetterzentrale \
 	vlcplayer \
+	weatherplugin \
 	webcamviewer \
 	webinterface \
 	werbezapper \
