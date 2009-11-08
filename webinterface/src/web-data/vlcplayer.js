@@ -250,11 +250,12 @@ function onBouquetSelected() {
 }
 
 function initWebTv() {
+	var DBG = userprefs.data.debug || false;
 	if (DBG) {
 		openDebug();
 	}
 
-	vlc = $("vlc");
+	vlc = $('vlc');
 
 	try {
 		set('vlcVolume', vlc.audio.volume);

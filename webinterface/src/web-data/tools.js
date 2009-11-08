@@ -797,7 +797,7 @@ function incomingChannellist(request){
 	if(serviceList !== null) {		
 		var data = { services : serviceList };
 
-		processTpl('tplServiceList', data, 'contentMain', getBouquetEpg);
+		processTpl('tplServiceList', data, 'contentServices', getBouquetEpg);
 		delayedGetSubservices();
 	} else {
 		debug("[incomingChannellist] services is null");
@@ -811,11 +811,11 @@ function loadBouquet(servicereference, name){
 	currentBouquet = servicereference;
 
 	setContentHd(name);
-	setAjaxLoad('contentMain');
+	setAjaxLoad('contentServices');
 
 	startUpdateBouquetItemsPoller();
-
 	doRequest(URL.getservices+servicereference, incomingChannellist, true);
+
 }
 
 
@@ -823,21 +823,40 @@ function incomingBouquetListInitial(request){
 	if (request.readyState == 4) {
 		var bouquetList = new ServiceList(getXML(request)).getArray();
 		debug("[incomingBouquetListInitial] Got " + bouquetList.length + " TV Bouquets!");	
-
+	
 		// loading first entry of TV Favorites as default for ServiceList
-		loadBouquet(bouquetList[0].servicereference, bouquetList[0].servicename);
+		incomingBouquetList(
+				request, 
+				function(){
+					loadBouquet(bouquetList[0].servicereference, bouquetList[0].servicename);;
+				}
+			);
 	}
 }
 
 
-function incomingBouquetList(request){
+function incomingBouquetList(request, callback){
 	if (request.readyState == 4) {
 		var bouquetList = new ServiceList(getXML(request)).getArray();
 		debug("[incomingBouquetList] got " + bouquetList.length + " TV Bouquets!");	
+		var data = { bouquets : bouquetList };
 		
-		var data = { services : bouquetList };
-
-		processTpl('tplBouquetList', data, 'contentMain');
+		if( $('contentBouquets') != undefined ){
+			processTpl('tplBouquetList', data, 'contentBouquets');
+			if(typeof(callback) == 'function')
+				callback();
+		} else {
+			processTpl(					
+					'tplBouquetsAndServices', 
+					null, 
+					'contentMain',
+					function(){
+						processTpl('tplBouquetList', data, 'contentBouquets');
+						if(typeof(callback) == 'function')
+							callback();
+					}
+			);
+		}
 	}
 }
 
@@ -1389,7 +1408,8 @@ function getCurrent(){
  */
 function getBouquets(sRef){	
 	var url = URL.getservices+encodeURIComponent(sRef);
-	doRequest(url, incomingBouquetList, true);
+	
+	doRequest(url, incomingBouquetList, true);		
 }
 
 /*
@@ -1447,8 +1467,12 @@ function getAllRadio(){
  * @param fnc - The function used to load the content
  * @param title - The Title to set on the contentpanel
  */
-function loadContentDynamic(fnc, title){
-	setAjaxLoad('contentMain');
+function loadContentDynamic(fnc, title, domid){
+	if(typeof(domid) != undefined){
+		setAjaxLoad(domid);
+	} else {
+		setAjaxLoad('contentMain');
+	}
 	setContentHd(title);
 	stopUpdateBouquetItemsPoller();
 
@@ -1619,6 +1643,7 @@ function init(){
 	setAjaxLoad('contentMain');
 
 	fetchTpl('tplServiceListEPGItem');
+	fetchTpl('tplBouquetsAndServices');
 	fetchTpl('tplCurrent');	
 	reloadNav('tplNavTv', 'TeleVision');
 

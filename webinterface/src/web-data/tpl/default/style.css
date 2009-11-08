@@ -318,12 +318,18 @@
 
 	#contentTable{
 		scrollbar: auto;
-		width: 785px;
+		width: 585px;
 	}
 	
-	#contentTable div{
-		width: auto;
-		overflow: auto;
+	#contentServices{
+		vertical-align: top;		
+		width: 585px;
+	}
+	
+	#contentBouquets{
+		border-right: 1px solid #ccc;
+		vertical-align: top;		
+		width: 220px;
 	}
 
 	#contentMain{
@@ -333,7 +339,6 @@
 
 	#contentMain {
 		clear: both;
-		/*overflow-x: hidden;*/
 		overflow-y: auto;
 		width: 815px;
 		color: #485052;
@@ -341,12 +346,12 @@
 
 	#contentMain div table {
 		float: left;
-		width: 799px;
+		width: 599px;
 	}
 	
 	.sListItem{
 		/*border-bottom: 2px solid #CCC;*/
-		width: 780px;
+		width: 580px;
 		color: #485052;
 	}
 
@@ -359,7 +364,7 @@
 	}
 	
 	.epgTitle{
-		width: 630px;
+		width: 430px;
 		color: #485052;
 	}
 	
