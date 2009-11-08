@@ -7,6 +7,7 @@ from base64 import encodestring
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigInteger, ConfigText, ConfigYesNo, ConfigClock, ConfigSubsection, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
+from Components.Console import Console as eConsole
 from Components.Label import Label
 from Components.Language import language
 from Components.MenuList import MenuList
@@ -17,11 +18,12 @@ from enigma import eListboxPythonMultiContent, eTimer, gFont, RT_HALIGN_CENTER, 
 from os import environ, listdir, remove
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
+from Screens.Console import Console as ConsoleScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from time import localtime, sleep, strftime, time
-from Tools.Directories import resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE, SCOPE_PLUGINS
+from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.Downloader import HTTPProgressDownloader
 from Tools.LoadPixmap import LoadPixmap
 from twisted.internet import reactor
@@ -29,6 +31,7 @@ from twisted.python import failure
 from twisted.web.client import getPage
 from urllib2 import Request
 from urlparse import urlparse, urlunparse
+from xml.etree.cElementTree import parse
 import gettext, re, socket, urllib, urllib2
 
 ##############################################################################
@@ -888,6 +891,277 @@ class RSContainerSelector(ChangedScreen):
 
 ##############################################################################
 
+class UnrarEntry:
+	def __init__(self, name, password):
+		self.name = name
+		self.password = password
+		self.working = False
+		self.finishCallback = None
+		self.console = None
+		self.command = None
+		self.list = ("%s/%s"%(config.plugins.RSDownloader.lists_directory.value, self.name)).replace("//", "/")
+		package = None
+		try:
+			f = open(self.list, "r")
+			while True:
+				line = f.readline()
+				if line == '':
+					break
+				elif line.startswith("http://") and (line.__contains__("part1.rar") or line.__contains__("part01.rar") or line.__contains__("part001.rar")):
+					package = line.split("/")[-1]
+					package = package.replace("\n", "").replace("\r", "")
+					package = ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, package)).replace("//", "/")
+					break
+			f.close()
+		except:
+			pass
+		if package:
+			if self.password:
+				self.command = "unrar -p%s -o+ x %s %s"%(self.password, package, config.plugins.RSDownloader.downloads_directory.value)
+			else:
+				self.command = "unrar -o+ x %s %s"%(package, config.plugins.RSDownloader.downloads_directory.value)
+		else:
+			writeLog("Error finding rar-archives in list: %s"%self.name)
+
+	def startUnrar(self):
+		self.working = True
+		if not self.console:
+			self.console = eConsole()
+		self.console.ePopen(self.command, self.unrarDataAvailable)
+
+	def unrarDataAvailable(self, result, retval, extra_args):
+		self.working = False
+		try:
+			fileName = ("%s/%s_unrar.txt"%(config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/")
+			f = open(fileName, "w")
+			f.write(result)
+			f.close()
+		except:
+			print "[RS Downloader] Result of unrar:",result
+		self.finishCallback(self.name)
+
+	def allDownloaded(self):
+		try:
+			f = open(self.list, "r")
+			content = f.read()
+			f.close()
+		except:
+			content = ""
+		if content.__contains__("http://"):
+			return False
+		else:
+			return True
+
+##############################################################################
+
+class Unrar:
+	def __init__(self):
+		self.list = []
+		self.timer = eTimer()
+		self.timer.callback.append(self.checkUnrar)
+		self.timer.start(30000, 1)
+		self.xmlFile = ("%s/unrar.xml"%config.plugins.RSDownloader.lists_directory.value).replace("//", "/")
+		
+	def addToList(self, name, password):
+		entry = UnrarEntry(name, password)
+		self.list.append(entry)
+
+	def deleteEntry(self, name):
+		idx = 0
+		ret = True
+		for x in self.list:
+			if x.name == name:
+				if x.working:
+					ret = False
+				else:
+					del self.list[idx]
+					break
+			idx += 1
+		return ret
+
+	def checkUnrar(self):
+		if len(self.list) > 0:
+			self.startUnrar()
+		else:
+			self.timer.start(30000, 1)
+
+	def isWorking(self):
+		ret = False
+		for x in self.list:
+			if x.working:
+				ret = True
+				break
+		return ret
+
+	def getFirstEmptyList(self):
+		entry = None
+		for x in self.list:
+			if (x.allDownloaded() == True):
+				entry = x
+				break
+		return entry
+
+	def startUnrar(self):
+		ret = self.isWorking()
+		if ret == False:
+			entry = self.getFirstEmptyList()
+			if entry:
+				if entry.command:
+					writeLog("Start unpacking: %s"%entry.name)
+					entry.finishCallback = self.cleanFinishedEntry
+					entry.startUnrar()
+				else:
+					self.deleteEntry(entry.name)
+					self.timer.start(30000, 1)
+			else:
+				self.timer.start(30000, 1)
+		else:
+			self.timer.start(30000, 1)
+
+	def cleanFinishedEntry(self, name):
+		writeLog("Unpacking finished: %s"%name)
+		self.deleteEntry(name)
+		self.checkUnrar()
+
+	def decode_charset(self, str, charset):
+		try:
+			uni = unicode(str, charset, 'strict')
+		except:
+			uni = str
+		return uni
+
+	def loadXml(self):
+		if fileExists(self.xmlFile):
+			menu = parse(self.xmlFile).getroot()
+			for item in menu.findall("entry"):
+				name = item.get("name") or None
+				password = item.get("password") or None
+				if name and password:
+					name = self.decode_charset(name, "utf-8")
+					password = self.decode_charset(password, "utf-8")
+					self.addToList(str(name), str(password))
+
+	def writeXml(self):
+		xml = '<unrar>\n'
+		for x in self.list:
+			name = self.decode_charset(x.name, "utf-8")
+			password = self.decode_charset(x.password, "utf-8")
+			xml += '\t<entry name="%s" password="%s" />\n'%(name.encode("utf-8"), password.encode("utf-8"))
+		xml += '</unrar>\n'
+		try:
+			f = open(self.xmlFile, "w")
+			f.write(xml)
+			f.close()
+		except:
+			writeLog("Error writing unrar xml file: %s"%self.xmlFile)
+unrar = Unrar()
+
+##############################################################################
+
+class UnrarPackageSelector(ChangedScreen):
+	skin = """
+		<screen position="center,center" size="560,450" title="RS Downloader">
+			<widget name="list" position="0,0" size="560,450" />
+		</screen>"""
+
+	def __init__(self, session):
+		ChangedScreen.__init__(self, session)
+		
+		self["list"] = MenuList([])
+		
+		self["actions"] = ActionMap(["OkCancelActions"],
+			{
+				"ok": self.okClicked,
+				"cancel": self.close
+			}, -1)
+		
+		self.onLayoutFinish.append(self.updateList)
+
+	def updateList(self):
+		try:
+			names = listdir(config.plugins.RSDownloader.lists_directory.value)
+		except:
+			names = []
+		list = []
+		for name in names:
+			if name.lower().endswith(".txt"):
+				added = False
+				for x in unrar.list:
+					if x.name == name:
+						added = True
+				if added == False:
+					list.append(name)
+		list.sort()
+		self["list"].setList(list)
+
+	def okClicked(self):
+		cur = self["list"].getCurrent()
+		if cur:
+			self.name = cur
+			self.session.openWithCallback(self.okClickedCallback, VirtualKeyBoard, title=_("Enter unrar password:"))
+
+	def okClickedCallback(self, callback=None):
+		if callback is None:
+			callback = ""
+		self.close([self.name, callback])
+
+##############################################################################
+
+class UnrarManager(ChangedScreen):
+	skin = """
+		<screen position="center,center" size="560,450" title="RS Downloader">
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
+			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="list" position="0,40" size="560,375" scrollbarMode="showNever" />
+		</screen>"""
+
+	def __init__(self, session):
+		ChangedScreen.__init__(self, session)
+		self.session = session
+		
+		self["key_red"] = Label(_("Delete"))
+		self["key_green"] = Label(_("Add"))
+		self["list"] = MenuList([])
+		
+		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
+			{
+				"red": self.delete,
+				"green": self.add,
+				"cancel": self.close
+			}, prio=-1)
+		
+		self.onLayoutFinish.append(self.updateList)
+
+	def updateList(self):
+		list = []
+		for x in unrar.list:
+			list.append(x.name)
+		list.sort()
+		self["list"].setList(list)
+
+	def delete(self):
+		cur = self["list"].getCurrent()
+		if cur:
+			ret = unrar.deleteEntry(cur)
+			if ret:
+				self.updateList()
+			else:
+				self.session.open(MessageBox, _("Unrar is already working!"), MessageBox.TYPE_ERROR)
+
+	def add(self):
+		self.session.openWithCallback(self.addCallback, UnrarPackageSelector)
+
+	def addCallback(self, callback=None):
+		if callback:
+			unrar.addToList(callback[0], callback[1])
+			self.updateList()
+
+##############################################################################
+
 class RSList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
@@ -952,7 +1226,6 @@ class RSMain(ChangedScreen):
 
 	def menu(self):
 		list = []
-		#TODO: Add sort list functions
 		list.append((_("Delete download"), self.delete))
 		list.append((_("Use search engine"), self.search))
 		list.append((_("Add downloads from txt files"), self.add))
@@ -963,6 +1236,10 @@ class RSMain(ChangedScreen):
 		list.append((_("Clear finished downloads"), self.clearFinished))
 		list.append((_("Show log"), self.showLog))
 		list.append((_("Delete log"), self.deleteLog))
+		if fileExists("/usr/bin/unrar"):
+			list.append((_("Open unrar Manager"), self.openUnrarManager))
+		else:
+			list.append((_("Install unrar"), self.installUnrar))
 		list.append((_("Close plugin"), self.close))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Please choose a function..."), list=list)
 
@@ -990,6 +1267,12 @@ class RSMain(ChangedScreen):
 			remove("/tmp/rapidshare.log")
 		except:
 			pass
+
+	def openUnrarManager(self):
+		self.session.open(UnrarManager)
+
+	def installUnrar(self):
+		self.session.open(ConsoleScreen, title=_("Installing unrar..."), cmdlist=["ipkg install http://www.lt-forums.org/ali/downloads/unrar_3.4.3-r0_mipsel.ipk"])
 
 	def updateList(self):
 		list = []
@@ -1081,6 +1364,9 @@ class RSMain(ChangedScreen):
 def autostart(reason, **kwargs):
 	if reason == 0:
 		rapidshare.startDownloading()
+		unrar.loadXml()
+	elif reason == 1:
+		unrar.writeXml()
 
 ##############################################################################
 
