@@ -191,7 +191,7 @@ class AutoRes(Screen):
 						if self.lastmode != new_mode:
 							self.lastmode = new_mode
 							self.changeVideomode()
-						elif old != resolutionlabel["content"].getText():
+						elif old != resolutionlabel["content"].getText() and config.plugins.autoresolution.showinfo.value:
 							resolutionlabel.show()
 
 	def changeVideomode(self):
