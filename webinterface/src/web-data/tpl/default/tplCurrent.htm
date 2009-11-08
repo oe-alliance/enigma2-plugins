@@ -1,5 +1,5 @@
 <!-- tplCurrent -->
-			
+			{if current.title != ""}		
 				<table id="currentTable">
 					<tr>
 						<td id="currentName">
@@ -21,5 +21,11 @@
 						<td colspan="2" class="epgLong">${current.extdescription}</td>
 					</tr>
 				</table>
-
+			{elseif}
+				<table id="currentTable">
+					<tr>
+						<td id="currentName">Nothing running</td>					
+					</tr>	
+				</table>
+			{/if}
 <!-- /tplCurrent -->
