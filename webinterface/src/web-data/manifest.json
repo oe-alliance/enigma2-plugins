@@ -1,6 +1,6 @@
 {
   "betaManifestVersion": 1,
-  "version": "v36",
+  "version": "v38",
   "entries": [
 		{ "url": "IEFixes.htc" },		
 		{ "url": "img/arrow_down.png" },
@@ -34,6 +34,7 @@
 		{ "url": "tpl/default/style.css" } ,
 		{ "url": "tpl/default/tplAbout.htm" },
 		{ "url": "tpl/default/tplBouquetList.htm" },
+		{ "url": "tpl/default/tplBouquetsAndServices.htm" },
 		{ "url": "tpl/default/tplCurrent.htm" },
 		{ "url": "tpl/default/tplDebug.htm" },
 		{ "url": "tpl/default/tplDeviceInfo.htm" },
