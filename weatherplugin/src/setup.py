@@ -17,24 +17,24 @@
 #  GNU General Public License for more details.
 #
 
-from enigma import eListboxPythonMultiContent, eListbox, gFont, \
-	RT_HALIGN_LEFT, RT_VALIGN_CENTER
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
+	RT_VALIGN_CENTER
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.MenuList import MenuList
-from Components.Button import Button
-from Components.config import config
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.Sources.StaticText import StaticText
+from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import ConfigSubsection, ConfigSubList, ConfigIP, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, getConfigListEntry, configfile
+from Components.config import ConfigSubsection, ConfigText, \
+	getConfigListEntry, config, configfile
 
 
 def initWeatherPluginEntryConfig():
-	config.plugins.WeatherPlugin.Entries.append(ConfigSubsection())
-	i = len(config.plugins.WeatherPlugin.Entries) -1
-	config.plugins.WeatherPlugin.Entries[i].city = ConfigText(default = "Heidelberg", visible_width = 50, fixed_size = False)
-	config.plugins.WeatherPlugin.Entries[i].language = ConfigText(default = "de", visible_width = 50, fixed_size = False)
-	return config.plugins.WeatherPlugin.Entries[i]
+	s = ConfigSubsection()
+	s.city = ConfigText(default = "Heidelberg", visible_width = 50, fixed_size = False)
+	s.language = ConfigText(default = "de", visible_width = 50, fixed_size = False)
+	config.plugins.WeatherPlugin.Entries.append(s)
+	return s
 
 def initConfig():
 	count = config.plugins.WeatherPlugin.entriescount.value
@@ -47,25 +47,25 @@ def initConfig():
 class WeatherPluginEntriesListConfigScreen(Screen):
 	skin = """
 		<screen position="center,center" size="550,400" title="%s" >
-			<widget name="city" position="5,0" size="150,50" font="Regular;20" halign="left"/>
-			<widget name="language" position="155,0" size="150,50" font="Regular;20" halign="left"/>
+			<widget render="Label" source="city" position="5,0" size="150,50" font="Regular;20" halign="left"/>
+			<widget render="Label" source="language" position="155,0" size="150,50" font="Regular;20" halign="left"/>
 			<widget name="entrylist" position="0,50" size="550,300" scrollbarMode="showOnDemand"/>
-			<widget name="key_red" position="0,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_yellow" position="280,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="yellow" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="420,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<ePixmap name="red" position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget render="Label" source="key_red" position="0,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_yellow" position="280,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="yellow" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_blue" position="420,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<ePixmap position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="280,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		</screen>""" % _("WeatherPlugin: List of Entries")
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.session = session
-		self["city"] = Button(_("City"))
-		self["language"] = Button(_("Language"))
-		self["key_red"] = Button(_("Add"))
-		self["key_yellow"] = Button(_("Edit"))
-		self["key_blue"] = Button(_("Delete"))
+
+		self["city"] = StaticText(_("City"))
+		self["language"] = StaticText(_("Language"))
+		self["key_red"] = StaticText(_("Add"))
+		self["key_yellow"] = StaticText(_("Edit"))
+		self["key_blue"] = StaticText(_("Delete"))
 		self["entrylist"] = WeatherPluginEntryList([])
 		self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
 			{
@@ -109,7 +109,7 @@ class WeatherPluginEntriesListConfigScreen(Screen):
 		if not result:
 			return
 		sel = self["entrylist"].l.getCurrentSelection()[0]
-		config.plugins.WeatherPlugin.entriescount.value = config.plugins.WeatherPlugin.entriescount.value - 1
+		config.plugins.WeatherPlugin.entriescount.value -= 1
 		config.plugins.WeatherPlugin.entriescount.save()
 		config.plugins.WeatherPlugin.Entries.remove(sel)
 		config.plugins.WeatherPlugin.Entries.save()
@@ -122,6 +122,7 @@ class WeatherPluginEntryList(MenuList):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
+
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		instance.setItemHeight(20)
@@ -130,31 +131,34 @@ class WeatherPluginEntryList(MenuList):
 		return self.instance.getCurrentIndex()
 
 	def buildList(self):
-		self.list=[]
+		list = []
 		for c in config.plugins.WeatherPlugin.Entries:
-			res = [c]
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.city.value)))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 155, 0, 150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.language.value)))
-			self.list.append(res)
-		self.l.setList(self.list)
+			res = [
+				c,
+				(eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.city.value)),
+				(eListboxPythonMultiContent.TYPE_TEXT, 155, 0, 150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.language.value)),
+			]
+			list.append(res)
+		self.list = list
+		self.l.setList(list)
 		self.moveToIndex(0)
 
 class WeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen name="WeatherPluginEntryConfigScreen" position="center,center" size="550,400" title="%s">
 			<widget name="config" position="20,10" size="520,330" scrollbarMode="showOnDemand" />
-			<ePixmap name="red"	position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="140,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 
-			<widget name="key_red" position="0,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_green" position="140,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="key_blue" position="420,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		</screen>""" % _("WeatherPlugin: Edit Entry")
+			<widget source="key_red" render="Label" position="0,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_green" render="Label" position="140,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_blue" render="Label" position="420,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		</screen>"""
 
 	def __init__(self, session, entry):
-		self.session = session
 		Screen.__init__(self, session)
+		self.title = _("WeatherPlugin: Edit Entry")
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -164,9 +168,9 @@ class WeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			"cancel": self.keyCancel
 		}, -2)
 
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("OK"))
-		self["key_blue"] = Button(_("Delete"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_blue"] = StaticText(_("Delete"))
 
 		if entry is None:
 			self.newmode = 1
