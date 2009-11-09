@@ -187,12 +187,11 @@ class AutoRes(Screen):
 					print '[AutoRes] determined videomode', new_mode
 					old = resolutionlabel["content"].getText()
 					resolutionlabel["content"].setText("Videocontent: %sx%s%s %sHZ" % (width, height, prog, frate))
-					if usable:
-						if self.lastmode != new_mode:
-							self.lastmode = new_mode
-							self.changeVideomode()
-						elif old != resolutionlabel["content"].getText() and config.plugins.autoresolution.showinfo.value:
-							resolutionlabel.show()
+					if self.lastmode != new_mode:
+						self.lastmode = new_mode
+						self.changeVideomode()
+					elif old != resolutionlabel["content"].getText() and config.plugins.autoresolution.showinfo.value:
+						resolutionlabel.show()
 
 	def changeVideomode(self):
 		if usable:
