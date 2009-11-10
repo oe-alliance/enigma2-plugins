@@ -166,11 +166,11 @@ class AutoRes(Screen):
 
 				if (height >= 900 or width >= 1600) and frate in ('24', '25', '30') and prog == 'p': 	# 1080p content
 					new_mode = 'p1080_%s' % frate
-				elif (height >= 576 or width >= 720) and frate == '24' and prog == 'p': 		# 720p24 detection
+				elif (height > 576 or width > 720) and frate == '24' and prog == 'p': 		# 720p24 detection
 					new_mode = 'p720_24'
-				elif (height == 576 or height == 288) and frate in ('25', '50'):
+				elif (height <= 576) and (width <= 720) and frate in ('25', '50'):
 					new_mode = 'sd_%s_50' % prog
-				elif (height == 480 or height == 240) and frate in ('24', '30', '60'):
+				elif (height <= 480) and (width <= 720) and frate in ('24', '30', '60'):
 					new_mode = 'sd_%s_60' % prog
 				else:
 					new_mode = 'hd_%s' % prog
