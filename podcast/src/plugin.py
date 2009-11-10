@@ -47,6 +47,7 @@ language.addCallback(localeInit)
 class ChangedMoviePlayer(MoviePlayer):
 	def __init__(self, session, service):
 		MoviePlayer.__init__(self, session, service)
+		self.skinName = "MoviePlayer"
 
 	def leavePlayer(self):
 		self.session.openWithCallback(self.leavePlayerConfirmed, MessageBox, _("Stop playing this movie?"))
