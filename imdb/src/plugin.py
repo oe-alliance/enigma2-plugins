@@ -203,7 +203,7 @@ class IMDB(Screen):
 		'(?:.*?<h5>(?P<g_synopsis>Plot Synopsis):</h5>(?:.*?)(?:<a href=\".*?\">)*?(?P<synopsis>.+?)(?:</a>|</div>))*'
 		'(?:.*?<h5>(?P<g_keywords>Plot Keywords):</h5>(?P<keywords>.+?)(?:mehr|more</a>|</div>))*'
 		'(?:.*?<h5>(?P<g_awards>Filmpreise|Awards):</h5>(?P<awards>.+?)(?:mehr|more</a>|</div>))*'
-		'(?:.*?<h5>(?P<g_runtime>L\S*?nge|Runtime):</h5>(?P<runtime>.+?)<)*'
+		'(?:.*?<h5>(?P<g_runtime>L\S*?nge|Runtime):</h5>(?P<runtime>.+?)</div>)*'
 		'(?:.*?<h5>(?P<g_language>Sprache|Language):</h5>(?P<language>.+?)</div>)*'
 		'(?:.*?<h5>(?P<g_color>Farbe|Color):</h5>(?P<color>.+?)</div>)*'
 		'(?:.*?<h5>(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h5>(?P<aspect>.+?)(?:mehr|more</a>|</div>))*'
@@ -486,7 +486,8 @@ class IMDB(Screen):
 					if extrainfos.group('g_'+category):
 						Extratext += extrainfos.group('g_'+category) + ": " + self.htmltags.sub('',extrainfos.group(category).replace("\n",'').replace("<br>",'\n')) + "\n"
 				if extrainfos.group("g_comments"):
-					Extratext += extrainfos.group("g_comments") + " [" + self.htmltags.sub('',extrainfos.group("commenter")) + "]: " + self.htmltags.sub('',extrainfos.group("comment").replace("\n",' ')) + "\n"
+					stripmask = re.compile('\s{2,}', re.DOTALL)
+					Extratext += extrainfos.group("g_comments") + " [" + stripmask.sub(' ', self.htmltags.sub('',extrainfos.group("commenter"))) + "]: " + self.htmltags.sub('',extrainfos.group("comment").replace("\n",' ')) + "\n"
 
 				self["extralabel"].setText(Extratext)
 				self["extralabel"].hide()
