@@ -841,7 +841,7 @@ function incomingBouquetList(request, callback){
 		debug("[incomingBouquetList] got " + bouquetList.length + " TV Bouquets!");	
 		var data = { bouquets : bouquetList };
 		
-		if( $('contentBouquets') != undefined ){
+		if( $('contentBouquets') != "undefined" && $('contentBouquets') != null ){
 			processTpl('tplBouquetList', data, 'contentBouquets');
 			if(typeof(callback) == 'function')
 				callback();
@@ -1468,7 +1468,7 @@ function getAllRadio(){
  * @param title - The Title to set on the contentpanel
  */
 function loadContentDynamic(fnc, title, domid){
-	if(typeof(domid) != "undefined"){
+	if(typeof(domid) != "undefined" && $(domid) != null){
 		setAjaxLoad(domid);
 	} else {
 		setAjaxLoad('contentMain');

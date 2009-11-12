@@ -318,14 +318,19 @@
 
 	#contentTable{
 		scrollbar: auto;
-		width: 585px;
+		width: 785px;
 	}
 	
 	#contentServices{
 		vertical-align: top;		
 		width: 585px;
 	}
-	
+
+	#contentServices table{
+		scrollbar: auto;
+		width: 585px;
+	}
+
 	#contentBouquets{
 		border-right: 1px solid #ccc;
 		vertical-align: top;		
@@ -352,6 +357,12 @@
 	.sListItem{
 		/*border-bottom: 2px solid #CCC;*/
 		width: 580px;
+		color: #485052;
+	}
+	
+	.mListItem{
+		/*border-bottom: 2px solid #CCC;*/
+		width: 780px;
 		color: #485052;
 	}
 
