@@ -329,7 +329,7 @@ function saveSettings(){
 	userprefs.load();
 	
 	var debug = $('enableDebug').checked;
-	if(typeof(debug) != undefined){
+	if(typeof(debug) != "undefined"){
 		if( userprefs.data.debug != debug ){
 			userprefs.data.debug = debug;
 			userprefs.save();
@@ -1468,7 +1468,7 @@ function getAllRadio(){
  * @param title - The Title to set on the contentpanel
  */
 function loadContentDynamic(fnc, title, domid){
-	if(typeof(domid) != undefined){
+	if(typeof(domid) != "undefined"){
 		setAjaxLoad(domid);
 	} else {
 		setAjaxLoad('contentMain');
