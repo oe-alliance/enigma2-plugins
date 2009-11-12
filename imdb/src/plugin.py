@@ -188,13 +188,13 @@ class IMDB(Screen):
 
 		self.generalinfomask = re.compile(
 		'<h1>(?P<title>.*?) <.*?</h1>.*?'
-		'(?:.*?<h5>(?P<g_director>Regisseur|Directors?):</h5>.*?>(?P<director>.*?)</a>)*'
-		'(?:.*?<h5>(?P<g_creator>Sch\S*?pfer|Creators?):</h5>.*?>(?P<creator>.*?)</a>)*'
+		'(?:.*?<h5>(?P<g_director>Regisseur|Directors?):</h5>.*?\">(?P<director>.*?)</a>)*'
+		'(?:.*?<h5>(?P<g_creator>Sch\S*?pfer|Creators?):</h5>.*?\">(?P<creator>.*?)</a>)*'
 		'(?:.*?<h5>(?P<g_seasons>Seasons):</h5>(?:.*?)<a href=\".*?\">(?P<seasons>\d+?)</a>\s+?(?:<a class|\|\s+?<a href="episodes#season-unknown))*'
-		'(?:.*?<h5>(?P<g_writer>Drehbuch|Writer).*?</h5>.*?>(?P<writer>.*?)</a>)*'
-		'(?:.*?<h5>(?P<g_premiere>Premiere|Release Date).*?</h5>\s.*?\n?(?P<premiere>.*?)\n\s.*?<)*'
-		'(?:.*?<h5>(?P<g_alternativ>Alternativ|Also Known As):</h5>(?P<alternativ>.*?)<br>\s{0,8}<a.*?>(?:mehr|more))*'
-		'(?:.*?<h5>(?P<g_country>Produktionsland|Country):</h5>.*?<a.*?>\n?(?P<country>.*?)</a>(?:.*?mehr|\s+?</div>))*'
+		'(?:.*?<h5>(?P<g_writer>Drehbuch|Writer).*?</h5>.*?\">(?P<writer>.*?)</a>)*'
+		'(?:.*?<h5>(?P<g_premiere>Premiere|Release Date).*?</h5>.*?>\n?(?P<premiere>.*?)\n\s.*?<)*'
+		'(?:.*?<h5>(?P<g_alternativ>Auch bekannt als|Also Known As):</h5><p>\s*(?P<alternativ>.*?)<br>\s{0,8}<a.*?>(?:mehr|more))*'
+		'(?:.*?<h5>(?P<g_country>Land|Country):</h5>.*?(?:<a.*?>|<p>)\n?(?P<country>.*?)</(?:a|p)>(?:.*?mehr|\s+?</p>))*'
 		, re.DOTALL)
 
 		self.extrainfomask = re.compile(
@@ -425,7 +425,7 @@ class IMDB(Screen):
 
 			Detailstext = ""
 
-			genreblockmask = re.compile('<h5>Genre:</h5>\s+?(.*?)\s+?(?:mehr|more|<a class|</div>)', re.DOTALL)
+			genreblockmask = re.compile('<h5>Genre:</h5>\n<p>\s+?(.*?)\s+?(?:mehr|more|</p|<a class|</div>)', re.DOTALL)
 			genreblock = genreblockmask.findall(self.inhtml)
 			if genreblock:
 				genres = self.htmltags.sub('', genreblock[0])
@@ -439,7 +439,7 @@ class IMDB(Screen):
 					Detailstext += "\n" + self.generalinfos.group('g_'+category) + ": " + self.generalinfos.group(category)
 
 			if self.generalinfos.group("country"):
-				Detailstext += "\n" + self.generalinfos.group("g_country") + ":" + self.htmltags.sub('', self.generalinfos.group("country").replace('\n','').replace("<br>",'\n').replace("  ",' '))
+				Detailstext += "\n" + self.generalinfos.group("g_country") + ": " + self.htmltags.sub('', self.generalinfos.group("country").replace('\n','').replace("<br>",'\n').replace("  ",' '))
 
 			if self.generalinfos.group("alternativ"):
 				Detailstext += "\n" + self.generalinfos.group("g_alternativ") + ": " + self.htmltags.sub('', self.generalinfos.group("alternativ").replace('\n','').replace("<br>",'\n').replace("  ",' '))
