@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-31 11:19+0100\n"
+"POT-Creation-Date: 2009-11-13 18:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,9 +30,6 @@ msgid "Bodys"
 msgstr ""
 
 msgid "Date"
-msgstr ""
-
-msgid "Debug"
 msgstr ""
 
 msgid "Email Client"
@@ -108,6 +105,9 @@ msgstr ""
 msgid "connection failed - retrying"
 msgstr ""
 
+msgid "debug"
+msgstr ""
+
 msgid "delete"
 msgstr ""
 
@@ -147,6 +147,9 @@ msgid "importing configurations from %s"
 msgstr ""
 
 msgid "leave unread"
+msgstr ""
+
+msgid "list all mailboxes"
 msgstr ""
 
 msgid "loading headers ..."

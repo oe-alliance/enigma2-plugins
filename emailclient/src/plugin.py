@@ -616,8 +616,9 @@ class EmailAccount():
 		@param afterInit: to be called, when init is done. Needed to writeAccounts AFTER this one is added
 		'''
 		# TODO: derypt password
-		(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail) = params
+		(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail, listall) = params
 		# debug("[EmailAccount] %s: __init__: %s" %(self._name, repr(params)))
+		self._listall = (listall==1)
 		self._factory = createFactory(self, self._user, self._server, int(self._port))
 		self._proto = None
 		self._mailChecker = None
@@ -652,15 +653,19 @@ class EmailAccount():
 		@param connectCallback: call this function on successful connect, used by EmailAccountList
 		'''
 		self._connectCallback = connectCallback 
-		self._factory.resetDelay()
-		self._factory.retry()
+		if self._factory:
+			self._factory.resetDelay()
+			self._factory.retry()
+			return True
+		else:
+			return False
 
 	def removeCallback(self):
 		self._connectCallback = None 
 
 	def getConfig(self):
 		# TODO: encrypt passwd
-		return (self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail)
+		return (self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail, (1 if self._listall else 0))
 
 	def _ebNotify(self, result, where, what):
 		debug("[EmailAccount] %s: _ebNotify error in %s: %s: %s" %(self._name, where, what, result.getErrorMessage()))
@@ -853,8 +858,15 @@ class EmailAccount():
 		# better use LSUB here to get only the subscribed to mailboxes
 		debug("[EmailAccount] %s: _onAuthentication: %s" %(self._name, str(result)))
 		self.startChecker()
-		# TODO: make choice between list and lsub through options
-		self._proto.lsub("", "*").addCallback(self._onMailboxList)
+		self.getMailboxList()
+		
+	def getMailboxList(self):
+		if self._listall:
+			debug("[EmailAccount] %s: getMailboxList list" %(self._name))
+			self._proto.list("", "*").addCallback(self._onMailboxList)
+		else:
+			debug("[EmailAccount] %s: getMailboxList lsub" %(self._name))
+			self._proto.lsub("", "*").addCallback(self._onMailboxList)
 
 	def _onAuthenticationFailed(self, failure):
 		# If it failed because no SASL mechanisms match
@@ -884,6 +896,7 @@ class EmailAccount():
 	def _onMailboxList(self, result):
 		list = [UTF7toUTF8(mb[2]).encode('utf-8') for mb in result if '\\Noselect' not in mb[0]]
 		debug("[EmailAccount] %s: onMailboxList: %s selectable mailboxes" %(self._name, len(list)))
+		# debug("[EmailAccount] %s: onMailboxList:\n%s" %(self._name, str(list)))
 		list.sort()
 		try:
 			self.inboxPos = map(lambda x: x.lower(), list).index('inbox')+1
@@ -990,7 +1003,7 @@ class EmailAccountList(Screen):
 		if params:
 			# TODO: encrypt passwd
 			EmailAccount(params, writeAccounts)
-		self._layoutFinish()
+		self.close()
 
 	def _edit(self):
 		debug("[EmailAccountList] _edit")
@@ -1004,7 +1017,7 @@ class EmailAccountList(Screen):
 			self["accounts"].getCurrent()[0].exit()
 			# TODO: encrypt passwd
 			EmailAccount(params, writeAccounts)
-		self._layoutFinish()
+		self.close()
 		
 	def _remove(self):
 		debug("[EmailAccountList] _remove")
@@ -1030,14 +1043,19 @@ class EmailAccountList(Screen):
 			acc.removeCallback()
 		self.close()
 
-from Tools.Directories import resolveFilename, SCOPE_SYSETC, SCOPE_CONFIG
+from Tools.Directories import resolveFilename, SCOPE_SYSETC, SCOPE_CONFIG, SCOPE_PLUGINS
 import csv
 MAILCONF = resolveFilename(SCOPE_CONFIG, "EmailClient.csv")
 
+#
+# we need versioning on the config data
+#
+CONFIG_VERSION = 1
 def writeAccounts():
 	global mailAccounts
 	fd = open(MAILCONF, 'w')
-	out = csv.writer(fd, quotechar='"')
+	fd.write(str(CONFIG_VERSION)+'\n')
+	out = csv.writer(fd, quotechar='"', lineterminator='\n')
 	for acc in mailAccounts:
 		out.writerow(acc.getConfig())
 	fd.close()
@@ -1062,22 +1080,27 @@ def getAccounts():
 					password = str(acc.getElementsByTagName("pass")[0].childNodes[0].data)
 					interval = str(acc.getElementsByTagName("interval")[0].childNodes[0].data)
 					maxmail = str(acc.getElementsByTagName("MaxMail")[0].childNodes[0].data)
-				
-					debug("[] getAccounts: %s, %s, %s, %s, %s, %s, %s" 
-						%(name, server, port, user, password, interval, maxmail)
-						)
-					mailAccountsParams.append((str(name), (name, server, port, user, password, interval, maxmail)))
+					debug("[EmailClient] - Autostart: import account %s" %acc(name, server, port, user, password, interval, maxmail))
+					EmailAccount((name, server, port, user, password, interval, maxmail, 0))
 		else:
 			debug("[] getAccounts: no file found, exiting")
 	else:
 		debug("[] getAccounts: reading %s" %MAILCONF)
 		fd = open(MAILCONF)
 		accounts = csv.reader(fd, quotechar='"')
+		version = 0
 		for acc in accounts:
-			mailAccountsParams.append(acc)
+			if len(acc) == 1:
+				version = int(acc[0])
+				continue
+			debug("[EmailClient] - Autostart: add account %s" %acc[0])
+			if version==0 and CONFIG_VERSION==1:
+				(name, server, port, user, password, interval, maxmail) = acc
+				acc = (name, server, port, user, password, interval, maxmail, 0)
+			EmailAccount(acc)
 		fd.close()
-
-	return mailAccountsParams
+		if version != CONFIG_VERSION:
+			writeAccounts()
 
 def main(session, **kwargs): #@UnusedVariable kwargs
 	session.open(EmailAccountList)
@@ -1087,7 +1110,7 @@ def autostart(reason, **kwargs): #@UnusedVariable reason
 	debug("[EmailClient] " + "$Revision$"[1:-1]	+ "$Date$"[7:23] + " starting")
 	if os.path.isfile('/usr/lib/python2.5/uu.py') is not True:
 		import shutil
-		shutil.copy('/usr/lib/enigma2/python/Plugins/Extensions/EmailClient/uu.py', '/usr/lib/python2.5/uu.py')
+		shutil.copy(resolveFilename(SCOPE_PLUGINS, "Extensions/EmailClient/uu.py"), '/usr/lib/python2.5/uu.py')
 	# ouch, this is a hack
 	if kwargs.has_key("session"):
 		global my_global_session
@@ -1095,9 +1118,7 @@ def autostart(reason, **kwargs): #@UnusedVariable reason
 		# return
 
 	if reason == 0:
-		for acc in getAccounts():
-			debug("[EmailClient] - Autostart: add account %s" %acc[0])
-			EmailAccount(acc)
+		getAccounts()
 	else:
 		for acc in mailAccounts:
 			acc.exit()

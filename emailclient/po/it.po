@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - emailclient\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-31 11:19+0100\n"
+"POT-Creation-Date: 2009-11-13 18:29+0100\n"
 "PO-Revision-Date: 2009-10-25 22:14+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -31,9 +31,6 @@ msgstr "Corpi"
 
 msgid "Date"
 msgstr "Data"
-
-msgid "Debug"
-msgstr "Debug"
 
 msgid "Email Client"
 msgstr "Client email"
@@ -119,6 +116,10 @@ msgstr "Impossibile ottenere l'elenco dei nuovi messaggi"
 msgid "connection failed - retrying"
 msgstr "Connessione fallita. Nuovo tentativo in corso"
 
+#, fuzzy
+msgid "debug"
+msgstr "Debug"
+
 msgid "delete"
 msgstr "Cancellare"
 
@@ -161,6 +162,9 @@ msgstr "Importazione configurazione da %s in corso"
 
 msgid "leave unread"
 msgstr "Lasciare non letto"
+
+msgid "list all mailboxes"
+msgstr ""
 
 msgid "loading headers ..."
 msgstr "Caricamento intestazioni..."

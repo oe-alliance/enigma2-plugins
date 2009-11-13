@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EmailClient Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-03 17:26+0200\n"
+"POT-Creation-Date: 2009-11-13 18:29+0100\n"
 "PO-Revision-Date: 2009-10-26 09:42+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: de <de@li.org>\n"
@@ -15,24 +15,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, python-format
+msgid "%(name)s (%(user)s@%(server)s)"
+msgstr ""
+
+msgid "Accounts list"
+msgstr ""
+
 msgid "Attachments"
 msgstr "Bifogade"
 
 msgid "Bodys"
 msgstr "Textkropp"
 
-#, python-format
-msgid "Box '%s' is empty"
-msgstr "Epostlåda %s är tom"
-
 msgid "Date"
 msgstr "Datum"
 
-msgid "Debug"
-msgstr "Debug"
-
 msgid "Email Client"
 msgstr "Epost Klient"
+
+#, fuzzy
+msgid "Email setup"
+msgstr "Epost Klient"
+
+#, python-format
+msgid ""
+"EmailClient for %(account)s:\n"
+"\n"
+"%(error)s"
+msgstr ""
 
 msgid "From"
 msgstr "Från"
@@ -43,35 +54,44 @@ msgstr "IMAP Port"
 msgid "IMAP Server"
 msgstr "IMAP Server"
 
+#, fuzzy, python-format
 msgid ""
-"In order of missing standart python library files\n"
-"i have copied the nessary files now.\n"
-"But you have to restart your Box\n"
-" to apply this!"
-msgstr ""
-"Då det saknades vissa standard python librarys filer,\n"
-"har dessa nu kopierats.\n"
-"En omstart av din Dreambox är nödvändig\n"
-"för att aktivera dessa."
-
-msgid "Mailbox"
-msgstr "Epostlåda"
-
-msgid ""
-"New mail arrived:\n"
+"New mail arrived for account %s:\n"
 "\n"
 msgstr ""
 "Nytt epost inkommet:\n"
 "\n"
 
-msgid "Password"
-msgstr "Lösenord"
+#, fuzzy, python-format
+msgid "Really delete account %s?"
+msgstr "verkligen ta bort epost?"
 
 msgid "Subject"
 msgstr "Ämne"
 
-msgid "Username"
-msgstr "Användarnamn"
+#, python-format
+msgid ""
+"[EmailAccount] %(name)s: _cbCapabilities:\n"
+"####################################################################################################\n"
+"# If you have problems to log into your imap-server, please send me the "
+"output of the following line\n"
+"# cbCapabilities: %(capa)s\n"
+"####################################################################################################\n"
+msgstr ""
+
+#, python-format
+msgid "account %s is not connected"
+msgstr ""
+
+msgid "account name"
+msgstr ""
+
+#, fuzzy
+msgid "account not connected"
+msgstr "Ansluten"
+
+msgid "add"
+msgstr ""
 
 msgid "cancel"
 msgstr "Avbryt"
@@ -79,36 +99,18 @@ msgstr "Avbryt"
 msgid "cannot access inbox"
 msgstr "ingen åtkomst till INBOX"
 
-#, python-format
-msgid "cannot access mailbox '%(mboxname)s'"
-msgstr "ingen åtkomst till epostlådan '%(mboxname)s'"
-
-msgid "cannot get capabilities of mailserver"
-msgstr "kan inte erhålla tjänster fråm epostserver"
-
 msgid "cannot get headers of new messages"
 msgstr "kan inte erhålla brevhuvuden på nya meddelanden"
 
 msgid "cannot get list of new messages"
 msgstr "kan inte erhålla lista över nya meddelanden"
 
-msgid "check interval (minutes)"
-msgstr "Kontroll-Intervall (i Minuter)"
-
-msgid "connected"
-msgstr "Ansluten"
-
-#, python-format
-msgid "connection to %(server)s:%(port)d failed"
-msgstr "anslutning till %(server)s:%(port)d misslyckades"
-
-#, python-format
-msgid ""
-"connection to %(server)s:%(port)d failed:\n"
-"%(reason)s"
+msgid "connection failed - retrying"
 msgstr ""
-"anslutning till %(server)s:%(port)d misslyckades:\n"
-"%(reason)s"
+
+#, fuzzy
+msgid "debug"
+msgstr "Debug"
 
 msgid "delete"
 msgstr "Ta bort"
@@ -116,11 +118,24 @@ msgstr "Ta bort"
 msgid "display timeout (seconds)"
 msgstr "visa timeout (i Sekunder)"
 
-msgid "encrypted login failed, trying without encryption"
-msgstr "krypterad inloggning misslyckades, försöker utan kryptering"
+msgid "edit"
+msgstr ""
+
+msgid "empty values - retry"
+msgstr ""
+
+#, python-format
+msgid ""
+"error logging %(who)s in:\n"
+"%(failure)s"
+msgstr ""
 
 msgid "failed to load message"
 msgstr "misslyckades med att ladda meddelandet"
+
+#, fuzzy
+msgid "getting message ..."
+msgstr "laddar meddelanden"
 
 #, python-format
 msgid "have %d messages"
@@ -132,27 +147,32 @@ msgstr "inga meddelanden"
 msgid "headers loaded, now parsing ..."
 msgstr "Brevhuvuden laddade, bearbetar nu..."
 
+#, python-format
+msgid "importing configurations from %s"
+msgstr ""
+
 msgid "leave unread"
 msgstr "lämna oläst"
 
-#, python-format
-msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
-msgstr "laddar brevhuvuden %(from)d-%(to)d från epostlåda '%(name)s'"
+msgid "list all mailboxes"
+msgstr ""
 
-msgid "loading message"
+#, fuzzy
+msgid "loading headers ..."
 msgstr "laddar meddelanden"
 
-msgid "logged in"
-msgstr "inloggad"
+#, fuzzy
+msgid "mail check interval (minutes)"
+msgstr "Kontroll-Intervall (i Minuter)"
 
-msgid "login failed"
-msgstr "Inloggning missluckades"
+msgid "maximum mail size to fetch"
+msgstr ""
 
-msgid "max of Headers to load"
-msgstr "Max anntal brevhuvuden att ladda"
+msgid "message too large"
+msgstr ""
 
-msgid "no"
-msgstr "nej"
+msgid "no account selected"
+msgstr ""
 
 msgid "no date"
 msgstr "inget datum"
@@ -162,6 +182,9 @@ msgstr "inget filnamn"
 
 msgid "no from"
 msgstr "inegn avsändare"
+
+msgid "no mailbox?!?!"
+msgstr ""
 
 msgid "no sender"
 msgstr "ingen skickare"
@@ -175,14 +198,24 @@ msgstr "Meddela om nya epost"
 msgid "ok"
 msgstr "OK"
 
-msgid "parsing message"
+#, fuzzy
+msgid "parsing message ..."
 msgstr "Bearbetar epost"
 
-msgid "really delete Mail?"
+#, fuzzy
+msgid "password"
+msgstr "Lösenord"
+
+#, fuzzy
+msgid "really delete mail?"
 msgstr "verkligen ta bort epost?"
 
-msgid "really undelete Mail?"
+#, fuzzy
+msgid "really undelete mail?"
 msgstr "verkligen återskapa epost?"
+
+msgid "remove"
+msgstr ""
 
 msgid "select Attachment"
 msgstr "välj bifogad"
@@ -196,12 +229,66 @@ msgstr "visa borttagna epost"
 msgid "undelete"
 msgstr "återskapa"
 
-msgid "unread messages in mailbox"
-msgstr "olästa meddelanden i epostlådan"
+#, fuzzy
+msgid "user name"
+msgstr "Användarnamn"
 
 msgid "view Emails via IMAP4"
 msgstr "läs epost med hjälp av IMAP4"
 
-msgid "yes"
-msgstr "ja"
+#~ msgid "Box '%s' is empty"
+#~ msgstr "Epostlåda %s är tom"
 
+#~ msgid ""
+#~ "In order of missing standart python library files\n"
+#~ "i have copied the nessary files now.\n"
+#~ "But you have to restart your Box\n"
+#~ " to apply this!"
+#~ msgstr ""
+#~ "Då det saknades vissa standard python librarys filer,\n"
+#~ "har dessa nu kopierats.\n"
+#~ "En omstart av din Dreambox är nödvändig\n"
+#~ "för att aktivera dessa."
+
+#~ msgid "Mailbox"
+#~ msgstr "Epostlåda"
+
+#~ msgid "cannot access mailbox '%(mboxname)s'"
+#~ msgstr "ingen åtkomst till epostlådan '%(mboxname)s'"
+
+#~ msgid "cannot get capabilities of mailserver"
+#~ msgstr "kan inte erhålla tjänster fråm epostserver"
+
+#~ msgid "connection to %(server)s:%(port)d failed"
+#~ msgstr "anslutning till %(server)s:%(port)d misslyckades"
+
+#~ msgid ""
+#~ "connection to %(server)s:%(port)d failed:\n"
+#~ "%(reason)s"
+#~ msgstr ""
+#~ "anslutning till %(server)s:%(port)d misslyckades:\n"
+#~ "%(reason)s"
+
+#~ msgid "encrypted login failed, trying without encryption"
+#~ msgstr "krypterad inloggning misslyckades, försöker utan kryptering"
+
+#~ msgid "loading headers %(from)d-%(to)d of Box '%(name)s'"
+#~ msgstr "laddar brevhuvuden %(from)d-%(to)d från epostlåda '%(name)s'"
+
+#~ msgid "logged in"
+#~ msgstr "inloggad"
+
+#~ msgid "login failed"
+#~ msgstr "Inloggning missluckades"
+
+#~ msgid "max of Headers to load"
+#~ msgstr "Max anntal brevhuvuden att ladda"
+
+#~ msgid "no"
+#~ msgstr "nej"
+
+#~ msgid "unread messages in mailbox"
+#~ msgstr "olästa meddelanden i epostlådan"
+
+#~ msgid "yes"
+#~ msgstr "ja"

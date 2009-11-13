@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-31 11:19+0100\n"
+"POT-Creation-Date: 2009-11-13 18:29+0100\n"
 "PO-Revision-Date: 2009-10-28 08:44+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -31,9 +31,6 @@ msgstr "Cuerpos"
 
 msgid "Date"
 msgstr "Fecha"
-
-msgid "Debug"
-msgstr "Debug"
 
 msgid "Email Client"
 msgstr "Cliente correo"
@@ -119,6 +116,10 @@ msgstr "no puedo obtener la lista de mensajes nuevos"
 msgid "connection failed - retrying"
 msgstr "falló la conexión - reintentando"
 
+#, fuzzy
+msgid "debug"
+msgstr "Debug"
+
 msgid "delete"
 msgstr "borrar"
 
@@ -161,6 +162,9 @@ msgstr "importando configuraciones desde %s"
 
 msgid "leave unread"
 msgstr "dejarlo sin leer"
+
+msgid "list all mailboxes"
+msgstr ""
 
 msgid "loading headers ..."
 msgstr "cargando cabeceras..."

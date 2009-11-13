@@ -1,6 +1,6 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Components.config import config, getConfigListEntry, ConfigText, ConfigPassword, ConfigSelection
+from Components.config import config, getConfigListEntry, ConfigText, ConfigPassword, ConfigSelection, ConfigEnableDisable
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
@@ -48,7 +48,7 @@ class EmailConfigOptions(ConfigListScreen,Screen):
 			getConfigListEntry(_("show deleted entries"), config.plugins.emailimap.showDeleted),
 			getConfigListEntry(_("notify about new mails"), config.plugins.emailimap.checkForNewMails),
 			getConfigListEntry(_("display timeout (seconds)"), config.plugins.emailimap.timeout),
-			getConfigListEntry(_("Debug"), config.plugins.emailimap.debug),
+			getConfigListEntry(_("debug"), config.plugins.emailimap.debug),
 			]	
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -61,11 +61,12 @@ class EmailConfigOptions(ConfigListScreen,Screen):
 		debug("[EmailConfigOptions] saving")
 		for x in self["config"].list:
 			x[1].save()
-		for acc in mailAccounts:
-			acc.stopChecker()
-			if config.plugins.emailimap.checkForNewMails.value:
+		if config.plugins.emailimap.checkForNewMails.isChanged():
+			for acc in mailAccounts:
+				acc.stopChecker()
 				acc.startChecker()
-		initLog()
+		if config.plugins.emailimap.debug.isChanged():
+			initLog()
 		self.close(True)
 
 	def cancel(self):
@@ -112,9 +113,9 @@ class EmailConfigAccount(ConfigListScreen,Screen):
 		}, -2)
 		
 		if params:
-			(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail) = params
+			(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail, self._listall) = params
 		else:
-			(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail) = ("","","993","","","60","50")
+			(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail, self._listall) = ("","","993","","","60","50",False)
 		self._cName = ConfigText(self._name, fixed_size=False)
 		self._cServer = ConfigText(self._server, fixed_size=False)
 		self._cPort = ConfigSelection(choices=[("143", "143"),("993", "993 (SSL)")])
@@ -124,6 +125,7 @@ class EmailConfigAccount(ConfigListScreen,Screen):
 		self._cInterval.setUseableChars('0123456789,')
 		self._cMaxmail = ConfigText(self._maxmail, fixed_size=False)
 		self._cMaxmail.setUseableChars('0123456789,')
+		self._cListall = ConfigEnableDisable(self._listall)
 		
 		self.list = [
 					getConfigListEntry(_("account name"), self._cName),
@@ -132,7 +134,8 @@ class EmailConfigAccount(ConfigListScreen,Screen):
 					getConfigListEntry(_("user name"), self._cUser),
 					getConfigListEntry(_("password"), self._cPassword),
 					getConfigListEntry(_("mail check interval (minutes)"), self._cInterval),
-					getConfigListEntry(_("maximum mail size to fetch"), self._cMaxmail)
+					getConfigListEntry(_("maximum mail size to fetch"), self._cMaxmail),
+					getConfigListEntry(_("list all mailboxes"), self._cListall)
 					]
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -143,7 +146,10 @@ class EmailConfigAccount(ConfigListScreen,Screen):
 		if not self._cName.value or not self._cServer.value or not self._cUser.value or not self._cPassword.value or not self._cInterval.value or not self._cMaxmail.value:
 			self._session.open(MessageBox, _("empty values - retry"), type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
 		else:
-			self.close((self._cName.value, self._cServer.value, self._cPort.value, self._cUser.value, self._cPassword.value, self._cInterval.value, self._cMaxmail.value))
+			if self._cListall.value:
+				self.close((self._cName.value, self._cServer.value, self._cPort.value, self._cUser.value, self._cPassword.value, self._cInterval.value, self._cMaxmail.value, 1))
+			else:
+				self.close((self._cName.value, self._cServer.value, self._cPort.value, self._cUser.value, self._cPassword.value, self._cInterval.value, self._cMaxmail.value, 0))
 
 	def cancel(self):
 		debug("[EmailConfigAccount] cancel")

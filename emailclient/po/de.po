@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EmailClient Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-31 11:19+0100\n"
-"PO-Revision-Date: 2009-10-23 19:16+0200\n"
+"POT-Creation-Date: 2009-11-13 18:29+0100\n"
+"PO-Revision-Date: 2009-11-13 18:29+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: de <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,9 +30,6 @@ msgstr "Textkörper"
 
 msgid "Date"
 msgstr "Datum"
-
-msgid "Debug"
-msgstr "Debug"
 
 msgid "Email Client"
 msgstr "Email Client"
@@ -118,6 +115,9 @@ msgstr "Kann Liste neuer Nachrichten nicht bekommen"
 msgid "connection failed - retrying"
 msgstr "Verbindung fehlgeschlage - neuer Versuch"
 
+msgid "debug"
+msgstr "Debug"
+
 msgid "delete"
 msgstr "Löschen"
 
@@ -161,6 +161,9 @@ msgstr "Importiere Konfigurationen von %s"
 msgid "leave unread"
 msgstr "Ungelesen lassen"
 
+msgid "list all mailboxes"
+msgstr "Anzeige aller Mailboxen"
+
 msgid "loading headers ..."
 msgstr "Lade Header ..."
 
@@ -186,7 +189,7 @@ msgid "no from"
 msgstr "kein Absender"
 
 msgid "no mailbox?!?!"
-msgstr ""
+msgstr "keine Mailbox?!?!"
 
 msgid "no sender"
 msgstr "kein Sender"
