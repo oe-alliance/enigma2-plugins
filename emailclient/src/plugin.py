@@ -615,6 +615,7 @@ class EmailAccount():
 		@param params: (name, server, port, user, password, interval, maxmail)
 		@param afterInit: to be called, when init is done. Needed to writeAccounts AFTER this one is added
 		'''
+		# TODO: derypt password
 		(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail) = params
 		# debug("[EmailAccount] %s: __init__: %s" %(self._name, repr(params)))
 		self._factory = createFactory(self, self._user, self._server, int(self._port))
@@ -658,6 +659,7 @@ class EmailAccount():
 		self._connectCallback = None 
 
 	def getConfig(self):
+		# TODO: encrypt passwd
 		return (self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail)
 
 	def _ebNotify(self, result, where, what):
@@ -851,6 +853,7 @@ class EmailAccount():
 		# better use LSUB here to get only the subscribed to mailboxes
 		debug("[EmailAccount] %s: _onAuthentication: %s" %(self._name, str(result)))
 		self.startChecker()
+		# TODO: make choice between list and lsub through options
 		self._proto.lsub("", "*").addCallback(self._onMailboxList)
 
 	def _onAuthenticationFailed(self, failure):
@@ -985,6 +988,7 @@ class EmailAccountList(Screen):
 
 	def _cbAdd(self, params):
 		if params:
+			# TODO: encrypt passwd
 			EmailAccount(params, writeAccounts)
 		self._layoutFinish()
 
@@ -998,6 +1002,7 @@ class EmailAccountList(Screen):
 	def _cbEdit(self, params):
 		if params:
 			self["accounts"].getCurrent()[0].exit()
+			# TODO: encrypt passwd
 			EmailAccount(params, writeAccounts)
 		self._layoutFinish()
 		
@@ -1080,6 +1085,9 @@ def main(session, **kwargs): #@UnusedVariable kwargs
 def autostart(reason, **kwargs): #@UnusedVariable reason
 	debug("[EmailClient] - Autostart reason: %d kwargs: %s" %(reason,repr(kwargs)))
 	debug("[EmailClient] " + "$Revision$"[1:-1]	+ "$Date$"[7:23] + " starting")
+	if os.path.isfile('/usr/lib/python2.5/uu.py') is not True:
+		import shutil
+		shutil.copy('/usr/lib/enigma2/python/Plugins/Extensions/EmailClient/uu.py', '/usr/lib/python2.5/uu.py')
 	# ouch, this is a hack
 	if kwargs.has_key("session"):
 		global my_global_session
