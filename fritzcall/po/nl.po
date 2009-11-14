@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-08 10:16+0200\n"
+"POT-Creation-Date: 2009-11-14 10:12+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -129,6 +129,9 @@ msgstr "Laat FRITZ!Box gesprekken op het scherm zien"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Display all calls"
 msgstr "Laat alle gesprekken zien"
+
+msgid "Display connection infos"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Display incoming calls"

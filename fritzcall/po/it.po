@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-19 09:53+0200\n"
+"POT-Creation-Date: 2009-11-12 22:06+0100\n"
 "PO-Revision-Date: 2009-10-13 11:37+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -130,6 +130,9 @@ msgstr "Visualizzare chiamate telef. sulla TV"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Display all calls"
 msgstr "Tutte le chiamate"
+
+msgid "Display errors with the connection"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Display incoming calls"

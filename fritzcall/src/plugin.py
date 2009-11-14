@@ -100,6 +100,7 @@ config.plugins.FritzCall.showVanity = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.prefix = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 config.plugins.FritzCall.fullscreen = ConfigEnableDisable(default=False)
+config.plugins.FritzCall.connectionVerbose = ConfigEnableDisable(default=True)
 
 mountedDevs= [(resolveFilename(SCOPE_CONFIG), _("Flash") + " (" + resolveFilename(SCOPE_CONFIG) + ")")]
 if os.path.isdir(resolveFilename(SCOPE_MEDIA, "cf")):
@@ -2645,6 +2646,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			if config.plugins.FritzCall.lookup.value:
 				self.list.append(getConfigListEntry(_("Country"), config.plugins.FritzCall.country))
 
+			# TODO: make password unreadable?
 			self.list.append(getConfigListEntry(_("Password Accessing FRITZ!Box"), config.plugins.FritzCall.password))
 			self.list.append(getConfigListEntry(_("Extension number to initiate call on"), config.plugins.FritzCall.extension))
 			self.list.append(getConfigListEntry(_("Read PhoneBook from FRITZ!Box"), config.plugins.FritzCall.fritzphonebook))
@@ -2663,6 +2665,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			# self.list.append(getConfigListEntry(_("Default display mode for FRITZ!Box calls"), config.plugins.FritzCall.fbfCalls))
 			if DESKTOP_WIDTH == 1280 and DESKTOP_HEIGHT == 720:
 				self.list.append(getConfigListEntry(_("Full screen display"), config.plugins.FritzCall.fullscreen))
+			self.list.append(getConfigListEntry(_("Display connection infos"), config.plugins.FritzCall.connectionVerbose))
 			self.list.append(getConfigListEntry(_("Debug"), config.plugins.FritzCall.debug))
 
 		self["config"].list = self.list
@@ -3090,13 +3093,14 @@ class FritzClientFactory(ReconnectingClientFactory):
 
 	def __init__(self):
 		self.hangup_ok = False
-
 	def startedConnecting(self, connector): #@UnusedVariable
-		Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
+		if config.plugins.FritzCall.connectionVerbose.value:
+			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
 
 	def buildProtocol(self, addr): #@UnusedVariable
 		global fritzbox, phonebook
-		Notifications.AddNotification(MessageBox, _("Connected to FRITZ!Box!"), type=MessageBox.TYPE_INFO, timeout=4)
+		if config.plugins.FritzCall.connectionVerbose.value:
+			Notifications.AddNotification(MessageBox, _("Connected to FRITZ!Box!"), type=MessageBox.TYPE_INFO, timeout=4)
 		self.resetDelay()
 		initDebug()
 		initCbC()
@@ -3106,14 +3110,15 @@ class FritzClientFactory(ReconnectingClientFactory):
 		return FritzProtocol()
 
 	def clientConnectionLost(self, connector, reason):
-		if not self.hangup_ok:
+		if not self.hangup_ok and config.plugins.FritzCall.connectionVerbose.value:
 			Notifications.AddNotification(MessageBox, _("Connection to FRITZ!Box! lost\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
 		# config.plugins.FritzCall.enable.value = False
 		fritzbox = None
 
 	def clientConnectionFailed(self, connector, reason):
-		Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box failed\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
+		if config.plugins.FritzCall.connectionVerbose.value:
+			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box failed\n (%s)\nretrying...") % reason.getErrorMessage(), type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		ReconnectingClientFactory.clientConnectionFailed(self, connector, reason)
 		# config.plugins.FritzCall.enable.value = False
 		fritzbox = None
