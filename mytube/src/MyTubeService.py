@@ -13,8 +13,8 @@ from twisted.internet import reactor
 from urllib2 import Request, URLError, HTTPError, urlopen as urlopen2
 from socket import gaierror,error
 import re, os, sys, socket
-import urllib
-from urllib import FancyURLopener, quote
+#import urllib
+from urllib import quote, unquote_plus, unquote   #FancyURLopener,
 import cookielib
 from httplib import HTTPConnection,CannotSendRequest,BadStatusLine,HTTPException
 HTTPConnection.debuglevel = 1
@@ -31,9 +31,8 @@ std_headers = {
 #config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
 #config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
-
-class MyOpener(FancyURLopener):
-	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
+#class MyOpener(FancyURLopener):
+#	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
 
 
 class GoogleSuggestions():
@@ -83,9 +82,9 @@ class MyTubeFeedEntry():
 		self.entry = entry
 		self.favoritesFeed = favoritesFeed
 		self.thumbnail = {}
-		self.myopener = MyOpener()
+		"""self.myopener = MyOpener()
 		urllib.urlopen = MyOpener().open
-		"""if config.plugins.mytube.general.useHTTPProxy.value is True:
+		if config.plugins.mytube.general.useHTTPProxy.value is True:
 			proxy = {'http': 'http://'+str(config.plugins.mytube.general.ProxyIP.getText())+':'+str(config.plugins.mytube.general.ProxyPort.value)}
 			self.myopener = MyOpener(proxies=proxy)
 			urllib.urlopen = MyOpener(proxies=proxy).open
@@ -222,11 +221,11 @@ class MyTubeFeedEntry():
 			if mobj is None:
 				print 'ERROR: unable to extract "t" parameter for unknown reason'
 			else:
-				reason = urllib.unquote_plus(mobj.group(1))
+				reason = unquote_plus(mobj.group(1))
 				print 'ERROR: YouTube said: %s' % reason.decode('utf-8')
 			return mrl
 	
-		token = urllib.unquote(mobj.group(1))
+		token = unquote(mobj.group(1))
 		myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
 		if isHDAvailable is True:
 			mrl = '%s&fmt=%s' % (myurl, '22')
