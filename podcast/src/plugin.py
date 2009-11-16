@@ -212,7 +212,7 @@ class PodcastMovies(Screen):
 		if self.working == False:
 			if len(self.list) > 0:
 				idx = self["list"].getSelectionIndex()
-				(url, length, type) = self.splitExtraInfo(self.movies[idx][2])
+				(url, length, type) = self.splitExtraInfo(self.movies[idx][1])
 				if config.plugins.Podcast.buffer.value:
 					file = url
 					while file.__contains__("/"):
@@ -249,19 +249,36 @@ class PodcastMovies(Screen):
 		getPage(self.url).addCallback(self.showMovies).addErrback(self.error)
 
 	def showMovies(self, page):
-		reonecat = re.compile(r'<title>(.+?)</title>.+?<description>(.+?)</description>.+?<pubDate>(.+?)</pubDate>.+?<enclosure(.+?)/>.+?', re.DOTALL)
-		for title, description, pubDate, extra in reonecat.findall(page):
-			if title.startswith("<![CDATA["):
-				title = title[9:]
-			if title.endswith("]]>"):
-				title = title[:-3]
-			if description.__contains__("<![CDATA["):
-				idx = description.index("<![CDATA[")
-				description = description[idx+10:]
-			if description.endswith("]]>"):
-				description = description[:-3]
-			self.list.append(encodeUrl(title))
-			self.movies.append([description, pubDate, extra])
+		if page.__contains__("<itunes"):
+			reonecat = re.compile(r'<item>(.+?)</item>', re.DOTALL)
+			for item in reonecat.findall(page):
+				reonecat2 = re.compile(r'<title>(.+?)</title>.+?<description>(.+?)</description>.+?<enclosure(.+?)/>.+?', re.DOTALL)
+				for title, description, extra in reonecat2.findall(item):
+					if title.startswith("<![CDATA["):
+						title = title[9:]
+					if title.endswith("]]>"):
+						title = title[:-3]
+					if description.__contains__("<![CDATA["):
+						idx = description.index("<![CDATA[")
+						description = description[idx+10:]
+					if description.endswith("]]>"):
+						description = description[:-3]
+					self.list.append(encodeUrl(title))
+					self.movies.append([description, extra])
+		else:
+			reonecat = re.compile(r'<title>(.+?)</title>.+?<description>(.+?)</description>.+?<enclosure(.+?)/>.+?', re.DOTALL)
+			for title, description, extra in reonecat.findall(page):
+				if title.startswith("<![CDATA["):
+					title = title[9:]
+				if title.endswith("]]>"):
+					title = title[:-3]
+				if description.__contains__("<![CDATA["):
+					idx = description.index("<![CDATA[")
+					description = description[idx+10:]
+				if description.endswith("]]>"):
+					description = description[:-3]
+				self.list.append(encodeUrl(title))
+				self.movies.append([description, extra])
 		self["list"].setList(self.list)
 		self.showInfo()
 		self.working = False
@@ -275,9 +292,8 @@ class PodcastMovies(Screen):
 		if len(self.list) > 0:
 			idx = self["list"].getSelectionIndex()
 			description = self.movies[idx][0]
-			pubDate = self.movies[idx][1]
-			(url, length, type) = self.splitExtraInfo(self.movies[idx][2])
-			self["info"].setText("%s: %s\n%s: %s   %s: %s\n%s" % (_("Date"), pubDate, _("Length"), length, _("Type"), type, encodeUrl(description)))
+			(url, length, type) = self.splitExtraInfo(self.movies[idx][1])
+			self["info"].setText("%s: %s   %s: %s\n%s" % (_("Length"), length, _("Type"), type, encodeUrl(description)))
 
 	def splitExtraInfo(self, info):
 		if info.__contains__('url="'):
