@@ -10,6 +10,7 @@ class EPG(Source):
     SEARCH = 5
     BOUQUET = 6
     SEARCHSIMILAR = 7
+    
     def __init__(self, navcore, func=BOUQUETNOW, endtm=False):
         self.func = func
         Source.__init__(self)
@@ -17,6 +18,7 @@ class EPG(Source):
         self.epgcache = eEPGCache.getInstance()
         self.command = None
         self.endtime = endtm
+        self.search = False
 
     def handleCommand(self, cmd):
         self.command = cmd
@@ -134,8 +136,9 @@ class EPG(Source):
 
     def searchEvent(self, needle):
         print "[WebComponents.EPG] searching EPG: ", needle
+        self.search = True
 
-        events = self.epgcache.search(('IBDCTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1));
+        events = self.epgcache.search(('IBDTSERN', 256, eEPGCache.PARTIAL_TITLE_SEARCH, needle, 1));
         if events:
             return events
         return ()
@@ -149,34 +152,61 @@ class EPG(Source):
         return ()
 
     def getLut(self):
-        if self.endtime:
-            lut = {
-                    "EventID": 0,
-                    "TimeStart": 1,
-                    "Duration": 2,
-                    "TimeEnd": 3,
-                    "CurrentTime": 4,
-                    "Title": 5,
-                    "Description": 6,
-                    "DescriptionExtended": 7,
-                    "ServiceReference": 8,
-                    "ServiceName": 9
-                }
-            return lut
-        else:
-            lut = {
-                "EventID": 0,
-                "TimeStart": 1,
-                "Duration": 2,
-                "CurrentTime": 3,
-                "Title": 4,
-                "Description": 5,
-                "DescriptionExtended": 6,
-                "ServiceReference": 7,
-                "ServiceName": 8
-            }
-
-            return lut
+    	#No Current-Time on EPGSEARCH
+    	if self.search:
+	        if self.endtime:
+	            lut = {
+	                    "EventID": 0,
+	                    "TimeStart": 1,
+	                    "Duration": 2,
+	                    "TimeEnd": 3,
+	                    "Title": 4,
+	                    "Description": 5,
+	                    "DescriptionExtended": 6,
+	                    "ServiceReference": 7,
+	                    "ServiceName": 8
+	                }
+	            return lut
+	        else:
+	            lut = {
+	                "EventID": 0,
+	                "TimeStart": 1,
+	                "Duration": 2,
+	                "Title": 3,
+	                "Description": 4,
+	                "DescriptionExtended": 5,
+	                "ServiceReference": 6,
+	                "ServiceName": 7
+	            }    		
+    	else:
+    	
+	        if self.endtime:
+	            lut = {
+	                    "EventID": 0,
+	                    "TimeStart": 1,
+	                    "Duration": 2,
+	                    "TimeEnd": 3,
+	                    "CurrentTime": 4,
+	                    "Title": 5,
+	                    "Description": 6,
+	                    "DescriptionExtended": 7,
+	                    "ServiceReference": 8,
+	                    "ServiceName": 9
+	                }
+	            return lut
+	        else:
+	            lut = {
+	                "EventID": 0,
+	                "TimeStart": 1,
+	                "Duration": 2,
+	                "CurrentTime": 3,
+	                "Title": 4,
+	                "Description": 5,
+	                "DescriptionExtended": 6,
+	                "ServiceReference": 7,
+	                "ServiceName": 8
+	            }
+        return lut
 
     list = property(do_func)
 
