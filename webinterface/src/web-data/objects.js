@@ -214,7 +214,7 @@ function Service(xml, cssclass){
 		this.servicename = sname.replace('&quot;', '"');
 	};
 	
-	if( typeof( cssclass ) == "undefined" ){
+	if( typeof( cssclass ) == undefined ){
 		cssclass = 'odd';
 	}
 	
@@ -516,7 +516,7 @@ function Timer(xml, cssclass){
 		return this.cancled;
 	};
 	
-	if( typeof( cssclass == 'undefined')){
+	if( typeof( cssclass ) == undefined ){
 		cssclass = 'odd';
 	}
 	
@@ -573,6 +573,7 @@ function TimerList(xml){
 			var cssclass = 'even';
 			
 			for(var i=0;i<this.xmlitems.length;i++){
+				cssclass = cssclass == 'even' ? 'odd' : 'even';
 				var timer = new Timer(this.xmlitems.item(i), cssclass).toJSON();
 				this.timerlist.push(timer);			
 			}
