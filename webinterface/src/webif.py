@@ -162,7 +162,7 @@ class TextToURL(Converter):
 		Converter.__init__(self, arg)
 
 	def getHTML(self, id):
-		return self.source.text.replace(" ", "%20").replace("+", "%2b")
+		return self.source.text.replace(" ", "%20").replace("+", "%2b").replace("&", "%26")
 
 #===============================================================================
 # ReturnEmptyXML
