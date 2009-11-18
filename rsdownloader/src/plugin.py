@@ -58,6 +58,7 @@ config.plugins.RSDownloader.write_log = ConfigYesNo(default=True)
 config.plugins.RSDownloader.reconnect_fritz = ConfigYesNo(default=False)
 config.plugins.RSDownloader.autorestart_failed = ConfigYesNo(default=False)
 config.plugins.RSDownloader.mark_small_as_failed = ConfigYesNo(default=True)
+config.plugins.RSDownloader.unrar_password = ConfigText(default="", fixed_size=False)
 
 ##############################################################################
 
@@ -892,30 +893,32 @@ class RSContainerSelector(ChangedScreen):
 ##############################################################################
 
 class UnrarEntry:
-	def __init__(self, name, password):
+	def __init__(self, name, password, package=None):
 		self.name = name
 		self.password = password
 		self.working = False
 		self.finishCallback = None
 		self.console = None
 		self.command = None
+		self.package = None
 		self.list = ("%s/%s"%(config.plugins.RSDownloader.lists_directory.value, self.name)).replace("//", "/")
-		package = None
-		try:
-			f = open(self.list, "r")
-			while True:
-				line = f.readline()
-				if line == '':
-					break
-				elif line.startswith("http://") and (line.__contains__("part1.rar") or line.__contains__("part01.rar") or line.__contains__("part001.rar")):
-					package = line.split("/")[-1]
-					package = package.replace("\n", "").replace("\r", "")
-					package = ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, package)).replace("//", "/")
-					break
-			f.close()
-		except:
-			pass
+		if package is None:
+			try:
+				f = open(self.list, "r")
+				while True:
+					line = f.readline()
+					if line == '':
+						break
+					elif line.startswith("http://") and (line.__contains__("part1.rar") or line.__contains__("part01.rar") or line.__contains__("part001.rar")):
+						package = line.split("/")[-1]
+						package = package.replace("\n", "").replace("\r", "")
+						package = ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, package)).replace("//", "/")
+						break
+				f.close()
+			except:
+				pass
 		if package:
+			self.package = package
 			if self.password:
 				self.command = "unrar -p%s -o+ x %s %s"%(self.password, package, config.plugins.RSDownloader.downloads_directory.value)
 			else:
@@ -962,8 +965,8 @@ class Unrar:
 		self.timer.start(30000, 1)
 		self.xmlFile = ("%s/unrar.xml"%config.plugins.RSDownloader.lists_directory.value).replace("//", "/")
 		
-	def addToList(self, name, password):
-		entry = UnrarEntry(name, password)
+	def addToList(self, name, password, package=None):
+		entry = UnrarEntry(name, password, package)
 		self.list.append(entry)
 
 	def deleteEntry(self, name):
@@ -1036,17 +1039,18 @@ class Unrar:
 			for item in menu.findall("entry"):
 				name = item.get("name") or None
 				password = item.get("password") or None
+				package = item.get("package") or None
 				if name and password:
 					name = self.decode_charset(name, "utf-8")
 					password = self.decode_charset(password, "utf-8")
-					self.addToList(str(name), str(password))
+					self.addToList(str(name), str(password), str(package))
 
 	def writeXml(self):
 		xml = '<unrar>\n'
 		for x in self.list:
 			name = self.decode_charset(x.name, "utf-8")
 			password = self.decode_charset(x.password, "utf-8")
-			xml += '\t<entry name="%s" password="%s" />\n'%(name.encode("utf-8"), password.encode("utf-8"))
+			xml += '\t<entry name="%s" password="%s" package="%s" />\n'%(name.encode("utf-8"), password.encode("utf-8"), x.package)
 		xml += '</unrar>\n'
 		try:
 			f = open(self.xmlFile, "w")
@@ -1098,11 +1102,13 @@ class UnrarPackageSelector(ChangedScreen):
 		cur = self["list"].getCurrent()
 		if cur:
 			self.name = cur
-			self.session.openWithCallback(self.okClickedCallback, VirtualKeyBoard, title=_("Enter unrar password:"))
+			self.session.openWithCallback(self.okClickedCallback, VirtualKeyBoard, title=_("Enter unrar password:"), text=config.plugins.RSDownloader.unrar_password.value)
 
 	def okClickedCallback(self, callback=None):
 		if callback is None:
 			callback = ""
+		config.plugins.RSDownloader.unrar_password.value = callback
+		config.plugins.RSDownloader.unrar_password.save()
 		self.close([self.name, callback])
 
 ##############################################################################
