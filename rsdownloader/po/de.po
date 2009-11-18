@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RSDownloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-08 09:29-0000\n"
-"PO-Revision-Date: 2009-11-08 09:30-0000\n"
-"Last-Translator: aliabdul <aliabdul1978@hotmail.de>\n"
+"POT-Creation-Date: 2009-11-18 10:23+0100\n"
+"PO-Revision-Date: 2009-11-18 10:23+0100\n"
+"Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,7 +60,7 @@ msgid "Finished"
 msgstr "Fertig"
 
 #: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:684
-#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1381
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1384
 msgid "RS Downloader"
 msgstr "RS Downloader"
 
@@ -299,7 +299,12 @@ msgstr "%s löschen?"
 msgid "Search http://rapidshare-search-engine.com for:"
 msgstr "Durchsuche http://rapidshare-search-engine.com nach:"
 
-#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1381
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1363
+#, python-format
+msgid "Error while decrypting %s!"
+msgstr "Fehler während dem Entschlüsseln von %s!"
+
+#: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1384
 msgid "Download files from rapidshare"
 msgstr "Lade Dateien von rapidshare herunter"
 
@@ -309,8 +314,6 @@ msgstr "Lade Dateien von rapidshare herunter"
 #~ msgstr "Neu laden"
 #~ msgid "%s saved."
 #~ msgstr "%s gespeichert."
-#~ msgid "Error while writing %s!"
-#~ msgstr "Fehler während dem Schreiben von %s!"
 #~ msgid "Edit:"
 #~ msgstr "Editiere:"
 #~ msgid "Start downloading..."
