@@ -1343,21 +1343,24 @@ class RSMain(ChangedScreen):
 			file = "%s/%s"%(config.plugins.RSDownloader.lists_directory.value, callback)
 			file = file.replace("//", "/")
 			links = decrypt(file)
-			try:
-				f = open(("%s/%s.txt" % (config.plugins.RSDownloader.lists_directory.value, callback)).replace("//", "/"), "w")
-				for link in links:
-					if link.endswith(".html"):
-						link = link[:-5]
-					elif link.endswith(".htm"):
-						link = link[:-4]
-					f.write("%s\n"%link)
-				f.close()
-				remove(file)
-			except:
-				pass
-			self.refreshTimer.stop()
-			rapidshare.startDownloading()
-			self.updateList()
+			if links:
+				try:
+					f = open(("%s/%s.txt" % (config.plugins.RSDownloader.lists_directory.value, callback)).replace("//", "/"), "w")
+					for link in links:
+						if link.endswith(".html"):
+							link = link[:-5]
+						elif link.endswith(".htm"):
+							link = link[:-4]
+						f.write("%s\n"%link)
+					f.close()
+					remove(file)
+				except:
+					pass
+				self.refreshTimer.stop()
+				rapidshare.startDownloading()
+				self.updateList()
+			else:
+				self.session.open(MessageBox, (_("Error while decrypting %s!") % callback), MessageBox.TYPE_ERROR)
 
 ##############################################################################
 
