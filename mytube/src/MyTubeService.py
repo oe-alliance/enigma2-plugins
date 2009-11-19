@@ -13,7 +13,6 @@ from twisted.internet import reactor
 from urllib2 import Request, URLError, HTTPError, urlopen as urlopen2
 from socket import gaierror,error
 import re, os, sys, socket
-#import urllib
 from urllib import quote, unquote_plus, unquote   #FancyURLopener,
 import cookielib
 from httplib import HTTPConnection,CannotSendRequest,BadStatusLine,HTTPException
@@ -196,7 +195,7 @@ class MyTubeFeedEntry():
 			print "[MyTube] No valid mp4-url found"
 			return mrl
 
-		if "isHDAvailable = true" in watchvideopage:
+		if "'IS_HD_AVAILABLE': true" in watchvideopage:
 			isHDAvailable = True
 			print "HD AVAILABLE"
 		else:

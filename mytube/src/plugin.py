@@ -891,10 +891,10 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if self.History[0] == '':
 			del self.History[0]
 		print "self.History im add",self.History
-		if config.plugins.mytube.search.searchTerm.value not in self.History:
-			self.History.append((config.plugins.mytube.search.searchTerm.value))
-		self.History.reverse()
-		if len(self.History) == 15:
+		if config.plugins.mytube.search.searchTerm.value in self.History:
+			self.History.remove((config.plugins.mytube.search.searchTerm.value))
+		self.History.insert(0,(config.plugins.mytube.search.searchTerm.value))
+		if len(self.History) == 30:
 			self.History.pop()
 		config.plugins.mytube.general.history.value = ",".join(self.History)
 		config.plugins.mytube.general.history.save()
