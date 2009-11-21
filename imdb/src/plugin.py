@@ -188,13 +188,13 @@ class IMDB(Screen):
 
 		self.generalinfomask = re.compile(
 		'<h1>(?P<title>.*?) <.*?</h1>.*?'
-		'(?:.*?<h5>(?P<g_director>Regisseur|Directors?):</h5>.*?\">(?P<director>.*?)</a>)*'
-		'(?:.*?<h5>(?P<g_creator>Sch\S*?pfer|Creators?):</h5>.*?\">(?P<creator>.*?)</a>)*'
+		'(?:.*?<h5>(?P<g_director>Regisseur|Directors?):</h5>.*?<a href=\".*?\">(?P<director>.*?)</a>)*'
+		'(?:.*?<h5>(?P<g_creator>Sch\S*?pfer|Creators?):</h5>.*?<a href=\".*?\">(?P<creator>.*?)</a>)*'
 		'(?:.*?<h5>(?P<g_seasons>Seasons):</h5>(?:.*?)<a href=\".*?\">(?P<seasons>\d+?)</a>\s+?(?:<a class|\|\s+?<a href="episodes#season-unknown))*'
-		'(?:.*?<h5>(?P<g_writer>Drehbuch|Writer).*?</h5>.*?\">(?P<writer>.*?)</a>)*'
-		'(?:.*?<h5>(?P<g_premiere>Premiere|Release Date).*?</h5>.*?>\n?(?P<premiere>.*?)\n\s.*?<)*'
-		'(?:.*?<h5>(?P<g_alternativ>Auch bekannt als|Also Known As):</h5><p>\s*(?P<alternativ>.*?)<br>\s{0,8}<a.*?>(?:mehr|more))*'
-		'(?:.*?<h5>(?P<g_country>Land|Country):</h5>.*?(?:<a.*?>|<p>)\n?(?P<country>.*?)</(?:a|p)>(?:.*?mehr|\s+?</p>))*'
+		'(?:.*?<h5>(?P<g_writer>Drehbuch|Writer).*?</h5>.*?<a href=\".*?\">(?P<writer>.*?)</a>)*'
+		'(?:.*?<h5>(?P<g_premiere>Premiere|Release Date).*?</h5>\s+<div.*?>\s?(?P<premiere>.*?)\n\s.*?<)*'
+		'(?:.*?<h5>(?P<g_alternativ>Auch bekannt als|Also Known As):</h5><div.*?>\s*(?P<alternativ>.*?)<br>\s{0,8}<a.*?>(?:mehr|more))*'
+		'(?:.*?<h5>(?P<g_country>Land|Country):</h5>\s+<div.*?>(?P<country>.*?)</div>(?:.*?mehr|\s+?</div>))*'
 		, re.DOTALL)
 
 		self.extrainfomask = re.compile(
