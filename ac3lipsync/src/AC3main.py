@@ -1,54 +1,26 @@
-from AC3utils import AC3, PCM, AC3PCM
+from AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM, SKIN
 from AC3delay import AC3delay
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Button import Button
-from Components.ConfigList import ConfigListScreen
+from AC3Positioner import AC3Positioner
+from enigma import ePoint
+from HelpableNumberActionMap import HelpableNumberActionMap
 from Components.Label import Label,MultiColorLabel
+from Components.Pixmap import MultiPixmap
 from Components.ProgressBar import ProgressBar
 from Components.config import config
-from enigma import eDVBDB
 from Screens.ChoiceBox import ChoiceBox
+from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.InfoBarGenerics import InfoBarAudioSelection
-from ServiceReference import ServiceReference
 from __init__ import _
-import os
 
-class AC3LipSync(Screen,InfoBarAudioSelection):
-    skin = """
-        <screen position="center,472" size="600,74" title="AC3 Lip Sync" zPosition="1" >
-            <widget name="AudioDelayText" zPosition="2" position="5,0" size="180,21" font="Regular;21" foregroundColors="#ffffff,#ffa323" />
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/AC3LipSyncBarBG.png" zPosition="2" position="190,0" size="370,21" alphatest="on" transparent="1" />
-            <widget name="AudioSlider" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/AC3LipSyncBar.png" zPosition="3" position="190,0" size="370,21" transparent="1" />
-            <widget name="AudioSliderText" zPosition="4" position="190,0" size="370,21" font="Regular;18" halign="center" valign="center" transparent="1" />
-            <widget name="ServiceInfoText" zPosition="4" position="5,26" size="180,21" font="Regular;18" foregroundColor="#ffffff" />
-            <widget name="ServiceInfo" zPosition="4" position="190,26" size="180,21" font="Regular;18" foregroundColor="#cccccc" />
-            <widget name="AC3DelayInfoText" zPosition="4" position="380,26" size="48,21" font="Regular;18" foregroundColor="#ffffff" />
-            <widget name="AC3DelayInfo" zPosition="4" position="430,26" size="50,21" font="Regular;18" foregroundColor="#cccccc" />
-            <widget name="PCMDelayInfoText" zPosition="4" position="490,26" size="48,21" font="Regular;18" foregroundColor="#ffffff" />
-            <widget name="PCMDelayInfo" zPosition="4" position="540,26" size="50,21" font="Regular;18" foregroundColor="#cccccc" />
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/key-red.png" position="5,52" zPosition="5" size="20,20" transparent="1" alphatest="on" />
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/key-green.png" position="150,52" zPosition="5" size="20,20" transparent="1" alphatest="on" />
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/key-yellow.png" position="295,52" zPosition="5" size="20,20" transparent="1" alphatest="on" />
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/key-blue.png" position="440,52" zPosition="5" size="20,20" transparent="1" alphatest="on" />
-            <widget name="key_red" position="30,52" zPosition="1" size="115,21"
-                font="Regular;16" valign="center" halign="left" transparent="1"
-                shadowColor="#000000" shadowOffset="-1,-1" />
-            <widget name="key_green" position="175,52" zPosition="1" size="115,21"
-                font="Regular;16" valign="center" halign="left" transparent="1"
-                shadowColor="#000000" shadowOffset="-1,-1" />
-            <widget name="key_yellow" position="320,52" zPosition="1" size="115,21"
-                font="Regular;16" valign="center" halign="left" transparent="1"
-                shadowColor="#000000" shadowOffset="-1,-1" />
-            <widget name="key_blue" position="465,52" zPosition="1" size="115,21"
-                font="Regular;16" valign="center" halign="left" transparent="1"
-            shadowColor="#000000" shadowOffset="-1,-1" />
-        </screen>"""
+class AC3LipSync(Screen, HelpableScreen, InfoBarAudioSelection):
 
-    def __init__(self, session, args = None):
+    def __init__(self, session, plugin_path):
         Screen.__init__(self, session)
         self.onShow.append(self.__onShow)
+        self.skin = SKIN
+        self.skin_path = plugin_path
 
         #Initialisiere Infobargenerics
         InfoBarAudioSelection.__init__(self)
@@ -73,23 +45,34 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         # AC3delay instance
         self.AC3delay = AC3delay()
 
-        #Screen elements
-
-        #Slider
-
+        # Last saved values
+        self.savedValue = {}
+        # Current Values
+        self.currentValue = {}
+        
+        #Delay information
         for sAudio in AC3PCM:
-            self[sAudio+"Slider"] = ProgressBar()
-            self[sAudio+"SliderText"] = Label(_("%i ms")%0)
-            self[sAudio+"DelayText"] = MultiColorLabel( _("%s delay:")%sAudio)
-            self[sAudio+"DelayInfoText"] = Label( _("%s:")%sAudio)
-            self[sAudio+"DelayInfo"] = Label(_("%i ms")%0)
+            self[sAudio+"DelayInfoLabel"] = Label( _("%s:")%sAudio)
+            self[sAudio+"DelayInfo"] = Label(_("%i ms")%self.AC3delay.systemDelay[sAudio])
 
-        self["AudioSlider"] = ProgressBar()
-        self["AudioSliderText"] = Label(_("%i ms")%0)
-        self["AudioDelayText"] = MultiColorLabel( _("%s delay:")%self.AC3delay.whichAudio)
+        #Tabbed table labels
+        self["AC3TableTab"] = MultiPixmap()
+        self["AC3GLOBTableTab"] = MultiPixmap()
+        self["PCMTableTab"] = MultiPixmap()
+        self["PCMGLOBTableTab"] = MultiPixmap()
+        
+        self["AC3TableTabLabel"] = MultiColorLabel( _("Passthrough"))
+        self["AC3GLOBTableTabLabel"] = MultiColorLabel( _("Global Passthr."))
+        self["PCMTableTabLabel"] = MultiColorLabel( _("PCM"))
+        self["PCMGLOBTableTabLabel"] = MultiColorLabel( _("Global PCM"))
+
+        # Slider
+        self["AudioSliderBar"] = ProgressBar()
+        self["AudioSlider"] = Label(_("%i ms")%self.AC3delay.systemDelay[self.AC3delay.whichAudio])
+        self["AudioSliderLabel"] = Label( _("Delay:"))
         
         #Service Information
-        self["ServiceInfoText"] = Label(_("Channel audio:"))
+        self["ServiceInfoLabel"] = Label(_("Channel audio:"))
         self["ServiceInfo"] = Label()
         self.setChannelInfoText()
 
@@ -97,104 +80,140 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         self["key_red"] = Label(_("Cancel"))
         self["key_green"] = Label(_("OK"))
         self["key_yellow"] = Label(_("Switch audio"))
-        self["key_blue"] = Label("")
-
-        # Last saved values
-        self.savedValue = {}
-        self.savedValue[AC3] = 0
-        self.savedValue[PCM] = 0
-
-        # Current Values
-        self.currentValue = {}
-        self.currentValue[AC3] = 0
-        self.currentValue[PCM] = 0
+        self["key_blue"] = Label("Save to key")
 
         # Actions
-        self["actions"] = NumberActionMap(["WizardActions", "NumberActions", "ColorActions", "MenuActions"],
+        self["actions"] = HelpableNumberActionMap(self, "PluginAudioSyncActions",
         {
-            "menu": self.keyMenu,
-            "ok": self.keyOk,
-            "back": self.keyCancel,
-            "left": self.keyLeft,
-            "right": self.keyRight,
-            "up": self.keyUp,
-            "down": self.keyDown,
-            "red": self.keyCancel,
-            "green": self.keyOk,
-            "yellow": self.keyAudioSelection,
-            "1": self.keyNumberRelative,
-            "3": self.keyNumberRelative,
-            "4": self.keyNumberRelative,
-            "6": self.keyNumberRelative,
-            "7": self.keyNumberRelative,
-            "9": self.keyNumberRelative,
-            "0": self.keyNumberAbsolute,
-            "2": self.keyNumberAbsolute,
-            "5": self.keyNumberAbsolute,
-            "8": self.keyNumberAbsolute
+            "menu":     (self.keyMenu,              _("Open plugin menu")),
+            "ok":       (self.keyOk,                _("Save values and close plugin")),
+            "cancel":   (self.keyCancel,            _("Discard changes and close plugin")),
+            "left":     (self.keyLeft,              _("Decrease delay")),
+            "right":    (self.keyRight,             _("Increase delay")),
+            "up":       (self.keyUp,                _("Change active delay")),
+            "down":     (self.keyDown,              _("Change active delay")),
+            "red":      (self.keyCancel,            _("Discard changes and close plugin")),
+            "green":    (self.keyOk,                _("Save values and close plugin")),
+            "yellow":   (self.keyAudioSelection,    _("Select channel audio")),
+            "blue":     (self.menuSaveDelayToKey,    _("Save current delay to key")),
+            "1":        (self.keyNumberRelative,    _("Decrease delay by %i ms (can be set)")%self.stepSize["1"]),
+            "3":        (self.keyNumberRelative,    _("Increase delay by %i ms (can be set)")%self.stepSize["3"]),
+            "4":        (self.keyNumberRelative,    _("Decrease delay by %i ms (can be set)")%self.stepSize["4"]),
+            "6":        (self.keyNumberRelative,    _("Increase delay by %i ms (can be set)")%self.stepSize["6"]),
+            "7":        (self.keyNumberRelative,    _("Decrease delay by %i ms (can be set)")%self.stepSize["7"]),
+            "9":        (self.keyNumberRelative,    _("Increase delay by %i ms (can be set)")%self.stepSize["9"]),
+            "0":        (self.keyNumberAbsolute,    _("Set delay to %i ms (can be set)")%self.keyStep["0"]),
+            "2":        (self.keyNumberAbsolute,    _("Set delay to %i ms (can be set)")%self.keyStep["2"]),
+            "5":        (self.keyNumberAbsolute,    _("Set delay to %i ms (can be set)")%self.keyStep["5"]),
+            "8":        (self.keyNumberAbsolute,    _("Set delay to %i ms (can be set)")%self.keyStep["8"])
         }, -1)
 
+        HelpableScreen.__init__(self)
+        
     def __onShow(self):
         for sAudio in AC3PCM:
-            iDelay = self.AC3delay.getLamedbDelay(sAudio)
-            self[sAudio + "Slider"].setRange([(self.lowerBound), (self.upperBound)])
-            self[sAudio + "Slider"].setValue(iDelay-self.lowerBound)
-            self[sAudio + "SliderText"].setText(_("%i ms") %iDelay)
+            iDelay = self.AC3delay.getSystemDelay(sAudio)
             self.savedValue[sAudio] = iDelay
             self.currentValue[sAudio] = iDelay
             if sAudio == self.AC3delay.whichAudio: 
-                self["AudioSlider"].setRange([(self.lowerBound), (self.upperBound)])
-                self["AudioSlider"].setValue(iDelay-self.lowerBound)
-                self["AudioSliderText"].setText(_("%i ms")%iDelay)
+                self["AudioSliderBar"].setRange([(self.lowerBound), (self.upperBound)])
+                self["AudioSliderBar"].setValue(iDelay-self.lowerBound)
+                self["AudioSlider"].setText(_("%i ms")%iDelay)
+                iNum = 1
+            else:
+                iNum = 0
+            self[ sAudio + "TableTabLabel"].setForegroundColorNum(iNum)
+            self[ sAudio + "TableTab"].setPixmapNum(iNum)
+            
+        self.movePosition()
+
+    def movePosition(self):
+        if config.plugins.AC3LipSync.position_x.value != 0 or config.plugins.AC3LipSync.position_y.value != 0:
+            self.instance.move(ePoint(config.plugins.AC3LipSync.position_x.value, config.plugins.AC3LipSync.position_y.value))
+
 
     def keyUp(self):
-        self.AC3delay.whichAudio = AC3
-        self.setActiveSlider(AC3)
+        if self.AC3delay.whichAudio == PCMGLOB:
+            self.AC3delay.whichAudio = PCM
+        elif self.AC3delay.whichAudio == PCM:
+            self.AC3delay.whichAudio = AC3GLOB
+        elif self.AC3delay.whichAudio == AC3GLOB:
+            self.AC3delay.whichAudio = AC3
+        else:
+            self.AC3delay.whichAudio = PCMGLOB
+        
+        self.setActiveSlider()
 
     def keyDown(self):
-        self.AC3delay.whichAudio = PCM
-        self.setActiveSlider(PCM)
-
-    def setActiveSlider(self,sAudio):
         if self.AC3delay.whichAudio == AC3:
-            self["AC3DelayText"].setForegroundColorNum(1)
-            self["PCMDelayText"].setForegroundColorNum(0)
+            self.AC3delay.whichAudio = AC3GLOB
+        elif self.AC3delay.whichAudio == AC3GLOB:
+            self.AC3delay.whichAudio = PCM
+        elif self.AC3delay.whichAudio == PCM:
+            self.AC3delay.whichAudio = PCMGLOB
         else:
-            self["AC3DelayText"].setForegroundColorNum(0)
-            self["PCMDelayText"].setForegroundColorNum(1)                        
-        iDelay = self[sAudio+"Slider"].getValue()
-        iCurDelay = iDelay + self.lowerBound
-        self["AudioSlider"].setValue(iDelay)
-        self["AudioSliderText"].setText(_("%i ms")%iCurDelay)
-        self["AudioDelayText"].setText(_("%s delay:")%sAudio)
+            self.AC3delay.whichAudio = AC3
+
+        self.setActiveSlider()
+
+    def setActiveSlider(self):
+        # Reset colors of all tabs
+        for sAudio in AC3PCM:
+            if sAudio == self.AC3delay.whichAudio:
+                iNum = 1
+            else: 
+                iNum = 0
+            self[ sAudio + "TableTabLabel"].setForegroundColorNum(iNum)
+            self[ sAudio + "TableTab"].setPixmapNum(iNum)
+        iCurDelay = self.currentValue[self.AC3delay.whichAudio]
+        iDelay = iCurDelay - self.lowerBound
+        self["AudioSliderBar"].setValue(iDelay)
+        self["AudioSlider"].setText(_("%i ms")%iCurDelay)
 
     def keyLeft(self):
-        self.changeSliderValue(-1 * self.arrowStepSize)
+        if self.AC3delay.whichAudio == AC3GLOB or self.AC3delay.whichAudio == PCMGLOB:
+            iStep = -25
+        else:
+            iStep = -1 * self.arrowStepSize
+        self.changeSliderValue(iStep)
         
     def keyRight(self):
-        self.changeSliderValue(self.arrowStepSize)
+        if self.AC3delay.whichAudio == AC3GLOB or self.AC3delay.whichAudio == PCMGLOB:
+            iStep = 25
+        else:
+            iStep = self.arrowStepSize
+        self.changeSliderValue(iStep)
 
     def keyNumberAbsolute(self, number):
         sAudio = self.AC3delay.whichAudio
         sNumber = str(number)
-        iSliderValue = self.keyStep[sNumber]-self.lowerBound
+        if self.AC3delay.whichAudio == AC3GLOB or self.AC3delay.whichAudio == PCMGLOB:
+            iStep = ( self.keyStep[sNumber] // 25 ) * 25
+        else:
+            iStep = self.keyStep[sNumber]        
+        iSliderValue = iStep-self.lowerBound
         self.setSliderInfo(iSliderValue)
-        self.AC3delay.setLamedbDelay(sAudio, self.currentValue[sAudio], True)
+        self.AC3delay.setSystemDelay(sAudio, self.currentValue[sAudio], True)
 
     def keyNumberRelative(self, number):
         sNumber = str(number)
-        self.changeSliderValue(self.stepSize[sNumber])
+        if self.AC3delay.whichAudio == AC3GLOB or self.AC3delay.whichAudio == PCMGLOB:
+            iStep = ( self.stepSize[sNumber] // 25 ) * 25
+        else:
+            iStep = self.stepSize[sNumber]
+
+        self.changeSliderValue(iStep)
 
     def changeSliderValue(self,iValue):
         sAudio = self.AC3delay.whichAudio
-        iSliderValue = int(self[sAudio+"Slider"].getValue())
+        iSliderValue = int(self["AudioSliderBar"].getValue())
         iSliderValue += iValue
         if iSliderValue < 0:
             iSliderValue = 0
         elif iSliderValue > (self.upperBound - self.lowerBound):
             iSliderValue = (self.upperBound - self.lowerBound)
         self.setSliderInfo(iSliderValue)
-        self.AC3delay.setLamedbDelay(sAudio, self.currentValue[sAudio], True)        
+        self.AC3delay.setSystemDelay(sAudio, self.currentValue[sAudio], True)        
 
     def keyAudioSelection(self):
         self.audioSelection()
@@ -207,14 +226,14 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
             iSliderValue = self.currentValue[sAudio]
             if iSliderValue <> self.savedValue[sAudio]:
                 self.AC3delay.whichAudio = sAudio
-                self.AC3delay.setLamedbDelay(sAudio, self.savedValue[sAudio], False)
+                self.AC3delay.setSystemDelay(sAudio, self.savedValue[sAudio], False)
         self.close()
 
     def keyMenu(self):
         sAudio = self.AC3delay.whichAudio
-        iDelay = self[sAudio+"Slider"].getValue()+self.lowerBound
+        iDelay = self["AudioSliderBar"].getValue()+self.lowerBound
         keyList = [
-            (_("Save current %(audio)s delay of %(delay)i ms to key") %dict(audio=sAudio , delay=iDelay),"1")
+            (_("Move plugin screen"),"1")
         ]
 
         self.session.openWithCallback(self.DoShowMenu,ChoiceBox,_("Menu"),keyList)
@@ -222,7 +241,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
     def DoShowMenu(self, answer):
         if answer is not None:
             if answer[1] == "1":
-                self.menuSaveDelayToKey()
+                self.session.openWithCallback(self.positionerCallback,AC3Positioner,self.skin_path)    
             else:
                 sResponse = _("Invalid selection")
                 iType = MessageBox.TYPE_ERROR
@@ -230,23 +249,24 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
                 
     def menuSaveDelayToKey(self):
         sAudio = self.AC3delay.whichAudio
-        iDelay = self[sAudio+"Slider"].getValue()+self.lowerBound
+        iDelay = self["AudioSliderBar"].getValue()+self.lowerBound
 
         AC3SetCustomValue(self.session,iDelay,self.keyStep)
-
+    
+    def positionerCallback(self):
+        self.movePosition()
+    
     def setSliderInfo(self, iDelay):
         sAudio = self.AC3delay.whichAudio
         self.currentValue[sAudio] = iDelay + self.lowerBound
         iCurDelay = self.currentValue[sAudio]
-        self[sAudio+"Slider"].setValue(iDelay)
-        self[sAudio+"SliderText"].setText(_("%i ms")%iCurDelay)
-        self["AudioSlider"].setValue(iDelay)
-        self["AudioSliderText"].setText(_("%i ms")%iCurDelay)
+        self["AudioSliderBar"].setValue(iDelay)
+        self["AudioSlider"].setText(_("%i ms")%iCurDelay)
 
     def setChannelInfoText(self):
         sActiveAudio = str(self.AC3delay.selectedAudioInfo[0])
-        sBitstreamDelay = _("%i ms") %self.AC3delay.lamedbDelay[AC3]
-        sPCMDelay = _("%i ms") %self.AC3delay.lamedbDelay[PCM]
+        sBitstreamDelay = _("%i ms") %self.AC3delay.systemDelay[AC3]
+        sPCMDelay = _("%i ms") %self.AC3delay.systemDelay[PCM]
 
         self["ServiceInfo"].setText(sActiveAudio)
         self["AC3DelayInfo"].setText(sBitstreamDelay)
@@ -257,7 +277,7 @@ class AC3LipSync(Screen,InfoBarAudioSelection):
         if audio is not None:
             self.AC3delay.getAudioInformation()
             self.setChannelInfoText()
-            self.setActiveSlider(self.AC3delay.whichAudio)
+            self.setActiveSlider()
             
 class AC3SetCustomValue:
     def __init__(self, session, iDelay, keyStep):

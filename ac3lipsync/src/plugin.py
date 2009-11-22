@@ -14,10 +14,12 @@ config.plugins.AC3LipSync.stepSize79 = ConfigInteger(default = 500, limits = (-1
 config.plugins.AC3LipSync.absoluteStep2 = ConfigInteger(default = 0, limits = (-10000,10000))
 config.plugins.AC3LipSync.absoluteStep5 = ConfigInteger(default = 0, limits = (-10000,10000))
 config.plugins.AC3LipSync.absoluteStep8 = ConfigInteger(default = 0, limits = (-10000,10000))
+config.plugins.AC3LipSync.position_x = ConfigInteger(default=0)
+config.plugins.AC3LipSync.position_y = ConfigInteger(default=0)
 
 def main(session, **kwargs):
 #    reload(AC3main)
-    session.open(AC3main.AC3LipSync)
+    session.open(AC3main.AC3LipSync, plugin_path)
 
 def setup(session, **kwargs):
 #    reload(AC3setup)
@@ -25,13 +27,13 @@ def setup(session, **kwargs):
 
 def mainSetup(menuid, **kwargs):
     if menuid == "setup":
-        return [(_("AC3 Lip Sync"), main, "ac3_lipsync", 99)]
+        return [(_("Audio Sync"), main, "ac3_lipsync", 99)]
     return [ ]
 
 def Plugins(path,**kwargs):
     global plugin_path
     plugin_path = path
-    return [ PluginDescriptor(name=_("AC3 Lip Sync"), description=_("sets the AC3 audio Delay (LipSync)"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
-        PluginDescriptor(name=_("AC3 Lip Sync Setup"), description=_("Setup for the AC3 Lip Sync Plugin"), icon = "AC3LipSync.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup),
-        PluginDescriptor(name=_("AC3 Lip Sync"), description=_("sets the AC3 audio Delay (LipSync)"), where = PluginDescriptor.WHERE_MENU, fnc=mainSetup)]
+    return [ PluginDescriptor(name=_("Audio Sync"), description=_("sets the Audio Delay (LipSync)"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
+        PluginDescriptor(name=_("Audio Sync Setup"), description=_("Setup for the Audio Sync Plugin"), icon = "AudioSync.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup),
+        PluginDescriptor(name=_("Audio Sync"), description=_("sets the Audio Delay (LipSync)"), where = PluginDescriptor.WHERE_MENU, fnc=mainSetup)]
 

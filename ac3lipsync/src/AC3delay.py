@@ -1,4 +1,4 @@
-from AC3utils import AC3, PCM, AC3PCM
+from AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM
 from Components.config import config
 from enigma import eTimer
 from Tools.ISO639 import LanguageCodes
@@ -16,7 +16,7 @@ class AC3delay:
         self.bIsRecording = False
 
         # Current audio- delay
-        self.lamedbDelay = {}
+        self.systemDelay = {}
 
         self.getAudioInformation()
 
@@ -54,6 +54,8 @@ class AC3delay:
         self.activateTimer.start(self.activateWait, False)
 
     def activateDelay(self):
+        # This activation code is only neccessary for DM7025. 
+        # DM800, DM8000 and DM500HD directly activate the delay after using "setAC3Delay" and "setPCMDelay", they don't need the service restart
         if self.activateTimer.isActive:
             self.activateTimer.stop()
         if self.bHasToRestartService == True:
@@ -92,7 +94,7 @@ class AC3delay:
             return None
         return long(r[1])
 
-    def getLamedbDelay(self, sAudio):
+    def getSystemDelay(self, sAudio):
         bInitialized = False
         if self.iService == None:
             self.initAudio()
@@ -101,28 +103,47 @@ class AC3delay:
         if self.iAudioDelay is not None:
             if sAudio == AC3:
                 iDelay = self.iAudioDelay.getAC3Delay()
-            else:
+            elif sAudio == PCM:
                 iDelay = self.iAudioDelay.getPCMDelay()
+            elif sAudio == AC3GLOB:
+                iDelay = config.av.generalAC3delay.getValue()
+            else:
+                iDelay = config.av.generalPCMdelay.getValue()
         if bInitialized == True:
             self.deleteAudio()
         if iDelay == -1:
             iDelay = 0
         return iDelay
 
-    def setLamedbDelay(self, sAudio, iDelay, bDelayStart):
+    def setSystemDelay(self, sAudio, iDelay, bDelayStart):
         bInitialized = False
         if self.iService == None:
             self.initAudio()
             bInitialized = True
         if self.iAudioDelay is not None:
-            if iDelay == 0:
-                iDelay = -1
+            iDelayLameDb = iDelay
+            if iDelayLameDb == 0:
+                iDelayLameDb = -1
             if sAudio == AC3:
-                self.iAudioDelay.setAC3Delay(iDelay)
+                self.iAudioDelay.setAC3Delay(iDelayLameDb)
+            elif sAudio == PCM:
+                self.iAudioDelay.setPCMDelay(iDelayLameDb)
+            elif sAudio == AC3GLOB:
+                config.av.generalAC3delay.setValue(iDelay)
+                config.av.generalAC3delay.save()
+                #Setting the global delay does not activate it, so now we call setAC3Delay to activate the new delay..
+                self.iAudioDelay.setAC3Delay(self.systemDelay[AC3])
             else:
-                self.iAudioDelay.setPCMDelay(iDelay)
+                config.av.generalPCMdelay.setValue(iDelay)
+                config.av.generalPCMdelay.save()
+                #Setting the global delay does not activate it, so now we call setPCMDelay to activate the new delay..
+                self.iAudioDelay.setPCMDelay(self.systemDelay[PCM])
         if bInitialized == True:
             self.deleteAudio()
+        if bDelayStart == True:
+            self.delayedActivateDelay()
+        else:
+            self.activateDelay()
 
     def getAudioInformation(self):
         bInitialized = False
@@ -170,7 +191,7 @@ class AC3delay:
 
             self.audioTrackList = tlist
         for sAudio in AC3PCM:
-            self.lamedbDelay[sAudio]=self.getLamedbDelay(sAudio)
+            self.systemDelay[sAudio]=self.getSystemDelay(sAudio)
         del oAudioTracks
         if bInitialized == True:
             self.deleteAudio()

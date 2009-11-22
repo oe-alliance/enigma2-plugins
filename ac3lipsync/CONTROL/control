@@ -1,6 +1,6 @@
-Package: enigma2-plugin-extensions-ac3lipsync
-Version: 0.9-20091103-r0
-Description: Set AC3/PCM delay
+Package: enigma2-plugin-extensions-audiosync
+Version: 1.0b1-20091118-r0
+Description: Set Audio delay
 Architecture: mipsel
 Section: extra
 Priority: optional

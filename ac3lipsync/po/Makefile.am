@@ -5,7 +5,7 @@
 # the directory name of the plugin.
 #
 
-DOMAIN=AC3LipSync
+DOMAIN=AudioSync
 installdir = /usr/lib/enigma2/python/Plugins/Extensions/$(DOMAIN)
 #GETTEXT=./pygettext.py
 GETTEXT=xgettext

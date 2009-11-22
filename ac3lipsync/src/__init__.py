@@ -2,8 +2,8 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os,gettext
 
-PluginLanguageDomain = "AC3LipSync"
-PluginLanguagePath = "Extensions/AC3LipSync/locale"
+PluginLanguageDomain = "AudioSync"
+PluginLanguagePath = "Extensions/AudioSync/locale"
 
 def localeInit():
     lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"

@@ -1,4 +1,3 @@
-from AC3main import AC3LipSync
 from AC3utils import PLUGIN_BASE, PLUGIN_VERSION
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
