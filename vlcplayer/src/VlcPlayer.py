@@ -310,6 +310,8 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		self.play()
 
 	def play(self):
+		if self.state == self.STATE_PLAYING:
+			return
 		if self.state == self.STATE_PAUSED:
 			self.unpause()
 			return
