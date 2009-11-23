@@ -14,10 +14,10 @@ import os
 class AC3LipSyncSetup(ConfigListScreen, Screen):
     skin = """
     <screen position="center,center" size="560,400" title="AC3 Lip Sync Setup">
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/button-red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/button-green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/button-yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AC3LipSync/img/button-blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+      <ePixmap pixmap="~/img/button-red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+      <ePixmap pixmap="~/img/button-green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+      <ePixmap pixmap="~/img/button-yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+      <ePixmap pixmap="~/img/button-blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
       <widget name="key_red" position="0,0" zPosition="1" size="140,40"
         font="Regular;20" valign="center" halign="center" backgroundColor="#9f1313" transparent="1"
         shadowColor="#000000" shadowOffset="-1,-1" />
