@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-audiosync
-Version: 1.0b1-20091118-r0
+Version: 1.0b2-20091118-r0
 Description: Set Audio delay
 Architecture: mipsel
 Section: extra

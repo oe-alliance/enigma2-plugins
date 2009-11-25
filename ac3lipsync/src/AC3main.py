@@ -7,6 +7,7 @@ from Components.Label import Label,MultiColorLabel
 from Components.Pixmap import MultiPixmap
 from Components.ProgressBar import ProgressBar
 from Components.config import config
+from MovableScreen import MovableScreen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
@@ -14,7 +15,7 @@ from Screens.Screen import Screen
 from Screens.InfoBarGenerics import InfoBarAudioSelection
 from __init__ import _
 
-class AC3LipSync(Screen, HelpableScreen, InfoBarAudioSelection):
+class AC3LipSync(Screen, HelpableScreen, MovableScreen, InfoBarAudioSelection):
 
     def __init__(self, session, plugin_path):
         Screen.__init__(self, session)
@@ -109,6 +110,7 @@ class AC3LipSync(Screen, HelpableScreen, InfoBarAudioSelection):
         }, -1)
 
         HelpableScreen.__init__(self)
+        MovableScreen.__init__(self, config.plugins.AC3LipSync, 600, 100)
         
     def __onShow(self):
         for sAudio in AC3PCM:
@@ -126,11 +128,6 @@ class AC3LipSync(Screen, HelpableScreen, InfoBarAudioSelection):
             self[ sAudio + "TableTab"].setPixmapNum(iNum)
             
         self.movePosition()
-
-    def movePosition(self):
-        if config.plugins.AC3LipSync.position_x.value != 0 or config.plugins.AC3LipSync.position_y.value != 0:
-            self.instance.move(ePoint(config.plugins.AC3LipSync.position_x.value, config.plugins.AC3LipSync.position_y.value))
-
 
     def keyUp(self):
         if self.AC3delay.whichAudio == PCMGLOB:
@@ -241,7 +238,7 @@ class AC3LipSync(Screen, HelpableScreen, InfoBarAudioSelection):
     def DoShowMenu(self, answer):
         if answer is not None:
             if answer[1] == "1":
-                self.session.openWithCallback(self.positionerCallback,AC3Positioner,self.skin_path)    
+                self.startMoving([self["actions"]])
             else:
                 sResponse = _("Invalid selection")
                 iType = MessageBox.TYPE_ERROR
@@ -252,10 +249,7 @@ class AC3LipSync(Screen, HelpableScreen, InfoBarAudioSelection):
         iDelay = self["AudioSliderBar"].getValue()+self.lowerBound
 
         AC3SetCustomValue(self.session,iDelay,self.keyStep)
-    
-    def positionerCallback(self):
-        self.movePosition()
-    
+        
     def setSliderInfo(self, iDelay):
         sAudio = self.AC3delay.whichAudio
         self.currentValue[sAudio] = iDelay + self.lowerBound
