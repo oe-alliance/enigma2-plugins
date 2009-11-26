@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3LipSync\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-23 00:46+0100\n"
+"POT-Creation-Date: 2009-11-26 01:10+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: \n"
@@ -12,224 +12,150 @@ msgstr ""
 "X-Poedit-Basepath: D:\\Dreambox\\Eclipse\\ac3lipsync\\\n"
 "X-Poedit-SearchPath-0: src\n"
 
-#: src/AC3main.py:55
-#: src/AC3Positioner.py:25
+#: src/AC3main.py:56
 #, python-format
 msgid "%s:"
 msgstr ""
 
-#: src/AC3main.py:56
-#: src/AC3main.py:71
-#: src/AC3main.py:121
-#: src/AC3main.py:171
-#: src/AC3main.py:264
-#: src/AC3main.py:268
-#: src/AC3main.py:269
-#: src/AC3Positioner.py:26
-#: src/AC3Positioner.py:41
+#: src/AC3main.py:57
+#: src/AC3main.py:72
+#: src/AC3main.py:123
+#: src/AC3main.py:168
+#: src/AC3main.py:258
+#: src/AC3main.py:262
+#: src/AC3main.py:263
 #, python-format
 msgid "%i ms"
 msgstr ""
 
-#: src/AC3main.py:64
-#: src/AC3Positioner.py:34
+#: src/AC3main.py:65
 msgid "Passthrough"
 msgstr ""
 
-#: src/AC3main.py:65
-#: src/AC3Positioner.py:35
+#: src/AC3main.py:66
 msgid "Global Passthr."
 msgstr ""
 
-#: src/AC3main.py:66
-#: src/AC3Positioner.py:36
+#: src/AC3main.py:67
 msgid "PCM"
 msgstr ""
 
-#: src/AC3main.py:67
-#: src/AC3Positioner.py:37
+#: src/AC3main.py:68
 msgid "Global PCM"
 msgstr ""
 
-#: src/AC3main.py:72
-#: src/AC3Positioner.py:42
+#: src/AC3main.py:73
 msgid "Delay:"
 msgstr ""
 
-#: src/AC3main.py:75
-#: src/AC3Positioner.py:45
+#: src/AC3main.py:76
 msgid "Channel audio:"
 msgstr ""
 
-#: src/AC3main.py:80
-#: src/AC3Positioner.py:49
+#: src/AC3main.py:81
 #: src/AC3setup.py:63
 msgid "Cancel"
 msgstr ""
 
-#: src/AC3main.py:81
-#: src/AC3Positioner.py:50
+#: src/AC3main.py:82
 msgid "OK"
 msgstr ""
 
-#: src/AC3main.py:82
-#: src/AC3Positioner.py:51
+#: src/AC3main.py:83
 msgid "Switch audio"
 msgstr ""
 
-#: src/AC3main.py:88
-msgid "Open plugin menu"
+#: src/AC3main.py:84
+msgid "Save to key"
 msgstr ""
 
 #: src/AC3main.py:89
-#: src/AC3main.py:96
-msgid "Save values and close plugin"
+msgid "Open plugin menu"
 msgstr ""
 
 #: src/AC3main.py:90
-#: src/AC3main.py:95
-msgid "Discard changes and close plugin"
+#: src/AC3main.py:97
+msgid "Save values and close plugin"
 msgstr ""
 
 #: src/AC3main.py:91
-msgid "Decrease delay"
+#: src/AC3main.py:96
+msgid "Discard changes and close plugin"
 msgstr ""
 
 #: src/AC3main.py:92
-msgid "Increase delay"
+msgid "Decrease delay"
 msgstr ""
 
 #: src/AC3main.py:93
+msgid "Increase delay"
+msgstr ""
+
 #: src/AC3main.py:94
+#: src/AC3main.py:95
 msgid "Change active delay"
 msgstr ""
 
-#: src/AC3main.py:97
+#: src/AC3main.py:98
 msgid "Select channel audio"
 msgstr ""
 
-#: src/AC3main.py:98
-msgid "Save current delay to key"
-msgstr ""
-
 #: src/AC3main.py:99
-#: src/AC3main.py:101
-#: src/AC3main.py:103
-#, python-format
-msgid "Decrease delay by %i ms (can be set)"
+msgid "Save current delay to key"
 msgstr ""
 
 #: src/AC3main.py:100
 #: src/AC3main.py:102
 #: src/AC3main.py:104
 #, python-format
+msgid "Decrease delay by %i ms (can be set)"
+msgstr ""
+
+#: src/AC3main.py:101
+#: src/AC3main.py:103
+#: src/AC3main.py:105
+#, python-format
 msgid "Increase delay by %i ms (can be set)"
 msgstr ""
 
-#: src/AC3main.py:105
 #: src/AC3main.py:106
 #: src/AC3main.py:107
 #: src/AC3main.py:108
+#: src/AC3main.py:109
 #, python-format
 msgid "Set delay to %i ms (can be set)"
 msgstr ""
 
-#: src/AC3main.py:236
+#: src/AC3main.py:233
 msgid "Move plugin screen"
 msgstr ""
 
-#: src/AC3main.py:239
+#: src/AC3main.py:236
 msgid "Menu"
 msgstr ""
 
-#: src/AC3main.py:246
-#: src/AC3main.py:312
+#: src/AC3main.py:243
+#: src/AC3main.py:306
 msgid "Invalid selection"
 msgstr ""
 
-#: src/AC3main.py:287
+#: src/AC3main.py:281
 #, python-format
 msgid "Select the key you want to set to %i ms"
 msgstr ""
 
-#: src/AC3main.py:293
+#: src/AC3main.py:287
 #, python-format
 msgid "Key %(key)s (current value: %(value)i ms)"
 msgstr ""
 
-#: src/AC3main.py:298
+#: src/AC3main.py:292
 msgid "Setting key canceled"
 msgstr ""
 
-#: src/AC3main.py:310
+#: src/AC3main.py:304
 #, python-format
 msgid "Key %(Key)s successfully set to %(delay)i ms"
-msgstr ""
-
-#: src/AC3Positioner.py:56
-#: src/AC3Positioner.py:63
-msgid "Save values and close screen"
-msgstr ""
-
-#: src/AC3Positioner.py:57
-#: src/AC3Positioner.py:62
-msgid "Discard changes and close screen"
-msgstr ""
-
-#: src/AC3Positioner.py:58
-msgid "Move screen to the left"
-msgstr ""
-
-#: src/AC3Positioner.py:59
-msgid "Move screen to the right"
-msgstr ""
-
-#: src/AC3Positioner.py:60
-msgid "Move screen up"
-msgstr ""
-
-#: src/AC3Positioner.py:61
-msgid "Move screen down"
-msgstr ""
-
-#: src/AC3Positioner.py:64
-msgid "Move screen to the upper left corner"
-msgstr ""
-
-#: src/AC3Positioner.py:65
-msgid "Center screen at the upper border"
-msgstr ""
-
-#: src/AC3Positioner.py:66
-msgid "Move screen to the upper right corner"
-msgstr ""
-
-#: src/AC3Positioner.py:67
-msgid "Move screen to the middle of the left border"
-msgstr ""
-
-#: src/AC3Positioner.py:68
-msgid "Move screen to the center of your TV"
-msgstr ""
-
-#: src/AC3Positioner.py:69
-msgid "Move screen to the middle of the right border"
-msgstr ""
-
-#: src/AC3Positioner.py:70
-msgid "Move screen to the lower left corner"
-msgstr ""
-
-#: src/AC3Positioner.py:71
-msgid "Center screen at the lower border"
-msgstr ""
-
-#: src/AC3Positioner.py:72
-msgid "Move screen to the lower right corner"
-msgstr ""
-
-#: src/AC3Positioner.py:73
-msgid "Reset saved position"
 msgstr ""
 
 #: src/AC3setup.py:42
@@ -269,6 +195,72 @@ msgstr ""
 
 #: src/AC3setup.py:65
 msgid " "
+msgstr ""
+
+#: src/MovableScreen.py:16
+#: src/MovableScreen.py:23
+msgid "Save values and close screen"
+msgstr ""
+
+#: src/MovableScreen.py:17
+#: src/MovableScreen.py:22
+msgid "Discard changes and close screen"
+msgstr ""
+
+#: src/MovableScreen.py:18
+msgid "Move screen to the left"
+msgstr ""
+
+#: src/MovableScreen.py:19
+msgid "Move screen to the right"
+msgstr ""
+
+#: src/MovableScreen.py:20
+msgid "Move screen up"
+msgstr ""
+
+#: src/MovableScreen.py:21
+msgid "Move screen down"
+msgstr ""
+
+#: src/MovableScreen.py:24
+msgid "Move screen to the upper left corner"
+msgstr ""
+
+#: src/MovableScreen.py:25
+msgid "Center screen at the upper border"
+msgstr ""
+
+#: src/MovableScreen.py:26
+msgid "Move screen to the upper right corner"
+msgstr ""
+
+#: src/MovableScreen.py:27
+msgid "Move screen to the middle of the left border"
+msgstr ""
+
+#: src/MovableScreen.py:28
+msgid "Move screen to the center of your TV"
+msgstr ""
+
+#: src/MovableScreen.py:29
+msgid "Move screen to the middle of the right border"
+msgstr ""
+
+#: src/MovableScreen.py:30
+msgid "Move screen to the lower left corner"
+msgstr ""
+
+#: src/MovableScreen.py:31
+msgid "Center screen at the lower border"
+msgstr ""
+
+#: src/MovableScreen.py:32
+msgid "Move screen to the lower right corner"
+msgstr ""
+
+#: src/MovableScreen.py:33
+msgid "Reset saved position"
 msgstr ""
 
 #: src/plugin.py:30
