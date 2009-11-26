@@ -10,7 +10,7 @@ PLUGIN_VERSION = "1.0b2"
 MOVEPOSITIONSTEP = 10
 
 SKIN = """
-        <screen flags="wfNoBorder" position="center,30" size="600,100" title="AC3 Lip Sync" zPosition="1" backgroundColor="#ff000000">
+        <screen flags="wfNoBorder" position="center,30" size="600,100" title="Audio Sync" zPosition="1" backgroundColor="#ff000000">
             <ePixmap pixmap="~/img/BGTable.png" zPosition="1" position="5,20" size="590,80" alphatest="on" transparent="1" />
             <widget name="AC3TableTabLabel" zPosition="2" position="10,0" size="140,26" font="Regular;14" halign="center" valign="center" transparent="1" backgroundColor="#232323" foregroundColors="#dddddd,#ffffff"/>
             <widget name="AC3TableTab" pixmaps="~/img/BGTableTabLight.png,~/img/BGTableTabDark.png" position="10,0" zPosition="1" size="140,26" transparent="1" alphatest="on" />

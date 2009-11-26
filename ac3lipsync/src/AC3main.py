@@ -1,6 +1,5 @@
 from AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM, SKIN
 from AC3delay import AC3delay
-from AC3Positioner import AC3Positioner
 from enigma import ePoint
 from HelpableNumberActionMap import HelpableNumberActionMap
 from Components.Label import Label,MultiColorLabel
@@ -81,7 +80,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen, InfoBarAudioSelection):
         self["key_red"] = Label(_("Cancel"))
         self["key_green"] = Label(_("OK"))
         self["key_yellow"] = Label(_("Switch audio"))
-        self["key_blue"] = Label("Save to key")
+        self["key_blue"] = Label(_("Save to key"))
 
         # Actions
         self["actions"] = HelpableNumberActionMap(self, "PluginAudioSyncActions",
