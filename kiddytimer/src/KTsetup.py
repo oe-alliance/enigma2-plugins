@@ -61,10 +61,14 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self.skin_path = KTglob.plugin_path
         self.enabled_old = config.plugins.KiddyTimer.enabled.value
 
+        # If the oKiddyTimer- Class has no session yet, then get session
+        if KTglob.oKiddyTimer.session == None:
+            KTglob.oKiddyTimer.gotSession(self.session)
+        
         # Temporarily stop timer as long as we are in the setup screen
         if KTglob.oKiddyTimer.dialog != None:
             KTglob.oKiddyTimer.setDialogStatus(False)
-
+            
         # Plugin Information
         iRemainingTime = KTglob.oKiddyTimer.remainingTime
         sRemainingTime = KTglob.getTimeFromSeconds(KTglob.oKiddyTimer.remainingTime , True )
