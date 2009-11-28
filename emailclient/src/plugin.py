@@ -18,10 +18,11 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Tools import Notifications
 from enigma import eListboxPythonMultiContent, gFont, eTimer #@UnresolvedImport
-from twisted.mail import imap4
+from twisted.mail import imap4 #@UnresolvedImport
 from zope.interface import implements
 import email, re, os
 from email.header import decode_header
+import time
 from TagStrip import strip_readable
 from protocol import createFactory
 
@@ -31,8 +32,8 @@ from EmailConfig import EmailConfigOptions, EmailConfigAccount
 
 config.plugins.emailimap = ConfigSubsection()
 config.plugins.emailimap.showDeleted = ConfigEnableDisable(default=False)
-config.plugins.emailimap.checkForNewMails = ConfigEnableDisable(default=True)
 config.plugins.emailimap.timeout = ConfigInteger(default=0, limits=(0, 90)) # in seconds
+config.plugins.emailimap.verbose = ConfigEnableDisable(default=True)
 config.plugins.emailimap.debug = ConfigEnableDisable(default=False)
 
 def decodeHeader(text, default=''):
@@ -198,7 +199,7 @@ class EmailScreen(Screen):
 		@param result: list of message
 		@param flagsList: list of corresponding flags
 		'''
-		debug("[EmailScreen] onHeaderList")
+		debug("[EmailScreen] onHeaderList: %s" %len(result))
 		self["infolabel"].setText(_("headers loaded, now parsing ..."))
 		self._flagsList = flagsList
 		list = []
@@ -221,7 +222,7 @@ class EmailScreen(Screen):
 					# this appear to be errors in the formatting of the mail itself...
 					debug("[EmailScreen] onHeaderList error: %s (%s)" %(result[m]['RFC822.HEADER'], str(e)))
 		if list:
-			list.reverse()
+			list.sort(key=lambda x: x[0].getTimestampUTC(), reverse=True)
 			self["messagelist"].l.setList(list)
 			self["infolabel"].setText(_("have %d messages") %(len(list)))
 		else:
@@ -288,23 +289,23 @@ class EmailScreen(Screen):
 		return [
 			message,
 			MultiContentEntryText(pos=(5, 0), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.getSenderString(), color=color, color_sel=color),
-			MultiContentEntryText(pos=(5, scaleV(20,18)+1), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.get('date', default=_('no date')), color=color, color_sel=color),
+			MultiContentEntryText(pos=(5, scaleV(20,18)+1), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=time.ctime(message.getTimestampUTC()), color=color, color_sel=color),
 			MultiContentEntryText(pos=(5, 2*(scaleV(20,18)+1)), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.getSubject(), color=color, color_sel=color)
 		]
 
 class ScreenMailView(Screen):
 	skin=""
-	def __init__(self, session, account, email, uid, flags):
+	def __init__(self, session, account, message, uid, flags):
 		'''
 		Principal screen to show one mail message.
 		@param session:
 		@param account: mail acoount, this message is coming from 
-		@param email: the message itself
+		@param message: the message itself
 		@param uid: uid of the message, needed to (un)delete and unmark
 		@param flags: the flags of the message, needed to check, whether IS_DELETED
 		'''
 		self._session = session
-		self._email = email
+		self._email = message
 		self._account = account
 		# debug('ScreenMailView ' + repr(email) + ' dir: ' + repr(dir(email)))
 		width = max(4*140,scaleH(-1,550))
@@ -345,7 +346,11 @@ class ScreenMailView(Screen):
 					   )
 		Screen.__init__(self, session)
 		self["from"] = Label(decodeHeader(_("From") +": %s" %self._email.get('from', _('no from'))))
-		self["date"] = Label(_("Date") +": %s" %self._email.get('date', 'no-date'))
+		try:
+			msgdate = time.ctime(email.utils.mktime_tz(email.utils.parsedate_tz(self._email.get("date"))))
+		except:
+			msgdate = _('no date')
+		self["date"] = Label(_("Date") +": %s" %msgdate)
 		self["subject"] = Label(decodeHeader(_("Subject") +": %s" %self._email.get('subject', _('no subject'))))
 		self["body"] = ScrollLabel(_(self._email.messagebodys[0].getData()))
 		self["buttonred"] = Button("")
@@ -589,13 +594,21 @@ class CheckMail:
 class MessageHeader(object):
 	def __init__(self, uid, message):
 		self.uid = uid #must be int
-		self.message = email.Parser.Parser().parsestr(message) #@UndefinedVariable
+		self.message = email.Parser.HeaderParser().parsestr(message) #@UndefinedVariable
 
 	def getSenderString(self):
 		return decodeHeader(self.get("from"), _("no sender"))
 
 	def getSubject(self):
 		return decodeHeader(self.get("subject"), _("no subject"))
+
+	def getTimestampUTC(self):
+		ts = 0
+		try:
+			ts = email.utils.mktime_tz(email.utils.parsedate_tz(self.get("date")))
+		except:
+			debug("[MessageHeader] getDateTime: Invalid date: %s" % self.get("date"))
+		return ts
 
 	def get(self, key, default=None):
 		return self.message.get(key,failobj=default)
@@ -653,12 +666,11 @@ class EmailAccount():
 		@param connectCallback: call this function on successful connect, used by EmailAccountList
 		'''
 		self._connectCallback = connectCallback 
-		if self._factory:
+		if self._factory and self._factory.connector:
 			self._factory.resetDelay()
 			self._factory.retry()
-			return True
 		else:
-			return False
+			self._factory = createFactory(self, self._user, self._server, int(self._port))
 
 	def removeCallback(self):
 		self._connectCallback = None 
@@ -669,20 +681,19 @@ class EmailAccount():
 
 	def _ebNotify(self, result, where, what):
 		debug("[EmailAccount] %s: _ebNotify error in %s: %s: %s" %(self._name, where, what, result.getErrorMessage()))
-		Notifications.AddNotification(MessageBox, "EmailClient for %(account)s:\n\n%(error)s" %{'account': self._name, 'error':what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+		if config.plugins.emailimap.verbose.value:
+			Notifications.AddNotification(MessageBox, "EmailClient for %(account)s:\n\n%(error)s" %{'account': self._name, 'error':what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
 
 	def startChecker(self):
 		# debug("[EmailAccount] %s: startChecker?" %self._name)
-		if config.plugins.emailimap.checkForNewMails.value:
-			# interval == 0 means: no checking for this account
-			if int(self._interval) != 0:
-				if self._mailChecker:
-					# so, we already have seen an unseenList
-					# debug("[EmailAccount] %s: startChecker again" %self._name)
-					self._mailChecker.reStartChecking()
-				else:
-					# debug("[EmailAccount] %s: startChecker new" %self._name)
-					self._mailChecker = CheckMail(self)
+		if int(self._interval) != 0:
+			if self._mailChecker:
+				# so, we already have seen an unseenList
+				# debug("[EmailAccount] %s: startChecker again" %self._name)
+				self._mailChecker.reStartChecking()
+			else:
+				# debug("[EmailAccount] %s: startChecker new" %self._name)
+				self._mailChecker = CheckMail(self)
 
 	def stopChecker(self):
 		if self._mailChecker:
@@ -735,13 +746,13 @@ class EmailAccount():
 
 	def getMessageList(self, callback, mbox):
 		if self._proto:
-			self._proto.select(mbox.decode('utf-8')).addCallback(self._onSelect, callback, mbox).addErrback(self._onSelectFailed, callback, mbox)
+			self._proto.select(mbox.decode('utf-8')).addCallback(self._onSelect, callback).addErrback(self._onSelectFailed, callback, mbox)
 			return True
 		else:
 			return False
 
-	def _onSelect(self, result, callback, mboxname):
-		# debug("[EmailAccount] _onExamine: " + str(result) + ' ' + mboxname)
+	def _onSelect(self, result, callback):
+		# debug("[EmailAccount] _onExamine: " + str(result))
 		numMessagesinFolder = int(result['EXISTS'])
 		if numMessagesinFolder <= 0:
 			callback([], [])
@@ -776,7 +787,7 @@ class EmailAccount():
 		if self._proto:
 			self._proto.fetchSize(message.uid
 				).addCallback(self._onMessageSizeLoaded, message, callback, errCallback 
-				).addErrback(self._onMessageLoadFailed, message, callback, errCallback
+				).addErrback(self._onMessageLoadFailed, message, errCallback
 				)
 			return True
 		else:
@@ -793,10 +804,10 @@ class EmailAccount():
 		else:
 			self._proto.fetchMessage(message.uid
 				).addCallback(callback, message,
-				).addErrback(self._onMessageLoadFailed, message, callback, errCallback
+				).addErrback(self._onMessageLoadFailed, message, errCallback
 				)
 
-	def _onMessageLoadFailed(self, failure, message, callback, errCallback):
+	def _onMessageLoadFailed(self, failure, message, errCallback):
 		debug("[EmailAccount] %s: onMessageLoadFailed: %s %s" %(self._name, str(failure), str(message)))
 		errCallback('', _("failed to load message") + ': ' + failure.getErrorMessage())
 
@@ -827,6 +838,9 @@ class EmailAccount():
 			self._ebNotify(reason, 'onConnectionFailed', _("connection failed - retrying")+'\n'+reason.getErrorMessage())
 			self._failureReason = reasonString
 		self._proto = None
+		# don't retry, if we do not check this account
+		if int(self._interval) == 0 and self._factory:
+			self._factory.stopTrying()
 		# self.stopChecker() not necessary, because we don't have an active connection...
 
 	def onConnectionLost(self, reason):
@@ -834,6 +848,9 @@ class EmailAccount():
 		# too noisy... self._ebNotify(reason, 'onConnectionLost', _("connection lost - retrying"))
 		self._proto = None
 		self.stopChecker()
+		# don't retry, if we do not check this account
+		if int(self._interval) == 0 and self._factory:
+			self._factory.stopTrying()
 
 	def _cbCapabilities(self,reason):
 		debug(_("[EmailAccount] %(name)s: _cbCapabilities:\n\
@@ -885,13 +902,21 @@ class EmailAccount():
 	def _onInsecureAuthenticationFailed(self, failure):
 		debug("[EmailAccount] %s: _onInsecureAuthenticationFailed: %s" %(self._name, failure.getErrorMessage()))
 		self._proto = None
-		Notifications.AddNotification(
-			MessageBox,
-			_("error logging %(who)s in:\n%(failure)s")
-				%{
-				'who':"%s@%s" %(self._user, self._server),
-				'failure':failure.getErrorMessage()
-				}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+		#=======================================================================
+		# Notifications.AddNotification(
+		#	MessageBox,
+		#	_("error logging %(who)s in:\n%(failure)s")
+		#		%{
+		#		'who':"%s@%s" %(self._user, self._server),
+		#		'failure':failure.getErrorMessage()
+		#		}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
+		#=======================================================================
+		self._ebNotify(failure, "_onInsecureAuthenticationFailed",
+					_("error logging %(who)s in:\n%(failure)s")
+					%{
+					'who':"%s@%s" %(self._user, self._server),
+					'failure':failure.getErrorMessage()
+					})
 
 	def _onMailboxList(self, result):
 		list = [UTF7toUTF8(mb[2]).encode('utf-8') for mb in result if '\\Noselect' not in mb[0]]
@@ -1063,7 +1088,6 @@ def writeAccounts():
 def getAccounts():
 	debug("[] getAccounts")
 
-	mailAccountsParams = []
 	if not os.path.exists(MAILCONF):
 		MAILCONF_XML = resolveFilename(SCOPE_SYSETC, "mailconf.xml")
 		debug("[] getAccounts: check for %s" %MAILCONF_XML)
@@ -1094,7 +1118,8 @@ def getAccounts():
 				version = int(acc[0])
 				continue
 			debug("[EmailClient] - Autostart: add account %s" %acc[0])
-			if version==0 and CONFIG_VERSION==1:
+			if version==0:
+				# add listall param at the end to get version 1
 				(name, server, port, user, password, interval, maxmail) = acc
 				acc = (name, server, port, user, password, interval, maxmail, 0)
 			EmailAccount(acc)

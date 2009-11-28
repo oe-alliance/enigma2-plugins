@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Plugin EmailClient\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-13 18:29+0100\n"
+"POT-Creation-Date: 2009-11-18 08:15+0100\n"
 "PO-Revision-Date: 2009-09-27 17:49+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -118,6 +118,10 @@ msgid "delete"
 msgstr "obriši"
 
 #, fuzzy
+msgid "display connection errors"
+msgstr "vreme prikazivanja nove poruke (sekunde)"
+
+#, fuzzy
 msgid "display timeout (seconds)"
 msgstr "vreme prikazivanja nove poruke (sekunde)"
 
@@ -198,9 +202,6 @@ msgstr "bez pošiljaoca"
 msgid "no subject"
 msgstr "bez subjekta"
 
-msgid "notify about new mails"
-msgstr "obavesti o novim porukama"
-
 msgid "ok"
 msgstr "ok"
 
@@ -280,6 +281,9 @@ msgstr "vidi imejlove preko IMAP4"
 
 #~ msgid "no"
 #~ msgstr "ne"
+
+#~ msgid "notify about new mails"
+#~ msgstr "obavesti o novim porukama"
 
 #, fuzzy
 #~ msgid "unread messages in mailbox %s"

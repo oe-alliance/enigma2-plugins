@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EmailClient Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-13 18:29+0100\n"
+"POT-Creation-Date: 2009-11-18 08:15+0100\n"
 "PO-Revision-Date: 2009-10-26 09:42+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: de <de@li.org>\n"
@@ -115,6 +115,10 @@ msgstr "Debug"
 msgid "delete"
 msgstr "Ta bort"
 
+#, fuzzy
+msgid "display connection errors"
+msgstr "visa timeout (i Sekunder)"
+
 msgid "display timeout (seconds)"
 msgstr "visa timeout (i Sekunder)"
 
@@ -191,9 +195,6 @@ msgstr "ingen skickare"
 
 msgid "no subject"
 msgstr "inget ämne"
-
-msgid "notify about new mails"
-msgstr "Meddela om nya epost"
 
 msgid "ok"
 msgstr "OK"
@@ -286,6 +287,9 @@ msgstr "läs epost med hjälp av IMAP4"
 
 #~ msgid "no"
 #~ msgstr "nej"
+
+#~ msgid "notify about new mails"
+#~ msgstr "Meddela om nya epost"
 
 #~ msgid "unread messages in mailbox"
 #~ msgstr "olästa meddelanden i epostlådan"

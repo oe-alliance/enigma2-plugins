@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-13 18:29+0100\n"
+"POT-Creation-Date: 2009-11-18 08:15+0100\n"
 "PO-Revision-Date: 2009-10-28 08:44+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -123,6 +123,10 @@ msgstr "Debug"
 msgid "delete"
 msgstr "borrar"
 
+#, fuzzy
+msgid "display connection errors"
+msgstr "visualizar timeout (segundos)"
+
 msgid "display timeout (seconds)"
 msgstr "visualizar timeout (segundos)"
 
@@ -198,9 +202,6 @@ msgstr "sin origen"
 
 msgid "no subject"
 msgstr "sin asunto"
-
-msgid "notify about new mails"
-msgstr "notifíqueme sobre nuevos correos"
 
 msgid "ok"
 msgstr "ok"
@@ -288,6 +289,9 @@ msgstr "ver Correos via IMAP4"
 
 #~ msgid "no"
 #~ msgstr "no"
+
+#~ msgid "notify about new mails"
+#~ msgstr "notifíqueme sobre nuevos correos"
 
 #~ msgid "unread messages in mailbox"
 #~ msgstr "mensajes no leídos en el buzón"

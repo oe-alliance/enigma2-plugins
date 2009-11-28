@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-13 18:29+0100\n"
+"POT-Creation-Date: 2009-11-28 18:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,6 +111,9 @@ msgstr ""
 msgid "delete"
 msgstr ""
 
+msgid "display connection errors"
+msgstr ""
+
 msgid "display timeout (seconds)"
 msgstr ""
 
@@ -183,9 +186,6 @@ msgid "no sender"
 msgstr ""
 
 msgid "no subject"
-msgstr ""
-
-msgid "notify about new mails"
 msgstr ""
 
 msgid "ok"

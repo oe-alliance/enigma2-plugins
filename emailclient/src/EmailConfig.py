@@ -46,8 +46,8 @@ class EmailConfigOptions(ConfigListScreen,Screen):
 		}, -2)
 		self.list = [
 			getConfigListEntry(_("show deleted entries"), config.plugins.emailimap.showDeleted),
-			getConfigListEntry(_("notify about new mails"), config.plugins.emailimap.checkForNewMails),
 			getConfigListEntry(_("display timeout (seconds)"), config.plugins.emailimap.timeout),
+			getConfigListEntry(_("display connection errors"), config.plugins.emailimap.verbose),
 			getConfigListEntry(_("debug"), config.plugins.emailimap.debug),
 			]	
 		self["config"].list = self.list
@@ -118,7 +118,7 @@ class EmailConfigAccount(ConfigListScreen,Screen):
 			(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail, self._listall) = ("","","993","","","60","50",False)
 		self._cName = ConfigText(self._name, fixed_size=False)
 		self._cServer = ConfigText(self._server, fixed_size=False)
-		self._cPort = ConfigSelection(choices=[("143", "143"),("993", "993 (SSL)")])
+		self._cPort = ConfigSelection(choices=[("143", "143"),("993", "993 (SSL)")], default=self._port)
 		self._cUser = ConfigText(self._user, fixed_size=False)
 		self._cPassword = ConfigPassword(self._password, fixed_size=False)
 		self._cInterval = ConfigText(self._interval, fixed_size=False)

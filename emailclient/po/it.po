@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - emailclient\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-13 18:29+0100\n"
+"POT-Creation-Date: 2009-11-18 08:15+0100\n"
 "PO-Revision-Date: 2009-10-25 22:14+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -123,6 +123,10 @@ msgstr "Debug"
 msgid "delete"
 msgstr "Cancellare"
 
+#, fuzzy
+msgid "display connection errors"
+msgstr "Timeout visualizzazione (secondi)"
+
 msgid "display timeout (seconds)"
 msgstr "Timeout visualizzazione (secondi)"
 
@@ -199,9 +203,6 @@ msgstr "Nessun mittente"
 msgid "no subject"
 msgstr "Nessun soggetto"
 
-msgid "notify about new mails"
-msgstr "Avvisare dell'arrivo di nuovi messaggi"
-
 msgid "ok"
 msgstr "Ok"
 
@@ -237,3 +238,6 @@ msgstr "Nome User"
 
 msgid "view Emails via IMAP4"
 msgstr "Leggere email (prot. IMAP4)"
+
+#~ msgid "notify about new mails"
+#~ msgstr "Avvisare dell'arrivo di nuovi messaggi"
