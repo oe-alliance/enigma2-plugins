@@ -865,10 +865,10 @@
 	<country code="+47">
 		<website name="gulesider.no" url="http://www.gulesider.no/gs/categoryList.c?q=$NUMBER" prefix="">
 			<entry>
-				<name swapFirstAndLastName="true">title=&quot;.*personlige infoside&quot;&gt;\s*([^&lt;]*)&lt;/a&gt;</name>
-				<street>&lt;div\s+class=&quot;lead&quot;\s+style=&quot;padding-left: 0px;&quot;>([^,]*),\s+[^&lt;]*&lt;/div&gt;</street>
-				<city>&lt;div\s+class=&quot;lead&quot;\s+style=&quot;padding-left: 0px;&quot;>[^,]*,\s+[^\s]*\s([^&lt;]*)&lt;/div&gt;</city>
-				<zipcode>&lt;div\s+class=&quot;lead&quot;\s+style=&quot;padding-left: 0px;&quot;>[^,]*,\s+([^\s]*)\s[^&lt;]*&lt;/div&gt;</zipcode>
+				<name swapFirstAndLastName="true">&lt;div class=&quot;details&quot;&gt;&lt;p&gt;&lt;strong&gt;Mottaker:&lt;/strong&gt;\s*&lt;br/&gt;([^&lt;]*)&lt;br/&gt;</name>
+				<street>&lt;div class=&quot;details&quot;&gt;&lt;p&gt;&lt;strong&gt;Mottaker:&lt;/strong&gt;\s*&lt;br/&gt;[^&lt;]*&lt;br/&gt;\s*([^&lt;]*)&lt;br/&gt;</street>
+				<city>&lt;div class=&quot;details&quot;&gt;&lt;p&gt;&lt;strong&gt;Mottaker:&lt;/strong&gt;\s*&lt;br/&gt;[^&lt;]*&lt;br/&gt;\s*[^&lt;]*&lt;br/&gt;\s*\d+ ([^\s]*)\s*&lt;/p&gt;</city>
+				<zipcode>&lt;div class=&quot;details&quot;&gt;&lt;p&gt;&lt;strong&gt;Mottaker:&lt;/strong&gt;\s*&lt;br/&gt;[^&lt;]*&lt;br/&gt;\s*[^&lt;]*&lt;br/&gt;\s*(\d+) [^\s]*\s*&lt;/p&gt;</zipcode>
 			</entry>
 		</website>
 	</country>
