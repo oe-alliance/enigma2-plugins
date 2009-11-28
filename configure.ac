@@ -246,4 +246,8 @@ meteoitalia/src/Makefile
 
 weatherplugin/Makefile
 weatherplugin/src/Makefile
+
+startupservice/Makefile
+startupservice/po/Makefile
+startupservice/src/Makefile
 ])

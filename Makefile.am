@@ -41,6 +41,7 @@ SUBDIRS = \
 	rsdownloader \
 	simplerss \
 	setpasswd \
+	startupservice \
 	startuptostandby \
 	tageditor \
 	trafficinfo \
