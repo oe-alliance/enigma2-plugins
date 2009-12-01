@@ -1,0 +1,66 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: StartUpService\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-12-01 22:22+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dr.Best <dr.best@dreambox-tools.info>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "Nothing"
+msgstr "Keine Zuordnung"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "delete movie"
+msgstr "Film löschen"
+
+msgid "Assign plugin to green key pressed"
+msgstr "Tastendruck auf Grün"
+
+msgid "Assign plugin to yellow key pressed"
+msgstr "Tastendruck auf Gelb"
+
+msgid "Assign plugin to blue key pressed"
+msgstr "Tastendruck auf Blau"
+
+msgid "Unknown Error"
+msgstr "Unbekannter Fehler"
+
+#, python-format
+msgid ""
+"Error!\n"
+"Error Text: %s"
+msgstr ""
+
+msgid "Plugin not found!"
+msgstr "Plugin wurde nicht gefunden!"
+
+msgid "No plugin assigned!"
+msgstr "Keine Funktion zugeordnet"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "assigned to green"
+msgstr "Tastendruck auf Grün"
+
+msgid "assigned to yellow"
+msgstr "Tastendruck auf Gelb"
+
+msgid "assigned to blue"
+msgstr "Tastendruck auf Blau"
+
+msgid "Setup for MovieSelection QuickButton"
+msgstr "MovieSelection QuickButton Setup"
+

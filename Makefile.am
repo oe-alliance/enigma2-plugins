@@ -26,6 +26,7 @@ SUBDIRS = \
 	mosaic \
 	moviecut \
 	movieretitle \
+	movieselectionquickbutton \
 	movietagger \
 	mytube \
 	netcaster \

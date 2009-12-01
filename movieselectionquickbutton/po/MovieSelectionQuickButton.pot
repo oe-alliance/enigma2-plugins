@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-12-01 22:29+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/plugin.py:34
+#: ../src/plugin.py:35
+#: ../src/plugin.py:36
+#: ../src/plugin.py:62
+#: ../src/plugin.py:66
+#: ../src/plugin.py:70
+#: ../src/plugin.py:102
+#: ../src/plugin.py:137
+msgid "Nothing"
+msgstr ""
+
+#: ../src/plugin.py:60
+msgid "Delete"
+msgstr ""
+
+#: ../src/plugin.py:75
+msgid "delete movie"
+msgstr ""
+
+#: ../src/plugin.py:76
+msgid "Assign plugin to green key pressed"
+msgstr ""
+
+#: ../src/plugin.py:77
+msgid "Assign plugin to yellow key pressed"
+msgstr ""
+
+#: ../src/plugin.py:78
+msgid "Assign plugin to blue key pressed"
+msgstr ""
+
+#: ../src/plugin.py:99
+msgid "Unknown Error"
+msgstr ""
+
+#: ../src/plugin.py:111
+#, python-format
+msgid ""
+"Error!\n"
+"Error Text: %s"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "Plugin not found!"
+msgstr ""
+
+#: ../src/plugin.py:115
+msgid "No plugin assigned!"
+msgstr ""
+
+#: ../src/plugin.py:134
+msgid "Cancel"
+msgstr ""
+
+#: ../src/plugin.py:135
+msgid "OK"
+msgstr ""
+
+#: ../src/plugin.py:155
+msgid "assigned to green"
+msgstr ""
+
+#: ../src/plugin.py:156
+msgid "assigned to yellow"
+msgstr ""
+
+#: ../src/plugin.py:157
+msgid "assigned to blue"
+msgstr ""
+
+#: ../src/plugin.py:188
+msgid "Setup for MovieSelection QuickButton"
+msgstr ""
+

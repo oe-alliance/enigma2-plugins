@@ -250,4 +250,8 @@ weatherplugin/src/Makefile
 startupservice/Makefile
 startupservice/po/Makefile
 startupservice/src/Makefile
+
+movieselectionquickbutton/Makefile
+movieselectionquickbutton/po/Makefile
+movieselectionquickbutton/src/Makefile
 ])
