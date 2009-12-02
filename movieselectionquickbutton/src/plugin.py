@@ -185,6 +185,7 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = main)]	
-	list.append(PluginDescriptor(name="Setup MovieSelection QuickButton", description=_("Setup for MovieSelection QuickButton"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
+	list.append(PluginDescriptor(name="Setup MovieSelection QuickButton", description=_("Setup for MovieSelection QuickButton"), where = [PluginDescriptor.WHERE_PLUGINMENU],
+	icon = "plugin.png", fnc=setup))
 	return list
 

@@ -2,4 +2,4 @@ installdir = $(LIBDIR)/enigma2/python/Plugins/Extensions/MovieSelectionQuickButt
 
 install_PYTHON = *.py
 
-install_DATA = maintainer.info
+install_DATA = maintainer.info plugin.png
