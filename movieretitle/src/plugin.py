@@ -155,7 +155,10 @@ class MovieRetitle(Screen, ConfigListScreen):
 			parent.csel.reloadList()
 			parent.close()
 		except AttributeError:
-			pass
+			try:
+				# when started from MovieSelection Quickbutton Plugin, MovieSelection is parent, not MovieContextMenu --> try again
+				self.parent.reloadList()
+			except: pass
 
 	def baseName(self, str):
 		name = str.split('/')[-1]
