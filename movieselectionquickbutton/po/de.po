@@ -16,6 +16,12 @@ msgstr ""
 msgid "Nothing"
 msgstr "Keine Zuordnung"
 
+msgid "display plugin name"
+msgstr "zeige Pluginname an"
+
+msgid "display plugin description"
+msgstr "zeige Pluginbeschreibung an"
+
 msgid "Delete"
 msgstr "Löschen"
 
@@ -60,6 +66,9 @@ msgstr "Tastendruck auf Gelb"
 
 msgid "assigned to blue"
 msgstr "Tastendruck auf Blau"
+
+msgid "button caption"
+msgstr "Schalterüberschrift"
 
 msgid "Setup for MovieSelection QuickButton"
 msgstr "MovieSelection QuickButton Setup"

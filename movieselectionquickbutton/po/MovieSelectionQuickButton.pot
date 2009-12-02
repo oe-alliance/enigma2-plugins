@@ -27,6 +27,14 @@ msgstr ""
 msgid "Nothing"
 msgstr ""
 
+#: ../src/plugin.py:37
+msgid "display plugin name"
+msgstr ""
+
+#: ../src/plugin.py:37
+msgid "display plugin description"
+msgstr ""
+
 #: ../src/plugin.py:60
 msgid "Delete"
 msgstr ""
@@ -84,6 +92,10 @@ msgstr ""
 
 #: ../src/plugin.py:157
 msgid "assigned to blue"
+msgstr ""
+
+#: ../src/plugin.py:160
+msgid "button caption"
 msgstr ""
 
 #: ../src/plugin.py:188
