@@ -34,6 +34,7 @@ config.plugins.MovieSelectionQuickButton = ConfigSubsection()
 config.plugins.MovieSelectionQuickButton.green = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.MovieSelectionQuickButton.yellow = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.MovieSelectionQuickButton.blue = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
+config.plugins.MovieSelectionQuickButton.buttoncaption = ConfigSelection(default="0", choices = [("0", _("display plugin name")),("1", _("display plugin description"))])
 
 ###########################################
 # MovieSelection
@@ -53,23 +54,14 @@ def MovieSelectionInit():
 	MovieSelection.greenpressed = greenpressed
 	MovieSelection.yellowpressed = yellowpressed
 	MovieSelection.bluepressed = bluepressed
-
+	MovieSelection.getPluginCaption = getPluginCaption
 
 def MovieSelection__init__(self, session, selectedmovie = None):
 	baseMovieSelection__init__ (self, session, selectedmovie)
 	self["key_red"] = Button(_("Delete"))
-	green_text = ""
-	if str(config.plugins.MovieSelectionQuickButton.green.value) != _("Nothing"):
-		green_text = str(config.plugins.MovieSelectionQuickButton.green.value)
-	self["key_green"] = Button(green_text)
-	yellow_text = ""
-	if str(config.plugins.MovieSelectionQuickButton.yellow.value) != _("Nothing"):
-		yellow_text = str(config.plugins.MovieSelectionQuickButton.yellow.value)
-	self["key_yellow"] = Button(yellow_text)
-	blue_text = ""
-	if str(config.plugins.MovieSelectionQuickButton.blue.value) != _("Nothing"):
-		blue_text = str(config.plugins.MovieSelectionQuickButton.blue.value)
-	self["key_blue"] = Button(blue_text)
+	self["key_green"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.green.value)))
+	self["key_yellow"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.yellow.value)))
+	self["key_blue"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.blue.value)))
 	self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 	{
 		"red": (self.redpressed, _("delete movie")),
@@ -92,6 +84,16 @@ def yellowpressed(self):
 
 def bluepressed(self):
 	startPlugin(self,str(config.plugins.MovieSelectionQuickButton.blue.value))
+
+def getPluginCaption(self,pname):
+	if pname != _("Nothing"):
+		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_MOVIELIST]):
+			if pname == str(p.name):
+				if config.plugins.MovieSelectionQuickButton.buttoncaption.value == "1":
+					return p.description
+				else:
+					return p.name
+	return ""
 
 def startPlugin(self,pname):
 	plugin = None
@@ -154,8 +156,8 @@ class MovieSelectionButtonSetup(ConfigListScreen, Screen):
 		cfglist = [
 			getConfigListEntry(_("assigned to green"), self.greenchoice),
 			getConfigListEntry(_("assigned to yellow"), self.yellowchoice),
-			getConfigListEntry(_("assigned to blue"), self.bluechoice)
-
+			getConfigListEntry(_("assigned to blue"), self.bluechoice),
+			getConfigListEntry(_("button caption"), config.plugins.MovieSelectionQuickButton.buttoncaption),
 			]
 		ConfigListScreen.__init__(self, cfglist, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
