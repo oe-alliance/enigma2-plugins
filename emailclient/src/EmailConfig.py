@@ -61,10 +61,6 @@ class EmailConfigOptions(ConfigListScreen,Screen):
 		debug("[EmailConfigOptions] saving")
 		for x in self["config"].list:
 			x[1].save()
-		if config.plugins.emailimap.checkForNewMails.isChanged():
-			for acc in mailAccounts:
-				acc.stopChecker()
-				acc.startChecker()
 		if config.plugins.emailimap.debug.isChanged():
 			initLog()
 		self.close(True)
