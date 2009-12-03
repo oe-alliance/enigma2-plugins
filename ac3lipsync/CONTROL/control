@@ -1,4 +1,6 @@
 Package: enigma2-plugin-extensions-audiosync
+Replaces: enigma2-plugin-extensions-ac3lipsync
+Conflicts: enigma2-plugin-extensions-ac3lipsync
 Version: 1.0b2-20091118-r0
 Description: Set Audio delay
 Architecture: mipsel
