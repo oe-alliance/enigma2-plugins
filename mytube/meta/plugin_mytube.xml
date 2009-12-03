@@ -1,0 +1,25 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>acid-burn</author>
+                    <name>MyTube</name>
+                    <packagename>enigma2-plugin-extensions-mytube</packagename>
+                    <shortdescription>Direct playback of Youtube movies</shortdescription>
+                    <description>Manage logos to display at boottime</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_mytube_en.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>acid-burn</author>
+                    <name>MyTube</name>
+                    <packagename>enigma2-plugin-extensions-mytube</packagename>
+                    <shortdescription>Youtube Filme ohne PC abspielen.</shortdescription>
+                    <description>Mit der MyTube Erweiterung können Sie Youtube Filme ohne PC abspielen.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_mytube_de.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-mytube" />
+		<file type="package" name="python-gdata" />
+	  </files>
+</default>

@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info language="en">
+                    <author>3c5x9</author>
+                    <name>AntiScrollbar</name>
+                    <packagename>enigma2-plugin-extensions-antiscrollbar</packagename>
+                    <shortdescription>Overlay for scrolling bars.</shortdescription>
+                    <description>Overlay for scrolling bars.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_antiscrollbar.jpg" />
+          </info>
+          <info language="de">
+                    <author>3c5x9</author>
+                    <name>AntiScrollbar</name>
+                    <packagename>enigma2-plugin-extensions-antiscrollbar</packagename>
+                    <shortdescription>Overlay für Scrollbalken.</shortdescription>
+                    <description>Overlay für Scrollbalken.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_antiscrollbar.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-antiscrollbar" />
+	  </files>
+</default>

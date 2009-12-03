@@ -10,4 +10,4 @@ else
 install_PYTHON = *.py servicets.so
 endif
 
-install_DATA = *.png
+install_DATA = *.png maintainer.info

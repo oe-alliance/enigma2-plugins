@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="EPG" />
+	  </prerequisites>
+          <info language="en">
+                    <author>ritzMo</author>
+                    <name>EPGSearch</name>
+                    <packagename>enigma2-plugin-extensions-epgsearch</packagename>
+                    <shortdescription>Search through the EPG</shortdescription>
+                    <description>Search through the EPG and create timers..</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_epgsearch_en.jpg" />
+          </info>
+          <info language="de">
+                    <author>ritzMo</author>
+                    <name>EPGSearch</name>
+                    <packagename>enigma2-plugin-extensions-epgsearch</packagename>
+                    <shortdescription>Durchsuche das EPG</shortdescription>
+                    <description>Durchsuchen Sie das EPG nach Ihrer Lieblingssendung und erstellen Sie Timer.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_epgsearch_de.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-epgsearch" />
+	  </files>
+</default>

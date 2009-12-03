@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>Ali</author>
+                    <name>ZapHistoryBrowser</name>
+                    <packagename>enigma2-plugin-extensions-zaphistorybrowser</packagename>
+                    <shortdescription>Shows a list of recent zap entries</shortdescription>
+                    <description>Shows a list containing the zapping-history and allows user to zap to the entries or to modify them</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_zaphistorybrowser_en.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>Ali</author>
+                    <name>ZapHistoryBrowser</name>
+                    <packagename>enigma2-plugin-extensions-zaphistorybrowser</packagename>
+                    <shortdescription>Zeigt eine Liste der zuletzt gesehenen Kanäle</shortdescription>
+                    <description>Zeigt eine Liste der zuletzt gesehenen Kanäle</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_zaphistorybrowser_de.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-zaphistorybrowser" />
+	  </files>
+</default>

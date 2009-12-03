@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Recording" />
+	  </prerequisites>
+          <info language="en">
+                    <author>AHolst</author>
+                    <name>MovieCut</name>
+                    <packagename>enigma2-plugin-extensions-moviecut</packagename>
+                    <shortdescription>Cut your movies</shortdescription>
+                    <description>Cut your movies</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_moviecut.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>AHolst</author>
+                    <name>MovieCut</name>
+                    <packagename>enigma2-plugin-extensions-moviecut</packagename>
+                    <shortdescription>Schneiden Sie Ihre Filme</shortdescription>
+                    <description>Schneiden Sie Ihre Filme</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_moviecut.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-moviecut" />
+	  </files>
+</default>

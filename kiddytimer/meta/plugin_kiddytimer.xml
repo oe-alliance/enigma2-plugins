@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info language="en">
+                    <author>Tode</author>
+                    <name>KiddyTimer</name>
+                    <packagename>enigma2-plugin-extensions-kiddytimer</packagename>
+                    <shortdescription>Control your kids's tv usage</shortdescription>
+                    <description>allows to control your kids's daily tv usage</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_kiddytimer_en.jpg" />
+          </info>
+          <info language="de">
+                    <author>Tode</author>
+                    <name>KiddyTimer</name>
+                    <packagename>enigma2-plugin-extensions-kiddytimer</packagename>
+                    <shortdescription>Kontrollieren Sie die TV Nutzung ihres Kindes</shortdescription>
+                    <description>Kontrollieren Sie die TV Nutzung ihres Kindes</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_kiddytimer_de.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-kiddytimer" />
+	  </files>
+</default>

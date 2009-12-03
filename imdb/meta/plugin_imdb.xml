@@ -1,0 +1,25 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+                    <tag type="Recording" />
+	  </prerequisites>
+          <info language="en">
+                    <author>Dream Multimedia</author>
+                    <name>IMDb</name>
+                    <packagename>enigma2-plugin-extensions-imdb</packagename>
+                    <shortdescription>Movie informations from the InternetMovieDatabase</shortdescription>
+                    <description>Movie informations from the InternetMovieDatabase</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_imdb_en.jpg" />
+          </info>
+          <info language="de">
+                    <author>Dream Multimedia</author>
+                    <name>IMDb</name>
+                    <packagename>enigma2-plugin-extensions-imdb</packagename>
+                    <shortdescription>Filminformationen aus der InternetMovie Database</shortdescription>
+                    <description>Filminformationen aus der InternetMovie Database herunterladen.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_imdb_de.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-imdb" />
+	  </files>
+</default>

@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Network" />
+	  </prerequisites>
+          <info language="en">
+                    <author>ritzMo</author>
+                    <name>FTPBrowser</name>
+                    <packagename>enigma2-plugin-extensions-ftpbrowser</packagename>
+                    <shortdescription>A basic ftp client</shortdescription>
+                    <description>A basic ftp client</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_ftpbrowser_en.jpg" />
+          </info>
+          <info language="de">
+                    <author>ritzMo</author>
+                    <name>FTPBrowser</name>
+                    <packagename>enigma2-plugin-extensions-ftpbrowser</packagename>
+                    <shortdescription>Ein einfacher FTP Client</shortdescription>
+                    <description>A basic ftp client</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_ftpbrowser_de.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-ftpbrowser" />
+	  </files>
+</default>

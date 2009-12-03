@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>3c5x9</author>
+                    <name>UnwetterInfo</name>
+                    <packagename>enigma2-plugin-extensions-unwetterinfo</packagename>
+                    <shortdescription>German storm informations</shortdescription>
+                    <description>German storm informations</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_unwetterinfo.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>3c5x9</author>
+                    <name>UnwetterInfo</name>
+                    <packagename>enigma2-plugin-extensions-trafficinfo</packagename>
+                    <shortdescription>Aktuelle Unwetterinformationen</shortdescription>
+                    <description>Aktuelle Unwetterinformationen</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_unwetterinfo.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-unwetterinfo" />
+	  </files>
+</default>

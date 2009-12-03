@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>Ali</author>
+                    <name>Podcast</name>
+                    <packagename>enigma2-plugin-extensions-podcast</packagename>
+                    <shortdescription>Stream podcasts</shortdescription>
+                    <description>Stream podcasts</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_podcast.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>Ali</author>
+                    <name>Podcast</name>
+                    <packagename>enigma2-plugin-extensions-podcast</packagename>
+                    <shortdescription>Podcasts auf Ihrer Dreambox abspielen</shortdescription>
+                    <description>Spielen Sie Podcasts auf Ihrer Dreambox ab</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_podcast.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-podcast" />
+	  </files>
+</default>

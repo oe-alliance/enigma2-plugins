@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>acid-burn,nickoenner</author>
+                    <name>NetworkBrowser</name>
+                    <packagename>enigma2-plugin-systemplugins-networkbrowser</packagename>
+                    <shortdescription>Browse for and connect to network shares</shortdescription>
+                    <description>Browse for and connect to network shares</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_networkbrowser_en.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>acid-burn,nickoenner</author>
+                    <name>NetworkBrowser</name>
+                    <packagename>enigma2-plugin-systemplugins-networkbrowser</packagename>
+                    <shortdescription>Netzwerk nach NFS/CIFS Freigaben durchsuchen</shortdescription>
+                    <description>Netzwerk nach NFS/CIFS Freigaben durchsuchen und zu diesen verbinden.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_networkbrowser_de.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-networkbrowser" />
+	  </files>
+</default>

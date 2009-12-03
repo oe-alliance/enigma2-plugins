@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Software" />
+	  </prerequisites>
+          <info language="en">
+                    <author>lexx911</author>
+                    <name>VlcPlayer</name>
+                    <packagename>enigma2-plugin-extensions-vlcplayer</packagename>
+                    <shortdescription>play AVI/DIVX/WMV/etc. videos from PC on your dreambox</shortdescription>
+                    <description>Enigma2 Plugin to play AVI/DIVX/WMV/etc. videos from PC on your dreambox. Needs a running VLC from www.videolan.org on your pc</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_vlcplayer_en.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>lexx911</author>
+                    <name>VlcPlayer</name>
+                    <packagename>enigma2-plugin-extensions-vlcplayer</packagename>
+                    <shortdescription>AVI/DIVX/WMV/etc. videos von ihrem PC abspielen.</shortdescription>
+                    <description>Spielen Sie AVI/DIVX/WMV/etc. videos von ihrem PC. Dies benötigt ein funktionierendes VLC von www.videolan.org</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_vlcplayer_de.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-vlcplayer" />
+	  </files>
+</default>

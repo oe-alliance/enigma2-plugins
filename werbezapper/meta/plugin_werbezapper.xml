@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>ritzMo</author>
+                    <name>WerbeZapper</name>
+                    <packagename>enigma2-plugin-extensions-werbezapper</packagename>
+                    <shortdescription>Zap between commercials</shortdescription>
+                    <description>Zap between commercials</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_werbezapper_en.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>ritzMo</author>
+                    <name>WerbeZapper</name>
+                    <packagename>enigma2-plugin-extensions-werbezapper</packagename>
+                    <shortdescription>Werbezapper für Ihre Dreambox</shortdescription>
+                    <description>Werbezapper für Ihre Dreambox</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_werbezapper_de.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-werbezapper" />
+	  </files>
+</default>

@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>3c5x9</author>
+                    <name>LastFM</name>
+                    <packagename>enigma2-plugin-extensions-lastfm</packagename>
+                    <shortdescription>Play music from Last.fm</shortdescription>
+                    <description>Play music from Last.fm</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_lastfm.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>3c5x9</author>
+                    <name>LastFM</name>
+                    <packagename>enigma2-plugin-extensions-lastfm</packagename>
+                    <shortdescription>Musik von Last.fm abspielen.</shortdescription>
+                    <description>Spielen Sie Ihre Musik von Last.fm ab.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_lastfm.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-lastfm" />
+	  </files>
+</default>
