@@ -1,4 +1,4 @@
-SUBDIRS = src po
+SUBDIRS = src po meta
 
 PWD=$(shell pwd)
 
