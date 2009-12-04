@@ -906,9 +906,9 @@
 		<website name="www.dastelefonbuch.de" url="http://www3.dastelefonbuch.de/?la=de&amp;kw=$NUMBER&amp;cmd=detail&amp;recSelected=0" prefix="0">
 			<entry>
 				<name>&lt;div id=&quot;detail-hl&quot;&gt;&lt;h2&gt;([^&lt;]*)&lt;/h2&gt;</name>
-				<street>([^&amp;]*)&amp;nbsp;&lt;br /&gt;\d{5}&amp;nbsp;[^&lt;]*&lt;/div&gt;</street>
-				<city>[^&amp;]*&amp;nbsp;&lt;br /&gt;\d{5}&amp;nbsp;([^&lt;]*)&lt;/div&gt;</city>
-				<zipcode>[^&amp;]*&amp;nbsp;&lt;br /&gt;(\d{5})&amp;nbsp;[^&lt;]*&lt;/div&gt;</zipcode>
+				<street>&lt;div class=&quot;addr&quot; title=&quot;Adresse&quot;&gt;\s*?&lt;div&gt;.*?&lt;/div&gt;\s*?&lt;div&gt;\s*?([^&lt;]*)&lt;br /&gt;\d{5}&amp;nbsp;[^&lt;]*&lt;br /&gt;&lt;/div&gt;\s*?&lt;/div&gt;</street>
+				<city>&lt;div class=&quot;addr&quot; title=&quot;Adresse&quot;&gt;\s*?&lt;div&gt;.*?&lt;/div&gt;\s*?&lt;div&gt;\s*?[^&lt;]*&lt;br /&gt;\d{5}&amp;nbsp;([^&lt;]*)&lt;br /&gt;&lt;/div&gt;\s*?&lt;/div&gt;</city>
+				<zipcode>&lt;div class=&quot;addr&quot; title=&quot;Adresse&quot;&gt;\s*?&lt;div&gt;.*?&lt;/div&gt;\s*?&lt;div&gt;\s*?[^&lt;]*&lt;br /&gt;(\d{5})&amp;nbsp;[^&lt;]*&lt;br /&gt;&lt;/div&gt;\s*?&lt;/div&gt;</zipcode>
 			</entry>
 		</website>
 		<website name="www.dastelefonbuch.de" url="http://www.dastelefonbuch.de/?sourceid=Mozilla-search&amp;cmd=search&amp;kw=$NUMBER" prefix="0">
