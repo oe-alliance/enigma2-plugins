@@ -425,7 +425,7 @@ class IMDB(Screen):
 
 			Detailstext = ""
 
-			genreblockmask = re.compile('<h5>Genre:</h5>\n<p>\s+?(.*?)\s+?(?:mehr|more|</p|<a class|</div>)', re.DOTALL)
+			genreblockmask = re.compile('<h5>Genre:</h5>\s<div class="info-content">\s+?(.*?)\s+?(?:mehr|more|</p|<a class|</div>)', re.DOTALL)
 			genreblock = genreblockmask.findall(self.inhtml)
 			if genreblock:
 				genres = self.htmltags.sub('', genreblock[0])
