@@ -59,6 +59,8 @@ config.plugins.RSDownloader.reconnect_fritz = ConfigYesNo(default=False)
 config.plugins.RSDownloader.autorestart_failed = ConfigYesNo(default=False)
 config.plugins.RSDownloader.mark_small_as_failed = ConfigYesNo(default=True)
 config.plugins.RSDownloader.unrar_password = ConfigText(default="", fixed_size=False)
+config.plugins.RSDownloader.reconnect_start_time = ConfigClock(default=time())
+config.plugins.RSDownloader.reconnect_end_time = ConfigClock(default=time())
 config.plugins.Netload = ConfigSubsection()
 config.plugins.Netload.username = ConfigText(default="", fixed_size=False)
 config.plugins.Netload.password = ConfigText(default="", fixed_size=False)
@@ -229,7 +231,8 @@ class RSDownload:
 		if self.url.__contains__("rapidshare.com") and username == "" and password == "":
 			writeLog("Free RS-Download: %s"%self.url)
 			self.status = _("Checking")
-			if config.plugins.RSDownloader.reconnect_fritz.value:
+			if config.plugins.RSDownloader.reconnect_fritz.value and self.mayReconnect():
+				writeLog("Reconnecting fritz.Box...")
 				reconnect()
 				sleep(3)
 			data = get(self.url)
@@ -430,6 +433,36 @@ class RS:
 		self.checkTimer.callback.append(self.startDownloading)
 		self.checkTimer.start(5000*60, False)
 
+	def mayReconnect(self):
+		start = config.plugins.RSDownloader.reconnect_start_time.value
+		end = config.plugins.RSDownloader.reconnect_end_time.value
+		t = localtime()
+		hour_now = t[3]
+		minute_now = t[4]
+		hour_start = start[0]
+		minute_start = start[1]
+		hour_end = end[0]
+		minute_end = end[1]
+		if start == end: # Same start and end-time
+			return True
+		elif hour_end < hour_start: # Different days!!!
+			if hour_now > hour_start or hour_now < hour_end:
+				return True
+			elif hour_now == hour_start and minute_now > minute_start:
+				return True
+			elif hour_now == hour_end and minute_now < minute_end:
+				return True
+			else:
+				return False
+		elif hour_now > hour_start and hour_now < hour_end: # Same day...
+			return True
+		elif hour_now == hour_start and minute_now > minute_start: # Same day, same start-hour...
+			return True
+		elif hour_now == hour_end and minute_now < minute_end: # Same day, same end-hour...
+			return True
+		else:
+			return False
+
 	def mayDownload(self):
 		if config.plugins.RSDownloader.onoff.value == False:
 			writeLog("RS Downloader is turned off...")
@@ -516,9 +549,9 @@ class RS:
 				elif download.url.__contains__("netload.in"):
 					if config.plugins.Netload.username.value != "" and config.plugins.Netload.password.value != "":
 						onlyOneAllowed = False
-				if onlyOneAllowed:
+				if onlyOneAllowed and downloadCount == 0:
 					download.start() # Start only first download in the list
-				else:
+				elif onlyOneAllowed == False:
 					mayDownloadCount = config.plugins.RSDownloader.count_downloads.value - downloadCount
 					for download in self.downloads:
 						if download.downloading == False:
@@ -754,6 +787,8 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 			getConfigListEntry(_("Take x downloads to list:"), config.plugins.RSDownloader.count_maximal_downloads),
 			getConfigListEntry(_("Write log:"), config.plugins.RSDownloader.write_log),
 			getConfigListEntry(_("Reconnect fritz.Box before downloading:"), config.plugins.RSDownloader.reconnect_fritz),
+			getConfigListEntry(_("Don't reconnect before:"), config.plugins.RSDownloader.reconnect_start_time),
+			getConfigListEntry(_("Don't reconnect after:"), config.plugins.RSDownloader.reconnect_end_time),
 			getConfigListEntry(_("Restart failed after 10 minutes:"), config.plugins.RSDownloader.autorestart_failed),
 			getConfigListEntry(_("Mark files < 1 MB as failed:"), config.plugins.RSDownloader.mark_small_as_failed)])
 		
