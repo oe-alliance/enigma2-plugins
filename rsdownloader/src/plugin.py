@@ -173,6 +173,7 @@ def matchGet(rex, string):
 ##############################################################################
 
 def reconnect(host='fritz.box', port=49000):
+	writeLog("Reconnecting fritz.Box...")
 	http_body = '\r\n'.join((
 		'<?xml version="1.0" encoding="utf-8"?>',
 		'<s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">',
@@ -232,7 +233,6 @@ class RSDownload:
 			writeLog("Free RS-Download: %s"%self.url)
 			self.status = _("Checking")
 			if config.plugins.RSDownloader.reconnect_fritz.value and self.mayReconnect():
-				writeLog("Reconnecting fritz.Box...")
 				reconnect()
 				sleep(3)
 			data = get(self.url)
@@ -259,7 +259,7 @@ class RSDownload:
 		elif self.url.__contains__("uploaded.to") or self.url.__contains__("ul.to") and ul_username == "" and ul_password == "":
 			writeLog("Free Uploaded.to-Download: %s"%self.url)
 			self.status = _("Checking")
-			if config.plugins.RSDownloader.reconnect_fritz.value:
+			if config.plugins.RSDownloader.reconnect_fritz.value and self.mayReconnect():
 				reconnect()
 				sleep(3)
 			data = get(self.url)
