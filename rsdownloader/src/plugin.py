@@ -59,6 +59,12 @@ config.plugins.RSDownloader.reconnect_fritz = ConfigYesNo(default=False)
 config.plugins.RSDownloader.autorestart_failed = ConfigYesNo(default=False)
 config.plugins.RSDownloader.mark_small_as_failed = ConfigYesNo(default=True)
 config.plugins.RSDownloader.unrar_password = ConfigText(default="", fixed_size=False)
+config.plugins.Netload = ConfigSubsection()
+config.plugins.Netload.username = ConfigText(default="", fixed_size=False)
+config.plugins.Netload.password = ConfigText(default="", fixed_size=False)
+config.plugins.Uploaded = ConfigSubsection()
+config.plugins.Uploaded.username = ConfigText(default="", fixed_size=False)
+config.plugins.Uploaded.password = ConfigText(default="", fixed_size=False)
 
 ##############################################################################
 
@@ -216,6 +222,10 @@ class RSDownload:
 		self.size = 0
 		username = config.plugins.RSDownloader.username.value
 		password = config.plugins.RSDownloader.password.value
+		nl_username = config.plugins.Netload.username.value
+		nl_password = config.plugins.Netload.password.value
+		ul_username = config.plugins.Uploaded.username.value
+		ul_password = config.plugins.Uploaded.password.value
 		if self.url.__contains__("rapidshare.com") and username == "" and password == "":
 			writeLog("Free RS-Download: %s"%self.url)
 			self.status = _("Checking")
@@ -243,7 +253,7 @@ class RSDownload:
 						self.freeDownloadTimer = eTimer()
 						self.freeDownloadTimer.callback.append(self.freeDownloadStart)
 						self.freeDownloadTimer.start((int(seconds) + 2) * 1000, 1)
-		elif self.url.__contains__("uploaded.to") or self.url.__contains__("ul.to"):
+		elif self.url.__contains__("uploaded.to") or self.url.__contains__("ul.to") and ul_username == "" and ul_password == "":
 			writeLog("Free Uploaded.to-Download: %s"%self.url)
 			self.status = _("Checking")
 			if config.plugins.RSDownloader.reconnect_fritz.value:
@@ -285,8 +295,12 @@ class RSDownload:
 			else:
 				self.httpFailed(True, "Failed to get video url: %s"%self.url)
 		else:
-			if self.url.__contains__("rapidshare.com"):
+			if self.url.__contains__("rapidshare.com") and username != "" and password != "":
 				url = self.url.replace("http://", "http://" + username + ":" + password + "@")
+			elif (self.url.__contains__("uploaded.to") or self.url.__contains__("ul.to")) and ul_username != "" and ul_password != "":
+				url = self.url.replace("http://", "http://" + ul_username + ":" + ul_password + "@")
+			elif self.url.__contains__("netload.in") and nl_username != "" and nl_password != "":
+				url = self.url.replace("http://", "http://" + nl_username + ":" + nl_password + "@")
 			else:
 				url = self.url
 			self.status = _("Downloading")
@@ -484,19 +498,33 @@ class RS:
 			for download in self.downloads:
 				if download.downloading == True:
 					downloadCount += 1 # Count the downloaded files
-			if config.plugins.RSDownloader.username.value == "" and config.plugins.RSDownloader.password.value == "":
-				if downloadCount < 1: # Allow one download if without account
+			# Get next download
+			download = None
+			for next in self.downloads:
+				if next.downloading == False and next.status.startswith(_("Waiting")):
+					download = next
+					break
+			if download:
+				# Check URL of next download
+				onlyOneAllowed = True
+				if download.url.__contains__("rapidshare.com"):
+					if config.plugins.RSDownloader.username.value != "" and config.plugins.RSDownloader.password.value != "":
+						onlyOneAllowed = False
+				elif download.url.__contains__("uploaded.to") or download.url.__contains__("ul.to"):
+					if config.plugins.Uploaded.username.value != "" and config.plugins.Uploaded.password.value != "":
+						onlyOneAllowed = False
+				elif download.url.__contains__("netload.in"):
+					if config.plugins.Netload.username.value != "" and config.plugins.Netload.password.value != "":
+						onlyOneAllowed = False
+				if onlyOneAllowed:
+					download.start() # Start only first download in the list
+				else:
+					mayDownloadCount = config.plugins.RSDownloader.count_downloads.value - downloadCount
 					for download in self.downloads:
-						if download.downloading == False and download.status.startswith(_("Waiting")):
-							download.start() # Start first download in the list
-							break
-			else:
-				mayDownloadCount = config.plugins.RSDownloader.count_downloads.value - downloadCount
-				for download in self.downloads:
-					if download.downloading == False:
-						if mayDownloadCount > 0 and download.status == _("Waiting"):
-							download.start()
-							mayDownloadCount -= 1
+						if download.downloading == False:
+							if mayDownloadCount > 0 and download.status == _("Waiting"):
+								download.start()
+								mayDownloadCount -= 1
 
 	def addDownload(self, url):
 		error = False
@@ -706,6 +734,10 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 			getConfigListEntry(_("Download in the background:"), config.plugins.RSDownloader.onoff),
 			getConfigListEntry(_("Username:"), config.plugins.RSDownloader.username),
 			getConfigListEntry(_("Password:"), config.plugins.RSDownloader.password),
+			getConfigListEntry(_("Username (netload.in):"), config.plugins.Netload.username),
+			getConfigListEntry(_("Password (netload.in):"), config.plugins.Netload.password),
+			getConfigListEntry(_("Username (uploaded.to):"), config.plugins.Uploaded.username),
+			getConfigListEntry(_("Password (uploaded.to):"), config.plugins.Uploaded.password),
 			getConfigListEntry(_("Lists directory:"), config.plugins.RSDownloader.lists_directory),
 			getConfigListEntry(_("Downloads directory:"), config.plugins.RSDownloader.downloads_directory),
 			getConfigListEntry(_("Ignore download times:"), config.plugins.RSDownloader.ignore_time),
