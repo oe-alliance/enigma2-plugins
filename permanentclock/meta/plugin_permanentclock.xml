@@ -3,14 +3,14 @@
                     <tag type="System" />
 	  </prerequisites>
           <info language="en">
-                    <author>Ali</author>
+                    <author>AliAbdul</author>
                     <name>PermanentClock</name>
                     <packagename>enigma2-plugin-extensions-permanentclock</packagename>
                     <shortdescription>Shows the clock permanent on the screen</shortdescription>
                     <description>Shows the clock permanent on the screen</description>
           </info>
           <info language="de">
-                    <author>Ali</author>
+                    <author>AliAbdul</author>
                     <name>PermanentClock</name>
                     <packagename>enigma2-plugin-extensions-permanentclock</packagename>
                     <shortdescription>Permanente Uhrzeitanzeige auf dem TV</shortdescription>

@@ -3,7 +3,7 @@
                     <tag type="Multimedia" />
 	  </prerequisites>
           <info language="en">
-                    <author>Ali</author>
+                    <author>AliAbdul</author>
                     <name>ORFat</name>
                     <packagename>enigma2-plugin-extensions-orfat</packagename>
                     <shortdescription>Streaming modules for the orf.at web page</shortdescription>
@@ -11,7 +11,7 @@
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_orfat.jpg" />		    
           </info>
           <info language="de">
-                    <author>Ali</author>
+                    <author>AliAbdul</author>
                     <name>ORFat</name>
                     <packagename>enigma2-plugin-extensions-orfat</packagename>
                     <shortdescription>Streaming von orf.at Filmen</shortdescription>

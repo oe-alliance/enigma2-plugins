@@ -3,7 +3,7 @@
                     <tag type="Multimedia" />
 	  </prerequisites>
           <info language="en">
-                    <author>nabil1978</author>
+                    <author>AliAbdul</author>
                     <name>Mosaic</name>
                     <packagename>enigma2-plugin-extensions-mosaic</packagename>
                     <shortdescription>Preview screenshots of running tv shows</shortdescription>
@@ -11,7 +11,7 @@
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_mosaic.jpg" />		    
           </info>
           <info language="de">
-                    <author>nabil1978</author>
+                    <author>AliAbdul</author>
                     <name>Mosaic</name>
                     <packagename>enigma2-plugin-extensions-mosaic</packagename>
                     <shortdescription>Vorschaubilder gerade laufender Sendungen</shortdescription>

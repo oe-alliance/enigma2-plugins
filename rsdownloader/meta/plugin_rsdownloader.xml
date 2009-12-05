@@ -3,7 +3,7 @@
                     <tag type="Software" />
 	  </prerequisites>
           <info language="en">
-                    <author>Ali</author>
+                    <author>AliAbdul</author>
                     <name>RSDownloader</name>
                     <packagename>enigma2-plugin-extensions-rsdownloader</packagename>
                     <shortdescription>Download files from Rapidshare</shortdescription>
@@ -11,7 +11,7 @@
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_rsdownloader_en.jpg" />		    
           </info>
           <info language="de">
-                    <author>Ali</author>
+                    <author>AliAbdul</author>
                     <name>RSDownloader</name>
                     <packagename>enigma2-plugin-extensions-rsdownloader</packagename>
 		    <shortdescription>Dateien von Rapidshare herunterladen</shortdescription>
