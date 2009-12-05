@@ -5,9 +5,10 @@
 ##
 from base64 import encodestring
 from Components.ActionMap import ActionMap
-from Components.config import config, ConfigInteger, ConfigText, ConfigYesNo, ConfigClock, ConfigSubsection, getConfigListEntry
+from Components.config import config, ConfigClock, ConfigInteger, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Console import Console as eConsole
+from Components.FileList import FileList
 from Components.Label import Label
 from Components.Language import language
 from Components.MenuList import MenuList
@@ -15,7 +16,7 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Components.ScrollLabel import ScrollLabel
 from container.decrypt import decrypt
 from enigma import eListboxPythonMultiContent, eTimer, gFont, RT_HALIGN_CENTER, RT_HALIGN_RIGHT
-from os import environ, listdir, remove
+from os import environ, listdir, remove, system
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Console import Console as ConsoleScreen
@@ -55,7 +56,8 @@ config.plugins.RSDownloader.download_sunday = ConfigYesNo(default=True)
 config.plugins.RSDownloader.count_downloads = ConfigInteger(default=3, limits=(1, 10))
 config.plugins.RSDownloader.count_maximal_downloads = ConfigInteger(default=40, limits=(1, 1000))
 config.plugins.RSDownloader.write_log = ConfigYesNo(default=True)
-config.plugins.RSDownloader.reconnect_fritz = ConfigYesNo(default=False)
+config.plugins.RSDownloader.reconnect_type = ConfigSelection(choices={"script": _("Script"), "fritz": _("fritz.Box"), "no": _("No reconnect")}, default="fritz")
+config.plugins.RSDownloader.reconnect_script = ConfigText(default="", fixed_size=False)
 config.plugins.RSDownloader.autorestart_failed = ConfigYesNo(default=False)
 config.plugins.RSDownloader.mark_small_as_failed = ConfigYesNo(default=True)
 config.plugins.RSDownloader.unrar_password = ConfigText(default="", fixed_size=False)
@@ -199,6 +201,16 @@ def reconnect(host='fritz.box', port=49000):
 
 ##############################################################################
 
+def reconnect_script():
+	script = config.plugins.RSDownloader.reconnect_script.value
+	if script != "" and fileExists(script):
+		writeLog("Reconnecting with script %s..."%script)
+		system(script)
+	else:
+		writeLog("Error: Reconnect script %s not found!"%script)
+
+##############################################################################
+
 std_headers = {
 	'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2',
 	'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
@@ -218,6 +230,36 @@ class RSDownload:
 		self.name = self.url.split("/")[-1]
 		self.finishCallbacks = []
 
+	def mayReconnect(self):
+		start = config.plugins.RSDownloader.reconnect_start_time.value
+		end = config.plugins.RSDownloader.reconnect_end_time.value
+		t = localtime()
+		hour_now = t[3]
+		minute_now = t[4]
+		hour_start = start[0]
+		minute_start = start[1]
+		hour_end = end[0]
+		minute_end = end[1]
+		if start == end: # Same start and end-time
+			return True
+		elif hour_end < hour_start: # Different days!!!
+			if hour_now > hour_start or hour_now < hour_end:
+				return True
+			elif hour_now == hour_start and minute_now > minute_start:
+				return True
+			elif hour_now == hour_end and minute_now < minute_end:
+				return True
+			else:
+				return False
+		elif hour_now > hour_start and hour_now < hour_end: # Same day...
+			return True
+		elif hour_now == hour_start and minute_now > minute_start: # Same day, same start-hour...
+			return True
+		elif hour_now == hour_end and minute_now < minute_end: # Same day, same end-hour...
+			return True
+		else:
+			return False
+
 	def start(self):
 		writeLog("Downloading: %s"%self.url)
 		self.downloading = True
@@ -232,8 +274,11 @@ class RSDownload:
 		if self.url.__contains__("rapidshare.com") and username == "" and password == "":
 			writeLog("Free RS-Download: %s"%self.url)
 			self.status = _("Checking")
-			if config.plugins.RSDownloader.reconnect_fritz.value and self.mayReconnect():
+			if config.plugins.RSDownloader.reconnect_type.value == "fritz" and self.mayReconnect():
 				reconnect()
+				sleep(3)
+			elif config.plugins.RSDownloader.reconnect_type.value == "script" and self.mayReconnect():
+				reconnect_script()
 				sleep(3)
 			data = get(self.url)
 			url = matchGet('<form[^>]+action="([^"]+)', data)
@@ -256,11 +301,14 @@ class RSDownload:
 						self.freeDownloadTimer = eTimer()
 						self.freeDownloadTimer.callback.append(self.freeDownloadStart)
 						self.freeDownloadTimer.start((int(seconds) + 2) * 1000, 1)
-		elif self.url.__contains__("uploaded.to") or self.url.__contains__("ul.to") and ul_username == "" and ul_password == "":
+		elif (self.url.__contains__("uploaded.to") or self.url.__contains__("ul.to")) and ul_username == "" and ul_password == "":
 			writeLog("Free Uploaded.to-Download: %s"%self.url)
 			self.status = _("Checking")
-			if config.plugins.RSDownloader.reconnect_fritz.value and self.mayReconnect():
+			if config.plugins.RSDownloader.reconnect_type.value == "fritz" and self.mayReconnect():
 				reconnect()
+				sleep(3)
+			elif config.plugins.RSDownloader.reconnect_type.value == "script" and self.mayReconnect():
+				reconnect_script()
 				sleep(3)
 			data = get(self.url)
 			tmp = re.search(r"Or wait (\d+) minutes", data)
@@ -432,36 +480,6 @@ class RS:
 		self.checkTimer = eTimer()
 		self.checkTimer.callback.append(self.startDownloading)
 		self.checkTimer.start(5000*60, False)
-
-	def mayReconnect(self):
-		start = config.plugins.RSDownloader.reconnect_start_time.value
-		end = config.plugins.RSDownloader.reconnect_end_time.value
-		t = localtime()
-		hour_now = t[3]
-		minute_now = t[4]
-		hour_start = start[0]
-		minute_start = start[1]
-		hour_end = end[0]
-		minute_end = end[1]
-		if start == end: # Same start and end-time
-			return True
-		elif hour_end < hour_start: # Different days!!!
-			if hour_now > hour_start or hour_now < hour_end:
-				return True
-			elif hour_now == hour_start and minute_now > minute_start:
-				return True
-			elif hour_now == hour_end and minute_now < minute_end:
-				return True
-			else:
-				return False
-		elif hour_now > hour_start and hour_now < hour_end: # Same day...
-			return True
-		elif hour_now == hour_start and minute_now > minute_start: # Same day, same start-hour...
-			return True
-		elif hour_now == hour_end and minute_now < minute_end: # Same day, same end-hour...
-			return True
-		else:
-			return False
 
 	def mayDownload(self):
 		if config.plugins.RSDownloader.onoff.value == False:
@@ -747,6 +765,27 @@ class ChangedScreen(Screen):
 
 ##############################################################################
 
+class ReconnectScriptSelector(ChangedScreen):
+	skin = """
+		<screen position="center,center" size="560,450" title="RS Downloader">
+			<widget name="list" position="0,0" size="560,450" />
+		</screen>"""
+
+	def __init__(self, session):
+		ChangedScreen.__init__(self, session)
+		self["list"] = FileList("/", matchingPattern="(?i)^.*\.(sh)")
+		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
+
+	def okClicked(self):
+		if self["list"].canDescent():
+			self["list"].descent()
+		else:
+			cur = self["list"].getCurrent()
+			if cur:
+				self.close("%s/%s"%(self["list"].getCurrentDirectory(), cur[0][0]))
+
+##############################################################################
+
 class RSConfig(ConfigListScreen, ChangedScreen):
 	skin = """
 		<screen position="center,center" size="560,450" title="RS Downloader">
@@ -786,7 +825,8 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 			getConfigListEntry(_("Maximal downloads:"), config.plugins.RSDownloader.count_downloads),
 			getConfigListEntry(_("Take x downloads to list:"), config.plugins.RSDownloader.count_maximal_downloads),
 			getConfigListEntry(_("Write log:"), config.plugins.RSDownloader.write_log),
-			getConfigListEntry(_("Reconnect fritz.Box before downloading:"), config.plugins.RSDownloader.reconnect_fritz),
+			getConfigListEntry(_("Reconnect type:"), config.plugins.RSDownloader.reconnect_type),
+			getConfigListEntry(_("Choose reconnect script:"), config.plugins.RSDownloader.reconnect_script),
 			getConfigListEntry(_("Don't reconnect before:"), config.plugins.RSDownloader.reconnect_start_time),
 			getConfigListEntry(_("Don't reconnect after:"), config.plugins.RSDownloader.reconnect_end_time),
 			getConfigListEntry(_("Restart failed after 10 minutes:"), config.plugins.RSDownloader.autorestart_failed),
@@ -803,6 +843,28 @@ class RSConfig(ConfigListScreen, ChangedScreen):
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close()
+
+	def keyLeft(self):
+		sel = self["config"].getCurrent()[1]
+		if sel == config.plugins.RSDownloader.reconnect_script:
+			self.reconnectScriptSelector()
+		else:
+			ConfigListScreen.keyLeft(self)
+
+	def keyRight(self):
+		sel = self["config"].getCurrent()[1]
+		if sel == config.plugins.RSDownloader.reconnect_script:
+			self.reconnectScriptSelector()
+		else:
+			ConfigListScreen.keyRight(self)
+
+	def reconnectScriptSelector(self):
+		self.session.openWithCallback(self.reconnectScriptSelectorCallback, ReconnectScriptSelector)
+
+	def reconnectScriptSelectorCallback(self, callback=None):
+		if callback:
+			config.plugins.RSDownloader.reconnect_script.value = callback
+			self["config"].setList(self["config"].getList())
 
 ##############################################################################
 
