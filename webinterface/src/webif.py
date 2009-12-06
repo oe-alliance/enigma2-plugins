@@ -138,7 +138,7 @@ class TextToHTML(Converter):
 		Converter.__init__(self, arg)
 
 	def getHTML(self, id):
-		return self.source.text # encode & etc. here!
+		return self.source.text.replace('\xc2\x86', '').replace('\xc2\x87', '') # encode & etc. here!
 
 #===============================================================================
 # TextToXML
@@ -150,7 +150,7 @@ class TextToXML(Converter):
 		Converter.__init__(self, arg)
 
 	def getHTML(self, id):
-		return escape_xml(self.source.text).replace("\x19", "").replace("\x1c", "").replace("\x1e", "")
+		return escape_xml(self.source.text).replace("\x19", "").replace("\x1c", "").replace("\x1e", "").replace('\xc2\x86', '').replace('\xc2\x87', '')
 
 #===============================================================================
 # TextToURL
@@ -162,7 +162,7 @@ class TextToURL(Converter):
 		Converter.__init__(self, arg)
 
 	def getHTML(self, id):
-		return self.source.text.replace(" ", "%20").replace("+", "%2b").replace("&", "%26")
+		return self.source.text.replace(" ", "%20").replace("+", "%2b").replace("&", "%26").replace('\xc2\x86', '').replace('\xc2\x87', '')
 
 #===============================================================================
 # ReturnEmptyXML
@@ -234,16 +234,18 @@ class SimpleListFiller(Converter):
 				item = ""
 				
 			for (element, filternum) in list:
+				item = str(item).replace('\xc2\x86', '').replace('\xc2\x87', '')
+				
 				if not filternum:
 					append(element)
 				elif filternum == 2:
-					append(str(item).replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
+					append(item.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 				elif filternum == 3:					
-					append(escape_xml(str(item)))
+					append(escape_xml(item))
 				elif filternum == 4:
-					append(str(item).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
+					append(item.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				elif filternum == 5:
-					append(quote(str(item)))
+					append(quote(item))
 				elif filternum == 6:
 					time = parseint(item) or 0
 					t = localtime(time)
@@ -253,7 +255,7 @@ class SimpleListFiller(Converter):
 					t = localtime(time)
 					append("%d min" % (time / 60))
 				else:
-					append(str(item))
+					append(item)
 		# (this will be done in c++ later!)
 
 		return ''.join(strlist)		
@@ -294,7 +296,7 @@ class ListFiller(Converter):
 				#None becomes ""
 				curitem = ""
 				if filternum:
-					curitem = item[element]
+					curitem = str(item[element]).replace('\xc2\x86', '').replace('\xc2\x87', '')
 					if curitem is None:
 						curitem = ""
 				else:
@@ -304,13 +306,13 @@ class ListFiller(Converter):
 				if not filternum:
 					append(element)
 				elif filternum == 2:
-					append(str(curitem).replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
+					append(curitem.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 				elif filternum == 3:
-					append(escape_xml(str(curitem)))
+					append(escape_xml(curitem))
 				elif filternum == 4:
-					append(str(curitem).replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
+					append(curitem.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				elif filternum == 5:
-					append(quote(str(curitem)))
+					append(quote(curitem))
 				elif filternum == 6:
 					from time import localtime
 					time = int(float(curitem)) or 0
@@ -322,7 +324,7 @@ class ListFiller(Converter):
 					t = localtime(time)
 					append("%d min" % (time / 60))					
 				else:
-					append(str(curitem))
+					append(curitem)
 		# (this will be done in c++ later!)
 
 		return ''.join(strlist)

@@ -39,6 +39,7 @@ class ServiceListRecursive(Source):
 
 				subxml = ""
 				for (ref, name) in sub:
+					name = name.replace('\xc2\x86', '').replace('\xc2\x87', '')
 					subxml += "\t\t\t<e2service>\n"
 					subxml += "\t\t\t\t<e2servicereference>%s</e2servicereference>\n\t\t\t\t<e2servicename>%s</e2servicename>\n" % (self.filterXML(ref), self.filterXML(name))
 					subxml += "\t\t\t</e2service>\n"
@@ -46,7 +47,7 @@ class ServiceListRecursive(Source):
 			else:
 				self.xml += "\t\t<e2service>\n"
 				bouquet = False
-
+			
 			self.xml += "\t\t<e2servicereference>%s</e2servicereference>\n\t\t<e2servicename>%s</e2servicename>\n" % (self.filterXML(item[0]), self.filterXML(item[1]))
 
 			if bouquet:
@@ -60,7 +61,7 @@ class ServiceListRecursive(Source):
 		return self.xml
 
 	def filterXML(self, item):
-		item = item.replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;")
+		item = item.replace("&", "&amp;").replace("<", "&lt;").replace('"', '&quot;').replace(">", "&gt;").replace('\xc2\x86', '').replace('\xc2\x87', '')
 		return item
 
 	def getServiceList(self, ref):

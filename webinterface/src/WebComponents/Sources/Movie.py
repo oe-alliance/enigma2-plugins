@@ -91,12 +91,13 @@ class Movie(Source):
 			ext = event and event.getExtendedDescription() or ""
 
 			filename = "/" + "/".join(serviceref.toString().split("/")[1:])
-
+			servicename = ServiceReference(serviceref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+			
 			if not tag or tag in info.getInfoString(serviceref, iServiceInformation.sTags).lower():
 				""" add movie only to list, if a given tag is applied to the movie """
 				list.append((
 					serviceref.toString(),
-					ServiceReference(serviceref).getServiceName(),
+					servicename,
 					info.getInfoString(serviceref, iServiceInformation.sDescription),
 					rtime,
 					begin_string,
