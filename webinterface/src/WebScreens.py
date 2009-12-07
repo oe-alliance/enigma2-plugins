@@ -351,3 +351,18 @@ class DeviceInfoWebScreen(WebScreen):
 		self["WebIfVersion"] = StaticText(config.plugins.Webinterface.version.value)
 		self["FpVersion"] = StaticText(str(getFPVersion()))
 		self["DeviceName"] = StaticText(hw.get_device_name())
+
+class ServicePlayableWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		from WebComponents.Sources.ServicePlayable import ServicePlayable
+		
+		self["ServicePlayable"] = ServicePlayable(session, type=ServicePlayable.SINGLE)
+
+class ServiceListPlayableWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		from WebComponents.Sources.ServicePlayable import ServicePlayable
+		
+		self["ServiceListPlayable"] = ServicePlayable(session, type=ServicePlayable.BOUQUET)
+		
