@@ -123,8 +123,12 @@ def FillE2TimerList(xmlstring, sreference = None):
 	except: return E2TimerList
 	for timer in root.findall("e2timer"):
 		go = False
-		state = int(timer.findtext("e2state", 0))
-		disabled = int(timer.findtext("e2disabled", 0))
+		state = 0
+		try: state = int(timer.findtext("e2state", 0))
+		except: state = 0
+		disabled = 0
+		try: disabled = int(timer.findtext("e2disabled", 0))
+		except: disabled = 0
 		servicereference = str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore'))
 		if sreference is None:
 			go = True
@@ -132,22 +136,44 @@ def FillE2TimerList(xmlstring, sreference = None):
 			if sreference.upper() == servicereference.upper() and state != TimerEntry.StateEnded and not disabled:
 				go = True
 		if go:
-			eventId = timer.findtext("e2eit", -1)
-			if eventId is None: eventId = -1
+			timebegin = 0
+			timeend = 0
+			duration = 0
+			startprepare = 0
+			repeated = 0
+			justplay = 0
+			afterevent = 0
+			eventId = -1
+			try: timebegin = int(timer.findtext("e2timebegin", 0))
+			except: timebegin = 0
+			try: timeend = int(timer.findtext("e2timeend", 0))
+			except: timeend = 0
+			try: duration = int(timer.findtext("e2duration", 0))
+			except: duration = 0
+			try: startprepare = int(timer.findtext("e2startprepare", 0))
+			except: startprepare = 0
+			try: repeated = int(timer.findtext("e2repeated", 0))
+			except: repeated = 0
+			try: justplay = int(timer.findtext("e2justplay", 0)) 
+			except: justplay = 0
+			try: afterevent = int(timer.findtext("e2afterevent", 0))
+			except: afterevent = 0
+			try: eventId = int(timer.findtext("e2eit", -1))
+			except: eventId = -1
 			E2TimerList.append(E2Timer(
 				servicereference = servicereference,
 				servicename = str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')),
 				name = str(timer.findtext("e2name", '').encode("utf-8", 'ignore')),
 				disabled = disabled,
-				timebegin = int(timer.findtext("e2timebegin", 0)),
-				timeend = int(timer.findtext("e2timeend", 0)),
-				duration = int(timer.findtext("e2duration", 0)),
-				startprepare = int(timer.findtext("e2startprepare", 0)),
+				timebegin = timebegin,
+				timeend = timeend,
+				duration = duration,
+				startprepare = startprepare,
 				state = state,
-				repeated = int(timer.findtext("e2repeated", 0)),
-				justplay = int(timer.findtext("e2justplay", 0)),
+				repeated = repeated,
+				justplay = justplay,
 				eventId = eventId,
-				afterevent = int(timer.findtext("e2afterevent", 0)),
+				afterevent = afterevent,
 				dirname = str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
 				description = str(timer.findtext("e2description", '').encode("utf-8", 'ignore')),
 				type = 0))
@@ -159,13 +185,16 @@ def FillE1TimerList(xmlstring, sreference = None):
 	try: root = xml.etree.cElementTree.fromstring(xmlstring)
 	except: return E1TimerList
 	for timer in root.findall("timer"):
-		typedata = int(timer.findtext("typedata", 0))
+		try: typedata = int(timer.findtext("typedata", 0))
+		except: typedata = 0
 		for service in timer.findall("service"):
 			servicereference = str(service.findtext("reference", '').encode("utf-8", 'ignore'))
 			servicename = str(service.findtext("name", 'n/a').encode("utf-8", 'ignore'))
 		for event in timer.findall("event"):
-			timebegin = int(event.findtext("start", 0))
-			duration = int(event.findtext("duration", 0))
+			try: timebegin = int(event.findtext("start", 0))
+			except: timebegin = 0
+			try: duration = int(event.findtext("duration", 0))
+			except: duration = 0
 			description = str(event.findtext("description", '').encode("utf-8", 'ignore'))
 		go = False
 		if sreference is None:

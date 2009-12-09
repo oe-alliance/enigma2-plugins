@@ -60,6 +60,8 @@ from Screens.ChannelSelection import service_types_tv
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import ConfigSubsection, ConfigSubList, ConfigIP, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, getConfigListEntry, configfile
 
+from Components.GUIComponent import GUIComponent
+
 # for localized messages
 from . import _
 
@@ -229,7 +231,6 @@ class RemoteTimer(Screen):
 	def __init__(self, session, partnerboxentry):
 		self.session = session
 		Screen.__init__(self, session)
-		self["timerlist"] = E2TimerMenu([])
 		self["key_red"] = Label(_("Delete"))
 		self["key_green"] = Label() # Dummy, kommt eventuell noch was
 		self["key_yellow"] = Label(_("EPG Selection")) 
@@ -258,6 +259,7 @@ class RemoteTimer(Screen):
 		self.oldend = 0
 		self.oldtype = 0
 		self.Locations = []
+		self["timerlist"] = E2TimerMenu(self.enigma_type)
 		
 	def getLocations(self):
 		if self.enigma_type == 0:
@@ -272,14 +274,16 @@ class RemoteTimer(Screen):
 		self.addTimer()
 
 	def addTimer(self):
-		cur = self["timerlist"].getCurrent()
-		if cur is None:
-				return
-		if cur[0].repeated == 0:
-			self.oldstart = cur[0].timebegin
-			self.oldend = cur[0].timeend
-			self.oldtype = cur[0].type
-			self.session.openWithCallback(self.RemoteTimerEntryFinished, RemoteTimerEntry,cur[0], self.Locations)
+		try:
+			sel = self["timerlist"].l.getCurrentSelection()[0]
+		except: return
+		if sel is None:
+			return
+		if sel.repeated == 0:
+			self.oldstart = sel.timebegin
+			self.oldend = sel.timeend
+			self.oldtype = sel.type
+			self.session.openWithCallback(self.RemoteTimerEntryFinished, RemoteTimerEntry,sel, self.Locations)
 		else:
 			text = "Repeated Timer are not supported!"
 			self.session.open(MessageBox,text,  MessageBox.TYPE_INFO)
@@ -375,10 +379,9 @@ class RemoteTimer(Screen):
 		self.E2TimerList = []
 		if self.enigma_type == 0:
 			self.E2TimerList = FillE2TimerList(xmlstring)
-			self["timerlist"].buildList(self.E2TimerList)
 		else:
 			self.E2TimerList = FillE1TimerList(xmlstring)
-			self["timerlist"].buildE1List(self.E2TimerList)
+		self["timerlist"].setList([ (x,) for x in self.E2TimerList])
 
 	def EPGList(self):
 		self.session.openWithCallback(self.CallbackEPGList, RemoteTimerBouquetList, self.E2TimerList, self.PartnerboxEntry, 0)
@@ -623,12 +626,20 @@ class RemoteTimerChannelList(Screen):
 		else:
 			url = self.http + "/video.m3u"
 			sendPartnerBoxWebCommand(url, None,10, self.username, self.password).addCallback(self.StreamTV).addErrback(self.ChannelListDownloadError)
+			
+	def MoveItem(self, next):
+		self.mode = self.REMOTE_TIMER_MODE
+		self.session.nav.stopService()
+		if next:
+			self["channellist"].moveSelection(eListbox.moveDown)
+		else:
+			self["channellist"].moveSelection(eListbox.moveUp)
 	
 	def StreamTV(self, connectstring):
 			self.session.nav.stopService()
 			sref = eServiceReference(ENIGMA_WEBSERVICE_ID, 0, connectstring)
 			self.session.nav.playService(sref)
-			self.session.openWithCallback(self.PlayRemoteStream, RemotePlayer, self["channellist"].l.getCurrentSelection()[0].servicename,self["channellist"].l.getCurrentSelection()[0].eventtitle, self["channellist"].l.getCurrentSelection()[0].eventstart, self["channellist"].l.getCurrentSelection()[0].eventduration, self.PartnerboxEntry, self["channellist"].l.getCurrentSelection()[0].servicereference)
+			self.session.openWithCallback(self.PlayRemoteStream, RemotePlayer, self["channellist"].l.getCurrentSelection()[0].servicename,self["channellist"].l.getCurrentSelection()[0].eventtitle, self["channellist"].l.getCurrentSelection()[0].eventstart, self["channellist"].l.getCurrentSelection()[0].eventduration, self.PartnerboxEntry, self["channellist"].l.getCurrentSelection()[0].servicereference, self.session.current_dialog)
 	
 	def EPGEvent(self):
 		sel = self["channellist"].l.getCurrentSelection()[0]
@@ -803,7 +814,7 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 			<widget name="IP" zPosition="2" position="361,473" size="300,30" halign="right" font="Regular;16" foregroundColor="#F0F0F0" backgroundColor="#302C2C39" transparent="1" />
 		</screen>"""
 	
-	def __init__(self, session, ServiceName, EventTitle, eventstart, eventduration, partnerboxentry, servicereference):
+	def __init__(self, session, ServiceName, EventTitle, eventstart, eventduration, partnerboxentry, servicereference, parent = None):
 		self.session = session
 		Screen.__init__(self, session)
 		InfoBarAudioSelection.__init__(self)
@@ -825,6 +836,8 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 		{
 			"ok": self.Infobar,
 			"back": self.close,
+			"right": self.nextChannel,
+			"left": self.previousChannel,
 		}, -1)
 		self.password = partnerboxentry.password.value
 		self.username = "root"
@@ -832,8 +845,20 @@ class RemotePlayer(Screen, InfoBarAudioSelection):
 		self.onLayoutFinish.append(self.startRun)
 		self.onClose.append(self.__onClose)
 		
+		self.parent = parent
+		
 		self.Timer = eTimer()
 		self.Timer.timeout.get().append(self.TimerTimeout)
+		
+	def nextChannel(self):
+		if self.parent is not None:
+			self.parent.MoveItem(True)
+			self.close()
+	
+	def previousChannel(self):
+		if self.parent is not None:
+			self.parent.MoveItem(False)
+			self.close()
 		
 	def TimerTimeout(self):
 		if self.Timer.isActive():
@@ -1206,129 +1231,147 @@ class RemoteTimerEPGList(Screen):
 					self.ListCurrentIndex = 0
 			else:
 				self.getEPGList()
-			
-class E2TimerMenu(MenuList):
-	def __init__(self, list, enableWrapAround = True):
-		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
+				
+class E2TimerMenu(GUIComponent, object):
+
+	def __init__(self,enigma_type):
+		GUIComponent.__init__(self)
+		self.l = eListboxPythonMultiContent()
+		if enigma_type == 0:
+			self.l.setBuildFunc(self.buildEntry)
+		else:
+			self.l.setBuildFunc(self.buildEntryE1)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
-	def postWidgetCreate(self, instance):
-		MenuList.postWidgetCreate(self, instance)
-		instance.setItemHeight(70)
+		self.l.setItemHeight(70)
 
-	def buildList(self,listnew):
-		self.list=[]
+	def buildEntry(self, timer):
 		width = self.l.getItemSize().width()
-		for timer in listnew:
-			res = [ timer ]
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.servicename))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 30, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.name))
-
-			repeatedtext = ""
-			days = [ _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun") ]
-			if timer.repeated:
-				flags = timer.repeated
-				count = 0
-				for x in range(0, 7):
-						if (flags & 1 == 1):
-							if (count != 0):
-								repeatedtext += ", "
-							repeatedtext += days[x]
-							count += 1
-						flags = flags >> 1
-				if timer.justplay:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s "+ _("(ZAP)")) % (FuzzyTime(timer.timebegin)[1]))))
-				else:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin)[1], FuzzyTime(timer.timeend)[1], (timer.timeend - timer.timebegin) / 60))))
-			else:
-				if timer.justplay:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s " + _("(ZAP)")) % (FuzzyTime(timer.timebegin)))))
-				else:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,)))))
-			
-			if timer.state == TimerEntry.StateWaiting:
-				state = _("waiting")
-			elif timer.state == TimerEntry.StatePrepared:
-				state = _("about to start")
-			elif timer.state == TimerEntry.StateRunning:
-				if timer.justplay:
-					state = _("zapped")
-				else:
-					state = _("recording...")
-			elif timer.state == TimerEntry.StateEnded:
-				state = _("done!")
-			else:
-				state = _("<unknown>")
-
-			if timer.disabled:
-				state = _("disabled")
-
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-150, 50, 150, 20, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, state))
-
-			if timer.disabled:
-				png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/redx.png"))
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 490, 5, 40, 40, png))
-
-			self.list.append(res)
-		self.l.setList(self.list)
-		self.moveToIndex(0)
-		
-	def buildE1List(self,listnew):
-		self.list=[]
-		width = self.l.getItemSize().width()
-		for timer in listnew:
-			res = [ timer ]
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.servicename))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 30, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.description))
-
-			repeatedtext = ""
-			days = [ _("Sun"), _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat") ]
-			if timer.type & PlaylistEntry.isRepeating :
-				mask = PlaylistEntry.Su
-				count = 0
-				for x in range(0, 7):
-					if timer.type & mask:
+		res = [ timer ]
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.servicename))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 30, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.name))
+		repeatedtext = ""
+		days = [ _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun") ]
+		if timer.repeated:
+			flags = timer.repeated
+			count = 0
+			for x in range(0, 7):
+					if (flags & 1 == 1):
 						if (count != 0):
 							repeatedtext += ", "
 						repeatedtext += days[x]
 						count += 1
-					mask *= 2
-				if timer.type & PlaylistEntry.SwitchTimerEntry:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-170, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s "+ _("(ZAP)")) % (FuzzyTime(timer.timebegin)[1]))))
-				elif timer.type & PlaylistEntry.RecTimerEntry:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-170, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin)[1], FuzzyTime(timer.timeend)[1], (timer.timeend - timer.timebegin) / 60))))
+					flags = flags >> 1
+			if timer.justplay:
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s "+ _("(ZAP)")) % (FuzzyTime(timer.timebegin)[1]))))
 			else:
-				if timer.type & PlaylistEntry.SwitchTimerEntry:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-170, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ") ") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,))) + _("(ZAP)")))
-				elif timer.type & PlaylistEntry.RecTimerEntry:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-170, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,)))))
-			
-			if timer.type & PlaylistEntry.stateWaiting:
-				state = _("waiting")
-			elif timer.type & PlaylistEntry.stateRunning:
-				if timer.type & PlaylistEntry.SwitchTimerEntry:
-					state = _("zapped")
-				elif timer.type & PlaylistEntry.RecTimerEntry:
-					state = _("recording...")
-			elif timer.type & PlaylistEntry.stateFinished:
-				state = _("done!")
-			elif timer.type & PlaylistEntry.stateError:
-				if timer.type & PlaylistEntry.errorNoSpaceLeft:
-					state = _("Error: No space left")
-				elif timer.type & PlaylistEntry.errorUserAborted:
-					state = _("Error: User aborted")
-				elif timer.type & PlaylistEntry.errorZapFailed:
-					state = _("Error: Zap failed")
-				elif timer.type & PlaylistEntry.errorOutdated:
-					state = _("Error: Outdated")
-				else:
-					state = "Error: " + _("<unknown>")
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin)[1], FuzzyTime(timer.timeend)[1], (timer.timeend - timer.timebegin) / 60))))
+		else:
+			if timer.justplay:
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s " + _("(ZAP)")) % (FuzzyTime(timer.timebegin)))))
 			else:
-				state = _("<unknown>")
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, width-170, 50, 170, 20, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, state))
-			self.list.append(res)
-		self.l.setList(self.list)
-		self.moveToIndex(0)
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-150, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,)))))
+		
+		if timer.state == TimerEntry.StateWaiting:
+			state = _("waiting")
+		elif timer.state == TimerEntry.StatePrepared:
+			state = _("about to start")
+		elif timer.state == TimerEntry.StateRunning:
+			if timer.justplay:
+				state = _("zapped")
+			else:
+				state = _("recording...")
+		elif timer.state == TimerEntry.StateEnded:
+			state = _("done!")
+		else:
+			state = _("<unknown>")
+
+		if timer.disabled:
+			state = _("disabled")
+
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, width-150, 50, 150, 20, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, state))
+
+		if timer.disabled:
+			png = LoadPixmap(resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/redx.png"))
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 490, 5, 40, 40, png))
+		
+		return res
+		
+	def buildEntryE1(self,timer):
+		width = self.l.getItemSize().width()
+		res = [ timer ]
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 30, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.servicename))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 30, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, timer.description))
+
+		repeatedtext = ""
+		days = [ _("Sun"), _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat") ]
+		if timer.type & PlaylistEntry.isRepeating :
+			mask = PlaylistEntry.Su
+			count = 0
+			for x in range(0, 7):
+				if timer.type & mask:
+					if (count != 0):
+						repeatedtext += ", "
+					repeatedtext += days[x]
+					count += 1
+				mask *= 2
+			if timer.type & PlaylistEntry.SwitchTimerEntry:
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-170, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s "+ _("(ZAP)")) % (FuzzyTime(timer.timebegin)[1]))))
+			elif timer.type & PlaylistEntry.RecTimerEntry:
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-170, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin)[1], FuzzyTime(timer.timeend)[1], (timer.timeend - timer.timebegin) / 60))))
+		else:
+			if timer.type & PlaylistEntry.SwitchTimerEntry:
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-170, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ") ") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,))) + _("(ZAP)")))
+			elif timer.type & PlaylistEntry.RecTimerEntry:
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 50, width-170, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,)))))
+		
+		if timer.type & PlaylistEntry.stateWaiting:
+			state = _("waiting")
+		elif timer.type & PlaylistEntry.stateRunning:
+			if timer.type & PlaylistEntry.SwitchTimerEntry:
+				state = _("zapped")
+			elif timer.type & PlaylistEntry.RecTimerEntry:
+				state = _("recording...")
+		elif timer.type & PlaylistEntry.stateFinished:
+			state = _("done!")
+		elif timer.type & PlaylistEntry.stateError:
+			if timer.type & PlaylistEntry.errorNoSpaceLeft:
+				state = _("Error: No space left")
+			elif timer.type & PlaylistEntry.errorUserAborted:
+				state = _("Error: User aborted")
+			elif timer.type & PlaylistEntry.errorZapFailed:
+				state = _("Error: Zap failed")
+			elif timer.type & PlaylistEntry.errorOutdated:
+				state = _("Error: Outdated")
+			else:
+				state = "Error: " + _("<unknown>")
+		else:
+			state = _("<unknown>")
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, width-170, 50, 170, 20, 1, RT_HALIGN_RIGHT|RT_VALIGN_CENTER, state))
+		return res
+	def getCurrent(self):
+		cur = self.l.getCurrentSelection()
+		return cur and cur[0]
+	
+	GUI_WIDGET = eListbox
+	
+	def postWidgetCreate(self, instance):
+		instance.setContent(self.l)
+
+	def preWidgetRemove(self, instance):
+		instance.setContent(None)
+
+	def moveToIndex(self, index):
+		self.instance.moveSelectionTo(index)
+
+	def getCurrentIndex(self):
+		return self.instance.getCurrentIndex()
+
+	currentIndex = property(getCurrentIndex, moveToIndex)
+	currentSelection = property(getCurrent)
+
+	def setList(self, list):
+		self.l.setList(list)	
 		
 class E2BouquetList(MenuList):
 	def __init__(self, list, enableWrapAround = True):
@@ -1375,7 +1418,10 @@ class E2ChannelList(MenuList):
 		
 	def moveSelectionTo(self,index):
 		self.moveToIndex(index)
-	
+
+	def moveSelection(self, how):
+		 self.instance.moveSelection(how)
+
 	def buildList(self,listnew):
 		self.list=[]
 		width = self.l.getItemSize().width()
