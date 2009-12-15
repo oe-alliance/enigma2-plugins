@@ -4,7 +4,7 @@
 	  </prerequisites>
           <info language="en">
                     <author>AHolst</author>
-                    <name>AHolst</name>
+                    <name>TagEditor</name>
                     <packagename>enigma2-plugin-extensions-tageditor</packagename>
                     <shortdescription>Edit tags of recorded movies</shortdescription>
                     <description>Edit tags of recorded movies</description>
@@ -12,7 +12,7 @@
           </info>
           <info language="de">
                     <author>AHolst</author>
-                    <name>AHolst</name>
+                    <name>TagEditor</name>
                     <packagename>enigma2-plugin-extensions-tageditor</packagename>
                     <shortdescription>Bearbeiten Sie die Tags Ihrer Filme.</shortdescription>
                     <description>Bearbeiten Sie die Tags Ihrer Filme.</description>
