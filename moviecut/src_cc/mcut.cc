@@ -1,4 +1,4 @@
- /* Copyright (C) 2007, 2008 Anders Holst
+ /* Copyright (C) 2007, 2008, 2009 Anders Holst
   *
   * This program is free software; you can redistribute it and/or
   * modify it under the terms of the GNU General Public License as
@@ -24,13 +24,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <byteswap.h>
 
 #define LEN 24064
 
-static off64_t* buf0 = 0;
-static off64_t* buf1 = 0;
 static off64_t time_offset;
 static off64_t size_offset;
+static off64_t curr_size_offset;
 
 int use_leadin = 1;
 int use_leadout = 1;
@@ -65,27 +65,9 @@ double strtotime(char* str)
   return (double)tt + tmp*t1;
 }
 
-char* timetostr(double tm)
-{
-  static char buf[15];
-  int r = (int)(tm/60);
-  sprintf(buf, "%d:%d:%.3f", r/60, r%60, tm-60*r);
-  return buf;
-}
-
-inline unsigned int byteswop(unsigned int n)
-{
-  return ((n&0xff000000)>>24) | ((n&0xff0000)>>8) | ((n&0xff00)<<8) | ((n&0xff)<<24);
-}
-
-inline unsigned long long int byteswopl(unsigned long long int n)
-{
-  return (n>>56) | ((n>>40)&0xff00) | ((n>>24)&0xff0000) | ((n>>8)&0xff000000) | ((n&0xff000000)<<8) | ((n&0xff0000)<<24) | ((n&0xff00)<<40) | ((n&0xff)<<56);
-}
-
 double inttotime(unsigned int t1, unsigned int t2)
 {
-  return (byteswop(t2)*1.1111111111111112e-05 + byteswop(t1)*47721.858844444447);
+  return (bswap_32(t2)*1.1111111111111112e-05 + bswap_32(t1)*47721.858844444447);
 }
 
 double lltotime(long long int t)
@@ -96,33 +78,70 @@ double lltotime(long long int t)
 void timetoint(double tm, unsigned int& t1, unsigned int& t2)
 {
   double tmp=tm/47721.858844444447;
-  t1 = byteswop((unsigned int)tmp);
-  t2 = byteswop((unsigned int)((tm - t1*47721.858844444447)*90000));
+  t1 = bswap_32((unsigned int)tmp);
+  t2 = bswap_32((unsigned int)((tm - t1*47721.858844444447)*90000));
 }
 
-int readbufinternal(int f)
+void swapbuf(off64_t*& buf0, off64_t*& buf1)
 {
   off64_t* buf;
   buf = buf0;
   buf0 = buf1;
   buf1 = buf;
+}
+
+int readbufinternal(int f, off64_t*& buf)
+{
   if (read(f, buf, 16) != 16)
     return 0;
-  buf[0] = (off64_t)byteswopl((unsigned long long int)buf[0]);
-  buf[1] = (off64_t)byteswopl((unsigned long long int)buf[1]);
+  buf[0] = (off64_t)bswap_64((unsigned long long int)buf[0]);
+  buf[1] = (off64_t)bswap_64((unsigned long long int)buf[1]);
   return 1;
 }
 
-void writebufinternal(int f)
+void writebufinternal(int f, off64_t* buf)
 {
-  off64_t buf2[2];
-  buf2[0] = (off64_t)byteswopl((unsigned long long int)buf0[0] - size_offset);
-  buf2[1] = (off64_t)byteswopl((unsigned long long int)buf0[1]);
-  write(f, buf2, 16);
+  off64_t tbuf[2];
+  tbuf[0] = (off64_t)bswap_64((unsigned long long int)buf[0] - curr_size_offset);
+  tbuf[1] = (off64_t)bswap_64((unsigned long long int)buf[1]);
+  write(f, tbuf, 16);
 }
 
-off64_t readoff(int f, int fo, double t, int beg, double& tr)
+void movesc(int fs, int fso, off64_t off, int beg)
 {
+  static off64_t* buf = 0;
+  static off64_t lastoff;
+  static int endp;
+  if (fs == -1 || fso == -1)
+    return;
+  if (!buf) {
+    buf = new off64_t[2];
+    lastoff = 0;
+    endp = 0;
+  }
+  if (off < lastoff) {
+    lseek(fs, 0, SEEK_SET);
+    lastoff = 0;
+    endp = 0;
+  }
+  if (off == lastoff || endp)
+    return;
+  lastoff = off;
+  if (!beg && !endp)
+    writebufinternal(fso, buf);
+  while (readbufinternal(fs, buf)) {
+    if (buf[0] >= off)
+      return;
+    if (!beg)
+      writebufinternal(fso, buf);
+  }
+  endp = 1;
+}
+
+off64_t readoff(int fa, int fao, int fs, int fso, double t, int beg, double& tr)
+{
+  static off64_t* buf0 = 0;
+  static off64_t* buf1 = 0;
   static off64_t lastreturn;
   static double last;
   static int endp;
@@ -131,13 +150,15 @@ off64_t readoff(int f, int fo, double t, int beg, double& tr)
   if (!buf0) {
     buf0 = new off64_t[2];
     buf1 = new off64_t[2];
-    if (!(readbufinternal(f) && readbufinternal(f))) {
+    if (!(readbufinternal(fa, buf0) && readbufinternal(fa, buf1))) {
       printf("The corresponding \".ap\"-file is empty.\n");
       exit(8);
     }
     time_offset = buf0[1];
-    if (buf1[1] > buf0[1] && buf1[1] - buf0[1] < 900000)
+    if (buf1[1] > buf0[1] && buf1[1] - buf0[1] < 450000)
       time_offset -= (buf1[1]-buf0[1])*buf0[0]/(buf1[0]-buf0[0]);
+    else if (buf1[1] > buf0[1] || buf0[1] - buf1[1] > 45000)
+      time_offset = buf1[1];
     size_offset = buf0[0];
     lastreturn = 0;
     last = 0.0;
@@ -145,12 +166,14 @@ off64_t readoff(int f, int fo, double t, int beg, double& tr)
   }
   if (t < last && t != -1.0) {
     sizetmp = buf0[0];
-    lseek(f, 0, SEEK_SET);
-    readbufinternal(f);
-    readbufinternal(f);
+    lseek(fa, 0, SEEK_SET);
+    readbufinternal(fa, buf0);
+    readbufinternal(fa, buf1);
     time_offset = buf0[1];
-    if (buf1[1]>buf0[1] && buf1[1]-buf0[1]<900000)
+    if (buf1[1] > buf0[1] && buf1[1] - buf0[1] < 450000)
       time_offset -= (buf1[1]-buf0[1])*buf0[0]/(buf1[0]-buf0[0]);
+    else if (buf1[1] > buf0[1] || buf0[1] - buf1[1] > 45000)
+      time_offset = buf1[1];
     size_offset += buf0[0] - sizetmp;
     lastreturn = 0;
     last = 0.0;
@@ -160,34 +183,44 @@ off64_t readoff(int f, int fo, double t, int beg, double& tr)
     return lastreturn;
   }
   if (!beg)
-    writebufinternal(fo);
+    writebufinternal(fao, buf0);
   last = t;
   lt = lltotime(buf0[1] - time_offset);
-  tt = lltotime(buf1[1] - time_offset);
+  if (buf0[1] - buf1[1] > 0 && buf0[1] - buf1[1] <= 45000)
+    tt = lt, buf1[1] = buf0[1];
+  else
+    tt = lltotime(buf1[1] - time_offset);
   sizetmp = buf0[0];
   while (tt < t || t == -1.0) {
-    if (!readbufinternal(f))
+    swapbuf(buf0, buf1);
+    if (!readbufinternal(fa, buf1))
       endp = 1;
     if (!beg)
-      writebufinternal(fo);
+      writebufinternal(fao, buf0);
     if (endp)
       break;
-    if (buf1[1] < buf0[1] || buf1[1] - buf0[1] > 900000) {
-      if (absless(buf1[1] + ((long long int)1)<<33 - buf0[1], 900000))
+    if (buf0[1] - buf1[1] > 45000 || buf1[1] - buf0[1] > 450000) {
+      if (absless(buf1[1] + ((long long int)1)<<33 - buf0[1], 450000))
 	time_offset -= ((long long int)1)<<33;
       else
 	time_offset += buf1[1] - buf0[1];
     }
     lt = tt;
-    tt = lltotime(buf1[1] - time_offset);
+    if (buf0[1] - buf1[1] > 0 && buf0[1] - buf1[1] <= 45000)
+      tt = lt, buf1[1] = buf0[1];
+    else
+      tt = lltotime(buf1[1] - time_offset);
   }
   if (endp) {
     tr = tt;
   } else if (beg ? (lt == tt || (t-lt > tt-t && tt-t<0.18)) : (t-lt >= tt-t || t-lt>0.18)) {
-    if (!readbufinternal(f))
+    swapbuf(buf0, buf1);
+    if (!readbufinternal(fa, buf1))
       endp = 1;
+    if (buf0[1] - buf1[1] > 0 && buf0[1] - buf1[1] <= 45000)
+      buf1[1] = buf0[1];
     if (!beg)
-      writebufinternal(fo);
+      writebufinternal(fao, buf0);
     tr = tt;
   } else {
     tr = lt;
@@ -203,15 +236,25 @@ int framepid(char* buf, int pos)
   return ((buf[pos+1] & 0x1f) << 8) + buf[pos+2];
 }
 
-int framesearch_f(char* buf, int start, int stop, int pid)
+int framesearch_f(char* buf, int start, int stop, int pid, int& tp)
 {
   char* p;
   int pos = -1;
-  for (p = buf+start; p < buf+stop-3; p++)
-    if (p[0]==0 && p[1]==0 && p[2]==1 && p[3]==0) {
+  for (p = buf+start; p < buf+stop-5; p++)
+    if (p[0]==0 && p[1]==0 && p[2]==1) {
+      if (p[3]==0) {
         pos = ((p - buf)/188)*188;
-        if (pid == -1 || framepid(buf, pos) == pid)
+        if (pid == -1 || framepid(buf, pos) == pid) {
+          tp = (p[5]>>3)&7;
           return pos;
+        }
+      } else if (p[3]==0x09) {
+        pos = ((p - buf)/188)*188;
+        if ((buf[pos+1] & 0x40) && (pid == -1 || framepid(buf, pos) == pid)) {
+          tp = (p[4] >> 5) + 1;
+          return pos;
+        }
+      }
     }
   return -1;
 }
@@ -221,10 +264,16 @@ int framesearch_b(char* buf, int start, int stop, int pid)
   char* p;
   int pos = -1;
   for (p = buf+stop-1; p >= buf+start+3; p--)
-    if (p[0]==0 && p[-1]==1 && p[-2]==0 && p[-3]==0) {
+    if (p[-1]==1 && p[-2]==0 && p[-3]==0) {
+      if (p[0]==0) {
         pos = ((p - buf)/188)*188;
         if (pid == -1 || framepid(buf, pos) == pid)
           return pos;
+      } else if (p[0]==0x09) {
+        pos = ((p - buf)/188)*188;
+        if ((buf[pos+1] & 0x40) && (pid == -1 || framepid(buf, pos) == pid))
+          return pos;
+      }
     }
   return -1;
 }
@@ -271,7 +320,7 @@ int transfer_start(int f_ts, int f_out, off64_t n1, off64_t& n1ret)
 int transfer_rest(int f_ts, int f_out, off64_t n1, off64_t n2, off64_t& n2ret)
 {
   off64_t i;
-  int num, pos, st, pid, tmp;
+  int num, pos, st, pid, tp, tmp;
   char buf[LEN];
   static off64_t lastn2 = -1, lastn2ret;
   if (n1 == lastn2) {
@@ -289,11 +338,15 @@ int transfer_rest(int f_ts, int f_out, off64_t n1, off64_t n2, off64_t& n2ret)
     st = (i < n2 ? n2-i : 0);
     tmp = -st;
     st += 188;
-    while ((pos = framesearch_f(buf, st, num, pid)) == -1 && num == LEN) {
-      if (write(f_out, buf, LEN) != LEN) return 1;
-      num = read(f_ts, buf, LEN);
-      st = 0;
-      tmp += LEN;
+    while ((pos = framesearch_f(buf, st, num, pid, tp)) == -1 ? num == LEN : tp == 3) {
+      if (pos != -1) {
+        st = pos + 188;
+      } else {
+        if (write(f_out, buf, LEN) != LEN) return 1;
+        num = read(f_ts, buf, LEN);
+        st = 0;
+        tmp += LEN;
+      }
     }
     if (st && num < st)
       return 1;
@@ -319,7 +372,7 @@ int transfer_rest(int f_ts, int f_out, off64_t n1, off64_t n2, off64_t& n2ret)
   }
 }
 
-int donextinterval1(int fc, int fco, int fa, int fao, int fts, int ftso)
+int donextinterval1(int fc, int fco, int fa, int fao, int fs, int fso, int fts, int ftso)
 {
   static int n = -1;
   static double tlast, toff = 0.0;
@@ -338,24 +391,29 @@ int donextinterval1(int fc, int fco, int fa, int fao, int fts, int ftso)
 	return 0;
       read(fc, buf, 12);
       n--;
-      tmp = byteswop(buf[2]);
+      tmp = bswap_32(buf[2]);
       if (tmp == 1) {
-        c1 = readoff(fa, fao, 0.0, 1, toff);
+        c1 = readoff(fa, fao, fs, fso, 0.0, 1, toff);
         if (transfer_start(fts, ftso, c1, c1ret)) return -1;
-        c2 = readoff(fa, fao, inttotime(buf[0], buf[1]), 0, tlast);
+        curr_size_offset = size_offset;
+        movesc(fs, fso, c1ret, 1);
+        c2 = readoff(fa, fao, fs, fso, inttotime(buf[0], buf[1]), 0, tlast);
         if (transfer_rest(fts, ftso, c1, c2, c2ret)) return -1;
+        movesc(fs, fso, c2ret, 0);
         printf("Interval: %lld - %lld\n", c1ret, c2ret);
 	// move all passed marks
 	lseek(fc, 0, SEEK_SET);
 	read(fc, buf, 12);
-	while (byteswop(buf[2]) != 1) {
+	while (bswap_32(buf[2]) != 1) {
 	  write(fco, buf, 12);
 	  read(fc, buf, 12);
 	}
 	return 1;
       } else if (tmp == 0) {
-        c1 = readoff(fa, fao, inttotime(buf[0], buf[1]), 1, toff);
+        c1 = readoff(fa, fao, fs, fso, inttotime(buf[0], buf[1]), 1, toff);
         if (transfer_start(fts, ftso, c1, c1ret)) return -1;
+        curr_size_offset = size_offset;
+        movesc(fs, fso, c1ret, 1);
 	if (lcheck) {
 	  buf[0] = buf[1] = 0;
 	  write(fco, buf, 12);
@@ -368,11 +426,18 @@ int donextinterval1(int fc, int fco, int fa, int fao, int fts, int ftso)
     while (1) {
       read(fc, buf, 12);
       n--;
-      tmp = byteswop(buf[2]);
+      tmp = bswap_32(buf[2]);
       if (tmp == 0) {
-        c1 = readoff(fa, fao, inttotime(buf[0], buf[1]), 1, ttmp);
-        if (c1 != c2)
+        c1 = readoff(fa, fao, fs, fso, inttotime(buf[0], buf[1]), 1, ttmp);
+        use_leadin = 0;
+        if (c1 != c2) {
           if (transfer_start(fts, ftso, c1, c1ret)) return -1;
+          curr_size_offset = size_offset;
+        } else {
+          c1ret = c2ret;
+          size_offset = curr_size_offset;
+        }
+        movesc(fs, fso, c1ret, 1);
         toff += ttmp - tlast;
 	break;
       } else if (tmp == 3) {
@@ -385,17 +450,19 @@ int donextinterval1(int fc, int fco, int fa, int fao, int fts, int ftso)
   }
   while (1) {
     if (n == 0) {
-      c2 = readoff(fa, fao, -1.0, 0, tlast);
+      c2 = readoff(fa, fao, fs, fso, -1.0, 0, tlast);
       if (transfer_rest(fts, ftso, c1, c2, c2ret)) return -1;
+      movesc(fs, fso, c2ret, 0);
       printf("Interval: %lld - %lld\n", c1ret, c2ret);
       return 1;
     }
     read(fc, buf, 12);
     n--;
-    tmp = byteswop(buf[2]);
+    tmp = bswap_32(buf[2]);
     if (tmp == 1) {
-      c2 = readoff(fa, fao, inttotime(buf[0], buf[1]), 0, tlast);
+      c2 = readoff(fa, fao, fs, fso, inttotime(buf[0], buf[1]), 0, tlast);
       if (transfer_rest(fts, ftso, c1, c2, c2ret)) return -1;
+      movesc(fs, fso, c2ret, 0);
       printf("Interval: %lld - %lld\n", c1ret, c2ret);
       return 1;
     } else if (tmp != 0) {
@@ -406,7 +473,7 @@ int donextinterval1(int fc, int fco, int fa, int fao, int fts, int ftso)
   return 0;
 }
 
-int donextinterval2(int barg, int earg, char* argv[], int fc, int fco, int fa, int fao, int fts, int ftso)
+int donextinterval2(int barg, int earg, char* argv[], int fc, int fco, int fa, int fao, int fs, int fso, int fts, int ftso)
 {
   static int n = -1, i, lio = -1, lcheck=0;
   static double tlast = 0.0, toff = 0.0;
@@ -418,11 +485,11 @@ int donextinterval2(int barg, int earg, char* argv[], int fc, int fco, int fa, i
   unsigned int buff[3];
   unsigned int tmp;
   if (i>=earg) {
-    if (!lcheck && n!=-1) {
+    if (!lcheck && n>0) {
       lseek(fc, 0, SEEK_SET);
       for (j=0; j<n; j++) {
         read(fc, buf, 12);
-        tmp = byteswop(buf[2]);
+        tmp = bswap_32(buf[2]);
         if (tmp == 3) {
           timetoint(tlast-toff, buf[0], buf[1]);
           write(fco, buf, 12);
@@ -430,28 +497,31 @@ int donextinterval2(int barg, int earg, char* argv[], int fc, int fco, int fa, i
         }
       }
     }
-    if (lio != -1) {  // Add an extra "out" at the end to avoid bug in playback
-      buff[2] = byteswop(1);
-      timetoint(tlast-toff, buff[0], buff[1]);
-      write(fco, buff, 12);
-    }
     return 0;
   }
   if (n==-1) {
     i = barg;
-    n = lseek(fc, 0, SEEK_END) / 12;
+    n = (fc != -1 ? lseek(fc, 0, SEEK_END) / 12 : 0);
   }
-  c1 = readoff(fa, fao, strtotime(argv[i]), 1, ttmp);
-  if (c1 != c2)
+  c1 = readoff(fa, fao, fs, fso, strtotime(argv[i]), 1, ttmp);
+  if (c1 != c2) {
     if (transfer_start(fts, ftso, c1, c1ret)) return -1;
+    curr_size_offset = size_offset;
+  } else {
+    c1ret = c2ret;
+    size_offset = curr_size_offset;
+  }
+  movesc(fs, fso, c1ret, 1);
+  use_leadin = 0;
   toff += ttmp - tlast;
-  c2 = readoff(fa, fao, strtotime(argv[i+1]), 0, tlast);
+  c2 = readoff(fa, fao, fs, fso, strtotime(argv[i+1]), 0, tlast);
   if (transfer_rest(fts, ftso, c1, c2, c2ret)) return -1;
+  movesc(fs, fso, c2ret, 0);
   printf("Interval: %lld - %lld\n", c1ret, c2ret);
-  lseek(fc, 0, SEEK_SET);
+  if (n > 0) lseek(fc, 0, SEEK_SET);
   for (j=0; j<n; j++) {
     read(fc, buf, 12);
-    tmp = byteswop(buf[2]);
+    tmp = bswap_32(buf[2]);
     ttmp2=inttotime(buf[0], buf[1]);
     if (tmp == 3) {
       if (!lcheck) {
@@ -468,7 +538,7 @@ int donextinterval2(int barg, int earg, char* argv[], int fc, int fco, int fa, i
     } else if (ttmp2 >= ttmp && ttmp2 <= tlast) {
       if (tmp < 2) {
         if (lio != io && lio != -1) {
-          buff[2] = byteswop(io);
+          buff[2] = bswap_32(io);
           timetoint(ttmp-toff, buff[0], buff[1]);
           write(fco, buff, 12);
         }
@@ -484,7 +554,7 @@ int donextinterval2(int barg, int earg, char* argv[], int fc, int fco, int fa, i
   return 1;
 }
 
-char* makefilename(const char* base, const char* pre, const char* ext, const char* post)
+char* makefilename(const char* base, const char* pre, const char* ext, const char* post, int delext = 0)
 {
   static char buf[256];
   int len1, len2, len3;
@@ -496,10 +566,10 @@ char* makefilename(const char* base, const char* pre, const char* ext, const cha
     len1 -= len3;
   if (pre)
     strcpy(buf+len1, pre);
-  if (ext)
+  if (ext && !delext)
     strcpy(buf+len1+len2, ext);
   if (post)
-    strcpy(buf+len1+len2+len3, post);
+    strcpy(buf+len1+len2+(delext ? 0 : len3), post);
   return buf;
 }
 
@@ -542,9 +612,17 @@ void copymeta(int n, int f1, int f2, const char* title, const char* suff, const 
   delete [] buf;
 }
 
+void copysmallfile(int n, int f1, int f2)
+{ 
+  char* buf = new char[n];
+  read(f1, buf, n);
+  write(f2, buf, n);
+  delete [] buf;
+}
+
 int main(int argc, char* argv[])
 {
-  int f_ts, f_out, f_cuts, f_cutsout, f_ap, f_apout, f_meta, f_metaout;
+  int f_ts, f_out, f_cuts, f_cutsout, f_ap, f_apout, f_sc, f_scout, f_meta, f_metaout, f_eit, f_eitout;
   char* tmpname;
   const char* suff = 0;
   char* inname = 0;
@@ -552,7 +630,7 @@ int main(int argc, char* argv[])
   char* title = 0;
   char* descr = 0;
   int cutarg = 0, cutargend = 0;
-  int replace = 0;
+  int replace = 0, metafailed = 0;
   int i, j, ok, bad = 0;
   double t1, t2;
   struct stat statbuf;
@@ -628,7 +706,7 @@ int main(int argc, char* argv[])
   }
   tmpname = makefilename(inname, 0, ".ts", ".cuts");
   f_cuts = open(tmpname, O_RDONLY);
-  if (f_cuts == -1) {
+  if (f_cuts == -1 && !cutarg) {
     printf("Failed to open input cuts file \"%s\"\n", tmpname);
     close(f_ts);
     exit(3);
@@ -638,14 +716,18 @@ int main(int argc, char* argv[])
   if (f_ap == -1) {
     printf("Failed to open input ap file \"%s\"\n", tmpname);
     close(f_ts);
-    close(f_cuts);
+    if (f_cuts != -1) close(f_cuts);
     exit(4);
   }
+  tmpname = makefilename(inname, 0, ".ts", ".sc");
+  f_sc = open(tmpname, O_RDONLY);
+
   if (fstat64(f_ts, &statbuf64)) {
     printf("Failed to stat input stream file.\n");
     close(f_ts);
-    close(f_cuts);
     close(f_ap);
+    if (f_sc != -1) close(f_sc);
+    if (f_cuts != -1) close(f_cuts);
     exit(2);
   }
   tmpname = makefilename(outname, suff, ".ts", 0);
@@ -653,39 +735,53 @@ int main(int argc, char* argv[])
   if (f_out == -1) {
     printf("Failed to open output stream file \"%s\"\n", tmpname);
     close(f_ts);
-    close(f_cuts);
     close(f_ap);
+    if (f_sc != -1) close(f_sc);
+    if (f_cuts != -1) close(f_cuts);
     exit(5);
   }
-  if (fstat(f_cuts, &statbuf)) {
-    printf("Failed to stat input cuts file.\n");
-    close(f_ts);
-    close(f_cuts);
-    close(f_ap);
-    close(f_out);
-    unlink(makefilename(outname, suff, ".ts", 0));
-    exit(3);
+  if (f_cuts != -1 && fstat(f_cuts, &statbuf)) {
+    if (!cutarg) {
+      printf("Failed to stat input cuts file.\n");
+      close(f_ts);
+      close(f_out);
+      close(f_ap);
+      if (f_sc != -1) close(f_sc);
+      close(f_cuts);
+      unlink(makefilename(outname, suff, ".ts", 0));
+      exit(3);
+    } else {
+      close(f_cuts);
+      f_cuts = -1;
+    }
   }
-  tmpname = makefilename(outname, suff, ".ts", ".cuts");
-  f_cutsout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
-  if (f_cutsout == -1) {
-    printf("Failed to open output cuts file \"%s\"\n", tmpname);
-    close(f_ts);
-    close(f_cuts);
-    close(f_ap);
-    close(f_out);
-    unlink(makefilename(outname, suff, ".ts", 0));
-    exit(6);
-  }
+  if (f_cuts != -1) {
+    tmpname = makefilename(outname, suff, ".ts", ".cuts");
+    f_cutsout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
+    if (f_cutsout == -1) {
+      printf("Failed to open output cuts file \"%s\"\n", tmpname);
+      close(f_ts);
+      close(f_out);
+      close(f_ap);
+      if (f_sc != -1) close(f_sc);
+      close(f_cuts);
+      unlink(makefilename(outname, suff, ".ts", 0));
+      exit(6);
+    }
+  } else
+    f_cutsout = -1;
   if (fstat(f_ap, &statbuf)) {
     printf("Failed to stat input ap file.\n");
     close(f_ts);
-    close(f_cuts);
-    close(f_ap);
     close(f_out);
-    close(f_cutsout);
+    close(f_ap);
+    if (f_sc != -1) close(f_sc);
+    if (f_cuts != -1) {
+      close(f_cuts);
+      close(f_cutsout);
+      unlink(makefilename(outname, suff, ".ts", ".cuts"));
+    }
     unlink(makefilename(outname, suff, ".ts", 0));
-    unlink(makefilename(outname, suff, ".ts", ".cuts"));
     exit(4);
   }
   tmpname = makefilename(outname, suff, ".ts", ".ap");
@@ -693,75 +789,136 @@ int main(int argc, char* argv[])
   if (f_apout == -1) {
     printf("Failed to open output ap file \"%s\"\n", tmpname);
     close(f_ts);
-    close(f_cuts);
-    close(f_ap);
     close(f_out);
-    close(f_cutsout);
+    close(f_ap);
+    if (f_sc != -1) close(f_sc);
+    if (f_cuts != -1) {
+      close(f_cuts);
+      close(f_cutsout);
+      unlink(makefilename(outname, suff, ".ts", ".cuts"));
+    }
     unlink(makefilename(outname, suff, ".ts", 0));
-    unlink(makefilename(outname, suff, ".ts", ".cuts"));
     exit(7);
   }
-
+  if (f_sc != -1 && fstat(f_sc, &statbuf)) {
+    close(f_sc);
+    f_sc = -1;
+  }
+  if (f_sc != -1) {
+    tmpname = makefilename(outname, suff, ".ts", ".sc");
+    f_scout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
+    if (f_scout == -1) {
+      printf("Failed to open output sc file \"%s\"\n", tmpname);
+      close(f_ts);
+      close(f_out);
+      close(f_ap);
+      close(f_apout);
+      close(f_sc);
+      if (f_cuts != -1) {
+        close(f_cuts);
+        close(f_cutsout);
+        unlink(makefilename(outname, suff, ".ts", ".cuts"));
+      }
+      unlink(makefilename(outname, suff, ".ts", 0));
+      unlink(makefilename(outname, suff, ".ts", ".ap"));
+      exit(7);
+    }
+  }
   if (cutarg)
-    ok = donextinterval2(cutarg, cutargend, argv, f_cuts, f_cutsout, f_ap, f_apout, f_ts, f_out);
+    ok = donextinterval2(cutarg, cutargend, argv, f_cuts, f_cutsout, f_ap, f_apout, f_sc, f_scout, f_ts, f_out);
   else
-    ok = donextinterval1(f_cuts, f_cutsout, f_ap, f_apout, f_ts, f_out);
+    ok = donextinterval1(f_cuts, f_cutsout, f_ap, f_apout, f_sc, f_scout, f_ts, f_out);
   if (!ok) {
     printf("There are no cuts specified. Leaving the movie as it is.\n");
     close(f_ts);
-    close(f_cuts);
-    close(f_ap);
     close(f_out);
-    close(f_cutsout);
+    close(f_ap);
     close(f_apout);
+    if (f_cuts != -1) {
+      close(f_cuts);
+      close(f_cutsout);
+      unlink(makefilename(outname, suff, ".ts", ".cuts"));
+    }
+    if (f_sc != -1) {
+      close(f_sc);
+      close(f_scout);
+      unlink(makefilename(outname, suff, ".ts", ".sc"));
+    }
     unlink(makefilename(outname, suff, ".ts", 0));
-    unlink(makefilename(outname, suff, ".ts", ".cuts"));
     unlink(makefilename(outname, suff, ".ts", ".ap"));
     exit(9);
   }
 
   while (ok > 0) {
     if (cutarg)
-      ok = donextinterval2(cutarg, cutargend, argv, f_cuts, f_cutsout, f_ap, f_apout, f_ts, f_out);
+      ok = donextinterval2(cutarg, cutargend, argv, f_cuts, f_cutsout, f_ap, f_apout, f_sc, f_scout, f_ts, f_out);
     else
-      ok = donextinterval1(f_cuts, f_cutsout, f_ap, f_apout, f_ts, f_out);
+      ok = donextinterval1(f_cuts, f_cutsout, f_ap, f_apout, f_sc, f_scout, f_ts, f_out);
   }
 
   close(f_ts);
-  close(f_cuts);
-  close(f_ap);
   close(f_out);
-  close(f_cutsout);
+  close(f_ap);
   close(f_apout);
+  if (f_cuts != -1) {
+    close(f_cuts);
+    close(f_cutsout);
+  }
+  if (f_sc != -1) {
+    close(f_sc);
+    close(f_scout);
+  }
   if (ok < 0) {
     printf("Copying %s failed, read/write error.\n", makefilename(inname, 0, ".ts", 0));
     unlink(makefilename(outname, suff, ".ts", 0));
-    unlink(makefilename(outname, suff, ".ts", ".cuts"));
     unlink(makefilename(outname, suff, ".ts", ".ap"));
+    if (f_cuts != -1)
+      unlink(makefilename(outname, suff, ".ts", ".cuts"));
+    if (f_sc != -1)
+      unlink(makefilename(outname, suff, ".ts", ".sc"));
     exit(10);
   }
 
+  if (!replace) {
+    tmpname = makefilename(inname, 0, ".ts", ".eit", 1);
+    f_eit = open(tmpname, O_RDONLY);
+    if (f_eit != -1) {
+      if (fstat(f_eit, &statbuf))
+        close(f_eit);
+      else {
+        tmpname = makefilename(outname, suff, ".ts", ".eit", 1);
+        f_eitout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
+        if (f_eitout == -1)
+          close(f_eit);
+        else {
+          copysmallfile((int)statbuf.st_size, f_eit, f_eitout);
+          close(f_eit);
+          close(f_eitout);
+        }
+      }
+    }
+  }
+
+  metafailed = 0;
   tmpname = makefilename(inname, 0, ".ts", ".meta");
   f_meta = open(tmpname, O_RDONLY);
   if (f_meta == -1) {
-    printf("Failed to open input meta file \"%s\"\n", tmpname);
-    exit(0);
-  }
-  if (fstat(f_meta, &statbuf)) {
-    printf("Failed to stat input meta file.\n");
+    metafailed = 1;
+  } else if (fstat(f_meta, &statbuf)) {
+    metafailed = 1;
     close(f_meta);
-    exit(0);
+  } else {
+    tmpname = makefilename(outname, suff, ".ts", ".meta");
+    f_metaout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
+    if (f_metaout == -1) {
+      metafailed = 1;
+      close(f_meta);
+    } else {
+      copymeta((int)statbuf.st_size, f_meta, f_metaout, title, (replace ? 0 : suff), descr);
+      close(f_meta);
+      close(f_metaout);
+    }
   }
-  tmpname = makefilename(outname, suff, ".ts", ".meta");
-  f_metaout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
-  if (f_metaout == -1) {
-    printf("Failed to open output meta file \"%s\"\n", tmpname);
-    close(f_meta);
-    exit(0);
-  }
-  copymeta((int)statbuf.st_size, f_meta, f_metaout, title, (replace ? 0 : suff), descr);
-  close(f_meta);
-  close(f_metaout);
 
   if (replace) {
     if (suff) {
@@ -777,15 +934,26 @@ int main(int argc, char* argv[])
       tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
       unlink(tmpname);
       rename(makefilename(outname, suff, ".ts", ".ap"), tmpname);
-      tmpname = makefilename(inname, 0, ".ts", ".meta");
-      tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
-      unlink(tmpname);
-      rename(makefilename(outname, suff, ".ts", ".meta"), tmpname);
+      if (!metafailed) {
+        tmpname = makefilename(inname, 0, ".ts", ".meta");
+        tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
+        unlink(tmpname);
+        rename(makefilename(outname, suff, ".ts", ".meta"), tmpname);
+      }
     } else {
       unlink(makefilename(inname, 0, ".ts", 0));
       unlink(makefilename(inname, 0, ".ts", ".cuts"));
       unlink(makefilename(inname, 0, ".ts", ".ap"));
-      unlink(makefilename(inname, 0, ".ts", ".meta"));
+      tmpname = makefilename(inname, 0, ".ts", ".eit", 1);
+      tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
+      rename(tmpname, makefilename(outname, 0, ".ts", ".eit", 1));
+      if (!metafailed) 
+        unlink(makefilename(inname, 0, ".ts", ".meta"));
+      else {
+        tmpname = makefilename(inname, 0, ".ts", ".meta");
+        tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
+        rename(tmpname, makefilename(outname, 0, ".ts", ".meta"));
+      }
     }
   }
 }
