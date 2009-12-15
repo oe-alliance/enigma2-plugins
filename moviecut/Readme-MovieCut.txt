@@ -1,6 +1,6 @@
-MovieCut-1.2
+MovieCut-1.3
 ------------
-2008-07-17
+2009-12-04
 Anders Holst (aho@sics.se)
 
 
@@ -20,6 +20,25 @@ keep watching on your dreambox, and a typical movie takes about 15-20
 minutes to process. The program "mcut" can also be called directly
 from a shell. With no arguments it will give a brief description of
 the options.
+
+
+News since version 1.2
+
+* The same mcut program can now cut movies on both DM7025 and
+  DM800/DM8000, and both normal and HD movies. There may still be some
+  flickering at the cut points, especially on DM800/DM8000, but rather
+  limited.
+
+(* There is a driver change on DM7025 that makes movies cut with the
+   old mcut program (1.2 and earlier) to show much more flickering at
+   the cut points than before. Therefore you should change to he new
+   version, 1.3, even if you have only a DM7025 and thus no HD movies.)
+
+* The mcut program now cuts the new .sc files too (making precise fast
+  forward and rewind possible), and copies the .eit as well (making
+  the info button work on cut movies).
+
+* Some code cleanup.
 
 
 News since version 1.1
