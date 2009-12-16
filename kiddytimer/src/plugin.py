@@ -1,7 +1,7 @@
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigInteger, ConfigSubsection, ConfigSelection, \
     ConfigSubList, ConfigText, ConfigYesNo, ConfigDateTime, ConfigClock, ConfigPIN
-from KTmain import KiddyTimer
+from KTmain import oKiddyTimer
 from KTsetup import KiddyTimerSetup
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
@@ -27,20 +27,21 @@ for i in range(0, 7):
     config.plugins.KiddyTimer.dayTimes.append(s)
     del s
 
-# Assign global variable oKiddyTimer
-KTglob.oKiddyTimer = KiddyTimer()
-
 def setup(session, **kwargs):
     session.open(KiddyTimerSetup)
 
 def sessionstart(reason, **kwargs):
     if reason == 0:
-        KTglob.oKiddyTimer.gotSession(kwargs["session"])
+        oKiddyTimer.gotSession(kwargs["session"])
 
 def autostart(reason, **kwargs):
     if reason == 1:
-        KTglob.oKiddyTimer.stopMe()
-        KTglob.oKiddyTimer = None
+        global oKiddyTimer
+        oKiddyTimer.stopMe()
+        oKiddyTimer = None
+
+def extensionMenu(session, **kwargs):
+    oKiddyTimer.showExtensionsMenu()
         
 def Plugins(path,**kwargs):
     # Assign global variable plugin_path
@@ -48,5 +49,6 @@ def Plugins(path,**kwargs):
     return [
             PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart),
             PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart),
+            PluginDescriptor(name=_("KiddyTimer"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=extensionMenu),
             PluginDescriptor(name=_("KiddyTimer"), description=_("Allows to controls your kids' daily TV usage"), icon = "KiddyTimer.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=setup)]
 

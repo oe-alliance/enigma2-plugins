@@ -2,8 +2,11 @@ from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
+from Components.ProgressBar import ProgressBar
 from Components.config import config, getConfigListEntry
-from KTpositioner import KiddyTimerPositioner
+from KTmain import oKiddyTimer
+from KTMultiPixmap import KTmultiPixmap
+from MovableScreen import MovableScreen
 from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
@@ -62,16 +65,16 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self.enabled_old = config.plugins.KiddyTimer.enabled.value
 
         # If the oKiddyTimer- Class has no session yet, then get session
-        if KTglob.oKiddyTimer.session == None:
-            KTglob.oKiddyTimer.gotSession(self.session)
+        if oKiddyTimer.session == None:
+            oKiddyTimer.gotSession(self.session)
         
         # Temporarily stop timer as long as we are in the setup screen
-        if KTglob.oKiddyTimer.dialog != None:
-            KTglob.oKiddyTimer.setDialogStatus(False)
+        if oKiddyTimer.dialog != None:
+            oKiddyTimer.setDialogStatus(False)
             
         # Plugin Information
-        iRemainingTime = KTglob.oKiddyTimer.remainingTime
-        sRemainingTime = KTglob.getTimeFromSeconds(KTglob.oKiddyTimer.remainingTime , True )
+        iRemainingTime = oKiddyTimer.remainingTime
+        sRemainingTime = KTglob.getTimeFromSeconds(oKiddyTimer.remainingTime , True )
 
         self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") %dict(plugin=KTglob.PLUGIN_BASE,version=KTglob.PLUGIN_VERSION))
         self["RemainingTime"] = Label(_("Remaining time: %s") %sRemainingTime)
@@ -98,31 +101,69 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self.session.open(KiddyTimerPositioner)
 
     def resetTimer(self):
-        KTglob.oKiddyTimer.resetTimer()
-        sRemainingTime = KTglob.getTimeFromSeconds(KTglob.oKiddyTimer.remainingTime , True )
+        oKiddyTimer.resetTimer()
+        sRemainingTime = KTglob.getTimeFromSeconds(oKiddyTimer.remainingTime , True )
         self["RemainingTime"].setText(_("Remaining time: %s") %sRemainingTime)
 
     def save(self):
-        if KTglob.oKiddyTimer.remainingTime > KTglob.getSecondsFromClock( config.plugins.KiddyTimer.dayTimes[KTglob.oKiddyTimer.dayNr].timeValue.getValue()):
+        if oKiddyTimer.remainingTime > KTglob.getSecondsFromClock( config.plugins.KiddyTimer.dayTimes[oKiddyTimer.dayNr].timeValue.getValue()):
             self.resetTimer()
         for x in self["config"].list:
             x[1].save()
             
-        KTglob.oKiddyTimer.currentDayTime = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.dayTimes[KTglob.oKiddyTimer.dayNr].timeValue.getValue())
+        oKiddyTimer.currentDayTime = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.dayTimes[oKiddyTimer.dayNr].timeValue.getValue())
         if config.plugins.KiddyTimer.enabled.value:
             if self.enabled_old != config.plugins.KiddyTimer.enabled.value:
-                KTglob.oKiddyTimer.gotSession(KTglob.oKiddyTimer.session)
+                oKiddyTimer.gotSession(oKiddyTimer.session)
             else:
-                KTglob.oKiddyTimer.setDialogStatus(KTglob.oKiddyTimer.timerHasToRun())
-                if KTglob.oKiddyTimer.dialogEnabled == True:
-                    KTglob.oKiddyTimer.askForActivation()
+                oKiddyTimer.setDialogStatus(oKiddyTimer.timerHasToRun())
+                if oKiddyTimer.dialogEnabled == True:
+                    oKiddyTimer.askForActivation()
         self.close()
 
     def cancel(self):
         for x in self["config"].list:
             x[1].cancel()
         self.close()
-        KTglob.oKiddyTimer.showHide()
+        oKiddyTimer.showHide()
 
     def protectedWithPin(self):
         return config.plugins.KiddyTimer.pin.getValue()
+
+class KiddyTimerPositioner(Screen, MovableScreen):
+    def __init__(self, session):
+        Screen.__init__(self, session)
+        self.skin = KTglob.SKIN
+
+        self.skin_path = KTglob.plugin_path
+
+        self["TimerGraph"] = KTmultiPixmap()
+        self["TimerText"] = Label(_("01:00"))
+        self["TimerSlider"] = ProgressBar()
+        self["TimerSliderText"] = Label(_("01:00"))
+        
+        if config.plugins.KiddyTimer.timerStyle.value == "clock":
+            self["TimerGraph"].show()
+            self["TimerText"].show()
+            self["TimerSlider"].hide()    
+            self["TimerSliderText"].hide()
+        else:
+            self["TimerGraph"].hide()
+            self["TimerText"].hide()
+            self["TimerSlider"].show()
+            self["TimerSliderText"].show()
+
+        self["actions"] = ActionMap(["OkCancelActions"] , 
+        {
+         "ok":      self.keyOK,
+         "cancel":  self.keyCancel
+        }, -1)
+
+        MovableScreen.__init__(self, config.plugins.KiddyTimer, [], 82 , 82)
+        self.startMoving()
+        
+    def keyOK(self):
+        self.close()
+    
+    def keyCancel(self):
+        self.close()

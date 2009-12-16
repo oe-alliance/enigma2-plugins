@@ -2,8 +2,10 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from KTMultiPixmap import KTmultiPixmap
 from Components.config import config
+from Screens.ChoiceBox import ChoiceBox
 from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
+from Screens.MinuteInput import MinuteInput
 from Screens.Screen import Screen
 from Screens import Standby
 from Tools.BoundFunction import boundFunction
@@ -28,9 +30,9 @@ class KiddyTimerScreen(Screen):
         self["TimerSliderText"] = Label(_("??:??"))
         
     def renderScreen(self):
-        self["TimerSlider"].setValue(int(KTglob.oKiddyTimer.remainingPercentage*100)) 
-        self["TimerGraph"].setPixmapNum(KTglob.oKiddyTimer.curImg)
-        self.sTimeLeft = KTglob.getTimeFromSeconds( (KTglob.oKiddyTimer.remainingTime + 59) , False ) # Add 59 Seconds to show one minute if less than 1 minute left...
+        self["TimerSlider"].setValue(int(oKiddyTimer.remainingPercentage*100)) 
+        self["TimerGraph"].setPixmapNum(oKiddyTimer.curImg)
+        self.sTimeLeft = KTglob.getTimeFromSeconds( (oKiddyTimer.remainingTime + 59) , False ) # Add 59 Seconds to show one minute if less than 1 minute left...
         self["TimerText"].setText(self.sTimeLeft)
         self["TimerSliderText"].setText(self.sTimeLeft)
 
@@ -68,9 +70,11 @@ class KiddyTimer():
         self.iServiceReference = None
         self.curImg = 0
                     
-        self.loopTimerStep = 1000
+        self.loopTimerStep = 10000
         self.loopTimer = eTimer()
         self.loopTimer.callback.append(self.calculateTimer)
+
+        config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call = False)
     
     def gotSession(self, session):
         self.session = session
@@ -114,17 +118,17 @@ class KiddyTimer():
                 self.dialog = self.session.instantiateDialog(KiddyTimerScreen)
                 self.dialog.hide()
         else:
-            self.askForPassword()
+            self.askForPassword(self.pinEnteredDialog)
                                        
         self.calculateTimer()
 
-    def askForPassword(self):
-        self.session.openWithCallback( self.pinEntered, PinInput, pinList = [config.plugins.KiddyTimer.pin.getValue()], triesEntry = self.getTriesEntry(), title = _("Please enter the correct pin code"), windowTitle = _("Enter pin code"))
+    def askForPassword(self,callbackFunction):
+        self.session.openWithCallback( callbackFunction, PinInput, pinList = [config.plugins.KiddyTimer.pin.getValue()], triesEntry = self.getTriesEntry(), title = _("Please enter the correct pin code"), windowTitle = _("Enter pin code"))
     
     def getTriesEntry(self):
         return config.ParentalControl.retries.setuppin
         
-    def pinEntered(self, result):
+    def pinEnteredDialog(self, result):
         if result is None:
             pass
         elif not result:
@@ -132,6 +136,38 @@ class KiddyTimer():
         else:
             self.setDialogStatus( False )        
     
+    def pinEnteredDesactivation(self, result):
+        if result is None:
+            pass
+        elif not result:
+            pass
+        else:
+            config.plugins.KiddyTimer.enabled.value = False
+            config.plugins.KiddyTimer.enabled.save()
+            self.stopMe()
+    
+    def pinEnteredIncreaseRemainingTime(self, result):
+        if result is None:
+            pass
+        elif not result:
+            pass
+        else:
+            self.session.openWithCallback(self.increaseRemainingCallback, MinuteInput)
+
+    def increaseRemainingCallback(self, iMinutes):
+        iSeconds = iMinutes * 60
+        self.lastSavedRemainingTime += iSeconds
+        if self.lastSavedRemainingTime > self.currentDayTime:
+            self.lastSavedRemainingTime = self.currentDayTime
+        self.calculateTimer()
+
+    def decreaseRemainingCallback(self, iMinutes):
+        iSeconds = iMinutes * 60
+        self.lastSavedRemainingTime -= iSeconds
+        if self.lastSavedRemainingTime < 0:
+            self.lastSavedRemainingTime = 0
+        self.calculateTimer()
+
     def startLoop(self):
         self.loopTimer.start(self.loopTimerStep,1)
     
@@ -167,28 +203,28 @@ class KiddyTimer():
                 self.dialog.hide()
 
     def calculateTimer(self):
-        if Standby.inStandby != None:
-            Standby.inStandby.onClose.append(self.endStandby)
-            self.stopMe()            
-        else:
-            if self.dialogEnabled == True:
-                odtEnd = time.mktime(time.localtime())
-                iDiff = odtEnd - time.mktime(self.pluginStartTime)
-                iRemaining = self.lastSavedRemainingTime - iDiff
-                if iRemaining < 0:
-                    iRemaining = 0
-                self.remainingTime = iRemaining
-                self.remainingPercentage = iRemaining / KTglob.oKiddyTimer.currentDayTime
-                self.saveValues()
-                
-                self.setImageNumber()
-                
-                if self.remainingTime == 0:
-                    self.iServiceReference = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-                    NavigationInstance.instance.stopService()
-                self.dialog.renderScreen()
-            self.startLoop()
+        if self.dialogEnabled == True:
+            odtEnd = time.mktime(time.localtime())
+            iDiff = odtEnd - time.mktime(self.pluginStartTime)
+            iRemaining = self.lastSavedRemainingTime - iDiff
+            if iRemaining < 0:
+                iRemaining = 0
+            self.remainingTime = iRemaining
+            self.remainingPercentage = iRemaining / self.currentDayTime
+            self.saveValues()
+            
+            self.setImageNumber()
+            
+            if self.remainingTime == 0:
+                self.iServiceReference = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                NavigationInstance.instance.stopService()
+            self.dialog.renderScreen()
+        self.startLoop()
 
+    def enterStandby(self,configElement):
+        Standby.inStandby.onClose.append(self.endStandby)
+        self.stopMe()            
+        
     def showHide(self):
         if config.plugins.KiddyTimer.enabled.value and self.timerHasToRun():
             self.setDialogStatus(True)
@@ -221,4 +257,43 @@ class KiddyTimer():
         config.plugins.KiddyTimer.lastStartDay.save()
         config.plugins.KiddyTimer.remainingTime.setValue(int(self.remainingTime))
         config.plugins.KiddyTimer.remainingTime.save()
-        
+
+    def showExtensionsMenu(self):
+        self.session.openWithCallback(self.DoSelectionExtensionsMenu,ChoiceBox,_("Please select your KiddyTimer- option"),self.getOptionList())
+
+    def getOptionList(self):
+        keyList = []
+        if config.plugins.KiddyTimer.enabled.value:
+            if self.dialogEnabled:
+                keyList.append((_("Stop KiddyTimer (this session only)"),1))
+                keyList.append((_("Increase remaining time"),5))
+                keyList.append((_("Decrease remaining time"),6))
+            else:
+                keyList.append((_("Start KiddyTimer"),2))
+            keyList.append((_("Disable KiddyTimer"),3))
+        else:
+            keyList.append((_("Enable KiddyTimer"),4))
+        return keyList
+    
+    def DoSelectionExtensionsMenu(self,answer):
+        if answer is None:
+            pass
+        elif answer[1] == 3:
+            self.askForPassword(self.pinEnteredDesactivation)
+        elif  answer[1] == 1:
+            self.activationCallback(False)
+        elif  answer[1] == 2:
+            self.activationCallback(True)
+        elif  answer[1] == 4:
+            config.plugins.KiddyTimer.enabled.value = True
+            config.plugins.KiddyTimer.enabled.save()
+            self.gotSession(self.session)
+        elif answer[1] ==5:
+            self.askForPassword(self.pinEnteredIncreaseRemainingTime)
+        elif answer[1] ==6:
+            self.session.openWithCallback(self.decreaseRemainingCallback, MinuteInput)
+        else:
+            self.session.open(MessageBox,_("Invalid selection"), MessageBox.TYPE_ERROR, 5)
+
+# Assign global variable oKiddyTimer
+oKiddyTimer = KiddyTimer()
