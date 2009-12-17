@@ -109,7 +109,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen, InfoBarAudioSelection):
         }, -1)
 
         HelpableScreen.__init__(self)
-        MovableScreen.__init__(self, config.plugins.AC3LipSync, 600, 100)
+        MovableScreen.__init__(self, config.plugins.AC3LipSync, [self["actions"]], 600, 100)
         
     def __onShow(self):
         for sAudio in AC3PCM:
@@ -237,7 +237,7 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen, InfoBarAudioSelection):
     def DoShowMenu(self, answer):
         if answer is not None:
             if answer[1] == "1":
-                self.startMoving([self["actions"]])
+                self.startMoving()
             else:
                 sResponse = _("Invalid selection")
                 iType = MessageBox.TYPE_ERROR

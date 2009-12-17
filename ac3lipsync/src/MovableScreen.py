@@ -4,14 +4,15 @@ from __init__ import _
 from enigma import ePoint, eTimer, getDesktop
 
 class MovableScreen():
-    def __init__(self, configRoot, screenSize_x, screenSize_y, moveMinMargin=30, moveStepSize=10):
+    def __init__(self, configRoot, disableKeymaps, screenSize_x, screenSize_y, moveMinMargin=30, moveStepSize=10):
         self.configRoot = configRoot
+        self.disableKeymaps = disableKeymaps
         self.screenSize_x = screenSize_x
         self.screenSize_y = screenSize_y
         self.moveMinMargin = moveMinMargin
         self.moveStepSize = moveStepSize
 
-        self["MovableScreenActions"] = HelpableNumberActionMap(self, "PluginAudioSyncActions",
+        self["MovableScreenActions"] = HelpableNumberActionMap(self, "MovableScreenActions",
         {
             "ok":       (self.moveKeyOk,                   _("Save values and close screen")),
             "cancel":   (self.moveKeyCancel,            _("Discard changes and close screen")),
@@ -40,9 +41,8 @@ class MovableScreen():
         self.desktopHeight = desktop.size().height()
         
 
-    def startMoving(self,disableKeymaps):
-        self.disableKeymaps = disableKeymaps
-        self.switchKeymaps(False)
+    def startMoving(self):
+        self.setEnableMoveKeymap(True)
 
         self.moveTimer = eTimer()
         self.moveTimer.callback.append(self.movePositionTimer)
@@ -112,14 +112,14 @@ class MovableScreen():
     def moveKeyOk(self):
         self.configRoot.position_x.save()
         self.configRoot.position_y.save()
-        self.switchKeymaps(True)
+        self.setEnableMoveKeymap(False)
 
     def moveKeyCancel(self):
         self.configRoot.position_x.cancel()
         self.configRoot.position_y.cancel()
-        self.switchKeymaps(True)
+        self.setEnableMoveKeymap(False)
 
-    def switchKeymaps(self,enabled):
+    def setEnableMoveKeymap(self,enabled):
+        self["MovableScreenActions"].setEnabled(enabled)
         for keymap in self.disableKeymaps:
-            keymap.setEnabled(enabled)
-        self["MovableScreenActions"].setEnabled(not(enabled))
+            keymap.setEnabled(not(enabled))
