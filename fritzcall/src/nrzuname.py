@@ -1,27 +1,29 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-# $Id$
-# $Author$
-# $Revision$
-# $Date$
+'''
+$Id$
+$Author$
+$Revision$
+$Date$
+'''
 
-import re, sys, os, traceback
+import re, sys, os
 from xml.dom.minidom import parse
 from twisted.web.client import getPage #@UnresolvedImport
 from twisted.internet import reactor #@UnresolvedImport
 
 try:
-	from . import debug #@UnresolvedImport
-	def setDebug(what):
+	from . import debug #@UnresolvedImport # pylint: disable-msg=W0613,F0401
+	def setDebug(what): # pylint: disable-msg=W0613
 		pass
 except ValueError:
 	debugVal = True
 	def setDebug(what):
 		global debugVal
 		debugVal = what
-	def debug(str):
+	def debug(message):
 		if debugVal:
-			print str
+			print message
 
 import htmlentitydefs
 def html2unicode(in_html):
@@ -45,7 +47,7 @@ def html2unicode(in_html):
 	htmlentityhexnumbermask = re.compile('(&#x(..);)')
 	entities = htmlentityhexnumbermask.finditer(in_html)
 	for x in entities:
-		in_html = in_html.replace(x.group(1), '&#' + str(int(x.group(2),16)) + ';')
+		in_html = in_html.replace(x.group(1), '&#' + str(int(x.group(2), 16)) + ';')
 
 	htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
 	entitydict = {}
@@ -88,25 +90,33 @@ def out(number, caller):
 	found = re.match("NA: ([^;]*);VN: ([^;]*);STR: ([^;]*);HNR: ([^;]*);PLZ: ([^;]*);ORT: ([^;]*)", caller)
 	if not found:
 		return
-	( name,vorname,strasse,hnr,plz,ort ) = (found.group(1),
+	( name, vorname, strasse, hnr, plz, ort ) = (found.group(1),
 											found.group(2),
 											found.group(3),
 											found.group(4),
 											found.group(5),
 											found.group(6)
 											)
-	if vorname: name += ' ' + vorname
-	if strasse or hnr or plz or ort: name += ', '
-	if strasse: name += strasse
-	if hnr:	name += ' ' + hnr
-	if (strasse or hnr) and (plz or ort): name += ', '
-	if plz and ort: name += plz + ' ' + ort
-	elif plz: name += plz
-	elif ort: name += ort
+	if vorname:
+		name += ' ' + vorname
+	if strasse or hnr or plz or ort:
+		name += ', '
+	if strasse:
+		name += strasse
+	if hnr:
+		name += ' ' + hnr
+	if (strasse or hnr) and (plz or ort):
+		name += ', '
+	if plz and ort:
+		name += plz + ' ' + ort
+	elif plz:
+		name += plz
+	elif ort:
+		name += ort
 
 	print(name)
 
-def simpleout(number, caller): #@UnusedVariable
+def simpleout(number, caller): #@UnusedVariable # pylint: disable-msg=W0613
 	print caller
 
 try:
@@ -190,7 +200,7 @@ class ReverseLookupAndNotifier:
 			number = self.number
 
 		url = website.getAttribute("url")
-		if re.search('$AREACODE',url) or re.search('$PFXAREACODE',url):
+		if re.search('$AREACODE', url) or re.search('$PFXAREACODE', url):
 			debug("[ReverseLookupAndNotifier] handleWebsite: (PFX)ARECODE cannot be handled")
 			# self.caller = _("UNKNOWN")
 			self.notifyAndReset()
@@ -199,15 +209,14 @@ class ReverseLookupAndNotifier:
 		# Apparently, there is no attribute called (pfx)areacode anymore
 		# So, this below will not work.
 		#
-		if re.search('\\$AREACODE',url) and website.hasAttribute("areacode"):
+		if re.search('\\$AREACODE', url) and website.hasAttribute("areacode"):
 			areaCodeLen = int(website.getAttribute("areacode"))
-			url = url.replace("$AREACODE","%(areacode)s").replace("$NUMBER","%(number)s")
-			url = url %{ 'areacode':number[:areaCodeLen], 'number':number[areaCodeLen:] }
-		elif re.search('\\$PFXAREACODE',url) and website.hasAttribute("pfxareacode"):
+			url = url.replace("$AREACODE", number[:areaCodeLen]).replace("$NUMBER", number[areaCodeLen:])
+		elif re.search('\\$PFXAREACODE', url) and website.hasAttribute("pfxareacode"):
 			areaCodeLen = int(website.getAttribute("pfxareacode"))
-			url = url.replace("$PFXAREACODE","%(pfxareacode)s").replace("$NUMBER","%(number)s")
-			url = url %{ 'pfxareacode':number[:areaCodeLen], 'number':number[areaCodeLen:] }
-		elif re.search('\\$NUMBER',url): 
+			url = url.replace("$PFXAREACODE","%(pfxareacode)s").replace("$NUMBER", "%(number)s")
+			url = url % { 'pfxareacode': number[:areaCodeLen], 'number': number[areaCodeLen:] }
+		elif re.search('\\$NUMBER', url): 
 			url = url.replace("$NUMBER","%s") %number
 		else:
 			debug("[ReverseLookupAndNotifier] handleWebsite: cannot handle websites with no $NUMBER in url")
@@ -229,13 +238,13 @@ class ReverseLookupAndNotifier:
 			item = html2unicode(item)
 			try: # this works under Windows
 				item = item.decode('iso-8859-1')
-			except:
+			except UnicodeDecodeError:
 				try: # this works under Enigma2
 					item = item.decode('utf-8')
-				except:
+				except UnicodeDecodeError:
 					try: # fall back
 						item = item.decode(self.charset)
-					except:
+					except UnicodeDecodeError:
 						# debug("[ReverseLookupAndNotifier] cleanName: " + traceback.format_exc())
 						debug("[ReverseLookupAndNotifier] cleanName: encoding problem")
 
@@ -246,7 +255,7 @@ class ReverseLookupAndNotifier:
 			return newitem.strip()
 	
 		debug("[ReverseLookupAndNotifier] _gotPage")
-		found = re.match('.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />',page, re.S)
+		found = re.match('.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />', page, re.S)
 		if found:
 			debug("[ReverseLookupAndNotifier] Charset: " + found.group(1))
 			page = page.replace("\xa0"," ").decode(found.group(1), "replace")
@@ -269,7 +278,7 @@ class ReverseLookupAndNotifier:
 					else:
 						number = self.number
 					if number != normalizePhoneNumber(found.group(1)):
-						debug("[ReverseLookupAndNotifier] _gotPage: got unequal number '''%s''' for '''%s'''" %(found.group(1),self.number))
+						debug("[ReverseLookupAndNotifier] _gotPage: got unequal number '''%s''' for '''%s'''" %(found.group(1), self.number))
 						continue
 			
 			# look for <firstname> and <lastname> match, if not there look for <name>, if not there break
@@ -353,7 +362,7 @@ class ReverseLookupAndNotifier:
 				found = re.match("^(.+) ([-\d]+)$", street, re.S)
 				if found:
 					street = found.group(1)
-					streetno= found.group(2)
+					streetno = found.group(2)
 				#===============================================================
 				# else:
 				#	found = re.match("^(\d+) (.+)$", street, re.S)
@@ -362,7 +371,7 @@ class ReverseLookupAndNotifier:
 				#		streetno = found.group(1)
 				#===============================================================
 
-			self.caller = "NA: %s;VN: %s;STR: %s;HNR: %s;PLZ: %s;ORT: %s" %( name,firstname,street,streetno,zipcode,city )
+			self.caller = "NA: %s;VN: %s;STR: %s;HNR: %s;PLZ: %s;ORT: %s" % ( name, firstname, street, streetno, zipcode, city )
 			debug("[ReverseLookupAndNotifier] _gotPage: Reverse lookup succeeded:\nName: %s" %(self.caller))
 
 			self.notifyAndReset()
@@ -400,25 +409,24 @@ class ReverseLookupAndNotifier:
 				# debug("2: " + repr(self.caller))
 				self.caller = self.caller.encode(self.charset, 'replace')
 				# debug("3: " + repr(self.caller))
-			except:
+			except UnicodeEncodeError:
 				debug("[ReverseLookupAndNotifier] cannot encode?!?!")
-				pass
 			# self.caller = unicode(self.caller)
 			# debug("4: " + repr(self.caller))
 			self.outputFunction(self.number, self.caller)
 		else:
 			self.outputFunction(self.number, "")
 		if __name__ == '__main__':
-			reactor.stop() #@UndefinedVariable
+			reactor.stop() #@UndefinedVariable # pylint: disable-msg=E1101
 
 if __name__ == '__main__':
 	cwd = os.path.dirname(sys.argv[0])
 	if (len(sys.argv) == 2):
 		# nrzuname.py Nummer
 		ReverseLookupAndNotifier(sys.argv[1], simpleout)
-		reactor.run() #@UndefinedVariable
+		reactor.run() #@UndefinedVariable # pylint: disable-msg=E1101
 	elif (len(sys.argv) == 3):
 		# nrzuname.py Nummer Charset
 		setDebug(False)
 		ReverseLookupAndNotifier(sys.argv[1], out, sys.argv[2])
-		reactor.run() #@UndefinedVariable
+		reactor.run() #@UndefinedVariable # pylint: disable-msg=E1101

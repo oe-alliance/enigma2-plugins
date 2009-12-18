@@ -530,10 +530,11 @@
 		</website>
 		<website name="www.gebeld.nl" url="http://www.gebeld.nl/content.asp?zapp=zapp&amp;land=Nederland&amp;zoek=numm&amp;searchfield1=fullnumber&amp;searchfield2=&amp;queryfield1=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;td&gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot;&gt;([^&lt;]*)&lt;/font&gt;&lt;/td&gt;</name>
-				<street>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&lt;]+)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</street>
-				<city>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;([^&lt;]+)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</city>
-				<zipcode>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&lt;]+)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&amp;]*)&amp;nbsp;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]+&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</zipcode>
+				<firstname>&lt;td &gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot; &gt;\s*(.*?)(?: |&amp;nbsp;)[^ &lt;\r]*\s*&lt;/font&gt;</firstname>
+				<lastname>&lt;td &gt;&lt;font size=&quot;2&quot; face=&quot;Verdana, Arial, Helvetica, sans-serif&quot; &gt;\s*.*?(?: |&amp;nbsp;)([^ &lt;\r]*)\s*&lt;/font&gt;</lastname>
+				<street>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&lt;]*)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</street>
+				<city>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&amp;]*&amp;nbsp;([^&lt;]*)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</city>
+				<zipcode>&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;\s*&lt;tr bgcolor=&quot;f5f5f5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;([^&amp;]*)&amp;nbsp;[^&lt;]*&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</zipcode>
 			</entry>
 		</website>
 	</country>
@@ -865,10 +866,10 @@
 	<country code="+47">
 		<website name="gulesider.no" url="http://www.gulesider.no/gs/categoryList.c?q=$NUMBER" prefix="">
 			<entry>
-				<name swapFirstAndLastName="true">&lt;div class=&quot;details&quot;&gt;&lt;p&gt;&lt;strong&gt;Mottaker:&lt;/strong&gt;\s*&lt;br/&gt;([^&lt;]*)&lt;br/&gt;</name>
-				<street>&lt;div class=&quot;details&quot;&gt;&lt;p&gt;&lt;strong&gt;Mottaker:&lt;/strong&gt;\s*&lt;br/&gt;[^&lt;]*&lt;br/&gt;\s*([^&lt;]*)&lt;br/&gt;</street>
-				<city>&lt;div class=&quot;details&quot;&gt;&lt;p&gt;&lt;strong&gt;Mottaker:&lt;/strong&gt;\s*&lt;br/&gt;[^&lt;]*&lt;br/&gt;\s*[^&lt;]*&lt;br/&gt;\s*\d+ ([^\s]*)\s*&lt;/p&gt;</city>
-				<zipcode>&lt;div class=&quot;details&quot;&gt;&lt;p&gt;&lt;strong&gt;Mottaker:&lt;/strong&gt;\s*&lt;br/&gt;[^&lt;]*&lt;br/&gt;\s*[^&lt;]*&lt;br/&gt;\s*(\d+) [^\s]*\s*&lt;/p&gt;</zipcode>
+				<name swapFirstAndLastName="true">&lt;h2 class=&quot;name&quot;&gt;\s*&lt;a href=&quot;[^&quot;]*&quot;\s*title=&quot;[^&quot;]*&quot;&gt;\s*([- \w]*)\s*?&lt;span&gt;</name>
+				<street>&lt;p class=&quot;[^&quot;]*&quot;&gt;\s*([ \w]*),\s*\d+ \w+\s*&lt;/p&gt;</street>
+				<city>&lt;p class=&quot;[^&quot;]*&quot;&gt;\s*[ \w]*,\s*\d+ (\w+)\s*&lt;/p&gt;</city>
+				<zipcode>&lt;p class=&quot;[^&quot;]*&quot;&gt;\s*[ \w]*,\s*(\d+) \w+\s*&lt;/p&gt;</zipcode>
 			</entry>
 		</website>
 	</country>

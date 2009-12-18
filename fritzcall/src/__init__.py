@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+'''
+general functions for FritzCall plugin
+'''
 from Components.config import config #@UnresolvedImport
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
@@ -10,11 +13,17 @@ gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain("enigma2")
 gettext.bindtextdomain("FritzCall", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/FritzCall/locale/"))
 
-def _(txt):
-	t = gettext.dgettext("FritzCall", txt)
-	if t == txt:
-		t = gettext.gettext(txt)
-	return t
+def _(txt): # pylint: disable-msg=C0103
+	td = gettext.dgettext("FritzCall", txt)
+	if td == txt:
+		td = gettext.gettext(txt)
+	return td
+
+def initDebug():
+	try:
+		os.remove("/tmp/EmailClient.log")
+	except OSError:
+		pass
 
 from time import localtime
 def debug(message):
@@ -26,8 +35,8 @@ def debug(message):
 			# deb.write(headerstr + message.decode('utf-8') + u"\n")
 			deb.write(message + "\n")
 			deb.close()
-		except:
-			debug(repr(message) + " (retried debug)")
+		except Exception, e:
+			debug("%s (retried debug: %s)" % (repr(message), e.message))
 		
 
 import re

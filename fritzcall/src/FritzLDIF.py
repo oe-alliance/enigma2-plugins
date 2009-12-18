@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-#===============================================================================
-# $Author$
-# $Revision$
-# $Date$
-# $Id$
-#==============================
+'''
+$Author$
+$Revision$
+$Date$
+$Id$
+'''
 #
 # needs python-ldap for ldif
 #
 
 import ldif, re
 try:
-	from . import _, debug, normalizePhoneNumber #@UnresolvedImport
+	from . import _, debug, normalizePhoneNumber #@UnresolvedImport # pylint: disable-msg=F0401
 except ValueError:
-	def _(string):
+	def _(string): # pylint: disable-msg=C0103
 		return string
 	
 	def debug(text):
@@ -36,12 +36,12 @@ except ValueError:
 		else:
 			return '0'
 
-def out(number,name):
+def out(number, name):
 	print number + '#' + name
 
-class findNumber(ldif.LDIFParser):
-	def __init__(self, number, input, outFun):
-		ldif.LDIFParser.__init__(self, input)
+class FindNumber(ldif.LDIFParser):
+	def __init__(self, number, inp, outFun):
+		ldif.LDIFParser.__init__(self, inp)
 		self.outFun = outFun
 		self.number = number
 		try:
@@ -92,7 +92,7 @@ class findNumber(ldif.LDIFParser):
 						self.outFun(no, result)
 						self._input_file.close()
 						return
-		for i in ['homePhone','mobile']:
+		for i in ['homePhone', 'mobile']:
 			if entry.has_key(i):
 				no = normalizePhoneNumber(entry[i][0])
 				if self.number == no:
@@ -120,9 +120,9 @@ class findNumber(ldif.LDIFParser):
 						self._input_file.close()
 						return
 
-class readNumbers(ldif.LDIFParser):
-	def __init__(self, input, outFun):
-		ldif.LDIFParser.__init__(self, input)
+class ReadNumbers(ldif.LDIFParser):
+	def __init__(self, inPut, outFun):
+		ldif.LDIFParser.__init__(self, inPut)
 		self.outFun = outFun
 		try:
 			self.parse()
@@ -166,7 +166,7 @@ class readNumbers(ldif.LDIFParser):
 					no = normalizePhoneNumber(entry['telephoneNumber'][0])
 					result = nameB.replace('\n', ', ').replace('\r', '').replace('#', '')
 					self.outFun(no, result)
-		for i in ['homePhone','mobile']:
+		for i in ['homePhone', 'mobile']:
 			if entry.has_key(i):
 				no = normalizePhoneNumber(entry[i][0])
 				if i == 'mobile':
@@ -186,14 +186,14 @@ class readNumbers(ldif.LDIFParser):
 						nameHM = nameHM + ', ' + addressB.replace('\n', ', ').replace('\r', '').replace('#', '')
 					self.outFun(no, nameHM)
 
-def lookedUp(number,name):
+def lookedUp(number, name):
 	print number + ' ' + name
 
 if __name__ == '__main__':
 	import os, sys
 	cwd = os.path.dirname(sys.argv[0])
 	if (len(sys.argv) == 1):
-		readNumbers(open("Kontakte.ldif"), out)
+		ReadNumbers(open("Kontakte.ldif"), out)
 	elif (len(sys.argv) == 2):
 		# nrzuname.py Nummer
-		findNumber(sys.argv[1], open("Kontakte.ldif"), lookedUp)
+		FindNumber(sys.argv[1], open("Kontakte.ldif"), lookedUp)

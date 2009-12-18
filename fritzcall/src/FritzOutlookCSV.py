@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-#===============================================================================
-# $Author$
-# $Revision$
-# $Date$
-# $Id$
-#==============================
+'''
+$Author$
+$Revision$
+$Date$
+$Id$
+'''
 #
 # needs python-textutils for csv
 #
 try:
-	from . import _, debug, normalizePhoneNumber #@UnresolvedImport
+	from . import _, debug, normalizePhoneNumber #@UnresolvedImport # pylint: disable-msg=W0613,F0401
 except ValueError:
-	def _(string):
+	def _(string): # pylint: disable-msg=C0103
 		return string
 	
 	def debug(text):
@@ -35,7 +35,7 @@ except ValueError:
 		else:
 			return '0'
 
-def out(number,name):
+def out(number, name):
 	print number + '#' + name
 
 import csv
@@ -57,9 +57,10 @@ import csv
 #
 
 def findNumber(number, filename):
-	file = open(filename)
-	if not file: return
-	addrs = csv.reader(file, delimiter=',', quotechar='"')
+	fileD = open(filename)
+	if not fileD:
+		return
+	addrs = csv.reader(fileD, delimiter=',', quotechar='"')
 	addrs.next() # skip header
 	for row in addrs:
 		row = map(lambda w: w.decode('cp1252').encode('utf-8'), row)
@@ -72,7 +73,8 @@ def findNumber(number, filename):
 				no = normalizePhoneNumber(row[31])
 				# debug("[FritzOutlookCSV] findNumber compare (business) %s with %s for %s" %(no,number,name))
 				if no == number or (row[37] and number == normalizePhoneNumber(row[37])) or (row[40] and number == normalizePhoneNumber(row[40])):
-					if row[3]: name = row[3] # Nachname
+					if row[3]:
+						name = row[3] # Nachname
 					if row[1]:
 						if name:
 							name = row[1] + ' ' + name # Vorname
@@ -86,25 +88,30 @@ def findNumber(number, filename):
 							nameB = row[5]
 					else:
 						nameB = name
-					if not nameB: continue
+					if not nameB:
+						continue
 					nameB = (nameB + ' (' + _('work') + ')')
 					if row[11]: # Ort geschäftlich
 						addressB = row[11]
-						if row[13]: addressB =  row[13] + ' ' + addressB# Postleitzahl geschäftlich
-						if row[14]: addressB = addressB + ', ' + row[14] # Land/Region geschäftlich
-						if row[8]: addressB = row[8] + ', ' + addressB# Stra￟e gesch￤ftlich
+						if row[13]:
+							addressB =  row[13] + ' ' + addressB# Postleitzahl geschäftlich
+						if row[14]:
+							addressB = addressB + ', ' + row[14] # Land/Region geschäftlich
+						if row[8]:
+							addressB = row[8] + ', ' + addressB# Stra￟e gesch￤ftlich
 						nameB = (nameB + ', ' + addressB).replace('\n', ', ').replace('\r', '').replace('#', '')
 	
 					if no == number:
 						debug("[FritzCallPhonebook] findNumber result: " + no + ' ' + nameB)
-						file.close()
+						fileD.close()
 						return nameB
 			for i in [37, 40]:
 				if row[i]:
-					no = normalizePhoneNumber(row[i])
-					# debug("[FritzOutlookCSV] findNumber compare (home,mobile) %s with %s for %s" %(no,number,name))
-					if no == number:
-						if row[3]: name = row[3] # Nachname
+					number = normalizePhoneNumber(row[i])
+					# debug("[FritzOutlookCSV] findNumber compare (home,mobile) %s with %s for %s" %(number,number,name))
+					if number == number:
+						if row[3]:
+							name = row[3] # Nachname
 						if row[1]:
 							if name:
 								name = row[1] + ' ' + name # Vorname
@@ -116,24 +123,30 @@ def findNumber(number, filename):
 							nameHM = name + ' (' + _('home') + ')'
 						if row[18]: # Ort privat
 							address = row[18]
-							if row[20]: address = row[20] + ' ' + address # Postleitzahl privat
-							if row[21]: address = address + ', ' + row[21] # Land/Region privat
-							if row[15]: address = row[15] + ', ' + address # Straße privat
-						if not address: address = addressB
-						if address:	nameHM = nameHM + ', ' + address
+							if row[20]:
+								address = row[20] + ' ' + address # Postleitzahl privat
+							if row[21]:
+								address = address + ', ' + row[21] # Land/Region privat
+							if row[15]:
+								address = row[15] + ', ' + address # Straße privat
+						if not address:
+							address = addressB
+						if address:
+							nameHM = nameHM + ', ' + address
 						nameHM = nameHM.replace('\n', ', ').replace('\r', '').replace('#', '')
-						file.close()
-						debug("[FritzCallPhonebook] findNumber result: " + no + ' ' + nameHM)
+						fileD.close()
+						debug("[FritzCallPhonebook] findNumber result: " + number + ' ' + nameHM)
 						return nameHM
 		except IndexError:
 			continue
-	file.close()
+	fileD.close()
 	return ""
 	
 def readNumbers(filename, outFun):
-	file = open(filename, "rb")
-	if not file: return
-	addrs = csv.reader(file, delimiter=',', quotechar='"')
+	fileD = open(filename, "rb")
+	if not fileD:
+		return
+	addrs = csv.reader(fileD, delimiter=',', quotechar='"')
 	addrs.next() # skip header
 	for row in addrs:
 		row = map(lambda w: w.decode('cp1252'), row)
@@ -143,7 +156,8 @@ def readNumbers(filename, outFun):
 		addressB = u""
 		try:
 			if row[31] or row[37] or row[40]:
-				if row[3]: name = row[3] # Nachname
+				if row[3]:
+					name = row[3] # Nachname
 				if row[1]:
 					if name:
 						name = row[1] + ' ' + name # Vorname
@@ -157,13 +171,17 @@ def readNumbers(filename, outFun):
 						nameB = row[5]
 				else:
 					nameB = name
-				if not nameB: continue
+				if not nameB:
+					continue
 				nameB = (nameB + ' (' + _('work') + ')')
 				if row[11]: # Ort gesch￤ftlich
 					addressB = row[11]
-					if row[13]: addressB =  row[13] + ' ' + addressB# Postleitzahl gesch￤ftlich
-					if row[14]: addressB = addressB + ', ' + row[14] # Land/Region gesch￤ftlich
-					if row[8]: addressB = row[8] + ', ' + addressB# Stra?e gesch?ftlich
+					if row[13]:
+						addressB =  row[13] + ' ' + addressB# Postleitzahl gesch￤ftlich
+					if row[14]:
+						addressB = addressB + ', ' + row[14] # Land/Region gesch￤ftlich
+					if row[8]:
+						addressB = row[8] + ', ' + addressB# Stra?e gesch?ftlich
 					nameB = (nameB + ', ' + addressB).replace('\n', ', ').replace('\r', '').replace('#', '')
 				if row[31]:
 					number = normalizePhoneNumber(row[31])
@@ -173,7 +191,8 @@ def readNumbers(filename, outFun):
 				if row[i]:
 					number = normalizePhoneNumber(row[i])
 					nameHM = nameB
-					if row[3]: nameHM = row[3] # Nachname
+					if row[3]:
+						nameHM = row[3] # Nachname
 					if row[1]:
 						if nameHM:
 							nameHM = row[1] + ' ' + nameHM # Vorname
@@ -185,17 +204,22 @@ def readNumbers(filename, outFun):
 						nameHM = nameHM + ' (' + _('home') + ')'
 					if row[18]: # Ort privat
 						address = row[18]
-						if row[20]: address = row[20] + ' ' + address # Postleitzahl privat
-						if row[21]: address = address + ', ' + row[21] # Land/Region privat
-						if row[15]: address = row[15] + ', ' + address # Stra￟e privat
-					if not address: address = addressB
-					if address:	nameHM = nameHM + ', ' + address
+						if row[20]:
+							address = row[20] + ' ' + address # Postleitzahl privat
+						if row[21]:
+							address = address + ', ' + row[21] # Land/Region privat
+						if row[15]:
+							address = row[15] + ', ' + address # Stra￟e privat
+					if not address:
+						address = addressB
+					if address:
+						nameHM = nameHM + ', ' + address
 					nameHM = nameHM.replace('\n', ', ').replace('\r', '').replace('#', '')
 					outFun(number, nameHM)
 
 		except IndexError:
 			continue
-	file.close()
+	fileD.close()
 
 if __name__ == '__main__':
 	import os, sys

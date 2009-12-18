@@ -1,4 +1,6 @@
-# -*- coding: utf-8 -*-
+#@PydevCodeAnalysisIgnore
+# pylint: disable-msg=W0312,C0324,C0322
+
 """
 ldif - generate and parse LDIF data (see RFC 2849)
 
