@@ -120,7 +120,7 @@ def decode(in_file, out_file=None, mode=None, quiet=0):
     elif isinstance(out_file, basestring):
         fp = open(out_file, 'wb')
         try:
-            os.path.chmod(out_file, mode)
+            os.path.chmod(out_file, mode) #@UndefinedVariable
         except AttributeError:
             pass
         out_file = fp

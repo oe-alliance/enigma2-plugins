@@ -1,3 +1,6 @@
+'''
+Configuration screens for EmailClient
+'''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.config import config, getConfigListEntry, ConfigText, ConfigPassword, ConfigSelection, ConfigEnableDisable
@@ -5,10 +8,9 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 
-from . import _, initLog, debug, scaleH, scaleV, DESKTOP_WIDTH, DESKTOP_HEIGHT #@UnresolvedImport
-from plugin import mailAccounts
+from . import _, initLog, debug, scaleV, DESKTOP_WIDTH, DESKTOP_HEIGHT #@UnresolvedImport# pylint: disable-msg=C0103,F0401
 
-class EmailConfigOptions(ConfigListScreen,Screen):
+class EmailConfigOptions(ConfigListScreen, Screen):
 	noButtons = 2
 	width = max(noButtons*140+100, 550)
 	height = 5*30+50
@@ -20,7 +22,7 @@ class EmailConfigOptions(ConfigListScreen,Screen):
 		<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<widget name="buttonred" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="buttongreen" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		</screen>""" %(
+		</screen>""" % (
 					(DESKTOP_WIDTH-width)/2, (DESKTOP_HEIGHT-height)/2, width, height,
 					width, height-50,  # config
 					buttonsGap, height-45,
@@ -71,7 +73,7 @@ class EmailConfigOptions(ConfigListScreen,Screen):
 			x[1].cancel()
 		self.close(False)
 
-class EmailConfigAccount(ConfigListScreen,Screen):
+class EmailConfigAccount(ConfigListScreen, Screen):
 	width = max(2*140+100, 550)
 	height = 5*30+50
 	buttonsGap = (width-2*140)/3
@@ -82,7 +84,7 @@ class EmailConfigAccount(ConfigListScreen,Screen):
 		<ePixmap position="%d,%d" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<widget name="buttonred" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="buttongreen" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		</screen>""" %(
+		</screen>""" % (
 					(DESKTOP_WIDTH-width)/2, (DESKTOP_HEIGHT-height)/2, width, height,
 					width, height-50,  # config
 					buttonsGap, height-45,
@@ -111,10 +113,10 @@ class EmailConfigAccount(ConfigListScreen,Screen):
 		if params:
 			(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail, self._listall) = params
 		else:
-			(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail, self._listall) = ("","","993","","","60","50",False)
+			(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail, self._listall) = ("", "", "993", "", "", "60", "50", False)
 		self._cName = ConfigText(self._name, fixed_size=False)
 		self._cServer = ConfigText(self._server, fixed_size=False)
-		self._cPort = ConfigSelection(choices=[("143", "143"),("993", "993 (SSL)")], default=self._port)
+		self._cPort = ConfigSelection(choices=[("143", "143"), ("993", "993 (SSL)")], default=self._port)
 		self._cUser = ConfigText(self._user, fixed_size=False)
 		self._cPassword = ConfigPassword(self._password, fixed_size=False)
 		self._cInterval = ConfigText(self._interval, fixed_size=False)

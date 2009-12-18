@@ -5,7 +5,7 @@ from twisted.mail import imap4
 # from twisted.python import log
 # log.startLogging(open("/tmp/twisted.log","w"))
 # defer.setDebugging(True)
-from . import debug #@UnresolvedImport
+from . import debug #@UnresolvedImport # pylint: disable-msg=F0401
 
 class SimpleIMAP4Client(imap4.IMAP4Client):
 	greetDeferred = None
@@ -28,12 +28,12 @@ class SimpleIMAP4ClientFactory(protocol.ReconnectingClientFactory):
 
 	def buildProtocol(self, addr):
 		debug("[SimpleIMAP4ClientFactory] building protocol: %s" %addr)
-		p = self.protocol(contextFactory = self.ctx)
-		p.factory = self
-		p.greetDeferred = self.e2session.onConnect
+		pr = self.protocol(contextFactory = self.ctx)
+		pr.factory = self
+		pr.greetDeferred = self.e2session.onConnect
 		auth = imap4.CramMD5ClientAuthenticator(self.username)
-		p.registerAuthenticator(auth)
-		return p
+		pr.registerAuthenticator(auth)
+		return pr
 
 	def startedConnecting(self, connector):
 		debug("[SimpleIMAP4ClientFactory] startedConnecting")
@@ -48,15 +48,15 @@ class SimpleIMAP4ClientFactory(protocol.ReconnectingClientFactory):
 		self.e2session.onConnectionLost(reason)
 		protocol.ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
 
-def createFactory( e2session,username,hostname, port):
-	debug("createFactory: for %s@%s:%s" %(username,hostname,port))
+def createFactory(e2session, username, hostname, port):
+	debug("createFactory: for %s@%s:%s" %(username, hostname, port))
 
 	f2 = ssl.ClientContextFactory()
 	factory = SimpleIMAP4ClientFactory(e2session, username, f2)
 	if port == 993:
-		reactor.connectSSL( hostname, port,factory,f2) #@UndefinedVariable
+		reactor.connectSSL(hostname, port, factory, f2) #@UndefinedVariable # pylint: disable-msg=E1101
 	else:
-		reactor.connectTCP( hostname, port,factory) #@UndefinedVariable
+		reactor.connectTCP(hostname, port, factory) #@UndefinedVariable # pylint: disable-msg=E1101
 
 	debug("createFactory: factory started")
 	return factory

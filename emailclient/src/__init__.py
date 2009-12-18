@@ -1,3 +1,6 @@
+'''
+Common functions for EmailClient
+'''
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from Components.Language import language
 from Components.config import config
@@ -10,6 +13,7 @@ gettext.textdomain("enigma2")
 gettext.bindtextdomain("EmailClient", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/EmailClient/locale/"))
 
 def _(txt):
+	# pylint: disable-msg=C0103
 	t = gettext.dgettext("EmailClient", txt)
 	if t == txt:
 		t = gettext.gettext(txt)
@@ -18,7 +22,7 @@ def _(txt):
 def initLog():
 	try:
 		os.remove("/tmp/EmailClient.log")
-	except:
+	except OSError:
 		pass
 
 def debug(message):
@@ -27,8 +31,8 @@ def debug(message):
 			deb = open("/tmp/EmailClient.log", "aw")
 			deb.write(time.ctime() + ': ' + message + "\n")
 			deb.close()
-		except:
-			debug(repr(message) + " (retried debug)")
+		except Exception, e:
+			debug("%s (retried debug: %s)" %(repr(message), str(e)))
 
 from enigma import getDesktop
 DESKTOP_WIDTH = getDesktop(0).size().width()

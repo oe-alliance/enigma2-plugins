@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-#===============================================================================
-# $Author$
-# $Revision$
-# $Date$
-# $Id$
-#==============================
+'''
+$Author$
+$Revision$
+$Date$
+$Id$
+'''
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Screens.MessageBox import MessageBox
@@ -17,7 +17,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Tools import Notifications
-from enigma import eListboxPythonMultiContent, gFont, eTimer #@UnresolvedImport
+from enigma import eListboxPythonMultiContent, gFont, eTimer #@UnresolvedImport # pylint: disable-msg=E0611
 from twisted.mail import imap4 #@UnresolvedImport
 from zope.interface import implements
 import email, re, os
@@ -26,7 +26,7 @@ import time
 from TagStrip import strip_readable
 from protocol import createFactory
 
-from . import _, initLog, debug, scaleH, scaleV, DESKTOP_WIDTH, DESKTOP_HEIGHT #@UnresolvedImport
+from . import _, initLog, debug, scaleH, scaleV, DESKTOP_WIDTH, DESKTOP_HEIGHT #@UnresolvedImport # pylint: disable-msg=F0401
 mailAccounts = [] # contains all EmailAccount objects
 from EmailConfig import EmailConfigOptions, EmailConfigAccount
 
@@ -51,7 +51,7 @@ def decodeHeader(text, default=''):
 			textNew += content
 	try:
 		return textNew.encode('utf-8')
-	except: # for faulty mail software systems
+	except UnicodeEncodeError: # for faulty mail software systems
 		return textNew.decode('iso-8859-1').encode('utf-8')
 
 IS_UNSEEN = 0
@@ -67,17 +67,17 @@ class EmailScreen(Screen):
 	It is specific for one account.
 	'''
 
-	width = scaleH(-1,530)
-	height = scaleV(-1,430)
-	boxlistWidth = scaleH(-1,150)
+	width = scaleH(-1, 530)
+	height = scaleV(-1, 430)
+	boxlistWidth = scaleH(-1, 150)
 	messagelistWidth = width-boxlistWidth
-	infolabelHeight = scaleV(-1,30)
+	infolabelHeight = scaleV(-1, 30)
 	skin = """
 		<screen position="%d,%d" size="%d,%d" title="Email" >
 			<widget name="boxlist" position="0,0" size="%d,%d" scrollbarMode="showOnDemand" />
 			<widget name="messagelist" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" />
 			<widget name="infolabel" position="%d,%d" size="%d,%d"   foregroundColor=\"white\" font=\"Regular;%d\" />
-		</screen>""" %(
+		</screen>""" % (
 					   (DESKTOP_WIDTH-width)/2, (DESKTOP_HEIGHT-height)/2, width, height,
 					   boxlistWidth, height-infolabelHeight,
 					   boxlistWidth, 0, messagelistWidth, height-infolabelHeight,
@@ -114,10 +114,10 @@ class EmailScreen(Screen):
 			 "right":	   self._right,
 			 }, -1)
 		self["messagelist"] = MenuList([], content=eListboxPythonMultiContent)
-		self["messagelist"].l.setItemHeight(scaleV(70,60))
-		self["messagelist"].l.setFont(0, gFont("Regular", scaleV(20,18))) # new
-		self["messagelist"].l.setFont(1, gFont("Regular", scaleV(18,16))) # deleted
-		self["messagelist"].l.setFont(2, gFont("Regular", scaleV(18,16))) # seen
+		self["messagelist"].l.setItemHeight(scaleV(70, 60))
+		self["messagelist"].l.setFont(0, gFont("Regular", scaleV(20, 18))) # new
+		self["messagelist"].l.setFont(1, gFont("Regular", scaleV(18, 16))) # deleted
+		self["messagelist"].l.setFont(2, gFont("Regular", scaleV(18, 16))) # seen
 
 		if self._account.isConnected():
 			self["infolabel"] = Label("")
@@ -126,11 +126,13 @@ class EmailScreen(Screen):
 		else:
 			self["infolabel"] = Label(_("account not connected"))
 			self["boxlist"] = MenuList([])
+		self.currList = "boxlist"
 
 	def _exit(self):
 		self.close()
 
 	def _finishBoxlist(self):
+		# pylint: disable-msg=W0212
 		self.setTitle(_("%(name)s (%(user)s@%(server)s)")
 				%{
 				'name':self._account._name,
@@ -175,6 +177,7 @@ class EmailScreen(Screen):
 		@param where: location, where the error occurred
 		@param what: message, what happened
 		'''
+		# pylint: disable-msg=W0212
 		debug("[EmailScreen] _ebNotify error in %s: %s" %(where, what))
 		self.session.open(MessageBox, _("EmailClient for %(account)s:\n\n%(error)s") %{'account': self._account._name, 'error':what}, type=MessageBox.TYPE_ERROR, timeout=config.plugins.emailimap.timeout.value)
 
@@ -202,7 +205,7 @@ class EmailScreen(Screen):
 		debug("[EmailScreen] onHeaderList: %s" %len(result))
 		self["infolabel"].setText(_("headers loaded, now parsing ..."))
 		self._flagsList = flagsList
-		list = []
+		mylist = []
 		for m in result:
 			state = IS_UNSEEN
 			# debug("onHeaderList :" + repr(flagsList[m]['FLAGS']))
@@ -214,17 +217,17 @@ class EmailScreen(Screen):
 				else:
 					state = IS_DELETED
 			try:
-				list.append(self._buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER']), state))
-			except Exception,e:
+				mylist.append(self._buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER']), state))
+			except Exception, e:
 				try:
-					list.append(self._buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER'].decode('iso8859-1', 'replace'), state)))
-				except:
+					mylist.append(self._buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER'].decode('iso8859-1', 'replace'), state)))
+				except UnicodeDecodeError:
 					# this appear to be errors in the formatting of the mail itself...
 					debug("[EmailScreen] onHeaderList error: %s (%s)" %(result[m]['RFC822.HEADER'], str(e)))
-		if list:
-			list.sort(key=lambda x: x[0].getTimestampUTC(), reverse=True)
-			self["messagelist"].l.setList(list)
-			self["infolabel"].setText(_("have %d messages") %(len(list)))
+		if mylist:
+			mylist.sort(key=lambda x: x[0].getTimestampUTC(), reverse=True)
+			self["messagelist"].l.setList(mylist)
+			self["infolabel"].setText(_("have %d messages") %(len(mylist)))
 		else:
 			self["messagelist"].l.setList([])
 			self["infolabel"].setText(_("have no messages"))
@@ -247,7 +250,7 @@ class EmailScreen(Screen):
 			self._account.getMessage(message, self._onMessageLoaded, self._ebNotify)
 			# self.loadMessage(message)
 			return
-		msg = email.Parser.Parser().parsestr(msgstr) #@UndefinedVariable
+		msg = email.Parser.Parser().parsestr(msgstr) #@UndefinedVariable # pylint: disable-msg=E1101
 		msg.messagebodys = []
 		msg.attachments = []
 
@@ -294,7 +297,7 @@ class EmailScreen(Screen):
 		]
 
 class ScreenMailView(Screen):
-	skin=""
+	skin = ""
 	def __init__(self, session, account, message, uid, flags):
 		'''
 		Principal screen to show one mail message.
@@ -308,9 +311,9 @@ class ScreenMailView(Screen):
 		self._email = message
 		self._account = account
 		# debug('ScreenMailView ' + repr(email) + ' dir: ' + repr(dir(email)))
-		width = max(4*140,scaleH(-1,550))
-		height = scaleV(-1,476)
-		fontSize = scaleV(24,20)
+		width = max(4*140, scaleH(-1, 550))
+		height = scaleV(-1, 476)
+		fontSize = scaleV(24, 20)
 		lineHeight = fontSize+5
 		buttonsGap = (width-4*140)/5
 		self.skin = """
@@ -328,7 +331,7 @@ class ScreenMailView(Screen):
 			<widget name="buttongreen" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="buttonyellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="buttonblue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		</screen>""" %(
+		</screen>""" % (
 					   (DESKTOP_WIDTH-width)/2, (DESKTOP_HEIGHT-height)/2, width, height,
 					   0, 0, width, lineHeight, fontSize-1, # from
 					   0, lineHeight, width, lineHeight, fontSize-1, # date
@@ -336,19 +339,19 @@ class ScreenMailView(Screen):
 					   0, 3*lineHeight+1, width, # line 
 					   0, 3*lineHeight+5, width, height-3*lineHeight-5-5-30-5, fontSize, # body
 					   buttonsGap, height-30-5,
-                       2*buttonsGap+140, height-30-5,
-                       3*buttonsGap+2*140, height-30-5,
-                       4*buttonsGap+3*140, height-30-5,
-                       buttonsGap, height-30-5, scaleV(18,16),
-                       2*buttonsGap+140, height-30-5, scaleV(18,16),
-                       3*buttonsGap+2*140, height-30-5, scaleV(18,16),
-                       4*buttonsGap+3*140, height-30-5, scaleV(18,16),
+					   2*buttonsGap+140, height-30-5,
+					   3*buttonsGap+2*140, height-30-5,
+					   4*buttonsGap+3*140, height-30-5,
+					   buttonsGap, height-30-5, scaleV(18,16),
+					   2*buttonsGap+140, height-30-5, scaleV(18,16),
+					   3*buttonsGap+2*140, height-30-5, scaleV(18,16),
+					   4*buttonsGap+3*140, height-30-5, scaleV(18,16),
 					   )
 		Screen.__init__(self, session)
 		self["from"] = Label(decodeHeader(_("From") +": %s" %self._email.get('from', _('no from'))))
 		try:
-			msgdate = time.ctime(email.utils.mktime_tz(email.utils.parsedate_tz(self._email.get("date"))))
-		except:
+			msgdate = time.ctime(email.utils.mktime_tz(email.utils.parsedate_tz(self._email.get("date")))) #@UndefinedVariable
+		except ValueError:
 			msgdate = _('no date')
 		self["date"] = Label(_("Date") +": %s" %msgdate)
 		self["subject"] = Label(decodeHeader(_("Subject") +": %s" %self._email.get('subject', _('no subject'))))
@@ -412,10 +415,10 @@ class ScreenMailView(Screen):
 
 	def _selectBody(self):
 		if len(self._email.messagebodys):
-			list = []
+			mylist = []
 			for a in self._email.messagebodys:
-				list.append((a.getContenttype(), a))
-			self.session.openWithCallback(self._selectBodyCB, ChoiceBox, _("select Body"), list)
+				mylist.append((a.getContenttype(), a))
+			self.session.openWithCallback(self._selectBodyCB, ChoiceBox, _("select Body"), mylist)
 
 	def _selectBodyCB(self, choice):
 		if choice is not None:
@@ -423,15 +426,15 @@ class ScreenMailView(Screen):
 
 	def _selectAttachment(self):
 		if len(self._email.attachments):
-			list = []
+			mylist = []
 			for a in self._email.attachments:
 				name = a.getFilename()
 				if name:
-					list.append((a.getFilename(), a))
+					mylist.append((a.getFilename(), a))
 				else:
-					list.append((_("no filename"), a))
-			debug("[ScreenMailView] selectAttachment : " + repr(list))
-			self.session.openWithCallback(self._selectAttachmentCB, ChoiceBox, _("select Attachment"), list)
+					mylist.append((_("no filename"), a))
+			debug("[ScreenMailView] selectAttachment : " + repr(mylist))
+			self.session.openWithCallback(self._selectAttachmentCB, ChoiceBox, _("select Attachment"), mylist)
 
 	def _selectAttachmentCB(self, choice):
 		if choice:
@@ -443,7 +446,7 @@ class ScreenMailView(Screen):
 
 ############
 class EmailBody:
-	def __init__(self,data):
+	def __init__(self, data):
 		self.data = data
 
 	def getEncoding(self):
@@ -482,12 +485,12 @@ class EmailAttachment:
 		self.contenttype = contenttype
 		self.data = data
 
-	def save(self,folder):
+	def save(self, folder):
 		try:
 			fp = open(folder+"/"+self.getFilename(),"wb")
 			fp.write(self.data)
 			fp.close()
-		except Exception,e:
+		except Exception, e:
 			debug("[EmailAttachment] save %s" %str(e))
 			return False
 		return True
@@ -501,11 +504,11 @@ class EmailAttachment:
 	def getData(self):
 		return self.data
 
-def UTF7toUTF8(str):
-	return imap4.decoder(str)[0]
+def UTF7toUTF8(string): # pylint: disable-msg=C0103
+	return imap4.decoder(string)[0]
 
-def UTF8toUTF7(str):
-	return imap4.encoder(str.decode('utf-8'))[0]
+def UTF8toUTF7(string): # pylint: disable-msg=C0103
+	return imap4.encoder(string.decode('utf-8'))[0]
 
 
 class CheckMail:
@@ -516,6 +519,7 @@ class CheckMail:
 					at most one checker
 		@type acc: EmailAccount
 		'''
+		# pylint: disable-msg=W0212
 		import random
 		self._name = acc._name
 		self._account = acc
@@ -594,7 +598,7 @@ class CheckMail:
 class MessageHeader(object):
 	def __init__(self, uid, message):
 		self.uid = uid #must be int
-		self.message = email.Parser.HeaderParser().parsestr(message) #@UndefinedVariable
+		self.message = email.Parser.HeaderParser().parsestr(message) #@UndefinedVariable # pylint: disable-msg=E1101
 
 	def getSenderString(self):
 		return decodeHeader(self.get("from"), _("no sender"))
@@ -605,13 +609,13 @@ class MessageHeader(object):
 	def getTimestampUTC(self):
 		ts = 0
 		try:
-			ts = email.utils.mktime_tz(email.utils.parsedate_tz(self.get("date")))
-		except:
+			ts = email.utils.mktime_tz(email.utils.parsedate_tz(self.get("date"))) #@UndefinedVariable
+		except ValueError:
 			debug("[MessageHeader] getDateTime: Invalid date: %s" % self.get("date"))
 		return ts
 
 	def get(self, key, default=None):
-		return self.message.get(key,failobj=default)
+		return self.message.get(key, failobj=default)
 
 	def __str__(self):
 		return "<MessageHeader uid="+str(self.uid)+", subject="+self.getSubject()+">"
@@ -628,7 +632,7 @@ class EmailAccount():
 		@param params: (name, server, port, user, password, interval, maxmail)
 		@param afterInit: to be called, when init is done. Needed to writeAccounts AFTER this one is added
 		'''
-		# TODO: derypt password
+		# TODO: decrypt password
 		(self._name, self._server, self._port, self._user, self._password, self._interval, self._maxmail, listall) = params
 		# debug("[EmailAccount] %s: __init__: %s" %(self._name, repr(params)))
 		self._listall = (listall==1)
@@ -740,7 +744,7 @@ class EmailAccount():
 		else:
 			return False
 
-	def _doSearchUnseen(self, result, callback): #@UnusedVariable
+	def _doSearchUnseen(self, result, callback): #@UnusedVariable # pylint: disable-msg=W0613
 		# debug('[EmailAccount] %s: _doSearchUnseen' %(self._name))
 		self._proto.search(imap4.Query(unseen=1)).addCallback(callback).addErrback(self._ebNotify, '_doSearchUnseen', _("cannot get list of new messages"))
 
@@ -766,9 +770,8 @@ class EmailAccount():
 			else:
 				rangeToFetch = [1, numMessagesinFolder]
 			try:
-				self._rangeToFetch = rangeToFetch
 				self._proto.fetchFlags('%i:%i'%(rangeToFetch[0], rangeToFetch[1])	#'1:*'
-						   ).addCallback(self._onFlagsList, callback)
+						   ).addCallback(self._onFlagsList, callback, rangeToFetch)
 
 			except imap4.IllegalServerResponse, e:
 				debug("[EmailAccount] _onExamine exception: " + str(e))
@@ -778,8 +781,8 @@ class EmailAccount():
 		debug("[EmailAccount] %s: _onSelectFailed: %s %s" %(self._name, mboxname, str(failure)))
 		callback([], [])
 
-	def _onFlagsList(self, flagsList, callback):
-		self._proto.fetchHeaders('%i:%i'%(self._rangeToFetch[0], self._rangeToFetch[1])	#'1:*'
+	def _onFlagsList(self, flagsList, callback, rangeToFetch):
+		self._proto.fetchHeaders('%i:%i'%(rangeToFetch[0], rangeToFetch[1])	#'1:*'
 				   ).addCallback(callback, flagsList)
 
 	def getMessage(self, message, callback, errCallback):
@@ -796,8 +799,7 @@ class EmailAccount():
 	def _onMessageSizeLoaded(self, result, message, callback, errCallback):
 		debug("[EmailAccount] %s: _onMessageSizeLoaded: %s %s" %(self._name, str(result), str(message)))
 		size = int(result[message.uid]['RFC822.SIZE'])
-		self.MAX_MESSAGE_SIZE_TO_OPEN = 4000000
-		if size >= self.MAX_MESSAGE_SIZE_TO_OPEN:
+		if size >= 4000000:
 			#ask here to open message
 			debug("[EmailAccount] _onMessageSizeLoaded: message to large to open (size=%d)" %size)
 			errCallback('', _("message too large"))
@@ -824,11 +826,9 @@ class EmailAccount():
 		self._factory.resetDelay()
 		self._proto = proto
 		self._failureReason = ""
-		try:
+		if self._connectCallback:
 			self._connectCallback()
-		except:
-			pass # for the unlikely case, the screen does not exist anymore
-		self._connectCallback = None
+			self._connectCallback = None
 		proto.getCapabilities().addCallback(self._cbCapabilities).addErrback(self._ebCapabilities)
 
 	def onConnectionFailed(self, reason):
@@ -852,7 +852,7 @@ class EmailAccount():
 		if int(self._interval) == 0 and self._factory:
 			self._factory.stopTrying()
 
-	def _cbCapabilities(self,reason):
+	def _cbCapabilities(self, reason):
 		debug(_("[EmailAccount] %(name)s: _cbCapabilities:\n\
 ####################################################################################################\n\
 # If you have problems to log into your imap-server, please send me the output of the following line\n\
@@ -861,7 +861,7 @@ class EmailAccount():
 			%{'name':self._name, 'capa':str(reason)})
 		self._doLogin()
 
-	def _ebCapabilities(self,reason):
+	def _ebCapabilities(self, reason):
 		debug("[EmailAccount] %s: _ebCapabilities: %s" %(self._name, str(reason)))
 
 	def _doLogin(self):
@@ -891,9 +891,9 @@ class EmailAccount():
 		try:
 			failure.trap(imap4.NoSupportedAuthentication)
 			self._doLoginInsecure()
-		except Exception,e:
+		except Exception, e:
 			debug("[EmailAccount] %s: _onAuthenticationFailed: %s" %(self._name, e.message))
-			print e,e.message
+			print e, e.message
 
 	def _doLoginInsecure(self):
 		debug("[EmailAccount] %s: _doLoginInsecure" %(self._name))
@@ -919,20 +919,20 @@ class EmailAccount():
 					})
 
 	def _onMailboxList(self, result):
-		list = [UTF7toUTF8(mb[2]).encode('utf-8') for mb in result if '\\Noselect' not in mb[0]]
-		debug("[EmailAccount] %s: onMailboxList: %s selectable mailboxes" %(self._name, len(list)))
-		# debug("[EmailAccount] %s: onMailboxList:\n%s" %(self._name, str(list)))
-		list.sort()
+		mylist = [UTF7toUTF8(mb[2]).encode('utf-8') for mb in result if '\\Noselect' not in mb[0]]
+		debug("[EmailAccount] %s: onMailboxList: %s selectable mailboxes" %(self._name, len(mylist)))
+		# debug("[EmailAccount] %s: onMailboxList:\n%s" %(self._name, str(mylist)))
+		mylist.sort()
 		try:
-			self.inboxPos = map(lambda x: x.lower(), list).index('inbox')+1
-		except:
+			self.inboxPos = map(lambda x: x.lower(), mylist).index('inbox')+1
+		except ValueError:
 			debug("[EmailAccount] onMailboxList: no inbox?!?!")
-			list = ['INBOX']
+			mylist = ['INBOX']
 			self.inboxPos = 1
-		self.mailboxList = list
+		self.mailboxList = mylist
 
 class EmailAccountList(Screen):
-
+	# pylint: disable-msg=W0212
 	def __init__(self, session):
 		'''
 		Entry screen holding the list of accounts.
@@ -954,7 +954,7 @@ class EmailAccountList(Screen):
 			<widget name="buttonred" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="buttongreen" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="buttonyellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-			</screen>""" %(
+			</screen>""" % (
 						(DESKTOP_WIDTH-width)/2, (DESKTOP_HEIGHT-height)/2, width, height,
 						width, height,  # config
 						buttonsGap, height-45,
@@ -982,8 +982,8 @@ class EmailAccountList(Screen):
 			if not acc.isConnected():
 				acc.forceRetry(self._layoutFinish)
 		self["accounts"] = MenuList([], content=eListboxPythonMultiContent)
-		self["accounts"].l.setItemHeight(scaleV(20,18)+5)
-		self["accounts"].l.setFont(0, gFont("Regular", scaleV(20,18)))
+		self["accounts"].l.setItemHeight(scaleV(20, 18)+5)
+		self["accounts"].l.setFont(0, gFont("Regular", scaleV(20, 18)))
 		self.onLayoutFinish.append(self._layoutFinish)
 
 	def _layoutFinish(self):
@@ -994,7 +994,7 @@ class EmailAccountList(Screen):
 				color = 0x00FFFFFF
 			else:
 				color = 0x00888888
-			accList.append([acc, MultiContentEntryText(pos=(0, 0), size=(self.width,scaleV(20,18)+5), text=acc._name, color=color, color_sel=color)])
+			accList.append([acc, MultiContentEntryText(pos=(0, 0), size=(self.width, scaleV(20, 18)+5), text=acc._name, color=color, color_sel=color)])
 		self["accounts"].l.setList(accList)
 
 	def _config(self):
@@ -1077,7 +1077,6 @@ MAILCONF = resolveFilename(SCOPE_CONFIG, "EmailClient.csv")
 #
 CONFIG_VERSION = 1
 def writeAccounts():
-	global mailAccounts
 	fd = open(MAILCONF, 'w')
 	fd.write(str(CONFIG_VERSION)+'\n')
 	out = csv.writer(fd, quotechar='"', lineterminator='\n')
@@ -1089,12 +1088,12 @@ def getAccounts():
 	debug("[] getAccounts")
 
 	if not os.path.exists(MAILCONF):
-		MAILCONF_XML = resolveFilename(SCOPE_SYSETC, "mailconf.xml")
-		debug("[] getAccounts: check for %s" %MAILCONF_XML)
-		if os.path.exists(MAILCONF_XML):
+		fMAILCONF_XML = resolveFilename(SCOPE_SYSETC, "mailconf.xml")
+		debug("[] getAccounts: check for %s" %fMAILCONF_XML)
+		if os.path.exists(fMAILCONF_XML):
 			from xml.dom.minidom import parse
-			Notifications.AddNotification(MessageBox, _("importing configurations from %s") %MAILCONF_XML, type=MessageBox.TYPE_INFO, timeout=config.plugins.emailimap.timeout.value)
-			maildom = parse(MAILCONF_XML)
+			Notifications.AddNotification(MessageBox, _("importing configurations from %s") %fMAILCONF_XML, type=MessageBox.TYPE_INFO, timeout=config.plugins.emailimap.timeout.value)
+			maildom = parse(fMAILCONF_XML)
 			for top in maildom.getElementsByTagName("list"):
 				for acc in top.getElementsByTagName("account"):
 					name = str(acc.getElementsByTagName("name")[0].childNodes[0].data)
@@ -1118,7 +1117,7 @@ def getAccounts():
 				version = int(acc[0])
 				continue
 			debug("[EmailClient] - Autostart: add account %s" %acc[0])
-			if version==0:
+			if version == 0:
 				# add listall param at the end to get version 1
 				(name, server, port, user, password, interval, maxmail) = acc
 				acc = (name, server, port, user, password, interval, maxmail, 0)
@@ -1127,20 +1126,15 @@ def getAccounts():
 		if version != CONFIG_VERSION:
 			writeAccounts()
 
-def main(session, **kwargs): #@UnusedVariable kwargs
+def main(session, **kwargs): #@UnusedVariable kwargs # pylint: disable-msg=W0613
 	session.open(EmailAccountList)
 
 def autostart(reason, **kwargs): #@UnusedVariable reason
-	debug("[EmailClient] - Autostart reason: %d kwargs: %s" %(reason,repr(kwargs)))
+	debug("[EmailClient] - Autostart reason: %d kwargs: %s" %(reason, repr(kwargs)))
 	debug("[EmailClient] " + "$Revision$"[1:-1]	+ "$Date$"[7:23] + " starting")
 	if os.path.isfile('/usr/lib/python2.5/uu.py') is not True:
 		import shutil
 		shutil.copy(resolveFilename(SCOPE_PLUGINS, "Extensions/EmailClient/uu.py"), '/usr/lib/python2.5/uu.py')
-	# ouch, this is a hack
-	if kwargs.has_key("session"):
-		global my_global_session
-		my_global_session = kwargs["session"]
-		# return
 
 	if reason == 0:
 		getAccounts()
@@ -1150,7 +1144,7 @@ def autostart(reason, **kwargs): #@UnusedVariable reason
 
 initLog()
 
-def Plugins(path, **kwargs): #@UnusedVariable kwargs
+def Plugins(path, **kwargs): #@UnusedVariable kwargs # pylint: disable-msg=W0613,C0103
 	return [
 			 PluginDescriptor(name=_("Email Client"), description=_("view Emails via IMAP4"),
 			 where = PluginDescriptor.WHERE_PLUGINMENU,
