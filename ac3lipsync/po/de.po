@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioSync\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-26 01:09+0100\n"
+"POT-Creation-Date: 2009-12-18 02:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: \n"
@@ -13,148 +13,129 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-SearchPath-0: ..\\src\n"
 
-#: ..\src/AC3main.py:56
-#, python-format
-msgid "%s:"
-msgstr "%s:"
-
 #: ..\src/AC3main.py:57
-#: ..\src/AC3main.py:72
-#: ..\src/AC3main.py:123
-#: ..\src/AC3main.py:168
-#: ..\src/AC3main.py:258
-#: ..\src/AC3main.py:262
-#: ..\src/AC3main.py:263
+msgid "Service delay"
+msgstr "Kanal delay"
+
+#: ..\src/AC3main.py:58
+msgid "Global delay"
+msgstr "Globales delay"
+
+#: ..\src/AC3main.py:62
+#: ..\src/AC3main.py:146
+#: ..\src/AC3main.py:236
+#: ..\src/AC3main.py:240
+#: ..\src/AC3main.py:241
 #, python-format
 msgid "%i ms"
 msgstr "%i ms"
 
 #: ..\src/AC3main.py:65
-msgid "Passthrough"
-msgstr "Passthrough"
-
-#: ..\src/AC3main.py:66
-msgid "Global Passthr."
-msgstr "Passthr. Global"
-
-#: ..\src/AC3main.py:67
-msgid "PCM"
-msgstr "PCM"
-
-#: ..\src/AC3main.py:68
-msgid "Global PCM"
-msgstr "PCM Global"
-
-#: ..\src/AC3main.py:73
-msgid "Delay:"
-msgstr "Verzögerung:"
-
-#: ..\src/AC3main.py:76
 msgid "Channel audio:"
 msgstr "Kanal Tonspur:"
 
-#: ..\src/AC3main.py:81
+#: ..\src/AC3main.py:70
 #: ..\src/AC3setup.py:63
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ..\src/AC3main.py:82
+#: ..\src/AC3main.py:71
 msgid "OK"
 msgstr "OK"
 
-#: ..\src/AC3main.py:83
+#: ..\src/AC3main.py:72
 msgid "Switch audio"
 msgstr "Tonspur..."
 
-#: ..\src/AC3main.py:84
+#: ..\src/AC3main.py:73
 msgid "Save to key"
 msgstr "Auf Taste speichern"
 
-#: ..\src/AC3main.py:89
+#: ..\src/AC3main.py:78
 msgid "Open plugin menu"
 msgstr "Plugin menu öffnen"
 
-#: ..\src/AC3main.py:90
-#: ..\src/AC3main.py:97
+#: ..\src/AC3main.py:79
+#: ..\src/AC3main.py:86
 msgid "Save values and close plugin"
 msgstr "Werte speichern und Plugin schliessen"
 
-#: ..\src/AC3main.py:91
-#: ..\src/AC3main.py:96
+#: ..\src/AC3main.py:80
+#: ..\src/AC3main.py:85
 msgid "Discard changes and close plugin"
 msgstr "Änderungen verwerfen und Plugin schliessen"
 
-#: ..\src/AC3main.py:92
-msgid "Decrease delay"
-msgstr "Verzögerung verringern"
-
-#: ..\src/AC3main.py:93
-msgid "Increase delay"
-msgstr "Verzögerung erhöhen"
-
-#: ..\src/AC3main.py:94
-#: ..\src/AC3main.py:95
+#: ..\src/AC3main.py:81
+#: ..\src/AC3main.py:82
 msgid "Change active delay"
 msgstr "Aktive Verzögerung ändern"
 
-#: ..\src/AC3main.py:98
+#: ..\src/AC3main.py:83
+msgid "Increase delay"
+msgstr "Verzögerung erhöhen"
+
+#: ..\src/AC3main.py:84
+msgid "Decrease delay"
+msgstr "Verzögerung verringern"
+
+#: ..\src/AC3main.py:87
 msgid "Select channel audio"
 msgstr "Kanal- Tonspur wählen"
 
-#: ..\src/AC3main.py:99
+#: ..\src/AC3main.py:88
 msgid "Save current delay to key"
 msgstr "Aktuelle Verzögerung auf Taste speichern"
 
-#: ..\src/AC3main.py:100
-#: ..\src/AC3main.py:102
-#: ..\src/AC3main.py:104
+#: ..\src/AC3main.py:89
+#: ..\src/AC3main.py:91
+#: ..\src/AC3main.py:93
 #, python-format
 msgid "Decrease delay by %i ms (can be set)"
 msgstr "Verzögerung um %i ms erhöhen"
 
-#: ..\src/AC3main.py:101
-#: ..\src/AC3main.py:103
-#: ..\src/AC3main.py:105
+#: ..\src/AC3main.py:90
+#: ..\src/AC3main.py:92
+#: ..\src/AC3main.py:94
 #, python-format
 msgid "Increase delay by %i ms (can be set)"
 msgstr "Verzögerung um %i ms verringern"
 
-#: ..\src/AC3main.py:106
-#: ..\src/AC3main.py:107
-#: ..\src/AC3main.py:108
-#: ..\src/AC3main.py:109
+#: ..\src/AC3main.py:95
+#: ..\src/AC3main.py:96
+#: ..\src/AC3main.py:97
+#: ..\src/AC3main.py:98
 #, python-format
 msgid "Set delay to %i ms (can be set)"
 msgstr "Verzögerung auf %i ms setzen"
 
-#: ..\src/AC3main.py:233
+#: ..\src/AC3main.py:211
 msgid "Move plugin screen"
 msgstr "Plugin- Bildschirm verschieben"
 
-#: ..\src/AC3main.py:236
+#: ..\src/AC3main.py:214
 msgid "Menu"
 msgstr "Menu"
 
-#: ..\src/AC3main.py:243
-#: ..\src/AC3main.py:306
+#: ..\src/AC3main.py:221
+#: ..\src/AC3main.py:282
 msgid "Invalid selection"
 msgstr "Ungültige Auswahl"
 
-#: ..\src/AC3main.py:281
+#: ..\src/AC3main.py:257
 #, python-format
 msgid "Select the key you want to set to %i ms"
 msgstr "Wählen Sie die Taste, die Sue auf %i ms setzen wollen"
 
-#: ..\src/AC3main.py:287
+#: ..\src/AC3main.py:263
 #, python-format
 msgid "Key %(key)s (current value: %(value)i ms)"
 msgstr "Taste %(key)s (aktueller Wert: %(value)i ms)"
 
-#: ..\src/AC3main.py:292
+#: ..\src/AC3main.py:268
 msgid "Setting key canceled"
 msgstr "Setzen der Taste abgebrochen"
 
-#: ..\src/AC3main.py:304
+#: ..\src/AC3main.py:280
 #, python-format
 msgid "Key %(Key)s successfully set to %(delay)i ms"
 msgstr "Taste %(Key)s erfolgreich auf %(delay)i ms gesetzt"
@@ -198,69 +179,69 @@ msgstr "Speichern"
 msgid " "
 msgstr ""
 
-#: ..\src/MovableScreen.py:16
-#: ..\src/MovableScreen.py:23
+#: ..\src/MovableScreen.py:17
+#: ..\src/MovableScreen.py:24
 msgid "Save values and close screen"
 msgstr "Werte speichern und plugin schliessen"
 
-#: ..\src/MovableScreen.py:17
-#: ..\src/MovableScreen.py:22
+#: ..\src/MovableScreen.py:18
+#: ..\src/MovableScreen.py:23
 msgid "Discard changes and close screen"
 msgstr "Änderungen verwerfen"
 
-#: ..\src/MovableScreen.py:18
+#: ..\src/MovableScreen.py:19
 msgid "Move screen to the left"
 msgstr "Plugin nach links bewegen"
 
-#: ..\src/MovableScreen.py:19
+#: ..\src/MovableScreen.py:20
 msgid "Move screen to the right"
 msgstr "Plugin nach rechts bewegen"
 
-#: ..\src/MovableScreen.py:20
+#: ..\src/MovableScreen.py:21
 msgid "Move screen up"
 msgstr "Plugin nach oben bewegen"
 
-#: ..\src/MovableScreen.py:21
+#: ..\src/MovableScreen.py:22
 msgid "Move screen down"
 msgstr "Plugin nach unten bewegen"
 
-#: ..\src/MovableScreen.py:24
+#: ..\src/MovableScreen.py:25
 msgid "Move screen to the upper left corner"
 msgstr "Plugin in die linke obere Ecke verschieben"
 
-#: ..\src/MovableScreen.py:25
+#: ..\src/MovableScreen.py:26
 msgid "Center screen at the upper border"
 msgstr "Plugin am oberen Rand zentrieren"
 
-#: ..\src/MovableScreen.py:26
+#: ..\src/MovableScreen.py:27
 msgid "Move screen to the upper right corner"
 msgstr "Plugin in die rechte obere Ecke verschieben"
 
-#: ..\src/MovableScreen.py:27
+#: ..\src/MovableScreen.py:28
 msgid "Move screen to the middle of the left border"
 msgstr "Plugin in die Mitte des linken Randes bewegen"
 
-#: ..\src/MovableScreen.py:28
+#: ..\src/MovableScreen.py:29
 msgid "Move screen to the center of your TV"
 msgstr "Plugin auf dem Bildschirm zentrieren"
 
-#: ..\src/MovableScreen.py:29
+#: ..\src/MovableScreen.py:30
 msgid "Move screen to the middle of the right border"
 msgstr "Plugin in die Mitte des rechten Randes bewegen"
 
-#: ..\src/MovableScreen.py:30
+#: ..\src/MovableScreen.py:31
 msgid "Move screen to the lower left corner"
 msgstr "Plugin in die linke untere Ecke verschieben"
 
-#: ..\src/MovableScreen.py:31
+#: ..\src/MovableScreen.py:32
 msgid "Center screen at the lower border"
 msgstr "Plugin am unteren Rand zentrieren"
 
-#: ..\src/MovableScreen.py:32
+#: ..\src/MovableScreen.py:33
 msgid "Move screen to the lower right corner"
 msgstr "Plugin in die rechte untere Ecke verschieben"
 
-#: ..\src/MovableScreen.py:33
+#: ..\src/MovableScreen.py:34
 msgid "Reset saved position"
 msgstr "Gespeicherte Position zurücksetzen"
 
@@ -283,6 +264,16 @@ msgstr "Audio Sync Setup"
 msgid "Setup for the Audio Sync Plugin"
 msgstr "Setup fürs Audio Sync Plugin"
 
+#~ msgid "%s:"
+#~ msgstr "%s:"
+#~ msgid "Passthrough"
+#~ msgstr "Passthrough"
+#~ msgid "Global Passthr."
+#~ msgstr "Passthr. Global"
+#~ msgid "PCM"
+#~ msgstr "PCM"
+#~ msgid "Delay:"
+#~ msgstr "Verzögerung:"
 #~ msgid "sets the audio Delay (LipSync)"
 #~ msgstr "Setzt die verschiedenen Audio- Verzögerungen (LipSync)"
 
