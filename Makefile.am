@@ -38,7 +38,6 @@ SUBDIRS = \
 	permanentclock \
 	podcast \
 	quickbutton \
-	reconstruct_apsc \
 	remotetimer \
 	rsdownloader \
 	simplerss \
