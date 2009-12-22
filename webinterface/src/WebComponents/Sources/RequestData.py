@@ -23,7 +23,7 @@ class RequestData(Source):
 
 	def getHTML(self, id):
 		if self.what is self.HOST:
-			return self.request.host.host
+			return self.request.getRequestHostname()
 		elif self.what is self.PORT:
 			return str(self.request.host.port)
 		elif self.what is self.METHOD:
