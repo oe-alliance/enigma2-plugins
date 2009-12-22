@@ -35,7 +35,7 @@ class ReconstructApSc(ChoiceBox):
 			(_("Reconstruct all missing .ap and .sc files in this directory"), "CALLFUNC", self.confirmed2),
 			(_("Check any running reconstruct process"), "CALLFUNC", self.confirmed3),
 		]
-		ChoiceBox.__init__(self, session, _("What would you like to reconstruct?  (\"%s\"") % (self.name), list = tlist, selection = 0)
+		ChoiceBox.__init__(self, session, _("What would you like to reconstruct?  (\"%s\")") % (self.name), list = tlist, selection = 0)
 		self.skinName = "ChoiceBox"
 
 	def confirmed0(self, arg):
