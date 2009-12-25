@@ -22,6 +22,7 @@ from Components.config import config, ConfigSubsection, ConfigText
 from Screens.Screen import Screen
 from Screens.ChannelSelection import ChannelContextMenu
 from enigma import eServiceReference
+from Components.ChoiceList import ChoiceEntryComponent
 
 # for localized messages
 from . import _
@@ -77,8 +78,8 @@ def startUpService__init__(self, session, csel):
 	if csel.bouquet_mark_edit == 0 and not csel.movemode:
 		if not inBouquetRootList:
 			if not (current.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
-				self["menu"].list.insert(1, (_("set as startup service"), self.newStartUpServiceSelected))
-				self["menu"].list.insert(2, (_("reset startup service"), self.resetStartUpService))
+				self["menu"].list.insert(1, ChoiceEntryComponent(text = (_("set as startup service"), self.newStartUpServiceSelected)))
+				self["menu"].list.insert(2, ChoiceEntryComponent(text = (_("reset startup service"), self.resetStartUpService)))
 
 def newStartUpServiceSelected(self):
 	current = self.csel.getCurrentSelection()
