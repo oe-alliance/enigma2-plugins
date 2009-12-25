@@ -7,12 +7,11 @@ from Components.ActionMap import ActionMap
 from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer
 from os import access, chmod, X_OK
 
-recons_path = "/usr/lib/enigma2/python/Plugins/Extensions/ReconstructApSc/bin/reconstruct_apsc"
-# Hack to make sure it is executable
-if not access(recons_path, X_OK):
-	chmod(recons_path, 493)
-
 def main(session, service, **kwargs):
+	# Hack to make sure it is executable
+	recons_path = "/usr/lib/enigma2/python/Plugins/Extensions/ReconstructApSc/bin/reconstruct_apsc"
+	if not access(recons_path, X_OK):
+		chmod(recons_path, 493)
 	session.open(ReconstructApSc, service, **kwargs)
 
 def Plugins(**kwargs):
