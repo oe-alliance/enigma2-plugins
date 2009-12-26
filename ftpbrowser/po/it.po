@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - ftpbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-24 11:00+0100\n"
+"POT-Creation-Date: 2009-11-02 13:45+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/ftpbrowser\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/ftpbrowser\n"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPQueueManager.py:67
+#: /home/dario/Plugins/ftpbrowser/src/FTPQueueManager.py:97
 msgid "FTP Queue Manager"
 msgstr "Gestione code FTP"
 
@@ -40,69 +40,74 @@ msgstr "Connessione a FTP..."
 msgid "A basic FTP client"
 msgstr "Un semplice client FTP "
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:143
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:183
-msgid "Exit"
-msgstr "Uscire"
-
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:144
-msgid "OK"
-msgstr "Ok"
-
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:146
-msgid "Enter URI"
-msgstr "Inserire URI"
-
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:149
-msgid "Name:"
-msgstr "Nome:"
-
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:150
-msgid "Address:"
-msgstr "Indirizzo:"
-
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:151
-msgid "Username:"
-msgstr "Nome User:"
-
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:152
-msgid "Password:"
-msgstr "Password:"
-
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:153
-msgid "Port:"
-msgstr "Porta:"
-
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:166
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:145
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:172
 msgid "FTP Server Editor"
 msgstr "Editor server FTP"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:186
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:148
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:184
+msgid "Exit"
+msgstr "Uscire"
+
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:149
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:151
+msgid "Enter URI"
+msgstr "Inserire URI"
+
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:154
+msgid "Name:"
+msgstr "Nome:"
+
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:155
+msgid "Address:"
+msgstr "Indirizzo:"
+
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:156
+msgid "Username:"
+msgstr "Nome User:"
+
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:157
+msgid "Password:"
+msgstr "Password:"
+
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:158
+msgid "Port:"
+msgstr "Porta:"
+
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:159
+msgid "Passive:"
+msgstr "Passivo:"
+
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:208
 msgid "Enter URI of FTP Server:"
 msgstr "Inserire URI del server FTP:"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:213
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:185
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:255
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:186
 msgid "Delete"
 msgstr "Canc."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:214
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:256
 msgid "Add"
 msgstr "Agg."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:215
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:257
 msgid "Edit"
 msgstr "Mod."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:216
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:258
 msgid "Save"
 msgstr "Salvare"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:235
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:280
 msgid "FTP Server Manager"
 msgstr "Gestione server FTP"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:259
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:311
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -110,118 +115,118 @@ msgstr ""
 "Cancellare questa voce?\n"
 "Non potrà essere recuperata!"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:313
+#: /home/dario/Plugins/ftpbrowser/src/FTPServerManager.py:365
 msgid "Configuration saved."
 msgstr "Configurazione salvata."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:102
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:124
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:101
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:123
 msgid "Parent Directory"
 msgstr "Cartella padre"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:125
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:129
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:124
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:128
 msgid "Error"
 msgstr "Errore"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:176
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:177
 msgid "Local"
 msgstr "Locale"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:178
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:773
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:816
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:179
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:774
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:817
 msgid "Remote (not connected)"
 msgstr "Remoto (non connesso)"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:184
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:185
 msgid "Rename"
 msgstr "Rinominare"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:186
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:268
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:187
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:269
 msgid "Upload"
 msgstr "Upload"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:192
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:193
 msgid "enter directory/get file/put file"
 msgstr "Inserire cartella/Origine/Destinazione"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:193
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:194
 msgid "close"
 msgstr "Chiudere"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:194
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:195
 msgid "open menu"
 msgstr "Menu"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:199
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:200
 msgid "Select local file list"
 msgstr "Selezionare elenco file locali"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:200
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:201
 msgid "Select remote file list"
 msgstr "Selezionare elenco file remoti"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:261
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:262
 msgid "Server Manager"
 msgstr "Gestione server"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:262
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:263
 msgid "Queue Manager"
 msgstr "Gestione code"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:272
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:273
 msgid "Download"
 msgstr "Download"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:325
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:344
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:326
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:345
 #, python-format
 msgid "Renamed %s to %s."
 msgstr "Tinominare %s come %s."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:327
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:342
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:328
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:343
 #, python-format
 msgid "Could not rename %s."
 msgstr "Impossibile rinominare %s."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:366
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:367
 msgid "Enter new filename:"
 msgstr "Inserire il nuovo nome file:"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:380
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:396
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:381
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:397
 #, python-format
 msgid "Removed %s."
 msgstr "%s rimosso."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:382
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:394
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:383
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:395
 #, python-format
 msgid "Could not delete %s."
 msgstr "Impossibile rimuovere %s"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:409
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:422
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:410
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:423
 msgid "Removing directories is not supported."
 msgstr "La rimozione di cartelle non è supportata"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:434
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:435
 #, python-format
 msgid "Are you sure you want to delete %s?"
 msgstr "Cancellare %s?"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:462
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:463
 msgid "Queue processed."
 msgstr "Coda processata."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:469
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:470
 msgid "Could not obtain list of files."
 msgstr "Impossibile ottenere la lista file."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:518
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:519
 #, python-format
 msgid ""
 "A file with this name (%s) already exists locally.\n"
@@ -230,7 +235,7 @@ msgstr ""
 "Un file con lo stesso nome (%s) è già presente localmente!\n"
 "Sovrascriverlo?"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:548
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:549
 #, python-format
 msgid ""
 "A file with this name (%s) already exists on the remote host.\n"
@@ -239,35 +244,35 @@ msgstr ""
 "Un file con lo stesso nome (%s) è già presente sull'host remoto!\n"
 "Sovrascriverlo?"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:586
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:610
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:587
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:611
 msgid "There already is an active transfer."
 msgstr "Un trasferimento è già attivo."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:649
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:650
 msgid "Upload finished."
 msgstr "Caricamento terminato."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:658
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:682
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:659
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:683
 msgid "Error during download."
 msgstr "Errore nel download."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:673
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:674
 msgid "Download finished."
 msgstr "Download terminato."
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:708
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:709
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr "ETA %d:%02d min"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:709
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:710
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kb/s"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:743
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:744
 msgid ""
 "A transfer is currently in progress.\n"
 "What do you want to do?"
@@ -275,23 +280,23 @@ msgstr ""
 "Un trasferimento è in corso!\n"
 "Come si vuole procedere??"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:745
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:746
 msgid "Run in Background"
 msgstr "Eseguire in background"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:746
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:747
 msgid "Abort transfer"
 msgstr "Annullare il trasferimento"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:747
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:748
 msgid "Cancel"
 msgstr "Annullare"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:808
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:809
 msgid "Remote"
 msgstr "Remoto"
 
-#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:819
+#: /home/dario/Plugins/ftpbrowser/src/FTPBrowser.py:820
 msgid "Could not connect to ftp server!"
 msgstr "Impossibile connettersi al server ftp!"
 
