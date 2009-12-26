@@ -307,8 +307,8 @@ movieselectionquickbutton/Makefile
 movieselectionquickbutton/po/Makefile
 movieselectionquickbutton/src/Makefile
 
-reconstruct_apsc/Makefile
-reconstruct_apsc/src_cc/Makefile
-reconstruct_apsc/src_py/Makefile
-reconstruct_apsc/meta/Makefile
+reconstructapsc/Makefile
+reconstructapsc/src_cc/Makefile
+reconstructapsc/src_py/Makefile
+reconstructapsc/meta/Makefile
 ])
