@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-26 19:29+0100\n"
-"PO-Revision-Date: 2009-09-26 19:33+0100\n"
+"POT-Creation-Date: 2009-10-29 13:55+0100\n"
+"PO-Revision-Date: 2009-10-29 14:01+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: WWW.Linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgstr "Annull."
 
 #: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:499
 msgid "Scan NFS share"
-msgstr "Ricerca condivisioni NFS"
+msgstr "Ric. cond. NFS"
 
 #: /home/dario/Plugins/networkbrowser/src/NetworkBrowser.py:500
 msgid "Scan range"
@@ -191,12 +191,12 @@ msgid "Mount options"
 msgstr "Opzioni mount"
 
 #: /home/dario/Plugins/networkbrowser/src/MountEdit.py:195
-#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:131
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:128
 msgid "Username"
 msgstr "Nome User"
 
 #: /home/dario/Plugins/networkbrowser/src/MountEdit.py:197
-#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:133
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:130
 msgid "Password"
 msgstr "Password"
 
@@ -213,12 +213,12 @@ msgid "Enter options:"
 msgstr "Inserire opzioni: "
 
 #: /home/dario/Plugins/networkbrowser/src/MountEdit.py:217
-#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:142
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:139
 msgid "Enter username:"
 msgstr "Inserire nome User: "
 
 #: /home/dario/Plugins/networkbrowser/src/MountEdit.py:219
-#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:144
+#: /home/dario/Plugins/networkbrowser/src/UserDialog.py:141
 msgid "Enter password:"
 msgstr "Inserire Password: "
 
@@ -320,7 +320,7 @@ msgstr "Ok -> Modificare configurazione."
 
 #: /home/dario/Plugins/networkbrowser/src/MountView.py:64
 msgid "Delete mount"
-msgstr "Cancellare il mount"
+msgstr "Canc. il mount"
 
 #: /home/dario/Plugins/networkbrowser/src/MountView.py:84
 msgid "IP:"

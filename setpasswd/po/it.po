@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - setpasswd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-22 15:19+0100\n"
+"POT-Creation-Date: 2009-10-29 20:44+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@118como.org>\n"
@@ -16,40 +16,43 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/setpasswd\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/setpasswd\n"
 
-#: /home/dario/Plugins/setpasswd/src/plugin.py:22
-#: /home/dario/Plugins/setpasswd/src/plugin.py:35
+#: /home/dario/Plugins/setpasswd/src/plugin.py:25
 msgid "Change Root Password"
 msgstr "Cambiare la password di root"
 
-#: /home/dario/Plugins/setpasswd/src/plugin.py:46
-#: /home/dario/Plugins/setpasswd/src/plugin.py:64
-msgid "Enter new Password"
-msgstr "Inserire la nuova password"
-
-#: /home/dario/Plugins/setpasswd/src/plugin.py:49
+#: /home/dario/Plugins/setpasswd/src/plugin.py:51
 msgid "Cancel"
 msgstr "Annull."
 
-#: /home/dario/Plugins/setpasswd/src/plugin.py:50
+#: /home/dario/Plugins/setpasswd/src/plugin.py:52
 msgid "Set Password"
-msgstr "Configurare la password"
+msgstr "Confermare"
 
-#: /home/dario/Plugins/setpasswd/src/plugin.py:51
+#: /home/dario/Plugins/setpasswd/src/plugin.py:53
 msgid "new Random"
 msgstr "Nuova casuale"
 
-#: /home/dario/Plugins/setpasswd/src/plugin.py:80
-#, python-format
-msgid ""
-"Sucessfully changed password for root user to:\n"
-"%s "
-msgstr "La password per l'utente roor è stata modificata correttamente:1n%s"
+#: /home/dario/Plugins/setpasswd/src/plugin.py:54
+msgid "virt. Keyboard"
+msgstr "Tastiera virt."
 
-#: /home/dario/Plugins/setpasswd/src/plugin.py:82
+#: /home/dario/Plugins/setpasswd/src/plugin.py:73
+msgid "Enter new Password"
+msgstr "Inserire la nuova password"
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:88
+msgid "Sucessfully changed password for root user to: "
+msgstr "Password utente root modificata correttamente in: "
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:90
 msgid "Unable to change/reset password for root user"
 msgstr "Impossibile cambiare/annullare la password per l'utente root!"
 
-#: /home/dario/Plugins/setpasswd/src/plugin.py:114
+#: /home/dario/Plugins/setpasswd/src/plugin.py:113
+msgid "Enter your password here:"
+msgstr "Inserire qui la nuova password:"
+
+#: /home/dario/Plugins/setpasswd/src/plugin.py:130
 msgid "Change or reset the root password of your dreambox"
 msgstr "Cambiare o annullare la password del Dreambox"
 
