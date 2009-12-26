@@ -11,9 +11,10 @@ from Components.Sources.StaticText import StaticText
 from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer
 from os import access, chmod, X_OK
 
+mcut_path = "/usr/lib/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut"
+
 def main(session, service, **kwargs):
 	# Hack to make sure it is executable
-	mcut_path = "/usr/lib/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut"
 	if not access(mcut_path, X_OK):
 		chmod(mcut_path, 493)
 	session.open(MovieCut, service, **kwargs)
