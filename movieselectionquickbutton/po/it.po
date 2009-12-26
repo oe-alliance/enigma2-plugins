@@ -1,0 +1,104 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 movieselectionquickbutton\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-12-04 15:00+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: /home/dario/Plugins/movieselectionquickbutton\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/movieselectionquickbutton\n"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:34
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:35
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:36
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:89
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:104
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:139
+msgid "Nothing"
+msgstr "Nulla"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:37
+msgid "display plugin name"
+msgstr "Mostrare il nome del plugin"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:37
+msgid "display plugin description"
+msgstr "Mostrare la descrizione del plugin"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:61
+msgid "Delete"
+msgstr "Canc."
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:67
+msgid "delete movie"
+msgstr "Canc. reg."
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:68
+msgid "Assign plugin to green key pressed"
+msgstr "Assegnare il plugin al tasto rosso"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:69
+msgid "Assign plugin to yellow key pressed"
+msgstr "Assegnare il plugin al tasto  giallo"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:70
+msgid "Assign plugin to blue key pressed"
+msgstr "Assegnare il plugin al tasto blu"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:101
+msgid "Unknown Error"
+msgstr "Errore Sconosciuto"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:113
+#, python-format
+msgid ""
+"Error!\n"
+"Error Text: %s"
+msgstr ""
+"Errore!\n"
+"Descrizione: %s"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:115
+msgid "Plugin not found!"
+msgstr "Plugin non trovato!"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:117
+msgid "No plugin assigned!"
+msgstr "Nessun plugin assegnato!"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:136
+msgid "Cancel"
+msgstr "Annull."
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:137
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:157
+msgid "assigned to green"
+msgstr "Assegnato al tasto verde"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:158
+msgid "assigned to yellow"
+msgstr "Assegnato al tasto giallo"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:159
+msgid "assigned to blue"
+msgstr "Assegnato al tasto blu"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:160
+msgid "button caption"
+msgstr "Intestazione tasto"
+
+#: /home/dario/Plugins/movieselectionquickbutton/src/plugin.py:190
+msgid "Setup for MovieSelection QuickButton"
+msgstr "Configurazione MovieSelection QuickButton"
+
