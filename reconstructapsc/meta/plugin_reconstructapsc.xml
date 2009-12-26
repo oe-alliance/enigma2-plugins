@@ -5,20 +5,20 @@
           <info language="en">
                     <author>Anders Holst</author>
                     <name>ReconstructApSc</name>
-                    <packagename>enigma2-plugin-extensions-reconstruct_apsc</packagename>
+                    <packagename>enigma2-plugin-extensions-reconstructapsc</packagename>
                     <shortdescription>Reconstruct .ap and .sc files</shortdescription>
                     <description>Reconstruct missing or corrupt .ap and .sc files of movies</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_reconstruct_apsc.jpg" />		    
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_reconstructapsc.jpg" />		    
           </info>
           <info language="de">
                     <author>Anders Holst</author>
                     <name>ReconstructApSc</name>
-                    <packagename>enigma2-plugin-extensions-reconstruct_apsc</packagename>
+                    <packagename>enigma2-plugin-extensions-reconstructapsc</packagename>
                     <shortdescription>Rekonstruiren .ap und .sc Dateien</shortdescription>
                     <description>Rekonstruiren fehlende oder zerstörte .ap und .sc Dateien für die Filme</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_reconstruct_apsc.jpg" />		    
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_reconstructapsc.jpg" />		    
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
-		<file type="package" name="enigma2-plugin-extensions-reconstruct_apsc" />
+		<file type="package" name="enigma2-plugin-extensions-reconstructapsc" />
 	  </files>
 </default>

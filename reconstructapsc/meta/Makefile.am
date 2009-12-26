@@ -1,5 +1,5 @@
 installdir = $(datadir)/meta/
 
-dist_install_DATA = plugin_reconstruct_apsc.xml
+dist_install_DATA = plugin_reconstructapsc.xml
 
-EXTRA_DIST = reconstruct_apsc.jpg
+EXTRA_DIST = reconstructapsc.jpg
