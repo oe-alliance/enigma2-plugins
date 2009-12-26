@@ -41,7 +41,8 @@ Release infos
 3.3.3 Added patch to installer to fix enigma2. It 
 	  should now be possible to run Elektro and 
 	  EPG refresh in parallel.
-3.3.4 Added Turkish locale by MytHoLoG	  
+3.3.4 Added Turkish locale by MytHoLoG
+3.3.5 Italian translation updated	  
 ====================================================
 The English Documentation follows the German one 
 ====================================================

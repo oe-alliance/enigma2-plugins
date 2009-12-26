@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - elektropowersaver\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-28 16:15+0100\n"
-"PO-Revision-Date: 2009-03-28 16:32+0100\n"
+"POT-Creation-Date: 2009-10-29 20:32+0100\n"
+"PO-Revision-Date: 2009-10-29 20:32+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,92 +16,96 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/elektro\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/elektro\n"
 
-#: /home/dario/Plugins/elektro/plugin.py:108
+#: /home/dario/Plugins/elektro/src/plugin.py:110
 msgid "Monday"
 msgstr "Lunedì"
 
-#: /home/dario/Plugins/elektro/plugin.py:109
+#: /home/dario/Plugins/elektro/src/plugin.py:111
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: /home/dario/Plugins/elektro/plugin.py:110
+#: /home/dario/Plugins/elektro/src/plugin.py:112
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: /home/dario/Plugins/elektro/plugin.py:111
+#: /home/dario/Plugins/elektro/src/plugin.py:113
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: /home/dario/Plugins/elektro/plugin.py:112
+#: /home/dario/Plugins/elektro/src/plugin.py:114
 msgid "Friday"
 msgstr "Venerdì"
 
-#: /home/dario/Plugins/elektro/plugin.py:113
+#: /home/dario/Plugins/elektro/src/plugin.py:115
 msgid "Saturday"
 msgstr "Sabato"
 
-#: /home/dario/Plugins/elektro/plugin.py:114
+#: /home/dario/Plugins/elektro/src/plugin.py:116
 msgid "Sunday"
 msgstr "Domenica"
 
-#: /home/dario/Plugins/elektro/plugin.py:182
+#: /home/dario/Plugins/elektro/src/plugin.py:200
 msgid "Enable Elektro Power Save"
-msgstr "Abilitare \"Elektro Power Save\""
+msgstr "Abilitare Elektro Power Save"
 
-#: /home/dario/Plugins/elektro/plugin.py:183
-#: /home/dario/Plugins/elektro/plugin.py:269
+#: /home/dario/Plugins/elektro/src/plugin.py:201
+#: /home/dario/Plugins/elektro/src/plugin.py:305
 msgid "Standby on boot"
 msgstr "Standby all'avvio"
 
-#: /home/dario/Plugins/elektro/plugin.py:184
+#: /home/dario/Plugins/elektro/src/plugin.py:202
+msgid "Standby on manual boot"
+msgstr "Standby su avvio manuale"
+
+#: /home/dario/Plugins/elektro/src/plugin.py:203
 msgid "Standby on boot screen timeout"
 msgstr "Timeout standby su schermata di avvio"
 
-#: /home/dario/Plugins/elektro/plugin.py:185
+#: /home/dario/Plugins/elektro/src/plugin.py:204
 msgid "Force sleep (even when not in standby)"
 msgstr "Forzare spegnimento (anche se non in standby)"
 
-#: /home/dario/Plugins/elektro/plugin.py:186
+#: /home/dario/Plugins/elektro/src/plugin.py:205
 msgid "Dont wake up"
 msgstr "Non accendere"
 
-#: /home/dario/Plugins/elektro/plugin.py:187
+#: /home/dario/Plugins/elektro/src/plugin.py:206
 msgid "Holiday mode (experimental)"
-msgstr "Modalità \"vacanza\" (sperimentale)"
+msgstr "Modalità vacanza (sperimentale)"
 
-#: /home/dario/Plugins/elektro/plugin.py:189
+#: /home/dario/Plugins/elektro/src/plugin.py:208
 msgid "Next day starts at"
 msgstr "Il prossimo giorno inizia alle"
 
-#: /home/dario/Plugins/elektro/plugin.py:192
+#: /home/dario/Plugins/elektro/src/plugin.py:211
 msgid "Wakeup"
 msgstr "Accendere"
 
-#: /home/dario/Plugins/elektro/plugin.py:193
+#: /home/dario/Plugins/elektro/src/plugin.py:212
 msgid "Sleep"
 msgstr "Spegnere"
 
-#: /home/dario/Plugins/elektro/plugin.py:197
+#: /home/dario/Plugins/elektro/src/plugin.py:216
 msgid "Cancel"
 msgstr "Annull."
 
-#: /home/dario/Plugins/elektro/plugin.py:198
+#: /home/dario/Plugins/elektro/src/plugin.py:217
 msgid "Ok"
 msgstr "Ok"
 
-#: /home/dario/Plugins/elektro/plugin.py:199
+#: /home/dario/Plugins/elektro/src/plugin.py:218
 msgid "Help"
 msgstr "Aiuto"
 
-#: /home/dario/Plugins/elektro/plugin.py:223
+#: /home/dario/Plugins/elektro/src/plugin.py:242
 msgid "Showing Elektro readme.txt"
 msgstr "Elektro readme.txt"
 
-#: /home/dario/Plugins/elektro/plugin.py:292
+#: /home/dario/Plugins/elektro/src/plugin.py:328
 msgid "Go to Standby now?"
 msgstr "Standby?"
 
-#: /home/dario/Plugins/elektro/plugin.py:434
+#: /home/dario/Plugins/elektro/src/plugin.py:470
 msgid "Go to sleep now?"
 msgstr "Spegenere?"
 
