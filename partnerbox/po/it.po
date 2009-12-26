@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - partnerbox\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-27 04:19+0100\n"
-"PO-Revision-Date: 2009-08-27 04:19+0100\n"
+"POT-Creation-Date: 2009-10-29 14:08+0100\n"
+"PO-Revision-Date: 2009-10-29 20:40+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: /home/dario/Plugins/partnerbox/src/PartnerboxEPGSelection.py:123
 #: /home/dario/Plugins/partnerbox/src/plugin.py:337
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1152
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1158
 #, python-format
 msgid ""
 "Do you really want to delete the timer \n"
@@ -28,7 +28,7 @@ msgstr ""
 "%s?"
 
 #: /home/dario/Plugins/partnerbox/src/PartnerboxEPGSelection.py:174
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1007
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1013
 msgid "Remove timer"
 msgstr "Rim. timer"
 
@@ -54,14 +54,14 @@ msgid "Stream current service from partnerbox"
 msgstr "Stream canale corrente da Partnerbox"
 
 #: /home/dario/Plugins/partnerbox/src/plugin.py:233
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:129
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:236
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:134
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:241
 msgid "Delete"
 msgstr "Canc."
 
 #: /home/dario/Plugins/partnerbox/src/plugin.py:235
 #: /home/dario/Plugins/partnerbox/src/plugin.py:507
-#: /home/dario/Plugins/partnerbox/src/plugin.py:651
+#: /home/dario/Plugins/partnerbox/src/plugin.py:658
 msgid "EPG Selection"
 msgstr "Selezione EPG"
 
@@ -86,9 +86,9 @@ msgid "Zap"
 msgstr "Zap"
 
 #: /home/dario/Plugins/partnerbox/src/plugin.py:510
-#: /home/dario/Plugins/partnerbox/src/plugin.py:652
-#: /home/dario/Plugins/partnerbox/src/plugin.py:947
-#: /home/dario/Plugins/partnerbox/src/plugin.py:998
+#: /home/dario/Plugins/partnerbox/src/plugin.py:659
+#: /home/dario/Plugins/partnerbox/src/plugin.py:953
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1004
 msgid "Info"
 msgstr "Informazioni"
 
@@ -96,127 +96,127 @@ msgstr "Informazioni"
 msgid "Getting Channel Information..."
 msgstr "Recupero informazioni canale in corso..."
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:807
-#: /home/dario/Plugins/partnerbox/src/plugin.py:879
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1236
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1241
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1293
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1296
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1298
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1382
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1579
+#: /home/dario/Plugins/partnerbox/src/plugin.py:813
+#: /home/dario/Plugins/partnerbox/src/plugin.py:885
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1242
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1247
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1299
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1302
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1304
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1388
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1585
 msgid "mins"
 msgstr "Min"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:944
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1003
+#: /home/dario/Plugins/partnerbox/src/plugin.py:950
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1009
 msgid "Add timer"
 msgstr "Agg. timer"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:948
+#: /home/dario/Plugins/partnerbox/src/plugin.py:954
 msgid "Getting EPG Information..."
 msgstr "Recupero informazioni EPG in corso..."
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1222
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1279
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1395
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
 msgid "Mon"
 msgstr "Lun"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1222
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1279
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1395
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
 msgid "Tue"
 msgstr "Mar"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1222
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1279
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1395
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
 msgid "Wed"
 msgstr "Mer"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1222
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1279
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1395
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
 msgid "Thu"
 msgstr "Gio"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1222
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1279
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1395
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
 msgid "Fri"
 msgstr "Ven"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1222
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1279
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1395
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
 msgid "Sat"
 msgstr "Sab"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1222
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1279
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1395
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1228
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1285
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1401
 msgid "Sun"
 msgstr "Dom"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1234
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1239
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1291
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1296
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1240
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1245
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1297
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1302
 msgid "(ZAP)"
 msgstr "(ZAP)"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1244
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1301
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1250
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1307
 msgid "waiting"
 msgstr "In attesa"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1246
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1252
 msgid "about to start"
 msgstr "Avvio in corso"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1249
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1304
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1255
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1310
 msgid "zapped"
 msgstr "Zap eseguito"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1251
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1306
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1257
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1312
 msgid "recording..."
 msgstr "Registrazione..."
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1253
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1308
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1259
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1314
 msgid "done!"
 msgstr "Fatto!"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1255
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1319
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1321
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1261
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1325
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1327
 msgid "<unknown>"
 msgstr "<sconosciuto>"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1258
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1264
 msgid "disabled"
 msgstr "Disabilitato"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1311
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1317
 msgid "Error: No space left"
 msgstr "Errore: spazio insufficiente"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1313
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1319
 msgid "Error: User aborted"
 msgstr "Errore: annullato dall'utente"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1315
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1321
 msgid "Error: Zap failed"
 msgstr "Errore : zap fallito"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1317
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1323
 msgid "Error: Outdated"
 msgstr "Errore: sorpassato"
 
-#: /home/dario/Plugins/partnerbox/src/plugin.py:1564
+#: /home/dario/Plugins/partnerbox/src/plugin.py:1570
 msgid "unknown service"
 msgstr "Canale sconosciuto"
 
@@ -236,92 +236,96 @@ msgstr "Usare il remoto"
 msgid "use internal"
 msgstr "Usare il locale"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:68
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:234
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:73
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:239
 #: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:73
 msgid "Cancel"
 msgstr "Annull."
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:69
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:235
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:74
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:240
 #: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:72
 msgid "OK"
 msgstr "Ok"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:70
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:75
 msgid "Partnerbox Entries"
 msgstr "Voci Partnerbox"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:74
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:79
 msgid "Show 'RemoteTimer' in E-Menu"
 msgstr "Mostrare \"RemoteTimer\" nel E-menu:"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:75
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:80
 msgid "Show 'RemoteTV Player' in E-Menu"
 msgstr "Mostrare \"RemoteTV Player\" nel E-menu:"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:76
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:81
 msgid "Show 'Stream current Service' in E-Menu"
 msgstr "Mostrare \"Stream del canale corrente\" nel E-menu:"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:77
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:82
 msgid "Enable Partnerbox-Function in TimerEvent"
 msgstr "Abilitare la funzione Partnerbox nell'evento timer"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:78
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:83
 msgid "Enable Partnerbox-Function in EPGList"
 msgstr "Abilitare la funzione Partnerbox in elenco EPG"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:118
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:123
 msgid "Partnerbox: List of Entries"
 msgstr "Partnerbox: elenco voci"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:123
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:246
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:128
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:251
 #: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:153
 #: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:440
 msgid "Name"
 msgstr "Nome"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:124
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:247
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:129
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:252
 msgid "IP"
 msgstr "IP"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:125
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:248
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:130
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:253
 msgid "Port"
 msgstr "Porta"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:126
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:249
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:131
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:254
 msgid "Enigma Type"
 msgstr "Tipo enigma"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:127
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:132
 msgid "Add"
 msgstr "Agg."
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:128
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:133
 msgid "Edit"
 msgstr "Modif."
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:168
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:274
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:173
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:280
 msgid "Really delete this Partnerbox Entry?"
 msgstr "Cancellare la voce?"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:220
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:225
 msgid "Partnerbox: Edit Entry"
 msgstr "Partnerbox: modificare voce"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:250
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:255
 msgid "Password"
 msgstr "Password"
 
-#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:251
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:256
 msgid "Servicelists/EPG"
 msgstr "Elenco canali/EPG:"
+
+#: /home/dario/Plugins/partnerbox/src/PartnerboxSetup.py:257
+msgid "Zap to service when streaming"
+msgstr "Sintonizzarsi sul canale di streaming"
 
 #: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:128
 #: /home/dario/Plugins/partnerbox/src/RemoteTimerEntry.py:132
