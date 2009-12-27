@@ -6,20 +6,24 @@
 #  Coded by Dr.Best (c) 2009
 #  Support: www.dreambox-tools.info
 #
-#  This program is free software; you can redistribute it and/or
-#  modify it under the terms of the GNU General Public License
-#  as published by the Free Software Foundation; either version 2
-#  of the License, or (at your option) any later version.
+#  This plugin is licensed under the Creative Commons 
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  License. To view a copy of this license, visit
+#  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
+#  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
 #
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
+#  Alternatively, this plugin may be distributed and executed on hardware which
+#  is licensed by Dream Multimedia GmbH.
+
+#  This plugin is NOT free software. It is open source, you are allowed to
+#  modify it (if you keep the license), but it may not be commercially 
+#  distributed other than under the conditions noted above.
 #
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MovieSelection import MovieSelection, MovieContextMenu
+from Components.MovieList import MovieList
 from Components.ActionMap import HelpableActionMap, ActionMap
 from Components.Button import Button
 from Components.PluginComponent import plugins
@@ -31,6 +35,7 @@ from Screens.MessageBox import MessageBox
 from . import _
 
 config.plugins.MovieSelectionQuickButton = ConfigSubsection()
+config.plugins.MovieSelectionQuickButton.red = ConfigText(default = _("Delete"), visible_width = 50, fixed_size = False)
 config.plugins.MovieSelectionQuickButton.green = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.MovieSelectionQuickButton.yellow = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
 config.plugins.MovieSelectionQuickButton.blue = ConfigText(default = _("Nothing"), visible_width = 50, fixed_size = False)
@@ -58,61 +63,95 @@ def MovieSelectionInit():
 
 def MovieSelection__init__(self, session, selectedmovie = None):
 	baseMovieSelection__init__ (self, session, selectedmovie)
-	self["key_red"] = Button(_("Delete"))
+	self["key_red"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.red.value)))
 	self["key_green"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.green.value)))
 	self["key_yellow"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.yellow.value)))
 	self["key_blue"] = Button(self.getPluginCaption(str(config.plugins.MovieSelectionQuickButton.blue.value)))
 	self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 	{
-		"red": (self.redpressed, _("delete movie")),
+		"red": (self.redpressed, _("Assign plugin to red key pressed")),
 		"green": (self.greenpressed, _("Assign plugin to green key pressed")),
 		"yellow": (self.yellowpressed, _("Assign plugin to yellow key pressed")),
 		"blue": (self.bluepressed, _("Assign plugin to blue key pressed")),
 	})
 
 def redpressed(self):
-	current = self.getCurrent()
-	if current is not None:
-		MCM = MovieContextMenu(self.session,self,current)
-		MCM.delete()
+	startPlugin(self,str(config.plugins.MovieSelectionQuickButton.red.value),0)
 
 def greenpressed(self):
-	startPlugin(self,str(config.plugins.MovieSelectionQuickButton.green.value))
+	startPlugin(self,str(config.plugins.MovieSelectionQuickButton.green.value),1)
 
 def yellowpressed(self):
-	startPlugin(self,str(config.plugins.MovieSelectionQuickButton.yellow.value))
+	startPlugin(self,str(config.plugins.MovieSelectionQuickButton.yellow.value),2)
 
 def bluepressed(self):
-	startPlugin(self,str(config.plugins.MovieSelectionQuickButton.blue.value))
+	startPlugin(self,str(config.plugins.MovieSelectionQuickButton.blue.value),3)
 
 def getPluginCaption(self,pname):
 	if pname != _("Nothing"):
-		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_MOVIELIST]):
-			if pname == str(p.name):
-				if config.plugins.MovieSelectionQuickButton.buttoncaption.value == "1":
-					return p.description
-				else:
-					return p.name
+		if pname == _("Delete"):
+			return _("Delete")
+		elif pname == _("Home"):
+			return _("Home")
+		elif pname == _("Sort"):
+			if config.movielist.moviesort.value == MovieList.SORT_ALPHANUMERIC:
+				return _("sort by date")
+			else:
+				return _("alphabetic sort")
+		else:
+			for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_MOVIELIST]):
+				if pname == str(p.name):
+					if config.plugins.MovieSelectionQuickButton.buttoncaption.value == "1":
+						return p.description
+					else:
+						return p.name
 	return ""
 
-def startPlugin(self,pname):
+def startPlugin(self,pname, index):
 	plugin = None
 	no_plugin = True
 	msgText = _("Unknown Error")
 	current = self.getCurrent()
 	if current is not None:
 		if pname != _("Nothing"):
-			for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_MOVIELIST]):
-				if pname == str(p.name):
-					plugin = p
-			if plugin is not None:
-				try:
-					plugin(self.session, current)
-					no_plugin = False
-				except Exception, e:
-					msgText = _("Error!\nError Text: %s"%e)
-			else: 
-				msgText = _("Plugin not found!")
+			if pname == _("Delete"):
+				MCM = MovieContextMenu(self.session,self,current)
+				MCM.delete()
+				no_plugin = False
+			elif pname == _("Home"):
+				self.gotFilename("/hdd/movie/")
+				no_plugin = False
+			elif pname == _("Sort"):
+				if config.movielist.moviesort.value == MovieList.SORT_ALPHANUMERIC:
+					newType = MovieList.SORT_RECORDED
+					newCaption =  _("alphabetic sort")
+				else:
+					newType = MovieList.SORT_ALPHANUMERIC
+					newCaption = _("sort by date")
+				config.movielist.moviesort.value = newType
+				self.setSortType(newType)
+				self.reloadList()
+				if index == 0:
+					self["key_red"].setText(newCaption)
+				elif index == 1:
+					self["key_green"].setText(newCaption)
+				elif index == 2:
+					self["key_yellow"].setText(newCaption)
+				elif index == 3:
+					self["key_blue"].setText(newCaption)
+				no_plugin = False
+			else:
+				for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_MOVIELIST]):
+					if pname == str(p.name):
+						plugin = p
+				if plugin is not None:
+					try:
+						plugin(self.session, current)
+						no_plugin = False
+					except Exception, e:
+						msgText = _("Error!\nError Text: %s"%e)
+				else: 
+					msgText = _("Plugin not found!")
 		else:
 			msgText = _("No plugin assigned!")
 		if no_plugin:
@@ -137,12 +176,18 @@ class MovieSelectionButtonSetup(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("OK"))
 		self.entryguilist = []
 		self.entryguilist.append(("0",_("Nothing")))
-		index = 1
-		green_selectedindex = "0"
-		yellow_selectedindex = "0"
-		blue_selectedindex = "0"
+		self.entryguilist.append(("1",_("Delete")))
+		self.entryguilist.append(("2",_("Home")))
+		self.entryguilist.append(("3",_("Sort")))
+		index = 4
+		red_selectedindex = self.getStaticName(config.plugins.MovieSelectionQuickButton.red.value)
+		green_selectedindex = self.getStaticName(config.plugins.MovieSelectionQuickButton.green.value)
+		yellow_selectedindex = self.getStaticName(config.plugins.MovieSelectionQuickButton.yellow.value)
+		blue_selectedindex = self.getStaticName(config.plugins.MovieSelectionQuickButton.blue.value)
 		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_MOVIELIST]):
 			self.entryguilist.append((str(index),str(p.name)))
+			if config.plugins.MovieSelectionQuickButton.red.value == str(p.name):
+				red_selectedindex = str(index)
 			if config.plugins.MovieSelectionQuickButton.green.value == str(p.name):
 				green_selectedindex = str(index)
 			if config.plugins.MovieSelectionQuickButton.yellow.value == str(p.name):
@@ -150,10 +195,12 @@ class MovieSelectionButtonSetup(ConfigListScreen, Screen):
 			if config.plugins.MovieSelectionQuickButton.blue.value == str(p.name):
 				blue_selectedindex = str(index)
 			index = index + 1
+		self.redchoice = ConfigSelection(default = red_selectedindex, choices = self.entryguilist)
 		self.greenchoice = ConfigSelection(default = green_selectedindex, choices = self.entryguilist)
 		self.yellowchoice = ConfigSelection(default = yellow_selectedindex, choices = self.entryguilist)
 		self.bluechoice = ConfigSelection(default = blue_selectedindex, choices = self.entryguilist)
 		cfglist = [
+			getConfigListEntry(_("assigned to red"), self.redchoice),
 			getConfigListEntry(_("assigned to green"), self.greenchoice),
 			getConfigListEntry(_("assigned to yellow"), self.yellowchoice),
 			getConfigListEntry(_("assigned to blue"), self.bluechoice),
@@ -168,6 +215,7 @@ class MovieSelectionButtonSetup(ConfigListScreen, Screen):
 		}, -2)
 
 	def keySave(self):
+		config.plugins.MovieSelectionQuickButton.red.value = self.entryguilist[int(self.redchoice.value)][1]
 		config.plugins.MovieSelectionQuickButton.green.value = self.entryguilist[int(self.greenchoice.value)][1]
 		config.plugins.MovieSelectionQuickButton.yellow.value = self.entryguilist[int(self.yellowchoice.value)][1]
 		config.plugins.MovieSelectionQuickButton.blue.value = self.entryguilist[int(self.bluechoice.value)][1]
@@ -177,6 +225,16 @@ class MovieSelectionButtonSetup(ConfigListScreen, Screen):
 
 	def keyClose(self):
 		self.close()
+
+	def getStaticName(self,value):
+		if value == _("Delete"):
+			return "1"
+		elif value == _("Home"):
+			return "2"
+		elif value == _("Sort"):
+			return "3"
+		else:
+			return "0"
 
 def setup(session,**kwargs):
 	session.open(MovieSelectionButtonSetup)
