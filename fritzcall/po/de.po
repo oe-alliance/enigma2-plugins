@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-14 10:12+0100\n"
-"PO-Revision-Date: 2009-11-14 10:13+0100\n"
+"POT-Creation-Date: 2009-12-24 12:29+0100\n"
+"PO-Revision-Date: 2009-12-25 18:16+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -228,6 +228,9 @@ msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Fon Status"
+
+msgid "Filter also list of calls"
+msgstr "Filter auch auf Anrufliste anwenden"
 
 msgid "Flash"
 msgstr "Flash"
@@ -450,9 +453,6 @@ msgstr "Suche in Outlook-Export..."
 msgid "Shortcut"
 msgstr "Kurzwahl"
 
-msgid "Show Calls for specific MSN"
-msgstr "Zeige nur Anrufe bestimmter Nummern"
-
 msgid "Show Outgoing Calls"
 msgstr "Zeige abgehende Anrufe an"
 
@@ -462,6 +462,9 @@ msgstr "Anzeige nach Standby"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
 msgstr "Details des Eintrags anzeigen"
+
+msgid "Show only calls for specific MSN"
+msgstr "Zeige nur Anrufe bestimmter Nummern"
 
 msgid "Software fax active"
 msgstr "Software Fax aktiv"

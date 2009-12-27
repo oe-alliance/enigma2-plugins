@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-14 10:12+0100\n"
+"POT-Creation-Date: 2009-12-24 12:29+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -229,6 +229,9 @@ msgstr "FRITZ!Box adres (Naam of IP)"
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Status"
 
+msgid "Filter also list of calls"
+msgstr ""
+
 msgid "Flash"
 msgstr "Flash"
 
@@ -446,9 +449,6 @@ msgstr "Zoekt in Outlook export..."
 msgid "Shortcut"
 msgstr "Snelkoppeling"
 
-msgid "Show Calls for specific MSN"
-msgstr "Laat gesprekken van een specifieke MSN zien"
-
 msgid "Show Outgoing Calls"
 msgstr "Laat uitgaande gesprekken zien"
 
@@ -458,6 +458,9 @@ msgstr "Laat zien na standby"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
 msgstr "Laat de details zien van een regel"
+
+msgid "Show only calls for specific MSN"
+msgstr ""
 
 #, fuzzy
 msgid "Software fax active"
@@ -640,6 +643,9 @@ msgstr "werk"
 
 #~ msgid "Harddisk"
 #~ msgstr "Harde schijf"
+
+#~ msgid "Show Calls for specific MSN"
+#~ msgstr "Laat gesprekken van een specifieke MSN zien"
 
 #, fuzzy
 #~ msgid "Toggle "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-14 10:12+0100\n"
+"POT-Creation-Date: 2009-12-24 12:29+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -230,6 +230,9 @@ msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Stanje telefona"
 
+msgid "Filter also list of calls"
+msgstr ""
+
 msgid "Flash"
 msgstr "Fleš"
 
@@ -445,9 +448,6 @@ msgstr "Tražim u Outlook-Export..."
 msgid "Shortcut"
 msgstr "Prečica"
 
-msgid "Show Calls for specific MSN"
-msgstr "Pokaži pozive za spec. MSN"
-
 msgid "Show Outgoing Calls"
 msgstr "Prikaži odlazne pozive"
 
@@ -457,6 +457,9 @@ msgstr "Pokaži posle stend baja"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
 msgstr "Pokaži detalje unosa"
+
+msgid "Show only calls for specific MSN"
+msgstr ""
 
 msgid "Software fax active"
 msgstr "Aktivan faks softver"
@@ -619,6 +622,9 @@ msgstr "Posao"
 
 #~ msgid "Harddisk"
 #~ msgstr "Festplatte"
+
+#~ msgid "Show Calls for specific MSN"
+#~ msgstr "Pokaži pozive za spec. MSN"
 
 #~ msgid "USB Stick"
 #~ msgstr "USB Stick"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-14 10:12+0100\n"
+"POT-Creation-Date: 2009-12-27 13:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -217,6 +217,9 @@ msgstr ""
 msgid "FRITZ!Box Fon Status"
 msgstr ""
 
+msgid "Filter also list of calls"
+msgstr ""
+
 msgid "Flash"
 msgstr ""
 
@@ -420,9 +423,6 @@ msgstr ""
 msgid "Shortcut"
 msgstr ""
 
-msgid "Show Calls for specific MSN"
-msgstr ""
-
 msgid "Show Outgoing Calls"
 msgstr ""
 
@@ -431,6 +431,9 @@ msgstr ""
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
+msgstr ""
+
+msgid "Show only calls for specific MSN"
 msgstr ""
 
 msgid "Software fax active"

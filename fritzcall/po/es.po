@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-14 10:12+0100\n"
+"POT-Creation-Date: 2009-12-24 12:29+0100\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -228,6 +228,9 @@ msgstr "Dirección FRITZ!Box FON (Nombre o IP)"
 msgid "FRITZ!Box Fon Status"
 msgstr "Estado de Fon FRITZ!Box"
 
+msgid "Filter also list of calls"
+msgstr ""
+
 msgid "Flash"
 msgstr "Flash"
 
@@ -445,9 +448,6 @@ msgstr "Buscando en la exportación de Outlook..."
 msgid "Shortcut"
 msgstr "Acceso rápido"
 
-msgid "Show Calls for specific MSN"
-msgstr "Mostrar Llamadas para un específico MSN"
-
 msgid "Show Outgoing Calls"
 msgstr "Mostrar Llamadas Salientes"
 
@@ -457,6 +457,9 @@ msgstr "Mostrar después del inicio"
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Show details of entry"
 msgstr "Mostrar detalles de la entrada"
+
+msgid "Show only calls for specific MSN"
+msgstr ""
 
 #, fuzzy
 msgid "Software fax active"
@@ -668,6 +671,9 @@ msgstr "trabajo"
 
 #~ msgid "Harddisk"
 #~ msgstr "Disco duro"
+
+#~ msgid "Show Calls for specific MSN"
+#~ msgstr "Mostrar Llamadas para un específico MSN"
 
 #, fuzzy
 #~ msgid "Toggle "
