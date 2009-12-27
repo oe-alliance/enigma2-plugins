@@ -21,7 +21,7 @@ def _(txt): # pylint: disable-msg=C0103
 
 def initDebug():
 	try:
-		os.remove("/tmp/EmailClient.log")
+		os.remove("/tmp/FritzDebug.log")
 	except OSError:
 		pass
 
