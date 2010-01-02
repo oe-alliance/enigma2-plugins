@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-shoutcast
+Version: 1.0
+Description: E2 SHOUTcast Plugin
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: Dr. Best <dr.best@dreambox-tools.info>
+Homepage: http://www.dreambox-tools.info
+Depends: enigma2(>2.6git20091201), twisted-web, streamripper
+Source: http://enigma2-plugins.schwerkraft.elitedvb.net/

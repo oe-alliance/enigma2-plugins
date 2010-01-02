@@ -1,0 +1,12 @@
+config.entriescount=3
+config.Entries.1.text=http://83.143.85.115:8008
+config.Entries.1.type=url
+config.Entries.1.name=Ekko Radio - Den beste Musikken - [SHOUTcast.com]
+config.Entries.0.text=Top
+config.Entries.0.type=genre
+config.Entries.0.name=Top
+config.Entries.2.text=http://yp.shoutcast.com/sbin/tunein-station.pls?id=2793
+config.Entries.2.audio=audio/mpeg
+config.Entries.2.type=pls
+config.Entries.2.name=top 100 station - Germanys No.1 Web Hit Station - [SHOUTcast.com]
+config.Entries.2.bitrate=224

@@ -43,6 +43,7 @@ SUBDIRS = \
 	rsdownloader \
 	simplerss \
 	setpasswd \
+	shoutcast \
 	startupservice \
 	startuptostandby \
 	tageditor \

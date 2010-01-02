@@ -311,4 +311,9 @@ reconstructapsc/Makefile
 reconstructapsc/src_cc/Makefile
 reconstructapsc/src_py/Makefile
 reconstructapsc/meta/Makefile
+
+shoutcast/Makefile
+shoutcast/src/Makefile
+shoutcast/meta/Makefile
+
 ])
