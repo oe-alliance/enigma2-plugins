@@ -284,30 +284,29 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			sendUrlCommand(self.stationListURL, None,10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
 	def InputBoxStartRecordingCallback(self, returnValue = None):
-		recordingLength = 0
 		if returnValue:
 			recordingLength =  int(returnValue) * 60
-		if not os.path.exists(config.plugins.shoutcast.dirname.value):
-			os.mkdir(config.plugins.shoutcast.dirname.value)
-		args = []
-		args.append(self.currentStreamingURL)
-		args.append('-d')
-		args.append(config.plugins.shoutcast.dirname.value)
-		args.append('-r')
-		args.append('9191')
-		if recordingLength != 0:
-			args.append('-l')
-			args.append("%d" % int(recordingLength))
-		if config.plugins.shoutcast.riptosinglefile.value:
-			args.append('-a')
-			args.append('-A')
-		if not config.plugins.shoutcast.createdirforeachstream.value:
-			args.append('-s')
-		if config.plugins.shoutcast.addsequenceoutputfile.value:
-			args.append('-q')
-		cmd = [self.STREAMRIPPER_BIN, self.STREAMRIPPER_BIN] + args
-		containerStreamripper.execute(*cmd)
-		self["key_red"].setText(_("Stop record"))
+			if not os.path.exists(config.plugins.shoutcast.dirname.value):
+				os.mkdir(config.plugins.shoutcast.dirname.value)
+			args = []
+			args.append(self.currentStreamingURL)
+			args.append('-d')
+			args.append(config.plugins.shoutcast.dirname.value)
+			args.append('-r')
+			args.append('9191')
+			if recordingLength != 0:
+				args.append('-l')
+				args.append("%d" % int(recordingLength))
+			if config.plugins.shoutcast.riptosinglefile.value:
+				args.append('-a')
+				args.append('-A')
+			if not config.plugins.shoutcast.createdirforeachstream.value:
+				args.append('-s')
+			if config.plugins.shoutcast.addsequenceoutputfile.value:
+				args.append('-q')
+			cmd = [self.STREAMRIPPER_BIN, self.STREAMRIPPER_BIN] + args
+			containerStreamripper.execute(*cmd)
+			self["key_red"].setText(_("Stop record"))
 
 	def deleteRecordingConfirmed(self,val):
 		if val:
