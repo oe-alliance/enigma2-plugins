@@ -331,7 +331,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			self.stopReloadStationListTimer()
 			self.mode = self.GENRELIST
 			if len(self.genreList):
-				self["headertext"].setText("SHOUTcast genre-list")
+				self["headertext"].setText(_("SHOUTcast genre list"))
 				self["list"].setMode(self.mode)
 				self["list"].setList([ (x,) for x in self.genreList])
 				self["list"].moveToIndex(self.genreListIndex)
@@ -379,7 +379,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		sendUrlCommand(url, None,10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
-		self["headertext"].setText("SHOUTcast genre list")
+		self["headertext"].setText(_("SHOUTcast genre list"))
 		self.genreListIndex = 0
 		self.mode = self.GENRELIST
 		self["list"].setMode(self.mode)
@@ -435,7 +435,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 					self.stopPlaying()
 					url = "http://yp.shoutcast.com%s?id=%s" % (self.tunein, sel.id)
 					self["list"].hide()
-					self["statustext"].setText("Getting streaming data from\n%s" % sel.name)
+					self["statustext"].setText(_("Getting streaming data from\n%s") % sel.name)
 					self.currentStreamingStation = sel.name
 					sendUrlCommand(url, None,10).addCallback(self.callbackPLS).addErrback(self.callbackStationListError)
 				elif self.mode == self.FAVORITELIST:
@@ -487,7 +487,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			self["statustext"].setText(_("No streaming data found..."))
 
 	def getStationList(self,genre):
-		self.stationListHeader = "genre %s" % genre
+		self.stationListHeader = _("genre %s") % genre
 		self.headerTextString = _("SHOUTcast station list for %s") % self.stationListHeader
 		self["headertext"].setText("")
 		self["statustext"].setText(_("Getting %s") %  self.headerTextString)

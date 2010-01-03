@@ -78,7 +78,7 @@ msgstr "Erhalte SHOUTcast Genre Liste..."
 #: ../src/plugin.py:265
 #: ../src/plugin.py:312
 msgid "Stop record"
-msgstr "Aufnahme stoppen"
+msgstr "Beende Aufnahme"
 
 #: ../src/plugin.py:267
 msgid "Recording stream station"
@@ -101,6 +101,10 @@ msgid "Only running streamings can be recorded!"
 msgstr ""
 "Zur Zeit wird kein Radiosender abgespielt.\n"
 "Aufnahme wird nicht gestartet."
+
+#: ../src/plugin.py:334
+msgid "SHOUTcast genre list"
+msgstr "SHOUTcast Genre Liste"
 
 #: ../src/plugin.py:345
 #: ../src/plugin.py:489
@@ -134,6 +138,11 @@ msgstr ""
 msgid "No streaming data found..."
 msgstr "Keine Daten gefunden..."
 
+#: ../src/plugin.py:490
+#, python-format
+msgid "genre %s"
+msgstr "Genre %s"
+
 #: ../src/plugin.py:491
 #, python-format
 msgid "Getting %s"
@@ -149,23 +158,23 @@ msgstr "Suche"
 
 #: ../src/plugin.py:534
 msgid "rename current selected favorite"
-msgstr "Aktuell ausgewählten Favoriten umbenennen"
+msgstr "Umbenennen"
 
 #: ../src/plugin.py:535
 msgid "remove current selected favorite"
-msgstr "Aktuell ausgewählten Favoriten löschen"
+msgstr "Löschen"
 
 #: ../src/plugin.py:537
 msgid "Add current selected genre to favorite"
-msgstr "Aktuell ausgewähltes Genre zu Favoritenliste hinzufügen"
+msgstr "Zur Favoritenliste hinzufügen"
 
 #: ../src/plugin.py:539
 msgid "Add current selected station to favorite"
-msgstr "Aktuell ausgewählte Station zu Favoritenliste hinzufügen"
+msgstr "Zur Favoritenliste hinzufügen"
 
 #: ../src/plugin.py:541
 msgid "Add current playing stream to favorite"
-msgstr "Aktuell laufende Radiostation zu Favoritenliste hinzufügen"
+msgstr "Zur Favoritenliste hinzufügen"
 
 #: ../src/plugin.py:542
 msgid "Hide"
@@ -249,7 +258,7 @@ msgstr "Stationsliste neu laden:"
 
 #: ../src/plugin.py:873
 msgid "Rip to single file, name is timestamped"
-msgstr "In eine einzelne Datei speichern, Dateiname wird autom. generiert"
+msgstr "In eine einzelne Datei speichern"
 
 #: ../src/plugin.py:874
 msgid "Create a directory for each stream"

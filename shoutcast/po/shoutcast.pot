@@ -100,6 +100,10 @@ msgstr ""
 msgid "Only running streamings can be recorded!"
 msgstr ""
 
+#: ../src/plugin.py:334
+msgid "SHOUTcast genre list"
+msgstr ""
+
 #: ../src/plugin.py:345
 #: ../src/plugin.py:489
 #, python-format
@@ -126,6 +130,11 @@ msgstr ""
 
 #: ../src/plugin.py:485
 msgid "No streaming data found..."
+msgstr ""
+
+#: ../src/plugin.py:490
+#, python-format
+msgid "genre %s"
 msgstr ""
 
 #: ../src/plugin.py:491
