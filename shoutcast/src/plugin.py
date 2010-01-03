@@ -259,6 +259,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		containerStreamripper.appClosed.append(self.streamripperClosed)
 
 		if containerStreamripper.running():
+			self["key_red"].setText(_("Stop record"))
 			# just to hear to recording music when starting the plugin...
 			self.currentStreamingStation = _("Recording stream station")
 			self.playServiceStream("http://localhost:9191")
@@ -266,6 +267,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	def streamripperClosed(self, retval):
 		if retval == 0:
 			self["console"].setText("")
+		self["key_red"].setText(_("Record"))
 
 	def streamripperDataAvail(self, data):
 		sData = data.replace('\n','')
@@ -305,10 +307,15 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			args.append('-q')
 		cmd = [self.STREAMRIPPER_BIN, self.STREAMRIPPER_BIN] + args
 		containerStreamripper.execute(*cmd)
+		self["key_red"].setText(_("Stop record"))
+
+	def deleteRecordingConfirmed(self,val):
+		if val:
+			containerStreamripper.sendCtrlC()
 
 	def red_pressed(self):
 		if containerStreamripper.running():
-			containerStreamripper.sendCtrlC()
+			self.session.openWithCallback(self.deleteRecordingConfirmed, MessageBox, _("Do you really want to stop the recording?"))
 		else:
 			if len(self.currentStreamingURL) != 0:
 				self.session.openWithCallback(self.InputBoxStartRecordingCallback, InputBox, windowTitle = _("Recording length"),  title=_("Enter in minutes (0 means unlimited)"), text="0", type=Input.NUMBER)
