@@ -184,11 +184,6 @@ msgstr "Suchtext eingeben"
 msgid "search-criteria %s"
 msgstr "Suchkriterium %s"
 
-#: ../src/plugin.py:614
-#, python-format
-msgid "SHOUTcast station list for %s"
-msgstr "SHOUTcast Stationsliste für %s"
-
 #: ../src/plugin.py:616
 #, python-format
 msgid "Searching SHOUTcast for %s..."
