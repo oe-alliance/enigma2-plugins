@@ -118,6 +118,9 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 
 	STREAMRIPPER_BIN = '/usr/bin/streamripper'
 
+	FAVORITE_FILE_DEFAULT = '/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/favorites'
+	FAVORITE_FILE = '/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/favorites.user'
+
 	sz_w = getDesktop(0).size().width()
 	if sz_w == 1280:
 		skin = """
@@ -222,14 +225,14 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self.favoriteList = []
 		self.favoriteListIndex = 0
 
-		self.favoriteConfigFile = "/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/favorites"
 		self.favoriteConfig = Config()
-		if os.path.exists(self.favoriteConfigFile):
-			self.favoriteConfig.loadFromFile(self.favoriteConfigFile)
+		if os.path.exists(self.FAVORITE_FILE):
+			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE)
+		else:
+			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE_DEFAULT)
 		self.favoriteConfig.entriescount =  ConfigInteger(0)
 		self.favoriteConfig.Entries = ConfigSubList()
 		self.initFavouriteConfig()
-
 		self.stationListXML = ""
 		self["titel"] = Label()
 		self["station"] = Label()
@@ -573,7 +576,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		newFavorite.audio.value = audio
 		newFavorite.bitrate.value = bitrate
 		newFavorite.save()
-		self.favoriteConfig.saveToFile(self.favoriteConfigFile)
+		self.favoriteConfig.saveToFile(self.FAVORITE_FILE)
 
 	def renameFavorite(self):
 		sel = self.getSelectedItem()
@@ -585,7 +588,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			sel = self.getSelectedItem()
 			sel.configItem.name.value = text
 			sel.configItem.save()
-			self.favoriteConfig.saveToFile(self.favoriteConfigFile)
+			self.favoriteConfig.saveToFile(self.FAVORITE_FILE)
 			self.favoriteListIndex = 0
 			self.getFavoriteList()
 
@@ -597,7 +600,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			self.favoriteConfig.entriescount.save()
 			self.favoriteConfig.Entries.remove(sel.configItem)
 			self.favoriteConfig.Entries.save()
-			self.favoriteConfig.saveToFile(self.favoriteConfigFile)
+			self.favoriteConfig.saveToFile(self.FAVORITE_FILE)
 			self.favoriteListIndex = 0
 			self.getFavoriteList()
 
