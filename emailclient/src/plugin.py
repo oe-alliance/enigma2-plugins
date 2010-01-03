@@ -51,7 +51,7 @@ def decodeHeader(text, default=''):
 			textNew += content
 	try:
 		return textNew.encode('utf-8')
-	except UnicodeEncodeError: # for faulty mail software systems
+	except UnicodeDecodeError: # for faulty mail software systems
 		return textNew.decode('iso-8859-1').encode('utf-8')
 
 IS_UNSEEN = 0
@@ -216,20 +216,13 @@ class EmailScreen(Screen):
 					continue
 				else:
 					state = IS_DELETED
-			try:
-				mylist.append(self._buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER']), state))
-			except Exception, e:
-				try:
-					mylist.append(self._buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER'].decode('iso8859-1', 'replace'), state)))
-				except UnicodeDecodeError:
-					# this appear to be errors in the formatting of the mail itself...
-					debug("[EmailScreen] onHeaderList error: %s (%s)" %(result[m]['RFC822.HEADER'], str(e)))
-		if mylist:
-			mylist.sort(key=lambda x: x[0].getTimestampUTC(), reverse=True)
-			self["messagelist"].l.setList(mylist)
+			mylist.append(self._buildMessageListItem(MessageHeader(m, result[m]['RFC822.HEADER']), state))
+
+		mylist.sort(key=lambda x: x[0].getTimestampUTC(), reverse=True)
+		self["messagelist"].l.setList(mylist)
+		if len(mylist) > 0:
 			self["infolabel"].setText(_("have %d messages") %(len(mylist)))
 		else:
-			self["messagelist"].l.setList([])
 			self["infolabel"].setText(_("have no messages"))
 			# self.onBoxSelected() # brings us into endless loop, when still deleted messages are in there...
 			self._selectBoxlist()
@@ -292,7 +285,7 @@ class EmailScreen(Screen):
 		return [
 			message,
 			MultiContentEntryText(pos=(5, 0), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.getSenderString(), color=color, color_sel=color),
-			MultiContentEntryText(pos=(5, scaleV(20,18)+1), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=time.ctime(message.getTimestampUTC()), color=color, color_sel=color),
+			MultiContentEntryText(pos=(5, scaleV(20,18)+1), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.getLocalDateTimeString(), color=color, color_sel=color),
 			MultiContentEntryText(pos=(5, 2*(scaleV(20,18)+1)), size=(self.messagelistWidth, scaleV(20,18)+5), font=font, text=message.getSubject(), color=color, color_sel=color)
 		]
 
@@ -349,11 +342,8 @@ class ScreenMailView(Screen):
 					   )
 		Screen.__init__(self, session)
 		self["from"] = Label(decodeHeader(_("From") +": %s" %self._email.get('from', _('no from'))))
-		try:
-			msgdate = time.ctime(email.utils.mktime_tz(email.utils.parsedate_tz(self._email.get("date")))) #@UndefinedVariable
-		except ValueError:
-			msgdate = _('no date')
-		self["date"] = Label(_("Date") +": %s" %msgdate)
+		msgdate = email.utils.parsedate_tz(self._email.get("date", ""))
+		self["date"] = Label(_("Date") +": %s" % (time.ctime(email.utils.mktime_tz(msgdate)) if msgdate else _("no date")))
 		self["subject"] = Label(decodeHeader(_("Subject") +": %s" %self._email.get('subject', _('no subject'))))
 		self["body"] = ScrollLabel(_(self._email.messagebodys[0].getData()))
 		self["buttonred"] = Button("")
@@ -606,12 +596,18 @@ class MessageHeader(object):
 	def getSubject(self):
 		return decodeHeader(self.get("subject"), _("no subject"))
 
+	def getLocalDateTimeString(self):
+		msgdate = email.utils.parsedate_tz(self.get("date", ""))
+		if msgdate:
+			return time.ctime(email.utils.mktime_tz(msgdate))
+		else:
+			return self.get("date", _("no date"))
+
 	def getTimestampUTC(self):
 		ts = 0
-		try:
-			ts = email.utils.mktime_tz(email.utils.parsedate_tz(self.get("date"))) #@UndefinedVariable
-		except ValueError:
-			debug("[MessageHeader] getDateTime: Invalid date: %s" % self.get("date"))
+		msgdate = email.utils.parsedate_tz(self.get("date", ''))
+		if msgdate:
+			ts = email.utils.mktime_tz(msgdate)
 		return ts
 
 	def get(self, key, default=None):
