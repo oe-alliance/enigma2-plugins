@@ -315,5 +315,6 @@ reconstructapsc/meta/Makefile
 shoutcast/Makefile
 shoutcast/src/Makefile
 shoutcast/meta/Makefile
+shoutcast/po/Makefile
 
 ])

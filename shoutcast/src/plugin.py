@@ -57,6 +57,8 @@ from enigma import eConsoleAppContainer
 from Components.Input import Input
 from Screens.InputBox import InputBox
 from Components.FileList import FileList
+# for localized messages
+from . import _
 
 
 containerStreamripper = None
@@ -610,8 +612,8 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	def searchSHOUTcast(self, searchstring = None):
 		if searchstring:
 			self.stopReloadStationListTimer()
-			self.stationListHeader = _("search-cirteria %s") % searchstring
-			self.headerTextString = _("(SHOUTcast station list for %s") % self.stationListHeader
+			self.stationListHeader = _("search-criteria %s") % searchstring
+			self.headerTextString = _("SHOUTcast station list for %s") % self.stationListHeader
 			self["headertext"].setText("")
 			self["statustext"].setText(_("Searching SHOUTcast for %s...") % searchstring)
 			self["list"].hide()
