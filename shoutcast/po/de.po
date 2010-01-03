@@ -110,7 +110,7 @@ msgstr "SHOUTcast Genre Liste"
 #: ../src/plugin.py:489
 #, python-format
 msgid "SHOUTcast station list for %s"
-msgstr "SHOUTcast Station Liste für %s"
+msgstr "SHOUTcast Stationsliste für %s"
 
 #: ../src/plugin.py:360
 msgid "Favorite list"
@@ -166,15 +166,15 @@ msgstr "Löschen"
 
 #: ../src/plugin.py:537
 msgid "Add current selected genre to favorite"
-msgstr "Zur Favoritenliste hinzufügen"
+msgstr "Markiertes Genre zur Favoritenliste hinzufügen"
 
 #: ../src/plugin.py:539
 msgid "Add current selected station to favorite"
-msgstr "Zur Favoritenliste hinzufügen"
+msgstr "Markierte Station zur Favoritenliste hinzufügen"
 
 #: ../src/plugin.py:541
 msgid "Add current playing stream to favorite"
-msgstr "Zur Favoritenliste hinzufügen"
+msgstr "Laufender Sender zur Favoritenliste hinzufügen"
 
 #: ../src/plugin.py:542
 msgid "Hide"
