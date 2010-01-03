@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-05-29 17:38+0200\n"
-"PO-Revision-Date: 2009-09-28 10:16+0100\n"
+"PO-Revision-Date: 2010-01-03 07:27+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: WeeGull <weegull@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,6 @@ msgstr "Ett fel uppstod."
 
 #: ../src/MyTubeSearch.py:228
 #: ../src/plugin.py:116
-#, fuzzy
 msgid "Ascending"
 msgstr "Stigande"
 
@@ -131,15 +130,13 @@ msgid "Download location"
 msgstr "Nedladdningsplats"
 
 #: ../src/plugin.py:1238
-#, fuzzy
 msgid "Downloading screenshots. Please wait..."
-msgstr "Försöker ladda ner Youtube sökresultat. Vänligen vänta..."
+msgstr "Laddar ner förhandsvisningsbilder. Vänligen vänta..."
 
 #: ../src/plugin.py:1104
 #: ../src/plugin.py:1264
-#, fuzzy
 msgid "Duration: "
-msgstr "Utbildning"
+msgstr "Längd: "
 
 #: ../src/MyTubeSearch.py:193
 #: ../src/plugin.py:81
@@ -147,9 +144,8 @@ msgid "Education"
 msgstr "Utbildning"
 
 #: ../src/plugin.py:526
-#, fuzzy
 msgid "Enter your search term(s)"
-msgstr "Sökterm(er)"
+msgstr "Ange dina sökterm(er)"
 
 #: ../src/MyTubeSearch.py:192
 #: ../src/plugin.py:80
@@ -217,7 +213,7 @@ msgstr "Hong Kong"
 #: ../src/MyTubeSearch.py:194
 #: ../src/plugin.py:82
 msgid "Howto & Style"
-msgstr ""
+msgstr "Howto & Design"
 
 #: ../src/MyTubeSearch.py:211
 #: ../src/plugin.py:99
@@ -312,9 +308,8 @@ msgstr "MyTubePlayer"
 #: ../src/plugin.py:450
 #: ../src/plugin.py:452
 #: ../src/plugin.py:459
-#, fuzzy
 msgid "MyTubePlayer Help"
-msgstr "MyTubePlayer"
+msgstr "MyTubePlayer Hjälp"
 
 #: ../src/MyTubeSearch.py:571
 #: ../src/MyTubeSearch.py:588
@@ -323,18 +318,16 @@ msgstr "MyTubePlayer aktiva videonedladdningar"
 
 #: ../src/MyTubeSearch.py:407
 #: ../src/MyTubeSearch.py:410
-#, fuzzy
 msgid "MyTubePlayer settings"
-msgstr "MyTubePlayer"
+msgstr "MyTubePlayer inställningar"
 
 #: ../src/plugin.py:1279
 msgid "MyTubeVideoInfoScreen"
 msgstr "MyTubeVideoInfoScreen"
 
 #: ../src/plugin.py:1425
-#, fuzzy
 msgid "MyTubeVideohelpScreen"
-msgstr "MyTubeVideoInfoScreen"
+msgstr "MyTubeVideoHjälpSkärm"
 
 #: ../src/MyTubeSearch.py:217
 #: ../src/plugin.py:105
@@ -362,14 +355,12 @@ msgid "No videos to display"
 msgstr "Ingen video att visa"
 
 #: ../src/plugin.py:1695
-#, fuzzy
 msgid "No, but play video again"
-msgstr "Nej, men spela nästa video"
+msgstr "Nej, men spela video igen"
 
 #: ../src/plugin.py:572
-#, fuzzy
 msgid "No, but switch to video entries."
-msgstr "Fler video poster."
+msgstr "Nej, men byt till videoposter."
 
 #: ../src/plugin.py:578
 msgid "No, but switch to video search."
@@ -381,9 +372,8 @@ msgid "Nonprofits & Activism"
 msgstr ""
 
 #: ../src/plugin.py:433
-#, fuzzy
 msgid "Not fetching feed entries"
-msgstr "Hämtar feed poster"
+msgstr "Hämtar inte feed poster"
 
 #: ../src/MyTubeSearch.py:190
 #: ../src/plugin.py:78
@@ -401,9 +391,8 @@ msgstr "Spela YouTube filmer"
 
 #: ../src/MyTubeSearch.py:249
 #: ../src/plugin.py:136
-#, fuzzy
 msgid "Play next video"
-msgstr "Nej, men spela nästa video"
+msgstr "Spela nästa video"
 
 #: ../src/MyTubeSearch.py:249
 #: ../src/plugin.py:136
@@ -434,25 +423,22 @@ msgid "Rating"
 msgstr "Betyg"
 
 #: ../src/plugin.py:1104
-#, fuzzy
 msgid "Ratings: "
-msgstr "Betyg"
+msgstr "Betyg: "
 
 #: ../src/plugin.py:580
-#, fuzzy
 msgid "Really quit MyTube Player?"
-msgstr "MyTubePlayer"
+msgstr "Verkligen avsluta MyTubePlayer?"
 
 #: ../src/MyTubeSearch.py:240
 #: ../src/plugin.py:128
 #: ../src/plugin.py:761
 msgid "Recently featured"
-msgstr ""
+msgstr "Nyligen aktuell"
 
 #: ../src/plugin.py:936
-#, fuzzy
 msgid "Related video entries."
-msgstr "Fler video poster."
+msgstr "Liknande video poster."
 
 #: ../src/MyTubeSearch.py:161
 #: ../src/plugin.py:49
@@ -460,9 +446,8 @@ msgid "Relevance"
 msgstr "Relevance"
 
 #: ../src/plugin.py:943
-#, fuzzy
 msgid "Response video entries."
-msgstr "Fler video poster."
+msgstr "Svars video poster."
 
 #: ../src/MyTubeSearch.py:249
 #: ../src/MyTubeSearch.py:252
@@ -490,19 +475,16 @@ msgid "Search Term(s)"
 msgstr "Sökterm(er)"
 
 #: ../src/MyTubeSearch.py:416
-#, fuzzy
 msgid "Search category:"
-msgstr "Sökterm(er)"
+msgstr "Sök kategori:"
 
 #: ../src/MyTubeSearch.py:417
-#, fuzzy
 msgid "Search region:"
-msgstr "Sök"
+msgstr "Sök region:"
 
 #: ../src/MyTubeSearch.py:415
-#, fuzzy
 msgid "Search restricted content:"
-msgstr "Begränsat innehåll"
+msgstr "Sök begränsat innehåll"
 
 #: ../src/plugin.py:764
 msgid "Select new feed to view."
@@ -579,7 +561,7 @@ msgstr "Den här veckan"
 
 #: ../src/plugin.py:1420
 msgid "This is the help screen. Feed me with something to display."
-msgstr ""
+msgstr "Det här är hjälpen. Ge mig något att visa."
 
 #: ../src/MyTubeSearch.py:171
 #: ../src/plugin.py:59
@@ -640,7 +622,7 @@ msgstr "Visa relaterade videos"
 
 #: ../src/plugin.py:481
 msgid "View response videos"
-msgstr ""
+msgstr "Visa resultatets videos"
 
 #: ../src/plugin.py:1104
 #: ../src/plugin.py:1273
@@ -661,6 +643,15 @@ msgid ""
 "\n"
 "The Help button shows this help again."
 msgstr ""
+"Välkommen till MyTube Youtube Spelare.\n"
+"\n"
+"Använd Bouqet+ knappen för att navigera till sökfältet och Bouqet- för att navigera till videoposterna.\n"
+"\n"
+"För att spela en video tryck OK på din fjärrkontroll.\n"
+"\n"
+"Tryck på MENU knappen för ytterligare val.\n"
+"\n"
+"HELP knappen kommer visa den här informationen igen."
 
 #: ../src/plugin.py:259
 msgid ""
@@ -672,6 +663,13 @@ msgid ""
 "\n"
 "Press exit to get back to the input field."
 msgstr ""
+"Välkommen till MyTube Youtube Spelare.\n"
+"\n"
+"Under tiden som du anger sökterm(er) kommer du få förslag på matchande söktermer.\n"
+"\n"
+"För att välja ett förslag tryck på NER knappen på din fjärrkontroll, välj sedan önskat förslag och tryck OK för att starta sökningen.\n"
+"\n"
+"Tryck EXIT för att återgå till inmatningsfältet."
 
 #: ../src/MyTubeSearch.py:175
 #: ../src/plugin.py:63
@@ -682,14 +680,12 @@ msgid "Yes"
 msgstr "Ja"
 
 #: ../src/plugin.py:1696
-#, fuzzy
 msgid "Yes, but play next video"
-msgstr "Nej, men spela nästa video"
+msgstr "Ja, men spela nästa video"
 
 #: ../src/plugin.py:1697
-#, fuzzy
 msgid "Yes, but play previous video"
-msgstr "Nej, men spela föregående video"
+msgstr "Ja, men spela föregående video"
 
 #~ msgid "Category"
 #~ msgstr "Kategori"
