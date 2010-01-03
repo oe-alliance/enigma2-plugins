@@ -26,7 +26,7 @@ except ValueError:
 			print message
 
 import htmlentitydefs
-def html2unicode(in_html):
+def html2unicode(in_html, charset):
 #===============================================================================
 #	# sanity checks
 #	try:
@@ -69,7 +69,7 @@ def html2unicode(in_html):
 	for key, codepoint in entitydict.items():
 		try:
 			debug("[nrzuname] html2utf8: replace %s with %s" %(repr(key), str(codepoint)))
-			in_html = in_html.replace(unicode(key), (unichr(int(codepoint))))
+			in_html = in_html.replace(unicode(key), (unichr(int(codepoint))).encode(charset))
 		except ValueError:
 			debug("[nrzuname] html2utf8: ValueError " + key + "/" + str(codepoint))
 	return in_html
@@ -235,18 +235,22 @@ class ReverseLookupAndNotifier:
 		def cleanName(text):
 			item = text.replace("%20"," ").replace("&nbsp;"," ").replace("</b>","").replace(","," ").replace('\n',' ').replace('\t',' ')
 
-			item = html2unicode(item)
-			try: # this works under Windows
-				item = item.decode('iso-8859-1')
-			except UnicodeDecodeError:
-				try: # this works under Enigma2
-					item = item.decode('utf-8')
-				except UnicodeDecodeError:
-					try: # fall back
-						item = item.decode(self.charset)
-					except UnicodeDecodeError:
-						# debug("[ReverseLookupAndNotifier] cleanName: " + traceback.format_exc())
-						debug("[ReverseLookupAndNotifier] cleanName: encoding problem")
+			item = html2unicode(item, self.charset)
+			#===================================================================
+			# try: # this works under Windows
+			#	item = item.encode('iso-8859-1')
+			# except UnicodeEncodeError:
+			#	debug("[ReverseLookupAndNotifier] cleanName: encoding problem with iso8859")
+			#	try: # this works under Enigma2
+			#		item = item.encode('utf-8')
+			#	except UnicodeEncodeError:
+			#		debug("[ReverseLookupAndNotifier] cleanName: encoding problem with utf-8")
+			#		try: # fall back
+			#			item = item.encode(self.charset)
+			#		except UnicodeEncodeError:
+			#			# debug("[ReverseLookupAndNotifier] cleanName: " + traceback.format_exc())
+			#			debug("[ReverseLookupAndNotifier] cleanName: encoding problem")
+			#===================================================================
 
 			newitem = item.replace("  ", " ")
 			while newitem != item:
@@ -406,10 +410,10 @@ class ReverseLookupAndNotifier:
 		# debug("1: " + repr(self.caller))
 		if self.caller:
 			try:
-				# debug("2: " + repr(self.caller))
+				debug("2: " + repr(self.caller))
 				self.caller = self.caller.encode(self.charset, 'replace')
-				# debug("3: " + repr(self.caller))
-			except UnicodeEncodeError:
+				debug("3: " + repr(self.caller))
+			except UnicodeDecodeError:
 				debug("[ReverseLookupAndNotifier] cannot encode?!?!")
 			# self.caller = unicode(self.caller)
 			# debug("4: " + repr(self.caller))

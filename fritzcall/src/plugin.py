@@ -496,12 +496,14 @@ class FritzCallFBF:
 			if found:
 				charset = found.group(1)
 				debug("[FritzCallFBF] _parseFritzBoxPhonebook: found charset: " + charset)
-				html = html2unicode(html.decode(charset)).encode('utf-8') # this looks silly, but has to be
+				html = html2unicode(html.decode(charset), charset).encode('utf-8') # this looks silly, but has to be
 			else: # this is kind of emergency conversion...
 				try:
-					html = html2unicode(html.decode('utf-8')).encode('utf-8') # this looks silly, but has to be
+					charset = 'utf-8'
+					html = html2unicode(html.decode('utf-8'), 'utf-8').encode('utf-8') # this looks silly, but has to be
 				except UnicodeDecodeError:
-					html = html2unicode(html.decode('iso-8859-1')).encode('utf-8') # this looks silly, but has to be
+					charset = 'iso-8859-1'
+					html = html2unicode(html.decode('iso-8859-1'), 'iso-8859-1').encode('utf-8') # this looks silly, but has to be
 			entrymask = re.compile('(TrFonName\("[^"]+", "[^"]+", "[^"]*"\);.*?)document.write\(TrFon1\(\)', re.S)
 			entries = entrymask.finditer(html)
 			for entry in entries:
@@ -557,7 +559,7 @@ class FritzCallFBF:
 				if config.plugins.FritzCall.showVanity.value and found.group(4):
 					name = name + ", " + _("Vanity") + ": " + found.group(4)
 				if thisnumber:
-					name = html2unicode(unicode(name)).encode('utf-8')
+					name = html2unicode(unicode(name), charset).encode('utf-8')
 					debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (name, thisnumber))
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
 					phonebook.phonebook[thisnumber] = name
@@ -676,7 +678,7 @@ class FritzCallFBF:
 				self._callScreen.updateStatus(_("done, using last list"))
 			lines = self._callList
 		else:
-			debug("[FritzCallFBF] _gotPageCalls: got no csv, no callList, leaving")
+			debug("[FritzCallFBF] _gotPageCalls: got no csv, no callList, laving")
 			return
 			
 		callListL = []
@@ -1783,7 +1785,8 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 		self["entries"].setList(sortlist)
 
 	def updateStatus(self, text):
-		self["statusbar"].setText(_("Getting calls from FRITZ!Box...") + ' ' + text)
+		if self.has_key("statusbar"):
+			self["statusbar"].setText(_("Getting calls from FRITZ!Box...") + ' ' + text)
 
 	def showEntry(self):
 		debug("[FritzDisplayCalls] showEntry")
@@ -2669,6 +2672,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.helpList.append((self["setupActions"], "EPGSelectActions", [("info", _("About FritzCall"))]))
 
 		ConfigListScreen.__init__(self, self.list, session=session)
+			
 		self.createSetup()
 
 

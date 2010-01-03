@@ -36,7 +36,7 @@ def debug(message):
 			deb.write(message + "\n")
 			deb.close()
 		except Exception, e:
-			debug("%s (retried debug: %s)" % (repr(message), e.message))
+			debug("%s (retried debug: %s)" % (repr(message), str(e)))
 		
 
 import re
