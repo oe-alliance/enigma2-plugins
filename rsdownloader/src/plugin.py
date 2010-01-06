@@ -274,12 +274,13 @@ class RSDownload:
 		if self.url.__contains__("rapidshare.com") and username == "" and password == "":
 			writeLog("Free RS-Download: %s"%self.url)
 			self.status = _("Checking")
-			if config.plugins.RSDownloader.reconnect_type.value == "fritz" and self.mayReconnect():
-				reconnect()
-				sleep(3)
-			elif config.plugins.RSDownloader.reconnect_type.value == "script" and self.mayReconnect():
-				reconnect_script()
-				sleep(3)
+			if self.mayReconnect():
+				if config.plugins.RSDownloader.reconnect_type.value == "fritz":
+					reconnect()
+					sleep(3)
+				if config.plugins.RSDownloader.reconnect_type.value == "script":
+					reconnect_script()
+					sleep(3)
 			data = get(self.url)
 			url = matchGet('<form[^>]+action="([^"]+)', data)
 			if not url:
@@ -304,12 +305,13 @@ class RSDownload:
 		elif (self.url.__contains__("uploaded.to") or self.url.__contains__("ul.to")) and ul_username == "" and ul_password == "":
 			writeLog("Free Uploaded.to-Download: %s"%self.url)
 			self.status = _("Checking")
-			if config.plugins.RSDownloader.reconnect_type.value == "fritz" and self.mayReconnect():
-				reconnect()
-				sleep(3)
-			elif config.plugins.RSDownloader.reconnect_type.value == "script" and self.mayReconnect():
-				reconnect_script()
-				sleep(3)
+			if self.mayReconnect():
+				if config.plugins.RSDownloader.reconnect_type.value == "fritz":
+					reconnect()
+					sleep(3)
+				if config.plugins.RSDownloader.reconnect_type.value == "script":
+					reconnect_script()
+					sleep(3)
 			data = get(self.url)
 			tmp = re.search(r"Or wait (\d+) minutes", data)
 			if tmp:
