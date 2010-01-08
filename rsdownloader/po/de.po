@@ -284,7 +284,7 @@ msgstr "Downloads aus txt Dateien hinzufügen"
 
 #: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1367
 msgid "Add files from container"
-msgstr "Dateien aus Kontainer hinzufügen"
+msgstr "Dateien aus Container hinzufügen"
 
 #: /home/aliabdul/dream/enigma2-plugins/rsdownloader/src/plugin.py:1368
 msgid "Delete failed downloads"
