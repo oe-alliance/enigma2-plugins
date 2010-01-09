@@ -169,22 +169,22 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 
 		skin = """
 			<screen name="SHOUTcastWidget" position="0,0" size="720,576" flags="wfNoBorder" backgroundColor="#00000000" title="SHOUTcast">
-				<ePixmap position="20,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="160,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap position="300,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap position="440,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-				<widget render="Label" source="key_red" position="20,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_green" position="160,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_yellow" position="300,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_blue" position="440,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="headertext" position="20,77" zPosition="1" size="680,23" font="Regular;20" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="statustext" position="20,270" zPosition="1" size="680,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="list" position="20,110" zPosition="2" size="680,313" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="titel" position="130,450" zPosition="1" size="550,20" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="station" position="130,470" zPosition="1" size="550,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="console" position="130,520" zPosition="1" size="550,50" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="cover" zPosition="2" position="20,450" size="102,110" alphatest="blend" />
-				<ePixmap position="590,35" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
+				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap position="210,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap position="370,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap position="530,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_green" position="210,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_yellow" position="370,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget render="Label" source="key_blue" position="530,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="headertext" position="50,77" zPosition="1" size="620,23" font="Regular;20" transparent="1"  backgroundColor="#00000000"/>
+				<widget name="statustext" position="50,270" zPosition="1" size="620,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
+				<widget name="list" position="50,120" zPosition="2" size="620,249" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
+				<widget name="titel" position="155,400" zPosition="1" size="525,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
+				<widget name="station" position="155,445" zPosition="1" size="525,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
+				<widget name="console" position="155,490" zPosition="1" size="525,50" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
+				<widget name="cover" zPosition="2" position="50,400" size="102,110" alphatest="blend" />
+				<ePixmap position="550,77" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
 			</screen>"""
 
 	
