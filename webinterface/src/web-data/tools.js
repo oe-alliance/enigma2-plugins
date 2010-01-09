@@ -36,7 +36,7 @@ var tagsList = [];
 var boxtype = "";
 
 function startUpdateCurrentPoller(){
-	updateCurrentPoller = setInterval(updateItems, 10000);
+	updateCurrentPoller = setInterval(updateItems, 60000);
 }
 
 function stopUpdateCurrentPoller(){
@@ -141,7 +141,7 @@ function simpleResultHandler(simpleResult){
 
 function startUpdateBouquetItemsPoller(){
 	debug("[startUpdateBouquetItemsPoller] called");
-	updateBouquetItemsPoller = setInterval(updateItemsLazy, 60000);
+	updateBouquetItemsPoller = setInterval(updateItemsLazy, 300000);
 }
 
 
@@ -337,10 +337,10 @@ function saveSettings(){
 			if(debug){
 				openDebug();
 			}
-		}
-		
-		
+		}		
 	}
+	
+	
 	
 }
 
