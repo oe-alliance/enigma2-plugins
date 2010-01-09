@@ -207,6 +207,7 @@ class AutoRes(Screen):
 			else:
 				self.setMode(mode)
 			if config.plugins.autoresolution.testmode.value:
+				resolutionlabeltxt = "Videomode: %s" % mode
 				self.session.openWithCallback(
 					self.confirm,
 					MessageBox,
