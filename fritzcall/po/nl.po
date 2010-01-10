@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-24 12:29+0100\n"
+"POT-Creation-Date: 2010-01-10 16:55+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -189,6 +189,10 @@ msgstr "Fout bij het laden van het FRITZ!Box telefoonboek -fout: %s"
 
 #, python-format
 msgid "FRITZ!Box - Dialling failed: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error getting blacklist: %s"
 msgstr ""
 
 #, python-format
@@ -588,12 +592,24 @@ msgstr "mailboxen actief"
 msgid "mobile"
 msgstr "mobiel"
 
+msgid "no"
+msgstr ""
+
 #, fuzzy
 msgid "no device active"
 msgstr "Eén mailbox actief"
 
 msgid "not encrypted"
 msgstr "ongecodeerd "
+
+msgid "number suppressed"
+msgstr ""
+
+msgid "on connect"
+msgstr ""
+
+msgid "on ring"
+msgstr ""
 
 #, fuzzy
 msgid "one device active"

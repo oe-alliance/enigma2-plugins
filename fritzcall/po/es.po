@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-24 12:29+0100\n"
+"POT-Creation-Date: 2010-01-10 16:55+0100\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -188,6 +188,10 @@ msgstr "No puedo cargar la agenda desde FRITZ!Box - Error: %s"
 
 #, python-format
 msgid "FRITZ!Box - Dialling failed: %s"
+msgstr ""
+
+#, python-format
+msgid "FRITZ!Box - Error getting blacklist: %s"
 msgstr ""
 
 #, python-format
@@ -586,12 +590,24 @@ msgstr "cuentas activas"
 msgid "mobile"
 msgstr "móvil"
 
+msgid "no"
+msgstr ""
+
 #, fuzzy
 msgid "no device active"
 msgstr "Una cuenta de correo activa"
 
 msgid "not encrypted"
 msgstr "no encriptado"
+
+msgid "number suppressed"
+msgstr ""
+
+msgid "on connect"
+msgstr ""
+
+msgid "on ring"
+msgstr ""
 
 #, fuzzy
 msgid "one device active"

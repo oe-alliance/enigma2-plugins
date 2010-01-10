@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-24 12:29+0100\n"
+"POT-Creation-Date: 2010-01-10 16:55+0100\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -187,6 +187,10 @@ msgstr "Rehber, FRITZ!Box'dan yüklenemiyor: %s"
 #, python-format
 msgid "FRITZ!Box - Dialling failed: %s"
 msgstr "FRITZ!Box araması başarısız: %s"
+
+#, python-format
+msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr ""
 
 #, python-format
 msgid "FRITZ!Box - Error getting status: %s"
@@ -580,11 +584,23 @@ msgstr "posta kutusu etkin"
 msgid "mobile"
 msgstr "cep"
 
+msgid "no"
+msgstr ""
+
 msgid "no device active"
 msgstr "etkin cihaz yok"
 
 msgid "not encrypted"
 msgstr "şifrelenmemiş"
+
+msgid "number suppressed"
+msgstr ""
+
+msgid "on connect"
+msgstr ""
+
+msgid "on ring"
+msgstr ""
 
 msgid "one device active"
 msgstr "Bir cihaz etkin"

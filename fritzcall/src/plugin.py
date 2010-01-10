@@ -13,7 +13,7 @@ from Screens import Standby
 from Screens.HelpMenu import HelpableScreen
 
 from enigma import eTimer, eSize, ePoint #@UnresolvedImport # pylint: disable-msg=E0611
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eDVBVolumecontrol
 
 from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
@@ -33,6 +33,7 @@ from Tools import Notifications
 from Tools.NumericalTextInput import NumericalTextInput
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_CONFIG, SCOPE_MEDIA
 from Tools.LoadPixmap import LoadPixmap
+from GlobalActions import globalActionMap # for muting
 
 from twisted.internet import reactor #@UnresolvedImport
 from twisted.internet.protocol import ReconnectingClientFactory #@UnresolvedImport
@@ -77,7 +78,8 @@ my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
-config.plugins.FritzCall.muteOnCall = ConfigEnableDisable(default=False)
+#config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
+config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
 config.plugins.FritzCall.hostname = ConfigText(default="fritz.box", fixed_size=False)
 config.plugins.FritzCall.afterStandby = ConfigSelection(choices=[("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
 config.plugins.FritzCall.filter = ConfigEnableDisable(default=False)
@@ -304,6 +306,8 @@ class FritzCallFBF:
 		self._phoneBookID = '0'
 		self.info = None # (boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive)
 		self.getInfo(None)
+		self.blacklist = ([], [])
+		self.readBlacklist()
 
 	def _notify(self, text):
 		debug("[FritzCallFBF] notify: " + text)
@@ -1173,6 +1177,49 @@ class FritzCallFBF:
 	def _errorReset(self, error):
 		debug("[FritzCallFBF] _errorReset: %s" % (error))
 		text = _("FRITZ!Box - Error resetting: %s") % error.getErrorMessage()
+		self._notify(text)
+
+	def readBlacklist(self):
+		self._login(self._readBlacklist)
+		
+	def _readBlacklist(self, html):
+		if html:
+			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			if found:
+				self._errorBlacklist('Login: ' + found.group(1))
+				return
+		# http://fritz.box/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:menu=fon&var:pagename=sperre
+		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
+		parms = urlencode({
+			'getpage':'../html/de/menus/menu2.html',
+			'var:lang':'de',
+			'var:pagename':'sperre',
+			'var:menu':'fon',
+			'sid':self._md5Sid
+			})
+		debug("[FritzCallFBF] _readBlacklist url: '" + url + "' parms: '" + parms + "'")
+		getPage(url,
+			method="POST",
+			agent="Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5",
+			headers={
+					'Content-Type': "application/x-www-form-urlencoded",
+					'Content-Length': str(len(parms))},
+			postdata=parms).addCallback(self._okBlacklist).addErrback(self._errorBlacklist)
+
+	def _okBlacklist(self, html):
+		debug("[FritzCallFBF] _okBlacklist")
+		entries = re.compile('<script type="text/javascript">document.write\(Tr(Out|In)\("\d+", "(\d+)", "\w*"\)\);</script>', re.S).finditer(html)
+		self.blacklist = ([], [])
+		for entry in entries:
+			if entry.group(1) == "In":
+				self.blacklist[0].append(entry.group(2))
+			else:
+				self.blacklist[1].append(entry.group(2))
+		debug("[FritzCallFBF] _okBlacklist: %s" % repr(self.blacklist))
+
+	def _errorBlacklist(self, error):
+		debug("[FritzCallFBF] _errorBlacklist: %s" % (error))
+		text = _("FRITZ!Box - Error getting blacklist: %s") % error.getErrorMessage()
 		self._notify(text)
 
 #===============================================================================
@@ -2688,7 +2735,6 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.list = [ ]
 		self.list.append(getConfigListEntry(_("Call monitoring"), config.plugins.FritzCall.enable))
 		if config.plugins.FritzCall.enable.value:
-			self.list.append(getConfigListEntry(_("Mute on call"), config.plugins.FritzCall.muteOnCall))
 			self.list.append(getConfigListEntry(_("FRITZ!Box FON address (Name or IP)"), config.plugins.FritzCall.hostname))
 
 			self.list.append(getConfigListEntry(_("Show after Standby"), config.plugins.FritzCall.afterStandby))
@@ -2697,6 +2743,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			if config.plugins.FritzCall.filter.value:
 				self.list.append(getConfigListEntry(_("MSN to show (separated by ,)"), config.plugins.FritzCall.filtermsn))
 				self.list.append(getConfigListEntry(_("Filter also list of calls"), config.plugins.FritzCall.filterCallList))
+			self.list.append(getConfigListEntry(_("Mute on call"), config.plugins.FritzCall.muteOnCall))
 
 			self.list.append(getConfigListEntry(_("Show Outgoing Calls"), config.plugins.FritzCall.showOutgoing))
 			# not only for outgoing: config.plugins.FritzCall.showOutgoing.value:
@@ -2821,6 +2868,10 @@ class FritzCallList:
 			if found:
 				phone = found.group(1)
 
+			# should not happen, for safety reasons
+			if not caller:
+				caller = _("UNKNOWN")
+			
 			#  if we have an unknown number, show the number
 			if caller == _("UNKNOWN") and number != "":
 				caller = number
@@ -2851,12 +2902,15 @@ callList = FritzCallList()
 
 def findFace(number, name):
 	debug("[FritzCall] findFace number/name: %s/%s" % (number, name))
-	sep = name.find(',')
-	if sep != -1:
-		name = name[:sep]
-	sep = name.find('\n')
-	if sep != -1:
-		name = name[:sep]
+	if name:
+		sep = name.find(',')
+		if sep != -1:
+			name = name[:sep]
+		sep = name.find('\n')
+		if sep != -1:
+			name = name[:sep]
+	else:
+		name = _("UNKNOWN")
 
 	facesDir = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallFaces")
 	numberFile = os.path.join(facesDir, number)
@@ -2990,13 +3044,17 @@ class MessageBoxPixmap(Screen):
 	def _exit(self):
 		self.close()
 
-
-from GlobalActions import globalActionMap
-def notifyCall(event, date, number, caller, phone):
+mutedOnConnID = None
+def notifyCall(event, date, number, caller, phone, connID):
 	if Standby.inStandby is None or config.plugins.FritzCall.afterStandby.value == "each":
-		if config.plugins.FritzCall.muteOnCall.value:
-			globalActionMap.actions["volumeMute"]()
 		if event == "RING":
+			global mutedOnConnID
+			if config.plugins.FritzCall.muteOnCall.value =="ring" and not mutedOnConnID:
+				debug("[FritzCall] mute on connID: %s" % connID)
+				mutedOnConnID = connID
+				# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
+				if not eDVBVolumecontrol.getInstance().isMuted():
+					globalActionMap.actions["volumeMute"]()
 			text = _("Incoming Call on %(date)s from\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nto: %(phone)s") % { 'date':date, 'number':number, 'caller':caller, 'phone':phone }
 		else:
 			text = _("Outgoing Call on %(date)s to\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nfrom: %(phone)s") % { 'date':date, 'number':number, 'caller':caller, 'phone':phone }
@@ -3026,7 +3084,7 @@ countries = { }
 reverselookupMtime = 0
 
 class FritzReverseLookupAndNotifier:
-	def __init__(self, event, number, caller, phone, date):
+	def __init__(self, event, number, caller, phone, date, connID):
 		'''
 		
 		Initiate a reverse lookup for the given number in the configured country
@@ -3043,6 +3101,7 @@ class FritzReverseLookupAndNotifier:
 		self.caller = caller
 		self.phone = phone
 		self.date = date
+		self.connID = connID
 
 		if number[0] != "0":
 			self.notifyAndReset(number, caller)
@@ -3085,17 +3144,20 @@ class FritzReverseLookupAndNotifier:
 				self.caller = _("UNKNOWN")
 			else:
 				self.caller = name
-		notifyCall(self.event, self.date, self.number, self.caller, self.phone)
+		notifyCall(self.event, self.date, self.number, self.caller, self.phone, self.connID)
 		# kill that object...
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
 		debug("[FritzProtocol] " + "$Revision$"[1:-1]	+ "$Date$"[7:23] + " starting")
+		global mutedOnConnID
+		mutedOnConnID = None
 		self.number = '0'
 		self.caller = None
 		self.phone = None
 		self.date = '0'
 		self.event = None
+		self.connID = None
 
 	def resetValues(self):
 		debug("[FritzProtocol] resetValues")
@@ -3104,33 +3166,60 @@ class FritzProtocol(LineReceiver):
 		self.phone = None
 		self.date = '0'
 		self.event = None
+		self.connID = None
 
 	def notifyAndReset(self):
-		notifyCall(self.event, self.date, self.number, self.caller, self.phone)
+		notifyCall(self.event, self.date, self.number, self.caller, self.phone, self.connID)
 		self.resetValues()
 
 	def lineReceived(self, line):
 		debug("[FritzProtocol] lineReceived: %s" % line)
-#15.07.06 00:38:54;CALL;1;4;<from/extern>;<to/our msn>;
+#15.07.06 00:38:54;CALL;1;4;<from/our msn>;<to/extern>;
 #15.07.06 00:38:58;DISCONNECT;1;0;
 #15.07.06 00:39:22;RING;0;<from/extern>;<to/our msn>;
 #15.07.06 00:39:27;DISCONNECT;0;0;
 		anEvent = line.split(';')
 		(self.date, self.event) = anEvent[0:2]
+		self.connID = anEvent[2]
 
-		if self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoing.value):
+		filtermsns = config.plugins.FritzCall.filtermsn.value.split(",")
+		for i in range(len(filtermsns)):
+			filtermsns[i] = filtermsns[i].strip()
+
+		# debug("[FritzProtocol] Volcontrol dir: %s" % dir(eDVBVolumecontrol.getInstance()))
+		# debug("[FritzCall] unmute on connID: %s?" %self.connID)
+		global mutedOnConnID
+		if self.event == "DISCONNECT" and config.plugins.FritzCall.muteOnCall.value and mutedOnConnID == self.connID:
+			debug("[FritzCall] unmute on connID: %s!" % self.connID)
+			mutedOnConnID = None
+			# eDVBVolumecontrol.getInstance().volumeUnMute()
+			if eDVBVolumecontrol.getInstance().isMuted():
+				globalActionMap.actions["volumeMute"]()
+		# not supported so far, because, taht would mean muting on EVERY connect, regardless of RING or CALL or filter active
+		#=======================================================================
+		# elif self.event == "CONNECT" and config.plugins.FritzCall.muteOnCall.value == "connect":
+		#	debug("[FritzCall] mute on connID: %s" % self.connID)
+		#	mutedOnConnID = self.connID
+		#	# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
+		#	if not eDVBVolumecontrol.getInstance().isMuted():
+		#		globalActionMap.actions["volumeMute"]()
+		#=======================================================================
+		elif self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoing.value):
 			phone = anEvent[4]
 
 			if self.event == "RING":
 				number = anEvent[3] 
+				if fritzbox and number in fritzbox.blacklist[0]:
+					debug("[FritzProtocol] lineReceived phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
+					return 
 			else:
 				number = anEvent[5]
-				
+				if number in fritzbox.blacklist[1]:
+					debug("[FritzProtocol] lineReceived phone: '''%s''' blacklisted number: '''%s'''" % (phone, number))
+					return 
+
 			debug("[FritzProtocol] lineReceived phone: '''%s''' number: '''%s'''" % (phone, number))
 
-			filtermsns = config.plugins.FritzCall.filtermsn.value.split(",")
-			for i in range(len(filtermsns)):
-				filtermsns[i] = filtermsns[i].strip()
 			if not (config.plugins.FritzCall.filter.value and phone not in filtermsns):
 				debug("[FritzProtocol] lineReceived no filter hit")
 				phonename = phonebook.search(phone)		   # do we have a name for the number of our side?
@@ -3139,29 +3228,33 @@ class FritzProtocol(LineReceiver):
 				else:
 					self.phone = phone
 
-				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0] == "0":
-					debug("[FritzProtocol] lineReceived: strip leading 0")
-					self.number = number[1:]
+				if not number:
+					debug("[FritzProtocol] lineReceived: no number")
+					self.number = _("number suppressed")
+					self.caller = _("UNKNOWN")
 				else:
-					self.number = number
-					if self.event == "CALL" and self.number[0] != '0':					  # should only happen for outgoing
-						debug("[FritzProtocol] lineReceived: add local prefix")
-						self.number = config.plugins.FritzCall.prefix.value + self.number
-
-				# strip CbC prefixes
-				if self.event == "CALL":
-					number = stripCbCPrefix(self.number, config.plugins.FritzCall.country.value)
-
-				if self.number is not "":
+					if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0] == "0":
+						debug("[FritzProtocol] lineReceived: strip leading 0")
+						self.number = number[1:]
+					else:
+						self.number = number
+						if self.event == "CALL" and self.number[0] != '0':					  # should only happen for outgoing
+							debug("[FritzProtocol] lineReceived: add local prefix")
+							self.number = config.plugins.FritzCall.prefix.value + self.number
+	
+					# strip CbC prefixes
+					if self.event == "CALL":
+						number = stripCbCPrefix(self.number, config.plugins.FritzCall.country.value)
+	
 					debug("[FritzProtocol] lineReceived phonebook.search: %s" % self.number)
 					self.caller = phonebook.search(self.number)
 					debug("[FritzProtocol] lineReceived phonebook.search reault: %s" % self.caller)
-					if (not self.caller) and config.plugins.FritzCall.lookup.value:
-						FritzReverseLookupAndNotifier(self.event, self.number, self.caller, self.phone, self.date)
-						return							# reverselookup is supposed to handle the message itself 
-
-				if self.caller is None:
-					self.caller = _("UNKNOWN")
+					if not self.caller:
+						if config.plugins.FritzCall.lookup.value:
+							FritzReverseLookupAndNotifier(self.event, self.number, self.caller, self.phone, self.date, self.connID)
+							return							# reverselookup is supposed to handle the message itself
+						else:
+							self.caller = _("UNKNOWN")
 
 				self.notifyAndReset()
 
