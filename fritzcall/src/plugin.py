@@ -477,7 +477,23 @@ class FritzCallFBF:
 
 	def _parseFritzBoxPhonebook(self, html):
 		debug("[FritzCallFBF] _parseFritzBoxPhonebook")
-		# if not re.search('document.write\(TrFon\("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"\)\)', html):
+
+		# first, let us get the charset
+		found = re.match('.*<meta http-equiv=content-type content="text/html; charset=([^"]*)">', html, re.S)
+		if found:
+			charset = found.group(1)
+			debug("[FritzCallFBF] _parseFritzBoxPhonebook: found charset: " + charset)
+			html = html2unicode(html.decode(charset), charset).encode('utf-8') # this looks silly, but has to be
+		else: # this is kind of emergency conversion...
+			try:
+				debug("[FritzCallFBF] _parseFritzBoxPhonebook: try charset utf-8")
+				charset = 'utf-8'
+				html = html2unicode(html.decode('utf-8'), 'utf-8').encode('utf-8') # this looks silly, but has to be
+			except UnicodeDecodeError:
+				debug("[FritzCallFBF] _parseFritzBoxPhonebook: try charset iso-8859-1")
+				charset = 'iso-8859-1'
+				html = html2unicode(html.decode('iso-8859-1'), 'iso-8859-1').encode('utf-8') # this looks silly, but has to be
+
 		if re.search('document.write\(TrFon1\(\)', html):
 			#===============================================================================
 			#				 New Style: 7270 (FW 54.04.58, 54.04.63-11941, 54.04.70, 54.04.74-14371, 54.04.76)
@@ -496,18 +512,6 @@ class FritzCallFBF:
 					self._loadFritzBoxPhonebook(self._phoneBookID) # reload with dreambox phonebook
 					return
 
-			found = re.match('.*<meta http-equiv=content-type content="text/html; charset=([^"]*)">', html, re.S)
-			if found:
-				charset = found.group(1)
-				debug("[FritzCallFBF] _parseFritzBoxPhonebook: found charset: " + charset)
-				html = html2unicode(html.decode(charset), charset).encode('utf-8') # this looks silly, but has to be
-			else: # this is kind of emergency conversion...
-				try:
-					charset = 'utf-8'
-					html = html2unicode(html.decode('utf-8'), 'utf-8').encode('utf-8') # this looks silly, but has to be
-				except UnicodeDecodeError:
-					charset = 'iso-8859-1'
-					html = html2unicode(html.decode('iso-8859-1'), 'iso-8859-1').encode('utf-8') # this looks silly, but has to be
 			entrymask = re.compile('(TrFonName\("[^"]+", "[^"]+", "[^"]*"\);.*?)document.write\(TrFon1\(\)', re.S)
 			entries = entrymask.finditer(html)
 			for entry in entries:
@@ -563,7 +567,7 @@ class FritzCallFBF:
 				if config.plugins.FritzCall.showVanity.value and found.group(4):
 					name = name + ", " + _("Vanity") + ": " + found.group(4)
 				if thisnumber:
-					name = html2unicode(unicode(name), charset).encode('utf-8')
+					# name = name.encode('utf-8')
 					debug("[FritzCallFBF] Adding '''%s''' with '''%s''' from FRITZ!Box Phonebook!" % (name, thisnumber))
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
 					phonebook.phonebook[thisnumber] = name
@@ -1502,6 +1506,9 @@ class FritzMenu(Screen, HelpableScreen):
 		self._wlanActive = (wlanState[0] == '1')
 		self._mailboxActive = False
 		try:
+			if not self.has_key("FBFInfo"): # screen is closed already
+				return
+
 			if boxInfo:
 				self["FBFInfo"].setText(boxInfo.replace(', ', '\n'))
 			else:

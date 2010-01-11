@@ -68,10 +68,11 @@ def html2unicode(in_html, charset):
 		entitydict[x.group(1)] = x.group(2)
 	for key, codepoint in entitydict.items():
 		try:
-			debug("[nrzuname] html2utf8: replace %s with %s" %(repr(key), str(codepoint)))
-			in_html = in_html.replace(unicode(key), (unichr(int(codepoint))).encode(charset))
-		except ValueError:
-			debug("[nrzuname] html2utf8: ValueError " + key + "/" + str(codepoint))
+			uml = unichr(int(codepoint))
+			debug("[nrzuname] html2utf8: replace %s with %s in %s" %(repr(key), repr(uml), repr(in_html[0:20]+'...')))
+			in_html = in_html.replace(key, uml)
+		except ValueError, e:
+			debug("[nrzuname] html2utf8: ValueError " + repr(key) + ":" + repr(codepoint) + " (" + str(e) + ")")
 	return in_html
 
 def normalizePhoneNumber(intNo):
