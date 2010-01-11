@@ -15,7 +15,7 @@
                     <name>KiddyTimer</name>
                     <packagename>enigma2-plugin-extensions-kiddytimer</packagename>
                     <shortdescription>Kontrollieren Sie die TV Nutzung ihres Kindes</shortdescription>
-                    <description>Kontrollieren Sie die TV Nutzung ihres Kindes</description>
+                    <description>Kontrollieren Sie die Dauer der täglichen TV Nutzung ihres Kindes</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_kiddytimer_de.jpg" />
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
