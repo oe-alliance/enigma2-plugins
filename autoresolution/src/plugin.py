@@ -12,11 +12,11 @@ from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
 
 usable = False
-session = [ ]
 preferedmodes = None
 default = None
 port = None
 videoresolution_dictionary = {}
+resolutionlabel = None
 
 resolutions = (('sd_i_50', (_("SD 25/50HZ Interlace Mode"))), ('sd_i_60', (_("SD 30/60HZ Interlace Mode"))), \
 			('sd_p_50', (_("SD 25/50HZ Progressive Mode"))), ('sd_p_60', (_("SD 30/60HZ Progressive Mode"))), \
@@ -151,7 +151,7 @@ class AutoRes(Screen):
 		self.timer.stop()
 		self.after_switch_delay = True
 		if usable:
-			service = session.nav.getCurrentService()
+			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			height = info and info.getInfo(iServiceInformation.sVideoHeight)
 			width = info and info.getInfo(iServiceInformation.sVideoWidth)
@@ -206,7 +206,7 @@ class AutoRes(Screen):
 					resolutionlabel.show()
 			else:
 				self.setMode(mode)
-			if config.plugins.autoresolution.testmode.value:
+			if config.plugins.autoresolution.testmode.value and default[0] != mode:
 				resolutionlabeltxt = "Videomode: %s" % mode
 				self.session.openWithCallback(
 					self.confirm,
@@ -329,10 +329,9 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 	def createSummary(self):
 		return SetupSummary
 
-
 def autostart(reason, **kwargs):
-	global session, resolutionlabel
-	if "session" in kwargs:
+	if "session" in kwargs and resolutionlabel is None:
+		global resolutionlabel
 		session = kwargs["session"]
 		resolutionlabel = session.instantiateDialog(ResolutionLabel)
 		AutoRes(session)
@@ -343,6 +342,7 @@ def startSetup(menuid):
 	return [("Autoresolution...", autoresSetup, "autores_setup", 45)]
 
 def autoresSetup(session, **kwargs):
+	autostart(reason=0, session=session)
 	session.open(AutoResSetupMenu)
 
 def Plugins(path, **kwargs):
