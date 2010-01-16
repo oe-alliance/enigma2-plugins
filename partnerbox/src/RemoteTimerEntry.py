@@ -137,6 +137,7 @@ class RemoteTimerEntry(Screen, ConfigListScreen):
 		self.timerentry_endtime = ConfigClock(default = end)
 		if self.timer.type == 0:
 			default = self.timer.dirname
+			if default == "None": default = "/hdd/movie/"
 			if default not in self.Locations:
 				self.Locations.append(default)
 			self.timerentry_dirname = ConfigSelection(default = default, choices = self.Locations)

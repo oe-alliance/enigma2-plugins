@@ -174,7 +174,7 @@ def FillE2TimerList(xmlstring, sreference = None):
 				justplay = justplay,
 				eventId = eventId,
 				afterevent = afterevent,
-				dirname = str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')),
+				dirname = str(timer.findtext("e2location", '').encode("utf-8", 'ignore')),
 				description = str(timer.findtext("e2description", '').encode("utf-8", 'ignore')),
 				type = 0))
 	return E2TimerList
