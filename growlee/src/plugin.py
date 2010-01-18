@@ -15,7 +15,7 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry, ConfigSubsection, \
-		ConfigText, ConfigPassword, ConfigYesNo, ConfigSelection
+		ConfigText, ConfigPassword, ConfigYesNo, ConfigSelection, ConfigSet
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 
@@ -26,6 +26,7 @@ config.plugins.growlee.address = ConfigText(fixed_size=False)
 config.plugins.growlee.password = ConfigPassword()
 config.plugins.growlee.prowl_api_key = ConfigText(fixed_size=False)
 config.plugins.growlee.protocol = ConfigSelection(default="growl", choices = [("growl", "Growl"), ("snarl", "Snarl"), ("prowl", "Prowl")])
+config.plugins.growlee.blacklist = ConfigSet(choices = [])
 
 NOTIFICATIONID = 'GrowleeReceivedNotification'
 
@@ -179,20 +180,30 @@ class GrowlProtocolOneWrapper(DatagramProtocol):
 				'application': "growlee",
 				'event': kwargs.get('title', 'No title.'),
 				'description': kwargs.get('description', 'No message.'),
-				'priority': 0
+				'priority': kwargs.get('priority', 0),
 			}
 
-			print urlencode(data)
 			getPage('https://prowl.weks.net/publicapi/add/', method = 'POST', headers = headers, postdata = urlencode(data)).addErrback(emergencyDisable)
 		else:
 			addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
 			if proto == "growl":
-				p = GrowlNotificationPacket(*args, **kwargs)
+				# map timeout -> sticky
+				if "timeout" in kwargs:
+					if kwargs["timeout"] == -1:
+						kwargs["sticky"] = True
+					del kwargs["timeout"]
+
+				p = GrowlNotificationPacket(*args, application="growlee", **kwargs)
 				payload = p.payload()
 			else: #proto == "snarl":
 				title = kwargs.get('title', 'No title.')
 				text = kwargs.get('description', 'No message.')
-				timeout = kwargs.get('timeout', 10)
+				timeout = kwargs.get('timeout', -1)
+
+				# NOTE: timeout = 0 means sticky, so add one second to map -1 to 0 and make 0 non-sticky
+				if timeout < 2:
+					timeout += 1
+
 				payload = "type=SNP#?version=1.0#?action=notification#?app=growlee#?class=growleeClass#?title=%s#?text=%s#?timeout=%d\r\n" % (title, text, timeout)
 			try:
 				self.transport.write(payload, addr)
@@ -246,7 +257,7 @@ class GrowlProtocolOneWrapper(DatagramProtocol):
 				key, value = item.split('=')
 				if key == "action":
 					if value != "notification":
-						# NOTE: we pretent to accept pretty much everything one throws at us
+						# NOTE: we pretend to handle&accept pretty much everything one throws at us
 						addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
 						payload = "SNP/1.0/0/OK\r\n"
 						try:
@@ -270,6 +281,15 @@ class GrowlProtocolOneWrapper(DatagramProtocol):
 				close_on_any_key = True,
 			)
 
+			# return ok
+			addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
+			payload = "SNP/1.0/0/OK\r\n"
+			try:
+				self.transport.write(payload, addr)
+			except gaierror:
+				emergencyDisable()
+
+
 growlProtocolOneWrapper = GrowlProtocolOneWrapper()
 port = None
 
@@ -277,7 +297,10 @@ def gotNotification():
 	notifications = Notifications.notifications
 	if notifications:
 		_, screen, args, kwargs, id = notifications[-1]
-		if screen is MessageBox and id != NOTIFICATIONID:
+		if screen is MessageBox and id != NOTIFICATIONID and id not in config.plugins.growlee.blacklist.value:
+
+			type = kwargs.get("type", 0)
+			timeout = kwargs.get("timeout", -1)
 
 			if "text" in kwargs:
 				description = kwargs["text"]
@@ -285,7 +308,9 @@ def gotNotification():
 				description = args[0]
 			description = description.decode('utf-8')
 
-			growlProtocolOneWrapper.sendNotification(title="Dreambox", description=description, password=config.plugins.growlee.password.value)
+			# NOTE: priority is in [-2; 2] but type is [0; 3] so map it
+			# XXX: maybe priority==type-2 would be more appropriate
+			growlProtocolOneWrapper.sendNotification(title="Dreambox", description=description, password=config.plugins.growlee.password.value, priority=type-1, timeout=timeout)
 
 def autostart(**kwargs):
 	if config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
