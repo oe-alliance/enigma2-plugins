@@ -28,6 +28,7 @@ SUBDIRS = \
 	movieretitle \
 	movieselectionquickbutton \
 	movietagger \
+	multirc \
 	mytube \
 	netcaster \
 	networkbrowser \

@@ -317,4 +317,7 @@ shoutcast/src/Makefile
 shoutcast/meta/Makefile
 shoutcast/po/Makefile
 
+multirc/Makefile
+multirc/src/Makefile
+
 ])
