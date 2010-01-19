@@ -148,7 +148,7 @@ class GrowlProtocolOneWrapper(DatagramProtocol):
 		if config.plugins.growlee.enable_outgoing.value and not proto == "prowl":
 			addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
 			if proto == "growl":
-				p = GrowlRegistrationPacket(password=config.plugins.growlee.password.value)
+				p = GrowlRegistrationPacket(application="growlee", password=config.plugins.growlee.password.value)
 				p.addNotification()
 				payload = p.payload()
 			else: #proto == "snarl":
@@ -166,7 +166,7 @@ class GrowlProtocolOneWrapper(DatagramProtocol):
 				self.transport.write(payload, addr)
 			except gaierror:
 				pass
-		DaragramProtocol.doStop(self)
+		DatagramProtocol.doStop(self)
 
 	def sendNotification(self, *args, **kwargs):
 		if not self.transport or not config.plugins.growlee.enable_outgoing.value:
