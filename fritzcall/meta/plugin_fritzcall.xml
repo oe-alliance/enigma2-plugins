@@ -14,7 +14,7 @@
           <info language="de">
                     <author>DrMichael</author>
                     <name>FritzCall</name>
-                    <packagename>enigma2-plugin-extensions-filebrowser</packagename>
+                    <packagename>enigma2-plugin-extensions-fritzcall</packagename>
                     <shortdescription>Anrufmonitor für Fritz!Boxen</shortdescription>
                     <description>FritzCall zeigt die Anrufe ihrer Fritz!Box auf Ihrer Dreambox an.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_fritzcall_de.jpg" />
