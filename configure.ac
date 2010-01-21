@@ -245,6 +245,10 @@ rsdownloader/po/Makefile
 rsdownloader/src/Makefile
 rsdownloader/src/container/Makefile
 
+seekbar/Makefile
+seekbar/po/Makefile
+seekbar/src/Makefile
+
 setpasswd/Makefile
 setpasswd/meta/Makefile
 setpasswd/po/Makefile
