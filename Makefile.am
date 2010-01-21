@@ -45,8 +45,9 @@ SUBDIRS = \
 	reconstructapsc \
 	remotetimer \
 	rsdownloader \
-	simplerss \
+	seekbar \
 	setpasswd \
+	simplerss \
 	shoutcast \
 	startupservice \
 	startuptostandby \
