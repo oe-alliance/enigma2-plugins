@@ -320,4 +320,7 @@ shoutcast/po/Makefile
 multirc/Makefile
 multirc/src/Makefile
 
+ardmediathek/Makefile
+ardmediathek/src/Makefile
+
 ])
