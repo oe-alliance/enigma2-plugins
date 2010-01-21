@@ -40,6 +40,7 @@ SUBDIRS = \
 	passwordchanger \
 	permanentclock \
 	podcast \
+	porncenter \
 	quickbutton \
 	reconstructapsc \
 	remotetimer \

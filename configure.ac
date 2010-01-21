@@ -220,6 +220,11 @@ podcast/meta/Makefile
 podcast/po/Makefile
 podcast/src/Makefile
 
+porncenter/Makefile
+porncenter/po/Makefile
+porncenter/src/Makefile
+porncenter/src/Additions/Makefile
+
 quickbutton/Makefile
 quickbutton/meta/Makefile
 quickbutton/po/Makefile
