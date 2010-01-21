@@ -26,6 +26,7 @@ SUBDIRS = \
 	meteoitalia \
 	mosaic \
 	moviecut \
+	movielistpreview \
 	movieretitle \
 	movieselectionquickbutton \
 	movietagger \

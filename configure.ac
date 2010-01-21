@@ -323,4 +323,8 @@ multirc/src/Makefile
 ardmediathek/Makefile
 ardmediathek/src/Makefile
 
+movielistpreview/Makefile
+movielistpreview/po/Makefile
+movielistpreview/src/Makefile
+
 ])
