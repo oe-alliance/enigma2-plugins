@@ -340,4 +340,7 @@ zapstatistic/Makefile
 zapstatistic/po/Makefile
 zapstatistic/src/Makefile
 
+zdfmediathek/Makefile
+zdfmediathek/src/Makefile
+
 ])
