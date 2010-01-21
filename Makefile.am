@@ -60,7 +60,8 @@ SUBDIRS = \
 	webinterface \
 	werbezapper \
 	youtubeplayer \
-	zaphistorybrowser
+	zaphistorybrowser \
+	zapstatistic
 
 
 LANGS := $(shell cat $(srcdir)/LINGUAS)

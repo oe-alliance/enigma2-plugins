@@ -336,4 +336,8 @@ zaphistorybrowser/meta/Makefile
 zaphistorybrowser/po/Makefile
 zaphistorybrowser/src/Makefile
 
+zapstatistic/Makefile
+zapstatistic/po/Makefile
+zapstatistic/src/Makefile
+
 ])
