@@ -13,7 +13,7 @@
           <info language="de">
                     <author>3c5x9</author>
                     <name>MovieTagger</name>
-                    <packagename>enigma2-plugin-extensions-logomanager</packagename>
+                    <packagename>enigma2-plugin-extensions-movietagger</packagename>
                     <shortdescription>Vergeben Sie Tags für Ihre Filme.</shortdescription>
                     <description>Vergeben Sie Tags für Ihre Filme.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_movietagger.jpg" />	

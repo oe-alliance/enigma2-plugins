@@ -13,7 +13,7 @@
           <info language="de">
                     <author>3c5x9</author>
                     <name>UnwetterInfo</name>
-                    <packagename>enigma2-plugin-extensions-trafficinfo</packagename>
+                    <packagename>enigma2-plugin-extensions-unwetterinfo</packagename>
                     <shortdescription>Aktuelle Unwetterinformationen</shortdescription>
                     <description>Aktuelle Unwetterinformationen</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_unwetterinfo.jpg" />	
