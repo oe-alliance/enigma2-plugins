@@ -39,8 +39,13 @@ def gotNotification():
 class GrowleeConnection:
 	connection = None
 
-	def sendNotification(self, title="Dreambox", description='', priority=-1, timeout = -1):
-		if self.connection and not priority < config.plugins.growlee.level.value:
+	def sendNotification(self, title="Dreambox", description='', priority=-1, timeout=-1):
+		try:
+			level = int(config.plugins.growlee.level.value)
+		except ValueError:
+			level = -1
+
+		if self.connection and not priority < level:
 			self.connection.sendNotification(title=title, description=description, priority=priority, timeout=timeout)
 
 	def listen(self):

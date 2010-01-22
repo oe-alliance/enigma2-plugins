@@ -21,7 +21,7 @@ config.plugins.growlee.address = ConfigText(fixed_size=False)
 config.plugins.growlee.password = ConfigPassword()
 config.plugins.growlee.prowl_api_key = ConfigText(fixed_size=False)
 config.plugins.growlee.protocol = ConfigSelection(default="growl", choices = [("growl", "Growl"), ("snarl", "Snarl"), ("prowl", "Prowl")])
-config.plugins.growlee.level = ConfigSelection(default=-1, choices = [(-1, _("Low (Yes/No)")), (0, _("Normal (Information)")), (1, _("High (Warning)")), (2, _("Highest (Emergency)"))])
+config.plugins.growlee.level = ConfigSelection(default="-1", choices = [("-1", _("Low (Yes/No)")), ("0", _("Normal (Information)")), ("1", _("High (Warning)")), ("2", _("Highest (Emergency)"))])
 config.plugins.growlee.blacklist = ConfigSet(choices = [])
 
 class GrowleeConfiguration(Screen, ConfigListScreen):
