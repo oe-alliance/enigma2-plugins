@@ -101,7 +101,10 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 					growleeConnection.listen()
 
 			d = growleeConnection.stop()
-			d.addCallback(maybeConnect).addErrback(emergencyDisable)
+			if d is not None:
+				d.addCallback(maybeConnect).addErrback(emergencyDisable)
+			else:
+				maybeConnect()
 
 		self.saveAll()
 		self.close()
