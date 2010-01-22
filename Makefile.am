@@ -7,6 +7,7 @@ SUBDIRS = \
 	autotimer \
 	cdinfo \
 	dreamirc \
+	dyndns \
 	elektro \
 	emailclient \
 	epgrefresh \
@@ -21,6 +22,7 @@ SUBDIRS = \
 	imdb \
 	kiddytimer \
 	lastfm \
+	letterbox \
 	logomanager \
 	mediadownloader \
 	meteoitalia \
@@ -47,8 +49,8 @@ SUBDIRS = \
 	rsdownloader \
 	seekbar \
 	setpasswd \
-	simplerss \
 	shoutcast \
+	simplerss \
 	startupservice \
 	startuptostandby \
 	tageditor \

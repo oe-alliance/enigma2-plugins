@@ -57,6 +57,9 @@ dreamirc/meta/Makefile
 dreamirc/src/Makefile
 dreamirc/src/protocols/Makefile
 
+dyndns/Makefile
+dyndns/src/Makefile
+
 elektro/Makefile
 elektro/meta/Makefile
 elektro/po/Makefile
@@ -125,6 +128,9 @@ lastfm/Makefile
 lastfm/meta/Makefile
 lastfm/src/Makefile
 
+letterbox/Makefile
+letterbox/src/Makefile
+
 logomanager/Makefile
 logomanager/logodir_hdd/Makefile
 logomanager/meta/Makefile
@@ -152,6 +158,11 @@ movielistpreview/Makefile
 movielistpreview/po/Makefile
 movielistpreview/src/Makefile
 
+movieretitle/Makefile
+movieretitle/meta/Makefile
+movieretitle/po/Makefile
+movieretitle/src/Makefile
+
 movieselectionquickbutton/Makefile
 movieselectionquickbutton/po/Makefile
 movieselectionquickbutton/src/Makefile
@@ -160,11 +171,6 @@ movietagger/Makefile
 movietagger/etc/Makefile
 movietagger/meta/Makefile
 movietagger/src/Makefile
-
-movieretitle/Makefile
-movieretitle/meta/Makefile
-movieretitle/po/Makefile
-movieretitle/src/Makefile
 
 multirc/Makefile
 multirc/src/Makefile
@@ -292,11 +298,6 @@ vlcplayer/po/Makefile
 vlcplayer/src/Makefile
 vlcplayer/src/servicets/Makefile
 
-youtubeplayer/Makefile
-youtubeplayer/meta/Makefile
-youtubeplayer/src/Makefile
-youtubeplayer/src/Nemesis.GlassLine_Mod/Makefile
-
 weatherplugin/Makefile
 weatherplugin/meta/Makefile
 weatherplugin/src/Makefile
@@ -304,11 +305,6 @@ weatherplugin/src/Makefile
 webcamviewer/Makefile
 webcamviewer/meta/Makefile
 webcamviewer/src/Makefile
-
-werbezapper/Makefile
-werbezapper/meta/Makefile
-werbezapper/po/Makefile
-werbezapper/src/Makefile
 
 webinterface/Makefile
 webinterface/meta/Makefile
@@ -330,6 +326,16 @@ webinterface/src/WebChilds/External/Makefile
 webinterface/src/WebComponents/Makefile
 webinterface/src/WebComponents/Converter/Makefile
 webinterface/src/WebComponents/Sources/Makefile
+
+werbezapper/Makefile
+werbezapper/meta/Makefile
+werbezapper/po/Makefile
+werbezapper/src/Makefile
+
+youtubeplayer/Makefile
+youtubeplayer/meta/Makefile
+youtubeplayer/src/Makefile
+youtubeplayer/src/Nemesis.GlassLine_Mod/Makefile
 
 zaphistorybrowser/Makefile
 zaphistorybrowser/meta/Makefile
