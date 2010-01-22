@@ -1,23 +1,18 @@
 from Plugins.Plugin import PluginDescriptor
 
 from Tools import Notifications
-from netgrowl import GrowlRegistrationPacket, GrowlNotificationPacket, \
-		GROWL_UDP_PORT, md5_constructor
-from twisted.internet.protocol import DatagramProtocol
-from twisted.internet import reactor
-from twisted.web.client import getPage
-from struct import unpack
-from socket import gaierror
-from urllib import urlencode
 
 from Screens.Setup import SetupSummary
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry, ConfigSubsection, \
 		ConfigText, ConfigPassword, ConfigYesNo, ConfigSelection, ConfigSet
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
+
+from GrowleeConnection import gotNotification, emergencyDisable, growleeConnection
+
+from . import NOTIFICATIONID
 
 config.plugins.growlee = ConfigSubsection()
 config.plugins.growlee.enable_incoming = ConfigYesNo(default=False)
@@ -26,9 +21,8 @@ config.plugins.growlee.address = ConfigText(fixed_size=False)
 config.plugins.growlee.password = ConfigPassword()
 config.plugins.growlee.prowl_api_key = ConfigText(fixed_size=False)
 config.plugins.growlee.protocol = ConfigSelection(default="growl", choices = [("growl", "Growl"), ("snarl", "Snarl"), ("prowl", "Prowl")])
+config.plugins.growlee.level = ConfigSelection(default=-1, choices = [(-1, _("Low (Yes/No)")), (0, _("Normal (Information)")), (1, _("High (Warning)")), (2, _("Highest (Emergency)"))])
 config.plugins.growlee.blacklist = ConfigSet(choices = [])
-
-NOTIFICATIONID = 'GrowleeReceivedNotification'
 
 class GrowleeConfiguration(Screen, ConfigListScreen):
 	def __init__(self, session):
@@ -70,17 +64,22 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 	def setupList(self, *args):
 		l = [
 			getConfigListEntry(_("Type"), config.plugins.growlee.protocol),
+			getConfigListEntry(_("Minimum Priority"), config.plugins.growlee.level),
 			getConfigListEntry(_("Send Notifications?"), config.plugins.growlee.enable_outgoing),
 		]
 
-		if config.plugins.growlee.protocol.value == "prowl":
+		proto = config.plugins.growlee.protocol.value
+		if proto ==  "prowl":
 			l.append(getConfigListEntry(_("API Key"), config.plugins.growlee.prowl_api_key))
 		else:
 			l.extend((
 				getConfigListEntry(_("Receive Notifications?"), config.plugins.growlee.enable_incoming),
 				getConfigListEntry(_("Address"), config.plugins.growlee.address),
-				getConfigListEntry(_("Password"), config.plugins.growlee.password),
 			))
+			if proto == "growl":
+				l.append(
+					getConfigListEntry(_("Password"), config.plugins.growlee.password)
+				)
 
 		self["config"].list = l
 
@@ -97,19 +96,12 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 
 	def keySave(self):
 		if self["config"].isChanged():
-			global port
-			if port:
-				def maybeConnect(*args, **kwargs):
-					if config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
-						doConnect()
+			def maybeConnect(*args, **kwargs):
+				if config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
+					growleeConnection.listen()
 
-				d = port.stopListening()
-				if d is not None:
-					d.addCallback(maybeConnect).addErrback(emergencyDisable)
-				else:
-					maybeConnect()
-			elif config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
-				doConnect()
+			d = growleeConnection.stop()
+			d.addCallback(maybeConnect).addErrback(emergencyDisable)
 
 		self.saveAll()
 		self.close()
@@ -121,204 +113,13 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 def configuration(session, **kwargs):
 	session.open(GrowleeConfiguration)
 
-def doConnect():
-	global port
-	if config.plugins.growlee.protocol.value == "snarl":
-		port = reactor.listenTCP(GROWL_UDP_PORT, growlProtocolOneWrapper)
-	else:
-		port = reactor.listenUDP(GROWL_UDP_PORT, growlProtocolOneWrapper)
-
-def emergencyDisable(*args, **kwargs):
-	global port
-	if port:
-		port.stopListening()
-		port = None
-
-	if gotNotification in Notifications.notificationAdded:
-		Notifications.notificationAdded.remove(gotNotification)
-	Notifications.AddPopup(
-		_("Network error.\nDisabling Growlee!"),
-		MessageBox.TYPE_ERROR,
-		10
-	)
-
-class GrowlProtocolOneWrapper(DatagramProtocol):
-	def startProtocol(self):
-		proto = config.plugins.growlee.protocol.value
-		if config.plugins.growlee.enable_outgoing.value and not proto == "prowl":
-			addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
-			if proto == "growl":
-				p = GrowlRegistrationPacket(application="growlee", password=config.plugins.growlee.password.value)
-				p.addNotification()
-				payload = p.payload()
-			else: #proto == "snarl":
-				payload = "type=SNP#?version=1.0#?action=register#?app=growlee\r\n"
-			try:
-				self.transport.write(payload, addr)
-			except gaierror:
-				emergencyDisable()
-
-	def doStop(self):
-		if config.plugins.growlee.enable_outgoing.value and config.plugins.growlee.protocol.value == "snarl":
-			addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
-			payload = "type=SNP#?version=1.0#?action=unregister#?app=growlee\r\n"
-			try:
-				self.transport.write(payload, addr)
-			except gaierror:
-				pass
-		DatagramProtocol.doStop(self)
-
-	def sendNotification(self, *args, **kwargs):
-		if not self.transport or not config.plugins.growlee.enable_outgoing.value:
-			return
-
-		proto = config.plugins.growlee.protocol.value
-		if proto == "prowl":
-			headers = {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
-			data = {
-				'apikey': config.plugins.growlee.prowl_api_key.value,
-				'application': "growlee",
-				'event': kwargs.get('title', 'No title.'),
-				'description': kwargs.get('description', 'No message.'),
-				'priority': kwargs.get('priority', 0),
-			}
-
-			getPage('https://prowl.weks.net/publicapi/add/', method = 'POST', headers = headers, postdata = urlencode(data)).addErrback(emergencyDisable)
-		else:
-			addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
-			if proto == "growl":
-				# map timeout -> sticky
-				if "timeout" in kwargs:
-					if kwargs["timeout"] == -1:
-						kwargs["sticky"] = True
-					del kwargs["timeout"]
-
-				p = GrowlNotificationPacket(*args, application="growlee", **kwargs)
-				payload = p.payload()
-			else: #proto == "snarl":
-				title = kwargs.get('title', 'No title.')
-				text = kwargs.get('description', 'No message.')
-				timeout = kwargs.get('timeout', -1)
-
-				# NOTE: timeout = 0 means sticky, so add one second to map -1 to 0 and make 0 non-sticky
-				if timeout < 2:
-					timeout += 1
-
-				payload = "type=SNP#?version=1.0#?action=notification#?app=growlee#?class=growleeClass#?title=%s#?text=%s#?timeout=%d\r\n" % (title, text, timeout)
-			try:
-				self.transport.write(payload, addr)
-			except gaierror:
-				emergencyDisable()
-
-	def datagramReceived(self, data, addr):
-		proto = config.plugins.growlee.protocol.value
-		if proto == "prowl" or not config.plugins.growlee.enable_incoming.value:
-			return
-
-		Len = len(data)
-		if proto == "growl":
-			if Len < 16:
-				return
-
-			digest = data[-16:]
-			password = config.plugins.growlee.password.value
-			checksum = md5_constructor()
-			checksum.update(data[:-16])
-			if password:
-				checksum.update(password)
-			if digest != checksum.digest():
-				return
-
-			# notify packet
-			if data[1] == '\x01':
-				nlen, tlen, dlen, alen = unpack("!HHHH",str(data[4:12]))
-				notification, title, description = unpack("%ds%ds%ds" % (nlen, tlen, dlen), data[12:Len-alen-16])
-
-				Notifications.AddNotificationWithID(
-					NOTIFICATIONID,
-					MessageBox,
-					text = title + '\n' + description,
-					type = MessageBox.TYPE_INFO,
-					timeout = 5,
-					close_on_any_key = True,
-				)
-
-			# TODO: do we want to handle register packets? :-)
-		else: #proto == "snarl":
-			if Len < 23 or not data[:23] == "type=SNP#?version=1.0#?":
-				return
-
-			items = data[23:].split('#?')
-
-			title = ''
-			description = ''
-			timeout = 5
-			for item in items:
-				key, value = item.split('=')
-				if key == "action":
-					if value != "notification":
-						# NOTE: we pretend to handle&accept pretty much everything one throws at us
-						addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
-						payload = "SNP/1.0/0/OK\r\n"
-						try:
-							self.transport.write(payload, addr)
-						except gaierror:
-							emergencyDisable()
-						return
-				elif key == "title":
-					title = value
-				elif key == "text":
-					description = value
-				elif key == "timeout":
-					timeout = int(value)
-
-			Notifications.AddNotificationWithID(
-				NOTIFICATIONID,
-				MessageBox,
-				text = title + '\n' + description,
-				type = MessageBox.TYPE_INFO,
-				timeout = timeout,
-				close_on_any_key = True,
-			)
-
-			# return ok
-			addr = (config.plugins.growlee.address.value, GROWL_UDP_PORT)
-			payload = "SNP/1.0/0/OK\r\n"
-			try:
-				self.transport.write(payload, addr)
-			except gaierror:
-				emergencyDisable()
-
-
-growlProtocolOneWrapper = GrowlProtocolOneWrapper()
-port = None
-
-def gotNotification():
-	notifications = Notifications.notifications
-	if notifications:
-		_, screen, args, kwargs, id = notifications[-1]
-		if screen is MessageBox and id != NOTIFICATIONID and id not in config.plugins.growlee.blacklist.value:
-
-			type = kwargs.get("type", 0)
-			timeout = kwargs.get("timeout", -1)
-
-			if "text" in kwargs:
-				description = kwargs["text"]
-			else:
-				description = args[0]
-			description = description.decode('utf-8')
-
-			# NOTE: priority is in [-2; 2] but type is [0; 3] so map it
-			# XXX: maybe priority==type-2 would be more appropriate
-			growlProtocolOneWrapper.sendNotification(title="Dreambox", description=description, password=config.plugins.growlee.password.value, priority=type-1, timeout=timeout)
-
 def autostart(**kwargs):
-	if config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
-		doConnect()
-
 	# NOTE: we need to be the first one to be notified since other listeners
 	# may remove the notifications from the list for good
 	Notifications.notificationAdded.insert(0, gotNotification)
+
+	if config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
+		growleeConnection.listen()
 
 def Plugins(**kwargs):
 	return [
