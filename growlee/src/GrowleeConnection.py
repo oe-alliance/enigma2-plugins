@@ -32,7 +32,7 @@ def gotNotification():
 				description = kwargs["text"]
 			else:
 				description = args[0]
-			description = description.decode('utf-8')
+			description = description
 
 			growleeConnection.sendNotification(title="Dreambox", description=description, priority=priority, timeout=timeout)
 
