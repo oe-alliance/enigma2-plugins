@@ -1,4 +1,3 @@
-from netgrowl import GROWL_UDP_PORT
 from twisted.internet.defer import Deferred
 from twisted.internet.protocol import ClientFactory, ServerFactory
 from twisted.internet import reactor
@@ -9,6 +8,8 @@ from Components.config import config
 
 from GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID
+
+SNP_TCP_PORT = 9887
 
 class SnarlNetworkProtocol(LineReceiver):
 	def __init__(self, client = False):
@@ -143,11 +144,11 @@ class SnarlNetworkProtocolAbstraction:
 			reactor.resolve(config.plugins.growlee.address.value).addCallback(self.gotIP).addErrback(self.noIP)
 
 		if config.plugins.growlee.enable_incoming.value:
-			self.serverPort = reactor.listenTCP(GROWL_UDP_PORT, self.serverFactory)
+			self.serverPort = reactor.listenTCP(SNP_TCP_PORT, self.serverFactory)
 			self.pending += 1
 
 	def gotIP(self, ip):
-		self.clientPort = reactor.connectTCP(ip, GROWL_UDP_PORT, self.clientFactory)
+		self.clientPort = reactor.connectTCP(ip, SNP_TCP_PORT, self.clientFactory)
 		self.pending += 1
 
 	def noIP(self, error):
