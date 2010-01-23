@@ -1,14 +1,16 @@
-from netgrowl import GrowlRegistrationPacket, GrowlNotificationPacket, \
-		GROWL_UDP_PORT, md5_constructor
 from twisted.internet.protocol import DatagramProtocol
 from twisted.internet import reactor
-from struct import unpack
+from struct import pack, unpack
+from hashlib import md5
 
+from Screens.MessageBox import MessageBox
 from Tools import Notifications
 from Components.config import config
 
 from GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID
+
+GROWL_UDP_PORT = 9887
 
 class GrowlTalk(DatagramProtocol):
 	addr = None
@@ -16,28 +18,62 @@ class GrowlTalk(DatagramProtocol):
 	def gotIP(self, ip):
 		self.addr = (ip, GROWL_UDP_PORT)
 		if config.plugins.growlee.enable_outgoing.value:
-			p = GrowlRegistrationPacket(application="growlee", password=config.plugins.growlee.password.value)
-			p.addNotification()
-			payload = p.payload()
+			p = pack("!BBHBB",
+					1, # version
+					0, # registration
+					7, # length of application name == len("growlee")
+					1, # one notification
+					1, # one of them default
+			)
+			p += "growlee" # application name
+			p += pack("!H",
+					32, # length of first notification type name
+			)
+			p += "Notifications from your Dreambox" # first notification type name
+			p += "\x00" # index of default notifications
 
-			self.transport.write(payload, self.addr)
+			password = config.plugins.growlee.password.value
+			checksum = md5()
+			checksum.update(p)
+			if password:
+				checksum.update(password)
+			p += checksum.digest()
+
+			self.transport.write(p, self.addr)
 
 	def noIP(self, error):
+		print "--------------------------------", error
 		emergencyDisable()
 
 	def startProtocol(self):
 		reactor.resolve(config.plugins.growlee.address.value).addCallback(self.gotIP).addErrback(self.noIP)
 
-	def sendNotification(self, *args, **kwargs):
+	def sendNotification(self, title='No title.', description='No description.', flags=0):
 		if not self.transport or not self.addr or not config.plugins.growlee.enable_outgoing.value:
 			return
 
-		kwargs["application"] = "growlee"
-		kwargs["password"] = config.plugins.growlee.password.value
-		p = GrowlNotificationPacket(*args, **kwargs)
-		payload = p.payload()
+		p = pack("!BBHHHHH",
+				1, # version
+				1, # notification
+				flags, # 3-bit signed priority, 1 bit sticky in rightmost nibble
+				32, # len("Notifications from your Dreambox")
+				len(title),
+				len(description),
+				7, # len("growlee")
+		)
+		p += "Notifications from your Dreambox"
+		p += title
+		p += description
+		p += "growlee"
 
-		self.transport.write(payload, self.addr)
+		password = config.plugins.growlee.password.value
+		checksum = md5()
+		checksum.update(p)
+		if password:
+			checksum.update(password)
+		p += checksum.digest()
+
+		self.transport.write(p, self.addr)
 
 	def datagramReceived(self, data, addr):
 		if not config.plugins.growlee.enable_incoming.value:
@@ -55,7 +91,7 @@ class GrowlTalk(DatagramProtocol):
 		if data[1] == '\x01':
 			digest = data[-16:]
 			password = config.plugins.growlee.password.value
-			checksum = md5_constructor()
+			checksum = md5()
 			checksum.update(data[:-16])
 			if password:
 				checksum.update(password)
@@ -86,14 +122,17 @@ class GrowlTalkAbstraction:
 		self.growltalk = GrowlTalk()
 		self.serverPort = reactor.listenUDP(GROWL_UDP_PORT, self.growltalk)
 
-	def sendNotification(self, *args, **kwargs):
-		# map timeout -> sticky
-		if "timeout" in kwargs:
-			if kwargs["timeout"] == -1:
-				kwargs["sticky"] = True
-			del kwargs["timeout"]
+	def sendNotification(self, title='No title.', description='No description.', priority=-1, timeout=-1):
+		if priority < 0:
+			flags = 8 + (-priority << 1)
+		else:
+			flags = priority << 1
 
-		self.growltalk.sendNotification(*args, **kwargs)
+		# NOTE: sticky didn't work in any of my tests, but let's assume this is my configurations fault
+		if timeout == -1:
+			flags |= 1
+
+		self.growltalk.sendNotification(title=title, description=description, flags=flags)
 
 	def stop(self):
 		return self.serverPort.stopListening()
