@@ -3,6 +3,7 @@ from twisted.internet.protocol import ClientFactory, ServerFactory
 from twisted.internet import reactor
 from twisted.protocols.basic import LineReceiver
 
+from Screens.MessageBox import MessageBox
 from Tools import Notifications
 from Components.config import config
 
