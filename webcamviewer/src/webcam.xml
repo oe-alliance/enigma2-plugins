@@ -538,6 +538,28 @@
 					<url>http://www.linz.at/images/T_WebcamKunstuni.jpg</url>
 				</cam>
 			</menu>
+			<menu>
+				<name>Nederland</name>
+				<menu>
+					<name>Terschelling</name>
+					<cam>
+						<name>hotel nap</name>
+						<url>http://www.hotelnap.nl/webcam/totaal/current.jpg</url>
+					</cam>
+					<cam>
+						<name>Tijs Knop</name>
+						<url>http://www.tijsknop.nl/webcam/output.jpg?counter=1261169399970.jpg</url>
+					</cam>
+					<cam>
+						<name>Willem Barendtsz</name>
+						<url>http://www.miwb.nl/webcam/webcam.jpg</url>
+					</cam>
+					<cam>
+						<name>VVV</name>
+						<url>http://www.vvvterschelling.nl/webcam/webcam/vvv_current.jpg</url>
+					</cam>
+				</menu>
+			</menu>	
 			<cam>
 				<name>London, Trafalgar Square</name>
 				<url>http://images.earthcam.com/ec_metros/ourcams/trafalgarsq.jpg</url>
