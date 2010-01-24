@@ -46,7 +46,7 @@ def applySkinVars(skin,dict):
     return skin
 
 def getURL(x,y,z):
-    url = "http://khm3.google.de/kh/v=40&x=%i&y=%i&z=%i"%(x,y,z)
+    url = "http://khm0.google.de/kh/v=53&x=%i&y=%i&z=%i"%(x,y,z)
     return url
 
 def getMapURL(x,y,z):
