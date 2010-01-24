@@ -1658,6 +1658,11 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 			else:
 				backMainLine = ""
 			debug("[FritzDisplayCalls] backMainLine: " + backMainLine)
+			if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/buttons")):
+				buttonPath = resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/buttons")
+			else:
+				buttonPath = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons")
+			debug("[FritzDisplayCalls] buttonPath: " + buttonPath)
 				
 			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.skin = """
@@ -1676,10 +1681,10 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 					<eLabel 			  	position="%d,%d" size="%d,%d" 	zPosition="2" backgroundColor="#252b4247" />
 					<widget name="entries" position="%d,%d" size="%d,%d" zPosition="3" scrollbarMode="showOnDemand" transparent="1" />
 			
-					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/red.png" transparent="1" alphatest="on" />
-					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/green.png" transparent="1" alphatest="on" />
-					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/yellow.png" transparent="1" alphatest="on" />
-					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/blue.png" transparent="1" alphatest="on" />
+					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/red.png" transparent="1" alphatest="on" />
+					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/green.png" transparent="1" alphatest="on" />
+					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/yellow.png" transparent="1" alphatest="on" />
+					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/blue.png" transparent="1" alphatest="on" />
 					<widget name="key_red" position="%d,%d" size="%d,%d" zPosition="10" font="Regular;%d" transparent="1" />
 					<widget name="key_green" position="%d,%d" size="%d,%d" zPosition="10" font="Regular;%d" transparent="1" />
 					<widget name="key_yellow" position="%d,%d" size="%d,%d" zPosition="10" font="Regular;%d" transparent="1" />
@@ -1695,10 +1700,10 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 							scaleH(490, XXX), scaleV(130, XXX), scaleH(730, XXX), scaleV(420, XXX), # entries eLabel
 							scaleH(492, XXX), scaleV(132, XXX), scaleH(726, XXX), scaleV(416, XXX), # entries eLabel
 							scaleH(500, XXX), scaleV(140, XXX), scaleH(710, XXX), scaleV(400, XXX), # entries
-							scaleH(500, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # red
-							scaleH(680, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # green
-							scaleH(860, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # yellow
-							scaleH(1040, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # blue
+							scaleH(500, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # red
+							scaleH(680, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # green
+							scaleH(860, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # yellow
+							scaleH(1040, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # blue
 							scaleH(530, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # red
 							scaleH(710, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # green
 							scaleH(890, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # yellow
@@ -2219,7 +2224,12 @@ class FritzCallPhonebook:
 				else:
 					backMainLine = ""
 				debug("[FritzDisplayPhonebook] backMainLine: " + backMainLine)
-					
+				if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/buttons")):
+					buttonPath = resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/buttons")
+				else:
+					buttonPath = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons")
+				debug("[FritzDisplayCalls] buttonPath: " + buttonPath)
+
 				# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 				self.skin = """
 					<screen name="FritzdisplayPhonebook" position="0,0" size="%d,%d" title="%s" flags="wfNoBorder">
@@ -2236,10 +2246,10 @@ class FritzCallPhonebook:
 						<eLabel 			  	position="%d,%d" size="%d,%d" 	zPosition="2" backgroundColor="#252b4247" />
 						<widget name="entries" position="%d,%d" size="%d,%d" zPosition="3" scrollbarMode="showOnDemand" transparent="1" />
 				
-						<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/red.png" transparent="1" alphatest="on" />
-						<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/green.png" transparent="1" alphatest="on" />
-						<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/yellow.png" transparent="1" alphatest="on" />
-						<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/blue.png" transparent="1" alphatest="on" />
+						<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/red.png" transparent="1" alphatest="on" />
+						<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/green.png" transparent="1" alphatest="on" />
+						<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/yellow.png" transparent="1" alphatest="on" />
+						<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/blue.png" transparent="1" alphatest="on" />
 						<widget name="key_red" position="%d,%d" size="%d,%d" zPosition="10" font="Regular;%d" transparent="1" />
 						<widget name="key_green" position="%d,%d" size="%d,%d" zPosition="10" font="Regular;%d" transparent="1" />
 						<widget name="key_yellow" position="%d,%d" size="%d,%d" zPosition="10" font="Regular;%d" transparent="1" />
@@ -2254,10 +2264,10 @@ class FritzCallPhonebook:
 									scaleH(490, XXX), scaleV(130, XXX), scaleH(730, XXX), scaleV(420, XXX), # entries eLabel
 									scaleH(492, XXX), scaleV(132, XXX), scaleH(726, XXX), scaleV(416, XXX), # entries eLabel
 									scaleH(500, XXX), scaleV(140, XXX), scaleH(self.entriesWidth, XXX), scaleV(400, XXX), # entries
-									scaleH(500, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # red
-									scaleH(680, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # green
-									scaleH(860, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # yellow
-									scaleH(1040, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # blue
+									scaleH(500, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # red
+									scaleH(680, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # green
+									scaleH(860, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # yellow
+									scaleH(1040, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # blue
 									scaleH(530, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # red
 									scaleH(710, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # green
 									scaleH(890, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # yellow
@@ -2576,6 +2586,12 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			else:
 				backMainLine = ""
 			debug("[FritzCallSetup] backMainLine: " + backMainLine)
+			if os.path.exists(resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/buttons")):
+				buttonPath = resolveFilename(SCOPE_SKIN_IMAGE, DESKTOP_SKIN + "/buttons")
+			else:
+				buttonPath = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons")
+			debug("[FritzCallSetup] buttonPath: " + buttonPath)
+
 			# TRANSLATORS: this is a window title. Avoid the use of non ascii chars
 			self.skin = """
 				<screen name="FritzCallSetup" position="0,0" size="%d,%d" title="%s" flags="wfNoBorder">
@@ -2592,12 +2608,12 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 					<eLabel 			  	position="%d,%d" size="%d,%d"	zPosition="1" backgroundColor="#bbbbbb" />
 					<eLabel 			  	position="%d,%d" size="%d,%d" 	zPosition="2" backgroundColor="#252b4247" />
 					<widget name="config" position="%d,%d" size="%d,%d" zPosition="3" scrollbarMode="showOnDemand" transparent="1" />
-					<ePixmap pixmap="skin_default/buttons/key_info.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
-					<ePixmap pixmap="skin_default/buttons/key_menu.png" 	position="%d,%d" 	size="%d,%d" alphatest="on" />
-					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/red.png" transparent="1" alphatest="on" />
-					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/green.png" transparent="1" alphatest="on" />
-					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/yellow.png" transparent="1" alphatest="on" />
-					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="Kerni-HD1/buttons/blue.png" transparent="1" alphatest="on" />
+					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/key_info.png" alphatest="on" />
+					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/key_menu.png" alphatest="on" />
+					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/red.png" transparent="1" alphatest="on" />
+					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/green.png" transparent="1" alphatest="on" />
+					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/yellow.png" transparent="1" alphatest="on" />
+					<ePixmap position="%d,%d" size="%d,%d" zPosition="10" pixmap="%s/blue.png" transparent="1" alphatest="on" />
 					<widget name="key_red" position="%d,%d" size="%d,%d" zPosition="10" font="Regular;%d" transparent="1" />
 					<widget name="key_green" position="%d,%d" size="%d,%d" zPosition="10" font="Regular;%d" transparent="1" />
 					<widget name="key_yellow" position="%d,%d" size="%d,%d" zPosition="10" font="Regular;%d" transparent="1" />
@@ -2613,12 +2629,12 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 								scaleH(490, XXX), scaleV(130, XXX), scaleH(730, XXX), scaleV(420, XXX), # config eLabel
 								scaleH(492, XXX), scaleV(132, XXX), scaleH(726, XXX), scaleV(416, XXX), # config eLabel
 								scaleH(500, XXX), scaleV(140, XXX), scaleH(710, XXX), scaleV(400, XXX), # config
-								scaleH(80, XXX), scaleV(586, XXX), scaleH(35, XXX), scaleV(25, XXX), # info
-								scaleH(140, XXX), scaleV(586, XXX), scaleH(35, XXX), scaleV(25, XXX), # menu
-								scaleH(500, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # red
-								scaleH(680, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # green
-								scaleH(860, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # yellow
-								scaleH(1040, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), # blue
+								scaleH(80, XXX), scaleV(586, XXX), scaleH(35, XXX), scaleV(25, XXX), buttonPath, # info
+								scaleH(140, XXX), scaleV(586, XXX), scaleH(35, XXX), scaleV(25, XXX), buttonPath, # menu
+								scaleH(500, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # red
+								scaleH(680, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # green
+								scaleH(860, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # yellow
+								scaleH(1040, XXX), scaleV(588, XXX), scaleH(21, XXX), scaleV(21, XXX), buttonPath, # blue
 								scaleH(530, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # red
 								scaleH(710, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # green
 								scaleH(890, XXX), scaleV(587, XXX), scaleH(160, XXX), scaleV(22, XXX), scaleV(20, XXX), # yellow
