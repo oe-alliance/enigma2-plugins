@@ -12,7 +12,7 @@ from Components.MenuList import MenuList
 from Components.PluginComponent import plugins
 from Components.ProgressBar import ProgressBar
 from enigma import eServiceReference, eTimer
-from os import environ, remove
+from os import environ, system
 from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import MoviePlayer
 from Screens.MessageBox import MessageBox
@@ -41,6 +41,11 @@ def _(txt):
 
 localeInit()
 language.addCallback(localeInit)
+
+###################################################
+
+def remove(file):
+	system('rm "' + file + '"')
 
 ###################################################
 
