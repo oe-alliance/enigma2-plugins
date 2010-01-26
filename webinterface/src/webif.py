@@ -241,7 +241,7 @@ class SimpleListFiller(Converter):
 				elif filternum == 2:
 					append(item.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 				elif filternum == 3:					
-					append(escape_xml(item))
+					append(escape_xml( item.replace("\x19", "").replace("\x1c", "").replace("\x1e", "").replace('\xc2\x86', '').replace('\xc2\x87', '') ))
 				elif filternum == 4:
 					append(item.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				elif filternum == 5:
@@ -308,7 +308,7 @@ class ListFiller(Converter):
 				elif filternum == 2:
 					append(curitem.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 				elif filternum == 3:
-					append(escape_xml(curitem))
+					append( escape_xml( curitem.replace("\x19", "").replace("\x1c", "").replace("\x1e", "").replace('\xc2\x86', '').replace('\xc2\x87', '') ))
 				elif filternum == 4:
 					append(curitem.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				elif filternum == 5:
@@ -473,7 +473,7 @@ class webifHandler(ContentHandler):
 		self.res.append('<?' + target + ' ' + data + '>')
 
 	def characters(self, ch):
-		ch = ch.encode('utf-8')
+		ch = ch.encode('utf-8', 'ignore')
 		if self.mode == 0:
 			self.res.append(ch)
 		elif self.mode == 2:
