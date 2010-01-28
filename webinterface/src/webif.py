@@ -138,7 +138,7 @@ class TextToHTML(Converter):
 		Converter.__init__(self, arg)
 
 	def getHTML(self, id):
-		return self.source.text.replace('\xc2\x86', '').replace('\xc2\x87', '') # encode & etc. here!
+		return self.source.text.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") # encode & etc. here!
 
 #===============================================================================
 # TextToXML
@@ -150,7 +150,7 @@ class TextToXML(Converter):
 		Converter.__init__(self, arg)
 
 	def getHTML(self, id):
-		return escape_xml(self.source.text).replace("\x19", "").replace("\x1c", "").replace("\x1e", "").replace('\xc2\x86', '').replace('\xc2\x87', '')
+		return escape_xml(self.source.text).replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
 
 #===============================================================================
 # TextToURL
@@ -162,7 +162,7 @@ class TextToURL(Converter):
 		Converter.__init__(self, arg)
 
 	def getHTML(self, id):
-		return self.source.text.replace(" ", "%20").replace("+", "%2b").replace("&", "%26").replace('\xc2\x86', '').replace('\xc2\x87', '')
+		return self.source.text.replace(" ", "%20").replace("+", "%2b").replace("&", "%26").replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8")
 
 #===============================================================================
 # ReturnEmptyXML
@@ -234,14 +234,15 @@ class SimpleListFiller(Converter):
 				item = ""
 				
 			for (element, filternum) in list:
-				item = str(item).replace('\xc2\x86', '').replace('\xc2\x87', '')
+				#filter out "non-displayable" Characters - at the very end, do it the hard way...
+				item = str(item).replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
 				
 				if not filternum:
 					append(element)
 				elif filternum == 2:
 					append(item.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 				elif filternum == 3:					
-					append(escape_xml( item.replace("\x19", "").replace("\x1c", "").replace("\x1e", "").replace('\xc2\x86', '').replace('\xc2\x87', '') ))
+					append(escape_xml(item))
 				elif filternum == 4:
 					append(item.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				elif filternum == 5:
@@ -296,7 +297,8 @@ class ListFiller(Converter):
 				#None becomes ""
 				curitem = ""
 				if filternum:
-					curitem = str(item[element]).replace('\xc2\x86', '').replace('\xc2\x87', '')
+					#filter out "non-displayable" Characters - at the very end, do it the hard way...
+					curitem = str(item[element]).replace('\xc2\x86', '').replace('\xc2\x87', '').replace("\x19", "").replace("\x1c", "").replace("\x1e", "").decode("utf-8", "ignore").encode("utf-8")
 					if curitem is None:
 						curitem = ""
 				else:
@@ -308,7 +310,7 @@ class ListFiller(Converter):
 				elif filternum == 2:
 					append(curitem.replace("\\", "\\\\").replace("\n", "\\n").replace('"', '\\"'))
 				elif filternum == 3:
-					append( escape_xml( curitem.replace("\x19", "").replace("\x1c", "").replace("\x1e", "").replace('\xc2\x86', '').replace('\xc2\x87', '') ))
+					append( escape_xml( curitem ))
 				elif filternum == 4:
 					append(curitem.replace("%", "%25").replace("+", "%2B").replace('&', '%26').replace('?', '%3f').replace(' ', '+'))
 				elif filternum == 5:
@@ -473,7 +475,7 @@ class webifHandler(ContentHandler):
 		self.res.append('<?' + target + ' ' + data + '>')
 
 	def characters(self, ch):
-		ch = ch.encode('utf-8', 'ignore')
+		ch = ch.encode('utf-8')
 		if self.mode == 0:
 			self.res.append(ch)
 		elif self.mode == 2:
