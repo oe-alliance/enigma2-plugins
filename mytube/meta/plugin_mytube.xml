@@ -1,5 +1,8 @@
 <default>
 	  <prerequisites>
+                    <hardware type="dm8000" />
+                    <hardware type="dm800" />		    
+                    <hardware type="dm500hd" />	
                     <tag type="Multimedia" />
 	  </prerequisites>
           <info language="en">
