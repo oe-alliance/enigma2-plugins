@@ -477,7 +477,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			if lines.find("File1=") != -1:
 				line = string.split(lines,"File1=")
 				found = True
-				self.playServiceStream(line[-1])
+				self.playServiceStream(line[-1].rstrip().strip())
 				
 		if found:
 			self["statustext"].setText("")
