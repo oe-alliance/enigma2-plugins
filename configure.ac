@@ -36,6 +36,7 @@ antiscrollbar/meta/Makefile
 antiscrollbar/src/Makefile
 
 ardmediathek/Makefile
+ardmediathek/meta/Makefile
 ardmediathek/src/Makefile
 
 autoresolution/Makefile
@@ -58,6 +59,7 @@ dreamirc/src/Makefile
 dreamirc/src/protocols/Makefile
 
 dvdbackup/Makefile
+dvdbackup/meta/Makefile
 dvdbackup/po/Makefile
 dvdbackup/src/Makefile
 
@@ -159,6 +161,7 @@ moviecut/src_cc/Makefile
 moviecut/src_py/Makefile
 
 movielistpreview/Makefile
+movielistpreview/meta/Makefile
 movielistpreview/po/Makefile
 movielistpreview/src/Makefile
 
@@ -231,6 +234,7 @@ podcast/po/Makefile
 podcast/src/Makefile
 
 porncenter/Makefile
+porncenter/meta/Makefile
 porncenter/po/Makefile
 porncenter/src/Makefile
 porncenter/src/Additions/Makefile
@@ -256,6 +260,7 @@ rsdownloader/src/Makefile
 rsdownloader/src/container/Makefile
 
 seekbar/Makefile
+seekbar/meta/Makefile
 seekbar/po/Makefile
 seekbar/src/Makefile
 

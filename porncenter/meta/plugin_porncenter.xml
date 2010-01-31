@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>AliAbdul</author>
+                    <name>Porn Center</name>
+                    <packagename>enigma2-plugin-extensions-porncenter</packagename>
+                    <shortdescription>Adult streaming plugins for dm800/dm8000</shortdescription>
+                    <description>Adult streaming plugins for dm800/dm8000</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_porncenter.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>AliAbdul</author>
+                    <name>Porn Center</name>
+                    <packagename>enigma2-plugin-extensions-porncenter</packagename>
+                    <shortdescription>Erwachsenen Stream Plugins für die dm800/dm8000</shortdescription>
+                    <description>Erwachsenen Stream Plugins für die dm800/dm8000</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_porncenter.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-porncenter" />
+	  </files>
+</default>

@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="de">
+                    <author>AliAbdul</author>
+                    <name>ARD Mediathek</name>
+                    <packagename>enigma2-plugin-extensions-ardmediathek</packagename>
+                    <shortdescription>Zugriff auf die ARD-Mediathek</shortdescription>
+                    <description>Zugriff auf die ARD-Mediathek</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_ardmediathek_de.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-ardmediathek" />
+	  </files>
+</default>

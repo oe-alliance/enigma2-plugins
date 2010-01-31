@@ -85,19 +85,16 @@ class ChangedMoviePlayer(MoviePlayer):
 
 def getCategories(html):
 	list = []
-	start = """<select size="1" name="moduleId" onchange="submitValue(this.value,'tv_form')">"""
-	end = '</select>'
+	start = """<div class="mt-reset mt-categories">"""
+	end = '</div>'
 	if start and end in html:
 		idx = html.index(start)
 		html = html[idx:]
 		idx = html.index(end)
 		html = html[:idx]
-		lines = html.split("\n")
-		for line in lines:
-			if ('<option value="' in line) and ('title="' in line):
-				reonecat = re.compile(r'<option value="(.+?)" title="(.+?)">', re.DOTALL)
-				for url, name in reonecat.findall(line):
-					list.append([MAIN_PAGE + "/ard/servlet/content/1214?moduleId=" + url, encodeHtml(name)])
+		reonecat = re.compile(r'<li><a href="(.+?)" title="">(.+?)</a></li>', re.DOTALL)
+		for url, name in reonecat.findall(html):
+			list.append([MAIN_PAGE + url, encodeHtml(name)])
 	return list
 
 def getMovies(html):
@@ -316,7 +313,9 @@ class ARDMediathek(Screen):
 	def getPage(self, url=None):
 		self.working = True
 		self.cacheDialog.start()
+		self.mainpage = False
 		if not url:
+			self.mainpage = True
 			url = MAIN_PAGE + "/ard/servlet/"
 		getPage(url).addCallback(self.gotPage).addErrback(self.error)
 
@@ -327,8 +326,7 @@ class ARDMediathek(Screen):
 
 	def gotPage(self, html=""):
 		list = []
-		if not """onchange="submitValue(this.value,'tv_form')">""" in html:
-			self.mainpage = False
+		if not self.mainpage:
 			del self.movies
 			del self.listMovies
 			self.listMovies = []
@@ -345,7 +343,6 @@ class ARDMediathek(Screen):
 			self["pageNavigation"].show()
 			self.buildList()
 		else:
-			self.mainpage = True
 			categories = getCategories(html)
 			for category in categories:
 				list.append(ARDMenuListEntry(category[0], category[1]))
