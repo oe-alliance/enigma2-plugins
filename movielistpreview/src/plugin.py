@@ -497,23 +497,12 @@ class MovielistPreviewMenu(Screen):
 
 ##############################################################################
 
-class InstanceCache:
-	def __init__(self):
-		self.movieListInstance = None
-		self.movieList2Instance = None
-instancecache = InstanceCache()
-
-##############################################################################
-
 SelectionChanged = MovieList.selectionChanged
 def selectionChanged(instance):
-	if not instancecache.movieListInstance:
-		instancecache.movieListInstance = instance
 	SelectionChanged(instance)
 	curr = instance.getCurrent()
-	if curr:
-		if isinstance(curr, eServiceReference):
-			movielistpreview.showPreview(curr.getPath())
+	if curr and isinstance(curr, eServiceReference):
+		movielistpreview.showPreview(curr.getPath())
 MovieList.selectionChanged = selectionChanged
 
 Hide = MovieSelection.hide
@@ -526,20 +515,15 @@ Show = MovieSelection.show
 def showMovieSelection(instance):
 	Show(instance)
 	movielistpreview.showDialog()
-	if instancecache.movieListInstance:
-		selectionChanged(instancecache.movieListInstance)
 MovieSelection.show = showMovieSelection
 
 ##############################################################################
 
 def selectionChanged2(instance):
-	if not instancecache.movieList2Instance:
-		instancecache.movieList2Instance = instance
 	SelectionChanged2(instance)
 	curr = instance.getCurrent()
-	if curr:
-		if isinstance(curr, eServiceReference):
-			movielistpreview.showPreview(curr.getPath())
+	if curr and isinstance(curr, eServiceReference):
+		movielistpreview.showPreview(curr.getPath())
 
 def hideMovieSelection2(instance):
 	Hide2(instance)
@@ -548,8 +532,6 @@ def hideMovieSelection2(instance):
 def showMovieSelection2(instance):
 	Show2(instance)
 	movielistpreview.showDialog()
-	if instancecache.movieList2Instance:
-		selectionChanged2(instancecache.movieList2Instance)
 
 try:
 	from Plugins.Extensions.Suomipoeka.MovieList import MovieList as MovieList2
