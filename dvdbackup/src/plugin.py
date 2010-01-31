@@ -431,7 +431,17 @@ def main(session, **kwargs):
 			session.open(DVDBackupScreen)
 
 def open_main(callback=None):
-	SESSION.open(DVDBackupScreen)
+	error = False
+	if not fileExists("/usr/bin/dvdbackup"):
+		error = True
+	if not fileExists("/usr/bin/mkisofs"):
+		error = True
+	if not fileExists("/usr/lib/libdvdread.so.3"):
+		error = True
+	if error:
+		message(_("Could not install needed packages!"))
+	else:
+		SESSION.open(DVDBackupScreen)
 
 def filescan_open(list, session, **kwargs):
 	if len(list) == 1 and list[0].mimetype == "video/x-dvd":
