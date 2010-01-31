@@ -7,6 +7,7 @@ SUBDIRS = \
 	autotimer \
 	cdinfo \
 	dreamirc \
+	dvdbackup \
 	dyndns \
 	elektro \
 	emailclient \

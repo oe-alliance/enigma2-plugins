@@ -57,6 +57,10 @@ dreamirc/meta/Makefile
 dreamirc/src/Makefile
 dreamirc/src/protocols/Makefile
 
+dvdbackup/Makefile
+dvdbackup/po/Makefile
+dvdbackup/src/Makefile
+
 dyndns/Makefile
 dyndns/src/Makefile
 

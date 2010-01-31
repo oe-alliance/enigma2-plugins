@@ -1,0 +1,108 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DVDBackup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-31 15:20+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
+"Language-Team: Nabil Hanna <nabil1978@web.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:50
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:401
+msgid "Name of DVD"
+msgstr "Name der DVD"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:143
+msgid "Could not find any file to backup!"
+msgstr "Konnte keine Datei zum Sichern finden!"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:146
+msgid "Could not read the DVD informations!"
+msgstr "Konnte die DVD Informationen nicht lesen!"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:152
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:181
+msgid "Error while backup of DVD!"
+msgstr "Fehler beim Sichern der DVD!"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:186
+msgid ""
+"mkisofs job done.\n"
+"Delete DVD directory?"
+msgstr ""
+"mkisofs Job erledigt.\n"
+"DVD Ordner löschen?"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:201
+msgid "Backup of DVD finished."
+msgstr "Sicherung der DVD abgeschlossen."
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:201
+msgid "Duration:"
+msgstr "Dauer:"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:201
+msgid "Eject DVD?"
+msgstr "DVD auswerfen?"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:250
+msgid "Abort"
+msgstr "Abbrechen"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:322
+msgid "Progress"
+msgstr "Fortschritt"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:323
+msgid "Backup"
+msgstr "Sicherung"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:324
+msgid "Keyboard"
+msgstr "Tastatur"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:325
+msgid "Location"
+msgstr "Ort"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:331
+msgid "Device:"
+msgstr "Gerät:"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:332
+msgid "Directory:"
+msgstr "Ordner:"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:333
+msgid "Name:"
+msgstr "Name:"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:334
+msgid "Log:"
+msgstr "Log:"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:335
+msgid "Create iso:"
+msgstr "iso erstellen:"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:429
+msgid "Installing..."
+msgstr "Installiere..."
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:448
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:451
+msgid "DVD Backup"
+msgstr "DVD Backup"
+
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:451
+msgid "Backup your Video-DVD to your harddisk"
+msgstr "Sichert deine Video-DVD auf Festplatte"
+
+#~ msgid "DVD Name"
+#~ msgstr "DVD Name"
+

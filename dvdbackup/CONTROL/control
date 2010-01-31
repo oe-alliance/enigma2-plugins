@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-dvdbackup
+Version: 1.0
+Description: Create a backup of your Video-DVD
+Architecture: all
+Section: extra
+Priority: optional
+Maintainer: Nabil Hanna <nabil1978@web.de>
+Homepage: http://www.lt-forums.org/ali
+Depends: enigma2(>=2.6git20090615)
+Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
