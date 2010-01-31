@@ -33,7 +33,7 @@ from twisted.web.client import getPage
 from urllib2 import Request
 from urlparse import urlparse, urlunparse
 from xml.etree.cElementTree import parse
-import gettext, re, socket, urllib, urllib2
+import gettext, re, socket, sys, urllib, urllib2
 
 ##############################################################################
 
@@ -197,7 +197,7 @@ def reconnect(host='fritz.box', port=49000):
 		s.send(http_data)
 		s.close()
 	except:
-		pass
+		writeLog("Error while reconnecting fritz.Box: " + str(sys.exc_info()))
 
 ##############################################################################
 
@@ -604,7 +604,7 @@ class RS:
 			writeLog("Count of lists: " + str(len(file_list)))
 		except:
 			file_list = []
-			writeLog("Could not find any list!")
+			writeLog("Could not find any list: " + str(sys.exc_info()))
 		added_downloads = 0
 		for x in file_list:
 			list = path + x
@@ -640,6 +640,7 @@ class RS:
 			file_list = listdir(path)
 		except:
 			file_list = []
+			writeLog("Error while searching for lists: " + str(sys.exc_info()))
 		
 		finished_downloads = []
 		for download in self.downloads:
@@ -660,7 +661,7 @@ class RS:
 					f.write(content)
 					f.close()
 				except:
-					writeLog("Error while cleaning list %s!"%list)
+					writeLog("Error while cleaning list %s: %s" % (list, str(sys.exc_info())))
 		self.startDownloading()
 
 	def removeDownload(self, url):
@@ -682,6 +683,7 @@ class RS:
 			file_list = listdir(path)
 		except:
 			file_list = []
+			writeLog("Error while searching for lists: " + str(sys.exc_info()))
 		for x in file_list:
 			list = path + x
 			try:
@@ -695,7 +697,7 @@ class RS:
 				f.write(content)
 				f.close()
 			except:
-				pass
+				writeLog("Error while removing link from list: " + str(sys.exc_info()))
 
 	def clearFinishedDownload(self, url):
 		idx = 0
@@ -1047,7 +1049,7 @@ class UnrarEntry:
 						break
 				f.close()
 			except:
-				pass
+				writeLog("Error while reading rar archive from list: " + str(sys.exc_info()))
 		if package:
 			self.package = package
 			if self.password:
@@ -1055,7 +1057,7 @@ class UnrarEntry:
 			else:
 				self.command = "unrar -o+ x %s %s"%(package, config.plugins.RSDownloader.downloads_directory.value)
 		else:
-			writeLog("Error finding rar-archives in list: %s"%self.name)
+			writeLog("Error finding rar-archives in list: " + self.name)
 
 	def startUnrar(self):
 		self.working = True
@@ -1071,7 +1073,7 @@ class UnrarEntry:
 			f.write(result)
 			f.close()
 		except:
-			print "[RS Downloader] Result of unrar:",result
+			print "[RS Downloader] Result of unrar:", result
 		self.finishCallback(self.name)
 
 	def allDownloaded(self):
@@ -1468,6 +1470,7 @@ class RSMain(ChangedScreen):
 			file_list = listdir(config.plugins.RSDownloader.lists_directory.value)
 		except:
 			file_list = []
+			writeLog("Error while searching for container files: " + str(sys.exc_info()))
 		list = []
 		for file in file_list:
 			if file.lower().endswith(".ccf") or file.lower().endswith(".dlc") or file.lower().endswith(".rsdf"):
@@ -1492,7 +1495,7 @@ class RSMain(ChangedScreen):
 					f.close()
 					remove(file)
 				except:
-					pass
+					writeLog("Error while writing list file: " + str(sys.exc_info()))
 				self.refreshTimer.stop()
 				rapidshare.startDownloading()
 				self.updateList()
