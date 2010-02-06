@@ -57,6 +57,7 @@ SUBDIRS = \
 	tageditor \
 	trafficinfo \
 	unwetterzentrale \
+	virtualzap \
 	vlcplayer \
 	weatherplugin \
 	webcamviewer \

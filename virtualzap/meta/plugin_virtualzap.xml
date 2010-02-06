@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>Dr.Best</author>
+                    <name>Virtual Zap</name>
+                    <packagename>enigma2-plugin-extensions-virtualzap</packagename>
+                    <shortdescription>see service-epg (and PiP) from channels in an infobar</shortdescription>
+                    <description>see service-epg (and PiP) from other channels in an infobar</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/virtualzap.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>Dr.Best</author>
+                    <name>Virtual Zap</name>
+                    <packagename>enigma2-plugin-extensions-shoutcast</packagename>
+		    <shortdescription>EPG Daten und PiP von Kanälen in Infobar anzeigen</shortdescription>
+                    <description>EPG Daten und PiP von Kanälen in Infobar anzeigen</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/virtualzap.jpg" />		 
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-virtualzap" />
+	  </files>
+</default>

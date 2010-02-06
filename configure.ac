@@ -301,6 +301,11 @@ unwetterzentrale/Makefile
 unwetterzentrale/meta/Makefile
 unwetterzentrale/src/Makefile
 
+virtualzap/Makefile
+virtualzap/meta/Makefile
+virtualzap/po/Makefile
+virtualzap/src/Makefile
+
 vlcplayer/Makefile
 vlcplayer/meta/Makefile
 vlcplayer/po/Makefile
