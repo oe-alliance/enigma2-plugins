@@ -1,0 +1,25 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>Bacicciosat-Lupomeo</author>
+                    <name>MeteoItalia</name>
+                    <packagename>enigma2-plugin-extensions-meteoitalia</packagename>
+                    <shortdescription>Italian Weather forecast on Dreambox</shortdescription>
+                    <description>Italian Weather forecast on Dreambox from www.google.it</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_meteoitalia.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>Bacicciosat-Lupomeo</author>
+                    <name>MeteoItalia</name>
+                    <packagename>enigma2-plugin-extensions-meteoitalia</packagename>
+		    <shortdescription>Italienisch Wettervorhersagen auf Ihrer Dreambox</shortdescription>
+                    <description>Italienisch Wettervorhersagen auf Ihrer Dreambox von www.google.it</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_meteoitalia.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-meteoitalia" />
+	  </files>
+</default>
+
