@@ -35,10 +35,6 @@ antiscrollbar/Makefile
 antiscrollbar/meta/Makefile
 antiscrollbar/src/Makefile
 
-ardmediathek/Makefile
-ardmediathek/meta/Makefile
-ardmediathek/src/Makefile
-
 autoresolution/Makefile
 autoresolution/meta/Makefile
 autoresolution/src/Makefile
