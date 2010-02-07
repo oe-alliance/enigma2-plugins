@@ -1,0 +1,45 @@
+<skin>
+		<widgetconfig>
+			<num_widgets x="3" y="3"/>
+		</widgetconfig>
+		<screen flags="wfNoBorder" name="WidgetDesktop" position="0,0" size="720,576" title="WidgetDesktop" backgroundColor="transparent">
+			<!-- 
+				w2_3 = widget on x=2 y=3
+				w2_3_h = highlight on x=2 y=3
+			 -->
+		
+			<widget name="w1_1"  position="50,51" size="200,150" 	font="Regular;22" halign="center" valign="center" zPosition="-1" />
+			<widget name="w1_1_h"  position="48,49" size="204,154" 		font="Regular;22" halign="center" valign="center" zPosition="-2" backgroundColor="red" />
+			<widget name="w1_2"  position="260,51" size="200,150" 	font="Regular;22" halign="center" valign="center" zPosition="-1" />
+			<widget name="w1_2_h"  position="258,49" size="204,154" 	font="Regular;22" halign="center" valign="center" zPosition="-2" backgroundColor="red" />
+			<widget name="w1_3"  position="470,51" size="200,150" 	font="Regular;22" halign="center" valign="center" zPosition="-1" />
+			<widget name="w1_3_h"  position="468,49" size="204,154" 	font="Regular;22" halign="center" valign="center" zPosition="-2" backgroundColor="red" />
+			<widget name="w2_1"  position="50,211" size="200,150" 	font="Regular;22" halign="center" valign="center" zPosition="-1" />
+			<widget name="w2_1_h"  position="48,209" size="204,154" 	font="Regular;22" halign="center" valign="center" zPosition="-2" backgroundColor="red" />
+			<widget name="w2_2"  position="260,211" size="200,150" 	font="Regular;22" halign="center" valign="center" zPosition="-1" />
+			<widget name="w2_2_h"  position="258,209" size="204,154" 	font="Regular;22" halign="center" valign="center" zPosition="-2" backgroundColor="red" />
+			<widget name="w2_3"  position="470,211" size="200,150" 	font="Regular;22" halign="center" valign="center" zPosition="-1" />
+			<widget name="w2_3_h"  position="468,209" size="204,154" 	font="Regular;22" halign="center" valign="center" zPosition="-2" backgroundColor="red" />
+			<widget name="w3_1"  position="50,371" size="200,150" 	font="Regular;22" halign="center" valign="center" zPosition="-1" />
+			<widget name="w3_1_h"  position="48,369" size="204,154" 	font="Regular;22" halign="center" valign="center" zPosition="-2" backgroundColor="red" />
+			<widget name="w3_2"  position="260,371" size="200,150" 	font="Regular;22" halign="center" valign="center" zPosition="-1" />
+			<widget name="w3_2_h"  position="258,369" size="204,154" 	font="Regular;22" halign="center" valign="center" zPosition="-2" backgroundColor="red" />
+			<widget name="w3_3"  position="470,371" size="200,150" 	font="Regular;22" halign="center" valign="center" zPosition="-1" />
+			<widget name="w3_3_h"  position="468,369" size="204,154" 	font="Regular;22" halign="center" valign="center" zPosition="-2" backgroundColor="red" />			
+		</screen>
+		
+		<screen name="WidgetPositionConfigScreen" position="center,center" size="530,350" title="WidgetPositionConfigScreen">
+		 	<widget name="list" position="10,10" size="250,150" scrollbarMode="showOnDemand" />  
+		 	<widget name="preview" position="270,10" size="250,150" 		zPosition="1" font="Regular;22" halign="center" valign="center"/>
+			<widget name="description" position="10,170" size="250,120" 	zPosition="1" font="Regular;22" halign="center" valign="center"/>
+			<widget name="version" position="270,170" size="250,30" 		zPosition="1" font="Regular;22" halign="center" valign="center"/>
+			<widget name="author" position="270,210" size="250,30" 			zPosition="1" font="Regular;22" halign="center" valign="center"/>
+			<widget name="homepage" position="270,250" size="250,30" 		zPosition="1" font="Regular;22" halign="center" valign="center"/>	
+			
+			<widget name="key_red" position="10,300" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_green" position="160,300" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			 	                     
+		</screen>
+		
+		
+</skin>

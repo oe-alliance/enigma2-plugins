@@ -1,0 +1,5 @@
+<skin>
+		<desktopwidget name="imageswitch">
+			<widget name="imageswitch_pixmap"  position="0,0" size="200,150"  zPosition="2" alphatest="blend" />
+		</desktopwidget>
+</skin>

@@ -1,0 +1,137 @@
+<skin>
+		<desktopwidget name="serviceinfo">
+			<eLabel text=" " font="Regular;18" position="0,0" size="200,150" halign="center" zPosition="1" />
+			<!-- resolution -->
+			<widget source="session.CurrentService" render="Label" font="Regular;18" position="0,0" size="55,20" halign="right" zPosition="2">
+				<convert type="ServiceInfo">VideoWidth</convert>
+			</widget>
+			<eLabel text="x" font="Regular;18" position="55,0" size="15,20" halign="center" zPosition="2"/>
+			<widget source="session.CurrentService" render="Label" font="Regular;18" position="70,0" size="55,20" halign="left" zPosition="2">
+				<convert type="ServiceInfo">VideoHeight</convert>
+			</widget>
+			
+			<!-- frontend type -->
+			<widget source="session.FrontendInfo" render="FixedLabel" text="DVB-S" position="135,0" size="60,20" font="Regular;18" halign="center" zPosition="2">
+				<convert type="FrontendInfo">TYPE</convert>
+				<convert type="ValueRange">0,0</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget source="session.FrontendInfo" render="FixedLabel" text="DVB-C" position="135,0" size="60,20" font="Regular;18" halign="center" zPosition="2">
+				<convert type="FrontendInfo">TYPE</convert>
+				<convert type="ValueRange">1,1</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget source="session.FrontendInfo" render="FixedLabel" text="DVB-T" position="135,0" size="60,20" font="Regular;18" halign="center" zPosition="2">
+				<convert type="FrontendInfo">TYPE</convert>
+				<convert type="ValueRange">2,2</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			
+			<!-- used nims  -->
+			<eLabel text="A" position="0,20" zPosition="1" size="20,20" font="Regular;18" halign="center" foregroundColor="#333333" backgroundColor="black" transparent="1" />
+			<eLabel text="B" position="20,20" zPosition="1" size="20,20" font="Regular;18" halign="center" foregroundColor="#333333" backgroundColor="black" transparent="1" />
+			<eLabel text="C" position="40,20" zPosition="1" size="20,20" font="Regular;18" halign="center" foregroundColor="#333333" backgroundColor="black" transparent="1" />
+			<eLabel text="D" position="60,20" zPosition="1" size="20,20" font="Regular;18" halign="center" foregroundColor="#333333" backgroundColor="black" transparent="1" />
+			
+			<widget source="session.TunerInfo" render="FixedLabel" text="A" position="0,20" zPosition="2" size="20,20" font="Regular;18" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
+				<convert type="TunerInfo">TunerUseMask</convert>
+				<convert type="ValueBitTest">1</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget source="session.TunerInfo" render="FixedLabel" text="B" position="20,20" zPosition="2" size="20,20" font="Regular;18" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
+				<convert type="TunerInfo">TunerUseMask</convert>
+				<convert type="ValueBitTest">2</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget source="session.TunerInfo" render="FixedLabel" text="C" position="40,20" zPosition="2" size="20,20" font="Regular;18" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
+				<convert type="TunerInfo">TunerUseMask</convert>
+				<convert type="ValueBitTest">4</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget source="session.TunerInfo" render="FixedLabel" text="D" position="60,20" zPosition="2" size="20,20" font="Regular;18" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
+				<convert type="TunerInfo">TunerUseMask</convert>
+				<convert type="ValueBitTest">8</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget source="session.FrontendInfo" render="FixedLabel" text="A" position="0,20" zPosition="3" size="20,20" font="Regular;18" halign="center" foregroundColor="green" backgroundColor="black" transparent="1">
+				<convert type="FrontendInfo">NUMBER</convert>
+				<convert type="ValueRange">0,0</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget source="session.FrontendInfo" render="FixedLabel" text="B" position="20,20" zPosition="3" size="20,20" font="Regular;18" halign="center" foregroundColor="green" backgroundColor="black" transparent="1">
+				<convert type="FrontendInfo">NUMBER</convert>
+				<convert type="ValueRange">1,1</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget source="session.FrontendInfo" render="FixedLabel" text="C" position="40,20" zPosition="3" size="20,20" font="Regular;18" halign="center" foregroundColor="green" backgroundColor="black" transparent="1">
+				<convert type="FrontendInfo">NUMBER</convert>
+				<convert type="ValueRange">2,2</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget source="session.FrontendInfo" render="FixedLabel" text="D" position="60,20" zPosition="3" size="20,20" font="Regular;18" halign="center" foregroundColor="green" backgroundColor="black" transparent="1">
+				<convert type="FrontendInfo">NUMBER</convert>
+				<convert type="ValueRange">3,3</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+					
+			<!--  -->
+			<widget source="session.CurrentService"  render="Pixmap" pixmap="skin_default/icons/icon_format.png"  position="70,20" size="30,20" zPosition="2">
+				<convert type="ServiceInfo">SubservicesAvailable</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>			
+			<widget source="session.CurrentService"  render="Pixmap" pixmap="skin_default/icons/icon_format.png"  position="100,20" size="30,20" zPosition="2">
+				<convert type="ServiceInfo">IsWidescreen</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>			
+			<widget source="session.CurrentService"  render="Pixmap" pixmap="skin_default/icons/icon_txt.png"  position="130,20" size="30,20" zPosition="2">
+				<convert type="ServiceInfo">HasTelext</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>			
+			<widget source="session.CurrentService"  render="Pixmap" pixmap="skin_default/icons/icon_crypt.png"  position="160,20" size="20,20" zPosition="2">
+				<convert type="ServiceInfo">IsMultichannel</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>			
+			<widget source="session.CurrentService"  render="Pixmap" pixmap="skin_default/icons/icon_crypt.png"  position="180,20" size="20,20" zPosition="2">
+				<convert type="ServiceInfo">IsCrypted</convert>
+				<convert type="ConditionalShowHide" />
+			</widget>
+			
+			<!-- PIDs -->
+			<eLabel text="APid:" font="Regular;18" position="0,50" size="65,20" halign="right" zPosition="2"/>
+			<widget source="session.CurrentService" render="Label" position="65,50" size="40,20" font="Regular;18" halign="left" zPosition="2">
+				<convert type="ServiceInfo">AudioPid</convert>				
+			</widget>
+			
+			<eLabel text="VPid:" font="Regular;18" position="0,70" size="65,20" halign="right" zPosition="2"/>
+			<widget source="session.CurrentService" render="Label" position="65,70" size="40,20" font="Regular;18" halign="left" zPosition="2">
+				<convert type="ServiceInfo">VideoPid</convert>				
+			</widget>
+			<eLabel text="PcrPid:" font="Regular;18" position="0,90" size="65,20" halign="right" zPosition="2"/>
+			<widget source="session.CurrentService" render="Label" position="65,90" size="40,20" font="Regular;18" halign="left" zPosition="2">
+				<convert type="ServiceInfo">PcrPid</convert>				
+			</widget>
+			<eLabel text="PmtPid:" font="Regular;18" position="0,110" size="65,20" halign="right" zPosition="2"/>
+			<widget source="session.CurrentService" render="Label" position="65,110" size="40,20" font="Regular;18" halign="left" zPosition="2">
+				<convert type="ServiceInfo">PmtPid</convert>				
+			</widget>
+			<eLabel text="TxtPid:" font="Regular;18" position="0,130" size="65,20" halign="right" zPosition="2"/>
+			<widget source="session.CurrentService" render="Label" position="65,130" size="40,20" font="Regular;18" halign="left" zPosition="2">
+				<convert type="ServiceInfo">TxtPid</convert>				
+			</widget>
+			
+			<eLabel text="TsId:" font="Regular;18" position="105,50" size="55,20" halign="right" zPosition="2"/>
+			<widget source="session.CurrentService" render="Label" position="160,50" size="40,20" font="Regular;18" halign="left" zPosition="2">
+				<convert type="ServiceInfo">TxtPid</convert>				
+			</widget>
+			<eLabel text="OnId:" font="Regular;18" position="105,70" size="55,20" halign="right" zPosition="2"/>
+			<widget source="session.CurrentService" render="Label" position="160,70" size="40,20" font="Regular;18" halign="left" zPosition="2">
+				<convert type="ServiceInfo">OnId</convert>				
+			</widget>
+			<eLabel text="Sid:" font="Regular;18" position="105,90" size="55,20" halign="right" zPosition="2"/>
+			<widget source="session.CurrentService" render="Label" position="160,90" size="40,20" font="Regular;18" halign="left" zPosition="2">
+				<convert type="ServiceInfo">Sid</convert>				
+			</widget>
+			
+						
+		</desktopwidget>
+</skin>

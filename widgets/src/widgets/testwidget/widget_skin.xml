@@ -1,0 +1,6 @@
+<skin>
+		<desktopwidget name="testwidget">
+			<widget name="testwidget_title"  position="0,0" size="200,100" font="Regular;22" halign="center" valign="center" />
+			<widget name="testwidget_blablub"  position="0,100" size="200,50" font="Regular;35" halign="center" valign="center" />
+		</desktopwidget>
+</skin>
