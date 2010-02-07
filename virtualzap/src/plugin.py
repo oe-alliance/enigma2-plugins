@@ -4,7 +4,7 @@
 #  $Id$
 #
 #  Coded by Dr.Best (c) 2010
-#  Coding idea by vali
+#  Coding idea and design by Vali
 #  Support: www.dreambox-tools.info
 #
 #  This plugin is licensed under the Creative Commons 
@@ -66,8 +66,8 @@ def autostart(reason, **kwargs):
 def InfoBarShowHide__init__(self):
 	# initialize InfoBarShowHide with original __init__
 	InfoBarShowHideINIT(self)
+	# delete current key map --> we have to use "ok" with b-flag
 	if config.plugins.virtualzap.mode.value == "1":
-		# delete current key map --> we have to use "ok" with b-flag
 		del self["ShowHideActions"]
 		# initialize own actionmap with ok = b and longOK = l
 		self["myactions"] = ActionMap( ["myShowHideActions"] ,
@@ -77,7 +77,6 @@ def InfoBarShowHide__init__(self):
 			"hide": self.hide,
 		}, 1)
 	elif config.plugins.virtualzap.mode.value == "2":
-		# overide hide 
 		self["ShowHideActions"] = ActionMap( ["InfobarShowHideActions"] ,
 		{
 			"toggleShow": self.toggleShow,
@@ -131,72 +130,69 @@ class VirtualZap(Screen):
 	#
 
 	if SystemInfo.get("NumVideoDecoders", 1) > 1 and config.plugins.virtualzap.usepip.value:
-		# the video widget position is odd for 1280 and 1024... but it seems that the video position is calculated wrong with res <> 720
 		if sz_w == 1280:
 			skin = """
-				<screen name="VirtualZap" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
-					<widget name="NowChannel" position="350,555" size="740,25" zPosition="2" font="Regular;22" />
-					<widget name="NowEPG" position="350,580" size="620,25" zPosition="2" font="Regular;22" foregroundColor="#fcc000" />
-					<widget name="NextEPG" position="350,605" size="620,25" zPosition="2" font="Regular;22" />
-					<widget name="NowTime" position="970,580" size="120,25" zPosition="2" font="Regular;22" halign="right" foregroundColor="#fcc000"/>
-					<widget name="NextTime" position="970,605" size="120,25" zPosition="2" font="Regular;22" halign="right"/>
-					<widget name="video" position="70,420" size="120,96" backgroundColor="transparent" />
+				<screen backgroundColor="#101214" flags="wfNoBorder" name="VirtualZap" position="0,505" size="1280,220" title="Virtual Zap">
+					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/hd.png" position="0,0" size="1280,220" zPosition="0"/>
+					<widget backgroundColor="transparent" name="video" position="60,50" size="214,120" zPosition="1"/>
+					<widget backgroundColor="#101214" font="Regular;26" halign="left" name="NowChannel" position="305,60" size="887,32" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" foregroundColor="#fcc000" halign="left" name="NowEPG" position="305,105" size="600,28" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" halign="left" name="NextEPG" position="305,140" size="600,28" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" foregroundColor="#fcc000" halign="right" name="NowTime" position="1070,105" size="124,28" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" halign="right" name="NextTime" position="1070,140" size="124,28" transparent="1" zPosition="2"/>
 				</screen>"""
-
 		elif sz_w == 1024:
-
 			skin = """
-				<screen name="VirtualZap" position="0,440" size="1024,96" flags="wfNoBorder" backgroundColor="transparent">
-					<widget name="NowChannel" position="280,10" size="675,25" zPosition="2" font="Regular;22" />
-					<widget name="NowEPG" position="280,35" size="555,25" zPosition="2" font="Regular;22" foregroundColor="#fcc000" />
-					<widget name="NextEPG" position="280,60" size="555,25" zPosition="2" font="Regular;22" />
-					<widget name="NowTime" position="835,35" size="120,25" zPosition="2" font="Regular;22" halign="right" foregroundColor="#fcc000"/>
-					<widget name="NextTime" position="835,60" size="120,25" zPosition="2" font="Regular;22" halign="right"/>
-					<widget name="video" position="70,0" size="120,96" backgroundColor="transparent" />
+				<screen backgroundColor="#101214" flags="wfNoBorder" name="VirtualZap" position="0,420" size="1024,176" title="Virtual Zap">
+					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/sd.png" position="0,0" size="1024,176" zPosition="0"/>
+					<widget backgroundColor="transparent" name="video" position="50,20" size="164,92" zPosition="1"/>
+					<widget backgroundColor="#101214" font="Regular;22" halign="left" name="NowChannel" position="230,25" size="741,30" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="left" name="NowEPG" position="230,55" size="600,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="left" name="NextEPG" position="230,80" size="600,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="right" name="NowTime" position="850,55" size="124,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="850,80" size="124,25" transparent="1" zPosition="2"/>
 				</screen>"""
-
 		else:
-
 			skin = """
-				<screen name="VirtualZap" position="0,0" size="720,576" flags="wfNoBorder" backgroundColor="transparent">
-					<widget name="NowChannel" position="170,450" size="510,25" zPosition="2" font="Regular;22" />
-					<widget name="NowEPG" position="170,475" size="390,25" zPosition="2" font="Regular;22" foregroundColor="#fcc000"/>
-					<widget name="NextEPG" position="170,500" size="390,25" zPosition="2" font="Regular;22" />
-					<widget name="NowTime" position="560,475" size="120,25" zPosition="2" font="Regular;22" halign="right" foregroundColor="#fcc000"/>
-					<widget name="NextTime" position="560,500" size="120,25" zPosition="2" font="Regular;22" halign="right"/>
-					<widget name="video" position="40,440" size="120,96" backgroundColor="transparent" />
+				<screen backgroundColor="#101214" flags="wfNoBorder" name="VirtualZap" position="0,420" size="720,176" title="Virtual Zap">
+					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/sd.png" position="0,0" size="720,176" zPosition="0"/>
+					<widget backgroundColor="transparent" name="video" position="50,25" size="130,73" zPosition="1"/>
+					<widget backgroundColor="#101214" font="Regular;22" halign="left" name="NowChannel" position="190,25" size="480,30" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="left" name="NowEPG" position="190,55" size="360,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="left" name="NextEPG" position="190,80" size="360,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="right" name="NowTime" position="550,55" size="120,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="550,80" size="120,25" transparent="1" zPosition="2"/>
 				</screen>"""
 	else:
 		if sz_w == 1280:
 			skin = """
-				<screen name="VirtualZapNoPiP" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
-					<widget name="NowChannel" position="270,555" size="740,25" zPosition="2" font="Regular;22" />
-					<widget name="NowEPG" position="270,580" size="620,25" zPosition="2" font="Regular;22" foregroundColor="#fcc000" />
-					<widget name="NextEPG" position="270,605" size="620,25" zPosition="2" font="Regular;22" />
-					<widget name="NowTime" position="890,580" size="120,25" zPosition="2" font="Regular;22" halign="right" foregroundColor="#fcc000"/>
-					<widget name="NextTime" position="890,605" size="120,25" zPosition="2" font="Regular;22" halign="right"/>
+				<screen backgroundColor="#101214" flags="wfNoBorder" name="VirtualZapNoPiP" position="0,505" size="1280,220" title="Virtual Zap">
+					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/hd.png" position="0,0" size="1280,220" zPosition="0"/>
+					<widget backgroundColor="#101214" font="Regular;26" halign="center" name="NowChannel" position="140,60" size="1000,32" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" foregroundColor="#fcc000" halign="left" name="NowEPG" position="140,105" size="860,28" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" halign="left" name="NextEPG" position="140,140" size="860,28" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" foregroundColor="#fcc000" halign="right" name="NowTime" position="1015,105" size="124,28" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" halign="right" name="NextTime" position="1015,140" size="124,28" transparent="1" zPosition="2"/>
 				</screen>"""
-
 		elif sz_w == 1024:
-
 			skin = """
-				<screen name="VirtualZapNoPiP" position="0,440" size="1024,96" flags="wfNoBorder" backgroundColor="transparent">
-					<widget name="NowChannel" position="167,10" size="690,25" zPosition="2" font="Regular;22" />
-					<widget name="NowEPG" position="167,35" size="570,25" zPosition="2" font="Regular;22" foregroundColor="#fcc000" />
-					<widget name="NextEPG" position="167,60" size="570,25" zPosition="2" font="Regular;22" />
-					<widget name="NowTime" position="737,35" size="120,25" zPosition="2" font="Regular;22" halign="right" foregroundColor="#fcc000"/>
-					<widget name="NextTime" position="737,60" size="120,25" zPosition="2" font="Regular;22" halign="right"/>
+				<screen backgroundColor="#101214" flags="wfNoBorder" name="VirtualZapNoPiP" position="0,420" size="1024,176" title="Virtual Zap">
+					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/sd.png" position="0,0" size="1024,176" zPosition="0"/>
+					<widget backgroundColor="#101214" font="Regular;22" halign="center" name="NowChannel" position="100,25" size="824,30" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="left" name="NowEPG" position="100,55" size="700,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="left" name="NextEPG" position="100,80" size="700,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="right" name="NowTime" position="800,55" size="124,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="800,80" size="124,25" transparent="1" zPosition="2"/>
 				</screen>"""
-
 		else:
-
 			skin = """
-				<screen name="VirtualZapNoPiP" position="0,0" size="720,576" flags="wfNoBorder" backgroundColor="transparent">
-					<widget name="NowChannel" position="80,450" size="560,25" zPosition="2" font="Regular;22" />
-					<widget name="NowEPG" position="80,475" size="440,25" zPosition="2" font="Regular;22" foregroundColor="#fcc000"/>
-					<widget name="NextEPG" position="80,500" size="440,25" zPosition="2" font="Regular;22" />
-					<widget name="NowTime" position="520,475" size="120,25" zPosition="2" font="Regular;22" halign="right" foregroundColor="#fcc000"/>
-					<widget name="NextTime" position="520,500" size="120,25" zPosition="2" font="Regular;22" halign="right"/>
+				<screen backgroundColor="#101214" flags="wfNoBorder" name="VirtualZapNoPiP" position="0,420" size="720,176" title="Virtual Zap">
+					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/sd.png" position="0,0" size="720,176" zPosition="0"/>
+					<widget backgroundColor="#101214" font="Regular;22" halign="center" name="NowChannel" position="50,25" size="620,30" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="left" name="NowEPG" position="50,55" size="500,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="left" name="NextEPG" position="50,80" size="500,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="right" name="NowTime" position="550,55" size="120,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="550,80" size="120,25" transparent="1" zPosition="2"/>
 				</screen>"""
 
 
@@ -217,12 +213,14 @@ class VirtualZap(Screen):
 		self["NextEPG"] = Label()
 		self["NowTime"] = Label()
 		self["NextTime"] = Label()
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ChannelSelectBaseActions"], 
 		{
 			"ok": self.ok, 
 			"cancel": self.closing,
-			"right": self.prgPlus,
-			"left": self.prgMinus,
+			"right": self.nextService,
+			"left": self.prevService,
+			"nextBouquet": self.nextBouquet,
+			"prevBouquet": self.prevBouquet,
 		},-2)
 		self["actions2"] = NumberActionMap(["NumberActions"],
 		{
@@ -240,7 +238,7 @@ class VirtualZap(Screen):
 		# PiP
 		if self.pipAvailable:
 			# activate PiP support
-			self["video"] = VideoWindow()
+			self["video"] = VideoWindow(fb_width = getDesktop(0).size().width(), fb_height = getDesktop(0).size().height())
 			self.pip = None
 			self.currentPiP = ""
 		# this is the servicelist from ChannelSelectionBase
@@ -253,28 +251,66 @@ class VirtualZap(Screen):
 	def onLayoutReady(self):
 		self.updateInfos()
 
-	def prgPlus(self):
+	def nextService(self):
 		# get next service
-		self.servicelist.moveDown()
+		if self.servicelist.inBouquet():
+			prev = self.servicelist.getCurrentSelection()
+			if prev:
+				prev = prev.toString()
+				while True:
+					if config.usage.quickzap_bouquet_change.value and self.servicelist.atEnd():
+						self.servicelist.nextBouquet()
+					else:
+						self.servicelist.moveDown()
+					cur = self.servicelist.getCurrentSelection()
+					if not cur or (not (cur.flags & 64)) or cur.toString() == prev:
+						break
+		else:
+			self.servicelist.moveDown()
 		if self.isPlayable():
 			self.updateInfos()
 		else:
-			# service is not playable, try next one
-			self.prgPlus()
+			self.nextService()
 
-	def prgMinus(self):
+	def prevService(self):
 		# get previous service
-		self.servicelist.moveUp()
+		if self.servicelist.inBouquet():
+			prev = self.servicelist.getCurrentSelection()
+			if prev:
+				prev = prev.toString()
+				while True:
+					if config.usage.quickzap_bouquet_change.value:
+						if self.servicelist.atBegin():
+							self.servicelist.prevBouquet()
+					self.servicelist.moveUp()
+					cur = self.servicelist.getCurrentSelection()
+					if not cur or (not (cur.flags & 64)) or cur.toString() == prev:
+						break
+		else:
+			self.servicelist.moveUp()
 		if self.isPlayable():
 			self.updateInfos()
 		else:
-			# service is not playable, try next one
-			self.prgMinus()
+			self.prevService()
 
 	def isPlayable(self):
 		# check if service is playable
 		current = ServiceReference(self.servicelist.getCurrentSelection())
 		return not (current.ref.flags & (eServiceReference.isMarker|eServiceReference.isDirectory))
+
+
+	def nextBouquet(self):
+		# next bouquet with first service
+		if config.usage.multibouquet.value:
+			self.servicelist.nextBouquet()
+		self.updateInfos()
+
+	def prevBouquet(self):
+		# previous bouquet with first service
+		if config.usage.multibouquet.value:
+			self.servicelist.prevBouquet()
+		self.updateInfos()
+
 
 	def updateInfos(self):
 		# update data
