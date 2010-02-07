@@ -16,11 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:77
+#: ../src/plugin.py:82
 msgid "set as startup service"
 msgstr ""
 
-#: ../src/plugin.py:78
+#: ../src/plugin.py:83
 msgid "reset startup service"
+msgstr ""
+
+#: ../src/plugin.py:102
+msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr ""
 

@@ -23,6 +23,7 @@ from Screens.Screen import Screen
 from Screens.ChannelSelection import ChannelContextMenu
 from enigma import eServiceReference
 from Components.ChoiceList import ChoiceEntryComponent
+from Screens.MessageBox import MessageBox
 
 # for localized messages
 from . import _
@@ -83,16 +84,22 @@ def startUpService__init__(self, session, csel):
 
 def newStartUpServiceSelected(self):
 	current = self.csel.getCurrentSelection()
-	current_root = self.csel.getRoot()
-	if current.type == eServiceReference.idDVB and current.getData(0) in (2, 10):	
-		config.startupservice.lastroot.value = "1:7:2:0:0:0:0:0:0:0:%s;" % (current_root.getPath())
-		config.startupservice.lastmode.value = "radio"
+	path = ''
+	for i in self.csel.servicePath:
+		 path += i.toString()
+		 path += ';'
+	if path:
+		if current.type == eServiceReference.idDVB and current.getData(0) in (2, 10):	
+			config.startupservice.lastroot.value = path
+			config.startupservice.lastmode.value = "radio"
+		else:
+			config.startupservice.lastroot.value = path
+			config.startupservice.lastmode.value = "tv"
+		config.startupservice.lastservice.value = current.toString()
+		config.startupservice.save()
+		self.close()
 	else:
-		config.startupservice.lastroot.value = "1:7:1:0:0:0:0:0:0:0:%s;" % (current_root.getPath())
-		config.startupservice.lastmode.value = "tv"
-	config.startupservice.lastservice.value = current.toString()
-	config.startupservice.save()
-	self.close()
+		 self.session.openWithCallback(self.close, MessageBox, _("If you see this message, please switch to the service you want to mark as startservice and try again."), MessageBox.TYPE_ERROR)
 
 def resetStartUpService(self):
 	config.startupservice.lastroot.value = ""

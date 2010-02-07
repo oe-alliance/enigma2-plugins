@@ -19,3 +19,6 @@ msgstr "Als Startservice setzen"
 msgid "reset startup service"
 msgstr "Startservice zurücksetzen"
 
+msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
+msgstr "Wenn diese Nachricht erscheint bitte auf den Kanal schalten, welcher als Startservice gesetzt werden soll, und dann nochmal versuchen."
+
