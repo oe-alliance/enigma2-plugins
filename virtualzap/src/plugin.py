@@ -39,6 +39,9 @@ from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 
+from Screens.EpgSelection import EPGSelection
+from Screens.EventView import  EventViewEPGSelect
+
 InfoBarShowHideINIT = None
 
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, getConfigListEntry, configfile
@@ -213,7 +216,7 @@ class VirtualZap(Screen):
 		self["NextEPG"] = Label()
 		self["NowTime"] = Label()
 		self["NextTime"] = Label()
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ChannelSelectBaseActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ChannelSelectBaseActions", "ChannelSelectEPGActions"], 
 		{
 			"ok": self.ok, 
 			"cancel": self.closing,
@@ -221,6 +224,7 @@ class VirtualZap(Screen):
 			"left": self.prevService,
 			"nextBouquet": self.nextBouquet,
 			"prevBouquet": self.prevBouquet,
+			"showEPGList": self.openEventView,
 		},-2)
 		self["actions2"] = NumberActionMap(["NumberActions"],
 		{
@@ -346,6 +350,41 @@ class VirtualZap(Screen):
 				else:
 					return "", ""
 		return "", ""
+
+	def openSingleServiceEPG(self):
+		# show EPGList
+		current = ServiceReference(self.servicelist.getCurrentSelection())
+		self.session.open(EPGSelection, current.ref)
+
+	def openEventView(self):
+		# show EPG Event
+		epglist = [ ]
+		self.epglist = epglist
+		service = ServiceReference(self.servicelist.getCurrentSelection())
+		ref = service.ref
+		evt = self.epgcache.lookupEventTime(ref, -1)
+		if evt:
+			epglist.append(evt)
+		evt = self.epgcache.lookupEventTime(ref, -1, 1)
+		if evt:
+			epglist.append(evt)
+		if epglist:
+			self.session.open(EventViewEPGSelect, epglist[0], service, self.eventViewCallback, self.openSingleServiceEPG, self.openMultiServiceEPG, self.openSimilarList)
+
+	def eventViewCallback(self, setEvent, setService, val):
+		epglist = self.epglist
+		if len(epglist) > 1:
+			tmp = epglist[0]
+			epglist[0] = epglist[1]
+			epglist[1] = tmp
+			setEvent(epglist[0])
+
+	def openMultiServiceEPG(self):
+		# not supported
+		pass
+
+	def openSimilarList(self, eventid, refstr):
+		self.session.open(EPGSelection, refstr, None, eventid)
 
 	def closing(self):
 		if self.pipAvailable:
