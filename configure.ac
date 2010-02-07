@@ -144,6 +144,7 @@ mediadownloader/po/Makefile
 mediadownloader/src/Makefile
 
 meteoitalia/Makefile
+meteoitalia/meta/Makefile
 meteoitalia/src/Makefile
 
 mosaic/Makefile
