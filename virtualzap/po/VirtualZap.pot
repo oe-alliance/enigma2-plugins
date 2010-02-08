@@ -22,10 +22,6 @@ msgstr ""
 msgid "with exit button"
 msgstr ""
 
-#: ../src/plugin.py:48
-msgid "as plugin in pluginmenu"
-msgstr ""
-
 #: ../src/plugin.py:106
 msgid "Virtual Zap Setup"
 msgstr ""

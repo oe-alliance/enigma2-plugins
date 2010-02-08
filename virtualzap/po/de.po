@@ -22,10 +22,6 @@ msgstr "mit langen Druck auf \"OK\""
 msgid "with exit button"
 msgstr "mit \"Exit\" auf Fernbedienung"
 
-#: ../src/plugin.py:48
-msgid "as plugin in pluginmenu"
-msgstr "als Plugin im Pluginbrowser"
-
 #: ../src/plugin.py:106
 msgid "Virtual Zap Setup"
 msgstr "Virtual Zap Einstellungen"

@@ -28,10 +28,6 @@ msgstr "con pressione lunga tasto Ok"
 msgid "with exit button"
 msgstr "con il tasto exit"
 
-#: /home/dario/Plugins/VirtualZap/plugin.py:51
-msgid "as plugin in pluginmenu"
-msgstr "come plugin"
-
 #: /home/dario/Plugins/VirtualZap/plugin.py:109
 msgid "Virtual Zap Setup"
 msgstr "Configurazione Virtual Zap"

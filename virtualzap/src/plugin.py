@@ -51,7 +51,7 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 from . import _
 
 config.plugins.virtualzap = ConfigSubsection()
-config.plugins.virtualzap.mode = ConfigSelection(default="0", choices = [("0", _("as plugin in extended bar")),("1", _("with long OK press")), ("2", _("with exit button")),("3", _("as plugin in pluginmenu"))])
+config.plugins.virtualzap.mode = ConfigSelection(default="0", choices = [("0", _("as plugin in extended bar")),("1", _("with long OK press")), ("2", _("with exit button"))])
 config.plugins.virtualzap.usepip = ConfigYesNo(default = True)
 
 def autostart(reason, **kwargs):
@@ -97,8 +97,8 @@ def showVZ(self):
 			if self.pipShown():
 				# it is... close it!
 				self.showPiP()
-		if InfoBar and InfoBar.instance:
-			InfoBar.instance.session.open(VirtualZap, InfoBar.instance.servicelist)
+		if isinstance(self, InfoBar):
+			self.session.open(VirtualZap, self.servicelist)
 
 def newHide(self):
 	# remember if infobar is shown
@@ -114,16 +114,13 @@ def Plugins(**kwargs):
 		plist.append(PluginDescriptor(name="Virtual Zap", description=_("Virtual (PiP) Zap"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU],icon = "plugin.png", fnc = main))
 	elif config.plugins.virtualzap.mode.value == "1" or config.plugins.virtualzap.mode.value == "2":
 		plist.append(PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART],fnc = autostart))
-	elif config.plugins.virtualzap.mode.value == "3":
-		plist.append(PluginDescriptor(name="Virtual Zap", description=_("Virtual (PiP) Zap"), where = [PluginDescriptor.WHERE_PLUGINMENU],icon = "plugin.png", fnc = main))
 	return plist
 
 def setup(session,**kwargs):
 	session.open(VirtualZapConfig)
 
 def main(session,**kwargs):
-	if InfoBar and InfoBar.instance:
-		session.open(VirtualZap, InfoBar.instance.servicelist)
+		session.open(VirtualZap, kwargs["servicelist"])
 
 class VirtualZap(Screen):
 	sz_w = getDesktop(0).size().width()
