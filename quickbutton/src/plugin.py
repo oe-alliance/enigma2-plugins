@@ -118,10 +118,15 @@ def startPlugin(self,pname):
 	msgText = _("Unknown Error")
 	no_plugin = True
 	if pname != _("Nothing"):
-		if pname == _("EPG List"):
-			from  Screens.InfoBarGenerics import InfoBarEPG
+		if pname == _("Single EPG"):
+			from Screens.InfoBarGenerics import InfoBarEPG
 			if isinstance(self, InfoBarEPG):
 				self.openSingleServiceEPG()
+			no_plugin = False
+		elif pname == _("Multi EPG"):
+			from Screens.InfoBarGenerics import InfoBarEPG
+			if isinstance(self, InfoBarEPG):
+				self.openMultiServiceEPG()
 			no_plugin = False
 		elif pname == _("MediaPlayer"):
 			try: # falls es nicht installiert ist
@@ -188,13 +193,14 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		blue_selectedindex = self.getStaticPluginName(config.plugins.Quickbutton.blue.value)
 		# feste Vorgaben...koennte man noch erweitern, da hole ich mir sinnvolle Vorschlaege aus Foren noch ein...
 		self.entryguilist.append(("0",_("Nothing")))
-		self.entryguilist.append(("1",_("EPG List")))
-		self.entryguilist.append(("2",_("MediaPlayer")))
-		self.entryguilist.append(("3",_("Plugin browser")))
-		self.entryguilist.append(("4",_("switch 4:3 content display")))
-		self.entryguilist.append(("5",_("Timer")))
+		self.entryguilist.append(("1",_("Single EPG")))
+		self.entryguilist.append(("2",_("Multi EPG")))
+		self.entryguilist.append(("3",_("MediaPlayer")))
+		self.entryguilist.append(("4",_("Plugin browser")))
+		self.entryguilist.append(("5",_("switch 4:3 content display")))
+		self.entryguilist.append(("6",_("Timer")))
 		# Vorgaben aus EXTENSIONSMENU, PLUGINMENU
-		index = 6
+		index = 7
 		for p in plugins.getPlugins(where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]):
 			self.entryguilist.append((str(index),str(p.name)))
 			if config.plugins.Quickbutton.red.value == str(p.name):
@@ -232,16 +238,18 @@ class QuickbuttonSetup(ConfigListScreen, Screen):
 		}, -2)
 
 	def getStaticPluginName(self,value):
-		if value == _("EPG List"):
+		if value == _("Single EPG"):
 			return "1"
-		elif value == _("MediaPlayer"):
+		elif value == _("Multi EPG"):
 			return "2"
-		elif value == _("Plugin browser"):
+		elif value == _("MediaPlayer"):
 			return "3"
-		elif value == _("switch 4:3 content display"):
+		elif value == _("Plugin browser"):
 			return "4"
-		if value == _("Timer"):
+		elif value == _("switch 4:3 content display"):
 			return "5"
+		if value == _("Timer"):
+			return "6"
 		else:
 			return "0"
 
