@@ -6,9 +6,28 @@
 									<table style="width: 100%;">
 										<tr>
 											<td>
-												<form><input type="checkbox" id="enableDebug" ${debug}/>Enable Debug</form>												
-											</td>											
+												Enable Debug												
+											</td>
+											<td>
+												<form><input type="checkbox" id="enableDebug" ${debug}/></form>
+											</td>										
 										</tr>
+										<tr>
+											<td>
+												Update-Interval for current service
+											</td>
+											<td>
+												<form><input type="text" id="updateCurrentInterval" value="${updateCurrentInterval}">ms</form>
+											</td>										
+										</tr>
+										<tr>
+											<td>
+												Update-Interval for current bouquets EPG
+											</td>
+											<td colspan="2">
+												<form><input type="text" id="updateBouquetInterval" value="${updateBouquetInterval}" />ms</form>
+											</td>										
+										</tr>																				
 										<tr><td><button onClick="saveSettings()">Save</button></td></tr>
 									</table>
 									

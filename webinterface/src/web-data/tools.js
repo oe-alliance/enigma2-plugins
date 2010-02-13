@@ -36,7 +36,8 @@ var tagsList = [];
 var boxtype = "";
 
 function startUpdateCurrentPoller(){
-	updateCurrentPoller = setInterval(updateItems, 60000);
+	clearInterval(updateCurrentPoller);
+	updateCurrentPoller = setInterval(updateItems, userprefs.data.updateCurrentInterval);
 }
 
 function stopUpdateCurrentPoller(){
@@ -141,7 +142,8 @@ function simpleResultHandler(simpleResult){
 
 function startUpdateBouquetItemsPoller(){
 	debug("[startUpdateBouquetItemsPoller] called");
-	updateBouquetItemsPoller = setInterval(updateItemsLazy, 300000);
+	clearInterval(updateBouquetItemsPoller);
+	updateBouquetItemsPoller = setInterval(updateItemsLazy, userprefs.data.updateBouquetInterval);
 }
 
 
@@ -329,19 +331,45 @@ function saveSettings(){
 	userprefs.load();
 	
 	var debug = $('enableDebug').checked;
+	var changed = false;
 	if(typeof(debug) != "undefined"){
 		if( userprefs.data.debug != debug ){
 			userprefs.data.debug = debug;
-			userprefs.save();
-			
+			changed = true;
+	
 			if(debug){
 				openDebug();
 			}
 		}		
 	}
 	
+	var updateCurrentInterval = $F('updateCurrentInterval');
+	if( isNaN(updateCurrentInterval) || parseNr(updateCurrentInterval) < 10000){
+		updateCurrentInterval = 120000;
+	}
 	
+	if( userprefs.data.updateCurrentInterval != updateCurrentInterval){
+		userprefs.data.updateCurrentInterval = updateCurrentInterval;
+		
+		changed = true;
+		startUpdateCurrentPoller();
+	}
 	
+	var updateBouquetInterval = $F('updateBouquetInterval');
+	if( isNaN(updateBouquetInterval) || parseNr(updateBouquetInterval) < 60000){
+		updateBouquetInterval = 300000;
+	}
+	
+	if( userprefs.data.updateBouquetInterval != updateBouquetInterval){
+		userprefs.data.updateBouquetInterval = updateBouquetInterval;
+		
+		changed = true;
+		startUpdateBouquetItemsPoller();
+	}
+	
+	if(changed){
+		userprefs.save();
+	}
 }
 
 //Template Helpers
@@ -1204,8 +1232,15 @@ function showSettings(){
 	if(debug){
 		debugChecked = 'checked';
 	}
+	
+	var updateCurrentInterval = userprefs.data.updateCurrentInterval;
+	var updateBouquetInterval = userprefs.data.updateBouquetInterval;
+	
 
-	data = { 'debug' : debugChecked };
+	data = {'debug' : debugChecked,
+			'updateCurrentInterval' : updateCurrentInterval,
+			'updateBouquetInterval' : updateBouquetInterval
+	};
 	processTpl('tplSettings', data, 'contentMain');
 }
 
@@ -1628,10 +1663,21 @@ function updateItemsLazy(bouquet){
 
 function init(){
 	var DBG = userprefs.data.debug || false;
+	
 	if(DBG){
 		openDebug();
 	}
 
+	if( parseNr(userprefs.data.updateCurrentInterval) < 10000){
+		userprefs.data.updateCurrentInterval = 120000;
+		userprefs.save();
+	}
+	
+	if( parseNr(userprefs.data.updateBouquetInterval) < 60000 ){
+		userprefs.data.updateBouquetInterval = 300000;
+		userprefs.save();
+	}
+	
 	if (typeof document.body.style.maxHeight == "undefined") {
 		alert("Due to the tremendous amount of work needed to get everthing to " +
 		"work properly, there is (for now) no support for Internet Explorer Versions below 7");
