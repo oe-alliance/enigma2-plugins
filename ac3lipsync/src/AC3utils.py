@@ -18,7 +18,7 @@ SKIN = """
             <widget name="GlobalImg" pixmaps="~/img/OptionButtonOff.png,~/img/OptionButtonOn.png" position="165,43" zPosition="2" size="11,11" transparent="1" alphatest="on"/>
             <ePixmap pixmap="~/img/AudioSyncBarBGVert.png" zPosition="2" position="30,70" size="21,370" alphatest="on" transparent="1" />
             <widget name="AudioSliderBar" pixmap="~/img/AudioSyncBarVert.png" zPosition="3" position="30,70" size="21,370" transparent="1" orientation="orBottomToTop"/>
-            <widget name="AudioSlider" zPosition="4" position="15,245" size="50,20" font="Regular;14" halign="center" valign="center" backgroundColor="#232323" foregroundColor="#eeeeee" transparent="1"/>
+            <widget name="AudioSlider" zPosition="4" position="5,245" size="70,20" font="Regular;14" halign="center" valign="center" backgroundColor="#232323" foregroundColor="#eeeeee" transparent="1"/>
             <widget name="ServiceInfoLabel" zPosition="4" position="20,15" size="65,20" font="Regular;14" backgroundColor="#232323" foregroundColor="#dddddd" transparent="1" />
             <widget name="ServiceInfo" zPosition="4" position="90,15" size="200,20" font="Regular;14" backgroundColor="#232323" foregroundColor="#ffffff" transparent="1" />
             <ePixmap pixmap="~/img/key-green.png" position="290,15" zPosition="5" size="20,20" transparent="1" alphatest="on" />
