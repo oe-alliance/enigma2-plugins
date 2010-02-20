@@ -79,7 +79,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") %dict(plugin=KTglob.PLUGIN_BASE,version=KTglob.PLUGIN_VERSION))
         self["RemainingTime"] = Label(_("Remaining time: %s") %sRemainingTime)
         self["LastDayStarted"] = Label(_("Last day started: %s") % config.plugins.KiddyTimer.lastStartDay.getValue())
-
+        
         # BUTTONS
         self["key_red"] = Button(_("Cancel"))
         self["key_green"] = Button(_("Save"))
@@ -96,6 +96,12 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
             "blue": self.keyPositioner,
             "yellow": self.resetTimer
         }, -2)
+
+    def pinEntered(self, result):
+        if result is None:
+            self.cancel()
+        elif not result:
+            self.session.openWithCallback(self.cancel, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR)
            
     def keyPositioner(self):
         self.session.open(KiddyTimerPositioner)

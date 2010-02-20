@@ -203,6 +203,7 @@ class KiddyTimer():
                 self.dialog.hide()
 
     def calculateTimer(self):
+        self.stopLoop()
         if self.dialogEnabled == True:
             odtEnd = time.mktime(time.localtime())
             iDiff = odtEnd - time.mktime(self.pluginStartTime)
