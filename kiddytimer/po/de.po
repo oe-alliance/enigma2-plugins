@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KiddyTimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 13:22+0100\n"
+"POT-Creation-Date: 2010-02-20 20:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: \n"
@@ -41,52 +41,61 @@ msgstr ""
 msgid "Saturday"
 msgstr ""
 
-#: ..\src/KTmain.py:28
-#: ..\src/KTmain.py:30
+#: ..\src/KTmain.py:38
+#: ..\src/KTmain.py:40
 msgid "??:??"
 msgstr "??:??"
 
-#: ..\src/KTmain.py:110
+#: ..\src/KTmain.py:120
 msgid "Do you want to start the kiddytimer- plugin now."
 msgstr "Wollen Sie das KiddyTimer- Plugin jetzt starten?"
 
-#: ..\src/KTmain.py:126
+#: ..\src/KTmain.py:137
 msgid "Please enter the correct pin code"
 msgstr "Bitte geben Sie den korrekten pin code ein"
 
-#: ..\src/KTmain.py:126
+#: ..\src/KTmain.py:137
 msgid "Enter pin code"
 msgstr "Pin code eingeben"
 
-#: ..\src/KTmain.py:263
+#: ..\src/KTmain.py:286
 msgid "Please select your KiddyTimer- option"
 msgstr "Bitte wählen Sie Ihre KiddyTimer- Option"
 
-#: ..\src/KTmain.py:269
+#: ..\src/KTmain.py:292
 msgid "Stop KiddyTimer (this session only)"
 msgstr "KiddyTimer stoppen (nur diese Session)"
 
-#: ..\src/KTmain.py:270
+#: ..\src/KTmain.py:293
 msgid "Increase remaining time"
 msgstr "Verbleibende Zeit erhöhen"
 
-#: ..\src/KTmain.py:271
+#: ..\src/KTmain.py:294
 msgid "Decrease remaining time"
 msgstr "Verbleibende Zeit verringern"
 
-#: ..\src/KTmain.py:273
+#: ..\src/KTmain.py:295
+msgid "Set remaining time"
+msgstr "Verbleibende Zeit setzen"
+
+#: ..\src/KTmain.py:297
 msgid "Start KiddyTimer"
 msgstr "KiddyTimer starten"
 
-#: ..\src/KTmain.py:274
+#: ..\src/KTmain.py:298
+#: ..\src/KTmain.py:302
+msgid "Enable KiddyTimer for x minutes"
+msgstr "KiddyTimer für x Minuten aktivieren"
+
+#: ..\src/KTmain.py:299
 msgid "Disable KiddyTimer"
 msgstr "KiddyTimer deaktivieren"
 
-#: ..\src/KTmain.py:276
+#: ..\src/KTmain.py:301
 msgid "Enable KiddyTimer"
 msgstr "KiddyTimer aktivieren"
 
-#: ..\src/KTmain.py:297
+#: ..\src/KTmain.py:332
 msgid "Invalid selection"
 msgstr "Ungültige Auswahl"
 

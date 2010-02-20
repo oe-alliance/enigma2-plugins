@@ -15,6 +15,16 @@ import KTglob
 import NavigationInstance
 import time
 
+PARAM_DIALOG = 0
+PARAM_STOPTIMER = 1
+PARAM_STARTTIMER = 2
+PARAM_DISABLETIMER = 3
+PARAM_ENABLETIMER = 4
+PARAM_INCREASETIMER = 5
+PARAM_DECREASETIMER = 6
+PARAM_SETTIMER = 7
+PARAM_ENABLETIMERONCE = 8
+
 class KiddyTimerScreen(Screen):    
 
     def __init__(self, session):
@@ -70,7 +80,7 @@ class KiddyTimer():
         self.iServiceReference = None
         self.curImg = 0
                     
-        self.loopTimerStep = 10000
+        self.loopTimerStep = 1000
         self.loopTimer = eTimer()
         self.loopTimer.callback.append(self.calculateTimer)
 
@@ -118,7 +128,8 @@ class KiddyTimer():
                 self.dialog = self.session.instantiateDialog(KiddyTimerScreen)
                 self.dialog.hide()
         else:
-            self.askForPassword(self.pinEnteredDialog)
+            self.callbackParameter = PARAM_DIALOG
+            self.askForPassword(self.pinEntered)
                                        
         self.calculateTimer()
 
@@ -127,55 +138,67 @@ class KiddyTimer():
     
     def getTriesEntry(self):
         return config.ParentalControl.retries.setuppin
-        
-    def pinEnteredDialog(self, result):
-        if result is None:
-            pass
-        elif not result:
-            pass
-        else:
-            self.setDialogStatus( False )        
-    
-    def pinEnteredDesactivation(self, result):
-        if result is None:
-            pass
-        elif not result:
-            pass
-        else:
-            config.plugins.KiddyTimer.enabled.value = False
-            config.plugins.KiddyTimer.enabled.save()
-            self.stopMe()
-    
-    def pinEnteredIncreaseRemainingTime(self, result):
-        if result is None:
-            pass
-        elif not result:
-            pass
-        else:
-            self.session.openWithCallback(self.increaseRemainingCallback, MinuteInput)
 
+    def pinEntered(self, result):
+        if result is None:
+            pass
+        elif not result:
+            pass
+        else:
+            if self.callbackParameter == PARAM_DIALOG:
+                self.setDialogStatus( False )        
+            elif self.callbackParameter == PARAM_DISABLETIMER:
+                config.plugins.KiddyTimer.enabled.value = False
+                config.plugins.KiddyTimer.enabled.save()
+                self.stopMe()                
+            elif self.callbackParameter == PARAM_INCREASETIMER:
+                self.session.openWithCallback(self.increaseRemainingCallback, MinuteInput)
+            elif self.callbackParameter == PARAM_SETTIMER:
+                self.session.openWithCallback(self.setRemainingCallback, MinuteInput)
+            elif self.callbackParameter == PARAM_ENABLETIMERONCE:
+                self.session.openWithCallback(self.setRemainingOnceCallback, MinuteInput)
+                
     def increaseRemainingCallback(self, iMinutes):
         iSeconds = iMinutes * 60
-        self.lastSavedRemainingTime += iSeconds
-        if self.lastSavedRemainingTime > self.currentDayTime:
-            self.lastSavedRemainingTime = self.currentDayTime
-        self.calculateTimer()
+        iSeconds += self.lastSavedRemainingTime 
+        self.setRemainingTime(iSeconds)
 
     def decreaseRemainingCallback(self, iMinutes):
         iSeconds = iMinutes * 60
-        self.lastSavedRemainingTime -= iSeconds
+        iSeconds = self.lastSavedRemainingTime - iSeconds
+        self.setRemainingTime(iSeconds)
+
+    def setRemainingCallback(self, iMinutes):
+        iSeconds = iMinutes * 60
+        self.resetTimer(setTime=iSeconds)
+        self.calculateTimer()
+        
+    def setRemainingOnceCallback(self, iMinutes):
+        iSeconds = iMinutes * 60
+        if iSeconds > 0:
+            self.enabled = True
+            self.resetTimer(setTime=iSeconds)
+            self.activationCallback(True)
+        
+    def setRemainingTime(self, iSeconds):
+        self.lastSavedRemainingTime = iSeconds
+        if self.lastSavedRemainingTime > self.currentDayTime:
+            self.currentDayTime = self.lastSavedRemainingTime
         if self.lastSavedRemainingTime < 0:
             self.lastSavedRemainingTime = 0
         self.calculateTimer()
-
+        
     def startLoop(self):
         self.loopTimer.start(self.loopTimerStep,1)
     
     def stopLoop(self):
         self.loopTimer.stop()
     
-    def resetTimer(self):
-        iDayTime = KTglob.getSecondsFromClock( config.plugins.KiddyTimer.dayTimes[self.dayNr].timeValue.getValue() )
+    def resetTimer(self,**kwargs):
+        if "setTime" in kwargs.keys():
+            iDayTime = kwargs["setTime"]
+        else:            
+            iDayTime = KTglob.getSecondsFromClock( config.plugins.KiddyTimer.dayTimes[self.dayNr].timeValue.getValue() )
         self.currentDayTime = iDayTime
         
         self.lastSavedRemainingTime = self.currentDayTime
@@ -266,33 +289,45 @@ class KiddyTimer():
         keyList = []
         if config.plugins.KiddyTimer.enabled.value:
             if self.dialogEnabled:
-                keyList.append((_("Stop KiddyTimer (this session only)"),1))
-                keyList.append((_("Increase remaining time"),5))
-                keyList.append((_("Decrease remaining time"),6))
+                keyList.append((_("Stop KiddyTimer (this session only)"),PARAM_STOPTIMER))
+                keyList.append((_("Increase remaining time"),PARAM_INCREASETIMER))
+                keyList.append((_("Decrease remaining time"),PARAM_DECREASETIMER))
+                keyList.append((_("Set remaining time"),PARAM_SETTIMER))
             else:
-                keyList.append((_("Start KiddyTimer"),2))
-            keyList.append((_("Disable KiddyTimer"),3))
+                keyList.append((_("Start KiddyTimer"),PARAM_STARTTIMER))
+            keyList.append((_("Enable KiddyTimer for x minutes"),PARAM_ENABLETIMERONCE))
+            keyList.append((_("Disable KiddyTimer"),PARAM_DISABLETIMER))
         else:
-            keyList.append((_("Enable KiddyTimer"),4))
+            keyList.append((_("Enable KiddyTimer"),PARAM_ENABLETIMER))
+            keyList.append((_("Enable KiddyTimer for x minutes"),PARAM_ENABLETIMERONCE))
         return keyList
-    
+        
     def DoSelectionExtensionsMenu(self,answer):
+        self.callbackParam = -1
         if answer is None:
             pass
-        elif answer[1] == 3:
-            self.askForPassword(self.pinEnteredDesactivation)
-        elif  answer[1] == 1:
+        elif answer[1] == PARAM_DISABLETIMER:
+            self.callbackParameter = PARAM_DISABLETIMER
+            self.askForPassword(self.pinEntered)
+        elif  answer[1] == PARAM_STOPTIMER:
             self.activationCallback(False)
-        elif  answer[1] == 2:
+        elif  answer[1] == PARAM_STARTTIMER:
             self.activationCallback(True)
-        elif  answer[1] == 4:
+        elif  answer[1] == PARAM_ENABLETIMER:
             config.plugins.KiddyTimer.enabled.value = True
             config.plugins.KiddyTimer.enabled.save()
             self.gotSession(self.session)
-        elif answer[1] ==5:
-            self.askForPassword(self.pinEnteredIncreaseRemainingTime)
-        elif answer[1] ==6:
+        elif answer[1] == PARAM_INCREASETIMER:
+            self.callbackParameter = PARAM_INCREASETIMER
+            self.askForPassword(self.pinEntered)
+        elif answer[1] == PARAM_DECREASETIMER:
             self.session.openWithCallback(self.decreaseRemainingCallback, MinuteInput)
+        elif answer[1] == PARAM_SETTIMER:
+            self.callbackParameter = PARAM_SETTIMER
+            self.askForPassword(self.pinEntered)
+        elif answer[1] == PARAM_ENABLETIMERONCE:
+            self.callbackParameter = PARAM_ENABLETIMERONCE
+            self.askForPassword(self.pinEntered)
         else:
             self.session.open(MessageBox,_("Invalid selection"), MessageBox.TYPE_ERROR, 5)
 
