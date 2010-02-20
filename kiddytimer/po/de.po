@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KiddyTimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-16 01:26+0100\n"
+"POT-Creation-Date: 2010-02-20 13:22+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: \n"
@@ -58,42 +58,42 @@ msgstr "Bitte geben Sie den korrekten pin code ein"
 msgid "Enter pin code"
 msgstr "Pin code eingeben"
 
-#: ..\src/KTmain.py:262
+#: ..\src/KTmain.py:263
 msgid "Please select your KiddyTimer- option"
 msgstr "Bitte wählen Sie Ihre KiddyTimer- Option"
 
-#: ..\src/KTmain.py:268
+#: ..\src/KTmain.py:269
 msgid "Stop KiddyTimer (this session only)"
 msgstr "KiddyTimer stoppen (nur diese Session)"
 
-#: ..\src/KTmain.py:269
+#: ..\src/KTmain.py:270
 msgid "Increase remaining time"
 msgstr "Verbleibende Zeit erhöhen"
 
-#: ..\src/KTmain.py:270
+#: ..\src/KTmain.py:271
 msgid "Decrease remaining time"
 msgstr "Verbleibende Zeit verringern"
 
-#: ..\src/KTmain.py:272
+#: ..\src/KTmain.py:273
 msgid "Start KiddyTimer"
 msgstr "KiddyTimer starten"
 
-#: ..\src/KTmain.py:273
+#: ..\src/KTmain.py:274
 msgid "Disable KiddyTimer"
 msgstr "KiddyTimer deaktivieren"
 
-#: ..\src/KTmain.py:275
+#: ..\src/KTmain.py:276
 msgid "Enable KiddyTimer"
 msgstr "KiddyTimer aktivieren"
 
-#: ..\src/KTmain.py:296
+#: ..\src/KTmain.py:297
 msgid "Invalid selection"
 msgstr "Ungültige Auswahl"
 
 #: ..\src/KTpositioner.py:19
 #: ..\src/KTpositioner.py:21
-#: ..\src/KTsetup.py:141
-#: ..\src/KTsetup.py:143
+#: ..\src/KTsetup.py:147
+#: ..\src/KTsetup.py:149
 msgid "01:00"
 msgstr "01:00"
 
@@ -123,7 +123,7 @@ msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Version: %(version)s"
 
 #: ..\src/KTsetup.py:80
-#: ..\src/KTsetup.py:106
+#: ..\src/KTsetup.py:112
 #, python-format
 msgid "Remaining time: %s"
 msgstr "Verbleibende Zeit: %s"
@@ -148,6 +148,10 @@ msgstr "Zurücksetzen"
 #: ..\src/KTsetup.py:87
 msgid "Move clock"
 msgstr "Pos.ändern"
+
+#: ..\src/KTsetup.py:104
+msgid "The pin code you entered is wrong."
+msgstr "Der eingegebene PIN-Code ist falsch"
 
 #: ..\src/MovableScreen.py:17
 #: ..\src/MovableScreen.py:24
