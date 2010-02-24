@@ -21,7 +21,10 @@ from urllib2 import quote
 #It IS used (dynamically)
 from WebScreens import *
 #DO NOT REMOVE THIS IMPORT
-		
+
+
+global screen_cache
+screen_cache = {}
 
 # The classes and Function in File handle all ScreenPage-based requests
 # ScreenPages use enigma2 standard functionality to bring contents to a webfrontend
