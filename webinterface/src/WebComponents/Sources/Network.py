@@ -22,10 +22,15 @@ class Network(Source):
 			self.iface = "ath0"
 
 	def ConvertIP(self, list):
-		if(len(list) == 4):
-			retstr = "%s.%s.%s.%s" % (list[0], list[1], list[2], list[3])
-		else:
+		retstr = None
+		
+		if list != None:
+			if(len(list) == 4):
+				retstr = "%s.%s.%s.%s" % (list[0], list[1], list[2], list[3])
+		
+		if retstr is None:
 			retstr = "0.0.0.0"
+			
 		return retstr
 
 	def getInterface(self):
