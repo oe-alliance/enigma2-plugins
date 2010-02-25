@@ -11,19 +11,15 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Screens.InfoBarGenerics import InfoBarAudioSelection
 from __init__ import _
 
-class AC3LipSync(Screen, HelpableScreen, MovableScreen, InfoBarAudioSelection):
+class AC3LipSync(Screen, HelpableScreen, MovableScreen):
 
     def __init__(self, session, plugin_path):
         Screen.__init__(self, session)
         self.onShow.append(self.__onShow)
         self.skin = SKIN
         self.skin_path = plugin_path
-
-        #Initialisiere Infobargenerics
-        InfoBarAudioSelection.__init__(self)
 
         # Configuration values
         self.upperBound = int(config.plugins.AC3LipSync.outerBounds.getValue())
@@ -69,7 +65,6 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen, InfoBarAudioSelection):
         # Buttons
         self["key_red"] = Label(_("Cancel"))
         self["key_green"] = Label(_("OK"))
-        self["key_yellow"] = Label(_("Switch audio"))
         self["key_blue"] = Label(_("Save to key"))
 
         # Actions
@@ -84,7 +79,6 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen, InfoBarAudioSelection):
             "down":     (self.keyDown,              _("Decrease delay")),
             "red":      (self.keyCancel,            _("Discard changes and close plugin")),
             "green":    (self.keyOk,                _("Save values and close plugin")),
-            "yellow":   (self.keyAudioSelection,    _("Select channel audio")),
             "blue":     (self.menuSaveDelayToKey,    _("Save current delay to key")),
             "1":        (self.keyNumberRelative,    _("Decrease delay by %i ms (can be set)")%self.stepSize["1"]),
             "3":        (self.keyNumberRelative,    _("Increase delay by %i ms (can be set)")%self.stepSize["3"]),
@@ -190,9 +184,6 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen, InfoBarAudioSelection):
         self.setSliderInfo(iSliderValue)
         self.AC3delay.setSystemDelay(sAudio, self.currentValue[sAudio], True)        
 
-    def keyAudioSelection(self):
-        self.audioSelection()
-
     def keyOk(self):
         self.close()
 
@@ -241,13 +232,6 @@ class AC3LipSync(Screen, HelpableScreen, MovableScreen, InfoBarAudioSelection):
         sPCMDelay = _("%i ms") %self.AC3delay.systemDelay[PCM]
 
         self["ServiceInfo"].setText(sActiveAudio)
-
-    def audioSelected(self, audio):
-        InfoBarAudioSelection.audioSelected(self, audio)
-        if audio is not None:
-            self.AC3delay.getAudioInformation()
-            self.setChannelInfoText()
-            self.setActiveSlider()
             
 class AC3SetCustomValue:
     def __init__(self, session, iDelay, keyStep):

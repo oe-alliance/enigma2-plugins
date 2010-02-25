@@ -5,7 +5,7 @@ PCMGLOB = "PCMGLOB"
 AC3PCM = (AC3,PCM,AC3GLOB,PCMGLOB)
 
 PLUGIN_BASE = "AudioSync"
-PLUGIN_VERSION = "1.1"
+PLUGIN_VERSION = "1.2"
 
 MOVEPOSITIONSTEP = 10
        
@@ -23,14 +23,11 @@ SKIN = """
             <widget name="ServiceInfo" zPosition="4" position="90,15" size="200,20" font="Regular;14" backgroundColor="#232323" foregroundColor="#ffffff" transparent="1" />
             <ePixmap pixmap="~/img/key-green.png" position="290,15" zPosition="5" size="20,20" transparent="1" alphatest="on" />
             <ePixmap pixmap="~/img/key-red.png" position="290,40" zPosition="5" size="20,20" transparent="1" alphatest="on" />
-            <ePixmap pixmap="~/img/key-yellow.png" position="400,15" zPosition="5" size="20,20" transparent="1" alphatest="on" />
-            <ePixmap pixmap="~/img/key-blue.png" position="400,40" zPosition="5" size="20,20" transparent="1" alphatest="on" />
+            <ePixmap pixmap="~/img/key-blue.png" position="400,15" zPosition="5" size="20,20" transparent="1" alphatest="on" />
             <widget name="key_green" position="315,15" zPosition="4" size="85,20"
                 font="Regular;14" valign="center" halign="left" backgroundColor="#232323" foregroundColor="#ffffff" transparent="1"/>
             <widget name="key_red" position="315,40" zPosition="4" size="85,20"
                 font="Regular;14" valign="center" halign="left" backgroundColor="#232323" foregroundColor="#ffffff" transparent="1"/>
-            <widget name="key_yellow" position="425,15" zPosition="4" size="160,20"
-                font="Regular;14" valign="center" halign="left" backgroundColor="#232323" foregroundColor="#ffffff" transparent="1" />
-            <widget name="key_blue" position="425,40" zPosition="4" size="160,20"
+            <widget name="key_blue" position="425,15" zPosition="4" size="160,20"
                 font="Regular;14" valign="center" halign="left" backgroundColor="#232323" foregroundColor="#ffffff" transparent="1" />
         </screen>"""        
