@@ -152,7 +152,9 @@ function EPGList(xml){
 	// parsing values from xml-element
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
-	} catch (e) { debug("[EPGList] parsing Error");}
+	} catch (e) {
+		notify("Error Parsing EPG: " + e, false);
+	}
 	
 	this.getArray = function(sortbytime){
 		debug("[EPGList] Sort by time "+sortbytime);
@@ -604,7 +606,7 @@ function DeviceInfo(xml){
 					'model' : model
 			};					
 		} catch (e) {
-			debug("[incomingDeviceInfo] error parsing NIM data: " + e);
+			notify("Error parsing frontend data: " + e);
 		}
 	}
 	
@@ -624,7 +626,7 @@ function DeviceInfo(xml){
 					'free'		: free
 			};
 		} catch(e){
-			debug("[incomingDeviceInfo] error parsing HDD data: " + e);
+			notify("Error parsing HDD data: " + e, false);			
 		}
 	}
 	
@@ -649,7 +651,7 @@ function DeviceInfo(xml){
 					'netmask' : netmask
 			};
 		} catch (e) {
-			debug("[incomingDeviceInfo] error parsing NIC data: " + e);
+			notify("Error parsing NIC data: " + e, false);			
 		}
 	}
 	
@@ -662,7 +664,7 @@ function DeviceInfo(xml){
 				'webifversion': xml.getElementsByTagName('e2webifversion').item(0).firstChild.data			
 		};
 	} catch (e) {
-		debug("[incomingDeviceInfo] parsing Error" + e);
+		notify("Error parsing deviceinfo data: " + e, false);		
 	}
 	
 	this.json = {
@@ -682,7 +684,7 @@ function SimpleXMLResult(xml){
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2simplexmlresult").item(0);
 	} catch (e) {
-		debug("[SimpleXMLResult] parsing e2simplexmlresult" + e);
+		notify("Error parsing e2simplexmlresult: " + e, false);
 	}
 
 	this.state = getNodeContent(this.xmlitems, 'e2state', 'False');
@@ -708,8 +710,9 @@ function SimpleXMLList(xml, tagname){
 	try{
 		this.xmlitems = xml.getElementsByTagName(tagname);
 	} catch (e) {
-		debug("[SimpleXMLList] parsing e2simplexmllist"+e);
+		notify("Error parsing SimpleXMLList: " + e, false);	
 	}
+	
 	this.xmllist = [];
 	
 	this.getList = function(){
@@ -748,8 +751,9 @@ function Settings(xml){
 		this.xmlitems = xml.getElementsByTagName("e2settings").item(0).getElementsByTagName("e2setting");
 		debug("[Settings] Number of items: " + this.xmlitems);
 	} catch (e) {
-		debug("[Settings] parsing Error");
+		notify("Error parsing Settings: " + e, false);	
 	}	
+	
 	this.settings = [];
 	
 	this.getArray = function(){
@@ -771,7 +775,7 @@ function FileList(xml){
 	try{
 		this.xmlitems = xml.getElementsByTagName("e2filelist").item(0).getElementsByTagName("e2file");
 	} catch (e) {
-		debug("[FileList] parsing Error");
+		notify("Error parsing FileList: " + e, false);
 	}
 	this.filelist = [];
 

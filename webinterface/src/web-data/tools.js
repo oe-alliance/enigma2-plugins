@@ -130,7 +130,7 @@ function notify(text, state){
 
 		set('notification', "<div>"+text+"</div>");
 		notif.appear({duration : 0.5, to: 0.9 });
-		hideNotifierTimeout = setTimeout(hideNotifier, 7500);
+		hideNotifierTimeout = setTimeout(hideNotifier, 10000);
 	}
 }
 
@@ -437,6 +437,11 @@ function openDebug(){
 	debugWin = openPopupPage("Debug", uri, 500, 300);
 }
 
+function requestFailed(transport){
+	var notifText = "Request failed for:  " + transport.request.url + "<br>Status: " + transport.status + " " + transport.statusText;
+	notify(notifText, false);
+}
+
 function doRequest(url, readyFunction){
 	requestStarted();
 	var request = '';
@@ -446,16 +451,19 @@ function doRequest(url, readyFunction){
 		try{
 			request = new Ajax.Request(url,
 					{
-				asynchronous: true,
-				method: 'GET',
-				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
-				onException: function(o,e){ throw(e); },				
-				onSuccess: function (transport, json) {						
-					if(typeof(readyFunction) != "undefined"){
-						readyFunction(transport);
-					}
-				},
-				onComplete: requestFinished 
+						asynchronous: true,
+						method: 'GET',
+						requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
+						onException: function(o,e){ throw(e); },				
+						onSuccess: function (transport, json) {						
+							if(typeof(readyFunction) != "undefined"){
+								readyFunction(transport);
+							}
+						},
+						onFailure: function(transport){
+							requestFailed(transport);
+						},
+						onComplete: requestFinished 
 					});
 		} catch(e) {}
 	} else { //we're on gears!
@@ -463,17 +471,18 @@ function doRequest(url, readyFunction){
 			request = google.gears.factory.create('beta.httprequest');
 			request.open('GET', url);
 
-			if( typeof(readyFunction) != "undefined" ){
-				request.onreadystatechange = function(){				
-					if(request.readyState == 4){
-						if(request.status == 200){			
+
+			request.onreadystatechange = function(){				
+				if(request.readyState == 4){
+					if(request.status == 200){
+						if( typeof(readyFunction) != "undefined" ){
 							readyFunction(request);
-						} else {
-							//we COULD do some error handling here
 						}
+					} else {
+						requestFailed(transport);
 					}
-				};
-			}
+				}
+			};
 			request.send();
 		} catch(e) {}
 	}
