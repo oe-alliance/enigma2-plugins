@@ -15,9 +15,10 @@
 	<!-- External libs
 	<script type="text/javascript" src="/web-data/lib/prototype-1.6.1.js"></script>
 	<script type="text/javascript" src="/web-data/lib/scriptaculous.js?load=effects"></script>
-	<script type="text/javascript" src="/web-data/lib/shadedborder.js"></script>
+	<script type="text/javascript" src="/web-data/lib/curvycorners.js"></script>
 	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
 	 -->
+ 
 	<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>
 	
 	<!-- userprefs Object -->
@@ -188,42 +189,15 @@
 			</div>	
 		</div>
 	</div>
-	<script language="javascript" type="text/javascript">			
-		/****************
-		Rounded Corners 
-		*****************/
-		var menuBorder = RUZEE.ShadedBorder.create({ corner:5, border: 1 });
-
-		var buttons = $('mainMenu').getElementsByTagName("li");
-
-		for (var i=0; i < buttons.length; ++i) {			
-			menuBorder.render(buttons[i]);
-		}
-
-		var bannerBorder = RUZEE.ShadedBorder.create({corner:5, shadow:10});
-		bannerBorder.render('banner');
-		bannerBorder.render('current');
-
-		var contentBorder = RUZEE.ShadedBorder.create({corner:5, border: 2, shadow:10});
-		contentBorder.render('nav');
-		contentBorder.render('navSearch');
-		contentBorder.render('navVolume');
-		contentBorder.render('content');
-
-		var hdBorder = RUZEE.ShadedBorder.create({corner:5, edges:"tlr"});
-		hdBorder.render('navHd');
-		hdBorder.render('searchHd');
-		hdBorder.render('volHd');
-		hdBorder.render('contentHd');
-		
+	<script language="javascript" type="text/javascript">	
 		function setNavHd(content){
 			set("navHd", '<div style="background-color: #000">'+content+'</div>');
-			hdBorder.render('navHd');
+			/*hdBorder.render('navHd');*/
 		}
 		
 		function setContentHd(content){
 			set("contentHd", '<div style="background-color: #000">'+content+'</div>');
-			hdBorder.render('contentHd');
+			/*hdBorder.render('contentHd');*/
 		}
 		
 		function getAjaxLoad(){
