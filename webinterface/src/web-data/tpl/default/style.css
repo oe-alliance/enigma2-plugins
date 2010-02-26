@@ -144,10 +144,10 @@
 	#mainMenu{
 		background-color: #485052;
 		text-align: center;
-		overflow:hidden; 
+		overflow:hidden;
 		background: #000; 
-		margin: 0; 
-		padding: 0; 
+		margin: 0;
+		padding: 0;
 		width: 940px;
 	}
 
@@ -157,15 +157,15 @@
 		width: 130px;
 		height: 21px;
 		margin-left: 2px;
+		background:#485052; 
+		margin-top: 6px;
+		margin-bottom: 0px;
 		
 		/* Do rounding (native in Firefox and Safari) */
     	-webkit-border-radius: 5px;
     	-moz-border-radius: 5px;		
 	}
 	
-	#mainMenu li{ 
-		background:#485052; 
-	}
 	#mainMenu a{ display:block; padding: 1px; }
 	#mainMenu li:hover, #mainMenu li:hover{ background: #AAA; }
 
