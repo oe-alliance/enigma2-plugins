@@ -153,6 +153,36 @@
 			</div>				
 		</div>	
 	</div>
+	
+	<script language="JavaScript" type="Text/Javascript">
+	<!--
+	function addtoFavorites(){ 
+		var url = location.href.replace("#", ""); 
+		var title = "Dreambox WebTV"; 
+		
+		if (window.sidebar){
+			// firefox
+			window.sidebar.addPanel(title, url, "");
+	
+		} else if(window.opera && window.print){
+			// opera
+			var elem = document.createElement('a');
+			elem.setAttribute('href', url);
+			elem.setAttribute('title', title);
+			elem.setAttribute('rel', 'sidebar');
+			elem.click();
+
+		} else if(document.all){
+			// ie
+			window.external.AddFavorite(url,title);
+		}
+	}
+	-->
+	</script>
+	<div>
+		<a style="color: #FFF;font-size: 12px; font-weight: normal;" href="#" onClick="addtoFavorites()">Add to Favorites</a>
+	</div>
+	
 	<script language="javascript" type="text/javascript">			
 		initWebTv();
 	</script>
