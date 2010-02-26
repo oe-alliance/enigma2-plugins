@@ -343,8 +343,8 @@ function saveSettings(){
 		}		
 	}
 	
-	var updateCurrentInterval = $F('updateCurrentInterval');
-	if( isNaN(updateCurrentInterval) || parseNr(updateCurrentInterval) < 10000){
+	var updateCurrentInterval = parseNr( $F('updateCurrentInterval') ) * 1000;
+	if( updateCurrentInterval < 10000){
 		updateCurrentInterval = 120000;
 	}
 	
@@ -355,8 +355,8 @@ function saveSettings(){
 		startUpdateCurrentPoller();
 	}
 	
-	var updateBouquetInterval = $F('updateBouquetInterval');
-	if( isNaN(updateBouquetInterval) || parseNr(updateBouquetInterval) < 60000){
+	var updateBouquetInterval = parseNr( $F('updateBouquetInterval') )  * 1000;
+	if( updateBouquetInterval < 60000){
 		updateBouquetInterval = 300000;
 	}
 	
@@ -393,7 +393,7 @@ function renderTpl(tpl, data, domElement) {
 function fetchTpl(tplName, callback){
 	if(typeof(templates[tplName]) == "undefined") {
 		var url = URL.tpl+tplName+".htm";
-
+		
 		doRequest(
 				url, 
 				function(transport){
@@ -421,7 +421,7 @@ function incomingProcessTpl(request, data, domElement, callback){
 
 function processTpl(tplName, data, domElement, callback){
 	var url = URL.tpl+tplName+".htm";
-
+	
 	doRequest(url, 
 			function(transport){
 		incomingProcessTpl(transport, data, domElement, callback);
@@ -448,7 +448,7 @@ function doRequest(url, readyFunction){
 					{
 				asynchronous: true,
 				method: 'GET',
-				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'no-cache', 'Cache-Control', 'no-store', 'Expires', '0'],
+				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
 				onException: function(o,e){ throw(e); },				
 				onSuccess: function (transport, json) {						
 					if(typeof(readyFunction) != "undefined"){
@@ -1233,8 +1233,8 @@ function showSettings(){
 		debugChecked = 'checked';
 	}
 	
-	var updateCurrentInterval = userprefs.data.updateCurrentInterval;
-	var updateBouquetInterval = userprefs.data.updateBouquetInterval;
+	var updateCurrentInterval = userprefs.data.updateCurrentInterval / 1000;
+	var updateBouquetInterval = userprefs.data.updateBouquetInterval / 1000;
 	
 
 	data = {'debug' : debugChecked,
