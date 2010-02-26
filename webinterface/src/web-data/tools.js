@@ -1654,7 +1654,9 @@ function openWebTV(){
 	window.open('/web-data/streaminterface.html', 'WebTV', 'scrollbars=no, width=800, height=730');
 }
 
-
+function clearSearch(){
+	$('epgSearch').value = "";
+}
 
 function updateItems(){
 	getCurrent();

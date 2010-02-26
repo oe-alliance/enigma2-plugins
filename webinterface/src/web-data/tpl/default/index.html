@@ -5,6 +5,8 @@
 
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	
 	<title>Dreambox WebControl</title>
 	
 	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
@@ -173,9 +175,9 @@
 				<div id="navSearch">
 					<div id="searchHd" class="header"><div>EPG-Search</div></div>
 					<div class="boxContent">
-						<form action="" onSubmit="loadEPGBySearchString(document.getElementById('epgSearch').value); return false;">
-							<input type="text" id="epgSearch" onfocus="this.value=''" value="Search EPG"/>
-							<input style="vertical-align:middle" type="image" src="/web-data/img/search.png" alt="search..." title="Search EPG for term">
+						<form action="" onSubmit="loadEPGBySearchString($('epgSearch').value); return false;">
+							<input type="text" id="epgSearch" onfocus="this.value=''" value="Search EPG" />
+							<img style="vertical-align:middle" src="/web-data/img/cross.png" alt="clear..." title="Clear Search" onClick="clearSearch()" />
 						</form>						
 					</div>
 				</div>
