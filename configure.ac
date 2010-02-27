@@ -146,6 +146,7 @@ mediadownloader/po/Makefile
 mediadownloader/src/Makefile
 
 merlinmusicplayer/Makefile
+merlinmusicplayer/meta/Makefile
 merlinmusicplayer/src/Makefile
 merlinmusicplayer/src/images/Makefile
 merlinmusicplayer/src/merlinmp3player/Makefile
