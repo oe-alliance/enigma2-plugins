@@ -1656,6 +1656,7 @@ function openWebTV(){
 
 function clearSearch(){
 	$('epgSearch').value = "";
+	$('epgSearch').focus();
 }
 
 function updateItems(){
