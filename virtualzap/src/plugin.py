@@ -120,7 +120,7 @@ def setup(session,**kwargs):
 	session.open(VirtualZapConfig)
 
 def main(session,**kwargs):
-		session.open(VirtualZap, kwargs["servicelist"])
+	session.open(VirtualZap, kwargs["servicelist"])
 
 class VirtualZap(Screen):
 	sz_w = getDesktop(0).size().width()
@@ -225,6 +225,7 @@ class VirtualZap(Screen):
 		},-2)
 		self["actions2"] = NumberActionMap(["NumberActions"],
 		{
+			"0": self.swap,
 			"1": self.keyNumberGlobal,
 			"2": self.keyNumberGlobal,
 			"3": self.keyNumberGlobal,
@@ -240,7 +241,6 @@ class VirtualZap(Screen):
 		if self.pipAvailable:
 			# activate PiP support
 			self["video"] = VideoWindow(fb_width = getDesktop(0).size().width(), fb_height = getDesktop(0).size().height())
-			self.pip = None
 			self.currentPiP = ""
 		# this is the servicelist from ChannelSelectionBase
 		self.servicelist = servicelist
@@ -469,7 +469,26 @@ class VirtualZap(Screen):
 		# update infos, no matter if service is none or not
 		self.updateInfos()
 
-
+	def swap(self, number):
+		if self.pipAvailable:
+			# save old values for selecting it in servicelist after zapping
+			currentRef = self.curRef
+			currentBouquet = self.curBouquet
+			# we have to close PiP first, otherwise the service-display is freezed
+			self.pipservice = None
+			# zap and set new values for the new reference and bouquet
+			self.servicelist.zap()
+			self.curRef = ServiceReference(self.servicelist.getCurrentSelection())
+			self.curBouquet = self.servicelist.getRoot()
+			# select old values in servicelist
+			if currentBouquet != self.servicelist.getRoot():
+				self.servicelist.clearPath()
+				if self.servicelist.bouquet_root != currentBouquet:
+					self.servicelist.enterPath(self.servicelist.bouquet_root)
+				self.servicelist.enterPath(currentBouquet)
+			self.servicelist.setCurrentSelection(currentRef.ref)
+			# play old service in PiP
+			self.updateInfos()
 
 class VirtualZapConfig(Screen, ConfigListScreen):
 
