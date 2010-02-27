@@ -6,7 +6,7 @@
 								<td style="width:100%;">									
 									<table class="timerState${t.state} tListItemTable ${t.cssclass}" border="0" cellpadding="0" cellspacing="0">				
 										<tr class="tListHead">
-											<td colspan="4" rowspan="1" class="tListSName" title="${t.description}, ${t.descriptionextended}">
+											<td colspan="4" rowspan="1" class="tListSName" title="${t.description.escapeHTML()}, ${t.descriptionextended.escapeHTML()}">
 											${t.title} - {if t.description == ''} N/A {else} ${t.description} {/if} (${t.servicename})
 											</td>											
 										</tr>

@@ -99,35 +99,33 @@ class StreamSubServiceWebScreen(WebScreen):
 
 		self["StreamSubServices"] = SubServices(session, streamingScreens)
 
-class ServiceWebScreen(WebScreen):
+class ServiceListWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		from WebComponents.Sources.ServiceListRecursive import ServiceListRecursive
+		
 		from Components.Sources.ServiceList import ServiceList
 		from Screens.ChannelSelection import service_types_tv
-
+	
 		fav = eServiceReference(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
-		self["SwitchService"] = ServiceList(fav, command_func=self.zapTo, validate_commands=False)
 		self["ServiceList"] = ServiceList(fav, command_func=self.getServiceList, validate_commands=False)
-		self["ServiceListRecursive"] = ServiceListRecursive(session, func=ServiceListRecursive.FETCH)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
-
+		
 	def getServiceList(self, sRef):
-		self["ServiceList"].root = sRef
+		self["ServiceList"].root = sRef	
 
-	def zapTo(self, reftozap):
-		from Components.config import config
-		pc = config.ParentalControl.configured.value
-		if pc:
-			config.ParentalControl.configured.value = False
-		if config.plugins.Webinterface.allowzapping.value:
-			self.session.nav.playService(reftozap)
-		if pc:
-			config.ParentalControl.configured.value = pc
-		"""
-		switching config.ParentalControl.configured.value
-		ugly, but necessary :(
-		"""
+class ServiceListRecursiveWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		
+		from WebComponents.Sources.ServiceListRecursive import ServiceListRecursive
+		self["ServiceListRecursive"] = ServiceListRecursive(session, func=ServiceListRecursive.FETCH)
+
+class SwitchServiceWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		
+		from WebComponents.Sources.SwitchService import SwitchService
+		self["SwitchService"] = SwitchService(session)
 
 class ReadPluginListWebScreen(WebScreen):
 	def __init__(self, session, request):

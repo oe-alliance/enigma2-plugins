@@ -67,16 +67,17 @@
 
 	#banner{
 		width: 1000px;
-		height: 70px;
+		height: 67px;
 		background: #000;
 		padding-left: 5px;
 		margin-bottom: 8px;
-				
-		/*border: 1px solid #FFF;*/		
-		/* Do rounding (native in Firefox and Safari) */
-		border-radius: 5px;
+
+		
+		
+    	border-radius: 5px;
     	-webkit-border-radius: 5px;
     	-moz-border-radius: 5px;
+    	
     	
 	}
 	
@@ -125,9 +126,10 @@
 		padding-bottom: 1px;
 		margin-bottom: 8px;
 				
-		/* Do rounding (native in Firefox and Safari) */
+    	border-radius: 5px;
     	-webkit-border-radius: 5px;
-    	-moz-border-radius: 5px;
+    	-moz-border-radius: 5px;    	
+    	
 	}
 
 	#currentTable{
@@ -160,14 +162,25 @@
 		background:#485052; 
 		margin-top: 6px;
 		margin-bottom: 0px;
+		padding: 0px;
 		
-		/* Do rounding (native in Firefox and Safari) */
+		border-radius: 5px;
     	-webkit-border-radius: 5px;
     	-moz-border-radius: 5px;		
 	}
 	
-	#mainMenu a{ display:block; padding: 1px; }
-	#mainMenu li:hover, #mainMenu li:hover{ background: #AAA; }
+	#mainMenu a:hover, #mainMenu a:hover{ background: #AAA; }
+	#mainMenu li.hover, #mainMenu li.hover{ background: #AAA; }
+	
+	#mainMenu a{
+		display:block;
+		padding-top: 1px;
+		padding-bottom: 3px;
+				
+		border-radius: 5px;
+    	-webkit-border-radius: 5px;
+    	-moz-border-radius: 5px;
+	}
 
 /***************
  Upper Left Nav
@@ -185,7 +198,7 @@
 		padding-left: 5px;
 				
 		border: 2px solid #000;
-		/* Do rounding (native in Firefox and Safari) */
+		border-radius: 5px;
     	-webkit-border-radius: 5px;
     	-moz-border-radius: 5px;
 	}
@@ -217,8 +230,9 @@
 		height: 61px;
 		background: #FFF;
 		margin-top: 8px;
+		
 		border: 2px solid #000;
-		/* Do rounding (native in Firefox and Safari) */
+		border-radius: 5px;
     	-webkit-border-radius: 5px;
     	-moz-border-radius: 5px;
 	}
@@ -237,7 +251,7 @@
 		margin-top: 8px;
 		
 		border: 2px solid #000;
-		/* Do rounding (native in Firefox and Safari) */
+		border-radius: 5px;
     	-webkit-border-radius: 5px;
     	-moz-border-radius: 5px;
 	}
@@ -259,9 +273,9 @@
 		width: 833px;
 		min-height: 308px;
 		margin-left: 8px;
-		border: 2px solid #000;
 		
-		/* Do rounding (native in Firefox and Safari) */
+		border: 2px solid #000;		
+		border-radius: 5px;
     	-webkit-border-radius: 5px;
     	-moz-border-radius: 5px;
 	}
