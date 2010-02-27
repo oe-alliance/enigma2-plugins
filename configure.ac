@@ -14,6 +14,8 @@ if test x"${have_e2_includes}" = "xyes"; then
 	TUXBOX_APPS_DVB
 	TUXBOX_APPS_LIB_PKGCONFIG(ENIGMA2,enigma2)
 	TUXBOX_APPS_LIB_PKGCONFIG(SIGC,sigc++-1.2)
+	_TUXBOX_APPS_LIB_PKGCONFIG_OPTIONAL(GSTREAMER,gstreamer,HAVE_GSTREAMER)
+	_TUXBOX_APPS_LIB_PKGCONFIG_OPTIONAL(GSTREAMERPBUTILS,gstreamer-pbutils,HAVE_GSTSTREAMERPBUTILS)
 	AC_DEFINE(HAVE_E2_INCLUDES, 1,[Define if enigm2 includes are available])
 	CXXFLAGS="$CXXFLAGS -fno-rtti -fno-exceptions"
 	LDFLAGS="$LDFLAGS -pthread $PYTHON_LDFLAGS"
@@ -142,6 +144,12 @@ mediadownloader/Makefile
 mediadownloader/meta/Makefile
 mediadownloader/po/Makefile
 mediadownloader/src/Makefile
+
+merlinmusicplayer/Makefile
+merlinmusicplayer/src/Makefile
+merlinmusicplayer/src/images/Makefile
+merlinmusicplayer/src/merlinmp3player/Makefile
+
 
 meteoitalia/Makefile
 meteoitalia/meta/Makefile

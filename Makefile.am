@@ -25,6 +25,7 @@ SUBDIRS = \
 	letterbox \
 	logomanager \
 	mediadownloader \
+	merlinmusicplayer \
 	meteoitalia \
 	mosaic \
 	moviecut \
