@@ -24,11 +24,9 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Label import Label
 from enigma import RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, gFont, eListbox,ePoint, eListboxPythonMultiContent
-
 # merlin mp3 player
 import merlinmp3player
 ENIGMA_MERLINPLAYER_ID = 0x1014
-
 from Components.FileList import FileList
 from enigma import eServiceReference, eTimer
 from os import path as os_path, mkdir as os_mkdir, listdir as os_listdir, walk as os_walk
@@ -62,11 +60,21 @@ from mutagen.id3 import ID3
 from mutagen.easyid3 import EasyID3
 from mutagen.easymp4 import EasyMP4
 from mutagen.oggvorbis import OggVorbis
-import datetime
+from datetime import timedelta as datetime_timedelta
+from time import time
 from random import shuffle, randrange
 from Components.config import config, ConfigSubsection, ConfigDirectory, ConfigYesNo, ConfigInteger, getConfigListEntry, configfile
 from Components.ConfigList import ConfigListScreen
 from Tools.HardwareInfo import HardwareInfo
+
+from Components.SystemInfo import SystemInfo
+from enigma import eServiceCenter, getBestPlayableServiceReference
+from Components.VideoWindow import VideoWindow
+from ServiceReference import ServiceReference
+from Screens.EpgSelection import EPGSelection
+from Screens.EventView import  EventViewEPGSelect
+from enigma import ePoint, eEPGCache
+from Screens.InfoBarGenerics import NumberZap
 
 
 config.plugins.merlinmusicplayer = ConfigSubsection()
@@ -146,53 +154,63 @@ class PathToDatabase(Thread):
 			connection.text_factory = str
 			cursor = connection.cursor()
 			counter = 0
+			checkTime = 0
 			for root, subFolders, files in os_walk(self.__path):
 				if self.__cancel:
 					break
 				for filename in files:
 					if self.__cancel:
 						break
-					audio, isAudio, title, genre,artist,album,tracknr,track,date,length,bitrate = getID3Tags(root,filename)
-					if  audio:	
-						# 1. Artist
-						artistID = -1
-						cursor.execute("""SELECT artist_id FROM Artists WHERE artist = "%s";""" % (artist))
-						row = cursor.fetchone()
-						if row is None:
-								cursor.execute("""INSERT INTO Artists (artist) VALUES("%s");""" % (artist))
-								artistID = cursor.lastrowid
-						else:
-								artistID = row[0]
-						# 2. Album
-						albumID = -1
-						cursor.execute("""SELECT album_id FROM Album WHERE album_text = "%s";""" % (album))
-						row = cursor.fetchone()
-						if row is None:
-								cursor.execute("""INSERT INTO Album (album_text) VALUES("%s");""" % (album))
-								albumID = cursor.lastrowid
-						else:
-								albumID = row[0]
+					cursor.execute('SELECT song_id FROM Songs WHERE filename = "%s";' % os_path.join(root,filename))
+					row = cursor.fetchone()
+					if row is None:
+						audio, isAudio, title, genre,artist,album,tracknr,track,date,length,bitrate = getID3Tags(root,filename)
+						if  audio:	
+							# 1. Artist
+							artistID = -1
+							cursor.execute('SELECT artist_id FROM Artists WHERE artist = "%s";' % (artist.replace('"','""')))
 
-						# 3. Genre
-						genreID = -1		
-						cursor.execute("""SELECT genre_id FROM Genre WHERE genre_text = "%s";""" % (genre))
-						row = cursor.fetchone()
-						if row is None:
-								cursor.execute("""INSERT INTO Genre (genre_text) VALUES("%s");""" % (genre))
-								genreID = cursor.lastrowid
-						else:
-								genreID = row[0]
+							row = cursor.fetchone()
+							if row is None:
+									cursor.execute('INSERT INTO Artists (artist) VALUES("%s");' % (artist.replace('"','""')))
+									artistID = cursor.lastrowid
+							else:
+									artistID = row[0]
+							# 2. Album
+							albumID = -1
+							cursor.execute('SELECT album_id FROM Album WHERE album_text = "%s";' % (album.replace('"','""')))
+							row = cursor.fetchone()
+							if row is None:
+									cursor.execute('INSERT INTO Album (album_text) VALUES("%s");' % (album.replace('"','""')))
+									albumID = cursor.lastrowid
+							else:
+									albumID = row[0]
+
+							# 3. Genre
+							genreID = -1		
+							cursor.execute('SELECT genre_id FROM Genre WHERE genre_text = "%s";' % (genre.replace('"','""')))
+							row = cursor.fetchone()
+							if row is None:
+									cursor.execute('INSERT INTO Genre (genre_text) VALUES("%s");' % (genre.replace('"','""')))
+									genreID = cursor.lastrowid
+							else:
+									genreID = row[0]
 							
-						# 4. Songs
-						try:
-							cursor.execute("INSERT INTO Songs (filename,title,artist_id,album_id,genre_id,tracknumber, bitrate, length, track, date) VALUES(?,?,?,?,?,?,?,?,?,?);" , (os_path.join(root,filename),title,artistID,albumID,genreID, tracknr, bitrate, length, track, date))
-							self.__messages.push((THREAD_WORKING, _("%s\n added to database") % os_path.join(root,filename)))
-							mp.send(0)
-							counter +=1
-						except sqlite.IntegrityError:
-							self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root,filename)))
-							mp.send(0)
-						audio = None
+							# 4. Songs
+							try:
+								cursor.execute("INSERT INTO Songs (filename,title,artist_id,album_id,genre_id,tracknumber, bitrate, length, track, date) VALUES(?,?,?,?,?,?,?,?,?,?);" , (os_path.join(root,filename),title,artistID,albumID,genreID, tracknr, bitrate, length, track, date))
+								self.__messages.push((THREAD_WORKING, _("%s\n added to database") % os_path.join(root,filename)))
+								mp.send(0)
+								counter +=1
+							except sqlite.IntegrityError:
+								self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root,filename)))
+								mp.send(0)
+							audio = None
+					elif time() - checkTime >= 0.1: # update interval for gui
+						self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root,filename)))
+						mp.send(0)
+						checkTime = time()
+						
 			if not self.__cancel:
 				connection.commit()
 			cursor.close()  
@@ -364,14 +382,21 @@ def getID3Tags(root,filename):
 		isAudio = False
 	if audio:
 		title = audio.get('title', [filename])[0]
-		genre = audio.get('genre', ['n/a'])[0]
+		try:
+			# list index out of range workaround
+			genre = audio.get('genre', ['n/a'])[0]
+		except:
+			genre = "n/a"
 		artist = audio.get('artist', ['n/a'])[0]
 		album = audio.get('album', ['n/a'])[0]
-		tracknr = int(audio.get('tracknumber', ['-1'])[0].split("/")[0])
+		try:
+			tracknr = int(audio.get('tracknumber', ['-1'])[0].split("/")[0])
+		except:
+			tracknr = -1
 		track = audio.get('tracknumber', [None])[0]
 		date = audio.get('date', [None])[0]
 		
-		length = str(datetime.timedelta(seconds=int(audio.info.length)))
+		length = str(datetime_timedelta(seconds=int(audio.info.length)))
 		if not isFlac:
 			bitrate = audio.info.bitrate / 1000
 		else:
@@ -476,6 +501,262 @@ class MerlinMusicPlayerScreenSaver(Screen):
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreen
 
+
+class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
+
+	w = getDesktop(0).size().width()
+	h = getDesktop(0).size().height()
+	if w == 1280:
+		cy = 606
+	else:
+		cy = 462
+	dx = 135
+	cx = 66
+	dy = cy + 20
+	dw = w - dx - cx
+
+	skin = """
+		<screen backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="%d,%d" title="MerlinMusicPlayerTV">
+			<widget backgroundColor="transparent" name="video" position="0,0" size="%d,%d" zPosition="1"/>
+			<widget name="coverArt" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/images/no_coverArt.png" position="%d,%d" size="64,64" transparent="1" alphatest="blend" zPosition="2" />
+			<widget name="display" position="%d,%d" size="%d,24" zPosition="2" backgroundColor="#33000000" font="Regular;20" foregroundColor="#fcc000" />		
+		</screen>""" % (w,h,w,h,cx,cy,dx,dy,dw)
+
+
+	def __init__(self, session, currentService, servicelist):
+		self.session = session
+		Screen.__init__(self, session)
+		self.onClose.append(self.__onClose)
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ChannelSelectBaseActions", "ChannelSelectEPGActions"], 
+		{
+			"cancel": self.close,
+			"ok": self.showHide,
+			"right": self.nextService,
+			"left": self.prevService,
+			"nextBouquet": self.nextBouquet,
+			"prevBouquet": self.prevBouquet,
+			"showEPGList": self.openEventView,
+
+		}, -1)
+		self["actions2"] = NumberActionMap(["NumberActions"],
+		{
+			"1": self.keyNumberGlobal,
+			"2": self.keyNumberGlobal,
+			"3": self.keyNumberGlobal,
+			"4": self.keyNumberGlobal,
+			"5": self.keyNumberGlobal,
+			"6": self.keyNumberGlobal,
+			"7": self.keyNumberGlobal,
+			"8": self.keyNumberGlobal,
+			"9": self.keyNumberGlobal,
+		}, -1)
+		self.epgcache = eEPGCache.getInstance()
+		self.servicelist = servicelist
+		self["coverArt"] = MerlinMediaPixmap()
+		self["display"] = Label()
+		self["video"] = VideoWindow(fb_width = getDesktop(0).size().width(), fb_height = getDesktop(0).size().height())
+		if self.servicelist is None:
+			self.playService(currentService)
+		else:
+			current = ServiceReference(self.servicelist.getCurrentSelection())
+			self.playService(current.ref)
+
+		self.showHideTimer = eTimer()
+	        self.showHideTimer.timeout.get().append(self.showHideTimerTimeout)
+		self.idx = config.usage.infobar_timeout.index
+		if self.idx:
+		        self.showHideTimer.start(self.idx * 1000)
+		self.displayShown = True
+
+	def showHide(self):
+		if self.displayShown:
+			if self.showHideTimer.isActive():
+				self.showHideTimer.stop()
+			self["coverArt"].hide()
+			self["display"].hide()
+		else:
+			self["coverArt"].show()
+			self["display"].show()
+			if self.idx:
+			        self.showHideTimer.start(self.idx * 1000)
+		self.displayShown = not self.displayShown
+
+	def showHideTimerTimeout(self):
+		self.showHide()
+
+	def updateDisplayText(self, text):
+		if self.showHideTimer.isActive():
+			self.showHideTimer.stop()
+		self["display"].setText(text)
+		self.displayShown = False
+		self.showHide()
+
+# Source Code taken from Virtual(Pip)Zap :-)
+
+	# switch with numbers
+	def keyNumberGlobal(self, number):
+		self.session.openWithCallback(self.numberEntered, NumberZap, number)
+
+	def numberEntered(self, retval):
+		if retval > 0:
+			self.zapToNumber(retval)
+
+	def searchNumberHelper(self, serviceHandler, num, bouquet):
+		servicelist = serviceHandler.list(bouquet)
+		if not servicelist is None:
+			while num:
+				serviceIterator = servicelist.getNext()
+				if not serviceIterator.valid(): #check end of list
+					break
+				playable = not (serviceIterator.flags & (eServiceReference.isMarker|eServiceReference.isDirectory))
+				if playable:
+					num -= 1;
+			if not num: #found service with searched number ?
+				return serviceIterator, 0
+		return None, num
+
+	def zapToNumber(self, number):
+		bouquet = self.servicelist.bouquet_root
+		service = None
+		serviceHandler = eServiceCenter.getInstance()
+		bouquetlist = serviceHandler.list(bouquet)
+		if not bouquetlist is None:
+			while number:
+				bouquet = bouquetlist.getNext()
+				if not bouquet.valid(): #check end of list
+					break
+				if bouquet.flags & eServiceReference.isDirectory:
+					service, number = self.searchNumberHelper(serviceHandler, number, bouquet)
+		if not service is None:
+			if self.servicelist.getRoot() != bouquet: #already in correct bouquet?
+				self.servicelist.clearPath()
+				if self.servicelist.bouquet_root != bouquet:
+					self.servicelist.enterPath(self.servicelist.bouquet_root)
+				self.servicelist.enterPath(bouquet)
+			self.servicelist.setCurrentSelection(service) #select the service in servicelist
+		# update infos, no matter if service is none or not
+		current = ServiceReference(self.servicelist.getCurrentSelection())
+		self.playService(current.ref)
+
+	def nextService(self):
+		if self.servicelist is not None:
+			# get next service
+			if self.servicelist.inBouquet():
+				prev = self.servicelist.getCurrentSelection()
+				if prev:
+					prev = prev.toString()
+					while True:
+						if config.usage.quickzap_bouquet_change.value and self.servicelist.atEnd():
+							self.servicelist.nextBouquet()
+						else:
+							self.servicelist.moveDown()
+						cur = self.servicelist.getCurrentSelection()
+						if not cur or (not (cur.flags & 64)) or cur.toString() == prev:
+							break
+			else:
+				self.servicelist.moveDown()
+			if self.isPlayable():
+				current = ServiceReference(self.servicelist.getCurrentSelection())
+				self.playService(current.ref)
+			else:
+				self.nextService()
+
+	def prevService(self):
+		if self.servicelist is not None:
+			# get previous service
+			if self.servicelist.inBouquet():
+				prev = self.servicelist.getCurrentSelection()
+				if prev:
+					prev = prev.toString()
+					while True:
+						if config.usage.quickzap_bouquet_change.value:
+							if self.servicelist.atBegin():
+								self.servicelist.prevBouquet()
+						self.servicelist.moveUp()
+						cur = self.servicelist.getCurrentSelection()
+						if not cur or (not (cur.flags & 64)) or cur.toString() == prev:
+							break
+			else:
+				self.servicelist.moveUp()
+			if self.isPlayable():
+				current = ServiceReference(self.servicelist.getCurrentSelection())
+				self.playService(current.ref)
+			else:
+				self.prevService()
+
+	def isPlayable(self):
+		# check if service is playable
+		current = ServiceReference(self.servicelist.getCurrentSelection())
+		return not (current.ref.flags & (eServiceReference.isMarker|eServiceReference.isDirectory))
+
+
+	def nextBouquet(self):
+		if self.servicelist is not None:
+			# next bouquet with first service
+			if config.usage.multibouquet.value:
+				self.servicelist.nextBouquet()
+				current = ServiceReference(self.servicelist.getCurrentSelection())
+				self.playService(current.ref)
+
+	def prevBouquet(self):
+		if self.servicelist is not None:
+			# previous bouquet with first service
+			if config.usage.multibouquet.value:
+				self.servicelist.prevBouquet()
+				current = ServiceReference(self.servicelist.getCurrentSelection())
+				self.playService(current.ref)
+
+	def openSingleServiceEPG(self):
+		# show EPGList
+		current = ServiceReference(self.servicelist.getCurrentSelection())
+		self.session.open(EPGSelection, current.ref)
+
+	def openEventView(self):
+		# show EPG Event
+		epglist = [ ]
+		self.epglist = epglist
+		service = ServiceReference(self.servicelist.getCurrentSelection())
+		ref = service.ref
+		evt = self.epgcache.lookupEventTime(ref, -1)
+		if evt:
+			epglist.append(evt)
+		evt = self.epgcache.lookupEventTime(ref, -1, 1)
+		if evt:
+			epglist.append(evt)
+		if epglist:
+			self.session.open(EventViewEPGSelect, epglist[0], service, self.eventViewCallback, self.openSingleServiceEPG, self.openMultiServiceEPG, self.openSimilarList)
+
+	def eventViewCallback(self, setEvent, setService, val):
+		epglist = self.epglist
+		if len(epglist) > 1:
+			tmp = epglist[0]
+			epglist[0] = epglist[1]
+			epglist[1] = tmp
+			setEvent(epglist[0])
+
+	def openMultiServiceEPG(self):
+		# not supported
+		pass
+
+	def openSimilarList(self, eventid, refstr):
+		self.session.open(EPGSelection, refstr, None, eventid)
+
+	def playService(self, service):
+		if service and (service.flags & eServiceReference.isGroup):
+			ref = getBestPlayableServiceReference(service, eServiceReference())
+		else:
+			ref = service
+		self.pipservice = eServiceCenter.getInstance().play(ref)
+		if self.pipservice and not self.pipservice.setTarget(1):
+			self.pipservice.start()
+
+	def __onClose(self):
+		self.pipservice = None
+		if self.showHideTimer.isActive():
+			self.showHideTimer.stop()
+
+
+
 class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications):
 	
 	sz_w = getDesktop(0).size().width()
@@ -556,7 +837,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			</screen>"""
 		
 	
-	def __init__(self, session, songlist, index, idreammode):
+	def __init__(self, session, songlist, index, idreammode, currentservice, servicelist):
 		self.session = session
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
@@ -576,6 +857,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			"yellow": self.pauseEntry,
 			"green": self.play,
 			"input_date_time": self.config,
+			"ok": self.showTV,
 		}, -1)
 
 		self.onClose.append(self.__onClose)
@@ -620,6 +902,8 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.screenSaverScreen = None
 
 		self.iDreamMode = idreammode
+		self.currentService = currentservice
+		self.serviceList = servicelist
 
 	def embeddedCoverArt(self):		
 		self["coverArt"].embeddedCoverArt()
@@ -670,6 +954,25 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		if self.screenSaverTimer.isActive():
 			self.screenSaverTimer.stop()
 		self.session.openWithCallback(self.setupFinished, MerlinMusicPlayerSetup, False)
+
+	def showTV(self):
+		if SystemInfo.get("NumVideoDecoders", 1) > 1:
+			if self.screenSaverTimer.isActive():
+				self.screenSaverTimer.stop()
+			if self.screenSaverScreen:
+				self.screenSaverScreen.doClose()
+				self.screenSaverScreen = None
+			self.screenSaverScreen = self.session.instantiateDialog(MerlinMusicPlayerTV, self.currentService, self.serviceList)
+			self.session.execDialog(self.screenSaverScreen)
+			self.screenSaverScreen.updateLCD(self.currentTitle,1)
+			self.screenSaverScreen.updateLCD(self.nextTitle,4)
+			album = self["album"].getText()
+			if album:
+				text = "%s - %s" % (self["title"].getText(), album)
+			else:
+				text = self["title"].getText()
+			self.screenSaverScreen.updateDisplayText(text)
+			self.screenSaverScreen.updateCover(self["coverArt"].coverArtFileName, modus = 0)
 	
 	def setupFinished(self, result):
 		if result:
@@ -1253,18 +1556,28 @@ class MerlinMusicPlayerSongList(Screen):
 		try:
 			index = self["list"].getCurrentIndex()
 			songlist = self["list"].getList()
-			self.summaries.setText(songlist[index][0].title,1)
+			mode =  self.iDreamMode or songlist[index][0].PTS
+			if mode:
+				self.summaries.setText(songlist[index][0].title,1)
+			else:
+				self.summaries.setText(songlist[index][0].text,1)
 			count = self["list"].getItemCount()
 			# voheriges
 			index -= 1
 			if index < 0:
 				index = count
-			self.summaries.setText(songlist[index][0].title,3)
+			if mode:
+				self.summaries.setText(songlist[index][0].title,3)
+			else:
+				self.summaries.setText(songlist[index][0].text,3)
 			# naechstes
 			index = self["list"].getCurrentIndex() + 1
 			if index > count:
 				index = 0
-			self.summaries.setText(songlist[index][0].title,4)
+			if mode:
+				self.summaries.setText(songlist[index][0].title,4)
+			else:
+				self.summaries.setText(songlist[index][0].text,4)
 		except: pass
 
 	def createSummary(self):
@@ -1319,7 +1632,7 @@ class iDreamMerlin(Screen):
 			</screen>"""
 		
 	
-	def __init__(self, session):
+	def __init__(self, session, servicelist):
 		self.session = session
 		Screen.__init__(self, session)
 		self["list"] = iDreamList()
@@ -1347,7 +1660,8 @@ class iDreamMerlin(Screen):
 		self.onShown.append(self.lcdUpdate)
 		self.onClose.append(self.__onClose)
 		
-		self.CurrentService = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.serviceList = servicelist
+		self.currentService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
 		
 		self.mode = 0
@@ -1537,7 +1851,7 @@ class iDreamMerlin(Screen):
 
 	def createPlaylistFinished(self, text = None):
 		if text:
-			self.sqlCommand("""INSERT INTO Playlists (playlist_text) VALUES("%s");""" % (text))
+			self.sqlCommand('INSERT INTO Playlists (playlist_text) VALUES("%s");' % (text))
 			self.clearCache()
 			self.menu_pressed()
 
@@ -1557,16 +1871,16 @@ class iDreamMerlin(Screen):
 			search = "%" + searchText + "%"
 			if searchType == 1:
 				sql_where = "where title like '%s'" % search
-				text = _("""Search results for "%s" in all titles""") % searchText
+				text = _('Search results for "%s" in all titles') % searchText
 			elif searchType == 2:
 				sql_where = "where artists.artist like '%s'" % search
-				text = _("""Search results for "%s" in all artists""") % searchText
+				text = _('Search results for "%s" in all artists') % searchText
 			elif searchType == 3:
 				sql_where = "where album_text like '%s'" % search
-				text = _("""Search results for "%s" in all albums""") % searchText
+				text = _('Search results for "%s" in all albums') % searchText
 			else:
 				sql_where = "where (title like '%s' or artists.artist like '%s' or album_text like '%s')"  % (search,search,search)
-				text = _("""Search results for "%s" in title, artist or album""") % searchText
+				text = _('Search results for "%s" in title, artist or album') % searchText
 			self.setButtons(red = True, yellow = True, blue = True)
 			oldmode = self.mode
 			self.mode = 20
@@ -1777,7 +2091,7 @@ class iDreamMerlin(Screen):
 			if self.player is not None:
 				self.player.doClose()
 				self.player = None
-			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,self["list"].getList()[1:], self["list"].getCurrentIndex() -1, True)
+			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,self["list"].getList()[1:], self["list"].getCurrentIndex() -1, True, self.currentService, self.serviceList)
 			self.session.execDialog(self.player)
 
 	def red_pressed(self):
@@ -2044,7 +2358,7 @@ class iDreamMerlin(Screen):
 			index = config.plugins.merlinmusicplayer.lastsonglistindex.value
 			if index >= count:
 				index = 0
-			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode)
+			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode, self.currentService, self.serviceList)
 			self.session.execDialog(self.player)
 
 	def config(self):
@@ -2066,7 +2380,12 @@ class iDreamMerlin(Screen):
 		if self.player is not None:
 			self.player.doClose()
 			self.player = None
-		self.session.nav.playService(self.CurrentService)
+		if self.serviceList is None:
+			self.session.nav.playService(self.currentService)
+		else:
+			current = ServiceReference(self.serviceList.getCurrentSelection())
+			self.session.nav.playService(current.ref)
+		
 
 	def lcdUpdate(self):
 		try:
@@ -2393,7 +2712,7 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 			</screen>"""
 	else:
 		skin = """
-			<screen name="MerlinMusicPlayerFileList" position="0,0" size="720,576" flags="wfNoBorder" backgroundColor="#00000000" title="Merlin Music Player Setup">
+			<screen position="0,0" size="720,576" flags="wfNoBorder" backgroundColor="#00000000" title="Merlin Music Player Setup">
 				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -2504,7 +2823,7 @@ class MerlinMusicPlayerFileList(Screen):
 			</screen>"""
 		
 	
-	def __init__(self, session):
+	def __init__(self, session, servicelist):
 		self.session = session
 		Screen.__init__(self, session)
 		self["list"] = FileList(config.plugins.merlinmusicplayer.defaultfilebrowserpath.value, showDirectories = True, showFiles = True, matchingPattern = "(?i)^.*\.(mp3|m4a|flac|ogg|m3u|pls|cue)", useServiceRef = False)
@@ -2516,13 +2835,19 @@ class MerlinMusicPlayerFileList(Screen):
 			"back": self.close,
 			"input_date_time": self.config,
 			"info" : self.info_pressed,
+			"green": self.green_pressed,
+			"up": self.moveup,
+			"down": self.movedown,
+			"right": self.moveright,
+			"left" : self.moveleft,
 		}, -1)
-
-		self["headertext"] = Label(_("Filelist"))
+		self.serviceList = servicelist
+		self["headertext"] = Label()
 		self.player = None
 		self.onClose.append(self.__onClose)
 		self.onLayoutFinish.append(self.startRun)
-		self.CurrentService = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.onShown.append(self.updateTarget)
+		self.currentService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
 
 	def startRun(self):
@@ -2553,7 +2878,7 @@ class MerlinMusicPlayerFileList(Screen):
 			index = config.plugins.merlinmusicplayer.lastsonglistindex.value
 			if index >= count:
 				index = 0
-			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode)
+			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode, self.currentService, self.serviceList)
 			self.session.execDialog(self.player)
 	
 	def readCUE(self, filename):
@@ -2583,7 +2908,7 @@ class MerlinMusicPlayerFileList(Screen):
 				if  m.group('filename')[0] == "/":
 					songfilename = m.group('filename')
 				else:
-					songfilename = os_path.dirname(filename) + "/" + m.group('filename')
+					songfilename = os_path.join(os_path.dirname(filename), m.group('filename'))
 			m = title_re.search(entry)
 			if m:
 				if state == 0:
@@ -2624,7 +2949,7 @@ class MerlinMusicPlayerFileList(Screen):
 					if entry[0] == "/":
 						songfilename = entry
 					else:
-						songfilename = os_path.dirname(filename) + "/" + entry
+						songfilename = os_path.join(os_path.dirname(filename),entry)
 					if displayname:
 						text = displayname
 						displayname = None
@@ -2656,14 +2981,33 @@ class MerlinMusicPlayerFileList(Screen):
 		plsfile.close()
 		return SongList
 
+	def green_pressed(self):
+		SongList = []
+		count = 0
+		for root, subFolders, files in os_walk(self["list"].getCurrentDirectory()):
+			files.sort()
+			for filename in files:
+				if filename.lower().endswith(".mp3") or filename.lower().endswith(".flac") or filename.lower().endswith(".m4a") or filename.lower().endswith(".ogg"):
+					SongList.append((Item(text = filename, filename = os_path.join(root,filename)),))
+		if self.player is not None:
+			self.player.doClose()
+			self.player = None
+		count = len(SongList)
+		if count:
+			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, 0, False, self.currentService, self.serviceList)
+			self.session.execDialog(self.player)
+		else:
+			self.session.open(MessageBox, _("No music files found!"), type = MessageBox.TYPE_INFO,timeout = 20 )
+
 	def ok(self):
 		if self["list"].canDescent():
 			self["list"].descent()
+			self.updateTarget()
 		else:
 			SongList = []
-			index = 0
 			foundIndex = 0
 			count = 0
+			index = 0
 			currentFilename = self["list"].getFilename()
  			if currentFilename.lower().endswith(".m3u"):
 				SongList = self.readM3U(os_path.join(self["list"].getCurrentDirectory(),currentFilename))
@@ -2680,12 +3024,13 @@ class MerlinMusicPlayerFileList(Screen):
 						if self["list"].getFilename() == filename:
 							foundIndex = index
 						index += 1
+
 			if self.player is not None:
 				self.player.doClose()
 				self.player = None
 			count = len(SongList)
 			if count:
-				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, foundIndex, False)
+				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, foundIndex, False, self.currentService, self.serviceList)
 				self.session.execDialog(self.player)
 			else:
 				self.session.open(MessageBox, _("No music files found!"), type = MessageBox.TYPE_INFO,timeout = 20 )
@@ -2698,21 +3043,84 @@ class MerlinMusicPlayerFileList(Screen):
 			if self.player.songList:
 				self.session.execDialog(self.player)
 
+	def moveright(self):
+		self["list"].pageDown()
+		self.lcdupdate()
+
+	def moveleft(self):
+		self["list"].pageUp()
+		self.lcdupdate()
+		
+	def moveup(self):
+		self["list"].up()
+		self.lcdupdate()
+
+	def movedown(self):
+		self["list"].down()
+		self.lcdupdate()
+
+	def updateTarget(self):
+		currFolder = self["list"].getCurrentDirectory()
+		if currFolder is None:
+			currFolder = ("Invalid Location")
+		self["headertext"].setText(_("Filelist: %s") % currFolder)
+		self.lcdupdate()
+
+	def lcdupdate(self):
+		index = self["list"].getSelectionIndex()
+		sel = self["list"].list[index]
+		text = sel[1][7]
+		if sel[0][1] == True:
+			text = "/" + text
+		self.summaries.setText(text,1)
+		# voheriges
+		index -= 1
+		if index < 0:
+			index = len(self["list"].list) -1
+		sel = self["list"].list[index]
+		text = sel[1][7]
+		if sel[0][1] == True:
+			text = "/" + text
+		self.summaries.setText(text,3)
+		# naechstes
+		index = self["list"].getSelectionIndex() + 1
+		if index > (len(self["list"].list) -1):		
+			index = 0
+		sel = self["list"].list[index]
+		text = sel[1][7]
+		if sel[0][1] == True:
+			text = "/" + text
+		self.summaries.setText(text,4)
+
 	def __onClose(self):
 		if self.player is not None:
 			self.player.doClose()
 			self.player = None
-		self.session.nav.playService(self.CurrentService)
+		if self.serviceList is None:
+			self.session.nav.playService(self.currentService)
+		else:
+			current = ServiceReference(self.serviceList.getCurrentSelection())
+			self.session.nav.playService(current.ref)
 		if config.plugins.merlinmusicplayer.rememberlastfilebrowserpath.value:
 			config.plugins.merlinmusicplayer.defaultfilebrowserpath.value = self["list"].getCurrentDirectory()
 			config.plugins.merlinmusicplayer.defaultfilebrowserpath.save()
 
+	def createSummary(self):
+		return MerlinMusicPlayerLCDScreenText
 
 def main(session,**kwargs):
-	session.open(iDreamMerlin)
+	if kwargs.has_key("servicelist"):
+		servicelist = kwargs["servicelist"]
+	else:
+		servicelist = None
+	session.open(iDreamMerlin, servicelist)
 
 def merlinmusicplayerfilelist(session,**kwargs):
-	session.open(MerlinMusicPlayerFileList)
+	if kwargs.has_key("servicelist"):
+		servicelist = kwargs["servicelist"]
+	else:
+		servicelist = None
+	session.open(MerlinMusicPlayerFileList, servicelist)
 
 def Plugins(**kwargs):
 
