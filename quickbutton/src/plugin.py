@@ -42,21 +42,15 @@ config.plugins.Quickbutton.blue = ConfigText(default = _("Nothing"), visible_wid
 
 from  Screens.InfoBarGenerics import InfoBarPlugins
 baseInfoBarPlugins__init__ = None
-baserunPlugin = None
-StartOnlyOneTime = False
 DM8000 = False
 
-
 def autostart(reason, **kwargs):
-	global baseInfoBarPlugins__init__, baserunPlugin, DM8000
+	global baseInfoBarPlugins__init__,DM8000
 	if "session" in kwargs:
 		session = kwargs["session"]
 		if baseInfoBarPlugins__init__ is None:
 			baseInfoBarPlugins__init__ = InfoBarPlugins.__init__
-		if baserunPlugin is None:
-			baserunPlugin = InfoBarPlugins.runPlugin
 		InfoBarPlugins.__init__ = InfoBarPlugins__init__
-		InfoBarPlugins.runPlugin = runPlugin
 		InfoBarPlugins.greenlong = greenlong
 		InfoBarPlugins.yellowlong = yellowlong
 		InfoBarPlugins.redlong = redlong
@@ -75,9 +69,8 @@ def Plugins(**kwargs):
 	return list
 
 def InfoBarPlugins__init__(self):
-	global StartOnlyOneTime
-	if not StartOnlyOneTime: 
-		StartOnlyOneTime = True
+	from Screens.InfoBarGenerics import InfoBarEPG
+	if isinstance(self, InfoBarEPG):
 		x = {	"green_l": (self.greenlong, _("Assign plugin to long green key pressed")),
 			"yellow_l": (self.yellowlong, _("Assign plugin to long yellow key pressed")),
 			"red_l": (self.redlong, _("Assign plugin to long red key pressed")),
@@ -87,7 +80,6 @@ def InfoBarPlugins__init__(self):
 		self["QuickbuttonActions"] = HelpableActionMap(self, "QuickbuttonActions",x)
 	else:
 		InfoBarPlugins.__init__ = InfoBarPlugins.__init__
-		InfoBarPlugins.runPlugin = InfoBarPlugins.runPlugin
 		InfoBarPlugins.greenlong = None
 		InfoBarPlugins.yellowlong = None
 		InfoBarPlugins.redlong = None
@@ -95,9 +87,6 @@ def InfoBarPlugins__init__(self):
 		if DM8000:
 			InfoBarPlugins.red = None
 	baseInfoBarPlugins__init__(self)
-
-def runPlugin(self, plugin):
-	baserunPlugin(self,plugin)
 
 def greenlong(self):
 	startPlugin(self,str(config.plugins.Quickbutton.green.value))
@@ -159,7 +148,7 @@ def startPlugin(self,pname):
 					plugin = p
 			if plugin is not None:
 				try:
-					runPlugin(self,plugin)
+					self.runPlugin(plugin)
 					no_plugin = False
 				except Exception, e:
 					msgText = _("Error!\nError Text: %s"%e)
