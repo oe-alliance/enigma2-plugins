@@ -470,25 +470,25 @@ class VirtualZap(Screen):
 		self.updateInfos()
 
 	def swap(self, number):
+		# save old values for selecting it in servicelist after zapping
+		currentRef = self.curRef
+		currentBouquet = self.curBouquet
+		# we have to close PiP first, otherwise the service-display is freezed
 		if self.pipAvailable:
-			# save old values for selecting it in servicelist after zapping
-			currentRef = self.curRef
-			currentBouquet = self.curBouquet
-			# we have to close PiP first, otherwise the service-display is freezed
 			self.pipservice = None
-			# zap and set new values for the new reference and bouquet
-			self.servicelist.zap()
-			self.curRef = ServiceReference(self.servicelist.getCurrentSelection())
-			self.curBouquet = self.servicelist.getRoot()
-			# select old values in servicelist
-			if currentBouquet != self.servicelist.getRoot():
-				self.servicelist.clearPath()
-				if self.servicelist.bouquet_root != currentBouquet:
-					self.servicelist.enterPath(self.servicelist.bouquet_root)
-				self.servicelist.enterPath(currentBouquet)
-			self.servicelist.setCurrentSelection(currentRef.ref)
-			# play old service in PiP
-			self.updateInfos()
+		# zap and set new values for the new reference and bouquet
+		self.servicelist.zap()
+		self.curRef = ServiceReference(self.servicelist.getCurrentSelection())
+		self.curBouquet = self.servicelist.getRoot()
+		# select old values in servicelist
+		if currentBouquet != self.servicelist.getRoot():
+			self.servicelist.clearPath()
+			if self.servicelist.bouquet_root != currentBouquet:
+				self.servicelist.enterPath(self.servicelist.bouquet_root)
+			self.servicelist.enterPath(currentBouquet)
+		self.servicelist.setCurrentSelection(currentRef.ref)
+		# play old service in PiP
+		self.updateInfos()
 
 class VirtualZapConfig(Screen, ConfigListScreen):
 
