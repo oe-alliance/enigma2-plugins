@@ -41,6 +41,7 @@ from Screens.Standby import TryQuitMainloop
 
 from Screens.EpgSelection import EPGSelection
 from Screens.EventView import  EventViewEPGSelect
+from Screens.PictureInPicture import PictureInPicture
 
 InfoBarShowHideINIT = None
 
@@ -63,6 +64,7 @@ def autostart(reason, **kwargs):
 		InfoBarShowHide.__init__ = InfoBarShowHide__init__
 		# new method
 		InfoBarShowHide.showVZ = showVZ
+		InfoBarShowHide.VirtualZapCallback = VirtualZapCallback
 		if config.plugins.virtualzap.mode.value == "2":
 			InfoBarShowHide.newHide = newHide
 
@@ -98,7 +100,21 @@ def showVZ(self):
 				# it is... close it!
 				self.showPiP()
 		if isinstance(self, InfoBar):
-			self.session.open(VirtualZap, self.servicelist)
+			self.session.openWithCallback(self.VirtualZapCallback, VirtualZap, self.servicelist)
+
+def VirtualZapCallback(self, service = None, servicePath = None):
+	from  Screens.InfoBarGenerics import InfoBarEPG, InfoBarPiP
+	if isinstance(self, InfoBarPiP):
+		if service and servicePath:
+			self.session.pip = self.session.instantiateDialog(PictureInPicture)
+			self.session.pip.show()
+			if self.session.pip.playService(service):
+				self.session.pipshown = True
+				self.session.pip.servicePath = servicePath
+			else:
+				self.session.pipshown = False
+				del self.session.pip
+				self.session.openWithCallback(self.close, MessageBox, _("Could not open Picture in Picture"), MessageBox.TYPE_ERROR)
 
 def newHide(self):
 	# remember if infobar is shown
@@ -213,7 +229,7 @@ class VirtualZap(Screen):
 		self["NextEPG"] = Label()
 		self["NowTime"] = Label()
 		self["NextTime"] = Label()
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ChannelSelectBaseActions", "ChannelSelectEPGActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ChannelSelectBaseActions", "ChannelSelectEPGActions", "ColorActions"], 
 		{
 			"ok": self.ok, 
 			"cancel": self.closing,
@@ -222,6 +238,8 @@ class VirtualZap(Screen):
 			"nextBouquet": self.nextBouquet,
 			"prevBouquet": self.prevBouquet,
 			"showEPGList": self.openEventView,
+			"blue": self.standardPiP,
+			"yellow": self.switchAndStandardPiP,
 		},-2)
 		self["actions2"] = NumberActionMap(["NumberActions"],
 		{
@@ -244,7 +262,6 @@ class VirtualZap(Screen):
 			self.currentPiP = ""
 		# this is the servicelist from ChannelSelectionBase
 		self.servicelist = servicelist
-		self.newServicePlayed  =  False
 		# needed, because if we won't zap, we habe to go back to the current bouquet and service
 		self.curRef = ServiceReference(self.servicelist.getCurrentSelection())
 		self.curBouquet = self.servicelist.getRoot()
@@ -383,17 +400,19 @@ class VirtualZap(Screen):
 	def openSimilarList(self, eventid, refstr):
 		self.session.open(EPGSelection, refstr, None, eventid)
 
+	def setServicelistSelection(self, bouquet, service):
+		# we need to select the old service with bouquet
+		if self.servicelist.getRoot() != bouquet: #already in correct bouquet?
+			self.servicelist.clearPath()
+			if self.servicelist.bouquet_root != bouquet:
+				self.servicelist.enterPath(self.servicelist.bouquet_root)
+			self.servicelist.enterPath(bouquet)
+		self.servicelist.setCurrentSelection(service) #select the service in servicelist
+
 	def closing(self):
 		if self.pipAvailable:
 			self.pipservice = None
-		if not self.newServicePlayed:
-			# we need to select the old service with bouquet
-			if self.curBouquet != self.servicelist.getRoot():
-				self.servicelist.clearPath()
-				if self.servicelist.bouquet_root != self.curBouquet:
-					self.servicelist.enterPath(self.servicelist.bouquet_root)
-				self.servicelist.enterPath(self.curBouquet)
-			self.servicelist.setCurrentSelection(self.curRef.ref)
+		self.setServicelistSelection(self.curBouquet, self.curRef.ref)
 		self.close()
 			
 	def ok(self):
@@ -401,9 +420,31 @@ class VirtualZap(Screen):
 		if self.pipAvailable:
 			self.pipservice = None
 		# play selected service and close virtualzap
-		self.newServicePlayed = True
 		self.servicelist.zap()
 		self.close()
+
+	def standardPiP(self):
+		if not self.pipAvailable:
+			return
+		# close PiP
+		self.pipservice = None
+		# save current selected service for standard PiP
+		service = ServiceReference(self.servicelist.getCurrentSelection()).ref
+		servicePath = self.servicelist.getCurrentServicePath() # same bug as in channcelsection 
+		self.setServicelistSelection(self.curBouquet, self.curRef.ref)
+		# close VZ and start standard PiP
+		self.close(service, servicePath)
+
+	def switchAndStandardPiP(self):
+		if not self.pipAvailable:
+			return
+		self.pipservice = None
+		# save current selected servicePath for standard PiP
+		servicePath = self.servicelist.getCurrentServicePath()
+		# play selected service and close virtualzap
+		self.servicelist.zap()
+		# close VZ and start standard PiP
+		self.close(self.curRef.ref, servicePath)
 
 	def CheckItNow(self):
 		self.CheckForEPG.stop()
@@ -460,12 +501,7 @@ class VirtualZap(Screen):
 				if bouquet.flags & eServiceReference.isDirectory:
 					service, number = self.searchNumberHelper(serviceHandler, number, bouquet)
 		if not service is None:
-			if self.servicelist.getRoot() != bouquet: #already in correct bouquet?
-				self.servicelist.clearPath()
-				if self.servicelist.bouquet_root != bouquet:
-					self.servicelist.enterPath(self.servicelist.bouquet_root)
-				self.servicelist.enterPath(bouquet)
-			self.servicelist.setCurrentSelection(service) #select the service in servicelist
+			self.setServicelistSelection(bouquet, service)
 		# update infos, no matter if service is none or not
 		self.updateInfos()
 
@@ -481,12 +517,7 @@ class VirtualZap(Screen):
 		self.curRef = ServiceReference(self.servicelist.getCurrentSelection())
 		self.curBouquet = self.servicelist.getRoot()
 		# select old values in servicelist
-		if currentBouquet != self.servicelist.getRoot():
-			self.servicelist.clearPath()
-			if self.servicelist.bouquet_root != currentBouquet:
-				self.servicelist.enterPath(self.servicelist.bouquet_root)
-			self.servicelist.enterPath(currentBouquet)
-		self.servicelist.setCurrentSelection(currentRef.ref)
+		self.setServicelistSelection(currentBouquet, currentRef.ref)
 		# play old service in PiP
 		self.updateInfos()
 
