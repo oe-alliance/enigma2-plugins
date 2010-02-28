@@ -158,7 +158,7 @@ function parseNr(num) {
 	if(isNaN(num)){
 		return 0;
 	} else {
-		return Number(num);
+		return parseInt(num);
 	}
 }
 

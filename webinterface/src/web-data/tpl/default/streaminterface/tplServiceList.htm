@@ -5,8 +5,8 @@
 	{for e in events}
 	<option id="${e.servicereference}" >
 	${e.servicename}	
-	{if e.shorttitle != '...'} 
-		(${e.shorttitle}) +${e.remaining} of ${e.duration} min
+	{if e.duration != 0} 
+		(${e.shorttitle}) +${e.remaining} of ${e.duration} min.
 	{/if}
 	</option>
 	{/for}

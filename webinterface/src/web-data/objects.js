@@ -10,7 +10,10 @@ function getNodeContent(xml, nodename, defaultString){
 
 		if(retVal === "" || retVal === null){
 			return 'N/A';		
-		}		
+		} else if (retVal === "None"){
+			return "";
+		}
+		
 		return retVal;
 	} catch(e){
 		if(typeof(defaultString) !== 'undefined') {
@@ -33,9 +36,9 @@ function getNamedChildren(xml, parentname, childname){
 //START class EPGEvent
 function EPGEvent(xml, number){	
 	this.eventID = getNodeContent(xml, 'e2eventid', '');
-	this.startTime = getNodeContent(xml, 'e2eventstart', '');
-	this.duration = getNodeContent(xml, 'e2eventduration', '');
-	this.currentTime = getNodeContent(xml, 'e2eventcurrenttime'),
+	this.startTime = parseNr(getNodeContent(xml, 'e2eventstart', ''));	
+	this.duration = parseNr(getNodeContent(xml, 'e2eventduration', ''));
+	this.currentTime = parseNr(getNodeContent(xml, 'e2eventcurrenttime')),
 	this.title = getNodeContent(xml, 'e2eventtitle', '');
 	this.serviceRef = getNodeContent(xml, 'e2eventservicereference', '');
 	this.serviceName = getNodeContent(xml, 'e2eventservicename', '');
@@ -56,7 +59,7 @@ function EPGEvent(xml, number){
 		return this.eventID;
 	};
 	this.getTimeStart = function() {
-		var date = new Date(parseInt(this.startTime, 10)*1000);
+		var date = new Date(this.startTime *1000);
 		return date;
 	};
 	this.getTimeStartString = function() {
@@ -80,11 +83,11 @@ function EPGEvent(xml, number){
 		return this.getTimeStart().getTime()/1000;
 	};
 	this.getTimeEnd = function() {
-		var date = new Date((parseInt(this.startTime, 10)+parseInt(this.duration, 10))*1000);
-		return date.getTime()/1000;
+		var date = new Date(( this.startTime + this.duration ) * 1000);
+		return parseInt( date.getTime()/1000 );
 	};
 	this.getTimeEndString = function() {
-		var date = new Date((parseInt(this.startTime, 10)+parseInt(this.duration, 10))*1000);
+		var date = new Date(( this.startTime + this.duration ) * 1000);
 		var h = date.getHours();
 		var m = date.getMinutes();
 		if (m < 10){
@@ -93,15 +96,20 @@ function EPGEvent(xml, number){
 		return h+":"+m;
 	};
 	this.getDuration = function() {		
-		var date = new Date(parseInt(this.duration, 10)*1000);
+		var date = new Date( this.duration * 1000);
 		return date;
 	};
 	this.getTimeRemainingString = function() {
-		if( parseInt(this.currentTime, 10) < parseInt(this.startTime, 10) ){
-			return Math.ceil(this.getDuration()/60000);
+		
+		if( this.currentTime <= this.startTime ){
+			return Math.ceil(this.getDuration() / 60000);
 		} else {
-			var remaining = parseInt( ( (this.getTimeEnd() - parseInt(this.currentTime, 10) ) / 60), 10);
-			return remaining;
+			if( this.getTimeEnd() > 0){
+				var remaining = Math.ceil( ( this.getTimeEnd() - this.currentTime ) / 60);
+				return remaining;
+			} else {
+				return this.getTimeEnd();
+			}
 		}
 	};
 	
