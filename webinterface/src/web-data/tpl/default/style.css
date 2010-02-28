@@ -1,10 +1,10 @@
-	body{
+	html, body{
 		font-family: Tahoma, Sans-Serif;
 		font-size: 14px;
 		font-weight: bold;
 		color: #fff;
 		text-align: center;
-		background-color: #555
+		background: #555
 	}
 	
 	a, a:visited, a:active{
