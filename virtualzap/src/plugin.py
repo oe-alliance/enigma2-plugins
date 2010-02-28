@@ -32,7 +32,7 @@ from enigma import eServiceCenter, getBestPlayableServiceReference
 from Components.VideoWindow import VideoWindow
 from enigma import ePoint, eEPGCache
 from time import localtime, time
-from Screens.InfoBarGenerics import InfoBarShowHide, NumberZap
+from Screens.InfoBarGenerics import InfoBarShowHide, NumberZap, InfoBarPiP
 from Screens.InfoBar import InfoBar
 
 from Components.Sources.StaticText import StaticText
@@ -90,7 +90,7 @@ def InfoBarShowHide__init__(self):
 
 
 def showVZ(self):
-	from  Screens.InfoBarGenerics import InfoBarEPG, InfoBarPiP
+	from  Screens.InfoBarGenerics import InfoBarEPG
 	# check for InfoBarEPG --> only start if true
 	if isinstance(self, InfoBarEPG):
 		# check for PiP
@@ -103,7 +103,6 @@ def showVZ(self):
 			self.session.openWithCallback(self.VirtualZapCallback, VirtualZap, self.servicelist)
 
 def VirtualZapCallback(self, service = None, servicePath = None):
-	from  Screens.InfoBarGenerics import InfoBarEPG, InfoBarPiP
 	if isinstance(self, InfoBarPiP):
 		if service and servicePath:
 			self.session.pip = self.session.instantiateDialog(PictureInPicture)
@@ -430,7 +429,7 @@ class VirtualZap(Screen):
 		self.pipservice = None
 		# save current selected service for standard PiP
 		service = ServiceReference(self.servicelist.getCurrentSelection()).ref
-		servicePath = self.servicelist.getCurrentServicePath() # same bug as in channcelsection 
+		servicePath = self.servicelist.getCurrentServicePath() # same bug as in channelselection 
 		self.setServicelistSelection(self.curBouquet, self.curRef.ref)
 		# close VZ and start standard PiP
 		self.close(service, servicePath)
