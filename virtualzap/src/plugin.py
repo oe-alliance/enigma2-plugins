@@ -45,7 +45,7 @@ from Screens.PictureInPicture import PictureInPicture
 
 InfoBarShowHideINIT = None
 
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, getConfigListEntry, configfile
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, getConfigListEntry, configfile, ConfigPosition
 from Components.ConfigList import ConfigList, ConfigListScreen
 
 # for localized messages
@@ -54,6 +54,7 @@ from . import _
 config.plugins.virtualzap = ConfigSubsection()
 config.plugins.virtualzap.mode = ConfigSelection(default="0", choices = [("0", _("as plugin in extended bar")),("1", _("with long OK press")), ("2", _("with exit button"))])
 config.plugins.virtualzap.usepip = ConfigYesNo(default = True)
+config.plugins.virtualzap.showpipininfobar = ConfigYesNo(default = True)
 
 def autostart(reason, **kwargs):
 	if config.plugins.virtualzap.mode.value != "0":
@@ -144,7 +145,8 @@ class VirtualZap(Screen):
 	# VirtualZap or VirtualZapNoPiP
 	#
 
-	if SystemInfo.get("NumVideoDecoders", 1) > 1 and config.plugins.virtualzap.usepip.value:
+	if SystemInfo.get("NumVideoDecoders", 1) > 1 and config.plugins.virtualzap.usepip.value and config.plugins.virtualzap.showpipininfobar.value:
+		# use PiP in Infobar
 		if sz_w == 1280:
 			skin = """
 				<screen backgroundColor="#101214" flags="wfNoBorder" name="VirtualZap" position="0,505" size="1280,220" title="Virtual Zap">
@@ -179,47 +181,65 @@ class VirtualZap(Screen):
 					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="550,80" size="120,25" transparent="1" zPosition="2"/>
 				</screen>"""
 	else:
+
+		if SystemInfo.get("NumVideoDecoders", 1) > 1 and config.plugins.virtualzap.usepip.value and not config.plugins.virtualzap.showpipininfobar.value:
+			# use standard PiP
+			config.av.pip = ConfigPosition(default=[0, 0, 0, 0], args = (719, 567, 720, 568))
+			x = config.av.pip.value[0]
+			y = config.av.pip.value[1]
+			w = config.av.pip.value[2]
+			h = config.av.pip.value[3]
+		else:
+			# no PiP
+			x = 0
+			y = 0
+			w = 0
+			h = 0
+
 		if sz_w == 1280:
 			skin = """
-				<screen backgroundColor="#101214" flags="wfNoBorder" name="VirtualZapNoPiP" position="0,505" size="1280,220" title="Virtual Zap">
-					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/hd.png" position="0,0" size="1280,220" zPosition="0"/>
-					<widget backgroundColor="#101214" font="Regular;26" halign="center" name="NowChannel" position="140,60" size="1000,32" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;24" foregroundColor="#fcc000" halign="left" name="NowEPG" position="140,105" size="860,28" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;24" halign="left" name="NextEPG" position="140,140" size="860,28" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;24" foregroundColor="#fcc000" halign="right" name="NowTime" position="1015,105" size="124,28" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;24" halign="right" name="NextTime" position="1015,140" size="124,28" transparent="1" zPosition="2"/>
-				</screen>"""
+				<screen backgroundColor="transparent" flags="wfNoBorder" name="VirtualZapNoPiP" position="0,0" size="1280,720" title="Virtual Zap">
+					<widget backgroundColor="transparent" name="video" position="%d,%d" size="%d,%d" zPosition="1"/>
+					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/hd.png" position="0,505" size="1280,220" zPosition="0"/>
+					<widget backgroundColor="#101214" font="Regular;26" halign="center" name="NowChannel" position="140,565" size="1000,32" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" foregroundColor="#fcc000" halign="left" name="NowEPG" position="140,610" size="860,28" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" halign="left" name="NextEPG" position="140,645" size="860,28" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" foregroundColor="#fcc000" halign="right" name="NowTime" position="1015,610" size="124,28" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;24" halign="right" name="NextTime" position="1015,645" size="124,28" transparent="1" zPosition="2"/>
+				</screen>""" % (x,y,w,h)
 		elif sz_w == 1024:
 			skin = """
-				<screen backgroundColor="#101214" flags="wfNoBorder" name="VirtualZapNoPiP" position="0,420" size="1024,176" title="Virtual Zap">
-					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/sd.png" position="0,0" size="1024,176" zPosition="0"/>
-					<widget backgroundColor="#101214" font="Regular;22" halign="center" name="NowChannel" position="100,25" size="824,30" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="left" name="NowEPG" position="100,55" size="700,25" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;20" halign="left" name="NextEPG" position="100,80" size="700,25" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="right" name="NowTime" position="800,55" size="124,25" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="800,80" size="124,25" transparent="1" zPosition="2"/>
-				</screen>"""
+				<screen backgroundColor="transparent" flags="wfNoBorder" name="VirtualZapNoPiP" position="0,0" size="1024,576" title="Virtual Zap">
+					<widget backgroundColor="transparent" name="video" position="%d,%d" size="%d,%d" zPosition="1"/>
+					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/sd.png" position="0,420" size="1024,176" zPosition="0"/>
+					<widget backgroundColor="#101214" font="Regular;22" halign="center" name="NowChannel" position="100,445" size="824,30" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="left" name="NowEPG" position="100,475" size="700,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="left" name="NextEPG" position="100,500" size="700,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="right" name="NowTime" position="800,475" size="124,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="800,500" size="124,25" transparent="1" zPosition="2"/>
+				</screen>""" % (x,y,w,h)
 		else:
-			skin = """
-				<screen backgroundColor="#101214" flags="wfNoBorder" name="VirtualZapNoPiP" position="0,420" size="720,176" title="Virtual Zap">
-					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/sd.png" position="0,0" size="720,176" zPosition="0"/>
-					<widget backgroundColor="#101214" font="Regular;22" halign="center" name="NowChannel" position="50,25" size="620,30" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="left" name="NowEPG" position="50,55" size="500,25" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;20" halign="left" name="NextEPG" position="50,80" size="500,25" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="right" name="NowTime" position="550,55" size="120,25" transparent="1" zPosition="2"/>
-					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="550,80" size="120,25" transparent="1" zPosition="2"/>
-				</screen>"""
 
+			skin = """
+				<screen backgroundColor="transparent" flags="wfNoBorder" name="VirtualZapNoPiP" position="0,0" size="720,576" title="Virtual Zap">
+					<widget backgroundColor="transparent" name="video" position="%d,%d" size="%d,%d" zPosition="1"/>
+					<ePixmap alphatest="off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/VirtualZap/sd.png" position="0,420" size="720,176" zPosition="0"/>
+					<widget backgroundColor="#101214" font="Regular;22" halign="center" name="NowChannel" position="50,445" size="620,30" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="left" name="NowEPG" position="50,475" size="500,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="left" name="NextEPG" position="50,500" size="500,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" foregroundColor="#fcc000" halign="right" name="NowTime" position="550,475" size="120,25" transparent="1" zPosition="2"/>
+					<widget backgroundColor="#101214" font="Regular;20" halign="right" name="NextTime" position="550,500" size="120,25" transparent="1" zPosition="2"/>
+				</screen>"""  % (x,y,w,h)
 
 	def __init__(self, session, servicelist = None):
 		Screen.__init__(self, session)
 		self.session = session
-		self.pipAvailable = False
-		if SystemInfo.get("NumVideoDecoders", 1) > 1 and config.plugins.virtualzap.usepip.value:
+		if SystemInfo.get("NumVideoDecoders", 1) > 1 and config.plugins.virtualzap.usepip.value and config.plugins.virtualzap.showpipininfobar.value:
 			self.skinName = "VirtualZap"
 			self.pipAvailable = True
 		else:
 			self.skinName = "VirtualZapNoPiP"
+			self.pipAvailable =  (SystemInfo.get("NumVideoDecoders", 1) > 1)  and config.plugins.virtualzap.usepip.value and not config.plugins.virtualzap.showpipininfobar.value
 		self.epgcache = eEPGCache.getInstance()
 		self.CheckForEPG = eTimer()
 		self.CheckForEPG.callback.append(self.CheckItNow)
@@ -257,8 +277,16 @@ class VirtualZap(Screen):
 		# PiP
 		if self.pipAvailable:
 			# activate PiP support
-			self["video"] = VideoWindow(fb_width = getDesktop(0).size().width(), fb_height = getDesktop(0).size().height())
+			if config.plugins.virtualzap.usepip.value and not config.plugins.virtualzap.showpipininfobar.value:
+				# activate standard PiP
+				self["video"] = VideoWindow()
+			else:
+				# show PiP in Infobar
+				self["video"] = VideoWindow(fb_width = getDesktop(0).size().width(), fb_height = getDesktop(0).size().height())
 			self.currentPiP = ""
+		else:
+			# no PiP
+			self["video"] = Label()
 		# this is the servicelist from ChannelSelectionBase
 		self.servicelist = servicelist
 		# needed, because if we won't zap, we habe to go back to the current bouquet and service
@@ -440,7 +468,7 @@ class VirtualZap(Screen):
 		self.pipservice = None
 		# save current selected servicePath for standard PiP
 		servicePath = self.servicelist.getCurrentServicePath()
-		# play selected service and close virtualzap
+		# play selected service
 		self.servicelist.zap()
 		# close VZ and start standard PiP
 		self.close(self.curRef.ref, servicePath)
@@ -523,7 +551,7 @@ class VirtualZap(Screen):
 class VirtualZapConfig(Screen, ConfigListScreen):
 
 	skin = """
-		<screen position="center,center" size="560,110" title="Virtual Zap Config" >
+		<screen position="center,center" size="560,130" title="Virtual Zap Config" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
@@ -540,7 +568,8 @@ class VirtualZapConfig(Screen, ConfigListScreen):
 		self.list = [ ]
 		self.list.append(getConfigListEntry(_("Usage"), config.plugins.virtualzap.mode))
 		if SystemInfo.get("NumVideoDecoders", 1) > 1:
-			self.list.append(getConfigListEntry(_("Show with PiP"), config.plugins.virtualzap.usepip))
+			self.list.append(getConfigListEntry(_("Use PiP"), config.plugins.virtualzap.usepip))
+			self.list.append(getConfigListEntry(_("Show PiP in Infobar"), config.plugins.virtualzap.showpipininfobar))
 		ConfigListScreen.__init__(self, self.list, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{

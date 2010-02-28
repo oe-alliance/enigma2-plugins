@@ -43,8 +43,12 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
-#: ../src/plugin.py:418
-msgid "Show with PiP"
+#: ../src/plugin.py:571
+msgid "Use PiP"
+msgstr ""
+
+#: ../src/plugin.py:572
+msgid "Show PiP in Infobar"
 msgstr ""
 
 #: ../src/plugin.py:430
