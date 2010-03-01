@@ -12,7 +12,7 @@
           </info>
           <info language="de">
                     <author>Dr.Best</author>
-                    <name>Partnerbox</name>
+                    <name>Merlin Music Player</name>
                     <packagename>enigma2-plugin-extensions-merlinmusicplayer</packagename>
                     <shortdescription>Merlin Music Player und iDream</shortdescription>
                     <description>Datenbankverwaltung für Musikdateien, Abspielen mit Merlin Music Player</description>
