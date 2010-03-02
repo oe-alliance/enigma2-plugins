@@ -11,6 +11,7 @@ from Screens import Standby
 from Tools.BoundFunction import boundFunction
 from Tools import Notifications
 from enigma import ePoint, eTimer
+from __init__ import _
 import KTglob
 import NavigationInstance
 import time

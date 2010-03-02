@@ -1,3 +1,4 @@
+from __init__ import _
 import time
 
 PLUGIN_BASE = "KiddyTimer"
