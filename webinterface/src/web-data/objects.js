@@ -203,6 +203,18 @@ function EPGList(xml){
 function Service(xml, cssclass){	
 	this.servicereference = getNodeContent(xml, 'e2servicereference', '');
 	this.servicename = getNodeContent(xml, 'e2servicename');
+	this.videowidth = getNodeContent(xml, 'e2videowidth');
+	this.videoheight = getNodeContent(xml, 'e2videoheight');
+	this.videosize = getNodeContent(xml, 'e2servicevideosize');
+	this.widescreen = getNodeContent(xml, 'e2iswidescreen');
+	this.apid = dec2hex( getNodeContent(xml, 'e2apid'),4 );
+	this.vpid = dec2hex( getNodeContent(xml, 'e2vpid'),4 );
+	this.pcrpid = dec2hex( getNodeContent(xml, 'e2pcrpid'),4 );
+	this.pmtpid = dec2hex( getNodeContent(xml, 'e2pmtpid'),4 );
+	this.txtpid = dec2hex( getNodeContent(xml, 'e2txtpid'),4 );
+	this.tsid = dec2hex( getNodeContent(xml, 'e2tsid'),4 );
+	this.onid = dec2hex( getNodeContent(xml, 'e2onid'),4 );
+	this.sid = dec2hex( getNodeContent(xml, 'e2sid'),4 );
 	
 	this.getServiceReference = function(){
 		return encodeURIComponent(this.servicereference);
@@ -231,6 +243,18 @@ function Service(xml, cssclass){
 	this.json = { 	
 			'servicereference' : this.getServiceReference(),
 			'servicename' : this.getServiceName(),
+			'videowidth' : this.videowidth,
+			'videoheight' : this.videoheight,
+			'videosize' : this.videosize,
+			'widescreen' : this.widescreen,
+			'apid' : this.apid,
+			'vpid' : this.vpid,
+			'pcrpid' : this.pcrpid,
+			'pmtpid' : this.pmtpid,
+			'txtpid' : this.txtpid,
+			'tsid' : this.tsid,
+			'onid' : this.onid,
+			'sid' : this.sid,
 			'cssclass' : cssclass
 	};
 	

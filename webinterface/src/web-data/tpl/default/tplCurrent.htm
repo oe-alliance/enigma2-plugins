@@ -18,7 +18,53 @@
 						</td>
 					</tr>
 					<tr id="trExtCurrent">
-						<td colspan="2" class="epgLong">${current.extdescription}</td>
+						<td colspan=2>
+							<table>
+								<tr>
+									<td class="epgLong">${current.extdescription}</td>
+								</tr>
+								<tr>
+									<td class="techInfo">
+										<table style="width: 350px; border: 1px solid #AAA">
+											<tr>
+												<th colspan="4" style="text-align: center">Technical Information</th>
+											</tr>
+											<tr>
+												<td>Videosize:</td>
+												<td>${service.videosize}</td>
+												<td>Widescreen:</td> 
+												<td>${service.widescreen}</td>
+											</tr>
+											<tr>
+												<td>APID:</td>
+												<td>${service.apid}</td> 
+												<td>VPID:</td>
+												<td>${service.vpid}</td>
+											</tr>
+											<tr>									
+												<td>PCRPID:</td> 
+												<td>${service.pcrpid}</td>
+												<td>PMTPID:</td> 
+												<td>${service.pmtpid}</td>
+											</tr>
+											<tr>										
+												<td>TXTPID:</td> 
+												<td>${service.txtpid}</td>									
+												<td>TSID:</td> 
+												<td>${service.tsid}</td>
+											</tr>
+											<tr>										
+												<td>ONID:</td> 
+												<td>${service.onid}</td>						
+												<td>SID:</td> 
+												<td>${service.sid}</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							
+							</table>
+						</td>
 					</tr>
 				</table>
 			{elseif}

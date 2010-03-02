@@ -176,7 +176,10 @@ function dec2hex(nr, len){
 			//something went wrong, return -1
 			hex = -1;
 		}
-	} 
+	}
+	
+	hex = '0x' + hex;
+	
 	return hex;
 }
 
@@ -1411,10 +1414,16 @@ function incomingCurrent(request){
 	//	debug("[incomingCurrent called]");
 	if(request.readyState == 4){
 		try{
-			var epg = new EPGList(getXML(request)).getArray();
+			var xml = getXML(request);
+			var epg = new EPGList(xml).getArray();
 			epg = epg[0];
-
-			var data = { current : epg };
+			
+			var service = new Service(xml).toJSON(); 
+			
+			var data = { 
+						'current' : epg,
+						'service' : service
+					};
 
 			if(typeof(templates.tplCurrent) != "undefined"){
 				var display = 'none';

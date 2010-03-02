@@ -131,6 +131,10 @@
     	-moz-border-radius: 5px;    	
     	
 	}
+	
+	.techInfo{
+		font-size: 10px;
+	}
 
 	#currentTable{
 		margin-bottom: 10px;
