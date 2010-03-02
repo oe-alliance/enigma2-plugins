@@ -70,6 +70,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         
         # Temporarily stop timer as long as we are in the setup screen
         if oKiddyTimer.dialog != None:
+            self.dialogEnabled_old = oKiddyTimer.dialogEnabled
             oKiddyTimer.setDialogStatus(False)
             
         # Plugin Information
@@ -131,7 +132,8 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         for x in self["config"].list:
             x[1].cancel()
         self.close()
-        oKiddyTimer.showHide()
+        if self.dialogEnabled_old == True:
+            oKiddyTimer.showHide()
 
     def protectedWithPin(self):
         return config.plugins.KiddyTimer.pin.getValue()
