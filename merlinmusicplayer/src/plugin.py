@@ -351,6 +351,17 @@ def OpenDatabase():
 				connection.execute('CREATE TABLE IF NOT EXISTS CurrentSongList (ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, song_id INTEGER, filename TEXT NOT NULL, title TEXT, artist TEXT, album TEXT, genre TEXT, bitrate TEXT, length TEXT, track TEXT, date TEXT, PTS INTEGER);')
 		return connection
 
+def getEncodedString(value):
+	returnValue = ""
+	try:
+		returnValue = value.encode("utf-8", 'ignore')
+	except UnicodeDecodeError:
+		try:
+			returnValue = value.encode("iso8859-1", 'ignore')
+		except UnicodeDecodeError:
+			returnValue = "n/a"
+	return returnValue
+
 def getID3Tags(root,filename):
 	audio = None
 	isFlac = False
@@ -381,22 +392,24 @@ def getID3Tags(root,filename):
 	else:
 		isAudio = False
 	if audio:
-		title = audio.get('title', [filename])[0]
+		title = getEncodedString(audio.get('title', [filename])[0])
 		try:
 			# list index out of range workaround
-			genre = audio.get('genre', ['n/a'])[0]
+			genre = getEncodedString(audio.get('genre', ['n/a'])[0])
 		except:
 			genre = "n/a"
-		artist = audio.get('artist', ['n/a'])[0]
-		album = audio.get('album', ['n/a'])[0]
+		artist = getEncodedString(audio.get('artist', ['n/a'])[0])
+		album = getEncodedString(audio.get('album', ['n/a'])[0])
 		try:
 			tracknr = int(audio.get('tracknumber', ['-1'])[0].split("/")[0])
 		except:
 			tracknr = -1
-		track = audio.get('tracknumber', [None])[0]
-		date = audio.get('date', [None])[0]
-		
-		length = str(datetime_timedelta(seconds=int(audio.info.length)))
+		track = getEncodedString(audio.get('tracknumber', ['n/a'])[0])
+		date = getEncodedString(audio.get('date', ['n/a'])[0])
+		try:
+			length = str(datetime_timedelta(seconds=int(audio.info.length))).encode("utf-8", 'ignore')
+		except:
+			length = -1
 		if not isFlac:
 			bitrate = audio.info.bitrate / 1000
 		else:
@@ -413,8 +426,8 @@ def getID3Tags(root,filename):
 			length = ""
 			bitrate = None
 
-	return audio, isAudio, title.encode("utf-8", 'ignore'), genre.encode("utf-8", 'ignore'),artist.encode("utf-8", 'ignore'),album.encode("utf-8", 'ignore'),tracknr,track,date,length.encode("utf-8", 'ignore'),bitrate
-
+	return audio, isAudio, title, genre ,artist, album, tracknr, track, date, length, bitrate
+	
 class MerlinMusicPlayerScreenSaver(Screen):
 
 	sz_w = getDesktop(0).size().width()
