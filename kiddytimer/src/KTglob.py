@@ -1,7 +1,7 @@
 import time
 
 PLUGIN_BASE = "KiddyTimer"
-PLUGIN_VERSION = "0.8"
+PLUGIN_VERSION = "0.8a"
 
 DAYNAMES= (_("Sunday"),
           _("Monday"),

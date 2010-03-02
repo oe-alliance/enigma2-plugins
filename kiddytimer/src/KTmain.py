@@ -126,7 +126,7 @@ class KiddyTimer():
             self.setDialogStatus( True )
             if self.dialog == None:
                 self.dialog = self.session.instantiateDialog(KiddyTimerScreen)
-                self.dialog.hide()
+                self.dialog.show()
         else:
             self.callbackParameter = PARAM_DIALOG
             self.askForPassword(self.pinEntered)
@@ -149,6 +149,7 @@ class KiddyTimer():
                 self.setDialogStatus( False )        
             elif self.callbackParameter == PARAM_DISABLETIMER:
                 config.plugins.KiddyTimer.enabled.value = False
+                self.enabled = config.plugins.KiddyTimer.enabled.value
                 config.plugins.KiddyTimer.enabled.save()
                 self.stopMe()                
             elif self.callbackParameter == PARAM_INCREASETIMER:
@@ -287,7 +288,7 @@ class KiddyTimer():
 
     def getOptionList(self):
         keyList = []
-        if config.plugins.KiddyTimer.enabled.value:
+        if self.enabled:
             if self.dialogEnabled:
                 keyList.append((_("Stop KiddyTimer (this session only)"),PARAM_STOPTIMER))
                 keyList.append((_("Increase remaining time"),PARAM_INCREASETIMER))
@@ -315,6 +316,7 @@ class KiddyTimer():
             self.activationCallback(True)
         elif  answer[1] == PARAM_ENABLETIMER:
             config.plugins.KiddyTimer.enabled.value = True
+            self.enabled = config.plugins.KiddyTimer.enabled.value
             config.plugins.KiddyTimer.enabled.save()
             self.gotSession(self.session)
         elif answer[1] == PARAM_INCREASETIMER:
