@@ -1,5 +1,0 @@
-* Remove all os.system calls
-* Fix Timer Pre-/Posttime
-* Implement Timer Sanity Check with proper Handling on Webinterface side
-* Add Standby indicator to index.html
-* Move bouquetlist into channellist
