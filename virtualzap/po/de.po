@@ -51,6 +51,10 @@ msgstr "PiP-Anzeige verwenden"
 msgid "Show PiP in Infobar"
 msgstr "PiP in Infobar anzeigen"
 
+#: ../src/plugin.py:600
+msgid "Remember last service"
+msgstr "Letzten Kanal merken"
+
 #: ../src/plugin.py:430
 msgid ""
 "GUI needs a restart to apply the new settings.\n"

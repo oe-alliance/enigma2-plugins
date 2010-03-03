@@ -45,7 +45,7 @@ from Screens.PictureInPicture import PictureInPicture
 
 InfoBarShowHideINIT = None
 
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, getConfigListEntry, configfile, ConfigPosition
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, getConfigListEntry, configfile, ConfigPosition, ConfigText
 from Components.ConfigList import ConfigList, ConfigListScreen
 
 # for localized messages
@@ -55,6 +55,9 @@ config.plugins.virtualzap = ConfigSubsection()
 config.plugins.virtualzap.mode = ConfigSelection(default="0", choices = [("0", _("as plugin in extended bar")),("1", _("with long OK press")), ("2", _("with exit button"))])
 config.plugins.virtualzap.usepip = ConfigYesNo(default = True)
 config.plugins.virtualzap.showpipininfobar = ConfigYesNo(default = True)
+config.plugins.virtualzap.saveLastService = ConfigYesNo(default = False)
+config.plugins.virtualzap.curref = ConfigText()
+config.plugins.virtualzap.curbouquet = ConfigText()
 
 def autostart(reason, **kwargs):
 	if config.plugins.virtualzap.mode.value != "0":
@@ -289,9 +292,17 @@ class VirtualZap(Screen):
 			self["video"] = Label()
 		# this is the servicelist from ChannelSelectionBase
 		self.servicelist = servicelist
-		# needed, because if we won't zap, we habe to go back to the current bouquet and service
+		# needed, because if we won't zap, we have to go back to the current bouquet and service
 		self.curRef = ServiceReference(self.servicelist.getCurrentSelection())
 		self.curBouquet = self.servicelist.getRoot()
+		# start with last used service
+		if config.plugins.virtualzap.saveLastService.value:
+			# get service and bouquet ref
+			ref = eServiceReference(config.plugins.virtualzap.curref.value)
+			bouquet = eServiceReference(config.plugins.virtualzap.curbouquet.value)
+			if ref.valid() and bouquet.valid():
+				# select bouquet and ref in servicelist
+				self.setServicelistSelection(bouquet, ref)
 
 	def onLayoutReady(self):
 		self.updateInfos()
@@ -431,14 +442,16 @@ class VirtualZap(Screen):
 		# we need to select the old service with bouquet
 		if self.servicelist.getRoot() != bouquet: #already in correct bouquet?
 			self.servicelist.clearPath()
-			if self.servicelist.bouquet_root != bouquet:
-				self.servicelist.enterPath(self.servicelist.bouquet_root)
+			self.servicelist.enterPath(self.servicelist.bouquet_root)
 			self.servicelist.enterPath(bouquet)
 		self.servicelist.setCurrentSelection(service) #select the service in servicelist
 
 	def closing(self):
 		if self.pipAvailable:
 			self.pipservice = None
+		# save last used service and bouqet ref
+		self.saveLastService(self.servicelist.getCurrentSelection().toString(), self.servicelist.getRoot().toString())
+		# select running service in servicelist again
 		self.setServicelistSelection(self.curBouquet, self.curRef.ref)
 		self.close()
 			
@@ -448,6 +461,8 @@ class VirtualZap(Screen):
 			self.pipservice = None
 		# play selected service and close virtualzap
 		self.servicelist.zap()
+		# save last used service and bouqet ref
+		self.saveLastService("","")
 		self.close()
 
 	def standardPiP(self):
@@ -457,7 +472,10 @@ class VirtualZap(Screen):
 		self.pipservice = None
 		# save current selected service for standard PiP
 		service = ServiceReference(self.servicelist.getCurrentSelection()).ref
-		servicePath = self.servicelist.getCurrentServicePath() # same bug as in channelselection 
+		servicePath = self.servicelist.getCurrentServicePath() # same bug as in channelselection
+		# save last used service and bouqet ref
+		self.saveLastService(self.servicelist.getCurrentSelection().toString(), self.servicelist.getRoot().toString())
+		# select running service in servicelist
 		self.setServicelistSelection(self.curBouquet, self.curRef.ref)
 		# close VZ and start standard PiP
 		self.close(service, servicePath)
@@ -468,10 +486,19 @@ class VirtualZap(Screen):
 		self.pipservice = None
 		# save current selected servicePath for standard PiP
 		servicePath = self.servicelist.getCurrentServicePath()
+		# save last used service and bouqet ref
+		self.saveLastService(self.curRef.ref.toString(), self.curBouquet.toString())
 		# play selected service
 		self.servicelist.zap()
 		# close VZ and start standard PiP
 		self.close(self.curRef.ref, servicePath)
+
+	def saveLastService(self, ref, bouquet):
+		if config.plugins.virtualzap.saveLastService.value:
+			# save last VZ service
+			config.plugins.virtualzap.curref.value = ref
+			config.plugins.virtualzap.curbouquet.value = bouquet
+			config.plugins.virtualzap.save()
 
 	def CheckItNow(self):
 		self.CheckForEPG.stop()
@@ -551,7 +578,7 @@ class VirtualZap(Screen):
 class VirtualZapConfig(Screen, ConfigListScreen):
 
 	skin = """
-		<screen position="center,center" size="560,130" title="Virtual Zap Config" >
+		<screen position="center,center" size="560,150" title="Virtual Zap Config" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
@@ -570,6 +597,7 @@ class VirtualZapConfig(Screen, ConfigListScreen):
 		if SystemInfo.get("NumVideoDecoders", 1) > 1:
 			self.list.append(getConfigListEntry(_("Use PiP"), config.plugins.virtualzap.usepip))
 			self.list.append(getConfigListEntry(_("Show PiP in Infobar"), config.plugins.virtualzap.showpipininfobar))
+		self.list.append(getConfigListEntry(_("Remember last service"), config.plugins.virtualzap.saveLastService))
 		ConfigListScreen.__init__(self, self.list, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{

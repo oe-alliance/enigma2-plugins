@@ -51,6 +51,10 @@ msgstr ""
 msgid "Show PiP in Infobar"
 msgstr ""
 
+#: ../src/plugin.py:600
+msgid "Remember last service"
+msgstr ""
+
 #: ../src/plugin.py:430
 msgid ""
 "GUI needs a restart to apply the new settings.\n"
