@@ -481,7 +481,7 @@ class VirtualZap(Screen):
 		# play selected service and close virtualzap
 		self.servicelist.zap()
 		# save last used service and bouqet ref
-		self.saveLastService("","")
+		self.saveLastService(self.curRef.ref.toString(), self.curBouquet.toString())
 		self.close()
 
 	def standardPiP(self):
