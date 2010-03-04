@@ -45,7 +45,7 @@ from Screens.PictureInPicture import PictureInPicture
 
 InfoBarShowHideINIT = None
 
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, getConfigListEntry, configfile, ConfigPosition, ConfigText
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, getConfigListEntry, configfile, ConfigPosition, ConfigText, ConfigInteger
 from Components.ConfigList import ConfigList, ConfigListScreen
 
 # for localized messages
@@ -58,6 +58,7 @@ config.plugins.virtualzap.showpipininfobar = ConfigYesNo(default = True)
 config.plugins.virtualzap.saveLastService = ConfigYesNo(default = False)
 config.plugins.virtualzap.curref = ConfigText()
 config.plugins.virtualzap.curbouquet = ConfigText()
+config.plugins.virtualzap.exittimer =  ConfigInteger(0,limits = (0, 20))
 
 def autostart(reason, **kwargs):
 	if config.plugins.virtualzap.mode.value != "0":
@@ -303,9 +304,19 @@ class VirtualZap(Screen):
 			if ref.valid() and bouquet.valid():
 				# select bouquet and ref in servicelist
 				self.setServicelistSelection(bouquet, ref)
+		# prepare exitTimer
+		self.exitTimer = eTimer()
+		self.exitTimer.timeout.get().append(self.standardPiP)
 
 	def onLayoutReady(self):
 		self.updateInfos()
+
+	def resetExitTimer(self):
+		# if enabled, run exit timer
+		if config.plugins.virtualzap.exittimer.value != 0:
+			if self.exitTimer.isActive():
+				self.exitTimer.stop()
+			self.exitTimer.start(config.plugins.virtualzap.exittimer.value * 1000)
 
 	def nextService(self):
 		# get next service
@@ -369,6 +380,7 @@ class VirtualZap(Screen):
 
 
 	def updateInfos(self):
+		self.resetExitTimer()
 		# update data
 		current = ServiceReference(self.servicelist.getCurrentSelection())
 		self["NowChannel"].setText(current.getServiceName())
@@ -409,6 +421,9 @@ class VirtualZap(Screen):
 		self.session.open(EPGSelection, current.ref)
 
 	def openEventView(self):
+		# stop exitTimer
+		if self.exitTimer.isActive():
+			self.exitTimer.stop()
 		# show EPG Event
 		epglist = [ ]
 		self.epglist = epglist
@@ -421,7 +436,11 @@ class VirtualZap(Screen):
 		if evt:
 			epglist.append(evt)
 		if epglist:
-			self.session.open(EventViewEPGSelect, epglist[0], service, self.eventViewCallback, self.openSingleServiceEPG, self.openMultiServiceEPG, self.openSimilarList)
+			self.session.openWithCallback(self.EventViewEPGSelectCallBack, EventViewEPGSelect, epglist[0], service, self.eventViewCallback, self.openSingleServiceEPG, self.openMultiServiceEPG, self.openSimilarList)
+
+	def EventViewEPGSelectCallBack(self):
+		# if enabled, start ExitTimer
+		self.resetExitTimer()
 
 	def eventViewCallback(self, setEvent, setService, val):
 		epglist = self.epglist
@@ -499,6 +518,9 @@ class VirtualZap(Screen):
 			config.plugins.virtualzap.curref.value = ref
 			config.plugins.virtualzap.curbouquet.value = bouquet
 			config.plugins.virtualzap.save()
+		# stop exitTimer
+		if self.exitTimer.isActive():
+			self.exitTimer.stop()
 
 	def CheckItNow(self):
 		self.CheckForEPG.stop()
@@ -578,7 +600,7 @@ class VirtualZap(Screen):
 class VirtualZapConfig(Screen, ConfigListScreen):
 
 	skin = """
-		<screen position="center,center" size="560,150" title="Virtual Zap Config" >
+		<screen position="center,center" size="560,180" title="Virtual Zap Config" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
@@ -597,6 +619,7 @@ class VirtualZapConfig(Screen, ConfigListScreen):
 		if SystemInfo.get("NumVideoDecoders", 1) > 1:
 			self.list.append(getConfigListEntry(_("Use PiP"), config.plugins.virtualzap.usepip))
 			self.list.append(getConfigListEntry(_("Show PiP in Infobar"), config.plugins.virtualzap.showpipininfobar))
+			self.list.append(getConfigListEntry(_("Start standard PiP after x secs (0 = disabled)"), config.plugins.virtualzap.exittimer))
 		self.list.append(getConfigListEntry(_("Remember last service"), config.plugins.virtualzap.saveLastService))
 		ConfigListScreen.__init__(self, self.list, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],

@@ -51,7 +51,11 @@ msgstr ""
 msgid "Show PiP in Infobar"
 msgstr ""
 
-#: ../src/plugin.py:600
+#: ../src/plugin.py:622
+msgid "Start standard PiP after x secs (0 = disabled)"
+msgstr ""
+
+#: ../src/plugin.py:623
 msgid "Remember last service"
 msgstr ""
 
