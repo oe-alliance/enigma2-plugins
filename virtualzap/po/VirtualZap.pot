@@ -43,7 +43,7 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
-#: ../src/plugin.py:571
+#: ../src/plugin.py:598
 msgid "Use PiP"
 msgstr ""
 
