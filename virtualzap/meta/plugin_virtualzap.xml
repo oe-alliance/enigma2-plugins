@@ -13,7 +13,7 @@
           <info language="de">
                     <author>Dr.Best</author>
                     <name>Virtual Zap</name>
-                    <packagename>enigma2-plugin-extensions-shoutcast</packagename>
+                    <packagename>enigma2-plugin-extensions-virtualzap</packagename>
 		    <shortdescription>EPG Daten und PiP von Kanälen in Infobar anzeigen</shortdescription>
                     <description>EPG Daten und PiP von Kanälen in Infobar anzeigen</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/virtualzap.jpg" />		 
