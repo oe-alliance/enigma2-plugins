@@ -63,6 +63,7 @@ dvdbackup/src/Makefile
 
 dyndns/Makefile
 dyndns/src/Makefile
+dyndns/meta/Makefile
 
 elektro/Makefile
 elektro/meta/Makefile
