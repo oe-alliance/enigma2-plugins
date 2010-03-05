@@ -136,7 +136,7 @@ function notify(text, state){
 
 
 function simpleResultHandler(simpleResult){
-	notify(simpleResult.statetext, simpleResult.state);
+	notify(simpleResult.getStateText(), simpleResult.getState());
 }
 
 

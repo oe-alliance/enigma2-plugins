@@ -327,10 +327,20 @@ class Timer(Source):
 			timer = RecordTimerEntry(service_ref, begin, end, name, description, 0, disabled, justplay, afterEvent, dirname=dirname, tags=tags)
 			timer.repeated = repeated
 			#add the new timer
-			self.recordtimer.record(timer)
-			return ( True, "Timer added successfully!" )
-		except Exception:
+			conflicts = self.recordtimer.record(timer)
+			if conflicts is None:
+				return ( True, 'Timer "%s" added successfully!' %(timer.name) )
+			else:
+				print "[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts)
+				msg = ""
+				for timer in conflicts:
+					msg = "%s / %s" %(msg, timer.name)				
+					
+				return (False, "Conflicting Timer(s) detected! %s" %(msg)) 
+				
+		except Exception, e:
 			#something went wrong, most possibly one of the given paramater-values was wrong
+			print "[WebComponents.Timer] editTimer exception: %s" %(e)
 			return ( False, "Could not add timer '%s'!" % name )
 
 		return ( False, "Unexpected Error" )
