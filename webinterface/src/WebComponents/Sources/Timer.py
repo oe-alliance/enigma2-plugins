@@ -311,9 +311,19 @@ class Timer(Source):
 								
 								timer.processRepeated()								
 								#send the changed timer back to enigma2 and hope it's good
-								self.recordtimer.record(timer)
-								print "[WebComponents.Timer] editTimer: Timer changed!"
-								return ( True, "Timer %s has been changed!" % (timer.name) )
+								
+								conflicts = self.recordtimer.record(timer)
+								if conflicts is None:
+									print "[WebComponents.Timer] editTimer: Timer changed!"
+									return ( True, "Timer '%s' changed" %(timer.name) )
+								else:
+									print "[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts)
+									msg = ""
+									for timer in conflicts:
+										msg = "%s / %s" %(msg, timer.name)				
+										
+									return (False, "Conflicting Timer(s) detected! %s" %(msg)) 
+
 			except Exception:
 				#obviously some value was not good, return an error
 				return ( False, "Changing the timer for '%s' failed!" % name )
@@ -329,7 +339,7 @@ class Timer(Source):
 			#add the new timer
 			conflicts = self.recordtimer.record(timer)
 			if conflicts is None:
-				return ( True, 'Timer "%s" added successfully!' %(timer.name) )
+				return ( True, "Timer '%s' added" %(timer.name) )
 			else:
 				print "[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts)
 				msg = ""
@@ -373,8 +383,18 @@ class Timer(Source):
 		(begin, end, name, description, eit) = parseEvent(event)
 
 		timer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.NONE, dirname=location, tags=tags)
-		self.recordtimer.record(timer)
-		return ( True, "Timer '%s' added" % (timer.name) )
+		
+		conflicts = self.recordtimer.record(timer)
+		if conflicts is None:
+			return ( True, "Timer '%s' added" %(timer.name) )
+		else:
+			print "[WebComponents.Timer] editTimer conflicting Timers: %s" %(conflicts)
+			msg = ""
+			for timer in conflicts:
+				msg = "%s / %s" %(msg, timer.name)				
+				
+			return (False, "Conflicting Timer(s) detected! %s" %(msg)) 
+
 
 	def writeTimerList(self, force=False):
 		# is there an easier and better way? :\
