@@ -135,6 +135,7 @@ lastfm/src/Makefile
 
 letterbox/Makefile
 letterbox/src/Makefile
+letterbox/meta/Makefile
 
 logomanager/Makefile
 logomanager/logodir_hdd/Makefile
@@ -188,6 +189,7 @@ movietagger/src/Makefile
 
 multirc/Makefile
 multirc/src/Makefile
+multirc/meta/Makefile
 
 mytube/Makefile
 mytube/meta/Makefile
