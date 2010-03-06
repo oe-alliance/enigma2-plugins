@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 startupservice\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-04 15:10+0100\n"
+"POT-Creation-Date: 2010-02-10 18:31+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -16,11 +16,15 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/startupservice\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/startupservice\n"
 
-#: /home/dario/Plugins/startupservice/src/plugin.py:80
+#: /home/dario/Plugins/startupservice/src/plugin.py:82
 msgid "set as startup service"
 msgstr "Configurare come canale di avvio"
 
-#: /home/dario/Plugins/startupservice/src/plugin.py:81
+#: /home/dario/Plugins/startupservice/src/plugin.py:83
 msgid "reset startup service"
 msgstr "Reset del canale di avvio"
+
+#: /home/dario/Plugins/startupservice/src/plugin.py:102
+msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
+msgstr "Se viene visualizzato questo messaggio, sintonizzare il canale che si desidera utilizzare come canale di avvio, e riprovare."
 
