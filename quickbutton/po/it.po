@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - quickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-20 11:40+0200\n"
+"POT-Creation-Date: 2010-02-10 17:50+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -16,30 +16,64 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/quickbutton\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/quickbutton\n"
 
-msgid "Assign plugin to long blue key pressed"
-msgstr "Assegnare il plugin al tasto blu (lungo)"
+#: /home/dario/Plugins/quickbutton/src/plugin.py:36
+#: /home/dario/Plugins/quickbutton/src/plugin.py:37
+#: /home/dario/Plugins/quickbutton/src/plugin.py:38
+#: /home/dario/Plugins/quickbutton/src/plugin.py:39
+#: /home/dario/Plugins/quickbutton/src/plugin.py:40
+#: /home/dario/Plugins/quickbutton/src/plugin.py:120
+#: /home/dario/Plugins/quickbutton/src/plugin.py:195
+msgid "Nothing"
+msgstr "Nulla"
 
+#: /home/dario/Plugins/quickbutton/src/plugin.py:74
+msgid "setup for Quickbutton"
+msgstr "Configurazione per Quickbutton"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:81
 msgid "Assign plugin to long green key pressed"
 msgstr "Assegnare il plugin al tasto verde (lungo)"
 
-msgid "Assign plugin to long red key pressed"
-msgstr "Assegnare il plugin al tasto rosso (lungo)"
-
+#: /home/dario/Plugins/quickbutton/src/plugin.py:82
 msgid "Assign plugin to long yellow key pressed"
 msgstr "Assegnare il plugin al tasto giallo (lungo)"
 
+#: /home/dario/Plugins/quickbutton/src/plugin.py:83
+msgid "Assign plugin to long red key pressed"
+msgstr "Assegnare il plugin al tasto rosso (lungo)"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:84
+msgid "Assign plugin to long blue key pressed"
+msgstr "Assegnare il plugin al tasto blu (lungo)"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:86
 msgid "Assign plugin to red key pressed"
 msgstr "Assegnare il plugin al tasto rosso (breve)"
 
-msgid "Cancel"
-msgstr "Annull."
+#: /home/dario/Plugins/quickbutton/src/plugin.py:118
+msgid "Unknown Error"
+msgstr "Errore Sconosciuto: "
 
-msgid "Display 4:3 content as"
-msgstr "Mostrare contenuti in 4:3 come"
+#: /home/dario/Plugins/quickbutton/src/plugin.py:121
+#: /home/dario/Plugins/quickbutton/src/plugin.py:196
+#: /home/dario/Plugins/quickbutton/src/plugin.py:241
+msgid "Single EPG"
+msgstr "EPG singolo"
 
-msgid "EPG List"
-msgstr "Elenco EPG"
+#: /home/dario/Plugins/quickbutton/src/plugin.py:126
+#: /home/dario/Plugins/quickbutton/src/plugin.py:197
+#: /home/dario/Plugins/quickbutton/src/plugin.py:243
+msgid "Multi EPG"
+msgstr "Multi EPG"
 
+#: /home/dario/Plugins/quickbutton/src/plugin.py:131
+#: /home/dario/Plugins/quickbutton/src/plugin.py:198
+#: /home/dario/Plugins/quickbutton/src/plugin.py:245
+msgid "MediaPlayer"
+msgstr "MediaPlayer"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:137
+#: /home/dario/Plugins/quickbutton/src/plugin.py:165
 #, python-format
 msgid ""
 "Error!\n"
@@ -48,56 +82,73 @@ msgstr ""
 "Errore!\n"
 "Tipo errore: %s"
 
-msgid "Just Scale"
-msgstr "Scalare solamente"
-
-msgid "MediaPlayer"
-msgstr "MediaPlayer"
-
-msgid "No plugin assigned!"
-msgstr "Nessun plugin assegnato"
-
-msgid "Nothing"
-msgstr "Nulla"
-
-msgid "OK"
-msgstr "Ok"
-
-msgid "Pan&Scan"
-msgstr "Pan&Scan"
-
-msgid "Pillarbox"
-msgstr "Pillarbox"
-
+#: /home/dario/Plugins/quickbutton/src/plugin.py:138
+#: /home/dario/Plugins/quickbutton/src/plugin.py:199
+#: /home/dario/Plugins/quickbutton/src/plugin.py:247
 msgid "Plugin browser"
 msgstr "Browser plugin"
 
-msgid "Plugin not found!"
-msgstr "Plugin non trovato!"
+#: /home/dario/Plugins/quickbutton/src/plugin.py:142
+#: /home/dario/Plugins/quickbutton/src/plugin.py:200
+#: /home/dario/Plugins/quickbutton/src/plugin.py:249
+msgid "switch 4:3 content display"
+msgstr "Commutare visual. contenuti in 4:3"
 
+#: /home/dario/Plugins/quickbutton/src/plugin.py:143
+msgid "Pillarbox"
+msgstr "Pillarbox"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:144
+msgid "Pan&Scan"
+msgstr "Pan&Scan"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:145
+msgid "Just Scale"
+msgstr "Scalare solamente"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:149
+msgid "Display 4:3 content as"
+msgstr "Mostrare contenuti in 4:3 come"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:151
+#: /home/dario/Plugins/quickbutton/src/plugin.py:201
+#: /home/dario/Plugins/quickbutton/src/plugin.py:251
 msgid "Timer"
 msgstr "Timer"
 
-msgid "Unknown Error"
-msgstr "Errore Sconosciuto: "
+#: /home/dario/Plugins/quickbutton/src/plugin.py:167
+msgid "Plugin not found!"
+msgstr "Plugin non trovato!"
 
-msgid "assigned to long blue"
-msgstr "Assegnato al tasto blu (lungo)"
+#: /home/dario/Plugins/quickbutton/src/plugin.py:169
+msgid "No plugin assigned!"
+msgstr "Nessun plugin assegnato"
 
-msgid "assigned to long green"
-msgstr "Assegnato al tasto verde (lungo)"
+#: /home/dario/Plugins/quickbutton/src/plugin.py:186
+msgid "Cancel"
+msgstr "Annull."
 
+#: /home/dario/Plugins/quickbutton/src/plugin.py:187
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:223
 msgid "assigned to long red"
 msgstr "Assegnato al tasto rosso (lungo)"
 
+#: /home/dario/Plugins/quickbutton/src/plugin.py:224
+msgid "assigned to long green"
+msgstr "Assegnato al tasto verde (lungo)"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:225
 msgid "assigned to long yellow"
 msgstr "Assegnato al tasto giallo (lungo)"
 
+#: /home/dario/Plugins/quickbutton/src/plugin.py:226
+msgid "assigned to long blue"
+msgstr "Assegnato al tasto blu (lungo)"
+
+#: /home/dario/Plugins/quickbutton/src/plugin.py:231
 msgid "assigned to red"
 msgstr "Assegnato al tasto rosso (breve)"
 
-msgid "setup for Quickbutton"
-msgstr "Configurazione per Quickbutton"
-
-msgid "switch 4:3 content display"
-msgstr "Commutare visual. contenuti in 4:3"
