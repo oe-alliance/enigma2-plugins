@@ -22,5 +22,7 @@
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-fritzcall" />
 		<file type="package" name="python-html" />
+		<file type="package" name="python-textutils" />
+		<file type="package" name="twisted-web" />
 	  </files>
 </default>

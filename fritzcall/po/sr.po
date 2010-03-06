@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-10 16:55+0100\n"
+"POT-Creation-Date: 2010-02-17 19:59+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -322,6 +322,9 @@ msgstr "Priguši kod poziva"
 msgid "Name"
 msgstr "Ime"
 
+msgid "Network mount"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
 msgstr "Neu"
@@ -596,9 +599,6 @@ msgid "not encrypted"
 msgstr "Nije kodirano"
 
 msgid "number suppressed"
-msgstr ""
-
-msgid "on connect"
 msgstr ""
 
 msgid "on ring"

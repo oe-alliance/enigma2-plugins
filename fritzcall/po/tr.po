@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-10 16:55+0100\n"
+"POT-Creation-Date: 2010-02-17 19:59+0100\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -318,6 +318,9 @@ msgstr "Çağrı olduğunda sessize al"
 msgid "Name"
 msgstr "Ad"
 
+msgid "Network mount"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
 msgstr "Yeni"
@@ -594,9 +597,6 @@ msgid "not encrypted"
 msgstr "şifrelenmemiş"
 
 msgid "number suppressed"
-msgstr ""
-
-msgid "on connect"
 msgstr ""
 
 msgid "on ring"

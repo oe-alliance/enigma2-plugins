@@ -6,6 +6,7 @@ from Components.config import config #@UnresolvedImport
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE #@UnresolvedImport
 import gettext, os
+from enigma import eBackgroundFileEraser
 
 lang = language.getLanguage()
 os.environ["LANGUAGE"] = lang[:2]
@@ -21,7 +22,8 @@ def _(txt): # pylint: disable-msg=C0103
 
 def initDebug():
 	try:
-		os.remove("/tmp/FritzDebug.log")
+		# os.remove("/tmp/FritzDebug.log")
+		eBackgroundFileEraser.getInstance().erase("/tmp/FritzDebug.log")
 	except OSError:
 		pass
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-10 16:55+0100\n"
-"PO-Revision-Date: 2010-01-10 16:56+0100\n"
+"POT-Creation-Date: 2010-02-17 19:59+0100\n"
+"PO-Revision-Date: 2010-03-06 13:32+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -327,6 +327,9 @@ msgstr "Ton aus bei angezeigten Anrufen"
 msgid "Name"
 msgstr "Name"
 
+msgid "Network mount"
+msgstr "Netzwerk"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
 msgstr "Neu"
@@ -605,9 +608,6 @@ msgstr "nicht verschlüsselt"
 
 msgid "number suppressed"
 msgstr "Nummer unterdrückt"
-
-msgid "on connect"
-msgstr "bei Verbindung"
 
 msgid "on ring"
 msgstr "bei Klingeln"

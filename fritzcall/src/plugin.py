@@ -14,6 +14,9 @@ from Screens.HelpMenu import HelpableScreen
 
 from enigma import eTimer, eSize, ePoint #@UnresolvedImport # pylint: disable-msg=E0611
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eDVBVolumecontrol
+from enigma import eBackgroundFileEraser
+#BgFileEraser = eBackgroundFileEraser.getInstance()
+#BgFileEraser.erase("blabla.txt")
 
 from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
@@ -105,27 +108,35 @@ config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 config.plugins.FritzCall.fullscreen = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.connectionVerbose = ConfigEnableDisable(default=True)
 
-def handleMountpoint(loc):
-	# debug("[FritzCall] handleMountpoint: %s" %repr(loc))
-	mp = loc[0]
-	while mp[-1] == '/':
-		mp = mp[:-1]
-	if os.path.exists(os.path.join(mp, "PhoneBook.txt")):
-		desc = ' *'
-	else:
-		desc = ''
-	desc = loc[1] + desc
-	return (mp, desc + " (" + mp + ")")
 
-mountedDevs = [(resolveFilename(SCOPE_CONFIG), _("Flash"))]
-if os.path.isdir(resolveFilename(SCOPE_MEDIA, "cf")):
-	mountedDevs.append((resolveFilename(SCOPE_MEDIA, "cf"), _("Compact Flash")))
-if os.path.isdir(resolveFilename(SCOPE_MEDIA, "usb")):
-	mountedDevs.append((resolveFilename(SCOPE_MEDIA, "usb"), _("USB Device")))
-for p in harddiskmanager.getMountedPartitions(True):
-	mountedDevs.append((p.mountpoint, (_(p.description) if p.description else "")))
-mountedDevs = map(handleMountpoint, mountedDevs)
-config.plugins.FritzCall.phonebookLocation = ConfigSelection(choices=mountedDevs)
+def getMountedDevs():
+	def handleMountpoint(loc):
+		# debug("[FritzCall] handleMountpoint: %s" %repr(loc))
+		mp = loc[0]
+		while mp[-1] == '/':
+			mp = mp[:-1]
+		if os.path.exists(os.path.join(mp, "PhoneBook.txt")):
+			if os.access(os.path.join(mp, "PhoneBook.txt"), os.W_OK):
+				desc = ' *'
+			else:
+				desc = ' -'
+		else:
+			desc = ''
+		desc = loc[1] + desc
+		return (mp, desc + " (" + mp + ")")
+
+	mountedDevs = [(resolveFilename(SCOPE_CONFIG), _("Flash")),
+				   (resolveFilename(SCOPE_MEDIA, "cf"), _("Compact Flash")),
+				   (resolveFilename(SCOPE_MEDIA, "usb"), _("USB Device"))]
+	mountedDevs += map(lambda p: (p.mountpoint, (_(p.description) if p.description else "")), harddiskmanager.getMountedPartitions(True))
+	# print("[FritzCall] getMountedDevs1: %s" %repr(mountedDevs))
+	mountedDevs = filter(lambda path: os.path.isdir(path[0]) and os.access(path[0], os.W_OK|os.X_OK), mountedDevs)
+	# put this after the write/executable check, that is far too slow...
+	if os.path.isdir(resolveFilename(SCOPE_MEDIA, "net")):
+		mountedDevs += map(lambda p: (resolveFilename(SCOPE_MEDIA, os.path.join("net", p)), _("Network mount")), os.listdir(resolveFilename(SCOPE_MEDIA, "net")))
+	mountedDevs = map(handleMountpoint, mountedDevs)
+	return mountedDevs
+config.plugins.FritzCall.phonebookLocation = ConfigSelection(choices=getMountedDevs())
 
 countryCodes = [
 	("0049", _("Germany")),
@@ -405,9 +416,10 @@ class FritzCallFBF:
 		if self._callScreen:
 			self._callScreen.updateStatus(_("login verification"))
 		debug("[FritzCallFBF] _gotPageLogin: verify login")
-		found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-		if found:
-			text = _("FRITZ!Box - Error logging in: %s") + found.group(1)
+		start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
+		if start != -1:
+			start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
+			text = _("FRITZ!Box - Error logging in: %s") + html[start, html.find('</p>', start)]
 			self._notify(text)
 		else:
 			if self._callScreen:
@@ -455,9 +467,16 @@ class FritzCallFBF:
 
 	def _loadFritzBoxPhonebook(self, html):
 		if html:
-			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			if found:
-				self._errorLoad('Login: ' + found.group(1))
+			#===================================================================
+			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			# if found:
+			#	self._errorLoad('Login: ' + found.group(1))
+			#	return
+			#===================================================================
+			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
+			if start != -1:
+				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
+				self._errorLoad('Login: ' + html[start, html.find('</p>', start)])
 				return
 		parms = urlencode({
 						'getpage':'../html/de/menus/menu2.html',
@@ -494,7 +513,8 @@ class FritzCallFBF:
 				charset = 'iso-8859-1'
 				html = html2unicode(html.decode('iso-8859-1'), 'iso-8859-1').encode('utf-8') # this looks silly, but has to be
 
-		if re.search('document.write\(TrFon1\(\)', html):
+		# if re.search('document.write\(TrFon1\(\)', html):
+		if html.find('document.write(TrFon1()') != -1:
 			#===============================================================================
 			#				 New Style: 7270 (FW 54.04.58, 54.04.63-11941, 54.04.70, 54.04.74-14371, 54.04.76)
 			#							7170 (FW 29.04.70) 22.03.2009
@@ -517,6 +537,7 @@ class FritzCallFBF:
 			for entry in entries:
 				# debug(entry.group(1)
 				# TrFonName (id, name, category)
+				# TODO: replace re.match?
 				found = re.match('TrFonName\("[^"]*", "([^"]+)", "[^"]*"\);', entry.group(1))
 				if found:
 					name = found.group(1).replace(',','').strip()
@@ -550,7 +571,8 @@ class FritzCallFBF:
 						# Beware: strings in phonebook.phonebook have to be in utf-8!
 						phonebook.phonebook[thisnumber] = thisname
 
-		elif re.search('document.write\(TrFon\(', html):
+		# elif re.search('document.write\(TrFon\(', html):
+		elif html.find('document.write(TrFon(') != -1:
 			#===============================================================================
 			#				Old Style: 7050 (FW 14.04.33)
 			#	We expect one line with TrFon(No,Name,Number,Shortcut,Vanity)
@@ -608,9 +630,16 @@ class FritzCallFBF:
 
 	def _getCalls(self, callback, html):
 		if html:
-			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			if found:
-				self._errorCalls('Login: ' + found.group(1))
+			#===================================================================
+			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			# if found:
+			#	self._errorCalls('Login: ' + found.group(1))
+			#	return
+			#===================================================================
+			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
+			if start != -1:
+				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
+				self._errorCalls('Login: ' + html[start, html.find('</p>', start)])
 				return
 		#
 		# we need this to fill Anrufliste.csv
@@ -618,10 +647,17 @@ class FritzCallFBF:
 		#
 		debug("[FritzCallFBF] _getCalls")
 		if html:
-			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			if found:
-				text = _("FRITZ!Box - Error logging in: %s") + found.group(1)
-				self._notify(text)
+			#===================================================================
+			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			# if found:
+			#	text = _("FRITZ!Box - Error logging in: %s") + found.group(1)
+			#	self._notify(text)
+			#	return
+			#===================================================================
+			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
+			if start != -1:
+				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
+				self._notify(_("FRITZ!Box - Error logging in: %s") + html[start, html.find('</p>', start)])
 				return
 
 		if self._callScreen:
@@ -652,9 +688,14 @@ class FritzCallFBF:
 					number = config.plugins.FritzCall.prefix.value + number
 				name = phonebook.search(number)
 				if name:
-					found = re.match('(.*?)\n.*', name)
-					if found:
-						name = found.group(1)
+					#===========================================================
+					# found = re.match('(.*?)\n.*', name)
+					# if found:
+					#	name = found.group(1)
+					#===========================================================
+					end = name.find('\n')
+					if end != -1:
+						name = name[:end]
 					number = name
 				else:
 					name = resolveNumberWithAvon(number, config.plugins.FritzCall.country.value)
@@ -670,8 +711,8 @@ class FritzCallFBF:
 			if self._callScreen:
 				self._callScreen.updateStatus(_("done"))
 			# check for error: wrong password or password not set... TODO
-			found = re.search('Melden Sie sich mit dem Kennwort der FRITZ!Box an', csv)
-			if found:
+			# found = re.search('Melden Sie sich mit dem Kennwort der FRITZ!Box an', csv)
+			if csv.find('Melden Sie sich mit dem Kennwort der FRITZ!Box an') != -1:
 				text = _("You need to set the password of the FRITZ!Box\nin the configuration dialog to display calls\n\nIt could be a communication issue, just try again.")
 				# self.session.open(MessageBox, text, MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
 				self._notify(text)
@@ -695,27 +736,40 @@ class FritzCallFBF:
 			debug("[FritzCallFBF] _gotPageCalls: filtermsns %s" % (repr(filtermsns)))
 		for line in lines:
 			# Typ;e;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
-			found = re.match("^(" + self._callType + ");([^;]*);([^;]*);([^;]*);([^;]*);([^;]*);([^;]*)", line)
-			if found:
-				direct = found.group(1)
-				date = found.group(2)
-				length = found.group(7)
-				remote = resolveNumber(found.group(4))
-				if not remote and direct != FBF_OUT_CALLS and found.group(3):
-					remote = found.group(3)
-				found1 = re.match('Internet: (.*)', found.group(6))
-				if found1:
-					here = found1.group(1)
+			elems = line.split(';')
+			# found = re.match("^(" + self._callType + ");([^;]*);([^;]*);([^;]*);([^;]*);([^;]*);([^;]*)", line)
+			if len(elems) != 7: # this happens, if someone puts a ';' in the name in the FBF phonebook
+				debug("[FritzCallFBF] _gotPageCalls: len != 7: %s" % (line))
+			if len(elems) == 7 and (self._callType == '.' or elems[0] == self._callType):
+				# debug("[FritzCallFBF] _gotPageCalls: elems %s" % (elems))
+				direct = elems[0]
+				date = elems[1]
+				length = elems[6]
+				remote = resolveNumber(elems[3])
+				if not remote and direct != FBF_OUT_CALLS and elems[2]:
+					remote = elems[2]
+				#===============================================================
+				# found1 = re.match('Internet: (.*)', found.group(6))
+				# if found1:
+				#	here = found1.group(1)
+				# else:
+				#	here = found.group(6)
+				#===============================================================
+				here = elems[5]
+				start = here.find('Internet: ')
+				if start != -1:
+					start += len('Internet: ')
+					here = here[start:]
 				else:
-					here = found.group(6)
+					here = elems[5]
 				if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
-					debug("[FritzCallFBF] _gotPageCalls: check %s" % (here))
+					# debug("[FritzCallFBF] _gotPageCalls: check %s" % (here))
 					if here not in filtermsns:
-						debug("[FritzCallFBF] _gotPageCalls: skip %s" % (here))
+						# debug("[FritzCallFBF] _gotPageCalls: skip %s" % (here))
 						continue
 				here = resolveNumber(here)
 
-				number = stripCbCPrefix(found.group(4), config.plugins.FritzCall.country.value)
+				number = stripCbCPrefix(elems[3], config.plugins.FritzCall.country.value)
 				if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
 					number = config.plugins.FritzCall.prefix.value + number
 				callListL.append((number, date, here, direct, remote, length))
@@ -738,9 +792,16 @@ class FritzCallFBF:
 		
 	def _dial(self, number, html):
 		if html:
-			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			if found:
-				self._errorDial('Login: ' + found.group(1))
+			#===================================================================
+			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			# if found:
+			#	self._errorDial('Login: ' + found.group(1))
+			#	return
+			#===================================================================
+			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
+			if start != -1:
+				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
+				self._errorDial('Login: ' + html[start, html.find('</p>', start)])
 				return
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
 		parms = urlencode({
@@ -778,9 +839,16 @@ class FritzCallFBF:
 		
 	def _changeWLAN(self, statusWLAN, html):
 		if html:
-			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			if found:
-				self._errorChangeWLAN('Login: ' + found.group(1))
+			#===================================================================
+			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			# if found:
+			#	self._errorChangeWLAN('Login: ' + found.group(1))
+			#	return
+			#===================================================================
+			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
+			if start != -1:
+				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
+				self._errorChangeWLAN('Login: ' + html[start, html.find('</p>', start)])
 				return
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
 		parms = urlencode({
@@ -815,9 +883,16 @@ class FritzCallFBF:
 
 	def _changeMailbox(self, whichMailbox, html):
 		if html:
-			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			if found:
-				self._errorChangeMailbox('Login: ' + found.group(1))
+			#===================================================================
+			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			# if found:
+			#	self._errorChangeMailbox('Login: ' + found.group(1))
+			#	return
+			#===================================================================
+			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
+			if start != -1:
+				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
+				self._errorChangeMailbox('Login: ' + html[start, html.find('</p>', start)])
 				return
 		debug("[FritzCallFBF] _changeMailbox")
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
@@ -876,9 +951,16 @@ class FritzCallFBF:
 		# http://192.168.178.1/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:pagename=home&var:menu=home
 		debug("[FritzCallFBF] _getInfo: verify login")
 		if html:
-			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			if found:
-				self._errorGetInfo('Login: ' + found.group(1))
+			#===================================================================
+			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			# if found:
+			#	self._errorGetInfo('Login: ' + found.group(1))
+			#	return
+			#===================================================================
+			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
+			if start != -1:
+				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
+				self._errorGetInfo('Login: ' + html[start, html.find('</p>', start)])
 				return
 
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
@@ -1151,9 +1233,16 @@ class FritzCallFBF:
 	def _reset(self, html):
 		# POSTDATA=getpage=../html/reboot.html&errorpage=../html/de/menus/menu2.html&var:lang=de&var:pagename=home&var:errorpagename=home&var:menu=home&var:pagemaster=&time:settings/time=1242207340%2C-120&var:tabReset=0&logic:command/reboot=../gateway/commands/saveconfig.html
 		if html:
-			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			if found:
-				self._errorReset('Login: ' + found.group(1))
+			#===================================================================
+			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			# if found:
+			#	self._errorReset('Login: ' + found.group(1))
+			#	return
+			#===================================================================
+			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
+			if start != -1:
+				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
+				self._errorReset('Login: ' + html[start, html.find('</p>', start)])
 				return
 		if self._callScreen:
 			self._callScreen.close()
@@ -1188,9 +1277,16 @@ class FritzCallFBF:
 		
 	def _readBlacklist(self, html):
 		if html:
-			found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
-			if found:
-				self._errorBlacklist('Login: ' + found.group(1))
+			#===================================================================
+			# found = re.match('.*<p class="errorMessage">FEHLER:&nbsp;([^<]*)</p>', html, re.S)
+			# if found:
+			#	self._errorBlacklist('Login: ' + found.group(1))
+			#	return
+			#===================================================================
+			start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
+			if start != -1:
+				start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
+				self._errorBlacklist('Login: ' + html[start, html.find('</p>', start)])
 				return
 		# http://fritz.box/cgi-bin/webcm?getpage=../html/de/menus/menu2.html&var:lang=de&var:menu=fon&var:pagename=sperre
 		url = "http://%s/cgi-bin/webcm" % config.plugins.FritzCall.hostname.value
@@ -1823,9 +1919,12 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 			fontSize = scaleV(24, 20)
 		sortlist = []
 		for (number, date, remote, direct, here, length) in listOfCalls:
-			found = re.match("(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
-			if found:
-				date = found.group(1) + found.group(2)
+			#===================================================================
+			# found = re.match("(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
+			# if found:
+			#	date = found.group(1) + found.group(2)
+			#===================================================================
+			date = date[:6] + date[9:14]
 			if direct == FBF_OUT_CALLS:
 				direct = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/FritzCall/images/callout.png"))
 			elif direct == FBF_IN_CALLS:
@@ -2056,6 +2155,7 @@ class FritzCallPhonebook:
 		if config.plugins.FritzCall.phonebook.value and os.path.exists(phonebookFilename):
 			debug("[FritzCallPhonebook] reload: read " + phonebookFilename)
 			phonebookTxtCorrupt = False
+			self.phonebook = {}
 			for line in open(phonebookFilename):
 				try:
 					# Beware: strings in phonebook.phonebook have to be in utf-8!
@@ -2069,29 +2169,43 @@ class FritzCallPhonebook:
 						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
 						phonebookTxtCorrupt = True
 				line = line.encode("utf-8")
-				if re.match("^\d+#.*$", line):
+				elems = line.split('#')
+				if len(elems) == 2:
 					try:
-						number, name = line.split("#")
-						if not self.phonebook.has_key(number):
-							# Beware: strings in phonebook.phonebook have to be in utf-8!
-							self.phonebook[number] = name
+						self.phonebook[elems[0]] = elems[1]
 					except ValueError: # how could this possibly happen?!?!
 						debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
 						phonebookTxtCorrupt = True
 				else:
 					debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
 					phonebookTxtCorrupt = True
+					
+				#===============================================================
+				# found = re.match("^(\d+)#(.*)$", line)
+				# if found:
+				#	try:
+				#		self.phonebook[found.group(1)] = found.group(2)
+				#	except ValueError: # how could this possibly happen?!?!
+				#		debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
+				#		phonebookTxtCorrupt = True
+				# else:
+				#	debug("[FritzCallPhonebook] Could not parse internal Phonebook Entry %s" % line)
+				#	phonebookTxtCorrupt = True
+				#===============================================================
 
 			if phonebookTxtCorrupt:
 				# dump phonebook to PhoneBook.txt
 				debug("[FritzCallPhonebook] dump Phonebook.txt")
-				os.rename(phonebookFilename, phonebookFilename + ".bck")
-				fNew = open(phonebookFilename, 'w')
-				# Beware: strings in phonebook.phonebook are utf-8!
-				for (number, name) in self.phonebook.iteritems():
-					# Beware: strings in PhoneBook.txt have to be in utf-8!
-					fNew.write(number + "#" + name.encode("utf-8"))
-				fNew.close()
+				try:
+					os.rename(phonebookFilename, phonebookFilename + ".bck")
+					fNew = open(phonebookFilename, 'w')
+					# Beware: strings in phonebook.phonebook are utf-8!
+					for (number, name) in self.phonebook.iteritems():
+						# Beware: strings in PhoneBook.txt have to be in utf-8!
+						fNew.write(number + "#" + name.encode("utf-8"))
+					fNew.close()
+				except (IOError, OSError):
+					debug("[FritzCallPhonebook] error renaming or writing to %s" %phonebookFilename)
 
 #===============================================================================
 #		#
@@ -2191,18 +2305,20 @@ class FritzCallPhonebook:
 					fNew = open(phonebookFilename + str(os.getpid()), 'w')
 					line = fOld.readline()
 					while (line):
-						if not re.match("^" + number + "#.*$", line):
+						elems = line.split('#')
+						if len(elems) == 2 and not elems[0] == number:
 							fNew.write(line)
 						line = fOld.readline()
 					fOld.close()
 					fNew.close()
-					os.remove(phonebookFilename)
+					# os.remove(phonebookFilename)
+					eBackgroundFileEraser.getInstance().erase(phonebookFilename)
 					os.rename(phonebookFilename + str(os.getpid()),	phonebookFilename)
 					debug("[FritzCallPhonebook] removed %s from Phonebook.txt" % number)
 					return True
 	
-				except IOError:
-					pass
+				except (IOError, OSError):
+					debug("[FritzCallPhonebook] error removing %s from %s" %(number, phonebookFilename))
 		return False
 
 	class FritzDisplayPhonebook(Screen, HelpableScreen, NumericalTextInput):
@@ -2381,9 +2497,16 @@ class FritzCallPhonebook:
 							continue
 					name = name.strip().decode("utf-8")
 					number = number.strip().decode("utf-8")
-					found = re.match("([^,]*),.*", name)   # strip address information from the name part
-					if found:
-						shortname = found.group(1)
+					#===========================================================
+					# found = re.match("([^,]*),.*", name)   # strip address information from the name part
+					# if found:
+					#	shortname = found.group(1)
+					# else:
+					#	shortname = name
+					#===========================================================
+					comma = name.find(',')
+					if comma != -1:
+						shortname = name[:comma]
 					else:
 						shortname = name
 					numberFieldWidth = scaleH(190, 150)
@@ -2742,7 +2865,9 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.helpList.append((self["setupActions"], "EPGSelectActions", [("info", _("About FritzCall"))]))
 
 		ConfigListScreen.__init__(self, self.list, session=session)
-			
+
+		# get new list of locations for PhoneBook.txt
+		self._mountedDevs = getMountedDevs()
 		self.createSetup()
 
 
@@ -2787,6 +2912,20 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 			self.list.append(getConfigListEntry(_("Use internal PhoneBook"), config.plugins.FritzCall.phonebook))
 			if config.plugins.FritzCall.phonebook.value:
+				if config.plugins.FritzCall.phonebookLocation.value in self._mountedDevs:
+					config.plugins.FritzCall.phonebookLocation.setChoices(self._mountedDevs, config.plugins.FritzCall.phonebookLocation.value)
+				else:
+					config.plugins.FritzCall.phonebookLocation.setChoices(self._mountedDevs)
+				path = config.plugins.FritzCall.phonebookLocation.value
+				# check whether we can write to PhoneBook.txt
+				if os.path.exists(os.path.join(path[0], "PhoneBook.txt")):
+					if not os.access(os.path.join(path[0], "PhoneBook.txt"), os.W_OK):
+						debug("[FritzCallSetup] createSetup: %s/PhoneBook.txt not writable, resetting to default" %(path[0]))
+						config.plugins.FritzCall.phonebookLocation.setChoices(self._mountedDevs)
+				elif not (os.path.isdir(path[0]) and os.access(path[0], os.W_OK|os.X_OK)):
+					debug("[FritzCallSetup] createSetup: directory %s not writable, resetting to default" %(path[0]))
+					config.plugins.FritzCall.phonebookLocation.setChoices(self._mountedDevs)
+
 				self.list.append(getConfigListEntry(_("PhoneBook Location"), config.plugins.FritzCall.phonebookLocation))
 				if config.plugins.FritzCall.lookup.value:
 					self.list.append(getConfigListEntry(_("Automatically add new Caller to PhoneBook"), config.plugins.FritzCall.addcallers))
@@ -2805,6 +2944,9 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 #		debug("[FritzCallSetup] save"
 		for x in self["config"].list:
 			x[1].save()
+		if config.plugins.FritzCall.phonebookLocation.isChanged():
+			global phonebook
+			phonebook = FritzCallPhonebook()
 		if fritz_call:
 			if config.plugins.FritzCall.enable.value:
 				fritz_call.connect()
@@ -2882,14 +3024,23 @@ class FritzCallList:
 				direction = "<-"
 
 			# shorten the date info
-			found = re.match(".*(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
-			if found:
-				date = found.group(1) + found.group(2)
+			#===================================================================
+			# found = re.match(".*(\d\d.\d\d.)\d\d( \d\d:\d\d)", date)
+			# if found:
+			#	date = found.group(1) + found.group(2)
+			#===================================================================
+			date = date[:6] + date[9:14]
 
 			# our phone could be of the form "0123456789 (home)", then we only take "home"
-			found = re.match(".*\((.*)\)", phone)
-			if found:
-				phone = found.group(1)
+			#===================================================================
+			# found = re.match(".*\((.*)\)", phone)
+			# if found:
+			#	phone = found.group(1)
+			#===================================================================
+			oBrack = phone.find('(')
+			cBrack = phone.find(')')
+			if oBrack != -1 and cBrack != -1:
+				phone = phone[oBrack+1:cBrack-1]
 
 			# should not happen, for safety reasons
 			if not caller:
@@ -2900,9 +3051,14 @@ class FritzCallList:
 				caller = number
 			else:
 				# strip off the address part of the remote number, if there is any
-				found = re.match("(.*)\n.*", caller)
-				if found:
-					caller = found.group(1)
+				#===============================================================
+				# found = re.match("(.*)\n.*", caller)
+				# if found:
+				#	caller = found.group(1)
+				#===============================================================
+				nl = caller.find('\n')
+				if nl != -1:
+					caller = caller[:nl]
 				elif caller[0] == '[' and caller[-1] == ']':
 					caller = number + ' ' + caller
 

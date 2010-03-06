@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-10 17:00+0100\n"
+"POT-Creation-Date: 2010-03-06 13:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -303,6 +303,9 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+msgid "Network mount"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
 msgstr ""
@@ -567,9 +570,6 @@ msgid "not encrypted"
 msgstr ""
 
 msgid "number suppressed"
-msgstr ""
-
-msgid "on connect"
 msgstr ""
 
 msgid "on ring"
