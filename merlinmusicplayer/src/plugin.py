@@ -912,7 +912,11 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		self.currentGoogleCoverFile = ""
 		self.googleDownloadDir = os_path.join(config.plugins.merlinmusicplayer.googleimagepath.value, "downloaded_covers/" )
 		if not os_path.exists(self.googleDownloadDir):
-			os_mkdir(self.googleDownloadDir)
+			try:
+				os_mkdir(self.googleDownloadDir)
+			except:
+				self.googleDownloadDir = "/tmp/"
+				
 		self.init = 0
 		self.onShown.append(self.__onShown)
 		# for lcd
@@ -999,7 +1003,10 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 		if result:
 			self.googleDownloadDir = os_path.join(config.plugins.merlinmusicplayer.googleimagepath.value, "downloaded_covers/" )
 			if not os_path.exists(self.googleDownloadDir):
-				os_mkdir(self.googleDownloadDir)
+				try:
+					os_mkdir(self.googleDownloadDir)
+				except:
+					self.googleDownloadDir = "/tmp/"
 		self.resetScreenSaverTimer()
 
 	def closePlayer(self):	
