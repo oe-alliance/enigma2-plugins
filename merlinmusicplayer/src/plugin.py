@@ -1,6 +1,7 @@
 #
 #  Merlin Music Player E2
 #
+#  $Id$
 #
 #  Coded by Dr.Best (c) 2010
 #  Support: www.dreambox-tools.info
@@ -151,74 +152,77 @@ class PathToDatabase(Thread):
 		self.__cancel = False
 		if self.__path:
 			connection = OpenDatabase()
-			connection.text_factory = str
-			cursor = connection.cursor()
-			counter = 0
-			checkTime = 0
-			for root, subFolders, files in os_walk(self.__path):
-				if self.__cancel:
-					break
-				for filename in files:
+			if connection is not None:
+				connection.text_factory = str
+				cursor = connection.cursor()
+				counter = 0
+				checkTime = 0
+				for root, subFolders, files in os_walk(self.__path):
 					if self.__cancel:
 						break
-					cursor.execute('SELECT song_id FROM Songs WHERE filename = "%s";' % os_path.join(root,filename))
-					row = cursor.fetchone()
-					if row is None:
-						audio, isAudio, title, genre,artist,album,tracknr,track,date,length,bitrate = getID3Tags(root,filename)
-						if  audio:	
-							# 1. Artist
-							artistID = -1
-							cursor.execute('SELECT artist_id FROM Artists WHERE artist = "%s";' % (artist.replace('"','""')))
+					for filename in files:
+						if self.__cancel:
+							break
+						cursor.execute('SELECT song_id FROM Songs WHERE filename = "%s";' % os_path.join(root,filename))
+						row = cursor.fetchone()
+						if row is None:
+							audio, isAudio, title, genre,artist,album,tracknr,track,date,length,bitrate = getID3Tags(root,filename)
+							if  audio:	
+								# 1. Artist
+								artistID = -1
+								cursor.execute('SELECT artist_id FROM Artists WHERE artist = "%s";' % (artist.replace('"','""')))
 
-							row = cursor.fetchone()
-							if row is None:
-									cursor.execute('INSERT INTO Artists (artist) VALUES("%s");' % (artist.replace('"','""')))
-									artistID = cursor.lastrowid
-							else:
-									artistID = row[0]
-							# 2. Album
-							albumID = -1
-							cursor.execute('SELECT album_id FROM Album WHERE album_text = "%s";' % (album.replace('"','""')))
-							row = cursor.fetchone()
-							if row is None:
-									cursor.execute('INSERT INTO Album (album_text) VALUES("%s");' % (album.replace('"','""')))
-									albumID = cursor.lastrowid
-							else:
-									albumID = row[0]
+								row = cursor.fetchone()
+								if row is None:
+										cursor.execute('INSERT INTO Artists (artist) VALUES("%s");' % (artist.replace('"','""')))
+										artistID = cursor.lastrowid
+								else:
+										artistID = row[0]
+								# 2. Album
+								albumID = -1
+								cursor.execute('SELECT album_id FROM Album WHERE album_text = "%s";' % (album.replace('"','""')))
+								row = cursor.fetchone()
+								if row is None:
+										cursor.execute('INSERT INTO Album (album_text) VALUES("%s");' % (album.replace('"','""')))
+										albumID = cursor.lastrowid
+								else:
+										albumID = row[0]
 
-							# 3. Genre
-							genreID = -1		
-							cursor.execute('SELECT genre_id FROM Genre WHERE genre_text = "%s";' % (genre.replace('"','""')))
-							row = cursor.fetchone()
-							if row is None:
-									cursor.execute('INSERT INTO Genre (genre_text) VALUES("%s");' % (genre.replace('"','""')))
-									genreID = cursor.lastrowid
-							else:
-									genreID = row[0]
+								# 3. Genre
+								genreID = -1		
+								cursor.execute('SELECT genre_id FROM Genre WHERE genre_text = "%s";' % (genre.replace('"','""')))
+								row = cursor.fetchone()
+								if row is None:
+										cursor.execute('INSERT INTO Genre (genre_text) VALUES("%s");' % (genre.replace('"','""')))
+										genreID = cursor.lastrowid
+								else:
+										genreID = row[0]
 							
-							# 4. Songs
-							try:
-								cursor.execute("INSERT INTO Songs (filename,title,artist_id,album_id,genre_id,tracknumber, bitrate, length, track, date) VALUES(?,?,?,?,?,?,?,?,?,?);" , (os_path.join(root,filename),title,artistID,albumID,genreID, tracknr, bitrate, length, track, date))
-								self.__messages.push((THREAD_WORKING, _("%s\n added to database") % os_path.join(root,filename)))
-								mp.send(0)
-								counter +=1
-							except sqlite.IntegrityError:
-								self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root,filename)))
-								mp.send(0)
-							audio = None
-					elif time() - checkTime >= 0.1: # update interval for gui
-						self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root,filename)))
-						mp.send(0)
-						checkTime = time()
+								# 4. Songs
+								try:
+									cursor.execute("INSERT INTO Songs (filename,title,artist_id,album_id,genre_id,tracknumber, bitrate, length, track, date) VALUES(?,?,?,?,?,?,?,?,?,?);" , (os_path.join(root,filename),title,artistID,albumID,genreID, tracknr, bitrate, length, track, date))
+									self.__messages.push((THREAD_WORKING, _("%s\n added to database") % os_path.join(root,filename)))
+									mp.send(0)
+									counter +=1
+								except sqlite.IntegrityError:
+									self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root,filename)))
+									mp.send(0)
+								audio = None
+						elif time() - checkTime >= 0.1: # update interval for gui
+							self.__messages.push((THREAD_WORKING, _("%s\n already exists in database!") % os_path.join(root,filename)))
+							mp.send(0)
+							checkTime = time()
 						
-			if not self.__cancel:
-				connection.commit()
-			cursor.close()  
-			connection.close()
-			if self.__cancel:
-				self.__messages.push((THREAD_FINISHED, _("Process aborted.\n 0 files added to database!\nPress OK to close.") ))
-			else:	
-				self.__messages.push((THREAD_FINISHED, _("%d files added to database!\nPress OK to close." % counter)))
+				if not self.__cancel:
+					connection.commit()
+				cursor.close()  
+				connection.close()
+				if self.__cancel:
+					self.__messages.push((THREAD_FINISHED, _("Process aborted.\n 0 files added to database!\nPress OK to close.") ))
+				else:	
+					self.__messages.push((THREAD_FINISHED, _("%d files added to database!\nPress OK to close." % counter)))
+			else:
+				self.__messages.push((THREAD_FINISHED, _("Error!\nCan not open database!\nCheck if save folder is correct and writeable!\nPress OK to close.") ))
 			mp.send(0)
 			self.__running = False
 			Thread.__init__(self)
@@ -340,7 +344,11 @@ def OpenDatabase():
 		db_exists = False
 		if os_path.exists(connectstring):
 			db_exists = True
-		connection = sqlite.connect(connectstring)
+		try:
+			connection = sqlite.connect(connectstring)
+		except:
+			print "[MerlinMusicPlayer] unable to open database file: %s" % connectstring
+			return None
 		if not db_exists :
 				connection.execute('CREATE TABLE IF NOT EXISTS Songs (song_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, filename TEXT NOT NULL UNIQUE, title TEXT, artist_id INTEGER, album_id INTEGER, genre_id INTEGER, tracknumber INTEGER, bitrate INTEGER, length TEXT, track TEXT, date TEXT, lyrics TEXT);')
 				connection.execute('CREATE TABLE IF NOT EXISTS Artists (artist_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, artist TEXT NOT NULL UNIQUE);')
@@ -999,14 +1007,15 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			config.plugins.merlinmusicplayer.lastsonglistindex.value = self.currentIndex
 			config.plugins.merlinmusicplayer.lastsonglistindex.save()
 			connection = OpenDatabase()
-			connection.text_factory = str
-			cursor = connection.cursor()
-			cursor.execute("Delete from CurrentSongList;")
-			for song in self.origSongList:
-				cursor.execute("INSERT INTO CurrentSongList (song_id, filename,title,artist,album,genre, bitrate, length, track, date, PTS) VALUES(?,?,?,?,?,?,?,?,?,?,?);" , (song[0].songID, song[0].filename,song[0].title,song[0].artist,song[0].album,song[0].genre, song[0].bitrate, song[0].length, song[0].track, song[0].date, song[0].PTS))
-			connection.commit()
-			cursor.close()
-			connection.close()
+			if connection is not None:
+				connection.text_factory = str
+				cursor = connection.cursor()
+				cursor.execute("Delete from CurrentSongList;")
+				for song in self.origSongList:
+					cursor.execute("INSERT INTO CurrentSongList (song_id, filename,title,artist,album,genre, bitrate, length, track, date, PTS) VALUES(?,?,?,?,?,?,?,?,?,?,?);" , (song[0].songID, song[0].filename,song[0].title,song[0].artist,song[0].album,song[0].genre, song[0].bitrate, song[0].length, song[0].track, song[0].date, song[0].PTS))
+				connection.commit()
+				cursor.close()
+				connection.close()
 		if self.screenSaverTimer.isActive():
 			self.screenSaverTimer.stop()
 		self.close()
@@ -1276,12 +1285,13 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 			config.plugins.merlinmusicplayer.lastsonglistindex.value = -1
 			config.plugins.merlinmusicplayer.lastsonglistindex.save()
 			connection = OpenDatabase()
-			connection.text_factory = str
-			cursor = connection.cursor()
-			cursor.execute("Delete from CurrentSongList;")
-			connection.commit()
-			cursor.close()
-			connection.close()
+			if connection is not None:
+				connection.text_factory = str
+				cursor = connection.cursor()
+				cursor.execute("Delete from CurrentSongList;")
+				connection.commit()
+				cursor.close()
+				connection.close()
 		self.resetScreenSaverTimer()
 		self.close()
 
@@ -1691,23 +1701,27 @@ class iDreamMerlin(Screen):
 
 	def getPlayList(self):
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		playList = []
-		cursor.execute("select playlist_id,playlist_text from playlists order by playlist_text;")
-		for row in cursor:
-			playList.append((row[1], row[0]))
-		cursor.close()  
-		connection.close()
-		return playList
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			playList = []
+			cursor.execute("select playlist_id,playlist_text from playlists order by playlist_text;")
+			for row in cursor:
+				playList.append((row[1], row[0]))
+			cursor.close()  
+			connection.close()
+			return playList
+		else:
+			return None
 
 	def sqlCommand(self, sqlSatement):
 		connection = OpenDatabase()
-		cursor = connection.cursor()
-		cursor.execute(sqlSatement)
-		cursor.close()
-		connection.commit()
-		connection.close()
+		if connection is not None:
+			cursor = connection.cursor()
+			cursor.execute(sqlSatement)
+			cursor.close()
+			connection.commit()
+			connection.close()
 
 	def clearCache(self):
 		for items in self.cacheList:
@@ -1991,18 +2005,19 @@ class iDreamMerlin(Screen):
 		self.LastMethod = MethodArguments(method = self.buildPlaylistList, arguments = arguments)
 		self["headertext"].setText(_("Playlists"))
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		playlistList = []
-		playlistList.append((Item(text = _("[back]"), mode = 0, navigator = True),))
-		cursor.execute("select playlists.playlist_id, playlist_text, count(Playlist_Songs.playlist_id) from playlists left outer join Playlist_Songs on playlists.playlist_id = Playlist_Songs.playlist_id group by playlists.playlist_id order by playlists.playlist_text;")
-		for row in cursor:
-			playlistList.append((Item(text = "%s (%d)" % (row[1], row[2]), mode = 2, playlistID = row[0]),))
-		cursor.close() 
-		connection.close()
-		self["list"].setList(playlistList)
-		if len(playlistList) > 1:
-			self["list"].moveToIndex(1)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			playlistList = []
+			playlistList.append((Item(text = _("[back]"), mode = 0, navigator = True),))
+			cursor.execute("select playlists.playlist_id, playlist_text, count(Playlist_Songs.playlist_id) from playlists left outer join Playlist_Songs on playlists.playlist_id = Playlist_Songs.playlist_id group by playlists.playlist_id order by playlists.playlist_text;")
+			for row in cursor:
+				playlistList.append((Item(text = "%s (%d)" % (row[1], row[2]), mode = 2, playlistID = row[0]),))
+			cursor.close() 
+			connection.close()
+			self["list"].setList(playlistList)
+			if len(playlistList) > 1:
+				self["list"].moveToIndex(1)
 
 	def buildPlaylistSongList(self, playlistID, addToCache):
 		if addToCache:
@@ -2012,21 +2027,22 @@ class iDreamMerlin(Screen):
 		arguments["addToCache"] = False
 		self.LastMethod = MethodArguments(method = self.buildPlaylistSongList, arguments = arguments)
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		playlistSongList = []
-		playlistSongList.append((Item(text = _("[back]"), mode = 1, navigator = True),))
-		cursor.execute("select songs.song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id inner join playlist_songs on songs.song_id = playlist_songs.song_id where playlist_songs.playlist_id =  %d order by playlist_songs.id;" % (playlistID))
-		for row in cursor:
-			playlistSongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], artistID = row[4], bitrate = row[5], length = row[6], genre = row[7], track = row[8], date = row[9], album = row[10], albumID = row[11], playlistID = playlistID),))
-		cursor.execute("SELECT playlist_text from playlists where playlist_id = %d;" % playlistID)
-		row = cursor.fetchone()
-		self["headertext"].setText(_("Playlist (%s) -> Song List") % row[0])
-		cursor.close() 
-		connection.close()
-		self["list"].setList(playlistSongList)
-		if len(playlistSongList) > 1:
-			self["list"].moveToIndex(1)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			playlistSongList = []
+			playlistSongList.append((Item(text = _("[back]"), mode = 1, navigator = True),))
+			cursor.execute("select songs.song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id inner join playlist_songs on songs.song_id = playlist_songs.song_id where playlist_songs.playlist_id =  %d order by playlist_songs.id;" % (playlistID))
+			for row in cursor:
+				playlistSongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], artistID = row[4], bitrate = row[5], length = row[6], genre = row[7], track = row[8], date = row[9], album = row[10], albumID = row[11], playlistID = playlistID),))
+			cursor.execute("SELECT playlist_text from playlists where playlist_id = %d;" % playlistID)
+			row = cursor.fetchone()
+			self["headertext"].setText(_("Playlist (%s) -> Song List") % row[0])
+			cursor.close() 
+			connection.close()
+			self["list"].setList(playlistSongList)
+			if len(playlistSongList) > 1:
+				self["list"].moveToIndex(1)
 				
 	def buildGenreList(self, addToCache):
 		if addToCache:
@@ -2036,18 +2052,19 @@ class iDreamMerlin(Screen):
 		self.LastMethod = MethodArguments(method = self.buildGenreList, arguments = arguments)
 		self["headertext"].setText(_("Genre List"))
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		genreList = []
-		genreList.append((Item(text = _("[back]"), mode = 0, navigator = True),))
-		cursor.execute("select Genre.genre_id,Genre.Genre_text, count(*) from songs inner join Genre on songs.genre_id = Genre.Genre_id group by songs.Genre_id order by Genre.Genre_text;")
-		for row in cursor:
-			genreList.append((Item(text = "%s (%d)" % (row[1], row[2]), mode = 14, genreID = row[0]),))
-		cursor.close() 
-		connection.close()
-		self["list"].setList(genreList)
-		if len(genreList) > 1:
-			self["list"].moveToIndex(1)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			genreList = []
+			genreList.append((Item(text = _("[back]"), mode = 0, navigator = True),))
+			cursor.execute("select Genre.genre_id,Genre.Genre_text, count(*) from songs inner join Genre on songs.genre_id = Genre.Genre_id group by songs.Genre_id order by Genre.Genre_text;")
+			for row in cursor:
+				genreList.append((Item(text = "%s (%d)" % (row[1], row[2]), mode = 14, genreID = row[0]),))
+			cursor.close() 
+			connection.close()
+			self["list"].setList(genreList)
+			if len(genreList) > 1:
+				self["list"].moveToIndex(1)
 
 	def buildGenreSongList(self, genreID, addToCache):
 		if addToCache:
@@ -2057,21 +2074,22 @@ class iDreamMerlin(Screen):
 		arguments["addToCache"] = False
 		self.LastMethod = MethodArguments(method = self.buildGenreSongList, arguments = arguments)
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		genreSongList = []
-		genreSongList.append((Item(text = _("[back]"), mode = 13, navigator = True),))
-		cursor.execute("select song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id where songs.genre_id = %d order by title, filename;" % (genreID))
-		for row in cursor:
-			genreSongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], artistID = row[4], bitrate = row[5], length = row[6], genre = row[7], track = row[8], date = row[9], album = row[10], albumID = row[11], genreID = genreID),))
-		cursor.execute("SELECT genre_text from genre where genre_ID = %d;" % genreID)
-		row = cursor.fetchone()
-		self["headertext"].setText(_("Genre (%s) -> Song List") % row[0])
-		cursor.close() 
-		connection.close()
-		self["list"].setList(genreSongList)
-		if len(genreSongList) > 1:
-			self["list"].moveToIndex(1)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			genreSongList = []
+			genreSongList.append((Item(text = _("[back]"), mode = 13, navigator = True),))
+			cursor.execute("select song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id where songs.genre_id = %d order by title, filename;" % (genreID))
+			for row in cursor:
+				genreSongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], artistID = row[4], bitrate = row[5], length = row[6], genre = row[7], track = row[8], date = row[9], album = row[10], albumID = row[11], genreID = genreID),))
+			cursor.execute("SELECT genre_text from genre where genre_ID = %d;" % genreID)
+			row = cursor.fetchone()
+			self["headertext"].setText(_("Genre (%s) -> Song List") % row[0])
+			cursor.close() 
+			connection.close()
+			self["list"].setList(genreSongList)
+			if len(genreSongList) > 1:
+				self["list"].moveToIndex(1)
 
 	def setButtons(self, red = False, green = False, yellow = False, blue = False):
 		if red:
@@ -2097,7 +2115,10 @@ class iDreamMerlin(Screen):
 				self.session.execDialog(self.player)
 
 	def green_pressed(self):
-		sel = self["list"].l.getCurrentSelection()[0]
+		try:
+			sel = self["list"].l.getCurrentSelection()[0]
+		except: 
+			sel = None
 		if sel is None:
 			return
 		if sel.songID != 0:
@@ -2115,7 +2136,10 @@ class iDreamMerlin(Screen):
 		self.buildMainMenuList()
 	
 	def yellow_pressed(self):
-		sel = self["list"].l.getCurrentSelection()[0]
+		try:
+			sel = self["list"].l.getCurrentSelection()[0]
+		except: 
+			return
 		if sel.artistID != 0:
 			oldmode = self.mode
 			self.mode = 19
@@ -2124,7 +2148,10 @@ class iDreamMerlin(Screen):
 			self.buildArtistSongList(artistID = sel.artistID, mode = oldmode, addToCache = True)
 		
 	def blue_pressed(self):
-		sel = self["list"].l.getCurrentSelection()[0]
+		try:
+			sel = self["list"].l.getCurrentSelection()[0]
+		except: 
+			return
 		if sel.albumID != 0:
 			self.setButtons(red = True, green = True, yellow = True)
 			oldmode = self.mode
@@ -2140,18 +2167,19 @@ class iDreamMerlin(Screen):
 		self.LastMethod = MethodArguments(method = self.buildSongList, 	arguments = arguments)
 		self["headertext"].setText(_("All Songs"))
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		SongList = []
-		SongList.append((Item(text = _("[back]"), mode = 0, navigator = True),))
-		cursor.execute("select song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id order by title, filename;")
-		for row in cursor:
-			SongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], artistID = row[4], bitrate = row[5], length = row[6], genre = row[7], track = row[8], date = row[9], album = row[10], albumID = row[11]),))
-		cursor.close() 
-		connection.close()
-		self["list"].setList(SongList)
-		if len(SongList) > 1:
-			self["list"].moveToIndex(1)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			SongList = []
+			SongList.append((Item(text = _("[back]"), mode = 0, navigator = True),))
+			cursor.execute("select song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id order by title, filename;")
+			for row in cursor:
+				SongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], artistID = row[4], bitrate = row[5], length = row[6], genre = row[7], track = row[8], date = row[9], album = row[10], albumID = row[11]),))
+			cursor.close() 
+			connection.close()
+			self["list"].setList(SongList)
+			if len(SongList) > 1:
+				self["list"].moveToIndex(1)
 
 
 	def buildSearchSongList(self, sql_where, headerText, mode, addToCache):
@@ -2165,18 +2193,19 @@ class iDreamMerlin(Screen):
 		self.LastMethod = MethodArguments(method = self.buildSearchSongList, arguments = arguments)
 		self["headertext"].setText(headerText)
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		SongList = []
-		SongList.append((Item(text = _("[back]"), mode = mode, navigator = True),))
-		cursor.execute("select song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id %s order by title, filename;" % sql_where)
-		for row in cursor:
-			SongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], artistID = row[4], bitrate = row[5], length = row[6], genre = row[7], track = row[8], date = row[9], album = row[10], albumID = row[11]),))
-		cursor.close() 
-		connection.close()
-		self["list"].setList(SongList)
-		if len(SongList) > 1:
-			self["list"].moveToIndex(1)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			SongList = []
+			SongList.append((Item(text = _("[back]"), mode = mode, navigator = True),))
+			cursor.execute("select song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id %s order by title, filename;" % sql_where)
+			for row in cursor:
+				SongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], artistID = row[4], bitrate = row[5], length = row[6], genre = row[7], track = row[8], date = row[9], album = row[10], albumID = row[11]),))
+			cursor.close() 
+			connection.close()
+			self["list"].setList(SongList)
+			if len(SongList) > 1:
+				self["list"].moveToIndex(1)
 
 	
 	def buildArtistSongList(self, artistID, mode, addToCache):
@@ -2188,21 +2217,22 @@ class iDreamMerlin(Screen):
 		arguments["addToCache"] = False
 		self.LastMethod = MethodArguments(method = self.buildArtistSongList, arguments = arguments)
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		artistSongList = []
-		artistSongList.append((Item(text = _("[back]"), mode = mode, navigator = True),))
-		cursor.execute("select song_id, title, artists.artist, filename, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id where songs.artist_id = %d order by Album.album_text, tracknumber, filename;" % (artistID))
-		for row in cursor:
-			artistSongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], bitrate = row[4], length = row[5], genre = row[6], track = row[7], date = row[8], album = row[9], albumID = row[10], artistID = artistID),))
-		cursor.execute("SELECT artist from artists where artist_ID = %d;" % artistID)
-		row = cursor.fetchone()
-		self["headertext"].setText(_("Artist (%s) -> Song List") % row[0])
-		cursor.close() 
-		connection.close()
-		self["list"].setList(artistSongList)
-		if len(artistSongList) > 1:
-			self["list"].moveToIndex(1)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			artistSongList = []
+			artistSongList.append((Item(text = _("[back]"), mode = mode, navigator = True),))
+			cursor.execute("select song_id, title, artists.artist, filename, bitrate, length, genre_text, track, date, album_text, songs.Album_id from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id where songs.artist_id = %d order by Album.album_text, tracknumber, filename;" % (artistID))
+			for row in cursor:
+				artistSongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], bitrate = row[4], length = row[5], genre = row[6], track = row[7], date = row[8], album = row[9], albumID = row[10], artistID = artistID),))
+			cursor.execute("SELECT artist from artists where artist_ID = %d;" % artistID)
+			row = cursor.fetchone()
+			self["headertext"].setText(_("Artist (%s) -> Song List") % row[0])
+			cursor.close() 
+			connection.close()
+			self["list"].setList(artistSongList)
+			if len(artistSongList) > 1:
+				self["list"].moveToIndex(1)
 			
 	def buildAlbumSongList(self, albumID, mode, addToCache):
 		if addToCache:
@@ -2213,21 +2243,22 @@ class iDreamMerlin(Screen):
 		arguments["addToCache"] = False
 		self.LastMethod = MethodArguments(method = self.buildAlbumSongList, arguments = arguments)
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		albumSongList = []
-		albumSongList.append((Item(text = _("[back]"), mode = mode, navigator = True),))
-		cursor.execute("select song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id where songs.album_id = %d order by tracknumber, filename;" % (albumID))
-		for row in cursor:
-			albumSongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], artistID = row[4], bitrate = row[5], length = row[6], genre = row[7], track = row[8], date = row[9], album = row[10], albumID = albumID),))
-		cursor.execute("SELECT album_text from album where album_ID = %d;" % albumID)
-		row = cursor.fetchone()
-		self["headertext"].setText(_("Album (%s) -> Song List") % row[0])
-		cursor.close() 
-		connection.close()
-		self["list"].setList(albumSongList)
-		if len(albumSongList) > 1:
-			self["list"].moveToIndex(1)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			albumSongList = []
+			albumSongList.append((Item(text = _("[back]"), mode = mode, navigator = True),))
+			cursor.execute("select song_id, title, artists.artist, filename, songs.artist_id, bitrate, length, genre_text, track, date, album_text from songs inner join artists on songs.artist_id = artists.artist_id inner join Album on songs.Album_id = Album.Album_id inner join genre on songs.genre_id = genre.genre_id where songs.album_id = %d order by tracknumber, filename;" % (albumID))
+			for row in cursor:
+				albumSongList.append((Item(mode = 99, songID = row[0], title = row[1], artist = row[2], filename = row[3], artistID = row[4], bitrate = row[5], length = row[6], genre = row[7], track = row[8], date = row[9], album = row[10], albumID = albumID),))
+			cursor.execute("SELECT album_text from album where album_ID = %d;" % albumID)
+			row = cursor.fetchone()
+			self["headertext"].setText(_("Album (%s) -> Song List") % row[0])
+			cursor.close() 
+			connection.close()
+			self["list"].setList(albumSongList)
+			if len(albumSongList) > 1:
+				self["list"].moveToIndex(1)
 		
 	def buildMainMenuList(self, addToCache = True):
 		arguments = {}
@@ -2236,32 +2267,33 @@ class iDreamMerlin(Screen):
 		self["headertext"].setText(_("iDream Main Menu"))
 		mainMenuList = []
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		# 1. Playlists
-		cursor.execute("SELECT COUNT (*) FROM playlists;")
-		row = cursor.fetchone()
-		mainMenuList.append((Item(text = _("Playlists (%d)") % row[0], mode = 1),))
-		# 2. Artists
-		cursor.execute("SELECT COUNT (*) FROM artists;")
-		row = cursor.fetchone()
-		mainMenuList.append((Item(text = _("Artists (%d)") % row[0], mode = 4),))
-		# 3. Albums
-		cursor.execute("SELECT COUNT (DISTINCT album_text) FROM album;")
-		row = cursor.fetchone()
-		mainMenuList.append((Item(text = _("Albums (%d)") % row[0], mode = 7),))
-		# 4. Songs
-		cursor.execute("SELECT COUNT (*) FROM songs;")
-		row = cursor.fetchone()
-		mainMenuList.append((Item(text = _("Songs (%d)") % row[0], mode = 10),))
-		# 5. Genres
-		cursor.execute("SELECT COUNT (*) FROM genre;")
-		row = cursor.fetchone()
-		mainMenuList.append((Item(text = _("Genres (%d)") % row[0], mode = 13),))
-		cursor.close()  
-		connection.close()
-		self["list"].setList(mainMenuList)
-		self["list"].moveToIndex(0)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			# 1. Playlists
+			cursor.execute("SELECT COUNT (*) FROM playlists;")
+			row = cursor.fetchone()
+			mainMenuList.append((Item(text = _("Playlists (%d)") % row[0], mode = 1),))
+			# 2. Artists
+			cursor.execute("SELECT COUNT (*) FROM artists;")
+			row = cursor.fetchone()
+			mainMenuList.append((Item(text = _("Artists (%d)") % row[0], mode = 4),))
+			# 3. Albums
+			cursor.execute("SELECT COUNT (DISTINCT album_text) FROM album;")
+			row = cursor.fetchone()
+			mainMenuList.append((Item(text = _("Albums (%d)") % row[0], mode = 7),))
+			# 4. Songs
+			cursor.execute("SELECT COUNT (*) FROM songs;")
+			row = cursor.fetchone()
+			mainMenuList.append((Item(text = _("Songs (%d)") % row[0], mode = 10),))
+			# 5. Genres
+			cursor.execute("SELECT COUNT (*) FROM genre;")
+			row = cursor.fetchone()
+			mainMenuList.append((Item(text = _("Genres (%d)") % row[0], mode = 13),))
+			cursor.close()  
+			connection.close()
+			self["list"].setList(mainMenuList)
+			self["list"].moveToIndex(0)
 		
 	def buildArtistList(self, addToCache):
 		if addToCache:
@@ -2271,16 +2303,17 @@ class iDreamMerlin(Screen):
 		self.LastMethod = MethodArguments(method = self.buildArtistList, arguments = arguments)
 		self["headertext"].setText(_("Artists List"))
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		artistList = []
-		artistList.append((Item(text = _("[back]"), mode = 0, navigator = True),))
-		cursor.execute("SELECT artists.artist_id,artists.artist, count (distinct album.album_text) FROM songs INNER JOIN artists ON songs.artist_id = artists.artist_id inner join album on songs.album_id =  album.album_id GROUP BY songs.artist_id ORDER BY artists.artist;")
-		for row in cursor:
-			artistList.append((Item(text = "%s (%d)" % (row[1], row[2]), mode = 5, artistID = row[0]),))
-		cursor.close() 
-		connection.close()
-		self["list"].setList(artistList)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			artistList = []
+			artistList.append((Item(text = _("[back]"), mode = 0, navigator = True),))
+			cursor.execute("SELECT artists.artist_id,artists.artist, count (distinct album.album_text) FROM songs INNER JOIN artists ON songs.artist_id = artists.artist_id inner join album on songs.album_id =  album.album_id GROUP BY songs.artist_id ORDER BY artists.artist;")
+			for row in cursor:
+				artistList.append((Item(text = "%s (%d)" % (row[1], row[2]), mode = 5, artistID = row[0]),))
+			cursor.close() 
+			connection.close()
+			self["list"].setList(artistList)
 		
 	def buildArtistAlbumList(self, ArtistID, addToCache):
 		if addToCache:
@@ -2290,25 +2323,26 @@ class iDreamMerlin(Screen):
 		arguments["addToCache"] = False
 		self.LastMethod = MethodArguments(method = self.buildArtistAlbumList, arguments = arguments)
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		albumArtistList = []
-		albumArtistList.append((Item(text = _("[back]"), mode = 4, navigator = True),))
-		cursor.execute("select Album.Album_id,Album.Album_text from songs inner join Album on songs.Album_id = Album.Album_id where songs.artist_id = %d group by songs.Album_id order by Album.Album_text;" % ArtistID)
-		for row in cursor:
-			cursor2 = connection.cursor()
-			cursor2.execute("select count(song_id) from songs where album_id = %d;" % row[0])
-			row2 = cursor2.fetchone()
-			albumArtistList.append((Item(text = "%s (%d)" % (row[1], row2[0]), mode = 6, albumID = row[0], artistID = ArtistID),))
-			cursor2.close()
-		cursor.execute("SELECT artist from artists where artist_ID = %d;" % ArtistID)
-		row = cursor.fetchone()
-		self["headertext"].setText(_("Artist (%s) -> Album List") % row[0])
-		cursor.close() 
-		connection.close()
-		self["list"].setList(albumArtistList)
-		if len(albumArtistList) > 1:
-			self["list"].moveToIndex(1)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			albumArtistList = []
+			albumArtistList.append((Item(text = _("[back]"), mode = 4, navigator = True),))
+			cursor.execute("select Album.Album_id,Album.Album_text from songs inner join Album on songs.Album_id = Album.Album_id where songs.artist_id = %d group by songs.Album_id order by Album.Album_text;" % ArtistID)
+			for row in cursor:
+				cursor2 = connection.cursor()
+				cursor2.execute("select count(song_id) from songs where album_id = %d;" % row[0])
+				row2 = cursor2.fetchone()
+				albumArtistList.append((Item(text = "%s (%d)" % (row[1], row2[0]), mode = 6, albumID = row[0], artistID = ArtistID),))
+				cursor2.close()
+			cursor.execute("SELECT artist from artists where artist_ID = %d;" % ArtistID)
+			row = cursor.fetchone()
+			self["headertext"].setText(_("Artist (%s) -> Album List") % row[0])
+			cursor.close() 
+			connection.close()
+			self["list"].setList(albumArtistList)
+			if len(albumArtistList) > 1:
+				self["list"].moveToIndex(1)
 			
 	def buildAlbumList(self, addToCache):
 		if addToCache:
@@ -2318,18 +2352,19 @@ class iDreamMerlin(Screen):
 		self.LastMethod = MethodArguments(method = self.buildAlbumList, arguments = arguments)
 		self["headertext"].setText(_("Albums List"))
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		albumList = []
-		albumList.append((Item(text = _("[back]"), mode = 0, navigator = True),))
-		cursor.execute("select Album.Album_id,Album.Album_text, count(*) from songs inner join Album on songs.Album_id = Album.Album_id group by songs.Album_id order by Album.Album_text;")
-		for row in cursor:
-			albumList.append((Item(text = "%s (%d)" % (row[1], row[2]), mode = 8, albumID = row[0]),))
-		cursor.close() 
-		connection.close()
-		self["list"].setList(albumList)
-		if len(albumList) > 1:
-			self["list"].moveToIndex(1)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			albumList = []
+			albumList.append((Item(text = _("[back]"), mode = 0, navigator = True),))
+			cursor.execute("select Album.Album_id,Album.Album_text, count(*) from songs inner join Album on songs.Album_id = Album.Album_id group by songs.Album_id order by Album.Album_text;")
+			for row in cursor:
+				albumList.append((Item(text = "%s (%d)" % (row[1], row[2]), mode = 8, albumID = row[0]),))
+			cursor.close() 
+			connection.close()
+			self["list"].setList(albumList)
+			if len(albumList) > 1:
+				self["list"].moveToIndex(1)
 			
 	def startRun(self):
 		if pathToDatabase.isRunning:
@@ -2351,28 +2386,29 @@ class iDreamMerlin(Screen):
 
 	def startPlayerTimerCallback(self):
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		iDreamMode = False
-		SongList = []
-		cursor.execute("select song_id, filename, title, artist, album, genre, bitrate, length,  track, date, PTS from CurrentSongList;")
-		for row in cursor:
-			SongList.append((Item(songID = row[0], text = os_path.basename(row[1]), filename = row[1], title = row[2], artist = row[3], album = row[4], genre = row[5],  bitrate = row[6], length = row[7], track = row[8], date = row[9], PTS = row[10], join = False),))
-			if row[0] != 0:
-				iDreamMode = True
-		cursor.close() 
-		connection.close()
-		if self.player is not None:
-			self.player.doClose()
-			self.player = None
-		count = len(SongList)
-		if count:
-			# just to be sure, check the index , it's critical
-			index = config.plugins.merlinmusicplayer.lastsonglistindex.value
-			if index >= count:
-				index = 0
-			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode, self.currentService, self.serviceList)
-			self.session.execDialog(self.player)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			iDreamMode = False
+			SongList = []
+			cursor.execute("select song_id, filename, title, artist, album, genre, bitrate, length,  track, date, PTS from CurrentSongList;")
+			for row in cursor:
+				SongList.append((Item(songID = row[0], text = os_path.basename(row[1]), filename = row[1], title = row[2], artist = row[3], album = row[4], genre = row[5],  bitrate = row[6], length = row[7], track = row[8], date = row[9], PTS = row[10], join = False),))
+				if row[0] != 0:
+					iDreamMode = True
+			cursor.close() 
+			connection.close()
+			if self.player is not None:
+				self.player.doClose()
+				self.player = None
+			count = len(SongList)
+			if count:
+				# just to be sure, check the index , it's critical
+				index = config.plugins.merlinmusicplayer.lastsonglistindex.value
+				if index >= count:
+					index = 0
+				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode, self.currentService, self.serviceList)
+				self.session.execDialog(self.player)
 
 	def config(self):
 		self.session.openWithCallback(self.setupFinished, MerlinMusicPlayerSetup, True)
@@ -2871,28 +2907,29 @@ class MerlinMusicPlayerFileList(Screen):
 
 	def startPlayerTimerCallback(self):
 		connection = OpenDatabase()
-		connection.text_factory = str
-		cursor = connection.cursor()
-		iDreamMode = False
-		SongList = []
-		cursor.execute("select song_id, filename, title, artist, album, genre, bitrate, length,  track, date, PTS from CurrentSongList;")
-		for row in cursor:
-			SongList.append((Item(songID = row[0], text = os_path.basename(row[1]), filename = row[1], title = row[2], artist = row[3], album = row[4], genre = row[5],  bitrate = row[6], length = row[7], track = row[8], date = row[9], PTS = row[10], join = False),))
-			if row[0] != 0:
-				iDreamMode = True
-		cursor.close() 
-		connection.close()
-		if self.player is not None:
-			self.player.doClose()
-			self.player = None
-		count = len(SongList)
-		if count:
-			# just to be sure, check the index , it's critical
-			index = config.plugins.merlinmusicplayer.lastsonglistindex.value
-			if index >= count:
-				index = 0
-			self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode, self.currentService, self.serviceList)
-			self.session.execDialog(self.player)
+		if connection is not None:
+			connection.text_factory = str
+			cursor = connection.cursor()
+			iDreamMode = False
+			SongList = []
+			cursor.execute("select song_id, filename, title, artist, album, genre, bitrate, length,  track, date, PTS from CurrentSongList;")
+			for row in cursor:
+				SongList.append((Item(songID = row[0], text = os_path.basename(row[1]), filename = row[1], title = row[2], artist = row[3], album = row[4], genre = row[5],  bitrate = row[6], length = row[7], track = row[8], date = row[9], PTS = row[10], join = False),))
+				if row[0] != 0:
+					iDreamMode = True
+			cursor.close() 
+			connection.close()
+			if self.player is not None:
+				self.player.doClose()
+				self.player = None
+			count = len(SongList)
+			if count:
+				# just to be sure, check the index , it's critical
+				index = config.plugins.merlinmusicplayer.lastsonglistindex.value
+				if index >= count:
+					index = 0
+				self.player = self.session.instantiateDialog(MerlinMusicPlayerScreen,SongList, index, iDreamMode, self.currentService, self.serviceList)
+				self.session.execDialog(self.player)
 	
 	def readCUE(self, filename):
 		SongList = []
@@ -3115,8 +3152,11 @@ class MerlinMusicPlayerFileList(Screen):
 			current = ServiceReference(self.serviceList.getCurrentSelection())
 			self.session.nav.playService(current.ref)
 		if config.plugins.merlinmusicplayer.rememberlastfilebrowserpath.value:
-			config.plugins.merlinmusicplayer.defaultfilebrowserpath.value = self["list"].getCurrentDirectory()
-			config.plugins.merlinmusicplayer.defaultfilebrowserpath.save()
+			try:
+				config.plugins.merlinmusicplayer.defaultfilebrowserpath.value = self["list"].getCurrentDirectory()
+				config.plugins.merlinmusicplayer.defaultfilebrowserpath.save()
+			except:
+				pass
 
 	def createSummary(self):
 		return MerlinMusicPlayerLCDScreenText
