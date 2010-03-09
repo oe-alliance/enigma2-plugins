@@ -72,6 +72,8 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         if oKiddyTimer.dialog != None:
             self.dialogEnabled_old = oKiddyTimer.dialogEnabled
             oKiddyTimer.setDialogStatus(False)
+        else:
+            self.dialogEnabled_old = False
             
         # Plugin Information
         iRemainingTime = oKiddyTimer.remainingTime
