@@ -847,15 +847,23 @@ function incomingChannellist(request){
 
 function loadBouquet(servicereference, name){ 
 	debug("[loadBouquet] called");
-
+	setAjaxLoad('contentServices');
+	
 	currentBouquet = servicereference;
 
 	setContentHd(name);
-	setAjaxLoad('contentServices');
+	
+	var input = new Element('input');
+	input.id = 'serviceSearch';
+	input.value = 'Search for service';
+	
+	$('contentHdExt').update(input);
+	
+	input.observe('focus', onServiceSearchFocus);
+	input.observe('keyup', serviceSearch);	
 
 	startUpdateBouquetItemsPoller();
 	doRequest(URL.getservices+servicereference, incomingChannellist, true);
-
 }
 
 
@@ -1610,6 +1618,34 @@ function reloadGearsInfo(){
 	loadContentDynamic(showGears, 'Google Gears');
 }
 
+var cachedServiceElements = null;
+
+function onServiceSearchFocus(event){
+	event.element().value = '';
+	cachedServiceElements = null;
+	serviceSearch(event);
+}
+
+function serviceSearch(event){
+	var needle = event.element().value.toLowerCase();
+	
+	if(cachedServiceElements == null){
+		cachedServiceElements = $$('.sListRow');
+	}
+	
+	for(var i = 0; i < cachedServiceElements.length; i++){
+		var row = cachedServiceElements[i];
+		var serviceName = row.readAttribute('data-servicename').toLowerCase();
+		
+		if(!serviceName.startsWith(needle) && serviceName != ""){
+			row.hide();
+		} else {		
+			row.show();
+		}
+	}
+	
+	debug('serviceNames');
+}
 
 /*
  * Switches Navigation Modes

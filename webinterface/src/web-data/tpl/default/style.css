@@ -43,7 +43,10 @@
 /***********************
  GENERAL
  ***********************/
-
+	.black{
+		background: #000;
+	}
+	
 	.odd{
 		background-color: #FFF;
 	}
@@ -285,8 +288,21 @@
 	}
 	#contentHd{
 		background: #000;
-		width: 827px;
+		width: 527px;
 	}
+	#contentHdExt{
+		background: #000;		
+		dipslay:block;
+	}
+	
+	#contentHdExt input{
+		padding: 1px;
+		margin-right: 2px;
+		margin-bottom: 2px;
+		border: 0px;
+		color: #485052;
+	}
+	
 	#epgSearch{ width: 120px; }
 	
 	.boxContent{
