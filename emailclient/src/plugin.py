@@ -1128,7 +1128,12 @@ def main(session, **kwargs): #@UnusedVariable kwargs # pylint: disable-msg=W0613
 def autostart(reason, **kwargs): #@UnusedVariable reason
 	debug("[EmailClient] - Autostart reason: %d kwargs: %s" %(reason, repr(kwargs)))
 	debug("[EmailClient] " + "$Revision$"[1:-1]	+ "$Date$"[7:23] + " starting")
-	if os.path.isfile('/usr/lib/python2.5/uu.py') is not True:
+	if os.path.exists('/usr/lib/python2.6'):
+		debug("[EmailClient] new OE 1.6")
+		if os.path.isfile('/usr/lib/python2.6/uu.py') is not True:
+			import shutil
+			shutil.copy(resolveFilename(SCOPE_PLUGINS, "Extensions/EmailClient/uu.py"), '/usr/lib/python2.6/uu.py')
+	elif os.path.isfile('/usr/lib/python2.5/uu.py') is not True:
 		import shutil
 		shutil.copy(resolveFilename(SCOPE_PLUGINS, "Extensions/EmailClient/uu.py"), '/usr/lib/python2.5/uu.py')
 
