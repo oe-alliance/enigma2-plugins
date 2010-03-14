@@ -108,7 +108,7 @@ function getPowerState(){
 function set(element, value){
 	element = parent.$(element);
 	if (element){
-		element.innerHTML = value;
+		element.update(value);
 	}
 }
 
@@ -242,7 +242,7 @@ function hide(id){
 * @param targetElement - The element the Ajax-Loader should be set in
 */
 function setAjaxLoad(targetElement){
-	$(targetElement).innerHTML = getAjaxLoad();
+	$(targetElement).update( getAjaxLoad() );
 }
 
 
@@ -386,7 +386,7 @@ function renderTpl(tpl, data, domElement) {
 	var result = tpl.process(data);
 
 	try{
-		$(domElement).innerHTML = result;
+		$(domElement).update( result );
 	}catch(ex){
 		//		debug("[renderTpl] exception: " + ex);
 	}
@@ -702,7 +702,6 @@ function buildServiceListEPGItem(epgevent, type){
 	var data = { epg : epgevent,
 				 nownext: type
 				};
-	// e.innerHTML = RND(tplServiceListEPGItem, namespace);
 
 	var id = type + epgevent.servicereference;
 
@@ -1637,7 +1636,7 @@ function serviceSearch(event){
 		var row = cachedServiceElements[i];
 		var serviceName = row.readAttribute('data-servicename').toLowerCase();
 		
-		if(!serviceName.startsWith(needle) && serviceName != ""){
+		if(serviceName.match(needle) != needle && serviceName != ""){
 			row.hide();
 		} else {		
 			row.show();
