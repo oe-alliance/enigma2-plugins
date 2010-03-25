@@ -1,4 +1,4 @@
-<e2:screen name="ServiceWebScreen">&lt;html>
+<e2:screen name="ServiceListWebScreen">&lt;html>
 <head>
   <link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet" />
 </head>
