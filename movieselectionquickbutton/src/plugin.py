@@ -119,7 +119,7 @@ def startPlugin(self,pname, index):
 				MCM.delete()
 				no_plugin = False
 			elif pname == _("Home"):
-				self.gotFilename("/hdd/movie/")
+				self.gotFilename(config.usage.default_path.value)
 				no_plugin = False
 			elif pname == _("Sort"):
 				if config.movielist.moviesort.value == MovieList.SORT_ALPHANUMERIC:
