@@ -568,6 +568,7 @@ class LastFMSaveScreen(Screen):
             pass
         else:
             self.lastcreator = self.streamplayer.getMetadata("creator")
+            self.setTitle(self.lastcreator+" - "+self.streamplayer.getMetadata("title"))
             if config.plugins.LastFM.sreensaver.showcoverart.value is not True:
                 pass#do nothing
             elif self.streamplayer.getMetadata("image").startswith("http") and config.plugins.LastFM.showcoverart.value:
