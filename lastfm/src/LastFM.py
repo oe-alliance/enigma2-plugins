@@ -127,7 +127,7 @@ class LastFM(LastFMHandler):
 #            getPage(self.info["base_url"],80
 #                            ,self.info["base_path"] + "/xspf.php?sk=" + self.info["session"]+"&discovery=0&desktop=1.3.1.1"
 #                            ,callback=self.loadPlaylistCB,errorback=self.onCommandFailed)
-            url = "http://"+self.info["base_url"]+":80"+self.info["base_path"] + "/xspf.php?sk=" + self.info["session"]+"&discovery=0&desktop=1.3.1.1"
+            url = "http://"+self.info["base_url"]+":80"+self.info["base_path"] + "/xspf.php?sk=" + self.info["session"] + "&discovery=0&desktop=2.0"
             getPage(url).addCallback(self.loadPlaylistCB).addErrback(self.onCommandFailed)
 
     def loadPlaylistCB(self,xmlsource):
