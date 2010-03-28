@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	
+	<title>Dreambox WebControl</title>
+	
+	<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
+	<link rel="shortcut icon" type="/web-data/image/x-icon" href="/web-data/img/favicon.ico">
+	
+	<!-- External libs
+	<script type="text/javascript" src="/web-data/lib/prototype-1.6.1.js"></script>
+	<script type="text/javascript" src="/web-data/lib/scriptaculous.js?load=effects"></script>
+	<script type="text/javascript" src="/web-data/lib/curvycorners.js"></script>
+	<script type="text/javascript" src="/web-data/lib/trimpath-template-1.0.38.js"></script>
+	 -->
+
+	<script type="text/javascript" src="/web-data/lib/libs_minified.js"></script>
+	
+	<!-- userprefs Object -->
+	<script type="text/javascript" src="/web-data/userprefs.js"></script>
+		
+	<!-- our stuff //-->
+	<script type="text/javascript" src="/web-data/objects.js" ></script>
+	<script type="text/javascript" src="/web-data/statics.js" ></script>	
+	<script type="text/javascript" src="/web-data/tools.js" ></script>
+	<script type="text/javascript" src="/web-data/handler.js" ></script>
+	<script type="text/javascript" src="/web-data/timer.js" ></script>
+
+	<!-- Gears-->
+	<script type="text/javascript" src="/web-data/lib/gears_init.js"></script>
+	<script type="text/javascript" src="/web-data/gears_handler.js" ></script>
+
+	<!-- Live RSS Feeds //-->
+	<link rel="alternate" type="application/rss+xml" title="Movie List" href="/web/movielist.rss?tag" >
+
+
+	<script language="javascript" type="text/javascript">
+		
+		if (!window.$) {
+			window.$ = function(id) { return document.getElementById(id); }
+		}
+		
+		function getWinSize(win) 
+		{ 
+			if(!win) win = window; 
+			var s = {}; 
+			if(typeof win.innerWidth != 'undefined') 
+			{ 
+				s.width = win.innerWidth; 
+				s.height = win.innerHeight; 
+			} 
+			else 
+			{ 
+				 var obj = getBody(win); 
+				 s.width = parseInt(obj.clientWidth); 
+				 s.height = parseInt(obj.clientHeight); 
+			} 
+			return s; 
+		} 
+
+		function getBody(w) 
+		{ 
+			return (w.document.compatMode && w.document.compatMode == "CSS1Compat") ? w.document.documentElement : w.document.body || null; 
+		} 
+		
+		function setMaxHeight(element){
+			try{			
+				var slc = $(element);
+				size = getWinSize();
+				slc.style.maxHeight = size.height - 200+"px";
+			} catch (e) {}
+		}
+
+	</script>
+</head>
+<body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">
+	
+	<div id="container">
+		<div id="banner">
+			<span id="notification"><div></div></span>
+			<div id="bannerLeft">
+				<div id="bannerText" style="font-size: 24px;">
+					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
+				</div>
+				<ul id="mainMenu">
+					<li><a href="#" onClick="switchMode('TV')">TeleVision</a></li>
+					<li><a href="#" onClick="switchMode('Radio')">Radio</a></li>
+					<li><a href="#" onClick="switchMode('Movies')">Movies</a></li>
+					<li><a href="#" onClick="switchMode('Timer')">Timer</a></li>
+					<!-- <li><a href="#" onClick="switchMode('MediaPlayer')">MediaPlayer</a></li>  -->
+					<li><a href="#" onClick="switchMode('BoxControl')">BoxControl</a></li>
+					<li><a href="#" onClick="switchMode('Extras')">Extras</a></li>
+					<li>
+						<a href="#" onClick="openWebTV();">
+							WebTV
+						</a></li>
+				</ul>
+			</div>
+			<div id="bannerRight">
+				<div>					
+					<a id="openSignalPanel" href="#" >
+						<img id="openSignalPanelImg" border="0" src="/web-data/img/signal.png" alt="Signal" title="Show Signal Panel">
+					</a><br>
+					<a id="doInstantRecord" href="#" onClick="recordNowPopup()">
+						<img  id="doInstantRecordImg" border="0" src="/web-data/img/record.png" alt="R" title="Instant Record">
+					</a>
+				</div>			
+			</div>
+		</div>
+		<div id="current">
+			<div id="currentContent">
+				<table id="currentTable">
+					<tr>
+						<td id="currentName">N/A</td>
+					</tr>	
+				</table>
+			</div>
+		</div>
+		<div id="main">
+			<div id="navContainer">
+				<div id="nav">
+					<div id="navHd" class="header"><div>SubNav</div></div>
+					<div id="navContent">loading...</div>
+				</div>
+				<div id="navVolume">
+					<div id="volHd" class="header"><div>Volume</div></div>
+					<span class="boxContent center" style="width: 94%; display:block;">
+						<!-- Volume "Slider" -->
+						<a href="#" onClick="volumeSet(10)">
+							<img id='volume1' src='/web-data/img/led_off.png' title="Volume to 10%" alt="10%">
+						</a>
+						<a href="#" onClick="volumeSet(20)">
+							<img id='volume2' src='/web-data/img/led_off.png' title="Volume to 20%" alt="20%">
+						</a>
+						<a href="#" onClick="volumeSet(30)">
+							<img id='volume3' src='/web-data/img/led_off.png' title="Volume to 30%" alt="30%">
+						</a>
+						<a href="#" onClick="volumeSet(40)">
+							<img id='volume4' src='/web-data/img/led_off.png' title="Volume to 40%" alt="40%">
+						</a>
+						<a href="#" onClick="volumeSet(50)">
+							<img id='volume5' src='/web-data/img/led_off.png' title="Volume to 50%" alt="50%">
+						</a>
+						<a href="#" onClick="volumeSet(60)">
+							<img id='volume6' src='/web-data/img/led_off.png' title="Volume to 60%" alt="60%">
+						</a>
+						<a href="#" onClick="volumeSet(70)">
+							<img id='volume7' src='/web-data/img/led_off.png' title="Volume to 70%" alt="70%">
+						</a>
+						<a href="#" onClick="volumeSet(80)">
+							<img id='volume8' src='/web-data/img/led_off.png' title="Volume to 80%" alt="80%">
+						</a>
+						<a href="#" onClick="volumeSet(90)">
+							<img id='volume9' src='/web-data/img/led_off.png' title="Volume to 90%" alt="90%">
+						</a>
+						<a href="#" onClick="volumeSet(100)">
+							<img id='volume10' src='/web-data/img/led_off.png' title="Volume to 100%" alt="100%">
+						</a>
+						<br>
+						<!-- Volume Control -->
+						<a href="#" onClick="volumeUp()">
+							<img src='/web-data/img/arrow_up.png'  title="Volume Up" alt="Up">
+						</a>
+						<a href="#" onClick="volumeDown()">
+							<img src='/web-data/img/arrow_down.png'  title="Volume Down" alt="Down">
+						</a>
+						<a href="#" onClick="volumeMute()">
+							<img id='speaker' src='/web-data/img/speak_on.png'  title="Mute" alt="Mute">
+						</a>						
+					</span>
+				</div>
+				<div id="navSearch">
+					<div id="searchHd" class="header"><div>EPG-Search</div></div>
+					<div class="boxContent">
+						<form action="" onSubmit="loadEPGBySearchString($('epgSearch').value); return false;">
+							<input type="text" id="epgSearch" onfocus="this.value=''" value="Search EPG" />
+							<img style="vertical-align:middle" src="/web-data/img/cross.png" alt="clear..." title="Clear Search" onClick="clearSearch()" />
+						</form>						
+					</div>
+				</div>
+			</div>
+			<div id="content">
+				<table style="margin:0px; padding:0px; background:#000;width:100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td><div id="contentHd" class="header"><div>Content</div></div></td>
+						<td style="text-align: right"><div id="contentHdExt"></div></td>
+					</tr>
+				</table>
+				<div id="contentMain">loading...</div>
+			</div>	
+		</div>
+	</div>
+	<script language="javascript" type="text/javascript">	
+		function setNavHd(content){
+			set("navHd", '<div style="background-color: #000">'+content+'</div>');
+		}
+		
+		function setContentHd(content){
+			var div = new Element('div');
+			div.setStyle({background: 'black'});
+			div.update(content);
+			$('contentHd').update(div);
+			$('contentHdExt').update('');
+		}
+		
+		function getAjaxLoad(){
+			return ('<center><img style="padding-top: 50px;" src="/web-data/gfx/ajaxload.gif" alt="loading..."></center>');
+		}
+		
+		setMaxHeight('contentMain');		
+		
+		init();
+	</script>
+
+</body>
+</html>

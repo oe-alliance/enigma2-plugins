@@ -1,268 +1,553 @@
-var doRequestMemory = new Object();
+//$Header$
+var templates = {};
+var loadedChannellist = {};
 
-// Get Settings
+var epgListData = {};
+var signalPanelData = {};
+
+var mediaPlayerStarted = false; 
+var popUpBlockerHinted = false;
+
 var settings = null;
 var parentControlList = null;
 
-// UpdateStreamReader
-var UpdateStreamReaderNextReadPos = 0;
-var UpdateStreamReaderPollTimer;
-var UpdateStreamReaderPollTimerCounter = 0;
-var UpdateStreamReaderPollTimerCounterTwisted = 0;
-UpdateStreamReaderRequest = null;
-function UpdateStreamReaderStart(){
-	var ua = navigator.userAgent;
-	if(navigator.userAgent.indexOf("MSIE") >=0) {
-		debug("UpdateStreamReader IE Fix");
-
-		var namespace = { 	
-					'url_updates': url_updates
-		};
-		$('UpdateStreamReaderIEFixPanel').innerHTML = RND(tplUpdateStreamReaderIE, namespace);
-		
-	}else {
-		UpdateStreamReaderNextReadPos = 0;
-		allMessages = "";
-		UpdateStreamReaderRequest = new XMLHttpRequest();
-		UpdateStreamReaderRequest.onload = UpdateStreamReaderOnLoad;
-		UpdateStreamReaderRequest.onerror = UpdateStreamReaderOnError;
-		UpdateStreamReaderRequest.open("GET", url_updates, true);
- 		UpdateStreamReaderRequest.send(null);
-		UpdateStreamReaderPollTimer = setInterval(UpdateStreamReaderLatestResponse, 10000);
-	}
-}
-  
-function UpdateStreamReaderLatestResponse() {
-	UpdateStreamReaderPollTimerCounter++;
-	debug(UpdateStreamReaderPollTimerCounter);
-	if(UpdateStreamReaderPollTimerCounter > 6) {
-		clearInterval(UpdateStreamReaderPollTimer);
-		UpdateStreamReaderRequest.abort();
-		UpdateStreamReaderRequest = null;
-		UpdateStreamReaderPollTimerCounter = 0;
-		UpdateStreamReaderStart();
-		
-		UpdateStreamReaderPollTimerCounterTwisted++;
-/*
-// Quickhack jjbig start
-// Its not great, but the best I could come up with to solve the 
-// problem with the memory leak
-
- 		if(UpdateStreamReaderPollTimerCounterTwisted > 5) {
-			UpdateStreamReaderPollTimerCounterTwisted = 0;
-			debug("restarting twisted");
-			debug(new Ajax.Request( "/web/restarttwisted", { method: 'get' }));
-			debug("...twisted restart");
-		}
-		* // Quickhack jjbig end
-*/
-		return;
-	}
-	var allMessages = UpdateStreamReaderRequest.responseText;
-	do {
-		var unprocessed = allMessages.substring(UpdateStreamReaderNextReadPos);
-		var messageXMLEndIndex = unprocessed.indexOf("\n");
-		
-		if (messageXMLEndIndex!=-1) {
-			var endOfFirstMessageIndex = messageXMLEndIndex + "\n".length;
-			var anUpdate = unprocessed.substring(0, endOfFirstMessageIndex);
-	
-			var re = new RegExp("<script>parent\.(.*)</script>");
-			anUpdate = re.exec(anUpdate);
-
-			if(anUpdate != null){
-				if (anUpdate.length == 2){
-					eval(anUpdate[1]);
-				}
-			}
-			
-			UpdateStreamReaderNextReadPos += endOfFirstMessageIndex;
-		}
-		if(UpdateStreamReaderNextReadPos > 65000){
-			UpdateStreamReaderRequest.abort();
-			UpdateStreamReaderRequest = null;
-			UpdateStreamReaderPollTimerCounter = 0;
-			UpdateStreamReaderStart();
-			messageXMLEndIndex = -1;
-		}
-	} while (messageXMLEndIndex != -1);
-}
-
-function UpdateStreamReaderOnLoad(){
-	window.clearInterval(UpdateStreamReaderPollTimer);
-	debug("UpdateStreamReaderOnLoad");
-	Dialog.confirm(
-		"Live Update Stream ends!<br><br>You will not receive any Update from Enigma2.<br>Should I reconnect?",
-		 {windowParameters: {width:300, className: windowStyle},
-			okLabel: "reconnect",
-			buttonClass: "myButtonClass",
-			cancel: function(win) {debug("cancel confirm panel")},
-			ok: function(win) {UpdateStreamReaderStart(); return true;}
-			}
-		);
-}
-function UpdateStreamReaderOnError(){
-	// TODO: change this, because it will be called on 'PageUnload' while the request is still running
-	debug("UpdateStreamReaderOnError");
-	window.clearInterval(UpdateStreamReaderPollTimer);
-	Dialog.confirm(
-		"Live Update Stream has an Error!<br><br>You will not receive any Update from Enigma2.<br>Should I try to reconnect?",
-		 {windowParameters: {width:300, className: windowStyle},
-			 okLabel: "reconnect",
-			 buttonClass: "myButtonClass",
-			 cancel: function(win) {debug("cancel confirm panel")},
-			 ok: function(win) {UpdateStreamReaderStart(); return true;}
-			}
-		);
-}
-//end UpdateStreamReader
-
-function openWindow(title, inner, width, height, id){
-			if(id == null) id = new Date().toUTCString();
-			var win = new Window(id, {className: windowStyle, title: title, width: width, height: height });
-			win.getContent().innerHTML = inner;
-			win.setDestroyOnClose();
-			win.showCenter();
-			debug("opening Window: "+title);
-			return win;
-}
-function messageBox(t, m){
-	Dialog.alert(m, {windowParameters: {title: t, className: windowStyle, width:200}, okLabel: "Close"});
-}
-
-//RND Template Function (http://www.amix.dk)
-function RND(tmpl, ns) {
-	var fn = function(w, g) {
-		g = g.split("|");
-		var cnt = ns[g[0]];
-		//Support for filter functions
-		for(var i=1; i < g.length; i++) {
-			cnt = eval(g[i])(cnt);
-		}
-		return cnt || w;
-	};
-	return tmpl.replace(/%\(([A-Za-z0-9_|.]*)\)/g, fn);
-}
-function debug(text){
-	if(DBG){
-		try{
-			debugWin.getContent().innerHTML += "DEBUG: "+text+"<br>";
-		} catch (windowNotPresent) {}
-	}
-}
-function showhide(id){
- 	o = $(id).style;
- 	o.display = (o.display!="none")? "none":"";
-}
-function set(element, value){
-	//debug(element+"-"+value);
-	element = parent.$(element);
-	if(value.length > 550) {
-		value = value.substr(0,550) + "[...]";
-	}
-	if (element){
-		element.innerHTML = value;
-	}
-	if(navigator.userAgent.indexOf("MSIE") >=0) {
-		elementscript= $('UpdateStreamReaderIEFixIFrame').$('scriptzone');
-		if(elementscript){
-			elementscript.innerHTML = ""; // deleting set() from page, to keep the page short and to save memory			
-		}
-	}
-}
-function setComplete(element, value){
-	//debug(element+"-"+value);
-	element = parent.$(element);
-	if (element){
-		element.innerHTML = value;
-	}
-	if(navigator.userAgent.indexOf("MSIE") >=0) {
-		elementscript= $('UpdateStreamReaderIEFixIFrame').$('scriptzone');
-		if(elementscript){
-			elementscript.innerHTML = ""; // deleting set() from page, to keep the page short and to save memory			
-		}
-	}
-}
-// requestindikator
 var requestcounter = 0;
+
+var debugWin = '';
+var signalWin = '';
+var webRemoteWin = '';
+var EPGListWin = '';
+
+var currentBouquet = bouquetsTv;
+
+var updateBouquetItemsPoller = '';
+var updateCurrentPoller = '';
+var signalPanelUpdatePoller = '';
+
+var hideNotifierTimeout = '';
+
+var isActive = {};
+isActive.getCurrent = false;
+
+var currentLocation = "/hdd/movie";
+var locationsList = [];
+var tagsList = [];
+
+var boxtype = "";
+
+function startUpdateCurrentPoller(){
+	clearInterval(updateCurrentPoller);
+	updateCurrentPoller = setInterval(updateItems, userprefs.data.updateCurrentInterval);
+}
+
+function stopUpdateCurrentPoller(){
+	clearInterval(updateCurrentPoller);
+}
+
+function getXML(request){
+	var xmlDoc = "";
+
+	if(window.ActiveXObject){ // we're on IE
+		xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+		xmlDoc.async="false";
+		xmlDoc.loadXML(request.responseText);
+	} else { //we're not on IE
+		if (!window.google || !google.gears){
+			xmlDoc = request.responseXML;
+		} else { //no responseXML on gears
+			xmlDoc = (new DOMParser()).parseFromString(request.responseText, "text/xml");
+		}
+	}
+
+	return xmlDoc;
+}
+/*
+* Set boxtype Variable for being able of determining model specific stuff correctly (like WebRemote)
+*/
+function incomingDeviceInfoBoxtype(request){
+	debug("[incomingAboutBoxtype] returned");
+	boxtype = getXML(request).getElementsByTagName("e2devicename").item(0).firstChild.data;
+
+	debug("[incomingAboutBoxtype] Boxtype: " + boxtype);
+}
+
+
+function getBoxtype(){
+	doRequest(URL.deviceinfo, incomingDeviceInfoBoxtype, false);
+}
+
+function toggleStandby(){
+	sendPowerState(0);
+}
+
+function incomingPowerState(request){
+	var standby = getXML(request).getElementsByTagName("e2instandby").item(0).firstChild.data;
+	
+	var signal = $('openSignalPanel');
+	var signalImg = $('openSignalPanelImg');
+	
+	if(standby.strip() == "false"){
+		signal.stopObserving('click', openSignalPanel);
+		signal.observe('click', openSignalPanel);
+		
+		signalImg.src = "/web-data/img/signal.png";
+		signalImg.title = "Show Signal Panel";
+		
+	} else {
+		signal.stopObserving('click', openSignalPanel);		
+		
+		signalImg.src = "/web-data/img/signal_off.png";
+		signalImg.title = "Please disable standby first";
+	}
+}
+
+function getPowerState(){
+	doRequest(URL.powerstate, incomingPowerState);	
+}
+
+function set(element, value){
+	element = parent.$(element);
+	if (element){
+		element.update(value);
+	}
+}
+
+function hideNotifier(){
+	$('notification').fade({duration : 0.5 });
+}
+
+function notify(text, state){
+	notif = $('notification');
+
+	if(notif !== null){
+		//clear possibly existing hideNotifier timeout of a previous notfication
+		clearTimeout(hideNotifierTimeout);
+		if(state === false){
+			notif.style.background = "#C00";
+		} else {
+			notif.style.background = "#85C247";
+		}				
+
+		set('notification', "<div>"+text+"</div>");
+		notif.appear({duration : 0.5, to: 0.9 });
+		hideNotifierTimeout = setTimeout(hideNotifier, 10000);
+	}
+}
+
+
+function simpleResultHandler(simpleResult){
+	notify(simpleResult.getStateText(), simpleResult.getState());
+}
+
+
+function startUpdateBouquetItemsPoller(){
+	debug("[startUpdateBouquetItemsPoller] called");
+	clearInterval(updateBouquetItemsPoller);
+	updateBouquetItemsPoller = setInterval(updateItemsLazy, userprefs.data.updateBouquetInterval);
+}
+
+
+function stopUpdateBouquetItemsPoller(){
+	debug("[stopUpdateBouquetItemsPoller] called");
+	clearInterval(updateBouquetItemsPoller);
+}
+
+
+//General Helpers
+function parseNr(num) {
+	if(isNaN(num)){
+		return 0;
+	} else {
+		return parseInt(num);
+	}
+}
+
+
+function dec2hex(nr, len){
+
+	var hex = parseInt(nr, 10).toString(16).toUpperCase();
+	if(len > 0){
+		try{
+			while(hex.length < len){
+				hex = "0"+hex;
+			}
+		} 
+		catch(e){
+			//something went wrong, return -1
+			hex = -1;
+		}
+	}
+	
+	hex = '0x' + hex;
+	
+	return hex;
+}
+
+
+function quotes2html(txt) {
+	if(txt !== undefined){
+		return txt.escapeHTML().replace('\n', '<br>');
+	} else {
+		return "";
+	}
+}
+
+function addLeadingZero(nr){
+	if(nr < 10){
+		return '0' + nr;
+	}
+	return nr;
+}
+
+function dateToString(date){
+
+	var dateString = "";
+
+	dateString += date.getFullYear();
+	dateString += "-" + addLeadingZero(date.getMonth()+1);
+	dateString += "-" + addLeadingZero(date.getDate());
+	dateString += " " + addLeadingZero(date.getHours());
+	dateString += ":" + addLeadingZero(date.getMinutes());
+
+	return dateString;
+}
+
+
+function showhide(id){
+	var s = $(id).style;
+	s.display = (s.display!="none")? "none":"";
+}
+
+
+function show(id){
+	try{
+		$(id).style.display = "";
+	} catch(e) {
+		debug("[show] Could not show element with id: " + id);
+	}
+}
+
+
+function hide(id){
+	try{
+		$(id).style.display = "none";
+	} catch(e) {
+		debug("[hide] Could not hide element with id: " + id);
+	}
+}
+
+
+/*
+* Sets the Loading Notification to the given HTML Element
+* @param targetElement - The element the Ajax-Loader should be set in
+*/
+function setAjaxLoad(targetElement){
+	$(targetElement).update( getAjaxLoad() );
+}
+
+
+//Ajax Request Helpers
+//requestindikator
+
 function requestIndicatorUpdate(){
-	//debug(requestcounter+" open requests");
+	/*debug(requestcounter+" open requests");
 	if(requestcounter>=1){
 		$('RequestIndicator').style.display = "inline";
 	}else{
 		$('RequestIndicator').style.display = "none";
-	}
+	}*/
 }
+
 function requestStarted(){
 	requestcounter +=1;
 	requestIndicatorUpdate();
 }
+
 function requestFinished(){
-	requestcounter -=1;
+	requestcounter -= 1;
 	requestIndicatorUpdate();
 }
-// end requestindikator
-function doRequest(url, readyFunction, save){
+
+//Popup And Messagebox Helpers
+function messageBox(m){
+	alert(m);
+}
+
+
+function popUpBlockerHint(){
+	if(!popUpBlockerHinted){
+		popUpBlockerHinted = true;
+		messageBox("Please disable your Popup-Blocker for enigma2 WebControl to work flawlessly!");
+
+	}
+}
+
+function setWindowContent(window, html){
+	window.document.write(html);
+	window.document.close();
+}
+
+function openPopup(title, html, width, height, x, y){
+	try {
+		var popup = window.open('about:blank',title,'scrollbars=yes, width='+width+',height='+height);		
+		setWindowContent(popup, html);
+		return popup;
+	} catch(e){
+		popUpBlockerHint();
+		return "";
+	}
+}
+
+function openPopupPage(title, uri, width, height, x, y){
+	try {
+		var popup = window.open(uri,title,'scrollbars=yes, width='+width+',height='+height);
+		return popup;
+	} catch(e){
+		popUpBlockerHint();
+		return "";
+	}
+}
+
+function debug(text){
+	var DBG = userprefs.data.debug || false;
+	
+	if(DBG){
+		try{
+			if(!debugWin.closed && debugWin.location){
+				var inner = debugWin.document.getElementById('debugContent').innerHTML;
+				debugWin.document.getElementById('debugContent').innerHTML = new Date().toLocaleString() + ": "+text+"<br>" + inner;
+			} else { 			
+				openDebug();
+				
+				setTimeout(	function(){
+									var inner = debugWin.document.getElementById('debugContent').innerHTML;
+									debugWin.document.getElementById('debugContent').innerHTML = new Date().toLocaleString() + ": "+text+"<br>" + inner;
+								}, 
+								1000
+						  	);
+			}
+		} catch (Exception) {}
+	}
+}
+
+function saveSettings(){
+	userprefs.load();
+	
+	var debug = $('enableDebug').checked;
+	var changed = false;
+	if(debug != undefined){
+		if( userprefs.data.debug != debug ){
+			userprefs.data.debug = debug;
+			changed = true;
+	
+			if(debug){
+				openDebug();
+			}
+		}		
+	}
+	
+	var updateCurrentInterval = parseNr( $F('updateCurrentInterval') ) * 1000;
+	if( updateCurrentInterval < 10000){
+		updateCurrentInterval = 120000;
+	}
+	
+	if( userprefs.data.updateCurrentInterval != updateCurrentInterval){
+		userprefs.data.updateCurrentInterval = updateCurrentInterval;
+		
+		changed = true;
+		startUpdateCurrentPoller();
+	}
+	
+	var updateBouquetInterval = parseNr( $F('updateBouquetInterval') )  * 1000;
+	if( updateBouquetInterval < 60000){
+		updateBouquetInterval = 300000;
+	}
+	
+	if( userprefs.data.updateBouquetInterval != updateBouquetInterval){
+		userprefs.data.updateBouquetInterval = updateBouquetInterval;
+		
+		changed = true;
+		startUpdateBouquetItemsPoller();
+	}
+	
+	if(changed){
+		userprefs.save();
+	}
+}
+
+//Template Helpers
+function saveTpl(request, tplName){
+	debug("[saveTpl] saving template: " + tplName);
+	templates[tplName] = request.responseText;
+}
+
+
+function renderTpl(tpl, data, domElement) {	
+	var result = tpl.process(data);
+
+	try{
+		$(domElement).update( result );
+	}catch(ex){
+		//		debug("[renderTpl] exception: " + ex);
+	}
+}
+
+
+function fetchTpl(tplName, callback){
+	if(templates[tplName] === undefined) {
+		var url = URL.tpl+tplName+".htm";
+		
+		doRequest(
+				url, 
+				function(transport){
+					saveTpl(transport, tplName);
+					if(typeof(callback) == 'function'){
+						callback();
+					}
+				}
+		);
+	} else {
+		if(typeof(callback) == 'function'){
+			callback();
+		}
+	}
+}
+
+function incomingProcessTpl(request, data, domElement, callback){
+	if(request.readyState == 4){
+		renderTpl(request.responseText, data, domElement);
+		if(typeof(callback) == 'function') {
+			callback();
+		}
+	}
+}
+
+function processTpl(tplName, data, domElement, callback){
+	var url = URL.tpl+tplName+".htm";
+	
+	doRequest(url, 
+			function(transport){
+		incomingProcessTpl(transport, data, domElement, callback);
+	}
+	);
+}
+
+//Debugging Window
+
+
+function openDebug(){
+	var uri = URL.tpl+'tplDebug.htm';
+	debugWin = openPopupPage("Debug", uri, 500, 300);
+}
+
+function requestFailed(transport){
+	var notifText = "Request failed for:  " + transport.request.url + "<br>Status: " + transport.status + " " + transport.statusText;
+	notify(notifText, false);
+}
+
+function doRequest(url, readyFunction){
 	requestStarted();
-	//var password = "";
-	//var username = "";
-	debug("Requesting: "+url);
-	if(save == true && typeof(doRequestMemory[url]) != "undefined") {
-		debug("not loading");
-		readyFunction(doRequestMemory[url]);
-	} else {
-		debug("loading");
-		new Ajax.Request(url,
-			{
-				asynchronous: true,
-				method: 'GET',
-				requestHeaders: ['Pragma', 'no-cache', 'Cache-Control', 'must-revalidate', 'If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT'],
-				onException: function(o,e){ throw(e); },				
-				onSuccess: function (transport, json) { 
-							if(save == true) { doRequestMemory[url] = transport; }
-							readyFunction(transport);
+	var request = '';
+	// gears or not that's the question here
+	if (!window.google || !google.gears){ //no gears, how sad
+//		debug("NO GEARS!!");		
+		try{
+			request = new Ajax.Request(url,
+					{
+						asynchronous: true,
+						method: 'GET',
+						requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
+						onException: function(o,e){ throw(e); },				
+						onSuccess: function (transport, json) {						
+							if(readyFunction !== undefined){
+								readyFunction(transport);
+							}
 						},
-				onComplete: requestFinished 
-			});
+						onFailure: function(transport){
+							requestFailed(transport);
+						},
+						onComplete: requestFinished
+					});
+		} catch(e) {}
+	} else { //we're on gears!
+		try{
+			request = google.gears.factory.create('beta.httprequest');
+			request.open('GET', url);
+
+
+			request.onreadystatechange = function(){				
+				if(request.readyState == 4){
+					if(request.status == 200){
+						if( readyFunction !== undefined ){
+							readyFunction(request);
+						}
+					} else {
+						requestFailed(transport);
+					}
+				}
+			};
+			request.send();
+		} catch(e) {}
 	}
 }
 
-function getXML(request){
-	if (document.implementation && document.implementation.createDocument){
-		var xmlDoc = request.responseXML
+//Parental Control
+function incomingParentControl(request) {
+	if(request.readyState == 4){
+		parentControlList = new ServiceList(getXML(request)).getArray();
+		debug("[incomingParentControl] Got "+parentControlList.length + " services");
 	}
-	else if (window.ActiveXObject){
-		var xmlInsert = document.createElement('xml');
-
-		xmlInsert.setAttribute('innerHTML',request.responseText);
-		xmlInsert.setAttribute('id','_MakeAUniqueID');
-		document.body.appendChild(xmlInsert);
-		xmlDoc = $('_MakeAUniqueID');
-		document.body.removeChild($('_MakeAUniqueID'));
-	} else {
-		debug("Your Browser Sucks!");
-	}
-	return xmlDoc;
 }
+
+function getParentControl() {
+	doRequest(URL.parentcontrol, incomingParentControl, false);
+}
+
+
+function getParentControlByRef(txt) {
+	debug("[getParentControlByRef] ("+txt+")");
+	for(var i = 0; i < parentControlList.length; i++) {
+		debug( "[getParentControlByRef] "+parentControlList[i].getClearServiceReference() );
+		if(String(parentControlList[i].getClearServiceReference()) == String(txt)) {
+			return parentControlList[i].getClearServiceReference();
+		} 
+	}
+	return "";
+}
+
+
+//Settings
+function getSettingByName(txt) {
+	debug("[getSettingByName] (" + txt + ")");
+	for(var i = 0; i < settings.length; i++) {
+		debug("("+settings[i].getSettingName()+") (" +settings[i].getSettingValue()+")");
+		if(String(settings[i].getSettingName()) == String(txt)) {
+			return settings[i].getSettingValue().toLowerCase();
+		} 
+	}
+	return "";
+}
+
 function parentPin(servicereference) {
+	debug("[parentPin] parentControlList");
 	servicereference = decodeURIComponent(servicereference);
-	if(parentControlList == null || String(getSettingByName("config.ParentalControl.configured")) != "True") {
+	if(parentControlList === null || String(getSettingByName("config.ParentalControl.configured")) != "true") {
 		return true;
 	}
-	debug("parentPin " + parentControlList.length);
+	//debug("parentPin " + parentControlList.length);
 	if(getParentControlByRef(servicereference) == servicereference) {
 		if(String(getSettingByName("config.ParentalControl.type.value")) == "whitelist") {
-			debug("leaving here 1");
+			debug("[parentPin] Channel in whitelist");
 			return true;
 		}
 	} else {
-		debug("leaving here 2");
+		debug("[parentPin] sRef differs ");
 		return true;
 	}
-	debug("going to ask for PIN");
+	debug("[parentPin] Asking for PIN");
 
-	var userInput = prompt('ParentControll was switch on.<br> Please enter PIN','PIN');
-	if (userInput != '' && userInput != null) {
+	var userInput = prompt('Parental Control is enabled!<br> Please enter the Parental Control PIN','PIN');
+	if (userInput !== '' && userInput !== null) {
 		if(String(userInput) == String(getSettingByName("config.ParentalControl.servicepin.0")) ) {
 			return true;
 		} else {
@@ -272,368 +557,416 @@ function parentPin(servicereference) {
 		return false;
 	}
 }
-var SubServicePoller;
-var SubServicePollerCounter = 0;
-var SubServicePollerRef = null;
-function zap(servicereference){
-	if(parentPin(servicereference)) {
-		new Ajax.Request( "/web/zap?ZapTo=" + servicereference, 
-							{
-								asynchronous: true,
-								method: 'get'
-							}
-						);
-		if(SubServicePoller != 0){
-			clearInterval(SubServicePoller);
-			SubServicePollerCounter = 0;
+
+
+function incomingGetDreamboxSettings(request){
+	if(request.readyState == 4){
+		settings = new Settings(getXML(request)).getArray();
+
+		debug("[incomingGetDreamboxSettings] config.ParentalControl.configured="+ getSettingByName("config.ParentalControl.configured"));
+
+		if(String(getSettingByName("config.ParentalControl.configured")) == "true") {
+			getParentControl();
 		}
-		SubServicePollerRef = servicereference;
-		SubServicePoller = setInterval(getSubServices, 10000);
-		SubServicePollerCounter = 1;
 	}
 }
 
-//++++       SignalPanel                           ++++
-function initSignalPanel(){
-	$('SignalPanel').innerHTML = tplSignalPanelButton;
-}
-function openSignalDialog(){
-	openWindow("Signal Info",tplSignalPanel, 215, 75);
+
+function getDreamboxSettings(){
+	doRequest(URL.settings, incomingGetDreamboxSettings, false);
 }
 
+function delayedGetSubservices(){
+	setTimeout(serviceListHandler.getSubServices, 5000);
+}
 
-//++++ EPG functions                               ++++
-function loadEPGBySearchString(string){
-		doRequest(url_epgsearch+escape(string),incomingEPGrequest, false);
+//zap zap
+function zap(servicereference){
+	servicereference = decodeURIComponent(servicereference);
+	serviceListHandler.zap(servicereference);
+//	doRequest("/web/zap?sRef=" + servicereference);	
+//	setTimeout(updateItemsLazy, 7000); //reload epg and subservices
+//	setTimeout(updateItems, 3000);
 }
-function loadEPGByServiceReference(servicereference){
-		doRequest(url_epgservice+servicereference,incomingEPGrequest, false);
+
+//SignalPanel
+
+function updateSignalPanel(){	
+	var html = templates.tplSignalPanel.process(signalPanelData);
+
+	if (!signalWin.closed && signalWin.location) {
+		setWindowContent(signalWin, html);
+	} else {
+		clearInterval(signalPanelUpdatePoller);
+		signalPanelUpdatePoller = '';
+	}
 }
+
+function incomingSignalPanel(request){
+	var namespace = {};
+
+	if (request.readyState == 4){
+		var xml = getXML(request).getElementsByTagName("e2frontendstatus").item(0);
+		namespace = {
+				snrdb : xml.getElementsByTagName('e2snrdb').item(0).firstChild.data,
+				snr : xml.getElementsByTagName('e2snr').item(0).firstChild.data,
+				ber : xml.getElementsByTagName('e2ber').item(0).firstChild.data,
+				acg : xml.getElementsByTagName('e2acg').item(0).firstChild.data
+		};
+	}
+
+	signalPanelData = { signal : namespace };
+	fetchTpl('tplSignalPanel', updateSignalPanel); 	
+}
+
+function reloadSignalPanel(){
+	doRequest(URL.signal, incomingSignalPanel, false);
+}
+
+function openSignalPanel(){
+	if (!(!signalWin.closed && signalWin.location)){
+		signalWin = openPopup('SignalPanel', '', 220, 120);
+		if(signalPanelUpdatePoller === ''){
+			signalPanelUpdatePoller = setInterval(reloadSignalPanel, 5000);
+		}
+	}
+	reloadSignalPanel();
+}
+
+//EPG functions
+
+
+function showEpgList(){
+	var html = templates.tplEpgList.process(epgListData);
+
+	if (!EPGListWin.closed && EPGListWin.location) {
+		setWindowContent(EPGListWin, html);
+	} else {
+		EPGListWin = openPopup("EPG", html, 900, 500);
+	}
+}
+
 function incomingEPGrequest(request){
-	debug("incoming request" +request.readyState);		
+	debug("[incomingEPGrequest] readyState" +request.readyState);		
 	if (request.readyState == 4){
 		var EPGItems = new EPGList(getXML(request)).getArray(true);
-		debug("have "+EPGItems.length+" e2events");
-		if(EPGItems.length > 0){			
-			var html = tplEPGListHeader;
-			for (var i=0; i < EPGItems.length; i++){
-				try{
-					var item = EPGItems[i];				
-					var namespace = {	
-							'date': item.getTimeDay(),
-							'eventid': item.getEventId(),
-							'servicereference': item.getServiceReference(),
-							'servicename': quotes2html(item.getServiceName()),
-							'title': quotes2html(item.getTitle()),
-							'titleESC': escape(item.getTitle()),
-							'starttime': item.getTimeStartString(), 
-							'duration': Math.ceil(item.getDuration()/60000), 
-							'description': quotes2html(item.getDescription()),
-							'endtime': item.getTimeEndString(), 
-							'extdescription': quotes2html(item.getDescriptionExtended()),
-							'number': String(i),
-							'extdescriptionSmall': extdescriptionSmall(item.getDescriptionExtended(),String(i)),
-							'start': item.getTimeBegin(),
-							'end': item.getTimeEnd()
-						};
-					//Fill template with data and add id to our result
-					html += RND(tplEPGListItem, namespace);
-				} catch (blubb) { debug("Error rendering: "+blubb);	}
-			}
-			html += tplEPGListFooter;
-			openWindow("Electronic Program Guide", html, 900, 500);
+		debug("[incomingEPGrequest] got "+EPGItems.length+" e2events");
+
+		if( EPGItems.length > 0){
+			epgListData = {epg : EPGItems};
+			fetchTpl('tplEpgList', showEpgList);
 		} else {
-			messageBox('No Items found!', 'Sorry but i could not find any EPG Content containing your search value');
+			messageBox('No Items found!', 'Sorry but I could not find any EPG Content containing your search value');
 		}
 	}
 }
-function extdescriptionSmall(txt,num) {
-	if(txt.length > 410) {
-		var shortTxt = txt.substr(0,410);
-		txt = txt.replace(/\'\'/g, '&quot;');
-		txt = txt.replace(/\\/g, '\\\\');
-		txt = txt.replace(/\'/g, '\\\'');
-		txt = txt.replace(/\"/g, '&quot;');
-		var smallNamespace = { 'txt':txt,'number':num, 'shortTxt':shortTxt};
-		return RND(tplEPGListItemExtend, smallNamespace);
-	} else {
-		return txt;
-	}
-}	
 
-/////////////////////////
-
-function loadServiceEPGNowNext(servicereference){
-	var url = url_epgnow+servicereference;
-	doRequest(url, incomingServiceEPGNowNext, false);	
+function loadEPGBySearchString(string){
+	doRequest(URL.epgsearch+escape(string),incomingEPGrequest, false);
 }
 
-function incomingServiceEPGNowNext(request){
+function loadEPGByServiceReference(servicereference){
+	doRequest(URL.epgservice+servicereference,incomingEPGrequest, false);
+}
+
+function buildServiceListEPGItem(epgevent, type){
+	var data = { epg : epgevent,
+				 nownext: type
+				};
+
+	var id = type + epgevent.servicereference;
+
+	show('tr' + id);
+
+	if(templates.tplServiceListEPGItem !== undefined){
+		renderTpl(templates.tplServiceListEPGItem, data, id);
+	} else {
+		debug("[buildServiceListEPGItem] tplServiceListEPGItem N/A");
+	}
+}
+
+function incomingServiceEPGNowNext(request, type){
 	if(request.readyState == 4){
 		var epgevents = getXML(request).getElementsByTagName("e2eventlist").item(0).getElementsByTagName("e2event");
-		for (var c =0; c < epgevents.length;c++){
-			var eventnow = new EPGEvent(epgevents.item(c));
-			
-			if (eventnow.getEventId() != 'None'){
-				buildServiceListEPGItem(eventnow,"NOW");
+		for (var c = 0; c < epgevents.length; c++){
+			try{
+				var epgEvt = new EPGEvent(epgevents.item(c), c).toJSON();
+			} catch (e){
+				debug("[incomingServiceEPGNowNext]" + e);
+			}
+
+			if (epgEvt.eventid != ''){
+				buildServiceListEPGItem(epgEvt, type);
 			}
 		}
 	}
 }
-function buildServiceListEPGItem(epgevent,nownext){
-	var e = $(epgevent.getServiceReference()+'EPG'+nownext);
-		try{
-			var namespace = { 	
-				'starttime': epgevent.getTimeStartString(), 
-				'title': epgevent.getTitle(), 
-				'length': Math.ceil(epgevent.duration/60) 
-			};
-			e.innerHTML = RND(tplServiceListEPGItem, namespace);
-		} catch (blubb) {
-			debug("Error rendering: "+blubb);
-		}	
+
+function incomingServiceEPGNow(request){
+	incomingServiceEPGNowNext(request, 'NOW');
 }
-///////////////////
 
+function incomingServiceEPGNext(request){
+	incomingServiceEPGNowNext(request, 'NEXT');
+}
 
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//++++ GUI functions                               ++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
+function loadServiceEPGNowNext(servicereference, next){
+	var url = URL.epgnow+'?bRef='+servicereference;
 
-var currentBodyMainElement = null
-
-function setBodyMainContent(newelementname){
-	newelement =$(newelementname);
-	if(currentBodyMainElement != null){
-		currentBodyMainElement.style.display = "none";
-		
+	if(next === undefined){
+		doRequest(url, incomingServiceEPGNow, false);
+	} else {
+		url = URL.epgnext+'?bRef='+servicereference;
+		doRequest(url, incomingServiceEPGNext, false);
 	}
-	newelement.style.display = "";
-	currentBodyMainElement = newelement;
 }
+
+
+
+
+function recordNowPopup(){
+	var result = confirm(	
+			"OK: Record current event\n" +
+			"Cancel: Start infinite recording"
+	);
+
+	if( result === true || result === false){
+		recordNowDecision(result);
+	}
+}
+
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//++++ volume functions                            ++++
+//++++ volume functions ++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-function initVolumePanel(){
-	$('VolumePanel').innerHTML = tplVolumePanel;
-	getVolume(); 
-}
-function getVolume(){
-	doRequest(url_getvolume,handleVolumeRequest, false);
-}
-function volumeSet(newvalue){
-	doRequest(url_setvolume+newvalue,handleVolumeRequest, false);
-}
-function volumeUp(){
-	doRequest(url_volumeup,handleVolumeRequest, false);
-}
-function volumeDown(){
-	doRequest(url_volumedown,handleVolumeRequest, false);	
-}
-function volumeMute(){
-	doRequest(url_volumemute,handleVolumeRequest, false);
-}
 function handleVolumeRequest(request){
 	if (request.readyState == 4) {
 		var b = getXML(request).getElementsByTagName("e2volume");
 		var newvalue = b.item(0).getElementsByTagName('e2current').item(0).firstChild.data;
 		var mute = b.item(0).getElementsByTagName('e2ismuted').item(0).firstChild.data;
-		debug("volume"+newvalue+";"+mute);
-		
+		debug("[handleVolumeRequest] Volume " + newvalue + " | Mute: " + mute);
+
 		for (var i = 1; i <= 10; i++)		{
 			if ( (newvalue/10)>=i){
-				$("volume"+i).src = "/webdata/gfx/led_on.png";
+				$("volume"+i).src = "/web-data/img/led_on.png";
 			}else{
-				$("volume"+i).src = "/webdata/gfx/led_off.png";
+				$("volume"+i).src = "/web-data/img/led_off.png";
 			}
 		}
 		if (mute == "False"){
-			$("speaker").src = "/webdata/gfx/speak_on.png";
+			$("speaker").src = "/web-data/img/speak_on.png";
 		}else{
-			$("speaker").src = "/webdata/gfx/speak_off.png";
+			$("speaker").src = "/web-data/img/speak_off.png";
 		}
 	}    	
 }
 
-var bouqetsMemory = new Object();
+
+function getVolume(){
+	doRequest(URL.getvolume, handleVolumeRequest, false);
+}
+
+function volumeSet(val){
+	doRequest(URL.setvolume+val, handleVolumeRequest, false);
+}
+
+function volumeUp(){
+	doRequest(URL.volumeup, handleVolumeRequest, false);
+}
+
+function volumeDown(){
+	doRequest(URL.volumedown, handleVolumeRequest, false);
+}
+
+function volumeMute(){
+	doRequest(URL.volumemute, handleVolumeRequest, false);
+}
+
+function initVolumePanel(){
+	getVolume(); 
+}
+
+
+
+//Channels and Bouquets
+function loadBouquet(servicereference, name){ 
+	debug("[loadBouquet] called");
+	
+	servicereference = decodeURIComponent(servicereference);
+	currentBouquet = servicereference;
+
+	setContentHd(name);
+	
+	var input = new Element('input');
+	input.id = 'serviceSearch';
+	input.value = 'Search for service';
+	
+	$('contentHdExt').update(input);
+	
+	input.observe('focus', onServiceSearchFocus);
+	input.observe('keyup', serviceSearch);	
+
+	startUpdateBouquetItemsPoller();
+	serviceListHandler.load({sRef : servicereference});
+}
+
+
+function incomingBouquetListInitial(request){
+	if (request.readyState == 4) {
+		var bouquetList = new ServiceList(getXML(request)).getArray();
+		debug("[incomingBouquetListInitial] Got " + bouquetList.length + " TV Bouquets!");	
+	
+		// loading first entry of TV Favorites as default for ServiceList
+		incomingBouquetList(
+				request, 
+				function(){
+					loadBouquet(bouquetList[0].servicereference, bouquetList[0].servicename);
+				}
+			);
+	}
+}
+
+
+function incomingBouquetList(request, callback){
+	if (request.readyState == 4) {
+		var bouquetList = new ServiceList(getXML(request)).getArray();
+		debug("[incomingBouquetList] got " + bouquetList.length + " TV Bouquets!");	
+		var data = { bouquets : bouquetList };
+		
+		if( $('contentBouquets') != undefined && $('contentBouquets') != null ){
+			processTpl('tplBouquetList', data, 'contentBouquets');
+			if(typeof(callback) == 'function')
+				callback();
+		} else {
+			processTpl(					
+					'tplBouquetsAndServices', 
+					null, 
+					'contentMain',
+					function(){
+						processTpl('tplBouquetList', data, 'contentBouquets');
+						if(typeof(callback) == 'function')
+							callback();
+					}
+			);
+		}
+	}
+}
+
 
 function initChannelList(){
-	//debug("init ChannelList");	
-	var url = url_fetchchannels+encodeURIComponent(bouqet_tv);
-	doRequest(url, incomingTVBouquetList, true);
+	var url = URL.getservices+'?sRef='+encodeURIComponent(bouquetsTv);
+	currentBouquet = bouquetsTv;
 
-	var url = url_fetchchannels+encodeURIComponent(bouqet_radio);
-	doRequest(url, incomingRadioBouquetList, true);
-
-	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_tv);
-	doRequest(url, incomingProviderTVBouquetList, true);
-
-	var url = url_fetchchannels+encodeURIComponent(bouqet_provider_radio);
-	doRequest(url, incomingProviderRadioBouquetList, true);
-	
-	getSettings();
+	doRequest(url, incomingBouquetListInitial, true);
 }
 
-var servicereftoloadepgnow = "";
-var loadedChannellist = new Object();
-function loadBouquet(servicereference){ 
-	debug("loading bouquet with "+servicereference);
-	servicereftoloadepgnow = servicereference;
-	debug("loadBouquet " + typeof(loadedChannellist[servicereftoloadepgnow]));
-	if(typeof(loadedChannellist[servicereftoloadepgnow]) == "undefined") {
-		doRequest(url_fetchchannels+servicereference, incomingChannellist, true);
-	} else {
-		incomingChannellist();
-	}
+
+
+//Movies
+function initMovieList(){
+	// get videodirs, last_videodir, and all tags
+	doRequest(URL.getcurrlocation, incomingMovieListCurrentLocation, false);
 }
 
-function incomingTVBouquetList(request){
-	if (request.readyState == 4) {
-		var list0 = new ServiceList(getXML(request)).getArray();
-		debug("have "+list0.length+" TV Bouquet ");	
-		$('accordionMenueBouquetContentTV').innerHTML = renderBouquetTable(list0,tplBouquetListHeader,tplBouquetListItem,tplBouquetListFooter);
-		//loading first entry of TV Favorites as default for ServiceList
-		loadBouquet(list0[0].getServiceReference());
-		bouqetsMemory["bouqet_tv"] = list0;
-	}
-}
-function incomingRadioBouquetList(request){
-	if (request.readyState == 4) {
-		var list1 = new ServiceList(getXML(request)).getArray();
-		debug("have "+list1.length+" Radio Bouquet ");	
-		$('accordionMenueBouquetContentRadio').innerHTML = renderBouquetTable(list1,tplBouquetListHeader,tplBouquetListItem,tplBouquetListFooter);
-	}	
-}
-function incomingProviderTVBouquetList(request){
-	if (request.readyState == 4) {
-		var list2 = new ServiceList(getXML(request)).getArray();
-		debug("have "+list2.length+" TV Provider Bouquet ");	
-		$('accordionMenueBouquetContentProviderTV').innerHTML = renderBouquetTable(list2,tplBouquetListHeader,tplBouquetListItem,tplBouquetListFooter);
-	}	
-}
-function incomingProviderRadioBouquetList(request){
-	if (request.readyState == 4) {
-		var list2 = new ServiceList(getXML(request)).getArray();
-		debug("have "+list2.length+" Radio Provider Bouquet ");	
-		$('accordionMenueBouquetContentProviderRadio').innerHTML = renderBouquetTable(list2,tplBouquetListHeader,tplBouquetListItem,tplBouquetListFooter);
-	}	
-}
-
-function renderBouquetTable(bouquet,templateHeader,templateItem,templateFooter){
-	debug("renderBouquetTable with "+bouquet.length+" Bouqet");	
-	var html = templateHeader;
-	for (var i=0; i < bouquet.length; i++){
-		try{
-			var namespace = {
-				'servicereference': bouquet[i].getServiceReference(), 
-				'bouquetname': bouquet[i].getServiceName()
-			};
-			html += RND(templateItem, namespace);
-		} catch (blubb) {}
-	}
-	html += templateFooter;
-	return html;
-}	
-
-function incomingChannellist(request){
-	var services = null;
-	if(typeof(loadedChannellist[servicereftoloadepgnow]) != "undefined"){
-		services = loadedChannellist[servicereftoloadepgnow];
-	} else if(request.readyState == 4) {
-		services = new ServiceList(getXML(request)).getArray();
-		loadedChannellist[servicereftoloadepgnow] = services;
-		debug("got "+services.length+" Services");
-	}
-	if(services != null) {
-		var smallNamespace = {'mainServiceRef': servicereftoloadepgnow };
-		listerHtml = RND(tplServiceListHeader, smallNamespace);
-		for ( var i = 0; i < services.length ; i++){
-			var reference = services[i];
-			var namespace = { 	
-				'servicereference': reference.getServiceReference(),
-				'servicename': reference.getServiceName()
-			};
-			listerHtml += RND(tplServiceListItem, namespace);
-		}		
-		listerHtml += tplServiceListFooter;
-		$('BodyContentChannellist').innerHTML = listerHtml;
-		setBodyMainContent('BodyContentChannellist');
-		loadServiceEPGNowNext(servicereftoloadepgnow);
-		debug("incomingChannellist " + typeof(loadedChannellist[servicereftoloadepgnow]));
-	}
-}
-// Movies
-function loadMovieList(){
-	debug("loading movies");
-	doRequest(url_movielist, incomingMovieList);	
-}
-
-function incomingMovieList(request){
+function incomingMovieListCurrentLocation(request){
 	if(request.readyState == 4){
-		var movies = new MovieList(getXML(request)).getArray();
-		debug("have "+movies.length+" movies");
-		listerHtml 	= tplMovieListHeader;		
-		for ( var i = 0; i <movies.length; i++){
-			var movie = movies[i];
-			var namespace = { 	
-				'servicereference': movie.getServiceReference(),
-				'servicename': movie.getServiceName() ,
-				'title': movie.getTitle(), 
-				'description': movie.getDescription(), 
-				'descriptionextended': movie.getDescriptionExtended(),
-				'filelink': String(movie.getFilename()).substr(17,movie.getFilename().length),
-				'filename': String(movie.getFilename()),
-				'tags': movie.getTags().join(', ') 
-			};
-			listerHtml += RND(tplMovieListItem, namespace);
-		}
-		listerHtml += tplMovieListFooter;
-		$('BodyContentChannellist').innerHTML = listerHtml;
-		setBodyMainContent('BodyContentChannellist');
-		
-	}		
+		result  = new SimpleXMLList(getXML(request), "e2location");
+		currentLocation = result.getList()[0];
+		debug("[incomingMovieListCurrentLocation].currentLocation" + currentLocation);
+		doRequest(URL.getlocations, incomingMovieListLocations, false);
+	}
 }
-function delMovieFile(file,servicename,title,description) {
-	debug("delMovieFile: file("+file+"),servicename("+servicename+"),title("+title+"),description("+description+")");
-	Dialog.confirm(
-		"Selected timer:<br>"
-		+"Servicename: "+servicename+"<br>"
-		+"Title: "+title+"<br>"
-		+"Description: "+description+"<br>"
-		+"Are you sure that you want to delete the Timer?",
-		 {windowParameters: {width:300, className: windowStyle},
-			okLabel: "delete",
-			buttonClass: "myButtonClass",
-			cancel: function(win) {debug("delMovieFile cancel confirm panel")},
-			ok: function(win) { debug("delMovieFile ok confirm panel"); doRequest(url_moviefiledelete+"?filename="+file, incomingDelMovieFileResult, false); return true; }
-			}
-	);
-	
-}
-function incomingDelMovieFileResult(request) {
-	debug("incomingDelMovieFileResult");
+
+function incomingMovieListLocations(request){
 	if(request.readyState == 4){
-		var delresult = new SimpleXMLResult(getXML(request));
-		if(delresult.getState()){
-			loadMovieList();
-		}else{
-			messageBox("Deletion Error","Reason: "+delresult.getStateText());
+		result  = new SimpleXMLList(getXML(request), "e2location");
+		locationsList = result.getList();
+
+		if (locationsList.length === 0) {
+			locationsList = ["/hdd/movie"];
 		}
-	}		
+		doRequest(URL.gettags, incomingMovieListTags, false);
+	}
 }
 
-
-// send Messages
-function showMessageSendForm(){
-		$('BodyContentChannellist').innerHTML = tplMessageSendForm;
+function incomingMovieListTags(request){
+	if(request.readyState == 4){
+		result  = new SimpleXMLList(getXML(request), "e2tag");
+		tagsList = result.getList();
+	}
 }
-function sendMessage(messagetext,messagetype,messagetimeout){
+
+function createOptionListSimple(lst, selected) {
+	var namespace = Array();
+	var i = 0;
+	var found = false;
+
+	for (i = 0; i < lst.length; i++) {
+		if (lst[i] == selected) {
+			found = true;
+		}
+	}
+
+	if (!found) {
+		lst = [ selected ].concat(lst);
+	}
+
+	for (i = 0; i < lst.length; i++) {
+		namespace[i] = {
+				'value': lst[i],
+				'txt': lst[i],
+				'selected': (lst[i] == selected ? "selected" : " ")};
+	}
+
+	return namespace;
+}
+
+function loadMovieNav(){
+	// fill in menus
+	var data = {
+			dirname: createOptionListSimple(locationsList, currentLocation),
+			tags: createOptionListSimple(tagsList, "")
+	};
+
+	processTpl('tplNavMovies', data, 'navContent');
+}
+
+function loadMovieList(loc, tag){
+	if(loc === undefined){
+		loc = currentLocation;
+	}
+	if(tag === undefined){
+		tag = '';
+	}
+	debug("[loadMovieList] Loading movies in location '"+loc+"' with tag '"+tag+"'");
+	
+	movieListHandler.load({ dirname : loc, tag : tag});
+}
+
+function delMovie(servicereference ,servicename, title, description) {
+	debug("[delMovie] File(" + unescape(servicereference) + "), servicename(" + servicename + ")," +
+			"title(" + unescape(title) + "), description(" + description + ")");
+	
+	movieListHandler.del(decodeURIComponent(servicereference) ,servicename, title, description);	
+}
+
+//Send Messages and Receive the Answer
+
+
+function incomingMessageResult(request){
+	if(request.readyState== 4){
+		var result = new SimpleXMLResult(getXML(request));
+		simpleResultHandler(result);
+	}
+}
+
+function getMessageAnswer() {
+	doRequest(URL.messageanswer, incomingMessageResult, false);
+}
+
+function sendMessage(messagetext, messagetype, messagetimeout){
 	if(!messagetext){
 		messagetext = $('MessageSendFormText').value;
 	}	
@@ -644,283 +977,141 @@ function sendMessage(messagetext,messagetype,messagetimeout){
 		var index = $('MessageSendFormType').selectedIndex;
 		messagetype = $('MessageSendFormType').options[index].value;
 	}	
-	doRequest(url_message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult, false);
-}
-function incomingMessageResult(request){
-
-	if(request.readyState== 4){
-		var b = getXML(request).getElementsByTagName("e2message");
-		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
-		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
-		if (result=="True"){
-			messageBox('message send','message send successfully! it appears on TV-Screen');
-		}else{
-			messageBox('message send failed',resulttext);
-		}
-	}		
-}
-
-// PowerState Code
-function showPowerStateSendForm(){
-		$('BodyContentChannellist').innerHTML = tplPowerStateSendForm;
-}
-function sendPowerState(newState){
-	doRequest(url_powerstate+'?newstate='+newState, incomingPowerStateResult, false);
-}
-function incomingPowerStateResult(request){
-	debug(request.readyState);
-	if(request.readyState == 4){
-		var b = getXML(request).getElementsByTagName("e2powerstate");
-		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
-		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
-		var tplPowerStateSendForm2 = '<h1>PowerState is changing to:'+resulttext+ '</h1>' + tplPowerStateSendForm;
-		$('BodyContentChannellist').innerHTML = tplPowerStateSendForm2;
+	if(parseNr(messagetype) === 0){
+		doRequest(URL.message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout);
+		setTimeout(getMessageAnswer, parseNr(messagetimeout)*1000);
 	} else {
-		$('BodyContentChannellist').innerHTML = "<h1>some unknown error</h1>" + tplPasswordSendForm;
+		doRequest(URL.message+'?text='+messagetext+'&type='+messagetype+'&timeout='+messagetimeout, incomingMessageResult, false);
 	}
 }
 
-// RemoteControl Code
-function showRemoteControllSendForm(){
-	if(! $('rcWindow')){
-		openWindow("Remote", tplRemoteControlForm, 220, 615, "rcWindow");
+
+//Screenshots
+function getScreenShot(what) {
+	debug("[getScreenShot] called");
+
+	var buffer = new Image();
+	var downloadStart;
+	var data = {};
+
+	buffer.onload = function () { 
+		debug("[getScreenShot] image assigned");
+
+		data = { img : { src : buffer.src } };	
+		processTpl('tplGrab', data, 'contentMain');
+
+		return true;
+	};
+
+	buffer.onerror = function (meldung) { 
+		debug("[getScreenShot] Loading image failed"); 
+		return true;
+	};
+
+	switch(what){
+	case "o":
+		what = "&o=&n=";
+		break;
+	case "v":
+		what = "&v=";
+		break;
+	default:
+		what = "";
+	break;
 	}
+
+	downloadStart = new Date().getTime();
+	buffer.src = '/grab?format=jpg&r=720&' + what + '&filename=/tmp/' + downloadStart;
 }
-function sendRemoteControlRequest(command){
-	doRequest(url_remotecontrol+'?command='+command, incomingRemoteControlResult, false);
+
+function getVideoShot() {
+	getScreenShot("v");
 }
+
+function getOsdShot(){
+	getScreenShot("o");
+}
+
+//RemoteControl Code
+
 function incomingRemoteControlResult(request){
-	if(request.readyState == 4){
-		var b = getXML(request).getElementsByTagName("e2remotecontrol");
-		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
-		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
+//	if(request.readyState == 4){
+//		var b = getXML(request).getElementsByTagName("e2remotecontrol");
+//		var result = b.item(0).getElementsByTagName('e2result').item(0).firstChild.data;
+//		var resulttext = b.item(0).getElementsByTagName('e2resulttext').item(0).firstChild.data;
+//	}
+}
+
+function openWebRemote(){
+	var template = templates.tplWebRemoteOld;
+
+	if(boxtype == "dm8000"){
+		template = templates.tplWebRemote;
+	}
+
+
+	if (!webRemoteWin.closed && webRemoteWin.location) {
+		setWindowContent(webRemoteWin, template);
 	} else {
-		$('rcWindow').innerHTML = "<h1>some unknown error</h1>" + tplRemoteControlForm;
+		webRemoteWin = openPopup('WebRemote', template, 250, 600);
 	}
+
 }
 
-function getSettings(){
-	doRequest(url_settings, incomingGetSettings, false);
-}
 
-function incomingGetSettings(request){
-	if(request.readyState == 4){
-		settings = new Settings(getXML(request)).getArray();
-	}
-	if(String(getSettingByName("config.ParentalControl.configured")) == "True") {
-		getParentControl();
-	}
-}
-function getSettingByName(txt) {
-	debug("getSettingByName ("+txt+")");
-	for(i = 0; i < settings.length; i++) {
-		debug("("+settings[i].getSettingName()+") (" +settings[i].getSettingValue()+")");
-		if(String(settings[i].getSettingName()) == String(txt)) {
-			return settings[i].getSettingValue();
-		} 
-	}
-	return "";
-}
-function getParentControl() {
-	doRequest(url_parentcontrol, incomingParentControl, false);
-}
-function incomingParentControl(request) {
-	if(request.readyState == 4){
-		parentControlList = new ServiceList(getXML(request)).getArray();
-		debug("parentControlList got "+parentControlList.length + " services");
-	}
-}
-function getParentControlByRef(txt) {
-	debug("getParentControlByRef ("+txt+")");
-	for(i = 0; i < parentControlList.length; i++) {
-		debug("("+parentControlList[i].getClearServiceReference()+")");
-		if(String(parentControlList[i].getClearServiceReference()) == String(txt)) {
-			return parentControlList[i].getClearServiceReference();
-		} 
-	}
-	return "";
-}
-function sendToggleTimerDisable(justplay,begin,end,repeated,channel,name,description,afterEvent,disabled){
-	disabled = (ownLazyNumber(disabled) == 0) ? 1 : 0;
-	
-	var descriptionClean = (description == " " || description == "N/A") ? "" : description;
-	var nameClean = (name == " " || name == "N/A") ? "" : name;
-
-	doRequest(url_timerchange+"?"+"serviceref="+channel.replace("&quot;", '"')+"&begin="+begin
-	 +"&end="+end+"&name="+escape(nameClean)+"&description="+escape(descriptionClean)
-	 +"&afterevent="+afterEvent+"&eit=0&disabled="+disabled
-	 +"&justplay="+justplay+"&repeated="+repeated
-	 +"&channelOld="+channel
-	 +"&beginOld="+begin+"&endOld="+end
-	 +"&deleteOldOnSave=1", incomingTimerAddResult, false);
-}
-function ownLazyNumber(num) {
-	if(isNaN(num)){
-		return 0;
+function loadAndOpenWebRemote(){
+	if(boxtype == "dm8000"){
+		fetchTpl('tplWebRemote', openWebRemote);
+		
 	} else {
-		return Number(num);
+		fetchTpl('tplWebRemoteOld', openWebRemote);
 	}
 }
 
-var subServicesInsertedList = new Object();
 
-function getSubServices(servicereference) {
-	clearInterval(SubServicePoller);
-	SubServicePollerCounter = 0;
-	doRequest(url_subservices,incomingSubServiceRequest, false);
-}
-function incomingSubServiceRequest(request){
-	if(request.readyState == 4){
-		var services = new ServiceList(getXML(request)).getArray();
-		listerHtml 	= '';		
-		debug("got "+services.length+" SubServices");
-		if(services.length > 1) {
-			
-			first = services[0];
-			var mainChannellist = loadedChannellist[String($('mainServiceRef').value)];
-			
-			var oldEntryPosition = -1;
-			for(i = 0; i < mainChannellist.length; i++) {
-				var service = mainChannellist[i];
-				if(String(service.getServiceReference()) == String(first.getServiceReference())) {
-					oldEntryPosition = i + 1;
-					break;
-				}
-			}
-			if(typeof(subServicesInsertedList[String(first.getServiceReference())]) != "undefined") {
-				for ( var i = 1; i < subServicesInsertedList[String(first.getServiceReference())].length ; i++){
-					var reference = subServicesInsertedList[String(first.getServiceReference())][i];
-					$(reference.getServiceReference()+'extend').innerHTML = "";
-				}
-				for(i = oldEntryPosition; i < oldEntryPosition + subServicesInsertedList[String(first.getServiceReference())].length; i++) {
-					mainChannellist.splice(i);
-				}
-			}
-			for ( var i = 0; i < services.length ; i++){
-				var reference = services[i];
-				var namespace = { 	
-					'servicereference': reference.getServiceReference(),
-					'servicename': reference.getServiceName()
-				};
-				listerHtml += RND(tplServiceListItem, namespace);
-				if(oldEntryPosition > -1) {
-					mainChannellist = mainChannellist.insert(oldEntryPosition++, reference);
-				}
-			}
-			$(first.getServiceReference()+'extend').innerHTML = listerHtml;
-			subServicesInsertedList[String(first.getServiceReference())] = services;
-			loadedChannellist[$('mainServiceRef').value] = mainChannellist;
+function sendRemoteControlRequest(command){
+	doRequest(URL.remotecontrol+'?command='+command, incomingRemoteControlResult, false);
+	if(webRemoteWin.document.getElementById('getScreen').checked) {
+		if(webRemoteWin.document.getElementById('getVideo').checked){
+			getScreenShot();
+		} else {
+			getScreenShot("o");
 		}
 	}
 }
+
+
 // Array.insert( index, value ) - Insert value at index, without overwriting existing keys
 Array.prototype.insert = function( j, v ) {
- if( j>=0 ) {
-  var a = this.slice(), b = a.splice( j );
-  a[j] = v;
-  return a.concat( b );
- }
-}
-// Array.splice() - Remove or replace several elements and return any deleted elements
-if( typeof Array.prototype.splice==='undefined' ) {
- Array.prototype.splice = function( a, c ) {
-  var i = 0, e = arguments, d = this.copy(), f = a, l = this.length;
-  if( !c ) { c = l - a; }
-  for( i; i < e.length - 2; i++ ) { this[a + i] = e[i + 2]; }
-  for( a; a < l - c; a++ ) { this[a + e.length - 2] = d[a - c]; }
-  this.length -= c - e.length + 2;
-  return d.slice( f, f + c );
- };
-}
-function writeTimerListNow() {
-	new Ajax.Request( url_timerlistwrite, { asynchronous: true, method: 'get' });
-}
-function recordingPushed() {
-	doRequest(url_timerlist, incomingRecordingPushed, false);
-}
-function incomingRecordingPushed(request) {
-	if(request.readyState == 4){
-		var timers = new TimerList(getXML(request)).getArray();
-		debug("have "+timers.length+" timer");
-		
-		var aftereventReadable = new Array ('Nothing', 'Standby', 'Deepstandby/Shutdown');
-		var justplayReadable = new Array('record', 'zap');
-		var OnOff = new Array('on', 'off');
-		
-		listerHtml = '';
-		
-		for ( var i = 0; i <timers.length; i++){
-			var timer = timers[i];
+	if( j>=0 ) {
+		var a = this.slice(), b = a.splice( j );
+		a[j] = v;
+		return a.concat( b );
+	}
+};
 
-			if(ownLazyNumber(timer.getDontSave()) == 1) {
-				var beginDate = new Date(Number(timer.getTimeBegin())*1000);
-				var endDate = new Date(Number(timer.getTimeEnd())*1000);
-				var namespace = {
-				'servicereference': timer.getServiceReference(),
-				'servicename': timer.getServiceName() ,
-				'title': timer.getName(), 
-				'description': timer.getDescription(), 
-				'descriptionextended': timer.getDescriptionExtended(), 
-				'begin': timer.getTimeBegin(),
-				'beginDate': beginDate.toLocaleString(),
-				'end': timer.getTimeEnd(),
-				'endDate': endDate.toLocaleString(),
-				'state': timer.getState(),
-				'duration': Math.ceil((timer.getDuration()/60)),
-				'repeated': timer.getRepeated(),
-				'repeatedReadable': repeatedReadable(timer.getRepeated()),
-				'justplay': timer.getJustplay(),
-				'justplayReadable': justplayReadable[Number(timer.getJustplay())],
-				'afterevent': timer.getAfterevent(),
-				'aftereventReadable': aftereventReadable[Number(timer.getAfterevent())],
-				'disabled': timer.getDisabled(),
-				'onOff': OnOff[Number(timer.getDisabled())],
-				'color': colorTimerListEntry( timer.getState() )
-				};
-				listerHtml += RND(tplTimerListItem, namespace);
-			}
+//Array.splice() - Remove or replace several elements and return any deleted
+//elements
+if( typeof Array.prototype.splice===undefined ) {
+	Array.prototype.splice = function( a, c ) {
+		var e = arguments, d = this.copy(), f = a, l = this.length;
+
+		if( !c ) { 
+			c = l - a; 
 		}
-		openWindow("Record Now", listerHtml+tplRecordingFooter, 900, 500, "Record now window");
-	}
-}
-function inserteSizes() {
-/*	var screenW = 640, screenH = 480;
-	if (parseInt(navigator.appVersion)>3) {	
-		screenW = screen.width;
-		screenH = screen.height;
-	} else if (navigator.appName == "Netscape"
-	   && parseInt(navigator.appVersion)==3
-	   && navigator.javaEnabled() ) {
-		var jToolkit = java.awt.Toolkit.getDefaultToolkit();
-		var jScreenSize = jToolkit.getScreenSize();
-		screenW = jScreenSize.width;
-		screenH = jScreenSize.height;
-	}
-	debug("screenW:"+screenW+" screenH:"+screenH);
-	/* 640x480
-	 * 800x600
-	 * 1024x768
-	 * 1280x1024
-	 * 1600x1280
-	if(screenH == 800) {
-		debug("size 1");
-		$("BodyContentChannellist").style.height = '20%';
-	} else if(screenH == 1024) {
-		debug("1024")
-		$("BodyContentChannellist").style.height = '760px';
-		
-	} else {
-		alert("unsupported screensize");
-	}*/
-	
-}
-function recordingPushedDecision(recordNowNothing,recordNowUndefinitely,recordNowCurrent) {
-	var recordNow = recordNowNothing;
-	recordNow = (recordNow == "") ? recordNowUndefinitely: recordNow;
-	recordNow = (recordNow == "") ? recordNowCurrent: recordNow;
-	if(recordNow != "nothing" && recordNow != "") {
-		doRequest(url_recordnow+"?recordnow="+recordNow, incomingTimerAddResult, false);
-	}
+
+		for( var i = 0; i < e.length - 2; i++ ) { 
+			this[a + i] = e[i + 2]; 
+		}
+
+
+		for( var j = a; j < l - c; j++ ) { 
+			this[j + e.length - 2] = d[j - c]; 
+		}
+		this.length -= c - e.length + 2;
+
+		return d.slice( f, f + c );
+	};
 }
 
 function ifChecked(rObj) {
@@ -930,67 +1121,551 @@ function ifChecked(rObj) {
 		return "";
 	}
 }
-function showAbout() {
-	doRequest(url_about, incomingAbout, false);
-}
-function incomingAbout(request) {
+
+//Device Info
+/*
+ * Handles an incoming request for /web/deviceinfo Parses the Data, and calls
+ * everything needed to render the Template using the parsed data and set the
+ * result into contentMain @param request - the XHR
+ */
+function incomingDeviceInfo(request) {
 	if(request.readyState == 4){
-		debug("incomingAbout returned");
-		var aboutEntries = getXML(request).getElementsByTagName("e2abouts").item(0).getElementsByTagName("e2about");
-		for (var c =0; c < aboutEntries.length;c++){
-			var xml = aboutEntries.item(c);
-			try{
-				var namespace = {
-					'enigmaVersion': xml.getElementsByTagName('e2enigmaversion').item(0).firstChild.data
-					,'lanDHCP': xml.getElementsByTagName('e2landhcp').item(0).firstChild.data
-					,'lanIP': xml.getElementsByTagName('e2lanip').item(0).firstChild.data
-					,'lanMask': xml.getElementsByTagName('e2lanmask').item(0).firstChild.data
-					,'lanGW': xml.getElementsByTagName('e2langw').item(0).firstChild.data
-					,'lanDNS': xml.getElementsByTagName('e2landns').item(0).firstChild.data
-					,'fpVersion': xml.getElementsByTagName('e2fpversion').item(0).firstChild.data
-					,'tunerInfo': xml.getElementsByTagName('e2tunerinfo').item(0).firstChild.data
-					,'hddInfo': xml.getElementsByTagName('e2hddinfo').item(0).firstChild.data
-					,'serviceName': xml.getElementsByTagName('e2servicename').item(0).firstChild.data
-					,'serviceProvider': xml.getElementsByTagName('e2serviceprovider').item(0).firstChild.data
-					,'serviceAspect': xml.getElementsByTagName('e2serviceaspect').item(0).firstChild.data
-					,'serviceNamespace': xml.getElementsByTagName('e2servicenamespace').item(0).firstChild.data
-					,'vPID': xml.getElementsByTagName('e2vpid').item(0).firstChild.data
-					 ,'vPIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2vpid').item(0).firstChild.data),16)+" "
-					,'aPID': xml.getElementsByTagName('e2apid').item(0).firstChild.data+" "
-					 ,'aPIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2apid').item(0).firstChild.data),16)+" "
-					,'pcrID': xml.getElementsByTagName('e2pcrid').item(0).firstChild.data
- 					 ,'pcrIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2pcrid').item(0).firstChild.data),16)+" "
-					,'pmtPID': xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data
-					 ,'pmtPIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2pmtpid').item(0).firstChild.data),16)+" "
-					,'txtPID': xml.getElementsByTagName('e2txtpid').item(0).firstChild.data
-					 ,'txtPIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2txtpid').item(0).firstChild.data),16)+" "
-					,'tsID': xml.getElementsByTagName('e2tsid').item(0).firstChild.data
-					 ,'tsIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2tsid').item(0).firstChild.data),16)+" "
-					,'onID': xml.getElementsByTagName('e2onid').item(0).firstChild.data
-					 ,'onIDh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2onid').item(0).firstChild.data),16)+" "
-					,'sid': xml.getElementsByTagName('e2sid').item(0).firstChild.data
-					 ,'sidh': parseInt(ownLazyNumber(xml.getElementsByTagName('e2sid').item(0).firstChild.data),16)+" "
-				  };
-				$('BodyContentChannellist').innerHTML = RND(tplAbout, namespace);;
-				setBodyMainContent('BodyContentChannellist');
-				
-			} catch (e) {
-				debug("About parsing Error" + e);
-			}	
-		}
+		debug("[incomingDeviceInfo] called");
+		var deviceInfo = new DeviceInfo(getXML(request));
+
+		processTpl('tplDeviceInfo', deviceInfo, 'contentMain');
 	}
 }
-function quotes2html(txt) {
-	txt = txt.replace(/"/g, '&quot;');
-	return txt.replace(/'/g, '&#39;');
+
+
+/*
+ * Show Device Info Information in contentMain
+ */
+function showDeviceInfo() {
+	doRequest(URL.deviceinfo, incomingDeviceInfo, false);
 }
+
+function showGears(){
+	var enabled = false;
+	
+	if (window.google && google.gears){
+		enabled = gearsEnabled();
+	}
+	
+	data = { 'useGears' : enabled };
+	processTpl('tplGears', data, 'contentMain');
+}
+
+function showSettings(){
+	var debug = userprefs.data.debug;
+	var debugChecked = "";
+	if(debug){
+		debugChecked = 'checked';
+	}
+	
+	var updateCurrentInterval = userprefs.data.updateCurrentInterval / 1000;
+	var updateBouquetInterval = userprefs.data.updateBouquetInterval / 1000;
+	
+
+	data = {'debug' : debugChecked,
+			'updateCurrentInterval' : updateCurrentInterval,
+			'updateBouquetInterval' : updateBouquetInterval
+	};
+	processTpl('tplSettings', data, 'contentMain');
+}
+
+ 
+// Spezial functions, mostly for testing purpose
 function openHiddenFunctions(){
-	openWindow("Extra Hidden Functions",tplExtraHiddenFunctions,300,100);
+	openPopup("Extra Hidden Functions",tplExtraHiddenFunctions,300,100,920,0);
 }
-function restartUpdateStream() {
-	clearInterval(UpdateStreamReaderPollTimer);
-	UpdateStreamReaderRequest.abort();
-	UpdateStreamReaderRequest = null;
-	UpdateStreamReaderPollTimerCounter = 0;
-	UpdateStreamReaderStart();
+
+
+function startDebugWindow() {
+	DBG = true;
+	debugWin = openPopup("DEBUG", "", 300, 300,920,140, "debugWindow");
+}
+
+
+function restartTwisted() {
+	doRequest( "/web/restarttwisted" );
+}
+
+
+//MediaPlayer
+function sendMediaPlayer(command) {
+	debug("[sendMediaPlayer] called");
+	doRequest( URL.mediaplayercmd+command );
+}
+
+
+function incomingMediaPlayer(request){
+	if(request.readyState == 4){
+		var files = new FileList(getXML(request)).getArray();
+
+		debug("[loadMediaPlayer] Got "+files.length+" entries in mediaplayer filelist");
+		// listerHtml = tplMediaPlayerHeader;
+
+		var namespace = {};
+
+		var root = files[0].getRoot();
+		if (root != "playlist") {
+			namespace = {'root': root};
+			if(root != '/') {
+				var re = new RegExp(/(.*)\/(.*)\/$/);
+				re.exec(root);
+				var newroot = RegExp.$1+'/';
+				if(newroot == '//') {
+					newroot = '/';
+				}
+				namespace = {
+						'root': root,
+						'servicereference': newroot,
+						'exec': 'loadMediaPlayer',
+						'exec_description': 'Change to directory ../',
+						'color': '000000',
+						'newroot': newroot,
+						'name': '..'
+				};	
+			}
+		}
+
+		var itemnamespace = Array();
+		for ( var i = 0; i <files.length; i++){
+			var file = files[i];
+			if(file.getNameOnly() == '') {
+				continue;
+			}
+			var exec = 'loadMediaPlayer';
+			var exec_description = 'Change to directory' + file.getServiceReference();
+			var color = '000000';			
+			var isdir = 'true';
+
+			if (file.getIsDirectory() == "False") {
+				exec = 'playFile';
+				exec_description = 'play file';
+				color = '00BCBC';
+				isdir = 'false';
+			}
+
+			itemnamespace[i] = {
+					'isdir' : isdir,
+					'servicereference': file.getServiceReference(),
+					'exec': exec,
+					'exec_description': exec_description,
+					'color': color,							
+					'root': file.getRoot(),
+					'name': file.getNameOnly()
+			};
+
+		}
+		/*
+		if (root == "playlist") {
+			listerHtml += tplMediaPlayerFooterPlaylist;
+		}
+		 */
+
+		var data = { mp : namespace,
+				items: itemnamespace
+		};
+
+		processTpl('tplMediaPlayer', data, 'contentMain');
+		var sendMediaPlayerTMP = sendMediaPlayer;
+		sendMediaPlayer = false;
+		// setBodyMainContent('BodyContent');
+		sendMediaPlayer = sendMediaPlayerTMP;
+	}		
+}
+
+
+function loadMediaPlayer(directory){
+	debug("[loadMediaPlayer] called");
+	if(directory === undefined){
+		directory = 'Filesystems';
+	}
+	doRequest(URL.mediaplayerlist+directory, incomingMediaPlayer, false);
+}
+
+
+function playFile(file,root) {
+	debug("[playFile] called");
+	mediaPlayerStarted = true;
+	doRequest( URL.mediaplayerplay+file+"&root="+root );
+}
+
+
+function deleteFile(sref) {
+	debug("[deleteFile] called");
+	mediaPlayerStarted = true;
+	doRequest( URL.mediaplayerremove+sref );
+}
+
+
+function openMediaPlayerPlaylist() {
+	debug("[openMediaPlayerPlaylist] called");
+	doRequest(URL.mediaplayerlist+"playlist", incomingMediaPlayer, false);
+}
+
+
+function writePlaylist() {
+	debug("[writePlaylist] called");
+	var filename = '';
+	filename = prompt("Please enter a name for the playlist", "");
+
+	if(filename !== "") {
+		doRequest( URL.mediaplayerwrite+filename );
+	}
+}
+
+//Powerstate
+/*
+ * Sets the Powerstate @param newState - the new Powerstate Possible Values
+ * (also see WebComponents/Sources/PowerState.py) #-1: get current state # 0:
+ * toggle standby # 1: poweroff/deepstandby # 2: rebootdreambox # 3:
+ * rebootenigma
+ */
+function sendPowerState(newState){
+	doRequest( URL.powerstate+'?newstate='+newState, incomingPowerState);
+}
+
+
+//Currently Running Service
+function incomingCurrent(request){
+	//	debug("[incomingCurrent called]");
+	if(request.readyState == 4){
+		try{
+			var xml = getXML(request);
+			var epg = new EPGList(xml).getArray();
+			epg = epg[0];
+			
+			var service = new Service(xml).toJSON(); 
+			
+			var data = { 
+						'current' : epg,
+						'service' : service
+					};
+
+			if(templates.tplCurrent !== undefined){
+				var display = 'none';
+				try{
+					var display = $('trExtCurrent').style.display;
+				} catch(e){}
+				
+				renderTpl(templates.tplCurrent, data, "currentContent");
+				$('trExtCurrent').style.display = display;
+			} else {
+				debug("[incomingCurrent] tplCurrent N/A");
+			}
+
+		} catch (e){}
+		
+		isActive.getCurrent = false;
+	}
+}
+
+
+function getCurrent(){
+	if(!isActive.getCurrent){
+		isActive.getCurrent = true;
+		doRequest(URL.getcurrent, incomingCurrent, false);
+	}
+}
+
+
+//Navigation and Content Helper Functions
+
+/*
+ * Loads all Bouquets for the given enigma2 servicereference and sets the
+ * according contentHeader @param sRef - the Servicereference for the bouquet to
+ * load
+ */
+function getBouquets(sRef){	
+	var url = URL.getservices+'?sRef='+encodeURIComponent(sRef);
+	
+	doRequest(url, incomingBouquetList, true);		
+}
+
+/*
+ * Loads another navigation template and sets the navigation header
+ * @param template - The name of the template
+ * @param title - The title to set for the navigation
+ */
+function reloadNav(template, title){
+	setAjaxLoad('navContent');
+	processTpl(template, null, 'navContent');
+	setNavHd(title);
+}
+
+function reloadNavDynamic(fnc, title){
+	setAjaxLoad('navContent');
+	setNavHd(title);
+	fnc();
+}
+
+function getBouquetsTv(){
+	getBouquets(bouquetsTv);
+}
+
+function getProviderTv(){
+	getBouquets(providerTv);
+}
+
+function getSatellitesTv(){
+	getBouquets(satellitesTv);
+}
+
+function getAllTv(){
+	loadBouquet(allTv, "All (TV)");
+}
+
+
+function getBouquetsRadio(){
+	getBouquets(bouquetsRadio);
+}
+
+function getProviderRadio(){
+	getBouquets(providerRadio);
+}
+
+function getSatellitesRadio(){
+	getBouquets(satellitesRadio);
+}
+
+function getAllRadio(){
+	loadBouquet(allRadio, "All (Radio)");
+}
+
+/*
+ * Loads dynamic content to $(contentMain) by calling a execution function
+ * @param fnc - The function used to load the content
+ * @param title - The Title to set on the contentpanel
+ */
+function loadContentDynamic(fnc, title, domid){
+	if(domid !== undefined && $(domid) != null){
+		setAjaxLoad(domid);
+	} else {
+		setAjaxLoad('contentMain');
+	}
+	setContentHd(title);
+	stopUpdateBouquetItemsPoller();
+
+	fnc();
+}
+
+/*
+ * like loadContentDynamic but without the AjaxLoaderAnimation being shown
+ */
+function reloadContentDynamic(fnc, title){
+	setContentHd(title);
+	fnc();
+}
+
+/*
+ * Loads a static template to $(contentMain)
+ * @param template - Name of the Template
+ * @param title - The Title to set on the Content-Panel
+ */
+function loadContentStatic(template, title){
+	setAjaxLoad('contentMain');
+	setContentHd(title);
+	stopUpdateBouquetItemsPoller();
+	processTpl(template, null, 'contentMain');
+}
+
+
+/*
+ * Opens the given Control
+ * @param control - Control Page as String
+ * Possible Values: power, extras, message, screenshot, videoshot, osdshot
+ */
+function loadControl(control){
+	switch(control){
+	case "power":
+		loadContentStatic('tplPower', 'PowerControl');
+		break;
+
+	case "message":
+		loadContentStatic('tplSendMessage', 'Send a Message');
+		break;
+
+	case "remote":
+		loadAndOpenWebRemote();
+		break;
+
+	case "screenshot":
+		loadContentDynamic(getScreenShot, 'Screenshot');
+		break;
+
+	case "videoshot":
+		loadContentDynamic(getVideoShot, 'Videoshot');
+		break;
+
+	case "osdshot":
+		loadContentDynamic(getOsdShot, 'OSDshot');
+		break;
+
+	default:
+		break;
+	}
+}
+
+
+function loadDeviceInfo(){
+	loadContentDynamic(showDeviceInfo, 'Device Information');
+}
+
+function loadAbout(){
+	loadContentStatic('tplAbout', 'About');
+}
+
+function loadSettings(){
+	loadContentDynamic(showSettings, 'Settings');
+}
+
+function loadGearsInfo(){
+	loadContentDynamic(showGears, 'Google Gears');
+}
+
+function reloadGearsInfo(){
+	loadContentDynamic(showGears, 'Google Gears');
+}
+
+var cachedServiceElements = null;
+
+function onServiceSearchFocus(event){
+	event.element().value = '';
+	cachedServiceElements = null;
+	serviceSearch(event);
+}
+
+function serviceSearch(event){
+	var needle = event.element().value.toLowerCase();
+	
+	if(cachedServiceElements == null){
+		cachedServiceElements = $$('.sListRow');
+	}
+	
+	for(var i = 0; i < cachedServiceElements.length; i++){
+		var row = cachedServiceElements[i];
+		var serviceName = row.readAttribute('data-servicename').toLowerCase();
+		
+		if(serviceName.match(needle) != needle && serviceName != ""){
+			row.hide();
+		} else {		
+			row.show();
+		}
+	}
+	
+	debug('serviceNames');
+}
+
+/*
+ * Switches Navigation Modes
+ * @param mode - The Navigation Mode you want to switch to
+ * Possible Values: TV, Radio, Movies, Timer, Extras
+ */
+function switchMode(mode){
+	switch(mode){
+	case "TV":
+		reloadNav('tplNavTv', 'TeleVision');
+		break;
+
+	case "Radio":
+		reloadNav('tplNavRadio', 'Radio');
+		break;
+
+	case "Movies":
+		//The Navigation
+		reloadNavDynamic(loadMovieNav, 'Movies');
+
+		// The Movie list
+		loadContentDynamic(loadMovieList, 'Movies');
+		break;
+
+	case "Timer":
+		//The Navigation
+		reloadNav('tplNavTimer', 'Timer');
+
+		// The Timerlist
+		loadContentDynamic(loadTimerList, 'Timer');
+		break;
+
+	case "MediaPlayer":
+		loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
+		break;
+
+	case "BoxControl":
+		reloadNav('tplNavBoxControl', 'BoxControl');
+		break;
+
+	case "Extras":
+		reloadNav('tplNavExtras', 'Extras');
+		break;
+		
+	default:
+		break;
+	}
+}
+
+function openWebTV(){
+	window.open('/web-data/streaminterface.html', 'WebTV', 'scrollbars=no, width=800, height=740');
+}
+
+function clearSearch(){
+	$('epgSearch').value = "";
+	$('epgSearch').focus();
+}
+
+function updateItems(){
+	getCurrent();
+	getPowerState();
+}
+
+function updateItemsLazy(){	
+	serviceListHandler.getNowNext();
+	serviceListHandler.getSubservices();
+}
+
+/*
+ * Does the everything required on initial pageload
+ */
+
+function init(){
+	var DBG = userprefs.data.debug || false;
+	
+	if(DBG){
+		openDebug();
+	}
+
+	if( parseNr(userprefs.data.updateCurrentInterval) < 10000){
+		userprefs.data.updateCurrentInterval = 120000;
+		userprefs.save();
+	}
+	
+	if( parseNr(userprefs.data.updateBouquetInterval) < 60000 ){
+		userprefs.data.updateBouquetInterval = 300000;
+		userprefs.save();
+	}
+	
+	if (typeof document.body.style.maxHeight == undefined) {
+		alert("Due to the tremendous amount of work needed to get everthing to " +
+		"work properly, there is (for now) no support for Internet Explorer Versions below 7");
+	}
+	
+	getBoxtype();
+
+	setAjaxLoad('navContent');
+	setAjaxLoad('contentMain');
+
+	fetchTpl('tplServiceListEPGItem');
+	fetchTpl('tplBouquetsAndServices');
+	fetchTpl('tplCurrent');	
+	reloadNav('tplNavTv', 'TeleVision');
+
+	initChannelList();
+	initVolumePanel();
+	initMovieList();
+
+	updateItems();
+	startUpdateCurrentPoller();
 }
