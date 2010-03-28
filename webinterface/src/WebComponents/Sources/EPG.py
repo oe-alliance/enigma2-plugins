@@ -99,7 +99,7 @@ class EPG(Source):
 			if not param["endTime"] is None:
 				endtime = int( float(param["endTime"]) )
 				if endtime < 0:
-					enditme = -1
+					endtime = -1
 				
 		events = self.epgcache.lookupEvent([options , (service, 0, time, endtime)]);
 		
