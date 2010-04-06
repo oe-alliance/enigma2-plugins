@@ -183,12 +183,19 @@ var AbstractContentHandler = Class.create({
 		}
 	},
 	
+	registerEvents : function(){
+		debug('[AbstractContentHandler] WARNING: registerEvents not implemented in derived class!');
+	},
+	
 	/**
 	 * finished
-	 * Calls all functions this.onFinished contains
+	 * Calls all functions this.onFinished contains PLUS this.registerEvents
 	 * Is usually called after this.show() has finished
 	 */
 	finished : function(){
+		
+		this.registerEvents();
+		
 		if(this.onFinished !== undefined){
 			for(var i = 0; i < this.onFinished.length; i++){
 				var fnc = this.onFinished[i];
@@ -335,13 +342,39 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 		this.subServiceProvider.load({});
 	},
 	
+	
+	registerEvents : function(){
+		var parent = $(this.target);
+		
+		parent.on(
+				'click', 
+				'a.sListSLink', 
+				function(event, element){
+					this.zap(unescape(element.id));
+				}.bind(this)
+		);
+		
+		parent.on(
+				'click', 
+				'a.sListServiceEpg', 
+				function(event, element){
+					var ref = unescape( element.readAttribute('data-servicereference') );
+					
+					//TODO replace with EPG-Handler call
+					loadEPGByServiceReference( ref );
+				}.bind(this)
+		);
+		
+		
+	},
+	
 	/**
 	 * call this to switch to a service
 	 * Parameters:
 	 * @servicereference - the (unescaped) reference to the service that should be shown
 	 */
-	zap: function(servicereference){
-		this.simpleResultQuery(URL.zap, {sRef : servicereference});
+	zap: function(ref){
+		this.simpleResultQuery(URL.zap, {sRef : ref});
 	
 		//TODO replace this
 		setTimeout(updateItemsLazy, 7000); //reload epg and subservices
