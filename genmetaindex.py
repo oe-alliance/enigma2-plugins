@@ -1,4 +1,4 @@
-# usage: genmetaindex.py <language> <xml-files>  > index.xml
+# usage: genmetaindex.py <language> <xml-files>  > index.xml 
 import sys, os
 from xml.etree.ElementTree import ElementTree, Element
 
