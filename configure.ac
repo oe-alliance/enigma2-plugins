@@ -321,6 +321,12 @@ vlcplayer/po/Makefile
 vlcplayer/src/Makefile
 vlcplayer/src/servicets/Makefile
 
+vxdcontrol/Makefile
+vxdcontrol/meta/Makefile
+vxdcontrol/src/Makefile
+vxdcontrol/src/comp/Makefile
+vxdcontrol/src/data/Makefile
+
 weatherplugin/Makefile
 weatherplugin/meta/Makefile
 weatherplugin/src/Makefile

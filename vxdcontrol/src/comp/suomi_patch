@@ -1,0 +1,23 @@
+#!/bin/sh
+if [ `grep "				res.append(MultiContentEntryText(pos=(50, 0), size=(310, 22), font=1, flags=RT_HALIGN_LEFT, text=filename))" /usr/lib/enigma2/python/Plugins/Extensions/Suomipoeka/MovieList.py | wc -l` -gt 0 ]; then
+echo "Suomipoeka MovieList found, try to patch it ......."
+cp /usr/lib/enigma2/python/Plugins/Extensions/Suomipoeka/MovieList.py /usr/lib/enigma2/python/Plugins/Extensions/Suomipoeka/MovieList.py_org
+cat /usr/lib/enigma2/python/Plugins/Extensions/Suomipoeka/MovieList.py | sed -e "s/				res.append(MultiContentEntryText(pos=(50, 0), size=(310, 22), font=1, flags=RT_HALIGN_LEFT, text=filename))/				res.append(MultiContentEntryText(pos=(50, 0), size=(563, 25), font=1, flags=RT_HALIGN_LEFT, text=filename))/g" > /tmp/MovieList_patched1.py
+cat /tmp/MovieList_patched1.py | sed -e "s/				res.append(MultiContentEntryText(pos=(366, 0), size=(200, 22), font=1, flags=RT_HALIGN_LEFT, text=_(\"Directory\")))/				res.append(MultiContentEntryText(pos=(615, 0), size=(200, 25), font=1, flags=RT_HALIGN_RIGHT, text=_(\"Directory\")))/g" > /tmp/MovieList_patched2.py
+cat /tmp/MovieList_patched2.py | sed -e "s/			res.append(MultiContentEntryText(pos=(380, 0), size=(90, 22), font=1, flags=RT_HALIGN_RIGHT, text=date))/			res.append(MultiContentEntryText(pos=(675, 0), size=(90, 25), font=1, flags=RT_HALIGN_RIGHT, text=date))/g" > /tmp/MovieList_patched3.py
+cat /tmp/MovieList_patched3.py | sed -e "s/			res.append(MultiContentEntryText(pos=(posx, 0), size=(400-posx, 22), font=1, flags=RT_HALIGN_LEFT, text=moviestring))/			res.append(MultiContentEntryText(pos=(posx, 0), size=(705-posx, 25), font=1, flags=RT_HALIGN_LEFT, text=moviestring))/g" > /tmp/MovieList_patched4.py
+cat /tmp/MovieList_patched4.py | sed -e "s/			res.append(MultiContentEntryText(pos=(470, 0), size=(85, 22), font=1, flags=RT_HALIGN_LEFT, text=time))/			res.append(MultiContentEntryText(pos=(765, 0), size=(85, 25), font=1, flags=RT_HALIGN_LEFT, text=time))/g" > /tmp/MovieList_patched5.py
+cp /tmp/MovieList_patched5.py /usr/lib/enigma2/python/Plugins/Extensions/Suomipoeka/MovieList.py
+rm -rf /tmp/MovieList_patched*.py
+else
+echo "Nothing to do!"
+fi
+
+if [ `grep "	WINDOW_HEIGHT = 444" /usr/lib/enigma2/python/Plugins/Extensions/Suomipoeka/MovieSelection.py | wc -l` -gt 0 ]; then
+echo "Suomipoeka MovieSelection found, try to patch it ......."
+cp /usr/lib/enigma2/python/Plugins/Extensions/Suomipoeka/MovieSelection.py /usr/lib/enigma2/python/Plugins/Extensions/Suomipoeka/MovieSelection.py_org
+cat /usr/lib/enigma2/python/Plugins/Extensions/Suomipoeka/MovieSelection.py_org | sed -e "s/	WINDOW_HEIGHT = 444/	#WINDOW_HEIGHT = 444/g" > /usr/lib/enigma2/python/Plugins/Extensions/Suomipoeka/MovieSelection.py
+else
+echo "Nothing to do!"
+fi
+exit 0

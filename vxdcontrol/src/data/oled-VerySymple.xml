@@ -1,0 +1,56 @@
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  +++++++++++++++++++++++++++++++++++++++++++++ OLED +++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->	
+	<windowstyle id="1" type="skinned">
+		<color color="#000000" name="Background"/>
+		<color color="#ffffff" name="LabelForeground"/>
+		<color color="#000000" name="ListboxBackground"/>
+		<color color="#ffffff" name="ListboxForeground"/>
+		<color color="#000000" name="ListboxSelectedBackground"/>
+		<color color="#ffffff" name="ListboxSelectedForeground"/>
+		<color color="#000000" name="ListboxMarkedBackground"/>
+		<color color="#ffffff" name="ListboxMarkedForeground"/>
+		<color color="#000000" name="ListboxMarkedAndSelectedBackground"/>
+		<color color="#ffffff" name="ListboxMarkedAndSelectedForeground"/>
+		<color color="#ffffff" name="WindowTitleForeground"/>
+		<color color="#000000" name="WindowTitleBackground"/>
+	</windowstyle>
+
+
+
+	<!-- ########## Summarys Very Simple ########## -->>
+	<screen name="InfoBarSummary" position="0,0" size="132,64">
+		<widget font="Regular;46" halign="center" position="0,0" render="Label" size="132,64" source="global.CurrentTime" valign="center">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+	</screen>
+	
+	<screen name="ChannelSelection_summary" position="0,0" size="132,64">
+		<widget font="Regular;24" halign="center" position="0,0" render="Label" size="132,64" source="parent.ServiceEvent" valign="center">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+	</screen>
+	
+	<screen name="MenuSummary" position="0,0" size="132,64">
+		<widget font="Regular;24" halign="center" position="0,0" render="Label" size="132,64" source="parent.menu" valign="center">
+			<convert type="StringListSelection"/>
+		</widget>
+	</screen>
+	
+	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="132,64">
+		<widget font="Regular;46" halign="center" position="0,0" render="Label" size="132,64" source="global.CurrentTime" valign="center">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+	</screen>
+	
+	<screen name="StandbySummary" position="0,0" size="132,64">
+		<widget font="LCD;42" halign="center" position="0,0" render="Label" size="132,64" source="global.CurrentTime" valign="center">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+	</screen>
+	
+	
+	
+	
+	<!--  ##### END of Vali-Skin #####  -->
+</skin>

@@ -59,6 +59,7 @@ SUBDIRS = \
 	unwetterzentrale \
 	virtualzap \
 	vlcplayer \
+	vxdcontrol \
 	weatherplugin \
 	webcamviewer \
 	webinterface \

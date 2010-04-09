@@ -1,0 +1,56 @@
+
+
+
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  +++++++++++++++++++++++++++++++++++++++++++++ CHANNEL SELECTOR +++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<screen flags="wfNoBorder" name="ChannelSelection" position="0,0" size="1024,576" title="Channel Selection">
+		<eLabel backgroundColor="secondBG" position="680,0" size="384,576" zPosition="0"/>
+		<widget foregroundColor="secondFG" font="Regular;16" halign="right" position="685,40" render="Label" size="280,50" source="Title" valign="center" transparent="1" zPosition="3"/>
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/red.png" position="695,410" size="35,25" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/green.png" position="695,440" size="35,25" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/yellow.png" position="695,470" size="35,25" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/blue.png" position="695,500" size="35,25" transparent="1"/>
+		<widget backgroundColor="secondBG" font="Regular;18" halign="left" name="key_red" position="735,410" size="240,24" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="Regular;18" halign="left" name="key_green" position="735,440" size="240,24" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="Regular;18" halign="left" name="key_yellow" position="735,470" size="240,24" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="Regular;18" halign="left" name="key_blue" position="735,500" size="240,24" transparent="1" valign="center" zPosition="2"/>
+		<widget colorServiceDescription = "#aaaaaa" colorEventProgressbar="#888888" colorEventProgressbarSelected="#fcc000" colorEventProgressbarBorder="#555555" colorEventProgressbarBorderSelected="grey" foregroundColorServiceNotAvail="#5a5a5a" name="list" position="55,50" scrollbarMode="showNever" itemHeight="28" size="620,476" transparent="1"/>			
+		<widget backgroundColor="secondBG" font="Regular;18" halign="left" position="690,92" render="Label" size="55,22" source="ServiceEvent" transparent="1" zPosition="2">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText"/>
+		</widget>
+		<widget borderColor="darkgrey" borderWidth="1" pixmap="Vali-XD/window/chan_p_bar2.png" position="745,100" render="Progress" size="100,8" source="ServiceEvent" zPosition="1">
+			<convert type="EventTime">Progress</convert>
+		</widget>		
+		<widget backgroundColor="secondBG" font="Regular;18" position="850,90" render="Label" size="120,22" source="ServiceEvent" transparent="1" zPosition="2">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText">InMinutes</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;18" position="690,125" render="Label" size="290,255" source="ServiceEvent" transparent="1" zPosition="2">
+			<convert type="EventName">ExtendedDescription</convert>
+		</widget>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="EPGSelection" position="0,0" size="1024,576" title="EPG Selection">
+		<eLabel backgroundColor="secondBG" position="680,0" size="384,576" zPosition="0"/>
+		<widget foregroundColor="secondFG" font="Regular;18" halign="right" position="685,40" render="Label" size="280,50" source="Title" valign="center" transparent="1" zPosition="3"/>
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/red.png" position="695,410" size="35,25" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/green.png" position="695,440" size="35,25" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/yellow.png" position="695,470" size="35,25" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/blue.png" position="695,500" size="35,25" transparent="1"/>
+		<widget backgroundColor="secondBG" font="Regular;18" halign="left" name="key_red" position="735,410" size="240,24" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="Regular;18" halign="left" name="key_green" position="735,440" size="240,24" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="Regular;18" halign="left" name="key_yellow" position="735,470" size="240,24" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="Regular;18" halign="left" name="key_blue" position="735,500" size="240,24" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="secondFG" halign="left" position="690,105" render="Label" size="290,50" source="Service" transparent="1" zPosition="3">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;18" position="690,167" render="Label" size="290,215" source="Event" transparent="1" zPosition="3">
+			<convert type="EventName">ExtendedDescription</convert>
+		</widget>
+		<widget name="list" position="50,50" scrollbarMode="showOnDemand" itemHeight="28" size="620,476"/>
+	</screen>
+	
+	
+	

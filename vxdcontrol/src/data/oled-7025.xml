@@ -1,0 +1,80 @@
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  +++++++++++++++++++++++++++++++++++++++++++++ OLED 7025 ++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<windowstyle id="1" type="skinned">
+		<color color="#000000" name="Background"/>
+		<color color="#ffffff" name="LabelForeground"/>
+		<color color="#000000" name="ListboxBackground"/>
+		<color color="#ffffff" name="ListboxForeground"/>
+		<color color="#000000" name="ListboxSelectedBackground"/>
+		<color color="#ffffff" name="ListboxSelectedForeground"/>
+		<color color="#000000" name="ListboxMarkedBackground"/>
+		<color color="#ffffff" name="ListboxMarkedForeground"/>
+		<color color="#000000" name="ListboxMarkedAndSelectedBackground"/>
+		<color color="#ffffff" name="ListboxMarkedAndSelectedForeground"/>
+		<color color="#ffffff" name="WindowTitleForeground"/>
+		<color color="#000000" name="WindowTitleBackground"/>
+	</windowstyle>
+
+
+
+	<!-- ########## Summarys 7025 ##########  -->
+	<screen name="InfoBarSummary" position="0,0" size="132,64">
+		<widget source="session.CurrentService" render="Label" position="1,0" size="130,38" font="OLED;16" halign="center" >
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Progress" position="3,36" size="126,4" borderWidth="1" >
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text="R" position="2,43" size="20,20" font="Regular;20" >
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="26,40" size="106,24" font="Regular;22" halign="left" >
+			<convert type="ClockToText">WithSeconds</convert>
+		</widget>
+	</screen>
+	<screen name="ChannelSelection_summary" position="0,0" size="132,64">
+		<widget source="parent.ServiceEvent" render="Label" position="1,0" size="130,38" font="OLED;16" halign="center" >
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="parent.ServiceEvent" render="Progress" position="3,36" size="126,4" borderWidth="1" >
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="26,40" size="106,24" font="Regular;22" halign="left" >
+			<convert type="ClockToText">WithSeconds</convert>
+		</widget>
+	</screen>
+	<screen name="MenuSummary" position="0,0" size="132,64">
+		<widget source="parent.title" render="Label" position="6,0" size="120,32" font="Regular;16" halign="center" valign="center"/>
+		<widget source="parent.menu" render="Label" position="6,32" size="120,32" font="Regular;16" halign="center" valign="center">
+			<convert type="StringListSelection" />
+		</widget>
+	</screen>
+	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="132,64">
+		<widget source="session.CurrentService" render="Label" position="1,0" size="130,38" font="OLED;16" halign="center" >
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Progress" position="3,36" size="126,4" borderWidth="1" >
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text="R" position="2,43" size="20,20" font="Regular;20" >
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="26,40" size="106,24" font="Regular;22" halign="left" >
+			<convert type="ClockToText">WithSeconds</convert>
+		</widget>
+	</screen>
+	<screen name="StandbySummary" position="0,0" size="132,64">
+		<widget source="global.CurrentTime" render="Label" position="20,0" size="92,64" font="LCD;38" halign="center">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text="R" position="2,43" size="20,20" font="Regular;20" >
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+	</screen>
+	
+	
+	
+	
+	<!--  ##### END of Vali-Skin #####  -->
+</skin>
