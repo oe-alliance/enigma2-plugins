@@ -140,6 +140,8 @@ class XDsetup(ConfigListScreen, Screen):
 		self.onLayoutFinish.append(self.ComponentsCheck)
 	
 	def ComponentsCheck(self):
+		if not fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py"):
+			system('cp ' + self.komponente + 'vRendVolumeText.py /usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py')
 		if not fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py"):
 			system('cp ' + self.komponente + 'vRendChNumber.py /usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py')
 		if not fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendVideoSize.py"):
@@ -152,6 +154,7 @@ class XDsetup(ConfigListScreen, Screen):
 	def save(self):
 		CompsAreOK = False
 		if fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py") \
+			and fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendVideoSize.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Converter/vConvSmartInfo.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Converter/vConvClockToText.py"):
@@ -282,11 +285,9 @@ class XDsetup(ConfigListScreen, Screen):
 			#self.session.open(Console, cmdlist=[("tar -xzvf " + self.komponente + "spetial_icons.tar.gz" + " -C /")])
 			self.session.open(MessageBox,_("The function is still in development."), MessageBox.TYPE_INFO)
 		elif answer == "ROUNDBUTT":
-			#self.session.open(Console, cmdlist=[("tar -xzvf " + self.komponente + "round_buttons.tar.gz" + " -C /")])
-			self.session.open(MessageBox,_("The function is still in development."), MessageBox.TYPE_INFO)
+			self.session.open(Console, cmdlist=[("tar -xzvf " + self.komponente + "round_buttons.tar.gz" + " -C /")])
 		elif answer == "MAGICBUTT":
-			#self.session.open(Console, cmdlist=[("tar -xzvf " + self.komponente + "magic_buttons.tar.gz" + " -C /")])
-			self.session.open(MessageBox,_("The function is still in development."), MessageBox.TYPE_INFO)
+			self.session.open(Console, cmdlist=[("tar -xzvf " + self.komponente + "magic_buttons.tar.gz" + " -C /")])
 
 	def checkUserColors(self):
 		if (config.plugins.valiXDsetup.Style.value=='base'):

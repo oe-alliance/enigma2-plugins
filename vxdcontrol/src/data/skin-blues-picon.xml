@@ -62,7 +62,7 @@
 
 
 	<!--  ##### InfoBars ##### -->
-	<screen backgroundColor="background" flags="wfNoBorder" name="InfoBar" position="0,428" size="1024,176" title="InfoBar">
+	<screen backgroundColor="background" flags="wfNoBorder" name="InfoBar" position="0,429" size="1024,176" title="InfoBar">
 		<ePixmap alphatest="off" pixmap="Vali-XD/Vision/v2.png" position="0,0" size="1024,176" zPosition="0"/>
 		<widget backgroundColor="secondBG" font="Regular;18" foregroundColor="foreground" halign="left" position="890,24" render="vRendVideoSize" size="102,20" source="session.CurrentService" transparent="1" zPosition="3"/>
 		<widget backgroundColor="secondBG" font="Regular;24" foregroundColor="foreground" halign="left" position="165,22" render="vRendChNumber" size="65,28" source="session.CurrentService" transparent="1" zPosition="3"/>
@@ -103,7 +103,7 @@
 			<convert type="EventTime">Duration</convert>
 			<convert type="vConvClockToText">InStunden</convert>
 		</widget>
-		<widget backgroundColor="#04404043" pixmap="Vali-XD/infobar/p_bar.png" position="165,57" render="Progress" size="695,5" source="session.Event_Now" zPosition="3">
+		<widget backgroundColor="#04404043" pixmap="Vali-XD/infobar/p_bar.png" position="165,57" render="Progress" size="695,5" source="session.Event_Now" transparent="1" zPosition="3">
 			<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget alphatest="on" pixmap="Vali-XD/Avalon/ico_crypt_on.png" position="710,25" render="Pixmap" size="24,20" source="session.CurrentService" zPosition="3">
@@ -198,7 +198,7 @@
 		</widget>
 	</screen>
 
-	<screen backgroundColor="background" flags="wfNoBorder" name="MoviePlayer" position="0,428" size="1024,176" title="MoviePlayer">
+	<screen backgroundColor="background" flags="wfNoBorder" name="MoviePlayer" position="0,429" size="1024,176" title="MoviePlayer">
 		<ePixmap alphatest="off" pixmap="Vali-XD/Vision/v2.png" position="0,0" size="1024,176" zPosition="0"/>
 		<ePixmap alphatest="on" pixmap="Vali-XD/dvr/dvr_klein.png" position="460,60" size="103,26" transparent="1" zPosition="2"/>
 		<widget backgroundColor="secondBG" font="Regular;18" foregroundColor="foreground" halign="left" position="875,85" render="vRendVideoSize" size="120,21" source="session.CurrentService" transparent="1" zPosition="3"/>
@@ -242,7 +242,7 @@
 		</widget>
 	</screen>
 
-	<screen backgroundColor="background" flags="wfNoBorder" name="DVDPlayer" position="0,428" size="1024,176" title="DVDPlayer">
+	<screen backgroundColor="background" flags="wfNoBorder" name="DVDPlayer" position="0,429" size="1024,176" title="DVDPlayer">
 		<ePixmap alphatest="off" pixmap="Vali-XD/Vision/v2.png" position="0,0" size="1024,176" zPosition="0"/>
 		<ePixmap alphatest="on" pixmap="Vali-XD/dvr/dvr_klein.png" position="460,60" size="103,26" transparent="1" zPosition="2"/>
 		<widget backgroundColor="secondBG" font="Regular;18" foregroundColor="foreground" halign="left" position="875,85" render="vRendVideoSize" size="120,21" source="session.CurrentService" transparent="1" zPosition="3"/>
