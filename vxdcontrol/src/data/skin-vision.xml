@@ -26,6 +26,9 @@
 		<color name="transparent" value="#ff000000"/>
 		<color name="transpBlack" value="#65000000"/>
 		<color name="transpWhite" value="#80ffffff"/>
+		<color name="movieRecording" value="#ff4A3C"/>
+		<color name="movieWatching" value="#a0b0e9"/>
+		<color name="movieFinished" value="#56C856"/>
 	</colors>
 	
 	<!--  ##### Window ##### -->

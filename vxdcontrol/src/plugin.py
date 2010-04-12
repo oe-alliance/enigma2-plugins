@@ -270,8 +270,8 @@ class XDsetup(ConfigListScreen, Screen):
 		contextFileList = [(_("Help information"), "INFO"),
 						(_("Install round buttons"), "ROUNDBUTT"),
 						(_("Install magic buttons"), "MAGICBUTT"),
-						(_("Suomipoeka-Movielist patch from Telekind"), "PATCHSUOMI"),
-						(_("Colored icons patch from Constable"), "PATCHCONSTABLE")]
+						(_("Suomipoeka-Movielist patch"), "PATCHSUOMI"),
+						(_("Colored icons patch"), "PATCHCONSTABLE")]
 		self.session.openWithCallback(self.toolExec, ChoiceBox, title=_("Vali-XD Tool Box..."), list=contextFileList)
 	
 	def toolExec(self, answer):
@@ -280,10 +280,9 @@ class XDsetup(ConfigListScreen, Screen):
 			hilfeText = _("Color format: TTRRGGBB (hexadecimal)\nTT=Transparenty RR=Red GG=Green BB=Blue\nSee more colors by www.colorpicker.com\n\nSupport: www.dreambox-tools.info")
 			self.session.open(MessageBox, hilfeText, MessageBox.TYPE_INFO)
 		elif answer == "PATCHSUOMI":
-			self.session.open(Console, cmdlist=[(self.komponente + "suomi_patch")])
+			self.session.open(Console, cmdlist=[("chmod 755 " + self.komponente + "suomi_patch"), (self.komponente + "suomi_patch")])
 		elif answer == "PATCHCONSTABLE":
-			#self.session.open(Console, cmdlist=[("tar -xzvf " + self.komponente + "spetial_icons.tar.gz" + " -C /")])
-			self.session.open(MessageBox,_("The function is still in development."), MessageBox.TYPE_INFO)
+			self.session.open(Console, cmdlist=[("tar -xzvf " + self.komponente + "spetial_icons.tar.gz" + " -C /")])
 		elif answer == "ROUNDBUTT":
 			self.session.open(Console, cmdlist=[("tar -xzvf " + self.komponente + "round_buttons.tar.gz" + " -C /")])
 		elif answer == "MAGICBUTT":
