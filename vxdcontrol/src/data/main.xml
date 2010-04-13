@@ -718,7 +718,7 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 		<widget font="Regular;17" position="60,445" render="Label" size="904,82" source="Service" zPosition="1">
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
-		<widget name="freeDiskSpace" foregroundColor="secondFG" position="620,52" size="355,40" font="Regular;17" valign="center" transparent="1" zPosition="4"/>
+		<widget font="Regular;17" foregroundColor="secondFG" position="620,52" render="vRendMovieDirSize" size="355,40" source="global.CurrentTime" transparent="1" valign="center" zPosition="4"/>
 		<eLabel backgroundColor="darkgrey" position="50,415" size="924,2" zPosition="5"/>
 		<widget name="DescriptionBorder" position="0,0" size="0,0"/>
 	</screen>
