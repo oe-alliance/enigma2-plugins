@@ -377,10 +377,12 @@ zaphistorybrowser/po/Makefile
 zaphistorybrowser/src/Makefile
 
 zapstatistic/Makefile
+zapstatistic/meta/Makefile
 zapstatistic/po/Makefile
 zapstatistic/src/Makefile
 
 zdfmediathek/Makefile
+zdfmediathek/meta/Makefile
 zdfmediathek/src/Makefile
 
 ])

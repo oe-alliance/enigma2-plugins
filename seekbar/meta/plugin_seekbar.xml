@@ -6,6 +6,14 @@
                     <author>AliAbdul</author>
                     <name>Seekbar</name>
                     <packagename>enigma2-plugin-extensions-seekbar</packagename>
+                    <shortdescription>Replace the minute input for the seek functions</shortdescription>
+                    <description>Replace the minute input for the seek functions</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_seekbar_de.jpg" />	
+          </info>
+          <info language="de">
+                    <author>AliAbdul</author>
+                    <name>Seekbar</name>
+                    <packagename>enigma2-plugin-extensions-seekbar</packagename>
                     <shortdescription>Ersetzt die Minuteneingabe für die Spulfunktionen</shortdescription>
                     <description>Ersetzt die Minuteneingabe für die Spulfunktionen</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_seekbar_de.jpg" />	
