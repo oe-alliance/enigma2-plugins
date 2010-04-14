@@ -83,7 +83,8 @@ def main(session, **kwargs):
 	if fileExists("/usr/share/enigma2/Vali-XD/skin.xml"):
 		session.open(XDsetup)
 	else:
-		session.open(MessageBox,_("Vali-XD skin not installed.\nWe have nothing to control."), MessageBox.TYPE_INFO)
+		#session.open(MessageBox,_("Vali-XD skin not installed.\nWe have nothing to control."), MessageBox.TYPE_INFO)
+		pass
 
 
 
@@ -137,25 +138,22 @@ class XDsetup(ConfigListScreen, Screen):
 									"blue": self.toolBox,
 									"cancel": self.exit
 									}, -1)
-		self.onLayoutFinish.append(self.ComponentsCheck)
+		self.onLayoutFinish.append(self.UpdateComponents)
 	
-	def ComponentsCheck(self):
-		if not fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py"):
-			system('cp ' + self.komponente + 'vRendVolumeText.py /usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py')
-		if not fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py"):
-			system('cp ' + self.komponente + 'vRendChNumber.py /usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py')
-		if not fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendVideoSize.py"):
-			system('cp ' + self.komponente + 'vRendVideoSize.py /usr/lib/enigma2/python/Components/Renderer/vRendVideoSize.py')
-		if not fileExists("/usr/lib/enigma2/python/Components/Converter/vConvSmartInfo.py"):
-			system('cp ' + self.komponente + 'vConvSmartInfo.py /usr/lib/enigma2/python/Components/Converter/vConvSmartInfo.py')
-		if not fileExists("/usr/lib/enigma2/python/Components/Converter/vConvClockToText.py"):
-			system('cp ' + self.komponente + 'vConvClockToText.py /usr/lib/enigma2/python/Components/Converter/vConvClockToText.py')
+	def UpdateComponents(self):
+		system('cp ' + self.komponente + 'vRendVolumeText.py /usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py')
+		system('cp ' + self.komponente + 'vRendChNumber.py /usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py')
+		system('cp ' + self.komponente + 'vRendVideoSize.py /usr/lib/enigma2/python/Components/Renderer/vRendVideoSize.py')
+		system('cp ' + self.komponente + 'vRendMovieDirSize.py /usr/lib/enigma2/python/Components/Renderer/vRendMovieDirSize.py')
+		system('cp ' + self.komponente + 'vConvSmartInfo.py /usr/lib/enigma2/python/Components/Converter/vConvSmartInfo.py')
+		system('cp ' + self.komponente + 'vConvClockToText.py /usr/lib/enigma2/python/Components/Converter/vConvClockToText.py')
 
 	def save(self):
 		CompsAreOK = False
 		if fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendVideoSize.py") \
+			and fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendMovieDirSize.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Converter/vConvSmartInfo.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Converter/vConvClockToText.py"):
 			CompsAreOK = True

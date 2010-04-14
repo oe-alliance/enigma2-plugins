@@ -26,9 +26,6 @@
 		<widget borderWidth="1" position="3,36" render="Progress" size="126,4" source="session.Event_Now">
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="R" position="2,43" size="20,20" font="Regular;20" >
-			<convert type="ConditionalShowHide">Blink</convert>
-		</widget>
 		<widget font="Regular;20" halign="left" position="26,40" render="Label" size="106,24" source="global.CurrentTime">
 			<convert type="ClockToText">WithSeconds</convert>
 		</widget>
@@ -59,9 +56,6 @@
 		</widget>
 		<widget borderWidth="1" position="3,36" render="Progress" size="126,4" source="session.CurrentService">
 			<convert type="ServicePosition">Position</convert>
-		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="R" position="2,43" size="20,20" font="Regular;20" >
-			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<widget font="Regular;20" halign="left" position="26,40" render="Label" size="106,20" source="global.CurrentTime">
 			<convert type="ClockToText">WithSeconds</convert>
