@@ -254,9 +254,22 @@ class PodcastMovies(Screen):
 		getPage(self.url).addCallback(self.showMovies).addErrback(self.error)
 
 	def showMovies(self, page):
-		if page.__contains__("<itunes"):
+		if '<item>' in page:
 			reonecat = re.compile(r'<item>(.+?)</item>', re.DOTALL)
-			for item in reonecat.findall(page):
+			items = reonecat.findall(page)
+		else:
+			items = [page]
+		for item in items:
+			if '<description></description>' in item:
+				reonecat2 = re.compile(r'<title>(.+?)</title>.+?<enclosure(.+?)/>.+?', re.DOTALL)
+				for title, extra in reonecat2.findall(item):
+					if title.startswith("<![CDATA["):
+						title = title[9:]
+					if title.endswith("]]>"):
+						title = title[:-3]
+					self.list.append(encodeUrl(title))
+					self.movies.append(["", extra])
+			else:
 				reonecat2 = re.compile(r'<title>(.+?)</title>.+?<description>(.+?)</description>.+?<enclosure(.+?)/>.+?', re.DOTALL)
 				for title, description, extra in reonecat2.findall(item):
 					if title.startswith("<![CDATA["):
@@ -270,20 +283,6 @@ class PodcastMovies(Screen):
 						description = description[:-3]
 					self.list.append(encodeUrl(title))
 					self.movies.append([description, extra])
-		else:
-			reonecat = re.compile(r'<title>(.+?)</title>.+?<description>(.+?)</description>.+?<enclosure(.+?)/>.+?', re.DOTALL)
-			for title, description, extra in reonecat.findall(page):
-				if title.startswith("<![CDATA["):
-					title = title[9:]
-				if title.endswith("]]>"):
-					title = title[:-3]
-				if description.__contains__("<![CDATA["):
-					idx = description.index("<![CDATA[")
-					description = description[idx+10:]
-				if description.endswith("]]>"):
-					description = description[:-3]
-				self.list.append(encodeUrl(title))
-				self.movies.append([description, extra])
 		self["list"].setList(self.list)
 		self.showInfo()
 		self.working = False
