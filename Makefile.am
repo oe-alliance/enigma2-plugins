@@ -2,6 +2,7 @@ AUTOMAKE_OPTIONS = gnu
 SUBDIRS = \
 	ac3lipsync \
 	antiscrollbar \
+	automatictimerlistcleanup \
 	autoresolution \
 	autotimer \
 	cdinfo \

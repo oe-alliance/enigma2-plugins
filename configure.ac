@@ -37,6 +37,11 @@ antiscrollbar/Makefile
 antiscrollbar/meta/Makefile
 antiscrollbar/src/Makefile
 
+automatictimerlistcleanup/Makefile
+automatictimerlistcleanup/meta/Makefile
+automatictimerlistcleanup/po/Makefile
+automatictimerlistcleanup/src/Makefile
+
 autoresolution/Makefile
 autoresolution/meta/Makefile
 autoresolution/src/Makefile
