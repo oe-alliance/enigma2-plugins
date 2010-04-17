@@ -1,4 +1,4 @@
-#######################################################################
+# -*- coding: utf-8 -*-
 #
 #
 #    SmartInfo-Converter for Dreambox/Enigma-2
@@ -27,6 +27,7 @@
 from enigma import iServiceInformation
 from Components.Converter.Converter import Converter
 from Components.Element import cached
+from Components.Sensors import sensors
 from Poll import Poll
 
 
@@ -93,6 +94,22 @@ class vConvSmartInfo(Poll, Converter, object):
 						Ret_Text = Ret_Text + "Frequency: " + frequency
 				prvd = info.getInfoString(iServiceInformation.sProvider)
 				Ret_Text = self.kurz(prvd) + "     " + Ret_Text
+			maxtemp = 0
+			sensotN = "?"
+			try:
+				templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
+				tempcount = len(templist)
+				for count in range(tempcount):
+					id = templist[count]
+					tt = sensors.getSensorValue(id)
+					if tt > maxtemp:
+						maxtemp = tt
+						sensotN = sensors.getSensorName(id)
+						if sensotN == "undefined":
+							sensotN = "sensor-"+str(id)
+				Ret_Text = "max. Box-Temperatute:  " + str(maxtemp) + "°C / " + sensotN + "\n" + Ret_Text
+			except:
+				pass
 			return Ret_Text
 		return "n/a"
 		
