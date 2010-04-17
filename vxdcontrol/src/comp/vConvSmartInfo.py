@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: iso-8859-1 -*-
 #
 #
 #    SmartInfo-Converter for Dreambox/Enigma-2
@@ -107,7 +107,7 @@ class vConvSmartInfo(Poll, Converter, object):
 						sensotN = sensors.getSensorName(id)
 						if sensotN == "undefined":
 							sensotN = "sensor-"+str(id)
-				Ret_Text = "max. Box-Temperatute:  " + str(maxtemp) + "°C / " + sensotN + "\n" + Ret_Text
+				Ret_Text = "max. Box-Temp:  " + str(maxtemp) + "°C / " + sensotN + "\n" + Ret_Text
 			except:
 				pass
 			return Ret_Text
