@@ -23,7 +23,7 @@
 #######################################################################
 
 from Components.VariableText import VariableText
-from enigma import eLabel
+from enigma import eLabel, eServiceCenter
 from Renderer import Renderer
 from Screens.InfoBar import InfoBar
 
@@ -41,7 +41,21 @@ class vRendChNumber(Renderer, VariableText):
 		if info is None:
 			self.text = " "
 			return
-		chx = MYCHANSEL.servicelist.getCurrentIndex() + 1
-		broot = MYCHANSEL.servicelist.getRoot()
-		rx = MYCHANSEL.getBouquetNumOffset(broot)
+		serviceHandler = eServiceCenter.getInstance()
+		myRoot = MYCHANSEL.servicelist.getRoot()
+		mySSS = serviceHandler.list(myRoot)
+		SRVList = mySSS and mySSS.getContent("SN", True)
+		markersOffset = 0
+		mySrv = MYCHANSEL.servicelist.getCurrent()
+		chx = MYCHANSEL.servicelist.l.lookupService(mySrv)
+		for i in range(len(SRVList)):
+			if chx == i:
+				break
+			testlinet = SRVList[i]
+			testline = testlinet[0].split(":")
+			if testline[1] == "64":
+				markersOffset = markersOffset + 1
+		chx = (chx - markersOffset) + 1
+		rx = MYCHANSEL.getBouquetNumOffset(myRoot)
 		self.text = str(chx + rx)
+
