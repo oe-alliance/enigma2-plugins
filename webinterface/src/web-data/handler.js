@@ -26,6 +26,7 @@ var AbstractContentHandler = Class.create({
 		this.ajaxload = false;
 		this.parms = {};
 		this.refresh = false;
+		this.eventsRegistered = false;
 	},
 	
 	/**
@@ -189,12 +190,14 @@ var AbstractContentHandler = Class.create({
 	
 	/**
 	 * finished
-	 * Calls all functions this.onFinished contains PLUS this.registerEvents
+	 * Calls all functions this.onFinished contains this.registerEvents
 	 * Is usually called after this.show() has finished
 	 */
 	finished : function(){
-		
-		this.registerEvents();
+		if(!this.eventsRegistered){
+			this.registerEvents();
+			this.eventsRegistered = true;
+		}
 		
 		if(this.onFinished !== undefined){
 			for(var i = 0; i < this.onFinished.length; i++){
@@ -365,6 +368,17 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 				}.bind(this)
 		);
 		
+		parent.on('click', 'a.sListEPG',
+			function(event, element){
+				var target = $(element.readAttribute('data-target_id'));
+				
+				if(target.visible()){
+					target.hide();
+				} else {
+					target.show();
+				}
+			}
+		);
 		
 	},
 	
@@ -437,6 +451,7 @@ var ServiceListEpgProvider = Class.create(AbstractContentHandler, {
 	
 			if(templates.tplServiceListEPGItem !== undefined){
 				//TODO move templates.* maybe?!?
+				//TODO replace renderTpl
 				renderTpl(templates.tplServiceListEPGItem, data, id, true);
 			} else {
 				debug("[ServiceListEpgProvider.showItem] tplServiceListEPGItem N/A");
@@ -499,7 +514,7 @@ var ServiceListEpgProvider = Class.create(AbstractContentHandler, {
 		}
 		
 		this.load(this.parms);
-	}	
+	}
 });
 
 /**
@@ -645,7 +660,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	/**
 	 * @override
 	 * load
-	 * When handling timers the whole loading-sequence is entirely off-standard.
+	 * When handling timers the whole loading-sequence is entirely different.
 	 * Most of the data is already there or has to be created.
 	 * 
 	 * Parameters:
@@ -671,7 +686,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 
 			
 		var begin = new Date(t.begin * 1000);
-		var end = new Date(t.end * 1000);
+		var end = new Date(t.end * 1000);	
 		
 		var bHours = this.numericalOptionList(1, 24, begin.getHours());		
 		var bMinutes = this.numericalOptionList(1, 60, begin.getMinutes());
@@ -680,6 +695,8 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		
 		var now = new Date();
 		var years = this.numericalOptionList(now.getFullYear(), now.getFullYear() + 10, begin.getFullYear());
+		var months = this.numericalOptionList(0, 11, begin.getMonth(), 1);
+		var days = this.daysOptionList(begin);
 		
 		var actions = this.ACTIONS;
 		actions[t.justplay].selected = this.SELECTED;
@@ -691,8 +708,8 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		
 		var data = { 
 				year : years,
-				month : [],
-				day : [],
+				month : months,
+				day : days,
 				shour : bHours,
 				smin : bMinutes,
 				ehour : eHours,
@@ -706,6 +723,8 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				timer : t };
 		
 		this.show(data);
+		
+		
 	},
 	
 	/**
@@ -748,8 +767,6 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 			num = num >> 1;
 		}
 		
-
-		
 		return days;
 	},
 	
@@ -763,12 +780,16 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * @upperBound - Number to stop at
 	 * @selectedValue - entry.selected is set to this.SELECTED if number == selectedValue ("" else)
 	 **/
-	numericalOptionList: function(lowerBound, upperBound, selectedValue){
+	numericalOptionList: function(lowerBound, upperBound, selectedValue, offset){
 		var list = [];
 		var idx = 0;
+		if(offset == undefined){
+			offset = 0;
+		}
 		
 		for(var i = lowerBound; i <= upperBound; i++){
-			var txt = i < 10 ? "0" + i : i;
+			var t = i + offset;
+			var txt = t < 10 ? "0" + t : t;
 			var selected = "";
 			if(i == selectedValue){
 				selected = this.SELECTED;
@@ -779,9 +800,26 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		return list;
 	},
 	
+	/**
+	 * daysOptionList
+	 * 
+	 * Determines how many Days a month has an builds an 
+	 * numericalOptionsList for that number of Days
+	 */
+	daysOptionList: function(date){		
+		var days = 32 - new Date(date.getYear(), date.getMonth(), 32).getDate();
+		return this.numericalOptionList(1, days, date.getDate());
+	},
 	
-	commitForm : function(form){
-		values = $F(form).serializeElements();
+	/**
+	 * commitForm
+	 * 
+	 * Commit the Timer Form by serialing it and doing executing the request
+	 * @id - id of the Form
+	 */
+	commitForm : function(id){		
+		var values = $(id).serialize();
+		debug(values);
 	},
 	
 	/**
@@ -791,9 +829,48 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	renderXML: function(xml){
 		var list = new TimerList(xml).getArray();
 		return {timer : list};
+	},
+	
+	registerEvents: function(){
+		$('saveTimer').on('click',
+				function(event, element){
+					this.commitForm('timerEditForm');
+				}.bind(this)
+			);
+		
+		$('month').on('change',
+			function(event, element){			
+				this.reloadDays();
+			}.bind(this)
+		);
+		
+		$('year').on('change',
+			function(event, element){			
+				this.reloadDays();
+			}.bind(this)
+		);
+		
+	},
+	
+	reloadDays : function(){
+		var date = new Date($('year').value, $('month').value, $('day').value);
+		var days = this.daysOptionList(date);
+						
+		$('day').update('');
+		this.createOptions(days, $('day'));
+	},
+	
+	createOptions: function(items, element){		
+		for(var i = 0; i < items.length; i++){
+			var item = items[i];
+			
+			var attrs = { value : item.value, selected : item.selected };
+			var option = new Element('option', attrs).update(item.txt);				
+			
+			element.appendChild(option);
+		}
 	}
 });
-
 
 //create required Instances
 var serviceListHandler = new ServiceListHandler('contentServices',  new ServiceListEpgProvider(), new ServiceListSubserviceProvider());

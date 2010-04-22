@@ -1559,6 +1559,8 @@ function serviceSearch(event){
 	debug('serviceNames');
 }
 
+
+var currentMode = 'TV';
 /*
  * Switches Navigation Modes
  * @param mode - The Navigation Mode you want to switch to
@@ -1567,22 +1569,32 @@ function serviceSearch(event){
 function switchMode(mode){
 	switch(mode){
 	case "TV":
+		if(currentMode != 'TV' && currentMode != 'Radio'){
+			serviceListHandler.registerEvents();
+		}
 		reloadNav('tplNavTv', 'TeleVision');
 		break;
 
 	case "Radio":
+		if(currentMode != 'TV' && currentMode != 'Radio'){
+			serviceListHandler.registerEvents();
+		}		
 		reloadNav('tplNavRadio', 'Radio');
 		break;
 
 	case "Movies":
+		movieListHandler = new MovieListHandler('contentMain');
+
 		//The Navigation
 		reloadNavDynamic(loadMovieNav, 'Movies');
-
 		// The Movie list
 		loadContentDynamic(loadMovieList, 'Movies');
 		break;
 
 	case "Timer":
+		timerListHandler = new TimerListHandler('contentMain');
+		timerHandler = new TimerHandler('contentMain');		
+		
 		//The Navigation
 		reloadNav('tplNavTimer', 'Timer');
 

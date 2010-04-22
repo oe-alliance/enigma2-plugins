@@ -4,7 +4,7 @@
 						<table id="contentTable">
 							<tr>
 								<td>
-									<form id='timerEditForm'>
+									<form id='timerEditForm' onSubmit="return false;">
 										<table>
 											<tr>
 												<td colspan="3">Action:</td>
@@ -150,7 +150,7 @@
 													<input name="beginOld" id="beginOld" type="hidden" value="${timer.beginOld}">
 													<input name="endOld" id="endOld" type="hidden" value="${timer.endOld}">
 													<input name="eventID" id="eventID" type="hidden" value="${timer.eventID}">
-													<button onclick="sendAddTimer();">Add/Save</button>
+													<button id="saveTimer">Add/Save</button>
 												</td>
 											</tr>
 										</table>
