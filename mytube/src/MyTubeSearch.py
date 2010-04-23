@@ -1,4 +1,3 @@
-from __init__ import _
 from MyTubeService import GoogleSuggestions
 from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox
@@ -128,7 +127,6 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 			self.tmpValue = self.value
 			self.value = self.suggestionsWindow.activate()
 			self.allmarked = False
-			#self.marked_pos = -1
 			self.suggestionsListActivated = True
 			ret = True
 		return ret
@@ -439,7 +437,6 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 
 	def selectionChanged(self):
 		current = self["config"].getCurrent()
-		#print current
 
 	def newConfig(self):
 		print "newConfig", self["config"].getCurrent()
@@ -570,7 +567,6 @@ class MyTubeTasksScreen(Screen):
 	def layoutFinished(self):
 		self["title"].setText(_("MyTubePlayer active video downloads"))
 		self.Timer.startLongTimer(2)
-		#self.Timer.start(1000)
 
 	def TimerFire(self):
 		self.Timer.stop()

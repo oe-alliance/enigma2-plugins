@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-1 -*-
-from __init__ import _
+from __init__ import bin2long, long2bin, rsa_pub1024, decrypt_block
 import gdata.youtube
 import gdata.youtube.service
 from gdata.service import BadAuthentication
@@ -13,10 +13,23 @@ from twisted.internet import reactor
 from urllib2 import Request, URLError, HTTPError, urlopen as urlopen2
 from socket import gaierror,error
 import re, os, sys, socket
-from urllib import quote, unquote_plus, unquote   #FancyURLopener,
+from urllib import quote, unquote_plus, unquote
 import cookielib
 from httplib import HTTPConnection,CannotSendRequest,BadStatusLine,HTTPException
 HTTPConnection.debuglevel = 1
+
+def validate_cert(cert, key):
+	buf = decrypt_block(cert[8:], key) 
+	if buf is None:
+		return None
+	return buf[36:107] + cert[139:196]
+
+def get_rnd():
+	try:
+		rnd = os.urandom(8)
+		return rnd
+	except:
+		return None
 
 std_headers = {
 	'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2',
@@ -184,14 +197,14 @@ class MyTubeFeedEntry():
 		mrl = None
 		isHDAvailable = False
 		video_id = str(self.getTubeId())
+		#URLs for YouTube video pages will change from the format http://www.youtube.com/watch?v=ylLzyHk54Z0 to http://www.youtube.com/watch#!v=ylLzyHk54Z0.
 		watch_url = "http://www.youtube.com/watch?v=" + video_id
 		watchrequest = Request(watch_url, None, std_headers)
 		try:
-			print "trying to find out if a HD Stream is available"
+			print "trying to find out if a HD Stream is available",watch_url
 			watchvideopage = urlopen2(watchrequest).read()
 		except (urllib2.URLError, httplib.HTTPException, socket.error), err:
-			print "[MyTube] Error: Unable to retrieve watchpage"
-			print "[MyTube] Error code: ", str(err)
+			print "[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err)
 			print "[MyTube] No valid mp4-url found"
 			return mrl
 
@@ -202,14 +215,14 @@ class MyTubeFeedEntry():
 			print "HD Stream NOT AVAILABLE"
 
 		# Get video info
-		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en' % video_id
+		#info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en' % video_id
+		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s' % video_id
 		inforequest = Request(info_url, None, std_headers)
 		try:
 			print "getting video_info_webpage",info_url
 			infopage = urlopen2(inforequest).read()
 		except (urllib2.URLError, httplib.HTTPException, socket.error), err:
-			print "[MyTube] Error: Unable to retrieve infopage"
-			print "[MyTube] Error code: ", str(err)
+			print "[MyTube] Error: Unable to retrieve infopage, error:", str(err)
 			print "[MyTube] No valid mp4-url found"
 			return mrl
 
@@ -225,7 +238,8 @@ class MyTubeFeedEntry():
 			return mrl
 	
 		token = unquote(mobj.group(1))
-		myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
+		#myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
+		myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s' % (video_id, token)
 		if isHDAvailable is True:
 			mrl = '%s&fmt=%s' % (myurl, '22')
 			print "[MyTube] GOT HD URL: ", mrl
