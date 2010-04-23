@@ -14,7 +14,7 @@
 		<td><b>Duration</b></td>
 		<td><b>Timer</b></td>
 	</tr>
-	<e2:element source="EPGSERVICEWAP" id="sRef"><e2:convert type="web:ListFiller" >
+	<e2:element source="EpgServiceWap" id="sRef,time,endTime"><e2:convert type="web:ListFiller" >
 	&lt;tr>
 		&lt;td><e2:item name="ServiceName" filter="xml"/>&lt;/td>
 		&lt;td><e2:item name="Title" filter="xml"/>&lt;p><e2:item name="Description" filter="xml"/>&lt;/td>   

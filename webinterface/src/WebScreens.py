@@ -159,7 +159,7 @@ class EpgWebScreen(WebScreen):
 		self["EpgBouquet"] = EPG(session, func=EPG.BOUQUET)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
 
-		self["EPGSERVICEWAP"] = EPG(session, func=EPG.SERVICE, endtm=True)
+		self["EpgServiceWap"] = EPG(session, func=EPG.SERVICE, endtm=True)
 
 	def getServiceList(self, sRef):
 		self["ServiceList"].root = sRef
