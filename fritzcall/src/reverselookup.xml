@@ -770,6 +770,14 @@
 				<zipcode>&lt;td class=&quot;dati&quot;&gt;&lt;span [^&gt;]*&gt;[^&lt;]*&lt;/span&gt;&lt;br&gt;([0-9]*)&amp;nbsp;[^&amp;]*[^-]*-[^&lt;]*&lt;</zipcode>
 			</entry>
 		</website>
+		<website name="pronto.it" url="http://www.pronto.it/?q=$NUMBER" prefix="0">
+			<entry>
+				<name swapFirstAndLastName="true">&lt;span class="cognome "&gt;([^&gt;]*)&lt;/span&gt;</name>
+				<street>&lt;span class="via" title="([^"]*)"&gt;</street>
+				<city>&lt;span class="via" title="[^"]*">[^-]*- \d* ([^-&lt;]*)(?:- [^&lt;]*)?&lt;/span&gt;</city>
+				<zipcode>&lt;span class="via" title="[^"]*">[^-]*- (\d*) [^-&lt;]*&lt;/span&gt;</zipcode>
+			</entry>
+		</website>
 		<website name="infobel.com" url="http://www.infobel.com/it/Italy/Inverse.aspx?qPhone=$NUMBER" prefix="0">
 			<entry>
 				<name>&lt;div class="result-item"&gt;&lt;h[1-9]&gt;1. (?:&lt;a href=&quot;[^&quot;]*&quot;&gt;)?([^&lt;]*)(?:&lt;/a&gt;)?&lt;!--[^&lt;]*&lt;/h[1-9]&gt;</name>
@@ -810,7 +818,7 @@
 	<country code="+43">
 		<website name="herold.at (Privat)" url="http://www.herold.at/servlet/at.herold.sp.servlet.SPWPSearchServlet?searchmask=2&amp;phone=$NUMBER" prefix="0">
 			<entry>
-				<name>&lt;h[1-9]&gt;&lt;a href=&quot;[^&quot;]*&quot;(?:\s*class=&quot;bold&quot;)?&gt;([^&lt;]*)&lt;/a&gt;&lt;/h[1-9]&gt;</name>
+				<name>&lt;td class=&quot;last&quot;&gt;&lt;h[1-9]&gt;&lt;a href=&quot;[^&quot;]*&quot;(?:\s*class=&quot;bold&quot;)?&gt;([^&lt;]*)&lt;/a&gt;&lt;/h[1-9]&gt;</name>
 				<street>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?[^,]*,\s*([^&lt;]*)&lt;br /&gt;&lt;/p&gt;</street>
 				<city>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?\d+ ([^,]*),\s*[^&lt;]*&lt;br /&gt;&lt;/p&gt;</city>
 				<zipcode>&lt;div class=&quot;addrF&quot;&gt;&lt;p(?:\sclass=&quot;bold&quot;)?&gt;\s*(?:[^&lt;]+&lt;br/&gt;)?(\d+) [^,]*,\s*[^&lt;]*&lt;br /&gt;&lt;/p&gt;</zipcode>
