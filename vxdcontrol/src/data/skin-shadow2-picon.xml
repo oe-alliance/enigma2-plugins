@@ -141,21 +141,7 @@
 		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" halign="left" position="890,70" render="Label" size="71,20" source="session.FrontendStatus" transparent="1" zPosition="5">
 			<convert type="FrontendInfo">SNRdB</convert>
 		</widget>
-		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" position="890,96" render="FixedLabel" size="100,20" source="session.FrontendInfo" text="DVB-S" transparent="1" zPosition="5">
-			<convert type="FrontendInfo">TYPE</convert>
-			<convert type="ValueRange">0,0</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" position="890,96" render="FixedLabel" size="100,20" source="session.FrontendInfo" text="DVB-C" transparent="1" zPosition="5">
-			<convert type="FrontendInfo">TYPE</convert>
-			<convert type="ValueRange">1,1</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" position="890,96" render="FixedLabel" size="100,20" source="session.FrontendInfo" text="DVB-T" transparent="1" zPosition="5">
-			<convert type="FrontendInfo">TYPE</convert>
-			<convert type="ValueRange">2,2</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>		
+		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" position="890,96" render="vRendMaxTemp" size="121,20" source="global.CurrentTime" transparent="1" zPosition="5"/>	
 		<eLabel backgroundColor="darkgrey" position="890,57" size="14,5" zPosition="1"/>
 		<eLabel backgroundColor="darkgrey" position="906,57" size="14,5" zPosition="1"/>
 		<eLabel backgroundColor="darkgrey" position="922,57" size="14,5" zPosition="1"/>

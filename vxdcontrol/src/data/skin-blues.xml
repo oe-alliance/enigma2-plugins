@@ -140,9 +140,7 @@
 		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" halign="left" position="890,70" render="Label" size="71,20" source="session.FrontendStatus" transparent="1" zPosition="5">
 			<convert type="FrontendInfo">SNRdB</convert>
 		</widget>
-		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" halign="left" position="890,96" render="Label" size="121,20" source="session.FrontendStatus" transparent="1" zPosition="5">
-			<convert type="FrontendInfo">BER</convert>
-		</widget>
+		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" position="890,96" render="vRendMaxTemp" size="121,20" source="global.CurrentTime" transparent="1" zPosition="5"/>
 	</screen>
 
 	<screen backgroundColor="background" flags="wfNoBorder" name="MoviePlayer" position="0,429" size="1024,176" title="MoviePlayer">
