@@ -417,29 +417,14 @@ def main(session, **kwargs):
 	if dvdbackup.working:
 		session.open(DVDBackupProgress)
 	else:
-		# Search for needed files
-		l = []
 		if not fileExists("/usr/bin/dvdbackup"):
-			l.append("ipkg install http://www.lt-forums.org/ali/downloads/dvdbackup_0.4.1-r0_mipsel.ipk")
-		if not fileExists("/usr/bin/mkisofs"):
-			l.append("ipkg install http://www.lt-forums.org/ali/downloads/cdrkit_1.1.8-r0_mipsel.ipk")
-		if not fileExists("/usr/lib/libdvdread.so.3"):
-			l.append("ipkg install http://www.lt-forums.org/ali/downloads/libdvdread3_0.9.6-r0_mipsel.ipk")
-		if len(l):
-			session.openWithCallback(open_main, ConsoleScreen, title=_("Installing..."), cmdlist=l)
+			session.openWithCallback(open_main, ConsoleScreen, title=_("Installing..."), cmdlist=["ipkg install http://www.lt-forums.org/ali/downloads/dvdbackup_0.4.1-r0_mipsel.ipk"])
 		else:
 			session.open(DVDBackupScreen)
 
 def open_main(callback=None):
-	error = False
 	if not fileExists("/usr/bin/dvdbackup"):
-		error = True
-	if not fileExists("/usr/bin/mkisofs"):
-		error = True
-	if not fileExists("/usr/lib/libdvdread.so.3"):
-		error = True
-	if error:
-		message(_("Could not install needed packages!"))
+		message(_("Could not install needed dvdbackup package!"))
 	else:
 		SESSION.open(DVDBackupScreen)
 
