@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Skin" />
+	  </prerequisites>
+          <info language="en">
+                    <author>Vali</author>
+                    <name>Ai.HD skins control</name>
+                    <packagename>enigma2-plugin-extensions-aihdcontrol</packagename>
+                    <shortdescription>First generate your skin-style with the Ai.HD-Control plugin.</shortdescription>
+                    <description>First generate your skin-style with the Ai.HD-Control plugin.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_aihdcontrol.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>Vali</author>
+                    <name>Ai.HD Skins Control</name>
+                    <packagename>enigma2-plugin-extensions-aihdcontrol</packagename>
+		    <shortdescription>Deinen Wunschskin-Style zuerst mit Ai.HD-Control plugin generieren.</shortdescription>
+                    <description>Deinen Wunschskin-Style zuerst mit Ai.HD-Control plugin generieren.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_aihdcontrol.jpg" />		 
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-aihdcontrol" />
+	  </files>
+</default>
