@@ -1,0 +1,8 @@
+PlayPause; $KEY_PLAYPAUSE
+TV; $KEY_TV; LOAD zapp
+RIGHT; $KEY_RIGHT
+LEFT; $KEY_LEFT
+OK; $KEY_OK; GOTO 0
+quickjump; LOAD quickjump
+pvr; LOAD pvr
+<==; LOAD

@@ -58,6 +58,11 @@ autotimer/po/Makefile
 autotimer/src/Makefile
 autotimer/src/webinterface/Makefile
 
+babelzapper/Makefile
+babelzapper/etc/Makefile
+babelzapper/meta/Makefile
+babelzapper/src/Makefile
+
 cdinfo/Makefile
 cdinfo/meta/Makefile
 cdinfo/src/Makefile

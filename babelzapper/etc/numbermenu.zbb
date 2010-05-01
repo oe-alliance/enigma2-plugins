@@ -1,0 +1,12 @@
+manynum; LOAD manynum
+0; $KEY_0; GOTO 12
+1; $KEY_1; GOTO 12
+2; $KEY_2; GOTO 12
+3; $KEY_3; GOTO 12
+4; $KEY_4; GOTO 12
+5; $KEY_5; GOTO 12
+6; $KEY_6; GOTO 12
+7; $KEY_7; GOTO 12
+8; $KEY_8; GOTO 12
+9; $KEY_9; GOTO 12
+---; RUN menu

@@ -1,0 +1,7 @@
+5min >; $KEY_3
+7min >; $KEY_6
+5min <; $KEY_1
+7min <; $KEY_4
+30min >; $KEY_9
+30min <; $KEY_7
+---; RUN recplay

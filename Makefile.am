@@ -6,6 +6,7 @@ SUBDIRS = \
 	automatictimerlistcleanup \
 	autoresolution \
 	autotimer \
+	babelzapper \
 	cdinfo \
 	dreamirc \
 	dvdbackup \
