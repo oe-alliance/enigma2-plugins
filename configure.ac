@@ -33,6 +33,12 @@ ac3lipsync/meta/Makefile
 ac3lipsync/po/Makefile
 ac3lipsync/src/Makefile
 
+aihdcontrol/Makefile
+aihdcontrol/meta/Makefile
+aihdcontrol/src/Makefile
+aihdcontrol/src/comp/Makefile
+aihdcontrol/src/data/Makefile
+
 antiscrollbar/Makefile
 antiscrollbar/meta/Makefile
 antiscrollbar/src/Makefile

@@ -1,6 +1,7 @@
 AUTOMAKE_OPTIONS = gnu
 SUBDIRS = \
 	ac3lipsync \
+	aihdcontrol \
 	antiscrollbar \
 	automatictimerlistcleanup \
 	autoresolution \
