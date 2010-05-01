@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DVDBackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-31 16:06+0100\n"
+"POT-Creation-Date: 2010-05-01 09:36+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
@@ -90,20 +90,20 @@ msgstr "Log:"
 msgid "Create iso:"
 msgstr "iso erstellen:"
 
-#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:429
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:421
 msgid "Installing..."
 msgstr "Installiere..."
 
-#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:442
-msgid "Could not install needed packages!"
-msgstr "Konnte die benötigten Pakete nicht installieren!"
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:427
+msgid "Could not install needed dvdbackup package!"
+msgstr "Konnte das benötigte dvdbackup Pakete nicht installieren!"
 
-#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:458
-#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:461
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:443
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:446
 msgid "DVD Backup"
 msgstr "DVD Backup"
 
-#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:461
+#: /home/aliabdul/dream/enigma2-plugins/dvdbackup/src/plugin.py:446
 msgid "Backup your Video-DVD to your harddisk"
 msgstr "Sichert deine Video-DVD auf Festplatte"
 
