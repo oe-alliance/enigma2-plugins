@@ -142,6 +142,7 @@ class XDsetup(ConfigListScreen, Screen):
 	
 	def UpdateComponents(self):
 		system('cp ' + self.komponente + 'vRendVolumeText.py /usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py')
+		system('cp ' + self.komponente + 'vRendMaxTemp.py /usr/lib/enigma2/python/Components/Renderer/vRendMaxTemp.py')
 		system('cp ' + self.komponente + 'vRendChNumber.py /usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py')
 		system('cp ' + self.komponente + 'vRendVideoSize.py /usr/lib/enigma2/python/Components/Renderer/vRendVideoSize.py')
 		system('cp ' + self.komponente + 'vRendMovieDirSize.py /usr/lib/enigma2/python/Components/Renderer/vRendMovieDirSize.py')
@@ -151,6 +152,7 @@ class XDsetup(ConfigListScreen, Screen):
 	def save(self):
 		CompsAreOK = False
 		if fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendChNumber.py") \
+			and fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendMaxTemp.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendVolumeText.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendVideoSize.py") \
 			and fileExists("/usr/lib/enigma2/python/Components/Renderer/vRendMovieDirSize.py") \
