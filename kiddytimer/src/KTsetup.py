@@ -104,8 +104,11 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         if result is None:
             self.cancel()
         elif not result:
-            self.session.openWithCallback(self.cancel, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR)
-           
+            self.session.openWithCallback(self.pinCancel, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR)
+    
+    def pinCancel(self, result):
+        self.cancel()
+               
     def keyPositioner(self):
         self.session.open(KiddyTimerPositioner)
 

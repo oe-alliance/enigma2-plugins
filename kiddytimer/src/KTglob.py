@@ -2,7 +2,7 @@ from __init__ import _
 import time
 
 PLUGIN_BASE = "KiddyTimer"
-PLUGIN_VERSION = "0.8b"
+PLUGIN_VERSION = "0.8c"
 
 DAYNAMES= (_("Sunday"),
           _("Monday"),
