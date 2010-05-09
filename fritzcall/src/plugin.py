@@ -132,9 +132,9 @@ def getMountedDevs():
 	def handleMountpoint(loc):
 		# debug("[FritzCall] handleMountpoint: %s" %repr(loc))
 		mp = loc[0]
+		while mp[-1] == '/':
+			mp = mp[:-1]
 		#=======================================================================
-		# while mp[-1] == '/':
-		#	mp = mp[:-1]
 		# if os.path.exists(os.path.join(mp, "PhoneBook.txt")):
 		#	if os.access(os.path.join(mp, "PhoneBook.txt"), os.W_OK):
 		#		desc = ' *'
@@ -151,7 +151,11 @@ def getMountedDevs():
 				   (resolveFilename(SCOPE_MEDIA, "cf"), _("Compact Flash")),
 				   (resolveFilename(SCOPE_MEDIA, "usb"), _("USB Device"))]
 	mountedDevs += map(lambda p: (p.mountpoint, (_(p.description) if p.description else "")), harddiskmanager.getMountedPartitions(True))
-	# print("[FritzCall] getMountedDevs1: %s" %repr(mountedDevs))
+	mediaDir = resolveFilename(SCOPE_MEDIA)
+	for p in os.listdir(mediaDir):
+		if os.path.join(mediaDir, p) not in [path[0] for path in mountedDevs]:
+			mountedDevs.append((os.path.join(mediaDir, p), _("Media directory")))
+	debug("[FritzCall] getMountedDevs1: %s" %repr(mountedDevs))
 	mountedDevs = filter(lambda path: os.path.isdir(path[0]) and os.access(path[0], os.W_OK|os.X_OK), mountedDevs)
 	# put this after the write/executable check, that is far too slow...
 	netDir = resolveFilename(SCOPE_MEDIA, "net")
