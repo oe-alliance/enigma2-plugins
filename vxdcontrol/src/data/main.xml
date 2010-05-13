@@ -551,7 +551,19 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 		<widget font="Regular;20" halign="left" position="50,0" render="Label" size="220,50" source="key_red" transparent="1" valign="center" zPosition="1"/>
 		<widget font="Regular;20" halign="left" position="345,0" render="Label" size="220,50" source="key_green" transparent="1" valign="center" zPosition="1"/>
 		<widget font="Regular;20" halign="left" position="630,0" render="Label" size="220,50" source="key_yellow" transparent="1" valign="center" zPosition="1"/>
-		<widget name="list" position="55,65" scrollbarMode="showOnDemand" size="785,280" zPosition="10"/>
+		<widget source="list" render="Listbox" position="55,65" size="785,280" zPosition="10" scrollbarMode="showOnDemand">
+                        <convert type="TemplatedMultiContent"> <!--  iface, name, description, interfacepng, defaultpng, activepng, divpng  -->
+                                 {"template": [
+                                                 MultiContentEntryText(pos = (85, 6), size = (440, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1), # index 1 is the interfacename
+                                                 MultiContentEntryText(pos = (85, 43), size = (440, 20), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, text = 2), # index 2 is the description
+                                                 MultiContentEntryPixmapAlphaTest(pos = (2, 8), size = (54, 54), png = 3), # index 3 is the interface pixmap
+                                                 MultiContentEntryPixmapAlphaTest(pos = (63, 46), size = (15, 16), png = 4), # index 4 is the default pixmap
+                                         ],
+                                 "fonts": [gFont("Regular", 28),gFont("Regular", 20)],
+                                 "itemHeight": 70
+                                 }
+                        </convert>
+                </widget>
 		<widget font="Regular;21" halign="center" position="50,375" render="Label" size="800,60" source="introduction" transparent="1" valign="center" zPosition="10"/>
 	</screen>
 	
