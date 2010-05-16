@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2  - FRITZ!Box\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 19:59+0100\n"
-"PO-Revision-Date: 2010-01-17 04:07+0100\n"
+"POT-Creation-Date: 2010-05-16 03:47+0100\n"
+"PO-Revision-Date: 2010-05-16 03:55+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,192 +18,133 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/fritzcall\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/fritzcall\n"
 
-#. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: keep it short, this is a help text
-msgid "About FritzCall"
-msgstr "Info su FritzCall"
+#: /home/dario/Plugins/fritzcall/src/FritzOutlookCSV.py:93
+#: /home/dario/Plugins/fritzcall/src/FritzOutlookCSV.py:176
+#: /home/dario/Plugins/fritzcall/src/plugin.py:591
+msgid "work"
+msgstr "Ufficio"
 
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Add entry to phonebook"
-msgstr "Aggiungere voce in rubrica"
+#: /home/dario/Plugins/fritzcall/src/FritzOutlookCSV.py:121
+#: /home/dario/Plugins/fritzcall/src/FritzOutlookCSV.py:202
+#: /home/dario/Plugins/fritzcall/src/plugin.py:587
+#: /home/dario/Plugins/fritzcall/src/FritzLDIF.py:100
+#: /home/dario/Plugins/fritzcall/src/FritzLDIF.py:173
+msgid "mobile"
+msgstr "Cellulare"
 
-#. TRANSLATORS: keep it short, this is a button
-msgid "All"
+#: /home/dario/Plugins/fritzcall/src/FritzOutlookCSV.py:123
+#: /home/dario/Plugins/fritzcall/src/FritzOutlookCSV.py:204
+#: /home/dario/Plugins/fritzcall/src/plugin.py:589
+#: /home/dario/Plugins/fritzcall/src/FritzLDIF.py:102
+#: /home/dario/Plugins/fritzcall/src/FritzLDIF.py:175
+msgid "home"
+msgstr "Casa"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:104
+msgid "no"
+msgstr "no"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:104
+msgid "on ring"
+msgstr "su squillo"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:106
+msgid "show nothing"
+msgstr "Nulla"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:106
+msgid "show as list"
+msgstr "Come elenco"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:106
+msgid "show each call"
 msgstr "Tutte"
 
-msgid "All calls"
-msgstr "Tutte le chiamate"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:150
+msgid "Flash"
+msgstr "Flash"
 
-msgid "Append shortcut number"
-msgstr "Aggiungere numero breve"
-
-msgid "Append type of number"
-msgstr "Agg. il tipo di numero (casa,cell.,uff.)"
-
-msgid "Append vanity name"
-msgstr "Aggiungere nome \"Vanity\""
-
-msgid "Areacode to add to calls without one (if necessary)"
-msgstr "Prefisso per le chiamate in uscita (se necessario)"
-
-msgid "Austria"
-msgstr "Austria"
-
-msgid "Automatically add new Caller to PhoneBook"
-msgstr "Ins. autom. nuovo chiamante in rubrica"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Call"
-msgstr "Chiam."
-
-msgid "Call monitoring"
-msgstr "Monitoraggio chiamate"
-
-msgid "Call redirection"
-msgstr "Deviazione chiamate"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Cancel"
-msgstr "Annull."
-
-msgid "Cannot get calls from FRITZ!Box"
-msgstr "Recupero chiamate dalla FRITZ!Box impossibile"
-
-msgid "Cannot get infos from FRITZ!Box"
-msgstr "Recupero informazioni dalla FRITZ!Box impossibile"
-
+#: /home/dario/Plugins/fritzcall/src/plugin.py:151
 msgid "Compact Flash"
 msgstr "work"
 
-msgid "Connected since"
-msgstr "Connesso da"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:152
+msgid "USB Device"
+msgstr "Dispositivo USB"
 
-msgid "Connected to FRITZ!Box!"
-msgstr "Connesso alla FRITZ!Box!"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:157
+msgid "Media directory"
+msgstr "Directory media"
 
-#, python-format
-msgid ""
-"Connecting to FRITZ!Box failed\n"
-" (%s)\n"
-"retrying..."
-msgstr ""
-"Connessione alla FRITZ!Box fallita!\n"
-"(%s)\n"
-"Nuovo tentativo in corso..."
+#: /home/dario/Plugins/fritzcall/src/plugin.py:163
+msgid "Network mount"
+msgstr "Mount di rete"
 
-msgid "Connecting to FRITZ!Box..."
-msgstr "Connessione alla FRITZ!Box in corso..."
+#: /home/dario/Plugins/fritzcall/src/plugin.py:169
+msgid "Germany"
+msgstr "Germania"
 
-#, python-format
-msgid ""
-"Connection to FRITZ!Box! lost\n"
-" (%s)\n"
-"retrying..."
-msgstr ""
-"Connessione alla FRITZ!Box persa!\n"
-"(%s)\n"
-"Nuovo tentativo in corso..."
+#: /home/dario/Plugins/fritzcall/src/plugin.py:170
+msgid "The Netherlands"
+msgstr "Olanda"
 
-msgid "Could not parse FRITZ!Box Phonebook entry"
-msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:171
+msgid "France"
+msgstr "Francia"
 
-msgid "Country"
-msgstr "Nazione"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:172
+msgid "Italy"
+msgstr "Italia"
 
-msgid "DECT phones registered"
-msgstr "Telefoni DECT registrati"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:173
+msgid "Switzerland"
+msgstr "Svizzera"
 
-msgid "Debug"
-msgstr "Debug"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:174
+msgid "Austria"
+msgstr "Austria"
 
-#. TRANSLATORS: keep it short, this is a button
-msgid "Delete"
-msgstr "Cancell."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Delete entry"
-msgstr "Cancellare voce"
-
-msgid "Display FRITZ!box-Fon calls on screen"
-msgstr "Visualizzare chiamate telef. sulla TV"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Display all calls"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:182
+msgid "All calls"
 msgstr "Tutte le chiamate"
 
-msgid "Display connection infos"
-msgstr "Mostrare informazioni connessione"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:183
+msgid "Incoming calls"
+msgstr "Chiamate in entrata"
 
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Display incoming calls"
-msgstr "Chiamate in ingresso"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Display missed calls"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:184
+msgid "Missed calls"
 msgstr "Chiamate perse"
 
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Display outgoing calls"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:185
+msgid "Outgoing calls"
 msgstr "Chiamate in uscita"
 
-msgid "Do what?"
-msgstr "Che fare?"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:319
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2863
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2894
+msgid "About FritzCall"
+msgstr "Info su FritzCall"
 
-#, python-format
-msgid ""
-"Do you really want to delete entry for\n"
-"\n"
-"%(number)s\n"
-"\n"
-"%(name)s?"
-msgstr ""
-"Cancellare la voce\n"
-"\n"
-"%(number)s\n"
-"\n"
-"%(name)s?"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:361
+msgid "login"
+msgstr "Login"
 
-#. TRANSLATORS: keep it short, this is a button
-msgid "Edit"
-msgstr "Mod."
+#: /home/dario/Plugins/fritzcall/src/plugin.py:443
+msgid "login verification"
+msgstr "Verifica login"
 
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Edit selected entry"
-msgstr "Mod. voce selezionata"
-
-msgid "Enter Search Terms"
-msgstr "Inserire criteri di ricerca"
-
-msgid "Entry incomplete."
-msgstr "Voce incompleta."
-
-msgid "Extension number to initiate call on"
-msgstr "Numero apparecchio su cui indirizzare la chiamata"
-
-#, python-format
-msgid "FRITZ!Box - Could not load calls: %s"
-msgstr "FRITZ!Box - Impossibile caricare le chiamate: %s"
-
-#, python-format
-msgid "FRITZ!Box - Could not load phonebook: %s"
-msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"
-
-#, python-format
-msgid "FRITZ!Box - Dialling failed: %s"
-msgstr "FRITZ!Box - Composizione fallita: %s"
-
-#, python-format
-msgid "FRITZ!Box - Error getting blacklist: %s"
-msgstr "FRITZ!Box - Errore in recupero blacklist: %s"
-
-#, python-format
-msgid "FRITZ!Box - Error getting status: %s"
-msgstr "FRITZ!Box - Errore in recupero stato: %s"
-
+#: /home/dario/Plugins/fritzcall/src/plugin.py:448
+#: /home/dario/Plugins/fritzcall/src/plugin.py:688
 #, python-format
 msgid "FRITZ!Box - Error logging in: %s"
 msgstr "FRITZ!Box - Errore in esecuzione log: %s"
 
+#: /home/dario/Plugins/fritzcall/src/plugin.py:452
+msgid "login ok"
+msgstr "Login Ok"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:462
 #, python-format
 msgid ""
 "FRITZ!Box - Error logging in: %s\n"
@@ -212,36 +153,314 @@ msgstr ""
 "FRITZ!Box - Errore in esecuzione log: %s\n"
 "Il plugin verrà disabilitato."
 
+#: /home/dario/Plugins/fritzcall/src/plugin.py:484
 #, python-format
 msgid "FRITZ!Box - Error logging out: %s"
 msgstr "FRITZ!Box - Errore in esecuzione log: %s"
 
-#, python-format
-msgid "FRITZ!Box - Error resetting: %s"
-msgstr "FRITZ!Box - Errore in reset: %s"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:594
+#: /home/dario/Plugins/fritzcall/src/plugin.py:616
+msgid "Shortcut"
+msgstr "Numero breve"
 
-#, python-format
-msgid "FRITZ!Box - Failed changing Mailbox: %s"
-msgstr "FRITZ!Box - Cambiamento casella di posta fallito: %s"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:596
+#: /home/dario/Plugins/fritzcall/src/plugin.py:618
+msgid "Vanity"
+msgstr "\"Vanity\""
 
+#: /home/dario/Plugins/fritzcall/src/plugin.py:631
+msgid "Could not parse FRITZ!Box Phonebook entry"
+msgstr "Impossibile analizzare la voce nella Rubrica della FRITZ!Box!"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:635
+#, python-format
+msgid "FRITZ!Box - Could not load phonebook: %s"
+msgstr "FRITZ!Box - Impossibile caricare la rubrica: %s"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:692
+msgid "preparing"
+msgstr "Preparazione in corso"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:703
+msgid "finishing"
+msgstr "Quasi terminato..."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:733
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2008
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3068
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3071
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3112
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3343
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3433
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3456
+msgid "UNKNOWN"
+msgstr "SCONOSCIUTO"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:740
+msgid "done"
+msgstr "Fatto"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:744
+msgid ""
+"You need to set the password of the FRITZ!Box\n"
+"in the configuration dialog to display calls\n"
+"\n"
+"It could be a communication issue, just try again."
+msgstr ""
+"E' necessario impostare la password della FRITZ!Box\n"
+"nel menu configurazione per mostrare le chiamate.\n"
+"\n"
+"Potrebbe trattarsi di un problema di comunicazione, riprovare."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:755
+msgid "done, using last list"
+msgstr "Fatto, sarà usata l'ultimo elenco"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:814
+#, python-format
+msgid "FRITZ!Box - Could not load calls: %s"
+msgstr "FRITZ!Box - Impossibile caricare le chiamate: %s"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:858
+#, python-format
+msgid "FRITZ!Box - Dialling failed: %s"
+msgstr "FRITZ!Box - Composizione fallita: %s"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:904
 #, python-format
 msgid "FRITZ!Box - Failed changing WLAN: %s"
 msgstr "FRITZ!Box - Cambiamento WLAN fallito: %s"
 
-msgid "FRITZ!Box FON address (Name or IP)"
-msgstr "FRITZ!Box FON - Indirizzo (nome o IP)"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:970
+#, python-format
+msgid "FRITZ!Box - Failed changing Mailbox: %s"
+msgstr "FRITZ!Box - Cambiamento casella di posta fallito: %s"
 
-#. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: keep it short, this is a help text
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1252
+#, python-format
+msgid "FRITZ!Box - Error getting status: %s"
+msgstr "FRITZ!Box - Errore in recupero stato: %s"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1300
+#, python-format
+msgid "FRITZ!Box - Error resetting: %s"
+msgstr "FRITZ!Box - Errore in reset: %s"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1350
+#, python-format
+msgid "FRITZ!Box - Error getting blacklist: %s"
+msgstr "FRITZ!Box - Errore in recupero blacklist: %s"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1535
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1589
+msgid "Reset"
+msgstr "Reset"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1537
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1587
+msgid "Toggle WLAN"
+msgstr "Commutare WLAN"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1541
+msgid "Toggle Mailbox"
+msgstr "Comm. casella"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1557
+msgid "Toggle all mailboxes"
+msgstr "Comm. tutte le caselle"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1559
+msgid "Toggle 1. mailbox"
+msgstr "Comm. casella 1."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1561
+msgid "Toggle 2. mailbox"
+msgstr "Comm. casella 2."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1563
+msgid "Toggle 3. mailbox"
+msgstr "Comm. casella 3."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1565
+msgid "Toggle 4. mailbox"
+msgstr "Comm. casella 4."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1567
+msgid "Toggle 5. mailbox"
+msgstr "Comm. casella 5."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1568
+msgid "Mailbox"
+msgstr "Casella di posta"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1583
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1585
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1910
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2491
+msgid "Quit"
+msgstr "Uscire"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1591
+msgid "Refresh status"
+msgstr "Aggiornare lo stato"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1593
+msgid "Getting status from FRITZ!Box Fon..."
+msgstr "Recupero stato dalla FRITZ!Box Fon in corso..."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1626
+msgid "Call redirection"
+msgstr "Deviazione chiamate"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1636
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2865
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2892
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3573
 msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Fon - Stato"
 
-msgid "Filter also list of calls"
-msgstr "Filtrare anche gli elenchi chiamate"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1653
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1676
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1702
+msgid "Status not available"
+msgstr "Stato non disponibile"
 
-msgid "Flash"
-msgstr "Flash"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1657
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1659
+msgid "IP Address:"
+msgstr "Indirizzo IP:"
 
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1657
+msgid "Connected since"
+msgstr "Connesso da"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1686
+msgid "not encrypted"
+msgstr "non codificato"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1688
+msgid "encrypted"
+msgstr "codificato"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1691
+msgid "no device active"
+msgstr "Nessun dispositivo attivo"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1693
+msgid "one device active"
+msgstr "Un dispositivo attivo"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1695
+msgid "devices active"
+msgstr "Dispositivi attivi"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1711
+msgid "No mailbox active"
+msgstr "Nessuna casella di posta attiva"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1722
+msgid "One mailbox active"
+msgstr "Una casella di posta attiva"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1724
+msgid "mailboxes active"
+msgstr "caselle di posta attive"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1730
+msgid "No DECT phone registered"
+msgstr "Nessun telefono DECT registrato"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1733
+msgid "One DECT phone registered"
+msgstr "Un telefono DECT registrato"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1735
+msgid "DECT phones registered"
+msgstr "Telefoni DECT registrati"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1740
+msgid "Software fax active"
+msgstr "Fax software attivo"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1746
+msgid "No call redirection active"
+msgstr "Nessuna deviazione chiamate attiva"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1751
+msgid "One call redirection active"
+msgstr "Una deviazione chiamate attiva"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1753
+msgid "call redirections active"
+msgstr "deviazione chiamate attiva"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1830
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1927
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2859
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3571
+msgid "Phone calls"
+msgstr "Ch. telef."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1890
+msgid "All"
+msgstr "Tutte"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1892
+msgid "Missed"
+msgstr "Ch. perse"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1894
+msgid "Incoming"
+msgstr "In Entr."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1896
+msgid "Outgoing"
+msgstr "In uscita"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1908
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2489
+msgid "Show details of entry"
+msgstr "Mostrare dettagli voce"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1912
+msgid "Display all calls"
+msgstr "Tutte le chiamate"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1914
+msgid "Display missed calls"
+msgstr "Chiamate perse"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1916
+msgid "Display incoming calls"
+msgstr "Chiamate in ingresso"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1918
+msgid "Display outgoing calls"
+msgstr "Chiamate in uscita"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1920
+#: /home/dario/Plugins/fritzcall/src/plugin.py:1983
+msgid "Getting calls from FRITZ!Box..."
+msgstr "Recupero chiamate dalla FRITZ!Box in corso"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2038
+msgid "Lookup"
+msgstr "Lookup"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2040
+msgid "Call"
+msgstr "Chiam."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2042
+msgid "Save"
+msgstr "Salvare"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2065
+msgid "Do what?"
+msgstr "Che fare?"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2075
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3171
 #, python-format
 msgid ""
 "Found picture\n"
@@ -256,31 +475,277 @@ msgstr ""
 "\n"
 "Impossibile caricarla. Il formato deve esserecpng, 8 bit."
 
-msgid "France"
-msgstr "Francia"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2131
+msgid "Reverse searching..."
+msgstr "Ricerca identificativo chiamante..."
 
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2135
+msgid "Searching in Outlook export..."
+msgstr "Ricerca in Outlook  export..."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2142
+msgid "Searching in LDIF..."
+msgstr "Ricerca in LDIF..."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2154
+msgid "No result from reverse lookup"
+msgstr "Ricerca identificativo chiamante: nessun risultato!"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2156
+msgid "No result from Outlook export"
+msgstr "Ricerca in Outlook  export: nessun risultato!"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2158
+msgid "No result from LDIF"
+msgstr "Ricerca in LDIF: nessun risultato!"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2417
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2510
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2861
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3572
+msgid "Phonebook"
+msgstr "Rubrica"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2471
+msgid "Delete"
+msgstr "Cancell."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2473
+msgid "New"
+msgstr "Nuovo"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2475
+msgid "Edit"
+msgstr "Mod."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2477
+msgid "Search"
+msgstr "Ricerca"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2493
+msgid "Delete entry"
+msgstr "Cancellare voce"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2495
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2654
+msgid "Add entry to phonebook"
+msgstr "Aggiungere voce in rubrica"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2497
+msgid "Edit selected entry"
+msgstr "Mod. voce selezionata"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2499
+msgid "Search (case insensitive)"
+msgstr "Ricerca (non distingue Maiusc-minusc)"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2577
+#, python-format
+msgid ""
+"Do you really want to delete entry for\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+msgstr ""
+"Cancellare la voce\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2581
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2598
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2701
+msgid "No entry selected"
+msgstr "Nessuna voce selezionata"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2632
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2855
+msgid "Cancel"
+msgstr "Annull."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2634
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2857
+msgid "OK"
+msgstr "Ok"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2649
+msgid "Name"
+msgstr "Nome"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2650
+msgid "Number"
+msgstr "Numero"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2662
+msgid "Entry incomplete."
+msgstr "Voce incompleta."
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2711
+msgid "Enter Search Terms"
+msgstr "Inserire criteri di ricerca"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2711
+msgid "Search phonebook"
+msgstr "Ricerca su rubrica"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2783
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2901
 msgid "FritzCall Setup"
 msgstr "Configurazione FritzCall"
 
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2850
+msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
+msgstr "Per abilitare il monitoraggio sulla FRITZ!Box comporre #96*5*!"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2880
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2890
+msgid "quit"
+msgstr "Uscire"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2882
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2888
+msgid "save and quit"
+msgstr "Salvare e uscire"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2884
+msgid "display calls"
+msgstr "Tutte le chiamate"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2886
+msgid "display phonebook"
+msgstr "Mostrare rubrica"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2915
+msgid "Call monitoring"
+msgstr "Monitoraggio chiamate"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2917
+msgid "FRITZ!Box FON address (Name or IP)"
+msgstr "FRITZ!Box FON - Indirizzo (nome o IP)"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2919
+msgid "Show after Standby"
+msgstr "Mostrare chiamate dopo lo standby"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2921
+msgid "Show only calls for specific MSN"
+msgstr "Mostrare solo le chiamate per MSN specifico"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2923
+msgid "MSN to show (separated by ,)"
+msgstr "MSN da mostrare (separare con ,)"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2924
+msgid "Filter also list of calls"
+msgstr "Filtrare anche gli elenchi chiamate"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2925
+msgid "Mute on call"
+msgstr "Mute su Chiamata"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2927
+msgid "Show Outgoing Calls"
+msgstr "Mostrare le chiamate in uscita"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2929
+msgid "Areacode to add to calls without one (if necessary)"
+msgstr "Prefisso per le chiamate in uscita (se necessario)"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2930
+msgid "Timeout for Call Notifications (seconds)"
+msgstr "Ritardo notifica chiamate (secondi)"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2931
+msgid "Reverse Lookup Caller ID (select country below)"
+msgstr "Identificativo chiamante (selezionare il Paese!)"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2933
+msgid "Country"
+msgstr "Nazione"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2936
+msgid "Password Accessing FRITZ!Box"
+msgstr "Password di accesso alla FRITZ!Box"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2937
+msgid "Extension number to initiate call on"
+msgstr "Numero apparecchio su cui indirizzare la chiamata"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2938
+msgid "Read PhoneBook from FRITZ!Box"
+msgstr "Caricare la rubrica dalla FRITZ!Box"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2940
+msgid "Append type of number"
+msgstr "Agg. il tipo di numero (casa,cell.,uff.)"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2941
+msgid "Append shortcut number"
+msgstr "Aggiungere numero breve"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2942
+msgid "Append vanity name"
+msgstr "Aggiungere nome \"Vanity\""
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2944
+msgid "Use internal PhoneBook"
+msgstr "Usare la rubrica interna"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2960
+msgid "PhoneBook Location"
+msgstr "Posizione rubrica"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2962
+msgid "Automatically add new Caller to PhoneBook"
+msgstr "Ins. autom. nuovo chiamante in rubrica"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2964
+msgid "Strip Leading 0"
+msgstr "Sopprimere \"0\" iniziali"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2967
 msgid "Full screen display"
 msgstr "Mostrare a tutto schermo"
 
-msgid "Germany"
-msgstr "Germania"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2968
+msgid "Display connection infos"
+msgstr "Mostrare informazioni connessione"
 
-msgid "Getting calls from FRITZ!Box..."
-msgstr "Recupero chiamate dalla FRITZ!Box in corso"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2969
+msgid "Debug"
+msgstr "Debug"
 
-msgid "Getting status from FRITZ!Box Fon..."
-msgstr "Recupero stato dalla FRITZ!Box Fon in corso..."
+#: /home/dario/Plugins/fritzcall/src/plugin.py:2999
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3526
+msgid "Cannot get calls from FRITZ!Box"
+msgstr "Recupero chiamate dalla FRITZ!Box impossibile"
 
-msgid "IP Address:"
-msgstr "Indirizzo IP:"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3001
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3008
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3022
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3528
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3535
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3546
+msgid "Plugin not active"
+msgstr "Plugin non attivo"
 
-#. TRANSLATORS: keep it short, this is a button
-msgid "Incoming"
-msgstr "In Entr."
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3010
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3537
+msgid "No phonebook"
+msgstr "Nessuna rubrica"
 
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3020
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3544
+msgid "Cannot get infos from FRITZ!Box"
+msgstr "Recupero informazioni dalla FRITZ!Box impossibile"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3047
+msgid "Last 10 calls:\n"
+msgstr "Ultime 10 chiamate:\n"
+
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3257
 #, python-format
 msgid ""
 "Incoming Call on %(date)s from\n"
@@ -297,89 +762,7 @@ msgstr ""
 "---------------------------------------------\n"
 "a: %(phone)s"
 
-msgid "Incoming calls"
-msgstr "Chiamate in entrata"
-
-msgid "Italy"
-msgstr "Italia"
-
-msgid "Last 10 calls:\n"
-msgstr "Ultime 10 chiamate:\n"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Lookup"
-msgstr "Lookup"
-
-msgid "MSN to show (separated by ,)"
-msgstr "MSN da mostrare (separare con ,)"
-
-msgid "Mailbox"
-msgstr "Casella di posta"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Missed"
-msgstr "Ch. perse"
-
-msgid "Missed calls"
-msgstr "Chiamate perse"
-
-msgid "Mute on call"
-msgstr "Mute su Chiamata"
-
-msgid "Name"
-msgstr "Nome"
-
-msgid "Network mount"
-msgstr ""
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "New"
-msgstr "Nuovo"
-
-msgid "No DECT phone registered"
-msgstr "Nessun telefono DECT registrato"
-
-msgid "No call redirection active"
-msgstr "Nessuna deviazione chiamate attiva"
-
-msgid "No entry selected"
-msgstr "Nessuna voce selezionata"
-
-msgid "No mailbox active"
-msgstr "Nessuna casella di posta attiva"
-
-msgid "No phonebook"
-msgstr "Nessuna rubrica"
-
-msgid "No result from LDIF"
-msgstr "Ricerca in LDIF: nessun risultato!"
-
-msgid "No result from Outlook export"
-msgstr "Ricerca in Outlook  export: nessun risultato!"
-
-msgid "No result from reverse lookup"
-msgstr "Ricerca identificativo chiamante: nessun risultato!"
-
-msgid "Number"
-msgstr "Numero"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "OK"
-msgstr "Ok"
-
-msgid "One DECT phone registered"
-msgstr "Un telefono DECT registrato"
-
-msgid "One call redirection active"
-msgstr "Una deviazione chiamate attiva"
-
-msgid "One mailbox active"
-msgstr "Una casella di posta attiva"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Outgoing"
-msgstr "In uscita"
-
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3259
 #, python-format
 msgid ""
 "Outgoing Call on %(date)s to\n"
@@ -396,246 +779,46 @@ msgstr ""
 "---------------------------------------------\n"
 "da: %(phone)s"
 
-msgid "Outgoing calls"
-msgstr "Chiamate in uscita"
-
-msgid "Password Accessing FRITZ!Box"
-msgstr "Password di accesso alla FRITZ!Box"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Phone calls"
-msgstr "Ch. telef."
-
-msgid "PhoneBook Location"
-msgstr "Posizione rubrica"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Phonebook"
-msgstr "Rubrica"
-
-msgid "Plugin not active"
-msgstr "Plugin non attivo"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Quit"
-msgstr "Uscire"
-
-msgid "Read PhoneBook from FRITZ!Box"
-msgstr "Caricare la rubrica dalla FRITZ!Box"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Refresh status"
-msgstr "Aggiornare lo stato"
-
-#. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Reset"
-msgstr "Reset"
-
-msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Identificativo chiamante (selezionare il Paese!)"
-
-msgid "Reverse searching..."
-msgstr "Ricerca identificativo chiamante..."
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Save"
-msgstr "Salvare"
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Search"
-msgstr "Ricerca"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Search (case insensitive)"
-msgstr "Ricerca (non distingue Maiusc-minusc)"
-
-msgid "Search phonebook"
-msgstr "Ricerca su rubrica"
-
-msgid "Searching in LDIF..."
-msgstr "Ricerca in LDIF..."
-
-msgid "Searching in Outlook export..."
-msgstr "Ricerca in Outlook  export..."
-
-msgid "Shortcut"
-msgstr "Numero breve"
-
-msgid "Show Outgoing Calls"
-msgstr "Mostrare le chiamate in uscita"
-
-msgid "Show after Standby"
-msgstr "Mostrare chiamate dopo lo standby"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Show details of entry"
-msgstr "Mostrare dettagli voce"
-
-msgid "Show only calls for specific MSN"
-msgstr "Mostrare solo le chiamate per MSN specifico"
-
-msgid "Software fax active"
-msgstr "Fax software attivo"
-
-msgid "Status not available"
-msgstr "Stato non disponibile"
-
-msgid "Strip Leading 0"
-msgstr "Sopprimere \"0\" iniziali"
-
-msgid "Switzerland"
-msgstr "Svizzera"
-
-msgid "The Netherlands"
-msgstr "Olanda"
-
-msgid "Timeout for Call Notifications (seconds)"
-msgstr "Ritardo notifica chiamate (secondi)"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle 1. mailbox"
-msgstr "Comm. casella 1."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle 2. mailbox"
-msgstr "Comm. casella 2."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle 3. mailbox"
-msgstr "Comm. casella 3."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle 4. mailbox"
-msgstr "Comm. casella 4."
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle 5. mailbox"
-msgstr "Comm. casella 5."
-
-#. TRANSLATORS: keep it short, this is a button
-msgid "Toggle Mailbox"
-msgstr "Comm. casella"
-
-#. TRANSLATORS: keep it short, this is a button
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle WLAN"
-msgstr "Commutare WLAN"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "Toggle all mailboxes"
-msgstr "Comm. tutte le caselle"
-
-msgid "UNKNOWN"
-msgstr "SCONOSCIUTO"
-
-msgid "USB Device"
-msgstr "Dispositivo USB"
-
-msgid "Use internal PhoneBook"
-msgstr "Usare la rubrica interna"
-
-msgid "Vanity"
-msgstr "\"Vanity\""
-
-msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr "Per abilitare il monitoraggio sulla FRITZ!Box comporre #96*5*!"
-
-msgid ""
-"You need to set the password of the FRITZ!Box\n"
-"in the configuration dialog to display calls\n"
-"\n"
-"It could be a communication issue, just try again."
-msgstr ""
-"E' necessario impostare la password della FRITZ!Box\n"
-"nel menu configurazione per mostrare le chiamate.\n"
-"\n"
-"Potrebbe trattarsi di un problema di comunicazione, riprovare."
-
-msgid "call redirections active"
-msgstr "deviazione chiamate attiva"
-
-msgid "devices active"
-msgstr "Dispositivi attivi"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "display calls"
-msgstr "Tutte le chiamate"
-
-#. TRANSLATORS: keep it short, this is a help text
-msgid "display phonebook"
-msgstr "Mostrare rubrica"
-
-msgid "done"
-msgstr "Fatto"
-
-msgid "done, using last list"
-msgstr "Fatto, sarà usata l'ultimo elenco"
-
-msgid "encrypted"
-msgstr "codificato"
-
-msgid "finishing"
-msgstr "Quasi terminato..."
-
-msgid "home"
-msgstr "Casa"
-
-msgid "login"
-msgstr "Login"
-
-msgid "login ok"
-msgstr "Login Ok"
-
-msgid "login verification"
-msgstr "Verifica login"
-
-msgid "mailboxes active"
-msgstr "caselle di posta attive"
-
-msgid "mobile"
-msgstr "Cellulare"
-
-msgid "no"
-msgstr "no"
-
-msgid "no device active"
-msgstr "Nessun dispositivo attivo"
-
-msgid "not encrypted"
-msgstr "non codificato"
-
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3432
 msgid "number suppressed"
 msgstr "numero mascherato"
 
-msgid "on ring"
-msgstr "su squillo"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3468
+msgid "Connecting to FRITZ!Box..."
+msgstr "Connessione alla FRITZ!Box in corso..."
 
-msgid "one device active"
-msgstr "Un dispositivo attivo"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3473
+msgid "Connected to FRITZ!Box!"
+msgstr "Connesso alla FRITZ!Box!"
 
-msgid "preparing"
-msgstr "Preparazione in corso"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3485
+#, python-format
+msgid ""
+"Connection to FRITZ!Box! lost\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Connessione alla FRITZ!Box persa!\n"
+"(%s)\n"
+"Nuovo tentativo in corso..."
 
-#. TRANSLATORS: keep it short, this is a help text
-msgid "quit"
-msgstr "Uscire"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3493
+#, python-format
+msgid ""
+"Connecting to FRITZ!Box failed\n"
+" (%s)\n"
+"retrying..."
+msgstr ""
+"Connessione alla FRITZ!Box fallita!\n"
+"(%s)\n"
+"Nuovo tentativo in corso..."
 
-#. TRANSLATORS: keep it short, this is a help text
-msgid "save and quit"
-msgstr "Salvare e uscire"
+#: /home/dario/Plugins/fritzcall/src/plugin.py:3570
+msgid "Display FRITZ!box-Fon calls on screen"
+msgstr "Visualizzare chiamate telef. sulla TV"
 
-msgid "show as list"
-msgstr "Come elenco"
+#: /home/dario/Plugins/fritzcall/src/FritzLDIF.py:70
+#: /home/dario/Plugins/fritzcall/src/FritzLDIF.py:148
+msgid "business"
+msgstr "Affari"
 
-msgid "show each call"
-msgstr "Tutte"
-
-msgid "show nothing"
-msgstr "Nulla"
-
-msgid "work"
-msgstr "Ufficio"
-
-#~ msgid "business"
-#~ msgstr "Affari"
