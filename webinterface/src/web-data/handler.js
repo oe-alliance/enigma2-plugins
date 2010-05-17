@@ -1,33 +1,18 @@
-/**
- * AbstractContentHandler
- * 
- * Abstract Class for "AbstractContentHandler" Classes 
- * A Content handler is a class that provides content for the webpage 
- * e.g. a list of channels, or a list of recordings and/or is able of
- * doing the handling of all events for that content (e.g. deleting a recording)
- */
-
 var AbstractContentHandler = Class.create({
-	/**
-	 * initialize
-	 * Default constructor
-	 * Parameters:
-	 * @tpl - Name of the template to use
-	 * @url - name of the url to use for requests
-	 * @target - target html id for the content
-	 * @onFinished - an array of functions that should be called after "this.show()" has finished
-	 */
-	initialize: function(tpl, url, target, onFinished){
+	initialize: function(tpl, target, onFinished){
 		this.tpl = tpl;
-		this.url = url;
 		this.target = target;
-		this.request = '';
 		this.onFinished = onFinished;
-		this.ajaxload = false;
-		this.parms = {};
-		this.refresh = false;
 		this.eventsRegistered = false;
+		this.provider = null;
+		this.ajaxload = false;
 	},
+	
+	load: function(parms, fnc){
+		this.requestStarted();
+		this.provider.load(parms, fnc);
+	},	
+	
 	
 	/**
 	 * requestStarted
@@ -48,166 +33,6 @@ var AbstractContentHandler = Class.create({
 	},
 	
 	//TODO insert renderTpl, processTpl & Co. here or somewhere else... (maybe a separate class?)
-	
-	/**
-	 * getXML
-	 * Converts the incoming transport result into a DOM object
-	 * Parameters:
-	 * @transport - the xmlhttp transport object
-	 * 
-	 **/
-	getXML: function(transport){
-		var xmlDoc = "";
-
-		if(window.ActiveXObject){ // we're on IE
-			xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-			xmlDoc.async="false";
-			xmlDoc.loadXML(transport.responseText);
-		} else { //we're not on IE
-			if (!window.google || !google.gears){
-				xmlDoc = transport.responseXML;
-			} else { //no responseXML on gears
-				xmlDoc = (new DOMParser()).parseFromString(transport.responseText, "text/xml");
-			}
-		}
-
-		return xmlDoc;
-	},
-	
-	/**
-	 * renderXML
-	 * renders the XML and returns what's required by this.show();
-	 */
-	renderXML: function(xml){
-		debug('[AbstractContentHandler] ERROR: renderXML not implemented in derived class!');
-		return {};
-	},
-	
-	/**
-	 * callback
-	 * The default function that is being called for the onSuccess event of this.load();
-	 * Parameters:
-	 * @transport - the xmlhttp transport object
-	 **/
-	callback: function(transport){
-		var data = this.renderXML(this.getXML(transport));
-		this.show(data);
-	},
-	
-	/**
-	 * errorback
-	 * The default function that is being called for the onError event of this.load();
-	 * Parameters
-	 * @transport - the xmlhttp transport object
-	 */
-	errorback: function(transport){
-		var notif = "Request failed for:  " + transport.request.url + "<br>Status: " + transport.status + " " + transport.statusText;
-		notify(notif, false);
-	},
-	
-	/**
-	 * load
-	 * Calls this.getURL 
-	 * Parameters
-	 * @parms - an json object containing  {parameter : value} pairs for the request
-	 * @fnc - function to replace this.callback (which is being called @ onSuccess)
-	 */
-	load: function(parms, fnc){
-		// gears or not that's the question here
-		this.requestStarted();
-		
-		this.parms = parms;
-		if(fnc !== undefined){
-			this.callback = fnc;
-		}
-		
-		this.getUrl(this.url, parms, this.callback.bind(this), this.errorback.bind(this));
-	},
-	
-	/**
-	 * getUrl
-	 * creates a new Ajax.Request
-	 * Parameters:
-	 * @url - the url to fetch
-	 * @parms - an json object containing  {parameter : value} pairs for the request
-	 * @callback - function to call @ onSuccess;
-	 * @errorback - function to call @ onError;
-	 */
-	getUrl: function(url, parms, callback, errorback){
-		if (!window.google || !google.gears){ //no gears
-			try{
-				new Ajax.Request(url,
-						{
-							parameters: parms,
-							asynchronous: true,
-							method: 'GET',
-							requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
-							onException: function(o,e){ throw(e); },				
-							onSuccess: function (transport, json) {						
-								if(callback !== undefined){
-									callback(transport);
-								}
-							}.bind(this),
-							onFailure: function(transport){
-								if(errorback !== undefined){
-									errorback(transport);
-								}
-							}.bind(this),
-							onComplete: this.requestFinished.bind(this)
-						});
-			} catch(e) {
-				debug('[AbstractContentHandler.getUrl] Exception: '+ e);
-			}
-		} else { //we're on gears!
-			try{
-				url = url + "?" + $H(parms).toQueryString();
-				
-				var request = google.gears.factory.create('beta.httprequest');
-				request.open('GET', url);
-	
-	
-				request.onreadystatechange = function(){				
-					if(request.readyState == 4){
-						if(request.status == 200){
-							if( callback !== undefined ){
-								callback(request);
-							}
-						} else {
-							this.errorback(request);
-						}
-					}
-				}.bind(this);
-				request.send();
-			} catch(e) {
-				debug('[AbstractContentHandler.getUrl] Exception: '+ e);
-			}
-		}
-	},
-	
-	registerEvents : function(){
-		debug('[AbstractContentHandler] WARNING: registerEvents not implemented in derived class!');
-	},
-	
-	/**
-	 * finished
-	 * Calls all functions this.onFinished contains this.registerEvents
-	 * Is usually called after this.show() has finished
-	 */
-	finished : function(){
-		if(!this.eventsRegistered){
-			this.registerEvents();
-			this.eventsRegistered = true;
-		}
-		
-		if(this.onFinished !== undefined){
-			for(var i = 0; i < this.onFinished.length; i++){
-				var fnc = this.onFinished[i];
-				if(typeof(fnc) === 'function'){
-					fnc();
-				}
-			}
-		}
-	},
 	
 	/**
 	 * show
@@ -245,29 +70,6 @@ var AbstractContentHandler = Class.create({
 	},
 	
 	/**
-	 * reload
-	 * rexecute this.load() using this.parms and set this.refresh to false
-	 * Parameters:
-	 * @fnc - function to call @ onSuccess (passed through to this.load() )
-	 */	
-	reload: function(fnc){
-		this.refresh = false;
-		this.load(this.parms, fnc);
-	},
-	
-	/**
-	 * simpleResultQuery
-	 * Call any URL that returns a SimpleXMLResult with this.simpleResultCallback for
-	 * @onSuccess
-	 * Parameters:
-	 * @url - the url to call
-	 * @parms - an json object containing  {parameter : value} pairs for the request
-	 */
-	simpleResultQuery: function(url, parms){
-		this.getUrl(url, parms, this.simpleResultCallback.bind(this));		
-	},
-	
-	/**
 	 * simpleResultCallback
 	 * Callback for @ onSuccess of this.simpleResultQuery()
 	 * if this.refresh == true this.reload is being called
@@ -275,76 +77,79 @@ var AbstractContentHandler = Class.create({
 	 * @transport - the xmlhttp transport object
 	 */
 	simpleResultCallback: function(transport){
-		var result = this.simpleResultRenderXML(this.getXML(transport));
-		this.notify(result.getStateText(), result.getState());
-		
-		if(this.refresh){
-			this.reload();
+		this.provider.simpleResultCallback(transport, this.showSimpleResult.bind(this));		
+	},
+	
+	showSimpleResult: function(result){
+		this.notify(result.getStateText(), result.getState());		
+	},
+	
+	registerEvents : function(){
+		debug('[AbstractContentHandler] WARNING: registerEvents not implemented in derived class!');
+	},
+	
+	/**
+	 * finished
+	 * Calls all functions this.onFinished contains this.registerEvents
+	 * Is usually called after this.show() has finished
+	 */
+	finished : function(){
+		if(!this.eventsRegistered){
+			this.registerEvents();
+			this.eventsRegistered = true;
 		}
 		
-	},
-	
-	/**
-	 * simpleResultRenderXML
-	 * Renders the result of this.simpleResultQuery() and returns an SimpleXMLResult object for it
-	 * Parameters:
-	 * @xml - a DOM object containing the XML to render
-	 */
-	simpleResultRenderXML: function(xml){
-		var result = new SimpleXMLResult(xml);
-		return result;
+		if(this.onFinished !== undefined){
+			for(var i = 0; i < this.onFinished.length; i++){
+				var fnc = this.onFinished[i];
+				if(typeof(fnc) === 'function'){
+					fnc();
+				}
+			}
+		}
 	}
-
-	
 });
 
-/**
- * ServiceListHandler
- * ContentHandler for service lists.
- */
 var ServiceListHandler = Class.create(AbstractContentHandler, {
-	/**
-	 * initialize
-	 * Parameters:
-	 * @target: the html target id
-	 * @epgp: Instance of ServiceListEpgProvider to show epgnow/next information
-	 * @subsp: Instance of ServiceListSubserviceProvider to show subservices 
-	 */
-	initialize: function($super, target, epgp, subsp){
-		$super('tplServiceList', URL.getservices, 
-				target, [this.getNowNext.bind(this),this.getSubservices.bind(this)] );
+	initialize: function($super, target){
+		$super('tplServiceList', target, [this.getNowNext.bind(this),this.getSubservices.bind(this)]);
+		//TODO ServiceListEpg-/ServiceListSubserviceHandler
+		this.provider = new ServiceListProvider(this.show.bind(this));
+		this.epgHandler = new ServiceListEpgHandler();
+		this.subServiceHandler = new ServiceListSubserviceHandler();
 		
-		this.epgProvider = epgp;
-		this.subServiceProvider = subsp;
 		this.ajaxload = true;
 	},
-	
-	/**
-	 * renderXML
-	 * See the description in AbstractContentHandler
-	 */
-	renderXML: function(xml){
-		var list = new ServiceList(xml).getArray();
-		return {services : list};	
-	},
-	
+		
 	/**
 	 * getNowNext
-	 * calls this.epgProvider.getNowNext to show Now/Next epg information
+	 * calls this.epgHandler.getNowNext to show Now/Next epg information
 	 * using this.parms.sRef as the servicereference of the bouquet 
 	 */
 	getNowNext: function(){
-		this.epgProvider.getNowNext({bRef : this.parms.sRef});
+		this.epgHandler.provider.getNowNext({bRef : this.provider.parms.sRef});
 	},
 	
 	/**
 	 * getSubservices
-	 * calls this.subServiceProvider.load() to show Now/Next epg information
+	 * calls this.subServiceHandler.load() to show Now/Next epg information
 	 */
 	getSubservices: function(){
-		this.subServiceProvider.load({});
+		this.subServiceHandler.load({});
 	},
 	
+	/**
+	 * call this to switch to a service
+	 * Parameters:
+	 * @servicereference - the (unescaped) reference to the service that should be shown
+	 */
+	zap: function(ref){
+		this.provider.simpleResultQuery(URL.zap, {sRef : ref}, this.simpleResultCallback.bind(this));
+	
+		//TODO replace this
+		setTimeout(updateItemsLazy, 7000); //reload epg and subservices
+		setTimeout(updateItems, 3000);
+	},
 	
 	registerEvents : function(){
 		var parent = $(this.target);
@@ -380,74 +185,39 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 			}
 		);
 		
-	},
-	
-	/**
-	 * call this to switch to a service
-	 * Parameters:
-	 * @servicereference - the (unescaped) reference to the service that should be shown
-	 */
-	zap: function(ref){
-		this.simpleResultQuery(URL.zap, {sRef : ref});
-	
-		//TODO replace this
-		setTimeout(updateItemsLazy, 7000); //reload epg and subservices
-		setTimeout(updateItems, 3000);
-	}
+	}	
 });
 
-/**
- * ServiceListEpgProvider
- * Handles EPG now/next for a ServiceListHandler
- */
-var ServiceListEpgProvider = Class.create(AbstractContentHandler, {
-	//Constants
-	NOW : 'NOW',
-	NEXT : 'NEXT',
-	
-	/**
-	 * initialize
-	 * See the description in AbstractContentHandler
-	 */	
+var ServiceListEpgHandler  = Class.create(AbstractContentHandler, {
 	initialize: function($super){
-		$super('tplServiceListEPGItem', URL.epgnow);
-		this.type = this.NOW;
-		this.url = URL.epgnow;
-	},
-
-	/**
-	 * renderXML
-	 * See the description in AbstractContentHandler
-	 */
-	renderXML: function(xml){
-		var list = new EPGList(xml).getArray();
-		return list;
+		$super('tplServiceListEPGItem');
+		this.provider = new ServiceListEpgProvider(this.show.bind(this));
 	},
 	
 	/**
 	 * show
 	 * calls this.showItem for each item of @list
 	 * @list - An array of EPGEvents
-	 */
-	show: function(list){
+	 */	
+	show: function(list, type){
 		for(var i = 0; i < list.length; i++){
-			this.showItem(list[i]);
+			this.showItem(list[i], type);
 		}
 		
 		this.finished();
 	},
 	
 	/**
-	 * showItem
 	 * Shows an EPGEvent item in the DOM
 	 * templates.tplServiceListEPGItem needs to be present!
 	 * Parameters:
 	 * @item - The EPGEvent object
 	 */
-	showItem: function(item){
+	//TODO: move showItem outta here
+	showItem: function(item, type){
 		if(item.eventid != ''){
-			var data = { epg : item, nownext: this.type };
-			var id = this.type + item.servicereference;
+			var data = { epg : item, nownext: type };
+			var id = type + item.servicereference;
 	
 			if(templates.tplServiceListEPGItem !== undefined){
 				//TODO move templates.* maybe?!?
@@ -462,86 +232,18 @@ var ServiceListEpgProvider = Class.create(AbstractContentHandler, {
 				element.show();
 			}
 		}
-	},
-	
-	/**
-	 * callback
-	 * custom callback
-	 * Parameters:
-	 * @transport - xmlhttp transport object
-	 */
-	callback: function(transport){
-		var data = this.renderXML(this.getXML(transport));
-		this.show(data);
-		if(this.callbackType !== undefined){
-			this.get(this.callbackType);
-		}
-	},	
-	
-	/**
-	 * getNowNext
-	 * call this.get to show epg-now and epg-next
-	 * Parameters:
-	 * @parms - an json object containing  {parameter : value} pairs for the request
-	 */
-	getNowNext: function(parms){
-		this.parms = parms;
-		this.get(this.NOW, this.NEXT);		
-	},
-	
-	/**
-	 * get
-	 * Load epg information for type and - if set - callbackType 
-	 * (ServiceListEpgProvider.NOW or ServiceListEpgProvider.NEXT)
-	 * Parameters:
-	 * @type - ServiceListEpgProvider.NOW or ServiceListEpgProvider.NEXT
-	 * @callbackType - ServiceListEpgProvider.NOW or ServiceListEpgProvider.NEXT
-	 */
-	get: function(type, callbackType){		
-		this.type = type;
-		//just in case... don't do it twice...
-		if(type != callbackType){
-			this.callbackType = callbackType;
-		}
-		
-		switch(this.type){
-			case this.NOW:
-				this.url = URL.epgnow;
-				break;
-			case this.NEXT:
-				this.url = URL.epgnext;
-				break;
-		}
-		
-		this.load(this.parms);
 	}
 });
 
-/**
- * ServiceListSubserviceProvider
- * Handles EPG now/next for a ServiceListHandler
- */
-var ServiceListSubserviceProvider = Class.create(AbstractContentHandler, {
+var ServiceListSubserviceHandler  = Class.create(AbstractContentHandler, {
 	//constants
 	PREFIX : 'SUB',
-
-	/**
-	 * initialize
-	 * See the description in AbstractContentHandler
-	 */		
+		
 	initialize: function($super){
-		$super('tplSubServices', URL.subservices);
+		$super('tplSubServices');
+		this.provider = new ServiceListSubserviceProvider(this.show.bind(this));
 	},
-
-	/**
-	 * renderXML
-	 * See the description in AbstractContentHandler
-	 */		
-	renderXML: function(xml){
-		var list = new ServiceList(xml).getArray();
-		return list;
-	},
-
+	
 	/**
 	 * show
 	 * Show all subervices of a service (if there are any)
@@ -561,30 +263,14 @@ var ServiceListSubserviceProvider = Class.create(AbstractContentHandler, {
 	}
 });
 
-/**
- * MovieListHandler
- * Handles a list of movies including deleting actions
- */
-var MovieListHandler = Class.create(AbstractContentHandler, {		
-	/**
-	 * initialize
-	 * See the description in AbstractContentHandler
-	 */
+var MovieListHandler  = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
-		$super('tplMovieList', URL.movielist, target );
+		$super('tplMovieList', target);
+		this.provider = new MovieListProvider(this.show.bind(this));
 		
 		this.ajaxload = true;
 	},
 	
-	/**
-	 * renderXML
-	 * See the description in AbstractContentHandler
-	 */	
-	renderXML: function(xml){
-		var list = new MovieList(xml).getArray();
-		return {movies : list};
-	},
-
 	/**
 	 * del
 	 * Deletes a movie
@@ -601,11 +287,11 @@ var MovieListHandler = Class.create(AbstractContentHandler, {
 				"Description: " + description + "\n");
 		
 		if(result){
-			debug("[MovieListHandler.del] ok confirm panel"); 
-			this.simpleResultQuery(URL.moviedelete, {sRef : servicereference});			
+			debug("[MovieListProvider.del] ok confirm panel"); 
+			this.provider.simpleResultQuery(URL.moviedelete, {sRef : servicereference}, this.simpleResultCallback.bind(this));			
 		}
 		else{
-			debug("[MovieListHandler.del] cancel confirm panel");
+			debug("[MovieListProvider.del] cancel confirm panel");
 			result = false;
 		}
 		
@@ -614,25 +300,13 @@ var MovieListHandler = Class.create(AbstractContentHandler, {
 	}	
 });
 
-var TimerListHandler = Class.create(AbstractContentHandler, {
-	/**
-	 * initialize
-	 * See the description in AbstractContentHandler
-	 */
+var TimerListHandler  = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
-		$super('tplTimerList', URL.timerlist, target );
+		$super('tplTimerList', target);
+		this.provider = new TimerListProvider(this.show.bind(this));
 		
 		this.ajaxload = true;
-	},
-	
-	/**
-	 * renderXML
-	 * See the description in AbstractContentHandler
-	 */	
-	renderXML: function(xml){
-		var list = new TimerList(xml).getArray();
-		return {timer : list};
-	}
+	}	
 });
 
 var TimerHandler = Class.create(AbstractContentHandler, {	
@@ -649,10 +323,10 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	
 	/**
 	 * initialize
-	 * See the description in AbstractContentHandler
+	 * See the description in AbstractContentProvider
 	 */
 	initialize: function($super, target){
-		$super('tplTimerEdit', URL.timerlist, target );
+		$super('tplTimerEdit', target);
 		
 		this.ajaxload = true;
 	},
@@ -664,7 +338,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 * Most of the data is already there or has to be created.
 	 * 
 	 * Parameters:
-	 * @element - the html element calling the load function ( onclick="TimerHandler.load(this)" )
+	 * @element - the html element calling the load function ( onclick="TimerProvider.load(this)" )
 	 */
 	load : function(element){
 		var parent = element.up('.tListItem');
@@ -824,7 +498,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	
 	/**
 	 * renderXML
-	 * See the description in AbstractContentHandler
+	 * See the description in AbstractContentProvider
 	 */	
 	renderXML: function(xml){
 		var list = new TimerList(xml).getArray();
@@ -832,20 +506,17 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	},
 	
 	registerEvents: function(){
-		$('saveTimer').on('click',
-				function(event, element){
+		$('saveTimer').on('click', function(event, element){
 					this.commitForm('timerEditForm');
 				}.bind(this)
 			);
 		
-		$('month').on('change',
-			function(event, element){			
+		$('month').on('change', function(event, element){			
 				this.reloadDays();
 			}.bind(this)
 		);
 		
-		$('year').on('change',
-			function(event, element){			
+		$('year').on('change', function(event, element){			
 				this.reloadDays();
 			}.bind(this)
 		);
@@ -864,7 +535,10 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 		for(var i = 0; i < items.length; i++){
 			var item = items[i];
 			
-			var attrs = { value : item.value, selected : item.selected };
+			var attrs = { value : item.value };
+			if(item.selected == this.SELECTED){
+				attrs = { value : item.value, selected : item.selected };
+			}
 			var option = new Element('option', attrs).update(item.txt);				
 			
 			element.appendChild(option);
@@ -872,8 +546,9 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	}
 });
 
+
 //create required Instances
-var serviceListHandler = new ServiceListHandler('contentServices',  new ServiceListEpgProvider(), new ServiceListSubserviceProvider());
+var serviceListHandler = new ServiceListHandler('contentServices');
 var movieListHandler = new MovieListHandler('contentMain');
 var timerListHandler = new TimerListHandler('contentMain');
 var timerHandler = new TimerHandler('contentMain');
