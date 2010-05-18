@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 #  Weather Plugin E2
 #
@@ -16,6 +17,9 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
+
+# for localized messages
+from . import _
 
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
 	RT_VALIGN_CENTER
@@ -154,11 +158,10 @@ class WeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 			<widget source="key_red" render="Label" position="0,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="key_green" render="Label" position="140,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="key_blue" render="Label" position="420,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		</screen>"""
+		</screen>""" % _("WeatherPlugin: Edit Entry")
 
 	def __init__(self, session, entry):
 		Screen.__init__(self, session)
-		self.title = _("WeatherPlugin: Edit Entry")
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{

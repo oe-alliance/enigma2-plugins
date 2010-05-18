@@ -18,6 +18,9 @@
 #  GNU General Public License for more details.
 #
 
+# for localized messages
+from . import _
+
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -58,36 +61,37 @@ def main(session,**kwargs):
 	session.open(WeatherPlugin)
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name="Weather Plugin", description=_("Weather Plugin"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
+	list = [PluginDescriptor(name=_("Weather Plugin"), description=_("Weather Plugin"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
 	return list
 
 
 class WeatherPlugin(Screen):
 
 	skin = """
-		<screen name="WeatherPlugin" position="center,center" size="664,170" title="Weather Plugin">
+		<screen name="WeatherPlugin" position="center,center" size="664,190" title="%s">
 			<widget render="Label" source="caption" position="10,20" zPosition="1" size="300,23" font="Regular;22" transparent="1"/>
 			<widget render="Label" source="currentTemp" position="10,45" zPosition="1" size="300,23" font="Regular;22" transparent="1"/>
-			<widget render="Label" source="condition" position="10,80" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
-			<widget render="Label" source="wind_condition" position="10,105" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
-			<widget render="Label" source="humidity" position="10,130" zPosition="1" size="300,20" font="Regular;18" valign="bottom" transparent="1"/>
-			<widget render="Label" source="weekday1" position="255,30" zPosition="1" size="72,20" halign="center" valign="center" font="Regular;18" transparent="1"/>
-			<widget name="weekday1_icon" position="255,50" zPosition="1" size="72,72" alphatest="blend"/>
-			<widget render="Label" source="weekday1_temp" position="241,130" zPosition="1" size="100,20" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
-			<widget render="Label" source="weekday2" position="358,30" zPosition="1" size="72,20" halign="center" valign="center" font="Regular;18" transparent="1"/>
-			<widget name="weekday2_icon" position="358,50" zPosition="1" size="72,72" alphatest="blend"/>
-			<widget render="Label" source="weekday2_temp" position="344,130" zPosition="1" size="100,20" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
-			<widget render="Label" source="weekday3" position="461,30" zPosition="1" size="72,20" halign="center" valign="center" font="Regular;18" transparent="1"/>
-			<widget name="weekday3_icon" position="461,50" zPosition="1" size="72,72" alphatest="blend"/>
-			<widget render="Label" source="weekday3_temp" position="448,130" zPosition="1" size="100,20" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
-			<widget render="Label" source="weekday4" position="564,30" zPosition="1" size="72,20" halign="center" valign="center" font="Regular;18" transparent="1"/>
-			<widget name="weekday4_icon" position="564,50" zPosition="1" size="72,72" alphatest="blend"/>
-			<widget render="Label" source="weekday4_temp" position="550,130" zPosition="1" size="100,20" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
-			<widget render="Label" source="statustext" position="0,0" zPosition="1" size="664,170" font="Regular;20" halign="center" valign="center" transparent="1"/>
-		</screen>"""
+			<widget render="Label" source="condition" position="10,100" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
+			<widget render="Label" source="wind_condition" position="10,125" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
+			<widget render="Label" source="humidity" position="10,150" zPosition="1" size="300,20" font="Regular;18" valign="bottom" transparent="1"/>
+			<widget render="Label" source="weekday1" position="255,50" zPosition="1" size="72,20" halign="center" valign="center" font="Regular;18" transparent="1"/>
+			<widget name="weekday1_icon" position="255,70" zPosition="1" size="72,72" alphatest="blend"/>
+			<widget render="Label" source="weekday1_temp" position="241,150" zPosition="1" size="100,20" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
+			<widget render="Label" source="weekday2" position="358,50" zPosition="1" size="72,20" halign="center" valign="center" font="Regular;18" transparent="1"/>
+			<widget name="weekday2_icon" position="358,70" zPosition="1" size="72,72" alphatest="blend"/>
+			<widget render="Label" source="weekday2_temp" position="344,150" zPosition="1" size="100,20" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
+			<widget render="Label" source="weekday3" position="461,50" zPosition="1" size="72,20" halign="center" valign="center" font="Regular;18" transparent="1"/>
+			<widget name="weekday3_icon" position="461,70" zPosition="1" size="72,72" alphatest="blend"/>
+			<widget render="Label" source="weekday3_temp" position="448,150" zPosition="1" size="100,20" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
+			<widget render="Label" source="weekday4" position="564,50" zPosition="1" size="72,20" halign="center" valign="center" font="Regular;18" transparent="1"/>
+			<widget name="weekday4_icon" position="564,70" zPosition="1" size="72,72" alphatest="blend"/>
+			<widget render="Label" source="weekday4_temp" position="550,150" zPosition="1" size="100,20" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
+			<widget render="Label" source="statustext" position="0,0" zPosition="1" size="664,190" font="Regular;20" halign="center" valign="center" transparent="1"/>
+		</screen>""" %  _("Weather Plugin")
 	
 	def __init__(self, session):
 		Screen.__init__(self, session)
+
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"],
 		{
 			"back": self.close,

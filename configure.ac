@@ -344,6 +344,7 @@ vxdcontrol/src/data/Makefile
 
 weatherplugin/Makefile
 weatherplugin/meta/Makefile
+weatherplugin/po/Makefile
 weatherplugin/src/Makefile
 
 webcamviewer/Makefile
