@@ -717,7 +717,19 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget font="Regular;20" halign="left" position="50,0" render="Label" size="220,50" source="key_red" transparent="1" valign="center" zPosition="1"/>
 		<widget font="Regular;20" halign="left" position="345,0" render="Label" size="220,50" source="key_green" transparent="1" valign="center" zPosition="1"/>
 		<widget font="Regular;20" halign="left" position="630,0" render="Label" size="220,50" source="key_yellow" transparent="1" valign="center" zPosition="1"/>
-		<widget itemHeight="28" name="list" position="55,65" scrollbarMode="showOnDemand" size="785,280" zPosition="10"/>
+		<widget source="list" render="Listbox" position="55,65" size="785,280" zPosition="10" scrollbarMode="showOnDemand">
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (85, 6), size = (700, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
+						MultiContentEntryText(pos = (85, 43), size = (700, 24), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, text = 2),
+						MultiContentEntryPixmapAlphaTest(pos = (2, 8), size = (54, 54), png = 3),
+						MultiContentEntryPixmapAlphaTest(pos = (63, 46), size = (15, 16), png = 4),
+					],
+				"fonts": [gFont("Regular", 26),gFont("Regular", 20)],
+				"itemHeight": 70
+				}
+			</convert>
+		</widget>
 		<widget font="Regular;21" halign="center" position="50,375" render="Label" size="800,60" source="introduction" transparent="1" valign="center" zPosition="10"/>
 	</screen>
 	
