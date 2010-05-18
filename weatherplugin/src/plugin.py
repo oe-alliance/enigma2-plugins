@@ -87,11 +87,11 @@ class WeatherPlugin(Screen):
 			<widget name="weekday4_icon" position="564,70" zPosition="1" size="72,72" alphatest="blend"/>
 			<widget render="Label" source="weekday4_temp" position="550,150" zPosition="1" size="100,20" halign="center" valign="bottom" font="Regular;16" transparent="1"/>
 			<widget render="Label" source="statustext" position="0,0" zPosition="1" size="664,190" font="Regular;20" halign="center" valign="center" transparent="1"/>
-		</screen>""" %  _("Weather Plugin")
+		</screen>"""
 	
 	def __init__(self, session):
 		Screen.__init__(self, session)
-
+		self.title = _("Weather Plugin")
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"],
 		{
 			"back": self.close,
