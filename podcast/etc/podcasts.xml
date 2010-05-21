@@ -36,4 +36,17 @@
 			<podcast name="Wetten, dass...?" url="http://content.zdf.de/podcast/zdf_wd/wd_v.xml" />
 		</provider>
 	</language>
+	<language name="Swiss" >
+		<provider name="SF TV" >
+			<podcast name="DOK" url="http://feeds.sf.tv/podcast/dok" />
+			<podcast name="Aeschbacher" url="http://feeds.sf.tv/podcast/aeschbacher" />
+			<podcast name="Giaccobbo / Mueller" url="http://feeds.sf.tv/podcast/giacobbomueller" />
+			<podcast name="Einstein" url="http://feeds.sf.tv/podcast/einstein" />
+			<podcast name="ECO" url="http://feeds.sf.tv/podcast/eco" />
+			<podcast name="Rundschau" url="http://feeds.sf.tv/podcast/rundschau" />
+			<podcast name="Reporter" url="http://feeds.sf.tv/podcast/reporter" />
+			<podcast name="SF Unterwegs" url="http://feeds.sf.tv/podcast/sfunterwegs" />
+			<podcast name="SF bi de Luet" url="http://feeds.sf.tv/podcast/sfbideluet" />
+		</provider> 
+	</language>
 </podcasts>
