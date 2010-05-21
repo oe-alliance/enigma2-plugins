@@ -588,17 +588,17 @@ class ZDFMediathek(Screen, HelpableScreen):
 		
 		self["actions"] = HelpableActionMap(self, "ZDFMediathekActions",
 			{
-				"back": (self.exit, _("Exit")),
-				"ok": (self.ok, _("Select")),
-				"left": (self.left, _("Page up")),
-				"right": (self.right, _("Page down")),
-				"up": (self.up, _("Up")),
-				"down": (self.down, _("Down")),
-				"previousList": (self.toggleList, _("Toggle list")),
-				"nextList": (self.toggleList, _("Toggle list")),
-				"menu": (self.selectServer, _("Select server")),
-				"search": (self.search, _("Search")),
-				"previousPage": (self.previousPage, _("Previous page"))
+				"back": (self.exit, "Beenden"),
+				"ok": (self.ok, "Selektieren"),
+				"left": (self.left, "Seite hoch"),
+				"right": (self.right, "Seite runter"),
+				"up": (self.up, "Hoch"),
+				"down": (self.down, "Runter"),
+				"previousList": (self.toggleList, "Liste umschalten"),
+				"nextList": (self.toggleList, "Liste umschalten"),
+				"menu": (self.selectServer, "Selektiere Server"),
+				"search": (self.search, "Suche"),
+				"previousPage": (self.previousPage, "Vorherige Seite")
 			}, -2)
 		
 		self.cacheDialog = self.session.instantiateDialog(ZDFMediathekCache)
