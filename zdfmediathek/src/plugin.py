@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # ZDF Mediathek by AliAbdul
-from Components.ActionMap import ActionMap
+from Components.ActionMap import HelpableActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -11,6 +11,7 @@ from enigma import eListboxPythonMultiContent, ePicLoad, eServiceReference, eTim
 from os import listdir
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
+from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBar import MoviePlayer
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
@@ -38,8 +39,9 @@ LIST_LEFT = 0
 LIST_RIGHT = 1
 LIST_NONE = 2
 
-if HardwareInfo().get_device_name().startswith("dm800"):
-	PLAY_MP4 = False # TODO: Benutze 'True' wenn RTSP-Streaming mit gstreamer funktioniert, es wird dann kein PC mehr benötigt
+deviceName = HardwareInfo().get_device_name()
+if deviceName.startswith("dm800") or deviceName == "dm500hd":
+	PLAY_MP4 = False #Benutze True, wenn rtsp streaming mit der Dreambox funktioniert
 else:
 	PLAY_MP4 = False
 
@@ -553,7 +555,7 @@ class ZDFMediathekCache(Screen):
 
 ###################################################
 
-class ZDFMediathek(Screen):
+class ZDFMediathek(Screen, HelpableScreen):
 	def __init__(self, session):
 		self.session = session
 		
@@ -582,20 +584,22 @@ class ZDFMediathek(Screen):
 		self["fakeList"] = MenuList([])
 		self["serverName"] = Label("Server")
 		
-		self["actions"] = ActionMap(["ZDFMediathekActions"],
+		HelpableScreen.__init__(self)
+		
+		self["actions"] = HelpableActionMap(self, "ZDFMediathekActions",
 			{
-				"back": self.exit,
-				"ok": self.ok,
-				"left": self.left,
-				"right": self.right,
-				"up": self.up,
-				"down": self.down,
-				"previousList": self.toggleList,
-				"nextList": self.toggleList,
-				"menu": self.selectServer,
-				"search": self.search,
-				"previousPage": self.previousPage
-			}, -1)
+				"back": (self.exit, _("Exit")),
+				"ok": (self.ok, _("Select")),
+				"left": (self.left, _("Page up")),
+				"right": (self.right, _("Page down")),
+				"up": (self.up, _("Up")),
+				"down": (self.down, _("Down")),
+				"previousList": (self.toggleList, _("Toggle list")),
+				"nextList": (self.toggleList, _("Toggle list")),
+				"menu": (self.selectServer, _("Select server")),
+				"search": (self.search, _("Search")),
+				"previousPage": (self.previousPage, _("Previous page"))
+			}, -2)
 		
 		self.cacheDialog = self.session.instantiateDialog(ZDFMediathekCache)
 		self["rightList"].callback = self.deactivateCacheDialog
