@@ -85,7 +85,7 @@ class DurationZapEntry:
 		self.ref = zapentry.ref
 		self.name = zapentry.name
 		duration = zapentry.end - zapentry.begin
-		self.duration = "%02d:%02d:%02d" % (duration/3600, (duration/60) - ((duration/3600) * 60), duration%60)
+		self.duration = "%02d:%02d:%02d" % (duration/3600, duration/60, duration%60)
 		t = localtime(zapentry.begin)
 		self.begin = "%02d.%02d. %02d:%02d:%02d" % (t[2], t[1], t[3], t[4], t[5])
 
@@ -101,7 +101,7 @@ class CombinedZapEntry:
 		self.duration = self.duration + zapentry.end - zapentry.begin
 
 	def getDurationText(self):
-		return "%02d:%02d:%02d" % (self.duration/3600, (self.duration/60) - ((self.duration/3600) * 60), self.duration%60)
+		return "%02d:%02d:%02d" % (self.duration/3600, self.duration/60, self.duration%60)
 
 ###########################################################
 
