@@ -16,6 +16,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web.client import downloadPage, getPage
+import re, urllib2
 
 ##########################################################
 
@@ -114,7 +115,9 @@ class ORFMain(Screen):
 		self.session = session
 		self.movies = []
 		self.pics = []
+		self.names = []
 		self.selectedEntry = 0
+		self.mainUrl = "http://iptv.orf.at"
 		self.pic = "/tmp/orf.jpg"
 		self.working = False
 		self.cacheDialog = self.session.instantiateDialog(ORFatCache)
@@ -134,6 +137,21 @@ class ORFMain(Screen):
 		
 		self.onLayoutFinish.append(self.downloadList)
 
+	def getVideoUrl(self, url):
+		try:
+			f = urllib2.urlopen(url)
+			txt = f.read()
+			f.close()
+		except:
+			txt = ""
+		ret = None
+		if 'flashVars="vidUrl=' in txt:
+			reonecat = re.compile(r'flashVars="vidUrl=(.+?).flv', re.DOTALL)
+			urls = reonecat.findall(txt)
+			if len(urls):
+				ret = urls[0] + ".flv"
+		return ret
+
 	def okClicked(self):
 		if self.working == False:
 			if len(self.movies) > 0:
@@ -141,17 +159,21 @@ class ORFMain(Screen):
 					self.playCachedFile()
 				else:
 					url = self.movies[self.selectedEntry]
-					if self.transcodeServer is not None:
-						if self.transcodeServer == "LT Stream2Dream":
-							r = streamplayer.play(url)
-							if r == "ok":
-								sleep(6)
-								self.cacheDialog.start()
-								self.cacheTimer.start(1000, False)
+					url = self.getVideoUrl(url)
+					if url:
+						if self.transcodeServer is not None:
+							if self.transcodeServer == "LT Stream2Dream":
+								r = streamplayer.play(url)
+								if r == "ok":
+									sleep(6)
+									self.cacheDialog.start()
+									self.cacheTimer.start(1000, False)
+							else:
+								self.transcodeServer.play(self.session, url, self.names[self.selectedEntry])
 						else:
-							self.transcodeServer.play(self.session, url, "ORF.at IPTV")
+							self.session.open(MessageBox, "Es wurde kein Server ausgewaehlt!", MessageBox.TYPE_ERROR)
 					else:
-						self.session.open(MessageBox, "Es wurde kein Server ausgewaehlt!", MessageBox.TYPE_ERROR)
+						self.session.open(MessageBox, "Fehler beim Ermitteln der Video URL!", MessageBox.TYPE_ERROR)
 
 	def exit(self):
 		if not self.working:
@@ -234,27 +256,24 @@ class ORFMain(Screen):
 
 	def downloadList(self):
 		self.working = True
-		getPage("http://iptv.orf.at").addCallback(self.downloadListCallback).addErrback(self.downloadListError)
+		getPage(self.mainUrl).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
 
 	def downloadListError(self, error=""):
-		print str(error)
+		print "[ORF.at] Fehler beim Verbindungsversuch:", str(error)
 		self.working = False
 		self.session.open(MessageBox, "Fehler beim Verbindungsversuch!", MessageBox.TYPE_ERROR)
 
 	def downloadListCallback(self, page=""):
-		while page.__contains__("javascript:iptvPopup('"):
-			idx = page.index("javascript:iptvPopup('")
-			page = page[idx+22:]
-			idx = page.index("'")
-			movie = page[:idx]
-			idx = movie.index("?")
-			movie = "%s%s" % ("mms://stream4.orf.at/news/", movie[idx+1:])
-			self.movies.append(movie)
-			idx = page.index('<IMG SRC=')
-			page = page[idx+9:]
-			idx = page.index(' ALT')
-			pic = "%s%s" % ("http://iptv.orf.at/", page[:idx])
-			self.pics.append(pic)
+		if '<div class="griditem' in page:
+			reonecat = re.compile(r'<div class="griditem(.+?)</div>', re.DOTALL)
+			divs = reonecat.findall(page)
+			for div in divs:
+				if ('href="' in div) and ('<img src="' in div):
+					reonecat = re.compile(r'href="(.+?)">.+?<img src="(.+?)".+?alt="(.+?)"', re.DOTALL)
+					for url, picUrl, name in reonecat.findall(div):
+						self.movies.append(self.mainUrl + url)
+						self.pics.append(self.mainUrl + picUrl)
+						self.names.append(name)
 		self.selectionChanged(0)
 
 	def up(self):
