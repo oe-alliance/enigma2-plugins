@@ -146,10 +146,10 @@ class PasswordChangerConsole(Screen):
 	def changePassword(self):
 		try:
 			r = self.sendMessage("passwd")
-			if r.__contains__("Enter new password:"):
+			if r.__contains__("Enter new password:") or r.__contains__("New password:"):
 				r = self.sendMessage(self.new_pass)
 				
-				if r.__contains__("Re-enter new password:"):
+				if r.__contains__("Re-enter new password:") or r.__contains__("Retype password:"):
 					r = self.sendMessage(self.new_pass)
 		except:
 			self.log += _("Error while setting new password!")
