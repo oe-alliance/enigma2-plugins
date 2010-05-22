@@ -156,13 +156,17 @@ class ZapHistoryBrowser(Screen, ProtectedScreen):
 			else: # Multi-Bouquet
 				ref = x[2]
 			info = self.serviceHandler.info(ref)
-			name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
-			event = info.getEvent(ref)
-			if event is not None:
-				eventName = event.getEventName()
-				if eventName is None:
+			if info:
+				name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
+				event = info.getEvent(ref)
+				if event is not None:
+					eventName = event.getEventName()
+					if eventName is None:
+						eventName = ""
+				else:
 					eventName = ""
 			else:
+				name = "N/A"
 				eventName = ""
 			list.append(ZapHistoryBrowserListEntry(name, eventName))
 		list.reverse()
