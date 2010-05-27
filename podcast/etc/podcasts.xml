@@ -49,4 +49,9 @@
 			<podcast name="SF bi de Luet" url="http://feeds.sf.tv/podcast/sfbideluet" />
 		</provider> 
 	</language>
+	<language name="The Netherlands" >
+		<provider name="NOS" >
+			<podcast name="Journaal 20:00" url="http://feeds.nos.nl/journaal20uur" />
+		</provider>
+	</language>
 </podcasts>
