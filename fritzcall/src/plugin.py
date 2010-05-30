@@ -2287,7 +2287,7 @@ class FritzCallPhonebook:
 	def search(self, number):
 		# debug("[FritzCallPhonebook] Searching for %s" %number)
 		name = ""
-		if not self.phonebook:
+		if not self.phonebook or not number:
 			return
 
 		if config.plugins.FritzCall.prefix.value:
@@ -3421,11 +3421,14 @@ class FritzProtocol(LineReceiver):
 
 			if not (config.plugins.FritzCall.filter.value and phone not in filtermsns):
 				debug("[FritzProtocol] lineReceived no filter hit")
-				phonename = phonebook.search(phone)		   # do we have a name for the number of our side?
-				if phonename:
-					self.phone = "%s (%s)" % (phone, phonename)
+				if phone:
+					phonename = phonebook.search(phone)		   # do we have a name for the number of our side?
+					if phonename:
+						self.phone = "%s (%s)" % (phone, phonename)
+					else:
+						self.phone = phone
 				else:
-					self.phone = phone
+					self.phone = _("UNKNOWN")
 
 				if not number:
 					debug("[FritzProtocol] lineReceived: no number")
