@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#
-#    Maximum Box Temperature Renderer for Dreambox/Enigma-2
+#    Maximum Temperature Renderer for Dreambox/Enigma-2
 #    Coded by Vali (c)2010
 #    Support: www.dreambox-tools.info
 #
@@ -23,30 +22,45 @@
 #######################################################################
 
 from Components.VariableText import VariableText
-from enigma import eLabel
 from Components.Sensors import sensors
+from Tools.HardwareInfo import HardwareInfo
+from enigma import eLabel
 from Renderer import Renderer
+from os import popen
 
 class vhdRendMaxTemp(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)
 		VariableText.__init__(self)
+		if "8000" in HardwareInfo().get_device_name() or "500" in HardwareInfo().get_device_name():
+			self.ZeigeTemp = True
+		else:
+			self.ZeigeTemp = False
 	GUI_WIDGET = eLabel
 
 	def changed(self, what):
 		if not self.suspended:
-			maxtemp = 0
-			try:
-				templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
-				tempcount = len(templist)
-				for count in range(tempcount):
-					id = templist[count]
-					tt = sensors.getSensorValue(id)
-					if tt > maxtemp:
-						maxtemp = tt
-			except:
-				pass
-			self.text = str(maxtemp) + "°C"
+			if self.ZeigeTemp:
+				maxtemp = 0
+				try:
+					templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
+					tempcount = len(templist)
+					for count in range(tempcount):
+						id = templist[count]
+						tt = sensors.getSensorValue(id)
+						if tt > maxtemp:
+							maxtemp = tt
+				except:
+					pass
+				self.text = str(maxtemp) + "°C"
+			else:
+				loada = 0
+				try:
+					out_line = popen("cat /proc/loadavg").readline()
+					loada = out_line[:4]	
+				except:
+					pass
+				self.text = loada
 
 	def onShow(self):
 		self.suspended = False

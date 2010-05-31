@@ -214,7 +214,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 	<screen name="ChoiceBox" position="150,100" size="550,400" title="Input">
 		<ePixmap alphatest="on" pixmap="Ai.HD/input_choice.png" position="5,5" size="50,50"/>
 		<widget font="Regular;20" name="text" position="70,8" size="480,25"/>
-		<widget name="list" position="0,30" scrollbarMode="showOnDemand" size="550,335"/>
+		<widget name="list" position="0,50" scrollbarMode="showOnDemand" size="550,335"/>
 		<applet type="onLayoutFinish">
 from enigma import eSize, ePoint
 orgwidth = self.instance.size().width()

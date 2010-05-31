@@ -237,9 +237,9 @@
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
 			<convert type="ClockToText">Format:%a %d. %b</convert>
 		</widget>
-		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,145" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
-		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="960,75" render="Label" size="130,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
-			<convert type="ServicePosition">Length</convert>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,155" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="70,130" render="Label" size="130,25" source="session.CurrentService" transparent="1" zPosition="4">
+			<convert type="ServicePosition">Length,ShowHours</convert>
 		</widget>
 		<widget alphatest="on" pixmap="Ai.HD/ico_dolby_on.png" position="1102,140" render="Pixmap" size="60,24" source="session.CurrentService" zPosition="2">
 			<convert type="ServiceInfo">IsMultichannel</convert>
@@ -261,8 +261,11 @@
 		<widget pointer="Ai.HD/pointer.png:13,3" position="360,81" render="PositionGauge" size="560,14" source="session.CurrentService" zPosition="2">
 			<convert type="ServicePosition">Gauge</convert>
 		</widget>
-		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="right" position="205,75" render="Label" size="121,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
-			<convert type="ServicePosition">Position</convert>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="right" position="205,75" render="Label" size="121,25" source="session.CurrentService" transparent="1" zPosition="4">
+			<convert type="ServicePosition">Position,ShowHours</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="960,75" render="Label" size="130,25" source="session.CurrentService" transparent="1" zPosition="4">
+			<convert type="ServicePosition">Remaining,ShowHours</convert>
 		</widget>
 	</screen>
 	
@@ -278,9 +281,9 @@
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
 			<convert type="ClockToText">Format:%a %d. %b</convert>
 		</widget>
-		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,145" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
-		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="960,75" render="Label" size="130,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
-			<convert type="ServicePosition">Length</convert>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,155" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="70,130" render="Label" size="130,25" source="session.CurrentService" transparent="1" zPosition="4">
+			<convert type="ServicePosition">Length,ShowHours</convert>
 		</widget>
 		<widget alphatest="on" pixmap="Ai.HD/ico_dolby_on.png" position="1102,140" render="Pixmap" size="60,24" source="session.CurrentService" zPosition="2">
 			<convert type="ServiceInfo">IsMultichannel</convert>
@@ -302,7 +305,10 @@
 		<widget pointer="Ai.HD/pointer.png:13,3" position="360,81" render="PositionGauge" size="560,14" source="session.CurrentService" zPosition="2">
 			<convert type="ServicePosition">Gauge</convert>
 		</widget>
-		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="right" position="205,75" render="Label" size="121,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
-			<convert type="ServicePosition">Position</convert>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="right" position="205,75" render="Label" size="121,25" source="session.CurrentService" transparent="1" zPosition="4">
+			<convert type="ServicePosition">Position,ShowHours</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="960,75" render="Label" size="130,25" source="session.CurrentService" transparent="1" zPosition="4">
+			<convert type="ServicePosition">Remaining,ShowHours</convert>
 		</widget>
 	</screen>
