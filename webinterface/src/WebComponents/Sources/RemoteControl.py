@@ -27,9 +27,9 @@ class RemoteControl(Source):
 		dataoff = pack('iiHHi', 0, 0, 1, type, 0)
 
 		if HardwareInfo.device_name == "dm8000":
-			fp = open("/dev/input/event2", 'wb')
-		else:
 			fp = open("/dev/input/event1", 'wb')
+		else:
+			fp = open("/dev/input/event0", 'wb')
 		fp.write(dataon)
 		fp.write(dataoff)
 		fp.close()
