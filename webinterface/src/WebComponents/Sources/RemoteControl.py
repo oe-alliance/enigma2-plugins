@@ -26,6 +26,7 @@ class RemoteControl(Source):
 		dataon = pack('iiHHi', 0, 0, 1, type, 1)
 		dataoff = pack('iiHHi', 0, 0, 1, type, 0)
 
+		# FIXME: input devices are dynamic so we need a better function to find out the correct input devices
 		if HardwareInfo.device_name == "dm8000":
 			fp = open("/dev/input/event1", 'wb')
 		else:
