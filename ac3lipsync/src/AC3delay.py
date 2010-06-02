@@ -29,10 +29,7 @@ class AC3delay:
 
         # find out box type
         self.oHWInfo = HardwareInfo()
-        if self.oHWInfo.get_device_name() in ("dm800","dm8000","dm500hd"):
-            self.bHasToRestartService = False
-        else:
-            self.bHasToRestartService = True
+        self.bHasToRestartService = self.oHWInfo.get_device_name() == "dm7025"
         
     def initAudio(self):
         self.iService = NavigationInstance.instance.getCurrentService()
