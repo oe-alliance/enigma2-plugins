@@ -11,8 +11,8 @@ class SwitchService(Source):
 	def handleCommand(self, cmd):		
 		self.res = self.switchService(cmd)
 		
-	def switchService(self, ref):
-		print "[SwitchService] ref=%s" %ref
+	def switchService(self, cmd):
+		print "[SwitchService] ref=%s" %cmd["sRef"]
 		
 		pc = config.ParentalControl.configured.value
 
@@ -23,11 +23,14 @@ class SwitchService(Source):
 		if pc:
 			config.ParentalControl.configured.value = False
 		if config.plugins.Webinterface.allowzapping.value:
-			self.session.nav.playService(eServiceReference(ref))	
+			eref= eServiceReference(cmd["sRef"])
+			if cmd["title"] is not None:
+				eref.setName(cmd["title"])
+			self.session.nav.playService(eref)	
 			if pc:
 				config.ParentalControl.configured.value = pc
 			
-			return ( True, "Active service switched to %s" %ref )
+			return ( True, "Active service switched to %s" %cmd["sRef"] )
 		
 		else:
 			return ( False, "Zapping is disabled in WebInterface Configuration" )
