@@ -32,7 +32,7 @@ class LocationsAndTags(Source):
 	def getCurrentLocation(self):
 		path = config.movielist.last_videodir.value or "/hdd/movie"
 		if not os.path.exists(path):
-			path = "__ERROR__"
+			path = "/hdd/movie"
 		
 		return path
 
