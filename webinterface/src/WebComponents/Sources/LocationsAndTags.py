@@ -30,7 +30,11 @@ class LocationsAndTags(Source):
 			self.result = False
 
 	def getCurrentLocation(self):
-		return config.movielist.last_videodir.value
+		path = config.movielist.last_videodir.value or "/hdd/movie"
+		if not os.path.exists(path):
+			path = "__ERROR__"
+		
+		return path
 
 	def getLocations(self):
 		return config.movielist.videodirs.value

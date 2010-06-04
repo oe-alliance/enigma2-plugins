@@ -382,7 +382,7 @@ class Timer(Source):
 
 		(begin, end, name, description, eit) = parseEvent(event)
 
-		timer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.NONE, dirname=location, tags=tags)
+		timer = RecordTimerEntry(ServiceReference(param['sRef']), begin , end, name, description, eit, False, justplay, AFTEREVENT.AUTO, dirname=location, tags=tags)
 		
 		conflicts = self.recordtimer.record(timer)
 		if conflicts is None:
