@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 ############################################################################
 #    Copyright (C) 2008 by Volker Christian                                #
 #    Volker.Christian@fh-hagenberg.at                                      #
@@ -33,6 +33,8 @@ from urllib2 import urlopen, Request, URLError, HTTPError
 from urllib import quote, unquote_plus, unquote
 
 from httplib import HTTPConnection, HTTPException
+
+from urlparse import parse_qs
 
 from socket import gaierror, error
 
@@ -254,60 +256,84 @@ class YouTubeEntry():
 
 
 	def getVideoUrl(self, fmt):
-		mrl = None
-		isHDAvailable = False
 		video_id = str(self.getTubeId())
-		#URLs for YouTube video pages will change from the format http://www.youtube.com/watch?v=ylLzyHk54Z0 to http://www.youtube.com/watch#!v=ylLzyHk54Z0.
-		watch_url = "http://www.youtube.com/watch?v=" + video_id
-		watchrequest = Request(watch_url, None, std_headers)
-		try:
-			print "trying to find out if a HD Stream is available",watch_url
-			watchvideopage = urlopen(watchrequest).read()
-		except (URLError, HTTPException, error), err:
-			print "[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err)
-			print "[MyTube] No valid mp4-url found"
-			return mrl
-
-		if "'IS_HD_AVAILABLE': true" in watchvideopage:
-			isHDAvailable = True
-			print "HD AVAILABLE"
-		else:
-			print "HD Stream NOT AVAILABLE"
-
-		# Get video info
-		#info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en' % video_id
-		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s' % video_id
-		inforequest = Request(info_url, None, std_headers)
-		try:
-			print "getting video_info_webpage",info_url
-			infopage = urlopen(inforequest).read()
-		except (URLError, HTTPException, error), err:
-			print "[MyTube] Error: Unable to retrieve infopage, error:", str(err)
-			print "[MyTube] No valid mp4-url found"
-			return mrl
-
-		mobj = re.search(r'(?m)&token=([^&]+)(?:&|$)', infopage)
-		if mobj is None:
-			# was there an error ?
-			mobj = re.search(r'(?m)&reason=([^&]+)(?:&|$)', infopage)
-			if mobj is None:
-				print 'ERROR: unable to extract "t" parameter for unknown reason'
+		for el_type in ['detailpage', 'embedded', 'vevo']:
+			video_info_url = ('http://www.youtube.com/get_video_info?&video_id=%s&el=%s&ps=default&eurl=&gl=DE&hl=en'% (video_id, el_type))
+			request = Request(video_info_url, None, std_headers)
+			try:
+				video_info_page = urlopen(request).read()
+				video_info = parse_qs(video_info_page)
+				if 'token' in video_info:
+					break
+			except (URLError, HTTPException, error), err:
+				return None, # ('ERROR: unable to download video info webpage: %s' % str(err))
+		if 'token' not in video_info:
+			if 'reason' not in video_info:
+				reason = 'Unable to extract "t" parameter for unknown reason'
 			else:
-				reason = unquote_plus(mobj.group(1))
-				print 'ERROR: YouTube said: %s' % reason.decode('utf-8')
-			return mrl
-
-		token = unquote(mobj.group(1))
-		#myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
-		myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s' % (video_id, token)
-		if isHDAvailable is True:
-			mrl = '%s&fmt=%s' % (myurl, '22')
-			print "[MyTube] GOT HD URL: ", mrl
+				reason = unquote_plus(video_info['reason'][0])
+			return None #, reason
 		else:
-			mrl = '%s&fmt=%s' % (myurl, fmt)
-			print "[MyTube] GOT SD URL: ", mrl
+			token = video_info['token'][0]
+			video_real_url = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en&fmt=18' % (video_id, token)
+			return video_real_url #, 'OK'
 
-		return mrl
+
+#	def getVideoUrl(self, fmt):
+#		mrl = None
+#		isHDAvailable = False
+#		video_id = str(self.getTubeId())
+#		#URLs for YouTube video pages will change from the format http://www.youtube.com/watch?v=ylLzyHk54Z0 to http://www.youtube.com/watch#!v=ylLzyHk54Z0.
+#		watch_url = "http://www.youtube.com/watch?v=" + video_id
+#		watchrequest = Request(watch_url, None, std_headers)
+#		try:
+#			print "trying to find out if a HD Stream is available",watch_url
+#			watchvideopage = urlopen(watchrequest).read()
+#		except (URLError, HTTPException, error), err:
+#			print "[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err)
+#			print "[MyTube] No valid mp4-url found"
+#			return mrl
+#
+#		if "'IS_HD_AVAILABLE': true" in watchvideopage:
+#			isHDAvailable = True
+#			print "HD AVAILABLE"
+#		else:
+#			print "HD Stream NOT AVAILABLE"
+#
+#		# Get video info
+#		#info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en' % video_id
+#		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s' % video_id
+#		inforequest = Request(info_url, None, std_headers)
+#		try:
+#			print "getting video_info_webpage",info_url
+#			infopage = urlopen(inforequest).read()
+#		except (URLError, HTTPException, error), err:
+#			print "[MyTube] Error: Unable to retrieve infopage, error:", str(err)
+#			print "[MyTube] No valid mp4-url found"
+#			return mrl
+#
+#		mobj = re.search(r'(?m)&token=([^&]+)(?:&|$)', infopage)
+#		if mobj is None:
+#			# was there an error ?
+#			mobj = re.search(r'(?m)&reason=([^&]+)(?:&|$)', infopage)
+#			if mobj is None:
+#				print 'ERROR: unable to extract "t" parameter for unknown reason'
+#			else:
+#				reason = unquote_plus(mobj.group(1))
+#				print 'ERROR: YouTube said: %s' % reason.decode('utf-8')
+#			return mrl
+#
+#		token = unquote(mobj.group(1))
+#		#myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
+#		myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s' % (video_id, token)
+#		if isHDAvailable is True:
+#			mrl = '%s&fmt=%s' % (myurl, '22')
+#			print "[MyTube] GOT HD URL: ", mrl
+#		else:
+#			mrl = '%s&fmt=%s' % (myurl, fmt)
+#			print "[MyTube] GOT SD URL: ", mrl
+#
+#		return mrl
 
 
 	def getDuration(self):

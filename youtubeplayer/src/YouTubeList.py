@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ############################################################################
 #    Copyright (C) 2008 by Volker Christian                                #
 #    Volker.Christian@fh-hagenberg.at                                      #
@@ -46,8 +47,10 @@ from Plugins.Extensions.VlcPlayer.VlcServerList import VlcServerListScreen
 from YouTubeContextMenu import YouTubeEntryContextMenu, YouTubeEntryContextMenuList
 
 from Tools.BoundFunction import boundFunction
+from Tools.HardwareInfo import HardwareInfo
 
 from YouTubePlayer import YouTubePlayer
+from DirectYouTubePlayer import DirectYouTubePlayer
 
 from YouTubeUserConfig import youTubeUserConfig
 from YouTubeUserList import YouTubeUserListScreen
@@ -411,6 +414,25 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		self.isFavoritesFeed = False
 
 
+	def processDelayed(self, function):
+		self.delay_timer = eTimer()
+		self.delay_timer.callback.append(self.processDelay)
+		self.delay_timer.start(0, 1)
+		self.function = function
+
+
+	def processDelay(self):
+		self.function()
+
+
+	def getRelatedDelayed(self):
+		self.processDelayed(self.getRelated)
+
+
+	def getResponsesDelayed(self):
+		self.processDelayed(self.getResponses)
+
+
 	def backInHistory(self):
 		if self.historyIndex > 1:
 			self.historyIndex = self.historyIndex - 1
@@ -449,13 +471,6 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 	def selectAndPlayCB(self, selectedServer, defaultServer):
 		self.serverSelectedCB(selectedServer, defaultServer)
 		self.tryToPlay()
-
-
-	def tryToPlay(self):
-		if self.currentServer is not None:
-			self.play()
-		else:
-			self.selectServer(self.selectAndPlayCB, None)
 
 
 	def login(self, callback):
@@ -571,8 +586,18 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 	def getVideoUrl(self, youTubeEntry, fmt):
 		mrl = youTubeEntry.getVideoUrl(fmt)
 		if mrl is None:
-			self.session.open(MessageBox, _("Could not retrive video url for:\n%s") % youTubeEntry.getYouTubeId(), MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Could not retrive video url for:\n%s") % youTubeEntry.getTubeId(), MessageBox.TYPE_ERROR)
 		return mrl
+
+
+	def tryToPlay(self):
+		if HardwareInfo.device_name == "dm8000" or HardwareInfo.device_name == "dm800":
+			self.playDirect()
+		else:
+			if self.currentServer is not None:
+				self.play()
+			else:
+				self.selectServer(self.selectAndPlayCB, None)
 
 
 # http://cacan.blog385.com/index.php/2008/05/09/youtube-high-quality-hacks/
@@ -631,14 +656,38 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 				entries.append((_("Remove from playlist"), [self.removeFromPlaylist, False]))
 			else:
 				entries.append((_("Add to playlist"), [self.addToPlaylist, False]))
-			entries.append((_("Get related videos"), [self.getRelated, True]))
-			entries.append((_("Get video responses"), [self.getResponses, True]))
+			entries.append((_("Get related videos"), [self.getRelatedDelayed, True]))
+			entries.append((_("Get video responses"), [self.getResponsesDelayed, True]))
 			
 			self.currentServer.play(self.session, mrl, youTubeEntry.getTitle(), self,
 								player = boundFunction(YouTubePlayer, contextMenuEntries = entries, infoCallback = self.showVideoInfo, name = self["list"].getCurrent()[0].getTitle()))
 		else:
 			print "[YTB] No valid flv-mrl found"
 
+
+	def playDirect(self):
+		print "[YTB] PlayDirect()"
+		youTubeEntry = self["list"].getCurrent()[0]
+		mrl = self.getVideoUrl(youTubeEntry, config.plugins.youtubeplayer.quality.value)
+		if mrl is not None:
+			entries = []
+			entries.append((_("Show video detail info"), [self.showVideoInfo, False]))
+			if self["list"].getCurrent()[0].belongsToFavorites():
+				entries.append((_("Remove from favorites"), [self.removeFromFavorites, False]))
+			else:
+				entries.append((_("Add to favorites"), [self.addToFavorites, False]))
+
+			if self["list"].getCurrent()[0].isPlaylistEntry():
+				entries.append((_("Remove from playlist"), [self.removeFromPlaylist, False]))
+			else:
+				entries.append((_("Add to playlist"), [self.addToPlaylist, False]))
+			entries.append((_("Get related videos"), [self.getRelatedDelayed, True]))
+			entries.append((_("Get video responses"), [self.getResponsesDelayed, True]))
+
+			self.session.open(DirectYouTubePlayer, mrl, youTubeEntry.getTitle(), self, infoCallback = self.showVideoInfo )
+		else:
+			print "[YTB] No valid flv-mrl found"
+			
 
 	def getNextFile(self):
 		i = self["list"].getSelectedIndex() + 1
