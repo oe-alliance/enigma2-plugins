@@ -171,7 +171,13 @@ class YouTubeEntry():
 		print "[YTB] YouTubeEntry::getYouTubeId()"
 		ret = None
 		if self.entry.media.player:
-			ret = self.entry.media.player.url.split("=").pop()
+			split = self.entry.media.player.url.split("=")
+			ret = split.pop()
+			if ret == 'youtube_gdata':
+				tmpval=split.pop()
+				if tmpval.endswith("&feature"):
+					tmp = tmpval.split("&")
+					ret = tmp.pop(0)
 		return ret
 
 
@@ -225,38 +231,8 @@ class YouTubeEntry():
 		self.loadThumbnail(0, callback)
 
 
-#	def getVideoUrl(self, fmt):
-#		conn = HTTPConnection("www.youtube.com")
-#		conn.request("GET", "/v/" + quote(self.getYouTubeId()))
-#		response = conn.getresponse()
-#		conn.close()
-#		mrl = None
-#		print "[YTB] Response: ", response.status, response.reason
-#		if response.status == 303:
-#			location = response.getheader("location")
-#			mrl = "http://www.youtube.com/get_video?video_id=" + quote(self.getYouTubeId()) + "&t=" + quote(re.match (".*[?&]t=([^&]+)", location).groups()[0]) + fmt
-#			print "[YTB] Playing ", mrl
-#		else:
-#			print "[YTB] No valid flv-mrl found"
-#		return mrl
-
-
-	def getTubeId(self):
-		#print "[MyTubeFeedEntry] getTubeId"
-		ret = None
-		if self.entry.media.player:
-			split = self.entry.media.player.url.split("=")
-			ret = split.pop()
-			if ret == 'youtube_gdata':
-				tmpval=split.pop()
-				if tmpval.endswith("&feature"):
-					tmp = tmpval.split("&")
-					ret = tmp.pop(0)
-		return ret
-
-
 	def getVideoUrl(self, fmt):
-		video_id = str(self.getTubeId())
+		video_id = str(self.getYouTubeId())
 		for el_type in ['detailpage', 'embedded', 'vevo']:
 			video_info_url = ('http://www.youtube.com/get_video_info?&video_id=%s&el=%s&ps=default&eurl=&gl=DE&hl=en'% (video_id, el_type))
 			request = Request(video_info_url, None, std_headers)
@@ -277,63 +253,6 @@ class YouTubeEntry():
 			token = video_info['token'][0]
 			video_real_url = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en&fmt=18' % (video_id, token)
 			return video_real_url #, 'OK'
-
-
-#	def getVideoUrl(self, fmt):
-#		mrl = None
-#		isHDAvailable = False
-#		video_id = str(self.getTubeId())
-#		#URLs for YouTube video pages will change from the format http://www.youtube.com/watch?v=ylLzyHk54Z0 to http://www.youtube.com/watch#!v=ylLzyHk54Z0.
-#		watch_url = "http://www.youtube.com/watch?v=" + video_id
-#		watchrequest = Request(watch_url, None, std_headers)
-#		try:
-#			print "trying to find out if a HD Stream is available",watch_url
-#			watchvideopage = urlopen(watchrequest).read()
-#		except (URLError, HTTPException, error), err:
-#			print "[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err)
-#			print "[MyTube] No valid mp4-url found"
-#			return mrl
-#
-#		if "'IS_HD_AVAILABLE': true" in watchvideopage:
-#			isHDAvailable = True
-#			print "HD AVAILABLE"
-#		else:
-#			print "HD Stream NOT AVAILABLE"
-#
-#		# Get video info
-#		#info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en' % video_id
-#		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s' % video_id
-#		inforequest = Request(info_url, None, std_headers)
-#		try:
-#			print "getting video_info_webpage",info_url
-#			infopage = urlopen(inforequest).read()
-#		except (URLError, HTTPException, error), err:
-#			print "[MyTube] Error: Unable to retrieve infopage, error:", str(err)
-#			print "[MyTube] No valid mp4-url found"
-#			return mrl
-#
-#		mobj = re.search(r'(?m)&token=([^&]+)(?:&|$)', infopage)
-#		if mobj is None:
-#			# was there an error ?
-#			mobj = re.search(r'(?m)&reason=([^&]+)(?:&|$)', infopage)
-#			if mobj is None:
-#				print 'ERROR: unable to extract "t" parameter for unknown reason'
-#			else:
-#				reason = unquote_plus(mobj.group(1))
-#				print 'ERROR: YouTube said: %s' % reason.decode('utf-8')
-#			return mrl
-#
-#		token = unquote(mobj.group(1))
-#		#myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
-#		myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s' % (video_id, token)
-#		if isHDAvailable is True:
-#			mrl = '%s&fmt=%s' % (myurl, '22')
-#			print "[MyTube] GOT HD URL: ", mrl
-#		else:
-#			mrl = '%s&fmt=%s' % (myurl, fmt)
-#			print "[MyTube] GOT SD URL: ", mrl
-#
-#		return mrl
 
 
 	def getDuration(self):
@@ -534,13 +453,13 @@ class YouTubeInterface():
 		print "[YTB] YouTubeInterface::login()"
 		ret = False
 		if user is not None:
+			# http://code.google.com/apis/youtube/developers_guide_python.html#ClientLogin
+			self.ytService.email = user.getEmail()
+			self.ytService.password = user.getPassword()
+			self.ytService.source = 'my-example-application'
+			self.ytService.developer_key = "AI39si7t0WNyg_tvjBPdRIvBfaUA_XrTY1LNzfjLgCn8A_m92YKtWTcR_auEmI5gKGitJb4SskrjxJSmRc3yhQ4YlHTBAzPSig"
+			self.ytService.client_id = "ytapi-VolkerChristian-YouTubePlayer-pq3mrg1o-0"
 			try:
-				# http://code.google.com/apis/youtube/developers_guide_python.html#ClientLogin
-				self.ytService.email = user.getEmail()
-				self.ytService.password = user.getPassword()
-				self.ytService.source = 'my-example-application'
-				self.ytService.developer_key = "AI39si7t0WNyg_tvjBPdRIvBfaUA_XrTY1LNzfjLgCn8A_m92YKtWTcR_auEmI5gKGitJb4SskrjxJSmRc3yhQ4YlHTBAzPSig"
-				self.ytService.client_id = "ytapi-VolkerChristian-YouTubePlayer-pq3mrg1o-0"
 				self.ytService.ProgrammaticLogin()
 			except BadAuthentication:
 				pass
