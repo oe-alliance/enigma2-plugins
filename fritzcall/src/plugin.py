@@ -1766,14 +1766,20 @@ class FritzMenu(Screen, HelpableScreen):
 class FritzDisplayCalls(Screen, HelpableScreen):
 
 	def __init__(self, session, text=""): #@UnusedVariable # pylint: disable-msg=W0613
-		self.width = scaleH(1100, 570)
-		dateFieldWidth = scaleH(145, 105)
+		self.width = DESKTOP_WIDTH * scaleH(75, 90)/100
+		self.height = DESKTOP_HEIGHT * 0.75
+		dateFieldWidth = scaleH(180, 105)
 		dirFieldWidth = 16
 		lengthFieldWidth = scaleH(55, 45)
 		scrollbarWidth = scaleH(35, 35)
-		hereFieldWidth = scaleH(160, 100)
-		fieldWidth = self.width -scaleH(60, 5) -dateFieldWidth -5 -dirFieldWidth -5 -lengthFieldWidth -5 -hereFieldWidth -scrollbarWidth -5
-		fontSize = scaleV(24, 20)
+		entriesWidth = self.width -scaleH(40, 5) -5
+		hereFieldWidth = entriesWidth -dirFieldWidth -5 -dateFieldWidth -5 -lengthFieldWidth -scrollbarWidth
+		fieldWidth = entriesWidth -dirFieldWidth -5 -5 -scrollbarWidth
+		fontSize = scaleV(22, 20)
+		itemHeight = 2*fontSize+5
+		entriesHeight = self.height -scaleV(15, 10) -5 -fontSize -5 -5 -5 -40 -5
+		buttonGap = (self.width -4*140)/5
+		buttonV = self.height -40
 		debug("[FritzDisplayCalls] width: " + str(self.width))
 		self.skin = """
 			<screen name="FritzDisplayCalls" position="center,center" size="%d,%d" title="Phone calls" >
@@ -1783,13 +1789,13 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				<widget source="entries" render="Listbox" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" transparent="1">
 					<convert type="TemplatedMultiContent">
 						{"template": [
-								MultiContentEntryText(pos = (%d,%d), size = (%d,%d), font=0, flags = RT_HALIGN_LEFT, text = 1), # index 0 is the number, index 1 is date
+								MultiContentEntryText(pos = (%d,%d), size = (%d,%d), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1), # index 0 is the number, index 1 is date
 								MultiContentEntryPixmapAlphaTest(pos = (%d,%d), size = (%d,%d), png = 2), # index 1 i direction pixmap
-								MultiContentEntryText(pos = (%d,%d), size = (%d,%d), font=0, flags = RT_HALIGN_LEFT, text = 3), # index 2 is remote name/number
-								MultiContentEntryText(pos = (%d,%d), size = (%d,%d), font=0, flags = RT_HALIGN_LEFT, text = 4), # index 3 is length of call
-								MultiContentEntryText(pos = (%d,%d), size = (%d,%d), font=0, flags = RT_HALIGN_LEFT, text = 5), # index 4 is my number/name for number
+								MultiContentEntryText(pos = (%d,%d), size = (%d,%d), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 3), # index 2 is remote name/number
+								MultiContentEntryText(pos = (%d,%d), size = (%d,%d), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 4), # index 3 is length of call
+								MultiContentEntryText(pos = (%d,%d), size = (%d,%d), font=0, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text = 5), # index 4 is my number/name for number
 							],
-						"fonts": [gFont("Regular", %d)],
+						"fonts": [gFont("Regular", %d), gFont("Regular", %d)],
 						"itemHeight": %d
 						}
 					</convert>
@@ -1805,34 +1811,34 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				<widget name="key_blue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>""" % (
 						# scaleH(90, 75), scaleV(100, 78), # position 
-						scaleH(1100, 570), scaleV(560, 430), # size
-						scaleH(1100, 570), # eLabel width
+						self.width, self.height, # size
+						self.width, # eLabel width
 						scaleH(40, 5), scaleV(10, 5), # statusbar position
-						scaleH(1050, 560), scaleV(25, 22), # statusbar size
+						self.width, fontSize+5, # statusbar size
 						scaleV(21, 21), # statusbar font size
-						scaleV(40, 28), # eLabel position vertical
-						scaleH(1100, 570), # eLabel width
-						scaleH(40, 5), scaleV(55, 40), # entries position
-						scaleH(1040, 560), scaleV(458, 340), # entries size
-						0, 0, dateFieldWidth, fontSize, # date pos/size
-						dateFieldWidth+5, 0, dirFieldWidth, 16, # dir pos/size
-						dateFieldWidth+5+dirFieldWidth+5, 0, fieldWidth, fontSize, # caller pos/size
-						dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5, 0, lengthFieldWidth, fontSize, # length pos/size
-						dateFieldWidth+5+dirFieldWidth+5+fieldWidth+5+lengthFieldWidth+5, 0, hereFieldWidth, fontSize, # my number pos/size
-						fontSize, # fontsize
-						fontSize, # itemHeight
-						scaleV(518, 390), # eLabel position vertical
-						scaleH(1100, 570), # eLabel width
-						scaleH(20, 5), scaleV(525, 395), "skin_default/buttons/red.png", # widget red
-						scaleH(290, 145), scaleV(525, 395), "skin_default/buttons/green.png", # widget green
-						scaleH(560, 285), scaleV(525, 395), "skin_default/buttons/yellow.png", # widget yellow
-						scaleH(830, 425), scaleV(525, 395), "skin_default/buttons/blue.png", # widget blue
-						scaleH(20, 5), scaleV(525, 395), scaleV(22, 21), # widget red
-						scaleH(290, 145), scaleV(525, 395), scaleV(22, 21), # widget green
-						scaleH(560, 285), scaleV(525, 395), scaleV(22, 21), # widget yellow
-						scaleH(830, 425), scaleV(525, 395), scaleV(22, 21), # widget blue
+						scaleV(10, 5)+5+fontSize+5, # eLabel position vertical
+						self.width, # eLabel width
+						scaleH(40, 5), scaleV(10, 5)+5+fontSize+5+5, # entries position
+						entriesWidth, entriesHeight, # entries size
+						5+dirFieldWidth+5, fontSize+5, dateFieldWidth, fontSize, # date pos/size
+						5, (itemHeight-dirFieldWidth)/2, dirFieldWidth, dirFieldWidth, # dir pos/size
+						5+dirFieldWidth+5, 5, fieldWidth, fontSize, # caller pos/size
+						2+dirFieldWidth+2+dateFieldWidth+5, fontSize+5, lengthFieldWidth, fontSize, # length pos/size
+						2+dirFieldWidth+2+dateFieldWidth+5+lengthFieldWidth+5, fontSize+5, hereFieldWidth, fontSize, # my number pos/size
+						fontSize-4, fontSize, # fontsize
+						itemHeight, # itemHeight
+						buttonV-5, # eLabel position vertical
+						self.width, # eLabel width
+						buttonGap, buttonV, "skin_default/buttons/red.png", # widget red
+						2*buttonGap+140, buttonV, "skin_default/buttons/green.png", # widget green
+						3*buttonGap+2*140, buttonV, "skin_default/buttons/yellow.png", # widget yellow
+						4*buttonGap+3*140, buttonV, "skin_default/buttons/blue.png", # widget blue
+						buttonGap, buttonV, scaleV(22, 21), # widget red
+						2*buttonGap+140, buttonV, scaleV(22, 21), # widget green
+						3*buttonGap+2*140, buttonV, scaleV(22, 21), # widget yellow
+						4*buttonGap+3*140, buttonV, scaleV(22, 21), # widget blue
 														)
-		debug("[FritzDisplayCalls] skin: " + self.skin)
+		# debug("[FritzDisplayCalls] skin: " + self.skin)
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
@@ -2349,7 +2355,7 @@ class FritzCallPhonebook:
 						scaleH(830, 425), scaleV(525, 395), scaleV(22, 21), # widget blue
 						)
 	
-			debug("[FritzDisplayCalls] skin: " + self.skin)
+			# debug("[FritzDisplayCalls] skin: " + self.skin)
 			Screen.__init__(self, session)
 			NumericalTextInput.__init__(self)
 			HelpableScreen.__init__(self)
