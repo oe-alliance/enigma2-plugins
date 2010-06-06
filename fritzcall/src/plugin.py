@@ -2305,10 +2305,11 @@ class FritzCallPhonebook:
 		def __init__(self, session):
 			self.entriesWidth = DESKTOP_WIDTH * scaleH(75, 85)/100
 			self.height = DESKTOP_HEIGHT * 0.75
-			numberFieldWidth = scaleH(190, 150)
+			numberFieldWidth = scaleH(220, 160)
 			fieldWidth = self.entriesWidth -5 -numberFieldWidth -10
 			fontSize = scaleV(22, 18)
 			fontHeight = scaleV(24, 20)
+			buttonGap = (self.entriesWidth-4*140)/5
 			debug("[FritzDisplayPhonebook] width: " + str(self.entriesWidth))
 			self.skin = """
 				<screen name="FritzDisplayPhonebook" position="center,center" size="%d,%d" title="Phonebook" >
@@ -2335,24 +2336,24 @@ class FritzCallPhonebook:
 					<widget name="key_blue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				</screen>""" % (
 						# scaleH(90, 75), scaleV(100, 73), # position 
-						scaleH(1100, 570), scaleV(560, 430), # size
-						scaleH(1100, 570), # eLabel width
+						self.entriesWidth, self.height, # size
+						self.entriesWidth, # eLabel width
 						scaleH(40, 5), scaleV(20, 5), # entries position
-						self.entriesWidth, scaleV(488, 380), # entries size
+						self.entriesWidth-scaleH(40, 5), self.height-scaleV(20, 5)-5-5-40, # entries size
 						0, 0, fieldWidth, scaleH(24,20), # name pos/size
 						fieldWidth +5, 0, numberFieldWidth, scaleH(24,20), # dir pos/size
 						fontSize, # fontsize
 						fontHeight, # itemHeight
-						scaleV(518, 390), # eLabel position vertical
-						scaleH(1100, 570), # eLabel width
-						scaleH(20, 5), scaleV(525, 395), "skin_default/buttons/red.png", # ePixmap red
-						scaleH(290, 145), scaleV(525, 395), "skin_default/buttons/green.png", # ePixmap green
-						scaleH(560, 285), scaleV(525, 395), "skin_default/buttons/yellow.png", # ePixmap yellow
-						scaleH(830, 425), scaleV(525, 395), "skin_default/buttons/blue.png", # ePixmap blue
-						scaleH(20, 5), scaleV(525, 395), scaleV(22, 21), # widget red
-						scaleH(290, 145), scaleV(525, 395), scaleV(22, 21), # widget green
-						scaleH(560, 285), scaleV(525, 395), scaleV(22, 21), # widget yellow
-						scaleH(830, 425), scaleV(525, 395), scaleV(22, 21), # widget blue
+						self.height-40-5, # eLabel position vertical
+						self.entriesWidth, # eLabel width
+						buttonGap, self.height-40, "skin_default/buttons/red.png", # ePixmap red
+						2*buttonGap+140, self.height-40, "skin_default/buttons/green.png", # ePixmap green
+						3*buttonGap+2*140, self.height-40, "skin_default/buttons/yellow.png", # ePixmap yellow
+						4*buttonGap+3*140, self.height-40, "skin_default/buttons/blue.png", # ePixmap blue
+						buttonGap, self.height-40, scaleV(22, 21), # widget red
+						2*buttonGap+140, self.height-40, scaleV(22, 21), # widget green
+						3*buttonGap+2*140, self.height-40, scaleV(22, 21), # widget yellow
+						4*buttonGap+3*140, self.height-40, scaleV(22, 21), # widget blue
 						)
 	
 			# debug("[FritzDisplayCalls] skin: " + self.skin)
