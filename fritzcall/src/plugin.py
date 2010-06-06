@@ -2309,7 +2309,7 @@ class FritzCallPhonebook:
 			fieldWidth = self.entriesWidth -5 -numberFieldWidth -10
 			fontSize = scaleV(22, 18)
 			fontHeight = scaleV(24, 20)
-			debug("[FritzDisplayPhonebook] width: " + str(self.width))
+			debug("[FritzDisplayPhonebook] width: " + str(self.entriesWidth))
 			self.skin = """
 				<screen name="FritzDisplayPhonebook" position="center,center" size="%d,%d" title="Phonebook" >
 					<eLabel position="0,0" size="%d,2" backgroundColor="#aaaaaa" />
@@ -2583,8 +2583,7 @@ class FritzCallPhonebook:
 			if cur is None:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
 			else:
-				(number, name) = cur[0]
-				self.add(self, number, name)
+				self.add(self, cur[2], cur[0])
 	
 		def search(self):
 			debug("[FritzCallPhonebook] displayPhonebook/search")
