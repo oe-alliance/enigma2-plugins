@@ -1766,7 +1766,7 @@ class FritzMenu(Screen, HelpableScreen):
 class FritzDisplayCalls(Screen, HelpableScreen):
 
 	def __init__(self, session, text=""): #@UnusedVariable # pylint: disable-msg=W0613
-		self.width = DESKTOP_WIDTH * scaleH(75, 90)/100
+		self.width = DESKTOP_WIDTH * scaleH(75, 85)/100
 		self.height = DESKTOP_HEIGHT * 0.75
 		dateFieldWidth = scaleH(180, 105)
 		dirFieldWidth = 16
@@ -2303,8 +2303,8 @@ class FritzCallPhonebook:
 	class FritzDisplayPhonebook(Screen, HelpableScreen, NumericalTextInput):
 	
 		def __init__(self, session):
-			self.width = scaleH(1100, 570)
-			self.entriesWidth = scaleH(1040, 560)
+			self.entriesWidth = DESKTOP_WIDTH * scaleH(75, 85)/100
+			self.height = DESKTOP_HEIGHT * 0.75
 			numberFieldWidth = scaleH(190, 150)
 			fieldWidth = self.entriesWidth -5 -numberFieldWidth -10
 			fontSize = scaleV(22, 18)
