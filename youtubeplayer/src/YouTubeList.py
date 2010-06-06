@@ -620,30 +620,6 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 		print "[YTB] Play()"
 		youTubeEntry = self["list"].getCurrent()[0]
 		mrl = self.getVideoUrl(youTubeEntry, config.plugins.youtubeplayer.quality.value)
-############## To be resolved
-#Traceback (most recent call last):
-#  File "/usr/lib/enigma2/python/Components/ActionMap.py", line 46, in action
-#    res = self.actions[action]()
-#  File "/usr/lib/enigma2/python/Plugins/Extensions/YouTubePlayer/YouTubeList.py", line 425, in tryToPlay
-#    self.play()
-#  File "/usr/lib/enigma2/python/Plugins/Extensions/YouTubePlayer/YouTubeList.py", line 543, in play
-#    mrl = youTubeEntry.getVideoUrl("&fmt=18")
-#  File "/usr/lib/enigma2/python/Plugins/Extensions/YouTubePlayer/YouTubeInterface.py", line 216, in getVideoUrl
-#    conn.request("GET", "/v/" + quote(self.getYouTubeId()))
-#  File "/usr/lib/python2.5/httplib.py", line 862, in request
-#    self._send_request(method, url, body, headers)
-#  File "/usr/lib/python2.5/httplib.py", line 885, in _send_request
-#    self.endheaders()
-#  File "/usr/lib/python2.5/httplib.py", line 856, in endheaders
-#    self._send_output()
-#  File "/usr/lib/python2.5/httplib.py", line 728, in _send_output
-#    self.send(msg)
-#  File "/usr/lib/python2.5/httplib.py", line 695, in send
-#    self.connect()
-#  File "/usr/lib/python2.5/httplib.py", line 663, in connect
-#    socket.SOCK_STREAM):
-#socket.gaierror: (2, 'temporary failure in name resolution.')
-
 		if mrl is not None:
 			entries = []
 			entries.append((_("Show video detail info"), [self.showVideoInfo, False]))
@@ -684,7 +660,7 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 			entries.append((_("Get related videos"), [self.getRelatedDelayed, True]))
 			entries.append((_("Get video responses"), [self.getResponsesDelayed, True]))
 
-			self.session.open(DirectYouTubePlayer, mrl, youTubeEntry.getTitle(), self, infoCallback = self.showVideoInfo )
+			self.session.open(DirectYouTubePlayer, mrl, youTubeEntry.getTitle(), self, contextMenuEntries = entries, infoCallback = self.showVideoInfo, name = self["list"].getCurrent()[0].getTitle())
 		else:
 			print "[YTB] No valid flv-mrl found"
 			

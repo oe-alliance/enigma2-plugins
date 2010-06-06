@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 from time import time
 
 from enigma import iPlayableServicePtr
@@ -18,7 +18,31 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import ActionMap
 from Components.config import config
 
+from YouTubeContextMenu import YouTubeEntryContextMenu, YouTubeEntryContextMenuList
 
+class DirectYouTubePlayerSummary(Screen):
+	skin = """
+	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="132,64">
+		<widget source="session.CurrentService" render="Label" position="6,0" size="120,25" font="Regular;14" halign="center" valign="center" >
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Progress" position="16,27" size="100,5" borderWidth="1">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="6,32" size="120,32" font="Regular;32" halign="center" valign="center">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="session.RecordState" render="FixedLabel" text=" " position="6,32" zPosition="1" size="120,32">
+			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+	</screen>"""
+
+	def __init__(self, session, parent):
+		Screen.__init__(self, session)
+		self.skinName = "InfoBarMoviePlayerSummary"
+
+		
 class DirectYouTubePlayer(Screen, InfoBarNotifications):
 	STATE_IDLE = 0
 	STATE_PLAYING = 1
@@ -26,9 +50,12 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 	ENABLE_RESUME_SUPPORT = True
 	ALLOW_SUSPEND = True
 
-	def __init__(self, session, mrl, title, currentList, infoCallback = None):
+	def __init__(self, session, mrl, title, currentList, contextMenuEntries, infoCallback, name):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
+		self.contextMenuEntries = contextMenuEntries
+		self.infoCallback = infoCallback
+		self.name = name
 		self.skinName = "MoviePlayer"
 		self.session = session
 		self.service = eServiceReference(4097, 0, mrl)
@@ -36,26 +63,54 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		self.currentList = currentList
 		self.infoCallback = infoCallback
 		self.screen_timeout = 5000
+		
+		class DirectYouTubePlayerActionMap(ActionMap):
+			def __init__(self, player, contexts = [ ], actions = { }, prio=0):
+				ActionMap.__init__(self, contexts, actions, prio)
+				self.player = player
 
-		print "evEOF=%d" % iPlayableService.evEOF
+			def action(self, contexts, action):
+				if action[:5] == "seek:":
+					time = int(action[5:])
+					self.player.seekRelative(time * 90000)
+					return 1
+				elif action[:8] == "seekdef:":
+					key = int(action[8:])
+					time = [-config.seek.selfdefined_13.value, False, config.seek.selfdefined_13.value,
+							-config.seek.selfdefined_46.value, False, config.seek.selfdefined_46.value,
+							-config.seek.selfdefined_79.value, False, config.seek.selfdefined_79.value][key-1]
+					self.player.seekRelative(time * 90000)
+					return 1
+				else:
+					return ActionMap.action(self, contexts, action)
+					
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
 			{
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 				iPlayableService.evStart: self.__serviceStarted,
-				iPlayableService.evEOF: self.__evEOF,
+				iPlayableService.evEOF: self.__evEOF
 			})
 
-		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"],
+		self["actions"] = DirectYouTubePlayerActionMap(self, ["OkCancelActions", "TvRadioActions", "InfobarSeekActions", "MediaPlayerActions", "YouTubePlayerScreenActions"],
 		{
 				"ok": self.ok,
-				"cancel": self.leavePlayer,
-				"stop": self.leavePlayer,
-				"playpauseService": self.playpauseService,
-				"seekFwd": self.playNextFile,
-				"seekBack": self.playPrevFile,
-				"showEventInfo": self.showVideoInfo,
+				"cancel": self.close,
+				"keyTV": self.close,
+				"pauseService": self.playpauseService,
+				"unPauseService": self.playpauseService,
+				"play": self.play,
+#				"seekFwd": self.seekFwd,
+#				"seekBack": self.seekBack,
+#				"seekFwdDown": self.seekFwd,
+#				"seekBackDown": self.seekBack,
+#				"seekFwdManual": self.seekManual,
+#				"seekBackManual": self.seekManual,
+				"next": self.playNextFile,
+				"previous": self.playPrevFile,
+				"menu"	:	self.openContextMenu,
+				"info"	:	self.showVideoInfo,
 			}, -2)
-
+			
 		self.oldservice = self.session.screen["CurrentService"]
 		self.oldNavService = session.nav.getCurrentlyPlayingServiceReference()
 
@@ -69,9 +124,14 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		self.onPlayStateChanged = [ ]
 		self.__seekableStatusChanged()
 
-		self.play()
 		self.onClose.append(self.__onClose)
+		
+		self.play()
 
+	def createSummary(self):
+		print "[YTB] createSummary"
+		return DirectYouTubePlayerSummary
+		
 	def __onClose(self):
 		self.session.nav.stopService()
 		self.session.screen["CurrentService"] = self.oldservice
@@ -80,7 +140,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 	def __evEOF(self):
 		print "evEOF=%d" % iPlayableService.evEOF
 		print "Event EOF"
-		self.handleLeave(config.plugins.mytube.general.on_movie_stop.value)
+		self.close()
 
 	def __setHideTimer(self):
 		self.hidetimer.start(self.screen_timeout)
@@ -108,34 +168,9 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		if self.infoCallback is not None:
 			self.infoCallback()
 
-
-	def playNextFile(self):
-		print "playNextFile"
-		mrl, name = self.currentList.getNextFile()
-		if mrl is None:
-			self.handleLeave(config.plugins.mytube.general.on_movie_stop.value, True)
-		else:
-			self.playService(mrl, name)
-			self.showInfobar()
-
-	def playPrevFile(self):
-		print "playPrevFile"
-		mrl, name = self.currentList.getPrevFile()
-		if mrl is None:
-			self.handleLeave(config.plugins.mytube.general.on_movie_stop.value, True)
-		else:
-			self.playService(mrl, name)
-			self.showInfobar()
-
-	def playagain(self):
-		print "playagain"
-		if self.state != self.STATE_IDLE:
-			self.stopCurrent()
-		self.play()
-
 	def playService(self, mrl, name):
-		if self.state != self.STATE_IDLE:
-			self.stopCurrent()
+#		if self.state != self.STATE_IDLE:
+#			self.stopCurrent()
 		self.service = eServiceReference(4097, 0, mrl)
 		self.service.setName(name)
 		self.play()
@@ -149,10 +184,10 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		if self.shown:
 			self.__setHideTimer()
 
-	def stopCurrent(self):
-		print "stopCurrent"
-		self.session.nav.stopService()
-		self.state = self.STATE_IDLE
+#	def stopCurrent(self):
+#		print "stopCurrent"
+#		self.session.nav.stopService()
+#		self.state = self.STATE_IDLE
 
 	def playpauseService(self):
 		print "playpauseService"
@@ -170,6 +205,33 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 		print "unPauseService"
 		if self.state == self.STATE_PAUSED:
 			self.setSeekState(self.STATE_PLAYING)
+
+
+	def playNextFile(self):
+		print "[YTB] playNextFile"
+		if self.currentList != None:
+			media, name = self.currentList.getNextFile()
+			if media is None:
+				self.session.open(
+						MessageBox, _("No more files in this directory"), MessageBox.TYPE_INFO
+				)
+				self.close()
+			else:
+				self.playService(media, name)
+				self.showInfobar()
+
+	def playPrevFile(self):
+		print "[YTB] playPrevFile"
+		if self.currentList != None:
+			media, name = self.currentList.getPrevFile()
+			if media is None:
+				self.session.open(
+						MessageBox, _("No previous file in this directory"), MessageBox.TYPE_INFO
+				)
+				self.close()
+			else:
+				self.playService(media, name)
+				self.showInfobar()
 
 
 	def getSeek(self):
@@ -236,39 +298,47 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 
 		return True
 
-	def handleLeave(self, how, error = False):
-		self.is_closing = True
-		if how == "ask":
-			list = (
-				(_("Yes"), "quit"),
-				(_("No, but play video again"), "playagain"),
-				(_("Yes, but play next video"), "playnext"),
-				(_("Yes, but play previous video"), "playprev"),
-			)
-			if error is False:
-				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list = list)
-			else:
-				self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("No playable video found! Stop playing this movie?"), list = list)
-		else:
-			self.leavePlayerConfirmed([True, how])
+	def seekRelative(self, pts):
+		seekable = self.getSeek()
+		if seekable is None:
+			return
+#		prevstate = self.seekstate
 
-	def leavePlayer(self):
-		self.handleLeave(config.plugins.mytube.general.on_movie_stop.value)
+#		if self.seekstate == self.STATE_EOF:
+#			if prevstate == self.STATE_PAUSE:
+#				self.setSeekState(self.STATE_PAUSE)
+#			else:
+#				self.setSeekState(self.STATE_PLAY)
+		seekable.seekRelative(pts<0 and -1 or 1, abs(pts))
+		if abs(pts) > 100 and config.usage.show_infobar_on_skip.value:
+			self.showInfobar()
 
-	def leavePlayerConfirmed(self, answer):
-		answer = answer and answer[1]
-		if answer == "quit":
-			self.close()
-		elif answer == "playnext":
-			self.playNextFile()
-		elif answer == "playprev":
-			self.playPrevFile()
-		elif answer == "playagain":
-			self.playagain()
 
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
 		if not playing :
 			return
-		self.handleLeave(config.usage.on_movie_eof.value)
+		self.close()
+
+
+	def showVideoInfo(self):
+		if self.shown:
+			self.hideInfobar()
+		self.infoCallback()
+
+
+	def openContextMenu(self):
+		if self.shown:
+			self.hideInfobar()
+		contextMenuList = YouTubeEntryContextMenuList()
+		for entry in self.contextMenuEntries:
+			contextMenuList.appendEntry(entry)
+		self.session.openWithCallback(self.menuActionCoosen, YouTubeEntryContextMenu, contextMenuList, self.name)
+
+
+	def menuActionCoosen(self, cookie):
+		if cookie is not None:
+			if cookie[1]:
+				self.close()
+			cookie[0]()
