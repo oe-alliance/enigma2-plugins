@@ -518,9 +518,10 @@ def AddTimerE2Callback(self, session, answer):
 	try: root = xml.etree.cElementTree.fromstring(answer)
 	except: pass
 	statetext = root.findtext("e2statetext")
+	state = root.findtext("e2state")
 	if statetext:
 		text =  statetext.encode("utf-8", 'ignore')
-	ok = text == "Timer added successfully!"
+	ok = state == "True"
 	session.open(MessageBox,_("Partnerbox Answer: \n%s") % (text),MessageBox.TYPE_INFO, timeout = 3)
 	if ok:
 		if (config.plugins.Partnerbox.enablepartnerboxepglist.value): 
