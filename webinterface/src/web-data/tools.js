@@ -1601,6 +1601,10 @@ function loadDeviceInfo(){
 	loadContentDynamic(showDeviceInfo, 'Device Information');
 }
 
+function loadTools(){
+	loadContentStatic('tplTools', 'Tools');
+}
+
 function loadAbout(){
 	loadContentStatic('tplAbout', 'About');
 }

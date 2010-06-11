@@ -454,6 +454,57 @@
 	}
 	
 /*****************
+* Tools
+******************/	
+	
+	#tools{
+		font-size: 12px;
+		text-align: center;
+	}
+	
+	#tools h1{
+		font-size: 14px;
+	}
+	
+	.tools a, .tools a:hover, .tools a:visited {
+		text-decoration: underline;
+	}
+	
+	.toolsHeader {
+		color:#FFF;
+		font-weight:bold;
+		background-color:#000;
+	}
+
+	.tools {
+		border: 1px solid #CCC;
+		width: 100%;
+		margin: 0px;
+		padding: 0px;		
+	}
+	
+	.tools td{
+		font-size:12px;
+		padding: 5px;
+		vertical-align:top;	
+		
+	}
+
+	.toolsElementLeft{
+		font-weight: bold;
+		width: 15%;
+		text-align: left;
+	}
+	.toolsElementCenter{
+		text-align: left;
+	}
+
+	.toolsElementRight{
+		width: 10%;
+		text-align: left;
+	}
+
+/*****************
 * About
 ******************/	
 	
