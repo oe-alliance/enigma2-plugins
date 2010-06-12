@@ -720,8 +720,6 @@ class FritzCallFBF:
 			debug("[FritzCallFBF] _gotPageCalls: got csv, setting callList")
 			if self._callScreen:
 				self._callScreen.updateStatus(_("done"))
-			# check for error: wrong password or password not set... TODO
-			# found = re.search('Melden Sie sich mit dem Kennwort der FRITZ!Box an', csv)
 			if csv.find('Melden Sie sich mit dem Kennwort der FRITZ!Box an') != -1:
 				text = _("You need to set the password of the FRITZ!Box\nin the configuration dialog to display calls\n\nIt could be a communication issue, just try again.")
 				# self.session.open(MessageBox, text, MessageBox.TYPE_ERROR, timeout=config.plugins.FritzCall.timeout.value)
@@ -744,47 +742,37 @@ class FritzCallFBF:
 		if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
 			filtermsns = map(lambda x: x.strip(), config.plugins.FritzCall.filtermsn.value.split(","))
 			debug("[FritzCallFBF] _gotPageCalls: filtermsns %s" % (repr(filtermsns)))
+
+		# Typ;e;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
+		lines = map(lambda line: line.split(';'), lines)
+		lines = filter(lambda line: (len(line)==7 and (line[0]=="Typ" or self._callType == '.' or line[0] == self._callType)), lines)
+
 		for line in lines:
-			# Typ;e;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
-			elems = line.split(';')
-			# found = re.match("^(" + self._callType + ");([^;]*);([^;]*);([^;]*);([^;]*);([^;]*);([^;]*)", line)
-			if len(elems) != 7: # this happens, if someone puts a ';' in the name in the FBF phonebook
-				debug("[FritzCallFBF] _gotPageCalls: len != 7: %s" % (line))
-			if len(elems) == 7 and (self._callType == '.' or elems[0] == self._callType):
-				# debug("[FritzCallFBF] _gotPageCalls: elems %s" % (elems))
-				direct = elems[0]
-				date = elems[1]
-				length = elems[6]
-				remote = resolveNumber(elems[3])
-				if not remote and direct != FBF_OUT_CALLS and elems[2]:
-					remote = elems[2]
-				#===============================================================
-				# found1 = re.match('Internet: (.*)', found.group(6))
-				# if found1:
-				#	here = found1.group(1)
-				# else:
-				#	here = found.group(6)
-				#===============================================================
-				here = elems[5]
-				start = here.find('Internet: ')
-				if start != -1:
-					start += len('Internet: ')
-					here = here[start:]
-				else:
-					here = elems[5]
-				if config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
-					# debug("[FritzCallFBF] _gotPageCalls: check %s" % (here))
-					if here not in filtermsns:
-						# debug("[FritzCallFBF] _gotPageCalls: skip %s" % (here))
-						continue
-				here = resolveNumber(here)
+			# debug("[FritzCallFBF] _gotPageCalls: elems %s" % (elems))
+			direct = line[0]
+			date = line[1]
+			length = line[6]
+			remote = resolveNumber(line[3])
+			if not remote and direct != FBF_OUT_CALLS and line[2]:
+				remote = line[2]
+			here = line[5]
+			start = here.find('Internet: ')
+			if start != -1:
+				start += len('Internet: ')
+				here = here[start:]
+			else:
+				here = line[5]
+			if direct != "Typ" and config.plugins.FritzCall.filter.value and config.plugins.FritzCall.filterCallList.value:
+				# debug("[FritzCallFBF] _gotPageCalls: check %s" % (here))
+				if here not in filtermsns:
+					# debug("[FritzCallFBF] _gotPageCalls: skip %s" % (here))
+					continue
+			here = resolveNumber(here)
 
-				number = stripCbCPrefix(elems[3], config.plugins.FritzCall.country.value)
-				if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
-					number = config.plugins.FritzCall.prefix.value + number
-				callListL.append((number, date, direct, remote, length, here))
-
-		# debug("[FritzCallFBF] _gotPageCalls result:\n" + text
+			number = stripCbCPrefix(line[3], config.plugins.FritzCall.country.value)
+			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
+				number = config.plugins.FritzCall.prefix.value + number
+			callListL.append((number, date, direct, remote, length, here))
 
 		if callback:
 			# debug("[FritzCallFBF] _gotPageCalls call callback with\n" + text
@@ -1915,8 +1903,11 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				direct = directfailed
 			return direct
 
+		debug("[FritzDisplayCalls] gotCalls: %s" %repr(listOfCalls))
 		self.list = [(number, date[:6] + ' ' + date[9:14], pixDir(direct), remote, length, here) for (number, date, direct, remote, length, here) in listOfCalls]
 		self["entries"].setList(self.list)
+		if len(self.list) > 1:
+			self["entries"].setIndex(1)
 
 	def updateStatus(self, text):
 		if self.has_key("statusbar"):
