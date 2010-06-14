@@ -56,6 +56,9 @@ from YouTubeUserConfig import youTubeUserConfig
 from YouTubeUserList import YouTubeUserListScreen
 from YouTubePlayList import YouTubePlaylistScreen
 
+#from Screens.InfoBar import MoviePlayer
+#from enigma import eServiceReference
+
 from . import _
 
 def YouTubeEntryComponent(entry):
@@ -659,6 +662,8 @@ class YouTubeListScreen(Screen, NumericalTextInput):
 				entries.append((_("Add to playlist"), [self.addToPlaylist, False]))
 			entries.append((_("Get related videos"), [self.getRelatedDelayed, True]))
 			entries.append((_("Get video responses"), [self.getResponsesDelayed, True]))
+
+#			self.session.open(MoviePlayer, eServiceReference(4097, 0, mrl))
 
 			self.session.open(DirectYouTubePlayer, mrl, youTubeEntry.getTitle(), self, contextMenuEntries = entries, infoCallback = self.showVideoInfo, name = self["list"].getCurrent()[0].getTitle())
 		else:

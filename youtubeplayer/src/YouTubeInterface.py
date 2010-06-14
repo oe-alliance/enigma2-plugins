@@ -224,7 +224,7 @@ class YouTubeEntry():
 			self.thumbnail[str(index)] = None
 			cookie = {"entry" : self, "file" : thumbnailFile, "callback" : callback, "index" : index}
 			downloadPage(thumbnailUrl, thumbnailFile).addCallback(fetchFinished, cookie).addErrback(fetchFailed, cookie)
-		
+
 
 	def loadThumbnails(self, callback):
 		print "[YTB] YouTubeEntry::loadThumbnails()"
@@ -242,7 +242,7 @@ class YouTubeEntry():
 				if 'token' in video_info:
 					break
 			except (URLError, HTTPException, error), err:
-				return None, # ('ERROR: unable to download video info webpage: %s' % str(err))
+				return None #, ('ERROR: unable to download video info webpage: %s' % str(err))
 		if 'token' not in video_info:
 			if 'reason' not in video_info:
 				reason = 'Unable to extract "t" parameter for unknown reason'
@@ -251,7 +251,7 @@ class YouTubeEntry():
 			return None #, reason
 		else:
 			token = video_info['token'][0]
-			video_real_url = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en&fmt=18' % (video_id, token)
+			video_real_url = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en&fmt=%s' % (video_id, token, fmt)
 			return video_real_url #, 'OK'
 
 
