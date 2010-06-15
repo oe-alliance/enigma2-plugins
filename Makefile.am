@@ -28,6 +28,7 @@ SUBDIRS = \
 	letterbox \
 	logomanager \
 	mediadownloader \
+	merlinepg \
 	merlinmusicplayer \
 	meteoitalia \
 	mosaic \
