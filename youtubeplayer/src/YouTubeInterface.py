@@ -229,10 +229,24 @@ class YouTubeEntry():
 	def loadThumbnails(self, callback):
 		print "[YTB] YouTubeEntry::loadThumbnails()"
 		self.loadThumbnail(0, callback)
+		
+	def verify_url(self, url):
+		try:
+			request = Request(url, None, std_headers)
+			data = urlopen(request)
+			data.read(1)
+			url = data.geturl()
+			data.close()
+		except (OSError, IOError, URLError, HTTPException, error), err:
+					return None
+		else:
+			return url
 
 
 	def getVideoUrl(self, fmt):
 		video_id = str(self.getYouTubeId())
+		if video_id is None:
+			return None #, no video_id
 		for el_type in ['detailpage', 'embedded', 'vevo']:
 			video_info_url = ('http://www.youtube.com/get_video_info?&video_id=%s&el=%s&ps=default&eurl=&gl=DE&hl=en'% (video_id, el_type))
 			request = Request(video_info_url, None, std_headers)
@@ -250,8 +264,25 @@ class YouTubeEntry():
 				reason = unquote_plus(video_info['reason'][0])
 			return None #, reason
 		else:
+			quality_dict = {}
+			quality_dict["22"] = "18"
+			quality_dict["18"] = "6"
+			quality_dict["6"] = "1"
 			token = video_info['token'][0]
-			video_real_url = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en&fmt=%s' % (video_id, token, fmt)
+			while True: 
+				print "[YTB] Trying fmt=" + fmt
+				video_real_url = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en&fmt=%s' % (video_id, token, fmt)
+				video_real_url = self.verify_url(video_real_url)
+				if video_real_url is None:
+					if fmt == "1":
+						print "[YTB] no valid fmt found"
+						break
+					else:
+						print "[YTB] not found"
+						fmt = quality_dict[fmt]
+				else:
+					print "[YTB] found"
+					break
 			return video_real_url #, 'OK'
 
 
