@@ -264,10 +264,7 @@ class YouTubeEntry():
 				reason = unquote_plus(video_info['reason'][0])
 			return None #, reason
 		else:
-			quality_dict = {}
-			quality_dict["22"] = "18"
-			quality_dict["18"] = "6"
-			quality_dict["6"] = "1"
+			quality_fallback_dict = dict({"22" : "18",  "18" : "6",  "6" : "1"})
 			token = video_info['token'][0]
 			while True: 
 				print "[YTB] Trying fmt=" + fmt
@@ -279,7 +276,7 @@ class YouTubeEntry():
 						break
 					else:
 						print "[YTB] not found"
-						fmt = quality_dict[fmt]
+						fmt = quality_fallback_dict[fmt]
 				else:
 					print "[YTB] found"
 					break
