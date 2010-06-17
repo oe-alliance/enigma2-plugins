@@ -258,11 +258,13 @@ class VirtualZap(Screen):
 			"cancel": self.closing,
 			"right": self.nextService,
 			"left": self.prevService,
-			"nextBouquet": self.nextBouquet,
-			"prevBouquet": self.prevBouquet,
+			"nextBouquet": self.showFavourites,
+			"prevBouquet": self.openServiceList,
 			"showEPGList": self.openEventView,
 			"blue": self.standardPiP,
 			"yellow": self.switchAndStandardPiP,
+			"down": self.switchChannelDown,
+			"up": self.switchChannelUp,
 		},-2)
 		self["actions2"] = NumberActionMap(["NumberActions"],
 		{
@@ -293,6 +295,19 @@ class VirtualZap(Screen):
 			self["video"] = Label()
 		# this is the servicelist from ChannelSelectionBase
 		self.servicelist = servicelist
+		# save orig. method of zap in servicelist
+		self.servicelist_orig_zap = self.servicelist.zap 
+		# when displaying ChannelSelection, do not zap when pressing "ok", so new method is needed	
+		self.servicelist.zap = self.servicelist_overwrite_zap
+		# overwrite the actionmap of ChannelSelection
+		self.servicelist["actions"] = ActionMap(["OkCancelActions"],
+			{
+				"cancel": self.cancelChannelSelection,
+				"ok": self.servicelist.channelSelected,
+			})
+		# temp. vars, needed when pressing cancel in ChannelSelection
+		self.curSelectedRef = None
+		self.curSelectedBouquet = None
 		# needed, because if we won't zap, we have to go back to the current bouquet and service
 		self.curRef = ServiceReference(self.servicelist.getCurrentSelection())
 		self.curBouquet = self.servicelist.getRoot()
@@ -307,6 +322,8 @@ class VirtualZap(Screen):
 		# prepare exitTimer
 		self.exitTimer = eTimer()
 		self.exitTimer.timeout.get().append(self.standardPiP)
+		# reverse changes of ChannelSelection when closing plugin
+		self.onClose.append(self.__onClose)
 
 	def onLayoutReady(self):
 		self.updateInfos()
@@ -479,7 +496,7 @@ class VirtualZap(Screen):
 		if self.pipAvailable:
 			self.pipservice = None
 		# play selected service and close virtualzap
-		self.servicelist.zap()
+		self.servicelist_orig_zap()
 		# save last used service and bouqet ref
 		self.saveLastService(self.curRef.ref.toString(), self.curBouquet.toString())
 		self.close()
@@ -508,7 +525,7 @@ class VirtualZap(Screen):
 		# save last used service and bouqet ref
 		self.saveLastService(self.curRef.ref.toString(), self.curBouquet.toString())
 		# play selected service
-		self.servicelist.zap()
+		self.servicelist_orig_zap()
 		# close VZ and start standard PiP
 		self.close(self.curRef.ref, servicePath)
 
@@ -589,13 +606,84 @@ class VirtualZap(Screen):
 		if self.pipAvailable:
 			self.pipservice = None
 		# zap and set new values for the new reference and bouquet
-		self.servicelist.zap()
+		self.servicelist_orig_zap()
 		self.curRef = ServiceReference(self.servicelist.getCurrentSelection())
 		self.curBouquet = self.servicelist.getRoot()
 		# select old values in servicelist
 		self.setServicelistSelection(currentBouquet, currentRef.ref)
 		# play old service in PiP
 		self.updateInfos()
+
+	# ChannelSelection Support
+	def prepareChannelSelectionDisplay(self):
+		# stop exitTimer
+		if self.exitTimer.isActive():
+			self.exitTimer.stop()
+		# turn off PiP
+		if self.pipAvailable:
+			self.pipservice = None
+		# save current ref and bouquet ( for cancel )
+		self.curSelectedRef = eServiceReference(self.servicelist.getCurrentSelection().toString())
+		self.curSelectedBouquet = self.servicelist.getRoot()
+
+	def cancelChannelSelection(self):
+		# select service and bouquet selected before started ChannelSelection
+		if self.servicelist.revertMode is None:
+			ref = self.curSelectedRef
+			bouquet = self.curSelectedBouquet
+			if ref.valid() and bouquet.valid():
+				# select bouquet and ref in servicelist
+				self.setServicelistSelection(bouquet, ref)
+		# close ChannelSelection
+		self.servicelist.revertMode = None
+		self.servicelist.asciiOff()
+		self.servicelist.close(None)
+
+		# clean up
+		self.curSelectedRef = None
+		self.curSelectedBouquet = None
+		# display VZ data
+		self.servicelist_overwrite_zap()
+
+	def switchChannelDown(self):
+		self.prepareChannelSelectionDisplay()
+		self.servicelist.moveDown()
+		# show ChannelSelection
+		self.session.execDialog(self.servicelist)
+
+	def switchChannelUp(self):
+		self.prepareChannelSelectionDisplay()
+		self.servicelist.moveUp()
+		# show ChannelSelection
+		self.session.execDialog(self.servicelist)
+
+	def showFavourites(self):
+		self.prepareChannelSelectionDisplay()
+		self.servicelist.showFavourites()
+		# show ChannelSelection
+		self.session.execDialog(self.servicelist)
+
+	def openServiceList(self):
+		self.prepareChannelSelectionDisplay()
+		# show ChannelSelection
+		self.session.execDialog(self.servicelist)
+
+	def servicelist_overwrite_zap(self):
+		# we do not really want to zap to the service, just display data for VZ
+		self.currentPiP = ""
+		if self.isPlayable():
+			self.updateInfos()
+
+	def __onClose(self):
+		# reverse changes of ChannelSelection 
+		self.servicelist.zap = self.servicelist_orig_zap
+		self.servicelist["actions"] = ActionMap(["OkCancelActions", "TvRadioActions"],
+			{
+				"cancel": self.servicelist.cancel,
+				"ok": self.servicelist.channelSelected,
+				"keyRadio": self.servicelist.setModeRadio,
+				"keyTV": self.servicelist.setModeTv,
+			})
 
 class VirtualZapConfig(Screen, ConfigListScreen):
 
