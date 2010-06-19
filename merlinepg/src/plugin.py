@@ -51,6 +51,7 @@ config.plugins.MerlinPG.StartFirst = ConfigYesNo(default=False)
 config.plugins.MerlinPG.Primetime  = ConfigInteger(default=20, limits=(0, 23))
 config.plugins.MerlinPG.PTlow  = ConfigInteger(default=10, limits=(0, 59))
 config.plugins.MerlinPG.PThi  = ConfigInteger(default=20, limits=(0, 59))
+config.plugins.MerlinPG.AutoPT  = ConfigYesNo(default=False)
 
 
 
@@ -83,6 +84,7 @@ class MerlinPGsetup(ConfigListScreen, Screen):
 		clist.append(getConfigListEntry(_("Primetime (h):"), config.plugins.MerlinPG.Primetime))
 		clist.append(getConfigListEntry(_("Primetime from (m):"), config.plugins.MerlinPG.PTlow))
 		clist.append(getConfigListEntry(_("Primetime to (m):"), config.plugins.MerlinPG.PThi))
+		clist.append(getConfigListEntry(_("Auto-Primetime:"), config.plugins.MerlinPG.AutoPT))
 		ConfigListScreen.__init__(self, clist)
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.set, "cancel": self.exit}, -2)
 
@@ -251,6 +253,8 @@ class Merlin_PGII(Screen):
 			self.Fields = 5
 		self.CheckForEPG = eTimer()
 		self.CheckForEPG.callback.append(self.CheckItNow)
+		self.AutoPrime = eTimer()
+		self.AutoPrime.callback.append(self.go2Primetime)
 		self["prg_list"] = MenuList(self.getChannels())
 		self["currCh1"] = Label(" ")
 		self["currCh2"] = Label(" ")
@@ -325,6 +329,8 @@ class Merlin_PGII(Screen):
 		self.updateInfos()
 
 	def updateInfos(self):
+		if self.AutoPrime.isActive():
+			self.AutoPrime.stop()
 		self.displayActiveEPG()
 		prgIndex = self["prg_list"].getSelectionIndex()
 		CurrentPrg = self.myServices[prgIndex]
@@ -384,6 +390,8 @@ class Merlin_PGII(Screen):
 			else:
 				self["currCh5"].setText(str(" "))
 				self["epg_list5"].hide()
+		if config.plugins.MerlinPG.AutoPT.value:
+			 self.AutoPrime.start(500)
 
 	def onSelectionChanged(self):
 		pass
@@ -545,6 +553,8 @@ class Merlin_PGII(Screen):
 		self.updateInfos()
 
 	def go2Primetime(self):
+		if self.AutoPrime.isActive():
+			self.AutoPrime.stop()
 		for xFL in range(1, self.Fields):
 			self["epg_list"+str(xFL)].instance.moveSelection(self["epg_list"+str(xFL)].instance.moveTop)
 			for i in range(0,(self.Fields*3)):
