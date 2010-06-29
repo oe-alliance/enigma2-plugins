@@ -192,7 +192,7 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 			cuts = self.input_manualcuts.value.split(' ')
 			while "" in cuts:
 				cuts.remove("")
-		self.close((True, self.input_replace.value, path, self.input_title.value, self.input_descr.value, cuts))
+		self.close((True, self.input_replace.value == "yes", path, self.input_title.value, self.input_descr.value, cuts))
 
 	def keyCancel(self):
 		self.close((False,))

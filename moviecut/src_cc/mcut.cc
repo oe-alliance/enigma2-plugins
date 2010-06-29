@@ -926,14 +926,22 @@ int main(int argc, char* argv[])
       tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
       unlink(tmpname);
       rename(makefilename(outname, suff, ".ts", 0), tmpname);
-      tmpname = makefilename(inname, 0, ".ts", ".cuts");
-      tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
-      unlink(tmpname);
-      rename(makefilename(outname, suff, ".ts", ".cuts"), tmpname);
       tmpname = makefilename(inname, 0, ".ts", ".ap");
       tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
       unlink(tmpname);
       rename(makefilename(outname, suff, ".ts", ".ap"), tmpname);
+      if (f_sc != -1) {
+        tmpname = makefilename(inname, 0, ".ts", ".sc");
+        tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
+        unlink(tmpname);
+        rename(makefilename(outname, suff, ".ts", ".sc"), tmpname);
+      }
+      if (f_cuts != -1) {
+        tmpname = makefilename(inname, 0, ".ts", ".cuts");
+        tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
+        unlink(tmpname);
+        rename(makefilename(outname, suff, ".ts", ".cuts"), tmpname);
+      }
       if (!metafailed) {
         tmpname = makefilename(inname, 0, ".ts", ".meta");
         tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
@@ -942,8 +950,11 @@ int main(int argc, char* argv[])
       }
     } else {
       unlink(makefilename(inname, 0, ".ts", 0));
-      unlink(makefilename(inname, 0, ".ts", ".cuts"));
       unlink(makefilename(inname, 0, ".ts", ".ap"));
+      if (f_sc != -1)
+        unlink(makefilename(inname, 0, ".ts", ".sc"));
+      if (f_cuts != -1)
+        unlink(makefilename(inname, 0, ".ts", ".cuts"));
       tmpname = makefilename(inname, 0, ".ts", ".eit", 1);
       tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
       rename(tmpname, makefilename(outname, 0, ".ts", ".eit", 1));
