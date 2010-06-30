@@ -14,7 +14,7 @@
                     <author>Vali</author>
                     <name>Merlin Programm Guide</name>
                     <packagename>enigma2-plugin-extensions-merlinepg</packagename>
-								    <shortdescription>Eine grafische EPG Oberflache</shortdescription>
+		    <shortdescription>Eine grafische EPG Interface</shortdescription>
                     <description>Eine grafische EPG Oberflache</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_merlinepg.jpg" />		 
           </info>

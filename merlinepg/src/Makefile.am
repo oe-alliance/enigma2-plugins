@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/Merlin_PG
+installdir = /usr/lib/enigma2/python/Plugins/Extensions/MerlinEPG
 
 install_PYTHON = *.py
 
