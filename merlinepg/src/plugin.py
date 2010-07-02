@@ -45,15 +45,15 @@ from time import localtime
 
 
 
-config.plugins.MerlinPG = ConfigSubsection()
-config.plugins.MerlinPG.Columns = ConfigYesNo(default=True)
-config.plugins.MerlinPG.StartFirst = ConfigYesNo(default=False)
-config.plugins.MerlinPG.Primetime  = ConfigInteger(default=20, limits=(0, 23))
-config.plugins.MerlinPG.PTlow  = ConfigInteger(default=10, limits=(0, 59))
-config.plugins.MerlinPG.PThi  = ConfigInteger(default=20, limits=(0, 59))
-config.plugins.MerlinPG.AutoPT  = ConfigYesNo(default=False)
-config.plugins.MerlinPG.ZapOnOK  = ConfigYesNo(default=False)
-config.plugins.MerlinPG.PageUDonBouquets  = ConfigYesNo(default=True)
+config.plugins.MerlinEPG = ConfigSubsection()
+config.plugins.MerlinEPG.Columns = ConfigYesNo(default=True)
+config.plugins.MerlinEPG.StartFirst = ConfigYesNo(default=False)
+config.plugins.MerlinEPG.Primetime  = ConfigInteger(default=20, limits=(0, 23))
+config.plugins.MerlinEPG.PTlow  = ConfigInteger(default=10, limits=(0, 59))
+config.plugins.MerlinEPG.PThi  = ConfigInteger(default=20, limits=(0, 59))
+config.plugins.MerlinEPG.AutoPT  = ConfigYesNo(default=False)
+config.plugins.MerlinEPG.ZapOnOK  = ConfigYesNo(default=False)
+config.plugins.MerlinEPG.PageUDonBouquets  = ConfigYesNo(default=True)
 
 
 
@@ -65,7 +65,7 @@ def Plugins(**kwargs):
 
 
 def startMerlinPG(session, servicelist, **kwargs):
-	if config.plugins.MerlinPG.Columns.value:
+	if config.plugins.MerlinEPG.Columns.value:
 		session.open(Merlin_PGII, servicelist)
 	else:
 		session.open(Merlin_PGd, servicelist)
@@ -81,19 +81,19 @@ class MerlinPGsetup(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		clist = []
-		clist.append(getConfigListEntry(_("Show EPG in columns:"), config.plugins.MerlinPG.Columns))
-		clist.append(getConfigListEntry(_("Start allways on channel 1:"), config.plugins.MerlinPG.StartFirst))
-		clist.append(getConfigListEntry(_("Primetime (h):"), config.plugins.MerlinPG.Primetime))
-		clist.append(getConfigListEntry(_("Primetime from (m):"), config.plugins.MerlinPG.PTlow))
-		clist.append(getConfigListEntry(_("Primetime to (m):"), config.plugins.MerlinPG.PThi))
-		clist.append(getConfigListEntry(_("Auto-Primetime:"), config.plugins.MerlinPG.AutoPT))
-		clist.append(getConfigListEntry(_("Zap with OK button (false=EventInfo):"), config.plugins.MerlinPG.ZapOnOK))
-		clist.append(getConfigListEntry(_("Page-up/down with bouquet+/- :"), config.plugins.MerlinPG.PageUDonBouquets))
+		clist.append(getConfigListEntry(_("Show EPG in columns:"), config.plugins.MerlinEPG.Columns))
+		clist.append(getConfigListEntry(_("Start allways on channel 1:"), config.plugins.MerlinEPG.StartFirst))
+		clist.append(getConfigListEntry(_("Primetime (h):"), config.plugins.MerlinEPG.Primetime))
+		clist.append(getConfigListEntry(_("Primetime from (m):"), config.plugins.MerlinEPG.PTlow))
+		clist.append(getConfigListEntry(_("Primetime to (m):"), config.plugins.MerlinEPG.PThi))
+		clist.append(getConfigListEntry(_("Auto-Primetime:"), config.plugins.MerlinEPG.AutoPT))
+		clist.append(getConfigListEntry(_("Zap with OK button (false=EventInfo):"), config.plugins.MerlinEPG.ZapOnOK))
+		clist.append(getConfigListEntry(_("Page-up/down with bouquet+/- :"), config.plugins.MerlinEPG.PageUDonBouquets))
 		ConfigListScreen.__init__(self, clist)
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.set, "cancel": self.exit}, -2)
 
 	def set(self):
-		if not config.plugins.MerlinPG.PThi.value > config.plugins.MerlinPG.PTlow.value:
+		if not config.plugins.MerlinEPG.PThi.value > config.plugins.MerlinEPG.PTlow.value:
 			return
 		for x in self["config"].list:
 			x[1].save()
@@ -129,7 +129,7 @@ class MerlinEPGList(EPGList):
 		r3=self.descr_rect
 		t = localtime(beginTime)
 		self.evCnt = self.evCnt + 1
-		if (t[3]==config.plugins.MerlinPG.Primetime.value) and (t[4]>config.plugins.MerlinPG.PTlow.value) and (t[4]<config.plugins.MerlinPG.PThi.value):
+		if (t[3]==config.plugins.MerlinEPG.Primetime.value) and (t[4]>=config.plugins.MerlinEPG.PTlow.value) and (t[4]<config.plugins.MerlinEPG.PThi.value):
 			res = [
 				None,
 				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, "  _________________"),
@@ -162,7 +162,7 @@ class MerlinEPGList(EPGList):
 		for OneLine in range(0,self.evCnt):
 			evBgTime, evBgMin = self.getBgTime()
 			if evBgTime is not None:
-				if (evBgTime==config.plugins.MerlinPG.Primetime.value) and (evBgMin>config.plugins.MerlinPG.PTlow.value) and (evBgMin<config.plugins.MerlinPG.PThi.value):
+				if (evBgTime==config.plugins.MerlinEPG.Primetime.value) and (evBgMin>=config.plugins.MerlinEPG.PTlow.value) and (evBgMin<config.plugins.MerlinEPG.PThi.value):
 					break
 				self.moveDown()
 			else:
@@ -323,7 +323,7 @@ class Merlin_PGII(Screen):
 	def onLayoutReady(self):
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
-		if (info is not None) and not(config.plugins.MerlinPG.StartFirst.value):
+		if (info is not None) and not(config.plugins.MerlinEPG.StartFirst.value):
 			nameROH = info.getName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 			for idx in range(1, len(self.list)):
 				name = str(idx) + ". " + nameROH
@@ -396,7 +396,7 @@ class Merlin_PGII(Screen):
 			else:
 				self["currCh5"].setText(str(" "))
 				self["epg_list5"].hide()
-		if config.plugins.MerlinPG.AutoPT.value:
+		if config.plugins.MerlinEPG.AutoPT.value:
 			 self.AutoPrime.start(500)
 
 	def onSelectionChanged(self):		
@@ -463,7 +463,7 @@ class Merlin_PGII(Screen):
 		self["epg_list"+str(self.ActiveEPG)].moveDown()
 
 	def AllUp(self):
-		if config.plugins.MerlinPG.PageUDonBouquets.value:
+		if config.plugins.MerlinEPG.PageUDonBouquets.value:
 			for xU in range(1,self.Fields):
 				self["epg_list"+str(xU)].instance.moveSelection(self["epg_list"+str(xU)].instance.pageUp)
 		else:
@@ -471,7 +471,7 @@ class Merlin_PGII(Screen):
 				self["epg_list"+str(xU)].moveUp()
 
 	def AllDown(self):
-		if config.plugins.MerlinPG.PageUDonBouquets.value:
+		if config.plugins.MerlinEPG.PageUDonBouquets.value:
 			for xU in range(1,self.Fields):
 				self["epg_list"+str(xU)].instance.moveSelection(self["epg_list"+str(xU)].instance.pageDown)
 		else:
@@ -581,7 +581,7 @@ class Merlin_PGII(Screen):
 		self.session.open(ShowMe, "/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPG/help.jpg")
 
 	def UserOK(self):
-		if config.plugins.MerlinPG.ZapOnOK.value:
+		if config.plugins.MerlinEPG.ZapOnOK.value:
 			self.ZapTo()
 		else:
 			self.showEventInfo()
@@ -655,6 +655,7 @@ class Merlin_PGd(Screen):
 		self.CheckForEPG.callback.append(self.CheckItNow)
 		self["currCh"] = Label(_("Channel"))
 		self["prg_list"] = MenuList(self.getChannels())
+		self["fullEventInfo"] = Label(" ")
 		self["epg_list"] = EPGList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
 		self["actions"] = ActionMap(["OkCancelActions", "EPGSelectActions", "ColorActions", "MenuActions", "HelpActions"], {
 									"ok": self.ok, 
@@ -676,7 +677,7 @@ class Merlin_PGd(Screen):
 	def onLayoutReady(self):
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
-		if (info is not None) and not(config.plugins.MerlinPG.StartFirst.value):
+		if (info is not None) and not(config.plugins.MerlinEPG.StartFirst.value):
 			nameROH = info.getName().replace('\xc2\x86', '').replace('\xc2\x87', '')
 			for idx in range(1, len(self.list)):
 				name = str(idx) + ". " + nameROH
@@ -688,7 +689,10 @@ class Merlin_PGd(Screen):
 		self.updateInfos()
 
 	def onSelectionChanged(self):
-		pass
+		curEV = self["epg_list"].getCurrent()
+		event = curEV[0]
+		ext = event and event.getExtendedDescription() or ""
+		self["fullEventInfo"].setText(str(ext))
 
 	def prgUp(self):
 		self["prg_list"].down()
