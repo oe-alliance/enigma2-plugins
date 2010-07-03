@@ -654,10 +654,10 @@ class Merlin_PGd(Screen):
 		self.CheckForEPG = eTimer()
 		self.CheckForEPG.callback.append(self.CheckItNow)
 		self["currCh"] = Label(_("Channel"))
-		self["prg_list"] = MenuList(self.getChannels())
 		self["fullEventInfo"] = Label(" ")
+		self["prg_list"] = MenuList(self.getChannels())
 		self["epg_list"] = EPGList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
-		self["actions"] = ActionMap(["OkCancelActions", "EPGSelectActions", "ColorActions", "MenuActions", "HelpActions"], {
+		self["actions"] = ActionMap(["OkCancelActions", "EPGSelectActions", "ColorActions", "DirectionActions", "MenuActions", "HelpActions"], {
 									"ok": self.ok, 
 									"cancel": self.close,
 									"nextBouquet": self.prgDown,
@@ -670,7 +670,15 @@ class Merlin_PGd(Screen):
 									"yellow": self.go2now,
 									"info": self.ok,
 									"menu": self.menuClicked,
-									"displayHelp": self.myhelp
+									"displayHelp": self.myhelp,
+									"right": self.right,
+									"rightRepeated": self.right,
+									"left": self.left,
+									"leftRepeated": self.left,
+									"up": self.up,
+									"upRepeated": self.up,
+									"down": self.down,
+									"downRepeated": self.down,
 									},-2)
 		self.onLayoutFinish.append(self.onLayoutReady)
 
@@ -808,6 +816,18 @@ class Merlin_PGd(Screen):
 
 	def myhelp(self):
 		self.session.open(ShowMe, "/usr/lib/enigma2/python/Plugins/Extensions/MerlinEPG/help.jpg")
+
+	def up(self):
+		self["epg_list"].moveUp()
+
+	def down(self):
+		self["epg_list"].moveDown()
+
+	def left(self):
+		self["epg_list"].instance.moveSelection(self["epg_list"].instance.pageUp)
+
+	def right(self):
+		self["epg_list"].instance.moveSelection(self["epg_list"].instance.pageDown)
 
 
 
