@@ -8,7 +8,7 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Components.Pixmap import Pixmap
 from Components.PluginComponent import plugins
 from enigma import eListboxPythonMultiContent, ePicLoad, eServiceReference, eTimer, getDesktop, gFont
-from os import listdir
+from os import listdir, popen
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
@@ -40,10 +40,18 @@ LIST_RIGHT = 1
 LIST_NONE = 2
 
 deviceName = HardwareInfo().get_device_name()
-if deviceName.startswith("dm7025"):
-	PLAY_MP4 = False
-else:
-	PLAY_MP4 = True
+
+PLAY_MP4 = False
+
+if not deviceName.startswith("dm7025"):
+	try:
+		#FIXMEE add better check ! ? !
+		for line in popen("opkg info gst-plugin-rtsp").readlines():
+			if line.find("Version: ") != -1:
+				if line[9:] >= "0.10.23-r7.1":
+					PLAY_MP4 = True
+	except:
+		pass
 
 try:
 	from LT.LTStreamPlayer import streamplayer
