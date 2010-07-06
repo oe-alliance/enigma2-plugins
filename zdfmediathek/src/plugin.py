@@ -40,10 +40,10 @@ LIST_RIGHT = 1
 LIST_NONE = 2
 
 deviceName = HardwareInfo().get_device_name()
-if deviceName.startswith("dm800") or deviceName == "dm500hd":
-	PLAY_MP4 = False #Benutze True, wenn rtsp streaming mit der Dreambox funktioniert
-else:
+if deviceName.startswith("dm7025"):
 	PLAY_MP4 = False
+else:
+	PLAY_MP4 = True
 
 try:
 	from LT.LTStreamPlayer import streamplayer
