@@ -495,6 +495,7 @@ class Merlin_PGII(Screen):
 			self["prg_list"].pageUp()
 			self.ActiveEPG = (self.Fields-1)
 			self.updateInfos()
+		self.onSelectionChanged()
 
 	def right(self):
 		if self.ActiveEPG < (self.Fields-1):
@@ -502,6 +503,7 @@ class Merlin_PGII(Screen):
 			self.displayActiveEPG()
 		else:
 			self.NextPage()
+		self.onSelectionChanged()
 
 	def showEventInfo(self):
 		curEV = self["epg_list"+str(self.ActiveEPG)].getCurrent()
