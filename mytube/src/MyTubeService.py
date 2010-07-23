@@ -17,6 +17,7 @@ from urllib import quote, unquote_plus, unquote
 import cookielib
 from httplib import HTTPConnection,CannotSendRequest,BadStatusLine,HTTPException
 HTTPConnection.debuglevel = 1
+from urlparse import parse_qs
 
 def validate_cert(cert, key):
 	buf = decrypt_block(cert[8:], key) 
@@ -32,9 +33,9 @@ def get_rnd():
 		return None
 
 std_headers = {
-	'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2',
+	'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
 	'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-	'Accept': 'text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5',
+	'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 	'Accept-Language': 'en-us,en;q=0.5',
 }
 
@@ -51,7 +52,8 @@ class GoogleSuggestions():
 	def __init__(self, callback, ds = None, json = None, hl = None):
 		self.callback = callback
 		self.conn = HTTPConnection("google.com")
-		self.prepQuerry = "/complete/search?"
+		#GET /complete/search?output=toolbar&ds=yt&hl=en&jsonp=self.gotSuggestions&q=s
+		self.prepQuerry = "/complete/search?output=toolbar&"
 		if ds is not None:
 			self.prepQuerry = self.prepQuerry + "ds=" + ds + "&"
 		if json is not None:
@@ -69,18 +71,18 @@ class GoogleSuggestions():
 			try:
 				self.conn.request("GET", querry)
 			except (CannotSendRequest, gaierror, error):
-				print "[YTB] Can not send request for suggestions"
+				print "[MyTube]  Can not send request for suggestions"
 				self.callback(None)
 			else:
 				try:
 					response = self.conn.getresponse()
 				except BadStatusLine:
-					print "[YTB] Can not get a response from google"
+					print "[MyTube]  Can not get a response from google"
 					self.callback(None)
 				else:
 					if response.status == 200:
 						data = response.read()
-						exec data
+						self.gotSuggestions(data)
 					else:
 						self.callback(None)
 			self.conn.close()
@@ -192,63 +194,67 @@ class MyTubeFeedEntry():
 		#print EntryDetails
 		return EntryDetails
 
-
 	def getVideoUrl(self):
-		mrl = None
-		isHDAvailable = False
+		VIDEO_FMT_PRIORITY_MAP = {
+			'38' : 1, #MP4 Original (HD)
+			'37' : 2, #MP4 1080p (HD)
+			'22' : 3, #MP4 720p (HD)
+			'18' : 4, #MP4 360p
+			'35' : 5, #FLV 480p
+			'34' : 6, #FLV 360p
+		}
+		video_url = None
 		video_id = str(self.getTubeId())
+
+		# Getting video webpage
 		#URLs for YouTube video pages will change from the format http://www.youtube.com/watch?v=ylLzyHk54Z0 to http://www.youtube.com/watch#!v=ylLzyHk54Z0.
-		watch_url = "http://www.youtube.com/watch?v=" + video_id
+		watch_url = 'http://www.youtube.com/watch?v=%s&gl=US&hl=en' % video_id
 		watchrequest = Request(watch_url, None, std_headers)
 		try:
-			print "trying to find out if a HD Stream is available",watch_url
+			print "[MyTube] trying to find out if a HD Stream is available",watch_url
 			watchvideopage = urlopen2(watchrequest).read()
 		except (urllib2.URLError, httplib.HTTPException, socket.error), err:
 			print "[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err)
-			print "[MyTube] No valid mp4-url found"
-			return mrl
-
-		if "'IS_HD_AVAILABLE': true" in watchvideopage:
-			isHDAvailable = True
-			print "HD AVAILABLE"
-		else:
-			print "HD Stream NOT AVAILABLE"
+			return video_url
 
 		# Get video info
-		#info_url = 'http://www.youtube.com/get_video_info?&video_id=%s&el=detailpage&ps=default&eurl=&gl=US&hl=en' % video_id
-		info_url = 'http://www.youtube.com/get_video_info?&video_id=%s' % video_id
-		inforequest = Request(info_url, None, std_headers)
-		try:
-			print "getting video_info_webpage",info_url
-			infopage = urlopen2(inforequest).read()
-		except (urllib2.URLError, httplib.HTTPException, socket.error), err:
-			print "[MyTube] Error: Unable to retrieve infopage, error:", str(err)
-			print "[MyTube] No valid mp4-url found"
-			return mrl
+		for el in ['&el=embedded', '&el=detailpage', '&el=vevo', '']:
+			info_url = ('http://www.youtube.com/get_video_info?&video_id=%s%s&ps=default&eurl=&gl=US&hl=en' % (video_id, el))
+			request = Request(info_url, None, std_headers)
+			try:
+				infopage = urlopen2(request).read()
+				videoinfo = parse_qs(infopage)
+				if 'fmt_url_map' in videoinfo:
+					break
+			except (urllib2.URLError, httplib.HTTPException, socket.error), err:
+				print "[MyTube] Error: unable to download video infopage",str(err)
+				return video_url
 
-		mobj = re.search(r'(?m)&token=([^&]+)(?:&|$)', infopage)
-		if mobj is None:
-			# was there an error ?
-			mobj = re.search(r'(?m)&reason=([^&]+)(?:&|$)', infopage)
-			if mobj is None:
-				print 'ERROR: unable to extract "t" parameter for unknown reason'
+		if 'fmt_url_map' not in videoinfo:
+			# Attempt to see if YouTube has issued an error message
+			if 'reason' not in videoinfo:
+				print '[MyTube] Error: unable to extract "fmt_url_map" parameter for unknown reason'
 			else:
-				reason = unquote_plus(mobj.group(1))
-				print 'ERROR: YouTube said: %s' % reason.decode('utf-8')
-			return mrl
+				reason = unquote_plus(videoinfo['reason'][0])
+				print '[MyTube] Error: YouTube said: %s' % reason.decode('utf-8')
+			return video_url
+
+		video_fmt_map = {}
+		fmt_infomap = {}
+		tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
+		for fmtstring in tmp_fmtUrlDATA:
+			(fmtid,fmturl) = fmtstring.split('|')
+			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
+			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
+		print "[MyTube] got",sorted(fmt_infomap.iterkeys())
+		if video_fmt_map and len(video_fmt_map):
+			print "[MyTube] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+			video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl']
+			print "[MyTube] found best available video url:",video_url
+		
+		return video_url
 	
-		token = unquote(mobj.group(1))
-		#myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s&eurl=&el=detailpage&ps=default&gl=US&hl=en' % (video_id, token)
-		myurl = 'http://www.youtube.com/get_video?video_id=%s&t=%s' % (video_id, token)
-		if isHDAvailable is True:
-			mrl = '%s&fmt=%s' % (myurl, '22')
-			print "[MyTube] GOT HD URL: ", mrl
-		else:
-			mrl = '%s&fmt=%s' % (myurl, '18')
-			print "[MyTube] GOT SD URL: ", mrl
-
-		return mrl
-
 	def getRelatedVideos(self):
 		print "[MyTubeFeedEntry] getResponseVideos()"
 		for link in self.entry.link:

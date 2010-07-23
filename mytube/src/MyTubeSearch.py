@@ -17,6 +17,8 @@ from Components.Task import job_manager
 from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_HDD
 from threading import Thread
 from threading import Condition
+from xml.etree.cElementTree import parse as cet_parse
+from StringIO import StringIO
 
 
 import urllib
@@ -288,18 +290,23 @@ class MyTubeSuggestionsListScreen(Screen):
 		self.configTextWithSuggestion = configTextWithGoogleSuggestion
 
 	def update(self, suggestions):
-		if suggestions and len(suggestions[1]) > 0:
+		if suggestions and len(suggestions) > 0:
 			if not self.shown:
 				self.show()
-			if suggestions:
+			suggestions_tree = cet_parse(StringIO(suggestions)).getroot()
+			if suggestions_tree:
 				self.list = []
 				self.suggestlist = []
-				suggests = suggestions[1]
-				for suggestion in suggests:
-					name = suggestion[0]
-					results = suggestion[1].replace(" results", "")
-					numresults = results.replace(",", "")
-					self.suggestlist.append((name, numresults ))
+				for suggestion in suggestions_tree.findall("CompleteSuggestion"):
+					name = None
+					numresults = None
+					for subelement in suggestion:
+						if subelement.attrib.has_key('data'):
+							name = subelement.attrib['data'].encode("UTF-8")
+						if subelement.attrib.has_key('int'):
+							numresults = subelement.attrib['int']
+						if name and numresults:
+							self.suggestlist.append((name, numresults ))
 				if len(self.suggestlist):
 					self.suggestlist.sort(key=lambda x: int(x[1]))
 					self.suggestlist.reverse()
