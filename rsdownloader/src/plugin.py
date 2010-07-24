@@ -322,12 +322,18 @@ class RSDownload:
 				self.freeDownloadTimer.callback.append(self.start)
 				self.freeDownloadTimer.start((int(minutes) + 1) * 60000, 1)
 			else:
-				url = re.search(r".*<form name=\"download_form\" method=\"post\" action=\"(.*)\">", data).group(1)
-				self.name = re.search(r"<td><b>\s+(.+)\s", data).group(1) + re.search(r"</td><td>(\..+)</td></tr>", data).group(1)
-				self.status = _("Downloading")
-				self.download = ProgressDownload(url, ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/"))
-				self.download.addProgress(self.httpProgress)
-				self.download.start().addCallback(self.httpFinished).addErrback(self.httpFailed)
+				try:
+					url = re.search(r".*<form name=\"download_form\" method=\"post\" action=\"(.*)\">", data).group(1)
+				except:
+					url = None
+				if url:
+					self.name = re.search(r"<td><b>\s+(.+)\s", data).group(1) + re.search(r"</td><td>(\..+)</td></tr>", data).group(1)
+					self.status = _("Downloading")
+					self.download = ProgressDownload(url, ("%s/%s"%(config.plugins.RSDownloader.downloads_directory.value, self.name)).replace("//", "/"))
+					self.download.addProgress(self.httpProgress)
+					self.download.start().addCallback(self.httpFinished).addErrback(self.httpFailed)
+				else:
+					self.httpFailed(True, "File is offline: %s"%self.url)
 		elif self.url.__contains__("youtube.com"):
 			writeLog("Getting youtube video link: %s"%self.url)
 			self.status = _("Checking")
