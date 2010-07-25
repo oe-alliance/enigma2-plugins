@@ -70,7 +70,7 @@ class GrabResource(resource.Resource):
 			request.setHeader('Content-Disposition', 'inline; filename=screenshot.%s;' %imageformat)
 			request.setHeader('Content-Type','image/%s' %imageformat)
 
-			filename = filename+imageformat
+			filename = "%s.%s" %(filename,imageformat)
 			append(filename)
 			cmd = [self.GRAB_BIN, self.GRAB_BIN] + args
 
