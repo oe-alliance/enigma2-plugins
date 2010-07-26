@@ -7,6 +7,7 @@ SUBDIRS = \
 	autoresolution \
 	autotimer \
 	babelzapper \
+	bonjour \
 	cdinfo \
 	dreamirc \
 	dvdbackup \

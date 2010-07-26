@@ -63,6 +63,10 @@ babelzapper/etc/Makefile
 babelzapper/meta/Makefile
 babelzapper/src/Makefile
 
+bonjour/Makefile
+bonjour/meta/Makefile
+bonjour/src/Makefile
+
 cdinfo/Makefile
 cdinfo/meta/Makefile
 cdinfo/src/Makefile
