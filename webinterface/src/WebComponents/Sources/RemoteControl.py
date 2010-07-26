@@ -54,13 +54,20 @@ class RemoteControl(Source):
 			if type == "long":
 				#Doesn't work yet (WHY?)
 				#TODO Fix long key press
-				flag = self.FLAG_LONG
+				flag = self.FLAG_LONG		
 			elif type == "ascii":
 				flag = self.FLAG_ASCII
-				
-		self.eam.keyPressed(self.TYPE_ADVANCED, key, flag)		
 		
-		print "[RemoteControl.py] command was was sent (%s)" % key
+		#If type=="long" we need to press send FLAG_MAKE first 
+		if(flag == self.FLAG_LONG):			
+			self.eam.keyPressed(self.TYPE_ADVANCED, key, self.FLAG_MAKE)
+
+		#press the key with the desired flag
+		self.eam.keyPressed(self.TYPE_ADVANCED, key, flag)
+		#Release the key		
+		self.eam.keyPressed(self.TYPE_ADVANCED, key, self.FLAG_BREAK)
+			
+		print "[RemoteControl.py] command was was sent (key: %s, flag: %s)" %(key,flag)
 		return ( True, "RC command '" + str(key) + "' has been issued" ) 
 
 	result = property(lambda self: self.res)

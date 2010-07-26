@@ -33,7 +33,7 @@ var currentLocation = "/hdd/movie";
 var locationsList = [];
 var tagsList = [];
 
-var boxtype = "";
+var boxtype = "dm8000";
 
 function startUpdateCurrentPoller(){
 	clearInterval(updateCurrentPoller);
@@ -73,7 +73,7 @@ function incomingDeviceInfoBoxtype(request){
 
 
 function getBoxtype(){
-	doRequest(URL.deviceinfo, incomingDeviceInfoBoxtype, false);
+//	doRequest(URL.deviceinfo, incomingDeviceInfoBoxtype, false);	
 }
 
 function toggleStandby(){
@@ -1142,7 +1142,7 @@ function openWebRemote(){
 	if (!webRemoteWin.closed && webRemoteWin.location) {
 		setWindowContent(webRemoteWin, template);
 	} else {
-		webRemoteWin = openPopup('WebRemote', template, 250, 600);
+		webRemoteWin = openPopup('WebRemote', template, 250, 620);
 	}
 
 }
@@ -1159,7 +1159,14 @@ function loadAndOpenWebRemote(){
 
 
 function sendRemoteControlRequest(command){
-	doRequest(URL.remotecontrol+'?command='+command, incomingRemoteControlResult, false);
+	var long = webRemoteWin.document.getElementById('long')
+	if(long.checked){
+		doRequest(URL.remotecontrol+'?command='+command+'&type=long', incomingRemoteControlResult, false);
+		long.checked = undefined;
+	} else {
+		doRequest(URL.remotecontrol+'?command='+command, incomingRemoteControlResult, false);
+	}
+	
 	if(webRemoteWin.document.getElementById('getScreen').checked) {
 		if(webRemoteWin.document.getElementById('getVideo').checked){
 			getScreenShot();
