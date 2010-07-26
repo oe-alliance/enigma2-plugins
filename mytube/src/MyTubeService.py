@@ -213,7 +213,7 @@ class MyTubeFeedEntry():
 		try:
 			print "[MyTube] trying to find out if a HD Stream is available",watch_url
 			watchvideopage = urlopen2(watchrequest).read()
-		except (urllib2.URLError, httplib.HTTPException, socket.error), err:
+		except (URLError, HTTPException, socket.error), err:
 			print "[MyTube] Error: Unable to retrieve watchpage - Error code: ", str(err)
 			return video_url
 
@@ -226,7 +226,7 @@ class MyTubeFeedEntry():
 				videoinfo = parse_qs(infopage)
 				if 'fmt_url_map' in videoinfo:
 					break
-			except (urllib2.URLError, httplib.HTTPException, socket.error), err:
+			except (URLError, HTTPException, socket.error), err:
 				print "[MyTube] Error: unable to download video infopage",str(err)
 				return video_url
 
