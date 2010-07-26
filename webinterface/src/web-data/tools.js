@@ -33,7 +33,7 @@ var currentLocation = "/hdd/movie";
 var locationsList = [];
 var tagsList = [];
 
-var boxtype = "dm8000";
+var boxtype = "";
 
 function startUpdateCurrentPoller(){
 	clearInterval(updateCurrentPoller);
@@ -73,7 +73,7 @@ function incomingDeviceInfoBoxtype(request){
 
 
 function getBoxtype(){
-//	doRequest(URL.deviceinfo, incomingDeviceInfoBoxtype, false);	
+	doRequest(URL.deviceinfo, incomingDeviceInfoBoxtype, false);	
 }
 
 function toggleStandby(){

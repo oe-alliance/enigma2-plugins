@@ -1,8 +1,7 @@
 from enigma import eActionMap
-#from struct import pack
 from Components.Sources.Source import Source
 from Tools.HardwareInfo import HardwareInfo
-
+from Components.config import config
 class RemoteControl(Source):
 	# Flags
 	FLAG_MAKE = 0
@@ -22,6 +21,15 @@ class RemoteControl(Source):
 		Source.__init__(self)
 		self.res = ( False, "Missing or wrong argument" )
 		self.eam = eActionMap.getInstance()
+		
+		#Advanced remote or standard?
+		
+		if config.misc.rcused.value == 0:
+			self.remotetype = self.TYPE_ADVANCED
+		else:
+			self.remotetype = self.TYPE_STANDARD
+			
+		print "[RemoteControl.__init__] Configured RCU-Type is '%s'" %(self.remotetype)										
 
 	def handleCommand(self, cmd):
 		self.cmd = cmd
@@ -29,17 +37,17 @@ class RemoteControl(Source):
 
 	def sendEvent(self):
 		if len(self.cmd) == 0 or self.cmd is None:
-			print "[RemoteControl.py] cmd is empty or None"
+			print "[RemoteControl.sendEvent] cmd is empty or None"
 			return self.res
 		
 		if not "command" in self.cmd:
-			print "[RemoteControl.py] Obligatory parameter 'command' is missing!"
+			print "[RemoteControl.sendEvent] Obligatory parameter 'command' is missing!"
 			return ( False, "Obligatory parameter 'command' is missing!" )
 		
 		key = int(self.cmd["command"])			
 		
 		if key <= 0:			
-			print "[RemoteControl.py] command <= 0 (%s)" % key
+			print "[RemoteControl.sendEvent] command <= 0 (%s)" % key
 			return ( False, "the command was not > 0" )
 		
 		#type can be "long" or "ascii", everything else will result in FLAG_MAKE
@@ -60,14 +68,14 @@ class RemoteControl(Source):
 		
 		#If type=="long" we need to press send FLAG_MAKE first 
 		if(flag == self.FLAG_LONG):			
-			self.eam.keyPressed(self.TYPE_ADVANCED, key, self.FLAG_MAKE)
+			self.eam.keyPressed(self.remotetype, key, self.FLAG_MAKE)
 
 		#press the key with the desired flag
-		self.eam.keyPressed(self.TYPE_ADVANCED, key, flag)
+		self.eam.keyPressed(self.remotetype, key, flag)
 		#Release the key		
-		self.eam.keyPressed(self.TYPE_ADVANCED, key, self.FLAG_BREAK)
+		self.eam.keyPressed(self.remotetype, key, self.FLAG_BREAK)
 			
-		print "[RemoteControl.py] command was was sent (key: %s, flag: %s)" %(key,flag)
+		print "[RemoteControl.sendEvent] command was was sent (key: %s, flag: %s)" %(key,flag)
 		return ( True, "RC command '" + str(key) + "' has been issued" ) 
 
 	result = property(lambda self: self.res)
