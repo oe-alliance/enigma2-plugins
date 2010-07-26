@@ -2,6 +2,7 @@ Version = '$Header$';
 
 from enigma import eConsoleAppContainer
 from Plugins.Plugin import PluginDescriptor
+
 from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
 from Components.Network import iNetwork
 from Screens.MessageBox import MessageBox
@@ -70,6 +71,7 @@ class Closer:
 		for d in running_defered:
 			print "[Webinterface] stopping interface on ", d.interface, " with port", d.port
 			x = d.stopListening()
+			
 			try:
 				x.addCallback(self.isDown)
 				self.counter += 1
@@ -185,11 +187,15 @@ def startWebserver(session):
 					ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value)
 					if ret == False:
 						errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.http.port.value)
+					else:
+						registerBonjourService('http', config.plugins.Webinterface.http.port.value)
 			#HTTPS		
 				if config.plugins.Webinterface.https.enabled.value is True:					
 					ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, True)
 					if ret == False:
 						errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.https.port.value)
+					else:
+						registerBonjourService('https', config.plugins.Webinterface.https.port.value)
 	
 	#LOCAL HTTP Connections (Streamproxy)
 		ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.streamauth.value)			
@@ -472,6 +478,38 @@ def sessionstart(reason, session):
 	global global_session
 	global_session = session
 
+
+def registerBonjourService(protocol, port):	
+	try:
+		from Plugins.Extensions.Bonjour.Bonjour import bonjour
+				
+		service = bonjour.buildService(protocol, port)
+		bonjour.registerService(service, True)
+		print "[WebInterface.registerBonjourService] Service for protocol '%s' with port '%i' registered!" %(protocol, port) 
+		return True
+		
+	except ImportError, e:
+		print "[WebInterface.registerBonjourService] %s" %e
+		return False
+
+def unregisterBonjourService(protocol):	
+	try:
+		from Plugins.Extensions.Bonjour.Bonjour import bonjour
+						
+		bonjour.unregisterService(protocol)
+		print "[WebInterface.unregisterBonjourService] Service for protocol '%s' unregistered!" %(protocol) 
+		return True
+		
+	except ImportError, e:
+		print "[WebInterface.unregisterBonjourService] %s" %e
+		return False
+	
+def checkBonjour():
+	if ( not config.plugins.Webinterface.http.enabled.value ) or ( not config.plugins.Webinterface.enabled.value ):
+		unregisterBonjourService('http')
+	if ( not config.plugins.Webinterface.https.enabled.value ) or ( not config.plugins.Webinterface.enabled.value ):
+		unregisterBonjourService('https')
+		
 #===============================================================================
 # networkstart
 # Actions to take place after Network is up (startup the Webserver)
@@ -479,9 +517,11 @@ def sessionstart(reason, session):
 def networkstart(reason, **kwargs):
 	if reason is True:
 		startWebserver(global_session)
-
+		checkBonjour()
+		
 	elif reason is False:
 		stopWebserver(global_session)
+		checkBonjour()
 
 def openconfig(session, **kwargs):
 	session.openWithCallback(configCB, WebIfConfigScreen)
@@ -490,6 +530,7 @@ def configCB(result, session):
 	if result is True:
 		print "[WebIf] config changed"
 		restartWebserver(session)
+		checkBonjour()
 	else:
 		print "[WebIf] config not changed"
 
