@@ -5,6 +5,7 @@ from os import system, path
 class Message(Source):
 	PRINT = 0
 	ANSWER = 1
+	#TODO FIXME - this could be done with an on-going request that finishes when the answer has been given
 	yesnoFile = "/tmp/yesno"
 
 	def __init__(self, session, func=PRINT):
