@@ -10,15 +10,7 @@ class Bonjour:
 	 
 	def __init__(self):	
 		self.services = []		
-		self.files = {}	
-		
-		self.container = eConsoleAppContainer()
-		self.container.appClosed.append(self.cmdFinished)
-		
-		self._timer = eTimer()
-		self._timer.callback.append(self.restartDaemon)
-		self._timerRunning = False
-		
+		self.files = {}		
 		self.reloadConfig()
 		
 	def __createServiceConfig(self, service):
@@ -122,13 +114,6 @@ class Bonjour:
 				self.services.append(service)
 				self.files[service['file']] = len(self.services) - 1
 				
-				if self._timerRunning:
-					self._timer.stop()
-				
-				#if no other service is being registered for 15 seconds restart the daemon
-				self._timer.start(15000)
-				self._timerRunning = True
-								
 				return True
 				
 		else:
@@ -204,29 +189,5 @@ class Bonjour:
 		filepath = "%s%s" %(self.AVAHI_SERVICES_DIR, service['file'])
 		if not path.exists(filepath):
 			self.registerService(service)
-	
-	def stopTimer(self):
-		if self._timerRunning:
-			self._timer.stop()
-		
-	def startDaemon(self):
-		print "[Bonjour.startDaemon] called"		
-		cmd = [self.AVAHI_START_SCRIPT, 'start']
-		self.container.execute(*cmd)
-	
-	def stopDaemon(self):
-		print "[Bonjour.stopDaemon] called"		
-		cmd = [self.AVAHI_START_SCRIPT, 'stop']
-		self.container.execute(*cmd)
-	
-	def restartDaemon(self):
-		print "[Bonjour.restartDaemon] called"
-		self.stopTimer()
-		
-		cmd = [self.AVAHI_START_SCRIPT, 'restart']
-		self.container.execute(*cmd)
-		
-	def cmdFinished(self, data):
-		print "[Bonjour.cmdFinished] %s" %(data)
 			
 bonjour = Bonjour()
