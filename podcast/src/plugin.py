@@ -308,14 +308,14 @@ class PodcastMovies(Screen):
 		else:
 			url = "N/A"
 		
+		length = "N/A"
 		if info.__contains__('length="'):
 			idx = info.index('length="')
 			length = info[idx+8:]
 			idx = length.index('"')
 			length = length[:idx]
-			length = str((int(length) / 1024) / 1024) + " MB"
-		else:
-			length = "N/A"
+			if length:
+				length = str((int(length) / 1024) / 1024) + " MB"
 		
 		if info.__contains__('type="'):
 			idx = info.index('type="')
