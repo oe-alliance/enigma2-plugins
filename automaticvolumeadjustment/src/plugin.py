@@ -89,12 +89,14 @@ class AutomaticVolumeAdjustment(Screen):
 						self.serviceHandler = eServiceCenter.getInstance()
 						info = self.serviceHandler.info(ref)
 						if info:
-							ref = eServiceReference(info.getInfoString(ref, iServiceInformation.sServiceref)) # set new eServicereference
+							ref = eServiceReference(info.getInfoString(ref, iServiceInformation.sServiceref)) # get new eServicereference from meta file
 					ajvol = self.serviceList.get(ref.toString(), self.defaultValue) # get delta from config
 					if vol >= 100 - ajvol: # check if delta + vol < 100
 						ajvol = 100 - vol # correct delta value
 					self.lastAdjustedValue = ajvol # save delta value
-					if ajvol !=0 and (vol+ajvol != currentvol): # only adjust volume when delta != 0 or current vol != new volume
+					if (ajvol !=0 or self.defaultValue == 0) and (vol+ajvol != currentvol): # only adjust volume when delta != 0 and current vol != new volume
+						if ajvol == 0:
+							ajvol = vol - currentvol # correction for debug -print only
 						self.volctrl.setVolume(vol+self.lastAdjustedValue, vol+self.lastAdjustedValue)
 						print "[AutomaticVolumeAdjustment] Change volume for service: %s (+%d) to %d"%(ServiceReference(ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''), ajvol, self.volctrl.getVolume())
 					self.currentVolume = self.volctrl.getVolume() # ac3||dts service , save current volume
