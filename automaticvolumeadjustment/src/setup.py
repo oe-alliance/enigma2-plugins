@@ -269,6 +269,8 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 		else:
 			self.newmode = 0
 			self.current = entry
+			self.currentref = entry.servicereference.value
+			self.currentvalue = entry.adjustvalue.value
 		self.list = [ ]
 		self.service = getConfigListEntry(_("Servicename"), self.current.name)
 		self.list.append(self.service)
@@ -302,7 +304,12 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 
 	def keyCancel(self):
 		if self.newmode == 1:
-			self.configVA.remove(self.current)
+			self.configVA.config.Entries.remove(self.current)
+			self.configVA.config.Entries.save()
+		else:
+			self.current.servicereference.value = self.currentref
+			self.current.adjustvalue.value = self.currentvalue
+			self.current.save()
 		ConfigListScreen.cancelConfirm(self, True)
 
 class ConfigChannelSelection(SimpleChannelSelection):
