@@ -4,6 +4,7 @@ SUBDIRS = \
 	aihdcontrol \
 	antiscrollbar \
 	automatictimerlistcleanup \
+	automaticvolumeadjustment \
 	autoresolution \
 	autotimer \
 	babelzapper \

@@ -48,6 +48,10 @@ automatictimerlistcleanup/meta/Makefile
 automatictimerlistcleanup/po/Makefile
 automatictimerlistcleanup/src/Makefile
 
+automaticvolumeadjustment/Makefile
+automaticvolumeadjustment/meta/Makefile
+automaticvolumeadjustment/src/Makefile
+
 autoresolution/Makefile
 autoresolution/meta/Makefile
 autoresolution/src/Makefile

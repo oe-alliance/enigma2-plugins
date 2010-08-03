@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info language="en">
+                    <author>Dr.Best</author>
+                    <name>Automatic Volume Adjustment</name>
+                    <packagename>enigma2-plugin-systemplugins-automaticvolumeadjustment</packagename>
+                    <shortdescription>Automatic volume adjustment for ac3/dts services</shortdescription>
+                    <description>Automatic volume adjustment for ac3/dts services</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_automaticvolumeadjustment.jpg" />		    
+          </info>
+          <info language="de">
+                    <author>Dr.Best</author>
+                    <name>Automatic Volume Adjustment</name>
+                    <packagename>enigma2-plugin-systemplugins-automaticvolumeadjustment</packagename>
+		    <shortdescription>Automatische Lautstaerkenanpassung fuer AC3/DTS Tonspuren</shortdescription>
+                    <description>Automatische Lautstaerkenanpassung fuer AC3/DTS Tonspuren</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_automaticvolumeadjustment.jpg" />	
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-automaticvolumeadjustment" />
+	  </files>
+</default>

@@ -1,0 +1,10 @@
+Package: enigma2-plugin-systemplugins-automaticvolumeadjustment
+Version: 1.0
+Description: Automatic Volume Adjustment
+Architecture: mipsel
+Section: extra
+Priority: optional
+Maintainer: Dr. Best <dr.best@dreambox-tools.info>
+Homepage: http://www.dreambox-tools.info
+Depends: enigma2
+Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
