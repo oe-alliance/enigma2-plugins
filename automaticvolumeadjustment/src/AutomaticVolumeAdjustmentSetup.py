@@ -4,84 +4,35 @@
 #
 #  $Id$
 #
-#  Coded by Dr.Best (c) 2009
+#  Coded by Dr.Best (c) 2010
 #  Support: www.dreambox-tools.info
 #
-#  This program is free software; you can redistribute it and/or
-#  modify it under the terms of the GNU General Public License
-#  as published by the Free Software Foundation; either version 2
-#  of the License, or (at your option) any later version.
+#  This plugin is licensed under the Creative Commons 
+#  Attribution-NonCommercial-ShareAlike 3.0 Unported 
+#  License. To view a copy of this license, visit
+#  http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
+#  Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
 #
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
+#  Alternatively, this plugin may be distributed and executed on hardware which
+#  is licensed by Dream Multimedia GmbH.
 
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
-	RT_VALIGN_CENTER
+#  This plugin is NOT free software. It is open source, you are allowed to
+#  modify it (if you keep the license), but it may not be commercially 
+#  distributed other than under the conditions noted above.
+#
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eServiceReference
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens.ChannelSelection import SimpleChannelSelection
 from Components.MenuList import MenuList
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
-from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import ConfigSubsection, ConfigText, \
-	getConfigListEntry, config, ConfigInteger, Config, ConfigSubList, ConfigDirectory, NoSave, ConfigYesNo
-from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT  as os_O_CREAT 
-from Screens.ChannelSelection import SimpleChannelSelection
-from enigma import eServiceReference
+from Components.ConfigList import ConfigListScreen
+from Components.config import getConfigListEntry, config
 from ServiceReference import ServiceReference
+from AutomaticVolumeAdjustment import AutomaticVolumeAdjustment
+from AutomaticVolumeAdjustmentConfig import AutomaticVolumeAdjustmentConfig
 
-import plugin as AutomaticVolumeAdjustmentPlugin # import to submit config-values
-	
-class AutomaticVolumeAdjustmentConfig():
-	def __init__(self):
-		self.CONFIG_FILE = '/usr/lib/enigma2/python/Plugins/SystemPlugins/AutomaticVolumeAdjustment/config'
-		# load config file
-		self.loadConfigFile()
-
-	# load config file and initialize 
-	def loadConfigFile(self):
-		print "[AutomaticVolumeAdjustmentConfig] Loading config file..."
-		self.config = Config()
-		if not os_path.exists(self.CONFIG_FILE):
-			fd = os_open( self.CONFIG_FILE, os_O_RDWR|os_O_CREAT)
-			os_close( fd )
-		self.config.loadFromFile(self.CONFIG_FILE)
-		self.config.entriescount =  ConfigInteger(0)
-		self.config.Entries = ConfigSubList()
-		self.config.enable = ConfigYesNo(default = False)
-		self.config.adustvalue = ConfigInteger(default=25, limits=(0,50))
-		self.initConfig()
-
-	def initConfig(self):
-		count = self.config.entriescount.value
-		if count != 0:
-			i = 0
-			while i < count:
-				self.initEntryConfig()
-				i += 1
-		print "[AutomaticVolumeAdjustmentConfig] Loaded %s entries from config file..." % count
-
-	def initEntryConfig(self):
-		self.config.Entries.append(ConfigSubsection())
-		i = len(self.config.Entries) - 1
-		self.config.Entries[i].servicereference = ConfigText(default = "")
-		self.config.Entries[i].name = NoSave(ConfigDirectory(default = _("Press OK to select a service")))
-		self.config.Entries[i].adjustvalue = ConfigInteger(default=25, limits=(5,50))
-		return self.config.Entries[i]
-	
-	def remove(self, configItem):
-		self.config.entriescount.value = self.config.entriescount.value - 1
-		self.config.entriescount.save()
-		self.config.Entries.remove(configItem)
-		self.config.Entries.save()
-		self.save()
-	
-	def save(self):
-		print "[AutomaticVolumeAdjustmentConfig] saving config file..."
-		self.config.saveToFile(self.CONFIG_FILE)
 		
 class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 	skin = """
@@ -114,6 +65,9 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Enable"), self.configVA.config.enable))
 		self.list.append(getConfigListEntry(_("Default volume adjustment value for AC3/DTS"), self.configVA.config.adustvalue))
+		self.list.append(getConfigListEntry(_("Max. volume for mpeg audio"), self.configVA.config.mpeg_max_volume))
+		self.list.append(getConfigListEntry(_("Show volumebar when volume-value was changed"), self.configVA.config.show_volumebar))
+		self.automaticVolumeAdjustmentInstance = AutomaticVolumeAdjustment.instance
 		ConfigListScreen.__init__(self, self.list, session)
 		
 	def blue(self):
@@ -123,8 +77,8 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].save()
 		self.configVA.save()
-		if AutomaticVolumeAdjustmentPlugin.automaticvolumeadjustment is not None:
-			AutomaticVolumeAdjustmentPlugin.automaticvolumeadjustment.initializeConfigValues(self.configVA, True) # submit config values
+		if self.automaticVolumeAdjustmentInstance is not None:
+			self.automaticVolumeAdjustmentInstance.initializeConfigValues(self.configVA, True) # submit config values
 		self.close()
 
 	def keyCancel(self):
@@ -166,6 +120,7 @@ class AutomaticVolumeAdjustmentEntriesListConfigScreen(Screen):
 			 "yellow":	self.keyYellow,
 			 "blue": 	self.keyDelete,
 			 }, -1)
+		self.automaticVolumeAdjustmentInstance = AutomaticVolumeAdjustment.instance
 		self["entrylist"].setConfig(configVA)
 		self.updateList()
 
@@ -202,8 +157,8 @@ class AutomaticVolumeAdjustmentEntriesListConfigScreen(Screen):
 			return
 		sel = self["entrylist"].l.getCurrentSelection()[0]
 		self["entrylist"].configVA.remove(sel)
-		if AutomaticVolumeAdjustmentPlugin.automaticvolumeadjustment is not None:
-			AutomaticVolumeAdjustmentPlugin.automaticvolumeadjustment.initializeConfigValues(self["entrylist"].configVA, True) # submit config values
+		if self.automaticVolumeAdjustmentInstance is not None:
+			self.automaticVolumeAdjustmentInstance.initializeConfigValues(self["entrylist"].configVA, True) # submit config values
 		self.updateList()
 
 class AutomaticVolumeAdjustmentEntryList(MenuList):
@@ -250,7 +205,8 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 			<widget source="key_green" render="Label" position="140,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
-	def __init__(self, session, entry, configVA):
+	def __init__(self, session, entry, configVA):	
+		self.session = session
 		Screen.__init__(self, session)
 		self.title = _("Automatic Volume Adjustment - Entry Config")
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -266,6 +222,7 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 		if entry is None:
 			self.newmode = 1
 			self.current = self.configVA.initEntryConfig()
+			self.currentvalue = self.current.adjustvalue.value
 		else:
 			self.newmode = 0
 			self.current = entry
@@ -274,13 +231,15 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 		self.list = [ ]
 		self.service = getConfigListEntry(_("Servicename"), self.current.name)
 		self.list.append(self.service)
-		self.list.append(getConfigListEntry(_("Adjustment value"), self.current.adjustvalue))
+		self.adjustValue = getConfigListEntry(_("Adjustment value"), self.current.adjustvalue)
+		self.list.append(self.adjustValue)
 		ConfigListScreen.__init__(self, self.list, session)
+		self.automaticVolumeAdjustmentInstance = AutomaticVolumeAdjustment.instance
 		
 	def keySelect(self):
 		cur = self["config"].getCurrent()
 		if cur == self.service:
-			self.session.openWithCallback(self.channelSelected, ConfigChannelSelection)
+			self.session.openWithCallback(self.channelSelected, SimpleChannelSelection, _("Channel Selection"))
 			
 	def channelSelected(self, ref = None):
 		if ref:
@@ -296,8 +255,8 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 			for x in self["config"].list:
 				x[1].save()
 			self.configVA.save()
-			if AutomaticVolumeAdjustmentPlugin.automaticvolumeadjustment is not None:
-				AutomaticVolumeAdjustmentPlugin.automaticvolumeadjustment.initializeConfigValues(self.configVA, True) # submit config values
+			if self.automaticVolumeAdjustmentInstance is not None:
+				self.automaticVolumeAdjustmentInstance.initializeConfigValues(self.configVA, True) # submit config values
 			self.close()
 		else:
 			self.session.open(MessageBox, _("You must select a valid service!"), type = MessageBox.TYPE_INFO)
@@ -311,19 +270,3 @@ class AutomaticVolumeAdjustmentEntryConfigScreen(ConfigListScreen, Screen):
 			self.current.adjustvalue.value = self.currentvalue
 			self.current.save()
 		ConfigListScreen.cancelConfirm(self, True)
-
-class ConfigChannelSelection(SimpleChannelSelection):
-	def __init__(self, session):
-		SimpleChannelSelection.__init__(self, session, _("Channel Selection"))
-		self.skinName = ["SimpleChannelSelection"]
-		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
-		{
-				"showEPGList": self.channelSelected
-		})
-
-	def channelSelected(self):
-		ref = self.getCurrentSelection()
-		if (ref.flags & 7) == 7:
-			self.enterPath(ref)
-		elif not (ref.flags & eServiceReference.isMarker):
-			self.close(ref)
