@@ -22,16 +22,19 @@ def autostart(reason, **kwargs):
 	try:
 		# for blue key activating in EPGSelection
 		EPGSelectionInit()
-	except Esception:
+	except Exception:
 		pass
 
 # Mainfunction
 def main(session, *args, **kwargs):
 	s = session.nav.getCurrentService()
-	info = s.info()
-	event = info.getEvent(0) # 0 = now, 1 = next
-	name = event and event.getEventName() or ''
-	session.open(EPGSearch, name, False)
+	if s:
+		info = s.info()
+		event = info.getEvent(0) # 0 = now, 1 = next
+		name = event and event.getEventName() or ''
+		session.open(EPGSearch, name, False)
+	else:
+		session.open(EPGSearch)
 
 # Event Info
 def eventinfo(session, *args, **kwargs):
