@@ -98,12 +98,16 @@ class AutomaticVolumeAdjustment(Screen):
 						if info:
 							ref = eServiceReference(info.getInfoString(ref, iServiceInformation.sServiceref)) # get new eServicereference from meta file
 					ajvol = self.serviceList.get(ref.toString(), self.defaultValue) # get delta from config
-					if vol >= 100 - ajvol: # check if delta + vol < 100
-						ajvol = 100 - vol # correct delta value
+					if ajvol < 0: # adjust vol down
+						if vol + ajvol < 0:
+							ajvol = (-1) * vol
+					else: # adjust vol up
+						if vol >= 100 - ajvol: # check if delta + vol < 100
+							ajvol = 100 - vol # correct delta value
 					self.lastAdjustedValue = ajvol # save delta value
 					if (vol + ajvol != currentvol): # only when current vol != new volume
 						if ajvol == 0:
-							ajvol = vol+self.lastAdjustedValue - currentvol # correction for debug -print only
+							ajvol = vol - currentvol # correction for debug -print only
 						self.volctrl.setVolume(vol+self.lastAdjustedValue, vol+self.lastAdjustedValue)
 						if self.volumeControlInstance is not None:
 							self.volumeControlInstance.volumeDialog.setValue(vol+self.lastAdjustedValue)
@@ -183,4 +187,3 @@ def AVA_setVolume(self, direction):
 				self.hideVolTimer.start(3000, True)
 	if ok:
 		baseVolumeControl_setVolume(self, direction)
-

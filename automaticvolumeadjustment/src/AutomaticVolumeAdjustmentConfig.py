@@ -21,7 +21,7 @@
 #  distributed other than under the conditions noted above.
 #
 from Components.config import ConfigSubsection, ConfigText, \
-	config, ConfigInteger, Config, ConfigSubList, ConfigDirectory, NoSave, ConfigYesNo
+	config, ConfigInteger, Config, ConfigSubList, ConfigDirectory, NoSave, ConfigYesNo, ConfigSelectionNumber
 from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT  as os_O_CREAT 
 
 class AutomaticVolumeAdjustmentConfig():
@@ -41,8 +41,8 @@ class AutomaticVolumeAdjustmentConfig():
 		self.config.entriescount =  ConfigInteger(0)
 		self.config.Entries = ConfigSubList()
 		self.config.enable = ConfigYesNo(default = False)
-		self.config.adustvalue = ConfigInteger(default=25, limits=(0,50))
-		self.config.mpeg_max_volume = ConfigInteger(default=100, limits=(10,100))
+		self.config.adustvalue = ConfigSelectionNumber(-50, 50, 5, default = 25)
+		self.config.mpeg_max_volume = ConfigSelectionNumber(10, 100, 5, default = 100)
 		self.config.show_volumebar = ConfigYesNo(default = False)
 		self.initConfig()
 
@@ -60,7 +60,7 @@ class AutomaticVolumeAdjustmentConfig():
 		i = len(self.config.Entries) - 1
 		self.config.Entries[i].servicereference = ConfigText(default = "")
 		self.config.Entries[i].name = NoSave(ConfigDirectory(default = _("Press OK to select a service")))
-		self.config.Entries[i].adjustvalue = ConfigInteger(default=25, limits=(0,50))
+		self.config.Entries[i].adjustvalue = ConfigSelectionNumber(-50, 50, 5, default = 25)
 		return self.config.Entries[i]
 	
 	def remove(self, configItem):
