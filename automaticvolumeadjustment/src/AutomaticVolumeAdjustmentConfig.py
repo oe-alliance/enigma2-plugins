@@ -60,7 +60,7 @@ class AutomaticVolumeAdjustmentConfig():
 		i = len(self.config.Entries) - 1
 		self.config.Entries[i].servicereference = ConfigText(default = "")
 		self.config.Entries[i].name = NoSave(ConfigDirectory(default = _("Press OK to select a service")))
-		self.config.Entries[i].adjustvalue = ConfigInteger(default=25, limits=(5,50))
+		self.config.Entries[i].adjustvalue = ConfigInteger(default=25, limits=(0,50))
 		return self.config.Entries[i]
 	
 	def remove(self, configItem):

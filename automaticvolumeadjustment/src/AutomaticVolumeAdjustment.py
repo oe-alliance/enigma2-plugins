@@ -101,7 +101,7 @@ class AutomaticVolumeAdjustment(Screen):
 					if vol >= 100 - ajvol: # check if delta + vol < 100
 						ajvol = 100 - vol # correct delta value
 					self.lastAdjustedValue = ajvol # save delta value
-					if (ajvol !=0 or self.defaultValue == 0) and (vol+ajvol != currentvol): # only adjust volume when delta != 0 and current vol != new volume
+					if (vol + ajvol != currentvol): # only when current vol != new volume
 						if ajvol == 0:
 							ajvol = vol+self.lastAdjustedValue - currentvol # correction for debug -print only
 						self.volctrl.setVolume(vol+self.lastAdjustedValue, vol+self.lastAdjustedValue)
@@ -183,3 +183,4 @@ def AVA_setVolume(self, direction):
 				self.hideVolTimer.start(3000, True)
 	if ok:
 		baseVolumeControl_setVolume(self, direction)
+
