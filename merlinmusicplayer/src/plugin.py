@@ -93,8 +93,8 @@ config.plugins.merlinmusicplayer.idreamextendedpluginlist = ConfigYesNo(default 
 config.plugins.merlinmusicplayer.merlinmusicplayerextendedpluginlist = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.defaultfilebrowserpath = ConfigDirectory(default = "/hdd/")
 config.plugins.merlinmusicplayer.rememberlastfilebrowserpath = ConfigYesNo(default = True)
-config.plugins.merlinmusicplayer.idreammainmenu = ConfigYesNo(default = True)
-config.plugins.merlinmusicplayer.merlinmusicplayermainmenu = ConfigYesNo(default = True)
+config.plugins.merlinmusicplayer.idreammainmenu = ConfigYesNo(default = False)
+config.plugins.merlinmusicplayer.merlinmusicplayermainmenu = ConfigYesNo(default = False)
 
 from enigma import ePythonMessagePump
 from threading import Thread, Lock
