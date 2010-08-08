@@ -93,6 +93,8 @@ config.plugins.merlinmusicplayer.idreamextendedpluginlist = ConfigYesNo(default 
 config.plugins.merlinmusicplayer.merlinmusicplayerextendedpluginlist = ConfigYesNo(default = True)
 config.plugins.merlinmusicplayer.defaultfilebrowserpath = ConfigDirectory(default = "/hdd/")
 config.plugins.merlinmusicplayer.rememberlastfilebrowserpath = ConfigYesNo(default = True)
+config.plugins.merlinmusicplayer.idreammainmenu = ConfigYesNo(default = True)
+config.plugins.merlinmusicplayer.merlinmusicplayermainmenu = ConfigYesNo(default = True)
 
 from enigma import ePythonMessagePump
 from threading import Thread, Lock
@@ -2888,6 +2890,8 @@ class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
 		self.list.append(self.defaultFileBrowserPath)
 		self.list.append(getConfigListEntry(_("Show iDream in extended-pluginlist"), config.plugins.merlinmusicplayer.idreamextendedpluginlist))
 		self.list.append(getConfigListEntry(_("Show Merlin Music Player in extended-pluginlist"), config.plugins.merlinmusicplayer.merlinmusicplayerextendedpluginlist))
+		self.list.append(getConfigListEntry(_("Show iDream in mainmenu"), config.plugins.merlinmusicplayer.idreammainmenu))
+		self.list.append(getConfigListEntry(_("Show Merlin Music Player in mainmenu"), config.plugins.merlinmusicplayer.merlinmusicplayermainmenu))
 
 		ConfigListScreen.__init__(self, self.list, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -3200,7 +3204,7 @@ class MerlinMusicPlayerFileList(Screen):
 				options.extend(((_("Clear current songlist and play selected entry"), self.stopPlayingAndAppendFileToSongList),))
 				options.extend(((_("Append file to current songlist"), self.appendFileToSongList),))
 				if self.player is not None and self.player.songList:
-					options.extend(((_("insert file to current songlist and play next"), self.insertFileToSongList),))
+					options.extend(((_("Insert file to current songlist and play next"), self.insertFileToSongList),))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox,list = options)
 
 	def menuCallback(self, ret):
@@ -3341,6 +3345,16 @@ def merlinmusicplayerfilelist(session,**kwargs):
 		servicelist = None
 	session.open(MerlinMusicPlayerFileList, servicelist)
 
+def menu_merlinmusicplayerfilelist(menuid, **kwargs):
+	if menuid == "mainmenu":
+		return [(_("Merlin Music Player"), merlinmusicplayerfilelist, "merlin_music_player", 46)]
+	return []
+
+def menu_idream(menuid, **kwargs):
+	if menuid == "mainmenu":
+		return [(_("iDream"), merlinmusicplayerfilelist, "idream", 47)]
+	return []
+
 def Plugins(**kwargs):
 
 	list = [PluginDescriptor(name="Merlin iDream", description=_("Dreambox Music Database"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon = "iDream.png", fnc=main)]
@@ -3349,5 +3363,9 @@ def Plugins(**kwargs):
 		list.append(PluginDescriptor(name="iDream", description=_("Dreambox Music Database"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
 	if config.plugins.merlinmusicplayer.merlinmusicplayerextendedpluginlist.value:
 		list.append(PluginDescriptor(name="Merlin Music Player", description=_("Merlin Music Player"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=merlinmusicplayerfilelist))
+	if config.plugins.merlinmusicplayer.merlinmusicplayermainmenu.value:
+		list.append(PluginDescriptor(name="Merlin Music Player", description=_("Merlin Music Player"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_merlinmusicplayerfilelist))
+	if config.plugins.merlinmusicplayer.idreammainmenu.value:
+		list.append(PluginDescriptor(name="iDream", description=_("iDream"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_idream))
 	return list
 
