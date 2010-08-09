@@ -115,7 +115,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="foreground" position="83,96" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" position="235,120" render="Label" size="70,30" source="session.Event_Now" transparent="1" zPosition="1">
 			<convert type="EventTime">StartTime</convert>
@@ -238,7 +238,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="foreground" position="83,96" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="83,152" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="83,122" render="Label" size="130,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
@@ -282,7 +282,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="foreground" position="83,96" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="83,152" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="83,122" render="Label" size="130,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">

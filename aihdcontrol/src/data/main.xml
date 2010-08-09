@@ -46,7 +46,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget font="Regular;17" halign="center" position="0,40" render="Label" size="130,24" source="global.CurrentTime" valign="top">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 	</screen>
 	
@@ -375,7 +375,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 			<convert type="ClockToText">Format::%S</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;18" foregroundColor="secondFG" halign="center" position="45,160" render="Label" size="130,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="220,120" render="Label" size="70,30" source="session.Event_Now" transparent="1" zPosition="1">
 			<convert type="EventTime">StartTime</convert>
@@ -442,7 +442,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_red" position="145,633" size="200,30" transparent="1" valign="center"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_green" position="145,663" size="200,30" transparent="1" valign="center"/>
 		<widget name="timeline_text" position="0,60" size="1182,30"/>
-		<widget EntryBackgroundColor="#16071230" EntryBackgroundColorSelected="selectedBG" EntryBorderColor="darkgrey" name="list" position="70,110" scrollbarMode="showNever" size="1130,486" transparent="1"/>
+		<widget EntryBackgroundColor="#16071230" EntryBackgroundColorSelected="selectedBG" EntryBorderColor="darkgrey" name="list" position="70,110" scrollbarMode="showOnDemand" size="1130,486" transparent="1"/>
 		<widget name="timeline0" pixmap="Ai.HD/timeline.png" position="60,105" size="1,496" zPosition="1"/>
 		<widget name="timeline1" pixmap="Ai.HD/timeline.png" position="60,105" size="1,496" zPosition="1"/>
 		<widget name="timeline2" pixmap="Ai.HD/timeline.png" position="60,105" size="1,496" zPosition="1"/>
@@ -494,7 +494,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget backgroundColor="background" font="Regular;20" foregroundColor="grey" halign="right" position="910,72" render="Label" size="310,22" source="global.CurrentTime" transparent="1">
-			<convert type="ClockToText">Format:%a %d %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_red" position="145,645" size="220,26" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_green" position="435,644" size="220,27" transparent="1"/>
@@ -559,7 +559,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 	</screen>
 	
 	<screen name="TimerEditList" position="center,87" size="1100,560" title="Timer Editor">
-		<widget name="timerlist" position="10,12" scrollbarMode="showOnDemand" size="1080,350"/>
+		<widget name="timerlist" position="10,15" scrollbarMode="showOnDemand" size="1080,490"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="30,525" size="30,30"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="300,525" size="30,30"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/yellow.png" position="570,525" size="30,30"/>
@@ -587,8 +587,8 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 	<screen name="TimerSanityConflict" position="center,87" size="1100,560" title="Timer sanity error">
 		<widget name="list" position="10,10" scrollbarMode="showOnDemand" size="1080,250"/>
 		<eLabel backgroundColor="grey" position="549,0" size="2,260"/>
-		<widget name="timer1" position="10,45" scrollbarMode="showNever" size="530,225"/>
-		<widget name="timer2" position="560,45" scrollbarMode="showNever" size="530,225"/>
+		<widget name="timer1" position="10,45" scrollbarMode="showOnDemand" size="530,225"/>
+		<widget name="timer2" position="560,45" scrollbarMode="showOnDemand" size="530,225"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="30,525" size="30,30"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="300,525" size="30,30"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/yellow.png" position="570,525" size="30,30"/>
@@ -1004,11 +1004,8 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 	
 	<!-- ########## Media-Player ########## -->
 	<screen backgroundColor="noTransBG" flags="wfNoBorder" name="MediaPlayer" position="0,0" size="1280,720" title="MediaPlayer">
-		<widget backgroundColor="noTransBG" font="Regular;26" foregroundColor="darkgrey" halign="right" position="1130,40" render="Label" size="80,26" source="global.CurrentTime" transparent="1">
-			<convert type="ClockToText">Default</convert>
-		</widget>
-		<widget backgroundColor="noTransBG" font="Regular;20" foregroundColor="darkgrey" halign="right" position="900,70" render="Label" size="310,22" source="global.CurrentTime" transparent="1">
-			<convert type="ClockToText">Format:%a %d %b</convert>
+		<widget backgroundColor="noTransBG" font="Regular;20" foregroundColor="darkgrey" halign="right" position="652,70" size="556,24" render="Label" source="global.CurrentTime" transparent="1">
+			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
 		</widget>
 		<eLabel backgroundColor="noTransBG" font="Regular;36" foregroundColor="grey" halign="left" position="75,40" size="702,56" text="M e d i a  P l a y e r" valign="top" zPosition="1"/>
 		<eLabel backgroundColor="grey" font="Regular;22" foregroundColor="black" halign="center" position="72,102" size="556,26" text="F i l e l i s t" zPosition="5"/>
@@ -1154,7 +1151,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 			<eLabel backgroundColor="noTransBG" position="0,534" size="950,190" zPosition="-1"/>
 			
 			<widget backgroundColor="noTransBG" font="Regular;16" foregroundColor="foreground" halign="left" noWrap="1" position="965,55" render="Label" size="231,22" source="global.CurrentTime" transparent="1" zPosition="3">
-				<convert type="ClockToText">Format:%A %B %d, %H:%M</convert>
+				<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
 			</widget>
 			<widget backgroundColor="noTransBG" font="Regular;22" halign="center" position="120,535" render="Label" size="797,50" source="session.CurrentService" valign="center">
 				<convert type="ServiceName">Name</convert>
@@ -1244,7 +1241,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget font="Regular;20" halign="center" name="text" position="50,94" size="924,424" valign="center" zPosition="3"/>
 		<widget name="timerlist" position="50,94" scrollbarMode="showOnDemand" size="924,400" zPosition="5"/>
 		<widget font="Regular;20" foregroundColor="grey" halign="left" position="626,33" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
-			<convert type="ClockToText">Format:%A %d.%b  %H:%M</convert>
+			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
 		</widget>
 	</screen>
 	
@@ -1260,7 +1257,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget font="Regular;20" halign="center" name="text" position="50,94" size="924,424" valign="center" zPosition="3"/>
 		<widget name="epglist" position="50,96" scrollbarMode="showOnDemand" size="924,400" zPosition="5"/>
 		<widget font="Regular;20" foregroundColor="grey" halign="left" position="626,33" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
-			<convert type="ClockToText">Format:%A %d.%b  %H:%M</convert>
+			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
 		</widget>
 	</screen>
 	
@@ -1276,7 +1273,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget halign="center" name="text" position="50,94" size="924,400" valign="center" zPosition="3"/>
 		<widget itemHeight="28" name="channellist" position="50,96" scrollbarMode="showOnDemand" size="924,420" zPosition="5"/>
 		<widget font="Regular;20" foregroundColor="grey" halign="left" position="626,33" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
-			<convert type="ClockToText">Format:%A %d.%b  %H:%M</convert>
+			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
 		</widget>
 	</screen>
 	
@@ -1295,7 +1292,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget font="Regular;22" name="channel" position="490,492" size="485,30"/>
 		<eLabel backgroundColor="darkgrey" position="50,485" size="924,2" zPosition="5"/>
 		<widget font="Regular;20" foregroundColor="grey" halign="left" position="626,33" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
-			<convert type="ClockToText">Format:%A %d.%b  %H:%M</convert>
+			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
 		</widget>
 	</screen>
 	
@@ -1308,7 +1305,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="oktext" position="187,25" size="140,40" transparent="1" valign="center" zPosition="2"/>
 		<widget itemHeight="28" name="config" position="50,97" scrollbarMode="showOnDemand" size="924,420"/>
 		<widget font="Regular;20" foregroundColor="grey" halign="left" position="626,33" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
-			<convert type="ClockToText">Format:%A %d.%b  %H:%M</convert>
+			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
 		</widget>
 	</screen>
 	
@@ -1354,7 +1351,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,145" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="960,75" render="Label" size="130,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
@@ -1414,7 +1411,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<ePixmap alphatest="on" name="red" pixmap="Ai.HD/key-red.png" position="155,55" size="140,40" transparent="1"/>
 		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
 		<widget font="Regular;20" foregroundColor="foreground" halign="left" name="title" position="320,50" size="597,50" transparent="1" valign="center" zPosition="5"/>
-		<widget position="200,110" render="Listbox" scrollbarMode="showNever" selectionDisabled="1" size="620,110" source="infolist" transparent="1" zPosition="6">
+		<widget position="200,110" render="Listbox" scrollbarMode="showOnDemand" selectionDisabled="1" size="620,110" source="infolist" transparent="1" zPosition="6">
 				<convert type="TemplatedMultiContent">
 				{"templates":
 					{"default": (110,[
@@ -1455,7 +1452,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<ePixmap alphatest="on" pixmap="skin_default/buttons/key_menu.png" position="920,55" size="35,25" transparent="1" zPosition="4"/>
 		<widget alphatest="on" name="ButtonBlue" pixmap="Ai.HD/key-blue.png" position="590,45" size="140,40" transparent="1" zPosition="10"/>
 		<widget alphatest="on" name="VKeyIcon" pixmap="skin_default/vkey_icon.png" position="740,40" size="60,48" transparent="1" zPosition="10"/>
-		<widget name="config" position="198,100" scrollbarMode="showNever" size="628,30" transparent="1" zPosition="2"/>
+		<widget name="config" position="198,100" scrollbarMode="showOnDemand" size="628,30" transparent="1" zPosition="2"/>
 		<widget position="100,140" render="Listbox" scrollbarMode="showOnDemand" size="824,385" source="feedlist" transparent="1" zPosition="1">
 				<convert type="TemplatedMultiContent">
 				{"templates":
@@ -1543,7 +1540,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 	
 	<!--  ##### Softwaremanager ##### -->
 	<screen name="UpdatePluginMenu" position="center,center" size="900,450" title="Softwaremanager...">
-		<widget enableWrapAround="1" position="5,50" render="Listbox" scrollbarMode="showNever" size="440,400" source="menu" transparent="1">
+		<widget enableWrapAround="1" position="5,50" render="Listbox" scrollbarMode="showOnDemand" size="440,400" source="menu" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (15, 5), size = (405, 30), flags = RT_HALIGN_LEFT, text = 1),
@@ -1553,7 +1550,7 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 				}
 			</convert>
 		</widget>
-		<widget position="450,150" render="Listbox" scrollbarMode="showNever" selectionDisabled="1" size="445,150" source="menu" transparent="1" zPosition="3">
+		<widget position="450,150" render="Listbox" scrollbarMode="showOnDemand" selectionDisabled="1" size="445,150" source="menu" transparent="1" zPosition="3">
 			<convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (0, 0), size = (420, 150), flags = RT_HALIGN_CENTER|RT_VALIGN_CENTER|RT_WRAP, text = 2),
@@ -1654,6 +1651,76 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<ePixmap alphatest="on" pixmap="Ai.HD/key-yellow.png" position="285,5" size="140,40" transparent="1"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/key-blue.png" position="425,5" size="140,40" transparent="1"/>
 	</screen>
+
+	<!--  ##### RSS-Reader ##### -->
+	<screen name="RSSSetup" position="center, 0" size="1280, 720" title="Simple RSS Reader Setup" flags="wfNoBorder">
+		<widget source="global.CurrentTime" render="Label" position="55, 20" size=" 80,25" font="Regular;23" foregroundColor="white" backgroundColor="black" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="145, 20" size="140,25" font="Regular;23" foregroundColor="white" backgroundColor="black" transparent="1">
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<eLabel text="Simple RSS Reader Setup" position="300, 20" size="540,43" font="Regular;35" halign="right" backgroundColor="black" transparent="1" />
+		<widget name="config" position="57, 91" size="1163, 540" itemHeight="30" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" transparent="1" />
+		<ePixmap pixmap="Ai.HD/red.png" position="60, 640" size="35,27" alphatest="blend" />
+		<ePixmap pixmap="Ai.HD/green.png" position="260, 640" size="35,27" alphatest="blend" />
+		<ePixmap pixmap="Ai.HD/yellow.png" position="460, 640" size="35,27" alphatest="blend" />
+		<ePixmap pixmap="Ai.HD/blue.png" position="660, 640" size="35,27" alphatest="blend" />
+		<widget source="key_red" render="Label" position="110, 640" size="150,26" zPosition="1" font="Regular;22" halign="left" backgroundColor="black" transparent="1" />
+		<widget source="key_green" render="Label" position="310, 640" size="150,26" zPosition="1" font="Regular;22" halign="left" backgroundColor="black" transparent="1" />
+		<widget source="key_yellow" render="Label" position="510, 640" size="150,26" zPosition="1" font="Regular;22" halign="left" backgroundColor="black" transparent="1" />
+		<widget source="key_blue" render="Label" position="710, 640" size="150,26" zPosition="1" font="Regular;22" halign="left" backgroundColor="black" transparent="1" />
+	</screen>
+	<screen name="RSSEntryView" position="center, 0" size="1280, 720" title="Simple RSS Reader" flags="wfNoBorder">
+		<widget source="global.CurrentTime" render="Label" position="55, 20" size=" 80,25" font="Regular;23" backgroundColor="black" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="145, 20" size="140,25" font="Regular;23" backgroundColor="black" transparent="1">
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<eLabel text="RSSEntryView" position="300, 20" size="540,43" font="Regular;35" halign="right" backgroundColor="black" transparent="1" />
+		<widget source="info" render="Label" position="55, 75" size="1163, 32" font="Regular;24" backgroundColor="background" transparent="1" />
+		<eLabel position="55, 110" size="1163, 2" backgroundColor="grey" />
+		<widget name="content" position="55, 120" size="1163, 550" font="Regular; 22" backgroundColor="background" transparent="1" />
+	</screen>
+	<screen name="RSSFeedView" position="0, 2" size="1280, 720" title="Simple RSS Reader" flags="wfNoBorder">
+		<widget source="global.CurrentTime" render="Label" position="55, 20" size=" 80,25" font="Regular;23" backgroundColor="black" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="145, 20" size="140,25" font="Regular;23" backgroundColor="black" transparent="1">
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<eLabel text="RSSFeedView" position="300, 20" size="540,43" font="Regular;35" halign="right" backgroundColor="black" transparent="1" />
+		<widget source="info" render="Label" position="55, 75" size="1163, 28" font="Regular;24" backgroundColor="background" transparent="1" />
+		<eLabel position="55, 110" size="1163, 2" backgroundColor="grey" />
+		<widget source="content" render="Listbox" position="57, 114" size="1163, 392" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" transparent="1">
+			<convert type="TemplatedMultiContent">
+                {"template": [
+                        MultiContentEntryText(pos=(10, 5), size=(760, 65), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text = 0)
+                    ],
+                 "fonts": [gFont("Regular", 20)],
+                 "itemHeight": 75
+                }
+			</convert>
+		</widget>
+		<eLabel position="55, 510" size="1163, 2" backgroundColor="grey" />
+		<widget source="summary" render="Label" position="55, 520" size="1163, 158" font="Regular;22" backgroundColor="background" transparent="1" />
+	</screen>
+	<screen name="RSSOverview" position="0, 0" size="1280, 720" title="Simple RSS Reader" flags="wfNoBorder">
+		<widget source="global.CurrentTime" render="Label" position="55, 20" size=" 80,25" font="Regular;23" backgroundColor="black" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="145, 20" size="140,25" font="Regular;23" backgroundColor="black" transparent="1">
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<eLabel text="RSSOverview" position="300, 20" size="540,43" font="Regular;35" halign="right" backgroundColor="black" transparent="1" />
+		<widget source="info" render="Label" position="55, 75" size="1163, 28" font="Regular;24" backgroundColor="background" transparent="1" />
+		<eLabel position="55, 110" size="1163, 2" backgroundColor="grey" />
+		<widget name="content" position="55, 120" size="1163, 495" enableWrapAround="1" backgroundColor="background" transparent="1" />
+		<eLabel position="55, 620" size="1163, 2" backgroundColor="grey" />
+		<widget source="summary" render="Label" position="55, 626" size="1163, 28" font="Regular;22" backgroundColor="background" transparent="1" />
+	</screen>
+
 	
 	
 	

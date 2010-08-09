@@ -135,7 +135,10 @@
 			<convert type="EventTime">Duration</convert>
 			<convert type="vhdConvClockToText">InStunden</convert>
 		</widget>
-		<widget backgroundColor="#08202529" borderWidth="0" pixmap="Ai.HD/pbarG2.png" position="65,129" render="Progress" size="1150,8" source="session.Event_Now" transparent="1" zPosition="2">
+		<!-- <widget backgroundColor="#08202529" borderWidth="0" pixmap="Ai.HD/pbarG2.png" position="65,129" render="Progress" size="1150,8" source="session.Event_Now" transparent="1" zPosition="2">
+				<convert type="EventTime">Progress</convert>
+		</widget> -->
+		<widget backgroundColor="grey" borderWidth="0" position="65,130" render="Progress" size="1150,6" source="session.Event_Now" transparent="1" zPosition="2">
 				<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" position="1100,90" render="vhdRendVideoSize" size="101,22" source="session.CurrentService" transparent="1" valign="top" zPosition="1"/>
@@ -228,7 +231,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,155" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="70,130" render="Label" size="130,25" source="session.CurrentService" transparent="1" zPosition="4">
@@ -272,7 +275,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,155" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="70,130" render="Label" size="130,25" source="session.CurrentService" transparent="1" zPosition="4">

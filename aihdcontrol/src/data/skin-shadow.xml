@@ -112,7 +112,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" position="235,120" render="Label" size="70,30" source="session.Event_Now" transparent="1" zPosition="1">
 			<convert type="EventTime">StartTime</convert>
@@ -235,7 +235,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,155" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="70,130" render="Label" size="130,25" source="session.CurrentService" transparent="1" zPosition="4">
@@ -279,7 +279,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,155" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="70,130" render="Label" size="130,25" source="session.CurrentService" transparent="1" zPosition="4">
