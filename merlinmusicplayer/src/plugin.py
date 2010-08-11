@@ -1498,16 +1498,17 @@ class MerlinMusicPlayerLyrics(Screen):
 		except:
 			audio = None
 		if audio:
-			text = getEncodedString(self.getLyricsFromID3Tag(audio)).replace("\r","\n")
+			text = getEncodedString(self.getLyricsFromID3Tag(audio)).replace("\r\n","\n")
+			text = text.replace("\r","\n")
 			self["lyric_text"].setText(text)
 		else:
 			self["lyric_text"].setText("No lyrics found")
   
 	def getLyricsFromID3Tag(self,tag):
-		try:
-			return tag[u"USLT::'eng'"].text
-		except KeyError:
-			return "No lyrics found in id3-tag"
+		for frame in tag.values():
+			if frame.FrameID == "USLT":
+				return frame.text
+		return "No lyrics found in id3-tag"
 
 	
 	def urlError(self, error = None):
