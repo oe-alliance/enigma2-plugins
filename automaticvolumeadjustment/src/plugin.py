@@ -23,11 +23,19 @@
 from Plugins.Plugin import PluginDescriptor
 from AutomaticVolumeAdjustmentSetup import AutomaticVolumeAdjustmentConfigScreen
 from AutomaticVolumeAdjustment import AutomaticVolumeAdjustment
+from AutomaticVolumeAdjustmentConfig import saveVolumeDict
 
 def autostart(reason, **kwargs):
 	if "session" in kwargs:
 		session = kwargs["session"]
 		AutomaticVolumeAdjustment(session)
+
+def autoend(reason, **kwargs):
+	# save config values for last used volume modus
+	if reason == 1:
+		if AutomaticVolumeAdjustment.instance:
+			if AutomaticVolumeAdjustment.instance.enabled and AutomaticVolumeAdjustment.instance.modus != "0":
+				saveVolumeDict(AutomaticVolumeAdjustment.instance.serviceList)
 	
 def setup(session, **kwargs):
 	session.open(AutomaticVolumeAdjustmentConfigScreen) # start setup
@@ -38,5 +46,5 @@ def startSetup(menuid):
 	return [(_("Automatic Volume Adjustment"), setup, "AutomaticVolumeAdjustment", 46)]
 	
 def Plugins(**kwargs):
-	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart), PluginDescriptor(name="Automatic Volume Adjustment", description=_("Automatic Volume Adjustment"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
+	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart), PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autoend), PluginDescriptor(name="Automatic Volume Adjustment", description=_("Automatic Volume Adjustment"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
 

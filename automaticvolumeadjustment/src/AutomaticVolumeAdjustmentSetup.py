@@ -60,18 +60,45 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 		}, -2)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-		self["key_blue"] = StaticText(_("Services"))
+		self["key_blue"] = StaticText()
 		self.configVA = AutomaticVolumeAdjustmentConfig()
-		self.list = []
-		self.list.append(getConfigListEntry(_("Enable"), self.configVA.config.enable))
-		self.list.append(getConfigListEntry(_("Default volume adjustment value for AC3/DTS"), self.configVA.config.adustvalue))
-		self.list.append(getConfigListEntry(_("Max. volume for mpeg audio"), self.configVA.config.mpeg_max_volume))
-		self.list.append(getConfigListEntry(_("Show volumebar when volume-value was changed"), self.configVA.config.show_volumebar))
 		self.automaticVolumeAdjustmentInstance = AutomaticVolumeAdjustment.instance
-		ConfigListScreen.__init__(self, self.list, session)
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = session)
+		self.createSetup("config")
+		
+	def createSetup(self, widget):
+		self.list = []
+		self.config_enable = getConfigListEntry(_("Enable"), self.configVA.config.enable)
+		self.list.append(self.config_enable)
+		if self.configVA.config.enable.value:
+			self.config_modus = getConfigListEntry(_("Modus"), self.configVA.config.modus)
+			self.list.append(self.config_modus)
+			if self.configVA.config.modus.value == "0":
+				self.list.append(getConfigListEntry(_("Default volume adjustment value for AC3/DTS"), self.configVA.config.adustvalue))
+				self.list.append(getConfigListEntry(_("Max. volume for mpeg audio"), self.configVA.config.mpeg_max_volume))
+				self["key_blue"].text = _("Services")
+			else:
+				self["key_blue"].text = ""
+			self.list.append(getConfigListEntry(_("Show volumebar when volume-value was changed"), self.configVA.config.show_volumebar))
+		self[widget].list = self.list
+		self[widget].l.setList(self.list)
+	
+	def newConfig(self):
+		if self["config"].getCurrent() in (self.config_enable, self.config_modus):
+			self.createSetup("config")
+
+	def keyLeft(self):
+			ConfigListScreen.keyLeft(self)
+			self.newConfig()
+
+	def keyRight(self):
+			ConfigListScreen.keyRight(self)
+			self.newConfig()
 		
 	def blue(self):
-		self.session.open(AutomaticVolumeAdjustmentEntriesListConfigScreen, self.configVA)
+		if self.configVA.config.modus.value == "0":
+			self.session.open(AutomaticVolumeAdjustmentEntriesListConfigScreen, self.configVA)
 
 	def keySave(self):
 		for x in self["config"].list:

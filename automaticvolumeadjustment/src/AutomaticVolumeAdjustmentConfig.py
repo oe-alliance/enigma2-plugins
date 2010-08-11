@@ -21,8 +21,26 @@
 #  distributed other than under the conditions noted above.
 #
 from Components.config import ConfigSubsection, ConfigText, \
-	config, ConfigInteger, Config, ConfigSubList, ConfigDirectory, NoSave, ConfigYesNo, ConfigSelectionNumber
+	config, ConfigInteger, Config, ConfigSubList, ConfigDirectory, NoSave, ConfigYesNo, ConfigSelectionNumber, ConfigSelection
 from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT  as os_O_CREAT 
+from pickle import load as pickle_load, dump as pickle_dump
+
+CONFIG_FILE_VOLUME = '/usr/lib/enigma2/python/Plugins/SystemPlugins/AutomaticVolumeAdjustment/config_volume'
+
+def getVolumeDict():
+	if os_path.exists(CONFIG_FILE_VOLUME):
+		pkl_file = open(CONFIG_FILE_VOLUME, 'rb')
+		if pkl_file:
+			volumedict = pickle_load(pkl_file)
+			pkl_file.close()
+			return volumedict
+	return {}
+
+def saveVolumeDict(dict):
+	pkl_file = open(CONFIG_FILE_VOLUME, 'wb')
+	if pkl_file:
+		pickle_dump(dict, pkl_file)
+		pkl_file.close()
 
 class AutomaticVolumeAdjustmentConfig():
 	def __init__(self):
@@ -41,6 +59,7 @@ class AutomaticVolumeAdjustmentConfig():
 		self.config.entriescount =  ConfigInteger(0)
 		self.config.Entries = ConfigSubList()
 		self.config.enable = ConfigYesNo(default = False)
+		self.config.modus = ConfigSelection(choices = [("0", _("Automatic volume adjust")), ("1", _("Remember service volume value"))], default = "0")
 		self.config.adustvalue = ConfigSelectionNumber(-50, 50, 5, default = 25)
 		self.config.mpeg_max_volume = ConfigSelectionNumber(10, 100, 5, default = 100)
 		self.config.show_volumebar = ConfigYesNo(default = False)
