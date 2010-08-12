@@ -1,6 +1,8 @@
+# -*- coding: iso-8859-15-*-
 from Converter import Converter
 from time import localtime, strftime
 from Components.Element import cached
+from Components.config import config
 
 class vConvClockToText(Converter, object):
 	DEFAULT = 0
@@ -11,9 +13,8 @@ class vConvClockToText(Converter, object):
 	AS_LENGTH = 5
 	TIMESTAMP = 6
 	STUNDEN = 7
-	
-	# add: date, date as string, weekday, ... 
-	# (whatever you need!)
+	LOCDE = 8
+	LOCFULL = 9
 	
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -32,16 +33,29 @@ class vConvClockToText(Converter, object):
 		elif str(type).find("Format") != -1:
 			self.type = self.FORMAT
 			self.fmt_string = type[7:]
+		elif str(type).find("LocaleKurz") != -1:
+			self.type = self.LOCDE
+			self.fmt_string = type[11:]
+		elif str(type).find("LocaleLang") != -1:
+			self.type = self.LOCFULL
+			self.fmt_string = type[11:]
 		else:
 			self.type = self.DEFAULT
+		if config.osd.language.value == "de_DE":
+			self.Tage = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+			self.Monate = ["Jän", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
+		elif (config.osd.language.value == "it_IT") or (config.osd.language.value == "es_ES"):
+			self.Tage = ["Lu", "Ma", "Me", "Gi", "Ve", "Sa", "Do"]
+			self.Monate = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"]
+		else:
+			self.Tage = ["Mo", "Tu", "We", "Th", "Fr", "Say", "Su"]
+			self.Monate = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 	@cached
 	def getText(self):
 		time = self.source.time
 		if time is None:
 			return ""
-
-		# handle durations
 		if self.type == self.IN_MINUTES:
 			return "%d min" % (time / 60)
 		elif self.type == self.AS_LENGTH:
@@ -50,9 +64,7 @@ class vConvClockToText(Converter, object):
 			return str(time)
 		elif self.type == self.STUNDEN:
 			return "%d:%02d" % (time / 3600, (time / 60) - ((time / 3600) * 60))
-		
 		t = localtime(time)
-		
 		if self.type == self.WITH_SECONDS:
 			return "%2d:%02d:%02d" % (t.tm_hour, t.tm_min, t.tm_sec)
 		elif self.type == self.DEFAULT:
@@ -67,7 +79,29 @@ class vConvClockToText(Converter, object):
 				return str(s1+s2)
 			else:
 				return strftime(self.fmt_string, t)
-		
+		elif self.type == self.LOCDE:
+			spos = self.fmt_string.find('%')
+			if not(spos < 0):
+				s1 = (strftime(self.fmt_string[spos:], t))
+				iAll = s1.split(" ")
+				iTag = iAll[0]
+				iMonat = iAll[2]
+				sOut = self.Tage[int(iTag)-1] + " " + iAll[1] + ". " + self.Monate[int(iMonat)-1]
+				return str(sOut)
+			else:
+				return strftime(self.fmt_string, t)
+		elif self.type == self.LOCFULL:
+			spos = self.fmt_string.find('%')
+			if not(spos < 0):
+				s1 = (strftime(self.fmt_string[spos:], t))
+				iAll = s1.split(" ")
+				iTag = iAll[0]
+				iMonat = iAll[2]
+				sOut = self.Tage[int(iTag)-1] + " " + iAll[1] + ". " + self.Monate[int(iMonat)-1]
+				zeit = "%02d:%02d" % (t.tm_hour, t.tm_min)
+				return str(sOut + "     " + zeit)
+			else:
+				return strftime(self.fmt_string, t)
 		else:
 			return "???"
 

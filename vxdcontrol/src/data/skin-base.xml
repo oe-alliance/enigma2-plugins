@@ -71,7 +71,7 @@
 			<convert type="ClockToText">Format::%S</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="30,91" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="background" font="OLED;21" foregroundColor="foreground" halign="center" position="165,17" render="Label" size="694,28" source="session.CurrentService" transparent="1" zPosition="3">
 			<convert type="ServiceName">Name</convert>
@@ -155,7 +155,7 @@
 			<convert type="ClockToText">Format::%S</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="30,91" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="#0444444a" pointer="Vali-XD/dvr/position_pointer.png:572,0" position="330,19" render="PositionGauge" size="420,12" source="session.CurrentService" transparent="1" zPosition="4">
 			<convert type="ServicePosition">Gauge</convert>
@@ -197,7 +197,7 @@
 			<convert type="ClockToText">Format::%S</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="30,91" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="#0444444a" pointer="Vali-XD/dvr/position_pointer.png:572,0" position="330,19" render="PositionGauge" size="420,12" source="session.CurrentService" transparent="0" zPosition="4">
 			<convert type="ServicePosition">Gauge</convert>

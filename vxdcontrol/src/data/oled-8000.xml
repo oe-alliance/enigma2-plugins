@@ -67,7 +67,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget font="Regular;16" halign="center" position="0,41" render="Label" size="132,23" source="global.CurrentTime">
-			<convert type="ClockToText">Format:%a %d. %b</convert>
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 	</screen>
 	
