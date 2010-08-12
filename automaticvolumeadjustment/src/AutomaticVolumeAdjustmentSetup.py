@@ -81,6 +81,8 @@ class AutomaticVolumeAdjustmentConfigScreen(ConfigListScreen, Screen):
 			else:
 				self["key_blue"].text = ""
 			self.list.append(getConfigListEntry(_("Show volumebar when volume-value was changed"), self.configVA.config.show_volumebar))
+		else:
+			self.config_modus = None
 		self[widget].list = self.list
 		self[widget].l.setList(self.list)
 	
