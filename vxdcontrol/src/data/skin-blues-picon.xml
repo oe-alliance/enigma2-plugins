@@ -79,7 +79,7 @@
 			<convert type="ClockToText">Format::%S</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="35,106" render="Label" size="120,27" source="global.CurrentTime" transparent="1" zPosition="3">
-			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="230,22" render="Label" size="411,28" source="session.CurrentService" transparent="1" zPosition="3">
 			<convert type="ServiceName">Name</convert>
@@ -198,7 +198,7 @@
 			<convert type="ClockToText">Format:%S</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="25,90" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
-			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<ePixmap alphatest="blend" pixmap="Vali-XD/dvr/mpslider.png" position="302,89" size="420,12" zPosition="5"/>
 		<widget backgroundColor="background" pointer="Vali-XD/dvr/position_pointer_mp.png:6,1" position="312,89" render="PositionGauge" size="400,12" source="session.CurrentService" transparent="1" zPosition="4">
@@ -242,7 +242,7 @@
 			<convert type="ClockToText">Format:%S</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="25,90" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
-			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<ePixmap alphatest="blend" pixmap="Vali-XD/dvr/mpslider.png" position="302,89" size="420,12" zPosition="5"/>
 		<widget backgroundColor="background" pointer="Vali-XD/dvr/position_pointer_mp.png:6,1" position="312,89" render="PositionGauge" size="400,12" source="session.CurrentService" transparent="1" zPosition="4">

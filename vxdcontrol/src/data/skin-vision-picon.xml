@@ -80,7 +80,7 @@
 			<convert type="ClockToText">Format::%S</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="28,125" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
-			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="background" font="OLED;21" foregroundColor="foreground" halign="left" position="230,54" render="Label" size="501,28" source="session.CurrentService" transparent="1" zPosition="3">
 			<convert type="ServiceName">Name</convert>
@@ -206,7 +206,7 @@
 			<convert type="ClockToText">Format::%S</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="30,124" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
-			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="#0444444a" pointer="Vali-XD/dvr/position_pointer.png:572,0" position="330,64" render="PositionGauge" size="420,12" source="session.CurrentService" transparent="1" zPosition="4">
 			<convert type="ServicePosition">Gauge</convert>
@@ -251,7 +251,7 @@
 			<convert type="ClockToText">Format::%S</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="30,124" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
-			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="#0444444a" pointer="Vali-XD/dvr/position_pointer.png:572,0" position="330,64" render="PositionGauge" size="420,12" source="session.CurrentService" transparent="0" zPosition="4">
 			<convert type="ServicePosition">Gauge</convert>

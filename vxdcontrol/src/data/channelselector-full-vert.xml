@@ -16,7 +16,7 @@
 		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,40" size="140,40" transparent="1" valign="center" zPosition="2"/>
 		<widget colorServiceDescription = "#FA9F43" colorEventProgressbar="#888888" colorEventProgressbarSelected="#fcc000" colorEventProgressbarBorder="#555555" colorEventProgressbarBorderSelected="grey" foregroundColorServiceNotAvail="#5a5a5a" itemHeight="28" name="list" position="50,100" scrollbarMode="showNever" serviceInfoFont="Regular;18" serviceNameFont="Replacement;20" serviceNumberFont="Replacement;20" size="600,450"/>
 		<widget font="Replacement;16" foregroundColor="secondFG" halign="center" position="620,50" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
-			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
+			<convert type="vConvClockToText">LocaleLang:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;18" halign="left" position="660,125" render="Label" size="51,22" source="ServiceEvent" transparent="1" zPosition="2">
 			<convert type="EventTime">StartTime</convert>
@@ -49,7 +49,7 @@
 		</widget>
 		<widget itemHeight="28" name="list" position="50,120" scrollbarMode="showOnDemand" size="924,420"/>
 		<widget font="Replacement;19" foregroundColor="secondFG" halign="center" position="620,61" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
-			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
+			<convert type="vConvClockToText">LocaleLang:%w %d %m</convert>
 		</widget>
 	</screen>
 	
