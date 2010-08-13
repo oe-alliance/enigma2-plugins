@@ -1553,6 +1553,12 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="285,5" size="140,40" transparent="1"/>
 		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="425,5" size="140,40" transparent="1"/>
 	</screen>
+	<screen name="UpdatePlugin" position="center,center" size="550,300" title="Software update" >
+		<widget name="activityslider" position="0,0" size="550,5"  />
+		<widget name="slider" position="0,150" size="550,30"  />
+		<widget source="package" render="Label" position="10,20" size="540,20" font="Regular;18" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
+		<widget source="status" render="Label" position="10,50" size="540,80" font="Regular;20" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
+	</screen>
 	
 	
 	
