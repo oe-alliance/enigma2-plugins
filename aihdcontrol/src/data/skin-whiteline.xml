@@ -25,7 +25,7 @@
 		<color name="greentransparent" value="#08004C00"/>
 		<color name="bluetransparent" value="#08001E4B"/>
 		<color name="yellowtransparent" value="#084B4B00"/>
-		<color name="noTransBG" value="#00101417"/>
+		<color name="noTransBG" value="#00101319"/>
 		<color name="transparent" value="#ff888888"/>
 		<color name="transpBlack" value="#540f0f0f"/>
 		<color name="transpWhite" value="#70f0f0f0"/>
@@ -135,10 +135,7 @@
 			<convert type="EventTime">Duration</convert>
 			<convert type="vhdConvClockToText">InStunden</convert>
 		</widget>
-		<!-- <widget backgroundColor="#08202529" borderWidth="0" pixmap="Ai.HD/pbarG2.png" position="65,129" render="Progress" size="1150,8" source="session.Event_Now" transparent="1" zPosition="2">
-				<convert type="EventTime">Progress</convert>
-		</widget> -->
-		<widget backgroundColor="grey" borderWidth="0" position="65,130" render="Progress" size="1150,6" source="session.Event_Now" transparent="1" zPosition="2">
+		<widget backgroundColor="#08202529" borderWidth="0" pixmap="Ai.HD/pbarG2.png" position="65,129" render="Progress" size="1150,8" source="session.Event_Now" transparent="1" zPosition="2">
 				<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" position="1100,90" render="vhdRendVideoSize" size="101,22" source="session.CurrentService" transparent="1" valign="top" zPosition="1"/>
@@ -224,6 +221,7 @@
 	<screen backgroundColor="transparent" flags="wfNoBorder" name="MoviePlayer" position="0,512" size="1280,220" title="InfoBar">
 		<ePixmap alphatest="off" pixmap="Ai.HD/infobar-shadow.png" position="0,24" size="1280,220" zPosition="-1"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/mp_buttons.png" position="1095,75" size="122,50" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="center" position="1095,75" render="vhdRendMaxTemp" size="122,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="2"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="center" position="282,105" render="Label" size="722,77" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
@@ -268,6 +266,7 @@
 	<screen backgroundColor="transparent" flags="wfNoBorder" name="DVDPlayer" position="0,512" size="1280,220" title="InfoBar">
 		<ePixmap alphatest="off" pixmap="Ai.HD/infobar-shadow.png" position="0,24" size="1280,220" zPosition="-1"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/mp_buttons.png" position="1095,75" size="122,50" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="center" position="1095,75" render="vhdRendMaxTemp" size="122,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="2"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="center" position="282,105" render="Label" size="722,77" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>

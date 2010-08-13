@@ -16,7 +16,7 @@
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_green" position="435,644" size="220,27" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_blue" position="1015,645" size="220,26" transparent="1"/>
-		<widget picServiceEventProgressbar="Ai.HD/minibar.png" colorEventProgressbarBorder="#555555" colorEventProgressbarBorderSelected="grey" colorServiceDescription="#DBB96E" foregroundColorServiceNotAvail="#00656565" itemHeight="30" name="list" position="60,55" scrollbarMode="showOnDemand" serviceInfoFont="Regular;22" serviceItemHeight="30" serviceNameFont="Regular;23" serviceNumberFont="Regular;23" size="750,570"/>
+		<widget picServiceEventProgressbar="Ai.HD/minibar.png" colorEventProgressbarBorder="#555555" colorEventProgressbarBorderSelected="grey" colorServiceDescription="#DBB96E" foregroundColorServiceNotAvail="#00656565" itemHeight="30" name="list" position="60,55" scrollbarMode="showNever" serviceInfoFont="Regular;22" serviceItemHeight="30" serviceNameFont="Regular;23" serviceNumberFont="Regular;23" size="740,570"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" position="845,135" render="Label" size="385,25" source="ServiceEvent" transparent="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
@@ -55,7 +55,7 @@
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_green" position="435,644" size="220,27" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_blue" position="1015,645" size="220,26" transparent="1"/>
-		<widget itemHeight="30" name="list" position="60,55" scrollbarMode="showOnDemand" size="740,570" transparent="1"/>
+		<widget itemHeight="30" name="list" position="60,55" scrollbarMode="showNever" size="740,570" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;20" foregroundColor="foreground" position="845,182" render="Label" size="377,417" source="Event" transparent="1">
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>

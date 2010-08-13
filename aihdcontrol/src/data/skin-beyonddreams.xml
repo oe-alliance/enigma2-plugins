@@ -27,7 +27,7 @@
 		<color name="greentransparent" value="#08004C00"/>
 		<color name="bluetransparent" value="#08001E4B"/>
 		<color name="yellowtransparent" value="#084B4B00"/>
-		<color name="noTransBG" value="#00101417"/>
+		<color name="noTransBG" value="#000A1E36"/>
 		<color name="transparent" value="#ff888888"/>
 		<color name="transpBlack" value="#540A1E36"/>
 		<color name="transpWhite" value="#70f0f0f0"/>
@@ -231,6 +231,7 @@
 	<screen backgroundColor="transparent" flags="wfNoBorder" name="MoviePlayer" position="0,500" size="1280,220" title="InfoBar">
 		<ePixmap alphatest="off" pixmap="Ai.HD/infobarMC.png" position="0,22" size="1280,220" zPosition="0"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/mp_buttons.png" position="1085,80" size="122,50" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="center" position="1085,80" render="vhdRendMaxTemp" size="122,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="2"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="center" position="282,105" render="Label" size="722,77" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
@@ -275,6 +276,7 @@
 	<screen backgroundColor="transparent" flags="wfNoBorder" name="DVDPlayer" position="0,500" size="1280,220" title="InfoBar">
 		<ePixmap alphatest="off" pixmap="Ai.HD/infobarMC.png" position="0,22" size="1280,220" zPosition="0"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/mp_buttons.png" position="1085,80" size="122,50" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="center" position="1085,80" render="vhdRendMaxTemp" size="122,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="2"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="center" position="282,105" render="Label" size="722,77" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>

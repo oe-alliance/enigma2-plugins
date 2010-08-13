@@ -108,10 +108,10 @@
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" position="310,69" render="Label" size="497,36" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget backgroundColor="secondBG" font="Regular;24" foregroundColor="grey" position="70,75" render="Label" size="92,25" source="global.CurrentTime" transparent="1" valign="top" zPosition="1">
+		<widget backgroundColor="secondBG" font="Regular;24" foregroundColor="grey" position="70,64" render="Label" size="92,25" source="global.CurrentTime" transparent="1" valign="top" zPosition="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
+		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,90" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
 			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" position="235,120" render="Label" size="70,30" source="session.Event_Now" transparent="1" zPosition="1">
@@ -136,7 +136,7 @@
 			<convert type="EventTime">Duration</convert>
 			<convert type="vhdConvClockToText">InStunden</convert>
 		</widget>
-		<widget backgroundColor="#08202529" borderWidth="0" pixmap="Ai.HD/pbar.png" position="235,105" render="Progress" size="814,8" source="session.Event_Now" transparent="0" zPosition="2">
+		<widget backgroundColor="#08303539" borderWidth="0" pixmap="Ai.HD/pbar.png" position="235,105" render="Progress" size="814,8" source="session.Event_Now" transparent="0" zPosition="2">
 				<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="foreground" position="1110,75" render="vhdRendVideoSize" size="101,22" source="session.CurrentService" transparent="1" valign="top" zPosition="1"/>
@@ -228,6 +228,7 @@
 	<screen backgroundColor="transparent" flags="wfNoBorder" name="MoviePlayer" position="0,512" size="1280,220" title="InfoBar">
 		<ePixmap alphatest="off" pixmap="Ai.HD/infobar-shadow.png" position="0,24" size="1280,220" zPosition="-1"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/mp_buttons.png" position="1095,75" size="122,50" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="center" position="1095,75" render="vhdRendMaxTemp" size="122,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="2"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="center" position="282,105" render="Label" size="722,77" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
@@ -272,6 +273,7 @@
 	<screen backgroundColor="transparent" flags="wfNoBorder" name="DVDPlayer" position="0,512" size="1280,220" title="InfoBar">
 		<ePixmap alphatest="off" pixmap="Ai.HD/infobar-shadow.png" position="0,24" size="1280,220" zPosition="-1"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/mp_buttons.png" position="1095,75" size="122,50" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="center" position="1095,75" render="vhdRendMaxTemp" size="122,24" source="global.CurrentTime" transparent="1" valign="center" zPosition="2"/>
 		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="center" position="282,105" render="Label" size="722,77" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>

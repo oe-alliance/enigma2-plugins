@@ -78,7 +78,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.release = ".release4"
+		self.release = ".release20100813"
 		Screen.__init__(self, session)
 		self.session = session
 		self.datei = "/usr/share/enigma2/Ai.HD/skin.xml"
@@ -86,7 +86,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 		self.komponente = "/usr/lib/enigma2/python/Plugins/Extensions/AiHDcontroler/comp/"
 		list = []
 		list.append(getConfigListEntry(_("Infobar and Window Style:"), config.plugins.vhd.Style))
-		#list.append(getConfigListEntry(_("Channel and EPG selectors Style:"), config.plugins.vhd.ChannSelector))
+		list.append(getConfigListEntry(_("Channel and EPG selectors Style:"), config.plugins.vhd.ChannSelector))
 		ConfigListScreen.__init__(self, list)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
 									{
