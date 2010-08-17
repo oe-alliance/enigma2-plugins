@@ -193,28 +193,28 @@ class IMDB(Screen):
 		'(?:.*?<h5>(?P<g_seasons>Seasons):</h5>(?:.*?)<a href=\".*?\">(?P<seasons>\d+?)</a>\s+?(?:<a class|\|\s+?<a href="episodes#season-unknown))*'
 		'(?:.*?<h5>(?P<g_writer>Drehbuch|Writer).*?</h5>.*?<a href=\".*?\">(?P<writer>.*?)</a>)*'
 		'(?:.*?<h5>(?P<g_premiere>Premiere|Release Date).*?</h5>\s+<div.*?>\s?(?P<premiere>.*?)\n\s.*?<)*'
-		'(?:.*?<h5>(?P<g_alternativ>Auch bekannt als|Also Known As):</h5><div.*?>\s*(?P<alternativ>.*?)<br>\s{0,8}<a.*?>(?:mehr|more))*'
-		'(?:.*?<h5>(?P<g_country>Land|Country):</h5>\s+<div.*?>(?P<country>.*?)</div>(?:.*?mehr|\s+?</div>))*'
+		'(?:.*?<h5>(?P<g_alternativ>Auch bekannt als|Also Known As):</h5><div.*?>\s*(?P<alternativ>.*?)<br>)*'#\s{0,8}<a.*?>(?:Mehr|See more))*'
+		'(?:.*?<h5>(?P<g_country>Land|Country):</h5>\s+<div.*?>(?P<country>.*?)</div>(?:.*?Mehr|\s+?</div>))*'
 		, re.DOTALL)
 
 		self.extrainfomask = re.compile(
 		'(?:.*?<h5>(?P<g_tagline>Werbezeile|Tagline?):</h5>\n(?P<tagline>.+?)<)*'
 		'(?:.*?<h5>(?P<g_outline>Kurzbeschreibung|Plot Outline):</h5>(?P<outline>.+?)<)*'
 		'(?:.*?<h5>(?P<g_synopsis>Plot Synopsis):</h5>(?:.*?)(?:<a href=\".*?\">)*?(?P<synopsis>.+?)(?:</a>|</div>))*'
-		'(?:.*?<h5>(?P<g_keywords>Plot Keywords):</h5>(?P<keywords>.+?)(?:mehr|more</a>|</div>))*'
-		'(?:.*?<h5>(?P<g_awards>Filmpreise|Awards):</h5>(?P<awards>.+?)(?:mehr|more</a>|</div>))*'
+		'(?:.*?<h5>(?P<g_keywords>Plot Keywords):</h5>(?P<keywords>.+?)(?:Mehr|See more</a>|</div>))*'
+		'(?:.*?<h5>(?P<g_awards>Filmpreise|Awards):</h5>(?P<awards>.+?)(?:Mehr|See more</a>|</div>))*'
 		'(?:.*?<h5>(?P<g_runtime>L\S*?nge|Runtime):</h5>(?P<runtime>.+?)</div>)*'
 		'(?:.*?<h5>(?P<g_language>Sprache|Language):</h5>(?P<language>.+?)</div>)*'
 		'(?:.*?<h5>(?P<g_color>Farbe|Color):</h5>(?P<color>.+?)</div>)*'
-		'(?:.*?<h5>(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h5>(?P<aspect>.+?)(?:mehr|more</a>|</div>))*'
+		'(?:.*?<h5>(?P<g_aspect>Seitenverh\S*?ltnis|Aspect Ratio):</h5>(?P<aspect>.+?)(?:Mehr|See more</a>|</div>))*'
 		'(?:.*?<h5>(?P<g_sound>Tonverfahren|Sound Mix):</h5>(?P<sound>.+?)</div>)*'
 		'(?:.*?<h5>(?P<g_cert>Altersfreigabe|Certification):</h5>(?P<cert>.+?)</div>)*'
-		'(?:.*?<h5>(?P<g_locations>Drehorte|Filming Locations):</h5>(?P<locations>.+?)(?:mehr|more</a>|</div>))*'
-		'(?:.*?<h5>(?P<g_company>Firma|Company):</h5>(?P<company>.+?)(?:mehr|more</a>|</div>))*'
-		'(?:.*?<h5>(?P<g_trivia>Dies und das|Trivia):</h5>(?P<trivia>.+?)(?:mehr|more</a>|</div>))*'
-		'(?:.*?<h5>(?P<g_goofs>Pannen|Goofs):</h5>(?P<goofs>.+?)(?:mehr|more</a>|</div>))*'
-		'(?:.*?<h5>(?P<g_quotes>Dialogzitate|Quotes):</h5>(?P<quotes>.+?)(?:mehr|more</a>|</div>))*'
-		'(?:.*?<h5>(?P<g_connections>Bez\S*?ge zu anderen Titeln|Movie Connections):</h5>(?P<connections>.+?)(?:mehr|more</a>|</div>))*'
+		'(?:.*?<h5>(?P<g_locations>Drehorte|Filming Locations):</h5>(?P<locations>.+?)(?:Mehr|See more</a>|</div>))*'
+		'(?:.*?<h5>(?P<g_company>Firma|Company):</h5>(?P<company>.+?)(?:Mehr|See more</a>|</div>))*'
+		'(?:.*?<h5>(?P<g_trivia>Dies und das|Trivia):</h5>(?P<trivia>.+?)(?:Mehr|See more</a>|</div>))*'
+		'(?:.*?<h5>(?P<g_goofs>Pannen|Goofs):</h5>(?P<goofs>.+?)(?:Mehr|See more</a>|</div>))*'
+		'(?:.*?<h5>(?P<g_quotes>Dialogzitate|Quotes):</h5>(?P<quotes>.+?)(?:Mehr|See more</a>|</div>))*'
+		'(?:.*?<h5>(?P<g_connections>Bez\S*?ge zu anderen Titeln|Movie Connections):</h5>(?P<connections>.+?)(?:Mehr|See more</a>|</div>))*'
 		'(?:.*?<h3>(?P<g_comments>Nutzerkommentare|User Comments)</h3>.*?<a href="/user/ur\d{7,7}/comments">(?P<commenter>.+?)\n</div>.*?<p>(?P<comment>.+?)</p>)*'
 		, re.DOTALL)
 
@@ -425,7 +425,7 @@ class IMDB(Screen):
 
 			Detailstext = ""
 
-			genreblockmask = re.compile('<h5>Genre:</h5>\s<div class="info-content">\s+?(.*?)\s+?(?:mehr|more|</p|<a class|</div>)', re.DOTALL)
+			genreblockmask = re.compile('<h5>Genre:</h5>\s<div class="info-content">\s+?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
 			genreblock = genreblockmask.findall(self.inhtml)
 			if genreblock:
 				genres = self.htmltags.sub('', genreblock[0])
