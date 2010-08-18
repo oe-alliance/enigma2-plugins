@@ -45,7 +45,9 @@ config.plugins.vhd.Style = ConfigSelection(default="dmm", choices = [
 				("dmm", _("DMM-Board")),
 				("shadow", _("Shadow")),
 				("beyonddreams", _("BeyondDreams-HD")),
-				("whiteline", _("WhiteLine"))
+				("whiteline", _("WhiteLine")),
+				("liga", _("LigaLine")),
+				("dc", _("Concinnity"))
 				])
 config.plugins.vhd.ChannSelector = ConfigSelection(default="full", choices = [
 				("full", _("Full")),
@@ -78,7 +80,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.release = ".release20100813"
+		self.release = ".release20100818"
 		Screen.__init__(self, session)
 		self.session = session
 		self.datei = "/usr/share/enigma2/Ai.HD/skin.xml"

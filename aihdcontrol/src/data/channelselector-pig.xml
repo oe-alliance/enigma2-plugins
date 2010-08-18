@@ -17,24 +17,25 @@
 		<widget backgroundColor="noTransBG" font="Regular;22" halign="left" name="key_green" position="435,645" size="220,26" transparent="1" zPosition="1"/>
 		<widget backgroundColor="noTransBG" font="Regular;22" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1" zPosition="1"/>
 		<widget backgroundColor="noTransBG" font="Regular;22" halign="left" name="key_blue" position="1015,645" size="220,26" transparent="1" zPosition="1"/>
-		<widget backgroundColor="noTransBG" picServiceEventProgressbar="Ai.HD/minibar.png" colorEventProgressbarBorder="#555555" colorEventProgressbarBorderSelected="grey" colorServiceDescription="#DBB96E" foregroundColorServiceNotAvail="#00656565" itemHeight="30" name="list" position="520,105" scrollbarMode="showOnDemand" serviceInfoFont="Regular;20" serviceItemHeight="30" serviceNameFont="Regular;23" serviceNumberFont="Regular;23" size="700,510"/>
-		<widget font="Regular;22" foregroundColor="secondFG" position="70,380" render="Label" size="400,70" source="ServiceEvent" transparent="1" valign="center">
+		<widget backgroundColor="noTransBG" colorEventProgressbarBorder="#555555" colorEventProgressbarBorderSelected="grey" colorServiceDescription="#DBB96E" foregroundColorServiceNotAvail="#00656565" itemHeight="30" name="list" picServiceEventProgressbar="Ai.HD/minibar.png" position="520,105" scrollbarMode="showOnDemand" serviceInfoFont="Regular;20" serviceItemHeight="30" serviceNameFont="Regular;23" serviceNumberFont="Regular;23" size="700,510"/>
+		<widget font="Regular;22" foregroundColor="secondFG" position="70,380" render="Label" size="400,24" source="ServiceEvent" transparent="1" valign="top">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget font="Regular;19" foregroundColor="foreground" position="70,450" render="Label" size="62,22" source="ServiceEvent" transparent="1">
+		<widget font="Regular;19" foregroundColor="foreground" position="70,410" render="Label" size="62,22" source="ServiceEvent" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText"/>
 		</widget>
-		<widget font="Regular;19" foregroundColor="foreground" position="295,450" render="Label" size="81,22" source="ServiceEvent" transparent="1">
+		<widget font="Regular;19" foregroundColor="foreground" position="295,410" render="Label" size="81,22" source="ServiceEvent" transparent="1">
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText"/>
 		</widget>
-		<widget borderColor="grey" borderWidth="1" pixmap="Ai.HD/progress.png" position="140,455" render="Progress" size="140,12" source="ServiceEvent" transparent="1">
+		<widget borderColor="grey" borderWidth="1" pixmap="Ai.HD/progress.png" position="135,415" render="Progress" size="140,14" source="ServiceEvent" transparent="1">
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget font="Regular;20" foregroundColor="grey" position="70,477" render="Label" size="420,140" source="ServiceEvent" transparent="1">
+		<widget font="Regular;20" foregroundColor="grey" position="70,440" render="Label" size="420,140" source="ServiceEvent" transparent="1">
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
+		<widget backgroundColor="background" font="Regular;19" foregroundColor="secondFG" position="70,582" render="vhdRendNextEvent" size="420,44" source="ServiceEvent" transparent="1"/>
 	</screen>
 	
 	<screen backgroundColor="noTransBG" flags="wfNoBorder" name="EPGSelection" position="0,0" size="1280,720" title="EPG Selection">
