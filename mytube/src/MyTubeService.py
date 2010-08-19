@@ -115,7 +115,7 @@ class MyTubeFeedEntry():
 		if self.entry.media.player:
 			split = self.entry.media.player.url.split("=")
 			ret = split.pop()
-			if ret == 'youtube_gdata':
+			if ret.startswith('youtube_gdata'):
 				tmpval=split.pop()
 				if tmpval.endswith("&feature"):
 					tmp = tmpval.split("&")
