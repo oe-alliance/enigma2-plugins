@@ -1,0 +1,33 @@
+	
+	
+	
+	<!-- ########## Summarys 800 ########## -->
+	<screen name="InfoBarSummary" position="0,0" size="132,64">
+		<widget font="Regular;24" halign="center" position="0,0" render="Label" size="132,64" source="session.CurrentService" valign="center">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+	</screen>
+	
+	<screen name="ChannelSelection_summary" position="0,0" size="132,64">
+		<widget font="Regular;24" halign="center" position="0,0" render="Label" size="132,64" source="parent.ServiceEvent" valign="center">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+	</screen>
+	
+	<screen name="MenuSummary" position="0,0" size="132,64">
+		<widget font="Regular;24" halign="center" position="0,0" render="Label" size="132,64" source="parent.menu" valign="center">
+			<convert type="StringListSelection"/>
+		</widget>
+	</screen>
+	
+	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="132,64">
+		<widget font="Regular;46" halign="center" position="0,0" render="Label" size="132,64" source="global.CurrentTime" valign="center">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+	</screen>
+	
+	<screen name="StandbySummary" position="0,0" size="132,64">
+		<widget font="Regular;46" halign="center" position="0,0" render="Label" size="132,64" source="global.CurrentTime" valign="center">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+	</screen>

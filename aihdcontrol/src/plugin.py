@@ -53,6 +53,10 @@ config.plugins.vhd.ChannSelector = ConfigSelection(default="full", choices = [
 				("full", _("Full")),
 				("pig", _("mini TV"))
 				])
+config.plugins.vhd.OledStyle = ConfigSelection(default="full", choices = [
+				("full", _("Full")),
+				("simple", _("Simple"))
+				])
 
 
 
@@ -87,8 +91,9 @@ class AIHDsetup(ConfigListScreen, Screen):
 		self.daten = "/usr/lib/enigma2/python/Plugins/Extensions/AiHDcontroler/data/"
 		self.komponente = "/usr/lib/enigma2/python/Plugins/Extensions/AiHDcontroler/comp/"
 		list = []
-		list.append(getConfigListEntry(_("Infobar and Window Style:"), config.plugins.vhd.Style))
-		list.append(getConfigListEntry(_("Channel and EPG selectors Style:"), config.plugins.vhd.ChannSelector))
+		list.append(getConfigListEntry(_("Infobar and window style:"), config.plugins.vhd.Style))
+		list.append(getConfigListEntry(_("Channel and EPG selectors style:"), config.plugins.vhd.ChannSelector))
+		list.append(getConfigListEntry(_("OLED dysplay style:"), config.plugins.vhd.OledStyle))
 		ConfigListScreen.__init__(self, list)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
 									{
@@ -132,6 +137,12 @@ class AIHDsetup(ConfigListScreen, Screen):
 			file_lines = skFile.readlines()
 			skFile.close()
 			for x in file_lines:
+				skin_lines.append(x)
+			oled_file = self.daten + "oled-" + config.plugins.vhd.OledStyle.value + ".xml"
+			skFile = open(oled_file, "r")
+			oled_lines = skFile.readlines()
+			skFile.close()
+			for x in oled_lines:
 				skin_lines.append(x)
 			skn_file = self.daten + "channelselector-"
 			if config.plugins.vhd.ChannSelector.value=="pig":
