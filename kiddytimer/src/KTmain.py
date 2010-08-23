@@ -215,7 +215,8 @@ class KiddyTimer():
     def timerHasToRun(self):
         iPluginStart = KTglob.getSecondsFromClock( [self.pluginStartTime[3],self.pluginStartTime[4]] )
         iMonitorEnd = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorEndTime.getValue())  
-        return iPluginStart < iMonitorEnd 
+        iMonitorStart = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorStartTime.getValue())  
+        return (iPluginStart < iMonitorEnd) & (iPluginStart > iMonitorStart)
     
     def setDialogStatus(self , bStatus):
         if bStatus == True:

@@ -50,6 +50,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self.list = [
             getConfigListEntry(_("Enabled"), config.plugins.KiddyTimer.enabled),
             getConfigListEntry(_("PIN"), config.plugins.KiddyTimer.pin),
+            getConfigListEntry(_("Don't monitor TV started before"), config.plugins.KiddyTimer.monitorStartTime ), 
             getConfigListEntry(_("Don't monitor TV started after"), config.plugins.KiddyTimer.monitorEndTime ), 
             getConfigListEntry(_("Style of timer"), config.plugins.KiddyTimer.timerStyle ),
             getConfigListEntry(_("Timeout for activation dialog"), config.plugins.KiddyTimer.activationDialogTimeout )

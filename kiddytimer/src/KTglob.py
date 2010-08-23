@@ -2,7 +2,7 @@ from __init__ import _
 import time
 
 PLUGIN_BASE = "KiddyTimer"
-PLUGIN_VERSION = "0.8c"
+PLUGIN_VERSION = "0.9"
 
 DAYNAMES= (_("Sunday"),
           _("Monday"),
@@ -21,6 +21,7 @@ MOVEPOSITIONSTEP = 10
 
 #This is a hack to get the times in the current timezone to feed as default value for the ConfigClock
 ONEOCLOCK=time.mktime([2000,1,1,1,0,0,5,1,time.timezone])
+FOUROCLOCK=time.mktime([2000,1,1,4,0,0,5,1,time.timezone])
 EIGHTOCLOCK=time.mktime([2000,1,1,8,0,0,5,1,time.timezone])
 EIGHTOCLOCKNOON=time.mktime([2000,1,1,20,0,0,5,1,time.timezone])
 
