@@ -81,7 +81,7 @@ off64_t framepts(unsigned char* buf, int pos)
     pts |= ((unsigned long long)(buf[tmp+12]&0xFF)) << 7;
     pts |= ((unsigned long long)(buf[tmp+13]&0xFE)) >> 1;
   } else
-    pts = 0;
+    pts = -1;
   return pts;
 }
 
@@ -100,6 +100,8 @@ int framesearch(int fts, int first, off64_t& retpos, off64_t& retpts, off64_t& r
     ind = 0;
     pos = 0;
     st = 0;
+    sdflag = 0;
+    pid = -1;
   }
   while (1) {
     p = buf+ind+st;
@@ -115,11 +117,11 @@ int framesearch(int fts, int first, off64_t& retpos, off64_t& retpts, off64_t& r
           continue;
         }
         if (p[3]==0 || p[3]==0xb3 || p[3]==0xb8) { // MPEG2
-          if (p[3]==0 && ((p[5] >> 3 & 7) == 1)) {
+          if (p[3]==0xb3) {
             retpts = framepts(buf, ind);
             retpos = pos + ind;
           } else {
-            retpts = 0;
+            retpts = -1;
             retpos = -1;
           }
           retdat = (unsigned int) p[3] | (p[4]<<8) | (p[5]<<16) | (p[6]<<24);
@@ -132,7 +134,7 @@ int framesearch(int fts, int first, off64_t& retpos, off64_t& retpts, off64_t& r
             retpts = framepts(buf, ind);
             retpos = pos + ind;
           } else {
-            retpts = 0;
+            retpts = -1;
             retpos = -1;
           }
           retdat = p[3] | (p[4]<<8);
@@ -175,7 +177,7 @@ int do_one(int fts, int fap, int fsc)
   int first = 1;
   while (framesearch(fts, first, pos, pts, pos2, dat) >= 0) {
     first = 0;
-    if (pos >= 0)
+    if (pos >= 0 && pts >= 0)
       if (fap >= 0 && writebufinternal(fap, pos, pts))
         return 1;
     if (fsc >= 0 && writebufinternal(fsc, pos2, dat))
