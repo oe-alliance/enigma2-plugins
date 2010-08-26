@@ -33,7 +33,6 @@ class PictureView(Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.skin = PictureView.skin
 		Screen.__init__(self, session)
 
 		self.picfile = "/tmp/uwz.png"
@@ -76,7 +75,6 @@ class HelpPictureView(Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.skin = HelpPictureView.skin
 		Screen.__init__(self, session)
 
 		self["picture"] = Pixmap()
@@ -139,9 +137,6 @@ class UnwetterMain(Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.loadinginprogress = False
-		self.skin = UnwetterMain.skin
-		self.session = session
 		Screen.__init__(self, session)
 
 		self["statuslabel"] = Label()
@@ -159,29 +154,10 @@ class UnwetterMain(Screen):
 			"contextMenu": self.switchDeA,
 		}, -1)
 
-		self.menueintrag = []
-		self.link = []
+		self.loadinginprogress = False
 		self.picfile = "/tmp/uwz.png"
 		self.picweatherfile = pluginpath + "/wetterreport.jpg"
 		self.reportfile = "/tmp/uwz.report"
-
-		try:
-			f = open(pluginpath + "/last.cfg","r")
-			self.land = f.read()
-			f.close
-		except:
-			self.land = "de"
-
-		if self.land == "de":
-			self.baseurl = "http://www.unwetterzentrale.de/uwz/"
-			self.menuurl = self.baseurl + "index.html"
-			self.weatherreporturl = self.baseurl + "lagebericht.html"
-		else:
-			self.baseurl = "http://www.uwz.at/"
-			self.menuurl = self.baseurl + "index.php"
-			self.weatherreporturl = self.baseurl + "lagebericht.php"
-
-		self.downloadMenu()
 
 		self.picload = ePicLoad()
 
@@ -189,7 +165,8 @@ class UnwetterMain(Screen):
 
 		self.ThumbTimer = eTimer()
 		self.ThumbTimer.callback.append(self.showThumb)
-		self.ThumbTimer.start(1000, True)
+
+		self.switchDeA(load=True)
 
 	def hauptmenu(self,output):
 		self.loadinginprogress = False
@@ -210,10 +187,13 @@ class UnwetterMain(Screen):
 				self.menueintrag.append(name)
 				self.link.append(link)
 		else:
-			startpos = output.find('<div id="mainWindow">')
-			endpos = output.find('<a class="menua" href="http://www.austrowetter.at"')
+			self.menueintrag.append("Lagebericht")
+			self.link.append(self.weatherreporturl)
+
+			startpos = output.find('<table class="selection_box report">')
+			endpos = output.find('</table>', startpos)
 			bereich = output[startpos:endpos]
-			a = findall(r'<a class="menub" href=(?P<text>.*?)</a>',bereich)
+			a = findall(r'<a href=(?P<text>.*?)</a>',bereich)
 			for x in a[1:13]:
 				x = x.replace('">',"#").replace('"',"").replace(' style=font-weight:;',"")
 				if x != '#&nbsp;':
@@ -221,7 +201,7 @@ class UnwetterMain(Screen):
 						if not len(x) > 1:
 							break
 						name = x[1]
-						link = self.baseurl + x[0]
+						link = x[0]
 						self.menueintrag.append(name)
 						self.link.append(link)
 
@@ -329,8 +309,8 @@ class UnwetterMain(Screen):
 			picurl = search(r'<img src="(?P<text>.*?)" width=',bereich)
 			picurl = self.baseurl + picurl.group(1)
 		else:
-			picurl = search(r'<img src="showMap(?P<text>.*?)" alt=',output)
-			picurl = self.baseurl + "showMap" + picurl.group(1).replace('&amp;','&')
+			picurl = search(r'<img class="map_big" src="(?P<url>.*?)" lang=', output)
+			picurl = picurl.group(1).replace('&amp;','&')
 		self.downloadPic(picurl)
 
 	def getPic(self,output):
@@ -341,18 +321,16 @@ class UnwetterMain(Screen):
 
 	def getWeatherReport(self,output):
 		self.loadinginprogress = False
+		trans = { '&szlig;' : 'ß' , '&auml;' : 'ä' , '&ouml;' : 'ö' , '&uuml;' : 'ü' , '&Auml;' : 'Ä', '&Ouml;' : 'Ö' , '&Uuml;' : 'Ü'}
+		output= util.unescape(output,trans)
 		if self.land == "de":
-			trans = { '&szlig;' : 'ß' , '&auml;' : 'ä' , '&ouml;' : 'ö' , '&uuml;' : 'ü' , '&Auml;' : 'Ä', '&Ouml;' : 'Ö' , '&Uuml;' : 'Ü'}
-			output= util.unescape(output,trans)
 			startpos = output.find('<!-- Anfang msg_Box Content -->')
 			endpos = output.find('<!-- Ende msg_Box Content -->')
 			bereich = output[startpos:endpos]
 		else:
 			startpos = output.find('<div class="content">')
-			endpos = output.find('<div class="rs_title">Unwettermeldungen</div>')
+			endpos = output.find('</div>', startpos)
 			bereich = output[startpos:endpos]
-			u_bereich = bereich.decode("iso-8859-1")
-			bereich = u_bereich.encode("utf-8")
 			bereich = sub('<br />',"\n",bereich)
 
 		bereich = sub('<[^>]*>',"",bereich)
@@ -387,23 +365,34 @@ class UnwetterMain(Screen):
 #		self["statuslabel"].setText("Lade Report: %s" % self.weatherreporturl)
 		getPage(self.weatherreporturl).addCallback(self.getWeatherReport).addErrback(self.downloadError)
 
-	def switchDeA(self):
+	def switchDeA(self, load=False):
+		if load:
+			try:
+				f = open(pluginpath + "/last.cfg","r")
+				self.land = f.read()
+				f.close
+			except:
+				self.land = "a"
+
 		self.menueintrag = []
 		self.link = []
+
 		if self.land == "de":
 			self.land = "a"
 			self.baseurl = "http://www.uwz.at/"
 			self.menuurl = self.baseurl + "index.php"
-			self.weatherreporturl = self.baseurl + "lagebericht.php"
+			self.weatherreporturl = self.baseurl + "at/de/lagebericht/aktuelle-wetterlage"
 		else:
 			self.land = "de"
 			self.baseurl = "http://www.unwetterzentrale.de/uwz/"
 			self.menuurl = self.baseurl + "index.html"
 			self.weatherreporturl = self.baseurl + "lagebericht.html"
 
-		f = open(pluginpath + "/last.cfg","w")
-		f.write(self.land)
-		f.close
+		if not load:
+			f = open(pluginpath + "/last.cfg","w")
+			f.write(self.land)
+			f.close
+
 		self.downloadMenu()
 		self.ThumbTimer.start(1500, True)
 
