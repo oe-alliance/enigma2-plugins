@@ -9,19 +9,15 @@ class GoogleReader:
 		self.username = username
 		self.password = password
 		self.token = None
-		self.sid = None
+		self.auth = None
 
 	def sendRequest(self, url):
 		print "[GoogleReader] sendRequest:", url
-		cookies = {
-			'Name': 'SID',
-			'SID': self.sid,
-			'Domain': '.google.com',
-			'Path': '/',
-			'Expires': '160000000000'
+		headers = {
+			'Authorization': 'GoogleLogin auth='+self.auth,
 		}
 
-		return getPage(url, cookies = cookies)
+		return getPage(url, headers=headers)
 
 	def login(self):
 		print "[GoogleReader] login"
@@ -42,11 +38,11 @@ class GoogleReader:
 		return defer
 
 	def loginFinished(self, res = None, defer = None):
-		pos_beg = res.find('SID=')
+		pos_beg = res.find('Auth=')
 		pos_end = res.find('\n',pos_beg)
-		self.sid = res[pos_beg+4:pos_end]
+		self.auth = res[pos_beg+5:pos_end]
 		if defer:
-			defer.callback(self.sid)
+			defer.callback(self.auth)
 
 	def loginFailed(self, res = None, defer = None):
 		print "[GoogleReader] loginFailed:", res
@@ -55,7 +51,7 @@ class GoogleReader:
 			defer.errback()
 
 	def getToken(self):
-		if not self.sid:
+		if not self.auth:
 			return
 
 		defer = Deferred()
@@ -75,11 +71,11 @@ class GoogleReader:
 			defer.errback()
 
 	def getSubscriptionList(self):
-		if not self.sid:
+		if not self.auth:
 			return
 
 		defer = Deferred()
-		self.sendRequest('http://www.google.com/reader/api/0/subscription/list').addCallback(self.gotSubscriptionList, defer).addErrback(self.errSubscriptionList, defer)
+		self.sendRequest('http://www.google.com/reader/api/0/subscription/list?output=xml').addCallback(self.gotSubscriptionList, defer).addErrback(self.errSubscriptionList, defer)
 		return defer
 
 	def gotSubscriptionList(self, res = None, defer = None):
@@ -99,3 +95,22 @@ class GoogleReader:
 			# XXX: we might want to give some information here besides "we failed"
 			defer.errback()
 
+if __name__ == '__main__':
+	from twisted.internet import reactor
+	import sys
+
+	googleReader = GoogleReader(sys.argv[1], sys.argv[2])
+	def googleLoggedIn(self, sid = None):
+		googleReader.getSubscriptionList().addCallback(googleSubscriptionList).addErrback(googleSubscriptionFailed)
+
+	def googleLoginFailed(self, res = None):
+		print "Failed to login to Google Reader."
+
+	def googleSubscriptionList(self, subscriptions = None):
+		print "Got Feeds:", subscriptions
+
+	def googleSubscriptionFailed(self, res = None):
+		print "Failed to get subscriptions from Google Reader."
+
+	googleReader.login().addCallback(googleLoggedIn).addErrback(googleLoginFailed)
+	reactor.run()
