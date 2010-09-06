@@ -2,249 +2,253 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - kiddytimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-01 15:39+0100\n"
+"POT-Creation-Date: 2010-09-06 21:13+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: /home/dario/Plugins/kiddytimer\n"
+"X-Poedit-Basepath: /home/dario/Plugins/KiddyTimer\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: Italy\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: /home/dario/Plugins/kiddytimer\n"
+"X-Poedit-SearchPath-0: /home/dario/Plugins/KiddyTimer\n"
 
-#: /home/dario/Plugins/kiddytimer/src/KTpositioner.py:19
-#: /home/dario/Plugins/kiddytimer/src/KTpositioner.py:21
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:147
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:149
+#: /home/dario/Plugins/KiddyTimer/KTpositioner.py:19
+#: /home/dario/Plugins/KiddyTimer/KTpositioner.py:21
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:155
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:157
 msgid "01:00"
 msgstr "01:00"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:38
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:40
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:39
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:41
 msgid "??:??"
 msgstr "??:??"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:120
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:121
 msgid "Do you want to start the kiddytimer- plugin now."
 msgstr "Avviare il plugin kiddytimer ora?"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:137
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:138
 msgid "Please enter the correct pin code"
 msgstr "Inserire correttamente il codice PIN"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:137
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:138
 msgid "Enter pin code"
 msgstr "Inserire il codice PIN"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:286
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:289
 msgid "Please select your KiddyTimer- option"
 msgstr "Selezionare l'opzione KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:292
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:295
 msgid "Stop KiddyTimer (this session only)"
 msgstr "Arrestare KiddyTimer (solo per questa sessione)"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:293
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:296
 msgid "Increase remaining time"
 msgstr "Aumentare il tempo residuo"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:294
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:297
 msgid "Decrease remaining time"
 msgstr "Diminuire il tempo residuo"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:295
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:298
 msgid "Set remaining time"
 msgstr "Regolare il tempo residuo"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:297
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:300
 msgid "Start KiddyTimer"
 msgstr "Avviare KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:298
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:302
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:301
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:305
 msgid "Enable KiddyTimer for x minutes"
 msgstr "Abilitare KiddyTimer per x minuti"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:299
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:302
 msgid "Disable KiddyTimer"
 msgstr "Disabilitare KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:301
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:304
 msgid "Enable KiddyTimer"
 msgstr "Abilitare KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/src/KTmain.py:332
+#: /home/dario/Plugins/KiddyTimer/KTmain.py:336
 msgid "Invalid selection"
 msgstr "Selezione non valida"
 
-#: /home/dario/Plugins/kiddytimer/src/plugin.py:16
+#: /home/dario/Plugins/KiddyTimer/plugin.py:16
 msgid "Clock"
 msgstr "Orologio"
 
-#: /home/dario/Plugins/kiddytimer/src/plugin.py:16
+#: /home/dario/Plugins/KiddyTimer/plugin.py:16
 msgid "Smiley"
 msgstr "Smiley"
 
-#: /home/dario/Plugins/kiddytimer/src/plugin.py:52
-#: /home/dario/Plugins/kiddytimer/src/plugin.py:53
+#: /home/dario/Plugins/KiddyTimer/plugin.py:53
+#: /home/dario/Plugins/KiddyTimer/plugin.py:54
 msgid "KiddyTimer"
 msgstr "KiddyTimer"
 
-#: /home/dario/Plugins/kiddytimer/src/plugin.py:53
+#: /home/dario/Plugins/KiddyTimer/plugin.py:54
 msgid "Allows to controls your kids' daily TV usage"
 msgstr "Utilizzo giornaliero della TV da parte dei bambini"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:51
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:51
 msgid "Enabled"
 msgstr "Abilitato"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:52
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:52
 msgid "PIN"
 msgstr "PIN"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:53
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:53
+msgid "Don't monitor TV started before"
+msgstr "Non monitorare la TV accesa prima delle "
+
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:54
 msgid "Don't monitor TV started after"
 msgstr "Non monitorare la TV accesa dopo le "
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:54
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:55
 msgid "Style of timer"
 msgstr "Stile timer"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:55
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:56
 msgid "Timeout for activation dialog"
 msgstr "Timeout di attivazione finestra di dialogo"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:79
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:83
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Versione: %(version)s"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:80
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:112
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:84
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:119
 #, python-format
 msgid "Remaining time: %s"
 msgstr "Tempo residuo: %s"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:81
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:85
 #, python-format
 msgid "Last day started: %s"
 msgstr "Ultimo avvio: %s"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:84
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:88
 msgid "Cancel"
 msgstr "Annullare"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:85
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:89
 msgid "Save"
 msgstr "Salvare"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:86
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:90
 msgid "Reset clock"
 msgstr "Reset orologio"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:87
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:91
 msgid "Move clock"
 msgstr "Spost. orologio"
 
-#: /home/dario/Plugins/kiddytimer/src/KTsetup.py:104
+#: /home/dario/Plugins/KiddyTimer/KTsetup.py:108
 msgid "The pin code you entered is wrong."
 msgstr "E' stato inserito un codice PIN errato!"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:17
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:24
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:17
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:24
 msgid "Save values and close screen"
 msgstr "Salvare le modifiche e chiudere la finestra"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:18
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:23
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:18
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:23
 msgid "Discard changes and close screen"
 msgstr "Annullare le modifiche e chiudere la finestra"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:19
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:19
 msgid "Move screen to the left"
 msgstr "Spostare la finestra a sx"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:20
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:20
 msgid "Move screen to the right"
 msgstr "Spostare la finestra a dx"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:21
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:21
 msgid "Move screen up"
 msgstr "Spostare la finestra sù"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:22
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:22
 msgid "Move screen down"
 msgstr "Spostare la finestra giù"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:25
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:25
 msgid "Move screen to the upper left corner"
 msgstr "Spostare la finestra nell'angolo in alto a sx"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:26
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:26
 msgid "Center screen at the upper border"
 msgstr "Centrare la finestra sul bordo superiore"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:27
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:27
 msgid "Move screen to the upper right corner"
 msgstr "Spostare la finestra nell'angolo in alto a dx"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:28
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:28
 msgid "Move screen to the middle of the left border"
 msgstr "Spostare la finestra al centro del bordo sx"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:29
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:29
 msgid "Move screen to the center of your TV"
 msgstr "Spostare la finestra al centro dello schermo"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:30
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:30
 msgid "Move screen to the middle of the right border"
 msgstr "Spostare la finestra al centro del bordo dx"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:31
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:31
 msgid "Move screen to the lower left corner"
 msgstr "Spostare la finestra nell'angolo in basso a sx"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:32
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:32
 msgid "Center screen at the lower border"
 msgstr "Centrare la finestra sul bordo inferiore"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:33
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:33
 msgid "Move screen to the lower right corner"
 msgstr "Spostare la finestra nell'angolo in basso a dx"
 
-#: /home/dario/Plugins/kiddytimer/src/MovableScreen.py:34
+#: /home/dario/Plugins/KiddyTimer/MovableScreen.py:34
 msgid "Reset saved position"
 msgstr "Reset della posizione salvata"
 
-#: /home/dario/Plugins/kiddytimer/src/KTglob.py:6
+#: /home/dario/Plugins/KiddyTimer/KTglob.py:7
 msgid "Sunday"
 msgstr "Domenica"
 
-#: /home/dario/Plugins/kiddytimer/src/KTglob.py:7
+#: /home/dario/Plugins/KiddyTimer/KTglob.py:8
 msgid "Monday"
 msgstr "Lunedì"
 
-#: /home/dario/Plugins/kiddytimer/src/KTglob.py:8
+#: /home/dario/Plugins/KiddyTimer/KTglob.py:9
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: /home/dario/Plugins/kiddytimer/src/KTglob.py:9
+#: /home/dario/Plugins/KiddyTimer/KTglob.py:10
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: /home/dario/Plugins/kiddytimer/src/KTglob.py:10
+#: /home/dario/Plugins/KiddyTimer/KTglob.py:11
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: /home/dario/Plugins/kiddytimer/src/KTglob.py:11
+#: /home/dario/Plugins/KiddyTimer/KTglob.py:12
 msgid "Friday"
 msgstr "Venerdì"
 
-#: /home/dario/Plugins/kiddytimer/src/KTglob.py:12
+#: /home/dario/Plugins/KiddyTimer/KTglob.py:13
 msgid "Saturday"
 msgstr "Sabato"
 
