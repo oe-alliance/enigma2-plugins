@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-15-*-
+# -*- coding: iso-8859-15 -*-
 from Converter import Converter
 from time import localtime, strftime
 from Components.Element import cached
