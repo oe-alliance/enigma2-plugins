@@ -135,9 +135,10 @@ class KiddyTimer():
                 self.startLoop()
 
     def stopTimer(self):
+        if self.active:
+            self.saveValues()
         self.toggleActiveState(False)
         self.stopLoop()
-        self.saveValues()
         self.setPluginStatus("SHUTDOWN")
         self.iServiceReference = None
         self.dialog = None
@@ -313,10 +314,12 @@ class KiddyTimer():
         self.curImg = iCount
         
     def saveValues(self):
-        config.plugins.KiddyTimer.lastStartDay.value = self.currentDay
-        config.plugins.KiddyTimer.lastStartDay.save()
-        config.plugins.KiddyTimer.remainingTime.value = int(self.remainingTime)
-        config.plugins.KiddyTimer.remainingTime.save()
+        if hasattr(self,"currentDay"):
+            config.plugins.KiddyTimer.lastStartDay.value = self.currentDay
+            config.plugins.KiddyTimer.lastStartDay.save()
+        if hasattr(self,"remainingTime"):
+            config.plugins.KiddyTimer.remainingTime.value = int(self.remainingTime)
+            config.plugins.KiddyTimer.remainingTime.save()
 
     def showExtensionsMenu(self):
         keyList = []
