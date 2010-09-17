@@ -3,8 +3,8 @@ from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
-from Components.config import config, getConfigListEntry
-from KTmain import oKiddyTimer
+from Components.config import config, configfile, getConfigListEntry
+from KTmain import kiddyTimer
 from KTMultiPixmap import KTmultiPixmap
 from MovableScreen import MovableScreen
 from Screens.InputBox import PinInput
@@ -18,7 +18,7 @@ import time
 
 class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
     skin = ("""
-    <screen position="center,center" size="560,400" title="%s Setup">
+    <screen position="center,center" size="560,440" title="%s Setup">
       <ePixmap pixmap="~/img/button-red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
       <ePixmap pixmap="~/img/button-green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
       <ePixmap pixmap="~/img/button-yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
@@ -35,10 +35,10 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
       <widget name="key_blue" position="420,0" zPosition="1" size="140,40"
         font="Regular;20" valign="center" halign="center" backgroundColor="#18188b" transparent="1"
         shadowColor="#000000" shadowOffset="-1,-1" />
-      <widget name="config" position="10,40" size="540,300" scrollbarMode="showOnDemand" />
-      <widget name="LastDayStarted" position="10,340" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
-      <widget name="RemainingTime" position="10,360" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
-      <widget name="PluginInfo" position="10,380" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
+      <widget name="config" position="10,40" size="540,330" scrollbarMode="showOnDemand" />
+      <widget name="LastDayStarted" position="10,380" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
+      <widget name="RemainingTime" position="10,400" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
+      <widget name="PluginInfo" position="10,420" size="540,20" zPosition="4" font="Regular;18" foregroundColor="#cccccc" />
     </screen>""") %KTglob.PLUGIN_BASE
 
     def __init__(self, session):
@@ -63,22 +63,16 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self["config"].list = self.list
 
         self.skin_path = KTglob.plugin_path
-        self.enabled_old = config.plugins.KiddyTimer.enabled.value
-
-        # If the oKiddyTimer- Class has no session yet, then get session
-        if oKiddyTimer.session == None:
-            oKiddyTimer.gotSession(self.session)
+        self.kiddyTimerStopped = False;
         
         # Temporarily stop timer as long as we are in the setup screen
-        if oKiddyTimer.dialog != None:
-            self.dialogEnabled_old = oKiddyTimer.dialogEnabled
-            oKiddyTimer.setDialogStatus(False)
-        else:
-            self.dialogEnabled_old = False
+        if kiddyTimer.active:
+            self.kiddyTimerStopped = True;
+            kiddyTimer.stopTimer()
             
         # Plugin Information
-        iRemainingTime = oKiddyTimer.remainingTime
-        sRemainingTime = KTglob.getTimeFromSeconds(oKiddyTimer.remainingTime , True )
+        self.remainingTime = config.plugins.KiddyTimer.remainingTime.value
+        sRemainingTime = KTglob.getTimeFromSeconds(self.remainingTime , True )
 
         self["PluginInfo"] = Label(_("Plugin: %(plugin)s , Version: %(version)s") %dict(plugin=KTglob.PLUGIN_BASE,version=KTglob.PLUGIN_VERSION))
         self["RemainingTime"] = Label(_("Remaining time: %s") %sRemainingTime)
@@ -114,33 +108,31 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
         self.session.open(KiddyTimerPositioner)
 
     def resetTimer(self):
-        oKiddyTimer.resetTimer()
-        sRemainingTime = KTglob.getTimeFromSeconds(oKiddyTimer.remainingTime , True )
+        self.remainingTime = KTglob.getTodaysTimeInSeconds()
+        config.plugins.KiddyTimer.remainingTime.value = int(self.remainingTime)
+        config.plugins.KiddyTimer.remainingTime.save()
+
+        sRemainingTime = KTglob.getTimeFromSeconds(self.remainingTime , True )
         self["RemainingTime"].setText(_("Remaining time: %s") %sRemainingTime)
 
     def save(self):
-        if oKiddyTimer.remainingTime > KTglob.getSecondsFromClock( config.plugins.KiddyTimer.dayTimes[oKiddyTimer.dayNr].timeValue.getValue()):
+        if self.remainingTime > KTglob.getTodaysTimeInSeconds():
             self.resetTimer()
         for x in self["config"].list:
             x[1].save()
+        configfile.save() 
             
-        oKiddyTimer.currentDayTime = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.dayTimes[oKiddyTimer.dayNr].timeValue.getValue())
         if config.plugins.KiddyTimer.enabled.value:
-            if self.enabled_old != config.plugins.KiddyTimer.enabled.value:
-                oKiddyTimer.gotSession(oKiddyTimer.session)
-            else:
-                oKiddyTimer.setDialogStatus(oKiddyTimer.timerHasToRun())
-                if oKiddyTimer.dialogEnabled == True:
-                    oKiddyTimer.askForActivation()
+            kiddyTimer.startTimer()
         self.close()
 
     def cancel(self):
         for x in self["config"].list:
             x[1].cancel()
         self.close()
-        if self.dialogEnabled_old == True:
-            oKiddyTimer.showHide()
-
+        if self.kiddyTimerStopped:
+            kiddyTimer.startTimer()
+        
     def protectedWithPin(self):
         return config.plugins.KiddyTimer.pin.getValue()
 

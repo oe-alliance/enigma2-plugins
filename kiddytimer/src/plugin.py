@@ -1,7 +1,7 @@
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigInteger, ConfigSubsection, ConfigSelection, \
     ConfigSubList, ConfigText, ConfigYesNo, ConfigDateTime, ConfigClock, ConfigPIN
-from KTmain import oKiddyTimer
+from KTmain import kiddyTimer
 from KTsetup import KiddyTimerSetup
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
@@ -15,6 +15,7 @@ config.plugins.KiddyTimer.position_x = ConfigInteger(default=590)
 config.plugins.KiddyTimer.position_y = ConfigInteger(default=35)
 config.plugins.KiddyTimer.timerStyle = ConfigSelection(choices = [("clock", _("Clock")), ("smiley", _("Smiley"))])
 config.plugins.KiddyTimer.lastStartDay = ConfigText(default="")
+config.plugins.KiddyTimer.lastStatus = ConfigText(default="") # Used for cheat detection
 config.plugins.KiddyTimer.monitorStartTime = ConfigClock(default=KTglob.FOUROCLOCK)
 config.plugins.KiddyTimer.monitorEndTime = ConfigClock(default=KTglob.EIGHTOCLOCKNOON)
 config.plugins.KiddyTimer.activationDialogTimeout = ConfigInteger(default=10)
@@ -33,16 +34,16 @@ def setup(session, **kwargs):
 
 def sessionstart(reason, **kwargs):
     if reason == 0:
-        oKiddyTimer.gotSession(kwargs["session"])
+        kiddyTimer.gotSession(kwargs["session"])
 
 def autostart(reason, **kwargs):
     if reason == 1:
-        global oKiddyTimer
-        oKiddyTimer.stopMe()
-        oKiddyTimer = None
+        global kiddyTimer
+        kiddyTimer.stopTimer()
+        kiddyTimer = None
 
 def extensionMenu(session, **kwargs):
-    oKiddyTimer.showExtensionsMenu()
+    kiddyTimer.showExtensionsMenu()
         
 def Plugins(path,**kwargs):
     # Assign global variable plugin_path
