@@ -10,7 +10,9 @@ from Screens.Screen import Screen
 from Screens import Standby
 from Tools.BoundFunction import boundFunction
 from Tools import Notifications
-from enigma import ePoint, eTimer
+from Tools.Directories import resolveFilename, SCOPE_CONFIG
+from enigma import ePoint, eTimer, eDVBLocalTimeHandler
+
 from __init__ import _
 import KTglob
 import NavigationInstance
@@ -103,38 +105,47 @@ class KiddyTimer():
         self.startTimer()
         
     def startTimer(self,bForceStart=False,iRemainingSeconds=0):
-        bDoStandardInit = True
-        if bForceStart:
-            self.enabled = True
+        curStartYear = time.localtime().tm_year 
+        if curStartYear < 2010: 
+            # Time has not yet been set from transponder, wait until it has been set
+            eDVBLocalTimeHandler.getInstance().m_timeUpdated.get().append(self.gotTime)
         else:
-            self.enabled = config.plugins.KiddyTimer.enabled.value
-        if (self.enabled == True and self.timerHasToRun()) or bForceStart:   
-            # Date of the current day
-            self.currentDay = time.strftime("%d.%m.%Y" , time.localtime())
-            # First check for Cheat- attempts by kids
-            if self.detectCheatAttempt():
-                config.plugins.KiddyTimer.remainingTime.value = 0
-                configfile.save()
-                bForceStart = True
-            elif iRemainingSeconds > 0:
-                self.resetTimer(setTime=iRemainingSeconds)
-                bDoStandardInit = False
-            elif self.currentDay != config.plugins.KiddyTimer.lastStartDay.getValue():
-                self.resetTimer()
-                bDoStandardInit = False
-            if bDoStandardInit:             
-                self.setCurrentDayTime()
-                self.setSessionTime(config.plugins.KiddyTimer.remainingTime.getValue())
-                self.setRemainingTime(self.sessionTime)
-                self.setSessionStartTime()
-
-            self.setPluginStatus("RUNNING")
-            self.toggleActiveState(True)
-            if not bForceStart:
-                self.askForActivation()
+            bDoStandardInit = True
+            if bForceStart:
+                self.enabled = True
             else:
-                self.startLoop()
+                self.enabled = config.plugins.KiddyTimer.enabled.value
+            if (self.enabled == True and self.timerHasToRun()) or bForceStart:   
+                # Date of the current day
+                self.currentDay = time.strftime("%d.%m.%Y" , time.localtime())
+                # First check for Cheat- attempts by kids
+                if self.detectCheatAttempt():
+                    config.plugins.KiddyTimer.remainingTime.value = 0
+                    configfile.save()
+                    bForceStart = True
+                elif iRemainingSeconds > 0:
+                    self.resetTimer(setTime=iRemainingSeconds)
+                    bDoStandardInit = False
+                elif self.currentDay != config.plugins.KiddyTimer.lastStartDay.getValue():
+                    self.resetTimer()
+                    bDoStandardInit = False
+                if bDoStandardInit:             
+                    self.setCurrentDayTime()
+                    self.setSessionTime(config.plugins.KiddyTimer.remainingTime.getValue())
+                    self.setRemainingTime(self.sessionTime)
+                    self.setSessionStartTime()
+    
+                self.setPluginStatus("RUNNING")
+                self.toggleActiveState(True)
+                if not bForceStart:
+                    self.askForActivation()
+                else:
+                    self.startLoop()
 
+    def gotTime(self):
+        eDVBLocalTimeHandler.getInstance().m_timeUpdated.get().remove(self.gotTime)
+        self.startTimer()
+    
     def stopTimer(self):
         if self.active:
             self.saveValues()
@@ -155,7 +166,7 @@ class KiddyTimer():
         self.setSessionStartTime()
 
     def timerHasToRun(self):
-        curStartTime = self.sessionStartTime or time.localtime()
+        curStartTime = time.localtime()
         iPluginStart = KTglob.getSecondsFromClock( [curStartTime[3],curStartTime[4]] )
         iMonitorEnd = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorEndTime.getValue())  
         iMonitorStart = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorStartTime.getValue())  
