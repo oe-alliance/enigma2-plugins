@@ -35,7 +35,7 @@ class KiddyTimerScreen(Screen):
         self.onShow.append(self.movePosition)
         
         self.skin_path = KTglob.plugin_path
-
+        
         self["TimerGraph"] = KTmultiPixmap()
         self["TimerText"] = Label(_("??:??"))
         self["TimerSlider"] = ProgressBar()
@@ -99,6 +99,7 @@ class KiddyTimer():
         self.stopTimer()    
       
     def endStandby(self):
+        self.sessionStartTime = None
         self.startTimer()
         
     def startTimer(self,bForceStart=False,iRemainingSeconds=0):
@@ -110,7 +111,7 @@ class KiddyTimer():
         if (self.enabled == True and self.timerHasToRun()) or bForceStart:   
             # Date of the current day
             self.currentDay = time.strftime("%d.%m.%Y" , time.localtime())
-            # First check for Cheat- attenpts by kids
+            # First check for Cheat- attempts by kids
             if self.detectCheatAttempt():
                 config.plugins.KiddyTimer.remainingTime.value = 0
                 configfile.save()
@@ -176,10 +177,10 @@ class KiddyTimer():
             return False
 
     def setPluginStatus(self,sStatus):
-            # Set values for detection of cheat attempts
-            config.plugins.KiddyTimer.lastStatus.value = sStatus
-            config.plugins.KiddyTimer.lastStatus.save()
-            configfile.save()
+        # Set values for detection of cheat attempts
+        config.plugins.KiddyTimer.lastStatus.value = sStatus
+        config.plugins.KiddyTimer.lastStatus.save()
+        configfile.save()
 
     def askForActivation(self):
         iTimeOut = config.plugins.KiddyTimer.activationDialogTimeout.getValue()
