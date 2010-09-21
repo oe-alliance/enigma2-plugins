@@ -1,23 +1,16 @@
 <default>
 	  <prerequisites>
-                    <tag type="Multimedia" />
+                    <tag type="EPG" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Dr.Best</author>
                     <name>Automatic Timerlist Cleanup</name>
                     <packagename>enigma2-plugin-systemplugins-automatictimerlistcleanup</packagename>
-                    <shortdescription>cleanup timerlist automatically</shortdescription>
-                    <description>cleanup timerlist automatically</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/automatictimerlistcleanup.jpg" />		    
+                    <shortdescription>Cleanup timerlist automatically</shortdescription>
+                    <description>Cleanup timerlist automatically.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_automatictimerlistcleanup.jpg" />		    
           </info>
-          <info language="de">
-                    <author>Dr.Best</author>
-                    <name>Automatic Timerlist Cleanup</name>
-                    <packagename>enigma2-plugin-systemplugins-automatictimerlistcleanup</packagename>
-		    <shortdescription>Timerliste automatisch aufräumen lassen</shortdescription>
-                    <description>Timerliste automatisch aufräumen lassen</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/automatictimerlistcleanup.jpg" />		 
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-systemplugins-automatictimerlistcleanup" />
 	  </files>

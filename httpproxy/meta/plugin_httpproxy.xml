@@ -2,20 +2,12 @@
 	  <prerequisites>
                     <tag type="System" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>3c5x9</author>
                     <name>HTTPProxy</name>
                     <packagename>enigma2-plugin-extensions-httpproxy</packagename>
                     <shortdescription>use your Dreambox as Web proxy</shortdescription>
-                    <description>use your Dreambox as Web proxy</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_httpproxy.jpg" />
-          </info>
-          <info language="de">
-                    <author>3c5x9</author>
-                    <name>HTTPProxy</name>
-                    <packagename>enigma2-plugin-extensions-httpproxy</packagename>
-                    <shortdescription>Benutzen Sie Ihre Dreambox als Web Proxy</shortdescription>
-                    <description>Benutzen Sie Ihre Dreambox als Web Proxy</description>
+                    <description>use your Dreambox as Web proxy.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_httpproxy.jpg" />
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->

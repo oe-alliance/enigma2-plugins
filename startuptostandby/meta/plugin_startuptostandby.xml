@@ -2,20 +2,14 @@
 	  <prerequisites>
                     <tag type="System" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>fireball</author>
                     <name>StartupToStandby</name>
                     <packagename>enigma2-plugin-extensions-startuptostandby</packagename>
                     <shortdescription>set enigma2 to standby-mode after startup</shortdescription>
-                    <description>set enigma2 to standby-mode after startup</description>
+                    <description>After a reboot or power outage, StartupToStandby will bring your Dreambox to standby-mode.</description>
           </info>
-          <info language="de">
-                    <author>fireball</author>
-                    <name>StartupToStandby</name>
-                    <packagename>enigma2-plugin-extensions-startuptostandby</packagename>
-		    <shortdescription>Dreambox im Standby Modus starten.</shortdescription>
-                    <description>Startet Ihre Dreambox im Standby Modus nach einem Stromausfall oder Reboot.</description>
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-startuptostandby" />
 	  </files>

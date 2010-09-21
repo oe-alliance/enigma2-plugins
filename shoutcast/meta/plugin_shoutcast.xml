@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Dr.Best</author>
                     <name>SHOUTcast</name>
                     <packagename>enigma2-plugin-extensions-shoutcast</packagename>
-                    <shortdescription>listen and record internet radio on your Dreambox</shortdescription>
-                    <description>listen and record internet radio on your Dreambox</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_shoutcast.jpg.jpg" />		    
+                    <shortdescription>Listen and record internet radio</shortdescription>
+                    <description>Listen and record shoutcast internet radio on your Dreambox.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_shoutcast.jpg" />		    
           </info>
-          <info language="de">
-                    <author>Dr.Best</author>
-                    <name>SHOUTcast</name>
-                    <packagename>enigma2-plugin-extensions-shoutcast</packagename>
-		    <shortdescription>Internetradio und Aufnahme auf der Dreambox</shortdescription>
-                    <description>Internetradio und Aufnahme auf der Dreambox</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_shoutcast.jpg.jpg" />		   
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-shoutcast" />
 	  </files>

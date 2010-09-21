@@ -2,7 +2,7 @@
 	  <prerequisites>
                     <tag type="System" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>3c5x9</author>
                     <name>Filebrowser</name>
                     <packagename>enigma2-plugin-extensions-filebrowser</packagename>
@@ -10,14 +10,7 @@
                     <description>Copy, rename, delete, move local files on your Dreambox.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_filebrowser.jpg" />
           </info>
-          <info language="de">
-                    <author>3c5x9</author>
-                    <name>Filebrowser</name>
-                    <packagename>enigma2-plugin-extensions-filebrowser</packagename>
-                    <shortdescription>Dateibrowser für lokale Dateien.</shortdescription>
-                    <description>Löschen, kopieren, verschieben, umbenennen von Lokalen Dateien.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_filebrowser.jpg" />
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-filebrowser" />
 	  </files>

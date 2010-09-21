@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>AliAbdul</author>
                     <name>DVD Backup</name>
                     <packagename>enigma2-plugin-extensions-dvdbackup</packagename>
                     <shortdescription>Create a backup of your Video-DVD</shortdescription>
-                    <description>Create a backup of your Video-DVD</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_dvdbackup_de.jpg" />	
+                    <description>Create a backup of your Video DVD on your DreamBox hard drive.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_dvdbackup_en.jpg" />	
           </info>
-          <info language="de">
-                    <author>AliAbdul</author>
-                    <name>DVD Backup</name>
-                    <packagename>enigma2-plugin-extensions-dvdbackup</packagename>
-                    <shortdescription>Erstelle eine Sicherung deiner Video-DVD</shortdescription>
-                    <description>Erstelle eine Sicherung deiner Video-DVD</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_dvdbackup_de.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-dvdbackup" />
 	  </files>

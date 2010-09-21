@@ -2,21 +2,14 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Voc</author>
                     <name>YouTubePlayer</name>
                     <packagename>enigma2-plugin-extensions-youtubeplayer</packagename>
-                    <shortdescription>Playback of Youtube movies from your PC</shortdescription>
-                    <description>Playback of Youtube movies from your PC</description>
+                    <shortdescription>Playback of Youtube through a PC</shortdescription>
+                    <description>With YouTubePlayer you can watch YouTube-Videos on the Dreambox.\n
+		    This plugin requires a PC with the VLC program running.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_youtubeplayer_en.jpg" />		    
-          </info>
-          <info language="de">
-                    <author>Voc</author>
-                    <name>YouTubePlayer</name>
-                    <packagename>enigma2-plugin-extensions-youtubeplayer</packagename>
-                    <shortdescription>Youtube Filme von Ihrem PC abspielen.</shortdescription>
-                    <description>Youtube Filme von Ihrem PC abspielen.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_youtubeplayer_de.jpg" />	
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-youtubeplayer" />

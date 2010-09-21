@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="EPG" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>nixkoenner</author>
                     <name>remoteTimer</name>
                     <packagename>enigma2-plugin-extensions-remotetimer</packagename>
                     <shortdescription>Create remote timers</shortdescription>
-                    <description>Create remote timers</description>
+                    <description>Create timers on remote Dreamboxes.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_remotetimer_en.jpg" />		    
           </info>
-          <info language="de">
-                    <author>nixkoenner</author>
-                    <name>remoteTimer</name>
-                    <packagename>enigma2-plugin-extensions-remotetimer</packagename>
-                    <shortdescription>Erstellen von remote Timern</shortdescription>
-                    <description>Erstellen von remote Timern</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_remotetimer_de.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-remotetimer" />
 	  </files>

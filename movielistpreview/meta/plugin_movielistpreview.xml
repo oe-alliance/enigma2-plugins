@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>AliAbdul</author>
                     <name>Movielist Preview</name>
                     <packagename>enigma2-plugin-extensions-movielistpreview</packagename>
-                    <shortdescription>Create previews for movies and show them in the movielist</shortdescription>
-                    <description>Create previews for movies and show them in the movielist</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_movielistpreview_de.jpg" />	
+                    <shortdescription>Create preview pictures of your Movies</shortdescription>
+                    <description>Movielist Preview creates screenshots of recordings and shows them inside the movielist.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_movielistpreview_en.jpg" />	
           </info>
-          <info language="de">
-                    <author>AliAbdul</author>
-                    <name>Movielist Preview</name>
-                    <packagename>enigma2-plugin-extensions-movielistpreview</packagename>
-                    <shortdescription>Erstelle Vorschaubilder zu Filmen und lasse sie in der Filmliste anzeigen</shortdescription>
-                    <description>Erstelle Vorschaubilder zu Filmen und lasse sie in der Filmliste anzeigen</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_movielistpreview_de.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-movielistpreview" />
 	  </files>

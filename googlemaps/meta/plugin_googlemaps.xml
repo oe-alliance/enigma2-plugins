@@ -2,20 +2,12 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>3c5x9</author>
                     <name>GoogleMaps</name>
                     <packagename>enigma2-plugin-extensions-googlemaps</packagename>
-                    <shortdescription>Browse Google maps</shortdescription>
-                    <description>Browse Google maps</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_googlemaps.jpg" />
-          </info>
-          <info language="de">
-                    <author>3c5x9</author>
-                    <name>GoogleMaps</name>
-                    <packagename>enigma2-plugin-extensions-googlemaps</packagename>
-                    <shortdescription>Google Maps anschauen</shortdescription>
-                    <description>Betrachten Sie Karten von Google Maps.</description>
+                    <shortdescription>View Google maps</shortdescription>
+                    <description>View Google maps with your Dreambox.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_googlemaps.jpg" />
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->

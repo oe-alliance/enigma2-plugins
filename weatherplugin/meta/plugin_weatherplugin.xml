@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Dr.Best</author>
                     <name>WeatherPlugin</name>
                     <packagename>enigma2-plugin-extensions-weatherplugin</packagename>
                     <shortdescription>Weatherforecast on your Dreambox</shortdescription>
-                    <description>Weatherforecast on your Dreambox</description>
+                    <description>WeatherPlugin shows weatherforecasts on your Dreambox.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_weatherplugin.jpg" />		    
           </info>
-          <info language="de">
-                    <author>Dr.Best</author>
-                    <name>WeatherPlugin</name>
-                    <packagename>enigma2-plugin-extensions-weatherplugin</packagename>
-		    <shortdescription>Wettervorhersagen auf Ihrer Dreambox</shortdescription>
-                    <description>Wettervorhersagen auf Ihrer Dreambox</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_weatherplugin.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-weatherplugin" />
 	  </files>

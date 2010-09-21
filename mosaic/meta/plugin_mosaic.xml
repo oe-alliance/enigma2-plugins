@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>AliAbdul</author>
                     <name>Mosaic</name>
                     <packagename>enigma2-plugin-extensions-mosaic</packagename>
                     <shortdescription>Preview screenshots of running tv shows</shortdescription>
-                    <description>Preview screenshots of running tv shows</description>
+                    <description>Preview screenshots of running tv shows.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_mosaic.jpg" />		    
           </info>
-          <info language="de">
-                    <author>AliAbdul</author>
-                    <name>Mosaic</name>
-                    <packagename>enigma2-plugin-extensions-mosaic</packagename>
-                    <shortdescription>Vorschaubilder gerade laufender Sendungen</shortdescription>
-                    <description>Vorschaubilder gerade laufender Sendungen</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_mosaic.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-mosaic" />
 	  </files>

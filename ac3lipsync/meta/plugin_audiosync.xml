@@ -2,21 +2,13 @@
 	  <prerequisites>
                     <tag type="System" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Tode</author>
                     <name>AudioSync</name>
                     <packagename>enigma2-plugin-extensions-audiosync</packagename>
-                    <shortdescription>Set Bitstream/PCM audio delays.</shortdescription>
-                    <description>Set Bitstream/PCM audio delays to synchronize picture and sound.</description>
+                    <shortdescription>Set Bitstream/PCM audio delays</shortdescription>
+                    <description>AudoSync allows delaying the sound output (Bitstream/PCM) so that it is synchronous to the picture.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_audiosync_en.jpg" />
-          </info>
-          <info language="de">
-                    <author>Tode</author>
-                    <name>AudioSync</name>
-                    <packagename>enigma2-plugin-extensions-audiosync</packagename>
-                    <shortdescription>Einstellung der Ton- / Bild- Synchronität</shortdescription>
-                    <description>Ändert die Verzögerung der Ton- Ausgabe (Bitstream und PCM) um Synchronität zum Bild herzustellen.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_audiosync_de.jpg" />
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-audiosync" />

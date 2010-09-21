@@ -2,19 +2,12 @@
 	  <prerequisites>
                     <tag type="EPG" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>AliAbdul</author>
                     <name>ZapStatistic</name>
                     <packagename>enigma2-plugin-extensions-zapstatistic</packagename>
-                    <shortdescription>Shows the watched services with some statistic</shortdescription>
-                    <description>Shows the watched services with some statistic</description>
-          </info>
-          <info language="de">
-                    <author>AliAbdul</author>
-                    <name>ZapStatistic</name>
-                    <packagename>enigma2-plugin-extensions-zapstatistic</packagename>
-                    <shortdescription>Zeigt die angeschauten Sendungen mit einigen Statistiken</shortdescription>
-                    <description>Zeigt die angeschauten Sendungen mit einigen Statistiken</description>
+                    <shortdescription>Shows statistics of watched services</shortdescription>
+                    <description>ZapStatistic shows the watched services with some statistics.</description>
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-zapstatistic" />

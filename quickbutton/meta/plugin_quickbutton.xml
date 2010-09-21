@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Software" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Dr.Best</author>
                     <name>Quickbutton</name>
                     <packagename>enigma2-plugin-extensions-quickbutton</packagename>
                     <shortdescription>assign long key-press on color buttons to plugins or E2 functions</shortdescription>
-                    <description>assign long key-press (red/green/yellow/blue) to plugins or E2 functions</description>
+                    <description>assign long key-press (red/green/yellow/blue) to plugins or E2 functions.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_quickbutton_en.jpg" />		    
           </info>
-          <info language="de">
-                    <author>Dr.Best</author>
-                    <name>Quickbutton</name>
-                    <packagename>enigma2-plugin-extensions-quickbutton</packagename>
-                    <shortdescription>Plugins und Funktionen an Farbtasten legen.</shortdescription>
-                    <description>Legen Sie Plugins und Funktionen auf Farbtasten.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_quickbutton_de.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-quickbutton" />
 	  </files>

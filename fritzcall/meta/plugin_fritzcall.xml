@@ -3,22 +3,15 @@
                     <tag type="Communication" />
                     <tag type="Network" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>DrMichael</author>
                     <name>FritzCall</name>
                     <packagename>enigma2-plugin-extensions-fritzcall</packagename>
                     <shortdescription>Callmonitor for the Fritz!Box routers</shortdescription>
-                    <description>FritzCall shows you the calls of your Fritz!Box on your Dreambox.</description>
+                    <description>FritzCall shows incoming calls to your Fritz!Box on your Dreambox.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_fritzcall_en.jpg" />
           </info>
-          <info language="de">
-                    <author>DrMichael</author>
-                    <name>FritzCall</name>
-                    <packagename>enigma2-plugin-extensions-fritzcall</packagename>
-                    <shortdescription>Anrufmonitor für Fritz!Boxen</shortdescription>
-                    <description>FritzCall zeigt die Anrufe ihrer Fritz!Box auf Ihrer Dreambox an.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_fritzcall_de.jpg" />
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-fritzcall" />
 		<file type="package" name="python-html" />

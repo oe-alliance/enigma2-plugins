@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>3c5x9</author>
                     <name>TrafficInfo</name>
                     <packagename>enigma2-plugin-extensions-trafficinfo</packagename>
-                    <shortdescription>German traffic informations</shortdescription>
-                    <description>German traffic informations</description>
+                    <shortdescription>German traffic information</shortdescription>
+                    <description>TrafficInfo shows german traffic information.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_trafficinfo.jpg" />		    
           </info>
-          <info language="de">
-                    <author>3c5x9</author>
-                    <name>TrafficInfo</name>
-                    <packagename>enigma2-plugin-extensions-trafficinfo</packagename>
-                    <shortdescription>Aktuelle Verkehrsinformationen</shortdescription>
-                    <description>Aktuelle Verkehrsinformationen</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_trafficinfo.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-trafficinfo" />
 	  </files>

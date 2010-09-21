@@ -3,22 +3,15 @@
                     <tag type="Multimedia" />
                     <tag type="Recording" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Dream Multimedia</author>
                     <name>OFDb</name>
                     <packagename>enigma2-plugin-extensions-ofdb</packagename>
                     <shortdescription>Movie informations from the Online Film Datenbank</shortdescription>
-                    <description>Movie informations from the Online Film Datenbank</description>
+                    <description>Movie information from the Online Film Datenbank (German).</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_ofdb.jpg" />
           </info>
-          <info language="de">
-                    <author>Dream Multimedia</author>
-                    <name>OFDb</name>
-                    <packagename>enigma2-plugin-extensions-ofdb</packagename>
-                    <shortdescription>Filminformationen aus der Online Film Datenbank</shortdescription>
-                    <description>Filminformationen aus der Online Film Datenbank.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_ofdb.jpg" />
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-ofdb" />
 	  </files>

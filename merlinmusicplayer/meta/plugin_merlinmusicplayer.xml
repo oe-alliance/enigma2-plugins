@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Dr.Best</author>
                     <name>Merlin Music Player</name>
                     <packagename>enigma2-plugin-extensions-merlinmusicplayer</packagename>
                     <shortdescription>Merlin Music Player and iDream</shortdescription>
-                    <description>Manage your music files in a database, play it with Merlin Music Player</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/merlinmusicplayer.jpg" />		    
+                    <description>Manage your music files in a database, play it with Merlin Music Player.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_merlinmusicplayer.jpg" />		    
           </info>
-          <info language="de">
-                    <author>Dr.Best</author>
-                    <name>Merlin Music Player</name>
-                    <packagename>enigma2-plugin-extensions-merlinmusicplayer</packagename>
-                    <shortdescription>Merlin Music Player und iDream</shortdescription>
-                    <description>Datenbankverwaltung für Musikdateien, Abspielen mit Merlin Music Player</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/merlinmusicplayer.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-merlinmusicplayer" />
 	  </files>

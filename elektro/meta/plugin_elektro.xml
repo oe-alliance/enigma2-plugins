@@ -2,25 +2,14 @@
 	  <prerequisites>
                     <tag type="System" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Morty</author>
                     <name>Elektro Power Save</name>
                     <packagename>enigma2-plugin-extensions-elektro</packagename>
-                    <shortdescription>Elektro Power Save</shortdescription>
-                    <description>The Elektro Power Save Plugin puts the box from stand by to sleep mode (Deep Standby) at certain times.\n
+                    <shortdescription>Sets your Dreambox into Deep-Standby</shortdescription>
+                    <description>The Elektro Power Save plugin puts the box from standby to sleep mode (Deep Standby) at certain times.\n
 		    This only happens if the box is in standby and no recording is running or sheduled in the next 20 minutes.\n
 		    The box automatically wakes up for recordings or at the end of the sleep time. You therefore don't have to wait until it is on again.
-		    </description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_elektro.jpg" />
-          </info>
-          <info language="de">
-                    <author>Morty</author>
-                    <name>Elektro Power Save</name>
-                    <packagename>enigma2-plugin-extensions-elektro</packagename>
-                    <shortdescription>Elektro Power Save</shortdescription>
-                    <description>Das Elektro Power Save Plugin sorgt dafür, zu die Box zu bestimmten Zeiten in den Ruhezustand (Deep Standby) heruntergefahren wird.\n
-		    Dies passiert nur, wenn sie sich in Standby befindet und keine Aufnahme läuft oder in den nächsten 20 Minuten gestartet wird.\n
-		    Zu Aufnahmen und nach Ende der Ruhezeit wacht die Box von alleine wieder auf, so dass man nicht ewig warten muss, bis sie Bereit ist.
 		    </description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_elektro.jpg" />
           </info>

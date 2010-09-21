@@ -2,20 +2,14 @@
 	  <prerequisites>
                     <tag type="System" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>AliAbdul</author>
                     <name>PermanentClock</name>
                     <packagename>enigma2-plugin-extensions-permanentclock</packagename>
-                    <shortdescription>Shows the clock permanent on the screen</shortdescription>
-                    <description>Shows the clock permanent on the screen</description>
+                    <shortdescription>Shows the clock permanently on the screen</shortdescription>
+                    <description>PermanentClock shows the clock permanently on the screen.</description>
           </info>
-          <info language="de">
-                    <author>AliAbdul</author>
-                    <name>PermanentClock</name>
-                    <packagename>enigma2-plugin-extensions-permanentclock</packagename>
-                    <shortdescription>Permanente Uhrzeitanzeige auf dem TV</shortdescription>
-                    <description>Permanente Uhrzeitanzeige auf dem TV</description>
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-permanentclock" />
 	  </files>

@@ -3,24 +3,15 @@
                     <tag type="Recording" />
                     <tag type="EPG" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>ritzMo</author>
                     <name>AutoTimer</name>
                     <packagename>enigma2-plugin-extensions-autotimer</packagename>
-                    <shortdescription>Edit Timers and scan for new events.</shortdescription>
-                    <description>Edit Timers and scan for new events.</description>
+                    <shortdescription>Automatically create timer events based on keywords</shortdescription>
+                    <description>AutoTimer scans the EPG and creates Timers depending on user-defined search  criteria.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_autotimer_en.jpg" />
           </info>
-          <info language="de">
-                    <author>ritzMo</author>
-                    <name>AutoTimer</name>
-                    <packagename>enigma2-plugin-extensions-autotimer</packagename>
-                    <shortdescription>Erstellt Timereinträge aufgrund von Stichworten.</shortdescription>
-                    <description>Was sind AutoTimer?\nEin AutoTimer ist ein Timer der automatisch auf Basis von benutzerdefinierten Regeln von diesem Plugin gesetzt wird.\n
-		    Die Haupteigenschaft und die einzig benötigte ist eine Textsuche im Titel der Sendung.\nWeitere sind eine vorgegebene Zeitspanne (es lassen sich auch ganze Wochentage ausschließen), Senderbeschränkungen und Auschlussbegriffe in Titel, Kurbeschreibung oder (Voll-)Beschreibung.
-		    </description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_autotimer_de.jpg" />
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-autotimer" />
 	  </files>

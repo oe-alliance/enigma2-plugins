@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Software" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>AliAbdul</author>
                     <name>RSDownloader</name>
                     <packagename>enigma2-plugin-extensions-rsdownloader</packagename>
                     <shortdescription>Download files from Rapidshare</shortdescription>
-                    <description>Allows user to download files from rapidshare in the background</description>
+                    <description>Allows user to download files from rapidshare in the background.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_rsdownloader_en.jpg" />		    
           </info>
-          <info language="de">
-                    <author>AliAbdul</author>
-                    <name>RSDownloader</name>
-                    <packagename>enigma2-plugin-extensions-rsdownloader</packagename>
-		    <shortdescription>Dateien von Rapidshare herunterladen</shortdescription>
-                    <description>Laden Sie Dateien von Rapidshare im Hintergrund herunter.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_rsdownloader_de.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-rsdownloader" />
 	  </files>

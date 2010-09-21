@@ -76,12 +76,9 @@ SUBDIRS = \
 	zdfmediathek
 
 
-LANGS := $(shell cat $(srcdir)/LINGUAS)
-
 install-exec-hook:
-	for lang in $(LANGS); do \
-		$(PYTHON) $(srcdir)/genmetaindex.py $$lang $(DESTDIR)$(datadir)/meta/plugin_*.xml > $(DESTDIR)$(datadir)/meta/index-enigma2-plugins_$$lang.xml; \
-	done
+	$(PYTHON) $(srcdir)/genmetaindex.py $(DESTDIR)$(datadir)/meta/plugin_*.xml > $(DESTDIR)$(datadir)/meta/index-enigma2-plugins.xml
 
 uninstall-hook:
-	$(RM) $(DESTDIR)$(datadir)/meta/index-enigma2-plugins_*.xml
+	$(RM) $(DESTDIR)$(datadir)/meta/index-enigma2-plugins.xml
+

@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Domino</author>
                     <name>AutoResolution</name>
                     <packagename>enigma2-plugin-systemplugins-autoresolution</packagename>
-                    <shortdescription>Automatically change resolution</shortdescription>
-                    <description>Automatically change resolution</description>
+                    <shortdescription>Automatically change video resolution</shortdescription>
+                    <description>Automatically changes the output resolution depending on the video resolution you are watching.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_autoresolution.jpg" />		    
           </info>
-          <info language="de">
-                    <author>Domino</author>
-                    <name>AutoResolution</name>
-                    <packagename>enigma2-plugin-systemplugins-autoresolution</packagename>
-                    <shortdescription>Automatisches Umschalten der Auflösung</shortdescription>
-                    <description>Automatisches Umschalten der Auflösung anhand des angezeigten Videos.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_autoresolution.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-systemplugins-autoresolution" />
 	  </files>

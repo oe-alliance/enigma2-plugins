@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>ritzMo</author>
                     <name>SimpleRSS</name>
                     <packagename>enigma2-plugin-extensions-simplerss</packagename>
                     <shortdescription>RSS viewer</shortdescription>
-                    <description>RSS viewer</description>
+                    <description>SimpleRSS allows reading RSS newsfeeds on your Dreambox.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_simplerss.jpg" />		    
           </info>
-          <info language="de">
-                    <author>ritzMo</author>
-                    <name>SimpleRSS</name>
-                    <packagename>enigma2-plugin-extensions-simplerss</packagename>
-                    <shortdescription>Betrachten von RSS Links</shortdescription>
-                    <description>Betrachten Sie RSS Links auf Ihrer Dreambox</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_simplerss.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-simplerss" />
 	  </files>

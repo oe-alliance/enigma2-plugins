@@ -3,22 +3,15 @@
                     <tag type="Multimedia" />
                     <tag type="EPG" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Dr.Best</author>
                     <name>Partnerbox</name>
                     <packagename>enigma2-plugin-extensions-partnerbox</packagename>
                     <shortdescription>Remote timer and remote TV player</shortdescription>
-                    <description>Remote timer and remote TV player</description>
+                    <description>Partnerbox allows editing a remote Dreambox's record timers and stream its TV  program.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_partnerbox_en.jpg" />		    
           </info>
-          <info language="de">
-                    <author>Dr.Best</author>
-                    <name>Partnerbox</name>
-                    <packagename>enigma2-plugin-extensions-partnerbox</packagename>
-                    <shortdescription>Remote Timer und Remote TV Player</shortdescription>
-                    <description>Remote Timer und Remote TV Player</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_partnerbox_de.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-partnerbox" />
 	  </files>

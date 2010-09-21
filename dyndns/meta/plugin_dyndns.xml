@@ -2,7 +2,7 @@
 	  <prerequisites>
                     <tag type="System" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>3c5x9</author>
                     <name>Dyndns Client</name>
                     <packagename>enigma2-plugin-extensions-dyndns</packagename>
@@ -10,14 +10,7 @@
                     <description>A client for www.dyndns.org</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_dyndns.jpg" />
           </info>
-          <info language="de">
-                    <author>3c5x9</author>
-                    <name>Dyndns Client</name>
-                    <packagename>enigma2-plugin-extensions-dyndns</packagename>
-                    <shortdescription>Ein Client für www.dyndns.org</shortdescription>
-                    <description>Ein Client für www.dyndns.org</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_dyndns.jpg" />
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-dyndns" />
 	  </files>

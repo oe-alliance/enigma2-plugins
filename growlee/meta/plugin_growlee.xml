@@ -1,23 +1,17 @@
 <default>
 	  <prerequisites>
-                    <tag type="Multimedia" />
+                    <tag type="System" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>ritzMo</author>
                     <name>Growlee</name>
                     <packagename>enigma2-plugin-extensions-growlee</packagename>
                     <shortdescription>redirect notifications to Growl</shortdescription>
-                    <description>redirect notifications to Growl</description>
+                    <description>Growlee allows your Dreambox to send short messages using the growl protocol\n
+		    (e.g. "Recording started" notification to a PC running a growl client)</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_growlee.jpg" />
           </info>
-          <info language="de">
-                    <author>ritzMo</author>
-                    <name>Growlee</name>
-                    <packagename>enigma2-plugin-extensions-growlee</packagename>
-                    <shortdescription>Benachrichtigungen an Growl senden</shortdescription>
-                    <description>Benachrichtigungen an Growl senden</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_growlee.jpg" />
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-growlee" />
 	  </files>

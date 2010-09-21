@@ -5,22 +5,15 @@
                     <hardware type="dm500hd" />	
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>acid-burn</author>
                     <name>MyTube</name>
                     <packagename>enigma2-plugin-extensions-mytube</packagename>
-                    <shortdescription>Direct playback of Youtube movies</shortdescription>
-                    <description>With Mytube you can play YouTube Videos directly on your TV without a PC.</description>
+                    <shortdescription>Direct playback of Youtube videos</shortdescription>
+                    <description>With MyTube you can play YouTube videos directly on your TV without a PC.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_mytube_en.jpg" />		    
           </info>
-          <info language="de">
-                    <author>acid-burn</author>
-                    <name>MyTube</name>
-                    <packagename>enigma2-plugin-extensions-mytube</packagename>
-                    <shortdescription>Spielt YouTube-Videos auf dem Fernseher ab</shortdescription>
-                    <description>Mit MyTube können Sie YouTube-Videos direkt auf Ihrem Fernseher abspielen ohne einen zusätzlichen PC.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_mytube_de.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-mytube" />
 		<file type="package" name="python-gdata" />

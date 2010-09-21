@@ -2,22 +2,15 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>3c5x9</author>
                     <name>NETcaster</name>
                     <packagename>enigma2-plugin-extensions-netcaster</packagename>
                     <shortdescription>Player for Network and Internet Streams</shortdescription>
-                    <description>Player for Network and Internet Streams</description>
+                    <description>Player for Network and Internet Streams.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_netcaster_en.jpg" />		    
           </info>
-          <info language="de">
-                    <author>3c5x9</author>
-                    <name>NETcaster</name>
-                    <packagename>enigma2-plugin-extensions-netcaster</packagename>
-                    <shortdescription>Player für Netzwerk und Internet Streams</shortdescription>
-                    <description>Player für Netzwerk und Internet Streams</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_netcaster_de.jpg" />	
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-netcaster" />
 	  </files>

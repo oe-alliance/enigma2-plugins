@@ -2,19 +2,12 @@
 	  <prerequisites>
                     <tag type="Multimedia" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>Georg Lukas</author>
                     <name>Letterbox</name>
                     <packagename>enigma2-plugin-extensions-letterbox</packagename>
                     <shortdescription>Zoom into letterboxed/anamorph movies</shortdescription>
-                    <description>Zoom into letterboxed/anamorph movies</description>	    
-          </info>
-          <info language="de">
-                    <author>Georg Lukas</author>
-                    <name>Letterbox</name>
-                    <packagename>enigma2-plugin-extensions-letterbox</packagename>
-                    <shortdescription>Zoom-In für Letterbox-Filme</shortdescription>
-                    <description>Zoom-In für Letterbox-Filme</description>	
+                    <description>Zoom into letterboxed/anamorph movies.</description>	    
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-letterbox" />

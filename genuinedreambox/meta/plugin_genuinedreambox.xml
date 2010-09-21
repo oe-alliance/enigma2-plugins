@@ -3,24 +3,17 @@
                     <hardware type="dm8000" />
                     <hardware type="dm800" />
                     <hardware type="dm500hd" />
-                    <tag type="EPG" />
+                    <tag type="System" />
 	  </prerequisites>
-          <info language="en">
+          <info>
                     <author>nixkoenner</author>
                     <name>GenuineDreambox</name>
                     <packagename>enigma2-plugin-extensions-genuinedreambox</packagename>
-                    <shortdescription>Genuine Dreambox Verification</shortdescription>
-                    <description>Authenticity test for your Dreambox</description>
+                    <shortdescription>Genuine Dreambox verification</shortdescription>
+                    <description>With Genuine Dreambox you can verify the authenticity of your Dreambox.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_genuinedreambox.jpg" />
           </info>
-          <info language="de">
-                    <author>nixkoenner</author>
-                    <name>GenuineDreambox</name>
-                    <packagename>enigma2-plugin-extensions-genuinedreambox</packagename>
-                    <shortdescription>Genuine Dreambox Verifikation</shortdescription>
-                    <description>Testen Sie ob Sie eine echte Dreambox besitzen</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_genuinedreambox.jpg" />
-          </info>
+
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-genuinedreambox" />
 	  </files>
