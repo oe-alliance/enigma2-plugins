@@ -206,6 +206,7 @@ movieretitle/po/Makefile
 movieretitle/src/Makefile
 
 movieselectionquickbutton/Makefile
+movieselectionquickbutton/meta/Makefile
 movieselectionquickbutton/po/Makefile
 movieselectionquickbutton/src/Makefile
 

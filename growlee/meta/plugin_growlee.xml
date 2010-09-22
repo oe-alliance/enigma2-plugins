@@ -8,7 +8,7 @@
                     <packagename>enigma2-plugin-extensions-growlee</packagename>
                     <shortdescription>redirect notifications to Growl</shortdescription>
                     <description>Growlee allows your Dreambox to send short messages using the growl protocol\n
-		    (e.g. "Recording started" notification to a PC running a growl client)</description>
+		    like Recording started notifications to a PC running a growl client</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_growlee.jpg" />
           </info>
 
