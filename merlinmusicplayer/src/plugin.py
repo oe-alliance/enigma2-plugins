@@ -3353,7 +3353,7 @@ def menu_merlinmusicplayerfilelist(menuid, **kwargs):
 
 def menu_idream(menuid, **kwargs):
 	if menuid == "mainmenu":
-		return [(_("iDream"), merlinmusicplayerfilelist, "idream", 47)]
+		return [(_("iDream"), main, "idream", 47)]
 	return []
 
 def Plugins(**kwargs):
