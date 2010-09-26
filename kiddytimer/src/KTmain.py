@@ -255,7 +255,10 @@ class KiddyTimer():
         if iRemaining < 0:
             iRemaining = 0
         self.remainingTime = iRemaining
-        self.remainingPercentage = iRemaining / self.currentDayTime
+        if self.currentDayTime > 0:
+            self.remainingPercentage = iRemaining / self.currentDayTime
+        else:
+            self.remainingPercentage = 0
 
     def callbackSetTimer(self, iMinutes):
         iSeconds = iMinutes * 60
