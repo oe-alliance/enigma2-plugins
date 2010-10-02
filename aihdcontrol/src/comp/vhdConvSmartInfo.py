@@ -1,4 +1,4 @@
-#######################################################################
+# -*- coding: iso-8859-1 -*-
 #
 #
 #    SmartInfo-Converter for Dreambox/Enigma-2
@@ -27,19 +27,23 @@
 from enigma import iServiceInformation
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from os import popen
+from Components.Sensors import sensors
+from Poll import Poll
 
 
 
-class vhdConvSmartInfo(Converter, object):
+class vhdConvSmartInfo(Poll, Converter, object):
 	SMART_LABEL = 0
 	SMART_INFO_H = 1
 	def __init__(self, type):
 		Converter.__init__(self, type)
+		Poll.__init__(self)
 		self.type = {
 				"ShowMe": self.SMART_LABEL,
 				"ExpertInfo": self.SMART_INFO_H
 			}[type]
+		self.poll_interval = 30000
+		self.poll_enabled = True
 		self.ar_fec = ["Auto", "1/2", "2/3", "3/4", "5/6", "7/8", "3/5", "4/5", "8/9", "9/10","None","None","None","None","None"]
 		self.ar_pol = ["H", "V", "CL", "CR", "na", "na", "na", "na", "na", "na", "na", "na"]
 
@@ -55,13 +59,16 @@ class vhdConvSmartInfo(Converter, object):
 		Ret_Text = ""
 		if (self.type == self.SMART_INFO_H):
 			xresol = info.getInfo(iServiceInformation.sVideoWidth)
+			yresol = info.getInfo(iServiceInformation.sVideoHeight)
 			feinfo = (service and service.frontendInfo())
 			if (feinfo is not None) and (xresol>0):
+				#Ret_Text = str(xresol) + "x" + str(yresol) + "   "
+				if (yresol > 580):
+					Ret_Text = "HD     "
+				else:
+					Ret_Text = "SD     "
 				frontendData = (feinfo and feinfo.getAll(True))
 				if (frontendData is not None):
-					xfrr = info.getInfo(iServiceInformation.sFrameRate)
-					Frames = "%d fps" % ((xfrr+500)/1000)
-					Ret_Text = str(frontendData.get("tuner_type")) + "      " + Frames + "      "
 					if ((frontendData.get("tuner_type") == "DVB-S") or (frontendData.get("tuner_type") == "DVB-C")):
 						frequency = (str((frontendData.get("frequency") / 1000)) + " MHz")
 						symbolrate = (str((float(frontendData.get("symbol_rate")) / float(1000000))) + " MS/s")
@@ -73,7 +80,7 @@ class vhdConvSmartInfo(Converter, object):
 							fec_i = frontendData.get("fec_inner")
 							Ret_Text = Ret_Text + frequency + "  -  " + self.ar_pol[polarisation_i] + "  -  " + self.ar_fec[fec_i] + "  -  " + symbolrate + "     "
 						except:
-							Ret_Text = Ret_Text + frequency + "      " + symbolrate + "      "
+							Ret_Text = Ret_Text + frequency + "     " + symbolrate + "     "
 						orb_pos = ""
 						if (frontendData.get("tuner_type") == "DVB-S"):
 							orbital_pos = int(frontendData["orbital_position"])
@@ -86,11 +93,23 @@ class vhdConvSmartInfo(Converter, object):
 						frequency = (str((frontendData.get("frequency") / 1000)) + " MHz")
 						Ret_Text = Ret_Text + "Frequency: " + frequency
 				prvd = info.getInfoString(iServiceInformation.sProvider)
-				#Ret_Text = self.kurz(prvd) + "      " + Ret_Text
-				Ret_Text = prvd + "          " + Ret_Text
-			out_line = popen("cat /proc/loadavg").readline()
-			last = "          load: " + out_line[:15]
-			Ret_Text = Ret_Text + last
+				Ret_Text = self.kurz(prvd) + "     " + Ret_Text
+			maxtemp = 0
+			sensotN = "?"
+			try:
+				templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
+				tempcount = len(templist)
+				for count in range(tempcount):
+					id = templist[count]
+					tt = sensors.getSensorValue(id)
+					if tt > maxtemp:
+						maxtemp = tt
+						sensotN = sensors.getSensorName(id)
+						if sensotN == "undefined":
+							sensotN = "sensor-"+str(id)
+				Ret_Text = "max. Box-Temp:  " + str(maxtemp) + "°C / " + sensotN + "\n" + Ret_Text
+			except:
+				pass
 			return Ret_Text
 		return "n/a"
 		
