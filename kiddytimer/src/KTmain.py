@@ -295,7 +295,7 @@ class KiddyTimer():
 
     def calculateTimes(self):
         self.stopLoop()
-        if self.active == True:
+        if self.active == True and self.timerHasToRun():
             odtEnd = time.mktime(time.localtime())
             iDiff = odtEnd - time.mktime(self.sessionStartTime)
             iRemaining = self.sessionTime - iDiff
