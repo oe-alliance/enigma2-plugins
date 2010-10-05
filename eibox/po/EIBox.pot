@@ -1,0 +1,53 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-05 22:19+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/plugin.py:598
+msgid "(actual)"
+msgstr ""
+
+#: ../src/plugin.py:412
+msgid "(offline!)"
+msgstr ""
+
+#: ../src/plugin.py:410
+msgid "(online)"
+msgstr ""
+
+#: ../src/plugin.py:603
+msgid "(set point)"
+msgstr ""
+
+#: ../src/plugin.py:615
+msgid "Visualization for European Installation Bus"
+msgstr ""
+
+#: ../src/plugin.py:54
+msgid "down"
+msgstr ""
+
+#: ../src/plugin.py:499
+msgid "not found"
+msgstr ""
+
+#: ../src/plugin.py:537
+msgid "parser error"
+msgstr ""
+
+#: ../src/plugin.py:54
+msgid "up"
+msgstr ""

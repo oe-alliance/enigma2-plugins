@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Network" />
+	  </prerequisites>
+          <info>
+                    <author>Dream Multimedia</author>
+                    <name>E.I.B.ox</name>
+                    <packagename>enigma2-plugin-extensions-eibox</packagename>
+                    <shortdescription>Visualization for the European Installation Bus</shortdescription>
+		    <description>Visualize and control your lights, dimmers, blinds, thermostats etc. through EIB/KNX. (linknx server required)</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_eibox.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-eibox" />
+	  </files>
+</default>
