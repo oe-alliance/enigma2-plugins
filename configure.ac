@@ -89,6 +89,12 @@ dyndns/Makefile
 dyndns/src/Makefile
 dyndns/meta/Makefile
 
+eibox/Makefile
+eibox/meta/Makefile
+eibox/po/Makefile
+eibox/src/Makefile
+eibox/src/images/Makefile
+
 elektro/Makefile
 elektro/meta/Makefile
 elektro/po/Makefile

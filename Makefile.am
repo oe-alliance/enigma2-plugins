@@ -13,6 +13,7 @@ SUBDIRS = \
 	dreamirc \
 	dvdbackup \
 	dyndns \
+	eibox \
 	elektro \
 	emailclient \
 	epgrefresh \
