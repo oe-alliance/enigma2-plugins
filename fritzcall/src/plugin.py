@@ -12,7 +12,7 @@ from Screens.InputBox import InputBox
 from Screens import Standby
 from Screens.HelpMenu import HelpableScreen
 
-from enigma import eTimer, eSize, ePoint #@UnresolvedImport # pylint: disable-msg=E0611
+from enigma import eTimer, eSize, ePoint #@UnresolvedImport # pylint: disable=E0611
 from enigma import eDVBVolumecontrol
 from enigma import eBackgroundFileEraser
 #BgFileEraser = eBackgroundFileEraser.getInstance()
@@ -48,7 +48,7 @@ import re, time, os, hashlib, traceback
 
 from nrzuname import ReverseLookupAndNotifier, html2unicode
 import FritzOutlookCSV, FritzLDIF
-from . import _, initDebug, debug #@UnresolvedImport # pylint: disable-msg=E0611,F0401
+from . import _, initDebug, debug #@UnresolvedImport # pylint: disable=E0611,F0401
 
 from enigma import getDesktop
 DESKTOP_WIDTH = getDesktop(0).size().width()
@@ -674,7 +674,7 @@ class FritzCallFBF:
 			self._callScreen.updateStatus(_("preparing"))
 		parms = urlencode({'getpage':'../html/de/menus/menu2.html', 'var:lang':'de', 'var:pagename':'foncalls', 'var:menu':'fon', 'sid':self._md5Sid})
 		url = "http://%s/cgi-bin/webcm?%s" % (config.plugins.FritzCall.hostname.value, parms)
-		getPage(url).addCallback(lambda x:self._getCalls1(callback)).addErrback(self._errorCalls) #@UnusedVariable # pylint: disable-msg=W0613
+		getPage(url).addCallback(lambda x:self._getCalls1(callback)).addErrback(self._errorCalls) #@UnusedVariable # pylint: disable=W0613
 
 	def _getCalls1(self, callback):
 		#
@@ -820,7 +820,7 @@ class FritzCallFBF:
 					'Content-Length': str(len(parms))},
 			postdata=parms).addCallback(self._okDial).addErrback(self._errorDial)
 
-	def _okDial(self, html): #@UnusedVariable # pylint: disable-msg=W0613
+	def _okDial(self, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF] okDial")
 
 	def _errorDial(self, error):
@@ -866,7 +866,7 @@ class FritzCallFBF:
 					'Content-Length': str(len(parms))},
 			postdata=parms).addCallback(self._okChangeWLAN).addErrback(self._errorChangeWLAN)
 
-	def _okChangeWLAN(self, html): #@UnusedVariable # pylint: disable-msg=W0613
+	def _okChangeWLAN(self, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF] _okChangeWLAN")
 
 	def _errorChangeWLAN(self, error):
@@ -932,7 +932,7 @@ class FritzCallFBF:
 						'Content-Length': str(len(parms))},
 				postdata=parms).addCallback(self._okChangeMailbox).addErrback(self._errorChangeMailbox)
 
-	def _okChangeMailbox(self, html): #@UnusedVariable # pylint: disable-msg=W0613
+	def _okChangeMailbox(self, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF] _okChangeMailbox")
 
 	def _errorChangeMailbox(self, error):
@@ -1262,7 +1262,7 @@ class FritzCallFBF:
 					'Content-Length': str(len(parms))},
 			postdata=parms)
 
-	def _okReset(self, html): #@UnusedVariable # pylint: disable-msg=W0613
+	def _okReset(self, html): #@UnusedVariable # pylint: disable=W0613
 		debug("[FritzCallFBF] _okReset")
 
 	def _errorReset(self, error):
@@ -1753,7 +1753,7 @@ class FritzMenu(Screen, HelpableScreen):
 
 class FritzDisplayCalls(Screen, HelpableScreen):
 
-	def __init__(self, session, text=""): #@UnusedVariable # pylint: disable-msg=W0613
+	def __init__(self, session, text=""): #@UnusedVariable # pylint: disable=W0613
 		self.width = DESKTOP_WIDTH * scaleH(75, 85)/100
 		self.height = DESKTOP_HEIGHT * 0.75
 		dateFieldWidth = scaleH(180, 105)
@@ -1983,6 +1983,8 @@ class FritzOfferAction(Screen):
 			"ok": self._exit, }, - 2)
 
 		self._session = session
+		if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0] == "0":
+			number = number[1:]
 		self._number = number
 		self._name = name.replace("\n", ", ")
 		self["text"] = Label(number + "\n\n" + name.replace(", ", "\n"))
@@ -2000,7 +2002,7 @@ class FritzOfferAction(Screen):
 		self.setTitle(_("Do what?"))
 
 	def _finishLayout(self):
-		# pylint: disable-msg=W0142
+		# pylint: disable=W0142
 		debug("[FritzCall] FritzOfferAction/finishLayout number: %s/%s" % (self._number, self._name))
 
 		faceFile = findFace(self._number, self._name)
@@ -2053,7 +2055,7 @@ class FritzOfferAction(Screen):
 		self.instance.move(ePoint((DESKTOP_WIDTH-wSize.width())/2, (DESKTOP_HEIGHT-wSize.height())/2))
 
 	def _setTextAndResize(self, message):
-		# pylint: disable-msg=W0142
+		# pylint: disable=W0142
 		self["text"].instance.resize(eSize(*(DESKTOP_WIDTH, DESKTOP_HEIGHT)))
 		self["text"].setText(self._number + "\n\n" + message)
 		self._finishLayout()
@@ -2600,7 +2602,7 @@ phonebook = FritzCallPhonebook()
 
 class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
-	def __init__(self, session, args=None): #@UnusedVariable # pylint: disable-msg=W0613
+	def __init__(self, session, args=None): #@UnusedVariable # pylint: disable=W0613
 		self.width = scaleH(20+4*(140+90)+2*(35+40)+20, 4*140+2*35)
 		width = self.width
 		debug("[FritzCallSetup] width: " + str(self.width))
@@ -2965,7 +2967,7 @@ class MessageBoxPixmap(Screen):
 			"ok": self._exit, }, - 2)
 
 	def _finishLayout(self):
-		# pylint: disable-msg=W0142
+		# pylint: disable=W0142
 		debug("[FritzCall] MessageBoxPixmap/setInfoPixmap number: %s/%s" % (self._number, self._name))
 
 		faceFile = findFace(self._number, self._name)
@@ -3269,11 +3271,11 @@ class FritzClientFactory(ReconnectingClientFactory):
 
 	def __init__(self):
 		self.hangup_ok = False
-	def startedConnecting(self, connector): #@UnusedVariable # pylint: disable-msg=W0613
+	def startedConnecting(self, connector): #@UnusedVariable # pylint: disable=W0613
 		if config.plugins.FritzCall.connectionVerbose.value:
 			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
 
-	def buildProtocol(self, addr): #@UnusedVariable # pylint: disable-msg=W0613
+	def buildProtocol(self, addr): #@UnusedVariable # pylint: disable=W0613
 		global fritzbox, phonebook
 		if config.plugins.FritzCall.connectionVerbose.value:
 			Notifications.AddNotification(MessageBox, _("Connected to FRITZ!Box!"), type=MessageBox.TYPE_INFO, timeout=4)
@@ -3312,7 +3314,7 @@ class FritzCall:
 		self.abort()
 		if config.plugins.FritzCall.enable.value:
 			fact = FritzClientFactory()
-			self.desc = (fact, reactor.connectTCP(config.plugins.FritzCall.hostname.value, 1012, fact)) #@UndefinedVariable # pylint: disable-msg=E1101
+			self.desc = (fact, reactor.connectTCP(config.plugins.FritzCall.hostname.value, 1012, fact)) #@UndefinedVariable # pylint: disable=E1101
 
 	def shutdown(self):
 		self.abort()
@@ -3324,7 +3326,7 @@ class FritzCall:
 			self.desc[1].disconnect()
 			self.desc = None
 
-def displayCalls(session, servicelist=None): #@UnusedVariable # pylint: disable-msg=W0613
+def displayCalls(session, servicelist=None): #@UnusedVariable # pylint: disable=W0613
 	if config.plugins.FritzCall.enable.value:
 		if fritzbox:
 			session.open(FritzDisplayCalls)
@@ -3333,7 +3335,7 @@ def displayCalls(session, servicelist=None): #@UnusedVariable # pylint: disable-
 	else:
 		Notifications.AddNotification(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
-def displayPhonebook(session, servicelist=None): #@UnusedVariable # pylint: disable-msg=W0613
+def displayPhonebook(session, servicelist=None): #@UnusedVariable # pylint: disable=W0613
 	if phonebook:
 		if config.plugins.FritzCall.enable.value:
 			session.open(phonebook.FritzDisplayPhonebook)
@@ -3342,7 +3344,7 @@ def displayPhonebook(session, servicelist=None): #@UnusedVariable # pylint: disa
 	else:
 		Notifications.AddNotification(MessageBox, _("No phonebook"), type=MessageBox.TYPE_INFO)
 
-def displayFBFStatus(session, servicelist=None): #@UnusedVariable # pylint: disable-msg=W0613
+def displayFBFStatus(session, servicelist=None): #@UnusedVariable # pylint: disable=W0613
 	if config.plugins.FritzCall.enable.value:
 		if fritzbox and fritzbox.info:
 			session.open(FritzMenu)
@@ -3372,7 +3374,7 @@ def autostart(reason, **kwargs):
 		fritz_call.shutdown()
 		fritz_call = None
 
-def Plugins(**kwargs): #@UnusedVariable # pylint: disable-msg=W0613,C0103
+def Plugins(**kwargs): #@UnusedVariable # pylint: disable=W0613,C0103
 	what = _("Display FRITZ!box-Fon calls on screen")
 	what_calls = _("Phone calls")
 	what_phonebook = _("Phonebook")
