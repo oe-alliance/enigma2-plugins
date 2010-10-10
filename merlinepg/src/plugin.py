@@ -59,7 +59,7 @@ config.plugins.MerlinEPG.PageUDonBouquets  = ConfigYesNo(default=True)
 
 def Plugins(**kwargs):
  	list = [(PluginDescriptor(name="Merlin Programm Guide", description="Merlin Programm Guide", where = PluginDescriptor.WHERE_EVENTINFO, fnc=startMerlinPG))]
-	list.append(PluginDescriptor(name="Merlin Programm Guide", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=startMerlinPG))
+	list.append(PluginDescriptor(name="Merlin Programm Guide", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=startMerlinPGnew))
 	return list
 
 
@@ -69,6 +69,14 @@ def startMerlinPG(session, servicelist, **kwargs):
 		session.open(Merlin_PGII, servicelist)
 	else:
 		session.open(Merlin_PGd, servicelist)
+
+
+
+def startMerlinPGnew(session, **kwargs):
+	if config.plugins.MerlinEPG.Columns.value:
+		session.open(Merlin_PGII)
+	else:
+		session.open(Merlin_PGd)
 
 
 
@@ -240,7 +248,7 @@ class Merlin_PGII(Screen):
 			</widget>
 		</screen>"""
 
-	def __init__(self, session, servicelist):
+	def __init__(self, session, servicelist=None):
 		Screen.__init__(self, session)
 		self.session = session
 		self.srvList = servicelist
@@ -426,7 +434,7 @@ class Merlin_PGII(Screen):
 		return self["prg_list"].getSelectionIndex()+(self.ActiveEPG-1)
 
 	def ZapTo(self):
-		if self.getActivePrg() > self.chCount:
+		if (self.getActivePrg() > self.chCount) or (self.srvList==None):
 			return
 		CurrentPrg = self.myServices[self.getActivePrg()]
 		CurrentBqt = self.myBqts[self.getActivePrg()]
@@ -441,7 +449,7 @@ class Merlin_PGII(Screen):
 		self.close()
 
 	def ZapForRefresh(self):
-		if self.getActivePrg() > self.chCount:
+		if (self.getActivePrg() > self.chCount) or (self.srvList==None):
 			return
 		CurrentPrg = self.myServices[self.getActivePrg()]
 		myService = ServiceReference(CurrentPrg[0])
@@ -646,7 +654,7 @@ class Merlin_PGd(Screen):
 			</widget>
 		</screen>"""
 
-	def __init__(self, session, servicelist):
+	def __init__(self, session, servicelist=None):
 		Screen.__init__(self, session)
 		self.session = session
 		self.myServices = []
@@ -752,6 +760,8 @@ class Merlin_PGd(Screen):
 			self.session.open(EventViewSimple, event, service)
 			
 	def ZapTo(self):
+		if self.srvList==None:
+			return
 		CurrentPrg = self.myServices[self["prg_list"].getSelectionIndex()]
 		CurrentBqt = self.myBqts[self["prg_list"].getSelectionIndex()]
 		myService = ServiceReference(CurrentPrg[0])
@@ -765,6 +775,8 @@ class Merlin_PGd(Screen):
 		self.close()
 
 	def ZapForRefresh(self):
+		if self.srvList==None:
+			return
 		CurrentPrg = self.myServices[self["prg_list"].getSelectionIndex()]
 		myService = ServiceReference(CurrentPrg[0])
 		self.session.nav.playService(myService.ref)
