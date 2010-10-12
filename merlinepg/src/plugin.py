@@ -73,10 +73,16 @@ def startMerlinPG(session, servicelist, **kwargs):
 
 
 def startMerlinPGnew(session, **kwargs):
-	if config.plugins.MerlinEPG.Columns.value:
-		session.open(Merlin_PGII)
+	if "servicelist" in kwargs:
+		if config.plugins.MerlinEPG.Columns.value:
+			session.open(Merlin_PGII, kwargs["servicelist"])
+		else:
+			session.open(Merlin_PGd, kwargs["servicelist"])
 	else:
-		session.open(Merlin_PGd)
+		if config.plugins.MerlinEPG.Columns.value:
+			session.open(Merlin_PGII)
+		else:
+			session.open(Merlin_PGd)
 
 
 
