@@ -486,11 +486,13 @@ class IMDB(Screen):
 			rating = self.ratingmask.search(self.inhtml)
 			Ratingtext = _("no user rating yet")
 			if rating:
-				Ratingtext = _("User Rating") + ": " + rating.group("rating") + " / 10"
-				self.ratingstars = int(10*round(float(rating.group("rating").replace(',','.')),1))
-				self["stars"].show()
-				self["stars"].setValue(self.ratingstars)
-				self["starsbg"].show()
+				rating = rating.group("rating")
+				if rating != "-":
+					Ratingtext = _("User Rating") + ": " + rating + " / 10"
+					self.ratingstars = int(10*round(float(rating.replace(',','.')),1))
+					self["stars"].show()
+					self["stars"].setValue(self.ratingstars)
+					self["starsbg"].show()
 			self["ratinglabel"].setText(Ratingtext)
 
 			castresult = self.castmask.finditer(self.inhtml)
