@@ -215,8 +215,8 @@ class IMDB(Screen):
 			, re.DOTALL)
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genre:</h4>\s<div class="info-content">\s+?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
-			self.ratingmask = re.compile('<span class="rating-rating">(?P<rating>.*?)<span>/10', re.DOTALL)
-			self.castmask = re.compile('<td class="name">.*?>(.*?)</a>.*?<td class="character">.*?<div>(.*?)</div>', re.DOTALL)
+			self.ratingmask = re.compile('<span style="display:none" id="star-bar-user-rate"><b>(?P<rating>.*?)</b>', re.DOTALL)
+			self.castmask = re.compile('<td class="name">\s*<a.*?>(.*?)</a>.*?<td class="character">\s*<div>\s*(?:<a.*?>)?(.*?)(?:</a>)?\s*(?:\(as.*)?\s*</div>', re.DOTALL)
 			self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 		else:
 			self.IMDBlanguage = "german." # it's a subdomain, so add a '.' at the end
@@ -487,7 +487,7 @@ class IMDB(Screen):
 			Ratingtext = _("no user rating yet")
 			if rating:
 				rating = rating.group("rating")
-				if rating != "-":
+				if rating != '<span id="voteuser"></span>':
 					Ratingtext = _("User Rating") + ": " + rating + " / 10"
 					self.ratingstars = int(10*round(float(rating.replace(',','.')),1))
 					self["stars"].show()
@@ -501,7 +501,7 @@ class IMDB(Screen):
 				for x in castresult:
 					Casttext += "\n" + self.htmltags.sub('', x.group(1))
 					if x.group(2):
-						Casttext += _(" as ") + self.htmltags.sub('', x.group(2).replace('/ ...','')).replace('\n', ' ').replace("  ", ' ').strip()
+						Casttext += _(" as ") + self.htmltags.sub('', x.group(2).replace('/ ...','')).replace('\n', ' ')
 				if Casttext is not "":
 					Casttext = _("Cast: ") + Casttext
 				else:
