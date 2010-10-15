@@ -81,7 +81,8 @@ my_global_session = None
 config.plugins.FritzCall = ConfigSubsection()
 config.plugins.FritzCall.debug = ConfigEnableDisable(default=False)
 #config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring")), ("connect", _("on connect"))])
-config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
+#config.plugins.FritzCall.muteOnCall = ConfigSelection(choices=[(None, _("no")), ("ring", _("on ring"))])
+config.plugins.FritzCall.muteOnCall = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.hostname = ConfigText(default="fritz.box", fixed_size=False)
 config.plugins.FritzCall.afterStandby = ConfigSelection(choices=[("none", _("show nothing")), ("inList", _("show as list")), ("each", _("show each call"))])
 config.plugins.FritzCall.filter = ConfigEnableDisable(default=False)
@@ -2848,54 +2849,58 @@ class FritzCallList:
 		# Standby.inStandby.onClose.remove(self.display) object does not exist anymore...
 		# build screen from call list
 		text = "\n"
-		if self.callList[0] == "Start":
-			text = text + _("Last 10 calls:\n")
-			del self.callList[0]
 
-		for call in self.callList:
-			(event, number, date, caller, phone) = call
-			if event == "RING":
-				direction = "->"
-			else:
-				direction = "<-"
-
-			# shorten the date info
-			date = date[:6] + date[9:14]
-
-			# our phone could be of the form "0123456789 (home)", then we only take "home"
-			oBrack = phone.find('(')
-			cBrack = phone.find(')')
-			if oBrack != -1 and cBrack != -1:
-				phone = phone[oBrack+1:cBrack]
-
-			# should not happen, for safety reasons
-			if not caller:
-				caller = _("UNKNOWN")
-			
-			#  if we have an unknown number, show the number
-			if caller == _("UNKNOWN") and number != "":
-				caller = number
-			else:
-				# strip off the address part of the remote caller/callee, if there is any
-				nl = caller.find('\n')
-				if nl != -1:
-					caller = caller[:nl]
-				elif caller[0] == '[' and caller[-1] == ']':
-					# that means, we've got an unknown number with a city added from avon.dat 
-					if (len(number) + 1 + len(caller) + len(phone)) <= 40:
-						caller = number + ' ' + caller
-					else:
-						caller = number
-
-			while (len(caller) + len(phone)) > 40:
-				if len(caller) > len(phone):
-					caller = caller[: - 1]
+		if not self.callList:
+			text = _("no calls") 
+		else:
+			if self.callList[0] == "Start":
+				text = text + _("Last 10 calls:\n")
+				del self.callList[0]
+	
+			for call in self.callList:
+				(event, number, date, caller, phone) = call
+				if event == "RING":
+					direction = "->"
 				else:
-					phone = phone[: - 1]
+					direction = "<-"
+	
+				# shorten the date info
+				date = date[:6] + date[9:14]
+	
+				# our phone could be of the form "0123456789 (home)", then we only take "home"
+				oBrack = phone.find('(')
+				cBrack = phone.find(')')
+				if oBrack != -1 and cBrack != -1:
+					phone = phone[oBrack+1:cBrack]
+	
+				# should not happen, for safety reasons
+				if not caller:
+					caller = _("UNKNOWN")
+				
+				#  if we have an unknown number, show the number
+				if caller == _("UNKNOWN") and number != "":
+					caller = number
+				else:
+					# strip off the address part of the remote caller/callee, if there is any
+					nl = caller.find('\n')
+					if nl != -1:
+						caller = caller[:nl]
+					elif caller[0] == '[' and caller[-1] == ']':
+						# that means, we've got an unknown number with a city added from avon.dat 
+						if (len(number) + 1 + len(caller) + len(phone)) <= 40:
+							caller = number + ' ' + caller
+						else:
+							caller = number
+	
+				while (len(caller) + len(phone)) > 40:
+					if len(caller) > len(phone):
+						caller = caller[: - 1]
+					else:
+						phone = phone[: - 1]
+	
+				text = text + "%s %s %s %s\n" % (date, caller, direction, phone)
+				debug("[FritzCallList] display: '%s %s %s %s'" % (date, caller, direction, phone))
 
-			text = text + "%s %s %s %s\n" % (date, caller, direction, phone)
-
-		debug("[FritzCallList] display: '%s %s %s %s'" % (date, caller, direction, phone))
 		# display screen
 		Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO)
 		# TODO please HELP: from where can I get a session?
@@ -3053,7 +3058,7 @@ def notifyCall(event, date, number, caller, phone, connID):
 	if Standby.inStandby is None or config.plugins.FritzCall.afterStandby.value == "each":
 		if event == "RING":
 			global mutedOnConnID
-			if config.plugins.FritzCall.muteOnCall.value =="ring" and not mutedOnConnID:
+			if config.plugins.FritzCall.muteOnCall.value and not mutedOnConnID:
 				debug("[FritzCall] mute on connID: %s" % connID)
 				mutedOnConnID = connID
 				# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
