@@ -216,7 +216,7 @@ class IMDB(Screen):
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genre:</h4>\s<div class="info-content">\s+?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
 			self.ratingmask = re.compile('<span style="display:none" id="star-bar-user-rate"><b>(?P<rating>.*?)</b>', re.DOTALL)
-			self.castmask = re.compile('<td class="name">\s*<a.*?>(.*?)</a>.*?<td class="character">\s*<div>\s*(?:<a.*?>)?(.*?)(?:</a>)?\s*(?:\(as.*)?\s*</div>', re.DOTALL)
+			self.castmask = re.compile('<td class="name">\s*<a.*?>(.*?)</a>.*?<td class="character">\s*<div>\s*(?:<a.*?>)?(.*?)(?:</a>)?\s*( \(as.*?\))?\s*</div>', re.DOTALL)
 			self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 		else:
 			self.IMDBlanguage = "german." # it's a subdomain, so add a '.' at the end
@@ -255,7 +255,7 @@ class IMDB(Screen):
 
 			self.genreblockmask = re.compile('<h5>Genre:</h5>\s<div class="info-content">\s+?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
 			self.ratingmask = re.compile('<h5>(?P<g_rating>Nutzer-Bewertung|User Rating):</h5>.*?<b>(?P<rating>.*?)/10</b>', re.DOTALL)
-			self.castmask = re.compile('<td class="nm">.*?>(.*?)</a>.*?<td class="char">(?:<a.*?>)?(.*?)(?:</a>)?</td>', re.DOTALL)
+			self.castmask = re.compile('<td class="nm">.*?>(.*?)</a>.*?<td class="char">(?:<a.*?>)?(.*?)(?:</a>)?(\s\(.*?\))?</td>', re.DOTALL)
 			self.postermask = re.compile('<div class="photo">.*?<img .*? src=\"(http.*?)\" .*?>', re.DOTALL)
 
 		self.htmltags = re.compile('<.*?>')
@@ -385,31 +385,28 @@ class IMDB(Screen):
 		self["statusbar"].setText(_("IMDb Download failed"))
 
 	def html2utf8(self,in_html):
-		htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
-		htmlentityhexmask = re.compile('(&#x([0-9A-Fa-f]{2,2}?);)')
-		htmlentitynamemask = re.compile('(&([^#]\D{1,5}?);)')
 		entitydict = {}
-		entityhexdict = {}
-		entities = htmlentitynamemask.finditer(in_html)
 
+		entities = re.finditer('&([^#]\D{1,5}?);', in_html)
 		for x in entities:
-			entitydict[x.group(1)] = x.group(2)
-		for key, name in entitydict.items():
-			entitydict[key] = htmlentitydefs.name2codepoint[name]
-		entities = htmlentityhexmask.finditer(in_html)
+			key = x.group(0)
+			if key not in entitydict:
+				entitydict[key] = htmlentitydefs.name2codepoint[x.group(1)]
 
+		entities = re.finditer('&#x([0-9A-Fa-f]{2,2}?);', in_html)
 		for x in entities:
-			entityhexdict[x.group(1)] = x.group(2)
+			key = x.group(0)
+			if key not in entitydict:
+				entitydict[key] = "%d" % int(key[3:5], 16)
 
-		for key, name in entityhexdict.items():
-			entitydict[key] = "%d" % int(key[3:5], 16)
-			print "key:", key, "before:", name, "after:", entitydict[key]
-		
-		entities = htmlentitynumbermask.finditer(in_html)
+		entities = re.finditer('&#(\d{1,5}?);', in_html)
 		for x in entities:
-			entitydict[x.group(1)] = x.group(2)
+			key = x.group(0)
+			if key not in entitydict:
+				entitydict[key] = x.group(1)
+
 		for key, codepoint in entitydict.items():
-			in_html = in_html.replace(key, (unichr(int(codepoint)).encode('latin-1', 'ignore')))
+			in_html = in_html.replace(key, unichr(int(codepoint)).encode('latin-1', 'ignore'))
 		self.inhtml = in_html.decode('latin-1').encode('utf8')
 
 	def IMDBquery(self,string):
@@ -502,6 +499,8 @@ class IMDB(Screen):
 					Casttext += "\n" + self.htmltags.sub('', x.group(1))
 					if x.group(2):
 						Casttext += _(" as ") + self.htmltags.sub('', x.group(2).replace('/ ...','')).replace('\n', ' ')
+						if x.group(3):
+							Casttext += x.group(3)
 				if Casttext is not "":
 					Casttext = _("Cast: ") + Casttext
 				else:
