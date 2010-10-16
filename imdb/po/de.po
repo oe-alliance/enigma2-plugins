@@ -63,7 +63,7 @@ msgid "IMDb query failed!"
 msgstr "Anfrage an IMDb fehlgeschlagen!"
 
 msgid "Lookup"
-msgstr ""
+msgstr "Suchen"
 
 msgid "No IMDb match."
 msgstr "Keine passenden Einträge gefunden."
@@ -93,6 +93,9 @@ msgstr "Die Internet Movie Database"
 
 msgid "Title Menu"
 msgstr "Titelauswahl"
+
+msgid "User Rating"
+msgstr "Nutzer-Bewertung"
 
 msgid "no user rating yet"
 msgstr "noch keine Nutzerwertung"
