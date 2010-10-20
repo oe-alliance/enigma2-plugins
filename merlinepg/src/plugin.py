@@ -49,6 +49,11 @@ if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AutoTimer/AutoTimerEdi
 	AutoTimerPresent=True
 else:
 	AutoTimerPresent=False
+if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/IMDb/plugin.pyo") or fileExists("/usr/lib/enigma2/python/Plugins/Extensions/IMDb/plugin.pyc"):
+	from Plugins.Extensions.IMDb.plugin import IMDB
+	IMDbPresent=True
+else:
+	IMDbPresent=False
 
 
 config.plugins.MerlinEPG = ConfigSubsection()
@@ -524,13 +529,25 @@ class Merlin_PGII(Screen):
 		else:
 			self.NextPage()
 		self.onSelectionChanged()
-
+		
 	def showEventInfo(self):
+		if not IMDbPresent:
+			self.showConfirmedInfo([None,"Ei"])
+		else:
+			self.session.openWithCallback(self.showConfirmedInfo, ChoiceBox, title=_("Select Info type..."), list=[(_("Standard EPG info"), "Ei"),(_("IMBd info"), "Ii")])
+
+	def showConfirmedInfo(self,answer):
 		curEV = self["epg_list"+str(self.ActiveEPG)].getCurrent()
 		event = curEV[0]
 		service = curEV[1]
-		if event is not None:
-			self.session.open(EventViewSimple, event, service)
+		answer = answer and answer[1]
+		if answer == "Ei":
+			if event is not None:
+				self.session.open(EventViewSimple, event, service)
+		if answer == "Ii":
+			if event is not None:
+				IeventName=event.getEventName()
+				self.session.open(IMDB, IeventName)
 
 	def timerAdd(self):
 		if not AutoTimerPresent:
@@ -618,7 +635,7 @@ class Merlin_PGII(Screen):
 		if config.plugins.MerlinEPG.ZapOnOK.value:
 			self.ZapTo()
 		else:
-			self.showEventInfo()
+			self.showConfirmedInfo([None,"Ei"])
 
 
 
