@@ -27,6 +27,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.EventView import EventViewSimple
 from Screens.MessageBox import MessageBox
+from Screens.ChoiceBox import ChoiceBox
 from Screens.TimerEntry import TimerEntry
 from Screens.TimerEdit import TimerSanityConflict
 from Components.ConfigList import ConfigListScreen
@@ -35,14 +36,19 @@ from Components.MenuList import MenuList
 from Components.Label import Label
 from Components.EpgList import EPGList, EPG_TYPE_SINGLE, Rect
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigInteger, getConfigListEntry
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
 from enigma import eServiceReference, eServiceCenter, getDesktop, eTimer, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_WRAP
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT
 from ServiceReference import ServiceReference
 from ShowMe import ShowMe
 from time import localtime
-
+if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AutoTimer/AutoTimerEditor.pyo") or fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AutoTimer/AutoTimerEditor.pyc"):
+	from Plugins.Extensions.AutoTimer.AutoTimerEditor import addAutotimerFromEvent
+	from Plugins.Extensions.AutoTimer.plugin import main as AutoTimerView
+	AutoTimerPresent=True
+else:
+	AutoTimerPresent=False
 
 
 config.plugins.MerlinEPG = ConfigSubsection()
@@ -527,6 +533,12 @@ class Merlin_PGII(Screen):
 			self.session.open(EventViewSimple, event, service)
 
 	def timerAdd(self):
+		if not AutoTimerPresent:
+			self.AddConfirmedTimer([None,"NT"])
+		else:
+			self.session.openWithCallback(self.AddConfirmedTimer, ChoiceBox, title=_("Select timer type..."), list=[(_("Standard timer"), "NT"),(_("AutoTimer"), "AT"),(_("View AutoTimers"), "ATV")])
+
+	def AddConfirmedTimer(self, answer):
 		cur = self["epg_list"+str(self.ActiveEPG)].getCurrent()
 		event = cur[0]
 		serviceref = cur[1]
@@ -534,14 +546,20 @@ class Merlin_PGII(Screen):
 			return
 		eventid = event.getEventId()
 		refstr = serviceref.ref.toString()
-		for timer in self.session.nav.RecordTimer.timer_list:
-			if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
-				cb_func = lambda ret : not ret or self.removeTimer(timer)
-				self.session.openWithCallback(cb_func, MessageBox, _("Do you really want to delete %s?") % event.getEventName())
-				break
-		else:
-			newEntry = RecordTimerEntry(serviceref, checkOldTimers = True, *parseEvent(event))
-			self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
+		answer = answer and answer[1]
+		if answer == "AT":
+			addAutotimerFromEvent(self.session,evt=event,service=serviceref)
+		elif answer == "NT":
+			for timer in self.session.nav.RecordTimer.timer_list:
+				if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
+					cb_func = lambda ret : not ret or self.removeTimer(timer)
+					self.session.openWithCallback(cb_func, MessageBox, _("Do you really want to delete %s?") % event.getEventName())
+					break
+			else:
+				newEntry = RecordTimerEntry(serviceref, checkOldTimers = True, *parseEvent(event))
+				self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
+		elif answer == "ATV":
+			AutoTimerView(self.session)
 
 	def removeTimer(self, timer):
 		timer.afterEvent = AFTEREVENT.NONE
@@ -791,8 +809,14 @@ class Merlin_PGd(Screen):
 	def CheckItNow(self):
 		self.CheckForEPG.stop()
 		self.updateInfos()
-
+			
 	def timerAdd(self):
+		if not AutoTimerPresent:
+			self.AddConfirmedTimer([None,"NT"])
+		else:
+			self.session.openWithCallback(self.AddConfirmedTimer, ChoiceBox, title=_("Select timer type..."), list=[(_("Standard timer"), "NT"),(_("AutoTimer"), "AT"),(_("View AutoTimers"), "ATV")])
+
+	def AddConfirmedTimer(self, answer):
 		cur = self["epg_list"].getCurrent()
 		event = cur[0]
 		serviceref = cur[1]
@@ -800,14 +824,20 @@ class Merlin_PGd(Screen):
 			return
 		eventid = event.getEventId()
 		refstr = serviceref.ref.toString()
-		for timer in self.session.nav.RecordTimer.timer_list:
-			if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
-				cb_func = lambda ret : not ret or self.removeTimer(timer)
-				self.session.openWithCallback(cb_func, MessageBox, _("Do you really want to delete %s?") % event.getEventName())
-				break
-		else:
-			newEntry = RecordTimerEntry(serviceref, checkOldTimers = True, *parseEvent(event))
-			self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
+		answer = answer and answer[1]
+		if answer == "AT":
+			addAutotimerFromEvent(self.session,evt=event,service=serviceref)
+		elif answer == "NT":
+			for timer in self.session.nav.RecordTimer.timer_list:
+				if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
+					cb_func = lambda ret : not ret or self.removeTimer(timer)
+					self.session.openWithCallback(cb_func, MessageBox, _("Do you really want to delete %s?") % event.getEventName())
+					break
+			else:
+				newEntry = RecordTimerEntry(serviceref, checkOldTimers = True, *parseEvent(event))
+				self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
+		elif answer == "ATV":
+			AutoTimerView(self.session)
 
 	def removeTimer(self, timer):
 		timer.afterEvent = AFTEREVENT.NONE
