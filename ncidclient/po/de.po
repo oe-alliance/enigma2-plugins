@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: nigma2-plugin-extensions-ncidclient\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-22 18:04+0100\n"
-"PO-Revision-Date: 2010-10-22 18:18+0100\n"
+"PO-Revision-Date: 2010-10-22 21:51+0100\n"
 "Last-Translator: Stephan Reichholf <stephan@reichholf.net>\n"
 "Language-Team: Stephan Reichholf <stephan@reichholf.net>\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,7 @@ msgstr "Nummer"
 
 #: V:\eclipse\workspaces\pydev\enigma2-plugins\enigma2-plugins\ncidclient\src/plugin.py:600
 msgid "Add entry to phonebook"
-msgstr "Eintrzu zu Telefonbuch hinzufügen"
+msgstr "Eintrag zu Telefonbuch hinzufügen"
 
 #: V:\eclipse\workspaces\pydev\enigma2-plugins\enigma2-plugins\ncidclient\src/plugin.py:608
 msgid "Entry incomplete."
@@ -163,7 +163,7 @@ msgstr "NCID Server (Name oder IP)"
 
 #: V:\eclipse\workspaces\pydev\enigma2-plugins\enigma2-plugins\ncidclient\src/plugin.py:733
 msgid "NCID server listening port (1-65535)"
-msgstr "NCID Server listening Port (1-65535)"
+msgstr "NCID Server Port (1-65535)"
 
 #: V:\eclipse\workspaces\pydev\enigma2-plugins\enigma2-plugins\ncidclient\src/plugin.py:735
 msgid "Show after Standby"
@@ -179,7 +179,7 @@ msgstr "Anzeigedauer für Anrufbenachrichtigungen (Sekunden)"
 
 #: V:\eclipse\workspaces\pydev\enigma2-plugins\enigma2-plugins\ncidclient\src/plugin.py:740
 msgid "Reverse Lookup Caller ID (select country below)"
-msgstr "Reverselookup für eingehende Anrufe"
+msgstr "Rückwärtssuche für eingehende Anrufe"
 
 #: V:\eclipse\workspaces\pydev\enigma2-plugins\enigma2-plugins\ncidclient\src/plugin.py:742
 msgid "Country"
@@ -268,5 +268,5 @@ msgstr ""
 
 #: V:\eclipse\workspaces\pydev\enigma2-plugins\enigma2-plugins\ncidclient\src/plugin.py:1102
 msgid "Display Fon calls on screen"
-msgstr ""
+msgstr "Anrufe auf dem Fernseher anzeigen"
 
