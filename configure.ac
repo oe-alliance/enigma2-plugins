@@ -243,6 +243,11 @@ networkbrowser/src/Makefile
 networkbrowser/src/icons/Makefile
 networkbrowser/src/lib/Makefile
 
+ncidclient/Makefile
+ncidclient/meta/Makefile
+ncidclient/po/Makefile
+ncidclient/src/Makefile
+
 ofdb/Makefile
 ofdb/meta/Makefile
 ofdb/po/Makefile

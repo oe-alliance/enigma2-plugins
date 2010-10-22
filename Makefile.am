@@ -42,6 +42,7 @@ SUBDIRS = \
 	movietagger \
 	multirc \
 	mytube \
+	ncidclient \
 	netcaster \
 	networkbrowser \
 	ofdb \
