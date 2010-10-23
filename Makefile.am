@@ -8,7 +8,7 @@ SUBDIRS = \
 	autoresolution \
 	autotimer \
 	babelzapper \
-	bitrateviewer
+	bitrateviewer \
 	bonjour \
 	cdinfo \
 	dreamirc \
