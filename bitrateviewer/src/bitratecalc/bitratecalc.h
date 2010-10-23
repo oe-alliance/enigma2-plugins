@@ -29,7 +29,7 @@
 class eBitrateCalc: public Object
 {
 private:
-	unsigned int m_size;
+	unsigned long long m_size;
 	int m_refresh_intervall;
 	struct timespec m_start;
 	ePtr<iDVBPESReader> m_reader;
