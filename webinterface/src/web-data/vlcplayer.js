@@ -73,29 +73,32 @@ function incomingVLCSubservices(request){
 		var services = new ServiceList(getXML(request)).getArray();
 		debug("[incomincVLCSubservices] Got " + services.length + " SubServices");
 		
-		if(services.length > 1) {
+		if(services.length > 1) {			
+			var masterref = $(services[0].servicereference);
+			var lastoption = masterref;
 
-			var first = services[0];
-			
-			var lastoption = $(services[0].servicereference);
 			
 			if(lastoption !== null){
 				// we already have the main service in our servicelist so we'll
 				// start with the second element
+				// to avoid crazy things happening, just check it's not the master-service we've gotten
+				
 				for ( var i = 1; i < services.length ; i++){
 					var service = services[i];
 					
 					//TODO: FIX THIS UGLY CODE
-					var option = $(service.servicereference);
-					if(option !== null){
-						option.remove();
+					if(service.servicereference != masterref){
+						var option = $(service.servicereference);
+						if(option !== null){
+							option.remove();
+						}
+						option = new Option(' |- ' + service.servicename);
+						option.id =  service.servicereference;
+						
+						lastoption.insert( { after : option } );
+						
+						lastoption = option;
 					}
-					option = new Option(' |- ' + service.servicename);
-					option.id =  service.servicereference;
-					
-					lastoption.insert( { after : option } );
-					
-					lastoption = option;
 				}
 			}
 		}
@@ -224,6 +227,7 @@ function vlcTeletext() {
 function playUrl(url) {
 	current = vlc.playlist.add(url);
 	vlc.playlist.playItem(current);
+	set('vlcVolume', vlc.audio.volume);
 }
 
 function setStreamTarget(servicereference) {
