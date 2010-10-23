@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Dr.Best</author>
+                    <name>BitrateViewer</name>
+                    <packagename>enigma2-plugin-extensions-bitrateviewer</packagename>
+                    <shortdescription>Shows average bitrate of video and audio</shortdescription>
+                    <description>Shows average bitrate of video and audio</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/bitrateviewer.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="nigma2-plugin-extensions-bitrateviewer" />
+	  </files>
+</default>

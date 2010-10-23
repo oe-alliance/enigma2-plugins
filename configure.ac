@@ -67,6 +67,11 @@ babelzapper/etc/Makefile
 babelzapper/meta/Makefile
 babelzapper/src/Makefile
 
+bitrateviewer/Makefile
+bitrateviewer/meta/Makefile
+bitrateviewer/src/Makefile
+bitrateviewer/src/bitratecalc/Makefile
+
 bonjour/Makefile
 bonjour/meta/Makefile
 bonjour/src/Makefile
