@@ -18,12 +18,23 @@ CONFIGS1 = [("100", _("DM8000-RC layer 1")),
 	     ("400", _("DM8000-RC layer 3")),
 	     ("800", _("DM8000-RC layer 4"))]
 
+CONFIGS2 = [("10000", _("Illuminated RC layer 1")),
+	    ("20000", _("Illuminated RC layer 2")),
+	    ("40000", _("Illuminated RC layer 3")),
+	    ("80000", _("Illuminated RC layer 4"))]
+
 # config file for IR mask, default is DM7025 or later, fallback to DM500/600
 # new-gen boxes also support DM8000 RCs via mask1
 MASK = "/proc/stb/ir/rc/mask0"
 if path.exists(MASK):
 	MASK1 = "/proc/stb/ir/rc/mask1"
 	CONFIGS += CONFIGS1
+	MASK2 = "/proc/stb/ir/rc/mask2"
+	# check for mask2 (RCU, only on newer kernels)
+	if path.exists(MASK2):
+		CONFIGS += CONFIGS2
+	else:
+		MASK2 = None
 else:
 	MASK = "/proc/stb/ir/rc/mask"
 
@@ -85,32 +96,35 @@ Information about re-configuring the RC is available at http://www.dream-multime
 		set_mask()
 		self.close()
 
+def write_mask(fname, value):
+	print "MultiRC:", fname, value
+	f = open(fname, "w")
+	f.write(value)
+	f.close()
+
 def set_mask(mask=None):
 	if not mask:
 		mask = config.plugins.MultiRC.mask.value
 	try:
-		# for two-mask boxes, we have to separate
-		# old-rc values (1..8) to mask0 and new-rc
-		# values (100..800) to mask1. the special
-		# case "any RC" (f) must be set to both.
-		if MASK1:
-			if mask == "f":
-				mask1 = "f00"
-			elif int(mask, 16) >= 0x100:
-				mask1 = mask
-				mask = "0"
-			else:
-				mask1 = "0"
-			print "mask1", mask1
-			f = open(MASK1, "w")
-			f.write(mask1)
-			f.close()
+		# we have to separate old-rc values (1..8) to mask0,
+		# DM8000-RC values (100..800) to mask1 and Illuminated RC
+		# values (10000..80000) to mask2. The special
+		# case "any RC" (f) must be set to all three.
+		if mask == "f":
+			mask = "0f0f0f"
+		v = "000000" + mask
+		mask0 = v[-2:]		# last two digits
+		mask1 = v[-4:-2] + "00"	# four digits (WTF?)
+		mask2 = v[-6:-4]	# first two, if available
 
-		print "mask0", mask
-		f = open(MASK, "w")
-		f.write(mask)
-		f.close()
+		write_mask(MASK, mask0)
+		if MASK1:
+			write_mask(MASK1, mask1)
+		if MASK2:
+			write_mask(MASK2, mask2)
+
 	except Exception, e:
+		print "MultiRC failed:", e
 		return False
 	return True
 
