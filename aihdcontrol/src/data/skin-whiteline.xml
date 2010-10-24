@@ -138,7 +138,7 @@
 		<widget backgroundColor="#08202529" borderWidth="0" pixmap="Ai.HD/pbarG2.png" position="65,129" render="Progress" size="1150,8" source="session.Event_Now" transparent="1" zPosition="2">
 				<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" position="1100,90" render="vhdRendVideoSize" size="101,22" source="session.CurrentService" transparent="1" valign="top" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" position="1100,90" render="vhdRendVideoSize" size="130,22" source="session.CurrentService" transparent="1" valign="top" zPosition="1"/>
 		<widget alphatest="on" pixmap="Ai.HD/ico_dolby_on.png" position="830,88" render="Pixmap" size="60,24" source="session.CurrentService" zPosition="2">
 			<convert type="ServiceInfo">IsMultichannel</convert>
 			<convert type="ConditionalShowHide"/>
