@@ -37,6 +37,14 @@ msgstr ""
 msgid "older than 2 weeks"
 msgstr ""
 
+#: ../src/plugin.py:36
+msgid "older than 4 weeks"
+msgstr ""
+
+#: ../src/plugin.py:36
+msgid "older than 6 weeks"
+msgstr ""
+
 #: ../src/plugin.py:49
 #: ../src/plugin.py:122
 #: ../src/plugin.py:125
