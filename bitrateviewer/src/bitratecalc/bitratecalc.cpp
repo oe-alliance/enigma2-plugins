@@ -227,32 +227,51 @@ static const unsigned char tpm_root_mod[128] = {
 
 static bool signature()
 {
-  	eTPM tpm;
-	unsigned char rnd[CLEN];
-	/* read random bytes */
-	if (!read_random(rnd, CLEN))
-		return 1;
-	unsigned char level2_mod[128];
-	unsigned char level3_mod[128];
-	unsigned char buf[128];
-	std::string challenge((char*)rnd, CLEN);
-	std::string response = tpm.challenge(challenge);
-	unsigned int len = response.size();
-	unsigned char val[len];
-	if ( len != 128 )
-		return false;
-	memcpy(val, response.c_str(), len);
-	std::string cert = tpm.getCert(eTPM::TPMD_DT_LEVEL2_CERT);
-	if ( cert.size() != 210 || !validate_cert(level2_mod, (const unsigned char*) cert.c_str(), tpm_root_mod))
-		return false;
-	cert = tpm.getCert(eTPM::TPMD_DT_LEVEL3_CERT);
-	if ( cert.size() != 210 || !validate_cert(level3_mod, (const unsigned char*) cert.c_str(), level2_mod))
-		return false;
-	if (!decrypt_block(buf, val, 128, level3_mod))
-		return false;
-	if (memcmp(&buf[80], rnd, CLEN))
-		return false;
-	return true;
+	int chk = 1;
+	FILE *fp; 
+	fp = fopen ("/proc/stb/info/model", "r");
+	if (fp)
+	{
+		char line[256];
+		int n;
+		fgets(line, sizeof(line), fp);
+ 		if ((n = strlen(line)) && line[n - 1] == '\n')
+		         line[n - 1] = '\0';
+		fclose(fp);
+		if (strstr(line,"dm7025"))
+			chk = 0;
+	}
+	if (chk)
+	{
+	  	eTPM tpm;
+		unsigned char rnd[CLEN];
+		/* read random bytes */
+		if (!read_random(rnd, CLEN))
+			return 1;
+		unsigned char level2_mod[128];
+		unsigned char level3_mod[128];
+		unsigned char buf[128];
+		std::string challenge((char*)rnd, CLEN);
+		std::string response = tpm.challenge(challenge);
+		unsigned int len = response.size();
+		unsigned char val[len];
+		if ( len != 128 )
+			return false;
+		memcpy(val, response.c_str(), len);
+		std::string cert = tpm.getCert(eTPM::TPMD_DT_LEVEL2_CERT);
+		if ( cert.size() != 210 || !validate_cert(level2_mod, (const unsigned char*) cert.c_str(), tpm_root_mod))
+			return false;
+		cert = tpm.getCert(eTPM::TPMD_DT_LEVEL3_CERT);
+		if ( cert.size() != 210 || !validate_cert(level3_mod, (const unsigned char*) cert.c_str(), level2_mod))
+			return false;
+		if (!decrypt_block(buf, val, 128, level3_mod))
+			return false;
+		if (memcmp(&buf[80], rnd, CLEN))
+			return false;
+		return true;
+	}
+	else
+		return true;
 }
 
 // eBitrateCalculator replacement
