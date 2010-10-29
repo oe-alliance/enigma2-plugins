@@ -35,7 +35,8 @@ class MP(Source):
 		elif func is self.REMOVE:
 			self.result = self.removeFile(cmd)
 		elif func is self.ADD:
-			self.result = self.addFile(cmd)
+			param = { "file" : cmd, "root" : None}
+			self.result = self.addFile(param)
 
 	def tryOpenMP(self, noCreate = False):
 		# check if there is an active link
