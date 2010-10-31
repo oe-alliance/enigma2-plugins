@@ -128,7 +128,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
                 if self.mountinfo.has_key('options'):
                         options = self.mountinfo['options']
                 else:
-                        options = "rw,nolock"
+                        options = "rw,nolock,tcp"
                 if self.mountinfo.has_key('username'):
                         username = self.mountinfo['username']
                 else:
@@ -151,7 +151,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
                         sharedir = "/export/hdd"
                 if options is False:
                         if mounttype == "nfs":
-                                options = "rw,nolock"
+                                options = "rw,nolock,tcp"
                         else:
                                 options = "rw"
                 if username is False:
@@ -188,7 +188,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
                 if self.mounttypeConfigEntry.value == "cifs":
                         self.optionsConfigEntry = NoSave(ConfigText(default = "rw", visible_width = 50, fixed_size = False))
                 else:
-                        self.optionsConfigEntry = NoSave(ConfigText(default = "rw,nolock", visible_width = 50, fixed_size = False))
+                        self.optionsConfigEntry = NoSave(ConfigText(default = "rw,nolock,tcp", visible_width = 50, fixed_size = False))
                 self.optionsEntry = getConfigListEntry(_("Mount options"), self.optionsConfigEntry)
                 self.list.append(self.optionsEntry)
                 if self.mounttypeConfigEntry.value == "cifs":

@@ -59,7 +59,7 @@ class AutoMount():
 					data['ip'] = getValue(mount.findall("ip"), "192.168.0.0").encode("UTF-8")
 					data['sharedir'] = getValue(mount.findall("sharedir"), "/exports/").encode("UTF-8")
 					data['sharename'] = getValue(mount.findall("sharename"), "MEDIA").encode("UTF-8")
-					data['options'] = getValue(mount.findall("options"), "rw,nolock").encode("UTF-8")
+					data['options'] = getValue(mount.findall("options"), "rw,nolock,tcp").encode("UTF-8")
 					print "NFSMOUNT",data
 					self.automounts[data['sharename']] = data
 				except Exception, e:
@@ -433,7 +433,7 @@ class AutoMount_Unused:
 				if tmpsharedir[-1:] == "$":
 					tmpdir = tmpsharedir.replace("$", "\\$")
 					tmpsharedir = tmpdir
-				nfscmd = 'mount -o nolock -t nfs ' + data['ip'] + ':' + tmpsharedir + ' ' + path
+				nfscmd = 'mount -o nolock,tcp -t nfs ' + data['ip'] + ':' + tmpsharedir + ' ' + path
 				print "[AutoMount.py] nfsscmd--->",nfscmd
 				self.MountConsole.ePopen(nfscmd, self.CheckMountPointFinished, [data, callback])
 			if data['mounttype'] == 'cifs' and data['active'] is True:
