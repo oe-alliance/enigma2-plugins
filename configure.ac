@@ -94,6 +94,10 @@ dyndns/Makefile
 dyndns/src/Makefile
 dyndns/meta/Makefile
 
+easymedia/Makefile
+easymedia/meta/Makefile
+easymedia/src/Makefile
+
 eibox/Makefile
 eibox/meta/Makefile
 eibox/po/Makefile

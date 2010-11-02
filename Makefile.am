@@ -14,6 +14,7 @@ SUBDIRS = \
 	dreamirc \
 	dvdbackup \
 	dyndns \
+	easymedia \
 	eibox \
 	elektro \
 	emailclient \
