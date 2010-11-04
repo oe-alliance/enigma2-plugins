@@ -81,8 +81,11 @@ def pvr(self):
 	MPaskList = [(_("Movies"), "PLAYMOVIES"),
 				(_("Pictures"), "PICTURES"),
 				(_("Music"), "MUSIC"),
+				(_("DVD Player"), "DVD"),
 				(_("Weather"), "WEATHER"),
-				(_("Files"), "FILES")]
+				(_("Files"), "FILES"),
+				(_("SHOUTcast"), "SHOUTCAST"),
+				(_("MyTube Player"), "MYTUBE")]
 	self.session.openWithCallback(MPcallbackFunc, EasyMedia, list=MPaskList)
 
 
@@ -111,13 +114,13 @@ class MPanelList(MenuList):
 
 class EasyMedia(Screen):
 	skin = """
-	<screen position="center,center" size="420,320" title="Easy Media">
-		<widget name="list" position="10,10" size="400,300" scrollbarMode="showOnDemand" />
+	<screen position="center,center" size="420,380" title="Easy Media">
+		<widget name="list" position="10,10" size="400,360" scrollbarMode="showOnDemand" />
 	</screen>"""
 	def __init__(self, session, list = []):
 		Screen.__init__(self, session)
 		self.list = []
-		self.__keys = [ "movies", "pictures", "music", "weather", "files" ] #+ (len(list) - 4) * [""]
+		self.__keys = [ "movies", "pictures", "music", "dvd", "weather", "files", "shoutcast", "mytube" ]
 		self.keymap = {}
 		pos = 0
 		for x in list:
@@ -174,7 +177,10 @@ def MPcallbackFunc(answer):
 		else:
 			EMsession.open(MessageBox, text = _('No Music-Player installed!'), type = MessageBox.TYPE_ERROR)
 	elif answer == "FILES":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/plugin.pyo"):
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Tuxcom/plugin.pyo"):
+			from Plugins.Extensions.Tuxcom.plugin import TuxComStarter
+			EMsession.open(TuxComStarter)
+		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/plugin.pyo"):
 			from Plugins.Extensions.DreamExplorer.plugin import DreamExplorerII
 			EMsession.open(DreamExplorerII)
 		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Filebrowser/plugin.pyo"):
@@ -188,6 +194,24 @@ def MPcallbackFunc(answer):
 			EMsession.open(WeatherPlugin)
 		else:
 			EMsession.open(MessageBox, text = _('Weather Plugin is not installed!'), type = MessageBox.TYPE_ERROR)
+	elif answer == "DVD":
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/DVDPlayer/plugin.pyo"):
+			from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
+			EMsession.open(DVDPlayer)
+		else:
+			EMsession.open(MessageBox, text = _('DVDPlayer Plugin is not installed!'), type = MessageBox.TYPE_ERROR)
+	elif answer == "MYTUBE":
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MyTube/plugin.pyo"):
+			from Plugins.Extensions.MyTube.plugin import *
+			MyTubeMain(EMsession)
+		else:
+			EMsession.open(MessageBox, text = _('MyTube Plugin is not installed!'), type = MessageBox.TYPE_ERROR)
+	elif answer == "SHOUTCAST":
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/plugin.pyo"):
+			from Plugins.Extensions.SHOUTcast.plugin import SHOUTcastWidget
+			EMsession.open(SHOUTcastWidget)
+		else:
+			EMsession.open(MessageBox, text = _('SHOUTcast Plugin is not installed!'), type = MessageBox.TYPE_ERROR)
 	
 
 
