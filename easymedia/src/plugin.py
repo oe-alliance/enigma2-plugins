@@ -43,7 +43,8 @@ EMsession = None
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = EasyMediaAutostart)]
+	return [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = EasyMediaAutostart),
+			PluginDescriptor(name="EasyMedia", description=_("Not easy way to start EasyMedia"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=notEasy),]
 
 
 
@@ -79,6 +80,11 @@ def InfoBarPlugins__init__(self):
 
 def pvr(self):
 	self.session.openWithCallback(MPcallbackFunc, EasyMedia)
+
+
+
+def notEasy(session, **kwargs):
+	session.openWithCallback(MPcallbackFunc, EasyMedia)
 
 
 
