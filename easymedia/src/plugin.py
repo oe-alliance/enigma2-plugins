@@ -32,7 +32,7 @@ from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Tools.Directories import fileExists
 from Tools.LoadPixmap import LoadPixmap
-from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont
+from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getDesktop
 
 
 
@@ -78,15 +78,7 @@ def InfoBarPlugins__init__(self):
 
 
 def pvr(self):
-	MPaskList = [(_("Movies"), "PLAYMOVIES"),
-				(_("Pictures"), "PICTURES"),
-				(_("Music"), "MUSIC"),
-				(_("DVD Player"), "DVD"),
-				(_("Weather"), "WEATHER"),
-				(_("Files"), "FILES"),
-				(_("SHOUTcast"), "SHOUTCAST"),
-				(_("MyTube Player"), "MYTUBE")]
-	self.session.openWithCallback(MPcallbackFunc, EasyMedia, list=MPaskList)
+	self.session.openWithCallback(MPcallbackFunc, EasyMedia)
 
 
 
@@ -113,27 +105,59 @@ class MPanelList(MenuList):
 
 
 class EasyMedia(Screen):
-	skin = """
-	<screen position="center,center" size="420,380" title="Easy Media">
-		<widget name="list" position="10,10" size="400,360" scrollbarMode="showOnDemand" />
-	</screen>"""
-	def __init__(self, session, list = []):
+	sz_w = getDesktop(0).size().width()
+	if sz_w > 1100:
+		skin = """
+		<screen flags="wfNoBorder" position="0,0" size="450,720" title="Easy Media">
+			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/bg.png" position="0,0" size="450,576"/>
+			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/bg.png" position="0,576" size="450,145"/>
+			<widget name="list" position="60,30" size="350,660" scrollbarMode="showNever" transparent="1" zPosition="2"/>
+		</screen>"""
+	elif sz_w > 1000:
+		skin = """
+		<screen flags="wfNoBorder" position="-20,0" size="450,576" title="Easy Media">
+			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/bg.png" position="0,0" size="450,576"/>
+			<widget name="list" position="70,48" size="320,480" scrollbarMode="showNever" transparent="1" zPosition="2"/>
+		</screen>"""
+	else:
+		skin = """
+		<screen position="center,center" size="320,440" title="Easy Media">
+			<widget name="list" position="10,10" size="300,420" scrollbarMode="showOnDemand" />
+		</screen>"""
+	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
-		self.__keys = [ "movies", "pictures", "music", "dvd", "weather", "files", "shoutcast", "mytube" ]
+		self.__keys = [ "movies", "pictures", "music", "weather", "files" ]
+		MPaskList = [(_("Movies"), "PLAYMOVIES"),(_("Pictures"), "PICTURES"),(_("Music"), "MUSIC"),(_("Weather"), "WEATHER"),(_("Files"), "FILES")]
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/DVDPlayer/plugin.pyo"):
+			self.__keys.append("dvd")
+			MPaskList.append((_("DVD Player"), "DVD"))
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/plugin.pyo"):
+			self.__keys.append("shoutcast")
+			MPaskList.append((_("SHOUTcast"), "SHOUTCAST"))
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MyTube/plugin.pyo"):
+			self.__keys.append("mytube")
+			MPaskList.append((_("MyTube Player"), "MYTUBE"))
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer/plugin.pyo"):
+			self.__keys.append("vlc")
+			MPaskList.append((_("VLC Player"), "VLC"))
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/plugin.pyo"):
+			self.__keys.append("zdf")
+			MPaskList.append((_("ZDFmediathek"), "ZDF"))
 		self.keymap = {}
 		pos = 0
-		for x in list:
+		for x in MPaskList:
 			strpos = str(self.__keys[pos])
 			self.list.append(MPanelEntryComponent(key = strpos, text = x))
 			if self.__keys[pos] != "":
-				self.keymap[self.__keys[pos]] = list[pos]
+				self.keymap[self.__keys[pos]] = MPaskList[pos]
 			pos += 1
 		self["list"] = MPanelList(list = self.list, selection = 0)
-		self["actions"] = ActionMap(["WizardActions"],
+		self["actions"] = ActionMap(["WizardActions", "EPGSelectActions"],
 		{
 			"ok": self.go,
-			"back": self.cancel
+			"back": self.cancel,
+			"showMovies": self.cancel
 		}, -1)
 
 	def cancel(self):
@@ -212,6 +236,18 @@ def MPcallbackFunc(answer):
 			EMsession.open(SHOUTcastWidget)
 		else:
 			EMsession.open(MessageBox, text = _('SHOUTcast Plugin is not installed!'), type = MessageBox.TYPE_ERROR)
+	elif answer == "ZDF":
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/plugin.pyo"):
+			from Plugins.Extensions.ZDFMediathek.plugin import ZDFMediathek
+			EMsession.open(ZDFMediathek)
+		else:
+			EMsession.open(MessageBox, text = _('ZDFmediathek Plugin is not installed!'), type = MessageBox.TYPE_ERROR)
+	elif answer == "VLC":
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer/plugin.pyo"):
+			from Plugins.Extensions.VlcPlayer.plugin import *
+			main(EMsession)
+		else:
+			EMsession.open(MessageBox, text = _('VLC Player is not installed!'), type = MessageBox.TYPE_ERROR)
 	
 
 
