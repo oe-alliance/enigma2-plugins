@@ -31,7 +31,7 @@ class Movie(Source):
 			elif self.func is self.LIST:
 				if cmd['dirname']:
 					self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + cmd['dirname'])
-				self.tagfilter = cmd['tag'] and [cmd['tag']] or []
+				self.tagfilter = cmd['tag'] and cmd['tag'].split(' ') or []
 
 	def delMovie(self, param):
 #		print "[WebComponents.delMovie] %s" %param
