@@ -26,7 +26,7 @@ from twisted.web.client import HTTPClientFactory
 from base64 import encodestring
 import xml.etree.cElementTree
 
-
+CurrentIP = None
 remote_timer_list = None
 oldIP = None
 
