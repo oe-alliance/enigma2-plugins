@@ -141,6 +141,9 @@ class EasyMedia(Screen):
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/plugin.pyo"):
 			self.__keys.append("shoutcast")
 			MPaskList.append((_("SHOUTcast"), "SHOUTCAST"))
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyo"):
+			self.__keys.append("idream")
+			MPaskList.append((_("iDream"), "IDREAM"))
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MyTube/plugin.pyo"):
 			self.__keys.append("mytube")
 			MPaskList.append((_("MyTube Player"), "MYTUBE"))
@@ -254,6 +257,13 @@ def MPcallbackFunc(answer):
 			main(EMsession)
 		else:
 			EMsession.open(MessageBox, text = _('VLC Player is not installed!'), type = MessageBox.TYPE_ERROR)
+	elif answer == "IDREAM":
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyo"):
+			from Plugins.Extensions.MerlinMusicPlayer.plugin import iDreamMerlin
+			servicelist = None
+			EMsession.open(iDreamMerlin, servicelist)
+		else:
+			EMsession.open(MessageBox, text = _('Merlin iDream is not installed!'), type = MessageBox.TYPE_ERROR)
 	
 
 
