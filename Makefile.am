@@ -49,6 +49,7 @@ SUBDIRS = \
 	networkbrowser \
 	ofdb \
 	orfat \
+	orfteletext \
 	partnerbox \
 	passwordchanger \
 	permanentclock \

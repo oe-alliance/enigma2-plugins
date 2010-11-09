@@ -266,6 +266,10 @@ orfat/Makefile
 orfat/meta/Makefile
 orfat/src/Makefile
 
+orfteletext/Makefile
+orfteletext/meta/Makefile
+orfteletext/src/Makefile
+
 partnerbox/Makefile
 partnerbox/meta/Makefile
 partnerbox/po/Makefile
