@@ -39,6 +39,7 @@ from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getDesktop
 EMbaseInfoBarPlugins__init__ = None
 EMStartOnlyOneTime = False
 EMsession = None
+InfoBar_instance = None
 
 
 
@@ -62,6 +63,8 @@ def EasyMediaAutostart(reason, **kwargs):
 
 def InfoBarPlugins__init__(self):
 	global EMStartOnlyOneTime
+	global InfoBar_instance
+	InfoBar_instance = self
 	if not EMStartOnlyOneTime: 
 		EMStartOnlyOneTime = True
 		self["EasyMediaActions"] = ActionMap(["EasyMediaActions"],
@@ -191,8 +194,8 @@ class EasyMedia(Screen):
 def MPcallbackFunc(answer):
 	answer = answer and answer[1]
 	if answer == "PLAYMOVIES":
-		if InfoBar and InfoBar.instance:
-			InfoBar.showMovies(InfoBar.instance)
+		if InfoBar_instance:
+			InfoBar_instance.showMovies()
 	elif answer == "PICTURES":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer/plugin.pyo"):
 			from Plugins.Extensions.PicturePlayer.plugin import picshow
