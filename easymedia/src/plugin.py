@@ -65,23 +65,18 @@ def InfoBarPlugins__init__(self):
 	global EMStartOnlyOneTime
 	if not EMStartOnlyOneTime: 
 		EMStartOnlyOneTime = True
+		global InfoBar_instance
+		InfoBar_instance = self
 		self["EasyMediaActions"] = ActionMap(["EasyMediaActions"],
 			{"video_but": self.pvr}, -1)
 	else:
 		InfoBarPlugins.__init__ = InfoBarPlugins.__init__
-		InfoBarPlugins.green = None
-		InfoBarPlugins.yellow = None
-		InfoBarPlugins.red = None
-		InfoBarPlugins.blue = None
 		InfoBarPlugins.pvr = None
-		InfoBarPlugins.radio = None
 	EMbaseInfoBarPlugins__init__(self)
 
 
 
 def pvr(self):
-	global InfoBar_instance
-	InfoBar_instance = self
 	self.session.openWithCallback(MPcallbackFunc, EasyMedia)
 
 
