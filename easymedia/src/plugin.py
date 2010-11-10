@@ -63,8 +63,6 @@ def EasyMediaAutostart(reason, **kwargs):
 
 def InfoBarPlugins__init__(self):
 	global EMStartOnlyOneTime
-	global InfoBar_instance
-	InfoBar_instance = self
 	if not EMStartOnlyOneTime: 
 		EMStartOnlyOneTime = True
 		self["EasyMediaActions"] = ActionMap(["EasyMediaActions"],
@@ -82,6 +80,8 @@ def InfoBarPlugins__init__(self):
 
 
 def pvr(self):
+	global InfoBar_instance
+	InfoBar_instance = self
 	self.session.openWithCallback(MPcallbackFunc, EasyMedia)
 
 
