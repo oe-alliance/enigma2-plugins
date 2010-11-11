@@ -33,6 +33,14 @@ from Components.Label import Label
 from Tools.Directories import fileExists
 from enigma import ePicLoad, getDesktop
 from os import system as os_system
+from Components.config import config, ConfigSubsection, ConfigText, ConfigInteger
+
+
+
+config.plugins.ORFteletext = ConfigSubsection()
+config.plugins.ORFteletext.startHZ = ConfigInteger(default=100)
+config.plugins.ORFteletext.startNZ = ConfigInteger(default=1)
+config.plugins.ORFteletext.adr = ConfigText(default="ORF")
 
 
 
@@ -87,13 +95,13 @@ class ORFteletextScreen(Screen):
 		Screen.__init__(self, session)
 		self["seite"] = Label("100")
 		self["wohin"] = Label("")
-		self.seite = 100
+		self.seite = config.plugins.ORFteletext.startHZ.value
 		self.strseite = ""
-		self.subseite = 1
+		self.subseite = config.plugins.ORFteletext.startNZ.value
 		self.EXscale = (AVSwitch().getFramebufferScale())
 		self.EXpicload = ePicLoad()
 		self["Picture"] = Pixmap()
-		self["actions"] = NumberActionMap(["DirectionActions", "ColorActions", "OkCancelActions", "NumberActions"],
+		self["actions"] = NumberActionMap(["DirectionActions", "ColorActions", "OkCancelActions", "NumberActions", "EPGSelectActions"],
 		{
 			"ok": self.showMe,
 			"cancel": self.raus,
@@ -114,7 +122,8 @@ class ORFteletextScreen(Screen):
 			"red": self.rot,
 			"green": self.gruen,
 			"yellow": self.gelb,
-			"blue": self.blau
+			"blue": self.blau,
+			"info": self.Info
 		}, -1)
 		if fileExists("/tmp/bild"):
 			self.whatPic = "/tmp/bild"
@@ -138,6 +147,11 @@ class ORFteletextScreen(Screen):
 
 	def raus(self):
 		os_system("rm -f /tmp/bild")
+		config.plugins.ORFteletext.startHZ.value = self.seite
+		config.plugins.ORFteletext.startNZ.value = self.subseite
+		config.plugins.ORFteletext.adr.save()
+		config.plugins.ORFteletext.startHZ.save()
+		config.plugins.ORFteletext.startNZ.save()
 		self.close()
 
 	def lade2(self, hs, ns):
@@ -145,9 +159,12 @@ class ORFteletextScreen(Screen):
 		hz = str(hs)
 		lz = hz[0]
 		nz = str(ns)
-		adr = "http://teletext.orf.at/" + lz + "00/" + hz + "_000" + nz + ".png"
+		if config.plugins.ORFteletext.adr.value == "ORF":
+			adr = "http://teletext.orf.at/" + lz + "00/" + hz + "_000" + nz + ".png"
+		elif config.plugins.ORFteletext.adr.value == "SAT1":
+			adr = "http://www.sat1.at/service/teletext/cache_de/" + hz + "_0" + nz + ".png" 
 		neu = "wget -O /tmp/bild " + adr
-		self["seite"].setText(hz+"-"+nz)
+		self["seite"].setText(hz+"-"+nz+" at "+config.plugins.ORFteletext.adr.value)
 		os_system(neu)
 		if fileExists("/tmp/bild"):
 			self.whatPic = "/tmp/bild"
@@ -208,25 +225,36 @@ class ORFteletextScreen(Screen):
 		self.lade2(self.seite,self.subseite)
 
 	def gruen(self):
-		self.seite = 600
+		if config.plugins.ORFteletext.adr.value == "ORF":
+			self.seite = 600
+		elif config.plugins.ORFteletext.adr.value == "SAT1":
+			self.seite = 150
 		self.subseite = 1
 		self.lade2(self.seite,self.subseite)
-
 	def gelb(self):
 		self.seite = 200
 		self.subseite = 1
 		self.lade2(self.seite,self.subseite)
 
 	def blau(self):
-		self.seite = 890
+		if config.plugins.ORFteletext.adr.value == "ORF":
+			self.seite = 890
+		elif config.plugins.ORFteletext.adr.value == "SAT1":
+			self.seite = 104
 		self.subseite = 1
 		self.lade2(self.seite,self.subseite)
-	
+			
 
-
-
-
-
+	def Info(self):
+		if config.plugins.ORFteletext.adr.value == "ORF":
+			config.plugins.ORFteletext.adr.value = "SAT1"
+			config.plugins.ORFteletext.adr.save()
+		else:
+			config.plugins.ORFteletext.adr.value = "ORF"
+			config.plugins.ORFteletext.adr.save()
+		self.seite = 100
+		self.subseite = 1
+		self.showMe()
 
 
 

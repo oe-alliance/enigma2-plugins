@@ -6,8 +6,8 @@
                     <author>Vali</author>
                     <name>ORFteletext</name>
                     <packagename>enigma2-plugin-extensions-orfteletext</packagename>
-                    <shortdescription>Browse ORF Teletext independent from channel. This need I-net conection.</shortdescription>
-                    <description>Browse ORF Teletext independent from channel. This need I-net conection.</description>
+                    <shortdescription>Browse ORF and SAT1 Teletext independent from channel. This need I-net conection.</shortdescription>
+                    <description>Browse ORF and SAT1 Teletext independent from channel. This need I-net conection.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_orfteletext.jpg" />		    
           </info>
 
