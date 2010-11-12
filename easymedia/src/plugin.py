@@ -27,9 +27,11 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.InfoBarGenerics import InfoBarPlugins
 from Screens.InfoBar import InfoBar
+from Screens.ChoiceBox import ChoiceBox
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
+from Components.config import config
 from Tools.Directories import fileExists
 from Tools.LoadPixmap import LoadPixmap
 from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getDesktop
@@ -108,6 +110,16 @@ class MPanelList(MenuList):
 
 
 
+def BookmarksCallback(choice):
+	choice = choice and choice[1]
+	if choice:
+		config.movielist.last_videodir.value = choice
+		config.movielist.last_videodir.save()
+		if InfoBar_instance:
+			InfoBar_instance.showMovies()
+
+
+
 class EasyMedia(Screen):
 	sz_w = getDesktop(0).size().width()
 	if sz_w > 1100:
@@ -131,11 +143,17 @@ class EasyMedia(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
-		self.__keys = [ "movies", "pictures", "music", "weather", "files" ]
-		MPaskList = [(_("Movies"), "PLAYMOVIES"),(_("Pictures"), "PICTURES"),(_("Music"), "MUSIC"),(_("Weather"), "WEATHER"),(_("Files"), "FILES")]
+		self.__keys = [ "movies", "bookmarks", "pictures", "music" ]
+		MPaskList = [(_("Movies"), "PLAYMOVIES"),(_("Bookmarks"), "BOOKMARKS"),(_("Pictures"), "PICTURES"),(_("Music"), "MUSIC")]
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/DVDPlayer/plugin.pyo"):
 			self.__keys.append("dvd")
 			MPaskList.append((_("DVD Player"), "DVD"))
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/plugin.pyo"):
+			self.__keys.append("weather")
+			MPaskList.append((_("Weather"), "WEATHER"))
+		if True:
+			self.__keys.append("files")
+			MPaskList.append((_("Files"), "FILES"))
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/plugin.pyo"):
 			self.__keys.append("shoutcast")
 			MPaskList.append((_("SHOUTcast"), "SHOUTCAST"))
@@ -160,11 +178,10 @@ class EasyMedia(Screen):
 				self.keymap[self.__keys[pos]] = MPaskList[pos]
 			pos += 1
 		self["list"] = MPanelList(list = self.list, selection = 0)
-		self["actions"] = ActionMap(["WizardActions", "EPGSelectActions"],
+		self["actions"] = ActionMap(["WizardActions"],
 		{
 			"ok": self.go,
-			"back": self.cancel,
-			"showMovies": self.cancel
+			"back": self.cancel
 		}, -1)
 
 	def cancel(self):
@@ -191,6 +208,14 @@ def MPcallbackFunc(answer):
 	if answer == "PLAYMOVIES":
 		if InfoBar_instance:
 			InfoBar_instance.showMovies()
+	elif answer == "BOOKMARKS":
+		tmpBookmarks = config.movielist.videodirs
+		myBookmarks = tmpBookmarks and tmpBookmarks.value[:] or []
+		if len(myBookmarks)>0:
+			askBM = []
+			for s in myBookmarks:
+				askBM.append((s, s))
+			EMsession.openWithCallback(BookmarksCallback, ChoiceBox, title="Select bookmark...", list = askBM)
 	elif answer == "PICTURES":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer/plugin.pyo"):
 			from Plugins.Extensions.PicturePlayer.plugin import picshow
@@ -262,6 +287,17 @@ def MPcallbackFunc(answer):
 			EMsession.open(iDreamMerlin, servicelist)
 		else:
 			EMsession.open(MessageBox, text = _('Merlin iDream is not installed!'), type = MessageBox.TYPE_ERROR)
-	
+
+
+
+
+
+
+
+
+
+
+
+
 
 
