@@ -31,7 +31,8 @@ from Screens.ChoiceBox import ChoiceBox
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
-from Components.config import config
+from Components.ConfigList import ConfigListScreen
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection
 from Tools.Directories import fileExists
 from Tools.LoadPixmap import LoadPixmap
 from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getDesktop
@@ -42,6 +43,20 @@ EMbaseInfoBarPlugins__init__ = None
 EMStartOnlyOneTime = False
 EMsession = None
 InfoBar_instance = None
+
+
+
+config.plugins.easyMedia  = ConfigSubsection()
+config.plugins.easyMedia.music = ConfigSelection(default="mediaplayer", choices = [("no", _("Disabled")), ("mediaplayer", _("MediaPlayer")), ("merlinmp", _("MerlinMusicPlayer"))])
+config.plugins.easyMedia.files = ConfigSelection(default="dreamexplorer", choices = [("no", _("Disabled")), ("filebrowser", _("Filebrowser")), ("dreamexplorer", _("DreamExplorer")), ("tuxcom", _("TuxCom"))])
+config.plugins.easyMedia.bookmarks = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.mytube = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.vlc = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.dvd = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.weather = ConfigSelection(default="yes", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.iradio = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.idream = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.zdfmedia = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 
 
 
@@ -120,6 +135,41 @@ def BookmarksCallback(choice):
 
 
 
+class ConfigEasyMedia(ConfigListScreen, Screen):
+	skin = """
+		<screen name="ConfigEasyMedia" position="center,center" size="600,410" title="EasyMedia settings...">
+			<widget name="config" position="5,5" scrollbarMode="showOnDemand" size="590,380"/>
+			<eLabel font="Regular;20" foregroundColor="#00ff4A3C" halign="center" position="20,388" size="120,26" text="Cancel"/>
+			<eLabel font="Regular;20" foregroundColor="#0056C856" halign="center" position="165,388" size="120,26" text="Save"/>
+		</screen>"""
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		list = []
+		list.append(getConfigListEntry(_("Music player:"), config.plugins.easyMedia.music))
+		list.append(getConfigListEntry(_("Files browser:"), config.plugins.easyMedia.files))
+		list.append(getConfigListEntry(_("Show bookmarks:"), config.plugins.easyMedia.bookmarks))
+		list.append(getConfigListEntry(_("YouTube player:"), config.plugins.easyMedia.mytube))
+		list.append(getConfigListEntry(_("VLC player:"), config.plugins.easyMedia.vlc))
+		list.append(getConfigListEntry(_("DVD player:"), config.plugins.easyMedia.dvd))
+		list.append(getConfigListEntry(_("Weather plugin:"), config.plugins.easyMedia.weather))
+		list.append(getConfigListEntry(_("NetRadio player:"), config.plugins.easyMedia.iradio))
+		list.append(getConfigListEntry(_("Show Merlin-iDream:"), config.plugins.easyMedia.idream))
+		list.append(getConfigListEntry(_("ZDFmediathek player:"), config.plugins.easyMedia.zdfmedia))
+		ConfigListScreen.__init__(self, list)
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {"green": self.save, "red": self.exit, "cancel": self.exit}, -1)
+
+	def save(self):
+		for x in self["config"].list:
+			x[1].save()
+		self.close()
+
+	def exit(self):
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close()
+
+
+
 class EasyMedia(Screen):
 	sz_w = getDesktop(0).size().width()
 	if sz_w > 1100:
@@ -142,31 +192,44 @@ class EasyMedia(Screen):
 		</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.session = session
 		self.list = []
-		self.__keys = [ "movies", "bookmarks", "pictures", "music" ]
-		MPaskList = [(_("Movies"), "PLAYMOVIES"),(_("Bookmarks"), "BOOKMARKS"),(_("Pictures"), "PICTURES"),(_("Music"), "MUSIC")]
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/DVDPlayer/plugin.pyo"):
+		self.__keys = []
+		MPaskList = []
+		if True:
+			self.__keys.append("movies")
+			MPaskList.append((_("Movies"), "PLAYMOVIES"))
+		if config.plugins.easyMedia.bookmarks.value != "no":
+			self.__keys.append("bookmarks")
+			MPaskList.append((_("Bookmarks"), "BOOKMARKS"))
+		if True:
+			self.__keys.append("pictures")
+			MPaskList.append((_("Pictures"), "PICTURES"))
+		if config.plugins.easyMedia.music.value != "no":
+			self.__keys.append("music")
+			MPaskList.append((_("Music"), "MUSIC"))
+		if config.plugins.easyMedia.dvd.value != "no":
 			self.__keys.append("dvd")
 			MPaskList.append((_("DVD Player"), "DVD"))
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/plugin.pyo"):
+		if config.plugins.easyMedia.weather.value != "no":
 			self.__keys.append("weather")
 			MPaskList.append((_("Weather"), "WEATHER"))
-		if True:
+		if config.plugins.easyMedia.files.value != "no":
 			self.__keys.append("files")
 			MPaskList.append((_("Files"), "FILES"))
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/plugin.pyo"):
+		if config.plugins.easyMedia.iradio.value != "no":
 			self.__keys.append("shoutcast")
 			MPaskList.append((_("SHOUTcast"), "SHOUTCAST"))
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyo"):
+		if config.plugins.easyMedia.idream.value != "no":
 			self.__keys.append("idream")
 			MPaskList.append((_("iDream"), "IDREAM"))
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MyTube/plugin.pyo"):
+		if config.plugins.easyMedia.mytube.value != "no":
 			self.__keys.append("mytube")
 			MPaskList.append((_("MyTube Player"), "MYTUBE"))
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer/plugin.pyo"):
+		if config.plugins.easyMedia.vlc.value != "no":
 			self.__keys.append("vlc")
 			MPaskList.append((_("VLC Player"), "VLC"))
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/ZDFMediathek/plugin.pyo"):
+		if config.plugins.easyMedia.zdfmedia.value != "no":
 			self.__keys.append("zdf")
 			MPaskList.append((_("ZDFmediathek"), "ZDF"))
 		self.keymap = {}
@@ -178,10 +241,11 @@ class EasyMedia(Screen):
 				self.keymap[self.__keys[pos]] = MPaskList[pos]
 			pos += 1
 		self["list"] = MPanelList(list = self.list, selection = 0)
-		self["actions"] = ActionMap(["WizardActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions"],
 		{
 			"ok": self.go,
-			"back": self.cancel
+			"back": self.cancel,
+			"menu": self.emContextMenu
 		}, -1)
 
 	def cancel(self):
@@ -200,6 +264,9 @@ class EasyMedia(Screen):
 			entry[2](arg)
 		else:
 			self.close(entry)
+
+	def emContextMenu(self):
+		self.session.open(ConfigEasyMedia)
 
 
 
@@ -223,23 +290,23 @@ def MPcallbackFunc(answer):
 		else:
 			EMsession.open(MessageBox, text = _('Picture-player is not installed!'), type = MessageBox.TYPE_ERROR)
 	elif answer == "MUSIC":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyo"):
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer/plugin.pyo") and (config.plugins.easyMedia.music.value == "merlinmp"):
 			from Plugins.Extensions.MerlinMusicPlayer.plugin import MerlinMusicPlayerFileList
 			servicelist = None
 			EMsession.open(MerlinMusicPlayerFileList, servicelist)
-		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPlayer/plugin.pyo"):
+		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPlayer/plugin.pyo") and (config.plugins.easyMedia.music.value == "mediaplayer"):
 			from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
 			EMsession.open(MediaPlayer)
 		else:
 			EMsession.open(MessageBox, text = _('No Music-Player installed!'), type = MessageBox.TYPE_ERROR)
 	elif answer == "FILES":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Tuxcom/plugin.pyo"):
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Tuxcom/plugin.pyo") and (config.plugins.easyMedia.files.value == "tuxcom"):
 			from Plugins.Extensions.Tuxcom.plugin import TuxComStarter
 			EMsession.open(TuxComStarter)
-		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/plugin.pyo"):
+		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/plugin.pyo") and (config.plugins.easyMedia.files.value == "dreamexplorer"):
 			from Plugins.Extensions.DreamExplorer.plugin import DreamExplorerII
 			EMsession.open(DreamExplorerII)
-		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Filebrowser/plugin.pyo"):
+		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Filebrowser/plugin.pyo") and (config.plugins.easyMedia.files.value == "filebrowser"):
 			from Plugins.Extensions.Filebrowser.plugin import FilebrowserScreen
 			EMsession.open(FilebrowserScreen)
 		else:
