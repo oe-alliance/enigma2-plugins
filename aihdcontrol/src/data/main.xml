@@ -1011,46 +1011,6 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 	
 	
 	<!-- ########## Suomipoeka ########## -->
-	<screen name="MovieSelectionSP" position="center,78" size="1024,576" title="Suomipoeka">
-		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="45,5" size="30,30"/>
-		<ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="290,5" size="30,30"/>
-		<ePixmap alphatest="on" pixmap="Ai.HD/yellow.png" position="535,5" size="30,30"/>
-		<ePixmap alphatest="on" pixmap="Ai.HD/blue.png" position="780,5" size="30,30"/>
-		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="left" name="key_red" position="80,0" size="180,40" transparent="1" valign="center" zPosition="2"/>
-		<widget backgroundColor="#266926" font="Regular;18" halign="left" name="key_green" position="325,0" size="180,40" transparent="1" valign="center" zPosition="2"/>
-		<widget backgroundColor="#8C5900" font="Regular;18" halign="left" name="key_yellow" position="570,0" size="180,40" transparent="1" valign="center" zPosition="2"/>
-		<widget backgroundColor="#254177" font="Regular;18" halign="left" name="key_blue" position="815,0" size="180,40" transparent="1" valign="center" zPosition="2"/>
-		<widget itemHeight="28" name="list" position="50,46" scrollbarMode="showOnDemand" size="924,308" zPosition="2"/>
-		<widget alphatest="on" name="DescriptionBorder" pixmap="skin_default/border_eventinfo.png" position="1400,600" size="560,103" transparent="1" zPosition="3"/>
-		<widget font="Regular;22" foregroundColor="secondFG" halign="left" position="50,360" render="Label" size="921,32" source="Service" valign="center" zPosition="1">
-			<convert type="MovieInfo">RecordServiceName</convert>
-		</widget>
-		<widget backgroundColor="background" font="Regular;18" foregroundColor="foreground" position="95,435" render="Label" size="824,26" source="Service" zPosition="1">
-			<convert type="MovieInfo">ShortDescription</convert>
-		</widget>
-		<widget font="Regular;16" foregroundColor="foreground" position="95,460" render="Label" size="824,92" source="Service" zPosition="1">
-			<convert type="EventName">ExtendedDescription</convert>
-		</widget>
-		<widget font="Regular;18" foregroundColor="grey" halign="right" position="675,395" render="Label" size="300,22" source="Service" zPosition="1">
-			<convert type="ServiceTime">StartTime</convert>
-			<convert type="ClockToText">Date</convert>
-		</widget>
-		<widget font="Regular;18" foregroundColor="grey" halign="left" position="525,400" render="Label" size="61,22" source="Service" zPosition="1">
-			<convert type="ServiceTime">StartTime</convert>
-			<convert type="ClockToText"/>
-		</widget>
-		<widget font="Regular;18" foregroundColor="grey" halign="left" position="585,400" render="Label" size="81,22" source="Service" zPosition="1">
-			<convert type="ServiceTime">EndTime</convert>
-			<convert type="ClockToText">Format:- %H:%M </convert>
-		</widget>
-		<widget font="Regular;20" foregroundColor="grey" halign="left" position="50,395" render="Label" size="181,30" source="Service" zPosition="1">
-			<convert type="ServiceTime">Duration</convert>
-			<convert type="ClockToText">AsLength</convert>
-		</widget>
-		<widget font="Regular;20" foregroundColor="grey" halign="left" name="FileSize" position="240,395" size="201,30" zPosition="1"/>
-		<eLabel backgroundColor="darkgrey" position="50,425" size="924,2" zPosition="5"/>
-	</screen>
-	
 	<screen name="SuomipoekaMenu" position="center,center" size="900,450" title="SuomipoekaMenu">
 		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="15,5" size="30,30"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/green.png" position="240,5" size="30,30"/>

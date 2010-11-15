@@ -932,47 +932,6 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
 
 
 	<!-- ########## Suomipoeka ########## -->
-	<screen flags="wfNoBorder" name="MovieSelectionSP" position="0,0" size="1024,576" title="Suomipoeka">
-		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,50" size="140,40" transparent="1"/>
-		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,50" size="140,40" transparent="1"/>
-		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,50" size="140,40" transparent="1"/>
-		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,50" size="140,40" transparent="1"/>
-		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,50" size="370,40" transparent="1"/>
-		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="50,50" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="190,50" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="330,50" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="470,50" size="140,40" transparent="1" valign="center" zPosition="2"/>		
-		<widget font="Replacement;16" foregroundColor="secondFG" halign="left" position="615,42" render="Label" size="350,54" source="Title" transparent="1" valign="center" zPosition="2"/>
-		<widget itemHeight="30" name="list" position="65,95" scrollbarMode="showOnDemand" size="894,300" zPosition="2"/>
-		<widget alphatest="on" name="DescriptionBorder" pixmap="skin_default/border_eventinfo.png" position="1100,450" size="560,103" transparent="1" zPosition="3"/>
-		<widget font="Regular;16" foregroundColor="secondFG" halign="left" position="570,403" render="Label" size="300,23" source="Service" valign="center" zPosition="1">
-			<convert type="MovieInfo">RecordServiceName</convert>
-		</widget>
-		<widget font="Regular;16" foregroundColor="foreground" position="65,450" render="Label" size="881,84" source="Service" zPosition="1">
-			<convert type="EventName">ExtendedDescription</convert>
-		</widget>
-		<widget font="Regular;16" foregroundColor="foreground" position="65,403" render="Label" size="501,23" source="Service" valign="center" zPosition="1">
-			<convert type="MovieInfo">ShortDescription</convert>
-		</widget>
-		<widget font="Regular;16" foregroundColor="grey" halign="left" position="180,425" render="Label" size="361,23" source="Service" zPosition="1">
-			<convert type="ServiceTime">StartTime</convert>
-			<convert type="ClockToText">Date</convert>
-		</widget>
-		<widget font="Regular;16" foregroundColor="grey" halign="left" position="65,425" render="Label" size="50,23" source="Service" zPosition="1">
-			<convert type="ServiceTime">StartTime</convert>
-			<convert type="ClockToText"/>
-		</widget>
-		<widget font="Regular;16" foregroundColor="grey" halign="left" position="110,425" render="Label" size="70,23" source="Service" zPosition="1">
-			<convert type="ServiceTime">EndTime</convert>
-			<convert type="ClockToText">Format:- %H:%M </convert>
-		</widget>
-		<widget font="Regular;16" foregroundColor="grey" halign="left" position="570,425" render="Label" size="106,23" source="Service" zPosition="1">
-			<convert type="ServiceTime">Duration</convert>
-			<convert type="ClockToText">AsLength</convert>
-		</widget>
-		<widget font="Regular;16" foregroundColor="grey" halign="left" name="FileSize" position="695,425" size="162,23" zPosition="1"/>
-		<eLabel backgroundColor="darkgrey" position="0,398" size="1024,2" zPosition="5"/>
-	</screen>
 	<screen name="SuomipoekaMenu" position="center,77" size="900,450" title="SuomipoekaMenu">
 		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="0,0" size="140,40"/>
 		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="140,0" size="140,40"/>
