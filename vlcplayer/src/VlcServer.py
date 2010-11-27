@@ -150,7 +150,7 @@ class VlcServer:
 
 	def __xmlRequest(self, request, params):
 		uri = "/requests/" + request + ".xml"
-		if params is not None: uri = uri + "?" + urlencode(params)
+		if params is not None: uri = uri + "?" + urlencode(params).replace('+', '%20')
 		location = "%s:%d" % (self.getHost(), self.getHttpPort())
 		resp = urlopen("http://" + location + uri)
 		if resp is None:
