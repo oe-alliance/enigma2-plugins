@@ -689,7 +689,7 @@ class FritzCallFBF:
 		getPage(url).addCallback(lambda x:self._gotPageCalls(callback, x)).addErrback(self._errorCalls)
 
 	def _gotPageCalls(self, callback, csv=""):
-		def resolveNumber(number):
+		def resolveNumber(number, default=None):
 			if number.isdigit():
 				if config.plugins.FritzCall.internal.value and len(number) > 3 and number[0] == "0":
 					number = number[1:]
@@ -708,6 +708,8 @@ class FritzCallFBF:
 					if end != -1:
 						name = name[:end]
 					number = name
+				elif default:
+					number = default
 				else:
 					name = resolveNumberWithAvon(number, config.plugins.FritzCall.country.value)
 					if name:
@@ -744,18 +746,17 @@ class FritzCallFBF:
 			filtermsns = map(lambda x: x.strip(), config.plugins.FritzCall.filtermsn.value.split(","))
 			debug("[FritzCallFBF] _gotPageCalls: filtermsns %s" % (repr(filtermsns)))
 
-		# Typ;e;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
+		# Typ;Datum;Name;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
+		# 0  ;1    ;2   ;3        ;4          ;5               ;6
 		lines = map(lambda line: line.split(';'), lines)
 		lines = filter(lambda line: (len(line)==7 and (line[0]=="Typ" or self._callType == '.' or line[0] == self._callType)), lines)
 
 		for line in lines:
-			# debug("[FritzCallFBF] _gotPageCalls: elems %s" % (elems))
+			# debug("[FritzCallFBF] _gotPageCalls: line %s" % (line))
 			direct = line[0]
 			date = line[1]
 			length = line[6]
-			remote = resolveNumber(line[3])
-			if not remote and direct != FBF_OUT_CALLS and line[2]:
-				remote = line[2]
+			remote = resolveNumber(line[3], line[2])
 			here = line[5]
 			start = here.find('Internet: ')
 			if start != -1:
@@ -768,7 +769,7 @@ class FritzCallFBF:
 				if here not in filtermsns:
 					# debug("[FritzCallFBF] _gotPageCalls: skip %s" % (here))
 					continue
-			here = resolveNumber(here)
+			here = resolveNumber(here, line[4])
 
 			number = stripCbCPrefix(line[3], config.plugins.FritzCall.country.value)
 			if config.plugins.FritzCall.prefix.value and number and number[0] != '0':		# should only happen for outgoing
