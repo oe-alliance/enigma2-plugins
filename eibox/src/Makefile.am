@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/EIBox
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/EIBox
 SUBDIRS = images
 
 install_PYTHON = __init__.py plugin.py

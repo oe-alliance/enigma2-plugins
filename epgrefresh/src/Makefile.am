@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/EPGRefresh
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/EPGRefresh
 
 SUBDIRS = webinterface
 

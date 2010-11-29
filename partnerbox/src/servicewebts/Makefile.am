@@ -1,12 +1,10 @@
-OBJS := servicewebts.cpp
+plugindir = $(libdir)/enigma2/python/Plugins/Extensions/Partnerbox
 
--include $(OBJS:.cpp=.d)
+plugin_LTLIBRARIES = servicewebts.la
 
-servicewebts.so:
-	$(CXX) $(CPPFLAGS) -MD $(CXXFLAGS) $(ENIGMA2_CFLAGS) $(SIGC_CFLAGS) \
-	$(PYTHON_CPPFLAGS) $(DEFS) -I. -Wall -W $(OBJS) -shared -fPIC \
-	-Wl,-soname,servicewebts.so -o servicewebts.so $(LDFLAGS)
+servicewebts_la_SOURCES = \
+	servicewebts.cpp \
+	servicewebts.h
 
-all: servicewebts.so
-
-CLEANFILES = servicewebts.so servicewebts.d
+servicewebts_la_LDFLAGS = \
+	-avoid-version -module

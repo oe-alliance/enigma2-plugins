@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/VirtualZap
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/VirtualZap
 
 install_PYTHON = *.py
 

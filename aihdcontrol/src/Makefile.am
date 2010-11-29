@@ -1,5 +1,5 @@
 SUBDIRS = comp data
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/AiHDcontroler
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/AiHDcontroler
 
 install_PYTHON = *.py
 

@@ -1,4 +1,5 @@
-AUTOMAKE_OPTIONS = gnu
+ACLOCAL_AMFLAGS = -I m4
+
 SUBDIRS = \
 	ac3lipsync \
 	aihdcontrol \
@@ -80,10 +81,9 @@ SUBDIRS = \
 	zapstatistic \
 	zdfmediathek
 
+metadir = $(datadir)/meta
+meta_DATA = index-enigma2-plugins.xml
+CLEANFILES = index-enigma2-plugins.xml
 
-install-exec-hook:
-	$(PYTHON) $(srcdir)/genmetaindex.py $(DESTDIR)$(datadir)/meta/plugin_*.xml > $(DESTDIR)$(datadir)/meta/index-enigma2-plugins.xml
-
-uninstall-hook:
-	$(RM) $(DESTDIR)$(datadir)/meta/index-enigma2-plugins.xml
-
+index-enigma2-plugins.xml: $(top_srcdir)/genmetaindex.py $(top_srcdir)/*/meta/plugin_*.xml
+	$(AM_V_GEN)$(PYTHON) $^ > $@

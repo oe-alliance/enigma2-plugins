@@ -1,12 +1,10 @@
-OBJS := servicets.cpp
+plugindir = $(libdir)/enigma2/python/Plugins/Extensions/VlcPlayer
 
--include $(OBJS:.cpp=.d)
+plugin_LTLIBRARIES = servicets.la
 
-servicets.so:
-	$(CXX) $(CPPFLAGS) -MD $(CXXFLAGS) $(ENIGMA2_CFLAGS) $(SIGC_CFLAGS) \
-	$(PYTHON_CPPFLAGS) $(DEFS) -I. -Wall -W $(OBJS) -shared -fPIC \
-	-Wl,-soname,servicets.so -o servicets.so $(LDFLAGS)
+servicets_la_SOURCES = \
+	servicets.cpp \
+	servicets.h
 
-all: servicets.so
-
-CLEANFILES = servicets.so servicets.d
+servicets_la_LDFLAGS = \
+	-avoid-version -module

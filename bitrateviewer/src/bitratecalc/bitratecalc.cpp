@@ -20,7 +20,6 @@
 #  distributed other than under the conditions noted above.
 */
 
-#include <Python.h>
 #include "bitratecalc.h"
 #include <fcntl.h>
 #include <lib/base/etpm.h>

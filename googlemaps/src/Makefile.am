@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/GoogleMaps
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/GoogleMaps
 
 install_PYTHON = __init__.py plugin.py WebPixmap.py KMLlib.py globalmaptiles.py
 

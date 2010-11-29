@@ -1,7 +1,10 @@
 SUBDIRS = bitratecalc
 
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/BitrateViewer
+plugindir = $(libdir)/enigma2/python/Plugins/Extensions/BitrateViewer
 
-install_PYTHON = *.py bitratecalc/bitratecalc.so
+plugin_PYTHON = \
+	__init__.py \
+	plugin.py
 
-install_DATA = maintainer.info
+plugin_DATA = \
+	maintainer.info

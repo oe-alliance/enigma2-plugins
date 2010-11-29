@@ -1,30 +1,58 @@
-AC_INIT(enigma2-plugins, 1.0)
-AM_INIT_AUTOMAKE(enigma2-plugins, 1.0)
+AC_INIT([enigma2-plugins],[3.0.0],[enigma2-devel@lists.elitedvb.net])
+AM_INIT_AUTOMAKE([dist-bzip2 foreign no-define tar-pax])
+AC_CONFIG_HEADERS([enigma2-plugins-config.h])
 
-AM_PATH_PYTHON()
+# Silent rules are available since 1.11, but older versions
+# are still in use. So don't use them unconditionally.
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
+AC_USE_SYSTEM_EXTENSIONS
+AC_SYS_LARGEFILE
+
 AC_PROG_CC
 AC_PROG_CXX
-AC_PROG_RANLIB
-AC_PYTHON_DEVEL
+m4_ifdef([LT_INIT], [LT_INIT], [AC_PROG_LIBTOOL])
+AC_CONFIG_MACRO_DIR([m4])
 
-AC_CHECK_HEADER(enigma2/lib/base/i18n.h,have_e2_includes="yes",have_e2_includes="no")
-if test x"${have_e2_includes}" = "xyes"; then
-	TUXBOX_APPS
-	TUXBOX_APPS_DIRECTORY
-	TUXBOX_APPS_DVB
-	TUXBOX_APPS_LIB_PKGCONFIG(ENIGMA2,enigma2)
-	TUXBOX_APPS_LIB_PKGCONFIG(SIGC,sigc++-1.2)
-	_TUXBOX_APPS_LIB_PKGCONFIG_OPTIONAL(GSTREAMER,gstreamer,HAVE_GSTREAMER)
-	_TUXBOX_APPS_LIB_PKGCONFIG_OPTIONAL(GSTREAMERPBUTILS,gstreamer-pbutils,HAVE_GSTSTREAMERPBUTILS)
-	AC_DEFINE(HAVE_E2_INCLUDES, 1,[Define if enigm2 includes are available])
-	CXXFLAGS="$CXXFLAGS -fno-rtti -fno-exceptions"
-	LDFLAGS="$LDFLAGS -pthread $PYTHON_LDFLAGS"
-else
-	AC_MSG_NOTICE([enigma2 headers not found.. dont build servicets.so])
+AC_PATH_PROG(MSGFMT, msgfmt, AC_MSG_ERROR(Could not find msgfmt))
+
+AM_PATH_PYTHON
+AX_PYTHON_DEVEL
+AX_PTHREAD
+
+TUXBOX_APPS_DVB
+
+PKG_CHECK_MODULES(ENIGMA2, enigma2)
+PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
+PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
+
+AC_ARG_WITH(debug,
+	AS_HELP_STRING([--without-debug],[disable debugging code]),
+	[with_debug="$withval"],[with_debug="yes"])
+if test "$with_debug" = "yes"; then
+	DEBUG_CFLAGS="-ggdb3"
+	AC_DEFINE([DEBUG],[1],[Define to 1 to enable debugging code])
 fi
-AM_CONDITIONAL(HAVE_E2_INCLUDES, test "$have_e2_includes" = "yes")
 
-AC_OUTPUT([
+AC_ARG_WITH(po,
+	AS_HELP_STRING([--with-po],[enable updating of po files]),
+	[with_po="$withval"],[with_po="no"])
+if test "$with_po" = "yes"; then
+	AC_PATH_PROG(MSGINIT, msginit)
+	AC_PATH_PROG(MSGMERGE, msgmerge)
+	AC_PATH_PROG(MSGUNIQ, msguniq)
+	AC_PATH_PROG(XGETTEXT, xgettext)
+	if test -z "$MSGINIT" -o -z "$MSGMERGE" -o -z "$MSGUNIQ" -o -z "$XGETTEXT"; then
+		AC_MSG_ERROR([Could not find required gettext tools])
+	fi
+fi
+AM_CONDITIONAL(UPDATE_PO, test "$with_po" = "yes")
+
+CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS -include Python.h -include enigma2-plugins-config.h"
+CFLAGS="$CFLAGS $DEBUG_CFLAGS -Wall"
+CXXFLAGS="$CXXFLAGS $DEBUG_CFLAGS -Wall $ENIGMA2_CFLAGS $PTHREAD_CFLAGS"
+
+AC_CONFIG_FILES([
 Makefile
 
 ac3lipsync/Makefile
@@ -434,3 +462,4 @@ zdfmediathek/meta/Makefile
 zdfmediathek/src/Makefile
 
 ])
+AC_OUTPUT

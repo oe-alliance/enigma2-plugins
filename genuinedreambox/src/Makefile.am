@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/GenuineDreambox
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/GenuineDreambox
 
 install_PYTHON = *.py
 

@@ -1,3 +1,3 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/AiHDcontroler/data
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/AiHDcontroler/data
 
 install_DATA = *.xml

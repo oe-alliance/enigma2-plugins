@@ -1,7 +1,17 @@
 SUBDIRS = servicewebts icons
 
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/Partnerbox
+plugindir = $(libdir)/enigma2/python/Plugins/Extensions/Partnerbox
 
-install_PYTHON = *.py servicewebts/servicewebts.so
+plugin_PYTHON = \
+	PartnerboxEPGList.py \
+	PartnerboxEPGSelection.py \
+	PartnerboxFunctions.py \
+	PartnerboxSetup.py \
+	RemoteTimerEntry.py \
+	Services.py \
+	__init__.py \
+	plugin.py
 
-install_DATA = *.png maintainer.info
+plugin_DATA = \
+	ExPlayer.png \
+	maintainer.info

@@ -1,13 +1,21 @@
-if HAVE_E2_INCLUDES
 SUBDIRS = servicets
-endif
 
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer
+plugindir = $(libdir)/enigma2/python/Plugins/Extensions/VlcPlayer
 
-if HAVE_E2_INCLUDES
-install_PYTHON = *.py servicets/servicets.so
-else
-install_PYTHON = *.py servicets.so
-endif
+plugin_PYTHON = \
+	VlcFileList.py \
+	VlcMediaList.py \
+	VlcPlayList.py \
+	VlcPlayer.py \
+	VlcServer.py \
+	VlcServerConfig.py \
+	VlcServerList.py \
+	__init__.py \
+	plugin.py
 
-install_DATA = *.png maintainer.info
+plugin_DATA = \
+	maintainer.info \
+	playlist.png \
+	plugin.png \
+	vlc.png \
+	vlc_default.png

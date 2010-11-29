@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/Quickbutton
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/Quickbutton
 
 install_PYTHON = *.py
 

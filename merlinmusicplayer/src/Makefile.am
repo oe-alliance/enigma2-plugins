@@ -1,7 +1,11 @@
 SUBDIRS = images merlinmp3player
 
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/MerlinMusicPlayer
+plugindir = $(libdir)/enigma2/python/Plugins/Extensions/MerlinMusicPlayer
 
-install_PYTHON = *.py merlinmp3player/merlinmp3player.so
+plugin_PYTHON = \
+	__init__.py
+	plugin.py
 
-install_DATA = *.png 
+plugin_DATA = \
+	MerlinMusicPlayer.png \
+	iDream.png

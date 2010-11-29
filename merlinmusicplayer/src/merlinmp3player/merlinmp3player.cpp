@@ -6,7 +6,6 @@
 
 */
 
-#include <Python.h>
 #include <lib/base/eerror.h>
 #include <lib/base/object.h>
 #include <lib/base/ebase.h>

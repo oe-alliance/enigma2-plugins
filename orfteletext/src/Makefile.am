@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/ORFteletext
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/ORFteletext
 
 install_PYTHON = *.py
 

@@ -1,4 +1,4 @@
-installdir = $(LIBDIR)/enigma2/python/Plugins/SystemPlugins/NetworkBrowser
+installdir = $(libdir)/enigma2/python/Plugins/SystemPlugins/NetworkBrowser
 
 install_PYTHON = *.py
 

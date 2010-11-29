@@ -1,15 +1,15 @@
-OBJS = merlinmp3player.cpp
+AM_CXXFLAGS = @GSTREAMER_CFLAGS@
 
--include $(OBJS:.cpp=.d)
+plugindir = $(libdir)/enigma2/python/Plugins/Extensions/MerlinMusicPlayer
 
-merlinmp3player.so: merlinmp3player.h
+plugin_LTLIBRARIES = merlinmp3player.la
 
+merlinmp3player_la_SOURCES = \
+	merlinmp3player.cpp \
+	merlinmp3player.h
 
-	$(CXX) $(CPPFLAGS) -MD $(CXXFLAGS) $(ENIGMA2_CFLAGS) $(SIGC_CFLAGS) $(GSTREAMER_CFLAGS) $(GSTREAMERPBUTILS_CFLAGS) $(GSTREAMER_LDFLAGS) $(GSTREAMERPBUTILS_LDFLAGS) \
-	$(PYTHON_CPPFLAGS) $(DEFS) -I$(top_srcdir)/include -Wall -lgstbase-0.10 -W $(OBJS) -shared -fPIC -Wl,-soname,merlinmp3player.so -o merlinmp3player.so \
-	$(LDFLAGS)
+merlinmp3player_la_LDFLAGS = \
+	-avoid-version -module
 
-all: merlinmp3player.so
-
-CLEANFILES = merlinmp3player.so merlinmp3player.d
-
+merlinmp3player_la_LIBADD = \
+	@GSTREAMER_LIBS@

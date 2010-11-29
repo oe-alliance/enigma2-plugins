@@ -31,7 +31,7 @@
 #include "range.h"
 #include "list.h"
 #include "errors.h"
-#include "time.h"
+#include "time_compat.h"
 
 typedef struct {
 	char name[16];

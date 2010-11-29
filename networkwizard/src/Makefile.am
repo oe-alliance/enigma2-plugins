@@ -1,4 +1,4 @@
-installdir = $(LIBDIR)/enigma2/python/Plugins/SystemPlugins/NetworkWizard
+installdir = $(libdir)/enigma2/python/Plugins/SystemPlugins/NetworkWizard
 
 install_PYTHON =	\
 	__init__.py \
@@ -8,4 +8,3 @@ install_PYTHON =	\
 	WizardPluginLanguage.py
 
 dist_install_DATA = maintainer.info LICENSE
-	

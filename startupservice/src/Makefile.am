@@ -1,4 +1,4 @@
-installdir = $(LIBDIR)/enigma2/python/Plugins/SystemPlugins/StartUpService
+installdir = $(libdir)/enigma2/python/Plugins/SystemPlugins/StartUpService
 
 install_PYTHON = *.py
 

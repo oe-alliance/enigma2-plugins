@@ -1,5 +1,5 @@
 SUBDIRS = comp data
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/ValiXDControl
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/ValiXDControl
 
 install_PYTHON = *.py
 

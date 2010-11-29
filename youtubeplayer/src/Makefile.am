@@ -1,6 +1,6 @@
 SUBDIRS = Nemesis.GlassLine_Mod
 
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/YouTubePlayer
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/YouTubePlayer
 
 install_PYTHON = *.py
 

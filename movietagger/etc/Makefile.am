@@ -1,3 +1,3 @@
-installdir = /etc/enigma2
+installdir = $(sysconfdir)/enigma2
 
 install_DATA = movietags

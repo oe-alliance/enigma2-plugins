@@ -1,13 +1,15 @@
-OBJS := bitratecalc.cpp
+AM_CXXFLAGS = @LIBCRYPTO_CFLAGS@
 
--include $(OBJS:.cpp=.d)
+plugindir = $(libdir)/enigma2/python/Plugins/Extensions/BitrateViewer
 
-bitratecalc.so:
-	$(CXX) $(CPPFLAGS) -MD $(CXXFLAGS) $(ENIGMA2_CFLAGS) $(SIGC_CFLAGS) \
-	$(PYTHON_CPPFLAGS) $(DEFS) -I. -Wall -W $(OBJS) -shared -fPIC  -lcrypto \
-	-Wl,-soname,bitratecalc.so -o bitratecalc.so $(LDFLAGS)
+plugin_LTLIBRARIES = bitratecalc.la
 
-all: bitratecalc.so
+bitratecalc_la_SOURCES = \
+	bitratecalc.cpp \
+	bitratecalc.h
 
-CLEANFILES = bitratecalc.so bitratecalc.d
+bitratecalc_la_LDFLAGS = \
+	-avoid-version -module
 
+bitratecalc_la_LIBADD = \
+	@LIBCRYPTO_LIBS@

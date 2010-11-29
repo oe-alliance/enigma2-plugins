@@ -1,4 +1,4 @@
-installdir = $(LIBDIR)/enigma2/python/Plugins/Extensions/dreamIRC
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/dreamIRC
 
 install_PYTHON = *.py
 

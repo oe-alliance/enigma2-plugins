@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/AutoTimer
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/AutoTimer
 
 SUBDIRS = webinterface
 
