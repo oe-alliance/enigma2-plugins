@@ -431,6 +431,8 @@ class webifHandler(ContentHandler):
 
 	def startElement(self, name, attrs):
 		if name == "e2:screen":
+			if "external_module" in attrs:
+				exec "from " + attrs["external_module"] + " import *"
 			self.screen = eval(attrs["name"])(self.session, self.request) # fixme
 			self.screens.append(self.screen)
 			return
