@@ -12,6 +12,6 @@
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->
-		<file type="package" name="nigma2-plugin-extensions-bitrateviewer" />
+		<file type="package" name="enigma2-plugin-extensions-bitrateviewer" />
 	  </files>
 </default>

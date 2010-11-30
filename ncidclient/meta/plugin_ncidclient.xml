@@ -13,7 +13,7 @@
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->
-		<file type="package" name="nigma2-plugin-extensions-ncidclient" />
+		<file type="package" name="enigma2-plugin-extensions-ncidclient" />
 		<file type="package" name="python-html" />
 		<file type="package" name="python-textutils" />
 		<file type="package" name="twisted-web" />
