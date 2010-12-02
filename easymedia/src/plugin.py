@@ -23,6 +23,7 @@
 
 
 
+from __init__ import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.InfoBarGenerics import InfoBarPlugins
@@ -144,6 +145,7 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 		</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.setTitle(_("EasyMedia settings..."))
 		list = []
 		list.append(getConfigListEntry(_("Music player:"), config.plugins.easyMedia.music))
 		list.append(getConfigListEntry(_("Files browser:"), config.plugins.easyMedia.files))
@@ -282,7 +284,7 @@ def MPcallbackFunc(answer):
 			askBM = []
 			for s in myBookmarks:
 				askBM.append((s, s))
-			EMsession.openWithCallback(BookmarksCallback, ChoiceBox, title="Select bookmark...", list = askBM)
+			EMsession.openWithCallback(BookmarksCallback, ChoiceBox, title=_("Select bookmark..."), list = askBM)
 	elif answer == "PICTURES":
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer/plugin.pyo"):
 			from Plugins.Extensions.PicturePlayer.plugin import picshow
