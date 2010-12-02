@@ -96,6 +96,7 @@ dyndns/meta/Makefile
 
 easymedia/Makefile
 easymedia/meta/Makefile
+easymedia/po/Makefile
 easymedia/src/Makefile
 
 eibox/Makefile
