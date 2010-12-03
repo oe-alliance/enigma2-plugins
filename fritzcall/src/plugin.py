@@ -3359,7 +3359,7 @@ def displayFBFStatus(session, servicelist=None): #@UnusedVariable # pylint: disa
 	else:
 		Notifications.AddNotification(MessageBox, _("Plugin not active"), type=MessageBox.TYPE_INFO)
 
-def main(session):
+def main(session, servicelist=None):
 	session.open(FritzCallSetup)
 
 fritz_call = None
