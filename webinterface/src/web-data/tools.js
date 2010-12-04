@@ -1159,7 +1159,7 @@ function loadAndOpenWebRemote(){
 
 
 function sendRemoteControlRequest(command){
-	var long = webRemoteWin.document.getElementById('long')
+	var long = webRemoteWin.document.getElementById('long');
 	if(long.checked){
 		doRequest(URL.remotecontrol+'?command='+command+'&type=long', incomingRemoteControlResult, false);
 		long.checked = undefined;
