@@ -678,7 +678,7 @@ function showEpgList(){
 function incomingEPGrequest(request){
 	debug("[incomingEPGrequest] readyState" +request.readyState);		
 	if (request.readyState == 4){
-		var EPGItems = new EPGList(getXML(request)).getArray(true);
+		var EPGItems = new EPGList(getXML(request)).getArray();
 		debug("[incomingEPGrequest] got "+EPGItems.length+" e2events");
 
 		if( EPGItems.length > 0){
