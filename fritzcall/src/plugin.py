@@ -756,7 +756,10 @@ class FritzCallFBF:
 			direct = line[0]
 			date = line[1]
 			length = line[6]
-			remote = resolveNumber(line[3], line[2])
+			if config.plugins.FritzCall.phonebook.value and line[2]:
+				remote = resolveNumber(line[3], line[2] + " (FBF)")
+			else:
+				remote = resolveNumber(line[3], line[2])
 			here = line[5]
 			start = here.find('Internet: ')
 			if start != -1:
@@ -1905,7 +1908,7 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				direct = directfailed
 			return direct
 
-		debug("[FritzDisplayCalls] gotCalls: %s" %repr(listOfCalls))
+		# debug("[FritzDisplayCalls] gotCalls: %s" %repr(listOfCalls))
 		self.list = [(number, date[:6] + ' ' + date[9:14], pixDir(direct), remote, length, here) for (number, date, direct, remote, length, here) in listOfCalls]
 		self["entries"].setList(self.list)
 		if len(self.list) > 1:
@@ -1926,6 +1929,9 @@ class FritzDisplayCalls(Screen, HelpableScreen):
 				if fullname:
 					# we have a name for this number
 					name = fullname
+					self.session.open(FritzOfferAction, self, number, name)
+				elif cur[3]:
+					name = cur[3]
 					self.session.open(FritzOfferAction, self, number, name)
 				else:
 					# we don't
