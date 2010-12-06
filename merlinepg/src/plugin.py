@@ -299,7 +299,7 @@ class Merlin_PGII(Screen):
 		self["epg_list2"] = MerlinEPGList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
 		self["epg_list3"] = MerlinEPGList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
 		self["epg_list4"] = MerlinEPGList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
-		self["actions"] = ActionMap(["OkCancelActions", "EPGSelectActions", "DirectionActions", "ColorActions", "MenuActions", "NumberActions", "HelpActions"], {
+		self["actions"] = ActionMap(["OkCancelActions", "EPGSelectActions", "DirectionActions", "ColorActions", "MenuActions", "NumberActions", "HelpActions", "InfobarActions"], {
 						"ok": self.UserOK, 
 						"cancel": self.close,
 						"nextBouquet": self.AllUp,
@@ -324,7 +324,8 @@ class Merlin_PGII(Screen):
 						"0": self.go2now,
 						"1": self.go2first,
 						"7": self.findPrvBqt,
-						"9": self.findNextBqt
+						"9": self.findNextBqt,
+						"showMovies": self.editCurTimer
 						},-2)
 		self.onLayoutFinish.append(self.onLayoutReady)
 
@@ -637,6 +638,18 @@ class Merlin_PGII(Screen):
 		else:
 			self.showConfirmedInfo([None,"Ei"])
 
+	def editCurTimer(self):
+		cur = self["epg_list"+str(self.ActiveEPG)].getCurrent()
+		event = cur[0]
+		serviceref = cur[1]
+		if event is None:
+			return
+		eventid = event.getEventId()
+		refstr = serviceref.ref.toString()
+		for timer in self.session.nav.RecordTimer.timer_list:
+			if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
+				self.session.open(TimerEntry, timer)
+
 
 
 class Merlin_PGd(Screen):
@@ -708,7 +721,7 @@ class Merlin_PGd(Screen):
 		self["fullEventInfo"] = Label(" ")
 		self["prg_list"] = MenuList(self.getChannels())
 		self["epg_list"] = EPGList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
-		self["actions"] = ActionMap(["OkCancelActions", "EPGSelectActions", "ColorActions", "DirectionActions", "MenuActions", "HelpActions"], {
+		self["actions"] = ActionMap(["OkCancelActions", "EPGSelectActions", "ColorActions", "DirectionActions", "MenuActions", "HelpActions", "InfobarActions"], {
 									"ok": self.ok, 
 									"cancel": self.close,
 									"nextBouquet": self.prgDown,
@@ -730,6 +743,7 @@ class Merlin_PGd(Screen):
 									"upRepeated": self.up,
 									"down": self.down,
 									"downRepeated": self.down,
+									"showMovies": self.editCurTimer
 									},-2)
 		self.onLayoutFinish.append(self.onLayoutReady)
 
@@ -895,6 +909,18 @@ class Merlin_PGd(Screen):
 
 	def right(self):
 		self["epg_list"].instance.moveSelection(self["epg_list"].instance.pageDown)
+
+	def editCurTimer(self):
+		cur = self["epg_list"].getCurrent()
+		event = cur[0]
+		serviceref = cur[1]
+		if event is None:
+			return
+		eventid = event.getEventId()
+		refstr = serviceref.ref.toString()
+		for timer in self.session.nav.RecordTimer.timer_list:
+			if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
+				self.session.open(TimerEntry, timer)
 
 
 
