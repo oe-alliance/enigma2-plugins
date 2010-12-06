@@ -95,7 +95,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 		list = []
 		list.append(getConfigListEntry(_("Infobar and window style:"), config.plugins.vhd.Style))
 		list.append(getConfigListEntry(_("Channel and EPG selectors style:"), config.plugins.vhd.ChannSelector))
-		list.append(getConfigListEntry(_("OLED dysplay style:"), config.plugins.vhd.OledStyle))
+		list.append(getConfigListEntry(_("OLED display style:"), config.plugins.vhd.OledStyle))
 		ConfigListScreen.__init__(self, list)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
 									{

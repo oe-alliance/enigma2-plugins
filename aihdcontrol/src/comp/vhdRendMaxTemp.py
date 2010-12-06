@@ -32,7 +32,7 @@ class vhdRendMaxTemp(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)
 		VariableText.__init__(self)
-		if "8000" in HardwareInfo().get_device_name() or "500" in HardwareInfo().get_device_name():
+		if "8000" in HardwareInfo().get_device_name() or "500" in HardwareInfo().get_device_name() or "800se" in HardwareInfo().get_device_name():
 			self.ZeigeTemp = True
 		else:
 			self.ZeigeTemp = False
