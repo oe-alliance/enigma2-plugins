@@ -1637,6 +1637,40 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 		<widget source="status" render="Label" position="10,50" size="540,80" font="Regular;20" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
 	</screen>
 	
+<!-- ########## OLED MINI ########## -->
+  <screen name="StandbySummary" position="0,0" size="96,64" id="2">
+    <widget font="Regular;32" halign="center" position="0,0" render="Label" size="96,32" source="global.CurrentTime" valign="center">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget font="Regular;24" halign="center" position="0,32" render="Label" size="96,32" source="global.CurrentTime" valign="center">
+      <convert type="ClockToText">Format:%a %d</convert>
+    </widget>
+  </screen>
+  <screen name="InfoBarMoviePlayerSummary" position="0,0" size="96,64" id="2">
+    <widget font="Regular;24" halign="center" position="0,0" render="Label" size="96,32" source="session.CurrentService" valign="center">
+      <convert type="ServicePosition">Remaining,ShowHours</convert>
+    </widget>
+    <widget font="Regular;28" halign="center" position="0,32" render="Label" size="96,32" source="global.CurrentTime" valign="center">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+  </screen>
+  <screen name="InfoBarSummary" position="0,0" size="96,64" id="2">
+    <widget font="Regular;18" noWrap="1" position="0,0" render="Label" size="96,32" source="session.CurrentService" valign="center">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget font="Regular;28" halign="center" position="0,32" render="Label" size="96,32" source="global.CurrentTime" valign="center">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <!-- <widget alphatest="off" position="-2,2" render="Picon" size="100,60" source="session.CurrentService" transparent="1" zPosition="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget> -->
+  </screen>
+  <screen name="ChannelSelection_summary" position="0,0" size="96,64" id="2">
+    <widget font="Regular;18" halign="center" position="0,0" render="Label" size="96,64" source="parent.ServiceEvent" valign="center">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+	
 
 	
 	
