@@ -535,7 +535,7 @@ class Merlin_PGII(Screen):
 		if not IMDbPresent:
 			self.showConfirmedInfo([None,"Ei"])
 		else:
-			self.session.openWithCallback(self.showConfirmedInfo, ChoiceBox, title=_("Select Info type..."), list=[(_("Standard EPG info"), "Ei"),(_("IMBd info"), "Ii")])
+			self.session.openWithCallback(self.showConfirmedInfo, ChoiceBox, title=_("Select Info type..."), list=[(_("Standard EPG info"), "Ei"),(_("IMDb info"), "Ii")])
 
 	def showConfirmedInfo(self,answer):
 		curEV = self["epg_list"+str(self.ActiveEPG)].getCurrent()
