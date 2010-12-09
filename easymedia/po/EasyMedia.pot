@@ -127,3 +127,8 @@ msgstr ""
 msgid "Select bookmark..."
 msgstr ""
 
+msgid "Radio"
+msgstr ""
+
+msgid "Show radio:"
+msgstr ""
