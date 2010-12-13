@@ -227,7 +227,10 @@ class EasyMedia(Screen):
 			MPaskList.append((_("Music"), "MUSIC"))
 		if config.plugins.easyMedia.radio.value != "no":
 			self.__keys.append("radio")
-			MPaskList.append((_("Tv/Radio"), "RADIO"))
+			if config.usage.e1like_radio_mode.value:
+				MPaskList.append((_("Tv/Radio"), "RADIO"))
+			else:
+				MPaskList.append((_("Radio"), "RADIO"))
 		if config.plugins.easyMedia.dvd.value != "no":
 			self.__keys.append("dvd")
 			MPaskList.append((_("DVD Player"), "DVD"))
@@ -299,11 +302,15 @@ def MPcallbackFunc(answer):
 		if InfoBar_instance:
 			InfoBar_instance.showMovies()
 	elif answer == "RADIO":
-		askBM = []
-		askBM.append((_("TV-mode"), "TM"))
-		askBM.append((_("Radio-mode"), "RM"))
-		askBM.append((_("Nothing"), "NO"))
-		EMsession.openWithCallback(TvRadioCallback, ChoiceBox, title="EasyMedia...", list = askBM)
+		if config.usage.e1like_radio_mode.value:
+			askBM = []
+			askBM.append((_("TV-mode"), "TM"))
+			askBM.append((_("Radio-mode"), "RM"))
+			askBM.append((_("Nothing"), "NO"))
+			EMsession.openWithCallback(TvRadioCallback, ChoiceBox, title="EasyMedia...", list = askBM)
+		else:
+			if InfoBar_instance:
+				InfoBar_instance.showRadio()
 	elif answer == "BOOKMARKS":
 		tmpBookmarks = config.movielist.videodirs
 		myBookmarks = tmpBookmarks and tmpBookmarks.value[:] or []
