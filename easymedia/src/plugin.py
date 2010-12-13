@@ -59,6 +59,7 @@ config.plugins.easyMedia.iradio = ConfigSelection(default="no", choices = [("no"
 config.plugins.easyMedia.idream = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.zdfmedia = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.radio = ConfigSelection(default="yes", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.myvideo = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 
 
 
@@ -170,6 +171,7 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("NetRadio player:"), config.plugins.easyMedia.iradio))
 		list.append(getConfigListEntry(_("Show Merlin-iDream:"), config.plugins.easyMedia.idream))
 		list.append(getConfigListEntry(_("ZDFmediathek player:"), config.plugins.easyMedia.zdfmedia))
+		list.append(getConfigListEntry(_("MyVideo player:"), config.plugins.easyMedia.myvideo))
 		ConfigListScreen.__init__(self, list)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {"green": self.save, "red": self.exit, "cancel": self.exit}, -1)
 
@@ -250,6 +252,9 @@ class EasyMedia(Screen):
 		if config.plugins.easyMedia.zdfmedia.value != "no":
 			self.__keys.append("zdf")
 			MPaskList.append((_("ZDFmediathek"), "ZDF"))
+		if config.plugins.easyMedia.myvideo.value != "no":
+			self.__keys.append("myvideo")
+			MPaskList.append((_("MyVideo"), "MYVIDEO"))
 		self.keymap = {}
 		pos = 0
 		for x in MPaskList:
@@ -378,6 +383,12 @@ def MPcallbackFunc(answer):
 			EMsession.open(iDreamMerlin, servicelist)
 		else:
 			EMsession.open(MessageBox, text = _('Merlin iDream is not installed!'), type = MessageBox.TYPE_ERROR)
+	elif answer == "MYVIDEO":
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MyVideoPlayer/plugin.pyo"):
+			from Plugins.Extensions.MyVideoPlayer.plugin import Vidtype
+			EMsession.open(Vidtype)
+		else:
+			EMsession.open(MessageBox, text = _('MyVideo Player is not installed!'), type = MessageBox.TYPE_ERROR)
 
 
 

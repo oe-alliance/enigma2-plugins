@@ -141,3 +141,12 @@ msgstr ""
 
 msgid "Nothing"
 msgstr ""
+
+msgid "MyVideo Player is not installed!"
+msgstr ""
+
+msgid "MyVideo"
+msgstr ""
+
+msgid "MyVideo player:"
+msgstr ""

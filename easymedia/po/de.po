@@ -142,3 +142,11 @@ msgstr "Radio-Modus"
 msgid "Nothing"
 msgstr "Zurück"
 
+msgid "MyVideo Player is not installed!"
+msgstr "MyVideo Player ist nicht  installiert!"
+
+msgid "MyVideo"
+msgstr "MyVideo"
+
+msgid "MyVideo player:"
+msgstr "MyVideo Player:"
