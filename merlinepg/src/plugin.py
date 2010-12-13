@@ -604,6 +604,7 @@ class Merlin_PGII(Screen):
 	def findNextBqt(self):
 		CurrIdx = 0
 		CurrBqt = self.myBqts[self.getActivePrg()]
+		self.ActiveEPG = 1
 		for CurrIdx in range(self.getActivePrg(),self.chCount):
 			NewBqt = self.myBqts[CurrIdx]
 			if NewBqt != CurrBqt:
@@ -614,6 +615,7 @@ class Merlin_PGII(Screen):
 	def findPrvBqt(self):
 		CurrIdx = 0
 		CurrBqt = self.myBqts[self.getActivePrg()]
+		self.ActiveEPG = 1
 		for CurrIdx in range(self.getActivePrg(),-1,-1):
 			NewBqt = self.myBqts[CurrIdx]
 			if NewBqt != CurrBqt:
