@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: EasyMedia\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-24 16:10+0200\n"
-"PO-Revision-Date: 2010-12-09 16:39+0100\n"
+"PO-Revision-Date: 2010-12-13 19:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -127,9 +127,18 @@ msgstr "EasyMedia Einstellungen..."
 msgid "Select bookmark..."
 msgstr "Lesezeichen wählen..."
 
-msgid "Radio"
-msgstr "Radio"
+msgid "Tv/Radio"
+msgstr "TV/Radio"
 
-msgid "Show radio:"
-msgstr "Radio zeigen:"
+msgid "Show tv/radio switch:"
+msgstr "Tv/Radio Umschalter zeigen:"
+
+msgid "TV-mode"
+msgstr "TV-Modus"
+
+msgid "Radio-mode"
+msgstr "Radio-Modus"
+
+msgid "Nothing"
+msgstr "Zurück"
 

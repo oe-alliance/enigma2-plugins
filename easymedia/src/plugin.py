@@ -137,6 +137,17 @@ def BookmarksCallback(choice):
 
 
 
+def TvRadioCallback(choice):
+	choice = choice and choice[1]
+	if choice == "TM":
+		if InfoBar_instance:
+			InfoBar_instance.showTv()
+	elif choice == "RM":
+		if InfoBar_instance:
+			InfoBar_instance.showRadio()
+
+
+
 class ConfigEasyMedia(ConfigListScreen, Screen):
 	skin = """
 		<screen name="ConfigEasyMedia" position="center,center" size="600,410" title="EasyMedia settings...">
@@ -151,7 +162,7 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("Music player:"), config.plugins.easyMedia.music))
 		list.append(getConfigListEntry(_("Files browser:"), config.plugins.easyMedia.files))
 		list.append(getConfigListEntry(_("Show bookmarks:"), config.plugins.easyMedia.bookmarks))
-		list.append(getConfigListEntry(_("Show radio:"), config.plugins.easyMedia.radio))
+		list.append(getConfigListEntry(_("Show tv/radio switch:"), config.plugins.easyMedia.radio))
 		list.append(getConfigListEntry(_("YouTube player:"), config.plugins.easyMedia.mytube))
 		list.append(getConfigListEntry(_("VLC player:"), config.plugins.easyMedia.vlc))
 		list.append(getConfigListEntry(_("DVD player:"), config.plugins.easyMedia.dvd))
@@ -214,7 +225,7 @@ class EasyMedia(Screen):
 			MPaskList.append((_("Music"), "MUSIC"))
 		if config.plugins.easyMedia.radio.value != "no":
 			self.__keys.append("radio")
-			MPaskList.append((_("Radio"), "RADIO"))
+			MPaskList.append((_("Tv/Radio"), "RADIO"))
 		if config.plugins.easyMedia.dvd.value != "no":
 			self.__keys.append("dvd")
 			MPaskList.append((_("DVD Player"), "DVD"))
@@ -283,8 +294,11 @@ def MPcallbackFunc(answer):
 		if InfoBar_instance:
 			InfoBar_instance.showMovies()
 	elif answer == "RADIO":
-		if InfoBar_instance:
-			InfoBar_instance.showRadio()
+		askBM = []
+		askBM.append((_("TV-mode"), "TM"))
+		askBM.append((_("Radio-mode"), "RM"))
+		askBM.append((_("Nothing"), "NO"))
+		EMsession.openWithCallback(TvRadioCallback, ChoiceBox, title="EasyMedia...", list = askBM)
 	elif answer == "BOOKMARKS":
 		tmpBookmarks = config.movielist.videodirs
 		myBookmarks = tmpBookmarks and tmpBookmarks.value[:] or []

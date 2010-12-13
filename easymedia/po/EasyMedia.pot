@@ -127,8 +127,17 @@ msgstr ""
 msgid "Select bookmark..."
 msgstr ""
 
-msgid "Radio"
+msgid "Tv/Radio"
 msgstr ""
 
-msgid "Show radio:"
+msgid "Show tv/radio switch:"
+msgstr ""
+
+msgid "TV-mode"
+msgstr ""
+
+msgid "Radio-mode"
+msgstr ""
+
+msgid "Nothing"
 msgstr ""
