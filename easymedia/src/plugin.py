@@ -297,6 +297,8 @@ class EasyMedia(Screen):
 
 
 def MPcallbackFunc(answer):
+	if EMsession is None:
+		return
 	answer = answer and answer[1]
 	if answer == "PLAYMOVIES":
 		if InfoBar_instance:
