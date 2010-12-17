@@ -32,10 +32,12 @@ from Screens.ChoiceBox import ChoiceBox
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
+from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection
 from Tools.Directories import fileExists
 from Tools.LoadPixmap import LoadPixmap
+from Tools.HardwareInfo import HardwareInfo
 from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getDesktop
 
 
@@ -187,6 +189,33 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 
 
 
+class EasyMediaSummary(Screen):
+	if "800se" in HardwareInfo().get_device_name():
+		skin = """
+			<screen position="0,0" size="96,64" id="2">
+				<eLabel text="EasyMedia:" foregroundColor="#fcc000" position="0,0" size="96,24" font="Regular;16"/>
+				<widget name="text1" position="0,24" size="96,40" font="Regular;18"/>
+			</screen>"""
+	else:
+		skin = """
+			<screen position="0,0" size="132,64">
+				<eLabel text="EasyMedia:" position="0,0" size="132,24" font="Regular;14"/>
+				<widget name="text1" position="0,24" size="132,40" font="Regular;16"/>
+			</screen>"""
+
+	def __init__(self, session, parent):
+		Screen.__init__(self, session)
+		self["text1"] = Label()
+		self.onLayoutFinish.append(self.layoutEnd)
+
+	def layoutEnd(self):
+		self["text1"].setText(_("Movies"))
+
+	def setText(self, text, line):
+		self["text1"].setText(text)
+
+
+
 class EasyMedia(Screen):
 	sz_w = getDesktop(0).size().width()
 	if sz_w > 1100:
@@ -267,6 +296,7 @@ class EasyMedia(Screen):
 				self.keymap[self.__keys[pos]] = MPaskList[pos]
 			pos += 1
 		self["list"] = MPanelList(list = self.list, selection = 0)
+		self["list"].onSelectionChanged.append(self.updateOLED)
 		self["actions"] = ActionMap(["WizardActions", "MenuActions"],
 		{
 			"ok": self.go,
@@ -293,6 +323,13 @@ class EasyMedia(Screen):
 
 	def emContextMenu(self):
 		self.session.open(ConfigEasyMedia)
+
+	def createSummary(self):
+		return EasyMediaSummary
+
+	def updateOLED(self):
+		text = str(self["list"].l.getCurrentSelection()[0][0])
+		self.summaries.setText(text, 1)
 
 
 
