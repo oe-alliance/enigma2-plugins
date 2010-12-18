@@ -150,3 +150,12 @@ msgstr ""
 
 msgid "MyVideo player:"
 msgstr ""
+
+msgid "Add/remove plugin"
+msgstr ""
+
+msgid " removed from EasyMedia"
+msgstr ""
+
+msgid " added to EasyMedia"
+msgstr ""

@@ -34,11 +34,16 @@ from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
+from Components.PluginComponent import plugins
+from Components.PluginList import *
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from Tools.HardwareInfo import HardwareInfo
 from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getDesktop
+import pickle
+from os import system as os_system
+from os import listdir as os_listdir
 
 
 
@@ -110,10 +115,14 @@ def notEasy(session, **kwargs):
 
 def MPanelEntryComponent(key, text):
 	res = [ text ]
-	res.append((eListboxPythonMultiContent.TYPE_TEXT, 160, 15, 300, 60, 0, RT_HALIGN_LEFT, text[0]))
+	res.append((eListboxPythonMultiContent.TYPE_TEXT, 150, 17, 300, 60, 0, RT_HALIGN_LEFT, text[0]))
 	png = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/' + key + ".png")
 	if png is not None:
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 30, 5, 100, 50, png))
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 25, 5, 100, 50, png))
+	else:
+		png = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/default.png')
+		if png is not None:
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 25, 5, 100, 50, png))
 	return res
 
 
@@ -121,7 +130,7 @@ def MPanelEntryComponent(key, text):
 class MPanelList(MenuList):
 	def __init__(self, list, selection = 0, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 24))
+		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setItemHeight(60)
 		self.selection = selection
 	def postWidgetCreate(self, instance):
@@ -155,12 +164,14 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 	skin = """
 		<screen name="ConfigEasyMedia" position="center,center" size="600,410" title="EasyMedia settings...">
 			<widget name="config" position="5,5" scrollbarMode="showOnDemand" size="590,380"/>
-			<eLabel font="Regular;20" foregroundColor="#00ff4A3C" halign="center" position="20,388" size="120,26" text="Cancel"/>
-			<eLabel font="Regular;20" foregroundColor="#0056C856" halign="center" position="165,388" size="120,26" text="Save"/>
+			<eLabel font="Regular;20" foregroundColor="#00ff4A3C" halign="center" position="20,388" size="140,26" text="Cancel"/>
+			<eLabel font="Regular;20" foregroundColor="#0056C856" halign="center" position="165,388" size="140,26" text="Save"/>
+			<eLabel font="Regular;20" foregroundColor="#00f3ca09" halign="center" position="310,388" size="140,26" text="Plugins"/>
 		</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("EasyMedia settings..."))
+		self.session = session
 		list = []
 		list.append(getConfigListEntry(_("Music player:"), config.plugins.easyMedia.music))
 		list.append(getConfigListEntry(_("Files browser:"), config.plugins.easyMedia.files))
@@ -175,7 +186,7 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("ZDFmediathek player:"), config.plugins.easyMedia.zdfmedia))
 		list.append(getConfigListEntry(_("MyVideo player:"), config.plugins.easyMedia.myvideo))
 		ConfigListScreen.__init__(self, list)
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {"green": self.save, "red": self.exit, "cancel": self.exit}, -1)
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {"green": self.save, "red": self.exit, "cancel": self.exit, "yellow": self.plug}, -1)
 
 	def save(self):
 		for x in self["config"].list:
@@ -186,6 +197,63 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close()
+
+	def plug(self):
+		self.session.open(AddPlug)
+
+
+
+class AddPlug(Screen):
+	skin = """
+		<screen name="AddPlug" position="center,center" size="440,375" title="EasyMedia...">
+			<widget name="list" position="0,10" size="440,355" scrollbarMode="showOnDemand" />
+		</screen>"""
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.setTitle(_("Add/remove plugin"))
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		self.session = session
+		self.list = []
+		self["list"] = PluginList(self.list)
+		self.updateList()
+		self["actions"] = ActionMap(["WizardActions"],
+		{
+			"ok": self.save,
+			"back": self.close
+		}, -1)
+		self.onExecBegin.append(self.checkWarnings)
+
+	def checkWarnings(self):
+		if len(plugins.warnings):
+			text = _("Some plugins are not available:\n")
+			for (pluginname, error) in plugins.warnings:
+				text += _("%s (%s)\n") % (pluginname, error)
+			plugins.resetWarnings()
+			self.session.open(MessageBox, text = text, type = MessageBox.TYPE_WARNING)
+
+	def updateList(self):
+		self.list = [ ]
+		self.pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU)
+		for plugin in self.pluginlist:
+			self.list.append(PluginEntryComponent(plugin))
+		self["list"].l.setList(self.list)
+
+	def save(self):
+		plugin = self["list"].l.getCurrentSelection()[0]
+		plugin.icon = None
+		if not fileExists("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + plugin.name + ".plug"):
+			try:
+				outf = open(("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + plugin.name + ".plug"), 'wb')
+				pickle.dump(plugin, outf)
+				outf.close()
+				self.session.open(MessageBox, text = (plugin.name + _(" added to EasyMedia")), type = MessageBox.TYPE_INFO)
+			except: self.session.open(MessageBox, text = "Write Error!", type = MessageBox.TYPE_WARNING)
+		else:
+			order = 'rm -f \"' + '/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/' + plugin.name + '.plug' + '\"'
+			try:
+				os_system(order)
+				self.session.open(MessageBox, text = (plugin.name + _(" removed from EasyMedia")), type = MessageBox.TYPE_INFO)
+			except: self.session.open(MessageBox, text = "Write Error!", type = MessageBox.TYPE_WARNING)
 
 
 
@@ -202,7 +270,6 @@ class EasyMediaSummary(Screen):
 				<eLabel text="EasyMedia:" position="0,0" size="132,24" font="Regular;14"/>
 				<widget name="text1" position="0,24" size="132,40" font="Regular;16"/>
 			</screen>"""
-
 	def __init__(self, session, parent):
 		Screen.__init__(self, session)
 		self["text1"] = Label()
@@ -287,6 +354,17 @@ class EasyMedia(Screen):
 		if config.plugins.easyMedia.myvideo.value != "no":
 			self.__keys.append("myvideo")
 			MPaskList.append((_("MyVideo"), "MYVIDEO"))
+		plist = os_listdir("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia")
+		plist = [x[:-5] for x in plist if x.endswith('.plug')]
+		plist.sort()
+		for onePlug in plist:
+			try:
+				inpf = open(("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + onePlug + ".plug"), 'rb')
+				binPlug = pickle.load(inpf)
+				inpf.close()	
+				self.__keys.append(binPlug.name)
+				MPaskList.append((binPlug.name, ("++++" + binPlug.name)))
+			except: pass
 		self.keymap = {}
 		pos = 0
 		for x in MPaskList:
@@ -320,6 +398,9 @@ class EasyMedia(Screen):
 			entry[2](arg)
 		else:
 			self.close(entry)
+
+	def emContextMenu(self):
+		self.session.open(ConfigEasyMedia)
 
 	def emContextMenu(self):
 		self.session.open(ConfigEasyMedia)
@@ -435,6 +516,15 @@ def MPcallbackFunc(answer):
 			EMsession.open(Vidtype)
 		else:
 			EMsession.open(MessageBox, text = _('MyVideo Player is not installed!'), type = MessageBox.TYPE_ERROR)
+	elif answer is not None and "++++" in answer:
+		plugToRun = answer[4:]
+		try:
+			inpf = open(("/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/" + plugToRun + ".plug"), 'rb')
+			runPlug = pickle.load(inpf)
+			inpf.close()	
+			runPlug(session = EMsession)
+		except: EMsession.open(MessageBox, text = (plugToRun + " not found!"), type = MessageBox.TYPE_WARNING)
+	
 
 
 
