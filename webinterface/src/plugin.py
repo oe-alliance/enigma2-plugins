@@ -176,34 +176,30 @@ def startWebserver(session):
 				print "[Webinterface] Installing Webserver Certificates for SSL encryption"
 				installCertificates(session, startWebserver)
 				return
-				
-		for adaptername in iNetwork.ifaces:				
-			ip = '.'.join("%d" % d for d in iNetwork.ifaces[adaptername]['ip'])
-						
-			#Only if it's up and has a "good" IP
-			if ip != '0.0.0.0' and iNetwork.ifaces[adaptername]['up'] == True:
-			#HTTP
-				if config.plugins.Webinterface.http.enabled.value is True:
-					ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value)
-					if ret == False:
-						errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.http.port.value)
-					else:
-						registerBonjourService('http', config.plugins.Webinterface.http.port.value)
-			#HTTPS		
-				if config.plugins.Webinterface.https.enabled.value is True:					
-					ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, True)
-					if ret == False:
-						errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.https.port.value)
-					else:
-						registerBonjourService('https', config.plugins.Webinterface.https.port.value)
+		# Listen on all Interfaces
+		ip = "0.0.0.0"
+		#HTTP
+		if config.plugins.Webinterface.http.enabled.value is True:
+			ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value)
+			if ret == False:
+				errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.http.port.value)
+			else:
+				registerBonjourService('http', config.plugins.Webinterface.http.port.value)
+		#HTTPS		
+		if config.plugins.Webinterface.https.enabled.value is True:					
+			ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, True)
+			if ret == False:
+				errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.https.port.value)
+			else:
+				registerBonjourService('https', config.plugins.Webinterface.https.port.value)
 	
-	#LOCAL HTTP Connections (Streamproxy)
-		ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.streamauth.value)			
-		if ret == False:
-			errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
-		
-		if errors != "":
-			session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
+#		#LOCAL HTTP Connections (Streamproxy)
+#		ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.streamauth.value)			
+#		if ret == False:
+#			errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
+#		
+#		if errors != "":
+#			session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
 		
 #===============================================================================
 # stop the Webinterface for all configured Interfaces
@@ -267,7 +263,14 @@ class HTTPAuthResource(resource.Resource):
 
 		return self.unauthorizedResource
 	
-	def isAuthenticated(self, request):
+	def isAuthenticated(self, request):		
+		host = request.getHost().host
+		#If streamauth is disabled allow all acces from localhost
+		if not config.plugins.Webinterface.streamauth.value:			
+			if( host == "127.0.0.1" or host == "localhost" ):
+				print "[WebInterface.plugin.isAuthenticated] Streaming auth is disabled bypassing authcheck because host is '%s'" %host
+				return True
+					
 		# get the Session from the Request
 		sessionNs = request.getSession().sessionNamespaces
 		
@@ -291,6 +294,7 @@ class HTTPAuthResource(resource.Resource):
 			return self.resource.render(request)
 		
 		else:
+			print "[Webinterface.HTTPAuthResource.render] !!! unauthorized !!!"
 			return self.unautorized(request).render(request)
 
 #===============================================================================
@@ -301,6 +305,7 @@ class HTTPAuthResource(resource.Resource):
 			return self.resource.getChildWithDefault(path, request)
 		
 		else:
+			print "[Webinterface.HTTPAuthResource.render] !!! unauthorized !!!"
 			return self.unautorized(request)
 
 #===============================================================================
@@ -376,10 +381,10 @@ def check_passwd(name, passwd, pwfile='/etc/passwd'):
 	try:
 		enc_passwd = getuser(name)
 	except (KeyError, IOError):
-		print "!!! EXCEPT"
+		print "[Webinterface.check_passwd] No such user!"
 		return False
 	if not enc_passwd:
-		"!!! NOT ENC_PASSWD"
+		"[Webinterface.check_passwd] NOT ENC_PASSWD"
 		return False
 	elif len(enc_passwd) >= 3 and enc_passwd[:3] == '$1$':
 		salt = enc_passwd[3:enc_passwd.find('$', 3)]
