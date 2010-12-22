@@ -9,3 +9,4 @@ ltmain.sh
 Makefile.in
 missing
 py-compile
+/.settings
