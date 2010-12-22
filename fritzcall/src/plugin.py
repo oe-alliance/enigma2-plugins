@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
-$Author$
-$Revision$
-$Date$
-$Id$
+$Author: michael $
+$Revision: 626 $
+$Date: 2010-12-20 15:33:20 +0100 (Mo, 20 Dez 2010) $
+$Id: plugin.py 626 2010-12-20 14:33:20Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -290,9 +290,9 @@ class FritzAbout(Screen):
 		}, -2)
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
-							"$Author$"[1:-2] + "\n" +
-							"$Revision$"[1:-2] + "\n" + 
-							"$Date$"[1:23] + "\n"
+							"$Author: michael $"[1:-2] + "\n" +
+							"$Revision: 626 $"[1:-2] + "\n" + 
+							"$Date: 2010-12-20 15:33:20 +0100 (Mo, 20 Dez 2010) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -428,7 +428,7 @@ class FritzCallFBF:
 		start = html.find('<p class="errorMessage">FEHLER:&nbsp;')
 		if start != -1:
 			start = start + len('<p class="errorMessage">FEHLER:&nbsp;')
-			text = _("FRITZ!Box - Error logging in: %s") + html[start, html.find('</p>', start)]
+			text = _("FRITZ!Box - Error logging in\n\n") + html[start : html.find('</p>', start)]
 			self._notify(text)
 		else:
 			if self._callScreen:
@@ -2715,7 +2715,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision$"[1: - 1] + "$Date$"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 626 $"[1: - 1] + "$Date: 2010-12-20 15:33:20 +0100 (Mo, 20 Dez 2010) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -3165,7 +3165,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision$"[1:-1]	+ "$Date$"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 626 $"[1:-1]	+ "$Date: 2010-12-20 15:33:20 +0100 (Mo, 20 Dez 2010) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
