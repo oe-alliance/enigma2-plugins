@@ -96,9 +96,46 @@
 	
 	
 	<!-- ########## Input & Output Boxes ########## -->
-	<screen flags="wfNoBorder" name="SecondInfoBar" position="0,0" size="1280,78" title="Second InfoBar" zPosition="-1">
+	<!-- <screen flags="wfNoBorder" name="SecondInfoBar" position="0,0" size="1280,78" title="Second InfoBar" zPosition="-1">
 		<widget backgroundColor="background" font="Regular;18" foregroundColor="foreground" halign="center" position="50,28" render="Label" size="1180,44" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
 			<convert type="vhdConvSmartInfo">ExpertInfo</convert>
+		</widget>
+	</screen> -->
+	<screen flags="wfNoBorder" name="SecondInfoBar" position="0,0" size="1280,720" title="Second InfoBar">
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="270,359" size="1280,2"/>
+		<widget font="Regular;24" foregroundColor="secondFG" halign="center" position="50,50" render="Label" size="1180,30" source="session.CurrentService" transparent="1" zPosition="1">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" position="100,260" render="Label" size="70,30" source="session.Event_Now" transparent="1" zPosition="1">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" noWrap="1" position="270,90" render="Label" size="900,30" source="session.Event_Now" transparent="1" zPosition="1">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="secondFG" position="125,345" render="Label" size="130,30" source="session.Event_Now" transparent="1" zPosition="1">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText">InMinutes</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;24" position="100,430" render="Label" size="70,30" source="session.Event_Next" transparent="1" zPosition="1">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="grey" noWrap="1" position="270,370" render="Label" size="900,30" source="session.Event_Next" transparent="1" zPosition="1">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="grey" position="270,400" render="Label" size="130,30" source="session.Event_Next" transparent="1" zPosition="1">
+			<convert type="EventTime">Duration</convert>
+			<convert type="ClockToText">InMinutes</convert>
+		</widget>
+		<widget backgroundColor="darkgrey" borderColor="darkgrey" orientation="orTopToBottom" borderWidth="4" position="100,300" render="Progress" size="14,120" source="session.Event_Now" transparent="0" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" position="270,127" render="Label" size="900,225" source="session.Event_Now" transparent="1" valign="top" zPosition="5">
+			<convert type="EventName">ExtendedDescription</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="grey" position="270,437" render="Label" size="900,225" source="session.Event_Next" transparent="1" valign="top" zPosition="5">
+			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 	</screen>
 	

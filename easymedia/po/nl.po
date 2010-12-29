@@ -1,0 +1,162 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: EasyMedia\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-12-28 15:18+0200\n"
+"PO-Revision-Date: 2010-12-28 15:35+0200\n"
+"Last-Translator: Ni Hao <ni_hao_1@hotmail.com>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "MerlinMusicPlayer"
+msgstr "MerlinMusicPlayer"
+
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+msgid "Not easy way to start EasyMedia"
+msgstr "De moeilijkste manier om EasyMedia te starten"
+
+msgid "Music player:"
+msgstr "Muziek-speler:"
+
+msgid "Files browser:"
+msgstr "Bestandsbrowser:"
+
+msgid "Show bookmarks:"
+msgstr "Markeerpunten tonen:"
+
+msgid "YouTube player:"
+msgstr "YouTube-speler:"
+
+msgid "VLC player:"
+msgstr "VLC-speler:"
+
+msgid "DVD player:"
+msgstr "DVD speler:"
+
+msgid "Weather plugin:"
+msgstr "Weer plugin:"
+
+msgid "NetRadio player:"
+msgstr "Internet radio-speler:"
+
+msgid "Show Merlin-iDream:"
+msgstr "Merlin iDream tonen:"
+
+msgid "ZDFmediathek player:"
+msgstr "ZDFmediatheek-speler:"
+
+msgid "Movies"
+msgstr "Films"
+
+msgid "Bookmarks"
+msgstr "Markeerpunten"
+
+msgid "Pictures"
+msgstr "Foto's"
+
+msgid "Music"
+msgstr "Muziek"
+
+msgid "DVD Player"
+msgstr "DVD-speler"
+
+msgid "Weather"
+msgstr "Weer"
+
+msgid "Files"
+msgstr "Bestanden"
+
+msgid "SHOUTcast"
+msgstr "SHOUTcast"
+
+msgid "iDream"
+msgstr "iDream"
+
+msgid "MyTube Player"
+msgstr "MyTube-speler"
+
+msgid "VLC Player"
+msgstr "VLC-speler"
+
+msgid "ZDFmediathek"
+msgstr "ZDFmediatheek"
+
+msgid "Filebrowser"
+msgstr "Bestandsbrowser"
+
+msgid "DreamExplorer"
+msgstr "DreamExplorer"
+
+msgid "Picture-player is not installed!"
+msgstr "Geen picture-player gëïnstalleerd!"
+
+msgid "No Music-Player installed!"
+msgstr "Geen muziek-speler geïnstalleerd!"
+
+msgid "No File-Manager installed!"
+msgstr "Geen bestandsmanager geïnstalleerd!"
+
+msgid "Weather Plugin is not installed!"
+msgstr "Weer plugin is niet geïnstalleerd!"
+
+msgid "DVDPlayer Plugin is not installed!"
+msgstr "DVD-speler is niet geïnstalleerd!"
+
+msgid "MyTube Plugin is not installed!"
+msgstr "MyTube plugin is niet geïnstalleerd!"
+
+msgid "SHOUTcast Plugin is not installed!"
+msgstr "SHOUTcast Plugin is niet geïnstalleerd!"
+
+msgid "ZDFmediathek Plugin is not installed!"
+msgstr "ZDFmediatheek Plugin is niet geïnstalleerd!"
+
+msgid "VLC Player is not installed!"
+msgstr "VLC-speler is niet geïnstalleerd!"
+
+msgid "Merlin iDream is not installed!"
+msgstr "Merlin iDream is niet geïnstalleerd!"
+
+msgid "EasyMedia settings..."
+msgstr "EasyMedia instellingen..."
+
+msgid "Select bookmark..."
+msgstr "Markeerpunt kiezen..."
+
+msgid "Tv/Radio"
+msgstr "TV/Radio"
+
+msgid "Show tv/radio switch:"
+msgstr "Tv/Radio schakelaar tonen:"
+
+msgid "TV-mode"
+msgstr "TV-Mode"
+
+msgid "Radio-mode"
+msgstr "Radio-Mode"
+
+msgid "Nothing"
+msgstr "Terug"
+
+msgid "MyVideo Player is not installed!"
+msgstr "MyVideo/speler is niet geïnstalleerd!"
+
+msgid "MyVideo"
+msgstr "MyVideo"
+
+msgid "MyVideo player:"
+msgstr "MyVideo/speler:"
+
+msgid "Add/remove plugin"
+msgstr "Plugin toevoegen/verwijderen"
+
+msgid " removed from EasyMedia"
+msgstr " uit EasyMedia verwijderd"
+
+msgid " added to EasyMedia"
+msgstr " aan EasyMedia toegevoegd"
+
