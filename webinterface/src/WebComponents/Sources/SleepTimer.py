@@ -26,35 +26,39 @@ class SleepTimer(Source):
                     time = self.session.nav.SleepTimer.getCurrentSleepTime()
                     return ( True, "SleepTimer is enabled! %s Minutes remaining." %time) 
                 else:
-                    return ( False, "SleepTimer is disabled!")
+                    return ( True, "SleepTimer is disabled!")
                 
             elif cmd['cmd'] == "set":
-                if cmd['time'] is None :
-                    return ( False, "Obligatory parameter 'time' [0-999] is missing" )
-                elif cmd['enabled'] is None :
-                    return ( False, "Obligatory parameter 'enabled' [True,False] is missing" )
-                
-                
-                    
-                
-                time = int(float(cmd['time']))
-                if cmd['action'] is None :
-                    action = "standby"
-                else:
-                    action = cmd['action']
-                
-                
                 if cmd['enabled'] == 'True':
                     enabled = True
-                else:
+                elif cmd['enabled'] == 'False':
                     enabled = False
+                else:
+                   return ( False, "Obligatory parameter 'enabled' [True,False] has unspecified value '%s'" %cmd['enabled'] )  
                 
-                if time > 999:
-                    time = 999        
-                elif time < 0:
-                    time = 0
+                if not enabled:
+                    self.session.nav.SleepTimer.clear()
+                    self.session.open(MessageBox, _("The sleep timer has been disabled."), MessageBox.TYPE_INFO)
+                    return ( True, "Sleeptimer disabled" )
                 
-                if enabled:
+                else:
+                    if cmd['time'] is None :
+                        return ( False, "Obligatory parameter 'time' [0-999] is missing" )
+                    elif cmd['enabled'] is None :
+                        return ( False, "Obligatory parameter 'enabled' [True,False] is missing" )
+                      
+                    time = int(float(cmd['time']))
+                    
+                    if cmd['action'] is None :
+                        action = "standby"
+                    else:
+                        action = cmd['action']
+                    
+                    if time > 999:
+                        time = 999        
+                    elif time < 0:
+                        time = 0
+                    
                     if action == "shutdown":
                         config.SleepTimer.action.value = action
                     else:
@@ -66,11 +70,7 @@ class SleepTimer(Source):
                     self.session.nav.SleepTimer.setSleepTime(time)
                     self.session.open(MessageBox, _("The sleep timer has been activated."), MessageBox.TYPE_INFO)
                     return ( True, "Sleeptimer set to %s minutes" %time)
-                else:
-                    self.session.nav.SleepTimer.clear()
-                    self.session.open(MessageBox, _("The sleep timer has been disabled."), MessageBox.TYPE_INFO)
-                    return ( True, "Sleeptimer disabled" ) %time
-                    
+                        
             else:
                 return ( False, "Obligatory parameter 'cmd' [get,set] has unspecified value '%s'" %cmd['cmd'] ) 
         else:
