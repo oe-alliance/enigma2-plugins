@@ -365,4 +365,10 @@ class ServiceListPlayableWebScreen(WebScreen):
 		from WebComponents.Sources.ServicePlayable import ServicePlayable
 		
 		self["ServiceListPlayable"] = ServicePlayable(session, type=ServicePlayable.BOUQUET)
+
+class SleepTimerWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		
+		from WebComponents.Sources.SleepTimer import SleepTimer		
+		self["SleepTimer"] = SleepTimer(session)
