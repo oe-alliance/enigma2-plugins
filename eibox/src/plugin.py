@@ -294,6 +294,8 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		offset = [12, 10] # fix up browser css spacing
 		iconsize = [32, 32]
 		
+		self.setup_title = "E.I.B.ox"
+
 		self.EIB_objects = EIB_objects
 		for EIB_object in self.EIB_objects:
 			if EIB_object.object_type == EIB_GOTO:
@@ -338,6 +340,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		self.initConfigList()
 		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		self.onChangedEntry = [ ]
 
 		self["actions"] = ActionMap(["SetupActions", "OkCancelActions", "ColorActions", "DirectionActions"], 
 		{
@@ -352,6 +355,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 			"green": self.keyOk,
 			"ok": self.keyOk
 		}, -2)
+
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def handleInputHelpers(self):
@@ -418,10 +422,12 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		self.setWindowTitle(status)
 
 	def setWindowTitle(self, status):
+		self.setup_title = "E.I.B.ox %s " % self.EIB_objects.zone_name
 		if status == True:
-			self.setTitle("E.I.B.ox %s " % self.EIB_objects.zone_name + _("(online)"))
+			self.setup_title += _("(online)")
 		else:
-			self.setTitle("E.I.B.ox %s " % self.EIB_objects.zone_name + _("(offline!)"))
+			self.setup_title += _("(offline!)")
+		self.setTitle(self.setup_title)
 
 	def updateObject(self, EIB_object):
 		if EIB_object.object_type in (EIB_THERMO, EIB_TEXT):
@@ -458,8 +464,8 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(EIB_object.label, EIB_object.config_element))
 		
 	def changedEntry(self):
-	  	current = self["config"].getCurrent()
-	  	if current:
+		current = self["config"].getCurrent()
+		if current:
 			EIB_object = self.EIB_objects.by_cfg(current[1])
 			if EIB_object.object_type == EIB_GOTO:
 				self.exit(EIB_object.object_id)
@@ -469,7 +475,19 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 				status = self.EIB_objects.EIBreadSingle(EIB_object)
 				self.updateObject(EIB_object)
 				self.setWindowTitle(status)
-	
+		for summaryWatcher in self.onChangedEntry:
+			summaryWatcher()
+
+	def getCurrentEntry(self):
+		return str(self["config"].getCurrent()[0])
+
+	def getCurrentValue(self):
+		return str(self["config"].getCurrent()[1].getText())
+
+	def createSummary(self):
+		from Screens.Setup import SetupSummary
+		return SetupSummary
+
 	def exit(self, gotoZone=None):
 		self.refresh_timer.callback.remove(self.refreshObjects)
 		self.close(gotoZone)
