@@ -96,7 +96,7 @@ class EIBObject(object):
 				choiceslist.append(choice)
 			self.config_element = ConfigSelection(choices=choiceslist)
 		elif self.object_type == EIB_DIMMER:
-			self.config_element = ConfigSelectionNumber(0,255,15)
+			self.config_element = ConfigSelectionNumber(0,255,1)
 			#self.config_element = ConfigSlider(increment = 10, limits=(0,255))
 		elif self.object_type == EIB_THERMO:
 			self.config_element = ConfigFloat(default=[0,0],limits=[(-31,+31),(0,99)])
@@ -350,6 +350,8 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 			"down": self.keyDown,
 			"downUp": self.keyPass,
 			"downRepeated": self.keyDown,
+			"leftRepeated": self.keyLeftRepeated,
+			"rightRepeated": self.keyRightRepeated,
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
 			"green": self.keyOk,
@@ -371,21 +373,41 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		self.moveBorder(self["config"].instance.moveDown)
 
 	def keyOk(self):
-		current = self["config"].getCurrent()
-	  	if current:
-			EIB_object = self.EIB_objects.by_cfg(current[1])
-			if EIB_object.object_type == EIB_DIMMER:
-				if EIB_object.value < 128:
-					EIB_object.value = 255
-				else:
-					EIB_object.value = 0
-				self.changedEntry()
-				self["config"].invalidateCurrent()
+		EIB_object = self.getCurrentObj()
+		if EIB_object and EIB_object.object_type == EIB_DIMMER:
+			if EIB_object.value < 128:
+				EIB_object.value = 255
 			else:
-				self.keyRight()
+				EIB_object.value = 0
+			self.changedEntry()
+			self["config"].invalidateCurrent()
+		else:
+			self.keyRight()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
+
+	def keyRightRepeated(self):
+		EIB_object = self.getCurrentObj()
+		if EIB_object and EIB_object.object_type == EIB_DIMMER:
+			value = EIB_object.getValue()
+			if value < 255-15:
+				EIB_object.value += 15
+			else:
+				EIB_object.value = 255
+			self.changedEntry()
+			self["config"].invalidateCurrent()
+
+	def keyLeftRepeated(self):
+		EIB_object = self.getCurrentObj()
+		if EIB_object and EIB_object.object_type == EIB_DIMMER:
+			value = EIB_object.getValue()
+			if value > 15:
+				EIB_object.value -= 15
+			else:
+				EIB_object.value = 0
+			self.changedEntry()
+			self["config"].invalidateCurrent()
 
 	def keyCancel(self):
 		self.exit()
@@ -398,6 +420,13 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		interval = config.eib.refresh.value
 		if interval >= 500:
 			self.refresh_timer.start(interval)
+
+	def getCurrentObj(self):
+		current = self["config"].getCurrent()
+		if current:
+			return self.EIB_objects.by_cfg(current[1])
+		else:
+			return None
 
 	def moveBorder(self, direction=None):
 		if direction != None:
@@ -462,7 +491,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		self.list = []
 		for EIB_object in self.EIB_objects:
 			self.list.append(getConfigListEntry(EIB_object.label, EIB_object.config_element))
-		
+	
 	def changedEntry(self):
 		current = self["config"].getCurrent()
 		if current:
