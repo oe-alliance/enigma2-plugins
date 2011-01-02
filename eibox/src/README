@@ -41,15 +41,14 @@ or
 == known issues ==
 
 so far the following "widgets" of knxweb have been implemented in E.I.B.ox:
-* light switch
+* switches for light, blinds, outlet, fan, pump
 * light dimmer
-* blinds
 * thermostat (actual temperature and set point)
 * text
 * zone goto
 
 still to be implemented are
-* switches for outlet, fan, pump and multiswitch
+* multiswitch
 * thermostat KONNEX mode switching
 * value input
 * camera link
@@ -62,3 +61,4 @@ still to be implemented are
 * have background images, use only PNG files with dimensions of exactly 550x400
 * for icons, use 32x32 PNGs
 * don't have dots ('.') in your object IDs or dimmer progress bars won't work
+

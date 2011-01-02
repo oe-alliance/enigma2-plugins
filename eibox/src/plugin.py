@@ -83,7 +83,7 @@ class EIBObject(object):
 		self.createConfigElement()
 
 	def createConfigElement(self):
-		if self.object_type == EIB_SWITCH and self.img == "light":
+		if self.object_type == EIB_SWITCH and self.img in ["light", "outlet", "fan", "pump"]:
 			self.config_element = ConfigOnOff()
 		elif self.object_type == EIB_SWITCH and self.img == "blinds":
 			self.config_element = ConfigUpDown()
@@ -145,7 +145,7 @@ class EIBObject(object):
 					print "[setValue] Error setting", val, self.getInfo()
 					return
 			if config.eib.debug.value:
-				print "[setValue]", self.object_id, ":=", val, "now: ", self.config_element.getValue()
+				print "[setValue]", self.object_id, ":=", val, "before:", self.config_element.getValue()
 		else:
 			print "[setValue] error: no config_element", self.getInfo()
 
@@ -263,12 +263,12 @@ class EIBObjects(object):
 						      elif key == "value":
 							value = item.nodeValue
 						      i += 1
-						    if object_id and value != None:
+						    if object_id and value != None and self.ids.has_key(object_id):
 							  EIBObject = self.ids[object_id]
 							  EIBObject.value = value
 							  if config.eib.debug.value:
 								print "[parseMultiRead]", EIBObject.object_id, " := ", EIBObject.value
-					            else:
+					            elif config.eib.debug.value:
 							  print "[parseMultiRead] couldn't parse persistence object", object_id, value
 		except xml.parsers.expat.ExpatError:
 			print ("[parseMultiRead] XML parser error") 
@@ -296,6 +296,12 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 					pixmap_src = (img_prefix+'light_off.png',img_prefix+'light_on.png')
 				elif EIB_object.img == "blinds":
 					pixmap_src = (img_prefix+'blinds_up.png',img_prefix+'blinds_down.png')
+				elif EIB_object.img == "outlet":
+					pixmap_src = (img_prefix+'outlet_off.png',img_prefix+'outlet_on.png')
+				elif EIB_object.img == "fan":
+					pixmap_src = (img_prefix+'fan_off.png',img_prefix+'fan_on.png')
+				elif EIB_object.img == "pump":
+					pixmap_src = (img_prefix+'pump_off.png',img_prefix+'pump_on.png')
 				elif EIB_object.img == "custom":
 					pixmap_src = (img_prefix+EIB_object.custom_img[0],img_prefix+EIB_object.custom_img[1])
 			if EIB_object.object_type == EIB_DIMMER:
@@ -447,8 +453,8 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 				self.exit(EIB_object.object_id)
 			else:
 				if not EIB_object.readonly:
-					status = self.EIB_objects.EIBwriteSingle(EIB_object)
-				self.EIB_objects.EIBreadSingle(EIB_object)
+					self.EIB_objects.EIBwriteSingle(EIB_object)
+				status = self.EIB_objects.EIBreadSingle(EIB_object)
 				self.updateObject(EIB_object)
 				self.setWindowTitle(status)
 	
@@ -513,7 +519,7 @@ class EIBox(Screen, ConfigListScreen):
 				    zone_img = str(subnode.getAttribute("img"))
 				    zone_name = str(subnode.getAttribute("name"))
 				    filename = img_prefix + zone_img
-				    if not fileExists(filename):
+				    if not zone_img or not fileExists(filename):
 					print "[loadXML] ", filename, " not found! using default image"
 					zone_img = "default_bg.png"
     				    self.EIB_zones[zone_id] = EIBObjects(zone_id, zone_name, zone_img)
