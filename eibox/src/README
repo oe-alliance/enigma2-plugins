@@ -42,13 +42,13 @@ or
 
 so far the following "widgets" of knxweb have been implemented in E.I.B.ox:
 * switches for light, blinds, outlet, fan, pump
+* multiswitch
 * light dimmer
 * thermostat (actual temperature and set point)
 * text
 * zone goto
 
 still to be implemented are
-* multiswitch
 * thermostat KONNEX mode switching
 * value input
 * camera link
