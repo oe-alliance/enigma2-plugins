@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - easymedia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-04 04:09+0100\n"
+"POT-Creation-Date: 2011-01-02 16:04+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,187 +17,249 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/easymedia\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/easymedia\n"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:51
-#: /home/dario/Plugins/easymedia/src/plugin.py:52
-#: /home/dario/Plugins/easymedia/src/plugin.py:53
-#: /home/dario/Plugins/easymedia/src/plugin.py:54
-#: /home/dario/Plugins/easymedia/src/plugin.py:55
-#: /home/dario/Plugins/easymedia/src/plugin.py:56
-#: /home/dario/Plugins/easymedia/src/plugin.py:57
 #: /home/dario/Plugins/easymedia/src/plugin.py:58
 #: /home/dario/Plugins/easymedia/src/plugin.py:59
 #: /home/dario/Plugins/easymedia/src/plugin.py:60
+#: /home/dario/Plugins/easymedia/src/plugin.py:61
+#: /home/dario/Plugins/easymedia/src/plugin.py:62
+#: /home/dario/Plugins/easymedia/src/plugin.py:63
+#: /home/dario/Plugins/easymedia/src/plugin.py:64
+#: /home/dario/Plugins/easymedia/src/plugin.py:65
+#: /home/dario/Plugins/easymedia/src/plugin.py:66
+#: /home/dario/Plugins/easymedia/src/plugin.py:67
+#: /home/dario/Plugins/easymedia/src/plugin.py:68
+#: /home/dario/Plugins/easymedia/src/plugin.py:69
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:51
+#: /home/dario/Plugins/easymedia/src/plugin.py:58
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:51
+#: /home/dario/Plugins/easymedia/src/plugin.py:58
 msgid "MerlinMusicPlayer"
 msgstr "MerlinMusicPlayer"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:52
+#: /home/dario/Plugins/easymedia/src/plugin.py:59
 msgid "Filebrowser"
 msgstr "Browser file"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:52
+#: /home/dario/Plugins/easymedia/src/plugin.py:59
 msgid "DreamExplorer"
 msgstr "DreamExplorer"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:52
+#: /home/dario/Plugins/easymedia/src/plugin.py:59
 msgid "TuxCom"
 msgstr "TuxCom"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:53
-#: /home/dario/Plugins/easymedia/src/plugin.py:54
-#: /home/dario/Plugins/easymedia/src/plugin.py:55
-#: /home/dario/Plugins/easymedia/src/plugin.py:56
-#: /home/dario/Plugins/easymedia/src/plugin.py:57
-#: /home/dario/Plugins/easymedia/src/plugin.py:58
-#: /home/dario/Plugins/easymedia/src/plugin.py:59
 #: /home/dario/Plugins/easymedia/src/plugin.py:60
+#: /home/dario/Plugins/easymedia/src/plugin.py:61
+#: /home/dario/Plugins/easymedia/src/plugin.py:62
+#: /home/dario/Plugins/easymedia/src/plugin.py:63
+#: /home/dario/Plugins/easymedia/src/plugin.py:64
+#: /home/dario/Plugins/easymedia/src/plugin.py:65
+#: /home/dario/Plugins/easymedia/src/plugin.py:66
+#: /home/dario/Plugins/easymedia/src/plugin.py:67
+#: /home/dario/Plugins/easymedia/src/plugin.py:68
+#: /home/dario/Plugins/easymedia/src/plugin.py:69
 msgid "Enabled"
 msgstr "Abilitato"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:66
+#: /home/dario/Plugins/easymedia/src/plugin.py:75
 msgid "Not easy way to start EasyMedia"
 msgstr "Via complessa per avviare EasyMedia"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:148
+#: /home/dario/Plugins/easymedia/src/plugin.py:173
 msgid "EasyMedia settings..."
 msgstr "Configurazione EasyMedia..."
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:150
+#: /home/dario/Plugins/easymedia/src/plugin.py:176
 msgid "Music player:"
 msgstr "Player musicale:"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:151
+#: /home/dario/Plugins/easymedia/src/plugin.py:177
 msgid "Files browser:"
 msgstr "Browser file:"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:152
+#: /home/dario/Plugins/easymedia/src/plugin.py:178
 msgid "Show bookmarks:"
 msgstr "Mostrare segnalibri:"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:153
+#: /home/dario/Plugins/easymedia/src/plugin.py:179
+msgid "Show tv/radio switch:"
+msgstr "Mostrare commutatore tv/radio:"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:180
 msgid "YouTube player:"
 msgstr "Player YouTube:"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:154
+#: /home/dario/Plugins/easymedia/src/plugin.py:181
 msgid "VLC player:"
 msgstr "Player VLC:"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:155
+#: /home/dario/Plugins/easymedia/src/plugin.py:182
 msgid "DVD player:"
 msgstr "Player DVD:"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:156
+#: /home/dario/Plugins/easymedia/src/plugin.py:183
 msgid "Weather plugin:"
 msgstr "Plugin meteo:"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:157
+#: /home/dario/Plugins/easymedia/src/plugin.py:184
 msgid "NetRadio player:"
 msgstr "Player NetRadio:"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:158
+#: /home/dario/Plugins/easymedia/src/plugin.py:185
 msgid "Show Merlin-iDream:"
 msgstr "Mostrare Melin-iDream:"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:159
+#: /home/dario/Plugins/easymedia/src/plugin.py:186
 msgid "ZDFmediathek player:"
 msgstr "Player ZDFmediathek:"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:203
+#: /home/dario/Plugins/easymedia/src/plugin.py:187
+msgid "MyVideo player:"
+msgstr "Player MyVideo:"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:213
+msgid "Add/remove plugin"
+msgstr "Aggiungere/Rimuovere plugin"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:228
+msgid "Some plugins are not available:\n"
+msgstr "Alcuni plugin non sono disponibili:\n"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:230
+#, python-format
+msgid "%s (%s)\n"
+msgstr "%s (%s)\n"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:249
+msgid " added to EasyMedia"
+msgstr " aggiunto a EasyMedia"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:255
+msgid " removed from EasyMedia"
+msgstr "Rimosso da EasyMedia"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:279
+#: /home/dario/Plugins/easymedia/src/plugin.py:314
 msgid "Movies"
 msgstr "Film"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:206
+#: /home/dario/Plugins/easymedia/src/plugin.py:317
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:209
+#: /home/dario/Plugins/easymedia/src/plugin.py:320
 msgid "Pictures"
 msgstr "Immagini"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:212
+#: /home/dario/Plugins/easymedia/src/plugin.py:323
 msgid "Music"
 msgstr "Musica"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:215
+#: /home/dario/Plugins/easymedia/src/plugin.py:327
+msgid "Tv/Radio"
+msgstr "Tv/Radio"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:329
+msgid "Radio"
+msgstr "Radio"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:332
 msgid "DVD Player"
 msgstr "Player DVD"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:218
+#: /home/dario/Plugins/easymedia/src/plugin.py:335
 msgid "Weather"
 msgstr "Meteo"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:221
+#: /home/dario/Plugins/easymedia/src/plugin.py:338
 msgid "Files"
 msgstr "File"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:224
+#: /home/dario/Plugins/easymedia/src/plugin.py:341
 msgid "SHOUTcast"
 msgstr "SHOUTcast"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:227
+#: /home/dario/Plugins/easymedia/src/plugin.py:344
 msgid "iDream"
 msgstr "iDream"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:230
+#: /home/dario/Plugins/easymedia/src/plugin.py:347
 msgid "MyTube Player"
 msgstr "Player MyTube"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:233
+#: /home/dario/Plugins/easymedia/src/plugin.py:350
 msgid "VLC Player"
 msgstr "Player VLC"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:236
+#: /home/dario/Plugins/easymedia/src/plugin.py:353
 msgid "ZDFmediathek"
 msgstr "ZDFmediathek"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:287
+#: /home/dario/Plugins/easymedia/src/plugin.py:356
+msgid "MyVideo"
+msgstr "MyVideo"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:427
+msgid "TV-mode"
+msgstr "Modalità TV"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:428
+msgid "Radio-mode"
+msgstr "Modalità Radio"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:429
+msgid "Nothing"
+msgstr "Nulla"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:441
 msgid "Select bookmark..."
 msgstr "Selezionare segnalibro..."
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:293
+#: /home/dario/Plugins/easymedia/src/plugin.py:447
 msgid "Picture-player is not installed!"
 msgstr "PicturePlayer non installato!"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:303
+#: /home/dario/Plugins/easymedia/src/plugin.py:457
 msgid "No Music-Player installed!"
 msgstr "Nessun player musicale installato!"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:315
+#: /home/dario/Plugins/easymedia/src/plugin.py:469
 msgid "No File-Manager installed!"
 msgstr "Nessun file manager installato!"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:321
+#: /home/dario/Plugins/easymedia/src/plugin.py:475
 msgid "Weather Plugin is not installed!"
 msgstr "Weather plugin non installato!"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:327
+#: /home/dario/Plugins/easymedia/src/plugin.py:481
 msgid "DVDPlayer Plugin is not installed!"
 msgstr "Plugin DVDPlayer non installato!"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:333
+#: /home/dario/Plugins/easymedia/src/plugin.py:487
 msgid "MyTube Plugin is not installed!"
 msgstr "Plugin MyTube non installato!"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:339
+#: /home/dario/Plugins/easymedia/src/plugin.py:493
 msgid "SHOUTcast Plugin is not installed!"
 msgstr "Plugin SHOUTcast non installato!"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:345
+#: /home/dario/Plugins/easymedia/src/plugin.py:499
 msgid "ZDFmediathek Plugin is not installed!"
 msgstr "Plugin ZDFmediathek non installato!"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:351
+#: /home/dario/Plugins/easymedia/src/plugin.py:505
 msgid "VLC Player is not installed!"
 msgstr "VLCPlayer non installato!"
 
-#: /home/dario/Plugins/easymedia/src/plugin.py:358
+#: /home/dario/Plugins/easymedia/src/plugin.py:512
 msgid "Merlin iDream is not installed!"
 msgstr "Merlin iDream non installato!"
+
+#: /home/dario/Plugins/easymedia/src/plugin.py:518
+msgid "MyVideo Player is not installed!"
+msgstr "Player MyVideo non installato!"
 

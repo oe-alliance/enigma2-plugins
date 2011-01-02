@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - webinterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 21:11+0100\n"
-"PO-Revision-Date: 2009-10-29 21:11+0100\n"
+"POT-Creation-Date: 2011-01-02 18:12+0100\n"
+"PO-Revision-Date: 2011-01-02 18:13+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -76,13 +77,21 @@ msgstr "Abilitare autenticazione streaming"
 msgid "Webinterface: Main Setup"
 msgstr "Interfaccia web - Configurazione"
 
-#: /home/dario/Plugins/webinterface/src/plugin.py:503
+#: /home/dario/Plugins/webinterface/src/plugin.py:545
 msgid "Webinterface"
 msgstr "Webinterface"
 
-#: /home/dario/Plugins/webinterface/src/plugin.py:503
+#: /home/dario/Plugins/webinterface/src/plugin.py:545
 msgid "Configuration for the Webinterface"
 msgstr "Configurazione Interfaccia web"
+
+#: /home/dario/Plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:41
+msgid "The sleep timer has been disabled."
+msgstr "Sleep timer disattivato."
+
+#: /home/dario/Plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:71
+msgid "The sleep timer has been activated."
+msgstr "Sleep timer attivato."
 
 #: /home/dario/Plugins/webinterface/src/WebComponents/Converter/HddInfo.py:32
 msgid "N/A"
