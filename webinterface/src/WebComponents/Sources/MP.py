@@ -89,7 +89,7 @@ class MP(Source):
 			useServiceRef = True
 		elif param["types"] == "any":
 			matchingPattern = ".*"
-		else:
+		elif param["types"]:
 			matchingPattern = param["types"]
 
 		path = param["path"]
