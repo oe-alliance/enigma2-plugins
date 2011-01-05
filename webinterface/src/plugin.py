@@ -1,6 +1,6 @@
 Version = '$Header$';
 
-from enigma import eConsoleAppContainer
+from enigma import eConsoleAppContainer, eTPM
 from Plugins.Plugin import PluginDescriptor
 
 from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
@@ -19,11 +19,10 @@ from socket import gethostname as socket_gethostname
 from OpenSSL import SSL
 
 from os.path import isfile as os_isfile
-
-
-
-from __init__ import _, __version__
-
+from __init__ import _, __version__, decrypt_block
+from webif import get_random, validate_certificate
+tpm = eTPM()
+rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
 #CONFIG INIT
 
 #init the config
@@ -153,7 +152,7 @@ def restartWebserver(session):
 #===============================================================================
 # start the Webinterface for all configured Interfaces
 #===============================================================================
-def startWebserver(session):
+def startWebserver(session, l2k):
 	global running_defered
 	global toplevel
 	
@@ -180,26 +179,29 @@ def startWebserver(session):
 		ip = "0.0.0.0"
 		#HTTP
 		if config.plugins.Webinterface.http.enabled.value is True:
-			ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value)
+			ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value, l2k)
 			if ret == False:
 				errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.http.port.value)
 			else:
 				registerBonjourService('http', config.plugins.Webinterface.http.port.value)
+			
+		#Streaming requires listening on 127.0.0.1:80 no matter what, ensure it its available
+		if config.plugins.Webinterface.http.port.value != 80 or not config.plugins.Webinterface.http.enabled.value:
+			#LOCAL HTTP Connections (Streamproxy)
+			ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.http.auth.value, l2k)			
+			if ret == False:
+				errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
+			
+			if errors != "":
+				session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
+				
 		#HTTPS		
 		if config.plugins.Webinterface.https.enabled.value is True:					
-			ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, True)
+			ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, l2k, True)
 			if ret == False:
 				errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.https.port.value)
 			else:
 				registerBonjourService('https', config.plugins.Webinterface.https.port.value)
-	
-#		#LOCAL HTTP Connections (Streamproxy)
-#		ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.streamauth.value)			
-#		if ret == False:
-#			errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
-#		
-#		if errors != "":
-#			session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
 		
 #===============================================================================
 # stop the Webinterface for all configured Interfaces
@@ -222,28 +224,58 @@ def stopWebserver(session):
 # Starts an Instance of the Webinterface
 # on given ipaddress, port, w/o auth, w/o ssl
 #===============================================================================
-def startServerInstance(session, ipaddress, port, useauth=False, usessl=False):
-	try:
-		if useauth:
-# HTTPAuthResource handles the authentication for every Resource you want it to			
-			root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
-			site = server.Site(root)			
-		else:
-			site = server.Site(toplevel)
+def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usessl=False):
+	#try:
+	l3k = None		
+	l3c = tpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
 	
-		if usessl:
-			
-			ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem', '/etc/enigma2/cacert.pem', sslmethod=SSL.SSLv23_METHOD)
-			d = reactor.listenSSL(port, site, ctx, interface=ipaddress)
-		else:
-			d = reactor.listenTCP(port, site, interface=ipaddress)
-		running_defered.append(d)		
-		print "[Webinterface] started on %s:%i" % (ipaddress, port), "auth=", useauth, "ssl=", usessl
-		return True
+	if l3c is None:
+		print "random error"
+		return False			
 	
-	except Exception, e:
-		print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e		
+	l3k = validate_certificate(l3c, l2k)
+	if l3k is None:
+		print "random error"			
 		return False
+	
+	random = get_random()
+	if random is None:
+		print "random error"
+		return False
+	
+	value = tpm.challenge(random)
+	result = decrypt_block(value, l3k)
+	
+	if result is None:
+		print "random error"
+		return False
+	else:
+		if result [80:88] == random:		
+			print "[WebInterface.plugin].startServerInstance - Genuine verfication succeeded!"
+		else:
+			print "random error"
+			return False	
+	
+	if useauth:
+# HTTPAuthResource handles the authentication for every Resource you want it to			
+		root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
+		site = server.Site(root)			
+	else:
+		site = server.Site(toplevel)
+
+	if usessl:
+		
+		ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem', '/etc/enigma2/cacert.pem', sslmethod=SSL.SSLv23_METHOD)
+		d = reactor.listenSSL(port, site, ctx, interface=ipaddress)
+	else:
+		d = reactor.listenTCP(port, site, interface=ipaddress)
+	running_defered.append(d)		
+	print "[Webinterface] started on %s:%i" % (ipaddress, port), "auth=", useauth, "ssl=", usessl
+	return True
+	
+	#except Exception, e:
+		#print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e		
+		#return False
 #===============================================================================
 # HTTPAuthResource
 # Handles HTTP Authorization for a given Resource
@@ -255,7 +287,7 @@ class HTTPAuthResource(resource.Resource):
 		self.realm = realm
 		self.authorized = False
 		self.tries = 0
-		self.unauthorizedResource = UnauthorizedResource(self.realm)		
+		self.unauthorizedResource = UnauthorizedResource(self.realm)
 	
 	def unautorized(self, request):
 		request.setResponseCode(http.UNAUTHORIZED)
@@ -520,14 +552,29 @@ def checkBonjour():
 # Actions to take place after Network is up (startup the Webserver)
 #===============================================================================
 def networkstart(reason, **kwargs):
-	if reason is True:
-		startWebserver(global_session)
-		checkBonjour()
+	l2r = False
+	l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+	
+	if l2c is None:
+		return
+	
+	l2k = validate_certificate(l2c, rootkey)
+	if l2k is None:
+		return
 		
-	elif reason is False:
-		stopWebserver(global_session)
-		checkBonjour()
-
+	l2r = True
+	
+	if l2r:	
+		if reason is True:
+			startWebserver(global_session, l2k)
+			checkBonjour()
+			
+		elif reason is False:
+			stopWebserver(global_session)
+			checkBonjour()	
+	else:
+		print "random error"
+		
 def openconfig(session, **kwargs):
 	session.openWithCallback(configCB, WebIfConfigScreen)
 
