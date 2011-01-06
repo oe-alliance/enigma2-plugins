@@ -43,7 +43,7 @@ class vConvClockToText(Converter, object):
 			self.type = self.DEFAULT
 		if config.osd.language.value == "de_DE":
 			self.Tage = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
-			self.Monate = [u"J\xe4n", "Feb", u"M\xe4r", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
+			self.Monate = ["Jan", "Feb", u"M\xe4r", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
 		elif (config.osd.language.value == "it_IT") or (config.osd.language.value == "es_ES"):
 			self.Tage = ["Lu", "Ma", "Me", "Gi", "Ve", "Sa", "Do"]
 			self.Monate = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"]
