@@ -2,7 +2,7 @@
 #
 #
 #    Ai-HD-Skins Control for Dreambox/Enigma-2
-#    Coded by Vali (c)2009-2010
+#    Coded by Vali (c)2009-2011
 #    Support: www.dreambox-tools.info
 #
 #
@@ -86,7 +86,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.release = ".release20101030"
+		self.release = ".release20110106"
 		Screen.__init__(self, session)
 		self.session = session
 		self.datei = "/usr/share/enigma2/Ai.HD/skin.xml"
