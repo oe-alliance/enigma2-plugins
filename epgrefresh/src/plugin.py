@@ -3,7 +3,7 @@ from . import _
 
 # Config
 from Components.config import config, ConfigYesNo, ConfigNumber, \
-	ConfigSubsection, ConfigClock
+	ConfigSubsection, ConfigClock, ConfigYesNo
 
 # Calculate default begin/end
 from time import time, localtime, mktime
@@ -29,6 +29,7 @@ config.plugins.epgrefresh.force = ConfigYesNo(default = False)
 config.plugins.epgrefresh.wakeup = ConfigYesNo(default = False)
 config.plugins.epgrefresh.lastscan = ConfigNumber(default = 0)
 config.plugins.epgrefresh.parse_autotimer = ConfigYesNo(default = False)
+config.plugins.epgrefresh.background = ConfigYesNo(default = False)
 
 del now, begin, end
 
