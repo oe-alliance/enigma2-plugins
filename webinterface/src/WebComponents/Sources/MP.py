@@ -10,6 +10,7 @@ class MP(Source):
 	WRITEPLAYLIST = 4
 	ADD = 5
 	REMOVE = 6
+	CURRENT = 7
 
 	def __init__(self, session, func=LIST):
 		Source.__init__(self)
@@ -198,9 +199,41 @@ class MP(Source):
 			return (False, "unknown parameter %s" % param)
 		return (True, "executed %s" % param)
 
-	list = property(lambda self: self.result)
-	lut = {
-		"ServiceReference": 0,
-		"IsDirectory": 1,
-		"Root": 2,
-	}
+	def getCurrent(self):
+		mp = self.tryOpenMP()
+		if mp is None:
+			msg = "mediaplayer not installed"
+			return ((msg, msg, msg, msg, msg, msg),)
+
+		return ((
+			mp["artist"].getText(),
+			mp["title"].getText(),
+			mp["album"].getText(),
+			mp["year"].getText(),
+			mp["genre"].getText(),
+			mp["coverArt"].coverArtFileName
+		),)
+
+	def getList(self):
+		if self.func is self.CURRENT:
+			return self.getCurrent()
+		return self.result
+
+	def getLut(self):
+		if self.func is self.CURRENT:
+			return {
+				"Artist": 0,
+				"Title": 1,
+				"Album": 2,
+				"Year": 3,
+				"Genre": 4,
+				"CoverFilename": 5,
+			}
+		return  {
+			"ServiceReference": 0,
+			"IsDirectory": 1,
+			"Root": 2,
+		}
+
+	list = property(getList)
+	lut = property(getLut)
