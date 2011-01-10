@@ -8,6 +8,7 @@ from Components.Network import iNetwork
 from Screens.MessageBox import MessageBox
 from WebIfConfig import WebIfConfigScreen
 from WebChilds.Toplevel import getToplevel
+from Tools.HardwareInfo import HardwareInfo
 
 from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG
 
@@ -21,8 +22,10 @@ from OpenSSL import SSL
 from os.path import isfile as os_isfile
 from __init__ import _, __version__, decrypt_block
 from webif import get_random, validate_certificate
+
 tpm = eTPM()
 rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
+hw = HardwareInfo()
 #CONFIG INIT
 
 #init the config
@@ -225,37 +228,30 @@ def stopWebserver(session):
 # on given ipaddress, port, w/o auth, w/o ssl
 #===============================================================================
 def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usessl=False):
-	#try:
-	l3k = None		
-	l3c = tpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+	if hw.get_device_name().lower() != "dm7025":
+		l3k = None		
+		l3c = tpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+		
+		if l3c is None:
+			return False			
+		
+		l3k = validate_certificate(l3c, l2k)
+		if l3k is None:			
+			return False
+		
+		random = get_random()
+		if random is None:
+			return False
 	
-	if l3c is None:
-		print "random error"
-		return False			
-	
-	l3k = validate_certificate(l3c, l2k)
-	if l3k is None:
-		print "random error"			
-		return False
-	
-	random = get_random()
-	if random is None:
-		print "random error"
-		return False
-	
-	value = tpm.challenge(random)
-	result = decrypt_block(value, l3k)
-	
-	if result is None:
-		print "random error"
-		return False
-	else:
-		if result [80:88] == random:		
-			print "[WebInterface.plugin].startServerInstance - Genuine verfication succeeded!"
+		value = tpm.challenge(random)
+		result = decrypt_block(value, l3k)
+		
+		if result is None:
+			return False
 		else:
-			print "random error"
-			return False	
-	
+			if result [80:88] != random:		
+				return False
+		
 	if useauth:
 # HTTPAuthResource handles the authentication for every Resource you want it to			
 		root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
@@ -553,17 +549,20 @@ def checkBonjour():
 #===============================================================================
 def networkstart(reason, **kwargs):
 	l2r = False
-	l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
-	
-	if l2c is None:
-		return
-	
-	l2k = validate_certificate(l2c, rootkey)
-	if l2k is None:
-		return
+	if hw.get_device_name().lower() != "dm7025":		
+		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
 		
-	l2r = True
-	
+		if l2c is None:
+			return
+		
+		l2k = validate_certificate(l2c, rootkey)
+		if l2k is None:
+			return
+			
+		l2r = True
+	else:
+		l2r = True
+		
 	if l2r:	
 		if reason is True:
 			startWebserver(global_session, l2k)
@@ -571,9 +570,7 @@ def networkstart(reason, **kwargs):
 			
 		elif reason is False:
 			stopWebserver(global_session)
-			checkBonjour()	
-	else:
-		print "random error"
+			checkBonjour()
 		
 def openconfig(session, **kwargs):
 	session.openWithCallback(configCB, WebIfConfigScreen)
