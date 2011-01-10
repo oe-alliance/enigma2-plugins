@@ -25,30 +25,49 @@ class PowerState(Source):
 		# 1: poweroff/deepstandby
 		# 2: rebootdreambox
 		# 3: rebootenigma
+		# 4: wakeup (if not already awake)
+		# 5: standby
 		try:
+			from Screens.Standby import inStandby
+			from Screens.Standby import Standby
 			type = int(self.cmd)
 			if type == -1:
 				return self.getStandby()
 
 			elif type == 0:
 				print "[PowerState.py] Standby 0"
-				from Screens.Standby import inStandby
-				if inStandby == None:
-					from Screens.Standby import Standby
+				if inStandby == None:					
 					self.session.open(Standby)
 					return "true"
 				else:
 					inStandby.Power()
 					return "false"
-
+							
+			elif type == 4:
+				print "[PowerState.py] Standby 4"
+				if inStandby != None:
+					inStandby.Power()
+					return "false"
+				else:
+					return "true"
+			elif type == 5:
+				print "[PowerState.py] Standby 5"
+				if inStandby == None:					
+					self.session.open(Standby)
+					return "true"	
+				else:
+					return "false"
+				
 			elif 0 < type < 4:
 				print "[PowerState.py] TryQuitMainloop"
 				from Screens.Standby import TryQuitMainloop
 				self.session.open(TryQuitMainloop, type)
 				return "true"
+							
 			else:
 				print "[PowerState.py] cmd unknown" % type
 				return "error"
+			
 		except ValueError:
 			return "error"
 
