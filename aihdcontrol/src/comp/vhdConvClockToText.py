@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 from Converter import Converter
 from time import localtime, strftime
 from Components.Element import cached
@@ -43,7 +43,7 @@ class vhdConvClockToText(Converter, object):
 			self.type = self.DEFAULT
 		if config.osd.language.value == "de_DE":
 			self.Tage = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
-			self.Monate = ["Jän", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
+			self.Monate = [u"J\xe4n", "Feb", u"M\xe4r", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
 		elif (config.osd.language.value == "it_IT") or (config.osd.language.value == "es_ES"):
 			self.Tage = ["Lu", "Ma", "Me", "Gi", "Ve", "Sa", "Do"]
 			self.Monate = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"]

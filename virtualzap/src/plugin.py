@@ -668,7 +668,7 @@ class VirtualZap(Screen):
 		# show ChannelSelection
 		self.session.execDialog(self.servicelist)
 
-	def servicelist_overwrite_zap(self):
+	def servicelist_overwrite_zap(self, *args, **kwargs):
 		# we do not really want to zap to the service, just display data for VZ
 		self.currentPiP = ""
 		if self.isPlayable():
