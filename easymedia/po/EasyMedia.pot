@@ -159,3 +159,15 @@ msgstr ""
 
 msgid " added to EasyMedia"
 msgstr ""
+
+msgid "VideoDB is not installed!"
+msgstr ""
+
+msgid "PicturePlayer:"
+msgstr ""
+
+msgid "Video database:"
+msgstr ""
+
+msgid "VideoDB"
+msgstr ""
