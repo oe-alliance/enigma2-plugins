@@ -179,7 +179,7 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("Music player:"), config.plugins.easyMedia.music))
 		list.append(getConfigListEntry(_("Files browser:"), config.plugins.easyMedia.files))
 		list.append(getConfigListEntry(_("Show bookmarks:"), config.plugins.easyMedia.bookmarks))
-		list.append(getConfigListEntry(_("PicturePlayer")+":", config.plugins.easyMedia.pictures))
+		list.append(getConfigListEntry(_("PicturePlayer:"), config.plugins.easyMedia.pictures))
 		list.append(getConfigListEntry(_("Show tv/radio switch:"), config.plugins.easyMedia.radio))
 		list.append(getConfigListEntry(_("YouTube player:"), config.plugins.easyMedia.mytube))
 		list.append(getConfigListEntry(_("VLC player:"), config.plugins.easyMedia.vlc))
@@ -524,7 +524,7 @@ def MPcallbackFunc(answer):
 		else:
 			EMsession.open(MessageBox, text = _('MyVideo Player is not installed!'), type = MessageBox.TYPE_ERROR)
 	elif answer == "VIDEODB":
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/VodeoDB/plugin.pyo"):
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/VideoDB/plugin.pyo"):
 			from Plugins.Extensions.VideoDB.plugin import main as vdbmain
 			vdbmain(EMsession)
 		else:

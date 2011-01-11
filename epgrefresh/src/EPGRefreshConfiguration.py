@@ -17,6 +17,7 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry
 
 from EPGRefresh import epgrefresh
+from Components.SystemInfo import SystemInfo
 
 class EPGRefreshConfiguration(Screen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""
@@ -60,6 +61,8 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 			getConfigListEntry(_("Make AutoTimer parse EPG if available"), config.plugins.epgrefresh.parse_autotimer, _("If you're also using the AutoTimer plugin this will initiate a scan of the EPG after a completed refresh.")),
 			getConfigListEntry(_("Shutdown after refresh"), config.plugins.epgrefresh.afterevent, _("This setting controls if the receiver should be sent to deep-standby after a completed refresh.")),
 		]
+		if SystemInfo.get("NumVideoDecoders", 1) > 1:
+			self.list.insert(1, getConfigListEntry(_("Refresh in Background"), config.plugins.epgrefresh.background, _("Use Picture In Picture to refresh EPG?")))
 
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
 		self["config"].onSelectionChanged.append(self.updateHelp)
