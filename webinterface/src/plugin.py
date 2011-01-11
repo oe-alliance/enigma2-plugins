@@ -105,7 +105,7 @@ def checkCertificates():
 	else:
 		return True
 		
-def installCertificates(session, callback = None):
+def installCertificates(session, callback = None, l2k = None):
 	print "[WebInterface] Installing SSL Certificates to %s" %resolveFilename(SCOPE_CONFIG)
 	
 	srvcert = '%sserver.pem' %resolveFilename(SCOPE_CONFIG) 
@@ -122,14 +122,14 @@ def installCertificates(session, callback = None):
 		ret = copyfile(source, target)
 		
 		if ret == 0 and callback != None:
-			callback(session)
+			callback(session, l2k)
 	
 	if ret < 0:
 		config.plugins.Webinterface.https.enabled.value = False
 		config.plugins.Webinterface.https.enabled.save()
 		
 		# Start without https
-		callback(session)
+		callback(session, l2k)
 		
 		#Inform the user
 		session.open(MessageBox, "Couldn't install SSL-Certifactes for https access\nHttps access is now disabled!", MessageBox.TYPE_ERROR)
@@ -176,7 +176,7 @@ def startWebserver(session, l2k):
 		if config.plugins.Webinterface.https.enabled.value:
 			if not checkCertificates():
 				print "[Webinterface] Installing Webserver Certificates for SSL encryption"
-				installCertificates(session, startWebserver)
+				installCertificates(session, startWebserver, l2k)
 				return
 		# Listen on all Interfaces
 		ip = "0.0.0.0"
