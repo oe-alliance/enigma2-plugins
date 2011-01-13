@@ -549,6 +549,7 @@ def checkBonjour():
 #===============================================================================
 def networkstart(reason, **kwargs):
 	l2r = False
+	l2k = None
 	if hw.get_device_name().lower() != "dm7025":		
 		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
 		
