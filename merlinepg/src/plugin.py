@@ -1,7 +1,7 @@
 #######################################################################
 #
 #    Merlin Programm Guide for Dreambox-Enigma2
-#    Coded by Vali (c)2010
+#    Coded by Vali (c)2010-2011
 #    Support: www.dreambox-tools.info
 #
 #
@@ -38,22 +38,28 @@ from Components.EpgList import EPGList, EPG_TYPE_SINGLE, Rect
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigInteger, getConfigListEntry
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
-from enigma import eServiceReference, eServiceCenter, getDesktop, eTimer, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_WRAP
+from enigma import eServiceReference, eServiceCenter, getDesktop, eTimer, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_WRAP, eEPGCache
 from RecordTimer import RecordTimerEntry, parseEvent, AFTEREVENT
 from ServiceReference import ServiceReference
 from ShowMe import ShowMe
 from time import localtime
-if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AutoTimer/AutoTimerEditor.pyo") or fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AutoTimer/AutoTimerEditor.pyc"):
+if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AutoTimer/AutoTimerEditor.pyo"):
 	from Plugins.Extensions.AutoTimer.AutoTimerEditor import addAutotimerFromEvent
 	from Plugins.Extensions.AutoTimer.plugin import main as AutoTimerView
 	AutoTimerPresent=True
 else:
 	AutoTimerPresent=False
-if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/IMDb/plugin.pyo") or fileExists("/usr/lib/enigma2/python/Plugins/Extensions/IMDb/plugin.pyc"):
+if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/IMDb/plugin.pyo"):
 	from Plugins.Extensions.IMDb.plugin import IMDB
 	IMDbPresent=True
 else:
 	IMDbPresent=False
+if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/EPGSearch/EPGSearch.pyo"):
+	from Plugins.Extensions.EPGSearch.EPGSearch import EPGSearchList, EPGSearch
+	epgSpresent=True
+else:
+	epgSpresent=False
+
 
 
 config.plugins.MerlinEPG = ConfigSubsection()
@@ -325,7 +331,8 @@ class Merlin_PGII(Screen):
 						"1": self.go2first,
 						"7": self.findPrvBqt,
 						"9": self.findNextBqt,
-						"showMovies": self.editCurTimer
+						"showMovies": self.editCurTimer,
+						"showTv": self.fullEPGlist
 						},-2)
 		self.onLayoutFinish.append(self.onLayoutReady)
 
@@ -652,6 +659,12 @@ class Merlin_PGII(Screen):
 			if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
 				self.session.open(TimerEntry, timer)
 
+	def fullEPGlist(self):
+		if epgSpresent:
+			self.session.open(myEPGSearch)
+		else:
+			self.session.open(MessageBox, text = _('EPGsearch is not installed!'), type = MessageBox.TYPE_ERROR)
+
 
 
 class Merlin_PGd(Screen):
@@ -745,7 +758,8 @@ class Merlin_PGd(Screen):
 									"upRepeated": self.up,
 									"down": self.down,
 									"downRepeated": self.down,
-									"showMovies": self.editCurTimer
+									"showMovies": self.editCurTimer,
+									"showTv": self.fullEPGlist
 									},-2)
 		self.onLayoutFinish.append(self.onLayoutReady)
 
@@ -924,9 +938,81 @@ class Merlin_PGd(Screen):
 			if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
 				self.session.open(TimerEntry, timer)
 
+	def fullEPGlist(self):
+		if epgSpresent:
+			self.session.open(myEPGSearch)
+		else:
+			self.session.open(MessageBox, text = _('EPGsearch is not installed!'), type = MessageBox.TYPE_ERROR)
 
 
 
+class myEPGSearchList(EPGSearchList):
+	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
+		EPGSearchList.__init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None)
+		EPGList.__init__(self, type, selChangedCB, timer)
+		self.l.setBuildFunc(self.buildEPGSearchEntry)
+
+	def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
+		r1 = self.weekday_rect
+		r2 = self.datetime_rect
+		r3 = self.descr_rect
+		t = localtime(beginTime)
+		serviceref = ServiceReference(service)
+		res = [
+			None,
+			(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, self.days[t[6]]),
+			(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width()-20, r1.height(), 0, RT_HALIGN_LEFT, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+		]
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, EventName + " <" + serviceref.getServiceName()))
+		return res
+
+
+
+class myEPGSearch(EPGSearch):
+	def __init__(self, session, *args):
+		EPGSearch.__init__(self, session)
+		Screen.__init__(self, session)
+		self.skinName = ["EPGSearch", "EPGSelection"]
+		self["list"] = myEPGSearchList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
+		self.onLayoutFinish.append(self.fillMe)
+
+	def fillMe(self):
+		self["key_yellow"].hide()
+		self["key_green"].hide()
+		self["key_blue"].hide()
+		self.searchEPG("")
+
+	def searchEPG(self, searchString = None, searchSave = True):
+		self.currSearch = ""
+		encoding = config.plugins.epgsearch.encoding.value
+		epgcache = eEPGCache.getInstance()
+		ret = epgcache.search(('RIBDT', 2000, eEPGCache.PARTIAL_TITLE_SEARCH, "", eEPGCache.NO_CASE_CHECK)) or []
+		ret.sort(key = lambda x: x[4])
+		l = self["list"]
+		l.recalcEntrySize()
+		l.list = ret
+		l.l.setList(ret)
+
+	def blueButtonPressed(self):
+		pass
+
+	def yellowButtonPressed(self):
+		pass
+
+	def timerAdd(self):
+		pass
+
+	def menu(self):
+		pass
+
+	def zapTo(self):
+		pass
+
+	def timerAdd(self):
+		pass
+
+
+	
 
 
 
