@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info language="en">
+                    <author>joergm6</author>
+                    <name>FanControl2</name>
+                    <packagename>enigma2-plugin-extensions-fancontrol2</packagename>
+                    <shortdescription>Temperature-dependent fan control.</shortdescription>
+                    <description>Temperature-dependent fan control.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_fancontrol.jpg" />
+          </info>
+          <info language="de">
+                    <author>joergm6</author>
+                    <name>FanControl2</name>
+                    <packagename>enigma2-plugin-extensions-fancontrol2</packagename>
+                    <shortdescription>Temperaturabhängige Lüftersteuerung.</shortdescription>
+                    <description>Temperaturabhängige Lüftersteuerung.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_fancontrol.jpg" />
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-fancontrol2" />
+	  </files>
+</default>
