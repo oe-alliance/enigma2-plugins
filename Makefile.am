@@ -21,6 +21,7 @@ SUBDIRS = \
 	emailclient \
 	epgrefresh \
 	epgsearch \
+	fancontrol2 \
 	filebrowser \
 	fritzcall \
 	ftpbrowser \
