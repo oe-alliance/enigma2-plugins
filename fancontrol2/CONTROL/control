@@ -1,6 +1,6 @@
 Package: enigma2-plugin-extensions-fancontrol2
-Version: 2.4-20110113-r4
-Description: Steuerung Luefter
+Version: 2.4-20110113-r5
+Description: Controlling Fan
 Architecture: mipsel
 Section: extra
 Priority: optional

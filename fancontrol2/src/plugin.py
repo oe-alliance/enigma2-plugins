@@ -668,7 +668,7 @@ class FanControl2Plugin(ConfigListScreen,Screen):
 		self.session.open(FanControl2Monitor)
 
 	def help(self):
-		self.session.open(Console,_("Information"),["cat /usr/lib/enigma2/python/Plugins/Extensions/FanControl/%s" % _("readme.txt")])
+		self.session.open(Console,_("Information"),["cat /usr/lib/enigma2/python/Plugins/Extensions/FanControl2/%s" % _("readme.txt")])
 
 	def SetupMenu(self):
 		self.session.open(FanControl2SpezialSetup)
@@ -795,8 +795,8 @@ class FanControl2(Screen):
 		self.Fan        = "aus"
 		self.dontshutdown = False
 		FClog("Starting up")
-		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/FanControl/data/diagram.class.org"):
-			os.rename("/usr/lib/enigma2/python/Plugins/Extensions/FanControl/data/diagram.class.org","/usr/lib/enigma2/python/Plugins/Extensions/FanControl/data/diagram.class")
+		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class.org"):
+			os.rename("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class.org","/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class")
 		if not isDMMdisabled() and config.plugins.FanControl.DisableDMM.value:
 			disableDMM()
 		Box = GetBox()
@@ -1030,7 +1030,7 @@ def autostart(reason, **kwargs):
 	from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 	from FC2webSite import FC2web, FC2webLog, FC2webChart
 	from twisted.web import static
-	root = static.File("/usr/lib/enigma2/python/Plugins/Extensions/FanControl/data")
+	root = static.File("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data")
 #	root = FC2web()
 	root.putChild("", FC2web())
 	root.putChild("log", FC2webLog())

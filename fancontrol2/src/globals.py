@@ -1,4 +1,4 @@
-Version = "V2.4r4"
+Version = "V2.4r5"
 # globale Variablen        
 ZielRPM = 0
 AktVLT = 0
