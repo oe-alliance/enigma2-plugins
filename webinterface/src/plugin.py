@@ -61,10 +61,10 @@ server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revi", "").r
 #===============================================================================
 class Closer:
 	counter = 0
-	def __init__(self, session, callback=None):
+	def __init__(self, session, callback=None, l2k=None):
 		self.callback = callback
 		self.session = session
-
+		self.l2k = l2k
 #===============================================================================
 # Closes all running Instances of the Webinterface
 #===============================================================================
@@ -82,7 +82,7 @@ class Closer:
 		running_defered = []
 		if self.counter < 1:
 			if self.callback is not None:
-				self.callback(self.session)
+				self.callback(self.session, self.l2k)
 
 #===============================================================================
 # #Is it already down?
@@ -91,7 +91,7 @@ class Closer:
 		self.counter -= 1
 		if self.counter < 1:
 			if self.callback is not None:
-				self.callback(self.session)
+				self.callback(self.session, self.l2k)
 
 def checkCertificates():
 	print "[WebInterface] checking for SSL Certificates"
@@ -137,7 +137,7 @@ def installCertificates(session, callback = None, l2k = None):
 #===============================================================================
 # restart the Webinterface for all configured Interfaces
 #===============================================================================
-def restartWebserver(session):
+def restartWebserver(session, l2k):
 	try:
 		del session.mediaplayer
 		del session.messageboxanswer
@@ -148,9 +148,9 @@ def restartWebserver(session):
 
 	global running_defered
 	if len(running_defered) > 0:
-		Closer(session, startWebserver).stop()
+		Closer(session, startWebserver, l2k).stop()
 	else:
-		startWebserver(session)
+		startWebserver(session, l2k)
 	
 #===============================================================================
 # start the Webinterface for all configured Interfaces
@@ -266,7 +266,7 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 	else:
 		d = reactor.listenTCP(port, site, interface=ipaddress)
 	running_defered.append(d)		
-	print "[Webinterface] started on %s:%i" % (ipaddress, port), "auth=", useauth, "ssl=", usessl
+	print "[Webinterface] started on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
 	return True
 	
 	#except Exception, e:
@@ -577,12 +577,29 @@ def openconfig(session, **kwargs):
 	session.openWithCallback(configCB, WebIfConfigScreen)
 
 def configCB(result, session):
-	if result is True:
-		print "[WebIf] config changed"
-		restartWebserver(session)
-		checkBonjour()
+	l2r = False
+	l2k = None
+	if hw.get_device_name().lower() != "dm7025":		
+		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+		
+		if l2c is None:
+			return
+		
+		l2k = validate_certificate(l2c, rootkey)
+		if l2k is None:
+			return
+			
+		l2r = True
 	else:
-		print "[WebIf] config not changed"
+		l2r = True
+		
+	if l2r:	
+		if result:
+			print "[WebIf] config changed"
+			restartWebserver(session, l2k)
+			checkBonjour()
+		else:
+			print "[WebIf] config not changed"
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
