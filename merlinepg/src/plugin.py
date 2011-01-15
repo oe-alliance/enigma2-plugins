@@ -946,70 +946,72 @@ class Merlin_PGd(Screen):
 
 
 
-class myEPGSearchList(EPGSearchList):
-	def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
-		EPGSearchList.__init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None)
-		EPGList.__init__(self, type, selChangedCB, timer)
-		self.l.setBuildFunc(self.buildEPGSearchEntry)
+if epgSpresent:
+	class myEPGSearchList(EPGSearchList):
+		def __init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None):
+			EPGSearchList.__init__(self, type=EPG_TYPE_SINGLE, selChangedCB=None, timer=None)
+			EPGList.__init__(self, type, selChangedCB, timer)
+			self.l.setBuildFunc(self.buildEPGSearchEntry)
 
-	def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
-		r1 = self.weekday_rect
-		r2 = self.datetime_rect
-		r3 = self.descr_rect
-		t = localtime(beginTime)
-		serviceref = ServiceReference(service)
-		res = [
-			None,
-			(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, self.days[t[6]]),
-			(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width()-20, r1.height(), 0, RT_HALIGN_LEFT, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
-		]
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, EventName + " <" + serviceref.getServiceName()))
-		return res
+		def buildEPGSearchEntry(self, service, eventId, beginTime, duration, EventName):
+			r1 = self.weekday_rect
+			r2 = self.datetime_rect
+			r3 = self.descr_rect
+			t = localtime(beginTime)
+			serviceref = ServiceReference(service)
+			res = [
+				None,
+				(eListboxPythonMultiContent.TYPE_TEXT, r1.left(), r1.top(), r1.width(), r1.height(), 0, RT_HALIGN_LEFT, self.days[t[6]]),
+				(eListboxPythonMultiContent.TYPE_TEXT, r2.left(), r2.top(), r2.width()-20, r1.height(), 0, RT_HALIGN_LEFT, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
+			]
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.left(), r3.top(), r3.width(), r3.height(), 0, RT_HALIGN_LEFT, EventName + " <" + serviceref.getServiceName()))
+			return res
 
 
 
-class myEPGSearch(EPGSearch):
-	def __init__(self, session, *args):
-		EPGSearch.__init__(self, session)
-		Screen.__init__(self, session)
-		self.skinName = ["EPGSearch", "EPGSelection"]
-		self["list"] = myEPGSearchList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
-		self.onLayoutFinish.append(self.fillMe)
+if epgSpresent:
+	class myEPGSearch(EPGSearch):
+		def __init__(self, session, *args):
+			EPGSearch.__init__(self, session)
+			Screen.__init__(self, session)
+			self.skinName = ["EPGSearch", "EPGSelection"]
+			self["list"] = myEPGSearchList(type = EPG_TYPE_SINGLE, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
+			self.onLayoutFinish.append(self.fillMe)
 
-	def fillMe(self):
-		self["key_yellow"].hide()
-		self["key_green"].hide()
-		self["key_blue"].hide()
-		self.searchEPG("")
+		def fillMe(self):
+			self["key_yellow"].hide()
+			self["key_green"].hide()
+			self["key_blue"].hide()
+			self.searchEPG("")
 
-	def searchEPG(self, searchString = None, searchSave = True):
-		self.currSearch = ""
-		encoding = config.plugins.epgsearch.encoding.value
-		epgcache = eEPGCache.getInstance()
-		ret = epgcache.search(('RIBDT', 2000, eEPGCache.PARTIAL_TITLE_SEARCH, "", eEPGCache.NO_CASE_CHECK)) or []
-		ret.sort(key = lambda x: x[4])
-		l = self["list"]
-		l.recalcEntrySize()
-		l.list = ret
-		l.l.setList(ret)
+		def searchEPG(self, searchString = None, searchSave = True):
+			self.currSearch = ""
+			encoding = config.plugins.epgsearch.encoding.value
+			epgcache = eEPGCache.getInstance()
+			ret = epgcache.search(('RIBDT', 2000, eEPGCache.PARTIAL_TITLE_SEARCH, "", eEPGCache.NO_CASE_CHECK)) or []
+			ret.sort(key = lambda x: x[4])
+			l = self["list"]
+			l.recalcEntrySize()
+			l.list = ret
+			l.l.setList(ret)
 
-	def blueButtonPressed(self):
-		pass
+		def blueButtonPressed(self):
+			pass
 
-	def yellowButtonPressed(self):
-		pass
+		def yellowButtonPressed(self):
+			pass
 
-	def timerAdd(self):
-		pass
+		def timerAdd(self):
+			pass
 
-	def menu(self):
-		pass
+		def menu(self):
+			pass
 
-	def zapTo(self):
-		pass
+		def zapTo(self):
+			pass
 
-	def timerAdd(self):
-		pass
+		def timerAdd(self):
+			pass
 
 
 	
