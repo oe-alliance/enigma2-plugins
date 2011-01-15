@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 19:59+0100\n"
+"POT-Creation-Date: 2011-01-15 16:20+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,12 +19,14 @@ msgstr ""
 "X-Poedit-Country: SERBIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "About FritzCall"
 msgstr "O FritzCall dodatku"
 
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
 msgid "Add entry to phonebook"
 msgstr "Dodaj unos u tel. imenik"
 
@@ -146,6 +149,7 @@ msgstr "Prikaži propuštene pozive"
 msgid "Display outgoing calls"
 msgstr "Prikaži odlazne pozive"
 
+#. TRANSLATORS: this is a window title.
 msgid "Do what?"
 msgstr "Šta raditi?"
 
@@ -200,6 +204,11 @@ msgstr ""
 msgid "FRITZ!Box - Error getting status: %s"
 msgstr "FRITZ!Box - Greška kod dobijanja stanja: %s"
 
+msgid ""
+"FRITZ!Box - Error logging in\n"
+"\n"
+msgstr ""
+
 #, python-format
 msgid "FRITZ!Box - Error logging in: %s"
 msgstr "FRITZ!Box - Greška kod upisa: %s"
@@ -229,6 +238,7 @@ msgstr "FRITZ!Box -Nije uspela promena WLAN-a: %s"
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box FON Adresse (Name oder IP-Adresse)"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
@@ -252,11 +262,9 @@ msgstr ""
 msgid "France"
 msgstr "Francuska"
 
+#. TRANSLATORS: this is a window title.
 msgid "FritzCall Setup"
 msgstr "FritzCall Podešavanje"
-
-msgid "Full screen display"
-msgstr "Prikaži ceo ekran"
 
 msgid "Germany"
 msgstr "Nemačka"
@@ -276,19 +284,13 @@ msgstr "Dolazni"
 
 #, python-format
 msgid ""
-"Incoming Call on %(date)s from\n"
+"Incoming Call on %(date)s at %(time)s from\n"
 "---------------------------------------------\n"
 "%(number)s\n"
 "%(caller)s\n"
 "---------------------------------------------\n"
 "to: %(phone)s"
 msgstr ""
-"Dolazni poziv %(date)s od\n"
-"---------------------------------------------\n"
-"%(number)s\n"
-"%(caller)s\n"
-"---------------------------------------------\n"
-"za: %(phone)s"
 
 msgid "Incoming calls"
 msgstr "Dolazni pozivi"
@@ -308,6 +310,9 @@ msgstr "Pokazati MSN (odvojen sa  ,)"
 
 msgid "Mailbox"
 msgstr "Poštansko sanduče"
+
+msgid "Media directory"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
@@ -375,19 +380,13 @@ msgstr "Odlazni"
 
 #, python-format
 msgid ""
-"Outgoing Call on %(date)s to\n"
+"Outgoing Call on %(date)s at %(time)s to\n"
 "---------------------------------------------\n"
 "%(number)s\n"
 "%(caller)s\n"
 "---------------------------------------------\n"
 "from: %(phone)s"
 msgstr ""
-"Odlazni poziv  %(date)s za\n"
-"---------------------------------------------\n"
-"%(number)s\n"
-"%(caller)s\n"
-"---------------------------------------------\n"
-"od: %(phone)s"
 
 msgid "Outgoing calls"
 msgstr "Odlazni pozivi"
@@ -395,6 +394,7 @@ msgstr "Odlazni pozivi"
 msgid "Password Accessing FRITZ!Box"
 msgstr "Lozinka za pristup FRITZ!Box-u"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
 msgstr "Telefonski pozivi"
@@ -402,6 +402,7 @@ msgstr "Telefonski pozivi"
 msgid "PhoneBook Location"
 msgstr "Lokacija tel. imenika"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Telefonski imenik"
@@ -589,7 +590,7 @@ msgstr "Sandučići aktivni"
 msgid "mobile"
 msgstr "Mobilni"
 
-msgid "no"
+msgid "no calls"
 msgstr ""
 
 msgid "no device active"
@@ -599,9 +600,6 @@ msgid "not encrypted"
 msgstr "Nije kodirano"
 
 msgid "number suppressed"
-msgstr ""
-
-msgid "on ring"
 msgstr ""
 
 msgid "one device active"
@@ -636,8 +634,41 @@ msgstr "Posao"
 #~ msgid "CF Drive"
 #~ msgstr "CF Laufwerk"
 
+#~ msgid "Full screen display"
+#~ msgstr "Prikaži ceo ekran"
+
 #~ msgid "Harddisk"
 #~ msgstr "Festplatte"
+
+#~ msgid ""
+#~ "Incoming Call on %(date)s from\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "to: %(phone)s"
+#~ msgstr ""
+#~ "Dolazni poziv %(date)s od\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "za: %(phone)s"
+
+#~ msgid ""
+#~ "Outgoing Call on %(date)s to\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "from: %(phone)s"
+#~ msgstr ""
+#~ "Odlazni poziv  %(date)s za\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "od: %(phone)s"
 
 #~ msgid "Show Calls for specific MSN"
 #~ msgstr "Pokaži pozive za spec. MSN"
