@@ -158,8 +158,7 @@ fancontrol2/Makefile
 fancontrol2/meta/Makefile
 fancontrol2/po/Makefile
 fancontrol2/src/Makefile
-fancontrol2/src/webif/Makefile
-fancontrol2/src/webifdata/Makefile
+fancontrol2/src/data/Makefile
 
 filebrowser/Makefile
 filebrowser/meta/Makefile

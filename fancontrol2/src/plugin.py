@@ -1,9 +1,10 @@
 # FanControl2
 # joergm6 IHAD
-Version = "V2.4r4"
 import time
 import os
 from __init__ import _
+
+from globals import *
 
 from enigma import eTimer, eSize
 
@@ -127,44 +128,6 @@ def setPWM(fanid, value):
 	f = open("/proc/stb/fp/fan_pwm", "w")
 	f.write("%x" % value)
 	f.close()
-
-# globale Variablen        
-ZielRPM = 0
-AktVLT = 0
-AktPWM = 0
-AktRPM = 0
-AktTemp = 0
-AktHDD = []
-LastVLT = 0
-LastPWM = 0
-FanFehler = 0
-OverheatTimer = 0
-Overheat = False
-FanOffWait = False
-Recording = False
-RPMread = 0
-RPMdiff = 0
-FirstStart = True
-RPMrunning = False
-istStandbySave = False
-disableHDDread = False
-session = None
-Box = ""
-DataMinute = ""
-FC2Log = []
-FC2werte = [0.1,0,0,0,0,0]
-FC2stunde = ["-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"]
-HeadLine = "Time;Temp;RPM;VLT;PWM;HDD;Status;Temp1;Temp2;Temp3;Temp4;Temp5;Temp6;Temp7;Temp8\r\n"
-TempName = [
-	_("below Tunerslot 4"),
-	_("near XILINX Spartan"),
-	_("under the WLAN"),
-	_("left of the Battery"),
-	_("left near Front-CI"),
-	_("left near Card-Slot"),
-	_("over Security Card"),
-	_("under the Fan")
-]
 
 #Configuration
 config.plugins.FanControl = ConfigSubsection()
@@ -705,7 +668,7 @@ class FanControl2Plugin(ConfigListScreen,Screen):
 		self.session.open(FanControl2Monitor)
 
 	def help(self):
-		self.session.open(Console,_("Information"),["cat /usr/lib/enigma2/python/Plugins/Extensions/FanControl/%s" % _("readme.txt")])
+		self.session.open(Console,_("Information"),["cat /usr/lib/enigma2/python/Plugins/Extensions/FanControl2/%s" % _("readme.txt")])
 
 	def SetupMenu(self):
 		self.session.open(FanControl2SpezialSetup)
@@ -832,8 +795,8 @@ class FanControl2(Screen):
 		self.Fan        = "aus"
 		self.dontshutdown = False
 		FClog("Starting up")
-		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/fc2/diagram.class.org"):
-			os.rename("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/fc2/diagram.class.org","/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/fc2/diagram.class")
+		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class.org"):
+			os.rename("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class.org","/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data/diagram.class")
 		if not isDMMdisabled() and config.plugins.FanControl.DisableDMM.value:
 			disableDMM()
 		Box = GetBox()
@@ -1064,6 +1027,15 @@ class FanControl2(Screen):
 
 def autostart(reason, **kwargs):
 	global session
+	from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
+	from FC2webSite import FC2web, FC2webLog, FC2webChart
+	from twisted.web import static
+	root = static.File("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data")
+#	root = FC2web()
+	root.putChild("", FC2web())
+	root.putChild("log", FC2webLog())
+	root.putChild("chart", FC2webChart())
+	addExternalChild( ("fancontrol", root) )
 	if reason == 0 and kwargs.has_key("session"):
 		session = kwargs["session"]
 		session.open(FanControl2)

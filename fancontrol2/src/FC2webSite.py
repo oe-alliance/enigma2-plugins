@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from twisted.web import resource, http
+from globals import *
 from plugin import *
 from Sensors import sensors
 from __init__ import _
@@ -36,14 +37,14 @@ class FC2web(resource.Resource):
 		html += "<body bgcolor=\"#666666\" text=\"#FFFFFF\">\n"
 		html += "<form method=\"POST\" action=\"--WEBBOT-SELF--\">\n"
 		html += "<table border=\"1\" width=\"500\" bordercolorlight=\"#000000\" bordercolordark=\"#000000\" cellspacing=\"1\"><tr><td bgcolor=\"#000000\" width=\"200\">\n"
-		html += "<p align=\"center\"><img border=\"0\" src=\"/web-data/fc2/FC2dreambox.png\" width=\"181\" height=\"10\">\n"
+		html += "<p align=\"center\"><img border=\"0\" src=\"/fancontrol/FC2dreambox.png\" width=\"181\" height=\"10\">\n"
 		html += "<font color=\"#FFFFFF\"><BR><b>Fan Control 2 - Info</b></font></p>\n"
 		html += "</td><td bgcolor=\"#000000\">\n"
 		html += "<p align=\"right\">"
 		html += BoxStatus()
 		if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2data.csv"):
-			html += "<a href=\"/fancontrol/chart\"><img border=\"0\" src=\"/web-data/fc2/FC2Chart.png\" width=\"100\" height=\"40\"></a>\n"
-		html += "<a href=\"/fancontrol/log\"><img border=\"0\" src=\"/web-data/fc2/FC2Setup.png\" width=\"100\" height=\"40\"></a></td></tr></table>\n"
+			html += "<a href=\"/fancontrol/chart\"><img border=\"0\" src=\"/fancontrol/FC2Chart.png\" width=\"100\" height=\"40\"></a>\n"
+		html += "<a href=\"/fancontrol/log\"><img border=\"0\" src=\"/fancontrol/FC2Setup.png\" width=\"100\" height=\"40\"></a></td></tr></table>\n"
 		html += "<table border=\"1\" width=\"500\" id=\"table1\">\n"
 		html += "<tr>\n"
 		html += "<td>%s: <b><font color=\"#FFCC00\">%4.1f °C</font></b></td>\n" % (_("Temperature"),FC2werte[0])
@@ -127,14 +128,14 @@ class FC2webLog(resource.Resource):
 			html += "</head>"
 			html += "<body bgcolor=\"#666666\" text=\"#FFFFFF\">\n"
 			html += "<table border=\"1\" width=\"500\" bordercolorlight=\"#000000\" bordercolordark=\"#000000\" cellspacing=\"1\"><tr><td bgcolor=\"#000000\" width=\"200\">\n"
-			html += "<p align=\"center\"><img border=\"0\" src=\"/web-data/fc2/FC2dreambox.png\" width=\"181\" height=\"10\">\n"
+			html += "<p align=\"center\"><img border=\"0\" src=\"/fancontrol/FC2dreambox.png\" width=\"181\" height=\"10\">\n"
 			html += "<font color=\"#FFFFFF\"><BR><b>Fan Control 2 - Logging</b></font></p>\n"
 			html += "</td><td bgcolor=\"#000000\">\n"
 			html += "<p align=\"right\">"
 			html += BoxStatus()
 			if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2data.csv"):
-				html += "<a href=\"/fancontrol/chart\"><img border=\"0\" src=\"/web-data/fc2/FC2Chart.png\" width=\"100\" height=\"40\"></a>\n"
-			html += "<a href=\"/fancontrol\"><img border=\"0\" src=\"/web-data/fc2/FC2Info.png\" width=\"100\" height=\"40\"></a></td></tr></table>\n"
+				html += "<a href=\"/fancontrol/chart\"><img border=\"0\" src=\"/fancontrol/FC2Chart.png\" width=\"100\" height=\"40\"></a>\n"
+			html += "<a href=\"/fancontrol\"><img border=\"0\" src=\"/fancontrol/FC2Info.png\" width=\"100\" height=\"40\"></a></td></tr></table>\n"
 
 			html += "<table border=\"1\" width=\"500\">"
 			html += "<tr><td width=\"50%\" align=\"center\" valign=\"top\">Data Logging "
@@ -383,16 +384,16 @@ class FC2webChart(resource.Resource):
 			html += "</head>"
 			html += "<body bgcolor=\"#666666\" text=\"#FFFFFF\">\n"
 			html += "<table border=\"1\" width=\"900\" bordercolorlight=\"#000000\" bordercolordark=\"#000000\"  cellspacing=\"1\"><tr><td bgcolor=\"#000000\" width=\"200\">\n"
-			html += "<p align=\"center\"><img border=\"0\" src=\"/web-data/fc2/FC2dreambox.png\" width=\"181\" height=\"10\">\n"
+			html += "<p align=\"center\"><img border=\"0\" src=\"/fancontrol/FC2dreambox.png\" width=\"181\" height=\"10\">\n"
 			html += "<font color=\"#FFFFFF\"><BR><b>Fan Control 2 - Chart</b></font></p>\n"
 			html += "</td><td bgcolor=\"#000000\">\n"
 			html += "<p align=\"right\">"
 			html += BoxStatus()
 			if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2data.csv"):
-				html += "<a href=\"/fancontrol\"><img border=\"0\" src=\"/web-data/fc2/FC2Info.png\" width=\"100\" height=\"40\"></a>\n"
-			html += "<a href=\"/fancontrol/log\"><img border=\"0\" src=\"/web-data/fc2/FC2Setup.png\" width=\"100\" height=\"40\"></a></td></tr></table>\n"
+				html += "<a href=\"/fancontrol\"><img border=\"0\" src=\"/fancontrol/FC2Info.png\" width=\"100\" height=\"40\"></a>\n"
+			html += "<a href=\"/fancontrol/log\"><img border=\"0\" src=\"/fancontrol/FC2Setup.png\" width=\"100\" height=\"40\"></a></td></tr></table>\n"
 
-			html += "<applet code=\"diagram.class\" codebase=\"/web-data/fc2/\" name=\"DiaTemp\" "
+			html += "<applet code=\"diagram.class\" codebase=\"/fancontrol/\" name=\"DiaTemp\" "
 			html += "align=\"baseline\" width=\"900\" height=\"250\" mayscript>\n"
 			html += "<param name=\"title\" value=\"Temp  (48h - %s)\">\n" % DT[0]
 			html += "<param name=\"bgcolor\" value=\"240; 240; 240\">\n"
@@ -432,7 +433,7 @@ class FC2webChart(resource.Resource):
 #			html += "<div style=\"position: absolute; width: 100px; height: 100px; z-index: 1; left: 910px; top: 146px\" id=\"Ebene1\">\n"
 #			html += "<img border=\"0\" src=\"/web-data/fc2/FC2Status.png\" width=\"115\" height=\"168\"></div>\n"
 
-			html += "<applet code=\"diagram.class\" codebase=\"/web-data/fc2/\" name=\"DiaRPM\" "
+			html += "<applet code=\"diagram.class\" codebase=\"/fancontrol/\" name=\"DiaRPM\" "
 			html += "align=\"baseline\" width=\"900\" height=\"250\" mayscript>\n"
 			html += "<param name=\"title\" value=\"RPM  (48h - %s)\">\n" % DT[0]
 			html += "<param name=\"bgcolor\" value=\"240; 240; 240\">\n"
@@ -494,9 +495,9 @@ def BoxStatus():
 	h = ""
 	S = int(FC2werte[5])
 	if (S & 1)>0 :
-		h += "<img border=\"0\" src=\"/web-data/fc2/FC2on.png\" width=\"20\" height=\"20\" title=\"Box On\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
+		h += "<img border=\"0\" src=\"/fancontrol/FC2on.png\" width=\"20\" height=\"20\" title=\"Box On\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
 	if (S & 2)>0 :
-		h += "<img border=\"0\" src=\"/web-data/fc2/FC2hdd.png\" width=\"20\" height=\"20\" title=\"HDD On\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
+		h += "<img border=\"0\" src=\"/fancontrol/FC2hdd.png\" width=\"20\" height=\"20\" title=\"HDD On\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
 	if (S & 4)>0 :
-		h += "<img border=\"0\" src=\"/web-data/fc2/FC2record.png\" width=\"20\" height=\"20\" title=\"Recording\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
+		h += "<img border=\"0\" src=\"/fancontrol/FC2record.png\" width=\"20\" height=\"20\" title=\"Recording\" align=\"left\" hspace=\"2\" vspace=\"5\">\n"
 	return h
