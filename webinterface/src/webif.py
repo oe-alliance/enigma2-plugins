@@ -16,12 +16,15 @@ from xml.sax.handler import ContentHandler, feature_namespaces
 from xml.sax.saxutils import escape as escape_xml
 from twisted.python import util
 from urllib2 import quote
+from time import time
 
 #DO NOT REMOVE THIS IMPORT
 #It IS used (dynamically)
 from WebScreens import *
 #DO NOT REMOVE THIS IMPORT
 
+from __init__ import decrypt_block
+from os import urandom
 
 global screen_cache
 screen_cache = {}
@@ -565,3 +568,20 @@ def requestFinish(handler, request):
 	request.finish()	
 	
 	del handler
+
+def validate_certificate(cert, key):
+	buf = decrypt_block(cert[8:], key) 
+	if buf is None:
+		return None
+	return buf[36:107] + cert[139:196]
+
+def get_random():
+	try:
+		xor = lambda a,b: ''.join(chr(ord(c)^ord(d)) for c,d in zip(a,b*100))
+		random = urandom(8)
+		x = str(time())[-8:]
+		result = xor(random, x)
+				
+		return result
+	except:
+		return None

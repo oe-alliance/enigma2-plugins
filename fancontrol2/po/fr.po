@@ -1,0 +1,292 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-02 16:26+Westeuropäische Sommerzeit\n"
+"PO-Revision-Date: 2011-01-02 16:29+0100\n"
+"Last-Translator: mimi74 <jrs.concept@orange.fr>\n"
+"Language-Team: french\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Country: FRENCH\n"
+
+msgid "%s   %02d C"
+msgstr "%s   %02d C"
+
+msgid "."
+msgstr ","
+
+msgid "3Pin"
+msgstr "3Pin"
+
+msgid "4Pin"
+msgstr "4Pin"
+
+msgid "Action in case of Fan failure"
+msgstr "Action en cas de défaillance du ventilateur"
+
+msgid "Box Shutdown"
+msgstr "Arrêt de la boîte"
+
+msgid "Box shutdown at Temperature (C)"
+msgstr "Arrêter boîte à la température (en C)"
+
+msgid "Cancel"
+msgstr "Abandon"
+
+msgid "Check"
+msgstr "Vérifier"
+
+msgid "Choose path"
+msgstr "Choisir chemin"
+
+msgid "Control disabled"
+msgstr "Contrôle désactivé"
+
+msgid "Current rpm  %4d"
+msgstr "Rpm actuelles  %4d"
+
+msgid "Current value: %s"
+msgstr "Valeur actuelle: %s"
+
+msgid "Delete"
+msgstr "Effacer"
+
+msgid "Delete older 48h"
+msgstr "Effacer plus vieux que 48h"
+
+msgid "Disk free : %d MByte"
+msgstr "Disque libre : %d MByte"
+
+msgid "Download"
+msgstr "T&eacute;l&eacute;chargement"
+
+msgid "Enable Data Logging"
+msgstr "Activer journal données"
+
+msgid "Enable Event Logging"
+msgstr "Activer jounal événements"
+
+msgid "End temperature C"
+msgstr "Température finale en C"
+
+msgid "Extended Control Range"
+msgstr "Echelle contrôle étendu"
+
+msgid "Fan is not working!"
+msgstr "Le ventilateur ne fonctionne pas!"
+
+msgid "Fan off in Standby"
+msgstr "Ventilateur stoppé en veille"
+
+msgid "Fan type"
+msgstr "Type ventilateur"
+
+msgid "FanControl2 emergency, Box Shutdown now?"
+msgstr "Alerte FanControl2, éteindre boîte maintenant ?"
+
+msgid "File %s does not exists"
+msgstr "Le fichier %s n'existe pas"
+
+msgid "Filesize : %d %sByte"
+msgstr "Taille fichier : %d %sByte"
+
+msgid ""
+"GUI needs a restart to apply the changes.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+"L'IGU a besoin d'un redémarrage pour appliquer les modifications.\n"
+"Souhaitez-vous relancer l'IGU maintenant ?"
+
+msgid "Help"
+msgstr "Aide"
+
+msgid "Information"
+msgstr "Informations"
+
+msgid "Initial PWM"
+msgstr "PWM initial"
+
+msgid "Initial Voltage"
+msgstr "Voltage initial"
+
+msgid "Logging path"
+msgstr "Chemin des journaux"
+
+msgid "Logging-Path: %s"
+msgstr "Chemin des journaux: %s"
+
+msgid "Max Fan %d rpm at PWM=255 (%s)"
+msgstr "Ventilateur max %d rpm à PWM=255 (%s)"
+
+msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
+msgstr "Ventilateur max %d rpm à PWM=255 et VLT=255 (%s)"
+
+msgid "Max Fan %d rpm at VLT=255 (%s)"
+msgstr "Ventilateur max %d rpm à VLT=255 (%s)"
+
+msgid "Min Fan Start %d rpm at PWM=%d"
+msgstr "Démarrage ventilateur min %d rpm à PWM=%d"
+
+msgid "Min Fan Start %d rpm at VLT=%d"
+msgstr "Démarrage ventilateur min %d rpm à VLT=%d"
+
+msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
+msgstr "Démarrage ventilateur min %d rpm à VLT=%d et PWM=0"
+
+msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
+msgstr "Stop ventilateur min %d rpm à PWM=%d (%s)"
+
+msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
+msgstr "Stop ventilateur min %d rpm à VLT=%d (%s)"
+
+msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
+msgstr "Stop ventilateur min %d rpm à VLT=%d et PWM=0 (%s)"
+
+msgid "Number of WebIF-Log-Entries"
+msgstr "Nombre de WebIF-Log-entries"
+
+msgid "PWM  %03d"
+msgstr "PWM  %03d"
+
+msgid "Restart GUI now?"
+msgstr "Relancer l'IGU maintenant ?"
+
+msgid "Save"
+msgstr "Sauver"
+
+msgid "Sensors"
+msgstr "Capteurs"
+
+msgid "Show Monitor in Extension-Menu"
+msgstr "Montrer Moniteur dans le menu-extension"
+
+msgid "Speed"
+msgstr "Vitesse"
+
+msgid "Static temp C"
+msgstr "Température statique C"
+
+msgid "Target rpm  %4d"
+msgstr "Rpm cible  %4d"
+
+msgid "Temperature"
+msgstr "Temp&eacute;rature"
+
+msgid "Temperature C  %4.1f"
+msgstr "Température C  %4.1f"
+
+msgid "Voltage"
+msgstr "Voltage"
+
+msgid "Voltage  %03d"
+msgstr "Voltage  %03d"
+
+msgid "active"
+msgstr "actif"
+
+msgid "auto"
+msgstr "automatique"
+
+msgid "below Tunerslot 4"
+msgstr "à coté fente tuner 4"
+
+msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
+msgstr "RPM actuelles:%d RPM cible:%d Temp:%4.1f"
+
+msgid "disable DMM-FanControl"
+msgstr "Désactiver DMM-Fancontrol"
+
+msgid "disabled"
+msgstr "désactivé"
+
+msgid "display Info"
+msgstr "afficher les infos"
+
+msgid "do nothing"
+msgstr "ne rien faire"
+
+msgid "increases overheating protection to (C)"
+msgstr "Augmenter protection contre la surchauffe de (en C)"
+
+msgid "left near Card-Slot"
+msgstr "gauche près fente-carte"
+
+msgid "left near Front-CI"
+msgstr "gauche près CI-avant"
+
+msgid "left of the Battery"
+msgstr "gauche de la batterie"
+
+msgid "max Speed rpm"
+msgstr "Vitesse max rpm"
+
+msgid "min Speed rpm"
+msgstr "Vitesse min rpm"
+
+msgid "near XILINX Spartan"
+msgstr "près spartan XILINX"
+
+msgid "never"
+msgstr "jamais"
+
+msgid "no"
+msgstr "non"
+
+msgid "not active"
+msgstr "pas actif"
+
+msgid "over Security Card"
+msgstr "sur la carte sécurité"
+
+msgid "please wait (until 3min)..."
+msgstr "Veuillez patienter (jusqu'à 3min)..."
+
+msgid "press Info for HDD-Temp"
+msgstr "presse info pour HDD-Temp"
+
+msgid "read HDD-Temperature in HDD-Standby-Mode"
+msgstr "Lire HDD-Température si HDD en Standby-Mode"
+
+msgid "readme.txt"
+msgstr "readmefr.txt"
+
+msgid "turn off"
+msgstr "Stopper"
+
+msgid "turn on"
+msgstr "D&eacute;marrer"
+
+msgid "under the Fan"
+msgstr "sous le ventilateur"
+
+msgid "under the WLAN"
+msgstr "sous le WiFi"
+
+msgid "yes"
+msgstr "oui"
+
+msgid "yes, Except for Recording or HDD"
+msgstr "oui, sauf pour l'enregistrement/HDD"
+
+msgid "Auto-Delete Data older than (Days)"
+msgstr "Effacement auto données plus vieilles que (en jours)"
+
+msgid "Data Logging "
+msgstr "Jounal donn&eacute;es"
+
+msgid "Event Logging "
+msgstr "Jounal &eacute;v&eacute;nements"
+
+msgid "Fan Control 2 - Info"
+msgstr "Fan Control 2 - Infos"
+
+msgid "Fan Control 2 - Chart"
+msgstr "Fan Control 2 - Courbes"
+
+msgid "Fan Control 2 - Logging"
+msgstr "Fan Control 2 - Journaux"

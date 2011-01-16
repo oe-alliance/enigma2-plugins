@@ -57,7 +57,9 @@ InfoBar_instance = None
 config.plugins.easyMedia  = ConfigSubsection()
 config.plugins.easyMedia.music = ConfigSelection(default="mediaplayer", choices = [("no", _("Disabled")), ("mediaplayer", _("MediaPlayer")), ("merlinmp", _("MerlinMusicPlayer"))])
 config.plugins.easyMedia.files = ConfigSelection(default="dreamexplorer", choices = [("no", _("Disabled")), ("filebrowser", _("Filebrowser")), ("dreamexplorer", _("DreamExplorer")), ("tuxcom", _("TuxCom"))])
+config.plugins.easyMedia.videodb = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.bookmarks = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.pictures = ConfigSelection(default="yes", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.mytube = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.vlc = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.dvd = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
@@ -173,9 +175,11 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 		self.setTitle(_("EasyMedia settings..."))
 		self.session = session
 		list = []
+		list.append(getConfigListEntry(_("Video database:"), config.plugins.easyMedia.videodb))
 		list.append(getConfigListEntry(_("Music player:"), config.plugins.easyMedia.music))
 		list.append(getConfigListEntry(_("Files browser:"), config.plugins.easyMedia.files))
 		list.append(getConfigListEntry(_("Show bookmarks:"), config.plugins.easyMedia.bookmarks))
+		list.append(getConfigListEntry(_("PicturePlayer:"), config.plugins.easyMedia.pictures))
 		list.append(getConfigListEntry(_("Show tv/radio switch:"), config.plugins.easyMedia.radio))
 		list.append(getConfigListEntry(_("YouTube player:"), config.plugins.easyMedia.mytube))
 		list.append(getConfigListEntry(_("VLC player:"), config.plugins.easyMedia.vlc))
@@ -315,7 +319,10 @@ class EasyMedia(Screen):
 		if config.plugins.easyMedia.bookmarks.value != "no":
 			self.__keys.append("bookmarks")
 			MPaskList.append((_("Bookmarks"), "BOOKMARKS"))
-		if True:
+		if config.plugins.easyMedia.videodb.value != "no":
+			self.__keys.append("videodb")
+			MPaskList.append((_("VideoDB"), "VIDEODB"))
+		if config.plugins.easyMedia.pictures.value != "no":
 			self.__keys.append("pictures")
 			MPaskList.append((_("Pictures"), "PICTURES"))
 		if config.plugins.easyMedia.music.value != "no":
@@ -516,6 +523,12 @@ def MPcallbackFunc(answer):
 			EMsession.open(Vidtype)
 		else:
 			EMsession.open(MessageBox, text = _('MyVideo Player is not installed!'), type = MessageBox.TYPE_ERROR)
+	elif answer == "VIDEODB":
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/VideoDB/plugin.pyo"):
+			from Plugins.Extensions.VideoDB.plugin import main as vdbmain
+			vdbmain(EMsession)
+		else:
+			EMsession.open(MessageBox, text = _('VideoDB is not installed!'), type = MessageBox.TYPE_ERROR)
 	elif answer is not None and "++++" in answer:
 		plugToRun = answer[4:]
 		try:

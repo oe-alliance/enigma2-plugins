@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 628 $
-$Date: 2010-12-30 11:13:18 +0100 (Do, 30 Dez 2010) $
-$Id: plugin.py 628 2010-12-30 10:13:18Z michael $
+$Revision: 640 $
+$Date: 2011-01-15 16:17:12 +0100 (Sa, 15. Jan 2011) $
+$Id: plugin.py 640 2011-01-15 15:17:12Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -291,8 +291,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 628 $"[1:-2] + "\n" + 
-							"$Date: 2010-12-30 11:13:18 +0100 (Do, 30 Dez 2010) $"[1:23] + "\n"
+							"$Revision: 640 $"[1:-2] + "\n" + 
+							"$Date: 2011-01-15 16:17:12 +0100 (Sa, 15. Jan 2011) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -2715,7 +2715,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 628 $"[1: - 1] + "$Date: 2010-12-30 11:13:18 +0100 (Do, 30 Dez 2010) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 640 $"[1: - 1] + "$Date: 2011-01-15 16:17:12 +0100 (Sa, 15. Jan 2011) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -3071,9 +3071,9 @@ def notifyCall(event, date, number, caller, phone, connID):
 				# eDVBVolumecontrol.getInstance().volumeMute() # with this, we get no mute icon...
 				if not eDVBVolumecontrol.getInstance().isMuted():
 					globalActionMap.actions["volumeMute"]()
-			text = _("Incoming Call on %(date)s from\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nto: %(phone)s") % { 'date':date, 'number':number, 'caller':caller, 'phone':phone }
+			text = _("Incoming Call on %(date)s at %(time)s from\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nto: %(phone)s") % { 'date':date[:8], 'time':date[9:], 'number':number, 'caller':caller, 'phone':phone }
 		else:
-			text = _("Outgoing Call on %(date)s to\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nfrom: %(phone)s") % { 'date':date, 'number':number, 'caller':caller, 'phone':phone }
+			text = _("Outgoing Call on %(date)s at %(time)s to\n---------------------------------------------\n%(number)s\n%(caller)s\n---------------------------------------------\nfrom: %(phone)s") % { 'date':date[:8], 'time':date[9:], 'number':number, 'caller':caller, 'phone':phone }
 		debug("[FritzCall] notifyCall:\n%s" % text)
 		# Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=config.plugins.FritzCall.timeout.value)
 		Notifications.AddNotification(MessageBoxPixmap, text, number=number, name=caller, timeout=config.plugins.FritzCall.timeout.value)
@@ -3096,7 +3096,7 @@ def notifyCall(event, date, number, caller, phone, connID):
 	# date of event, format: "dd.mm.yy hh.mm.ss"
 	# telephone number which is calling/is called
 	# caller's name and address, format Name\n Street\n ZIP City
-	# line/number which is called/which is used for calling	userActionScript = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallUserAction.sh")
+	# line/number which is called/which is used for calling
 	userActionScript = os.path.join(config.plugins.FritzCall.phonebookLocation.value, "FritzCallUserAction.sh")
 	if os.path.exists(userActionScript) and os.access(userActionScript, os.X_OK):
 		cmd = userActionScript + ' "' + event + '" "' + date + '" "' + number + '" "' + caller + '" "' + phone + '"'
@@ -3178,7 +3178,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 628 $"[1:-1]	+ "$Date: 2010-12-30 11:13:18 +0100 (Do, 30 Dez 2010) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 640 $"[1:-1]	+ "$Date: 2011-01-15 16:17:12 +0100 (Sa, 15. Jan 2011) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

@@ -187,7 +187,7 @@ class MediaPlayerWebScreen(WebScreen):
 		self["RemoveFile"] = MP(session, func=MP.REMOVE)
 		self["Command"] = MP(session, func=MP.COMMAND)
 		self["WritePlaylist"] = MP(session, func=MP.WRITEPLAYLIST)
-		
+		self["CurrentTrack"] = MP(session, func=MP.CURRENT)
 
 class AutoTimerWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -365,4 +365,10 @@ class ServiceListPlayableWebScreen(WebScreen):
 		from WebComponents.Sources.ServicePlayable import ServicePlayable
 		
 		self["ServiceListPlayable"] = ServicePlayable(session, type=ServicePlayable.BOUQUET)
+
+class SleepTimerWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		
+		from WebComponents.Sources.SleepTimer import SleepTimer		
+		self["SleepTimer"] = SleepTimer(session)

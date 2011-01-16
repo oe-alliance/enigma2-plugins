@@ -25,6 +25,10 @@ from EPGRefreshService import EPGRefreshService
 # Configuration
 from Components.config import config
 
+# ... II
+from MainPictureAdapter import MainPictureAdapter
+from BackgroundAdapter import BackgroundAdapter
+
 # Path to configuration
 CONFIG = "/etc/enigma2/epgrefresh.xml"
 
@@ -34,7 +38,6 @@ class EPGRefresh:
 	def __init__(self):
 		# Initialize
 		self.services = (set(), set())
-		self.previousService = None
 		self.forcedScan = False
 		self.session = None
 		self.beginOfTimespan = 0
@@ -147,9 +150,6 @@ class EPGRefresh:
 	def prepareRefresh(self):
 		print "[EPGRefresh] About to start refreshing EPG"
 
-		# Keep service
-		self.previousService =  self.session.nav.getCurrentlyPlayingServiceReference()
-
 		# Maybe read in configuration
 		try:
 			self.readConfiguration()
@@ -224,6 +224,11 @@ class EPGRefresh:
 		# Debug
 		#print "[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in scanServices])
 
+		if config.plugins.epgrefresh.background.value:
+			self.refreshAdapter = BackgroundAdapter(self.session)
+		else:
+			self.refreshAdapter = MainPictureAdapter(self.session)
+
 		self.scanServices = scanServices
 		self.refresh()
 
@@ -264,10 +269,7 @@ class EPGRefresh:
 
 		self.forcedScan = False
 		epgrefreshtimer.cleanup()
-
-		# Zap back
-		if self.previousService is not None or Screens.Standby.inStandby:
-			self.session.nav.playService(self.previousService)
+		self.refreshAdapter.stop()
 
 	def refresh(self):
 		if self.forcedScan:
@@ -320,7 +322,8 @@ class EPGRefresh:
 			self.cleanUp()
 		else:
 			# Play next service
-			self.session.nav.playService(eServiceReference(service.sref))
+			# XXX: we might want to check the return value
+			self.refreshAdapter.play(eServiceReference(service.sref))
 
 			# Start Timer
 			delay = service.duration or config.plugins.epgrefresh.interval.value

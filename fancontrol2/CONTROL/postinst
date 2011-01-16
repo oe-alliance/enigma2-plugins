@@ -1,0 +1,10 @@
+#!/bin/sh
+echo "*                               *"
+echo "* plugin installed successfully *"
+echo "*                               *"
+echo "* E2 restart is required        *"
+echo "*                               *"
+echo "* E2 muss neu gestartet werden  *"
+echo "*                               *"
+
+exit
