@@ -18,9 +18,6 @@ from Components.ActionMap import HelpableActionMap
 from Components.config import config
 from Components.Sources.StaticText import StaticText
 
-# Plugin
-from AutoTimerComponent import AutoTimerComponent
-
 class AutoTimerOverviewSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">

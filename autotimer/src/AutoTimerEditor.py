@@ -1142,7 +1142,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		))
 
 def addAutotimerFromSearchString(session, match):
-	from AutoTimerComponent import AutoTimerComponent
+	from AutoTimerComponent import preferredAutoTimerComponent
 	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
 
@@ -1155,7 +1155,7 @@ def addAutotimerFromSearchString(session, match):
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		AutoTimerComponent(
+		preferredAutoTimerComponent(
 			autotimer.getUniqueId(),
 			match,
 			'',		# Match
@@ -1173,7 +1173,7 @@ def addAutotimerFromSearchString(session, match):
 	)
 
 def addAutotimerFromEvent(session, evt = None, service = None):
-	from AutoTimerComponent import AutoTimerComponent
+	from AutoTimerComponent import preferredAutoTimerComponent
 	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
 
@@ -1210,7 +1210,7 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		AutoTimerComponent(
+		preferredAutoTimerComponent(
 			autotimer.getUniqueId(),
 			name,
 			'',		# Match
@@ -1228,7 +1228,7 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 	)
 
 def addAutotimerFromService(session, service = None):
-	from AutoTimerComponent import AutoTimerComponent
+	from AutoTimerComponent import preferredAutoTimerComponent
 	from AutoTimerImporter import AutoTimerImporter
 	from plugin import autotimer
 
@@ -1272,7 +1272,7 @@ def addAutotimerFromService(session, service = None):
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		AutoTimerComponent(
+		preferredAutoTimerComponent(
 			autotimer.getUniqueId(),
 			name,
 			'',		# Match
