@@ -2,7 +2,7 @@
 # for localized messages
 from . import _
 
-from AutoTimerComponent import AutoTimerComponent
+from AutoTimerComponent import preferredAutoTimerComponent
 from RecordTimer import AFTEREVENT
 from Tools.XMLTools import stringToXML
 from ServiceReference import ServiceReference
@@ -40,7 +40,7 @@ def parseConfig(configuration, list, version = None, uniqueTimerId = 0, defaultT
 
 	for timer in configuration.findall("timer"):
 		uniqueTimerId += 1
-		baseTimer = AutoTimerComponent(
+		baseTimer = preferredAutoTimerComponent(
 			uniqueTimerId,
 			'',
 			'',
@@ -452,7 +452,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			tags.append(value.encode("UTF-8"))
 
 		# Finally append timer
-		list.append(AutoTimerComponent(
+		list.append(preferredAutoTimerComponent(
 				uniqueTimerId,
 				name,
 				match,

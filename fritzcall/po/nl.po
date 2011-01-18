@@ -7,22 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 19:59+0100\n"
+"POT-Creation-Date: 2011-01-15 16:20+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "About FritzCall"
 msgstr "Over FritzCall"
 
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
 msgid "Add entry to phonebook"
 msgstr "Aan telefoonlijst toevoegen"
 
@@ -145,6 +148,7 @@ msgstr "Laat gemiste gesprekken zien"
 msgid "Display outgoing calls"
 msgstr "Laat uitgaande gesprekken zien"
 
+#. TRANSLATORS: this is a window title.
 msgid "Do what?"
 msgstr "Wat te doen..."
 
@@ -199,6 +203,11 @@ msgstr ""
 msgid "FRITZ!Box - Error getting status: %s"
 msgstr ""
 
+msgid ""
+"FRITZ!Box - Error logging in\n"
+"\n"
+msgstr ""
+
 #, python-format
 msgid "FRITZ!Box - Error logging in: %s"
 msgstr "FRITZ!Box Login mislukt! - Error: %s"
@@ -228,6 +237,7 @@ msgstr ""
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box adres (Naam of IP)"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
@@ -251,11 +261,9 @@ msgstr ""
 msgid "France"
 msgstr "Frankrijk"
 
+#. TRANSLATORS: this is a window title.
 msgid "FritzCall Setup"
 msgstr "Setup Fritzcall"
-
-msgid "Full screen display"
-msgstr "Volledig scherm"
 
 msgid "Germany"
 msgstr "Duitsland"
@@ -275,19 +283,13 @@ msgstr "Binnenkomend"
 
 #, python-format
 msgid ""
-"Incoming Call on %(date)s from\n"
+"Incoming Call on %(date)s at %(time)s from\n"
 "---------------------------------------------\n"
 "%(number)s\n"
 "%(caller)s\n"
 "---------------------------------------------\n"
 "to: %(phone)s"
 msgstr ""
-"Binnenkomend gesprek op %(date)s van\n"
-"---------------------------------------------\n"
-"%(number)s\n"
-"%(caller)s\n"
-"---------------------------------------------\n"
-"to: %(phone)s"
 
 msgid "Incoming calls"
 msgstr "Inkomende gesprekken"
@@ -307,6 +309,9 @@ msgstr "Laat MSN zien (door een komma gescheiden)"
 
 msgid "Mailbox"
 msgstr "Mailbox"
+
+msgid "Media directory"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
@@ -376,19 +381,13 @@ msgstr "Uitgaand"
 
 #, python-format
 msgid ""
-"Outgoing Call on %(date)s to\n"
+"Outgoing Call on %(date)s at %(time)s to\n"
 "---------------------------------------------\n"
 "%(number)s\n"
 "%(caller)s\n"
 "---------------------------------------------\n"
 "from: %(phone)s"
 msgstr ""
-"Uitgaand gesprek op %(date)s to\n"
-"---------------------------------------------\n"
-"%(number)s\n"
-"%(caller)s\n"
-"---------------------------------------------\n"
-"van: %(phone)s"
 
 msgid "Outgoing calls"
 msgstr "Uitgaande gesprekken"
@@ -396,6 +395,7 @@ msgstr "Uitgaande gesprekken"
 msgid "Password Accessing FRITZ!Box"
 msgstr "Wachtwoord voor toegang FRITZ!Box"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
 msgstr "Telefoongesprekken"
@@ -403,6 +403,7 @@ msgstr "Telefoongesprekken"
 msgid "PhoneBook Location"
 msgstr "Telefoonboek locatie"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Telefoonboek"
@@ -595,7 +596,7 @@ msgstr "mailboxen actief"
 msgid "mobile"
 msgstr "mobiel"
 
-msgid "no"
+msgid "no calls"
 msgstr ""
 
 #, fuzzy
@@ -606,9 +607,6 @@ msgid "not encrypted"
 msgstr "ongecodeerd "
 
 msgid "number suppressed"
-msgstr ""
-
-msgid "on ring"
 msgstr ""
 
 #, fuzzy
@@ -657,8 +655,41 @@ msgstr "werk"
 #~ msgid "FRITZ!Box Login failed: "
 #~ msgstr "FRITZ!Box Login mislukt! - Error: %s"
 
+#~ msgid "Full screen display"
+#~ msgstr "Volledig scherm"
+
 #~ msgid "Harddisk"
 #~ msgstr "Harde schijf"
+
+#~ msgid ""
+#~ "Incoming Call on %(date)s from\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "to: %(phone)s"
+#~ msgstr ""
+#~ "Binnenkomend gesprek op %(date)s van\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "to: %(phone)s"
+
+#~ msgid ""
+#~ "Outgoing Call on %(date)s to\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "from: %(phone)s"
+#~ msgstr ""
+#~ "Uitgaand gesprek op %(date)s to\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "van: %(phone)s"
 
 #~ msgid "Show Calls for specific MSN"
 #~ msgstr "Laat gesprekken van een specifieke MSN zien"

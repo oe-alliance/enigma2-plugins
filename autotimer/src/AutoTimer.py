@@ -21,7 +21,7 @@ from enigma import eEPGCache, eServiceReference
 from Components.config import config
 
 # AutoTimer Component
-from AutoTimerComponent import AutoTimerComponent
+from AutoTimerComponent import preferredAutoTimerComponent
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
@@ -60,7 +60,7 @@ class AutoTimer:
 		self.timers = []
 		self.configMtime = -1
 		self.uniqueTimerId = 0
-		self.defaultTimer = AutoTimerComponent(
+		self.defaultTimer = preferredAutoTimerComponent(
 			0,		# Id
 			"",		# Name
 			"",		# Match

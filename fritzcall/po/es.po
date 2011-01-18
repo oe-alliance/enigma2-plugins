@@ -7,21 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 19:59+0100\n"
+"POT-Creation-Date: 2011-01-15 16:20+0100\n"
 "PO-Revision-Date: 2009-06-04 20:22+0200\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "About FritzCall"
 msgstr "Sobre FritzCall"
 
 #. TRANSLATORS: keep it short, this is a help text
+#. TRANSLATORS: this is a window title.
 msgid "Add entry to phonebook"
 msgstr "Añadir entrada a la agenda"
 
@@ -144,6 +147,7 @@ msgstr "Visualizar llamadas perdidas"
 msgid "Display outgoing calls"
 msgstr "Visualizar llamadas salientes"
 
+#. TRANSLATORS: this is a window title.
 msgid "Do what?"
 msgstr "¿Qué hago?"
 
@@ -198,6 +202,11 @@ msgstr ""
 msgid "FRITZ!Box - Error getting status: %s"
 msgstr ""
 
+msgid ""
+"FRITZ!Box - Error logging in\n"
+"\n"
+msgstr ""
+
 #, fuzzy, python-format
 msgid "FRITZ!Box - Error logging in: %s"
 msgstr "Falló la identificación a FRITZ!Box - Error: %s"
@@ -227,6 +236,7 @@ msgstr ""
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "Dirección FRITZ!Box FON (Nombre o IP)"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
 msgid "FRITZ!Box Fon Status"
@@ -250,11 +260,9 @@ msgstr ""
 msgid "France"
 msgstr "Francia"
 
+#. TRANSLATORS: this is a window title.
 msgid "FritzCall Setup"
 msgstr "Configuración FritzCall"
-
-msgid "Full screen display"
-msgstr "Visualización a pantalla completa"
 
 msgid "Germany"
 msgstr "Alemania"
@@ -274,19 +282,13 @@ msgstr "Entrada"
 
 #, python-format
 msgid ""
-"Incoming Call on %(date)s from\n"
+"Incoming Call on %(date)s at %(time)s from\n"
 "---------------------------------------------\n"
 "%(number)s\n"
 "%(caller)s\n"
 "---------------------------------------------\n"
 "to: %(phone)s"
 msgstr ""
-"Llamada Entrante en %(date)s desde\n"
-"---------------------------------------------\n"
-"%(number)s\n"
-"%(caller)s\n"
-"---------------------------------------------\n"
-"a: %(phone)s"
 
 msgid "Incoming calls"
 msgstr "Llamadas entrantes"
@@ -306,6 +308,9 @@ msgstr "MSN a mostrar (separado por ,)"
 
 msgid "Mailbox"
 msgstr "Carpeta de correo"
+
+msgid "Media directory"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
@@ -375,19 +380,13 @@ msgstr "Salida"
 
 #, python-format
 msgid ""
-"Outgoing Call on %(date)s to\n"
+"Outgoing Call on %(date)s at %(time)s to\n"
 "---------------------------------------------\n"
 "%(number)s\n"
 "%(caller)s\n"
 "---------------------------------------------\n"
 "from: %(phone)s"
 msgstr ""
-"Llamadas saliente en %(date)s a\n"
-"---------------------------------------------\n"
-"%(number)s\n"
-"%(caller)s\n"
-"---------------------------------------------\n"
-"desde: %(phone)s"
 
 msgid "Outgoing calls"
 msgstr "Llamadas salientes"
@@ -395,6 +394,7 @@ msgstr "Llamadas salientes"
 msgid "Password Accessing FRITZ!Box"
 msgstr "Contraseña accediendo a FRITZ!Box"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phone calls"
 msgstr "Llamadas de teléfono"
@@ -402,6 +402,7 @@ msgstr "Llamadas de teléfono"
 msgid "PhoneBook Location"
 msgstr "Ubicación de la Agenda"
 
+#. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
 msgid "Phonebook"
 msgstr "Agenda"
@@ -593,7 +594,7 @@ msgstr "cuentas activas"
 msgid "mobile"
 msgstr "móvil"
 
-msgid "no"
+msgid "no calls"
 msgstr ""
 
 #, fuzzy
@@ -604,9 +605,6 @@ msgid "not encrypted"
 msgstr "no encriptado"
 
 msgid "number suppressed"
-msgstr ""
-
-msgid "on ring"
 msgstr ""
 
 #, fuzzy
@@ -685,8 +683,41 @@ msgstr "trabajo"
 #~ msgid "FRITZ!Box Login failed: "
 #~ msgstr "Falló la identificación a FRITZ!Box - Error: %s"
 
+#~ msgid "Full screen display"
+#~ msgstr "Visualización a pantalla completa"
+
 #~ msgid "Harddisk"
 #~ msgstr "Disco duro"
+
+#~ msgid ""
+#~ "Incoming Call on %(date)s from\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "to: %(phone)s"
+#~ msgstr ""
+#~ "Llamada Entrante en %(date)s desde\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "a: %(phone)s"
+
+#~ msgid ""
+#~ "Outgoing Call on %(date)s to\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "from: %(phone)s"
+#~ msgstr ""
+#~ "Llamadas saliente en %(date)s a\n"
+#~ "---------------------------------------------\n"
+#~ "%(number)s\n"
+#~ "%(caller)s\n"
+#~ "---------------------------------------------\n"
+#~ "desde: %(phone)s"
 
 #~ msgid "Show Calls for specific MSN"
 #~ msgstr "Mostrar Llamadas para un específico MSN"

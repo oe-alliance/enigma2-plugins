@@ -7,6 +7,9 @@ from re import compile as re_compile
 # Alternatives and service restriction
 from enigma import eServiceReference, eServiceCenter
 
+# To get preferred component
+from Components.config import config
+
 class AutoTimerComponent(object):
 	"""AutoTimer Component which also handles validity checks"""
 
@@ -575,3 +578,94 @@ class AutoTimerComponent(object):
 			 ")>"
 		))
 
+class AutoTimerFastscanComponent(AutoTimerComponent):
+	def __init__(self, *args, **kwargs):
+		AutoTimerComponent.__init__(self, *args, **kwargs)
+		self._fastServices = None
+
+	def setBouquets(self, bouquets):
+		AutoTimerComponent.setBouquets(self, bouquets)
+		self._fastServices = None
+
+	def setServices(self, services):
+		AutoTimerComponent.setServices(self, services)
+		self._fastServices = None
+
+	def getFastServices(self):
+		if self._fastServices is None:
+			fastServices = []
+			append = fastServices.append
+			addbouquets = []
+			for service in self.services:
+				myref = eServiceReference(str(service))
+				if myref.flags & eServiceReference.isGroup:
+					addbouquets.append(service)
+				else:
+					comp = service.split(':')
+					append(':'.join(comp[3:]))
+
+			serviceHandler = eServiceCenter.getInstance()
+			for bouquet in bouquets + addbouquets:
+				myref = eServiceReference(str(bouquet))
+				mylist = serviceHandler.list(myref)
+				if mylist is not None:
+					while 1:
+						s = mylist.getNext()
+						# TODO: I wonder if its sane to assume we get services here (and not just new lists)
+						# We can ignore markers & directorys here because they won't match any event's service :-)
+						if s.valid():
+							# strip all after last :
+							value = s.toString()
+							pos = value.rfind(':')
+							if pos != -1:
+								if value[pos-1] == ':':
+									pos -= 1
+								value = value[:pos+1]
+
+							comp = value.split(':')
+							append(':'.join(value[3:]))
+						else:
+							break
+			self._fastServices = fastServices
+		return self._fastServices
+
+	def checkServices(self, check_service):
+		services = self.getFastServices()
+		if services:
+			check = ':'.join(check_service.split(':')[3:])
+			for service in services:
+				if service == check:
+					return False # included
+			return True # not included
+		return False # no restriction
+
+	def getAlternative(self, override_service):
+		services = self.services
+		if services:
+			override = ':'.join(override_service.split(':')[3:])
+			serviceHandler = eServiceCenter.getInstance()
+
+			for service in services:
+				myref = eServiceReference(str(service))
+				if myref.flags & eServiceReference.isGroup:
+					mylist = serviceHandler.list(myref)
+					if mylist is not None:
+						while 1:
+							s = mylist.getNext()
+							if s.valid():
+								# strip all after last :
+								value = s.toString()
+								pos = value.rfind(':')
+								if pos != -1:
+									if value[pos-1] == ':':
+										pos -= 1
+									value = value[:pos+1]
+
+								if ':'.join(value.split(':')[3:]) == override:
+									return service
+							else:
+								break
+		return override_service
+
+# very basic factory ;-)
+preferredAutoTimerComponent = lambda *args, **kwargs: AutoTimerFastscanComponent(*args, **kwargs) if config.plugins.autotimer.fastscan.value else AutoTimerComponent(*args, **kwargs)

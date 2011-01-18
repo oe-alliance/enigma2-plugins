@@ -30,6 +30,7 @@ config.plugins.autotimer.editor = ConfigSelection(choices = [
 )
 config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default = False)
 config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default = False)
+config.plugins.autotimer.fastscan = ConfigYesNo(default = False)
 
 autotimer = None
 autopoller = None
