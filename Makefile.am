@@ -69,6 +69,7 @@ SUBDIRS = \
 	startuptostandby \
 	tageditor \
 	trafficinfo \
+	tvcharts \
 	unwetterzentrale \
 	virtualzap \
 	vlcplayer \
