@@ -1,7 +1,7 @@
 #######################################################################
 #
 #    EasyMedia for Dreambox-Enigma2
-#    Coded by Vali (c)2010
+#    Coded by Vali (c)2010-2011
 #    Support: www.dreambox-tools.info
 #
 #
@@ -69,6 +69,7 @@ config.plugins.easyMedia.idream = ConfigSelection(default="no", choices = [("no"
 config.plugins.easyMedia.zdfmedia = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.radio = ConfigSelection(default="yes", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.easyMedia.myvideo = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
+config.plugins.easyMedia.timers = ConfigSelection(default="no", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 
 
 
@@ -179,6 +180,7 @@ class ConfigEasyMedia(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("Music player:"), config.plugins.easyMedia.music))
 		list.append(getConfigListEntry(_("Files browser:"), config.plugins.easyMedia.files))
 		list.append(getConfigListEntry(_("Show bookmarks:"), config.plugins.easyMedia.bookmarks))
+		list.append(getConfigListEntry(_("Timer:"), config.plugins.easyMedia.timers))
 		list.append(getConfigListEntry(_("PicturePlayer:"), config.plugins.easyMedia.pictures))
 		list.append(getConfigListEntry(_("Show tv/radio switch:"), config.plugins.easyMedia.radio))
 		list.append(getConfigListEntry(_("YouTube player:"), config.plugins.easyMedia.mytube))
@@ -319,6 +321,9 @@ class EasyMedia(Screen):
 		if config.plugins.easyMedia.bookmarks.value != "no":
 			self.__keys.append("bookmarks")
 			MPaskList.append((_("Bookmarks"), "BOOKMARKS"))
+		if config.plugins.easyMedia.timers.value != "no":
+			self.__keys.append("timers")
+			MPaskList.append((_("Timer"), "TIMERS"))
 		if config.plugins.easyMedia.videodb.value != "no":
 			self.__keys.append("videodb")
 			MPaskList.append((_("VideoDB"), "VIDEODB"))
@@ -529,6 +534,9 @@ def MPcallbackFunc(answer):
 			vdbmain(EMsession)
 		else:
 			EMsession.open(MessageBox, text = _('VideoDB is not installed!'), type = MessageBox.TYPE_ERROR)
+	elif answer == "TIMERS":
+		from Screens.TimerEdit import TimerEditList
+		EMsession.open(TimerEditList)
 	elif answer is not None and "++++" in answer:
 		plugToRun = answer[4:]
 		try:
@@ -537,7 +545,6 @@ def MPcallbackFunc(answer):
 			inpf.close()	
 			runPlug(session = EMsession)
 		except: EMsession.open(MessageBox, text = (plugToRun + " not found!"), type = MessageBox.TYPE_WARNING)
-	
 
 
 

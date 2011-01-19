@@ -392,6 +392,11 @@ trafficinfo/Makefile
 trafficinfo/meta/Makefile
 trafficinfo/src/Makefile
 
+tvcharts/Makefile
+tvcharts/meta/Makefile
+tvcharts/src/Makefile
+tvcharts/src/images/Makefile
+
 unwetterzentrale/Makefile
 unwetterzentrale/meta/Makefile
 unwetterzentrale/src/Makefile
