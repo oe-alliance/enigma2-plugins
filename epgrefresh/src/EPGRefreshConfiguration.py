@@ -65,6 +65,14 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 			self.list.insert(1, getConfigListEntry(_("Refresh in Background"), config.plugins.epgrefresh.background, _("Use Picture In Picture to refresh EPG?")))
 
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		def selectionChanged():
+			if self["config"].current:
+				self["config"].current[1].onDeselect(self.session)
+			self["config"].current = self["config"].getCurrent()
+			if self["config"].current:
+				self["config"].current[1].onSelect(self.session)
+			for x in self["config"].onSelectionChanged:
+				x()
 		self["config"].onSelectionChanged.append(self.updateHelp)
 
 		# Initialize Buttons
