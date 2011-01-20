@@ -73,6 +73,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 				self["config"].current[1].onSelect(self.session)
 			for x in self["config"].onSelectionChanged:
 				x()
+		self["config"].selectionChanged = selectionChanged
 		self["config"].onSelectionChanged.append(self.updateHelp)
 
 		# Initialize Buttons
