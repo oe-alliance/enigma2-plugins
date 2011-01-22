@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Elektro Power Save\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 11:35+0100\n"
-"PO-Revision-Date: 2009-04-26 11:35+0100\n"
+"POT-Creation-Date: 2010-07-18 14:48+0100\n"
+"PO-Revision-Date: 2010-07-18 14:49+0100\n"
 "Last-Translator: Moritz 'Morty' Strübe <morty@gmx.net>\n"
 "Language-Team: Morty <morty@gmx.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,96 +15,124 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: plugin.py:110
+#: plugin.py:113
+#: plugin_neu.py:113
 msgid "Monday"
 msgstr "Montag"
 
-#: plugin.py:111
+#: plugin.py:114
+#: plugin_neu.py:114
 msgid "Tuesday"
 msgstr "Dienstag"
 
-#: plugin.py:112
+#: plugin.py:115
+#: plugin_neu.py:115
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: plugin.py:113
+#: plugin.py:116
+#: plugin_neu.py:116
 msgid "Thursday"
 msgstr "Donnerstag"
 
-#: plugin.py:114
+#: plugin.py:117
+#: plugin_neu.py:117
 msgid "Friday"
 msgstr "Freitag"
 
-#: plugin.py:115
+#: plugin.py:118
+#: plugin_neu.py:118
 msgid "Saturday"
 msgstr "Samstag"
 
-#: plugin.py:116
+#: plugin.py:119
+#: plugin_neu.py:119
 msgid "Sunday"
 msgstr "Sonntag"
 
-#: plugin.py:195
+#: plugin.py:203
+#: plugin_neu.py:203
 msgid "Enable Elektro Power Save"
 msgstr "Elektro Power Save aktivieren"
 
-#: plugin.py:196
-#: plugin.py:300
+#: plugin.py:204
+#: plugin.py:309
+#: plugin_neu.py:204
+#: plugin_neu.py:308
 msgid "Standby on boot"
 msgstr "Nach dem Booten in den Standby"
 
-#: plugin.py:197
+#: plugin.py:205
+#: plugin_neu.py:205
 msgid "Standby on manual boot"
 msgstr "Nach dem manuellen Booten in den Standby"
 
-#: plugin.py:198
+#: plugin.py:206
+#: plugin_neu.py:206
 msgid "Standby on boot screen timeout"
 msgstr "In-den-Standby-Bildschirm Anzeigezeit"
 
-#: plugin.py:199
+#: plugin.py:207
+#: plugin_neu.py:207
 msgid "Force sleep (even when not in standby)"
 msgstr "Erzwinge Ruhezustand (auch wenn nicht im Standby)"
 
-#: plugin.py:200
+#: plugin.py:208
+msgid "Don't sleep while hdd is active (e.g. ftp)"
+msgstr "Nicht schlafen, wenn die HDD aktiv ist (z.B. ftp)"
+
+#: plugin.py:209
+#: plugin_neu.py:208
 msgid "Dont wake up"
 msgstr "Nicht aufwachen"
 
-#: plugin.py:201
+#: plugin.py:210
+#: plugin_neu.py:209
 msgid "Holiday mode (experimental)"
 msgstr "Urlaubsmodus (Experimentell)"
 
-#: plugin.py:203
+#: plugin.py:212
+#: plugin_neu.py:211
 msgid "Next day starts at"
 msgstr "Die nächste Tag beginnt um"
 
-#: plugin.py:206
+#: plugin.py:215
+#: plugin_neu.py:214
 msgid "Wakeup"
 msgstr "Aufwachen"
 
-#: plugin.py:207
+#: plugin.py:216
+#: plugin_neu.py:215
 msgid "Sleep"
 msgstr "Ruhezustand"
 
-#: plugin.py:211
+#: plugin.py:220
+#: plugin_neu.py:219
 msgid "Cancel"
 msgstr "Abbruch"
 
-#: plugin.py:212
+#: plugin.py:221
+#: plugin_neu.py:220
 msgid "Ok"
 msgstr "OK"
 
-#: plugin.py:213
+#: plugin.py:222
+#: plugin_neu.py:221
 msgid "Help"
 msgstr "Hilfe"
 
-#: plugin.py:237
+#: plugin.py:246
+#: plugin_neu.py:245
 msgid "Showing Elektro readme.txt"
 msgstr "Zeige Electro Readme.txt"
 
-#: plugin.py:323
+#: plugin.py:332
+#: plugin_neu.py:331
 msgid "Go to Standby now?"
 msgstr "Jetzt in den Standby gehen?"
 
-#: plugin.py:465
+#: plugin.py:480
+#: plugin_neu.py:479
 msgid "Go to sleep now?"
 msgstr "Jetzt in den Ruhezustand gehen?"
 

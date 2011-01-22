@@ -41,8 +41,8 @@ Release infos
 3.3.3 Added patch to installer to fix enigma2. It 
 	  should now be possible to run Elektro and 
 	  EPG refresh in parallel.
-3.3.4 Added Turkish locale by MytHoLoG
-3.3.5 Italian translation updated	  
+3.3.4 Added Turkish locale by MytHoLoG	  
+3.4.0 no shutdown if HDD not Idle (joergm6)  
 ====================================================
 The English Documentation follows the German one 
 ====================================================
@@ -117,6 +117,11 @@ Hauptmenü -> Erweiterungen -> Elektro Power Save
    Erzwingt den Ruhezustand auch, wenn die Box nicht
    im Standby ist. Auf Aufnahmen hat dies keinen Ein-
    fluss.
+   
+ - Nicht schlafen, wenn die HDD aktiv ist
+   Warte bis die Festplatte in den Ruhemodus geht. Je
+   nach Konfiguration kann dies den Ruhezustand
+   vollständig unterbinden.
    
  - Nicht aufwachen
    Die Box wacht nach dem eine der Ruhe-Zeit nicht von
@@ -210,6 +215,11 @@ Main menu -> Extensions -> Elektro Power Save
  - Force sleep 
    Forces sleep, even when not in standby. This
    has influence on sheduled recordings.
+ 
+ - Don't sleep while hdd is active
+   Wait for the HDD to got to sleep mode. Depending on
+   the configuration this can keep the box from going
+   to sleep mode.
    
  - Dont wake up
    Do not wake up at the end of the sleep time.

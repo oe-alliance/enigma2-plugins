@@ -1,6 +1,7 @@
 ﻿#
 # Power Save Plugin by gutemine
 # Rewritten by Morty (morty@gmx.net)
+# HDD Mod by joergm6
 #
 # Deep standby will be called sleep. Normal standby will be named standby!
 # All calculations are in the local timezone, or in the relative Timezone.
@@ -35,6 +36,8 @@ from Screens import Standby
 # GUI (Components)
 from Components.ActionMap import ActionMap
 from Components.Button import Button
+
+from Components.Harddisk import harddiskmanager
 
 # Configuration
 from Components.config import getConfigListEntry, ConfigEnableDisable, \
@@ -76,7 +79,7 @@ except IOError:
 # Globals
 session = None
 ElektroWakeUpTime = -1
-elektro_pluginversion = "3.3.4"
+elektro_pluginversion = "3.4.0"
 elektro_readme = "/usr/lib/enigma2/python/Plugins/Extensions/Elektro/readme.txt"
 elektrostarttime = 60 
 elektrosleeptime = 5
@@ -103,6 +106,7 @@ config.plugins.elektro.nextwakeup = ConfigNumber(default = 0)
 config.plugins.elektro.force = ConfigEnableDisable(default = False)
 config.plugins.elektro.dontwakeup = ConfigEnableDisable(default = False)
 config.plugins.elektro.holiday =  ConfigEnableDisable(default = False)
+config.plugins.elektro.hddsleep =  ConfigEnableDisable(default = False)
 
 
 
@@ -177,7 +181,7 @@ def main(session,**kwargs):
 
 class Elektro(ConfigListScreen,Screen):
 	skin = """
-			<screen position="100,100" size="550,400" title="Elektro Power Save Ver. """ + elektro_pluginversion + """" >
+			<screen position="center,center" size="550,400" title="Elektro Power Save Ver. """ + elektro_pluginversion + """" >
 			<widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
 			
 			<widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
@@ -202,6 +206,7 @@ class Elektro(ConfigListScreen,Screen):
 		self.list.append(getConfigListEntry(_("Standby on manual boot"), config.plugins.elektro.standbyOnManualBoot ))
 		self.list.append(getConfigListEntry(_("Standby on boot screen timeout"), config.plugins.elektro.standbyOnBootTimeout))
 		self.list.append(getConfigListEntry(_("Force sleep (even when not in standby)"), config.plugins.elektro.force ))
+		self.list.append(getConfigListEntry(_("Don't sleep while hdd is active (e.g. ftp)"), config.plugins.elektro.hddsleep ))
 		self.list.append(getConfigListEntry(_("Dont wake up"), config.plugins.elektro.dontwakeup ))
 		self.list.append(getConfigListEntry(_("Holiday mode (experimental)"), config.plugins.elektro.holiday ))
 		
@@ -243,7 +248,7 @@ class Elektro(ConfigListScreen,Screen):
 
 
 class DoElektro(Screen):
-	skin = """ <screen position="100,100" size="300,300" title="Elektro Plugin Menu" > </screen>"""
+	skin = """ <screen position="center,center" size="300,300" title="Elektro Plugin Menu" > </screen>"""
 	
 	def __init__(self,session):
 		Screen.__init__(self,session)
@@ -457,6 +462,12 @@ class DoElektro(Screen):
 		# No Sleep while recording
 		if self.session.nav.RecordTimer.isRecording():
 			trysleep = False
+		
+		# No Sleep on HDD running - joergm6
+		if (config.plugins.elektro.hddsleep.value == True) and (harddiskmanager.HDDCount() > 0):
+			hddlist = harddiskmanager.HDDList()
+			if not hddlist[0][1].isSleeping():
+				trysleep = False
 		
 		# Will there be a recording in a short while?
 		nextRecTime = self.session.nav.RecordTimer.getNextRecordingTime()

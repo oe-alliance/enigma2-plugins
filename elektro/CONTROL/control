@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-elektro
-Version: 3.3.5
+Version: 3.4.0
 Description: Automatically shut down your box when you don't need it.
 Architecture: mipsel
 Section: extra
