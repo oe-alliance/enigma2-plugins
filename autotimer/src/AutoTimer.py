@@ -277,7 +277,7 @@ class AutoTimer:
 						newEntry.service_ref = ServiceReference(serviceref)
 
 						break
-					elif timer.avoidDuplicateDescription == 1 and rtimer.name == name and rtimer.description == description:
+					elif timer.avoidDuplicateDescription == 1 and not rtimer.disabled and rtimer.name == name and rtimer.description == description:
 						oldExists = True
 						print "[AutoTimer] We found a timer with same description, skipping event"
 						break
@@ -294,7 +294,7 @@ class AutoTimer:
 						try:
 							for list in recorddict.values():
 								for rtimer in list:
-									if rtimer.name == name and rtimer.description == description:
+									if not rtimer.disabled and rtimer.name == name and rtimer.description == description:
 										raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
 						except AutoTimerIgnoreTimerException, etite:
 							print etite
