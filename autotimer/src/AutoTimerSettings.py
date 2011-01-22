@@ -48,6 +48,15 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 			session = session,
 			on_change = self.changed
 		)
+		def selectionChanged():
+			if self["config"].current:
+				self["config"].current[1].onDeselect(self.session)
+			self["config"].current = self["config"].getCurrent()
+			if self["config"].current:
+				self["config"].current[1].onSelect(self.session)
+			for x in self["config"].onSelectionChanged:
+				x()
+		self["config"].selectionChanged = selectionChanged
 		self["config"].onSelectionChanged.append(self.updateHelp)
 
 		# Initialize widgets
