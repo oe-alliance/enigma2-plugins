@@ -4,7 +4,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os,gettext
 import sha
 PluginLanguageDomain = "MyTube"
-PluginLanguagePath = "Extensions/MyTube/po"
+PluginLanguagePath = "Extensions/MyTube/locale"
 
 def localeInit():
 	lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
