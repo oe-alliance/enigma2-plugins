@@ -10,7 +10,7 @@ class GrabResource(resource.Resource):
 		this is a interface to Seddis AiO Dreambox Screengrabber
 	'''
 	GRAB_BIN = '/usr/bin/grab'
-	SPECIAL_ARGS = ('format', 'filename', 'save')
+	SPECIAL_ARGS = ('format', 'filename', 'save', 'refresh')
 
 	def render(self, request):
 		args = []
@@ -22,6 +22,7 @@ class GrabResource(resource.Resource):
 		osdOnly = False
 		videoOnly = False
 		save = False
+		refresh = None
 
 		for key, value in request.args.items():
 			if key in GrabResource.SPECIAL_ARGS:
@@ -49,6 +50,9 @@ class GrabResource(resource.Resource):
 
 				elif key == 'save':
 					save = True
+
+				elif key == 'refresh':
+					refresh = value[0]
 			else:
 				if key == "o" and videoOnly is True:
 					continue
@@ -69,6 +73,8 @@ class GrabResource(resource.Resource):
 		else:
 			request.setHeader('Content-Disposition', 'inline; filename=screenshot.%s;' %imageformat)
 			request.setHeader('Content-Type','image/%s' %imageformat)
+			if refresh:
+				request.setHeader('Refresh', str(refresh))
 
 			filename = "%s.%s" %(filename,imageformat)
 			append(filename)
