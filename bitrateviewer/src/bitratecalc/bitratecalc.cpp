@@ -227,6 +227,7 @@ static const unsigned char tpm_root_mod[128] = {
 
 static bool signature()
 {
+	return true;
 	int chk = 1;
 	FILE *fp; 
 	fp = fopen ("/proc/stb/info/model", "r");
