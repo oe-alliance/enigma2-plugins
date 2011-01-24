@@ -121,7 +121,8 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	STREAMRIPPER_BIN = '/usr/bin/streamripper'
 
 	FAVORITE_FILE_DEFAULT = '/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/favorites'
-	FAVORITE_FILE = '/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/favorites.user'
+	FAVORITE_FILE_OLD = '/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/favorites.user'
+	FAVORITE_FILE = '/etc/enigma2/SHOUTcast.favorites'
 
 	sz_w = getDesktop(0).size().width()
 	if sz_w == 1280:
@@ -137,7 +138,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				<widget render="Label" source="key_blue" position="500,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="headertext" position="50,77" zPosition="1" size="1180,23" font="Regular;20" transparent="1"  backgroundColor="#00000000"/>
 				<widget name="statustext" position="20,270" zPosition="1" size="1240,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="list" position="50,110" zPosition="2" size="1180,445" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
+				<widget name="list" position="50,110" zPosition="2" size="1180,441" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 				<widget name="titel" position="160,580" zPosition="1" size="900,20" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
 				<widget name="station" position="160,600" zPosition="1" size="900,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
 				<widget name="console" position="160,650" zPosition="1" size="900,50" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
@@ -158,7 +159,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				<widget render="Label" source="key_blue" position="500,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="headertext" position="50,77" zPosition="1" size="900,23" font="Regular;20" transparent="1"  backgroundColor="#00000000"/>
 				<widget name="statustext" position="20,270" zPosition="1" size="1004,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="list" position="50,110" zPosition="2" size="940,313" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
+				<widget name="list" position="50,110" zPosition="2" size="940,315" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 				<widget name="titel" position="160,450" zPosition="1" size="800,20" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
 				<widget name="station" position="160,470" zPosition="1" size="800,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
 				<widget name="console" position="160,520" zPosition="1" size="800,50" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
@@ -179,7 +180,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				<widget render="Label" source="key_blue" position="530,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="headertext" position="50,77" zPosition="1" size="620,23" font="Regular;20" transparent="1"  backgroundColor="#00000000"/>
 				<widget name="statustext" position="50,270" zPosition="1" size="620,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="list" position="50,120" zPosition="2" size="620,249" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
+				<widget name="list" position="50,120" zPosition="2" size="620,252" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
 				<widget name="titel" position="155,400" zPosition="1" size="525,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
 				<widget name="station" position="155,445" zPosition="1" size="525,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
 				<widget name="console" position="155,490" zPosition="1" size="525,50" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
@@ -230,6 +231,8 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self.favoriteConfig = Config()
 		if os.path.exists(self.FAVORITE_FILE):
 			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE)
+		elif os.path.exists(self.FAVORITE_FILE_OLD):
+			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE_OLD)
 		else:
 			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE_DEFAULT)
 		self.favoriteConfig.entriescount =  ConfigInteger(0)
