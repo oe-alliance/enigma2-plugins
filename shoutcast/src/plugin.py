@@ -378,7 +378,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self["headertext"].setText("")
 		self["statustext"].setText(_("Getting SHOUTcast genre list..."))
 		self["list"].hide()
-		url = "http://yp.shoutcast.com/sbin/newxml.phtml"
+		url = "http://shoutcast.net/sbin/newxml.phtml"
 		sendUrlCommand(url, None,10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
@@ -436,7 +436,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				elif self.mode == self.STATIONLIST:
 					self.stationListIndex = self["list"].getCurrentIndex()
 					self.stopPlaying()
-					url = "http://yp.shoutcast.com%s?id=%s" % (self.tunein, sel.id)
+					url = "http://shoutcast.net%s?id=%s" % (self.tunein, sel.id)
 					self["list"].hide()
 					self["statustext"].setText(_("Getting streaming data from\n%s") % sel.name)
 					self.currentStreamingStation = sel.name
@@ -495,7 +495,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self["headertext"].setText("")
 		self["statustext"].setText(_("Getting %s") %  self.headerTextString)
 		self["list"].hide()
-		self.stationListURL = "http://yp.shoutcast.com/sbin/newxml.phtml?genre=%s" % genre
+		self.stationListURL = "http://shoutcast.net/sbin/newxml.phtml?genre=%s" % genre
 		self.stationListIndex = 0
 		sendUrlCommand(self.stationListURL, None,10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
@@ -566,7 +566,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	def addStationToFavorite(self):
 		sel = self.getSelectedItem()
 		if sel is not None:
-			self.addFavorite(name = sel.name, text = "http://yp.shoutcast.com%s?id=%s" % (self.tunein, sel.id), favoritetype = "pls", audio = sel.mt, bitrate = sel.br)			
+			self.addFavorite(name = sel.name, text = "http://shoutcast.net%s?id=%s" % (self.tunein, sel.id), favoritetype = "pls", audio = sel.mt, bitrate = sel.br)			
 
 	def addCurrentStreamToFavorite(self):
 		self.addFavorite(name = self.currentStreamingStation, text = self.currentStreamingURL, favoritetype = "url")
@@ -620,7 +620,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			self["headertext"].setText("")
 			self["statustext"].setText(_("Searching SHOUTcast for %s...") % searchstring)
 			self["list"].hide()
-			self.stationListURL = "http://yp.shoutcast.com/sbin/newxml.phtml?search=%s" % searchstring
+			self.stationListURL = "http://shoutcast.net/sbin/newxml.phtml?search=%s" % searchstring
 			self.mode = self.SEARCHLIST
 			self.searchSHOUTcastString = searchstring
 			self.stationListIndex = 0
