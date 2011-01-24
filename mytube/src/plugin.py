@@ -144,7 +144,7 @@ config.plugins.mytube.general.loadFeedOnOpen = ConfigYesNo(default = True)
 config.plugins.mytube.general.startFeed = ConfigSelection(
 				[
 				 ("hd", _("HD videos")),
-				 ("most_viewed", _("Most viewed")),
+#				 ("most_viewed", _("Most viewed")),
 				 ("top_rated", _("Top rated")),
 				 ("recently_featured", _("Recently featured")),
 				 ("most_discussed", _("Most discussed")),
@@ -152,7 +152,7 @@ config.plugins.mytube.general.startFeed = ConfigSelection(
 				 ("most_linked", _("Most linked")),
 				 ("most_responded", _("Most responded")),
 				 ("most_recent", _("Most recent"))
-				], "most_viewed")
+				], "top_rated")
 config.plugins.mytube.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
 	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
 
