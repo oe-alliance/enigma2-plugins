@@ -4,7 +4,6 @@ SUBDIRS = \
 	ac3lipsync \
 	aihdcontrol \
 	antiscrollbar \
-	automatictimerlistcleanup \
 	automaticvolumeadjustment \
 	autoresolution \
 	autotimer \
@@ -25,7 +24,6 @@ SUBDIRS = \
 	filebrowser \
 	fritzcall \
 	ftpbrowser \
-	genuinedreambox \
 	googlemaps \
 	growlee \
 	httpproxy \
@@ -65,7 +63,6 @@ SUBDIRS = \
 	setpasswd \
 	shoutcast \
 	simplerss \
-	startupservice \
 	startuptostandby \
 	tageditor \
 	trafficinfo \
