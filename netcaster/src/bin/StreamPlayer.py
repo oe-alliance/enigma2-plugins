@@ -10,6 +10,7 @@ class StreamPlayer:
 	    self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
 	    self.session.nav.event.append(self.__event)
 	    self.metadatachangelisteners = []
+	    self.onStop = []
 
 	def __event(self, ev):
 	    print "[NETcaster.StreamPlayer] EVENT ==>", ev
@@ -19,6 +20,11 @@ class StreamPlayer:
    				#it seems, that only Title is avaible for now
    				sTagTitle = currentServiceRef.info().getInfoString(iServiceInformation.sTagTitle)
 				self._onMetadataChanged(sTagTitle)
+# TODO: Figure out the correct event for "STOP", 1 appears to be wrong.
+#	    elif ev == 1:
+#	       for c in self.onStop:
+#	           c()
+		
 
 	def _onMetadataChanged(self,title):
 		for i in self.metadatachangelisteners:

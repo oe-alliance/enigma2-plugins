@@ -103,10 +103,9 @@ class Stream:
 
     def _gotPLSContent(self, lines):
 		if lines.startswith("ICY "):
-			print "PLS expected, but got ICY stream"
+			print "[NETcaster] PLS expected, but got ICY stream"
 			self.type = "mp3"
 			self.callback(self.url)
-
 		else:
 			for line in lines.split('\n'):
 			    if line.startswith("File"):
@@ -115,9 +114,11 @@ class Stream:
 			        break
 			    print "Skipping:", line
 
-    def _errorPLSContent(self, data, callback):
-    	callback(None)
-
+    def _errorPLSContent(self, data):
+        print "[NETcaster] _errorPLSContent", data
+        print "[NETcaster] _errorPLSContent let's assume it's a stream"
+        self.type = "mp3"
+        self.callback(self.url)
 
     def setFavorite(self,TrueFalse):
         self.isfavorite = TrueFalse

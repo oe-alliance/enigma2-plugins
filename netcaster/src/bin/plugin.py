@@ -93,11 +93,16 @@ class NETcasterScreenBrowser(Screen):
         global streamplayer
         if streamplayer is not None:
              streamplayer.metadatachangelisteners.append(self.onMetadataChanged)
+             streamplayer.onStop.append(self._onStop)
 
     def disconnectFromMetadataUpdates(self):
         global streamplayer
         try:
              streamplayer.metadatachangelisteners.remove(self.onMetadataChanged)
+        except Exception,e:
+            pass
+        try:
+             streamplayer.onStop.remove(self._onStop)
         except Exception,e:
             pass
 
@@ -147,14 +152,17 @@ class NETcasterScreenBrowser(Screen):
     def yellow(self):
         pass
 
+    def _onStop(self):
+        self["pixred"].setText("")
+        self.setTitle("%s (%s)"%(myname,self.currentPlugin.nameshort))
+
     def stream_stop(self):
         global streamplayer
         if streamplayer.is_playing:
             print "[",myname,"] stream_startstop -> stop"
             streamplayer.stop()
             self.disconnectFromMetadataUpdates()
-            self["pixred"].setText("")
-            self.setTitle("%s (%s)"%(myname,self.currentPlugin.nameshort))
+            self._onStop()
 
     def stream_start(self):
         global streamplayer
