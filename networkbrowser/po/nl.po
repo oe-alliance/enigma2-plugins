@@ -46,7 +46,7 @@ msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
 msgstr ""
-"Weet u zeker om deze netwerkverbinding te bewaren?\n"
+"Wilt u deze netwerkverbinding bewaren?\n"
 "\n"
 
 msgid "Browse network neighbourhood"

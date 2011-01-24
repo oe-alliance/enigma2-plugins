@@ -452,7 +452,7 @@ class NetworkBrowser(Screen):
 				data['mounttype'] = 'cifs'
 				data['active'] = True
 				data['ip'] = selection[2]
-				data['sharename'] = selection[1]
+				data['sharename'] = selection[3] + "@" + selection[1]
 				data['sharedir'] = selection[3]
 				data['options'] = "rw"
 				self.sharecache_file = None
