@@ -567,9 +567,12 @@ class IMDbLCDScreen(Screen):
 		Screen.__init__(self, session)
 		self["headline"] = Label(_("IMDb Plugin"))
 
-def eventinfo(session, servicelist, **kwargs):
-	ref = session.nav.getCurrentlyPlayingServiceReference()
-	session.open(IMDBEPGSelection, ref)
+def eventinfo(session, eventName="", **kwargs):
+	if eventName != "":
+		session.open(IMDB, eventName)
+	else:
+		ref = session.nav.getCurrentlyPlayingServiceReference()
+		session.open(IMDBEPGSelection, ref)
 
 def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
