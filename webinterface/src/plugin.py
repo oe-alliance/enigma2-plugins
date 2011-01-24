@@ -228,7 +228,7 @@ def stopWebserver(session):
 # on given ipaddress, port, w/o auth, w/o ssl
 #===============================================================================
 def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usessl=False):
-	if hw.get_device_name().lower() != "dm7025":
+	if False:
 		l3k = None		
 		l3c = tpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
 		
