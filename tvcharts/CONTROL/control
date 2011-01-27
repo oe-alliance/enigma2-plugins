@@ -5,4 +5,4 @@ Architecture: all
 Section: extra
 Priority: optional
 Maintainer: homey
-Depends: enigma2, twisted-web
+Depends: enigma2, python-twisted-web

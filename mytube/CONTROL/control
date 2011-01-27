@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: Mladen Horvat <acid-burn@opendreambox.org>
 Homepage: http://www.dream-multimedia-tv.de/
-Depends: enigma2(>=2.6git20090520), twisted-web, python-gdata, gst-plugin-flv
+Depends: enigma2(>=2.6git20090520), python-twisted-web, python-gdata, gst-plugin-flv
 Source: http://www.dream-multimedia-tv.de/

@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: nixkoenner@newnigma2.to
 Homepage: http://www.newnigma2.to
-Depends: enigma2(>2.6git20090409), twisted-web
+Depends: enigma2(>2.6git20090409), python-twisted-web
 Source: http://enigma2-plugins.schwerkraft.elitedvb.net/

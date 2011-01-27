@@ -5,5 +5,5 @@ Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
-Depends: enigma2(>=2.6git20091014), twisted-web, python-codecs, python-xml, python-html
+Depends: enigma2(>=2.6git20091014), python-twisted-web, python-codecs, python-xml, python-html
 Source: http://schwerkraft.elitedvb.net/scm/?group_id=11
