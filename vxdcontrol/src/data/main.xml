@@ -1552,7 +1552,43 @@ self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
       <convert type="ServiceName">Name</convert>
     </widget>
   </screen>
-	
+  
+ <!-- ########## EnhancedMovieCenter ########## -->
+	<screen name="EnhancedMovieCenterMenu" position="center,77" size="900,450" title="EnhancedMovieCenterMenu">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="0,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="140,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="280,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="420,0" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;20" halign="center" position="0,0" size="140,40" name="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#266926" font="Regular;20" halign="center" position="140,0" size="140,40" name="key_green" transparent="1" valign="center" zPosition="1"/>
+		<widget itemHeight="28" name="config" position="5,63" scrollbarMode="showOnDemand" size="891,364"/>
+	</screen>
+	<screen flags="wfNoBorder" name="EMCSelection" position="0,0" size="1024,576" title="Enhanced Movie Center">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget font="Regular;16" foregroundColor="secondFG" halign="left" position="620,52" render="Label" size="355,40" source="Title" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget CoolFont="Regular;18" CoolDirPos="770" CoolFolderSize="730" CoolMoviePos="30" CoolMovieSize="680" CoolDatePos="720" CoolTimePos="820" name="list" itemHeight="30" position="50,103" scrollbarMode="showOnDemand" size="924,300" backgroundColor="background" transparent="1" />
+		<widget name="wait" position="50,100" size="924,308"/>
+		<widget font="Regular;16" position="60,420" render="Label" size="500,23" source="Service" zPosition="1">
+			<convert type="MovieInfo">ShortDescription</convert>
+		</widget>
+		<widget font="Regular;16" halign="left" position="670,420" render="Label" size="100,23" source="Service" zPosition="1">
+			<convert type="ServiceTime">Duration</convert>
+			<convert type="ClockToText">AsLength</convert>
+		</widget>
+		<widget font="Regular;17" position="60,445" render="Label" size="904,82" source="Service" zPosition="1">
+			<convert type="EventName">ExtendedDescription</convert>
+		</widget>
+		<widget name="FileSize" position="570,420" size="100,23" font="Regular;16" backgroundColor="background" transparent="1" />
+		<eLabel backgroundColor="darkgrey" position="50,415" size="924,2" zPosition="5"/>
+	</screen>
 	
 	
 	
