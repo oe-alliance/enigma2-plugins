@@ -9,8 +9,6 @@ from Components.config import configfile, config
 import os
 import datetime
 
-HeadLine = "Time;Temp;RPM;VLT;PWM;HDD;Status;Temp1;Temp2;Temp3;Temp4;Temp5;Temp6;Temp7;Temp8\r\n"
-
 ########################################################
 class FC2web(resource.Resource):
     
@@ -94,10 +92,17 @@ class FC2web(resource.Resource):
 		html += "myIFrameName.document.body.scrollTop = myIFrameName.document.body.scrollHeight*100;\n" 
 		html += "</script>\n"
 
-		html += "</form>\n"
-		html += "Version: %s\n" % Version
+		html += "<table border=\"1\" width=\"500\">\n"
+		html += "<tr>\n"
+		html += "<td>Version: %s </td>\n" % Version
+		html += "<td>Settings: %s-%s °C</td>\n" % (config.plugins.FanControl.temp.value,config.plugins.FanControl.tempmax.value)
+		html += "<td>%s-%s rpm</td>\n" % (config.plugins.FanControl.minRPM.value,config.plugins.FanControl.maxRPM.value)
+		html += "</tr>\n"
+		html += "</table>\n"
 		html += "</body>\n"
 		html += "</html>\n"
+
+		html += "</form>\n"
 
 		return html
 
@@ -354,7 +359,7 @@ class FC2webChart(resource.Resource):
 			s = f.tell()
 			f.close()
 			if s < 150:
-				html = "<html><body><html>Not enough Data!</body></html>"
+				html = "<html><body><html>Not enough Data (wait 3min)!</body></html>"
 				return html
 			f = open(config.plugins.FanControl.LogPath.value + "FC2data.csv","r")
 			f.seek(s-100)
@@ -474,11 +479,11 @@ class FC2webChart(resource.Resource):
 					R = 0
 					S = int(DT[6])
 					if (S & 1)>0 :
-						B = 4
+						B = 3
 					if (S & 2)>0 :
-						H = 8
+						H = 6
 					if (S & 4)>0 :
-						R = 12
+						R = 9
 					html += "dT.AddPoint(\"%s; %s; %d; %d; %d\", %s, null);\n" % (DT[1].replace(",","."),DT[5],B,H,R,tmp)
 					html += "dR.AddPoint(\"%s\", %s, null);\n" % (DT[2],tmp)
 			f.close()

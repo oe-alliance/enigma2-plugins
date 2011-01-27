@@ -144,12 +144,13 @@ config.plugins.FanControl.ShutdownTemp = ConfigInteger(default = 65,limits = (50
 config.plugins.FanControl.AddOverheat = ConfigInteger(default = 0,limits = (0, 9))
 config.plugins.FanControl.DisableDMM = ConfigYesNo(default = False)
 config.plugins.FanControl.LogCount = ConfigInteger(default = 40,limits = (40, 999))
-config.plugins.FanControl.LogPath = ConfigText(default="/media/hdd/", fixed_size=False)
+config.plugins.FanControl.LogPath = ConfigText(default="/tmp/", fixed_size=False)
 config.plugins.FanControl.DeleteData = ConfigSelection(choices = [("0", _("no")), ("2", "2"), ("3", "3"), ("7", "7"), ("14", "14"), ("30", "30")], default="0")
 config.plugins.FanControl.EnableDataLog = ConfigYesNo(default = False)
 config.plugins.FanControl.EnableEventLog = ConfigYesNo(default = False)
 config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("auto", _("auto")), ("never", _("never"))], default="auto")
 config.plugins.FanControl.MonitorInExtension = ConfigYesNo(default = True)
+config.plugins.FanControl.Multi = ConfigSelection(choices = [(1, "RPM"), (2, "RPM/2")], default = 2)
 
 def GetFanRPM():
 	global RPMread
@@ -160,7 +161,7 @@ def GetFanRPM():
 		RPMread = 0
 	else:
 		RPMread += 1
-	value = int(value / 2)
+	value = int(value / config.plugins.FanControl.Multi.value)
 	return value
 
 def GetBox():
@@ -505,7 +506,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 				except:
 					f.close()
 			except IOError:
-				FCLog("Data-Log-Error")
+				FClog("Data-Log-Error")
 
 	def restartGUI(self, answer):
 		if answer is True:

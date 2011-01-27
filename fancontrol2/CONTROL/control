@@ -1,6 +1,6 @@
 Package: enigma2-plugin-extensions-fancontrol2
-Version: 2.4-20110113-r5
-Description: Controlling Fan
+Version: 2.5
+Description: Temperature dependent fan control
 Architecture: mipsel
 Section: extra
 Priority: optional
