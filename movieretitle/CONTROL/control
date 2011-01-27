@@ -5,4 +5,4 @@ Section: extra
 Priority: optional
 Architecture: mipsel
 Maintainer: Anders Holst <aho@sics.se>
-Depends: enigma2(>=2.6git20091014)
+Depends: enigma2 (>= 2.6git20091014)

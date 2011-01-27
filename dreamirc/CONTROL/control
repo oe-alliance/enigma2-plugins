@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: Michael Alexejew <luke_s@opendreambox.org>
 Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net
-Depends: enigma2(>=2.6git20090219)
+Depends: enigma2 (>= 2.6git20090219)
 Source: http://enigma2-plugins.schwerkraft.elitedvb.net/

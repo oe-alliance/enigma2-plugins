@@ -1,10 +1,10 @@
 Package: enigma2-plugin-extensions-merlinmusicplayer
 Version: 1.1
-Description: Merlin Music Player  and iDream (music management)
+Description: Merlin Music Player and iDream (music management)
 Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: Dr. Best <dr.best@dreambox-tools.info>
 Homepage: http://www.dreambox-tools.info
-Depends: enigma2(>2.6git20090615), python-twisted-web, python-mutagen, python-sqlite3
+Depends: enigma2 (>> 2.6git20090615), python-twisted-web, python-mutagen, python-sqlite3
 Source: http://enigma2-plugins.schwerkraft.elitedvb.net/

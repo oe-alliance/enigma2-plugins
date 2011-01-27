@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: Dr. Best <dr.best@dreambox-tools.info>
 Homepage: http://www.dreambox-tools.info
-Depends: enigma2(>2.6git20091201), python-twisted-web, streamripper
+Depends: enigma2 (>> 2.6git20091201), python-twisted-web, streamripper
 Source: http://enigma2-plugins.schwerkraft.elitedvb.net/

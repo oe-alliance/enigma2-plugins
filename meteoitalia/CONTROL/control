@@ -5,6 +5,5 @@ Architecture: mipsel
 Section: extra
 Priority: optional
 Maintainer: Spaeleus <spaeleus@croci.org>
-Homepage: n/a
-Depends: 
+Depends: enigma2
 Source: http://enigma2-plugins.schwerkraft.elitedvb.net/

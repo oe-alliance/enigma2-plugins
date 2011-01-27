@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: Fraxinas <andreas.frisch@multimedia-labs.de>
 Homepage: n/a
-Depends: enigma2(>=2.8git20100728)
+Depends: enigma2 (>= 2.8git20100728)
 Source: http://schwerkraft.elitedvb.net/

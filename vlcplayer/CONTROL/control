@@ -6,5 +6,5 @@ Priority: optional
 Maintainer: Alex Laetsch <alex@laetsch.de>
 Architecture: mipsel
 Homepage: http://www.i-have-a-dreambox.com/wbb2/board.php?boardid=240
-Depends: enigma2(>=2.5git20080501)
+Depends: enigma2 (>= 2.5git20080501)
 Source: git://anonymous@git.schwerkraft.elitedvb.net/gitroot/enigma2-plugins;module=enigma2-plugins;method=pserver
