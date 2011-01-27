@@ -1,10 +1,6 @@
 Package: enigma2-plugin-extensions-growlee
 Version: 0.1-20091001-r0
 Description: redirect notifications to growl
-Architecture: mipsel
-Section: extra
-Priority: optional
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
 Homepage: http://www.ritzmo.de
 Depends: enigma2 (>= 2.6git20091014), python-twisted-protocols
-Source: http://enigma2-plugins.schwerkraft.elitedvb.net/

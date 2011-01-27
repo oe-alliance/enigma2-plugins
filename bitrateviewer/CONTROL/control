@@ -1,10 +1,6 @@
 Package: enigma2-plugin-extensions-bitrateviewer
 Version: 0.1
 Description: BitrateViewer
-Architecture: mipsel
-Section: extra
-Priority: optional
 Maintainer: Dr. Best <dr.best@dreambox-tools.info>
 Homepage: http://www.dreambox-tools.info
 Depends: enigma2
-Source: http://enigma2-plugins.schwerkraft.elitedvb.net/

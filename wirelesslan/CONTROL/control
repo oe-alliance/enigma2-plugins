@@ -1,10 +1,6 @@
 Package: enigma2-plugin-systemplugins-wirelesslan
 Version: 1.2-20070503-r0
 Description: Wireless LAN Configuration Tool
-Architecture: mipsel
-Section: extra
-Priority: optional
 Maintainer: Stephan Reichholf <stephan@reichholf.net>
 Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net
 Depends: enigma2 (>= 2.6git20090926), wpa-supplicant, wireless-tools
-Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
