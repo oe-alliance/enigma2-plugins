@@ -1,7 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = \
-	ac3lipsync \
+	audiosync \
 	aihdcontrol \
 	antiscrollbar \
 	automatictimerlistcleanup \

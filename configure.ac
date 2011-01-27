@@ -55,12 +55,6 @@ CXXFLAGS="$CXXFLAGS $DEBUG_CFLAGS -Wall $ENIGMA2_CFLAGS $PTHREAD_CFLAGS"
 AC_CONFIG_FILES([
 Makefile
 
-ac3lipsync/Makefile
-ac3lipsync/img/Makefile
-ac3lipsync/meta/Makefile
-ac3lipsync/po/Makefile
-ac3lipsync/src/Makefile
-
 aihdcontrol/Makefile
 aihdcontrol/meta/Makefile
 aihdcontrol/src/Makefile
@@ -70,6 +64,12 @@ aihdcontrol/src/data/Makefile
 antiscrollbar/Makefile
 antiscrollbar/meta/Makefile
 antiscrollbar/src/Makefile
+
+audiosync/Makefile
+audiosync/img/Makefile
+audiosync/meta/Makefile
+audiosync/po/Makefile
+audiosync/src/Makefile
 
 automatictimerlistcleanup/Makefile
 automatictimerlistcleanup/meta/Makefile
