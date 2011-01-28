@@ -1255,174 +1255,6 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
 		</widget>
 	</screen>
-	
-	
-	
-	<!--  ##### MyTube ##### -->
-	<screen backgroundColor="background" flags="wfNoBorder" name="MyTubeSuggestionsListScreen" position="128,218" size="1024,260" zPosition="6">
-			<eLabel backgroundColor="secondBG" position="95,0" size="834,260" zPosition="7"/>
-			<widget position="100,5" render="Listbox" scrollbarMode="showOnDemand" size="824,250" source="suggestionslist" transparent="1" zPosition="8">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 1), size = (610, 24), font=0, flags = RT_HALIGN_LEFT, text = 0),
-							MultiContentEntryText(pos = (620, 1), size = (180, 24), font=1, flags = RT_HALIGN_RIGHT, text = 1),
-						],
-					"fonts": [gFont("Regular", 20),gFont("Regular", 18)],
-					"itemHeight": 25
-					}
-				</convert>
-			</widget>
-	</screen>
-	
-	<screen backgroundColor="background" flags="wfNoBorder" name="MyTubeHistoryScreen" position="128,218" size="1024,260" zPosition="6">
-			<eLabel backgroundColor="secondBG" position="95,0" size="834,260" zPosition="7"/>
-			<widget position="100,5" render="Listbox" scrollbarMode="showOnDemand" size="824,250" source="historylist" transparent="1" zPosition="8">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 1), size = (800, 24), font=0, flags = RT_HALIGN_LEFT, text = 0),
-						],
-					"fonts": [gFont("Regular", 20),gFont("Regular", 18)],
-					"itemHeight": 25
-					}
-				</convert>
-			</widget>
-	</screen>
-	
-	<screen backgroundColor="transparent" flags="wfNoBorder" name="MyTubePlayer" position="0,512" size="1280,220" title="MoviePlayer">
-		<ePixmap alphatest="off" pixmap="Ai.HD/infobar-dmm.png" position="0,24" size="1280,220" zPosition="-1"/>
-		<ePixmap alphatest="on" pixmap="Ai.HD/mp_buttons.png" position="1095,75" size="122,50" zPosition="1"/>
-		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="center" position="282,105" render="Label" size="722,77" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-			<convert type="ServiceName">Name</convert>
-		</widget>
-		<widget backgroundColor="secondBG" font="Regular;24" foregroundColor="grey" position="70,75" render="Label" size="92,25" source="global.CurrentTime" transparent="1" valign="top" zPosition="1">
-			<convert type="ClockToText">Default</convert>
-		</widget>
-		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
-			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
-		</widget>
-		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,145" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
-		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="960,75" render="Label" size="130,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
-			<convert type="ServicePosition">Length</convert>
-		</widget>
-		<ePixmap alphatest="blend" pixmap="Ai.HD/mpslider.png" position="345,80" size="600,16" zPosition="3"/>
-		<widget pointer="Ai.HD/pointer.png:13,3" position="360,81" render="PositionGauge" size="560,14" source="session.CurrentService" zPosition="2">
-			<convert type="ServicePosition">Gauge</convert>
-		</widget>
-		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="right" position="205,75" render="Label" size="121,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
-			<convert type="ServicePosition">Position</convert>
-		</widget>
-		<ePixmap alphatest="on" pixmap="Ai.HD/plugin.png" position="1106,133" size="100,40" transparent="1" zPosition="7"/>
-	</screen>
-	
-	<screen name="MyTubeSettingsScreen" position="128,78" size="1024,576" title="MyTubePlayerMainScreen...">
-		<ePixmap alphatest="on" pixmap="Ai.HD/plugin.png" position="50,55" size="100,40" transparent="1" zPosition="1"/>
-		<ePixmap alphatest="on" name="red" pixmap="Ai.HD/key-red.png" position="155,55" size="140,40" transparent="1"/>
-		<ePixmap alphatest="on" name="green" pixmap="Ai.HD/key-green.png" position="300,55" size="140,40" transparent="1"/>
-		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="300,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<widget font="Regular;20" foregroundColor="foreground" halign="left" name="title" position="450,50" size="497,50" transparent="1" valign="center" zPosition="5"/>
-		<widget name="config" position="50,105" scrollbarMode="showOnDemand" size="924,397" zPosition="2"/>
-	</screen>
-	
-	<screen name="MyTubeVideoHelpScreen" position="128,78" size="1024,576" title="MyTubePlayerMainScreen...">
-		<ePixmap alphatest="on" pixmap="Ai.HD/plugin.png" position="50,55" size="100,40" transparent="1" zPosition="1"/>
-		<ePixmap alphatest="on" name="red" pixmap="Ai.HD/key-red.png" position="155,55" size="140,40" transparent="1"/>
-		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<widget font="Regular;20" foregroundColor="foreground" halign="left" name="title" position="320,50" size="597,50" transparent="1" valign="center" zPosition="5"/>
-		<widget font="Regular;22" halign="left" name="detailtext" position="100,125" size="824,377" transparent="1" valign="top" zPosition="10"/>
-	</screen>
-	
-	<screen name="MyTubeTasksScreen" position="128,78" size="1024,576" title="MyTubePlayerMainScreen...">
-		<ePixmap alphatest="on" pixmap="Ai.HD/plugin.png" position="50,55" size="100,40" transparent="1" zPosition="1"/>
-		<ePixmap alphatest="on" name="red" pixmap="Ai.HD/key-red.png" position="155,55" size="140,40" transparent="1"/>
-		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<widget font="Regular;20" foregroundColor="foreground" halign="left" name="title" position="320,50" size="597,50" transparent="1" valign="center" zPosition="5"/>
-		<widget position="100,125" render="Listbox" scrollbarMode="showOnDemand" size="824,370" source="tasklist" transparent="1" zPosition="7">
-				<convert type="TemplatedMultiContent">
-					{"template": [
-							MultiContentEntryText(pos = (0, 1), size = (400, 24), font=1, flags = RT_HALIGN_LEFT, text = 1),
-							MultiContentEntryText(pos = (410, 1), size = (150, 24), font=1, flags = RT_HALIGN_RIGHT, text = 2),
-							MultiContentEntryProgress(pos = (570, 1), size = (100, 24), percent = -3),
-							MultiContentEntryText(pos = (680, 1), size = (120, 24), font=1, flags = RT_HALIGN_RIGHT, text = 4),
-						],
-					"fonts": [gFont("Regular", 20),gFont("Regular", 18)],
-					"itemHeight": 25
-					}
-				</convert>
-			</widget>
-	</screen>
-	
-	<screen name="MyTubeVideoInfoScreen" position="128,78" size="1024,576" title="MyTubePlayerMainScreen...">
-		<widget alphatest="on" name="thumbnail" position="0,0" size="130,98"/>
-		<ePixmap alphatest="on" pixmap="Ai.HD/plugin.png" position="50,55" size="100,40" transparent="1" zPosition="1"/>
-		<ePixmap alphatest="on" name="red" pixmap="Ai.HD/key-red.png" position="155,55" size="140,40" transparent="1"/>
-		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<widget font="Regular;20" foregroundColor="foreground" halign="left" name="title" position="320,50" size="597,50" transparent="1" valign="center" zPosition="5"/>
-		<widget position="200,110" render="Listbox" scrollbarMode="showOnDemand" selectionDisabled="1" size="620,110" source="infolist" transparent="1" zPosition="6">
-				<convert type="TemplatedMultiContent">
-				{"templates":
-					{"default": (110,[
-							MultiContentEntryPixmapAlphaTest(pos = (0, 4), size = (130, 98), png = 0),
-							MultiContentEntryPixmapAlphaTest(pos = (130, 4), size = (130, 98), png = 1),
-							MultiContentEntryPixmapAlphaTest(pos = (260, 4), size = (130, 98), png = 2),
-							MultiContentEntryPixmapAlphaTest(pos = (390, 4), size = (130, 98), png = 3),
-						]),
-					"state": (110,[
-							MultiContentEntryText(pos = (10, 40), size = (550, 38), font=2, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 0),
-						])
-					},
-					"fonts": [gFont("Regular", 18),gFont("Regular", 14),gFont("Regular", 22)],
-					"itemHeight": 110
-				}
-				</convert>
-			</widget>
-			<widget alphatest="on" name="starsbg" pixmap="Ai.HD/starsbar_empty.png" position="715,230" size="100,20" transparent="1" zPosition="5"/>
-			<widget name="stars" pixmap="Ai.HD/starsbar_filled.png" position="715,230" size="100,20" transparent="1" zPosition="6"/>
-			<widget font="Regular;20" halign="left" name="author" position="212,230" size="300,24" transparent="1" valign="top" zPosition="10"/>
-			<widget font="Regular;20" halign="left" name="duration" position="522,230" size="200,24" transparent="1" valign="top" zPosition="10"/>
-			<widget font="Regular;20" halign="left" name="published" position="212,255" size="300,24" transparent="1" valign="top" zPosition="10"/>
-			<widget font="Regular;20" halign="left" name="views" position="522,255" size="200,24" transparent="1" valign="top" zPosition="10"/>
-			<widget font="Regular;20" halign="left" name="tags" position="212,280" size="600,24" transparent="1" valign="top" zPosition="10"/>
-			<widget font="Regular;20" halign="left" name="detailtext" position="212,310" size="610,200" transparent="1" valign="top" zPosition="10"/>
-	</screen>
-	
-	<screen name="MyTubePlayerMainScreen" position="128,78" size="1024,576" title="MyTubePlayerMainScreen...">
-		<widget alphatest="on" name="thumbnail" position="0,0" size="130,98"/>
-		<ePixmap alphatest="on" pixmap="Ai.HD/plugin.png" position="50,45" size="100,40" transparent="1" zPosition="1"/>
-		<ePixmap alphatest="on" name="red" pixmap="Ai.HD/key-red.png" position="155,45" size="140,40" transparent="1"/>
-		<ePixmap alphatest="on" name="green" pixmap="Ai.HD/key-green.png" position="300,45" size="140,40" transparent="1"/>
-		<ePixmap alphatest="on" name="yellow" pixmap="Ai.HD/key-yellow.png" position="445,45" size="140,40" transparent="1"/>
-		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,45" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="300,45" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="445,45" size="140,40" transparent="1" valign="center" zPosition="2"/>
-		<ePixmap alphatest="on" pixmap="skin_default/buttons/key_info.png" position="880,55" size="35,25" transparent="1" zPosition="4"/>
-		<ePixmap alphatest="on" pixmap="skin_default/buttons/key_menu.png" position="920,55" size="35,25" transparent="1" zPosition="4"/>
-		<widget alphatest="on" name="ButtonBlue" pixmap="Ai.HD/key-blue.png" position="590,45" size="140,40" transparent="1" zPosition="10"/>
-		<widget alphatest="on" name="VKeyIcon" pixmap="skin_default/vkey_icon.png" position="740,40" size="60,48" transparent="1" zPosition="10"/>
-		<widget name="config" position="198,100" scrollbarMode="showOnDemand" size="628,30" transparent="1" zPosition="2"/>
-		<widget position="100,140" render="Listbox" scrollbarMode="showOnDemand" size="824,385" source="feedlist" transparent="1" zPosition="1">
-				<convert type="TemplatedMultiContent">
-				{"templates":
-					{"default": (77,[
-							MultiContentEntryPixmapAlphaTest(pos = (5, 1), size = (100, 75), png = 4),
-							MultiContentEntryText(pos = (110, 1), size = (800, 25), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 1),
-							MultiContentEntryText(pos = (110, 27), size = (380, 20), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 5),
-							MultiContentEntryText(pos = (110, 48), size = (380, 20), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 6),
-							MultiContentEntryText(pos = (500, 27), size = (300, 20), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 7),
-							MultiContentEntryText(pos = (500, 48), size = (300, 20), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 8),
-						]),
-					"state": (77,[
-							MultiContentEntryText(pos = (20, 1), size = (800, 40), font=2, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 0),
-							MultiContentEntryText(pos = (20, 43), size = (800, 30), font=3, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 1),
-						])
-					},
-					"fonts": [gFont("Regular", 20),gFont("Regular", 16),gFont("Regular", 22),gFont("Regular", 18)],
-					"itemHeight": 77
-				}
-				</convert>
-			</widget>
-			<widget alphatest="on" name="HelpWindow" position="700,550" size="1,1" transparent="1" zPosition="1"/>
-	</screen>
 
 	
 	<!--  ##### Weather ##### -->
@@ -1707,6 +1539,318 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
       <convert type="ServiceName">Name</convert>
     </widget>
   </screen>
+
+  
+ <!-- MyTube Player ##### -->
+	<screen backgroundColor="secondBG" name="MyTubeHistoryScreen" position="150,200" size="980,400" title="MyTubeHistoryScreen..." zPosition="6" >
+		<widget source="historylist" render="Listbox" position="0,0" zPosition="7" size="980,400" scrollbarMode="showOnDemand" transparent="1" >
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (10, 2), size = (920, 35), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+					],
+				"fonts": [gFont("Regular", 22),gFont("Regular", 18)],
+				"itemHeight": 40
+				}
+			</convert>
+		</widget>
+	</screen>
+	<screen name="MyTubePlayerMainScreen" position="0,0" size="1280,720" title="MyTubePlayerMainScreen..." flags="wfNoBorder" >
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-2"/>
+		<widget backgroundColor="secondBG" font="Regular;24" position="70,35" render="Label" size="850,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+			<convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		</widget>
+		<widget name="config" position="150,115" size="980,28" zPosition="3" scrollbarMode="showNever" transparent="1"/>
+		<widget source="feedlist" render="Listbox" position="150,160" size="980,400" zPosition="3" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1" >
+			<convert type="TemplatedMultiContent">
+			{"templates":
+				{"default": (100,[
+						MultiContentEntryPixmapAlphaTest(pos = (10, 12), size = (100, 75), png = 4), # index 4 is the thumbnail
+						MultiContentEntryText(pos = (120, 10), size = (850, 25), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 1), # index 1 is the Title
+						MultiContentEntryText(pos = (120, 40), size = (300, 20), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 5), # index 5 is the Published Date
+						MultiContentEntryText(pos = (120, 70), size = (300, 20), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 6), # index 6 is the Views Count
+						MultiContentEntryText(pos = (420, 40), size = (250, 20), font=1, flags = RT_HALIGN_RIGHT | RT_VALIGN_TOP| RT_WRAP, text = 7), # index 7 is the duration
+						MultiContentEntryText(pos = (420, 70), size = (250, 20), font=1, flags = RT_HALIGN_RIGHT | RT_VALIGN_TOP| RT_WRAP, text = 8), # index 8 is the ratingcount
+					]),
+				"state": (100,[
+						MultiContentEntryText(pos = (10, 10), size = (870, 28), font=2, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (10, 40), size = (870, 50), font=3, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 1), # index 2 is the description
+					])
+				},
+				"fonts": [gFont("Regular", 22),gFont("Regular", 18),gFont("Regular", 26),gFont("Regular", 20)],
+				"itemHeight": 100
+			}
+			</convert>
+		</widget>
+		<widget name="HelpWindow" position="545,500" size="1,1" zPosition="10" transparent="1" alphatest="on" />	
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+	    <ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget name="ButtonBlue" pixmap="Ai.HD/blue.png" zPosition="2" position="970,643" size="30,30" alphatest="blend" />
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_red" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_green" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1" zPosition="1"/>
+		<eLabel text="Virtual KeyBoard" position="1015,645" size="220,26" font="Regular;22" halign="left" backgroundColor="secondBG" transparent="1" zPosition="1"/>
+		<widget name="thumbnail" position="0,0" size="100,75" alphatest="on"/>
+		<widget name="VKeyIcon" position="0,0" size="0,0"/>
+	</screen>
+	<screen name="MyTubeSettingsScreen" position="0,0" size="1280,720" title="MyTubeSettingsScreen" flags="wfNoBorder" >
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-2"/>
+		<widget backgroundColor="secondBG" font="Regular;24" position="70,35" render="Label" size="850,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+			<convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		</widget>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/picon_default.png" position="160,285" size="100,60"/>
+		<widget itemHeight="28" name="config" position="400,108" scrollbarMode="showOnDemand" size="780,504"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+	    <ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_red" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_green" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+	</screen>
+	<screen backgroundColor="secondBG" name="MyTubeSuggestionsListScreen" position="150,200" size="980,300" title="MyTubeSuggestionsListScreen..." zPosition="6" >
+		<widget source="suggestionslist" render="Listbox" position="0,0" zPosition="7" size="980,300" scrollbarMode="showOnDemand" transparent="1" >
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (10, 2), size = (710, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (730, 2), size = (180, 24), font=1, flags = RT_HALIGN_RIGHT, text = 1), # index 1 are the rtesults
+					],
+				"fonts": [gFont("Regular", 22),gFont("Regular", 18)],
+				"itemHeight": 30
+				}
+			</convert>
+		</widget>
+	</screen>
+	<screen name="MyTubeTasksScreen" position="0,0" size="1280,720" title="MyTubeTasksScreen" flags="wfNoBorder" >
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-2"/>
+		<widget backgroundColor="secondBG" font="Regular;24" position="70,35" render="Label" size="850,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+			<convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		</widget>
+		<widget source="tasklist" render="Listbox" position="150,125" size="980,480" zPosition="3" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1" >
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (10, 3), size = (350, 24), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the name
+						MultiContentEntryText(pos = (370, 3), size = (200, 24), font=1, flags = RT_HALIGN_RIGHT, text = 2), # index 2 is the state
+						MultiContentEntryProgress(pos = (580, 3), size = (120, 24), percent = -3), # index 3 should be progress 
+						MultiContentEntryText(pos = (710, 3), size = (90, 24), font=1, flags = RT_HALIGN_RIGHT, text = 4), # index 4 is the percentage
+					],
+				"fonts": [gFont("Regular", 22),gFont("Regular", 18)],
+				"itemHeight": 30
+				}
+			</convert>
+		</widget>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+	    <ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_red" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+	</screen>	
+	<screen name="MyTubeVideoHelpScreen" position="0,0" size="1280,720" title="MyTubePlayerHelpScreen..." flags="wfNoBorder" >
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-2"/>
+		<widget backgroundColor="secondBG" font="Regular;24" position="70,35" render="Label" size="850,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+			<convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		</widget>
+		<widget name="detailtext" position="150,130" size="980,480" zPosition="3" font="Regular;22" transparent="1" halign="left" valign="top" />
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+	    <ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_red" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+	</screen>
+	<screen name="MyTubeVideoInfoScreen" position="0,0" size="1280,720" title="MyTubePlayerMainScreen..." flags="wfNoBorder" >
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-2"/>
+		<widget backgroundColor="secondBG" font="Regular;24" position="70,35" render="Label" size="850,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+			<convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		</widget>
+		<widget name="author" position="80,145" size="370,25" zPosition="10" font="Regular;22" transparent="1" halign="left" valign="top" />
+		<widget name="duration" position="80,175" size="370,25" zPosition="10" font="Regular;22" transparent="1" halign="left" valign="top" />
+		<widget name="published" position="80,205" size="370,25" zPosition="10" font="Regular;22" transparent="1" halign="left" valign="top" />
+		<widget name="views" position="80,235" size="370,25" zPosition="10" font="Regular;22" transparent="1" halign="left" valign="top" />
+		<widget name="tags" position="80,265" size="370,75" zPosition="10" font="Regular;22" transparent="1" halign="left" valign="top" />
+		<widget name="starsbg" position="185,360" size="100,20" pixmap="Ai.HD/starsbar_empty.png"  zPosition="5" transparent="1" alphatest="on" />
+		<widget name="stars" position="185,360" size="100,20" pixmap="Ai.HD/starsbar_filled.png" zPosition="6" transparent="1" />
+		<widget source="infolist" render="Listbox" position="480,145" size="730,135" zPosition="6" scrollbarMode="showNever" selectionDisabled="1" transparent="1">
+			<convert type="TemplatedMultiContent">
+			{"templates":
+				{"default": (135,[
+						MultiContentEntryPixmapAlphaTest(pos = (10, 0), size = (180, 135), png = 0), # index 0 is the thumbnail
+						MultiContentEntryPixmapAlphaTest(pos = (190, 0), size = (180, 135), png = 1), # index 0 is the thumbnail
+						MultiContentEntryPixmapAlphaTest(pos = (370, 0), size = (180, 135), png = 2), # index 0 is the thumbnail
+						MultiContentEntryPixmapAlphaTest(pos = (550, 0), size = (180, 135), png = 3), # index 0 is the thumbnail							
+					]),
+				"state": (135,[
+						MultiContentEntryText(pos = (0, 35), size = (740, 65), font=2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER| RT_WRAP, text = 0), # index 0 is the name
+					])
+				},
+				"fonts": [gFont("Regular", 20),gFont("Regular", 14),gFont("Regular", 28)],
+				"itemHeight": 135
+			}
+			</convert>
+		</widget>
+		<widget name="detailtext" position="490,310" size="710,280" zPosition="10" font="Regular;22" foregroundColor="white" backgroundColor="darkgrey" transparent="1" />
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_red" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget name="thumbnail" position="0,0" size="180,135" alphatest="on"/>
+	</screen>
+	
+	
+<!-- EnhancedMovieCenter ##### -->
+	<screen flags="wfNoBorder" name="EMCSelection" position="0,0" size="1280,720" title="Enhanced Movie Center">
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-1"/>
+		<widget backgroundColor="secondBG" font="Regular;24" position="70,35" render="Label" size="850,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+			<convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		</widget>
+		<widget name="wait" position="100,90" size="1080,450"/>
+		<widget CoolFont="Regular;20" CoolDirPos="770" CoolFolderSize="730" CoolMoviePos="30" CoolMovieSize="680" CoolDatePos="720" CoolTimePos="820" name="list" position="100,90" size="1080,450" itemHeight="30" scrollbarMode="showNever" backgroundColor="background" transparent="1" />
+		<eLabel backgroundColor="darkgrey" position="50,545" size="1180,2"/>
+		<widget font="Regular;20" position="380,550" render="Label" noWrap="1" size="750,27" source="Service" zPosition="1">
+			<convert type="MovieInfo">ShortDescription</convert>
+		</widget>
+		<widget font="Regular;22" position="100,550" render="Label" size="130,27" source="Service" zPosition="1">
+			<convert type="ServiceTime">Duration</convert>
+			<convert type="ClockToText">AsLength</convert>
+		</widget>
+		<widget name="FileSize" position="230,550" size="150,27" font="Regular;22" backgroundColor="background" transparent="1" />
+		<widget font="Regular;20" position="100,575" render="Label" size="1080,48" source="Service" zPosition="1">
+			<convert type="EventName">ExtendedDescription</convert>
+		</widget>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_red" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_green" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_blue" position="1015,645" size="220,26" transparent="1" zPosition="1"/>
+	</screen>
+	<screen flags="wfNoBorder" name="EnhancedMovieCenterMenu" position="0,0" size="1280,720" title="EnhancedMovieCenterMenu">
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-1"/>
+		<widget backgroundColor="secondBG" font="Regular;24" position="70,35" render="Label" size="850,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+			<convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		</widget>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/picon_default.png" position="160,285" size="100,60"/>
+		<widget itemHeight="28" name="config" position="400,108" scrollbarMode="showOnDemand" size="780,504"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_red" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget backgroundColor="secondBG" font="Regular;22" halign="left" name="key_green" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+	</screen>
+
+
+<!--VideoDB Plugin ##### -->
+	<screen backgroundColor="background" flags="wfNoBorder" name="VideoManager" position="0,0" size="1280,720" title="VideoDB">
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-2"/>
+		<widget font="Regular;24" foregroundColor="secondFG" name="headertext" position="50,35" size="850,50" transparent="1" valign="center" zPosition="1"/>
+		    <widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+		      <convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		    </widget>
+		<widget name="config" position="50,105" size="1180,60" scrollbarMode="showOnDemand" />
+		<widget name="list" position="50,185" scrollbarMode="showOnDemand" size="1180,460" transparent="1"/>
+		<widget name="descriptionBorder" position="0,530" zPosition="1" size="1180,1" transparent="1" alphatest="on" />
+		<widget name="shortdescription" position="50,542" zPosition="3" size="1180,20" font="Regular;16" transparent="1" foregroundColor="#fcc000" backgroundColor="#00000000"/>
+		<widget name="servicename" position="50,542" zPosition="3" size="1180,20" halign="right" font="Regular;16" transparent="1" foregroundColor="#fcc000" backgroundColor="#00000000"/>
+		<widget name="filesize" position="550,542" zPosition="3" size="130,20" font="Regular;16" transparent="1" foregroundColor="#fcc000" backgroundColor="#00000000"/>
+		<widget name="duration" position="600,542" zPosition="3" size="120,20" halign="right" font="Regular;16" transparent="1" foregroundColor="#fcc000" backgroundColor="#00000000"/>
+		<widget name="progress" position="725,549" zPosition="3" size="50,6" borderWidth="1" borderColor="#fcc000" />
+		<widget name="extendeddescription" position="50,570" zPosition="3" size="1180,55" font="Regular;16" transparent="1" foregroundColor="#fcc000" backgroundColor="#00000000"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget render="Label" source="key_red" backgroundColor="secondBG" font="Regular;22" halign="left" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_green" backgroundColor="secondBG" font="Regular;22" halign="left" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_yellow" backgroundColor="secondBG" font="Regular;22" halign="left" position="725,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_blue" backgroundColor="secondBG" font="Regular;22" halign="left" position="1015,645" size="220,26" transparent="1" zPosition="1"/>
+	</screen>
+	<screen backgroundColor="background" flags="wfNoBorder" name="VideoManagerEventView" position="0,0" size="1280,720" title="Event Info">
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-2"/>
+		<eLabel font="Regular;24" foregroundColor="secondFG" text="Event Info" position="50,35" size="850,50" transparent="1" valign="center" zPosition="1"/>
+		    <widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+		      <convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		    </widget>
+		<widget name="headertext" position="250,100" size="850,26" transparent="1" font="Regular;24" valign="center" zPosition="1"/>
+		<widget name="poster" zPosition="2" position="50,140" size="185,278" alphatest="blend" />
+		<widget name="overview" position="250,140" size="980,278" zPosition="3" font="Regular;24" transparent="1"/>
+		<widget name="misc" position="250,425" size="980,130" zPosition="2" font="Regular;22" transparent="1"/>
+		<widget name="epg_description" position="50,100" size="1180,500" zPosition="3" font="Regular;24" transparent="1"/>
+		<widget name="datetime" foregroundColor="secondFG" font="Regular;20"  position="60,605" size="300,24" zPosition="5" transparent="1"/>
+		<widget name="duration" foregroundColor="secondFG" font="Regular;20" position="440,605" size="200,24" zPosition="5" transparent="1"/>
+		<widget name="channel"  foregroundColor="secondFG" font="Regular;20" position="745,605" size="475,24" zPosition="5" halign="right" transparent="1"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget render="Label" source="key_red" backgroundColor="secondBG" font="Regular;22" halign="left" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_green" backgroundColor="secondBG" font="Regular;22" halign="left" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_yellow" backgroundColor="secondBG" font="Regular;22" halign="left" position="725,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_blue" backgroundColor="secondBG" font="Regular;22" halign="left" position="1015,645" size="220,26" transparent="1" zPosition="1"/>
+	</screen>
+	<screen backgroundColor="background" flags="wfNoBorder" name="SelectScannedPath" position="0,0" size="1280,720" title="Select path">
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-2"/>
+		<widget render="Label" source="text" font="Regular;24" foregroundColor="secondFG" position="50,35" size="850,50" transparent="1" valign="center" zPosition="1"/>
+		    <widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+		      <convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		    </widget>
+		<widget name="list" position="50,105" zPosition="2" size="1180,510" scrollbarMode="showOnDemand" transparent="1"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget render="Label" source="key_red" backgroundColor="secondBG" font="Regular;22" halign="left" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_green" backgroundColor="secondBG" font="Regular;22" halign="left" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_yellow" backgroundColor="secondBG" font="Regular;22" halign="left" position="725,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_blue" backgroundColor="secondBG" font="Regular;22" halign="left" position="1015,645" size="220,26" transparent="1" zPosition="1"/>
+	</screen>
+	<screen backgroundColor="background" flags="wfNoBorder" name="TMDbSelection" position="0,0" size="1280,720" title="TMDb Info">
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-2"/>
+		<widget font="Regular;24" foregroundColor="secondFG" name="headertext" position="50,35" size="850,50" transparent="1" valign="center" zPosition="1"/>
+		    <widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+		      <convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		    </widget>
+		<widget name="list" position="50,105" zPosition="2" size="1180,510" scrollbarMode="showOnDemand" transparent="1"/>
+		<widget name="poster" zPosition="2" position="50,120" size="185,278" alphatest="blend" />
+		<widget name="overview" position="250,120" size="980,278" zPosition="3" font="Regular;24" transparent="1"/>
+		<widget name="misc" position="250,405" size="980,200" zPosition="2" font="Regular;22" transparent="1"/>
+		<widget name="statustext" position="50,105" size="1180,510" zPosition="2" font="Regular;18" transparent="1" valign="center" halign="center"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget render="Label" source="key_red" backgroundColor="secondBG" font="Regular;22" halign="left" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_green" backgroundColor="secondBG" font="Regular;22" halign="left" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_yellow" backgroundColor="secondBG" font="Regular;22" halign="left" position="725,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_blue" backgroundColor="secondBG" font="Regular;22" halign="left" position="1015,645" size="220,26" transparent="1" zPosition="1"/>
+	</screen>
+	<screen backgroundColor="background" flags="wfNoBorder" name="TVDbSelection" position="0,0" size="1280,720" title="TMDb Info">
+		<ePixmap alphatest="on" pixmap="Ai.HD/bottom_bg.png" position="0,85" size="1280,2" zPosition="-2"/>
+		<widget font="Regular;24" foregroundColor="secondFG" name="headertext" position="50,35" size="850,50" transparent="1" valign="center" zPosition="1"/>
+		    <widget backgroundColor="secondBG" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
+		      <convert type="ClockToText">Format:%a %d. %b   %H:%M</convert>
+		    </widget>
+		<widget name="list" position="50,105" zPosition="2" size="1180,510" scrollbarMode="showOnDemand" transparent="1"/>
+		<widget name="overview" position="50,105" size="1180,510" zPosition="3" font="Regular;24" transparent="1"/>
+		<widget name="statustext" position="50,105" size="1180,510" zPosition="2" font="Regular;18" transparent="1" valign="center" halign="center"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/green.png" position="390,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/yellow.png" position="680,643" size="30,30"/>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/blue.png" position="970,643" size="30,30"/>
+		<widget render="Label" source="key_red" backgroundColor="secondBG" font="Regular;22" halign="left" position="145,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_green" backgroundColor="secondBG" font="Regular;22" halign="left" position="435,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_yellow" backgroundColor="secondBG" font="Regular;22" halign="left" position="725,645" size="220,26" transparent="1" zPosition="1"/>
+		<widget render="Label" source="key_blue" backgroundColor="secondBG" font="Regular;22" halign="left" position="1015,645" size="220,26" transparent="1" zPosition="1"/>
+	</screen>
 	
 
 	
