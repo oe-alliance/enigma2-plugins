@@ -4,4 +4,3 @@ Description: Shows a list containing the zapping-history and allows user to zap 
 Maintainer: Nabil Hanna <nabil1978@web.de>
 Homepage: http://www.lt-forums.org/ali
 Depends: enigma2 (>= 2.6git20090615)
-
