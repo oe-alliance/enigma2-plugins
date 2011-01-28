@@ -55,11 +55,11 @@ CXXFLAGS="$CXXFLAGS $DEBUG_CFLAGS -Wall $ENIGMA2_CFLAGS $PTHREAD_CFLAGS"
 AC_CONFIG_FILES([
 Makefile
 
-aihdcontrol/Makefile
-aihdcontrol/meta/Makefile
-aihdcontrol/src/Makefile
-aihdcontrol/src/comp/Makefile
-aihdcontrol/src/data/Makefile
+aihdcontroler/Makefile
+aihdcontroler/meta/Makefile
+aihdcontroler/src/Makefile
+aihdcontroler/src/comp/Makefile
+aihdcontroler/src/data/Makefile
 
 antiscrollbar/Makefile
 antiscrollbar/meta/Makefile
@@ -396,9 +396,15 @@ tvcharts/meta/Makefile
 tvcharts/src/Makefile
 tvcharts/src/images/Makefile
 
-unwetterzentrale/Makefile
-unwetterzentrale/meta/Makefile
-unwetterzentrale/src/Makefile
+unwetterinfo/Makefile
+unwetterinfo/meta/Makefile
+unwetterinfo/src/Makefile
+
+valixdcontrol/Makefile
+valixdcontrol/meta/Makefile
+valixdcontrol/src/Makefile
+valixdcontrol/src/comp/Makefile
+valixdcontrol/src/data/Makefile
 
 virtualzap/Makefile
 virtualzap/meta/Makefile
@@ -410,12 +416,6 @@ vlcplayer/meta/Makefile
 vlcplayer/po/Makefile
 vlcplayer/src/Makefile
 vlcplayer/src/servicets/Makefile
-
-vxdcontrol/Makefile
-vxdcontrol/meta/Makefile
-vxdcontrol/src/Makefile
-vxdcontrol/src/comp/Makefile
-vxdcontrol/src/data/Makefile
 
 weatherplugin/Makefile
 weatherplugin/meta/Makefile
