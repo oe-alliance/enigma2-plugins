@@ -12,6 +12,9 @@
 		<widget backgroundColor="background" font="Regular;20" foregroundColor="grey" halign="right" position="910,72" render="Label" size="310,22" source="global.CurrentTime" transparent="1">
 			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
+		<widget alphatest="blend" position="845,40" render="Picon" size="100,60" source="ServiceEvent" transparent="1" zPosition="5">
+			<convert type="valiRefString">ServicelistRef</convert>
+		</widget>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_red" position="145,645" size="220,26" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_green" position="435,644" size="220,27" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1"/>
@@ -51,6 +54,9 @@
 		<widget backgroundColor="background" font="Regular;20" foregroundColor="grey" halign="right" position="910,72" render="Label" size="310,22" source="global.CurrentTime" transparent="1">
 			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
+		<widget alphatest="blend" position="845,40" render="Picon" size="100,60" source="Event" transparent="1" zPosition="5">
+			<convert type="valiRefString">CurrentRef</convert>
+		</widget>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_red" position="145,645" size="220,26" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_green" position="435,644" size="220,27" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_yellow" position="725,645" size="220,26" transparent="1"/>
@@ -74,6 +80,9 @@
 		</widget>
 		<widget backgroundColor="background" font="Regular;20" foregroundColor="grey" halign="right" position="910,72" render="Label" size="310,22" source="global.CurrentTime" transparent="1">
 			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<widget alphatest="blend" position="845,40" render="Picon" size="100,60" source="Title" transparent="1" zPosition="5">
+			<convert type="valiRefString">CurrentRef</convert>
 		</widget>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_red" position="145,645" size="220,26" transparent="1"/>
 		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="left" name="key_green" position="435,644" size="220,27" transparent="1"/>

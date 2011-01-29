@@ -86,7 +86,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.release = ".release20110128"
+		self.release = ".release20110129"
 		Screen.__init__(self, session)
 		self.session = session
 		self.datei = "/usr/share/enigma2/Ai.HD/skin.xml"
@@ -116,6 +116,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 			system('cp ' + self.komponente + 'vhdRendNextEvent.py /usr/lib/enigma2/python/Components/Renderer/vhdRendNextEvent.py')
 			system('cp ' + self.komponente + 'vhdConvSmartInfo.py /usr/lib/enigma2/python/Components/Converter/vhdConvSmartInfo.py')
 			system('cp ' + self.komponente + 'vhdConvClockToText.py /usr/lib/enigma2/python/Components/Converter/vhdConvClockToText.py')
+			system('cp ' + self.komponente + 'valiRefString.py /usr/lib/enigma2/python/Components/Converter/valiRefString.py')
 			system("touch " + self.datei + self.release)
 
 	def save(self):
