@@ -1,9 +1,5 @@
 Package: enigma2-plugin-extensions-startuptostandby
 Version: 1.0-20080113-r0
 Description: set enigma2 to standby-mode after startup
-Architecture: mipsel
-Section: extra
-Priority: optional
 Maintainer: Marcus Groﬂ <mail@marcus-gross.eu>
-Depends: enigma2(>=2.6git20091014)
-Source: http://schwerkraft.elitedvb.net/scm/?group_id=11
+Depends: enigma2 (>= 2.6git20091014)

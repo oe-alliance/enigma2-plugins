@@ -1,9 +1,9 @@
 ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = \
-	ac3lipsync \
-	aihdcontrol \
+	aihdcontroler \
 	antiscrollbar \
+	audiosync \
 	automaticvolumeadjustment \
 	autoresolution \
 	autotimer \
@@ -67,10 +67,10 @@ SUBDIRS = \
 	tageditor \
 	trafficinfo \
 	tvcharts \
-	unwetterzentrale \
+	unwetterinfo \
+	valixdcontrol \
 	virtualzap \
 	vlcplayer \
-	vxdcontrol \
 	weatherplugin \
 	webcamviewer \
 	webinterface \

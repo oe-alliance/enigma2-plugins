@@ -1,10 +1,5 @@
 Package: enigma2-plugin-extensions-meteoitalia
 Version: 0.1-20090928-r0
 Description: Shows italian weather forecast
-Architecture: mipsel
-Section: extra
-Priority: optional
 Maintainer: Spaeleus <spaeleus@croci.org>
-Homepage: n/a
-Depends: 
-Source: http://enigma2-plugins.schwerkraft.elitedvb.net/
+Depends: enigma2

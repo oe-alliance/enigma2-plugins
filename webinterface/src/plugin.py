@@ -301,7 +301,10 @@ class HTTPAuthResource(resource.Resource):
 		
 		# if the auth-information has not yet been stored to the session
 		if not sessionNs.has_key('authenticated'):
-			sessionNs['authenticated'] = check_passwd(request.getUser(), request.getPassword())
+			if request.getUser() != '':
+				sessionNs['authenticated'] = check_passwd(request.getUser(), request.getPassword())
+			else:
+				sessionNs['authenticated'] = False
 		
 		#if the auth-information already is in the session				
 		else:
@@ -349,154 +352,31 @@ class UnauthorizedResource(resource.Resource):
 	def render(self, request):	
 		return self.errorpage.render(request)
 
+
+
 # Password verfication stuff
-
-from hashlib import md5 as md5_new
 from crypt import crypt
+from pwd import getpwnam
+from spwd import getspnam
 
-#===============================================================================
-# getpwnam
-# 
-# Get a password database entry for the given user name
-# Example from the Python Library Reference.
-#===============================================================================
-def getpwnam(name, pwfile=None):
-	if not pwfile:
-		pwfile = '/etc/passwd'
 
-	f = open(pwfile)
-	while 1:
-		line = f.readline()
-		if not line:
-			f.close()
-			raise KeyError, name
-		entry = tuple(line.strip().split(':', 6))
-		if entry[0] == name:
-			f.close()
-			return entry
-
-#===============================================================================
-# passcrypt
-#
-# Encrypt a password
-#===============================================================================
-def passcrypt(passwd, salt=None, method='des', magic='$1$'):
-	"""Encrypt a string according to rules in crypt(3)."""
-	if method.lower() == 'des':
-		return crypt(passwd, salt)
-	elif method.lower() == 'md5':
-		return passcrypt_md5(passwd, salt, magic)
-	elif method.lower() == 'clear':
-		return passwd
-
-#===============================================================================
-# check_passwd
-#
-# Checks username and Password against a given Unix Password file 
-# The default path is '/etc/passwd'
-#===============================================================================
-def check_passwd(name, passwd, pwfile='/etc/passwd'):
-	"""Validate given user, passwd pair against password database."""
-
-	if not pwfile or type(pwfile) == type(''):
-		getuser = lambda x, pwfile = pwfile: getpwnam(x, pwfile)[1]
-	else:
-		getuser = pwfile.get_passwd
-
+def check_passwd(name, passwd):
+	cryptedpass = None
 	try:
-		enc_passwd = getuser(name)
-	except (KeyError, IOError):
-		print "[Webinterface.check_passwd] No such user!"
+		cryptedpass = getpwnam(name)[1]
+	except:
 		return False
-	if not enc_passwd:
-		"[Webinterface.check_passwd] NOT ENC_PASSWD"
-		return False
-	elif len(enc_passwd) >= 3 and enc_passwd[:3] == '$1$':
-		salt = enc_passwd[3:enc_passwd.find('$', 3)]
-		return enc_passwd == passcrypt(passwd, salt, 'md5')
-	else:
-		return enc_passwd == passcrypt(passwd, enc_passwd[:2])
-
-def _to64(v, n):
-	DES_SALT = list('./0123456789' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz')
-	r = ''
-	while (n - 1 >= 0):
-		r = r + DES_SALT[v & 0x3F]
-		v = v >> 6
-		n = n - 1
-	return r
-
-#===============================================================================
-# passcrypt_md5
-# Encrypt a password via md5
-#===============================================================================
-def passcrypt_md5(passwd, salt=None, magic='$1$'):
-	if not salt:
-		pass
-	elif salt[:len(magic)] == magic:
-		# remove magic from salt if present
-		salt = salt[len(magic):]
-
-	# salt only goes up to first '$'
-	salt = salt.split('$')[0]
-	# limit length of salt to 8
-	salt = salt[:8]
-
-	ctx = md5_new(passwd)
-	ctx.update(magic)
-	ctx.update(salt)
-
-	ctx1 = md5_new(passwd)
-	ctx1.update(salt)
-	ctx1.update(passwd)
-
-	final = ctx1.digest()
-
-	for i in range(len(passwd), 0 , -16):
-		if i > 16:
-			ctx.update(final)
-		else:
-			ctx.update(final[:i])
-
-	i = len(passwd)
-	while i:
-		if i & 1:
-			ctx.update('\0')
-		else:
-			ctx.update(passwd[:1])
-		i = i >> 1
-	final = ctx.digest()
-
-	for i in range(1000):
-		ctx1 = md5_new()
-		if i & 1:
-			ctx1.update(passwd)
-		else:
-			ctx1.update(final)
-		if i % 3: ctx1.update(salt)
-		if i % 7: ctx1.update(passwd)
-		if i & 1:
-			ctx1.update(final)
-		else:
-			ctx1.update(passwd)
-		final = ctx1.digest()
-
-	rv = magic + salt + '$'
-	final = map(ord, final)
-	l = (final[0] << 16) + (final[6] << 8) + final[12]
-	rv = rv + _to64(l, 4)
-	l = (final[1] << 16) + (final[7] << 8) + final[13]
-	rv = rv + _to64(l, 4)
-	l = (final[2] << 16) + (final[8] << 8) + final[14]
-	rv = rv + _to64(l, 4)
-	l = (final[3] << 16) + (final[9] << 8) + final[15]
-	rv = rv + _to64(l, 4)
-	l = (final[4] << 16) + (final[10] << 8) + final[5]
-	rv = rv + _to64(l, 4)
-	l = final[11]
-	rv = rv + _to64(l, 2)
-
-	return rv
+	
+	if cryptedpass:
+		#shadowed or not, that's the questions here
+		if cryptedpass == 'x' or cryptedpass == '*':
+			try:
+				cryptedpass = getspnam(name)[1]
+			except:
+				return False			
+				
+		return crypt(passwd, cryptedpass) == cryptedpass
+	return False
 
 global_session = None
 

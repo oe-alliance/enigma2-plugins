@@ -1,0 +1,1597 @@
+
+
+
+
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  +++++++++++++++++++++++++++++++++++++++++++++ MAIN CODE ++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+	<screen flags="wfNoBorder" backgroundColor="background" name="SecondInfoBar" position="0,0" size="1024,73" title=" " zPosition="-1">
+		<widget backgroundColor="background" font="Replacement;18" foregroundColor="foreground" halign="left" position="200,8" render="Label" size="824,70" source="session.CurrentService" transparent="1" valign="center" zPosition="7">
+			<convert type="vConvSmartInfo">ExpertInfo</convert>
+		</widget>
+		<eLabel backgroundColor="background" font="OLED;19" text="A" foregroundColor="#66666a" position="50,32" size="30,20" transparent="1" zPosition="7"/>
+		<eLabel backgroundColor="background" font="OLED;19" text="B" foregroundColor="#66666a" position="80,32" size="30,20" transparent="1" zPosition="7"/>
+		<eLabel backgroundColor="background" font="OLED;19" text="C" foregroundColor="#66666a" position="110,32" size="30,20" transparent="1" zPosition="7"/>
+		<eLabel backgroundColor="background" font="OLED;19" text="D" foregroundColor="#66666a" position="140,32" size="30,20" transparent="1" zPosition="7"/>
+		<widget source="session.TunerInfo" render="FixedLabel" text="A" position="50,32" zPosition="8" size="30,20" font="OLED;19" foregroundColor="orange" transparent="1">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">1</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.TunerInfo" render="FixedLabel" text="B" position="80,32" zPosition="8" size="30,20" font="OLED;19" foregroundColor="orange" transparent="1">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">2</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.TunerInfo" render="FixedLabel" text="C" position="110,32" zPosition="8" size="30,20" font="OLED;19" foregroundColor="orange" transparent="1">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">4</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.TunerInfo" render="FixedLabel" text="D" position="140,32" zPosition="8" size="30,20" font="OLED;19" foregroundColor="orange" transparent="1">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">8</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.FrontendInfo" render="FixedLabel" text="A" position="50,32" zPosition="9" size="30,20" font="OLED;19" foregroundColor="green" transparent="1">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">0,0</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.FrontendInfo" render="FixedLabel" text="B" position="80,32" zPosition="9" size="30,20" font="OLED;19" foregroundColor="green" transparent="1">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">1,1</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.FrontendInfo" render="FixedLabel" text="C" position="110,32" zPosition="9" size="30,20" font="OLED;19" foregroundColor="green" transparent="1">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">2,2</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.FrontendInfo" render="FixedLabel" text="D" position="140,32" zPosition="9" size="30,20" font="OLED;19" foregroundColor="green" transparent="1">
+			<convert type="FrontendInfo">NUMBER</convert>
+			<convert type="ValueRange">3,3</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/down-shadow.png" position="0,65" size="1024,8" zPosition="10"/>
+	</screen>
+
+	<!--  ##### Radio-InfoBar ##### -->
+	<screen backgroundColor="background" flags="wfNoBorder" name="RadioInfoBar" position="0,400" size="1024,176">
+		<eLabel backgroundColor="#44444a" position="0,0" size="1024,8" zPosition="0"/>
+		<eLabel backgroundColor="secondBG" position="0,8" size="152,168" zPosition="1"/>
+		<eLabel backgroundColor="secondBG" position="872,8" size="152,169" zPosition="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/infobar/off_icons.png" position="890,18" size="57,64" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="Regular;30" foregroundColor="secondFG" halign="right" position="20,58" render="Label" size="90,32" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;22" foregroundColor="secondFG" halign="left" position="110,60" render="Label" size="42,24" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="ClockToText">Format::%S</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="30,91" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<widget backgroundColor="background" font="Replacement;21" foregroundColor="foreground" halign="center" position="165,19" render="Label" size="694,28" source="session.CurrentService" transparent="1" zPosition="3">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget font="Regular;22" position="165,58" render="Label" size="60,28" source="session.Event_Now" transparent="1" zPosition="3">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget font="Regular;22" position="230,58" render="Label" size="540,28" source="session.Event_Now" transparent="1" zPosition="3">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget font="Regular;22" halign="right" position="770,58" render="Label" size="90,28" source="session.Event_Now" transparent="1" zPosition="3">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText">NoSeconds</convert>
+		</widget>
+		<widget font="Regular;22" position="165,86" render="Label" size="60,28" source="session.Event_Next" transparent="1" zPosition="3">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget font="Regular;22" position="230,86" render="Label" size="540,28" source="session.Event_Next" transparent="1" zPosition="3">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget font="Regular;22" halign="right" position="770,86" render="Label" size="90,28" source="session.Event_Next" transparent="1" zPosition="3">
+			<convert type="EventTime">Duration</convert>
+			<convert type="ClockToText">InMinutes</convert>
+		</widget>
+		<widget backgroundColor="#0444444a" pixmap="Vali-XD/infobar/p_bar.png" position="165,47" render="Progress" size="695,5" source="session.Event_Now" zPosition="3">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/infobar/ico_crypt_on.png" position="890,64" render="Pixmap" size="26,18" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">IsCrypted</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/infobar/ico_dolby_on.png" position="890,41" render="Pixmap" size="26,18" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">IsMultichannel</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget alphatest="on" pixmap="Vali-XD/infobar/ico_rec_on.png" position="921,64" render="Pixmap" size="26,18" source="session.RecordState" zPosition="4">
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+		<widget borderColor="#44444a" borderWidth="2" orientation="orBottomToTop" pixmap="Vali-XD/infobar/snr_bar.png" position="958,18" render="Progress" size="12,64" source="session.FrontendStatus" transparent="1" zPosition="5">
+			<convert type="FrontendInfo">SNR</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" halign="right" position="915,90" render="Label" size="60,20" source="session.FrontendStatus" transparent="1" zPosition="5">
+			<convert type="FrontendInfo">SNR</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" position="892,90" render="FixedLabel" size="24,20" source="session.TunerInfo" text="A" transparent="0" zPosition="6">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">1</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" position="892,90" render="FixedLabel" size="24,20" source="session.TunerInfo" text="B" transparent="0" zPosition="7">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">2</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" position="892,90" render="FixedLabel" size="24,20" source="session.TunerInfo" text="C" transparent="0" zPosition="8">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">4</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;19" foregroundColor="grey" position="892,90" render="FixedLabel" size="24,20" source="session.TunerInfo" text="D" transparent="0" zPosition="9">
+			<convert type="TunerInfo">TunerUseMask</convert>
+			<convert type="ValueBitTest">8</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>	
+		<widget font="LCD;20" foregroundColor="secondFG" position="165,115" render="Label" size="694,30" source="RdsDecoder" zPosition="8">
+			<convert type="RdsInfo">RadioText</convert>
+		</widget>
+	</screen>
+
+
+
+	<!--  ##### Imput and Output Boxes #####  -->
+	<screen name="Menu" position="center,150" size="500,285" title="Main menu">
+		<widget font="Regular;22" halign="center" position="10,5" render="Label" size="480,35" source="title" valign="center"/>
+		<widget enableWrapAround="True" position="10,55" render="Listbox" scrollbarMode="showOnDemand" size="480,224" itemHeight="28" source="menu">
+			<convert type="StringList"/>
+		</widget>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="NumberZap" position="center,center" size="185,55" title="Channel">
+		<widget font="Replacement;30" halign="center" name="number" position="0,0" size="185,55" transparent="1" valign="center" zPosition="1"/>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="ChapterZap" position="center,center" size="185,58" title="Chapter">
+		<widget font="Regular;18" halign="left" name="chapter" position="5,5" size="180,20" transparent="1" valign="center"/>
+		<widget font="Replacement;30" halign="center" name="number" position="0,26" size="185,32" transparent="1" valign="center" zPosition="1"/>
+	</screen> 
+	
+	<screen name="MessageBox" position="162,245" size="700,200" title="Message">
+		<widget font="Regular;22" name="text" position="65,8" size="520,0"/>
+		<widget alphatest="on" name="ErrorPixmap" pixmap="Vali-XD/window/input_error.png" position="5,7" size="54,54"/>
+		<widget alphatest="on" name="QuestionPixmap" pixmap="Vali-XD/window/input_question.png" position="5,7" size="54,54"/>
+		<widget alphatest="on" name="InfoPixmap" pixmap="Vali-XD/window/input_info.png" position="5,7" size="54,54"/>
+		<widget name="list" position="100,100" size="580,375" />
+		<applet type="onLayoutFinish">
+from enigma import eSize, ePoint
+orgwidth = self.instance.size().width()
+orgpos = self.instance.position()
+textsize = self["text"].getSize()
+textsize = (textsize[0] + 50, textsize[1] + 50)
+offset = 0
+if self.type == self.TYPE_YESNO:
+	offset = 60
+wsizex = textsize[0] + 60
+wsizey = textsize[1] + offset
+if (280 &gt; wsizex):
+	wsizex = 280
+wsize = (wsizex, wsizey)
+self.instance.resize(eSize(*wsize))
+self["text"].instance.resize(eSize(*textsize))
+listsize = (wsizex, 50)
+self["list"].instance.move(ePoint(0, textsize[1]))
+self["list"].instance.resize(eSize(*listsize))
+self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
+		</applet>
+	</screen>
+	
+	<screen name="ChoiceBox" position="312,100" size="400,400" title="Input">
+		<ePixmap alphatest="on" pixmap="Vali-XD/window/input_choice.png" position="5,10" size="50,50"/>
+		<widget font="Regular;20" name="text" position="60,10" size="690,25"/>
+		<widget itemHeight="28" name="list" position="0,30" scrollbarMode="showOnDemand" size="700,335"/>
+		<applet type="onLayoutFinish">
+from enigma import eSize, ePoint
+orgwidth = self.instance.size().width()
+orgpos = self.instance.position()
+textsize = self["text"].getSize()
+if textsize[1] &gt; 20:
+	textsize = (textsize[0] + 50, textsize[1] + 50)
+else:
+	textsize = (textsize[0] + 50, 70)
+count = len(self.list)
+if count &gt; 10:
+	count = 10
+offset = 28 * count
+wsizex = textsize[0] + 60
+wsizey = textsize[1] + offset
+if (520 &gt; wsizex):
+	wsizex = 520
+wsize = (wsizex, wsizey)
+self.instance.resize(eSize(*wsize))
+self["text"].instance.resize(eSize(*textsize))
+listsize = (wsizex, 28 * count)
+self["list"].instance.move(ePoint(0, textsize[1]))
+self["list"].instance.resize(eSize(*listsize))
+self.instance.move(ePoint((1024-wsizex)/2, (576-wsizey)/2))
+		</applet>
+	</screen>
+	
+	<screen name="TimeshiftState" position="center,70" zPosition="2" size="860,60" flags="wfNoBorder">
+		<widget name="state" position="10,3" size="150,27" font="Regular;22" halign="center"/>
+		<widget source="session.CurrentService" render="Label" position="160,5" size="150,27" font="Regular;22" halign="left">
+			<convert type="ServicePosition">Remaining</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="650,5" size="80,27" font="Regular;22" halign="right">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<eLabel text="/" position="740,5" size="10,27" font="Regular;22" halign="center"/>
+		<widget source="session.CurrentService" render="Label" position="760,5" size="80,27" font="Regular;22" halign="left">
+			<convert type="ServicePosition">Length</convert>
+		</widget>
+		<widget backgroundColor="#0444444a" source="session.CurrentService" render="Progress" position="82,33" size="695,5" zPosition="3" pixmap="Vali-XD/infobar/p_bar.png">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="PVRState" position="40,270" size="150,36" zPosition="2">
+		<widget font="Regular;25" halign="center" name="state" position="0,3" size="150,30" transparent="1"/>
+	</screen>
+	
+	<screen backgroundColor="transparent" flags="wfNoBorder" name="SubtitleDisplay" position="0,0" size="1024,576" zPosition="-1"/>
+
+	<subtitles>
+		<sub font="Replacement;28" foregroundColor="foreground" name="Subtitle_TTX" shadowColor="#101010" shadowOffset="2,2"/>
+		<sub font="Replacement;28" foregroundColor="#DCDCDC" name="Subtitle_Regular" shadowColor="#101010" shadowOffset="2,2"/>
+		<sub font="Replacement;28" foregroundColor="#DCDCDC" name="Subtitle_Bold" shadowColor="#101010" shadowOffset="2,2"/>
+		<sub font="Regular;26" foregroundColor="#DCAAAA" name="Subtitle_Italic" shadowColor="#101010" shadowOffset="2,2"/>
+	</subtitles>
+	
+	<screen name="PictureInPicture" position="40,30" zPosition="-1" size="341,192" flags="wfNoBorder">
+		<widget name="video" position="0,0" size="341,192" backgroundColor="transparent" />
+	</screen>
+	
+	<screen name="Dish" flags="wfNoBorder" position="50,50" size="130,160" title="Dish" zPosition="-1" backgroundColor="transparent">
+		<widget name="Dishpixmap" pixmap="skin_default/icons/dish.png" position="0,0" size="130,160" alphatest="off" />
+	</screen>
+	
+	<screen backgroundColor="background" flags="wfNoBorder" name="NumericalTextInputHelpDialog" position="center,400" size="394,124" zPosition="2">
+		<eLabel backgroundColor="yellowtransparent" position="0,0" size="394,124" zPosition="-1"/>
+		<widget font="Console;16" halign="center" name="key1" position="2,2" size="130,30" valign="center"/>
+		<widget font="Console;16" halign="center" name="key2" position="132,2" size="130,30" valign="center"/>
+		<widget font="Console;16" halign="center" name="key3" position="262,2" size="130,30" valign="center"/>
+		<widget font="Console;16" halign="center" name="key4" position="2,32" size="130,30" valign="center"/>
+		<widget font="Console;16" halign="center" name="key5" position="132,32" size="130,30" valign="center"/>
+		<widget font="Console;16" halign="center" name="key6" position="262,32" size="130,30" valign="center"/>
+		<widget font="Console;16" halign="center" name="key7" position="2,62" size="130,30" valign="center"/>
+		<widget font="Console;16" halign="center" name="key8" position="132,62" size="130,30" valign="center"/>
+		<widget font="Console;16" halign="center" name="key9" position="262,62" size="130,30" valign="center"/>
+		<widget font="Console;16" halign="center" name="help1" position="2,92" size="130,30" valign="center"/>
+		<widget font="Console;12" halign="center" name="key0" position="132,92" size="130,30" valign="center"/>
+		<widget font="Console;16" halign="center" name="help2" position="262,92" size="130,30" valign="center"/>
+	</screen>
+	
+	<screen name="VirtualKeyBoard" position="center,center" size="560,350" title="Virtual KeyBoard" zPosition="99">
+		<ePixmap alphatest="on" pixmap="skin_default/vkey_text.png" position="9,35" size="542,52" zPosition="-4"/>
+		<widget font="Regular;18" name="header" noWrap="1" position="10,5" size="500,24" transparent="1"/>
+		<widget font="Replacement;26" halign="right" name="text" noWrap="1" position="12,42" size="536,34" transparent="1" valign="venter"/>
+		<widget name="list" position="10,100" selectionDisabled="1" size="540,225" transparent="1"/>
+	</screen>
+	
+	<screen name="About" position="center,123" size="500,360" title="About">
+		<widget font="Regular;18" position="10,10" render="Label" size="480,23" source="EnigmaVersion"/>
+		<widget font="Regular;18" position="10,35" render="Label" size="480,23" source="ImageVersion"/>
+		<widget font="Regular;18" position="10,80" render="Label" size="480,24" source="FPVersion"/>
+		<widget font="Regular;18" position="10,105" render="Label" size="480,24" source="TunerHeader"/>
+		<widget font="Regular;18" position="10,130" render="Label" size="480,20" source="Tuner0"/>
+		<widget font="Regular;18" position="10,150" render="Label" size="480,20" source="Tuner1"/>
+		<widget font="Regular;18" position="10,170" render="Label" size="480,20" source="Tuner2"/>
+		<widget font="Regular;18" position="10,190" render="Label" size="480,20" source="Tuner3"/>
+		<widget font="Regular;18" position="10,212" render="Label" size="480,24" source="HDDHeader"/>
+		<widget font="Regular;18" position="10,240" render="Label" size="480,50" source="hddA"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/window/merlin_logo.png" position="40,310" size="420,40" transparent="1" zPosition="2"/>
+	</screen>
+	
+	<screen backgroundColor="transparent" flags="wfNoBorder" name="UnhandledKey" position="940,30" size="45,45" title="UnhandledKey" zPosition="100">
+		<widget alphatest="off" name="UnhandledKeyPixmap" pixmap="Vali-XD/window/no-key.png" position="0,0" size="45,45"/>
+	</screen>
+	
+	
+	
+	<!--  ##### Wizards #####  -->
+	<screen flags="wfNoBorder" name="StartWizard" position="0,0" size="1024,576" title="Welcome...">
+		<widget font="Regular;23" name="text" position="50,70" size="436,266"/>
+		<widget position="50,340" render="Listbox" scrollbarMode="showOnDemand" size="440,200" source="list">
+			<convert type="StringList"/>
+		</widget>
+		<widget name="config" position="50,340" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>
+		<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,35" size="15,16"/>
+		<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
+		<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="500,50" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="DefaultWizard" position="0,0" size="1024,576" title="Welcome...">
+			<widget font="Regular;23" name="text" position="50,70" size="436,266"/>
+			<widget position="50,340" render="Listbox" scrollbarMode="showOnDemand" size="440,200" source="list">
+				<convert type="StringList"/>
+			</widget>
+			<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,35" size="15,16"/>
+			<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
+			<widget name="config" position="50,340" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>            
+			<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
+			<widget alphatest="on" name="rc" pixmap="skin_default/rc.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="DefaultSatLists" position="0,0" size="1024,576" title="Welcome...">
+			<widget font="Regular;23" name="text" position="50,70" size="436,266"/>
+			<widget position="50,340" render="Listbox" scrollbarMode="showOnDemand" size="440,200" source="list">
+				<convert type="StringList"/>
+			</widget>
+			<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,35" size="15,16"/>
+			<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
+			<widget name="config" position="50,340" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>            
+			<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
+			<widget alphatest="on" name="rc" pixmap="skin_default/rc.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="DreamPackageWizard" position="0,0" size="1024,576" title="Welcome...">
+			<widget font="Regular;23" name="text" position="50,70" size="436,266"/>
+			<widget position="50,340" render="Listbox" scrollbarMode="showOnDemand" size="440,200" source="list">
+				<convert type="StringList"/>
+			</widget>
+			<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,35" size="15,16"/>
+			<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
+			<widget name="config" position="50,340" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>            
+			<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
+			<widget alphatest="on" name="rc" pixmap="skin_default/rc.png" position="500,600" size="154,471" transparent="1" zPosition="10"/>
+			<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+			<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" transparent="1" zPosition="11"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="LanguageWizard" position="0,0" size="1024,576" title="Welcome...">
+		<widget font="Regular;23" name="text" position="50,70" size="436,266"/>
+		<widget position="50,340" render="Listbox" scrollbarMode="showOnDemand" size="440,200" source="languages">
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (80, 10), size = (200, 50), flags = RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryPixmap(pos = (10, 5), size = (60, 40), png = 2),
+					],
+				 "fonts": [gFont("Regular", 20)],
+				 "itemHeight": 50
+				}
+			</convert>
+		</widget>
+		<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="500,50" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="TutorialWizard" position="0,0" size="1024,576" title="Welcome...">
+		<widget font="Regular;23" name="text" position="50,100" size="440,202"/>
+		<widget name="list" position="50,310" size="440,200" zPosition="1"/>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmap="skin_default/rc.png" position="500,600" size="154,475" zPosition="10"/>
+		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="0,0" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="HelpMenu" position="0,0" size="1024,576" title="Menu">
+		<eLabel font="Regular;40" position="400,40" size="220,60" text="help..."/>
+		<widget name="list" position="50,100" scrollbarMode="showOnDemand" size="450,380"/>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="540,10" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget font="Regular;25" foregroundColor="yellow" halign="right" name="long_key" position="320,520" size="350,50"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="NetworkWizard" position="0,0" size="1024,576" title="Welcome...">
+		<widget font="Regular;23" name="text" position="50,70" size="436,266"/>
+		<widget position="50,340" render="Listbox" scrollbarMode="showOnDemand" size="440,200" source="list">
+			<convert type="StringList"/>
+		</widget>
+		<widget name="config" position="50,340" scrollbarMode="showOnDemand" size="440,200" transparent="1" zPosition="1"/>
+		<ePixmap alphatest="on" pixmap="skin_default/buttons/button_red.png" position="40,35" size="15,16"/>
+		<widget font="Regular;18" name="languagetext" position="60,30" size="200,30"/>
+		<widget alphatest="blend" name="wizard" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
+		<widget alphatest="on" name="rc" pixmaps="skin_default/rc.png,skin_default/rcold.png" position="540,10" size="154,500" zPosition="10"/>
+		<widget alphatest="on" name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowdown2" pixmap="skin_default/arrowdown.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+		<widget alphatest="on" name="arrowup2" pixmap="skin_default/arrowup.png" position="-100,-100" size="37,70" zPosition="11"/>
+	</screen>
+	
+	
+	
+	<!-- ########## Setup ########## -->
+	<screen name="Console" position="center,77" size="900,450" title="Command execution...">
+		<widget font="Console;16" name="text" position="5,12" size="890,440"/>
+	</screen>
+	
+	<screen name="Setup" position="center,77" size="900,450" title="Setup">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="0,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="140,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="280,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="420,0" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;20" halign="center" position="0,0" render="Label" size="140,40" source="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#266926" font="Regular;20" halign="center" position="140,0" render="Label" size="140,40" source="key_green" transparent="1" valign="center" zPosition="1"/>
+		<widget itemHeight="28" name="config" position="5,63" scrollbarMode="showOnDemand" size="891,364"/>
+	</screen>
+	
+	<screen name="ServiceInfo" position="center,77" size="900,450" title="Serviceinfo">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="0,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="140,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="280,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="420,0" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="red" position="0,0" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="green" position="140,0" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="yellow" position="280,0" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="blue" position="420,0" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget name="infolist" position="5,63" selectionDisabled="1" size="891,364"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="LocationBox" position="0,0" size="1024,576">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget font="Regular;20" name="text" position="60,98" size="914,28"/>
+		<widget font="Regular;20" name="target" position="60,125" size="914,28" valign="center"/>
+		<widget itemHeight="28" name="filelist" position="55,158" scrollbarMode="showOnDemand" selectionDisabled="1" size="920,196" zPosition="1"/>
+		<widget font="Regular;20" name="textbook" position="60,382" size="914,28"/>
+		<widget itemHeight="28" name="booklist" position="55,416" scrollbarMode="showOnDemand" size="920,112" zPosition="2"/>
+		<widget font="Replacement;17" foregroundColor="secondFG" halign="left" position="620,52" render="Label" size="355,40" source="Title" transparent="1" valign="center" zPosition="2"/>
+		<eLabel backgroundColor="darkgrey" position="50,374" size="924,2" zPosition="5"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="MovieLocationBox" position="0,0" size="1024,576">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget font="Regular;20" name="text" position="60,98" size="914,28"/>
+		<widget font="Regular;20" name="target" position="60,125" size="914,28" valign="center"/>
+		<widget itemHeight="28" name="filelist" position="55,158" scrollbarMode="showOnDemand" selectionDisabled="1" size="920,196" zPosition="1"/>
+		<widget font="Regular;20" name="textbook" position="60,382" size="914,28"/>
+		<widget itemHeight="28" name="booklist" position="55,416" scrollbarMode="showOnDemand" size="920,112" zPosition="2"/>
+		<widget font="Replacement;17" foregroundColor="secondFG" halign="left" position="620,52" render="Label" size="355,40" source="Title" transparent="1" valign="center" zPosition="2"/>
+		<eLabel backgroundColor="darkgrey" position="50,374" size="924,2" zPosition="5"/>
+	</screen>
+	
+	<screen backgroundColor="noTransBG" flags="wfNoBorder" name="VideoFinetune" position="0,0" size="1024,576">
+		<ePixmap alphatest="blend" pixmap="Vali-XD/window/merlin.png" position="720,125" size="200,326" zPosition="10"/>
+		<widget position="0,0" render="Canvas" size="720,576" source="Canvas"/>
+	</screen>
+	
+	<screen name="NetworkSetup" position="center,77" size="900,450" title="Network Setup">
+		<widget name="menu" position="50,50" size="800,350"/>
+	</screen>
+	
+	<screen name="AdapterSetupConfiguration" position="center,77" size="900,450" title="Network Configuration...">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/red.png" position="665,415" size="35,25"/>
+		<widget font="Regular;20" halign="left" position="705,410" render="Label" size="187,35" source="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget name="menulist" position="40,20" scrollbarMode="showOnDemand" size="330,260" zPosition="10"/>
+		<widget font="Regular;19" halign="center" position="400,20" render="Label" size="461,300" source="description" transparent="1" valign="center"/>
+		<widget font="Regular;21" halign="left" position="85,350" render="Label" size="166,25" source="IFtext" transparent="1" zPosition="10"/>
+		<widget font="Regular;21" halign="left" position="265,350" render="Label" size="596,25" source="IF" transparent="1" zPosition="10"/>
+		<widget font="Regular;20" halign="left" position="85,410" render="Label" size="496,35" source="Statustext" transparent="1" valign="center" zPosition="10"/>
+		<widget alphatest="on" name="statuspic" pixmaps="Vali-XD/buttons/green.png,Vali-XD/buttons/grey.png" position="40,415" size="35,25" transparent="1" zPosition="10"/>
+	</screen>
+	
+	<screen name="AdapterSetup" position="center,77" size="900,450" title="Network Setup">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/red.png" position="35,12" size="35,25"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/blue.png" position="420,12" size="35,25"/>
+		<widget font="Regular;20" halign="left" position="75,0" render="Label" size="321,50" source="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;20" halign="left" position="465,0" render="Label" size="416,50" source="key_blue" transparent="1" valign="center" zPosition="1"/>
+		<widget name="config" position="40,60" scrollbarMode="showOnDemand" size="550,176"/>
+		<widget font="Regular;19" foregroundColor="grey" halign="right" position="650,75" render="Label" size="230,25" source="DNS1text" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;19" foregroundColor="grey" halign="right" position="650,150" render="Label" size="230,25" source="DNS2text" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;18" halign="right" position="650,100" render="Label" size="230,25" source="DNS1" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;18" halign="right" position="650,175" render="Label" size="230,25" source="DNS2" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;20" halign="center" position="50,250" render="Label" size="800,27" source="introduction"/>
+		<widget font="Regular;19" foregroundColor="grey" halign="right" position="15,280" render="Label" size="270,25" source="IPtext" zPosition="1"/>
+		<widget font="Regular;19" foregroundColor="grey" halign="right" position="15,310" render="Label" size="270,25" source="Netmasktext" zPosition="1"/>
+		<widget font="Regular;19" foregroundColor="grey" halign="right" position="15,340" render="Label" size="270,25" source="Gatewaytext" zPosition="1"/>
+		<widget font="Regular;19" position="300,280" render="Label" size="400,25" source="IP" zPosition="1"/>
+		<widget font="Regular;19" position="300,310" render="Label" size="400,25" source="Mask" zPosition="1"/>
+		<widget font="Regular;19" position="300,340" render="Label" size="561,25" source="Gateway" zPosition="1"/>
+		<widget font="Regular;20" foregroundColor="grey" halign="right" position="15,370" render="Label" size="270,25" source="Adaptertext" transparent="1" zPosition="10"/>
+		<widget font="Regular;20" halign="left" position="300,370" render="Label" size="400,25" source="Adapter" transparent="1" zPosition="10"/>
+		<widget font="Regular;20" halign="center" position="50,410" render="Label" size="800,27" source="introduction2" transparent="1" valign="center" zPosition="10"/>
+		<widget alphatest="on" name="VKeyIcon" pixmap="skin_default/buttons/key_text.png" position="10,410" size="35,25" transparent="1" zPosition="10"/>
+		<widget alphatest="on" name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="50,410" size="1,1" transparent="1" zPosition="1"/>
+	</screen>
+	
+	<screen name="NameserverSetup" position="center,77" size="900,450" title="Nameserver Setup">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/red.png" position="10,12" size="35,25"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/green.png" position="305,12" size="35,25"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/yellow.png" position="590,12" size="35,25"/>
+		<widget font="Regular;20" halign="left" position="50,0" render="Label" size="220,50" source="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;20" halign="left" position="345,0" render="Label" size="220,50" source="key_green" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;20" halign="left" position="630,0" render="Label" size="220,50" source="key_yellow" transparent="1" valign="center" zPosition="1"/>
+		<widget name="config" position="55,65" scrollbarMode="showOnDemand" size="785,280"/>
+		<widget font="Regular;21" halign="center" position="50,375" render="Label" size="800,60" source="introduction" transparent="1" valign="center" zPosition="10"/>
+	</screen>
+	
+	<screen name="NetworkAdapterSelection" position="center,77" size="900,450" title="Select Network Adapter">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/red.png" position="10,12" size="35,25"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/green.png" position="305,12" size="35,25"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/yellow.png" position="590,12" size="35,25"/>
+		<widget font="Regular;20" halign="left" position="50,0" render="Label" size="220,50" source="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;20" halign="left" position="345,0" render="Label" size="220,50" source="key_green" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;20" halign="left" position="630,0" render="Label" size="220,50" source="key_yellow" transparent="1" valign="center" zPosition="1"/>
+		<widget source="list" render="Listbox" position="55,65" size="785,280" zPosition="10" scrollbarMode="showOnDemand">
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (85, 6), size = (700, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
+						MultiContentEntryText(pos = (85, 43), size = (700, 24), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, text = 2),
+						MultiContentEntryPixmapAlphaTest(pos = (2, 8), size = (54, 54), png = 3),
+						MultiContentEntryPixmapAlphaTest(pos = (63, 46), size = (15, 16), png = 4),
+					],
+				"fonts": [gFont("Regular", 26),gFont("Regular", 20)],
+				"itemHeight": 70
+				}
+			</convert>
+		</widget>
+		<widget font="Regular;21" halign="center" position="50,375" render="Label" size="800,60" source="introduction" transparent="1" valign="center" zPosition="10"/>
+	</screen>
+	
+	<screen name="NetworkAdapterTest" position="center,77" size="900,450" title="Network test...">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/red.png" position="10,12" size="35,25"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/green.png" position="305,12" size="35,25"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/yellow.png" position="590,12" size="35,25"/>
+		<widget font="Regular;20" halign="left" position="50,0" render="Label" size="220,50" source="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;20" halign="left" position="345,0" render="Label" size="220,50" source="key_green" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;20" halign="left" position="630,0" render="Label" size="220,50" source="key_yellow" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="dark" font="Regular;19" foregroundColors="#8c8c93,#1cff1c" halign="left" name="Adaptertext" position="50,70" size="800,23" zPosition="1"/>
+		<widget font="Regular;19" foregroundColors="#8c8c93,#f23d21,#1cff1c" halign="center" name="Adapter" position="280,70" size="306,23" transparent="1" zPosition="2"/>
+		<widget font="Regular;19" foregroundColors="#8c8c93,#000000,#1cff1c" name="AdapterInfo_Text" position="630,70" size="200,23" transparent="1" zPosition="2"/>
+		<widget alphatest="on" name="AdapterInfo_OK" pixmap="skin_default/icons/lock_on.png" position="590,65" size="38,31" zPosition="2"/>
+		<widget backgroundColor="dark" font="Regular;19" foregroundColors="#8c8c93,#1cff1c" halign="left" name="Networktext" position="50,120" size="800,23" zPosition="1"/>
+		<widget font="Regular;19" foregroundColors="#8c8c93,#f23d21,#1cff1c" halign="center" name="Network" position="280,120" size="306,23" transparent="1" zPosition="2"/>
+		<widget font="Regular;19" foregroundColors="#8c8c93,#000000,#1cff1c" name="NetworkInfo_Text" position="630,120" size="200,23" transparent="1" zPosition="2"/>
+		<widget alphatest="on" name="NetworkInfo_Check" pixmaps="skin_default/icons/lock_on.png,skin_default/icons/lock_error.png" position="590,115" size="38,31" zPosition="2"/>
+		<widget backgroundColor="dark" font="Regular;19" foregroundColors="#8c8c93,#1cff1c" halign="left" name="Dhcptext" position="50,170" size="800,23" zPosition="1"/>
+		<widget font="Regular;19" foregroundColors="#8c8c93,#f23d21,#1cff1c" halign="center" name="Dhcp" position="280,170" size="306,23" transparent="1" zPosition="2"/>
+		<widget font="Regular;19" foregroundColors="#8c8c93,#000000,#1cff1c" name="DhcpInfo_Text" position="630,170" size="200,23" transparent="1" zPosition="2"/>
+		<widget alphatest="on" name="DhcpInfo_Check" pixmaps="skin_default/icons/lock_on.png,skin_default/icons/lock_error.png" position="590,165" size="38,31" zPosition="2"/>
+		<widget backgroundColor="dark" font="Regular;19" foregroundColors="#8c8c93,#1cff1c" halign="left" name="IPtext" position="50,220" size="800,23" zPosition="1"/>
+		<widget font="Regular;19" foregroundColors="#8c8c93,#f23d21,#1cff1c" halign="center" name="IP" position="280,220" size="306,23" transparent="1" zPosition="2"/>
+		<widget font="Regular;19" foregroundColors="#8c8c93,#000000,#1cff1c" name="IPInfo_Text" position="630,220" size="200,23" transparent="1" zPosition="2"/>
+		<widget alphatest="on" name="IPInfo_Check" pixmaps="skin_default/icons/lock_on.png,skin_default/icons/lock_error.png" position="590,215" size="38,31" zPosition="2"/>
+		<widget backgroundColor="dark" font="Regular;19" foregroundColors="#8c8c93,#1cff1c" halign="left" name="DNStext" position="50,270" size="800,23" zPosition="1"/>
+		<widget font="Regular;19" foregroundColors="#8c8c93,#f23d21,#1cff1c" halign="center" name="DNS" position="280,270" size="306,23" transparent="1" zPosition="2"/>
+		<widget font="Regular;19" foregroundColors="#8c8c93,#000000,#1cff1c" name="DNSInfo_Text" position="630,270" size="200,23" transparent="1" zPosition="2"/>
+		<widget alphatest="on" name="DNSInfo_Check" pixmaps="skin_default/icons/lock_on.png,skin_default/icons/lock_error.png" position="590,265" size="38,31" zPosition="2"/>
+		<widget alphatest="on" name="EditSettingsButton" pixmaps="Vali-XD/buttons/grey.png,Vali-XD/buttons/blue.png" position="590,330" size="35,25" transparent="1" zPosition="1"/>
+		<widget font="Regular;19" foregroundColors="#000000,#8c8c93,#1cff1c" name="EditSettings_Text" position="630,330" size="200,23" transparent="1" zPosition="2"/>
+		<widget font="Regular;21" name="InfoText" position="15,50" size="866,256" zPosition="25"/>
+	</screen>
+	
+	<screen name="NetworkBrowser" position="center,77" size="900,450" title="Network Neighbourhood">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="0,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="140,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="280,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="420,0" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" position="0,0" render="Label" size="140,40" source="key_red" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" position="140,0" render="Label" size="140,40" source="key_green" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" position="280,0" render="Label" size="140,40" source="key_yellow" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" position="420,0" render="Label" size="140,40" source="key_blue" transparent="1" valign="center" zPosition="2"/>
+		<widget position="5,50" render="Listbox" scrollbarMode="showOnDemand" size="891,350" source="list" zPosition="10">
+			<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryPixmapAlphaTest(pos = (0, 0), size = (48, 48), png = 1),
+							MultiContentEntryText(pos = (50, 4), size = (420, 26), font=2, flags = RT_HALIGN_LEFT, text = 2),
+							MultiContentEntryText(pos = (140, 5), size = (320, 25), font=0, flags = RT_HALIGN_LEFT, text = 3),
+							MultiContentEntryText(pos = (140, 26), size = (320, 17), font=1, flags = RT_HALIGN_LEFT, text = 4),
+							MultiContentEntryPixmapAlphaTest(pos = (45, 0), size = (48, 48), png = 5),
+							MultiContentEntryPixmapAlphaTest(pos = (90, 0), size = (48, 48), png = 6),
+						],
+					"fonts": [gFont("Regular", 20),gFont("Regular", 14),gFont("Regular", 24)],
+					"itemHeight": 50
+					}
+			</convert>
+		</widget>
+		<widget backgroundColor="#25062748" font="Regular;20" halign="center" position="0,420" render="Label" size="891,30" source="infotext" transparent="1" valign="center" zPosition="10"/>
+	</screen>
+
+	<screen name="AutoMountManager" position="center,77" size="900,450" title="AutoMountManager">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="0,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="140,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="280,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="420,0" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" position="0,0" render="Label" size="140,40" source="key_red" transparent="1" valign="center" zPosition="2"/>
+		<widget position="5,50" render="Listbox" scrollbarMode="showOnDemand" size="891,357" source="config">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 3), size = (480, 25), font=0, flags = RT_HALIGN_LEFT, text = 0),
+							MultiContentEntryText(pos = (10, 29), size = (480, 17), font=1, flags = RT_HALIGN_LEFT, text = 2),
+							MultiContentEntryPixmapAlphaTest(pos = (500, 1), size = (48, 48), png = 3),
+						],
+					"fonts": [gFont("Regular", 20),gFont("Regular", 14)],
+					"itemHeight": 50
+					}
+				</convert>
+		</widget>
+		<widget backgroundColor="#25062748" font="Regular;20" halign="center" position="5,420" render="Label" size="891,21" source="introduction" transparent="1" valign="center" zPosition="10"/>
+	</screen>
+	
+	<screen name="AutoMountView" position="center,77" size="900,450" title="MountView">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="0,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="140,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="280,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="420,0" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" position="0,0" render="Label" size="140,40" source="key_red" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" position="280,0" render="Label" size="140,40" source="key_yellow" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#25062748" font="Regular;18" halign="center" position="0,50" render="Label" size="130,72" source="legend1" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#25062748" font="Regular;18" halign="center" position="130,50" render="Label" size="631,72" source="legend2" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#25062748" font="Regular;18" halign="center" position="765,50" render="Label" size="130,72" source="legend3" transparent="1" valign="center" zPosition="1"/>
+		<widget position="5,130" render="Listbox" scrollbarMode="showOnDemand" size="891,269" source="config">
+                                <convert type="TemplatedMultiContent">
+                                        {"template": [
+                                                        MultiContentEntryPixmapAlphaTest(pos = (15, 1), size = (48, 48), png = 0),
+                                                        MultiContentEntryText(pos = (100, 3), size = (200, 25), font=0, flags = RT_HALIGN_LEFT, text = 1),
+                                                        MultiContentEntryText(pos = (290, 5), size = (150, 17), font=1, flags = RT_HALIGN_LEFT, text = 2),
+                                                        MultiContentEntryText(pos = (100, 29), size = (350, 17), font=1, flags = RT_HALIGN_LEFT, text = 3),
+                                                        MultiContentEntryPixmapAlphaTest(pos = (450, 9), size = (48, 48), png = 4),
+                                                        MultiContentEntryPixmapAlphaTest(pos = (480, 1), size = (48, 48), png = 5),
+                                                ],
+                                        "fonts": [gFont("Regular", 20),gFont("Regular", 14)],
+                                        "itemHeight": 50
+                                        }
+                                </convert>
+		</widget>
+		<widget backgroundColor="#25062748" font="Regular;20" halign="center" position="0,420" render="Label" size="891,20" source="introduction" transparent="1" valign="center" zPosition="10"/>
+	</screen>
+	
+	<screen name="SkinSelector" position="center,80" size="924,460" title="Choose your Skin">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/red.png" position="40,20" size="30,30" zPosition="1"/>
+		<widget font="Regular;20" position="75,15" render="Label" size="347,40" source="key_red" transparent="1" valign="center" zPosition="2"/>
+		<widget itemHeight="28" name="SkinList" position="40,80" scrollbarMode="showOnDemand" size="416,308"/>
+		<eLabel backgroundColor="darkgrey" position="500,75" size="2,330" zPosition="1"/>
+		<widget alphatest="on" name="Preview" position="565,130" size="280,210"/>
+		<eLabel backgroundColor="darkgrey" position="0,420" size="924,2" zPosition="1"/>
+		<widget font="Regular;20" halign="center" position="10,425" render="Label" size="914,30" source="introduction" transparent="1" valign="center" zPosition="10"/>
+	</screen>
+	
+	
+	
+	<!-- ########## Service selection ########## -->
+	<screen flags="wfNoBorder" name="ChannelSelectionRadio" position="0,0" size="1024,400" title="Channel Selection">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget itemHeight="28" name="list" position="50,99" scrollbarMode="showOnDemand" size="924,280" zPosition="2"/>
+		<widget font="Replacement;17" foregroundColor="secondFG" halign="left" position="620,52" render="Label" size="355,40" source="Title" transparent="1" valign="center" zPosition="2"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="MovieSelection" position="0,0" size="1024,576" title="Select a movie">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget name="list" position="50,103" scrollbarMode="showOnDemand" size="924,300" zPosition="2"/>
+		<widget font="Regular;20" name="waitingtext" position="50,100" size="924,308" zPosition="4"/>
+		<widget font="Regular;16" halign="left" position="570,420" render="Label" size="100,23" source="Service" transparent="1" zPosition="4">
+			<convert type="MovieInfo">FileSize</convert>
+		</widget>
+		<widget font="Regular;16" position="60,420" render="Label" size="500,23" source="Service" zPosition="1">
+			<convert type="MovieInfo">ShortDescription</convert>
+		</widget>
+		<widget font="Regular;16" halign="left" position="780,420" render="Label" size="300,23" source="Service" zPosition="1">
+			<convert type="MovieInfo">RecordServiceName</convert>
+		</widget>
+		<widget font="Regular;16" halign="left" position="670,420" render="Label" size="100,23" source="Service" zPosition="1">
+			<convert type="ServiceTime">Duration</convert>
+			<convert type="ClockToText">AsLength</convert>
+		</widget>
+		<widget font="Regular;17" position="60,445" render="Label" size="904,82" source="Service" zPosition="1">
+			<convert type="EventName">ExtendedDescription</convert>
+		</widget>
+		<widget font="Regular;17" foregroundColor="secondFG" position="620,52" render="vRendMovieDirSize" size="355,40" source="global.CurrentTime" transparent="1" valign="center" zPosition="4"/>
+		<eLabel backgroundColor="darkgrey" position="50,415" size="924,2" zPosition="5"/>
+		<widget name="DescriptionBorder" position="0,0" size="0,0"/>
+	</screen>
+	
+	<screen name="FileBrowser" position="center,center" size="620,430" title="DVD File Browser">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="5,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="145,5" size="140,40"/>
+		<widget backgroundColor="#9f1313" font="Regular;20" halign="center" position="5,5" render="Label" size="140,40" source="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#1f771f" font="Regular;20" halign="center" position="145,5" render="Label" size="140,40" source="key_green" transparent="1" valign="center" zPosition="1"/>
+		<widget itemHeight="28" name="filelist" position="5,58" scrollbarMode="showOnDemand" size="610,364"/>
+	</screen>
+	
+	
+	
+	<!-- ########## EGP selection ########## -->	
+	<screen flags="wfNoBorder" name="GraphMultiEPG" position="0,0" size="1024,576" title="Electronic Program Guide">
+		<ePixmap alphatest="on" pixmap="Vali-XD/border/multiEPG.png" position="44,50" size="632,476" transparent="1" zPosition="1"/>
+		<widget name="timeline_text" position="0,51" size="924,20"/>
+		<widget EntryBackgroundColor="background" EntryBackgroundColorSelected="selectedBG" EntryBorderColor="#555555" backgroundColor="background" name="list" position="50,76" scrollbarMode="showOnDemand" size="924,378"/>
+		<widget name="timeline0" pixmap="Vali-XD/window/timeline.png" position="50,76" size="1,378" zPosition="1"/>
+		<widget name="timeline1" pixmap="Vali-XD/window/timeline.png" position="50,76" size="1,378" zPosition="1"/>
+		<widget name="timeline2" pixmap="Vali-XD/window/timeline.png" position="50,76" size="1,378" zPosition="1"/>
+		<widget name="timeline3" pixmap="Vali-XD/window/timeline.png" position="50,76" size="1,378" zPosition="1"/>
+		<widget name="timeline4" pixmap="Vali-XD/window/timeline.png" position="50,76" size="1,378" zPosition="1"/>
+		<widget name="timeline5" pixmap="Vali-XD/window/timeline.png" position="50,76" size="1,378" zPosition="1"/>
+		<widget alphatest="on" name="timeline_now" pixmap="Vali-XD/window/timeline-now.png" position="50,76" size="1,378" zPosition="2"/>
+		<widget font="Regular;20" noWrap="1" position="160,465" render="Label" size="807,26" source="Event" transparent="1" zPosition="1">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget font="Regular;20" position="160,496" render="Label" size="50,22" source="Event" transparent="1" zPosition="1">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText"/>
+		</widget>
+		<widget font="Regular;20" position="215,496" render="Label" size="70,22" source="Event" transparent="1" zPosition="1">
+			<convert type="EventTime">EndTime</convert>
+			<convert type="ClockToText">Format:- %H:%M</convert>
+		</widget>
+		<widget font="Regular;20" noWrap="1" position="280,496" render="Label" size="350,26" source="Event" transparent="1" zPosition="1">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Format:(%A)</convert>
+		</widget>
+		<widget font="Regular;20" foregroundColor="secondFG" halign="right" position="676,496" render="Label" size="296,26" source="global.CurrentTime" transparent="1" zPosition="2">
+			<convert type="vConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="EventView" position="0,0" size="1024,576" title="Eventview">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget font="Regular;22" name="epg_description" position="50,108" size="924,374"/>
+		<widget font="Regular;22" name="datetime" position="70,492" size="172,30"/>
+		<widget font="Regular;22" name="duration" position="265,492" size="186,30"/>
+		<widget font="Regular;22" name="channel" position="490,492" size="485,30"/>
+		<widget font="Replacement;19" foregroundColor="secondFG" halign="center" position="620,61" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
+			<convert type="vConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+		<eLabel backgroundColor="darkgrey" position="50,485" size="924,2" zPosition="5"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="EPGSelectionMulti" position="0,0" size="1024,576" title="EPG Selection">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget alphatest="on" name="now_button_sel" pixmap="Vali-XD/border/epg_now.png" position="660,65" size="310,25" zPosition="1"/>
+		<widget alphatest="on" name="next_button_sel" pixmap="Vali-XD/border/epg_next.png" position="660,65" size="310,25" zPosition="1"/>
+		<widget alphatest="on" name="more_button_sel" pixmap="Vali-XD/border/epg_more.png" position="660,65" size="310,25" zPosition="1"/>
+		<widget itemHeight="28" name="list" position="50,99" scrollbarMode="showOnDemand" size="924,420"/>
+		<widget font="Regular;18" foregroundColor="secondFG" halign="right" position="655,40" render="Label" size="296,24" source="global.CurrentTime" transparent="1" zPosition="2">
+			<convert type="vConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+		<eLabel backgroundColor="darkgrey" position="50,90" size="920,2" zPosition="5"/>
+	</screen>
+	
+	
+	
+	<!-- ########## Timers ########## -->
+	<screen flags="wfNoBorder" name="TimerEditList" position="0,0" size="1024,576" title="Timer Editor">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget name="timerlist" position="50,94" scrollbarMode="showOnDemand" size="924,426"/>
+		<widget font="Replacement;17" foregroundColor="secondFG" halign="left" position="620,52" render="Label" size="355,40" source="Title" transparent="1" valign="center" zPosition="2"/>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="TimerEntry" position="0,0" size="1024,576" title="Timer entry">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="canceltext" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="oktext" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget name="config" position="50,94" scrollbarMode="showOnDemand" size="924,426"/>
+		<widget font="Replacement;19" foregroundColor="secondFG" halign="center" position="620,61" render="Label" size="346,26" source="global.CurrentTime" transparent="1" zPosition="2">
+			<convert type="vConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+	</screen>
+	
+	<screen flags="wfNoBorder" name="TimerLog" position="0,0" size="1024,576" title="Timer log">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget name="loglist" position="60,100" scrollbarMode="showOnDemand" size="904,260"/>
+		<widget font="Regular;20" name="logentry" position="60,380" size="904,134"/>
+		<widget font="Replacement;17" foregroundColor="secondFG" halign="left" position="620,52" render="Label" size="355,40" source="Title" transparent="1" valign="center" zPosition="2"/>
+		<eLabel backgroundColor="darkgrey" position="50,370" size="924,2" zPosition="5"/>
+	</screen>
+
+	<screen flags="wfNoBorder" name="TimerSanityConflict" position="0,0" size="1024,576" title="Timer sanity error">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget name="timer1" position="80,115" scrollbarMode="showNever" size="864,75"/>
+		<widget name="timer2" position="80,210" scrollbarMode="showNever" size="864,75"/>
+		<widget name="list" position="60,310" scrollbarMode="showOnDemand" size="904,200"/>
+		<widget font="Replacement;17" foregroundColor="secondFG" halign="left" position="620,52" render="Label" size="355,40" source="Title" transparent="1" valign="center" zPosition="2"/>
+	</screen>
+	
+	
+	
+	<!-- ########## Merlin ########## -->	
+	<screen backgroundColor="#ffffffff" flags="wfNoBorder" name="Merlin_PG" position="0,0" size="1024,576" title="Merlin Program Guide">
+		<widget backgroundColor="#ffffffff" position="0,0" render="Pig" size="384,216" source="session.VideoPicture" zPosition="0"/>
+		<eLabel backgroundColor="noTransBG" position="0,216" size="384,366" zPosition="0"/>
+		<eLabel backgroundColor="noTransBG" position="384,0" size="720,576" zPosition="0"/>
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/red.png" position="40,520" size="35,25" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/green.png" position="185,520" size="35,25" transparent="1"/>
+		<eLabel backgroundColor="noTransBG" font="Regular;18" position="80,520" size="92,24" text="ZAP" transparent="1" zPosition="2"/>
+		<eLabel backgroundColor="noTransBG" font="Regular;18" position="230,520" size="141,24" text="TIMERS" transparent="1" zPosition="2"/>
+		<widget name="prg_list" position="40,228" scrollbarMode="showNever" itemHeight="25" size="332,275" transparent="1" zPosition="2"/>
+		<widget name="epg_list" position="395,80" scrollbarMode="showNever" itemHeight="28" size="590,448" transparent="1" zPosition="2"/>
+		<widget backgroundColor="secondBG" font="OLED;21" foregroundColor="secondFG" halign="center" name="currCh" position="395,40" size="590,24" transparent="1" valign="center" zPosition="2"/>
+	</screen>
+	
+	<screen name="DreamExplorer" position="center,77" size="900,450" title="Dream-Explorer">
+		<widget name="filelist" position="0,0" scrollbarMode="showOnDemand" itemHeight="28" size="900,420" zPosition="4"/>
+		<ePixmap alphatest="on" pixmap="/usr/share/enigma2/Merlin/buttons/key-menu.png" position="2,426" size="35,25" zPosition="5"/>
+		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" name="location" position="40,421" size="860,35" valign="center" zPosition="6"/>
+	</screen>
+	
+	<screen name="FileExplorer" position="center,77" size="900,450" title="File-Explorer">
+		<widget font="Regular;16" foregroundColor="foreground" name="filedata" position="0,0" size="900,418" transparent="1" zPosition="9"/>
+		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" name="status" position="0,421" size="900,35" valign="center" zPosition="4"/>
+	</screen>
+	
+	<screen backgroundColor="noTransBG" flags="wfNoBorder" name="PictureExplorer" position="0,0" size="1024,576" title="Picture-Explorer">
+		<widget alphatest="on" backgroundColor="noTransBG" name="Picture" position="0,0" size="1024,576" zPosition="1"/>
+	</screen>
+	
+	<screen name="MerlinDownloadBrowser" position="center,100" size="800,420" title="Addon Manager">
+		<widget font="Regular;20" halign="center" name="text" position="0,0" size="800,420" valign="center" zPosition="1"/>
+		<widget name="list" position="10,10" scrollbarMode="showOnDemand" size="780,400" zPosition="2"/>
+	</screen>
+	
+	<screen name="Scripts" position="center,100" size="420,400" title="Scripts from /usr/script/tools/...">
+		<widget name="list" position="0,4" scrollbarMode="showOnDemand" itemHeight="28" size="420,392"/>
+	</screen>
+	
+	<screen name="QuickbuttonSetup" position="center,77" size="900,450" title="Quickbutton Setup">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="15,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="165,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="315,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="465,5" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="15,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="165,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget name="config" position="15,58" scrollbarMode="showOnDemand" size="871,375"/>
+	</screen>
+	
+
+
+	<!-- ########## Suomipoeka ########## -->
+	<screen name="SuomipoekaMenu" position="center,77" size="900,450" title="SuomipoekaMenu">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="0,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="140,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="280,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="420,0" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;20" halign="center" name="key_red" position="0,0" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#266926" font="Regular;20" halign="center" name="key_green" position="140,0" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#8C5900" font="Regular;20" halign="center" name="key_yellow" position="280,0" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#254177" font="Regular;20" halign="center" name="key_blue" position="420,0" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<eLabel font="Replacement;20" position="5,54" size="867,30" text="Suomipoeka-Setup"/>
+		<widget name="config" position="5,87" scrollbarMode="showOnDemand" size="891,353"/>
+	</screen>
+	<screen name="SimpleRename" position="center,77" size="900,450" title="Simple Rename Input">
+		<widget alphatest="on" name="cancel" pixmap="Vali-XD/buttons/key-red.png" position="0,0" size="140,40"/>
+		<widget alphatest="on" name="ok" pixmap="Vali-XD/buttons/key-green.png" position="140,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="280,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="420,0" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;20" halign="center" name="canceltext" position="0,0" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#266926" font="Regular;20" halign="center" name="oktext" position="140,0" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<eLabel font="Replacement;20" position="5,54" size="867,30" text="Simple Rename Input"/>
+		<widget name="config" position="5,87" size="891,353"/>
+	</screen>
+	
+	
+	<!-- ########## Picture-Player ########## -->	
+	<screen name="picshow" position="0,0" size="1024,576" title="PicturePlayer">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" position="47,52" render="Label" size="140,40" source="key_red" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" position="187,52" render="Label" size="140,40" source="key_green" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" position="327,52" render="Label" size="140,40" source="key_yellow" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" position="467,52" render="Label" size="140,40" source="key_blue" transparent="1" valign="center" zPosition="2"/>
+		<widget font="Replacement;17" foregroundColor="secondFG" halign="left" position="620,52" render="Label" size="355,40" source="Title" transparent="1" valign="center" zPosition="2"/>
+		<widget font="Regular;19" name="label" position="55,310" size="326,140"/>
+		<widget alphatest="on" name="thn" position="115,125" size="180,160"/>
+		<widget name="filelist" position="408,103" scrollbarMode="showOnDemand" size="557,438" zPosition="2"/>
+	</screen>
+	
+	
+	<!-- ########## CutList-Editor ########## -->
+	<screen backgroundColor="#FFFFFFFF" flags="wfNoBorder" name="CutListEditor" position="0,0" size="1024,576" title="CutListEditor">
+			<widget backgroundColor="transparent" name="Video" position="0,0" size="712,400" zPosition="-2"/>
+			<eLabel backgroundColor="noTransBG" position="700,0" size="330,576" zPosition="0"/>
+			<eLabel backgroundColor="noTransBG" position="0,400" size="710,176" zPosition="-1"/>
+			<widget backgroundColor="noTransBG" font="Regular;16" foregroundColor="foreground" halign="left" noWrap="1" position="740,50" render="Label" size="231,22" source="global.CurrentTime" transparent="1" zPosition="3">
+				<convert type="vConvClockToText">LocaleLang:%w %d %m</convert>
+			</widget>
+			<widget backgroundColor="noTransBG" font="Regular;22" halign="center" position="135,405" render="Label" size="450,50" source="session.CurrentService" valign="center">
+				<convert type="ServiceName">Name</convert>
+			</widget>
+			<widget backgroundColor="noTransBG" font="Regular;20" halign="center" position="50,450" render="Label" size="620,25" source="session.CurrentService" valign="center" zPosition="1">
+				<convert type="ServicePosition">Position,Detailed</convert>
+			</widget>
+			<widget position="735,95" render="Listbox" scrollbarMode="showOnDemand" size="246,432" source="cutlist" transparent="1" zPosition="1">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(size=(125, 20), text = 1, backcolor = MultiContentTemplateColor(3)),
+							MultiContentEntryText(pos=(125,0), size=(50, 20), text = 2, flags = RT_HALIGN_RIGHT, backcolor = MultiContentTemplateColor(3))
+						],
+				 	"fonts": [gFont("Regular", 18)],
+				 	"itemHeight": 20
+					}
+				</convert>
+			</widget>
+			<widget backgroundColor="#505555" foregroundColor="black" name="Timeline" pointer="skin_default/position_arrow.png:3,5" position="50,485" size="615,20"/>
+			<ePixmap alphatest="on" pixmap="Vali-XD/dvr/dvr.png" position="285,515" size="150,20" transparent="1" zPosition="2"/>
+	</screen>
+	
+	
+	<!-- ########## Media-Player ########## -->	
+	<screen backgroundColor="noTransBG" flags="wfNoBorder" name="MediaPlayer" position="0,0" size="1024,576" title="MediaPlayer">
+		<eLabel backgroundColor="darkgrey" position="50,40" size="924,2" zPosition="1"/>
+		<eLabel backgroundColor="darkgrey" position="50,235" size="924,2" zPosition="1"/>
+		<eLabel backgroundColor="darkgrey" position="50,425" size="924,2" zPosition="1"/>
+		<eLabel backgroundColor="darkgrey" font="Regular;16" foregroundColor="#0f0f0f" halign="center" position="412,32" size="200,20" text="FILE LIST" valign="center" zPosition="2"/>
+		<eLabel backgroundColor="darkgrey" font="Regular;16" foregroundColor="#0f0f0f" halign="center" position="412,226" size="200,20" text="PLAY LIST" valign="center" zPosition="2"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/dvr/dvr.png" position="50,446" size="150,20" transparent="1" zPosition="2"/>
+		<widget alphatest="on" name="coverArt" pixmap="Vali-XD/dvr/no_coverArt.png" position="804,270" size="128,128" transparent="1" zPosition="2"/>
+		<widget font="Regular;30" foregroundColor="grey" halign="right" position="55,477" render="Label" size="90,32" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget font="Regular;22" foregroundColor="grey" halign="left" position="145,479" render="Label" size="42,24" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="ClockToText">Format::%S</convert>
+		</widget>
+		<widget font="Regular;16" foregroundColor="grey" halign="center" position="50,515" render="Label" size="150,22" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<ePixmap alphatest="blend" pixmap="Vali-XD/dvr/mpslider.png" position="375,449" size="420,12" zPosition="5"/>
+		<widget name="PositionGauge" pointer="Vali-XD/dvr/position_pointer_mp.png:6,1" position="385,449" size="400,12" transparent="1" zPosition="4"/>
+		<widget backgroundColor="secondBG" font="Regular;22" foregroundColor="foreground" halign="right" position="235,442" render="Label" size="120,22" source="session.CurrentService" transparent="1" zPosition="3">
+			<convert type="ServicePosition">Length</convert>
+		</widget>
+		<widget font="Regular;22" foregroundColor="foreground" halign="left" position="817,442" render="Label" size="117,22" source="session.CurrentService" transparent="1" zPosition="2">
+			<convert type="ServicePosition">Remaining</convert>
+		</widget>	
+		<widget name="filelist" position="62,58" scrollbarMode="showOnDemand" size="900,164" transparent="1" zPosition="4"/>
+		<widget name="playlist" position="62,251" scrollbarMode="showOnDemand" selectionDisabled="1" size="720,164" transparent="1" zPosition="4"/>
+		<widget font="Regular;20" halign="center" name="title" position="250,473" size="690,26" transparent="1" zPosition="5"/>
+		<widget font="Regular;18" halign="center" name="artist" position="250,505" size="690,24" transparent="1" zPosition="5"/>				
+	</screen>
+	
+	
+	<!-- ########## EPGRefresh ########## -->	
+	<screen name="EPGRefreshConfiguration" position="center,center" size="565,424" title="Configure EPGRefresh">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="0,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="140,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="280,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="420,5" size="140,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" position="0,5" render="Label" size="140,40" source="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" position="140,5" render="Label" size="140,40" source="key_green" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" position="280,5" render="Label" size="140,40" source="key_yellow" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" position="420,5" render="Label" size="140,40" source="key_blue" transparent="1" valign="center" zPosition="1"/>
+		<widget name="config" position="5,50" scrollbarMode="showOnDemand" size="555,260"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="0,301" zPosition="1" size="565,2" />
+		<widget font="Regular;21" position="5,320" render="Label" size="555,83" source="help"/>
+	</screen>
+	
+	
+	<!--  ##### PartnerBox ##### -->
+	<screen flags="wfNoBorder" name="RemoteTimer" position="0,0" size="1024,576" title="RemoteTimer Timerlist">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<eLabel backgroundColor="background" font="Regular;16" foregroundColor="orange" halign="left" position="626,59" size="346,26" text="RemoteTimer Timerlist" transparent="1" zPosition="2"/>
+		<widget font="Regular;20" halign="center" name="text" position="50,94" size="924,424" valign="center" zPosition="3"/>
+		<widget name="timerlist" position="50,94" scrollbarMode="showOnDemand" size="924,424" zPosition="5"/>
+	</screen>
+	<screen flags="wfNoBorder" name="RemoteTimerEPGList" position="0,0" size="1024,576" title="EPG Selection">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<eLabel backgroundColor="background" font="Regular;16" foregroundColor="orange" halign="left" position="626,59" size="346,26" text="RemoteTimer EPG Selection" transparent="1" zPosition="2"/>
+		<widget font="Regular;20" halign="center" name="text" position="50,94" size="924,424" valign="center" zPosition="3"/>
+		<widget name="epglist" position="50,94" scrollbarMode="showOnDemand" size="924,424" zPosition="5"/>
+	</screen>
+	<screen flags="wfNoBorder" name="RemoteTimerChannelList" position="0,0" size="1024,576" title="Bouquet List">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<eLabel backgroundColor="background" font="Regular;16" foregroundColor="orange" halign="left" position="626,59" size="346,26" text="RemoteTimer Bouquet List" transparent="1" zPosition="2"/>
+		<widget font="Regular;20" halign="center" name="text" position="50,94" size="924,424" valign="center" zPosition="3"/>
+		<widget name="channellist" position="50,94" scrollbarMode="showOnDemand" size="924,424" zPosition="5"/>
+	</screen>
+	<screen flags="wfNoBorder" name="RemoteTimerEventView" position="0,0" size="1024,576" title="Eventview">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<eLabel backgroundColor="background" font="Regular;16" foregroundColor="orange" halign="left" position="626,59" size="346,26" text="RemoteTimer Eventview" transparent="1" zPosition="2"/>
+		<widget font="Regular;22" name="epg_description" position="50,108" size="924,374"/>
+		<widget font="Regular;22" name="datetime" position="70,492" size="172,30"/>
+		<widget font="Regular;22" name="duration" position="265,492" size="186,30"/>
+		<widget font="Regular;22" name="channel" position="490,492" size="485,30"/>
+		<eLabel backgroundColor="darkgrey" position="50,485" size="924,2" zPosition="5"/>
+	</screen>
+	<screen flags="wfNoBorder" name="RemoteTimerEntry" position="0,0" size="1024,576" title="Timer entry">
+		<widget alphatest="on" name="cancel" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40"/>
+		<widget alphatest="on" name="ok" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="canceltext" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="oktext" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget name="config" position="50,94" scrollbarMode="showOnDemand" size="924,426"/>
+		<widget font="Replacement;17" foregroundColor="secondFG" halign="left" position="620,52" render="Label" size="355,40" source="Title" transparent="1" valign="center" zPosition="2"/>
+	</screen>
+	<screen backgroundColor="background" flags="wfNoBorder" name="RemotePlayer" position="0,438" size="1024,176" title="Partnerbox - RemotePlayer">
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/up-shadow.png" position="0,0" size="1024,8" zPosition="0"/>
+		<widget backgroundColor="background" font="Replacement;21" foregroundColor="foreground" halign="center" name="ServiceName" position="50,10" size="924,60" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="background" font="Regular;18" foregroundColor="foreground" halign="left" name="DateTime" position="60,75" size="602,52" transparent="1" valign="top" zPosition="2"/>
+		<widget backgroundColor="background" font="Regular;18" foregroundColor="foreground" halign="right" name="IP" position="665,75" size="300,52" transparent="1" valign="top" zPosition="2"/>
+	</screen>
+	
+	
+	<!--  ##### VLC Player##### -->
+	<screen name="VlcServerConfigScreen" position="center,77" size="900,450" title="Edit VLC Server">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="15,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="165,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="315,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="465,5" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;20" halign="center" name="key_red" position="15,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget backgroundColor="#266926" font="Regular;20" halign="center" name="key_green" position="165,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget backgroundColor="#8C5900" font="Regular;20" halign="center" name="key_yellow" position="315,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget backgroundColor="#254177" font="Regular;20" halign="center" name="key_blue" position="465,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget name="config" position="15,58" scrollbarMode="showOnDemand" size="871,375"/>
+	</screen>
+	<screen name="VlcServerListScreen" position="50,77" size="900,450" title="VLC Video Player V2.5 - Select a VLC-Server Profile">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="15,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="165,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="315,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="465,5" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;20" halign="center" name="key_red" position="15,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget backgroundColor="#266926" font="Regular;20" halign="center" name="key_green" position="165,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget backgroundColor="#8C5900" font="Regular;20" halign="center" name="key_yellow" position="315,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget backgroundColor="#254177" font="Regular;20" halign="center" name="key_blue" position="465,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget font="Regular;18" name="serverlabel" position="15,65" size="871,36"/>
+		<widget name="serverlist" position="15,122" scrollbarMode="showOnDemand" size="871,310"/>
+	</screen>
+	<screen name="VlcMediaListScreen" position="50,77" size="900,450" title="VLC Video Player V2.5 - Select a VLC-Server Profile">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="15,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="155,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="295,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="435,5" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;20" halign="center" name="key_red" position="15,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget backgroundColor="#266926" font="Regular;20" halign="center" name="key_green" position="155,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget backgroundColor="#8C5900" font="Regular;20" halign="center" name="key_yellow" position="295,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget backgroundColor="#254177" font="Regular;20" halign="center" name="key_blue" position="435,5" size="140,40" transparent="1" valign="center" zPosition="5"/>
+		<widget alphatest="on" name="filelist_button_sel" pixmap="Vali-XD/buttons/key-blue.png" position="595,5" size="140,40" zPosition="1"/>
+		<widget alphatest="on" name="playlist_button_sel" pixmap="Vali-XD/buttons/key-blue.png" position="740,5" size="140,40" zPosition="1"/>
+		<widget backgroundColor="#254177" font="Regular;18" foregroundColor="orange" halign="center" name="filelist_text" position="595,5" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" foregroundColor="orange" halign="center" name="playlist_text" position="740,5" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget name="filelist" position="15,58" scrollbarMode="showOnDemand" size="871,375"/>
+		<widget name="playlist" position="15,58" scrollbarMode="showOnDemand" size="871,375"/>
+	</screen>
+	
+	
+	<!--  ##### MyTube ##### -->
+	<screen backgroundColor="background" flags="wfNoBorder" name="MyTubeSuggestionsListScreen" position="0,140" size="1024,260" zPosition="6">
+			<eLabel backgroundColor="secondBG" position="95,0" size="834,260" zPosition="7"/>
+			<widget position="100,5" render="Listbox" scrollbarMode="showOnDemand" size="824,250" source="suggestionslist" transparent="1" zPosition="8">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 1), size = (610, 24), font=0, flags = RT_HALIGN_LEFT, text = 0),
+							MultiContentEntryText(pos = (620, 1), size = (180, 24), font=1, flags = RT_HALIGN_RIGHT, text = 1),
+						],
+					"fonts": [gFont("Regular", 20),gFont("Regular", 18)],
+					"itemHeight": 25
+					}
+				</convert>
+			</widget>
+	</screen>
+	<screen backgroundColor="background" flags="wfNoBorder" name="MyTubeHistoryScreen" position="0,140" size="1024,260" zPosition="6">
+			<eLabel backgroundColor="secondBG" position="95,0" size="834,260" zPosition="7"/>
+			<widget position="100,5" render="Listbox" scrollbarMode="showOnDemand" size="824,250" source="historylist" transparent="1" zPosition="8">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 1), size = (800, 24), font=0, flags = RT_HALIGN_LEFT, text = 0),
+						],
+					"fonts": [gFont("Regular", 20),gFont("Regular", 18)],
+					"itemHeight": 25
+					}
+				</convert>
+			</widget>
+	</screen>
+	<screen backgroundColor="background" flags="wfNoBorder" name="MyTubePlayer" position="0,433" size="1024,176" title="MoviePlayer">
+		<ePixmap alphatest="off" pixmap="Vali-XD/border/up-shadow.png" position="0,0" size="1024,8" zPosition="0"/>
+		<eLabel backgroundColor="secondBG" position="0,8" size="152,168" zPosition="1"/>
+		<eLabel backgroundColor="secondBG" position="872,8" size="152,169" zPosition="1"/>
+		<eLabel backgroundColor="#0444444a" position="330,24" size="420,4" zPosition="2"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/dvr/dvr.png" position="165,15" size="150,20" transparent="1" zPosition="2"/>
+		<!-- <widget backgroundColor="secondBG" font="Regular;18" foregroundColor="grey" halign="center" position="30,37" render="vRendVideoSize" size="120,20" source="session.CurrentService" transparent="1" zPosition="3"/> -->
+		<widget backgroundColor="secondBG" font="Regular;30" foregroundColor="secondFG" halign="right" position="20,58" render="Label" size="90,32" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;22" foregroundColor="secondFG" halign="left" position="110,60" render="Label" size="42,24" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="ClockToText">Format::%S</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;16" foregroundColor="secondFG" halign="center" position="30,91" render="Label" size="120,22" source="global.CurrentTime" transparent="1" zPosition="3">
+			<convert type="vConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<widget backgroundColor="#0444444a" pointer="Vali-XD/dvr/position_pointer.png:572,0" position="330,19" render="PositionGauge" size="420,12" source="session.CurrentService" transparent="1" zPosition="4">
+			<convert type="ServicePosition">Gauge</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;22" foregroundColor="foreground" halign="center" position="30,12" render="Label" size="120,22" source="session.CurrentService" transparent="1" zPosition="3">
+			<convert type="ServicePosition">Length</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" position="765,12" render="Label" size="117,22" source="session.CurrentService" transparent="1" zPosition="2">
+			<convert type="ServicePosition">Remaining,Negate,ShowHours</convert>
+		</widget>	
+		<widget font="Regular;22" foregroundColor="foreground" halign="center" position="165,50" render="Label" size="692,60" source="session.CurrentService" transparent="1" valign="center" zPosition="2">
+			<convert type="ServiceName">Name</convert>
+		</widget>		
+		<ePixmap alphatest="on" pixmap="Vali-XD/ProfiLine/plugin.png" position="890,35" size="100,40" transparent="1" zPosition="7"/>
+	</screen>
+	<screen flags="wfNoBorder" name="MyTubeSettingsScreen" position="0,0" size="1024,576" title="MyTubePlayerMainScreen...">
+		<ePixmap alphatest="on" pixmap="Vali-XD/ProfiLine/plugin.png" position="50,55" size="100,40" transparent="1" zPosition="1"/>
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="155,55" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="300,55" size="140,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="300,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget font="Regular;20" foregroundColor="foreground" halign="left" name="title" position="450,50" size="497,50" transparent="1" valign="center" zPosition="5"/>
+		<widget name="config" position="50,105" scrollbarMode="showOnDemand" size="924,397" zPosition="2"/>
+	</screen>
+	<screen flags="wfNoBorder" name="MyTubeVideoHelpScreen" position="0,0" size="1024,576" title="MyTubePlayerMainScreen...">
+		<ePixmap alphatest="on" pixmap="Vali-XD/ProfiLine/plugin.png" position="50,55" size="100,40" transparent="1" zPosition="1"/>
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="155,55" size="140,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget font="Regular;20" foregroundColor="foreground" halign="left" name="title" position="320,50" size="597,50" transparent="1" valign="center" zPosition="5"/>
+		<widget font="Regular;22" halign="left" name="detailtext" position="100,125" size="824,377" transparent="1" valign="top" zPosition="10"/>
+	</screen>
+	<screen flags="wfNoBorder" name="MyTubeTasksScreen" position="0,0" size="1024,576" title="MyTubePlayerMainScreen...">
+		<ePixmap alphatest="on" pixmap="Vali-XD/ProfiLine/plugin.png" position="50,55" size="100,40" transparent="1" zPosition="1"/>
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="155,55" size="140,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget font="Regular;20" foregroundColor="foreground" halign="left" name="title" position="320,50" size="597,50" transparent="1" valign="center" zPosition="5"/>
+		<widget position="100,125" render="Listbox" scrollbarMode="showOnDemand" size="824,370" source="tasklist" transparent="1" zPosition="7">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (0, 1), size = (400, 24), font=1, flags = RT_HALIGN_LEFT, text = 1),
+							MultiContentEntryText(pos = (410, 1), size = (150, 24), font=1, flags = RT_HALIGN_RIGHT, text = 2),
+							MultiContentEntryProgress(pos = (570, 1), size = (100, 24), percent = -3),
+							MultiContentEntryText(pos = (680, 1), size = (120, 24), font=1, flags = RT_HALIGN_RIGHT, text = 4),
+						],
+					"fonts": [gFont("Regular", 20),gFont("Regular", 18)],
+					"itemHeight": 25
+					}
+				</convert>
+			</widget>
+	</screen>
+	<screen flags="wfNoBorder" name="MyTubeVideoInfoScreen" position="0,0" size="1024,576" title="MyTubePlayerMainScreen...">
+		<widget alphatest="on" name="thumbnail" position="0,0" size="130,98"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/ProfiLine/plugin.png" position="50,55" size="100,40" transparent="1" zPosition="1"/>
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="155,55" size="140,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,55" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget font="Regular;20" foregroundColor="foreground" halign="left" name="title" position="320,50" size="597,50" transparent="1" valign="center" zPosition="5"/>
+		<widget position="200,110" render="Listbox" scrollbarMode="showNever" selectionDisabled="1" size="620,110" source="infolist" transparent="1" zPosition="6">
+				<convert type="TemplatedMultiContent">
+				{"templates":
+					{"default": (110,[
+							MultiContentEntryPixmapAlphaTest(pos = (0, 4), size = (130, 98), png = 0),
+							MultiContentEntryPixmapAlphaTest(pos = (130, 4), size = (130, 98), png = 1),
+							MultiContentEntryPixmapAlphaTest(pos = (260, 4), size = (130, 98), png = 2),
+							MultiContentEntryPixmapAlphaTest(pos = (390, 4), size = (130, 98), png = 3),
+						]),
+					"state": (110,[
+							MultiContentEntryText(pos = (10, 40), size = (550, 38), font=2, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 0),
+						])
+					},
+					"fonts": [gFont("Regular", 18),gFont("Regular", 14),gFont("Regular", 22)],
+					"itemHeight": 110
+				}
+				</convert>
+			</widget>
+			<widget alphatest="on" name="starsbg" pixmap="Vali-XD/ProfiLine/starsbar_empty.png" position="715,230" size="100,20" transparent="1" zPosition="5"/>
+			<widget name="stars" pixmap="Vali-XD/ProfiLine/starsbar_filled.png" position="715,230" size="100,20" transparent="1" zPosition="6"/>
+			<widget font="Regular;20" halign="left" name="author" position="212,230" size="300,24" transparent="1" valign="top" zPosition="10"/>
+			<widget font="Regular;20" halign="left" name="duration" position="522,230" size="200,24" transparent="1" valign="top" zPosition="10"/>
+			<widget font="Regular;20" halign="left" name="published" position="212,255" size="300,24" transparent="1" valign="top" zPosition="10"/>
+			<widget font="Regular;20" halign="left" name="views" position="522,255" size="200,24" transparent="1" valign="top" zPosition="10"/>
+			<widget font="Regular;20" halign="left" name="tags" position="212,280" size="600,24" transparent="1" valign="top" zPosition="10"/>
+			<widget font="Regular;20" halign="left" name="detailtext" position="212,310" size="610,200" transparent="1" valign="top" zPosition="10"/>
+	</screen>
+	<screen flags="wfNoBorder" name="MyTubePlayerMainScreen" position="0,0" size="1024,576" title="MyTubePlayerMainScreen...">
+		<widget alphatest="on" name="thumbnail" position="0,0" size="130,98"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/ProfiLine/plugin.png" position="50,45" size="100,40" transparent="1" zPosition="1"/>
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="155,45" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="300,45" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="445,45" size="140,40" transparent="1"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="155,45" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="300,45" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="445,45" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<ePixmap alphatest="on" pixmap="skin_default/buttons/key_info.png" position="880,55" size="35,25" transparent="1" zPosition="4"/>
+		<ePixmap alphatest="on" pixmap="skin_default/buttons/key_menu.png" position="920,55" size="35,25" transparent="1" zPosition="4"/>
+		<widget alphatest="on" name="ButtonBlue" pixmap="Vali-XD/buttons/key-blue.png" position="590,45" size="140,40" transparent="1" zPosition="10"/>
+		<widget alphatest="on" name="VKeyIcon" pixmap="skin_default/vkey_icon.png" position="740,40" size="60,48" transparent="1" zPosition="10"/>
+		<widget name="config" position="198,100" scrollbarMode="showNever" size="628,30" transparent="1" zPosition="2"/>
+		<widget position="100,140" render="Listbox" scrollbarMode="showOnDemand" size="824,385" source="feedlist" transparent="1" zPosition="1">
+				<convert type="TemplatedMultiContent">
+				{"templates":
+					{"default": (77,[
+							MultiContentEntryPixmapAlphaTest(pos = (5, 1), size = (100, 75), png = 4),
+							MultiContentEntryText(pos = (110, 1), size = (800, 25), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 1),
+							MultiContentEntryText(pos = (110, 27), size = (380, 20), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 5),
+							MultiContentEntryText(pos = (110, 48), size = (380, 20), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 6),
+							MultiContentEntryText(pos = (500, 27), size = (300, 20), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 7),
+							MultiContentEntryText(pos = (500, 48), size = (300, 20), font=1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 8),
+						]),
+					"state": (77,[
+							MultiContentEntryText(pos = (20, 1), size = (800, 40), font=2, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 0),
+							MultiContentEntryText(pos = (20, 43), size = (800, 30), font=3, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP| RT_WRAP, text = 1),
+						])
+					},
+					"fonts": [gFont("Regular", 20),gFont("Regular", 16),gFont("Regular", 22),gFont("Regular", 18)],
+					"itemHeight": 77
+				}
+				</convert>
+			</widget>
+			<widget alphatest="on" name="HelpWindow" position="534,400" size="1,1" transparent="1" zPosition="1"/>
+	</screen>
+	
+	
+	<!--  ##### Weather ##### -->
+	<screen name="WeatherPlugin" position="center,center" size="800,240" title="Weather Plugin">
+		<widget font="Regular;23" position="10,20" render="Label" size="700,27" source="caption" transparent="1" zPosition="1"/>
+		<widget font="Regular;22" position="10,55" render="Label" size="220,26" source="currentTemp" transparent="1" zPosition="1"/>
+		<widget font="Regular;18" position="10,90" render="Label" size="220,22" source="condition" transparent="1" zPosition="1"/>
+		<widget font="Regular;18" position="10,115" render="Label" size="220,22" source="wind_condition" transparent="1" zPosition="1"/>
+		<widget font="Regular;18" position="10,140" render="Label" size="220,22" source="humidity" transparent="1" valign="bottom" zPosition="1"/>
+		<widget font="Regular;18" halign="center" position="255,60" render="Label" size="72,20" source="weekday1" transparent="1" valign="center" zPosition="1"/>
+		<widget alphatest="blend" name="weekday1_icon" position="255,90" size="72,72" zPosition="1"/>
+		<widget font="Replacement;18" halign="center" position="241,180" render="Label" size="100,20" source="weekday1_temp" transparent="1" valign="bottom" zPosition="1"/>
+		<widget font="Regular;18" halign="center" position="388,60" render="Label" size="72,20" source="weekday2" transparent="1" valign="center" zPosition="1"/>
+		<widget alphatest="blend" name="weekday2_icon" position="388,90" size="72,72" zPosition="1"/>
+		<widget font="Replacement;18" halign="center" position="374,180" render="Label" size="100,20" source="weekday2_temp" transparent="1" valign="bottom" zPosition="1"/>
+		<widget font="Regular;18" halign="center" position="521,60" render="Label" size="72,20" source="weekday3" transparent="1" valign="center" zPosition="1"/>
+		<widget alphatest="blend" name="weekday3_icon" position="521,90" size="72,72" zPosition="1"/>
+		<widget font="Replacement;18" halign="center" position="508,180" render="Label" size="100,20" source="weekday3_temp" transparent="1" valign="bottom" zPosition="1"/>
+		<widget font="Regular;18" halign="center" position="654,60" render="Label" size="72,20" source="weekday4" transparent="1" valign="center" zPosition="1"/>
+		<widget alphatest="blend" name="weekday4_icon" position="654,90" size="72,72" zPosition="1"/>
+		<widget font="Replacement;18" halign="center" position="640,180" render="Label" size="100,20" source="weekday4_temp" transparent="1" valign="bottom" zPosition="1"/>
+		<widget font="Regular;20" halign="center" position="0,0" render="Label" size="800,240" source="statustext" transparent="1" valign="center" zPosition="1"/>
+	</screen>
+	
+	
+	<!--  ##### CDInfo ##### -->
+	<screen name="CDInfo" position="center,center" size="800,440" title="CDInfo">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="5,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="145,5" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="420,5" size="145,40"/>
+		<widget backgroundColor="#9f1313" font="Regular;20" halign="center" position="5,5" render="Label" size="140,40" source="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#1f771f" font="Regular;20" halign="center" position="145,5" render="Label" size="140,40" source="key_green" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#18188b" font="Regular;20" halign="center" position="425,5" render="Label" size="140,40" source="key_blue" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#25062748" font="Regular;18" position="5,54" render="Label" size="790,60" source="info" transparent="1"/>
+		<widget name="config" position="5,120" scrollbarMode="showOnDemand" size="790,200"/>
+		<eLabel backgroundColor="#44444a" position="0,330" size="800,2" zPosition="0"/>
+		<widget backgroundColor="#25062748" font="Regular;18" position="5,343" render="Label" size="790,90" source="info2" transparent="1"/>
+	</screen>
+	
+	
+	<!--  ##### Filemanager ##### -->
+	<screen name="FilebrowserScreen" position="center,77" size="900,450" title="">
+        <widget name="list_left" position="5,53" scrollbarMode="showOnDemand" size="440,392"/>
+        <widget name="list_right" position="450,53" scrollbarMode="showOnDemand" size="445,392"/>
+        <widget font="Regular;18" halign="center" name="red" position="5,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+        <widget font="Regular;18" halign="center" name="green" position="145,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+        <widget font="Regular;18" halign="center" name="yellow" position="285,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+        <widget font="Regular;18" halign="center" name="blue" position="425,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+        <ePixmap alphatest="on" name="pred" pixmap="Vali-XD/buttons/key-red.png" position="5,5" size="140,40" transparent="1" zPosition="0"/>
+        <ePixmap alphatest="on" name="pgreen" pixmap="Vali-XD/buttons/key-green.png" position="145,5" size="140,40" transparent="1" zPosition="0"/>
+        <ePixmap alphatest="on" name="pyellow" pixmap="Vali-XD/buttons/key-yellow.png" position="285,5" size="140,40" transparent="1" zPosition="0"/>
+        <ePixmap alphatest="on" name="pblue" pixmap="Vali-XD/buttons/key-blue.png" position="425,5" size="140,40" transparent="1" zPosition="0"/>
+    </screen>
+	<screen name="FilebrowserConfigScreen" position="center,center" size="700,420" title="">
+        <widget name="config" position="5,5" scrollbarMode="showOnDemand" size="690,360"/>
+        <widget font="Regular;18" halign="center" name="buttonred" position="10,370" size="140,40" transparent="1" valign="center" zPosition="1"/>
+        <widget font="Regular;18" halign="center" name="buttongreen" position="150,370" size="140,40" transparent="1" valign="center" zPosition="1"/>
+        <ePixmap alphatest="on" name="pred" pixmap="Vali-XD/buttons/key-red.png" position="10,370" size="140,40" transparent="1" zPosition="0"/>
+        <ePixmap alphatest="on" name="pgreen" pixmap="Vali-XD/buttons/key-green.png" position="150,370" size="140,40" transparent="1" zPosition="0"/>
+    </screen>
+	
+	
+	<!--  ##### Softwaremanager ##### -->
+	<screen name="UpdatePluginMenu" position="center,77" size="900,450" title="Softwaremanager...">
+		<widget source="menu" render="Listbox" position="5,50" size="440,400" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (15, 5), size = (405, 30), flags = RT_HALIGN_LEFT, text = 1),
+					],
+				"fonts": [gFont("Regular", 20)],
+				"itemHeight": 40
+				}
+			</convert>
+		</widget>
+		<widget source="menu" render="Listbox" position="450,150" size="445,150" zPosition="3" scrollbarMode="showNever" selectionDisabled="1" transparent="1">
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (0, 0), size = (420, 150), flags = RT_HALIGN_CENTER|RT_VALIGN_CENTER|RT_WRAP, text = 2),
+					],
+				"fonts": [gFont("Regular", 20)],
+				"itemHeight": 150
+				}
+			</convert>
+		</widget>
+        <widget font="Regular;18" halign="center" source="key_red" render="Label" position="5,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+        <ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="5,5" size="140,40" transparent="1"/>
+        <ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="145,5" size="140,40" transparent="1"/>
+        <ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="285,5" size="140,40" transparent="1"/>
+        <ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="425,5" size="140,40" transparent="1"/>
+	</screen>
+	<screen name="PacketManager" position="center,77" size="900,420" title="PacketManager">
+		<widget source="list" render="Listbox"  position="10,60" size="880,360" scrollbarMode="showOnDemand" transparent="1" >
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryPixmapAlphaTest(pos = (18, 5), size = (48, 48), png = 4), # index 4 is the status pixmap
+						MultiContentEntryText(pos = (90, 5), size = (690, 26), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (100, 32), size = (690, 22), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
+						MultiContentEntryPixmapAlphaTest(pos = (5, 58), size = (0, 0), png = 5), # index 4 is the div pixmap
+					],
+				"fonts": [gFont("Regular", 21),gFont("Regular", 18)],
+				"itemHeight": 60
+				}
+			</convert>
+		</widget>
+		<widget font="Regular;18" halign="center" source="key_red" render="Label" position="5,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;18" halign="center" source="key_green" render="Label" position="145,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="5,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="145,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="285,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="425,5" size="140,40" transparent="1"/>
+	</screen>
+	<screen name="PluginManager" position="center,77" size="900,450" title="Plugin manager">
+		<widget source="list" render="Listbox"  position="10,50" size="880,375" scrollbarMode="showOnDemand" transparent="1">
+			<convert type="TemplatedMultiContent">
+			{"templates":
+				{"default": (75,[
+						MultiContentEntryPixmapAlphaTest(pos = (18, 12), size = (48, 48), png = 5), # index 5 is the status pixmap
+						MultiContentEntryText(pos = (90, 7), size = (690, 26), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (100, 33), size = (690, 38), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
+					]),
+				"category": (75,[
+						MultiContentEntryText(pos = (15, 7), size = (690, 26), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (15, 33), size = (690, 22), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the description
+					])
+				},
+				"fonts": [gFont("Regular", 21),gFont("Regular", 18)],
+				"itemHeight": 75
+			}
+			</convert>
+		</widget>
+		<widget source="status" render="Label" foregroundColor="secondFG" position="0,565" size="330,50" halign="center" font="Regular;18" transparent="1"/>
+		<widget font="Regular;18" halign="center" source="key_red" render="Label" position="5,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;18" halign="center" source="key_green" render="Label" position="145,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;18" halign="center" source="key_yellow" render="Label" position="285,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;18" halign="center" source="key_blue" render="Label" position="425,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="5,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="145,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="285,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="425,5" size="140,40" transparent="1"/>
+	</screen>
+	<screen name="PluginManagerInfo" position="center,77" size="900,450" title="Plugin manager activity">
+		<widget source="list" render="Listbox" position="10,50" size="880,375" scrollbarMode="showOnDemand" transparent="1">
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryPixmapAlphaTest(pos = (18, 14), size = (48, 48), png = 2), # index 2 is the status pixmap
+						MultiContentEntryText(pos = (90, 5), size = (565, 26), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (90, 33), size = (565, 38), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the state
+					],
+				"fonts": [gFont("Regular", 21),gFont("Regular", 18)],
+				"itemHeight": 75
+				}
+			</convert>
+		</widget>
+		<widget source="status" render="Label" foregroundColor="secondFG" position="0,565" size="330,50" halign="center" font="Regular;18" transparent="1"/>
+		<widget font="Regular;18" halign="center" source="key_red" render="Label" position="5,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;18" halign="center" source="key_green" render="Label" position="145,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="5,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="145,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="285,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="425,5" size="140,40" transparent="1"/>
+	</screen>
+	<screen name="PluginDetails" position="center,77" size="900,450" title="Plugin details">
+		<widget name="divpic" position="0,0" size="0,0"/>
+		<widget name="statuspic" position="70,70" size="48,48" alphatest="on"/>
+		<widget source="author" render="Label" 	position="130,85" size="540,30" font="Regular;21" backgroundColor="background" transparent="1"/>
+		<eLabel position="70,130" size="700,2" backgroundColor="darkgrey"/>
+		<widget name="screenshot" position="70,140" size="320,230" zPosition="10" alphatest="on"/>
+		<widget name="detailtext" position="400,140" size="470,310" font="Regular;20" transparent="1"/>
+		<widget font="Regular;18" halign="center" source="key_red" render="Label" position="5,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<widget font="Regular;18" halign="center" source="key_green" render="Label" position="145,5" size="140,40" transparent="1" valign="center" zPosition="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="5,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="145,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="285,5" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="425,5" size="140,40" transparent="1"/>
+	</screen>
+	<screen name="UpdatePlugin" position="center,center" size="550,300" title="Software update" >
+		<widget name="activityslider" position="0,0" size="550,5"  />
+		<widget name="slider" position="0,150" size="550,30"  />
+		<widget source="package" render="Label" position="10,20" size="540,20" font="Regular;18" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
+		<widget source="status" render="Label" position="10,50" size="540,80" font="Regular;20" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
+	</screen>
+	
+<!-- ########## OLED MINI ########## -->
+  <screen name="StandbySummary" position="0,0" size="96,64" id="2">
+    <widget font="Regular;32" halign="center" position="0,0" render="Label" size="96,32" source="global.CurrentTime" valign="center">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget font="Regular;24" halign="center" position="0,32" render="Label" size="96,32" source="global.CurrentTime" valign="center">
+      <convert type="ClockToText">Format:%a %d</convert>
+    </widget>
+  </screen>
+  <screen name="InfoBarMoviePlayerSummary" position="0,0" size="96,64" id="2">
+    <widget font="Regular;24" halign="center" position="0,0" render="Label" size="96,32" source="session.CurrentService" valign="center">
+      <convert type="ServicePosition">Remaining,ShowHours</convert>
+    </widget>
+    <widget font="Regular;28" halign="center" position="0,32" render="Label" size="96,32" source="global.CurrentTime" valign="center">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+  </screen>
+  <screen name="InfoBarSummary" position="0,0" size="96,64" id="2">
+    <widget font="Regular;18" noWrap="1" position="0,0" render="Label" size="96,32" source="session.CurrentService" valign="center">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget font="Regular;28" halign="center" position="0,32" render="Label" size="96,32" source="global.CurrentTime" valign="center">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <!-- <widget alphatest="off" position="-2,2" render="Picon" size="100,60" source="session.CurrentService" transparent="1" zPosition="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget> -->
+  </screen>
+  <screen name="ChannelSelection_summary" position="0,0" size="96,64" id="2">
+    <widget font="Regular;18" halign="center" position="0,0" render="Label" size="96,64" source="parent.ServiceEvent" valign="center">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+  
+ <!-- ########## EnhancedMovieCenter ########## -->
+	<screen name="EnhancedMovieCenterMenu" position="center,77" size="900,450" title="EnhancedMovieCenterMenu">
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-red.png" position="0,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-green.png" position="140,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-yellow.png" position="280,0" size="140,40"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-blue.png" position="420,0" size="140,40"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;20" halign="center" position="0,0" size="140,40" name="key_red" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="#266926" font="Regular;20" halign="center" position="140,0" size="140,40" name="key_green" transparent="1" valign="center" zPosition="1"/>
+		<widget itemHeight="28" name="config" position="5,63" scrollbarMode="showOnDemand" size="891,364"/>
+	</screen>
+	<screen flags="wfNoBorder" name="EMCSelection" position="0,0" size="1024,576" title="Enhanced Movie Center">
+		<ePixmap alphatest="on" name="red" pixmap="Vali-XD/buttons/key-red.png" position="47,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="green" pixmap="Vali-XD/buttons/key-green.png" position="187,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="yellow" pixmap="Vali-XD/buttons/key-yellow.png" position="327,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" name="blue" pixmap="Vali-XD/buttons/key-blue.png" position="467,52" size="140,40" transparent="1"/>
+		<ePixmap alphatest="on" pixmap="Vali-XD/buttons/key-grey.png" position="607,52" size="370,40" transparent="1"/>
+		<widget font="Regular;16" foregroundColor="secondFG" halign="left" position="620,52" render="Label" size="355,40" source="Title" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#7C1C1C" font="Regular;18" halign="center" name="key_red" position="47,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#266926" font="Regular;18" halign="center" name="key_green" position="187,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#8C5900" font="Regular;18" halign="center" name="key_yellow" position="327,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget backgroundColor="#254177" font="Regular;18" halign="center" name="key_blue" position="467,52" size="140,40" transparent="1" valign="center" zPosition="2"/>
+		<widget CoolFont="Regular;18" CoolDirPos="770" CoolFolderSize="730" CoolMoviePos="30" CoolMovieSize="680" CoolDatePos="720" CoolTimePos="820" name="list" itemHeight="30" position="50,103" scrollbarMode="showOnDemand" size="924,300" backgroundColor="background" transparent="1" />
+		<widget name="wait" position="50,100" size="924,308"/>
+		<widget font="Regular;16" position="60,420" render="Label" size="500,23" source="Service" zPosition="1">
+			<convert type="MovieInfo">ShortDescription</convert>
+		</widget>
+		<widget font="Regular;16" halign="left" position="670,420" render="Label" size="100,23" source="Service" zPosition="1">
+			<convert type="ServiceTime">Duration</convert>
+			<convert type="ClockToText">AsLength</convert>
+		</widget>
+		<widget font="Regular;17" position="60,445" render="Label" size="904,82" source="Service" zPosition="1">
+			<convert type="EventName">ExtendedDescription</convert>
+		</widget>
+		<widget name="FileSize" position="570,420" size="100,23" font="Regular;16" backgroundColor="background" transparent="1" />
+		<eLabel backgroundColor="darkgrey" position="50,415" size="924,2" zPosition="5"/>
+	</screen>
+	
+	
+	
+	
+	
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
