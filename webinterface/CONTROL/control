@@ -3,4 +3,4 @@ Version: 1.6.6
 Description: Control enigma2 with your Browser
 Maintainer: Felix Domke <tmbinc@elitedvb.net>
 Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net/
-Depends: enigma2 (>> 2.6git20090614), python-twisted-web, python-pyopenssl, python-crypt, python-misc
+Depends: enigma2, python-twisted-web, python-pyopenssl, python-crypt, python-unixadmin, aio-grab
