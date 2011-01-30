@@ -605,7 +605,7 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 					append(':'.join(comp[3:]))
 
 			serviceHandler = eServiceCenter.getInstance()
-			for bouquet in bouquets + addbouquets:
+			for bouquet in self.bouquets + addbouquets:
 				myref = eServiceReference(str(bouquet))
 				mylist = serviceHandler.list(myref)
 				if mylist is not None:
