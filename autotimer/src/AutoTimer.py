@@ -154,12 +154,13 @@ class AutoTimer:
 	def parseEPG(self, simulateOnly = False):
 		if NavigationInstance.instance is None:
 			print "[AutoTimer] Navigation is not available, can't parse EPG"
-			return (0, 0, 0, [])
+			return (0, 0, 0, [], [])
 
 		total = 0
 		new = 0
 		modified = 0
 		timers = []
+		conflicting = []
 
 		self.readXml()
 
@@ -330,10 +331,13 @@ class AutoTimer:
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
+						conflicting.append((name, begin, end, serviceref, timer.name))
 					if conflicts is None:
 						timer.decrementCounter()
 						new += 1
 						recorddict.setdefault(serviceref, []).append(newEntry)
+					else:
+						conflicting.append((name, begin, end, serviceref, timer.name))
 
-		return (total, new, modified, timers)
+		return (total, new, modified, timers, conflicting)
 
