@@ -332,7 +332,8 @@ class Merlin_PGII(Screen):
 						"7": self.findPrvBqt,
 						"9": self.findNextBqt,
 						"showMovies": self.editCurTimer,
-						"showTv": self.fullEPGlist
+						"showTv": self.fullEPGlist,
+						"showRadio": self.runEpgSeartch
 						},-2)
 		self.onLayoutFinish.append(self.onLayoutReady)
 
@@ -665,6 +666,15 @@ class Merlin_PGII(Screen):
 		else:
 			self.session.open(MessageBox, text = _('EPGsearch is not installed!'), type = MessageBox.TYPE_ERROR)
 
+	def runEpgSeartch(self):
+		if epgSpresent:
+			cur = self["epg_list"+str(self.ActiveEPG)].getCurrent()
+			epg_event = cur[0]
+			epg_name = epg_event and epg_event.getEventName() or ''
+			self.session.open(EPGSearch, epg_name, False)
+		else:
+			self.session.open(MessageBox, text = _('EPGsearch is not installed!'), type = MessageBox.TYPE_ERROR)
+
 
 
 class Merlin_PGd(Screen):
@@ -759,7 +769,8 @@ class Merlin_PGd(Screen):
 									"down": self.down,
 									"downRepeated": self.down,
 									"showMovies": self.editCurTimer,
-									"showTv": self.fullEPGlist
+									"showTv": self.fullEPGlist,
+									"showRadio": self.runEpgSeartch
 									},-2)
 		self.onLayoutFinish.append(self.onLayoutReady)
 
@@ -941,6 +952,15 @@ class Merlin_PGd(Screen):
 	def fullEPGlist(self):
 		if epgSpresent:
 			self.session.open(myEPGSearch)
+		else:
+			self.session.open(MessageBox, text = _('EPGsearch is not installed!'), type = MessageBox.TYPE_ERROR)
+
+	def runEpgSeartch(self):
+		if epgSpresent:
+			cur = self["epg_list"].getCurrent()
+			epg_event = cur[0]
+			epg_name = epg_event and epg_event.getEventName() or ''
+			self.session.open(EPGSearch, epg_name, False)
 		else:
 			self.session.open(MessageBox, text = _('EPGsearch is not installed!'), type = MessageBox.TYPE_ERROR)
 
