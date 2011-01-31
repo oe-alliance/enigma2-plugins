@@ -27,7 +27,7 @@ def addHost(name):
 	s.enable_outgoing = ConfigYesNo(default=False)
 	s.address = ConfigText(fixed_size=False)
 	s.password = ConfigPassword()
-	s.protocol = ConfigSelection(default="growl", choices=[("growl", "Growl"), ("snarl", "Snarl"), ("prowl", "Prowl")])
+	s.protocol = ConfigSelection(default="growl", choices=[("growl", "Growl"), ("snarl", "Snarl"), ("prowl", "Prowl"), ("syslog", "Syslog UDP")])
 	s.level = ConfigSelection(default="-1", choices=[("-1", _("Low (Yes/No)")), ("0", _("Normal (Information)")), ("1", _("High (Warning)")), ("2", _("Highest (Emergency)"))])
 	s.blacklist = ConfigSet(choices=[])
 	config.plugins.growlee.hosts.append(s)

@@ -7,6 +7,10 @@ from twisted.internet import reactor
 from . import NOTIFICATIONID
 
 def emergencyDisable(*args, **kwargs):
+	if args:
+		try: args[0].printTraceback()
+		except Exception: pass
+
 	global growleeConnection
 	if growleeConnection:
 		growleeConnection.stop()
@@ -67,9 +71,12 @@ class GrowleeConnection:
 			elif proto == "growl":
 				from GrowlTalk import GrowlTalkAbstraction
 				connection = GrowlTalkAbstraction(host)
-			else: # proto == "snarl":
+			elif proto == "snarl":
 				from SNP import SnarlNetworkProtocolAbstraction
 				connection = SnarlNetworkProtocolAbstraction(host)
+			else: # proto == "syslog":
+				from Syslog import SyslogAbstraction
+				connection = SyslogAbstraction(host)
 
 			self.connections.append((connection, host))
 
