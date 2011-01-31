@@ -60,6 +60,9 @@ class SyslogNetworkProtocol(DatagramProtocol):
 		value = strftime("%b %%s %H:%M:%S", ltime)
 		timestamp = value % (day,)
 		payload = "<%d>%s %s growlee: (%s) %s" % (FACILITY['local0'] * 8 + SEVERITYMAP[priority], timestamp, uname()[1], title, description.replace('\n', ' '),)
+		# TODO: better way to stay within the 1024 char-limit (e.g. ignore title, multiple packets, ...)
+		#if len(payload) > 1024:
+		#	payload = payload[:1024]
 		self.transport.write(payload, self.addr)
 
 	def datagramReceived(self, data, addr):
@@ -67,8 +70,10 @@ class SyslogNetworkProtocol(DatagramProtocol):
 			return
 
 		Len = len(data)
-		if Len > 1024: # invalid according to rfc
-			return
+		# NOTE: since we're capable of handling longer messages, lets just do so
+		# even if they do not comply to the protocol
+		#if Len > 1024: # invalid according to rfc
+		#	return
 
 		# read prio field
 		prio, data = data.split('>', 1)
@@ -80,14 +85,14 @@ class SyslogNetworkProtocol(DatagramProtocol):
 		# parse remaining header
 		try:
 			# try to parse timestamp to determine validity
-			timestamp = strptime(payload[:15], '%b %d %H:%M:%S')
+			timestamp = strptime(data[:15], '%b %d %H:%M:%S')
 		except ValueError:
-			message = payload
+			message = data
 		else:
-			hostname, payload = payload[16:].split(' ', 1)
+			hostname, body = data[16:].split(' ', 1)
 			# NOTE: we could re-process timestamp to get a customized display format,
 			# but lets just keep this for now
-			message = hostname + '@' + payload[:15] + ':' + payload
+			message = hostname + ' @ ' + data[:15] + ': ' + body
 
 		Notifications.AddNotificationWithID(
 			NOTIFICATIONID,
