@@ -54,7 +54,7 @@ if growlee.hostcount.value == 0:
 	if growlee.protocol.value == "prowl":
 		password = growlee.prowl_api_key.value
 
-	s = addHost('1')
+	s = addHost(_("Converted connection"))
 	s.enable_incoming.value = growlee.enable_incoming.value
 	s.enable_outgoing.value = growlee.enable_outgoing.value
 	s.address.value = growlee.address.value
