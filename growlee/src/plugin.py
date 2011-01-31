@@ -20,9 +20,9 @@ config.plugins.growlee = growlee
 growlee.hostcount = ConfigNumber(default=0)
 growlee.hosts = ConfigSubList()
 
-def addHost(idx):
+def addHost(name):
 	s = ConfigSubsection()
-	s.name = ConfigText(default=str(idx+1), fixed_size=False)
+	s.name = ConfigText(default=name, fixed_size=False)
 	s.enable_incoming = ConfigYesNo(default=False)
 	s.enable_outgoing = ConfigYesNo(default=False)
 	s.address = ConfigText(fixed_size=False)
@@ -35,7 +35,7 @@ def addHost(idx):
 
 i = 0
 while i < growlee.hostcount.value:
-	addHost(i)
+	addHost(str(i+1))
 	i += 1
 
 # XXX: change to new config format
@@ -54,7 +54,7 @@ if growlee.hostcount.value == 0:
 	if growlee.protocol.value == "prowl":
 		password = growlee.prowl_api_key.value
 
-	s = addHost(0)
+	s = addHost('1')
 	s.enable_incoming.value = growlee.enable_incoming.value
 	s.enable_outgoing.value = growlee.enable_outgoing.value
 	s.address.value = growlee.address.value
@@ -79,25 +79,40 @@ if growlee.hostcount.value == 0:
 del i, growlee
 
 class GrowleeConfiguration(Screen, ConfigListScreen):
+	skin = """
+		<screen name="RSSSetup" position="center,center" size="560,400" title="Simple RSS Reader Setup" >
+			<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="config" position="5,45" size="550,350" scrollbarMode="showOnDemand" />
+		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = [ "GrowleeConfiguration", "Setup" ]
 
 		# Buttons
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
+		self["key_yellow"] = StaticText(_("New"))
+		self["key_blue"] = StaticText(_("Delete"))
 
 		# Summary
 		self.setup_title = "Growlee Configuration"
 		self.onChangedEntry = []
 
 		# Define Actions
-		self["actions"] = ActionMap(["SetupActions"],
-			{
-				"cancel": self.keyCancel,
-				"save": self.keySave,
-			}
-		)
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+		{
+			"blue": self.delete,
+			"yellow": self.new,
+			"cancel": self.keyCancel,
+			"save": self.keySave,
+		})
 
 		self.hostElement = NoSave(ConfigSelection(choices=[(x, x.name.value) for x in config.plugins.growlee.hosts]))
 		self.hostElement.addNotifier(self.setupList, initial_call=False)
@@ -112,6 +127,28 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 		# Trigger change
 		self.setupList()
 		self.changed()
+
+	def delete(self):
+		from Screens.MessageBox import MessageBox
+
+		self.session.openWithCallback(
+			self.deleteConfirm,
+			MessageBox,
+			_("Really delete this entry?\nIt cannot be recovered!")
+		)
+
+	def deleteConfirm(self, result):
+		if result and config.plugins.growlee.hostcount.value > 0:
+			config.plugins.growlee.hostcount.value -= 1
+			config.plugins.growlee.hosts.remove(self.cur)
+			self.hostElement.setChoices([(x, x.name.value) for x in config.plugins.growlee.hosts])
+			self.cur = self.hostElement.value
+
+	def new(self):
+		self.cur = addHost(_("New connection"))
+		config.plugins.growlee.hostcount.value += 1
+		self.hostElement.setChoices([(x, x.name.value) for x in config.plugins.growlee.hosts])
+		self.hostElement.setValue(self.cur)
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -159,7 +196,12 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 	def createSummary(self):
 		return SetupSummary
 
+	def cancelConfirm(self):
+		ConfigListScreen.cancelConfirm(self)
+		config.plugins.growlee.cancel()
+
 	def keySave(self):
+		config.plugins.growlee.save()
 		if self["config"].isChanged():
 			def doConnect(*args, **kwargs):
 				growleeConnection.listen()
