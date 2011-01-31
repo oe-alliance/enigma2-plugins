@@ -3,19 +3,21 @@ from twisted.internet.defer import Deferred
 from twisted.internet import reactor
 from urllib import urlencode
 
-from Components.config import config
-
 from GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID
 
 class ProwlAPI:
+	def __init__(self, host):
+		self.enable_outgoing = host.enable_outgoing.value
+		self.api_key = host.password.value
+
 	def sendNotification(self, title='No title.', description='No message.', priority=0, timeout=-1):
-		if not config.plugins.growlee.enable_outgoing.value:
+		if not self.enable_outgoing:
 			return
 
 		headers = {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
 		data = {
-			'apikey': config.plugins.growlee.prowl_api_key.value,
+			'apikey': self.api_key,
 			'application': "growlee",
 			'event': title,
 			'description': description,

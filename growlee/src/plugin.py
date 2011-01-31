@@ -7,7 +7,7 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry, ConfigSubsection, \
 		ConfigText, ConfigPassword, ConfigYesNo, ConfigSelection, ConfigSet, \
-		ConfigSubList, NoSave
+		ConfigSubList, ConfigNumber, NoSave
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 
@@ -20,10 +20,9 @@ config.plugins.growlee = growlee
 growlee.hostcount = ConfigNumber(default=0)
 growlee.hosts = ConfigSubList()
 
-i = 0
-while i < growlee.hostcount.value:
+def addHost(idx):
 	s = ConfigSubsection()
-	s.name = ConfigText(default=str(i+1), fixed_size=False)
+	s.name = ConfigText(default=str(idx+1), fixed_size=False)
 	s.enable_incoming = ConfigYesNo(default=False)
 	s.enable_outgoing = ConfigYesNo(default=False)
 	s.address = ConfigText(fixed_size=False)
@@ -31,13 +30,19 @@ while i < growlee.hostcount.value:
 	s.protocol = ConfigSelection(default="growl", choices=[("growl", "Growl"), ("snarl", "Snarl"), ("prowl", "Prowl")])
 	s.level = ConfigSelection(default="-1", choices=[("-1", _("Low (Yes/No)")), ("0", _("Normal (Information)")), ("1", _("High (Warning)")), ("2", _("Highest (Emergency)"))])
 	s.blacklist = ConfigSet(choices=[])
-	growlee.hosts.append(s)
+	config.plugins.growlee.hosts.append(s)
+	return s
+
+i = 0
+while i < growlee.hostcount.value:
+	addHost(i)
 	i += 1
-	del s
 
 # XXX: change to new config format
-growlee.enable_outgoing = ConfigYesNo(default=False)
-if growlee.hostcount.value == 0 and growlee.enable_outgoing.value:
+# NOTE: after some time, remove this and hardcode default length to 1
+# since internally we assume to have at least 1 host configured
+if growlee.hostcount.value == 0:
+	growlee.enable_outgoing = ConfigYesNo(default=False)
 	growlee.enable_incoming = ConfigYesNo(default=False)
 	growlee.address = ConfigText(fixed_size=False)
 	growlee.password = ConfigPassword()
@@ -49,16 +54,7 @@ if growlee.hostcount.value == 0 and growlee.enable_outgoing.value:
 	if growlee.protocol.value == "prowl":
 		password = growlee.prowl_api_key.value
 
-	s = ConfigSubsection()
-	s.name = ConfigText(default="1", fixed_size=False)
-	s.enable_incoming = ConfigYesNo(default=False)
-	s.enable_outgoing = ConfigYesNo(default=False)
-	s.address = ConfigText(fixed_size=False)
-	s.password = ConfigPassword()
-	s.protocol = ConfigSelection(default="growl", choices=[("growl", "Growl"), ("snarl", "Snarl"), ("prowl", "Prowl")])
-	s.level = ConfigSelection(default="-1", choices=[("-1", _("Low (Yes/No)")), ("0", _("Normal (Information)")), ("1", _("High (Warning)")), ("2", _("Highest (Emergency)"))])
-	s.blacklist = ConfigSet(choices=[])
-
+	s = addHost(0)
 	s.enable_incoming.value = growlee.enable_incoming.value
 	s.enable_outgoing.value = growlee.enable_outgoing.value
 	s.address.value = growlee.address.value
@@ -77,8 +73,6 @@ if growlee.hostcount.value == 0 and growlee.enable_outgoing.value:
 	growlee.blacklist.value = []
 
 	growlee.hostcount.value += 1
-	growlee.hosts.append(s)
-
 	growlee.save()
 	del s
 
@@ -113,6 +107,7 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 			session=session,
 			on_change=self.changed
 		)
+		self.cur = self.hostElement.value
 
 		# Trigger change
 		self.setupList()
@@ -127,6 +122,7 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 		if self.setupList in last.protocol.notifiers:
 			last.protocol.notifiers.remove(self.setupList)
 		cur = self.hostElement.value
+		self.cur = cur
 		cur.protocol.notifiers.append(self.setupList)
 
 		l = [
@@ -165,13 +161,12 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 
 	def keySave(self):
 		if self["config"].isChanged():
-			def maybeConnect(*args, **kwargs):
-				if config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
-					growleeConnection.listen()
+			def doConnect(*args, **kwargs):
+				growleeConnection.listen()
 
 			d = growleeConnection.stop()
 			if d is not None:
-				d.addCallback(maybeConnect).addErrback(emergencyDisable)
+				d.addCallback(doConnect).addErrback(emergencyDisable)
 			else:
 				maybeConnect()
 
@@ -179,7 +174,8 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 		self.close()
 
 	def close(self):
-		config.plugins.growlee.protocol.notifiers.remove(self.setupList)
+		if self.setupList in self.cur.protocol.notifiers:
+			self.cur.protocol.notifiers.remove(self.setupList)
 		Screen.close(self)
 
 def configuration(session, **kwargs):
@@ -190,8 +186,7 @@ def autostart(**kwargs):
 	# may remove the notifications from the list for good
 	Notifications.notificationAdded.insert(0, gotNotification)
 
-	if config.plugins.growlee.enable_incoming.value or config.plugins.growlee.enable_outgoing.value:
-		growleeConnection.listen()
+	growleeConnection.listen()
 
 def Plugins(**kwargs):
 	return [
