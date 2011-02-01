@@ -4,10 +4,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - AutoTimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 18:25+0100\n"
-"PO-Revision-Date: 2011-01-22 18:38+0100\n"
+"POT-Creation-Date: 2011-02-01 10:04+0100\n"
+"PO-Revision-Date: 2011-02-01 10:05+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
-"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.yeam <spaeleus@croci.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,425 +16,439 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/autotimer\n"
-"X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/autotimer\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-SearchPath-0: \n"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:44
+#: .../src/AutoPoller.py:48
+#, python-format
+msgid ""
+"%d conflict(s) encountered when trying to add new timers:\n"
+"%s"
+msgstr ""
+"Il tentativo di aggiungere nuovi timer ha generato %d conflitti.\n"
+"%s"
+
+#: .../src/AutoPoller.py:48
+#, python-format
+msgid "%s: %s at %s"
+msgstr "%s: %s alle %s"
+
+#: .../src/AutoTimerEditor.py:44
 msgid "Monday"
 msgstr "Lunedì"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:45
+#: .../src/AutoTimerEditor.py:45
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:46
+#: .../src/AutoTimerEditor.py:46
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:47
+#: .../src/AutoTimerEditor.py:47
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:48
+#: .../src/AutoTimerEditor.py:48
 msgid "Friday"
 msgstr "Venerdì"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:49
+#: .../src/AutoTimerEditor.py:49
 msgid "Saturday"
 msgstr "Sabato"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:50
+#: .../src/AutoTimerEditor.py:50
 msgid "Sunday"
 msgstr "Domenica"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:51
+#: .../src/AutoTimerEditor.py:51
 msgid "Weekend"
 msgstr "Weekend"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:52
+#: .../src/AutoTimerEditor.py:52
 msgid "Weekday"
 msgstr "Giorno feriale"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:85
+#: .../src/AutoTimerEditor.py:85
 msgid "Channel Selection"
 msgstr "Selezione canale"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:180
+#: .../src/AutoTimerEditor.py:180
 msgid "partial match"
 msgstr "Corrispondenza parziale"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:180
+#: .../src/AutoTimerEditor.py:180
 msgid "exact match"
 msgstr "Corrispondenza esatta"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:181
+#: .../src/AutoTimerEditor.py:181
 msgid "case-sensitive search"
 msgstr "Distinguere Maiusc. - minusc."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:181
+#: .../src/AutoTimerEditor.py:181
 msgid "case-insensitive search"
 msgstr "Non distinguere Maiusc. - minusc."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:187
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:182
+#: .../src/AutoTimerEditor.py:187
+#: .../src/AutoTimerImporter.py:182
 msgid "zap"
 msgstr "Zap"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:187
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:182
+#: .../src/AutoTimerEditor.py:187
+#: .../src/AutoTimerImporter.py:182
 msgid "record"
 msgstr "Registrazione"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:238
+#: .../src/AutoTimerEditor.py:238
 msgid "standard"
 msgstr "Azione predefinita"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:238
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:26
+#: .../src/AutoTimerEditor.py:238
+#: .../src/AutoTimerImporter.py:26
 msgid "do nothing"
 msgstr "Non fare nulla"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:239
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:28
+#: .../src/AutoTimerEditor.py:239
+#: .../src/AutoTimerImporter.py:28
 msgid "go to standby"
 msgstr "Standby"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:240
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:27
+#: .../src/AutoTimerEditor.py:240
+#: .../src/AutoTimerImporter.py:27
 msgid "go to deep standby"
 msgstr "Spegnere (Deep Standby)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:241
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:29
+#: .../src/AutoTimerEditor.py:241
+#: .../src/AutoTimerImporter.py:29
 msgid "auto"
 msgstr "Auto"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:285
+#: .../src/AutoTimerEditor.py:285
 msgid "Never"
 msgstr "Mai"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:285
+#: .../src/AutoTimerEditor.py:285
 msgid "Monthly"
 msgstr "Mensile"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:285
+#: .../src/AutoTimerEditor.py:285
 msgid "Weekly (Sunday)"
 msgstr "Settimanale (Domenica)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:285
+#: .../src/AutoTimerEditor.py:285
 msgid "Weekly (Monday)"
 msgstr "Settimanale (Lunedì)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:287
+#: .../src/AutoTimerEditor.py:287
 #, python-format
 msgid "Custom (%s)"
 msgstr "Personalizzata (%s)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:292
+#: .../src/AutoTimerEditor.py:292
 msgid "No"
 msgstr "No"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:293
+#: .../src/AutoTimerEditor.py:293
 msgid "On same service"
 msgstr "Sullo stesso canale"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:294
+#: .../src/AutoTimerEditor.py:294
 msgid "On any service"
 msgstr "Su tutti i canali"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:316
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:339
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:20
+#: .../src/AutoTimerEditor.py:316
+#: .../src/AutoTimerEditor.py:339
+#: .../src/plugin.py:20
 msgid "None"
 msgstr "Nessuna"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:331
+#: .../src/AutoTimerEditor.py:331
 msgid "Choose target folder"
 msgstr "Scegliere cartella destinazione"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:373
+#: .../src/AutoTimerEditor.py:373
 msgid "AutoTimer Editor"
 msgstr "Editor AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:393
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:811
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1014
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:44
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:118
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerPreview.py:59
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:64
+#: .../src/AutoTimerEditor.py:393
+#: .../src/AutoTimerEditor.py:811
+#: .../src/AutoTimerEditor.py:1014
+#: .../src/AutoTimerImporter.py:44
+#: .../src/AutoTimerImporter.py:118
+#: .../src/AutoTimerPreview.py:59
+#: .../src/AutoTimerSettings.py:65
 msgid "Cancel"
 msgstr "Annullare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:394
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1015
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:45
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:119
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:63
+#: .../src/AutoTimerEditor.py:394
+#: .../src/AutoTimerEditor.py:1015
+#: .../src/AutoTimerImporter.py:45
+#: .../src/AutoTimerImporter.py:119
+#: .../src/AutoTimerSettings.py:64
 msgid "OK"
 msgstr "Ok"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:421
+#: .../src/AutoTimerEditor.py:421
 msgid "Edit AutoTimer"
 msgstr "Modifica AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:425
+#: .../src/AutoTimerEditor.py:425
 msgid "edit filters"
 msgstr "Mod. Filtri"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:427
+#: .../src/AutoTimerEditor.py:427
 msgid "add filters"
 msgstr "Agg. Filtri"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:431
+#: .../src/AutoTimerEditor.py:431
 msgid "edit services"
 msgstr "Mod. Canali"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:433
+#: .../src/AutoTimerEditor.py:433
 msgid "add services"
 msgstr "Agg. Canali"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:458
+#: .../src/AutoTimerEditor.py:458
 msgid "Set this NO to disable this AutoTimer."
 msgstr "Selezionare No per disabilitare AutoTimer."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:459
+#: .../src/AutoTimerEditor.py:459
 msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
 msgstr "E' possibile assegnare un nome all'AutoTimer. Sarà mostrato in Panoramica e Anteprima."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:460
+#: .../src/AutoTimerEditor.py:460
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Termini usati nella ricerca nei titoli. Attenzione: caratteri speciali (es. la umlaut tedesca) richiedono di conoscere la codifica caratteri utilizzata dal canale."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:461
+#: .../src/AutoTimerEditor.py:461
 msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
 msgstr "Codifica caratteri utilizzata dal canale per i dati EPG. Potrebbe essere necessario modificarla solo per caratteri speciali (es: umlaut tedesca)."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:462
+#: .../src/AutoTimerEditor.py:462
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly or \"partial match\" if you only want to search for a part of the event title."
 msgstr "Selezionare \"Corrispondenza esatta\" per un confronto letterale, \"Corrispondenza parziale\" per un confronto anche solo parziale del titolo."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:463
+#: .../src/AutoTimerEditor.py:463
 msgid "Select whether or not you want to enforce case correctness."
 msgstr "Scegliere se il confronto debba o meno considerare maiuscole/minuscole."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:464
+#: .../src/AutoTimerEditor.py:464
 msgid "Add zap timer instead of record timer?"
 msgstr "Aggiungere un timer \"zap\" invece di un timer registrazione?"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:465
+#: .../src/AutoTimerEditor.py:465
 msgid "With this option enabled the channel to record on can be changed to a alternative service it is restricted to."
 msgstr "Abilitando questa opzione verrà limitato l'uso di un canale di registrazione alternativo predefinito per il canale prescelto."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:466
+#: .../src/AutoTimerEditor.py:466
 msgid "Should this AutoTimer be restricted to a timespan?"
 msgstr "Scegliere se l'AutoTimer selezionato debba essere circoscritto a un intervallo."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:467
+#: .../src/AutoTimerEditor.py:467
 msgid "Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"
 msgstr "Limite inferiore intervallo. Niente dopo questo limite verrà confrontato. I margini registrazione non saranno considerati!"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:468
+#: .../src/AutoTimerEditor.py:468
 msgid "Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"
 msgstr "Limite superiore intervallo. Niente dopo questo limite verrà confrontato. I margini registrazione non saranno considerati!"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:469
+#: .../src/AutoTimerEditor.py:469
 msgid "Change default recording offset?"
 msgstr "Cambiare i margini registrazione predefiniti?"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:470
+#: .../src/AutoTimerEditor.py:470
 msgid "Time in minutes to prepend to recording."
 msgstr "Margine (in minuti) di anticipo da applicare a inizio registrazione."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:471
+#: .../src/AutoTimerEditor.py:471
 msgid "Time in minutes to append to recording."
 msgstr "Margine (in minuti) da applicare a fine registrazione."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:472
+#: .../src/AutoTimerEditor.py:472
 msgid "Should this AutoTimer only match up to a certain event duration?"
 msgstr "Scegliere se l'AutoTimer selezionato debba essere circoscritto a una durata evento specifica."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:473
+#: .../src/AutoTimerEditor.py:473
 msgid "Maximum event duration to match. If an event is longer than this ammount of time (without offset) it won't be matched."
 msgstr "Durata massima di un evento da confrontare. Se la durata di un evento è superiore a quanto indicato (margini esclusi) non sarà confrontato."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:474
+#: .../src/AutoTimerEditor.py:474
 msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
 msgstr "Stato del decoder al termine di una registrazione. \"Standard\" equivale all'opzione prevista nella configurazione di enigma2."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:475
+#: .../src/AutoTimerEditor.py:475
 msgid "Restrict \"after event\" to a certain timespan?"
 msgstr "Restringere \"dopo l'evento\" a un preciso intervallo?"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:476
+#: .../src/AutoTimerEditor.py:476
 msgid "Lower bound of timespan."
 msgstr "Limite inferiore intervallo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:477
+#: .../src/AutoTimerEditor.py:477
 msgid "Upper bound of timespan."
 msgstr "Limite superiore intervallo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:478
+#: .../src/AutoTimerEditor.py:478
 msgid "With this option you can restrict the AutoTimer to a certain ammount of scheduled recordings. Set this to 0 to disable this functionality."
 msgstr "Tramite questa opzione è possibile restringere AutoTimer ad un certo numero di registrazioni programmate. 0 -> disabilitare la funzione."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:479
+#: .../src/AutoTimerEditor.py:479
 msgid "Number of scheduled recordings left."
 msgstr "Registrazioni programmate residue"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:480
+#: .../src/AutoTimerEditor.py:480
 msgid "The counter can automatically be reset to the limit at certain intervals."
 msgstr "Il contatore può essere automaticamente resettato a intervalli prefissati."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:481
+#: .../src/AutoTimerEditor.py:481
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
 msgstr "Abilitando questa funzione AutoTimer non confronterà eventi per cui esiste già un timer con la medesima descrizione."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:482
+#: .../src/AutoTimerEditor.py:482
 msgid "Should timers created by this AutoTimer be recorded to a custom location?"
 msgstr "Scegliere se il timer creato con AutoTimer debba essere registrato in una destinazione specifica."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:483
+#: .../src/AutoTimerEditor.py:483
 msgid "Select the location to save the recording to."
 msgstr "Selezionare la destinazione della registrazione."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:484
+#: .../src/AutoTimerEditor.py:484
 msgid "Tags the Timer/Recording will have."
 msgstr "Etichette da assegnare al timer o alla registrazione."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:492
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:128
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerWizard.py:85
+#: .../src/AutoTimerEditor.py:492
+#: .../src/AutoTimerImporter.py:128
+#: .../src/AutoTimerWizard.py:85
 msgid "Enabled"
 msgstr "Abilitato"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:493
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerWizard.py:86
+#: .../src/AutoTimerEditor.py:493
+#: .../src/AutoTimerWizard.py:86
 msgid "Description"
 msgstr "Descrizione"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:494
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerWizard.py:87
+#: .../src/AutoTimerEditor.py:494
+#: .../src/AutoTimerWizard.py:87
 msgid "Match title"
 msgstr "Stringa di confronto"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:498
+#: .../src/AutoTimerEditor.py:498
 msgid "EPG encoding"
 msgstr "Codifica EPG"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:499
+#: .../src/AutoTimerEditor.py:499
 msgid "Search type"
 msgstr "Tipo ricerca"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:500
+#: .../src/AutoTimerEditor.py:500
 msgid "Search strictness"
 msgstr "Rigore ricerca"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:501
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:182
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerWizard.py:88
+#: .../src/AutoTimerEditor.py:501
+#: .../src/AutoTimerImporter.py:182
+#: .../src/AutoTimerWizard.py:88
 msgid "Timer type"
 msgstr "Tipo timer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:502
+#: .../src/AutoTimerEditor.py:502
 msgid "Override found with alternative service"
 msgstr "Sovrascrivere le corrispondenze trovate su canale alternativo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:503
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerWizard.py:72
+#: .../src/AutoTimerEditor.py:503
+#: .../src/AutoTimerWizard.py:72
 msgid "Only match during timespan"
 msgstr "Confrontare solo nell'intervallo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:509
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerWizard.py:78
+#: .../src/AutoTimerEditor.py:509
+#: .../src/AutoTimerWizard.py:78
 msgid "Begin of timespan"
 msgstr "Inizio intervallo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:510
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerWizard.py:79
+#: .../src/AutoTimerEditor.py:510
+#: .../src/AutoTimerWizard.py:79
 msgid "End of timespan"
 msgstr "Fine intervallo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:513
+#: .../src/AutoTimerEditor.py:513
 msgid "Custom offset"
 msgstr "Margine personalizzato"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:518
+#: .../src/AutoTimerEditor.py:518
 msgid "Offset before recording (in m)"
 msgstr "Margine inizio registrazione (min.)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:519
+#: .../src/AutoTimerEditor.py:519
 msgid "Offset after recording (in m)"
 msgstr "Margine fine registrazione (min.)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:522
+#: .../src/AutoTimerEditor.py:522
 msgid "Set maximum duration"
 msgstr "Configurazione durata massima"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:526
+#: .../src/AutoTimerEditor.py:526
 msgid "Maximum duration (in m)"
 msgstr "Durata massima (min.)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:528
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:173
+#: .../src/AutoTimerEditor.py:528
+#: .../src/AutoTimerImporter.py:173
 msgid "After event"
 msgstr "Dopo l'evento"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:532
+#: .../src/AutoTimerEditor.py:532
 msgid "Execute \"after event\" during timespan"
 msgstr "Eseguire \"dopo l'evento\" durante l'intervallo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:537
+#: .../src/AutoTimerEditor.py:537
 msgid "Begin of \"after event\" timespan"
 msgstr "Inizio Intervallo \"dopo l'evento\""
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:538
+#: .../src/AutoTimerEditor.py:538
 msgid "End of \"after event\" timespan"
 msgstr "Fine Intervallo \"dopo l'evento\""
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:541
+#: .../src/AutoTimerEditor.py:541
 msgid "Record a maximum of x times"
 msgstr "Registrare per un massimo di \"x\" volte"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:546
+#: .../src/AutoTimerEditor.py:546
 msgid "Ammount of recordings left"
 msgstr "Registrazioni residue"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:547
+#: .../src/AutoTimerEditor.py:547
 msgid "Reset count"
 msgstr "Azzerare conteggio"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:549
+#: .../src/AutoTimerEditor.py:549
 msgid "Require description to be unique"
 msgstr "Richiesta descrizione univoca"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:552
+#: .../src/AutoTimerEditor.py:552
 msgid "Use a custom location"
 msgstr "Usare destinazione personalizzata"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:554
+#: .../src/AutoTimerEditor.py:554
 msgid "Custom location"
 msgstr "Destinazione personalizzata"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:556
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:200
+#: .../src/AutoTimerEditor.py:556
+#: .../src/AutoTimerImporter.py:200
 msgid "Tags"
 msgstr "Etich."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:627
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:957
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1127
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:226
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:194
+#: .../src/AutoTimerEditor.py:627
+#: .../src/AutoTimerEditor.py:957
+#: .../src/AutoTimerEditor.py:1127
+#: .../src/AutoTimerImporter.py:226
+#: .../src/AutoTimerOverview.py:194
 msgid "Really close without saving settings?"
 msgstr "Chiudere senza salvare le modifiche?"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:644
+#: .../src/AutoTimerEditor.py:644
 msgid "The match attribute is mandatory."
 msgstr "La stringa di confronto è obbligatoria!"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:653
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:241
+#: .../src/AutoTimerEditor.py:653
+#: .../src/AutoTimerImporter.py:241
 #, python-format
 msgid ""
 "You entered \"%s\" as Text to match.\n"
@@ -443,236 +457,235 @@ msgstr ""
 "Il testo inserito per il confronto è \"%s\".\n"
 "Rimuovere gli spazi bianchi finali?"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:790
+#: .../src/AutoTimerEditor.py:790
 msgid "AutoTimer Filters"
 msgstr "Filtri AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:794
+#: .../src/AutoTimerEditor.py:794
 msgid "in Title"
 msgstr "Nel Titolo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:795
+#: .../src/AutoTimerEditor.py:795
 msgid "in Shortdescription"
 msgstr "Nella Descrizione breve"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:796
+#: .../src/AutoTimerEditor.py:796
 msgid "in Description"
 msgstr "Nella Descrizione"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:797
+#: .../src/AutoTimerEditor.py:797
 msgid "on Weekday"
 msgstr "Nei giorni feriali"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:812
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:71
+#: .../src/AutoTimerEditor.py:812
+#: .../src/AutoTimerOverview.py:71
 msgid "Save"
 msgstr "Salvare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:813
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1016
+#: .../src/AutoTimerEditor.py:813
+#: .../src/AutoTimerEditor.py:1016
 msgid "delete"
 msgstr "Cancellare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:814
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1017
+#: .../src/AutoTimerEditor.py:814
+#: .../src/AutoTimerEditor.py:1017
 msgid "New"
 msgstr "Nuovo"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:832
+#: .../src/AutoTimerEditor.py:832
 msgid "Edit AutoTimer filters"
 msgstr "Mod. filtri AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:876
+#: .../src/AutoTimerEditor.py:876
 msgid "Enable Filtering"
 msgstr "Abilitare Filtri"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:877
+#: .../src/AutoTimerEditor.py:877
 msgid "Filter"
 msgstr "Filtro"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:885
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:902
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:927
+#: .../src/AutoTimerEditor.py:885
+#: .../src/AutoTimerEditor.py:902
+#: .../src/AutoTimerEditor.py:927
 msgid "Exclude"
 msgstr "Escludere"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:890
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:907
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:928
+#: .../src/AutoTimerEditor.py:890
+#: .../src/AutoTimerEditor.py:907
+#: .../src/AutoTimerEditor.py:928
 msgid "Include"
 msgstr "Includere"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:925
+#: .../src/AutoTimerEditor.py:925
 msgid "Select type of Filter"
 msgstr "Selezionare il tipo di Filtro"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:994
+#: .../src/AutoTimerEditor.py:994
 msgid "AutoTimer Services"
 msgstr "Canali AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1004
+#: .../src/AutoTimerEditor.py:1004
 msgid "Channels"
 msgstr "Canali"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1005
+#: .../src/AutoTimerEditor.py:1005
 msgid "Bouquets"
 msgstr "Bouquet"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1035
+#: .../src/AutoTimerEditor.py:1035
 msgid "Edit AutoTimer services"
 msgstr "Modificare i canali AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1056
+#: .../src/AutoTimerEditor.py:1056
 msgid "Enable Service Restriction"
 msgstr "Abilitare Restrizione canale"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1057
+#: .../src/AutoTimerEditor.py:1057
 msgid "Editing"
 msgstr "Modificare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1066
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1119
+#: .../src/AutoTimerEditor.py:1066
+#: .../src/AutoTimerEditor.py:1119
 msgid "Record on"
 msgstr "Registrare da"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1097
+#: .../src/AutoTimerEditor.py:1097
 msgid "Select channel to record on"
 msgstr "Selezionare il canale da cui registrare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerEditor.py:1103
+#: .../src/AutoTimerEditor.py:1103
 msgid "Select bouquet to record on"
 msgstr "Selezionare il bouquet da cui registrare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:59
+#: .../src/AutoTimerImporter.py:59
 msgid "Select a timer to import"
 msgstr "Selezionare un timer da importare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:128
+#: .../src/AutoTimerImporter.py:128
 msgid "disable"
 msgstr "Disabilitare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:128
+#: .../src/AutoTimerImporter.py:128
 msgid "enable"
 msgstr "Abilitare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:137
+#: .../src/AutoTimerImporter.py:137
 #, python-format
 msgid "Match title: %s"
 msgstr "Stringa di confronto: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:143
+#: .../src/AutoTimerImporter.py:143
 msgid "Exact match"
 msgstr "Corrispondenza esatta"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:155
+#: .../src/AutoTimerImporter.py:155
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr "Intervallo di confronto: %02d:%02d - %02d:%02d"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:164
+#: .../src/AutoTimerImporter.py:164
 #, python-format
 msgid "Only on Service: %s"
 msgstr "Solo sul canale: %s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:191
+#: .../src/AutoTimerImporter.py:191
 msgid "Location"
 msgstr "Destinazione"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:220
+#: .../src/AutoTimerImporter.py:220
 msgid "Import AutoTimer"
 msgstr "Importare AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerImporter.py:299
+#: .../src/AutoTimerImporter.py:299
 msgid "Please provide a Text to match"
 msgstr "Introdurre una stringa di confronto"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:72
+#: .../src/AutoTimerOverview.py:72
 msgid "Delete"
 msgstr "Cancellare"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:73
+#: .../src/AutoTimerOverview.py:73
 msgid "Add"
 msgstr "Aggiungere"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:85
+#: .../src/AutoTimerOverview.py:85
 msgid "Edit selected AutoTimer"
 msgstr "Modifica AutoTimer selezionato"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:86
+#: .../src/AutoTimerOverview.py:86
 msgid "Close and forget changes"
 msgstr "Chiudere senza salvare le modifiche"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:92
+#: .../src/AutoTimerOverview.py:92
 msgid "Open Context Menu"
 msgstr "Aprire Menu contestuale"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:98
+#: .../src/AutoTimerOverview.py:98
 msgid "Close and save changes"
 msgstr "Chiudere e salvare le modifiche"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:99
+#: .../src/AutoTimerOverview.py:99
 msgid "Remove selected AutoTimer"
 msgstr "Cancellare AutoTimer selezionato"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:100
+#: .../src/AutoTimerOverview.py:100
 msgid "Add new AutoTimer"
 msgstr "Aggiungere nuovo AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:107
+#: .../src/AutoTimerOverview.py:107
 msgid "AutoTimer overview"
 msgstr "Panoramica AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:180
+#: .../src/AutoTimerOverview.py:180
 #, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Cancellare %s?"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:209
+#: .../src/AutoTimerOverview.py:209
 msgid "Preview"
 msgstr "Anteprima"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:210
+#: .../src/AutoTimerOverview.py:210
 msgid "Import existing Timer"
 msgstr "Importare timer esistente"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:211
+#: .../src/AutoTimerOverview.py:211
 msgid "Import from EPG"
 msgstr "Importare da EPG"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:212
+#: .../src/AutoTimerOverview.py:212
 msgid "Setup"
 msgstr "Configurazione"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:213
+#: .../src/AutoTimerOverview.py:213
 msgid "Edit new timer defaults"
 msgstr "Modificare parametri predefiniti nuovo timer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:217
+#: .../src/AutoTimerOverview.py:217
 msgid "Create a new timer using the classic editor"
 msgstr "Impostare un nuovo timer con Editor classico"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerOverview.py:219
+#: .../src/AutoTimerOverview.py:219
 msgid "Create a new timer using the wizard"
 msgstr "Impostare un nuovo timer usando Conf. Guidata"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerPreview.py:52
+#: .../src/AutoTimerPreview.py:52
 msgid "mins"
 msgstr "Min."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerPreview.py:76
+#: .../src/AutoTimerPreview.py:76
 msgid "Preview AutoTimer"
 msgstr "Anteprima AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerPreview.py:80
+#: .../src/AutoTimerPreview.py:80
 msgid "Sort Time"
 msgstr "Ord. per Ora"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerPreview.py:82
+#: .../src/AutoTimerPreview.py:82
 msgid "Sort AutoTimer"
 msgstr "Ord. Autotimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerResource.py:18
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:117
+#: .../src/AutoTimerResource.py:18
 #, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
@@ -681,96 +694,104 @@ msgstr ""
 "Trovate in totale %d corrispondenze.\n"
 "%d nuovi timer Aggiunti - %d timer modificati."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:33
+#: .../src/AutoTimerSettings.py:33
 msgid "AutoTimer Settings"
 msgstr "Configurazione Autotimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:39
+#: .../src/AutoTimerSettings.py:39
 msgid "Poll automatically"
 msgstr "Ricerca automatica"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:39
+#: .../src/AutoTimerSettings.py:39
 msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
 msgstr "Se non abilitata, AutoTimer NON verificherà automaticamente una corrispondenza eventi. Tale verifica sarà eseguita solo dopo la pressione del tasto verde."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:40
+#: .../src/AutoTimerSettings.py:40
 msgid "Poll Interval (in h)"
 msgstr "Intervallo ricerca (ore)"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:40
+#: .../src/AutoTimerSettings.py:40
 msgid "This is the delay in hours that the AutoTimer will wait after a search to search the EPG again."
 msgstr "Specificare il ritardo in ore da applicare tra ricerche successive nell'EPG."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:41
+#: .../src/AutoTimerSettings.py:41
 msgid "Show in extension menu"
 msgstr "Mostrare nel menu estensioni"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:41
+#: .../src/AutoTimerSettings.py:41
 msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
 msgstr "Abilitando l'opzione, si avrà accesso alla panoramica AutoTimer attraverso il menu estensioni."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:42
+#: .../src/AutoTimerSettings.py:42
 msgid "Modify existing timers"
 msgstr "Modificare timer esistenti"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:42
+#: .../src/AutoTimerSettings.py:42
 msgid "This setting controls the behavior when a timer matches a found event."
 msgstr "Indicare il comportamento da adottare nel caso in cui un timer corrisponda a un evento trovato."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:43
+#: .../src/AutoTimerSettings.py:43
 msgid "Guess existing timer based on begin/end"
 msgstr "Calcolare i timer esistenti basati su inizio/fine"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:43
+#: .../src/AutoTimerSettings.py:43
 #, python-format
 msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
 msgstr "Abilitando questa opzione, un timer verrà considerato già esistente se la registrazione effettuata da quest'ultimo avrà già raggiunto almeno l'80% del totale."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:44
+#: .../src/AutoTimerSettings.py:44
 msgid "Add timer as disabled on conflict"
 msgstr "Agg. timer disabilitato se in conflitto"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:44
+#: .../src/AutoTimerSettings.py:44
 msgid "This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled."
 msgstr "Indicare il comportamento da tenere in caso di conflitto timer. Se una corrispondenza con un evento genera un conflitto di timer, l'evento non viene ignorato ma aggiunto disabilitato. "
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:45
+#: .../src/AutoTimerSettings.py:45
+msgid "Show notification on conflicts"
+msgstr "Mostrare avviso in caso di conflitti"
+
+#: .../src/AutoTimerSettings.py:45
+msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr "Abilitando questa opzione si verrà informati della presenza di conflitti durante il polling automatico. Non viene applicato alcun controllo in proposito, perciò si potrebbero ricevere avvisi circa lo stesso conflitto più e più volte."
+
+#: .../src/AutoTimerSettings.py:46
 msgid "Editor for new AutoTimers"
 msgstr "Editor nuovi AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:45
+#: .../src/AutoTimerSettings.py:46
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
 msgstr "Editor utilizzato per aggiungere nuovi AutoTimer. Possono essere usati indifferentemente l'edito classico o la configurazione guidata."
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:46
+#: .../src/AutoTimerSettings.py:47
 msgid "Support \"Fast Scan\"?"
 msgstr " \"Fast Scan\" è supportato?"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:46
+#: .../src/AutoTimerSettings.py:47
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
 msgstr "Se \"Fast Scan\" è supportato, il tipo di canale è ignorato. Non è necessario abilitare il parametro, a meno che l'immagine lo supporti e sia utilizzato.  "
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/AutoTimerSettings.py:81
+#: .../src/AutoTimerSettings.py:82
 msgid "Configure AutoTimer behavior"
 msgstr "Configurazione caratteristiche AutoTimer"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:21
+#: .../src/plugin.py:21
 msgid "Only AutoTimers created during this session"
 msgstr "Solo AutoTimer creati durante questa sessione"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:22
+#: .../src/plugin.py:22
 msgid "All non-repeating timers"
 msgstr "Tutti i timer non ripetuti"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:27
+#: .../src/plugin.py:27
 msgid "Classic"
 msgstr "Classico"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:28
+#: .../src/plugin.py:28
 msgid "Wizard"
 msgstr "Configurazione Guidata"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:88
+#: .../src/plugin.py:89
 #, python-format
 msgid ""
 "Your config file is not well-formed:\n"
@@ -779,13 +800,22 @@ msgstr ""
 "File di configurazione errato:\n"
 "%s"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:159
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:164
+#: .../src/plugin.py:118
+#, python-format
+msgid ""
+"Found a total of %d matching Events.\n"
+"%d Timer were added and %d modified, %d conflicts encountered."
+msgstr ""
+"Trovate in totale %d corrispondenze.\n"
+"Timer: %d aggiunti e %d modificati. Conflitti riscontrati: %d."
+
+#: .../src/plugin.py:160
+#: .../src/plugin.py:165
 msgid "Edit Timers and scan for new Events"
 msgstr "Modificare timer e cercare nuovi eventi"
 
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:165
-#: /media/TREKSTOR/git/enigma2-plugins/autotimer/src/plugin.py:166
+#: .../src/plugin.py:166
+#: .../src/plugin.py:167
 msgid "add AutoTimer..."
 msgstr "agg. AutoTimer"
 
