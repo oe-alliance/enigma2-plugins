@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-gp3wizard
+Version: 0.14
+Description: Gemini3 Wizard, installs the Gemini3 Plugin
+Maintainer: GeminiTeam
+Homepage: http://www.i-have-a-dreambox.com
+Depends: enigma2 (>> 2.6git20102010)

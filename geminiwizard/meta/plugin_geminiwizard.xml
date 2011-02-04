@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>IhaD Team</author>
+                    <name>Gemini3 Wizard</name>
+                    <packagename>enigma2-plugin-extensions-gp3wizard</packagename>
+                    <shortdescription>Gemini3 Installation Wizard</shortdescription>
+                    <description>the Gemini3 Wizard helps you with the Installation of the Gemini Tools</description>
+                    <screenshot src="http://www.i-have-a-dreambox.com" />		    
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-gp3wizard" />
+	  </files>
+</default>
