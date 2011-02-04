@@ -26,7 +26,6 @@ SUBDIRS = \
 	filebrowser \
 	fritzcall \
 	ftpbrowser \
-	geminiwizard \
 	genuinedreambox \
 	googlemaps \
 	growlee \
