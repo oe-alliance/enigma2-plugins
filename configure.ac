@@ -179,6 +179,10 @@ ftpbrowser/po/Makefile
 ftpbrowser/src/Makefile
 ftpbrowser/src/images/Makefile
 
+geminiwizard/Makefile
+geminiwizard/src/Makefile
+geminiwizard/meta/Makefile
+
 genuinedreambox/Makefile
 genuinedreambox/meta/Makefile
 genuinedreambox/src/Makefile
