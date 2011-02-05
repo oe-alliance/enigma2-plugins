@@ -228,7 +228,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		ret = ret and ret[1]
 		if ret:
 			if ret == "preview":
-				total, new, modified, timers = self.autotimer.parseEPG(simulateOnly = True)
+				total, new, modified, timers, conflicts = self.autotimer.parseEPG(simulateOnly = True)
 				self.session.open(
 					AutoTimerPreview,
 					timers
