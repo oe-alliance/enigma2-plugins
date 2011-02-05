@@ -5,7 +5,6 @@ from twisted.protocols.basic import LineReceiver
 
 from Screens.MessageBox import MessageBox
 from Tools import Notifications
-from Components.config import config
 
 from GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID
@@ -137,14 +136,14 @@ class SnarlNetworkProtocolAbstraction:
 	serverPort = None
 	pending = 0
 
-	def __init__(self):
+	def __init__(self, host):
 		self.clientFactory = SnarlNetworkProtocolClientFactory()
 		self.serverFactory = SnarlNetworkProtocolServerFactory()
 
-		if config.plugins.growlee.enable_outgoing.value:
-			reactor.resolve(config.plugins.growlee.address.value).addCallback(self.gotIP).addErrback(self.noIP)
+		if host.enable_outgoing.value:
+			reactor.resolve(host.address.value).addCallback(self.gotIP).addErrback(self.noIP)
 
-		if config.plugins.growlee.enable_incoming.value:
+		if host.enable_incoming.value:
 			self.serverPort = reactor.listenTCP(SNP_TCP_PORT, self.serverFactory)
 			self.pending += 1
 

@@ -1542,6 +1542,31 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/2))
 
   
  <!-- MyTube Player ##### -->
+	<screen backgroundColor="transparent" flags="wfNoBorder" name="MyTubePlayer" position="0,512" size="1280,220" title="MoviePlayer">
+		<ePixmap alphatest="off" pixmap="Ai.HD/infobar-dmm.png" position="0,24" size="1280,220" zPosition="-1"/>
+		<ePixmap alphatest="on" pixmap="Ai.HD/mp_buttons.png" position="1095,75" size="122,50" zPosition="1"/>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="center" position="282,105" render="Label" size="722,77" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;24" foregroundColor="grey" position="70,75" render="Label" size="92,25" source="global.CurrentTime" transparent="1" valign="top" zPosition="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="70,98" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
+			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
+		</widget>
+		<widget backgroundColor="secondBG" font="Regular;20" foregroundColor="foreground" halign="left" position="70,145" render="vhdRendVideoSize" size="116,24" source="session.CurrentService" transparent="1" zPosition="1"/>
+		<widget backgroundColor="background" font="Regular;24" foregroundColor="foreground" halign="left" position="960,75" render="Label" size="130,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
+			<convert type="ServicePosition">Length</convert>
+		</widget>
+		<ePixmap alphatest="blend" pixmap="Ai.HD/mpslider.png" position="345,80" size="600,16" zPosition="3"/>
+		<widget pointer="Ai.HD/pointer.png:13,3" position="360,81" render="PositionGauge" size="560,14" source="session.CurrentService" zPosition="2">
+			<convert type="ServicePosition">Gauge</convert>
+		</widget>
+		<widget backgroundColor="background" font="Regular;22" foregroundColor="foreground" halign="right" position="205,75" render="Label" size="121,25" source="session.CurrentService" transparent="1" valign="center" zPosition="4">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<ePixmap alphatest="on" pixmap="Ai.HD/plugin.png" position="1106,133" size="100,40" transparent="1" zPosition="7"/>
+	</screen>
 	<screen backgroundColor="secondBG" name="MyTubeHistoryScreen" position="150,200" size="980,400" title="MyTubeHistoryScreen..." zPosition="6" >
 		<widget source="historylist" render="Listbox" position="0,0" zPosition="7" size="980,400" scrollbarMode="showOnDemand" transparent="1" >
 			<convert type="TemplatedMultiContent">

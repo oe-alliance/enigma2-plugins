@@ -4,9 +4,12 @@
 	<screen backgroundColor="noTransBG" flags="wfNoBorder" name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection">
 		<ePixmap pixmap="Ai.HD/top_bg.png" position="0,0" size="1280,90"/>
 		<ePixmap pixmap="Ai.HD/bottom_bg.png" position="0,630" size="1280,2"/>
-		<widget backgroundColor="darkgrey" font="Regular;22" position="70,35" render="Label" size="850,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="darkgrey" font="Regular;22" position="190,35" render="Label" size="730,50" source="Title" transparent="1" valign="center" zPosition="1"/>
 		<widget backgroundColor="darkgrey" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
 			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+		<widget alphatest="blend" position="70,30" render="Picon" size="100,60" source="ServiceEvent" transparent="1" zPosition="5">
+			<convert type="valiRefString">ServicelistRef</convert>
 		</widget>
 		<widget backgroundColor="transparent" position="0,90" render="Pig" size="501,282" source="session.VideoPicture" zPosition="1"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
@@ -41,9 +44,12 @@
 	<screen backgroundColor="noTransBG" flags="wfNoBorder" name="EPGSelection" position="0,0" size="1280,720" title="EPG Selection">
 		<ePixmap pixmap="Ai.HD/top_bg.png" position="0,0" size="1280,90"/>
 		<ePixmap pixmap="Ai.HD/bottom_bg.png" position="0,630" size="1280,2"/>
-		<widget backgroundColor="darkgrey" font="Regular;22" position="70,35" render="Label" size="850,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="darkgrey" font="Regular;22" position="190,35" render="Label" size="730,50" source="Title" transparent="1" valign="center" zPosition="1"/>
 		<widget backgroundColor="darkgrey" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
 			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+		<widget alphatest="blend" position="70,30" render="Picon" size="100,60" source="Event" transparent="1" zPosition="5">
+			<convert type="valiRefString">CurrentRef</convert>
 		</widget>
 		<widget backgroundColor="transparent" position="0,90" render="Pig" size="501,282" source="session.VideoPicture" zPosition="1"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>
@@ -66,9 +72,12 @@
 	<screen backgroundColor="noTransBG" flags="wfNoBorder" name="EventView" position="0,0" size="1280,720" title="Eventview">
 		<ePixmap pixmap="Ai.HD/top_bg.png" position="0,0" size="1280,90"/>
 		<ePixmap pixmap="Ai.HD/bottom_bg.png" position="0,630" size="1280,2"/>
-		<widget backgroundColor="darkgrey" font="Regular;22" position="70,35" render="Label" size="850,50" source="Title" transparent="1" valign="center" zPosition="1"/>
+		<widget backgroundColor="darkgrey" font="Regular;22" position="190,35" render="Label" size="730,50" source="Title" transparent="1" valign="center" zPosition="1"/>
 		<widget backgroundColor="darkgrey" font="Regular;20" halign="right" position="940,35" render="Label" size="270,50" source="global.CurrentTime" transparent="1" valign="center" zPosition="1">
 			<convert type="vhdConvClockToText">LocaleLang:%w %d %m</convert>
+		</widget>
+		<widget alphatest="blend" position="70,30" render="Picon" size="100,60" source="Title" transparent="1" zPosition="5">
+			<convert type="valiRefString">CurrentRef</convert>
 		</widget>
 		<widget backgroundColor="transparent" position="0,90" render="Pig" size="501,282" source="session.VideoPicture" zPosition="1"/>
 		<ePixmap alphatest="on" pixmap="Ai.HD/red.png" position="100,643" size="30,30"/>

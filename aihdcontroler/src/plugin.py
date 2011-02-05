@@ -52,6 +52,7 @@ config.plugins.vhd.Style = ConfigSelection(default="dmm", choices = [
 				])
 config.plugins.vhd.ChannSelector = ConfigSelection(default="full", choices = [
 				("full", _("Full")),
+				("vert", _("Full vertikal")),
 				("pig", _("mini TV")),
 				("simple", _("Simple"))
 				])
@@ -86,7 +87,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.release = ".release20110128"
+		self.release = ".release20110202"
 		Screen.__init__(self, session)
 		self.session = session
 		self.datei = "/usr/share/enigma2/Ai.HD/skin.xml"
@@ -116,6 +117,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 			system('cp ' + self.komponente + 'vhdRendNextEvent.py /usr/lib/enigma2/python/Components/Renderer/vhdRendNextEvent.py')
 			system('cp ' + self.komponente + 'vhdConvSmartInfo.py /usr/lib/enigma2/python/Components/Converter/vhdConvSmartInfo.py')
 			system('cp ' + self.komponente + 'vhdConvClockToText.py /usr/lib/enigma2/python/Components/Converter/vhdConvClockToText.py')
+			system('cp ' + self.komponente + 'valiRefString.py /usr/lib/enigma2/python/Components/Converter/valiRefString.py')
 			system("touch " + self.datei + self.release)
 
 	def save(self):
@@ -151,6 +153,8 @@ class AIHDsetup(ConfigListScreen, Screen):
 				skn_file = skn_file + "pig.xml"
 			elif config.plugins.vhd.ChannSelector.value=="simple":
 				skn_file = skn_file + "simple.xml"
+			elif config.plugins.vhd.ChannSelector.value=="vert":
+				skn_file = skn_file + "vert.xml"
 			else:
 				skn_file = skn_file + "full.xml"
 			skFile = open(skn_file, "r")

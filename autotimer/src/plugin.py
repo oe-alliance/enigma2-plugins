@@ -31,6 +31,7 @@ config.plugins.autotimer.editor = ConfigSelection(choices = [
 config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default = False)
 config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.autotimer.fastscan = ConfigYesNo(default = False)
+config.plugins.autotimer.notifconflict = ConfigYesNo(default = True)
 
 autotimer = None
 autopoller = None
@@ -114,7 +115,7 @@ def editCallback(session):
 		ret = autotimer.parseEPG()
 		session.open(
 			MessageBox,
-			_("Found a total of %d matching Events.\n%d Timer were added and %d modified.") % (ret[0], ret[1], ret[2]),
+			_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered.") % (ret[0], ret[1], ret[2], len(ret[4])),
 			type = MessageBox.TYPE_INFO,
 			timeout = 10
 		)

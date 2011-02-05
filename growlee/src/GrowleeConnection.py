@@ -1,10 +1,16 @@
 from Components.config import config
 from Tools import Notifications
 from Screens.MessageBox import MessageBox
+from twisted.internet.defer import Deferred
+from twisted.internet import reactor
 
 from . import NOTIFICATIONID
 
 def emergencyDisable(*args, **kwargs):
+	if args:
+		try: args[0].printTraceback()
+		except Exception: pass
+
 	global growleeConnection
 	if growleeConnection:
 		growleeConnection.stop()
@@ -21,7 +27,7 @@ def gotNotification():
 	notifications = Notifications.notifications
 	if notifications:
 		_, screen, args, kwargs, id = notifications[-1]
-		if screen is MessageBox and id != NOTIFICATIONID and id not in config.plugins.growlee.blacklist.value:
+		if screen is MessageBox and id != NOTIFICATIONID:
 
 			# NOTE: priority is in [-2; 2] but type is [0; 3] so map it
 			# XXX: maybe priority==type-2 would be more appropriate
@@ -34,41 +40,64 @@ def gotNotification():
 				description = args[0]
 			description = description
 
-			growleeConnection.sendNotification(title="Dreambox", description=description, priority=priority, timeout=timeout)
+			growleeConnection.sendNotification(title="Dreambox", description=description, priority=priority, timeout=timeout, id=id)
 
 class GrowleeConnection:
-	connection = None
+	connections = []
+	pending = 0
 
-	def sendNotification(self, title="Dreambox", description='', priority=-1, timeout=-1):
-		try:
-			level = int(config.plugins.growlee.level.value)
-		except ValueError:
-			level = -1
+	def sendNotification(self, title="Dreambox", description='', priority=-1, timeout=-1, id=""):
+		for connection, host in self.connections:
+			try:
+				level = int(host.level.value)
+			except ValueError:
+				level = -1
 
-		if self.connection and not priority < level:
-			self.connection.sendNotification(title=title, description=description, priority=priority, timeout=timeout)
+			if connection and id not in host.blacklist.value and not priority < level:
+				connection.sendNotification(title=title, description=description, priority=priority, timeout=timeout)
 
 	def listen(self):
-		if self.connection:
+		if self.connections:
 			return
 
-		proto = config.plugins.growlee.protocol.value
-		if proto == "prowl":
-			from Prowl import ProwlAPI
-			self.connection = ProwlAPI()
-		elif proto == "growl":
-			from GrowlTalk import GrowlTalkAbstraction
-			self.connection = GrowlTalkAbstraction()
-		else: # proto == "snarl":
-			from SNP import SnarlNetworkProtocolAbstraction
-			self.connection = SnarlNetworkProtocolAbstraction()
+		for host in config.plugins.growlee.hosts:
+			if not (host.enable_outgoing.value or host.enable_incoming.value):
+				continue
+
+			proto = host.protocol.value
+			if proto == "prowl":
+				from Prowl import ProwlAPI
+				connection = ProwlAPI(host)
+			elif proto == "growl":
+				from GrowlTalk import GrowlTalkAbstraction
+				connection = GrowlTalkAbstraction(host)
+			elif proto == "snarl":
+				from SNP import SnarlNetworkProtocolAbstraction
+				connection = SnarlNetworkProtocolAbstraction(host)
+			else: # proto == "syslog":
+				from Syslog import SyslogAbstraction
+				connection = SyslogAbstraction(host)
+
+			self.connections.append((connection, host))
+
+	def maybeClose(self, resOrFail, defer = None):
+		self.pending -= 1
+		if self.pending == 0:
+			if defer: defer.callback(True)
 
 	def stop(self):
-		if self.connection:
-			d = self.connection.stop()
-			self.connection = None
-			return d
-		return None
+		defer = Deferred()
+		self.pending = 0
+		for connection, host in self.connections:
+			d = connection.stop()
+			if d is not None:
+				self.pending += 1
+				d.addBoth(self.maybeClose, defer = defer)
+		del self.connections[:]
+
+		if self.pending == 0:
+			reactor.callLater(1, defer, True)
+		return defer
 
 growleeConnection = GrowleeConnection()
 
