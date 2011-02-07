@@ -7,6 +7,7 @@ from Components.config import config
 # Notifications
 from Tools.FuzzyDate import FuzzyTime
 from Tools.Notifications import AddPopup
+from Screens.MessageBox import MessageBox
 NOTIFICATIONID = 'AutoTimerConflictEncounteredNotification'
 
 class AutoPoller:
