@@ -40,7 +40,6 @@ SUBDIRS = \
 	moviecut \
 	movielistpreview \
 	movieretitle \
-	movieselectionquickbutton \
 	movietagger \
 	multirc \
 	mytube \
