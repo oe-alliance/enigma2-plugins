@@ -52,6 +52,7 @@ config.plugins.vhd.Style = ConfigSelection(default="dmm", choices = [
 				])
 config.plugins.vhd.ChannSelector = ConfigSelection(default="full", choices = [
 				("full", _("Full")),
+				("vert", _("Full vertikal")),
 				("pig", _("mini TV")),
 				("simple", _("Simple"))
 				])
@@ -86,7 +87,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.release = ".release20110129"
+		self.release = ".release20110202"
 		Screen.__init__(self, session)
 		self.session = session
 		self.datei = "/usr/share/enigma2/Ai.HD/skin.xml"
@@ -152,6 +153,8 @@ class AIHDsetup(ConfigListScreen, Screen):
 				skn_file = skn_file + "pig.xml"
 			elif config.plugins.vhd.ChannSelector.value=="simple":
 				skn_file = skn_file + "simple.xml"
+			elif config.plugins.vhd.ChannSelector.value=="vert":
+				skn_file = skn_file + "vert.xml"
 			else:
 				skn_file = skn_file + "full.xml"
 			skFile = open(skn_file, "r")

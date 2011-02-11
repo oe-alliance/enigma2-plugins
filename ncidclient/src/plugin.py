@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-$Author$
+$Author: sreichholf $
 '''
 from enigma import eTimer, eSize, ePoint, getDesktop, eDVBVolumecontrol, eBackgroundFileEraser
 
@@ -741,25 +741,25 @@ class NcidClientSetup(Screen, ConfigListScreen):
 			if config.plugins.NcidClient.lookup.value:
 				self.list.append(getConfigListEntry(_("Country"), config.plugins.NcidClient.country))
 
-#			self.list.append(getConfigListEntry(_("Use internal PhoneBook"), config.plugins.NcidClient.phonebook))
-#			if config.plugins.NcidClient.phonebook.value:
-#				if config.plugins.NcidClient.phonebookLocation.value in self._mountedDevices:
-#					config.plugins.NcidClient.phonebookLocation.setChoices(self._mountedDevices, config.plugins.NcidClient.phonebookLocation.value)
-#				else:
-#					config.plugins.NcidClient.phonebookLocation.setChoices(self._mountedDevices)
-#				path = config.plugins.NcidClient.phonebookLocation.value
-#				# check whether we can write to PhoneBook.txt
-#				if os.path.exists(os.path.join(path[0], "PhoneBook.txt")):
-#					if not os.access(os.path.join(path[0], "PhoneBook.txt"), os.W_OK):
-#						debug("[NcidClientSetup] createSetup: %s/PhoneBook.txt not writable, resetting to default" % (path[0]))
-#						config.plugins.NcidClient.phonebookLocation.setChoices(self._mountedDevices)
-#				elif not (os.path.isdir(path[0]) and os.access(path[0], os.W_OK | os.X_OK)):
-#					debug("[NcidClientSetup] createSetup: directory %s not writable, resetting to default" % (path[0]))
-#					config.plugins.NcidClient.phonebookLocation.setChoices(self._mountedDevices)
-#
-#				self.list.append(getConfigListEntry(_("PhoneBook Location"), config.plugins.NcidClient.phonebookLocation))
-#				if config.plugins.NcidClient.lookup.value:
-#					self.list.append(getConfigListEntry(_("Automatically add new Caller to PhoneBook"), config.plugins.NcidClient.addcallers))
+			self.list.append(getConfigListEntry(_("Use internal PhoneBook"), config.plugins.NcidClient.phonebook))
+			if config.plugins.NcidClient.phonebook.value:
+				if config.plugins.NcidClient.phonebookLocation.value in self._mountedDevices:
+					config.plugins.NcidClient.phonebookLocation.setChoices(self._mountedDevices, config.plugins.NcidClient.phonebookLocation.value)
+				else:
+					config.plugins.NcidClient.phonebookLocation.setChoices(self._mountedDevices)
+				path = config.plugins.NcidClient.phonebookLocation.value
+				# check whether we can write to PhoneBook.txt
+				if os.path.exists(os.path.join(path[0], "PhoneBook.txt")):
+					if not os.access(os.path.join(path[0], "PhoneBook.txt"), os.W_OK):
+						debug("[NcidClientSetup] createSetup: %s/PhoneBook.txt not writable, resetting to default" % (path[0]))
+						config.plugins.NcidClient.phonebookLocation.setChoices(self._mountedDevices)
+				elif not (os.path.isdir(path[0]) and os.access(path[0], os.W_OK | os.X_OK)):
+					debug("[NcidClientSetup] createSetup: directory %s not writable, resetting to default" % (path[0]))
+					config.plugins.NcidClient.phonebookLocation.setChoices(self._mountedDevices)
+
+				self.list.append(getConfigListEntry(_("PhoneBook Location"), config.plugins.NcidClient.phonebookLocation))
+				if config.plugins.NcidClient.lookup.value:
+					self.list.append(getConfigListEntry(_("Automatically add new Caller to PhoneBook"), config.plugins.NcidClient.addcallers))
 
 			self.list.append(getConfigListEntry(_("Strip Leading 0"), config.plugins.NcidClient.internal))
 			self.list.append(getConfigListEntry(_("Show connection information popups"), config.plugins.NcidClient.connectionVerbose))

@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<webtvstations>
+	<tvstation>
+		<provider>americafree.tv</provider>
+		<title>AFTVHD</title>
+		<streamurl>rtsp://video1.americafree.tv/AFTVHDVarietyH2642000.sdp</streamurl>
+	</tvstation>
+	<tvstation>
+		<provider>cctv.ws</provider>
+		<title>VH1 Classic</title>
+		<streamurl>http://cctv.ws/1/ssic01/VH1classic</streamurl>
+	</tvstation>
+	<tvstation>
+		<provider>americafree.tv</provider>
+		<title>AFTVHDVariety</title>
+		<streamurl>rtsp://video1.americafree.tv/AFTVHDVarietyH2642000.sdp</streamurl>
+	</tvstation>
+</webtvstations>

@@ -5,7 +5,6 @@ from hashlib import md5
 
 from Screens.MessageBox import MessageBox
 from Tools import Notifications
-from Components.config import config
 
 from GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID
@@ -15,9 +14,12 @@ GROWL_UDP_PORT = 9887
 class GrowlTalk(DatagramProtocol):
 	addr = None
 
+	def __init__(self, host):
+		self.host = host
+
 	def gotIP(self, ip):
 		self.addr = (ip, GROWL_UDP_PORT)
-		if config.plugins.growlee.enable_outgoing.value:
+		if self.host.enable_outgoing.value:
 			p = pack("!BBHBB",
 					1, # version
 					0, # registration
@@ -32,7 +34,7 @@ class GrowlTalk(DatagramProtocol):
 			p += "Notifications from your Dreambox" # first notification type name
 			p += "\x00" # index of default notifications
 
-			password = config.plugins.growlee.password.value
+			password = self.host.password.value
 			checksum = md5()
 			checksum.update(p)
 			if password:
@@ -46,10 +48,10 @@ class GrowlTalk(DatagramProtocol):
 		emergencyDisable()
 
 	def startProtocol(self):
-		reactor.resolve(config.plugins.growlee.address.value).addCallback(self.gotIP).addErrback(self.noIP)
+		reactor.resolve(self.host.address.value).addCallback(self.gotIP).addErrback(self.noIP)
 
 	def sendNotification(self, title='No title.', description='No description.', flags=0):
-		if not self.transport or not self.addr or not config.plugins.growlee.enable_outgoing.value:
+		if not self.transport or not self.addr or not self.host.enable_outgoing.value:
 			return
 
 		p = pack("!BBHHHHH",
@@ -66,7 +68,7 @@ class GrowlTalk(DatagramProtocol):
 		p += description
 		p += "growlee"
 
-		password = config.plugins.growlee.password.value
+		password = self.host.password.value
 		checksum = md5()
 		checksum.update(p)
 		if password:
@@ -76,7 +78,7 @@ class GrowlTalk(DatagramProtocol):
 		self.transport.write(p, self.addr)
 
 	def datagramReceived(self, data, addr):
-		if not config.plugins.growlee.enable_incoming.value:
+		if not self.host.enable_incoming.value:
 			return
 
 		Len = len(data)
@@ -90,7 +92,7 @@ class GrowlTalk(DatagramProtocol):
 		# type == GROWL_TYPE_NOTIFICATION
 		if data[1] == '\x01':
 			digest = data[-16:]
-			password = config.plugins.growlee.password.value
+			password = self.host.password.value
 			checksum = md5()
 			checksum.update(data[:-16])
 			if password:
@@ -118,8 +120,8 @@ class GrowlTalk(DatagramProtocol):
 		)
 
 class GrowlTalkAbstraction:
-	def __init__(self):
-		self.growltalk = GrowlTalk()
+	def __init__(self, host):
+		self.growltalk = GrowlTalk(host)
 		self.serverPort = reactor.listenUDP(GROWL_UDP_PORT, self.growltalk)
 
 	def sendNotification(self, title='No title.', description='No description.', priority=-1, timeout=-1):

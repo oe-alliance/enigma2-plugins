@@ -2,7 +2,7 @@
 # TVCharts Plugin for Enigma2 Dreamboxes
 # Coded by Homey (c) 2010
 #
-# Version: 1.0
+# Version: 1.1
 # Support: www.i-have-a-dreambox.com
 #####################################################
 from Components.About import about
@@ -34,7 +34,7 @@ from enigma import eTimer, eEPGCache, loadJPG, loadPNG, loadPic, eListboxPythonM
 from time import gmtime, strftime
 from twisted.web.client import getPage
 from xml.dom.minidom import parse, parseString
-from urllib import quote, quote_plus, unquote, unquote_plus, urlencode
+from urllib import urlencode
 
 import timer
 import xml.etree.cElementTree
@@ -88,6 +88,11 @@ def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname,
 		res.append(MultiContentEntryText(pos=(130, 5), size=(480, 28), font=0, text="%s (User: %s)" % (channelname, usercount)))
 		res.append(MultiContentEntryText(pos=(130, 33), size=(480, 25), font=1, text=eventname))
 		res.append(MultiContentEntryText(pos=(130, 57), size=(480, 20), font=2, text="%s Uhr - %s Uhr (%smin)" % (strftime("%d.%m.%Y %H:%M", gmtime(starttime)), strftime("%H:%M", gmtime(endtime)), int((endtime-starttime)/60))))
+	elif type == "moviecharts":
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(8, 8), size=(100, 60), png=loadPNG(pixmap)))
+		res.append(MultiContentEntryText(pos=(130, 5), size=(480, 30), font=0, text=eventname))
+		res.append(MultiContentEntryText(pos=(130, 33), size=(480, 25), font=1, text="Viewer: %s" % (usercount)))
+		res.append(MultiContentEntryText(pos=(130, 57), size=(480, 20), font=2, text="%s Uhr - %s" % (strftime("%d.%m.%Y %H:%M", gmtime(starttime)), channelname)))
 
 	return res
 
@@ -98,17 +103,17 @@ def ChannelListEntryComponent(type, channelname, serviceref, eventid, eventname,
 class TVChartsMain(Screen):
 
 	skin = """
-	<screen position="center,center" size="600,510" title="TV Charts">
-		<widget name="channellist" position="10,10" zPosition="1" size="580,458" scrollbarMode="showOnDemand" />
-		<widget name="info" position="0,447" zPosition="2" size="600,20" font="Regular;18" noWrap="1" foregroundColor="#ffffff" transparent="1" halign="center" valign="center" />
-		<ePixmap name="red"    position="20,470"  zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_red.png" transparent="1" alphatest="on" />
-		<ePixmap name="green"  position="160,470" zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_green.png" transparent="1" alphatest="on" />
-		<ePixmap name="yellow" position="300,470" zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_yellow.png" transparent="1" alphatest="on" />
-		<ePixmap name="blue"   position="440,470" zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="20,470" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="160,470" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" position="300,470" zPosition="4" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" position="440,470" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+	<screen position="center,center" size="620,510" title="TV Charts">
+		<widget name="channellist" position="10,10" zPosition="1" size="600,458" scrollbarMode="showOnDemand" />
+		<widget name="info" position="0,447" zPosition="2" size="620,20" font="Regular;18" noWrap="1" foregroundColor="#ffffff" transparent="1" halign="center" valign="center" />
+		<ePixmap name="red"    position="22,470"  zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_red.png" transparent="1" alphatest="on" />
+		<ePixmap name="green"  position="167,470" zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_green.png" transparent="1" alphatest="on" />
+		<ePixmap name="yellow" position="312,470" zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_yellow.png" transparent="1" alphatest="on" />
+		<ePixmap name="blue"   position="457,470" zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_blue.png" transparent="1" alphatest="on" />
+		<widget name="key_red" position="22,470" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_green" position="167,470" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_yellow" position="312,470" zPosition="4" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_blue" position="457,470" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
 	def __init__(self, session):
@@ -121,7 +126,7 @@ class TVChartsMain(Screen):
 
 		self["key_red"] = Button("TV Charts")
 		self["key_green"] = Button("Timer Charts")
-		self["key_yellow"] = Button("")
+		self["key_yellow"] = Button("Movie Charts")
 		self["key_blue"] = Button("Settings")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "EPGSelectActions"],
@@ -129,6 +134,7 @@ class TVChartsMain(Screen):
 			"ok": self.okClicked,
 			"red": self.switchToTVCharts,
 			"green": self.switchToTimerCharts,
+			"yellow": self.switchToMovieCharts,
 			"blue": self.SettingsMenu,
 			"info": self.ShowEventInfo,
 			"cancel": self.close
@@ -162,6 +168,9 @@ class TVChartsMain(Screen):
 				self.session.openWithCallback(self.addTimerCallback, TimerEntry, newEntry)
 			else:
 				self.session.open(MessageBox, "Sorry, no EPG Info available for this event", type=MessageBox.TYPE_ERROR, timeout=10)
+		elif self.mode == "moviecharts":
+			print "[TVCharts] ToDo: Show Movie Info here ..."
+			return
 
 	def addTimerCallback(self, answer):
 		if answer[0]:
@@ -240,12 +249,19 @@ class TVChartsMain(Screen):
 		self.feedurl = "http://www.dreambox-plugins.de/feeds/toptimers.php?limit=%s" % config.plugins.tvcharts.maxtimerentries.value
 		self.downloadList()
 
+	def switchToMovieCharts(self):
+		self.mode = "moviecharts"
+		self.setTitle("Movie Charts")
+		self["channellist"].setList([])
+		self.feedurl = "http://www.dreambox-plugins.de/feeds/topmovies.php"
+		self.downloadList()
+
 	def downloadList(self):
-		if not config.plugins.tvcharts.enabled.value:
-			self["info"].setText("Error: Plugin disabled in Settings ...")
-		else:
+		if config.plugins.tvcharts.enabled.value:
 			self["info"].setText("Download feeds from server ...")
 			getPage(self.feedurl).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
+		else:
+			self["info"].setText("Error: Plugin disabled in Settings ...")
 
 	def downloadListError(self, error=""):
 		print str(error)
@@ -259,6 +275,8 @@ class TVChartsMain(Screen):
 		channelcount = 0
 		useronline = 0
 		totalusers = 0
+		totaltimer = 0
+		totalmovies = 0
 		xml = parseString(page)
 
 		#channellist.append(ChannelListEntryComponent("NAME", "SERVICEREF", "EVENTNAME", "USERCOUNT", "PERCENT"))
@@ -270,9 +288,9 @@ class TVChartsMain(Screen):
 
 			for node in xml.getElementsByTagName("CHANNEL"):
 				event_id = None
-				channelname = unquote_plus(str(node.getElementsByTagName("NAME")[0].childNodes[0].data))
-				serviceref = unquote_plus(str(node.getElementsByTagName("SERVICEREF")[0].childNodes[0].data))
-				eventname = unquote_plus(str(node.getElementsByTagName("EVENTNAME")[0].childNodes[0].data))
+				channelname =str(node.getElementsByTagName("NAME")[0].childNodes[0].data)
+				serviceref = str(node.getElementsByTagName("SERVICEREF")[0].childNodes[0].data)
+				eventname = str(node.getElementsByTagName("EVENTNAME")[0].childNodes[0].data)
 				usercount = int(node.getElementsByTagName("USERCOUNT")[0].childNodes[0].data)
 				percent = int(node.getElementsByTagName("PERCENT")[0].childNodes[0].data)
 				inBouquet = False
@@ -308,24 +326,55 @@ class TVChartsMain(Screen):
 				self.setTitle("TV Charts (User online: %s of %s)" % (useronline, totalusers))
 
 		elif self.mode == "timercharts":
+			for node in xml.getElementsByTagName("DATA"):
+				totaltimer = int(node.getElementsByTagName("TIMERCOUNT")[0].childNodes[0].data)
+
 			for node in xml.getElementsByTagName("TIMER"):
-				eitID = str(node.getElementsByTagName("ID")[0].childNodes[0].data)
+				eitID = int(node.getElementsByTagName("ID")[0].childNodes[0].data)
 				channelname = str(node.getElementsByTagName("CHANNELNAME")[0].childNodes[0].data)
 				serviceref = str(node.getElementsByTagName("SERVICEREF")[0].childNodes[0].data)
 				eventname = str(node.getElementsByTagName("EVENTNAME")[0].childNodes[0].data)
-				starttime = str(node.getElementsByTagName("STARTTIME")[0].childNodes[0].data)
-				endtime = str(node.getElementsByTagName("ENDTIME")[0].childNodes[0].data)
-				usercount = str(node.getElementsByTagName("USERCOUNT")[0].childNodes[0].data)
-				percent = str(node.getElementsByTagName("PERCENT")[0].childNodes[0].data)
+				starttime = int(node.getElementsByTagName("STARTTIME")[0].childNodes[0].data)
+				endtime = int(node.getElementsByTagName("ENDTIME")[0].childNodes[0].data)
+				usercount = int(node.getElementsByTagName("USERCOUNT")[0].childNodes[0].data)
+				percent = int(node.getElementsByTagName("PERCENT")[0].childNodes[0].data)
+
+				# Look for favourite channel for this event in my bouqets
+				for sepginfo in self.eventcache:
+					if sepginfo[2] == channelname:
+						serviceref = sepginfo[1]
+						channelname = sepginfo[2]
+						inBouquet = True
+						break
+						
+				# Add to List
+				channellist.append(ChannelListEntryComponent(self.mode, channelname, serviceref, eitID, eventname, starttime, endtime, usercount, percent))
+
+			if totaltimer > 0:
+				self.setTitle("Timer Charts (Total Timer: %s)" % (totaltimer))
+
+		elif self.mode == "moviecharts":
+			for node in xml.getElementsByTagName("DATA"):
+				totalmovies = int(node.getElementsByTagName("MOVIECOUNT")[0].childNodes[0].data)
+
+			for node in xml.getElementsByTagName("MOVIE"):
+				eventid = int(node.getElementsByTagName("EVENTID")[0].childNodes[0].data)
+				eventname = str(node.getElementsByTagName("EVENTNAME")[0].childNodes[0].data)
+				channelname = str(node.getElementsByTagName("CHANNELNAME")[0].childNodes[0].data)
+				serviceref = str(node.getElementsByTagName("SERVICEREF")[0].childNodes[0].data)
+				starttime = int(node.getElementsByTagName("STARTTIME")[0].childNodes[0].data)
+				usercount = int(node.getElementsByTagName("USERCOUNT")[0].childNodes[0].data)
 
 				# Add to List
-				channellist.append(ChannelListEntryComponent(self.mode, unquote_plus(channelname), unquote_plus(serviceref), int(eitID), unquote_plus(eventname), int(starttime), int(endtime), unquote_plus(usercount), unquote_plus(percent)))
+				channellist.append(ChannelListEntryComponent(self.mode, channelname, serviceref, eventid, eventname, starttime, 0, usercount, 0))
+
+			#if totalmovies > 0:
+			#	self.setTitle("Movie Charts (Total Movies: %s)" % (totalmovies))
 
 		self["info"].setText("")
 		self["channellist"].setList(channellist)
 
 		self.RefreshTimer.start(60000, True)
-
 
 ############################
 #####  SETTINGS SCREEN #####
@@ -405,7 +454,6 @@ class TVChartsSetup(Screen, ConfigListScreen):
 ##############################
 #####   UPDATE STATUS    #####
 ##############################
-
 class DBUpdateStatus(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -467,7 +515,7 @@ class DBUpdateStatus(Screen):
 
 		if event is not None:
 			curEvent = parseEvent(event)
-			event_begin = int(curEvent[0])
+			event_begin = int(curEvent[0])+(config.recording.margin_before.value*60)
 
 		# Get Box Info
 		self.BoxID = iNetwork.getAdapterAttribute("eth0", "mac")
@@ -492,8 +540,10 @@ class DBUpdateStatus(Screen):
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)
 
-##########################################################
 
+############################
+#####    INIT PLUGIN   #####
+############################
 def main(session, **kwargs):
 	session.open(TVChartsMain)
 
