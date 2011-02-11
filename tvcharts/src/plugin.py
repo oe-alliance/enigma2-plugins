@@ -1,8 +1,8 @@
 #####################################################
 # TVCharts Plugin for Enigma2 Dreamboxes
-# Coded by Homey (c) 2010
+# Coded by Homey (c) 2011
 #
-# Version: 1.1
+# Version: 1.2
 # Support: www.i-have-a-dreambox.com
 #####################################################
 from Components.About import about
@@ -31,6 +31,7 @@ from Tools.HardwareInfo import HardwareInfo
 from Plugins.Plugin import PluginDescriptor
 
 from enigma import eTimer, eEPGCache, loadJPG, loadPNG, loadPic, eListboxPythonMultiContent, gFont, eServiceReference, eServiceCenter, iPlayableService
+from random import randint
 from time import gmtime, strftime
 from twisted.web.client import getPage
 from xml.dom.minidom import parse, parseString
@@ -475,7 +476,7 @@ class DBUpdateStatus(Screen):
 	def restartTimer(self):
 		if self.NetworkConnectionAvailable:
 			self.DBStatusTimer.stop()
-			self.DBStatusTimer.start(15000, True)
+			self.DBStatusTimer.start((randint(15,60))*1000, True)
 		else:
 			iNetwork.checkNetworkState(self.checkNetworkCB)
 
@@ -483,7 +484,7 @@ class DBUpdateStatus(Screen):
 		if data is not None:
 			if data <= 2:
 				self.NetworkConnectionAvailable = True
-				self.DBStatusTimer.start(15000, True)
+				self.restartTimer()
 			else:
 				self.NetworkConnectionAvailable = False
 				self.DBStatusTimer.stop()
@@ -535,12 +536,16 @@ class DBUpdateStatus(Screen):
 
 		# Status Update
 		url = "http://www.dreambox-plugins.de/feeds/TVCharts/status.php"
-		getPage(url, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist}))
+		getPage(url, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist})).addErrback(self.updateError)
 
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)
 
-
+	def updateError(self, error=""):
+		print "[TVCharts] Update Error: " + str(error)
+		self.NetworkConnectionAvailable = False
+		self.DBStatusTimer.stop()
+		
 ############################
 #####    INIT PLUGIN   #####
 ############################
