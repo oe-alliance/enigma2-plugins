@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 18:49+0100\n"
-"PO-Revision-Date: 2011-01-22 18:51+0100\n"
+"POT-Creation-Date: 2011-02-12 22:40+0100\n"
+"PO-Revision-Date: 2011-02-12 22:40+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: \n"
@@ -168,11 +168,20 @@ msgstr "Agg. ora"
 msgid "Edit Services"
 msgstr "Mod. Canali"
 
-#: /media/TREKSTOR/git/enigma2-plugins/epgrefresh/src/EPGRefreshConfiguration.py:103
+#: /media/TREKSTOR/git/enigma2-plugins/epgrefresh/src/EPGRefreshConfiguration.py:104
 msgid "Configure EPGRefresh"
 msgstr "Configurare Agg. automatizzato EPG"
 
-#: /media/TREKSTOR/git/enigma2-plugins/epgrefresh/src/EPGRefreshConfiguration.py:157
+#: /media/TREKSTOR/git/enigma2-plugins/epgrefresh/src/EPGRefreshConfiguration.py:159
+msgid "never"
+msgstr "mai"
+
+#: /media/TREKSTOR/git/enigma2-plugins/epgrefresh/src/EPGRefreshConfiguration.py:163
+#, python-format
+msgid "Last refresh was %s"
+msgstr "Ultimo aggiornamento: %s"
+
+#: /media/TREKSTOR/git/enigma2-plugins/epgrefresh/src/EPGRefreshConfiguration.py:174
 msgid "Really close without saving settings?"
 msgstr "Chiudere senza salvare le modifiche?"
 
