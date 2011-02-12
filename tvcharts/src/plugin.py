@@ -2,7 +2,7 @@
 # TVCharts Plugin for Enigma2 Dreamboxes
 # Coded by Homey (c) 2011
 #
-# Version: 1.2
+# Version: 1.3
 # Support: www.i-have-a-dreambox.com
 #####################################################
 from Components.About import about
@@ -32,7 +32,7 @@ from Plugins.Plugin import PluginDescriptor
 
 from enigma import eTimer, eEPGCache, loadJPG, loadPNG, loadPic, eListboxPythonMultiContent, gFont, eServiceReference, eServiceCenter, iPlayableService
 from random import randint
-from time import gmtime, strftime
+from time import time, gmtime, strftime
 from twisted.web.client import getPage
 from xml.dom.minidom import parse, parseString
 from urllib import urlencode
@@ -159,7 +159,8 @@ class TVChartsMain(Screen):
 			return
 
 		if self.mode == "tvcharts":
-			self.session.nav.playService(eServiceReference(str(current[0][0])))
+			service = eServiceReference(str(current[0][0]))
+			self.session.nav.playService(service)
 		elif self.mode == "timercharts":
 			serviceref = ServiceReference(current[0][0])
 			eventid = int(current[0][1])
@@ -259,7 +260,7 @@ class TVChartsMain(Screen):
 
 	def downloadList(self):
 		if config.plugins.tvcharts.enabled.value:
-			self["info"].setText("Download feeds from server ...")
+			self["info"].setText("Downloading feeds from server ...")
 			getPage(self.feedurl).addCallback(self.downloadListCallback).addErrback(self.downloadListError)
 		else:
 			self["info"].setText("Error: Plugin disabled in Settings ...")
@@ -279,8 +280,6 @@ class TVChartsMain(Screen):
 		totaltimer = 0
 		totalmovies = 0
 		xml = parseString(page)
-
-		#channellist.append(ChannelListEntryComponent("NAME", "SERVICEREF", "EVENTNAME", "USERCOUNT", "PERCENT"))
 
 		if self.mode == "tvcharts":
 			for node in xml.getElementsByTagName("DATA"):
@@ -347,7 +346,7 @@ class TVChartsMain(Screen):
 						channelname = sepginfo[2]
 						inBouquet = True
 						break
-						
+
 				# Add to List
 				channellist.append(ChannelListEntryComponent(self.mode, channelname, serviceref, eitID, eventname, starttime, endtime, usercount, percent))
 
@@ -470,6 +469,7 @@ class DBUpdateStatus(Screen):
 
 		self.recordtimer = session.nav.RecordTimer
 		self.NetworkConnectionAvailable = False
+		self.LastTimerlistUpdate = 0
 
 		self.onShow.append(self.restartTimer)
 
@@ -512,11 +512,13 @@ class DBUpdateStatus(Screen):
 		info = service and service.info()
 		event = info and info.getEvent(0)
 		event_name = event and event.getEventName() or ""
+		event_description = ""
 		event_begin = 0
 
 		if event is not None:
 			curEvent = parseEvent(event)
 			event_begin = int(curEvent[0])+(config.recording.margin_before.value*60)
+			event_description = event.getExtendedDescription()
 
 		# Get Box Info
 		self.BoxID = iNetwork.getAdapterAttribute("eth0", "mac")
@@ -526,7 +528,8 @@ class DBUpdateStatus(Screen):
 
 		# Get TimerList
 		self.timerlist = ""
-		if config.plugins.tvcharts.submittimers.value:
+		if config.plugins.tvcharts.submittimers.value and self.LastTimerlistUpdate <= (time()-1800):
+			self.LastTimerlistUpdate = time()
 			try:
 				for timer in self.recordtimer.timer_list:
 					if timer.disabled == 0 and timer.justplay == 0:
@@ -535,20 +538,18 @@ class DBUpdateStatus(Screen):
 				print "[TVCharts] Error loading timers!"
 
 		# Status Update
-		url = "http://www.dreambox-plugins.de/feeds/TVCharts/status.php"
-		getPage(url, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist})).addErrback(self.updateError)
+		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'eventdescr' : event_description, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist})).addErrback(self.updateError)
 
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)
 
 	def updateError(self, error=""):
-		print "[TVCharts] Update Error: " + str(error)
 		self.NetworkConnectionAvailable = False
 		self.DBStatusTimer.stop()
-		
-############################
-#####    INIT PLUGIN   #####
-############################
+
+#############################
+#####    INIT PLUGIN    #####
+#############################
 def main(session, **kwargs):
 	session.open(TVChartsMain)
 
