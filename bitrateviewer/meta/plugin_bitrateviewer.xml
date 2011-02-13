@@ -8,7 +8,7 @@
                     <packagename>enigma2-plugin-extensions-bitrateviewer</packagename>
                     <shortdescription>Shows average bitrate of video and audio</shortdescription>
                     <description>Shows average bitrate of video and audio</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/bitrateviewer.jpg" />
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_bitrateviewer.jpg" />
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->

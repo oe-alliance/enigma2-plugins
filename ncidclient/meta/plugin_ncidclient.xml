@@ -9,7 +9,7 @@
                     <packagename>enigma2-plugin-extensions-ncidclient</packagename>
                     <shortdescription>Callmonitor for NCID-based call notification</shortdescription>
                     <description>NCID Client shows incoming voice calls promoted by any NCID server (e.g. Vodafone Easybox) on your Dreambox.</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/ncidclient.jpg" />
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_ncidclient.jpg" />
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->
