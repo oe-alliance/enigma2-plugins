@@ -253,15 +253,6 @@ RESULT eServiceTS::start()
 	ePtr<eDVBResourceManager> rmgr;
 	eDVBResourceManager::getInstance(rmgr);
 	eDVBChannel dvbChannel(rmgr, 0);
-	if (m_destfd == -1)
-	{
-		m_destfd = ::open("/dev/misc/pvr", O_WRONLY);
-		if (m_destfd < 0)
-		{
-			eDebug("Cannot open /dev/misc/pvr");
-			return -1;
-		}
-	}
 	if (dvbChannel.getDemux(m_decodedemux, iDVBChannel::capDecode) != 0) {
 		eDebug("Cannot allocate decode-demux");
 		return -1;
@@ -269,6 +260,15 @@ RESULT eServiceTS::start()
 	if (m_decodedemux->getMPEGDecoder(m_decoder, 1) != 0) {
 		eDebug("Cannot allocate MPEGDecoder");
 		return -1;
+	}
+	if (m_destfd == -1)
+	{
+		m_destfd = m_decodedemux->openPVR(O_WRONLY);
+		if (m_destfd < 0)
+		{
+			eDebug("openPVR failed");
+			return -1;
+		}
 	}
 	m_decoder->setVideoPID(m_vpid, eDVBVideo::MPEG2);
 	m_decoder->setAudioPID(m_apid, eDVBAudio::aMPEG);
