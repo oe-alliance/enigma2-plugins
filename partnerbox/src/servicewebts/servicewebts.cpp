@@ -273,10 +273,10 @@ RESULT eServiceWebTS::start()
 	}
 	if (m_destfd == -1)
 	{
-		m_destfd = m_decodedemux->openPVR(O_WRONLY);
+		m_destfd = m_decodedemux->openDVR(O_WRONLY);
 		if (m_destfd < 0)
 		{
-			eDebug("openPVR failed!");
+			eDebug("openDVR failed!");
 			return -1;
 		}
 	}
