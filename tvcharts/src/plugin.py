@@ -497,8 +497,9 @@ class DBUpdateStatus(Screen):
 			return
 
 		# Get Channelname
-		ref = eServiceReference(self.session.nav.getCurrentlyPlayingServiceReference().toString())
-		if ref is not None:
+		sref = self.session.nav.getCurrentlyPlayingServiceReference()
+		if sref is not None:
+			ref = eServiceReference(sref.toString())
 			ref.setName("")
 			serviceHandler = eServiceCenter.getInstance()
 			info = serviceHandler.info(ref)
