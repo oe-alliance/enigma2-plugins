@@ -85,12 +85,13 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self["help"] = StaticText()
 
 		# Define Actions
-		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
+		self["actions"] = ActionMap(["SetupActions", "ColorActions", "ChannelSelectEPGActions"],
 			{
 				"cancel": self.keyCancel,
 				"save": self.keySave,
 				"yellow": self.forceRefresh,
-				"blue": self.editServices
+				"blue": self.editServices,
+				"showEPGList": self.keyInfo,
 			}
 		)
 
@@ -146,6 +147,22 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 			x[1].cancel()
 
 		self.close(self.session)
+
+	def keyInfo(self):
+		from Screens.MessageBox import MessageBox
+
+		lastscan = config.plugins.epgrefresh.lastscan.value
+		if lastscan:
+			from Tools.FuzzyDate import FuzzyTime
+			scanDate = ', '.join(FuzzyTime(lastscan))
+		else:
+			scanDate = _("never")
+
+		self.session.open(
+				MessageBox,
+				_("Last refresh was %s") % (scanDate,),
+				type=MessageBox.TYPE_INFO
+		)
 
 	def keyCancel(self):
 		if self["config"].isChanged():

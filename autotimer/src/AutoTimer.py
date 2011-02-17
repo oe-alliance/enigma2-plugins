@@ -182,7 +182,7 @@ class AutoTimer:
 
 			# Search EPG, default to empty list
 			epgcache = eEPGCache.getInstance()
-			ret = epgcache.search(('RI', 100, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or ()
+			ret = epgcache.search(('RI', 500, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or ()
 
 			for serviceref, eit in ret:
 				eserviceref = eServiceReference(serviceref)

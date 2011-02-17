@@ -197,8 +197,8 @@ class Timer(Source):
 			location = config.movielist.last_videodir.value
 			timer = RecordTimerEntry(serviceref, begin, end, name, description, eventid, False, False, 0, dirname=location)
 			timer.dontSave = True
-			ret = self.recordtimer.record(timer)
-			if ret is not None:
+			recRet = self.recordtimer.record(timer)
+			if recRet is not None:
 				# a conflict is rather unlikely, but this can also indicate a non-recordable service
 				ret = (False, "Timer conflict detected! Not recording!" )
 
