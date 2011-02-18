@@ -16,6 +16,7 @@ SUBDIRS = \
 	dreammediathek \
 	dvdbackup \
 	dyndns \
+	easyinfo \
 	easymedia \
 	eibox \
 	elektro \

@@ -125,6 +125,10 @@ dyndns/Makefile
 dyndns/src/Makefile
 dyndns/meta/Makefile
 
+easyinfo/Makefile
+easyinfo/meta/Makefile
+easyinfo/src/Makefile
+
 easymedia/Makefile
 easymedia/meta/Makefile
 easymedia/po/Makefile

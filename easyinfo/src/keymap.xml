@@ -1,0 +1,5 @@
+<keymap>
+	<map context="EasyInfoActions">
+		<key id="KEY_INFO" mapto="info_but" flags="b" />
+	</map>
+</keymap>
