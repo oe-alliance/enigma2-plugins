@@ -182,7 +182,7 @@ class AutoTimer:
 
 			# Search EPG, default to empty list
 			epgcache = eEPGCache.getInstance()
-			ret = epgcache.search(('RI', 500, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or ()
+			ret = epgcache.search(('RI', 900, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or ()
 
 			for serviceref, eit in ret:
 				eserviceref = eServiceReference(serviceref)
@@ -201,6 +201,8 @@ class AutoTimer:
 				# Gather Information
 				name = evt.getEventName()
 				description = evt.getShortDescription()
+				if description == "":
+					description = evt.getExtendedDescription()
 				begin = evt.getBeginTime()
 				duration = evt.getDuration()
 				end = begin + duration

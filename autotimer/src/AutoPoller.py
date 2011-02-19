@@ -3,6 +3,7 @@ from enigma import eTimer
 
 # Config
 from Components.config import config
+from plugin import autotimer
 
 # Notifications
 from Tools.FuzzyDate import FuzzyTime
@@ -15,17 +16,13 @@ class AutoPoller:
 
 	def __init__(self):
 		# Init Timer
+		print "[AutoTimer] Auto Poll Enabled"
 		self.timer = eTimer()
 
-	def start(self, initial = True):
-		if initial:
-			delay = 2
-		else:
-			delay = config.plugins.autotimer.interval.value*3600
-
+	def start(self):
 		if self.query not in self.timer.callback:
 			self.timer.callback.append(self.query)
-		self.timer.startLongTimer(delay)
+		self.timer.startLongTimer(config.plugins.autotimer.interval.value*60)
 
 	def stop(self):
 		if self.query in self.timer.callback:
@@ -33,24 +30,34 @@ class AutoPoller:
 		self.timer.stop()
 
 	def query(self):
-		from plugin import autotimer
-
-		# Ignore any program errors
-		try:
-			ret = autotimer.parseEPG()
-		except Exception:
-			# Dump error to stdout
-			import traceback, sys
-			traceback.print_exc(file=sys.stdout)
-		else:
-			conflicts = ret[4]
-			if conflicts and config.plugins.autotimer.notifconflict.value:
-				AddPopup(
-					_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(conflicts), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in conflicts])),
-					MessageBox.TYPE_INFO,
-					5,
-					NOTIFICATIONID
-				)
-
-		self.timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
-
+		self.timer.stop()
+		from Screens.Standby import inStandby
+		print "[AutoTimer] Auto Poll"
+		if config.plugins.autotimer.onlyinstandby.value and inStandby:
+			print "[AutoTimer] Auto Poll Started"
+			# Ignore any program errors
+			try:
+				ret = autotimer.parseEPG()
+			except Exception:
+				# Dump error to stdout
+				import traceback, sys
+				traceback.print_exc(file=sys.stdout)
+		elif not config.plugins.autotimer.onlyinstandby.value:
+			print "[AutoTimer] Auto Poll Started"
+			# Ignore any program errors
+			try:
+				ret = autotimer.parseEPG()
+			except Exception:
+				# Dump error to stdout
+				import traceback, sys
+				traceback.print_exc(file=sys.stdout)
+			else:
+				conflicts = ret[4]
+				if conflicts and config.plugins.autotimer.notifconflict.value:
+					AddPopup(
+						_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(conflicts), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in conflicts])),
+						MessageBox.TYPE_INFO,
+						5,
+						NOTIFICATIONID
+					)
+		self.timer.startLongTimer(config.plugins.autotimer.interval.value*60)

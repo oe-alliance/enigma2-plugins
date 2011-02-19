@@ -28,7 +28,7 @@ class AutoTimerList(MenuList):
 				elif attrib == "itemHeight":
 					self.l.setItemHeight(int(value))
 				elif attrib == "colorDisabled":
-					self.colorDisabled = int(parseColor(value))
+					self.colorDisabled = parseColor(value).argb()
 				else:
 					attribs.append((attrib, value))
 		self.skinAttributes = attribs

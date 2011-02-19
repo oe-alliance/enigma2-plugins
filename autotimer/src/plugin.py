@@ -14,21 +14,22 @@ from Plugins.Plugin import PluginDescriptor
 
 # Initialize Configuration
 config.plugins.autotimer = ConfigSubsection()
-config.plugins.autotimer.autopoll = ConfigEnableDisable(default = False)
-config.plugins.autotimer.interval = ConfigNumber(default = 3)
+config.plugins.autotimer.autopoll = ConfigEnableDisable(default = True)
+config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default = True)
+config.plugins.autotimer.interval = ConfigNumber(default = 60)
 config.plugins.autotimer.refresh = ConfigSelection(choices = [
 		("none", _("None")),
 		("auto", _("Only AutoTimers created during this session")),
 		("all", _("All non-repeating timers"))
-	], default = "none"
+	], default = "all"
 )
-config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = True)
+config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = False)
 config.plugins.autotimer.editor = ConfigSelection(choices = [
 		("plain", _("Classic")),
 		("wizard", _("Wizard"))
-	], default = "wizard"
+	], default = "Classic"
 )
-config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default = False)
+config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default = True)
 config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.autotimer.fastscan = ConfigYesNo(default = False)
 config.plugins.autotimer.notifconflict = ConfigYesNo(default = True)
@@ -46,7 +47,6 @@ def autostart(reason, **kwargs):
 		# Initialize AutoTimer
 		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
-
 		# Start Poller
 		from AutoPoller import AutoPoller
 		autopoller = AutoPoller()
@@ -128,7 +128,7 @@ def editCallback(session):
 		if autopoller is None:
 			from AutoPoller import AutoPoller
 			autopoller = AutoPoller()
-		autopoller.start(initial = False)
+		autopoller.start()
 	# Remove instance if not running in background
 	else:
 		autopoller = None
@@ -165,8 +165,14 @@ def Plugins(**kwargs):
 		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main),
 		PluginDescriptor(name="AutoTimer", description= _("add AutoTimer..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist),
 		PluginDescriptor(name=_("add AutoTimer..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc = eventinfo),
+		PluginDescriptor(name=_("Auto Timers"), description = "Edit Timers and scan for new Events", where=PluginDescriptor.WHERE_MENU, fnc=timermenu),
 	]
 	if config.plugins.autotimer.show_in_extensionsmenu.value:
 		l.append(extDescriptor)
 	return l
+
+def timermenu(menuid):
+	if menuid == "timermenu":
+		return [(_("AutoTimers"), main, "autotimer_setup", None)]
+	return []
 

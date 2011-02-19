@@ -293,7 +293,7 @@ class AutoTimerEditorBase:
 				("1", _("On same service")),
 				("2", _("On any service")),
 			],
-			default = str(timer.getAvoidDuplicateDescription())
+			default = "1"
 		))
 
 		# Custom Location
@@ -1151,6 +1151,8 @@ def addAutotimerFromSearchString(session, match):
 		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
 		autotimer.readXml()
+	else:
+		autotimer.readXml()
 
 	session.openWithCallback(
 		importerCallback,
@@ -1182,7 +1184,9 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
 		autotimer.readXml()
-
+	else:
+		autotimer.readXml()
+	
 	match = evt and evt.getEventName() or ""
 	name = match or "New AutoTimer"
 	sref = None
@@ -1236,6 +1240,8 @@ def addAutotimerFromService(session, service = None):
 	if autotimer is None:
 		from AutoTimer import AutoTimer
 		autotimer = AutoTimer()
+		autotimer.readXml()
+	else:
 		autotimer.readXml()
 
 	serviceHandler = eServiceCenter.getInstance()
@@ -1319,7 +1325,11 @@ def editorCallback(ret):
 		# Save modified xml
 		autotimer.writeXml()
 
+		autotimer.readXml()
+		autotimer.parseEPG()
+
 	# Remove instance if not running in background
 	if not config.plugins.autotimer.autopoll.value:
 		autotimer = None
+
 

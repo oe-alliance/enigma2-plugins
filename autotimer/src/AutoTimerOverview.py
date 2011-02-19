@@ -130,9 +130,9 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			)
 		else:
 			self.session.openWithCallback(
-				self.addCallback,
-				AutoTimerEditor,
-				newTimer
+				self.refresh,
+				AutoTimerChannelSelection,
+				self.autotimer
 			)
 
 	def editCallback(self, ret):
