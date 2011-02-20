@@ -68,6 +68,7 @@ CHOICELIST=[("no", _("Disabled")),
 			("singleepg", _("Single EPG")),
 			("multiepg", _("Multi EPG")),
 			("easypg", _("Easy-PG")),
+			("easysel", _("Easy-Selection")),
 			("graphepg", _("Graphik multi-EPG")),
 			("merlinepg", _("Merlin EPG")),
 			("cooltv", _("Cool-TV")),
@@ -78,6 +79,7 @@ CHOICELIST=[("no", _("Disabled")),
 			("imdbinfo", _("IMDB info")),
 			("primetime", _("Prime Time Manager")),
 			("epgrefresh", _("EPG refresh")),
+			("sleep", _("Sleep timer")),
 			("sysinfo", _("Sherlock"))
 			]
 config.plugins.EasyInfo  = ConfigSubsection()
@@ -167,12 +169,18 @@ def info(self):
 
 
 def tvbut(self):
+	myService = self.session.nav.getCurrentService()
+	myTS = myService and myService.timeshift()
+	if myTS is not None:
+		if myTS.isTimeshiftActive():
+			InfoBar_instance.stopTimeshift()
+			return
 	bouquets = InfoBar_instance.servicelist.getBouquetList()
 	if bouquets is None:
 		cnt = 0
 	else:
 		cnt = len(bouquets)
-		IBservices = InfoBar_instance.getBouquetServices(bouquets[0][1])
+		IBservices = InfoBar_instance.getBouquetServices(InfoBar_instance.servicelist.getRoot())
 	if cnt > 1:
 		if config.plugins.EasyInfo.buttTV.value == "easysel":
 			InfoBar_instance.dlg_stack.append(InfoBar_instance.session.open(EasySelection, IBservices, EINzapTo, None, EINchangeBouquetCB))
@@ -533,11 +541,22 @@ def EINcallbackFunc(answer):
 			cnt = 0
 		else:
 			cnt = len(bouquets)
-			IBservices = InfoBar_instance.getBouquetServices(bouquets[0][1])
+			IBservices = InfoBar_instance.getBouquetServices(InfoBar_instance.servicelist.getRoot())
 		if cnt > 1:
 			InfoBar_instance.dlg_stack.append(InfoBar_instance.session.open(EasyPG, IBservices, EINzapTo, None, EINchangeBouquetCB))
 		elif cnt == 1:
 			InfoBar_instance.dlg_stack.append(InfoBar_instance.session.open(EasyPG, IBservices, EINzapTo, None, None))
+	elif answer == "easysel":
+		bouquets = InfoBar_instance.servicelist.getBouquetList()
+		if bouquets is None:
+			cnt = 0
+		else:
+			cnt = len(bouquets)
+			IBservices = InfoBar_instance.getBouquetServices(InfoBar_instance.servicelist.getRoot())
+		if cnt > 1:
+			InfoBar_instance.dlg_stack.append(InfoBar_instance.session.open(EasySelection, IBservices, EINzapTo, None, EINchangeBouquetCB))
+		elif cnt == 1:
+			InfoBar_instance.dlg_stack.append(InfoBar_instance.session.open(EasySelection, IBservices, EINzapTo, None, None))
 	elif answer == "timers":
 		EINsession.open(TimerEditList)
 	elif answer == "multiepg":
@@ -634,6 +653,9 @@ def EINcallbackFunc(answer):
 			EINsession.open(SherlockII)
 		else:
 			EINsession.open(MessageBox, text = _('Sherlock is not installed!'), type = MessageBox.TYPE_INFO)
+	elif answer == "sleep":
+		from Screens.SleepTimerEdit import SleepTimerEdit
+		EINsession.open(SleepTimerEdit)
 	else:
 		EINsession.open(MessageBox, text = _('This function is yet not available!'), type = MessageBox.TYPE_INFO)
 
