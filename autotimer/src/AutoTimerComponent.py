@@ -48,7 +48,7 @@ class AutoTimerComponent(object):
 			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
 			lastBegin = 0, justplay = False, avoidDuplicateDescription = 0, bouquets = None, \
 			tags = None, encoding = 'UTF-8', searchType = "partial", searchCase = "insensitive", \
-			overrideAlternatives = False):
+			overrideAlternatives = False, timeframe = None):
 		self.name = name
 		self.match = match
 		self.enabled = enabled
@@ -73,6 +73,7 @@ class AutoTimerComponent(object):
 		self.searchType = searchType
 		self.searchCase = searchCase
 		self.overrideAlternatives = overrideAlternatives
+		self.timeframe = timeframe
 
 ### Attributes / Properties
 
@@ -190,6 +191,9 @@ class AutoTimerComponent(object):
 	def hasOffset(self):
 		return self.offset is not None
 
+	def hasTimeframe(self):
+		return self.timeframe is not None
+
 ### Helper
 
 	"""
@@ -299,6 +303,10 @@ class AutoTimerComponent(object):
 	getTimespan = lambda self: self._timespan
 	getTimespanBegin = lambda self: '%02d:%02d' % (self.timespan[0][0], self.timespan[0][1])
 	getTimespanEnd = lambda self: '%02d:%02d' % (self.timespan[1][0], self.timespan[1][1])
+
+	getTimeframe = lambda self: self.timeframe
+	getTimeframeBegin = lambda self: int(self.timeframe[0])
+	getTimeframeEnd	= lambda self: int(self.timeframe[1])
 
 	isOffsetEqual = lambda self: self.offset[0] == self.offset[1]
 
@@ -466,6 +474,14 @@ class AutoTimerComponent(object):
 				return afterevent[0]
 		return None
 
+	def checkTimeframe(self, begin):
+		if self.timeframe is not None:
+			start, end = self.timeframe
+			if begin > start and begin < end:
+				return False
+			return True
+		return False
+
 ### Misc
 
 	def __copy__(self):
@@ -494,7 +510,8 @@ class AutoTimerComponent(object):
 			encoding = self.encoding,
 			searchType = self.searchType,
 			searchCase = self.searchCase,
-			overrideAlternatives = self.overrideAlternatives
+			overrideAlternatives = self.overrideAlternatives,
+			timeframe = self.timeframe,
 		)
 
 	def __deepcopy__(self, memo):
@@ -523,7 +540,8 @@ class AutoTimerComponent(object):
 			encoding = self.encoding,
 			searchType = self.searchType,
 			searchCase = self.searchCase,
-			overrideAlternatives = self.overrideAlternatives
+			overrideAlternatives = self.overrideAlternatives,
+			timeframe = self.timeframe
 		)
 
 	def __eq__(self, other):
@@ -576,6 +594,7 @@ class AutoTimerComponent(object):
 					str(self.bouquets),
 					str(self.tags),
 					str(self.overrideAlternatives),
+					str(self.timeframe),
 			 )),
 			 ")>"
 		))
