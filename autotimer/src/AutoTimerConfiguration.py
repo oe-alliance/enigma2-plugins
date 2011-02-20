@@ -482,6 +482,8 @@ def buildConfig(defaultTimer, timers, webif = False):
 
 	# This gets deleted afterwards if we do not have set any defaults
 	list.append(' <defaults')
+	if webif:
+		list.extend((' id="', str(defaultTimer.getId()),'"'))
 
 	# Timespan
 	if defaultTimer.hasTimespan():
@@ -606,6 +608,8 @@ def buildConfig(defaultTimer, timers, webif = False):
 	for timer in timers:
 		# Common attributes (match, enabled)
 		list.extend((' <timer name="', stringToXML(timer.name), '" match="', stringToXML(timer.match), '" enabled="', timer.getEnabled(), '"'))
+		if webif:
+			list.extend((' id="', str(timer.getId()),'"'))
 
 		# Timespan
 		if timer.hasTimespan():

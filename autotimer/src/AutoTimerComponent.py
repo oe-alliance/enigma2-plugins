@@ -272,6 +272,8 @@ class AutoTimerComponent(object):
 	getExcludedShort = lambda self: [x.pattern for x in self.exclude[1]]
 	getExcludedTitle = lambda self: [x.pattern for x in self.exclude[0]]
 
+	getId = lambda self: self.id
+
 	getInclude = lambda self: self._include
 	getIncludedTitle = lambda self: [x.pattern for x in self.include[0]]
 	getIncludedShort = lambda self: [x.pattern for x in self.include[1]]
