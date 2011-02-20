@@ -74,6 +74,12 @@ def parseEntry(element, baseTimer, defaults = False):
 			print '[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', disabling'
 			baseTimer.enabled = False
 
+		# Read timeframe
+		before = element.get("before")
+		after = element.get("after")
+		if before and after:
+			baseTimer.timeframe = (int(after), int(before))
+
 	# Read out encoding (won't change if no value is set)
 	baseTimer.encoding = element.get("encoding")
 
@@ -614,6 +620,10 @@ def buildConfig(defaultTimer, timers, webif = False):
 		# Timespan
 		if timer.hasTimespan():
 			list.extend((' from="', timer.getTimespanBegin(), '" to="', timer.getTimespanEnd(), '"'))
+
+		# Timeframe
+		if timer.hasTimeframe():
+			list.extend((' after="', str(timer.getTimeframeBegin()), '" before="', str(timer.getTimeframeEnd()), '"'))
 
 		# Duration
 		if timer.hasDuration():
