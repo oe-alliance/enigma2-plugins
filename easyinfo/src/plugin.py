@@ -798,6 +798,19 @@ class EvNewList(EPGList):
 				))
 		return res
 
+	def moveToService(self,serviceref):
+		if not serviceref:
+			return
+		index = 0
+		refstr = serviceref.toString()
+		for x in self.list:
+			if x[1] == refstr:
+				self.instance.moveSelectionTo(index)
+				break
+			index += 1
+		if x[1] != refstr:
+			self.instance.moveSelectionTo(0)
+
 
 
 class EasyPG(EPGSelection, Screen):
@@ -899,6 +912,11 @@ class EasyPG(EPGSelection, Screen):
 		EPGSelection.__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
 		global EINposition
 		EINposition = 0
+		allbouq = InfoBar_instance.servicelist.getBouquetList()
+		for newpos in range(0, len(allbouq)):
+			if InfoBar_instance.servicelist.getRoot() == allbouq[newpos][1]:
+				EINposition = newpos
+				break
 		self.PTinit = False
 		self.session = session
 		EPGSelection.skinName = "EasyPG"
@@ -1076,6 +1094,19 @@ class ESListNext(EPGList):
 				))
 		return res
 
+	def moveToService(self,serviceref):
+		if not serviceref:
+			return
+		index = 0
+		refstr = serviceref.toString()
+		for x in self.list:
+			if x[1] == refstr:
+				self.instance.moveSelectionTo(index)
+				break
+			index += 1
+		if x[1] != refstr:
+			self.instance.moveSelectionTo(0)
+
 
 
 class EasySelection(EPGSelection, Screen):
@@ -1108,6 +1139,11 @@ class EasySelection(EPGSelection, Screen):
 		EPGSelection.__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
 		global EINposition
 		EINposition = 0
+		allbouq = InfoBar_instance.servicelist.getBouquetList()
+		for newpos in range(0, len(allbouq)):
+			if InfoBar_instance.servicelist.getRoot() == allbouq[newpos][1]:
+				EINposition = newpos
+				break
 		self.session = session
 		EPGSelection.skinName = "EasySelection"
 		self["list"] = EvNewList(type = EPG_TYPE_MULTI, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
