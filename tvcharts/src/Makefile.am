@@ -1,5 +1,3 @@
-SUBDIRS = images
-
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/TVCharts
 
 install_PYTHON = __init__.py plugin.py

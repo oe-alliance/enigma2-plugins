@@ -401,7 +401,6 @@ trafficinfo/src/Makefile
 tvcharts/Makefile
 tvcharts/meta/Makefile
 tvcharts/src/Makefile
-tvcharts/src/images/Makefile
 
 unwetterinfo/Makefile
 unwetterinfo/meta/Makefile
