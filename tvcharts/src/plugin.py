@@ -2,7 +2,7 @@
 # TVCharts Plugin for Enigma2 Dreamboxes
 # Coded by Homey (c) 2011
 #
-# Version: 1.3
+# Version: 1.4
 # Support: www.i-have-a-dreambox.com
 #####################################################
 from Components.About import about
@@ -30,7 +30,7 @@ from Tools.Directories import fileExists
 from Tools.HardwareInfo import HardwareInfo
 from Plugins.Plugin import PluginDescriptor
 
-from enigma import eTimer, eEPGCache, loadJPG, loadPNG, loadPic, eListboxPythonMultiContent, gFont, eServiceReference, eServiceCenter, iPlayableService
+from enigma import eTimer, eEPGCache, loadPNG, eListboxPythonMultiContent, gFont, eServiceReference, eServiceCenter, iPlayableService
 from random import randint
 from time import time, gmtime, strftime
 from twisted.web.client import getPage
@@ -107,10 +107,10 @@ class TVChartsMain(Screen):
 	<screen position="center,center" size="620,510" title="TV Charts">
 		<widget name="channellist" position="10,10" zPosition="1" size="600,458" scrollbarMode="showOnDemand" />
 		<widget name="info" position="0,447" zPosition="2" size="620,20" font="Regular;18" noWrap="1" foregroundColor="#ffffff" transparent="1" halign="center" valign="center" />
-		<ePixmap name="red"    position="22,470"  zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_red.png" transparent="1" alphatest="on" />
-		<ePixmap name="green"  position="167,470" zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_green.png" transparent="1" alphatest="on" />
-		<ePixmap name="yellow" position="312,470" zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_yellow.png" transparent="1" alphatest="on" />
-		<ePixmap name="blue"   position="457,470" zPosition="3" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVCharts/images/key_blue.png" transparent="1" alphatest="on" />
+		<ePixmap name="red"    position="22,470"  zPosition="3" size="140,40" pixmap="/usr/share/enigma2/skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap name="green"  position="167,470" zPosition="3" size="140,40" pixmap="/usr/share/enigma2/skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap name="yellow" position="312,470" zPosition="3" size="140,40" pixmap="/usr/share/enigma2/skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap name="blue"   position="457,470" zPosition="3" size="140,40" pixmap="/usr/share/enigma2/skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		<widget name="key_red" position="22,470" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_green" position="167,470" zPosition="4" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_yellow" position="312,470" zPosition="4" size="140,40" valign="center" halign="center"  font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -288,12 +288,12 @@ class TVChartsMain(Screen):
 
 			for node in xml.getElementsByTagName("CHANNEL"):
 				event_id = None
+				inBouquet = False
 				channelname =str(node.getElementsByTagName("NAME")[0].childNodes[0].data)
 				serviceref = str(node.getElementsByTagName("SERVICEREF")[0].childNodes[0].data)
 				eventname = str(node.getElementsByTagName("EVENTNAME")[0].childNodes[0].data)
 				usercount = int(node.getElementsByTagName("USERCOUNT")[0].childNodes[0].data)
 				percent = int(node.getElementsByTagName("PERCENT")[0].childNodes[0].data)
-				inBouquet = False
 
 				# Look for favourite channel for this event in my bouqets
 				for sepginfo in self.eventcache:
@@ -540,7 +540,7 @@ class DBUpdateStatus(Screen):
 				print "[TVCharts] Error loading timers!"
 
 		# Status Update
-		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'eventdescr' : event_description, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist})).addErrback(self.updateError)
+		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', timeout=60, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'eventdescr' : event_description, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist})).addErrback(self.updateError)
 
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)
