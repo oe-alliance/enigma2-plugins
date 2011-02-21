@@ -74,8 +74,9 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		timer = None
 		newTimer = True
 		if id is None:
+			id = autotimer.getUniqueId()
 			timer = autotimer.defaultTimer.clone()
-			timer.id = autotimer.getUniqueId()
+			timer.id = id
 		else:
 			id = int(id)
 			for possibleMatch in autotimer.getTimerList():
@@ -86,14 +87,28 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			if timer is None:
 				return self.returnResult(req, False, _("unable to find timer with id %i" % (id,)))
 
-		# Match
-		timer.match = unquote(get("match", timer.match))
-		if not timer.match:
-			return self.returnResult(req, False, _("autotimers need a match attribute"))
+		if id != -1:
+			# Match
+			timer.match = unquote(get("match", timer.match))
+			if not timer.match:
+				return self.returnResult(req, False, _("autotimers need a match attribute"))
 
-		# Name
-		timer.name = unquote(get("name", timer.name)).strip()
-		if not timer.name: timer.name = timer.match
+			# Name
+			timer.name = unquote(get("name", timer.name)).strip()
+			if not timer.name: timer.name = timer.match
+
+			# Enabled
+			enabled = get("enabled")
+			if enabled is not None:
+				try: enabled = int(enabled)
+				except ValueError: enabled = enabled == "yes"
+				timer.enabled = enabled
+
+			# Timeframe
+			before = get("before")
+			after = get("after")
+			if before and after:
+				timer.timeframe = (int(after), int(before))
 
 		# Encoding
 		timer.encoding = get("encoding", timer.encoding)
@@ -104,13 +119,6 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 
 		# Alternatives
 		timer.overrideAlternatives = int(get("overrideAlternatives", timer.overrideAlternatives))
-
-		# Enabled
-		enabled = get("enabled")
-		if enabled is not None:
-			try: enabled = int(enabled)
-			except ValueError: enabled = enabled == "yes"
-			timer.enabled = enabled
 
 		# Justplay
 		justplay = get("justplay")
