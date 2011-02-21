@@ -42,7 +42,7 @@ from Tools.Directories import fileExists, pathExists
 from Tools.LoadPixmap import LoadPixmap
 from Tools.HardwareInfo import HardwareInfo
 from ServiceReference import ServiceReference
-from enigma import eListboxPythonMultiContent, gFont, getDesktop, eTimer, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, RT_HALIGN_RIGHT, RT_VALIGN_TOP
+from enigma import eListboxPythonMultiContent, gFont, getDesktop, eTimer, eServiceReference, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, RT_HALIGN_RIGHT, RT_VALIGN_TOP
 from time import localtime, time, mktime
 
 
@@ -1221,6 +1221,14 @@ class EasySelection(EPGSelection, Screen):
 		self["list"].fillMultiEPG(self.services, -1)
 		self["listN"].fillMultiEPG(self.services, -1)
 		self["listN"].updateMultiEPG(1)
+
+	def infoKeyPressed(self):
+		cur = self["list"].getCurrent()
+		service = cur[1].ref.toString()
+		ref = eServiceReference(service)
+		if ref:
+			InfoBar_instance.servicelist.savedService = ref
+			self.session.openWithCallback(InfoBar_instance.servicelist.SingleServiceEPGClosed, EPGSelection, ref, serviceChangeCB = InfoBar_instance.servicelist.changeServiceCB)
 
 
 
