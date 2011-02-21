@@ -192,7 +192,52 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		if maxduration:
 			timer.maxduration = int(maxduration)*60
 
-		# TODO: implement in-/excludes, counter, tags
+		# Includes
+		title = req.args.get("title")
+		shortdescription = req.args.get("shortdescription")
+		description = req.args.get("description")
+		dayofweek = req.args.get("dayofweek")
+		if title or shortdescription or description or dayofweek:
+			includes = timer.include
+			title = [unquote(x) for x in title] if title else includes[0]
+			shortdescription = [unquote(x) for x in shortdescription] if shortdescription else includes[1]
+			description = [unquote(x) for x in description] if description else includes[2]
+			dayofweek = [unquote(x) for x in dayofweek] if dayofweek else includes[3]
+			while '' in title: title.remove('')
+			while '' in shortdescription: shortdescription.remove('')
+			while '' in description: description.remove('')
+			while '' in dayofweek: dayofweek.remove('')
+			timer.include = (title, shortdescription, description, dayofweek)
+
+		# Excludes
+		title = req.args.get("!title")
+		shortdescription = req.args.get("!shortdescription")
+		description = req.args.get("!description")
+		dayofweek = req.args.get("!dayofweek")
+		if title or shortdescription or description or dayofweek:
+			excludes = timer.exclude
+			title = [unquote(x) for x in title] if title else excludes[0]
+			shortdescription = [unquote(x) for x in shortdescription] if shortdescription else excludes[1]
+			description = [unquote(x) for x in description] if description else excludes[2]
+			dayofweek = [unquote(x) for x in dayofweek] if dayofweek else excludes[3]
+			while '' in title: title.remove('')
+			while '' in shortdescription: shortdescription.remove('')
+			while '' in description: description.remove('')
+			while '' in dayofweek: dayofweek.remove('')
+			timer.exclude = (title, shortdescription, description, dayofweek)
+
+		tags = req.args.get("tag")
+		if tags:
+			while '' in tags: tags.remove('')
+			timer.tags = [unquote(x) for x in tags]
+
+		timer.matchCount = int(get("counter", timer.matchCount))
+		timer.matchFormatString = get("counterFormat", timer.matchFormatString)
+		if id != -1:
+			matchLeft = get("left")
+			timer.matchLeft = int(matchLeft) if matchLeft else (timer.matchCount if newTimer else timer.matchLeft)
+			timer.matchLimit = get("lastActivation", timer.matchLimit)
+			timer.lastBegin = int(get("lastBegin", timer.lastBegin))
 
 		timer.avoidDuplicateDescription = int(get("avoidDuplicateDescription", timer.avoidDuplicateDescription))
 		timer.destination = get("location", "") or None
