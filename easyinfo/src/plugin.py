@@ -38,10 +38,12 @@ from Components.EpgList import EPGList, EPG_TYPE_MULTI
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigClock
 from Components.Sources.StaticText import StaticText
+from Components.TimerSanityCheck import TimerSanityCheck
 from Tools.Directories import fileExists, pathExists
 from Tools.LoadPixmap import LoadPixmap
 from Tools.HardwareInfo import HardwareInfo
 from ServiceReference import ServiceReference
+from skin import parseColor
 from enigma import eListboxPythonMultiContent, gFont, getDesktop, eTimer, eServiceReference, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, RT_HALIGN_RIGHT, RT_VALIGN_TOP
 from time import localtime, time, mktime
 
@@ -737,6 +739,16 @@ class EasyEvent(Screen, EventViewBase):
 
 
 
+class DummyTimerEntry:
+	def __init__(self, serviceref, begin, end):
+		self.service_ref = serviceref
+		self.begin = begin
+		self.end = end
+		self.repeated = 0
+		self.disabled = False
+
+
+
 class EvNewList(EPGList):
 	def __init__(self, type=EPG_TYPE_MULTI, selChangedCB=None, timer = None):
 		EPGList.__init__(self, type, selChangedCB, timer)
@@ -753,6 +765,7 @@ class EvNewList(EPGList):
 
 	def buildMultiEntry(self, changecount, service, eventId, beginTime, duration, EventName, nowTime, service_name):
 		(clock_pic, rec) = self.getPixmapForEntry(service, eventId, beginTime, duration)
+		colorEventAvailable = self.getColorEventAvailable(service, beginTime, duration)
 		res = [ None ]
 		sref = str(service)[:-1].replace(':','_')
 		Spixmap = LoadPixmap(path=(config.plugins.EasyInfo.myPicons.value + sref + '.png'))
@@ -786,7 +799,7 @@ class EvNewList(EPGList):
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, 100, 4, 10, 20, 1, RT_HALIGN_RIGHT, '>'),
 					(eListboxPythonMultiContent.TYPE_TEXT, 110, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d"%(begin[3],begin[4],end[3],end[4])),
-					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, EventName, colorEventAvailable, colorEventAvailable)
 				))
 			else:
 				percent = (nowTime - beginTime)*100/duration
@@ -794,7 +807,7 @@ class EvNewList(EPGList):
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_PROGRESS, 110, 11, 40, 8, percent),
 					(eListboxPythonMultiContent.TYPE_TEXT, 110, 25, 60, 22, 1, RT_HALIGN_LEFT, "+%d:%02d" % (restzeit/3600, (restzeit/60)-((restzeit /3600)*60))),
-					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 180, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, EventName, colorEventAvailable, colorEventAvailable)
 				))
 		return res
 
@@ -810,6 +823,49 @@ class EvNewList(EPGList):
 			index += 1
 		if x[1] != refstr:
 			self.instance.moveSelectionTo(0)
+	
+	def getColorEventAvailable(self, service, beginTime, duration):
+		colorEventAvailable =  None
+		if beginTime and duration:
+			endTime = beginTime + duration
+			timerlist = []
+			serviceref = ServiceReference(service)
+			for x in self.timer.timer_list:
+				if x.repeated and not x.disabled:
+					timerlist = self.timer.timer_list
+					break
+			if not timerlist:
+				ref = serviceref.ref
+				refList = []
+				if ref.flags & eServiceReference.isGroup:
+					serviceList = serviceHandler.list(ref)
+					if serviceList:
+						for ref in serviceList.getContent("R"):
+							refList.append(ref.toString())
+				else:
+					refList.append(ref.toString())		
+				for timer in self.timer.timer_list:
+					if not x.disabled:					
+						check = 0
+						ref = timer.service_ref.ref
+						if ref.flags & eServiceReference.isGroup:
+							serviceList = serviceHandler.list(ref)
+							if serviceList:
+								for ref in serviceList.getContent("R"):
+									if ref.toString() not in refList:
+										check = 1
+										break
+						else:
+							if ref.toString() not in refList:
+								check = 1
+						if check:
+							if (max(beginTime, timer.begin) < min(endTime, timer.end)):
+								timerlist.append(timer)
+			if timerlist:
+				timersanitycheck = TimerSanityCheck(timerlist, DummyTimerEntry(serviceref, beginTime, endTime))
+				if not timersanitycheck.check(filter_check = 1):
+					colorEventAvailable = 0x777777
+		return colorEventAvailable
 
 
 
@@ -1039,15 +1095,9 @@ class EasyPG(EPGSelection, Screen):
 
 
 
-class ESListNext(EPGList):
+class ESListNext(EvNewList):
 	def __init__(self, type=EPG_TYPE_MULTI, selChangedCB=None, timer = None):
-		EPGList.__init__(self, type, selChangedCB, timer)
-		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", 18))
-		self.l.setItemHeight(50)
-		self.l.setBuildFunc(self.buildMultiEntry)
-		self.breite = 200
-		MyPiconPath = "/"
+		EvNewList.__init__(self, type, selChangedCB, timer)
 
 	def recalcEntrySize(self):
 		esize = self.l.getItemSize()
@@ -1055,6 +1105,7 @@ class ESListNext(EPGList):
 
 	def buildMultiEntry(self, changecount, service, eventId, beginTime, duration, EventName, nowTime, service_name):
 		(clock_pic, rec) = self.getPixmapForEntry(service, eventId, beginTime, duration)
+		colorEventAvailable = self.getColorEventAvailable(service, beginTime, duration)
 		res = [ None ]
 		if rec:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 58, 16, 21, 21, clock_pic))
@@ -1065,7 +1116,7 @@ class ESListNext(EPGList):
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_TEXT, 0, 4, 10, 20, 1, RT_HALIGN_RIGHT, '>'),
 					(eListboxPythonMultiContent.TYPE_TEXT, 10, 4, 70, 44, 1, RT_HALIGN_LEFT, "%02d.%02d\n%02d.%02d"%(begin[3],begin[4],end[3],end[4])),
-					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, EventName, colorEventAvailable, colorEventAvailable)
 				))
 			else:
 				percent = (nowTime - beginTime)*100/duration
@@ -1073,7 +1124,7 @@ class ESListNext(EPGList):
 				res.extend((
 					(eListboxPythonMultiContent.TYPE_PROGRESS, 10, 11, 40, 8, percent),
 					(eListboxPythonMultiContent.TYPE_TEXT, 10, 25, 60, 22, 1, RT_HALIGN_LEFT, "+%d:%02d" % (restzeit/3600, (restzeit/60)-((restzeit /3600)*60))),
-					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, EventName)
+					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, EventName, colorEventAvailable, colorEventAvailable)
 				))
 		elif beginTime is not None:
 			if nowTime < beginTime:
@@ -1093,19 +1144,6 @@ class ESListNext(EPGList):
 					(eListboxPythonMultiContent.TYPE_TEXT, 80, 1, self.breite, 48, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, EventName)
 				))
 		return res
-
-	def moveToService(self,serviceref):
-		if not serviceref:
-			return
-		index = 0
-		refstr = serviceref.toString()
-		for x in self.list:
-			if x[1] == refstr:
-				self.instance.moveSelectionTo(index)
-				break
-			index += 1
-		if x[1] != refstr:
-			self.instance.moveSelectionTo(0)
 
 
 
