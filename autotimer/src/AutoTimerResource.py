@@ -1,30 +1,29 @@
-from twisted.web import http, resource
 from AutoTimer import AutoTimer
+from Components.config import config
 from RecordTimer import AFTEREVENT
+from twisted.web import http, resource
 from urllib import unquote
 from . import _
+import plugin
 
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
 	def getAutoTimerInstance(self):
-		from plugin import autotimer
-		if autotimer is None:
+		if plugin.autotimer is None:
 			self._remove = True
 			return AutoTimer()
 		self._remove = False
-		return autotimer
+		return plugin.autotimer
 	def returnResult(self, req, state, statetext):
-		result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
-			<e2simplexmlresult>
-				<e2state>%s</e2state>
-				<e2statetext>%s</e2statetext>
-			</e2simplexmlresult>
-			""" % ('true' if state else 'false', statetext)
-
 		req.setResponseCode(http.OK)
 		req.setHeader('Content-type', 'application; xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
-		return result
+
+		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+<e2simplexmlresult>
+	<e2state>%s</e2state>
+	<e2statetext>%s</e2statetext>
+</e2simplexmlresult>""" % ('true' if state else 'false', statetext)
 
 
 class AutoTimerDoParseResource(AutoTimerBaseResource):
@@ -252,3 +251,101 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		else:
 			message = _("AutoTimer was changed successfully")
 		return self.returnResult(req, True, message)
+
+class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
+	def render(self, req):
+		for key, value in req.args.iteritems():
+			value = value[0]
+			if key == "autopoll":
+				config.plugins.autotimer.autopoll.value = True if value == "true" else False
+			elif key == "interval":
+				config.plugins.autotimer.interval.value = int(value)
+			elif key == "refresh":
+				config.plugins.autotimer.refresh.value = value
+			elif key == "try_guessing":
+				config.plugins.autotimer.try_guessing.value = True if value == "true" else False
+			elif key == "editor":
+				config.plugins.autotimer.editor.value = value
+			elif key == "disabled_on_conflict":
+				config.plugins.autotimer.disabled_on_conflict.value = True if value == "true" else False
+			elif key == "show_in_extensionsmenu":
+				config.plugins.autotimer.show_in_extensionsmenu.value = True if value == "true" else False
+			elif key == "fastscan":
+				config.plugins.autotimer.fastscan.value = True if value == "true" else False
+			elif key == "notifconflict":
+				config.plugins.autotimer.notifconflict.value = True if value == "true" else False
+
+		if config.plugins.autotimer.autopoll.value:
+			if plugin.autopoller is None:
+				from AutoPoller import AutoPoller
+				plugin.autopoller = AutoPoller()
+			if plugin.autotimer is None:
+				plugin.autotimer = AutoTimer()
+			plugin.autopoller.start(initial = False)
+		else:
+			if plugin.autopoller is not None:
+				plugin.autopoller.stop()
+				plugin.autopoller = None
+			if plugin.autotimer is not None:
+				try: plugin.autotimer.readXml()
+				except Exception: pass
+				else: plugin.autotimer.writeXml()
+				plugin.autotimer = None
+
+		return self.returnResult(req, True, _("config changed."))
+
+class AutoTimerSettingsResource(resource.Resource):
+	def render(self, req):
+		req.setResponseCode(http.OK)
+		req.setHeader('Content-type', 'application; xhtml+xml')
+		req.setHeader('charset', 'UTF-8')
+
+		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+<e2settings>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.autopoll</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.interval</e2settingname>
+		<e2settingvalue>%d</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.refresh</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.try_guessing</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.editor</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.disabled_on_conflict</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.show_in_extensionsmenu</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.fastscan</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
+		<e2settingname>config.plugins.autotimer.notifconflict</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+</e2settings>""" % (
+				config.plugins.autotimer.autopoll.value,
+				config.plugins.autotimer.interval.value,
+				config.plugins.autotimer.refresh.value,
+				config.plugins.autotimer.try_guessing.value,
+				config.plugins.autotimer.editor.value,
+				config.plugins.autotimer.disabled_on_conflict.value,
+				config.plugins.autotimer.show_in_extensionsmenu.value,
+				config.plugins.autotimer.fastscan.value,
+				config.plugins.autotimer.notifconflict.value,
+			)
