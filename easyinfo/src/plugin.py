@@ -175,6 +175,9 @@ def tvbut(self):
 		if myTS.isTimeshiftActive():
 			InfoBar_instance.stopTimeshift()
 			return
+	if InfoBar_instance.servicelist.mode == 1:
+		InfoBar_instance.showTv()
+		return
 	bouquets = InfoBar_instance.servicelist.getBouquetList()
 	if bouquets is None:
 		cnt = 0
