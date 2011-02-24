@@ -448,6 +448,13 @@ function requestFailed(transport){
 function doRequest(url, readyFunction){
 	requestStarted();
 	var request = '';
+	var parms = {};
+	
+	var params = url.split("?");
+	if(params.length > 1){
+		parms = params[1].toQueryParams();
+	}
+	
 	// gears or not that's the question here
 	if (!window.google || !google.gears){ //no gears, how sad
 //		debug("NO GEARS!!");		
@@ -455,9 +462,9 @@ function doRequest(url, readyFunction){
 			request = new Ajax.Request(url,
 					{
 						asynchronous: true,
-						method: 'GET',
-						requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
-						onException: function(o,e){ throw(e); },				
+						method: 'POST',
+						parameters: parms,
+						onException: function(o,e){ throw(e); },
 						onSuccess: function (transport, json) {						
 							if(typeof(readyFunction) != "undefined"){
 								readyFunction(transport);
