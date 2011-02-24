@@ -36,36 +36,31 @@ class RemoteControl(Source):
 		self.res = self.sendEvent()
 
 	def sendEvent(self):
-		if len(self.cmd) == 0 or self.cmd is None:
+		if not self.cmd:
 			print "[RemoteControl.sendEvent] cmd is empty or None"
 			return self.res
 		
-		if not "command" in self.cmd:
+		key = self.cmd.get("command", None)
+		if key is None:
 			print "[RemoteControl.sendEvent] Obligatory parameter 'command' is missing!"
 			return ( False, "Obligatory parameter 'command' is missing!" )
-		
-		key = int(self.cmd["command"])			
-		
+
+		key = int(key)
+
 		if key <= 0:			
 			print "[RemoteControl.sendEvent] command <= 0 (%s)" % key
 			return ( False, "the command was not > 0" )
-		
+
 		#type can be "long" or "ascii", everything else will result in FLAG_MAKE
-		type = None 
-		if "type" in self.cmd:
-			if self.cmd["type"] != "" and self.cmd["type"] != None:
-				type = self.cmd["type"];
-		
-		#if type is set, set the flag accordingly
+		type = self.cmd.get('type', '')
 		flag = self.FLAG_MAKE
-		if type != None:
-			if type == "long":
-				#Doesn't work yet (WHY?)
-				#TODO Fix long key press
-				flag = self.FLAG_LONG		
-			elif type == "ascii":
-				flag = self.FLAG_ASCII
-		
+		if type == "long":
+			#Doesn't work yet (WHY?)
+			#TODO Fix long key press
+			flag = self.FLAG_LONG
+		elif type == "ascii":
+			flag = self.FLAG_ASCII
+
 		#If type=="long" we need to press send FLAG_MAKE first 
 		if(flag == self.FLAG_LONG):			
 			self.eam.keyPressed(self.remotetype, key, self.FLAG_MAKE)
