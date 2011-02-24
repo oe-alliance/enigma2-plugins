@@ -448,12 +448,7 @@ function requestFailed(transport){
 function doRequest(url, readyFunction){
 	requestStarted();
 	var request = '';
-	var parms = {};
-	
-	var params = url.split("?");
-	if(params.length > 1){
-		parms = params[1].toQueryParams();
-	}
+	var parms = url.toQueryParams();
 	
 	// gears or not that's the question here
 	if (!window.google || !google.gears){ //no gears, how sad
