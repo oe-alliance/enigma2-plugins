@@ -1,7 +1,7 @@
 import Plugins.Plugin
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os, gettext, hashlib
+import os, gettext
 
 __version__ = "1.6.6"
 
@@ -34,10 +34,11 @@ def rsa_pub1024(src, mod):
 	return long2bin(pow(bin2long(src), 65537, bin2long(mod)))
 	
 def decrypt_block(src, mod):
+	import hashlib
 	if len(src) != 128 and len(src) != 202:
 		return None
 	dest = rsa_pub1024(src[:128], mod)
-	hash = hashlib.new(dest[1:107])
+	hash = hashlib.sha1(dest[1:107])
 	if len(src) == 202:
 		hash.update(src[131:192])	
 	result = hash.digest()
