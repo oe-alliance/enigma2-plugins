@@ -9,7 +9,7 @@ from FileStreamer import FileStreamer
 from Screengrab import GrabResource
 from IPKG import IPKGResource
 from PlayService import ServiceplayerResource
-#from Uploader import UploadResource
+from Uploader import UploadResource
 from ServiceListSave import ServiceList
 from RedirecToCurrentStream import RedirecToCurrentStreamResource
 
@@ -30,7 +30,7 @@ def getToplevel(session):
 	root.putChild("play", ServiceplayerResource(session))
 	root.putChild("wap", RedirectorResource("/mobile/"))
 	root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True) )
-	#root.putChild("upload", UploadResource())
+	root.putChild("upload", UploadResource())
 	root.putChild("servicelist", ServiceList(session))
 	root.putChild("streamcurrent", RedirecToCurrentStreamResource(session))
 		
