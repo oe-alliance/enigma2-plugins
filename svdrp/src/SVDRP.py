@@ -348,7 +348,7 @@ class SimpleVDRProtocol(LineReceiver):
 				volctr.setVolume(num, num)
 
 		if volctrl.isMuted():
-			payload = "%d Audio is muted." % (CODE_OK,)
+			payload = "%d Audio is mute" % (CODE_OK,)
 		else:
 			payload = "%d Audio volume is %d." % (CODE_OK, volctrl.getVolume()*2.55)
 		self.sendLine(payload)
