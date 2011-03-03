@@ -484,7 +484,9 @@ def configCB(result, session):
 			print "[WebIf] config not changed"
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+	p = PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)
+	p.weight = 100 #webif should start as last plugin
+	return [p,
 #			PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkstart),
 			PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),
 							where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=openconfig)]
