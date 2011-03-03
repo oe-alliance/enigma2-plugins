@@ -1,6 +1,7 @@
 <default>
 	  <prerequisites>
-                    <tag type="System" />
+                    <tag type="Multimedia" />
+                    <tag type="Recording" />
 	  </prerequisites>
           <info>
                     <author>Awd</author>
