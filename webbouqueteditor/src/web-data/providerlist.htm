@@ -1,0 +1,18 @@
+<table class="selectTab"> 
+	<tr>
+		<td>
+			<select id="providerlist" size="6" class="select" onchange="providerlistChange(this);">
+			{for service in services}
+			  <option value="${service.servicereference}">${service.servicename}</option>
+			{/for}		
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<button type="button" onclick="addProviderToBouquet('providerlist');">
+				Add to bouquetlist
+			</button>
+		</td>
+	</tr>
+</table>

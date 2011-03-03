@@ -1,0 +1,15 @@
+<e2:screen external_module="Plugins.Extensions.WebBouquetEditor.WebScreens.AdditionalWebScreens" name="AdditionalWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2protection>
+<e2:element source="ProtectionSettings" id="sref">				
+	<e2:convert type="web:ListFiller">
+	&lt;e2serviceprotection>
+		&lt;e2serviceprotectionconfigured><e2:item name="Configured" filter="xml" />&lt;/e2serviceprotectionconfigured>
+		&lt;e2serviceprotectiontype><e2:item name="Type" filter="xml" />&lt;/e2serviceprotectiontype>
+		&lt;e2serviceprotectionsetuppinactive><e2:item name="SetupPinActive" filter="xml" />&lt;/e2serviceprotectionsetuppinactive>
+		&lt;e2serviceprotectionsetuppin><e2:item name="SetupPin" filter="xml" />&lt;/e2serviceprotectionsetuppin>
+	&lt;/e2serviceprotection>
+	</e2:convert>
+	<e2:convert type="web:TextToHTML" />			
+</e2:element>
+</e2protection>	
+</e2:screen>

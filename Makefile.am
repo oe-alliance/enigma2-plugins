@@ -78,6 +78,7 @@ SUBDIRS = \
 	vlcplayer \
 	weatherplugin \
 	webcamviewer \
+	webbouqueteditor \
 	webinterface \
 	werbezapper \
 	youtubeplayer \

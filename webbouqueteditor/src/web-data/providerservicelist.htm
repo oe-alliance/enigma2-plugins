@@ -1,0 +1,21 @@
+<table class="selectTab"> 
+	<tr>
+		<td>
+			<select id="providerservicelist" size="18" class="select">
+			{for service in services}
+			  <option id="service.servicereference" class="providerservice" data-servicename="${service.servicename}" value="${service.servicereference}">${service.servicename}</option>
+			{/for}		
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<button class="half" type="button" onclick="addServiceToBouquet('providerservicelist');">
+				Add service to bouquet
+			</button>
+			<button class="half" type="button" onclick="addAlternativeService('providerservicelist');">
+				Add as alternative service
+			</button>
+		</td>
+	</tr>
+</table>
