@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Awd</author>
+                    <name>SerienFilm</name>
+                    <packagename>enigma2-plugin-extensions-serienfilm</packagename>
+                    <shortdescription>Groups episodic recordings</shortdescription>
+                    <description>Groups episodic recordings into virtual movieplayer folders</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/serienfilm.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-serienfilm" />
+	  </files>
+</default>

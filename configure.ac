@@ -365,6 +365,12 @@ seekbar/meta/Makefile
 seekbar/po/Makefile
 seekbar/src/Makefile
 
+serienfilm/Makefile
+serienfilm/meta/Makefile
+serienfilm/po/Makefile
+serienfilm/src/Makefile
+serienfilm/src/icons/Makefile
+
 setpasswd/Makefile
 setpasswd/meta/Makefile
 setpasswd/po/Makefile

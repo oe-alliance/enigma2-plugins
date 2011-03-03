@@ -64,6 +64,7 @@ SUBDIRS = \
 	remotetimer \
 	rsdownloader \
 	seekbar \
+	serienfilm \
 	setpasswd \
 	shoutcast \
 	simplerss \
