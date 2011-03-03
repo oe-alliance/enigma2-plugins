@@ -8,7 +8,7 @@
                     <packagename>enigma2-plugin-extensions-serienfilm</packagename>
                     <shortdescription>Groups episodic recordings</shortdescription>
                     <description>Groups episodic recordings into virtual movieplayer folders</description>
-                    <screenshot src="http://www.dreamboxupdate.com/preview/serienfilm.jpg" />
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_serienfilm.jpg" />
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->
