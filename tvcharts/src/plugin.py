@@ -579,5 +579,5 @@ def autostart(reason, **kwargs):
 def Plugins(path, **kwargs):
 	return [
 		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
-		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
-		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main) ]
+		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
+		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main) ]
