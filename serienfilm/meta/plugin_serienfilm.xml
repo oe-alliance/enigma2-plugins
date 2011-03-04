@@ -7,8 +7,8 @@
                     <author>Awd</author>
                     <name>SerienFilm</name>
                     <packagename>enigma2-plugin-extensions-serienfilm</packagename>
-                    <shortdescription>Groups episodic recordings</shortdescription>
-                    <description>Groups episodic recordings into virtual movieplayer folders</description>
+                    <shortdescription>creates virtual series folders from episodes</shortdescription>
+                    <description>creates virtual series folders from sets of recorded episodes</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_serienfilm.jpg" />
           </info>
 
