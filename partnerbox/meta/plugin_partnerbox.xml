@@ -1,5 +1,6 @@
 <default>
 	  <prerequisites>
+                    <tag type="Network" />
                     <tag type="Multimedia" />
                     <tag type="EPG" />
 	  </prerequisites>

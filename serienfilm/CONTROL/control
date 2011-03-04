@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-serienfilm
+Version: 0.1
+Description: Groups episodic recordings into virtual folders
+Maintainer: Andreas Monzner <andreas.monzner@multimedia-labs.de>
+Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net
+Depends: enigma2

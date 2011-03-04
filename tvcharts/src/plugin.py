@@ -2,7 +2,7 @@
 # TVCharts Plugin for Enigma2 Dreamboxes
 # Coded by Homey (c) 2011
 #
-# Version: 1.4
+# Version: 1.5
 # Support: www.i-have-a-dreambox.com
 #####################################################
 from Components.About import about
@@ -32,6 +32,7 @@ from Plugins.Plugin import PluginDescriptor
 
 from enigma import eTimer, eEPGCache, loadPNG, eListboxPythonMultiContent, gFont, eServiceReference, eServiceCenter, iPlayableService
 from random import randint
+from os import system as os_system
 from time import time, gmtime, strftime
 from twisted.web.client import getPage
 from xml.dom.minidom import parse, parseString
@@ -49,6 +50,7 @@ config.plugins.tvcharts.enabled = ConfigYesNo(default = True)
 config.plugins.tvcharts.maxentries = ConfigInteger(default=10, limits=(5, 100))
 config.plugins.tvcharts.maxtimerentries = ConfigInteger(default=10, limits=(5, 100))
 config.plugins.tvcharts.submittimers = ConfigYesNo(default = True)
+config.plugins.tvcharts.submitplugins = ConfigYesNo(default = True)
 config.plugins.tvcharts.bouquetfilter = ConfigYesNo(default = True)
 
 ##########################################################
@@ -414,6 +416,7 @@ class TVChartsSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("Max Timerlist Entries"), config.plugins.tvcharts.maxtimerentries),
 				getConfigListEntry(_("Enable Bouquet-Filter?"), config.plugins.tvcharts.bouquetfilter),
 				getConfigListEntry(_("Submit Timerlist?"), config.plugins.tvcharts.submittimers),
+				getConfigListEntry(_("Submit Pluginlist?"), config.plugins.tvcharts.submitplugins)
 			))
 
 		self["config"].list = self.list
@@ -471,6 +474,9 @@ class DBUpdateStatus(Screen):
 		self.NetworkConnectionAvailable = False
 		self.LastTimerlistUpdate = 0
 
+		self.timerlist = ""
+		self.pluginlist = ""
+		
 		self.onShow.append(self.restartTimer)
 
 	def restartTimer(self):
@@ -529,18 +535,27 @@ class DBUpdateStatus(Screen):
 		self.ImageVersion = about.getVersionString()
 
 		# Get TimerList
-		self.timerlist = ""
 		if config.plugins.tvcharts.submittimers.value and self.LastTimerlistUpdate <= (time()-1800):
 			self.LastTimerlistUpdate = time()
 			try:
 				for timer in self.recordtimer.timer_list:
 					if timer.disabled == 0 and timer.justplay == 0:
-						self.timerlist += "%s|%s|%s|%s|%s|%s\n" % (timer.eit,str(int(timer.begin)+(config.recording.margin_before.value*60)), str(int(timer.end)-(config.recording.margin_after.value*60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"))
+						self.timerlist += "%s|%s|%s|%s|%s|%s|%s\n" % (timer.eit,str(int(timer.begin)+(config.recording.margin_before.value*60)), str(int(timer.end)-(config.recording.margin_after.value*60)), str(timer.service_ref), timer.name, timer.service_ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8"), timer.repeated)
 			except Exception:
 				print "[TVCharts] Error loading timers!"
 
+		# Get Pluginlist
+		if config.plugins.tvcharts.submitplugins.value and self.pluginlist == "":
+			try:
+				os_system("ipkg list_installed | grep enigma2-plugin- > /tmp/plugins.txt")
+				for plugin in open('/tmp/plugins.txt', 'r'):
+					self.pluginlist += plugin[0:plugin.find(' - ')]+"\n"
+				os_system("rm -f /tmp/plugins.txt")
+			except Exception:
+				print "[TVCharts] Error loading plugins!"
+		
 		# Status Update
-		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', timeout=60, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'eventdescr' : event_description, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist})).addErrback(self.updateError)
+		getPage(url='http://www.dreambox-plugins.de/feeds/TVCharts/status.php', timeout=60, method='POST', headers={'Content-Type':'application/x-www-form-urlencoded'}, postdata=urlencode({'boxid' : self.BoxID, 'devicename' : self.DeviceName, 'imageversion' : self.ImageVersion, 'enigmaversion' : self.EnigmaVersion, 'lastchannel' : channel_name, 'lastevent' : event_name, 'eventdescr' : event_description, 'lastbegin' : event_begin, 'lastserviceref' : self.serviceref, 'timerlist' : self.timerlist, 'pluginlist' : self.pluginlist})).addErrback(self.updateError)
 
 		# Restart Timer
 		self.DBStatusTimer.start(900000, True)
@@ -564,5 +579,5 @@ def autostart(reason, **kwargs):
 def Plugins(path, **kwargs):
 	return [
 		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
-		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
-		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main) ]
+		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
+		PluginDescriptor(name="TV Charts", description="TV Charts Plugin", icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main) ]
