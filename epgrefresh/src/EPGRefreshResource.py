@@ -141,6 +141,8 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.wakeup.value = True if value == "true" else False
 			elif key == "pase_autotimer":
 				config.plugins.epgrefresh.parse_autotimer.value = True if value == "true" else False
+			elif key == "background":
+				config.plugins.epgrefresh.background.value = True if value == "true" else False
 
 		config.plugins.epgrefresh.save()
 
@@ -221,6 +223,10 @@ class EPGRefreshSettingsResource(resource.Resource):
 					<e2settingname>config.plugins.epgrefresh.parse_autotimer</e2settingname>
 					<e2settingvalue>%s</e2settingvalue>
 				</e2setting>
+				<e2setting>
+					<e2settingname>config.plugins.epgrefresh.background</e2settingname>
+					<e2settingvalue>%s</e2settingvalue>
+				</e2setting>
 			</e2settings>
 			""" % (
 				config.plugins.epgrefresh.enabled.value,
@@ -233,5 +239,6 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.force.value,
 				config.plugins.epgrefresh.wakeup.value,
 				config.plugins.epgrefresh.parse_autotimer.value,
+				config.plugins.epgrefresh.background.value,
 			)
 

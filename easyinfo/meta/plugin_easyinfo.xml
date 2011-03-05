@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="EPG" />
+	  </prerequisites>
+          <info>
+                    <author>Vali</author>
+                    <name>Easy Info</name>
+                    <packagename>enigma2-plugin-extensions-easyinfo</packagename>
+                    <shortdescription>A graphical EPG interface and EPG tools manager</shortdescription>
+                    <description>You can use the EasyInfo for manage your EPG plugins from info button. You have also a new now-next event viewer. Easy-PG, the own graphical EPG bowser is also included.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_easyinfo.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-easyinfo" />
+	  </files>
+</default>

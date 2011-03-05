@@ -106,7 +106,8 @@ class SyslogNetworkProtocol(DatagramProtocol):
 class SyslogAbstraction:
 	def __init__(self, host):
 		self.syslog = SyslogNetworkProtocol(host)
-		self.serverPort = reactor.listenUDP(SYSLOG_UDP_PORT, self.syslog)
+		listeningPort = SYSLOG_UDP_PORT if host.enable_incoming.value else 0
+		self.serverPort = reactor.listenUDP(listeningPort, self.syslog)
 
 	def sendNotification(self, title='No title.', description='No description.', priority=-1, timeout=-1):
 		self.syslog.sendNotification(title=title, description=description, priority=priority)

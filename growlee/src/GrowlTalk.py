@@ -122,7 +122,8 @@ class GrowlTalk(DatagramProtocol):
 class GrowlTalkAbstraction:
 	def __init__(self, host):
 		self.growltalk = GrowlTalk(host)
-		self.serverPort = reactor.listenUDP(GROWL_UDP_PORT, self.growltalk)
+		listeningPort = GROWL_UDP_PORT if host.enable_incoming.value else 0
+		self.serverPort = reactor.listenUDP(listeningPort, self.growltalk)
 
 	def sendNotification(self, title='No title.', description='No description.', priority=-1, timeout=-1):
 		if priority < 0:

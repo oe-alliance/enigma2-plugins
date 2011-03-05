@@ -215,10 +215,11 @@ class AutoTimer:
 				# Update timer
 				timer.update(begin, timestamp)
 
-				# Check Duration, Timespan and Excludes
+				# Check Duration, Timespan, Timeframe and Excludes
 				if timer.checkServices(serviceref) \
 					or timer.checkDuration(duration) \
 					or timer.checkTimespan(timestamp) \
+					or timer.checkTimeframe(begin) \
 					or timer.checkFilter(name, description,
 						evt.getExtendedDescription(), str(timestamp.tm_wday)):
 					continue

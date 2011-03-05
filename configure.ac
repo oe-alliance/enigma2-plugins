@@ -125,6 +125,10 @@ dyndns/Makefile
 dyndns/src/Makefile
 dyndns/meta/Makefile
 
+easyinfo/Makefile
+easyinfo/meta/Makefile
+easyinfo/src/Makefile
+
 easymedia/Makefile
 easymedia/meta/Makefile
 easymedia/po/Makefile
@@ -361,6 +365,12 @@ seekbar/meta/Makefile
 seekbar/po/Makefile
 seekbar/src/Makefile
 
+serienfilm/Makefile
+serienfilm/meta/Makefile
+serienfilm/po/Makefile
+serienfilm/src/Makefile
+serienfilm/src/icons/Makefile
+
 setpasswd/Makefile
 setpasswd/meta/Makefile
 setpasswd/po/Makefile
@@ -397,7 +407,6 @@ trafficinfo/src/Makefile
 tvcharts/Makefile
 tvcharts/meta/Makefile
 tvcharts/src/Makefile
-tvcharts/src/images/Makefile
 
 unwetterinfo/Makefile
 unwetterinfo/meta/Makefile
@@ -428,6 +437,16 @@ weatherplugin/src/Makefile
 webcamviewer/Makefile
 webcamviewer/meta/Makefile
 webcamviewer/src/Makefile
+
+webbouqueteditor/Makefile
+webbouqueteditor/src/Makefile
+webbouqueteditor/meta/Makefile
+webbouqueteditor/src/web/Makefile
+webbouqueteditor/src/web-data/Makefile
+webbouqueteditor/src/WebChilds/Makefile
+webbouqueteditor/src/WebComponents/Makefile
+webbouqueteditor/src/WebComponents/Sources/Makefile
+webbouqueteditor/src/WebScreens/Makefile
 
 webinterface/Makefile
 webinterface/meta/Makefile

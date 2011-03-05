@@ -1,7 +1,9 @@
 from os import statvfs, path as os_path, chmod as os_chmod, write as os_write, \
-		close as os_close, unlink as os_unlink
+		close as os_close, unlink as os_unlink, open as os_open, O_WRONLY, \
+		O_CREAT
 from twisted.web import resource, http
 from tempfile import mkstemp
+from re import search
 
 class UploadResource(resource.Resource):
 	default_uploaddir = "/tmp/"
@@ -24,7 +26,17 @@ class UploadResource(resource.Resource):
 			req.setHeader('Content-type', 'text/html')
 			return "filesize was 0, not uploaded"
 
-		fd, fn = mkstemp(dir = uploaddir)
+		try:
+			matches = search('.*?filename="(.*?)"\r\n.*?', req.content.getvalue())
+			fn=os_path.join(uploaddir, matches.group(1))
+		except Exception, e:
+			fn= None
+
+		# NOTE: we only accept the given filename if no such file exists yet
+		if fn and not os_path.exists(fn):
+			fd = os_open(fn, O_WRONLY | O_CREAT)
+		else:
+			fd, fn = mkstemp(dir = uploaddir)
 		cnt = os_write(fd, data)
 		os_close(fd)
 		os_chmod(fn, 0755)

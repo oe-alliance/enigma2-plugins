@@ -1,0 +1,9 @@
+<keymap>
+	<map context="EasyInfoActions">
+		<key id="KEY_INFO" mapto="info_but" flags="b" />
+		<key id="KEY_TV" mapto="tv_but" flags="m" />
+	</map>
+	<map context="EasyInfoActionsALT">
+		<key id="KEY_INFO" mapto="info_but" flags="b" />
+	</map>
+</keymap>
