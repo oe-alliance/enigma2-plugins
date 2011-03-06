@@ -67,11 +67,11 @@ class RemoteControl(Source):
 			
 		remotetype = self.cmd.get("rcu", None)
 		if remotetype != None:
-			if "standard" == remotetype:
+			if remotetype == "standard":
 				self.remotetype = self.TYPE_STANDARD
-			elif "advanced" == remotetype:
+			elif remotetype == "advanced":
 				self.remotetype = self.TYPE_ADVANCED
-			elif "keyboard" == remotetype:
+			elif remotetype == "keyboard":
 				self.remotetype == self.TYPE_KEYBOARD
 
 		#press the key with the desired flag
