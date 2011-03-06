@@ -60,24 +60,26 @@ class RemoteControl(Source):
 			flag = self.FLAG_LONG
 		elif type == "ascii":
 			flag = self.FLAG_ASCII
-
-		#If type=="long" we need to press send FLAG_MAKE first 
-		if(flag == self.FLAG_LONG):			
-			self.eam.keyPressed(self.remotetype, key, self.FLAG_MAKE)
 			
 		remotetype = self.cmd.get("rcu", None)
-		if remotetype != None:
-			if remotetype == "standard":
-				self.remotetype = self.TYPE_STANDARD
-			elif remotetype == "advanced":
-				self.remotetype = self.TYPE_ADVANCED
-			elif remotetype == "keyboard":
-				self.remotetype == self.TYPE_KEYBOARD
 
+		if remotetype == "standard":
+			remotetype = self.TYPE_STANDARD
+		elif remotetype == "advanced":
+			remotetype = self.TYPE_ADVANCED
+		elif remotetype == "keyboard":
+			remotetype == self.TYPE_KEYBOARD
+		else:
+			remotetype = self.remotetype
+		
+		#If type=="long" we need to press send FLAG_MAKE first 
+		if(flag == self.FLAG_LONG):			
+			self.eam.keyPressed(remotetype, key, self.FLAG_MAKE)
+		
 		#press the key with the desired flag
-		self.eam.keyPressed(self.remotetype, key, flag)
+		self.eam.keyPressed(remotetype, key, flag)
 		#Release the key		
-		self.eam.keyPressed(self.remotetype, key, self.FLAG_BREAK)
+		self.eam.keyPressed(remotetype, key, self.FLAG_BREAK)
 			
 		print "[RemoteControl.sendEvent] command was was sent (key: %s, flag: %s)" %(key, flag)
 		return ( True, "RC command '" + str(key) + "' has been issued" ) 
