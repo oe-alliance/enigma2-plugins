@@ -1,0 +1,51 @@
+<table class="selectTab"> 
+	<tr>
+		<td>
+			<select id="servicelist" size="10" class="select" onchange="servicelistChange(this);">
+
+			{for service in services}
+				<option data-hasalt="${service.serviceisgroup}" data-hasprotection="${service.serviceisprotected}" value="${service.servicereference}">${service.prefix}${service.servicename}${service.suffix}</option>
+			{/for}		
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<button type="button" onclick="moveServiceOptionsUp('servicelist');">
+				Up
+			</button>
+			<button type="button" onclick="moveServiceOptionsDown('servicelist');">
+				Down
+			</button>
+			<button type="button" onclick="moveServiceOptionsUp5('servicelist');">
+				Up +5
+			</button>
+			<button type="button" onclick="moveServiceOptionsDown5('servicelist');">
+				Down -5
+			</button>
+			<button type="button" onclick="moveServiceOptionsTop('servicelist');">
+				Top
+			</button>
+			<button type="button" onclick="moveServiceOptionsBottom('servicelist');">
+				Bottom
+			</button>
+			<button type="button" onclick="removeService('servicelist');">				  
+				Remove
+			</button>
+			<button id="renameservice" type="button" onclick="renameService('servicelist');">
+				Rename
+			</button><br>
+			<button id="addmarker" type="button" onclick="addMarkerToBouquet('servicelist');">
+				Add marker
+			</button>
+			<button id="removeAlternativServicesButton" type="button" onclick="removeAlternativServices('servicelist');">
+				Remove alternative list
+			</button>
+			<button id="toggleserviceprotection" type="button" onclick="toggleServiceProtection('servicelist');">
+				toggle protection
+			</button>
+		</td>
+	</tr>
+</table>
+
+

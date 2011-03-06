@@ -10,4 +10,7 @@
                     <description>Temperature-dependent fan control.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_fancontrol2.jpg" />
           </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-fancontrol2" />
+	  </files>
 </default>

@@ -3,7 +3,7 @@ from enigma import eConsoleAppContainer
 from twisted.web import server, resource, http
 
 class IPKGResource(resource.Resource):
-	IPKG_PATH = "/usr/bin/ipkg"
+	IPKG_PATH = "/usr/bin/opkg"
 
 	SIMPLECMDS = ( "list", "list_installed", "update", "upgrade" )
 	PACKAGECMDS = ( "info", "status", "install", "remove" )

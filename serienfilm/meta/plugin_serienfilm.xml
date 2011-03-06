@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+                    <tag type="Multimedia" />
+                    <tag type="Recording" />
+	  </prerequisites>
+          <info>
+                    <author>Awd</author>
+                    <name>SerienFilm</name>
+                    <packagename>enigma2-plugin-extensions-serienfilm</packagename>
+                    <shortdescription>creates virtual series folders from episodes</shortdescription>
+                    <description>creates virtual series folders from sets of recorded episodes</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_serienfilm.jpg" />
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-serienfilm" />
+	  </files>
+</default>

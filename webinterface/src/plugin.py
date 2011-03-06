@@ -387,6 +387,7 @@ global_session = None
 def sessionstart(reason, session):
 	global global_session
 	global_session = session
+	networkstart(True, session)
 
 
 def registerBonjourService(protocol, port):	
@@ -424,7 +425,8 @@ def checkBonjour():
 # networkstart
 # Actions to take place after Network is up (startup the Webserver)
 #===============================================================================
-def networkstart(reason, **kwargs):
+#def networkstart(reason, **kwargs):
+def networkstart(reason, session):
 	l2r = False
 	l2k = None
 	if False:
@@ -443,11 +445,11 @@ def networkstart(reason, **kwargs):
 		
 	if l2r:	
 		if reason is True:
-			startWebserver(global_session, l2k)
+			startWebserver(session, l2k)
 			checkBonjour()
 			
 		elif reason is False:
-			stopWebserver(global_session)
+			stopWebserver(session)
 			checkBonjour()
 		
 def openconfig(session, **kwargs):
@@ -479,7 +481,9 @@ def configCB(result, session):
 			print "[WebIf] config not changed"
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-			PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkstart),
+	p = PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)
+	p.weight = 100 #webif should start as last plugin
+	return [p,
+#			PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkstart),
 			PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),
 							where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=openconfig)]

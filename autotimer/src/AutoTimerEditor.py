@@ -20,7 +20,7 @@ from Components.Sources.StaticText import StaticText
 # Configuration
 from Components.config import getConfigListEntry, ConfigEnableDisable, \
 	ConfigYesNo, ConfigText, ConfigClock, ConfigNumber, ConfigSelection, \
-	config, NoSave
+	ConfigDateTime, config, NoSave
 
 # Timer
 from RecordTimer import AFTEREVENT
@@ -208,6 +208,22 @@ class AutoTimerEditorBase:
 		self.timespanbegin = NoSave(ConfigClock(default = begin))
 		self.timespanend = NoSave(ConfigClock(default = end))
 
+		# Timeframe
+		if timer.hasTimeframe():
+			default = True
+			begin = timer.getTimeframeBegin()
+			end = timer.getTimeframeEnd()
+		else:
+			default = False
+			now = [x for x in localtime()]
+			now[3] = 0
+			now[4] = 0
+			begin = mktime(now)
+			end = begin + 604800 # today + 7d
+		self.timeframe = NoSave(ConfigEnableDisable(default = default))
+		self.timeframebegin = NoSave(ConfigDateTime(begin, _("%d.%B %Y"), increment = 86400))
+		self.timeframeend = NoSave(ConfigDateTime(end, _("%d.%B %Y"), increment = 86400))
+
 		# Services have their own Screen
 
 		# Offset
@@ -375,6 +391,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# We might need to change shown items, so add some notifiers
 		self.timespan.addNotifier(self.reloadList, initial_call = False)
+		self.timeframe.addNotifier(self.reloadList, initial_call = False)
 		self.offset.addNotifier(self.reloadList, initial_call = False)
 		self.duration.addNotifier(self.reloadList, initial_call = False)
 		self.afterevent.addNotifier(self.reloadList, initial_call = False)
@@ -466,6 +483,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timespan: _("Should this AutoTimer be restricted to a timespan?"),
 			self.timespanbegin: _("Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"),
 			self.timespanend: _("Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"),
+			self.timeframe: _("By enabling this events will not be matched if they don't occur on certain dates."),
+			self.timeframebegin: _("First day to match events. No event that begins before this date will be matched."),
+			self.timeframeend: _("Last day to match events. Events have to begin before this date to be matched."),
 			self.offset: _("Change default recording offset?"),
 			self.offsetbegin: _("Time in minutes to prepend to recording."),
 			self.offsetend: _("Time in minutes to append to recording."),
@@ -508,6 +528,15 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			list.extend((
 				getConfigListEntry(_("Begin of timespan"), self.timespanbegin),
 				getConfigListEntry(_("End of timespan"), self.timespanend)
+			))
+
+		list.append(getConfigListEntry(_("Restrict to events on certain dates"), self.timeframe))
+
+		# Only allow editing timeframe when it's enabled
+		if self.timeframe.value:
+			list.extend((
+				getConfigListEntry(_("Not before"), self.timeframebegin),
+				getConfigListEntry(_("Not after"), self.timeframeend)
 			))
 
 		list.append(getConfigListEntry(_("Custom offset"), self.offset))
@@ -693,6 +722,14 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.timespan = (start, end)
 		else:
 			self.timer.timespan = None
+
+		# Timeframe
+		if self.timeframe.value:
+			start = self.timeframebegin.value
+			end = self.timeframeend.value
+			self.timer.timeframe = (start, end)
+		else:
+			self.timer.timeframe = None
 
 		# Services
 		if self.serviceRestriction:

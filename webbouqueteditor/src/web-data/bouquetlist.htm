@@ -1,0 +1,39 @@
+<table class="selectTab"> 
+	<tr>
+		<td>
+			<select id="bouquetlist" size="6" class="select" onchange="bouquetlistChange(this);">
+			{for bouquet in bouquets}
+			  <option data-hasprotection="${bouquet.serviceisprotected}" value="${bouquet.servicereference}">${bouquet.prefix}${bouquet.servicename}${bouquet.suffix}</option>
+			{/for}		
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<button style="width: 23%" type="button"
+				  onclick="moveBouquetOptionsUp('bouquetlist');">
+				Up
+			</button>
+			<button style="width: 23%" type="button"
+				  onclick="moveBouquetOptionsDown('bouquetlist');">
+				Down
+			</button>
+			<button style="width: 23%" type="button"
+				  onclick="addBouquet();">
+				New
+			</button>
+			<button style="width: 23%" type="button"
+				  onclick="removeBouquet('bouquetlist');">
+				Remove
+			</button>
+			<button style="width: 23%" type="button"
+				  onclick="renameBouquet('bouquetlist');">
+				Rename
+			</button>
+			<button id="togglebouquetprotection" style="width: 23%" type="button"
+				  onclick="toggleBouquetProtection('bouquetlist');">
+				toggle protection
+			</button>
+		</td>
+	</tr>
+</table>

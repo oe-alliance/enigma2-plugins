@@ -37,7 +37,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.PluginList import *
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import fileExists, pathExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from Tools.HardwareInfo import HardwareInfo
 from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getDesktop
@@ -119,11 +119,11 @@ def notEasy(session, **kwargs):
 def MPanelEntryComponent(key, text):
 	res = [ text ]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 150, 17, 300, 60, 0, RT_HALIGN_LEFT, text[0]))
-	png = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/' + key + ".png")
+	png = LoadPixmap(EasyMedia.EMiconspath + key + '.png')
 	if png is not None:
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 25, 5, 100, 50, png))
 	else:
-		png = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/default.png')
+		png = LoadPixmap(EasyMedia.EMiconspath + 'default.png')
 		if png is not None:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 25, 5, 100, 50, png))
 	return res
@@ -309,6 +309,10 @@ class EasyMedia(Screen):
 		<screen position="center,center" size="320,440" title="Easy Media">
 			<widget name="list" position="10,10" size="300,420" scrollbarMode="showOnDemand" />
 		</screen>"""
+	if pathExists('/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/icons/'):
+		EMiconspath = '/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/icons/'
+	else:
+		EMiconspath = '/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/'
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
@@ -410,9 +414,6 @@ class EasyMedia(Screen):
 			entry[2](arg)
 		else:
 			self.close(entry)
-
-	def emContextMenu(self):
-		self.session.open(ConfigEasyMedia)
 
 	def emContextMenu(self):
 		self.session.open(ConfigEasyMedia)

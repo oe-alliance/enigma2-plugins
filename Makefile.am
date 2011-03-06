@@ -15,6 +15,7 @@ SUBDIRS = \
 	dreammediathek \
 	dvdbackup \
 	dyndns \
+	easyinfo \
 	easymedia \
 	eibox \
 	elektro \
@@ -60,6 +61,7 @@ SUBDIRS = \
 	remotetimer \
 	rsdownloader \
 	seekbar \
+	serienfilm \
 	setpasswd \
 	shoutcast \
 	simplerss \
@@ -73,6 +75,7 @@ SUBDIRS = \
 	vlcplayer \
 	weatherplugin \
 	webcamviewer \
+	webbouqueteditor \
 	webinterface \
 	werbezapper \
 	youtubeplayer \
