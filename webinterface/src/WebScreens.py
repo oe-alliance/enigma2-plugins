@@ -157,6 +157,7 @@ class EpgWebScreen(WebScreen):
 		self["EpgServiceNow"] = EPG(session, func=EPG.SERVICENOW)
 		self["EpgServiceNext"] = EPG(session, func=EPG.SERVICENEXT)
 		self["EpgBouquet"] = EPG(session, func=EPG.BOUQUET)
+		self["EpgMulti"] = EPG(session, func=EPG.MULTI)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 		self["EpgServiceWap"] = EPG(session, func=EPG.SERVICE, endtm=True)
