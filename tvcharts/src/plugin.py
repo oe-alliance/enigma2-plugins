@@ -473,6 +473,9 @@ class DBUpdateStatus(Screen):
 		self.recordtimer = session.nav.RecordTimer
 		self.NetworkConnectionAvailable = False
 		self.LastTimerlistUpdate = 0
+		
+		self.timerlist = ""
+		self.pluginlist = ""
 
 		self.onShow.append(self.restartTimer)
 
@@ -543,7 +546,6 @@ class DBUpdateStatus(Screen):
 				print "[TVCharts] Error loading timers!"
 
 		# Get Pluginlist
-		self.pluginlist = ""
 		if config.plugins.tvcharts.submitplugins.value and self.pluginlist == "":
 			try:
 				os_system("ipkg list_installed | grep enigma2-plugin- > /tmp/plugins.txt")
