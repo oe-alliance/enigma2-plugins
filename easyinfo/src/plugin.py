@@ -1217,8 +1217,9 @@ class EasySelection(EPGSelection, Screen):
 		ask_time = int(mktime(pt))
 		if ask_time > int(mktime(heute)):
 			self["list"].fillMultiEPG(self.services, ask_time)
+			pt = (heute[0],heute[1],heute[2],config.plugins.EasyInfo.Primetime3.value[0],config.plugins.EasyInfo.Primetime3.value[1],0,heute[6],heute[7],0)
+			ask_time = int(mktime(pt))
 			self["listN"].fillMultiEPG(self.services, ask_time)
-			self["listN"].updateMultiEPG(1)
 
 	def NowNextLook(self):
 		self["list"].fillMultiEPG(self.services, -1)
