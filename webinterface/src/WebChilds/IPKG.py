@@ -92,7 +92,7 @@ class IPKGResource(resource.Resource):
 class IPKGConsoleStream:
 	def __init__(self, request, cmd):
 		self.request = request
-
+		self.request.write("<html><body>\n")		
 		self.container = eConsoleAppContainer()
 
 		self.container.dataAvail.append(self.dataAvail)
@@ -101,8 +101,9 @@ class IPKGConsoleStream:
 		self.container.execute(*cmd)
 
 	def cmdFinished(self, data):
+		self.request.write("</body></html>\n")
 		self.request.finish()
 
 	def dataAvail(self, data):
-		self.request.write(data)
+		self.request.write(data.replace("\n", "<br>\n"))
 

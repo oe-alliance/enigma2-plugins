@@ -115,7 +115,7 @@
 		<widget backgroundColor="secondBG" font="Regular;17" foregroundColor="grey" position="85,70" render="Label" size="128,24" source="global.CurrentTime" transparent="1" zPosition="1">
 			<convert type="vhdConvClockToText">LocaleKurz:%w %d %m</convert>
 		</widget>
-		<widget backgroundColor="grey" font="Regular;26" foregroundColor="black" position="225,117" render="Label" size="70,36" source="session.Event_Now" transparent="1" zPosition="1">
+		<widget backgroundColor="grey" font="Regular;26" foregroundColor="black" position="225,117" render="Label" size="90,36" source="session.Event_Now" transparent="1" zPosition="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
@@ -126,7 +126,7 @@
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">NoSeconds</convert>
 		</widget>
-		<widget backgroundColor="white" font="Regular;26" foregroundColor="black" position="225,152" render="Label" size="70,36" source="session.Event_Next" transparent="1" zPosition="1">
+		<widget backgroundColor="white" font="Regular;26" foregroundColor="black" position="225,152" render="Label" size="90,36" source="session.Event_Next" transparent="1" zPosition="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>

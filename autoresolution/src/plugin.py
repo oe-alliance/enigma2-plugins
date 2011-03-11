@@ -74,6 +74,16 @@ class AutoRes(Screen):
 		self.setMode(default[0], False)
 		self.after_switch_delay = False
 		self.newService = False
+		config.av.videorate["720p"].addNotifier(self.__videorate_720p_changed, initial_call = False, immediate_feedback = False)
+		config.av.videorate["1080i"].addNotifier(self.__videorate_1080i_changed, initial_call = False, immediate_feedback = False)
+
+	def __videorate_720p_changed(self, configEntry):
+		if self.lastmode == "720p":
+			self.changeVideomode()
+
+	def __videorate_1080i_changed(self, configEntry):
+		if self.lastmode == "1080i":
+			self.changeVideomode()
 
 	def __evStart(self):
 		self.newService = True
@@ -288,6 +298,8 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 				for mode, label in resolutions:
 					self.list.append(getConfigListEntry(label, videoresolution_dictionary[mode]))
 				self.list.extend((
+					getConfigListEntry(_("Refresh Rate")+" 720p", config.av.videorate["720p"]),
+					getConfigListEntry(_("Refresh Rate")+" 1080i", config.av.videorate["1080i"]),
 					getConfigListEntry(_("Show info screen"), config.plugins.autoresolution.showinfo),
 					getConfigListEntry(_("Delay x seconds after service started"), config.plugins.autoresolution.delay_switch_mode),
 					getConfigListEntry(_("Running in testmode"), config.plugins.autoresolution.testmode),
