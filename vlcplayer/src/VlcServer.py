@@ -236,7 +236,7 @@ class VlcServer:
 			filename = filename.replace("/", "\\")
 
 		filename = filename.replace("\\", "\\\\").replace("'", "\\'")
-		input = "file:///" + filename + " :sout=#"
+		input = filename + " :sout=#"
 
 		if len(transcode) > 0:
 			input += "transcode{%s}:" % (",".join(transcode))
