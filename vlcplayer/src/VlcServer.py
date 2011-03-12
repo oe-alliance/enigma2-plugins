@@ -211,12 +211,16 @@ class VlcServer:
 
 		if not doDirect or self.getTranscodeVideo():
 			videoNormList = self.getVideoNorm().split(",")
-#			,height=%s
-			transcode.append("vcodec=%s,vb=%d,venc=ffmpeg{strict-rc=1},width=%s,height=%s,canvas-width=%s,canvas-height=%s,canvas-aspect=%s,fps=%s" % (
+			# Video settings
+			transcode.append("vcodec=%s,vb=%d,venc=ffmpeg,fps=%s" % (
 				self.getVideoCodec(),self.getVideoBitrate(),
+				videoNormList[3]
+			))
+			#New canvas - since VLC 0.9
+			transcode.append("vfilter=canvas{width=%s,height=%s,aspect=%s}" % (
 				str(int(float(videoNormList[0]) - float(videoNormList[0]) * float(self.getOverscanCorrection()) / 100)),
 				str(int(float(videoNormList[1]) - float(videoNormList[1]) * float(self.getOverscanCorrection()) / 100)),
-				videoNormList[0], videoNormList[1], videoNormList[2], videoNormList[3]
+				videoNormList[2]
 			))
 			if self.getSOverlay():
 				transcode.append("soverlay")
@@ -232,8 +236,7 @@ class VlcServer:
 			filename = filename.replace("/", "\\")
 
 		filename = filename.replace("\\", "\\\\").replace("'", "\\'")
-#		input = filename + " :dvdread-caching=3000 :sub-track=1 :audio-track=1 :sout=#"
-		input = filename + " :sout=#"
+		input = "file:///" + filename + " :sout=#"
 
 		if len(transcode) > 0:
 			input += "transcode{%s}:" % (",".join(transcode))
