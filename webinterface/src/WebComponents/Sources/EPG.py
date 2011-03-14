@@ -141,26 +141,20 @@ class EPG(Source):
 		if 'bRef' not in param:
 			return ()
 		
-		time = -1
-		endtime = -1
-		if "time" in param:
-			if not param["time"] is None:
-				time = int(float(param["time"]))
-				if time < 0:
-					time = -1
+		time = param.get('time', -1)		
+		endtime = param.get('endTime', -1)
+		if time < -1:
+			time = -1
 		
-		if "endTime" in param:
-			if not param["endTime"] is None:
-				endtime = int( float(param["endTime"]) )
-				if endtime < 0:
-					endtime = -1
-				
-		bRef = param['bRef']
-		if bRef is None:
+		if endtime < -1:
+			endtime = -1
+		
+		bRef = param.get('bRef', '')
+		if bRef is None or bRef == '':
 			return ()
 		
 		serviceHandler = eServiceCenter.getInstance()
-		sl = serviceHandler.list(eServiceReference(bRef))
+		sl = serviceHandler.list(eServiceReference(bRef)) or []
 		services = sl and sl.getContent('S')
 
 		search = ['IBDCTSERN']
