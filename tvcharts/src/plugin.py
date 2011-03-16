@@ -473,10 +473,10 @@ class DBUpdateStatus(Screen):
 		self.recordtimer = session.nav.RecordTimer
 		self.NetworkConnectionAvailable = False
 		self.LastTimerlistUpdate = 0
-
+		
 		self.timerlist = ""
 		self.pluginlist = ""
-		
+
 		self.onShow.append(self.restartTimer)
 
 	def restartTimer(self):
@@ -535,6 +535,7 @@ class DBUpdateStatus(Screen):
 		self.ImageVersion = about.getVersionString()
 
 		# Get TimerList
+		self.timerlist = ""
 		if config.plugins.tvcharts.submittimers.value and self.LastTimerlistUpdate <= (time()-1800):
 			self.LastTimerlistUpdate = time()
 			try:

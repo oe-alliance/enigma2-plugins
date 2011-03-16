@@ -297,32 +297,32 @@ class EasyInfo(Screen):
 			<screen backgroundColor="background" flags="wfNoBorder" position="0,0" size="1280,720" title="Easy Info">
 				<widget name="list" position="55,30" size="110,660" scrollbarMode="showNever" transparent="1" zPosition="2"/>
 				<eLabel backgroundColor="#666666" position="250,359" size="1280,2"/>
-				<widget font="Regular;24" foregroundColor="#fcc000" position="600,50" render="Label" size="600,30" source="session.CurrentService" transparent="1" zPosition="1">
+				<widget font="Regular;24" foregroundColor="#fcc000" position="630,50" render="Label" size="600,30" source="session.CurrentService" transparent="1" zPosition="1">
 					<convert type="ServiceName">Name</convert>
 				</widget>
-				<widget font="Regular;24" position="250,50" render="Label" size="70,30" source="session.Event_Now" transparent="1" zPosition="1">
+				<widget font="Regular;24" position="250,50" render="Label" size="100,30" source="session.Event_Now" transparent="1" zPosition="1">
 					<convert type="EventTime">StartTime</convert>
 					<convert type="ClockToText">Default</convert>
 				</widget>
 				<widget font="Regular;24" noWrap="1" position="250,90" render="Label" size="900,30" source="session.Event_Now" transparent="1" zPosition="1">
 					<convert type="EventName">Name</convert>
 				</widget>
-				<widget font="Regular;22" foregroundColor="#fcc000" position="320,50" halign="right" render="Label" size="130,30" source="session.Event_Now" transparent="1" zPosition="1">
+				<widget font="Regular;22" foregroundColor="#fcc000" position="350,50" halign="right" render="Label" size="130,30" source="session.Event_Now" transparent="1" zPosition="1">
 					<convert type="EventTime">Remaining</convert>
 					<convert type="RemainingToText">InMinutes</convert>
 				</widget>
-				<widget font="Regular;24" position="250,400" render="Label" size="70,30" source="session.Event_Next" transparent="1" zPosition="1">
+				<widget font="Regular;24" position="250,400" render="Label" size="100,30" source="session.Event_Next" transparent="1" zPosition="1">
 					<convert type="EventTime">StartTime</convert>
 					<convert type="ClockToText">Default</convert>
 				</widget>
 				<widget font="Regular;24" foregroundColor="#aaaaaa" noWrap="1" position="250,370" render="Label" size="900,30" source="session.Event_Next" transparent="1" zPosition="1">
 					<convert type="EventName">Name</convert>
 				</widget>
-				<widget font="Regular;24" foregroundColor="#aaaaaa" position="320,400" render="Label" size="130,30" source="session.Event_Next" transparent="1" zPosition="1">
+				<widget font="Regular;24" foregroundColor="#aaaaaa" position="350,400" render="Label" size="130,30" source="session.Event_Next" transparent="1" zPosition="1">
 					<convert type="EventTime">Duration</convert>
 					<convert type="ClockToText">InMinutes</convert>
 				</widget>
-				<widget backgroundColor="#555555" borderColor="#555555" borderWidth="4" position="460,57" render="Progress" size="120,14" source="session.Event_Now" zPosition="2">
+				<widget backgroundColor="#555555" borderColor="#555555" borderWidth="4" position="490,57" render="Progress" size="120,14" source="session.Event_Now" zPosition="2">
 					<convert type="EventTime">Progress</convert>
 				</widget>
 				<widget font="Regular;22" position="250,127" render="Label" size="950,225" source="session.Event_Now" transparent="1" valign="top" zPosition="5">
@@ -1217,8 +1217,9 @@ class EasySelection(EPGSelection, Screen):
 		ask_time = int(mktime(pt))
 		if ask_time > int(mktime(heute)):
 			self["list"].fillMultiEPG(self.services, ask_time)
+			pt = (heute[0],heute[1],heute[2],config.plugins.EasyInfo.Primetime3.value[0],config.plugins.EasyInfo.Primetime3.value[1],0,heute[6],heute[7],0)
+			ask_time = int(mktime(pt))
 			self["listN"].fillMultiEPG(self.services, ask_time)
-			self["listN"].updateMultiEPG(1)
 
 	def NowNextLook(self):
 		self["list"].fillMultiEPG(self.services, -1)
