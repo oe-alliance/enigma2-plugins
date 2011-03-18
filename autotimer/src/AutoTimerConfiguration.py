@@ -601,7 +601,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 
 	# Tags
 	if webif and defaultTimer.tags:
-		list.extend(('  <e2tags>', stringToXML(','.join(defaultTimer.tags)), '</e2tags>\n'))
+		list.extend(('  <e2tags>', stringToXML(' '.join(defaultTimer.tags)), '</e2tags>\n'))
 	else:
 		for tag in defaultTimer.tags:
 			list.extend(('  <tag>', stringToXML(tag), '</tag>\n'))
@@ -739,7 +739,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 
 		# Tags
 		if webif and timer.tags:
-			list.extend(('  <e2tags>', stringToXML(','.join(timer.tags)), '</e2tags>\n'))
+			list.extend(('  <e2tags>', stringToXML(' '.join(timer.tags)), '</e2tags>\n'))
 		else:
 			for tag in timer.tags:
 				list.extend(('  <tag>', stringToXML(tag), '</tag>\n'))
