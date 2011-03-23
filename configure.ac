@@ -14,6 +14,8 @@ AC_PROG_CXX
 m4_ifdef([LT_INIT], [LT_INIT], [AC_PROG_LIBTOOL])
 AC_CONFIG_MACRO_DIR([m4])
 
+AC_CHECK_HEADERS([dbox/fp.h dbox/lcd-ks0713.h])
+
 AC_PATH_PROG(MSGFMT, msgfmt, AC_MSG_ERROR(Could not find msgfmt))
 
 AM_PATH_PYTHON
@@ -21,6 +23,21 @@ AX_PYTHON_DEVEL
 AX_PTHREAD
 
 TUXBOX_APPS_DVB
+
+AC_ARG_WITH(boxtype,
+	[  --with-boxtype=NAME box type [[none,dm7025,dm800...]]],
+	[BOXTYPE="$withval"],[BOXTYPE="dm800"])
+AC_SUBST(BOXTYPE)
+AC_DEFINE_UNQUOTED(BOXTYPE,"$BOXTYPE",[box type])
+
+AM_CONDITIONAL(DREAMBOX, test `echo "$BOXTYPE" | cut -b 1-2` == "dm")
+AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm500hd)
+AM_CONDITIONAL(VUPLUS, test "$BOXTYPE" == vusolo -o == vuduo)
+AM_CONDITIONAL(CLARKETECH, test "$BOXTYPE" == et5000 -o == et9000)
+AM_CONDITIONAL(VUSOLO, test "$BOXTYPE" == vusolo)
+AM_CONDITIONAL(VUDUO, test "$BOXTYPE" == vuduo)
+AM_CONDITIONAL(ET5000, test "$BOXTYPE" == et5000)
+AM_CONDITIONAL(ET9000, test "$BOXTYPE" == et9000)
 
 PKG_CHECK_MODULES(ENIGMA2, enigma2)
 PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)

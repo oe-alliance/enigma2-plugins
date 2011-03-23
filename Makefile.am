@@ -8,7 +8,6 @@ SUBDIRS = \
 	autoresolution \
 	autotimer \
 	babelzapper \
-	bitrateviewer \
 	bonjour \
 	cdinfo \
 	dreamirc \
@@ -22,7 +21,6 @@ SUBDIRS = \
 	emailclient \
 	epgrefresh \
 	epgsearch \
-	fancontrol2 \
 	filebrowser \
 	fritzcall \
 	ftpbrowser \
@@ -32,15 +30,12 @@ SUBDIRS = \
 	imdb \
 	kiddytimer \
 	lastfm \
-	letterbox \
-	logomanager \
 	mediadownloader \
 	merlinepg \
 	merlinmusicplayer \
 	meteoitalia \
 	mosaic \
 	moviecut \
-	movielistpreview \
 	movieretitle \
 	movietagger \
 	multirc \
@@ -65,7 +60,6 @@ SUBDIRS = \
 	setpasswd \
 	shoutcast \
 	simplerss \
-	startuptostandby \
 	tageditor \
 	trafficinfo \
 	tvcharts \
@@ -81,7 +75,11 @@ SUBDIRS = \
 	youtubeplayer \
 	zaphistorybrowser \
 	zapstatistic \
-	zdfmediathek
+	zdfmediathek 
+
+if DREAMBOX
+SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview
+endif
 
 metadir = $(datadir)/meta
 meta_DATA = index-enigma2-plugins.xml
