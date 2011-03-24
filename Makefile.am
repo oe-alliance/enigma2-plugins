@@ -70,6 +70,7 @@ SUBDIRS = \
 	simplerss \
 	startupservice \
 	startuptostandby \
+	svdrp \
 	tageditor \
 	trafficinfo \
 	tvcharts \

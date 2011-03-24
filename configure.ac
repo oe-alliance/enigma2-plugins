@@ -395,6 +395,10 @@ startuptostandby/Makefile
 startuptostandby/meta/Makefile
 startuptostandby/src/Makefile
 
+svdrp/Makefile
+svdrp/meta/Makefile
+svdrp/src/Makefile
+
 tageditor/Makefile
 tageditor/meta/Makefile
 tageditor/po/Makefile
