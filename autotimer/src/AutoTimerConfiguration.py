@@ -600,8 +600,11 @@ def buildConfig(defaultTimer, timers, webif = False):
 		list.extend(('  <include where="dayofweek">', stringToXML(day), '</include>\n'))
 
 	# Tags
-	for tag in defaultTimer.tags:
-		list.extend(('  <tag>', stringToXML(tag), '</tag>\n'))
+	if webif and defaultTimer.tags:
+		list.extend(('  <e2tags>', stringToXML(' '.join(defaultTimer.tags)), '</e2tags>\n'))
+	else:
+		for tag in defaultTimer.tags:
+			list.extend(('  <tag>', stringToXML(tag), '</tag>\n'))
 
 	# Keep the list clean
 	if len(list) == 5:
@@ -735,8 +738,11 @@ def buildConfig(defaultTimer, timers, webif = False):
 			list.extend(('  <include where="dayofweek">', stringToXML(day), '</include>\n'))
 
 		# Tags
-		for tag in timer.tags:
-			list.extend(('  <tag>', stringToXML(tag), '</tag>\n'))
+		if webif and timer.tags:
+			list.extend(('  <e2tags>', stringToXML(' '.join(timer.tags)), '</e2tags>\n'))
+		else:
+			for tag in timer.tags:
+				list.extend(('  <tag>', stringToXML(tag), '</tag>\n'))
 
 		# End of Timer
 		list.append(' </timer>\n\n')

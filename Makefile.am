@@ -66,6 +66,7 @@ SUBDIRS = \
 	shoutcast \
 	simplerss \
 	startuptostandby \
+	svdrp \
 	tageditor \
 	trafficinfo \
 	tvcharts \
