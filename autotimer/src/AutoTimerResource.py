@@ -3,6 +3,7 @@ from Components.config import config
 from RecordTimer import AFTEREVENT
 from twisted.web import http, resource
 from urllib import unquote
+from enigma import eServiceReference
 from . import _
 import plugin
 
@@ -153,13 +154,15 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 							pos -= 1
 						value = value[:pos+1]
 
-				appendlist.append(value)
+				if myref.valid():
+					appendlist.append(value)
 			timer.services = appendlist
 
 		# Bouquets
 		servicelist = get("bouquets")
 		if servicelist is not None:
 			servicelist = unquote(servicelist).split(',')
+			while '' in servicelist: servicelist.remove('')
 			timer.bouquets = servicelist
 
 		# Offset
