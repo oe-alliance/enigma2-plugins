@@ -2,7 +2,7 @@
 #
 #
 #    Next Event Renderer for Dreambox/Enigma-2
-#    Coded by Vali (c)2010
+#    Coded by Vali (c)2010-2011
 #    Support: www.dreambox-tools.info
 #
 #
@@ -35,18 +35,17 @@ class vhdRendNextEvent(Renderer, VariableText):
 	GUI_WIDGET = eLabel
 	
 	def changed(self, what):
-		if not self.suspended:
-			ref = self.source.service
-			info = ref and self.source.info
-			if info is None:
-				self.text = ""
-				return
-			ENext = ""
-			eventNext = self.epgcache.lookupEvent(['IBDCTSERNX', (ref.toString(), 1, -1)])
-			if eventNext:
-				if eventNext[0][4]:
-					t = localtime(eventNext[0][1])
-					duration = "%d min" %  (eventNext[0][2] / 60)
-					ENext = "-->    %02d:%02d    %s\n%s" % (t[3], t[4], duration, eventNext[0][4])
-			self.text = ENext
+		ref = self.source.service
+		info = ref and self.source.info
+		if info is None:
+			self.text = ""
+			return
+		ENext = ""
+		eventNext = self.epgcache.lookupEvent(['IBDCTSERNX', (ref.toString(), 1, -1)])
+		if eventNext:
+			if eventNext[0][4]:
+				t = localtime(eventNext[0][1])
+				duration = "%d min" %  (eventNext[0][2] / 60)
+				ENext = "next:   %02d:%02d   %s   %s" % (t[3], t[4], duration, eventNext[0][4])
+		self.text = ENext
 
