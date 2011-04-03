@@ -26,6 +26,7 @@ def getToplevel(session):
 	root.putChild("web-data", static.File(util.sibpath(__file__, "web-data")))
 	root.putChild("file", FileStreamer())
 	root.putChild("grab", GrabResource())
+	root.putChild("opkg", IPKGResource())
 	root.putChild("ipkg", IPKGResource())
 	root.putChild("play", ServiceplayerResource(session))
 	root.putChild("wap", RedirectorResource("/mobile/"))

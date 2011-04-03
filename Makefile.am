@@ -60,6 +60,7 @@ SUBDIRS = \
 	setpasswd \
 	shoutcast \
 	simplerss \
+	svdrp \
 	tageditor \
 	trafficinfo \
 	tvcharts \

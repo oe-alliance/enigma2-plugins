@@ -108,6 +108,8 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			after = get("after")
 			if before and after:
 				timer.timeframe = (int(after), int(before))
+			elif before == '' or after == '':
+				timer.timeframe = None
 
 		# Encoding
 		timer.encoding = get("encoding", timer.encoding)
@@ -133,6 +135,8 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			start = [int(x) for x in start.split(':')]
 			end = [int(x) for x in end.split(':')]
 			timer.timespan = (start, end)
+		elif start == '' and end == '':
+			timer.timespan = None
 
 		# Services
 		servicelist = get("services")
@@ -168,6 +172,8 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 				before = int(offset[0] or 0) * 60
 				after = int(offset[1] or 0) * 60
 			timer.offset = (before, after)
+		elif offset == '':
+			timer.offset = None
 
 		# AfterEvent
 		afterevent = get("afterevent")
@@ -190,6 +196,8 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		maxduration = get("maxduration")
 		if maxduration:
 			timer.maxduration = int(maxduration)*60
+		elif maxduration == '':
+			timer.maxduration = None
 
 		# Includes
 		title = req.args.get("title")
@@ -239,7 +247,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			timer.lastBegin = int(get("lastBegin", timer.lastBegin))
 
 		timer.avoidDuplicateDescription = int(get("avoidDuplicateDescription", timer.avoidDuplicateDescription))
-		timer.destination = get("location", "") or None
+		timer.destination = get("location", timer.destination) or None
 
 		# eventually save config
 		if self._remove:
