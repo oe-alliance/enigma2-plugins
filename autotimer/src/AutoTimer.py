@@ -3,6 +3,11 @@ from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
 from AutoTimerConfiguration import parseConfig, buildConfig
 
+# GUI (Screens)
+from Screens.MessageBox import MessageBox
+from Tools.FuzzyDate import FuzzyTime
+from Tools.Notifications import AddPopup
+
 # Navigation (RecordTimer)
 import NavigationInstance
 
@@ -41,6 +46,57 @@ caseMap = {
 	"sensitive": eEPGCache.CASE_CHECK,
 	"insensitive": eEPGCache.NO_CASE_CHECK
 }
+
+import thread
+import exceptions
+
+class InterruptedException(exceptions.Exception):
+    def __init__(self, args = None):
+        self.args = args
+
+class ThreadedJob:
+    def __init__(self):
+        # tell them ten seconds at first
+        self.secondsRemaining = 10.0
+        self.lastTick = 0
+
+        # not running yet
+        self.isPaused = False
+        self.isRunning = False
+        self.keepGoing = True
+
+    def Start(self):
+        self.keepGoing = self.isRunning = True
+        thread.start_new_thread(self.Run, ())
+        self.isPaused = False
+
+    def Stop(self):
+        self.keepGoing = False
+
+    def WaitUntilStopped(self):
+        while self.isRunning:
+            time.sleep(0.1)
+
+    def IsRunning(self):
+        return self.isRunning
+
+    def Run(self):
+        # this is overridden by the
+        # concrete ThreadedJob
+        print "Run was not overloaded"
+        self.JobFinished()
+        pass
+
+    def Pause(self):
+        self.isPaused = True
+        pass
+
+    def Continue(self):
+        self.isPaused = False
+        pass
+
+    def JobFinished(self):
+        self.isRunning = False
 
 class AutoTimerIgnoreTimerException(Exception):
 	def __init__(self, cause):
@@ -150,8 +206,27 @@ class AutoTimer:
 		self.timers.append(timer)
 
 # Main function
+	def parseEPG(self, autoPoll = False, simulateOnly = False):
+		job = ParseEPG(autoPoll, simulateOnly)
+		job.Start()
 
-	def parseEPG(self, simulateOnly = False):
+class ParseEPG(ThreadedJob):
+	""" A common file copy Job. """
+
+	def __init__(self, autoPoll, simulateOnly):
+		self.simulateOnly = simulateOnly
+		self.autoPoll = autoPoll
+		ThreadedJob.__init__(self)
+
+	def Run(self):
+		""" This can either be run directly for synchronous use of the job,
+		or started as a thread when ThreadedJob.Start() is called.
+
+		It is responsible for calling JobBeginning, JobProgress, and JobFinished.
+		And as often as possible, calling PossibleStoppingPoint() which will 
+		sleep if the user pauses, and raise an exception if the user cancels.
+		"""
+		autotimer = AutoTimer()
 		if NavigationInstance.instance is None:
 			print "[AutoTimer] Navigation is not available, can't parse EPG"
 			return (0, 0, 0, [], [])
@@ -162,16 +237,15 @@ class AutoTimer:
 		timers = []
 		conflicting = []
 
-		self.readXml()
+		autotimer.readXml()
 
 		# Save Recordings in a dict to speed things up a little
 		# We include processed timers as we might search for duplicate descriptions
 		recorddict = {}
 		for timer in NavigationInstance.instance.RecordTimer.timer_list + NavigationInstance.instance.RecordTimer.processed_timers:
 			recorddict.setdefault(str(timer.service_ref), []).append(timer)
-
 		# Iterate Timer
-		for timer in self.getEnabledTimerList():
+		for timer in autotimer.getEnabledTimerList():
 			# Workaround to allow search for umlauts if we know the encoding
 			match = timer.match
 			if timer.encoding != 'UTF-8':
@@ -242,7 +316,7 @@ class AutoTimer:
 
 				# Append to timerlist and abort if simulating
 				timers.append((name, begin, end, serviceref, timer.name))
-				if simulateOnly:
+				if self.simulateOnly:
 					continue
 
 				# Initialize
@@ -342,5 +416,9 @@ class AutoTimer:
 					else:
 						conflicting.append((name, begin, end, serviceref, timer.name))
 
+		if self.autoPoll:
+			if conflicting and config.plugins.autotimer.notifconflict.value:
+				AddPopup(_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(conflicting), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in conflicting])), type = MessageBox.TYPE_INFO, timeout = 10)
+		else:
+			AddPopup(_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered.") % (total, new, modified, len(conflicting)), type = MessageBox.TYPE_INFO, timeout = 10)
 		return (total, new, modified, timers, conflicting)
-

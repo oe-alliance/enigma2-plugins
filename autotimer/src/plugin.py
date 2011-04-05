@@ -15,15 +15,15 @@ from Plugins.Plugin import PluginDescriptor
 # Initialize Configuration
 config.plugins.autotimer = ConfigSubsection()
 config.plugins.autotimer.autopoll = ConfigEnableDisable(default = True)
-config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default = True)
-config.plugins.autotimer.interval = ConfigNumber(default = 60)
+config.plugins.autotimer.onlyinstandby = ConfigEnableDisable(default = False)
+config.plugins.autotimer.interval = ConfigNumber(default = 30)
 config.plugins.autotimer.refresh = ConfigSelection(choices = [
 		("none", _("None")),
 		("auto", _("Only AutoTimers created during this session")),
 		("all", _("All non-repeating timers"))
 	], default = "all"
 )
-config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = False)
+config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = True)
 config.plugins.autotimer.editor = ConfigSelection(choices = [
 		("plain", _("Classic")),
 		("wizard", _("Wizard"))
@@ -113,13 +113,6 @@ def editCallback(session):
 	if session is not None:
 		# Poll EPGCache
 		ret = autotimer.parseEPG()
-		session.open(
-			MessageBox,
-			_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered.") % (ret[0], ret[1], ret[2], len(ret[4])),
-			type = MessageBox.TYPE_INFO,
-			timeout = 10
-		)
-
 		# Save xml
 		autotimer.writeXml()
 

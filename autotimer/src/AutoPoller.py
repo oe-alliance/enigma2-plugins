@@ -37,7 +37,7 @@ class AutoPoller:
 			print "[AutoTimer] Auto Poll Started"
 			# Ignore any program errors
 			try:
-				ret = autotimer.parseEPG()
+				ret = autotimer.parseEPG(autoPoll = True)
 			except Exception:
 				# Dump error to stdout
 				import traceback, sys
@@ -46,18 +46,9 @@ class AutoPoller:
 			print "[AutoTimer] Auto Poll Started"
 			# Ignore any program errors
 			try:
-				ret = autotimer.parseEPG()
+				ret = autotimer.parseEPG(autoPoll = True)
 			except Exception:
 				# Dump error to stdout
 				import traceback, sys
 				traceback.print_exc(file=sys.stdout)
-			else:
-				conflicts = ret[4]
-				if conflicts and config.plugins.autotimer.notifconflict.value:
-					AddPopup(
-						_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(conflicts), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in conflicts])),
-						MessageBox.TYPE_INFO,
-						5,
-						NOTIFICATIONID
-					)
 		self.timer.startLongTimer(config.plugins.autotimer.interval.value*60)
