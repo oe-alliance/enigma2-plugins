@@ -25,6 +25,10 @@ from EPGRefreshService import EPGRefreshService
 # Configuration
 from Components.config import config
 
+# MessageBox
+from Screens.MessageBox import MessageBox
+from Tools import Notifications
+
 # ... II
 from MainPictureAdapter import MainPictureAdapter
 from BackgroundAdapter import BackgroundAdapter
@@ -221,11 +225,13 @@ class EPGRefresh:
 		del additionalServices[:]
 
 		# Debug
-		#print "[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in scanServices])
+		print "[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in scanServices])
 
 		if config.plugins.epgrefresh.background.value:
 			self.refreshAdapter = BackgroundAdapter(self.session)
 		else:
+			if not Screens.Standby.inStandby and config.plugins.epgrefresh.enablemessage.value and (not self.session.nav.RecordTimer.isRecording() or self.forcedScan):
+				Notifications.AddNotification(MessageBox, _("EPG refresh starts scanning channels."), type=MessageBox.TYPE_INFO, timeout=4)
 			self.refreshAdapter = MainPictureAdapter(self.session)
 
 		self.scanServices = scanServices
@@ -266,6 +272,8 @@ class EPGRefresh:
 				1
 			)
 
+		if not Screens.Standby.inStandby and not config.plugins.epgrefresh.background and config.plugins.epgrefresh.enablemessage.value:
+			Notifications.AddNotification(MessageBox, _("EPG refresh finished."), type=MessageBox.TYPE_INFO, timeout=4)
 		self.forcedScan = False
 		epgrefreshtimer.cleanup()
 		self.refreshAdapter.stop()
