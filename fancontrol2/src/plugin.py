@@ -150,7 +150,7 @@ config.plugins.FanControl.EnableDataLog = ConfigYesNo(default = False)
 config.plugins.FanControl.EnableEventLog = ConfigYesNo(default = False)
 config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("auto", _("auto")), ("never", _("never"))], default="auto")
 config.plugins.FanControl.MonitorInExtension = ConfigYesNo(default = True)
-config.plugins.FanControl.Multi = ConfigSelection(choices = [(1, "RPM"), (2, "RPM/2")], default = 2)
+config.plugins.FanControl.Multi = ConfigSelection(choices = [("1", "RPM"), ("2", "RPM/2")], default = "2")
 
 def GetFanRPM():
 	global RPMread
@@ -161,7 +161,7 @@ def GetFanRPM():
 		RPMread = 0
 	else:
 		RPMread += 1
-	value = int(value / config.plugins.FanControl.Multi.value)
+	value = int(value / int(config.plugins.FanControl.Multi.value))
 	return value
 
 def GetBox():
@@ -1028,15 +1028,19 @@ class FanControl2(Screen):
 
 def autostart(reason, **kwargs):
 	global session
-	from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
-	from FC2webSite import FC2web, FC2webLog, FC2webChart
-	from twisted.web import static
-	root = static.File("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data")
-#	root = FC2web()
-	root.putChild("", FC2web())
-	root.putChild("log", FC2webLog())
-	root.putChild("chart", FC2webChart())
-	addExternalChild( ("fancontrol", root) )
+	if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/webif.py"):
+		from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
+		from FC2webSite import FC2web, FC2webLog, FC2webChart
+		from twisted.web import static
+		root = static.File("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data")
+#		root = FC2web()
+		root.putChild("", FC2web())
+		root.putChild("log", FC2webLog())
+		root.putChild("chart", FC2webChart())
+		addExternalChild( ("fancontrol", root) )
+	if not os.path.exists("/proc/stb/fp/fan_vlt"):
+		FClog("not supported, exit")
+		return
 	if reason == 0 and kwargs.has_key("session"):
 		session = kwargs["session"]
 		session.open(FanControl2)
@@ -1047,17 +1051,18 @@ def Plugins(**kwargs):
 	description="Fan Control 2", 
 	where = [PluginDescriptor.WHERE_SESSIONSTART, 
 	PluginDescriptor.WHERE_AUTOSTART], 
-	fnc = autostart),
-	PluginDescriptor(name="Fan Control", 
-	description="Fan Control 2", 
-	where = PluginDescriptor.WHERE_PLUGINMENU,
-	icon = "plugin.png",
-	fnc = main)]
-	if config.plugins.FanControl.MonitorInExtension.value:
-		list.append(PluginDescriptor(
-		name="Fan Control 2 - Monitor", 
+	fnc = autostart)]
+	if os.path.exists("/proc/stb/fp/fan_vlt"):
+		list.append(PluginDescriptor(name="Fan Control", 
 		description="Fan Control 2", 
-		where = PluginDescriptor.WHERE_EXTENSIONSMENU,
+		where = PluginDescriptor.WHERE_PLUGINMENU,
 		icon = "plugin.png",
-		fnc = mainMonitor))
+		fnc = main))
+		if config.plugins.FanControl.MonitorInExtension.value:
+			list.append(PluginDescriptor(
+			name="Fan Control 2 - Monitor", 
+			description="Fan Control 2", 
+			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
+			icon = "plugin.png",
+			fnc = mainMonitor))
 	return list

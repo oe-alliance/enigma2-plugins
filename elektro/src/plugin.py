@@ -11,7 +11,7 @@
 
 
 #from enigma import *
-
+from __init__ import _
 
 from Screens.InfoBarGenerics import *
 # from RecordTimer import *
@@ -63,23 +63,12 @@ from enigma import quitMainloop, eTimer
 # import Wakeup?!
 from Tools.DreamboxHardware import getFPWasTimerWakeup
 
-
-
-# from Tools import Directories
-import gettext
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-try:
-	_ = gettext.translation('elektro', resolveFilename(SCOPE_PLUGINS, "Extensions/Elektro/locale"), [config.osd.language.getText()]).gettext
-except IOError:
-	print "[Elektro] Locale not found!"
-	pass
-
 #############
 
 # Globals
 session = None
 ElektroWakeUpTime = -1
-elektro_pluginversion = "3.4.0"
+elektro_pluginversion = "3.4.1"
 elektro_readme = "/usr/lib/enigma2/python/Plugins/Extensions/Elektro/readme.txt"
 elektrostarttime = 60 
 elektrosleeptime = 5
@@ -181,8 +170,8 @@ def main(session,**kwargs):
 
 class Elektro(ConfigListScreen,Screen):
 	skin = """
-			<screen position="center,center" size="550,400" title="Elektro Power Save Ver. """ + elektro_pluginversion + """" >
-			<widget name="config" position="0,0" size="550,360" scrollbarMode="showOnDemand" />
+			<screen position="center,center" size="600,400" title="Elektro Power Save Ver. """ + elektro_pluginversion + """" >
+			<widget name="config" position="0,0" size="600,360" scrollbarMode="showOnDemand" />
 			
 			<widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
 			<widget name="key_green" position="140,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 

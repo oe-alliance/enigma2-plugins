@@ -43,6 +43,7 @@ Release infos
 	  EPG refresh in parallel.
 3.3.4 Added Turkish locale by MytHoLoG	  
 3.4.0 no shutdown if HDD not Idle (joergm6)  
+3.4.1 Fix: Multi-Language (locale) does not work 
 ====================================================
 The English Documentation follows the German one 
 ====================================================
