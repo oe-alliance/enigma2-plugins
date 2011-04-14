@@ -28,16 +28,9 @@ from Tools.BoundFunction import boundFunction
 from enigma import eServiceReference, eServiceCenter, eTimer, eSize, iServiceInformation
 from SerienFilm import EpiSepCfg
 
-config.movielist = ConfigSubsection()
-config.movielist.moviesort = ConfigInteger(default=MovieList.SORT_RECORDED)
+config.movielist.sfmoviesort = ConfigInteger(default=MovieList.SORT_RECORDED)
 config.movielist.sflisttype = ConfigInteger(default=MovieList.LISTTYPE_MINIMAL)
 config.movielist.sftimes = ConfigInteger(default=MovieList.SHOW_DURATION | MovieList.SHOW_DIRECTORIES)
-config.movielist.last_videodir = ConfigText(default=resolveFilename(SCOPE_HDD))
-config.movielist.last_timer_videodir = ConfigText(default=resolveFilename(SCOPE_HDD))
-config.movielist.videodirs = ConfigLocations(default=[resolveFilename(SCOPE_HDD)])
-config.movielist.first_tags = ConfigText(default="")
-config.movielist.second_tags = ConfigText(default="")
-config.movielist.last_selected_tags = ConfigSet([], default=[])
 config.movielist.sftitle_episode_separator = ConfigText(default=_x(": "))
 
 def setPreferredTagEditor(te):
@@ -75,7 +68,7 @@ class MovieContextMenu(Screen):
 		menu = [(_("delete..."), self.delete)]
 		menu.extend([(p.description, boundFunction(self.execPlugin, p)) for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST)])
 
-		if config.movielist.moviesort.value == MovieList.SORT_ALPHANUMERIC:
+		if config.movielist.sfmoviesort.value == MovieList.SORT_ALPHANUMERIC:
 			menu.append((_x("sort by date  (quick toggle by key 0)"), boundFunction(self.sortBy, MovieList.SORT_RECORDED)))
 		else:
 			menu.append((_x("alphabetic sort  (quick toggle by key 0)"), boundFunction(self.sortBy, MovieList.SORT_ALPHANUMERIC)))
@@ -110,7 +103,7 @@ class MovieContextMenu(Screen):
 		self.close(False)
 
 	def sortBy(self, newType):
-		config.movielist.moviesort.value = newType
+		config.movielist.sfmoviesort.value = newType
 		self.csel.setSortType(newType)
 		if not self.csel["list"].sortLists():	# no reload required if sflists sorted
 			self.csel.reloadList()
@@ -249,7 +242,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 
 		self["list"] = MovieList(None,
 			config.movielist.sflisttype.value,
-			config.movielist.moviesort.value,
+			config.movielist.sfmoviesort.value,
 			config.movielist.sftimes.value,
 			config.movielist.sftitle_episode_separator.value,
 			self)
@@ -383,7 +376,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 
 	def saveconfig(self):
 		config.movielist.last_selected_tags.value = self.selected_tags
-		config.movielist.moviesort.save()
+		config.movielist.sfmoviesort.save()
 		config.movielist.sflisttype.save()
 		config.movielist.sftimes.save()
 

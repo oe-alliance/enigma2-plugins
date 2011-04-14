@@ -505,17 +505,18 @@ class MovieList(GUIComponent):
 				rootlidx -= 1
 				film = self.serflm(film, ts)
 				samefilm = False
-				if film[3][3] != "" and film[3][2] == serlst[-1][3][2]:		# perhaps same Movie?
-					event1 = film[1].getEvent(film[0])
-					event2 = serlst[-1][1].getEvent(serlst[-1][0])
-					if event1 and event2 and event1.getExtendedDescription() == event2.getExtendedDescription():
-						samefilm = True
-				if samefilm:
-					repcnt += 1
-				elif repcnt:
-					self.update_repcnt(serlst, repcnt)
-					repcnt = 0
-				serlst.append(film)
+				if serlst:
+					if serlst and film[3][3] != "" and film[3][2] == serlst[-1][3][2]:		# perhaps same Movie?
+						event1 = film[1].getEvent(film[0])
+						event2 = serlst[-1][1].getEvent(serlst[-1][0])
+						if event1 and event2 and event1.getExtendedDescription() == event2.getExtendedDescription():
+							samefilm = True
+					if samefilm:
+						repcnt += 1
+					elif repcnt:
+						self.update_repcnt(serlst, repcnt)
+						repcnt = 0
+					serlst.append(film)
 			elif serlst:
 				self.rootlst[parent_list_index] = (ser_serviceref, ser_info, self.serdate, 
 					[self.VIRT_DIR, self.pdirMap, txt[0], "", "SFLIDX" + str(sflidx), 1])
