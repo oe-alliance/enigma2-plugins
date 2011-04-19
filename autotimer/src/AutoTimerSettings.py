@@ -37,7 +37,7 @@ class AutoTimerSettings(Screen, ConfigListScreen):
 			self,
 			[
 				getConfigListEntry(_("Poll automatically"), config.plugins.autotimer.autopoll, _("Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button.")),
-				getConfigListEntry(_("Only poll while in stanby"), config.plugins.autotimer.onlyinstandby, _("When this is enabled AutoTimer will ONLY check for new events whilst in stanadby.")),
+				getConfigListEntry(_("Only poll while in standby"), config.plugins.autotimer.onlyinstandby, _("When this is enabled AutoTimer will ONLY check for new events whilst in stanadby.")),
 				getConfigListEntry(_("Poll Interval (in mins)"), config.plugins.autotimer.interval, _("This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again.")),
 				getConfigListEntry(_("Show in extension menu"), config.plugins.autotimer.show_in_extensionsmenu, _("Enable this to be able to access the AutoTimer Overview from within the extension menu.")),
 				getConfigListEntry(_("Modify existing timers"), config.plugins.autotimer.refresh, _("This setting controls the behavior when a timer matches a found event.")),
