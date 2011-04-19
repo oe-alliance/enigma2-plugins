@@ -42,31 +42,6 @@ try:
 except ImportError:
 	autoTimerAvailable = False
 
-# Overwrite EPGSelection.__init__ with our modified one
-baseEPGSelection__init__ = None
-def EPGSelectionInit():
-	global baseEPGSelection__init__
-	if baseEPGSelection__init__ is None:
-		baseEPGSelection__init__ = EPGSelection.__init__
-	EPGSelection.__init__ = EPGSelection__init__
-
-# Modified EPGSelection __init__
-def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None):
-	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
-	if self.type != EPG_TYPE_MULTI:
-		def bluePressed():
-			cur = self["list"].getCurrent()
-			if cur[0] is not None:
-				name = cur[0].getEventName()
-			else:
-				name = ''
-			self.session.open(EPGSearch, name, False)
-
-		self["epgsearch_actions"] = ActionMap(["EPGSelectActions"],
-				{
-					"blue": bluePressed,
-				})
-		self["key_blue"].text = _("EPG Search")
 
 # Modified EPGSearchList with support for PartnerBox
 class EPGSearchList(EPGList):
@@ -132,7 +107,7 @@ class EPGSearch(EPGSelection):
 
 		# XXX: we lose sort begin/end here
 		self["key_yellow"] = Button(_("New Search"))
-		self["key_blue"] = Button(_("History"))
+		self["key_blue"] = Button(_("Add AutoTimer"))
 
 # begin stripped copy of EPGSelection.__init__
 		self.bouquetChangeCB = None
@@ -158,9 +133,9 @@ class EPGSearch(EPGSelection):
 				"ok": self.eventSelected,
 				"timerAdd": self.timerAdd,
 				"yellow": self.yellowButtonPressed,
-				"blue": self.blueButtonPressed,
+				"blue": self.exportAutoTimer,
 				"info": self.infoKeyPressed,
-				"red": self.zapTo, # needed --> Partnerbox
+				#"red": self.zapTo, # needed --> Partnerbox
 				"nextBouquet": self.nextBouquet, # just used in multi epg yet
 				"prevBouquet": self.prevBouquet, # just used in multi epg yet
 				"nextService": self.nextService, # just used in single epg yet
@@ -211,9 +186,9 @@ class EPGSearch(EPGSelection):
 
 		if autoTimerAvailable:
 			options.extend((
+				(_("Show search history"), self.showHistory),
 				(_("Import from AutoTimer"), self.importFromAutoTimer),
 				(_("Save search as AutoTimer"), self.addAutoTimer),
-				(_("Export selected as AutoTimer"), self.exportAutoTimer),
 			))
 
 		self.session.openWithCallback(
@@ -282,7 +257,7 @@ class EPGSearch(EPGSelection):
 			return
 		addAutotimerFromEvent(self.session, cur[0], cur[1])
 
-	def blueButtonPressed(self):
+	def showHistory(self):
 		options = [(x, x) for x in config.plugins.epgsearch.history.value]
 
 		if options:
