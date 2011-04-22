@@ -1190,15 +1190,16 @@ def addAutotimerFromSearchString(session, match):
 		autotimer = AutoTimer()
 		autotimer.readXml()
 
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = match
+	newTimer.match = ''
+	newTimer.enabled = True
+
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		preferredAutoTimerComponent(
-			autotimer.getUniqueId(),
-			match,
-			'',		# Match
-			True	# Enabled
-		),
+		newTimer,
 		match,		# Proposed Match
 		None,		# Proposed Begin
 		None,		# Proposed End
@@ -1245,15 +1246,16 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 
 	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
 
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = name
+	newTimer.match = ''
+	newTimer.enabled = True
+
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		preferredAutoTimerComponent(
-			autotimer.getUniqueId(),
-			name,
-			'',		# Match
-			True	# Enabled
-		),
+		newTimer,
 		match,		# Proposed Match
 		begin,		# Proposed Begin
 		end,		# Proposed End
