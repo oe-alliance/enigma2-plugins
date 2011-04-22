@@ -32,6 +32,7 @@ config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default = Fa
 config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.autotimer.fastscan = ConfigYesNo(default = False)
 config.plugins.autotimer.notifconflict = ConfigYesNo(default = True)
+config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default = 0)
 
 autotimer = None
 autopoller = None

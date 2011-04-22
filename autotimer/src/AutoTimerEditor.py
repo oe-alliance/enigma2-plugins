@@ -308,6 +308,7 @@ class AutoTimerEditorBase:
 				("0", _("No")),
 				("1", _("On same service")),
 				("2", _("On any service")),
+				("3", _("Any service/recording")),
 			],
 			default = str(timer.getAvoidDuplicateDescription())
 		))
