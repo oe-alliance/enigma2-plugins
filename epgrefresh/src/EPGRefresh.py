@@ -92,28 +92,27 @@ class EPGRefresh:
 		list = ['<?xml version="1.0" ?>\n<epgrefresh>\n\n']
 
 		if webif:
-			TAGSERVICE='e2servicereference'
-			TAGBOUQUET='e2servicereference'
-			TAGNAME='e2servicename'
+			for serviceref in self.services[0].union(self.services[1]):
+				ref = ServiceReference(str(serviceref))
+				list.extend((
+					' <e2service>\n',
+					'  <e2servicereference>', str(serviceref), '</e2servicereference>\n',
+					'  <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
+					' </e2service>\n',
+				))
 		else:
-			TAGSERVICE='service'
-			TAGBOUQUET='bouquet'
-			TAGNAME='!--'
-
-		for service in self.services[0]:
-			ref = ServiceReference(service.sref)
-			list.extend((' <', TAGNAME, '>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</', TAGNAME, '>\n'))
-			list.extend((' <', TAGSERVICE))
-			if service.duration is not None:
-				list.extend((' duration="', str(service.duration), '"'))
-			list.extend(('>', stringToXML(service.sref), '</', TAGSERVICE, '>\n'))
-		for bouquet in self.services[1]:
-			ref = ServiceReference(bouquet.sref)
-			list.extend((' <', TAGNAME, '>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</', TAGNAME, '>\n'))
-			list.extend((' <', TAGBOUQUET))
-			if bouquet.duration is not None:
-				list.extend((' duration="', str(bouquet.duration), '"'))
-			list.extend(('>', stringToXML(bouquet.sref), '</', TAGBOUQUET, '>\n'))
+			for service in self.services[0]:
+				ref = ServiceReference(service.sref)
+				list.extend((' <!--', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '-->\n', ' <service'))
+				if service.duration is not None:
+					list.extend((' duration="', str(service.duration), '"'))
+				list.extend(('>', stringToXML(service.sref), '</service>\n'))
+			for bouquet in self.services[1]:
+				ref = ServiceReference(bouquet.sref)
+				list.extend((' <!--', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '-->\n', ' <bouquet'))
+				if bouquet.duration is not None:
+					list.extend((' duration="', str(bouquet.duration), '"'))
+				list.extend(('>', stringToXML(bouquet.sref), '</bouquet>\n'))
 
 		list.append('\n</epgrefresh>')
 
