@@ -548,7 +548,7 @@ class DBUpdateStatus(Screen):
 		# Get Pluginlist
 		if config.plugins.tvcharts.submitplugins.value and self.pluginlist == "":
 			try:
-				os_system("ipkg list_installed | grep enigma2-plugin- > /tmp/plugins.txt")
+				os_system("opkg list_installed | grep enigma2-plugin- > /tmp/plugins.txt")
 				for plugin in open('/tmp/plugins.txt', 'r'):
 					self.pluginlist += plugin[0:plugin.find(' - ')]+"\n"
 				os_system("rm -f /tmp/plugins.txt")
