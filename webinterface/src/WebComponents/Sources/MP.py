@@ -195,6 +195,8 @@ class MP(Source):
 			mp.stopEntry()
 		elif param == "exit":
 			mp.exit()
+		elif param == "shuffle":
+			mp.playlist.PlayListShuffle()
 		else:
 			return (False, "unknown parameter %s" % param)
 		return (True, "executed %s" % param)

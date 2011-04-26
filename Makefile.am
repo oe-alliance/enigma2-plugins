@@ -44,6 +44,7 @@ SUBDIRS = \
 	moviecut \
 	movielistpreview \
 	movieretitle \
+	moviesearch \
 	movieselectionquickbutton \
 	movietagger \
 	multirc \

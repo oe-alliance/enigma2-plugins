@@ -12,7 +12,13 @@ class AutoTimerBaseResource(resource.Resource):
 	def getAutoTimerInstance(self):
 		if plugin.autotimer is None:
 			self._remove = True
-			return AutoTimer()
+			autotimer = AutoTimer()
+			try:
+				autotimer.readXml()
+			except Exception:
+				# TODO: proper error handling
+				pass
+			return autotimer
 		self._remove = False
 		return plugin.autotimer
 	def returnResult(self, req, state, statetext):
