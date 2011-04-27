@@ -37,6 +37,7 @@ SUBDIRS = \
 	mosaic \
 	moviecut \
 	movieretitle \
+	moviesearch \
 	movietagger \
 	multirc \
 	mytube \

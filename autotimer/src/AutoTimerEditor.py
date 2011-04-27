@@ -308,6 +308,7 @@ class AutoTimerEditorBase:
 				("0", _("No")),
 				("1", _("On same service")),
 				("2", _("On any service")),
+				("3", _("Any service/recording")),
 			],
 			default = "1"
 		))
@@ -1191,15 +1192,16 @@ def addAutotimerFromSearchString(session, match):
 	else:
 		autotimer.readXml()
 
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = match
+	newTimer.match = ''
+	newTimer.enabled = True
+
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		preferredAutoTimerComponent(
-			autotimer.getUniqueId(),
-			match,
-			'',		# Match
-			True	# Enabled
-		),
+		newTimer,
 		match,		# Proposed Match
 		None,		# Proposed Begin
 		None,		# Proposed End
@@ -1248,15 +1250,16 @@ def addAutotimerFromEvent(session, evt = None, service = None):
 
 	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
 
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = name
+	newTimer.match = ''
+	newTimer.enabled = True
+
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		preferredAutoTimerComponent(
-			autotimer.getUniqueId(),
-			name,
-			'',		# Match
-			True	# Enabled
-		),
+		newTimer,
 		match,		# Proposed Match
 		begin,		# Proposed Begin
 		end,		# Proposed End

@@ -58,7 +58,11 @@ class FC2web(resource.Resource):
 		templist = sensors.getSensorsList(sensors.TYPE_TEMPERATURE)
 		tempcount = len(templist)
 		for count in range(tempcount):
-			html += "<td><font color=\"#FFCC00\">%d</font></td>" % sensors.getSensorValue(count)
+			if sensors.getSensorName(count) == "undefined":
+				N = TempName[count]
+			else:
+				N = sensors.getSensorName(count)
+			html += "<td><font color=\"#FFCC00\" title=\"%s\">%d</font></td>" % (N,sensors.getSensorValue(count))
 		if FC2werte[4] > 0:
 			html += "<td><font size=\"1\">HDD </font><font color=\"#FFCC00\">%d</font></td>\n" % FC2werte[4]
 		html += "</tr>\n"

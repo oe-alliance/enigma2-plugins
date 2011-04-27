@@ -17,10 +17,11 @@ from RecordTimer import RecordTimerEntry
 from Components.TimerSanityCheck import TimerSanityCheck
 
 # Timespan
-from time import localtime, time
+from time import localtime, time, mktime
+from datetime import timedelta, date
 
 # EPGCache & Event
-from enigma import eEPGCache, eServiceReference
+from enigma import eEPGCache, eServiceReference, eServiceCenter, iServiceInformation
 
 # Enigma2 Config
 from Components.config import config
@@ -237,6 +238,12 @@ class ParseEPG(ThreadedJob):
 		timers = []
 		conflicting = []
 
+		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
+		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.value + 1)
+		evtLimit = mktime((date.today() + delta).timetuple())
+		checkEvtLimit = delta.days > 1
+		del delta
+
 		autotimer.readXml()
 
 		# Save Recordings in a dict to speed things up a little
@@ -244,8 +251,16 @@ class ParseEPG(ThreadedJob):
 		recorddict = {}
 		for timer in NavigationInstance.instance.RecordTimer.timer_list + NavigationInstance.instance.RecordTimer.processed_timers:
 			recorddict.setdefault(str(timer.service_ref), []).append(timer)
+
+		# Create dict of all movies in all folders used by an autotimer to compare with recordings
+		moviedict = {}
+		serviceHandler = eServiceCenter.getInstance()
+
 		# Iterate Timer
 		for timer in autotimer.getEnabledTimerList():
+			# Precompute timer destination dir
+			dest = timer.destination or config.usage.default_path.value
+
 			# Workaround to allow search for umlauts if we know the encoding
 			match = timer.match
 			if timer.encoding != 'UTF-8':
@@ -285,6 +300,11 @@ class ParseEPG(ThreadedJob):
 				if begin < time() + 60:
 					continue
 
+				# If maximum days in future is set then check time
+				if checkEvtLimit:
+					if begin > evtLimit:
+						continue
+
 				# Convert begin time
 				timestamp = localtime(begin)
 
@@ -317,6 +337,45 @@ class ParseEPG(ThreadedJob):
 				# Append to timerlist and abort if simulating
 				timers.append((name, begin, end, serviceref, timer.name))
 				if self.simulateOnly:
+					continue
+
+				# Reset movie Exists
+				movieExists = False
+
+				# Check for existing recordings in directory
+				if timer.avoidDuplicateDescription == 3:
+					# Eventually create cache
+					if dest and dest not in moviedict:
+						movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
+						if movielist is None:
+							print "[AutoTimer] listing of movies in " + dest + " failed"
+						else:
+							moviedict.setdefault(dest, [])
+							append = moviedict[dest].append
+							while 1:
+								movieref = movielist.getNext()
+								if not movieref.valid():
+									break
+								if movieref.flags & eServiceReference.mustDescent:
+									continue
+								info = serviceHandler.info(movieref)
+								if info is None:
+									continue
+								append({
+									"name": info.getName(movieref),
+									"description": info.getInfoString(movieref, iServiceInformation.sDescription)
+								})
+							del append
+
+					for movieinfo in moviedict.get(dest, ()):
+						moviename = movieinfo.get("name")
+						moviedescription = movieinfo.get("description")
+						if moviename == name and moviedescription == description:
+							print "[AutoTimer] We found a matching recorded movie, skipping event:", name
+							movieExists = True
+							break
+
+				if movieExists:
 					continue
 
 				# Initialize
@@ -355,7 +414,7 @@ class ParseEPG(ThreadedJob):
 						newEntry.service_ref = ServiceReference(serviceref)
 
 						break
-					elif timer.avoidDuplicateDescription == 1 and not rtimer.disabled and rtimer.name == name and rtimer.description == description:
+					elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled and rtimer.name == name and rtimer.description == description:
 						oldExists = True
 						print "[AutoTimer] We found a timer with same description, skipping event"
 						break
@@ -367,7 +426,7 @@ class ParseEPG(ThreadedJob):
 						continue
 
 					# We want to search for possible doubles
-					if timer.avoidDuplicateDescription == 2:
+					if timer.avoidDuplicateDescription >= 2:
 						# I thinks thats the fastest way to do this, though it's a little ugly
 						try:
 							for list in recorddict.values():

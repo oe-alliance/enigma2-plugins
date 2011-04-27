@@ -8,6 +8,7 @@ from RecordTimer import RecordTimerEntry, RecordTimer, AFTEREVENT, parseEvent
 from Components.config import config
 from xml.sax.saxutils import unescape
 from time import time, strftime, localtime, mktime
+from Components.UsageConfig import preferredInstantRecordPath, preferredTimerPath
 
 class Timer(Source):
 	LIST = 0
@@ -194,7 +195,7 @@ class Timer(Source):
 				ret = ( False, "No event found! Not recording!" )
 
 		if ret[0]:
-			location = config.movielist.last_videodir.value
+			location = preferredInstantRecordPath()
 			timer = RecordTimerEntry(serviceref, begin, end, name, description, eventid, False, False, 0, dirname=location)
 			timer.dontSave = True
 			recRet = self.recordtimer.record(timer)
@@ -267,7 +268,7 @@ class Timer(Source):
 			if (param['afterevent'] == "0") or (param['afterevent'] == "1") or (param['afterevent'] == "2"):
 				afterEvent = int(param['afterevent'])
 
-		dirname = config.movielist.last_timer_videodir.value
+		dirname = preferredTimerPath()
 		if 'dirname' in param and param['dirname']:
 			dirname = param['dirname']
 
@@ -370,7 +371,7 @@ class Timer(Source):
 			if param['justplay'] == "1":
 				justplay = True
 
-		location = config.movielist.last_timer_videodir.value
+		location = preferredTimerPath()
 		if 'dirname' in param and param['dirname']:
 			location = param['dirname']
 

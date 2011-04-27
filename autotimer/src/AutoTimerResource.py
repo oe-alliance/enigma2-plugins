@@ -3,6 +3,7 @@ from Components.config import config
 from RecordTimer import AFTEREVENT
 from twisted.web import http, resource
 from urllib import unquote
+from enigma import eServiceReference
 from . import _
 import plugin
 
@@ -23,7 +24,7 @@ class AutoTimerBaseResource(resource.Resource):
 <e2simplexmlresult>
 	<e2state>%s</e2state>
 	<e2statetext>%s</e2statetext>
-</e2simplexmlresult>""" % ('true' if state else 'false', statetext)
+</e2simplexmlresult>""" % ('True' if state else 'False', statetext)
 
 
 class AutoTimerDoParseResource(AutoTimerBaseResource):
@@ -153,13 +154,15 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 							pos -= 1
 						value = value[:pos+1]
 
-				appendlist.append(value)
+				if myref.valid():
+					appendlist.append(value)
 			timer.services = appendlist
 
 		# Bouquets
 		servicelist = get("bouquets")
 		if servicelist is not None:
 			servicelist = unquote(servicelist).split(',')
+			while '' in servicelist: servicelist.remove('')
 			timer.bouquets = servicelist
 
 		# Offset
