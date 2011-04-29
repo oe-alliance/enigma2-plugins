@@ -146,9 +146,9 @@ class MP(Source):
 
 		ref = eServiceReference(file)
 		if not ref.valid():
-			if not os_path.isfile(file):
-				return (False, "%s is neither a valid reference nor a valid file" % file)
 			ref = eServiceReference(4097, 0, file)
+			if not ref.valid():
+				return (False, "%s is neither a valid reference nor a valid file" % file)
 
 		serviceRefList = mp.playlist.getServiceRefList()
 		i = 0
