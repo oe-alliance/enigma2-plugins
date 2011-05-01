@@ -1,4 +1,8 @@
 //$Header$
+
+// replace ' with \' for in-html javascript
+String.prototype.esc = function(){ return this.valueOf().gsub("'", "\\'"); };
+
 var templates = {};
 var loadedChannellist = {};
 
