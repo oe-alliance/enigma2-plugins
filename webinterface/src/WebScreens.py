@@ -189,6 +189,7 @@ class MediaPlayerWebScreen(WebScreen):
 		self["Command"] = MP(session, func=MP.COMMAND)
 		self["WritePlaylist"] = MP(session, func=MP.WRITEPLAYLIST)
 		self["CurrentTrack"] = MP(session, func=MP.CURRENT)
+		self["LoadPlaylist"] = MP(session, func=MP.LOADPLAYLIST)
 
 class AutoTimerWebScreen(WebScreen):
 	def __init__(self, session, request):
