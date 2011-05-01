@@ -213,6 +213,8 @@ class MP(Source):
 			mp.exit()
 		elif param == "shuffle":
 			mp.playlist.PlayListShuffle()
+		elif param == "clear":
+			mp.clear_playlist()
 		else:
 			return (False, "unknown parameter %s" % param)
 		return (True, "executed %s" % param)
