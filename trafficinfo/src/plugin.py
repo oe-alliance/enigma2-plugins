@@ -1,5 +1,5 @@
 # by 3c5x9@2007
-from enigma import eTimer
+from enigma import eTimer, getDesktop
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -16,19 +16,32 @@ from twisted.internet import reactor
 
 ###############################################################################        
 class TrafficInfoMain(Screen):
-    skin = """
-        <screen position="110,83" size="530,430" title="Verkehrsinfo" >
-                        
+    skin_SD = """
+        <screen position="110,83" size="530,430" title="Verkehrsinfo" >                        
             <widget name="sectionlist" position="0,0" size="530,125" scrollbarMode="showOnDemand" />            
             <widget name="itemlist" position="0,130" size="530,125" scrollbarMode="showOnDemand" />            
             <widget name="itemdetails" position="0,260" size="530,140" font="Regular;20" halign=\"center\" valign=\"center\"/>            
             <widget name="statuslabel" position="0,400" size="530,30" halign=\"left\"/>           
         </screen>
         """
+    skin_HD = """
+        <screen name="TrafficInfo" position="center,60" size="1030,600" title="Verkehrsinformation">
+            <widget name="sectionlist" position="100,0" size="830,205" scrollbarMode="showOnDemand" />
+            <widget name="itemlist" position="100,215" size="830,275" scrollbarMode="showOnDemand" />
+            <widget name="itemdetails" position="10,495" size="1010,90" font="Regular;20" halign="left" valign="center" />
+            <widget name="statuslabel" position="0,587" size="730,13" halign="left" />
+        </screen>
+        """
     def __init__(self, session,args = 0):
-        self.loadinginprogress = False 
-        self.skin = TrafficInfoMain.skin
+        self.loadinginprogress = False
         self.session = session
+        desktop = getDesktop(0)
+        size = desktop.size()
+        width = size.width()
+        if width < 1280:
+            self.skin = TrafficInfoMain.skin_SD
+        else:
+            self.skin = TrafficInfoMain.skin_HD
         Screen.__init__(self, session)
         self.menu = args
         self["sectionlist"] = MenuList([])
@@ -225,5 +238,5 @@ def main(session, **kwargs):
     session.open(TrafficInfoMain)
 
 def Plugins(**kwargs):
-  return PluginDescriptor(name="Verkehrsinfo",description="view german traffic jam informations",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main,icon="plugin.png")
+  return PluginDescriptor(name="Verkehrsinfo",description="Show German traffic jams",where = PluginDescriptor.WHERE_PLUGINMENU,fnc = main,icon="plugin.png")
 
