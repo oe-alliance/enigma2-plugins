@@ -310,7 +310,7 @@ class AutoTimerEditorBase:
 				("2", _("On any service")),
 				("3", _("Any service/recording")),
 			],
-			default = "1"
+			default = str(timer.getAvoidDuplicateDescription())
 		))
 
 		# Custom Location
@@ -794,7 +794,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.matchLeft = 0
 			self.timer.matchFormatString = ''
 
-		self.timer.avoidDuplicateDescription = int(self.avoidDuplicateDescription.value)
+		self.timer.avoidDuplicateDescription = str(self.avoidDuplicateDescription.value)
 
 		if self.useDestination.value:
 			self.timer.destination = self.destination.value
