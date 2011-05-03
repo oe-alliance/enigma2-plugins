@@ -112,10 +112,10 @@ def editCallback(session):
 
 	# Don't parse EPG if editing was canceled
 	if session is not None:
-		# Poll EPGCache
-		ret = autotimer.parseEPG()
 		# Save xml
 		autotimer.writeXml()
+		# Poll EPGCache
+		ret = autotimer.parseEPG()
 
 	# Start autopoller again if wanted
 	if config.plugins.autotimer.autopoll.value:
