@@ -3,6 +3,9 @@ from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
 from AutoTimerConfiguration import parseConfig, buildConfig
 
+import Components.Task
+from twisted.internet import reactor, threads, task
+
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
 from Tools.FuzzyDate import FuzzyTime
@@ -48,57 +51,6 @@ caseMap = {
 	"insensitive": eEPGCache.NO_CASE_CHECK
 }
 
-import thread
-import exceptions
-
-class InterruptedException(exceptions.Exception):
-    def __init__(self, args = None):
-        self.args = args
-
-class ThreadedJob:
-    def __init__(self):
-        # tell them ten seconds at first
-        self.secondsRemaining = 10.0
-        self.lastTick = 0
-
-        # not running yet
-        self.isPaused = False
-        self.isRunning = False
-        self.keepGoing = True
-
-    def Start(self):
-        self.keepGoing = self.isRunning = True
-        thread.start_new_thread(self.Run, ())
-        self.isPaused = False
-
-    def Stop(self):
-        self.keepGoing = False
-
-    def WaitUntilStopped(self):
-        while self.isRunning:
-            time.sleep(0.1)
-
-    def IsRunning(self):
-        return self.isRunning
-
-    def Run(self):
-        # this is overridden by the
-        # concrete ThreadedJob
-        print "Run was not overloaded"
-        self.JobFinished()
-        pass
-
-    def Pause(self):
-        self.isPaused = True
-        pass
-
-    def Continue(self):
-        self.isPaused = False
-        pass
-
-    def JobFinished(self):
-        self.isRunning = False
-
 class AutoTimerIgnoreTimerException(Exception):
 	def __init__(self, cause):
 		self.cause = cause
@@ -125,7 +77,6 @@ class AutoTimer:
 		)
 
 # Configuration
-
 	def readXml(self):
 		# Abort if no config found
 		if not os_path.exists(XML_CONFIG):
@@ -166,7 +117,6 @@ class AutoTimer:
 		file.close()
 
 # Manage List
-
 	def add(self, timer):
 		self.timers.append(timer)
 
@@ -208,56 +158,59 @@ class AutoTimer:
 
 # Main function
 	def parseEPG(self, autoPoll = False, simulateOnly = False):
-		job = ParseEPG(autoPoll, simulateOnly)
-		job.Start()
+		name = _("AutoTimerTask")
+		job = Components.Task.Job(name)
+		task = AutoTimerTask(job, name)
+		task.setup(autoPoll, simulateOnly)
+		Components.Task.job_manager.AddJob(job)
 
-class ParseEPG(ThreadedJob):
-	""" A common file copy Job. """
+class FailedPostcondition(Components.Task.Condition):
+	def __init__(self, exception):
+		self.exception = exception
+	def getErrorMessage(self, task):
+		return str(self.exception)
+	def check(self, task):
+		return self.exception is None
 
-	def __init__(self, autoPoll, simulateOnly):
-		self.simulateOnly = simulateOnly
-		self.autoPoll = autoPoll
-		ThreadedJob.__init__(self)
-
-	def Run(self):
-		""" This can either be run directly for synchronous use of the job,
-		or started as a thread when ThreadedJob.Start() is called.
-
-		It is responsible for calling JobBeginning, JobProgress, and JobFinished.
-		And as often as possible, calling PossibleStoppingPoint() which will 
-		sleep if the user pauses, and raise an exception if the user cancels.
-		"""
+class AutoTimerTask(Components.Task.PythonTask):
+	def setup(self, autoPoll, simulateOnly):
 		autotimer = AutoTimer()
 		if NavigationInstance.instance is None:
 			print "[AutoTimer] Navigation is not available, can't parse EPG"
 			return (0, 0, 0, [], [])
 
-		total = 0
-		new = 0
-		modified = 0
-		timers = []
-		conflicting = []
+		self.total = 0
+		self.new = 0
+		self.modified = 0
+		self.nooftimers = []
+		self.conflicting = []
+		self.autoPoll = autoPoll
+		self.simulateOnly = simulateOnly
 
+
+		self.readXml = autotimer.readXml()
+
+		self.getEnabledTimerList = autotimer.getEnabledTimerList()
+
+	def work(self):
 		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
 		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.value + 1)
 		evtLimit = mktime((date.today() + delta).timetuple())
-		checkEvtLimit = delta.days > 1
+		self.checkEvtLimit = delta.days > 1
 		del delta
-
-		autotimer.readXml()
-
+		
 		# Save Recordings in a dict to speed things up a little
 		# We include processed timers as we might search for duplicate descriptions
-		recorddict = {}
+		self.recorddict = {}
 		for timer in NavigationInstance.instance.RecordTimer.timer_list + NavigationInstance.instance.RecordTimer.processed_timers:
-			recorddict.setdefault(str(timer.service_ref), []).append(timer)
+			self.recorddict.setdefault(str(timer.service_ref), []).append(timer)
 
 		# Create dict of all movies in all folders used by an autotimer to compare with recordings
-		moviedict = {}
-		serviceHandler = eServiceCenter.getInstance()
+		self.moviedict = {}
+		self.serviceHandler = eServiceCenter.getInstance()
 
 		# Iterate Timer
-		for timer in autotimer.getEnabledTimerList():
+		for timer in self.getEnabledTimerList:
 			# Precompute timer destination dir
 			dest = timer.destination or config.usage.default_path.value
 
@@ -301,7 +254,7 @@ class ParseEPG(ThreadedJob):
 					continue
 
 				# If maximum days in future is set then check time
-				if checkEvtLimit:
+				if self.checkEvtLimit:
 					if begin > evtLimit:
 						continue
 
@@ -332,10 +285,10 @@ class ParseEPG(ThreadedJob):
 				if timer.overrideAlternatives:
 					serviceref = timer.getAlternative(serviceref)
 
-				total += 1
+				self.total += 1
 
 				# Append to timerlist and abort if simulating
-				timers.append((name, begin, end, serviceref, timer.name))
+				self.nooftimers.append((name, begin, end, serviceref, timer.name))
 				if self.simulateOnly:
 					continue
 
@@ -345,20 +298,20 @@ class ParseEPG(ThreadedJob):
 				# Check for existing recordings in directory
 				if timer.avoidDuplicateDescription == 3:
 					# Eventually create cache
-					if dest and dest not in moviedict:
-						movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
+					if dest and dest not in self.moviedict:
+						movielist = self.serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
 						if movielist is None:
 							print "[AutoTimer] listing of movies in " + dest + " failed"
 						else:
-							moviedict.setdefault(dest, [])
-							append = moviedict[dest].append
+							self.moviedict.setdefault(dest, [])
+							append = self.moviedict[dest].append
 							while 1:
 								movieref = movielist.getNext()
 								if not movieref.valid():
 									break
 								if movieref.flags & eServiceReference.mustDescent:
 									continue
-								info = serviceHandler.info(movieref)
+								info = self.serviceHandler.info(movieref)
 								if info is None:
 									continue
 								append({
@@ -367,7 +320,7 @@ class ParseEPG(ThreadedJob):
 								})
 							del append
 
-					for movieinfo in moviedict.get(dest, ()):
+					for movieinfo in self.moviedict.get(dest, ()):
 						moviename = movieinfo.get("name")
 						moviedescription = movieinfo.get("description")
 						if moviename == name and moviedescription == description:
@@ -385,7 +338,7 @@ class ParseEPG(ThreadedJob):
 				# Check for double Timers
 				# We first check eit and if user wants us to guess event based on time
 				# we try this as backup. The allowed diff should be configurable though.
-				for rtimer in recorddict.get(serviceref, ()):
+				for rtimer in self.recorddict.get(serviceref, ()):
 					if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, begin, end) > ((duration/10)*8):
 						oldExists = True
 
@@ -404,7 +357,7 @@ class ParseEPG(ThreadedJob):
 							print "[AutoTimer] Warning, we're messing with a timer which might not have been set by us"
 
 						newEntry = rtimer
-						modified += 1
+						self.modified += 1
 
 						# Modify values saved in timer
 						newEntry.name = name
@@ -429,7 +382,7 @@ class ParseEPG(ThreadedJob):
 					if timer.avoidDuplicateDescription >= 2:
 						# I thinks thats the fastest way to do this, though it's a little ugly
 						try:
-							for list in recorddict.values():
+							for list in self.recorddict.values():
 								for rtimer in list:
 									if not rtimer.disabled and rtimer.name == name and rtimer.description == description:
 										raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
@@ -467,17 +420,17 @@ class ParseEPG(ThreadedJob):
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
-						conflicting.append((name, begin, end, serviceref, timer.name))
+						self.conflicting.append((name, begin, end, serviceref, timer.name))
 					if conflicts is None:
 						timer.decrementCounter()
-						new += 1
-						recorddict.setdefault(serviceref, []).append(newEntry)
+						self.new += 1
+						self.recorddict.setdefault(serviceref, []).append(newEntry)
 					else:
-						conflicting.append((name, begin, end, serviceref, timer.name))
-
+						self.conflicting.append((name, begin, end, serviceref, timer.name))
 		if self.autoPoll:
-			if conflicting and config.plugins.autotimer.notifconflict.value:
-				AddPopup(_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(conflicting), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in conflicting])), type = MessageBox.TYPE_INFO, timeout = 10)
+			if self.conflicting and config.plugins.autotimer.notifconflict.value:
+				AddPopup(_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(self.conflicting), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.conflicting])), type = MessageBox.TYPE_INFO, timeout = 10)
 		else:
-			AddPopup(_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered.") % (total, new, modified, len(conflicting)), type = MessageBox.TYPE_INFO, timeout = 10)
-		return (total, new, modified, timers, conflicting)
+			AddPopup(_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered.") % (self.total, self.new, self.modified, len(self.conflicting)), type = MessageBox.TYPE_INFO, timeout = 10)
+	
+		#return (self.total, self.new, self.modified, self.nooftimers, self.conflicting)
