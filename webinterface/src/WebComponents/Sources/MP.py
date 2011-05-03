@@ -11,6 +11,7 @@ class MP(Source):
 	ADD = 5
 	REMOVE = 6
 	CURRENT = 7
+	LOADPLAYLIST = 8
 
 	def __init__(self, session, func=LIST):
 		Source.__init__(self)
@@ -33,6 +34,8 @@ class MP(Source):
 			self.result = self.command(cmd)
 		elif func is self.WRITEPLAYLIST:
 			self.result = self.writePlaylist(cmd)
+		elif func is self.LOADPLAYLIST:
+			self.result = self.loadPlaylist(cmd)
 		elif func is self.REMOVE:
 			self.result = self.removeFile(cmd)
 		elif func is self.ADD:
@@ -146,9 +149,9 @@ class MP(Source):
 
 		ref = eServiceReference(file)
 		if not ref.valid():
-			if not os_path.isfile(file):
-				return (False, "%s is neither a valid reference nor a valid file" % file)
 			ref = eServiceReference(4097, 0, file)
+			if not ref.valid():
+				return (False, "%s is neither a valid reference nor a valid file" % file)
 
 		serviceRefList = mp.playlist.getServiceRefList()
 		i = 0
@@ -161,6 +164,19 @@ class MP(Source):
 
 		return (False, "%s not found in playlist" % file)
 
+	def loadPlaylist(self, param):
+		filename = "playlist/%s" % param
+		from Tools.Directories import resolveFilename, SCOPE_CONFIG
+
+		# TODO: fix error handling
+		mp = self.tryOpenMP()
+		if mp is None:
+			return (False, "mediaplayer not installed")
+
+		fullPath = resolveFilename(SCOPE_CONFIG, filename)
+		mp.PlaylistSelected(fullPath)
+		return (True, "playlist loaded from %s" % fullPath)
+
 	def writePlaylist(self, param):
 		filename = "playlist/%s.e2pls" % param
 		from Tools.Directories import resolveFilename, SCOPE_CONFIG
@@ -171,7 +187,7 @@ class MP(Source):
 			return (False, "mediaplayer not installed")
 
 		fullPath = resolveFilename(SCOPE_CONFIG, filename)
-		mp.playlistIOInternal.save(resolveFilename(SCOPE_CONFIG, filename))
+		mp.playlistIOInternal.save(fullPath)
 		return (True, "playlist saved to %s" % fullPath)
 
 	def command(self, param):
@@ -197,6 +213,8 @@ class MP(Source):
 			mp.exit()
 		elif param == "shuffle":
 			mp.playlist.PlayListShuffle()
+		elif param == "clear":
+			mp.clear_playlist()
 		else:
 			return (False, "unknown parameter %s" % param)
 		return (True, "executed %s" % param)
