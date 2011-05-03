@@ -373,3 +373,10 @@ class SleepTimerWebScreen(WebScreen):
 		
 		from WebComponents.Sources.SleepTimer import SleepTimer		
 		self["SleepTimer"] = SleepTimer(session)
+		
+class TPMWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		
+		from WebComponents.Sources.TPMChallenge import TPMChallenge
+		self["TPM"] = TPMChallenge()
