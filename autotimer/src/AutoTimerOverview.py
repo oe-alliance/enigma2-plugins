@@ -206,7 +206,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 	def menu(self):
 		list = [
-			(_("Preview"), "preview"),
+			#(_("Preview"), "preview"),
 			(_("Import existing Timer"), "import"),
 			(_("Import from EPG"), "import_epg"),
 			(_("Setup"), "setup"),
@@ -227,13 +227,13 @@ class AutoTimerOverview(Screen, HelpableScreen):
 	def menuCallback(self, ret):
 		ret = ret and ret[1]
 		if ret:
-			if ret == "preview":
-				total, new, modified, timers, conflicts = self.autotimer.parseEPG(simulateOnly = True)
-				self.session.open(
-					AutoTimerPreview,
-					timers
-				)
-			elif ret == "import":
+			#if ret == "preview":
+				#self.total, self.new, self.modified, self.timers, self.conflicts = self.autotimer.parseEPG(simulateOnly = True)
+				#self.session.open(
+					#AutoTimerPreview,
+					#timers
+				#)
+			if ret == "import":
 				newTimer = self.autotimer.defaultTimer.clone()
 				newTimer.id = self.autotimer.getUniqueId()
 
