@@ -7,7 +7,7 @@
                     <name>TrafficInfo</name>
                     <packagename>enigma2-plugin-extensions-trafficinfo</packagename>
                     <shortdescription>German traffic information</shortdescription>
-                    <description>TrafficInfo shows german traffic information.</description>
+                    <description>TrafficInfo shows German traffic jams.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_trafficinfo.jpg" />		    
           </info>
 
