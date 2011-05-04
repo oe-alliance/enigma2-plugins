@@ -20,7 +20,7 @@ from RecordTimer import RecordTimerEntry
 from Components.TimerSanityCheck import TimerSanityCheck
 
 # Timespan
-from time import localtime, time, mktime
+from time import localtime, time, mktime, sleep
 from datetime import timedelta, date
 
 # EPGCache & Event
@@ -164,13 +164,13 @@ class AutoTimer:
 		task.setup(autoPoll, simulateOnly)
 		Components.Task.job_manager.AddJob(job)
 
-class FailedPostcondition(Components.Task.Condition):
-	def __init__(self, exception):
-		self.exception = exception
-	def getErrorMessage(self, task):
-		return str(self.exception)
-	def check(self, task):
-		return self.exception is None
+#class FailedPostcondition(Components.Task.Condition):
+	#def __init__(self, exception):
+		#self.exception = exception
+	#def getErrorMessage(self, task):
+		#return str(self.exception)
+	#def check(self, task):
+		#return self.exception is None
 
 class AutoTimerTask(Components.Task.PythonTask):
 	def setup(self, autoPoll, simulateOnly):
@@ -427,6 +427,8 @@ class AutoTimerTask(Components.Task.PythonTask):
 						self.recorddict.setdefault(serviceref, []).append(newEntry)
 					else:
 						self.conflicting.append((name, begin, end, serviceref, timer.name))
+			sleep(0.5)
+
 		if self.autoPoll:
 			if self.conflicting and config.plugins.autotimer.notifconflict.value:
 				AddPopup(_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(self.conflicting), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in self.conflicting])), type = MessageBox.TYPE_INFO, timeout = 10)
