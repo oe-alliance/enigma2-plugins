@@ -26,7 +26,6 @@ from Components.Sensors import sensors
 from Tools.HardwareInfo import HardwareInfo
 from enigma import eLabel
 from Renderer import Renderer
-from os import popen
 
 class vRendMaxTemp(Renderer, VariableText):
 	def __init__(self):
@@ -56,7 +55,7 @@ class vRendMaxTemp(Renderer, VariableText):
 			else:
 				loada = 0
 				try:
-					out_line = popen("cat /proc/loadavg").readline()
+					out_line = open("/proc/loadavg").readline()
 					loada = out_line[:4]	
 				except:
 					pass

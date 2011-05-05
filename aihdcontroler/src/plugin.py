@@ -87,7 +87,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 		</screen>"""
 
 	def __init__(self, session):
-		self.release = ".release20110401"
+		self.release = ".release20110505"
 		Screen.__init__(self, session)
 		self.session = session
 		self.datei = "/usr/share/enigma2/Ai.HD/skin.xml"
