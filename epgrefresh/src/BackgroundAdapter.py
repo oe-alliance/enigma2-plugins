@@ -21,17 +21,18 @@ class BackgroundAdapter:
 			Notifications.AddNotification(MessageBox, _("EPG refresh started in background.\nPlease don't use PiP meanwhile!"), type=MessageBox.TYPE_INFO, timeout=4)
 		if session.pipshown:
 			# Hijack PiP
-			self.hidePiP()
 			self.wasShown = True
 			self.previousService = self.session.pip.getCurrentService()
 			self.previousPath = self.session.pip.servicePath
+			if self.session.pip.getCurrentService():
+				self.session.pip.pipservice = None
 		else:
 			self.wasShown = False
 			self.initPiP()
 
 	def hidePiP(self):
-		# set PiP size to 1 pixel
-		print "[EPGRefresh] Hide PiP"
+		# set pip size to 1 pixel
+		print "[EPGRefresh.BackgroundAdapter.hidePiP]"
 		x = y = 0
 		w = h = 1
 		self.session.pip.instance.move(ePoint(x, y))
@@ -71,8 +72,8 @@ class BackgroundAdapter:
 			if self.session.pipshown and self.session.pip.playService(self.previousService):
 				self.session.pip.servicePath = self.previousPath
 
-				#Restore PiP values to their defaults after EPG refresh is finished
-				print "[EPGRefresh] Restoring PiP"
+				# restore pip values to their defaults after epg refresh is finished
+				print "[EPGRefresh.BackgroundAdapter.stop] Restoring PiP"
 				try:
 					x = config.av.pip.value[0]
 					y = config.av.pip.value[1]
