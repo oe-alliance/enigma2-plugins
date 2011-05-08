@@ -24,11 +24,10 @@ class BackgroundAdapter:
 			self.wasShown = True
 			self.previousService = self.session.pip.getCurrentService()
 			self.previousPath = self.session.pip.servicePath
-			if self.session.pip.getCurrentService():
-				self.session.pip.pipservice = None
+			del self.session.pip
 		else:
 			self.wasShown = False
-			self.initPiP()
+		self.initPiP()
 
 	def hidePiP(self):
 		# set pip size to 1 pixel
@@ -67,33 +66,20 @@ class BackgroundAdapter:
 		if config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddNotification(MessageBox, _("EPG refresh finished. PiP available now."), type=MessageBox.TYPE_INFO, timeout=4)
 
+		# remove pip preemptively
+		try: del self.session.pip
+		except Exception: pass
+
 		# reset pip and remove it if unable to play service
 		if self.wasShown:
-			if self.session.pipshown and self.session.pip.playService(self.previousService):
+			self.session.pip = self.session.instantiateDialog(PictureInPicture)
+			self.session.pip.show()
+			self.session.pipshown = True
+			if self.session.pip.playService(self.previousService):
 				self.session.pip.servicePath = self.previousPath
-
-				# restore pip values to their defaults after epg refresh is finished
-				print "[EPGRefresh.BackgroundAdapter.stop] Restoring PiP"
-				try:
-					x = config.av.pip.value[0]
-					y = config.av.pip.value[1]
-					w = config.av.pip.value[2]
-					h = config.av.pip.value[3]
-				except Exception: # default location - can this actually happen?
-					x = 400
-					y = 60
-					w = 240
-					h = 192
-
-				if x != -1 and y != -1 and w != -1 and h != -1:
-					self.session.pip.move(x, y)
-					self.session.pip.resize(w, h)
 			else:
 				self.session.pipshown = False
 				del self.session.pip
 		else:
-			# remove pip
 			self.session.pipshown = False
-			try: del self.session.pip
-			except Exception: pass
 
