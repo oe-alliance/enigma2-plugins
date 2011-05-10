@@ -132,6 +132,8 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 			value = value[0]
 			if key == "enabled":
 				config.plugins.epgrefresh.enabled.value = True if value == "true" else False
+			elif key == "enablemessage":
+				config.plugins.epgrefresh.enablemessage.value = True if value == "true" else False
 			elif key == "begin":
 				value = int(value)
 				if value:
@@ -206,6 +208,10 @@ class EPGRefreshSettingsResource(resource.Resource):
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
  <e2setting>
+  <e2settingname>config.plugins.epgrefresh.enablemessage</e2settingname>
+  <e2settingvalue>%s</e2settingvalue>
+ </e2setting>
+ <e2setting>
   <e2settingname>config.plugins.epgrefresh.begin</e2settingname>
   <e2settingvalue>%d</e2settingvalue>
  </e2setting>
@@ -247,6 +253,7 @@ class EPGRefreshSettingsResource(resource.Resource):
  </e2setting>
 </e2settings>""" % (
 				config.plugins.epgrefresh.enabled.value,
+				config.plugins.epgrefresh.enablemessage.value,
 				begin,
 				end,
 				config.plugins.epgrefresh.interval.value,
