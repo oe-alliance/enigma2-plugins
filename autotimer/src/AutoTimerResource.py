@@ -12,7 +12,13 @@ class AutoTimerBaseResource(resource.Resource):
 	def getAutoTimerInstance(self):
 		if plugin.autotimer is None:
 			self._remove = True
-			return AutoTimer()
+			autotimer = AutoTimer()
+			try:
+				autotimer.readXml()
+			except Exception:
+				# TODO: proper error handling
+				pass
+			return autotimer
 		self._remove = False
 		return plugin.autotimer
 	def returnResult(self, req, state, statetext):
@@ -252,15 +258,16 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		timer.avoidDuplicateDescription = int(get("avoidDuplicateDescription", timer.avoidDuplicateDescription))
 		timer.destination = get("location", timer.destination) or None
 
-		# eventually save config
-		if self._remove:
-			autotimer.writeXml()
-
 		if newTimer:
 			autotimer.add(timer)
 			message = _("AutoTimer was added successfully")
 		else:
 			message = _("AutoTimer was changed successfully")
+
+		# eventually save config
+		if self._remove:
+			autotimer.writeXml()
+
 		return self.returnResult(req, True, message)
 
 class AutoTimerChangeSettingsResource(AutoTimerBaseResource):

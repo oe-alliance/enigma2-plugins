@@ -5,7 +5,7 @@ from twisted.web import server, resource, http
 class IPKGResource(resource.Resource):
 	IPKG_PATH = "/usr/bin/opkg"
 
-	SIMPLECMDS = ( "list", "list_installed", "update", "upgrade" )
+	SIMPLECMDS = ( "list", "list_installed", "list_upgradable", "update", "upgrade" )
 	PACKAGECMDS = ( "info", "status", "install", "remove" )
 	FILECMDS = ( "search", )
 
@@ -58,10 +58,11 @@ class IPKGResource(resource.Resource):
 
 	def doIndexPage(self, request):
 		html = "<html><body>"
-		html += "<h1>Interface to IPKG</h1>"
+		html += "<h1>Interface to OPKG</h1>"
 		html += "update, ?command=update<br>"
 		html += "upgrade, ?command=upgrade<br>"
 		html += "list_installed, ?command=list_installed<br>"
+		html += "list_upgradable, ?command=list_upgradable<br>"
 		html += "list, ?command=list<br>"
 		html += "search, ?command=search&file=&lt;filename&gt;<br>"
 		html += "info, ?command=info&package=&lt;packagename&gt;<br>"

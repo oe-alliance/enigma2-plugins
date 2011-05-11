@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 640 $
-$Date: 2011-01-15 16:17:12 +0100 (Sa, 15. Jan 2011) $
-$Id: plugin.py 640 2011-01-15 15:17:12Z michael $
+$Revision: 643 $
+$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $
+$Id: plugin.py 643 2011-04-30 10:38:52Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -106,6 +106,7 @@ config.plugins.FritzCall.showVanity = ConfigEnableDisable(default=False)
 config.plugins.FritzCall.prefix = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.prefix.setUseableChars('0123456789')
 config.plugins.FritzCall.connectionVerbose = ConfigEnableDisable(default=True)
+config.plugins.FritzCall.ignoreUnknown = ConfigEnableDisable(default=False)
 
 
 def getMountedDevs():
@@ -291,8 +292,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 640 $"[1:-2] + "\n" + 
-							"$Date: 2011-01-15 16:17:12 +0100 (Sa, 15. Jan 2011) $"[1:23] + "\n"
+							"$Revision: 643 $"[1:-2] + "\n" + 
+							"$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -511,7 +512,8 @@ class FritzCallFBF:
 		if found:
 			charset = found.group(1)
 			debug("[FritzCallFBF] _parseFritzBoxPhonebook: found charset: " + charset)
-			html = html2unicode(html.decode(charset), charset).encode('utf-8') # this looks silly, but has to be
+			if charset != "utf-8":
+				html = html2unicode(html.decode(charset), charset).encode('utf-8') # this looks silly, but has to be
 		else: # this is kind of emergency conversion...
 			try:
 				debug("[FritzCallFBF] _parseFritzBoxPhonebook: try charset utf-8")
@@ -2715,7 +2717,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 640 $"[1: - 1] + "$Date: 2011-01-15 16:17:12 +0100 (Sa, 15. Jan 2011) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 643 $"[1: - 1] + "$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2779,6 +2781,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 			self.list.append(getConfigListEntry(_("Strip Leading 0"), config.plugins.FritzCall.internal))
 			# self.list.append(getConfigListEntry(_("Default display mode for FRITZ!Box calls"), config.plugins.FritzCall.fbfCalls))
 			self.list.append(getConfigListEntry(_("Display connection infos"), config.plugins.FritzCall.connectionVerbose))
+			self.list.append(getConfigListEntry(_("Ignore callers with no phone number"), config.plugins.FritzCall.ignoreUnknown))
 			self.list.append(getConfigListEntry(_("Debug"), config.plugins.FritzCall.debug))
 
 		self["config"].list = self.list
@@ -3178,7 +3181,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 640 $"[1:-1]	+ "$Date: 2011-01-15 16:17:12 +0100 (Sa, 15. Jan 2011) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 643 $"[1:-1]	+ "$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -3215,6 +3218,15 @@ class FritzProtocol(LineReceiver):
 		for i in range(len(filtermsns)):
 			filtermsns[i] = filtermsns[i].strip()
 
+		if config.plugins.FritzCall.ignoreUnknown.value:
+			if self.event == "RING":
+				if not anEvent[3]:
+					debug("[FritzProtocol] lineReceived: call from unknown phone; skipping")
+					return
+				elif not anEvent[5]:
+					debug("[FritzProtocol] lineReceived: call to unknown phone; skipping")
+					return
+
 		# debug("[FritzProtocol] Volcontrol dir: %s" % dir(eDVBVolumecontrol.getInstance()))
 		# debug("[FritzCall] unmute on connID: %s?" %self.connID)
 		global mutedOnConnID
@@ -3235,7 +3247,6 @@ class FritzProtocol(LineReceiver):
 		#=======================================================================
 		elif self.event == "RING" or (self.event == "CALL" and config.plugins.FritzCall.showOutgoing.value):
 			phone = anEvent[4]
-
 			if self.event == "RING":
 				number = anEvent[3] 
 				if fritzbox and number in fritzbox.blacklist[0]:
