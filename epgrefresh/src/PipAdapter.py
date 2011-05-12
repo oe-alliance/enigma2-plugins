@@ -10,11 +10,12 @@ from Tools import Notifications
 from Components.config import config
 
 class PipAdapter:
-	def __init__(self, session):
+	def __init__(self, session, hide=True):
 		if SystemInfo.get("NumVideoDecoders", 1) < 2:
 			self.pipAvail = False
 			return
 
+		self.hide = hide
 		self.session = session
 		self.pipAvail = True
 		if config.plugins.epgrefresh.enablemessage.value:
@@ -42,7 +43,7 @@ class PipAdapter:
 		# Instantiate PiP
 		self.session.pip = self.session.instantiateDialog(PictureInPicture)
 		self.session.pip.show()
-		self.hidePiP()
+		if self.hide: self.hidePiP()
 		self.session.pipshown = True # Always pretends it's shown (since the ressources are present)
 		newservice = self.session.nav.getCurrentlyPlayingServiceReference()
 		if self.session.pip.playService(newservice):
