@@ -19,7 +19,7 @@ class PipAdapter:
 		self.session = session
 		self.pipAvail = True
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddNotification(MessageBox, _("EPG refresh started in background.\nPlease don't use PiP meanwhile!"), type=MessageBox.TYPE_INFO, timeout=4)
+			Notifications.AddNotification(MessageBox, _("EPG refresh started in background.") + "\n" + _("Please don't use PiP meanwhile!"), type=MessageBox.TYPE_INFO, timeout=4)
 		if session.pipshown:
 			# Hijack PiP
 			self.wasShown = True
