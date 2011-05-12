@@ -7,9 +7,10 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from AutoTimerEditor import AutoTimerEditor, AutoTimerChannelSelection
-from AutoTimerSettings import AutoTimerSettings
-from AutoTimerPreview import AutoTimerPreview
+from AutoTimerHelp import AutoTimerHelp
 from AutoTimerImporter import AutoTimerImportSelector
+from AutoTimerPreview import AutoTimerPreview
+from AutoTimerSettings import AutoTimerSettings
 from AutoTimerWizard import AutoTimerWizard
 
 # GUI (Components)
@@ -102,6 +103,13 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		)
 
 		self.onLayoutFinish.append(self.setCustomTitle)
+		self.onFirstExecBegin.append(self.firstExec)
+
+	def firstExec(self):
+		if config.plugins.autotimer.show_help.value:
+			config.plugins.autotimer.show_help.value = False
+			config.plugins.autotimer.show_help.save()
+			self.session.open(AutoTimerHelp)
 
 	def setCustomTitle(self):
 		self.setTitle(_("AutoTimer overview"))
@@ -206,6 +214,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 	def menu(self):
 		list = [
+			(_("Help"), "help"),
 			(_("Preview"), "preview"),
 			(_("Import existing Timer"), "import"),
 			(_("Import from EPG"), "import_epg"),
@@ -227,7 +236,9 @@ class AutoTimerOverview(Screen, HelpableScreen):
 	def menuCallback(self, ret):
 		ret = ret and ret[1]
 		if ret:
-			if ret == "preview":
+			if ret == "help":
+				self.session.open(AutoTimerHelp)
+			elif ret == "preview":
 				total, new, modified, timers, conflicts = self.autotimer.parseEPG(simulateOnly = True)
 				self.session.open(
 					AutoTimerPreview,
