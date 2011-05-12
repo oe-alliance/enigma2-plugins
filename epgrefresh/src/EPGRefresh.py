@@ -31,7 +31,7 @@ from Tools import Notifications
 
 # ... II
 from MainPictureAdapter import MainPictureAdapter
-from BackgroundAdapter import BackgroundAdapter
+from PipAdapter import PipAdapter
 
 # Path to configuration
 CONFIG = "/etc/enigma2/epgrefresh.xml"
@@ -236,7 +236,7 @@ class EPGRefresh:
 
 		self.maybeStopAdapter()
 		if config.plugins.epgrefresh.background.value:
-			self.refreshAdapter = BackgroundAdapter(self.session)
+			self.refreshAdapter = PipAdapter(self.session)
 		else:
 			if not Screens.Standby.inStandby and config.plugins.epgrefresh.enablemessage.value and (not self.session.nav.RecordTimer.isRecording() or self.forcedScan):
 				Notifications.AddNotification(MessageBox, _("EPG refresh starts scanning channels."), type=MessageBox.TYPE_INFO, timeout=4)

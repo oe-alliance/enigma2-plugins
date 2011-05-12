@@ -9,7 +9,7 @@ from Tools import Notifications
 # Config
 from Components.config import config
 
-class BackgroundAdapter:
+class PipAdapter:
 	def __init__(self, session):
 		if SystemInfo.get("NumVideoDecoders", 1) < 2:
 			self.pipAvail = False
@@ -31,7 +31,7 @@ class BackgroundAdapter:
 
 	def hidePiP(self):
 		# set pip size to 1 pixel
-		print "[EPGRefresh.BackgroundAdapter.hidePiP]"
+		print "[EPGRefresh.PipAdapter.hidePiP]"
 		x = y = 0
 		w = h = 1
 		self.session.pip.instance.move(ePoint(x, y))
@@ -49,7 +49,7 @@ class BackgroundAdapter:
 			self.session.pip.servicePath = newservice.getPath()
 
 	def play(self, service):
-		print "[EPGRefresh.BackgroundAdapter.play]"
+		print "[EPGRefresh.PipAdapter.play]"
 		if not self.pipAvail: return False
 
 		if not self.session.pipshown: # make sure pip still exists
