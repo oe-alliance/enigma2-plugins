@@ -61,7 +61,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 			getConfigListEntry(_("Shutdown after EPG refresh"), config.plugins.epgrefresh.afterevent, _("This setting controls whether the receiver should be set to deep standby after refresh is completed.")),
                 ]
 		if SystemInfo.get("NumVideoDecoders", 1) > 1:
-			self.list.insert(2, getConfigListEntry(_("Refresh hidden in background"), config.plugins.epgrefresh.background, _("Do you want to refresh EPG in background by using the Picture in Picture (PiP) feature?")))
+			self.list.insert(2, getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, you can choose a way that better suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture.")))
 
 		try:
 			# try to import autotimer module to check for its existence
