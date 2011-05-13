@@ -20,10 +20,11 @@ class MPHelp(Screen):
 			<widget name="detailtext" position="60,120" size="610,370" zPosition="10" font="Regular;21" transparent="1" halign="left" valign="top"/>
 		</screen>"""
 
-	def __init__(self, session, pages, additionalSkin=""):
+	def __init__(self, session, pages, title="", additionalSkin=""):
 		Screen.__init__(self, session)
 		if additionalSkin:
 			self.skinName = [additionalSkin, "MPHelp"]
+		self.designatedTitle = title
 
 		self["key_red"] = StaticText(_("Close"))
 		#self["key_green"] = StaticText()
@@ -50,7 +51,8 @@ class MPHelp(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		self.setTitle(_("AutoTimer Help"))
+		if self.designatedTitle:
+			self.setTitle(self.designatedTitle)
 		self.setPage(0)
 
 	def setPage(self, newPage):
