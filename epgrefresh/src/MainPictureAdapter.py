@@ -1,4 +1,10 @@
 import Screens.Standby
+
+# MessageBox
+from Screens.MessageBox import MessageBox
+from Tools import Notifications
+
+# Config
 from Components.config import config
 
 class MainPictureAdapter:
