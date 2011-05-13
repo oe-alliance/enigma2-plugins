@@ -322,13 +322,13 @@ class AutoTimer:
 							break
 
 						if hasattr(rtimer, "isAutoTimer"):
-								printLog(rtimer, 501, "[AutoTimer] Modifying existing AutoTimer!")
+								printLog(rtimer, 501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name,))
 						else:
 							if config.plugins.autotimer.refresh.value != "all":
 								print "[AutoTimer] Won't modify existing timer because it's no timer set by us"
 								break
 
-							printLog(rtimer, 501, "[AutoTimer] Warning, we're messing with a timer which might not have been set by us.")
+							printLog(rtimer, 501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might belong to it." % (timer.name,))
 
 						newEntry = rtimer
 						modified += 1
@@ -386,7 +386,6 @@ class AutoTimer:
 				newEntry.tags = timer.tags
 
 				if oldExists:
-					printLog(newEntry, 502, "[AutoTimer] Modified timer because of AutoTimer %s." % (timer.name,))
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
 					NavigationInstance.instance.RecordTimer.timeChanged(newEntry)
 				else:
