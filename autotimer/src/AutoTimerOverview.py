@@ -260,10 +260,10 @@ class AutoTimerOverview(Screen, HelpableScreen):
 					),
 					(
 						_("Congratulations"),
-						_("You now know almost everything there is to know about the AutoTimer-Plugin.\n\nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Suprisingly even after the hints were added ;-).")
+						_("You now know almost everything there is to know about the AutoTimer-Plugin.\n\nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-).")
 					),
 				)
-				self.session.open(MPHelp, pages, "AutoTimerHelp")
+				self.session.open(MPHelp, pages, title=_("AutoTimer Help"), additionalSkin="AutoTimerHelp")
 			elif ret == "preview":
 				total, new, modified, timers, conflicts = self.autotimer.parseEPG(simulateOnly = True)
 				self.session.open(
