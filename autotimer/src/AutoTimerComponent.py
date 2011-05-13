@@ -102,7 +102,7 @@ class AutoTimerComponent(object):
 	def setEncoding(self, encoding):
 		if encoding:
 			self._encoding = encoding
-		elif not self._encoding:
+		elif encoding == '(null)' or not self._encoding:
 			self._encoding = 'UTF-8'
 
 	encoding = property(lambda self: self._encoding, setEncoding)
