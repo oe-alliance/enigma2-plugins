@@ -84,7 +84,7 @@ def autostart(reason, **kwargs):
 					AddNotificationWithCallback(
 						boundFunction(standbyQuestionCallback, session),
 						MessageBox,
-						_("This might have been an automated bootup to refresh the EPG. For this to happen it is recommmended to put the receiver to Standby.\nDo you want to do this now?"),
+						_("This might have been an automated bootup to refresh the EPG. For this to happen it is recommended to put the receiver to Standby.\nDo you want to do this now?"),
 						timeout = 15
 					)
 
