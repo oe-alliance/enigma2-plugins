@@ -328,7 +328,7 @@ class AutoTimer:
 								print "[AutoTimer] Won't modify existing timer because it's no timer set by us"
 								break
 
-							printLog(rtimer, 501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might belong to it." % (timer.name,))
+							printLog(rtimer, 501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name,))
 
 						newEntry = rtimer
 						modified += 1
@@ -393,6 +393,7 @@ class AutoTimer:
 					if conflicts and config.plugins.autotimer.disabled_on_conflict.value:
 						conflictString = ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
 						printLog(newEntry, 503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString,))
+						del conflictString
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
