@@ -12,7 +12,7 @@ from RecordTimer import RecordTimerEntry
 from Components.TimerSanityCheck import TimerSanityCheck
 
 # Timespan
-from time import localtime, time, mktime
+from time import localtime, strftime, time, mktime
 from datetime import timedelta, date
 
 # EPGCache & Event
@@ -318,13 +318,13 @@ class AutoTimer:
 							break
 
 						if hasattr(rtimer, "isAutoTimer"):
-								print "[AutoTimer] Modifying existing AutoTimer!"
+								rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name,))
 						else:
 							if config.plugins.autotimer.refresh.value != "all":
 								print "[AutoTimer] Won't modify existing timer because it's no timer set by us"
 								break
 
-							print "[AutoTimer] Warning, we're messing with a timer which might not have been set by us"
+							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name,))
 
 						newEntry = rtimer
 						modified += 1
@@ -363,8 +363,8 @@ class AutoTimer:
 					if timer.checkCounter(timestamp):
 						continue
 
-					print "[AutoTimer] Adding an event."
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, description, eit)
+					newEntry.log(500, "[AutoTimer] Adding new timer based on AutoTimer %s." % (timer.name,))
 
 					# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
 					newEntry.isAutoTimer = True
@@ -387,6 +387,9 @@ class AutoTimer:
 				else:
 					conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
 					if conflicts and config.plugins.autotimer.disabled_on_conflict.value:
+						conflictString = ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
+						newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString,))
+						del conflictString
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)

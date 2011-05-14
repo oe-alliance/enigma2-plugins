@@ -3,7 +3,7 @@ from . import _
 
 # Config
 from Components.config import config, ConfigYesNo, ConfigNumber, \
-	ConfigSubsection, ConfigClock, ConfigYesNo
+	ConfigSelection, ConfigSubsection, ConfigClock, ConfigYesNo
 
 # Calculate default begin/end
 from time import time, localtime, mktime
@@ -30,7 +30,20 @@ config.plugins.epgrefresh.enablemessage = ConfigYesNo(default = True)
 config.plugins.epgrefresh.wakeup = ConfigYesNo(default = False)
 config.plugins.epgrefresh.lastscan = ConfigNumber(default = 0)
 config.plugins.epgrefresh.parse_autotimer = ConfigYesNo(default = False)
+config.plugins.epgrefresh.adapter = ConfigSelection(choices = [
+		("main", _("Main Picture")),
+		("pip", _("Picture in Picture")),
+		("pip_hidden", _("Picture in Picture (hidden)")),
+		("record", _("Fake recording")),
+	], default = "main"
+)
+
+# convert previous parameter
 config.plugins.epgrefresh.background = ConfigYesNo(default = False)
+if config.plugins.epgrefresh.background.value:
+	config.plugins.epgrefresh.adapter.value = "pip_hidden"
+	config.plugins.epgrefresh.background.value = False
+	config.plugins.epgrefresh.save()
 
 del now, begin, end
 
@@ -71,7 +84,7 @@ def autostart(reason, **kwargs):
 					AddNotificationWithCallback(
 						boundFunction(standbyQuestionCallback, session),
 						MessageBox,
-						_("This might have been an automated bootup to refresh the EPG. For this to happen it is recommmended to put the receiver to Standby.\nDo you want to do this now?"),
+						_("This might have been an automated bootup to refresh the EPG. For this to happen it is recommended to put the receiver to Standby.\nDo you want to do this now?"),
 						timeout = 15
 					)
 

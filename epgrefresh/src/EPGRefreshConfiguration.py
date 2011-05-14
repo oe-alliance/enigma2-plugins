@@ -52,16 +52,16 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self.list = [
 			getConfigListEntry(_("Refresh EPG automatically"), config.plugins.epgrefresh.enabled, _("Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu.")),
 			getConfigListEntry(_("Show popup when refresh starts and ends"), config.plugins.epgrefresh.enablemessage, _("This setting controls whether or not an informational message will be shown at start and completion of refresh.")),
-			getConfigListEntry(_("Wake up from deep stand-by for EPG refresh"), config.plugins.epgrefresh.wakeup, _("If this is enabled, the plugin will wake up the receiver from deep stand-by if possible. Otherwise it needs to be switched on already.")),
-			getConfigListEntry(_("Duration to stay on service-channels (minutes)"), config.plugins.epgrefresh.interval, _("This is the duration for each servive-channel to stay active during a refresh run.")),
+			getConfigListEntry(_("Wake up from deep standby for EPG refresh"), config.plugins.epgrefresh.wakeup, _("If this is enabled, the plugin will wake up the receiver from deep standby if possible. Otherwise it needs to be switched on already.")),
+			getConfigListEntry(_("Duration to stay on service-channels (minutes)"), config.plugins.epgrefresh.interval, _("This is the duration each service/channel will stay active during a refresh.")),
 			getConfigListEntry(_("EPG refresh auto-start earliest (hh:mm)"), config.plugins.epgrefresh.begin, _("An automated refresh will start after this time of day, but before the time specified in next setting.")),
 			getConfigListEntry(_("EPG refresh auto-start latest (hh:mm)"), config.plugins.epgrefresh.end, _("An automated refresh will start before this time of day, but after the time specified in previous setting.")),
-			getConfigListEntry(_("Delay if not in stand-by (minutes)"), config.plugins.epgrefresh.delay_standby, _("If the receiver currently isn't in stand-by, this is the duration which EPGRefresh will wait before retry.")),
+			getConfigListEntry(_("Delay if not in standby (minutes)"), config.plugins.epgrefresh.delay_standby, _("If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry.")),
 			getConfigListEntry(_("Force scan even if receiver is in use"), config.plugins.epgrefresh.force, _("This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording).")),
 			getConfigListEntry(_("Shutdown after EPG refresh"), config.plugins.epgrefresh.afterevent, _("This setting controls whether the receiver should be set to deep standby after refresh is completed.")),
                 ]
 		if SystemInfo.get("NumVideoDecoders", 1) > 1:
-			self.list.insert(2, getConfigListEntry(_("Refresh hidden in background"), config.plugins.epgrefresh.background, _("Do you want to refresh EPG in background by using the Picture in Picture (PiP) feature?")))
+			self.list.insert(2, getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, you can choose a way that better suits your needs here, e.g. hidden, fake recording or regular Picture in Picture.")))
 
 		try:
 			# try to import autotimer module to check for its existence
@@ -70,7 +70,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Inherit Services from AutoTimer"), config.plugins.epgrefresh.inherit_autotimer, _("Extend the list of services to refresh by those your AutoTimers use?")))
 			self.list.append(getConfigListEntry(_("Run AutoTimer after refresh"), config.plugins.epgrefresh.parse_autotimer, _("After a successful refresh the AutoTimer will automatically search for new matches if this is enabled.")))
 		except ImportError, ie:
-			print "[EPGRefresh] AutoTimer Plugin not installed:", e
+			print "[EPGRefresh] AutoTimer Plugin not installed:", ie
 
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
 		def selectionChanged():
