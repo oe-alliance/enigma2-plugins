@@ -33,10 +33,6 @@ def getTimeDiff(timer, begin, end):
 		return timer.end - begin
 	return 0
 
-def printLog(timer, code, msg):
-	print msg
-	timer.log(code, msg)
-
 typeMap = {
 	"exact": eEPGCache.EXAKT_TITLE_SEARCH,
 	"partial": eEPGCache.PARTIAL_TITLE_SEARCH
@@ -322,13 +318,13 @@ class AutoTimer:
 							break
 
 						if hasattr(rtimer, "isAutoTimer"):
-								printLog(rtimer, 501, "[AutoTimer] Modifying existing AutoTimer!")
+								rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name,))
 						else:
 							if config.plugins.autotimer.refresh.value != "all":
 								print "[AutoTimer] Won't modify existing timer because it's no timer set by us"
 								break
 
-							printLog(rtimer, 501, "[AutoTimer] Warning, we're messing with a timer which might not have been set by us.")
+							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name,))
 
 						newEntry = rtimer
 						modified += 1
@@ -368,7 +364,7 @@ class AutoTimer:
 						continue
 
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, description, eit)
-					printLog(newEntry, 500, "[AutoTimer] Adding new timer based on AutoTimer %s." % (timer.name,))
+					newEntry.log(500, "[AutoTimer] Adding new timer based on AutoTimer %s." % (timer.name,))
 
 					# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
 					newEntry.isAutoTimer = True
@@ -386,14 +382,14 @@ class AutoTimer:
 				newEntry.tags = timer.tags
 
 				if oldExists:
-					printLog(newEntry, 502, "[AutoTimer] Modified timer because of AutoTimer %s." % (timer.name,))
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
 					NavigationInstance.instance.RecordTimer.timeChanged(newEntry)
 				else:
 					conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
 					if conflicts and config.plugins.autotimer.disabled_on_conflict.value:
 						conflictString = ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
-						printLog(newEntry, 503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString,))
+						newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString,))
+						del conflictString
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)

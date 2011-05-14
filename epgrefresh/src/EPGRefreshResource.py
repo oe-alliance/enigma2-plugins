@@ -184,7 +184,7 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
  <e2state>true</e2state>
- <e2statetext>%s<e2statetext>
+ <e2statetext>%s</e2statetext>
 </e2simplexmlresult>""" % (statetext,)
 
 class EPGRefreshSettingsResource(resource.Resource):
