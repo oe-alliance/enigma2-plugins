@@ -2,8 +2,6 @@
 #
 #    EasyMedia for Dreambox-Enigma2
 #    Coded by Vali (c)2010-2011
-#    Support: www.dreambox-tools.info
-#
 #
 #  This plugin is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -13,11 +11,9 @@
 #  Alternatively, this plugin may be distributed and executed on hardware which
 #  is licensed by Dream Multimedia GmbH.
 #
-#
 #  This plugin is NOT free software. It is open source, you are allowed to
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
-#
 #
 #######################################################################
 
@@ -296,12 +292,14 @@ class EasyMedia(Screen):
 		<screen flags="wfNoBorder" position="0,0" size="450,720" title="Easy Media">
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/bg.png" position="0,0" size="450,576"/>
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/bg.png" position="0,576" size="450,145"/>
+			<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/buttons.png" position="55,30" size="5,300" zPosition="1"/>
 			<widget name="list" position="60,30" size="350,660" scrollbarMode="showNever" transparent="1" zPosition="2"/>
 		</screen>"""
 	elif sz_w > 1000:
 		skin = """
 		<screen flags="wfNoBorder" position="-20,0" size="450,576" title="Easy Media">
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/bg.png" position="0,0" size="450,576"/>
+			<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/buttons.png" position="65,48" size="5,300" zPosition="1"/>
 			<widget name="list" position="70,48" size="320,480" scrollbarMode="showNever" transparent="1" zPosition="2"/>
 		</screen>"""
 	else:
@@ -391,11 +389,16 @@ class EasyMedia(Screen):
 			pos += 1
 		self["list"] = MPanelList(list = self.list, selection = 0)
 		self["list"].onSelectionChanged.append(self.updateOLED)
-		self["actions"] = ActionMap(["WizardActions", "MenuActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "InfobarActions", "ColorActions"],
 		{
 			"ok": self.go,
 			"back": self.cancel,
-			"menu": self.emContextMenu
+			"menu": self.emContextMenu,
+			"showMovies": lambda: self.go2(MPaskList[0]),
+			"green": lambda: self.go2(MPaskList[2]),
+			"red": lambda: self.go2(MPaskList[1]),
+			"blue": lambda: self.go2(MPaskList[4]),
+			"yellow": lambda: self.go2(MPaskList[3])
 		}, -1)
 
 	def cancel(self):
@@ -407,6 +410,9 @@ class EasyMedia(Screen):
 			self.goEntry(cursel[0])
 		else:
 			self.cancel()
+
+	def go2(self, wohin):
+		self.close(wohin)
 
 	def goEntry(self, entry):
 		if len(entry) > 2 and isinstance(entry[1], str) and entry[1] == "CALLFUNC":
