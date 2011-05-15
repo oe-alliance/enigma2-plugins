@@ -32,6 +32,7 @@ from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.PluginList import *
+from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection
 from Tools.Directories import fileExists, pathExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
@@ -112,9 +113,13 @@ def notEasy(session, **kwargs):
 
 
 
-def MPanelEntryComponent(key, text):
+def MPanelEntryComponent(key, text, cell):
 	res = [ text ]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 150, 17, 300, 60, 0, RT_HALIGN_LEFT, text[0]))
+	if cell<5:
+		bpng = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/key-' + str(cell) + ".png")
+		if bpng is not None:
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 5, 5, 50, bpng))
 	png = LoadPixmap(EasyMedia.EMiconspath + key + '.png')
 	if png is not None:
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 25, 5, 100, 50, png))
@@ -292,14 +297,12 @@ class EasyMedia(Screen):
 		<screen flags="wfNoBorder" position="0,0" size="450,720" title="Easy Media">
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/bg.png" position="0,0" size="450,576"/>
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/bg.png" position="0,576" size="450,145"/>
-			<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/buttons.png" position="55,30" size="5,300" zPosition="1"/>
 			<widget name="list" position="60,30" size="350,660" scrollbarMode="showNever" transparent="1" zPosition="2"/>
 		</screen>"""
 	elif sz_w > 1000:
 		skin = """
 		<screen flags="wfNoBorder" position="-20,0" size="450,576" title="Easy Media">
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/bg.png" position="0,0" size="450,576"/>
-			<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/buttons.png" position="65,48" size="5,300" zPosition="1"/>
 			<widget name="list" position="70,48" size="320,480" scrollbarMode="showNever" transparent="1" zPosition="2"/>
 		</screen>"""
 	else:
@@ -379,13 +382,15 @@ class EasyMedia(Screen):
 				self.__keys.append(binPlug.name)
 				MPaskList.append((binPlug.name, ("++++" + binPlug.name)))
 			except: pass
-		self.keymap = {}
 		pos = 0
 		for x in MPaskList:
 			strpos = str(self.__keys[pos])
-			self.list.append(MPanelEntryComponent(key = strpos, text = x))
-			if self.__keys[pos] != "":
-				self.keymap[self.__keys[pos]] = MPaskList[pos]
+			self.list.append(MPanelEntryComponent(key = strpos, text = x, cell = pos))
+			if pos==0: self["key_info"] = StaticText(MPaskList[0][0])
+			elif pos==1: self["key_red"] = StaticText(MPaskList[1][0])
+			elif pos==2: self["key_green"] = StaticText(MPaskList[2][0])
+			elif pos==3: self["key_yellow"] = StaticText(MPaskList[3][0])
+			elif pos==4: self["key_blue"] = StaticText(MPaskList[4][0])
 			pos += 1
 		self["list"] = MPanelList(list = self.list, selection = 0)
 		self["list"].onSelectionChanged.append(self.updateOLED)
