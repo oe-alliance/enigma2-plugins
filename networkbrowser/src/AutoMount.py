@@ -174,7 +174,7 @@ class AutoMount():
 			if len(self.MountConsole.appContainers) == 0:
 				if callback is not None:
 					self.callback = callback
-					self.timer.startLongTimer(10)
+					self.timer.startLongTimer(1)
 
 	def makeHDDlink(self, path):
 		hdd_dir = '/media/hdd'
@@ -301,7 +301,7 @@ class AutoMount():
 			if len(self.removeConsole.appContainers) == 0:
 				if callback is not None:
 					self.callback = callback
-					self.timer.startLongTimer(10)
+					self.timer.startLongTimer(1)
 
 
 # currently unused autofs support stuff
