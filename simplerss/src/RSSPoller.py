@@ -74,6 +74,7 @@ class RSSPoller:
 
 		self.reloading = False
 		if self.do_poll:
+			self.doCallback()
 			self.poll_timer.start(0, 1)
 
 	def googleSubscriptionFailed(self, res = None):
