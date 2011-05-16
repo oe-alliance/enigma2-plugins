@@ -5,6 +5,8 @@ from Screens.MessageBox import MessageBox
 from enigma import eServiceCenter, eServiceReference, \
 		iStaticServiceInformationPtr
 
+titleCmp = lambda x, y: x.lower() in y.lower() # force case-insensitive for now
+
 def vkCallback(movieContextMenu, searchString=None):
 	isEmc = False
 	if not movieContextMenu: return
@@ -33,8 +35,7 @@ def vkCallback(movieContextMenu, searchString=None):
 					if not info: newList.append(movie)
 					else:
 						name = info.getName(movie[0])
-						if searchString.lower() in name.lower(): # force case-insensitive for now
-							newList.append(movie)
+						if titleCmp(searchString, name): newList.append(movie)
 		csel.list = newList
 		csel.l.setList(newList)
 	else:
@@ -44,10 +45,19 @@ def vkCallback(movieContextMenu, searchString=None):
 			# we have no idea what this input could be, just add it back
 			if len(movie) < 2: newList.append(movie)
 			else:
-				if isinstance(movie[0], eServiceReference) and isinstance(movie[1], iStaticServiceInformationPtr):
-					name = movie[1].getName(movie[0])
-					if searchString.lower() in name.lower(): # force case-insensitive for now
+				if len(movie) == 4 and isinstance(movie[3], list): # assume serienfilm-plugin
+					tinfo = movie[3]
+					type = tinfo[0]
+					if type == 0:
+						name = movie[1].getName(movie[0])
+						if titleCmp(searchString, name): newList.append(movie)
+					elif type == 4:
+						if titleCmp(searchString, tinfo[2]): newList.append(movie)
+					else:
 						newList.append(movie)
+				elif isinstance(movie[0], eServiceReference) and isinstance(movie[1], iStaticServiceInformationPtr):
+					name = movie[1].getName(movie[0])
+					if titleCmp(searchString, name): newList.append(movie)
 				else:
 					newList.append(movie)
 		csel["list"].list = newList
