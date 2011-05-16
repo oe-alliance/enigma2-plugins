@@ -237,6 +237,7 @@ class RSSPoller:
 	def shutdown(self):
 		self.poll_timer.callback.remove(self.poll)
 		self.poll_timer = None
+		self.do_poll = False
 
 	def triggerReload(self):
 		self.reloading = True
