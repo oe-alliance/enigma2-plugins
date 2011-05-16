@@ -386,7 +386,7 @@ class EasyMedia(Screen):
 		for x in MPaskList:
 			strpos = str(self.__keys[pos])
 			self.list.append(MPanelEntryComponent(key = strpos, text = x, cell = pos))
-			if pos==0: self["key_info"] = StaticText(MPaskList[0][0])
+			if pos==0: self["key_pvr"] = StaticText(MPaskList[0][0])
 			elif pos==1: self["key_red"] = StaticText(MPaskList[1][0])
 			elif pos==2: self["key_green"] = StaticText(MPaskList[2][0])
 			elif pos==3: self["key_yellow"] = StaticText(MPaskList[3][0])
