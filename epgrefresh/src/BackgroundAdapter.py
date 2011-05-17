@@ -1,5 +1,13 @@
 from Screens.PictureInPicture import PictureInPicture
 from Components.SystemInfo import SystemInfo
+from enigma import ePoint, eSize
+
+# MessageBox
+from Screens.MessageBox import MessageBox
+from Tools import Notifications
+
+# Config
+from Components.config import config
 
 class BackgroundAdapter:
 	def __init__(self, session):
@@ -9,19 +17,32 @@ class BackgroundAdapter:
 
 		self.session = session
 		self.pipAvail = True
+		if config.plugins.epgrefresh.enablemessage.value:
+			Notifications.AddNotification(MessageBox, _("EPG refresh started in background.\nPlease don't use PiP meanwhile!"), type=MessageBox.TYPE_INFO, timeout=4)
 		if session.pipshown:
 			# Hijack PiP
 			self.wasShown = True
 			self.previousService = self.session.pip.getCurrentService()
 			self.previousPath = self.session.pip.servicePath
+			del self.session.pip
 		else:
 			self.wasShown = False
-			self.initPiP()
+		self.initPiP()
+
+	def hidePiP(self):
+		# set pip size to 1 pixel
+		print "[EPGRefresh.BackgroundAdapter.hidePiP]"
+		x = y = 0
+		w = h = 1
+		self.session.pip.instance.move(ePoint(x, y))
+		self.session.pip.instance.resize(eSize(w, y))
+		self.session.pip["video"].instance.resize(eSize(w, y))
 
 	def initPiP(self):
 		# Instantiate PiP
 		self.session.pip = self.session.instantiateDialog(PictureInPicture)
 		self.session.pip.show()
+		self.hidePiP()
 		self.session.pipshown = True # Always pretends it's shown (since the ressources are present)
 		newservice = self.session.nav.getCurrentlyPlayingServiceReference()
 		if self.session.pip.playService(newservice):
@@ -42,16 +63,23 @@ class BackgroundAdapter:
 	def stop(self):
 		if not self.pipAvail: return
 
+		if config.plugins.epgrefresh.enablemessage.value:
+			Notifications.AddNotification(MessageBox, _("EPG refresh finished. PiP available now."), type=MessageBox.TYPE_INFO, timeout=4)
+
+		# remove pip preemptively
+		try: del self.session.pip
+		except Exception: pass
+
+		# reset pip and remove it if unable to play service
 		if self.wasShown:
-			# reset pip and remove it if unable to play service
-			if self.session.pipshown and self.session.pip.playService(self.previousService):
+			self.session.pip = self.session.instantiateDialog(PictureInPicture)
+			self.session.pip.show()
+			self.session.pipshown = True
+			if self.session.pip.playService(self.previousService):
 				self.session.pip.servicePath = self.previousPath
 			else:
 				self.session.pipshown = False
 				del self.session.pip
 		else:
-			# remove pip
 			self.session.pipshown = False
-			try: del self.session.pip
-			except Exception: pass
 

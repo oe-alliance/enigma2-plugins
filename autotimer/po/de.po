@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-22 20:04+0100\n"
-"PO-Revision-Date: 2011-04-22 20:16+0100\n"
+"PO-Revision-Date: 2011-04-26 18:42+0100\n"
 "Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -156,7 +156,7 @@ msgstr "Auf jedem Sender"
 
 #: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:311
 msgid "Any service/recording"
-msgstr "Auf jedem Sender/in Aufnahmen"
+msgstr "in Timerliste / in Aufnahmen"
 
 #: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:333
 #: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:356
@@ -385,7 +385,7 @@ msgstr "Ende der Zeitspanne"
 
 #: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:534
 msgid "Restrict to events on certain dates"
-msgstr "Auf bestimmte Daten beschränken"
+msgstr "Auf bestimmtes Datum beschränken"
 
 #: D:\Dreambox\Plugins\enigma2-plugins\autotimer\src/AutoTimerEditor.py:539
 msgid "Not before"
