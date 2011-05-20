@@ -14,7 +14,7 @@
 		&lt;e2startprepare><e2:item name="startPrepare" />&lt;/e2startprepare>
 		&lt;e2justplay><e2:item name="justPlay" />&lt;/e2justplay>
 		&lt;e2afterevent><e2:item name="afterEvent" />&lt;/e2afterevent>
-		&lt;e2location><e2:item name="Location" />&lt;/e2location>
+		&lt;e2location><e2:item name="Location" filter="xml"/>&lt;/e2location>
 		&lt;e2tags><e2:item name="Tags" filter="xml"/>&lt;/e2tags>
 		&lt;e2logentries><e2:item name="LogEntries" filter="xml"/>&lt;/e2logentries>
 		&lt;e2filename><e2:item name="Filename" filter="xml"/>&lt;/e2filename>

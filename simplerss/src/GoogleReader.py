@@ -84,7 +84,7 @@ class GoogleReader:
 			dom = cet_fromstring(res)
 			for item in dom.getiterator():
 				if item.tag == 'string':
-					if item.get('name') == 'id':
+					if item.get('name') == 'id' and item.text.startswith('feed/'):
 						l.append(UniversalFeed(item.text[5:], True, True))
 		if defer:
 			defer.callback(l)
@@ -98,19 +98,24 @@ class GoogleReader:
 if __name__ == '__main__':
 	from twisted.internet import reactor
 	import sys
+	Deferred.debug = True
 
 	googleReader = GoogleReader(sys.argv[1], sys.argv[2])
-	def googleLoggedIn(self, sid = None):
-		googleReader.getSubscriptionList().addCallback(googleSubscriptionList).addErrback(googleSubscriptionFailed)
+	def googleLoggedIn(sid = None):
+		print "Got Token:", sid
+		googleReader.getSubscriptionList().addCallbacks(googleSubscriptionList, errback=googleSubscriptionFailed)
 
-	def googleLoginFailed(self, res = None):
-		print "Failed to login to Google Reader."
+	def googleLoginFailed(res = None):
+		print "Failed to login to Google Reader:", str(res)
+		reactor.stop()
 
-	def googleSubscriptionList(self, subscriptions = None):
+	def googleSubscriptionList(subscriptions = None):
 		print "Got Feeds:", subscriptions
+		reactor.stop()
 
-	def googleSubscriptionFailed(self, res = None):
-		print "Failed to get subscriptions from Google Reader."
+	def googleSubscriptionFailed(res = None):
+		print "Failed to get subscriptions from Google Reader:", str(res)
+		reactor.stop()
 
-	googleReader.login().addCallback(googleLoggedIn).addErrback(googleLoginFailed)
+	googleReader.login().addCallbacks(googleLoggedIn, errback=googleLoginFailed)
 	reactor.run()

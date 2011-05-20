@@ -25,9 +25,14 @@ from EPGRefreshService import EPGRefreshService
 # Configuration
 from Components.config import config
 
+# MessageBox
+from Screens.MessageBox import MessageBox
+from Tools import Notifications
+
 # ... II
 from MainPictureAdapter import MainPictureAdapter
-from BackgroundAdapter import BackgroundAdapter
+from PipAdapter import PipAdapter
+from RecordAdapter import RecordAdapter
 
 # Path to configuration
 CONFIG = "/etc/enigma2/epgrefresh.xml"
@@ -41,6 +46,7 @@ class EPGRefresh:
 		self.forcedScan = False
 		self.session = None
 		self.beginOfTimespan = 0
+		self.refreshAdapter = None
 
 		# Mtime of configuration files
 		self.configMtime = -1
@@ -124,6 +130,11 @@ class EPGRefresh:
 
 		file.close()
 
+	def maybeStopAdapter(self):
+		if self.refreshAdapter:
+			self.refreshAdapter.stop()
+			self.refreshAdapter = None
+
 	def forceRefresh(self, session = None):
 		print "[EPGRefresh] Forcing start of EPGRefresh"
 		if self.session is None:
@@ -144,6 +155,7 @@ class EPGRefresh:
 
 	def stop(self):
 		print "[EPGRefresh] Stopping Timer"
+		self.maybeStopAdapter()
 		epgrefreshtimer.clear()
 
 	def prepareRefresh(self):
@@ -221,10 +233,15 @@ class EPGRefresh:
 		del additionalServices[:]
 
 		# Debug
-		#print "[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in scanServices])
+		print "[EPGRefresh] Services we're going to scan:", ', '.join([repr(x) for x in scanServices])
 
-		if config.plugins.epgrefresh.background.value:
-			self.refreshAdapter = BackgroundAdapter(self.session)
+		self.maybeStopAdapter()
+		# NOTE: start notification is handled in adapter initializer
+		if config.plugins.epgrefresh.adapter.value.startswith("pip"):
+			hidden = config.plugins.epgrefresh.adapter.value == "pip_hidden"
+			self.refreshAdapter = PipAdapter(self.session, hide=hidden)
+		elif config.plugins.epgrefresh.adapter.value.startswith("record"):
+			self.refreshAdapter = RecordAdapter(self.session)
 		else:
 			self.refreshAdapter = MainPictureAdapter(self.session)
 
@@ -266,9 +283,11 @@ class EPGRefresh:
 				1
 			)
 
+		if not Screens.Standby.inStandby and not config.plugins.epgrefresh.background and config.plugins.epgrefresh.enablemessage.value:
+			Notifications.AddNotification(MessageBox, _("EPG refresh finished."), type=MessageBox.TYPE_INFO, timeout=4)
 		self.forcedScan = False
 		epgrefreshtimer.cleanup()
-		self.refreshAdapter.stop()
+		self.maybeStopAdapter()
 
 	def refresh(self):
 		if self.forcedScan:

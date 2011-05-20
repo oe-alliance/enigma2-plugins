@@ -525,7 +525,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 		list.extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
 
 	# Only display encoding if != utf-8
-	if defaultTimer.encoding != 'UTF-8':
+	if defaultTimer.encoding != 'UTF-8' or webif:
 		list.extend((' encoding="', str(defaultTimer.encoding), '"'))
 
 	# Only display searchType if exact
@@ -659,7 +659,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 			list.extend((' justplay="', str(timer.getJustplay()), '"'))
 
 		# Only display encoding if != utf-8
-		if timer.encoding != 'UTF-8':
+		if timer.encoding != 'UTF-8' or webif:
 			list.extend((' encoding="', str(timer.encoding), '"'))
 
 		# Only display searchType if exact

@@ -128,10 +128,13 @@ class EPGRefreshListServicesResource(resource.Resource):
 
 class EPGRefreshChangeSettingsResource(resource.Resource):
 	def render(self, req):
+		statetext = "config changed."
 		for key, value in req.args.iteritems():
 			value = value[0]
 			if key == "enabled":
 				config.plugins.epgrefresh.enabled.value = True if value == "true" else False
+			elif key == "enablemessage":
+				config.plugins.epgrefresh.enablemessage.value = True if value == "true" else False
 			elif key == "begin":
 				value = int(value)
 				if value:
@@ -161,7 +164,11 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 			elif key == "parse_autotimer":
 				config.plugins.epgrefresh.parse_autotimer.value = True if value == "true" else False
 			elif key == "background":
-				config.plugins.epgrefresh.background.value = True if value == "true" else False
+				statetext += " parameter \"background\" is deprecated. please use new \"adapter\" parameter instead."
+				config.plugins.epgrefresh.adapter.value = "pip_hidden" if value == "true" else "main"
+			elif key == "adapter":
+				if value in config.plugins.epgrefresh.adapter.choices:
+					config.plugins.epgrefresh.adapter.value = value
 
 		config.plugins.epgrefresh.save()
 
@@ -177,8 +184,8 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2simplexmlresult>
  <e2state>true</e2state>
- <e2statetext>config changed.</e2statetext>
-</e2simplexmlresult>"""
+ <e2statetext>%s</e2statetext>
+</e2simplexmlresult>""" % (statetext,)
 
 class EPGRefreshSettingsResource(resource.Resource):
 	def render(self, req):
@@ -203,6 +210,10 @@ class EPGRefreshSettingsResource(resource.Resource):
 <e2settings>
  <e2setting>
   <e2settingname>config.plugins.epgrefresh.enabled</e2settingname>
+  <e2settingvalue>%s</e2settingvalue>
+ </e2setting>
+ <e2setting>
+  <e2settingname>config.plugins.epgrefresh.enablemessage</e2settingname>
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
  <e2setting>
@@ -242,11 +253,17 @@ class EPGRefreshSettingsResource(resource.Resource):
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
  <e2setting>
+  <!-- deprecated, pending removal -->
   <e2settingname>config.plugins.epgrefresh.background</e2settingname>
+  <e2settingvalue>%s</e2settingvalue>
+ </e2setting>
+ <e2setting>
+  <e2settingname>config.plugins.epgrefresh.adapter</e2settingname>
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
 </e2settings>""" % (
 				config.plugins.epgrefresh.enabled.value,
+				config.plugins.epgrefresh.enablemessage.value,
 				begin,
 				end,
 				config.plugins.epgrefresh.interval.value,
@@ -256,6 +273,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.force.value,
 				config.plugins.epgrefresh.wakeup.value,
 				config.plugins.epgrefresh.parse_autotimer.value,
-				config.plugins.epgrefresh.background.value,
+				config.plugins.epgrefresh.adapter.value in ("pip", "pip_hidden"),
+				config.plugins.epgrefresh.adapter.value,
 			)
 

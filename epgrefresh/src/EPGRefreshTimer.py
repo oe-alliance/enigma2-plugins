@@ -124,8 +124,8 @@ class EPGRefreshTimer(timer.Timer):
 		# Add refresh Timer
 		now = localtime()
 		# XXX: basic workaround if the clock is not yet set
-		year = 2009
-		if now.tm_year > 2009:
+		year = 2011
+		if now.tm_year > 2011:
 			year = now.tm_year
 		begin = mktime(
 			(year, now.tm_mon, now.tm_mday,

@@ -33,6 +33,7 @@ config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.autotimer.fastscan = ConfigYesNo(default = False)
 config.plugins.autotimer.notifconflict = ConfigYesNo(default = True)
 config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default = 0)
+config.plugins.autotimer.show_help = ConfigYesNo(default = True)
 
 autotimer = None
 autopoller = None
