@@ -4,6 +4,7 @@ from EPGRefreshService import EPGRefreshService
 from enigma import eServiceReference
 from Components.config import config
 from time import localtime
+from urllib import unquote
 
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
@@ -53,7 +54,8 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 				output = 'invalid value for "duration": ' + str(duration)
 			else:
 				for sref in req.args.get('sref'):
-					ref = eServiceReference(str(sref))
+					sref = unquote(sref)
+					ref = eServiceReference(sref)
 					if not ref.valid():
 						output = 'invalid value for "sref": ' + str(sref)
 					elif (ref.flags & 7) == 7:
@@ -78,7 +80,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 							# strip all after last :
 							pos = sref.rfind(':')
 							if pos != -1:
-								if value[pos-1] == ':':
+								if sref[pos-1] == ':':
 									pos -= 1
 								sref = sref[:pos+1]
 
@@ -116,7 +118,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 <e2simplexmlresult>
  <e2state>%s</e2state>
  <e2statetext>%s</e2statetext>
-</e2simplexmlresult> """ % ('true' if state else 'false', output)
+</e2simplexmlresult> """ % ('True' if state else 'False', output)
 
 class EPGRefreshListServicesResource(resource.Resource):
 	def render(self, req):
