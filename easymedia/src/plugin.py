@@ -2,8 +2,6 @@
 #
 #    EasyMedia for Dreambox-Enigma2
 #    Coded by Vali (c)2010-2011
-#    Support: www.dreambox-tools.info
-#
 #
 #  This plugin is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -13,11 +11,9 @@
 #  Alternatively, this plugin may be distributed and executed on hardware which
 #  is licensed by Dream Multimedia GmbH.
 #
-#
 #  This plugin is NOT free software. It is open source, you are allowed to
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
-#
 #
 #######################################################################
 
@@ -36,6 +32,7 @@ from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.PluginList import *
+from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection
 from Tools.Directories import fileExists, pathExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
@@ -116,9 +113,13 @@ def notEasy(session, **kwargs):
 
 
 
-def MPanelEntryComponent(key, text):
+def MPanelEntryComponent(key, text, cell):
 	res = [ text ]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 150, 17, 300, 60, 0, RT_HALIGN_LEFT, text[0]))
+	if cell<5:
+		bpng = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/EasyMedia/key-' + str(cell) + ".png")
+		if bpng is not None:
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 0, 5, 5, 50, bpng))
 	png = LoadPixmap(EasyMedia.EMiconspath + key + '.png')
 	if png is not None:
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 25, 5, 100, 50, png))
@@ -381,21 +382,28 @@ class EasyMedia(Screen):
 				self.__keys.append(binPlug.name)
 				MPaskList.append((binPlug.name, ("++++" + binPlug.name)))
 			except: pass
-		self.keymap = {}
 		pos = 0
 		for x in MPaskList:
 			strpos = str(self.__keys[pos])
-			self.list.append(MPanelEntryComponent(key = strpos, text = x))
-			if self.__keys[pos] != "":
-				self.keymap[self.__keys[pos]] = MPaskList[pos]
+			self.list.append(MPanelEntryComponent(key = strpos, text = x, cell = pos))
+			if pos==0: self["key_pvr"] = StaticText(MPaskList[0][0])
+			elif pos==1: self["key_red"] = StaticText(MPaskList[1][0])
+			elif pos==2: self["key_green"] = StaticText(MPaskList[2][0])
+			elif pos==3: self["key_yellow"] = StaticText(MPaskList[3][0])
+			elif pos==4: self["key_blue"] = StaticText(MPaskList[4][0])
 			pos += 1
 		self["list"] = MPanelList(list = self.list, selection = 0)
 		self["list"].onSelectionChanged.append(self.updateOLED)
-		self["actions"] = ActionMap(["WizardActions", "MenuActions"],
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "InfobarActions", "ColorActions"],
 		{
 			"ok": self.go,
 			"back": self.cancel,
-			"menu": self.emContextMenu
+			"menu": self.emContextMenu,
+			"showMovies": lambda: self.go2(MPaskList[0]),
+			"green": lambda: self.go2(MPaskList[2]),
+			"red": lambda: self.go2(MPaskList[1]),
+			"blue": lambda: self.go2(MPaskList[4]),
+			"yellow": lambda: self.go2(MPaskList[3])
 		}, -1)
 
 	def cancel(self):
@@ -407,6 +415,9 @@ class EasyMedia(Screen):
 			self.goEntry(cursel[0])
 		else:
 			self.cancel()
+
+	def go2(self, wohin):
+		self.close(wohin)
 
 	def goEntry(self, entry):
 		if len(entry) > 2 and isinstance(entry[1], str) and entry[1] == "CALLFUNC":

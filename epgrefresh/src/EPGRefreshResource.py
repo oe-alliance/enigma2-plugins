@@ -3,7 +3,9 @@ from EPGRefresh import epgrefresh
 from EPGRefreshService import EPGRefreshService
 from enigma import eServiceReference
 from Components.config import config
+from Components.SystemInfo import SystemInfo
 from time import localtime
+from urllib import unquote
 
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
@@ -53,7 +55,8 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 				output = 'invalid value for "duration": ' + str(duration)
 			else:
 				for sref in req.args.get('sref'):
-					ref = eServiceReference(str(sref))
+					sref = unquote(sref)
+					ref = eServiceReference(sref)
 					if not ref.valid():
 						output = 'invalid value for "sref": ' + str(sref)
 					elif (ref.flags & 7) == 7:
@@ -78,7 +81,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 							# strip all after last :
 							pos = sref.rfind(':')
 							if pos != -1:
-								if value[pos-1] == ':':
+								if sref[pos-1] == ':':
 									pos -= 1
 								sref = sref[:pos+1]
 
@@ -116,7 +119,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 <e2simplexmlresult>
  <e2state>%s</e2state>
  <e2statetext>%s</e2statetext>
-</e2simplexmlresult> """ % ('true' if state else 'false', output)
+</e2simplexmlresult> """ % ('True' if state else 'False', output)
 
 class EPGRefreshListServicesResource(resource.Resource):
 	def render(self, req):
@@ -206,6 +209,13 @@ class EPGRefreshSettingsResource(resource.Resource):
 			0, now.tm_wday, now.tm_yday, now.tm_isdst)
 		)
 
+		canDoBackgroundRefresh = SystemInfo.get("NumVideoDecoders", 1) > 1
+		hasAutoTimer = False
+		try:
+			from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+			hasAutoTimer = True
+		except ImportError, ie: pass
+
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2settings>
  <e2setting>
@@ -261,6 +271,14 @@ class EPGRefreshSettingsResource(resource.Resource):
   <e2settingname>config.plugins.epgrefresh.adapter</e2settingname>
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
+ <e2setting>
+  <e2settingname>canDoBackgroundRefresh</e2settingname>
+  <e2settingvalue>%s</e2settingvalue>
+ </e2setting>
+ <e2setting>
+  <e2settingname>hasAutoTimer</e2settingname>
+  <e2settingvalue>%s</e2settingvalue>
+ </e2setting>
 </e2settings>""" % (
 				config.plugins.epgrefresh.enabled.value,
 				config.plugins.epgrefresh.enablemessage.value,
@@ -275,5 +293,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.parse_autotimer.value,
 				config.plugins.epgrefresh.adapter.value in ("pip", "pip_hidden"),
 				config.plugins.epgrefresh.adapter.value,
+				canDoBackgroundRefresh,
+				hasAutoTimer,
 			)
 

@@ -2,106 +2,197 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-24 16:10+0200\n"
-"PO-Revision-Date: 2009-09-24 16:15+0100\n"
-"Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
+"POT-Creation-Date: 2011-05-20 13:28+0100\n"
+"PO-Revision-Date: 2011-05-20 13:43+0100\n"
+"Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: D:\\Dreambox\\Plugins\\enigma2-plugins\\epgrefresh\\src\n"
 
-msgid "Automatically refresh EPG"
-msgstr "Automatisierte EPG Aktualisierung"
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:59
+msgid "EPGRefresh Services"
+msgstr "EPGRefresh Sender"
 
-msgid "Bouquets"
-msgstr "Bouquets"
-
-msgid "Cancel"
-msgstr "Abbrechen"
-
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:69
 msgid "Channels"
 msgstr "Sender"
 
-msgid "Configure EPGRefresh"
-msgstr "EPGRefresh Konfiguration"
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:70
+msgid "Bouquets"
+msgstr "Bouquets"
 
-msgid "Delay when not in Standby (in m)"
-msgstr "Verzögerung sofern nicht im Standby (min)"
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:79
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:80
+msgid "Cancel"
+msgstr "Abbrechen"
 
-msgid "EPGRefresh Configuration"
-msgstr "EPGRefresh Konfiguration"
-
-msgid "EPGRefresh Services"
-msgstr "EPGRefresh Kanäle"
-
-msgid "Edit Services"
-msgstr "Kanäle"
-
-msgid "Edit Services to refresh"
-msgstr "Kanal zur Aktualisierung auswählen"
-
-msgid "Editing"
-msgstr "Bearbeite"
-
-msgid "Force scan even if receiver is in use"
-msgstr "Aktualisierung erzwingen"
-
-msgid "Inherit Services from AutoTimer if available"
-msgstr "Zusätzlich Sender vom AutoTimer verwenden"
-
-msgid "Make AutoTimer parse EPG if available"
-msgstr "AutoTimer nach Aktualisierung aktivieren"
-
-msgid "New"
-msgstr "Neu"
-
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:80
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:81
 msgid "OK"
 msgstr "OK"
 
-msgid "Really close without saving settings?"
-msgstr "Wirklich Beenden ohne zu Speichern?"
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:81
+msgid "delete"
+msgstr "Löschen"
 
-msgid "Refresh EPG after"
-msgstr "Aktualisiere nach"
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:82
+msgid "New"
+msgstr "Neu"
 
-msgid "Refresh EPG before"
-msgstr "Aktualisiere vor"
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:100
+msgid "Edit Services to refresh"
+msgstr "Sender zur Aktualisierung auswählen"
 
-msgid "Refresh automatically"
-msgstr "Automatisch aktualisieren"
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:120
+msgid "Editing"
+msgstr "Bearbeite"
 
-msgid "Refresh now"
-msgstr "Aktualisieren"
-
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:129
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:177
 msgid "Refreshing"
 msgstr "Aktualisiere"
 
-msgid "Select bouquet to refresh"
-msgstr "Bouquet zum aktualisieren auswählen"
-
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:164
 msgid "Select channel to refresh"
-msgstr "Sender zum aktualisieren auswählen"
+msgstr "Zu aktualisierenden Sender auswählen"
 
-msgid "Shutdown after refresh"
-msgstr "Nach Aktualisieren herunterfahren"
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshChannelEditor.py:170
+msgid "Select bouquet to refresh"
+msgstr "Zu aktualisierendes Bouquet auswählen"
 
-msgid ""
-"This might have been an automated bootup to refresh the EPG. For this to "
-"happen it is recommmended to put the receiver to Standby.\n"
-"Do you want to do this now?"
-msgstr ""
-"Der Empfänger könnte automatisiert zur Aktualisierung des EPG hochgefahren "
-"sein. Es wird empfohlen dies im Standby zu tun.\n"
-"Jetzt in den Standby gehen?"
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:43
+msgid "EPGRefresh Configuration"
+msgstr "EPGRefresh Konfiguration"
 
-msgid "Time to stay on service (in m)"
-msgstr "Verbleibe auf Sender für (min)"
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:53
+msgid "Refresh automatically"
+msgstr "Automatisch aktualisieren"
 
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:53
+msgid "Unless this is enabled EPGRefresh won't automatically run but has to be explicitely started through the yellow button from this menu."
+msgstr "Solange diese Option nicht aktiviert ist, wird EPGRefresh nicht automatisch laufen, sondern muss explizit mittels gelbem Button hier im Menu gestartet werden."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:54
 msgid "Wakeup from Deep-Standby to refresh EPG"
 msgstr "Aus dem Deep-Standby hochfahren"
 
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:54
+msgid "If this is enabled, the plugin will wake the receiver up from deep-standby if possible. Otherwise it has to be turned on already."
+msgstr "Ist diese Option aktiviert, dann weckt das Plugin den Receiver aus dem Deep Standby auf - sofern möglich. Andernfalls muss die Box schon eingeschaltet sein."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:55
+msgid "Time to stay on service (in m)"
+msgstr "Verbleibe auf Sender für (min)"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:55
+msgid "This is the ammount of time a channel will be active during a refresh."
+msgstr "Das ist die Anzahl Minuten, für die die einzelnen Kanäle aktiviert werden."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:56
+msgid "Refresh EPG after"
+msgstr "Aktualisiere nach"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:56
+msgid "An automated refresh will happen after this time of day, but before the next setting."
+msgstr "Die automatische Aktualisierung wird nach dieser Uhrzeit und vor der Uhrzeit im nächsten Feld durchgeführt."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:57
+msgid "Refresh EPG before"
+msgstr "Aktualisiere vor"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:57
+msgid "An automated refresh will happen before this time of day, but after the previous setting."
+msgstr "Die automatische Aktualisierung wird vor dieser Uhrzeit und nach der Uhrzeit im vorherigen Feld durchgeführt."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:58
+msgid "Delay when not in Standby (in m)"
+msgstr "Verzögerung sofern nicht im Standby (min)"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:58
+msgid "If the receiver is currently not in standby this is the amount of time EPGRefresh will wait before trying again."
+msgstr "Wenn der Receiver zum Zeitpunkt des Starts nicht im Standby ist, wird das Plugin die hier eingetragene Zeit warten, bevor es einen erneuten Versuch startet."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:59
+msgid "Force scan even if receiver is in use"
+msgstr "Aktualisierung erzwingen"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:59
+msgid "This setting controls whether or not the refresh will also be initiated when the receiver is being used (namely not in standby or currently recording)."
+msgstr "Diese Einstellung kontrolliert, ob die Aktualisierung auch gestartet wird, wenn die Box gerade in Verwendung ist (also nicht im Standby oder bei aktiver Aufnahme)."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:60
+msgid "Inherit Services from AutoTimer if available"
+msgstr "Zusätzlich Sender vom AutoTimer verwenden"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:60
+msgid "If you're also using the AutoTimer plugin this allows to extend the list of services to refresh by the services your AutoTimers are restricted to."
+msgstr "Bei Benutzung des AutoTimer- Plugins erlaubt diese Einstellung die Liste der Kanäle automatisch um die Kanäle der gesetzten AutoTimer zu erweitern."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:61
+msgid "Make AutoTimer parse EPG if available"
+msgstr "AutoTimer nach Aktualisierung aktivieren"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:61
+msgid "If you're also using the AutoTimer plugin this will initiate a scan of the EPG after a completed refresh."
+msgstr "Bei Benutzung des AutoTimer- Plugins wird automatisch ein EPG- Scan nach erfolgter Aktualisierung gestartet."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:62
+msgid "Shutdown after refresh"
+msgstr "Nach Aktualisierung herunterfahren"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:62
+msgid "This setting controls if the receiver should be sent to deep-standby after a completed refresh."
+msgstr "Diese Einstellung kontrolliert, ob der Receiver nach vollständiger Aktualisierung in den Deep- Standby geschickt werden soll."
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:65
+msgid "Refresh in Background"
+msgstr "Aktualisierung im Hintergrund"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:65
+msgid "Use Picture In Picture to refresh EPG?"
+msgstr "PiP verwenden für die EPG- Aktualisierung?"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:82
+msgid "Refresh now"
+msgstr "Aktualisieren"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:83
+msgid "Edit Services"
+msgstr "Kanäle"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:104
+msgid "Configure EPGRefresh"
+msgstr "EPGRefresh Konfiguration"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:159
+msgid "never"
+msgstr "niemals"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:163
+#, python-format
+msgid "Last refresh was %s"
+msgstr "Letzte Aktualisierung: %s"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/EPGRefreshConfiguration.py:174
+msgid "Really close without saving settings?"
+msgstr "Wirklich Beenden ohne zu Speichern?"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/plugin.py:73
+msgid ""
+"This might have been an automated bootup to refresh the EPG. For this to happen it is recommmended to put the receiver to Standby.\n"
+"Do you want to do this now?"
+msgstr ""
+"Der Receiver könnte automatisiert zur Aktualisierung des EPG hochgefahren sein. Es wird empfohlen dies im Standby zu tun.\n"
+"Jetzt in den Standby gehen?"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/plugin.py:140
+msgid "Automatically refresh EPG"
+msgstr "Automatisierte EPG Aktualisierung"
+
+#: D:\Dreambox\Plugins\enigma2-plugins\epgrefresh\src/plugin.py:145
 msgid "add to EPGRefresh"
 msgstr "Zu EPGRefresh hinzufügen"
 
-msgid "delete"
-msgstr "Löschen"

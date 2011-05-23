@@ -2,7 +2,6 @@
 #
 #    EasyInfo for Dreambox-Enigma2
 #    Coded by Vali (c)2011
-#    Support: www.dreambox-tools.info
 #
 #  This plugin is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported License.
