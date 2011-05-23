@@ -485,65 +485,67 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 def buildConfig(defaultTimer, timers, webif = False):
 	# Generate List in RAM
 	list = ['<?xml version="1.0" ?>\n<autotimer version="', CURRENT_CONFIG_VERSION, '">\n\n']
+	append = list.append
+	extend = list.extend
 
 	# This gets deleted afterwards if we do not have set any defaults
-	list.append(' <defaults')
+	append(' <defaults')
 	if webif:
-		list.extend((' id="', str(defaultTimer.getId()),'"'))
+		extend((' id="', str(defaultTimer.getId()),'"'))
 
 	# Timespan
 	if defaultTimer.hasTimespan():
-		list.extend((' from="', defaultTimer.getTimespanBegin(), '" to="', defaultTimer.getTimespanEnd(), '"'))
+		extend((' from="', defaultTimer.getTimespanBegin(), '" to="', defaultTimer.getTimespanEnd(), '"'))
 
 	# Duration
 	if defaultTimer.hasDuration():
-		list.extend((' maxduration="', str(defaultTimer.getDuration()), '"'))
+		extend((' maxduration="', str(defaultTimer.getDuration()), '"'))
 
 	# Destination
 	if defaultTimer.hasDestination():
-		list.extend((' location="', stringToXML(defaultTimer.destination), '"'))
+		extend((' location="', stringToXML(defaultTimer.destination), '"'))
 
 	# Offset
 	if defaultTimer.hasOffset():
 		if defaultTimer.isOffsetEqual():
-			list.extend((' offset="', str(defaultTimer.getOffsetBegin()), '"'))
+			extend((' offset="', str(defaultTimer.getOffsetBegin()), '"'))
 		else:
-			list.extend((' offset="', str(defaultTimer.getOffsetBegin()), ',', str(defaultTimer.getOffsetEnd()), '"'))
+			extend((' offset="', str(defaultTimer.getOffsetBegin()), ',', str(defaultTimer.getOffsetEnd()), '"'))
 
 	# Counter
 	if defaultTimer.hasCounter():
-		list.extend((' counter="', str(defaultTimer.getCounter()), '"'))
+		extend((' counter="', str(defaultTimer.getCounter()), '"'))
 		if defaultTimer.hasCounterFormatString():
-			list.extend((' counterFormat="', str(defaultTimer.getCounterFormatString()), '"'))
+			extend((' counterFormat="', str(defaultTimer.getCounterFormatString()), '"'))
 
 	# Duplicate Description
 	if defaultTimer.getAvoidDuplicateDescription():
-		list.append(' avoidDuplicateDescription="1" ')
+		append(' avoidDuplicateDescription="1" ')
 
 	# Only display justplay if true
 	if defaultTimer.justplay:
-		list.extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
+		extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
 
 	# Only display encoding if != utf-8
 	if defaultTimer.encoding != 'UTF-8' or webif:
-		list.extend((' encoding="', str(defaultTimer.encoding), '"'))
+		extend((' encoding="', str(defaultTimer.encoding), '"'))
 
 	# Only display searchType if exact
 	if defaultTimer.searchType == "exact":
-		list.extend((' searchType="', str(defaultTimer.searchType), '"'))
+		extend((' searchType="', str(defaultTimer.searchType), '"'))
 
 	# Only display searchCase if sensitive
 	if defaultTimer.searchCase == "sensitive":
-		list.extend((' searchCase="', str(defaultTimer.searchCase), '"'))
+		extend((' searchCase="', str(defaultTimer.searchCase), '"'))
 
 	# Close still opened defaults tag
-	list.append('>\n')
+	append('>\n')
 
 	if webif:
 		# Services + Bouquets
 		for serviceref in defaultTimer.services + defaultTimer.bouquets:
 			ref = ServiceReference(str(serviceref))
-			list.extend((
+			extend((
 				'  <e2service>\n',
 				'   <e2servicereference>', str(serviceref), '</e2servicereference>\n',
 				'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
@@ -553,14 +555,14 @@ def buildConfig(defaultTimer, timers, webif = False):
 		# Services
 		for serviceref in defaultTimer.services:
 			ref = ServiceReference(str(serviceref))
-			list.extend(('  <serviceref>', serviceref, '</serviceref>',
+			extend(('  <serviceref>', serviceref, '</serviceref>',
 						' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
 			))
 
 		# Bouquets
 		for bouquet in defaultTimer.bouquets:
 			ref = ServiceReference(str(bouquet))
-			list.extend(('  <bouquet>', str(bouquet), '</bouquet>',
+			extend(('  <bouquet>', str(bouquet), '</bouquet>',
 						' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
 			))
 
@@ -574,114 +576,114 @@ def buildConfig(defaultTimer, timers, webif = False):
 		}
 		for afterevent in defaultTimer.afterevent:
 			action, timespan = afterevent
-			list.append('  <afterevent')
+			append('  <afterevent')
 			if timespan[0] is not None:
-				list.append(' from="%02d:%02d" to="%02d:%02d"' % (timespan[0][0], timespan[0][1], timespan[1][0], timespan[1][1]))
-			list.extend(('>', idx[action], '</afterevent>\n'))
+				append(' from="%02d:%02d" to="%02d:%02d"' % (timespan[0][0], timespan[0][1], timespan[1][0], timespan[1][1]))
+			extend(('>', idx[action], '</afterevent>\n'))
 
 	# Excludes
 	for title in defaultTimer.getExcludedTitle():
-		list.extend(('  <exclude where="title">', stringToXML(title), '</exclude>\n'))
+		extend(('  <exclude where="title">', stringToXML(title), '</exclude>\n'))
 	for short in defaultTimer.getExcludedShort():
-		list.extend(('  <exclude where="shortdescription">', stringToXML(short), '</exclude>\n'))
+		extend(('  <exclude where="shortdescription">', stringToXML(short), '</exclude>\n'))
 	for desc in defaultTimer.getExcludedDescription():
-		list.extend(('  <exclude where="description">', stringToXML(desc), '</exclude>\n'))
+		extend(('  <exclude where="description">', stringToXML(desc), '</exclude>\n'))
 	for day in defaultTimer.getExcludedDays():
-		list.extend(('  <exclude where="dayofweek">', stringToXML(day), '</exclude>\n'))
+		extend(('  <exclude where="dayofweek">', stringToXML(day), '</exclude>\n'))
 
 	# Includes
 	for title in defaultTimer.getIncludedTitle():
-		list.extend(('  <include where="title">', stringToXML(title), '</include>\n'))
+		extend(('  <include where="title">', stringToXML(title), '</include>\n'))
 	for short in defaultTimer.getIncludedShort():
-		list.extend(('  <include where="shortdescription">', stringToXML(short), '</include>\n'))
+		extend(('  <include where="shortdescription">', stringToXML(short), '</include>\n'))
 	for desc in defaultTimer.getIncludedDescription():
-		list.extend(('  <include where="description">', stringToXML(desc), '</include>\n'))
+		extend(('  <include where="description">', stringToXML(desc), '</include>\n'))
 	for day in defaultTimer.getIncludedDays():
-		list.extend(('  <include where="dayofweek">', stringToXML(day), '</include>\n'))
+		extend(('  <include where="dayofweek">', stringToXML(day), '</include>\n'))
 
 	# Tags
 	if webif and defaultTimer.tags:
-		list.extend(('  <e2tags>', stringToXML(' '.join(defaultTimer.tags)), '</e2tags>\n'))
+		extend(('  <e2tags>', stringToXML(' '.join(defaultTimer.tags)), '</e2tags>\n'))
 	else:
 		for tag in defaultTimer.tags:
-			list.extend(('  <tag>', stringToXML(tag), '</tag>\n'))
+			extend(('  <tag>', stringToXML(tag), '</tag>\n'))
 
 	# Keep the list clean
 	if len(list) == 5:
 		list.pop() # >
 		list.pop() # <defaults
 	else:
-		list.append(' </defaults>\n\n')
+		append(' </defaults>\n\n')
 
 	# Iterate timers
 	for timer in timers:
 		# Common attributes (match, enabled)
-		list.extend((' <timer name="', stringToXML(timer.name), '" match="', stringToXML(timer.match), '" enabled="', timer.getEnabled(), '"'))
+		extend((' <timer name="', stringToXML(timer.name), '" match="', stringToXML(timer.match), '" enabled="', timer.getEnabled(), '"'))
 		if webif:
-			list.extend((' id="', str(timer.getId()),'"'))
+			extend((' id="', str(timer.getId()),'"'))
 
 		# Timespan
 		if timer.hasTimespan():
-			list.extend((' from="', timer.getTimespanBegin(), '" to="', timer.getTimespanEnd(), '"'))
+			extend((' from="', timer.getTimespanBegin(), '" to="', timer.getTimespanEnd(), '"'))
 
 		# Timeframe
 		if timer.hasTimeframe():
-			list.extend((' after="', str(timer.getTimeframeBegin()), '" before="', str(timer.getTimeframeEnd()), '"'))
+			extend((' after="', str(timer.getTimeframeBegin()), '" before="', str(timer.getTimeframeEnd()), '"'))
 
 		# Duration
 		if timer.hasDuration():
-			list.extend((' maxduration="', str(timer.getDuration()), '"'))
+			extend((' maxduration="', str(timer.getDuration()), '"'))
 
 		# Destination
 		if timer.hasDestination():
-			list.extend((' location="', stringToXML(timer.destination), '"'))
+			extend((' location="', stringToXML(timer.destination), '"'))
 
 		# Offset
 		if timer.hasOffset():
 			if timer.isOffsetEqual():
-				list.extend((' offset="', str(timer.getOffsetBegin()), '"'))
+				extend((' offset="', str(timer.getOffsetBegin()), '"'))
 			else:
-				list.extend((' offset="', str(timer.getOffsetBegin()), ',', str(timer.getOffsetEnd()), '"'))
+				extend((' offset="', str(timer.getOffsetBegin()), ',', str(timer.getOffsetEnd()), '"'))
 
 		# Counter
 		if timer.hasCounter():
-			list.extend((' lastBegin="', str(timer.getLastBegin()), '" counter="', str(timer.getCounter()), '" left="', str(timer.getCounterLeft()) ,'"'))
+			extend((' lastBegin="', str(timer.getLastBegin()), '" counter="', str(timer.getCounter()), '" left="', str(timer.getCounterLeft()) ,'"'))
 			if timer.hasCounterFormatString():
-				list.extend((' lastActivation="', str(timer.getCounterLimit()), '"'))
-				list.extend((' counterFormat="', str(timer.getCounterFormatString()), '"'))
+				extend((' lastActivation="', str(timer.getCounterLimit()), '"'))
+				extend((' counterFormat="', str(timer.getCounterFormatString()), '"'))
 
 		# Duplicate Description
 		if timer.getAvoidDuplicateDescription():
-			list.extend((' avoidDuplicateDescription="', str(timer.getAvoidDuplicateDescription()), '"'))
+			extend((' avoidDuplicateDescription="', str(timer.getAvoidDuplicateDescription()), '"'))
 
 		# Only display justplay if true
 		if timer.justplay:
-			list.extend((' justplay="', str(timer.getJustplay()), '"'))
+			extend((' justplay="', str(timer.getJustplay()), '"'))
 
 		# Only display encoding if != utf-8
 		if timer.encoding != 'UTF-8' or webif:
-			list.extend((' encoding="', str(timer.encoding), '"'))
+			extend((' encoding="', str(timer.encoding), '"'))
 
 		# Only display searchType if exact
 		if timer.searchType == "exact":
-			list.extend((' searchType="', str(timer.searchType), '"'))
+			extend((' searchType="', str(timer.searchType), '"'))
 
 		# Only display searchCase if sensitive
 		if timer.searchCase == "sensitive":
-			list.extend((' searchCase="', str(timer.searchCase), '"'))
+			extend((' searchCase="', str(timer.searchCase), '"'))
 
 		# Only display overrideAlternatives if true
 		if timer.overrideAlternatives:
-			list.extend((' overrideAlternatives="', str(timer.getOverrideAlternatives()), '"'))
+			extend((' overrideAlternatives="', str(timer.getOverrideAlternatives()), '"'))
 
 		# Close still opened timer tag
-		list.append('>\n')
+		append('>\n')
 
 		if webif:
 			# Services + Bouquets
 			for serviceref in timer.services + timer.bouquets:
 				ref = ServiceReference(str(serviceref))
-				list.extend((
+				extend((
 					'  <e2service>\n',
 					'   <e2servicereference>', str(serviceref), '</e2servicereference>\n',
 					'   <e2servicename>', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), '</e2servicename>\n',
@@ -691,14 +693,14 @@ def buildConfig(defaultTimer, timers, webif = False):
 			# Services
 			for serviceref in timer.services:
 				ref = ServiceReference(str(serviceref))
-				list.extend(('  <serviceref>', serviceref, '</serviceref>',
+				extend(('  <serviceref>', serviceref, '</serviceref>',
 							' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
 				))
 
 			# Bouquets
 			for bouquet in timer.bouquets:
 				ref = ServiceReference(str(bouquet))
-				list.extend(('  <bouquet>', str(bouquet), '</bouquet>',
+				extend(('  <bouquet>', str(bouquet), '</bouquet>',
 							' <!-- ', stringToXML(ref.getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')), ' -->\n',
 				))
 
@@ -712,43 +714,43 @@ def buildConfig(defaultTimer, timers, webif = False):
 			}
 			for afterevent in timer.afterevent:
 				action, timespan = afterevent
-				list.append('  <afterevent')
+				append('  <afterevent')
 				if timespan[0] is not None:
-					list.append(' from="%02d:%02d" to="%02d:%02d"' % (timespan[0][0], timespan[0][1], timespan[1][0], timespan[1][1]))
-				list.extend(('>', idx[action], '</afterevent>\n'))
+					append(' from="%02d:%02d" to="%02d:%02d"' % (timespan[0][0], timespan[0][1], timespan[1][0], timespan[1][1]))
+				extend(('>', idx[action], '</afterevent>\n'))
 
 		# Excludes
 		for title in timer.getExcludedTitle():
-			list.extend(('  <exclude where="title">', stringToXML(title), '</exclude>\n'))
+			extend(('  <exclude where="title">', stringToXML(title), '</exclude>\n'))
 		for short in timer.getExcludedShort():
-			list.extend(('  <exclude where="shortdescription">', stringToXML(short), '</exclude>\n'))
+			extend(('  <exclude where="shortdescription">', stringToXML(short), '</exclude>\n'))
 		for desc in timer.getExcludedDescription():
-			list.extend(('  <exclude where="description">', stringToXML(desc), '</exclude>\n'))
+			extend(('  <exclude where="description">', stringToXML(desc), '</exclude>\n'))
 		for day in timer.getExcludedDays():
-			list.extend(('  <exclude where="dayofweek">', stringToXML(day), '</exclude>\n'))
+			extend(('  <exclude where="dayofweek">', stringToXML(day), '</exclude>\n'))
 
 		# Includes
 		for title in timer.getIncludedTitle():
-			list.extend(('  <include where="title">', stringToXML(title), '</include>\n'))
+			extend(('  <include where="title">', stringToXML(title), '</include>\n'))
 		for short in timer.getIncludedShort():
-			list.extend(('  <include where="shortdescription">', stringToXML(short), '</include>\n'))
+			extend(('  <include where="shortdescription">', stringToXML(short), '</include>\n'))
 		for desc in timer.getIncludedDescription():
-			list.extend(('  <include where="description">', stringToXML(desc), '</include>\n'))
+			extend(('  <include where="description">', stringToXML(desc), '</include>\n'))
 		for day in timer.getIncludedDays():
-			list.extend(('  <include where="dayofweek">', stringToXML(day), '</include>\n'))
+			extend(('  <include where="dayofweek">', stringToXML(day), '</include>\n'))
 
 		# Tags
 		if webif and timer.tags:
-			list.extend(('  <e2tags>', stringToXML(' '.join(timer.tags)), '</e2tags>\n'))
+			extend(('  <e2tags>', stringToXML(' '.join(timer.tags)), '</e2tags>\n'))
 		else:
 			for tag in timer.tags:
-				list.extend(('  <tag>', stringToXML(tag), '</tag>\n'))
+				extend(('  <tag>', stringToXML(tag), '</tag>\n'))
 
 		# End of Timer
-		list.append(' </timer>\n\n')
+		append(' </timer>\n\n')
 
 	# End of Configuration
-	list.append('</autotimer>\n')
+	append('</autotimer>\n')
 
 	return list
 
