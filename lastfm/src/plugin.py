@@ -8,7 +8,7 @@ from Components.MenuList import MenuList
 from Screens.InputBox import InputBox
 
 from Components.ActionMap import ActionMap
-from Components.config import config, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigPassword
 from Plugins.Plugin import PluginDescriptor
 
 from StreamPlayer import StreamPlayer
@@ -26,8 +26,8 @@ streamplayer = False
 
 config.plugins.LastFM = ConfigSubsection()
 config.plugins.LastFM.showcoverart = ConfigYesNo(default = True)
-config.plugins.LastFM.username = ConfigText("user",fixed_size=False)
-config.plugins.LastFM.password = ConfigText("passwd",fixed_size=False)
+config.plugins.LastFM.username = ConfigText("user", fixed_size = False)
+config.plugins.LastFM.password = ConfigPassword(default = "passwd", fixed_size = False)
 config.plugins.LastFM.timeoutstatustext = ConfigInteger(3,limits = (0, 10))
 config.plugins.LastFM.timeouttabselect = ConfigInteger(2,limits = (0, 10))
 config.plugins.LastFM.metadatarefreshinterval = ConfigInteger(1,limits = (0, 100))
@@ -86,26 +86,31 @@ def Plugins(path,**kwargs):
 ############################################################################### 
 class LastFMScreenMain(Screen,HelpableScreen,LastFM):
     skin = """
-        <screen position="110,83" size="530,430" title="Last.FM" >
+        <screen position="center,center" size="600,440" title="Last.FM" >
             
-            <widget name="artist" position="0,0" size="70,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
-            <widget name="album" position="0,40" size="70,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
-            <widget name="track" position="0,80" size="70,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
+            <widget name="artist" position="0,5" size="100,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
+            <widget name="album" position="0,45" size="100,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
+            <widget name="track" position="0,85" size="100,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
             
-            <widget name="info_artist" position="70,0" size="284,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
-            <widget name="duration" position="354,0" size="60,30" valign=\"center\" halign=\"right\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
-            <widget name="info_album" position="70,40" size="344,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
-            <widget name="info_track" position="70,80" size="344,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
-            <widget name="info_cover" position="414,0" size="116,116" />          
+            <widget name="info_artist" position="105,5" size="300,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
+            <widget name="duration" position="420,5" size="60,30" valign=\"center\" halign=\"right\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
+            <widget name="info_album" position="105,45" size="370,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
+            <widget name="info_track" position="105,85" size="370,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
+            <widget name="info_cover" position="484,5" size="116,116" />          
             
-            <widget name="tablist" position="0,120" size="150,260" scrollbarMode="showOnDemand" />            
-            <widget name="streamlist" position="150,120" size="380,260" scrollbarMode="showOnDemand" />            
+            <widget name="tablist" position="0,140" size="190,220" scrollbarMode="showOnDemand" />            
+            <widget name="streamlist" position="200,140" size="400,225" scrollbarMode="showOnDemand" />            
             
-            <widget name="button_red" position="10,400" size="60,30" backgroundColor=\"red\" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
-            <widget name="button_green" position="80,400" size="60,30" backgroundColor=\"green\" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\"/>            
-            <widget name="button_yellow" position="150,400" size="60,30" backgroundColor=\"yellow\" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />            
-            <widget name="button_blue" position="220,400" size="60,30" backgroundColor=\"blue\" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />            
-            <widget name="infolabel" position="290,400" size="290,30" valign=\"center\" halign=\"center\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />           
+            <widget name="button_red" position="0,370" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />          
+            <widget name="button_green" position="140,370" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\"/>            
+            <widget name="button_yellow" position="280,370" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />            
+            <widget name="button_blue" position="420,370" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />             
+            <ePixmap pixmap="skin_default/buttons/red.png" position="0,370" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap pixmap="skin_default/buttons/green.png" position="140,370" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap pixmap="skin_default/buttons/yellow.png" position="280,370" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap pixmap="skin_default/buttons/blue.png" position="420,370" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap position="570,380" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+            <widget name="infolabel" position="10,415" size="500,15" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;16\" />           
         </screen>"""
          
     noCoverArtPNG = "/usr/share/enigma2/skin_default/no_coverArt.png"
@@ -121,7 +126,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.imageconverter = ImageConverter(116,116,self.setCoverArt)
         Screen.__init__(self, session)
         
-        self.tabs=[("personal Stations",self.loadPersonalStations)
+        self.tabs=[("Personal Stations",self.loadPersonalStations)
                    ,("Global Tags",self.loadGlobalTags)
                    ,("Top Tracks",self.loadTopTracks)
                    ,("Recent Tracks",self.loadRecentTracks)
@@ -149,10 +154,10 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self["tablist"] = self.tablist
         self["streamlist"] = MenuList([])
         
-        self["button_red"] = Label(_("play"))
-        self["button_green"] = Label(_("skip"))
-        self["button_yellow"] = Label(_("love"))
-        self["button_blue"] = Label(_("ban"))
+        self["button_red"] = Label(_("Play"))
+        self["button_green"] = Label(_("Skip"))
+        self["button_yellow"] = Label(_("Love"))
+        self["button_blue"] = Label(_("Ban"))
         self["infolabel"] = Label("")
         
         self["actions"] = ActionMap(["InfobarChannelSelection","WizardActions", "DirectionActions","MenuActions","ShortcutActions","GlobalActions","HelpActions","NumberActions"], 
@@ -216,13 +221,13 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.setInfoLabel("login failed! "+text,timeout=False)
 
     def onTrackSkiped(self,reason):
-        self.setInfoLabel("Track skiped")
+        self.setInfoLabel("Track skipped")
 
     def onTrackLoved(self,reason):
         self.setInfoLabel("Track loved")
     
     def onTrackBanned(self,reason):
-        self.setInfoLabel("Track baned")
+        self.setInfoLabel("Track banned")
         
     
     def onCommandFailed(self,reason):
@@ -237,15 +242,15 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.buildMenuList(tracks)
 
     def onRecentTracksLoaded(self,tracks):
-        self.setInfoLabel("recent Tracks loaded")
+        self.setInfoLabel("Recent Tracks loaded")
         self.buildMenuList(tracks)
         
     def onRecentBannedTracksLoaded(self,tracks):
-        self.setInfoLabel("banned Tracks loaded")
+        self.setInfoLabel("Banned Tracks loaded")
         self.buildMenuList(tracks)
 
     def onRecentLovedTracksLoaded(self,tracks):
-        self.setInfoLabel("loved Tracks loaded")
+        self.setInfoLabel("Loved Tracks loaded")
         self.buildMenuList(tracks)
 
     def onNeighboursLoaded(self,user):
@@ -354,9 +359,9 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.resetScreensaverTimer()
         if self.streamplayer.is_playing:
             self.streamplayer.stop(force=True)
-            self.setInfoLabel("stream stopped")
+            self.setInfoLabel("Stream stopped")
         else:
-            self.setInfoLabel("starting stream",timeout=True)
+            self.setInfoLabel("Starting stream",timeout=True)
             self.loadPlaylist()
             self.updateGUI() #forcing guiupdate, so we dont wait till guiupdatetimer fired
             self.guiupdatetimer.start(config.plugins.LastFM.metadatarefreshinterval.value*1000)
@@ -378,9 +383,9 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
             
         
         if self.streamplayer.is_playing is True:
-            self["button_red"].setText(_("stop"))
+            self["button_red"].setText(_("Stop"))
         else:
-            self["button_red"].setText(_("play"))            
+            self["button_red"].setText(_("Play"))            
         
         if self.streamplayer.is_playing is not True or self.shown is not True:
             return None
@@ -442,17 +447,17 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         tags.append(x)
         
         x= {}
-        x["_display"] = "play Artist Radio ..."
+        x["_display"] = "Play Artist Radio ..."
         x["stationurl"] = 'artist'
         tags.append(x)
 
         x= {}
-        x["_display"] = "play Groupe Radio ..."
+        x["_display"] = "Play Group Radio ..."
         x["stationurl"] = 'groupe'
         tags.append(x)
         
         x= {}
-        x["_display"] = "play Tag Radio ..."
+        x["_display"] = "Play Tag Radio ..."
         x["stationurl"] = 'tag'
         tags.append(x)
         
@@ -481,27 +486,27 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         tags = self.getGlobalTags()
 
     def loadTopTracks(self):
-        self.setInfoLabel("loading Top Tacks")
+        self.setInfoLabel("Loading Top Tacks")
         tracks = self.getTopTracks(config.plugins.LastFM.username.value)
 
     def loadRecentTracks(self):
-        self.setInfoLabel("loading recent Tracks")
+        self.setInfoLabel("Loading Recent Tracks")
         tracks = self.getRecentTracks(config.plugins.LastFM.username.value)
 
     def loadLovedTracks(self):
-        self.setInfoLabel("loading loved Tracks")
+        self.setInfoLabel("Loading Loved Tracks")
         tracks = self.getRecentLovedTracks(config.plugins.LastFM.username.value)
 
     def loadBannedTracks(self):
-        self.setInfoLabel("loading loved Tracks")
+        self.setInfoLabel("Loading Loved Tracks")
         tracks = self.getRecentBannedTracks(config.plugins.LastFM.username.value)
         
     def loadNeighbours(self):
-        self.setInfoLabel("loading Neighbours")
+        self.setInfoLabel("Loading Neighbours")
         tracks = self.getNeighbours(config.plugins.LastFM.username.value)
 
     def loadFriends(self):
-        self.setInfoLabel("loading Friends")
+        self.setInfoLabel("Loading Friends")
         tracks = self.getFriends(config.plugins.LastFM.username.value)
 
     def buildMenuList(self,items):
