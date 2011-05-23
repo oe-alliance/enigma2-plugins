@@ -68,7 +68,7 @@ class PictureView(Screen):
 
 class HelpPictureView(Screen):
 	skin = """
-		<screen position="25,200" size="670,290" title="Warnstufen" >
+		<screen position="center,center" size="670,290" title="Warnstufen" >
 			<eLabel position="0,0" zPosition="1" size="670,290" backgroundColor="black" />
 			<ePixmap position="320,260" zPosition="2" size="36,20" pixmap="skin_default/arrowdown.png" alphatest="on" />
 			<widget name="picture" position="-10,20" zPosition="2" size="690,225" />
@@ -128,7 +128,7 @@ class HelpPictureView(Screen):
 
 class UnwetterMain(Screen):
 	skin = """
-		<screen position="110,83" size="530,430" title="Unwetterzentrale" >
+		<screen position="center,center" size="530,430" title="Unwetterzentrale" >
 			<widget name="hmenu" position="5,0" zPosition="1" size="530,220" scrollbarMode="showOnDemand" />
 			<widget name="thumbnail" position="185,250" zPosition="2" size="140,150" />
 			<widget name="thumbland" position="435,390" zPosition="2" size="90,40" />
