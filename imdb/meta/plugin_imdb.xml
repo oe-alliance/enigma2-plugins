@@ -6,8 +6,8 @@
                     <author>Dream Multimedia</author>
                     <name>IMDb</name>
                     <packagename>enigma2-plugin-extensions-imdb</packagename>
-                    <shortdescription>Displays movie information from the InternetMovieDatabase</shortdescription>
-                    <description>With IMDb you can download and displays movie information (rating, poster, cast, synopsis etc.) about the selected event.</description>
+                    <shortdescription>Displays Movie Information from the InternetMovieDatabase</shortdescription>
+                    <description>With IMDb you can display downloaded movie information (rating, poster, cast, synopsis etc.) about the selected event.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_imdb_en.jpg" />
           </info>
 
