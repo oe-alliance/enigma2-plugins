@@ -115,19 +115,19 @@ class AutoTimer:
 		self.timers.append(timer)
 
 	def getEnabledTimerList(self):
-		return [x for x in self.timers if x.enabled]
+		return (x for x in self.timers if x.enabled)
 
 	def getTimerList(self):
 		return self.timers
 
 	def getTupleTimerList(self):
 		list = self.timers
-		return [(x,) for x in list]
+		return ((x,) for x in list)
 
 	def getSortedTupleTimerList(self):
 		list = self.timers[:]
 		list.sort()
-		return [(x,) for x in list]
+		return ((x,) for x in list)
 
 	def getUniqueId(self):
 		self.uniqueTimerId += 1
@@ -273,7 +273,7 @@ class AutoTimer:
 						if movielist is None:
 							print "[AutoTimer] listing of movies in " + dest + " failed"
 						else:
-							moviedict.setdefault(dest, [])
+							moviedict[dest] = []
 							append = moviedict[dest].append
 							while 1:
 								movieref = movielist.getNext()
