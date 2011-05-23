@@ -6,8 +6,8 @@
                     <author>3c5x9</author>
                     <name>LastFM</name>
                     <packagename>enigma2-plugin-extensions-lastfm</packagename>
-                    <shortdescription>Play music from Last.fm</shortdescription>
-                    <description>Play music from Last.fm.</description>
+                    <shortdescription>Play Internet Radio downloaded from Last.fm</shortdescription>
+                    <description>Select your favourite music (Artist, Album, Style).</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_lastfm.jpg" />		    
           </info>
 
