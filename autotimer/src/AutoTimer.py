@@ -122,12 +122,12 @@ class AutoTimer:
 
 	def getTupleTimerList(self):
 		list = self.timers
-		return ((x,) for x in list)
+		return [(x,) for x in list]
 
 	def getSortedTupleTimerList(self):
 		list = self.timers[:]
 		list.sort()
-		return ((x,) for x in list)
+		return [(x,) for x in list]
 
 	def getUniqueId(self):
 		self.uniqueTimerId += 1
