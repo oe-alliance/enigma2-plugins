@@ -90,6 +90,10 @@ class KiddyTimer():
         self.loopTimer = eTimer()
         self.loopTimer.callback.append(self.calculateTimes)
 
+        self.observeTimerStep = 60000 # Check every minute, if the time to acitivate the timer has come
+        self.observeTimer = eTimer()
+        self.observeTimer.callback.append(self.observeTime)
+
         config.misc.standbyCounter.addNotifier(self.enterStandby, initial_call = False)
 
     def gotSession(self, session):
@@ -106,7 +110,7 @@ class KiddyTimer():
         
     def startTimer(self,bForceStart=False,iRemainingSeconds=0):
         curStartYear = time.localtime().tm_year 
-        if curStartYear < 2010: 
+        if curStartYear < 2011: 
             # Time has not yet been set from transponder, wait until it has been set
             eDVBLocalTimeHandler.getInstance().m_timeUpdated.get().append(self.gotTime)
         else:
@@ -116,6 +120,8 @@ class KiddyTimer():
             else:
                 self.enabled = config.plugins.KiddyTimer.enabled.value
             if (self.enabled == True and self.timerHasToRun()) or bForceStart:   
+                # This command may be double, just made to be sure, the observer is stopped when the real timer starts
+                self.stopObserve()
                 # Date of the current day
                 self.currentDay = time.strftime("%d.%m.%Y" , time.localtime())
                 # First check for Cheat- attempts by kids
@@ -141,6 +147,9 @@ class KiddyTimer():
                     self.askForActivation()
                 else:
                     self.startLoop()
+            else:
+                if (self.enabled == True):
+                    self.startObserve()
 
     def gotTime(self):
         eDVBLocalTimeHandler.getInstance().m_timeUpdated.get().remove(self.gotTime)
@@ -151,6 +160,7 @@ class KiddyTimer():
             self.saveValues()
         self.toggleActiveState(False)
         self.stopLoop()
+        self.stopObserve()
         self.setPluginStatus("SHUTDOWN")
         self.iServiceReference = None
         self.dialog = None
@@ -170,14 +180,36 @@ class KiddyTimer():
         iPluginStart = KTglob.getSecondsFromClock( [curStartTime[3],curStartTime[4]] )
         iMonitorEnd = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorEndTime.getValue())  
         iMonitorStart = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorStartTime.getValue())  
-        return (iPluginStart < iMonitorEnd) & (iPluginStart > iMonitorStart)
+        return (iPluginStart < iMonitorEnd) & (iPluginStart >= iMonitorStart)
 
     def startLoop(self):
         self.loopTimer.start(self.loopTimerStep,1)
     
     def stopLoop(self):
         self.loopTimer.stop()
-                           
+    
+    def startObserve(self):
+        curStartTime = time.localtime()
+        iPluginStart = KTglob.getSecondsFromClock( [curStartTime[3],curStartTime[4]] )
+        iMonitorStart = KTglob.getSecondsFromClock(config.plugins.KiddyTimer.monitorStartTime.getValue())  
+
+        # If we are after Pluginstart, then sleep until next day
+        if (iPluginStart > iMonitorStart):
+            iMonitorStart += 86400
+
+        iObserveTimerStep = (iMonitorStart - iPluginStart)*1000 + 1000
+        print "[KiddyTimer] setting plugin idle for ms=", iObserveTimerStep
+        self.observeTimer.start(iObserveTimerStep, False)
+        
+    def stopObserve(self):
+        self.observeTimer.stop()
+    
+    def observeTime(self):
+        print "[KiddyTimer] Observer checking if plugin has to run"
+        if (self.timerHasToRun()):
+            self.stopObserve()
+            self.startTimer()
+    
     def detectCheatAttempt(self):
         sLastStatus = config.plugins.KiddyTimer.lastStatus.value
         if (sLastStatus == "RUNNING"):
