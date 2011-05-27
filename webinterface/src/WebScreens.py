@@ -385,6 +385,6 @@ class TPMWebScreen(WebScreen):
 class ExternalWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-	
+
 		from WebComponents.Sources.External import External
 		self["External"] = External()

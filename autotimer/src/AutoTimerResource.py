@@ -10,6 +10,8 @@ from enigma import eServiceReference
 from . import _, iteritems
 from . import plugin
 
+API_VERSION = "1.0"
+
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
 	def getAutoTimerInstance(self):

@@ -12,6 +12,8 @@ except ImportError as ie:
 	from urllib.parse import unquote
 	iteritems = lambda d: d.items()
 
+API_VERSION = "1.0"
+
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
 		state = False
