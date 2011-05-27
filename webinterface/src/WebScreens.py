@@ -381,3 +381,10 @@ class TPMWebScreen(WebScreen):
 		
 		from WebComponents.Sources.TPMChallenge import TPMChallenge
 		self["TPM"] = TPMChallenge()
+
+class ExternalWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+	
+		from WebComponents.Sources.External import External
+		self["External"] = External()

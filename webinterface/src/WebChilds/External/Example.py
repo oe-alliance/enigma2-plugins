@@ -5,4 +5,4 @@
 #from twisted.python import util
 #
 #
-#addExternalChild( ["example", static.File(util.sibpath(__file__, "example"))] )
+#addExternalChild( ["example", static.File(util.sibpath(__file__, "example")), "Example Module", "0.1a"] )
