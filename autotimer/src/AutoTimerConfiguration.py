@@ -520,7 +520,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 
 	# Duplicate Description
 	if defaultTimer.getAvoidDuplicateDescription():
-		append(' avoidDuplicateDescription="1" ')
+		extend((' avoidDuplicateDescription="', str(defaultTimer.getAvoidDuplicateDescription()), '"'))
 
 	# Only display justplay if true
 	if defaultTimer.justplay:
