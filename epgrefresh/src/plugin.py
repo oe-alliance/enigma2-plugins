@@ -17,7 +17,13 @@ end = mktime((
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 
+pluginName = _("EPG Refresh")
+pluginDescription = _("Automated EPG update")
+
+#Configuration
+#print "[EPGRefresh] Set config defaults"
 config.plugins.epgrefresh = ConfigSubsection()
+config.plugins.epgrefresh.menu = ConfigSelection(default = "plugin", choices = [("plugin", _("Plugin menu")), ("extensions", _("Extensions menu"))])
 config.plugins.epgrefresh.enabled = ConfigYesNo(default = False)
 config.plugins.epgrefresh.begin = ConfigClock(default = int(begin))
 config.plugins.epgrefresh.end = ConfigClock(default = int(end))
@@ -139,7 +145,7 @@ def eventinfo(session, servicelist, **kwargs):
 	epgrefresh.services[0].add(EPGRefreshService(str(sref), None))
 
 def Plugins(**kwargs):
-	return [
+	list = [
 		PluginDescriptor(
 			name = "EPGRefresh",
 			where = [
@@ -150,14 +156,26 @@ def Plugins(**kwargs):
 			wakeupfnc = getNextWakeup
 		),
 		PluginDescriptor(
-			name = "EPGRefresh",
-			description = _("Automatically refresh EPG"),
-			where = PluginDescriptor.WHERE_PLUGINMENU,
-			fnc = main
-		),
-		PluginDescriptor(
 			name = _("add to EPGRefresh"),
 			where = PluginDescriptor.WHERE_EVENTINFO,
 			fnc = eventinfo
 		),
 	]
+	
+	if config.plugins.epgrefresh.menu.value == "plugin":
+		list.append (PluginDescriptor(
+			name = pluginName, 
+			description = pluginDescription, 
+			where = PluginDescriptor.WHERE_PLUGINMENU, 
+			#icon = "elektro.png", 
+			fnc=main)
+		)
+	else:
+		list.append (PluginDescriptor(
+			name = pluginName, 
+			description = pluginDescription, 
+			where = PluginDescriptor.WHERE_EXTENSIONSMENU, 
+			fnc=main)
+		)		
+	
+	return list

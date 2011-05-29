@@ -7,8 +7,10 @@
                     <name>EPGRefresh</name>
                     <packagename>enigma2-plugin-extensions-epgrefresh</packagename>
                     <shortdescription>Automatically refresh EPG</shortdescription>
-                    <description>EPGRefresh will automatically switch to user-defined channels when the box is idling\n
-		    (in standby mode without any running recordings) to perform updates of the epg information on these channels.</description>
+                    <description>EPGRefresh will automatically switch to user-defined channels when the box is idleing\n
+		    		(i.e. in standby mode and no recordings running) to perform updates of the EPG information on these channels.\n
+		    		On multi-tuner boxes it may optionally run in background hidden or in PiP, so not disturbing the current TV program.
+		    		</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_epgrefresh_en.jpg" />
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->

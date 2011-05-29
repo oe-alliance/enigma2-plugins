@@ -19,28 +19,35 @@ from Components.config import config, getConfigListEntry
 from EPGRefresh import epgrefresh
 from Components.SystemInfo import SystemInfo
 
+epgrefresh_pluginversion = "1.0.0"
+epgrefresh_title = _("EPG Refresh Configuration Ver.") + " " + epgrefresh_pluginversion
+
 class EPGRefreshConfiguration(Screen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""
-
-	skin = """<screen name="EPGRefreshConfiguration" title="Configure EPGRefresh" position="center,center" size="565,370">
+        
+        skin = """<screen name="EPGRefreshConfiguration" title="%s" position="center,center" size="600,450">
 		<ePixmap position="0,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 		<ePixmap position="420,5" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="562,15" size="35,25" pixmap="skin_default/buttons/key_info.png" alphatest="on" />
+		
 		<widget source="key_red" render="Label" position="0,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_green" render="Label" position="140,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_blue" render="Label" position="420,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="config" position="5,50" size="555,250" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="0,301" zPosition="1" size="565,2" />
-		<widget source="help" render="Label" position="5,305" size="555,63" font="Regular;21" />
-	</screen>"""
-
+		
+		<widget name="config" position="5,50" size="590,295" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,355" zPosition="1" size="565,2" />
+		<widget source="help" render="Label" position="5,365" size="590,83" font="Regular;21" />
+		
+	</screen>""" %(epgrefresh_title)
+	
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
 		# Summary
-		self.setup_title = _("EPGRefresh Configuration")
+		self.setup_title = epgrefresh_title
 		self.onChangedEntry = []
 
 		# Although EPGRefresh keeps services in a Set we prefer a list
@@ -50,6 +57,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		)
 
 		self.list = [
+			getConfigListEntry(_("Show in"), config.plugins.epgrefresh.menu, _("Specify whether plugin shall show up in plugin menu or extension menu (needs GUI restart).")),
 			getConfigListEntry(_("Refresh EPG automatically"), config.plugins.epgrefresh.enabled, _("Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu.")),
 			getConfigListEntry(_("Show popup when refresh starts and ends"), config.plugins.epgrefresh.enablemessage, _("This setting controls whether or not an informational message will be shown at start and completion of refresh.")),
 			getConfigListEntry(_("Wake up from deep standby for EPG refresh"), config.plugins.epgrefresh.wakeup, _("If this is enabled, the plugin will wake up the receiver from deep standby if possible. Otherwise it needs to be switched on already.")),
@@ -61,7 +69,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 			getConfigListEntry(_("Shutdown after EPG refresh"), config.plugins.epgrefresh.afterevent, _("This setting controls whether the receiver should be set to deep standby after refresh is completed.")),
                 ]
 		if SystemInfo.get("NumVideoDecoders", 1) > 1:
-			self.list.insert(2, getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, you can choose a way that better suits your needs here, e.g. hidden, fake recording or regular Picture in Picture.")))
+			self.list.insert(3, getConfigListEntry(_("Refresh EPG using"), config.plugins.epgrefresh.adapter, _("If you want to refresh the EPG in background, here you can choose the method which best suits your needs, e.g. hidden, fake reocrding or regular Picture in Picture.")))
 
 		try:
 			# try to import autotimer module to check for its existence
@@ -73,6 +81,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 			print "[EPGRefresh] AutoTimer Plugin not installed:", ie
 
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
+		
 		def selectionChanged():
 			if self["config"].current:
 				self["config"].current[1].onDeselect(self.session)
@@ -81,6 +90,7 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 				self["config"].current[1].onSelect(self.session)
 			for x in self["config"].onSelectionChanged:
 				x()
+				
 		self["config"].selectionChanged = selectionChanged
 		self["config"].onSelectionChanged.append(self.updateHelp)
 
@@ -105,11 +115,6 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 
 		# Trigger change
 		self.changed()
-
-		self.onLayoutFinish.append(self.setCustomTitle)
-
-	def setCustomTitle(self):
-		self.setTitle(_("Configure EPGRefresh"))
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
