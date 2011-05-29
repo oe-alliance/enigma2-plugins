@@ -17,13 +17,8 @@ end = mktime((
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 
-pluginName = _("EPG Refresh")
-pluginDescription = _("Automated EPG update")
-
 #Configuration
-#print "[EPGRefresh] Set config defaults"
 config.plugins.epgrefresh = ConfigSubsection()
-config.plugins.epgrefresh.menu = ConfigSelection(default = "plugin", choices = [("plugin", _("Plugin menu")), ("extensions", _("Extensions menu"))])
 config.plugins.epgrefresh.enabled = ConfigYesNo(default = False)
 config.plugins.epgrefresh.begin = ConfigClock(default = int(begin))
 config.plugins.epgrefresh.end = ConfigClock(default = int(end))
@@ -43,6 +38,7 @@ config.plugins.epgrefresh.adapter = ConfigSelection(choices = [
 		("record", _("Fake recording")),
 	], default = "main"
 )
+config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default = False)
 
 # convert previous parameter
 config.plugins.epgrefresh.background = ConfigYesNo(default = False)
@@ -58,7 +54,8 @@ from EPGRefresh import epgrefresh
 from EPGRefreshConfiguration import EPGRefreshConfiguration
 from EPGRefreshService import EPGRefreshService
 
-# Plugin definition
+# Plugin
+from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
 def standbyQuestionCallback(session, res = None):
@@ -144,6 +141,20 @@ def eventinfo(session, servicelist, **kwargs):
 
 	epgrefresh.services[0].add(EPGRefreshService(str(sref), None))
 
+# XXX: we need this helper function to identify the descriptor
+# Extensions menu
+def extensionsmenu(session, **kwargs):
+	main(session, **kwargs)
+
+def housekeepingExtensionsmenu(el):
+	if el.value:
+		plugins.addPlugin(extDescriptor)
+	else:
+		plugins.removePlugin(extDescriptor)
+
+config.plugins.epgrefresh.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
+extDescriptor = PluginDescriptor(name="EPGRefresh", description = _("Automatically refresh EPG"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart=False)
+
 def Plugins(**kwargs):
 	list = [
 		PluginDescriptor(
@@ -160,22 +171,14 @@ def Plugins(**kwargs):
 			where = PluginDescriptor.WHERE_EVENTINFO,
 			fnc = eventinfo
 		),
-	]
-	
-	if config.plugins.epgrefresh.menu.value == "plugin":
-		list.append (PluginDescriptor(
-			name = pluginName, 
-			description = pluginDescription, 
+		PluginDescriptor(
+			name = "EPGRefresh",
+			description = _("Automatically refresh EPG"),
 			where = PluginDescriptor.WHERE_PLUGINMENU, 
-			#icon = "elektro.png", 
-			fnc=main)
-		)
-	else:
-		list.append (PluginDescriptor(
-			name = pluginName, 
-			description = pluginDescription, 
-			where = PluginDescriptor.WHERE_EXTENSIONSMENU, 
-			fnc=main)
-		)		
-	
+			fnc = main
+		),
+	]
+	if config.plugins.epgrefresh.show_in_extensionsmenu.value:
+		list.append(extDescriptor)
+
 	return list
