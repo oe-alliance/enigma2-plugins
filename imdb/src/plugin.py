@@ -5,6 +5,7 @@ from enigma import ePicLoad, eServiceReference
 from Screens.Screen import Screen
 from Screens.EpgSelection import EPGSelection
 from Screens.ChannelSelection import SimpleChannelSelection
+from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -16,6 +17,7 @@ from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from os import environ as os_environ
+from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 import re
 import htmlentitydefs
 import urllib
@@ -166,7 +168,7 @@ class IMDB(Screen):
 			"green": self.showMenu,
 			"yellow": self.showDetails,
 			"blue": self.showExtras,
-			"contextMenu": self.openChannelSelection,
+			"contextMenu": self.contextMenuPressed,
 			"showEventInfo": self.showDetails
 		}, -1)
 
@@ -343,13 +345,35 @@ class IMDB(Screen):
 			self["ratinglabel"].hide()
 			self.Page = 2
 
+	def contextMenuPressed(self):
+		list = [
+			(_("Enter search"), self.openVirtualKeyBoard),
+			(_("Select from EPG"), self.openChannelSelection),
+		]
+
+		self.session.openWithCallback(
+			self.menuCallback,
+			ChoiceBox,
+			list = list,
+		)
+
+	def menuCallback(self, ret = None):
+		ret and ret[1]()
+
+	def openVirtualKeyBoard(self):
+		self.session.openWithCallback(
+			self.gotSearchString,
+			NTIVirtualKeyBoard,
+			title = _("Enter text to search for")
+		)
+
 	def openChannelSelection(self):
 		self.session.openWithCallback(
-			self.channelSelectionClosed,
+			self.gotSearchString,
 			IMDBChannelSelection
 		)
 
-	def channelSelectionClosed(self, ret = None):
+	def gotSearchString(self, ret = None):
 		if ret:
 			self.eventName = ret
 			self.Page = 0
