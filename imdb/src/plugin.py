@@ -373,7 +373,7 @@ class IMDB(Screen):
 				self.eventName = event.getEventName()
 		if self.eventName is not "":
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
-			event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore'))
+			event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore')).replace('%20', '+')
 			localfile = "/tmp/imdbquery.html"
 			fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 			print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
@@ -437,7 +437,7 @@ class IMDB(Screen):
 				if splitpos > 0 and self.eventName.endswith(')'):
 					self.eventName = self.eventName[splitpos+1:-1]
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.eventName))
-					event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore'))
+					event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore')).replace('%20', '+')
 					localfile = "/tmp/imdbquery.html"
 					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 					print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
@@ -576,21 +576,17 @@ def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
 
 def Plugins(**kwargs):
-	try:
-		return [PluginDescriptor(name="IMDb Details",
-				description=_("Query details from the Internet Movie Database"),
-				icon="imdb.png",
-				where = PluginDescriptor.WHERE_PLUGINMENU,
-				fnc = main),
-				PluginDescriptor(name="IMDb Details",
-				description=_("Query details from the Internet Movie Database"),
-				where = PluginDescriptor.WHERE_EVENTINFO,
-				fnc = eventinfo)
-				]
-	except AttributeError:
-		wherelist = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]
-		return PluginDescriptor(name="IMDb Details",
-				description=_("Query details from the Internet Movie Database"),
-				icon="imdb.png",
-				where = wherelist,
-				fnc=main)	
+	return [PluginDescriptor(name="IMDb Details",
+			description=_("Query details from the Internet Movie Database"),
+			icon="imdb.png",
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main,
+			needsRestart=False,
+			),
+			PluginDescriptor(name="IMDb Details",
+			description=_("Query details from the Internet Movie Database"),
+			where=PluginDescriptor.WHERE_EVENTINFO,
+			fnc=eventinfo,
+			needsRestart=False,
+			),
+		]
