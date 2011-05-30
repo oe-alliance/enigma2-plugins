@@ -156,6 +156,14 @@ config.plugins.epgrefresh.show_in_extensionsmenu.addNotifier(housekeepingExtensi
 extDescriptor = PluginDescriptor(name="EPGRefresh", description = _("Automatically refresh EPG"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart=False)
 
 def Plugins(**kwargs):
+	# NOTE: this might be a little odd to check this, but a user might expect
+	# the plugin to resume normal operation if installed during runtime, but
+	# this is not given if the plugin is supposed to run in background (as we
+	# won't be handed the session which we need to zap). So in turn we require
+	# a restart if-and only if-we're installed during runtime AND running in
+	# background. To improve the user experience in this situation, we hide
+	# all references to this plugin.
+	needsRestart = config.plugins.epgrefresh.enabled.value and not plugins.firstRun
 	list = [
 		PluginDescriptor(
 			name = "EPGRefresh",
@@ -164,21 +172,25 @@ def Plugins(**kwargs):
 				PluginDescriptor.WHERE_SESSIONSTART
 			],
 			fnc = autostart,
-			wakeupfnc = getNextWakeup
+			wakeupfnc = getNextWakeup,
+			needsRestart = needsRestart,
 		),
 		PluginDescriptor(
 			name = _("add to EPGRefresh"),
 			where = PluginDescriptor.WHERE_EVENTINFO,
-			fnc = eventinfo
+			fnc = eventinfo,
+			needsRestart = needsRestart,
 		),
 		PluginDescriptor(
 			name = "EPGRefresh",
 			description = _("Automatically refresh EPG"),
 			where = PluginDescriptor.WHERE_PLUGINMENU, 
-			fnc = main
+			fnc = main,
+			needsRestart = needsRestart,
 		),
 	]
 	if config.plugins.epgrefresh.show_in_extensionsmenu.value:
+		extDescriptor.needsRestart = needsRestart
 		list.append(extDescriptor)
 
 	return list
