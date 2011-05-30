@@ -24,7 +24,7 @@ VERSION = "1.0.0"
 class EPGRefreshConfiguration(Screen, ConfigListScreen):
 	"""Configuration of EPGRefresh"""
         
-        skin = """<screen name="EPGRefreshConfiguration" position="center,center" size="600,450">
+        skin = """<screen name="EPGRefreshConfiguration" position="center,center" size="600,430">
 		<ePixmap position="0,5" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,5" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,5" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -36,9 +36,9 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		<widget source="key_yellow" render="Label" position="280,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_blue" render="Label" position="420,5" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 
-		<widget name="config" position="5,50" size="590,295" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="0,355" zPosition="1" size="565,2" />
-		<widget source="help" render="Label" position="5,365" size="590,83" font="Regular;21" />
+		<widget name="config" position="5,50" size="590,275" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,335" zPosition="1" size="565,2" />
+		<widget source="help" render="Label" position="5,345" size="590,83" font="Regular;21" />
 	</screen>"""
 	
 	def __init__(self, session):
