@@ -92,5 +92,5 @@ def main(session, service, **kwargs):
 
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="MovieSearch", description=_("search..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+	return PluginDescriptor(name="MovieSearch", description=_("search..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart = False)
 
