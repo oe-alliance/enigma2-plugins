@@ -26,9 +26,9 @@ from os import unlink
 
 class PictureView(Screen):
 	skin = """
-		<screen position="0,0" size="720,576" flags="wfNoBorder" title="UWZ" >
+		<screen position="center,center" size="720,576" flags="wfNoBorder" title="UWZ" >
 			<eLabel position="0,0" zPosition="1" size="720,576" backgroundColor="black" />
-			<ePixmap position="635,540" zPosition="2" size="36,20" pixmap="skin_default/buttons/key_info.png" alphatest="on" />
+			<ePixmap position="655,540" zPosition="2" size="36,20" pixmap="skin_default/buttons/key_info.png" alphatest="on" />
 			<widget name="picture" position="80,10" zPosition="2" size="550,550" />
 		</screen>"""
 
@@ -68,10 +68,12 @@ class PictureView(Screen):
 
 class HelpPictureView(Screen):
 	skin = """
-		<screen position="center,center" size="670,290" title="Warnstufen" >
-			<eLabel position="0,0" zPosition="1" size="670,290" backgroundColor="black" />
-			<ePixmap position="320,260" zPosition="2" size="36,20" pixmap="skin_default/arrowdown.png" alphatest="on" />
-			<widget name="picture" position="-10,20" zPosition="2" size="690,225" />
+		<screen position="center,center" size="700,320" title="Warnstufen" >
+			<eLabel position="0,0" zPosition="1" size="700,320" backgroundColor="black" />
+			<ePixmap position="80,270" zPosition="2" size="45,45" pixmap="skin_default/vkey_left.png" alphatest="on" />
+			<ePixmap position="328,270" zPosition="2" size="45,45" pixmap="skin_default/vkey_esc.png" alphatest="on" />
+			<ePixmap position="575,270" zPosition="2" size="45,45" pixmap="skin_default/vkey_right.png" alphatest="on" />
+			<widget name="picture" position="5,20" zPosition="2" size="690,225" />
 		</screen>"""
 
 	def __init__(self, session):
