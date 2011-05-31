@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-lastfm
-Version: 0.4-20070408-r0
-Description: a client to use last.fm, the social music revolution 
+Version: 0.5-20110530-r0
+Description: Listen to Last.FM Internet Radio", the social music revolution 
 Maintainer: 3c5x9 <3c5x9@gmx.net>
 Depends: enigma2 (>> 1.0git20070908), python-twisted-web, gst-plugin-neonhttpsrc, python-crypt
