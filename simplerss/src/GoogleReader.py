@@ -84,7 +84,7 @@ class GoogleReader:
 			dom = cet_fromstring(res)
 			for item in dom.getiterator():
 				if item.tag == 'string':
-					if item.get('name') == 'id':
+					if item.get('name') == 'id' and item.text.startswith('feed/'):
 						l.append(UniversalFeed(item.text[5:], True, True))
 		if defer:
 			defer.callback(l)

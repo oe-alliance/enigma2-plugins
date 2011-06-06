@@ -48,8 +48,8 @@ def main(session, **kwargs):
 		from RSSPoller import RSSPoller
 		rssPoller = RSSPoller()
 
-	# Show Overview when we have feeds
-	if rssPoller.feeds:
+	# Show Overview when we have feeds (or retrieving them from google)
+	if rssPoller.feeds or config.plugins.simpleRSS.enable_google_reader.value:
 		from RSSScreens import RSSOverview
 		session.openWithCallback(closed, RSSOverview, rssPoller)
 	# Show Setup otherwise

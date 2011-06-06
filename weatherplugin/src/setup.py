@@ -55,9 +55,11 @@ class WeatherPluginEntriesListConfigScreen(Screen):
 			<widget render="Label" source="language" position="155,0" size="150,50" font="Regular;20" halign="left"/>
 			<widget name="entrylist" position="0,50" size="550,300" scrollbarMode="showOnDemand"/>
 			<widget render="Label" source="key_red" position="0,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_green" position="140,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="green" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_yellow" position="280,350" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="yellow" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget render="Label" source="key_blue" position="420,350" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<ePixmap position="0,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<ePixmap position="280,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 			<ePixmap position="420,350" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 		</screen>""" % _("WeatherPlugin: List of Entries")
@@ -67,7 +69,8 @@ class WeatherPluginEntriesListConfigScreen(Screen):
 
 		self["city"] = StaticText(_("City"))
 		self["language"] = StaticText(_("Language"))
-		self["key_red"] = StaticText(_("Add"))
+		self["key_red"] = StaticText(_("Back"))
+		self["key_green"] = StaticText(_("Add"))		
 		self["key_yellow"] = StaticText(_("Edit"))
 		self["key_blue"] = StaticText(_("Delete"))
 		self["entrylist"] = WeatherPluginEntryList([])
@@ -75,7 +78,8 @@ class WeatherPluginEntriesListConfigScreen(Screen):
 			{
 			 "ok"	:	self.keyOK,
 			 "back"	:	self.keyClose,
-			 "red"	:	self.keyRed,
+			 "red"	:	self.keyClose,
+			 "green":	self.keyGreen,			 
 			 "yellow":	self.keyYellow,
 			 "blue": 	self.keyDelete,
 			 }, -1)
@@ -87,7 +91,7 @@ class WeatherPluginEntriesListConfigScreen(Screen):
 	def keyClose(self):
 		self.close(-1, None)
 
-	def keyRed(self):
+	def keyGreen(self):
 		self.session.openWithCallback(self.updateList,WeatherPluginEntryConfigScreen,None)
 
 	def keyOK(self):

@@ -491,12 +491,12 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.offsetbegin: _("Time in minutes to prepend to recording."),
 			self.offsetend: _("Time in minutes to append to recording."),
 			self.duration: _("Should this AutoTimer only match up to a certain event duration?"),
-			self.durationlength: _("Maximum event duration to match. If an event is longer than this ammount of time (without offset) it won't be matched."),
+			self.durationlength: _("Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."),
 			self.afterevent: _("Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."),
 			self.afterevent_timespan: _("Restrict \"after event\" to a certain timespan?"),
 			self.afterevent_timespanbegin: _("Lower bound of timespan."),
 			self.afterevent_timespanend: _("Upper bound of timespan."),
-			self.counter: _("With this option you can restrict the AutoTimer to a certain ammount of scheduled recordings. Set this to 0 to disable this functionality."),
+			self.counter: _("With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."),
 			self.counterLeft: _("Number of scheduled recordings left."),
 			self.counterFormatString: _("The counter can automatically be reset to the limit at certain intervals."),
 			self.avoidDuplicateDescription: _("When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."),
@@ -573,7 +573,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		# Only allow setting matchLeft when counting hits
 		if self.counter.value:
 			if not self.editingDefaults:
-				list.append(getConfigListEntry(_("Ammount of recordings left"), self.counterLeft))
+				list.append(getConfigListEntry(_("Amount of recordings left"), self.counterLeft))
 			list.append(getConfigListEntry(_("Reset count"), self.counterFormatString))
 
 		list.append(getConfigListEntry(_("Require description to be unique"), self.avoidDuplicateDescription))

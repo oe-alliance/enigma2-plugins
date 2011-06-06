@@ -7,7 +7,7 @@
                     <name>UnwetterInfo</name>
                     <packagename>enigma2-plugin-extensions-unwetterinfo</packagename>
                     <shortdescription>German storm information</shortdescription>
-                    <description>UnwetterInfo shows german storm information.</description>
+                    <description>UnwetterInfo shows German storm information.</description>
                     <screenshot src="http://www.dreamboxupdate.com/preview/plugin_unwetterinfo.jpg" />		    
           </info>
 
