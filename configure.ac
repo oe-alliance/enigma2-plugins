@@ -157,11 +157,6 @@ eibox/po/Makefile
 eibox/src/Makefile
 eibox/src/images/Makefile
 
-elektro/Makefile
-elektro/meta/Makefile
-elektro/po/Makefile
-elektro/src/Makefile
-
 emailclient/Makefile
 emailclient/meta/Makefile
 emailclient/po/Makefile
@@ -411,10 +406,6 @@ startupservice/Makefile
 startupservice/meta/Makefile
 startupservice/po/Makefile
 startupservice/src/Makefile
-
-startuptostandby/Makefile
-startuptostandby/meta/Makefile
-startuptostandby/src/Makefile
 
 svdrp/Makefile
 svdrp/meta/Makefile

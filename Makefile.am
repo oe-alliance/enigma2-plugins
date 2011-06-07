@@ -17,7 +17,6 @@ SUBDIRS = \
 	easyinfo \
 	easymedia \
 	eibox \
-	elektro \
 	emailclient \
 	epgrefresh \
 	epgsearch \
