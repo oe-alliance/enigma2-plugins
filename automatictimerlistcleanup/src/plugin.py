@@ -119,8 +119,8 @@ def setup(session, **kwargs):
 def startSetup(menuid):
 	if menuid != "system": # show setup only in system level menu
 		return []
-	return [(_("Automatic Timerlist Cleanup Setup"), setup, "automatictimerlistcleanup", 46)]
+	return [(_("Timerlist Cleanup Setup"), setup, "automatictimerlistcleanup", 46)]
 	
 def Plugins(**kwargs):
-	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart), PluginDescriptor(name="Automatic Timerlist Cleanup Setup", description=_("Automatic Timerlist Cleanup Setup"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
+	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart), PluginDescriptor(name="Timerlist Cleanup Setup", description=_("Automatic Timerlist Cleanup Setup"), where = PluginDescriptor.WHERE_MENU, fnc=startSetup) ]
 

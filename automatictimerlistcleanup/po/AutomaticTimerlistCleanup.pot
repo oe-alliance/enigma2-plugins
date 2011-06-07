@@ -46,9 +46,13 @@ msgid "older than 6 weeks"
 msgstr ""
 
 #: ../src/plugin.py:49
-#: ../src/plugin.py:122
 #: ../src/plugin.py:125
 msgid "Automatic Timerlist Cleanup Setup"
+msgstr ""
+
+#: ../src/plugin.py:122
+#: ../src/plugin.py:125
+msgid "Timerlist Cleanup Setup"
 msgstr ""
 
 #: ../src/plugin.py:53

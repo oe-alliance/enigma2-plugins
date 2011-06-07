@@ -50,10 +50,14 @@ msgid "older than 6 weeks"
 msgstr "Più vecchi di 6 settimane"
 
 #: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:49
-#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:122
 #: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:125
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Configurazione Automatic Timerlist Cleanup"
+
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:122
+#: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:125
+msgid "Timerlist Cleanup Setup"
+msgstr "Configurazione Timerlist Cleanup"
 
 #: /home/dario/Plugins/automatictimerlistcleanup/src/plugin.py:53
 msgid "Cancel"

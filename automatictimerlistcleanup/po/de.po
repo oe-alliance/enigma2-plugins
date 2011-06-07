@@ -46,10 +46,14 @@ msgid "older than 6 weeks"
 msgstr "älter als 6 Wochen"
 
 #: ../src/plugin.py:49
-#: ../src/plugin.py:122
 #: ../src/plugin.py:125
 msgid "Automatic Timerlist Cleanup Setup"
-msgstr "Automatisches Aufräumen der Timerlisten"
+msgstr "Automatisches Aufräumen der Timerliste"
+
+#: ../src/plugin.py:122
+#: ../src/plugin.py:125
+msgid "Timerlist Cleanup Setup"
+msgstr "Aufräumen Timerliste Einstellung"
 
 #: ../src/plugin.py:53
 msgid "Cancel"
