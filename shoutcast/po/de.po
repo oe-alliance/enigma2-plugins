@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shoutcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-03 14:09+0100\n"
+"POT-Creation-Date: 2011-06-08 19:11+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Dr. Best <dr.best@dreambox-tools.info>\n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: Dr.Best <dr.best@dreambox-tools.info>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,110 +13,130 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/plugin.py:65
+#: shoutcast\src/plugin.py:68
+msgid "Plugin menu"
+msgstr "Plugin Menü"
+
+#: shoutcast\src/plugin.py:68
+msgid "Extensions menu"
+msgstr "Erweiterungs-Menü"
+
+#: shoutcast\src/plugin.py:69
+msgid "SHOUTcast"
+msgstr "SHOUTcast"
+
+#: shoutcast\src/plugin.py:70
+msgid "Listen to SHOUTcast Internet Radio"
+msgstr "SHOUTcast Internet-Radio hören"
+
+#: shoutcast\src/plugin.py:71
 msgid "All"
 msgstr "Alle"
 
-#: ../src/plugin.py:65
+#: shoutcast\src/plugin.py:71
 msgid ">= 64 kbps"
 msgstr ">= 64 kbps"
 
-#: ../src/plugin.py:65
+#: shoutcast\src/plugin.py:71
 msgid ">= 128 kbps"
 msgstr ">= 128 kbps"
 
-#: ../src/plugin.py:65
+#: shoutcast\src/plugin.py:71
 msgid ">= 192 kbps"
 msgstr ">= 192 kbps"
 
-#: ../src/plugin.py:65
+#: shoutcast\src/plugin.py:71
 msgid ">= 256 kbps"
 msgstr ">= 256 kbps"
 
-#: ../src/plugin.py:66
+#: shoutcast\src/plugin.py:72
 msgid "Off"
 msgstr "Aus"
 
-#: ../src/plugin.py:66
+#: shoutcast\src/plugin.py:72
 msgid "every minute"
 msgstr "jede Minute"
 
-#: ../src/plugin.py:66
+#: shoutcast\src/plugin.py:72
 msgid "every three minutes"
 msgstr "alle 3 Minuten"
 
-#: ../src/plugin.py:66
+#: shoutcast\src/plugin.py:72
 msgid "every five minutes"
 msgstr "alle 5 Minuten"
 
-#: ../src/plugin.py:109
-msgid "listen to shoutcast internet-radio"
-msgstr "shoutcast Internet-Radio"
+#: shoutcast\src/plugin.py:119
+#: shoutcast\src/plugin.py:127
+#: shoutcast\src/plugin.py:168
+msgid "Ver."
+msgstr "Ver."
 
-#: ../src/plugin.py:195
-#: ../src/plugin.py:273
+#: shoutcast\src/plugin.py:189
+#: shoutcast\src/plugin.py:267
 msgid "Record"
 msgstr "Aufnahme"
 
-#: ../src/plugin.py:196
+#: shoutcast\src/plugin.py:190
 msgid "Genres"
 msgstr "Genres"
 
-#: ../src/plugin.py:197
+#: shoutcast\src/plugin.py:191
 msgid "Stations"
 msgstr "Stationen"
 
-#: ../src/plugin.py:198
+#: shoutcast\src/plugin.py:192
 msgid "Favorites"
 msgstr "Favoriten"
 
-#: ../src/plugin.py:209
-#: ../src/plugin.py:374
+#: shoutcast\src/plugin.py:203
+#: shoutcast\src/plugin.py:368
 msgid "Getting SHOUTcast genre list..."
 msgstr "Erhalte SHOUTcast Genre Liste..."
 
-#: ../src/plugin.py:265
-#: ../src/plugin.py:312
+#: shoutcast\src/plugin.py:259
+#: shoutcast\src/plugin.py:306
 msgid "Stop record"
 msgstr "Beende Aufnahme"
 
-#: ../src/plugin.py:267
+#: shoutcast\src/plugin.py:261
 msgid "Recording stream station"
 msgstr "Aktuell laufende Aufnahme-Station"
 
-#: ../src/plugin.py:320
+#: shoutcast\src/plugin.py:314
 msgid "Do you really want to stop the recording?"
 msgstr "Soll die Aufnahme wirklich beendet werden?"
 
-#: ../src/plugin.py:323
+#: shoutcast\src/plugin.py:317
 msgid "Recording length"
 msgstr "Aufnahme-Länge"
 
-#: ../src/plugin.py:323
+#: shoutcast\src/plugin.py:317
 msgid "Enter in minutes (0 means unlimited)"
 msgstr "Eingabe in Minuten (0 = unbegrenzt)"
 
-#: ../src/plugin.py:325
+#: shoutcast\src/plugin.py:319
 msgid "Only running streamings can be recorded!"
 msgstr ""
 "Zur Zeit wird kein Radiosender abgespielt.\n"
 "Aufnahme wird nicht gestartet."
 
-#: ../src/plugin.py:334
+#: shoutcast\src/plugin.py:326
+#: shoutcast\src/plugin.py:374
 msgid "SHOUTcast genre list"
 msgstr "SHOUTcast Genre Liste"
 
-#: ../src/plugin.py:345
-#: ../src/plugin.py:489
+#: shoutcast\src/plugin.py:339
+#: shoutcast\src/plugin.py:483
+#: shoutcast\src/plugin.py:608
 #, python-format
 msgid "SHOUTcast station list for %s"
 msgstr "SHOUTcast Stationsliste für %s"
 
-#: ../src/plugin.py:360
+#: shoutcast\src/plugin.py:354
 msgid "Favorite list"
 msgstr "Favoritenliste"
 
-#: ../src/plugin.py:395
+#: shoutcast\src/plugin.py:389
 #, python-format
 msgid ""
 "%s\n"
@@ -125,7 +145,8 @@ msgstr ""
 "%s\n"
 "Grünen Knopf drücken, um den Vorgang zu wiederholen..."
 
-#: ../src/plugin.py:450
+#: shoutcast\src/plugin.py:430
+#: shoutcast\src/plugin.py:444
 #, python-format
 msgid ""
 "Getting streaming data from\n"
@@ -134,71 +155,71 @@ msgstr ""
 "Erhalte Daten von \n"
 "%s"
 
-#: ../src/plugin.py:485
+#: shoutcast\src/plugin.py:479
 msgid "No streaming data found..."
 msgstr "Keine Daten gefunden..."
 
-#: ../src/plugin.py:490
+#: shoutcast\src/plugin.py:482
 #, python-format
 msgid "genre %s"
 msgstr "Genre %s"
 
-#: ../src/plugin.py:491
+#: shoutcast\src/plugin.py:485
 #, python-format
 msgid "Getting %s"
 msgstr "Erhalte %s"
 
-#: ../src/plugin.py:532
+#: shoutcast\src/plugin.py:526
 msgid "Config"
 msgstr "Konfiguration"
 
-#: ../src/plugin.py:532
+#: shoutcast\src/plugin.py:526
 msgid "Search"
 msgstr "Suche"
 
-#: ../src/plugin.py:534
+#: shoutcast\src/plugin.py:528
 msgid "rename current selected favorite"
 msgstr "Umbenennen"
 
-#: ../src/plugin.py:535
+#: shoutcast\src/plugin.py:529
 msgid "remove current selected favorite"
 msgstr "Löschen"
 
-#: ../src/plugin.py:537
+#: shoutcast\src/plugin.py:531
 msgid "Add current selected genre to favorite"
 msgstr "Markiertes Genre zur Favoritenliste hinzufügen"
 
-#: ../src/plugin.py:539
+#: shoutcast\src/plugin.py:533
 msgid "Add current selected station to favorite"
 msgstr "Markierte Station zur Favoritenliste hinzufügen"
 
-#: ../src/plugin.py:541
+#: shoutcast\src/plugin.py:535
 msgid "Add current playing stream to favorite"
 msgstr "Laufender Sender zur Favoritenliste hinzufügen"
 
-#: ../src/plugin.py:542
+#: shoutcast\src/plugin.py:536
 msgid "Hide"
 msgstr "Verbergen"
 
-#: ../src/plugin.py:584
+#: shoutcast\src/plugin.py:578
 msgid "Enter new name for favorite item"
 msgstr "Neuen Namen für Favoriten eingeben"
 
-#: ../src/plugin.py:608
+#: shoutcast\src/plugin.py:602
 msgid "Enter text to search for"
 msgstr "Suchtext eingeben"
 
-#: ../src/plugin.py:613
+#: shoutcast\src/plugin.py:607
 #, python-format
 msgid "search-criteria %s"
 msgstr "Suchkriterium %s"
 
-#: ../src/plugin.py:616
+#: shoutcast\src/plugin.py:610
 #, python-format
 msgid "Searching SHOUTcast for %s..."
 msgstr "Durchsuche SHOUTcast nach %s..."
 
-#: ../src/plugin.py:639
+#: shoutcast\src/plugin.py:633
 #, python-format
 msgid ""
 "%s\n"
@@ -207,72 +228,88 @@ msgstr ""
 "%s\n"
 "Drücke OK um den Vorgang zu wiederholen..."
 
-#: ../src/plugin.py:681
+#: shoutcast\src/plugin.py:675
 #, python-format
 msgid "Title: %s"
 msgstr "Titel: %s"
 
-#: ../src/plugin.py:690
+#: shoutcast\src/plugin.py:684
 #, python-format
 msgid "This Dreambox can't decode %s streams!"
 msgstr "%s kann nicht dekodiert werden."
 
-#: ../src/plugin.py:710
+#: shoutcast\src/plugin.py:704
 msgid "Title: n/a"
 msgstr "Titel: n/a"
 
-#: ../src/plugin.py:711
+#: shoutcast\src/plugin.py:705
 #, python-format
 msgid "Station: %s"
 msgstr "Station: %s"
 
-#: ../src/plugin.py:768
-#: ../src/plugin.py:774
+#: shoutcast\src/plugin.py:762
+#: shoutcast\src/plugin.py:768
 #, python-format
 msgid "Audio: %s"
 msgstr "Audio: %s"
 
-#: ../src/plugin.py:769
-#: ../src/plugin.py:776
+#: shoutcast\src/plugin.py:763
+#: shoutcast\src/plugin.py:770
 #, python-format
 msgid "Bit rate: %s kbps"
 msgstr "Bitrate: %s kbps"
 
-#: ../src/plugin.py:866
-#: ../src/plugin.py:936
+#: shoutcast\src/plugin.py:858
+msgid "Setup"
+msgstr "Einrichtung"
+
+#: shoutcast\src/plugin.py:864
+#: shoutcast\src/plugin.py:940
 msgid "Cancel"
 msgstr "Abbruch"
 
-#: ../src/plugin.py:867
-#: ../src/plugin.py:937
+#: shoutcast\src/plugin.py:865
+#: shoutcast\src/plugin.py:941
 msgid "OK"
 msgstr "OK"
 
-#: ../src/plugin.py:871
+#: shoutcast\src/plugin.py:868
+msgid "Show in (needs GUI restart):"
+msgstr "Aufführen in (erfordert GUI Neustart):"
+
+#: shoutcast\src/plugin.py:869
+msgid "Name (needs GUI restart):"
+msgstr "Name (erfordert GUI Neustart):"
+
+#: shoutcast\src/plugin.py:870
+msgid "Description:"
+msgstr "Beschreibung:"
+
+#: shoutcast\src/plugin.py:871
 msgid "Streaming rate:"
 msgstr "Bitrate:"
 
-#: ../src/plugin.py:872
+#: shoutcast\src/plugin.py:872
 msgid "Reload station list:"
 msgstr "Stationsliste neu laden:"
 
-#: ../src/plugin.py:873
+#: shoutcast\src/plugin.py:873
 msgid "Rip to single file, name is timestamped"
 msgstr "In eine einzelne Datei speichern"
 
-#: ../src/plugin.py:874
+#: shoutcast\src/plugin.py:874
 msgid "Create a directory for each stream"
 msgstr "Verzeichnis für jeden Stream generieren"
 
-#: ../src/plugin.py:875
+#: shoutcast\src/plugin.py:875
 msgid "Add sequence number to output file"
 msgstr "Dateien mit fortlaufender Nummerierung generieren"
 
-#: ../src/plugin.py:876
+#: shoutcast\src/plugin.py:878
 msgid "Recording location:"
 msgstr "Aufnahmepfad"
 
-#: ../src/plugin.py:971
+#: shoutcast\src/plugin.py:975
 msgid "Invalid Location"
 msgstr "Ungültiger Aufnahmepfad"
 
