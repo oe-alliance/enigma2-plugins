@@ -1129,10 +1129,10 @@ def autostart(reason, **kwargs): #@UnusedVariable reason
 	debug("[EmailClient] - Autostart reason: %d kwargs: %s" %(reason, repr(kwargs)))
 	debug("[EmailClient] " + "$Revision$"[1:-1]	+ "$Date$"[7:23] + " starting")
 	import shutil
-	if os.path.isdir('/usr/lib/python2.6') and not os.path.isfile('/usr/lib/python2.6/uu.py'):
-		shutil.copy(resolveFilename(SCOPE_PLUGINS, "Extensions/EmailClient/uu.py"), '/usr/lib/python2.6/uu.py')
+	if os.path.isdir('/usr/lib/python2.6') and not os.path.isfile('/usr/lib/python2.6/uu.pyo'):
+		shutil.copy(resolveFilename(SCOPE_PLUGINS, "Extensions/EmailClient/uu.pyo"), '/usr/lib/python2.6/uu.pyo')
 	elif os.path.isdir('/usr/lib/python2.5') and not os.path.isfile('/usr/lib/python2.5/uu.py'):
-		shutil.copy(resolveFilename(SCOPE_PLUGINS, "Extensions/EmailClient/uu.py"), '/usr/lib/python2.5/uu.py')
+		shutil.copy(resolveFilename(SCOPE_PLUGINS, "Extensions/EmailClient/uu.pyo"), '/usr/lib/python2.5/uu.pyo')
 
 	if reason == 0:
 		getAccounts()
