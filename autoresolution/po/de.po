@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Automatic Screen Resolution V. 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-10 09:59+0100\n"
+"POT-Creation-Date: 2011-06-10 16:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: JuSt611\n"
@@ -26,11 +26,11 @@ msgstr "SD 30/60HZ Interlace Modus"
 
 #: ../src/plugin.py:25
 msgid "SD 25/50HZ Progressive Mode"
-msgstr "SD 25/50HZ Progressive Modus"
+msgstr "SD 25/50HZ Progressiv Modus"
 
 #: ../src/plugin.py:25
 msgid "SD 30/60HZ Progressive Mode"
-msgstr "SD 30/60HZ Progressive Modus"
+msgstr "SD 30/60HZ Progressiv Modus"
 
 #: ../src/plugin.py:26
 msgid "HD Interlace Mode"
@@ -38,7 +38,7 @@ msgstr "HD Interlace Modus"
 
 #: ../src/plugin.py:26
 msgid "HD Progressive Mode"
-msgstr "HD Progressive Modus"
+msgstr "HD Progressiv Modus"
 
 #: ../src/plugin.py:27
 msgid "Enable 720p24 Mode"
@@ -74,7 +74,7 @@ msgstr "ein"
 #: ../src/plugin.py:35
 #: ../src/plugin.py:37
 msgid "bob"
-msgstr ""
+msgstr "bestmöglich"
 
 #: ../src/plugin.py:39
 msgid "second"
@@ -156,81 +156,3 @@ msgstr "Autoresolution"
 msgid "Autoresolution Switch"
 msgstr "Autoresolution Umschaltung"
 
-#~ msgid "disabled"
-#~ msgstr "ausgeschaltet"
-
-#~ msgid "older than 4 weeks"
-#~ msgstr "älter als 4 Wochen"
-
-#~ msgid "older than 2 weeks"
-#~ msgstr "älter als 2 Wochen"
-
-#~ msgid "older than 1 week"
-#~ msgstr "älter als 1 Woche"
-
-#~ msgid "older than 3 days"
-#~ msgstr "älter als 3 Tage"
-
-#~ msgid "older than 1 day"
-#~ msgstr "älter als 1 Tag"
-
-#~ msgid "all"
-#~ msgstr "alle"
-
-#~ msgid "last 10"
-#~ msgstr "die 10 neuesten"
-
-#~ msgid "last 5"
-#~ msgstr "die 5 neuesten"
-
-#~ msgid "last 3"
-#~ msgstr "die 3 neuesten"
-
-#~ msgid "last 1"
-#~ msgstr "die neueste"
-
-#~ msgid "older than 6 months"
-#~ msgstr "älter als 6 Monate"
-
-#~ msgid "older than 4 months"
-#~ msgstr "älter als 4 Monate"
-
-#~ msgid "older than 2 months"
-#~ msgstr "älter als 2 Monate"
-
-#~ msgid "older than 6 weeks"
-#~ msgstr "älter als 6 Wochen"
-
-#~ msgid "immediately after recording"
-#~ msgstr "sofort nach der Aufnahme"
-
-#~ msgid "Automatic System Cleanup Setup"
-#~ msgstr "Automatische Systembereinigung einrichten"
-
-#~ msgid "Ver."
-#~ msgstr "Ver."
-
-#~ msgid "Delete crashlogs"
-#~ msgstr "Crashlogs löschen"
-
-#~ msgid "Maximum number of crashlogs to keep"
-#~ msgstr "Maximale Anzahl von Crashlogs"
-
-#~ msgid "Delete system setting backups (latest kept anyway)"
-#~ msgstr "Einstellungs-Sicherungen löschen (exkl. dem letzten)"
-
-#~ msgid "Maximum number of system setting backups to keep"
-#~ msgstr "Maximale Anzahl von Einstellungs-Sicherungen"
-
-#~ msgid "Delete timerlist entries"
-#~ msgstr "Timerlisten-Einträge löschen"
-
-#~ msgid "Really close without saving settings?"
-#~ msgstr "Wirklich beenden ohne Sicherung?"
-
-#, fuzzy
-#~ msgid "System cleanup settings"
-#~ msgstr "Systembereinigung einrichten"
-
-#~ msgid "Debug mode"
-#~ msgstr "Test Modus"
