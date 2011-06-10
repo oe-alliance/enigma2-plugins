@@ -95,7 +95,7 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		self.hdd_replacementEntry = None
 
 		self.mountusing = []
-		self.mountusing.append(("fstab", _("FSTAB (monut using linux)")))
+		self.mountusing.append(("fstab", _("FSTAB (mount using linux)")))
 		self.mountusing.append(("enigma2", _("Enigma2 (mount using enigma2")))
 
 		self.sharetypelist = []
