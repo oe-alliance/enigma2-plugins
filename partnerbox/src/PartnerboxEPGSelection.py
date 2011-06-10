@@ -81,8 +81,8 @@ def PartnerboxInit(self, filterRef):
 			self.partnerboxentry = config.plugins.Partnerbox.Entries[0]
 			partnerboxfunctions.CurrentIP = self.partnerboxentry.ip.value
 		except: self.partnerboxentry = None
-	try:self["key_red"].setText(config.plugins.Partnerbox.Entries[0].name.value)
-	except: pass
+	#try:self["key_red"].setText(config.plugins.Partnerbox.Entries[0].name.value)
+	#except: pass
 	
 
 def Partnerbox_EPGSelection_ZapTo(self): # just used in multiepg
