@@ -7,9 +7,12 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
+from Components.Pixmap import Pixmap,MultiPixmap
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 from enigma import iPlayableService, iServiceInformation, eTimer
 from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
+from Components.Sources.Boolean import Boolean
 
 usable = False
 preferedmodes = None
@@ -269,6 +272,9 @@ class AutoResSetupMenu(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		self.skinName = [ "AutoResSetupMenu", "Setup" ]
 		self.setup_title = _("Autoresolution videomode setup")
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+		self["VKeyIcon"] = Boolean(False)
 
 		self.onChangedEntry = [ ]
 		self.list = [ ]
