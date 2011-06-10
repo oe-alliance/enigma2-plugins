@@ -112,11 +112,13 @@ def Plugins(**kwargs):
 			description = _("A basic FTP client"),
 			where = PluginDescriptor.WHERE_PLUGINMENU,
 			icon = "plugin.png",
-			fnc = main
+			fnc = main,
+			needsRestart = False
 		),
 		PluginDescriptor(
 			name = "FTPBrowser",
 			where = PluginDescriptor.WHERE_FILESCAN,
-			fnc = filescan
+			fnc = filescan,
+			needsRestart = False,
 		),
 	]

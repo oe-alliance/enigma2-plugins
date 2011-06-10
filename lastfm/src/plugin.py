@@ -93,7 +93,7 @@ def Plugins(path,**kwargs):
     else:
         list.append (PluginDescriptor(
             name = config.plugins.LastFM.name.value, 
-            description = config.plugins.shoutcast.LastFM.value + " "  + _("Ver.") + " " + lastfm_pluginversion, 
+            description = config.plugins.LastFM.description.value + " "  + _("Ver.") + " " + lastfm_pluginversion, 
             where = PluginDescriptor.WHERE_EXTENSIONSMENU, 
             fnc = main)
             )		

@@ -100,7 +100,9 @@ class AutoTimerComponent(object):
 	bouquets = property(lambda self: self._bouquets , setBouquets)
 
 	def setEncoding(self, encoding):
-		if encoding:
+		if encoding == '(null)':
+			self._encoding = 'UTF-8'
+		elif encoding:
 			self._encoding = encoding
 		elif not self._encoding:
 			self._encoding = 'UTF-8'

@@ -61,7 +61,7 @@ def main(session,**kwargs):
 	session.open(WeatherPlugin)
 
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name=_("Weather Plugin"), description=_("Weather Plugin"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
+	list = [PluginDescriptor(name=_("Weather Plugin"), description=_("Show Weather Forecast"), where = [PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
 	return list
 
 
@@ -69,7 +69,8 @@ class WeatherPlugin(Screen):
 
 	skin = """
 		<screen name="WeatherPlugin" position="center,center" size="664,190" title="%s">
-			<widget render="Label" source="caption" position="10,20" zPosition="1" size="300,23" font="Regular;22" transparent="1"/>
+			<widget render="Label" source="caption" position="10,20" zPosition="1" size="600,23" font="Regular;22" transparent="1"/>
+			<ePixmap position="620,22" zPosition="1" size="36,20" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
 			<widget render="Label" source="currentTemp" position="10,45" zPosition="1" size="300,23" font="Regular;22" transparent="1"/>
 			<widget render="Label" source="condition" position="10,100" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
 			<widget render="Label" source="wind_condition" position="10,125" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
@@ -227,7 +228,7 @@ class WeatherPlugin(Screen):
 							highTemp = items2.attrib.get("data").encode("utf-8", 'ignore')
 							self["weekday%s_temp" % index].text = "%s °%s | %s °%s" % (highTemp, UnitSystemText, lowTemp, UnitSystemText)
 						elif items2.tag == "icon":
-							url = "http://www.google.com%s" % items2.attrib.get("data").encode("utf-8", 'ignore')
+							url = items2.attrib.get("data").encode("utf-8", 'ignore')
 							parts = url.split("/")
 							filename = self.appdir + parts[-1]
 							if not os_path.exists(filename):

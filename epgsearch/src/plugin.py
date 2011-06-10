@@ -19,11 +19,12 @@ from Plugins.Plugin import PluginDescriptor
 
 # Autostart
 def autostart(reason, **kwargs):
-	try:
-		# for blue key activating in EPGSelection
-		EPGSelectionInit()
-	except Exception:
-		pass
+	if reason == 0:
+		try:
+			# for blue key activating in EPGSelection
+			EPGSelectionInit()
+		except Exception:
+			pass
 
 # Mainfunction
 def main(session, *args, **kwargs):
@@ -52,24 +53,28 @@ def movielist(session, service, **kwargs):
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			where = PluginDescriptor.WHERE_SESSIONSTART,
+			where = PluginDescriptor.WHERE_AUTOSTART,
 			fnc = autostart,
+			needsRestart = False,
 		),
 		PluginDescriptor(
 			name = "EPGSearch",
 			description = _("Search EPG"),
 			where = PluginDescriptor.WHERE_PLUGINMENU,
 			fnc = main,
+			needsRestart = False,
 		),
 		PluginDescriptor(
 			name = _("search EPG..."),
 			where = PluginDescriptor.WHERE_EVENTINFO,
 			fnc = eventinfo,
+			needsRestart = False,
 		),
 		PluginDescriptor(
 			name = "EPGSearch",
 			description = _("search EPG..."),
 			where = PluginDescriptor.WHERE_MOVIELIST,
 			fnc = movielist,
+			needsRestart = False,
 		),
 	]

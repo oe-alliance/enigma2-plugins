@@ -9,16 +9,17 @@ from Tools import Notifications
 # Config
 from Components.config import config
 
-class BackgroundAdapter:
-	def __init__(self, session):
+class PipAdapter:
+	def __init__(self, session, hide=True):
 		if SystemInfo.get("NumVideoDecoders", 1) < 2:
 			self.pipAvail = False
 			return
 
+		self.hide = hide
 		self.session = session
 		self.pipAvail = True
 		if config.plugins.epgrefresh.enablemessage.value:
-			Notifications.AddNotification(MessageBox, _("EPG refresh started in background.\nPlease don't use PiP meanwhile!"), type=MessageBox.TYPE_INFO, timeout=4)
+			Notifications.AddNotification(MessageBox, _("EPG refresh started in background.") + "\n" + _("Please don't use PiP meanwhile!"), type=MessageBox.TYPE_INFO, timeout=4)
 		if session.pipshown:
 			# Hijack PiP
 			self.wasShown = True
@@ -31,7 +32,7 @@ class BackgroundAdapter:
 
 	def hidePiP(self):
 		# set pip size to 1 pixel
-		print "[EPGRefresh.BackgroundAdapter.hidePiP]"
+		print "[EPGRefresh.PipAdapter.hidePiP]"
 		x = y = 0
 		w = h = 1
 		self.session.pip.instance.move(ePoint(x, y))
@@ -42,14 +43,14 @@ class BackgroundAdapter:
 		# Instantiate PiP
 		self.session.pip = self.session.instantiateDialog(PictureInPicture)
 		self.session.pip.show()
-		self.hidePiP()
+		if self.hide: self.hidePiP()
 		self.session.pipshown = True # Always pretends it's shown (since the ressources are present)
 		newservice = self.session.nav.getCurrentlyPlayingServiceReference()
 		if self.session.pip.playService(newservice):
 			self.session.pip.servicePath = newservice.getPath()
 
 	def play(self, service):
-		print "[EPGRefresh.BackgroundAdapter.play]"
+		print "[EPGRefresh.PipAdapter.play]"
 		if not self.pipAvail: return False
 
 		if not self.session.pipshown: # make sure pip still exists

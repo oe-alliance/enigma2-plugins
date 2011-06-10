@@ -12,7 +12,7 @@ from RecordTimer import RecordTimerEntry
 from Components.TimerSanityCheck import TimerSanityCheck
 
 # Timespan
-from time import localtime, time, mktime
+from time import localtime, strftime, time, mktime
 from datetime import timedelta, date
 
 # EPGCache & Event
@@ -115,7 +115,7 @@ class AutoTimer:
 		self.timers.append(timer)
 
 	def getEnabledTimerList(self):
-		return [x for x in self.timers if x.enabled]
+		return (x for x in self.timers if x.enabled)
 
 	def getTimerList(self):
 		return self.timers
@@ -221,6 +221,7 @@ class AutoTimer:
 
 				# If event starts in less than 60 seconds skip it
 				if begin < time() + 60:
+					print "[AutoTimer] Skipping an event because it starts in less than 60 seconds"
 					continue
 
 				# If maximum days in future is set then check time
@@ -262,18 +263,19 @@ class AutoTimer:
 				if simulateOnly:
 					continue
 
-				# Reset movie Exists
-				movieExists = False
 
 				# Check for existing recordings in directory
 				if timer.avoidDuplicateDescription == 3:
+					# Reset movie Exists
+					movieExists = False
+
 					# Eventually create cache
 					if dest and dest not in moviedict:
 						movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
 						if movielist is None:
 							print "[AutoTimer] listing of movies in " + dest + " failed"
 						else:
-							moviedict.setdefault(dest, [])
+							moviedict[dest] = []
 							append = moviedict[dest].append
 							while 1:
 								movieref = movielist.getNext()
@@ -298,8 +300,8 @@ class AutoTimer:
 							movieExists = True
 							break
 
-				if movieExists:
-					continue
+					if movieExists:
+						continue
 
 				# Initialize
 				newEntry = None
@@ -318,13 +320,13 @@ class AutoTimer:
 							break
 
 						if hasattr(rtimer, "isAutoTimer"):
-								print "[AutoTimer] Modifying existing AutoTimer!"
+								rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name,))
 						else:
 							if config.plugins.autotimer.refresh.value != "all":
 								print "[AutoTimer] Won't modify existing timer because it's no timer set by us"
 								break
 
-							print "[AutoTimer] Warning, we're messing with a timer which might not have been set by us"
+							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name,))
 
 						newEntry = rtimer
 						modified += 1
@@ -361,10 +363,11 @@ class AutoTimer:
 							continue
 
 					if timer.checkCounter(timestamp):
+						print "[AutoTimer] Not adding new timer because counter is depleted."
 						continue
 
-					print "[AutoTimer] Adding an event."
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, description, eit)
+					newEntry.log(500, "[AutoTimer] Adding new timer based on AutoTimer %s." % (timer.name,))
 
 					# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
 					newEntry.isAutoTimer = True
@@ -387,6 +390,9 @@ class AutoTimer:
 				else:
 					conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
 					if conflicts and config.plugins.autotimer.disabled_on_conflict.value:
+						conflictString = ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
+						newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString,))
+						del conflictString
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
 						conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)

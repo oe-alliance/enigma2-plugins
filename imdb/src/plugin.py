@@ -5,6 +5,7 @@ from enigma import ePicLoad, eServiceReference
 from Screens.Screen import Screen
 from Screens.EpgSelection import EPGSelection
 from Screens.ChannelSelection import SimpleChannelSelection
+from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -16,6 +17,7 @@ from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from os import environ as os_environ
+from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 import re
 import htmlentitydefs
 import urllib
@@ -93,25 +95,26 @@ class IMDBEPGSelection(EPGSelection):
 
 class IMDB(Screen):
 	skin = """
-		<screen name="IMDB" position="90,95" size="560,420" title="Internet Movie Database Details Plugin" >
+		<screen name="IMDB" position="center,center" size="600,420" title="Internet Movie Database Details Plugin" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="565,5" zPosition="0" size="35,25" alphatest="on" />
 			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#9f1313" transparent="1" />
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#a08500" transparent="1" />
 			<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#18188b" transparent="1" />
 			<widget name="titellabel" position="10,40" size="330,45" valign="center" font="Regular;22"/>
-			<widget name="detailslabel" position="105,90" size="445,140" font="Regular;18" />
-			<widget name="castlabel" position="10,235" size="540,155" font="Regular;18" />
-			<widget name="extralabel" position="10,40" size="540,350" font="Regular;18" />
-			<widget name="ratinglabel" position="340,62" size="210,20" halign="center" font="Regular;18" foregroundColor="#f0b400"/>
-			<widget name="statusbar" position="10,404" size="540,16" font="Regular;16" foregroundColor="#cccccc" />
+			<widget name="detailslabel" position="105,90" size="485,140" font="Regular;18" />
+			<widget name="castlabel" position="10,235" size="580,155" font="Regular;18" />
+			<widget name="extralabel" position="10,40" size="580,350" font="Regular;18" />
+			<widget name="ratinglabel" position="340,62" size="250,20" halign="center" font="Regular;18" foregroundColor="#f0b400"/>
+			<widget name="statusbar" position="10,404" size="580,16" font="Regular;16" foregroundColor="#cccccc" />
 			<widget name="poster" position="4,90" size="96,140" alphatest="on" />
-			<widget name="menu" position="10,115" size="540,275" zPosition="3" scrollbarMode="showOnDemand" />
-			<widget name="starsbg" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/IMDb/starsbar_empty.png" position="340,40" zPosition="0" size="210,21" transparent="1" alphatest="on" />
-			<widget name="stars" position="340,40" size="210,21" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/IMDb/starsbar_filled.png" transparent="1" />
+			<widget name="menu" position="10,115" size="580,275" zPosition="3" scrollbarMode="showOnDemand" />
+			<widget name="starsbg" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/IMDb/starsbar_empty.png" position="340,40" zPosition="0" size="250,21" transparent="1" alphatest="on" />
+			<widget name="stars" position="340,40" size="250,21" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/IMDb/starsbar_filled.png" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session, eventName, callbackNeeded=False):
@@ -165,7 +168,7 @@ class IMDB(Screen):
 			"green": self.showMenu,
 			"yellow": self.showDetails,
 			"blue": self.showExtras,
-			"contextMenu": self.openChannelSelection,
+			"contextMenu": self.contextMenuPressed,
 			"showEventInfo": self.showDetails
 		}, -1)
 
@@ -342,13 +345,35 @@ class IMDB(Screen):
 			self["ratinglabel"].hide()
 			self.Page = 2
 
+	def contextMenuPressed(self):
+		list = [
+			(_("Enter search"), self.openVirtualKeyBoard),
+			(_("Select from EPG"), self.openChannelSelection),
+		]
+
+		self.session.openWithCallback(
+			self.menuCallback,
+			ChoiceBox,
+			list = list,
+		)
+
+	def menuCallback(self, ret = None):
+		ret and ret[1]()
+
+	def openVirtualKeyBoard(self):
+		self.session.openWithCallback(
+			self.gotSearchString,
+			NTIVirtualKeyBoard,
+			title = _("Enter text to search for")
+		)
+
 	def openChannelSelection(self):
 		self.session.openWithCallback(
-			self.channelSelectionClosed,
+			self.gotSearchString,
 			IMDBChannelSelection
 		)
 
-	def channelSelectionClosed(self, ret = None):
+	def gotSearchString(self, ret = None):
 		if ret:
 			self.eventName = ret
 			self.Page = 0
@@ -372,7 +397,7 @@ class IMDB(Screen):
 				self.eventName = event.getEventName()
 		if self.eventName is not "":
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
-			event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore'))
+			event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore')).replace('%20', '+')
 			localfile = "/tmp/imdbquery.html"
 			fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 			print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
@@ -436,7 +461,7 @@ class IMDB(Screen):
 				if splitpos > 0 and self.eventName.endswith(')'):
 					self.eventName = self.eventName[splitpos+1:-1]
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.eventName))
-					event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore'))
+					event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore')).replace('%20', '+')
 					localfile = "/tmp/imdbquery.html"
 					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 					print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
@@ -575,21 +600,17 @@ def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
 
 def Plugins(**kwargs):
-	try:
-		return [PluginDescriptor(name="IMDb Details",
-				description=_("Query details from the Internet Movie Database"),
-				icon="imdb.png",
-				where = PluginDescriptor.WHERE_PLUGINMENU,
-				fnc = main),
-				PluginDescriptor(name="IMDb Details",
-				description=_("Query details from the Internet Movie Database"),
-				where = PluginDescriptor.WHERE_EVENTINFO,
-				fnc = eventinfo)
-				]
-	except AttributeError:
-		wherelist = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]
-		return PluginDescriptor(name="IMDb Details",
-				description=_("Query details from the Internet Movie Database"),
-				icon="imdb.png",
-				where = wherelist,
-				fnc=main)	
+	return [PluginDescriptor(name="IMDb Details",
+			description=_("Query details from the Internet Movie Database"),
+			icon="imdb.png",
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main,
+			needsRestart=False,
+			),
+			PluginDescriptor(name="IMDb Details",
+			description=_("Query details from the Internet Movie Database"),
+			where=PluginDescriptor.WHERE_EVENTINFO,
+			fnc=eventinfo,
+			needsRestart=False,
+			),
+		]

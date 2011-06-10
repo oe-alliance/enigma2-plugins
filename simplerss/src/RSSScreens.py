@@ -430,6 +430,8 @@ class RSSOverview(RSSBaseView):
 
 	def pollCallback(self, id = None):
 		print "[SimpleRSS] SimpleRSS called back"
+		self.fillFeeds()
+		self["content"].setList(self.feeds)
 		self.updateInfo()
 		self["content"].invalidate()
 
