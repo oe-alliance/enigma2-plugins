@@ -31,18 +31,18 @@ import PartnerboxFunctions as partnerboxfunctions
 from . import _
 
 baseEPGSelection__init__ = None
-baseEPGSelection_zapTo = None
+baseEPGSelection_ZapTo = None
 baseonSelectionChanged = None
 basetimerAdd = None
 basefinishedAdd = None
 baseonCreate = None
 
 def Partnerbox_EPGSelectionInit():
-	global baseEPGSelection__init__, baseEPGSelection_zapTo, baseonSelectionChanged, basetimerAdd, basefinishedAdd, baseonCreate
+	global baseEPGSelection__init__, baseEPGSelection_ZapTo, baseonSelectionChanged, basetimerAdd, basefinishedAdd, baseonCreate
 	if baseEPGSelection__init__ is None:
 		baseEPGSelection__init__ = EPGSelection.__init__
-	if baseEPGSelection_zapTo is None:
-		baseEPGSelection_zapTo = EPGSelection.zapTo
+	if baseEPGSelection_ZapTo is None:
+		baseEPGSelection_ZapTo = EPGSelection.ZapTo
 	if baseonSelectionChanged is None:
 		baseonSelectionChanged = EPGSelection.onSelectionChanged
 	if basetimerAdd is None:
@@ -53,7 +53,7 @@ def Partnerbox_EPGSelectionInit():
 		baseonCreate = EPGSelection.onCreate
 
 	EPGSelection.__init__ = Partnerbox_EPGSelection__init__
-	EPGSelection.zapTo = Partnerbox_EPGSelection_zapTo
+	EPGSelection.ZapTo = Partnerbox_EPGSelection_ZapTo
 	EPGSelection.onSelectionChanged = Partnerbox_onSelectionChanged
 	EPGSelection.timerAdd = Partnerbox_timerAdd
 	EPGSelection.finishedAdd = Partnerbox_finishedAdd
@@ -85,11 +85,11 @@ def PartnerboxInit(self, filterRef):
 	except: pass
 	
 
-def Partnerbox_EPGSelection_zapTo(self): # just used in multiepg
+def Partnerbox_EPGSelection_ZapTo(self): # just used in multiepg
 	if not (self.zapFunc and self.key_red_choice == self.ZAP):
 		self.session.openWithCallback(self.NewPartnerBoxSelected, PartnerboxEntriesListConfigScreen, 0)
 	else:
-		baseEPGSelection_zapTo(self)
+		baseEPGSelection_ZapTo(self)
 
 def NewPartnerBoxSelected(self, session, what, partnerboxentry = None):
 	if partnerboxentry is not None:
