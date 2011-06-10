@@ -351,7 +351,7 @@ def autostart(reason, **kwargs):
 def startSetup(menuid):
 	if menuid != "system":
 		return [ ]
-	return [("Autoresolution...", autoresSetup, "autores_setup", 45)]
+	return [("Autoresolution", autoresSetup, "autores_setup", 45)]
 
 def autoresSetup(session, **kwargs):
 	autostart(reason=0, session=session)
