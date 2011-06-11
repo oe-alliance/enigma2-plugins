@@ -47,6 +47,7 @@ SUBDIRS = \
 	moviesearch \
 	movieselectionquickbutton \
 	movietagger \
+	movieepg \
 	multirc \
 	mytube \
 	ncidclient \

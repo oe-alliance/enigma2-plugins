@@ -278,6 +278,10 @@ movietagger/etc/Makefile
 movietagger/meta/Makefile
 movietagger/src/Makefile
 
+movieepg/Makefile
+movieepg/meta/Makefile
+movieepg/src/Makefile
+
 multirc/Makefile
 multirc/src/Makefile
 multirc/meta/Makefile
