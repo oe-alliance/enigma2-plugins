@@ -213,6 +213,7 @@ kiddytimer/src/Makefile
 
 lastfm/Makefile
 lastfm/meta/Makefile
+lastfm/po/Makefile
 lastfm/src/Makefile
 
 letterbox/Makefile
