@@ -6,7 +6,16 @@ from Tools.BoundFunction import boundFunction
 from Screens.InfoBarGenerics import InfoBarPlugins, InfoBarMoviePlayerSummarySupport
 from Screens.ChannelSelection import ChannelSelection
 from Screens.InfoBar import InfoBar, MoviePlayer
+from Components.config import config, ConfigSubsection, ConfigSelection
 import inspect
+
+config.plugins.movieepg = ConfigSubsection()
+config.plugins.movieepg.show_epg_entry = ConfigSelection(choices=[
+		("never", _("Never")),
+		("movie", _("Movie Player")),
+		("always", _("always")),
+	], default = "movie"
+)
 
 MODE_OFF = False
 MODE_ON = True
@@ -29,9 +38,12 @@ def InfoBarPlugins_getPluginList(self, *args, **kwargs):
 		args = inspect.getargspec(p.__call__)[0]
 		if len(args) == 1 or len(args) == 2 and showSlistPlugins:
 			l.append(((boundFunction(self.getPluginName, p.name), boundFunction(self.runPlugin, p), lambda: True), None, p.name))
-	# this is the/a movie player, add our fake plugin
-	if isinstance(self, InfoBarMoviePlayerSummarySupport):
+
+	# add fake plugin if show_epg_entry set to "always" or "movie" and this is the movie player
+	show_epg_entry = config.plugins.movieepg.show_epg_entry.value
+	if show_epg_entry == "always" or show_epg_entry == "movie" and isinstance(self, InfoBarMoviePlayerSummarySupport):
 		l.append(((boundFunction(self.getPluginName, "EPG"), boundFunction(self.runPlugin, entry), lambda: True), None, "EPG"))
+
 	l.sort(key = lambda e: e[2]) # sort by name
 	return l
 def InfoBarPlugins_runPlugin(self, plugin, *args, **kwargs):
@@ -100,16 +112,19 @@ def MoviePlayer_close(self, *args, **kwargs):
 baseMoviePlayer_close = MoviePlayer.close
 MoviePlayer.close = MoviePlayer_close
 
-# Autostart
-def autostart(reason, **kwargs):
-	if reason == 0:
-		pass # TODO: anything to do here?
+# Configuration
+from MovieEpgConfiguration import MovieEpgConfiguration
+
+def main(session):
+	session.open(MovieEpgConfiguration)
 
 def Plugins(**kwargs):
 	return [
-		#PluginDescriptor(
-		#	where = PluginDescriptor.WHERE_AUTOSTART,
-		#	fnc = autostart,
-		#	needsRestart = True,
-		#),
+		PluginDescriptor(
+			name="Movie-EPG",
+			description=_("Configure Movie-EPG Plugin"),
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main,
+			needsRestart=True, # XXX: force restart for now as I don't think it will work properly without doing so
+		),
 	]
