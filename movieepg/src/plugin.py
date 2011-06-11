@@ -43,21 +43,12 @@ InfoBarPlugins.getPluginList = InfoBarPlugins_getPluginList
 InfoBarPlugins.runPlugin = InfoBarPlugins_runPlugin
 
 # Step 2: Overwrite some ChannelSelection code to be able to interject channel selection
-# TODO: right now we only block channel selection, this can be improved by allowing to switch channels
 #
 # Doing so should not affect behavior if plugin is disabled, though we still overwrite these functions to make things easier to manage internally.
-baseChannelSelection_channelSelected = None
-def ChannelSelection_channelSelected(self, *args, **kwargs):
-	if hasattr(self, 'secretMovieMode') and self.secretMovieMode:
-		# XXX: better would be to invoke the movie player quit handler and eventually (if not canceled) zap
-		return
-	baseChannelSelection_channelSelected(self, *args, **kwargs)
-baseChannelSelection_channelSelected = ChannelSelection.channelSelected
-ChannelSelection.channelSelected = ChannelSelection_channelSelected
-
 baseChannelSelection_close = None
 def ChannelSelection_close(self, *args, **kwargs):
 	if hasattr(self, 'secretMovieMode') and self.secretMovieMode != MODE_MOVIEPLAYER:
+		# handles "plugin" close
 		self.secretMovieMode = MODE_OFF
 	baseChannelSelection_close(self, *args, **kwargs)
 baseChannelSelection_close = ChannelSelection.close
@@ -66,7 +57,9 @@ ChannelSelection.close = ChannelSelection_close
 baseChannelSelection_zap = None
 def ChannelSelection_zap(self, *args, **kwargs):
 	if hasattr(self, 'secretMovieMode') and self.secretMovieMode:
-		# XXX: better would be to invoke the movie player quit handler and eventually (if not canceled) zap
+		if movieEpgMoviePlayerInstance is not None:
+			movieEpgMoviePlayerInstance.lastservice = self.getCurrentSelection()
+			movieEpgMoviePlayerInstance.leavePlayer()
 		return
 	baseChannelSelection_zap(self, *args, **kwargs)
 baseChannelSelection_zap = ChannelSelection.zap
@@ -84,17 +77,24 @@ def entry(session = None, servicelist = None):
 	session.execDialog(servicelist)
 
 # Step 4: Modify standard movie player to keep a reference to the service list (taken from the info bar)
+# We also save a reference to the movie list here which we use to provide the "standard" close dialog when trying to zap
+#
 # Basically no effect on its own.
+movieEpgMoviePlayerInstance = None
 baseMoviePlayer___init__ = None
 def MoviePlayer___init__(self, *args, **kwargs):
 	baseMoviePlayer___init__(self, *args, **kwargs)
 	self.servicelist = InfoBar.instance.servicelist
 	self.servicelist.secretMovieMode = MODE_MOVIEPLAYER
+	global movieEpgMoviePlayerInstance
+	movieEpgMoviePlayerInstance = self
 baseMoviePlayer___init__ = MoviePlayer.__init__
 MoviePlayer.__init__ = MoviePlayer___init__
 
 baseMoviePlayer_close = None
 def MoviePlayer_close(self, *args, **kwargs):
+	global movieEpgMoviePlayerInstance
+	movieEpgMoviePlayerInstance = None
 	self.servicelist.secretMovieMode = MODE_OFF
 	baseMoviePlayer_close(self, *args, **kwargs)
 baseMoviePlayer_close = MoviePlayer.close
