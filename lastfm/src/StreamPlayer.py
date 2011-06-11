@@ -4,6 +4,9 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from twisted.internet import reactor
 from time import time
 
+# for localized messages
+from . import _
+
 
 class StreamPlayer:
     STATE_PLAYINGSTARTED = 0

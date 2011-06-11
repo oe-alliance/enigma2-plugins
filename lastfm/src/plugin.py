@@ -19,10 +19,14 @@ from twisted.web.client import downloadPage
 from os import remove as os_remove, system as os_system
 from random import randrange
 
+# for localized messages
+from . import _
+
+
 ###############################################################################        
 plugin_path = ""
 streamplayer = False
-lastfm_pluginversion = "1.0.0"
+lastfm_pluginversion = "0.6.0"
 ###############################################################################        
 
 config.plugins.LastFM = ConfigSubsection()
@@ -115,19 +119,19 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
             <widget name="info_track" position="105,85" size="370,30" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;18\" />          
             <widget name="info_cover" position="484,5" size="116,116" />          
             
-            <widget name="tablist" position="0,140" size="190,220" scrollbarMode="showOnDemand" />            
-            <widget name="streamlist" position="200,140" size="400,225" scrollbarMode="showOnDemand" />            
+            <widget name="tablist" position="0,140" size="210,205" scrollbarMode="showOnDemand" />            
+            <widget name="streamlist" position="220,140" size="380,205" scrollbarMode="showOnDemand" />            
             
-            <widget name="button_red" position="0,370" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />          
-            <widget name="button_green" position="140,370" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\"/>            
-            <widget name="button_yellow" position="280,370" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />            
-            <widget name="button_blue" position="420,370" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />             
-            <ePixmap pixmap="skin_default/buttons/red.png" position="0,370" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-            <ePixmap pixmap="skin_default/buttons/green.png" position="140,370" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-            <ePixmap pixmap="skin_default/buttons/yellow.png" position="280,370" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-            <ePixmap pixmap="skin_default/buttons/blue.png" position="420,370" zPosition="2" size="140,40" transparent="1" alphatest="on" />
-            <ePixmap position="570,380" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
-            <widget name="infolabel" position="10,415" size="500,15" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;16\" />           
+            <widget name="button_red" position="0,360" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />          
+            <widget name="button_green" position="140,360" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\"/>            
+            <widget name="button_yellow" position="280,360" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />            
+            <widget name="button_blue" position="420,360" size="140,40" valign=\"center\" halign=\"center\" zPosition=\"3\" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" font=\"Regular;18\" />             
+            <ePixmap pixmap="skin_default/buttons/red.png" position="0,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap pixmap="skin_default/buttons/green.png" position="140,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap pixmap="skin_default/buttons/yellow.png" position="280,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap pixmap="skin_default/buttons/blue.png" position="420,360" zPosition="2" size="140,40" transparent="1" alphatest="on" />
+            <ePixmap position="570,370" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+            <widget name="infolabel" position="10,410" size="500,20" valign=\"center\" halign=\"left\" zPosition=\"2\"  foregroundColor=\"white\" font=\"Regular;16\" />           
         </screen>""" %(config.plugins.LastFM.name.value + " "  + _("Ver.") + " " + lastfm_pluginversion) # title
          
     noCoverArtPNG = "/usr/share/enigma2/skin_default/no_coverArt.png"
@@ -143,14 +147,14 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.imageconverter = ImageConverter(116,116,self.setCoverArt)
         Screen.__init__(self, session)
         
-        self.tabs=[("Personal Stations",self.loadPersonalStations)
-                   ,("Global Tags",self.loadGlobalTags)
-                   ,("Top Tracks",self.loadTopTracks)
-                   ,("Recent Tracks",self.loadRecentTracks)
-                   ,("Loved Tracks",self.loadLovedTracks)
-                   ,("Banned Tracks",self.loadBannedTracks)
-                   ,("Friends",self.loadFriends)
-                   ,("Neighbours",self.loadNeighbours)
+        self.tabs=[(_("Personal Stations"),self.loadPersonalStations)
+                   ,(_("Global Tags"),self.loadGlobalTags)
+                   ,(_("Top Tracks"),self.loadTopTracks)
+                   ,(_("Recent Tracks"),self.loadRecentTracks)
+                   ,(_("Loved Tracks"),self.loadLovedTracks)
+                   ,(_("Banned Tracks"),self.loadBannedTracks)
+                   ,(_("Friends"),self.loadFriends)
+                   ,(_("Neighbours"),self.loadNeighbours)
                    ]
         tablist =[]
         for tab in self.tabs:
@@ -200,10 +204,10 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         self.helpList.append((self["actions"], "InfobarChannelSelection", [("zapUp", _("Page backward Selections"))]))
         self.helpList.append((self["actions"], "ShortcutActions", [("red", _("Start/stop streaming"))]))
         self.helpList.append((self["actions"], "ShortcutActions", [("green", _("Skip current Track"))]))
-        self.helpList.append((self["actions"], "ShortcutActions", [("yellow", _("Mark current Track as loved"))]))
-        self.helpList.append((self["actions"], "ShortcutActions", [("blue", _("Ban Track, never play again"))]))		
+        self.helpList.append((self["actions"], "ShortcutActions", [("yellow", _("Mark Track as loved"))]))
+        self.helpList.append((self["actions"], "ShortcutActions", [("blue", _("Ban Track, never play"))]))		
         self.helpList.append((self["actions"], "MenuActions", [("menu", _("Open") + " " + _("Setup"))]))		
-        self.helpList.append((self["actions"], "WizardActions", [("back", _("Quit" + " " + config.plugins.LastFM.name.value))]))
+        self.helpList.append((self["actions"], "WizardActions", [("back", _("Quit") + " " + config.plugins.LastFM.name.value)]))
 
         self.onLayoutFinish.append(self.initLastFM)
         self.onLayoutFinish.append(self.tabchangedtimerFired)
@@ -225,7 +229,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         
 
     def initLastFM(self):
-        self.setInfoLabel(_("logging into last.fm"))
+        self.setInfoLabel(_("logging into last.FM"))
         self.connect(config.plugins.LastFM.username.value,config.plugins.LastFM.password.value)
         
     def onStreamplayerStateChanged(self,reason):
@@ -406,7 +410,7 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
             return None
             
         if self.streamplayer.is_playing is True:
-            self.setTitle("Last.FM: "+self.streamplayer.getMetadata("station"))
+            self.setTitle(config.plugins.LastFM.name.value+" "+ _("Ver.")+lastfm_pluginversion+" "+self.streamplayer.getMetadata("station"))
             self["info_artist"].setText(self.streamplayer.getMetadata("creator"))
             self["info_album"].setText(self.streamplayer.getMetadata("album"))
             self["info_track"].setText(self.streamplayer.getMetadata("title"))
@@ -455,17 +459,17 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         tags.append(x)
         
         x= {}
-        x["_display"] = _("Play Artist Radio ...")
+        x["_display"] = _("Play Artist Radio...")
         x["stationurl"] = 'artist'
         tags.append(x)
 
         x= {}
-        x["_display"] = _("Play Group Radio ...")
+        x["_display"] = _("Play Group Radio...")
         x["stationurl"] = 'groupe'
         tags.append(x)
         
         x= {}
-        x["_display"] = _("Play Tag Radio ...")
+        x["_display"] = _("Play Tag Radio...")
         x["stationurl"] = 'tag'
         tags.append(x)
         
@@ -473,17 +477,17 @@ class LastFMScreenMain(Screen,HelpableScreen,LastFM):
         creator = self.streamplayer.getMetadata("creator")
         if creator != "no creator" and creator != "N/A":
             x= {}
-            x["_display"] = _("Tracks similar to ")+self.streamplayer.getMetadata("creator")
+            x["_display"] = _("Tracks similar to")+" "+self.streamplayer.getMetadata("creator")
             x["stationurl"] = self.getSimilarArtistsURL(artist=creator)
             tags.append(x)
             
             x= {}
-            x["_display"] = _("Tracks liked by Fans of ")+self.streamplayer.getMetadata("creator")
+            x["_display"] = _("Tracks liked by Fans of")+" "+self.streamplayer.getMetadata("creator")
             x["stationurl"] = self.getArtistsLikedByFans(artist=creator)
             tags.append(x)
 
             x= {}
-            x["_display"] = _("Group of ")+self.streamplayer.getMetadata("creator")
+            x["_display"] = _("Group of")+" "+self.streamplayer.getMetadata("creator")
             x["stationurl"] = self.getArtistGroup(artist=creator)
             tags.append(x)
         
@@ -606,8 +610,8 @@ class LastFMSaveScreen(Screen):
 class lastfmLCDScreen(Screen):
 	skin = """
 	<screen name="LastFM_Summary" position="0,0" size="132,64" id="1">
-		<widget name="text1" position="2,0" size="128,14" font="Regular;12" halign="center" valign="center"/>
-		<widget name="text2" position="2,14" size="128,50" font="Regular;10" halign="center" valign="center"/>
+		<widget name="text1" position="2,0" size="128,25" font="Regular;12" halign="center" valign="center"/>
+		<widget name="text2" position="2,29" size="128,35" font="Regular;10" halign="center" valign="center"/>
 	</screen>"""
 
 	def __init__(self, session, parent):

@@ -1,12 +1,17 @@
 from Screens.Screen import Screen
-from Components.config import config, getConfigListEntry, ConfigSubsection
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigText
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
+
+# for localized messages
+from . import _
+
        
 class LastFMConfigScreen(ConfigListScreen,Screen):
 
     config.plugins.LastFM = ConfigSubsection()
+    config.plugins.LastFM.name = ConfigText(default = _("Last.FM"))
     
     skin = """
         <screen position="center,center" size="600,480" title="%s" >
@@ -19,8 +24,7 @@ class LastFMConfigScreen(ConfigListScreen,Screen):
         <ePixmap pixmap="skin_default/buttons/green.png" position="150,430" zPosition="1" size="140,40" transparent="1" alphatest="on" />
 
         </screen>""" %(
-            "Last.FM" + " " + _("Setup")  # title
-            #config.plugins.LastFM.name.value + " " + _("Setup") # commented out, because I couldn't get it working :-(
+            config.plugins.LastFM.name.value + " " + _("Setup")  # title
         ) 
 			
     def __init__(self, session, args = 0):
