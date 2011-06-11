@@ -59,6 +59,7 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
+	pipzap \
 	podcast \
 	porncenter \
 	quickbutton \

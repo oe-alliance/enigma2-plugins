@@ -338,6 +338,10 @@ permanentclock/meta/Makefile
 permanentclock/po/Makefile
 permanentclock/src/Makefile
 
+pipzap/Makefile
+pipzap/meta/Makefile
+pipzap/src/Makefile
+
 podcast/Makefile
 podcast/etc/Makefile
 podcast/meta/Makefile
