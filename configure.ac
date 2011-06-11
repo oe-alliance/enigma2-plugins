@@ -83,6 +83,7 @@ automaticvolumeadjustment/src/Makefile
 autoresolution/Makefile
 autoresolution/meta/Makefile
 autoresolution/src/Makefile
+autoresolution/po/Makefile
 
 autotimer/Makefile
 autotimer/meta/Makefile
