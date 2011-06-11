@@ -412,7 +412,7 @@ class IMDB(Screen):
 	def html2utf8(self,in_html):
 		entitydict = {}
 
-		entities = re.finditer('&([^#]\D{1,5}?);', in_html)
+		entities = re.finditer('&([^#][A-Za-z]{1,5}?);', in_html)
 		for x in entities:
 			key = x.group(0)
 			if key not in entitydict:
