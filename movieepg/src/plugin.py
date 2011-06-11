@@ -107,9 +107,9 @@ def autostart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	return [
-		PluginDescriptor(
-			where = PluginDescriptor.WHERE_AUTOSTART,
-			fnc = autostart,
-			needsRestart = True,
-		),
+		#PluginDescriptor(
+		#	where = PluginDescriptor.WHERE_AUTOSTART,
+		#	fnc = autostart,
+		#	needsRestart = True,
+		#),
 	]
