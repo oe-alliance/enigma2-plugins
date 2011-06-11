@@ -15,6 +15,7 @@ from Components.AVSwitch import AVSwitch
 from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
+from Components.Sources.StaticText import StaticText
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from os import environ as os_environ
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
@@ -105,7 +106,7 @@ class IMDB(Screen):
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#a08500" transparent="1" />
 			<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#18188b" transparent="1" />
-			<widget name="titellabel" position="10,40" size="330,45" valign="center" font="Regular;22"/>
+			<widget source="title" render="Label" position="10,40" size="330,45" valign="center" font="Regular;22"/>
 			<widget name="detailslabel" position="105,90" size="485,140" font="Regular;18" />
 			<widget name="castlabel" position="10,235" size="580,155" font="Regular;18" />
 			<widget name="extralabel" position="10,40" size="580,350" font="Regular;18" />
@@ -138,7 +139,13 @@ class IMDB(Screen):
 		self["starsbg"].hide()
 		self.ratingstars = -1
 
-		self["titellabel"] = Label(_("The Internet Movie Database"))
+		self["title"] = StaticText(_("The Internet Movie Database"))
+		# map new source -> old component
+		def setText(txt):
+			StaticText.setText(self["title"], txt)
+			self["titellabel"].setText(txt)
+		self["title"].setText = setText
+		self["titellabel"] = Label()
 		self["detailslabel"] = ScrollLabel("")
 		self["castlabel"] = ScrollLabel("")
 		self["extralabel"] = ScrollLabel("")
@@ -266,7 +273,7 @@ class IMDB(Screen):
 	def resetLabels(self):
 		self["detailslabel"].setText("")
 		self["ratinglabel"].setText("")
-		self["titellabel"].setText("")
+		self["title"].setText("")
 		self["castlabel"].setText("")
 		self["titellabel"].setText("")
 		self["extralabel"].setText("")
@@ -299,7 +306,7 @@ class IMDB(Screen):
 			self["castlabel"].hide()
 			self["poster"].hide()
 			self["extralabel"].hide()
-			self["titellabel"].setText(_("Ambiguous results"))
+			self["title"].setText(_("Ambiguous results"))
 			self["detailslabel"].setText(_("Please select the matching entry"))
 			self["detailslabel"].show()
 			self["key_blue"].setText("")
@@ -485,7 +492,7 @@ class IMDB(Screen):
 			Titeltext = self.generalinfos.group("title")
 			if len(Titeltext) > 57:
 				Titeltext = Titeltext[0:54] + "..."
-			self["titellabel"].setText(Titeltext)
+			self["title"].setText(Titeltext)
 
 			Detailstext = ""
 
@@ -583,13 +590,11 @@ class IMDbLCDScreen(Screen):
 	skin = """
 	<screen position="0,0" size="132,64" title="IMDB Plugin">
 		<widget name="headline" position="4,0" size="128,22" font="Regular;20"/>
-		<widget source="session.Event_Now" render="Label" position="6,26" size="120,34" font="Regular;14" >
-			<convert type="EventName">Name</convert>
-		</widget>
+		<widget source="parent.title" render="Label" position="6,26" size="120,34" font="Regular;14"/>
 	</screen>"""
 
 	def __init__(self, session, parent):
-		Screen.__init__(self, session)
+		Screen.__init__(self, session, parent)
 		self["headline"] = Label(_("IMDb Plugin"))
 
 def eventinfo(session, servicelist, **kwargs):
