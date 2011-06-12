@@ -3,10 +3,10 @@ from Plugins.Plugin import PluginDescriptor
 
 from Components.PluginComponent import plugins
 from Tools.BoundFunction import boundFunction
-from Screens.InfoBarGenerics import InfoBarPlugins, InfoBarMoviePlayerSummarySupport
+from Screens.InfoBarGenerics import InfoBarPlugins, InfoBarMoviePlayerSummarySupport, InfoBarChannelSelection
 from Screens.ChannelSelection import ChannelSelection
 from Screens.InfoBar import InfoBar, MoviePlayer
-from Components.config import config, ConfigSubsection, ConfigSelection
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo
 import inspect
 
 config.plugins.movieepg = ConfigSubsection()
@@ -16,6 +16,7 @@ config.plugins.movieepg.show_epg_entry = ConfigSelection(choices=[
 		("always", _("always")),
 	], default = "movie"
 )
+config.plugins.movieepg.show_servicelist_plugins_in_movieplayer = ConfigYesNo(default = True)
 
 MODE_OFF = False
 MODE_ON = True
@@ -33,7 +34,7 @@ MODE_MOVIEPLAYER = 2
 # Doing so should not affect behavior if plugin is disabled, though we still overwrite these functions to make things easier to manage internally.
 def InfoBarPlugins_getPluginList(self, *args, **kwargs):
 	l = []
-	showSlistPlugins = hasattr(self, 'servicelist')
+	showSlistPlugins = (config.plugins.movieepg.show_servicelist_plugins_in_movieplayer.value and hasattr(self, 'servicelist')) or isinstance(self, InfoBarChannelSelection)
 	for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EXTENSIONSMENU):
 		args = inspect.getargspec(p.__call__)[0]
 		if len(args) == 1 or len(args) == 2 and showSlistPlugins:
@@ -113,10 +114,10 @@ baseMoviePlayer_close = MoviePlayer.close
 MoviePlayer.close = MoviePlayer_close
 
 # Configuration
-from MovieEpgConfiguration import MovieEpgConfiguration
+from MovieEpgSetup import MovieEpgSetup
 
 def main(session):
-	session.open(MovieEpgConfiguration)
+	session.open(MovieEpgSetup)
 
 def Plugins(**kwargs):
 	return [
