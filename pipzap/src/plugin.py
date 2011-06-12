@@ -6,7 +6,7 @@ from Components.ChoiceList import ChoiceEntryComponent
 from Components.config import config, ConfigSubsection, ConfigEnableDisable
 from Components.SystemInfo import SystemInfo
 from Components.ParentalControl import parentalControl
-from enigma import eServiceReference
+from enigma import ePoint, eServiceReference, getDesktop
 from Screens.ChannelSelection import ChannelContextMenu, ChannelSelection, ChannelSelectionBase
 from Screens.InfoBar import InfoBar, MoviePlayer
 from Screens.InfoBarGenerics import InfoBarNumberZap, InfoBarEPG, InfoBarChannelSelection, InfoBarPiP, InfoBarShowMovies, InfoBarTimeshift, InfoBarSeek, InfoBarPlugins
@@ -337,6 +337,20 @@ class PictureInPictureZapping(Screen):
 	skin = """<screen name="PictureInPictureZapping" flags="wfNoBorder" position="50,50" size="90,26" title="PiPZap" zPosition="-1">
 		<eLabel text="PiP-Zap" position="0,0" size="90,26" foregroundColor="#00ff66" font="Regular;26" />
 	</screen>"""
+	def refreshPosition(self):
+		x = config.av.pip.value[0]
+		y = config.av.pip.value[1]
+		width = getDesktop(0).size().width()
+		height = getDesktop(0).size().height()
+		if x > width / 2:
+			x = 40
+		else:
+			x = width - 120
+		if y > height / 2:
+			y = 40
+		else:
+			y = height - 55
+		self.instance.move(ePoint(x, y))
 
 def PictureInPicture__init__(self, session, *args, **kwargs):
 	baseMethods.PictureInPicture__init__(self, session, *args, **kwargs)
@@ -347,6 +361,10 @@ def PictureInPicture_active(self):
 
 def PictureInPicture_inactive(self):
 	self.pipActive.hide()
+
+def PictureInPicture_move(self, *args, **kwargs):
+	baseMethods.PictureInPicture_move(self, *args, **kwargs)
+	self.pipActive.refreshPosition()
 
 #pragma mark -
 #pragma mark Plugin
@@ -419,6 +437,9 @@ def overwriteFunctions():
 
 	PictureInPicture.active = PictureInPicture_active
 	PictureInPicture.inactive = PictureInPicture_inactive
+
+	baseMethods.PictureInPicture_move = PictureInPicture.move
+	PictureInPicture.move = PictureInPicture_move
 
 config.plugins.pipzap = ConfigSubsection()
 config.plugins.pipzap.enable_hotkey = ConfigEnableDisable(default = True)
