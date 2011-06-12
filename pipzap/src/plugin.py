@@ -3,7 +3,7 @@ from Plugins.Plugin import PluginDescriptor
 
 from Components.ActionMap import HelpableActionMap
 from Components.ChoiceList import ChoiceEntryComponent
-from Components.config import config
+from Components.config import config, ConfigSubsection, ConfigEnableDisable
 from Components.SystemInfo import SystemInfo
 from Components.ParentalControl import parentalControl
 from enigma import eServiceReference
@@ -315,10 +315,11 @@ def InfoBarPiP__init__(self):
 	InfoBarPiP.baseInit(self)
 	if SystemInfo.get("NumVideoDecoders", 1) > 1 and self.allowPiP:
 		self.addExtension((self.getTogglePipzapName, self.togglePipzap, self.pipShown), "red")
-		self["pipzapActions"] = HelpableActionMap(self, "pipzapActions",
-			{
-				"switchPiP": (self.togglePipzap, _("zap in pip window...")),
-			})
+		if config.plugins.pipzap.enable_hotkey.value:
+			self["pipzapActions"] = HelpableActionMap(self, "pipzapActions",
+				{
+					"switchPiP": (self.togglePipzap, _("zap in pip window...")),
+				})
 InfoBarPiP.baseInit = InfoBarPiP.__init__
 InfoBarPiP.__init__ = InfoBarPiP__init__
 
@@ -410,18 +411,22 @@ PictureInPicture.inactive = PictureInPicture_inactive
 #pragma mark Plugin
 #pragma mark -
 
-# TODO: allow to disable pipzap, even if hardware supports it
+from PipzapSetup import PipzapSetup
 
-# Autostart
-def autostart(reason, **kwargs):
-	if reason == 0:
-		pass # TODO: anything to do here?
+# XXX: disabling more than the hotkey does not make much sense, because then you could just remove the plugin
+config.plugins.pipzap = ConfigSubsection()
+config.plugins.pipzap.enable_hotkey = ConfigEnableDisable(default = True)
+
+def main(session):
+	session.open(PipzapSetup)
 
 def Plugins(**kwargs):
 	return [
-		#PluginDescriptor(
-		#	where = PluginDescriptor.WHERE_AUTOSTART,
-		#	fnc = autostart,
-		#	needsRestart = True,
-		#),
+		PluginDescriptor(
+			name="pipzap",
+			description=_("Configure pipzap Plugin"),
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main,
+			needsRestart=True, # XXX: force restart for now as I don't think the plugin will work properly without one
+		),
 	]
