@@ -274,7 +274,7 @@ MoviePlayer.swapPiP = MoviePlayer_swapPiP
 
 def InfoBarNumberZap_zapToNumber(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
-	InfoBarNumberZap.baseZapToNumber(self, args, **kwargs)
+	InfoBarNumberZap.baseZapToNumber(self, *args, **kwargs)
 	self.servicelist.enable_pipzap = False
 InfoBarNumberZap.baseZapToNumber = InfoBarNumberZap.zapToNumber
 InfoBarNumberZap.zapToNumber = InfoBarNumberZap_zapToNumber
