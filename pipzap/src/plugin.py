@@ -12,6 +12,7 @@ from Screens.InfoBar import InfoBar, MoviePlayer
 from Screens.InfoBarGenerics import InfoBarNumberZap, InfoBarEPG, InfoBarChannelSelection, InfoBarPiP, InfoBarShowMovies, InfoBarTimeshift, InfoBarSeek, InfoBarPlugins
 from Screens.PictureInPicture import PictureInPicture
 from Screens.Screen import Screen
+from PipzapSetup import PipzapSetup
 
 #pragma mark -
 #pragma mark ChannelSelection
@@ -257,7 +258,6 @@ def MoviePlayer_showPiP(self):
 		del self.session.pip
 		self.session.pipshown = False
 	else:
-		from Screens.PictureInPicture import PictureInPicture
 		self.session.pip = self.session.instantiateDialog(PictureInPicture)
 		self.session.pip.show()
 		self.session.pipshown = True
@@ -410,8 +410,6 @@ PictureInPicture.inactive = PictureInPicture_inactive
 #pragma mark -
 #pragma mark Plugin
 #pragma mark -
-
-from PipzapSetup import PipzapSetup
 
 # XXX: disabling more than the hotkey does not make much sense, because then you could just remove the plugin
 config.plugins.pipzap = ConfigSubsection()
