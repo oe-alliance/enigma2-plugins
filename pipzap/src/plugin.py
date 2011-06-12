@@ -15,13 +15,16 @@ from Screens.Screen import Screen
 from PipzapSetup import PipzapSetup
 from Components.PluginComponent import plugins
 
+class baseMethods:
+	pass
+
 #pragma mark -
 #pragma mark ChannelSelection
 #pragma mark -
 
 # ChannelContextMenu: switch "Activate Picture in Picture" for pip/mainpicture
 def ChannelContextMenu___init__(self, session, csel, *args, **kwargs):
-	ChannelContextMenu.baseInit(self, session, csel, *args, **kwargs)
+	baseMethods.ChannelContextMenu__init__(self, session, csel, *args, **kwargs)
 
 	list = self["menu"].list
 	x = 0
@@ -64,17 +67,17 @@ def ChannelContextMenu_showServiceInPiP(self):
 		self.session.openWithCallback(self.close, MessageBox, _("Could not open Picture in Picture"), MessageBox.TYPE_ERROR)
 
 def ChannelSelectionBase__init__(self, *args, **kwargs):
-	ChannelSelectionBase.baseInit(self, *args, **kwargs)
+	baseMethods.ChannelSelectionBase__init__(self, *args, **kwargs)
 	self.dopipzap = False
 	self.enable_pipzap = False
 
 def ChannelSelectionBase_setCurrentSelection(self, service, *args, **kwargs):
 	if service:
-		ChannelSelectionBase.baseSetCurrentSelection(self, service, *args, **kwargs)
+		baseMethods.ChannelSelectionBase_setCurrentSelection(self, service, *args, **kwargs)
 
 def ChannelSelection_channelSelected(self, *args, **kwargs):
 	self.enable_pipzap = True
-	ChannelSelection.baseChannelSelected(self, *args, **kwargs)
+	baseMethods.ChannelSelection_channelSelected(self, *args, **kwargs)
 	self.enable_pipzap = False
 
 def ChannelSelection_togglePipzap(self):
@@ -122,7 +125,7 @@ def ChannelSelection_zap(self, *args, **kwargs):
 					# XXX: Make sure we set an invalid ref
 					self.session.pip.playService(None)
 	else:
-		ChannelSelection.baseZap(self, *args, **kwargs)
+		baseMethods.ChannelSelection_zap(self, *args, **kwargs)
 
 		# Yes, we might double-check this, but we need to re-select pipservice if pipzap is active
 		# and we just wanted to zap in mainwindow once
@@ -133,7 +136,7 @@ def ChannelSelection_zap(self, *args, **kwargs):
 			self.setCurrentSelection(self.session.pip.getCurrentService())
 
 def ChannelSelection_setHistoryPath(self, *args, **kwargs):
-	ChannelSelection.baseSetHistoryPath(self, *args, **kwargs)
+	baseMethods.ChannelSelection_setHistoryPath(self, *args, **kwargs)
 	if self.dopipzap:
 		self.setCurrentSelection(self.session.pip.getCurrentService())
 
@@ -142,14 +145,14 @@ def ChannelSelection_cancel(self, *args, **kwargs):
 		# This unfortunately won't work with subservices
 		self.setCurrentSelection(self.session.pip.getCurrentService())
 		self.revertMode = 1337 # not in (None, MODE_TV, MODE_RADIO)
-	ChannelSelection.baseCancel(self, *args, **kwargs)
+	baseMethods.ChannelSelection_cancel(self, *args, **kwargs)
 
 #pragma mark -
 #pragma mark MoviePlayer
 #pragma mark -
 
 def MoviePlayer__init__(self, *args, **kwargs):
-	MoviePlayer.baseInit(self, *args, **kwargs)
+	baseMethods.MoviePlayer__init__(self, *args, **kwargs)
 	self.servicelist = InfoBar.instance.servicelist
 
 	# WARNING: GROSS HACK INBOUND
@@ -229,19 +232,6 @@ def MoviePlayer_left(self):
 	else:
 		InfoBarSeek.seekBack(self)
 
-def MoviePlayer_showPiP(self):
-	slist = self.servicelist
-	if self.session.pipshown:
-		if slist and slist.dopipzap:
-			slist.togglePipzap()
-		del self.session.pip
-		self.session.pipshown = False
-	else:
-		self.session.pip = self.session.instantiateDialog(PictureInPicture)
-		self.session.pip.show()
-		self.session.pipshown = True
-		self.session.pip.playService(slist.getCurrentSelection())
-
 def MoviePlayer_swapPiP(self):
 	pass
 
@@ -251,26 +241,26 @@ def MoviePlayer_swapPiP(self):
 
 def InfoBarNumberZap_zapToNumber(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
-	InfoBarNumberZap.baseZapToNumber(self, *args, **kwargs)
+	baseMethods.InfoBarNumberZap_zapToNumber(self, *args, **kwargs)
 	self.servicelist.enable_pipzap = False
 
 def InfoBarChannelSelection_zapUp(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
-	InfoBarChannelSelection.baseZapUp(self, *args, **kwargs)
+	baseMethods.InfoBarChannelSelection_zapUp(self, *args, **kwargs)
 	self.servicelist.enable_pipzap = False
 
 def InfoBarChannelSelection_zapDown(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
-	InfoBarChannelSelection.baseZapDown(self, *args, **kwargs)
+	baseMethods.InfoBarChannelSelection_zapDown(self, *args, **kwargs)
 	self.servicelist.enable_pipzap = False
 
 def InfoBarEPG_zapToService(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
-	InfoBarEPG.baseZapToService(self, *args, **kwargs)
+	baseMethods.InfoBarEPG_zapToService(self, *args, **kwargs)
 	self.servicelist.enable_pipzap = False
 
 def InfoBarShowMovies__init__(self):
-	InfoBarShowMovies.baseInit(self)
+	baseMethods.InfoBarShowMovies__init__(self)
 	self["MovieListActions"] = HelpableActionMap(self, "InfobarMovieListActions",
 		{
 			"movieList": (self.showMovies, _("movie list")),
@@ -279,7 +269,7 @@ def InfoBarShowMovies__init__(self):
 		})
 
 def InfoBarPiP__init__(self):
-	InfoBarPiP.baseInit(self)
+	baseMethods.InfoBarPiP__init__(self)
 	if SystemInfo.get("NumVideoDecoders", 1) > 1 and self.allowPiP:
 		self.addExtension((self.getTogglePipzapName, self.togglePipzap, self.pipShown), "red")
 		if config.plugins.pipzap.enable_hotkey.value:
@@ -310,7 +300,14 @@ def InfoBarPiP_showPiP(self, *args, **kwargs):
 	slist = self.servicelist
 	if self.session.pipshown and slist and slist.dopipzap:
 		slist.togglePipzap()
-	InfoBarPiP.baseShowPiP(self, *args, **kwargs)
+	elif not self.session.pipshown and isinstance(self, InfoBarShowMovies):
+		self.session.pip = self.session.instantiateDialog(PictureInPicture)
+		self.session.pip.show()
+		self.session.pipshown = True
+		if slist:
+			self.session.pip.playService(slist.getCurrentSelection())
+		return
+	baseMethods.InfoBarPiP_showPiP(self, *args, **kwargs)
 
 # Using the base implementation would cause nasty bugs, so ignore it here
 def InfoBarPiP_swapPiP(self):
@@ -342,7 +339,7 @@ class PictureInPictureZapping(Screen):
 	</screen>"""
 
 def PictureInPicture__init__(self, session, *args, **kwargs):
-	PictureInPicture.baseInit(self, session, *args, **kwargs)
+	baseMethods.PictureInPicture__init__(self, session, *args, **kwargs)
 	self.pipActive = session.instantiateDialog(PictureInPictureZapping)
 
 def PictureInPicture_active(self):
@@ -357,68 +354,67 @@ def PictureInPicture_inactive(self):
 
 def overwriteFunctions():
 	"""Overwrite existing functions here to increase system stability a bit."""
-	ChannelContextMenu.baseInit = ChannelContextMenu.__init__
+	baseMethods.ChannelContextMenu__init__ = ChannelContextMenu.__init__
 	ChannelContextMenu.__init__ = ChannelContextMenu___init__
 
 	ChannelContextMenu.playMain = ChannelContextMenu_playMain
 	ChannelContextMenu.showServiceInPiP = ChannelContextMenu_showServiceInPiP
 
-	ChannelSelectionBase.baseInit = ChannelSelectionBase.__init__
+	baseMethods.ChannelSelectionBase__init__ = ChannelSelectionBase.__init__
 	ChannelSelectionBase.__init__ = ChannelSelectionBase__init__
 
-	ChannelSelectionBase.baseSetCurrentSelection = ChannelSelectionBase.setCurrentSelection
+	baseMethods.ChannelSelectionBase_setCurrentSelection = ChannelSelectionBase.setCurrentSelection
 	ChannelSelectionBase.setCurrentSelection = ChannelSelectionBase_setCurrentSelection
 
-	ChannelSelection.baseChannelSelected = ChannelSelection.channelSelected
+	baseMethods.ChannelSelection_channelSelected = ChannelSelection.channelSelected
 	ChannelSelection.channelSelected = ChannelSelection_channelSelected
 
 	ChannelSelection.togglePipzap = ChannelSelection_togglePipzap 
 
-	ChannelSelection.baseZap = ChannelSelection.zap
+	baseMethods.ChannelSelection_zap = ChannelSelection.zap
 	ChannelSelection.zap = ChannelSelection_zap
 
-	ChannelSelection.baseSetHistoryPath = ChannelSelection.setHistoryPath
+	baseMethods.ChannelSelection_setHistoryPath = ChannelSelection.setHistoryPath
 	ChannelSelection.setHistoryPath = ChannelSelection_setHistoryPath
 
-	ChannelSelection.baseCancel = ChannelSelection.cancel
+	baseMethods.ChannelSelection_cancel = ChannelSelection.cancel
 	ChannelSelection.cancel = ChannelSelection_cancel
 
-	MoviePlayer.baseInit = MoviePlayer.__init__
+	baseMethods.MoviePlayer__init__ = MoviePlayer.__init__
 	MoviePlayer.__init__ = MoviePlayer__init__
 
 	MoviePlayer.up = MoviePlayer_up
 	MoviePlayer.down = MoviePlayer_down
 	MoviePlayer.right = MoviePlayer_right
 	MoviePlayer.left = MoviePlayer_left
-	MoviePlayer.showPiP = MoviePlayer_showPiP
 	MoviePlayer.swapPiP = MoviePlayer_swapPiP
 
-	InfoBarNumberZap.baseZapToNumber = InfoBarNumberZap.zapToNumber
+	baseMethods.InfoBarNumberZap_zapToNumber = InfoBarNumberZap.zapToNumber
 	InfoBarNumberZap.zapToNumber = InfoBarNumberZap_zapToNumber
 
-	InfoBarChannelSelection.baseZapUp = InfoBarChannelSelection.zapUp
+	baseMethods.InfoBarChannelSelection_zapUp = InfoBarChannelSelection.zapUp
 	InfoBarChannelSelection.zapUp = InfoBarChannelSelection_zapUp
 
-	InfoBarChannelSelection.baseZapDown = InfoBarChannelSelection.zapDown
+	baseMethods.InfoBarChannelSelection_zapDown = InfoBarChannelSelection.zapDown
 	InfoBarChannelSelection.zapDown = InfoBarChannelSelection_zapDown
 
-	InfoBarEPG.baseZapToService = InfoBarEPG.zapToService
+	baseMethods.InfoBarEPG_zapToService = InfoBarEPG.zapToService
 	InfoBarEPG.zapToService = InfoBarEPG_zapToService
 
-	InfoBarShowMovies.baseInit = InfoBarShowMovies.__init__
+	baseMethods.InfoBarShowMovies__init__ = InfoBarShowMovies.__init__
 	InfoBarShowMovies.__init__ = InfoBarShowMovies__init__
 
-	InfoBarPiP.baseInit = InfoBarPiP.__init__
+	baseMethods.InfoBarPiP__init__ = InfoBarPiP.__init__
 	InfoBarPiP.__init__ = InfoBarPiP__init__
 
 	InfoBarPiP.getTogglePipzapName = InfoBarPiP_getTogglePipzapName
 	InfoBarPiP.togglePipzap = InfoBarPiP_togglePipzap
 	InfoBarPiP.swapPiP = InfoBarPiP_swapPiP
 
-	InfoBarPiP.baseShowPiP = InfoBarPiP.showPiP
+	baseMethods.InfoBarPiP_showPiP = InfoBarPiP.showPiP
 	InfoBarPiP.showPiP = InfoBarPiP_showPiP
 
-	PictureInPicture.baseInit = PictureInPicture.__init__
+	baseMethods.PictureInPicture__init__ = PictureInPicture.__init__
 	PictureInPicture.__init__ = PictureInPicture__init__
 
 	PictureInPicture.active = PictureInPicture_active
