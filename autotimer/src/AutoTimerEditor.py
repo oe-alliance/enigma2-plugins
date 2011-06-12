@@ -340,8 +340,8 @@ class AutoTimerEditorBase:
 		self.tags = NoSave(ConfigSelection(choices = [len(self.timerentry_tags) == 0 and _("None") or ' '.join(self.timerentry_tags)]))
 
 		# Vps
-		self.vpsplugin_enabled = NoSave(ConfigYesNo(default = timer.vps_enabled))
-		self.vpsplugin_overwrite = NoSave(ConfigYesNo(default = timer.vps_overwrite))
+		self.vps_enabled = NoSave(ConfigYesNo(default = timer.vps_enabled))
+		self.vps_overwrite = NoSave(ConfigYesNo(default = timer.vps_overwrite))
 
 	def pathSelected(self, res):
 		if res is not None:
