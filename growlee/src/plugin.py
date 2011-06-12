@@ -223,24 +223,27 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 def configuration(session, **kwargs):
 	session.open(GrowleeConfiguration)
 
-def autostart(**kwargs):
-	# NOTE: we need to be the first one to be notified since other listeners
-	# may remove the notifications from the list for good
-	Notifications.notificationAdded.insert(0, gotNotification)
+def autostart(reason, **kwargs):
+	if reason == 0:
+		# NOTE: we need to be the first one to be notified since other listeners
+		# may remove the notifications from the list for good
+		Notifications.notificationAdded.insert(0, gotNotification)
 
-	growleeConnection.listen()
+		growleeConnection.listen()
 
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			where=PluginDescriptor.WHERE_SESSIONSTART,
+			where=PluginDescriptor.WHERE_AUTOSTART,
 			fnc=autostart,
+			needsRestart = False,
 		),
 		PluginDescriptor(
 			name="Growlee",
 			description=_("Configure Growlee"), 
 			where=PluginDescriptor.WHERE_PLUGINMENU,
 			fnc=configuration,
+			needsRestart = False,
 		),
 	]
 

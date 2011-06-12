@@ -1,0 +1,14 @@
+<default>
+	  <prerequisites>
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>PiP-Zap</name>
+                    <packagename>enigma2-plugin-extensions-pipzap</packagename>
+                    <shortdescription>Allows to zap using the picture in picture.</shortdescription>
+					<description></description>
+          </info>
+	  <files type="package">
+		<file type="package" name="enigma2-plugin-extensions-pipzap" />
+	  </files>
+</default>

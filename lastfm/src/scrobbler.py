@@ -8,6 +8,10 @@ from twisted.web.client import getPage
 
 from urllib import  urlencode as urllib_urlencode
 
+# for localized messages
+from . import _
+
+
 class LastFMScrobbler(object):
     client     = "tst" # this must be changed to a own ID
     version    = "1.0"
