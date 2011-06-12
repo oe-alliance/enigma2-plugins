@@ -1,5 +1,6 @@
 <default>
 	  <prerequisites>
+	                <tag type="Recording" />
                     <tag type="Software" />
 	  </prerequisites>
           <info>

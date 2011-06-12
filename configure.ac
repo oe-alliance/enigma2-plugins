@@ -213,6 +213,7 @@ kiddytimer/src/Makefile
 
 lastfm/Makefile
 lastfm/meta/Makefile
+lastfm/po/Makefile
 lastfm/src/Makefile
 
 letterbox/Makefile
@@ -277,6 +278,10 @@ movietagger/etc/Makefile
 movietagger/meta/Makefile
 movietagger/src/Makefile
 
+movieepg/Makefile
+movieepg/meta/Makefile
+movieepg/src/Makefile
+
 multirc/Makefile
 multirc/src/Makefile
 multirc/meta/Makefile
@@ -332,6 +337,10 @@ permanentclock/Makefile
 permanentclock/meta/Makefile
 permanentclock/po/Makefile
 permanentclock/src/Makefile
+
+pipzap/Makefile
+pipzap/meta/Makefile
+pipzap/src/Makefile
 
 podcast/Makefile
 podcast/etc/Makefile
