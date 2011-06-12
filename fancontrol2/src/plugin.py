@@ -145,7 +145,7 @@ config.plugins.FanControl.AddOverheat = ConfigInteger(default = 0,limits = (0, 9
 config.plugins.FanControl.DisableDMM = ConfigYesNo(default = False)
 config.plugins.FanControl.LogCount = ConfigInteger(default = 40,limits = (40, 999))
 config.plugins.FanControl.LogPath = ConfigText(default="/tmp/", fixed_size=False)
-config.plugins.FanControl.DeleteData = ConfigSelection(choices = [("0", _("no")), ("2", "2"), ("3", "3"), ("7", "7"), ("14", "14"), ("30", "30")], default="0")
+config.plugins.FanControl.DeleteData = ConfigSelection(choices = [("0", _("no")), ("2", "2"), ("3", "3"), ("7", "7"), ("14", "14"), ("30", "30")], default="14")
 config.plugins.FanControl.EnableDataLog = ConfigYesNo(default = False)
 config.plugins.FanControl.EnableEventLog = ConfigYesNo(default = False)
 config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("auto", _("auto")), ("never", _("never"))], default="auto")
@@ -157,7 +157,7 @@ def GetFanRPM():
 	f = open("/proc/stb/fp/fan_speed", "r")
 	value = int(f.readline().strip()[:-4])
 	f.close()
-	if value > 0:
+	if value > 0 and value < 12000:
 		RPMread = 0
 	else:
 		RPMread += 1
@@ -710,12 +710,18 @@ def DeleteData():
 		FClog("Error Delete Data")
 
 def getstatusoutput(cmd):
-	pipe = os.popen('{ ' + cmd + '; } 2>&1', 'r')
-	text = pipe.read()
-	sts = pipe.close()
-	if sts is None: sts = 0
-	if text[-1:] == '\n': text = text[:-1]
-	return sts, text
+	try:
+		pipe = os.popen('{ ' + cmd + '; } 2>&1', 'r')
+		text = pipe.read()
+		sts = pipe.close()
+		if sts is None: sts = 0
+		if text[-1:] == '\n': text = text[:-1]
+	except:
+		sts = 1
+		text = ""
+		FClog("Error on call OS program (smartctl/hdparm)")
+	finally:
+		return sts, text
 
 def HDDtestTemp():
 	global disableHDDread
@@ -927,7 +933,7 @@ class FanControl2(Screen):
 				if (Overheat and AktTemp < self.maxTemp-3) or not Standby.inStandby:
 					Overheat = False
 				AktVLTtmp = getVoltage(id)
-				if Standby.inStandby and Standby.inStandby == istStandbySave and RPMdiff == 1:
+				if Standby.inStandby and Standby.inStandby == istStandbySave and RPMdiff == 1 and not Recording:
 					tmp = GetFanRPM()
 					RPMdiff = AktRPM-tmp
 					if RPMdiff < 150 or tmp < 300 or self.Fan == "3pin":
@@ -956,7 +962,12 @@ class FanControl2(Screen):
 					setPWM(id,config.plugins.FanControl.pwm.value)
 				AktRPMtmp = GetFanRPM()
 				if RPMread>0 and RPMread<3:
+					FClog("Reread")
 					self.timer.start(400, True)
+					return
+				RPMread = 0
+				if AktRPMtmp > 6000:
+					FClog("ignore high RPM")
 					return
 				AktRPM = AktRPMtmp
 				AktVLT = AktVLTtmp
@@ -970,7 +981,6 @@ class FanControl2(Screen):
 				FCdata()
 				if int(strftime("%M")) == 0:
 					FC2stunde[int(strftime("%H"))] = "%4.1f<BR>%d" % (AktTemp,AktRPM)
-				RPMread = 0
 				ZielRPM = self.cycle()
 				if (FanOffWait and OverheatTimer < 30) or (Overheat and OverheatTimer < 60):
 					ZielRPM = self.FanMin
@@ -1039,6 +1049,7 @@ def autostart(reason, **kwargs):
 		root.putChild("chart", FC2webChart())
 		addExternalChild( ("fancontrol", root) )
 	if not os.path.exists("/proc/stb/fp/fan_vlt"):
+		Notifications.AddNotification(MessageBox, _("Box has no fancontrol hardware -> FC2 deactivated"), type=MessageBox.TYPE_INFO, timeout=10)
 		FClog("not supported, exit")
 		return
 	if reason == 0 and kwargs.has_key("session"):

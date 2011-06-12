@@ -34,6 +34,7 @@ class PipzapSetup(Screen, ConfigListScreen):
 			self,
 			[
 				getConfigListEntry(_("Enable Hotkey"), config.plugins.pipzap.enable_hotkey, _("Use the STOP-Key to quickly enable/disable pipzap in TV-Mode? Changing this setting requires a restart.")),
+				getConfigListEntry(_("Show in Plugin menu"), config.plugins.pipzap.show_in_plugins, _("Adds an entry to the Plugin menu to toggle pipzap")),
 			],
 			session = session,
 			on_change = self.changed
