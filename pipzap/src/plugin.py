@@ -13,6 +13,7 @@ from Screens.InfoBarGenerics import InfoBarNumberZap, InfoBarEPG, InfoBarChannel
 from Screens.PictureInPicture import PictureInPicture
 from Screens.Screen import Screen
 from PipzapSetup import PipzapSetup
+from Components.PluginComponent import plugins
 
 #pragma mark -
 #pragma mark ChannelSelection
@@ -433,29 +434,47 @@ def overwriteFunctions():
 	PictureInPicture.active = PictureInPicture_active
 	PictureInPicture.inactive = PictureInPicture_inactive
 
-# XXX: disabling more than the hotkey does not make much sense, because then you could just remove the plugin
 config.plugins.pipzap = ConfigSubsection()
 config.plugins.pipzap.enable_hotkey = ConfigEnableDisable(default = True)
+config.plugins.pipzap.show_in_plugins = ConfigEnableDisable(default = False)
 
 def autostart(reason, **kwargs):
 	if reason == 0:
 		overwriteFunctions()
 
+def activate(session, *args, **kwargs):
+	InfoBar.instance.togglePipzap()
+
 def main(session, *args, **kwargs):
 	session.open(PipzapSetup)
 
+def menu(menuid):
+	if menuid != "system":
+		return []
+	return [(_("pipzap"), main, "pipzap_setup", None)]
+
+def housekeepingPluginmenu(el):
+	if el.value:
+		plugins.addPlugin(activateDescriptor)
+	else:
+		plugins.removePlugin(activateDescriptor)
+
+config.plugins.pipzap.show_in_plugins.addNotifier(housekeepingPluginmenu, initial_call=False, immediate_feedback=True)
+activateDescriptor = PluginDescriptor(name="pipzap", description=_("Toggle pipzap status"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=activate, needsRestart=False)
+
 def Plugins(**kwargs):
-	return [
+	l = [
 		PluginDescriptor(
 			where=PluginDescriptor.WHERE_AUTOSTART,
 			fnc=autostart,
 			needsRestart=True, # XXX: force restart for now as I don't think the plugin will work properly without one
 		),
 		PluginDescriptor(
-			name="pipzap",
-			description=_("Configure pipzap Plugin"),
-			where=PluginDescriptor.WHERE_PLUGINMENU,
-			fnc=main,
+			where=PluginDescriptor.WHERE_MENU,
+			fnc=menu,
 			needsRestart=False,
 		),
 	]
+	if config.plugins.pipzap.show_in_plugins.value:
+		l.append(activateDescriptor)
+	return l
