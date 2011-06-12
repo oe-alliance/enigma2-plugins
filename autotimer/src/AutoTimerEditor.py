@@ -464,7 +464,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
 		if cur:
-			self["help"].text = self.helpDict[cur[1]]
+			self["help"].text = self.helpDict.get(cur[1], "")
 
 	def changed(self):
 		for x in self.onChangedEntry:
