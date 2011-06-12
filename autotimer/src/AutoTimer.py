@@ -383,8 +383,8 @@ class AutoTimer:
 				newEntry.dirname = timer.destination
 				newEntry.justplay = timer.justplay
 				newEntry.tags = timer.tags
-				newEntry.vps_enabled = timer.vps_enabled
-				newEntry.vps_overwrite = timer.vps_overwrite
+				newEntry.vpsplugin_enabled = timer.vps_enabled
+				newEntry.vpsplugin_overwrite = timer.vps_overwrite
 
 				if oldExists:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?

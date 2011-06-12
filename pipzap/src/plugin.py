@@ -441,7 +441,7 @@ def autostart(reason, **kwargs):
 	if reason == 0:
 		overwriteFunctions()
 
-def main(session):
+def main(session, *args, **kwargs):
 	session.open(PipzapSetup)
 
 def Plugins(**kwargs):
