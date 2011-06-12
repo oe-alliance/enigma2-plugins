@@ -463,6 +463,10 @@ config.plugins.pipzap.show_in_plugins.addNotifier(housekeepingPluginmenu, initia
 activateDescriptor = PluginDescriptor(name="pipzap", description=_("Toggle pipzap status"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=activate, needsRestart=False)
 
 def Plugins(**kwargs):
+	# do not add any entry if only one (or less :P) video decoders present
+	if SystemInfo.get("NumVideoDecoders", 1) < 2:
+		return []
+
 	l = [
 		PluginDescriptor(
 			where=PluginDescriptor.WHERE_AUTOSTART,
