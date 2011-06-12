@@ -48,7 +48,8 @@ class AutoTimerComponent(object):
 			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
 			lastBegin = 0, justplay = False, avoidDuplicateDescription = 0, bouquets = None, \
 			tags = None, encoding = 'UTF-8', searchType = "partial", searchCase = "insensitive", \
-			overrideAlternatives = False, timeframe = None):
+			overrideAlternatives = False, timeframe = None, vps_enabled = False, \
+			vps_overwrite = False):
 		self.name = name
 		self.match = match
 		self.enabled = enabled
@@ -74,6 +75,8 @@ class AutoTimerComponent(object):
 		self.searchCase = searchCase
 		self.overrideAlternatives = overrideAlternatives
 		self.timeframe = timeframe
+		self.vps_enabled = False
+		self.vps_overwrite = False
 
 ### Attributes / Properties
 
@@ -516,6 +519,8 @@ class AutoTimerComponent(object):
 			searchCase = self.searchCase,
 			overrideAlternatives = self.overrideAlternatives,
 			timeframe = self.timeframe,
+			vps_enabled = vps_enabled,
+			vps_overwrite = vps_overwrite,
 		)
 
 	def __deepcopy__(self, memo):
@@ -545,7 +550,9 @@ class AutoTimerComponent(object):
 			searchType = self.searchType,
 			searchCase = self.searchCase,
 			overrideAlternatives = self.overrideAlternatives,
-			timeframe = self.timeframe
+			timeframe = self.timeframe,
+			vps_enabled = vps_enabled,
+			vps_overwrite = vps_overwrite,
 		)
 
 	def __eq__(self, other):
@@ -599,6 +606,8 @@ class AutoTimerComponent(object):
 					str(self.tags),
 					str(self.overrideAlternatives),
 					str(self.timeframe),
+					str(self.vps_enabled),
+					str(self.vps_overwrite),
 			 )),
 			 ")>"
 		))

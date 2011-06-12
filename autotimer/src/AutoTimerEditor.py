@@ -52,6 +52,13 @@ weekdays = [
 	("weekday", _("Weekday"))
 ]
 
+try:
+	from Plugins.SystemPlugins.vps import Vps
+except ImportError, ie:
+	hasVps = False
+else:
+	hasVps = True
+
 class ExtendedConfigText(ConfigText):
 	def __init__(self, default = "", fixed_size = True, visible_width = False):
 		ConfigText.__init__(self, default = default, fixed_size = fixed_size, visible_width = visible_width)
@@ -332,6 +339,10 @@ class AutoTimerEditorBase:
 		self.timerentry_tags = timer.tags
 		self.tags = NoSave(ConfigSelection(choices = [len(self.timerentry_tags) == 0 and _("None") or ' '.join(self.timerentry_tags)]))
 
+		# Vps
+		self.vpsplugin_enabled = NoSave(ConfigYesNo(default = timer.vps_enabled))
+		self.vpsplugin_overwrite = NoSave(ConfigYesNo(default = timer.vps_overwrite))
+
 	def pathSelected(self, res):
 		if res is not None:
 			# I'm pretty sure this will always fail
@@ -585,6 +596,11 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		list.append(getConfigListEntry(_("Tags"), self.tags))
 
+		if hasVps:
+			list.append(getConfigListEntry(_("Activate VPS"), self.vps_enabled))
+			if self.vps_enabled.value:
+				list.append(getConfigListEntry(_("Control recording completely by service"), self.vps_overwrite))
+
 		self.list = list
 
 	def reloadList(self, value):
@@ -802,6 +818,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.destination = None
 
 		self.timer.tags = self.timerentry_tags
+
+		self.timer.vps_enabled = self.vps_enabled.value
+		self.timer.vps_overwrite = self.vps_overwrite.value
 
 		# Close
 		self.close(self.timer)
