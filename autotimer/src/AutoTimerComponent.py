@@ -75,7 +75,7 @@ class AutoTimerComponent(object):
 		self.searchCase = searchCase
 		self.overrideAlternatives = overrideAlternatives
 		self.timeframe = timeframe
-		self.vps_enabled = vps_eabled
+		self.vps_enabled = vps_enabled
 		self.vps_overwrite = vps_overwrite
 
 ### Attributes / Properties
@@ -552,7 +552,7 @@ class AutoTimerComponent(object):
 			overrideAlternatives = self.overrideAlternatives,
 			timeframe = self.timeframe,
 			vps_enabled = self.vps_enabled,
-			vps_overwrite = selfself..vps_overwrite,
+			vps_overwrite = self.vps_overwrite,
 		)
 
 	def __eq__(self, other):
