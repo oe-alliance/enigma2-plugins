@@ -160,7 +160,7 @@ class AutoMount():
 				path = '/media/net/'+ data['sharename']
 				self.command = 'umount -fl '+ path
 
-			if data['active'] == 'True' or data['active'] is True:
+			elif data['active'] == 'True' or data['active'] is True:
 				path = '/media/net/'+ data['sharename']
 				if os_path.exists(path) is False:
 					createDir(path)
@@ -172,10 +172,10 @@ class AutoMount():
 							self.command = tmpcmd.encode("UTF-8")
 					if data['mounttype'] == 'cifs':
 						if not os_path.ismount(path):
-							tmpcmd = 'mount ' + data['ip'] + '/' + data['sharedir']
+							tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
 							self.command = tmpcmd.encode("UTF-8")
 
-				if data['mountusing'] == 'enigma2':
+				elif data['mountusing'] == 'enigma2':
 					tmpsharedir = data['sharedir'].replace(" ", "\\ ")
 					if tmpsharedir[-1:] == "$":
 						tmpdir = tmpsharedir.replace("$", "\\$")
@@ -323,9 +323,9 @@ class AutoMount():
 					list.append(''.join(["   <password>", sharedata['password'], "</password>\n"]))
 					list.append('  </mount>\n')
 					list.append(' </cifs>\n')
-					list.append('<fstab>\n')
+					list.append('</fstab>\n')
 					out = open('/etc/fstab', 'a')
-					line = sharedata['ip'] + "/" + sharedata['sharedir'] + " /media/net/" + sharedata['sharename'] + "    cifs   username=" + sharedata['username'] + ",password=" + sharedata['password'] + ",_netdev   0 0\n"
+					line = "//" + sharedata['ip'] + "/" + sharedata['sharedir'] + " /media/net/" + sharedata['sharename'] + "    cifs   username=" + sharedata['username'] + ",password=" + sharedata['password'] + ",_netdev   0 0\n"
 					out.write(line)
 					out.close()
 
@@ -358,7 +358,7 @@ class AutoMount():
 					list.append(''.join(["   <password>", sharedata['password'], "</password>\n"]))
 					list.append('  </mount>\n')
 					list.append(' </cifs>\n')
-					list.append('<enigma2>\n')
+					list.append('</enigma2>\n')
 
 		# Close Mountmanager Tag
 		list.append('</mountmanager>\n')
