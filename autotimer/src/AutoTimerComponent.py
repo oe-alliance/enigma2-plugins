@@ -75,8 +75,8 @@ class AutoTimerComponent(object):
 		self.searchCase = searchCase
 		self.overrideAlternatives = overrideAlternatives
 		self.timeframe = timeframe
-		self.vps_enabled = False
-		self.vps_overwrite = False
+		self.vps_enabled = vps_eabled
+		self.vps_overwrite = vps_overwrite
 
 ### Attributes / Properties
 
@@ -519,8 +519,8 @@ class AutoTimerComponent(object):
 			searchCase = self.searchCase,
 			overrideAlternatives = self.overrideAlternatives,
 			timeframe = self.timeframe,
-			vps_enabled = vps_enabled,
-			vps_overwrite = vps_overwrite,
+			vps_enabled = self.vps_enabled,
+			vps_overwrite = self.vps_overwrite,
 		)
 
 	def __deepcopy__(self, memo):
@@ -551,8 +551,8 @@ class AutoTimerComponent(object):
 			searchCase = self.searchCase,
 			overrideAlternatives = self.overrideAlternatives,
 			timeframe = self.timeframe,
-			vps_enabled = vps_enabled,
-			vps_overwrite = vps_overwrite,
+			vps_enabled = self.vps_enabled,
+			vps_overwrite = selfself..vps_overwrite,
 		)
 
 	def __eq__(self, other):
