@@ -25,8 +25,9 @@ def ChannelContextMenu___init__(self, session, csel, *args, **kwargs):
 
 	list = self["menu"].list
 	x = 0
+	searchText = _("Activate Picture in Picture")
 	for entry in list:
-		if entry[0][0] == _("Activate Picture in Picture"):
+		if entry[0][0] == searchText:
 			if csel.dopipzap:
 				entry = ChoiceEntryComponent("", (_("play in mainwindow"), self.playMain))
 			else:
@@ -305,24 +306,11 @@ def InfoBarPiP_togglePipzap(self):
 	if slist:
 		slist.togglePipzap()
 
-# Using the base implementation would cause nasty bugs, so ignore it here
-def InfoBarPiP_showPiP(self):
-	if self.session.pipshown:
-		slist = self.servicelist
-		if slist and slist.dopipzap:
-			slist.togglePipzap()
-		del self.session.pip
-		self.session.pipshown = False
-	else:
-		self.session.pip = self.session.instantiateDialog(PictureInPicture)
-		self.session.pip.show()
-		newservice = self.session.nav.getCurrentlyPlayingServiceReference()
-		if self.session.pip.playService(newservice):
-			self.session.pipshown = True
-			self.session.pip.servicePath = self.servicelist.getCurrentServicePath()
-		else:
-			self.session.pipshown = False
-			del self.session.pip
+def InfoBarPiP_showPiP(self, *args, **kwargs):
+	slist = self.servicelist
+	if self.session.pipshown and slist and slist.dopipzap:
+		slist.togglePipzap()
+	InfoBarPiP.baseShowPiP(self, *args, **kwargs)
 
 # Using the base implementation would cause nasty bugs, so ignore it here
 def InfoBarPiP_swapPiP(self):
@@ -425,8 +413,10 @@ def overwriteFunctions():
 
 	InfoBarPiP.getTogglePipzapName = InfoBarPiP_getTogglePipzapName
 	InfoBarPiP.togglePipzap = InfoBarPiP_togglePipzap
-	InfoBarPiP.showPiP = InfoBarPiP_showPiP
 	InfoBarPiP.swapPiP = InfoBarPiP_swapPiP
+
+	InfoBarPiP.baseShowPiP = InfoBarPiP.showPiP
+	InfoBarPiP.showPiP = InfoBarPiP_showPiP
 
 	PictureInPicture.baseInit = PictureInPicture.__init__
 	PictureInPicture.__init__ = PictureInPicture__init__
