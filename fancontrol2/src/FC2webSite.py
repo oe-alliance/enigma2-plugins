@@ -221,6 +221,7 @@ class FC2webLog(resource.Resource):
 				html += "<BR>" + _("File %s does not exists") % "FC2events.txt"
 			html += "</td></tr></table>"
 			html += _("Logging-Path: %s") % config.plugins.FanControl.LogPath.value
+			html += "<BR>" + _("Auto-Delete older %s Days") % config.plugins.FanControl.DeleteData.value
 			html += "</html>"
 
 		elif command[0] ==  "data":
