@@ -34,8 +34,6 @@ def ChannelContextMenu___init__(self, session, csel, *args, **kwargs):
 			break
 		x += 1
 	self["menu"].setList(list)
-ChannelContextMenu.baseInit = ChannelContextMenu.__init__
-ChannelContextMenu.__init__ = ChannelContextMenu___init__
 
 def ChannelContextMenu_playMain(self):
 	# XXX: we want to keep the current selection
@@ -43,7 +41,6 @@ def ChannelContextMenu_playMain(self):
 	self.csel.zap()
 	self.csel.setCurrentSelection(sel)
 	self.close()
-ChannelContextMenu.playMain = ChannelContextMenu_playMain
 
 # do not hide existing pip
 def ChannelContextMenu_showServiceInPiP(self):
@@ -63,27 +60,20 @@ def ChannelContextMenu_showServiceInPiP(self):
 		self.session.pipshown = False
 		del self.session.pip
 		self.session.openWithCallback(self.close, MessageBox, _("Could not open Picture in Picture"), MessageBox.TYPE_ERROR)
-ChannelContextMenu.showServiceInPiP = ChannelContextMenu_showServiceInPiP
 
 def ChannelSelectionBase__init__(self, *args, **kwargs):
 	ChannelSelectionBase.baseInit(self, *args, **kwargs)
 	self.dopipzap = False
 	self.enable_pipzap = False
-ChannelSelectionBase.baseInit = ChannelSelectionBase.__init__
-ChannelSelectionBase.__init__ = ChannelSelectionBase__init__
 
 def ChannelSelectionBase_setCurrentSelection(self, service, *args, **kwargs):
 	if service:
 		ChannelSelectionBase.baseSetCurrentSelection(self, service, *args, **kwargs)
-ChannelSelectionBase.baseSetCurrentSelection = ChannelSelectionBase.setCurrentSelection
-ChannelSelectionBase.setCurrentSelection = ChannelSelectionBase_setCurrentSelection
 
 def ChannelSelection_channelSelected(self, *args, **kwargs):
 	self.enable_pipzap = True
 	ChannelSelection.baseChannelSelected(self, *args, **kwargs)
 	self.enable_pipzap = False
-ChannelSelection.baseChannelSelected = ChannelSelection.channelSelected
-ChannelSelection.channelSelected = ChannelSelection_channelSelected
 
 def ChannelSelection_togglePipzap(self):
 	assert(self.session.pip)
@@ -118,7 +108,6 @@ def ChannelSelection_togglePipzap(self):
 		title += " (PiP)"
 	self.setTitle(title)
 	self.buildTitleString()
-ChannelSelection.togglePipzap = ChannelSelection_togglePipzap 
 
 def ChannelSelection_zap(self, *args, **kwargs):
 	if self.enable_pipzap and self.dopipzap:
@@ -140,15 +129,11 @@ def ChannelSelection_zap(self, *args, **kwargs):
 		if self.dopipzap:
 			# This unfortunately won't work with subservices
 			self.setCurrentSelection(self.session.pip.getCurrentService())
-ChannelSelection.baseZap = ChannelSelection.zap
-ChannelSelection.zap = ChannelSelection_zap
 
 def ChannelSelection_setHistoryPath(self, *args, **kwargs):
 	ChannelSelection.baseSetHistoryPath(self, *args, **kwargs)
 	if self.dopipzap:
 		self.setCurrentSelection(self.session.pip.getCurrentService())
-ChannelSelection.baseSetHistoryPath = ChannelSelection.setHistoryPath
-ChannelSelection.setHistoryPath = ChannelSelection_setHistoryPath
 
 def ChannelSelection_cancel(self, *args, **kwargs):
 	if self.revertMode is None and self.dopipzap:
@@ -156,8 +141,6 @@ def ChannelSelection_cancel(self, *args, **kwargs):
 		self.setCurrentSelection(self.session.pip.getCurrentService())
 		self.revertMode = 1337 # not in (None, MODE_TV, MODE_RADIO)
 	ChannelSelection.baseCancel(self, *args, **kwargs)
-ChannelSelection.baseCancel = ChannelSelection.cancel
-ChannelSelection.cancel = ChannelSelection_cancel
 
 #pragma mark -
 #pragma mark MoviePlayer
@@ -178,8 +161,6 @@ def MoviePlayer__init__(self, *args, **kwargs):
 			"left": self.left,
 			"right": self.right
 		}, prio = -2)
-MoviePlayer.baseInit = MoviePlayer.__init__
-MoviePlayer.__init__ = MoviePlayer__init__
 
 def MoviePlayer_up(self):
 	slist = self.servicelist
@@ -188,7 +169,6 @@ def MoviePlayer_up(self):
 		self.session.execDialog(slist)
 	else:
 		self.showMovies()
-MoviePlayer.up = MoviePlayer_up
 
 def MoviePlayer_down(self):
 	slist = self.servicelist
@@ -197,7 +177,6 @@ def MoviePlayer_down(self):
 		self.session.execDialog(slist)
 	else:
 		self.showMovies()
-MoviePlayer.down = MoviePlayer_down
 
 def MoviePlayer_right(self):
 	# XXX: gross hack, we do not really seek if changing channel in pip :-)
@@ -223,7 +202,6 @@ def MoviePlayer_right(self):
 		slist.enable_pipzap = False
 	else:
 		InfoBarSeek.seekFwd(self)
-MoviePlayer.right = MoviePlayer_right
 
 def MoviePlayer_left(self):
 	slist = self.servicelist
@@ -248,7 +226,6 @@ def MoviePlayer_left(self):
 		slist.enable_pipzap = False
 	else:
 		InfoBarSeek.seekBack(self)
-MoviePlayer.left = MoviePlayer_left
 
 def MoviePlayer_showPiP(self):
 	slist = self.servicelist
@@ -262,11 +239,9 @@ def MoviePlayer_showPiP(self):
 		self.session.pip.show()
 		self.session.pipshown = True
 		self.session.pip.playService(slist.getCurrentSelection())
-MoviePlayer.showPiP = MoviePlayer_showPiP
 
 def MoviePlayer_swapPiP(self):
 	pass
-MoviePlayer.swapPiP = MoviePlayer_swapPiP
 
 #pragma mark -
 #pragma mark InfoBarGenerics
@@ -276,29 +251,21 @@ def InfoBarNumberZap_zapToNumber(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
 	InfoBarNumberZap.baseZapToNumber(self, *args, **kwargs)
 	self.servicelist.enable_pipzap = False
-InfoBarNumberZap.baseZapToNumber = InfoBarNumberZap.zapToNumber
-InfoBarNumberZap.zapToNumber = InfoBarNumberZap_zapToNumber
 
 def InfoBarChannelSelection_zapUp(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
 	InfoBarChannelSelection.baseZapUp(self, *args, **kwargs)
 	self.servicelist.enable_pipzap = False
-InfoBarChannelSelection.baseZapUp = InfoBarChannelSelection.zapUp
-InfoBarChannelSelection.zapUp = InfoBarChannelSelection_zapUp
 
 def InfoBarChannelSelection_zapDown(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
 	InfoBarChannelSelection.baseZapDown(self, *args, **kwargs)
 	self.servicelist.enable_pipzap = False
-InfoBarChannelSelection.baseZapDown = InfoBarChannelSelection.zapDown
-InfoBarChannelSelection.zapDown = InfoBarChannelSelection_zapDown
 
 def InfoBarEPG_zapToService(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
 	InfoBarEPG.baseZapToService(self, *args, **kwargs)
 	self.servicelist.enable_pipzap = False
-InfoBarEPG.baseZapToService = InfoBarEPG.zapToService
-InfoBarEPG.zapToService = InfoBarEPG_zapToService
 
 def InfoBarShowMovies__init__(self):
 	InfoBarShowMovies.baseInit(self)
@@ -308,8 +275,6 @@ def InfoBarShowMovies__init__(self):
 			"up": (self.up, _("movie list")),
 			"down": (self.down, _("movie list"))
 		})
-InfoBarShowMovies.baseInit = InfoBarShowMovies.__init__
-InfoBarShowMovies.__init__ = InfoBarShowMovies__init__
 
 def InfoBarPiP__init__(self):
 	InfoBarPiP.baseInit(self)
@@ -320,15 +285,12 @@ def InfoBarPiP__init__(self):
 				{
 					"switchPiP": (self.togglePipzap, _("zap in pip window...")),
 				})
-InfoBarPiP.baseInit = InfoBarPiP.__init__
-InfoBarPiP.__init__ = InfoBarPiP__init__
 
 def InfoBarPiP_getTogglePipzapName(self):
 	slist = self.servicelist
 	if slist and slist.dopipzap:
 		return _("Zap focus to main screen")
 	return _("Zap focus to Picture in Picture")
-InfoBarPiP.getTogglePipzapName = InfoBarPiP_getTogglePipzapName
 
 def InfoBarPiP_togglePipzap(self):
 	# supposed to fix some problems with permanent timeshift patch
@@ -341,7 +303,6 @@ def InfoBarPiP_togglePipzap(self):
 	slist = self.servicelist
 	if slist:
 		slist.togglePipzap()
-InfoBarPiP.togglePipzap = InfoBarPiP_togglePipzap
 
 # Using the base implementation would cause nasty bugs, so ignore it here
 def InfoBarPiP_showPiP(self):
@@ -361,7 +322,6 @@ def InfoBarPiP_showPiP(self):
 		else:
 			self.session.pipshown = False
 			del self.session.pip
-InfoBarPiP.showPiP = InfoBarPiP_showPiP
 
 # Using the base implementation would cause nasty bugs, so ignore it here
 def InfoBarPiP_swapPiP(self):
@@ -382,7 +342,6 @@ def InfoBarPiP_swapPiP(self):
 				slist.lastservice.value = pipref.toString() # save service as last playing one
 			self.session.nav.stopService() # stop portal
 			self.session.nav.playService(pipref) # start subservice
-InfoBarPiP.swapPiP = InfoBarPiP_swapPiP
 
 #pragma mark -
 #pragma mark Picture in Picture
@@ -396,24 +355,91 @@ class PictureInPictureZapping(Screen):
 def PictureInPicture__init__(self, session, *args, **kwargs):
 	PictureInPicture.baseInit(self, session, *args, **kwargs)
 	self.pipActive = session.instantiateDialog(PictureInPictureZapping)
-PictureInPicture.baseInit = PictureInPicture.__init__
-PictureInPicture.__init__ = PictureInPicture__init__
 
 def PictureInPicture_active(self):
 	self.pipActive.show()
-PictureInPicture.active = PictureInPicture_active
 
 def PictureInPicture_inactive(self):
 	self.pipActive.hide()
-PictureInPicture.inactive = PictureInPicture_inactive
 
 #pragma mark -
 #pragma mark Plugin
 #pragma mark -
 
+def overwriteFunctions():
+	"""Overwrite existing functions here to increase system stability a bit."""
+	ChannelContextMenu.baseInit = ChannelContextMenu.__init__
+	ChannelContextMenu.__init__ = ChannelContextMenu___init__
+
+	ChannelContextMenu.playMain = ChannelContextMenu_playMain
+	ChannelContextMenu.showServiceInPiP = ChannelContextMenu_showServiceInPiP
+
+	ChannelSelectionBase.baseInit = ChannelSelectionBase.__init__
+	ChannelSelectionBase.__init__ = ChannelSelectionBase__init__
+
+	ChannelSelectionBase.baseSetCurrentSelection = ChannelSelectionBase.setCurrentSelection
+	ChannelSelectionBase.setCurrentSelection = ChannelSelectionBase_setCurrentSelection
+
+	ChannelSelection.baseChannelSelected = ChannelSelection.channelSelected
+	ChannelSelection.channelSelected = ChannelSelection_channelSelected
+
+	ChannelSelection.togglePipzap = ChannelSelection_togglePipzap 
+
+	ChannelSelection.baseZap = ChannelSelection.zap
+	ChannelSelection.zap = ChannelSelection_zap
+
+	ChannelSelection.baseSetHistoryPath = ChannelSelection.setHistoryPath
+	ChannelSelection.setHistoryPath = ChannelSelection_setHistoryPath
+
+	ChannelSelection.baseCancel = ChannelSelection.cancel
+	ChannelSelection.cancel = ChannelSelection_cancel
+
+	MoviePlayer.baseInit = MoviePlayer.__init__
+	MoviePlayer.__init__ = MoviePlayer__init__
+
+	MoviePlayer.up = MoviePlayer_up
+	MoviePlayer.down = MoviePlayer_down
+	MoviePlayer.right = MoviePlayer_right
+	MoviePlayer.left = MoviePlayer_left
+	MoviePlayer.showPiP = MoviePlayer_showPiP
+	MoviePlayer.swapPiP = MoviePlayer_swapPiP
+
+	InfoBarNumberZap.baseZapToNumber = InfoBarNumberZap.zapToNumber
+	InfoBarNumberZap.zapToNumber = InfoBarNumberZap_zapToNumber
+
+	InfoBarChannelSelection.baseZapUp = InfoBarChannelSelection.zapUp
+	InfoBarChannelSelection.zapUp = InfoBarChannelSelection_zapUp
+
+	InfoBarChannelSelection.baseZapDown = InfoBarChannelSelection.zapDown
+	InfoBarChannelSelection.zapDown = InfoBarChannelSelection_zapDown
+
+	InfoBarEPG.baseZapToService = InfoBarEPG.zapToService
+	InfoBarEPG.zapToService = InfoBarEPG_zapToService
+
+	InfoBarShowMovies.baseInit = InfoBarShowMovies.__init__
+	InfoBarShowMovies.__init__ = InfoBarShowMovies__init__
+
+	InfoBarPiP.baseInit = InfoBarPiP.__init__
+	InfoBarPiP.__init__ = InfoBarPiP__init__
+
+	InfoBarPiP.getTogglePipzapName = InfoBarPiP_getTogglePipzapName
+	InfoBarPiP.togglePipzap = InfoBarPiP_togglePipzap
+	InfoBarPiP.showPiP = InfoBarPiP_showPiP
+	InfoBarPiP.swapPiP = InfoBarPiP_swapPiP
+
+	PictureInPicture.baseInit = PictureInPicture.__init__
+	PictureInPicture.__init__ = PictureInPicture__init__
+
+	PictureInPicture.active = PictureInPicture_active
+	PictureInPicture.inactive = PictureInPicture_inactive
+
 # XXX: disabling more than the hotkey does not make much sense, because then you could just remove the plugin
 config.plugins.pipzap = ConfigSubsection()
 config.plugins.pipzap.enable_hotkey = ConfigEnableDisable(default = True)
+
+def autostart(reason, **kwargs):
+	if reason == 0:
+		overwriteFunctions()
 
 def main(session):
 	session.open(PipzapSetup)
@@ -421,10 +447,15 @@ def main(session):
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
+			where=PluginDescriptor.WHERE_AUTOSTART,
+			fnc=autostart,
+			needsRestart=True, # XXX: force restart for now as I don't think the plugin will work properly without one
+		),
+		PluginDescriptor(
 			name="pipzap",
 			description=_("Configure pipzap Plugin"),
 			where=PluginDescriptor.WHERE_PLUGINMENU,
 			fnc=main,
-			needsRestart=True, # XXX: force restart for now as I don't think the plugin will work properly without one
+			needsRestart=False,
 		),
 	]
