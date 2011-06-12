@@ -7,6 +7,7 @@ from enigma import eEPGCache, eServiceReference, RT_HALIGN_LEFT, \
 from Tools.LoadPixmap import LoadPixmap
 from ServiceReference import ServiceReference
 
+from EPGSearchSetup import EPGSearchSetup
 from Screens.ChannelSelection import SimpleChannelSelection
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EpgSelection import EPGSelection
@@ -53,7 +54,7 @@ def EPGSelectionInit():
 # Modified EPGSelection __init__
 def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None):
 	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
-	if self.type != EPG_TYPE_MULTI:
+	if self.type != EPG_TYPE_MULTI and config.plugins.epgsearch.add_search_to_epg.value:
 		def bluePressed():
 			cur = self["list"].getCurrent()
 			if cur[0] is not None:
@@ -215,6 +216,9 @@ class EPGSearch(EPGSelection):
 				(_("Save search as AutoTimer"), self.addAutoTimer),
 				(_("Export selected as AutoTimer"), self.exportAutoTimer),
 			))
+		options.append(
+				(_("Setup"), self.setup)
+		)
 
 		self.session.openWithCallback(
 			self.menuCallback,
@@ -282,6 +286,9 @@ class EPGSearch(EPGSelection):
 			return
 		addAutotimerFromEvent(self.session, cur[0], cur[1])
 
+	def setup(self):
+		self.session.open(EPGSearchSetup)
+
 	def blueButtonPressed(self):
 		options = [(x, x) for x in config.plugins.epgsearch.history.value]
 
@@ -311,8 +318,9 @@ class EPGSearch(EPGSelection):
 				history = config.plugins.epgsearch.history.value
 				if searchString not in history:
 					history.insert(0, searchString)
-					if len(history) > 10:
-						history.pop(10)
+					maxLen = config.plugins.epgsearch.history_length.value
+					if len(history) > maxLen:
+						del history[maxLen:]
 				else:
 					history.remove(searchString)
 					history.insert(0, searchString)
