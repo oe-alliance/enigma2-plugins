@@ -84,6 +84,13 @@ if DREAMBOX
 SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview
 endif
 
+if VUUNO
+SUBDIRS +=  fancontrol2
+endif
+if VUULTIMO
+SUBDIRS +=  fancontrol2
+endif
+
 metadir = $(datadir)/meta
 meta_DATA = index-enigma2-plugins.xml
 CLEANFILES = index-enigma2-plugins.xml
