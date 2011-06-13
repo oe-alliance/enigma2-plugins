@@ -156,12 +156,6 @@ def MoviePlayer__init__(self, *args, **kwargs):
 	baseMethods.MoviePlayer__init__(self, *args, **kwargs)
 	self.servicelist = InfoBar.instance.servicelist
 
-	# WARNING: GROSS HACK INBOUND
-	del self.list[:]
-	self.allowPiP = True
-	InfoBarPlugins.__init__(self)
-	InfoBarPiP.__init__(self)
-
 	self["DirectionActions"] = HelpableActionMap(self, "DirectionActions",
 		{
 			"left": self.left,
@@ -401,6 +395,8 @@ def overwriteFunctions():
 
 	baseMethods.MoviePlayer__init__ = MoviePlayer.__init__
 	MoviePlayer.__init__ = MoviePlayer__init__
+
+	MoviePlayer.allowPiP = property(lambda *x: True, lambda *x: None)
 
 	MoviePlayer.up = MoviePlayer_up
 	MoviePlayer.down = MoviePlayer_down
