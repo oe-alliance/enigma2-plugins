@@ -26,19 +26,20 @@ class baseMethods:
 def ChannelContextMenu___init__(self, session, csel, *args, **kwargs):
 	baseMethods.ChannelContextMenu__init__(self, session, csel, *args, **kwargs)
 
-	list = self["menu"].list
-	x = 0
-	searchText = _("Activate Picture in Picture")
-	for entry in list:
-		if entry[0][0] == searchText:
-			if csel.dopipzap:
-				entry = ChoiceEntryComponent("", (_("play in mainwindow"), self.playMain))
-			else:
-				entry = ChoiceEntryComponent("blue", (_("play as picture in picture"), self.showServiceInPiP))
-			list[x] = entry
-			break
-		x += 1
-	self["menu"].setList(list)
+	if self.pipAvailable:
+		list = self["menu"].list
+		x = 0
+		searchText = _("Activate Picture in Picture")
+		for entry in list:
+			if entry[0][0] == searchText:
+				if csel.dopipzap:
+					entry = ChoiceEntryComponent("", (_("play in mainwindow"), self.playMain))
+				else:
+					entry = ChoiceEntryComponent("blue", (_("play as picture in picture"), self.showServiceInPiP))
+				list[x] = entry
+				break
+			x += 1
+		self["menu"].setList(list)
 
 def ChannelContextMenu_playMain(self):
 	# XXX: we want to keep the current selection
