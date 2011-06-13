@@ -50,6 +50,7 @@ SUBDIRS = \
 	movieepg \
 	multirc \
 	mytube \
+	namezap \
 	ncidclient \
 	netcaster \
 	networkbrowser \

@@ -290,6 +290,10 @@ mytube/Makefile
 mytube/meta/Makefile
 mytube/src/Makefile
 
+namezap/Makefile
+namezap/meta/Makefile
+namezap/src/Makefile
+
 netcaster/Makefile
 netcaster/meta/Makefile
 netcaster/src/Makefile
