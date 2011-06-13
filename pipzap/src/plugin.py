@@ -352,7 +352,8 @@ def PictureInPicture__init__(self, session, *args, **kwargs):
 	self.pipActive = session.instantiateDialog(PictureInPictureZapping)
 
 def PictureInPicture_active(self):
-	self.pipActive.show()
+	if config.plugins.pipzap.show_label.value:
+		self.pipActive.show()
 
 def PictureInPicture_inactive(self):
 	self.pipActive.hide()
@@ -441,6 +442,7 @@ def overwriteFunctions():
 config.plugins.pipzap = ConfigSubsection()
 config.plugins.pipzap.enable_hotkey = ConfigEnableDisable(default = True)
 config.plugins.pipzap.show_in_plugins = ConfigEnableDisable(default = False)
+config.plugins.pipzap.show_label = ConfigEnableDisable(default = True)
 
 def autostart(reason, **kwargs):
 	if reason == 0:
@@ -465,6 +467,19 @@ def housekeepingPluginmenu(el):
 
 config.plugins.pipzap.show_in_plugins.addNotifier(housekeepingPluginmenu, initial_call=False, immediate_feedback=True)
 activateDescriptor = PluginDescriptor(name="pipzap", description=_("Toggle pipzap status"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=activate, needsRestart=False)
+
+def showHideNotifier(el):
+	infobar = InfoBar.instance
+	session = infobar.session
+	if session.pipshown:
+		if el.value:
+			slist = infobar.servicelist
+			if slist.dopipzap:
+				session.pip.active()
+		else:
+			session.pip.inactive()
+
+config.plugins.pipzap.show_label.addNotifier(showHideNotifier, initial_call=False, immediate_feedback=True)
 
 def Plugins(**kwargs):
 	# do not add any entry if only one (or less :P) video decoders present
