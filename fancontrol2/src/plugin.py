@@ -1028,7 +1028,7 @@ class FanControl2(Screen):
 
 def autostart(reason, **kwargs):
 	global session
-	if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/webif.py"):
+	if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/webif.pyo"):
 		from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 		from FC2webSite import FC2web, FC2webLog, FC2webChart
 		from twisted.web import static
