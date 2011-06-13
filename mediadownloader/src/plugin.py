@@ -92,6 +92,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(
 			name = "MediaDownloader",
 			where = PluginDescriptor.WHERE_FILESCAN,
-			fnc = filescan
+			fnc = filescan,
+			needsRestart = False,
 		)
 	]

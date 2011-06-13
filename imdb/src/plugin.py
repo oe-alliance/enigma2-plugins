@@ -5,6 +5,7 @@ from enigma import ePicLoad, eServiceReference
 from Screens.Screen import Screen
 from Screens.EpgSelection import EPGSelection
 from Screens.ChannelSelection import SimpleChannelSelection
+from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
 from Components.Label import Label
@@ -14,8 +15,10 @@ from Components.AVSwitch import AVSwitch
 from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
+from Components.Sources.StaticText import StaticText
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from os import environ as os_environ
+from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 import re
 import htmlentitydefs
 import urllib
@@ -103,7 +106,7 @@ class IMDB(Screen):
 			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="key_yellow" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#a08500" transparent="1" />
 			<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#18188b" transparent="1" />
-			<widget name="titellabel" position="10,40" size="330,45" valign="center" font="Regular;22"/>
+			<widget source="title" render="Label" position="10,40" size="330,45" valign="center" font="Regular;22"/>
 			<widget name="detailslabel" position="105,90" size="485,140" font="Regular;18" />
 			<widget name="castlabel" position="10,235" size="580,155" font="Regular;18" />
 			<widget name="extralabel" position="10,40" size="580,350" font="Regular;18" />
@@ -136,7 +139,13 @@ class IMDB(Screen):
 		self["starsbg"].hide()
 		self.ratingstars = -1
 
-		self["titellabel"] = Label(_("The Internet Movie Database"))
+		self["title"] = StaticText(_("The Internet Movie Database"))
+		# map new source -> old component
+		def setText(txt):
+			StaticText.setText(self["title"], txt)
+			self["titellabel"].setText(txt)
+		self["title"].setText = setText
+		self["titellabel"] = Label()
 		self["detailslabel"] = ScrollLabel("")
 		self["castlabel"] = ScrollLabel("")
 		self["extralabel"] = ScrollLabel("")
@@ -166,7 +175,7 @@ class IMDB(Screen):
 			"green": self.showMenu,
 			"yellow": self.showDetails,
 			"blue": self.showExtras,
-			"contextMenu": self.openChannelSelection,
+			"contextMenu": self.contextMenuPressed,
 			"showEventInfo": self.showDetails
 		}, -1)
 
@@ -264,7 +273,7 @@ class IMDB(Screen):
 	def resetLabels(self):
 		self["detailslabel"].setText("")
 		self["ratinglabel"].setText("")
-		self["titellabel"].setText("")
+		self["title"].setText("")
 		self["castlabel"].setText("")
 		self["titellabel"].setText("")
 		self["extralabel"].setText("")
@@ -297,7 +306,7 @@ class IMDB(Screen):
 			self["castlabel"].hide()
 			self["poster"].hide()
 			self["extralabel"].hide()
-			self["titellabel"].setText(_("Ambiguous results"))
+			self["title"].setText(_("Ambiguous results"))
 			self["detailslabel"].setText(_("Please select the matching entry"))
 			self["detailslabel"].show()
 			self["key_blue"].setText("")
@@ -343,13 +352,35 @@ class IMDB(Screen):
 			self["ratinglabel"].hide()
 			self.Page = 2
 
+	def contextMenuPressed(self):
+		list = [
+			(_("Enter search"), self.openVirtualKeyBoard),
+			(_("Select from EPG"), self.openChannelSelection),
+		]
+
+		self.session.openWithCallback(
+			self.menuCallback,
+			ChoiceBox,
+			list = list,
+		)
+
+	def menuCallback(self, ret = None):
+		ret and ret[1]()
+
+	def openVirtualKeyBoard(self):
+		self.session.openWithCallback(
+			self.gotSearchString,
+			NTIVirtualKeyBoard,
+			title = _("Enter text to search for")
+		)
+
 	def openChannelSelection(self):
 		self.session.openWithCallback(
-			self.channelSelectionClosed,
+			self.gotSearchString,
 			IMDBChannelSelection
 		)
 
-	def channelSelectionClosed(self, ret = None):
+	def gotSearchString(self, ret = None):
 		if ret:
 			self.eventName = ret
 			self.Page = 0
@@ -373,7 +404,7 @@ class IMDB(Screen):
 				self.eventName = event.getEventName()
 		if self.eventName is not "":
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
-			event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore'))
+			event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore')).replace('%20', '+')
 			localfile = "/tmp/imdbquery.html"
 			fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 			print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
@@ -388,7 +419,7 @@ class IMDB(Screen):
 	def html2utf8(self,in_html):
 		entitydict = {}
 
-		entities = re.finditer('&([^#]\D{1,5}?);', in_html)
+		entities = re.finditer('&([^#][A-Za-z]{1,5}?);', in_html)
 		for x in entities:
 			key = x.group(0)
 			if key not in entitydict:
@@ -437,7 +468,7 @@ class IMDB(Screen):
 				if splitpos > 0 and self.eventName.endswith(')'):
 					self.eventName = self.eventName[splitpos+1:-1]
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.eventName))
-					event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore'))
+					event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore')).replace('%20', '+')
 					localfile = "/tmp/imdbquery.html"
 					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 					print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
@@ -461,7 +492,7 @@ class IMDB(Screen):
 			Titeltext = self.generalinfos.group("title")
 			if len(Titeltext) > 57:
 				Titeltext = Titeltext[0:54] + "..."
-			self["titellabel"].setText(Titeltext)
+			self["title"].setText(Titeltext)
 
 			Detailstext = ""
 
@@ -559,13 +590,11 @@ class IMDbLCDScreen(Screen):
 	skin = """
 	<screen position="0,0" size="132,64" title="IMDB Plugin">
 		<widget name="headline" position="4,0" size="128,22" font="Regular;20"/>
-		<widget source="session.Event_Now" render="Label" position="6,26" size="120,34" font="Regular;14" >
-			<convert type="EventName">Name</convert>
-		</widget>
+		<widget source="parent.title" render="Label" position="6,26" size="120,34" font="Regular;14"/>
 	</screen>"""
 
 	def __init__(self, session, parent):
-		Screen.__init__(self, session)
+		Screen.__init__(self, session, parent)
 		self["headline"] = Label(_("IMDb Plugin"))
 
 def eventinfo(session, eventName="", **kwargs):
@@ -579,21 +608,17 @@ def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
 
 def Plugins(**kwargs):
-	try:
-		return [PluginDescriptor(name="IMDb Details",
-				description=_("Query details from the Internet Movie Database"),
-				icon="imdb.png",
-				where = PluginDescriptor.WHERE_PLUGINMENU,
-				fnc = main),
-				PluginDescriptor(name="IMDb Details",
-				description=_("Query details from the Internet Movie Database"),
-				where = PluginDescriptor.WHERE_EVENTINFO,
-				fnc = eventinfo)
-				]
-	except AttributeError:
-		wherelist = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU]
-		return PluginDescriptor(name="IMDb Details",
-				description=_("Query details from the Internet Movie Database"),
-				icon="imdb.png",
-				where = wherelist,
-				fnc=main)	
+	return [PluginDescriptor(name="IMDb Details",
+			description=_("Query details from the Internet Movie Database"),
+			icon="imdb.png",
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main,
+			needsRestart=False,
+			),
+			PluginDescriptor(name="IMDb Details",
+			description=_("Query details from the Internet Movie Database"),
+			where=PluginDescriptor.WHERE_EVENTINFO,
+			fnc=eventinfo,
+			needsRestart=False,
+			),
+		]

@@ -27,7 +27,8 @@ def Plugins(**kwargs):
 			name = "Werbezapper",
 			description = _("Automatically zaps back to current service after given Time"),
 			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-			fnc = main
+			fnc = main,
+			needsRestart = False,
 		)
 	]
 

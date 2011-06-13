@@ -320,6 +320,11 @@ class EasyMedia(Screen):
 		self.list = []
 		self.__keys = []
 		MPaskList = []
+		self["key_pvr"] = StaticText(" ")
+		self["key_yellow"] = StaticText(" ")
+		self["key_green"] = StaticText(" ")
+		self["key_red"] = StaticText(" ")
+		self["key_blue"] = StaticText(" ")
 		if True:
 			self.__keys.append("movies")
 			MPaskList.append((_("Movies"), "PLAYMOVIES"))
@@ -386,11 +391,11 @@ class EasyMedia(Screen):
 		for x in MPaskList:
 			strpos = str(self.__keys[pos])
 			self.list.append(MPanelEntryComponent(key = strpos, text = x, cell = pos))
-			if pos==0: self["key_pvr"] = StaticText(MPaskList[0][0])
-			elif pos==1: self["key_red"] = StaticText(MPaskList[1][0])
-			elif pos==2: self["key_green"] = StaticText(MPaskList[2][0])
-			elif pos==3: self["key_yellow"] = StaticText(MPaskList[3][0])
-			elif pos==4: self["key_blue"] = StaticText(MPaskList[4][0])
+			if pos==0: self["key_pvr"].setText(MPaskList[0][0])
+			elif pos==1: self["key_red"].setText(MPaskList[1][0])
+			elif pos==2: self["key_green"].setText(MPaskList[2][0])
+			elif pos==3: self["key_yellow"].setText(MPaskList[3][0])
+			elif pos==4: self["key_blue"].setText(MPaskList[4][0])
 			pos += 1
 		self["list"] = MPanelList(list = self.list, selection = 0)
 		self["list"].onSelectionChanged.append(self.updateOLED)
@@ -399,11 +404,11 @@ class EasyMedia(Screen):
 			"ok": self.go,
 			"back": self.cancel,
 			"menu": self.emContextMenu,
-			"showMovies": lambda: self.go2(MPaskList[0]),
-			"green": lambda: self.go2(MPaskList[2]),
-			"red": lambda: self.go2(MPaskList[1]),
-			"blue": lambda: self.go2(MPaskList[4]),
-			"yellow": lambda: self.go2(MPaskList[3])
+			"showMovies": lambda: self.go2(MPaskList,0),
+			"green": lambda: self.go2(MPaskList,2),
+			"red": lambda: self.go2(MPaskList,1),
+			"blue": lambda: self.go2(MPaskList,4),
+			"yellow": lambda: self.go2(MPaskList,3)
 		}, -1)
 
 	def cancel(self):
@@ -416,8 +421,21 @@ class EasyMedia(Screen):
 		else:
 			self.cancel()
 
-	def go2(self, wohin):
-		self.close(wohin)
+	def go2(self, was, wohin):
+		if wohin == 0:
+			self.close(was[wohin])
+		elif wohin == 1:
+			if len(was)>1: 
+				self.close(was[wohin])
+		elif wohin == 2:
+			if len(was)>2: 
+				self.close(was[wohin])
+		elif wohin == 3:
+			if len(was)>3: 
+				self.close(was[wohin])
+		elif wohin == 4:
+			if len(was)>4: 
+				self.close(was[wohin])
 
 	def goEntry(self, entry):
 		if len(entry) > 2 and isinstance(entry[1], str) and entry[1] == "CALLFUNC":

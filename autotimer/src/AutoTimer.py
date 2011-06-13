@@ -251,6 +251,7 @@ class AutoTimerTask(Components.Task.PythonTask):
 
 				# If event starts in less than 60 seconds skip it
 				if begin < time() + 60:
+					print "[AutoTimer] Skipping an event because it starts in less than 60 seconds"
 					continue
 
 				# If maximum days in future is set then check time
@@ -292,11 +293,12 @@ class AutoTimerTask(Components.Task.PythonTask):
 				if self.simulateOnly:
 					continue
 
-				# Reset movie Exists
-				movieExists = False
 
 				# Check for existing recordings in directory
 				if timer.avoidDuplicateDescription == 3:
+					# Reset movie Exists
+					movieExists = False
+
 					# Eventually create cache
 					if dest and dest not in self.moviedict:
 						movielist = self.serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
@@ -328,8 +330,8 @@ class AutoTimerTask(Components.Task.PythonTask):
 							movieExists = True
 							break
 
-				if movieExists:
-					continue
+					if movieExists:
+						continue
 
 				# Initialize
 				newEntry = None
@@ -391,6 +393,7 @@ class AutoTimerTask(Components.Task.PythonTask):
 							continue
 
 					if timer.checkCounter(timestamp):
+						print "[AutoTimer] Not adding new timer because counter is depleted."
 						continue
 
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, description, eit)

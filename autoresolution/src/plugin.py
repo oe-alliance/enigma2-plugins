@@ -14,6 +14,9 @@ from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw # depends on Videomode Plugin
 from Components.Sources.Boolean import Boolean
 
+# for localized messages
+from . import _
+
 usable = False
 preferedmodes = None
 default = None
@@ -222,7 +225,7 @@ class AutoRes(Screen):
 				self.session.openWithCallback(
 					self.confirm,
 					MessageBox,
-					_("Autoresolution Plugin Testmode:\nIs %s ok?") % (resolutionlabeltxt),
+					_("Autoresolution Plugin Testmode:\nIs %s OK?") % (resolutionlabeltxt),
 					MessageBox.TYPE_YESNO,
 					timeout = 15,
 					default = False
@@ -355,7 +358,7 @@ def autostart(reason, **kwargs):
 def startSetup(menuid):
 	if menuid != "system":
 		return [ ]
-	return [("Autoresolution...", autoresSetup, "autores_setup", 45)]
+	 return [(_("Autoresolution"), autoresSetup, "autores_setup", 45)]
 
 def autoresSetup(session, **kwargs):
 	autostart(reason=0, session=session)

@@ -48,16 +48,19 @@ def Plugins(**kwargs):
 			description = _("Search EPG"),
 			where = PluginDescriptor.WHERE_PLUGINMENU,
 			fnc = main,
+			needsRestart = False,
 		),
 		PluginDescriptor(
 			name = _("search EPG..."),
 			where = PluginDescriptor.WHERE_EVENTINFO,
 			fnc = eventinfo,
+			needsRestart = False,
 		),
 		PluginDescriptor(
 			name = "EPGSearch",
 			description = _("search EPG..."),
 			where = PluginDescriptor.WHERE_MOVIELIST,
 			fnc = movielist,
+			needsRestart = False,
 		),
 	]

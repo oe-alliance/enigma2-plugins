@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="EPG" />
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>MovieEPG</name>
+                    <packagename>enigma2-plugin-extensions-movieepg</packagename>
+                    <shortdescription>Access the EPG from within the Movie Player</shortdescription>
+					<description>Allows you to access the service list and plugins requiring access to the service list (e.g. Graphical Multi EPG) from within the standard movie player.
+DO NOT install this plugin if you're using a nonstandard movie player, e.g. EMC. It will probably break and you might end up with a unusable movie player until you uninstall one of the conflicting plugins.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-movieepg" />
+	  </files>
+</default>

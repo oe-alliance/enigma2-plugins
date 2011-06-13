@@ -5,14 +5,16 @@ class SleepTimer(Converter):
     ENABLED = 0
     TIME = 1
     ACTION = 2
-    TEXT = 3
+    CONFIRMED = 3
+    TEXT = 4
     
     def __init__(self, type):
         Converter.__init__(self, type)
         self.type = { "Enabled" : self.ENABLED,
                       "Time" : self.TIME,
                       "Action" : self.ACTION,
-                      "Text" : self.TEXT
+                      "Text" : self.TEXT,
+                      "Confirmed" : self.CONFIRMED,
                     }[type]
 
     @cached
@@ -25,9 +27,11 @@ class SleepTimer(Converter):
             return str(timer[1])
         elif self.type is self.ACTION:
             return str(timer[2])
+        elif self.type is self.CONFIRMED:
+            return str(timer[3])
         elif self.type is self.TEXT:
-            if not timer[3] is None:
-                return str(timer[3])
+            if not timer[4] is None:
+                return str(timer[4])
             else:
                 return "" 
         else:

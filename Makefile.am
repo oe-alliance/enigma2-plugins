@@ -38,6 +38,7 @@ SUBDIRS = \
 	movieretitle \
 	moviesearch \
 	movietagger \
+	movieepg \
 	multirc \
 	mytube \
 	ncidclient \
@@ -49,6 +50,7 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
+	pipzap \
 	podcast \
 	porncenter \
 	quickbutton \
