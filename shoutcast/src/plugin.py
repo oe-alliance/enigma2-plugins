@@ -70,7 +70,8 @@ config.plugins.shoutcast.dirname = ConfigDirectory(default = "/hdd/streamripper/
 config.plugins.shoutcast.riptosinglefile = ConfigYesNo(default = False)
 config.plugins.shoutcast.createdirforeachstream = ConfigYesNo(default = True)
 config.plugins.shoutcast.addsequenceoutputfile = ConfigYesNo(default = False)
-
+config.plugins.shoutcast.name = ConfigText(default = "SHOUTcast")
+shoutcast_pluginversion = "1.0"
 
 class SHOUTcastGenre:
 	def __init__(self, name = ""):
