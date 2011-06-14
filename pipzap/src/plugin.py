@@ -12,6 +12,7 @@ from Screens.InfoBar import InfoBar, MoviePlayer
 from Screens.InfoBarGenerics import InfoBarNumberZap, InfoBarEPG, InfoBarChannelSelection, InfoBarPiP, InfoBarShowMovies, InfoBarTimeshift, InfoBarSeek, InfoBarPlugins
 from Screens.PictureInPicture import PictureInPicture
 from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
 from PipzapSetup import PipzapSetup
 from Components.PluginComponent import plugins
 
@@ -449,7 +450,11 @@ def autostart(reason, **kwargs):
 		overwriteFunctions()
 
 def activate(session, *args, **kwargs):
-	InfoBar.instance.togglePipzap()
+	infobar = InfoBar.instance
+	if hasattr(infobar, 'togglePipzap'): # check if plugin is already hooked into enigma2
+		infobar.togglePipzap()
+	else:
+		session.open(MessageBox, _("pipzap not properly installed.\nPlease restart Enigma2."), MessageBox.TYPE_ERROR)
 
 def main(session, *args, **kwargs):
 	session.open(PipzapSetup)
@@ -471,13 +476,13 @@ activateDescriptor = PluginDescriptor(name="pipzap", description=_("Toggle pipza
 def showHideNotifier(el):
 	infobar = InfoBar.instance
 	session = infobar.session
-	if session.pipshown:
-		if el.value:
-			slist = infobar.servicelist
-			if slist.dopipzap:
+	slist = infobar.servicelist
+	if hasattr(slist, 'dopipzap'): # check if plugin is already hooked into enigma2
+		if session.pipshown:
+			if el.value and slist.dopipzap:
 				session.pip.active()
-		else:
-			session.pip.inactive()
+			else:
+				session.pip.inactive()
 
 config.plugins.pipzap.show_label.addNotifier(showHideNotifier, initial_call=False, immediate_feedback=True)
 
