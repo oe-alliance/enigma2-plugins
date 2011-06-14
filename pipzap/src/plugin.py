@@ -155,7 +155,7 @@ def ChannelSelection_cancel(self, *args, **kwargs):
 
 def MoviePlayer__init__(self, *args, **kwargs):
 	baseMethods.MoviePlayer__init__(self, *args, **kwargs)
-	self.servicelist = InfoBar.instance.servicelist
+	self.servicelist = InfoBar.instance and InfoBar.instance.servicelist
 
 	self["DirectionActions"] = HelpableActionMap(self, "DirectionActions",
 		{
@@ -267,12 +267,16 @@ def InfoBarShowMovies__init__(self):
 def InfoBarPiP__init__(self):
 	baseMethods.InfoBarPiP__init__(self)
 	if SystemInfo.get("NumVideoDecoders", 1) > 1 and self.allowPiP:
-		self.addExtension((self.getTogglePipzapName, self.togglePipzap, self.pipShown), "red")
+		self.addExtension((self.getTogglePipzapName, self.togglePipzap, self.pipzapAvailable), "red")
 		if config.plugins.pipzap.enable_hotkey.value:
 			self["pipzapActions"] = HelpableActionMap(self, "pipzapActions",
 				{
 					"switchPiP": (self.togglePipzap, _("zap in pip window...")),
 				})
+
+def InfoBarPiP_pipzapAvailable(self):
+	slist = self.servicelist
+	return True if slist and self.session.pipshown else False
 
 def InfoBarPiP_getTogglePipzapName(self):
 	slist = self.servicelist
@@ -424,6 +428,7 @@ def overwriteFunctions():
 	baseMethods.InfoBarPiP__init__ = InfoBarPiP.__init__
 	InfoBarPiP.__init__ = InfoBarPiP__init__
 
+	InfoBarPiP.pipzapAvailable = InfoBarPiP_pipzapAvailable
 	InfoBarPiP.getTogglePipzapName = InfoBarPiP_getTogglePipzapName
 	InfoBarPiP.togglePipzap = InfoBarPiP_togglePipzap
 	InfoBarPiP.swapPiP = InfoBarPiP_swapPiP
@@ -451,7 +456,9 @@ def autostart(reason, **kwargs):
 
 def activate(session, *args, **kwargs):
 	infobar = InfoBar.instance
-	if hasattr(infobar, 'togglePipzap'): # check if plugin is already hooked into enigma2
+	if not infobar:
+		session.open(MessageBox, _("Unable to access InfoBar.\npipzap not available."), MessageBox.TYPE_ERROR)
+	elif hasattr(infobar, 'togglePipzap'): # check if plugin is already hooked into enigma2
 		infobar.togglePipzap()
 	else:
 		session.open(MessageBox, _("pipzap not properly installed.\nPlease restart Enigma2."), MessageBox.TYPE_ERROR)
@@ -475,9 +482,11 @@ activateDescriptor = PluginDescriptor(name="pipzap", description=_("Toggle pipza
 
 def showHideNotifier(el):
 	infobar = InfoBar.instance
+	if not infobar:
+		return
 	session = infobar.session
 	slist = infobar.servicelist
-	if hasattr(slist, 'dopipzap'): # check if plugin is already hooked into enigma2
+	if slist and hasattr(slist, 'dopipzap'): # check if plugin is already hooked into enigma2
 		if session.pipshown:
 			if el.value and slist.dopipzap:
 				session.pip.active()
