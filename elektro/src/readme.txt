@@ -1,5 +1,5 @@
 ====================================================
-Elektro Power Save for Dreambox 7025 
+Elektro Power Save for Dreambox 
 Version 1 & 2 by gutemine
 Version 3 by Morty <morty@gmx.net>
 ====================================================
@@ -44,108 +44,9 @@ Release infos
 3.3.4 Added Turkish locale by MytHoLoG	  
 3.4.0 no shutdown if HDD not Idle (joergm6)  
 3.4.1 Fix: Multi-Language (locale) does not work 
-====================================================
-The English Documentation follows the German one 
-====================================================
-
-1) Voraussetzung
-----------------
-Power Save sollte auf den meisten Systemen mit Enigma2
-funktionieren. Muss aber nicht.
-DM7025 + DM8000: Wird unterstützt.
-DM800: Kann nicht alleine aufwachen, wird daher nicht
-wirklich unterstützt.
-
-2) Installation
----------------
-
-Zuerst kopiert das elektro*.ipk File vom  auf /tmp mit 
-ftp (TCP/IP muss natürlich schon funktionieren). 
-
-Wenn Ihr ein Image geflashed habt, das ein Blue 
-Pannel hat könnt Ihr damit mit Manual Install das
-ipk file installieren.
-
-Wenn nicht, dann installiert elektro mit folgenden 
-Kommandos im Telnet:
-
-cd /
-ipkg install /tmp/elektro*.ipk
-
-Damit Elektro zuverlässig funktioniert muss die Box 
-neu gestartet werden. 
+3.4.2 Enhance user interface (configuration menu)
 
 
-3) Funktionsweise
------------------
-
-Das Elektro Power Save Plugin sorgt dafür, zu die Box
-zu bestimmten Zeiten in den Ruhezustand (Deep Standby)
-heruntergefahren wird. Dies passiert nur, wenn sie
-sich in Standby befindet und keine Aufnahme läuft
-oder in den nächsten 20 Minuten gestartet wird.
-
-Zu Aufnahmen und nach Ende der Ruhezeit wacht die Box
-von alleine wieder auf, so dass man nicht ewig warten
-muss, bis sie Bereit ist.
-
-4) Optionen
------------
-Hauptmenü -> Erweiterungen -> Elektro Power Save
-
- - Elektro Power Save aktivieren
-   Aktiviert das Plugin
-   
- - Nach dem Booten in den Standby
-   Geht nach dem Booten in den Standby
-   
- - Nach dem manuellen Booten in den Standby
-   Soll nach einem manuellen Bootvorgang in den 
-   Standby gegangen werden? Die Box geht nach 
-   einem manuellen Bootvorgang erst in der nächsten
-   den Ruhezeit in den Ruhezustand, selbst wenn
-   diese Option aktiviert ist.
-   Diese Option wird nur ausgewertet, wenn "Nach 
-   dem Booten in den Standby" aktiviert ist.
-   
- - In-den-Standby-Bildschirm Anzeigezeit
-   Stellt ein wie lange die Stanby-Abfrge angezeigt
-   wird. Dieser Wert kann erhöht werden um sicher zu
-   stellen, dass sich die Box während der Ruhe-Zeit 
-   nicht zu schnell wieder abschaltet.
-   
- - Erzwinge Ruhezustand
-   Erzwingt den Ruhezustand auch, wenn die Box nicht
-   im Standby ist. Auf Aufnahmen hat dies keinen Ein-
-   fluss.
-   
- - Nicht schlafen, wenn die HDD aktiv ist
-   Warte bis die Festplatte in den Ruhemodus geht. Je
-   nach Konfiguration kann dies den Ruhezustand
-   vollständig unterbinden.
-   
- - Nicht aufwachen
-   Die Box wacht nach dem eine der Ruhe-Zeit nicht von
-   alleine auf.
-   
- - Urlaubsmodus
-   Die Box geht immer schlafen, wenn nicht gerade
-   aufgenommen wird.
-   
- - Die nächste Tag beginnt um und sostige Zeiten
-   Soll die Box Montag Nacht um 1 in den Ruhezustand,
-   ist es genau genommen schon Dienstag. Damit dies
-   trotzdem möglich ist, muss angegeben werden wann 
-   der nächste Tag anfängt.
-   Der Rest ist hoffentlich selbsterklärend.
-   
-
-
-
-====================================================
-Viel Spass mit dem Stromsparen und Umweltschützen
-mit dem Elektro Plugin auf der Dreambox 7025 !!!!
-====================================================
 
 
 1) Prerequisites
@@ -153,90 +54,109 @@ mit dem Elektro Plugin auf der Dreambox 7025 !!!!
 
 Should work on most systems using Enigma2, but this 
 isn't granted.
-DM7025 + DM8000: Supported.
+DM7025, DM800SE  + DM8000: Supported.
 DM800: Can not wake up by itself. It therefore isn't
 really supported.
 
 2) Installation
 ---------------
 
-First copy the elektro*.ipk file from elektro*.zip
-to /tmp with ftp (TCP/IP must be working already). 
+If your Dreambox has Internet access, Elektro can be
+installed using Plugin-Browser. Or using Addons, if 
+it's a Blue Panel Image.
 
-If you have flashed an image that offer in Blue 
-Pannel Manual Addon Install you can use this 
-functionality to install the ipk file.
+Else, simply copy the elektro*.ipk file to /tmp with
+FTP (TCP/IP must be working already) or from an
+USB stick using a Filebrowser.
 
-If not, then install Elektro by entering the 
-following commands in a Telnet session:
+Then install by "Install local extension" (Menu 
+Setup Software management). 
+
+Or by entering the following commands in a Telnet
+session:
 
 cd /
 ipkg install /tmp/elektro*.ipk
 
-To ensure proper operation of Elektro please reboot
-the box. 
+To ensure proper operation of Elektro please "Restart"
+(reboot) the Dreambox. 
 
 
 3) Mode of operation    
 --------------------
-The Elektro Power Save Plugin puts the box from 
-stand by to sleep mode (Deep Standby) at certain 
-times. This only happens if the box is in standby
-and no recording is running or sheduled in the 
+The Elektro Power Save Plugin puts the Dreambox from
+Standby to sleep mode (Deep Standby) at specified times.
+This only happens if the box is in Standby mode
+and no recording is running or scheduled during the
 next 20 minutes.
 
-The box automatically wakes up for recordings or
-at the end of the sleep time. You therefore don't
-have to wait until it is on again.
+The Dreambox automatically wakes up for recordings or
+at the end of the specified sleep time. Hence you needn't
+wait for it to boot-up.
 
-4) Optiones
------------
+4) Options
+----------
 Main menu -> Extensions -> Elektro Power Save
 
+ - Show in:
+   Specify whether Elektro shall show up in plugin menu 
+   or extensions menu (needs GUI restart).
+
+ - Name:
+   Specify plugin name to be used in menu (needs 
+   GUI restart).
+
+ - Description:
+   Specify plugin description to be used in menu 
+   (needs GUI restart).
+
  - Enable Elektro Power Save
-   Enables the Plugin.
+   Unless this is enabled, this plugin won't run 
+   automatically.
    
- - Standby on boot
+ - Standby on boot:
    Puts the box in standby after boot.  
    
- - Standby on manual boot
+ - Standby on manual boot:
    Whether to put the box in standby when booted
-   manually. On manual boot the box will not go
-   to sleep until the next sleep intervall eaven
-   when this is turned on.
-   This option is only evaluated if Standby on
-   boot is turned on.  
+   manually. On manual boot the box will not go to
+   standby before the next deep standby interval
+   starts, even if this option is set.
+   This option is only active if 'Standby on boot'
+   option is set, too.  
    
- - Standby on boot screen timeout
-   How long to show the standby on boot screen.
-   This value can be encreased to ensure the box
-   does not shut down again to quickly during
-   sleep times.
+ - Standby on boot screen timeout:
+   Specify how long to show the standby query on
+   boot screen. This value can be set to ensure
+   the box does not shut down to deep standby again
+   too fast when in standby mode.
    
- - Force sleep 
-   Forces sleep, even when not in standby. This
-   has influence on sheduled recordings.
+ - Force sleep (even when not in standby):
+   Forces deep standby, even when not in standby mode.
+   Scheduled recordings remain unaffected.
  
- - Don't sleep while hdd is active
-   Wait for the HDD to got to sleep mode. Depending on
-   the configuration this can keep the box from going
-   to sleep mode.
+ - Avoid deep standby when HDD is active, e.g. for FTP:
+   Wait for the HDD to enter sleep mode. Depending on
+   the configuration this can prevent the box entirely
+   from entering deep standby mode.
    
- - Dont wake up
-   Do not wake up at the end of the sleep time.
+ - Dont wake up:
+   Do not wake up at the end of next deep standby
+   interval.
    
- - Holiday mode
-   The box goes to sleep when not recording   
+ - Holiday mode:
+   The box always enters deep standby mode, except
+   for recording.
    
- - Next day starts at and other times
-   If the box is supposed to go to sleep Monday night
-   at 1 it is actually already Thuesday. To make this
-   nonetheless possible, it must be known when the
-   next day Starts.
+ - Next day starts at and other times:
+   If the box is supposed to enter deep standby
+   e.g. monday night at 1 AM, it actually is already
+   tuesday. To enable this anyway, differing next day
+   start time can to be specified here.   
    Hopefully the rest is self-explanatory. 
 
 
 ======================================================
-Have Fun to let Elektro Save Power and the 
-Environment with your Dreambox 7025 !!!!
+Have fun to let Elektro save power and preserve the 
+environment on using your Dreambox!!!!
 ======================================================

@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Elektro Power Save\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-18 14:48+0100\n"
-"PO-Revision-Date: 2010-07-18 14:49+0100\n"
-"Last-Translator: Moritz 'Morty' Strübe <morty@gmx.net>\n"
+"POT-Creation-Date: 2011-06-14 17:17+0100\n"
+"PO-Revision-Date: 2011-06-14 17:27+0100\n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: Morty <morty@gmx.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -12,127 +12,187 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: ../../..\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../src\n"
 
-#: plugin.py:113
-#: plugin_neu.py:113
+#: ../src/plugin.py:96
+msgid "Elektro Power Save"
+msgstr "Elektro Power Save"
+
+#: ../src/plugin.py:97
+msgid "Automatically shut down to deep standby"
+msgstr "Elektro Power Save aktivieren"
+
+#: ../src/plugin.py:98
+msgid "Plugin menu"
+msgstr "Plugin Menü"
+
+#: ../src/plugin.py:98
+msgid "Extensions menu"
+msgstr "Erweiterungs-Menü"
+
+#: ../src/plugin.py:112
 msgid "Monday"
 msgstr "Montag"
 
-#: plugin.py:114
-#: plugin_neu.py:114
+#: ../src/plugin.py:113
 msgid "Tuesday"
 msgstr "Dienstag"
 
-#: plugin.py:115
-#: plugin_neu.py:115
+#: ../src/plugin.py:114
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: plugin.py:116
-#: plugin_neu.py:116
+#: ../src/plugin.py:115
 msgid "Thursday"
 msgstr "Donnerstag"
 
-#: plugin.py:117
-#: plugin_neu.py:117
+#: ../src/plugin.py:116
 msgid "Friday"
 msgstr "Freitag"
 
-#: plugin.py:118
-#: plugin_neu.py:118
+#: ../src/plugin.py:117
 msgid "Saturday"
 msgstr "Samstag"
 
-#: plugin.py:119
-#: plugin_neu.py:119
+#: ../src/plugin.py:118
 msgid "Sunday"
 msgstr "Sonntag"
 
-#: plugin.py:203
-#: plugin_neu.py:203
+#: ../src/plugin.py:158
+#: ../src/plugin.py:169
+#: ../src/plugin.py:177
+#: ../src/plugin.py:283
+msgid "Ver."
+msgstr "Ver."
+
+#: ../src/plugin.py:218
+msgid "Show in"
+msgstr "Zeigen in"
+
+#: ../src/plugin.py:219
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr "Auswahl, ob Elektro im Plugin Menü oder Erweiterungs-Menü gezeigt werden soll (erfordert GUI Neustart)."
+
+#: ../src/plugin.py:220
+msgid "Name"
+msgstr "Name"
+
+#: ../src/plugin.py:221
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr "Name, unter dem das Plugin im Menü erscheinen soll (erfordert GUI Neustart)."
+
+#: ../src/plugin.py:222
+msgid "Description"
+msgstr "Beschreibung"
+
+#: ../src/plugin.py:223
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr "Beschreibung, mit der das Plugin im Menü erscheinen soll (erfordert GUI Neustart)."
+
+#: ../src/plugin.py:224
 msgid "Enable Elektro Power Save"
 msgstr "Elektro Power Save aktivieren"
 
-#: plugin.py:204
-#: plugin.py:309
-#: plugin_neu.py:204
-#: plugin_neu.py:308
+#: ../src/plugin.py:225
+msgid "Unless this is enabled, this plugin won't run automatically."
+msgstr "Aktiviert das Plugin"
+
+#: ../src/plugin.py:226
+#: ../src/plugin.py:369
 msgid "Standby on boot"
 msgstr "Nach dem Booten in den Standby"
 
-#: plugin.py:205
-#: plugin_neu.py:205
+#: ../src/plugin.py:227
+msgid "Puts the box in standby mode after boot."
+msgstr "Versetzt die Box nach dem Booten in den Standby Modus."
+
+#: ../src/plugin.py:228
 msgid "Standby on manual boot"
 msgstr "Nach dem manuellen Booten in den Standby"
 
-#: plugin.py:206
-#: plugin_neu.py:206
-msgid "Standby on boot screen timeout"
-msgstr "In-den-Standby-Bildschirm Anzeigezeit"
+#: ../src/plugin.py:229
+msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
+msgstr "Nach einem manuellen Bootvorgang in den Standby Modus gehen? Die Box geht nach einem manuellen Bootvorgang nicht vor der nächsten Deep Standby-Zeit in den Ruhezustand, selbst wenn diese Option aktiviert ist. Diese Option wird nur wirksam, wenn 'Nach dem Booten in den Standby' auch aktiviert ist."
 
-#: plugin.py:207
-#: plugin_neu.py:207
+#: ../src/plugin.py:230
+msgid "Standby on boot screen timeout"
+msgstr "Anzeigedauer der Abfrage \"In den Standby?\""
+
+#: ../src/plugin.py:231
+msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
+msgstr "Stellt ein, wie lange die Standby-Abfrage angezeigt wird. Dieser Wert kann gesetzt werden um sicher zu stellen, dass sich die Box während der Standby-Zeit nicht zu schnell wieder abschaltet."
+
+#: ../src/plugin.py:232
 msgid "Force sleep (even when not in standby)"
 msgstr "Erzwinge Ruhezustand (auch wenn nicht im Standby)"
 
-#: plugin.py:208
-msgid "Don't sleep while hdd is active (e.g. ftp)"
-msgstr "Nicht schlafen, wenn die HDD aktiv ist (z.B. ftp)"
+#: ../src/plugin.py:233
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr "Erzwingt den Ruhezustand auch, wenn die Box nicht im Standby ist. Auf Aufnahmen hat dies keinen Einfluss."
 
-#: plugin.py:209
-#: plugin_neu.py:208
-msgid "Dont wake up"
+#: ../src/plugin.py:234
+msgid "Avoid deep standby when HDD is active, e.g. for FTP"
+msgstr "Kein Deep Standby, wenn die HDD aktiv ist, z. B. für FTP"
+
+#: ../src/plugin.py:235
+msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
+msgstr "Warten bis die Festplatte in den Ruhemodus geht. Je nach Konfiguration kann dies den Ruhezustand vollständig unterbinden."
+
+#: ../src/plugin.py:236
+msgid "Don't wake up"
 msgstr "Nicht aufwachen"
 
-#: plugin.py:210
-#: plugin_neu.py:209
-msgid "Holiday mode (experimental)"
-msgstr "Urlaubsmodus (Experimentell)"
+#: ../src/plugin.py:237
+msgid "Do not wake up at the end of next deep standby interval."
+msgstr "Die Box wacht nach dem Ende der nächsten Ruhezeit nicht automatisch auf."
 
-#: plugin.py:212
-#: plugin_neu.py:211
+#: ../src/plugin.py:238
+msgid "Holiday mode (experimental)"
+msgstr "Urlaubsmodus (experimentell)"
+
+#: ../src/plugin.py:239
+msgid "The box always enters deep standby mode, except for recording."
+msgstr "Die Box bleibt immer im Deep Standby Modus, sofern nicht gerade aufgenommen wird."
+
+#: ../src/plugin.py:240
 msgid "Next day starts at"
 msgstr "Die nächste Tag beginnt um"
 
-#: plugin.py:215
-#: plugin_neu.py:214
+#: ../src/plugin.py:241
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr "Soll die Box z.B. Montag Nacht um 1 Uhr in den Deep Standby gehen, ist es genau genommen schon Dienstag. Damit dies trotzdem möglich ist, muss angegeben werden, wann der nächste Tag anfängt."
+
+#: ../src/plugin.py:245
 msgid "Wakeup"
 msgstr "Aufwachen"
 
-#: plugin.py:216
-#: plugin_neu.py:215
+#: ../src/plugin.py:246
 msgid "Sleep"
 msgstr "Ruhezustand"
 
-#: plugin.py:220
-#: plugin_neu.py:219
+#: ../src/plugin.py:262
 msgid "Cancel"
 msgstr "Abbruch"
 
-#: plugin.py:221
-#: plugin_neu.py:220
+#: ../src/plugin.py:263
 msgid "Ok"
 msgstr "OK"
 
-#: plugin.py:222
-#: plugin_neu.py:221
+#: ../src/plugin.py:264
 msgid "Help"
 msgstr "Hilfe"
 
-#: plugin.py:246
-#: plugin_neu.py:245
+#: ../src/plugin.py:304
+#: ../src/plugin.py:306
 msgid "Showing Elektro readme.txt"
-msgstr "Zeige Electro Readme.txt"
+msgstr "Zeige Elektro Readme.txt"
 
-#: plugin.py:332
-#: plugin_neu.py:331
+#: ../src/plugin.py:392
 msgid "Go to Standby now?"
 msgstr "Jetzt in den Standby gehen?"
 
-#: plugin.py:480
-#: plugin_neu.py:479
+#: ../src/plugin.py:543
 msgid "Go to sleep now?"
 msgstr "Jetzt in den Ruhezustand gehen?"
 
