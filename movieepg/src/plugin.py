@@ -6,6 +6,7 @@ from Tools.BoundFunction import boundFunction
 from Screens.InfoBarGenerics import InfoBarPlugins, InfoBarMoviePlayerSummarySupport, InfoBarChannelSelection
 from Screens.ChannelSelection import ChannelSelection
 from Screens.InfoBar import InfoBar, MoviePlayer
+from Screens.MessageBox import MessageBox
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo
 import inspect
 
@@ -58,7 +59,6 @@ InfoBarPlugins.runPlugin = InfoBarPlugins_runPlugin
 # Step 2: Overwrite some ChannelSelection code to be able to interject channel selection
 #
 # Doing so should not affect behavior if plugin is disabled, though we still overwrite these functions to make things easier to manage internally.
-baseChannelSelection_close = None
 def ChannelSelection_close(self, *args, **kwargs):
 	if hasattr(self, 'secretMovieMode') and self.secretMovieMode != MODE_MOVIEPLAYER:
 		# handles "plugin" close
@@ -67,7 +67,6 @@ def ChannelSelection_close(self, *args, **kwargs):
 baseChannelSelection_close = ChannelSelection.close
 ChannelSelection.close = ChannelSelection_close
 
-baseChannelSelection_zap = None
 def ChannelSelection_zap(self, *args, **kwargs):
 	if hasattr(self, 'secretMovieMode') and self.secretMovieMode:
 		if movieEpgMoviePlayerInstance is not None:
@@ -84,7 +83,12 @@ def entry(session = None, servicelist = None):
 	# XXX: session.current_dialog is the movie player (or infobar if ran from "regular" extension menu)
 	if not session: return
 	if not servicelist:
-		servicelist = InfoBar.instance.servicelist
+		if InfoBar.instance:
+			servicelist = InfoBar.instance.servicelist
+		else:
+			session.open(MessageBox, _("Unable to access InfoBar!\nEPG not available."), MessageBox.TYPE_ERROR)
+			return
+
 	if hasattr(servicelist, 'secretMovieMode') and servicelist.secretMovieMode != MODE_MOVIEPLAYER:
 		servicelist.secretMovieMode = MODE_ON
 	session.execDialog(servicelist)
@@ -94,17 +98,16 @@ def entry(session = None, servicelist = None):
 #
 # Basically no effect on its own.
 movieEpgMoviePlayerInstance = None
-baseMoviePlayer___init__ = None
 def MoviePlayer___init__(self, *args, **kwargs):
 	baseMoviePlayer___init__(self, *args, **kwargs)
-	self.servicelist = InfoBar.instance.servicelist
-	self.servicelist.secretMovieMode = MODE_MOVIEPLAYER
+	if InfoBar.instance:
+		self.servicelist = InfoBar.instance.servicelist
+		self.servicelist.secretMovieMode = MODE_MOVIEPLAYER
 	global movieEpgMoviePlayerInstance
 	movieEpgMoviePlayerInstance = self
 baseMoviePlayer___init__ = MoviePlayer.__init__
 MoviePlayer.__init__ = MoviePlayer___init__
 
-baseMoviePlayer_close = None
 def MoviePlayer_close(self, *args, **kwargs):
 	global movieEpgMoviePlayerInstance
 	movieEpgMoviePlayerInstance = None
