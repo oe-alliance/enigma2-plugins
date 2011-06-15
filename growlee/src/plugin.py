@@ -196,10 +196,6 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 	def createSummary(self):
 		return SetupSummary
 
-	def cancelConfirm(self):
-		ConfigListScreen.cancelConfirm(self)
-		config.plugins.growlee.cancel()
-
 	def keySave(self):
 		config.plugins.growlee.save()
 		if self["config"].isChanged():
