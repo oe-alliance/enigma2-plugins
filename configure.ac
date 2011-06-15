@@ -426,6 +426,12 @@ trafficinfo/Makefile
 trafficinfo/meta/Makefile
 trafficinfo/src/Makefile
 
+tuxcom/Makefile
+tuxcom/etc/Makefile
+tuxcom/meta/Makefile
+tuxcom/share/Makefile
+tuxcom/src/Makefile
+
 tvcharts/Makefile
 tvcharts/meta/Makefile
 tvcharts/src/Makefile

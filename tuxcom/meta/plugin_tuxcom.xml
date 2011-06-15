@@ -1,0 +1,24 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>gutemine</author>
+                    <name>TuxCom</name>
+                    <packagename>enigma2-plugin-extensions-tuxcom</packagename>
+                    <shortdescription>TuxBox Commander, a comprehensive File-Manager</shortdescription>
+                    <description>File-Manager offering a bunch of features:\n
+• Create/copy/move/delete files and folders\n 
+• Show/edit files\n
+• Search files\n
+• Execute files\n 
+• Change attributes\n
+• Create links\n 
+• Execute any Linux command\n
+• Password protectable!</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-tuxcom" />
+	  </files>
+</default>

@@ -1,0 +1,4 @@
+#!/bin/sh
+rm /usr/lib/enigma2/python/Plugins/Extensions/Tuxcom/*.pyc > /dev/null 2>&1
+rm /usr/lib/enigma2/python/Plugins/Extensions/Tuxcom/*.pyo > /dev/null 2>&1
+exit 0
