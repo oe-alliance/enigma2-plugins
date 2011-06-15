@@ -346,6 +346,10 @@ pipzap/Makefile
 pipzap/meta/Makefile
 pipzap/src/Makefile
 
+pluginhider/Makefile
+pluginhider/meta/Makefile
+pluginhider/src/Makefile
+
 podcast/Makefile
 podcast/etc/Makefile
 podcast/meta/Makefile
