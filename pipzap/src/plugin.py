@@ -80,7 +80,6 @@ def ChannelSelectionBase_setCurrentSelection(self, service, *args, **kwargs):
 def ChannelSelection_channelSelected(self, *args, **kwargs):
 	self.enable_pipzap = True
 	baseMethods.ChannelSelection_channelSelected(self, *args, **kwargs)
-	self.enable_pipzap = False
 
 def ChannelSelection_togglePipzap(self):
 	assert(self.session.pip)
@@ -136,6 +135,7 @@ def ChannelSelection_zap(self, *args, **kwargs):
 		if self.dopipzap:
 			# This unfortunately won't work with subservices
 			self.setCurrentSelection(self.session.pip.getCurrentService())
+	self.enable_pipzap = False
 
 def ChannelSelection_setHistoryPath(self, *args, **kwargs):
 	baseMethods.ChannelSelection_setHistoryPath(self, *args, **kwargs)
@@ -200,7 +200,6 @@ def MoviePlayer_right(self):
 			slist.moveDown()
 		slist.enable_pipzap = True
 		slist.zap()
-		slist.enable_pipzap = False
 	else:
 		InfoBarSeek.seekFwd(self)
 
@@ -224,7 +223,6 @@ def MoviePlayer_left(self):
 			slist.moveUp()
 		slist.enable_pipzap = True
 		slist.zap()
-		slist.enable_pipzap = False
 	else:
 		InfoBarSeek.seekBack(self)
 
@@ -236,24 +234,26 @@ def MoviePlayer_swapPiP(self):
 #pragma mark -
 
 def InfoBarNumberZap_zapToNumber(self, *args, **kwargs):
-	self.servicelist.enable_pipzap = True
+	try:
+		self.servicelist.enable_pipzap = True
+	except AttributeError, ae:
+		pass
 	baseMethods.InfoBarNumberZap_zapToNumber(self, *args, **kwargs)
-	self.servicelist.enable_pipzap = False
 
 def InfoBarChannelSelection_zapUp(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
 	baseMethods.InfoBarChannelSelection_zapUp(self, *args, **kwargs)
-	self.servicelist.enable_pipzap = False
 
 def InfoBarChannelSelection_zapDown(self, *args, **kwargs):
 	self.servicelist.enable_pipzap = True
 	baseMethods.InfoBarChannelSelection_zapDown(self, *args, **kwargs)
-	self.servicelist.enable_pipzap = False
 
 def InfoBarEPG_zapToService(self, *args, **kwargs):
-	self.servicelist.enable_pipzap = True
+	try:
+		self.servicelist.enable_pipzap = True
+	except AttributeError, ae:
+		pass
 	baseMethods.InfoBarEPG_zapToService(self, *args, **kwargs)
-	self.servicelist.enable_pipzap = False
 
 def InfoBarShowMovies__init__(self):
 	baseMethods.InfoBarShowMovies__init__(self)
@@ -275,8 +275,10 @@ def InfoBarPiP__init__(self):
 				})
 
 def InfoBarPiP_pipzapAvailable(self):
-	slist = self.servicelist
-	return True if slist and self.session.pipshown else False
+	try:
+		return True if self.servicelist and self.session.pipshown else False
+	except AttributeError, ae:
+		return False
 
 def InfoBarPiP_getTogglePipzapName(self):
 	slist = self.servicelist
@@ -297,7 +299,11 @@ def InfoBarPiP_togglePipzap(self):
 		slist.togglePipzap()
 
 def InfoBarPiP_showPiP(self, *args, **kwargs):
-	slist = self.servicelist
+	try:
+		slist = self.servicelist
+	except AttributeError, ae:
+		slist = None
+
 	if self.session.pipshown and slist and slist.dopipzap:
 		slist.togglePipzap()
 	elif not self.session.pipshown and isinstance(self, InfoBarShowMovies):
@@ -316,7 +322,10 @@ def InfoBarPiP_swapPiP(self):
 	if pipref and swapservice and pipref.toString() != swapservice.toString():
 			self.session.pip.playService(swapservice)
 
-			slist = self.servicelist
+			try:
+				slist = self.servicelist
+			except AttributeError, ae:
+				slist = None
 			if slist:
 				# TODO: this behaves real bad on subservices
 				if slist.dopipzap:
