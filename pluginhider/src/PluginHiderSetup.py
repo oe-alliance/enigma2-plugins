@@ -47,6 +47,7 @@ class PluginHiderSetup(Screen):
 		self["ColorActions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
 				"ok": self["list"].toggleSelection,
+				"cancel": self.cancel,
 				"red": self.cancel,
 				"green": self.save,
 				"yellow": self.plugins,
@@ -59,13 +60,10 @@ class PluginHiderSetup(Screen):
 	def cancel(self):
 		config.plugins.pluginhider.hideplugins.cancel()
 		config.plugins.pluginhider.hideextensions.cancel()
-		config.plugins.pluginhider.cancel()
 		self.close()
 
 	def save(self):
 		self.keepCurrent()
-		config.plugins.pluginhider.hideplugins.save()
-		config.plugins.pluginhider.hideextensions.save()
 		config.plugins.pluginhider.save()
 		self.close()
 
