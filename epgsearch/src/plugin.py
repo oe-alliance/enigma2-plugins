@@ -3,16 +3,6 @@ from . import _
 
 from enigma import eServiceCenter
 
-# Config
-from Components.config import config, ConfigSet, ConfigSubsection, ConfigText, ConfigNumber, ConfigYesNo
-
-config.plugins.epgsearch = ConfigSubsection()
-config.plugins.epgsearch.history = ConfigSet(choices = [])
-# XXX: configtext is more flexible but we cannot use this for a (not yet created) gui config
-config.plugins.epgsearch.encoding = ConfigText(default = 'ISO8859-15', fixed_size = False)
-config.plugins.epgsearch.history_length = ConfigNumber(default = 10)
-config.plugins.epgsearch.add_search_to_epg = ConfigYesNo(default = True)
-
 # Plugin
 from EPGSearch import EPGSearch, EPGSearchEPGSelection, EPGSelectionInit
 
