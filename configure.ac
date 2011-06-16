@@ -350,6 +350,10 @@ pluginhider/Makefile
 pluginhider/meta/Makefile
 pluginhider/src/Makefile
 
+pluginsort/Makefile
+pluginsort/meta/Makefile
+pluginsort/src/Makefile
+
 podcast/Makefile
 podcast/etc/Makefile
 podcast/meta/Makefile

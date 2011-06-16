@@ -62,6 +62,7 @@ SUBDIRS = \
 	permanentclock \
 	pipzap \
 	pluginhider \
+	pluginsort \
 	podcast \
 	porncenter \
 	quickbutton \
