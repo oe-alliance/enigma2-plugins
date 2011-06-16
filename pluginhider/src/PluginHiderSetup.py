@@ -9,6 +9,7 @@ from Screens.Setup import SetupSummary
 from Components.ActionMap import ActionMap
 from Components.SelectionList import SelectionList, SelectionEntryComponent
 from Components.Sources.StaticText import StaticText
+from Components.Pixmap import MultiPixmap
 
 # Configuration
 from Components.config import config
@@ -18,17 +19,23 @@ from Plugins.Plugin import PluginDescriptor
 
 LIST_PLUGINS = 0
 LIST_EXTENSIONS = 1
+LIST_EVENTINFO = 2
 class PluginHiderSetup(Screen):
-	skin = """<screen name="PluginHiderSetup" title="PluginHider Setup" position="center,center" size="565,290">
-		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="list" position="5,45" size="555,240" scrollbarMode="showOnDemand" />
+	skin = """<screen name="PluginHiderSetup" title="PluginHider Setup" position="center,center" size="565,395">
+		<ePixmap position="0,358" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,358" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,358" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,358" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,358" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_green" render="Label" position="140,358" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_yellow" render="Label" position="280,358" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_blue" render="Label" position="420,358" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<ePixmap size="551,336" alphatest="on" position="5,21" pixmap="skin_default/border_epg.png" zPosition="3" />
+		<widget size="320,25" alphatest="on" position="5,1" zPosition="1" name="tabbar" pixmaps="skin_default/epg_now.png,skin_default/epg_next.png,skin_default/epg_more.png" />
+		<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="5,1" zPosition="2" source="plugins" render="Label" halign="center" font="Regular;18" />
+		<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="111,1" zPosition="2" source="extensions" render="Label" halign="center" font="Regular;18" />
+		<widget valign="center" transparent="1" size="108,22" backgroundColor="#25062748" position="216,1" zPosition="2" source="eventinfo" render="Label" halign="center" font="Regular;18" />
+		<widget name="list" position="11,26" size="540,330" scrollbarMode="showOnDemand" />
 	</screen>"""
 
 	def __init__(self, session):
@@ -37,8 +44,12 @@ class PluginHiderSetup(Screen):
 		# Initialize widgets
 		self["key_green"] = StaticText(_("OK"))
 		self["key_red"] = StaticText(_("Cancel"))
-		self["key_yellow"] = StaticText(_("Plugins"))
-		self["key_blue"] = StaticText(_("Extensions"))
+		self["key_yellow"] = StaticText(_("Previous"))
+		self["key_blue"] = StaticText(_("Next"))
+		self["plugins"] = StaticText(_("Plugins"))
+		self["extensions"] = StaticText(_("Extensions"))
+		self["eventinfo"] = StaticText(_("Eventinfo"))
+		self["tabbar"] = MultiPixmap()
 
 		self["list"] = SelectionList([])
 		self.selectedList = LIST_PLUGINS
@@ -50,8 +61,8 @@ class PluginHiderSetup(Screen):
 				"cancel": self.cancel,
 				"red": self.cancel,
 				"green": self.save,
-				"yellow": self.plugins,
-				"blue": self.extensions,
+				"yellow": self.previous,
+				"blue": self.next,
 			}, -1
 		)
 
@@ -67,14 +78,18 @@ class PluginHiderSetup(Screen):
 		config.plugins.pluginhider.save()
 		self.close()
 
-	def plugins(self):
+	def previous(self):
 		self.keepCurrent()
-		self.selectedList = LIST_PLUGINS
+		self.selectedList -= 1
+		if self.selectedList < 0:
+			self.selectedList = LIST_EVENTINFO
 		self.updateList()
 
-	def extensions(self):
+	def next(self):
 		self.keepCurrent()
-		self.selectedList = LIST_EXTENSIONS
+		self.selectedList += 1
+		if self.selectedList > LIST_EVENTINFO:
+			self.selectedList = LIST_PLUGINS
 		self.updateList()
 
 	def setCustomTitle(self):
@@ -89,9 +104,13 @@ class PluginHiderSetup(Screen):
 		if self.selectedList == LIST_PLUGINS:
 			list = fnc([PluginDescriptor.WHERE_PLUGINMENU])
 			selected = config.plugins.pluginhider.hideplugins.value
-		else:
+		elif self.selectedList == LIST_EXTENSIONS:
 			list = fnc([PluginDescriptor.WHERE_EXTENSIONSMENU])
 			selected = config.plugins.pluginhider.hideextensions.value
+		else: #if self.selectedList == LIST_EVENTINFO:
+			list = fnc([PluginDescriptor.WHERE_EVENTINFO])
+			selected = config.plugins.pluginhider.hideeventinfo.value
+		self["tabbar"].setPixmapNum(self.selectedList)
 
 		res = []
 		i = 0
@@ -116,5 +135,7 @@ class PluginHiderSetup(Screen):
 		selected = self["list"].getSelectionsList()
 		if self.selectedList == LIST_PLUGINS:
 			config.plugins.pluginhider.hideplugins.value = [x[1] for x in selected]
-		else:
+		elif self.selectedList == LIST_EXTENSIONS:
 			config.plugins.pluginhider.hideextensions.value = [x[1] for x in selected]
+		else: #if self.selectedList == LIST_EVENTINFO:
+			config.plugins.pluginhider.hideeventinfo.value = [x[1] for x in selected]

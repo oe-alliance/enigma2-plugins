@@ -9,6 +9,7 @@ from PluginHiderSetup import PluginHiderSetup
 config.plugins.pluginhider = ConfigSubsection()
 config.plugins.pluginhider.hideextensions = ConfigSet(choices=[])
 config.plugins.pluginhider.hideplugins = ConfigSet(choices=[])
+config.plugins.pluginhider.hideeventinfo = ConfigSet(choices=[])
 
 def PluginComponent_getPlugins(self, where):
 	if not isinstance(where, list):
@@ -16,14 +17,19 @@ def PluginComponent_getPlugins(self, where):
 
 	res = []
 	if PluginDescriptor.WHERE_EXTENSIONSMENU in where:
-		hideextensions = config.plugins.pluginhider.hideextensions.value
-		res.extend((x for x in self.plugins.get(PluginDescriptor.WHERE_EXTENSIONSMENU, []) if x.name not in hideextensions))
+		hide = config.plugins.pluginhider.hideextensions.value
+		res.extend((x for x in self.plugins.get(PluginDescriptor.WHERE_EXTENSIONSMENU, []) if x.name not in hide))
 		where.remove(PluginDescriptor.WHERE_EXTENSIONSMENU)
 
 	if PluginDescriptor.WHERE_PLUGINMENU in where:
-		hideplugins = config.plugins.pluginhider.hideplugins.value
-		res.extend((x for x in self.plugins.get(PluginDescriptor.WHERE_PLUGINMENU, []) if x.name not in hideplugins))
+		hide = config.plugins.pluginhider.hideplugins.value
+		res.extend((x for x in self.plugins.get(PluginDescriptor.WHERE_PLUGINMENU, []) if x.name not in hide))
 		where.remove(PluginDescriptor.WHERE_PLUGINMENU)
+
+	if PluginDescriptor.WHERE_EVENTINFO in where:
+		hide = config.plugins.pluginhider.hideeventinfo.value
+		res.extend((x for x in self.plugins.get(PluginDescriptor.WHERE_EVENTINFO , []) if x.name not in hide))
+		where.remove(PluginDescriptor.WHERE_EVENTINFO)
 
 	if where:
 		res.extend(PluginComponent.pluginHider_baseGetPlugins(self, where))
