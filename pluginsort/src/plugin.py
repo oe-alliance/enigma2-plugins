@@ -15,7 +15,12 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from enigma import eListboxPythonMultiContent, gFont
 from Tools.LoadPixmap import LoadPixmap
 
-from xml.etree.cElementTree import parse as cet_parse, ParseError
+from xml.etree.cElementTree import parse as cet_parse
+try:
+	from xml.etree.cElementTree import ParseError
+except ImportError, ie:
+	ParseError = SyntaxError
+
 from shutil import copyfile, Error
 
 XML_CONFIG = "/etc/enigma2/pluginsort.xml"
