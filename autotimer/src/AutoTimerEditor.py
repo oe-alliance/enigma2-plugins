@@ -1326,17 +1326,18 @@ def addAutotimerFromService(session, service = None):
 	tags = info.getInfoString(service, iServiceInformation.sTags)
 	tags = tags and tags.split(' ') or []
 
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = name
+	newTimer.match = ''
+	newTimer.enabled = True
+
 	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
 
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		preferredAutoTimerComponent(
-			autotimer.getUniqueId(),
-			name,
-			'',		# Match
-			True	# Enabled
-		),
+		newTimer,
 		match,		# Proposed Match
 		begin,		# Proposed Begin
 		end,		# Proposed End
@@ -1357,17 +1358,11 @@ def importerCallback(ret):
 			AutoTimerEditor,
 			ret
 		)
-	else:
-		# Remove instance if not running in background
-		if not config.plugins.autotimer.autopoll.value:
-			from plugin import autotimer
-			autotimer = None
 
 def editorCallback(ret):
 	if ret:
 		from plugin import autotimer
 
-		# Create instance if needed (should have been created by addAutotimerFrom* above though)
 		if autotimer is None:
 			from AutoTimer import AutoTimer
 			autotimer = AutoTimer()
@@ -1377,8 +1372,4 @@ def editorCallback(ret):
 
 		# Save modified xml
 		autotimer.writeXml()
-
-	# Remove instance if not running in background
-	if not config.plugins.autotimer.autopoll.value:
-		autotimer = None
 
