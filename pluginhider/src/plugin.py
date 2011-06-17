@@ -1,3 +1,5 @@
+from . import _
+
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
