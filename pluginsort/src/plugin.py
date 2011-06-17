@@ -3,11 +3,13 @@ from Plugins.Plugin import PluginDescriptor
 
 from Components.config import config, ConfigSubsection, ConfigSet
 from Screens import PluginBrowser
+from Screens.MessageBox import MessageBox
+from Screens.ChoiceBox import ChoiceBox
 from Components.PluginComponent import PluginComponent, plugins
 from Components.PluginList import PluginEntryComponent
 from Tools.Directories import resolveFilename, fileExists, SCOPE_SKIN_IMAGE, SCOPE_PLUGINS
 
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, NumberActionMap
 from operator import attrgetter # python 2.5+
 
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
@@ -159,6 +161,27 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			}, -2
 		)
 		# TODO: allow to select first 10 plugins by number (1-9, 0)
+		self["NumberActions"] = NumberActionMap(["NumberActions"],
+			{
+				"1": self.keyNumberGlobal,
+				"2": self.keyNumberGlobal,
+				"3": self.keyNumberGlobal,
+				"4": self.keyNumberGlobal,
+				"5": self.keyNumberGlobal,
+				"6": self.keyNumberGlobal,
+				"7": self.keyNumberGlobal,
+				"8": self.keyNumberGlobal,
+				"9": self.keyNumberGlobal,
+				"0": self.keyNumberGlobal,
+			}, -1
+		)
+
+	def keyNumberGlobal(self, number):
+		if not self.movemode:
+			realnumber = (number - 1) % 10
+			if realnumber < len(self.list):
+				self["list"].moveToIndex(realnumber)
+				self.save()
 
 	def close(self, *args, **kwargs):
 		if self.movemode:
@@ -173,7 +196,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		self["list"].l.setList(self.list)
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
 			self["red"].setText(_("Manage extensions"))
-			self["green"].setText(_("Sort"))
+			self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
 			self["SoftwareActions"].setEnabled(True)
 			self["PluginDownloadActions"].setEnabled(False)
 			self["ColorActions"].setEnabled(True)
@@ -253,14 +276,34 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			self["list"].l.setList(self.list)
 	
 	def openMenu(self):
-		#if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginHider/plugin.py")):
-		#	# TODO: show prompt: (HIDE, TOGGLE MOVE MODE)
-		#	return
-		self.toggleMoveMode()
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginHider/plugin.py")):
+			list = [
+				(_("hide selected plugin"), self.hidePlugin),
+				(_("disable move mode") if self.movemode else _("enable move mode"), self.toggleMoveMode),
+			]
+			self.session.openWithCallback(
+				self.menuCallback,
+				ChoiceBox,
+				list = list,
+			)
+		else:
+			self.toggleMoveMode()
+
+	def menuCallback(self, ret):
+		ret and ret[1]()
 
 	def hidePlugin(self):
-		# TODO: add name to hide list, remove from local list, adjust selection in move mode
-		pass
+		try:
+			from Plugins.Extensions.PluginHider.plugin import hidePlugin
+		except Exception, e:
+			self.session.open(MessageBox, _("Unable to load PluginHider"), MessageBox.TYPE_ERROR)
+		else:
+			hidePlugin(self["list"].l.getCurrentSelection()[0])
+
+			# we were actually in move mode, so save the current position
+			if self.selected != -1:
+				self.save()
+			self.updateList()
 
 	def toggleMoveMode(self):
 		if self.movemode:
