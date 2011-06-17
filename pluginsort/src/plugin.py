@@ -1,3 +1,5 @@
+from . import _
+
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
@@ -280,9 +282,15 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 	
 	def openMenu(self):
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginHider/plugin.py")):
+			if self.movemode:
+				# TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
+				moveString = _("disable move mode")
+			else:
+				# TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
+				moveString = _("enable move mode")
 			list = [
 				(_("hide selected plugin"), self.hidePlugin),
-				(_("disable move mode") if self.movemode else _("enable move mode"), self.toggleMoveMode),
+				(moveString, self.toggleMoveMode),
 			]
 			self.session.openWithCallback(
 				self.menuCallback,

@@ -352,6 +352,7 @@ pluginhider/src/Makefile
 
 pluginsort/Makefile
 pluginsort/meta/Makefile
+pluginsort/po/Makefile
 pluginsort/src/Makefile
 
 podcast/Makefile
