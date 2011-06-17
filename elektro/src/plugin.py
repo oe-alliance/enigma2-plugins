@@ -215,29 +215,29 @@ class Elektro(ConfigListScreen,Screen):
 		self.onChangedEntry = []
 		
 		self.list = [	
-			getConfigListEntry(_("Show in"), config.plugins.elektro.menu, \
+			getConfigListEntry(_("Show in"), config.plugins.elektro.menu,
 				_("Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)")),
-			getConfigListEntry(_("Name"), config.plugins.elektro.name, \
+			getConfigListEntry(_("Name"), config.plugins.elektro.name,
 				_("Specify plugin name to be used in menu (needs GUI restart).")),
-			getConfigListEntry(_("Description"), config.plugins.elektro.description, \
+			getConfigListEntry(_("Description"), config.plugins.elektro.description,
 				_("Specify plugin description to be used in menu (needs GUI restart).")),		
-			getConfigListEntry(_("Enable Elektro Power Save"),config.plugins.elektro.enable, \
+			getConfigListEntry(_("Enable Elektro Power Save"),config.plugins.elektro.enable,
 				_("Unless this is enabled, this plugin won't run automatically.")),							
-			getConfigListEntry(_("Standby on boot"), config.plugins.elektro.standbyOnBoot, \
+			getConfigListEntry(_("Standby on boot"), config.plugins.elektro.standbyOnBoot,
 				_("Puts the box in standby mode after boot.")),
-			getConfigListEntry(_("Standby on manual boot"), config.plugins.elektro.standbyOnManualBoot, \
+			getConfigListEntry(_("Standby on manual boot"), config.plugins.elektro.standbyOnManualBoot,
 				_("Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too.")),
-			getConfigListEntry(_("Standby on boot screen timeout"), config.plugins.elektro.standbyOnBootTimeout, \
+			getConfigListEntry(_("Standby on boot screen timeout"), config.plugins.elektro.standbyOnBootTimeout,
 				_("Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode.")),
-			getConfigListEntry(_("Force sleep (even when not in standby)"), config.plugins.elektro.force, \
+			getConfigListEntry(_("Force sleep (even when not in standby)"), config.plugins.elektro.force,
 				_("Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected.")),
-			getConfigListEntry(_("Avoid deep standby when HDD is active, e.g. for FTP"), config.plugins.elektro.hddsleep, \
+			getConfigListEntry(_("Avoid deep standby when HDD is active, e.g. for FTP"), config.plugins.elektro.hddsleep,
 				_("Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode.")),
-			getConfigListEntry(_("Don't wake up"), config.plugins.elektro.dontwakeup, \
+			getConfigListEntry(_("Don't wake up"), config.plugins.elektro.dontwakeup,
 				_("Do not wake up at the end of next deep standby interval.")),
-			getConfigListEntry(_("Holiday mode (experimental)"), config.plugins.elektro.holiday, \
+			getConfigListEntry(_("Holiday mode (experimental)"), config.plugins.elektro.holiday,
 				_("The box always enters deep standby mode, except for recording.")),
-			getConfigListEntry(_("Next day starts at"), config.plugins.elektro.nextday, \
+			getConfigListEntry(_("Next day starts at"), config.plugins.elektro.nextday,
 				_("If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here.")),
 			]		
 				

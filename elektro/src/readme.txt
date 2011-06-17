@@ -152,7 +152,7 @@ Main menu -> Extensions -> Elektro Power Save
    If the box is supposed to enter deep standby
    e.g. monday night at 1 AM, it actually is already
    tuesday. To enable this anyway, differing next day
-   start time can to be specified here.   
+   start time can be specified here.   
    Hopefully the rest is self-explanatory. 
 
 
