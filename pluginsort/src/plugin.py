@@ -333,7 +333,7 @@ def autostart(reason, *args, **kwargs):
 			except AttributeError, ae:
 				plugin.weight = 0
 				newWeight = 0
-				PluinDescriptor.weight = 0
+				PluginDescriptor.weight = 0
 				print "[PluginSort] Introduced weight attribute to PluginDescriptor for old enigma2 (this message may show multiple times)"
 
 			print "[PluginSort] Fixing weight for %s (was %d, now %d)" % (plugin.name, plugin.weight, newWeight)
