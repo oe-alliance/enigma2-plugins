@@ -30,6 +30,7 @@ def ChannelContextMenu___init__(self, session, csel, *args, **kwargs):
 	if self.pipAvailable:
 		list = self["menu"].list
 		x = 0
+		# TRANSLATORS: Do NOT translate this! This is not a string in our plugin but one from e2 core which we try to find, so a custom translation will probably disallow us to do so.
 		searchText = _("Activate Picture in Picture")
 		for entry in list:
 			if entry[0][0] == searchText:
