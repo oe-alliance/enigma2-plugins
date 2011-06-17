@@ -11,6 +11,13 @@ config.plugins.pluginhider.hideextensions = ConfigSet(choices=[])
 config.plugins.pluginhider.hideplugins = ConfigSet(choices=[])
 config.plugins.pluginhider.hideeventinfo = ConfigSet(choices=[])
 
+def hidePlugin(plugin):
+	"""Convenience function for external code to hide a plugin."""
+	hide = config.plugins.pluginhider.hideplugins.value
+	if not plugin.name in hide:
+		hide.append(plugin.name)
+		config.plugins.pluginhider.hideplugins.save()	
+
 def PluginComponent_getPlugins(self, where):
 	if not isinstance(where, list):
 		where = [ where ]
