@@ -327,7 +327,15 @@ def autostart(reason, *args, **kwargs):
 
 		# "fix" weight of plugins already added to list, future ones will be fixed automatically
 		for plugin in plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU):
-			newWeight = pluginWeights.get(plugin)
+			# enigma2 older than 3.3.2011 does not know plugin weights, so default them to 0 manually
+			try:
+				newWeight = pluginWeights.get(plugin)
+			except AttributeError, ae:
+				plugin.weight = 0
+				newWeight = 0
+				PluinDescriptor.weight = 0
+				print "[PluginSort] Introduced weight attribute to PluginDescriptor for old enigma2 (this message may show multiple times)"
+
 			print "[PluginSort] Fixing weight for %s (was %d, now %d)" % (plugin.name, plugin.weight, newWeight)
 			plugin.weight = newWeight
 
