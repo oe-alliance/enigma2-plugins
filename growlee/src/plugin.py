@@ -80,7 +80,7 @@ del i, growlee
 
 class GrowleeConfiguration(Screen, ConfigListScreen):
 	skin = """
-		<screen name="RSSSetup" position="center,center" size="560,400" title="Simple RSS Reader Setup" >
+		<screen name="GrowleeConfiguration" position="center,center" size="560,400" title="Growlee Setup" >
 			<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
