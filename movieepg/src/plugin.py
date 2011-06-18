@@ -8,6 +8,7 @@ from Screens.ChannelSelection import ChannelSelection
 from Screens.InfoBar import InfoBar, MoviePlayer
 from Screens.MessageBox import MessageBox
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo
+from operator import attrgetter
 import inspect
 
 config.plugins.movieepg = ConfigSubsection()
@@ -39,14 +40,17 @@ def InfoBarPlugins_getPluginList(self, *args, **kwargs):
 	for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EXTENSIONSMENU):
 		args = inspect.getargspec(p.__call__)[0]
 		if len(args) == 1 or len(args) == 2 and showSlistPlugins:
-			l.append(((boundFunction(self.getPluginName, p.name), boundFunction(self.runPlugin, p), lambda: True), None, p.name))
+			l.append(p)
+	l.sort(key=attrgetter('weight', 'name')) # sort first by weight, then by name
+
+	# "tranform" into weird internal format
+	l = [((boundFunction(self.getPluginName, p.name), boundFunction(self.runPlugin, p), lambda: True), None, p.name) for p in l]
 
 	# add fake plugin if show_epg_entry set to "always" or "movie" and this is the movie player
 	show_epg_entry = config.plugins.movieepg.show_epg_entry.value
 	if show_epg_entry == "always" or show_epg_entry == "movie" and isinstance(self, InfoBarMoviePlayerSummarySupport):
 		l.append(((boundFunction(self.getPluginName, "EPG"), boundFunction(self.runPlugin, entry), lambda: True), None, "EPG"))
 
-	l.sort(key = lambda e: e[2]) # sort by name
 	return l
 def InfoBarPlugins_runPlugin(self, plugin, *args, **kwargs):
 	if hasattr(self, 'servicelist'):
