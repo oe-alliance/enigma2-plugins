@@ -105,7 +105,7 @@ class myHTTPClientFactory(HTTPClientFactory):
 def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	scheme, host, port, path = client._parse(url)
 	factory = myHTTPClientFactory(url, *args, **kwargs)
-	print "scheme=%s host=%s port=%s path=%s\n" % (scheme, host, port, path)
+	# print "scheme=%s host=%s port=%s path=%s\n" % (scheme, host, port, path)
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
 
@@ -285,7 +285,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	def reloadStationListTimerTimeout(self):
 		self.stopReloadStationListTimer()
 		if self.mode == self.STATIONLIST:
-			print "[SHOUTcast] reloadStationList: %s " % self.stationListURL
+			# print "[SHOUTcast] reloadStationList: %s " % self.stationListURL
 			sendUrlCommand(self.stationListURL, None,10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
 	def InputBoxStartRecordingCallback(self, returnValue = None):
@@ -643,7 +643,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 
 	def Error(self, error = None):
 		if error is not None:
-			print "[SHOUTcast] Error: %s\n" % error
+			# print "[SHOUTcast] Error: %s\n" % error
 			try:
 				self["list"].hide()
 				self["statustext"].setText(str(error.getErrorMessage()))
@@ -660,17 +660,17 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		foundPos2 = result.find("&imgrefurl=")
 		if foundPos2 == -1:
 			foundPos2 = result.find("&amp;imgrefurl=")
-		print "[SHOUTcast] foundPos=%s foundPos2=%s" % (foundPos, foundPos2)
+		# print "[SHOUTcast] foundPos=%s foundPos2=%s" % (foundPos, foundPos2)
 		if foundPos != -1 and foundPos2 != -1:
 			print "[SHOUTcast] downloading cover from %s " % result[foundPos+14:foundPos2]
 			downloadPage(result[foundPos+14:foundPos2], "/tmp/.cover").addCallback(self.coverDownloadFinished).addErrback(self.coverDownloadFailed)
 
 	def coverDownloadFailed(self,result):
-        	print "[SHOUTcast] cover download failed: %s " % result
+		# print "[SHOUTcast] cover download failed: %s " % result
 		self["cover"].doHide()
 
 	def coverDownloadFinished(self,result):
-		print "[SHOUTcast] cover download finished"
+		# print "[SHOUTcast] cover download finished"
 		self["cover"].updateIcon("/tmp/.cover")
 		self["cover"].doShow()
 		
