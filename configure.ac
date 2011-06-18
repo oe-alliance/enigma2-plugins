@@ -348,10 +348,12 @@ pipzap/src/Makefile
 
 pluginhider/Makefile
 pluginhider/meta/Makefile
+pluginhider/po/Makefile
 pluginhider/src/Makefile
 
 pluginsort/Makefile
 pluginsort/meta/Makefile
+pluginsort/po/Makefile
 pluginsort/src/Makefile
 
 podcast/Makefile

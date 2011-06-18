@@ -1,3 +1,5 @@
+from . import _
+
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
@@ -10,6 +12,15 @@ config.plugins.pluginhider = ConfigSubsection()
 config.plugins.pluginhider.hideextensions = ConfigSet(choices=[])
 config.plugins.pluginhider.hideplugins = ConfigSet(choices=[])
 config.plugins.pluginhider.hideeventinfo = ConfigSet(choices=[])
+
+hasPluginWeight = True
+
+def hidePlugin(plugin):
+	"""Convenience function for external code to hide a plugin."""
+	hide = config.plugins.pluginhider.hideplugins.value
+	if not plugin.name in hide:
+		hide.append(plugin.name)
+		config.plugins.pluginhider.hideplugins.save()	
 
 def PluginComponent_getPlugins(self, where):
 	if not isinstance(where, list):
@@ -33,7 +44,8 @@ def PluginComponent_getPlugins(self, where):
 
 	if where:
 		res.extend(PluginComponent.pluginHider_baseGetPlugins(self, where))
-	res.sort(key=lambda x:x.weight)
+	if hasPluginWeight:
+		res.sort(key=lambda x:x.weight)
 	return res
 
 def autostart(reason, *args, **kwargs):
@@ -52,12 +64,18 @@ def menu(menuid):
 	return [(_("Hide Plugins"), main, "pluginhider_setup", None)]
 
 def Plugins(**kwargs):
+	pd =  PluginDescriptor(
+		where=PluginDescriptor.WHERE_AUTOSTART,
+		fnc=autostart,
+		needsRestart=False,
+	)
+
+	if not hasattr(pd, 'weight'):
+		global hasPluginWeight
+		hasPluginWeight = False
+
 	return [
-		PluginDescriptor(
-			where=PluginDescriptor.WHERE_AUTOSTART,
-			fnc=autostart,
-			needsRestart=False,
-		),
+		pd,
 		PluginDescriptor(
 			where=PluginDescriptor.WHERE_MENU,
 			fnc=menu,

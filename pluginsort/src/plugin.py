@@ -1,13 +1,17 @@
+from . import _
+
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
 from Components.config import config, ConfigSubsection, ConfigSet
 from Screens import PluginBrowser
+from Screens.MessageBox import MessageBox
+from Screens.ChoiceBox import ChoiceBox
 from Components.PluginComponent import PluginComponent, plugins
 from Components.PluginList import PluginEntryComponent
 from Tools.Directories import resolveFilename, fileExists, SCOPE_SKIN_IMAGE, SCOPE_PLUGINS
 
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, NumberActionMap
 from operator import attrgetter # python 2.5+
 
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
@@ -159,6 +163,27 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			}, -2
 		)
 		# TODO: allow to select first 10 plugins by number (1-9, 0)
+		self["NumberActions"] = NumberActionMap(["NumberActions"],
+			{
+				"1": self.keyNumberGlobal,
+				"2": self.keyNumberGlobal,
+				"3": self.keyNumberGlobal,
+				"4": self.keyNumberGlobal,
+				"5": self.keyNumberGlobal,
+				"6": self.keyNumberGlobal,
+				"7": self.keyNumberGlobal,
+				"8": self.keyNumberGlobal,
+				"9": self.keyNumberGlobal,
+				"0": self.keyNumberGlobal,
+			}, -1
+		)
+
+	def keyNumberGlobal(self, number):
+		if not self.movemode:
+			realnumber = (number - 1) % 10
+			if realnumber < len(self.list):
+				self["list"].moveToIndex(realnumber)
+				self.save()
 
 	def close(self, *args, **kwargs):
 		if self.movemode:
@@ -172,13 +197,16 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		self.list = [PluginEntryComponent(plugin) for plugin in self.pluginlist]
 		self["list"].l.setList(self.list)
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
+			# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
 			self["red"].setText(_("Manage extensions"))
-			self["green"].setText(_("Sort"))
+			self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
 			self["SoftwareActions"].setEnabled(True)
 			self["PluginDownloadActions"].setEnabled(False)
 			self["ColorActions"].setEnabled(True)
 		else:
+			# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
 			self["red"].setText(_("Remove Plugins"))
+			# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
 			self["green"].setText(_("Download Plugins"))
 			self["SoftwareActions"].setEnabled(False)
 			self["PluginDownloadActions"].setEnabled(True)
@@ -253,14 +281,40 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			self["list"].l.setList(self.list)
 	
 	def openMenu(self):
-		#if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginHider/plugin.py")):
-		#	# TODO: show prompt: (HIDE, TOGGLE MOVE MODE)
-		#	return
-		self.toggleMoveMode()
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginHider/plugin.py")):
+			if self.movemode:
+				# TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
+				moveString = _("disable move mode")
+			else:
+				# TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
+				moveString = _("enable move mode")
+			list = [
+				(_("hide selected plugin"), self.hidePlugin),
+				(moveString, self.toggleMoveMode),
+			]
+			self.session.openWithCallback(
+				self.menuCallback,
+				ChoiceBox,
+				list = list,
+			)
+		else:
+			self.toggleMoveMode()
+
+	def menuCallback(self, ret):
+		ret and ret[1]()
 
 	def hidePlugin(self):
-		# TODO: add name to hide list, remove from local list, adjust selection in move mode
-		pass
+		try:
+			from Plugins.Extensions.PluginHider.plugin import hidePlugin
+		except Exception, e:
+			self.session.open(MessageBox, _("Unable to load PluginHider"), MessageBox.TYPE_ERROR)
+		else:
+			hidePlugin(self["list"].l.getCurrentSelection()[0])
+
+			# we were actually in move mode, so save the current position
+			if self.selected != -1:
+				self.save()
+			self.updateList()
 
 	def toggleMoveMode(self):
 		if self.movemode:
@@ -284,7 +338,15 @@ def autostart(reason, *args, **kwargs):
 
 		# "fix" weight of plugins already added to list, future ones will be fixed automatically
 		for plugin in plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU):
-			newWeight = pluginWeights.get(plugin)
+			# enigma2 older than 3.3.2011 does not know plugin weights, so default them to 0 manually
+			try:
+				newWeight = pluginWeights.get(plugin)
+			except AttributeError, ae:
+				plugin.weight = 0
+				newWeight = 0
+				PluginDescriptor.weight = 0
+				print "[PluginSort] Introduced weight attribute to PluginDescriptor for old enigma2 (this message may show multiple times)"
+
 			print "[PluginSort] Fixing weight for %s (was %d, now %d)" % (plugin.name, plugin.weight, newWeight)
 			plugin.weight = newWeight
 

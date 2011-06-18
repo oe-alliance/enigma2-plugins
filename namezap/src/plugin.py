@@ -5,24 +5,43 @@ from enigma import eServiceCenter, eServiceReference
 from Components.Label import Label
 from Screens import InfoBarGenerics
 from Screens.InfoBar import InfoBar
-from Components.config import config
+from Components.config import config, ConfigSubsection, ConfigSelection
+
+from NamezapSetup import NamezapSetup
+
+config.plugins.namezap = ConfigSubsection()
+config.plugins.namezap.style = ConfigSelection(choices = [
+		("number", _("Only Number")),
+		("name", _("Service Name")),
+		("both", _("Number and Name"))
+	], default = "both"
+)
 
 NumberZap = InfoBarGenerics.NumberZap
 class NameZap(NumberZap):
-	skin = """<screen name="NameZap" position="center,center" size="300,60" title="Channel">
-			<widget name="channel" position="5,15" size="100,25" font="Regular;23" />
-			<widget name="name" position="105,15" size="190,25" halign="right" font="Regular;23" />
+	STYLE_NUMBER = 0
+	STYLE_NAME = 1
+	STYLE_BOTH = 2
+
+	skin = """<screen name="NameZap" position="center,center" size="305,60" title="Channel">
+			<widget name="channel" position="5,15" size="80,25" font="Regular;23" />
+			<widget name="name" position="85,15" size="220,25" halign="left" font="Regular;23" />
 		</screen>"""
 
 	def __init__(self, *args, **kwargs):
 		NumberZap.__init__(self, *args, **kwargs)
+		self.style = {"number": self.STYLE_NUMBER, "name": self.STYLE_NAME, "both": self.STYLE_BOTH}[config.plugins.namezap.style.value]
+		if self.style == self.STYLE_NUMBER:
+			self.skinName = "NumberZap"
+
 		self["name"] = Label("")
 		self.serviceHandler = eServiceCenter.getInstance()
 		self.updateServiceName(int(self.field))
 
 	def keyNumberGlobal(self, number):
 		NumberZap.keyNumberGlobal(self, number)
-		self.updateServiceName(int(self.field))
+		if self.style != self.STYLE_NUMBER:
+			self.updateServiceName(int(self.field))
 
 	def searchNumberHelper(self, serviceHandler, num, bouquet):
 		servicelist = self.serviceHandler.list(bouquet)
@@ -55,21 +74,41 @@ class NameZap(NumberZap):
 						service, number = self.searchNumberHelper(serviceHandler, number, bouquet)
 		if service is not None:
 			info = serviceHandler.info(service)
-			self["name"].setText(info.getName(service).replace('\xc2\x86', '').replace('\xc2\x87', ''))
+
+			sname = info.getName(service).replace('\xc2\x86', '').replace('\xc2\x87', '')
+			if self.style == self.STYLE_BOTH:
+				self["name"].setText("%s. %s" % (self.field, sname))
+			else:
+				self["name"].setText(sname)
 		else:
-			self["name"].setText("??? (%s)" % (self.field,))
+			sname = _("Unknown Service")
+			if self.style == self.STYLE_BOTH:
+				self["name"].setText("%s. %s" % (self.field, sname))
+			else:
+				self["name"].setText("%s (%s)" % (sname, self.field))
 
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		InfoBarGenerics.NumberZap = NameZap
 
-# TODO: allow to disable this :-)
+def main(session, *args, **kwargs):
+	session.open(NamezapSetup)
+
+def menu(menuid):
+	if menuid != "system":
+		return []
+	return [(_("NameZAP Setup"), main, "namezap_setup", None)]
 
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
 			where=PluginDescriptor.WHERE_AUTOSTART,
 			fnc=autostart,
+			needsRestart=False,
+		),
+		PluginDescriptor(
+			where=PluginDescriptor.WHERE_MENU,
+			fnc=menu,
 			needsRestart=False,
 		),
 	]

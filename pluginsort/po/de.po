@@ -1,0 +1,45 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PluginSort\n"
+"POT-Creation-Date: 2011-06-17 12:38+0000\n"
+"PO-Revision-Date: 2011-06-17 15:42+0100\n"
+"Last-Translator: Friedhelm Kuklinski <fk-912737@versanet.de>\n"
+"Language-Team: SiennaRoot <fk-912737@versanet.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: /Users/fk/Desktop/PluginSort/locale/de/LC_MESSAGES\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+
+#: /Users/fk/Desktop/PluginSort/plugin.py:220
+msgid "End Sort"
+msgstr "Sortieren beenden"
+
+#: /Users/fk/Desktop/PluginSort/plugin.py:220
+msgid "Sort"
+msgstr "Sortieren"
+
+#: /Users/fk/Desktop/PluginSort/plugin.py:320
+msgid "Unable to load PluginHider"
+msgstr "PluginHider konnte nicht geladen werden!"
+
+#: /Users/fk/Desktop/PluginSort/plugin.py:303
+msgid "disable move mode"
+msgstr "Verschiebemodus ausschalten"
+
+#: /Users/fk/Desktop/PluginSort/plugin.py:303
+msgid "enable move mode"
+msgstr "Verschiebemodus aktivieren"
+
+#: /Users/fk/Desktop/PluginSort/plugin.py:302
+msgid "hide selected plugin"
+msgstr "Selektiertes Plugin ausblenden"
+
