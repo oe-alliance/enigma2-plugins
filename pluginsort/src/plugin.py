@@ -151,7 +151,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		self["ColorActions"] = ActionMap(["ColorActions"],
 			{
 				"green": self.toggleMoveMode,
-			}, -1
+			}, -2
 		)
 		self["ColorActions"].setEnabled(False)
 
@@ -163,7 +163,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 				"down": self.down,
 			}, -2
 		)
-		# TODO: allow to select first 10 plugins by number (1-9, 0)
+
 		self["NumberActions"] = NumberActionMap(["NumberActions"],
 			{
 				"1": self.keyNumberGlobal,
@@ -176,7 +176,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 				"8": self.keyNumberGlobal,
 				"9": self.keyNumberGlobal,
 				"0": self.keyNumberGlobal,
-			}, -1
+			}, -2
 		)
 
 	def keyNumberGlobal(self, number):
