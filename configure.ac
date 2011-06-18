@@ -461,6 +461,12 @@ vlcplayer/po/Makefile
 vlcplayer/src/Makefile
 vlcplayer/src/servicets/Makefile
 
+vps/Makefile
+vps/meta/Makefile
+vps/po/Makefile
+vps/src_cc/Makefile
+vps/src_py/Makefile
+
 weatherplugin/Makefile
 weatherplugin/meta/Makefile
 weatherplugin/po/Makefile
