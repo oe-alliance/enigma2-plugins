@@ -85,6 +85,7 @@ SUBDIRS = \
 	valixdcontrol \
 	virtualzap \
 	vlcplayer \
+	vps \
 	weatherplugin \
 	webcamviewer \
 	webbouqueteditor \
