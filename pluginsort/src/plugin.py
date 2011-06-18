@@ -37,9 +37,10 @@ def SelectedPluginEntryComponent(plugin):
 
 	return [
 		plugin,
-		MultiContentEntryText(pos=(120, 5), size=(320, 25), font=0, text=plugin.name, backcolor_sel=1234566),
-		MultiContentEntryText(pos=(120, 26), size=(320, 17), font=1, text=plugin.description, backcolor_sel=1234566),
-		MultiContentEntryPixmapAlphaTest(pos=(10, 5), size=(100, 40), png = png, backcolor_sel=1234566)
+		MultiContentEntryText(pos=(0,0), size=(440, 50), backcolor_sel=8388608),
+		MultiContentEntryText(pos=(120, 5), size=(320, 25), font=0, text=plugin.name),
+		MultiContentEntryText(pos=(120, 26), size=(320, 17), font=1, text=plugin.description),
+		MultiContentEntryPixmapAlphaTest(pos=(10, 5), size=(100, 40), png = png),
 	]
 
 WHEREMAP = {}
