@@ -137,11 +137,11 @@ def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
 OriginalPluginBrowser = PluginBrowser.PluginBrowser
 class SortingPluginBrowser(OriginalPluginBrowser):
 	def __init__(self, *args, **kwargs):
-		OriginalPluginBrowser.__init__(self, *args, **kwargs)
-		self.skinName = ["SortingPluginBrowser", "PluginBrowser"]
-
 		self.movemode = False
 		self.selected = -1
+
+		OriginalPluginBrowser.__init__(self, *args, **kwargs)
+		self.skinName = ["SortingPluginBrowser", "PluginBrowser"]
 
 		self["MenuActions"] = ActionMap(["MenuActions"],
 			{
