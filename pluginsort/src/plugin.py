@@ -329,11 +329,12 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginHider/plugin.py")):
 			list.insert(0, (_("hide selected plugin"), self.hidePlugin))
-			self.session.openWithCallback(
-				self.menuCallback,
-				ChoiceBox,
-				list = list,
-			)
+
+		self.session.openWithCallback(
+			self.menuCallback,
+			ChoiceBox,
+			list = list,
+		)
 
 	def menuCallback(self, ret):
 		ret and ret[1]()
