@@ -1,0 +1,7 @@
+Package: enigma2-plugin-extensions-vps
+Version: 0.4
+Description: VPS-Plugin
+Section: extra
+Priority: optional
+Maintainer: Martin Gauk <mart-g@web.de>
+Architecture: mipsel

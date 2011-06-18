@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Enable VPS"
+msgstr "VPS aktivieren"
+
+msgid "Recording controlled by channel"
+msgstr "Aufnahme komplett durch Sender steuern lassen"
+
+msgid "VPS-Time (date)"
+msgstr "VPS-Zeit (Datum)"
+
+msgid "VPS-Time (time)"
+msgstr "VPS-Zeit (Uhrzeit)"
+
+msgid "Enable VPS-Plugin"
+msgstr "VPS-Plugin eingeschaltet"
+
+msgid "Starting time"
+msgstr "Kontroll-Vorlaufzeit"
+
+msgid "Recordings can be controlled by channel"
+msgstr "Aufnahmen können durch Sender gesteuert werden"
+
+msgid "Wakeup from Deep-Standby is allowed"
+msgstr "Starten aus dem Deep-Standby erlaubt"
+
+msgid "VPS enabled by default"
+msgstr "VPS standardmäßig aktivieren"
+
+msgid "Recordings are controlled by channel by default"
+msgstr "Aufnahmen standardmäßig durch Sender steuern lassen"
+
+msgid "This plugin can determine whether a programme begins earlier or lasts longer. The channel has to provide reliable data."
+msgstr "Das VPS-Plugin kann feststellen, ob eine Sendung früher beginnt oder länger dauert als im Timer programmiert wurde. Der Sender muss verlässliche Daten liefern!"
+
+msgid "If possible, x minutes before a timer starts VPS-Plugin will control whether the programme begins earlier. (0 disables feature)"
+msgstr "Wenn möglich, wird x Minuten vor eigentlichem Beginn der Aufnahme überprüft, ob die Sendung früher anfängt. (0 deaktiviert das Feature)"
+
+msgid "If enabled, you can decide whether a timer should be controlled by channel (Running-Status). Programmed start and end time will be ignored."
+msgstr "Wenn eingeschaltet, kann bei jedem Timer angegeben werden, ob die Aufnahme komplett von den Senderangaben (Running-Status) gesteuert werden soll. In dem Fall werden die programmierten Timer-Zeiten nicht beachtet!"
+
+msgid "If enabled and necessary, the plugin will wake up the Dreambox from Deep-Standby for the defined starting time to control whether the programme begins earlier."
+msgstr "Wenn eingeschaltet und notwendig, wird das Plugin die Dreambox für die Kontroll-Vorlaufzeit aus dem Deep-Standby holen, um zu überprüfen, ob die Sendung früher anfängt."
+
+msgid "Enable VPS by default (new timers)"
+msgstr "Soll VPS bei neuen Timern standardmäßig aktiviert sein?"
+
+msgid "Enable \"Recording controlled by channel\" by default (new timers)"
+msgstr "Soll die Funktion \"durch Sender steuern lassen\" bei neuen Timern standardmäßig aktiviert sein?"
+
+msgid "VPS-Plugin checks if the channel supports VPS for manual timers ..."
+msgstr "Das VPS-Plugin prüft gerade, ob der Sender für manuell programmierte Timer VPS unterstützt ..."
+
+msgid ""
+"The selected channel doesn't support VPS for manually programmed timers!\n"
+" Do you really want to enable VPS?"
+msgstr ""
+"Der Sender unterstützt kein VPS für manuell programmierte Timer!\n"
+" VPS wirklich aktivieren?"
+
+msgid ""
+"The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n"
+" Do you really want to enable VPS?"
+msgstr ""
+"Das VPS-Plugin konnte nicht prüfen, ob der Sender für manuell programmierte Timer VPS unterstützt.\n"
+" VPS wirklich aktivieren?"
+
+msgid ""
+"The VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"
+"\n"
+"If you enable VPS, the recording is definitely starting at the latest at the startTime. The recording may start earlier or lasts longer.\n"
+"\n"
+"If you also enable \"Recording controlled by channel\", the recording will only start, when the channel flags the programme as running.\n"
+"\n"
+"\n"
+"Supported channels\n"
+"\n"
+"Germany:\n"
+" ARD, ZDF, Sky and DMAX\n"
+"\n"
+"Austria:\n"
+" ORF and Servus TV\n"
+"\n"
+"Czech Republic:\n"
+" CT\n"
+"\n"
+"If a timer is programmed manually (not via EPG), it is necessary to set a VPS-Time to enable VPS. VPS-Time (also known as PDC) is the first published start time, e.g. given in magazines. If you set a VPS-Time, you have to leave timer name empty."
+msgstr ""
+"VPS dient dazu, bei Aufnahmen von Sendungen auf Verschiebungen der Anfangszeit und Überziehungen der Sendedauer zu reagieren. VPS wird nur von bestimmten Sendern unterstützt!\n"
+"\n"
+"Wenn VPS aktiviert wird, werden die programmierten Timer-Zeiten beachtet. Die Aufnahme wird nur ggf. früher starten bzw. länger dauern, aber niemals kürzer.\n"
+"\n"
+"Wenn zusätzlich \"komplett durch Sender steuern\" aktiviert ist (in den Plugin-Einstellungen und im Timer), wird die Aufnahme erst starten, wenn der Sender angibt, dass die Sendung begonnen hat, und genau dann enden, wenn angegeben wird, dass die Sendung vorbei ist.\n"
+"\n"
+"\n"
+"\n"
+"Unterstützte Sender\n"
+"\n"
+"Deutschland:\n"
+" Sender von ARD und ZDF sowie teilweise Sky und DMAX\n"
+"\n"
+"Österreich:\n"
+" ORF und Servus TV\n"
+"\n"
+"Tschechien:\n"
+" CT\n"
+"\n"
+"\n"
+"Bei Timern, die manuell (nicht über den EPG) programmiert werden, muss eine VPS-Zeit angegeben werden, um VPS nutzen zu können Die VPS-Zeit ist z.B. die veröffentlichte Startzeit in Zeitschriften. Zur Nutzung der Funktion darf bei manuell angelegten Timern kein Timer-Name angegeben werden."
+
