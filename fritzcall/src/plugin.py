@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 643 $
-$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $
-$Id: plugin.py 643 2011-04-30 10:38:52Z michael $
+$Revision: 646 $
+$Date: 2011-06-05 12:26:00 +0200 (So, 05 Jun 2011) $
+$Id: plugin.py 646 2011-06-05 10:26:00Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -292,8 +292,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 643 $"[1:-2] + "\n" + 
-							"$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $"[1:23] + "\n"
+							"$Revision: 646 $"[1:-2] + "\n" + 
+							"$Date: 2011-06-05 12:26:00 +0200 (So, 05 Jun 2011) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -530,7 +530,9 @@ class FritzCallFBF:
 			#				 New Style: 7270 (FW 54.04.58, 54.04.63-11941, 54.04.70, 54.04.74-14371, 54.04.76, PHONE Labor 54.04.80-16624)
 			#							7170 (FW 29.04.70) 22.03.2009
 			#							7141 (FW 40.04.68) 22.03.2009
-			#	We expect one line with TrFonName followed by several lines with
+			#  We expect one line with
+			#   TrFonName(Entry umber, Name, ???, Path to picture)
+			#  followed by several lines with
 			#	TrFonNr(Type,Number,Shortcut,Vanity), which all belong to the name in TrFonName.
 			#===============================================================================
 			debug("[FritzCallFBF] _parseFritzBoxPhonebook: discovered newer firmware")
@@ -1617,7 +1619,8 @@ class FritzMenu(Screen, HelpableScreen):
 		self.setTitle(_("FRITZ!Box Fon Status"))
 
 	def _getInfo(self):
-		fritzbox.getInfo(self._fillMenu)
+		if fritzbox:
+			fritzbox.getInfo(self._fillMenu)
 
 	def _fillMenu(self, status):
 		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive) = status
@@ -2717,7 +2720,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 643 $"[1: - 1] + "$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 646 $"[1: - 1] + "$Date: 2011-06-05 12:26:00 +0200 (So, 05 Jun 2011) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -3181,7 +3184,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 643 $"[1:-1]	+ "$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 646 $"[1:-1]	+ "$Date: 2011-06-05 12:26:00 +0200 (So, 05 Jun 2011) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
