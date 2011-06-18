@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+					<tag type="Recording" />
+					<tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>JuSt611</author>
+                    <name>Automatic System Cleanup</name>
+                    <packagename>enigma2-plugin-systemplugins-automaticcleanup</packagename>
+                    <shortdescription>Cleanup timerlist, crashlogs and stored settings automatically.</shortdescription>
+                    <description>Cleanup timerlist, crashlogs and stored settings automatically according to specfied rules.</description>	    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-automaticcleanup" />
+	  </files>
+</default>
