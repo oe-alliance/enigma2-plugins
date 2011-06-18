@@ -10,6 +10,8 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.PluginComponent import PluginComponent, plugins
 from Components.PluginList import PluginEntryComponent
 from Tools.Directories import resolveFilename, fileExists, SCOPE_SKIN_IMAGE, SCOPE_PLUGINS
+from Tools.BoundFunction import boundFunction
+from Screens.InfoBarGenerics import InfoBarPlugins
 
 from Components.ActionMap import ActionMap, NumberActionMap
 from operator import attrgetter # python 2.5+
@@ -75,8 +77,8 @@ class PluginWeights:
 			where = wheresection.get('type')
 			whereid = WHEREMAP.get(where, None)
 			whereplugins = wheresection.findall('plugin')
-			if not whereid or not whereplugins:
-				print "[PluginSort] Ignoring section %s because of invalid id (%s) or no plugins" % (where, repr(whereid))
+			if whereid is None or not whereplugins:
+				print "[PluginSort] Ignoring section %s because of invalid id (%s) or no plugins (%s)" % (where, repr(whereid), repr(whereplugins))
 				continue
 
 			for plugin in whereplugins:
@@ -129,6 +131,17 @@ class PluginWeights:
 pluginWeights = PluginWeights()
 
 def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
+	if len(plugin.where) > 1:
+		print "[PluginSort] Splitting %s up in individual entries" % (plugin.name,)
+		for x in plugin.where:
+			if hasattr(plugin, 'iconstr'):
+				icon = plugin.iconstr
+			else:
+				icon = plugin.icon
+			pd = PluginDescriptor(name=plugin.name, where=[x], description=plugin.description, icon=icon, fnc=plugin.__call__, wakeupfnc=plugin.wakeupfnc, needsRestart=plugin.needsRestart, internal=plugin.internal, weight=plugin.weight)
+			PluginComponent_addPlugin(self, pd)
+		return
+
 	newWeight = pluginWeights.get(plugin)
 	print "[PluginSort] Setting weight of %s from %d to %d" % (plugin.name, plugin.weight, newWeight)
 	plugin.weight = newWeight
@@ -139,15 +152,15 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 	def __init__(self, *args, **kwargs):
 		self.movemode = False
 		self.selected = -1
+		if 'where' in kwargs:
+			self.where = kwargs['where']
+			del kwargs['where']
+		else:
+			self.where = PluginDescriptor.WHERE_PLUGINMENU
 
 		OriginalPluginBrowser.__init__(self, *args, **kwargs)
 		self.skinName = ["SortingPluginBrowser", "PluginBrowser"]
 
-		self["MenuActions"] = ActionMap(["MenuActions"],
-			{
-				"menu": self.openMenu,
-			}, -1
-		)
 		self["ColorActions"] = ActionMap(["ColorActions"],
 			{
 				"green": self.toggleMoveMode,
@@ -157,27 +170,47 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 
 		self["WizardActions"] = ActionMap(["WizardActions"],
 			{
-				"left": self.left,
-				"right": self.right,
-				"up": self.up,
-				"down": self.down,
+				"left": boundFunction(self.doMove, self["list"].pageUp),
+				"right": boundFunction(self.doMove, self["list"].pageDown),
+				"up": boundFunction(self.doMove, self["list"].up),
+				"down": boundFunction(self.doMove, self["list"].down),
 			}, -2
 		)
 
-		self["NumberActions"] = NumberActionMap(["NumberActions"],
-			{
-				"1": self.keyNumberGlobal,
-				"2": self.keyNumberGlobal,
-				"3": self.keyNumberGlobal,
-				"4": self.keyNumberGlobal,
-				"5": self.keyNumberGlobal,
-				"6": self.keyNumberGlobal,
-				"7": self.keyNumberGlobal,
-				"8": self.keyNumberGlobal,
-				"9": self.keyNumberGlobal,
-				"0": self.keyNumberGlobal,
-			}, -2
-		)
+		if self.where != PluginDescriptor.WHERE_PLUGINMENU:
+			self.toggleMoveMode()
+			self.onShow.append(self.setCustomTitle)
+		else:
+			self["NumberActions"] = NumberActionMap(["NumberActions"],
+				{
+					"1": self.keyNumberGlobal,
+					"2": self.keyNumberGlobal,
+					"3": self.keyNumberGlobal,
+					"4": self.keyNumberGlobal,
+					"5": self.keyNumberGlobal,
+					"6": self.keyNumberGlobal,
+					"7": self.keyNumberGlobal,
+					"8": self.keyNumberGlobal,
+					"9": self.keyNumberGlobal,
+					"0": self.keyNumberGlobal,
+				}, -2
+			)
+
+			self["MenuActions"] = ActionMap(["MenuActions"],
+				{
+					"menu": self.openMenu,
+				}, -1
+			)
+
+	def setCustomTitle(self):
+		titleMap = {
+			PluginDescriptor.WHERE_EXTENSIONSMENU: _("Sort Extensions"),
+			PluginDescriptor.WHERE_MOVIELIST: _("Sort MovieList Extensions"),
+			PluginDescriptor.WHERE_EVENTINFO: _("Sort EventInfo Extensions"),
+		}
+		title = titleMap.get(self.where, None)
+		if title:
+			self.setTitle(title)
 
 	def keyNumberGlobal(self, number):
 		if not self.movemode:
@@ -193,25 +226,35 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 
 	# copied from PluginBrowser because we redo pretty much anything :-)
 	def updateList(self):
-		self.pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU)
-		self.pluginlist.sort(key=attrgetter('weight', 'name')) # sort first by weight, then by name; we get pretty much a weight sorted but otherwise random list
+		self.pluginlist = plugins.getPlugins(self.where)
+		if self.where in (PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU):
+			self.pluginlist.sort(key=attrgetter('weight', 'name')) # sort first by weight, then by name; we get pretty much a weight sorted but otherwise random list
+		else: #if self.where in (PluginDescriptor.WHERE_EVENTINFO, PluginDescriptor.WHERE_MOVIELIST):
+			self.pluginlist.sort(key=attrgetter('weight'))
 		self.list = [PluginEntryComponent(plugin) for plugin in self.pluginlist]
 		self["list"].l.setList(self.list)
-		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
-			# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
-			self["red"].setText(_("Manage extensions"))
+		if self.where == PluginDescriptor.WHERE_PLUGINMENU:
+			if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
+				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+				self["red"].setText(_("Manage extensions"))
+				self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
+				self["SoftwareActions"].setEnabled(True)
+				self["PluginDownloadActions"].setEnabled(False)
+				self["ColorActions"].setEnabled(True)
+			else:
+				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+				self["red"].setText(_("Remove Plugins"))
+				# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
+				self["green"].setText(_("Download Plugins"))
+				self["SoftwareActions"].setEnabled(False)
+				self["PluginDownloadActions"].setEnabled(True)
+				self["ColorActions"].setEnabled(False)
+		else:
+			self["red"].setText("")
 			self["green"].setText(_("Sort") if not self.movemode else _("End Sort"))
-			self["SoftwareActions"].setEnabled(True)
+			self["SoftwareActions"].setEnabled(False)
 			self["PluginDownloadActions"].setEnabled(False)
 			self["ColorActions"].setEnabled(True)
-		else:
-			# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
-			self["red"].setText(_("Remove Plugins"))
-			# TRANSLATORS: leaving this empty is encouraged to not cause any confusion (this string was taken directly from the standard PluginBrowser)
-			self["green"].setText(_("Download Plugins"))
-			self["SoftwareActions"].setEnabled(False)
-			self["PluginDownloadActions"].setEnabled(True)
-			self["ColorActions"].setEnabled(False)
 
 	def doMove(self, func):
 		if self.selected != -1:
@@ -223,18 +266,6 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			self["list"].l.setList(self.list)
 		else:
 			func()
-
-	def left(self):
-		self.doMove(self["list"].pageUp)
-
-	def right(self):
-		self.doMove(self["list"].pageDown)
-
-	def up(self):
-		self.doMove(self["list"].up)
-
-	def down(self):
-		self.doMove(self["list"].down)
 
 	def save(self):
 		selected = self.selected
@@ -282,27 +313,33 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			self["list"].l.setList(self.list)
 	
 	def openMenu(self):
+		if self.movemode:
+			# TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
+			moveString = _("disable move mode")
+		else:
+			# TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
+			moveString = _("enable move mode")
+
+		list = [
+			(moveString, self.toggleMoveMode),
+			(_("move extensions"), boundFunction(self.openMover, PluginDescriptor.WHERE_EXTENSIONSMENU)),
+			(_("move movie extensions"), boundFunction(self.openMover, PluginDescriptor.WHERE_MOVIELIST)),
+			(_("move event extensions"), boundFunction(self.openMover, PluginDescriptor.WHERE_EVENTINFO)),
+		]
+
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginHider/plugin.py")):
-			if self.movemode:
-				# TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
-				moveString = _("disable move mode")
-			else:
-				# TRANSLATORS: there is no need to translate this string, as it was reused from e2 core
-				moveString = _("enable move mode")
-			list = [
-				(_("hide selected plugin"), self.hidePlugin),
-				(moveString, self.toggleMoveMode),
-			]
+			list.insert(0, (_("hide selected plugin"), self.hidePlugin))
 			self.session.openWithCallback(
 				self.menuCallback,
 				ChoiceBox,
 				list = list,
 			)
-		else:
-			self.toggleMoveMode()
 
 	def menuCallback(self, ret):
 		ret and ret[1]()
+
+	def openMover(self, where):
+		self.session.open(SortingPluginBrowser, where=where)
 
 	def hidePlugin(self):
 		try:
@@ -327,6 +364,11 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 			for plugin in self.pluginlist:
 				pluginWeights.set(plugin)
 			pluginWeights.save()
+
+			# auto-close if not "PluginBrowser"
+			if self.where != PluginDescriptor.WHERE_PLUGINMENU:
+				self.movemode = False
+				return self.close()
 		else:
 			if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/plugin.py")):
 				self["green"].setText(_("End Sort"))
@@ -338,23 +380,49 @@ def autostart(reason, *args, **kwargs):
 		PluginComponent.addPlugin = PluginComponent_addPlugin
 
 		# "fix" weight of plugins already added to list, future ones will be fixed automatically
-		for plugin in plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU):
-			# enigma2 older than 3.3.2011 does not know plugin weights, so default them to 0 manually
-			try:
-				newWeight = pluginWeights.get(plugin)
-			except AttributeError, ae:
-				plugin.weight = 0
-				newWeight = 0
-				PluginDescriptor.weight = 0
-				print "[PluginSort] Introduced weight attribute to PluginDescriptor for old enigma2 (this message may show multiple times)"
+		for plugin in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_MOVIELIST, PluginDescriptor.WHERE_EVENTINFO]):
+			# create individual entries for multiple wheres, this is potentially harmful!
+			if len(plugin.where) > 1:
+				# remove all entries except for a potential autostart one (highly unlikely to mix autostart with one of the above, but you never know :D)
+				if PluginDescriptor.WHERE_AUTOSTART in plugin.where:
+					plugin.where.remove(WHERE_AUTOSTART)
+					hadAutostart = True
+				else:
+					hadAutostart = False
+				plugins.removePlugin(plugin)
+				plugins.addPlugin(plugin) # this is our own addPlugin now, which automatically creates copies
 
-			print "[PluginSort] Fixing weight for %s (was %d, now %d)" % (plugin.name, plugin.weight, newWeight)
-			plugin.weight = newWeight
+				# HACK: re-add autostart entry to internal list inside PluginComponent
+				if hadAutostart:
+					plugin.where = [ PluginDescriptor.WHERE_AUTOSTART ]
+					plugins.pluginList.append(plugin)
+
+			# we're keeping the entry, just fix the weight
+			else:
+				newWeight = pluginWeights.get(plugin)
+				print "[PluginSort] Fixing weight for %s (was %d, now %d)" % (plugin.name, plugin.weight, newWeight)
+				plugin.weight = newWeight
 
 		PluginBrowser.PluginBrowser = SortingPluginBrowser
+
+		# let movieepg fix extensions list sorting if installed, else do this ourselves
+		if not fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/MovieEPG/plugin.py")):
+			def InfoBarPlugins_getPluginList(self, *args, **kwargs):
+				l = InfoBarPlugins.pluginSort_baseGetPluginList(self, *args, **kwargs)
+				try:
+					l.sort(key=lambda e: (e[0][1].args[0].weight, e[2]))
+				except Exception, e:
+					print "[PluginSort] Failed to sort extensions", e
+				return l
+
+			InfoBarPlugins.pluginSort_baseGetPluginList = InfoBarPlugins.getPluginList
+			InfoBarPlugins.getPluginList = InfoBarPlugins_getPluginList
+
 	else:
 		PluginComponent.addPlugin = PluginComponent.pluginSorter_baseAddPlugin
 		PluginBrowser.PluginBrowser = OriginalPluginBrowser
+		if hasattr(InfoBarPlugins, 'pluginSort_baseGetPluginList'):
+			InfoBarPlugins.getPluginList = InfoBarPlugins.pluginSort_baseGetPluginList
 
 def Plugins(**kwargs):
 	return [
