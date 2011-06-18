@@ -297,6 +297,7 @@ mytube/src/Makefile
 
 namezap/Makefile
 namezap/meta/Makefile
+namezap/po/Makefile
 namezap/src/Makefile
 
 netcaster/Makefile
