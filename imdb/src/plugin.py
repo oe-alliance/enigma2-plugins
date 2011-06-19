@@ -187,6 +187,8 @@ class IMDB(Screen):
 		else:
 			self.close()
 
+	event_quoted = property(lambda self: urllib.quote_plus(self.eventName.encode('utf8')))
+
 	def dictionary_init(self):
 		syslang = language.getLanguage()
 		if "de" not in syslang:
@@ -244,7 +246,7 @@ class IMDB(Screen):
 
 			self.extrainfomask = re.compile(
 			'(?:.*?<h5>(?P<g_tagline>Werbezeile|Tagline?):</h5>\n(?P<tagline>.+?)<)*'
-			'(?:.*?<h5>(?P<g_outline>Kurzbeschreibung|Plot Outline):</h5>(?P<outline>.+?)<)*'
+			'(?:.*?<h5>(?P<g_outline>Kurzbeschreibung|Handlung):</h5>(?P<outline>.+?)<)*'
 			'(?:.*?<h5>(?P<g_synopsis>Plot Synopsis):</h5>(?:.*?)(?:<a href=\".*?\">)*?(?P<synopsis>.+?)(?:</a>|</div>))*'
 			'(?:.*?<h5>(?P<g_keywords>Plot Keywords):</h5>(?P<keywords>.+?)(?:Mehr|See more</a>|</div>))*'
 			'(?:.*?<h5>(?P<g_awards>Filmpreise|Awards):</h5>(?P<awards>.+?)(?:Mehr|See more</a>|</div>))*'
@@ -404,9 +406,11 @@ class IMDB(Screen):
 				self.eventName = event.getEventName()
 		if self.eventName is not "":
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
-			event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore')).replace('%20', '+')
 			localfile = "/tmp/imdbquery.html"
-			fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
+			if self.IMDBlanguage:
+				fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
+			else:
+				fetchurl = "http://akas.imdb.com/find?s=tt;mx=20;q=" + self.event_quoted
 			print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
 			downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
 		else:
@@ -456,8 +460,16 @@ class IMDB(Screen):
 				searchresultmask = re.compile("<tr> <td.*?img src.*?>.*?<a href=\".*?/title/(tt\d{7,7})/\".*?>(.*?)</td>", re.DOTALL)
 				searchresults = searchresultmask.finditer(self.inhtml)
 				self.resultlist = [(self.htmltags.sub('',x.group(2)), x.group(1)) for x in searchresults]
+				Len = len(self.resultlist)
 				self["menu"].l.setList(self.resultlist)
-				if len(self.resultlist) > 1:
+				if Len == 1:
+					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.resultlist[0][0],))
+					self.eventName = self.resultlist[0][1]
+					localfile = "/tmp/imdbquery.html"
+					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
+					print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
+					downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
+				elif Len > 1:
 					self.Page = 1
 					self.showMenu()
 				else:
@@ -468,9 +480,8 @@ class IMDB(Screen):
 				if splitpos > 0 and self.eventName.endswith(')'):
 					self.eventName = self.eventName[splitpos+1:-1]
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.eventName))
-					event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore')).replace('%20', '+')
 					localfile = "/tmp/imdbquery.html"
-					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
+					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
 					print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
 					downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
 				else:
