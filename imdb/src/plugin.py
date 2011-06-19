@@ -16,6 +16,7 @@ from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
+from Components.config import config, ConfigSubsection, ConfigYesNo
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from os import environ as os_environ
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
@@ -23,6 +24,9 @@ import re
 import htmlentitydefs
 import urllib
 import gettext
+
+config.plugins.imdb = ConfigSubsection()
+config.plugins.imdb.force_english = ConfigYesNo(default=False)
 
 def localeInit():
 	lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
@@ -191,7 +195,7 @@ class IMDB(Screen):
 
 	def dictionary_init(self):
 		syslang = language.getLanguage()
-		if "de" not in syslang:
+		if "de" not in syslang or config.plugins.imdb.force_english.value:
 			self.IMDBlanguage = ""  # set to empty ("") for english version
 
 			self.generalinfomask = re.compile(
