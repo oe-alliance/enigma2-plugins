@@ -133,19 +133,32 @@ pluginWeights = PluginWeights()
 def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
 	if len(plugin.where) > 1:
 		print "[PluginSort] Splitting %s up in individual entries (%s)" % (plugin.name, repr(plugin.where))
+		if hasattr(plugin, 'iconstr'):
+			icon = plugin.iconstr
+		else:
+			icon = plugin.icon
+
 		for x in plugin.where:
-			if hasattr(plugin, 'iconstr'):
-				icon = plugin.iconstr
-			else:
-				icon = plugin.icon
 			pd = PluginDescriptor(name=plugin.name, where=[x], description=plugin.description, icon=icon, fnc=plugin.__call__, wakeupfnc=plugin.wakeupfnc, needsRestart=plugin.needsRestart, internal=plugin.internal, weight=plugin.weight)
-			PluginComponent_addPlugin(self, pd)
+
+			newWeight = pluginWeights.get(plugin)
+			print "[PluginSort] Setting weight of %s from %d to %d" % (plugin.name, plugin.weight, newWeight)
+			pd.weight = newWeight
+			PluginComponent.pluginSort_baseAddPlugin(self, pd, *args, **kwargs)
+
+		# installedPluginList is a list of original descriptors, but we changed it to be a copy, not a reference. so keep it up to date
+		if self.firstRun:
+			self.installedPluginList.append(plugin)
+			print "[PluginSort] Adding %s to list of installed plugins (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where))
 		return
 
 	newWeight = pluginWeights.get(plugin)
 	print "[PluginSort] Setting weight of %s from %d to %d" % (plugin.name, plugin.weight, newWeight)
 	plugin.weight = newWeight
-	PluginComponent.pluginSorter_baseAddPlugin(self, plugin, *args, **kwargs)
+	PluginComponent.pluginSort_baseAddPlugin(self, plugin, *args, **kwargs)
+
+	if self.firstRun:
+		self.installedPluginList.append(plugin)
 
 OriginalPluginBrowser = PluginBrowser.PluginBrowser
 class SortingPluginBrowser(OriginalPluginBrowser):
@@ -377,59 +390,74 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
-		PluginComponent.pluginSorter_baseAddPlugin = PluginComponent.addPlugin
-		PluginComponent.addPlugin = PluginComponent_addPlugin
+		if hasattr(PluginComponent, 'pluginSort_baseAddPlugin'):
+			print "[PluginSort] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring."
+			import traceback, sys
+			traceback.print_stack(limit=5, file=sys.stdout)
+		else:
+			PluginComponent.pluginSort_baseAddPlugin = PluginComponent.addPlugin
+			PluginComponent.addPlugin = PluginComponent_addPlugin
 
-		# "fix" weight of plugins already added to list, future ones will be fixed automatically
-		for plugin in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_MOVIELIST, PluginDescriptor.WHERE_EVENTINFO]):
-			# create individual entries for multiple wheres, this is potentially harmful!
-			if len(plugin.where) > 1:
-				# remove all entries except for a potential autostart one (highly unlikely to mix autostart with one of the above, but you never know :D)
-				if PluginDescriptor.WHERE_AUTOSTART in plugin.where:
-					plugin.where.remove(PluginDescriptor.WHERE_AUTOSTART)
-					hadAutostart = True
+			# we use a copy for installed plugins because we might change the 'where'-lists
+			plugins.installedPluginList = plugins.pluginList[:]
+			def PluginComponent__setattr__(self, key, value):
+				if key == 'installedPluginList': return
+				else: self.__dict__[key] = value
+			PluginComponent.__setattr__ = PluginComponent__setattr__
+
+			# "fix" weight of plugins already added to list, future ones will be fixed automatically
+			for plugin in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_MOVIELIST, PluginDescriptor.WHERE_EVENTINFO]):
+				# create individual entries for multiple wheres, this is potentially harmful!
+				if len(plugin.where) > 1:
+					# remove all entries except for a potential autostart one (highly unlikely to mix autostart with one of the above, but you never know :D)
+					if PluginDescriptor.WHERE_AUTOSTART in plugin.where:
+						plugin.where.remove(PluginDescriptor.WHERE_AUTOSTART)
+						hadAutostart = True
+					else:
+						hadAutostart = False
+					plugins.removePlugin(plugin)
+					plugins.addPlugin(plugin) # this is our own addPlugin now, which automatically creates copies
+
+					# HACK: re-add autostart entry to internal list inside PluginComponent
+					if hadAutostart:
+						plugin.where = [ PluginDescriptor.WHERE_AUTOSTART ]
+						plugins.pluginList.append(plugin)
+
+				# we're keeping the entry, just fix the weight
 				else:
-					hadAutostart = False
-				plugins.removePlugin(plugin)
-				plugins.addPlugin(plugin) # this is our own addPlugin now, which automatically creates copies
+					newWeight = pluginWeights.get(plugin)
+					print "[PluginSort] Fixing weight for %s (was %d, now %d)" % (plugin.name, plugin.weight, newWeight)
+					plugin.weight = newWeight
 
-				# HACK: re-add autostart entry to internal list inside PluginComponent
-				if hadAutostart:
-					plugin.where = [ PluginDescriptor.WHERE_AUTOSTART ]
-					plugins.pluginList.append(plugin)
+			# let movieepg fix extensions list sorting if installed, else do this ourselves
+			if not fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/MovieEPG/plugin.py")):
+				def InfoBarPlugins_getPluginList(self, *args, **kwargs):
+					l = InfoBarPlugins.pluginSort_baseGetPluginList(self, *args, **kwargs)
+					try:
+						l.sort(key=lambda e: (e[0][1].args[0].weight, e[2]))
+					except Exception, e:
+						print "[PluginSort] Failed to sort extensions", e
+					return l
 
-			# we're keeping the entry, just fix the weight
-			else:
-				newWeight = pluginWeights.get(plugin)
-				print "[PluginSort] Fixing weight for %s (was %d, now %d)" % (plugin.name, plugin.weight, newWeight)
-				plugin.weight = newWeight
+				InfoBarPlugins.pluginSort_baseGetPluginList = InfoBarPlugins.getPluginList
+				InfoBarPlugins.getPluginList = InfoBarPlugins_getPluginList
 
-		PluginBrowser.PluginBrowser = SortingPluginBrowser
 
-		# let movieepg fix extensions list sorting if installed, else do this ourselves
-		if not fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/MovieEPG/plugin.py")):
-			def InfoBarPlugins_getPluginList(self, *args, **kwargs):
-				l = InfoBarPlugins.pluginSort_baseGetPluginList(self, *args, **kwargs)
-				try:
-					l.sort(key=lambda e: (e[0][1].args[0].weight, e[2]))
-				except Exception, e:
-					print "[PluginSort] Failed to sort extensions", e
-				return l
-
-			InfoBarPlugins.pluginSort_baseGetPluginList = InfoBarPlugins.getPluginList
-			InfoBarPlugins.getPluginList = InfoBarPlugins_getPluginList
-
+			PluginBrowser.PluginBrowser = SortingPluginBrowser
 	else:
-		PluginComponent.addPlugin = PluginComponent.pluginSorter_baseAddPlugin
-		PluginBrowser.PluginBrowser = OriginalPluginBrowser
+		if hasattr(PluginComponent, 'pluginSort_baseAddPlugin'):
+			PluginComponent.addPlugin = PluginComponent.pluginSort_baseAddPlugin
+			del PluginComponent.pluginSort_baseAddPlugin
 		if hasattr(InfoBarPlugins, 'pluginSort_baseGetPluginList'):
 			InfoBarPlugins.getPluginList = InfoBarPlugins.pluginSort_baseGetPluginList
+			del InfoBarPlugins.pluginSort_baseGetPluginList
+		PluginBrowser.PluginBrowser = OriginalPluginBrowser
 
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
 			where=PluginDescriptor.WHERE_AUTOSTART,
 			fnc=autostart,
-			needsRestart=False, # TODO: check this!
+			needsRestart=True,
 		),
 	]
