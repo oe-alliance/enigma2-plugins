@@ -1,6 +1,0 @@
-#!/bin/sh
-
-if [ -f /usr/lib/enigma2/python/Plugins/SystemPlugins/vps/Uninstall.py ]
-then
-	python /usr/lib/enigma2/python/Plugins/SystemPlugins/vps/Uninstall.py
-fi
