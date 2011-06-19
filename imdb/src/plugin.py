@@ -39,10 +39,11 @@ def _(txt):
 localeInit()
 language.addCallback(localeInit)
 
-def quoteEventName(eventName):
+def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
 	# BBC uses '\x86' markers in program names, remove them
-	# IMDb doesn't seem to like urlencoded (...), so place them back too 
-	return urllib.quote(eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('latin-1','ignore')).replace('%20', '+').replace('%28', '(').replace('%29', ')')
+	text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('latin-1','ignore')
+	# IMDb doesn't seem to like urlencoded characters at all, hence the big "safe" list
+	return urllib.quote_plus(text, safe=safe)
 
 class IMDBChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
