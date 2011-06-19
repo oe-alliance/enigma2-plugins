@@ -5,8 +5,8 @@ from SVDRP import SimpleVDRProtocolAbstraction
 connection = None
 
 def autostart(reason, **kwargs):
-	if reason == 0:
-		global connection
+	global connection
+	if reason == 0 and connection is None:
 		connection = SimpleVDRProtocolAbstraction()
 
 def Plugins(**kwargs):
