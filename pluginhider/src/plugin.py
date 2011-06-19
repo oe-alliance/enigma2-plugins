@@ -50,10 +50,16 @@ def PluginComponent_getPlugins(self, where):
 
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
-		PluginComponent.pluginHider_baseGetPlugins = PluginComponent.getPlugins
-		PluginComponent.getPlugins = PluginComponent_getPlugins
+		if hasattr(PluginComponent, 'pluginHider_baseGetPlugins'):
+			print "[PluginHider] Something went wrong as our autostart handler was called twice for startup, printing traceback and ignoring."
+			import traceback, sys
+			traceback.print_exc(file=sys.stdout)
+		else:
+			PluginComponent.pluginHider_baseGetPlugins = PluginComponent.getPlugins
+			PluginComponent.getPlugins = PluginComponent_getPlugins
 	else:
 		PluginComponent.getPlugins = PluginComponent.pluginHider_baseGetPlugins
+		del PluginComponent.pluginHider_baseGetPlugins
 
 def main(session, *args, **kwargs):
 	session.open(PluginHiderSetup)
