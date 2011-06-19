@@ -160,6 +160,17 @@ def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
 	if self.firstRun:
 		self.installedPluginList.append(plugin)
 
+def PluginComponent_removePlugin(self, plugin, *args, **kwargs):
+	print "[PluginSort] Supposed to remove plugin: %s (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where))
+	try:
+		PluginComponent.pluginSort_baseRemovePlugin(self, plugin, *args, **kwargs)
+	except ValueError, ve:
+		print "[PluginSort] Ignoring failure to remove plugin %s, please DO NOT IGNORE THIS!" % (plugin.name,)
+		import traceback, sys
+		traceback.print_exc(file=sys.stdout)
+		print "[PluginSort] pluginList: %s" % (repr(self.pluginList),)
+		print "[PluginSort] plugins: %s" % (repr(self.plugins),)
+
 OriginalPluginBrowser = PluginBrowser.PluginBrowser
 class SortingPluginBrowser(OriginalPluginBrowser):
 	def __init__(self, *args, **kwargs):
@@ -398,6 +409,9 @@ def autostart(reason, *args, **kwargs):
 			PluginComponent.pluginSort_baseAddPlugin = PluginComponent.addPlugin
 			PluginComponent.addPlugin = PluginComponent_addPlugin
 
+			PluginComponent.pluginSort_baseRemovePlugin = PluginComponent.removePlugin
+			PluginComponent.removePlugin = PluginComponent_removePlugin
+
 			# we use a copy for installed plugins because we might change the 'where'-lists
 			plugins.installedPluginList = plugins.pluginList[:]
 			def PluginComponent__setattr__(self, key, value):
@@ -448,6 +462,8 @@ def autostart(reason, *args, **kwargs):
 		if hasattr(PluginComponent, 'pluginSort_baseAddPlugin'):
 			PluginComponent.addPlugin = PluginComponent.pluginSort_baseAddPlugin
 			del PluginComponent.pluginSort_baseAddPlugin
+			PluginComponent.removePlugin = PluginComponent.pluginSort_baseRemovePlugin
+			del PluginComponent.pluginSort_baseRemovePlugin
 		if hasattr(InfoBarPlugins, 'pluginSort_baseGetPluginList'):
 			InfoBarPlugins.getPluginList = InfoBarPlugins.pluginSort_baseGetPluginList
 			del InfoBarPlugins.pluginSort_baseGetPluginList
