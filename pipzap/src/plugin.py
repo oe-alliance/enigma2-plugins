@@ -383,6 +383,14 @@ def PictureInPicture_move(self, *args, **kwargs):
 
 def overwriteFunctions():
 	"""Overwrite existing functions here to increase system stability a bit."""
+	try:
+		baseMethods.ChannelContextMenu__init__
+	except AttributeError, ae:
+		pass
+	else:
+		print "[pipzap] already initialized, aborting."
+		return
+
 	baseMethods.ChannelContextMenu__init__ = ChannelContextMenu.__init__
 	ChannelContextMenu.__init__ = ChannelContextMenu___init__
 
