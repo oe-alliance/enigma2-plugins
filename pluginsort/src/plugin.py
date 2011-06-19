@@ -132,7 +132,7 @@ pluginWeights = PluginWeights()
 
 def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
 	if len(plugin.where) > 1:
-		print "[PluginSort] Splitting %s up in individual entries" % (plugin.name,)
+		print "[PluginSort] Splitting %s up in individual entries (%s)" % (plugin.name, repr(plugin.where))
 		for x in plugin.where:
 			if hasattr(plugin, 'iconstr'):
 				icon = plugin.iconstr
@@ -386,7 +386,7 @@ def autostart(reason, *args, **kwargs):
 			if len(plugin.where) > 1:
 				# remove all entries except for a potential autostart one (highly unlikely to mix autostart with one of the above, but you never know :D)
 				if PluginDescriptor.WHERE_AUTOSTART in plugin.where:
-					plugin.where.remove(WHERE_AUTOSTART)
+					plugin.where.remove(PluginDescriptor.WHERE_AUTOSTART)
 					hadAutostart = True
 				else:
 					hadAutostart = False
