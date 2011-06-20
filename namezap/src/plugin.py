@@ -26,14 +26,17 @@ class NameZap(NumberZap):
 	STYLE_NAME = 1
 	STYLE_BOTH = 2
 
-	skin = """<screen name="NameZap" position="center,center" size="305,60" title="Channel">
-			<widget name="channel" position="5,15" size="80,25" font="Regular;23" />
-			<widget name="name" position="85,15" size="220,25" halign="left" font="Regular;23" />
+	skin = """<screen name="NameZap" position="center,center" size="270,60" title="Channel">
+			<widget name="name" position="3,15" size="264,25" halign="left" font="Regular;23" />
 		</screen>"""
 
 	def __init__(self, *args, **kwargs):
 		NumberZap.__init__(self, *args, **kwargs)
-		self.style = {"number": self.STYLE_NUMBER, "name": self.STYLE_NAME, "both": self.STYLE_BOTH}[config.plugins.namezap.style.value]
+		if InfoBar.instance is None:
+			self.style = self.STYLE_NUMBER
+		else:
+			self.style = {"number": self.STYLE_NUMBER, "name": self.STYLE_NAME, "both": self.STYLE_BOTH}[config.plugins.namezap.style.value]
+
 		if self.style == self.STYLE_NUMBER:
 			self.skinName = "NumberZap"
 
