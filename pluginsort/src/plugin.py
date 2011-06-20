@@ -133,14 +133,8 @@ pluginWeights = PluginWeights()
 def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
 	if len(plugin.where) > 1:
 		print "[PluginSort] Splitting %s up in individual entries (%s)" % (plugin.name, repr(plugin.where))
-		if hasattr(plugin, 'iconstr'):
-			icon = plugin.iconstr
-		else:
-			icon = plugin.icon
-
 		for x in plugin.where:
-			pd = PluginDescriptor(name=plugin.name, where=[x], description=plugin.description, icon=icon, fnc=plugin.__call__, wakeupfnc=plugin.wakeupfnc, needsRestart=plugin.needsRestart, internal=plugin.internal, weight=plugin.weight)
-			pd.path = plugin.path
+			pd = PluginDescriptor(name=plugin.name, where=[x], description=plugin.description, icon=plugin.icon, fnc=plugin.__call__, wakeupfnc=plugin.wakeupfnc, needsRestart=plugin.needsRestart, internal=plugin.internal, weight=plugin.weight)
 
 			newWeight = pluginWeights.get(pd)
 			if DEBUG: print "[PluginSort] Setting weight of %s from %d to %d" % (pd.name, pd.weight, newWeight)
