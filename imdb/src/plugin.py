@@ -39,6 +39,12 @@ def _(txt):
 localeInit()
 language.addCallback(localeInit)
 
+def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
+	# BBC uses '\x86' markers in program names, remove them
+	text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('latin-1','ignore')
+	# IMDb doesn't seem to like urlencoded characters at all, hence the big "safe" list
+	return urllib.quote_plus(text, safe=safe)
+
 class IMDBChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
 		SimpleChannelSelection.__init__(self, session, _("Channel Selection"))
@@ -396,15 +402,15 @@ class IMDB(Screen):
 
 	def getIMDB(self):
 		self.resetLabels()
-		if self.eventName is "":
+		if not self.eventName:
 			s = self.session.nav.getCurrentService()
 			info = s.info()
 			event = info.getEvent(0) # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
-		if self.eventName is not "":
+		if self.eventName:
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
-			event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore')).replace('%20', '+')
+			event_quoted = quoteEventName(self.eventName)
 			localfile = "/tmp/imdbquery.html"
 			fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 			print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
@@ -468,7 +474,7 @@ class IMDB(Screen):
 				if splitpos > 0 and self.eventName.endswith(')'):
 					self.eventName = self.eventName[splitpos+1:-1]
 					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.eventName))
-					event_quoted = urllib.quote(self.eventName.decode('utf8').encode('latin-1','ignore')).replace('%20', '+')
+					event_quoted = quoteEventName(self.eventName)
 					localfile = "/tmp/imdbquery.html"
 					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 					print "[IMDB] Downloading Query " + fetchurl + " to " + localfile

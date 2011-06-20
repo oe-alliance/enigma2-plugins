@@ -12,7 +12,7 @@ def localeInit():
 def _(txt):
 	t = gettext.dgettext("SHOUTcast", txt)
 	if t == txt:
-		print "[SHOUTcast] fallback to default translation for", txt
+		# print "[SHOUTcast] fallback to default translation for", txt
 		t = gettext.gettext(txt)
 	return t
 
