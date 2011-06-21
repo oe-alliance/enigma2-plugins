@@ -45,7 +45,7 @@ Release infos
 3.4.0 no shutdown if HDD not Idle (joergm6)  
 3.4.1 Fix: Multi-Language (locale) does not work 
 3.4.2 Enhance user interface (configuration menu)
-
+3.4.3 2 Profiles; waiting for responding IP addresses
 
 
 
