@@ -113,7 +113,6 @@ class EPGSearch(EPGSelection):
 		self.bouquetChangeCB = None
 		self.serviceChangeCB = None
 		self.ask_time = -1 #now
-		self["key_red"] = Button("")
 		self.closeRecursive = False
 		self.saved_title = None
 		self["Service"] = ServiceEvent()
@@ -122,11 +121,12 @@ class EPGSearch(EPGSelection):
 		self.currentService=None
 		self.zapFunc = None
 		self.sort_type = 0
+		self["key_red"] = Button(_("IMDb Search"))
 		self["key_green"] = Button(_("Add timer"))
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
 		self["list"] = EPGSearchList(type = self.type, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
-		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions", "MenuActions"],
+		self["actions"] = ActionMap(['ColorActions', "EPGSelectActions", "OkCancelActions", "MenuActions"],
 			{
 				"menu": self.menu,
 				"cancel": self.closeScreen,
@@ -135,7 +135,7 @@ class EPGSearch(EPGSelection):
 				"yellow": self.yellowButtonPressed,
 				"blue": self.exportAutoTimer,
 				"info": self.infoKeyPressed,
-				#"red": self.zapTo, # needed --> Partnerbox
+				"red": self.redButtonPressed,
 				"nextBouquet": self.nextBouquet, # just used in multi epg yet
 				"prevBouquet": self.prevBouquet, # just used in multi epg yet
 				"nextService": self.nextService, # just used in single epg yet
@@ -182,11 +182,11 @@ class EPGSearch(EPGSelection):
 		options = [
 			(_("Import from Timer"), self.importFromTimer),
 			(_("Import from EPG"), self.importFromEPG),
+			(_("Show search history"), self.showHistory),
 		]
 
 		if autoTimerAvailable:
 			options.extend((
-				(_("Show search history"), self.showHistory),
 				(_("Import from AutoTimer"), self.importFromAutoTimer),
 				(_("Save search as AutoTimer"), self.addAutoTimer),
 			))
@@ -294,15 +294,16 @@ class EPGSearch(EPGSelection):
 
 			# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
 			encoding = config.plugins.epgsearch.encoding.value
+			searchString = searchString.replace('\xc2\x86', '').replace('\xc2\x87', '')
 			if encoding != 'UTF-8':
 				try:
-					searchString = searchString.decode('UTF-8', 'replace').encode(encoding, 'replace')
+					searchString = searchString.decode('UTF-8').encode(encoding)
 				except (UnicodeDecodeError, UnicodeEncodeError):
 					pass
 
 			# Search EPG, default to empty list
 			epgcache = eEPGCache.getInstance() # XXX: the EPGList also keeps an instance of the cache but we better make sure that we get what we want :-)
-			ret = epgcache.search(('RIBDT', 500, eEPGCache.PARTIAL_TITLE_SEARCH, searchString, eEPGCache.NO_CASE_CHECK)) or []
+			ret = epgcache.search(('RIBDT', 900, eEPGCache.PARTIAL_TITLE_SEARCH, searchString, eEPGCache.NO_CASE_CHECK)) or []
 			ret.sort(key = lambda x: x[2]) # sort by time
 
 			# Update List
