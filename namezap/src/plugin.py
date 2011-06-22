@@ -35,7 +35,6 @@ class NameZap(NumberZap):
 		if InfoBar.instance is None:
 			self.style = self.STYLE_NUMBER
 		else:
-			self.slist = InfoBar.instance.servicelist
 			self.style = {"number": self.STYLE_NUMBER, "name": self.STYLE_NAME, "both": self.STYLE_BOTH}[config.plugins.namezap.style.value]
 
 		if self.style == self.STYLE_NUMBER:
@@ -43,7 +42,8 @@ class NameZap(NumberZap):
 
 		self["name"] = Label("")
 		self.serviceHandler = eServiceCenter.getInstance()
-		self.updateServiceName(int(self.field))
+		if self.style != self.STYLE_NUMBER:
+			self.updateServiceName(int(self.field))
 
 	def keyNumberGlobal(self, number):
 		NumberZap.keyNumberGlobal(self, number)
@@ -65,7 +65,7 @@ class NameZap(NumberZap):
 		return None, num
 
 	def updateServiceName(self, number):
-		bouquet = self.slist.bouquet_root
+		bouquet = InfoBar.instance.servicelist.bouquet_root
 		service = None
 		serviceHandler = self.serviceHandler
 		if not config.usage.multibouquet.value:
