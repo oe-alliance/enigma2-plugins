@@ -35,6 +35,7 @@ class NameZap(NumberZap):
 		if InfoBar.instance is None:
 			self.style = self.STYLE_NUMBER
 		else:
+			self.slist = InfoBar.instance.servicelist
 			self.style = {"number": self.STYLE_NUMBER, "name": self.STYLE_NAME, "both": self.STYLE_BOTH}[config.plugins.namezap.style.value]
 
 		if self.style == self.STYLE_NUMBER:
@@ -64,7 +65,7 @@ class NameZap(NumberZap):
 		return None, num
 
 	def updateServiceName(self, number):
-		bouquet = InfoBar.instance.servicelist.bouquet_root
+		bouquet = self.slist.bouquet_root
 		service = None
 		serviceHandler = self.serviceHandler
 		if not config.usage.multibouquet.value:
