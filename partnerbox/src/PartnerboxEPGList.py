@@ -17,6 +17,7 @@
 #  GNU General Public License for more details.
 #
 
+from Components.config import config
 from Components.EpgList import EPGList
 from enigma import eListboxPythonMultiContent, \
 	RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_HALIGN_CENTER
@@ -48,8 +49,8 @@ def Partnerbox_EPGListInit():
 	EPGList.buildSimilarEntry = Partnerbox_SimilarEntry
 	EPGList.buildMultiEntry = Partnerbox_MultiEntry
 
-def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer = None):
-	baseEPGList__init__(self, type, selChangedCB, timer)
+def Partnerbox_EPGList__init__(self, type=0, selChangedCB=None, timer = None, time_epoch = config.GraphEPG.prev_time_period.value, overjump_empty = config.GraphEPG.overjump.value):
+	baseEPGList__init__(self, type, selChangedCB, timer, time_epoch = config.GraphEPG.prev_time_period.value, overjump_empty = config.GraphEPG.overjump.value)
 	# Partnerbox Clock Icons
 	self.remote_clock_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock.png')
 	self.remote_clock_add_pixmap = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Partnerbox/icons/remote_epgclock_add.png')
