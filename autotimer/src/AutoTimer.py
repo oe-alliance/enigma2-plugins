@@ -216,6 +216,7 @@ class AutoTimerTask(Components.Task.PythonTask):
 
 			# Workaround to allow search for umlauts if we know the encoding
 			match = timer.match
+			match = match.replace('\xc2\x86', '').replace('\xc2\x87', '')
 			if timer.encoding != 'UTF-8':
 				try:
 					match = match.decode('UTF-8').encode(timer.encoding)
