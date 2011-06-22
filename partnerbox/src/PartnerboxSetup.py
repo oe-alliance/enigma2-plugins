@@ -27,6 +27,9 @@ from Components.config import config
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import ConfigSubsection, ConfigSubList, ConfigIP, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, getConfigListEntry, configfile
+from Components.Pixmap import Pixmap,MultiPixmap
+from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Components.Sources.Boolean import Boolean
 
 # for localized messages
 from . import _
@@ -34,11 +37,11 @@ from . import _
 def initPartnerboxEntryConfig():
 	config.plugins.Partnerbox.Entries.append(ConfigSubsection())
 	i = len(config.plugins.Partnerbox.Entries) -1
-	config.plugins.Partnerbox.Entries[i].name = ConfigText(default = "dreambox", visible_width = 50, fixed_size = False)
+	config.plugins.Partnerbox.Entries[i].name = ConfigText(default = "vix", visible_width = 50, fixed_size = False)
 	config.plugins.Partnerbox.Entries[i].ip = ConfigIP(default = [192,168,0,98])
 	config.plugins.Partnerbox.Entries[i].port = ConfigInteger(default=80, limits=(1, 65555))
 	config.plugins.Partnerbox.Entries[i].enigma = ConfigSelection(default="0", choices = [("0", _("Enigma 2")),("1", _("Enigma 1"))])
-	config.plugins.Partnerbox.Entries[i].password = ConfigText(default = "dreambox", visible_width = 50, fixed_size = False)
+	config.plugins.Partnerbox.Entries[i].password = ConfigText(default = "", visible_width = 50, fixed_size = False)
 	config.plugins.Partnerbox.Entries[i].useinternal = ConfigSelection(default="1", choices = [("0", _("use external")),("1", _("use internal"))])
 	config.plugins.Partnerbox.Entries[i].zaptoservicewhenstreaming = ConfigYesNo(default = True)
 	return config.plugins.Partnerbox.Entries[i]
@@ -227,6 +230,20 @@ class PartnerboxEntryConfigScreen(ConfigListScreen, Screen):
 	def __init__(self, session, entry):
 		self.session = session
 		Screen.__init__(self, session)
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+		self["VKeyIcon"] = Boolean(False)
+
+		self.onChangedEntry = [ ]
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		if entry is None:
+			self.newmode = 1
+			self.current = initPartnerboxEntryConfig()
+		else:
+			self.newmode = 0
+			self.current = entry
+		self.createSetup()
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -240,24 +257,47 @@ class PartnerboxEntryConfigScreen(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("OK"))
 		self["key_blue"] = Button(_("Delete"))
 
-		if entry is None:
-			self.newmode = 1
-			self.current = initPartnerboxEntryConfig()
-		else:
-			self.newmode = 0
-			self.current = entry
+		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
+		{
+			"showVirtualKeyboard": self.KeyText,
+		}, -2)
+		self["VirtualKB"].setEnabled(False)
 
-		cfglist = [
-			getConfigListEntry(_("Name"), self.current.name),
-			getConfigListEntry(_("IP"), self.current.ip),
-			getConfigListEntry(_("Port"), self.current.port),
-			getConfigListEntry(_("Enigma Type"), self.current.enigma),
-			getConfigListEntry(_("Password"), self.current.password),
-			getConfigListEntry(_("Servicelists/EPG"), self.current.useinternal),
-			getConfigListEntry(_("Zap to service when streaming"), self.current.zaptoservicewhenstreaming)
-		]
 
-		ConfigListScreen.__init__(self, cfglist, session)
+	def createSetup(self):
+		self.editListEntry = None
+		self.list = []
+		self.list.append(getConfigListEntry(_("Name"), self.current.name))
+		self.list.append(getConfigListEntry(_("IP"), self.current.ip))
+		self.list.append(getConfigListEntry(_("Port"), self.current.port))
+		self.list.append(getConfigListEntry(_("Enigma Type"), self.current.enigma))
+		self.list.append(getConfigListEntry(_("Password"), self.current.password))
+		self.list.append(getConfigListEntry(_("Servicelists/EPG"), self.current.useinternal))
+		self.list.append(getConfigListEntry(_("Zap to service when streaming"), self.current.zaptoservicewhenstreaming))
+		self["config"].list = self.list
+		self["config"].setList(self.list)
+
+	# for summary:
+	def changedEntry(self):
+		for x in self.onChangedEntry:
+			x()
+
+	def getCurrentEntry(self):
+		return self["config"].getCurrent()[0]
+
+	def getCurrentValue(self):
+		return str(self["config"].getCurrent()[1].getText())
+
+	def KeyText(self):
+		if self['config'].getCurrent():
+			if self['config'].getCurrent()[0] == "Name" or self['config'].getCurrent()[0] == "Password":
+				from Screens.VirtualKeyBoard import VirtualKeyBoard
+				self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
+
+	def VirtualKeyBoardCallback(self, callback = None):
+		if callback is not None and len(callback):
+			self["config"].getCurrent()[1].setValue(callback)
+			self["config"].invalidate(self["config"].getCurrent())
 
 	def keySave(self):
 		if self.newmode == 1:
