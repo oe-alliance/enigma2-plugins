@@ -5,10 +5,12 @@ from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 
 # GUI (Summary)
+from Screens.HelpMenu import HelpableScreen
+from Screens.MessageBox import MessageBox
 from Screens.Setup import SetupSummary
 
 # GUI (Components)
-from Components.ActionMap import ActionMap
+from Components.ActionMap import HelpableActionMap
 from Components.SelectionList import SelectionList, SelectionEntryComponent
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import MultiPixmap
@@ -19,10 +21,12 @@ from Components.config import config
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
+import inspect
+
 LIST_PLUGINS = 0
 LIST_EXTENSIONS = 1
 LIST_EVENTINFO = 2
-class PluginHiderSetup(Screen):
+class PluginHiderSetup(Screen, HelpableScreen):
 	skin = """<screen name="PluginHiderSetup" title="PluginHider Setup" position="center,center" size="565,395">
 		<ePixmap position="0,358" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,358" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
@@ -42,12 +46,13 @@ class PluginHiderSetup(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
 
 		# Initialize widgets
 		self["key_green"] = StaticText(_("OK"))
 		self["key_red"] = StaticText(_("Cancel"))
-		self["key_yellow"] = StaticText(_("Previous"))
-		self["key_blue"] = StaticText(_("Next"))
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText(_("Run"))
 		self["plugins"] = StaticText(_("Plugins"))
 		self["extensions"] = StaticText(_("Extensions"))
 		self["eventinfo"] = StaticText(_("Eventinfo"))
@@ -57,18 +62,37 @@ class PluginHiderSetup(Screen):
 		self.selectedList = LIST_PLUGINS
 		self.updateList()
 
-		self["ColorActions"] = ActionMap(["OkCancelActions", "ColorActions"],
+		self["PluginHiderSetupActions"] = HelpableActionMap(self, "PluginHiderSetupActions",
 			{
-				"ok": self["list"].toggleSelection,
-				"cancel": self.cancel,
-				"red": self.cancel,
-				"green": self.save,
-				"yellow": self.previous,
-				"blue": self.next,
+				"ok": (self["list"].toggleSelection, _("toggle selection")),
+				"cancel": (self.cancel, _("end editing")),
+				"green": (self.save, _("save")),
+				"blue": (self.run, _("run selected plugin")),
+				"next": (self.next, _("select next tab")),
+				"previous": (self.previous, _("select previous tab")),
 			}, -1
 		)
 
 		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def run(self):
+		cur = self["list"].getCurrent()
+		cur = cur and cur[0]
+		if cur:
+			plugin = cur[1]
+
+			if self.selectedList == LIST_PLUGINS:
+				plugin(session=self.session)
+			else: #if self.selectedList == LIST_EXTENSIONS or self.selectedList == LIST_EVENTINFO:
+				from Screens.InfoBar import InfoBar
+				instance = InfoBar.instance
+				args = inspect.getargspec(plugin.__call__)[0]
+				if len(args) == 1:
+					plugin(session=self.session)
+				elif instance and instance.servicelist:
+					plugin(session=self.session,servicelist=instance.servicelist)
+				else:
+					session.open(MessageBox, _("Could not start Plugin:") + "\n" + _("Unable to access InfoBar."), type=MessageBox.TYPE_ERROR)
 
 	def cancel(self):
 		config.plugins.pluginhider.hideplugins.cancel()
@@ -124,7 +148,7 @@ class PluginHiderSetup(Screen):
 
 			res.append(SelectionEntryComponent(
 					name,
-					plugin.name,
+					plugin,
 					i,
 					plugin.name in selected,
 			))
@@ -136,8 +160,8 @@ class PluginHiderSetup(Screen):
 	def keepCurrent(self):
 		selected = self["list"].getSelectionsList()
 		if self.selectedList == LIST_PLUGINS:
-			config.plugins.pluginhider.hideplugins.value = [x[1] for x in selected]
+			config.plugins.pluginhider.hideplugins.value = [x[1].name for x in selected]
 		elif self.selectedList == LIST_EXTENSIONS:
-			config.plugins.pluginhider.hideextensions.value = [x[1] for x in selected]
+			config.plugins.pluginhider.hideextensions.value = [x[1].name for x in selected]
 		else: #if self.selectedList == LIST_EVENTINFO:
-			config.plugins.pluginhider.hideeventinfo.value = [x[1] for x in selected]
+			config.plugins.pluginhider.hideeventinfo.value = [x[1].name for x in selected]
