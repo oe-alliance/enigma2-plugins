@@ -240,6 +240,10 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection):
 		self.hidetimer = eTimer()
 		self.hidetimer.timeout.get().append(self.ok)
 		self.onClose.append(self.__onClose)
+		self["key_red"] = Label("")
+		self["key_green"] = Label("")
+		self["key_yellow"] = Label("")
+		self["key_blue"] = Label("")
 
 		class VlcPlayerActionMap(ActionMap):
 			def __init__(self, player, contexts = [ ], actions = { }, prio=0):
