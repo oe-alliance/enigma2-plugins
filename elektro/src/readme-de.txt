@@ -46,6 +46,7 @@ Release infos
 3.4.1 Fix: Multi-Language (locale) does not work 
 3.4.2 Enhance user interface (configuration menu)
 3.4.3 2 Profiles; waiting for responding IP addresses
+3.4.4 Use both profiles alternately (allows two time cycles per day)
 
 
 1) Voraussetzung
@@ -107,6 +108,18 @@ Hauptmenü -> Erweiterungen -> Elektro Power Save
  - Beschreibung:
    Beschreibung, mit der das Plugin im Menü erscheinen soll  
    (erfordert GUI Neustart).
+
+ - Aktives Zeit Profil
+   Die Zeiten dieses angezeigten Profiles werden verwendet.
+
+ - Beide Profile abwechselnd verwenden
+   Beide Profile werden abwechselnd eingesetzt. Beim Herunterfahren
+   wird des anderen Profil aktiviert. Dieses erlaubt 2 Zeitzyclen
+   pro Tag. Die Zeiten dürfen sich nicht überschneiden.
+
+ - Teste IPs (drücke OK zum Editieren)
+   Diese Liste von IP Adressen wird überprüft. Elektro wartet
+   solange bis keine Adresse mehr auf Ping antwortet.
 
  - Elektro Power Save aktivieren:
    Aktiviert das Plugin

@@ -72,7 +72,7 @@ pluginPrintname = "[Elektro]"
 debug = False # If set True, plugin will print some additional status info to track logic flow
 session = None
 ElektroWakeUpTime = -1
-elektro_pluginversion = "3.4.3"
+elektro_pluginversion = "3.4.4"
 elektro_readme = "/usr/lib/enigma2/python/Plugins/Extensions/Elektro/readme.txt"
 elektro_readme_de  = "/usr/lib/enigma2/python/Plugins/Extensions/Elektro/readme-de.txt"
 elektrostarttime = 60 
@@ -86,6 +86,7 @@ if debug:
 config.plugins.elektro = ConfigSubsection()
 config.plugins.elektro.nextday = ConfigClock(default = ((6 * 60 + 0) * 60) )
 config.plugins.elektro.profile = ConfigSelection(choices = [("1", "Profile 1"), ("2", "Profile 2")], default = "1")
+config.plugins.elektro.profileShift =  ConfigYesNo(default = False)
 
 config.plugins.elektro.sleep = ConfigSubDict()
 for i in range(7):
@@ -327,14 +328,10 @@ class Elektro(ConfigListScreen,Screen):
 		self.list = [	
 			getConfigListEntry(_("Active Time Profile"), config.plugins.elektro.profile,
 				_("The active Time Profile is (1 or 2).")),
-			getConfigListEntry(_("Show in"), config.plugins.elektro.menu,
-				_("Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)")),
-			getConfigListEntry(_("Name"), config.plugins.elektro.name,
-				_("Specify plugin name to be used in menu (needs GUI restart).")),
-			getConfigListEntry(_("Description"), config.plugins.elektro.description,
-				_("Specify plugin description to be used in menu (needs GUI restart).")),		
 			getConfigListEntry(_("Enable Elektro Power Save"),config.plugins.elektro.enable,
 				_("Unless this is enabled, this plugin won't run automatically.")),							
+			getConfigListEntry(_("Use both profiles alternately"), config.plugins.elektro.profileShift,
+				_("Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times.")),
 			getConfigListEntry(_("Standby on boot"), config.plugins.elektro.standbyOnBoot,
 				_("Puts the box in standby mode after boot.")),
 			getConfigListEntry(_("Standby on manual boot"), config.plugins.elektro.standbyOnManualBoot,
@@ -345,14 +342,20 @@ class Elektro(ConfigListScreen,Screen):
 				_("Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected.")),
 			getConfigListEntry(_("Avoid deep standby when HDD is active, e.g. for FTP"), config.plugins.elektro.hddsleep,
 				_("Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode.")),
+			getConfigListEntry(_("Check IPs (press OK to edit)"), config.plugins.elektro.IPenable,
+				_("This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping.")),
 			getConfigListEntry(_("Don't wake up"), config.plugins.elektro.dontwakeup,
 				_("Do not wake up at the end of next deep standby interval.")),
 			getConfigListEntry(_("Holiday mode (experimental)"), config.plugins.elektro.holiday,
 				_("The box always enters deep standby mode, except for recording.")),
 			getConfigListEntry(_("Next day starts at"), config.plugins.elektro.nextday,
 				_("If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here.")),
-			getConfigListEntry(_("Check IPs (press OK to edit)"), config.plugins.elektro.IPenable,
-				_("This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping.")),
+			getConfigListEntry(_("Show in"), config.plugins.elektro.menu,
+				_("Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)")),
+			getConfigListEntry(_("Name"), config.plugins.elektro.name,
+				_("Specify plugin name to be used in menu (needs GUI restart).")),
+			getConfigListEntry(_("Description"), config.plugins.elektro.description,
+				_("Specify plugin description to be used in menu (needs GUI restart).")),		
 			]		
 				
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
@@ -682,6 +685,10 @@ class DoElektro(Screen):
 		if trysleep:
 			#self.();
 			try:
+				if config.plugins.elektro.profileShift.value == True:
+					config.plugins.elektro.profile.value = "1" if config.plugins.elektro.profile.value == "2" else "2"
+					config.plugins.elektro.profile.save()
+					self.setNextWakeuptime()
 				self.session.openWithCallback(self.DoElektroSleep, MessageBox, _("Go to sleep now?"),type = MessageBox.TYPE_YESNO,timeout = 60)	
 			except:
 				#reset the timer and try again

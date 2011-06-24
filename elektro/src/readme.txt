@@ -46,7 +46,7 @@ Release infos
 3.4.1 Fix: Multi-Language (locale) does not work 
 3.4.2 Enhance user interface (configuration menu)
 3.4.3 2 Profiles; waiting for responding IP addresses
-
+3.4.4 Use both profiles alternately (allows two time cycles per day)
 
 
 1) Prerequisites
@@ -109,6 +109,18 @@ Main menu -> Extensions -> Elektro Power Save
  - Description:
    Specify plugin description to be used in menu 
    (needs GUI restart).
+
+ - Active Time profile
+   The times of this profile will be used.
+
+ - Use both profiles alternately
+   Both profiles are used alternately. When
+   shutting down the other profile is enabled.
+   This allows two time cycles per day. Do not overlap the times.
+
+ - Check IPs (press OK to edit)
+   This list of IP addresses is checked. Elektro waits
+   until addresses no longer responds to ping.
 
  - Enable Elektro Power Save
    Unless this is enabled, this plugin won't run 
