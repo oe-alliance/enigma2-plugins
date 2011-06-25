@@ -38,6 +38,7 @@ from RecordAdapter import RecordAdapter
 
 # Path to configuration
 CONFIG = "/etc/enigma2/epgrefresh.xml"
+XML_VERSION = "1"
 
 class EPGRefresh:
 	"""Simple Class to refresh EPGData"""
@@ -74,7 +75,12 @@ class EPGRefresh:
 		self.services[1].clear()
 
 		# Open file
-		configuration= cet_parse(CONFIG).getroot()
+		configuration = cet_parse(CONFIG).getroot()
+		version = configuration.get("version", None)
+		if version is None:
+			factor = 60
+		else: #if version == "1"
+			factor = 1
 
 		# Add References
 		for service in configuration.findall("service"):
@@ -86,7 +92,7 @@ class EPGRefresh:
 					value = value[:pos+1]
 
 				duration = service.get('duration', None)
-				duration = duration and int(duration)
+				duration = duration and int(duration)*factor
 
 				self.services[0].add(EPGRefreshService(value, duration))
 		for bouquet in configuration.findall("bouquet"):
@@ -97,7 +103,7 @@ class EPGRefresh:
 				self.services[1].add(EPGRefreshService(value, duration))
 
 	def buildConfiguration(self, webif = False):
-		list = ['<?xml version="1.0" ?>\n<epgrefresh>\n\n']
+		list = ['<?xml version="1.0" ?>\n<epgrefresh version="', XML_VERSION, '">\n\n']
 
 		if webif:
 			for serviceref in self.services[0].union(self.services[1]):
@@ -352,9 +358,9 @@ class EPGRefresh:
 			self.refreshAdapter.play(eServiceReference(service.sref))
 
 			# Start Timer
-			delay = service.duration or config.plugins.epgrefresh.interval.value
+			delay = service.duration or config.plugins.epgrefresh.interval_seconds.value
 			epgrefreshtimer.add(EPGRefreshTimerEntry(
-				time() + delay*60,
+				time() + delay,
 				self.refresh,
 				nocheck = True)
 			)

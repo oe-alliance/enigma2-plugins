@@ -24,7 +24,7 @@ config.plugins.epgrefresh = ConfigSubsection()
 config.plugins.epgrefresh.enabled = ConfigYesNo(default = False)
 config.plugins.epgrefresh.begin = ConfigClock(default = int(begin))
 config.plugins.epgrefresh.end = ConfigClock(default = int(end))
-config.plugins.epgrefresh.interval = ConfigNumber(default = 2)
+config.plugins.epgrefresh.interval_seconds = ConfigNumber(default = 120)
 config.plugins.epgrefresh.delay_standby = ConfigNumber(default = 10)
 config.plugins.epgrefresh.inherit_autotimer = ConfigYesNo(default = False)
 config.plugins.epgrefresh.afterevent = ConfigYesNo(default = False)
@@ -43,11 +43,16 @@ config.plugins.epgrefresh.adapter = ConfigSelection(choices = [
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.epgrefresh.show_help = ConfigYesNo(default = True)
 
-# convert previous parameter
+# convert previous parameters
 config.plugins.epgrefresh.background = ConfigYesNo(default = False)
 if config.plugins.epgrefresh.background.value:
 	config.plugins.epgrefresh.adapter.value = "pip_hidden"
 	config.plugins.epgrefresh.background.value = False
+	config.plugins.epgrefresh.save()
+config.plugins.epgrefresh.interval = ConfigNumber(default = 2)
+if config.plugins.epgrefresh.interval.value != 2:
+	config.plugins.epgrefresh.interval_seconds.value = config.plugins.epgrefresh.interval.value * 60
+	config.plugins.epgrefresh.interval.value = 2
 	config.plugins.epgrefresh.save()
 
 del now, begin, end
