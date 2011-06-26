@@ -78,8 +78,12 @@ config.plugins.shoutcast.addsequenceoutputfile = ConfigYesNo(default = False)
 
 
 class SHOUTcastGenre:
-	def __init__(self, name = ""):
+	def __init__(self, name = "", id = 0, haschilds = "false", parentid = 0, opened = "false"):
 		self.name = name
+		self.id = id
+		self.haschilds = haschilds
+		self.parentid = parentid
+		self.opened = opened
 
 class SHOUTcastStation:
 	def __init__(self, name = "", mt = "", id = "", br = "", genre = "", ct = "", lc = ""):
@@ -330,15 +334,10 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		if self.mode != self.GENRELIST:
 			self.stopReloadStationListTimer()
 			self.mode = self.GENRELIST
-			if len(self.genreList):
-				self["headertext"].setText(_("SHOUTcast genre list"))
-				self["list"].setMode(self.mode)
-				self["list"].setList([ (x,) for x in self.genreList])
-				self["list"].moveToIndex(self.genreListIndex)
-			else:
-				self.getGenreList()
-		else:
+		if not len(self.genreList):
 			self.getGenreList()
+		else:
+			self.showGenreList()
 
 	def yellow_pressed(self):
 		if self.mode != self.STATIONLIST:
@@ -371,24 +370,23 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			self["list"].moveToIndex(favoriteListIndex)
 		self["list"].show()
 
-	def getGenreList(self):
+	def getGenreList(self, genre = "all" , id = 0):
 		self["headertext"].setText("")
-		self["statustext"].setText(_("Getting SHOUTcast genre list..."))
+		self["statustext"].setText(_("Getting SHOUTcast genre list for %s..." % genre))
 		self["list"].hide()
-		url = self.SC + "/legacy/genrelist?k=%s" % config.plugins.shoutcast.devid.value
-		sendUrlCommand(url, None,10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
+		url = self.SC + "/genre/secondary?parentid=%s&k=%s&f=xml" % (id, config.plugins.shoutcast.devid.value)
+		sendUrlCommand(url, None, 10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
 		self["headertext"].setText(_("SHOUTcast genre list"))
 		self.genreListIndex = 0
 		self.mode = self.GENRELIST
-		self["list"].setMode(self.mode)
 		self.genreList = self.fillGenreList(xmlstring)
 		self["statustext"].setText("")
-		self["list"].setList([ (x,) for x in self.genreList])
-		if len(self.genreList):
-			self["list"].moveToIndex(self.genreListIndex)
-		self["list"].show()
+		if not len(self.genreList):
+			self["statustext"].setText(_("Got 0 genres. Could be a network problem.\nPlease try again..."))
+		else:
+			self.showGenreList()
 
 	def callbackGenreListError(self, error = None):
 		if error is not None:
@@ -396,18 +394,43 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				self["list"].hide()
 				self["statustext"].setText(_("%s\nPress green-button to try again...") % str(error.getErrorMessage()))
 			except: pass
-	
 		
-	def fillGenreList(self,xmlstring):
+	def fillGenreList(self, xmlstring):
 		genreList = []
+		# print "[SHOUTcast] fillGenreList\n%s" % xmlstring
 		try:
 			root = xml.etree.cElementTree.fromstring(xmlstring)
 		except: return []
-		for childs in root.findall("genre"):
-			genreList.append(SHOUTcastGenre(name = childs.get("name")))
+		data = root.find("data")
+		if data == None:
+			# print "[SHOUTcast] could not find data tag\n"
+			return []
+		for glist in data.findall("genrelist"):
+			for childs in glist.findall("genre"):
+				gn = childs.get("name")
+				gid = childs.get("id")
+				gparentid = childs.get("parentid")
+				ghaschilds = childs.get("haschildren")
+				#print "[SHOUTcast] Genre %s id=%s parent=%s haschilds=%s\n" % (gn, gid, gparentid, ghaschilds)
+				genreList.append(SHOUTcastGenre(name = gn, id = gid, parentid = gparentid, haschilds = ghaschilds))
+				if ghaschilds == "true":
+					for childlist in childs.findall("genrelist"):
+						for genre in childlist.findall("genre"):
+							gn = genre.get("name")
+							gid = genre.get("id")
+							gparentid = genre.get("parentid")
+							ghaschilds = genre.get("haschildren")
+							# print "[SHOUTcast]   Genre %s id=%s parent=%s haschilds=%s\n" % (gn, gid, gparentid, ghaschilds)
+							genreList.append(SHOUTcastGenre(name = gn, id = gid, parentid = gparentid, haschilds = ghaschilds))
 		return genreList
 
-	
+	def showGenreList(self):
+		self["headertext"].setText(_("SHOUTcast genre list"))
+		self["list"].setMode(self.mode)
+		self["list"].setList([ (x,) for x in self.genreList])
+		self["list"].moveToIndex(self.genreListIndex)
+		self["list"].show()
+
 	def onSelectionChanged(self):
 		pass
 		# till I find a better solution
@@ -780,7 +803,18 @@ class SHOUTcastList(GUIComponent, object):
 		width = self.l.getItemSize().width()
 		res = [ None ]
 		if self.mode == 0: # GENRELIST
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, 20, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.name))
+			print "[SHOUTcast] list name=%s haschilds=%s opened=%s\n" % (item.name, item.haschilds, item.opened)
+			if item.parentid == "0": # main genre
+				if item.haschilds == "true":
+					if item.opened == "true":
+						iname = "- %s" % item.name
+					else:
+						iname = "+ %s" % item.name
+				else:
+					iname = item.name
+			else:
+				iname = "     %s" % item.name
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 22, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, iname))
 		elif self.mode == 1: # STATIONLIST
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.name))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 23, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.ct))
