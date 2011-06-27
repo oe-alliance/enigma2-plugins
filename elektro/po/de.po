@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Elektro Power Save\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-24 16:07+Mitteleuropäische Sommerzeit\n"
-"PO-Revision-Date: 2011-06-24 16:07+0100\n"
+"POT-Creation-Date: 2011-06-27 15:57+Mitteleuropäische Sommerzeit\n"
+"PO-Revision-Date: 2011-06-27 15:57+0100\n"
 "Last-Translator: joergm6 <joergm6@online.de>\n"
 "Language-Team: Morty <morty@gmx.net>\n"
 "MIME-Version: 1.0\n"
@@ -218,8 +218,8 @@ msgid "Help"
 msgstr "Hilfe"
 
 #: plugin.py:378
-msgid "Profiles"
-msgstr "Profile"
+msgid "Times"
+msgstr "Uhrzeiten"
 
 #: plugin.py:425
 #: plugin.py:427
@@ -234,3 +234,5 @@ msgstr "Jetzt in den Standby gehen?"
 msgid "Go to sleep now?"
 msgstr "Jetzt in den Ruhezustand gehen?"
 
+#~ msgid "Profiles"
+#~ msgstr "Profile"

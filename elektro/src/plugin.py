@@ -203,7 +203,7 @@ def main(session,**kwargs):
 
 class ElektroProfile(ConfigListScreen,Screen):
 	skin = """
-			<screen position="center,center" size="600,400" title="Elektro Power Save Time Profile" >
+			<screen position="center,center" size="600,400" title="Elektro Power Save Profile Times" >
 			<widget name="config" position="0,0" size="600,360" scrollbarMode="showOnDemand" />
 			
 			<widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
@@ -375,7 +375,7 @@ class Elektro(ConfigListScreen,Screen):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Ok"))
 		self["key_yellow"] = Button(_("Help"))
-		self["key_blue"] = Button(_("Profiles"))
+		self["key_blue"] = Button(_("Times"))
 		self["help"] = StaticText()
 		
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
