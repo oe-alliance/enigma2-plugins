@@ -62,7 +62,7 @@ from . import _
 
 
 containerStreamripper = None
-shoutcast_pluginversion = "1.0.1"
+shoutcast_pluginversion = "1.1.0"
 
 config.plugins.shoutcast = ConfigSubsection()
 config.plugins.shoutcast.menu = ConfigSelection(default = "plugin", choices = [("plugin", _("Plugin menu")), ("extensions", _("Extensions menu"))])
