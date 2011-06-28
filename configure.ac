@@ -286,6 +286,10 @@ movieepg/Makefile
 movieepg/meta/Makefile
 movieepg/src/Makefile
 
+mphelp/Makefile
+mphelp/meta/Makefile
+mphelp/src/Makefile
+
 multirc/Makefile
 multirc/src/Makefile
 multirc/meta/Makefile

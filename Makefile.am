@@ -49,6 +49,7 @@ SUBDIRS = \
 	movieselectionquickbutton \
 	movietagger \
 	movieepg \
+	mphelp \
 	multirc \
 	mytube \
 	namezap \
