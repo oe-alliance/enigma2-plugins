@@ -37,6 +37,7 @@ SUBDIRS = \
 	letterbox \
 	logomanager \
 	mediadownloader \
+	menusort \
 	merlinepg \
 	merlinmusicplayer \
 	meteoitalia \

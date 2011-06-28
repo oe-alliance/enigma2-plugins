@@ -230,6 +230,10 @@ mediadownloader/meta/Makefile
 mediadownloader/po/Makefile
 mediadownloader/src/Makefile
 
+menusort/Makefile
+menusort/meta/Makefile
+menusort/src/Makefile
+
 merlinepg/Makefile
 merlinepg/meta/Makefile
 merlinepg/src/Makefile
