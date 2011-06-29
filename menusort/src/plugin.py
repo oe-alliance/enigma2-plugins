@@ -2,6 +2,7 @@
 from Plugins.Plugin import PluginDescriptor
 
 from Screens.Menu import Menu, mdom
+from Screens.HelpMenu import HelpableScreen
 
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
@@ -11,7 +12,7 @@ from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
 from Components.MenuList import MenuList
 from skin import parseColor, parseFont
 
-from Components.ActionMap import ActionMap
+from Components.ActionMap import HelpableActionMap, ActionMap
 from Components.SystemInfo import SystemInfo
 
 from xml.etree.cElementTree import parse as cet_parse
@@ -132,13 +133,14 @@ class SortableMenuList(MenuList):
 			l.insert(1, (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, height, 0, RT_HALIGN_LEFT|RT_WRAP, '',  None, None, None, self.selectedColor, None, None))
 		return l
 
-class SortableMenu(Menu):
+class SortableMenu(Menu, HelpableScreen):
 	skin = """<screen name="SortableMenu" position="center,center" size="210,285">
 		<widget source="title" render="Label" position="5,10" size="200,35" font="Regular;23" />
 		<widget name="menu" position="5,55" size="200,225" scrollbarMode="showOnDemand" font="Regular;23" />
 		</screen>"""
 	def __init__(self, *args, **kwargs):
 		baseMethods.Menu__init__(self, *args, **kwargs) # using the base initializer saves us a few cycles
+		HelpableScreen.__init__(self)
 		self.skinName = "SortableMenu"
 
 		# XXX: not nice, but makes our life a little easier
@@ -155,11 +157,11 @@ class SortableMenu(Menu):
 			}, -1
 		)
 
-		self["MenuSortActions"] = ActionMap(["MenuSortActions"],
+		self["MenuSortActions"] = HelpableActionMap(self, "MenuSortActions",
 			{
 				"ignore": lambda: None, # we need to overwrite some regular actions :-)
-				"toggleSelection": self.toggleSelection,
-				"selectEntry": self.okbuttonClick,
+				"toggleSelection": (self.toggleSelection, _("toggle selection")),
+				"selectEntry": (self.okbuttonClick, _("enter menu")),
 			}, -1
 		)
 		self.selected = -1
