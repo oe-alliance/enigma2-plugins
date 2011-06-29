@@ -39,6 +39,7 @@ config.plugins.epgrefresh.adapter = ConfigSelection(choices = [
 	], default = "main"
 )
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default = False)
+config.plugins.epgrefresh.show_help = ConfigYesNo(default = True)
 
 # convert previous parameter
 config.plugins.epgrefresh.background = ConfigYesNo(default = False)
@@ -49,12 +50,44 @@ if config.plugins.epgrefresh.background.value:
 
 del now, begin, end
 
+#pragma mark - Help
+def getHelpName():
+	return _("EPGRefresh Help")
+
+def getHelpText():
+	return (
+		HelpPage(
+			_("Welcome to EPGRefresh"),
+			_("This help screen is supposed to give you a quick look at everything EPGRefresh has to offer.\nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by pressing the HELP button from the configuration menu (more on that later).\n\n\nBut you really should consider to take the few minutes it takes to read these help pages.")
+		),
+		HelpPage(
+			_("The configuration menu"),
+			_("This is the entry point of EPGRefresh. From this menu you can configure every aspect of the plugin and start a manual refresh of the EPG.\nThe configuration options each have an explaination which is supposed to help you to understand their effects better. Please give reading them a try, they can save you a lot of time.\n\nUsing the YELLOW button you can start a refresh manually and the INFO button brings up the date the last refresh was completed successfully.\nThe BLUE key opens the service editor (next page).")
+		),
+		HelpPage(
+			_("Editing the service list"),
+			_("While the screen does not immediately show it, it does have a lot to offer. The topmost line allows you to choose between the editor for channels and bouquets and the following lines contain the channels/bouquets you chose to refresh.\n\nYou can use the BLUE button to add a new entry to the list or the YELLOW button to remove an existing one.\n\n\nFor most people it should be sufficient to add the \"Favourites\" bouquet by selecting \"Bouquets\" in the first line and by adding it using the BLUE button.")
+		),
+		HelpPage(
+			_("Congratulations"),
+			_("You now know how to do your first steps in EPGRefresh.\n\nAs a final note I want to hint you at the fact that this plugin will not do anything on it's own without YOU telling it to. So if you want the refresh to happen automatically in the background you need to configure the plugin to do so.\nThis was not done to cause you any inconvenience but rather to give you the freedom of choice.")
+		),
+	)
+
+try:
+	from Plugins.SystemPlugins.MPHelp import registerHelp, HelpPage
+except ImportError, ie:
+	print "[EPGRefresh] Unable to find MPHelp, help not available!"
+else:
+	registerHelp(getHelpName, getHelpText, "EPGRefreshHelp")
+#pragma mark -
+
 # Plugin
 from EPGRefresh import epgrefresh
 from EPGRefreshConfiguration import EPGRefreshConfiguration
 from EPGRefreshService import EPGRefreshService
 
-# Plugin
+# Plugins
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 

@@ -19,6 +19,13 @@ from Components.config import config, getConfigListEntry
 from EPGRefresh import epgrefresh
 from Components.SystemInfo import SystemInfo
 
+try:
+	from Plugins.SystemPlugins.MPHelp import showHelp
+except ImportError, ie:
+	showHelp = None
+else:
+	from plugin import getHelpName
+
 VERSION = "1.0.0"
 
 class EPGRefreshConfiguration(Screen, ConfigListScreen):
@@ -101,13 +108,14 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self["help"] = StaticText()
 
 		# Define Actions
-		self["actions"] = ActionMap(["SetupActions", "ColorActions", "ChannelSelectEPGActions"],
+		self["actions"] = ActionMap(["SetupActions", "ColorActions", "ChannelSelectEPGActions", "HelpActions"],
 			{
 				"cancel": self.keyCancel,
 				"save": self.keySave,
 				"yellow": self.forceRefresh,
 				"blue": self.editServices,
 				"showEPGList": self.keyInfo,
+				"displayHelp": self.showHelp,
 			}
 		)
 
@@ -115,9 +123,20 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self.changed()
 
 		self.onLayoutFinish.append(self.setCustomTitle)
+		self.onFirstExecBegin.append(self.firstExec)
+
+	def firstExec(self):
+		if config.plugins.epgrefresh.show_help.value and showHelp:
+			config.plugins.epgrefresh.show_help.value = False
+			config.plugins.epgrefresh.show_help.save()
+			self.showHelp()
 
 	def setCustomTitle(self):
 		self.setTitle(' '.join((_("EPGRefresh Configuration"), _("Version"), VERSION)))
+
+	def showHelp(self):
+		if showHelp:
+			showHelp(self.session, getHelpName())
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
