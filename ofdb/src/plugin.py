@@ -286,8 +286,8 @@ class OFDB(Screen):
 		self.resetLabels()
 		if self.eventName is "":
 			s = self.session.nav.getCurrentService()
-			info = s.info()
-			event = info.getEvent(0) # 0 = now, 1 = next
+			info = s and s.info()
+			event = info and info.getEvent(0) # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
 
