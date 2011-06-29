@@ -138,10 +138,13 @@ class SortableMenu(Menu):
 		<widget name="menu" position="5,55" size="200,225" scrollbarMode="showOnDemand" font="Regular;23" />
 		</screen>"""
 	def __init__(self, *args, **kwargs):
-		Menu.__init__(self, *args, **kwargs)
+		baseMethods.Menu__init__(self, *args, **kwargs) # using the base initializer saves us a few cycles
 		self.skinName = "SortableMenu"
 
-		self["menu"] = SortableMenuList(self["menu"].list) # XXX: not nice, but makes our life a little easier
+		# XXX: not nice, but makes our life a little easier
+		l = [(x[0], x[1], x[2], menuWeights.get(x)) for x in self["menu"].list]
+		l.sort(key=lambda x:x[3])
+		self["menu"] = SortableMenuList(l)
 
 		self["WizardActions"] = ActionMap(["WizardActions"],
 			{
