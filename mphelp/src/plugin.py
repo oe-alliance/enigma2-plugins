@@ -6,37 +6,37 @@ from collections import Callable
 helpList = []
 
 class PluginHelp(object):
-	def __init__(self, getNameFunc, getTextFunc, additionalSkin=""):
+	def __init__(self, getNameFunc, getPagesFunc, additionalSkin=""):
 		if not isinstance(getNameFunc, Callable):
 			print "NOT CALLABLE?!"
 			getNameFunc = lambda x: getNameFunc
 		self.getNameFunc = getNameFunc
 
-		if not isinstance(getTextFunc, Callable):
+		if not isinstance(getPagesFunc, Callable):
 			print "NOT CALLABLE EITHER?!"
-			getTextFunc = lambda x: getTextFunc
-		self.getTextFunc = getTextFunc
+			getPagesFunc = lambda x: getPagesFunc
+		self.getPagesFunc = getPagesFunc
 
 		self.additionalSkin = additionalSkin
 
 	def __getattr__(self, attr):
 		if attr == "name": return self.getNameFunc()
-		elif attr == "text": return self.getTextFunc()
+		elif attr == "pages": return self.getPagesFunc()
 		return object.__getattr__(self, attr)
 
 	def open(self, session):
-		session.open(MPHelp, self.text, title=self.name, additionalSkin=self.additionalSkin)
+		session.open(MPHelp, self.pages, title=self.name, additionalSkin=self.additionalSkin)
 
 	def openWithCallback(self, session, callback):
 		assert isinstance(callback, Callable), "callback has to be callable!"
-		session.openWithCallback(callback, MPHelp, self.text, title=self.name, additionalSkin=self.additionalSkin)
+		session.openWithCallback(callback, MPHelp, self.pages, title=self.name, additionalSkin=self.additionalSkin)
 
-def registerHelp(getNameFunc, getTextFunc, additionalSkin=""):
+def registerHelp(getNameFunc, getPagesFunc, additionalSkin=""):
 	curName = getNameFunc()
 	for x in helpList:
 		if x.name == curName:
 			return x
-	x = PluginHelp(getNameFunc, getTextFunc, additionalSkin=additionalSkin)
+	x = PluginHelp(getNameFunc, getPagesFunc, additionalSkin=additionalSkin)
 	helpList.append(x)
 	return x
 

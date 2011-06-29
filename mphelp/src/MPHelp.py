@@ -3,6 +3,16 @@ from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 
+class HelpPage:
+	def __init__(self, title, text):
+		self.title = title
+		self.text = text
+
+	def __getitem__(self, item):
+		if item == 0: return self.title
+		elif item == 1: return self.text
+		raise IndexError("no more items")
+
 class MPHelp(Screen):
 	skin = """
 		<screen name="MPHelp" flags="wfNoBorder" position="0,0" size="720,576">
@@ -78,3 +88,4 @@ class MPHelp(Screen):
 		if self.curPage < len(self.pages) - 1:
 			self.setPage(self.curPage + 1)
 
+__all__ = ['HelpPage', 'MPHelp']
