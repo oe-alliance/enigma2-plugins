@@ -8,12 +8,10 @@ helpList = []
 class PluginHelp(object):
 	def __init__(self, getNameFunc, getPagesFunc, additionalSkin=""):
 		if not isinstance(getNameFunc, Callable):
-			print "NOT CALLABLE?!"
 			getNameFunc = lambda x: getNameFunc
 		self.getNameFunc = getNameFunc
 
 		if not isinstance(getPagesFunc, Callable):
-			print "NOT CALLABLE EITHER?!"
 			getPagesFunc = lambda x: getPagesFunc
 		self.getPagesFunc = getPagesFunc
 
