@@ -5,12 +5,17 @@ from Components.Sources.StaticText import StaticText
 
 class HelpPage:
 	def __init__(self, title, text):
-		self.title = title
-		self.text = text
+		self.__title = title
+		self.__text = text
+
+	def getTitle(self):
+		return self.__title
+	def getText(self):
+		return self.__text
 
 	def __getitem__(self, item):
-		if item == 0: return self.title
-		elif item == 1: return self.text
+		if item == 0: return self.getTitle()
+		elif item == 1: return self.getText()
 		raise IndexError("no more items")
 
 class MPHelp(Screen):
