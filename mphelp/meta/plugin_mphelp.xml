@@ -5,7 +5,7 @@
                     <author>ritzMo</author>
                     <name>MPHelp</name>
                     <packagename>enigma2-plugin-systemplugins-mphelp</packagename>
-					<shortdescription></shortdescription>
+					<shortdescription>Reusable Help-component for other plugins.</shortdescription>
 					<description></description>
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
