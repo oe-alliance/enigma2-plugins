@@ -19,13 +19,6 @@ from Components.config import config, getConfigListEntry
 from EPGRefresh import epgrefresh
 from Components.SystemInfo import SystemInfo
 
-try:
-	from Plugins.SystemPlugins.MPHelp import showHelp
-except ImportError, ie:
-	showHelp = None
-else:
-	from plugin import getHelpName
-
 VERSION = "1.0.0"
 
 class EPGRefreshConfiguration(Screen, ConfigListScreen):
@@ -126,17 +119,19 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self.onFirstExecBegin.append(self.firstExec)
 
 	def firstExec(self):
-		if config.plugins.epgrefresh.show_help.value and showHelp:
+		from plugin import epgrefreshHelp
+		if config.plugins.epgrefresh.show_help.value and epgrefreshHelp:
 			config.plugins.epgrefresh.show_help.value = False
 			config.plugins.epgrefresh.show_help.save()
-			self.showHelp()
+			epgrefreshHelp.open(self.session)
 
 	def setCustomTitle(self):
 		self.setTitle(' '.join((_("EPGRefresh Configuration"), _("Version"), VERSION)))
 
 	def showHelp(self):
-		if showHelp:
-			showHelp(self.session, getHelpName())
+		from plugin import epgrefreshHelp
+		if epgrefreshHelp:
+			epgrefreshHelp.open(self.session)
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
