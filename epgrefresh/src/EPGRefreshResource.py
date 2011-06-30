@@ -156,9 +156,14 @@ class EPGRefreshChangeSettingsResource(resource.Resource):
 					t = localtime(int(value))
 					config.plugins.epgrefresh.end.value = [t.tm_hour, t.tm_min]
 			elif key == "interval":
+				statetext += " parameter \"interval\" is deprecated. please use new \"interval_seconds\" parameter instead."
 				value = int(value)
 				if value:
-					config.plugins.epgrefresh.interval.value = value
+					config.plugins.epgrefresh.interval_seconds.value = value*60
+			elif key == "interval_seconds":
+				value = int(value)
+				if value:
+					config.plugins.epgrefresh.interval_seconds.value = value
 			elif key == "delay_standby":
 				value = int(value)
 				if value:
@@ -241,8 +246,13 @@ class EPGRefreshSettingsResource(resource.Resource):
   <e2settingname>config.plugins.epgrefresh.end</e2settingname>
   <e2settingvalue>%d</e2settingvalue>
  </e2setting>
+ <!-- deprecated, pending removal -->
  <e2setting>
   <e2settingname>config.plugins.epgrefresh.interval</e2settingname>
+  <e2settingvalue>%d</e2settingvalue>
+ </e2setting>
+ <e2setting>
+  <e2settingname>config.plugins.epgrefresh.interval_seconds</e2settingname>
   <e2settingvalue>%d</e2settingvalue>
  </e2setting>
  <e2setting>
@@ -295,7 +305,8 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.enablemessage.value,
 				begin,
 				end,
-				config.plugins.epgrefresh.interval.value,
+				config.plugins.epgrefresh.interval_seconds.value*60,
+				config.plugins.epgrefresh.interval_seconds.value,
 				config.plugins.epgrefresh.delay_standby.value,
 				config.plugins.epgrefresh.inherit_autotimer.value,
 				config.plugins.epgrefresh.afterevent.value,
