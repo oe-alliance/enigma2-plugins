@@ -18,13 +18,6 @@ from Components.ActionMap import HelpableActionMap
 from Components.config import config
 from Components.Sources.StaticText import StaticText
 
-try:
-	from Plugins.SystemPlugins.MPHelp import showHelp
-except ImportError, ie:
-	showHelp = None
-else:
-	from plugin import getHelpName
-
 class AutoTimerOverviewSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">
@@ -112,10 +105,11 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self.onFirstExecBegin.append(self.firstExec)
 
 	def firstExec(self):
-		if config.plugins.autotimer.show_help.value and showHelp:
+		from plugin import autotimerHelp
+		if config.plugins.autotimer.show_help.value and autotimerHelp:
 			config.plugins.autotimer.show_help.value = False
 			config.plugins.autotimer.show_help.save()
-			self.menuCallback((False, "help"))
+			autotimerHelp.open(self.session)
 
 	def setCustomTitle(self):
 		self.setTitle(_("AutoTimer overview"))
@@ -227,7 +221,8 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			(_("Edit new timer defaults"), "defaults"),
 		]
 
-		if showHelp:
+		from plugin import autotimerHelp
+		if autotimerHelp:
 			list.insert(0, (_("Help"), "help"))
 
 		if config.plugins.autotimer.editor.value == "wizard":
@@ -245,7 +240,8 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		ret = ret and ret[1]
 		if ret:
 			if ret == "help":
-				showHelp(self.session, getHelpName())
+				from plugin import autotimerHelp
+				autotimerHelp.open(self.session)
 			elif ret == "preview":
 				total, new, modified, timers, conflicts = self.autotimer.parseEPG(simulateOnly = True)
 				self.session.open(
