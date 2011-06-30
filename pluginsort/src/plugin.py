@@ -11,6 +11,7 @@ from Components.PluginList import PluginEntryComponent
 from Tools.Directories import resolveFilename, fileExists, SCOPE_SKIN_IMAGE, SCOPE_PLUGINS
 from Tools.BoundFunction import boundFunction
 from Screens.InfoBarGenerics import InfoBarPlugins
+from Components.config import config, ConfigSubsection, ConfigYesNo
 
 from Components.ActionMap import ActionMap, NumberActionMap
 from operator import attrgetter # python 2.5+
@@ -30,6 +31,9 @@ from shutil import copyfile, Error
 
 XML_CONFIG = "/etc/enigma2/pluginsort.xml"
 DEBUG = False
+
+config.plugins.pluginsort = ConfigSubsection()
+config.plugins.pluginsort.show_help = ConfigYesNo(default=True)
 
 def SelectedPluginEntryComponent(plugin):
 	if plugin.icon is None:
@@ -226,6 +230,13 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 					"menu": self.openMenu,
 				}, -1
 			)
+		self.onFirstExecBegin.append(self.firstExec)
+
+	def firstExec(self):
+		if config.plugins.pluginsort.show_help.value and pluginSortHelp:
+			config.plugins.pluginsort.show_help.value = False
+			config.plugins.pluginsort.show_help.save()
+			pluginSortHelp.open(self.session)
 
 	def setCustomTitle(self):
 		titleMap = {
@@ -355,6 +366,9 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginHider/plugin.py")):
 			list.insert(0, (_("hide selected plugin"), self.hidePlugin))
 
+		if pluginSortHelp:
+			list.insert(0, (_("Help"), boundFunction(pluginSortHelp.open, self.session)))
+
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
@@ -474,6 +488,16 @@ def autostart(reason, *args, **kwargs):
 			InfoBarPlugins.getPluginList = InfoBarPlugins.pluginSort_baseGetPluginList
 			del InfoBarPlugins.pluginSort_baseGetPluginList
 		PluginBrowser.PluginBrowser = OriginalPluginBrowser
+
+#pragma mark - Help
+try:
+	from Plugins.SystemPlugins.MPHelp import registerHelp, showHelp, XMLHelpReader
+	reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginSort/mphelp.xml"))
+	pluginSortHelp = registerHelp(*reader)
+except Exception, e:
+	print "[PluginSort] Unable to initialize MPHelp:", e,"- Help not available!"
+	pluginSortHelp = None
+#pragma mark -
 
 def Plugins(**kwargs):
 	return [
