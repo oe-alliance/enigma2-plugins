@@ -1142,7 +1142,8 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		return SetupSummary
 
 	def remove(self):
-		if self["config"].getCurrentIndex() != 0:
+		idx = self["config"].getCurrentIndex()
+		if idx and idx > 1:
 			list = self["config"].getList()
 			list.remove(self["config"].getCurrent())
 			self["config"].setList(list)
