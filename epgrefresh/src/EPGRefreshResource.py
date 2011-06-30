@@ -305,7 +305,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.enablemessage.value,
 				begin,
 				end,
-				config.plugins.epgrefresh.interval_seconds.value*60,
+				int(config.plugins.epgrefresh.interval_seconds.value/60),
 				config.plugins.epgrefresh.interval_seconds.value,
 				config.plugins.epgrefresh.delay_standby.value,
 				config.plugins.epgrefresh.inherit_autotimer.value,
