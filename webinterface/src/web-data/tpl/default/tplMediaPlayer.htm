@@ -1,61 +1,71 @@
 
 <!-- tplMediaplayer -->
-<table id="contentTable">
-	<tr>
-		<td>
-			<table border="0" cellpadding="0" cellspacing="0" border="1">
-				<thead>
-					<tr>
-						<th>
-							<div class="sListHeader">MediaPlayer ${mp.root}
-								<map name="mpcontrols">
-								<area shape="circle" coords="17, 17, 14" nohref onclick="sendMediaPlayer('previous')" alt="jump back">
-								<area shape="circle" coords="54, 17, 14" nohref onclick="sendMediaPlayer('play')" alt="play">
-								<area shape="circle" coords="88, 17, 14" nohref onclick="sendMediaPlayer('pause')" alt="pause">
-								<area shape="circle" coords="125, 17, 14" nohref onclick="sendMediaPlayer('next')" alt="jump forward">
-								<area shape="circle" coords="161, 17, 14" nohref onclick="sendMediaPlayer('stop')" alt="stop">
-								</map><img src="/web-data/gfx/dvr-buttons-small-fs8.png" align="top" title="Control MediaPlayer" border="0" usemap="#mpcontrols">
-								<img src="/web-data/img/edit.png" onclick="openMediaPlayerPlaylist()">
-							</div>
-							<div class="sListSearch">
-								<img src="/web-data/img/nok.png" align="top" title="Close MediaPlayer" border="0" onclick="sendMediaPlayer('exit')">
-							</div>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{for item in items}
-					<tr>
-						<!-- ItemBody -->
-						<td>
-							<div style="color: #${item.color};" onclick="${item.exec}('${item.servicereference}','${item.root}');" class="sListSName" title="${item.servicereference}">${item.name}</div>
-						</td>
-						<td>
-							{if item.root == "playlist"}
-							<div class="sListExt">
-								<img src="/web-data/gfx/play.png" onclick="${item.exec}('${item.servicereference}','${item.root}');" title="${item.exec_description}" border="0">
-								<img src="/web-data/img/nok.png" onclick="deleteFile('${item.servicereference}');" title="remove file" border="0">
-								<a target="_blank" href="/file?file=${item.name}"><img src="/web-data/img/save.png" title="Download File" border="0"></a>
-							</div>
-							{elseif item.isdir == "false"}							
-							<div class="sListExt">
-								<img src="/web-data/gfx/play.png" onclick="${item.exec}('${item.servicereference}','${item.root}');" title="${item.exec_description}" border="0">
-								<a target="_blank" href="/file?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="Download File" border="0"></a>
-							</div>
-							{/if}
-						</td>
-					</tr>
-					{forelse}
-					<tr>
-						<td>Nothing to Display</td>
-					</tr>
-					{/for}
-					<tr>
-						<td colspan="7"><button onclick="writePlaylist()">Write Playlist</button></td>
-					</tr>
-				</tbody>
-			</table>
-		</td>
-	</tr>
-</table>
+						<table id="contentTable">
+							<tr>
+								<td>
+									<table border="0" cellpadding="0" cellspacing="0" border="1" style="width: 100%;">
+										<tr>
+											<th colspan="2"><div class="sListHeader">MediaPlayer ${mp.root}</div></th>
+										</tr>
+										<tr><td colspan="2">&nbsp;</td></tr>
+										{for item in items}
+										<tr class="sListItem">
+											<!-- ItemBody -->
+											<td>
+												<div class="sListSName">
+												{if item.isdir}
+												<a href="#" style="color: #000; display:block;" onclick="loadMediaPlayer('${item.servicereference}','${item.root}');" class="sListSLink" title="${item.servicereference}"><img style="vertical-align: bottom;" src="/web-data/img/folder.png"> ${item.name}</a>												
+												{else}
+												<a href="#" style="color: #888;" onclick="playFile('${item.servicereference}','${item.root}');" class="sListSLink" title="Play File">${item.name}</a>
+												{/if}
+												</div>
+											</td>
+											<td>
+												{if item.root == "playlist"}
+												<div class="sListExt">
+													<img src="/web-data/tpl/default/streaminterface/img/control_play_blue.png" onclick="playFile('${item.servicereference}','${item.root}');" title="Play File">
+													<img src="/web-data/img/nok.png" onclick="deleteFile('${item.servicereference}');" title="Remove From Playlist" border="0">
+													<a target="_blank" href="/file?file=${item.name}"><img src="/web-data/img/save.png" title="Download File" border="0"></a>
+												</div>
+												{elseif !item.isdir}							
+												<div class="sListExt">
+													<a href="#" onclick="playFile('${item.servicereference}','${item.root}');" title="Play File"><img src="/web-data/tpl/default/streaminterface/img/control_play_blue.png" border="0" alt="&gt;"></a>
+													<a target="_blank" href="/file?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="Download File" border="0"></a>
+												</div>
+												{/if}
+											</td>
+										</tr>
+										{forelse}
+										<tr>
+											<td colspan="2">No Items To Display</td>
+										</tr>
+										{/for}
+										<tr><td colspan="2">&nbsp;</td></tr>
+										<tr>
+											<td colspan="2" style="text-align: center;">						
+												<button onClick="sendMediaPlayer('previous')" title="Previous">
+													<img src="/web-data/tpl/default/streaminterface/img/control_start_blue.png" alt="&lt;&lt;" />
+												</button>
+												<button onClick="sendMediaPlayer('play')" title="Play">
+													<img src="/web-data/tpl/default/streaminterface/img/control_play_blue.png" alt="&gt;" />
+												</button>
+												<button onClick="sendMediaPlayer('next')" title="Next">
+													<img src="/web-data/tpl/default/streaminterface/img/control_end_blue.png" alt="&lt;&lt;" />
+												</button>
+												<button onClick="sendMediaPlayer('stop')" title="Stop">
+													<img src="/web-data/tpl/default/streaminterface/img/control_stop_blue.png" alt="[]" />
+												</button>
+												<button onClick="openMediaPlayerPlaylist()" title="Edit Playlist">
+													<img src="/web-data/img/edit.png" alt="Edit" />
+												</button>
+												<button onclick="writePlaylist()"><img src="/web-data/img/save.png" title="Save Playlist" alt="Save"></button>
+												<button onclick="sendMediaPlayer('exit')">
+													<img src="/web-data/img/nok.png" title="Close MediaPlayer" alt="X">
+												</button>												
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
 <!-- /tplMediaplayer -->

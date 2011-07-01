@@ -1305,12 +1305,13 @@ function incomingMediaPlayer(request){
 	if(request.readyState == 4){
 		var files = new FileList(getXML(request)).getArray();
 
-		debug("[loadMediaPlayer] Got "+files.length+" entries in mediaplayer filelist");
+		debug("[incomingMediaPlayer] Got "+files.length+" entries in mediaplayer filelist");
 		// listerHtml = tplMediaPlayerHeader;
 
 		var namespace = {};
 
 		var root = files[0].getRoot();
+		debug("[incomingMediaPlayer] root= " + root );
 		if (root != "playlist") {
 			namespace = {'root': root};
 			if(root != '/') {
@@ -1323,9 +1324,6 @@ function incomingMediaPlayer(request){
 				namespace = {
 						'root': root,
 						'servicereference': newroot,
-						'exec': 'loadMediaPlayer',
-						'exec_description': 'Change to directory ../',
-						'color': '000000',
 						'newroot': newroot,
 						'name': '..'
 				};	
@@ -1333,49 +1331,33 @@ function incomingMediaPlayer(request){
 		}
 
 		var itemnamespace = Array();
-		for ( var i = 0; i <files.length; i++){
+		for ( var i = 0; i < files.length; i++){
 			var file = files[i];
+			debug("[incomingMediaPlayer] filename='" + file.getNameOnly() + "'" );
 			if(file.getNameOnly() == '') {
 				continue;
 			}
-			var exec = 'loadMediaPlayer';
-			var exec_description = 'Change to directory' + file.getServiceReference();
-			var color = '000000';			
-			var isdir = 'true';
+			var isdir = true;
 
 			if (file.getIsDirectory() == "False") {
-				exec = 'playFile';
-				exec_description = 'play file';
-				color = '00BCBC';
-				isdir = 'false';
+				isdir = false;
 			}
 
 			itemnamespace[i] = {
 					'isdir' : isdir,
 					'servicereference': file.getServiceReference(),
-					'exec': exec,
-					'exec_description': exec_description,
-					'color': color,							
 					'root': file.getRoot(),
 					'name': file.getNameOnly()
 			};
 
 		}
-		/*
-		if (root == "playlist") {
-			listerHtml += tplMediaPlayerFooterPlaylist;
-		}
-		 */
 
-		var data = { mp : namespace,
-				items: itemnamespace
+		var data = { 
+			mp : namespace,
+			items: itemnamespace
 		};
 
 		processTpl('tplMediaPlayer', data, 'contentMain');
-		var sendMediaPlayerTMP = sendMediaPlayer;
-		sendMediaPlayer = false;
-		// setBodyMainContent('BodyContent');
-		sendMediaPlayer = sendMediaPlayerTMP;
 	}		
 }
 
