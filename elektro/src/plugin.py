@@ -72,7 +72,7 @@ pluginPrintname = "[Elektro]"
 debug = False # If set True, plugin will print some additional status info to track logic flow
 session = None
 ElektroWakeUpTime = -1
-elektro_pluginversion = "3.4.4"
+elektro_pluginversion = "3.4.4a"
 elektro_readme = "/usr/lib/enigma2/python/Plugins/Extensions/Elektro/readme.txt"
 elektro_readme_de  = "/usr/lib/enigma2/python/Plugins/Extensions/Elektro/readme-de.txt"
 elektrostarttime = 60 
@@ -85,6 +85,7 @@ if debug:
 	print pluginPrintname, "Setting config defaults"
 config.plugins.elektro = ConfigSubsection()
 config.plugins.elektro.nextday = ConfigClock(default = ((6 * 60 + 0) * 60) )
+config.plugins.elektro.nextday2 = ConfigClock(default = ((6 * 60 + 0) * 60) )
 config.plugins.elektro.profile = ConfigSelection(choices = [("1", "Profile 1"), ("2", "Profile 2")], default = "1")
 config.plugins.elektro.profileShift =  ConfigYesNo(default = False)
 
@@ -222,9 +223,13 @@ class ElektroProfile(ConfigListScreen,Screen):
 		for i in range(7):
 			self.list.append(getConfigListEntry(" 1. " + weekdays[i] + ": "  + _("Wakeup"), config.plugins.elektro.wakeup[i]))
 			self.list.append(getConfigListEntry(" 1. " + weekdays[i] + ": "  + _("Sleep"), config.plugins.elektro.sleep[i]))
+		self.list.append(getConfigListEntry(" 1. " + _("Next day starts at"), config.plugins.elektro.nextday,
+			_("If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here.")))
 		for i in range(7):
 			self.list.append(getConfigListEntry(" 2. " + weekdays[i] + ": "  + _("Wakeup"), config.plugins.elektro.wakeup2[i]))
 			self.list.append(getConfigListEntry(" 2. " + weekdays[i] + ": "  + _("Sleep"), config.plugins.elektro.sleep2[i]))
+		self.list.append(getConfigListEntry(" 2. " + _("Next day starts at"), config.plugins.elektro.nextday2,
+			_("If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here.")))
 			
 		ConfigListScreen.__init__(self, self.list)
 		
@@ -348,8 +353,6 @@ class Elektro(ConfigListScreen,Screen):
 				_("Do not wake up at the end of next deep standby interval.")),
 			getConfigListEntry(_("Holiday mode (experimental)"), config.plugins.elektro.holiday,
 				_("The box always enters deep standby mode, except for recording.")),
-			getConfigListEntry(_("Next day starts at"), config.plugins.elektro.nextday,
-				_("If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here.")),
 			getConfigListEntry(_("Show in"), config.plugins.elektro.menu,
 				_("Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)")),
 			getConfigListEntry(_("Name"), config.plugins.elektro.name,
@@ -506,7 +509,10 @@ class DoElektro(Screen):
 	# This function converts the time into the relative Timezone where the day starts at "nextday"
 	# This is done by substracting nextday from the current time. Negative times are corrected using the mod-operator
 	def getReltime(self, time):
-		nextday = self.clkToTime(config.plugins.elektro.nextday)
+		if config.plugins.elektro.profile.value == "1":
+			nextday = self.clkToTime(config.plugins.elektro.nextday)
+		else:
+			nextday = self.clkToTime(config.plugins.elektro.nextday2)
 		return (time - nextday) %  (24 * 60 * 60)
 		
 	
@@ -545,17 +551,22 @@ class DoElektro(Screen):
 		
 		#print pluginPrintname, "Nextday:", time.ctime(self.clkToTime(config.plugins.elektro.nextday))
 		# If it isn't past next-day time we need yesterdays settings
-		if time_s < self.clkToTime(config.plugins.elektro.nextday):
-			day = (ltime.tm_wday - 1) % 7
-		else:
-			day = ltime.tm_wday
-		
-		#Check whether we wake up today or tomorrow
+		#
+		# Check whether we wake up today or tomorrow
 		# Relative Time is needed for this
-		time_s = self.getReltime(time_s)
 		if config.plugins.elektro.profile.value == "1":
+			if time_s < self.clkToTime(config.plugins.elektro.nextday):
+				day = (ltime.tm_wday - 1) % 7
+			else:
+				day = ltime.tm_wday
+			time_s = self.getReltime(time_s)
 			wakeuptime = self.getReltime(self.clkToTime(config.plugins.elektro.wakeup[day]))
 		else:
+			if time_s < self.clkToTime(config.plugins.elektro.nextday2):
+				day = (ltime.tm_wday - 1) % 7
+			else:
+				day = ltime.tm_wday
+			time_s = self.getReltime(time_s)
 			wakeuptime = self.getReltime(self.clkToTime(config.plugins.elektro.wakeup2[day]))
 		
 		# Lets see if we already woke up today
@@ -596,10 +607,16 @@ class DoElektro(Screen):
 		#Which day is it? The next day starts at nextday
 		if debug:
 			print pluginPrintname, "wday 1:", str(ltime.tm_wday)
-		if time_s < self.clkToTime(config.plugins.elektro.nextday):
-			day = (ltime.tm_wday - 1) % 7
+		if config.plugins.elektro.profile.value == "1":
+			if time_s < self.clkToTime(config.plugins.elektro.nextday):
+				day = (ltime.tm_wday - 1) % 7
+			else:
+				day = ltime.tm_wday
 		else:
-			day = ltime.tm_wday
+			if time_s < self.clkToTime(config.plugins.elektro.nextday2):
+				day = (ltime.tm_wday - 1) % 7
+			else:
+				day = ltime.tm_wday
 		if debug:	
 			print pluginPrintname, "wday 2:", str(day)
 		
@@ -685,11 +702,11 @@ class DoElektro(Screen):
 		if trysleep:
 			#self.();
 			try:
+				self.session.openWithCallback(self.DoElektroSleep, MessageBox, _("Go to sleep now?"),type = MessageBox.TYPE_YESNO,timeout = 60)	
 				if config.plugins.elektro.profileShift.value == True:
 					config.plugins.elektro.profile.value = "1" if config.plugins.elektro.profile.value == "2" else "2"
 					config.plugins.elektro.profile.save()
 					self.setNextWakeuptime()
-				self.session.openWithCallback(self.DoElektroSleep, MessageBox, _("Go to sleep now?"),type = MessageBox.TYPE_YESNO,timeout = 60)	
 			except:
 				#reset the timer and try again
 				self.TimerSleep.startLongTimer(elektrostarttime) 
