@@ -12,6 +12,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer
 from os import path as os_path, rename as os_rename, unlink as os_unlink
+from Components.Sources.Boolean import Boolean
 
 def main(session, service, **kwargs):
 	session.open(MovieRetitle, service, session.current_dialog, **kwargs)
@@ -24,6 +25,9 @@ class MovieRetitle(Screen, ConfigListScreen):
 	def __init__(self, session, service, parent, args = 0):
 		Screen.__init__(self, session, parent = parent)
 		self.skinName = [ "MovieRetitle", "Setup" ]
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+		self["VKeyIcon"] = Boolean(False)
 
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(service)
