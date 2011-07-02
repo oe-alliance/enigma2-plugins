@@ -1308,12 +1308,15 @@ function mpOnLoadFinished(request){
 		debug("[mpOnLoadFinished] Got "+files.length+" entries in mediaplayer filelist");
 		// listerHtml = tplMediaPlayerHeader;
 
-		var namespace = {};
+		var namespace = { 'hasparent' : false };
 
 		var root = files[0].getRoot();
 		debug("[mpOnLoadFinished] root= " + root );
 		if (root != "playlist") {
-			namespace = {'root': root};
+			namespace = {
+					'root': root,
+					'hasparent' : false
+			};
 			if(root != '/') {
 				var re = new RegExp(/(.*)\/(.*)\/$/);
 				re.exec(root);
@@ -1322,6 +1325,7 @@ function mpOnLoadFinished(request){
 					newroot = '/';
 				}
 				namespace = {
+						'hasparent' : true,
 						'root': root,
 						'servicereference': newroot,
 						'newroot': newroot,
@@ -1334,7 +1338,7 @@ function mpOnLoadFinished(request){
 		for ( var i = 0; i < files.length; i++){
 			var file = files[i];
 			debug("[mpOnLoadFinished] filename='" + file.getNameOnly() + "'" );
-			if(file.getNameOnly() == '') {
+			if(file.getNameOnly() == '' || file.getRoot().startsWith( file.getNameOnly() )) {
 				continue;
 			}
 			var isdir = true;
