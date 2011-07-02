@@ -509,7 +509,6 @@ webinterface/src/web-data/lib/Makefile
 webinterface/src/web-data/tpl/Makefile
 webinterface/src/web-data/tpl/default/Makefile
 webinterface/src/web-data/tpl/default/streaminterface/Makefile
-webinterface/src/web-data/tpl/default/streaminterface/img/Makefile
 webinterface/src/WebChilds/Makefile
 webinterface/src/WebChilds/External/Makefile
 webinterface/src/WebComponents/Makefile

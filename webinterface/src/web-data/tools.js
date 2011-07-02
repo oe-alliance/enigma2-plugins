@@ -1295,23 +1295,23 @@ function restartTwisted() {
 
 
 //MediaPlayer
-function sendMediaPlayer(command) {
-	debug("[sendMediaPlayer] called");
-	doRequest( URL.mediaplayercmd+command );
+function mpCommand(command) {
+	debug("[mpCommand] called");
+	doRequest( URL.mediaplayercmd + command );
 }
 
 
-function incomingMediaPlayer(request){
+function mpOnLoadFinished(request){
 	if(request.readyState == 4){
 		var files = new FileList(getXML(request)).getArray();
 
-		debug("[incomingMediaPlayer] Got "+files.length+" entries in mediaplayer filelist");
+		debug("[mpOnLoadFinished] Got "+files.length+" entries in mediaplayer filelist");
 		// listerHtml = tplMediaPlayerHeader;
 
 		var namespace = {};
 
 		var root = files[0].getRoot();
-		debug("[incomingMediaPlayer] root= " + root );
+		debug("[mpOnLoadFinished] root= " + root );
 		if (root != "playlist") {
 			namespace = {'root': root};
 			if(root != '/') {
@@ -1333,7 +1333,7 @@ function incomingMediaPlayer(request){
 		var itemnamespace = Array();
 		for ( var i = 0; i < files.length; i++){
 			var file = files[i];
-			debug("[incomingMediaPlayer] filename='" + file.getNameOnly() + "'" );
+			debug("[mpOnLoadFinished] filename='" + file.getNameOnly() + "'" );
 			if(file.getNameOnly() == '') {
 				continue;
 			}
@@ -1362,35 +1362,45 @@ function incomingMediaPlayer(request){
 }
 
 
-function loadMediaPlayer(directory){
-	debug("[loadMediaPlayer] called");
-	if(typeof(directory) == 'undefined') directory = 'Filesystems';
-	doRequest(URL.mediaplayerlist+directory, incomingMediaPlayer, false);
+function mpLoad(path){
+	debug("[mpLoad] called");
+	if(path == undefined){
+		path = 'Filesystems';
+	}
+	doRequest(URL.mediaplayerlist + path, mpOnLoadFinished, false);
 }
 
 
-function playFile(file,root) {
-	debug("[playFile] called");
+/**
+ * @pmpAddToPlaylistee
+ * @param root
+ */
+function mpAddToPlaylist(file, root, play) {
+	debug("[mpAddToPlaylist] called");
 	mediaPlayerStarted = true;
-	doRequest( URL.mediaplayerplay+file+"&root="+root );
+	if(play === true){
+		doRequest( URL.mediaplayerplay + file + "&root=" + root );
+	} else {
+		doRequest( URL.mediaplayeradd + file + "&root=" + root );
+	}
 }
 
 
-function deleteFile(sref) {
-	debug("[deleteFile] called");
+function mpRemoveFromPlaylist(sref) {
+	debug("[mpRemoveFromPlaylist] called");
 	mediaPlayerStarted = true;
 	doRequest( URL.mediaplayerremove+sref );
 }
 
 
-function openMediaPlayerPlaylist() {
-	debug("[openMediaPlayerPlaylist] called");
-	doRequest(URL.mediaplayerlist+"playlist", incomingMediaPlayer, false);
+function mpPlaylist() {
+	debug("[mpPlaylist] called");
+	doRequest(URL.mediaplayerlist+"playlist", mpOnLoadFinished, false);
 }
 
 
-function writePlaylist() {
-	debug("[writePlaylist] called");
+function mpWritePlaylist() {
+	debug("[mpWritePlaylist] called");
 	var filename = '';
 	filename = prompt("Please enter a name for the playlist", "");
 
@@ -1677,7 +1687,7 @@ function switchMode(mode){
 		break;
 
 	case "MediaPlayer":
-		loadContentDynamic(loadMediaPlayer, 'MediaPlayer');
+		loadContentDynamic(mpLoad, 'MediaPlayer');
 		break;
 
 	case "BoxControl":
