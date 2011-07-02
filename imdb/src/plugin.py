@@ -199,7 +199,7 @@ class IMDB(Screen):
 			self.IMDBlanguage = ""  # set to empty ("") for english version
 
 			self.generalinfomask = re.compile(
-			'<h1 class="header">(?P<title>.*?)<.*?</h1>.*?'
+			'<h1 class="header".*?>(?P<title>.*?)<.*?</h1>.*?'
 			'(?:.*?<h4 class="inline">\s*(?P<g_director>Regisseur|Directors?):\s*</h4>.*?<a\s+href=\".*?\">(?P<director>.*?)</a>)*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_creator>Sch\S*?pfer|Creators?):\s*</h4>.*?<a\s+href=\".*?\">(?P<creator>.*?)</a>)*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_seasons>Seasons?):\s*</h4>.*?<a\s+href=\".*?\">(?P<seasons>\d+?)</a>)*'
@@ -231,7 +231,7 @@ class IMDB(Screen):
 			, re.DOTALL)
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genre:</h4>\s<div class="info-content">\s+?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
-			self.ratingmask = re.compile('<span style="display:none" id="star-bar-user-rate"><b>(?P<rating>.*?)</b>', re.DOTALL)
+			self.ratingmask = re.compile('="star-bar-user-rate"><b>(?P<rating>.*?)</b>', re.DOTALL)
 			self.castmask = re.compile('<td class="name">\s*<a.*?>(.*?)</a>.*?<td class="character">\s*<div>\s*(?:<a.*?>)?(.*?)(?:</a>)?\s*( \(as.*?\))?\s*</div>', re.DOTALL)
 			self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 		else:
