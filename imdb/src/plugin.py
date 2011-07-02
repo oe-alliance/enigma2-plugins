@@ -199,7 +199,7 @@ class IMDB(Screen):
 			self.IMDBlanguage = ""  # set to empty ("") for english version
 
 			self.generalinfomask = re.compile(
-			'<h1 class="header">(?P<title>.*?)<.*?</h1>.*?'
+			'<h1 class="header" itemprop="name">(?P<title>.*?)<.*?</h1>.*?'
 			'(?:.*?<h4 class="inline">\s*(?P<g_director>Regisseur|Directors?):\s*</h4>.*?<a\s+href=\".*?\">(?P<director>.*?)</a>)*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_creator>Sch\S*?pfer|Creators?):\s*</h4>.*?<a\s+href=\".*?\">(?P<creator>.*?)</a>)*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_seasons>Seasons?):\s*</h4>.*?<a\s+href=\".*?\">(?P<seasons>\d+?)</a>)*'
