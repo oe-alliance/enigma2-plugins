@@ -9,6 +9,7 @@ import Screens.Standby
 from Components.config import config, ConfigText, ConfigSelection, getConfigListEntry
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
+from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer
 from os import path as os_path, rename as os_rename, unlink as os_unlink
