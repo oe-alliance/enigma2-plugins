@@ -34,7 +34,7 @@
 							<tr><td colspan="2">&nbsp;</td></tr>
 							<tr>			
 								<td colspan="2">
-									<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+									<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;" id="mpContent">
 										{if mp.hasparent}
 										<tr class="sListItem">
 											<td>
@@ -62,8 +62,8 @@
 											<td>
 												<div style="text-align: right;">
 												{if item.root == "playlist"}												
-													<img src="/web-data/img/control_play_blue.png" onclick="mpAddToPlaylist('${item.servicereference}','${item.root}', true);" title="Play '${item.name}'">
-													<img src="/web-data/img/nok.png" onclick="mpRemoveFromPlaylist('${item.servicereference}');" title="Remove '${item.name}' From Playlist" border="0">
+													<a href="#" style="color: #000;" onclick="mpAddToPlaylist('${item.servicereference}','${item.root}', true);" title="Play '${item.name}'"><img src="/web-data/img/control_play_blue.png"></a>
+													<a href="#" style="color: #000;" onclick="mpRemoveFromPlaylist('${item.servicereference}');" title="Remove '${item.name}' From Playlist"><img src="/web-data/img/nok.png" border="0"></a>
 													<a target="_blank" href="/file?file=${item.name}"><img src="/web-data/img/save.png" title="Download '${item.name}'" border="0"></a>
 												{elseif !item.isdir}							
 													<a href="#" onclick="mpAddToPlaylist('${item.servicereference}','${item.root}', true);" title="Play '${item.name}'"><img src="/web-data/img/control_play_blue.png" border="0" alt="&gt;"></a>

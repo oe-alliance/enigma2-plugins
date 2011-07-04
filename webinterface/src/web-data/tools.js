@@ -931,7 +931,7 @@ function initMovieList(){
 
 function incomingMovieListCurrentLocation(request){
 	if(request.readyState == 4){
-		result  = new SimpleXMLList(getXML(request), "e2location");
+		var result  = new SimpleXMLList(getXML(request), "e2location");
 		currentLocation = result.getList()[0];
 		debug("[incomingMovieListCurrentLocation].currentLocation" + currentLocation);
 		doRequest(URL.getlocations, incomingMovieListLocations, false);
@@ -940,7 +940,7 @@ function incomingMovieListCurrentLocation(request){
 
 function incomingMovieListLocations(request){
 	if(request.readyState == 4){
-		result  = new SimpleXMLList(getXML(request), "e2location");
+		var result  = new SimpleXMLList(getXML(request), "e2location");
 		locationsList = result.getList();
 
 		if (locationsList.length === 0) {
@@ -952,7 +952,7 @@ function incomingMovieListLocations(request){
 
 function incomingMovieListTags(request){
 	if(request.readyState == 4){
-		result  = new SimpleXMLList(getXML(request), "e2tag");
+		var result  = new SimpleXMLList(getXML(request), "e2tag");
 		tagsList = result.getList();
 	}
 }
@@ -1295,11 +1295,22 @@ function restartTwisted() {
 
 
 //MediaPlayer
-function mpCommand(command) {
-	debug("[mpCommand] called");
-	doRequest( URL.mediaplayercmd + command );
+function mpOnCommandFinished(request){
+	if(request.readyState== 4){
+		var result = new SimpleXMLResult(getXML(request));
+		simpleResultHandler(result);
+	}
 }
 
+function mpOnCommandFinishedReload(request){
+	mpOnCommandFinished(request);
+	mpPlaylist();
+}
+
+function mpCommand(command) {
+	debug("[mpCommand] called");
+	doRequest( URL.mediaplayercmd + command, mpOnCommandFinished );
+}
 
 function mpOnLoadFinished(request){
 	if(request.readyState == 4){
@@ -1371,6 +1382,10 @@ function mpLoad(path){
 	if(path == undefined){
 		path = 'Filesystems';
 	}
+	if( $('mpContent') != null){
+		debug("[mpLoad] setAjaxLoad");
+		setAjaxLoad('mpContent');
+	}
 	doRequest(URL.mediaplayerlist + path, mpOnLoadFinished, false);
 }
 
@@ -1383,9 +1398,9 @@ function mpAddToPlaylist(file, root, play) {
 	debug("[mpAddToPlaylist] called");
 	mediaPlayerStarted = true;
 	if(play === true){
-		doRequest( URL.mediaplayerplay + file + "&root=" + root );
+		doRequest( URL.mediaplayerplay + file + "&root=" + root, mpOnCommandFinished );
 	} else {
-		doRequest( URL.mediaplayeradd + file + "&root=" + root );
+		doRequest( URL.mediaplayeradd + file + "&root=" + root, mpOnCommandFinished );
 	}
 }
 
@@ -1393,13 +1408,18 @@ function mpAddToPlaylist(file, root, play) {
 function mpRemoveFromPlaylist(sref) {
 	debug("[mpRemoveFromPlaylist] called");
 	mediaPlayerStarted = true;
-	doRequest( URL.mediaplayerremove+sref );
+	doRequest( URL.mediaplayerremove+sref, mpOnCommandFinishedReload );
 }
 
 
 function mpPlaylist() {
 	debug("[mpPlaylist] called");
-	doRequest(URL.mediaplayerlist+"playlist", mpOnLoadFinished, false);
+	if( $('mpContent') != null){
+		debug("[mpPlaylist] setAjaxLoad");
+		setAjaxLoad('mpContent');
+	}
+	
+	doRequest(URL.mediaplayerlist+"playlist", mpOnLoadFinished );
 }
 
 
@@ -1409,7 +1429,7 @@ function mpWritePlaylist() {
 	filename = prompt("Please enter a name for the playlist", "");
 
 	if(filename !== "") {
-		doRequest( URL.mediaplayerwrite+filename );
+		doRequest( URL.mediaplayerwrite+filename, mpOnCommandFinished );
 	}
 }
 
