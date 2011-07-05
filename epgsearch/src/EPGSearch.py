@@ -126,13 +126,14 @@ class EPGSearch(EPGSelection):
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
 		self["list"] = EPGSearchList(type = self.type, selChangedCB = self.onSelectionChanged, timer = session.nav.RecordTimer)
-		self["actions"] = ActionMap(['ColorActions', "EPGSelectActions", "OkCancelActions", "MenuActions"],
+		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions", "MenuActions", 'ColorActions'],
 			{
 				"menu": self.menu,
 				"cancel": self.closeScreen,
 				"ok": self.eventSelected,
 				"timerAdd": self.timerAdd,
 				"yellow": self.yellowButtonPressed,
+				"yellowlong": self.showHistory,
 				"blue": self.exportAutoTimer,
 				"info": self.infoKeyPressed,
 				"red": self.redButtonPressed,
