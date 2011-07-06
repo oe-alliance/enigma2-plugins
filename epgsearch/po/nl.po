@@ -79,3 +79,5 @@ msgstr "Selecteer te zoeken tekst..."
 msgid "search EPG..."
 msgstr "EPG doorzoeken..."
 
+msgid "search EPG"
+msgstr "EPG doorzoeken"
