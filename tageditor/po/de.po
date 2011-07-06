@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../src/plugin.py:25
 #, fuzzy
-msgid "Edit tags"
+msgid "edit tags..."
 msgstr "Tags bearbeiten"
 
 #: ../src/plugin.py:46

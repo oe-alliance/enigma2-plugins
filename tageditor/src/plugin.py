@@ -22,7 +22,7 @@ def Plugins(**kwargs):
 		setPreferredTagEditor(TagEditor)
 	except Exception:
 		pass
-	return PluginDescriptor(name = "TagEditor", description = _("Edit tags"), where = PluginDescriptor.WHERE_MOVIELIST, fnc = main, needsRestart = False)
+	return PluginDescriptor(name = "TagEditor", description = _("edit tags..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = main, needsRestart = False)
 
 class TagEditor(Screen):
 	skin = """
