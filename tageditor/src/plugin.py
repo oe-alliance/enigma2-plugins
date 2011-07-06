@@ -22,7 +22,8 @@ def Plugins(**kwargs):
 		setPreferredTagEditor(TagEditor)
 	except Exception:
 		pass
-	return PluginDescriptor(name = "TagEditor", description = _("edit tags..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = main, needsRestart = False)
+	# TRANSLATORS: this is the string used in the movie context menu for TagEditor
+	return PluginDescriptor(name = "TagEditor", description = _("edit tags"), where = PluginDescriptor.WHERE_MOVIELIST, fnc = main, needsRestart = False)
 
 class TagEditor(Screen):
 	skin = """
@@ -74,6 +75,7 @@ class TagEditor(Screen):
 		self.onLayoutFinish.append(self.setCustomTitle)
 
 	def setCustomTitle(self):
+		# TRANSLATORS: This is the title of the TagEditor main screen
 		self.setTitle(_("Edit Tags"))
 
 	def addCustom(self):
