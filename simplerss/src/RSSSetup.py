@@ -7,6 +7,8 @@ from Components.config import config, ConfigSubsection, ConfigEnableDisable, \
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
+from Components.Sources.Boolean import Boolean
+from Components.Pixmap import Pixmap
 
 class RSSFeedEdit(ConfigListScreen, Screen):
 	"""Edit an RSS-Feed"""
@@ -69,6 +71,9 @@ class RSSSetup(ConfigListScreen, Screen):
 
 		# Initialize ConfigListScreen
 		ConfigListScreen.__init__(self, self.list, session)
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+		self["VKeyIcon"] = Boolean(False)
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
