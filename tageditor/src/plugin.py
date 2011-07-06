@@ -26,7 +26,7 @@ def Plugins(**kwargs):
 
 class TagEditor(Screen):
 	skin = """
-	<screen name="TagEditor" position="center,center" size="600,460">
+	<screen name="TagEditor" position="center,center" size="600,310">
 		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -36,7 +36,7 @@ class TagEditor(Screen):
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<ePixmap position="562,10" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
-		<widget name="list" position="5,40" size="590,420" scrollbarMode="showOnDemand" />
+		<widget name="list" position="5,40" size="590,270" scrollbarMode="showOnDemand" />
 	</screen>"""
 
 	def __init__(self, session, tags, txt = None, args = 0, parent = None):
