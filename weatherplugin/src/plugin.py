@@ -93,10 +93,10 @@ class WeatherPlugin(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.title = _("Weather Plugin")
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"],
+		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 		{
-			"back": self.close,
-			"input_date_time": self.config,
+			"cancel": self.close,
+			"menu": self.config,
 			"right": self.nextItem,
 			"left": self.previousItem
 		}, -1)
