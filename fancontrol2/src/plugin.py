@@ -191,7 +191,7 @@ def disableDMM():
 		text=text.replace("config.misc.standbyCounter.addNotifier","#Disabled by FC2 config.misc.standbyCounter.addNotifier")
 		text=FCfile.write(text)
 		FCfile.close()
-		FClog("DMM-fancontrol disabled - please restart E2")
+		FClog("Fancontrol disabled - please restart E2")
 
 def enableDMM():
 	if os.path.exists("/usr/lib/enigma2/python/Components/FanControl.py"):
@@ -435,7 +435,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Box shutdown at Temperature (C)"), config.plugins.FanControl.ShutdownTemp))
 		self.list.append(getConfigListEntry(_("increases overheating protection to (C)"), config.plugins.FanControl.AddOverheat))
 		self.list.append(getConfigListEntry(_("read HDD-Temperature in HDD-Standby-Mode"), config.plugins.FanControl.CheckHDDTemp))
-		self.list.append(getConfigListEntry(_("disable DMM-FanControl"), config.plugins.FanControl.DisableDMM))
+		self.list.append(getConfigListEntry(_("disable FanControl"), config.plugins.FanControl.DisableDMM))
 		self.list.append(getConfigListEntry(_("Show Monitor in Extension-Menu"), config.plugins.FanControl.MonitorInExtension))
 		self.list.append(getConfigListEntry(_("Number of WebIF-Log-Entries"), config.plugins.FanControl.LogCount))
 		self.list.append(getConfigListEntry(_("Logging path"), config.plugins.FanControl.LogPath))
