@@ -461,6 +461,7 @@ weatherplugin/Makefile
 weatherplugin/meta/Makefile
 weatherplugin/po/Makefile
 weatherplugin/src/Makefile
+weatherplugin/src/icons/Makefile
 
 webcamviewer/Makefile
 webcamviewer/meta/Makefile
