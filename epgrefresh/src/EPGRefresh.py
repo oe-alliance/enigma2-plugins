@@ -245,6 +245,11 @@ class EPGRefresh:
 		else:
 			self.refreshAdapter = MainPictureAdapter(self.session)
 
+		if (not Screens.Standby.inStandby or self.refreshAdapter.backgroundCapable) or not self.refreshAdapter.prepare():
+			print "[EPGRefresh] Adapter is not able to run in background or not available, falling back to MainPictureAdapter"
+			self.refreshAdapter = MainPictureAdapter(self.session)
+			self.refreshAdapter.prepare()
+
 		self.scanServices = scanServices
 		self.refresh()
 
