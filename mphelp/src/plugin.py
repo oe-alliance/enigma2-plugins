@@ -52,4 +52,4 @@ def Plugins(**kwargs):
 	return [
 	]
 
-__all__ = ['Plugins', 'registerHelp', 'showHelp']
+__all__ = ['Plugins', 'registerHelp', 'showHelp', 'PluginHelp']
