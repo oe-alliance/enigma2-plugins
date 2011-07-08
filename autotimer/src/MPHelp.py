@@ -36,7 +36,7 @@ class MPHelp(Screen):
 		self.pages = pages
 		self.curPage = 0
 
-		self["actions"] = ActionMap(["ShortcutActions", "WizardActions"],
+		self["actions"] = ActionMap(["ShortcutActions", "WizardActions", 'DirectionActions'],
 		{
 			"back": self.close,
 			"red": self.close,
