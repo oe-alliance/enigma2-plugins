@@ -23,7 +23,7 @@ class MPHelp(Screen):
 	def __init__(self, session, pages, title="", additionalSkin=""):
 		Screen.__init__(self, session)
 		if additionalSkin:
-			self.skinName = [additionalSkin, "MPHelp"]
+			self.skinName = [additionalSkin, "MPHelp", "AutoTimerHelp"]
 		self.designatedTitle = title
 
 		self["key_red"] = StaticText(_("Close"))
