@@ -435,7 +435,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Box shutdown at Temperature (C)"), config.plugins.FanControl.ShutdownTemp))
 		self.list.append(getConfigListEntry(_("increases overheating protection to (C)"), config.plugins.FanControl.AddOverheat))
 		self.list.append(getConfigListEntry(_("read HDD-Temperature in HDD-Standby-Mode"), config.plugins.FanControl.CheckHDDTemp))
-		self.list.append(getConfigListEntry(_("disable FanControl"), config.plugins.FanControl.DisableDMM))
+		self.list.append(getConfigListEntry(_("disable System FanControl"), config.plugins.FanControl.DisableDMM))
 		self.list.append(getConfigListEntry(_("Show Monitor in Extension-Menu"), config.plugins.FanControl.MonitorInExtension))
 		self.list.append(getConfigListEntry(_("Number of WebIF-Log-Entries"), config.plugins.FanControl.LogCount))
 		self.list.append(getConfigListEntry(_("Logging path"), config.plugins.FanControl.LogPath))
