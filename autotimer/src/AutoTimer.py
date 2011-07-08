@@ -215,9 +215,9 @@ class AutoTimer:
 				# Gather Information
 				name = evt.getEventName()
 				description = evt.getShortDescription()
-				begin = evt.getBeginTime()
+				evtBegin = begin = evt.getBeginTime()
 				duration = evt.getDuration()
-				end = begin + duration
+				evtEnd = end = begin + duration
 
 				# If event starts in less than 60 seconds skip it
 				if begin < time() + 60:
@@ -311,7 +311,7 @@ class AutoTimer:
 				# We first check eit and if user wants us to guess event based on time
 				# we try this as backup. The allowed diff should be configurable though.
 				for rtimer in recorddict.get(serviceref, ()):
-					if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, begin, end) > ((duration/10)*8):
+					if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
 						oldExists = True
 
 						# Abort if we don't want to modify timers or timer is repeated
