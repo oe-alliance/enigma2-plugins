@@ -1,4 +1,4 @@
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/pipzap
 
 install_PYTHON = *.py
-install_DATA = maintainer.info LICENSE keymap.xml
+install_DATA = mphelp.xml maintainer.info LICENSE keymap.xml

@@ -299,6 +299,17 @@ def InfoBarPiP_togglePipzap(self):
 	if slist:
 		slist.togglePipzap()
 
+def InfoBarPiP_togglePipzapHelpable(self):
+	"""Stupid helper for InfoBarPiP_togglePipzap to optimize away the check if help should be shown if it already was."""
+	InfoBarPiP.togglePipzap = InfoBarPiP_togglePipzap
+
+	if config.plugins.pipzap.show_help.value and pipzapHelp:
+		pipzapHelp.open(self.session)
+		config.plugins.pipzap.show_help.value = False
+		config.plugins.pipzap.save()
+
+	self.togglePipzap()
+
 def InfoBarPiP_showPiP(self, *args, **kwargs):
 	try:
 		slist = self.servicelist
@@ -378,6 +389,20 @@ def PictureInPicture_move(self, *args, **kwargs):
 	self.pipActive.refreshPosition()
 
 #pragma mark -
+#pragma mark - Help
+#pragma mark -
+
+try:
+	if SystemInfo.get("NumVideoDecoders", 1) > 1:
+		from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
+		from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+		reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/pipzap/mphelp.xml"))
+		pipzapHelp = registerHelp(*reader)
+except Exception, e:
+	print "[pipzap] Unable to initialize MPHelp:", e,"- Help not available!"
+	pipzapHelp = None
+
+#pragma mark -
 #pragma mark Plugin
 #pragma mark -
 
@@ -448,8 +473,12 @@ def overwriteFunctions():
 
 	InfoBarPiP.pipzapAvailable = InfoBarPiP_pipzapAvailable
 	InfoBarPiP.getTogglePipzapName = InfoBarPiP_getTogglePipzapName
-	InfoBarPiP.togglePipzap = InfoBarPiP_togglePipzap
 	InfoBarPiP.swapPiP = InfoBarPiP_swapPiP
+
+	if config.plugins.pipzap.show_help.value and pipzapHelp:
+		InfoBarPiP.togglePipzap = InfoBarPiP_togglePipzapHelpable
+	else:
+		InfoBarPiP.togglePipzap = InfoBarPiP_togglePipzap
 
 	baseMethods.InfoBarPiP_showPiP = InfoBarPiP.showPiP
 	InfoBarPiP.showPiP = InfoBarPiP_showPiP
@@ -467,6 +496,7 @@ config.plugins.pipzap = ConfigSubsection()
 config.plugins.pipzap.enable_hotkey = ConfigEnableDisable(default = True)
 config.plugins.pipzap.show_in_plugins = ConfigEnableDisable(default = False)
 config.plugins.pipzap.show_label = ConfigEnableDisable(default = True)
+config.plugins.pipzap.show_help = ConfigEnableDisable(default = True)
 
 def autostart(reason, **kwargs):
 	if reason == 0:
