@@ -225,6 +225,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		from plugin import autotimerHelp
 		if autotimerHelp:
 			list.insert(0, (_("Help"), "help"))
+			list.insert(1, (_("Frequently asked questions") , "faq"))
 
 		if config.plugins.autotimer.editor.value == "wizard":
 			list.append((_("Create a new timer using the classic editor"), "newplain"))
@@ -243,6 +244,12 @@ class AutoTimerOverview(Screen, HelpableScreen):
 			if ret == "help":
 				from plugin import autotimerHelp
 				autotimerHelp.open(self.session)
+			elif ret == "faq":
+				from Plugins.SystemPlugins.MPHelp import PluginHelp, XMLHelpReader
+				from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+				reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/faq.xml"))
+				autotimerFaq = PluginHelp(*reader)
+				autotimerFaq.open(self.session)
 			elif ret == "preview":
 				total, new, modified, timers, conflicts = self.autotimer.parseEPG(simulateOnly = True)
 				self.session.open(
