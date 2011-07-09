@@ -32,6 +32,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		self.vps_initial_time = getConfigListEntry(_("Starting time"), config.plugins.vps.initial_time)
 		self.vps_allow_overwrite = getConfigListEntry(_("Recordings can be controlled by channel"), config.plugins.vps.allow_overwrite)
 		self.vps_allow_wakeup = getConfigListEntry(_("Wakeup from Deep-Standby is allowed"), config.plugins.vps.allow_wakeup)
+		self.vps_allow_seeking_multiple_pdc = getConfigListEntry(_("Seeking connected events"), config.plugins.vps.allow_seeking_multiple_pdc)
 		self.vps_default = getConfigListEntry(_("VPS enabled by default"), config.plugins.vps.default_vps)
 		self.vps_default_overwrite = getConfigListEntry(_("Recordings are controlled by channel by default"), config.plugins.vps.default_overwrite)
 		
@@ -40,6 +41,7 @@ class VPS_Setup(Screen, ConfigListScreen):
 		self.list.append(self.vps_initial_time)
 		self.list.append(self.vps_allow_overwrite)
 		self.list.append(self.vps_allow_wakeup)
+		self.list.append(self.vps_allow_seeking_multiple_pdc)
 		self.list.append(self.vps_default)
 		self.list.append(self.vps_default_overwrite)
 
@@ -76,6 +78,8 @@ class VPS_Setup(Screen, ConfigListScreen):
 			self["help"].text = _("Enable \"Recording controlled by channel\" by default (new timers)")
 		elif cur == self.vps_allow_wakeup:
 			self["help"].text = _("If enabled and necessary, the plugin will wake up the Dreambox from Deep-Standby for the defined starting time to control whether the programme begins earlier.")
+		elif cur == self.vps_allow_seeking_multiple_pdc:
+			self["help"].text = _("If a programme is interrupted and divided into separate events, the plugin will search for the connected events.")
 
 	def show_info(self):
 		VPS_show_info(self.session)
@@ -117,7 +121,7 @@ class VPS_Screen_Info(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		
-		self["text"] = ScrollLabel(_("The VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n\nIf you enable VPS, the recording is definitely starting at the latest at the startTime. The recording may start earlier or lasts longer.\n\nIf you also enable \"Recording controlled by channel\", the recording will only start, when the channel flags the programme as running.\n\n\nSupported channels\n\nGermany:\n ARD, ZDF, Sky and DMAX\n\nAustria:\n ORF and Servus TV\n\nCzech Republic:\n CT\n\nIf a timer is programmed manually (not via EPG), it is necessary to set a VPS-Time to enable VPS. VPS-Time (also known as PDC) is the first published start time, e.g. given in magazines. If you set a VPS-Time, you have to leave timer name empty."))
+		self["text"] = ScrollLabel(_("The VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n\nIf you enable VPS, the recording is definitely starting at the latest at the startTime. The recording may start earlier or lasts longer.\n\nIf you also enable \"Recording controlled by channel\", the recording will only start, when the channel flags the programme as running.\n\n\nSupported channels\n\nGermany:\n ARD, ZDF, Sky and DMAX\n\nAustria:\n ORF and Servus TV\n\nSwitzerland:\n SF\n\nCzech Republic:\n CT\n\nIf a timer is programmed manually (not via EPG), it is necessary to set a VPS-Time to enable VPS. VPS-Time (also known as PDC) is the first published start time, e.g. given in magazines. If you set a VPS-Time, you have to leave timer name empty."))
 		
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"], 
 			{

@@ -6,6 +6,7 @@
 // 2 nach PDC-Zeit suchen und Event-ID zurückgeben
 // 3 in "other transport stream, present/following" nach PDC suchen und Event-ID zurückgeben
 // 4 in allen EIT-Tabellen nach PDC suchen und alle gefundenen Event-IDs zurückgeben, ausschließlich der Event-ID im Aufruf
+// 5 in allen EIT-Tabellen nach der Event-ID schauen und nach weiteren Events mit gleicher PDC suchen
 // 10 prüfen, ob überhaupt PDC vorhanden
 //
 
@@ -122,7 +123,7 @@ int main(int argc, char *argv[])
 		if (n == -2)
 			n = open_read_demux(3218, 0x4f, 0xff, 30000); // Kabel Deutschland
 	}
-	else if (mode == 4)
+	else if (mode == 4 || mode == 5)
 	{
 		if (event_id > 0)
 			pdc_exclude_event_ids.insert(event_id);
@@ -243,7 +244,7 @@ void process_eit(u_char *b, u_char table_id, u_char table_mask)
 		process_monitoring2(b, section_length, section_number);
 	else if (mode == 2 || mode == 3)
 		process_search_pdc(b, section_length, section_number);
-	else if (mode == 4)
+	else if (mode == 4 || mode == 5)
 		process_search_multiple_pdc(b, section_length, section_number);
 	else if (mode == 10)
 		process_search_pdc_available(b, section_length, section_number);
@@ -286,6 +287,11 @@ inline void setNowNext(int section_number, int nevent)
 	{
 		service_event_checked_now = false;
 		service_event_checked_next = false;
+	}
+	else if (event_last_running_status == -1 && service_event_now != event_id && service_event_next != event_id && service_event_now != 0 && service_event_next != 0)
+	{
+		cout << timer_id << " EVENT_CURRENTLY_NOT_FOUND \n" << flush;
+		event_last_running_status = -2;
 	}
 }
 
@@ -434,6 +440,10 @@ void process_search_multiple_pdc(u_char *b, int section_length, int section_numb
 				{
 					pdc_exclude_event_ids.insert(n_event_id);
 					cout << timer_id << " PDC_MULTIPLE_FOUND_EVENT " << n_event_id << "\n" << flush;
+				}
+				else if (mode == 5 && n_event_id == event_id)
+				{
+					pdc_time = getBits(b, 0, 20, 20);
 				}
 			}
 			

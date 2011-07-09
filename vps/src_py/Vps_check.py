@@ -6,6 +6,7 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
+from Screens.ChoiceBox import ChoiceBox
 from Tools.XMLTools import stringToXML
 from Tools import Directories
 from time import time
@@ -13,59 +14,14 @@ from Vps import vps_exe
 import NavigationInstance
 from xml.etree.cElementTree import parse as xml_parse
 
-check_pdc_interval_available = 3600*24*30*6
+check_pdc_interval_available = 3600*24*30*8
 check_pdc_interval_unavailable = 3600*24*30*2
 
-# Prüfen, ob PDC-Descriptor vorhanden ist.
-class VPS_check_PDC(Screen):
-	skin = """<screen name="vpsCheck" position="center,center" size="540,110" title="VPS-Plugin">
-		<widget source="infotext" render="Label" position="10,10" size="520,90" font="Regular;21" valign="center" halign="center" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-	</screen>"""
-	
-	def __init__(self, session, service, timer_entry):
-		Screen.__init__(self, session)
-		
-		self["infotext"] = StaticText(_("VPS-Plugin checks if the channel supports VPS for manual timers ..."))
-		
-		self["actions"] = ActionMap(["OkCancelActions"], 
-			{
-				"cancel": self.finish,
-			}, -1)
-		
-		if service is None or service.ref.getPath():
-			self.close()
-			return
-
-		self.service = service.ref
-		self.program = eConsoleAppContainer()
-		self.program.dataAvail.append(self.program_dataAvail)
-		self.program.appClosed.append(self.program_closed)
-		self.check = eTimer()
-		self.check.callback.append(self.doCheck)
-		self.simulate_recordService = None
-		self.last_serviceref = None
-		self.calledfinished = False
-		
+class VPS_check_PDC:
+	def __init__(self):
 		self.checked_services = { }
-		self.has_pdc = -1
-		self.timer_entry = timer_entry
-		
-		if self.service and self.service.flags & eServiceReference.isGroup:
-			self.service = getBestPlayableServiceReference(self.service, eServiceReference())
-		self.service_ref_str = self.service.toString()
-		
 		self.load_pdc()
-		
-		try:
-			if self.checked_services[self.service_ref_str]["has_pdc"] == True:
-				self.has_pdc = 1
-			else:
-				self.has_pdc = 0
-		except:
-			self.has_pdc = -1
-		
-		self.check.start(100, True)
-		
+	
 	def load_pdc(self):
 		try:
 			doc = xml_parse(Directories.resolveFilename(Directories.SCOPE_CONFIG, "vps.xml"))
@@ -76,12 +32,14 @@ class VPS_check_PDC(Screen):
 					serviceref = xml.get("serviceref").encode("utf-8")
 					has_pdc = xml.get("has_pdc")
 					last_check = xml.get("last_check")
+					default_vps = xml.get("default_vps")
 					self.checked_services[serviceref] = { }
 					self.checked_services[serviceref]["last_check"] = int(last_check)
-					if has_pdc == "1":
-						self.checked_services[serviceref]["has_pdc"] = True
+					self.checked_services[serviceref]["has_pdc"] = int(has_pdc)
+					if default_vps and default_vps != "None":
+						self.checked_services[serviceref]["default_vps"] = int(default_vps)
 					else:
-						self.checked_services[serviceref]["has_pdc"] = False
+						self.checked_services[serviceref]["default_vps"] = 0
 		except:
 			pass
 	
@@ -92,12 +50,13 @@ class VPS_check_PDC(Screen):
 		
 		now = time()
 		for ch in self.checked_services:
-			if self.checked_services[ch]["last_check"] < (now - check_pdc_interval_available):
+			if (self.checked_services[ch]["last_check"] < (now - check_pdc_interval_available)) and self.checked_services[ch]["default_vps"] != 1:
 				continue
 			list.append('<channel')
 			list.append(' serviceref="' + stringToXML(ch) + '"')
 			list.append(' has_pdc="' + str(int(self.checked_services[ch]["has_pdc"])) + '"')
 			list.append(' last_check="' + str(int(self.checked_services[ch]["last_check"])) + '"')
+			list.append(' default_vps="' + str(int(self.checked_services[ch]["default_vps"])) + '"')
 			list.append('></channel>\n')
 		
 		list.append('</pdc_available>\n')
@@ -107,8 +66,78 @@ class VPS_check_PDC(Screen):
 			file.write(x)
 		file.close()
 	
+	def check_service(self, service):
+		service_str = service.toCompareString()
+		
+		try:
+			if self.checked_services[service_str] is not None:
+				return self.checked_services[service_str]["has_pdc"], self.checked_services[service_str]["last_check"], self.checked_services[service_str]["default_vps"]
+			else:
+				return -1, 0, 0
+		except:
+			return -1, 0, 0
+	
+	def setServicePDC(self, service, state, default_vps):
+		service_str = service.toCompareString()
+		
+		if state == -1 and default_vps == 0:
+			try:
+				del self.checked_services[service_str]
+			except:
+				pass
+		else:
+			self.checked_services[service_str] = { }
+			self.checked_services[service_str]["has_pdc"] = state
+			self.checked_services[service_str]["last_check"] = time()
+			self.checked_services[service_str]["default_vps"] = default_vps
+		
+		self.save_pdc()
+		
+	def recheck(self, has_pdc, last_check):
+		return not ((has_pdc == 1 and last_check > (time() - check_pdc_interval_available)) or (has_pdc == 0 and last_check > (time() - check_pdc_interval_unavailable)))
+
+Check_PDC = VPS_check_PDC()
+
+
+# Prüfen, ob PDC-Descriptor vorhanden ist.
+class VPS_check_PDC_Screen(Screen):
+	skin = """<screen name="vpsCheck" position="center,center" size="540,110" title="VPS-Plugin">
+		<widget source="infotext" render="Label" position="10,10" size="520,90" font="Regular;21" valign="center" halign="center" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+	</screen>"""
+	
+	def __init__(self, session, service, timer_entry, manual_timer = True):
+		Screen.__init__(self, session)
+		
+		self["infotext"] = StaticText(_("VPS-Plugin checks if the channel supports VPS ..."))
+		
+		self["actions"] = ActionMap(["OkCancelActions"], 
+			{
+				"cancel": self.finish,
+			}, -1)
+		
+		if service is None or service.getPath():
+			self.close()
+			return
+
+		self.service = service
+		self.program = eConsoleAppContainer()
+		self.program.dataAvail.append(self.program_dataAvail)
+		self.program.appClosed.append(self.program_closed)
+		self.check = eTimer()
+		self.check.callback.append(self.doCheck)
+		self.simulate_recordService = None
+		self.last_serviceref = None
+		self.calledfinished = False
+		self.timer_entry = timer_entry
+		self.manual_timer = manual_timer
+		
+		self.has_pdc, self.last_check, self.default_vps = Check_PDC.check_service(self.service)
+		
+		self.check.start(100, True)
+
+	
 	def doCheck(self):
-		if (self.has_pdc == 1 and self.checked_services[self.service_ref_str]["last_check"] > (time() - check_pdc_interval_available)) or (self.has_pdc == 0 and self.checked_services[self.service_ref_str]["last_check"] > (time() - check_pdc_interval_unavailable)):
+		if not Check_PDC.recheck(self.has_pdc, self.last_check):
 			self.finish()
 			return
 		
@@ -180,24 +209,8 @@ class VPS_check_PDC(Screen):
 				self.finish()
 	
 	def setServicePDC(self, state):
-		if state == -1:
-			self.has_pdc = -1
-			try:
-				del self.checked_services[self.service_ref_str]
-			except:
-				pass
-		elif state == 1:
-			self.has_pdc = 1
-			self.checked_services[self.service_ref_str] = { }
-			self.checked_services[self.service_ref_str]["has_pdc"] = True
-			self.checked_services[self.service_ref_str]["last_check"] = time()
-		elif state == 0:
-			self.has_pdc = 0
-			self.checked_services[self.service_ref_str] = { }
-			self.checked_services[self.service_ref_str]["has_pdc"] = False
-			self.checked_services[self.service_ref_str]["last_check"] = time()
-		
-		self.save_pdc()
+		Check_PDC.setServicePDC(self.service, state, self.default_vps)
+		self.has_pdc = state
 		
 	def finish(self):
 		self.calledfinished = True
@@ -210,19 +223,35 @@ class VPS_check_PDC(Screen):
 		if self.last_serviceref is not None:
 			NavigationInstance.instance.playService(self.last_serviceref)
 		
-		if self.has_pdc == 1: # PDC vorhanden
-			self.close()
-		elif self.has_pdc == 0: # kein PDC
-			#nachfragen
-			self.session.openWithCallback(self.finish_callback, MessageBox, _("The selected channel doesn't support VPS for manually programmed timers!\n Do you really want to enable VPS?"), default = False)
-		else: # konnte nicht ermitteln
-			self.session.openWithCallback(self.finish_callback, MessageBox, _("The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n Do you really want to enable VPS?"), default = False)
-	
+		if self.manual_timer:
+			if self.has_pdc == 1: # PDC vorhanden
+				self.close()
+			elif self.has_pdc == 0: # kein PDC
+				#nachfragen
+				self.session.openWithCallback(self.finish_callback, MessageBox, _("The selected channel doesn't support VPS for manually programmed timers!\n Do you really want to enable VPS?"), default = False)
+			else: # konnte nicht ermitteln
+				self.session.openWithCallback(self.finish_callback, MessageBox, _("The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n Do you really want to enable VPS?"), default = False)
+		else:
+			if self.has_pdc == 1: # PDC vorhanden
+				self.close()
+			else:
+				choiceList = [(_("no"), 0), (_("yes"), 1), (_("yes, don't ask again"), 2)]
+				self.session.openWithCallback(self.finish_callback2, ChoiceBox, title = _("VPS-Plugin couldn't check if the selected channel supports VPS.\n Do you really want to enable VPS?"), list = choiceList)
 	
 	def finish_callback(self, result):
 		if not result:
 			self.timer_entry.timerentry_vpsplugin_enabled.value = False
 			self.timer_entry.createSetup("config")
+			#self.timer_entry["config"].setCurrentIndex(self.timer_entry["config"].getCurrentIndex() + 1)
 		
 		self.close()
-			
+	
+	def finish_callback2(self, result):
+		if result is None or result[1] == 0:
+			self.finish_callback(False)
+			return
+		
+		elif result[1] == 2:
+			Check_PDC.setServicePDC(self.service, self.has_pdc, 1) # nicht mehr nachfragen
+		
+		self.close()
