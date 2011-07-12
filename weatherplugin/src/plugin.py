@@ -229,6 +229,8 @@ class WeatherPlugin(Screen):
 							self["weekday%s_temp" % index].text = "%s °%s | %s °%s" % (highTemp, UnitSystemText, lowTemp, UnitSystemText)
 						elif items2.tag == "icon":
 							url = items2.attrib.get("data").encode("utf-8", 'ignore')
+							if not url.startswith("http://"):
+								url = "http://www.google.com%s" % items2.attrib.get("data").encode("utf-8", 'ignore')
 							parts = url.split("/")
 							filename = self.appdir + parts[-1]
 							if not os_path.exists(filename):
