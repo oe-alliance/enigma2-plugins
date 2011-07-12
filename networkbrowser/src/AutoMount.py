@@ -148,6 +148,8 @@ class AutoMount():
 			self.MountConsole = Console()
 
 		self.command = None
+		self.mountcommand = None
+		self.unmountcommand = None
 		if self.activeMountsCounter == 0:
 			print "self.automounts without active mounts",self.automounts
 			if data['active'] == 'False' or data['active'] is False:
@@ -157,8 +159,16 @@ class AutoMount():
 				self.MountConsole.ePopen(umountcmd, self.CheckMountPointFinished, [data, callback])
 		else:
 			if data['active'] == 'False' or data['active'] is False:
-				path = '/media/net/'+ data['sharename']
-				self.command = 'umount -fl '+ path
+				if data['mountusing'] == 'fstab':
+					if data['mounttype'] == 'nfs':
+						tmpcmd = 'umount ' + data['ip'] + ':/' + data['sharedir']
+						self.unmountcommand = tmpcmd.encode("UTF-8")
+					if data['mounttype'] == 'cifs':
+						tmpcmd = 'umount //' + data['ip'] + '/' + data['sharedir']
+						self.mountcommand = tmpcmd.encode("UTF-8")
+				elif data['mountusing'] == 'enigma2':
+					path = '/media/net/'+ data['sharename']
+					self.unmountcommand = 'umount -fl '+ path
 
 			elif data['active'] == 'True' or data['active'] is True:
 				path = '/media/net/'+ data['sharename']
@@ -167,13 +177,15 @@ class AutoMount():
 
 				if data['mountusing'] == 'fstab':
 					if data['mounttype'] == 'nfs':
-						if not os_path.ismount(path):
-							tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
-							self.command = tmpcmd.encode("UTF-8")
+						tmpcmd = 'umount ' + data['ip'] + ':/' + data['sharedir']
+						self.unmountcommand = tmpcmd.encode("UTF-8")
+						tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
+						self.mountcommand = tmpcmd.encode("UTF-8")
 					if data['mounttype'] == 'cifs':
-						if not os_path.ismount(path):
-							tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
-							self.command = tmpcmd.encode("UTF-8")
+						tmpcmd = 'umount //' + data['ip'] + '/' + data['sharedir']
+						self.unmountcommand = tmpcmd.encode("UTF-8")
+						tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
+						self.mountcommand = tmpcmd.encode("UTF-8")
 
 				elif data['mountusing'] == 'enigma2':
 					tmpsharedir = data['sharedir'].replace(" ", "\\ ")
@@ -188,24 +200,27 @@ class AutoMount():
 							else:
 								options = "tcp,noatime"
 							tmpcmd = 'mount -t nfs -o ' + options + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
-							self.command = tmpcmd.encode("UTF-8")
+							self.mountcommand = tmpcmd.encode("UTF-8")
 
 					if data['mounttype'] == 'cifs':
 						if not os_path.ismount(path):
 							tmpusername = data['username'].replace(" ", "\\ ")
 							tmpcmd = 'mount -t cifs -o '+ data['options'] +',noatime,iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
-							self.command = tmpcmd.encode("UTF-8")
+							self.mountcommand = tmpcmd.encode("UTF-8")
 
-			if self.command is not None:
+			if self.unmountcommand is not None or self.unmountcommand is not None:
+				self.command = []
+				self.command.append(self.unmountcommand)
+				self.command.append(self.mountcommand)
 				print "[AutoMount.py] U/MOUNTCMD--->",self.command
-				self.MountConsole.ePopen(self.command, self.CheckMountPointFinished, [data, callback])
+				self.MountConsole.eBatch(self.command, self.CheckMountPointFinished, [data, callback])
 			else:
 				self.CheckMountPointFinished(None,None, [data, callback])
 
-	def CheckMountPointFinished(self, result, retval, extra_args):
+	def CheckMountPointFinished(self, extra_args):
 		print "[AutoMount.py] CheckMountPointFinished"
-		print "[AutoMount.py] result",result
-		print "[AutoMount.py] retval",retval
+		#print "[AutoMount.py] result",result
+		#print "[AutoMount.py] retval",retval
 		(data, callback ) = extra_args
 		print "LEN",len(self.MountConsole.appContainers)
 		path = '/media/net/'+ data['sharename']
