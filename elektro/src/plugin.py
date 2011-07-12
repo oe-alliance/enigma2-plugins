@@ -72,9 +72,7 @@ pluginPrintname = "[Elektro]"
 debug = False # If set True, plugin will print some additional status info to track logic flow
 session = None
 ElektroWakeUpTime = -1
-elektro_pluginversion = "3.4.4a"
-elektro_readme = "/usr/lib/enigma2/python/Plugins/Extensions/Elektro/readme.txt"
-elektro_readme_de  = "/usr/lib/enigma2/python/Plugins/Extensions/Elektro/readme-de.txt"
+elektro_pluginversion = "3.4.4b"
 elektrostarttime = 60 
 elektrosleeptime = 5
 elektroShutdownThreshold = 60 * 20
@@ -122,8 +120,6 @@ config.plugins.elektro.dontwakeup = ConfigEnableDisable(default = False)
 config.plugins.elektro.holiday =  ConfigEnableDisable(default = False)
 config.plugins.elektro.hddsleep =  ConfigYesNo(default = False)
 config.plugins.elektro.IPenable =  ConfigYesNo(default = False)
-
-
 
 weekdays = [
 	_("Monday"),
@@ -275,7 +271,7 @@ class ElektroIP(ConfigListScreen,Screen):
 		self.list = []
 
 		for i in range(10):
-			self.list.append(getConfigListEntry(_("%d. IP Address") % i , config.plugins.elektro.ip[i]))
+			self.list.append(getConfigListEntry(_("IP Address") , config.plugins.elektro.ip[i]))
 			
 		ConfigListScreen.__init__(self, self.list)
 		
@@ -424,10 +420,7 @@ class Elektro(ConfigListScreen,Screen):
 		return str(self["config"].getCurrent()[1].getText())
 		
 	def help(self):
-		if language.getLanguage()[:2] == "de":
-			self.session.open(Console,_("Showing Elektro readme.txt"),["cat %s" % elektro_readme_de])
-		else:
-			self.session.open(Console,_("Showing Elektro readme.txt"),["cat %s" % elektro_readme])
+		self.session.open(Console,_("Showing Elektro readme.txt"),["cat /usr/lib/enigma2/python/Plugins/Extensions/Elektro/%s" % _("readme.txt")])
 
 	def profile(self):
 		self.session.open(ElektroProfile)
@@ -471,8 +464,8 @@ class DoElektro(Screen):
 		# If the was a manual wakeup: Don't go to sleep	
 		if timerWakeup == False:
 			self.dontsleep = True
-		
-		
+
+
 		#Check whether we should try to sleep:
 		trysleep = config.plugins.elektro.standbyOnBoot.value
 		
@@ -520,7 +513,7 @@ class DoElektro(Screen):
 		print pluginPrintname, "Showing Standby Sceen"
 		try:
 			self.session.openWithCallback(self.DoElektroStandby,MessageBox,_("Go to Standby now?"),type = MessageBox.TYPE_YESNO,
-					timeout = config.plugins.elektro.standbyOnBootTimeout.value)		
+					timeout = config.plugins.elektro.standbyOnBootTimeout.value)
 		except:
 			# Couldn't be shown. Restart timer.
 			print pluginPrintname, "Failed Showing Standby Sceen "
@@ -531,7 +524,6 @@ class DoElektro(Screen):
 		if (retval):
 			#Yes, go to sleep
 			Notifications.AddNotification(Standby.Standby)
-		
 
 			
 	def setNextWakeuptime(self):
@@ -548,26 +540,27 @@ class DoElektro(Screen):
 			
 		time_s = self.getTime()
 		ltime = localtime()
+		if config.plugins.elektro.profile.value == "1":
+			config_wakeup = config.plugins.elektro.wakeup
+			config_sleep = config.plugins.elektro.sleep
+			config_nextday = config.plugins.elektro.nextday
+		else:
+			config_wakeup = config.plugins.elektro.wakeup2
+			config_sleep = config.plugins.elektro.sleep2
+			config_nextday = config.plugins.elektro.nextday2
 		
 		#print pluginPrintname, "Nextday:", time.ctime(self.clkToTime(config.plugins.elektro.nextday))
 		# If it isn't past next-day time we need yesterdays settings
 		#
+		if time_s < self.clkToTime(config_nextday):
+			day = (ltime.tm_wday - 1) % 7
+		else:
+			day = ltime.tm_wday
+
 		# Check whether we wake up today or tomorrow
 		# Relative Time is needed for this
-		if config.plugins.elektro.profile.value == "1":
-			if time_s < self.clkToTime(config.plugins.elektro.nextday):
-				day = (ltime.tm_wday - 1) % 7
-			else:
-				day = ltime.tm_wday
-			time_s = self.getReltime(time_s)
-			wakeuptime = self.getReltime(self.clkToTime(config.plugins.elektro.wakeup[day]))
-		else:
-			if time_s < self.clkToTime(config.plugins.elektro.nextday2):
-				day = (ltime.tm_wday - 1) % 7
-			else:
-				day = ltime.tm_wday
-			time_s = self.getReltime(time_s)
-			wakeuptime = self.getReltime(self.clkToTime(config.plugins.elektro.wakeup2[day]))
+		time_s = self.getReltime(time_s)
+		wakeuptime = self.getReltime(self.clkToTime(config_wakeup[day]))
 		
 		# Lets see if we already woke up today
 		if wakeuptime < time_s:
@@ -575,10 +568,7 @@ class DoElektro(Screen):
 			if debug:			
 				print pluginPrintname, "Wakeup tomorrow"
 			day = (day + 1) % 7
-			if config.plugins.elektro.profile.value == "1":
-				wakeuptime = self.getReltime(self.clkToTime(config.plugins.elektro.wakeup[day]))
-			else:
-				wakeuptime = self.getReltime(self.clkToTime(config.plugins.elektro.wakeup2[day]))
+			wakeuptime = self.getReltime(self.clkToTime(config_wakeup[day]))
 		
 		# Tomorrow we'll wake up erly-> Add a full day.
 		if wakeuptime < time_s:
@@ -597,37 +587,35 @@ class DoElektro(Screen):
 	def CheckElektro(self):
 		# first set the next wakeuptime - it would be much better to call that function on sleep. This will be a todo!
 		self.setNextWakeuptime()
-	
+
 		#convert to seconds
 		time_s = self.getTime()
 		ltime = localtime()
-		
-		print pluginPrintname, "Testtime;", self.getPrintTime(2 * 60 * 60)
+		if config.plugins.elektro.profile.value == "1":
+			config_wakeup = config.plugins.elektro.wakeup
+			config_sleep = config.plugins.elektro.sleep
+			config_nextday = config.plugins.elektro.nextday
+		else:
+			config_wakeup = config.plugins.elektro.wakeup2
+			config_sleep = config.plugins.elektro.sleep2
+			config_nextday = config.plugins.elektro.nextday2
 		
 		#Which day is it? The next day starts at nextday
 		if debug:
 			print pluginPrintname, "wday 1:", str(ltime.tm_wday)
-		if config.plugins.elektro.profile.value == "1":
-			if time_s < self.clkToTime(config.plugins.elektro.nextday):
-				day = (ltime.tm_wday - 1) % 7
-			else:
-				day = ltime.tm_wday
+		if time_s < self.clkToTime(config_nextday):
+			day = (ltime.tm_wday - 1) % 7
 		else:
-			if time_s < self.clkToTime(config.plugins.elektro.nextday2):
-				day = (ltime.tm_wday - 1) % 7
-			else:
-				day = ltime.tm_wday
+			day = ltime.tm_wday
 		if debug:	
 			print pluginPrintname, "wday 2:", str(day)
 		
 		#Let's get the day
-		if config.plugins.elektro.profile.value == "1":
-			wakeuptime = self.clkToTime(config.plugins.elektro.wakeup[day])
-			sleeptime = self.clkToTime(config.plugins.elektro.sleep[day])
-		else:
-			wakeuptime = self.clkToTime(config.plugins.elektro.wakeup2[day])
-			sleeptime = self.clkToTime(config.plugins.elektro.sleep2[day])
+		wakeuptime = self.clkToTime(config_wakeup[day])
+		sleeptime = self.clkToTime(config_sleep[day])
 
+		print pluginPrintname, "Profile:", config.plugins.elektro.profile.value
+		print pluginPrintname, "Nextday:", self.getPrintTime(self.clkToTime(config.plugins.elektro.nextday))
 		print pluginPrintname, "Current time:", self.getPrintTime(time_s)
 		print pluginPrintname, "Wakeup time:", self.getPrintTime(wakeuptime)
 		print pluginPrintname, "Sleep time:", self.getPrintTime(sleeptime)
@@ -713,8 +701,6 @@ class DoElektro(Screen):
 				
 		#set Timer, which calls this function again.
 		self.TimerSleep.startLongTimer(elektrostarttime) 
-		
-		
 
 
 	def DoElektroSleep(self,retval):
@@ -732,4 +718,3 @@ class DoElektro(Screen):
 			self.dontsleep = True
 			#Start the timer again
 			self.TimerSleep.startLongTimer(elektrostarttime) 
-			
