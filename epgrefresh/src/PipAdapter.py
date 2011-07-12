@@ -26,7 +26,7 @@ class PipAdapter:
 
 		if config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddNotification(MessageBox, _("EPG refresh started in background.") + "\n" + _("Please don't use PiP meanwhile!"), type=MessageBox.TYPE_INFO, timeout=4)
-		if session.pipshown:
+		if self.session.pipshown:
 			# Hijack PiP
 			self.wasShown = True
 			self.previousService = self.session.pip.getCurrentService()
