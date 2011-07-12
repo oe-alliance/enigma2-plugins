@@ -994,7 +994,7 @@ class FanControl2(Screen):
 					if FanFehler > 90:
 						FanFehler -= 18
 						FClog("Fan Error")
-						if config.plugins.FanControl.ShowError.value == "true":
+						if config.plugins.FanControl.ShowError.value == "true" and not Standby.inStandby:
 							Notifications.AddNotification(MessageBox, _("Fan is not working!"), type=MessageBox.TYPE_INFO, timeout=5)
 						if config.plugins.FanControl.ShowError.value == "shutdown":
 							self.FC2AskShutdown()
