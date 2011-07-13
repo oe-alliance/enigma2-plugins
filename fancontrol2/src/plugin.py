@@ -150,6 +150,7 @@ config.plugins.FanControl.EnableDataLog = ConfigYesNo(default = False)
 config.plugins.FanControl.EnableEventLog = ConfigYesNo(default = False)
 config.plugins.FanControl.CheckHDDTemp = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("auto", _("auto")), ("never", _("never"))], default="auto")
 config.plugins.FanControl.MonitorInExtension = ConfigYesNo(default = True)
+config.plugins.FanControl.FanControlInExtension = ConfigYesNo(default = True)
 config.plugins.FanControl.Multi = ConfigSelection(choices = [("1", "RPM"), ("2", "RPM/2")], default = "2")
 
 def GetFanRPM():
@@ -419,8 +420,8 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 
 class FanControl2SpezialSetup(Screen, ConfigListScreen):
 	skin = """
-		<screen position="center,center" size="600,320" title="Fan Control 2 - Setup" >
-			<widget name="config" position="10,20" size="580,290" scrollbarMode="showOnDemand" />
+		<screen position="center,center" size="600,350" title="Fan Control 2 - Setup" >
+			<widget name="config" position="10,20" size="580,320" scrollbarMode="showOnDemand" />
 		</screen>"""
 
 	def __init__(self, session, args = None):
@@ -429,6 +430,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 		config.plugins.FanControl.DisableDMM.value = isDMMdisabled()
 		self.HDDmode = config.plugins.FanControl.CheckHDDTemp.value
 		self.MonitorMode = config.plugins.FanControl.MonitorInExtension.value
+		self.FanControlMode = config.plugins.FanControl.FanControlInExtension.value
 
 		self.list = []
 		self.list.append(getConfigListEntry(_("Action in case of Fan failure"), config.plugins.FanControl.ShowError))
@@ -436,6 +438,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("increases overheating protection to (C)"), config.plugins.FanControl.AddOverheat))
 		self.list.append(getConfigListEntry(_("read HDD-Temperature in HDD-Standby-Mode"), config.plugins.FanControl.CheckHDDTemp))
 		self.list.append(getConfigListEntry(_("disable DMM-FanControl"), config.plugins.FanControl.DisableDMM))
+		self.list.append(getConfigListEntry(_("Show Plugin in Extension-Menu"), config.plugins.FanControl.FanControlInExtension))
 		self.list.append(getConfigListEntry(_("Show Monitor in Extension-Menu"), config.plugins.FanControl.MonitorInExtension))
 		self.list.append(getConfigListEntry(_("Number of WebIF-Log-Entries"), config.plugins.FanControl.LogCount))
 		self.list.append(getConfigListEntry(_("Logging path"), config.plugins.FanControl.LogPath))
@@ -481,6 +484,8 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 		if config.plugins.FanControl.CheckHDDTemp.value == "auto" and config.plugins.FanControl.CheckHDDTemp.value != self.HDDmode:
 			disableHDDread = True
 		if config.plugins.FanControl.MonitorInExtension.value != self.MonitorMode:
+			NeuStart = True
+		if config.plugins.FanControl.FanControlInExtension.value != self.FanControlMode:
 			NeuStart = True
 
 		for x in self["config"].list:
@@ -1064,15 +1069,21 @@ def Plugins(**kwargs):
 	PluginDescriptor.WHERE_AUTOSTART], 
 	fnc = autostart)]
 	if os.path.exists("/proc/stb/fp/fan_vlt"):
-		list.append(PluginDescriptor(name="Fan Control", 
-		description="Fan Control 2", 
+		list.append(PluginDescriptor(name="Fan Control 2", 
+		description="Fan Control", 
 		where = PluginDescriptor.WHERE_PLUGINMENU,
 		icon = "plugin.png",
 		fnc = main))
+		if config.plugins.FanControl.FanControlInExtension.value:
+			list.append(PluginDescriptor(name="Fan Control 2", 
+			description="Fan Control", 
+			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
+			icon = "plugin.png",
+			fnc = main))
 		if config.plugins.FanControl.MonitorInExtension.value:
 			list.append(PluginDescriptor(
 			name="Fan Control 2 - Monitor", 
-			description="Fan Control 2", 
+			description="Fan Control", 
 			where = PluginDescriptor.WHERE_EXTENSIONSMENU,
 			icon = "plugin.png",
 			fnc = mainMonitor))
