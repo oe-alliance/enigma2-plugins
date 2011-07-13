@@ -8,7 +8,7 @@ from Components.Element import cached
 from enigma import eTimer
 from Components.Label import Label
 from Components.MenuList import MenuList
-from enigma import  getDesktop, eSize,ePoint
+from enigma import getDesktop, eSize, ePoint, eEnv
 from skin import applyAllAttributes, dom_skins
 
 		
@@ -137,7 +137,7 @@ class WidgetDesktop(Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		
-		loadSkinReal("/usr/lib/enigma2/python/Plugins/Extensions/Widgets/skin.xml")
+		loadSkinReal(eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/Widgets/skin.xml"))
 		
 
 		cfg = lookupWidgetConfig()

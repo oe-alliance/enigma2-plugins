@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from enigma import eTimer, eConsoleAppContainer, getBestPlayableServiceReference, eServiceReference, eEPGCache
+from enigma import eTimer, eConsoleAppContainer, getBestPlayableServiceReference, eServiceReference, eEPGCache, eEnv
 from time import time, strftime, localtime
 from Components.config import config
 from timer import TimerEntry
@@ -12,7 +12,7 @@ from ServiceReference import ServiceReference
 from Components.TimerSanityCheck import TimerSanityCheck
 import NavigationInstance
 
-vps_exe = "/usr/lib/enigma2/python/Plugins/SystemPlugins/vps/vps"
+vps_exe = eEnv.resolve("${libdir}/enigma2/python/Plugins/SystemPlugins/vps/vps")
 if not access(vps_exe, X_OK):
 	chmod(vps_exe, 493)
 

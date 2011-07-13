@@ -10,6 +10,7 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Components.config import config
 from Tools.LoadPixmap import LoadPixmap
 from Components.UsageConfig import preferredPath, defaultMoviePath
+from enigma import eEnv
 import copy
 import os.path
 
@@ -65,9 +66,9 @@ class MovieList(GUIComponent):
 		if root is not None:
 			self.reload(root)
 
-		self.pdirIcon = LoadPixmap(cached=True, path='/usr/lib/enigma2/python/Plugins/Extensions/SerienFilm/icons/folder_20.png')
-		self.rdirIcon = LoadPixmap(cached=True, path='/usr/lib/enigma2/python/Plugins/Extensions/SerienFilm/icons/folder_red.png')
-		self.fupIcon = LoadPixmap(cached=True, path='/usr/lib/enigma2/python/Plugins/Extensions/SerienFilm/icons/folderup_20.png')
+		self.pdirIcon = LoadPixmap(cached=True, path=eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/SerienFilm/icons/folder_20.png'))
+		self.rdirIcon = LoadPixmap(cached=True, path=eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/SerienFilm/icons/folder_red.png'))
+		self.fupIcon = LoadPixmap(cached=True, path=eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/SerienFilm/icons/folderup_20.png'))
 		self.pdirMap = MultiContentEntryPixmapAlphaTest(pos=(0,0), size=(20,20), png=self.pdirIcon)
 		self.rdirMap = MultiContentEntryPixmapAlphaTest(pos=(0,0), size=(20,20), png=self.rdirIcon)
 		self.fupMap = MultiContentEntryPixmapAlphaTest(pos=(0,0), size=(20,20), png=self.fupIcon)
