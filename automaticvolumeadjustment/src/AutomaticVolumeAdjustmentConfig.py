@@ -54,9 +54,15 @@ class AutomaticVolumeAdjustmentConfig():
 		print "[AutomaticVolumeAdjustmentConfig] Loading config file..."
 		self.config = Config()
 		if not os_path.exists(self.CONFIG_FILE):
-			fd = os_open( self.CONFIG_FILE, os_O_RDWR|os_O_CREAT)
-			os_close( fd )
-		self.config.loadFromFile(self.CONFIG_FILE)
+			try:
+				fd = os_open( self.CONFIG_FILE, os_O_RDWR|os_O_CREAT)
+				os_close( fd )
+			except Exception, e:
+				print "Error: ", e
+		try:
+			self.config.loadFromFile(self.CONFIG_FILE)
+		except Exception, e:
+			print "Error: ", e
 		self.config.entriescount =  ConfigInteger(0)
 		self.config.Entries = ConfigSubList()
 		self.config.enable = ConfigYesNo(default = False)
