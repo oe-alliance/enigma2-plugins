@@ -167,7 +167,10 @@ def housekeepingExtensionsmenu(el):
 	if el.value:
 		plugins.addPlugin(extDescriptor)
 	else:
-		plugins.removePlugin(extDescriptor)
+		try:
+			plugins.removePlugin(extDescriptor)
+		except ValueError, ve:
+			print "[AutoTimer] housekeepingExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring."
 
 config.plugins.autotimer.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 extDescriptor = PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart = False)
