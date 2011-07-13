@@ -280,6 +280,7 @@ movieselectionquickbutton/src/Makefile
 movietagger/Makefile
 movietagger/etc/Makefile
 movietagger/meta/Makefile
+movietagger/po/Makefile
 movietagger/src/Makefile
 
 movieepg/Makefile
