@@ -162,7 +162,10 @@ def housekeepingExtensionsmenu(el):
 	if el.value:
 		plugins.addPlugin(extDescriptor)
 	else:
-		plugins.removePlugin(extDescriptor)
+		try:
+			plugins.removePlugin(extDescriptor)
+		except ValueError, ve:
+			print "[EPGRefresh] housekeepingExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring."
 
 config.plugins.epgrefresh.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 extDescriptor = PluginDescriptor(name="EPGRefresh", description = _("Automatically refresh EPG"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart=False)
