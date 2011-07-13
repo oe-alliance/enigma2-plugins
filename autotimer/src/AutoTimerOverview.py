@@ -95,6 +95,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 			{
+				"red": self.cancel,
 				"green": (self.save, _("Close and save changes")),
 				"yellow": (self.remove, _("Remove selected AutoTimer")),
 				"blue": (self.add, _("Add new AutoTimer")),
