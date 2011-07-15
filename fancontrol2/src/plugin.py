@@ -380,7 +380,7 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 		{
 			"ok": self.cancel,
 			"cancel": self.cancel,
-			"info": self.getHDD
+			"Info": self.getHDD
 		}, -1)
 
 		self.onLayoutFinish.append(self.updateTemp)
@@ -593,7 +593,7 @@ class FanControl2Plugin(ConfigListScreen,Screen):
 			"yellow": self.pruefen,
 			"blue": self.help,
 			"menu": self.SetupMenu,
-			"info": self.monitor
+			"Info": self.monitor
 		}, -1)
 
 		if not self.selectionChanged in self["config"].onSelectionChanged:
