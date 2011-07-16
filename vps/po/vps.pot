@@ -75,7 +75,7 @@ msgid ""
 " Do you really want to enable VPS?"
 msgstr ""
 
-msgid "yes, don't ask again"
+msgid "Yes, don't ask again"
 msgstr ""
 
 msgid ""

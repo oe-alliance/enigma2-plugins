@@ -46,6 +46,7 @@ void process_search_multiple_pdc(u_char *b, int section_length, int section_numb
 void process_search_pdc_available(u_char *b, int section_length, int section_number);
 
 inline void setNowNext(int section_number, int nevent);
+void checkFinished(u_char *b, int section_number);
 
 static long sect_read(int fd, u_char *buf, long buflen);
 unsigned long getBits(u_char *buf, int byte_offset, int startbit, int bitlen);
@@ -128,7 +129,7 @@ int main(int argc, char *argv[])
 		if (event_id > 0)
 			pdc_exclude_event_ids.insert(event_id);
 		
-		n = open_read_demux(18, 0x4f, 0x00);
+		n = open_read_demux(18, 0x50, 0xff);
 	}
 	else if (mode == 10)
 	{
@@ -405,6 +406,42 @@ void process_search_pdc(u_char *b, int section_length, int section_number)
 	}
 }
 
+void checkFinished(u_char *b, int section_number)
+{
+	static bool initiated = false;
+	static set<u_char> sections;
+	
+	if (section_number == -1)
+	{
+		sections.clear();
+		isAbort = false;
+		initiated = false;
+		return;
+	}
+	
+	b -= 14;
+	
+	u_char last_section_number = getBits(b, 0, 56, 8);
+	u_char segment_last_section_number = getBits(b, 0, 96, 8);
+	
+	b += 14;
+	
+	if (!initiated)
+	{
+		for (int i = last_section_number + 1; i <= 255; i++)
+			sections.insert(i);
+		initiated = true;
+	}
+	
+	sections.insert(section_number);
+	
+	for (int i = segment_last_section_number + 1; i <= ((int(segment_last_section_number / 8) * 8) + 7); i++)
+		sections.insert(i);
+
+	if (sections.size() == 256)
+		abort_program(1);
+}
+
 void process_search_multiple_pdc(u_char *b, int section_length, int section_number)
 {
 	time_t newtime;
@@ -415,6 +452,8 @@ void process_search_multiple_pdc(u_char *b, int section_length, int section_numb
 		abort_program(1);
 		return;
 	}
+	
+	checkFinished(b, section_number);
 	
 	// header data after length value
 	if ((section_length - 11) <= 16) // 12 Bytes Event-Header + 4 Bytes CRC
@@ -441,9 +480,10 @@ void process_search_multiple_pdc(u_char *b, int section_length, int section_numb
 					pdc_exclude_event_ids.insert(n_event_id);
 					cout << timer_id << " PDC_MULTIPLE_FOUND_EVENT " << n_event_id << "\n" << flush;
 				}
-				else if (mode == 5 && n_event_id == event_id)
+				else if (mode == 5 && n_event_id == event_id && pdc_time == 0)
 				{
 					pdc_time = getBits(b, 0, 20, 20);
+					checkFinished(b, -1);
 				}
 			}
 			

@@ -81,8 +81,8 @@ msgstr ""
 "Das VPS-Plugin konnte nicht eindeutig feststellen, ob der Sender VPS unterstützt.\n"
 " VPS wirklich aktivieren?"
 
-msgid "yes, don't ask again"
-msgstr "ja, nicht wieder fragen"
+msgid "Yes, don't ask again"
+msgstr "Ja, nicht wieder fragen"
 
 msgid ""
 "The VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"

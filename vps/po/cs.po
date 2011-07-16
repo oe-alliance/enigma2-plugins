@@ -87,8 +87,8 @@ msgstr ""
 "VPS-Plugin nemohl zkontrolovat, zda zvolený kanál podporuje VPS.\n"
 " Chcete opravdu povolit VPS?"
 
-msgid "yes, don't ask again"
-msgstr "ano, více se neptat"
+msgid "Yes, don't ask again"
+msgstr "Ano, více se neptat"
 
 msgid ""
 "The VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"

@@ -25,7 +25,6 @@ class vps_timer:
 		self.program.appClosed.append(self.program_closed)
 		self.program_running = False
 		self.program_try_search_running = False
-		self.last_overwrite_enabled = False
 		self.activated_auto_increase = False
 		self.simulate_recordService = None
 		self.demux = -1
@@ -73,6 +72,12 @@ class vps_timer:
 			self.timer.log(0, "[VPS] "+ " ".join(data))
 			
 			if data[1] == "RUNNING_STATUS":
+				if data[2] == "0": # undefined
+					if data[3] == "FOLLOWING":
+						data[2] = "1"
+					else:
+						data[2] = "4"
+				
 				if data[2] == "1": # not running
 					# Wenn der Eintrag im Following (Section_Number = 1) ist, dann nicht beenden (Sendung begann noch gar nicht)
 					if data[3] == "FOLLOWING":
@@ -103,25 +108,17 @@ class vps_timer:
 				
 				elif data[2] == "4": # running
 					if self.timer.state == TimerEntry.StateRunning:
-						if not self.timer.vpsplugin_overwrite and (time() - self.timer.begin) < 60:
-							self.program_abort()
-							self.stop_simulation()
-						elif not self.activated_auto_increase:
+						if not self.activated_auto_increase:
 							self.activate_autoincrease()
-					
 					elif self.timer.state == TimerEntry.StateWaiting or self.timer.state == TimerEntry.StatePrepared:
 						# setze Startzeit auf jetzt
 						self.timer.begin = int(time())
 						self.session.nav.RecordTimer.timeChanged(self.timer)
 						
-						if self.timer.vpsplugin_overwrite:
-							self.activate_autoincrease()
-							self.program_abort()
-							self.stop_simulation()
-							vps_timers.checksoon(2000) # Programm neu starten
-						else:
-							self.program_abort()
-							self.stop_simulation()
+						self.activate_autoincrease()
+						self.program_abort()
+						self.stop_simulation()
+						vps_timers.checksoon(2000) # Programm neu starten
 			
 			elif data[1] == "EVENT_ENDED":
 				if not self.set_next_event():
@@ -483,9 +480,13 @@ class vps_timer:
 		
 		self.nextExecution = 180
 		
+		if config.plugins.vps.initial_time.value < 2 and self.timer.vpsplugin_overwrite:
+			initial_time = 120
+		else:
+			initial_time = config.plugins.vps.initial_time.value * 60
+		
 		if self.timer.vpsplugin_overwrite == True:
 			if config.plugins.vps.allow_overwrite.value == True:
-				self.nextExecution = 60
 				if self.timer.state == TimerEntry.StateWaiting or self.timer.state == TimerEntry.StatePrepared:
 					# Startzeit verschieben
 					if (self.timer.begin - 60) < time():
@@ -518,50 +519,26 @@ class vps_timer:
 					
 					if 30 < self.nextExecution:
 						self.nextExecution = 30
-				
-				if self.last_overwrite_enabled == False:
-					self.last_overwrite_enabled = True
-				
-				# Programm wird auch bei laufendem Timer gestartet
-				# mind. 2 Minuten Vorlaufzeit bekommen die VPS-Timer hier
-				if self.program_running == False and (config.plugins.vps.initial_time.value < 2 or self.timer.state == TimerEntry.StateRunning):
-					if (self.timer.begin - 120) <= time():
-						self.program_start()
-					else:
-						n = self.timer.begin - 120 - time()
-						if n < self.nextExecution:
-							self.nextExecution = n
+
 			else:
 				self.timer.vpsplugin_overwrite = False
 		
-		# Wurde Overwrite deaktiviert?
-		if self.timer.vpsplugin_overwrite == False and self.last_overwrite_enabled == True:
-			self.last_overwrite_enabled = False
-			# Wenn der Timer eh schon kurz vor Ende ist, dann Programm nicht beenden.
-			#if self.program_running == True and (self.timer.end - 180) > time():
-			self.program_abort()
 		
-		# Vorlaufzeit zur Prüfung
-		if (self.timer.state == TimerEntry.StateWaiting or self.timer.state == TimerEntry.StatePrepared) and self.program_running == False and config.plugins.vps.initial_time.value > 0:
-			if (self.timer.begin - (config.plugins.vps.initial_time.value * 60)) <= time():
+		# Programm starten
+		if not self.program_running:
+			if self.timer.state == TimerEntry.StateRunning:
 				self.program_start()
-			else:
-				n = self.timer.begin - (config.plugins.vps.initial_time.value * 60) - time()
-				if n < self.nextExecution:
-					self.nextExecution = n
-		
-		# kurz vor (eigentlichem) Ende der Aufnahme Programm starten
-		if self.timer.state == TimerEntry.StateRunning:
-			if self.program_running == False:
-				if (self.timer.end - 120) <= time():
+			
+			elif initial_time > 0:
+				if (self.timer.begin - initial_time) <= time():
 					self.program_start()
 				else:
-					n = self.timer.end - 120 - time()
+					n = self.timer.begin - initial_time - time()
 					if n < self.nextExecution:
 						self.nextExecution = n
-			elif self.program_running == True and (self.timer.end - 120) > time() and self.timer.vpsplugin_overwrite == False:
-				self.program_abort()
-			
+		
+		
+		if self.timer.state == TimerEntry.StateRunning:
 			if self.activated_auto_increase and self.org_timer_end != 0 and (self.org_timer_end + (4*3600)) < time():
 				# Aufnahme läuft seit 4 Stunden im Autoincrease -> abbrechen
 				self.timer.autoincrease = False

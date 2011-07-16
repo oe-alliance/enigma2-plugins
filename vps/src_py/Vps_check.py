@@ -235,7 +235,7 @@ class VPS_check_PDC_Screen(Screen):
 			if self.has_pdc == 1: # PDC vorhanden
 				self.close()
 			else:
-				choiceList = [(_("no"), 0), (_("yes"), 1), (_("yes, don't ask again"), 2)]
+				choiceList = [(_("No"), 0), (_("Yes"), 1), (_("Yes, don't ask again"), 2)]
 				self.session.openWithCallback(self.finish_callback2, ChoiceBox, title = _("VPS-Plugin couldn't check if the selected channel supports VPS.\n Do you really want to enable VPS?"), list = choiceList)
 	
 	def finish_callback(self, result):
