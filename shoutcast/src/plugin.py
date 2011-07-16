@@ -68,7 +68,7 @@ config.plugins.shoutcast = ConfigSubsection()
 config.plugins.shoutcast.menu = ConfigSelection(default = "plugin", choices = [("plugin", _("Plugin menu")), ("extensions", _("Extensions menu"))])
 config.plugins.shoutcast.name = ConfigText(default = _("SHOUTcast"), fixed_size = False, visible_width = 20)
 config.plugins.shoutcast.description = ConfigText(default = _("Listen to SHOUTcast Internet Radio"), fixed_size = False, visible_width = 80)
-config.plugins.shoutcast.devid = ConfigText(default = "0", fixed_size = False, visible_width = 20)
+config.plugins.shoutcast.devid = ConfigText(default = "an1F5MN-I5M2XkPJ", fixed_size = False, visible_width = 20)
 config.plugins.shoutcast.streamingrate = ConfigSelection(default="0", choices = [("0",_("All")), ("64",_(">= 64 kbps")), ("128",_(">= 128 kbps")), ("192",_(">= 192 kbps")), ("256",_(">= 256 kbps"))])
 config.plugins.shoutcast.reloadstationlist = ConfigSelection(default="0", choices = [("0",_("Off")), ("1",_("every minute")), ("3",_("every three minutes")), ("5",_("every five minutes"))])
 config.plugins.shoutcast.dirname = ConfigDirectory(default = "/hdd/streamripper/")
@@ -216,7 +216,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		{
 			"ok": self.ok_pressed,
 			"back": self.close,
-			"input_date_time": self.menu_pressed,
+			"Menu": self.menu_pressed,
 			"red": self.red_pressed,
 			"green": self.green_pressed,
 			"yellow": self.yellow_pressed,
@@ -376,9 +376,11 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self["statustext"].setText(_("Getting SHOUTcast genre list for %s..." % genre))
 		self["list"].hide()
 		url = self.SC + "/genre/secondary?parentid=%s&k=%s&f=xml" % (id, config.plugins.shoutcast.devid.value)
+		print 'URL',url
 		sendUrlCommand(url, None, 10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
+		print 'XMLSTRING',xmlstring
 		self["headertext"].setText(_("SHOUTcast genre list"))
 		self.genreListIndex = 0
 		self.mode = self.GENRELIST
