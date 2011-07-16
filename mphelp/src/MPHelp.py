@@ -26,7 +26,7 @@ class MPHelp(Screen):
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="355,10" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="495,10" size="140,40" alphatest="on" />
 			<widget render="Label" source="key_red" position="75,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<!--<widget render="Label" source="key_green" position="215,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />-->
+			<widget render="Label" source="key_green" position="215,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget render="Label" source="key_yellow" position="355,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 			<widget render="Label" source="key_blue" position="495,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
 			<widget render="Label" source="title" position="60,50" size="600,50" zPosition="5" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
@@ -40,9 +40,12 @@ class MPHelp(Screen):
 		self.designatedTitle = title
 
 		self["key_red"] = StaticText(_("Close"))
-		#self["key_green"] = StaticText()
-		self["key_yellow"] = StaticText("<<")
-		self["key_blue"] = StaticText(">>")
+		self["key_green"] = StaticText()
+		self["key_yellow"] = StaticText("")
+		if len(pages) > 1:
+			self["key_blue"] = StaticText(">>")
+		else:
+			self["key_blue"] = StaticText("")
 		self["title"] = StaticText()
 		self["detailtext"] = ScrollLabel()
 
@@ -75,8 +78,8 @@ class MPHelp(Screen):
 			title = "Invalid Help Page"
 			text = "You managed to jump to an invalid page. Stop it :-)"
 			newPage = self.curPage
-		self["title"].text = title
-		self["detailtext"].setText(text)
+		self["title"].text = title.encode('utf-8', 'ignore')
+		self["detailtext"].setText(text.encode('utf-8', 'ignore'))
 		self.curPage = newPage
 	
 	def pageUp(self):
@@ -86,11 +89,26 @@ class MPHelp(Screen):
 		self["detailtext"].pageDown()
 
 	def prevPage(self):
+		curPage = self.curPage
+		if curPage > 0:
+			self.setPage(curPage - 1)
+
+		self["key_blue"].setText(">>")
 		if self.curPage > 0:
-			self.setPage(self.curPage - 1)
+			self["key_yellow"].setText("<<")
+		else:
+			self["key_yellow"].setText("")
 
 	def nextPage(self):
-		if self.curPage < len(self.pages) - 1:
-			self.setPage(self.curPage + 1)
+		curPage = self.curPage
+		Len = len(self.pages) - 1
+		if curPage < Len:
+			self.setPage(curPage + 1)
+
+		self["key_yellow"].setText("<<")
+		if self.curPage < Len:
+			self["key_blue"].setText(">>")
+		else:
+			self["key_blue"].setText("")
 
 __all__ = ['HelpPage', 'MPHelp']
