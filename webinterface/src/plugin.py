@@ -1,418 +1,492 @@
+Version = '$Header$';
+
+from enigma import eConsoleAppContainer, eTPM
 from Plugins.Plugin import PluginDescriptor
 
-from twisted.internet import reactor, defer
+from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
+from Components.Network import iNetwork
+from Screens.MessageBox import MessageBox
+from WebIfConfig import WebIfConfigScreen
+from WebChilds.Toplevel import getToplevel
+from Tools.HardwareInfo import HardwareInfo
 
-from twisted.web2 import server, channel, static, resource, stream, http_headers, responsecode, http
-from twisted.web2.auth import digest, basic, wrapper
+from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG
 
-from twisted.python import util
-from twisted.python.log import startLogging,discardLogs
-
-from twisted.cred.portal import Portal, IRealm
-from twisted.cred import checkers, credentials, error
+from twisted.internet import reactor, ssl
+from twisted.web import server, http, util, static, resource
 
 from zope.interface import Interface, implements
+from socket import gethostname as socket_gethostname
+from OpenSSL import SSL
 
-import webif
-import WebIfConfig  
-import os
+from os.path import isfile as os_isfile
+from __init__ import _, __version__, decrypt_block
+from webif import get_random, validate_certificate
 
-from Components.config import config, ConfigSubsection, ConfigInteger,ConfigYesNo
+tpm = eTPM()
+rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
+hw = HardwareInfo()
+#CONFIG INIT
 
+#init the config
 config.plugins.Webinterface = ConfigSubsection()
-config.plugins.Webinterface.enable = ConfigYesNo(default = True)
-config.plugins.Webinterface.port = ConfigInteger(80,limits = (1, 65536))
-config.plugins.Webinterface.includehdd = ConfigYesNo(default = False)
-config.plugins.Webinterface.useauth = ConfigYesNo(default = False) # False, because a std. images hasnt a rootpasswd set and so no login. and a login with a empty pwd makes no sense
-config.plugins.Webinterface.debug = ConfigYesNo(default = False) # False by default, not confgurable in GUI. Edit settingsfile directly if needed
+config.plugins.Webinterface.enabled = ConfigYesNo(default=True)
+config.plugins.Webinterface.allowzapping = ConfigYesNo(default=True)
+config.plugins.Webinterface.includemedia = ConfigYesNo(default=False)
+config.plugins.Webinterface.autowritetimer = ConfigYesNo(default=False)
+config.plugins.Webinterface.loadmovielength = ConfigYesNo(default=True)
+config.plugins.Webinterface.version = ConfigText(__version__) # used to make the versioninfo accessible enigma2-wide, not confgurable in GUI.
 
-sessions = [ ]
+config.plugins.Webinterface.http = ConfigSubsection()
+config.plugins.Webinterface.http.enabled = ConfigYesNo(default=True)
+config.plugins.Webinterface.http.port = ConfigInteger(default = 80, limits=(1, 65535) )
+config.plugins.Webinterface.http.auth = ConfigYesNo(default=False)
 
-"""
-	define all files in /web to send no  XML-HTTP-Headers here
-	all files not listed here will get an Content-Type: application/xhtml+xml charset: UTF-8
-"""
-AppTextHeaderFiles = ['stream.m3u.xml','ts.m3u.xml',] 
+config.plugins.Webinterface.https = ConfigSubsection()
+config.plugins.Webinterface.https.enabled = ConfigYesNo(default=True)
+config.plugins.Webinterface.https.port = ConfigInteger(default = 443, limits=(1, 65535) )
+config.plugins.Webinterface.https.auth = ConfigYesNo(default=True)
 
-"""
- Actualy, the TextHtmlHeaderFiles should contain the updates.html.xml, but the IE then
- has problems with unicode-characters
-"""
-TextHtmlHeaderFiles = ['wapremote.xml',] 
+config.plugins.Webinterface.streamauth = ConfigYesNo(default=False)
 
-"""
-	define all files in /web to send no  XML-HTTP-Headers here
-	all files not listed here will get an Content-Type: text/html charset: UTF-8
-"""
-NoExplicitHeaderFiles = ['getpid.xml','tvbrowser.xml',] 
+global running_defered, waiting_shutdown, toplevel
 
-"""
- set DEBUG to True, if twisted should write logoutput to a file.
- in normal console output, twisted will print only the first Traceback.
- is this a bug in twisted or a conflict with enigma2?
- with this option enabled, twisted will print all TB to the logfile
- use tail -f <file> to view this log
-"""
+running_defered = []
+waiting_shutdown = 0
+toplevel = None
+server.VERSION = "Enigma2 WebInterface Server $Revision$".replace("$Revi", "").replace("sion: ", "").replace("$", "")
+
+#===============================================================================
+# Helperclass to close running Instances of the Webinterface
+#===============================================================================
+class Closer:
+	counter = 0
+	def __init__(self, session, callback=None, l2k=None):
+		self.callback = callback
+		self.session = session
+		self.l2k = l2k
+#===============================================================================
+# Closes all running Instances of the Webinterface
+#===============================================================================
+	def stop(self):
+		global running_defered
+		for d in running_defered:
+			print "[Webinterface] stopping interface on ", d.interface, " with port", d.port
+			x = d.stopListening()
 			
+			try:
+				x.addCallback(self.isDown)
+				self.counter += 1
+			except AttributeError:
+				pass
+		running_defered = []
+		if self.counter < 1:
+			if self.callback is not None:
+				self.callback(self.session, self.l2k)
 
-DEBUGFILE= "/tmp/twisted.log"
+#===============================================================================
+# #Is it already down?
+#===============================================================================
+	def isDown(self, s):
+		self.counter -= 1
+		if self.counter < 1:
+			if self.callback is not None:
+				self.callback(self.session, self.l2k)
 
-def stopWebserver():
-	reactor.disconnectAll()
+def checkCertificates():
+	print "[WebInterface] checking for SSL Certificates"
+	srvcert = '%sserver.pem' %resolveFilename(SCOPE_CONFIG) 
+	cacert = '%scacert.pem' %resolveFilename(SCOPE_CONFIG)
 
-def restartWebserver():
-	stopWebserver()
-	startWebserver()
-
-def startWebserver():
-	if config.plugins.Webinterface.enable.value is not True:
-		print "not starting Werbinterface"
+	# Check whether there are regular certificates, if not copy the default ones over
+	if not os_isfile(srvcert) or not os_isfile(cacert):
 		return False
-	if config.plugins.Webinterface.debug.value:
-		print "start twisted logfile, writing to %s" % DEBUGFILE 
-		import sys
-		startLogging(open(DEBUGFILE,'w'))
-
-	class ScreenPage(resource.Resource):
-		def __init__(self, path):
-			self.path = path
-
-		def render(self, req):
-			global sessions
-			if sessions == [ ]:
-				return http.Response(responsecode.OK, stream="please wait until enigma has booted")
-
-			class myProducerStream(stream.ProducerStream):
-				def __init__(self):
-					stream.ProducerStream.__init__(self)
-					self.closed_callback = None
-
-				def close(self):
-					if self.closed_callback:
-						self.closed_callback()
-						self.closed_callback = None
-					stream.ProducerStream.close(self)
-
-			if os.path.isfile(self.path):
-				s=myProducerStream()
-				webif.renderPage(s, self.path, req, sessions[0])  # login?
-				if self.path.split("/")[-1] in AppTextHeaderFiles:
-					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'text', (('charset', 'UTF-8'),))},stream=s)
-				elif self.path.split("/")[-1] in TextHtmlHeaderFiles:
-					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('text', 'html', (('charset', 'UTF-8'),))},stream=s)
-				elif self.path.split("/")[-1] in NoExplicitHeaderFiles:
-					return http.Response(responsecode.OK,stream=s)
-				else:
-					return http.Response(responsecode.OK,{'Content-type': http_headers.MimeType('application', 'xhtml+xml', (('charset', 'UTF-8'),))},stream=s)
-			else:
-				return http.Response(responsecode.NOT_FOUND)
-
-		def locateChild(self, request, segments):
-			path = self.path+'/'+'/'.join(segments)
-			if path[-1:] == "/":
-				path += "index.html"
-			path +=".xml"
-			return ScreenPage(path), ()
-
-	class Toplevel(resource.Resource):
-		addSlash = True
-		child_web = ScreenPage(util.sibpath(__file__, "web")) # "/web/*"
-		child_webdata = static.File(util.sibpath(__file__, "web-data")) # FIXME: web-data appears as webdata
-		child_wap = static.File(util.sibpath(__file__, "wap")) # static pages for wap
-		child_movie = MovieStreamer()
-		def render(self, req):
-			fp = open(util.sibpath(__file__, "web-data")+"/index.html")
-			s = fp.read()
-			fp.close()
-			return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
-
-
-	toplevel = Toplevel()
-	if config.plugins.Webinterface.includehdd.value:
-		toplevel.putChild("hdd",static.File("/hdd"))
 	
-	if config.plugins.Webinterface.useauth.value is False:
-		site = server.Site(toplevel)
 	else:
-		portal = Portal(HTTPAuthRealm())
-		portal.registerChecker(PasswordDatabase())
-		root = ModifiedHTTPAuthResource(toplevel,(basic.BasicCredentialFactory('DM7025'),),portal, (IHTTPUser,))
-		site = server.Site(root)
-	print "[WebIf] starting Webinterface on port",config.plugins.Webinterface.port.value
-	reactor.listenTCP(config.plugins.Webinterface.port.value, channel.HTTPFactory(site))
-
-class MovieStreamer(resource.Resource):
-	addSlash = True
+		return True
+		
+def installCertificates(session, callback = None, l2k = None):
+	print "[WebInterface] Installing SSL Certificates to %s" %resolveFilename(SCOPE_CONFIG)
 	
-	def render(self, req):
-		class myFileStream(stream.FileStream):
-		    """
-		    	because os.fstat(f.fileno()).st_size returns negative values on 
-		    	large file, we set read() to a fix value
-		    """
-		    readsize = 10000    
-		    
-		    def read(self, sendfile=False):
-		    	if self.f is None:
-		            return None
+	srvcert = '%sserver.pem' %resolveFilename(SCOPE_CONFIG) 
+	cacert = '%scacert.pem' %resolveFilename(SCOPE_CONFIG)	
+	scope_webif = '%sExtensions/WebInterface/' %resolveFilename(SCOPE_PLUGINS)
+	
+	source = '%setc/server.pem' %scope_webif
+	target = srvcert
+	ret = copyfile(source, target)
+	
+	if ret == 0:
+		source = '%setc/cacert.pem' %scope_webif
+		target = cacert
+		ret = copyfile(source, target)
 		
-		        length = self.length
-		        if length == 0:
-		            self.f = None
-		            return None
+		if ret == 0 and callback != None:
+			callback(session, l2k)
+	
+	if ret < 0:
+		config.plugins.Webinterface.https.enabled.value = False
+		config.plugins.Webinterface.https.enabled.save()
 		
-		        if sendfile and length > SENDFILE_THRESHOLD:
-		            # XXX: Yay using non-existent sendfile support!
-		            # FIXME: if we return a SendfileBuffer, and then sendfile
-		            #        fails, then what? Or, what if file is too short?
-		            readSize = min(length, SENDFILE_LIMIT)
-		            res = SendfileBuffer(self.f, self.start, readSize)
-		            self.length -= readSize
-		            self.start += readSize
-		            return res
+		# Start without https
+		callback(session, l2k)
 		
-		        if self.useMMap and length > MMAP_THRESHOLD:
-		            readSize = min(length, MMAP_LIMIT)
-		            try:
-		                res = mmapwrapper(self.f.fileno(), readSize,
-		                                  access=mmap.ACCESS_READ, offset=self.start)
-		                #madvise(res, MADV_SEQUENTIAL)
-		                self.length -= readSize
-		                self.start += readSize
-		                return res
-		            except mmap.error:
-		                pass
-		        # Fall back to standard read.
-		        readSize = self.readsize #this is the only changed line :} 3c5x9 #min(length, self.CHUNK_SIZE)
-		        
-		        self.f.seek(self.start)
-		        b = self.f.read(readSize)
-		        bytesRead = len(b)
-		        if not bytesRead:
-		            raise RuntimeError("Ran out of data reading file %r, expected %d more bytes" % (self.f, length))
-		        else:
-		            self.length -= bytesRead
-		            self.start += bytesRead
-		            return b
-		try:
-			w1 = req.uri.split("?")[1]
-			w2 = w1.split("&")
-			parts= {}
-			for i in w2:
-				w3 = i.split("=")
-				parts[w3[0]] = w3[1]
-		except:
-			return http.Response(responsecode.OK, stream="no file given with file=???")			
-		if parts.has_key("file"):
-			path = "/hdd/movie/"+parts["file"].replace("%20"," ").replace("+"," ")
-			if os.path.exists(path):
-				self.filehandler = open(path,"r")
-				s = myFileStream(self.filehandler)
-				return http.Response(responsecode.OK, {'Content-type': http_headers.MimeType('text', 'html')},stream=s)
-			else:
-				return http.Response(responsecode.OK, stream="file was not found in /media/hdd/movie/")			
-		else:
-			return http.Response(responsecode.OK, stream="no file given with file=???")			
+		#Inform the user
+		session.open(MessageBox, "Couldn't install SSL-Certifactes for https access\nHttps access is now disabled!", MessageBox.TYPE_ERROR)
+	
+#===============================================================================
+# restart the Webinterface for all configured Interfaces
+#===============================================================================
+def restartWebserver(session, l2k):
+	try:
+		del session.mediaplayer
+		del session.messageboxanswer
+	except NameError:
+		pass
+	except AttributeError:
+		pass
 
-def autostart(reason, **kwargs):
-	if "session" in kwargs:
-		global sessions
-		sessions.append(kwargs["session"])
-		return
-	if reason == 0:
-		try:
-			startWebserver()
-		except ImportError,e:
-			print "[WebIf] twisted not available, not starting web services",e
+	global running_defered
+	if len(running_defered) > 0:
+		Closer(session, startWebserver, l2k).stop()
+	else:
+		startWebserver(session, l2k)
+	
+#===============================================================================
+# start the Webinterface for all configured Interfaces
+#===============================================================================
+def startWebserver(session, l2k):
+	global running_defered
+	global toplevel
+	
+	session.mediaplayer = None
+	session.messageboxanswer = None
+	if toplevel is None:
+		toplevel = getToplevel(session)
+	
+	errors = ""
+	
+	if config.plugins.Webinterface.enabled.value is not True:
+		print "[Webinterface] is disabled!"
+	
+	else:
+		# IF SSL is enabled we need to check for the certs first
+		# If they're not there we'll exit via return here 
+		# and get called after Certificates are installed properly
+		if config.plugins.Webinterface.https.enabled.value:
+			if not checkCertificates():
+				print "[Webinterface] Installing Webserver Certificates for SSL encryption"
+				installCertificates(session, startWebserver, l2k)
+				return
+		# Listen on all Interfaces
+		ip = "0.0.0.0"
+		#HTTP
+		if config.plugins.Webinterface.http.enabled.value is True:
+			ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value, l2k)
+			if ret == False:
+				errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.http.port.value)
+			else:
+				registerBonjourService('http', config.plugins.Webinterface.http.port.value)
 			
-def openconfig(session, **kwargs):
-	session.openWithCallback(configCB,WebIfConfig.WebIfConfigScreen)
-
-def configCB(result):
-	if result is True:
-		print "[WebIf] config changed"
-		restartWebserver()
-	else:
-		print "[WebIf] config not changed"
+		#Streaming requires listening on 127.0.0.1:80 no matter what, ensure it its available
+		if config.plugins.Webinterface.http.port.value != 80 or not config.plugins.Webinterface.http.enabled.value:
+			#LOCAL HTTP Connections (Streamproxy)
+			ret = startServerInstance(session, '127.0.0.1', 80, config.plugins.Webinterface.http.auth.value, l2k)			
+			if ret == False:
+				errors = "%s%s:%i\n" %(errors, '127.0.0.1', 80)
+			
+			if errors != "":
+				session.open(MessageBox, "Webinterface - Couldn't listen on:\n %s" % (errors), type=MessageBox.TYPE_ERROR, timeout=30)
+				
+		#HTTPS		
+		if config.plugins.Webinterface.https.enabled.value is True:					
+			ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, l2k, True)
+			if ret == False:
+				errors = "%s%s:%i\n" %(errors, ip, config.plugins.Webinterface.https.port.value)
+			else:
+				registerBonjourService('https', config.plugins.Webinterface.https.port.value)
 		
+#===============================================================================
+# stop the Webinterface for all configured Interfaces
+#===============================================================================
+def stopWebserver(session):
+	try:
+		del session.mediaplayer
+		del session.messageboxanswer
+	except NameError:
+		pass
+	except AttributeError:
+		pass
+
+	global running_defered
+	if len(running_defered) > 0:
+		Closer(session).stop()
+
+#===============================================================================
+# startServerInstance
+# Starts an Instance of the Webinterface
+# on given ipaddress, port, w/o auth, w/o ssl
+#===============================================================================
+def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usessl=False):
+	if hw.get_device_name().lower() != "dm7025":
+		l3k = None		
+		l3c = tpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+		
+		if l3c is None:
+			return False			
+		
+		l3k = validate_certificate(l3c, l2k)
+		if l3k is None:			
+			return False
+		
+		random = get_random()
+		if random is None:
+			return False
+	
+		value = tpm.challenge(random)
+		result = decrypt_block(value, l3k)
+		
+		if result is None:
+			return False
+		else:
+			if result [80:88] != random:		
+				return False
+		
+	if useauth:
+# HTTPAuthResource handles the authentication for every Resource you want it to			
+		root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
+		site = server.Site(root)			
+	else:
+		site = server.Site(toplevel)
+
+	if usessl:
+		
+		ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem', '/etc/enigma2/cacert.pem', sslmethod=SSL.SSLv23_METHOD)
+		d = reactor.listenSSL(port, site, ctx, interface=ipaddress)
+	else:
+		d = reactor.listenTCP(port, site, interface=ipaddress)
+	running_defered.append(d)		
+	print "[Webinterface] started on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
+	return True
+	
+	#except Exception, e:
+		#print "[Webinterface] starting FAILED on %s:%i!" % (ipaddress, port), e		
+		#return False
+#===============================================================================
+# HTTPAuthResource
+# Handles HTTP Authorization for a given Resource
+#===============================================================================
+class HTTPAuthResource(resource.Resource):
+	def __init__(self, res, realm):
+		resource.Resource.__init__(self)
+		self.resource = res
+		self.realm = realm
+		self.authorized = False
+		self.tries = 0
+		self.unauthorizedResource = UnauthorizedResource(self.realm)
+	
+	def unautorized(self, request):
+		request.setResponseCode(http.UNAUTHORIZED)
+		request.setHeader('WWW-authenticate', 'basic realm="%s"' % self.realm)
+
+		return self.unauthorizedResource
+	
+	def isAuthenticated(self, request):		
+		host = request.getHost().host
+		#If streamauth is disabled allow all acces from localhost
+		if not config.plugins.Webinterface.streamauth.value:			
+			if( host == "127.0.0.1" or host == "localhost" ):
+				print "[WebInterface.plugin.isAuthenticated] Streaming auth is disabled bypassing authcheck because host is '%s'" %host
+				return True
+					
+		# get the Session from the Request
+		sessionNs = request.getSession().sessionNamespaces
+		
+		# if the auth-information has not yet been stored to the session
+		if not sessionNs.has_key('authenticated'):
+			if request.getUser() != '':
+				sessionNs['authenticated'] = check_passwd(request.getUser(), request.getPassword())
+			else:
+				sessionNs['authenticated'] = False
+		
+		#if the auth-information already is in the session				
+		else:
+			if sessionNs['authenticated'] is False:
+				sessionNs['authenticated'] = check_passwd(request.getUser(), request.getPassword() )
+		
+		#return the current authentication status						
+		return sessionNs['authenticated']
+													
+#===============================================================================
+# Call render of self.resource (if authenticated)													
+#===============================================================================
+	def render(self, request):			
+		if self.isAuthenticated(request) is True:	
+			return self.resource.render(request)
+		
+		else:
+			print "[Webinterface.HTTPAuthResource.render] !!! unauthorized !!!"
+			return self.unautorized(request).render(request)
+
+#===============================================================================
+# Override to call getChildWithDefault of self.resource (if authenticated)	
+#===============================================================================
+	def getChildWithDefault(self, path, request):
+		if self.isAuthenticated(request) is True:
+			return self.resource.getChildWithDefault(path, request)
+		
+		else:
+			print "[Webinterface.HTTPAuthResource.render] !!! unauthorized !!!"
+			return self.unautorized(request)
+
+#===============================================================================
+# UnauthorizedResource
+# Returns a simple html-ified "Access Denied"
+#===============================================================================
+class UnauthorizedResource(resource.Resource):
+	def __init__(self, realm):
+		resource.Resource.__init__(self)
+		self.realm = realm
+		self.errorpage = static.Data('<html><body>Access Denied.</body></html>', 'text/html')
+	
+	def getChild(self, path, request):
+		return self.errorpage
+		
+	def render(self, request):	
+		return self.errorpage.render(request)
+
+
+
+# Password verfication stuff
+from crypt import crypt
+from pwd import getpwnam
+from spwd import getspnam
+
+
+def check_passwd(name, passwd):
+	cryptedpass = None
+	try:
+		cryptedpass = getpwnam(name)[1]
+	except:
+		return False
+	
+	if cryptedpass:
+		#shadowed or not, that's the questions here
+		if cryptedpass == 'x' or cryptedpass == '*':
+			try:
+				cryptedpass = getspnam(name)[1]
+			except:
+				return False			
+				
+		return crypt(passwd, cryptedpass) == cryptedpass
+	return False
+
+global_session = None
+
+#===============================================================================
+# sessionstart
+# Actions to take place on Session start 
+#===============================================================================
+def sessionstart(reason, session):
+	global global_session
+	global_session = session
+	networkstart(True, session)
+
+
+def registerBonjourService(protocol, port):	
+	try:
+		from Plugins.Extensions.Bonjour.Bonjour import bonjour
+				
+		service = bonjour.buildService(protocol, port)
+		bonjour.registerService(service, True)
+		print "[WebInterface.registerBonjourService] Service for protocol '%s' with port '%i' registered!" %(protocol, port) 
+		return True
+		
+	except ImportError, e:
+		print "[WebInterface.registerBonjourService] %s" %e
+		return False
+
+def unregisterBonjourService(protocol):	
+	try:
+		from Plugins.Extensions.Bonjour.Bonjour import bonjour
+						
+		bonjour.unregisterService(protocol)
+		print "[WebInterface.unregisterBonjourService] Service for protocol '%s' unregistered!" %(protocol) 
+		return True
+		
+	except ImportError, e:
+		print "[WebInterface.unregisterBonjourService] %s" %e
+		return False
+	
+def checkBonjour():
+	if ( not config.plugins.Webinterface.http.enabled.value ) or ( not config.plugins.Webinterface.enabled.value ):
+		unregisterBonjourService('http')
+	if ( not config.plugins.Webinterface.https.enabled.value ) or ( not config.plugins.Webinterface.enabled.value ):
+		unregisterBonjourService('https')
+		
+#===============================================================================
+# networkstart
+# Actions to take place after Network is up (startup the Webserver)
+#===============================================================================
+#def networkstart(reason, **kwargs):
+def networkstart(reason, session):
+	l2r = False
+	l2k = None
+	if hw.get_device_name().lower() != "dm7025":		
+		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+		
+		if l2c is None:
+			return
+		
+		l2k = validate_certificate(l2c, rootkey)
+		if l2k is None:
+			return
+			
+		l2r = True
+	else:
+		l2r = True
+		
+	if l2r:	
+		if reason is True:
+			startWebserver(session, l2k)
+			checkBonjour()
+			
+		elif reason is False:
+			stopWebserver(session)
+			checkBonjour()
+		
+def openconfig(session, **kwargs):
+	session.openWithCallback(configCB, WebIfConfigScreen)
+
+def configCB(result, session):
+	l2r = False
+	l2k = None
+	if hw.get_device_name().lower() != "dm7025":		
+		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+		
+		if l2c is None:
+			return
+		
+		l2k = validate_certificate(l2c, rootkey)
+		if l2k is None:
+			return
+			
+		l2r = True
+	else:
+		l2r = True
+		
+	if l2r:	
+		if result:
+			print "[WebIf] config changed"
+			restartWebserver(session, l2k)
+			checkBonjour()
+		else:
+			print "[WebIf] config not changed"
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
-		    PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),where = [PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png",fnc = openconfig)]
-	
-	
-class ModifiedHTTPAuthResource(wrapper.HTTPAuthResource):
-	"""
-		set it only to True, if you have a patched wrapper.py
-		see http://twistedmatrix.com/trac/ticket/2041
-		so, the solution for us is to make a new class an override ne faulty func
-	"""
-
-	def locateChild(self, req, seg):
-		return self.authenticate(req), seg
-	
-class PasswordDatabase:
-    """
-    	this checks webiflogins agains /etc/passwd
-    """
-    passwordfile = "/etc/passwd"
-    implements(checkers.ICredentialsChecker)
-    credentialInterfaces = (credentials.IUsernamePassword,credentials.IUsernameHashedPassword)
-
-    def _cbPasswordMatch(self, matched, username):
-        if matched:
-            return username
-        else:
-            return failure.Failure(error.UnauthorizedLogin())
-
-    def requestAvatarId(self, credentials):	
-    	if check_passwd(credentials.username,credentials.password,self.passwordfile) is True:
-    		return defer.maybeDeferred(credentials.checkPassword,credentials.password).addCallback(self._cbPasswordMatch, str(credentials.username))
-    	else:
-    		return defer.fail(error.UnauthorizedLogin())
-
-class IHTTPUser(Interface):
-	pass
-
-class HTTPUser(object):
-	implements(IHTTPUser)
-
-class HTTPAuthRealm(object):
-	implements(IRealm)
-	def requestAvatar(self, avatarId, mind, *interfaces):
-		if IHTTPUser in interfaces:
-			return IHTTPUser, HTTPUser()
-		raise NotImplementedError("Only IHTTPUser interface is supported")
-
-	
-import md5,time,string,crypt
-DES_SALT = list('./0123456789' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz') 
-def getpwnam(name, pwfile=None):
-    """Return pasword database entry for the given user name.
-    
-    Example from the Python Library Reference.
-    """
-    
-    if not pwfile:
-        pwfile = '/etc/passwd'
-
-    f = open(pwfile)
-    while 1:
-        line = f.readline()
-        if not line:
-            f.close()
-            raise KeyError, name
-        entry = tuple(line.strip().split(':', 6))
-        if entry[0] == name:
-            f.close()
-            return entry
-
-def passcrypt(passwd, salt=None, method='des', magic='$1$'):
-    """Encrypt a string according to rules in crypt(3)."""
-    if method.lower() == 'des':
-	    return crypt.crypt(passwd, salt)
-    elif method.lower() == 'md5':
-    	return passcrypt_md5(passwd, salt, magic)
-    elif method.lower() == 'clear':
-        return passwd
-
-def check_passwd(name, passwd, pwfile=None):
-    """Validate given user, passwd pair against password database."""
-    
-    if not pwfile or type(pwfile) == type(''):
-        getuser = lambda x,pwfile=pwfile: getpwnam(x,pwfile)[1]
-    else:
-        getuser = pwfile.get_passwd
-
-    try:
-        enc_passwd = getuser(name)
-    except (KeyError, IOError):
-        return 0
-    if not enc_passwd:
-        return 0
-    elif len(enc_passwd) >= 3 and enc_passwd[:3] == '$1$':
-        salt = enc_passwd[3:string.find(enc_passwd, '$', 3)]
-        return enc_passwd == passcrypt(passwd, salt, 'md5')
-       
-    else:
-        return enc_passwd == passcrypt(passwd, enc_passwd[:2])
-
-def _to64(v, n):
-    r = ''
-    while (n-1 >= 0):
-	r = r + DES_SALT[v & 0x3F]
-	v = v >> 6
-	n = n - 1
-    return r
-			
-def passcrypt_md5(passwd, salt=None, magic='$1$'):
-    """Encrypt passwd with MD5 algorithm."""
-    
-    if not salt:
-    	pass
-    elif salt[:len(magic)] == magic:
-        # remove magic from salt if present
-        salt = salt[len(magic):]
-
-    # salt only goes up to first '$'
-    salt = string.split(salt, '$')[0]
-    # limit length of salt to 8
-    salt = salt[:8]
-
-    ctx = md5.new(passwd)
-    ctx.update(magic)
-    ctx.update(salt)
-    
-    ctx1 = md5.new(passwd)
-    ctx1.update(salt)
-    ctx1.update(passwd)
-    
-    final = ctx1.digest()
-    
-    for i in range(len(passwd), 0 , -16):
-	if i > 16:
-	    ctx.update(final)
-	else:
-	    ctx.update(final[:i])
-    
-    i = len(passwd)
-    while i:
-	if i & 1:
-	    ctx.update('\0')
-	else:
-	    ctx.update(passwd[:1])
-	i = i >> 1
-    final = ctx.digest()
-    
-    for i in range(1000):
-	ctx1 = md5.new()
-	if i & 1:
-	    ctx1.update(passwd)
-	else:
-	    ctx1.update(final)
-	if i % 3: ctx1.update(salt)
-	if i % 7: ctx1.update(passwd)
-	if i & 1:
-	    ctx1.update(final)
-	else:
-	    ctx1.update(passwd)
-        final = ctx1.digest()
-    
-    rv = magic + salt + '$'
-    final = map(ord, final)
-    l = (final[0] << 16) + (final[6] << 8) + final[12]
-    rv = rv + _to64(l, 4)
-    l = (final[1] << 16) + (final[7] << 8) + final[13]
-    rv = rv + _to64(l, 4)
-    l = (final[2] << 16) + (final[8] << 8) + final[14]
-    rv = rv + _to64(l, 4)
-    l = (final[3] << 16) + (final[9] << 8) + final[15]
-    rv = rv + _to64(l, 4)
-    l = (final[4] << 16) + (final[10] << 8) + final[5]
-    rv = rv + _to64(l, 4)
-    l = final[11]
-    rv = rv + _to64(l, 2)
-    
-    return rv
-
-
+	p = PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)
+	p.weight = 100 #webif should start as last plugin
+	return [p,
+#			PluginDescriptor(where=[PluginDescriptor.WHERE_NETWORKCONFIG_READ], fnc=networkstart),
+			PluginDescriptor(name=_("Webinterface"), description=_("Configuration for the Webinterface"),
+							where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=openconfig)]

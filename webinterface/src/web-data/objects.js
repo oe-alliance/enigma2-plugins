@@ -813,9 +813,9 @@ function FileList(xml){
 
 	this.getArray = function(){
 		if(this.filelist.length === 0){
-			for(var i=0;i<this.xmlitems.length;i++){
+			for(var i = 0; i < this.xmlitems.length; i++){
 				var file = new File(this.xmlitems.item(i));
-				this.filelist.push(file);			
+				this.filelist.push(file);
 			}
 		}
 
@@ -836,10 +836,10 @@ function File(xml){
 	};
 	
 	this.getNameOnly = function(){
-		if(this.root == '/') {
-			return this.servicereference;
+		if(this.root == '/' || this.isdirectory == "True") {
+			return this.servicereference.replace(this.root, '');
 		} else {
-			return this.servicereference.replace(new RegExp('.*'+this.root, "i"), '');
+			return this.servicereference.replace('4097:0:0:0:0:0:0:0:0:0:', '').replace(this.root, '');
 		}
 	};
 	
@@ -850,39 +850,5 @@ function File(xml){
 	this.getRoot = function(){
 		return this.root;
 	};
-}
-
-/* yet not in use
-function Timer(stepsize){
-	this.msecs = 0;
-	this.stepsize = 100;
-	this.timeout = null;
-	
-	if(typeof(stepsize) != undefined){
-		this.stepsize = stepsize;
-	}
-	
-	this.timeOut = function(){
-		this.msecs = this.msecs + this.stepsize;
-	};
-	
-	this.run = function(){
-		this.msecs = 0;
-		this.timeout = setTimeout(this.timeOut, this.stepsize);
-	};
-	
-	this.stop = function(){
-		clearInterval(this.timeout);
-	};
-	
-	this.getMsecs = function(){
-		return this.msecs;
-	};
-}
-*/
-
-
-
-
-
+}	
 //END class File

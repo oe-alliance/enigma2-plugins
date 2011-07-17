@@ -1,0 +1,12 @@
+<e2:screen name="MediaPlayerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2mediaplayercurrent><e2:element source="CurrentTrack"><e2:convert type="web:ListFiller" >
+	&lt;e2currenttrack>
+		&lt;e2artist><e2:item name="Artist" filter="xml"/>&lt;/e2artist>
+		&lt;e2title><e2:item name="Title" filter="xml"/>&lt;/e2title>
+		&lt;e2album><e2:item name="Album" filter="xml"/>&lt;/e2album>
+		&lt;e2year><e2:item name="Year" filter="xml"/>&lt;/e2year>
+		&lt;e2genre><e2:item name="Genre" filter="xml"/>&lt;/e2genre>
+		&lt;e2coverfile><e2:item name="CoverFilename" filter="xml"/>&lt;/e2coverfile>
+	&lt;/e2currenttrack></e2:convert><e2:convert type="web:TextToHTML" /></e2:element>
+</e2mediaplayercurrent>
+</e2:screen>

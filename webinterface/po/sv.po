@@ -1,0 +1,167 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extension-webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-26 23:16+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: WeeGull <weegull@hotmail.com>\n"
+"Language-Team:  <stephan@reichholf.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/plugin.py:496
+msgid "Webinterface"
+msgstr "Webgränssnitt"
+
+#: src/plugin.py:496
+msgid "Configuration for the Webinterface"
+msgstr "Konfiguration för Webgränssnitt"
+
+#: src/WebIfConfig.py:34
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/WebIfConfig.py:35
+msgid "OK"
+msgstr "OK"
+
+#: src/WebIfConfig.py:58
+msgid "Start Webinterface"
+msgstr "Starta Webgränssnitt"
+
+#: src/WebIfConfig.py:59
+msgid "Enable /media"
+msgstr "Aktivera /media"
+
+#: src/WebIfConfig.py:60
+msgid "Allow zapping via Webinterface"
+msgstr "Tillåt zappning via Webgränssnittet"
+
+#: src/WebIfConfig.py:61
+msgid "Autowrite timer"
+msgstr "Automatskapa timer"
+
+#: src/WebIfConfig.py:62
+msgid "Load movie-length"
+msgstr "Ladda filmlängd"
+
+#: src/WebIfConfig.py:63
+msgid "Enable HTTP Access"
+msgstr "Aktivera HTTP tillgång"
+
+#: src/WebIfConfig.py:68
+msgid "HTTP Port"
+msgstr "HTTP Port"
+
+#: src/WebIfConfig.py:69
+msgid "Enable HTTP Authentication"
+msgstr "Aktivera HTTP autentisering"
+
+#: src/WebIfConfig.py:74
+msgid "Enable HTTPS Access"
+msgstr "Aktivera HTTPS tillgång"
+
+#: src/WebIfConfig.py:78
+msgid "HTTPS Port"
+msgstr "HTTPS Port"
+
+#: src/WebIfConfig.py:79
+msgid "Enable HTTPS Authentication"
+msgstr "Aktivera HTTPS autentisering"
+
+#: src/WebIfConfig.py:85
+msgid "Enable Streaming Authentication"
+msgstr "Aktivera Streaming autentisering"
+
+#: src/WebIfConfig.py:91
+msgid "Webinterface: Main Setup"
+msgstr "Webgränssnitt: Huvudinstallation"
+
+#: src/WebComponents/Converter/HddInfo.py:32
+msgid "N/A"
+msgstr "N/A"
+
+#~ msgid "Interfaces"
+#~ msgstr "Gränssnitt"
+#~ msgid "Webinterface: List of configured Interfaces"
+#~ msgstr "Webgränssnitt: Lista konfigurerade Gränssnitt"
+#~ msgid "Address"
+#~ msgstr "Adress"
+#~ msgid "Authorization"
+#~ msgstr "Tillstånd"
+#~ msgid "SSL"
+#~ msgstr "SSL"
+#~ msgid "Disabled"
+#~ msgstr "Avaktiverat"
+#~ msgid "Add"
+#~ msgstr "Lägg till"
+#~ msgid "Change"
+#~ msgstr "Ändra"
+#~ msgid "yes"
+#~ msgstr "ja"
+#~ msgid "no"
+#~ msgstr "nej"
+#~ msgid "Webinterface: Edit Interface"
+#~ msgstr "Webgränssnitt: Ändra Gränssnitt"
+#~ msgid "Delete"
+#~ msgstr "Ta bort"
+#~ msgid "Require Authorization"
+#~ msgstr "Kräv tillstånd"
+#~ msgid "SSL Encryption"
+#~ msgstr "SSL Kryptering"
+#~ msgid "Really delete this Interface?"
+#~ msgstr "Verkligen ta bort detta Gränssnitt?"
+#~ msgid "Unknown function: '%s'"
+#~ msgstr "Unbekannte Funktion: '%s'"
+#~ msgid "Missing Parameter: sRef"
+#~ msgstr "Fehlender Parameter: sRef"
+#~ msgid "Missing Parameter: begin"
+#~ msgstr "Fehlender Parameter: begin"
+#~ msgid "Missing Parameter: end"
+#~ msgstr "Fehlender Parameter: end"
+#~ msgid "The timer '%s' has been deleted successfully"
+#~ msgstr "Der Timer %s wurde erfolgreich gelöscht"
+#~ msgid "The timer has NOT been deleted"
+#~ msgstr "Der Timer wurde NICHT gelöscht"
+#~ msgid "No matching Timer not found"
+#~ msgstr "Kein zutreffender Timer gefunden"
+#~ msgid "Unknown command: '%s'"
+#~ msgstr "Unbekannter Befehl: '%s'"
+#~ msgid "No event found, started infinite recording"
+#~ msgstr "Kein Event gefunden, endlosaufnahme gestartet"
+#~ msgid "Instant recording started"
+#~ msgstr "Sofortaufnahme gestartet"
+#~ msgid "Illegal Parameter value for Parameter begin : '%s'"
+#~ msgstr "Unerlabter Parameterwert für Parameter begin: '%s'"
+#~ msgid "Missing Parameter: name"
+#~ msgstr "Fehelnder Parameter: name"
+#~ msgid "Missing Parameter: description"
+#~ msgstr "Fehlender Parameter: description"
+#~ msgid "Missing Parameter: beginOld"
+#~ msgstr "Fehlender Parameter: beginOld"
+#~ msgid "Missing Parameter: endOld"
+#~ msgstr "Fehlender Parameter: endOld"
+#~ msgid "Timer %s has been changed!"
+#~ msgstr "Timer %s wurde geändert!"
+#~ msgid "Changing the timer for '%s' failed!"
+#~ msgstr "Timer '%s' konnte nich geändert werden!"
+#~ msgid "Could not find timer '%s' with given start and end time!"
+#~ msgstr ""
+#~ "Timer '%s' mit der angegebenen Start- und Endzeit konnte nicht gefunden "
+#~ "werden!"
+#~ msgid "Timer added successfully!"
+#~ msgstr "Timer erfolgreich hinzugefügt!"
+#~ msgid "Could not add timer '%s'!"
+#~ msgstr "Timer '%s' konnte nicht hinzugefügt werden!"
+#~ msgid "Unexpected Error"
+#~ msgstr "Unerwarteter Fehler"
+#~ msgid "Missing Parameter: eventid"
+#~ msgstr "Fehlender Parameter: eventid"
+#~ msgid "EventId not found"
+#~ msgstr "EventId nicht gefunden"
+#~ msgid "Timer added"
+#~ msgstr "Timer hinzugefügt"
+#~ msgid "Ok"
+#~ msgstr "Ok"
+

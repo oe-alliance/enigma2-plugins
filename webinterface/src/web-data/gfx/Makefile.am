@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web-data/gfx/
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/WebInterface/web-data/gfx/
 
-install_DATA = *.png favicon.ico *.gif remotecontrol.jpg
+install_DATA = *.png  *.gif *.jpg
 

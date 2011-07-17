@@ -1,0 +1,29 @@
+
+<!-- tplNavMovies -->
+<table id="navTimer" class="navTable">
+	<tr>
+		<td>Movie Location:</td>
+	</tr>
+	<tr>
+		<td>
+			<select id="dirname" name="dirname" size="1" onchange="javascript:loadMovieList($('dirname').options[$('dirname').selectedIndex].value,$('tags').options[$('tags').selectedIndex].value)">
+				{for d in dirname}
+				<option value="${d.value}" ${d.selected}>${d.txt}</option>
+				{/for}
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Tag Filter:</td>
+	</tr>
+	<tr>
+		<td>
+			<select id="tags" name="tags" size="1" onchange="javascript:loadMovieList($('dirname').options[$('dirname').selectedIndex].value,$('tags').options[$('tags').selectedIndex].value)">
+				{for t in tags}
+				<option value="${t.value}" ${t.selected}>${t.txt}</option>
+				{/for}
+			</select>
+		</td>
+	</tr>
+</table>
+<!-- /tplNavMovies -->

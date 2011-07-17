@@ -1,0 +1,11 @@
+<e2:screen name="ServicePlayableWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?> 
+<e2:element source="ServicePlayable" id="sRef,sRefPlaying">				
+	<e2:convert type="web:ListFiller">
+&lt;e2serviceplayable>
+	&lt;e2servicereference><e2:item name="ServiceReference" filter="xml" />&lt;/e2servicereference>
+	&lt;e2isplayable><e2:item name="ServicePlayable" filter="xml" />&lt;/e2isplayable>
+&lt;/e2serviceplayable>
+	</e2:convert>
+	<e2:convert type="web:TextToHTML" />			
+</e2:element>
+</e2:screen>

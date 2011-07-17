@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- tplSignalPanel -->
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+		<title>Enigma2 WebControl - EPG</title>
+		
+		<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
+	</head>
+	<body style="color:#000; scrollbar: auto;">
+		<table width="100%" id="SignalPanelTable">
+			<tr>
+				<td style="background-color: #DDDDDD;">dB</td><td style="background-color: #DDDDDD;">
+					<div id="SNRdB">${signal.snrdb}</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="background-color: #DDDDDD;">SNR</td><td style="background-color: #DDDDDD;">
+					<div id="SNR">${signal.snr}</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="background-color: #DDDDDD;">AGC</td><td style="background-color: #DDDDDD;">
+					<div id="AGC">${signal.acg}</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="background-color: #DDDDDD;">BER</td><td style="background-color: #DDDDDD;">
+					<div id="BER">${signal.ber}</div>
+				</td>
+			</tr>
+		</table>
+	</body>
+<!-- /tplSignalPanel -->
+</html>

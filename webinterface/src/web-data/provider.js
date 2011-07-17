@@ -115,7 +115,7 @@ var AbstractContentProvider = Class.create({
 						{
 							parameters: parms,
 							asynchronous: true,
-							method: 'GET',
+							method: 'POST',
 							requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
 							onException: function(o,e){ throw(e); },				
 							onSuccess: function (transport, json) {						
@@ -265,6 +265,27 @@ var ServiceListProvider = Class.create(AbstractContentProvider, {
 		return {services : list};	
 	}
 });
+
+var ServiceEpgListProvider = Class.create(AbstractContentProvider, {
+	/**
+	 * initialize
+	 * Parameters:
+	 * @target: the html target id
+	 */
+	initialize: function($super, showFnc){
+		$super(URL.epgservice, showFnc );
+	},
+
+	/**
+	 * renderXML
+	 * See the description in AbstractContentProvider
+	 */
+	renderXML: function(xml){
+		var list = new EPGList(xml).getArray();
+		return {epg : list};	
+	}
+});
+
 
 /**
  * ServiceListEpgProvider

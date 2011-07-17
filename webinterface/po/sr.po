@@ -1,0 +1,188 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins-extension-webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-19 20:41+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: maja <jovanovic@gmx.ch>\n"
+"Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: SERBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: V:\\eclipse_3-4\\workspace\\enigma2-plugins\\enigma2-plugins\\webinterface\n"
+"X-Poedit-SearchPath-0: src\n"
+
+#: src/plugin.py:406
+msgid "Webinterface"
+msgstr "Vebinterfejs"
+
+#: src/plugin.py:406
+msgid "Configuration for the Webinterface"
+msgstr "Konfigurisanje vebinterfejsa"
+
+#: src/WebIfConfig.py:80
+msgid "Webinterface: Main Setup"
+msgstr "Vebinterfejs: Glavna podešavanja"
+
+#: src/WebIfConfig.py:85
+msgid "Start Webinterface"
+msgstr "Pokreni vebinterfejs"
+
+#: src/WebIfConfig.py:86
+msgid "Enable /media"
+msgstr "Aktiviraj /media"
+
+#: src/WebIfConfig.py:87
+msgid "Allow zapping via Webinterface"
+msgstr "Dozvoli promenu kanala preko vebinterfejsa"
+
+#: src/WebIfConfig.py:88
+msgid "Autowrite timer"
+msgstr "Automatski tajmer"
+
+#: src/WebIfConfig.py:89
+msgid "Load movie-length"
+msgstr "Učitaj dužinu filma"
+
+#: src/WebIfConfig.py:95
+#: src/WebIfConfig.py:250
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: src/WebIfConfig.py:96
+#: src/WebIfConfig.py:251
+msgid "OK"
+msgstr "OK"
+
+#: src/WebIfConfig.py:97
+msgid "Interfaces"
+msgstr "Interfejsi"
+
+#: src/WebIfConfig.py:138
+msgid "Webinterface: List of configured Interfaces"
+msgstr "Vebinterfejs: Lista konfigurisanih interfejsa"
+
+#: src/WebIfConfig.py:142
+#: src/WebIfConfig.py:271
+msgid "Address"
+msgstr "Adresa"
+
+#: src/WebIfConfig.py:143
+#: src/WebIfConfig.py:272
+msgid "Port"
+msgstr "Port"
+
+#: src/WebIfConfig.py:144
+msgid "Authorization"
+msgstr "Odobrenje"
+
+#: src/WebIfConfig.py:145
+msgid "SSL"
+msgstr "SSL"
+
+#: src/WebIfConfig.py:146
+#: src/WebIfConfig.py:270
+msgid "Disabled"
+msgstr "Isključeno"
+
+#: src/WebIfConfig.py:147
+msgid "Add"
+msgstr "Dodaj"
+
+#: src/WebIfConfig.py:148
+msgid "Change"
+msgstr "Promeni"
+
+#: src/WebIfConfig.py:173
+#: src/WebIfConfig.py:178
+#: src/WebIfConfig.py:183
+msgid "yes"
+msgstr "da"
+
+#: src/WebIfConfig.py:175
+#: src/WebIfConfig.py:180
+#: src/WebIfConfig.py:185
+msgid "no"
+msgstr "ne"
+
+#: src/WebIfConfig.py:238
+msgid "Webinterface: Edit Interface"
+msgstr "Vebinterfejs: Uredi interfejs"
+
+#: src/WebIfConfig.py:253
+msgid "Delete"
+msgstr "Izbriši"
+
+#: src/WebIfConfig.py:273
+msgid "Require Authorization"
+msgstr "Potrebno odobrenje"
+
+#: src/WebIfConfig.py:274
+msgid "SSL Encryption"
+msgstr "SSL enkripcija"
+
+#: src/WebIfConfig.py:296
+msgid "Really delete this Interface?"
+msgstr "Stvarno izbrisati ovaj interfejs?"
+
+#: src/WebComponents/Converter/HddInfo.py:33
+msgid "N/A"
+msgstr "N/A"
+
+#~ msgid "Unknown function: '%s'"
+#~ msgstr "Unbekannte Funktion: '%s'"
+#~ msgid "Missing Parameter: sRef"
+#~ msgstr "Fehlender Parameter: sRef"
+#~ msgid "Missing Parameter: begin"
+#~ msgstr "Fehlender Parameter: begin"
+#~ msgid "Missing Parameter: end"
+#~ msgstr "Fehlender Parameter: end"
+#~ msgid "The timer '%s' has been deleted successfully"
+#~ msgstr "Der Timer %s wurde erfolgreich gelöscht"
+#~ msgid "The timer has NOT been deleted"
+#~ msgstr "Der Timer wurde NICHT gelöscht"
+#~ msgid "No matching Timer not found"
+#~ msgstr "Kein zutreffender Timer gefunden"
+#~ msgid "Unknown command: '%s'"
+#~ msgstr "Unbekannter Befehl: '%s'"
+#~ msgid "No event found, started infinite recording"
+#~ msgstr "Kein Event gefunden, endlosaufnahme gestartet"
+#~ msgid "Instant recording started"
+#~ msgstr "Sofortaufnahme gestartet"
+#~ msgid "Illegal Parameter value for Parameter begin : '%s'"
+#~ msgstr "Unerlabter Parameterwert für Parameter begin: '%s'"
+#~ msgid "Missing Parameter: name"
+#~ msgstr "Fehelnder Parameter: name"
+#~ msgid "Missing Parameter: description"
+#~ msgstr "Fehlender Parameter: description"
+#~ msgid "Missing Parameter: beginOld"
+#~ msgstr "Fehlender Parameter: beginOld"
+#~ msgid "Missing Parameter: endOld"
+#~ msgstr "Fehlender Parameter: endOld"
+#~ msgid "Timer %s has been changed!"
+#~ msgstr "Timer %s wurde geändert!"
+#~ msgid "Changing the timer for '%s' failed!"
+#~ msgstr "Timer '%s' konnte nich geändert werden!"
+#~ msgid "Could not find timer '%s' with given start and end time!"
+#~ msgstr ""
+#~ "Timer '%s' mit der angegebenen Start- und Endzeit konnte nicht gefunden "
+#~ "werden!"
+#~ msgid "Timer added successfully!"
+#~ msgstr "Timer erfolgreich hinzugefügt!"
+#~ msgid "Could not add timer '%s'!"
+#~ msgstr "Timer '%s' konnte nicht hinzugefügt werden!"
+#~ msgid "Unexpected Error"
+#~ msgstr "Unerwarteter Fehler"
+#~ msgid "Missing Parameter: eventid"
+#~ msgstr "Fehlender Parameter: eventid"
+#~ msgid "EventId not found"
+#~ msgstr "EventId nicht gefunden"
+#~ msgid "Timer added"
+#~ msgstr "Timer hinzugefügt"
+#~ msgid "Ok"
+#~ msgstr "Ok"
+

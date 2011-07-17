@@ -1,9 +1,6 @@
 Package: enigma2-plugin-extensions-webinterface
-Version: 0.5beta
-Description: Enigma2 Plugin: extensions-webinterface
-Section: base
-Priority: optional
-Maintainer: Felix Domke <tmbinc@elitedvb.net>
-Architecture: noarch
-Homepage: unknown
-Depends: enigma2
+Version: 1.6.8
+Description: Control enigma2 with your Browser
+Maintainer: Stephan Reichholf <stephan@reichholf.net>
+Homepage: http://enigma2-plugins.schwerkraft.elitedvb.net/
+Depends: enigma2 (>> 2.6git20090614), python-twisted-web, python-pyopenssl, python-crypt, python-misc

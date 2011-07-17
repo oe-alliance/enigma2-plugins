@@ -157,6 +157,7 @@ class EpgWebScreen(WebScreen):
 		self["EpgServiceNow"] = EPG(session, func=EPG.SERVICENOW)
 		self["EpgServiceNext"] = EPG(session, func=EPG.SERVICENEXT)
 		self["EpgBouquet"] = EPG(session, func=EPG.BOUQUET)
+		self["EpgMulti"] = EPG(session, func=EPG.MULTI)
 		self["localip"] = RequestData(request, what=RequestData.HOST)
 
 		self["EpgServiceWap"] = EPG(session, func=EPG.SERVICE, endtm=True)
@@ -183,9 +184,12 @@ class MediaPlayerWebScreen(WebScreen):
 
 		self["FileList"] = MP(session, func=MP.LIST)
 		self["PlayFile"] = MP(session, func=MP.PLAY)
+		self["AddFile"] = MP(session, func = MP.ADD)
 		self["RemoveFile"] = MP(session, func=MP.REMOVE)
 		self["Command"] = MP(session, func=MP.COMMAND)
 		self["WritePlaylist"] = MP(session, func=MP.WRITEPLAYLIST)
+		self["CurrentTrack"] = MP(session, func=MP.CURRENT)
+		self["LoadPlaylist"] = MP(session, func=MP.LOADPLAYLIST)
 
 class AutoTimerWebScreen(WebScreen):
 	def __init__(self, session, request):
@@ -363,4 +367,17 @@ class ServiceListPlayableWebScreen(WebScreen):
 		from WebComponents.Sources.ServicePlayable import ServicePlayable
 		
 		self["ServiceListPlayable"] = ServicePlayable(session, type=ServicePlayable.BOUQUET)
+
+class SleepTimerWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
 		
+		from WebComponents.Sources.SleepTimer import SleepTimer		
+		self["SleepTimer"] = SleepTimer(session)
+		
+class TPMWebScreen(WebScreen):
+	def __init__(self, session, request):
+		WebScreen.__init__(self, session, request)
+		
+		from WebComponents.Sources.TPMChallenge import TPMChallenge
+		self["TPM"] = TPMChallenge()

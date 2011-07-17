@@ -9,7 +9,8 @@ class EPG(Source):
 	SERVICE = 4
 	SEARCH = 5
 	BOUQUET = 6
-	SEARCHSIMILAR = 7
+	MULTI = 7
+	SEARCHSIMILAR = 8
 	
 	def __init__(self, navcore, func=BOUQUETNOW, endtm=False):
 		self.func = func
@@ -38,6 +39,8 @@ class EPG(Source):
 				func = self.getBouquetEPGNext
 			elif self.func is self.BOUQUET:
 				func = self.getEPGofBouquet
+			elif self.func is self.MULTI:
+				func = self.getBouquetEPGMulti
 			elif self.func is self.SERVICENOW:
 				func = self.getServiceEPGNow
 			elif self.func is self.SERVICENEXT:
@@ -57,7 +60,10 @@ class EPG(Source):
 
 	def getServiceEPGNext(self, ref):
 		return self.getEPGNowNext(ref, 1, True)
-
+	
+	def getBouquetEPGMulti(self, ref):
+		return self.getEPGofBouquet(ref,  True)
+	
 	def getEPGNowNext(self, ref, type, service=False):
 		print "[WebComponents.EPG] getting EPG NOW/NEXT", ref
 
@@ -100,7 +106,7 @@ class EPG(Source):
 				endtime = int( float(param["endTime"]) )
 				if endtime < 0:
 					endtime = -1
-		
+				
 		events = self.epgcache.lookupEvent([options , (service, 0, time, endtime)]);
 		
 		if events:
@@ -129,29 +135,40 @@ class EPG(Source):
 
 		return list
 
-	def getEPGofBouquet(self, param):
+	def getEPGofBouquet(self, param, multi = False):
 		print "[WebComponents.EPG] getting EPG for Bouquet", param
 
 		if 'bRef' not in param:
 			return ()
 		
 		time = -1
-		
+		endtime = -1
 		if "time" in param:
 			if not param["time"] is None:
 				time = int(float(param["time"]))
 				if time < 0:
 					time = -1
-
+		
+		if "endTime" in param:
+			if not param["endTime"] is None:
+				endtime = int( float(param["endTime"]) )
+				if endtime < 0:
+					endtime = -1
+				
 		bRef = param['bRef']
-
+		if bRef is None:
+			return ()
+		
 		serviceHandler = eServiceCenter.getInstance()
 		sl = serviceHandler.list(eServiceReference(bRef))
 		services = sl and sl.getContent('S')
 
 		search = ['IBDCTSERN']
 		
-		search.extend([(service, 0, time) for service in services])
+		if multi:
+			search.extend([(service, 0, time, endtime) for service in services])
+		else: 
+			search.extend([(service, 0, time) for service in services])
 		events = self.epgcache.lookupEvent(search)
 
 		if events:

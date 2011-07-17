@@ -1,0 +1,89 @@
+
+<!-- tplMediaplayer -->
+						<table id="contentTable">
+							<tr>
+								<td><div class="sListHeader">MediaPlayer ${mp.root}</div></td>
+								<td style="text-align: right;">						
+									<button onClick="mpCommand('previous')" title="Previous">
+										<img src="/web-data/img/control_start_blue.png" alt="&lt;&lt;" />
+									</button>
+									<button onClick="mpCommand('play')" title="Play">
+										<img src="/web-data/img/control_play_blue.png" alt="&gt;" />
+									</button>
+									<button onClick="mpCommand('next')" title="Next">
+										<img src="/web-data/img/control_end_blue.png" alt="&lt;&lt;" />
+									</button>
+									<button onClick="mpCommand('stop')" title="Stop">
+										<img src="/web-data/img/control_stop_blue.png" alt="[]" />
+									</button>
+									<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<button onClick="mpLoad()" title="Filebrowser">
+										<img src="/web-data/img/text_columns.png" alt="Browse" />
+									</button>
+									<button onClick="mpPlaylist()" title="Playlist">
+										<img src="/web-data/img/edit.png" alt="Edit" />
+									</button>									
+									<button onclick="mpWritePlaylist()" title="Save Playlist">
+										<img src="/web-data/img/save.png" alt="Save">
+									</button><br />
+									<button onclick="mpCommand('exit')" title="Close MediaPlayer" >
+										<img src="/web-data/img/nok.png" alt="X">
+									</button>			
+								</td>
+							</tr>	
+							<tr>			
+								<td colspan="2">
+									<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;" id="mpContent">
+										{if mp.hasparent}
+										<tr class="sListItem">
+											<td>
+												<div class="sListSName">
+													<a href="#" style="color: #000; display:block;" onclick="mpLoad('${mp.servicereference.esc()}','${mp.root.esc()}');" class="sListSLink" title="${mp.servicereference}">
+														<img style="vertical-align: bottom;" src="/web-data/img/folder.png" alt="|"> ${mp.name}
+													</a>
+												</div>
+											</td>
+											<td>&nbsp;</td>
+										</tr>
+										{/if}
+										{for item in items}
+										<tr class="sListItem">
+											<!-- ItemBody -->
+											<td>
+												<div class="sListSName">
+													{if item.isdir}
+													<a href="#" style="color: #000; display:block;" onclick="mpLoad('${item.servicereference.esc()}','${item.root.esc()}');" class="sListSLink" title="${item.servicereference}"><img style="vertical-align: bottom;" src="/web-data/img/folder.png" alt="|"> ${item.name}</a>												
+													{else}
+													<a href="#" style="color: #888;" onclick="mpAddToPlaylist('${item.servicereference.esc()}','${item.root.esc()}', true);" class="sListSLink" title="Play '${item.name}'"><img style="vertical-align: bottom;" src="/web-data/img/page.png" alt="-"> ${item.name}</a>
+													{/if}
+												</div>
+											</td>
+											<td>
+												<div style="text-align: right;">
+												{if item.root == "playlist"}												
+													<a href="#" style="color: #000;" onclick="mpAddToPlaylist('${item.servicereference.esc()}','${item.root.esc()}', true);" title="Play '${item.name}'"><img src="/web-data/img/control_play_blue.png"></a>
+													<a href="#" style="color: #000;" onclick="mpRemoveFromPlaylist('${item.servicereference.esc()}');" title="Remove '${item.name}' From Playlist"><img src="/web-data/img/nok.png" border="0"></a>
+													<a target="_blank" href="/file?file=${item.name}"><img src="/web-data/img/save.png" title="Download '${item.name}'" border="0"></a>
+												{elseif !item.isdir}							
+													<a href="#" onclick="mpAddToPlaylist('${item.servicereference.esc()}','${item.root.esc()}', true);" title="Play '${item.name}'"><img src="/web-data/img/control_play_blue.png" border="0" alt="&gt;"></a>
+													<a href="#" onclick="mpAddToPlaylist('${item.servicereference.esc()}','${item.root.esc()}', false);" title="Add '${item.name}' to Playlist"><img src="/web-data/img/page_add.png" border="0" alt="+"></a>
+													<a target="_blank" href="/file?file=${item.name}&root=${item.root}"><img src="/web-data/img/save.png" title="Download '${item.name}'" border="0"></a>
+												{else}
+													<!-- 
+													<a href="#" onclick="mpAddFolder('${item.servicereference}','${item.root}');" title="Add '${item.name}' to Playlist"><img src="/web-data/img/folder_add.png" border="0" alt="Add"></a>
+												 	-->
+												{/if}
+												</div>
+											</td>
+										</tr>
+										{forelse}
+										<tr>
+											<td colspan="2">No Items To Display</td>
+										</tr>
+										{/for}
+										<tr><td colspan="2">&nbsp;</td></tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+<!-- /tplMediaplayer -->

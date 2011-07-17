@@ -1,0 +1,12 @@
+<e2:screen name="SleepTimerWebScreen">&lt;?xml version="1.0" encoding="UTF-8"?>
+<e2:element source="SleepTimer" id="cmd,time,action,enabled,confirmed">
+	<e2:convert type="web:Null" />
+</e2:element>
+<e2sleeptimer>
+	<e2enabled><e2:element source="SleepTimer"><e2:convert type="SleepTimer">Enabled</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2enabled>
+	<e2minutes><e2:element source="SleepTimer"><e2:convert type="SleepTimer">Time</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2minutes>
+	<e2action><e2:element source="SleepTimer"><e2:convert type="SleepTimer">Action</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2action>
+	<e2confirmed><e2:element source="SleepTimer"><e2:convert type="SleepTimer">Confirmed</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2confirmed>
+	<e2text><e2:element source="SleepTimer"><e2:convert type="SleepTimer">Text</e2:convert><e2:convert type="web:TextToXML" /></e2:element></e2text>
+</e2sleeptimer>
+</e2:screen>

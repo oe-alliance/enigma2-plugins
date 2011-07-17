@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional"
+       "http://www.w3.org/TR/html4/loose.dtd">  
+<html>
+<!-- tplEpgList -->     
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+		<title>Enigma2 WebControl - EPG</title>
+		
+		<link href="/web-data/tpl/default/style.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="/web-data/tools.js" ></script>
+	</head>
+	<body style="scrollbar: auto; color: #485052;">
+		<table style="width: 100%">
+			<tr>
+				<td>
+					{for e in epg}
+					<table class="epgListItem" width="100%" border="0" cellspacing="1" cellpadding="0">
+						<tr style="background-color: #DDDDDD;">
+							<td width="10%">${e.date}</td>
+							<td width="30%">${e.servicename}</td>
+							<td>${e.title}</td>
+						</tr>
+
+						<tr style="background-color: #DDDDDD;">
+							<td>${e.starttime}</td>
+							<td>${e.duration} min.</td>
+							<td>${e.description}</td>
+						</tr>
+
+						<tr style="background-color: #DDDDDD;">
+							<td valign="top">${e.endtime}</td>
+							<td colspan="2"rowspan="2" id="extdescription${e.number}">${e.extdescription}</td>
+						</tr>
+
+						<tr style="background-color: #DDDDDD;">
+							<td>
+								<a href="#" onclick="return false;"><img src="/web-data/img/timer.png" title="Add Timer" border="0" onclick=" if( opener.parentPin( '${e.servicereference}' ) ) { opener.addTimerByID('${e.servicereference}','${e.eventid}','0');}"></a>&nbsp;&nbsp;
+								<a href="#" onclick="return false;"><img src="/web-data/img/zap.png" title="Add zap Timer" border="0" onclick="if ( opener.parentPin( '${e.servicereference}' ) ) { opener.addTimerByID('${e.servicereference}','${e.eventid}','1');}"></a>&nbsp;&nbsp;
+								<a href="#" onclick="return false;"><img src="/web-data/img/edit.png" title="Edit and add timer" border="0" onclick="opener.loadTimerEditForm(0,'${e.start}','${e.end}',0,'${e.servicereference}','${e.servicename.esc()}','${e.title.esc()}','${e.description.esc()}',0,'','3',0,'${e.eventid}');"></a><br/>
+								<a target="_blank" href="/web/epgsearch.rss?search=${e.title}" ><img src="/web-data/img/feed.png" title="RSS-Feed for this Title" border="0"></a><br/>
+								<a target="_blank" href="http://www.imdb.com/find?s=all&amp;q=${e.titleESC}" ><img src="/web-data/img/world.png" title="Search IMDb" border="0"></a><br/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">&nbsp;</td>
+						</tr>
+					</table>
+					{/for}
+				</td>
+			</tr>
+		</table>
+	</body>
+<!-- /tplEpgList -->
+</html>

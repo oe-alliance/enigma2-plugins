@@ -1,4 +1,8 @@
-//$Header$
+//$Header: /cvsroot/enigma2-plugins/enigma2-plugins/webinterface/src/web-data/tools.js,v 1.216.2.2 2010-04-22 16:07:20 sreichholf Exp $
+
+// replace ' with \' for in-html javascript
+String.prototype.esc = function(){ return this.valueOf().gsub("'", "\\'"); };
+
 var templates = {};
 var loadedChannellist = {};
 
@@ -455,7 +459,7 @@ function doRequest(url, readyFunction){
 			request = new Ajax.Request(url,
 					{
 						asynchronous: true,
-						method: 'GET',
+						method: 'POST',
 						requestHeaders: ['Cache-Control', 'no-cache,no-store', 'Expires', '-1'],
 						onException: function(o,e){ throw(e); },				
 						onSuccess: function (transport, json) {						
@@ -666,7 +670,9 @@ function loadEPGBySearchString(string){
 }
 
 function loadEPGByServiceReference(servicereference){
-	doRequest(URL.epgservice+servicereference,incomingEPGrequest, false);
+	serviceEpgListHandler.load({sRef : decodeURIComponent(servicereference) });
+	
+//	doRequest(URL.epgservice+servicereference,incomingEPGrequest, false);
 }
 
 function buildServiceListEPGItem(epgevent, type){

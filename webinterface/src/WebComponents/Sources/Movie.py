@@ -1,115 +1,133 @@
-from enigma import *
-from enigma import eServiceReference, iServiceInformation
+from enigma import eServiceReference, iServiceInformation, eServiceCenter
 from Components.Sources.Source import Source
-from ServiceReference import ServiceReference,eServiceCenter
-from Components.MovieList import MovieList
-from Tools.Directories import *
+from Components.config import config
+from ServiceReference import ServiceReference
+from Tools.Directories import resolveFilename, SCOPE_HDD
+from Tools.FuzzyDate import FuzzyTime
 
-import os
-#import sys, traceback
+from os import stat as os_stat
 
-class Movie( Source):
-    LIST = 0
-    DEL = 1
-    
-    def __init__(self, session,func = LIST):
-        Source.__init__(self)
-        self.func = func
-        self.session = session
-        self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
-        self.movielist = MovieList(self.root)
-        self.movielist.load(self.root,None)
-    
-    def handleCommand(self,cmd):
-        if self.func is self.DEL:
-            self.result = self.delMovieFiles(cmd)
-        else:
-            self.result = False,"unknown command"
-        
-    def delMovieFiles(self,param):
-        print "delMovieFiles:",param
-        
-        if param is None:
-            return False,"title missing"
-        
-        #os.system("rm -f %s*" % param)
-        try:
-            os.system('rm -f "%s"' % param)
-            #.ap .cuts .meta
-            if os.path.exists("%s.ap" % param):
-                os.system('rm -f "%s.ap"' % param)
-            
-            if os.path.exists("%s.cuts" % param):
-                os.system('rm -f "%s.cuts"' % param)
-            
-            if os.path.exists("%s.meta" % param):
-                os.system('rm -f "%s.meta"' % param)
-            
-            if os.path.exists("%s.eit" % param):
-                os.system('rm -f "%s.eit"' % param)
-        except OSError:
-            return False,"OSErrorSome error occurred while deleting file"
-#        except:
-#             print sys.exc_info()[0]
-#             print sys.exc_info()[1]
-#             print traceback.extract_tb(sys.exc_info()[2])
+class Movie(Source):
+	LIST = 0
+	DEL = 1
+	TAGS = 2
 
-        
-        if os.path.exists(param):
-            return False,"Some error occurred while deleting file"
-        else:
-            return True,"File deleted"
-   
-    def command(self):
-        self.movielist.reload(root=self.root)
-        list=[]
-        for (serviceref, info, begin,unknown) in self.movielist.list:
-            movie = []
-            movie.append(serviceref.toString())
-            movie.append(ServiceReference(serviceref).getServiceName())
-            movie.append(info.getInfoString(serviceref, iServiceInformation.sDescription))
-            
-            sourceERef =info.getInfoString(serviceref, iServiceInformation.sServiceref)
-            sourceRef= ServiceReference(sourceERef)
-            
-            movie.append(sourceRef.getServiceName())
-            movie.append(info.getInfoString(serviceref, iServiceInformation.sTags))
-            event = info.getEvent(serviceref)
-            if event is not None:
-                text = event.getEventName()
-                short = event.getShortDescription()
-                ext = event.getExtendedDescription()
-                movie.append(ext)
-            else:
-                movie.append("")
-            filename = "/"+"/".join(serviceref.toString().split("/")[1:])
-            movie.append(filename)
-            list.append(movie)
-        print "tags",self.movielist.tags
-        return list
+	def __init__(self, session, movielist, func=LIST):
+		Source.__init__(self)
+		self.func = func
+		self.session = session
+		self.tagfilter = []
+		self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + resolveFilename(SCOPE_HDD))
+		self.movielist = movielist #MovieList(self.root)
+		self.movielist.load(self.root, None)
+		self.cmd = ""
+		self.res = ( False, "Missing or Wrong Argument" )
 
-    def getText(self):
-        print self.result
-        (result,text) = self.result
-        xml = "<?xml version=\"1.0\"?>\n"
-        xml  += "<e2simplexmlresult>\n"
-        if result:
-            xml += "<e2state>True</e2state>\n"
-        else:
-            xml += "<e2state>False</e2state>\n"            
-        xml += "<e2statetext>%s</e2statetext>\n" % text
-        xml += "</e2simplexmlresult>\n"
-        return xml
-    
-    text = property(getText)        
-    
-    list = property(command)
-    lut = {"ServiceReference": 0
-           ,"Title": 1
-           ,"Description": 2
-           ,"ServiceName": 3
-           ,"Tags": 4
-           ,"DescriptionExtended": 5
-           ,"Filename": 6
-           }
+	def handleCommand(self, cmd):
+		if cmd is not None:
+			self.cmd = cmd
+			if self.func is self.DEL:
+				self.res = self.delMovie(cmd)
+			elif self.func is self.LIST:
+				if cmd['dirname']:
+					self.root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + cmd['dirname'])
+				self.tagfilter = cmd['tag'] and cmd['tag'].split(' ') or []
 
+	def delMovie(self, param):
+#		print "[WebComponents.delMovie] %s" %param
+
+		if param is None:
+			return False, "Missing Parameter: sRef"
+
+		service = ServiceReference(param)
+		result = False
+
+		if service is not None:
+			#mostly copied from Screens.MovieSelection
+			serviceHandler = eServiceCenter.getInstance()
+			offline = serviceHandler.offlineOperations(service.ref)
+			info = serviceHandler.info(service.ref)
+			name = info and info.getName(service.ref) or "this recording"
+
+			if offline is not None:
+				if not offline.deleteFromDisk(0):
+					result = True
+
+			if result == False:
+				return ( result, "Could not delete Movie '%s'" % name )
+			else:
+				return ( result, "Movie '%s' deleted" % name )
+
+		return ( result, "Illegal Parameter Value: sRef - '%s'" % param )
+
+	def getMovieList(self):
+		self.movielist.reload(root=self.root, filter_tags=self.tagfilter)
+		list = []
+
+		tag = self.cmd['tag']
+		tag = tag and tag.lower()
+		for (serviceref, info, begin, unknown) in self.movielist.list:
+			rtime = info.getInfo(serviceref, iServiceInformation.sTimeCreate)
+
+			if rtime > 0:
+				t = FuzzyTime(rtime)
+				begin_string = t[0] + ", " + t[1]
+			else:
+				begin_string = "undefined"
+
+			if config.plugins.Webinterface.loadmovielength.value:
+				len = info.getLength(serviceref)
+				if len > 0:
+					len = "%d:%02d" % (len / 60, len % 60)
+				else:
+					len = "?:??"
+			else:
+				len = "disabled"
+
+			sourceERef = info.getInfoString(serviceref, iServiceInformation.sServiceref)
+			sourceRef = ServiceReference(sourceERef)
+
+			event = info.getEvent(serviceref)
+			ext = event and event.getExtendedDescription() or ""
+
+			filename = "/" + "/".join(serviceref.toString().split("/")[1:])
+			servicename = ServiceReference(serviceref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+			
+			if not tag or tag in info.getInfoString(serviceref, iServiceInformation.sTags).lower():
+				""" add movie only to list, if a given tag is applied to the movie """
+				list.append((
+					serviceref.toString(),
+					servicename,
+					info.getInfoString(serviceref, iServiceInformation.sDescription),
+					rtime,
+					begin_string,
+					len,
+					sourceRef.getServiceName(),
+					info.getInfoString(serviceref, iServiceInformation.sTags),
+					ext,
+					filename,
+					os_stat(filename)[6]
+				))
+		return list
+
+	def getResult(self):
+		if self.func is self.DEL:
+			return self.res
+
+		return ( False, "illegal call" )
+
+	result = property(getResult)
+
+	list = property(getMovieList)
+	lut = {"ServiceReference": 0
+			, "Title": 1
+			, "Description": 2
+			, "Time": 3
+			, "TimeString": 4
+			, "Length": 5
+			, "ServiceName": 6
+			, "Tags": 7
+			, "DescriptionExtended": 8
+			, "Filename": 9
+			, "Filesize": 10
+		}

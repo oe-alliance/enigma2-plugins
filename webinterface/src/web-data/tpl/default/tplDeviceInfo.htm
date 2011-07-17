@@ -1,0 +1,101 @@
+
+<!-- tplDeviceInfo -->
+			<table class="fullwidth">
+				<tr>
+					<td class="fullwidth">
+						<table cellspacing="0" class="about">
+							<tr>
+								<th colspan="2" class="aboutHeader">Device &amp; Versions</th>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">Devicename:</td>
+								<td class="aboutElementRight">${info.devicename}</td>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">Enigma Version:</td>
+								<td class="aboutElementRight">${info.enigmaVersion}</td>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">Image Version:</td>
+								<td class="aboutElementRight">${info.imageVersion}</td>
+							</tr>
+							
+							<tr>
+								<td class="aboutElementLeft">Frontprozessor Version:</td>
+								<td class="aboutElementRight">${info.fpVersion}</td>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">Webinterface Version:</td>
+								<td class="aboutElementRight">${info.webifversion}</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td class="fullwidth">
+						<table cellspacing="0" class="about">
+							<tr>
+								<th colspan="2" class="aboutHeader">Tuners</th>
+							</tr>
+							{for nim in nims}
+							<tr>
+								<td class="aboutElementLeft">${nim.name}:</td>
+								<td class="aboutElementRight">${nim.model}</td>
+							</tr>
+							{/for}
+						</table>
+					</td>
+				</tr>
+				{for hdd in hdds}
+				<tr>
+					<td class="fullwidth">
+						<table cellspacing="0" class="about">																
+							<tr>
+								<th colspan="2" class="aboutHeader">Harddisk (${hdd.model})</th>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">Capacity:</td>
+								<td class="aboutElementRight">${hdd.capacity}</td>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">Free:</td>
+								<td class="aboutElementRight">${hdd.free}</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				{/for}
+				{for nic in nics}
+				<tr>
+					<td class="fullwidth">
+						<table cellspacing="0" class="about">
+							<tr>
+								<th colspan="2" class="aboutHeader">Network Interface (${nic.name})</th>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">Mac Address:</td>
+								<td class="aboutElementRight">${nic.mac}</td>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">DHCP enabled:</td>
+								<td class="aboutElementRight">${nic.dhcp}</td>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">IP:</td>
+								<td class="aboutElementRight">${nic.ip}</td>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">Netmask:</td>
+								<td class="aboutElementRight">${nic.netmask}</td>
+							</tr>
+							<tr>
+								<td class="aboutElementLeft">Gateway:</td>
+								<td class="aboutElementRight">${nic.gateway}</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				{/for}
+			</table>
+
+<!-- /tplDeviceInfo -->

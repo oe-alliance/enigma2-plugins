@@ -93,7 +93,7 @@ function addTimerFormChangeChannel(newchannel) {
 		// bouquet selected, update menu
 		servicereftoloadepgnow = service.servicereference;
 		if (typeof (loadedChannellist[servicereftoloadepgnow]) == "undefined") {
-			doRequest(URL.getservices + '?sRef=' + servicereftoloadepgnow,
+			doRequest(URL.getservices + servicereftoloadepgnow,
 					incomingAddTimerFormChangeChannel, true);
 		} else {
 			incomingAddTimerFormChangeChannel();
@@ -223,8 +223,7 @@ function incomingTimerAddResult(request) {
 }
 
 function loadTimerList() {
-//	doRequest(URL.timerlist, incomingTimerList, false);
-	timerListHandler.load({});
+	doRequest(URL.timerlist, incomingTimerList, false);
 }
 
 function incomingTimerList(request) {
@@ -414,7 +413,7 @@ function loadTimerFormChannels() {
 			addTimerEditFormArray.RadioListFilled === 0) {
 		addTimerListFormatTV();
 	} else {
-		doRequest(URL.getservices + '?sRef=' + encodeURIComponent(bouquetsTv),
+		doRequest(URL.getservices + "sRef=" + encodeURIComponent(bouquetsTv),
 				addTimerListFormatTV, false);
 	}
 }
@@ -437,7 +436,7 @@ function addTimerListFormatTV(request) {
 	if (addTimerEditFormArray.RadioListFilled == 1) {
 		loadTimerForm();
 	} else {
-		doRequest(URL.getservices + '?sRef=' + encodeURIComponent(bouquetsRadio),
+		doRequest(URL.getservices + encodeURIComponent(bouquetsRadio),
 				addTimerListFormatRadio, false);
 	}
 }
@@ -505,7 +504,7 @@ function loadTimerForm() {
 	var tagsObject = addTimerFormPrepareTagsMenu(addTimerEditFormArray.tags);
 
 	var namespace = {
-		'year' : createOptions(2010, 2015, addTimerEditFormArray.year),
+		'year' : createOptions(2009, 2015, addTimerEditFormArray.year),
 		'month' : createOptions(1, 12, addTimerEditFormArray.month),
 		'day' : createOptions(1, 31, addTimerEditFormArray.day),
 		'shour' : createOptions(0, 23, addTimerEditFormArray.shour),
@@ -579,10 +578,17 @@ function createOptionList(object, selected) {
 function createOptionListRepeated(Repeated, repeated) {
 	var num = Number(repeated);
 
-	var list = [ 1, 2, 4, 8, 16, 32, 64];
+	var list = [ 1, 2, 4, 8, 16, 32, 64, 31, 127 ];
 	var namespace = [];
-	
-	
+	var checked = [];
+
+	for ( var i = 0; i < list.length; i++) {
+		checked[i] = " ";
+		if (!(~num & list[list.length - 1 - i])) {
+			num -= list[list.length - 1 - i];
+			checked[i] = "checked";
+		}
+	}
 	for ( var i = 0; i < list.length; i++) {
 		var txt = String(Repeated[String(list[i])]);
 		if (String(Repeated[String(list[i])]) == "mf") {
@@ -592,22 +598,12 @@ function createOptionListRepeated(Repeated, repeated) {
 		} else {
 			txt = txt.substr(0, 1).toUpperCase() + txt.substr(1, 1);
 		}
-		
-		var checked = "";
-		//set the checkbox checked when last bit is 1
-		if(num &1 == 1){
-			checked = "checked";
-		}
-		
-		// shift one bit to the right
-		num = num >> 1;
-		
 		namespace[i] = {
 			'id' : Repeated[String(list[i])],
 			'name' : Repeated[String(list[i])],
 			'value' : list[i],
 			'txt' : txt,
-			'checked' : checked
+			'checked' : checked[list.length - 1 - i]
 		};
 	}
 	return namespace;

@@ -1,0 +1,29 @@
+
+<!-- tplBouquetList -->	
+									<table id="bouquetTable">
+										{for bouquet in bouquets}
+										<tr><td>
+											<table>
+												<tr>
+													<td>
+														<a target="_blank" onclick="return parentPin( '${bouquet.servicereference}' );" href="/web/services.m3u?bRef=${bouquet.servicereference}">
+															<img src="/web-data/img/screen.png" title="Open ${bouquet.servicename} as Playlist" border="0">
+														</a>
+													</td>									
+													<td>										
+														<div class="sListSName">
+															<a href="#" id="${bouquet.servicereference}" onclick="{ loadBouquet(this.id, this.innerHTML); }" class="sListSLink" title="Load Bouquet ${bouquet.servicename}">
+																${bouquet.servicename}
+															</a>
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td></tr>
+										{forelse}
+										<tr><td>
+											<table><tr><td>No Bouquets to Display</td></tr></table>
+										</td></tr>
+										{/for}		
+									</table>
+<!-- /tplBouquetList -->

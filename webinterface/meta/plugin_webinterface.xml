@@ -1,0 +1,19 @@
+<default>
+	  <prerequisites>
+                    <tag type="Network" />
+                    <tag type="System" />
+                    <tag type="Multimedia" />
+	  </prerequisites>
+          <info>
+                    <author>Reichi</author>
+                    <name>WebInterface</name>
+                    <packagename>enigma2-plugin-extensions-webinterface</packagename>
+                    <shortdescription>Control your Dreambox with your browser</shortdescription>
+                    <description>Control your Dreambox with your Web browser.</description>
+                    <screenshot src="http://www.dreamboxupdate.com/preview/plugin_webinterface.jpg" />		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-webinterface" />
+	  </files>
+</default>

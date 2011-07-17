@@ -95,7 +95,11 @@ var AbstractContentHandler = Class.create({
 	 */
 	finished : function(){
 		if(!this.eventsRegistered){
-			this.registerEvents();
+			try{
+				this.registerEvents();
+			} catch (e){
+				debug(e);
+			}
 			this.eventsRegistered = true;
 		}
 		
@@ -113,7 +117,7 @@ var AbstractContentHandler = Class.create({
 var ServiceListHandler = Class.create(AbstractContentHandler, {
 	initialize: function($super, target){
 		$super('tplServiceList', target, [this.getNowNext.bind(this),this.getSubservices.bind(this)]);
-		//TODO ServiceListEpg-/ServiceListSubserviceHandler
+
 		this.provider = new ServiceListProvider(this.show.bind(this));
 		this.epgHandler = new ServiceListEpgHandler();
 		this.subServiceHandler = new ServiceListSubserviceHandler();
@@ -186,6 +190,30 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 		);
 		
 	}	
+});
+
+var ServiceEpgListHandler = Class.create(AbstractContentHandler,{
+	initialize: function($super){
+		$super('tplEpgList');
+		this.provider = new ServiceEpgListProvider(this.show.bind(this));
+		this.window = '';
+		this.data = '';
+	},
+	
+	show : function(data){
+		this.data = data;
+		fetchTpl(this.tpl, this.showEpg.bind(this));		
+	},
+	
+	showEpg: function(){
+		var html = templates[this.tpl].process(this.data);
+
+		if (!this.window.closed && this.window.location) {
+			setWindowContent(this.window, html);
+		} else {
+			this.window = openPopup("EPG", html, 900, 500);
+		}
+	}
 });
 
 var ServiceListEpgHandler  = Class.create(AbstractContentHandler, {
@@ -327,21 +355,36 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 	 */
 	initialize: function($super, target){
 		$super('tplTimerEdit', target);
-		
+		this.t = {};
 		this.ajaxload = true;
 	},
 	
 	/**
-	 * @override
-	 * load
-	 * When handling timers the whole loading-sequence is entirely different.
-	 * Most of the data is already there or has to be created.
+	 * getData
+	 * 
+	 * Extracts the data of a timer from the .tListItem elements data-* attributes
+	 * 
+	 * <tr class="tListItem"							
+	 * 	data-servicereference="${t.servicereference}"
+	 * 	data-servicename="${t.servicename}"
+	 * 	data-description="${t.description}"
+	 * 	data-title="${t.title}"
+	 * 	data-eventid="${t.eventid}"
+	 * 	data-begin="${t.begin}"
+	 * 	data-end="${t.end}"
+	 * 	data-repeated="${t.repeated}"
+	 * 	data-justplay="${t.justplay}"
+	 * 	data-dirname="${t.dirname}"
+	 * 	data-tags="${t.tags}"
+	 * 	data-afterevent="${t.afterevent}"
+	 * 	data-disabled="${t.disabled}"
+	 * >
 	 * 
 	 * Parameters:
 	 * @element - the html element calling the load function ( onclick="TimerProvider.load(this)" )
 	 */
-	load : function(element){
-		var parent = element.up('.tListItem');
+	getData: function(tListItem){
+		var parent = tListItem.up('.tListItem');
 		
 		var t = {
 				servicereference : parent.readAttribute('data-servicereference'),
@@ -357,7 +400,21 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				afterevent : parent.readAttribute('data-afterevent'),
 				disabled : parent.readAttribute('data-disabled')				
 		};
-
+		
+		return t;
+	},
+	
+	/**
+	 * @override
+	 * load
+	 * When handling timers the whole loading-sequence is entirely different.
+	 * Most of the data is already there or has to be created.
+	 * 
+	 * Parameters:
+	 * @element - the html element calling the load function ( onclick="TimerProvider.load(this)" )
+	 */
+	load : function(element){
+		var t = this.getData(element);
 			
 		var begin = new Date(t.begin * 1000);
 		var end = new Date(t.end * 1000);	
@@ -397,8 +454,10 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 				timer : t };
 		
 		this.show(data);
-		
-		
+	},
+	
+	toggleDisabled: function(element){
+		//TODO implement toggleDisabled
 	},
 	
 	/**
@@ -549,6 +608,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 
 //create required Instances
 var serviceListHandler = new ServiceListHandler('contentServices');
+var serviceEpgListHandler = new ServiceEpgListHandler();
 var movieListHandler = new MovieListHandler('contentMain');
 var timerListHandler = new TimerListHandler('contentMain');
 var timerHandler = new TimerHandler('contentMain');

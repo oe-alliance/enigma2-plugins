@@ -1,7 +1,7 @@
 
 <!-- tplServiceListEPGItem -->	
 	{if epg.title != 'None'}
-	<a href="#" class="sListEPG" data-target_id="trExt${nownext}${epg.servicereference}" title="Click to show/hide extended Description">
+	<a href="#" onclick="showhide('trExt${nownext}${epg.servicereference}')" title="Click to show/hide extended Description">
 		<table cellspacing="0">
 			<tr>
 				<td class="epgStart">${epg.starttime}</td>

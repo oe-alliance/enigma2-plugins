@@ -1,0 +1,100 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - webinterface\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-22 19:20+0100\n"
+"PO-Revision-Date: 2011-01-22 19:22+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/webinterface\n"
+"X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/webinterface\n"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:34
+msgid "Cancel"
+msgstr "Annull."
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:35
+msgid "OK"
+msgstr "Ok"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:60
+msgid "Start Webinterface"
+msgstr "Avviare Interfaccia web"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:61
+msgid "Enable /media"
+msgstr "Abilitare /media"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:62
+msgid "Allow zapping via Webinterface"
+msgstr "Consentire zapping via webif"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:63
+msgid "Autowrite timer"
+msgstr "Scrittura automatica timer"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:64
+msgid "Load movie-length"
+msgstr "Caricare durata registrazioni"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:65
+msgid "Enable HTTP Access"
+msgstr "Abilitare accesso HTTP"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:70
+msgid "HTTP Port"
+msgstr "Porta HTTP"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:71
+msgid "Enable HTTP Authentication"
+msgstr "Abilitare autenticazione HTTP"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:76
+msgid "Enable HTTPS Access"
+msgstr "Abilitare accesso HTTPS"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:80
+msgid "HTTPS Port"
+msgstr "Porta HTTPS"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:81
+msgid "Enable HTTPS Authentication"
+msgstr "Abilitare autenticazione HTTPS"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:87
+msgid "Enable Streaming Authentication"
+msgstr "Abilitare autenticazione streaming"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebIfConfig.py:93
+msgid "Webinterface: Main Setup"
+msgstr "Interfaccia web - Configurazione"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/plugin.py:607
+msgid "Webinterface"
+msgstr "Webinterface"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/plugin.py:607
+msgid "Configuration for the Webinterface"
+msgstr "Configurazione Interfaccia web"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebComponents/Converter/HddInfo.py:32
+msgid "N/A"
+msgstr "N/A"
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:52
+msgid "The sleep timer has been disabled."
+msgstr "Sleep timer disattivato."
+
+#: /media/TREKSTOR/git/enigma2-plugins/webinterface/src/WebComponents/Sources/SleepTimer.py:92
+#, python-format
+msgid "The sleep timer has been activated for %s minutes."
+msgstr "Sleep timer è stato attivato per %s minuti.."
+

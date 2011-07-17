@@ -13,7 +13,7 @@ function url() {
 	this.volumedown = '/web/vol?set=down';
 	this.volumemute = '/web/vol?set=mute';
 	
-	this.epgservice = "/web/epgservice?sRef="; // plus serviceRef
+	this.epgservice = "/web/epgservice"; // plus serviceRef
 	this.epgsearch = "/web/epgsearch?search="; // plus serviceRef
 	this.epgservicenow = "/web/epgservicenow?sRef="; // plus serviceRef
 	this.epgservicenext = "/web/epgservicenext?sRef="; // plus serviceRef
