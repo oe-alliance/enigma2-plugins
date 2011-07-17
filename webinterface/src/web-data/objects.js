@@ -362,7 +362,7 @@ function Movie(xml, cssclass){
 	}
 	
 	this.json = {
-			'servicereference': escape(this.getServiceReference()),
+			'servicereference': this.getServiceReference(),
 			'servicename': this.getServiceName(),
 			'title': this.getTitle(),
 			'escapedTitle': escape(this.getTitle()),
