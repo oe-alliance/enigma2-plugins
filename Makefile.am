@@ -75,6 +75,7 @@ SUBDIRS = \
 	serienfilm \
 	setpasswd \
 	shoutcast \
+	showclock \
 	simplerss \
 	startupservice \
 	startuptostandby \

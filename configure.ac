@@ -419,6 +419,11 @@ shoutcast/meta/Makefile
 shoutcast/po/Makefile
 shoutcast/src/Makefile
 
+showclock/Makefile
+showclock/meta/Makefile
+showclock/po/Makefile
+showclock/src/Makefile
+
 simplerss/Makefile
 simplerss/meta/Makefile
 simplerss/po/Makefile
