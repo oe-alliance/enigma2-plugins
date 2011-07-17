@@ -198,13 +198,15 @@ class ShowClockSetup(Screen, ConfigListScreen): # config
 	def createSummary(self):
 		return SetupSummary
 		
-	def keyHelp(self):            
+	def keyHelp(self):
+		self.hideKeypad() # close help window if open
 		self.session.open(MessageBox,
 			_('Modify the settings to match your preferences. To change the clock position, select "Move clock" and relocate using the direction keys. Press OK to store current position and return to the setup menu or EXIT to cancel the moving.\n\nPush key "Exit long" to show the clock while watching TV. Clock will disappear after the specified timeout or by pushing key "Exit long" again.\n\nIf GP3 is installed, weekday shows up in selected language, otherwise always in english.'), 
 			MessageBox.TYPE_INFO)
 		
 	def keyMove(self):            
 		if debug: print pluginPrintname, "Move Clock"
+		self.hideKeypad() # close help window if open
 		self.session.openWithCallback(
 			self.startPositioner, MessageBox,
 			_("Please use direction keys to move the clock.\n\nPress OK to store current position and return to the setup menu or EXIT to cancel the moving."),
