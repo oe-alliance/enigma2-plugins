@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 #
 #  Show Clock E2
 #
 #  $Id$
 #
-#  Coded by JuSt611 � 2011
+#  Coded by JuSt611 © 2011
 #  Derived from Permanent Clock plugin written by AliAbdul
 #  and placed in the public domain. He has my thanks.
 #  Support: http://www.i-have-a-dreambox.com/wbb2/thread.php?threadid=???
@@ -61,9 +61,10 @@ from Screens.Setup import SetupSummary
 
 
 ###############################################################################        
-VERSION = "0.4"
+VERSION = "0.5"
 # History:
 # 0.4 First public version
+# 0.5 Minor code optimization
 
 pluginPrintname = "[ShowClock Ver. %s]" %VERSION
 debug = False # If set True, plugin will print some additional status info to track logic flow
@@ -313,53 +314,46 @@ showClock = ShowClockMain()
 ##############################################################################
 
 def clockSkin():
-
-	clockSkinSD = """
-		<screen name="ShowClock" size="190,60" zPosition="10" backgroundColor="#50202020" flags="wfNoBorder">
-			<widget source="global.CurrentTime" render="Label" position="55,12" size="58,17" font="Regular;21" halign="left" valign="center" transparent="1">
-				<convert type="ClockToText">Default</convert>
-			</widget>
-			<widget source="global.CurrentTime" render="Label" position="111,15" size="30,15" font="Regular;16" halign="left" valign="center" transparent="1">
-				<convert type="ClockToText">Format::%S</convert>
-			</widget>
-			<widget source="global.CurrentTime" render="Label" position="0,37" size="190,13" font="Regular;15" halign="center" valign="center" foregroundColor="#999999" transparent="1">
-				<convert type="ClockToText">Format:%A, %d.%m.%Y</convert>		
-			</widget>
-		</screen>"""
-		
-	clockSkinXD = """
-		<screen name="ShowClock" size="250,70" zPosition="10" backgroundColor="#50202020" flags="wfNoBorder">
-			<widget source="global.CurrentTime" render="Label" position="80,10" size="80,25" font="Regular;24" halign="left" valign="center" transparent="1">
-				<convert type="ClockToText">Default</convert>
-			</widget>
-			<widget source="global.CurrentTime" render="Label" position="142,15" size="40,18" font="Regular;20" halign="left" valign="center" transparent="1">
-				<convert type="ClockToText">Format::%S</convert>
-			</widget>
-			<widget source="global.CurrentTime" render="Label" position="0,40" size="250,25" font="Regular;19" halign="center" valign="center" foregroundColor="#999999" transparent="1">
-				<convert type="ClockToText">Format:%A, %d.%m.%Y</convert>		
-			</widget>
-		</screen>"""
-
-	clockSkinHD = """      
-		<screen name="ShowClock" size="280,80" zPosition="10" backgroundColor="#50202020" flags="wfNoBorder">
-			<widget source="global.CurrentTime" render="Label" position="85,15" size="80,25" font="Regular;30" halign="left" valign="center" transparent="1">
-				<convert type="ClockToText">Default</convert>
-			</widget>
-			<widget source="global.CurrentTime" render="Label" position="162,20" size="40,18" font="Regular;24" halign="left" valign="center" transparent="1">
-				<convert type="ClockToText">Format::%S</convert>
-			</widget>
-			<widget source="global.CurrentTime" render="Label" position="0,45" size="280,30" font="Regular;23" halign="center" valign="center" foregroundColor="#999999" transparent="1">
-				<convert type="ClockToText">Format:%A, %d.%m.%Y</convert>		
-			</widget>
-		</screen>"""
- 
 	if width < 1280:
-		if width < 1024:
-			currentSkin = clockSkinSD
-		else:
-			currentSkin = clockSkinXD
-	else:		
-		currentSkin = clockSkinHD
+		if width < 1024: # SD
+			currentSkin = """
+				<screen name="ShowClock" size="190,60" zPosition="10" backgroundColor="#50202020" flags="wfNoBorder">
+					<widget source="global.CurrentTime" render="Label" position="55,12" size="58,17" font="Regular;21" halign="left" valign="center" transparent="1">
+						<convert type="ClockToText">Default</convert>
+					</widget>
+					<widget source="global.CurrentTime" render="Label" position="111,15" size="30,15" font="Regular;16" halign="left" valign="center" transparent="1">
+						<convert type="ClockToText">Format::%S</convert>
+					</widget>
+					<widget source="global.CurrentTime" render="Label" position="0,37" size="190,13" font="Regular;15" halign="center" valign="center" foregroundColor="#999999" transparent="1">
+						<convert type="ClockToText">Format:%A, %d.%m.%Y</convert>		
+					</widget>
+				</screen>"""
+		else: # XD
+			currentSkin = """
+				<screen name="ShowClock" size="250,70" zPosition="10" backgroundColor="#50202020" flags="wfNoBorder">
+					<widget source="global.CurrentTime" render="Label" position="80,10" size="80,25" font="Regular;24" halign="left" valign="center" transparent="1">
+						<convert type="ClockToText">Default</convert>
+					</widget>
+					<widget source="global.CurrentTime" render="Label" position="142,15" size="40,18" font="Regular;20" halign="left" valign="center" transparent="1">
+						<convert type="ClockToText">Format::%S</convert>
+					</widget>
+					<widget source="global.CurrentTime" render="Label" position="0,40" size="250,25" font="Regular;19" halign="center" valign="center" foregroundColor="#999999" transparent="1">
+						<convert type="ClockToText">Format:%A, %d.%m.%Y</convert>		
+					</widget>
+				</screen>"""
+	else: # HD
+		currentSkin = """      
+				<screen name="ShowClock" size="280,80" zPosition="10" backgroundColor="#50202020" flags="wfNoBorder">
+					<widget source="global.CurrentTime" render="Label" position="85,15" size="80,25" font="Regular;30" halign="left" valign="center" transparent="1">
+						<convert type="ClockToText">Default</convert>
+					</widget>
+					<widget source="global.CurrentTime" render="Label" position="162,20" size="40,18" font="Regular;24" halign="left" valign="center" transparent="1">
+						<convert type="ClockToText">Format::%S</convert>
+					</widget>
+					<widget source="global.CurrentTime" render="Label" position="0,45" size="280,30" font="Regular;23" halign="center" valign="center" foregroundColor="#999999" transparent="1">
+						<convert type="ClockToText">Format:%A, %d.%m.%Y</convert>		
+					</widget>
+				</screen>"""
 		
 	try: # try to import DateToText converter (GP3 component) to check for its existence
 		from Components.Converter.DateToText import DateToText # change converter to obtain localized weekdays
