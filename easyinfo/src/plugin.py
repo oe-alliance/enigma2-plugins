@@ -96,7 +96,7 @@ config.plugins.EasyInfo.pos11 = ConfigSelection(default="no", choices = CHOICELI
 config.plugins.EasyInfo.EvInStart = ConfigSelection(default="yes", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.EasyInfo.bEvInYellow = ConfigSelection(default="singleepg", choices=[("singleepg", _("Single EPG")),("multiepg", _("Multi EPG")),("easypg", _("Easy-PG")),("graphepg", _("Graphik multi-EPG")),("merlinepg", _("Merlin EPG")),("cooltv", _("Cool-TV")),("imdbinfo", _("IMDB info"))])
 config.plugins.EasyInfo.bEvInBlue = ConfigSelection(default="multiepg", choices=[("singleepg", _("Single EPG")),("multiepg", _("Multi EPG")),("easypg", _("Easy-PG")),("graphepg", _("Graphik multi-EPG")),("merlinepg", _("Merlin EPG")),("cooltv", _("Cool-TV")),("imdbinfo", _("IMDB info"))])
-config.plugins.EasyInfo.myPicons = ConfigSelection(default="/media/usb/epgpicon/", choices = [("/media/usb/epgpicon/", "/media/usb/epgpicon/"), ("/media/cf/epgpicon/", "/media/cf/epgpicon/"), ("/media/hdd/epgpicon/", "/media/hdd/epgpicon/")])
+config.plugins.EasyInfo.myPicons = ConfigSelection(default="/media/usb/epgpicon/", choices = [("/media/usb/epgpicon/", "/media/usb/epgpicon/"), ("/media/cf/epgpicon/", "/media/cf/epgpicon/"), ("/media/hdd/epgpicon/", "/media/hdd/epgpicon/"), ("/usr/share/enigma2/epgpicon/", "/usr/share/enigma2/epgpicon/")])
 config.plugins.EasyInfo.epgOKFunc = ConfigSelection(default="info", choices = [("info", _("Event info")), ("zap", _("Just zap")),("exitzap", _("Zap and Exit"))])
 config.plugins.EasyInfo.Primetime1 = ConfigClock(default = 63000)
 config.plugins.EasyInfo.Primetime2 = ConfigClock(default = 69300)
