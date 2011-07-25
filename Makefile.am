@@ -91,6 +91,7 @@ SUBDIRS = \
 	vps \
 	weatherplugin \
 	webcamviewer \
+	webbouqueteditor \
 	webinterface \
 	werbezapper \
 	youtubeplayer \
