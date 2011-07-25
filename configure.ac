@@ -71,6 +71,11 @@ audiosync/meta/Makefile
 audiosync/po/Makefile
 audiosync/src/Makefile
 
+automaticcleanup/Makefile
+automaticcleanup/meta/Makefile
+automaticcleanup/po/Makefile
+automaticcleanup/src/Makefile
+
 automatictimerlistcleanup/Makefile
 automatictimerlistcleanup/meta/Makefile
 automatictimerlistcleanup/po/Makefile
