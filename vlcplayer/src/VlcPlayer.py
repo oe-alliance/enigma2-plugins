@@ -27,6 +27,7 @@ from Components.Sources.Source import Source
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import ActionMap
 from Components.config import config
+from Components.Label import Label
 
 
 def isValidServiceId(id):
