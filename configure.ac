@@ -88,6 +88,7 @@ automaticvolumeadjustment/src/Makefile
 autoresolution/Makefile
 autoresolution/meta/Makefile
 autoresolution/src/Makefile
+autoresolution/po/Makefile
 
 autotimer/Makefile
 autotimer/meta/Makefile
@@ -129,6 +130,10 @@ dvdbackup/src/Makefile
 dyndns/Makefile
 dyndns/src/Makefile
 dyndns/meta/Makefile
+
+easyinfo/Makefile
+easyinfo/meta/Makefile
+easyinfo/src/Makefile
 
 easymedia/Makefile
 easymedia/meta/Makefile
@@ -213,6 +218,7 @@ kiddytimer/src/Makefile
 
 lastfm/Makefile
 lastfm/meta/Makefile
+lastfm/po/Makefile
 lastfm/src/Makefile
 
 letterbox/Makefile
@@ -228,6 +234,10 @@ mediadownloader/Makefile
 mediadownloader/meta/Makefile
 mediadownloader/po/Makefile
 mediadownloader/src/Makefile
+
+menusort/Makefile
+menusort/meta/Makefile
+menusort/src/Makefile
 
 merlinepg/Makefile
 merlinepg/meta/Makefile
@@ -263,6 +273,10 @@ movieretitle/meta/Makefile
 movieretitle/po/Makefile
 movieretitle/src/Makefile
 
+moviesearch/Makefile
+moviesearch/meta/Makefile
+moviesearch/src/Makefile
+
 movieselectionquickbutton/Makefile
 movieselectionquickbutton/meta/Makefile
 movieselectionquickbutton/po/Makefile
@@ -271,7 +285,16 @@ movieselectionquickbutton/src/Makefile
 movietagger/Makefile
 movietagger/etc/Makefile
 movietagger/meta/Makefile
+movietagger/po/Makefile
 movietagger/src/Makefile
+
+movieepg/Makefile
+movieepg/meta/Makefile
+movieepg/src/Makefile
+
+mphelp/Makefile
+mphelp/meta/Makefile
+mphelp/src/Makefile
 
 multirc/Makefile
 multirc/src/Makefile
@@ -280,6 +303,11 @@ multirc/meta/Makefile
 mytube/Makefile
 mytube/meta/Makefile
 mytube/src/Makefile
+
+namezap/Makefile
+namezap/meta/Makefile
+namezap/po/Makefile
+namezap/src/Makefile
 
 netcaster/Makefile
 netcaster/meta/Makefile
@@ -329,6 +357,20 @@ permanentclock/meta/Makefile
 permanentclock/po/Makefile
 permanentclock/src/Makefile
 
+pipzap/Makefile
+pipzap/meta/Makefile
+pipzap/src/Makefile
+
+pluginhider/Makefile
+pluginhider/meta/Makefile
+pluginhider/po/Makefile
+pluginhider/src/Makefile
+
+pluginsort/Makefile
+pluginsort/meta/Makefile
+pluginsort/po/Makefile
+pluginsort/src/Makefile
+
 podcast/Makefile
 podcast/etc/Makefile
 podcast/meta/Makefile
@@ -366,6 +408,12 @@ seekbar/meta/Makefile
 seekbar/po/Makefile
 seekbar/src/Makefile
 
+serienfilm/Makefile
+serienfilm/meta/Makefile
+serienfilm/po/Makefile
+serienfilm/src/Makefile
+serienfilm/src/icons/Makefile
+
 setpasswd/Makefile
 setpasswd/meta/Makefile
 setpasswd/po/Makefile
@@ -375,6 +423,11 @@ shoutcast/Makefile
 shoutcast/meta/Makefile
 shoutcast/po/Makefile
 shoutcast/src/Makefile
+
+showclock/Makefile
+showclock/meta/Makefile
+showclock/po/Makefile
+showclock/src/Makefile
 
 simplerss/Makefile
 simplerss/meta/Makefile
@@ -390,6 +443,10 @@ startuptostandby/Makefile
 startuptostandby/meta/Makefile
 startuptostandby/src/Makefile
 
+svdrp/Makefile
+svdrp/meta/Makefile
+svdrp/src/Makefile
+
 tageditor/Makefile
 tageditor/meta/Makefile
 tageditor/po/Makefile
@@ -402,7 +459,6 @@ trafficinfo/src/Makefile
 tvcharts/Makefile
 tvcharts/meta/Makefile
 tvcharts/src/Makefile
-tvcharts/src/images/Makefile
 
 unwetterinfo/Makefile
 unwetterinfo/meta/Makefile
@@ -425,6 +481,12 @@ vlcplayer/po/Makefile
 vlcplayer/src/Makefile
 vlcplayer/src/servicets/Makefile
 
+vps/Makefile
+vps/meta/Makefile
+vps/po/Makefile
+vps/src_cc/Makefile
+vps/src_py/Makefile
+
 weatherplugin/Makefile
 weatherplugin/meta/Makefile
 weatherplugin/po/Makefile
@@ -433,6 +495,16 @@ weatherplugin/src/Makefile
 webcamviewer/Makefile
 webcamviewer/meta/Makefile
 webcamviewer/src/Makefile
+
+webbouqueteditor/Makefile
+webbouqueteditor/src/Makefile
+webbouqueteditor/meta/Makefile
+webbouqueteditor/src/web/Makefile
+webbouqueteditor/src/web-data/Makefile
+webbouqueteditor/src/WebChilds/Makefile
+webbouqueteditor/src/WebComponents/Makefile
+webbouqueteditor/src/WebComponents/Sources/Makefile
+webbouqueteditor/src/WebScreens/Makefile
 
 webinterface/Makefile
 webinterface/meta/Makefile
@@ -448,7 +520,6 @@ webinterface/src/web-data/lib/Makefile
 webinterface/src/web-data/tpl/Makefile
 webinterface/src/web-data/tpl/default/Makefile
 webinterface/src/web-data/tpl/default/streaminterface/Makefile
-webinterface/src/web-data/tpl/default/streaminterface/img/Makefile
 webinterface/src/WebChilds/Makefile
 webinterface/src/WebChilds/External/Makefile
 webinterface/src/WebComponents/Makefile

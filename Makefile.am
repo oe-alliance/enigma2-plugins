@@ -17,6 +17,7 @@ SUBDIRS = \
 	dreammediathek \
 	dvdbackup \
 	dyndns \
+	easyinfo \
 	easymedia \
 	eibox \
 	elektro \
@@ -37,6 +38,7 @@ SUBDIRS = \
 	letterbox \
 	logomanager \
 	mediadownloader \
+	menusort \
 	merlinepg \
 	merlinmusicplayer \
 	meteoitalia \
@@ -44,10 +46,14 @@ SUBDIRS = \
 	moviecut \
 	movielistpreview \
 	movieretitle \
+	moviesearch \
 	movieselectionquickbutton \
 	movietagger \
+	movieepg \
+	mphelp \
 	multirc \
 	mytube \
+	namezap \
 	ncidclient \
 	netcaster \
 	networkbrowser \
@@ -57,6 +63,9 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
+	pipzap \
+	pluginhider \
+	pluginsort \
 	podcast \
 	porncenter \
 	quickbutton \
@@ -64,11 +73,14 @@ SUBDIRS = \
 	remotetimer \
 	rsdownloader \
 	seekbar \
+	serienfilm \
 	setpasswd \
 	shoutcast \
+	showclock \
 	simplerss \
 	startupservice \
 	startuptostandby \
+	svdrp \
 	tageditor \
 	trafficinfo \
 	tvcharts \
@@ -76,6 +88,7 @@ SUBDIRS = \
 	valixdcontrol \
 	virtualzap \
 	vlcplayer \
+	vps \
 	weatherplugin \
 	webcamviewer \
 	webinterface \
