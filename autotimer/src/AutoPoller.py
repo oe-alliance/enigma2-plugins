@@ -51,6 +51,14 @@ class AutoPoller:
 					5,
 					NOTIFICATIONID
 				)
+			similars = ret[5]
+			if similars and config.plugins.autotimer.notifsimilar.value:
+				AddPopup(
+					_("%d conflict(s) solved with similar timer(s):\n%s") % (len(similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in similars])),
+					MessageBox.TYPE_INFO,
+					5,
+					NOTIFICATIONID
+				)
 
 		self.timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
 

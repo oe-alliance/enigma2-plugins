@@ -37,7 +37,7 @@ class AutoTimerDoParseResource(AutoTimerBaseResource):
 	def render(self, req):
 		autotimer = self.getAutoTimerInstance()
 		ret = autotimer.parseEPG()
-		output = _("Found a total of %d matching Events.\n%d Timer were added and %d modified.") % (ret[0], ret[1], ret[2])
+		output = _("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered, %d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5]))
 
 		if self._remove:
 			autotimer.writeXml()
@@ -286,12 +286,16 @@ class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 				config.plugins.autotimer.editor.value = value
 			elif key == "disabled_on_conflict":
 				config.plugins.autotimer.disabled_on_conflict.value = True if value == "true" else False
+			elif key == "addsimilar_on_conflict":
+				config.plugins.autotimer.addsimilar_on_conflict.value = True if value == "true" else False
 			elif key == "show_in_extensionsmenu":
 				config.plugins.autotimer.show_in_extensionsmenu.value = True if value == "true" else False
 			elif key == "fastscan":
 				config.plugins.autotimer.fastscan.value = True if value == "true" else False
 			elif key == "notifconflict":
 				config.plugins.autotimer.notifconflict.value = True if value == "true" else False
+			elif key == "notifsimilar":
+				config.plugins.autotimer.notifsimilar.value = True if value == "true" else False
 
 		if config.plugins.autotimer.autopoll.value:
 			if plugin.autopoller is None:
@@ -352,6 +356,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.addsimilar_on_conflict</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>config.plugins.autotimer.show_in_extensionsmenu</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
@@ -364,6 +372,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
 	<e2setting>
+		<e2settingname>config.plugins.autotimer.notifsimilar</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
+	<e2setting>
 		<e2settingname>hasVps</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
@@ -373,9 +385,11 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.refresh.value,
 				config.plugins.autotimer.try_guessing.value,
 				config.plugins.autotimer.editor.value,
+				config.plugins.autotimer.addsimilar_on_conflict,
 				config.plugins.autotimer.disabled_on_conflict.value,
 				config.plugins.autotimer.show_in_extensionsmenu.value,
 				config.plugins.autotimer.fastscan.value,
 				config.plugins.autotimer.notifconflict.value,
+				config.plugins.autotimer.notifsimilar.value,
 				hasVps,
 			)

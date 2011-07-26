@@ -28,10 +28,12 @@ config.plugins.autotimer.editor = ConfigSelection(choices = [
 		("wizard", _("Wizard"))
 	], default = "wizard"
 )
+config.plugins.autotimer.addsimilar_on_conflict = ConfigEnableDisable(default = False)
 config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default = False)
 config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.autotimer.fastscan = ConfigYesNo(default = False)
 config.plugins.autotimer.notifconflict = ConfigYesNo(default = True)
+config.plugins.autotimer.notifsimilar = ConfigYesNo(default = True)
 config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default = 0)
 config.plugins.autotimer.show_help = ConfigYesNo(default = True)
 
@@ -128,7 +130,7 @@ def editCallback(session):
 		ret = autotimer.parseEPG()
 		session.open(
 			MessageBox,
-			_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered.") % (ret[0], ret[1], ret[2], len(ret[4])),
+			_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered, %d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
 			type = MessageBox.TYPE_INFO,
 			timeout = 10
 		)
