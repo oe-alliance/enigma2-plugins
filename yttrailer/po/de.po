@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 msgid "Extended search filter"
-msgstr "Erweiteter Suchfilter"
+msgstr "Erweiterter Suchfilter"
 
 msgid "Best resolution"
 msgstr "Beste Auflösung"
