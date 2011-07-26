@@ -92,7 +92,7 @@ class PermanentClockPositioner(Screen):
 		Screen.__init__(self, session)
 		self.skin = SKIN
 		
-		self["actions"] = ActionMap(["WizardActions"],
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions"],
 		{
 			"left": self.left,
 			"up": self.up,
