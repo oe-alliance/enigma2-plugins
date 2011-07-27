@@ -110,10 +110,11 @@ def showConfig(self):
 def showTrailer(self):
 	eventname = ""
 	if isinstance(self, EventViewBase):
-		eventname = self.event.getEventName()
+		if self.event:
+			eventname = self.event.getEventName()
 	else:
 		cur = self["list"].getCurrent()
-		if cur:
+		if cur and cur[0]:
 			event = cur[0]
 			eventname = event.getEventName()
 
@@ -123,10 +124,11 @@ def showTrailer(self):
 def showTrailerList(self):
 	eventname = ""
 	if isinstance(self, EventViewBase):
-		eventname = self.event.getEventName()
+		if self.event:
+			eventname = self.event.getEventName()
 	else:
 		cur = self["list"].getCurrent()
-		if cur:
+		if cur and cur[0]:
 			event = cur[0]
 			eventname = event.getEventName()
 
