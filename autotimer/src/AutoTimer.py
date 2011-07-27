@@ -306,15 +306,20 @@ class AutoTimer:
 								info = serviceHandler.info(movieref)
 								if info is None:
 									continue
+								event = info.getEvent(movieref)
+								if event is None:
+									continue
 								append({
 									"name": info.getName(movieref),
-									"shortdesc": info.getInfoString(movieref, iServiceInformation.sDescription)
+									"shortdesc": info.getInfoString(movieref, iServiceInformation.sDescription),
+									"extdesc": event.getExtendedDescription()
 								})
 							del append
 
 					for movieinfo in moviedict.get(dest, ()):
 						if movieinfo.get("name") == name \
-							and movieinfo.get("shortdesc") == shortdesc:
+							and movieinfo.get("shortdesc") == shortdesc \
+							and movieinfo.get("extdesc") == extdesc:
 							print "[AutoTimer] We found a matching recorded movie, skipping event:", name
 							movieExists = True
 							break
