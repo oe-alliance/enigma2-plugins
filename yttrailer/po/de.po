@@ -28,4 +28,7 @@ msgstr "Abbruch"
 msgid "Save"
 msgstr "Speichern"
 
+msgid "Close Player with exit-key"
+msgstr "Player mit Exit-Taste beenden"
+
 

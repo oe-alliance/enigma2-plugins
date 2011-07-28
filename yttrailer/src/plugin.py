@@ -19,6 +19,7 @@
 #  This applies to the source code as a whole as well as to parts of it, unless
 #  explicitely stated otherwise.
 
+from __init__ import decrypt_block, validate_cert, read_random, rootkey, l2key
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -26,7 +27,7 @@ from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Components.Sources.StaticText import StaticText
 from Components.GUIComponent import GUIComponent
-from enigma import eServiceReference,  RT_WRAP, RT_VALIGN_CENTER, RT_HALIGN_LEFT, gFont, eListbox, eListboxPythonMultiContent
+from enigma import eServiceReference,  RT_WRAP, RT_VALIGN_CENTER, RT_HALIGN_LEFT, gFont, eListbox, eListboxPythonMultiContent, eTPM
 
 import gdata.youtube
 import gdata.youtube.service
@@ -36,7 +37,7 @@ from urllib import unquote_plus
 from httplib import HTTPException
 from urlparse import parse_qs
 
-from Components.config import config, ConfigSubsection, ConfigSelection, getConfigListEntry, configfile, ConfigText, ConfigInteger
+from Components.config import config, ConfigSubsection, ConfigSelection, getConfigListEntry, configfile, ConfigText, ConfigInteger, ConfigBoolean
 from Components.ConfigList import ConfigListScreen
 
 from Screens.InfoBarGenerics import InfoBarShowHide, InfoBarSeek, InfoBarAudioSelection, InfoBarNotifications, InfoBarServiceNotifications, InfoBarPVRState, InfoBarMoviePlayerSummarySupport
@@ -49,31 +50,36 @@ config.plugins.yttrailer = ConfigSubsection()
 config.plugins.yttrailer.best_resolution = ConfigSelection(default="2", choices = [("0", _("1080p")),("1", _("720p")), ("2", _("No HD streaming"))])
 config.plugins.yttrailer.ext_descr = ConfigText(default="german", fixed_size = False)
 config.plugins.yttrailer.max_results =  ConfigInteger(5,limits = (1, 10))
+config.plugins.yttrailer.close_player_with_exit =  ConfigBoolean(False)
 
 from Screens.EventView import EventViewBase
 baseEventViewBase__init__ = None
 
 from Screens.EpgSelection import EPGSelection
 baseEPGSelection__init__ = None
-
-
+etpm = eTPM()
 
 
 def autostart(reason, **kwargs):
-	global baseEventViewBase__init__, baseEPGSelection__init__
-	if baseEventViewBase__init__ is None:
-		baseEventViewBase__init__ = EventViewBase.__init__
-	EventViewBase.__init__ = EventViewBase__init__
-	EventViewBase.showTrailer = showTrailer
-	EventViewBase.showTrailerList = showTrailerList
-	EventViewBase.showConfig = showConfig
+	global l2key
+	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+	if l2cert:
+		l2key = validate_cert(l2cert, rootkey)
+		if l2key:
+			global baseEventViewBase__init__, baseEPGSelection__init__
+			if baseEventViewBase__init__ is None:
+				baseEventViewBase__init__ = EventViewBase.__init__
+			EventViewBase.__init__ = EventViewBase__init__
+			EventViewBase.showTrailer = showTrailer
+			EventViewBase.showTrailerList = showTrailerList
+			EventViewBase.showConfig = showConfig
 
-	if baseEPGSelection__init__ is None:
-		baseEPGSelection__init__ = EPGSelection.__init__
-	EPGSelection.__init__ = EPGSelection__init__
-	EPGSelection.showTrailer = showTrailer
-	EPGSelection.showConfig = showConfig
-	EPGSelection.showTrailerList = showTrailerList
+			if baseEPGSelection__init__ is None:
+				baseEPGSelection__init__ = EPGSelection.__init__
+			EPGSelection.__init__ = EPGSelection__init__
+			EPGSelection.showTrailer = showTrailer
+			EPGSelection.showConfig = showConfig
+			EPGSelection.showTrailerList = showTrailerList
 
 
 def setup(session,**kwargs):
@@ -137,6 +143,7 @@ def showTrailerList(self):
 class YTTrailer:
 	def __init__(self, session):
 		self.session = session
+		self.l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
 
 	def showTrailer(self, eventname):
 		if eventname:
@@ -252,10 +259,16 @@ class YTTrailer:
 			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "[YTTrailer] got",sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):
-			print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
-			video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl']
-			print "[YTTrailer] found best available video url:",video_url
-
+			if self.l3cert:
+				l3key = validate_cert(self.l3cert, l2key)
+				if l3key:
+					rnd = read_random()
+					val = etpm.challenge(rnd)
+					result = decrypt_block(val, l3key)
+					if result[80:88] == rnd:
+						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+						video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl']
+						print "[YTTrailer] found best available video url:",video_url
 		return video_url
 
 class YTTrailerList(Screen, YTTrailer):
@@ -340,6 +353,14 @@ class TrailerPlayer(InfoBarBase, InfoBarShowHide, InfoBarSeek, InfoBarAudioSelec
 			{
 				"leavePlayer": (self.leavePlayer, _("leave movie player..."))
 			})
+
+		if config.plugins.yttrailer.close_player_with_exit.value:
+			self["closeactions"] = HelpableActionMap(self, "WizardActions",
+				{
+					"back": (self.close, _("leave movie player..."))
+				})
+
+
 		self.allowPiP = False
 		for x in InfoBarShowHide, InfoBarBase, InfoBarSeek, \
 				InfoBarAudioSelection, InfoBarNotifications, \
@@ -383,6 +404,9 @@ class YTTrailerSetup(ConfigListScreen, Screen):
 		cfglist.append(getConfigListEntry(_("Extended search filter"), config.plugins.yttrailer.ext_descr))
 		cfglist.append(getConfigListEntry(_("Best resolution"), config.plugins.yttrailer.best_resolution))
 		cfglist.append(getConfigListEntry(_("Max. results in list-mode"), config.plugins.yttrailer.max_results))
+		cfglist.append(getConfigListEntry(_("Close Player with exit-key"), config.plugins.yttrailer.close_player_with_exit))
+
+
 		ConfigListScreen.__init__(self, cfglist, session)
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
