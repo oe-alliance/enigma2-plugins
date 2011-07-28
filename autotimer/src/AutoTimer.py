@@ -24,6 +24,8 @@ from Components.config import config
 # AutoTimer Component
 from AutoTimerComponent import preferredAutoTimerComponent
 
+from collections import defaultdict
+
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
 def getTimeDiff(timer, begin, end):
@@ -42,16 +44,6 @@ caseMap = {
 	"sensitive": eEPGCache.CASE_CHECK,
 	"insensitive": eEPGCache.NO_CASE_CHECK
 }
-
-class AutoTimerIgnoreTimerException(Exception):
-	def __init__(self, cause):
-		self.cause = cause
-
-	def __str__(self):
-		return "[AutoTimer] " + str(self.cause)
-
-	def __repr__(self):
-		return str(type(self))
 
 class AutoTimer:
 	"""Read and save xml configuration, query EPGCache"""
@@ -121,13 +113,13 @@ class AutoTimer:
 		return self.timers
 
 	def getTupleTimerList(self):
-		list = self.timers
-		return [(x,) for x in list]
+		lst = self.timers
+		return [(x,) for x in lst]
 
 	def getSortedTupleTimerList(self):
-		list = self.timers[:]
-		list.sort()
-		return [(x,) for x in list]
+		lst = self.timers[:]
+		lst.sort()
+		return [(x,) for x in lst]
 
 	def getUniqueId(self):
 		self.uniqueTimerId += 1
@@ -171,21 +163,28 @@ class AutoTimer:
 		checkEvtLimit = delta.days > 1
 		del delta
 
-		# Read AutoTimer Configuration
+		# Read AutoTimer configuration
 		self.readXml()
 
-		# Get E2 EPGCache Instance
+		# Get E2 instances
 		epgcache = eEPGCache.getInstance()
+		serviceHandler = eServiceCenter.getInstance()
+		recordHandler = NavigationInstance.instance.RecordTimer
+
+		# Create dict of all movies in all folders used by an autotimer to compare with recordings
+		# The moviedict will be filled only if one AutoTimer is configured to avoid duplicate description for any recordings
+		moviedict = defaultdict(list)
 
 		# Save Recordings in a dict to speed things up a little
 		# We include processed timers as we might search for duplicate descriptions
-		recorddict = {}
-		for timer in NavigationInstance.instance.RecordTimer.timer_list + NavigationInstance.instance.RecordTimer.processed_timers:
-			recorddict.setdefault(str(timer.service_ref), []).append(timer)
-
-		# Create dict of all movies in all folders used by an autotimer to compare with recordings
-		moviedict = {}
-		serviceHandler = eServiceCenter.getInstance()
+		# The recordict is always filled
+		recorddict = defaultdict(list)
+		for timer in ( recordHandler.timer_list + recordHandler.processed_timers ):
+			if timer and timer.service_ref:
+				event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
+				extdesc = event and event.getExtendedDescription()
+				timer.extdesc = extdesc
+				recorddict[str(timer.service_ref)].append(timer)
 
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
@@ -202,7 +201,6 @@ class AutoTimer:
 
 			# Search EPG, default to empty list
 			epgmatches = epgcache.search(('RITBDSE', 500, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or []
-
 			# Sort list of tuples by begin time 'B'
 			epgmatches.sort(key = lambda x: x[3]) 
 
@@ -210,7 +208,7 @@ class AutoTimer:
 			similar.clear()
 
 			# Loop over all EPG matches
-			for serviceref, eit, name, begin, duration, shortdesc, extdesc in epgmatches:
+			for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
 
 				# Reset similarMatch and conflictString
 				similarMatch = False
@@ -222,7 +220,6 @@ class AutoTimer:
 					conflictString = similar[serviceref]
 					del similar[serviceref]
 
-				###### Do we need this ?
 				eserviceref = eServiceReference(serviceref)
 				evt = epgcache.lookupEventId(eserviceref, eit)
 				if not evt:
@@ -234,7 +231,6 @@ class AutoTimer:
 				if n > 0:
 					i = evt.getLinkageService(eserviceref, n-1)
 					serviceref = i.toString()
-				######
 
 				evtBegin = begin
 				evtEnd = end = begin + duration
@@ -251,7 +247,6 @@ class AutoTimer:
 
 				# Convert begin time
 				timestamp = localtime(begin)
-
 				# Update timer
 				timer.update(begin, timestamp)
 
@@ -295,7 +290,6 @@ class AutoTimer:
 						if movielist is None:
 							print "[AutoTimer] listing of movies in " + dest + " failed"
 						else:
-							moviedict[dest] = []
 							append = moviedict[dest].append
 							while 1:
 								movieref = movielist.getNext()
@@ -306,9 +300,11 @@ class AutoTimer:
 								info = serviceHandler.info(movieref)
 								if info is None:
 									continue
-								event = info.getEvent(movieref)
+								print "TEST AT moviename     " + str(info.getName(movieref))
+								#event = info.getEvent(movieref)
 								if event is None:
 									continue
+								#print "TEST AT moviedesc     " + str(event.getExtendedDescription())
 								append({
 									"name": info.getName(movieref),
 									"shortdesc": info.getInfoString(movieref, iServiceInformation.sDescription),
@@ -316,7 +312,7 @@ class AutoTimer:
 								})
 							del append
 
-					for movieinfo in moviedict.get(dest, ()):
+					for movieinfo in moviedict.get(dest, []):
 						if movieinfo.get("name") == name \
 							and movieinfo.get("shortdesc") == shortdesc \
 							and movieinfo.get("extdesc") == extdesc:
@@ -335,7 +331,7 @@ class AutoTimer:
 				# Check for double Timers
 				# We first check eit and if user wants us to guess event based on time
 				# we try this as backup. The allowed diff should be configurable though.
-				for rtimer in recorddict.get(serviceref, ()):
+				for rtimer in recorddict.get(serviceref, []):
 					if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
 						oldExists = True
 
@@ -363,10 +359,18 @@ class AutoTimer:
 						newEntry.end = int(end)
 						newEntry.service_ref = ServiceReference(serviceref)
 
+						# Don't store the extended description within the timer
+						if hasattr(newEntry, "extdesc"):
+							del newEntry.extdesc
+
 						break
-					elif timer.avoidDuplicateDescription >= 1 and not rtimer.disabled and rtimer.name == name and rtimer.description == shortdesc:
+					elif timer.avoidDuplicateDescription >= 1 \
+						and not rtimer.disabled \
+						and rtimer.name == name \
+						and rtimer.description == shortdesc \
+						and hasattr(rtimer, "extdesc") and rtimer.extdesc == extdesc:
 						oldExists = True
-						print "[AutoTimer] We found a timer with same description, skipping event"
+						print "[AutoTimer] We found a timer (similar service) with same description, skipping event"
 						break
 
 				# We found no timer we want to edit
@@ -377,14 +381,19 @@ class AutoTimer:
 
 					# We want to search for possible doubles
 					if timer.avoidDuplicateDescription >= 2:
-						# I thinks thats the fastest way to do this, though it's a little ugly
-						try:
-							for list in recorddict.values():
-								for rtimer in list:
-									if not rtimer.disabled and rtimer.name == name and rtimer.description == shortdesc:
-										raise AutoTimerIgnoreTimerException("We found a timer with same description, skipping event")
-						except AutoTimerIgnoreTimerException, etite:
-							print "[AutoTimer] exception: " + str(etite)
+						for lst in recorddict.values():
+							for rtimer in lst:
+								if not rtimer.disabled \
+									and rtimer.name == name \
+									and rtimer.description == shortdesc \
+									and hasattr(rtimer, "extdesc") and rtimer.extdesc == extdesc:
+									oldExists = True
+									print "[AutoTimer] We found a timer (any service) with same description, skipping event"
+									break
+							else:
+								continue
+							break
+						if oldExists:
 							continue
 
 					if timer.checkCounter(timestamp):
@@ -413,17 +422,19 @@ class AutoTimer:
 
 				if oldExists:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
-					NavigationInstance.instance.RecordTimer.timeChanged(newEntry)
+					recordHandler.timeChanged(newEntry)
 				else:
 					if similarMatch:
 						newEntry.log(504, "[AutoTimer] Similar Timer is added because of conflicts with %s." % (conflictString))
-					conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
+					conflicts = recordHandler.record(newEntry)
 
 					if conflicts:
 						conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
 
 					if conflicts and config.plugins.autotimer.addsimilar_on_conflict.value:
-						for servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS in epgmatches:
+						# Can be optimized
+						# We could start our search right after our actual index
+						for servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS in epgmatches[idx+1:]:
 							if evtBegin < beginS:
 								# Match must be after our conflicting event
 								if extdesc == extdescS and shortdesc == shortdescS:
@@ -432,7 +443,6 @@ class AutoTimer:
 									
 									# Indicate that there exists a similar timer
 									similarExists = True
-									
 									# Store the similar serviceref and conflictString, so it can be handled later
 									similar[servicerefS] = conflictString
 									
@@ -444,14 +454,15 @@ class AutoTimer:
 						newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString,))
 						newEntry.disabled = True
 						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
-						conflicts = NavigationInstance.instance.RecordTimer.record(newEntry)
+						conflicts = recordHandler.record(newEntry)
 						conflicting.append((name, begin, end, serviceref, timer.name))
 
 					if conflicts is None: 											# Similar timers will be added to the new timer list
 					#if conflicts is None and not similarMatch: # Similar timers won't be added to the new timer list
 						timer.decrementCounter()
 						new += 1
-						recorddict.setdefault(serviceref, []).append(newEntry)
+						timer.extdesc = extdesc
+						recorddict[serviceref].append(timer)
 
 					elif conflicts: 														# Conflicting timers will be added also if a similar timer exists
 					#elif conflicts and not similarExists: 			# Conflicting timers won't be added if a similar timer exists
