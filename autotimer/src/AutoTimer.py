@@ -24,6 +24,7 @@ from Components.config import config
 # AutoTimer Component
 from AutoTimerComponent import preferredAutoTimerComponent
 
+from itertools import chain
 from collections import defaultdict
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
@@ -379,8 +380,7 @@ class AutoTimer:
 
 					# We want to search for possible doubles
 					if timer.avoidDuplicateDescription >= 2:
-						#for lst in recorddict.values():
-						for rtimer in [ tmr for lst in recorddict.values() for tmr in lst ]:
+						for rtimer in list( chain.from_iterable( recorddict.values() ) ):
 							if not rtimer.disabled \
 								and rtimer.name == name \
 								and rtimer.description == shortdesc \
