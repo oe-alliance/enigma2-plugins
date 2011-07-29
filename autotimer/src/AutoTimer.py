@@ -379,18 +379,15 @@ class AutoTimer:
 
 					# We want to search for possible doubles
 					if timer.avoidDuplicateDescription >= 2:
-						for lst in recorddict.values():
-							for rtimer in lst:
-								if not rtimer.disabled \
-									and rtimer.name == name \
-									and rtimer.description == shortdesc \
-									and hasattr(rtimer, "extdesc") and rtimer.extdesc == extdesc:
-									oldExists = True
-									print "[AutoTimer] We found a timer (any service) with same description, skipping event"
-									break
-							else:
-								continue
-							break
+						#for lst in recorddict.values():
+						for rtimer in [ tmr for lst in recorddict.values() for tmr in lst ]:
+							if not rtimer.disabled \
+								and rtimer.name == name \
+								and rtimer.description == shortdesc \
+								and hasattr(rtimer, "extdesc") and rtimer.extdesc == extdesc:
+								oldExists = True
+								print "[AutoTimer] We found a timer (any service) with same description, skipping event"
+								break
 						if oldExists:
 							continue
 
