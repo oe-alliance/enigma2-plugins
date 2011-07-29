@@ -380,7 +380,7 @@ class AutoTimer:
 
 					# We want to search for possible doubles
 					if timer.avoidDuplicateDescription >= 2:
-						for rtimer in list( chain.from_iterable( recorddict.values() ) ):
+						for rtimer in chain.from_iterable( recorddict.values() ):
 							if not rtimer.disabled \
 								and rtimer.name == name \
 								and rtimer.description == shortdesc \
