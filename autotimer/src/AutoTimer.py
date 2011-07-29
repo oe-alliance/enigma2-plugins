@@ -300,11 +300,9 @@ class AutoTimer:
 								info = serviceHandler.info(movieref)
 								if info is None:
 									continue
-								print "TEST AT moviename     " + str(info.getName(movieref))
-								#event = info.getEvent(movieref)
+								event = info.getEvent(movieref)
 								if event is None:
 									continue
-								#print "TEST AT moviedesc     " + str(event.getExtendedDescription())
 								append({
 									"name": info.getName(movieref),
 									"shortdesc": info.getInfoString(movieref, iServiceInformation.sDescription),
@@ -432,8 +430,7 @@ class AutoTimer:
 						conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
 
 					if conflicts and config.plugins.autotimer.addsimilar_on_conflict.value:
-						# Can be optimized
-						# We could start our search right after our actual index
+						# We start our search right after our actual index
 						for servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS in epgmatches[idx+1:]:
 							if evtBegin < beginS:
 								# Match must be after our conflicting event
@@ -462,7 +459,7 @@ class AutoTimer:
 						timer.decrementCounter()
 						new += 1
 						timer.extdesc = extdesc
-						recorddict[serviceref].append(timer)
+						recorddict[serviceref].append(newEntry)
 
 					elif conflicts: 														# Conflicting timers will be added also if a similar timer exists
 					#elif conflicts and not similarExists: 			# Conflicting timers won't be added if a similar timer exists
