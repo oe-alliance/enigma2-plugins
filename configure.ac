@@ -141,10 +141,6 @@ dvdbackup/meta/Makefile
 dvdbackup/po/Makefile
 dvdbackup/src/Makefile
 
-dyndns/Makefile
-dyndns/src/Makefile
-dyndns/meta/Makefile
-
 easyinfo/Makefile
 easyinfo/meta/Makefile
 easyinfo/src/Makefile
