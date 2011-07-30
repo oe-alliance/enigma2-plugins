@@ -16,6 +16,7 @@ from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
+from Components.config import config, ConfigSubsection, ConfigYesNo
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from os import environ as os_environ
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
@@ -23,6 +24,9 @@ import re
 import htmlentitydefs
 import urllib
 import gettext
+
+config.plugins.imdb = ConfigSubsection()
+config.plugins.imdb.force_english = ConfigYesNo(default=False)
 
 def localeInit():
 	lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
@@ -193,13 +197,15 @@ class IMDB(Screen):
 		else:
 			self.close()
 
+	event_quoted = property(lambda self: urllib.quote_plus(self.eventName.encode('utf8')))
+
 	def dictionary_init(self):
 		syslang = language.getLanguage()
-		if "de" not in syslang:
+		if "de" not in syslang or config.plugins.imdb.force_english.value:
 			self.IMDBlanguage = ""  # set to empty ("") for english version
 
 			self.generalinfomask = re.compile(
-			'<h1 class="header" itemprop="name">(?P<title>.*?)<.*?</h1>.*?'
+			'<h1 class="header".*?>(?P<title>.*?)<.*?</h1>.*?'
 			'(?:.*?<h4 class="inline">\s*(?P<g_director>Regisseur|Directors?):\s*</h4>.*?<a\s+href=\".*?\">(?P<director>.*?)</a>)*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_creator>Sch\S*?pfer|Creators?):\s*</h4>.*?<a\s+href=\".*?\">(?P<creator>.*?)</a>)*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_seasons>Seasons?):\s*</h4>.*?<a\s+href=\".*?\">(?P<seasons>\d+?)</a>)*'
@@ -231,7 +237,7 @@ class IMDB(Screen):
 			, re.DOTALL)
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genre:</h4>\s<div class="info-content">\s+?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
-			self.ratingmask = re.compile('<span style="display:none" class="star-bar-user-rate"><b>(?P<rating>.*?)</b>', re.DOTALL)
+			self.ratingmask = re.compile('="star-bar-user-rate"><b>(?P<rating>.*?)</b>', re.DOTALL)
 			self.castmask = re.compile('<td class="name">\s*<a.*?>(.*?)</a>.*?<td class="character">\s*<div>\s*(?:<a.*?>)?(.*?)(?:</a>)?\s*( \(as.*?\))?\s*</div>', re.DOTALL)
 			self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 		else:
@@ -250,7 +256,7 @@ class IMDB(Screen):
 
 			self.extrainfomask = re.compile(
 			'(?:.*?<h5>(?P<g_tagline>Werbezeile|Tagline?):</h5>\n(?P<tagline>.+?)<)*'
-			'(?:.*?<h5>(?P<g_outline>Kurzbeschreibung|Plot Outline):</h5>(?P<outline>.+?)<)*'
+			'(?:.*?<h5>(?P<g_outline>Kurzbeschreibung|Handlung):</h5>(?P<outline>.+?)<)*'
 			'(?:.*?<h5>(?P<g_synopsis>Plot Synopsis):</h5>(?:.*?)(?:<a href=\".*?\">)*?(?P<synopsis>.+?)(?:</a>|</div>))*'
 			'(?:.*?<h5>(?P<g_keywords>Plot Keywords):</h5>(?P<keywords>.+?)(?:Mehr|See more</a>|</div>))*'
 			'(?:.*?<h5>(?P<g_awards>Filmpreise|Awards):</h5>(?P<awards>.+?)(?:Mehr|See more</a>|</div>))*'
@@ -404,15 +410,18 @@ class IMDB(Screen):
 		self.resetLabels()
 		if not self.eventName:
 			s = self.session.nav.getCurrentService()
-			info = s.info()
-			event = info.getEvent(0) # 0 = now, 1 = next
+			info = s and s.info()
+			event = info and info.getEvent(0) # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
 		if self.eventName:
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
 			event_quoted = quoteEventName(self.eventName)
 			localfile = "/tmp/imdbquery.html"
-			fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
+			if self.IMDBlanguage:
+				fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
+			else:
+				fetchurl = "http://akas.imdb.com/find?s=tt;mx=20;q=" + event_quoted
 			print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
 			downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
 		else:
@@ -462,8 +471,16 @@ class IMDB(Screen):
 				searchresultmask = re.compile("<tr> <td.*?img src.*?>.*?<a href=\".*?/title/(tt\d{7,7})/\".*?>(.*?)</td>", re.DOTALL)
 				searchresults = searchresultmask.finditer(self.inhtml)
 				self.resultlist = [(self.htmltags.sub('',x.group(2)), x.group(1)) for x in searchresults]
+				Len = len(self.resultlist)
 				self["menu"].l.setList(self.resultlist)
-				if len(self.resultlist) > 1:
+				if Len == 1:
+					self["statusbar"].setText(_("Re-Query IMDb: %s...") % (self.resultlist[0][0],))
+					self.eventName = self.resultlist[0][1]
+					localfile = "/tmp/imdbquery.html"
+					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
+					print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
+					downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
+				elif Len > 1:
 					self.Page = 1
 					self.showMenu()
 				else:

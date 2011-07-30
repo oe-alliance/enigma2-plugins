@@ -100,3 +100,5 @@ msgstr "Cercare EPG"
 msgid "search EPG..."
 msgstr "ricerca EPG..."
 
+msgid "search EPG"
+msgstr "ricerca EPG"

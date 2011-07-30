@@ -1,0 +1,14 @@
+<default>
+	  <prerequisites>
+	  </prerequisites>
+          <info>
+                    <author>ritzMo</author>
+                    <name>NameZAP</name>
+                    <packagename>enigma2-plugin-extensions-namezap</packagename>
+                    <shortdescription>Shows the service name instead of the service number when zapping.</shortdescription>
+					<description></description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-namezap" />
+	  </files>
+</default>

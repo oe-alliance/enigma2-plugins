@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-showclock
+Version: 0.5
+Description: Push key 'Exit long' to show the clock while watching TV
+Maintainer: JuSt611 <Software@Strasdas.de>
+Depends: enigma2 (>= 2.6git20090615)

@@ -30,7 +30,7 @@ from twisted.internet import defer
 from twisted.web.client import getPage, downloadPage
 from urllib import quote
 from Components.Pixmap import Pixmap
-from enigma import ePicLoad
+from enigma import ePicLoad, eEnv
 from os import path as os_path, mkdir as os_mkdir
 from Components.AVSwitch import AVSwitch
 from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config
@@ -116,7 +116,7 @@ class WeatherPlugin(Screen):
 			i += 1
 		del i
 
-		self.appdir = "/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/" 
+		self.appdir = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/")
 		if not os_path.exists(self.appdir):
 			os_mkdir(self.appdir)
 
@@ -229,6 +229,8 @@ class WeatherPlugin(Screen):
 							self["weekday%s_temp" % index].text = "%s °%s | %s °%s" % (highTemp, UnitSystemText, lowTemp, UnitSystemText)
 						elif items2.tag == "icon":
 							url = items2.attrib.get("data").encode("utf-8", 'ignore')
+							if not url.startswith("http://"):
+								url = "http://www.google.com%s" % items2.attrib.get("data").encode("utf-8", 'ignore')
 							parts = url.split("/")
 							filename = self.appdir + parts[-1]
 							if not os_path.exists(filename):

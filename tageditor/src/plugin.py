@@ -22,11 +22,12 @@ def Plugins(**kwargs):
 		setPreferredTagEditor(TagEditor)
 	except Exception:
 		pass
-	return PluginDescriptor(name = "TagEditor", description = _("edit tags..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = main, needsRestart = False)
+	# TRANSLATORS: this is the string used in the movie context menu for TagEditor
+	return PluginDescriptor(name = "TagEditor", description = _("edit tags"), where = PluginDescriptor.WHERE_MOVIELIST, fnc = main, needsRestart = False)
 
 class TagEditor(Screen):
 	skin = """
-	<screen name="TagEditor" position="center,center" size="565,280">
+	<screen name="TagEditor" position="center,center" size="600,310">
 		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -35,7 +36,8 @@ class TagEditor(Screen):
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="list" position="5,40" size="555,240" scrollbarMode="showOnDemand" />
+		<ePixmap position="562,10" size="35,25" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
+		<widget name="list" position="5,40" size="590,270" scrollbarMode="showOnDemand" />
 	</screen>"""
 
 	def __init__(self, session, tags, txt = None, args = 0, parent = None):
@@ -73,6 +75,7 @@ class TagEditor(Screen):
 		self.onLayoutFinish.append(self.setCustomTitle)
 
 	def setCustomTitle(self):
+		# TRANSLATORS: This is the title of the TagEditor main screen
 		self.setTitle(_("Edit Tags"))
 
 	def addCustom(self):

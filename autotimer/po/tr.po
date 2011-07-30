@@ -642,6 +642,9 @@ msgstr ""
 msgid "add AutoTimer..."
 msgstr "Otomatik zamanlayıcı ekle..."
 
+msgid "add AutoTimer"
+msgstr "Otomatik zamanlayıcı ekle"
+
 msgid "add filters"
 msgstr "Filtre ekle"
 

@@ -4,6 +4,7 @@ SUBDIRS = \
 	aihdcontroler \
 	antiscrollbar \
 	audiosync \
+	automaticcleanup \
 	automaticvolumeadjustment \
 	autoresolution \
 	autotimer \
@@ -35,6 +36,7 @@ SUBDIRS = \
 	letterbox \
 	logomanager \
 	mediadownloader \
+	menusort \
 	merlinepg \
 	merlinmusicplayer \
 	meteoitalia \
@@ -45,8 +47,10 @@ SUBDIRS = \
 	moviesearch \
 	movietagger \
 	movieepg \
+	mphelp \
 	multirc \
 	mytube \
+	namezap \
 	ncidclient \
 	netcaster \
 	networkbrowser \
@@ -57,6 +61,8 @@ SUBDIRS = \
 	passwordchanger \
 	permanentclock \
 	pipzap \
+	pluginhider \
+	pluginsort \
 	podcast \
 	porncenter \
 	quickbutton \
@@ -67,6 +73,7 @@ SUBDIRS = \
 	serienfilm \
 	setpasswd \
 	shoutcast \
+	showclock \
 	simplerss \
 	startuptostandby \
 	svdrp \
@@ -77,12 +84,14 @@ SUBDIRS = \
 	valixdcontrol \
 	virtualzap \
 	vlcplayer \
+	vps \
 	weatherplugin \
 	webcamviewer \
 	webbouqueteditor \
 	webinterface \
 	werbezapper \
 	youtubeplayer \
+	yttrailer \
 	zaphistorybrowser \
 	zapstatistic \
 	zdfmediathek

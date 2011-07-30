@@ -38,6 +38,17 @@ config.plugins.autotimer.show_help = ConfigYesNo(default = True)
 autotimer = None
 autopoller = None
 
+#pragma mark - Help
+try:
+	from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
+	from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+	reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/mphelp.xml"))
+	autotimerHelp = registerHelp(*reader)
+except Exception, e:
+	print "[AutoTimer] Unable to initialize MPHelp:", e,"- Help not available!"
+	autotimerHelp = None
+#pragma mark -
+
 # Autostart
 def autostart(reason, **kwargs):
 	global autotimer
@@ -156,7 +167,10 @@ def housekeepingExtensionsmenu(el):
 	if el.value:
 		plugins.addPlugin(extDescriptor)
 	else:
-		plugins.removePlugin(extDescriptor)
+		try:
+			plugins.removePlugin(extDescriptor)
+		except ValueError, ve:
+			print "[AutoTimer] housekeepingExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring."
 
 config.plugins.autotimer.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 extDescriptor = PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart = False)
@@ -164,8 +178,11 @@ extDescriptor = PluginDescriptor(name="AutoTimer", description = _("Edit Timers 
 def Plugins(**kwargs):
 	l = [
 		PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = autostart, needsRestart = False),
+		# TRANSLATORS: description of AutoTimer in PluginBrowser
 		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main, needsRestart = False),
-		PluginDescriptor(name="AutoTimer", description= _("add AutoTimer..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist, needsRestart = False),
+		# TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
+		PluginDescriptor(name="AutoTimer", description= _("add AutoTimer"), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist, needsRestart = False),
+		# TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
 		PluginDescriptor(name=_("add AutoTimer..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc = eventinfo, needsRestart = False),
 	]
 	if config.plugins.autotimer.show_in_extensionsmenu.value:

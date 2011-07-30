@@ -1,0 +1,24 @@
+<keymap>
+	<map context="PluginHiderSetupActions">
+		<key id="KEY_NEXT" mapto="next" flags="mr" />
+		<key id="KEY_PREVIOUS" mapto="previous" flags="mr" />
+		<key id="KEY_CHANNELUP" mapto="next" flags="mr" />
+		<key id="KEY_CHANNELDOWN" mapto="previous" flags="mr" />
+
+		<key id="KEY_GREEN" mapto="green" flags="m" />
+		<key id="KEY_YELLOW" mapto="yellow" flags="m" />
+		<key id="KEY_BLUE" mapto="blue" flags="m" />
+
+		<key id="KEY_RED" mapto="cancel" flags="m" />
+
+		<!-- ripped from OkCancelActions -->
+		<key id="\x0a" mapto="ok" flags="m" />
+		<key id="\x1b" mapto="cancel" flags="m" />
+
+		<key id="KEY_OK" mapto="ok" flags="m" />
+		<key id="KEY_EXIT" mapto="cancel" flags="m" />
+
+		<key id="KEY_ENTER" mapto="ok" flags="m" />
+		<key id="KEY_ESC" mapto="cancel" flags="m" />
+	</map>
+</keymap>

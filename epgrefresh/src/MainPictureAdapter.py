@@ -8,19 +8,21 @@ from Tools import Notifications
 from Components.config import config
 
 class MainPictureAdapter:
+	backgroundCapable = True
 	def __init__(self, session):
-		self.showNotification = config.plugins.epgrefresh.enablemessage.value
-		self.session = session
-		self.previousService = session.nav.getCurrentlyPlayingServiceReference()
+		self.navcore = session.nav
+
+	def prepare(self):
+		if config.plugins.epgrefresh.enablemessage.value:
+			Notifications.AddNotification(MessageBox, _("EPG refresh starts scanning channels."), type=MessageBox.TYPE_INFO, timeout=4)
+		self.previousService = self.navcore.getCurrentlyPlayingServiceReference()
+		return True
 
 	def play(self, service):
 		print "[EPGRefresh.MainPictureAdapter.play]"
-		if self.showNotification:
-			Notifications.AddNotification(MessageBox, _("EPG refresh starts scanning channels."), type=MessageBox.TYPE_INFO, timeout=4)
-			self.showNotification = False
-		return self.session.nav.playService(service)
+		return self.navcore.playService(service)
 
 	def stop(self):
 		if self.previousService is not None or Screens.Standby.inStandby:
-			self.session.nav.playService(self.previousService)
+			self.navcore.playService(self.previousService)
 

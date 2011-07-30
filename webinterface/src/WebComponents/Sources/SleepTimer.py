@@ -100,11 +100,13 @@ class SleepTimer(Source):
                 return ( self.session.nav.SleepTimer.isActive(),
                          config.SleepTimer.defaulttime.value,
                          config.SleepTimer.action.value,
+                         config.SleepTimer.ask.value,
                          "ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'" %cmd['cmd'] )
         else:
             return ( self.session.nav.SleepTimer.isActive(),
                      config.SleepTimer.defaulttime.value,
                      config.SleepTimer.action.value,
+                     config.SleepTimer.ask.value,
                      "ERROR: Cannot set SleepTimer while device is in Standby-Mode" )
 
     def getResult(self):

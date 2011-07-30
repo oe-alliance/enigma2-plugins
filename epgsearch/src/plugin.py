@@ -3,14 +3,6 @@ from . import _
 
 from enigma import eServiceCenter
 
-# Config
-from Components.config import config, ConfigSet, ConfigSubsection, ConfigText
-
-config.plugins.epgsearch = ConfigSubsection()
-config.plugins.epgsearch.history = ConfigSet(choices = [])
-# XXX: configtext is more flexible but we cannot use this for a (not yet created) gui config
-config.plugins.epgsearch.encoding = ConfigText(default = 'ISO8859-15', fixed_size = False)
-
 # Plugin
 from EPGSearch import EPGSearch, EPGSearchEPGSelection, EPGSelectionInit
 
@@ -59,20 +51,22 @@ def Plugins(**kwargs):
 		),
 		PluginDescriptor(
 			name = "EPGSearch",
+			# TRANSLATORS: description of EPGSearch in PluginBrowser
 			description = _("Search EPG"),
 			where = PluginDescriptor.WHERE_PLUGINMENU,
 			fnc = main,
 			needsRestart = False,
 		),
 		PluginDescriptor(
+			# TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 			name = _("search EPG..."),
 			where = PluginDescriptor.WHERE_EVENTINFO,
 			fnc = eventinfo,
 			needsRestart = False,
 		),
 		PluginDescriptor(
-			name = "EPGSearch",
-			description = _("search EPG..."),
+			# TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+			description = _("search EPG"),
 			where = PluginDescriptor.WHERE_MOVIELIST,
 			fnc = movielist,
 			needsRestart = False,

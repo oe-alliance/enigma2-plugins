@@ -882,6 +882,9 @@ msgstr "Automatisch Aufnahmen programmieren"
 msgid "add AutoTimer..."
 msgstr "AutoTimer hinzufügen..."
 
+msgid "add AutoTimer"
+msgstr "AutoTimer hinzufügen"
+
 #~ msgid "Abort this Wizard."
 #~ msgstr "Den Wizard beenden."
 

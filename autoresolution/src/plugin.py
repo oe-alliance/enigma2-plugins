@@ -70,16 +70,20 @@ class AutoRes(Screen):
 			})
 		self.timer = eTimer()
 		self.timer.callback.append(self.determineContent)
-		self.lastmode = config.av.videomode[config.av.videoport.value].value
+		if config.av.videoport.value in config.av.videomode:
+			self.lastmode = config.av.videomode[config.av.videoport.value].value
 		config.av.videoport.addNotifier(self.defaultModeChanged)
 		config.plugins.autoresolution.enable.addNotifier(self.enableChanged, initial_call = False)
 		config.plugins.autoresolution.deinterlacer.addNotifier(self.enableChanged, initial_call = False)
 		config.plugins.autoresolution.deinterlacer_progressive.addNotifier(self.enableChanged, initial_call = False)
-		self.setMode(default[0], False)
+		if default:
+			self.setMode(default[0], False)
 		self.after_switch_delay = False
 		self.newService = False
-		config.av.videorate["720p"].addNotifier(self.__videorate_720p_changed, initial_call = False, immediate_feedback = False)
-		config.av.videorate["1080i"].addNotifier(self.__videorate_1080i_changed, initial_call = False, immediate_feedback = False)
+		if "720p" in config.av.videorate:
+			config.av.videorate["720p"].addNotifier(self.__videorate_720p_changed, initial_call = False, immediate_feedback = False)
+		if "1080i" in config.av.videorate:
+			config.av.videorate["1080i"].addNotifier(self.__videorate_1080i_changed, initial_call = False, immediate_feedback = False)
 
 	def __videorate_720p_changed(self, configEntry):
 		if self.lastmode == "720p":
@@ -110,7 +114,8 @@ class AutoRes(Screen):
 			if port:
 				config.av.videomode[port].notifiers.remove(self.defaultModeChanged)
 			port = config.av.videoport.value
-			config.av.videomode[port].addNotifier(self.defaultModeChanged)
+			if port in config.av.videomode:
+				config.av.videomode[port].addNotifier(self.defaultModeChanged)
 			usable = config.plugins.autoresolution.enable.value and not port in ('DVI-PC', 'Scart')
 		else: # videomode changed in normal av setup
 			global videoresolution_dictionary

@@ -1,0 +1,229 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-07-12 23:02+Mitteleuropäische Sommerzeit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: plugin.py:110
+msgid "Elektro Power Save"
+msgstr ""
+
+#: plugin.py:111
+msgid "Automatically shut down to deep standby"
+msgstr ""
+
+#: plugin.py:112
+msgid "Extensions menu"
+msgstr ""
+
+#: plugin.py:112
+msgid "Plugin menu"
+msgstr ""
+
+#: plugin.py:125
+msgid "Monday"
+msgstr ""
+
+#: plugin.py:126
+msgid "Tuesday"
+msgstr ""
+
+#: plugin.py:127
+msgid "Wednesday"
+msgstr ""
+
+#: plugin.py:128
+msgid "Thursday"
+msgstr ""
+
+#: plugin.py:129
+msgid "Friday"
+msgstr ""
+
+#: plugin.py:130
+msgid "Saturday"
+msgstr ""
+
+#: plugin.py:131
+msgid "Sunday"
+msgstr ""
+
+#: plugin.py:168 plugin.py:179 plugin.py:187 plugin.py:397
+msgid "Ver."
+msgstr ""
+
+#: plugin.py:220 plugin.py:225
+msgid "Wakeup"
+msgstr ""
+
+#: plugin.py:221 plugin.py:226
+msgid "Sleep"
+msgstr ""
+
+#: plugin.py:222 plugin.py:227
+msgid "Next day starts at"
+msgstr ""
+
+#: plugin.py:223 plugin.py:228
+msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
+msgstr ""
+
+#: plugin.py:232 plugin.py:278 plugin.py:374
+msgid "Cancel"
+msgstr ""
+
+#: plugin.py:233 plugin.py:279 plugin.py:375
+msgid "Ok"
+msgstr ""
+
+#: plugin.py:274
+msgid "IP Address"
+msgstr ""
+
+#: plugin.py:330
+msgid "Active Time Profile"
+msgstr ""
+
+#: plugin.py:331
+msgid "The active Time Profile is (1 or 2)."
+msgstr ""
+
+#: plugin.py:332
+msgid "Enable Elektro Power Save"
+msgstr ""
+
+#: plugin.py:333
+msgid "Unless this is enabled, this plugin won't run automatically."
+msgstr ""
+
+#: plugin.py:334
+msgid "Use both profiles alternately"
+msgstr ""
+
+#: plugin.py:335
+msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
+msgstr ""
+
+#: plugin.py:336 plugin.py:489
+msgid "Standby on boot"
+msgstr ""
+
+#: plugin.py:337
+msgid "Puts the box in standby mode after boot."
+msgstr ""
+
+#: plugin.py:338
+msgid "Standby on manual boot"
+msgstr ""
+
+#: plugin.py:339
+msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
+msgstr ""
+
+#: plugin.py:340
+msgid "Standby on boot screen timeout"
+msgstr ""
+
+#: plugin.py:341
+msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
+msgstr ""
+
+#: plugin.py:342
+msgid "Force sleep (even when not in standby)"
+msgstr ""
+
+#: plugin.py:343
+msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
+msgstr ""
+
+#: plugin.py:344
+msgid "Avoid deep standby when HDD is active, e.g. for FTP"
+msgstr ""
+
+#: plugin.py:345
+msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
+msgstr ""
+
+#: plugin.py:346
+msgid "Check IPs (press OK to edit)"
+msgstr ""
+
+#: plugin.py:347
+msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
+msgstr ""
+
+#: plugin.py:348
+msgid "Don't wake up"
+msgstr ""
+
+#: plugin.py:349
+msgid "Do not wake up at the end of next deep standby interval."
+msgstr ""
+
+#: plugin.py:350
+msgid "Holiday mode (experimental)"
+msgstr ""
+
+#: plugin.py:351
+msgid "The box always enters deep standby mode, except for recording."
+msgstr ""
+
+#: plugin.py:352
+msgid "Show in"
+msgstr ""
+
+#: plugin.py:353
+msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
+msgstr ""
+
+#: plugin.py:354
+msgid "Name"
+msgstr ""
+
+#: plugin.py:355
+msgid "Specify plugin name to be used in menu (needs GUI restart)."
+msgstr ""
+
+#: plugin.py:356
+msgid "Description"
+msgstr ""
+
+#: plugin.py:357
+msgid "Specify plugin description to be used in menu (needs GUI restart)."
+msgstr ""
+
+#: plugin.py:376
+msgid "Help"
+msgstr ""
+
+#: plugin.py:377
+msgid "Times"
+msgstr ""
+
+#: plugin.py:423
+msgid "Showing Elektro readme.txt"
+msgstr ""
+
+#: plugin.py:423
+msgid "readme.txt"
+msgstr ""
+
+#: plugin.py:515
+msgid "Go to Standby now?"
+msgstr ""
+
+#: plugin.py:693
+msgid "Go to sleep now?"
+msgstr ""
+

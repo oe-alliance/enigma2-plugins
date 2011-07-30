@@ -101,13 +101,14 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self["help"] = StaticText()
 
 		# Define Actions
-		self["actions"] = ActionMap(["SetupActions", "ColorActions", "ChannelSelectEPGActions"],
+		self["actions"] = ActionMap(["SetupActions", "ColorActions", "ChannelSelectEPGActions", "HelpActions"],
 			{
 				"cancel": self.keyCancel,
 				"save": self.keySave,
 				"yellow": self.forceRefresh,
 				"blue": self.editServices,
 				"showEPGList": self.keyInfo,
+				"displayHelp": self.showHelp,
 			}
 		)
 
@@ -115,9 +116,22 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 		self.changed()
 
 		self.onLayoutFinish.append(self.setCustomTitle)
+		self.onFirstExecBegin.append(self.firstExec)
+
+	def firstExec(self):
+		from plugin import epgrefreshHelp
+		if config.plugins.epgrefresh.show_help.value and epgrefreshHelp:
+			config.plugins.epgrefresh.show_help.value = False
+			config.plugins.epgrefresh.show_help.save()
+			epgrefreshHelp.open(self.session)
 
 	def setCustomTitle(self):
 		self.setTitle(' '.join((_("EPGRefresh Configuration"), _("Version"), VERSION)))
+
+	def showHelp(self):
+		from plugin import epgrefreshHelp
+		if epgrefreshHelp:
+			epgrefreshHelp.open(self.session)
 
 	def updateHelp(self):
 		cur = self["config"].getCurrent()

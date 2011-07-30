@@ -17,7 +17,7 @@ class MP(Source):
 		Source.__init__(self)
 		self.func = func
 		self.session = session
-		error = "unknown command (%s)" % func
+		error = "Unknown command (%s)" % func
 		if func is self.LIST:
 			self.result = ((error, error, error),)
 		else:
@@ -119,18 +119,18 @@ class MP(Source):
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
-			return (False, "mediaplayer not installed")
+			return (False, "Mediaplayer not installed")
 
 		file = param["file"]
 		doAdd = False if param["root"] == "playlist" else True
 
 		if not file:
-			return (False, "missing or invalid parameter file")
+			return (False, "Missing or invalid parameter file")
 
 		ref = eServiceReference(file)
 		if not ref.valid():
 			if not os_path.isfile(file):
-				return (False, "%s is neither a valid reference nor a valid file" % file)
+				return (False, "'%s' is neither a valid reference nor a valid file" % file)
 			ref = eServiceReference(4097, 0, file)
 
 		if doAdd:
@@ -139,19 +139,22 @@ class MP(Source):
 			mp.playServiceRefEntry(ref)
 
 		mp.playlist.updateList()
-		return (True, "%s added to playlist and/or playback started" % (file))
-
+		if doPlay:
+			return (True, "Playback of '%s' started" % (file))
+		else:
+			return (True, "'%s' has been added to playlist" % (file))
+	
 	def removeFile(self, file):
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
-			return (False, "mediaplayer not installed")
+			return (False, "Mediaplayer not installed")
 
 		ref = eServiceReference(file)
 		if not ref.valid():
 			ref = eServiceReference(4097, 0, file)
 			if not ref.valid():
-				return (False, "%s is neither a valid reference nor a valid file" % file)
+				return (False, "'%s' is neither a valid reference nor a valid file" % file)
 
 		serviceRefList = mp.playlist.getServiceRefList()
 		i = 0
@@ -159,10 +162,10 @@ class MP(Source):
 			if mpref == ref:
 				mp.playlist.deleteFile(i)
 				mp.playlist.updateList()
-				return (True, "%s removed from playlist" % file)
+				return (True, "'%s' removed from playlist" % file)
 			i += 1
 
-		return (False, "%s not found in playlist" % file)
+		return (False, "'%s' not found in playlist" % file)
 
 	def loadPlaylist(self, param):
 		filename = "playlist/%s" % param
@@ -171,11 +174,11 @@ class MP(Source):
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
-			return (False, "mediaplayer not installed")
+			return (False, "Mediaplayer not installed")
 
 		fullPath = resolveFilename(SCOPE_CONFIG, filename)
 		mp.PlaylistSelected(fullPath)
-		return (True, "playlist loaded from %s" % fullPath)
+		return (True, "Playlist loaded from '%s'" % fullPath)
 
 	def writePlaylist(self, param):
 		filename = "playlist/%s.e2pls" % param
@@ -184,20 +187,20 @@ class MP(Source):
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
-			return (False, "mediaplayer not installed")
+			return (False, "Mediaplayer not installed")
 
 		fullPath = resolveFilename(SCOPE_CONFIG, filename)
 		mp.playlistIOInternal.save(fullPath)
-		return (True, "playlist saved to %s" % fullPath)
+		return (True, "Playlist saved to '%s'" % fullPath)
 
 	def command(self, param):
 		# TODO: fix error handling
 		noCreate = True if param == "exit" else False
 		mp = self.tryOpenMP(noCreate=noCreate)
 		if mp is None:
-			return (False, "mediaplayer not installed")
+			return (False, "Mediaplayer not installed")
 		elif mp is False:
-			return (True, "mediaplayer was not active")
+			return (True, "Mediaplayer was not active")
 
 		if param == "previous":
 			mp.previousMarkOrEntry()
@@ -216,13 +219,13 @@ class MP(Source):
 		elif param == "clear":
 			mp.clear_playlist()
 		else:
-			return (False, "unknown parameter %s" % param)
-		return (True, "executed %s" % param)
+			return (False, "Unknown parameter %s" % param)
+		return (True, "Command '%s' executed" % param)
 
 	def getCurrent(self):
 		mp = self.tryOpenMP()
 		if mp is None:
-			msg = "mediaplayer not installed"
+			msg = "Mediaplayer not installed"
 			return ((msg, msg, msg, msg, msg, msg),)
 
 		return ((

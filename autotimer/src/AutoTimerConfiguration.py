@@ -80,6 +80,13 @@ def parseEntry(element, baseTimer, defaults = False):
 		if before and after:
 			baseTimer.timeframe = (int(after), int(before))
 
+		# VPS-Plugin settings
+		vps_enabled = element.get("vps_enabled", "no")
+		vps_overwrite = element.get("vps_overwrite", "no")
+		baseTimer.vps_enabled = True if vps_enabled == "yes" else False
+		baseTimer.vps_overwrite = True if vps_overwrite == "yes" else False
+		del vps_enabled, vps_overwrite
+
 	# Read out encoding (won't change if no value is set)
 	baseTimer.encoding = element.get("encoding")
 
@@ -675,6 +682,12 @@ def buildConfig(defaultTimer, timers, webif = False):
 		# Only display overrideAlternatives if true
 		if timer.overrideAlternatives:
 			extend((' overrideAlternatives="', str(timer.getOverrideAlternatives()), '"'))
+
+		# Only add vps related entries if true
+		if timer.vps_enabled:
+			append(' vps_enabled="yes"')
+			if timer.vps_overwrite:
+				append(' vps_overwrite="yes"')
 
 		# Close still opened timer tag
 		append('>\n')

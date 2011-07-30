@@ -96,7 +96,7 @@ config.plugins.EasyInfo.pos11 = ConfigSelection(default="no", choices = CHOICELI
 config.plugins.EasyInfo.EvInStart = ConfigSelection(default="yes", choices = [("no", _("Disabled")), ("yes", _("Enabled"))])
 config.plugins.EasyInfo.bEvInYellow = ConfigSelection(default="singleepg", choices=[("singleepg", _("Single EPG")),("multiepg", _("Multi EPG")),("easypg", _("Easy-PG")),("graphepg", _("Graphik multi-EPG")),("merlinepg", _("Merlin EPG")),("cooltv", _("Cool-TV")),("imdbinfo", _("IMDB info"))])
 config.plugins.EasyInfo.bEvInBlue = ConfigSelection(default="multiepg", choices=[("singleepg", _("Single EPG")),("multiepg", _("Multi EPG")),("easypg", _("Easy-PG")),("graphepg", _("Graphik multi-EPG")),("merlinepg", _("Merlin EPG")),("cooltv", _("Cool-TV")),("imdbinfo", _("IMDB info"))])
-config.plugins.EasyInfo.myPicons = ConfigSelection(default="/media/usb/epgpicon/", choices = [("/media/usb/epgpicon/", "/media/usb/epgpicon/"), ("/media/cf/epgpicon/", "/media/cf/epgpicon/"), ("/media/hdd/epgpicon/", "/media/hdd/epgpicon/")])
+config.plugins.EasyInfo.myPicons = ConfigSelection(default="/media/usb/epgpicon/", choices = [("/media/usb/epgpicon/", "/media/usb/epgpicon/"), ("/media/cf/epgpicon/", "/media/cf/epgpicon/"), ("/media/hdd/epgpicon/", "/media/hdd/epgpicon/"), ("/usr/share/enigma2/epgpicon/", "/usr/share/enigma2/epgpicon/")])
 config.plugins.EasyInfo.epgOKFunc = ConfigSelection(default="info", choices = [("info", _("Event info")), ("zap", _("Just zap")),("exitzap", _("Zap and Exit"))])
 config.plugins.EasyInfo.Primetime1 = ConfigClock(default = 63000)
 config.plugins.EasyInfo.Primetime2 = ConfigClock(default = 69300)
@@ -394,31 +394,36 @@ class EasyInfo(Screen):
 		self.__keys = []
 		MPaskList = []
 		fertig = False
+		self["key_info"] = StaticText(" ")
+		self["key_yellow"] = StaticText(" ")
+		self["key_green"] = StaticText(" ")
+		self["key_red"] = StaticText(" ")
+		self["key_blue"] = StaticText(" ")
 		if True:
 			if config.plugins.EasyInfo.pos1.value != "no":
 				self.__keys.append(config.plugins.EasyInfo.pos1.value)
 				MPaskList.append(("info", config.plugins.EasyInfo.pos1.value))
-				self["key_info"] = StaticText(_(getPluginByName(config.plugins.EasyInfo.pos1.value)))
+				self["key_info"].setText(_(getPluginByName(config.plugins.EasyInfo.pos1.value)))
 			else: fertig = True
 			if config.plugins.EasyInfo.pos2.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos2.value)
 				MPaskList.append(("red", config.plugins.EasyInfo.pos2.value))
-				self["key_red"] = StaticText(_(getPluginByName(config.plugins.EasyInfo.pos2.value)))
+				self["key_red"].setText(_(getPluginByName(config.plugins.EasyInfo.pos2.value)))
 			else: fertig = True
 			if config.plugins.EasyInfo.pos3.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos3.value)
 				MPaskList.append(("green", config.plugins.EasyInfo.pos3.value))
-				self["key_green"] = StaticText(_(getPluginByName(config.plugins.EasyInfo.pos3.value)))
+				self["key_green"].setText(_(getPluginByName(config.plugins.EasyInfo.pos3.value)))
 			else: fertig = True
 			if config.plugins.EasyInfo.pos4.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos4.value)
 				MPaskList.append(("yellow", config.plugins.EasyInfo.pos4.value))
-				self["key_yellow"] = StaticText(_(getPluginByName(config.plugins.EasyInfo.pos4.value)))
+				self["key_yellow"].setText(_(getPluginByName(config.plugins.EasyInfo.pos4.value)))
 			else: fertig = True
 			if config.plugins.EasyInfo.pos5.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos5.value)
 				MPaskList.append(("blue", config.plugins.EasyInfo.pos5.value))
-				self["key_blue"] = StaticText(_(getPluginByName(config.plugins.EasyInfo.pos5.value)))
+				self["key_blue"].setText(_(getPluginByName(config.plugins.EasyInfo.pos5.value)))
 			else: fertig = True
 			if config.plugins.EasyInfo.pos6.value != "no" and not fertig:
 				self.__keys.append(config.plugins.EasyInfo.pos6.value)

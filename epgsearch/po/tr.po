@@ -97,3 +97,5 @@ msgstr "Arama metnini seçin"
 msgid "search EPG..."
 msgstr "EPG'de ara..."
 
+msgid "search EPG"
+msgstr "EPG'de ara"

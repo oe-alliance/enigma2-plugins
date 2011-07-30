@@ -1222,7 +1222,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
 
 	def googleImageCallback(self, result):
 		foundPos = result.find("imgres?imgurl=")
-		foundPos2 = result.find("&imgrefurl=")
+		foundPos2 = result.find("&amp;imgrefurl=")
 		if foundPos != -1 and foundPos2 != -1:
 			url = result[foundPos+14:foundPos2]
 			parts = url.split("/")

@@ -4,3 +4,4 @@ Description: Automatic Timerlist Cleanup Plugin
 Maintainer: Dr. Best <dr.best@dreambox-tools.info>
 Homepage: http://www.dreambox-tools.info
 Depends: enigma2
+Conflicts: enigma2-plugin-systemplugins-automaticcleanup

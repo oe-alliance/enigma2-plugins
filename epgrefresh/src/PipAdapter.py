@@ -10,6 +10,7 @@ from Tools import Notifications
 from Components.config import config
 
 class PipAdapter:
+	backgroundCapable = False
 	def __init__(self, session, hide=True):
 		if SystemInfo.get("NumVideoDecoders", 1) < 2:
 			self.pipAvail = False
@@ -18,9 +19,14 @@ class PipAdapter:
 		self.hide = hide
 		self.session = session
 		self.pipAvail = True
+
+	def prepare(self):
+		if not self.pipAvail:
+			return False
+
 		if config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddNotification(MessageBox, _("EPG refresh started in background.") + "\n" + _("Please don't use PiP meanwhile!"), type=MessageBox.TYPE_INFO, timeout=4)
-		if session.pipshown:
+		if self.session.pipshown:
 			# Hijack PiP
 			self.wasShown = True
 			self.previousService = self.session.pip.getCurrentService()
@@ -29,6 +35,7 @@ class PipAdapter:
 		else:
 			self.wasShown = False
 		self.initPiP()
+		return True
 
 	def hidePiP(self):
 		# set pip size to 1 pixel

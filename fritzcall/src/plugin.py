@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 $Author: michael $
-$Revision: 643 $
-$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $
-$Id: plugin.py 643 2011-04-30 10:38:52Z michael $
+$Revision: 650 $
+$Date: 2011-07-03 16:23:41 +0200 (So, 03 Jul 2011) $
+$Id: plugin.py 650 2011-07-03 14:23:41Z michael $
 '''
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -292,8 +292,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 643 $"[1:-2] + "\n" + 
-							"$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $"[1:23] + "\n"
+							"$Revision: 650 $"[1:-2] + "\n" + 
+							"$Date: 2011-07-03 16:23:41 +0200 (So, 03 Jul 2011) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -512,17 +512,16 @@ class FritzCallFBF:
 		if found:
 			charset = found.group(1)
 			debug("[FritzCallFBF] _parseFritzBoxPhonebook: found charset: " + charset)
-			if charset != "utf-8":
-				html = html2unicode(html.decode(charset), charset).encode('utf-8') # this looks silly, but has to be
+			html = html2unicode(html.replace(chr(0xf6),'').decode(charset)).encode('utf-8')
 		else: # this is kind of emergency conversion...
 			try:
 				debug("[FritzCallFBF] _parseFritzBoxPhonebook: try charset utf-8")
 				charset = 'utf-8'
-				html = html2unicode(html.decode('utf-8'), 'utf-8').encode('utf-8') # this looks silly, but has to be
+				html = html2unicode(html.decode('utf-8')).encode('utf-8') # this looks silly, but has to be
 			except UnicodeDecodeError:
 				debug("[FritzCallFBF] _parseFritzBoxPhonebook: try charset iso-8859-1")
 				charset = 'iso-8859-1'
-				html = html2unicode(html.decode('iso-8859-1'), 'iso-8859-1').encode('utf-8') # this looks silly, but has to be
+				html = html2unicode(html.decode('iso-8859-1')).encode('utf-8') # this looks silly, but has to be
 
 		# if re.search('document.write\(TrFon1\(\)', html):
 		if html.find('document.write(TrFon1()') != -1:
@@ -530,8 +529,12 @@ class FritzCallFBF:
 			#				 New Style: 7270 (FW 54.04.58, 54.04.63-11941, 54.04.70, 54.04.74-14371, 54.04.76, PHONE Labor 54.04.80-16624)
 			#							7170 (FW 29.04.70) 22.03.2009
 			#							7141 (FW 40.04.68) 22.03.2009
-			#	We expect one line with TrFonName followed by several lines with
+			#  We expect one line with
+			#   TrFonName(Entry umber, Name, ???, Path to picture)
+			#  followed by several lines with
 			#	TrFonNr(Type,Number,Shortcut,Vanity), which all belong to the name in TrFonName.
+			# 
+			#  Photo could be fetched with http://192.168.0.1/lua/photo.lua?photo=<Path to picture[7:]&sid=????
 			#===============================================================================
 			debug("[FritzCallFBF] _parseFritzBoxPhonebook: discovered newer firmware")
 			found = re.match('.*<input type="hidden" name="telcfg:settings/Phonebook/Books/Name(\d+)" value="[Dd]reambox" id="uiPostPhonebookName\d+" disabled>', html, re.S)
@@ -749,7 +752,7 @@ class FritzCallFBF:
 			debug("[FritzCallFBF] _gotPageCalls: filtermsns %s" % (repr(filtermsns)))
 
 		# Typ;Datum;Name;Rufnummer;Nebenstelle;Eigene Rufnummer;Dauer
-		# 0  ;1    ;2   ;3        ;4          ;5               ;6
+		# 0  ;1	;2   ;3		;4		  ;5			   ;6
 		lines = map(lambda line: line.split(';'), lines)
 		lines = filter(lambda line: (len(line)==7 and (line[0]=="Typ" or self._callType == '.' or line[0] == self._callType)), lines)
 
@@ -1617,7 +1620,8 @@ class FritzMenu(Screen, HelpableScreen):
 		self.setTitle(_("FRITZ!Box Fon Status"))
 
 	def _getInfo(self):
-		fritzbox.getInfo(self._fillMenu)
+		if fritzbox:
+			fritzbox.getInfo(self._fillMenu)
 
 	def _fillMenu(self, status):
 		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive) = status
@@ -2717,7 +2721,7 @@ class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 643 $"[1: - 1] + "$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 650 $"[1: - 1] + "$Date: 2011-07-03 16:23:41 +0200 (So, 03 Jul 2011) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -3181,7 +3185,7 @@ class FritzReverseLookupAndNotifier:
 
 class FritzProtocol(LineReceiver):
 	def __init__(self):
-		debug("[FritzProtocol] " + "$Revision: 643 $"[1:-1]	+ "$Date: 2011-04-30 12:38:52 +0200 (Sa, 30 Apr 2011) $"[7:23] + " starting")
+		debug("[FritzProtocol] " + "$Revision: 650 $"[1:-1]	+ "$Date: 2011-07-03 16:23:41 +0200 (So, 03 Jul 2011) $"[7:23] + " starting")
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'

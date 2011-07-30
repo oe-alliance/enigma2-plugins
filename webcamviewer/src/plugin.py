@@ -3,6 +3,7 @@ from enigma import eListboxPythonMultiContent
 from enigma import ePicLoad
 from enigma import loadPNG
 from enigma import gFont
+from enigma import eEnv
 ### Picturelist
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -64,7 +65,7 @@ def startWebcamviewer(session, **kwargs):
 	originalservice = session.nav.getCurrentlyPlayingServiceReference()
 	if config.plugins.pictureviewer.stopserviceonstart.value:
 		session.nav.stopService()
-	xmlfile = "/usr/lib/enigma2/python/Plugins/Extensions/WebcamViewer/webcam.xml"
+	xmlfile = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/WebcamViewer/webcam.xml")
 	if os.path.isfile(xmlfile):
 		try:
 			xmlnode = xml.dom.minidom.parse(open(xmlfile))

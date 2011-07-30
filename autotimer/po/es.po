@@ -642,6 +642,9 @@ msgstr ""
 msgid "add AutoTimer..."
 msgstr "Añadir AutoProgramación..."
 
+msgid "add AutoTimer"
+msgstr "Añadir AutoProgramación"
+
 msgid "add filters"
 msgstr "Añadir Filtros"
 
