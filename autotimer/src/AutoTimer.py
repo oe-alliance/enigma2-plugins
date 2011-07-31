@@ -210,14 +210,10 @@ class AutoTimer:
 
 			# Loop over all EPG matches
 			for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
-
+				#print "TEST AT epgmatches idx " + str(idx)
 				# Reset similarMatch and conflictString
 				similarMatch = False
 				conflictString = ""
-				
-				print "TEST AT name " +str(name)
-				print "TEST AT serv " +str(serviceref)
-				print "TEST AT name " +str(eit)
 				
 				# Check if serviceref is in similar matches list
 				if eit in similar:
@@ -424,26 +420,36 @@ class AutoTimer:
 				else:
 					if similarMatch:
 						newEntry.log(504, "[AutoTimer] Similar Timer is added because of conflicts with %s." % (conflictString))
+
 					conflicts = recordHandler.record(newEntry)
 
 					if conflicts:
 						conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
+						print "[AutoTimer] conflict with %s detected" % (conflictString)
 
 					if conflicts and config.plugins.autotimer.addsimilar_on_conflict.value:
 						# We start our search right after our actual index
-						for servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS in epgmatches[idx+1:]:
-							if evtBegin < beginS:
-								# Match must be after our conflicting event
-								if extdesc == extdescS and shortdesc == shortdescS:
-									# Match only if the descriptions are equal
+						for servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS in ( epgmatches[idx+1:]):
+							# Match only if the descriptions are equal
+							if extdesc == extdescS and shortdesc == shortdescS:
+								# Check if we already know it
+								if eitS not in similar:
 									print "[AutoTimer] Found similar Timer: " + name
 									
 									# Indicate that there exists a similar timer
 									similarExists = True
 
-									# Store the similar serviceref and conflictString, so it can be handled later
-									similar[eit] = conflictString
-									
+									# Store the similar eit and conflictString, so it can be handled later
+									similar[eitS] = conflictString
+
+#									print "TEST AT beginS < evtBegin " + str(beginS) + " " +str(evtBegin)
+#									if beginS < evtBegin:
+#										print "TEST AT epgmatches len " + str(len(epgmatches))
+#										# Event is before our actual epgmatch so we have to append it to the epgmatches list
+#										epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
+#										print "TEST AT epgmatches len " + str(len(epgmatches))
+#										print "TEST AT epgmatches " + str(epgmatches)
+
 									# If this one also will conflict and there are more matches, they will be marked the next time 
 									break
 
