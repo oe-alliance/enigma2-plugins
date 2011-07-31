@@ -153,8 +153,10 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	FAVORITE_FILE = '/etc/enigma2/SHOUTcast.favorites'
 
 	sz_w = getDesktop(0).size().width() - 90
-	sz_h = getDesktop(0).size().height() - 100
+	sz_h = getDesktop(0).size().height() - 95
 	print "[SHOUTcast] desktop size %dx%d\n" % (sz_w+90, sz_h+100)
+	if sz_h < 500:
+		sz_h += 4
 	skin = """
 		<screen name="SHOUTcastWidget" position="center,65" title="%s" size="%d,%d">
 			<ePixmap position="5,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
