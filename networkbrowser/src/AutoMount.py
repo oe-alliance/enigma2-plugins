@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages
-#from __init__ import _
+from __init__ import _
 from re import compile as re_compile
 from os import path as os_path, symlink, listdir, unlink, readlink, remove
 

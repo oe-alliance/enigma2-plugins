@@ -312,6 +312,7 @@ networkbrowser/meta/Makefile
 networkbrowser/src/Makefile
 networkbrowser/src/icons/Makefile
 networkbrowser/src/lib/Makefile
+networkbrowser/po/Makefile
 
 ncidclient/Makefile
 ncidclient/meta/Makefile

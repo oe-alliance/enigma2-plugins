@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages
-#from __init__ import _
+from __init__ import _
 
 from Plugins.Plugin import PluginDescriptor
 from NetworkBrowser import NetworkBrowser
