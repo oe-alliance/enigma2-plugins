@@ -361,17 +361,38 @@
 
 	#contentTable{
 		scrollbar: auto;
-		width: 785px;
 	}
 	
 	#contentServices{
 		vertical-align: top;		
-		width: 585px;
+		width: 610px;
 	}
 
 	#contentServices table{
 		scrollbar: auto;
-		width: 585px;
+		width: 565px;
+	}
+
+	#bouquetsContainer,
+	#servicesContainer {
+		float: left;
+		overflow-y: auto;
+	}
+	
+	#bouquetsContainer { 
+		width: 210px;
+	}
+	
+	#servicesContainer {
+		width: 600px;
+	}
+	
+	.ie8 #servicesContainer {
+		width: 590px;
+	}
+	
+	#bouquets {
+		width: 192px;
 	}
 
 	#contentBouquets{
@@ -392,17 +413,28 @@
 		color: #485052;
 	}
 
+	.ie #contentMain {
+		min-height: 390px;
+    }
+
 	#contentMain div table {
 		float: left;
-		width: 599px;
 	}
 	
 	.sListItem{
 		/*border-bottom: 2px solid #CCC;*/
-		width: 580px;
+		width: 587px;
 		color: #485052;
 	}
 	
+	.ie7 .sListItem {   
+		width: 560px;  
+	}
+	
+	.ie8 .sListItem {
+		width: 560px;
+	}
+
 	.mListItem{
 		/*border-bottom: 2px solid #CCC;*/
 		width: 780px;

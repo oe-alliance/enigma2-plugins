@@ -75,16 +75,24 @@
 			} catch (e) {}
 		}
 
+		function setContainerMaxHeight(element){
+			try{
+				var slc = $(element);
+				size = getWinSize();
+				slc.style.maxHeight = size.height - 180+"px";
+			} catch (e) {}
+		}
+
 	</script>
 </head>
-<body onresize="setMaxHeight('contentMain')" onload="document.getElementById('notification').style.display='none'">
+<body onresize="setContainerMaxHeight('contentMain'); setMaxHeight('bouquetsContainer'); setMaxHeight('servicesContainer')" onload="document.getElementById('notification').style.display='none'">
 	
 	<div id="container">
 		<div id="banner">
 			<span id="notification"><div></div></span>
 			<div id="bannerLeft">
 				<div id="bannerText" style="font-size: 24px;">
-					<img src="/web-data/img/dreamboxweb.png" alt="Dreambox Web">
+					<img src="/web-data/img/dreamboxweb.png" alt="Receiver Web">
 				</div>
 				<ul id="mainMenu">
 					<li><a href="#" onClick="switchMode('TV')">TeleVision</a></li>
@@ -211,7 +219,9 @@
 			return ('<center><img style="padding-top: 50px;" src="/web-data/gfx/ajaxload.gif" alt="loading..."></center>');
 		}
 		
-		setMaxHeight('contentMain');		
+		setInterval ( "setContainerMaxHeight('contentMain')", 500 );
+		setInterval ( "setMaxHeight('bouquetsContainer')", 500 );
+		setInterval ( "setMaxHeight('servicesContainer')", 500 );		
 		
 		init();
 	</script>
