@@ -215,11 +215,14 @@ class AutoTimer:
 				similarMatch = False
 				conflictString = ""
 				
+				print "TEST AT name " +str(name)
+				print "TEST AT serv " +str(serviceref)
+				print "TEST AT name " +str(eit)
+				
 				# Check if serviceref is in similar matches list
-				if serviceref in similar:
+				if eit in similar:
 					similarMatch = True
-					conflictString = similar[serviceref]
-					del similar[serviceref]
+					conflictString = similar[eit]
 
 				eserviceref = eServiceReference(serviceref)
 				evt = epgcache.lookupEventId(eserviceref, eit)
@@ -437,8 +440,9 @@ class AutoTimer:
 									
 									# Indicate that there exists a similar timer
 									similarExists = True
+
 									# Store the similar serviceref and conflictString, so it can be handled later
-									similar[servicerefS] = conflictString
+									similar[eit] = conflictString
 									
 									# If this one also will conflict and there are more matches, they will be marked the next time 
 									break
