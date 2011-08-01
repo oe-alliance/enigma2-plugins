@@ -429,7 +429,7 @@ class AutoTimer:
 
 					if conflicts and config.plugins.autotimer.addsimilar_on_conflict.value:
 						# We start our search right after our actual index
-						for servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS in ( epgmatches[idx+1:]):
+						for servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS in ( epgmatches[idx+1:] + epgmatches[:idx] ):
 							# Match only if the descriptions are equal
 							if extdesc == extdescS and shortdesc == shortdescS:
 								# Check if we already know it
@@ -442,13 +442,13 @@ class AutoTimer:
 									# Store the similar eit and conflictString, so it can be handled later
 									similar[eitS] = conflictString
 
-#									print "TEST AT beginS < evtBegin " + str(beginS) + " " +str(evtBegin)
-#									if beginS < evtBegin:
-#										print "TEST AT epgmatches len " + str(len(epgmatches))
-#										# Event is before our actual epgmatch so we have to append it to the epgmatches list
-#										epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
-#										print "TEST AT epgmatches len " + str(len(epgmatches))
-#										print "TEST AT epgmatches " + str(epgmatches)
+									print "TEST AT beginS < evtBegin " + str(beginS) + " " +str(evtBegin)
+									if beginS < evtBegin:
+										#print "TEST AT epgmatches len " + str(len(epgmatches))
+										# Event is before our actual epgmatch so we have to append it to the epgmatches list
+										epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
+										#print "TEST AT epgmatches len " + str(len(epgmatches))
+										#print "TEST AT epgmatches " + str(epgmatches)
 
 									# If this one also will conflict and there are more matches, they will be marked the next time 
 									break
