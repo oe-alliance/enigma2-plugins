@@ -155,8 +155,8 @@ class AutoTimer:
 		modified = 0
 		timers = []
 		conflicting = []
-		similar = {}			# Contains the the marked similar servicerefs and the conflicting string
-		similars = []			# Contains the added similar timers 
+		similar = defaultdict(list)			# Contains the the marked similar eits and the conflicting strings
+		similars = []										# Contains the added similar timers 
 
 		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
 		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.value + 1)
@@ -172,13 +172,10 @@ class AutoTimer:
 		serviceHandler = eServiceCenter.getInstance()
 		recordHandler = NavigationInstance.instance.RecordTimer
 
-		# Create dict of all movies in all folders used by an autotimer to compare with recordings
-		# The moviedict will be filled only if one AutoTimer is configured to avoid duplicate description for any recordings
-		moviedict = defaultdict(list)
-
 		# Save Recordings in a dict to speed things up a little
 		# We include processed timers as we might search for duplicate descriptions
 		# The recordict is always filled
+		#Question: It might be better to name it timerdict
 		recorddict = defaultdict(list)
 		for timer in ( recordHandler.timer_list + recordHandler.processed_timers ):
 			if timer and timer.service_ref:
@@ -186,6 +183,11 @@ class AutoTimer:
 				extdesc = event and event.getExtendedDescription()
 				timer.extdesc = extdesc
 				recorddict[str(timer.service_ref)].append(timer)
+
+		# Create dict of all movies in all folders used by an autotimer to compare with recordings
+		# The moviedict will be filled only if one AutoTimer is configured to avoid duplicate description for any recordings
+		#Question: It might be better to name it recorddict
+		moviedict = defaultdict(list)
 
 		# Iterate Timer
 		for timer in self.getEnabledTimerList():
@@ -210,15 +212,6 @@ class AutoTimer:
 
 			# Loop over all EPG matches
 			for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
-				#print "TEST AT epgmatches idx " + str(idx)
-				# Reset similarMatch and conflictString
-				similarMatch = False
-				conflictString = ""
-				
-				# Check if serviceref is in similar matches list
-				if eit in similar:
-					similarMatch = True
-					conflictString = similar[eit]
 
 				eserviceref = eServiceReference(serviceref)
 				evt = epgcache.lookupEventId(eserviceref, eit)
@@ -250,14 +243,26 @@ class AutoTimer:
 				# Update timer
 				timer.update(begin, timestamp)
 
-				# Check Duration, Timespan, Timeframe and Excludes
-				# Remove similarMatch if You want perform the check also on similar timers
-				if timer.checkServices(serviceref) \
-					or timer.checkDuration(duration) \
-					or ( not similarMatch and timer.checkTimespan(timestamp) ) \
-					or ( not similarMatch and timer.checkTimeframe(begin) ) \
-					or timer.checkFilter(name, shortdesc, extdesc, ( not similarMatch and str(timestamp.tm_wday) ) ):
-					continue
+				# Check if eit is in similar matches list
+				similarTimer = False
+				if eit in similar:
+					similarTimer = True
+
+				# Check timer conditions
+				if not similarTimer:
+					# Check Duration, Timespan, Timeframe and Excludes
+					if timer.checkServices(serviceref) \
+						or timer.checkDuration(duration) \
+						or timer.checkTimespan(timestamp) \
+						or timer.checkTimeframe(begin) \
+						or timer.checkFilter(name, shortdesc, extdesc, str(timestamp.tm_wday)):
+						continue
+				else:
+					# Check Duration and Excludes except dayofweek 
+					if timer.checkServices(serviceref) \
+						or timer.checkDuration(duration) \
+						or timer.checkFilter(name, shortdesc, extdesc, None):
+						continue
 
 				if timer.hasOffset():
 					# Apply custom Offset
@@ -274,7 +279,6 @@ class AutoTimer:
 				total += 1
 
 				# Append to timerlist and abort if simulating
-				#if not similarMatch: # Do we want the similar timers in the timers list?
 				timers.append((name, begin, end, serviceref, timer.name))
 				if simulateOnly:
 					continue
@@ -338,13 +342,13 @@ class AutoTimer:
 							break
 
 						if hasattr(rtimer, "isAutoTimer"):
-							rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name,))
+							rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 						else:
 							if config.plugins.autotimer.refresh.value != "all":
 								print "[AutoTimer] Won't modify existing timer because it's no timer set by us"
 								break
 
-							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name,))
+							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name))
 
 						newEntry = rtimer
 						modified += 1
@@ -356,16 +360,12 @@ class AutoTimer:
 						newEntry.end = int(end)
 						newEntry.service_ref = ServiceReference(serviceref)
 
-						# Don't store the extended description within the timer
-						if hasattr(newEntry, "extdesc"):
-							del newEntry.extdesc
-
 						break
 					elif timer.avoidDuplicateDescription >= 1 \
 						and not rtimer.disabled \
 						and rtimer.name == name \
 						and rtimer.description == shortdesc \
-						and hasattr(rtimer, "extdesc") and rtimer.extdesc == extdesc:
+						and rtimer.extdesc == extdesc:
 						oldExists = True
 						print "[AutoTimer] We found a timer (similar service) with same description, skipping event"
 						break
@@ -382,7 +382,7 @@ class AutoTimer:
 							if not rtimer.disabled \
 								and rtimer.name == name \
 								and rtimer.description == shortdesc \
-								and hasattr(rtimer, "extdesc") and rtimer.extdesc == extdesc:
+								and rtimer.extdesc == extdesc:
 								oldExists = True
 								print "[AutoTimer] We found a timer (any service) with same description, skipping event"
 								break
@@ -394,7 +394,7 @@ class AutoTimer:
 						continue
 
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
-					newEntry.log(500, "[AutoTimer] Try to add new timer based on AutoTimer %s." % (timer.name,))
+					newEntry.log(500, "[AutoTimer] Try to add new timer based on AutoTimer %s." % (timer.name))
 
 					# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
 					newEntry.isAutoTimer = True
@@ -417,45 +417,45 @@ class AutoTimer:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?
 					recordHandler.timeChanged(newEntry)
 				else:
-					if similarMatch:
+					conflictString = ""
+					if similarTimer:
+						conflictString = similar[eit].conflictString
 						newEntry.log(504, "[AutoTimer] Try to add similar Timer because of conflicts with %s." % (conflictString))
 
+					# Try to add timer
 					conflicts = recordHandler.record(newEntry)
 
 					if conflicts:
 						conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
 						print "[AutoTimer] conflict with %s detected" % (conflictString)
 
-					if conflicts and config.plugins.autotimer.addsimilar_on_conflict.value and not similar:
+					if conflicts and config.plugins.autotimer.addsimilar_on_conflict.value:
 						# We start our search right after our actual index
 						# Attention we have to use a copy of the list, because we have to append the previous older matches
-						# Our actual event will also be appended to the list, so it can be added as disabled if necessary
-						for servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS in ( epgmatches[idx+1:] + epgmatches[:idx+1] ):
+						lepgm = len(epgmatches)
+						for i in xrange(lepgm):
+							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[ (i+idx+1)%lepgm ]
+						#for servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS in ( epgmatches[idx+1:] + epgmatches[:idx] ):
 							# Match only if the descriptions are equal
 							if extdesc == extdescS and shortdesc == shortdescS:
-								print "[AutoTimer] Found similar Timer: " + name
-								
-								# Store the similar eit and conflictString, so it can be handled later
-								similar[eitS] = conflictString
-
-								#print "TEST AT beginS < evtBegin " + str(beginS) + " " +str(evtBegin)
-								if beginS <= evtBegin:
-									# Event is before our actual epgmatch so we have to append it to the epgmatches list
-									epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
-									#print "TEST AT epgmatches " + str(epgmatches)
-
-					# We reached the last element, clear the similar list, so the timer can be added as disabled
-					if idx == len(epgmatches)-1:
-						similar.clear()
-
-					# Similar timers won't be added to the new timer list
-					# Don't add a disabled timer if a similar timer exists
-					if conflicts and config.plugins.autotimer.disabled_on_conflict.value and not similar:
-						newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString,))
-						newEntry.disabled = True
-						# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
-						conflicts = recordHandler.record(newEntry)
-						conflicting.append((name, begin, end, serviceref, timer.name))
+								# Check if the similar is already known
+								if eitS not in similar:
+									print "[AutoTimer] Found similar Timer: " + name
+									
+									# Store the actual and similar eit and conflictString, so it can be handled later
+									newEntry.conflictString = conflictString
+									similar[eit] = newEntry
+									similar[eitS] = newEntry
+									similarTimer = True
+									if beginS <= evtBegin:
+										# Event is before our actual epgmatch so we have to append it to the epgmatches list
+										epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
+									# If we need a second similar it will be found the next time
+									break
+								else:
+									similarTimer = False
+									newEntry = similar[eitS]
+									break
 
 					if conflicts is None:
 						timer.decrementCounter()
@@ -463,13 +463,19 @@ class AutoTimer:
 						timer.extdesc = extdesc
 						recorddict[serviceref].append(newEntry)
 
-					# Conflicting timers won't be added if a similar timer exists
-					elif conflicts and not similar: 					
+						# Similar timers are in new timers list and additionally in similar timers list
+						if similarTimer:
+							similars.append((name, begin, end, serviceref, timer.name))
+							similar.clear()
+
+					# Don't care about similar timers
+					elif not similarTimer:
 						conflicting.append((name, begin, end, serviceref, timer.name))
 
-					# Similar timers are in new timers list and additionally in similar timers list
-					if similarMatch and conflicts is None:
-						similars.append((name, begin, end, serviceref, timer.name))
-						similar.clear()
+						if config.plugins.autotimer.disabled_on_conflict.value:
+							newEntry.log(503, "[AutoTimer] Timer disabled because of conflicts with %s." % (conflictString))
+							newEntry.disabled = True
+							# We might want to do the sanity check locally so we don't run it twice - but I consider this workaround a hack anyway
+							conflicts = recordHandler.record(newEntry)
 
 		return (total, new, modified, timers, conflicting, similars)
