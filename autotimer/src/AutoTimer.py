@@ -176,6 +176,8 @@ class AutoTimer:
 		# We include processed timers as we might search for duplicate descriptions
 		# The recordict is always filled
 		#Question: It might be better to name it timerdict
+		#Question: Move to a separate function getTimerDict()
+		#Note: It is also possible to use RecordTimer isInTimer(), but we won't get the timer itself on a match 
 		recorddict = defaultdict(list)
 		for timer in ( recordHandler.timer_list + recordHandler.processed_timers ):
 			if timer and timer.service_ref:
@@ -213,12 +215,13 @@ class AutoTimer:
 			# Loop over all EPG matches
 			for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
 
+				#Question: Do we need this? 
+				#Question: Move to separate function getRealService()
 				eserviceref = eServiceReference(serviceref)
 				evt = epgcache.lookupEventId(eserviceref, eit)
 				if not evt:
 					print "[AutoTimer] Could not create Event!"
 					continue
-
 				# Try to determine real service (we always choose the last one)
 				n = evt.getNumOfLinkageServices()
 				if n > 0:
@@ -227,7 +230,7 @@ class AutoTimer:
 
 				evtBegin = begin
 				evtEnd = end = begin + duration
-				
+
 				# If event starts in less than 60 seconds skip it
 				if begin < time() + 60:
 					print "[AutoTimer] Skipping an event because it starts in less than 60 seconds"
@@ -290,6 +293,7 @@ class AutoTimer:
 
 					# Eventually create cache
 					if dest and dest not in moviedict:
+						#Question: Move to a separate function getRecordDict()
 						movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
 						if movielist is None:
 							print "[AutoTimer] listing of movies in " + dest + " failed"
