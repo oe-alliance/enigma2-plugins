@@ -101,12 +101,22 @@ class RSS1Wrapper(RSSWrapper):
 			feed.findall(ns + 'item'), ns
 		)
 
+	def __getattr__(self, tag):
+		if tag == 'logo': # XXX: afaik not officially part of older rss, but can't hurt
+			tag = 'image'
+		return ElementWrapper.__getattr__(self, tag)
+
 class RSS2Wrapper(RSSWrapper):
 	def __init__(self, feed, ns):
 		channel = feed.find("channel")
 		RSSWrapper.__init__(
 			self, channel, channel.findall("item")
 		)
+
+	def __getattr__(self, tag):
+		if tag == 'logo':
+			tag = 'image'
+		return ElementWrapper.__getattr__(self, tag)
 
 class PEAWrapper(RSSWrapper):
 	def __init__(self, feed, ns):
@@ -134,6 +144,7 @@ class BaseFeed:
 		# Initialize
 		self.title = title or uri.encode("UTF-8")
 		self.description = description
+		self.logoUrl = ''
 		self.history = []
 
 	def __str__(self):
@@ -220,6 +231,7 @@ class UniversalFeed(BaseFeed):
 
 			self.title = strip(wrapper.title).encode("UTF-8")
 			self.description = strip_readable(wrapper.description or "").encode("UTF-8")
+			self.logoUrl = wrapper.logo
 
 		return self.gotWrapper(wrapper)
 

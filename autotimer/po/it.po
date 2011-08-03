@@ -887,5 +887,7 @@ msgstr "Modificare timer e cercare nuovi eventi"
 #: .../enigma2-plugins/autotimer/src/plugin.py:167
 #: .../enigma2-plugins/autotimer/src/plugin.py:168
 msgid "add AutoTimer..."
-msgstr "agg. AutoTimer"
+msgstr "agg. AutoTimer..."
 
+msgid "add AutoTimer"
+msgstr "agg. AutoTimer"

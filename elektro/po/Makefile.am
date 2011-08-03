@@ -1,3 +1,3 @@
 PLUGIN = Elektro
-LANGS = de it sr
+LANGS = de nl it sr tr
 include $(top_srcdir)/Rules-po.mak

@@ -8,15 +8,23 @@ from Tools import Notifications
 from Components.config import config
 
 class RecordAdapter:
+	backgroundCapable = True
 	def __init__(self, session):
 		if SystemInfo.get("NumVideoDecoders", 1) < 2:
 			self.backgroundRefreshAvailable = False
 			return
+
+		self.backgroundRefreshAvailable = True
+		self.__service = None
+		self.navcore = session.nav
+
+	def prepare(self):
+		if not self.backgroundRefreshAvailable:
+			return False
 		if config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddNotification(MessageBox, _("EPG refresh started in background."), type=MessageBox.TYPE_INFO, timeout=4)
-		self.__service = None
-		self.backgroundRefreshAvailable = True
-		self.navcore = session.nav
+
+		return True
 
 	def play(self, service):
 		print "[EPGRefresh.RecordAdapter.play]"

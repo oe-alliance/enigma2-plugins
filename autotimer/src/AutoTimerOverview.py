@@ -7,7 +7,6 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from AutoTimerEditor import AutoTimerEditor, AutoTimerChannelSelection
-from MPHelp import MPHelp
 from AutoTimerImporter import AutoTimerImportSelector
 from AutoTimerPreview import AutoTimerPreview
 from AutoTimerSettings import AutoTimerSettings
@@ -96,6 +95,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 			{
+				"red": self.cancel,
 				"green": (self.save, _("Close and save changes")),
 				"yellow": (self.remove, _("Remove selected AutoTimer")),
 				"blue": (self.add, _("Add new AutoTimer")),
@@ -106,10 +106,11 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		self.onFirstExecBegin.append(self.firstExec)
 
 	def firstExec(self):
-		if config.plugins.autotimer.show_help.value:
+		from plugin import autotimerHelp
+		if config.plugins.autotimer.show_help.value and autotimerHelp:
 			config.plugins.autotimer.show_help.value = False
 			config.plugins.autotimer.show_help.save()
-			self.menuCallback((False, "help"))
+			autotimerHelp.open(self.session)
 
 	def setCustomTitle(self):
 		self.setTitle(_("AutoTimer overview"))
@@ -214,13 +215,17 @@ class AutoTimerOverview(Screen, HelpableScreen):
 
 	def menu(self):
 		list = [
-			(_("Help"), "help"),
 			#(_("Preview"), "preview"),
 			(_("Import existing Timer"), "import"),
 			(_("Import from EPG"), "import_epg"),
 			(_("Setup"), "setup"),
 			(_("Edit new timer defaults"), "defaults"),
 		]
+
+		from plugin import autotimerHelp
+		if autotimerHelp:
+			list.insert(0, (_("Help"), "help"))
+			list.insert(1, (_("Frequently asked questions") , "faq"))
 
 		if config.plugins.autotimer.editor.value == "wizard":
 			list.append((_("Create a new timer using the classic editor"), "newplain"))
@@ -237,33 +242,14 @@ class AutoTimerOverview(Screen, HelpableScreen):
 		ret = ret and ret[1]
 		if ret:
 			if ret == "help":
-				pages = (
-					(
-						_("Welcome to the AutoTimer-Plugin"),
-						_("This help screen is supposed to give you a quick look at everything the AutoTimer has to offer.\nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later).\n\n\nBut you really should consider to take the few minutes it takes to read this help pages.")
-					),
-					(
-						_("The \"Overview\""),
-						_("The AutoTimer overview is the standard entry point to this plugin.\n\nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remove) or remove them (YELLOW button on your remote).\nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button.\n\nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup.")
-					),
-					(
-						_("What is this \"control menu\" you keep talking about?"),
-						_("The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers.\n\nWhile you can just open the menu and take a look for yourself, let's go through the available options:\n - Help:\n   What you are looking at right now\n - Preview:\n   Simulate EPG search, helps finding errors in your setup.\n - Import existing Timer:\n   Create a new AutoTimer based on an existing regular timer.\n - Import from EPG:\n   Create an AutoTimer based on an EPG event.\n - Setup:\n   Generic configuration of the plugin.\n - Edit new timer defaults:\n   Configure default values for new AutoTimers.\n - Create a new timer using the wizard/classic editor:\n   Use the non-default editor to create a new AutoTimer.")
-					),
-					(
-						_("Generic setup"),
-						_("This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue.\n\nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-).")
-					),
-					(
-						_("Wizard or Classic Editor?"),
-						_("This is mostly a matter of taste.\nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the \"expert\" level features of enigma2.\n\nYou can check out the \"classic\" editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog.")
-					),
-					(
-						_("Congratulations"),
-						_("You now know almost everything there is to know about the AutoTimer-Plugin.\n\nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-).")
-					),
-				)
-				self.session.open(MPHelp, pages, title=_("AutoTimer Help"), additionalSkin="AutoTimerHelp")
+				from plugin import autotimerHelp
+				autotimerHelp.open(self.session)
+			elif ret == "faq":
+				from Plugins.SystemPlugins.MPHelp import PluginHelp, XMLHelpReader
+				from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+				reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/faq.xml"))
+				autotimerFaq = PluginHelp(*reader)
+				autotimerFaq.open(self.session)
 			#elif ret == "preview":
 				#total, new, modified, timers, conflicts = self.autotimer.parseEPG(simulateOnly = True)
 				#self.session.open(

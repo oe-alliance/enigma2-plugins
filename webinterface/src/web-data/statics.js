@@ -33,6 +33,7 @@ function url() {
 	
 	this.mediaplayerlist= "/web/mediaplayerlist?types=audio&path="; // plus full qualified path
 	this.mediaplayerplay= "/web/mediaplayerplay?file="; // plus file-serviceref
+	this.mediaplayeradd= "/web/mediaplayeradd?file="; // plus file-serviceref
 	this.mediaplayerremove= "/web/mediaplayerremove?file="; // plus file-serviceref
 	this.mediaplayercmd= "/web/mediaplayercmd?command="; // plus command
 	this.mediaplayerwrite= "/web/mediaplayerwrite?filename="; // plus filename

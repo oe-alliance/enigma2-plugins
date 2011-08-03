@@ -8,10 +8,10 @@ from Components.config import config, ConfigText, ConfigSelection, ConfigNothing
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.Sources.StaticText import StaticText
-from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer
+from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer, eEnv
 from os import access, chmod, X_OK
 
-mcut_path = "/usr/lib/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut"
+mcut_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut")
 
 def main(session, service, **kwargs):
 	# Hack to make sure it is executable

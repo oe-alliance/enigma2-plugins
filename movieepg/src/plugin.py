@@ -3,10 +3,12 @@ from Plugins.Plugin import PluginDescriptor
 
 from Components.PluginComponent import plugins
 from Tools.BoundFunction import boundFunction
-from Screens.InfoBarGenerics import InfoBarPlugins, InfoBarMoviePlayerSummarySupport
+from Screens.InfoBarGenerics import InfoBarPlugins, InfoBarMoviePlayerSummarySupport, InfoBarChannelSelection
 from Screens.ChannelSelection import ChannelSelection
 from Screens.InfoBar import InfoBar, MoviePlayer
-from Components.config import config, ConfigSubsection, ConfigSelection
+from Screens.MessageBox import MessageBox
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo
+from operator import attrgetter
 import inspect
 
 config.plugins.movieepg = ConfigSubsection()
@@ -16,6 +18,7 @@ config.plugins.movieepg.show_epg_entry = ConfigSelection(choices=[
 		("always", _("always")),
 	], default = "movie"
 )
+config.plugins.movieepg.show_servicelist_plugins_in_movieplayer = ConfigYesNo(default = True)
 
 MODE_OFF = False
 MODE_ON = True
@@ -33,18 +36,21 @@ MODE_MOVIEPLAYER = 2
 # Doing so should not affect behavior if plugin is disabled, though we still overwrite these functions to make things easier to manage internally.
 def InfoBarPlugins_getPluginList(self, *args, **kwargs):
 	l = []
-	showSlistPlugins = hasattr(self, 'servicelist')
+	showSlistPlugins = (config.plugins.movieepg.show_servicelist_plugins_in_movieplayer.value and hasattr(self, 'servicelist')) or isinstance(self, InfoBarChannelSelection)
 	for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EXTENSIONSMENU):
 		args = inspect.getargspec(p.__call__)[0]
 		if len(args) == 1 or len(args) == 2 and showSlistPlugins:
-			l.append(((boundFunction(self.getPluginName, p.name), boundFunction(self.runPlugin, p), lambda: True), None, p.name))
+			l.append(p)
+	l.sort(key=attrgetter('weight', 'name')) # sort first by weight, then by name
+
+	# "tranform" into weird internal format
+	l = [((boundFunction(self.getPluginName, p.name), boundFunction(self.runPlugin, p), lambda: True), None, p.name) for p in l]
 
 	# add fake plugin if show_epg_entry set to "always" or "movie" and this is the movie player
 	show_epg_entry = config.plugins.movieepg.show_epg_entry.value
 	if show_epg_entry == "always" or show_epg_entry == "movie" and isinstance(self, InfoBarMoviePlayerSummarySupport):
 		l.append(((boundFunction(self.getPluginName, "EPG"), boundFunction(self.runPlugin, entry), lambda: True), None, "EPG"))
 
-	l.sort(key = lambda e: e[2]) # sort by name
 	return l
 def InfoBarPlugins_runPlugin(self, plugin, *args, **kwargs):
 	if hasattr(self, 'servicelist'):
@@ -57,7 +63,6 @@ InfoBarPlugins.runPlugin = InfoBarPlugins_runPlugin
 # Step 2: Overwrite some ChannelSelection code to be able to interject channel selection
 #
 # Doing so should not affect behavior if plugin is disabled, though we still overwrite these functions to make things easier to manage internally.
-baseChannelSelection_close = None
 def ChannelSelection_close(self, *args, **kwargs):
 	if hasattr(self, 'secretMovieMode') and self.secretMovieMode != MODE_MOVIEPLAYER:
 		# handles "plugin" close
@@ -66,7 +71,6 @@ def ChannelSelection_close(self, *args, **kwargs):
 baseChannelSelection_close = ChannelSelection.close
 ChannelSelection.close = ChannelSelection_close
 
-baseChannelSelection_zap = None
 def ChannelSelection_zap(self, *args, **kwargs):
 	if hasattr(self, 'secretMovieMode') and self.secretMovieMode:
 		if movieEpgMoviePlayerInstance is not None:
@@ -83,7 +87,12 @@ def entry(session = None, servicelist = None):
 	# XXX: session.current_dialog is the movie player (or infobar if ran from "regular" extension menu)
 	if not session: return
 	if not servicelist:
-		servicelist = InfoBar.instance.servicelist
+		if InfoBar.instance:
+			servicelist = InfoBar.instance.servicelist
+		else:
+			session.open(MessageBox, _("Unable to access InfoBar!\nEPG not available."), MessageBox.TYPE_ERROR)
+			return
+
 	if hasattr(servicelist, 'secretMovieMode') and servicelist.secretMovieMode != MODE_MOVIEPLAYER:
 		servicelist.secretMovieMode = MODE_ON
 	session.execDialog(servicelist)
@@ -93,17 +102,16 @@ def entry(session = None, servicelist = None):
 #
 # Basically no effect on its own.
 movieEpgMoviePlayerInstance = None
-baseMoviePlayer___init__ = None
 def MoviePlayer___init__(self, *args, **kwargs):
 	baseMoviePlayer___init__(self, *args, **kwargs)
-	self.servicelist = InfoBar.instance.servicelist
-	self.servicelist.secretMovieMode = MODE_MOVIEPLAYER
+	if InfoBar.instance:
+		self.servicelist = InfoBar.instance.servicelist
+		self.servicelist.secretMovieMode = MODE_MOVIEPLAYER
 	global movieEpgMoviePlayerInstance
 	movieEpgMoviePlayerInstance = self
 baseMoviePlayer___init__ = MoviePlayer.__init__
 MoviePlayer.__init__ = MoviePlayer___init__
 
-baseMoviePlayer_close = None
 def MoviePlayer_close(self, *args, **kwargs):
 	global movieEpgMoviePlayerInstance
 	movieEpgMoviePlayerInstance = None
@@ -113,10 +121,10 @@ baseMoviePlayer_close = MoviePlayer.close
 MoviePlayer.close = MoviePlayer_close
 
 # Configuration
-from MovieEpgConfiguration import MovieEpgConfiguration
+from MovieEpgSetup import MovieEpgSetup
 
 def main(session):
-	session.open(MovieEpgConfiguration)
+	session.open(MovieEpgSetup)
 
 def Plugins(**kwargs):
 	return [

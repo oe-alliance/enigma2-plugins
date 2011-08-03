@@ -246,9 +246,9 @@ class AutoTimerTask(Components.Task.PythonTask):
 				description = evt.getShortDescription()
 				if description == "":
 					description = evt.getExtendedDescription()
-				begin = evt.getBeginTime()
+				evtBegin = begin = evt.getBeginTime()
 				duration = evt.getDuration()
-				end = begin + duration
+				evtEnd = end = begin + duration
 
 				# If event starts in less than 60 seconds skip it
 				if begin < time() + 60:
@@ -342,7 +342,7 @@ class AutoTimerTask(Components.Task.PythonTask):
 				# We first check eit and if user wants us to guess event based on time
 				# we try this as backup. The allowed diff should be configurable though.
 				for rtimer in self.recorddict.get(serviceref, ()):
-					if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, begin, end) > ((duration/10)*8):
+					if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
 						oldExists = True
 
 						# Abort if we don't want to modify timers or timer is repeated
@@ -414,6 +414,8 @@ class AutoTimerTask(Components.Task.PythonTask):
 				newEntry.dirname = timer.destination
 				newEntry.justplay = timer.justplay
 				newEntry.tags = timer.tags
+				newEntry.vpsplugin_enabled = timer.vps_enabled
+				newEntry.vpsplugin_overwrite = timer.vps_overwrite
 
 				if oldExists:
 					# XXX: this won't perform a sanity check, but do we actually want to do so?

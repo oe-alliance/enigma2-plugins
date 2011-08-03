@@ -1,0 +1,23 @@
+<mphelp skin="PluginSortHelp" caption="PluginSort Help">
+	<page title="Welcome to PluginSort">
+		<text value="This guide is supposed to give you a quick look at how PluginSort works.
+\n\nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selection it from the context menu of the PluginBrowser by pressing the MENU button.
+\n\n\nBut you should really consider to take the few minutes it takes to read these help pages now instead of spending more on trying to find it out how to use this plugin afterwards." />
+	</page>
+	<page title="Stop stalling! Tell me what to do already.">
+		<text value="When inside the PluginBrowser, it behaves just as it normally would. Besides the fact that it is a whole lot different.
+\n\nIf the SoftwareManager is installed, you can gain access to the so-called Move-Mode by pressing the GREEN button on your remote control.
+\n\n\nFrom now on pressing OK will not launch a plugin, but instead the entry you had selected is highlighted and you can move it around using the LEFT, RIGHT, UP and DOWN buttons of your remote control.
+\nOnce you moved the plugin to a position of your liking, you can deselect it by pressing the OK button again." />
+	</page>
+	<page title="So that's all you can do?">
+		<text value="In addition to just being able to change the order of installed plugins inside the PluginBrowser, if you press the MENU button you can also change the order of plugins inside the Extensionsmenu, the EventInfo-Menu (hold the INFO button when watching TV) or the MovieSelection-Menu (press MENU when inside the MovieSelection).
+\n\nOnce you selected one of these options, you go to a modified PluginBrowser, which shows the respective plugins and you can change their order just as described on the previous page.
+\nThe changes are applied when leaving the editor using the RED or EXIT button on your remote control." />
+	</page>
+	<page title="Congratulations">
+		<text value="You have reached the end of this short guide and should know by now how to rearrange your installed plugins to your liking.
+\nIf you do not, you can bring these pages up at any later point by pressing the MENU button in the PluginBrowser and selecting the entry labeled &quot;Help&quot;.
+\n\n\nBefore sending you off to try out the plugin first hand, I want to point you at the fact that you are also able to start the first 10 plugins in the PluginBrowser by pressing the buttons 1 (for the first plugin) to 0 (for the tenth plugin) on your remote control." />
+	</page>
+</mphelp>

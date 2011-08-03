@@ -102,3 +102,5 @@ msgstr "Izaberi tekst za pretragu"
 msgid "search EPG..."
 msgstr "pretraga EPG..."
 
+msgid "search EPG"
+msgstr "pretraga EPG"

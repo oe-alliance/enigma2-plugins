@@ -239,11 +239,17 @@ class EPGRefresh:
 		# NOTE: start notification is handled in adapter initializer
 		if config.plugins.epgrefresh.adapter.value.startswith("pip"):
 			hidden = config.plugins.epgrefresh.adapter.value == "pip_hidden"
-			self.refreshAdapter = PipAdapter(self.session, hide=hidden)
+			refreshAdapter = PipAdapter(self.session, hide=hidden)
 		elif config.plugins.epgrefresh.adapter.value.startswith("record"):
-			self.refreshAdapter = RecordAdapter(self.session)
+			refreshAdapter = RecordAdapter(self.session)
 		else:
-			self.refreshAdapter = MainPictureAdapter(self.session)
+			refreshAdapter = MainPictureAdapter(self.session)
+
+		if (not refreshAdapter.backgroundCapable and Screens.Standby.inStandby) or not refreshAdapter.prepare():
+			print "[EPGRefresh] Adapter is not able to run in background or not available, falling back to MainPictureAdapter"
+			refreshAdapter = MainPictureAdapter(self.session)
+			refreshAdapter.prepare()
+		self.refreshAdapter = refreshAdapter
 
 		self.scanServices = scanServices
 		self.refresh()

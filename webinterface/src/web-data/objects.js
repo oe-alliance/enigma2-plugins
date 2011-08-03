@@ -362,7 +362,7 @@ function Movie(xml, cssclass){
 	}
 	
 	this.json = {
-			'servicereference': escape(this.getServiceReference()),
+			'servicereference': this.getServiceReference(),
 			'servicename': this.getServiceName(),
 			'title': this.getTitle(),
 			'escapedTitle': escape(this.getTitle()),
@@ -813,9 +813,9 @@ function FileList(xml){
 
 	this.getArray = function(){
 		if(this.filelist.length === 0){
-			for(var i=0;i<this.xmlitems.length;i++){
+			for(var i = 0; i < this.xmlitems.length; i++){
 				var file = new File(this.xmlitems.item(i));
-				this.filelist.push(file);			
+				this.filelist.push(file);
 			}
 		}
 
@@ -836,10 +836,10 @@ function File(xml){
 	};
 	
 	this.getNameOnly = function(){
-		if(this.root == '/') {
-			return this.servicereference;
+		if(this.root == '/' || this.isdirectory == "True") {
+			return this.servicereference.replace(this.root, '');
 		} else {
-			return this.servicereference.replace(new RegExp('.*'+this.root, "i"), '');
+			return this.servicereference.replace('4097:0:0:0:0:0:0:0:0:0:', '').replace(this.root, '');
 		}
 	};
 	

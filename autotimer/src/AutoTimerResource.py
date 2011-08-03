@@ -318,6 +318,13 @@ class AutoTimerSettingsResource(resource.Resource):
 		req.setHeader('Content-type', 'application; xhtml+xml')
 		req.setHeader('charset', 'UTF-8')
 
+		try:
+			from Plugins.SystemPlugins.vps import Vps
+		except ImportError, ie:
+			hasVps = False
+		else:
+			hasVps = True
+
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2settings>
 	<e2setting>
@@ -356,6 +363,10 @@ class AutoTimerSettingsResource(resource.Resource):
 		<e2settingname>config.plugins.autotimer.notifconflict</e2settingname>
 		<e2settingvalue>%s</e2settingvalue>
 	</e2setting>
+	<e2setting>
+		<e2settingname>hasVps</e2settingname>
+		<e2settingvalue>%s</e2settingvalue>
+	</e2setting>
 </e2settings>""" % (
 				config.plugins.autotimer.autopoll.value,
 				config.plugins.autotimer.interval.value,
@@ -366,4 +377,5 @@ class AutoTimerSettingsResource(resource.Resource):
 				config.plugins.autotimer.show_in_extensionsmenu.value,
 				config.plugins.autotimer.fastscan.value,
 				config.plugins.autotimer.notifconflict.value,
+				hasVps,
 			)

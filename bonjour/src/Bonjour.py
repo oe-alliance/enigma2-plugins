@@ -39,10 +39,13 @@ class Bonjour:
 		print "[Bonjour.__writeService] Creating service file '%s'" %(service['file'])	
 		if 'type' in service and 'port' in service and 'file' in service:
 			filepath = "%s%s" %(self.AVAHI_SERVICES_DIR, service['file'])
-			file = open(filepath, 'w');
-			file.writelines(self.__createServiceConfig(service))
-			file.close()
-			return True
+			try:
+				file = open(filepath, 'w');
+				file.writelines(self.__createServiceConfig(service))
+				file.close()
+				return True
+			except IOError:
+				pass
 		
 		print "[Bonjour.__writeService] Cannot create service file '%s'" %(service['file'])		
 		return False

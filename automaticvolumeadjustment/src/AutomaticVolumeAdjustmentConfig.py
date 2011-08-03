@@ -24,8 +24,9 @@ from Components.config import ConfigSubsection, ConfigText, \
 	config, ConfigInteger, Config, ConfigSubList, ConfigDirectory, NoSave, ConfigYesNo, ConfigSelectionNumber, ConfigSelection
 from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT  as os_O_CREAT 
 from pickle import load as pickle_load, dump as pickle_dump
+from enigma import eEnv
 
-CONFIG_FILE_VOLUME = '/usr/lib/enigma2/python/Plugins/SystemPlugins/AutomaticVolumeAdjustment/config_volume'
+CONFIG_FILE_VOLUME = eEnv.resolve('${libdir}/enigma2/python/Plugins/SystemPlugins/AutomaticVolumeAdjustment/config_volume')
 
 def getVolumeDict():
 	if os_path.exists(CONFIG_FILE_VOLUME):
@@ -44,7 +45,7 @@ def saveVolumeDict(dict):
 
 class AutomaticVolumeAdjustmentConfig():
 	def __init__(self):
-		self.CONFIG_FILE = '/usr/lib/enigma2/python/Plugins/SystemPlugins/AutomaticVolumeAdjustment/config'
+		self.CONFIG_FILE = eEnv.resolve('${libdir}/enigma2/python/Plugins/SystemPlugins/AutomaticVolumeAdjustment/config')
 		# load config file
 		self.loadConfigFile()
 
@@ -53,9 +54,15 @@ class AutomaticVolumeAdjustmentConfig():
 		print "[AutomaticVolumeAdjustmentConfig] Loading config file..."
 		self.config = Config()
 		if not os_path.exists(self.CONFIG_FILE):
-			fd = os_open( self.CONFIG_FILE, os_O_RDWR|os_O_CREAT)
-			os_close( fd )
-		self.config.loadFromFile(self.CONFIG_FILE)
+			try:
+				fd = os_open( self.CONFIG_FILE, os_O_RDWR|os_O_CREAT)
+				os_close( fd )
+			except Exception, e:
+				print "Error: ", e
+		try:
+			self.config.loadFromFile(self.CONFIG_FILE)
+		except Exception, e:
+			print "Error: ", e
 		self.config.entriescount =  ConfigInteger(0)
 		self.config.Entries = ConfigSubList()
 		self.config.enable = ConfigYesNo(default = False)

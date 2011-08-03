@@ -1,0 +1,5 @@
+installdir = $(datadir)/meta/
+
+dist_install_DATA = plugin_vps.xml
+
+EXTRA_DIST = vps.jpg

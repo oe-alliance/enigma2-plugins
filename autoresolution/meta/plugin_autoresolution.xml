@@ -4,7 +4,7 @@
 					<tag type="System" />
 	  </prerequisites>
           <info>
-                    <author>Domino</author>
+                    <author>nighti</author>
                     <name>AutoResolution</name>
                     <packagename>enigma2-plugin-systemplugins-autoresolution</packagename>
                     <shortdescription>Automatically change video resolution</shortdescription>

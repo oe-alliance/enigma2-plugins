@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 '''
-$Id$
-$Author$
-$Revision$
-$Date$
+$Id: nrzuname.py 649 2011-07-03 14:16:49Z michael $
+$Author: michael $
+$Revision: 649 $
+$Date: 2011-07-03 16:16:49 +0200 (So, 03 Jul 2011) $
 '''
 
 import re, sys, os
@@ -26,7 +26,7 @@ except ValueError:
 			print message
 
 import htmlentitydefs
-def html2unicode(in_html, charset):
+def html2unicode(in_html):
 #===============================================================================
 #	# sanity checks
 #	try:

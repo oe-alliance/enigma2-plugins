@@ -90,6 +90,11 @@ audiosync/meta/Makefile
 audiosync/po/Makefile
 audiosync/src/Makefile
 
+automaticcleanup/Makefile
+automaticcleanup/meta/Makefile
+automaticcleanup/po/Makefile
+automaticcleanup/src/Makefile
+
 automatictimerlistcleanup/Makefile
 automatictimerlistcleanup/meta/Makefile
 automatictimerlistcleanup/po/Makefile
@@ -240,6 +245,10 @@ mediadownloader/meta/Makefile
 mediadownloader/po/Makefile
 mediadownloader/src/Makefile
 
+menusort/Makefile
+menusort/meta/Makefile
+menusort/src/Makefile
+
 merlinepg/Makefile
 merlinepg/meta/Makefile
 merlinepg/src/Makefile
@@ -286,11 +295,16 @@ movieselectionquickbutton/src/Makefile
 movietagger/Makefile
 movietagger/etc/Makefile
 movietagger/meta/Makefile
+movietagger/po/Makefile
 movietagger/src/Makefile
 
 movieepg/Makefile
 movieepg/meta/Makefile
 movieepg/src/Makefile
+
+mphelp/Makefile
+mphelp/meta/Makefile
+mphelp/src/Makefile
 
 multirc/Makefile
 multirc/src/Makefile
@@ -299,6 +313,11 @@ multirc/meta/Makefile
 mytube/Makefile
 mytube/meta/Makefile
 mytube/src/Makefile
+
+namezap/Makefile
+namezap/meta/Makefile
+namezap/po/Makefile
+namezap/src/Makefile
 
 netcaster/Makefile
 netcaster/meta/Makefile
@@ -353,6 +372,16 @@ pipzap/Makefile
 pipzap/meta/Makefile
 pipzap/src/Makefile
 
+pluginhider/Makefile
+pluginhider/meta/Makefile
+pluginhider/po/Makefile
+pluginhider/src/Makefile
+
+pluginsort/Makefile
+pluginsort/meta/Makefile
+pluginsort/po/Makefile
+pluginsort/src/Makefile
+
 podcast/Makefile
 podcast/etc/Makefile
 podcast/meta/Makefile
@@ -406,6 +435,11 @@ shoutcast/meta/Makefile
 shoutcast/po/Makefile
 shoutcast/src/Makefile
 
+showclock/Makefile
+showclock/meta/Makefile
+showclock/po/Makefile
+showclock/src/Makefile
+
 simplerss/Makefile
 simplerss/meta/Makefile
 simplerss/po/Makefile
@@ -454,6 +488,12 @@ vlcplayer/po/Makefile
 vlcplayer/src/Makefile
 vlcplayer/src/servicets/Makefile
 
+vps/Makefile
+vps/meta/Makefile
+vps/po/Makefile
+vps/src_cc/Makefile
+vps/src_py/Makefile
+
 weatherplugin/Makefile
 weatherplugin/meta/Makefile
 weatherplugin/po/Makefile
@@ -488,7 +528,6 @@ webinterface/src/web-data/lib/Makefile
 webinterface/src/web-data/tpl/Makefile
 webinterface/src/web-data/tpl/default/Makefile
 webinterface/src/web-data/tpl/default/streaminterface/Makefile
-webinterface/src/web-data/tpl/default/streaminterface/img/Makefile
 webinterface/src/WebChilds/Makefile
 webinterface/src/WebChilds/External/Makefile
 webinterface/src/WebComponents/Makefile
@@ -504,6 +543,11 @@ youtubeplayer/Makefile
 youtubeplayer/meta/Makefile
 youtubeplayer/src/Makefile
 youtubeplayer/src/Nemesis.GlassLine_Mod/Makefile
+
+yttrailer/Makefile
+yttrailer/meta/Makefile
+yttrailer/po/Makefile
+yttrailer/src/Makefile
 
 zaphistorybrowser/Makefile
 zaphistorybrowser/meta/Makefile

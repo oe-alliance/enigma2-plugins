@@ -1,0 +1,24 @@
+﻿<default>
+	  <prerequisites>
+					<tag type="System" />
+	  </prerequisites>
+          <info language="en">
+                    <author>JuSt611</author>
+                    <name>Show Clock</name>
+                    <packagename>enigma2-plugin-extensions-showclock</packagename>
+                    <shortdescription>Push key &quot;Exit long&quot; to show the clock while watching TV.</shortdescription>
+                    <description>Push key &quot;Exit long&quot; to show the clock while watching TV. Clock will disappear after the specified timeout or by pushing key &quot;Exit long&quot; again.\n
+Modify the settings to match your preferences. To change the clock position, select &quot;Move clock&quot; and relocate.</description>
+          </info>
+          <info language="de">
+                    <author>JuSt611</author>
+                    <name>Show Clock</name>
+                    <packagename>enigma2-plugin-extensions-showclock</packagename>
+                    <shortdescription>Uhr mit Taste &quot;Exit lange&quot; ein-/ausblenden.</shortdescription>
+                    <description>Mit der Taste &quot;Exit lange&quot; wird die Uhr eingeblendet, während Sie fernsehen. Die Uhr wird nach dem eingestellten Zeitintervall oder mit der Taste &quot;Exit lange&quot; wieder ausgeblendet.\n
+Ändern Sie die Einstellungen wunschgemäß. Per &quot;Uhr verschieben&quot; kann die Position der Uhr mit den Steuertasten geändert werden.</description>	    
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-showclock" />
+	  </files>
+</default>

@@ -28,7 +28,7 @@ from Components.Pixmap import Pixmap
 from Components.MenuList import MenuList
 from Components.Label import Label
 from Tools.Directories import fileExists
-from enigma import ePicLoad, getDesktop
+from enigma import ePicLoad, getDesktop, eEnv
 from os import system as os_system
 from Components.config import config, ConfigSubsection, ConfigText, ConfigInteger
 
@@ -125,7 +125,7 @@ class ORFteletextScreen(Screen):
 		if fileExists("/tmp/bild"):
 			self.whatPic = "/tmp/bild"
 		else:
-			self.whatPic = "/usr/lib/enigma2/python/Plugins/Extensions/ORFteletext/nodata.png"
+			self.whatPic = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/ORFteletext/nodata.png")
 		self.EXpicload.PictureData.get().append(self.DecodeAction)
 		self.onLayoutFinish.append(self.firstStart)
 
@@ -166,7 +166,7 @@ class ORFteletextScreen(Screen):
 		if fileExists("/tmp/bild"):
 			self.whatPic = "/tmp/bild"
 		else:
-			self.whatPic = "/usr/lib/enigma2/python/Plugins/Extensions/ORFteletext/nodata.png"
+			self.whatPic = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/ORFteletext/nodata.png")
 		self.Show_Picture()
 
 	def showMe(self):

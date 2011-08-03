@@ -52,6 +52,13 @@ weekdays = [
 	("weekday", _("Weekday"))
 ]
 
+try:
+	from Plugins.SystemPlugins.vps import Vps
+except ImportError, ie:
+	hasVps = False
+else:
+	hasVps = True
+
 class ExtendedConfigText(ConfigText):
 	def __init__(self, default = "", fixed_size = True, visible_width = False):
 		ConfigText.__init__(self, default = default, fixed_size = fixed_size, visible_width = visible_width)
@@ -332,6 +339,10 @@ class AutoTimerEditorBase:
 		self.timerentry_tags = timer.tags
 		self.tags = NoSave(ConfigSelection(choices = [len(self.timerentry_tags) == 0 and _("None") or ' '.join(self.timerentry_tags)]))
 
+		# Vps
+		self.vps_enabled = NoSave(ConfigYesNo(default = timer.vps_enabled))
+		self.vps_overwrite = NoSave(ConfigYesNo(default = timer.vps_overwrite))
+
 	def pathSelected(self, res):
 		if res is not None:
 			# I'm pretty sure this will always fail
@@ -399,6 +410,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.afterevent_timespan.addNotifier(self.reloadList, initial_call = False)
 		self.counter.addNotifier(self.reloadList, initial_call = False)
 		self.useDestination.addNotifier(self.reloadList, initial_call = False)
+		self.vps_enabled.addNotifier(self.reloadList, initial_call = False)
 
 		self.refresh()
 		self.initHelpTexts()
@@ -453,7 +465,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 	def updateHelp(self):
 		cur = self["config"].getCurrent()
 		if cur:
-			self["help"].text = self.helpDict[cur[1]]
+			self["help"].text = self.helpDict.get(cur[1], "")
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -584,6 +596,11 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			list.append(getConfigListEntry(_("Custom location"), self.destination))
 
 		list.append(getConfigListEntry(_("Tags"), self.tags))
+
+		if hasVps:
+			list.append(getConfigListEntry(_("Activate VPS"), self.vps_enabled))
+			if self.vps_enabled.value:
+				list.append(getConfigListEntry(_("Control recording completely by service"), self.vps_overwrite))
 
 		self.list = list
 
@@ -794,7 +811,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.matchLeft = 0
 			self.timer.matchFormatString = ''
 
-		self.timer.avoidDuplicateDescription = str(self.avoidDuplicateDescription.value)
+		self.timer.avoidDuplicateDescription = int(self.avoidDuplicateDescription.value)
 
 		if self.useDestination.value:
 			self.timer.destination = self.destination.value
@@ -802,6 +819,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.timer.destination = None
 
 		self.timer.tags = self.timerentry_tags
+
+		self.timer.vps_enabled = self.vps_enabled.value
+		self.timer.vps_overwrite = self.vps_overwrite.value
 
 		# Close
 		self.close(self.timer)
@@ -1122,7 +1142,8 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 		return SetupSummary
 
 	def remove(self):
-		if self["config"].getCurrentIndex() != 0:
+		idx = self["config"].getCurrentIndex()
+		if idx and idx > 1:
 			list = self["config"].getList()
 			list.remove(self["config"].getCurrent())
 			self["config"].setList(list)
@@ -1313,17 +1334,18 @@ def addAutotimerFromService(session, service = None):
 	tags = info.getInfoString(service, iServiceInformation.sTags)
 	tags = tags and tags.split(' ') or []
 
+	newTimer = autotimer.defaultTimer.clone()
+	newTimer.id = autotimer.getUniqueId()
+	newTimer.name = name
+	newTimer.match = ''
+	newTimer.enabled = True
+
 	# XXX: we might want to make sure that we actually collected any data because the importer does not do so :-)
 
 	session.openWithCallback(
 		importerCallback,
 		AutoTimerImporter,
-		preferredAutoTimerComponent(
-			autotimer.getUniqueId(),
-			name,
-			'',		# Match
-			True	# Enabled
-		),
+		newTimer,
 		match,		# Proposed Match
 		begin,		# Proposed Begin
 		end,		# Proposed End
@@ -1344,20 +1366,16 @@ def importerCallback(ret):
 			AutoTimerEditor,
 			ret
 		)
-	else:
-		# Remove instance if not running in background
-		if not config.plugins.autotimer.autopoll.value:
-			from plugin import autotimer
-			autotimer = None
 
 def editorCallback(ret):
 	if ret:
 		from plugin import autotimer
 
-		# Create instance if needed (should have been created by addAutotimerFrom* above though)
 		if autotimer is None:
 			from AutoTimer import AutoTimer
 			autotimer = AutoTimer()
+			autotimer.readXml()
+		else:
 			autotimer.readXml()
 
 		autotimer.add(ret)
@@ -1367,9 +1385,4 @@ def editorCallback(ret):
 
 		autotimer.readXml()
 		autotimer.parseEPG()
-
-	# Remove instance if not running in background
-	if not config.plugins.autotimer.autopoll.value:
-		autotimer = None
-
 

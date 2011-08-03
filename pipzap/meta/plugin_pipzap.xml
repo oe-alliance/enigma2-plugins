@@ -1,5 +1,8 @@
 <default>
 	  <prerequisites>
+		  <hardware type="dm8000" />
+		  <hardware type="dm7025" />
+		  <hardware type="dm7020hd" />
 	  </prerequisites>
           <info>
                     <author>ritzMo</author>
