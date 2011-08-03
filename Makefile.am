@@ -36,7 +36,6 @@ SUBDIRS = \
 	letterbox \
 	logomanager \
 	mediadownloader \
-	menusort \
 	merlinepg \
 	merlinmusicplayer \
 	meteoitalia \
@@ -46,11 +45,9 @@ SUBDIRS = \
 	movieretitle \
 	moviesearch \
 	movietagger \
-	movieepg \
 	mphelp \
 	multirc \
 	mytube \
-	namezap \
 	ncidclient \
 	netcaster \
 	networkbrowser \
@@ -60,9 +57,6 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
-	pipzap \
-	pluginhider \
-	pluginsort \
 	podcast \
 	porncenter \
 	quickbutton \
