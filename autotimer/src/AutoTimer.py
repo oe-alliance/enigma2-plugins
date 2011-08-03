@@ -26,6 +26,7 @@ from AutoTimerComponent import preferredAutoTimerComponent
 
 from itertools import chain
 from collections import defaultdict
+from difflib import SequenceMatcher
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
@@ -320,11 +321,15 @@ class AutoTimer:
 
 					for movieinfo in moviedict.get(dest, []):
 						if movieinfo.get("name") == name \
-							and movieinfo.get("shortdesc") == shortdesc \
-							and movieinfo.get("extdesc") == extdesc:
-							print "[AutoTimer] We found a matching recorded movie, skipping event:", name
-							movieExists = True
-							break
+							and movieinfo.get("shortdesc") == shortdesc:
+							# Some channels indicate replays in the extended descriptions
+							# If the similarity percent is higher then 0.8 it is a very close match
+							extdescM = movieinfo.get("extdesc")
+							if ( len(extdesc) == len(extdescM) and extdesc == extdescM ) \
+								or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, extdescM).ratio() ):
+								print "[AutoTimer] We found a matching recorded movie, skipping event:", name
+								movieExists = True
+								break
 
 					if movieExists:
 						continue
@@ -368,11 +373,14 @@ class AutoTimer:
 					elif timer.avoidDuplicateDescription >= 1 \
 						and not rtimer.disabled \
 						and rtimer.name == name \
-						and rtimer.description == shortdesc \
-						and rtimer.extdesc == extdesc:
-						oldExists = True
-						print "[AutoTimer] We found a timer (similar service) with same description, skipping event"
-						break
+						and rtimer.description == shortdesc:
+							# Some channels indicate replays in the extended descriptions
+							# If the similarity percent is higher then 0.8 it is a very close match
+							if ( len(extdesc) == len(rtimer.extdesc) and extdesc == rtimer.extdesc ) \
+								or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, rtimer.extdesc).ratio() ):
+								oldExists = True
+								print "[AutoTimer] We found a timer (similar service) with same description, skipping event"
+								break
 
 				# We found no timer we want to edit
 				if newEntry is None:
@@ -385,11 +393,14 @@ class AutoTimer:
 						for rtimer in chain.from_iterable( recorddict.values() ):
 							if not rtimer.disabled \
 								and rtimer.name == name \
-								and rtimer.description == shortdesc \
-								and rtimer.extdesc == extdesc:
-								oldExists = True
-								print "[AutoTimer] We found a timer (any service) with same description, skipping event"
-								break
+								and rtimer.description == shortdesc:
+									# Some channels indicate replays in the extended descriptions
+									# If the similarity percent is higher then 0.8 it is a very close match
+									if ( len(extdesc) == len(rtimer.extdesc) and extdesc == rtimer.extdesc ) \
+										or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, rtimer.extdesc).ratio() ):
+										oldExists = True
+										print "[AutoTimer] We found a timer (any service) with same description, skipping event"
+										break
 						if oldExists:
 							continue
 
@@ -401,6 +412,8 @@ class AutoTimer:
 					newEntry.log(500, "[AutoTimer] Try to add new timer based on AutoTimer %s." % (timer.name))
 
 					# Mark this entry as AutoTimer (only AutoTimers will have this Attribute set)
+					# It is only temporarily, after a restart it will be lost,
+					# because it won't be stored in the timer xml file
 					newEntry.isAutoTimer = True
 
 				# Apply afterEvent
@@ -439,27 +452,29 @@ class AutoTimer:
 						lepgm = len(epgmatches)
 						for i in xrange(lepgm):
 							servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS = epgmatches[ (i+idx+1)%lepgm ]
-						#for servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS in ( epgmatches[idx+1:] + epgmatches[:idx] ):
-							# Match only if the descriptions are equal
-							if extdesc == extdescS and shortdesc == shortdescS:
-								# Check if the similar is already known
-								if eitS not in similar:
-									print "[AutoTimer] Found similar Timer: " + name
-									
-									# Store the actual and similar eit and conflictString, so it can be handled later
-									newEntry.conflictString = conflictString
-									similar[eit] = newEntry
-									similar[eitS] = newEntry
-									similarTimer = True
-									if beginS <= evtBegin:
-										# Event is before our actual epgmatch so we have to append it to the epgmatches list
-										epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
-									# If we need a second similar it will be found the next time
-									break
-								else:
-									similarTimer = False
-									newEntry = similar[eitS]
-									break
+							if shortdesc == shortdescS:
+								# Some channels indicate replays in the extended descriptions
+								# If the similarity percent is higher then 0.8 it is a very close match
+								if ( len(extdesc) == len(extdescS) and extdesc == extdescS ) \
+									or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, extdescS).ratio() ):
+									# Check if the similar is already known
+									if eitS not in similar:
+										print "[AutoTimer] Found similar Timer: " + name
+										
+										# Store the actual and similar eit and conflictString, so it can be handled later
+										newEntry.conflictString = conflictString
+										similar[eit] = newEntry
+										similar[eitS] = newEntry
+										similarTimer = True
+										if beginS <= evtBegin:
+											# Event is before our actual epgmatch so we have to append it to the epgmatches list
+											epgmatches.append((servicerefS, eitS, nameS, beginS, durationS, shortdescS, extdescS))
+										# If we need a second similar it will be found the next time
+										break
+									else:
+										similarTimer = False
+										newEntry = similar[eitS]
+										break
 
 					if conflicts is None:
 						timer.decrementCounter()
