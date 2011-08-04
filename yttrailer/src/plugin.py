@@ -88,7 +88,7 @@ def setup(session,**kwargs):
 def Plugins(**kwargs):
 
 	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]	
-	list.append(PluginDescriptor(name="YTTrailerSetup", description=_("YT-Trailer Setup"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
+	list.append(PluginDescriptor(name="YTTrailerSetup", description=_("YT-Trailer Setup"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup, icon="YTtrailer.png"))
 	return list
 
 def EventViewBase__init__(self, Event, Ref, callback=None, similarEPGCB=None):
