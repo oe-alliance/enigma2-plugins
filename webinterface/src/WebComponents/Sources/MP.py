@@ -176,6 +176,8 @@ class MP(Source):
 			return (False, "Mediaplayer not installed")
 
 		fullPath = resolveFilename(SCOPE_PLAYLIST, param)
+		if not os_path.isfile(fullPath):
+			return (False, "Playlist '%s' does not exist" % fullPath)
 		mp.PlaylistSelected((param, fullPath))
 		return (True, "Playlist loaded from '%s'" % fullPath)
 
