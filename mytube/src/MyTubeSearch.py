@@ -1,20 +1,17 @@
-from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, gFont, eListbox,ePoint,eTimer
+from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, gFont, eTimer
 from MyTubeService import GoogleSuggestions
 from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox
-from Components.config import config, Config, ConfigSelection, ConfigText, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigIP, ConfigNumber,ConfigLocations
-from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT
+from Components.config import config, ConfigText, getConfigListEntry
+from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_ASCII, KEY_TIMEOUT
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
-from Components.ScrollLabel import ScrollLabel
 from Components.Sources.List import List
+from Components.MultiContent import MultiContentEntryText 
 from Components.Task import job_manager
-from Components.Pixmap import Pixmap
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
-from Components.Task import Task, Job, job_manager
-from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_HDD
+from Tools.Directories import resolveFilename, SCOPE_HDD
 
 from threading import Thread
 from threading import Condition

@@ -1623,7 +1623,6 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 		if self.infoCallback is not None:	
 			self.infoCallback()
 
-
 	def playNextFile(self):
 		print "playNextFile"
 		nextservice,error = self.nextCallback()
