@@ -248,6 +248,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.ytfeed = None
 		self.currentFeedName = None
 		self.videolist = []
+		self.queryThread = None
+		self.queryRunning = False
 
 		self.video_playlist = []
 		self.statuslist = []
@@ -691,6 +693,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		config.plugins.mytube.general.history.save()
 		config.plugins.mytube.general.save()
 		config.plugins.mytube.save()
+		self.cancelThread()
 		self.close()
 			
 	def keyOK(self):
@@ -948,16 +951,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.propagateUpDownNormally = True
 
 	def getFeed(self, feedUrl, feedName):
-		try:
-			feed = myTubeService.getFeed(feedUrl)
-		except Exception, e:
-			feed = None
-			print "Error querying feed :",feedName
-			print "E-->",e
-			self.setState('Error')
-		if feed is not None:
-			self.ytfeed = feed
-		self.buildEntryList()
+		self.queryStarted()
+		self.queryThread = myTubeService.getFeed(feedUrl, self.gotFeed, self.gotFeedError)
 
 	def getNextEntries(self, result):
 		if not result:
@@ -990,26 +985,53 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.searchFeed(searchContext)
 
 	def searchFeed(self, searchContext):
-		print "[MyTubePlayer] searchFeed"
+		print "[MyTubePlayer] searchFeed"		
+		self.queryStarted()		
 		self.appendEntries = False
-		try:
-			feed = myTubeService.search(searchContext, 
+		self.queryThread = myTubeService.search(searchContext, 
 					orderby = config.plugins.mytube.search.orderBy.value,
 					racy = config.plugins.mytube.search.racy.value,
 					lr = config.plugins.mytube.search.lr.value,
 					categories = [ config.plugins.mytube.search.categories.value ],
-					sortOrder = config.plugins.mytube.search.sortOrder.value)
-		except Exception, e:
-			feed = None
-			print "Error querying search for :",config.plugins.mytube.search.searchTerm.value
-			print "E-->",e
-			self.setState('Error')
+					sortOrder = config.plugins.mytube.search.sortOrder.value,
+					callback = self.gotSearchFeed, errorback = self.gotSearchFeedError)
+	
+	def queryStarted(self):
+		if self.queryRunning:
+			self.cancelThread()
+		self.queryRunning = True		
+	
+	def queryFinished(self):
+		self.queryRunning = False
+	
+	def cancelThread(self):
+		print "[MyTubePlayer] cancelThread"
+		if self.queryThread is not None:
+			self.queryThread.cancel()
+		self.queryFinished()
+	
+	def gotFeed(self, feed):
+		print "[MyTubePlayer] gotFeed"
+		self.queryFinished()
 		if feed is not None:
 			self.ytfeed = feed
-		if self.FirstRun == True:	
-			self.FirstRun = False
 		self.buildEntryList()
-
+	
+	def gotFeedError(self, exception):
+		print "[MyTubePlayer] gotFeedError"
+		self.queryFinished()
+		self.setState('Error')
+	
+	def gotSearchFeed(self, feed):
+		if self.FirstRun:	
+			self.FirstRun = False
+		self.gotFeed(feed)
+	
+	def gotSearchFeedError(self, exception):
+		if self.FirstRun:	
+			self.FirstRun = False
+		self.gotFeedError(exception)
+	
 	def buildEntryList(self):
 		self.mytubeentries = None
 		self.screenshotList = []
