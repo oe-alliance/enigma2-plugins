@@ -9,16 +9,16 @@ from gdata.service import BadAuthentication
 
 from twisted.web import client
 from twisted.internet import reactor
-from urllib2 import Request, URLError, HTTPError, urlopen as urlopen2
-from socket import gaierror,error
-import re, os, sys, socket
+from urllib2 import Request, URLError, urlopen as urlopen2
+from socket import gaierror, error
+import os, socket
 from urllib import quote, unquote_plus, unquote
-import cookielib
 from httplib import HTTPConnection,CannotSendRequest,BadStatusLine,HTTPException
-HTTPConnection.debuglevel = 1
-from urlparse import parse_qs
 
+from urlparse import parse_qs
 from threading import Thread
+
+HTTPConnection.debuglevel = 1
 
 def validate_cert(cert, key):
 	buf = decrypt_block(cert[8:], key) 
