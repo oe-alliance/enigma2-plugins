@@ -192,7 +192,7 @@ var ServiceListHandler = Class.create(AbstractContentHandler, {
 	}	
 });
 
-var ServiceEpgListHandler = Class.create(AbstractContentHandler,{
+var EpgListHandler = Class.create(AbstractContentHandler,{
 	initialize: function($super){
 		$super('tplEpgList');
 		this.provider = new ServiceEpgListProvider(this.show.bind(this));
@@ -608,7 +608,7 @@ var TimerHandler = Class.create(AbstractContentHandler, {
 
 //create required Instances
 var serviceListHandler = new ServiceListHandler('contentServices');
-var serviceEpgListHandler = new ServiceEpgListHandler();
+var epgListHandler = new EpgListHandler();
 var movieListHandler = new MovieListHandler('contentMain');
 var timerListHandler = new TimerListHandler('contentMain');
 var timerHandler = new TimerHandler('contentMain');

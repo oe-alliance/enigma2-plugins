@@ -670,9 +670,7 @@ function loadEPGBySearchString(string){
 }
 
 function loadEPGByServiceReference(servicereference){
-	serviceEpgListHandler.load({sRef : decodeURIComponent(servicereference) });
-	
-//	doRequest(URL.epgservice+servicereference,incomingEPGrequest, false);
+	epgListHandler.load({sRef : decodeURIComponent(servicereference) });
 }
 
 function buildServiceListEPGItem(epgevent, type){
