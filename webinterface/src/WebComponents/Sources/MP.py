@@ -177,7 +177,7 @@ class MP(Source):
 			return (False, "Mediaplayer not installed")
 
 		fullPath = resolveFilename(SCOPE_CONFIG, filename)
-		mp.PlaylistSelected(fullPath)
+		mp.PlaylistSelected((filename, fullPath))
 		return (True, "Playlist loaded from '%s'" % fullPath)
 
 	def writePlaylist(self, param):
