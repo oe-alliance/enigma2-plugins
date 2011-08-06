@@ -13,7 +13,6 @@ SUBDIRS = \
 	bonjour \
 	cdinfo \
 	dreamirc \
-	dreammediathek \
 	dvdbackup \
 	dyndns \
 	easyinfo \
@@ -81,13 +80,18 @@ SUBDIRS = \
 	weatherplugin \
 	webcamviewer \
 	webbouqueteditor \
-	webinterface \
 	werbezapper \
-	youtubeplayer \
-	yttrailer \
 	zaphistorybrowser \
 	zapstatistic \
 	zdfmediathek
+
+if TPM
+SUBDIRS += \
+	dreammediathek \
+	youtubeplayer \
+	yttrailer \
+	webinterface
+endif
 
 metadir = $(datadir)/meta
 meta_DATA = index-enigma2-plugins.xml
