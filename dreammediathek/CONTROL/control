@@ -3,4 +3,4 @@ Version: 20110131
 Description: Play rtp Stream on your Dreambox 
 Maintainer: nixkoenner@newnigma2.to
 Homepage: http://www.newnigma2.to
-Depends: enigma2 (>> 2.6git20090409), twisted-web
+Depends: twisted-web, dreambox-tpm-python
