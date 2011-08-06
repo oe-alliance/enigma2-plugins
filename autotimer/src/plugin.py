@@ -27,7 +27,7 @@ config.plugins.autotimer.try_guessing = ConfigEnableDisable(default = True)
 config.plugins.autotimer.editor = ConfigSelection(choices = [
 		("plain", _("Classic")),
 		("wizard", _("Wizard"))
-	], default = "Classic"
+	], default = "plain"
 )
 config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default = True)
 config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default = False)
