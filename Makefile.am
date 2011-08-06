@@ -13,6 +13,7 @@ SUBDIRS = \
 	bonjour \
 	cdinfo \
 	dreamirc \
+	dreammediathek \
 	dvdbackup \
 	dyndns \
 	easyinfo \
@@ -87,7 +88,6 @@ SUBDIRS = \
 
 if TPM
 SUBDIRS += \
-	dreammediathek \
 	mytube \
 	yttrailer \
 	webinterface
