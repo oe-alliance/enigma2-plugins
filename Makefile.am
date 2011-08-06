@@ -46,7 +46,6 @@ SUBDIRS = \
 	movietagger \
 	mphelp \
 	multirc \
-	mytube \
 	ncidclient \
 	netcaster \
 	networkbrowser \
@@ -81,6 +80,7 @@ SUBDIRS = \
 	webcamviewer \
 	webbouqueteditor \
 	werbezapper \
+	youtubeplayer \
 	zaphistorybrowser \
 	zapstatistic \
 	zdfmediathek
@@ -88,7 +88,7 @@ SUBDIRS = \
 if TPM
 SUBDIRS += \
 	dreammediathek \
-	youtubeplayer \
+	mytube \
 	yttrailer \
 	webinterface
 endif
