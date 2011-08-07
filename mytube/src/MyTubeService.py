@@ -13,7 +13,7 @@ from urllib2 import Request, URLError, urlopen as urlopen2
 from socket import gaierror, error
 import os, socket
 from urllib import quote, unquote_plus, unquote
-from httplib import HTTPConnection,CannotSendRequest,BadStatusLine,HTTPException
+from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
 
 from urlparse import parse_qs
 from threading import Thread

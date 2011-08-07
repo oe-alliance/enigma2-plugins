@@ -10,8 +10,8 @@ from Components.ScrollLabel import ScrollLabel
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.List import List
 from Components.Task import Task, Job, job_manager
-from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, \
-	ConfigYesNo#, ConfigIP, ConfigNumber, ConfigLocations
+from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
+#, ConfigIP, ConfigNumber, ConfigLocations
 from MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, MyTubeTasksScreen, MyTubeHistoryScreen
 from MyTubeService import validate_cert, get_rnd, myTubeService
 from Plugins.Plugin import PluginDescriptor
@@ -26,8 +26,7 @@ from Tools.Downloader import downloadWithProgress
 
 from __init__ import decrypt_block
 
-from enigma import eTPM, eTimer, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, \
-	gFont, ePicLoad, eServiceReference, iPlayableService
+from enigma import eTPM, eTimer, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, gFont, ePicLoad, eServiceReference, iPlayableService
 from os import path as os_path, remove as os_remove
 from twisted.web import client
 
@@ -191,7 +190,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	Details = {}
 	#(entry, Title, Description, TubeID, thumbnail, PublishedDate,Views,duration,ratings )	
 	skin = """
-		<screen name="MyTubePlayerMainScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTubePlayerMainScreen..." >
+		<screen name="MyTubePlayerMainScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Browser" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="config" zPosition="2" position="60,60" size="600,50" scrollbarMode="showNever" transparent="1" />
 			<widget source="feedlist" render="Listbox" position="49,110" size="628,385" zPosition="1" scrollbarMode="showOnDemand" transparent="1" backgroundPixmap="~/list_bg.png" selectionPixmap="~/list_sel.png" >
@@ -1248,7 +1247,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 class MyTubeVideoInfoScreen(Screen):
 	skin = """
-		<screen name="MyTubeVideoInfoScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTubePlayerMainScreen..." >
+		<screen name="MyTubeVideoInfoScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Video Info" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="title" position="60,50" size="600,50" zPosition="5" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="starsbg" pixmap="~/starsbar_empty.png" position="560,220" zPosition="5" size="100,20" transparent="1" alphatest="on" />
@@ -1462,7 +1461,7 @@ class MyTubeVideoInfoScreen(Screen):
 
 class MyTubeVideoHelpScreen(Screen):
 	skin = """
-		<screen name="MyTubeVideoHelpScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTubePlayerMainScreen..." >
+		<screen name="MyTubeVideoHelpScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Help" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="title" position="60,50" size="600,50" zPosition="5" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="detailtext" position="60,120" size="610,370" zPosition="10" font="Regular;21" transparent="1" halign="left" valign="top"/>

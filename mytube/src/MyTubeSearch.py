@@ -153,7 +153,7 @@ if default not in tmp:
 
 class MyTubeSuggestionsListScreen(Screen):
 	skin = """
-		<screen name="MyTubeSuggestionsListScreen" position="60,93" zPosition="6" size="610,160" flags="wfNoBorder" >
+		<screen name="MyTubeSuggestionsListScreen" title="MyTube - Search" position="60,93" zPosition="6" size="610,160" flags="wfNoBorder" >
 			<ePixmap position="0,0" zPosition="-1" size="610,160" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyTube/suggestions_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget source="suggestionslist" render="Listbox" position="10,5" zPosition="7" size="580,150" scrollbarMode="showOnDemand" transparent="1" >
 				<convert type="TemplatedMultiContent">
@@ -253,7 +253,7 @@ class MyTubeSuggestionsListScreen(Screen):
 
 class MyTubeSettingsScreen(Screen, ConfigListScreen):
 	skin = """
-		<screen name="MyTubeSettingsScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTubePlayerMainScreen..." >
+		<screen name="MyTubeSettingsScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Settings" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="title" position="60,50" size="600,50" zPosition="5" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="config" zPosition="2" position="60,120" size="610,370" scrollbarMode="showOnDemand" transparent="1" />
@@ -411,7 +411,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 
 class MyTubeTasksScreen(Screen):
 	skin = """
-		<screen name="MyTubeTasksScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTubePlayerMainScreen..." >
+		<screen name="MyTubeTasksScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Tasks" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="title" position="60,50" size="600,50" zPosition="5" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="tasklist" render="Listbox" position="60,120" size="610,370" zPosition="7" scrollbarMode="showOnDemand" transparent="1" >
@@ -497,7 +497,7 @@ class MyTubeTasksScreen(Screen):
 
 class MyTubeHistoryScreen(Screen):
 	skin = """
-		<screen name="MyTubeHistoryScreen" position="60,93" zPosition="6" size="610,160" flags="wfNoBorder" >
+		<screen name="MyTubeHistoryScreen" position="60,93" zPosition="6" size="610,160" flags="wfNoBorder" title="MyTube - History>
 			<ePixmap position="0,0" zPosition="-1" size="610,160" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyTube/suggestions_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget source="historylist" render="Listbox" position="10,5" zPosition="7" size="580,150" scrollbarMode="showOnDemand" transparent="1" >
 				<convert type="TemplatedMultiContent">
