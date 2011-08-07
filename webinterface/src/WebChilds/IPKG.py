@@ -95,7 +95,6 @@ class IPKGConsoleStream:
 		self.request = request
 		self.request.write("<html><body>\n")		
 		self.container = eConsoleAppContainer()
-		self.container.dumpToFile("/tmp/IPKG.py")
 		self.lastdata = None
 
 		self.container.dataAvail.append(self.dataAvail)
