@@ -168,28 +168,29 @@ class MP(Source):
 		return (False, "'%s' not found in playlist" % file)
 
 	def loadPlaylist(self, param):
-		filename = "playlist/%s" % param
-		from Tools.Directories import resolveFilename, SCOPE_CONFIG
+		from Tools.Directories import resolveFilename, SCOPE_PLAYLIST
 
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
 			return (False, "Mediaplayer not installed")
 
-		fullPath = resolveFilename(SCOPE_CONFIG, filename)
-		mp.PlaylistSelected(fullPath)
+		fullPath = resolveFilename(SCOPE_PLAYLIST, param)
+		if not os_path.isfile(fullPath):
+			return (False, "Playlist '%s' does not exist" % fullPath)
+		mp.PlaylistSelected((param, fullPath))
 		return (True, "Playlist loaded from '%s'" % fullPath)
 
 	def writePlaylist(self, param):
-		filename = "playlist/%s.e2pls" % param
-		from Tools.Directories import resolveFilename, SCOPE_CONFIG
+		filename = "%s.e2pls" % param
+		from Tools.Directories import resolveFilename, SCOPE_PLAYLIST
 
 		# TODO: fix error handling
 		mp = self.tryOpenMP()
 		if mp is None:
 			return (False, "Mediaplayer not installed")
 
-		fullPath = resolveFilename(SCOPE_CONFIG, filename)
+		fullPath = resolveFilename(SCOPE_PLAYLIST, filename)
 		mp.playlistIOInternal.save(fullPath)
 		return (True, "Playlist saved to '%s'" % fullPath)
 

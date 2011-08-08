@@ -1,23 +1,24 @@
 # -*- coding: iso-8859-1 -*-
-from __init__ import bin2long, long2bin, rsa_pub1024, decrypt_block
+from enigma import ePythonMessagePump
+
+from __init__ import decrypt_block
+from ThreadQueue import ThreadQueue
 import gdata.youtube
 import gdata.youtube.service
 from gdata.service import BadAuthentication
-from Tools.LoadPixmap import LoadPixmap
-from Components.config import config, Config, ConfigSelection, ConfigText, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigIP, ConfigNumber
-from Components.ConfigList import ConfigListScreen
-from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT
 
 from twisted.web import client
 from twisted.internet import reactor
-from urllib2 import Request, URLError, HTTPError, urlopen as urlopen2
-from socket import gaierror,error
-import re, os, sys, socket
+from urllib2 import Request, URLError, urlopen as urlopen2
+from socket import gaierror, error
+import os, socket
 from urllib import quote, unquote_plus, unquote
-import cookielib
-from httplib import HTTPConnection,CannotSendRequest,BadStatusLine,HTTPException
-HTTPConnection.debuglevel = 1
+from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
+
 from urlparse import parse_qs
+from threading import Thread
+
+HTTPConnection.debuglevel = 1
 
 def validate_cert(cert, key):
 	buf = decrypt_block(cert[8:], key) 
@@ -50,7 +51,7 @@ std_headers = {
 
 class GoogleSuggestions():
 	def __init__(self, callback, ds = None, json = None, hl = None):
-		self.callback = callback
+		self.gotFeed = callback
 		self.conn = HTTPConnection("google.com")
 		#GET /complete/search?output=toolbar&ds=yt&hl=en&jsonp=self.gotSuggestions&q=s
 		self.prepQuerry = "/complete/search?output=toolbar&"
@@ -63,7 +64,7 @@ class GoogleSuggestions():
 		self.prepQuerry = self.prepQuerry + "jsonp=self.gotSuggestions&q="
 
 	def gotSuggestions(self, suggestslist):
-		self.callback(suggestslist)
+		self.gotFeed(suggestslist)
 
 	def getSuggestions(self, querryString):
 		if querryString is not "":
@@ -72,22 +73,22 @@ class GoogleSuggestions():
 				self.conn.request("GET", querry)
 			except (CannotSendRequest, gaierror, error):
 				print "[MyTube]  Can not send request for suggestions"
-				self.callback(None)
+				self.gotFeed(None)
 			else:
 				try:
 					response = self.conn.getresponse()
 				except BadStatusLine:
 					print "[MyTube]  Can not get a response from google"
-					self.callback(None)
+					self.gotFeed(None)
 				else:
 					if response.status == 200:
 						data = response.read()
 						self.gotSuggestions(data)
 					else:
-						self.callback(None)
+						self.gotFeed(None)
 			self.conn.close()
 		else:
-			self.callback(None)
+			self.gotFeed(None)
 
 
 class MyTubeFeedEntry():
@@ -287,13 +288,14 @@ class MyTubePlayerService():
 		print "[MyTube] MyTubePlayerService - init"
 		self.feedentries = []
 		self.feed = None
-		
+				
 	def startService(self):
 		print "[MyTube] MyTubePlayerService - startService"
-		self.yt_service = gdata.youtube.service.YouTubeService()
-		self.yt_service.developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw'
-		self.yt_service.client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0'
-		self.loggedIn = False
+		self.yt_service = gdata.youtube.service.YouTubeService( 
+			developer_key = 'AI39si4AjyvU8GoJGncYzmqMCwelUnqjEMWTFCcUtK-VUzvWygvwPO-sadNwW5tNj9DDCHju3nnJEPvFy4WZZ6hzFYCx8rJ6Mw',
+			client_id = 'ytapi-dream-MyTubePlayer-i0kqrebg-0' 
+		)
+#		self.loggedIn = False
 		#os.environ['http_proxy'] = 'http://169.229.50.12:3128'
 		#proxy = os.environ.get('http_proxy')
 		#print "FOUND ENV PROXY-->",proxy
@@ -303,23 +305,18 @@ class MyTubePlayerService():
 	def stopService(self):
 		print "[MyTube] MyTubePlayerService - stopService"
 		del self.ytService
-		self.loggedIn = False
 
-	def isLoggedIn(self):
-		return self.loggedIn
-
-	def getFeed(self, url):
+	def getFeed(self, url, callback = None, errorback = None):
 		print "[MyTube] MyTubePlayerService - getFeed:",url
 		self.feedentries = []
-		self.feed = self.yt_service.GetYouTubeVideoFeed(url)
-		for entry in self.feed.entry:
-			MyFeedEntry = MyTubeFeedEntry(self, entry)
-			self.feedentries.append(MyFeedEntry)
-		return self.feed			
+		queryThread = YoutubeQueryThread(self.yt_service.GetYouTubeVideoFeed, url, self.gotFeed, self.gotFeedError, callback, errorback)
+		queryThread.start()
+		return queryThread		
 
 	def search(self, searchTerms, startIndex = 1, maxResults = 25,
 					orderby = "relevance", racy = "include", 
-					author = "", lr = "", categories = "", sortOrder = "ascending"):
+					author = "", lr = "", categories = "", sortOrder = "ascending", 
+					callback = None, errorback = None):
 		print "[MyTube] MyTubePlayerService - search()"
 		self.feedentries = []
 		query = gdata.youtube.service.YouTubeVideoQuery()
@@ -333,17 +330,24 @@ class MyTubePlayerService():
 			query.categories = categories
 		query.start_index = startIndex
 		query.max_results = maxResults
-		try:
-			feed = self.yt_service.YouTubeQuery(query)
-		except gaierror:
-			feed = None
+		queryThread = YoutubeQueryThread(self.yt_service.YouTubeQuery, query, self.gotFeed, self.gotFeedError, callback, errorback)
+		queryThread.start()
+		return queryThread	
+	
+	def gotFeed(self, feed, callback):
 		if feed is not None:
 			self.feed = feed
 			for entry in self.feed.entry:
 				MyFeedEntry = MyTubeFeedEntry(self, entry)
 				self.feedentries.append(MyFeedEntry)
-		return self.feed		
-
+		if callback is not None:
+			callback(self.feed)
+			
+	def gotFeedError(self, exception, errorback):
+		if errorback is not None:
+			errorback(exception)
+	
+	
 	def getTitle(self):
 		return self.feed.title.text
 
@@ -362,5 +366,38 @@ class MyTubePlayerService():
 				return link.href
 		return None
 
-
+class YoutubeQueryThread(Thread):
+	def __init__(self, query, param, gotFeed, gotFeedError, callback, errorback):
+		Thread.__init__(self)
+		self.messagePump = ePythonMessagePump()
+		self.messages = ThreadQueue()
+		self.gotFeed = gotFeed
+		self.gotFeedError = gotFeedError
+		self.callback = callback
+		self.errorback = errorback
+		self.query = query
+		self.param = param
+		self.canceled = False
+		self.messagePump.recv_msg.get().append(self.finished)
+	
+	def cancel(self):
+		self.canceled = True
+	
+	def run(self):
+		try:
+			feed = self.query(self.param)
+			self.messages.push((True, feed, self.callback))
+			self.messagePump.send(0)
+		except Exception, ex:
+			self.messages.push((False, ex, self.errorback))
+			self.messagePump.send(0)			
+	
+	def finished(self, val):		
+		if not self.canceled:
+			message = self.messages.pop()
+			if message[0]:		
+				self.gotFeed(message[1], message[2])
+			else:
+				self.gotFeedError(message[1], message[2])
+		
 myTubeService = MyTubePlayerService()

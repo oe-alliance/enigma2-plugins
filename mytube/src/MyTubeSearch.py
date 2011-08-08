@@ -1,32 +1,27 @@
+from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, gFont, eTimer
 from MyTubeService import GoogleSuggestions
 from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox
-from Components.config import config, Config, ConfigSelection, ConfigText, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigIP, ConfigNumber,ConfigLocations
+from Components.config import config, ConfigText, getConfigListEntry
+from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_ASCII, KEY_TIMEOUT
 from Components.ConfigList import ConfigListScreen
-from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
-from Components.ScrollLabel import ScrollLabel
 from Components.Sources.List import List
-from Components.Pixmap import Pixmap
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
-from Components.Task import Task, Job, job_manager
-from enigma import eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, gFont, eListbox,ePoint,eTimer
+from Components.MultiContent import MultiContentEntryText 
 from Components.Task import job_manager
-from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_HDD
+from Tools.Directories import resolveFilename, SCOPE_HDD
+
 from threading import Thread
 from threading import Condition
 from xml.etree.cElementTree import parse as cet_parse
 from StringIO import StringIO
-
-
-import urllib
+#import urllib
 from urllib import FancyURLopener
 
 class MyOpener(FancyURLopener):
 	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
-
 
 class ConfigTextWithGoogleSuggestions(ConfigText):
 	class SuggestionsThread(Thread):
@@ -151,122 +146,14 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 		if self.suggestionsWindow is not None:
 			self.suggestionsWindow.enableSelection(value)
 
-
-config.plugins.mytube = ConfigSubsection()
-config.plugins.mytube.search = ConfigSubsection()
-
-config.plugins.mytube.search.searchTerm = ConfigTextWithGoogleSuggestions("", False, threaded = True)
-config.plugins.mytube.search.orderBy = ConfigSelection(
-				[
-				 ("relevance", _("Relevance")),
-				 ("viewCount", _("View Count")),
-				 ("published", _("Published")),
-				 ("rating", _("Rating"))
-				], "relevance")
-config.plugins.mytube.search.time = ConfigSelection(
-				[
-				 ("all_time", _("All Time")),
-				 ("this_month", _("This Month")),
-				 ("this_week", _("This Week")),
-				 ("today", _("Today"))
-				], "all_time")
-config.plugins.mytube.search.racy = ConfigSelection(
-				[
-				 ("include", _("Yes")),
-				 ("exclude", _("No"))
-				], "include")
-config.plugins.mytube.search.categories = ConfigSelection(
-				[
-				 (None, _("All")),
-				 ("Film", _("Film & Animation")),
-				 ("Autos", _("Autos & Vehicles")),
-				 ("Music", _("Music")),
-				 ("Animals", _("Pets & Animals")),
-				 ("Sports", _("Sports")),
-				 ("Travel", _("Travel & Events")),
-				 ("Shortmov", _("Short Movies")),
-				 ("Games", _("Gaming")),
-				 ("Comedy", _("Comedy")),
-				 ("People", _("People & Blogs")),
-				 ("News", _("News & Politics")),
-				 ("Entertainment", _("Entertainment")),
-				 ("Education", _("Education")),
-				 ("Howto", _("Howto & Style")),
-				 ("Nonprofit", _("Nonprofits & Activism")),
-				 ("Tech", _("Science & Technology"))
-				], None)
-config.plugins.mytube.search.lr = ConfigSelection(
-				[
-				 (None, _("All")),
-				 ("au", _("Australia")),
-				 ("br", _("Brazil")),				 
-				 ("ca", _("Canada")),
-				 ("cz", _("Czech Republic")),
-				 ("fr", _("France")),
-				 ("de", _("Germany")),
-				 ("gb", _("Great Britain")),
-				 ("au", _("Australia")),
-				 ("nl", _("Holland")),
-				 ("hk", _("Hong Kong")),
-				 ("in", _("India")),
-				 ("ie", _("Ireland")),
-				 ("il", _("Israel")),
-				 ("it", _("Italy")),
-				 ("jp", _("Japan")),
-				 ("mx", _("Mexico")),
-				 ("nz", _("New Zealand")),
-				 ("pl", _("Poland")),
-				 ("ru", _("Russia")),
-				 ("kr", _("South Korea")),
-				 ("es", _("Spain")),
-				 ("se", _("Sweden")),
-				 ("tw", _("Taiwan")),
-				 ("us", _("United States")) 
-				], None)
-config.plugins.mytube.search.sortOrder = ConfigSelection(
-				[
-				 ("ascending", _("Ascending")),
-				 ("descending", _("Descending"))
-				], "ascending")
-
-config.plugins.mytube.general = ConfigSubsection()
-config.plugins.mytube.general.showHelpOnOpen = ConfigYesNo(default = True)
-config.plugins.mytube.general.loadFeedOnOpen = ConfigYesNo(default = True)
-config.plugins.mytube.general.startFeed = ConfigSelection(
-				[
-				 ("hd", _("HD videos")),
-				 ("most_viewed", _("Most viewed")),
-				 ("top_rated", _("Top rated")),
-				 ("recently_featured", _("Recently featured")),
-				 ("most_discussed", _("Most discussed")),
-				 ("top_favorites", _("Top favorites")),
-				 ("most_linked", _("Most linked")),
-				 ("most_responded", _("Most responded")),
-				 ("most_recent", _("Most recent"))
-				], "most_viewed")
-
-config.plugins.mytube.general.on_movie_stop = ConfigSelection(default = "ask", choices = [
-	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again")) ])
-
-config.plugins.mytube.general.on_exit = ConfigSelection(default = "ask", choices = [
-	("ask", _("Ask user")), ("quit", _("Return to movie list"))])
-
-
 default = resolveFilename(SCOPE_HDD)
 tmp = config.movielist.videodirs.value
 if default not in tmp:
 	tmp.append(default)
-config.plugins.mytube.general.videodir = ConfigSelection(default = default, choices = tmp)
-config.plugins.mytube.general.history = ConfigText(default="")
-config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
-
-#config.plugins.mytube.general.useHTTPProxy = ConfigYesNo(default = False)
-#config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
-#config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
 
 class MyTubeSuggestionsListScreen(Screen):
 	skin = """
-		<screen name="MyTubeSuggestionsListScreen" position="60,93" zPosition="6" size="610,160" flags="wfNoBorder" >
+		<screen name="MyTubeSuggestionsListScreen" title="MyTube - Search" position="60,93" zPosition="6" size="610,160" flags="wfNoBorder" >
 			<ePixmap position="0,0" zPosition="-1" size="610,160" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyTube/suggestions_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget source="suggestionslist" render="Listbox" position="10,5" zPosition="7" size="580,150" scrollbarMode="showOnDemand" transparent="1" >
 				<convert type="TemplatedMultiContent">
@@ -366,7 +253,7 @@ class MyTubeSuggestionsListScreen(Screen):
 
 class MyTubeSettingsScreen(Screen, ConfigListScreen):
 	skin = """
-		<screen name="MyTubeSettingsScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTubePlayerMainScreen..." >
+		<screen name="MyTubeSettingsScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Settings" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="title" position="60,50" size="600,50" zPosition="5" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="config" zPosition="2" position="60,120" size="610,370" scrollbarMode="showOnDemand" transparent="1" />
@@ -524,7 +411,7 @@ class MyTubeSettingsScreen(Screen, ConfigListScreen):
 
 class MyTubeTasksScreen(Screen):
 	skin = """
-		<screen name="MyTubeTasksScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTubePlayerMainScreen..." >
+		<screen name="MyTubeTasksScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Tasks" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="title" position="60,50" size="600,50" zPosition="5" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget source="tasklist" render="Listbox" position="60,120" size="610,370" zPosition="7" scrollbarMode="showOnDemand" transparent="1" >
@@ -610,7 +497,7 @@ class MyTubeTasksScreen(Screen):
 
 class MyTubeHistoryScreen(Screen):
 	skin = """
-		<screen name="MyTubeHistoryScreen" position="60,93" zPosition="6" size="610,160" flags="wfNoBorder" >
+		<screen name="MyTubeHistoryScreen" position="60,93" zPosition="6" size="610,160" flags="wfNoBorder" title="MyTube - History>
 			<ePixmap position="0,0" zPosition="-1" size="610,160" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyTube/suggestions_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget source="historylist" render="Listbox" position="10,5" zPosition="7" size="580,150" scrollbarMode="showOnDemand" transparent="1" >
 				<convert type="TemplatedMultiContent">
