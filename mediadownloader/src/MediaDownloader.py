@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # for localized messages
 from . import _
 
@@ -13,7 +15,10 @@ from Components.Sources.StaticText import StaticText
 from VariableProgressSource import VariableProgressSource
 
 from Components.config import config
-from urlparse import urlparse, urlunparse
+try:
+	from urlparse import urlparse, urlunparse
+except ImportError as ie:
+	from urllib.parse import urlparse, urlunparse
 
 import time
 
@@ -97,7 +102,7 @@ def download(url, file, writeProgress = None, contextFactory = None, \
 		authHeader = "Basic " + basicAuth.strip()
 		AuthHeaders = {"Authorization": authHeader}
 
-		if kwargs.has_key("headers"):
+		if "headers" in kwargs:
 			kwargs["headers"].update(AuthHeaders)
 		else:
 			kwargs["headers"] = AuthHeaders
@@ -255,7 +260,7 @@ class MediaDownloader(Screen):
 
 	def error(self, msg = ""):
 		if msg != "":
-			print "[MediaDownloader] Error downloading:", msg
+			print("[MediaDownloader] Error downloading:", msg)
 
 		self.session.open(
 			MessageBox,
