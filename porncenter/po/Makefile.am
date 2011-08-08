@@ -1,3 +1,3 @@
 PLUGIN = PornCenter
-LANGS = de it
-include $(top_srcdir)/Rules-po.mak
+LANGS = de it nl
+include $(top_srcdir)/Rules_noxml-po.mak

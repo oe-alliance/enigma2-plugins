@@ -11,7 +11,8 @@ $(PLUGIN)-py.pot: $(srcdir)/../src/*.py
 	$(XGETTEXT) -L python --from-code=UTF-8 --add-comments="TRANSLATORS:" -d $(PLUGIN) -s -o $@ $^
 
 $(PLUGIN).pot: $(PLUGIN)-py.pot
-	$(MSGUNIQ) $^ --no-location -o $@ -
+	sed --in-place $(PLUGIN)-py.pot --expression=s/CHARSET/UTF-8/
+	$(MSGUNIQ) $^ -o $@
 
 %.po: $(PLUGIN).pot
 	if [ -f $@ ]; then \
