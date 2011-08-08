@@ -271,15 +271,3 @@ msgstr "Mount di rete aggiornato."
 
 msgid "use as HDD replacement"
 msgstr "Usare in sostituzione HDD"
-
-#~ msgid "Add a new NFS or CIFS mount point to your Receiver."
-#~ msgstr "Aggiungere nuovo mount point NFS o CIFS al Receiver"
-
-#~ msgid "Change the hostname of your Receiver."
-#~ msgstr "Cambiare nome Host del Receiver."
-
-#~ msgid "Enter new hostname for your Receiver"
-#~ msgstr "Inserire il nuovo nome Host per il Receiver"
-
-#~ msgid "View, edit or delete mountpoints on your Receiver."
-#~ msgstr "Vedere, modificare o cancellare mount point sul Receiver."

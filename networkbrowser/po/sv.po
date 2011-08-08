@@ -272,27 +272,3 @@ msgstr "Din nätverksmontering har uppdaterats."
 
 msgid "use as HDD replacement"
 msgstr ""
-
-#~ msgid "Add a new NFS or CIFS mount point to your Receiver."
-#~ msgstr "Lägg till ny NFS eller CIFS monteringspunkt i din Receiver."
-
-#~ msgid "Change the hostname of your Receiver."
-#~ msgstr "Byt hostnamn på din Receiver."
-
-#~ msgid "Delete selected mount"
-#~ msgstr "Ta bort vald montering"
-
-#~ msgid "Enter new hostname for your Receiver"
-#~ msgstr "Ange nytt hostnamn för din Receiver"
-
-#~ msgid "Rescan network"
-#~ msgstr "Omsök nätverk"
-
-#~ msgid "Retrieving network information. Please wait..."
-#~ msgstr "Hämtar nätinformationssystem. Vänligen vänta..."
-
-#~ msgid "Use domain/username for windows domains as username!"
-#~ msgstr "Använd domän/användarnamn för Windows domän som användarnamn!"
-
-#~ msgid "View, edit or delete mountpoints on your Receiver."
-#~ msgstr "Visa, ändra eller ta bort monteringspunkter på din Receiver."

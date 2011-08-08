@@ -271,27 +271,3 @@ msgstr "Vaš mrežni maunt je ažuriran."
 
 msgid "use as HDD replacement"
 msgstr ""
-
-#~ msgid "Add a new NFS or CIFS mount point to your Receiver."
-#~ msgstr "Dodaj novu CIFS ili  NFS maunt tačku tvom drimboksu."
-
-#~ msgid "Change the hostname of your Receiver."
-#~ msgstr "Promeni ime hosta svog drimboksa."
-
-#~ msgid "Delete selected mount"
-#~ msgstr "Obriši izabrani maunt"
-
-#~ msgid "Enter new hostname for your Receiver"
-#~ msgstr "Unesi novo ime hosta za svoj drimboks"
-
-#~ msgid "Rescan network"
-#~ msgstr "Ponovo skeniraj mrežu"
-
-#~ msgid "Retrieving network information. Please wait..."
-#~ msgstr "Obnavljanje informacija o mreži. Molim sačekajte..."
-
-#~ msgid "Use domain/username for windows domains as username!"
-#~ msgstr "Koristi domen/korisn.ime za windows domene kao korisn.ime!"
-
-#~ msgid "View, edit or delete mountpoints on your Receiver."
-#~ msgstr "Vidi, uredi ili obriši maunt tačke na svom drimboksu."

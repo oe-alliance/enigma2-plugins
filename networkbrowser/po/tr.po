@@ -268,26 +268,3 @@ msgstr "Ağ diski bağlantınız güncellendi."
 
 msgid "use as HDD replacement"
 msgstr ""
-
-#~ msgid "Add a new NFS or CIFS mount point to your Receiver."
-#~ msgstr "Receiver'ınıza yeni bir NFS veya CIFS ağ bağlantı noktası ekleyin."
-
-#~ msgid "Change the hostname of your Receiver."
-#~ msgstr "Receiver'ınızın konak adını değiştirin."
-
-#~ msgid "Delete selected mount"
-#~ msgstr "Seçilen bağlantıyı sil"
-
-#~ msgid "Enter new hostname for your Receiver"
-#~ msgstr "Receiver'ınızın yeni konak adını girin"
-
-#~ msgid "MountView"
-#~ msgstr "Bağlantı noktalarına bak"
-
-#~ msgid "Rescan network"
-#~ msgstr "Ağı yeniden ara"
-
-#~ msgid "View, edit or delete mountpoints on your Receiver."
-#~ msgstr ""
-#~ "Receiver'ınızdaki ağ bağlantı noktalarını inceleyin, düzenleyin veya "
-#~ "silin."

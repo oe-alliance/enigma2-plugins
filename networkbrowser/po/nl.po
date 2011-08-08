@@ -276,27 +276,3 @@ msgstr "Uw netwerkverbinding is bijgewerkt."
 
 msgid "use as HDD replacement"
 msgstr "Gebruik als harde schijf vervanging"
-
-#~ msgid "Add a new NFS or CIFS mount point to your Receiver."
-#~ msgstr "Voeg een nieuwe NFS of CIFS verbinding aan uw Receiver toe."
-
-#~ msgid "Change the hostname of your Receiver."
-#~ msgstr "Wijzig de hostnaam van uw Receiver."
-
-#~ msgid "Delete selected mount"
-#~ msgstr "Verwijder deze verbinding"
-
-#~ msgid "Enter new hostname for your Receiver"
-#~ msgstr "Geef een nieuwe hostnaam voor uw Receiver:"
-
-#~ msgid "Rescan network"
-#~ msgstr "Netwerk opnieuw doorzoeken"
-
-#~ msgid "Scan NFS Share"
-#~ msgstr "Zoek NFS share"
-
-#~ msgid "View, edit or delete mountpoints on your Receiver."
-#~ msgstr "Bekijk, wijzig of verwijder verbindingen op uw Receiver."
-
-#~ msgid "address range"
-#~ msgstr "Adresbereik"
