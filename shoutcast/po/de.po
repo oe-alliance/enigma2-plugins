@@ -250,5 +250,3 @@ msgstr "Umbenennen"
 msgid "search-criteria %s"
 msgstr "Suchkriterium %s"
 
-#~ msgid "This Receiver can't decode %s streams!"
-#~ msgstr "%s kann nicht dekodiert werden."

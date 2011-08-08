@@ -249,8 +249,3 @@ msgstr "Rinominare il preferito selezionato"
 msgid "search-criteria %s"
 msgstr "criterio di ricerca %s"
 
-#~ msgid "This Receiver can't decode %s streams!"
-#~ msgstr "Questo Receiver non può decodificare stream %s"
-
-#~ msgid "listen to shoutcast internet-radio"
-#~ msgstr "Ascoltare shoutcast radio su internet"
