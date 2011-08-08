@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 plugin - kiddytimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-29 12:59+0100\n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,106 +16,182 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/kiddytimer\n"
 
-#: ..\src/plugin.py:49
-msgid "KiddyTimer"
-msgstr "Dečji tajmer"
+msgid "01:00"
+msgstr "01:00"
 
-#: ..\src/plugin.py:49
-msgid "Allows to controls your kids' daily TV usage"
-msgstr "Dopušta vam kontrolu dnevnog korišćenja TV-a vašeg deteta"
-
-#: ..\src/KTmain.py:21
 msgid "??:??"
 msgstr "??:??"
 
-#: ..\src/KTglob.py:6
-msgid "Sunday"
-msgstr "Nedelja"
+msgid "Allows to controls your kids' daily TV usage"
+msgstr "Dopušta vam kontrolu dnevnog korišćenja TV-a vašeg deteta"
 
-#: ..\src/KTglob.py:7
-msgid "Monday"
-msgstr "Ponedeljak"
+msgid "Cancel"
+msgstr "Otkaži"
 
-#: ..\src/KTglob.py:8
-msgid "Tuesday"
-msgstr "Utorak"
+msgid "Center screen at the lower border"
+msgstr ""
 
-#: ..\src/KTglob.py:9
-msgid "Wednesday"
-msgstr "Sreda"
+msgid "Center screen at the upper border"
+msgstr ""
 
-#: ..\src/KTglob.py:10
-msgid "Thursday"
-msgstr "Četvrtak"
+msgid ""
+"Cheat attempt detected. \n"
+"Box has not been shudown correctly. \n"
+"Remaining time was set to 0."
+msgstr ""
 
-#: ..\src/KTglob.py:11
-msgid "Friday"
-msgstr "Petak"
+msgid "Clock"
+msgstr "Sat"
 
-#: ..\src/KTglob.py:12
-msgid "Saturday"
-msgstr "Subota"
+msgid "Decrease remaining time"
+msgstr ""
 
-#: ..\src/KTsetup.py:48
-msgid "Enabled"
-msgstr "Uključeno"
+msgid "Disable KiddyTimer"
+msgstr ""
 
-#: ..\src/KTsetup.py:49
-msgid "PIN"
-msgstr "PIN "
+msgid "Discard changes and close screen"
+msgstr ""
 
-#: ..\src/KTsetup.py:50
+msgid "Do you want to start the kiddytimer- plugin now."
+msgstr "Da li želite da pokrenete dodatak dečji tajmer sada?"
+
 msgid "Don't monitor TV started after"
 msgstr "Ne kontroliši TV startovan posle "
 
-#: ..\src/KTsetup.py:70
-#, python-format
-msgid "Plugin: %(plugin)s , Version: %(version)s"
-msgstr "Dodatak: %(plugin)s , Verzija: %(version)s"
+msgid "Don't monitor TV started before"
+msgstr ""
 
-#: ..\src/KTsetup.py:71
-#: ..\src/KTsetup.py:97
-#, python-format
-msgid "Remaining time: %s"
-msgstr "Preostalo vreme: %s"
+msgid "Enable KiddyTimer"
+msgstr ""
 
-#: ..\src/KTsetup.py:72
+msgid "Enable KiddyTimer for x minutes"
+msgstr ""
+
+msgid "Enabled"
+msgstr "Uključeno"
+
+msgid "Enter pin code"
+msgstr "Unesite pin kod"
+
+msgid "Friday"
+msgstr "Petak"
+
+msgid "Increase remaining time"
+msgstr ""
+
+msgid "Invalid selection"
+msgstr ""
+
+msgid "KiddyTimer"
+msgstr "Dečji tajmer"
+
 #, python-format
 msgid "Last day started: %s"
 msgstr "Start.posled. dana: %s"
 
-#: ..\src/KTsetup.py:75
-msgid "Cancel"
-msgstr "Otkaži"
+msgid "Monday"
+msgstr "Ponedeljak"
 
-#: ..\src/KTsetup.py:76
-msgid "Save"
-msgstr "Sačuvaj"
-
-#: ..\src/KTsetup.py:77
-msgid "Reset clock"
-msgstr "Resetuj sat"
-
-#: ..\src/KTsetup.py:78
 msgid "Move clock"
 msgstr "Pomeri sat"
 
-#: ..\src/KTpositioner.py:18
-msgid "01:00"
-msgstr "01:00"
+msgid "Move screen down"
+msgstr ""
 
-#~ msgid "Do you want to start the kiddytimer- plugin now."
-#~ msgstr "Da li želite da pokrenete dodatak dečji tajmer sada?"
-#~ msgid "Please enter the correct pin code"
-#~ msgstr "Molim unesite ispravan pin kod"
-#~ msgid "Enter pin code"
-#~ msgstr "Unesite pin kod"
-#~ msgid "Clock"
-#~ msgstr "Sat"
-#~ msgid "Smiley"
-#~ msgstr "Smajli"
-#~ msgid "Style of timer"
-#~ msgstr "Stil tajmera"
-#~ msgid "Timeout for activation dialog"
-#~ msgstr "Vreme za aktiviranje dijaloga"
+msgid "Move screen to the center of your TV"
+msgstr ""
 
+msgid "Move screen to the left"
+msgstr ""
+
+msgid "Move screen to the lower left corner"
+msgstr ""
+
+msgid "Move screen to the lower right corner"
+msgstr ""
+
+msgid "Move screen to the middle of the left border"
+msgstr ""
+
+msgid "Move screen to the middle of the right border"
+msgstr ""
+
+msgid "Move screen to the right"
+msgstr ""
+
+msgid "Move screen to the upper left corner"
+msgstr ""
+
+msgid "Move screen to the upper right corner"
+msgstr ""
+
+msgid "Move screen up"
+msgstr ""
+
+msgid "PIN"
+msgstr "PIN "
+
+msgid "Please enter the correct pin code"
+msgstr "Molim unesite ispravan pin kod"
+
+msgid "Please select your KiddyTimer- option"
+msgstr ""
+
+#, python-format
+msgid "Plugin: %(plugin)s , Version: %(version)s"
+msgstr "Dodatak: %(plugin)s , Verzija: %(version)s"
+
+#, python-format
+msgid "Remaining time: %s"
+msgstr "Preostalo vreme: %s"
+
+msgid "Reset clock"
+msgstr "Resetuj sat"
+
+msgid "Reset saved position"
+msgstr ""
+
+msgid "Reset todays remaining time"
+msgstr ""
+
+msgid "Saturday"
+msgstr "Subota"
+
+msgid "Save"
+msgstr "Sačuvaj"
+
+msgid "Save values and close screen"
+msgstr ""
+
+msgid "Set remaining time"
+msgstr ""
+
+msgid "Smiley"
+msgstr "Smajli"
+
+msgid "Start KiddyTimer"
+msgstr ""
+
+msgid "Stop KiddyTimer (this session only)"
+msgstr ""
+
+msgid "Style of timer"
+msgstr "Stil tajmera"
+
+msgid "Sunday"
+msgstr "Nedelja"
+
+msgid "The pin code you entered is wrong."
+msgstr ""
+
+msgid "Thursday"
+msgstr "Četvrtak"
+
+msgid "Timeout for activation dialog"
+msgstr "Vreme za aktiviranje dijaloga"
+
+msgid "Tuesday"
+msgstr "Utorak"
+
+msgid "Wednesday"
+msgstr "Sreda"

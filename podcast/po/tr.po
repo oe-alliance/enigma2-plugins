@@ -2,17 +2,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Podcast plugin Turkish locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-06 07:30+0000\n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
 "PO-Revision-Date: 2009-06-06 23:53+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/enigma2/python/Plugins/Extensions/Podcast\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ali/enigma2/ali-image/usr/lib/"
+"enigma2/python/Plugins/Extensions/Podcast\n"
 
 msgid " (Audio)"
 msgstr " (Ses)"
@@ -29,12 +31,10 @@ msgstr "Tampon dosyası işleme:"
 msgid "Buffer:"
 msgstr "Tampon:"
 
-msgid "Date"
-msgstr "Tarih"
-
 msgid "Delete this movie?"
 msgstr "Bu film silmek istiyor musunuz?"
 
+#, python-format
 msgid "Downloading movie: %s"
 msgstr "%s filmi indiriliyor!"
 
@@ -71,6 +71,9 @@ msgstr "Kaydet"
 msgid "Select"
 msgstr "Seç"
 
+msgid "Stop playing this movie?"
+msgstr ""
+
 msgid "Type"
 msgstr "Tip"
 
@@ -95,3 +98,5 @@ msgstr "podcast.com"
 msgid "podcast.de"
 msgstr "podcast.de"
 
+#~ msgid "Date"
+#~ msgstr "Tarih"

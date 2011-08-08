@@ -1,0 +1,54 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-08-08 13:42+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/NamezapSetup.py:57
+msgid "Cancel"
+msgstr ""
+
+#: ../src/NamezapSetup.py:39
+msgid "Controls the visual appearance of the number zap dialog."
+msgstr ""
+
+#: ../src/NamezapSetup.py:33 ../src/NamezapSetup.py:74 ../src/plugin.py:107
+msgid "NameZAP Setup"
+msgstr ""
+
+#: ../src/plugin.py:19
+msgid "Number and Name"
+msgstr ""
+
+#: ../src/NamezapSetup.py:56
+msgid "OK"
+msgstr ""
+
+#: ../src/plugin.py:17
+msgid "Only Number"
+msgstr ""
+
+#: ../src/plugin.py:18
+msgid "Service Name"
+msgstr ""
+
+#: ../src/plugin.py:91
+msgid "Unknown Service"
+msgstr ""
+
+#: ../src/NamezapSetup.py:39
+msgid "Zapper Style"
+msgstr ""

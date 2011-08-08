@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - tageditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-31 01:42+0100\n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
 "PO-Revision-Date: 2009-05-31 02:27+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,36 +17,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/tageditor\n"
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:25
-msgid "edit tags"
-msgstr "Mod. etich"
+msgid "Add new tag..."
+msgstr "Aggiungere nuova etichetta..."
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:45
 msgid "Cancel"
 msgstr "Annull."
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:46
-msgid "OK"
-msgstr "Ok"
+msgid "Delete all tags..."
+msgstr "Cancellare tutte le etichette"
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:47
-msgid "New"
-msgstr "Nuovo"
+msgid "Delete this tag..."
+msgstr "Cancellare etichetta..."
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:48
-msgid "Load"
-msgstr "Caricare"
+msgid "Delete unused tags"
+msgstr "Cancellare le etichette inutilizzate"
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:77
-msgid "Please enter the new tag"
-msgstr "Inserire la nuova etichetta"
+msgid ""
+"Do you really want to delete all tags everywhere?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Cancellare ovunque tutte le etichetta?\n"
+"(Nota: \"Annull.\" non potrà annullare!)"
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:200
-#, python-format
-msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
-msgstr "Sostituire ovunque l'etichetta \"%s\" con:   (Nota: \"Annull.\" non potrà annullare!)"
-
-#: /home/dario/Plugins/tageditor/src/plugin.py:220
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -54,31 +47,33 @@ msgstr ""
 "Cancellare ovunque l'etichetta \"%s\" ?\n"
 "(Nota: \"Annull.\" non potrà annullare!)"
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:237
-msgid ""
-"Do you really want to delete all tags everywhere?\n"
-"(Note that 'Cancel' will not undo this!)"
+#. TRANSLATORS: This is the title of the TagEditor main screen
+msgid "Edit Tags"
 msgstr ""
-"Cancellare ovunque tutte le etichetta?\n"
-"(Nota: \"Annull.\" non potrà annullare!)"
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:251
-msgid "Add new tag..."
-msgstr "Aggiungere nuova etichetta..."
+msgid "Load"
+msgstr "Caricare"
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:252
+msgid "New"
+msgstr "Nuovo"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Please enter the new tag"
+msgstr "Inserire la nuova etichetta"
+
 msgid "Rename this tag..."
 msgstr "Rinominare etichetta..."
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:253
-msgid "Delete this tag..."
-msgstr "Cancellare etichetta..."
+#, python-format
+msgid ""
+"Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo "
+"this!)"
+msgstr ""
+"Sostituire ovunque l'etichetta \"%s\" con:   (Nota: \"Annull.\" non potrà "
+"annullare!)"
 
-#: /home/dario/Plugins/tageditor/src/plugin.py:254
-msgid "Delete unused tags"
-msgstr "Cancellare le etichette inutilizzate"
-
-#: /home/dario/Plugins/tageditor/src/plugin.py:255
-msgid "Delete all tags..."
-msgstr "Cancellare tutte le etichette"
-
+#. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+msgid "edit tags"
+msgstr "Mod. etich"

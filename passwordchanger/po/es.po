@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PasswordChanger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-26 16:05-0000\n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
 "PO-Revision-Date: 2009-01-09 14:18+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,17 +15,18 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/passwordchanger/src\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/passwordchanger/"
+"src\n"
 
-#: /home/aliabdul/dream/enigma2-plugins/passwordchanger/src/plugin.py:50
-msgid "Old password:"
-msgstr "Contraseña anterior:"
+msgid "Change your ftp and telnet password"
+msgstr "Cambia su contraseña de telnet y ftp"
 
-#: /home/aliabdul/dream/enigma2-plugins/passwordchanger/src/plugin.py:51
-msgid "New password:"
-msgstr "Contraseña nueva:"
+msgid "Could not log in!"
+msgstr "¡No puedo identificarme!"
 
-#: /home/aliabdul/dream/enigma2-plugins/passwordchanger/src/plugin.py:62
+msgid "Error while setting new password!"
+msgstr "¡Error mientras actualizaba la nueva contraseña!"
+
 msgid ""
 "Incorrect new password!\n"
 "Minimum length: 5\n"
@@ -34,19 +36,11 @@ msgstr ""
 "Longitud mínima : 5\n"
 "Longitud máxima: 8"
 
-#: /home/aliabdul/dream/enigma2-plugins/passwordchanger/src/plugin.py:137
-msgid "Could not log in!"
-msgstr "¡No puedo identificarme!"
+msgid "New password:"
+msgstr "Contraseña nueva:"
 
-#: /home/aliabdul/dream/enigma2-plugins/passwordchanger/src/plugin.py:150
-msgid "Error while setting new password!"
-msgstr "¡Error mientras actualizaba la nueva contraseña!"
+msgid "Old password:"
+msgstr "Contraseña anterior:"
 
-#: /home/aliabdul/dream/enigma2-plugins/passwordchanger/src/plugin.py:163
 msgid "Password Changer"
 msgstr "Cambiador de Contraseña"
-
-#: /home/aliabdul/dream/enigma2-plugins/passwordchanger/src/plugin.py:163
-msgid "Change your ftp and telnet password"
-msgstr "Cambia su contraseña de telnet y ftp"
-

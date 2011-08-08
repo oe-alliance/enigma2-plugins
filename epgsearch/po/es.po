@@ -7,68 +7,99 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-10 13:04+0100\n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
 "PO-Revision-Date: 2009-02-10 13:35+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/EPGSearch.py:137
+msgid "Add AutoTimer"
+msgstr ""
+
+msgid "Add timer"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../src/EPGSearch.py:175
 msgid "Channel Selection"
 msgstr "Selección canal"
 
-#: ../src/EPGSearch.py:52
+#, python-format
+msgid "Could not read AutoTimer timer list: %s"
+msgstr ""
+
+msgid "EPG Search"
+msgstr ""
+
+msgid "EPGSearch Setup"
+msgstr ""
+
 msgid "Enter text to search for"
 msgstr "Introduzca texto a buscar"
 
-#: ../src/EPGSearch.py:29
-msgid "History"
-msgstr "Historia"
+msgid ""
+"How many entries to keep in the search history at most. 0 disables history "
+"entirely!"
+msgstr ""
 
-#: ../src/EPGSearch.py:58
+msgid "IMDb Search"
+msgstr ""
+
+msgid "Import from AutoTimer"
+msgstr ""
+
 msgid "Import from EPG"
 msgstr "Importar desde el EPG"
 
-#: ../src/EPGSearch.py:57
 msgid "Import from Timer"
 msgstr "Importar desde la Programación"
 
-#: ../src/EPGSearch.py:28
+msgid "Length of History"
+msgstr ""
+
 msgid "New Search"
 msgstr "Nueva búsqueda"
 
-#: ../src/EPGSearch.py:138
+msgid "No history"
+msgstr ""
+
 msgid "OK"
 msgstr "OK"
 
-#: ../src/EPGSearch.py:202
+msgid "Save search as AutoTimer"
+msgstr ""
+
 msgid "Search"
 msgstr "Buscar"
 
-#: ../src/plugin.py:45
-#: ../src/plugin.py:50
-#: ../src/plugin.py:56
+#. TRANSLATORS: description of EPGSearch in PluginBrowser
 msgid "Search EPG"
 msgstr "Buscar EPG"
 
-msgid "search EPG..."
-msgstr "Buscar EPG..."
-
-msgid "search EPG"
-msgstr "Buscar EPG"
-
-#: ../src/EPGSearch.py:152
 msgid "Select a timer to search"
 msgstr "Seleccionar una programación a buscar"
 
-#: ../src/EPGSearch.py:87
 msgid "Select text to search for"
 msgstr "Seleccionar texto a buscar"
 
+msgid "Setup"
+msgstr ""
+
+msgid "Show search history"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+msgid "search EPG"
+msgstr "Buscar EPG"
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
+msgid "search EPG..."
+msgstr "Buscar EPG..."
+
+#~ msgid "History"
+#~ msgstr "Historia"

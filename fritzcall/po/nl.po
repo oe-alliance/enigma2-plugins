@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-15 16:20+0100\n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -276,6 +276,9 @@ msgstr "Ophalen van status van de FRITZ!Box..."
 
 msgid "IP Address:"
 msgstr "IP Adres:"
+
+msgid "Ignore callers with no phone number"
+msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Incoming"
@@ -550,6 +553,9 @@ msgstr ""
 "in het configuratiescherm om gesprekken te laten zien\n"
 "\n"
 "Dit kan een communicatieprobleem zijn, probeer opnieuw."
+
+msgid "business"
+msgstr ""
 
 msgid "call redirections active"
 msgstr ""

@@ -1,0 +1,90 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-08-08 13:42+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/plugin.py:276
+msgid "Add Tag"
+msgstr ""
+
+#: ../src/plugin.py:269
+msgid "Add new Tag"
+msgstr ""
+
+#: ../src/plugin.py:260
+msgid "Assigned Tags"
+msgstr ""
+
+#: ../src/plugin.py:174
+msgid "Can't write movietags, because no meta-file found!"
+msgstr ""
+
+#: ../src/plugin.py:278
+msgid "Clear all Tags"
+msgstr ""
+
+#: ../src/plugin.py:256
+msgid ""
+"Clear all Tags?\n"
+"\n"
+"This will delete ALL tags in ALL recodings!\n"
+"Are you sure?"
+msgstr ""
+
+#: ../src/plugin.py:252
+msgid "Enter the new Tag"
+msgstr ""
+
+#: ../src/plugin.py:259
+msgid "Movie Tagger"
+msgstr ""
+
+#: ../src/plugin.py:315
+msgid "Movie Tagger..."
+msgstr ""
+
+#: ../src/plugin.py:264
+msgid "Predefined Tag"
+msgstr ""
+
+#: ../src/plugin.py:268
+msgid "Remove Tag"
+msgstr ""
+
+#: ../src/plugin.py:261
+msgid "Specified Tags"
+msgstr ""
+
+#: ../src/plugin.py:271 ../src/plugin.py:279
+msgid "Toggle List"
+msgstr ""
+
+#: ../src/plugin.py:262
+msgid "Used Tag"
+msgstr ""
+
+#: ../src/plugin.py:263
+msgid "User-specific Tag"
+msgstr ""
+
+#: ../src/plugin.py:259
+msgid "Ver."
+msgstr ""
+
+#: ../src/plugin.py:252
+msgid "Whitepace will be replaced by \"_\""
+msgstr ""

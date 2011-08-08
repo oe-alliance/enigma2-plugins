@@ -1,0 +1,62 @@
+# Dutch translations for enigma2-plugins package.
+# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-plugins package.
+# Automatically generated, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: 2011-08-08 13:42+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/plugin.py:49
+msgid "1080p"
+msgstr ""
+
+#: ../src/plugin.py:49
+msgid "720p"
+msgstr ""
+
+#: ../src/plugin.py:390
+msgid "Best resolution"
+msgstr ""
+
+#: ../src/plugin.py:385
+msgid "Cancel"
+msgstr ""
+
+#: ../src/plugin.py:392
+msgid "Close Player with exit-key"
+msgstr ""
+
+#: ../src/plugin.py:389
+msgid "Extended search filter"
+msgstr ""
+
+#: ../src/plugin.py:391
+msgid "Max. results in list-mode"
+msgstr ""
+
+#: ../src/plugin.py:49
+msgid "No HD streaming"
+msgstr ""
+
+#: ../src/plugin.py:386
+msgid "Save"
+msgstr ""
+
+#: ../src/plugin.py:84
+msgid "YT-Trailer Setup"
+msgstr ""
+
+#: ../src/plugin.py:339 ../src/plugin.py:345
+msgid "leave movie player..."
+msgstr ""

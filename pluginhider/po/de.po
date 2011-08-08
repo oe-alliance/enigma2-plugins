@@ -4,12 +4,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PluginHider\n"
-"POT-Creation-Date: 2011-06-16 22:14+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
 "PO-Revision-Date: 2011-06-17 14:56+0100\n"
 "Last-Translator: Friedhelm Kuklinski <fk-912737@versanet.de>\n"
 "Language-Team: SiennaRoot <fk-912737@versanet.de>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "Language-Code: en\n"
@@ -19,39 +21,56 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:46
 msgid "Cancel"
 msgstr "Abbruch"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:51
+msgid "Could not start Plugin:"
+msgstr ""
+
 msgid "Eventinfo"
 msgstr "Event Info"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:50
 msgid "Extensions"
 msgstr "Erweiterungen"
 
-#: /Users/fk/Desktop/PluginHider/plugin.py:52
 msgid "Hide Plugins"
 msgstr "Plugins ausblenden"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:48
-msgid "Next"
-msgstr "Vor"
-
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:45
 msgid "OK"
 msgstr "OK"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:96
 msgid "PluginHider Setup"
 msgstr "PluginHider Setup"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:49
 msgid "Plugins"
 msgstr "Plugins"
 
-#: /Users/fk/Desktop/PluginHider/PluginHiderSetup.py:47
-msgid "Previous"
-msgstr "Zurück"
+msgid "Run"
+msgstr ""
 
+msgid "Unable to access InfoBar."
+msgstr ""
+
+msgid "end editing"
+msgstr ""
+
+msgid "run selected plugin"
+msgstr ""
+
+msgid "save"
+msgstr ""
+
+msgid "select next tab"
+msgstr ""
+
+msgid "select previous tab"
+msgstr ""
+
+msgid "toggle selection"
+msgstr ""
+
+#~ msgid "Next"
+#~ msgstr "Vor"
+
+#~ msgid "Previous"
+#~ msgstr "Zurück"
