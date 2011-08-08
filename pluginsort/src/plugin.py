@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from . import _
 
 # Plugin definition
@@ -24,7 +26,7 @@ from Tools.LoadPixmap import LoadPixmap
 from xml.etree.cElementTree import parse as cet_parse
 try:
 	from xml.etree.cElementTree import ParseError
-except ImportError, ie:
+except ImportError as ie:
 	ParseError = SyntaxError
 
 from shutil import copyfile, Error
@@ -55,7 +57,7 @@ for where in pdict:
 	if where.startswith('WHERE_'):
 		WHEREMAP[where] = pdict[where]
 del pdict
-reverse = lambda map: dict(zip(map.values(), map.keys()))
+reverse = lambda map: dict((v,k) for k,v in map.items())
 
 class PluginWeights:
 	def __init__(self):
@@ -68,13 +70,13 @@ class PluginWeights:
 
 		try:
 			config = cet_parse(XML_CONFIG).getroot()
-		except ParseError, pe:
+		except ParseError as pe:
 			from time import time
-			print "[PluginSort] Parse Error occured in configuration, backing it up and starting from scratch!"
+			print("[PluginSort] Parse Error occured in configuration, backing it up and starting from scratch!")
 			try:
 				copyfile(XML_CONFIG, "/etc/enigma2/pluginsort.xml.%d" % (int(time()),))
-			except Error, she:
-				print "[PluginSort] Uh oh, failed to create the backup... I hope you have one anyway :D"
+			except Error as she:
+				print("[PluginSort] Uh oh, failed to create the backup... I hope you have one anyway :D")
 			return
 
 		for wheresection in config.findall('where'):
@@ -82,15 +84,15 @@ class PluginWeights:
 			whereid = WHEREMAP.get(where, None)
 			whereplugins = wheresection.findall('plugin')
 			if whereid is None or not whereplugins:
-				print "[PluginSort] Ignoring section %s because of invalid id (%s) or no plugins (%s)" % (where, repr(whereid), repr(whereplugins))
+				print("[PluginSort] Ignoring section %s because of invalid id (%s) or no plugins (%s)" % (where, repr(whereid), repr(whereplugins)))
 				continue
 
 			for plugin in whereplugins:
 				name = plugin.get('name')
 				try:
 					weight = int(plugin.get('weight'))
-				except ValueError, ve:
-					print "[PluginSort] Invalid weight of %s received for plugin %s, ignoring" % (repr(plugin.get('weight')), repr(name))
+				except ValueError as ve:
+					print("[PluginSort] Invalid weight of %s received for plugin %s, ignoring" % (repr(plugin.get('weight')), repr(name)))
 				else:
 					self.plugins.setdefault(whereid, {})[name] = weight
 
@@ -107,7 +109,7 @@ class PluginWeights:
 
 			where = idmap[key]
 			extend((' <where type="', str(where), '">\n'))
-			for key, value in whereplugins.iteritems():
+			for key, value in whereplugins.items():
 				extend(('  <plugin name="', str(key), '" weight="', str(value), '" />\n'))
 			append((' </where>\n'))
 		append('\n</pluginsort>\n')
@@ -136,43 +138,43 @@ pluginWeights = PluginWeights()
 
 def PluginComponent_addPlugin(self, plugin, *args, **kwargs):
 	if len(plugin.where) > 1:
-		print "[PluginSort] Splitting %s up in individual entries (%s)" % (plugin.name, repr(plugin.where))
+		print("[PluginSort] Splitting %s up in individual entries (%s)" % (plugin.name, repr(plugin.where)))
 		for x in plugin.where:
 			pd = PluginDescriptor(name=plugin.name, where=[x], description=plugin.description, icon=plugin.icon, fnc=plugin.__call__, wakeupfnc=plugin.wakeupfnc, needsRestart=plugin.needsRestart, internal=plugin.internal, weight=plugin.weight)
 
 			newWeight = pluginWeights.get(pd)
-			if DEBUG: print "[PluginSort] Setting weight of %s from %d to %d" % (pd.name, pd.weight, newWeight)
+			if DEBUG: print("[PluginSort] Setting weight of %s from %d to %d" % (pd.name, pd.weight, newWeight))
 			pd.weight = newWeight
 			PluginComponent.pluginSort_baseAddPlugin(self, pd, *args, **kwargs)
 
 		# installedPluginList is a list of original descriptors, but we changed it to be a copy, not a reference. so keep it up to date
 		if self.firstRun:
 			self.installedPluginList.append(plugin)
-			if DEBUG: print "[PluginSort] Adding %s to list of installed plugins (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where))
+			if DEBUG: print("[PluginSort] Adding %s to list of installed plugins (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where)))
 		return
 
 	newWeight = pluginWeights.get(plugin)
-	if DEBUG: print "[PluginSort] Setting weight of %s from %d to %d" % (plugin.name, plugin.weight, newWeight)
+	if DEBUG: print("[PluginSort] Setting weight of %s from %d to %d" % (plugin.name, plugin.weight, newWeight))
 	plugin.weight = newWeight
 	PluginComponent.pluginSort_baseAddPlugin(self, plugin, *args, **kwargs)
 
 	if self.firstRun:
-		if DEBUG: print "[PluginSort] Adding %s to list of installed plugins (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where))
+		if DEBUG: print("[PluginSort] Adding %s to list of installed plugins (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where)))
 		self.installedPluginList.append(plugin)
 
 if DEBUG:
 	def PluginComponent_removePlugin(self, plugin, *args, **kwargs):
-		print "[PluginSort] Supposed to remove plugin: %s (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where))
+		print("[PluginSort] Supposed to remove plugin: %s (%s, %s)." % (plugin.name, plugin.path, repr(plugin.where)))
 		try:
 			PluginComponent.pluginSort_baseRemovePlugin(self, plugin, *args, **kwargs)
-		except ValueError, ve:
+		except ValueError as ve:
 			revMap = reverse(WHEREMAP)
-			print "-"*40
-			print "-"*40
-			print "-"*40
-			print "[PluginSort] pluginList: %s" % (repr([(x.name, x.path, repr([revMap[y] for y in x.where])) for x in self.pluginList]),)
+			print("-"*40)
+			print("-"*40)
+			print("-"*40)
+			print("[PluginSort] pluginList: %s" % (repr([(x.name, x.path, repr([revMap[y] for y in x.where])) for x in self.pluginList]),))
 			for w in plugin.where:
-				print "[PluginSort] plugins[%s]: %s" % (revMap[w], repr([(x.name, x.path, repr([revMap[y] for y in x.where])) for x in self.plugins[w]]))
+				print("[PluginSort] plugins[%s]: %s" % (revMap[w], repr([(x.name, x.path, repr([revMap[y] for y in x.where])) for x in self.plugins[w]])))
 	PluginComponent.pluginSort_baseRemovePlugin = PluginComponent.removePlugin
 	PluginComponent.removePlugin = PluginComponent_removePlugin
 
@@ -316,31 +318,31 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 
 			# we moved up, increase weight of plugins after us
 			if newpos < selected:
-				print "[PluginSort]", entry.name, "moved up"
+				print("[PluginSort]", entry.name, "moved up")
 				i = newpos + 1
 				# since we moved up, there has to be an entry after this one
 				diff = abs(self.pluginlist[i].weight - self.pluginlist[newpos].weight) + 1
-				print "[PluginSort] Using weight from %d (%d) and %d (%d) to calculate diff (%d)" % (i, self.pluginlist[i].weight, newpos, self.pluginlist[newpos].weight, diff)
+				print("[PluginSort] Using weight from %d (%d) and %d (%d) to calculate diff (%d)" % (i, self.pluginlist[i].weight, newpos, self.pluginlist[newpos].weight, diff))
 				while i < Len:
-					if DEBUG: print "[PluginSort] INCREASE WEIGHT OF", self.pluginlist[i].name, "BY", diff
+					if DEBUG: print("[PluginSort] INCREASE WEIGHT OF", self.pluginlist[i].name, "BY", diff)
 					self.pluginlist[i].weight += diff
 					i += 1
 			# we moved down, decrease weight of plugins before us
 			elif newpos > selected:
-				print "[PluginSort]", entry.name, "moved down"
+				print("[PluginSort]", entry.name, "moved down")
 				i = newpos - 1
 				# since we moved up, there has to be an entry before this one
 				diff = abs(self.pluginlist[newpos].weight - self.pluginlist[i].weight) + 1
-				print "[PluginSort] Using weight from %d (%d) and %d (%d) to calculate diff (%d)" % (newpos, self.pluginlist[newpos].weight, i, self.pluginlist[i].weight, diff)
+				print("[PluginSort] Using weight from %d (%d) and %d (%d) to calculate diff (%d)" % (newpos, self.pluginlist[newpos].weight, i, self.pluginlist[i].weight, diff))
 				while i > -1:
-					if DEBUG: print "[PluginSort] DECREASE WEIGHT OF", self.pluginlist[i].name, "BY", diff
+					if DEBUG: print("[PluginSort] DECREASE WEIGHT OF", self.pluginlist[i].name, "BY", diff)
 					self.pluginlist[i].weight -= diff
 					i -= 1
 			else:
-				if DEBUG: print "[PluginSort]", entry.name, "did not move (%d to %d)?" % (selected, newpos)
+				if DEBUG: print("[PluginSort]", entry.name, "did not move (%d to %d)?" % (selected, newpos))
 
 			self.list = [PluginEntryComponent(plugin) for plugin in self.pluginlist]
-			if DEBUG: print "[PluginSort] NEW LIST:", [(plugin.name, plugin.weight) for plugin in self.pluginlist]
+			if DEBUG: print("[PluginSort] NEW LIST:", [(plugin.name, plugin.weight) for plugin in self.pluginlist])
 			self["list"].l.setList(self.list)
 			self.selected = -1
 		else:
@@ -384,7 +386,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 	def hidePlugin(self):
 		try:
 			from Plugins.Extensions.PluginHider.plugin import hidePlugin
-		except Exception, e:
+		except Exception as e:
 			self.session.open(MessageBox, _("Unable to load PluginHider"), MessageBox.TYPE_ERROR)
 		else:
 			hidePlugin(self["list"].l.getCurrentSelection()[0])
@@ -417,7 +419,7 @@ class SortingPluginBrowser(OriginalPluginBrowser):
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		if hasattr(PluginComponent, 'pluginSort_baseAddPlugin'):
-			print "[PluginSort] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring."
+			print("[PluginSort] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring.")
 			import traceback, sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 		else:
@@ -460,7 +462,7 @@ def autostart(reason, *args, **kwargs):
 				# we're keeping the entry, just fix the weight
 				else:
 					newWeight = pluginWeights.get(plugin)
-					print "[PluginSort] Fixing weight for %s (was %d, now %d)" % (plugin.name, plugin.weight, newWeight)
+					print("[PluginSort] Fixing weight for %s (was %d, now %d)" % (plugin.name, plugin.weight, newWeight))
 					plugin.weight = newWeight
 
 				fixed.append(plugin)
@@ -471,8 +473,8 @@ def autostart(reason, *args, **kwargs):
 					l = InfoBarPlugins.pluginSort_baseGetPluginList(self, *args, **kwargs)
 					try:
 						l.sort(key=lambda e: (e[0][1].args[0].weight, e[2]))
-					except Exception, e:
-						print "[PluginSort] Failed to sort extensions", e
+					except Exception as e:
+						print("[PluginSort] Failed to sort extensions", e)
 					return l
 
 				InfoBarPlugins.pluginSort_baseGetPluginList = InfoBarPlugins.getPluginList
@@ -494,8 +496,8 @@ try:
 	from Plugins.SystemPlugins.MPHelp import registerHelp, showHelp, XMLHelpReader
 	reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/PluginSort/mphelp.xml"))
 	pluginSortHelp = registerHelp(*reader)
-except Exception, e:
-	print "[PluginSort] Unable to initialize MPHelp:", e,"- Help not available!"
+except Exception as e:
+	print("[PluginSort] Unable to initialize MPHelp:", e,"- Help not available!")
 	pluginSortHelp = None
 #pragma mark -
 

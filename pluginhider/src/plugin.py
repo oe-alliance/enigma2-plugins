@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from . import _
 
 # Plugin definition
@@ -51,7 +53,7 @@ def PluginComponent_getPlugins(self, where):
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		if hasattr(PluginComponent, 'pluginHider_baseGetPlugins'):
-			print "[PluginHider] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring."
+			print("[PluginHider] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring.")
 			import traceback, sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 		else:
@@ -62,7 +64,7 @@ def autostart(reason, *args, **kwargs):
 			PluginComponent.getPlugins = PluginComponent.pluginHider_baseGetPlugins
 			del PluginComponent.pluginHider_baseGetPlugins
 		else:
-			print "[PluginHider] Something went wrong as our autostart handler was called multiple times for shutdown, printing traceback and ignoring."
+			print("[PluginHider] Something went wrong as our autostart handler was called multiple times for shutdown, printing traceback and ignoring.")
 			import traceback, sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 

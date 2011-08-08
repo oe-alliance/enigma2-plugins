@@ -255,7 +255,7 @@ class EPGSearch(EPGSelection):
 
 			# Read in configuration
 			autotimer.readXml()
-		except Exception, e:
+		except Exception as e:
 			self.session.open(
 				MessageBox,
 				_("Could not read AutoTimer timer list: %s") % e,

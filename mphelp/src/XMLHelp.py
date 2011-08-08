@@ -1,9 +1,5 @@
 from MPHelp import HelpPage
 from xml.etree.cElementTree import parse as cet_parse
-try:
-	from xml.etree.cElementTree import ParseError
-except ImportError, ie:
-	ParseError = SyntaxError
 
 class XMLHelpPage(HelpPage):
 	def __init__(self, node):

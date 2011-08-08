@@ -1,7 +1,10 @@
 from twisted.web.client import getPage
 from twisted.internet.defer import Deferred
 from twisted.internet import reactor
-from urllib import urlencode
+try:
+	from urllib import urlencode
+except ImportError as ie:
+	from urllib.parse import urlencode
 
 from GrowleeConnection import emergencyDisable
 from . import NOTIFICATIONID

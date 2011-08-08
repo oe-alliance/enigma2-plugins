@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from twisted.internet.protocol import DatagramProtocol
 from twisted.internet import reactor
 from struct import pack, unpack
@@ -44,7 +46,7 @@ class GrowlTalk(DatagramProtocol):
 			self.transport.write(p, self.addr)
 
 	def noIP(self, error):
-		print "--------------------------------", error
+		print("--------------------------------", error)
 		emergencyDisable()
 
 	def startProtocol(self):
