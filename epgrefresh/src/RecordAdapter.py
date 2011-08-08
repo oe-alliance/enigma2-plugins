@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from Components.SystemInfo import SystemInfo
 
 # MessageBox
@@ -27,7 +29,7 @@ class RecordAdapter:
 		return True
 
 	def play(self, service):
-		print "[EPGRefresh.RecordAdapter.play]"
+		print("[EPGRefresh.RecordAdapter.play]")
 		if not self.backgroundRefreshAvailable: return False
 		self.stopStreaming()
 		self.__service = self.navcore.recordService(service)
@@ -43,6 +45,6 @@ class RecordAdapter:
 			self.__service = None
 
 	def stop(self):
-		print "[EPGRefresh.RecordAdapter.stop]"
+		print("[EPGRefresh.RecordAdapter.stop]")
 		self.stopStreaming()
 
