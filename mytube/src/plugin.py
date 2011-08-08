@@ -1050,7 +1050,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self["feedlist"].setIndex(0)
 					self["feedlist"].setList(self.videolist)
 					self["feedlist"].updateList(self.videolist)
-					if self.FirstRun == True:	
+					if self.FirstRun and not config.plugins.mytube.general.loadFeedOnOpen.value:
 						self.switchToConfigList()
 					else:
 						self.switchToFeedList()
