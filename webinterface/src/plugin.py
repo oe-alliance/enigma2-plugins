@@ -1,8 +1,7 @@
 Version = '$Header$';
 
-from enigma import eConsoleAppContainer
+from enigma import eConsoleAppContainer, eTPM
 from Plugins.Plugin import PluginDescriptor
-import dreamtpm
 
 from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
 from Components.Network import iNetwork
@@ -21,9 +20,12 @@ from socket import gethostname as socket_gethostname
 from OpenSSL import SSL
 
 from os.path import isfile as os_isfile
-from __init__ import _, __version__
+from __init__ import _, __version__, decrypt_block
 from webif import get_random, validate_certificate
 
+tpm = eTPM()
+rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
+hw = HardwareInfo()
 #CONFIG INIT
 
 #init the config
@@ -226,12 +228,30 @@ def stopWebserver(session):
 # on given ipaddress, port, w/o auth, w/o ssl
 #===============================================================================
 def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usessl=False):
-	try:
-		dreamtpm.check()
-	except Exception, e:
-		print "tPM check failed", e
-		return False
-
+	if hw.get_device_name().lower() != "dm7025":
+		l3k = None		
+		l3c = tpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+		
+		if l3c is None:
+			return False			
+		
+		l3k = validate_certificate(l3c, l2k)
+		if l3k is None:			
+			return False
+		
+		random = get_random()
+		if random is None:
+			return False
+	
+		value = tpm.challenge(random)
+		result = decrypt_block(value, l3k)
+		
+		if result is None:
+			return False
+		else:
+			if result [80:88] != random:		
+				return False
+		
 	if useauth:
 # HTTPAuthResource handles the authentication for every Resource you want it to			
 		root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
@@ -410,15 +430,28 @@ def checkBonjour():
 #===============================================================================
 #def networkstart(reason, **kwargs):
 def networkstart(reason, session):
-	dreamtpm.check()
-	try:
-		l2k = dreamtpm.tpm.l2key
-	except:
-		l2k = None
-	if reason is True:
+	l2r = False
+	l2k = None
+	if hw.get_device_name().lower() != "dm7025":		
+		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+		
+		if l2c is None:
+			return
+		
+		l2k = validate_certificate(l2c, rootkey)
+		if l2k is None:
+			return
+			
+		l2r = True
+	else:
+		l2r = True
+		
+	if l2r:	
+		if reason is True:
 			startWebserver(session, l2k)
 			checkBonjour()
-	elif reason is False:
+			
+		elif reason is False:
 			stopWebserver(session)
 			checkBonjour()
 		
@@ -426,16 +459,28 @@ def openconfig(session, **kwargs):
 	session.openWithCallback(configCB, WebIfConfigScreen)
 
 def configCB(result, session):
-	dreamtpm.check()
-	try:
-		l2k = dreamtpm.tpm.l2key
-	except:
-		l2k = None
-	if result:
+	l2r = False
+	l2k = None
+	if hw.get_device_name().lower() != "dm7025":		
+		l2c = tpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+		
+		if l2c is None:
+			return
+		
+		l2k = validate_certificate(l2c, rootkey)
+		if l2k is None:
+			return
+			
+		l2r = True
+	else:
+		l2r = True
+		
+	if l2r:	
+		if result:
 			print "[WebIf] config changed"
 			restartWebserver(session, l2k)
 			checkBonjour()
-	else:
+		else:
 			print "[WebIf] config not changed"
 
 def Plugins(**kwargs):

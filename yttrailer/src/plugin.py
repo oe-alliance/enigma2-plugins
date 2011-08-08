@@ -19,6 +19,7 @@
 #  This applies to the source code as a whole as well as to parts of it, unless
 #  explicitely stated otherwise.
 
+from __init__ import decrypt_block, validate_cert, read_random, rootkey, l2key
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -56,9 +57,15 @@ baseEventViewBase__init__ = None
 
 from Screens.EpgSelection import EPGSelection
 baseEPGSelection__init__ = None
+etpm = eTPM()
 
 
 def autostart(reason, **kwargs):
+	global l2key
+	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+	if l2cert:
+		l2key = validate_cert(l2cert, rootkey)
+		if l2key:
 			global baseEventViewBase__init__, baseEPGSelection__init__
 			if baseEventViewBase__init__ is None:
 				baseEventViewBase__init__ = EventViewBase.__init__
@@ -136,6 +143,7 @@ def showTrailerList(self):
 class YTTrailer:
 	def __init__(self, session):
 		self.session = session
+		self.l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
 
 	def showTrailer(self, eventname):
 		if eventname:
@@ -259,7 +267,14 @@ class YTTrailer:
 			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "[YTTrailer] got",sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):
-						#print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+			if self.l3cert:
+				l3key = validate_cert(self.l3cert, l2key)
+				if l3key:
+					rnd = read_random()
+					val = etpm.challenge(rnd)
+					result = decrypt_block(val, l3key)
+					if result[80:88] == rnd:
+						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
 						video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
 						print "[YTTrailer] found best available video url:",video_url
 		return video_url
