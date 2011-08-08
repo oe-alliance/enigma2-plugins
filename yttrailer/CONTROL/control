@@ -3,4 +3,4 @@ Version: 1.0
 Description: YTTrailer: watch trailer from epglist/eventview
 Maintainer: Dr. Best <dr.best@dreambox-tools.info>
 Homepage: http://www.dreambox-tools.info
-Depends: python-twisted-web, python-gdata, gst-plugin-flv, dreambox-tpm-python
+Depends: python-twisted-web, python-gdata, gst-plugin-flv
