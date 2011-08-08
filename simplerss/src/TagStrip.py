@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from re import sub, finditer
 
-import htmlentitydefs
+try:
+	import htmlentitydefs
+except ImportError as ie:
+	from html import entities as htmlentitydefs
+	unichr = chr
 
 def strip_readable(html):
 	# Newlines are rendered as whitespace in html
