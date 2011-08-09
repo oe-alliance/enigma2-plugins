@@ -9,7 +9,7 @@ from ServiceReference import ServiceReference
 
 from enigma import eServiceReference
 
-CURRENT_CONFIG_VERSION = "6"
+CURRENT_CONFIG_VERSION = "5"
 
 def getValue(definitions, default):
 	# Initialize Output
