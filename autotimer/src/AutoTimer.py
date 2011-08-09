@@ -251,22 +251,19 @@ class AutoTimer:
 				similarTimer = False
 				if eit in similar:
 					similarTimer = True
+					dayofweek = None # NOTE: ignore day on similar timer
+				else:
+					dayofweek = str(timestamp.tm_wday)
 
 				# Check timer conditions
-				if not similarTimer:
-					# Check Duration, Timespan, Timeframe and Excludes
-					if timer.checkServices(serviceref) \
-						or timer.checkDuration(duration) \
-						or timer.checkTimespan(timestamp) \
+				# NOTE: similar matches to not care about the day/time they are on, so ignore them
+				if timer.checkServices(serviceref) \
+					or timer.checkDuration(duration) \
+					or (not similarTimer and (\
+						timer.checkTimespan(timestamp) \
 						or timer.checkTimeframe(begin) \
-						or timer.checkFilter(name, shortdesc, extdesc, str(timestamp.tm_wday)):
-						continue
-				else:
-					# Check Duration and Excludes except dayofweek
-					if timer.checkServices(serviceref) \
-						or timer.checkDuration(duration) \
-						or timer.checkFilter(name, shortdesc, extdesc, None):
-						continue
+					)) or timer.checkFilter(name, shortdesc, extdesc, dayofweek):
+					continue
 
 				if timer.hasOffset():
 					# Apply custom Offset
