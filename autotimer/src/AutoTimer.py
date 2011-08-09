@@ -317,7 +317,7 @@ class AutoTimer:
 								})
 							del append
 
-					for movieinfo in moviedict.get(dest, []):
+					for movieinfo in moviedict.get(dest, ()):
 						if movieinfo.get("name") == name \
 							and movieinfo.get("shortdesc") == shortdesc:
 							# Some channels indicate replays in the extended descriptions
@@ -339,7 +339,7 @@ class AutoTimer:
 				# Check for double Timers
 				# We first check eit and if user wants us to guess event based on time
 				# we try this as backup. The allowed diff should be configurable though.
-				for rtimer in recorddict.get(serviceref, []):
+				for rtimer in recorddict.get(serviceref, ()):
 					if rtimer.eit == eit or config.plugins.autotimer.try_guessing.value and getTimeDiff(rtimer, evtBegin, evtEnd) > ((duration/10)*8):
 						oldExists = True
 
