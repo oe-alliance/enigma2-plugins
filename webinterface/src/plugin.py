@@ -12,12 +12,10 @@ from Tools.HardwareInfo import HardwareInfo
 
 from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG
 
-from twisted.internet import reactor, ssl
+from twisted.internet import reactor
 from twisted.web import server, http, util, static, resource
 
-from zope.interface import Interface, implements
 from socket import gethostname as socket_gethostname
-from OpenSSL import SSL
 
 from os.path import isfile as os_isfile
 from __init__ import _, __version__, decrypt_block
@@ -260,7 +258,8 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		site = server.Site(toplevel)
 
 	if usessl:
-		
+		from twisted.internet import ssl
+		from OpenSSL import SSL
 		ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem', '/etc/enigma2/cacert.pem', sslmethod=SSL.SSLv23_METHOD)
 		d = reactor.listenSSL(port, site, ctx, interface=ipaddress)
 	else:
