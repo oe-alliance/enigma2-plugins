@@ -8,7 +8,9 @@ from Components.config import config
 from Tools.FuzzyDate import FuzzyTime
 from Tools.Notifications import AddPopup
 from Screens.MessageBox import MessageBox
+
 NOTIFICATIONID = 'AutoTimerConflictEncounteredNotification'
+SIMILARNOTIFICATIONID = 'AutoTimerSimilarUsedNotification'
 
 class AutoPoller:
 	"""Automatically Poll AutoTimer"""
@@ -57,7 +59,7 @@ class AutoPoller:
 					_("%d conflict(s) solved with similar timer(s):\n%s") % (len(similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in similars])),
 					MessageBox.TYPE_INFO,
 					5,
-					NOTIFICATIONID
+					SIMILARNOTIFICATIONID
 				)
 
 		self.timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
