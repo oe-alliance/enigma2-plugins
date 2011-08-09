@@ -157,7 +157,7 @@ class AutoTimer:
 		timers = []
 		conflicting = []
 		similar = defaultdict(list)			# Contains the the marked similar eits and the conflicting strings
-		similars = []										# Contains the added similar timers 
+		similars = []										# Contains the added similar timers
 
 		# NOTE: the config option specifies "the next X days" which means today (== 1) + X
 		delta = timedelta(days = config.plugins.autotimer.maxdaysinfuture.value + 1)
@@ -178,7 +178,7 @@ class AutoTimer:
 		# The recordict is always filled
 		#Question: It might be better to name it timerdict
 		#Question: Move to a separate function getTimerDict()
-		#Note: It is also possible to use RecordTimer isInTimer(), but we won't get the timer itself on a match 
+		#Note: It is also possible to use RecordTimer isInTimer(), but we won't get the timer itself on a match
 		recorddict = defaultdict(list)
 		for timer in ( recordHandler.timer_list + recordHandler.processed_timers ):
 			if timer and timer.service_ref:
@@ -208,7 +208,7 @@ class AutoTimer:
 			# Search EPG, default to empty list
 			epgmatches = epgcache.search(('RITBDSE', 500, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or []
 			# Sort list of tuples by begin time 'B'
-			epgmatches.sort(key = lambda x: x[3]) 
+			epgmatches.sort(key = lambda x: x[3])
 
 			# Reset the the marked similar servicerefs
 			similar.clear()
@@ -216,7 +216,7 @@ class AutoTimer:
 			# Loop over all EPG matches
 			for idx, ( serviceref, eit, name, begin, duration, shortdesc, extdesc ) in enumerate( epgmatches ):
 
-				#Question: Do we need this? 
+				#Question: Do we need this?
 				#Question: Move to separate function getRealService()
 				eserviceref = eServiceReference(serviceref)
 				evt = epgcache.lookupEventId(eserviceref, eit)
@@ -262,7 +262,7 @@ class AutoTimer:
 						or timer.checkFilter(name, shortdesc, extdesc, str(timestamp.tm_wday)):
 						continue
 				else:
-					# Check Duration and Excludes except dayofweek 
+					# Check Duration and Excludes except dayofweek
 					if timer.checkServices(serviceref) \
 						or timer.checkDuration(duration) \
 						or timer.checkFilter(name, shortdesc, extdesc, None):
@@ -460,7 +460,7 @@ class AutoTimer:
 									# Check if the similar is already known
 									if eitS not in similar:
 										print "[AutoTimer] Found similar Timer: " + name
-										
+
 										# Store the actual and similar eit and conflictString, so it can be handled later
 										newEntry.conflictString = conflictString
 										similar[eit] = newEntry
