@@ -23,6 +23,7 @@ from time import time
 from WebScreens import *
 #DO NOT REMOVE THIS IMPORT
 
+from __init__ import decrypt_block
 from os import urandom
 
 global screen_cache
@@ -569,8 +570,7 @@ def requestFinish(handler, request):
 	del handler
 
 def validate_certificate(cert, key):
-	import dreamtpm
-	buf = dreamtpm.decrypt_block(cert[8:], key) 
+	buf = decrypt_block(cert[8:], key) 
 	if buf is None:
 		return None
 	return buf[36:107] + cert[139:196]
