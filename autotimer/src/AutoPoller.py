@@ -93,13 +93,19 @@ class AutoPoller:
 	"""Manages actual thread which does the polling. Used for convenience."""
 
 	def __init__(self):
-		self.thread = AutoPollerThread()
+		self.thread = None
 
 	def start(self, initial=True):
+		if self.thread:
+			self.stop()
+		self.thread = AutoPollerThread()
 		self.thread.start(initial=initial)
 
 	def stop(self):
+		if not self.thread:
+			return
 		self.thread.stop()
 		# NOTE: while we don't need to join the thread, we should do so in case it's currently parsining
 		self.thread.join()
+		self.thread = None
 
