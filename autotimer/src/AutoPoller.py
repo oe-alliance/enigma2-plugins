@@ -1,5 +1,7 @@
-# Timer
-from enigma import eTimer
+from __future__ import print_function
+
+# Core functionality
+from enigma import eTimer, ePythonMessagePump
 
 # Config
 from Components.config import config
@@ -12,55 +14,90 @@ from Screens.MessageBox import MessageBox
 NOTIFICATIONID = 'AutoTimerConflictEncounteredNotification'
 SIMILARNOTIFICATIONID = 'AutoTimerSimilarUsedNotification'
 
-class AutoPoller:
-	"""Automatically Poll AutoTimer"""
+from threading import Thread, Semaphore
+try:
+	from Queue import Queue
+except ImportError as ie:
+	from queue import Queue
 
+class AutoPollerThread(Thread):
+	"""Background thread where the EPG is parsed (unless initiated by the user)."""
 	def __init__(self):
-		# Init Timer
-		self.timer = eTimer()
+		Thread.__init__(self)
+		self.__semaphore = Semaphore(0)
+		self.__queue = Queue(1)
+		self.__pump = ePythonMessagePump()
+		self.__pump.recv_msg.get().append(self.gotThreadMsg)
+		self.__timer = eTimer()
+		self.__timer.callback.append(self.timeout)
+		self.running = False
 
-	def start(self, initial = True):
-		if initial:
-			delay = 2
-		else:
-			delay = config.plugins.autotimer.interval.value*3600
+	def timeout(self):
+		self.__semaphore.release()
 
-		if self.query not in self.timer.callback:
-			self.timer.callback.append(self.query)
-		self.timer.startLongTimer(delay)
+	def gotThreadMsg(self, msg):
+		"""Create Notifications if there is anything to display."""
+		ret = self.__queue.get()
+		conflicts = ret[4]
+		if conflicts and config.plugins.autotimer.notifconflict.value:
+			AddPopup(
+				_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(conflicts), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in conflicts])),
+				MessageBox.TYPE_INFO,
+				5,
+				NOTIFICATIONID
+			)
+		similars = ret[5]
+		if similars and config.plugins.autotimer.notifsimilar.value:
+			AddPopup(
+				_("%d conflict(s) solved with similar timer(s):\n%s") % (len(similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in similars])),
+				MessageBox.TYPE_INFO,
+				5,
+				SIMILARNOTIFICATIONID
+			)
+
+	def start(self, initial=True):
+		# NOTE: we wait for 10 seconds on initial launch to not delay enigma2 startup time
+		if initial: delay = 10
+		else: delay = config.plugins.autotimer.interval.value*3600
+
+		self.__timer.startLongTimer(delay)
+		Thread.start(self)
 
 	def stop(self):
-		if self.query in self.timer.callback:
-			self.timer.callback.remove(self.query)
-		self.timer.stop()
+		self.__timer.stop()
+		self.running = False
+		self.__semaphore.release()
 
-	def query(self):
-		from plugin import autotimer
+	def run(self):
+		self.running = True
+		while True:
+			self.__semaphore.acquire()
+			# NOTE: we have to check this here and not using the while to prevent the parser to be started on shutdown
+			if not self.running: break
 
-		# Ignore any program errors
-		try:
-			ret = autotimer.parseEPG()
-		except Exception:
-			# Dump error to stdout
-			import traceback, sys
-			traceback.print_exc(file=sys.stdout)
-		else:
-			conflicts = ret[4]
-			if conflicts and config.plugins.autotimer.notifconflict.value:
-				AddPopup(
-					_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(conflicts), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in conflicts])),
-					MessageBox.TYPE_INFO,
-					5,
-					NOTIFICATIONID
-				)
-			similars = ret[5]
-			if similars and config.plugins.autotimer.notifsimilar.value:
-				AddPopup(
-					_("%d conflict(s) solved with similar timer(s):\n%s") % (len(similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in similars])),
-					MessageBox.TYPE_INFO,
-					5,
-					SIMILARNOTIFICATIONID
-				)
+			from plugin import autotimer
+			# Ignore any program errors
+			try:
+				self.__queue.put(autotimer.parseEPG())
+				self.__pump.send(0)
+			except Exception:
+				# Dump error to stdout
+				import traceback, sys
+				traceback.print_exc(file=sys.stdout)
 
-		self.timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
+			self.__timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
+
+class AutoPoller:
+	"""Manages actual thread which does the polling. Used for convenience."""
+
+	def __init__(self):
+		self.thread = AutoPollerThread()
+
+	def start(self, initial=True):
+		self.thread.start(initial=initial)
+
+	def stop(self):
+		self.thread.stop()
+		# NOTE: while we don't need to join the thread, we should do so in case it's currently parsining
+		self.thread.join()
 
