@@ -2,10 +2,13 @@ from AutoTimer import AutoTimer
 from Components.config import config
 from RecordTimer import AFTEREVENT
 from twisted.web import http, resource
-from urllib import unquote
+try:
+	from urllib import unquote
+except ImportError as ie:
+	from urllib.parse import unquote
 from enigma import eServiceReference
-from . import _
-import plugin
+from . import _, iteritems
+from . import plugin
 
 class AutoTimerBaseResource(resource.Resource):
 	_remove = False
@@ -272,7 +275,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 
 class AutoTimerChangeSettingsResource(AutoTimerBaseResource):
 	def render(self, req):
-		for key, value in req.args.iteritems():
+		for key, value in iteritems(req.args):
 			value = value[0]
 			if key == "autopoll":
 				config.plugins.autotimer.autopoll.value = True if value == "true" else False
@@ -324,7 +327,7 @@ class AutoTimerSettingsResource(resource.Resource):
 
 		try:
 			from Plugins.SystemPlugins.vps import Vps
-		except ImportError, ie:
+		except ImportError as ie:
 			hasVps = False
 		else:
 			hasVps = True

@@ -46,8 +46,8 @@ try:
 	from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 	reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/mphelp.xml"))
 	autotimerHelp = registerHelp(*reader)
-except Exception, e:
-	print "[AutoTimer] Unable to initialize MPHelp:", e,"- Help not available!"
+except Exception as e:
+	print("[AutoTimer] Unable to initialize MPHelp:", e,"- Help not available!")
 	autotimerHelp = None
 #pragma mark -
 
@@ -98,7 +98,7 @@ def main(session, **kwargs):
 
 	try:
 		autotimer.readXml()
-	except SyntaxError, se:
+	except SyntaxError as se:
 		session.open(
 			MessageBox,
 			_("Your config file is not well-formed:\n%s") % (str(se)),
@@ -171,8 +171,8 @@ def housekeepingExtensionsmenu(el):
 	else:
 		try:
 			plugins.removePlugin(extDescriptor)
-		except ValueError, ve:
-			print "[AutoTimer] housekeepingExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring."
+		except ValueError as ve:
+			print("[AutoTimer] housekeepingExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring.")
 
 config.plugins.autotimer.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 extDescriptor = PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart = False)

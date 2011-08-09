@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # Plugins Config
 from xml.etree.cElementTree import parse as cet_parse
 from os import path as os_path
@@ -27,6 +29,8 @@ from AutoTimerComponent import preferredAutoTimerComponent
 from itertools import chain
 from collections import defaultdict
 from difflib import SequenceMatcher
+
+from . import xrange, itervalues
 
 XML_CONFIG = "/etc/enigma2/autotimer.xml"
 
@@ -67,13 +71,13 @@ class AutoTimer:
 	def readXml(self):
 		# Abort if no config found
 		if not os_path.exists(XML_CONFIG):
-			print "[AutoTimer] No configuration file present"
+			print("[AutoTimer] No configuration file present")
 			return
 
 		# Parse if mtime differs from whats saved
 		mtime = os_path.getmtime(XML_CONFIG)
 		if mtime == self.configMtime:
-			print "[AutoTimer] No changes in configuration, won't parse"
+			print("[AutoTimer] No changes in configuration, won't parse")
 			return
 
 		# Save current mtime
@@ -148,7 +152,7 @@ class AutoTimer:
 
 	def parseEPG(self, simulateOnly = False):
 		if NavigationInstance.instance is None:
-			print "[AutoTimer] Navigation is not available, can't parse EPG"
+			print("[AutoTimer] Navigation is not available, can't parse EPG")
 			return (0, 0, 0, [], [], [])
 
 		total = 0
@@ -221,7 +225,7 @@ class AutoTimer:
 				eserviceref = eServiceReference(serviceref)
 				evt = epgcache.lookupEventId(eserviceref, eit)
 				if not evt:
-					print "[AutoTimer] Could not create Event!"
+					print("[AutoTimer] Could not create Event!")
 					continue
 				# Try to determine real service (we always choose the last one)
 				n = evt.getNumOfLinkageServices()
@@ -234,7 +238,7 @@ class AutoTimer:
 
 				# If event starts in less than 60 seconds skip it
 				if begin < time() + 60:
-					print "[AutoTimer] Skipping an event because it starts in less than 60 seconds"
+					print("[AutoTimer] Skipping an event because it starts in less than 60 seconds")
 					continue
 
 				# Convert begin time
@@ -295,7 +299,7 @@ class AutoTimer:
 						#Question: Move to a separate function getRecordDict()
 						movielist = serviceHandler.list(eServiceReference("2:0:1:0:0:0:0:0:0:0:" + dest))
 						if movielist is None:
-							print "[AutoTimer] listing of movies in " + dest + " failed"
+							print("[AutoTimer] listing of movies in " + dest + " failed")
 						else:
 							append = moviedict[dest].append
 							while 1:
@@ -325,7 +329,7 @@ class AutoTimer:
 							extdescM = movieinfo.get("extdesc")
 							if ( len(extdesc) == len(extdescM) and extdesc == extdescM ) \
 								or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, extdescM).ratio() ):
-								print "[AutoTimer] We found a matching recorded movie, skipping event:", name
+								print("[AutoTimer] We found a matching recorded movie, skipping event:", name)
 								movieExists = True
 								break
 
@@ -345,14 +349,14 @@ class AutoTimer:
 
 						# Abort if we don't want to modify timers or timer is repeated
 						if config.plugins.autotimer.refresh.value == "none" or rtimer.repeated:
-							print "[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer"
+							print("[AutoTimer] Won't modify existing timer because either no modification allowed or repeated timer")
 							break
 
 						if hasattr(rtimer, "isAutoTimer"):
 							rtimer.log(501, "[AutoTimer] AutoTimer %s modified this automatically generated timer." % (timer.name))
 						else:
 							if config.plugins.autotimer.refresh.value != "all":
-								print "[AutoTimer] Won't modify existing timer because it's no timer set by us"
+								print("[AutoTimer] Won't modify existing timer because it's no timer set by us")
 								break
 
 							rtimer.log(501, "[AutoTimer] Warning, AutoTimer %s messed with a timer which might not belong to it." % (timer.name))
@@ -377,7 +381,7 @@ class AutoTimer:
 							if ( len(extdesc) == len(rtimer.extdesc) and extdesc == rtimer.extdesc ) \
 								or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, rtimer.extdesc).ratio() ):
 								oldExists = True
-								print "[AutoTimer] We found a timer (similar service) with same description, skipping event"
+								print("[AutoTimer] We found a timer (similar service) with same description, skipping event")
 								break
 
 				# We found no timer we want to edit
@@ -388,7 +392,7 @@ class AutoTimer:
 
 					# We want to search for possible doubles
 					if timer.avoidDuplicateDescription >= 2:
-						for rtimer in chain.from_iterable( recorddict.itervalues() ):
+						for rtimer in chain.from_iterable( itervalues(recorddict) ):
 							if not rtimer.disabled \
 								and rtimer.name == name \
 								and rtimer.description == shortdesc:
@@ -397,13 +401,13 @@ class AutoTimer:
 									if ( len(extdesc) == len(rtimer.extdesc) and extdesc == rtimer.extdesc ) \
 										or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, rtimer.extdesc).ratio() ):
 										oldExists = True
-										print "[AutoTimer] We found a timer (any service) with same description, skipping event"
+										print("[AutoTimer] We found a timer (any service) with same description, skipping event")
 										break
 						if oldExists:
 							continue
 
 					if timer.checkCounter(timestamp):
-						print "[AutoTimer] Not adding new timer because counter is depleted."
+						print("[AutoTimer] Not adding new timer because counter is depleted.")
 						continue
 
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
@@ -442,7 +446,7 @@ class AutoTimer:
 
 					if conflicts:
 						conflictString += ' / '.join(["%s (%s)" % (x.name, strftime("%Y%m%d %H%M", localtime(x.begin))) for x in conflicts])
-						print "[AutoTimer] conflict with %s detected" % (conflictString)
+						print("[AutoTimer] conflict with %s detected" % (conflictString))
 
 					if conflicts and config.plugins.autotimer.addsimilar_on_conflict.value:
 						# We start our search right after our actual index
@@ -457,7 +461,7 @@ class AutoTimer:
 									or ( 0.8 < SequenceMatcher(lambda x: x == " ",extdesc, extdescS).ratio() ):
 									# Check if the similar is already known
 									if eitS not in similar:
-										print "[AutoTimer] Found similar Timer: " + name
+										print("[AutoTimer] Found similar Timer: " + name)
 
 										# Store the actual and similar eit and conflictString, so it can be handled later
 										newEntry.conflictString = conflictString
