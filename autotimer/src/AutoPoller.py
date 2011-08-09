@@ -63,7 +63,8 @@ class AutoPollerThread(Thread):
 	def stop(self):
 		self.__timer.stop()
 		self.running = False
-		self.__semaphore.release()
+		self.__pump.recv_msg.get().remove(self.gotThreadMsg)
+		self.__timer.callback.remove(self.timeout)
 
 	def run(self):
 		sem = self.__semaphore
