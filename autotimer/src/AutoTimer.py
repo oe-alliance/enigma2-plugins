@@ -237,22 +237,23 @@ class AutoTimer:
 					print "[AutoTimer] Skipping an event because it starts in less than 60 seconds"
 					continue
 
-				# If maximum days in future is set then check time
-				if checkEvtLimit:
-					if begin > evtLimit:
-						continue
-
 				# Convert begin time
 				timestamp = localtime(begin)
 				# Update timer
 				timer.update(begin, timestamp)
 
 				# Check if eit is in similar matches list
+				# NOTE: ignore evtLimit for similar timers as I feel this makes the feature unintuitive
 				similarTimer = False
 				if eit in similar:
 					similarTimer = True
 					dayofweek = None # NOTE: ignore day on similar timer
 				else:
+					# If maximum days in future is set then check time
+					if checkEvtLimit:
+						if begin > evtLimit:
+							continue
+
 					dayofweek = str(timestamp.tm_wday)
 
 				# Check timer conditions
