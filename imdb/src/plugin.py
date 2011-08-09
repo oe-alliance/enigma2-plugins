@@ -25,9 +25,11 @@ import re
 try:
 	import htmlentitydefs
 	from urllib import quote_plus
+	iteritems = lambda d: d.iteritems()
 except ImportError as ie:
 	from html import entities as htmlentitydefs
 	from urllib.parse import quote_plus
+	iteritems = lambda d: d.items()
 	unichr = chr
 import gettext
 
@@ -451,7 +453,7 @@ class IMDB(Screen):
 			if key not in entitydict:
 				entitydict[key] = x.group(1)
 
-		for key, codepoint in entitydict.items():
+		for key, codepoint in iteritems(entitydict):
 			in_html = in_html.replace(key, unichr(int(codepoint)).encode('latin-1', 'ignore'))
 		self.inhtml = in_html.decode('latin-1').encode('utf8')
 

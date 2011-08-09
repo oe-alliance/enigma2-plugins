@@ -57,7 +57,13 @@ for where in pdict:
 	if where.startswith('WHERE_'):
 		WHEREMAP[where] = pdict[where]
 del pdict
-reverse = lambda map: dict((v,k) for k,v in map.items())
+
+try:
+	dict.iteritems
+	iteritems = lambda d: d.iteritems()
+except AttributeError:
+	iteritems = lambda d: d.items()
+reverse = lambda map: dict((v,k) for k,v in iteritems(map))
 
 class PluginWeights:
 	def __init__(self):
@@ -109,7 +115,7 @@ class PluginWeights:
 
 			where = idmap[key]
 			extend((' <where type="', str(where), '">\n'))
-			for key, value in whereplugins.items():
+			for key, value in iteritems(whereplugins):
 				extend(('  <plugin name="', str(key), '" weight="', str(value), '" />\n'))
 			append((' </where>\n'))
 		append('\n</pluginsort>\n')

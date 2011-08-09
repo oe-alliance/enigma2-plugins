@@ -7,8 +7,10 @@ from Components.SystemInfo import SystemInfo
 from time import localtime
 try:
 	from urllib import unquote
+	iteritems = lambda d: d.iteritems()
 except ImportError as ie:
 	from urllib.parse import unquote
+	iteritems = lambda d: d.items()
 
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
@@ -135,7 +137,7 @@ class EPGRefreshListServicesResource(resource.Resource):
 class EPGRefreshChangeSettingsResource(resource.Resource):
 	def render(self, req):
 		statetext = "config changed."
-		for key, value in req.args.items():
+		for key, value in iteritems(req.args):
 			value = value[0]
 			if key == "enabled":
 				config.plugins.epgrefresh.enabled.value = True if value == "true" else False

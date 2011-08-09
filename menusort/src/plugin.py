@@ -23,6 +23,12 @@ try:
 except ImportError as ie:
 	ParseError = SyntaxError
 
+try:
+	dict.iteritems
+	iteritems = lambda d: d.iteritems()
+except AttributeError:
+	iteritems = lambda d: d.items()
+
 from shutil import copyfile, Error
 
 XML_CONFIG = "/etc/enigma2/menusort.xml"
@@ -70,7 +76,7 @@ class MenuWeights:
 		append = list.append
 		extend = list.extend
 
-		for text, weight in self.weights.items():
+		for text, weight in iteritems(self.weights):
 			extend((' <entry text="', str(text), '" weight="', str(weight), '" />\n'))
 		append('\n</menusort>\n')
 

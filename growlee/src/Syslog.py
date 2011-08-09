@@ -27,7 +27,11 @@ SEVERITY = {
 	'warning': 4, 'notice': 5, 'info': 6, 'debug': 7
 }
 
-reverse = lambda map: dict((v,k) for k,v in map.items())
+try:
+	dict.iteritems
+	reverse = lambda map: dict((v,k) for k,v in map.iteritems())
+except AttributeError:
+	reverse = lambda map: dict((v,k) for k,v in map.items())
 
 SEVERITYMAP = {
 	MessageBox.TYPE_YESNO: SEVERITY['debug'],
