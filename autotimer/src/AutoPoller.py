@@ -15,17 +15,14 @@ NOTIFICATIONID = 'AutoTimerConflictEncounteredNotification'
 SIMILARNOTIFICATIONID = 'AutoTimerSimilarUsedNotification'
 
 from threading import Thread, Semaphore
-try:
-	from Queue import Queue
-except ImportError as ie:
-	from queue import Queue
+from collections import deque
 
 class AutoPollerThread(Thread):
 	"""Background thread where the EPG is parsed (unless initiated by the user)."""
 	def __init__(self):
 		Thread.__init__(self)
 		self.__semaphore = Semaphore(0)
-		self.__queue = Queue(1)
+		self.__queue = deque(maxlen=1)
 		self.__pump = ePythonMessagePump()
 		self.__pump.recv_msg.get().append(self.gotThreadMsg)
 		self.__timer = eTimer()
@@ -37,7 +34,7 @@ class AutoPollerThread(Thread):
 
 	def gotThreadMsg(self, msg):
 		"""Create Notifications if there is anything to display."""
-		ret = self.__queue.get()
+		ret = self.__queue.pop()
 		conflicts = ret[4]
 		if conflicts and config.plugins.autotimer.notifconflict.value:
 			AddPopup(
@@ -78,7 +75,7 @@ class AutoPollerThread(Thread):
 			from plugin import autotimer
 			# Ignore any program errors
 			try:
-				self.__queue.put(autotimer.parseEPG())
+				self.__queue.append(autotimer.parseEPG())
 				self.__pump.send(0)
 			except Exception:
 				# Dump error to stdout
