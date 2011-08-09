@@ -66,23 +66,28 @@ class AutoPollerThread(Thread):
 		self.__semaphore.release()
 
 	def run(self):
+		sem = self.__semaphore
+		queue = self.__queue
+		pump = self.__pump
+		timer = self.__timer
+
 		self.running = True
-		while True:
-			self.__semaphore.acquire()
+		while 1:
+			sem.acquire()
 			# NOTE: we have to check this here and not using the while to prevent the parser to be started on shutdown
 			if not self.running: break
 
 			from plugin import autotimer
 			# Ignore any program errors
 			try:
-				self.__queue.append(autotimer.parseEPG())
-				self.__pump.send(0)
+				queue.append(autotimer.parseEPG())
+				pump.send(0)
 			except Exception:
 				# Dump error to stdout
 				import traceback, sys
 				traceback.print_exc(file=sys.stdout)
 
-			self.__timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
+			timer.startLongTimer(config.plugins.autotimer.interval.value*3600)
 
 class AutoPoller:
 	"""Manages actual thread which does the polling. Used for convenience."""
