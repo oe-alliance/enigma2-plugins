@@ -29,6 +29,7 @@ from AutoTimerComponent import preferredAutoTimerComponent
 from itertools import chain
 from collections import defaultdict
 from difflib import SequenceMatcher
+from operator import itemgetter
 
 from . import xrange, itervalues
 
@@ -212,7 +213,7 @@ class AutoTimer:
 			# Search EPG, default to empty list
 			epgmatches = epgcache.search(('RITBDSE', 500, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or []
 			# Sort list of tuples by begin time 'B'
-			epgmatches.sort(key = lambda x: x[3])
+			epgmatches.sort(key=itemgetter(3))
 
 			# Reset the the marked similar servicerefs
 			similar.clear()
