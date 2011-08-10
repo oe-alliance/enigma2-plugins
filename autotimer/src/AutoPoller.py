@@ -58,11 +58,16 @@ class AutoPollerThread(Thread):
 		else: delay = config.plugins.autotimer.interval.value*3600
 
 		self.__timer.startLongTimer(delay)
-		Thread.start(self)
+		if not self.isAlive():
+			Thread.start(self)
+
+	def pause(self):
+		self.__timer.stop()
 
 	def stop(self):
 		self.__timer.stop()
 		self.running = False
+		self.__semaphore.release()
 		self.__pump.recv_msg.get().remove(self.gotThreadMsg)
 		self.__timer.callback.remove(self.timeout)
 
@@ -94,19 +99,16 @@ class AutoPoller:
 	"""Manages actual thread which does the polling. Used for convenience."""
 
 	def __init__(self):
-		self.thread = None
+		self.thread = AutoPollerThread()
 
 	def start(self, initial=True):
-		if self.thread:
-			self.stop()
-		self.thread = AutoPollerThread()
 		self.thread.start(initial=initial)
 
+	def pause(self):
+		self.thread.pause()
+
 	def stop(self):
-		if not self.thread:
-			return
 		self.thread.stop()
 		# NOTE: while we don't need to join the thread, we should do so in case it's currently parsining
 		self.thread.join()
 		self.thread = None
-

@@ -109,7 +109,7 @@ def main(session, **kwargs):
 
 	# Do not run in background while editing, this might screw things up
 	if autopoller is not None:
-		autopoller.stop()
+		autopoller.pause()
 
 	from AutoTimerOverview import AutoTimerOverview
 	session.openWithCallback(
