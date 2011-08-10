@@ -482,7 +482,7 @@ class AutoTimer:
 					if conflicts is None:
 						timer.decrementCounter()
 						new += 1
-						timer.extdesc = extdesc
+						newEntry.extdesc = extdesc
 						recorddict[serviceref].append(newEntry)
 
 						# Similar timers are in new timers list and additionally in similar timers list
