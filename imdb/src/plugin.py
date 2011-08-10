@@ -410,13 +410,13 @@ class IMDB(Screen):
 
 	def getIMDB(self):
 		self.resetLabels()
-		if self.eventName is "":
+		if not self.eventName:
 			s = self.session.nav.getCurrentService()
 			info = s and s.info()
 			event = info and info.getEvent(0) # 0 = now, 1 = next
 			if event:
 				self.eventName = event.getEventName()
-		if self.eventName is not "":
+		if self.eventName:
 			self["statusbar"].setText(_("Query IMDb: %s...") % (self.eventName))
 			localfile = "/tmp/imdbquery.html"
 			if self.IMDBlanguage:
@@ -556,7 +556,7 @@ class IMDB(Screen):
 						Casttext += _(" as ") + self.htmltags.sub('', x.group(2).replace('/ ...','')).replace('\n', ' ')
 						if x.group(3):
 							Casttext += x.group(3)
-				if Casttext is not "":
+				if Casttext:
 					Casttext = _("Cast: ") + Casttext
 				else:
 					Casttext = _("No cast list found in the database.")
