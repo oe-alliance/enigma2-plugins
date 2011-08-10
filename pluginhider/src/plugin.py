@@ -10,6 +10,8 @@ from Components.config import config, ConfigSubsection, ConfigSet
 
 from PluginHiderSetup import PluginHiderSetup
 
+from operator import attrgetter
+
 config.plugins.pluginhider = ConfigSubsection()
 config.plugins.pluginhider.hideextensions = ConfigSet(choices=[])
 config.plugins.pluginhider.hideplugins = ConfigSet(choices=[])
@@ -47,7 +49,7 @@ def PluginComponent_getPlugins(self, where):
 	if where:
 		res.extend(PluginComponent.pluginHider_baseGetPlugins(self, where))
 	if hasPluginWeight:
-		res.sort(key=lambda x:x.weight)
+		res.sort(key=attrgetter('weight'))
 	return res
 
 def autostart(reason, *args, **kwargs):
