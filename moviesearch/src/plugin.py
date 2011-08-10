@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 from Tools.BoundFunction import boundFunction
@@ -69,12 +70,12 @@ def main(session, service, **kwargs):
 	if hasattr(cur_dialog, 'csel'):
 		csel = session.current_dialog.csel
 		if not "list" in csel:
-			print "[MovieSearch] No list, goodbye!"
+			print("[MovieSearch] No list, goodbye!")
 			csel = None
 	elif hasattr(cur_dialog, 'mlist'):
 		csel = cur_dialog.mlist
 	else:
-		print "[MovieSearch] Unknown current dialog of type", type(cur_dialog)
+		print("[MovieSearch] Unknown current dialog of type", type(cur_dialog))
 		csel = None
 
 	if csel is not None:

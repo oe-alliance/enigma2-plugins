@@ -18,7 +18,7 @@ class HTTPProgressDownloader(HTTPDownloader):
 	def gotHeaders(self, headers):
 		# If we have a callback and 'OK' from Server try to get length
 		if self.writeProgress and self.status == '200':
-			if headers.has_key('content-length'):
+			if 'content-length' in headers:
 				self.totallength = int(headers['content-length'][0])
 				for cb in self.writeProgress:
 					cb(0, self.totallength)

@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from twisted.web.client import downloadPage
 from enigma import ePicLoad, eServiceReference
@@ -21,8 +22,15 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from os import environ as os_environ
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 import re
-import htmlentitydefs
-import urllib
+try:
+	import htmlentitydefs
+	from urllib import quote_plus
+	iteritems = lambda d: d.iteritems()
+except ImportError as ie:
+	from html import entities as htmlentitydefs
+	from urllib.parse import quote_plus
+	iteritems = lambda d: d.items()
+	unichr = chr
 import gettext
 
 config.plugins.imdb = ConfigSubsection()
@@ -36,7 +44,7 @@ def localeInit():
 def _(txt):
 	t = gettext.dgettext("IMDb", txt)
 	if t == txt:
-		print "[IMDb] fallback to default translation for", txt 
+		print("[IMDb] fallback to default translation for", txt)
 		t = gettext.gettext(txt)
 	return t
 
@@ -197,7 +205,7 @@ class IMDB(Screen):
 		else:
 			self.close()
 
-	event_quoted = property(lambda self: urllib.quote_plus(self.eventName.encode('utf8')))
+	event_quoted = property(lambda self: quote_plus(self.eventName.encode('utf8')))
 
 	def dictionary_init(self):
 		syslang = language.getLanguage()
@@ -337,7 +345,7 @@ class IMDB(Screen):
 			self["statusbar"].setText(_("Re-Query IMDb: %s...") % (title))
 			localfile = "/tmp/imdbquery2.html"
 			fetchurl = "http://" + self.IMDBlanguage + "imdb.com/title/" + link
-			print "[IMDB] downloading query " + fetchurl + " to " + localfile
+			print("[IMDB] downloading query " + fetchurl + " to " + localfile)
 			downloadPage(fetchurl,localfile).addCallback(self.IMDBquery2).addErrback(self.fetchFailed)
 			self["menu"].hide()
 			self.resetLabels()
@@ -422,13 +430,13 @@ class IMDB(Screen):
 				fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
 			else:
 				fetchurl = "http://akas.imdb.com/find?s=tt;mx=20;q=" + event_quoted
-			print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
+			print("[IMDB] Downloading Query " + fetchurl + " to " + localfile)
 			downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
 		else:
 			self["statusbar"].setText(_("Could't get Eventname"))
 
 	def fetchFailed(self,string):
-		print "[IMDB] fetch failed", string
+		print("[IMDB] fetch failed", string)
 		self["statusbar"].setText(_("IMDb Download failed"))
 
 	def html2utf8(self,in_html):
@@ -452,12 +460,12 @@ class IMDB(Screen):
 			if key not in entitydict:
 				entitydict[key] = x.group(1)
 
-		for key, codepoint in entitydict.items():
+		for key, codepoint in iteritems(entitydict):
 			in_html = in_html.replace(key, unichr(int(codepoint)).encode('latin-1', 'ignore'))
 		self.inhtml = in_html.decode('latin-1').encode('utf8')
 
 	def IMDBquery(self,string):
-		print "[IMDBquery]"
+		print("[IMDBquery]")
 		self["statusbar"].setText(_("IMDb Download completed"))
 
 		self.html2utf8(open("/tmp/imdbquery.html", "r").read())
@@ -478,7 +486,7 @@ class IMDB(Screen):
 					self.eventName = self.resultlist[0][1]
 					localfile = "/tmp/imdbquery.html"
 					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + self.event_quoted + "&s=tt&site=aka"
-					print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
+					print("[IMDB] Downloading Query " + fetchurl + " to " + localfile)
 					downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
 				elif Len > 1:
 					self.Page = 1
@@ -494,7 +502,7 @@ class IMDB(Screen):
 					event_quoted = quoteEventName(self.eventName)
 					localfile = "/tmp/imdbquery.html"
 					fetchurl = "http://" + self.IMDBlanguage + "imdb.com/find?q=" + event_quoted + "&s=tt&site=aka"
-					print "[IMDB] Downloading Query " + fetchurl + " to " + localfile
+					print("[IMDB] Downloading Query " + fetchurl + " to " + localfile)
 					downloadPage(fetchurl,localfile).addCallback(self.IMDBquery).addErrback(self.fetchFailed)
 				else:
 					self["detailslabel"].setText(_("IMDb query failed!"))
@@ -506,7 +514,7 @@ class IMDB(Screen):
 		self.IMDBparse()
 
 	def IMDBparse(self):
-		print "[IMDBparse]"
+		print("[IMDBparse]")
 		self.Page = 1
 		Detailstext = _("No details found.")
 		if self.generalinfos:
@@ -567,7 +575,7 @@ class IMDB(Screen):
 				posterurl = posterurl.group(1)
 				self["statusbar"].setText(_("Downloading Movie Poster: %s...") % (posterurl))
 				localfile = "/tmp/poster.jpg"
-				print "[IMDB] downloading poster " + posterurl + " to " + localfile
+				print("[IMDB] downloading poster " + posterurl + " to " + localfile)
 				downloadPage(posterurl,localfile).addCallback(self.IMDBPoster).addErrback(self.fetchFailed)
 			else:
 				self.IMDBPoster("kein Poster")

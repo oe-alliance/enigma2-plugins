@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from . import _
 
 # Plugin definition
@@ -7,6 +9,8 @@ from Components.PluginComponent import PluginComponent
 from Components.config import config, ConfigSubsection, ConfigSet
 
 from PluginHiderSetup import PluginHiderSetup
+
+from operator import attrgetter
 
 config.plugins.pluginhider = ConfigSubsection()
 config.plugins.pluginhider.hideextensions = ConfigSet(choices=[])
@@ -45,13 +49,13 @@ def PluginComponent_getPlugins(self, where):
 	if where:
 		res.extend(PluginComponent.pluginHider_baseGetPlugins(self, where))
 	if hasPluginWeight:
-		res.sort(key=lambda x:x.weight)
+		res.sort(key=attrgetter('weight'))
 	return res
 
 def autostart(reason, *args, **kwargs):
 	if reason == 0:
 		if hasattr(PluginComponent, 'pluginHider_baseGetPlugins'):
-			print "[PluginHider] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring."
+			print("[PluginHider] Something went wrong as our autostart handler was called multiple times for startup, printing traceback and ignoring.")
 			import traceback, sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 		else:
@@ -62,7 +66,7 @@ def autostart(reason, *args, **kwargs):
 			PluginComponent.getPlugins = PluginComponent.pluginHider_baseGetPlugins
 			del PluginComponent.pluginHider_baseGetPlugins
 		else:
-			print "[PluginHider] Something went wrong as our autostart handler was called multiple times for shutdown, printing traceback and ignoring."
+			print("[PluginHider] Something went wrong as our autostart handler was called multiple times for shutdown, printing traceback and ignoring.")
 			import traceback, sys
 			traceback.print_stack(limit=5, file=sys.stdout)
 

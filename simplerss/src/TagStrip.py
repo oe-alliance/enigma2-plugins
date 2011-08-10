@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 from re import sub, finditer
 
-import htmlentitydefs
+try:
+	import htmlentitydefs
+	iteritems = lambda d: d.iteritems()
+except ImportError as ie:
+	from html import entities as htmlentitydefs
+	iteritems = lambda d: d.items()
+	unichr = chr
 
 def strip_readable(html):
 	# Newlines are rendered as whitespace in html
@@ -51,7 +57,7 @@ def strip(html):
 		if key not in entitydict:
 			entitydict[key] = x.group(1)
 
-	for key, codepoint in entitydict.items():
+	for key, codepoint in iteritems(entitydict):
 		html = html.replace(key, unichr(int(codepoint)))
 
 	# Return result with leading/trailing whitespaces removed

@@ -333,6 +333,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"nextBouquet": self.switchToConfigList,
 			"green": self.keyStdFeed,
 			"yellow": self.handleHistory,
+			"menu": self.handleMenu
 		}, -2)
 
 		self["historyactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "MovieSelectionActions", "HelpActions"],
@@ -514,7 +515,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.switchToConfigList()
 
 	def handleMenu(self):
-		if self.currList == "configlist":
+		if self.currList == "configlist" or self.currList == "status":
 			menulist = (
 					(_("MyTube Settings"), "settings"),
 				)
@@ -1050,7 +1051,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self["feedlist"].setIndex(0)
 					self["feedlist"].setList(self.videolist)
 					self["feedlist"].updateList(self.videolist)
-					if self.FirstRun == True:	
+					if self.FirstRun and not config.plugins.mytube.general.loadFeedOnOpen.value:
 						self.switchToConfigList()
 					else:
 						self.switchToFeedList()

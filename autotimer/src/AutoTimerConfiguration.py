@@ -1,4 +1,6 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
+
 # for localized messages
 from . import _
 
@@ -55,13 +57,13 @@ def parseEntry(element, baseTimer, defaults = False):
 		# Read out match
 		baseTimer.match = element.get("match", "").encode("UTF-8")
 		if not baseTimer.match:
-			print '[AutoTimer] Erroneous config is missing attribute "match", skipping entry'
+			print('[AutoTimer] Erroneous config is missing attribute "match", skipping entry')
 			return False
 
 		# Read out name
 		baseTimer.name = element.get("name", "").encode("UTF-8")
 		if not baseTimer.name:
-			print '[AutoTimer] Timer is missing attribute "name", defaulting to match'
+			print('[AutoTimer] Timer is missing attribute "name", defaulting to match')
 			baseTimer.name = baseTimer.match
 
 		# Read out enabled
@@ -71,7 +73,7 @@ def parseEntry(element, baseTimer, defaults = False):
 		elif enabled == "yes":
 			baseTimer.enabled = True
 		else:
-			print '[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', disabling'
+			print('[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', disabling')
 			baseTimer.enabled = False
 
 		# Read timeframe
@@ -183,10 +185,10 @@ def parseEntry(element, baseTimer, defaults = False):
 		for afterevent in l:
 			value = afterevent.text
 
-			if idx.has_key(value):
+			if value in idx:
 				value = idx[value]
 			else:
-				print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
+				print('[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition')
 				continue
 
 			start = afterevent.get("from")
@@ -210,7 +212,7 @@ def parseEntry(element, baseTimer, defaults = False):
 			if not (value and where):
 				continue
 
-			if idx.has_key(where):
+			if where in idx:
 				excludes[idx[where]].append(value.encode("UTF-8"))
 		baseTimer.exclude = excludes
 
@@ -224,7 +226,7 @@ def parseEntry(element, baseTimer, defaults = False):
 			if not (value and where):
 				continue
 
-			if idx.has_key(where):
+			if where in idx:
 				includes[idx[where]].append(value.encode("UTF-8"))
 		baseTimer.include = includes
 
@@ -243,7 +245,7 @@ def parseEntry(element, baseTimer, defaults = False):
 	return True
 
 def parseConfigOld(configuration, list, uniqueTimerId = 0):
-	print "[AutoTimer] Trying to parse old config"
+	print("[AutoTimer] Trying to parse old config")
 
 	# Iterate Timers
 	for timer in configuration.findall("timer"):
@@ -260,7 +262,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			name = getValue(timer.findall("name"), "").encode("UTF-8")
 
 		if not name:
-			print '[AutoTimer] Erroneous config is missing attribute "name", skipping entry'
+			print('[AutoTimer] Erroneous config is missing attribute "name", skipping entry')
 			continue
 
 		# Read out match (V3+)
@@ -269,7 +271,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			# Read out match
 			match = match.encode("UTF-8")
 			if not match:
-				print '[AutoTimer] Erroneous config contains empty attribute "match", skipping entry'
+				print('[AutoTimer] Erroneous config contains empty attribute "match", skipping entry')
 				continue
 		# V2-
 		else:
@@ -285,7 +287,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			elif enabled == "yes":
 				enabled = True
 			else:
-				print '[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', skipping entry'
+				print('[AutoTimer] Erroneous config contains invalid value for "enabled":', enabled,', skipping entry')
 				enabled = False
 		# V1
 		else:
@@ -318,7 +320,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 					end = [int(x) for x in end.split(':')]
 					timetuple = (start, end)
 				else:
-					print '[AutoTimer] Erroneous config contains invalid definition of "timespan", ignoring definition'
+					print('[AutoTimer] Erroneous config contains invalid definition of "timespan", ignoring definition')
 					timetuple = None
 			else:
 				timetuple = None
@@ -400,10 +402,10 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 		for element in timer.findall("afterevent"):
 			value = element.text
 
-			if idx.has_key(value):
+			if value in idx:
 				value = idx[value]
 			else:
-				print '[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition'
+				print('[AutoTimer] Erroneous config contains invalid value for "afterevent":', afterevent,', ignoring definition')
 				continue
 
 			start = element.get("from")
@@ -424,7 +426,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			if not (value and where):
 				continue
 
-			if idx.has_key(where):
+			if where in idx:
 				excludes[idx[where]].append(value.encode("UTF-8"))
 
 		# Read out includes (use same idx) (V4+ feature, should not harm V3-)
@@ -435,7 +437,7 @@ def parseConfigOld(configuration, list, uniqueTimerId = 0):
 			if not (value and where):
 				continue
 
-			if idx.has_key(where):
+			if where in idx:
 				includes[idx[where]].append(value.encode("UTF-8"))
 
 		# Read out max length (V4+)

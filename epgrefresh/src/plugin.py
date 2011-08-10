@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # for localized messages
 from . import _
 
@@ -56,8 +58,8 @@ try:
 	from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 	reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/EPGRefresh/mphelp.xml"))
 	epgrefreshHelp = registerHelp(*reader)
-except Exception, e:
-	print "[EPGRefresh] Unable to initialize MPHelp:", e,"- Help not available!"
+except Exception as e:
+	print("[EPGRefresh] Unable to initialize MPHelp:", e,"- Help not available!")
 	epgrefreshHelp = None
 #pragma mark -
 
@@ -77,7 +79,7 @@ def standbyQuestionCallback(session, res = None):
 
 # Autostart
 def autostart(reason, **kwargs):
-	if reason == 0 and kwargs.has_key("session"):
+	if reason == 0 and "session" in kwargs:
 		session = kwargs["session"]
 		epgrefresh.session = session
 
@@ -164,8 +166,8 @@ def housekeepingExtensionsmenu(el):
 	else:
 		try:
 			plugins.removePlugin(extDescriptor)
-		except ValueError, ve:
-			print "[EPGRefresh] housekeepingExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring."
+		except ValueError as ve:
+			print("[EPGRefresh] housekeepingExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring.")
 
 config.plugins.epgrefresh.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 extDescriptor = PluginDescriptor(name="EPGRefresh", description = _("Automatically refresh EPG"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart=False)

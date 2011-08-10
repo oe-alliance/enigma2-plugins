@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
 
@@ -237,7 +239,7 @@ def MoviePlayer_swapPiP(self):
 def InfoBarNumberZap_zapToNumber(self, *args, **kwargs):
 	try:
 		self.servicelist.enable_pipzap = True
-	except AttributeError, ae:
+	except AttributeError as ae:
 		pass
 	baseMethods.InfoBarNumberZap_zapToNumber(self, *args, **kwargs)
 
@@ -252,7 +254,7 @@ def InfoBarChannelSelection_zapDown(self, *args, **kwargs):
 def InfoBarEPG_zapToService(self, *args, **kwargs):
 	try:
 		self.servicelist.enable_pipzap = True
-	except AttributeError, ae:
+	except AttributeError as ae:
 		pass
 	baseMethods.InfoBarEPG_zapToService(self, *args, **kwargs)
 
@@ -278,7 +280,7 @@ def InfoBarPiP__init__(self):
 def InfoBarPiP_pipzapAvailable(self):
 	try:
 		return True if self.servicelist and self.session.pipshown else False
-	except AttributeError, ae:
+	except AttributeError as ae:
 		return False
 
 def InfoBarPiP_getTogglePipzapName(self):
@@ -313,7 +315,7 @@ def InfoBarPiP_togglePipzapHelpable(self):
 def InfoBarPiP_showPiP(self, *args, **kwargs):
 	try:
 		slist = self.servicelist
-	except AttributeError, ae:
+	except AttributeError as ae:
 		slist = None
 
 	if self.session.pipshown and slist and slist.dopipzap:
@@ -336,7 +338,7 @@ def InfoBarPiP_swapPiP(self):
 
 			try:
 				slist = self.servicelist
-			except AttributeError, ae:
+			except AttributeError as ae:
 				slist = None
 			if slist:
 				# TODO: this behaves real bad on subservices
@@ -398,8 +400,8 @@ try:
 		from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 		reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/pipzap/mphelp.xml"))
 		pipzapHelp = registerHelp(*reader)
-except Exception, e:
-	print "[pipzap] Unable to initialize MPHelp:", e,"- Help not available!"
+except Exception as e:
+	print("[pipzap] Unable to initialize MPHelp:", e,"- Help not available!")
 	pipzapHelp = None
 
 #pragma mark -
@@ -410,10 +412,10 @@ def overwriteFunctions():
 	"""Overwrite existing functions here to increase system stability a bit."""
 	try:
 		baseMethods.ChannelContextMenu__init__
-	except AttributeError, ae:
+	except AttributeError as ae:
 		pass
 	else:
-		print "[pipzap] already initialized, aborting."
+		print("[pipzap] already initialized, aborting.")
 		return
 
 	baseMethods.ChannelContextMenu__init__ = ChannelContextMenu.__init__

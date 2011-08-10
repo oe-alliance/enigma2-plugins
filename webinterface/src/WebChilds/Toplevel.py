@@ -44,7 +44,7 @@ def getToplevel(session):
 	importExternalModules()
 
 	for child in externalChildren:
-		if len(child) == 2:
+		if len(child) > 1:
 			root.putChild(child[0], child[1])
 	
 	return root

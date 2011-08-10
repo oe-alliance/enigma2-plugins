@@ -28,10 +28,12 @@ config.plugins.autotimer.editor = ConfigSelection(choices = [
 		("wizard", _("Wizard"))
 	], default = "wizard"
 )
+config.plugins.autotimer.addsimilar_on_conflict = ConfigEnableDisable(default = False)
 config.plugins.autotimer.disabled_on_conflict = ConfigEnableDisable(default = False)
 config.plugins.autotimer.show_in_extensionsmenu = ConfigYesNo(default = False)
 config.plugins.autotimer.fastscan = ConfigYesNo(default = False)
 config.plugins.autotimer.notifconflict = ConfigYesNo(default = True)
+config.plugins.autotimer.notifsimilar = ConfigYesNo(default = True)
 config.plugins.autotimer.maxdaysinfuture = ConfigNumber(default = 0)
 config.plugins.autotimer.show_help = ConfigYesNo(default = True)
 
@@ -44,8 +46,8 @@ try:
 	from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 	reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/mphelp.xml"))
 	autotimerHelp = registerHelp(*reader)
-except Exception, e:
-	print "[AutoTimer] Unable to initialize MPHelp:", e,"- Help not available!"
+except Exception as e:
+	print("[AutoTimer] Unable to initialize MPHelp:", e,"- Help not available!")
 	autotimerHelp = None
 #pragma mark -
 
@@ -96,7 +98,7 @@ def main(session, **kwargs):
 
 	try:
 		autotimer.readXml()
-	except SyntaxError, se:
+	except SyntaxError as se:
 		session.open(
 			MessageBox,
 			_("Your config file is not well-formed:\n%s") % (str(se)),
@@ -107,7 +109,7 @@ def main(session, **kwargs):
 
 	# Do not run in background while editing, this might screw things up
 	if autopoller is not None:
-		autopoller.stop()
+		autopoller.pause()
 
 	from AutoTimerOverview import AutoTimerOverview
 	session.openWithCallback(
@@ -128,7 +130,7 @@ def editCallback(session):
 		ret = autotimer.parseEPG()
 		session.open(
 			MessageBox,
-			_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered.") % (ret[0], ret[1], ret[2], len(ret[4])),
+			_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered, %d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
 			type = MessageBox.TYPE_INFO,
 			timeout = 10
 		)
@@ -169,8 +171,8 @@ def housekeepingExtensionsmenu(el):
 	else:
 		try:
 			plugins.removePlugin(extDescriptor)
-		except ValueError, ve:
-			print "[AutoTimer] housekeepingExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring."
+		except ValueError as ve:
+			print("[AutoTimer] housekeepingExtensionsmenu got confused, tried to remove non-existant plugin entry... ignoring.")
 
 config.plugins.autotimer.show_in_extensionsmenu.addNotifier(housekeepingExtensionsmenu, initial_call = False, immediate_feedback = True)
 extDescriptor = PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = extensionsmenu, needsRestart = False)

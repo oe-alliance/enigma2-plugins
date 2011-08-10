@@ -265,7 +265,7 @@ class MyTubeFeedEntry():
 		return video_url
 	
 	def getRelatedVideos(self):
-		print "[MyTubeFeedEntry] getResponseVideos()"
+		print "[MyTubeFeedEntry] getRelatedVideos()"
 		for link in self.entry.link:
 			#print "Related link: ", link.rel.endswith
 			if link.rel.endswith("video.related"):
