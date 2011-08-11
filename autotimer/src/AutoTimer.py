@@ -188,7 +188,7 @@ class AutoTimer:
 		for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
 			if timer and timer.service_ref:
 				event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
-				extdesc = event and event.getExtendedDescription()
+				extdesc = event.getExtendedDescription() if event else ''
 				timer.extdesc = extdesc
 				recorddict[str(timer.service_ref)].append(timer)
 
@@ -318,7 +318,7 @@ class AutoTimer:
 								append({
 									"name": info.getName(movieref),
 									"shortdesc": info.getInfoString(movieref, iServiceInformation.sDescription),
-									"extdesc": event.getExtendedDescription()
+									"extdesc": event.getExtendedDescription() or '' # XXX: does event.getExtendedDescription() actually return None on no description or an empty string?
 								})
 							del append
 
