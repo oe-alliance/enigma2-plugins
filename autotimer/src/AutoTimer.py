@@ -188,7 +188,7 @@ class AutoTimer:
 		for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
 			if timer and timer.service_ref:
 				event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
-				extdesc = event.getExtendedDescription() if event else ''
+				extdesc = event and event.getExtendedDescription() or ''
 				timer.extdesc = extdesc
 				recorddict[str(timer.service_ref)].append(timer)
 
