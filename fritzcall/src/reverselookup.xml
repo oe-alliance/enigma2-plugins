@@ -983,11 +983,12 @@
 		<website name="www.11880.com" url="http://www.11880.com/inverssuche/index/search?method=searchSimple&amp;_dvform_posted=1&amp;phoneNumber=$NUMBER" prefix="0">
 	        <entry>
 	        	<name>&lt;a class="namelink"  href="[^"]*"&gt;&lt;strong&gt;([^&lt;]*)&lt;/strong&gt;&lt;/a&gt;</name>
-	        	<street>^\t*?([^,\t]*?), [\d]{5} [^&lt;]*?&lt;br /&gt;</street>
-	        	<city>^\t*?[^,\t]*?, [\d]{5} ([^&lt;]*?)&lt;br /&gt;</city>
-	        	<zipcode>^\t*?[^,\t]*?, ([\d]{5}) [^&lt;]*?&lt;br /&gt;</zipcode>
+	        	<street>&lt;p class="data track"&gt;\s*([^&lt;]*)&lt;br /&gt;\s*\d+ [^\n]*\n*\s*&lt;/p&gt;</street>
+	        	<city>&lt;p class="data track"&gt;[^&lt;]*&lt;br /&gt;\s*\d+ ([^\n]*)\n*\s*&lt;/p&gt;</city>
+	        	<zipcode>&lt;p class="data track"&gt;[^&lt;]*&lt;br /&gt;\s*(\d+) [^\n]*\n*\s*&lt;/p&gt;</zipcode>
 	        </entry>
-		</website>	</country>
+		</website>
+	</country>
 	<country code="+501">
 		<website name="belizeweb.com" url="http://www.belizeweb.com:8080/directory/index-new.jsp" cookie="(JSESSIONID=[^;]*);" nexturl="http://www.belizeweb.com:8080/directory/index-new.jsp?dirlist=$PART1-$PART2&amp;imageField.x=0&amp;imageField.y=0&amp;maxrecords=5" post="" hidden="(wrzlgrmpf)" prefix="">
 			<entry>
