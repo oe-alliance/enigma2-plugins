@@ -54,7 +54,7 @@ weekdays = [
 
 try:
 	from Plugins.SystemPlugins.vps import Vps
-except ImportError, ie:
+except ImportError as ie:
 	hasVps = False
 else:
 	hasVps = True

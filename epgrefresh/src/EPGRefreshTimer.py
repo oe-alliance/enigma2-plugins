@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # To check if in Standby
 import Screens.Standby
 
@@ -54,19 +56,19 @@ class EPGRefreshTimerEntry(timer.TimerEntry):
 		if self.state == self.StateWaiting:
 			# Check if in timespan
 			if checkTimespan(config.plugins.epgrefresh.begin.value, config.plugins.epgrefresh.end.value):
-				print "[EPGRefresh] In Timespan, will check if we're in Standby and have no Recordings running next"
+				print("[EPGRefresh] In Timespan, will check if we're in Standby and have no Recordings running next")
 				# Do we realy want to check nav?
 				from NavigationInstance import instance
 				if config.plugins.epgrefresh.force.value or (Screens.Standby.inStandby and instance is not None and not instance.RecordTimer.isRecording()):
 					return True
 				else:
-					print "[EPGRefresh] Box still in use, rescheduling"
+					print("[EPGRefresh] Box still in use, rescheduling")
 
 					# Recheck later
 					self.begin = time() + config.plugins.epgrefresh.delay_standby.value*60
 					return False
 			else:
-				print "[EPGRefresh] Not in timespan, ending timer"
+				print("[EPGRefresh] Not in timespan, ending timer")
 				self.state = self.StateEnded
 				return False
 		elif self.state == self.StateRunning:
@@ -102,7 +104,7 @@ class EPGRefreshTimer(timer.Timer):
 		timer.Timer.__init__(self)
 
 	def remove(self, entry):
-		print "[EPGRefresh] Timer removed " + str(entry)
+		print("[EPGRefresh] Timer removed " + str(entry))
 
 		# avoid re-enqueuing
 		entry.repeated = False
@@ -114,9 +116,9 @@ class EPGRefreshTimer(timer.Timer):
 		if entry.state != entry.StateEnded:
 			self.timeChanged(entry)
 
-		print "state: ", entry.state
-		print "in processed: ", entry in self.processed_timers
-		print "in running: ", entry in self.timer_list
+		print("state: ", entry.state)
+		print("in processed: ", entry in self.processed_timers)
+		print("in running: ", entry in self.timer_list)
 		# now the timer should be in the processed_timers list. remove it from there.
 		self.processed_timers.remove(entry)
 
@@ -153,7 +155,7 @@ class EPGRefreshTimer(timer.Timer):
 
 	def add(self, entry):
 		entry.timeChanged()
-		print "[EPGRefresh] Timer added " + str(entry)
+		print("[EPGRefresh] Timer added " + str(entry))
 		self.addTimerEntry(entry)
 
 	def clear(self):

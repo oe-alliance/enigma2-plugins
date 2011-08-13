@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # for localized messages
 from . import _
 
@@ -75,8 +77,8 @@ class EPGRefreshConfiguration(Screen, ConfigListScreen):
 
 			self.list.append(getConfigListEntry(_("Inherit Services from AutoTimer"), config.plugins.epgrefresh.inherit_autotimer, _("Extend the list of services to refresh by those your AutoTimers use?")))
 			self.list.append(getConfigListEntry(_("Run AutoTimer after refresh"), config.plugins.epgrefresh.parse_autotimer, _("After a successful refresh the AutoTimer will automatically search for new matches if this is enabled.")))
-		except ImportError, ie:
-			print "[EPGRefresh] AutoTimer Plugin not installed:", ie
+		except ImportError as ie:
+			print("[EPGRefresh] AutoTimer Plugin not installed:", ie)
 
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changed)
 		

@@ -418,15 +418,9 @@ def main(session, **kwargs):
 		session.open(DVDBackupProgress)
 	else:
 		if not fileExists("/usr/bin/dvdbackup"):
-			session.openWithCallback(open_main, ConsoleScreen, title=_("Installing..."), cmdlist=["ipkg install http://www.lt-forums.org/ali/downloads/dvdbackup_0.4.1-r0_mipsel.ipk"])
+			message(_("Could not install needed dvdbackup package!"))
 		else:
 			session.open(DVDBackupScreen)
-
-def open_main(callback=None):
-	if not fileExists("/usr/bin/dvdbackup"):
-		message(_("Could not install needed dvdbackup package!"))
-	else:
-		SESSION.open(DVDBackupScreen)
 
 def filescan_open(list, session, **kwargs):
 	if len(list) == 1 and list[0].mimetype == "video/x-dvd":

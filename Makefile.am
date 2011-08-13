@@ -30,7 +30,6 @@ SUBDIRS = \
 	kiddytimer \
 	lastfm \
 	mediadownloader \
-	menusort \
 	merlinepg \
 	merlinmusicplayer \
 	meteoitalia \
@@ -39,11 +38,8 @@ SUBDIRS = \
 	movieretitle \
 	moviesearch \
 	movietagger \
-	movieepg \
 	mphelp \
 	multirc \
-	mytube \
-	namezap \
 	ncidclient \
 	netcaster \
 	networkbrowser \
@@ -53,9 +49,6 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
-	pipzap \
-	pluginhider \
-	pluginsort \
 	podcast \
 	porncenter \
 	quickbutton \
@@ -63,7 +56,6 @@ SUBDIRS = \
 	remotetimer \
 	rsdownloader \
 	seekbar \
-	serienfilm \
 	setpasswd \
 	shoutcast \
 	showclock \
@@ -80,10 +72,8 @@ SUBDIRS = \
 	weatherplugin \
 	webcamviewer \
 	webbouqueteditor \
-	webinterface \
 	werbezapper \
 	youtubeplayer \
-	yttrailer \
 	zaphistorybrowser \
 	zapstatistic \
 	zdfmediathek 
@@ -97,6 +87,13 @@ SUBDIRS +=  fancontrol2
 endif
 if VUULTIMO
 SUBDIRS +=  fancontrol2
+endif
+
+if TPM
+SUBDIRS += \
+	mytube \
+	yttrailer \
+	webinterface
 endif
 
 metadir = $(datadir)/meta

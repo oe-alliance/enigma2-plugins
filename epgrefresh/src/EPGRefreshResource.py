@@ -5,7 +5,14 @@ from enigma import eServiceReference
 from Components.config import config
 from Components.SystemInfo import SystemInfo
 from time import localtime
-from urllib import unquote
+try:
+	from urllib import unquote
+	iteritems = lambda d: d.iteritems()
+except ImportError as ie:
+	from urllib.parse import unquote
+	iteritems = lambda d: d.items()
+
+API_VERSION = "1.0"
 
 class EPGRefreshStartRefreshResource(resource.Resource):
 	def render(self, req):
@@ -51,7 +58,7 @@ class EPGRefreshAddRemoveServiceResource(resource.Resource):
 			duration = req.args.get("duration", None)
 			try:
 				duration = duration and int(duration)
-			except ValueError, ve:
+			except ValueError as ve:
 				output = 'invalid value for "duration": ' + str(duration)
 			else:
 				for sref in req.args.get('sref'):
@@ -132,7 +139,7 @@ class EPGRefreshListServicesResource(resource.Resource):
 class EPGRefreshChangeSettingsResource(resource.Resource):
 	def render(self, req):
 		statetext = "config changed."
-		for key, value in req.args.iteritems():
+		for key, value in iteritems(req.args):
 			value = value[0]
 			if key == "enabled":
 				config.plugins.epgrefresh.enabled.value = True if value == "true" else False
@@ -214,7 +221,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 		try:
 			from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
 			hasAutoTimer = True
-		except ImportError, ie: pass
+		except ImportError as ie: pass
 
 		return """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <e2settings>

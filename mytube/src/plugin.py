@@ -1,68 +1,43 @@
+from Components.AVSwitch import AVSwitch
+from Components.ActionMap import ActionMap
+from Components.Button import Button
+from Components.ConfigList import ConfigListScreen
+from Components.Label import Label
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Components.Pixmap import Pixmap
+from Components.ProgressBar import ProgressBar
+from Components.ScrollLabel import ScrollLabel
+from Components.ServiceEventTracker import ServiceEventTracker
+from Components.Sources.List import List
+from Components.Task import Task, Job, job_manager
+from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry
+#, ConfigIP, ConfigNumber, ConfigLocations
+from MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, MyTubeTasksScreen, MyTubeHistoryScreen
+from MyTubeService import validate_cert, get_rnd, myTubeService
 from Plugins.Plugin import PluginDescriptor
-from MyTubeService import GoogleSuggestions, validate_cert, get_rnd
-from MyTubeSearch import ConfigTextWithGoogleSuggestions
-from Tools.BoundFunction import boundFunction
+from Screens.ChoiceBox import ChoiceBox
+from Screens.InfoBarGenerics import InfoBarNotifications
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Screens.ChoiceBox import ChoiceBox
-from Screens.InfoBar import MoviePlayer
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Label import Label
-from Components.ScrollLabel import ScrollLabel
-from Components.ProgressBar import ProgressBar
-from Components.Pixmap import Pixmap
-from Components.Button import Button
-from Components.Sources.List import List
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
-from Components.AVSwitch import AVSwitch
-from Components.ActionMap import HelpableActionMap
-from Components.config import config, Config, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, ConfigYesNo, ConfigIP, ConfigNumber,ConfigLocations
-from Components.config import KEY_DELETE, KEY_BACKSPACE, KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT
-from Components.ConfigList import ConfigListScreen
-from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
-from Components.Console import Console
-from Components.Sources.Source import Source
-from Components.Task import Task, Job, job_manager
+from Tools.BoundFunction import boundFunction
+from Tools.Directories import resolveFilename, SCOPE_HDD, SCOPE_CURRENT_PLUGIN
+from Tools.Downloader import downloadWithProgress
 
-from threading import Thread
-from threading import Condition
+from __init__ import decrypt_block
 
-from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_HDD, SCOPE_CURRENT_PLUGIN
-from Tools.LoadPixmap import LoadPixmap
-from Tools.Downloader import HTTPProgressDownloader, downloadWithProgress
-from enigma import eTimer, quitMainloop,eListbox,ePoint, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad, eServiceCenter, iServiceInformation, eServiceReference,iSeekableService,iServiceInformation, iPlayableService, iPlayableServicePtr
-from os import path as os_path, system as os_system, unlink, stat, mkdir, popen, makedirs, listdir, access, rename, remove, W_OK, R_OK, F_OK
+from enigma import eTPM, eTimer, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, gFont, ePicLoad, eServiceReference, iPlayableService
+from os import path as os_path, remove as os_remove
 from twisted.web import client
-from twisted.internet import reactor
-from time import time
-
-from Screens.InfoBarGenerics import InfoBarShowHide, InfoBarSeek, InfoBarNotifications, InfoBarServiceNotifications
-from __init__ import bin2long, long2bin, rsa_pub1024, decrypt_block
 
 
-
-class eTPM:
-		TPMD_DT_LEVEL3_CERT = 5
-		TPMD_DT_LEVEL2_CERT = 4
-		def __init__(self):
-			self.TPM = self
-		def getCert(self, *args):
-			return "12345678"
-		def challenge(self, r):
-			return r
-def decrypt_block(a,b):
-		return 80*"-" + a
-def get_rnd():
-		return "12345678"
-def validate_cert(*args):
-		return "12345678"
 
 etpm = eTPM()
 rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
 
 config.plugins.mytube = ConfigSubsection()
 config.plugins.mytube.search = ConfigSubsection()
+
 
 config.plugins.mytube.search.searchTerm = ConfigTextWithGoogleSuggestions("", False, threaded = True)
 config.plugins.mytube.search.orderBy = ConfigSelection(
@@ -170,6 +145,7 @@ config.plugins.mytube.general.clearHistoryOnClose = ConfigYesNo(default = False)
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
 #config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
 
+
 class downloadJob(Job):
 	def __init__(self, url, file, title):
 		Job.__init__(self, title)
@@ -207,8 +183,6 @@ class downloadTask(Task):
 
 
 
-from MyTubeService import myTubeService
-from MyTubeSearch import MyTubeSettingsScreen,MyTubeTasksScreen,MyTubeHistoryScreen
 
 
 class MyTubePlayerMainScreen(Screen, ConfigListScreen):
@@ -216,7 +190,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	Details = {}
 	#(entry, Title, Description, TubeID, thumbnail, PublishedDate,Views,duration,ratings )	
 	skin = """
-		<screen name="MyTubePlayerMainScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTubePlayerMainScreen..." >
+		<screen name="MyTubePlayerMainScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Browser" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="config" zPosition="2" position="60,60" size="600,50" scrollbarMode="showNever" transparent="1" />
 			<widget source="feedlist" render="Listbox" position="49,110" size="628,385" zPosition="1" scrollbarMode="showOnDemand" transparent="1" backgroundPixmap="~/list_bg.png" selectionPixmap="~/list_sel.png" >
@@ -266,6 +240,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.ytfeed = None
 		self.currentFeedName = None
 		self.videolist = []
+		self.queryThread = None
+		self.queryRunning = False
 
 		self.video_playlist = []
 		self.statuslist = []
@@ -357,6 +333,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"nextBouquet": self.switchToConfigList,
 			"green": self.keyStdFeed,
 			"yellow": self.handleHistory,
+			"menu": self.handleMenu
 		}, -2)
 
 		self["historyactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "MovieSelectionActions", "HelpActions"],
@@ -538,7 +515,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.switchToConfigList()
 
 	def handleMenu(self):
-		if self.currList == "configlist":
+		if self.currList == "configlist" or self.currList == "status":
 			menulist = (
 					(_("MyTube Settings"), "settings"),
 				)
@@ -709,6 +686,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		config.plugins.mytube.general.history.save()
 		config.plugins.mytube.general.save()
 		config.plugins.mytube.save()
+		self.cancelThread()
 		self.close()
 			
 	def keyOK(self):
@@ -966,16 +944,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.propagateUpDownNormally = True
 
 	def getFeed(self, feedUrl, feedName):
-		try:
-			feed = myTubeService.getFeed(feedUrl)
-		except Exception, e:
-			feed = None
-			print "Error querying feed :",feedName
-			print "E-->",e
-			self.setState('Error')
-		if feed is not None:
-			self.ytfeed = feed
-		self.buildEntryList()
+		self.queryStarted()
+		self.queryThread = myTubeService.getFeed(feedUrl, self.gotFeed, self.gotFeedError)
 
 	def getNextEntries(self, result):
 		if not result:
@@ -1008,26 +978,53 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.searchFeed(searchContext)
 
 	def searchFeed(self, searchContext):
-		print "[MyTubePlayer] searchFeed"
+		print "[MyTubePlayer] searchFeed"		
+		self.queryStarted()		
 		self.appendEntries = False
-		try:
-			feed = myTubeService.search(searchContext, 
+		self.queryThread = myTubeService.search(searchContext, 
 					orderby = config.plugins.mytube.search.orderBy.value,
 					racy = config.plugins.mytube.search.racy.value,
 					lr = config.plugins.mytube.search.lr.value,
 					categories = [ config.plugins.mytube.search.categories.value ],
-					sortOrder = config.plugins.mytube.search.sortOrder.value)
-		except Exception, e:
-			feed = None
-			print "Error querying search for :",config.plugins.mytube.search.searchTerm.value
-			print "E-->",e
-			self.setState('Error')
+					sortOrder = config.plugins.mytube.search.sortOrder.value,
+					callback = self.gotSearchFeed, errorback = self.gotSearchFeedError)
+	
+	def queryStarted(self):
+		if self.queryRunning:
+			self.cancelThread()
+		self.queryRunning = True		
+	
+	def queryFinished(self):
+		self.queryRunning = False
+	
+	def cancelThread(self):
+		print "[MyTubePlayer] cancelThread"
+		if self.queryThread is not None:
+			self.queryThread.cancel()
+		self.queryFinished()
+	
+	def gotFeed(self, feed):
+		print "[MyTubePlayer] gotFeed"
+		self.queryFinished()
 		if feed is not None:
 			self.ytfeed = feed
-		if self.FirstRun == True:	
-			self.FirstRun = False
 		self.buildEntryList()
-
+	
+	def gotFeedError(self, exception):
+		print "[MyTubePlayer] gotFeedError"
+		self.queryFinished()
+		self.setState('Error')
+	
+	def gotSearchFeed(self, feed):
+		if self.FirstRun:	
+			self.FirstRun = False
+		self.gotFeed(feed)
+	
+	def gotSearchFeedError(self, exception):
+		if self.FirstRun:	
+			self.FirstRun = False
+		self.gotFeedError(exception)
+	
 	def buildEntryList(self):
 		self.mytubeentries = None
 		self.screenshotList = []
@@ -1054,7 +1051,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self["feedlist"].setIndex(0)
 					self["feedlist"].setList(self.videolist)
 					self["feedlist"].updateList(self.videolist)
-					if self.FirstRun == True:	
+					if self.FirstRun and not config.plugins.mytube.general.loadFeedOnOpen.value:
 						self.switchToConfigList()
 					else:
 						self.switchToFeedList()
@@ -1222,7 +1219,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			if self.Details.has_key(tubeid):
 				self.Details[tubeid]["thumbnail"] = ptr
 			if (os_path.exists(thumbnailFile) == True):
-				remove(thumbnailFile)
+				os_remove(thumbnailFile)
 			del self.picloads[tubeid]
 		else:
 			del self.picloads[tubeid]
@@ -1251,7 +1248,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 class MyTubeVideoInfoScreen(Screen):
 	skin = """
-		<screen name="MyTubeVideoInfoScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTubePlayerMainScreen..." >
+		<screen name="MyTubeVideoInfoScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Video Info" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="title" position="60,50" size="600,50" zPosition="5" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="starsbg" pixmap="~/starsbar_empty.png" position="560,220" zPosition="5" size="100,20" transparent="1" alphatest="on" />
@@ -1426,7 +1423,7 @@ class MyTubeVideoInfoScreen(Screen):
 			self.thumbnails[picindex][3] = ptr
 			if (os_path.exists(self.thumbnails[picindex][2]) == True):
 				print "removing", self.thumbnails[picindex][2]
-				remove(self.thumbnails[picindex][2])
+				os_remove(self.thumbnails[picindex][2])
 				del self.picloads[picindex]
 				if len(self.picloads) == 0:
 					self.timer.startLongTimer(3)
@@ -1465,7 +1462,7 @@ class MyTubeVideoInfoScreen(Screen):
 
 class MyTubeVideoHelpScreen(Screen):
 	skin = """
-		<screen name="MyTubeVideoHelpScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTubePlayerMainScreen..." >
+		<screen name="MyTubeVideoHelpScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Help" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>
 			<widget name="title" position="60,50" size="600,50" zPosition="5" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="detailtext" position="60,120" size="610,370" zPosition="10" font="Regular;21" transparent="1" halign="left" valign="top"/>
@@ -1625,7 +1622,6 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 			self.hideInfobar()
 		if self.infoCallback is not None:	
 			self.infoCallback()
-
 
 	def playNextFile(self):
 		print "playNextFile"

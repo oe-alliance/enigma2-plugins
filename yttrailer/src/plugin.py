@@ -19,6 +19,7 @@
 #  This applies to the source code as a whole as well as to parts of it, unless
 #  explicitely stated otherwise.
 
+from __init__ import decrypt_block, validate_cert, read_random, rootkey, l2key
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -56,9 +57,15 @@ baseEventViewBase__init__ = None
 
 from Screens.EpgSelection import EPGSelection
 baseEPGSelection__init__ = None
+etpm = eTPM()
 
 
 def autostart(reason, **kwargs):
+	global l2key
+	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+	if l2cert:
+		l2key = validate_cert(l2cert, rootkey)
+		if l2key:
 			global baseEventViewBase__init__, baseEPGSelection__init__
 			if baseEventViewBase__init__ is None:
 				baseEventViewBase__init__ = EventViewBase.__init__
@@ -81,7 +88,7 @@ def setup(session,**kwargs):
 def Plugins(**kwargs):
 
 	list = [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = autostart)]	
-	list.append(PluginDescriptor(name="YTTrailerSetup", description=_("YT-Trailer Setup"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup))
+	list.append(PluginDescriptor(name="YTTrailerSetup", description=_("YT-Trailer Setup"), where = [PluginDescriptor.WHERE_PLUGINMENU], fnc=setup, icon="YTtrailer.png"))
 	return list
 
 def EventViewBase__init__(self, Event, Ref, callback=None, similarEPGCB=None):
@@ -136,6 +143,7 @@ def showTrailerList(self):
 class YTTrailer:
 	def __init__(self, session):
 		self.session = session
+		self.l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
 
 	def showTrailer(self, eventname):
 		if eventname:
@@ -226,16 +234,16 @@ class YTTrailer:
 			try:
 				infopage = urlopen2(request).read()
 				videoinfo = parse_qs(infopage)
-				if 'fmt_url_map' in videoinfo:
+				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
 					break
 			except (URLError, HTTPException, socket_error), err:
 				print "[YTTrailer] Error: unable to download video infopage",str(err)
 				return video_url
 
-		if 'fmt_url_map' not in videoinfo:
+		if ('url_encoded_fmt_stream_map' or 'fmt_url_map') not in videoinfo:
 			# Attempt to see if YouTube has issued an error message
 			if 'reason' not in videoinfo:
-				print '[YTTrailer] Error: unable to extract "fmt_url_map" parameter for unknown reason'
+				print '[YTTrailer] Error: unable to extract "url_encoded_fmt_stream_map" or "fmt_url_map" parameter for unknown reason'
 			else:
 				reason = unquote_plus(videoinfo['reason'][0])
 				print '[YTTrailer] Error: YouTube said: %s' % reason.decode('utf-8')
@@ -243,16 +251,31 @@ class YTTrailer:
 
 		video_fmt_map = {}
 		fmt_infomap = {}
-		tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
+		if videoinfo.has_key('url_encoded_fmt_stream_map'):
+			tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',url=')
+		else:
+			tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
 		for fmtstring in tmp_fmtUrlDATA:
-			(fmtid,fmturl) = fmtstring.split('|')
+			if videoinfo.has_key('url_encoded_fmt_stream_map'):
+				(fmturl, fmtid) = fmtstring.split('&itag=')
+				if fmturl.find("url=") !=-1:
+					fmturl = fmturl.replace("url=","")
+			else:
+				(fmtid,fmturl) = fmtstring.split('|')
 			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
 			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "[YTTrailer] got",sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):
-						#print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
-						video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl']
+			if self.l3cert:
+				l3key = validate_cert(self.l3cert, l2key)
+				if l3key:
+					rnd = read_random()
+					val = etpm.challenge(rnd)
+					result = decrypt_block(val, l3key)
+					if result[80:88] == rnd:
+						print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+						video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
 						print "[YTTrailer] found best available video url:",video_url
 		return video_url
 

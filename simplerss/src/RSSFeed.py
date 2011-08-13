@@ -81,6 +81,9 @@ class RSSWrapper(ElementWrapper):
 		self.len = len(self)-1
 		return self
 
+	def __next__(self):
+		return self.next()
+
 	def next(self):
 		idx = self.idx
 		if idx > self.len:
@@ -225,7 +228,7 @@ class UniversalFeed(BaseFeed):
 			elif feed.tag.endswith("feed"):
 				self.wrapper = PEAWrapper
 			else:
-				raise NotImplementedError, 'Unsupported Feed: %s' % feed.tag
+				raise NotImplementedError('Unsupported Feed: %s' % feed.tag)
 
 			wrapper = self.wrapper(feed, self.ns)
 

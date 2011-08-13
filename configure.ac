@@ -45,6 +45,14 @@ PKG_CHECK_MODULES(ENIGMA2, enigma2)
 PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
 PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
 
+AC_ARG_WITH(tpm,
+	AS_HELP_STRING([--with-tpm], [enable plugins that require a TPM]),
+	[with_tpm="$withval"],[with_tpm="no"])
+if test "$with_tpm" = "yes"; then
+	AC_DEFINE([HAVE_TPM],[1],[Define to 1 to enable plugins that require a TPM])
+fi
+AM_CONDITIONAL(TPM, test "$with_tpm" = "yes")
+
 AC_ARG_WITH(debug,
 	AS_HELP_STRING([--without-debug],[disable debugging code]),
 	[with_debug="$withval"],[with_debug="yes"])

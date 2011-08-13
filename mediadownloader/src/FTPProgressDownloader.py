@@ -101,7 +101,7 @@ class FTPProgressDownloader(Protocol):
 		if self.file is None:
 			try:
 				self.file, offset = self.openFile()
-			except IOError, ie:
+			except IOError as ie:
 				# TODO: handle exception
 				raise ie
 
@@ -124,7 +124,7 @@ class FTPProgressDownloader(Protocol):
 				self.file.seek(0, SEEK_END)
 
 			self.file.write(data)
-		except IOError, ie:
+		except IOError as ie:
 			# TODO: handle exception
 			self.file = None
 			raise ie

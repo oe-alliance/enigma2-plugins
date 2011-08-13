@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from Screens.PictureInPicture import PictureInPicture
 from Components.SystemInfo import SystemInfo
 from enigma import ePoint, eSize
@@ -39,7 +41,7 @@ class PipAdapter:
 
 	def hidePiP(self):
 		# set pip size to 1 pixel
-		print "[EPGRefresh.PipAdapter.hidePiP]"
+		print("[EPGRefresh.PipAdapter.hidePiP]")
 		x = y = 0
 		w = h = 1
 		self.session.pip.instance.move(ePoint(x, y))
@@ -57,7 +59,7 @@ class PipAdapter:
 			self.session.pip.servicePath = newservice.getPath()
 
 	def play(self, service):
-		print "[EPGRefresh.PipAdapter.play]"
+		print("[EPGRefresh.PipAdapter.play]")
 		if not self.pipAvail: return False
 
 		if not self.session.pipshown: # make sure pip still exists
