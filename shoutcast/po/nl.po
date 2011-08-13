@@ -1,312 +1,317 @@
-# Dutch translations for enigma2-plugins package.
-# Copyright (C) 2011 THE enigma2-plugins'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the enigma2-plugins package.
-# Automatically generated, 2011.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2-plugins 3.0.0\n"
+"Project-Id-Version: shoutcast\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: nl\n"
+"POT-Creation-Date: 2011-06-10 17:11+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: AndyBlac <robvddoes@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:669
-#, python-format
-msgid ""
-"%s\n"
-"Press OK to try again..."
+#: ../src/plugin.py:68
+msgid "Plugin menu"
+msgstr "Plugin menu"
+
+#: ../src/plugin.py:68
+msgid "Extensions menu"
+msgstr "Extensie menu"
+
+#: ../src/plugin.py:69
+msgid "SHOUTcast"
+msgstr "SHOUTcast"
+
+#: ../src/plugin.py:70
+msgid "Listen to SHOUTcast Internet Radio"
+msgstr "Luister naar SHOUTcast Internet Radio"
+
+#: ../src/plugin.py:71
+msgid "All"
+msgstr "Alle"
+
+#: ../src/plugin.py:71
+msgid ">= 64 kbps"
+msgstr ">= 64 kbps"
+
+#: ../src/plugin.py:71
+msgid ">= 128 kbps"
+msgstr ">= 128 kbps"
+
+#: ../src/plugin.py:71
+msgid ">= 192 kbps"
+msgstr ">= 192 kbps"
+
+#: ../src/plugin.py:71
+msgid ">= 256 kbps"
+msgstr ">= 256 kbps"
+
+#: ../src/plugin.py:72
+msgid "Off"
+msgstr "Uit"
+
+#: ../src/plugin.py:72
+msgid "every minute"
+msgstr "elke minuut"
+
+#: ../src/plugin.py:72
+msgid "every three minutes"
+msgstr "elke 3 minuten"
+
+#: ../src/plugin.py:72
+msgid "every five minutes"
+msgstr "elke 5 minuten"
+
+#: ../src/plugin.py:119
+#: ../src/plugin.py:127
+#: ../src/plugin.py:168
+msgid "Ver."
+msgstr "Ver."
+
+#: ../src/plugin.py:189
+#: ../src/plugin.py:267
+msgid "Record"
+msgstr "Opname"
+
+#: ../src/plugin.py:190
+msgid "Genres"
+msgstr "Genres"
+
+#: ../src/plugin.py:191
+msgid "Stations"
+msgstr "Stations"
+
+#: ../src/plugin.py:192
+msgid "Favorites"
+msgstr "Favorieten"
+
+#: ../src/plugin.py:203
+#: ../src/plugin.py:368
+msgid "Getting SHOUTcast genre list..."
+msgstr "SHOUTcast genrelijst laden..."
+
+#: ../src/plugin.py:259
+#: ../src/plugin.py:306
+msgid "Stop record"
+msgstr "Stop opname"
+
+#: ../src/plugin.py:261
+msgid "Recording stream station"
+msgstr "Momenteel lopende opname"
+
+#: ../src/plugin.py:314
+msgid "Do you really want to stop the recording?"
+msgstr "Wilt u d eopname echt stoppen?"
+
+#: ../src/plugin.py:317
+msgid "Recording length"
+msgstr "Opname duur"
+
+#: ../src/plugin.py:317
+msgid "Enter in minutes (0 means unlimited)"
+msgstr "Geef Minuten aan (0 = onbeperkt)"
+
+#: ../src/plugin.py:319
+msgid "Only running streamings can be recorded!"
 msgstr ""
+"Alleen aktuele streams kunnen worden opgenomen.\n"
+"Opname wordt niet gestart."
 
-#: ../src/plugin.py:400
+#: ../src/plugin.py:326
+#: ../src/plugin.py:374
+msgid "SHOUTcast genre list"
+msgstr "SHOUTcast genelijst"
+
+#: ../src/plugin.py:339
+#: ../src/plugin.py:483
+#: ../src/plugin.py:608
+#, python-format
+msgid "SHOUTcast station list for %s"
+msgstr "SHOUTcast stationsljist voor %s"
+
+#: ../src/plugin.py:354
+msgid "Favorite list"
+msgstr "Favorietenlijst"
+
+#: ../src/plugin.py:389
 #, python-format
 msgid ""
 "%s\n"
 "Press green-button to try again..."
 msgstr ""
+"%s\n"
+"Druk op de groene toets om te herhalen...."
 
-#: ../src/plugin.py:72
-msgid ">= 128 kbps"
-msgstr ""
-
-#: ../src/plugin.py:72
-msgid ">= 192 kbps"
-msgstr ""
-
-#: ../src/plugin.py:72
-msgid ">= 256 kbps"
-msgstr ""
-
-#: ../src/plugin.py:72
-msgid ">= 64 kbps"
-msgstr ""
-
-#: ../src/plugin.py:571
-msgid "Add current playing stream to favorite"
-msgstr ""
-
-#: ../src/plugin.py:567
-msgid "Add current selected genre to favorite"
-msgstr ""
-
-#: ../src/plugin.py:569
-msgid "Add current selected station to favorite"
-msgstr ""
-
-#: ../src/plugin.py:940
-msgid "Add sequence number to output file"
-msgstr ""
-
-#: ../src/plugin.py:72
-msgid "All"
-msgstr ""
-
-#: ../src/plugin.py:826 ../src/plugin.py:832
-#, python-format
-msgid "Audio: %s"
-msgstr ""
-
-#: ../src/plugin.py:827 ../src/plugin.py:834
-#, python-format
-msgid "Bit rate: %s kbps"
-msgstr ""
-
-#: ../src/plugin.py:928 ../src/plugin.py:1005
-msgid "Cancel"
-msgstr ""
-
-#: ../src/plugin.py:562
-msgid "Config"
-msgstr ""
-
-#: ../src/plugin.py:939
-msgid "Create a directory for each stream"
-msgstr ""
-
-#: ../src/plugin.py:934
-msgid "Description:"
-msgstr ""
-
-#: ../src/plugin.py:935
-msgid "Developper Id:"
-msgstr ""
-
-#: ../src/plugin.py:329
-msgid "Do you really want to stop the recording?"
-msgstr ""
-
-#: ../src/plugin.py:332
-msgid "Enter in minutes (0 means unlimited)"
-msgstr ""
-
-#: ../src/plugin.py:614
-msgid "Enter new name for favorite item"
-msgstr ""
-
-#: ../src/plugin.py:638
-msgid "Enter text to search for"
-msgstr ""
-
-#: ../src/plugin.py:68
-msgid "Extensions menu"
-msgstr ""
-
-#: ../src/plugin.py:364
-msgid "Favorite list"
-msgstr ""
-
-#: ../src/plugin.py:205
-msgid "Favorites"
-msgstr ""
-
-#: ../src/plugin.py:203
-msgid "Genres"
-msgstr ""
-
-#: ../src/plugin.py:521
-#, python-format
-msgid "Getting %s"
-msgstr ""
-
-#: ../src/plugin.py:378
-#, python-format
-msgid "Getting SHOUTcast genre list for %s..."
-msgstr ""
-
-#: ../src/plugin.py:216
-msgid "Getting SHOUTcast genre list..."
-msgstr ""
-
-#: ../src/plugin.py:466 ../src/plugin.py:480
+#: ../src/plugin.py:430
+#: ../src/plugin.py:444
 #, python-format
 msgid ""
 "Getting streaming data from\n"
 "%s"
 msgstr ""
+"Verkrijg data van \n"
+"%s"
 
-#: ../src/plugin.py:392
-msgid ""
-"Got 0 genres. Could be a network problem.\n"
-"Please try again..."
-msgstr ""
-
-#: ../src/plugin.py:572
-msgid "Hide"
-msgstr ""
-
-#: ../src/plugin.py:1040
-msgid "Invalid Location"
-msgstr ""
-
-#: ../src/plugin.py:70
-msgid "Listen to SHOUTcast Internet Radio"
-msgstr ""
-
-#: ../src/plugin.py:933
-msgid "Name (needs GUI restart):"
-msgstr ""
-
-#: ../src/plugin.py:515
+#: ../src/plugin.py:479
 msgid "No streaming data found..."
-msgstr ""
+msgstr "Geen data gevonden...."
 
-#: ../src/plugin.py:929 ../src/plugin.py:1006
-msgid "OK"
-msgstr ""
-
-#: ../src/plugin.py:73
-msgid "Off"
-msgstr ""
-
-#: ../src/plugin.py:334
-msgid "Only running streamings can be recorded!"
-msgstr ""
-
-#: ../src/plugin.py:68
-msgid "Plugin menu"
-msgstr ""
-
-#: ../src/plugin.py:202 ../src/plugin.py:282
-msgid "Record"
-msgstr ""
-
-#: ../src/plugin.py:332
-msgid "Recording length"
-msgstr ""
-
-#: ../src/plugin.py:943
-msgid "Recording location:"
-msgstr ""
-
-#: ../src/plugin.py:276
-msgid "Recording stream station"
-msgstr ""
-
-#: ../src/plugin.py:937
-msgid "Reload station list:"
-msgstr ""
-
-#: ../src/plugin.py:938
-msgid "Rip to single file, name is timestamped"
-msgstr ""
-
-#: ../src/plugin.py:69
-msgid "SHOUTcast"
-msgstr ""
-
-#: ../src/plugin.py:386 ../src/plugin.py:433
-msgid "SHOUTcast genre list"
-msgstr ""
-
-#: ../src/plugin.py:349 ../src/plugin.py:519 ../src/plugin.py:644
-#, python-format
-msgid "SHOUTcast station list for %s"
-msgstr ""
-
-#: ../src/plugin.py:562
-msgid "Search"
-msgstr ""
-
-#: ../src/plugin.py:646
-#, python-format
-msgid "Searching SHOUTcast for %s..."
-msgstr ""
-
-#: ../src/plugin.py:922
-msgid "Setup"
-msgstr ""
-
-#: ../src/plugin.py:932
-msgid "Show in (needs GUI restart):"
-msgstr ""
-
-#: ../src/plugin.py:747
-#, python-format
-msgid "Station: %s"
-msgstr ""
-
-#: ../src/plugin.py:204
-msgid "Stations"
-msgstr ""
-
-#: ../src/plugin.py:274 ../src/plugin.py:321
-msgid "Stop record"
-msgstr ""
-
-#: ../src/plugin.py:936
-msgid "Streaming rate:"
-msgstr ""
-
-#: ../src/plugin.py:726
-#, python-format
-msgid "This Dreambox can't decode %s streams!"
-msgstr ""
-
-#: ../src/plugin.py:716
-#, python-format
-msgid "Title: %s"
-msgstr ""
-
-#: ../src/plugin.py:746
-msgid "Title: n/a"
-msgstr ""
-
-#: ../src/plugin.py:125 ../src/plugin.py:133 ../src/plugin.py:181
-msgid "Ver."
-msgstr ""
-
-#: ../src/plugin.py:73
-msgid "every five minutes"
-msgstr ""
-
-#: ../src/plugin.py:73
-msgid "every minute"
-msgstr ""
-
-#: ../src/plugin.py:73
-msgid "every three minutes"
-msgstr ""
-
-#: ../src/plugin.py:518
+#: ../src/plugin.py:482
 #, python-format
 msgid "genre %s"
-msgstr ""
+msgstr "genre %s"
 
-#: ../src/plugin.py:565
-msgid "remove current selected favorite"
-msgstr ""
+#: ../src/plugin.py:485
+#, python-format
+msgid "Getting %s"
+msgstr "Verkrijg %s"
 
-#: ../src/plugin.py:564
+#: ../src/plugin.py:526
+msgid "Config"
+msgstr "Configuratie"
+
+#: ../src/plugin.py:526
+msgid "Search"
+msgstr "Zoek"
+
+#: ../src/plugin.py:528
 msgid "rename current selected favorite"
-msgstr ""
+msgstr "hernoemen"
 
-#: ../src/plugin.py:643
+#: ../src/plugin.py:529
+msgid "remove current selected favorite"
+msgstr "Verwijderen"
+
+#: ../src/plugin.py:531
+msgid "Add current selected genre to favorite"
+msgstr "Geselekteerd genre aan favorietenlijst toevoegen"
+
+#: ../src/plugin.py:533
+msgid "Add current selected station to favorite"
+msgstr "Geselekteerd station aan favorietenlijst toevoegen"
+
+#: ../src/plugin.py:535
+msgid "Add current playing stream to favorite"
+msgstr "Lopende zender aan favorietenlijst toevoegen"
+
+#: ../src/plugin.py:536
+msgid "Hide"
+msgstr "Verbergen"
+
+#: ../src/plugin.py:578
+msgid "Enter new name for favorite item"
+msgstr "Geef een nieuwe naam op voor de favoriet"
+
+#: ../src/plugin.py:602
+msgid "Enter text to search for"
+msgstr "Geef zoekargument op"
+
+#: ../src/plugin.py:607
 #, python-format
 msgid "search-criteria %s"
+msgstr "Zoekcriterium %s"
+
+#: ../src/plugin.py:610
+#, python-format
+msgid "Searching SHOUTcast for %s..."
+msgstr "Doorzoek SHOUTcast naar %s..."
+
+#: ../src/plugin.py:633
+#, python-format
+msgid ""
+"%s\n"
+"Press OK to try again..."
 msgstr ""
+"%s\n"
+"Druk op OK om te herhalen..."
+
+#: ../src/plugin.py:675
+#, python-format
+msgid "Title: %s"
+msgstr "Titel: %s"
+
+#: ../src/plugin.py:684
+#, python-format
+msgid "This Dreambox can't decode %s streams!"
+msgstr "Deze Dreambox kan %s stream niet decoderen!"
+
+#: ../src/plugin.py:704
+msgid "Title: n/a"
+msgstr "Titel: n/a"
+
+#: ../src/plugin.py:705
+#, python-format
+msgid "Station: %s"
+msgstr "Station: %s"
+
+#: ../src/plugin.py:762
+#: ../src/plugin.py:768
+#, python-format
+msgid "Audio: %s"
+msgstr "Audio: %s"
+
+#: ../src/plugin.py:763
+#: ../src/plugin.py:770
+#, python-format
+msgid "Bit rate: %s kbps"
+msgstr "Bitrate: %s kbps"
+
+#: ../src/plugin.py:858
+msgid "Setup"
+msgstr "Instellingen"
+
+#: ../src/plugin.py:864
+#: ../src/plugin.py:940
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: ../src/plugin.py:865
+#: ../src/plugin.py:941
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:868
+msgid "Show in (needs GUI restart):"
+msgstr "Toon in (GUI moet opnieuw gestart worden):"
+
+#: ../src/plugin.py:869
+msgid "Name (needs GUI restart):"
+msgstr "Naam (GUI moet opnieuw gestart worden):"
+
+#: ../src/plugin.py:870
+msgid "Description:"
+msgstr "Beschrijving:"
+
+#: ../src/plugin.py:871
+msgid "Streaming rate:"
+msgstr "Bitrate:"
+
+#: ../src/plugin.py:872
+msgid "Reload station list:"
+msgstr "Stationslijst opnieuw laden:"
+
+#: ../src/plugin.py:873
+msgid "Rip to single file, name is timestamped"
+msgstr "Opslaan als enkel bestand (datum/tijd wordt daaraan toegevoegd)"
+
+#: ../src/plugin.py:874
+msgid "Create a directory for each stream"
+msgstr "Voor elke opname een eigen map maken"
+
+#: ../src/plugin.py:875
+msgid "Add sequence number to output file"
+msgstr "Voeg volgordenummer toe aan outputbestand"
+
+#: ../src/plugin.py:878
+msgid "Recording location:"
+msgstr "Opnamepad:"
+
+#: ../src/plugin.py:975
+msgid "Invalid Location"
+msgstr "Ongeldig opnamepad"
+

@@ -8,101 +8,109 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2011-08-09 12:29+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Rob van der Does <robvddoes@gmail.com>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #: ../src/plugin.py:250
 msgid "Abort"
-msgstr ""
+msgstr "Breek af"
 
 #: ../src/plugin.py:323
 msgid "Backup"
-msgstr ""
+msgstr "Backup"
 
 #: ../src/plugin.py:201
 msgid "Backup of DVD finished."
-msgstr ""
+msgstr "Backup van DVD gereed"
 
 #: ../src/plugin.py:446
 msgid "Backup your Video-DVD to your harddisk"
-msgstr ""
+msgstr "Maak een backup van uw Video-DVD naar uw harde schijf"
 
 #: ../src/plugin.py:143
 msgid "Could not find any file to backup!"
-msgstr ""
+msgstr "Kon geen bestanden vinden om te backuppen!"
 
 #: ../src/plugin.py:427
 msgid "Could not install needed dvdbackup package!"
-msgstr ""
+msgstr "Kon het benodigde dvdbackup pakket niet installeren!"
 
 #: ../src/plugin.py:146
 msgid "Could not read the DVD informations!"
-msgstr ""
+msgstr "Kon de DVD informatie niet lezen!"
 
 #: ../src/plugin.py:335
 msgid "Create iso:"
-msgstr ""
+msgstr "Creëer ISO:"
 
-#: ../src/plugin.py:443 ../src/plugin.py:446
+#: ../src/plugin.py:443
+#: ../src/plugin.py:446
 msgid "DVD Backup"
-msgstr ""
+msgstr "DVD Backup"
 
 #: ../src/plugin.py:331
 msgid "Device:"
-msgstr ""
+msgstr "Medium:"
 
 #: ../src/plugin.py:332
 msgid "Directory:"
-msgstr ""
+msgstr "Map:"
 
 #: ../src/plugin.py:201
 msgid "Duration:"
-msgstr ""
+msgstr "Duur:"
 
 #: ../src/plugin.py:201
 msgid "Eject DVD?"
-msgstr ""
+msgstr "DVD uitwerpen?"
 
-#: ../src/plugin.py:152 ../src/plugin.py:181
+#: ../src/plugin.py:152
+#: ../src/plugin.py:181
 msgid "Error while backup of DVD!"
-msgstr ""
+msgstr "Fout tijdens backup van DVD!"
 
 #: ../src/plugin.py:421
 msgid "Installing..."
-msgstr ""
+msgstr "Bezig met installeren....."
 
 #: ../src/plugin.py:324
 msgid "Keyboard"
-msgstr ""
+msgstr "Toetsenbord"
 
 #: ../src/plugin.py:325
 msgid "Location"
-msgstr ""
+msgstr "Lokatie"
 
 #: ../src/plugin.py:334
 msgid "Log:"
-msgstr ""
+msgstr "Log:"
 
-#: ../src/plugin.py:50 ../src/plugin.py:401
+#: ../src/plugin.py:50
+#: ../src/plugin.py:401
 msgid "Name of DVD"
-msgstr ""
+msgstr "Naam van DVD"
 
 #: ../src/plugin.py:333
 msgid "Name:"
-msgstr ""
+msgstr "Naam:"
 
 #: ../src/plugin.py:322
 msgid "Progress"
-msgstr ""
+msgstr "Voortgang"
 
 #: ../src/plugin.py:186
 msgid ""
 "mkisofs job done.\n"
 "Delete DVD directory?"
 msgstr ""
+"mkisofs taak uitgevoerd.\n"
+"Verwijder DVD map?"
+

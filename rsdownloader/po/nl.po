@@ -8,13 +8,15 @@ msgstr ""
 "Project-Id-Version: RSDownloader_fy\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-09 18:22+0100\n"
-"PO-Revision-Date: 2009-01-11 20:24+0100\n"
-"Last-Translator: Roodkapke\n"
-"Language-Team: gerrit <fy@li.org>\n"
+"PO-Revision-Date: 2011-08-11 12:29+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: AndyBlac <RobvdDoes@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #: ../src/RSListBrowser.py:95
 #, python-format

@@ -8,55 +8,59 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2011-08-11 12:22+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: AndyBlac <RobvdDoes@gmail.com>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #: ../src/plugin.py:49
 msgid "1080p"
-msgstr ""
+msgstr "1080p"
 
 #: ../src/plugin.py:49
 msgid "720p"
-msgstr ""
+msgstr "720p"
 
 #: ../src/plugin.py:390
 msgid "Best resolution"
-msgstr ""
+msgstr "Beste resolutie"
 
 #: ../src/plugin.py:385
 msgid "Cancel"
-msgstr ""
+msgstr "Annulee"
 
 #: ../src/plugin.py:392
 msgid "Close Player with exit-key"
-msgstr ""
+msgstr "Sluit speler met exit-key"
 
 #: ../src/plugin.py:389
 msgid "Extended search filter"
-msgstr ""
+msgstr "Uitgebreid zoekfilter"
 
 #: ../src/plugin.py:391
 msgid "Max. results in list-mode"
-msgstr ""
+msgstr "Max. resultaten in list-modus"
 
 #: ../src/plugin.py:49
 msgid "No HD streaming"
-msgstr ""
+msgstr "Geen HD streaming"
 
 #: ../src/plugin.py:386
 msgid "Save"
-msgstr ""
+msgstr "Sla op"
 
 #: ../src/plugin.py:84
 msgid "YT-Trailer Setup"
-msgstr ""
+msgstr "YT-Trailer instellingen"
 
-#: ../src/plugin.py:339 ../src/plugin.py:345
+#: ../src/plugin.py:339
+#: ../src/plugin.py:345
 msgid "leave movie player..."
-msgstr ""
+msgstr "verlaat movieplayer...."
+

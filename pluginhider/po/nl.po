@@ -8,75 +8,78 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2011-08-11 12:19+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: AndyBlac <RobvdDoes@gmail.com>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #: ../src/PluginHiderSetup.py:53
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 #: ../src/PluginHiderSetup.py:95
 msgid "Could not start Plugin:"
-msgstr ""
+msgstr "Kon plugin niet starten:"
 
 #: ../src/PluginHiderSetup.py:58
 msgid "Eventinfo"
-msgstr ""
+msgstr "Eventinfo"
 
 #: ../src/PluginHiderSetup.py:57
 msgid "Extensions"
-msgstr ""
+msgstr "Extensies"
 
 #: ../src/plugin.py:75
 msgid "Hide Plugins"
-msgstr ""
+msgstr "Verberg Plugins"
 
 #: ../src/PluginHiderSetup.py:52
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../src/PluginHiderSetup.py:122
 msgid "PluginHider Setup"
-msgstr ""
+msgstr "PluginHider instellingen"
 
 #: ../src/PluginHiderSetup.py:56
 msgid "Plugins"
-msgstr ""
+msgstr "Plugins"
 
 #: ../src/PluginHiderSetup.py:55
 msgid "Run"
-msgstr ""
+msgstr "Voer uit"
 
 #: ../src/PluginHiderSetup.py:95
 msgid "Unable to access InfoBar."
-msgstr ""
+msgstr "Geen toegang tot infobar."
 
 #: ../src/PluginHiderSetup.py:68
 msgid "end editing"
-msgstr ""
+msgstr "stop bewerken"
 
 #: ../src/PluginHiderSetup.py:70
 msgid "run selected plugin"
-msgstr ""
+msgstr "voer geselecteerde plugin uit"
 
 #: ../src/PluginHiderSetup.py:69
 msgid "save"
-msgstr ""
+msgstr "sla op"
 
 #: ../src/PluginHiderSetup.py:71
 msgid "select next tab"
-msgstr ""
+msgstr "selecteer volgende tab"
 
 #: ../src/PluginHiderSetup.py:72
 msgid "select previous tab"
-msgstr ""
+msgstr "kies vorige tab"
 
 #: ../src/PluginHiderSetup.py:67
 msgid "toggle selection"
-msgstr ""
+msgstr "wissel selectie"
+

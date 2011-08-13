@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: enigma2 - AC3LipSync\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2009-09-16 13:02+0100\n"
-"Last-Translator: \n"
-"Language-Team:  <Benny.DeTandt@gmail.com>\n"
+"PO-Revision-Date: 2011-08-09 11:56+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Rob van der Does <robvddoes@gmail.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,8 +13,7 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
-"X-Poedit-SearchPath-0: L:\\Receiver\\Eclipse\\enigma2-plugins\\ac3lipsync"
-"\\src\n"
+"X-Poedit-SearchPath-0: L:\\Receiver\\Eclipse\\enigma2-plugins\\ac3lipsync\\src\n"
 
 msgid " "
 msgstr " "
@@ -30,10 +29,10 @@ msgid "%i ms"
 msgstr "%i ms"
 
 msgid "Audio Sync"
-msgstr ""
+msgstr "Audio Sync"
 
 msgid "Audio Sync Setup"
-msgstr ""
+msgstr "Audio Sync instellingen"
 
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:92
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:58
@@ -41,40 +40,40 @@ msgid "Cancel"
 msgstr "Annuleren"
 
 msgid "Center screen at the lower border"
-msgstr ""
+msgstr "Centreer het scherm aan de onderrand"
 
 msgid "Center screen at the upper border"
-msgstr ""
+msgstr "Centreer het scherm aan de bovenrand"
 
 msgid "Change active delay"
-msgstr ""
+msgstr "Pas de active vertraging aan"
 
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:87
 msgid "Channel audio:"
 msgstr "Kanaal audio:"
 
 msgid "Decrease delay"
-msgstr ""
+msgstr "Verminder de vertraging"
 
 #, python-format
 msgid "Decrease delay by %i ms (can be set)"
-msgstr ""
+msgstr "Verminder de vertraging met %i ms (kan ingesteld worden)"
 
 msgid "Discard changes and close plugin"
-msgstr ""
+msgstr "Zie af van de wijzigingen en sluit de plugin"
 
 msgid "Discard changes and close screen"
-msgstr ""
+msgstr "Zie af van de wijzigingen en sluit het scherm"
 
 msgid "Global delay"
-msgstr ""
+msgstr "Globale vertraging"
 
 msgid "Increase delay"
-msgstr ""
+msgstr "Vergroot vertraging"
 
 #, python-format
 msgid "Increase delay by %i ms (can be set)"
-msgstr ""
+msgstr "Vergroot de vertraging met %i ms (kan ingesteld worden)"
 
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:228
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:288
@@ -94,47 +93,47 @@ msgid "Menu"
 msgstr "Menu"
 
 msgid "Move plugin screen"
-msgstr ""
+msgstr "Verplaats het plugin scherm"
 
 msgid "Move screen down"
-msgstr ""
+msgstr "Verplaats scherm naar beneden"
 
 msgid "Move screen to the center of your TV"
-msgstr ""
+msgstr "Verplaats scherm naar het midden van het TV beeld"
 
 msgid "Move screen to the left"
-msgstr ""
+msgstr "Verplaats het scherm naar links"
 
 msgid "Move screen to the lower left corner"
-msgstr ""
+msgstr "Verplaats scherm naar de linker onderhoek"
 
 msgid "Move screen to the lower right corner"
-msgstr ""
+msgstr "Verplaats scherm naar de rechter onderhoek"
 
 msgid "Move screen to the middle of the left border"
-msgstr ""
+msgstr "Verplaats scherm naar het midden van de linker rand"
 
 msgid "Move screen to the middle of the right border"
-msgstr ""
+msgstr "Verplaats scherm naar het midden van de rechter rand"
 
 msgid "Move screen to the right"
-msgstr ""
+msgstr "Verplaats scherm naar rechts"
 
 msgid "Move screen to the upper left corner"
-msgstr ""
+msgstr "Verplaats scherm naar de linker bovenhoek"
 
 msgid "Move screen to the upper right corner"
-msgstr ""
+msgstr "Verplaats scherm naar de rechter bovenhoek"
 
 msgid "Move screen up"
-msgstr ""
+msgstr "Verplaats scherm naar boven"
 
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:93
 msgid "OK"
 msgstr "OK"
 
 msgid "Open plugin menu"
-msgstr ""
+msgstr "Open plugin menu"
 
 msgid "Outer Bound (+/-)"
 msgstr "Maximale vertraging (+/-)"
@@ -144,7 +143,7 @@ msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Versie: %(version)s"
 
 msgid "Reset saved position"
-msgstr ""
+msgstr "Ga terug naar de opgeslagen positie"
 
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:98
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:59
@@ -152,34 +151,34 @@ msgid "Save"
 msgstr "Bewaren"
 
 msgid "Save current delay to key"
-msgstr ""
+msgstr "Bewaar de huidige vertraging op toets"
 
 msgid "Save to key"
-msgstr ""
+msgstr "Bewaar als toets"
 
 msgid "Save values and close plugin"
-msgstr ""
+msgstr "Bewaar de ingestelde waardes an sluit plugin af"
 
 msgid "Save values and close screen"
-msgstr ""
+msgstr "Bewaar de ingestelde waardes an sluit scherm af"
 
 #, python-format
 msgid "Select the key you want to set to %i ms"
 msgstr "Selecteer de toets die u wilt instellen op %i ms..."
 
 msgid "Service delay"
-msgstr ""
+msgstr "Service vertraging"
 
 #, python-format
 msgid "Set delay to %i ms (can be set)"
-msgstr ""
+msgstr "Stel de vertraging in op %i ms (kan ingesteld worden)"
 
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:337
 msgid "Setting key canceled"
 msgstr "Configuratie toets geannuleerd"
 
 msgid "Setup for the Audio Sync Plugin"
-msgstr ""
+msgstr "Instellingen voor de Audio Sync Plugin"
 
 # L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3setup.py:44
 msgid "Step in ms for arrow keys"
@@ -199,56 +198,5 @@ msgid "Wait time in ms before activation:"
 msgstr "Wachttijd in ms voor activering"
 
 msgid "sets the Audio Delay (LipSync)"
-msgstr ""
+msgstr "Stelt de audio vertraging (LipSync) in"
 
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:82
-#~ msgid "%s delay:"
-#~ msgstr "%s vertraging:"
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:83
-#~ msgid "%s:"
-#~ msgstr "%s:"
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:30
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:34
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:36
-#~ msgid "AC3 Lip Sync"
-#~ msgstr "AC3 Lip Sync"
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:35
-#~ msgid "AC3 Lip Sync Setup"
-#~ msgstr "AC3 Lip Sync Instellingen"
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:247
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:248
-#~ msgid "Save %s delay"
-#~ msgstr "Bewaar %s vertraging"
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:249
-#~ msgid "Save both delays"
-#~ msgstr "Bewaar beide vertragingen"
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:215
-#~ msgid "Save current %(audio)s delay of %(delay)i ms to key"
-#~ msgstr "Bewaar huidige %(audio)s vertraging van %(delay)i ms aan toets"
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:284
-#~ msgid "Saved %(audio)s value: %(delay)i ms"
-#~ msgstr "Bewaarde %(audio)s waarde: %(delay)i ms"
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:35
-#~ msgid "Setup for the AC3 Lip Sync Plugin"
-#~ msgstr "Configuratie van de AC3 Lip Sync Plugin"
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:94
-#~ msgid "Switch audio"
-#~ msgstr "Kies audio"
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/AC3main.py:252
-#~ msgid "Which delays do you want to set"
-#~ msgstr "Welke vertragingen wilt u instellen..."
-
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:34
-# L:\Receiver\Eclipse\enigma2-plugins\ac3lipsync\src/plugin.py:36
-#~ msgid "sets the AC3 audio Delay (LipSync)"
-#~ msgstr "Stel de AC3 audio vertraging in (LipSync)"

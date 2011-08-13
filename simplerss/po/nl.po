@@ -8,14 +8,16 @@ msgstr ""
 "Project-Id-Version: SimpleRSS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2009-01-11 20:02+0100\n"
-"Last-Translator: Roodkapke\n"
-"Language-Team: gerrit <fy@li.org>\n"
+"PO-Revision-Date: 2011-08-11 12:28+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: AndyBlac <RobvdDoes@gmail.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #, python-format
 msgid "%d Feed(s) were added to configuration."
@@ -46,16 +48,14 @@ msgstr "Ingaves"
 msgid "Entry %s/%s"
 msgstr "Ingave %s%s"
 
-msgid ""
-"Error while parsing Feed, this usually means there is something wrong with "
-"it."
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
 msgstr "Fout tijdens verwerken feed, dit betekent meestal dat er iets fout is."
 
 msgid "Failed to get subscriptions from Google Reader."
-msgstr ""
+msgstr "Verkrijgen van inschrijving bij Google Reader mislukt."
 
 msgid "Failed to login to Google Reader."
-msgstr ""
+msgstr "Login Google Reader mislukt."
 
 msgid "Feed"
 msgstr "Feed"
@@ -71,16 +71,16 @@ msgid "Feed is empty."
 msgstr "Feed is leeg."
 
 msgid "Fetch feeds from Google Reader?"
-msgstr ""
+msgstr "Verkrijg feeds van Google Reader?"
 
 msgid "Found no Enclosure we can display."
 msgstr "Geen bijlage gevonden die we kunnen laten zien."
 
 msgid "Google Password"
-msgstr ""
+msgstr "Google Wachtwoord"
 
 msgid "Google Username"
-msgstr ""
+msgstr "Google Gebruikersnaam"
 
 msgid "Keep running in background"
 msgstr "Op de achtergrond uitvoeren"
@@ -124,14 +124,14 @@ msgid "Show new Messages as"
 msgstr "Laat nieuwe berichten zien als"
 
 msgid "Simple RSS Reader"
-msgstr ""
+msgstr "Simple RSS Reader"
 
 msgid "Simple RSS Reader Setup"
-msgstr ""
+msgstr "Simple RSS Reader instellingen"
 
 #, python-format
 msgid "Simple RSS Reader: %s"
-msgstr ""
+msgstr "Simple RSS Reader: %s"
 
 #, python-format
 msgid ""
@@ -145,7 +145,7 @@ msgid "Start automatically with Enigma2"
 msgstr "Start automatisch met Enigma2"
 
 msgid "Subscribe Newsfeed..."
-msgstr ""
+msgstr "Inschrijven op Newsfeed..."
 
 msgid "Update Feed"
 msgstr "Feed "
@@ -161,10 +161,11 @@ msgstr ""
 "De inhoud wordt automatisch ververst als het gereed is."
 
 msgid "View RSS..."
-msgstr ""
+msgstr "Bekijk RSS..."
 
 msgid "What to do?"
 msgstr "Wat te doen?"
 
 msgid "none"
 msgstr "geen"
+

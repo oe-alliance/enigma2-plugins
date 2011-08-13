@@ -8,18 +8,20 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2011-08-09 12:18+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Rob van der Does <robvddoes@gmail.com>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #: ../src/plugin.py:366
 msgid "Autoresolution"
-msgstr ""
+msgstr "Autoresolutie"
 
 #: ../src/plugin.py:233
 #, python-format
@@ -27,127 +29,137 @@ msgid ""
 "Autoresolution Plugin Testmode:\n"
 "Is %s OK?"
 msgstr ""
+"Autoresolute Plugin testmodus:\n"
+"Is %s OK?"
 
 #: ../src/plugin.py:374
 msgid "Autoresolution Switch"
-msgstr ""
+msgstr "Autoresolutie schakelaar"
 
 #: ../src/plugin.py:322
 msgid "Autoresolution is not working in Scart/DVI-PC Mode"
-msgstr ""
+msgstr "Autoresolutie werkt niet in Scart/DVI-PC Modus"
 
 #: ../src/plugin.py:304
 msgid "Autoresolution settings"
-msgstr ""
+msgstr "Autoresolutie instellingen"
 
 #: ../src/plugin.py:282
 msgid "Autoresolution videomode setup"
-msgstr ""
+msgstr "Autoresolutie videomodus instellingen"
 
 #: ../src/plugin.py:298
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 #: ../src/plugin.py:318
 msgid "Deinterlacer mode for interlaced content"
-msgstr ""
+msgstr "Deinterlacer modus voor interlaced content"
 
 #: ../src/plugin.py:319
 msgid "Deinterlacer mode for progressive content"
-msgstr ""
+msgstr "Deinterlacer modus voor progressive content"
 
 #: ../src/plugin.py:316
 msgid "Delay x seconds after service started"
-msgstr ""
+msgstr "Vertraag x sekonde nadat de service is gestart"
 
 #: ../src/plugin.py:31
 msgid "Enable 1080p24 Mode"
-msgstr ""
+msgstr "Schakel 1080p24 modus in"
 
 #: ../src/plugin.py:32
 msgid "Enable 1080p25 Mode"
-msgstr ""
+msgstr "Schakel 1080p25 modus in"
 
 #: ../src/plugin.py:32
 msgid "Enable 1080p30 Mode"
-msgstr ""
+msgstr "Schakel 1080p30 modus in"
 
 #: ../src/plugin.py:31
 msgid "Enable 720p24 Mode"
-msgstr ""
+msgstr "Schakel 720p24 modus in"
 
 #: ../src/plugin.py:307
 msgid "Enable Autoresolution"
-msgstr ""
+msgstr "Schakel Autoresolutie in"
 
 #: ../src/plugin.py:30
 msgid "HD Interlace Mode"
-msgstr ""
+msgstr "HD Interlace modus"
 
 #: ../src/plugin.py:30
 msgid "HD Progressive Mode"
-msgstr ""
+msgstr "HD Progressive modus"
 
 #: ../src/plugin.py:297
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
-#: ../src/plugin.py:313 ../src/plugin.py:314
+#: ../src/plugin.py:313
+#: ../src/plugin.py:314
 msgid "Refresh Rate"
-msgstr ""
+msgstr "Refresh Rate"
 
 #: ../src/plugin.py:317
 msgid "Running in testmode"
-msgstr ""
+msgstr "Draait in testmode"
 
 #: ../src/plugin.py:28
 msgid "SD 24HZ Progressive mode"
-msgstr ""
+msgstr "SD 24HZ Progressive modus"
 
 #: ../src/plugin.py:27
 msgid "SD 25/50HZ Interlace Mode"
-msgstr ""
+msgstr "SD 25/50HZ Interlace modus"
 
 #: ../src/plugin.py:29
 msgid "SD 25/50HZ Progressive Mode"
-msgstr ""
+msgstr "SD 25/50HZ Progressive modus"
 
 #: ../src/plugin.py:27
 msgid "SD 30/60HZ Interlace Mode"
-msgstr ""
+msgstr "SD 30/60HZ Interlace modus"
 
 #: ../src/plugin.py:29
 msgid "SD 30/60HZ Progressive Mode"
-msgstr ""
+msgstr "SD 30/60HZ Progressive modus"
 
 #: ../src/plugin.py:315
 msgid "Show info screen"
-msgstr ""
+msgstr "Toon informatiescherm"
 
-#: ../src/plugin.py:39 ../src/plugin.py:41
+#: ../src/plugin.py:39
+#: ../src/plugin.py:41
 msgid "auto"
-msgstr ""
+msgstr "auto"
 
-#: ../src/plugin.py:39 ../src/plugin.py:41
+#: ../src/plugin.py:39
+#: ../src/plugin.py:41
 msgid "bob"
-msgstr ""
+msgstr "bob"
 
 #: ../src/plugin.py:126
 msgid "default"
-msgstr ""
+msgstr "standaard"
 
-#: ../src/plugin.py:39 ../src/plugin.py:41
+#: ../src/plugin.py:39
+#: ../src/plugin.py:41
 msgid "off"
-msgstr ""
+msgstr "uit"
 
-#: ../src/plugin.py:39 ../src/plugin.py:41
+#: ../src/plugin.py:39
+#: ../src/plugin.py:41
 msgid "on"
-msgstr ""
+msgstr "aan"
 
 #: ../src/plugin.py:43
 msgid "second"
-msgstr ""
+msgstr "sekonde"
 
-#: ../src/plugin.py:43 ../src/plugin.py:44 ../src/plugin.py:45
+#: ../src/plugin.py:43
+#: ../src/plugin.py:44
+#: ../src/plugin.py:45
 msgid "seconds"
-msgstr ""
+msgstr "sekonden"
+
