@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from twisted.internet.protocol import DatagramProtocol
 from twisted.internet import reactor
 from twisted.internet import reactor
@@ -25,7 +27,11 @@ SEVERITY = {
 	'warning': 4, 'notice': 5, 'info': 6, 'debug': 7
 }
 
-reverse = lambda map: dict(zip(map.values(), map.keys()))
+try:
+	dict.iteritems
+	reverse = lambda map: dict((v,k) for k,v in map.iteritems())
+except AttributeError:
+	reverse = lambda map: dict((v,k) for k,v in map.items())
 
 SEVERITYMAP = {
 	MessageBox.TYPE_YESNO: SEVERITY['debug'],
@@ -43,7 +49,7 @@ class SyslogNetworkProtocol(DatagramProtocol):
 		self.addr = (ip, SYSLOG_UDP_PORT)
 
 	def noIP(self, error):
-		print "--------------------------------", error
+		print("--------------------------------", error)
 		emergencyDisable()
 
 	def startProtocol(self):

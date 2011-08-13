@@ -1,8 +1,7 @@
 # -*- coding: ISO-8859-1 -*-
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-import os,gettext
-import sha
+import os, gettext, hashlib
 PluginLanguageDomain = "MyTube"
 PluginLanguagePath = "Extensions/MyTube/locale"
 
@@ -35,7 +34,7 @@ def decrypt_block(src, mod):
 	if len(src) != 128 and len(src) != 202:
 		return None
 	dest = rsa_pub1024(src[:128], mod)
-	hash = sha.new(dest[1:107])
+	hash = hashlib.sha1(dest[1:107])
 	if len(src) == 202:
 		hash.update(src[131:192])	
 	result = hash.digest()

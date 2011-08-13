@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Software" />
+	  </prerequisites>
+          <info>
+                    <author>Dr.Best</author>
+                    <name>YTTRailer</name>
+                    <packagename>enigma2-plugin-extensions-yttrailer</packagename>
+                    <shortdescription>watch trailer from epglist/eventview</shortdescription>
+                    <description>watch trailer from epglist/eventview</description>
+                    <screenshot/>		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-yttrailer" />
+	  </files>
+</default>

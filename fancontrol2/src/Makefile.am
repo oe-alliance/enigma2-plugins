@@ -1,4 +1,4 @@
-installdir = /usr/lib/enigma2/python/Plugins/Extensions/FanControl2
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/FanControl2
 
 SUBDIRS = data
 

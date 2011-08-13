@@ -18,3 +18,12 @@ def _(txt):
 localeInit()
 language.addCallback(localeInit)
 
+try:
+	xrange = xrange
+	iteritems = lambda d: d.iteritems()
+	itervalues = lambda d: d.itervalues()
+except NameError:
+	xrange = range
+	iteritems = lambda d: d.items()
+	itervalues = lambda d: d.values()
+

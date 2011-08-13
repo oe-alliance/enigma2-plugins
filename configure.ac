@@ -536,6 +536,11 @@ youtubeplayer/meta/Makefile
 youtubeplayer/src/Makefile
 youtubeplayer/src/Nemesis.GlassLine_Mod/Makefile
 
+yttrailer/Makefile
+yttrailer/meta/Makefile
+yttrailer/po/Makefile
+yttrailer/src/Makefile
+
 zaphistorybrowser/Makefile
 zaphistorybrowser/meta/Makefile
 zaphistorybrowser/po/Makefile

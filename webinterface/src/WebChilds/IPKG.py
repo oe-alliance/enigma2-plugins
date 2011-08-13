@@ -95,6 +95,7 @@ class IPKGConsoleStream:
 		self.request = request
 		self.request.write("<html><body>\n")		
 		self.container = eConsoleAppContainer()
+		self.lastdata = None
 
 		self.container.dataAvail.append(self.dataAvail)
 		self.container.appClosed.append(self.cmdFinished)
@@ -106,5 +107,9 @@ class IPKGConsoleStream:
 		self.request.finish()
 
 	def dataAvail(self, data):
-		self.request.write(data.replace("\n", "<br>\n"))
+		print"[IPKGConsoleStream].dataAvail: '%s'" %data
+		#FIXME - filter strange reapeated outputs since we switched to opkg
+		if data != self.lastdata or self.lastdata is None:
+			self.lastdata = data
+			self.request.write(data.replace("\n", "<br>\n"))
 

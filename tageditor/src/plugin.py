@@ -99,7 +99,7 @@ class TagEditor(Screen):
 			while "" in tags:
 				tags.remove("")
 			file.close()
-		except IOError, ioe:
+		except IOError as ioe:
 			tags = []
 		return tags
 
@@ -108,7 +108,7 @@ class TagEditor(Screen):
 			file = open("/etc/enigma2/movietags", "w")
 			file.write("\n".join(tags)+"\n")
 			file.close()
-		except IOError, ioe:
+		except IOError as ioe:
 			pass
 
 	def joinTags(self, taglist, newtags):

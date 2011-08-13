@@ -24,6 +24,7 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
 
 from time import localtime
+from operator import itemgetter
 
 # Partnerbox installed and icons in epglist enabled?
 try:
@@ -255,7 +256,7 @@ class EPGSearch(EPGSelection):
 
 			# Read in configuration
 			autotimer.readXml()
-		except Exception, e:
+		except Exception as e:
 			self.session.open(
 				MessageBox,
 				_("Could not read AutoTimer timer list: %s") % e,
@@ -336,7 +337,7 @@ class EPGSearch(EPGSelection):
 			# Search EPG, default to empty list
 			epgcache = eEPGCache.getInstance() # XXX: the EPGList also keeps an instance of the cache but we better make sure that we get what we want :-)
 			ret = epgcache.search(('RIBDT', 500, eEPGCache.PARTIAL_TITLE_SEARCH, searchString, eEPGCache.NO_CASE_CHECK)) or []
-			ret.sort(key = lambda x: x[2]) # sort by time
+			ret.sort(key=itemgetter(2)) # sort by time
 
 			# Update List
 			l = self["list"]

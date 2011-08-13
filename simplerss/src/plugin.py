@@ -77,7 +77,7 @@ def autostart(reason, **kwargs):
 
 	# Instanciate when enigma2 is launching, autostart active and session present or installed during runtime
 	if reason == 0 and config.plugins.simpleRSS.autostart.value and \
-		(not plugins.firstRun or kwargs.has_key("session")):
+		(not plugins.firstRun or "session" in kwargs):
 
 		from RSSPoller import RSSPoller
 		rssPoller = RSSPoller()

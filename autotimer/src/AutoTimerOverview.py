@@ -251,7 +251,7 @@ class AutoTimerOverview(Screen, HelpableScreen):
 				autotimerFaq = PluginHelp(*reader)
 				autotimerFaq.open(self.session)
 			elif ret == "preview":
-				total, new, modified, timers, conflicts = self.autotimer.parseEPG(simulateOnly = True)
+				total, new, modified, timers, conflicts, similars = self.autotimer.parseEPG(simulateOnly = True)
 				self.session.open(
 					AutoTimerPreview,
 					timers

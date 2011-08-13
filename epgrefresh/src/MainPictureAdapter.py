@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import Screens.Standby
 
 # MessageBox
@@ -19,7 +21,7 @@ class MainPictureAdapter:
 		return True
 
 	def play(self, service):
-		print "[EPGRefresh.MainPictureAdapter.play]"
+		print("[EPGRefresh.MainPictureAdapter.play]")
 		return self.navcore.playService(service)
 
 	def stop(self):

@@ -95,6 +95,7 @@ SUBDIRS = \
 	webinterface \
 	werbezapper \
 	youtubeplayer \
+	yttrailer \
 	zaphistorybrowser \
 	zapstatistic \
 	zdfmediathek
