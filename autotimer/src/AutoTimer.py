@@ -243,6 +243,10 @@ class AutoTimer:
 					print("[AutoTimer] Skipping an event because it starts in less than 60 seconds")
 					continue
 
+				# Set short description to equal extended description if it is empty.
+				if not shortdesc:
+					shortdesc = extdesc
+
 				# Convert begin time
 				timestamp = localtime(begin)
 				# Update timer
@@ -412,6 +416,10 @@ class AutoTimer:
 						print("[AutoTimer] Not adding new timer because counter is depleted.")
 						continue
 
+# 					if shortdesc != "":
+# 						newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
+# 					else:
+# 						newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, extdesc, eit)
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
 					newEntry.log(500, "[AutoTimer] Try to add new timer based on AutoTimer %s." % (timer.name))
 
