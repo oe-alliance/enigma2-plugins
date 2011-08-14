@@ -185,10 +185,10 @@ class AutoTimer:
 		#Question: Move to a separate function getTimerDict()
 		#Note: It is also possible to use RecordTimer isInTimer(), but we won't get the timer itself on a match
 		recorddict = defaultdict(list)
-		for timer in ( recordHandler.timer_list + recordHandler.processed_timers ):
+		for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
 			if timer and timer.service_ref:
 				event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
-				extdesc = event and event.getExtendedDescription()
+				extdesc = event and event.getExtendedDescription() or ''
 				timer.extdesc = extdesc
 				recorddict[str(timer.service_ref)].append(timer)
 
@@ -319,7 +319,7 @@ class AutoTimer:
 								append({
 									"name": info.getName(movieref),
 									"shortdesc": info.getInfoString(movieref, iServiceInformation.sDescription),
-									"extdesc": event.getExtendedDescription()
+									"extdesc": event.getExtendedDescription() or '' # XXX: does event.getExtendedDescription() actually return None on no description or an empty string?
 								})
 							del append
 
@@ -483,7 +483,7 @@ class AutoTimer:
 					if conflicts is None:
 						timer.decrementCounter()
 						new += 1
-						timer.extdesc = extdesc
+						newEntry.extdesc = extdesc
 						recorddict[serviceref].append(newEntry)
 
 						# Similar timers are in new timers list and additionally in similar timers list
