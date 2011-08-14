@@ -55,7 +55,7 @@ def quoteEventName(eventName, safe="/()" + ''.join(map(chr,range(192,255)))):
 	# BBC uses '\x86' markers in program names, remove them
 	text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('latin-1','ignore')
 	# IMDb doesn't seem to like urlencoded characters at all, hence the big "safe" list
-	return urllib.quote_plus(text, safe=safe)
+	return quote_plus(text, safe=safe)
 
 class IMDBChannelSelection(SimpleChannelSelection):
 	def __init__(self, session):
