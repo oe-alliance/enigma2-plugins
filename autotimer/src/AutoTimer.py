@@ -187,9 +187,12 @@ class AutoTimer:
 		recorddict = defaultdict(list)
 		for timer in chain(recordHandler.timer_list, recordHandler.processed_timers):
 			if timer and timer.service_ref:
-				event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
-				extdesc = event and event.getExtendedDescription() or ''
-				timer.extdesc = extdesc
+				if timer.eit is not None:
+					event = epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
+					extdesc = event and event.getExtendedDescription() or ''
+					timer.extdesc = extdesc
+				elif not hasattr(timer, 'extdesc'):
+					timer.extdesc = ''
 				recorddict[str(timer.service_ref)].append(timer)
 
 		# Create dict of all movies in all folders used by an autotimer to compare with recordings
