@@ -80,7 +80,7 @@ class MenuWeights:
 		append = list.append
 		extend = list.extend
 
-		for text, values iteritems(self.weights):
+		for text, values in iteritems(self.weights):
 			weight, hidden = values
 			extend((' <entry text="', str(text), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '/>\n'))
 		append('\n</menusort>\n')
@@ -102,8 +102,7 @@ class MenuWeights:
 		return self.get(first) - self.get(second)
 
 	def set(self, tuple):
-		# TODO: support hiding entries
-		self.weights[tuple[0]] = (tuple[3], False)
+		self.weights[tuple[0]] = (tuple[3], tuple[4])
 menuWeights = MenuWeights()
 
 def Menu__init__(self, session, parent, *args, **kwargs):
@@ -192,12 +191,16 @@ class SortableMenu(Menu, HelpableScreen):
 				"ignore": lambda: None, # we need to overwrite some regular actions :-)
 				"toggleSelection": (self.toggleSelection, _("toggle selection")),
 				"selectEntry": (self.okbuttonClick, _("enter menu")),
+				#"hideEntry": (self.hideEntry, _("hide entry")),
 			}, -1
 		)
 		self.selected = -1
 
 	def createSummary(self):
 		return None
+
+	def hideEntry(self):
+		pass
 
 	# copied from original Menu for simplicity
 	def addMenu(self, destList, node):
