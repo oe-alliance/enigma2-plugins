@@ -113,7 +113,7 @@ def Menu__init__(self, session, parent, *args, **kwargs):
 	# remove hidden entries from list
 	i = 0
 	for x in list:
-		if x[3] == HIDDENWEIGHT: i += 1
+		if menuWeights.get(x) == HIDDENWEIGHT: i += 1
 		else: break
 	if i:
 		del list[:i]
