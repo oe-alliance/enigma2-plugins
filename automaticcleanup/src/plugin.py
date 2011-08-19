@@ -63,7 +63,7 @@ from Screens.Setup import SetupSummary
 
 
 ###############################################################################        
-VERSION = "0.1.4"
+VERSION = "0.1.5"
 # History:
 # 0.1.2 First public version
 # 0.1.3 Prevention of timerlist cleanup if duplicated with EMC plugin
@@ -75,6 +75,7 @@ VERSION = "0.1.4"
 #       "Timerlist cleanup immediately after recording" is set
 #       Help button added
 #       Cleanup crashlog feature invalidated for DMM plugin feed distribution
+# 0.1.5 Fix infinite loop when timerlist cleanup is set to option "immediately after recording"
 ###############################################################################  
 pluginPrintname = "[AutomaticCleanup Ver. %s]" %VERSION
 debug = False # If set True, plugin won't remove any file physically, instead prints file names in log for verification purposes
@@ -222,13 +223,12 @@ class AutomaticCleanup:
 		else: print pluginPrintname, "Starting AutomaticCleanup..."
 		self.timer = eTimer() # check timer
 		self.timer.callback.append(self.doCleanup)
-		if self.timer.isActive(): # stop timer if running
-			self.timer.stop()
 		self.doCleanup() # always check immediately after starting plugin
 		config.plugins.AutomaticCleanup.deleteSettingsOlderThan.addNotifier(self.configChange, initial_call = False)
 		config.plugins.AutomaticCleanup.keepSettings.addNotifier(self.configChange, initial_call = False)
 		config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.addNotifier(self.configChange, initial_call = False)
 		config.plugins.AutomaticCleanup.deleteTimersOlderThan.addNotifier(self.configChange, initial_call = False)
+		self.session.nav.RecordTimer.on_state_change.append(self.timerentryOnStateChange)
 		
 	def configChange(self, configElement = None):
 		# config was changed in setup
@@ -242,6 +242,8 @@ class AutomaticCleanup:
 			print pluginPrintname, "Cleanup disabled"
 			
 	def doCleanup(self):
+		if self.timer.isActive(): # stop timer if running
+			self.timer.stop()
 		if self.cleanupEnabled(): # check only if feature is enabled
 			self.cleanupSettings()
 			self.cleanupMovies()
@@ -341,17 +343,15 @@ class AutomaticCleanup:
 			if self.EMC_timer_autocln:	# Duplicate cleanup?
 				print pluginPrintname, "Timerlist cleanup skipped because it is already enabled in EMC" # we skip check to avoid crash
 			else:
-				if int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) == 0:
-					self.session.nav.RecordTimer.on_state_change.append(self.timerentryOnStateChange)
 				expiration = time() - int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) * 86400 # calculate end time for comparison with processed timers
 				print pluginPrintname, "Cleaning up timerlist-entries older than", strftime("%c", localtime(expiration))
-				if not debug:		
+				if not debug:
 					self.session.nav.RecordTimer.processed_timers = [timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.repeated or (timerentry.end and timerentry.end > expiration)] # cleanup timerlist
 		else:
 			print pluginPrintname, "Timerlist cleanup disabled"
 		
 	def timerentryOnStateChange(self, timer):
-		if int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) > -1 and timer.state == TimerEntry.StateEnded and timer.cancelled is not True: #if enabled, timerentry ended and it was not cancelled by user
+		if int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) == 0 and timer.state == TimerEntry.StateEnded and timer.cancelled is not True: #if enabled, timerentry ended and it was not cancelled by user
 			print pluginPrintname, "Timerentry has been changed to StateEnd"
 			self.cleanupTimerlist() # and check if entries have to be cleaned up in the timerlist
 		

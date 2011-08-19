@@ -161,14 +161,17 @@ class SimpleVDRProtocol(LineReceiver):
 			self.sendLine(line)
 			return True
 
-	def LSTT(self, args):
+	def getTimerList(self):
 		import NavigationInstance
 		list = []
 		recordTimer = NavigationInstance.instance.RecordTimer
 		list.extend(recordTimer.timer_list)
 		list.extend(recordTimer.processed_timers)
-		list.sort(cmp = lambda x, y: x.begin < y.begin)
+		list.sort(key=attrgetter('begin'))
+		return list
 
+	def LSTT(self, args):
+		list = self.getTimerList()
 		lastItem = list.pop()
 		idx = 1
 		for timer in list:
@@ -192,12 +195,7 @@ class SimpleVDRProtocol(LineReceiver):
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
 
-		import NavigationInstance
-		list = []
-		recordTimer = NavigationInstance.instance.RecordTimer
-		list.extend(recordTimer.timer_list)
-		list.extend(recordTimer.processed_timers)
-		list.sort(cmp = lambda x, y: x.begin < y.begin)
+		list = self.getTimerList()
 
 		if timerId < 1:
 			payload = "%d argument error" % (CODE_SYNTAX,)
@@ -257,12 +255,7 @@ class SimpleVDRProtocol(LineReceiver):
 				payload = "%d argument error" % (CODE_SYNTAX,)
 				return self.sendLine(payload)
 
-			import NavigationInstance
-			list = []
-			recordTimer = NavigationInstance.instance.RecordTimer
-			list.extend(recordTimer.timer_list)
-			list.extend(recordTimer.processed_timers)
-			list.sort(cmp = lambda x, y: x.begin < y.begin)
+			list = self.getTimerList()
 
 			if timerId < 1 or len(list) < timerId:
 				payload = "%d argument error" % (CODE_SYNTAX,)
@@ -297,12 +290,7 @@ class SimpleVDRProtocol(LineReceiver):
 			payload = "%d argument error" % (CODE_SYNTAX,)
 			return self.sendLine(payload)
 
-		import NavigationInstance
-		list = []
-		recordTimer = NavigationInstance.instance.RecordTimer
-		list.extend(recordTimer.timer_list)
-		list.extend(recordTimer.processed_timers)
-		list.sort(cmp = lambda x, y: x.begin < y.begin)
+		list = self.getTimerList()
 
 		if timerId < 1 or len(list) < timerId:
 			payload = "%d argument error" % (CODE_SYNTAX,)
@@ -361,8 +349,7 @@ class SimpleVDRProtocol(LineReceiver):
 			return self.sendLine(payload)
 		funcs, args = args
 		if not args:
-			funcnames = list(funcs.keys())
-			funcnames.sort() # make sure this is sorted
+			funcnames = sorted(funcs.keys())
 			payload = "%d-This is Enigma2 VDR-Plugin version %s" % (CODE_HELP, VERSION)
 			self.sendLine(payload)
 			payload = "%d-Topics:" % (CODE_HELP,)

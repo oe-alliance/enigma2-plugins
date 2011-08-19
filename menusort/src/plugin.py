@@ -29,6 +29,7 @@ try:
 except AttributeError:
 	iteritems = lambda d: d.items()
 
+from operator import itemgetter
 from shutil import copyfile, Error
 
 XML_CONFIG = "/etc/enigma2/menusort.xml"
@@ -97,7 +98,7 @@ menuWeights = MenuWeights()
 def Menu__init__(self, session, parent, *args, **kwargs):
 	baseMethods.Menu__init__(self, session, parent, *args, **kwargs)
 	list = self["menu"].list
-	list.sort(cmp=menuWeights.cmp)
+	list.sort(key=menuWeights.get)
 	self["menu"].list = list
 
 class SortableMenuList(MenuList):
@@ -153,7 +154,7 @@ class SortableMenu(Menu, HelpableScreen):
 
 		# XXX: not nice, but makes our life a little easier
 		l = [(x[0], x[1], x[2], menuWeights.get(x)) for x in self["menu"].list]
-		l.sort(key=lambda x:x[3])
+		l.sort(key=itemgetter(3))
 		self["menu"] = SortableMenuList(l)
 
 		self["WizardActions"] = ActionMap(["WizardActions"],
