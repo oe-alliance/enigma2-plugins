@@ -264,7 +264,7 @@ class SortableMenu(Menu, HelpableScreen):
 				print("[MenuSort] Using weight from %d (%d) and %d (%d) to calculate diff (%d)" % (i, int(l[i][3]), newpos, int(l[newpos][3]), diff))
 				while i < Len:
 					if DEBUG: print("[MenuSort] INCREASE WEIGHT OF", l[i][0], "BY", diff)
-					l[i] = (l[i][0], l[i][1], l[i][2], int(l[i][3]) + diff)
+					l[i] = (l[i][0], l[i][1], l[i][2], int(l[i][3]) + diff, l[i][4])
 					i += 1
 			# we moved down, decrease weight of plugins before us
 			elif newpos > selected:
@@ -275,7 +275,7 @@ class SortableMenu(Menu, HelpableScreen):
 				print("[MenuSort] Using weight from %d (%d) and %d (%d) to calculate diff (%d)" % (newpos, int(l[newpos][3]), i, int(l[i][3]), diff))
 				while i > -1:
 					if DEBUG: print("[MenuSort] DECREASE WEIGHT OF", l[i][0], "BY", diff)
-					l[i] = (l[i][0], l[i][1], l[i][2], int(l[i][3]) - diff)
+					l[i] = (l[i][0], l[i][1], l[i][2], int(l[i][3]) - diff, l[i][4])
 					i -= 1
 			else:
 				if DEBUG: print("[MenuSort]", entry[0], "did not move (%d to %d)?" % (selected, newpos))
