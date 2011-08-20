@@ -5,18 +5,20 @@
 # gerrit <gerrit@nedlinux.nl>, 2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: nl\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2009-06-04 20:19+0200\n"
-"Last-Translator: \n"
-"Language-Team:  <en@li.org>\n"
+"PO-Revision-Date: 2011-08-17 15:24+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: AndyBlac <RobvdDoes@gmail.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #. TRANSLATORS: this is a window title.
 #. TRANSLATORS: keep it short, this is a button
@@ -46,7 +48,7 @@ msgid "Append vanity name"
 msgstr "Alias toevoegen"
 
 msgid "Areacode to add to calls without one (if necessary)"
-msgstr ""
+msgstr "Netnummer toevoegen (indien noodzakelijk)"
 
 msgid "Austria"
 msgstr "Oostenrijk"
@@ -62,20 +64,20 @@ msgid "Call monitoring"
 msgstr "Gespreksmonitoring"
 
 msgid "Call redirection"
-msgstr ""
+msgstr "Oproep doorgeleiding"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
 msgstr "Annuleren"
 
 msgid "Cannot get calls from FRITZ!Box"
-msgstr ""
+msgstr "Kan geen oproepen van FRITZ!Box verkrijgen!"
 
 msgid "Cannot get infos from FRITZ!Box"
-msgstr ""
+msgstr "Kan geen info van FRITZ!Box verkrijgen!"
 
 msgid "Compact Flash"
-msgstr ""
+msgstr "Compact Flash"
 
 msgid "Connected since"
 msgstr "Verbonden sinds"
@@ -134,7 +136,7 @@ msgid "Display all calls"
 msgstr "Laat alle gesprekken zien"
 
 msgid "Display connection infos"
-msgstr ""
+msgstr "Toon verbindingsinfo"
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Display incoming calls"
@@ -185,7 +187,7 @@ msgstr "Voorkies nummer voor een telefoonoproep"
 
 #, python-format
 msgid "FRITZ!Box - Could not load calls: %s"
-msgstr ""
+msgstr "FRITZ!Box - Kon oproepen niet laden: %s"
 
 #, fuzzy, python-format
 msgid "FRITZ!Box - Could not load phonebook: %s"
@@ -193,20 +195,22 @@ msgstr "Fout bij het laden van het FRITZ!Box telefoonboek -fout: %s"
 
 #, python-format
 msgid "FRITZ!Box - Dialling failed: %s"
-msgstr ""
+msgstr "FRITZ!Box - Bellen mislukt: %s"
 
 #, python-format
 msgid "FRITZ!Box - Error getting blacklist: %s"
-msgstr ""
+msgstr "FRITZ!Box - Fout met verkrijgen blacklist: %s"
 
 #, python-format
 msgid "FRITZ!Box - Error getting status: %s"
-msgstr ""
+msgstr "FRITZ!Box - Fout met verkrijgen status: %s"
 
 msgid ""
 "FRITZ!Box - Error logging in\n"
 "\n"
 msgstr ""
+"FRITZ!Box - Fout met loggen in\n"
+"\n"
 
 #, python-format
 msgid "FRITZ!Box - Error logging in: %s"
@@ -217,6 +221,8 @@ msgid ""
 "FRITZ!Box - Error logging in: %s\n"
 "Disabling plugin."
 msgstr ""
+"FRITZ!Box - Fout met loggen in: %s\n"
+"Plugin wordt uitgeschakeld."
 
 #, fuzzy, python-format
 msgid "FRITZ!Box - Error logging out: %s"
@@ -224,15 +230,15 @@ msgstr "FRITZ!Box Logout mislukt! - Error: %s"
 
 #, python-format
 msgid "FRITZ!Box - Error resetting: %s"
-msgstr ""
+msgstr "FRITZ!Box -Fout tijdens reset: %s"
 
 #, python-format
 msgid "FRITZ!Box - Failed changing Mailbox: %s"
-msgstr ""
+msgstr "FRITZ!Box -Veranderen Mailbox mislukt: %s"
 
 #, python-format
 msgid "FRITZ!Box - Failed changing WLAN: %s"
-msgstr ""
+msgstr "FRITZ!Box - Veranderen WLAN mislukt: %s"
 
 msgid "FRITZ!Box FON address (Name or IP)"
 msgstr "FRITZ!Box adres (Naam of IP)"
@@ -244,7 +250,7 @@ msgid "FRITZ!Box Fon Status"
 msgstr "FRITZ!Box Status"
 
 msgid "Filter also list of calls"
-msgstr ""
+msgstr "Filter ook de lijst met oproepen"
 
 msgid "Flash"
 msgstr "Flash"
@@ -257,6 +263,11 @@ msgid ""
 "\n"
 "But did not load. Probably not PNG, 8-bit"
 msgstr ""
+"Vond foto\n"
+"\n"
+"%s\n"
+"\n"
+"maar heb die niet geladen. Waarschijnlijk geen (8-bit) PNG"
 
 msgid "France"
 msgstr "Frankrijk"
@@ -278,7 +289,7 @@ msgid "IP Address:"
 msgstr "IP Adres:"
 
 msgid "Ignore callers with no phone number"
-msgstr ""
+msgstr "Inkomende oproep zonder nummer"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Incoming"
@@ -293,6 +304,12 @@ msgid ""
 "---------------------------------------------\n"
 "to: %(phone)s"
 msgstr ""
+"Inkomende oproepen op %(date)s om %(time)s van\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"naar: %(phone)s"
 
 msgid "Incoming calls"
 msgstr "Inkomende gesprekken"
@@ -314,7 +331,7 @@ msgid "Mailbox"
 msgstr "Mailbox"
 
 msgid "Media directory"
-msgstr ""
+msgstr "Media map"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
@@ -330,7 +347,7 @@ msgid "Name"
 msgstr "Naam"
 
 msgid "Network mount"
-msgstr ""
+msgstr "Network mount"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
@@ -350,7 +367,7 @@ msgid "No mailbox active"
 msgstr "Geen mailbox actief"
 
 msgid "No phonebook"
-msgstr ""
+msgstr "Geen telefoonboek"
 
 msgid "No result from LDIF"
 msgstr "Geen resultaat uit LDIF"
@@ -391,6 +408,12 @@ msgid ""
 "---------------------------------------------\n"
 "from: %(phone)s"
 msgstr ""
+"Uitgaande oproep op %(date)s om %(time)s naar\n"
+"---------------------------------------------\n"
+"%(number)s\n"
+"%(caller)s\n"
+"---------------------------------------------\n"
+"van: %(phone)s"
 
 msgid "Outgoing calls"
 msgstr "Uitgaande gesprekken"
@@ -412,7 +435,7 @@ msgid "Phonebook"
 msgstr "Telefoonboek"
 
 msgid "Plugin not active"
-msgstr ""
+msgstr "Plugin niet  aktief"
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Quit"
@@ -423,7 +446,7 @@ msgstr "Lees telefoonboek van FRITZ!Box"
 
 #. TRANSLATORS: keep it short, this is a help text
 msgid "Refresh status"
-msgstr ""
+msgstr "Verversings status"
 
 #. TRANSLATORS: keep it short, this is a button
 #. TRANSLATORS: keep it short, this is a help text
@@ -471,14 +494,14 @@ msgid "Show details of entry"
 msgstr "Laat de details zien van een regel"
 
 msgid "Show only calls for specific MSN"
-msgstr ""
+msgstr "Toont alleen oproepen voor specifieke MSN"
 
 #, fuzzy
 msgid "Software fax active"
 msgstr "Geen mailbox actief"
 
 msgid "Status not available"
-msgstr ""
+msgstr "Status niet beschikbaar"
 
 msgid "Strip Leading 0"
 msgstr "Verwijder beginnende 0"
@@ -539,9 +562,7 @@ msgid "Vanity"
 msgstr "Trots"
 
 msgid "You need to enable the monitoring on your FRITZ!Box by dialing #96*5*!"
-msgstr ""
-"U moet de monitorfunctie van de FRITZ!Box inschakelen door het drukken van "
-"#96*5*!"
+msgstr "U moet de monitorfunctie van de FRITZ!Box inschakelen door het drukken van #96*5*!"
 
 msgid ""
 "You need to set the password of the FRITZ!Box\n"
@@ -555,10 +576,10 @@ msgstr ""
 "Dit kan een communicatieprobleem zijn, probeer opnieuw."
 
 msgid "business"
-msgstr ""
+msgstr "zakelijk"
 
 msgid "call redirections active"
-msgstr ""
+msgstr "doorleiden oproepen geactiveerd"
 
 #, fuzzy
 msgid "devices active"
@@ -603,7 +624,7 @@ msgid "mobile"
 msgstr "mobiel"
 
 msgid "no calls"
-msgstr ""
+msgstr "geen oproepen"
 
 #, fuzzy
 msgid "no device active"
@@ -613,7 +634,7 @@ msgid "not encrypted"
 msgstr "ongecodeerd "
 
 msgid "number suppressed"
-msgstr ""
+msgstr "nummer onderdrukt"
 
 #, fuzzy
 msgid "one device active"

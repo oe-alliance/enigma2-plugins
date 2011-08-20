@@ -8,40 +8,42 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2011-08-17 23:04+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: AndyBlac <RobvdDoes@gmail.com>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #. TRANSLATORS: this is a window title.
 msgid "Add entry to phonebook"
-msgstr ""
+msgstr "Voeg toe aan telefoonboek"
 
 msgid "Areacode to add to calls without one (if necessary)"
-msgstr ""
+msgstr "Voeg netnummer toe (indien noodzakelij)"
 
 msgid "Austria"
-msgstr ""
+msgstr "Oostenrijk"
 
 msgid "Automatically add new Caller to PhoneBook"
-msgstr ""
+msgstr "Voeg nieuwe bellers automatisch toe aan telefoonboek"
 
 msgid "Call monitoring"
-msgstr ""
+msgstr "Monitor oproepen"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 msgid "Compact Flash"
-msgstr ""
+msgstr "Compact Flash"
 
 msgid "Connected to NCID Server"
-msgstr ""
+msgstr "Verbonden met NCID Server"
 
 #, python-format
 msgid ""
@@ -49,9 +51,12 @@ msgid ""
 " (%s)\n"
 "retrying..."
 msgstr ""
+"Verbinden met NCID Server mislukt\n"
+" (%s)\n"
+"Probeer opnieuw..."
 
 msgid "Connecting to NCID Server..."
-msgstr ""
+msgstr "Verbinden met NCID Server..."
 
 #, python-format
 msgid ""
@@ -59,16 +64,19 @@ msgid ""
 " (%s)\n"
 "retrying..."
 msgstr ""
+"Verbinding met NCID Server kwijt\n"
+" (%s)\n"
+"probeer opnieuw..."
 
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Delete"
-msgstr ""
+msgstr "Verwijder"
 
 msgid "Display Fon calls on screen"
-msgstr ""
+msgstr "Toon Fon-oproepen"
 
 #, python-format
 msgid ""
@@ -78,25 +86,30 @@ msgid ""
 "\n"
 "%(name)s?"
 msgstr ""
+"Wilt u echt de entry verwijderen voor\n"
+"\n"
+"%(number)s\n"
+"\n"
+"%(name)s?"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Edit"
-msgstr ""
+msgstr "Bewerk"
 
 msgid "Enter Search Terms"
-msgstr ""
+msgstr "Geef zoek term in"
 
 msgid "Entry incomplete."
-msgstr ""
+msgstr "Ingave incompleet."
 
 msgid "Flash"
-msgstr ""
+msgstr "Flash"
 
 msgid "France"
-msgstr ""
+msgstr "Frankrijk"
 
 msgid "Germany"
-msgstr ""
+msgstr "Duitsland"
 
 #, python-format
 msgid ""
@@ -106,107 +119,113 @@ msgid ""
 "%s\n"
 "---------------------------------------------"
 msgstr ""
+"Inkomende oproep op %s van\n"
+"---------------------------------------------\n"
+"%s\n"
+"%s\n"
+"---------------------------------------------"
 
 msgid "Italy"
-msgstr ""
+msgstr "Italië"
 
 msgid "Last 10 calls:\n"
-msgstr ""
+msgstr "Laatste 10 oproepen:\n"
 
 msgid "Media directory"
-msgstr ""
+msgstr "Media map"
 
 #. TRANSLATORS: this is a window title.
 msgid "NCID Client - Setup"
-msgstr ""
+msgstr "NCID Client - Instellingen"
 
 msgid "NCID server (Name or IP)"
-msgstr ""
+msgstr "NCID server (Naam of IP)"
 
 msgid "NCID server listening port (1-65535)"
-msgstr ""
+msgstr "NCID server listening port (1-65535)"
 
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 msgid "Network mount"
-msgstr ""
+msgstr "Network mount"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "New"
-msgstr ""
+msgstr "Nieuw"
 
 msgid "No entry selected"
-msgstr ""
+msgstr "Niets geselecteerd"
 
 msgid "No phonebook"
-msgstr ""
+msgstr "Geen telefoonboek"
 
 msgid "Number"
-msgstr ""
+msgstr "Nummer"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "PhoneBook Location"
-msgstr ""
+msgstr "Plaats telefoonboek"
 
 #. TRANSLATORS: this is a window title.
 msgid "Phonebook"
-msgstr ""
+msgstr "Telefoonboek"
 
 msgid "Plugin not active"
-msgstr ""
+msgstr "Plugin niet aktief"
 
 msgid "Reverse Lookup Caller ID (select country below)"
-msgstr ""
+msgstr "Reverse Lookup Caller ID (selecteer land hieronder)"
 
 #. TRANSLATORS: keep it short, this is a button
 msgid "Search"
-msgstr ""
+msgstr "Zoek"
 
 msgid "Search phonebook"
-msgstr ""
+msgstr "Zoek telefoonboek"
 
 msgid "Show after Standby"
-msgstr ""
+msgstr "Toon na Standby"
 
 msgid "Show connection information popups"
-msgstr ""
+msgstr "Toon verbindings-informatie popups"
 
 msgid "Strip Leading 0"
-msgstr ""
+msgstr "Strip Leading 0"
 
 msgid "Switzerland"
-msgstr ""
+msgstr "Zwitzerland"
 
 msgid "The Netherlands"
-msgstr ""
+msgstr "Nederland"
 
 msgid "Timeout for Call Notifications (seconds)"
-msgstr ""
+msgstr "Timeout voor oproep meldingen (seconds)"
 
 msgid "UNKNOWN"
-msgstr ""
+msgstr "Onbekend"
 
 msgid "USB Device"
-msgstr ""
+msgstr "USB-apparaat"
 
 msgid "Use internal PhoneBook"
-msgstr ""
+msgstr "Gebruik intern telefoonboek"
 
 msgid "no calls"
-msgstr ""
+msgstr "geen oproepen"
 
 msgid "number suppressed"
-msgstr ""
+msgstr "nummer onderdrukt"
 
 msgid "show as list"
-msgstr ""
+msgstr "toon als lijst"
 
 msgid "show each call"
-msgstr ""
+msgstr "toon elke oproep"
 
 msgid "show nothing"
-msgstr ""
+msgstr "yoon niets"
+

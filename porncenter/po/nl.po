@@ -8,73 +8,79 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2011-08-16 14:07+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: AndyBlac <RobvdDoes@gmail.com>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #: ../src/plugin.py:55
 msgid "Adult streaming plugins for dm800/dm8000"
-msgstr ""
+msgstr "Adult streaming plugins for Dreambox"
 
 #: ../src/plugin.py:255
 msgid "Buffer device:"
-msgstr ""
+msgstr "Buffer device:"
 
 #: ../src/plugin.py:256
 msgid "Buffer file handling:"
-msgstr ""
+msgstr "Buffer file handling:"
 
 #: ../src/plugin.py:254
 msgid "Buffer:"
-msgstr ""
+msgstr "Buffer:"
 
 #: ../src/plugin.py:395
 msgid "Delete this movie?"
-msgstr ""
+msgstr "Deze film verwijderen?"
 
 #: ../src/plugin.py:253
 msgid "Description:"
-msgstr ""
+msgstr "Beschrijving:"
 
 #: ../src/plugin.py:120
 #, python-format
 msgid "Downloading movie: %s"
-msgstr ""
+msgstr "Bezig met downloaden film: %s"
 
 #: ../src/plugin.py:382
 msgid "Error while getting video url!"
-msgstr ""
+msgstr "Fout met verkrijgen van de video url!"
 
 #: ../src/plugin.py:252
 msgid "Name:"
-msgstr ""
+msgstr "Naam:"
 
-#: ../src/plugin.py:54 ../src/plugin.py:108 ../src/plugin.py:171
-#: ../src/plugin.py:189 ../src/plugin.py:237
+#: ../src/plugin.py:54
+#: ../src/plugin.py:108
+#: ../src/plugin.py:171
+#: ../src/plugin.py:189
+#: ../src/plugin.py:237
 msgid "Porn Center"
-msgstr ""
+msgstr "PornoCetrum"
 
 #: ../src/plugin.py:194
 msgid "Select"
-msgstr ""
+msgstr "Selecteer"
 
 #: ../src/plugin.py:159
 msgid "Stop playing this movie?"
-msgstr ""
+msgstr "Stop afspelen?"
 
 #: ../src/plugin.py:58
 msgid "ask me"
-msgstr ""
+msgstr "Vraag mij"
 
 #: ../src/plugin.py:58
 msgid "delete"
-msgstr ""
+msgstr "Verwijder"
 
 #: ../src/plugin.py:58
 msgid "keep on device"
-msgstr ""
+msgstr "Bewaar"
+

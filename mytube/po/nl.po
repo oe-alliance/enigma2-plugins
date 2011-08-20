@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: networkwizard_nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-24 13:22+0200\n"
-"PO-Revision-Date: 2009-01-06 18:28+0100\n"
-"Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
-"Language-Team: gerrit <fy@li.org>\n"
+"PO-Revision-Date: 2011-08-14 18:22+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: AndyBlac <RobvdDoes@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,226 +22,227 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 msgid " Results"
-msgstr ""
+msgstr "Resultaten"
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "All Time"
-msgstr ""
+msgstr "Alle tijden"
 
 msgid "Ascanding"
-msgstr ""
+msgstr "Oplopend"
 
 msgid "Australia"
-msgstr ""
+msgstr "Australië"
 
 msgid "Autos & Vehicles"
-msgstr ""
+msgstr "Auto's & voertuigen"
 
 msgid "Brazil"
-msgstr ""
+msgstr "Brazilië"
 
 msgid "Canada"
-msgstr ""
+msgstr "Canada"
 
 msgid "Category"
-msgstr ""
+msgstr "Categorie"
 
 msgid "Close"
-msgstr ""
+msgstr "sluit"
 
 msgid "Comedy"
-msgstr ""
+msgstr "Komedie"
 
 msgid "Czech Republic"
-msgstr ""
+msgstr "Tsjechië"
 
 msgid "Descending"
-msgstr ""
+msgstr "Aflopend"
 
 msgid "Do you want to see more entries?"
-msgstr ""
+msgstr "Wilt u meer entries zien?"
 
 msgid "Education"
-msgstr ""
+msgstr "Opvoeding"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Amusement"
 
 msgid "Fetching feed entries"
-msgstr ""
+msgstr "Haalt entries van de feed binnen"
 
 msgid "Fetching search entries"
-msgstr ""
+msgstr "Haalt zoek-entries binnen"
 
 msgid "Film & Animation"
-msgstr ""
+msgstr "Film & animatie"
 
 msgid "France"
-msgstr ""
+msgstr "Frankrijk"
 
 msgid "From Region"
-msgstr ""
+msgstr "Van regio"
 
 msgid "Gaming"
-msgstr ""
+msgstr "Gaming"
 
 msgid "Germany"
-msgstr ""
+msgstr "Duitsland"
 
 msgid "Great Britain"
-msgstr ""
+msgstr "Groot Brittannië"
 
 msgid "Holland"
-msgstr ""
+msgstr "Holland"
 
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 msgid "Howto & Style"
-msgstr ""
+msgstr "Howto & Stijl"
 
 msgid "India"
-msgstr ""
+msgstr "India"
 
 msgid "Ireland"
-msgstr ""
+msgstr "Ierland"
 
 msgid "Israel"
-msgstr ""
+msgstr "Israel"
 
 msgid "Italy"
-msgstr ""
+msgstr "Italië"
 
 msgid "Japan"
-msgstr ""
+msgstr "Japan"
 
 msgid "Mexico"
-msgstr ""
+msgstr "Mexico"
 
 msgid "More video entries."
-msgstr ""
+msgstr "Meer video entries."
 
 msgid "Music"
-msgstr ""
+msgstr "Muziek"
 
 msgid "My TubePlayer"
-msgstr ""
+msgstr "My TubePlayer"
 
 msgid "MyTubePlayer"
-msgstr ""
+msgstr "MyTubePlayer"
 
 msgid "MyTubeVideoInfoScreen"
-msgstr ""
+msgstr "MyTubeVideoInfoScreen"
 
 msgid "New Zealand"
-msgstr ""
+msgstr "Nieuw Zeeland"
 
 msgid "News & Politics"
-msgstr ""
+msgstr "Nieuws & Politiek"
 
 msgid "No"
-msgstr ""
+msgstr "Nee"
 
 msgid "No playable video found! Stop playing this movie?"
-msgstr ""
+msgstr "Geen afspeelbare video gevonden! Stoppen met afspelen?"
 
 msgid "No, but play next video"
-msgstr ""
+msgstr "Nee, speel de volgende video af"
 
 msgid "No, but play previous video"
-msgstr ""
+msgstr "Nee, speel de vorige video af"
 
 msgid "Nonprofits & Activism"
-msgstr ""
+msgstr "Nonprofit & activisme"
 
 msgid "Order by"
-msgstr ""
+msgstr "Sorteer op"
 
 msgid "People & Blogs"
-msgstr ""
+msgstr "Mensen & blogs"
 
 msgid "Pets & Animals"
-msgstr ""
+msgstr "(huis)dieren"
 
 msgid "Play YouTube movies"
-msgstr ""
+msgstr "Speel YouTube filmpjes af"
 
 msgid "Poland"
-msgstr ""
+msgstr "Polen"
 
 msgid "Published"
-msgstr ""
+msgstr "Gepubliceerd"
 
 msgid "Rating"
-msgstr ""
+msgstr "Waarderingscijfer"
 
 msgid "Relevance"
-msgstr ""
+msgstr "Relevantie"
 
 msgid "Restricted Content"
-msgstr ""
+msgstr "Vertrouwelijke inhoud"
 
 msgid "Russia"
-msgstr ""
+msgstr "Rusland"
 
 msgid "Science & Technology"
-msgstr ""
+msgstr "Wetenschap & technologie"
 
 msgid "Search"
-msgstr ""
+msgstr "Zoek"
 
 msgid "Search Term(s)"
-msgstr ""
+msgstr "Zoekterm(en)"
 
 msgid "Short Movies"
-msgstr ""
+msgstr "Korte filmpjes"
 
 msgid "Sorry, video is not available!"
-msgstr ""
+msgstr "Sorry, video is niet beschikbaar!"
 
 msgid "South Korea"
-msgstr ""
+msgstr "Zuid Korea"
 
 msgid "Spain"
-msgstr ""
+msgstr "Spanje"
 
 msgid "Sports"
-msgstr ""
+msgstr "Sport"
 
 msgid "Stop playing this movie?"
-msgstr ""
+msgstr "Stoppen met afspelen?"
 
 msgid "Sweden"
-msgstr ""
+msgstr "Zweden"
 
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 msgid "This Month"
-msgstr ""
+msgstr "Deze maand"
 
 msgid "This Week"
-msgstr ""
+msgstr "Deze week"
 
 msgid "Today"
-msgstr ""
+msgstr "Vandaag"
 
 msgid "Travel & Events"
-msgstr ""
+msgstr "Reizen & gebeurtenssen"
 
 msgid "Trying to download the Youtube feed entries. Please wait..."
-msgstr ""
+msgstr "Probeer de Youtube feed entries binnen te halen. Even wachten..."
 
 msgid "Trying to download the Youtube search results. Please wait..."
-msgstr ""
+msgstr "Probeer de Youtube zoekresultatenbinnen te halen. Even wachten..."
 
 msgid "United States"
-msgstr ""
+msgstr "Verenigde Staten"
 
 msgid "View Count"
-msgstr ""
+msgstr "Aantal malen bekeken"
 
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
+

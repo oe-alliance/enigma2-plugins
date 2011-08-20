@@ -8,210 +8,223 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2011-08-14 17:35+0100\n"
+"Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
+"Language-Team: AndyBlac <RobvdDoes@gmail.com>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
 
 #, python-format
 msgid "%d kb/s"
-msgstr ""
+msgstr "%d kb/s"
 
 msgid "A basic FTP client"
-msgstr ""
+msgstr "Een eenvoudige FTP client"
 
 #, python-format
 msgid ""
 "A file with this name (%s) already exists locally.\n"
 "Do you want to overwrite it?"
 msgstr ""
+"Een bestand met deze naam (%s) bestaat lokaal al.\n"
+"Wilt u die overschrijven?"
 
 #, python-format
 msgid ""
 "A file with this name (%s) already exists on the remote host.\n"
 "Do you want to overwrite it?"
 msgstr ""
+"Een bestand met deze naam (%s) bestaat al op de host.\n"
+"Wilt u die overschrijven?"
 
 msgid ""
 "A transfer is currently in progress.\n"
 "What do you want to do?"
 msgstr ""
+"Een transfer is momenteel bezig.\n"
+"Wat wilt u doen?"
 
 msgid "Abort transfer"
-msgstr ""
+msgstr "Brekk transfer af"
 
 msgid "Add"
-msgstr ""
+msgstr "Voeg toe"
 
 msgid "Address:"
-msgstr ""
+msgstr "Adres:"
 
 #, python-format
 msgid "Are you sure you want to delete %s?"
-msgstr ""
+msgstr "Weet u zeker dat u %s wilt verwijderen?"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 msgid "Configuration saved."
-msgstr ""
+msgstr "Configuratie opgeslagen."
 
 msgid "Connect to FTP..."
-msgstr ""
+msgstr "Verbind met FTP..."
 
 msgid "Could not connect to ftp server!"
-msgstr ""
+msgstr "Could not connect to ftp server!"
 
 #, python-format
 msgid "Could not delete %s."
-msgstr ""
+msgstr "Kon %s niet verwijderen."
 
 msgid "Could not obtain list of files."
-msgstr ""
+msgstr "Kon geen lijst met bestanden krijgen."
 
 #, python-format
 msgid "Could not rename %s."
-msgstr ""
+msgstr "Kon %s niet hernoemen."
 
 msgid "Delete"
-msgstr ""
+msgstr "Verwijder"
 
 msgid "Download"
-msgstr ""
+msgstr "Download"
 
 msgid "Download finished."
-msgstr ""
+msgstr "Download gereed."
 
 #, python-format
 msgid "ETA %d:%02d min"
-msgstr ""
+msgstr "ETA %d:%02d min"
 
 msgid "Edit"
-msgstr ""
+msgstr "Bewerk"
 
 msgid "Enter URI"
-msgstr ""
+msgstr "Voer URL in"
 
 msgid "Enter URI of FTP Server:"
-msgstr ""
+msgstr "Voer URI van de FTP Server in:"
 
 msgid "Enter new filename:"
-msgstr ""
+msgstr "Voer nieuwe bestandsnaam in:"
 
 msgid "Error"
-msgstr ""
+msgstr "Fout"
 
 msgid "Error during download."
-msgstr ""
+msgstr "Fout tijdens download."
 
 msgid "Exit"
-msgstr ""
+msgstr "Sluit af"
 
 msgid "FTP Queue Manager"
-msgstr ""
+msgstr "FTP Queue Manager"
 
 msgid "FTP Server Editor"
-msgstr ""
+msgstr "FTP Server Editor"
 
 msgid "FTP Server Manager"
-msgstr ""
+msgstr "FTP Server Manager"
 
 msgid "Local"
-msgstr ""
+msgstr "Lokaal"
 
 msgid "Name:"
-msgstr ""
+msgstr "Naam:"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Parent Directory"
-msgstr ""
+msgstr "Parent Directory"
 
 msgid "Passive:"
-msgstr ""
+msgstr "Passief:"
 
 msgid "Password:"
-msgstr ""
+msgstr "Wachtwoord:"
 
 msgid "Port:"
-msgstr ""
+msgstr "Port:"
 
 msgid "Queue Manager"
-msgstr ""
+msgstr "Queue Manager"
 
 msgid "Queue processed."
-msgstr ""
+msgstr "Queue verwerkt."
 
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
 msgstr ""
+"Deze entry echt verwijderen?\n"
+"Dit kan niet ongedaan worden gemaakt!"
 
 msgid "Remote"
-msgstr ""
+msgstr "Remote"
 
 msgid "Remote (not connected)"
-msgstr ""
+msgstr "Remote (niet verbonden)"
 
 #, python-format
 msgid "Removed %s."
-msgstr ""
+msgstr "%s verwijderd."
 
 msgid "Removing directories is not supported."
-msgstr ""
+msgstr "Verwijderen van mappen wordt niet ondersteund"
 
 msgid "Rename"
-msgstr ""
+msgstr "Hernoem"
 
 #, python-format
 msgid "Renamed %s to %s."
-msgstr ""
+msgstr "%s in %s hernoemd."
 
 msgid "Run in Background"
-msgstr ""
+msgstr "Voer op de achtergrond uit"
 
 msgid "Save"
-msgstr ""
+msgstr "Sla op"
 
 msgid "Select local file list"
-msgstr ""
+msgstr "Selecteer de lokale bestandslijst"
 
 msgid "Select remote file list"
-msgstr ""
+msgstr "Selecteer de remote bestandslijst"
 
 msgid "Server Manager"
-msgstr ""
+msgstr "Server Manager"
 
 msgid ""
 "There already is an active connection.\n"
 "Do you want to abort it?"
 msgstr ""
+"Er is al een actieve verbinding.\n"
+"Wilt u afbreken?"
 
 msgid "There already is an active transfer."
-msgstr ""
+msgstr "Er is al een transfer bezig."
 
 msgid "Upload"
-msgstr ""
+msgstr "Upload"
 
 msgid "Upload finished."
-msgstr ""
+msgstr "Upload gereed."
 
 msgid "Username:"
-msgstr ""
+msgstr "Gebruikersnaam:"
 
 msgid "Which server do you want to connect to?"
-msgstr ""
+msgstr "Met welke server wilt u verbinden?"
 
 msgid "close"
-msgstr ""
+msgstr "sluit"
 
 msgid "enter directory/get file/put file"
-msgstr ""
+msgstr "ga map in/verkrijg bestand/plaats bestand"
 
 msgid "open menu"
-msgstr ""
+msgstr "open menu"
+
