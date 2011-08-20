@@ -82,7 +82,7 @@ class MenuWeights:
 
 		for text, values in iteritems(self.weights):
 			weight, hidden = values
-			extend((' <entry text="', str(text), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '/>\n'))
+			extend((' <entry text="', str(text), '" weight="', str(weight), '" hidden="', "yes" if hidden else "no", '"/>\n'))
 		append('\n</menusort>\n')
 
 		file = open(XML_CONFIG, 'w')
@@ -129,6 +129,7 @@ class SortableMenuList(MenuList):
 		l.setBuildFunc(self.buildListboxEntry)
 		self.selected = None
 		self.selectedColor = 8388608
+		self.hiddenColor = 8388564
 
 	def invalidate(self):
 		self.l.invalidate()
@@ -143,6 +144,8 @@ class SortableMenuList(MenuList):
 					self.l.setItemHeight(int(value))
 				elif attrib == "selectedColor":
 					self.selectedColor = int(parseColor(value))
+				elif attrib == "hiddenColor":
+					self.hiddenColor = int(parseColor(value))
 				else:
 					attribs.append((attrib, value))
 		self.skinAttributes = attribs
@@ -152,11 +155,11 @@ class SortableMenuList(MenuList):
 		size = self.l.getItemSize()
 		height = size.height()
 		width = size.width()
+		color = self.hiddenColor if menu[4] else None
 
-		# TODO: mark hidden entires
 		l = [
 			None,
-			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, height, 0, RT_HALIGN_LEFT|RT_WRAP, menu[0]),
+			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, height, 0, RT_HALIGN_LEFT|RT_WRAP, menu[0], color, color),
 		]
 		if menu[0] == self.selected:
 			l.insert(1, (eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, height, 0, RT_HALIGN_LEFT|RT_WRAP, '',  None, None, None, self.selectedColor, None, None))
@@ -191,7 +194,7 @@ class SortableMenu(Menu, HelpableScreen):
 				"ignore": lambda: None, # we need to overwrite some regular actions :-)
 				"toggleSelection": (self.toggleSelection, _("toggle selection")),
 				"selectEntry": (self.okbuttonClick, _("enter menu")),
-				#"hideEntry": (self.hideEntry, _("hide entry")),
+				"hideEntry": (self.hideEntry, _("hide entry")),
 			}, -1
 		)
 		self.selected = -1
@@ -200,7 +203,11 @@ class SortableMenu(Menu, HelpableScreen):
 		return None
 
 	def hideEntry(self):
-		pass
+		l = self["menu"].list
+		idx = self["menu"].getSelectedIndex()
+		x = l[idx]
+		l[idx] = (x[0], x[1], x[2], x[3], not x[4])
+		self["menu"].setList(l)
 
 	# copied from original Menu for simplicity
 	def addMenu(self, destList, node):
