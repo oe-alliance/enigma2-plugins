@@ -109,7 +109,7 @@ def main(session, **kwargs):
 
 	# Do not run in background while editing, this might screw things up
 	if autopoller is not None:
-		autopoller.pause()
+		autopoller.stop()
 
 	from AutoTimerOverview import AutoTimerOverview
 	session.openWithCallback(
@@ -126,26 +126,17 @@ def editCallback(session):
 
 	# Don't parse EPG if editing was canceled
 	if session is not None:
-		# Poll EPGCache
-		ret = autotimer.parseEPG()
-		session.open(
-			MessageBox,
-			_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered, %d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
-			type = MessageBox.TYPE_INFO,
-			timeout = 10
-		)
-
 		# Save xml
 		autotimer.writeXml()
 		# Poll EPGCache
-		ret = autotimer.parseEPG()
+		autotimer.parseEPG()
 
 	# Start autopoller again if wanted
 	if config.plugins.autotimer.autopoll.value:
 		if autopoller is None:
 			from AutoPoller import AutoPoller
 			autopoller = AutoPoller()
-		autopoller.start(initial = False)
+		autopoller.start()
 	# Remove instance if not running in background
 	else:
 		autopoller = None
@@ -183,12 +174,12 @@ def Plugins(**kwargs):
 	l = [
 		PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = autostart, needsRestart = False),
 		# TRANSLATORS: description of AutoTimer in PluginBrowser
-		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main, needsRestart = False),
+ 		PluginDescriptor(name="AutoTimer", description = _("Edit Timers and scan for new Events"), where = PluginDescriptor.WHERE_PLUGINMENU, icon = "plugin.png", fnc = main, needsRestart = False),
 		# TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
 		PluginDescriptor(name="AutoTimer", description= _("add AutoTimer"), where = PluginDescriptor.WHERE_MOVIELIST, fnc = movielist, needsRestart = False),
 		# TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
 		PluginDescriptor(name=_("add AutoTimer..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc = eventinfo, needsRestart = False),
-		PluginDescriptor(name=_("Auto Timers"), description = "Edit Timers and scan for new Events", where=PluginDescriptor.WHERE_MENU, fnc=timermenu),
+		PluginDescriptor(name=_("Auto Timers"), description = _("Edit Timers and scan for new Events"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu),
 	]
 	if config.plugins.autotimer.show_in_extensionsmenu.value:
 		l.append(extDescriptor)
