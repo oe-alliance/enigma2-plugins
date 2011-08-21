@@ -222,9 +222,12 @@ class AutoTimerTask(Components.Task.PythonTask):
 		self.recorddict = defaultdict(list)
 		for timer in chain(self.recordHandler.timer_list, self.recordHandler.processed_timers):
 			if timer and timer.service_ref:
-				event = self.epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
-				extdesc = event and event.getExtendedDescription() or ''
-				timer.extdesc = extdesc
+				if timer.eit is not None:
+					event = self.epgcache.lookupEventId(timer.service_ref.ref, timer.eit)
+					extdesc = event and event.getExtendedDescription() or ''
+					timer.extdesc = extdesc
+				elif not hasattr(timer, 'extdesc'):
+					timer.extdesc = ''
 				self.recorddict[str(timer.service_ref)].append(timer)
 
 		# Create dict of all movies in all folders used by an autotimer to compare with recordings
@@ -451,10 +454,6 @@ class AutoTimerTask(Components.Task.PythonTask):
 						print("[AutoTimer] Not adding new timer because counter is depleted.")
 						continue
 
-# 					if shortdesc != "":
-# 						newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
-# 					else:
-# 						newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, extdesc, eit)
 					newEntry = RecordTimerEntry(ServiceReference(serviceref), begin, end, name, shortdesc, eit)
 					newEntry.log(500, "[AutoTimer] Try to add new timer based on AutoTimer %s." % (timer.name))
 

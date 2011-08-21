@@ -286,7 +286,7 @@ class WAPfunctions(Source):
 		tag = param
 		try:
 			file = open("/etc/enigma2/movietags")
-			taglist = [x.rstrip() for x in file.readlines()]
+			taglist = [x.rstrip() for x in file]
 			while "" in taglist:
 				taglist.remove("")
 			file.close()

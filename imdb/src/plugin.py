@@ -214,11 +214,11 @@ class IMDB(Screen):
 
 			self.generalinfomask = re.compile(
 			'<h1 class="header".*?>(?P<title>.*?)<.*?</h1>.*?'
-			'(?:.*?<h4 class="inline">\s*(?P<g_director>Regisseur|Directors?):\s*</h4>.*?<a\s+href=\".*?\">(?P<director>.*?)</a>)*'
-			'(?:.*?<h4 class="inline">\s*(?P<g_creator>Sch\S*?pfer|Creators?):\s*</h4>.*?<a\s+href=\".*?\">(?P<creator>.*?)</a>)*'
-			'(?:.*?<h4 class="inline">\s*(?P<g_seasons>Seasons?):\s*</h4>.*?<a\s+href=\".*?\">(?P<seasons>\d+?)</a>)*'
-			'(?:.*?<h4 class="inline">\s*(?P<g_writer>Drehbuch|Writer).*?</h4>.*?<a\s+href=\".*?\">(?P<writer>.*?)</a>)*'
-			'(?:.*?<h4 class="inline">\s*(?P<g_country>Land|Country):\s*</h4>.*?<a\s+href=\".*?\">(?P<country>.*?)</a>)*'
+			'(?:.*?<h4 class="inline">\s*(?P<g_director>Regisseur|Directors?):\s*</h4>.*?<a\s+href=\".*?\"\s*>(?P<director>.*?)</a>)*'
+			'(?:.*?<h4 class="inline">\s*(?P<g_creator>Sch\S*?pfer|Creators?):\s*</h4>.*?<a\s+href=\".*?\"\s*>(?P<creator>.*?)</a>)*'
+			'(?:.*?<h4 class="inline">\s*(?P<g_seasons>Seasons?):\s*</h4>.*?<a\s+href=\".*?\"\s*>(?P<seasons>\d+?)</a>)*'
+			'(?:.*?<h4 class="inline">\s*(?P<g_writer>Drehbuch|Writer).*?</h4>.*?<a\s+href=\".*?\"\s*>(?P<writer>.*?)</a>)*'
+			'(?:.*?<h4 class="inline">\s*(?P<g_country>Land|Country):\s*</h4>.*?<a\s+href=\".*?\"\s*>(?P<country>.*?)</a>)*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_premiere>Premiere|Release Date).*?</h4>\s+(?P<premiere>.*?)\s*<span)*'
 			'(?:.*?<h4 class="inline">\s*(?P<g_alternativ>Auch bekannt als|Also Known As):\s*</h4>\s*(?P<alternativ>.*?)\s*<span)*'
 			, re.DOTALL)
@@ -245,7 +245,7 @@ class IMDB(Screen):
 			, re.DOTALL)
 
 			self.genreblockmask = re.compile('<h4 class="inline">Genre:</h4>\s<div class="info-content">\s+?(.*?)\s+?(?:Mehr|See more|</p|<a class|</div>)', re.DOTALL)
-			self.ratingmask = re.compile('="star-bar-user-rate"><b>(?P<rating>.*?)</b>', re.DOTALL)
+			self.ratingmask = re.compile('="ratingValue">(?P<rating>.*?)</', re.DOTALL)
 			self.castmask = re.compile('<td class="name">\s*<a.*?>(.*?)</a>.*?<td class="character">\s*<div>\s*(?:<a.*?>)?(.*?)(?:</a>)?\s*( \(as.*?\))?\s*</div>', re.DOTALL)
 			self.postermask = re.compile('<td .*?id="img_primary">.*?<img .*?src=\"(http.*?)\"', re.DOTALL)
 		else:
@@ -564,7 +564,7 @@ class IMDB(Screen):
 						Casttext += _(" as ") + self.htmltags.sub('', x.group(2).replace('/ ...','')).replace('\n', ' ')
 						if x.group(3):
 							Casttext += x.group(3)
-				if Casttext is not "":
+				if Casttext:
 					Casttext = _("Cast: ") + Casttext
 				else:
 					Casttext = _("No cast list found in the database.")
