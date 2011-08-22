@@ -161,10 +161,10 @@ class AutoMount():
 			if data['active'] == 'False' or data['active'] is False:
 				if data['mountusing'] == 'fstab':
 					if data['mounttype'] == 'nfs':
-						tmpcmd = 'umount ' + data['ip'] + ':/' + data['sharedir']
+						tmpcmd = 'umount -fl /media/net/'+ data['sharename']
 						self.unmountcommand = tmpcmd.encode("UTF-8")
 					if data['mounttype'] == 'cifs':
-						tmpcmd = 'umount //' + data['ip'] + '/' + data['sharedir']
+						tmpcmd = 'umount -fl /media/net/'+ data['sharename']
 						self.mountcommand = tmpcmd.encode("UTF-8")
 				elif data['mountusing'] == 'enigma2':
 					path = '/media/net/'+ data['sharename']
@@ -177,12 +177,12 @@ class AutoMount():
 
 				if data['mountusing'] == 'fstab':
 					if data['mounttype'] == 'nfs':
-						tmpcmd = 'umount ' + data['ip'] + ':/' + data['sharedir']
+						tmpcmd = 'umount -fl /media/net/'+ data['sharename']
 						self.unmountcommand = tmpcmd.encode("UTF-8")
 						tmpcmd = 'mount ' + data['ip'] + ':/' + data['sharedir']
 						self.mountcommand = tmpcmd.encode("UTF-8")
 					if data['mounttype'] == 'cifs':
-						tmpcmd = 'umount //' + data['ip'] + '/' + data['sharedir']
+						tmpcmd = 'umount -fl /media/net/'+ data['sharename']
 						self.unmountcommand = tmpcmd.encode("UTF-8")
 						tmpcmd = 'mount //' + data['ip'] + '/' + data['sharedir']
 						self.mountcommand = tmpcmd.encode("UTF-8")
