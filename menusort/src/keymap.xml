@@ -12,5 +12,7 @@
 		<key id="\x0a" mapto="selectEntry" flags="l" />
 		<key id="KEY_OK" mapto="selectEntry" flags="l" />
 		<key id="KEY_ENTER" mapto="selectEntry" flags="l" />
+
+		<key id="KEY_BLUE" mapto="hideEntry" flags="m" />
 	</map>
 </keymap>
