@@ -318,7 +318,7 @@ class AutoMount():
 					list.append(' </nfs>\n')
 					list.append('</fstab>\n')
 					out = open('/etc/fstab', 'a')
-					line = sharedata['ip'] + ":/" + sharedata['sharedir'] + " /media/net/" + sharedata['sharename'] + "    nfs        rsize=32768,wsize=32768,timeo=14,intr     0 0\n"
+					line = sharedata['ip'] + ":/" + sharedata['sharedir'] + " /media/net/" + sharedata['sharename'] + "    nfs        nfsvers=3,proto=tcp,rsize=32768,wsize=32768,timeo=14,intr     0 0\n"
 					out.write(line)
 					out.close()
 
