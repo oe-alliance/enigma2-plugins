@@ -15,14 +15,6 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/plugin.py:68
-msgid "Plugin menu"
-msgstr "Plugin Menü"
-
-#: ../src/plugin.py:68
-msgid "Extensions menu"
-msgstr "Erweiterungs-Menü"
-
 #: ../src/plugin.py:69
 msgid "SHOUTcast"
 msgstr "SHOUTcast"
@@ -287,27 +279,31 @@ msgstr "Name (erfordert GUI Neustart):"
 msgid "Description:"
 msgstr "Beschreibung:"
 
-#: ../src/plugin.py:871
+#: ../src/plugin.py:874
+msgid "Show in extension menu:"
+msgstr "Im Erweiterungs-Menü anzeigen"
+
+#: ../src/plugin.py:875
 msgid "Streaming rate:"
 msgstr "Bitrate:"
 
-#: ../src/plugin.py:872
+#: ../src/plugin.py:876
 msgid "Reload station list:"
 msgstr "Stationsliste neu laden:"
 
-#: ../src/plugin.py:873
+#: ../src/plugin.py:877
 msgid "Rip to single file, name is timestamped"
 msgstr "In eine einzelne Datei speichern"
 
-#: ../src/plugin.py:874
+#: ../src/plugin.py:878
 msgid "Create a directory for each stream"
 msgstr "Verzeichnis für jeden Stream generieren"
 
-#: ../src/plugin.py:875
+#: ../src/plugin.py:879
 msgid "Add sequence number to output file"
 msgstr "Dateien mit fortlaufender Nummerierung generieren"
 
-#: ../src/plugin.py:878
+#: ../src/plugin.py:881
 msgid "Recording location:"
 msgstr "Aufnahmepfad"
 
