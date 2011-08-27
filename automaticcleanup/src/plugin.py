@@ -63,7 +63,7 @@ from Screens.Setup import SetupSummary
 
 
 ###############################################################################        
-VERSION = "0.1.5"
+VERSION = "0.1.6"
 # History:
 # 0.1.2 First public version
 # 0.1.3 Prevention of timerlist cleanup if duplicated with EMC plugin
@@ -76,9 +76,10 @@ VERSION = "0.1.5"
 #       Help button added
 #       Cleanup crashlog feature invalidated for DMM plugin feed distribution
 # 0.1.5 Fix infinite loop when timerlist cleanup is set to option "immediately after recording"
+# 0.1.6 Fix crash if settings backup file date ends with "2"
 ###############################################################################  
 pluginPrintname = "[AutomaticCleanup Ver. %s]" %VERSION
-debug = False # If set True, plugin won't remove any file physically, instead prints file names in log for verification purposes
+DEBUG = False # If set True, plugin won't remove any file physically, instead prints file names in log for verification purposes
 ###############################################################################
 
 config.plugins.AutomaticCleanup = ConfigSubsection()
@@ -219,7 +220,7 @@ class AutomaticCleanup:
         checkInterval = 60 * 60 * 24 # check timerlist every 24 hours
 	def __init__(self, session):
 		self.session = session
-		if debug: print pluginPrintname, "Starting in debugging mode..."
+		if DEBUG: print pluginPrintname, "Starting in debugging mode..."
 		else: print pluginPrintname, "Starting AutomaticCleanup..."
 		self.timer = eTimer() # check timer
 		self.timer.callback.append(self.doCleanup)
@@ -292,7 +293,7 @@ class AutomaticCleanup:
 			if keep > -1: # don't keep all settings
 				# start checking the range in self.settingList which wasn't copied to
 				# self.deleteList
-				i = self.numSettings - keep
+				i = self.numSettings - keep + 1 # increment for uncounted latest
 				# if there are less settings than we want to keep, check the
 				# whole settings list
 				if i < 0:
@@ -302,9 +303,9 @@ class AutomaticCleanup:
 			
 			while i < self.numSettings:
 				self.backupPath = self.getBackupPath()
-				backupDate = self.settingList[i].lstrip(self.backupPath + "/")
-				backupDate = backupDate.rstrip('-enigma2settingsbackup.tar.gz')
-				if debug: print pluginPrintname, "Backup path: %s, file: %s, date: %s"  %(self.backupPath, self.settingList[i], backupDate)
+				backupDatePos = self.settingList[i].rfind('/') + 1
+				backupDate = self.settingList[i][backupDatePos:backupDatePos + 10]
+				if DEBUG: print pluginPrintname, "Backup path: %s, file: %s, date: %s"  %(self.backupPath, self.settingList[i], backupDate)
 				settingTime = mktime(strptime(backupDate, "%Y-%m-%d"))
 				if int(settingTime) > deleteOlderThan:
 					break
@@ -314,7 +315,7 @@ class AutomaticCleanup:
 			print pluginPrintname, "Found %i outdated setting backup(s)"  % i
 
 		for setting in self.deleteList:
-			if debug: print pluginPrintname, "Setting backup to delete:", setting
+			if DEBUG: print pluginPrintname, "Setting backup to delete:", setting
 			else: remove(setting)
 
 		print pluginPrintname, "Deleted %i setting backup(s)"  % len(self.deleteList)
@@ -345,7 +346,7 @@ class AutomaticCleanup:
 			else:
 				expiration = time() - int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) * 86400 # calculate end time for comparison with processed timers
 				print pluginPrintname, "Cleaning up timerlist-entries older than", strftime("%c", localtime(expiration))
-				if not debug:
+				if not DEBUG:
 					self.session.nav.RecordTimer.processed_timers = [timerentry for timerentry in self.session.nav.RecordTimer.processed_timers if timerentry.repeated or (timerentry.end and timerentry.end > expiration)] # cleanup timerlist
 		else:
 			print pluginPrintname, "Timerlist cleanup disabled"
@@ -393,7 +394,7 @@ class AutomaticCleanup:
 		if not scanPath.endswith("/"): scanPath += "/"
 		if scanPath.startswith("/hdd"): scanPath = "/media" + scanPath
 		if not path.exists(scanPath) or scanPath in exclude: return
-		if debug: print pluginPrintname, "Checking moviepath:", scanPath
+		if DEBUG: print pluginPrintname, "Checking moviepath:", scanPath
 		extensions = [".ts.ap", ".ts.cuts", ".ts.cutsr", ".ts.gm", ".ts.meta", ".ts.sc", ".eit", ".png", ".ts_mp.jpg"]
 
 		for p in listdir(scanPath):
@@ -404,7 +405,7 @@ class AutomaticCleanup:
 				for ext in extensions:
 					if p.endswith(ext):
 						if not path.exists(scanPath + p.replace(ext, ".ts")):							
-							if not debug:
+							if not DEBUG:
 								remove(scanPath + p)
 								print pluginPrintname, "Orphaned movie file deleted:", scanPath + p
 							else:

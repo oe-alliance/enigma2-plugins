@@ -1489,9 +1489,6 @@ class MerlinMusicPlayerLyrics(Screen):
 		self.onLayoutFinish.append(self.startRun)
 
 	def startRun(self):
-		# leoslyrics does not work anymore
-		#url = "http://api.leoslyrics.com/api_search.php?auth=duane&artist=%s&songtitle=%s" % (quote(self.currentSong.artist), quote(self.currentSong.title))
-		#sendUrlCommand(url, None,10).addCallback(self.getHID).addErrback(self.urlError)
 		# get lyric-text from id3 tag
 		try:
 			audio = ID3(self.currentSong.filename)
@@ -1508,42 +1505,28 @@ class MerlinMusicPlayerLyrics(Screen):
 		for frame in tag.values():
 			if frame.FrameID == "USLT":
 				return frame.text
-		return "No lyrics found in id3-tag"
+		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(self.currentSong.artist), quote(self.currentSong.title))
+		sendUrlCommand(url, None,10).addCallback(self.gotLyrics).addErrback(self.urlError)
+		return "No lyrics found in id3-tag, trying api.chartlyrics.com..."
 
 	
 	def urlError(self, error = None):
 		if error is not None:
 			self["resulttext"].setText(str(error.getErrorMessage()))
+			self["lyric_text"].setText("")
 
-	def getHID(self, xmlstring):
-		root = cet_fromstring(xmlstring)
-		url = ""
-		child = root.find("searchResults")
-		if child:
-			child2 = child.find("result")
-			if child2:
-				url = "http://api.leoslyrics.com/api_lyrics.php?auth=duane&hid=%s" % quote(child2.get("hid"))
-				sendUrlCommand(url, None,10).addCallback(self.getLyrics).addErrback(self.urlError)
-		if not url:
-			self["resulttext"].setText(_("No lyrics found"))
-
-	def getLyrics(self, xmlstring):
+	def gotLyrics(self, xmlstring):
 		root = cet_fromstring(xmlstring)
 		lyrictext = ""
-		child = root.find("lyric")
-		if child:
-			title = child.findtext("title").encode("utf-8", 'ignore')
-			child2 = child.find("artist")
-			if child2:
-				artist = child2.findtext("name").encode("utf-8", 'ignore')
-			else:
-				artist = ""
-			lyrictext = child.findtext("text").encode("utf-8", 'ignore')
-			self["lyric_text"].setText(lyrictext)
-			result = _("Response -> lyrics for: %s (%s)") % (title,artist)
-			self["resulttext"].setText(result)
+		lyrictext = root.findtext("{http://api.chartlyrics.com/}Lyric").encode("utf-8", 'ignore')
+		self["lyric_text"].setText(lyrictext)
+		title = root.findtext("{http://api.chartlyrics.com/}LyricSong").encode("utf-8", 'ignore')
+		artist = root.findtext("{http://api.chartlyrics.com/}LyricArtist").encode("utf-8", 'ignore')
+		result = _("Response -> lyrics for: %s (%s)") % (title,artist)
+		self["resulttext"].setText(result)
 		if not lyrictext:
 			self["resulttext"].setText(_("No lyrics found"))
+			self["lyric_text"].setText("")
 
 	def pageUp(self):
 		self["lyric_text"].pageUp()
