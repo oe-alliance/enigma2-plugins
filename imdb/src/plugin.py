@@ -18,7 +18,7 @@ from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigSubsection, ConfigYesNo
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from os import environ as os_environ
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 import re
@@ -372,6 +372,12 @@ class IMDB(Screen):
 			(_("Select from EPG"), self.openChannelSelection),
 		]
 
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/YTTrailer/plugin.py")):
+			list.extend((
+				(_("Play Trailer"), self.openYttrailer),
+				(_("Search Trailer"), self.searchYttrailer),
+			))
+
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
@@ -380,6 +386,27 @@ class IMDB(Screen):
 
 	def menuCallback(self, ret = None):
 		ret and ret[1]()
+
+	def openYttrailer(self):
+		try:
+			from Plugins.Extensions.YTTrailer.plugin import YTTrailer, baseEPGSelection__init__
+		except ImportError as ie:
+			pass
+		if baseEPGSelection__init__ is None:
+			return
+
+		ytTrailer = YTTrailer(self.session)
+		ytTrailer.showTrailer(self.eventName)
+
+	def searchYttrailer(self):
+		try:
+			from Plugins.Extensions.YTTrailer.plugin import YTTrailerList, baseEPGSelection__init__
+		except ImportError as ie:
+			pass
+		if baseEPGSelection__init__ is None:
+			return
+
+		self.session.open(YTTrailerList, self.eventName)
 
 	def openVirtualKeyBoard(self):
 		self.session.openWithCallback(
