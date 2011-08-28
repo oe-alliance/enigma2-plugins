@@ -246,6 +246,34 @@ msgstr "Löschen"
 msgid "rename current selected favorite"
 msgstr "Umbenennen"
 
+#: ../src/plugin.py:874
+msgid "Show in extension menu:"
+msgstr "Im Erweiterungs-Menü anzeigen"
+
+#: ../src/plugin.py:875
+msgid "Streaming rate:"
+msgstr "Bitrate:"
+
+#: ../src/plugin.py:876
+msgid "Reload station list:"
+msgstr "Stationsliste neu laden:"
+
+#: ../src/plugin.py:877
+msgid "Rip to single file, name is timestamped"
+msgstr "In eine einzelne Datei speichern"
+
+#: ../src/plugin.py:878
+msgid "Create a directory for each stream"
+msgstr "Verzeichnis für jeden Stream generieren"
+
+#: ../src/plugin.py:879
+msgid "Add sequence number to output file"
+msgstr "Dateien mit fortlaufender Nummerierung generieren"
+
+#: ../src/plugin.py:881
+msgid "Recording location:"
+msgstr "Aufnahmepfad"
+
 #, python-format
 msgid "search-criteria %s"
 msgstr "Suchkriterium %s"
