@@ -177,6 +177,20 @@ class EPGSearch(EPGSelection):
 		if PartnerBoxIconsEnabled:
 			EPGSelection.PartnerboxInit(self, False)
 
+		# Hook up actions for yttrailer if installed
+		try:
+			from Plugins.Extensions.YTTrailer.plugin import baseEPGSelection__init__
+		except ImportError as ie:
+			pass
+		else:
+			if baseEPGSelection__init__ is not None:
+				self["trailerActions"] = ActionMap(["InfobarActions", "InfobarTeletextActions"],
+				{
+					"showTv": self.showTrailer,
+					"showRadio": self.showTrailerList,
+					"startTeletext": self.showConfig
+				})
+
 	def onCreate(self):
 		self.setTitle(_("EPG Search"))
 
