@@ -95,6 +95,21 @@ class AutoMount():
 			for sharename, sharedata in self.automounts.items():
 				self.CheckMountPoint(sharedata, callback)
 
+	def sanitizeOptions(self, origOptions, cifs=False):
+		options = origOptions.strip()
+		if not options:
+			options = 'rsize=8192,wsize=8192'
+			if not cifs:
+				options += ',tcp'
+		else:
+			if 'rsize' not in options:
+				options += ',rsize=8192'
+			if 'wsize' not in options:
+				options += ',wsize=8192'
+			if not cifs and 'tcp' not in options and 'udp' not in options:
+				options += ',tcp'
+		return options
+
 	def CheckMountPoint(self, data, callback):
 		print "[AutoMount.py] CheckMountPoint"
 		print "[AutoMount.py] activeMounts:--->",self.activeMountsCounter
@@ -114,7 +129,7 @@ class AutoMount():
 				path = '/media/net/'+ data['sharename']
 				self.command = 'umount -fl '+ path
 
-			if data['active'] == 'True' or data['active'] is True:
+			elif data['active'] == 'True' or data['active'] is True:
 				path = '/media/net/'+ data['sharename']
 				if os_path.exists(path) is False:
 					createDir(path)
@@ -125,13 +140,13 @@ class AutoMount():
 
 				if data['mounttype'] == 'nfs':
 					if not os_path.ismount(path):
-						tmpcmd = 'mount -t nfs -o tcp,'+ data['options'] +',rsize=8192,wsize=8192 ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
+						tmpcmd = 'mount -t nfs -o '+ self.sanitizeOptions(data['options']) + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
 						self.command = tmpcmd.encode("UTF-8")
 
-				if data['mounttype'] == 'cifs':
+				elif data['mounttype'] == 'cifs':
 					if not os_path.ismount(path):
 						tmpusername = data['username'].replace(" ", "\\ ")
-						tmpcmd = 'mount -t cifs -o '+ data['options'] +',iocharset=utf8,rsize=8192,wsize=8192,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
+						tmpcmd = 'mount -t cifs -o '+ self.sanitizeOptions(data['options'], cifs=False) +',iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
 						self.command = tmpcmd.encode("UTF-8")
 
 			if self.command is not None:
