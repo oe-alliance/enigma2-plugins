@@ -141,7 +141,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	if sz_h < 500:
 		sz_h += 4
 	skin = """
-		<screen name="SHOUTcastWidget" position="center,65" title="%s" size="%d,%d">
+		<screen name="SHOUTcastWidget" position="center,65" title="SHOUTcast" size="%d,%d">
 			<ePixmap position="5,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap position="150,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 			<ePixmap position="295,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -160,7 +160,6 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			<widget name="cover" zPosition="2" position="5,%d" size="102,110" alphatest="blend" />
 			<ePixmap position="%d,41" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
 		</screen>""" %(
-			config.plugins.shoutcast.name.value + " "  + _("Ver.") + " " + shoutcast_pluginversion, # title
 			sz_w, sz_h, # size
 			sz_w - 135, # size headertext
 			sz_w - 100, # size statustext
@@ -388,8 +387,8 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		except: return []
 		data = root.find("data")
 		if data == None:
-			# print "[SHOUTcast] could not find data tag\n"
-			return []
+			print "[SHOUTcast] could not find data tag, assume flat listing\n"
+			return [SHOUTcastGenre(name=childs.get("name")) for childs in root.findall("genre")]
 		for glist in data.findall("genrelist"):
 			for childs in glist.findall("genre"):
 				gn = childs.get("name")
