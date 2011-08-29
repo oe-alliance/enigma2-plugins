@@ -274,6 +274,3 @@ msgstr ""
 msgid "Invalid Location"
 msgstr ""
 
-msgid "Show in extension menu:"
-msgstr ""
-
