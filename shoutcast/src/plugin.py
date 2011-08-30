@@ -71,7 +71,7 @@ config.plugins.shoutcast.dirname = ConfigDirectory(default = "/hdd/streamripper/
 config.plugins.shoutcast.riptosinglefile = ConfigYesNo(default = False)
 config.plugins.shoutcast.createdirforeachstream = ConfigYesNo(default = True)
 config.plugins.shoutcast.addsequenceoutputfile = ConfigYesNo(default = False)
-config.plugins.shoutcast.devid = ConfigText(default = "0", fixed_size = False, visible_width = 20)
+config.plugins.shoutcast.devid = ConfigText(default = "fa1jo93O_raeF0v9", fixed_size = False, visible_width = 20)
 
 
 class SHOUTcastGenre:
@@ -318,7 +318,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		if self.mode != self.GENRELIST:
 			self.stopReloadStationListTimer()
 			self.mode = self.GENRELIST
-		if not len(self.genreList):
+		if not self.genreList:
 			self.getGenreList()
 		else:
 			self.showGenreList()
@@ -358,7 +358,11 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self["headertext"].setText("")
 		self["statustext"].setText(_("Getting SHOUTcast genre list for %s..." % genre))
 		self["list"].hide()
-		url = "http://207.200.98.1/sbin/newxml.phtml"
+		devid = config.plugins.shoutcast.devid.value
+		if len(devid) > 8:
+			url = self.SC + "/genre/secondary?parentid=%s&k=%s&f=xml" % (id, devid)
+		else:
+			url = "http://207.200.98.1/sbin/newxml.phtml"
 		sendUrlCommand(url, None,10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
