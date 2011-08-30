@@ -146,7 +146,7 @@ class AutoMount():
 				elif data['mounttype'] == 'cifs':
 					if not os_path.ismount(path):
 						tmpusername = data['username'].replace(" ", "\\ ")
-						tmpcmd = 'mount -t cifs -o '+ self.sanitizeOptions(data['options'], cifs=False) +',iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
+						tmpcmd = 'mount -t cifs -o '+ self.sanitizeOptions(data['options'], cifs=True) +',iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
 						self.command = tmpcmd.encode("UTF-8")
 
 			if self.command is not None:
