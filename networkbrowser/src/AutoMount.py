@@ -210,8 +210,10 @@ class AutoMount():
 
 			if self.unmountcommand is not None or self.unmountcommand is not None:
 				self.command = []
-				self.command.append(self.unmountcommand)
-				self.command.append(self.mountcommand)
+				if self.unmountcommand is not None:
+					self.command.append(self.unmountcommand)
+				if self.unmountcommand is not None:
+					self.command.append(self.mountcommand)
 				print "[AutoMount.py] U/MOUNTCMD--->",self.command
 				self.MountConsole.eBatch(self.command, self.CheckMountPointFinished, [data, callback])
 			else:
