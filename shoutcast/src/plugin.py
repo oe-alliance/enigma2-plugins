@@ -20,7 +20,6 @@
 #  distributed other than under the conditions noted above.
 #
 
-
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -444,7 +443,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				elif self.mode == self.STATIONLIST:
 					self.stationListIndex = self["list"].getCurrentIndex()
 					self.stopPlaying()
-					url = "http://207.200.98.1%s?id=%s" % (self.tunein, sel.id)
+					url = self.SCY + "%s?id=%s" % (self.tunein, sel.id)
 					self["list"].hide()
 					self["statustext"].setText(_("Getting streaming data from\n%s") % sel.name)
 					self.currentStreamingStation = sel.name
@@ -503,7 +502,11 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self["headertext"].setText("")
 		self["statustext"].setText(_("Getting %s") %  self.headerTextString)
 		self["list"].hide()
-		self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?genre=%s" % genre
+		devid = config.plugins.shoutcast.devid.value
+		if len(devid) > 8:
+			self.stationListURL = self.SC + "/legacy/stationsearch?k=%s&search=%s" % (devid, genre)
+		else:
+			self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?genre=%s" % genre
 		self.stationListIndex = 0
 		sendUrlCommand(self.stationListURL, None, 10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
@@ -574,7 +577,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	def addStationToFavorite(self):
 		sel = self.getSelectedItem()
 		if sel is not None:
-			self.addFavorite(name = sel.name, text = "http://207.200.98.1%s?id=%s" % (self.tunein, sel.id), favoritetype = "pls", audio = sel.mt, bitrate = sel.br)			
+			self.addFavorite(name = sel.name, text = self.SCY + "%s?id=%s" % (self.tunein, sel.id), favoritetype = "pls", audio = sel.mt, bitrate = sel.br)			
 
 	def addCurrentStreamToFavorite(self):
 		self.addFavorite(name = self.currentStreamingStation, text = self.currentStreamingURL, favoritetype = "url")
@@ -628,7 +631,11 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			self["headertext"].setText("")
 			self["statustext"].setText(_("Searching SHOUTcast for %s...") % searchstring)
 			self["list"].hide()
-			self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?search=%s" % searchstring
+			devid = config.plugins.shoutcast.devid.value
+			if len(devid) > 8:
+			   self.stationListURL = self.SC + "/legacy/stationsearch?k=%s&search=%s" % (devid, searchstring)
+			else:
+			   self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?search=%s" % searchstring
 			self.mode = self.SEARCHLIST
 			self.searchSHOUTcastString = searchstring
 			self.stationListIndex = 0
@@ -689,7 +696,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		if currPlay is not None:
 			sTitle = currPlay.info().getInfoString(iServiceInformation.sTagTitle)
 			if (len(sTitle) != 0):
-				url = "http://images.google.com/search?tbm=isch&q=%s" % quote(sTitle)
+				url = "http://images.google.com/search?tbm=isch&q=%s&biw=102&bih=110&ift=jpg" % quote(sTitle)
 				sendUrlCommand(url, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 		if len(sTitle) == 0:
 			sTitle = "n/a"
