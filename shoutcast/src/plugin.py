@@ -57,9 +57,9 @@ from enigma import eConsoleAppContainer
 from Components.Input import Input
 from Screens.InputBox import InputBox
 from Components.FileList import FileList
+from timer import TimerEntry
 # for localized messages
 from . import _
-
 
 containerStreamripper = None
 
@@ -103,7 +103,6 @@ def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	factory = myHTTPClientFactory(url, *args, **kwargs)
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
-
 
 def main(session,**kwargs):
 	session.open(SHOUTcastWidget)
@@ -270,6 +269,12 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			# just to hear to recording music when starting the plugin...
 			self.currentStreamingStation = _("Recording stream station")
 			self.playServiceStream("http://localhost:9191")
+			
+		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
+	
+	def sleepTimerEntryOnStateChange(self, timer):
+		if timer.state == TimerEntry.StateEnded:
+			self.close()
 
 	def streamripperClosed(self, retval):
 		if retval == 0:
@@ -651,6 +656,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			except: pass
 	
 	def __onClose(self):
+		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
 		self.stopReloadStationListTimer()
 		self.session.nav.playService(self.CurrentService)
 		containerStreamripper.dataAvail.remove(self.streamripperDataAvail)
