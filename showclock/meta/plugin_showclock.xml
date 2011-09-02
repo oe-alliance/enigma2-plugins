@@ -6,10 +6,10 @@
                     <author>JuSt611</author>
                     <name>Show Clock</name>
                     <packagename>enigma2-plugin-extensions-showclock</packagename>
-                    <shortdescription>Push key &quot;Exit long&quot; to show the clock while watching TV.</shortdescription>
-                    <description>Push key &quot;Exit long&quot; to show the clock while watching TV. Clock will disappear after the specified timeout or by pushing key &quot;Exit long&quot; again.\n
-		    Modify the settings to match your preferences. To change the clock position, select &quot;Move clock&quot; and relocate.</description>
-          </info>
+                    <shortdescription>Push key \"Exit long\" to show the clock while watching TV.</shortdescription>
+                    <description>Push key \"Exit long\" to show the clock while watching TV. Clock will disappear after the specified timeout or by pushing key \"Exit long\" again.\n
+		    Modify the settings to match your preferences. To change the clock position, select \"Move clock\" and relocate.</description>
+         </info>
 	  <files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-showclock" />
 	  </files>

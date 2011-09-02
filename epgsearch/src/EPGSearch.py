@@ -177,6 +177,20 @@ class EPGSearch(EPGSelection):
 		if PartnerBoxIconsEnabled:
 			EPGSelection.PartnerboxInit(self, False)
 
+		# Hook up actions for yttrailer if installed
+		try:
+			from Plugins.Extensions.YTTrailer.plugin import baseEPGSelection__init__
+		except ImportError as ie:
+			pass
+		else:
+			if baseEPGSelection__init__ is not None:
+				self["trailerActions"] = ActionMap(["InfobarActions", "InfobarTeletextActions"],
+				{
+					"showTv": self.showTrailer,
+					"showRadio": self.showTrailerList,
+					"startTeletext": self.showConfig
+				})
+
 	def onCreate(self):
 		self.setTitle(_("EPG Search"))
 
@@ -336,7 +350,7 @@ class EPGSearch(EPGSelection):
 
 			# Search EPG, default to empty list
 			epgcache = eEPGCache.getInstance() # XXX: the EPGList also keeps an instance of the cache but we better make sure that we get what we want :-)
-			ret = epgcache.search(('RIBDT', 500, eEPGCache.PARTIAL_TITLE_SEARCH, searchString, eEPGCache.NO_CASE_CHECK)) or []
+			ret = epgcache.search(('RIBDT', 1000, eEPGCache.PARTIAL_TITLE_SEARCH, searchString, eEPGCache.NO_CASE_CHECK)) or []
 			ret.sort(key=itemgetter(2)) # sort by time
 
 			# Update List

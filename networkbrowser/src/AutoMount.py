@@ -94,9 +94,23 @@ class AutoMount():
 		else:
 			self.CheckMountPoint(self.checkList.pop(), callback)
 
+	def sanitizeOptions(self, origOptions, cifs=False):
+		options = origOptions.strip()
+		if not options:
+			options = 'rsize=8192,wsize=8192'
+			if not cifs:
+				options += ',tcp'
+		else:
+			if 'rsize' not in options:
+				options += ',rsize=8192'
+			if 'wsize' not in options:
+				options += ',wsize=8192'
+			if not cifs and 'tcp' not in options and 'udp' not in options:
+				options += ',tcp'
+		return options
+
 	def CheckMountPoint(self, item, callback):
 		data = self.automounts[item]
-		print "[AutoMount.py] CheckMountPoint", data
 		print "[AutoMount.py] activeMounts:--->",self.activeMountsCounter
 		if not self.MountConsole:
 			self.MountConsole = Console()
@@ -114,7 +128,7 @@ class AutoMount():
 				path = '/media/net/'+ data['sharename']
 				self.command = 'umount -fl '+ path
 
-			if data['active'] == 'True' or data['active'] is True:
+			elif data['active'] == 'True' or data['active'] is True:
 				path = '/media/net/'+ data['sharename']
 				if os_path.exists(path) is False:
 					createDir(path)
@@ -132,7 +146,7 @@ class AutoMount():
 						tmpcmd = 'mount -t nfs -o ' + options + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
 						self.command = tmpcmd.encode("UTF-8")
 
-				if data['mounttype'] == 'cifs':
+				elif data['mounttype'] == 'cifs':
 					if not os_path.ismount(path):
 						tmpusername = data['username'].replace(" ", "\\ ")
 						tmpcmd = 'mount -t cifs -o '+ data['options'] +',noatime,iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
