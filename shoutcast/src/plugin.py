@@ -71,11 +71,16 @@ config.plugins.shoutcast.dirname = ConfigDirectory(default = "/hdd/streamripper/
 config.plugins.shoutcast.riptosinglefile = ConfigYesNo(default = False)
 config.plugins.shoutcast.createdirforeachstream = ConfigYesNo(default = True)
 config.plugins.shoutcast.addsequenceoutputfile = ConfigYesNo(default = False)
+config.plugins.shoutcast.devid = ConfigText(default = "fa1jo93O_raeF0v9", fixed_size = False, visible_width = 20)
 
 
 class SHOUTcastGenre:
-	def __init__(self, name = ""):
+	def __init__(self, name = "", id = 0, haschilds = "false", parentid = 0, opened = "false"):
 		self.name = name
+		self.id = id
+		self.haschilds = haschilds
+		self.parentid = parentid
+		self.opened = opened
 
 class SHOUTcastStation:
 	def __init__(self, name = "", mt = "", id = "", br = "", genre = "", ct = "", lc = ""):
@@ -96,14 +101,14 @@ class myHTTPClientFactory(HTTPClientFactory):
 	agent="SHOUTcast", timeout=0, cookies=None,
 	followRedirect=1, lastModified=None, etag=None):
 		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
-		headers=headers, agent=agent, timeout=timeout, cookies=cookies,followRedirect=followRedirect)
+		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
 
 def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	scheme, host, port, path = client._parse(url)
 	factory = myHTTPClientFactory(url, *args, **kwargs)
+	# print "scheme=%s host=%s port=%s path=%s\n" % (scheme, host, port, path)
 	reactor.connectTCP(host, port, factory, timeout=timeout)
 	return factory.deferred
-
 
 def main(session,**kwargs):
 	session.open(SHOUTcastWidget)
@@ -123,72 +128,51 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 
 	STREAMRIPPER_BIN = '/usr/bin/streamripper'
 
+	SC = 'http://api.shoutcast.com'
+	SCY = 'http://yp.shoutcast.com'
+
 	FAVORITE_FILE_DEFAULT = '/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/favorites'
-	FAVORITE_FILE = '/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/favorites.user'
+	FAVORITE_FILE_OLD = '/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/favorites.user'
+	FAVORITE_FILE = '/etc/enigma2/SHOUTcast.favorites'
 
-	sz_w = getDesktop(0).size().width()
-	if sz_w == 1280:
-		skin = """
-			<screen name="SHOUTcastWidget" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="#00000000" title="SHOUTcast">
-				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap position="350,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap position="500,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_yellow" position="350,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_blue" position="500,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="headertext" position="50,77" zPosition="1" size="1180,23" font="Regular;20" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="statustext" position="20,270" zPosition="1" size="1240,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="list" position="50,110" zPosition="2" size="1180,445" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="titel" position="160,580" zPosition="1" size="900,20" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="station" position="160,600" zPosition="1" size="900,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="console" position="160,650" zPosition="1" size="900,50" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="cover" zPosition="2" position="50,580" size="102,110" alphatest="blend" />
-				<ePixmap position="1100,35" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
-			</screen>"""
-
-	elif sz_w == 1024:
-		skin = """
-			<screen name="SHOUTcastWidget" position="0,0" size="1024,576" flags="wfNoBorder" backgroundColor="#00000000" title="SHOUTcast">
-				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="200,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap position="350,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap position="500,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_green" position="200,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_yellow" position="350,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_blue" position="500,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="headertext" position="50,77" zPosition="1" size="900,23" font="Regular;20" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="statustext" position="20,270" zPosition="1" size="1004,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="list" position="50,110" zPosition="2" size="940,313" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="titel" position="160,450" zPosition="1" size="800,20" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="station" position="160,470" zPosition="1" size="800,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="console" position="160,520" zPosition="1" size="800,50" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="cover" zPosition="2" position="50,450" size="102,110" alphatest="blend" />
-				<ePixmap position="870,35" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
-			</screen>"""
-	else:
-
-		skin = """
-			<screen name="SHOUTcastWidget" position="0,0" size="720,576" flags="wfNoBorder" backgroundColor="#00000000" title="SHOUTcast">
-				<ePixmap position="50,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap position="210,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap position="370,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap position="530,30" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-				<widget render="Label" source="key_red" position="50,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_green" position="210,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_yellow" position="370,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget render="Label" source="key_blue" position="530,30" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="headertext" position="50,77" zPosition="1" size="620,23" font="Regular;20" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="statustext" position="50,270" zPosition="1" size="620,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="list" position="50,120" zPosition="2" size="620,249" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
-				<widget name="titel" position="155,400" zPosition="1" size="525,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="station" position="155,445" zPosition="1" size="525,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="console" position="155,490" zPosition="1" size="525,50" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
-				<widget name="cover" zPosition="2" position="50,400" size="102,110" alphatest="blend" />
-				<ePixmap position="550,77" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
-			</screen>"""
+	sz_w = getDesktop(0).size().width() - 90
+	sz_h = getDesktop(0).size().height() - 95
+	print "[SHOUTcast] desktop size %dx%d\n" % (sz_w+90, sz_h+100)
+	if sz_h < 500:
+		sz_h += 4
+	skin = """
+		<screen name="SHOUTcastWidget" position="center,65" title="SHOUTcast" size="%d,%d">
+			<ePixmap position="5,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="150,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap position="295,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap position="440,0" zPosition="4" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="585,10" zPosition="0" size="35,25" alphatest="on" />
+			<widget render="Label" source="key_red" position="5,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_green" position="150,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_yellow" position="295,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget render="Label" source="key_blue" position="440,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="headertext" position="5,47" zPosition="1" size="%d,23" font="Regular;20" transparent="1"  backgroundColor="#00000000"/>
+			<widget name="statustext" position="5,240" zPosition="1" size="%d,90" font="Regular;20" halign="center" valign="center" transparent="0"  backgroundColor="#00000000"/>
+			<widget name="list" position="5,80" zPosition="2" size="%d,%d" scrollbarMode="showOnDemand" transparent="0"  backgroundColor="#00000000"/>
+			<widget name="titel" position="115,%d" zPosition="1" size="%d,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
+			<widget name="station" position="115,%d" zPosition="1" size="%d,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
+			<widget name="console" position="115,%d" zPosition="1" size="%d,40" font="Regular;18" transparent="1"  backgroundColor="#00000000"/>
+			<widget name="cover" zPosition="2" position="5,%d" size="102,110" alphatest="blend" />
+			<ePixmap position="%d,41" zPosition="4" size="120,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/shoutcast-logo1-fs8.png" transparent="1" alphatest="on" />
+		</screen>""" %(
+			sz_w, sz_h, # size
+			sz_w - 135, # size headertext
+			sz_w - 100, # size statustext
+			sz_w - 10, sz_h - 205, # size list
+			sz_h - 105, # position titel
+			sz_w - 125, # size titel
+			sz_h - 70, # position station
+			sz_w - 125, # size station
+			sz_h - 25, # position console
+			sz_w - 125, # size console
+			sz_h - 105, # position cover
+			sz_w - 125, # position logo
+			)
 	
 	def __init__(self, session):
 		self.session = session
@@ -232,6 +216,8 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self.favoriteConfig = Config()
 		if os.path.exists(self.FAVORITE_FILE):
 			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE)
+		elif os.path.exists(self.FAVORITE_FILE_OLD):
+			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE_OLD)
 		else:
 			self.favoriteConfig.loadFromFile(self.FAVORITE_FILE_DEFAULT)
 		self.favoriteConfig.entriescount =  ConfigInteger(0)
@@ -287,7 +273,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	def reloadStationListTimerTimeout(self):
 		self.stopReloadStationListTimer()
 		if self.mode == self.STATIONLIST:
-			print "[SHOUTcast] reloadStationList: %s " % self.stationListURL
+			# print "[SHOUTcast] reloadStationList: %s " % self.stationListURL
 			sendUrlCommand(self.stationListURL, None,10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
 	def InputBoxStartRecordingCallback(self, returnValue = None):
@@ -332,15 +318,10 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		if self.mode != self.GENRELIST:
 			self.stopReloadStationListTimer()
 			self.mode = self.GENRELIST
-			if len(self.genreList):
-				self["headertext"].setText(_("SHOUTcast genre list"))
-				self["list"].setMode(self.mode)
-				self["list"].setList([ (x,) for x in self.genreList])
-				self["list"].moveToIndex(self.genreListIndex)
-			else:
-				self.getGenreList()
-		else:
+		if not self.genreList:
 			self.getGenreList()
+		else:
+			self.showGenreList()
 
 	def yellow_pressed(self):
 		if self.mode != self.STATIONLIST:
@@ -373,24 +354,27 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			self["list"].moveToIndex(favoriteListIndex)
 		self["list"].show()
 
-	def getGenreList(self):
+	def getGenreList(self, genre = "all" , id = 0):
 		self["headertext"].setText("")
-		self["statustext"].setText(_("Getting SHOUTcast genre list..."))
+		self["statustext"].setText(_("Getting SHOUTcast genre list for %s..." % genre))
 		self["list"].hide()
-		url = "http://207.200.98.1/sbin/newxml.phtml"
+		devid = config.plugins.shoutcast.devid.value
+		if len(devid) > 8:
+			url = self.SC + "/genre/secondary?parentid=%s&k=%s&f=xml" % (id, devid)
+		else:
+			url = "http://207.200.98.1/sbin/newxml.phtml"
 		sendUrlCommand(url, None,10).addCallback(self.callbackGenreList).addErrback(self.callbackGenreListError)
 
 	def callbackGenreList(self, xmlstring):
 		self["headertext"].setText(_("SHOUTcast genre list"))
 		self.genreListIndex = 0
 		self.mode = self.GENRELIST
-		self["list"].setMode(self.mode)
 		self.genreList = self.fillGenreList(xmlstring)
 		self["statustext"].setText("")
-		self["list"].setList([ (x,) for x in self.genreList])
-		if len(self.genreList):
-			self["list"].moveToIndex(self.genreListIndex)
-		self["list"].show()
+		if not len(self.genreList):
+			self["statustext"].setText(_("Got 0 genres. Could be a network problem.\nPlease try again..."))
+		else:
+			self.showGenreList()
 
 	def callbackGenreListError(self, error = None):
 		if error is not None:
@@ -398,18 +382,43 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				self["list"].hide()
 				self["statustext"].setText(_("%s\nPress green-button to try again...") % str(error.getErrorMessage()))
 			except: pass
-	
 		
-	def fillGenreList(self,xmlstring):
+	def fillGenreList(self, xmlstring):
 		genreList = []
+		# print "[SHOUTcast] fillGenreList\n%s" % xmlstring
 		try:
 			root = xml.etree.cElementTree.fromstring(xmlstring)
 		except: return []
-		for childs in root.findall("genre"):
-			genreList.append(SHOUTcastGenre(name = childs.get("name")))
+		data = root.find("data")
+		if data == None:
+			print "[SHOUTcast] could not find data tag, assume flat listing\n"
+			return [SHOUTcastGenre(name=childs.get("name")) for childs in root.findall("genre")]
+		for glist in data.findall("genrelist"):
+			for childs in glist.findall("genre"):
+				gn = childs.get("name")
+				gid = childs.get("id")
+				gparentid = childs.get("parentid")
+				ghaschilds = childs.get("haschildren")
+				#print "[SHOUTcast] Genre %s id=%s parent=%s haschilds=%s\n" % (gn, gid, gparentid, ghaschilds)
+				genreList.append(SHOUTcastGenre(name = gn, id = gid, parentid = gparentid, haschilds = ghaschilds))
+				if ghaschilds == "true":
+					for childlist in childs.findall("genrelist"):
+						for genre in childlist.findall("genre"):
+							gn = genre.get("name")
+							gid = genre.get("id")
+							gparentid = genre.get("parentid")
+							ghaschilds = genre.get("haschildren")
+							# print "[SHOUTcast]   Genre %s id=%s parent=%s haschilds=%s\n" % (gn, gid, gparentid, ghaschilds)
+							genreList.append(SHOUTcastGenre(name = gn, id = gid, parentid = gparentid, haschilds = ghaschilds))
 		return genreList
 
-	
+	def showGenreList(self):
+		self["headertext"].setText(_("SHOUTcast genre list"))
+		self["list"].setMode(self.mode)
+		self["list"].setList([ (x,) for x in self.genreList])
+		self["list"].moveToIndex(self.genreListIndex)
+		self["list"].show()
+
 	def onSelectionChanged(self):
 		pass
 		# till I find a better solution
@@ -439,7 +448,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 					self["list"].hide()
 					self["statustext"].setText(_("Getting streaming data from\n%s") % sel.name)
 					self.currentStreamingStation = sel.name
-					sendUrlCommand(url, None,10).addCallback(self.callbackPLS).addErrback(self.callbackStationListError)
+					sendUrlCommand(url, None, 10).addCallback(self.callbackPLS).addErrback(self.callbackStationListError)
 				elif self.mode == self.FAVORITELIST:
 					self.favoriteListIndex = self["list"].getCurrentIndex()
 					if sel.configItem.type.value == "url":
@@ -468,7 +477,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self["titel"].setText("")
 		self["station"].setText("")
 		self.summaries.setText("")
-		self["cover"].hide()
+		self["cover"].doHide()
 		self.session.nav.stopService()
 
 	def callbackPLS(self, result):
@@ -496,7 +505,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self["list"].hide()
 		self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?genre=%s" % genre
 		self.stationListIndex = 0
-		sendUrlCommand(self.stationListURL, None,10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
+		sendUrlCommand(self.stationListURL, None, 10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
 	def callbackStationList(self, xmlstring):
 		self.searchSHOUTcastString = ""
@@ -623,7 +632,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			self.mode = self.SEARCHLIST
 			self.searchSHOUTcastString = searchstring
 			self.stationListIndex = 0
-			sendUrlCommand(self.stationListURL, None,10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
+			sendUrlCommand(self.stationListURL, None, 10).addCallback(self.callbackStationList).addErrback(self.callbackStationListError)
 
 	def config(self):
 		self.stopReloadStationListTimer()
@@ -645,6 +654,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 
 	def Error(self, error = None):
 		if error is not None:
+			# print "[SHOUTcast] Error: %s\n" % error
 			try:
 				self["list"].hide()
 				self["statustext"].setText(str(error.getErrorMessage()))
@@ -661,28 +671,30 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		foundPos2 = result.find("&amp;imgrefurl=")
 		if foundPos != -1 and foundPos2 != -1:
 			print "[SHOUTcast] downloading cover from %s " % result[foundPos+14:foundPos2]
-			downloadPage(result[foundPos+14:foundPos2] ,"/tmp/.cover").addCallback(self.coverDownloadFinished).addErrback(self.coverDownloadFailed)
+			downloadPage(result[foundPos+14:foundPos2], "/tmp/.cover").addCallback(self.coverDownloadFinished).addErrback(self.coverDownloadFailed)
 
 	def coverDownloadFailed(self,result):
-        	print "[SHOUTcast] cover download failed: %s " % result
-		self["cover"].hide()
+		# print "[SHOUTcast] cover download failed: %s " % result
+		self["cover"].doHide()
 
 	def coverDownloadFinished(self,result):
-		print "[SHOUTcast] cover download finished"
+		# print "[SHOUTcast] cover download finished"
 		self["cover"].updateIcon("/tmp/.cover")
-		self["cover"].show()
+		self["cover"].doShow()
 		
 	def __evUpdatedInfo(self):
 		sTitle = ""
 		currPlay = self.session.nav.getCurrentService()
+		self["cover"].doHide()
 		if currPlay is not None:
 			sTitle = currPlay.info().getInfoString(iServiceInformation.sTagTitle)
-			if (len(sTitle) !=0):
-				url = "http://images.google.de/images?q=%s&btnG=Bilder-Suche" % quote(sTitle)
-				sendUrlCommand(url, None,10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
+			if (len(sTitle) != 0):
+				url = "http://images.google.com/search?tbm=isch&q=%s" % quote(sTitle)
+				sendUrlCommand(url, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 		if len(sTitle) == 0:
 			sTitle = "n/a"
 		title = _("Title: %s") % sTitle
+		print "[SHOUTcast __evUpdatedInfo] Title: %s " % title
 		self["titel"].setText(title)
 		self.summaries.setText(title)
 
@@ -691,13 +703,13 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		currPlay = self.session.nav.getCurrentService()
 		sAudioType = currPlay.info().getInfoString(iServiceInformation.sUser+10)
 		print "[SHOUTcast __evAudioDecodeError] audio-codec %s can't be decoded by hardware" % (sAudioType)
-		self.session.open(MessageBox, _("This Dreambox can't decode %s streams!") % sAudioType, type = MessageBox.TYPE_INFO,timeout = 20 )
+		self.session.open(MessageBox, _("This Dreambox can't decode %s streams!") % sAudioType, type = MessageBox.TYPE_INFO, timeout = 20 )
 
 	def __evPluginError(self):
 		currPlay = self.session.nav.getCurrentService()
 		message = currPlay.info().getInfoString(iServiceInformation.sUser+12)
 		print "[SHOUTcast __evPluginError]" , message
-		self.session.open(MessageBox, message, type = MessageBox.TYPE_INFO,timeout = 20 )
+		self.session.open(MessageBox, message, type = MessageBox.TYPE_INFO, timeout = 20 )
 
 	def doEofInternal(self, playing):
 		self.stopPlaying()
@@ -743,10 +755,19 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		return sel
 
 class Cover(Pixmap):
+	visible = 0
+
 	def __init__(self):
 		Pixmap.__init__(self)
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.paintIconPixmapCB)
+
+	def doShow(self):
+		self.visible = 1
+
+	def doHide(self):
+		self.visible = 0
+		self.hide()
 
 	def onShow(self):
 		Pixmap.onShow(self)
@@ -756,6 +777,8 @@ class Cover(Pixmap):
 		ptr = self.picload.getData()
 		if ptr != None:
 			self.instance.setPixmap(ptr.__deref__())
+			if self.visible:
+				self.show()
 
 	def updateIcon(self, filename):
 		self.picload.startDecode(filename)
@@ -765,7 +788,18 @@ class SHOUTcastList(GUIComponent, object):
 		width = self.l.getItemSize().width()
 		res = [ None ]
 		if self.mode == 0: # GENRELIST
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, 20, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.name))
+			print "[SHOUTcast] list name=%s haschilds=%s opened=%s\n" % (item.name, item.haschilds, item.opened)
+			if item.parentid == "0": # main genre
+				if item.haschilds == "true":
+					if item.opened == "true":
+						iname = "- %s" % item.name
+					else:
+						iname = "+ %s" % item.name
+				else:
+					iname = item.name
+			else:
+				iname = "     %s" % item.name
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, 22, 0, RT_HALIGN_LEFT|RT_VALIGN_CENTER, iname))
 		elif self.mode == 1: # STATIONLIST
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 3, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.name))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 23, width, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, item.ct))
@@ -795,7 +829,7 @@ class SHOUTcastList(GUIComponent, object):
 		if mode == 0: # GENRELIST
 			self.l.setItemHeight(22)
 		elif mode == 1 or mode == 2: # STATIONLIST OR FAVORITELIST
-			self.l.setItemHeight(63)
+			self.l.setItemHeight(69)
 
 	def connectSelChanged(self, fnc):
 		if not fnc in self.onSelectionChanged:
@@ -877,6 +911,7 @@ class SHOUTcastSetup(Screen, ConfigListScreen):
 			getConfigListEntry(_("Rip to single file, name is timestamped"), config.plugins.shoutcast.riptosinglefile),
 			getConfigListEntry(_("Create a directory for each stream"), config.plugins.shoutcast.createdirforeachstream),
 			getConfigListEntry(_("Add sequence number to output file"), config.plugins.shoutcast.addsequenceoutputfile),
+			getConfigListEntry(_("Developer Id:"), config.plugins.shoutcast.devid),
 				]
 		self.dirname = getConfigListEntry(_("Recording location:"), config.plugins.shoutcast.dirname)
 		self.list.append(self.dirname)
