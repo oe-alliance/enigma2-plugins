@@ -27,6 +27,7 @@ SUBDIRS = \
 	fancontrol2 \
 	filebrowser \
 	fritzcall \
+	fstabeditor \
 	ftpbrowser \
 	genuinedreambox \
 	googlemaps \
