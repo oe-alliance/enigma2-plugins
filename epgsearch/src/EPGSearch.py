@@ -30,7 +30,7 @@ from operator import itemgetter
 try:
 	from Plugins.Extensions.Partnerbox.PartnerboxEPGList import \
 			isInRemoteTimer, getRemoteClockPixmap
-	from Plugins.Extensions.Partnerbox.PartnerboxSetup import \
+	from Plugins.Extensions.Partnerbox.plugin import \
 			showPartnerboxIconsinEPGList
 	PartnerBoxIconsEnabled = showPartnerboxIconsinEPGList()
 except ImportError:
