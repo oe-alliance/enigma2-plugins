@@ -14,6 +14,7 @@ simpleRSS.update_notification = ConfigSelection(
 	choices = [
 		("notification", _("Notification")),
 		("preview", _("Preview")),
+		("ticker", _("Ticker")),
 		("none", _("none"))
 	],
 	default = "preview"
@@ -74,6 +75,11 @@ def closed():
 # Autostart
 def autostart(reason, **kwargs):
 	global rssPoller
+
+	if "session" in kwargs and config.plugins.simpleRSS.update_notification.value == "ticker":
+		import RSSTickerView as tv
+		if tv.tickerView is None:
+			tv.tickerView = kwargs["session"].instantiateDialog(tv.RSSTickerView)
 
 	# Instanciate when enigma2 is launching, autostart active and session present or installed during runtime
 	if reason == 0 and config.plugins.simpleRSS.autostart.value and \
