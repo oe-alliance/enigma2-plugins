@@ -83,7 +83,6 @@ class RSSTickerView(Screen):
 
 	def updateText(self, feed):
 		text = _("New Items") + ': ' + ' +++ '.join((item[0].decode('utf-8') for item in feed.history))
-		text = text[:1000] # DEBUG
 		self["newsLabel"].setText(text)
 
 	def display(self, feed=None):
