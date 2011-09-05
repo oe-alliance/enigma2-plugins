@@ -51,10 +51,6 @@ def initConfig():
 			initPartnerboxEntryConfig()
 			i += 1
 
-def showPartnerboxIconsinEPGList():
-	# for epgsearch	
-	return config.plugins.Partnerbox.enablepartnerboxepglist.value
-
 class PartnerboxSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="550,400" title="Partnerbox Setup" >

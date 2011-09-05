@@ -26,6 +26,7 @@ SUBDIRS = \
 	fancontrol2 \
 	filebrowser \
 	fritzcall \
+	fstabeditor \
 	ftpbrowser \
 	googlemaps \
 	growlee \
