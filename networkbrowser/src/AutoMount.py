@@ -208,11 +208,11 @@ class AutoMount():
 							tmpcmd = 'mount -t cifs -o '+ data['options'] +',noatime,iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
 							self.mountcommand = tmpcmd.encode("UTF-8")
 
-			if self.unmountcommand is not None or self.unmountcommand is not None:
+			if self.unmountcommand is not None or self.mountcommand is not None:
 				self.command = []
 				if self.unmountcommand is not None:
 					self.command.append(self.unmountcommand)
-				if self.unmountcommand is not None:
+				if self.mountcommand is not None:
 					self.command.append(self.mountcommand)
 				print "[AutoMount.py] U/MOUNTCMD--->",self.command
 				self.MountConsole.eBatch(self.command, self.CheckMountPointFinished, [data, callback])
