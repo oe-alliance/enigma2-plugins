@@ -714,6 +714,10 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				coverfile = coverfiles[self.currentcoverfile]
 				print "[SHOUTcast] downloading cover from %s to %s" % (url, coverfile)
 				downloadPage(url, coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
+		else:
+			if config.plugins.shoutcast.showcover.value:
+				self["cover"].doHide()
+
 
 	def coverDownloadFailed(self,result):
 		print "[SHOUTcast] cover download failed:", result
