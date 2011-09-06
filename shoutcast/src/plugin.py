@@ -56,9 +56,10 @@ from enigma import eConsoleAppContainer
 from Components.Input import Input
 from Screens.InputBox import InputBox
 from Components.FileList import FileList
-from timer import TimerEntry
 # for localized messages
 from . import _
+
+coverfiles = ("/tmp/.cover.ping", "/tmp/.cover.pong", "/tmp/.cover.pang")
 
 containerStreamripper = None
 config.plugins.shoutcast = ConfigSubsection()
@@ -178,7 +179,8 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.oldurl = None
+		self.oldtitle = None
+		self.currentcoverfile = 0
 		self.CurrentService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
 		if config.plugins.shoutcast.showcover.value:
@@ -259,12 +261,6 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			# just to hear to recording music when starting the plugin...
 			self.currentStreamingStation = _("Recording stream station")
 			self.playServiceStream("http://localhost:9191")
-			
-		self.session.nav.SleepTimer.on_state_change.append(self.sleepTimerEntryOnStateChange)
-	
-	def sleepTimerEntryOnStateChange(self, timer):
-		if timer.state == TimerEntry.StateEnded:
-			self.close()
 
 	def streamripperClosed(self, retval):
 		if retval == 0:
@@ -682,65 +678,79 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			except: pass
 	
 	def __onClose(self):
-		self.session.nav.SleepTimer.on_state_change.remove(self.sleepTimerEntryOnStateChange)
+		global coverfiles
+		for f in coverfiles:
+			try:
+				os.unlink(f)
+			except:
+				pass
 		self.stopReloadStationListTimer()
 		self.session.nav.playService(self.CurrentService)
 		containerStreamripper.dataAvail.remove(self.streamripperDataAvail)
 		containerStreamripper.appClosed.remove(self.streamripperClosed)
 
 	def GoogleImageCallback(self, result):
+		global coverfiles
 		foundPos = result.find("imgres?imgurl=")
 		foundPos2 = result.find("&amp;imgrefurl=")
 		if foundPos != -1 and foundPos2 != -1:
 			url=result[foundPos+14:foundPos2]
-			if len(url) > 15:
+			if len(url)>15:
+				url= url.replace(" ", "%20")
 				print "download url: %s " % url
-				if ".JP" in url.upper():
-					try:
-						os.unlink('/tmp/.cover')
-					except:
-						pass
-					print "[SHOUTcast] downloading cover from %s " % url
-					downloadPage(url, "/tmp/.cover").addCallback(self.coverDownloadFinished).addErrback(self.coverDownloadFailed)
+				upperl = url.upper()
+				validurl = (".JPG" in upperl) or (".PNG" in upperl) or (".GIF" in upperl) or (".JPEG" in upperl)
 			else:
-				print "[SHOUTcast] invalid cover url!"
+				validurl = False
+				print "[SHOUTcast] invalid cover url or pictureformat!"
+				if config.plugins.shoutcast.showcover.value:
+					self["cover"].doHide()
+			if validurl:
+				self.currentcoverfile = (self.currentcoverfile + 1) % len(coverfiles)
+				try:
+					os.unlink(coverfiles[self.currentcoverfile-1])
+				except:
+					pass
+				coverfile = coverfiles[self.currentcoverfile]
+				print "[SHOUTcast] downloading cover from %s to %s" % (url, coverfile)
+				downloadPage(url, coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
 
-			
 	def coverDownloadFailed(self,result):
 		print "[SHOUTcast] cover download failed:", result
 		if config.plugins.shoutcast.showcover.value:
 			self["cover"].doHide()
 
-	def coverDownloadFinished(self,result):
+	def coverDownloadFinished(self, result, coverfile):
 		if config.plugins.shoutcast.showcover.value:
-			self["cover"].updateIcon("/tmp/.cover")
+			print "[SHOUTcast] cover download finished:", coverfile
+			self["cover"].updateIcon(coverfile)
 			self["cover"].doShow()
 		
 	def __evUpdatedInfo(self):
 		sTitle = ""
 		currPlay = self.session.nav.getCurrentService()
-		if config.plugins.shoutcast.showcover.value:
-			self["cover"].doHide()
 		print "[SHOUTcast] playstatus: %s" % currPlay
 		if currPlay is not None:
 			sTitle = currPlay.info().getInfoString(iServiceInformation.sTagTitle)
-			if config.plugins.shoutcast.showcover.value:
-				print "[SHOUTcast] cover enabled!"
-				if (len(sTitle) != 0):
-					url = "http://images.google.com/search?tbm=isch&q=%s&biw=%s&bih=%s&ift=jpg" % (quote(sTitle), config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
-					if url != self.oldurl:
-						print "[Shoutcast] coverurl = %s " % url
-						sendUrlCommand(url, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
-						self.oldurl = url
+			if self.oldtitle != sTitle:
+				self.oldtitle=sTitle
+				sTitle = sTitle.replace("Title:", "")
+				if config.plugins.shoutcast.showcover.value:
+					print "[SHOUTcast] cover enabled!"
+					if (len(sTitle) != 0):
+						url = "http://images.google.com/search?tbm=isch&q=%s&biw=%s&bih=%s&ift=jpg" % (quote(sTitle), config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
 					else:
-						print "[Shoutcast] ignoring multiple request cover requests!"
-		if len(sTitle) == 0:
-			sTitle = "n/a"
-		title = _("Title: %s") % sTitle
-		print "[SHOUTcast __evUpdatedInfo] Title: %s " % title
-		self["titel"].setText(title)
-		self.summaries.setText(title)
-
+						url = "http://images.google.com/search?tbm=isch&q=notavailable&biw=%s&bih=%s&ift=jpg" % (config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
+					print "[Shoutcast] coverurl = %s " % url
+					sendUrlCommand(url, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
+				if len(sTitle) == 0:
+					sTitle = "n/a"
+				title = _("Title: %s") % sTitle
+				print "[SHOUTcast __evUpdatedInfo] Title: %s " % title
+				self["titel"].setText(title)
+				self.summaries.setText(title)
+			else:
+				print "[Shoutcast] Ignoring useless updated info provided by streamengine!"
 
 	def __evAudioDecodeError(self):
 		currPlay = self.session.nav.getCurrentService()
@@ -806,11 +816,13 @@ class Cover(Pixmap):
 		self.picload.PictureData.get().append(self.paintIconPixmapCB)
 
 	def doShow(self):
-		self.visible = 1
+		if not self.visible == 1:
+			self.visible = 1
 
 	def doHide(self):
-		self.visible = 0
-		self.hide()
+		if not self.visible == 0:
+			self.visible = 0
+			self.hide()
 
 	def onShow(self):
 		Pixmap.onShow(self)
