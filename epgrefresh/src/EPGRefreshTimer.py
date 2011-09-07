@@ -125,12 +125,8 @@ class EPGRefreshTimer(timer.Timer):
 	def setRefreshTimer(self, tocall):
 		# Add refresh Timer
 		now = localtime()
-		# XXX: basic workaround if the clock is not yet set
-		year = 2011
-		if now.tm_year > 2011:
-			year = now.tm_year
 		begin = mktime(
-			(year, now.tm_mon, now.tm_mday,
+			(now.tm_year, now.tm_mon, now.tm_mday,
 			config.plugins.epgrefresh.begin.value[0],
 			config.plugins.epgrefresh.begin.value[1],
 			0, now.tm_wday, now.tm_yday, now.tm_isdst)
