@@ -181,6 +181,8 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		Screen.__init__(self, session)
 		self.oldtitle = None
 		self.currentcoverfile = 0
+		self.currentGoogle = None
+		self.nextGoogle = None
 		self.CurrentService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
 		self["cover"] = Cover()
@@ -675,6 +677,12 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				self["list"].hide()
 				self["statustext"].setText(str(error.getErrorMessage()))
 			except: pass
+		if self.nextGoogle:
+			self.currentGoogle = self.nextGoogle
+			self.nextGoogle = None
+			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
+		else:
+			self.currentGoogle = None
 	
 	def __onClose(self):
 		global coverfiles
@@ -690,6 +698,12 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 
 	def GoogleImageCallback(self, result):
 		global coverfiles
+		if self.nextGoogle:
+			self.currentGoogle = self.nextGoogle
+			self.nextGoogle = None
+			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
+			return
+		self.currentGoogle = None
 		foundPos = result.find("imgres?imgurl=")
 		foundPos2 = result.find("&amp;imgrefurl=")
 		if foundPos != -1 and foundPos2 != -1:
@@ -733,15 +747,18 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			sTitle = currPlay.info().getInfoString(iServiceInformation.sTagTitle)
 			if self.oldtitle != sTitle:
 				self.oldtitle=sTitle
-				sTitle = sTitle.replace("Title:", "")
+				sTitle = sTitle.replace("Title:", "")[:55]
 				if config.plugins.shoutcast.showcover.value:
-					print "[SHOUTcast] cover enabled!"
-					if (len(sTitle) != 0):
+					if sTitle:
 						url = "http://images.google.com/search?tbm=isch&q=%s&biw=%s&bih=%s&ift=jpg" % (quote(sTitle), config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
 					else:
 						url = "http://images.google.com/search?tbm=isch&q=notavailable&biw=%s&bih=%s&ift=jpg" % (config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
 					print "[Shoutcast] coverurl = %s " % url
-					sendUrlCommand(url, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
+					if self.currentGoogle:
+						self.nextGoogle = url
+					else:
+						self.currentGoogle = url
+						sendUrlCommand(url, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 				if len(sTitle) == 0:
 					sTitle = "n/a"
 				title = _("Title: %s") % sTitle
