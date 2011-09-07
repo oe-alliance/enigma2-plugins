@@ -183,8 +183,7 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		self.currentcoverfile = 0
 		self.CurrentService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
-		if config.plugins.shoutcast.showcover.value:
-			self["cover"] = Cover()
+		self["cover"] = Cover()
 		self["key_red"] = StaticText(_("Record"))
 		self["key_green"] = StaticText(_("Genres"))
 		self["key_yellow"] = StaticText(_("Stations"))
@@ -714,10 +713,6 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				coverfile = coverfiles[self.currentcoverfile]
 				print "[SHOUTcast] downloading cover from %s to %s" % (url, coverfile)
 				downloadPage(url, coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
-		else:
-			if config.plugins.shoutcast.showcover.value:
-				self["cover"].doHide()
-
 
 	def coverDownloadFailed(self,result):
 		print "[SHOUTcast] cover download failed:", result
@@ -818,6 +813,8 @@ class Cover(Pixmap):
 		Pixmap.__init__(self)
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.paintIconPixmapCB)
+		self.decoding = None
+		self.decodeNext = None
 
 	def doShow(self):
 		if not self.visible == 1:
@@ -844,9 +841,19 @@ class Cover(Pixmap):
 			self.instance.setPixmap(ptr.__deref__())
 			if self.visible:
 				self.show()
+		if self.decodeNext is not None:
+			self.decoding = self.decodeNext
+			self.decodeNext = None
+			self.picload.startDecode(self.decoding)
+		else:
+			self.decoding = None
 
 	def updateIcon(self, filename):
-		self.picload.startDecode(filename)
+		if self.decoding is not None:
+			self.decodeNext = filename
+		else:
+			self.decoding = filename
+			self.picload.startDecode(filename)
 
 class SHOUTcastList(GUIComponent, object):
 	def buildEntry(self, item):
