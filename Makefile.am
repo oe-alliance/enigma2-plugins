@@ -22,6 +22,7 @@ SUBDIRS = \
 	epgsearch \
 	filebrowser \
 	fritzcall \
+	fstabeditor \
 	ftpbrowser \
 	googlemaps \
 	growlee \

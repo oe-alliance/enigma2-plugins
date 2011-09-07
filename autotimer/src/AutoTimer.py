@@ -250,7 +250,7 @@ class AutoTimerTask(Components.Task.PythonTask):
 					pass
 
 			# Search EPG, default to empty list
-			epgmatches = self.epgcache.search(('RITBDSE', 900, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or []
+			epgmatches = self.epgcache.search(('RITBDSE', 1000, typeMap[timer.searchType], match, caseMap[timer.searchCase])) or []
 			# Sort list of tuples by begin time 'B'
 			epgmatches.sort(key=itemgetter(3))
 

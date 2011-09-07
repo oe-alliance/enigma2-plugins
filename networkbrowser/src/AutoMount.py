@@ -2,13 +2,12 @@
 # for localized messages
 from __init__ import _
 from re import compile as re_compile
-from os import path as os_path, symlink, listdir, unlink, readlink, remove
+from os import path as os_path, symlink, listdir, unlink, readlink, remove, rename, path, mkdir
 
 from enigma import eTimer
 from Components.Console import Console
 from Components.Harddisk import harddiskmanager #global harddiskmanager
 from Tools.Directories import isMount, removeDir, createDir
-from os import rename, path, mkdir, remove
 
 from xml.etree.cElementTree import parse as cet_parse
 
@@ -47,7 +46,6 @@ class AutoMount():
 			return Len > 0 and definitions[Len-1].text or default
 		# Config is stored in "mountmanager" element
 		# Read out NFS Mounts
-
 		for fstab in tree.findall("fstab"):
 			for nfs in fstab.findall("nfs"):
 				for mount in nfs.findall("mount"):
@@ -140,9 +138,23 @@ class AutoMount():
 		else:
 			self.CheckMountPoint(self.checkList.pop(), callback)
 
+	def sanitizeOptions(self, origOptions, cifs=False):
+		options = origOptions.strip()
+		if not options:
+			options = 'rsize=8192,wsize=8192'
+			if not cifs:
+				options += ',tcp'
+		else:
+			if 'rsize' not in options:
+				options += ',rsize=8192'
+			if 'wsize' not in options:
+				options += ',wsize=8192'
+			if not cifs and 'tcp' not in options and 'udp' not in options:
+				options += ',tcp'
+		return options
+
 	def CheckMountPoint(self, item, callback):
 		data = self.automounts[item]
-		print "[AutoMount.py] CheckMountPoint", data
 		print "[AutoMount.py] activeMounts:--->",self.activeMountsCounter
 		if not self.MountConsole:
 			self.MountConsole = Console()
@@ -199,13 +211,13 @@ class AutoMount():
 								options = "tcp,noatime," + data['options']
 							else:
 								options = "tcp,noatime"
-							tmpcmd = 'mount -t nfs -o ' + options + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
+							tmpcmd = 'mount -t nfs -o ' + self.sanitizeOptions(data['options']) + ' ' + data['ip'] + ':/' + tmpsharedir + ' ' + path
 							self.mountcommand = tmpcmd.encode("UTF-8")
 
-					if data['mounttype'] == 'cifs':
+					elif data['mounttype'] == 'cifs':
 						if not os_path.ismount(path):
 							tmpusername = data['username'].replace(" ", "\\ ")
-							tmpcmd = 'mount -t cifs -o '+ data['options'] +',noatime,iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
+							tmpcmd = 'mount -t cifs -o ' + self.sanitizeOptions(data['options'], cifs=True) +',iocharset=utf8,username='+ tmpusername + ',password='+ data['password'] + ' //' + data['ip'] + '/' + tmpsharedir + ' ' + path
 							self.mountcommand = tmpcmd.encode("UTF-8")
 
 			if self.unmountcommand is not None or self.mountcommand is not None:

@@ -76,6 +76,9 @@ config.plugins.Partnerbox.entriescount =  ConfigInteger(0)
 config.plugins.Partnerbox.Entries = ConfigSubList()
 initConfig()
 
+def showPartnerboxIconsinEPGList():
+	# for epgsearch	
+	return config.plugins.Partnerbox.enablepartnerboxepglist.value
 
 def partnerboxpluginStart(session, what):
 	count = config.plugins.Partnerbox.entriescount.value

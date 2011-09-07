@@ -201,6 +201,10 @@ fritzcall/po/Makefile
 fritzcall/src/Makefile
 fritzcall/src/images/Makefile
 
+fstabeditor/Makefile
+fstabeditor/meta/Makefile
+fstabeditor/src/Makefile
+
 ftpbrowser/Makefile
 ftpbrowser/meta/Makefile
 ftpbrowser/po/Makefile
