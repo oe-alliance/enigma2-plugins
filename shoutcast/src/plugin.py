@@ -861,7 +861,9 @@ class Cover(Pixmap):
 		if self.decodeNext is not None:
 			self.decoding = self.decodeNext
 			self.decodeNext = None
-			self.picload.startDecode(self.decoding)
+			if self.picload.startDecode(self.decoding) != 0:
+				print "[Shoutcast] Failed to start decoding next image"
+				self.decoding = None
 		else:
 			self.decoding = None
 
@@ -869,8 +871,11 @@ class Cover(Pixmap):
 		if self.decoding is not None:
 			self.decodeNext = filename
 		else:
-			self.decoding = filename
-			self.picload.startDecode(filename)
+			if self.picload.startDecode(filename) == 0:
+				self.decoding = filename
+			else:
+				print "[Shoutcast] Failed to start decoding image"
+				self.decoding = None
 
 class SHOUTcastList(GUIComponent, object):
 	def buildEntry(self, item):
