@@ -58,14 +58,17 @@ from enigma import eDVBLocalTimeHandler
 
 def timeCallback(isCallback=True):
 	"""Time Callback/Autostart management."""
-	now = localtime()
+	thInstance = eDVBLocalTimeHandler.getInstance()
 	if isCallback:
-		eDVBLocalTimeHandler.getInstance().m_timeUpdated.get().remove(timeCallback)
-	elif now.tm_year < 2011:
-		eDVBLocalTimeHandler.getInstance().m_timeUpdated.get().append(timeCallback)
+		# NOTE: this assumes the clock is actually ready when called back
+		# this may not be true, but we prefer silently dying to waiting forever
+		thInstance.m_timeUpdated.get().remove(timeCallback)
+	elif not thInstance.ready():
+		thInstance.m_timeUpdated.get().append(timeCallback)
 		return
 
 	if config.plugins.epgrefresh.wakeup.value:
+		now = localtime()
 		begin = int(mktime(
 			(now.tm_year, now.tm_mon, now.tm_mday,
 			config.plugins.epgrefresh.begin.value[0],
