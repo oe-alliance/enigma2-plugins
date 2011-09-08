@@ -140,6 +140,10 @@ easymedia/meta/Makefile
 easymedia/po/Makefile
 easymedia/src/Makefile
 
+ecasa/Makefile
+ecasa/meta/Makefile
+ecasa/src/Makefile
+
 eibox/Makefile
 eibox/meta/Makefile
 eibox/po/Makefile

@@ -19,6 +19,7 @@ SUBDIRS = \
 	dyndns \
 	easyinfo \
 	easymedia \
+	ecasa \
 	eibox \
 	elektro \
 	emailclient \
