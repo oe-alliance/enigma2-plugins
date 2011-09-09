@@ -19,6 +19,7 @@ from Components.config import config
 
 #pragma mark Picasa
 from .PicasaApi import PicasaApi
+from TagStrip import strip_readable
 
 from enigma import ePicLoad, ePythonMessagePump, getDesktop
 from collections import deque
@@ -228,25 +229,57 @@ class EcasaOverview(EcasaPictureWall):
 		# TODO: implement
 
 class EcasaPicture(Screen, HelpableScreen):
+	PAGE_PICTURE = 0
+	PAGE_INFO = 1
 	def __init__(self, session, photo, api=None):
 		size_w = getDesktop(0).size().width()
 		size_h = getDesktop(0).size().height()
-		self.skin = """
-		<screen position="0,0" size="%d,%d" title="%s" flags="wfNoBorder">
-			 <widget name="pixmap" position="0,0" size="%d,%d" backgroundColor="black"/>
-		</screen>""" % (size_w,size_h,photo.title.text.encode('utf-8'),size_w,size_h)
+		self.skin = """<screen position="0,0" size="{size_w},{size_h}" title="{title}" flags="wfNoBorder">
+			<widget name="pixmap" position="0,0" size="{size_w},{size_h}" backgroundColor="black" zPosition="2"/>
+			<widget source="title" render="Label" position="25,20" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
+			<widget source="summary" render="Label" position="25,60" zPosition="1" size="{labelwidth},100" valign="top" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
+			<widget source="keywords" render="Label" position="25,160" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
+			<widget source="camera" render="Label" position="25,180" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
+		</screen>""".format(size_w=size_w,size_h=size_h,title=photo.title.text.encode('utf-8'), labelwidth=size_w-50)
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
 		self.photo = photo
+		self.page = self.PAGE_PICTURE
 
 		self['pixmap'] = Pixmap()
+
+		unk = _("unknown")
+
+		# camera
+		if photo.exif.make and photo.exif.model:
+			camera = '%s %s' % (photo.exif.make.text, photo.exif.model.text)
+		elif photo.exif.make:
+			camera = photo.exif.make.text
+		elif photo.exif.model:
+			camera = photo.exif.model.text
+		else:
+			camera = unk
+		self['camera'] = StaticText(_("Camera: %s") % (camera,))
+
+		title = photo.title.text if photo.title else unk
+		self['title'] = StaticText(_("Title: %s") % (title,))
+		print(photo.summary.text)
+		summary = strip_readable(photo.summary.text) if photo.summary else unk
+		self['summary'] = StaticText(_("Summary: %s") % (summary,))
+		if photo.media and photo.media.keywords:
+			keywords = photo.media.keywords.text
+			# TODO: find a better way to handle this
+			if len(keywords) > 50:
+				keywords = keywords[:47] + "..."
+		else:
+			keywords = unk
+		self['keywords'] = StaticText(_("Keywords: %s") % (keywords,))
 
 		self["pictureActions"] = HelpableActionMap(self, "EcasaPictureActions", {
 			"info": (self.info, _("show metadata")),
 			"exit": (self.close, _("Close")),
 			}, -1)
-
 
 		try:
 			real_w = int(photo.media.content[0].width.text)
@@ -282,6 +315,12 @@ class EcasaPicture(Screen, HelpableScreen):
 
 	def info(self):
 		our_print("info")
+		if self.page == self.PAGE_PICTURE:
+			self.page = self.PAGE_INFO
+			self['pixmap'].hide()
+		else:
+			self.page = self.PAGE_PICTURE
+			self['pixmap'].show()
 
 #pragma mark - Thread
 
