@@ -10,5 +10,6 @@
 		<key id="KEY_BACK" mapto="prevPage" flags="m"/>
 		<key id="KEY_OK" mapto="select" flags="m"/>
 		<key id="KEY_RED" mapto="exit" flags="m"/>
+		<key id="KEY_EXIT" mapto="exit" flags="m"/>
 	</map>
 </keymap>
