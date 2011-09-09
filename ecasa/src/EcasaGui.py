@@ -30,7 +30,8 @@ except NameError:
 our_print = lambda *args, **kwargs: print("[EcasaGui]", *args, **kwargs)
 
 class EcasaPictureWall(Screen, HelpableScreen):
-	skin = """<screen position="center,center" size="600,400">
+	PICS_PER_PAGE = 15
+	skin = """<screen position="center,center" size="600,380">
 		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
 		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
 		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on"/>
@@ -40,18 +41,23 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
-		<!-- TODO: check size! -->
-		<widget name="image0" position="30,50" size="72,72"/>
-		<widget name="image1" position="110,50" size="72,72"/>
-		<widget name="image2" position="190,50" size="72,72"/>
-		<widget name="image3" position="30,150" size="72,72"/>
-		<widget name="image4" position="110,150" size="72,72"/>
-		<widget name="image5" position="190,150" size="72,72"/>
-		<widget name="image6" position="30,250" size="72,72"/>
-		<widget name="image7" position="110,250" size="72,72"/>
-		<widget name="image8" position="190,250" size="72,72"/>
+		<widget name="image0"  position="30,50"   size="90,90"/>
+		<widget name="image1"  position="140,50"  size="90,90"/>
+		<widget name="image2"  position="250,50"  size="90,90"/>
+		<widget name="image3"  position="360,50"  size="90,90"/>
+		<widget name="image4"  position="470,50"  size="90,90"/>
+		<widget name="image5"  position="30,160"  size="90,90"/>
+		<widget name="image6"  position="140,160" size="90,90"/>
+		<widget name="image7"  position="250,160" size="90,90"/>
+		<widget name="image8"  position="360,160" size="90,90"/>
+		<widget name="image9"  position="470,160" size="90,90"/>
+		<widget name="image10" position="30,270"  size="90,90"/>
+		<widget name="image11" position="140,270" size="90,90"/>
+		<widget name="image12" position="250,270" size="90,90"/>
+		<widget name="image13" position="360,270" size="90,90"/>
+		<widget name="image14" position="470,270" size="90,90"/>
 		<!-- TODO: find/create :P -->
-		<widget name="highlight" position="20,40" size="92,92"/>
+		<widget name="highlight" position="20,45" size="100,100"/>
 		</screen>"""
 	def __init__(self, session, api=None):
 		Screen.__init__(self, session)
@@ -67,7 +73,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText()
 		self["key_blue"] = StaticText()
-		for i in xrange(9):
+		for i in xrange(self.PICS_PER_PAGE):
 			self['image%d' % i] = Pixmap()
 			self['title%d' % i] = StaticText()
 		self["highlight"] = MovingPixmap()
@@ -90,7 +96,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.gotPicture)
 		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((72, 72, sc[0], sc[1], False, 1, '#ff000000')) # TODO: hardcoded size is evil!
+		self.picload.setPara((90, 90, sc[0], sc[1], False, 1, '#ff000000')) # TODO: hardcoded size is evil!
 		self.currentphoto = None
 		self.queue = deque()
 
@@ -132,12 +138,13 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		our_print("setup")
 		self.queue.clear()
 		pictures = self.pictures
-		for i in xrange(9):
+		for i in xrange(self.PICS_PER_PAGE):
 			try:
 				our_print("trying to initiate download of idx", i+self.offset)
 				self.api.downloadThumbnail(pictures[i+self.offset]).addCallbacks(self.pictureDownloaded, self.pictureDownloadFailed)
 			except IndexError:
 				# no more pictures
+				# TODO: set invalid pic for remaining items
 				our_print("no more pictures in setup")
 				break
 
@@ -150,9 +157,22 @@ class EcasaPictureWall(Screen, HelpableScreen):
 	def right(self):
 		our_print("RIGHT")
 	def nextPage(self):
-		our_print("NEXT PAGE")
+		our_print("nextPage")
+		offset = self.offset + self.PICS_PER_PAGE
+		if offset > len(self.pictures):
+			self.offset = 0
+		else:
+			self.offset = offset
+		self.setup()
 	def prevPage(self):
-		our_print("PREV PAGE")
+		our_print("prevPage")
+		offset = self.offset - self.PICS_PER_PAGE
+		if offset < 0:
+			Len = len(self.pictures)
+			self.offset = Len - (Len % self.PICS_PER_PAGE)
+		else:
+			self.offset = offset
+		self.setup()
 	def select(self):
 		our_print("SELECT")
 
@@ -164,6 +184,7 @@ class EcasaOverview(EcasaPictureWall):
 
 	def go(self):
 		self.onLayoutFinish.remove(self.go)
+		# NOTE: possibility of a socket.timeout
 		self.pictures = self.api.getFeatured()
 		self.setup()
 
