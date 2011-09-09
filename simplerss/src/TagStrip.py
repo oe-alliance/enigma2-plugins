@@ -14,13 +14,13 @@ def strip_readable(html):
 	html = html.replace('\n', ' ')
 
 	# Replace <br> by newlines
-	html = sub('<br(\s+/)?>', '\n', html)
+	html = sub('<br(\s*/)?>', '\n', html)
 
 	# Replace <p>, <ul>, <ol> and end of these tags by newline
-	html = sub('</?(p|ul|ol)(\s+.*?)?>', '\n', html)
+	html = sub('</?(p|ul|ol)(\s*.*?)?>', '\n', html)
 
 	# Replace <li> by - and </li> by newline
-	html = sub('<li(\s+.*?)?>', '-', html)
+	html = sub('<li(\s*.*?)?>', '-', html)
 	html = html.replace('</li>', '\n')
 
 	# Replace </div> by newline
