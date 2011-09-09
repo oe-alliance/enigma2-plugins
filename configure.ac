@@ -110,6 +110,7 @@ automatictimerlistcleanup/src/Makefile
 
 automaticvolumeadjustment/Makefile
 automaticvolumeadjustment/meta/Makefile
+automaticvolumeadjustment/po/Makefile
 automaticvolumeadjustment/src/Makefile
 
 autoresolution/Makefile

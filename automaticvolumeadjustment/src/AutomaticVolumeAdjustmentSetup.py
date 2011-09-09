@@ -20,6 +20,9 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
+# for localized messages
+from . import _
+
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eServiceReference
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox

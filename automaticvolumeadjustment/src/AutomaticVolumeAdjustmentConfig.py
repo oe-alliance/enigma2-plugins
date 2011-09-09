@@ -20,6 +20,9 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
+# for localized messages
+from . import _
+
 from Components.config import ConfigSubsection, ConfigText, \
 	config, ConfigInteger, Config, ConfigSubList, ConfigDirectory, NoSave, ConfigYesNo, ConfigSelectionNumber, ConfigSelection
 from os import path as os_path, open as os_open, close as os_close, O_RDWR as os_O_RDWR, O_CREAT  as os_O_CREAT 

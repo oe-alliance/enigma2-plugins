@@ -20,6 +20,9 @@
 #  modify it (if you keep the license), but it may not be commercially 
 #  distributed other than under the conditions noted above.
 #
+# for localized messages
+from . import _
+
 from Plugins.Plugin import PluginDescriptor
 from AutomaticVolumeAdjustmentSetup import AutomaticVolumeAdjustmentConfigScreen
 from AutomaticVolumeAdjustment import AutomaticVolumeAdjustment
