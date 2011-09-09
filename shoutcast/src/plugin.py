@@ -181,10 +181,11 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 		Screen.__init__(self, session)
 		self.oldtitle = None
 		self.currentcoverfile = 0
+		self.currentGoogle = None
+		self.nextGoogle = None
 		self.CurrentService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
-		if config.plugins.shoutcast.showcover.value:
-			self["cover"] = Cover()
+		self["cover"] = Cover()
 		self["key_red"] = StaticText(_("Record"))
 		self["key_green"] = StaticText(_("Genres"))
 		self["key_yellow"] = StaticText(_("Stations"))
@@ -676,6 +677,12 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				self["list"].hide()
 				self["statustext"].setText(str(error.getErrorMessage()))
 			except: pass
+		if self.nextGoogle:
+			self.currentGoogle = self.nextGoogle
+			self.nextGoogle = None
+			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
+		else:
+			self.currentGoogle = None
 	
 	def __onClose(self):
 		global coverfiles
@@ -691,6 +698,12 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 
 	def GoogleImageCallback(self, result):
 		global coverfiles
+		if self.nextGoogle:
+			self.currentGoogle = self.nextGoogle
+			self.nextGoogle = None
+			sendUrlCommand(self.currentGoogle, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
+			return
+		self.currentGoogle = None
 		foundPos = result.find("imgres?imgurl=")
 		foundPos2 = result.find("&amp;imgrefurl=")
 		if foundPos != -1 and foundPos2 != -1:
@@ -714,10 +727,6 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				coverfile = coverfiles[self.currentcoverfile]
 				print "[SHOUTcast] downloading cover from %s to %s" % (url, coverfile)
 				downloadPage(url, coverfile).addCallback(self.coverDownloadFinished, coverfile).addErrback(self.coverDownloadFailed)
-		else:
-			if config.plugins.shoutcast.showcover.value:
-				self["cover"].doHide()
-
 
 	def coverDownloadFailed(self,result):
 		print "[SHOUTcast] cover download failed:", result
@@ -738,15 +747,18 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 			sTitle = currPlay.info().getInfoString(iServiceInformation.sTagTitle)
 			if self.oldtitle != sTitle:
 				self.oldtitle=sTitle
-				sTitle = sTitle.replace("Title:", "")
+				sTitle = sTitle.replace("Title:", "")[:55]
 				if config.plugins.shoutcast.showcover.value:
-					print "[SHOUTcast] cover enabled!"
-					if (len(sTitle) != 0):
+					if sTitle:
 						url = "http://images.google.com/search?tbm=isch&q=%s&biw=%s&bih=%s&ift=jpg" % (quote(sTitle), config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
 					else:
 						url = "http://images.google.com/search?tbm=isch&q=notavailable&biw=%s&bih=%s&ift=jpg" % (config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
 					print "[Shoutcast] coverurl = %s " % url
-					sendUrlCommand(url, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
+					if self.currentGoogle:
+						self.nextGoogle = url
+					else:
+						self.currentGoogle = url
+						sendUrlCommand(url, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
 				if len(sTitle) == 0:
 					sTitle = "n/a"
 				title = _("Title: %s") % sTitle
@@ -818,6 +830,8 @@ class Cover(Pixmap):
 		Pixmap.__init__(self)
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.paintIconPixmapCB)
+		self.decoding = None
+		self.decodeNext = None
 
 	def doShow(self):
 		if not self.visible == 1:
@@ -844,9 +858,24 @@ class Cover(Pixmap):
 			self.instance.setPixmap(ptr.__deref__())
 			if self.visible:
 				self.show()
+		if self.decodeNext is not None:
+			self.decoding = self.decodeNext
+			self.decodeNext = None
+			if self.picload.startDecode(self.decoding) != 0:
+				print "[Shoutcast] Failed to start decoding next image"
+				self.decoding = None
+		else:
+			self.decoding = None
 
 	def updateIcon(self, filename):
-		self.picload.startDecode(filename)
+		if self.decoding is not None:
+			self.decodeNext = filename
+		else:
+			if self.picload.startDecode(filename) == 0:
+				self.decoding = filename
+			else:
+				print "[Shoutcast] Failed to start decoding image"
+				self.decoding = None
 
 class SHOUTcastList(GUIComponent, object):
 	def buildEntry(self, item):
