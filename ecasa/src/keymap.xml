@@ -12,4 +12,9 @@
 		<key id="KEY_RED" mapto="exit" flags="m"/>
 		<key id="KEY_EXIT" mapto="exit" flags="m"/>
 	</map>
+	<map context="EcasaPictureActions">
+		<key id="KEY_INFO" mapto="info" flags="m"/>
+		<key id="KEY_EXIT" mapto="exit" flags="m"/>
+		<key id="KEY_RED" mapto="exit" flags="m"/>
+	</map>
 </keymap>

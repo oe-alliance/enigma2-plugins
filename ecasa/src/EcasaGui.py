@@ -9,6 +9,7 @@ from Screens.HelpMenu import HelpableScreen
 #pragma mark Components
 from Components.ActionMap import HelpableActionMap
 from Components.AVSwitch import AVSwitch
+from Components.Label import Label
 from Components.Pixmap import Pixmap, MovingPixmap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
@@ -19,7 +20,7 @@ from Components.config import config
 #pragma mark Picasa
 from .PicasaApi import PicasaApi
 
-from enigma import ePicLoad
+from enigma import ePicLoad, ePythonMessagePump, getDesktop
 from collections import deque
 
 try:
@@ -31,6 +32,7 @@ our_print = lambda *args, **kwargs: print("[EcasaGui]", *args, **kwargs)
 
 class EcasaPictureWall(Screen, HelpableScreen):
 	PICS_PER_PAGE = 15
+	PICS_PER_ROW = 5
 	skin = """<screen position="center,center" size="600,380">
 		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
 		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
@@ -41,6 +43,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
+		<widget name="waitingtext" position="100,179" size="400,22" valign="center" halign="center" font="Regular;22"/>
 		<widget name="image0"  position="30,50"   size="90,90"/>
 		<widget name="image1"  position="140,50"  size="90,90"/>
 		<widget name="image2"  position="250,50"  size="90,90"/>
@@ -57,7 +60,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		<widget name="image13" position="360,270" size="90,90"/>
 		<widget name="image14" position="470,270" size="90,90"/>
 		<!-- TODO: find/create :P -->
-		<widget name="highlight" position="20,45" size="100,100"/>
+		<widget name="highlight" position="25,45" size="100,100"/>
 		</screen>"""
 	def __init__(self, session, api=None):
 		Screen.__init__(self, session)
@@ -77,6 +80,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 			self['image%d' % i] = Pixmap()
 			self['title%d' % i] = StaticText()
 		self["highlight"] = MovingPixmap()
+		self["waitingtext"] = Label(_("Please wait... Loading list..."))
 
 		self["overviewActions"] = HelpableActionMap(self, "EcasaOverviewActions", {
 			"up": self.up,
@@ -90,7 +94,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 			}, -1)
 
 		self.offset = 0
-		self.highlighted = 0
+		self.__highlighted = 0
 
 		# thumbnail loader
 		self.picload = ePicLoad()
@@ -99,6 +103,19 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		self.picload.setPara((90, 90, sc[0], sc[1], False, 1, '#ff000000')) # TODO: hardcoded size is evil!
 		self.currentphoto = None
 		self.queue = deque()
+
+	@property
+	def highlighted(self):
+		return self.__highlighted
+
+	@highlighted.setter
+	def highlighted(self, highlighted):
+		our_print("setHighlighted", highlighted)
+		self.__highlighted = highlighted
+		origpos = self['image%d' % highlighted].getPosition()
+		# TODO: hardcoded highlight offset is evil :P
+		self["highlight"].moveTo(origpos[0]-5, origpos[1]-5, 1)
+		self["highlight"].startMoving()
 
 	def gotPicture(self, picInfo=None):
 		our_print("picture decoded")
@@ -136,6 +153,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 
 	def setup(self):
 		our_print("setup")
+		self["waitingtext"].hide()
 		self.queue.clear()
 		pictures = self.pictures
 		for i in xrange(self.PICS_PER_PAGE):
@@ -149,13 +167,21 @@ class EcasaPictureWall(Screen, HelpableScreen):
 				break
 
 	def up(self):
-		our_print("UP")
+		highlighted = (self.highlighted - self.PICS_PER_ROW) % self.PICS_PER_PAGE
+		our_print("up. before:", self.highlighted, ", after:", highlighted)
+		self.highlighted = highlighted
 	def down(self):
-		our_print("DOWN")
+		highlighted = (self.highlighted + self.PICS_PER_ROW) % self.PICS_PER_PAGE
+		our_print("down. before:", self.highlighted, ", after:", highlighted)
+		self.highlighted = highlighted
 	def left(self):
-		our_print("LEFT")
+		highlighted = (self.highlighted - 1) % self.PICS_PER_PAGE
+		our_print("left. before:", self.highlighted, ", after:", highlighted)
+		self.highlighted = highlighted
 	def right(self):
-		our_print("RIGHT")
+		highlighted = (self.highlighted + 1) % self.PICS_PER_PAGE
+		our_print("right. before:", self.highlighted, ", after:", highlighted)
+		self.highlighted = highlighted
 	def nextPage(self):
 		our_print("nextPage")
 		offset = self.offset + self.PICS_PER_PAGE
@@ -174,17 +200,117 @@ class EcasaPictureWall(Screen, HelpableScreen):
 			self.offset = offset
 		self.setup()
 	def select(self):
-		our_print("SELECT")
+		try:
+			photo = self.pictures[self.highlighted+self.offset]
+		except IndexError:
+			our_print("no such picture")
+			# TODO: indicate in gui
+		else:
+			self.session.open(EcasaPicture, photo, api=self.api)
 
 class EcasaOverview(EcasaPictureWall):
+	"""Overview and supposed entry point of ecasa. Shows featured pictures on the "EcasaPictureWall"."""
 	def __init__(self, session):
 		EcasaPictureWall.__init__(self, session)
 		self.skinName = ["EcasaOverview", "EcasaPictureWall"]
-		self.onLayoutFinish.append(self.go)
+		thread = EcasaThread(self.api.getFeatured)
+		thread.deferred.addCallbacks(self.gotPictures, self.errorPictures)
+		thread.start()
 
-	def go(self):
-		self.onLayoutFinish.remove(self.go)
-		# NOTE: possibility of a socket.timeout
-		self.pictures = self.api.getFeatured()
+	def gotPictures(self, pictures):
+		if not self.instance: return
+		self.pictures = pictures
 		self.setup()
 
+	def errorPictures(self, error):
+		if not self.instance: return
+		our_print("errorPictures", error)
+		# TODO: implement
+
+class EcasaPicture(Screen, HelpableScreen):
+	def __init__(self, session, photo, api=None):
+		size_w = getDesktop(0).size().width()
+		size_h = getDesktop(0).size().height()
+		self.skin = """
+		<screen position="0,0" size="%d,%d" title="%s" flags="wfNoBorder">
+			 <widget name="pixmap" position="0,0" size="%d,%d" backgroundColor="black"/>
+		</screen>""" % (size_w,size_h,photo.title.text.encode('utf-8'),size_w,size_h)
+		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
+
+		self.photo = photo
+
+		self['pixmap'] = Pixmap()
+
+		self["pictureActions"] = HelpableActionMap(self, "EcasaPictureActions", {
+			"info": (self.info, _("show metadata")),
+			"exit": (self.close, _("Close")),
+			}, -1)
+
+
+		try:
+			real_w = int(photo.media.content[0].width.text)
+			real_h = int(photo.media.content[0].heigth.text)
+		except Exception as e:
+			our_print("EcasaPicture.__init__: illegal w/h values, using max size!")
+			real_w = size_w
+			real_h = size_h
+
+		self.picload = ePicLoad()
+		self.picload.PictureData.get().append(self.gotPicture)
+		sc = AVSwitch().getFramebufferScale()
+		self.picload.setPara((real_w, real_h, sc[0], sc[1], False, 1, '#ff000000'))
+
+		# NOTE: no need to start an extra thread for this, twisted is "parallel" enough in this case
+		api.downloadPhoto(photo).addCallbacks(self.cbDownload, self.ebDownload)
+
+	def gotPicture(self, picInfo=None):
+		our_print("picture decoded")
+		ptr = self.picload.getData()
+		if ptr is not None:
+			self['pixmap'].instance.setPixmap(ptr.__deref__())
+
+	def cbDownload(self, tup):
+		if not self.instance: return
+		filename, photo = tup
+		self.picload.startDecode(filename)
+
+	def ebDownload(self, tup):
+		if not self.instance: return
+		error, photo = tup
+		print("ebDownload", error)
+
+	def info(self):
+		our_print("info")
+
+#pragma mark - Thread
+
+import threading
+from twisted.internet import defer
+
+class EcasaThread(threading.Thread):
+	def __init__(self, fnc):
+		threading.Thread.__init__(self)
+		self.deferred = defer.Deferred()
+		self.__pump = ePythonMessagePump()
+		self.__pump.recv_msg.get().append(self.gotThreadMsg)
+		self.__asyncFunc = fnc
+		self.__result = None
+		self.__err = None
+
+	def gotThreadMsg(self, msg):
+		if self.__err:
+			self.deferred.errback(self.__err)
+		else:
+			try:
+				self.deferred.callback(self.__result)
+			except Exception as e:
+				self.deferred.errback(e)
+
+	def run(self):
+		try:
+			self.__result = self.__asyncFunc()
+		except Exception as e:
+			self.__err = e
+		finally:
+			self.__pump.send(0)
