@@ -5,6 +5,7 @@ from __future__ import print_function
 #pragma mark Screens
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
+from Screens.MessageBox import MessageBox
 
 #pragma mark Components
 from Components.ActionMap import HelpableActionMap
@@ -32,6 +33,7 @@ except NameError:
 our_print = lambda *args, **kwargs: print("[EcasaGui]", *args, **kwargs)
 
 class EcasaPictureWall(Screen, HelpableScreen):
+	"""Base class for so-called "picture walls"."""
 	PICS_PER_PAGE = 15
 	PICS_PER_ROW = 5
 	skin = """<screen position="center,center" size="600,380">
@@ -72,11 +74,13 @@ class EcasaPictureWall(Screen, HelpableScreen):
 					config.plugins.ecasa.google_username.value,
 					config.plugins.ecasa.google_password.value,
 					config.plugins.ecasa.cache.value)
+		else:
+			self.api = api
 
 		self["key_red"] = StaticText(_("Close"))
-		self["key_green"] = StaticText()
+		self["key_green"] = StaticText(_("My Albums"))
 		self["key_yellow"] = StaticText()
-		self["key_blue"] = StaticText()
+		self["key_blue"] = StaticText(_("Search"))
 		for i in xrange(self.PICS_PER_PAGE):
 			self['image%d' % i] = Pixmap()
 			self['title%d' % i] = StaticText()
@@ -92,6 +96,8 @@ class EcasaPictureWall(Screen, HelpableScreen):
 			"prevPage": (self.prevPage, _("show previous page")),
 			"select": self.select,
 			"exit":self.close,
+			"albums":(self.albums, _("show your albums (if logged in)")),
+			"search":(self.search, _("start a new search")),
 			}, -1)
 
 		self.offset = 0
@@ -129,9 +135,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		self.maybeDecode()
 
 	def maybeDecode(self):
-		our_print("maybeDecode")
 		if self.currentphoto is not None: return
-		our_print("no current photo, checking for queued ones")
 		try:
 			filename, self.currentphoto = self.queue.pop()
 		except IndexError:
@@ -143,7 +147,6 @@ class EcasaPictureWall(Screen, HelpableScreen):
 
 	def pictureDownloaded(self, tup):
 		filename, photo = tup
-		our_print("pictureDownloaded", filename, photo)
 		self.queue.append((filename, photo))
 		self.maybeDecode()
 
@@ -160,12 +163,15 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		for i in xrange(self.PICS_PER_PAGE):
 			try:
 				our_print("trying to initiate download of idx", i+self.offset)
-				self.api.downloadThumbnail(pictures[i+self.offset]).addCallbacks(self.pictureDownloaded, self.pictureDownloadFailed)
+				picture = pictures[i+self.offset]
+				self.api.downloadThumbnail(picture).addCallbacks(self.pictureDownloaded, self.pictureDownloadFailed)
 			except IndexError:
 				# no more pictures
 				# TODO: set invalid pic for remaining items
 				our_print("no more pictures in setup")
 				break
+			except Exception as e:
+				our_print("unexpected exception in setup:", e)
 
 	def up(self):
 		highlighted = (self.highlighted - self.PICS_PER_ROW) % self.PICS_PER_PAGE
@@ -208,6 +214,26 @@ class EcasaPictureWall(Screen, HelpableScreen):
 			# TODO: indicate in gui
 		else:
 			self.session.open(EcasaPicture, photo, api=self.api)
+	def albums(self):
+		self.session.open(EcasaAlbumview, self.api)
+	def search(self):
+		our_print("search")
+		# TODO: open vkeyboard, start search with results in feedview
+
+	def gotPictures(self, pictures):
+		if not self.instance: return
+		self.pictures = pictures
+		self.setup()
+
+	def errorPictures(self, error):
+		if not self.instance: return
+		our_print("errorPictures", error)
+		self.session.open(
+			MessageBox,
+			_("Error downloading") + ': ' + error.message,
+			type=MessageBox.TYPE_ERROR,
+			timeout=3
+		)
 
 class EcasaOverview(EcasaPictureWall):
 	"""Overview and supposed entry point of ecasa. Shows featured pictures on the "EcasaPictureWall"."""
@@ -218,17 +244,92 @@ class EcasaOverview(EcasaPictureWall):
 		thread.deferred.addCallbacks(self.gotPictures, self.errorPictures)
 		thread.start()
 
-	def gotPictures(self, pictures):
-		if not self.instance: return
-		self.pictures = pictures
-		self.setup()
+class EcasaFeedview(EcasaPictureWall):
+	"""Display a nonspecific feed."""
+	def __init__(self, session, thread, api=None):
+		EcasaPictureWall.__init__(self, session, api=api)
+		self.skinName = ["EcasaFeedview", "EcasaPictureWall"]
+		self['key_green'].text = ''
+		thread.deferred.addCallbacks(self.gotPictures, self.errorPictures)
+		thread.start()
 
-	def errorPictures(self, error):
+	def albums(self):
+		pass
+
+class EcasaAlbumview(Screen, HelpableScreen):
+	"""Displays albums."""
+	skin = """<screen position="center,center" size="560,420">
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" transparent="1" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget source="list" render="Listbox" position="0,50" size="560,360" scrollbarMode="showAlways">
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos=(1,1), size=(540,22), text = 0, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
+					],
+				  "fonts": [gFont("Regular", 20)],
+				  "itemHeight": 24
+				 }
+			</convert>
+		</widget>
+	</screen>"""
+	def __init__(self, session, api, user='default'):
+		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
+		self.api = api
+		self.user = user
+
+		self['list'] = List()
+		self['key_red'] = StaticText(_("Close"))
+		self['key_green'] = StaticText()
+		self['key_yellow'] = StaticText()
+		self['key_blue'] = StaticText()
+
+		self["albumviewActions"] = HelpableActionMap(self, "EcasaAlbumviewActions", {
+			"select":(self.select, _("show album")),
+			"exit":(self.close, _("Close")),
+		}, -1)
+
+		self.acquireAlbumsForUser(user)
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(_("eCasa: Albums for user %s") % (self.user,))
+
+	def acquireAlbumsForUser(self, user):
+		thread = EcasaThread(lambda:self.api.getAlbums(user=user))
+		thread.deferred.addCallbacks(self.gotAlbums, self.errorAlbums)
+		thread.start()
+
+	def gotAlbums(self, albums):
 		if not self.instance: return
-		our_print("errorPictures", error)
-		# TODO: implement
+		self['list'].list = albums
+
+	def errorAlbums(self, error):
+		if not self.instance: return
+		our_print("errorAlbums", error)
+		self['list'].setList([(_("Error downloading"), "0", None)])
+		self.session.open(
+			MessageBox,
+			_("Error downloading") + ': ' + error.value.message,
+			type=MessageBox.TYPE_ERROR,
+			timeout=30,
+		)
+
+	def select(self):
+		cur = self['list'].getCurrent()
+		if cur:
+			album = cur[-1]
+			thread = EcasaThread(lambda:self.api.getAlbum(album))
+			self.session.open(EcasaFeedview, thread, api=self.api)
 
 class EcasaPicture(Screen, HelpableScreen):
+	"""Display a single picture and its metadata."""
 	PAGE_PICTURE = 0
 	PAGE_INFO = 1
 	def __init__(self, session, photo, api=None):
@@ -312,6 +413,12 @@ class EcasaPicture(Screen, HelpableScreen):
 		if not self.instance: return
 		error, photo = tup
 		print("ebDownload", error)
+		self.session.open(
+			MessageBox,
+			_("Error downloading") + ': ' + error.message,
+			type=MessageBox.TYPE_ERROR,
+			timeout=3
+		)
 
 	def info(self):
 		our_print("info")
