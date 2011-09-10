@@ -102,6 +102,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 
 		self.offset = 0
 		self.__highlighted = 0
+		self.pictures = ()
 
 		# thumbnail loader
 		self.picload = ePicLoad()
