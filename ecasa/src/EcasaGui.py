@@ -341,7 +341,7 @@ class EcasaPicture(Screen, HelpableScreen):
 			<widget source="summary" render="Label" position="25,60" zPosition="1" size="{labelwidth},100" valign="top" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 			<widget source="keywords" render="Label" position="25,160" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 			<widget source="camera" render="Label" position="25,180" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
-		</screen>""".format(size_w=size_w,size_h=size_h,title=photo.title.text.encode('utf-8'), labelwidth=size_w-50)
+		</screen>""".format(size_w=size_w,size_h=size_h,title=(photo.title.text or '').encode('utf-8'), labelwidth=size_w-50)
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
@@ -363,12 +363,11 @@ class EcasaPicture(Screen, HelpableScreen):
 			camera = unk
 		self['camera'] = StaticText(_("Camera: %s") % (camera,))
 
-		title = photo.title.text if photo.title else unk
+		title = photo.title.text if photo.title.text else unk
 		self['title'] = StaticText(_("Title: %s") % (title,))
-		print(photo.summary.text)
-		summary = strip_readable(photo.summary.text) if photo.summary else unk
+		summary = strip_readable(photo.summary.text) if photo.summary.text else unk
 		self['summary'] = StaticText(_("Summary: %s") % (summary,))
-		if photo.media and photo.media.keywords:
+		if photo.media and photo.media.keywords.text:
 			keywords = photo.media.keywords.text
 			# TODO: find a better way to handle this
 			if len(keywords) > 50:
