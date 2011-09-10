@@ -52,6 +52,43 @@ if config.plugins.epgrefresh.background.value:
 
 del now, begin, end
 
+#pragma mark - Workaround for unset clock
+
+from enigma import eDVBLocalTimeHandler
+
+def timeCallback(isCallback=True):
+	"""Time Callback/Autostart management."""
+	thInstance = eDVBLocalTimeHandler.getInstance()
+	if isCallback:
+		# NOTE: this assumes the clock is actually ready when called back
+		# this may not be true, but we prefer silently dying to waiting forever
+		thInstance.m_timeUpdated.get().remove(timeCallback)
+	elif not thInstance.ready():
+		thInstance.m_timeUpdated.get().append(timeCallback)
+		return
+
+	if config.plugins.epgrefresh.wakeup.value:
+		now = localtime()
+		begin = int(mktime(
+			(now.tm_year, now.tm_mon, now.tm_mday,
+			config.plugins.epgrefresh.begin.value[0],
+			config.plugins.epgrefresh.begin.value[1],
+			0, now.tm_wday, now.tm_yday, now.tm_isdst)
+		))
+		# booted +- 10min from begin of timespan
+		if abs(time() - begin) < 600:
+			from Screens.MessageBox import MessageBox
+			from Tools.Notifications import AddNotificationWithCallback
+			from Tools.BoundFunction import boundFunction
+			# XXX: we use a notification because this will be suppressed otherwise
+			AddNotificationWithCallback(
+				boundFunction(standbyQuestionCallback, session),
+				MessageBox,
+				_("This might have been an automated bootup to refresh the EPG. For this to happen it is recommended to put the receiver to Standby.\nDo you want to do this now?"),
+				timeout = 15
+			)
+	epgrefresh.start()
+
 #pragma mark - Help
 try:
 	from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
@@ -84,28 +121,7 @@ def autostart(reason, **kwargs):
 		epgrefresh.session = session
 
 		if config.plugins.epgrefresh.enabled.value:
-			if config.plugins.epgrefresh.wakeup.value:
-				now = localtime()
-				begin = int(mktime(
-					(now.tm_year, now.tm_mon, now.tm_mday,
-					config.plugins.epgrefresh.begin.value[0],
-					config.plugins.epgrefresh.begin.value[1],
-					0, now.tm_wday, now.tm_yday, now.tm_isdst)
-				))
-				# booted +- 10min from begin of timespan
-				if abs(time() - begin) < 600:
-					from Screens.MessageBox import MessageBox
-					from Tools.Notifications import AddNotificationWithCallback
-					from Tools.BoundFunction import boundFunction
-					# XXX: we use a notification because this will be suppressed otherwise
-					AddNotificationWithCallback(
-						boundFunction(standbyQuestionCallback, session),
-						MessageBox,
-						_("This might have been an automated bootup to refresh the EPG. For this to happen it is recommended to put the receiver to Standby.\nDo you want to do this now?"),
-						timeout = 15
-					)
-
-			epgrefresh.start(session)
+			timeCallback(isCallback=False)
 
 	elif reason == 1:
 		epgrefresh.stop()
