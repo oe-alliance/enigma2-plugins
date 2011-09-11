@@ -157,9 +157,9 @@ class AutoMountEdit(Screen, ConfigListScreen):
 		if sharedir is False:
 			sharedir = "/export/hdd"
 		if mounttype == "nfs":
-			options = "rw,nolock,tcp"
+			defaultOptions = "rw,nolock,tcp"
 		else:
-			options = "rw"
+			defaultOptions = "rw"
 		if username is False:
 			username = ""
 		if password is False:
