@@ -6,6 +6,7 @@ from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
+from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 
 #pragma mark Components
 from Components.ActionMap import HelpableActionMap
@@ -218,8 +219,15 @@ class EcasaPictureWall(Screen, HelpableScreen):
 	def albums(self):
 		self.session.open(EcasaAlbumview, self.api)
 	def search(self):
-		our_print("search")
-		# TODO: open vkeyboard, start search with results in feedview
+		self.session.openWithCallback(
+			self.searchCallback,
+			NTIVirtualKeyBoard,
+			title = _("Enter text to search for")
+		)
+	def searchCallback(self, text=None):
+		if text:
+			thread = EcasaThread(lambda:self.api.getSearch(text, limit=str(self.PICS_PER_PAGE)))
+			self.session.open(EcasaFeedview, thread, api=self.api)
 
 	def gotPictures(self, pictures):
 		if not self.instance: return
@@ -333,7 +341,7 @@ class EcasaPicture(Screen, HelpableScreen):
 	"""Display a single picture and its metadata."""
 	PAGE_PICTURE = 0
 	PAGE_INFO = 1
-	def __init__(self, session, photo, api=None):
+	def __init__(self, session, photo, api=None, prevFunc=None, nextFunc=None):
 		size_w = getDesktop(0).size().width()
 		size_h = getDesktop(0).size().height()
 		self.skin = """<screen position="0,0" size="{size_w},{size_h}" title="{title}" flags="wfNoBorder">
@@ -348,6 +356,8 @@ class EcasaPicture(Screen, HelpableScreen):
 
 		self.photo = photo
 		self.page = self.PAGE_PICTURE
+		self.prevFunc = prevFunc
+		self.nextFunc = nextFunc
 
 		self['pixmap'] = Pixmap()
 
@@ -381,14 +391,20 @@ class EcasaPicture(Screen, HelpableScreen):
 			"info": (self.info, _("show metadata")),
 			"exit": (self.close, _("Close")),
 			}, -1)
+		if prevFunc and nextFunc:
+			self["directionActions"] = HelpableActionMap(self, "DirectionActions", {
+				"left": self.previous,
+				"right": self.next,
+				}, -2)
 
 		try:
 			real_w = int(photo.media.content[0].width.text)
 			real_h = int(photo.media.content[0].heigth.text)
 		except Exception as e:
 			our_print("EcasaPicture.__init__: illegal w/h values, using max size!")
-			real_w = size_w
-			real_h = size_h
+			size = getDesktop(0).size()
+			real_w = size.width()
+			real_h = size.height()
 
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.gotPicture)
@@ -428,6 +444,55 @@ class EcasaPicture(Screen, HelpableScreen):
 		else:
 			self.page = self.PAGE_PICTURE
 			self['pixmap'].show()
+
+	def reloadData(self, photo):
+		if photo is None: return
+		self.photo = photo
+		unk = _("unknown")
+
+		# camera
+		if photo.exif.make and photo.exif.model:
+			camera = '%s %s' % (photo.exif.make.text, photo.exif.model.text)
+		elif photo.exif.make:
+			camera = photo.exif.make.text
+		elif photo.exif.model:
+			camera = photo.exif.model.text
+		else:
+			camera = unk
+		self['camera'].text = _("Camera: %s") % (camera,)
+
+		title = photo.title.text if photo.title.text else unk
+		self['title'].text = _("Title: %s") % (title,)
+		summary = strip_readable(photo.summary.text) if photo.summary.text else unk
+		self['summary'].text = _("Summary: %s") % (summary,)
+		if photo.media and photo.media.keywords and photo.media.keywords.text:
+			keywords = photo.media.keywords.text
+			# TODO: find a better way to handle this
+			if len(keywords) > 50:
+				keywords = keywords[:47] + "..."
+		else:
+			keywords = unk
+		self['keywords'].text = _("Keywords: %s") % (keywords,)
+
+		try:
+			real_w = int(photo.media.content[0].width.text)
+			real_h = int(photo.media.content[0].heigth.text)
+		except Exception as e:
+			our_print("EcasaPicture.__init__: illegal w/h values, using max size!")
+			size = getDesktop(0).size()
+			real_w = size.width()
+			real_h = size.height()
+
+		sc = AVSwitch().getFramebufferScale()
+		self.picload.setPara((real_w, real_h, sc[0], sc[1], False, 1, '#ff000000'))
+
+		# NOTE: no need to start an extra thread for this, twisted is "parallel" enough in this case
+		api.downloadPhoto(photo).addCallbacks(self.cbDownload, self.ebDownload)
+
+	def previous(self):
+		pass
+	def next(self):
+		pass
 
 #pragma mark - Thread
 

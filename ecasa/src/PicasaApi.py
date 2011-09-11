@@ -27,12 +27,21 @@ class PicasaApi:
 		self.gd_client = gd_client
 		self.cache = cache
 
+	def setCredentials(self, email, password):
+		# TODO: check if this is sane
+		gd_client = self.gd_client
+		gd_client.email = email
+		gd_client.password = password
+		if email and password:
+			# NOTE: this might fail
+			gd_client.ProgrammaticLogin()
+
 	def getAlbums(self, user='default'):
 		albums = self.gd_client.GetUserFeed(user=user)
 		return [(album.title.text, album.numphotos.text, album) for album in albums.entry]
 
 	def getSearch(self, query, limit='10'):
-		photos = gd_client.SearchCommunityPhotos(query, limit=str(limit))
+		photos = self.gd_client.SearchCommunityPhotos(query, limit=str(limit))
 		return __returnPhotos(photos)
 
 	def getAlbum(self, album):
