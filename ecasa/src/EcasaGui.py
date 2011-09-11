@@ -368,7 +368,7 @@ class EcasaPicture(Screen, HelpableScreen):
 		self['title'] = StaticText(_("Title: %s") % (title,))
 		summary = strip_readable(photo.summary.text) if photo.summary.text else unk
 		self['summary'] = StaticText(_("Summary: %s") % (summary,))
-		if photo.media and photo.media.keywords.text:
+		if photo.media and photo.media.keywords and photo.media.keywords.text:
 			keywords = photo.media.keywords.text
 			# TODO: find a better way to handle this
 			if len(keywords) > 50:
