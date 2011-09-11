@@ -120,6 +120,9 @@ class EcasaPictureWall(Screen, HelpableScreen):
 	@highlighted.setter
 	def highlighted(self, highlighted):
 		our_print("setHighlighted", highlighted)
+		# only allow to select valid pictures
+		if highlighted + self.offset >= len(self.pictures): return
+
 		self.__highlighted = highlighted
 		origpos = self['image%d' % highlighted].getPosition()
 		# TODO: hardcoded highlight offset is evil :P
@@ -176,38 +179,80 @@ class EcasaPictureWall(Screen, HelpableScreen):
 				our_print("unexpected exception in setup:", e)
 
 	def up(self):
+		# TODO: implement for incomplete pages
 		highlighted = (self.highlighted - self.PICS_PER_ROW) % self.PICS_PER_PAGE
 		our_print("up. before:", self.highlighted, ", after:", highlighted)
 		self.highlighted = highlighted
 	def down(self):
+		# TODO: implement for incomplete pages
 		highlighted = (self.highlighted + self.PICS_PER_ROW) % self.PICS_PER_PAGE
 		our_print("down. before:", self.highlighted, ", after:", highlighted)
 		self.highlighted = highlighted
 	def left(self):
+		# TODO: implement for incomplete pages
 		highlighted = (self.highlighted - 1) % self.PICS_PER_PAGE
 		our_print("left. before:", self.highlighted, ", after:", highlighted)
 		self.highlighted = highlighted
 	def right(self):
 		highlighted = (self.highlighted + 1) % self.PICS_PER_PAGE
+		if highlighted + self.offset >= len(self.pictures):
+			highlighted = 0
 		our_print("right. before:", self.highlighted, ", after:", highlighted)
 		self.highlighted = highlighted
 	def nextPage(self):
 		our_print("nextPage")
 		offset = self.offset + self.PICS_PER_PAGE
-		if offset > len(self.pictures):
+		Len = len(self.pictures)
+		if offset > Len:
 			self.offset = 0
 		else:
 			self.offset = offset
+			if offset + self.highlighted > Len:
+				self.highlighted = Len - offset - 1
 		self.setup()
 	def prevPage(self):
 		our_print("prevPage")
 		offset = self.offset - self.PICS_PER_PAGE
 		if offset < 0:
 			Len = len(self.pictures)
-			self.offset = Len - (Len % self.PICS_PER_PAGE)
+			offset = Len - (Len % self.PICS_PER_PAGE)
+			self.offset = offset
+			if offset + self.highlighted > Len:
+				self.highlighted = Len - offset - 1
 		else:
 			self.offset = offset
 		self.setup()
+
+	def prevFunc(self):
+		old = self.highlighted
+		self.left()
+		highlighted = self.highlighted
+		if highlighted > old:
+			self.prevPage()
+
+		photo = None
+		try:
+			# NOTE: using self.highlighted as prevPage might have moved this if the page is not full
+			photo = self.pictures[self.highlighted+self.offset]
+		except IndexError:
+			pass
+		return photo
+
+	def nextFunc(self):
+		old = self.highlighted
+		self.right()
+		highlighted = self.highlighted
+		if highlighted < old:
+			self.nextPage()
+
+		photo = None
+		try:
+			# NOTE: using self.highlighted as nextPage might have moved this if the page is not full
+			photo = self.pictures[self.highlighted+self.offset]
+		except IndexError:
+			pass
+		return photo
+
 	def select(self):
 		try:
 			photo = self.pictures[self.highlighted+self.offset]
@@ -215,7 +260,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 			our_print("no such picture")
 			# TODO: indicate in gui
 		else:
-			self.session.open(EcasaPicture, photo, api=self.api)
+			self.session.open(EcasaPicture, photo, api=self.api, prevFunc=self.prevFunc, nextFunc=self.nextFunc)
 	def albums(self):
 		self.session.open(EcasaAlbumview, self.api)
 	def search(self):
@@ -354,38 +399,16 @@ class EcasaPicture(Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
-		self.photo = photo
+		self.api = api
 		self.page = self.PAGE_PICTURE
 		self.prevFunc = prevFunc
 		self.nextFunc = nextFunc
 
 		self['pixmap'] = Pixmap()
-
-		unk = _("unknown")
-
-		# camera
-		if photo.exif.make and photo.exif.model:
-			camera = '%s %s' % (photo.exif.make.text, photo.exif.model.text)
-		elif photo.exif.make:
-			camera = photo.exif.make.text
-		elif photo.exif.model:
-			camera = photo.exif.model.text
-		else:
-			camera = unk
-		self['camera'] = StaticText(_("Camera: %s") % (camera,))
-
-		title = photo.title.text if photo.title.text else unk
-		self['title'] = StaticText(_("Title: %s") % (title,))
-		summary = strip_readable(photo.summary.text) if photo.summary.text else unk
-		self['summary'] = StaticText(_("Summary: %s") % (summary,))
-		if photo.media and photo.media.keywords and photo.media.keywords.text:
-			keywords = photo.media.keywords.text
-			# TODO: find a better way to handle this
-			if len(keywords) > 50:
-				keywords = keywords[:47] + "..."
-		else:
-			keywords = unk
-		self['keywords'] = StaticText(_("Keywords: %s") % (keywords,))
+		self['camera'] = StaticText()
+		self['title'] = StaticText()
+		self['summary'] = StaticText()
+		self['keywords'] = StaticText()
 
 		self["pictureActions"] = HelpableActionMap(self, "EcasaPictureActions", {
 			"info": (self.info, _("show metadata")),
@@ -397,22 +420,11 @@ class EcasaPicture(Screen, HelpableScreen):
 				"right": self.next,
 				}, -2)
 
-		try:
-			real_w = int(photo.media.content[0].width.text)
-			real_h = int(photo.media.content[0].heigth.text)
-		except Exception as e:
-			our_print("EcasaPicture.__init__: illegal w/h values, using max size!")
-			size = getDesktop(0).size()
-			real_w = size.width()
-			real_h = size.height()
-
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.gotPicture)
-		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((real_w, real_h, sc[0], sc[1], False, 1, '#ff000000'))
 
-		# NOTE: no need to start an extra thread for this, twisted is "parallel" enough in this case
-		api.downloadPhoto(photo).addCallbacks(self.cbDownload, self.ebDownload)
+		# populate with data, initiate download
+		self.reloadData(photo)
 
 	def gotPicture(self, picInfo=None):
 		our_print("picture decoded")
@@ -487,12 +499,12 @@ class EcasaPicture(Screen, HelpableScreen):
 		self.picload.setPara((real_w, real_h, sc[0], sc[1], False, 1, '#ff000000'))
 
 		# NOTE: no need to start an extra thread for this, twisted is "parallel" enough in this case
-		api.downloadPhoto(photo).addCallbacks(self.cbDownload, self.ebDownload)
+		self.api.downloadPhoto(photo).addCallbacks(self.cbDownload, self.ebDownload)
 
 	def previous(self):
-		pass
+		if self.prevFunc: self.reloadData(self.prevFunc())
 	def next(self):
-		pass
+		if self.nextFunc: self.reloadData(self.nextFunc())
 
 #pragma mark - Thread
 
