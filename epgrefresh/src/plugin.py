@@ -82,7 +82,7 @@ def timeCallback(isCallback=True):
 			from Tools.BoundFunction import boundFunction
 			# XXX: we use a notification because this will be suppressed otherwise
 			AddNotificationWithCallback(
-				boundFunction(standbyQuestionCallback, session),
+				boundFunction(standbyQuestionCallback, epgrefresh.session),
 				MessageBox,
 				_("This might have been an automated bootup to refresh the EPG. For this to happen it is recommended to put the receiver to Standby.\nDo you want to do this now?"),
 				timeout = 15
