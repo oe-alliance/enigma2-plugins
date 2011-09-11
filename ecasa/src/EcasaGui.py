@@ -7,6 +7,7 @@ from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
+from EcasaSetup import EcasaSetup
 
 #pragma mark Components
 from Components.ActionMap import HelpableActionMap
@@ -99,6 +100,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 			"exit":self.close,
 			"albums":(self.albums, _("show your albums (if logged in)")),
 			"search":(self.search, _("start a new search")),
+			"contextmenu":(self.contextMenu, _("open context menu")),
 			}, -1)
 
 		self.offset = 0
@@ -273,6 +275,14 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		if text:
 			thread = EcasaThread(lambda:self.api.getSearch(text, limit=str(self.PICS_PER_PAGE)))
 			self.session.open(EcasaFeedview, thread, api=self.api)
+	def contextMenu(self):
+		self.session.openWithCallback(self.setupClosed, EcasaSetup)
+	def setupClosed(self):
+		self.api.setCredentials(
+			config.plugins.ecasa.google_username.value,
+			config.plugins.ecasa.google_password.value
+		)
+		self.api.cache = config.plugins.ecasa.cache.value
 
 	def gotPictures(self, pictures):
 		if not self.instance: return
