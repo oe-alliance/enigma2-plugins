@@ -26,6 +26,7 @@ from .PicasaApi import PicasaApi
 from TagStrip import strip_readable
 
 from enigma import ePicLoad, ePythonMessagePump, getDesktop
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from collections import deque
 
 try:
@@ -65,8 +66,8 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		<widget name="image12" position="250,270" size="90,90"/>
 		<widget name="image13" position="360,270" size="90,90"/>
 		<widget name="image14" position="470,270" size="90,90"/>
-		<!-- TODO: find/create :P -->
-		<widget name="highlight" position="25,45" size="100,100"/>
+		<!-- TODO: find some better picture -->
+		<widget name="highlight" position="30,142" size="90,5"/>
 		</screen>"""
 	def __init__(self, session, api=None):
 		Screen.__init__(self, session)
@@ -116,6 +117,12 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		self.currentphoto = None
 		self.queue = deque()
 
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self["highlight"].instance.setPixmapFromFile(resolveFilename(SCOPE_PLUGINS, "Extensions/Ecasa/highlighted.png"))
+		self["highlight"].hide()
+
 	@property
 	def highlighted(self):
 		return self.__highlighted
@@ -127,18 +134,24 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		if highlighted + self.offset >= len(self.pictures): return
 
 		self.__highlighted = highlighted
-		origpos = self['image%d' % highlighted].getPosition()
+		pixmap = self['image%d' % highlighted]
+		origpos = pixmap.getPosition()
+		origsize = pixmap.instance.size()
 		# TODO: hardcoded highlight offset is evil :P
-		self["highlight"].moveTo(origpos[0]-5, origpos[1]-5, 1)
+		self["highlight"].moveTo(origpos[0], origpos[1]+origsize.height()+2, 1)
 		self["highlight"].startMoving()
 
 	def gotPicture(self, picInfo=None):
-		our_print("picture decoded")
 		ptr = self.picload.getData()
+		idx = self.pictures.index(self.currentphoto)
+		realIdx = idx - self.offset
 		if ptr is not None:
-			idx = self.pictures.index(self.currentphoto)
-			realIdx = idx - self.offset
 			self['image%d' % realIdx].instance.setPixmap(ptr.__deref__())
+		else:
+			our_print("gotPicture got invalid results for idx", idx, "("+str(realIdx)+")")
+			# NOTE: we could use a different picture here that indicates a failure
+			self['image%d' % realIdx].instance.setPixmap(None)
+			# NOTE: the thread WILL most likely be hung and NOT recover from it, so we should remove the old picload and create a new one :/
 		self.currentphoto = None
 		self.maybeDecode()
 
@@ -166,6 +179,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 	def setup(self):
 		our_print("setup")
 		self["waitingtext"].hide()
+		self["highlight"].show()
 		self.queue.clear()
 		pictures = self.pictures
 		for i in xrange(self.PICS_PER_PAGE):
@@ -175,9 +189,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 				self.api.downloadThumbnail(picture).addCallbacks(self.pictureDownloaded, self.pictureDownloadFailed)
 			except IndexError:
 				# no more pictures
-				# TODO: set invalid pic for remaining items
-				our_print("no more pictures in setup")
-				break
+				self['image%d' % i].instance.setPixmap(None)
 			except Exception as e:
 				our_print("unexpected exception in setup:", e)
 
@@ -186,16 +198,40 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		highlighted = (self.highlighted - self.PICS_PER_ROW) % self.PICS_PER_PAGE
 		our_print("up. before:", self.highlighted, ", after:", highlighted)
 		self.highlighted = highlighted
+
+		# we requested an invalid idx
+		if self.highlighted != highlighted:
+			# so skip another row
+			highlighted = (highlighted - self.PICS_PER_ROW) % self.PICS_PER_PAGE
+			our_print("up2. before:", self.highlighted, ", after:", highlighted)
+			self.highlighted = highlighted
+
 	def down(self):
 		# TODO: implement for incomplete pages
 		highlighted = (self.highlighted + self.PICS_PER_ROW) % self.PICS_PER_PAGE
 		our_print("down. before:", self.highlighted, ", after:", highlighted)
 		self.highlighted = highlighted
+
+		# we requested an invalid idx
+		if self.highlighted != highlighted:
+			# so try to skip another row
+			highlighted = (highlighted + self.PICS_PER_ROW) % self.PICS_PER_PAGE
+			our_print("down2. before:", self.highlighted, ", after:", highlighted)
+			self.highlighted = highlighted
+
 	def left(self):
 		# TODO: implement for incomplete pages
 		highlighted = (self.highlighted - 1) % self.PICS_PER_PAGE
 		our_print("left. before:", self.highlighted, ", after:", highlighted)
 		self.highlighted = highlighted
+
+		# we requested an invalid idx
+		if self.highlighted != highlighted:
+			# go to last possible item
+			highlighted = (len(self.pictures) - 1) % self.PICS_PER_PAGE
+			our_print("left2. before:", self.highlighted, ", after:", highlighted)
+			self.highlighted = highlighted
+
 	def right(self):
 		highlighted = (self.highlighted + 1) % self.PICS_PER_PAGE
 		if highlighted + self.offset >= len(self.pictures):
@@ -490,13 +526,13 @@ class EcasaPicture(Screen, HelpableScreen):
 	def __init__(self, session, photo, api=None, prevFunc=None, nextFunc=None):
 		size_w = getDesktop(0).size().width()
 		size_h = getDesktop(0).size().height()
-		self.skin = """<screen position="0,0" size="{size_w},{size_h}" title="{title}" flags="wfNoBorder">
+		self.skin = """<screen position="0,0" size="{size_w},{size_h}" flags="wfNoBorder">
 			<widget name="pixmap" position="0,0" size="{size_w},{size_h}" backgroundColor="black" zPosition="2"/>
 			<widget source="title" render="Label" position="25,20" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 			<widget source="summary" render="Label" position="25,60" zPosition="1" size="{labelwidth},100" valign="top" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 			<widget source="keywords" render="Label" position="25,160" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
 			<widget source="camera" render="Label" position="25,180" zPosition="1" size="{labelwidth},40" valign="center" halign="left" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1"/>
-		</screen>""".format(size_w=size_w,size_h=size_h,title=(photo.title.text or '').encode('utf-8'), labelwidth=size_w-50)
+		</screen>""".format(size_w=size_w,size_h=size_h,labelwidth=size_w-50)
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
@@ -575,6 +611,7 @@ class EcasaPicture(Screen, HelpableScreen):
 		self['camera'].text = _("Camera: %s") % (camera,)
 
 		title = photo.title.text if photo.title.text else unk
+		self.setTitle(_("eCasa: %s") % (title))
 		self['title'].text = _("Title: %s") % (title,)
 		summary = strip_readable(photo.summary.text) if photo.summary.text else unk
 		self['summary'].text = _("Summary: %s") % (summary,)
