@@ -80,7 +80,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 			self.api = api
 
 		self["key_red"] = StaticText(_("Close"))
-		self["key_green"] = StaticText(_("My Albums"))
+		self["key_green"] = StaticText(_("Albums"))
 		self["key_yellow"] = StaticText()
 		self["key_blue"] = StaticText(_("Search"))
 		for i in xrange(self.PICS_PER_PAGE):
@@ -264,7 +264,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		else:
 			self.session.open(EcasaPicture, photo, api=self.api, prevFunc=self.prevFunc, nextFunc=self.nextFunc)
 	def albums(self):
-		self.session.open(EcasaAlbumview, self.api)
+		self.session.open(EcasaAlbumview, self.api, user=config.plugins.ecasa.user.value)
 	def search(self):
 		self.session.openWithCallback(
 			self.searchCallback,
@@ -352,11 +352,12 @@ class EcasaAlbumview(Screen, HelpableScreen):
 		self['key_red'] = StaticText(_("Close"))
 		self['key_green'] = StaticText()
 		self['key_yellow'] = StaticText()
-		self['key_blue'] = StaticText()
+		self['key_blue'] = StaticText(_("Change user"))
 
 		self["albumviewActions"] = HelpableActionMap(self, "EcasaAlbumviewActions", {
 			"select":(self.select, _("show album")),
 			"exit":(self.close, _("Close")),
+			"users":(self.users, _("Change user"))
 		}, -1)
 
 		self.acquireAlbumsForUser(user)
@@ -391,6 +392,16 @@ class EcasaAlbumview(Screen, HelpableScreen):
 			album = cur[-1]
 			thread = EcasaThread(lambda:self.api.getAlbum(album))
 			self.session.open(EcasaFeedview, thread, api=self.api)
+
+	def users(self):
+		self.session.openWithCallback(
+			self.searchCallback,
+			NTIVirtualKeyBoard,
+			title = _("Enter username")
+		)
+	def searchCallback(self, text=None):
+		if text:
+			self.session.openWithCallback(self.close, EcasaAlbumview, self.api, text)
 
 class EcasaPicture(Screen, HelpableScreen):
 	"""Display a single picture and its metadata."""
