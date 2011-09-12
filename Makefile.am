@@ -56,7 +56,6 @@ SUBDIRS = \
 	reconstructapsc \
 	remotetimer \
 	rsdownloader \
-	seekbar \
 	setpasswd \
 	shoutcast \
 	showclock \

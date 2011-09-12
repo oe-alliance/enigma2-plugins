@@ -427,11 +427,6 @@ rsdownloader/po/Makefile
 rsdownloader/src/Makefile
 rsdownloader/src/container/Makefile
 
-seekbar/Makefile
-seekbar/meta/Makefile
-seekbar/po/Makefile
-seekbar/src/Makefile
-
 serienfilm/Makefile
 serienfilm/meta/Makefile
 serienfilm/po/Makefile
