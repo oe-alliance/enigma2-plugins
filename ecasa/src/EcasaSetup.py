@@ -40,6 +40,7 @@ class EcasaSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("Google Username"), config.plugins.ecasa.google_username, _("Username to use for authentication with google. Leave empty for unauthenticated use.")),
 				getConfigListEntry(_("Google Password"), config.plugins.ecasa.google_password, _("Password to the google account.")),
 				getConfigListEntry(_("Albums of"), config.plugins.ecasa.user, _("Show albums for this user by default. Use \"default\" for currently logged in user.")),
+				getConfigListEntry(_("Search results"), config.plugins.ecasa.searchlimit, _("Number of search results to display at most.")),
 				#getConfigListEntry(_("Cache directory"), config.plugins.ecasa.cache, _("Directory used to store cached images.")),
 			],
 			session = session,

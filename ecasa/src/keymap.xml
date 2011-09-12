@@ -24,6 +24,8 @@
 		<key id="KEY_OK" mapto="select" flags="m"/>
 		<key id="KEY_RED" mapto="exit" flags="m"/>
 		<key id="KEY_EXIT" mapto="exit" flags="m"/>
-		<key id="KEY_BLUE" mapto="users" flags="m"/>
+		<key id="KEY_BLUE" mapto="history" flags="m"/>
+		<key id="KEY_YELLOW" mapto="users" flags="m"/>
+		<key id="KEY_MENU" mapto="contextMenu" flags="m"/>
 	</map>
 </keymap>

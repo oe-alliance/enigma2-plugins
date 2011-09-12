@@ -3,6 +3,7 @@ from __future__ import print_function
 #pragma mark - GUI
 
 #pragma mark Screens
+from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
@@ -100,7 +101,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 			"exit":self.close,
 			"albums":(self.albums, _("show your albums (if logged in)")),
 			"search":(self.search, _("start a new search")),
-			"contextmenu":(self.contextMenu, _("open context menu")),
+			"contextMenu":(self.contextMenu, _("open context menu")),
 			}, -1)
 
 		self.offset = 0
@@ -205,7 +206,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		our_print("nextPage")
 		offset = self.offset + self.PICS_PER_PAGE
 		Len = len(self.pictures)
-		if offset > Len:
+		if offset >= Len:
 			self.offset = 0
 		else:
 			self.offset = offset
@@ -216,11 +217,11 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		our_print("prevPage")
 		offset = self.offset - self.PICS_PER_PAGE
 		if offset < 0:
-			Len = len(self.pictures)
+			Len = len(self.pictures) - 1
 			offset = Len - (Len % self.PICS_PER_PAGE)
 			self.offset = offset
-			if offset + self.highlighted > Len:
-				self.highlighted = Len - offset - 1
+			if offset + self.highlighted >= Len:
+				self.highlighted = Len - offset
 		else:
 			self.offset = offset
 		self.setup()
@@ -269,14 +270,60 @@ class EcasaPictureWall(Screen, HelpableScreen):
 		self.session.openWithCallback(
 			self.searchCallback,
 			NTIVirtualKeyBoard,
-			title = _("Enter text to search for")
+			title=_("Enter text to search for")
 		)
 	def searchCallback(self, text=None):
 		if text:
-			thread = EcasaThread(lambda:self.api.getSearch(text, limit=str(self.PICS_PER_PAGE)))
+			# Maintain history
+			history = config.plugins.ecasa.searchhistory.value
+			if text not in history:
+				history.insert(0, text)
+				del history[10:]
+			else:
+				history.remove(text)
+				history.insert(0, text)
+			config.plugins.ecasa.searchhistory.save()
+
+			# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
+			thread = EcasaThread(lambda:self.api.getSearch(text, limit=str(config.plugins.ecasa.searchlimit.value)))
 			self.session.open(EcasaFeedview, thread, api=self.api)
+
 	def contextMenu(self):
-		self.session.openWithCallback(self.setupClosed, EcasaSetup)
+		options = [
+			(_("Setup"), lambda: self.session.openWithCallback(self.setupClosed, EcasaSetup)),
+			(_("Search History"), self.openHistory),
+		]
+		self.session.openWithCallback(
+			self.menuCallback,
+			ChoiceBox,
+			list=options
+		)
+
+	def menuCallback(self, ret=None):
+		if ret:
+			ret[1]()
+
+	def openHistory(self):
+		options = [(x, x) for x in config.plugins.ecasa.searchhistory.value]
+
+		if options:
+			self.session.openWithCallback(
+				self.historyWrapper,
+				ChoiceBox,
+				title=_("Select text to search for"),
+				list=options
+			)
+		else:
+			self.session.open(
+				MessageBox,
+				_("No history"),
+				type=MessageBox.TYPE_INFO
+			)
+
+	def historyWrapper(self, ret):
+		if ret:
+			self.searchCallback(ret[1])
+
 	def setupClosed(self):
 		self.api.setCredentials(
 			config.plugins.ecasa.google_username.value,
@@ -351,13 +398,14 @@ class EcasaAlbumview(Screen, HelpableScreen):
 		self['list'] = List()
 		self['key_red'] = StaticText(_("Close"))
 		self['key_green'] = StaticText()
-		self['key_yellow'] = StaticText()
-		self['key_blue'] = StaticText(_("Change user"))
+		self['key_yellow'] = StaticText(_("Change user"))
+		self['key_blue'] = StaticText(_("User history"))
 
 		self["albumviewActions"] = HelpableActionMap(self, "EcasaAlbumviewActions", {
 			"select":(self.select, _("show album")),
 			"exit":(self.close, _("Close")),
-			"users":(self.users, _("Change user"))
+			"users":(self.users, _("Change user")),
+			"history":(self.history, _("User history")),
 		}, -1)
 
 		self.acquireAlbumsForUser(user)
@@ -401,7 +449,39 @@ class EcasaAlbumview(Screen, HelpableScreen):
 		)
 	def searchCallback(self, text=None):
 		if text:
+			# Maintain history
+			history = config.plugins.ecasa.userhistory.value
+			if text not in history:
+				history.insert(0, text)
+				del history[10:]
+			else:
+				history.remove(text)
+				history.insert(0, text)
+			config.plugins.ecasa.userhistory.save()
+
+			# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
 			self.session.openWithCallback(self.close, EcasaAlbumview, self.api, text)
+
+	def history(self):
+		options = [(x, x) for x in config.plugins.ecasa.userhistory.value]
+
+		if options:
+			self.session.openWithCallback(
+				self.historyWrapper,
+				ChoiceBox,
+				title=_("Select user"),
+				list=options
+			)
+		else:
+			self.session.open(
+				MessageBox,
+				_("No history"),
+				type=MessageBox.TYPE_INFO
+			)
+
+	def historyWrapper(self, ret):
+		if ret:
+			self.searchCallback(ret[1])
 
 class EcasaPicture(Screen, HelpableScreen):
 	"""Display a single picture and its metadata."""
