@@ -210,11 +210,11 @@ int eServiceWebTS::openHttpConnection(std::string url)
 	}
 
 	std::string request = "GET ";
-	request.append(uri).append(" HTTP/1.1\n");
-	request.append("Host: ").append(host).append("\n");
-	request.append("Accept: */*\n");
-	request.append("Connection: close\n");
-	request.append("\n");
+	request.append(uri).append(" HTTP/1.1\r\n");
+	request.append("Host: ").append(host).append("\r\n");
+	request.append("Accept: */*\r\n");
+	request.append("Connection: close\r\n");
+	request.append("\r\n");
 	//eDebug(request.c_str());
 	write(fd, request.c_str(), request.length());
 
