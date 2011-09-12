@@ -650,6 +650,18 @@ bool eStreamThreadWeb::scanAudioInfo(unsigned char buf[], int len)
 					APID =pid;
 			}
 			break;
+		case 0x0f:
+			if (APID == 0)
+				APID =pid;
+			lang = getDescriptor(pmt+b+5, pmt[b+4], LANGUAGE_DESCRIPTOR);
+			ainfo->addAudio(pid, lang, "AAC", eDVBAudio::aAAC);
+			break;
+		case 0x11:
+			if (APID == 0)
+				APID =pid;
+			lang = getDescriptor(pmt+b+5, pmt[b+4], LANGUAGE_DESCRIPTOR);
+			ainfo->addAudio(pid, lang, "AACHE", eDVBAudio::aAACHE);
+			break;
 		}
 		b += 4 + pmt[b+4];
 	}
