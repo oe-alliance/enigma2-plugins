@@ -6,6 +6,7 @@ from __future__ import print_function
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
+from Screens.InfoBarGenerics import InfoBarNotifications
 from Screens.MessageBox import MessageBox
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 from EcasaSetup import EcasaSetup
@@ -27,6 +28,7 @@ from TagStrip import strip_readable
 
 from enigma import ePicLoad, ePythonMessagePump, getDesktop
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Tools.Notifications import AddPopup
 from collections import deque
 
 try:
@@ -36,7 +38,9 @@ except NameError:
 
 our_print = lambda *args, **kwargs: print("[EcasaGui]", *args, **kwargs)
 
-class EcasaPictureWall(Screen, HelpableScreen):
+AUTHENTICATION_ERROR_ID = "EcasaAuthenticationError"
+
+class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 	"""Base class for so-called "picture walls"."""
 	PICS_PER_PAGE = 15
 	PICS_PER_ROW = 5
@@ -72,12 +76,22 @@ class EcasaPictureWall(Screen, HelpableScreen):
 	def __init__(self, session, api=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
+		InfoBarNotifications.__init__(self)
 
 		if api is None:
-			self.api = PicasaApi(
+			self.api = PicasaApi(cache=config.plugins.ecasa.cache.value)
+			try:
+				self.api.setCredentials(
 					config.plugins.ecasa.google_username.value,
-					config.plugins.ecasa.google_password.value,
-					config.plugins.ecasa.cache.value)
+					config.plugins.ecasa.google_password.value
+				)
+			except Exception as e:
+				AddPopup(
+					_("Unable to authenticate with Google: %s.") % (e.message),
+					MessageBox.TYPE_ERROR,
+					5,
+					id=AUTHENTICATION_ERROR_ID,
+				)
 		else:
 			self.api = api
 
@@ -361,10 +375,18 @@ class EcasaPictureWall(Screen, HelpableScreen):
 			self.searchCallback(ret[1])
 
 	def setupClosed(self):
-		self.api.setCredentials(
-			config.plugins.ecasa.google_username.value,
-			config.plugins.ecasa.google_password.value
-		)
+		try:
+			self.api.setCredentials(
+				config.plugins.ecasa.google_username.value,
+				config.plugins.ecasa.google_password.value
+			)
+		except Exception as e:
+			AddPopup(
+				_("Unable to authenticate with Google: %s.") % (e.message),
+				MessageBox.TYPE_ERROR,
+				5,
+				id=AUTHENTICATION_ERROR_ID,
+			)
 		self.api.cache = config.plugins.ecasa.cache.value
 
 	def gotPictures(self, pictures):
@@ -412,7 +434,7 @@ class EcasaFeedview(EcasaPictureWall):
 	def albums(self):
 		pass
 
-class EcasaAlbumview(Screen, HelpableScreen):
+class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 	"""Displays albums."""
 	skin = """<screen position="center,center" size="560,420">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
@@ -437,6 +459,7 @@ class EcasaAlbumview(Screen, HelpableScreen):
 	def __init__(self, session, api, user='default'):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
+		InfoBarNotifications.__init__(self)
 		self.api = api
 		self.user = user
 
@@ -528,7 +551,7 @@ class EcasaAlbumview(Screen, HelpableScreen):
 		if ret:
 			self.searchCallback(ret[1])
 
-class EcasaPicture(Screen, HelpableScreen):
+class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 	"""Display a single picture and its metadata."""
 	PAGE_PICTURE = 0
 	PAGE_INFO = 1
@@ -544,6 +567,7 @@ class EcasaPicture(Screen, HelpableScreen):
 		</screen>""".format(size_w=size_w,size_h=size_h,labelwidth=size_w-50)
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
+		InfoBarNotifications.__init__(self)
 
 		self.api = api
 		self.page = self.PAGE_PICTURE
