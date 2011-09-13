@@ -322,7 +322,7 @@ class EcasaPictureWall(Screen, HelpableScreen):
 
 			# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
 			thread = EcasaThread(lambda:self.api.getSearch(text, limit=str(config.plugins.ecasa.searchlimit.value)))
-			self.session.open(EcasaFeedview, thread, api=self.api)
+			self.session.open(EcasaFeedview, thread, api=self.api, title=_("Search for %s") % (text))
 
 	def contextMenu(self):
 		options = [
@@ -391,14 +391,23 @@ class EcasaOverview(EcasaPictureWall):
 		thread.deferred.addCallbacks(self.gotPictures, self.errorPictures)
 		thread.start()
 
+	def layoutFinished(self):
+		EcasaPictureWall.layoutFinished(self)
+		self.setTitle(_("eCasa: %s") % (_("Featured Photos")))
+
 class EcasaFeedview(EcasaPictureWall):
 	"""Display a nonspecific feed."""
-	def __init__(self, session, thread, api=None):
+	def __init__(self, session, thread, api=None, title=None):
 		EcasaPictureWall.__init__(self, session, api=api)
 		self.skinName = ["EcasaFeedview", "EcasaPictureWall"]
+		self.feedTitle = title
 		self['key_green'].text = ''
 		thread.deferred.addCallbacks(self.gotPictures, self.errorPictures)
 		thread.start()
+
+	def layoutFinished(self):
+		EcasaPictureWall.layoutFinished(self)
+		self.setTitle(_("eCasa: %s") % (self.feedTitle or _("Album")))
 
 	def albums(self):
 		pass
@@ -475,7 +484,7 @@ class EcasaAlbumview(Screen, HelpableScreen):
 		if cur:
 			album = cur[-1]
 			thread = EcasaThread(lambda:self.api.getAlbum(album))
-			self.session.open(EcasaFeedview, thread, api=self.api)
+			self.session.open(EcasaFeedview, thread, api=self.api, title=album.title and album.title.text)
 
 	def users(self):
 		self.session.openWithCallback(
