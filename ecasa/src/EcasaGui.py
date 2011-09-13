@@ -646,8 +646,8 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		title = photo.title.text if photo.title.text else unk
 		self.setTitle(_("eCasa: %s") % (title))
 		self['title'].text = _("Title: %s") % (title,)
-		summary = strip_readable(photo.summary.text) if photo.summary.text else unk
-		self['summary'].text = _("Summary: %s") % (summary,)
+		summary = strip_readable(photo.summary.text).replace('\n\nView Photo', '') if photo.summary.text else ''
+		self['summary'].text = summary
 		if photo.media and photo.media.keywords and photo.media.keywords.text:
 			keywords = photo.media.keywords.text
 			# TODO: find a better way to handle this
