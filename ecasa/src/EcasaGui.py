@@ -620,8 +620,6 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		ptr = self.picload.getData()
 		if ptr is not None:
 			self['pixmap'].instance.setPixmap(ptr.__deref__())
-			if self.page == self.PAGE_PICTURE:
-				self['pixmap'].show()
 			if self.nextPhoto is not None:
 				self.timer.start(config.plugins.ecasa.slideshow_interval.value*1000, True)
 
@@ -752,10 +750,10 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 
 	def previous(self):
 		if self.prevFunc: self.reloadData(self.prevFunc())
-		self['pixmap'].hide()
+		self['pixmap'].instance.setPixmap(None)
 	def next(self):
 		if self.nextFunc: self.reloadData(self.nextFunc())
-		self['pixmap'].hide()
+		self['pixmap'].instance.setPixmap(None)
 
 #pragma mark - Thread
 
