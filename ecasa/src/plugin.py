@@ -4,7 +4,6 @@ from __future__ import print_function
 
 def main(session, *args, **kwargs):
 	import EcasaGui
-	reload(EcasaGui)
 	session.open(EcasaGui.EcasaOverview)
 
 def Plugins(**kwargs):
