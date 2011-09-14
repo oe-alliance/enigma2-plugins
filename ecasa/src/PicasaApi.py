@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 #pragma mark - Picasa API
 
 import gdata.photos.service
@@ -8,6 +10,28 @@ import os
 from twisted.internet import reactor
 from twisted.internet.defer import Deferred
 from twisted.web.client import downloadPage
+
+def list_recursive(dirname):
+	for file in os.listdir(dirname):
+		fn = os.path.join(dirname, file)
+		if os.path.isfile(fn):
+			yield fn
+		elif os.path.isdir(fn):
+			for f in list_recursive(fn):
+				yield f
+
+def remove_empty(dirname):
+	files = os.listdir(dirname)
+	if files:
+		for file in os.listdir(dirname):
+			fn = os.path.join(dirname, file)
+			if os.path.isdir(fn):
+				remove_empty(fn)
+	else:
+		try:
+			os.rmdir(dirname)
+		except OSError as ose:
+			print("Unable to remove directory", dirname + ":", ose)
 
 #_PicasaApi__returnPhotos = lambda photos: [(photo.title.text, photo) for photo in photos.entry]
 _PicasaApi__returnPhotos = lambda photos: photos.entry
@@ -82,5 +106,27 @@ class PicasaApi:
 
 	def downloadThumbnail(self, photo):
 		return self.downloadPhoto(photo, thumbnail=True)
+
+	def cleanupCache(self, maxSize):
+		"""
+			Housekeeping for our download cache.
+			Removes pictures and thumbnails (oldest to newest) until the cache is smaller than maxSize MB.
+		"""
+		stat = os.stat
+		maxSize *= 1048576 # input size is assumed to be in mb, but we work with bytes internally
+
+		files = [(f, stat(f)) for f in list_recursive(self.cache)]
+		curSize = sum(map(lambda x: x[1].st_size, files))
+		if curSize > maxSize:
+			files.sort(key=lambda x: x[1].st_mtime)
+			while curSize > maxSize:
+				file, stat = files.pop(0)
+				try:
+					os.unlink(file)
+				except Exception as e:
+					print("[PicasaApi] Unable to unlink file", file + ":", e)
+				else:
+					curSize -= stat.st_size
+			remove_empty(self.cache)
 
 __all__ = ['PicasaApi']

@@ -42,6 +42,7 @@ class EcasaSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("Albums of"), config.plugins.ecasa.user, _("Show albums for this user by default. Use \"default\" for currently logged in user.")),
 				getConfigListEntry(_("Search results"), config.plugins.ecasa.searchlimit, _("Number of search results to display at most.")),
 				#getConfigListEntry(_("Cache directory"), config.plugins.ecasa.cache, _("Directory used to store cached images.")),
+				getConfigListEntry(_("Cache size"), config.plugins.ecasa.cachesize, _("Size of local picture cache. If the maximum size is reached the cleanup process will delete the oldest existing pictured after the plugin was closed.")),
 			],
 			session = session,
 			on_change = self.changed

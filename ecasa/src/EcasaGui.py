@@ -254,6 +254,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		self.highlighted = highlighted
 	def nextPage(self):
 		our_print("nextPage")
+		if not self.pictures: return
 		offset = self.offset + self.PICS_PER_PAGE
 		Len = len(self.pictures)
 		if offset >= Len:
@@ -265,6 +266,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		self.setup()
 	def prevPage(self):
 		our_print("prevPage")
+		if not self.pictures: return
 		offset = self.offset - self.PICS_PER_PAGE
 		if offset < 0:
 			Len = len(self.pictures) - 1
@@ -411,6 +413,12 @@ class EcasaOverview(EcasaPictureWall):
 		self.skinName = ["EcasaOverview", "EcasaPictureWall"]
 		thread = EcasaThread(self.api.getFeatured)
 		thread.deferred.addCallbacks(self.gotPictures, self.errorPictures)
+		thread.start()
+
+		self.onClose.append(self.__onClose)
+
+	def __onClose(self):
+		thread = EcasaThread(lambda: self.api.cleanupCache(config.plugins.ecasa.cachesize.value))
 		thread.start()
 
 	def layoutFinished(self):
@@ -601,6 +609,8 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		ptr = self.picload.getData()
 		if ptr is not None:
 			self['pixmap'].instance.setPixmap(ptr.__deref__())
+			if self.page == self.PAGE_PICTURE:
+				self['pixmap'].show()
 
 	def cbDownload(self, tup):
 		if not self.instance: return
@@ -674,8 +684,10 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 
 	def previous(self):
 		if self.prevFunc: self.reloadData(self.prevFunc())
+		self['pixmap'].hide()
 	def next(self):
 		if self.nextFunc: self.reloadData(self.nextFunc())
+		self['pixmap'].hide()
 
 #pragma mark - Thread
 
