@@ -7,6 +7,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBarGenerics import InfoBarNotifications
+from Screens.LocationBox import LocationBox
 from Screens.MessageBox import MessageBox
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
 from EcasaSetup import EcasaSetup
@@ -26,7 +27,7 @@ from Components.config import config
 from .PicasaApi import PicasaApi
 from TagStrip import strip_readable
 
-from enigma import ePicLoad, ePythonMessagePump, getDesktop
+from enigma import ePicLoad, ePythonMessagePump, eTimer, getDesktop
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Notifications import AddPopup
 from collections import deque
@@ -581,6 +582,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		self.page = self.PAGE_PICTURE
 		self.prevFunc = prevFunc
 		self.nextFunc = nextFunc
+		self.nextPhoto = None
 
 		self['pixmap'] = Pixmap()
 		self['camera'] = StaticText()
@@ -591,6 +593,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		self["pictureActions"] = HelpableActionMap(self, "EcasaPictureActions", {
 			"info": (self.info, _("show metadata")),
 			"exit": (self.close, _("Close")),
+			"contextMenu":(self.contextMenu, _("open context menu")),
 			}, -1)
 		if prevFunc and nextFunc:
 			self["directionActions"] = HelpableActionMap(self, "DirectionActions", {
@@ -600,9 +603,17 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.gotPicture)
+		self.timer = eTimer()
+		self.timer.callback.append(self.timerFired)
 
 		# populate with data, initiate download
 		self.reloadData(photo)
+
+		self.onClose.append(self.__onClose)
+
+	def __onClose(self):
+		if self.nextPhoto is not None:
+			self.toggleSlideshow()
 
 	def gotPicture(self, picInfo=None):
 		our_print("picture decoded")
@@ -611,6 +622,8 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 			self['pixmap'].instance.setPixmap(ptr.__deref__())
 			if self.page == self.PAGE_PICTURE:
 				self['pixmap'].show()
+			if self.nextPhoto is not None:
+				self.timer.start(config.plugins.ecasa.slideshow_interval.value*1000, True)
 
 	def cbDownload(self, tup):
 		if not self.instance: return
@@ -636,6 +649,61 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		else:
 			self.page = self.PAGE_PICTURE
 			self['pixmap'].show()
+
+	def contextMenu(self):
+		options = [
+			(_("Download Picture"), self.doDownload),
+		]
+		if self.prevFunc and self.nextFunc:
+			options.append(
+				(_("Start Slideshow") if self.nextPhoto is None else _("Stop Slideshow"), self.toggleSlideshow)
+			)
+		self.session.openWithCallback(
+			self.menuCallback,
+			ChoiceBox,
+			list=options
+		)
+
+	def menuCallback(self, ret=None):
+		if ret:
+			ret[1]()
+
+	def doDownload(self):
+		self.session.openWithCallback(
+			self.gotFilename,
+			LocationBox,
+			_("Where to save?"),
+			self.photo.media.content[0].url.split('/')[-1],
+		)
+
+	def gotFilename(self, res):
+		if res:
+			try:
+				self.api.copyPhoto(self.photo, res)
+			except Exception as e:
+				self.session.open(
+					MessageBox,
+					_("Unable to download picture: %s") % (e),
+					type=MessageBox.TYPE_INFO
+				)
+
+	def toggleSlideshow(self):
+		# is slideshow currently running?
+		if self.nextPhoto is not None:
+			self.timer.stop()
+			self.previous() # we already moved forward in our parent view, so move back
+			self.nextPhoto = None
+		else:
+			self.timer.start(config.plugins.ecasa.slideshow_interval.value*1000, True)
+			self.timerFired()
+
+	def timerFired(self):
+		if self.nextPhoto:
+			self.reloadData(self.nextPhoto)
+			self.timer.stop()
+		self.nextPhoto = self.nextFunc()
+		# XXX: for now, only start download. later on we might want to pre-parse the picture
+		self.api.downloadPhoto(self.nextPhoto)
 
 	def reloadData(self, photo):
 		if photo is None: return

@@ -6,6 +6,7 @@ import gdata.photos.service
 import gdata.media
 import gdata.geo
 import os
+import shutil
 
 from twisted.internet import reactor
 from twisted.internet.defer import Deferred
@@ -107,10 +108,46 @@ class PicasaApi:
 	def downloadThumbnail(self, photo):
 		return self.downloadPhoto(photo, thumbnail=True)
 
-	def cleanupCache(self, maxSize):
+	def copyPhoto(self, photo, target, recursive=True):
+		"""Attempt to copy photo from cache to given destination.
+
+		Arguments:
+		photo: photo object to download.
+		target: target filename
+		recursive (optional): attempt to download picture if it does not exist yet
+
+		Returns:
+		True if image was copied successfully,
+		False if image did not exist and download was initiated,
+		otherwise None.
+
+		Raises:
+		shutil.Error if an error occured during moving the file.
 		"""
-			Housekeeping for our download cache.
-			Removes pictures and thumbnails (oldest to newest) until the cache is smaller than maxSize MB.
+		if not photo: return
+
+		cache = os.path.join(self.cache, photo.albumid.text)
+		filename = photo.media.content[0].url.split('/')[-1]
+		fullname = os.path.join(cache, filename)
+
+		# file exists, assume it's valid...
+		if os.path.exists(fullname):
+			shutil.copy(fullname, target)
+			return True
+		else:
+			print("[PicasaApi] Photo does not exist in cache, trying to download with deferred copy operation")
+			self.downloadPhoto(photo).addCallback(
+				lambda value:self.copyPhoto(photo, target, recursive=False)
+			)
+			return False
+
+	def cleanupCache(self, maxSize):
+		"""Housekeeping for our download cache.
+
+		Removes pictures and thumbnails (oldest to newest) until the cache is smaller than maxSize MB.
+
+		Arguments:
+		maxSize: maximum size of cache im MB.
 		"""
 		stat = os.stat
 		maxSize *= 1048576 # input size is assumed to be in mb, but we work with bytes internally
