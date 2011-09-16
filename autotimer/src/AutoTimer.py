@@ -176,7 +176,6 @@ class AutoTimer:
 		Components.Task.job_manager.AddJob(self.createTask())
 
 	def createTask(self):
-		print("[AutoTimer] TEST")
 		job = Components.Task.Job(_("AutoTimerTask"))
 
 		task = Components.Task.PythonTask(job, _("Parsing Timers..."))
@@ -279,6 +278,10 @@ class AutoTimer:
 				if begin < time() + 60:
 					print("[AutoTimer] Skipping an event because it starts in less than 60 seconds")
 					continue
+
+				# Set short description to equal extended description if it is empty.
+				if not shortdesc:
+					shortdesc = extdesc
 
 				# Convert begin time
 				timestamp = localtime(begin)
