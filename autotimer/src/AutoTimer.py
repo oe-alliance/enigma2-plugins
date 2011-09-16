@@ -542,14 +542,14 @@ class AutoTimer:
 # 		return (self.total, self.new, self.modified, self.timers, len(self.conflicting), len(self.similars))
 
 		if self.autoPoll:
-			if self.conflicting and config.plugins.autotimer.notifconflict.value:
+			if conflicting and config.plugins.autotimer.notifconflict.value:
 				AddPopup(
 					_("%d conflict(s) encountered when trying to add new timers:\n%s") % (len(conflicting), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in conflicting])),
 					MessageBox.TYPE_INFO,
 					5,
 					CONFLICTNOTIFICATIONID
 				)
-			elif self.similars and config.plugins.autotimer.notifsimilar.value:
+			elif similars and config.plugins.autotimer.notifsimilar.value:
 				AddPopup(
 					_("%d conflict(s) solved with similar timer(s):\n%s") % (len(similars), '\n'.join([_("%s: %s at %s") % (x[4], x[0], FuzzyTime(x[2])) for x in similars])),
 					MessageBox.TYPE_INFO,
