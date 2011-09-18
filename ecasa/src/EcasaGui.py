@@ -734,8 +734,8 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		self['keywords'].text = _("Keywords: %s") % (keywords,)
 
 		try:
-			real_w = int(photo.media.content[0].width.text)
-			real_h = int(photo.media.content[0].heigth.text)
+			real_w = int(photo.media.content[0].width)
+			real_h = int(photo.media.content[0].heigth)
 		except Exception as e:
 			our_print("EcasaPicture.__init__: illegal w/h values, using max size!")
 			size = getDesktop(0).size()
