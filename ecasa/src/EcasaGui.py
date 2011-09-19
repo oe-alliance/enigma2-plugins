@@ -127,8 +127,6 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		# thumbnail loader
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.gotPicture)
-		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((90, 90, sc[0], sc[1], False, 1, '#ff000000')) # TODO: hardcoded size is evil!
 		self.currentphoto = None
 		self.queue = deque()
 
@@ -137,6 +135,10 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 	def layoutFinished(self):
 		self["highlight"].instance.setPixmapFromFile(resolveFilename(SCOPE_PLUGINS, "Extensions/Ecasa/highlighted.png"))
 		self["highlight"].hide()
+
+		size = self['image0'].instance.size()
+		sc = AVSwitch().getFramebufferScale()
+		self.picload.setPara((size.width(), size.height(), sc[0], sc[1], False, 1, '#ff000000'))
 
 	@property
 	def highlighted(self):
@@ -235,7 +237,6 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 			self.highlighted = highlighted
 
 	def left(self):
-		# TODO: implement for incomplete pages
 		highlighted = (self.highlighted - 1) % self.PICS_PER_PAGE
 		our_print("left. before:", self.highlighted, ", after:", highlighted)
 		self.highlighted = highlighted
