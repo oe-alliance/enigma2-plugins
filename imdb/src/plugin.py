@@ -668,13 +668,6 @@ def main(session, eventName="", **kwargs):
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="IMDb Details",
 			description=_("Query details from the Internet Movie Database"),
-			icon="imdb.png",
-			where=PluginDescriptor.WHERE_PLUGINMENU,
-			fnc=main,
-			needsRestart=False,
-			),
-			PluginDescriptor(name="IMDb Details",
-			description=_("Query details from the Internet Movie Database"),
 			where=PluginDescriptor.WHERE_EVENTINFO,
 			fnc=eventinfo,
 			needsRestart=False,
