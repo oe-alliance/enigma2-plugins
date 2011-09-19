@@ -36,14 +36,6 @@ def movielist(session, service, **kwargs):
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			name = "EPGSearch",
-			# TRANSLATORS: description of EPGSearch in PluginBrowser
-			description = _("Search EPG"),
-			where = PluginDescriptor.WHERE_PLUGINMENU,
-			fnc = main,
-			needsRestart = False,
-		),
-		PluginDescriptor(
 			# TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 			name = _("search EPG..."),
 			where = PluginDescriptor.WHERE_EVENTINFO,
