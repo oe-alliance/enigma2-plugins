@@ -338,7 +338,6 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 				history.insert(0, text)
 			config.plugins.ecasa.searchhistory.save()
 
-			# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
 			thread = EcasaThread(lambda:self.api.getSearch(text, limit=str(config.plugins.ecasa.searchlimit.value)))
 			self.session.open(EcasaFeedview, thread, api=self.api, title=_("Search for %s") % (text))
 
@@ -537,7 +536,6 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 				history.insert(0, text)
 			config.plugins.ecasa.userhistory.save()
 
-			# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
 			self.session.openWithCallback(self.close, EcasaAlbumview, self.api, text)
 
 	def history(self):
@@ -653,6 +651,12 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		options = [
 			(_("Download Picture"), self.doDownload),
 		]
+		photo = self.photo
+		if photo.author:
+			author = photo.author[0]
+			options.append(
+				(_("%s's Gallery") % (author.name.text), self.showAlbums)
+			)
 		if self.prevFunc and self.nextFunc:
 			options.append(
 				(_("Start Slideshow") if self.nextPhoto is None else _("Stop Slideshow"), self.toggleSlideshow)
@@ -685,6 +689,9 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 					_("Unable to download picture: %s") % (e),
 					type=MessageBox.TYPE_INFO
 				)
+
+	def showAlbums(self):
+		self.session.open(EcasaAlbumview, self.api, user=self.photo.author[0].email.text)
 
 	def toggleSlideshow(self):
 		# is slideshow currently running?
