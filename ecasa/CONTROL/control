@@ -3,4 +3,4 @@ Version: 0.0.1-20110908-r0
 Description: simple picasa client
 Maintainer: Moritz Venn <moritz.venn@freaque.net>
 Homepage: http://www.ritzmo.de
-Depends: enigma2 (>= 2.6git20090120), python-gdata, python-shell
+Depends: enigma2 (>= 2.6git20090120), python-gdata, python-shell, python-netclient, python-io
