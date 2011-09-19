@@ -402,10 +402,11 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		our_print("errorPictures", error)
 		self.session.open(
 			MessageBox,
-			_("Error downloading") + ': ' + error.message,
+			_("Error downloading") + ': ' + error.value.message,
 			type=MessageBox.TYPE_ERROR,
 			timeout=3
 		)
+		self["waitingtext"].hide()
 
 class EcasaOverview(EcasaPictureWall):
 	"""Overview and supposed entry point of ecasa. Shows featured pictures on the "EcasaPictureWall"."""
@@ -633,7 +634,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		print("ebDownload", error)
 		self.session.open(
 			MessageBox,
-			_("Error downloading") + ': ' + error.message,
+			_("Error downloading") + ': ' + error.value.message,
 			type=MessageBox.TYPE_ERROR,
 			timeout=3
 		)
