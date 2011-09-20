@@ -81,7 +81,7 @@ eBitrateCalc::eBitrateCalc(int pid, int dvbnamespace, int tsid, int onid, int re
 		else
 			eDebug("[eBitrateCalc] allocate pvr_allocated_demux failed...");
 	}
-	if (m_reader and success)
+	if (m_reader && success)
 	{
 		clock_gettime(CLOCK_MONOTONIC, &m_start);
 		m_reader->setBufferSize(buffer_size);
