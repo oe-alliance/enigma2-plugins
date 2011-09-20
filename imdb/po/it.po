@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - imdb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-19 16:25+0100\n"
-"PO-Revision-Date: 2010-10-19 16:27+0100\n"
+"POT-Creation-Date: 2011-09-18 17:45+0100\n"
+"PO-Revision-Date: 2011-09-20 21:42+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,123 +14,143 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: /home/dario/Plugins/imdb\n"
-"X-Poedit-SearchPath-0: /home/dario/Plugins/imdb\n"
+"X-Poedit-Basepath: .../enigma2-plugins/imdb\n"
+"X-Poedit-SearchPath-0: .../enigma2-plugins/imdb\n"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:41
+#: .../enigma2-plugins/imdb/src/plugin.py:56
 msgid "Channel Selection"
 msgstr "Selezione Canale"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:70
+#: .../enigma2-plugins/imdb/src/plugin.py:85
 msgid "Lookup"
 msgstr "Ricerca"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:138
+#: .../enigma2-plugins/imdb/src/plugin.py:154
 msgid "The Internet Movie Database"
 msgstr "Il Database Internet dei Film"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:148
+#: .../enigma2-plugins/imdb/src/plugin.py:170
 msgid "Exit"
 msgstr "Uscire"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:299
+#: .../enigma2-plugins/imdb/src/plugin.py:323
 msgid "Ambiguous results"
 msgstr "Risultati ambigui"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:300
+#: .../enigma2-plugins/imdb/src/plugin.py:324
 msgid "Please select the matching entry"
 msgstr "Selezionare la voce di confronto"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:303
+#: .../enigma2-plugins/imdb/src/plugin.py:327
 msgid "Title Menu"
 msgstr "Menu Titolo"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:304
-#: /home/dario/Plugins/imdb/src/plugin.py:458
+#: .../enigma2-plugins/imdb/src/plugin.py:328
+#: .../enigma2-plugins/imdb/src/plugin.py:540
 msgid "Details"
 msgstr "Dettagli"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:315
-#: /home/dario/Plugins/imdb/src/plugin.py:438
+#: .../enigma2-plugins/imdb/src/plugin.py:339
+#: .../enigma2-plugins/imdb/src/plugin.py:505
+#: .../enigma2-plugins/imdb/src/plugin.py:521
 #, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "Ripetere ricerca IMDb: %s"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:374
+#: .../enigma2-plugins/imdb/src/plugin.py:371
+msgid "Enter search"
+msgstr "Testo ricerca"
+
+#: .../enigma2-plugins/imdb/src/plugin.py:372
+msgid "Select from EPG"
+msgstr "Selezionare da EPG"
+
+#: .../enigma2-plugins/imdb/src/plugin.py:377
+msgid "Play Trailer"
+msgstr "Riprodurre trailer"
+
+#: .../enigma2-plugins/imdb/src/plugin.py:378
+msgid "Search Trailer"
+msgstr "Ricercare trailer"
+
+#: .../enigma2-plugins/imdb/src/plugin.py:415
+msgid "Enter text to search for"
+msgstr "Inserire il testo per la ricerca"
+
+#: .../enigma2-plugins/imdb/src/plugin.py:447
 #, python-format
 msgid "Query IMDb: %s..."
 msgstr "Ricerca IMDb: %s"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:381
+#: .../enigma2-plugins/imdb/src/plugin.py:456
 msgid "Could't get Eventname"
 msgstr "Nome evento non ottenibile!"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:385
+#: .../enigma2-plugins/imdb/src/plugin.py:460
 msgid "IMDb Download failed"
 msgstr "Download IMDb fallito!"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:414
+#: .../enigma2-plugins/imdb/src/plugin.py:489
 msgid "IMDb Download completed"
 msgstr "Download IMDb completato!"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:432
-#: /home/dario/Plugins/imdb/src/plugin.py:433
+#: .../enigma2-plugins/imdb/src/plugin.py:515
+#: .../enigma2-plugins/imdb/src/plugin.py:516
 msgid "No IMDb match."
 msgstr "Nessun riscontro IMDb!"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:445
+#: .../enigma2-plugins/imdb/src/plugin.py:527
 msgid "IMDb query failed!"
 msgstr "Ricerca IMDb fallita!"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:448
+#: .../enigma2-plugins/imdb/src/plugin.py:530
 msgid "IMDb Re-Download completed"
 msgstr "Ripetizione Download IMDb completato"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:456
+#: .../enigma2-plugins/imdb/src/plugin.py:538
 msgid "No details found."
 msgstr "Nessun dettaglio trovato!"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:459
-#: /home/dario/Plugins/imdb/src/plugin.py:539
+#: .../enigma2-plugins/imdb/src/plugin.py:541
+#: .../enigma2-plugins/imdb/src/plugin.py:621
 msgid "IMDb Details parsed"
 msgstr "Dettagli IMDb analizzati"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:484
+#: .../enigma2-plugins/imdb/src/plugin.py:566
 msgid "no user rating yet"
 msgstr "Valutazioni non ancora disponibili!"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:488
+#: .../enigma2-plugins/imdb/src/plugin.py:570
 msgid "User Rating"
 msgstr "Valutazione utente"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:501
+#: .../enigma2-plugins/imdb/src/plugin.py:583
 msgid " as "
 msgstr " nel ruolo di  "
 
-#: /home/dario/Plugins/imdb/src/plugin.py:505
+#: .../enigma2-plugins/imdb/src/plugin.py:587
 msgid "Cast: "
 msgstr "Cast: "
 
-#: /home/dario/Plugins/imdb/src/plugin.py:507
+#: .../enigma2-plugins/imdb/src/plugin.py:589
 msgid "No cast list found in the database."
 msgstr "Nessuna lista cast trovata nel database!"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:513
+#: .../enigma2-plugins/imdb/src/plugin.py:595
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Download Poster Film: %s"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:533
+#: .../enigma2-plugins/imdb/src/plugin.py:615
 msgid "Extra Info"
 msgstr "Info Extra"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:568
+#: .../enigma2-plugins/imdb/src/plugin.py:648
 msgid "IMDb Plugin"
 msgstr "Plugin IMDb"
 
-#: /home/dario/Plugins/imdb/src/plugin.py:580
-#: /home/dario/Plugins/imdb/src/plugin.py:585
-#: /home/dario/Plugins/imdb/src/plugin.py:592
+#: .../enigma2-plugins/imdb/src/plugin.py:659
+#: .../enigma2-plugins/imdb/src/plugin.py:666
 msgid "Query details from the Internet Movie Database"
 msgstr "Ricerca dettagli da \"Internet Movie Database\""
 
