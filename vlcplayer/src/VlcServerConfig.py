@@ -45,7 +45,7 @@ class ConfigMutable(ConfigElement):
 			self.currentConfig = self.configElementDict[key]
 			self.currentKey = key
 			self.saved_value = self.currentConfig.saved_value
-			
+
 	def setValue(self, val):
 		self.currentConfig.value = val
 		self.changed()
@@ -61,7 +61,7 @@ class ConfigMutable(ConfigElement):
 		return self.currentConfig._value
 
 	_value = property(get_Value, set_Value)
-	
+
 	def fromstring(self, value):
 		return self.currentConfig.fromstring(value)
 
@@ -80,19 +80,9 @@ class ConfigMutable(ConfigElement):
 	def cancel(self):
 		self.setAsCurrent(self.defaultKey)
 		self.load()
-		
+
 	def isChanged(self):
 		return self.currentConfig.isChanged()
-
-	def changed(self):
-		for x in self.notifiers:
-			x(self)
-			
-	def addNotifier(self, notifier, initial_call = True):
-		assert callable(notifier), "notifiers must be callable"
-		self.notifiers.append(notifier)
-		if initial_call:
-			notifier(self)
 
 	def disableSave(self):
 		self.currentConfig.disableSave()
@@ -127,7 +117,7 @@ class ConfigSelectionExtended(ConfigSelection):
 		ConfigSelection.__init__(self, choices, default)
 
 	def deleteNotifier(self, notifier):
-		self.notifiers.remove(notifier)
+		self.removeNotifier(notifier)
 
 
 class __VlcServerConfig():

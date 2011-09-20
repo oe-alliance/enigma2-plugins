@@ -157,10 +157,10 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 	def setupList(self, *args):
 		last = self.cur
 		if self.setupList in last.protocol.notifiers:
-			last.protocol.notifiers.remove(self.setupList)
+			last.protocol.removeNotifier(self.setupList)
 		cur = self.hostElement.value
 		self.cur = cur
-		cur.protocol.notifiers.append(self.setupList)
+		cur.protocol.addNotifier(self.setupList)
 
 		l = [
 			getConfigListEntry(_("Host"), self.hostElement),
@@ -213,7 +213,7 @@ class GrowleeConfiguration(Screen, ConfigListScreen):
 
 	def close(self):
 		if self.setupList in self.cur.protocol.notifiers:
-			self.cur.protocol.notifiers.remove(self.setupList)
+			self.cur.protocol.removeNotifier(self.setupList)
 		Screen.close(self)
 
 def configuration(session, **kwargs):
