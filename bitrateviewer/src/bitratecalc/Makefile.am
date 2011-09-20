@@ -1,4 +1,4 @@
-AM_CXXFLAGS = @LIBCRYPTO_CFLAGS@
+include $(top_srcdir)/Rules-cpp.mak
 
 plugindir = $(libdir)/enigma2/python/Plugins/Extensions/BitrateViewer
 
