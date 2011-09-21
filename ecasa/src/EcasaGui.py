@@ -25,7 +25,7 @@ from Components.config import config
 
 #pragma mark Picasa
 from .PicasaApi import PicasaApi
-from TagStrip import strip_readable
+from .TagStrip import strip_readable
 
 from enigma import ePicLoad, ePythonMessagePump, eTimer, getDesktop
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
