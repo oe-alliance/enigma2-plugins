@@ -12,35 +12,15 @@ from twisted.internet import reactor
 from twisted.internet.defer import Deferred
 from twisted.web.client import downloadPage
 
-def list_recursive(dirname):
-	for file in os.listdir(dirname):
-		fn = os.path.join(dirname, file)
-		if os.path.isfile(fn):
-			yield fn
-		elif os.path.isdir(fn):
-			for f in list_recursive(fn):
-				yield f
-
-def remove_empty(dirname):
-	files = os.listdir(dirname)
-	if files:
-		for file in os.listdir(dirname):
-			fn = os.path.join(dirname, file)
-			if os.path.isdir(fn):
-				remove_empty(fn)
-	else:
-		try:
-			os.rmdir(dirname)
-		except OSError as ose:
-			print("Unable to remove directory", dirname + ":", ose)
-
 #_PicasaApi__returnPhotos = lambda photos: [(photo.title.text, photo) for photo in photos.entry]
 _PicasaApi__returnPhotos = lambda photos: photos.entry
 
-class PicasaApi:
+from PictureApi import PictureApi
+class PicasaApi(PictureApi):
 	"""Wrapper around gdata/picasa API to make our life a little easier."""
 	def __init__(self, email=None, password=None, cache='/tmp/ecasa'):
 		"""Initialize API, login to google servers"""
+		PictureApi.__init__(self, cache=cache)
 		gd_client = gdata.photos.service.PhotosService()
 		gd_client.source = 'enigma2-plugin-extensions-ecasa'
 		if email and password:
@@ -50,7 +30,6 @@ class PicasaApi:
 			gd_client.ProgrammaticLogin()
 
 		self.gd_client = gd_client
-		self.cache = cache
 
 	def setCredentials(self, email, password):
 		# TODO: check if this is sane
@@ -105,9 +84,6 @@ class PicasaApi:
 				lambda error:d.errback((error, photo)))
 		return d
 
-	def downloadThumbnail(self, photo):
-		return self.downloadPhoto(photo, thumbnail=True)
-
 	def copyPhoto(self, photo, target, recursive=True):
 		"""Attempt to copy photo from cache to given destination.
 
@@ -140,30 +116,5 @@ class PicasaApi:
 				lambda value:self.copyPhoto(photo, target, recursive=False)
 			)
 			return False
-
-	def cleanupCache(self, maxSize):
-		"""Housekeeping for our download cache.
-
-		Removes pictures and thumbnails (oldest to newest) until the cache is smaller than maxSize MB.
-
-		Arguments:
-		maxSize: maximum size of cache im MB.
-		"""
-		stat = os.stat
-		maxSize *= 1048576 # input size is assumed to be in mb, but we work with bytes internally
-
-		files = [(f, stat(f)) for f in list_recursive(self.cache)]
-		curSize = sum(map(lambda x: x[1].st_size, files))
-		if curSize > maxSize:
-			files.sort(key=lambda x: x[1].st_mtime)
-			while curSize > maxSize:
-				file, stat = files.pop(0)
-				try:
-					os.unlink(file)
-				except Exception as e:
-					print("[PicasaApi] Unable to unlink file", file + ":", e)
-				else:
-					curSize -= stat.st_size
-			remove_empty(self.cache)
 
 __all__ = ['PicasaApi']
