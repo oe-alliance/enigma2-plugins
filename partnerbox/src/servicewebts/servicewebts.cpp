@@ -262,8 +262,17 @@ RESULT eServiceWebTS::start()
 {
 	ePtr<eDVBResourceManager> rmgr;
 	eDVBResourceManager::getInstance(rmgr);
-	eDVBChannel dvbChannel(rmgr, 0);
-	if (dvbChannel.getDemux(m_decodedemux, iDVBChannel::capDecode) != 0) {
+	// FIXMEE hardcoded chid... this only works for one eServiceWebTS
+	eDVBChannelID chid;
+	chid.dvbnamespace = eDVBNamespace(0);
+	chid.transport_stream_id = eTransportStreamID(0);
+	chid.original_network_id = eOriginalNetworkID(0);
+	chid.pvr_source = "/eServiceWebTS";
+	if (rmgr->allocateChannel(chid, m_channel)) {
+		eDebug("Cannot allocate pvr channel");
+		return -1;
+	}
+	if (m_channel->getDemux(m_decodedemux, iDVBChannel::capDecode) != 0) {
 		eDebug("Cannot allocate decode-demux");
 		return -1;
 	}
@@ -303,6 +312,7 @@ RESULT eServiceWebTS::stop()
 	m_streamthread->stop();
 	m_decodedemux->flush();
 	m_audioInfo = 0;
+	m_channel = 0;
 	APID = 0;
 	VPID = 0;
 	PID_SET = 0;
