@@ -161,7 +161,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 	def gotPicture(self, picInfo=None):
 		ptr = self.picload.getData()
 		idx = self.pictures.index(self.currentphoto)
-		realIdx = idx - self.offset
+		realIdx = (idx - self.offset) % self.PICS_PER_PAGE
 		if ptr is not None:
 			self['image%d' % realIdx].instance.setPixmap(ptr.__deref__())
 		else:
