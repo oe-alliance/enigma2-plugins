@@ -25,7 +25,7 @@ from Components.config import config
 
 #pragma mark Picasa
 from .PicasaApi import PicasaApi
-from TagStrip import strip_readable
+from .TagStrip import strip_readable
 
 from enigma import ePicLoad, ePythonMessagePump, eTimer, getDesktop
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -161,7 +161,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 	def gotPicture(self, picInfo=None):
 		ptr = self.picload.getData()
 		idx = self.pictures.index(self.currentphoto)
-		realIdx = idx - self.offset
+		realIdx = (idx - self.offset) % self.PICS_PER_PAGE
 		if ptr is not None:
 			self['image%d' % realIdx].instance.setPixmap(ptr.__deref__())
 		else:
@@ -439,7 +439,7 @@ class EcasaFeedview(EcasaPictureWall):
 
 	def layoutFinished(self):
 		EcasaPictureWall.layoutFinished(self)
-		self.setTitle(_("eCasa: %s") % (self.feedTitle or _("Album")))
+		self.setTitle(_("eCasa: %s") % (self.feedTitle.encode('utf-8') or _("Album")))
 
 	def albums(self):
 		pass
@@ -490,7 +490,7 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		self.setTitle(_("eCasa: Albums for user %s") % (self.user,))
+		self.setTitle(_("eCasa: Albums for user %s") % (self.user.encode('utf-8'),))
 
 	def acquireAlbumsForUser(self, user):
 		thread = EcasaThread(lambda:self.api.getAlbums(user=user))
@@ -507,17 +507,18 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		self['list'].setList([(_("Error downloading"), "0", None)])
 		self.session.open(
 			MessageBox,
-			_("Error downloading") + ': ' + error.value.message,
+			_("Error downloading") + ': ' + error.value.message.encode('utf-8'),
 			type=MessageBox.TYPE_ERROR,
 			timeout=30,
 		)
 
 	def select(self):
 		cur = self['list'].getCurrent()
-		if cur:
+		if cur and cur[-1]:
 			album = cur[-1]
+			title = cur[0] # NOTE: retrieve from array to be independent of underlaying API as the flickr and picasa albums are not compatible here
 			thread = EcasaThread(lambda:self.api.getAlbum(album))
-			self.session.open(EcasaFeedview, thread, api=self.api, title=album.title and album.title.text)
+			self.session.open(EcasaFeedview, thread, api=self.api, title=title)
 
 	def users(self):
 		self.session.openWithCallback(
@@ -728,10 +729,10 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 			camera = unk
 		self['camera'].text = _("Camera: %s") % (camera,)
 
-		title = photo.title.text if photo.title.text else unk
+		title = photo.title.text.encode('utf-8') if photo.title.text else unk
 		self.setTitle(_("eCasa: %s") % (title))
 		self['title'].text = _("Title: %s") % (title,)
-		summary = strip_readable(photo.summary.text).replace('\n\nView Photo', '') if photo.summary.text else ''
+		summary = strip_readable(photo.summary.text).replace('\n\nView Photo', '').encode('utf-8') if photo.summary.text else ''
 		self['summary'].text = summary
 		if photo.media and photo.media.keywords and photo.media.keywords.text:
 			keywords = photo.media.keywords.text
