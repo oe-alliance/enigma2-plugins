@@ -471,6 +471,14 @@ msgstr "umschalten"
 msgid "zapped"
 msgstr "umgeschaltet"
 
+msgid "add Partnerbox service"
+msgstr "Partnerbox Sender hinzufügen"
+
+msgid "add Partnerbox bouquet"
+msgstr "Partnerbox Bouquet hinzufügen"
+
 #: ../src/PartnerboxSetup.py:257 
 msgid "Zap to service when streaming"
 msgstr "Beim Streamen auf Sender zappen"
+
+

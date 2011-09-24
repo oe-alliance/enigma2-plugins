@@ -393,6 +393,12 @@ msgstr ""
 msgid "zapped"
 msgstr ""
 
+msgid "add Partnerbox service"
+msgstr ""
+
+msgid "add Partnerbox bouquet"
+msgstr ""
+
 #: ../src/PartnerboxSetup.py:257 
 msgid "Zap to service when streaming"
 msgstr ""
