@@ -751,9 +751,9 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				if config.plugins.shoutcast.showcover.value:
 					searchpara="album cover art "
 					if sTitle:
-						url = "http://images.google.com/search?tbm=isch&q=%s%s&biw=%s&bih=%s&ift=jpg" % (quote(searchpara), quote(sTitle), config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
+						url = "http://images.google.com/search?tbm=isch&q=%s%s&biw=%s&bih=%s&ift=jpg&ift=gif&ift=png" % (quote(searchpara), quote(sTitle), config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
 					else:
-						url = "http://images.google.com/search?tbm=isch&q=notavailable&biw=%s&bih=%s&ift=jpg" % (config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
+						url = "http://images.google.com/search?tbm=isch&q=notavailable&biw=%s&bih=%s&ift=jpg&ift=gif&ift=png" % (config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
 					print "[Shoutcast] coverurl = %s " % url
 					if self.currentGoogle:
 						self.nextGoogle = url
