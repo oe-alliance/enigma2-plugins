@@ -399,6 +399,9 @@ msgstr ""
 msgid "add Partnerbox bouquet"
 msgstr ""
 
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
+msgstr ""
+
 #: ../src/PartnerboxSetup.py:257 
 msgid "Zap to service when streaming"
 msgstr ""

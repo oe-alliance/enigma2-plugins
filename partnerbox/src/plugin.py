@@ -1696,7 +1696,11 @@ def startAddParnerboxService(self, insertType, session, what, partnerboxentry = 
 	if partnerboxentry is None:
 		self.close()
 	else:
-		self.session.openWithCallback(self.callbackPartnerboxServiceList, PartnerBouquetList, [], partnerboxentry, 1, insertType)
+		if int(partnerboxentry.enigma.value) == 0:
+			self.session.openWithCallback(self.callbackPartnerboxServiceList, PartnerBouquetList, [], partnerboxentry, 1, insertType)
+		else:
+			self.session.open(MessageBox,_("You can not add services or bouquets from Enigma1-receivers into the channellist..."), MessageBox.TYPE_INFO)
+			
 
 def callbackPartnerboxServiceList(self, result): 
 	if result and result[1]:
@@ -1754,7 +1758,7 @@ class PartnerBouquetList(RemoteTimerBouquetList):
 				sel = self["bouquetlist"].l.getCurrentSelection()[0]
 				if sel is None:
 					return
-				self.session.openWithCallback(self.callbackChannelList, PartnerChannelList, self.E2TimerList, sel.servicereference, sel.servicename, self.PartnerboxEntry, self.E1XMLString, self.playeronly)
+				self.session.openWithCallback(self.callbackChannelList, PartnerChannelList, self.E2TimerList, sel.servicereference, sel.servicename, self.PartnerboxEntry, self.playeronly)
 			except: return
 		else:
 			self.takeBouquet()
@@ -1772,26 +1776,9 @@ class PartnerBouquetList(RemoteTimerBouquetList):
 			if sel is None:
 				return
 		except: return
-		if self.enigma_type == 0:
-			ref = urllib.quote(sel.servicereference.decode('utf8').encode('latin-1','ignore'))
-			url = self.http + "/web/epgnow?bRef=" + ref
-			sendPartnerBoxWebCommand(url, None,10, self.username, self.password).addCallback(self.ChannelListDownloadCallback, sel).addErrback(self.ChannelListDownloadError)
-		else:
-			self.readXMLServiceListE1(sel)
-
-	def readXMLServiceListE1(self, sel):
-		e2ChannelList = []
-		root = xml.etree.cElementTree.fromstring(self.E1XMLString)
-		for bouquets in root.findall("bouquet"):
-			tempref = str(bouquets.findtext("reference", '').encode("utf-8", 'ignore'))
-			if tempref == sel.servicereference:
-				for services in bouquets.findall("service"):
-					servicereference = str(services.findtext("reference", '').encode("utf-8", 'ignore'))
-					servicename = str(services.findtext("name", 'n/a').encode("utf-8", 'ignore'))
-					e2ChannelList.append(E2EPGListAllData(servicereference = servicereference, servicename = servicename))
-		result = (e2ChannelList, sel)
-		self.close((1, result, self.PartnerboxEntry))
-
+		ref = urllib.quote(sel.servicereference.decode('utf8').encode('latin-1','ignore'))
+		url = self.http + "/web/epgnow?bRef=" + ref
+		sendPartnerBoxWebCommand(url, None,10, self.username, self.password).addCallback(self.ChannelListDownloadCallback, sel).addErrback(self.ChannelListDownloadError)
 
 	def ChannelListDownloadCallback(self, xmlstring, sel):
 		e2ChannelList = []
@@ -1809,8 +1796,8 @@ class PartnerBouquetList(RemoteTimerBouquetList):
 			self["text"].setText(str(error.getErrorMessage()))
 
 class PartnerChannelList(RemoteTimerChannelList):
-	def __init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, E1XMLString,  playeronly):
-		RemoteTimerChannelList.__init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, E1XMLString,  playeronly)
+	def __init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, playeronly):
+		RemoteTimerChannelList.__init__(self, session, E2Timerlist, ServiceReference, ServiceName, partnerboxentry, "",  playeronly)
 		self.skinName = "RemoteTimerChannelList"
 		self.useinternal = 0 # always use partnerbox services
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions"],

@@ -477,6 +477,9 @@ msgstr "Partnerbox Sender hinzufügen"
 msgid "add Partnerbox bouquet"
 msgstr "Partnerbox Bouquet hinzufügen"
 
+msgid "You can not add services or bouquets from Enigma1-receivers into the channellist..."
+msgstr "Sender oder Bouquets können nicht von Enigma1-Receivern in the Kanalliste eingefügt werden..."
+
 #: ../src/PartnerboxSetup.py:257 
 msgid "Zap to service when streaming"
 msgstr "Beim Streamen auf Sender zappen"
