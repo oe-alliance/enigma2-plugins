@@ -17,7 +17,6 @@ from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
-from Components.config import config, ConfigSubsection, ConfigYesNo
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from os import environ as os_environ
 from NTIVirtualKeyBoard import NTIVirtualKeyBoard
@@ -33,7 +32,14 @@ except ImportError as ie:
 	unichr = chr
 import gettext
 
+# Configuration
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo
+from Components.ConfigList import ConfigListScreen
+from Components.PluginComponent import plugins
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+
 config.plugins.imdb = ConfigSubsection()
+config.plugins.imdb.showinplugins = ConfigYesNo(default = False)
 config.plugins.imdb.force_english = ConfigYesNo(default=False)
 
 def localeInit():
@@ -376,6 +382,7 @@ class IMDB(Screen):
 		list = [
 			(_("Enter search"), self.openVirtualKeyBoard),
 			(_("Select from EPG"), self.openChannelSelection),
+			(_("Setup"), self.setup),
 		]
 
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/YTTrailer/plugin.py")):
@@ -641,6 +648,9 @@ class IMDB(Screen):
 			self["poster"].instance.setPixmap(ptr.__deref__())
 			self["poster"].show()
 
+	def setup(self):
+		self.session.open(IMDbSetup)
+
 	def createSummary(self):
 		return IMDbLCDScreen
 
@@ -655,6 +665,93 @@ class IMDbLCDScreen(Screen):
 		Screen.__init__(self, session, parent)
 		self["headline"] = Label(_("IMDb Plugin"))
 
+class IMDbSetup(Screen, ConfigListScreen):
+	skin = """<screen name="EPGSearchSetup" position="center,center" size="565,370">
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+		<widget name="config" position="5,50" size="555,250" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,301" zPosition="1" size="565,2" />
+		<widget source="help" render="Label" position="5,305" size="555,63" font="Regular;21" />
+	</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+
+		# Summary
+		self.setup_title = _("IMDb Setup")
+		self.onChangedEntry = []
+
+		ConfigListScreen.__init__(
+			self,
+			[
+				getConfigListEntry(_("Show in plugin browser"), config.plugins.imdb.showinplugins, _("Enable this to be able to access the IMDb from within the plugin browser.")),
+			],
+			session = session,
+			on_change = self.changed
+		)
+		def selectionChanged():
+			if self["config"].current:
+				self["config"].current[1].onDeselect(self.session)
+			self["config"].current = self["config"].getCurrent()
+			if self["config"].current:
+				self["config"].current[1].onSelect(self.session)
+			for x in self["config"].onSelectionChanged:
+				x()
+		self["config"].selectionChanged = selectionChanged
+		self["config"].onSelectionChanged.append(self.updateHelp)
+
+		# Initialize widgets
+		self["key_green"] = StaticText(_("OK"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["help"] = StaticText()
+
+		# Define Actions
+		self["actions"] = ActionMap(["SetupActions"],
+			{
+				"cancel": self.keyCancel,
+				"save": self.Save,
+			}
+		)
+
+		# Trigger change
+		self.changed()
+
+		self.onLayoutFinish.append(self.setCustomTitle)
+
+	def setCustomTitle(self):
+		self.setTitle(_("IMDb Setup"))
+
+	def updateHelp(self):
+		cur = self["config"].getCurrent()
+		if cur:
+			self["help"].text = cur[2]
+
+	def changed(self):
+		for x in self.onChangedEntry:
+			x()
+
+	def getCurrentEntry(self):
+		return self["config"].getCurrent()[0]
+
+	def getCurrentValue(self):
+		return str(self["config"].getCurrent()[0])
+
+	def Save(self):
+		self.saveAll()
+		if not config.plugins.imdb.showinplugins.value:
+			for plugin in plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU):
+				if plugin.name == _("IMDb Details"):
+					plugins.removePlugin(plugin)
+
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		self.close()
+
+	def createSummary(self):
+		from Screens.Setup import SetupSummary
+		return SetupSummary
+
 def eventinfo(session, eventName="", **kwargs):
 	if eventName != "":
 		session.open(IMDB, eventName)
@@ -665,11 +762,18 @@ def eventinfo(session, eventName="", **kwargs):
 def main(session, eventName="", **kwargs):
 	session.open(IMDB, eventName)
 
+pluginlist = PluginDescriptor(name=_("IMDb Details"), description=_("Query details from the Internet Movie Database"), icon="imdb.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, needsRestart=False)
+
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="IMDb Details",
+	l = [PluginDescriptor(name="IMDb Details",
 			description=_("Query details from the Internet Movie Database"),
 			where=PluginDescriptor.WHERE_EVENTINFO,
 			fnc=eventinfo,
 			needsRestart=False,
 			),
 		]
+
+	if config.plugins.imdb.showinplugins.value:
+		l.append(pluginlist)
+
+	return l
