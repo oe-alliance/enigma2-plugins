@@ -14,6 +14,11 @@ from Components.Sources.StaticText import StaticText
 
 # Configuration
 from Components.config import config, getConfigListEntry
+from Components.PluginComponent import plugins
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+
+# Plugin definition
+from Plugins.Plugin import PluginDescriptor
 
 class EPGSearchSetup(Screen, ConfigListScreen):
 	skin = """<screen name="EPGSearchSetup" position="center,center" size="565,370">
@@ -36,6 +41,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(
 			self,
 			[
+				getConfigListEntry(_("Show in plugin browser"), config.plugins.epgsearch.showinplugins, _("Enable this to be able to access the EPG-Search from within the plugin browser.")),
 				getConfigListEntry(_("Length of History"), config.plugins.epgsearch.history_length, _("How many entries to keep in the search history at most. 0 disables history entirely!")),
 # 				getConfigListEntry(_("Add \"Search\" Button to EPG"), config.plugins.epgsearch.add_search_to_epg , _("If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG.")),
 			],
@@ -62,7 +68,7 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		self["actions"] = ActionMap(["SetupActions"],
 			{
 				"cancel": self.keyCancel,
-				"save": self.keySave,
+				"save": self.Save,
 			}
 		)
 
@@ -87,8 +93,17 @@ class EPGSearchSetup(Screen, ConfigListScreen):
 		return self["config"].getCurrent()[0]
 
 	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].getText())
+		return str(self["config"].getCurrent()[0])
+
+	def Save(self):
+		self.saveAll()
+		if not config.plugins.epgsearch.showinplugins.value:
+			for plugin in plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU):
+				if plugin.name == _("EPGSearch"):
+					plugins.removePlugin(plugin)
+
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		self.close()
 
 	def createSummary(self):
 		return SetupSummary
-

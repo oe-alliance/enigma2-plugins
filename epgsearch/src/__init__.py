@@ -8,6 +8,7 @@ import gettext
 from Components.config import config, ConfigSet, ConfigSubsection, ConfigText, ConfigNumber, ConfigYesNo
 
 config.plugins.epgsearch = ConfigSubsection()
+config.plugins.epgsearch.showinplugins = ConfigYesNo(default = False)
 config.plugins.epgsearch.history = ConfigSet(choices = [])
 # XXX: configtext is more flexible but we cannot use this for a (not yet created) gui config
 config.plugins.epgsearch.encoding = ConfigText(default = 'ISO8859-15', fixed_size = False)

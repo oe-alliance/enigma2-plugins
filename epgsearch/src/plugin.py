@@ -3,6 +3,9 @@ from . import _
 
 from enigma import eServiceCenter
 
+# Configuration
+from Components.config import config
+
 # Plugin
 from EPGSearch import EPGSearch, EPGSearchEPGSelection
 
@@ -33,8 +36,10 @@ def movielist(session, service, **kwargs):
 
 	session.open(EPGSearch, name)
 
+pluginlist = PluginDescriptor(name = _("EPGSearch"), description = _("Search EPG"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main, needsRestart = False)
+
 def Plugins(**kwargs):
-	return [
+	l = [
 		PluginDescriptor(
 			# TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 			name = _("search EPG..."),
@@ -50,3 +55,8 @@ def Plugins(**kwargs):
 			needsRestart = False,
 		),
 	]
+
+	if config.plugins.epgsearch.showinplugins.value:
+		l.append(pluginlist)
+
+	return l
