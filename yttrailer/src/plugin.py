@@ -262,9 +262,10 @@ class YTTrailer:
 					fmturl = fmturl.replace("url=","")
 			else:
 				(fmtid,fmturl) = fmtstring.split('|')
-			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
-				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
-			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
+			if fmtid.isdigit(): # sometimes youtube is sending stupid things, or I do not know how to handle that crap... anyway, do not let crash the plugin because of that ;)
+				if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+					video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
+				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "[YTTrailer] got",sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):
 			if self.l3cert:

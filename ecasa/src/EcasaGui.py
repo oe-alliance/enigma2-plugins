@@ -25,7 +25,7 @@ from Components.config import config
 
 #pragma mark Picasa
 from .PicasaApi import PicasaApi
-from TagStrip import strip_readable
+from .TagStrip import strip_readable
 
 from enigma import ePicLoad, ePythonMessagePump, eTimer, getDesktop
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -127,8 +127,6 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		# thumbnail loader
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.gotPicture)
-		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((90, 90, sc[0], sc[1], False, 1, '#ff000000')) # TODO: hardcoded size is evil!
 		self.currentphoto = None
 		self.queue = deque()
 
@@ -137,6 +135,10 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 	def layoutFinished(self):
 		self["highlight"].instance.setPixmapFromFile(resolveFilename(SCOPE_PLUGINS, "Extensions/Ecasa/highlighted.png"))
 		self["highlight"].hide()
+
+		size = self['image0'].instance.size()
+		sc = AVSwitch().getFramebufferScale()
+		self.picload.setPara((size.width(), size.height(), sc[0], sc[1], False, 1, '#ff000000'))
 
 	@property
 	def highlighted(self):
@@ -159,7 +161,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 	def gotPicture(self, picInfo=None):
 		ptr = self.picload.getData()
 		idx = self.pictures.index(self.currentphoto)
-		realIdx = idx - self.offset
+		realIdx = (idx - self.offset) % self.PICS_PER_PAGE
 		if ptr is not None:
 			self['image%d' % realIdx].instance.setPixmap(ptr.__deref__())
 		else:
@@ -235,7 +237,6 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 			self.highlighted = highlighted
 
 	def left(self):
-		# TODO: implement for incomplete pages
 		highlighted = (self.highlighted - 1) % self.PICS_PER_PAGE
 		our_print("left. before:", self.highlighted, ", after:", highlighted)
 		self.highlighted = highlighted
@@ -337,7 +338,6 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 				history.insert(0, text)
 			config.plugins.ecasa.searchhistory.save()
 
-			# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
 			thread = EcasaThread(lambda:self.api.getSearch(text, limit=str(config.plugins.ecasa.searchlimit.value)))
 			self.session.open(EcasaFeedview, thread, api=self.api, title=_("Search for %s") % (text))
 
@@ -402,10 +402,11 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		our_print("errorPictures", error)
 		self.session.open(
 			MessageBox,
-			_("Error downloading") + ': ' + error.message,
+			_("Error downloading") + ': ' + error.value.message,
 			type=MessageBox.TYPE_ERROR,
 			timeout=3
 		)
+		self["waitingtext"].hide()
 
 class EcasaOverview(EcasaPictureWall):
 	"""Overview and supposed entry point of ecasa. Shows featured pictures on the "EcasaPictureWall"."""
@@ -438,7 +439,7 @@ class EcasaFeedview(EcasaPictureWall):
 
 	def layoutFinished(self):
 		EcasaPictureWall.layoutFinished(self)
-		self.setTitle(_("eCasa: %s") % (self.feedTitle or _("Album")))
+		self.setTitle(_("eCasa: %s") % (self.feedTitle.encode('utf-8') or _("Album")))
 
 	def albums(self):
 		pass
@@ -489,7 +490,7 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		self.setTitle(_("eCasa: Albums for user %s") % (self.user,))
+		self.setTitle(_("eCasa: Albums for user %s") % (self.user.encode('utf-8'),))
 
 	def acquireAlbumsForUser(self, user):
 		thread = EcasaThread(lambda:self.api.getAlbums(user=user))
@@ -506,17 +507,18 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 		self['list'].setList([(_("Error downloading"), "0", None)])
 		self.session.open(
 			MessageBox,
-			_("Error downloading") + ': ' + error.value.message,
+			_("Error downloading") + ': ' + error.value.message.encode('utf-8'),
 			type=MessageBox.TYPE_ERROR,
 			timeout=30,
 		)
 
 	def select(self):
 		cur = self['list'].getCurrent()
-		if cur:
+		if cur and cur[-1]:
 			album = cur[-1]
+			title = cur[0] # NOTE: retrieve from array to be independent of underlaying API as the flickr and picasa albums are not compatible here
 			thread = EcasaThread(lambda:self.api.getAlbum(album))
-			self.session.open(EcasaFeedview, thread, api=self.api, title=album.title and album.title.text)
+			self.session.open(EcasaFeedview, thread, api=self.api, title=title)
 
 	def users(self):
 		self.session.openWithCallback(
@@ -536,7 +538,6 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 				history.insert(0, text)
 			config.plugins.ecasa.userhistory.save()
 
-			# Workaround to allow search for umlauts if we know the encoding (pretty bad, I know...)
 			self.session.openWithCallback(self.close, EcasaAlbumview, self.api, text)
 
 	def history(self):
@@ -634,7 +635,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		print("ebDownload", error)
 		self.session.open(
 			MessageBox,
-			_("Error downloading") + ': ' + error.message,
+			_("Error downloading") + ': ' + error.value.message,
 			type=MessageBox.TYPE_ERROR,
 			timeout=3
 		)
@@ -652,6 +653,12 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		options = [
 			(_("Download Picture"), self.doDownload),
 		]
+		photo = self.photo
+		if photo.author:
+			author = photo.author[0]
+			options.append(
+				(_("%s's Gallery") % (author.name.text), self.showAlbums)
+			)
 		if self.prevFunc and self.nextFunc:
 			options.append(
 				(_("Start Slideshow") if self.nextPhoto is None else _("Stop Slideshow"), self.toggleSlideshow)
@@ -684,6 +691,9 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 					_("Unable to download picture: %s") % (e),
 					type=MessageBox.TYPE_INFO
 				)
+
+	def showAlbums(self):
+		self.session.open(EcasaAlbumview, self.api, user=self.photo.author[0].email.text)
 
 	def toggleSlideshow(self):
 		# is slideshow currently running?
@@ -719,10 +729,10 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 			camera = unk
 		self['camera'].text = _("Camera: %s") % (camera,)
 
-		title = photo.title.text if photo.title.text else unk
+		title = photo.title.text.encode('utf-8') if photo.title.text else unk
 		self.setTitle(_("eCasa: %s") % (title))
 		self['title'].text = _("Title: %s") % (title,)
-		summary = strip_readable(photo.summary.text).replace('\n\nView Photo', '') if photo.summary.text else ''
+		summary = strip_readable(photo.summary.text).replace('\n\nView Photo', '').encode('utf-8') if photo.summary.text else ''
 		self['summary'].text = summary
 		if photo.media and photo.media.keywords and photo.media.keywords.text:
 			keywords = photo.media.keywords.text
