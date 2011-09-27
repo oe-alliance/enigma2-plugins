@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2011-06-12 18:45+0100\n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: none\n"
@@ -25,6 +25,9 @@ msgstr " als "
 msgid "Ambiguous results"
 msgstr "Kein eindeutiger Treffer"
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Cast: "
 msgstr "Darsteller: "
 
@@ -41,6 +44,10 @@ msgstr "Details"
 msgid "Downloading Movie Poster: %s..."
 msgstr "Lade Filmplakat herunter: %s..."
 
+msgid ""
+"Enable this to be able to access the IMDb from within the plugin browser."
+msgstr ""
+
 msgid "Enter search"
 msgstr "Suchen"
 
@@ -52,6 +59,9 @@ msgstr "Beenden"
 
 msgid "Extra Info"
 msgstr "Zusatzinfos"
+
+msgid "IMDb Details"
+msgstr ""
 
 msgid "IMDb Details parsed"
 msgstr "Filminformationen eingelesen"
@@ -68,6 +78,9 @@ msgstr "IMDb Plugin"
 msgid "IMDb Re-Download completed"
 msgstr "Erneuten Download ausgeführt"
 
+msgid "IMDb Setup"
+msgstr ""
+
 msgid "IMDb query failed!"
 msgstr "Anfrage an IMDb fehlgeschlagen!"
 
@@ -83,6 +96,12 @@ msgstr "Keine Darstellerliste in der Datenbank gefunden."
 msgid "No details found."
 msgstr "Keine Details gefunden."
 
+msgid "OK"
+msgstr ""
+
+msgid "Play Trailer"
+msgstr ""
+
 msgid "Please select the matching entry"
 msgstr "Bitte passenden Eintrag auswählen"
 
@@ -97,8 +116,17 @@ msgstr "Filminformationen aus der Internet Movie Database"
 msgid "Re-Query IMDb: %s..."
 msgstr "Frage erneut bei IMDb an: %s..."
 
+msgid "Search Trailer"
+msgstr ""
+
 msgid "Select from EPG"
 msgstr "Aus  EPG wählen"
+
+msgid "Setup"
+msgstr ""
+
+msgid "Show in plugin browser"
+msgstr ""
 
 msgid "The Internet Movie Database"
 msgstr "Die Internet Movie Database"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2011-04-26 18:42+0100\n"
 "Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: none\n"
@@ -22,6 +22,12 @@ msgstr ""
 "%d Konflikt(e) gefunden beim hinzufügen neuer Timer:\n"
 "%s"
 
+#, python-format
+msgid ""
+"%d conflict(s) solved with similar timer(s):\n"
+"%s"
+msgstr ""
+
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
@@ -40,6 +46,9 @@ msgstr "Hinzufügen"
 
 msgid "Add new AutoTimer"
 msgstr "Neuen AutoTimer hinzufügen"
+
+msgid "Add similar timer on conflict"
+msgstr ""
 
 msgid "Add timer as disabled on conflict"
 msgstr "Timer bei Konflikt als deaktiviert hinzufügen"
@@ -113,6 +122,12 @@ msgid ""
 msgstr ""
 "Wird diese Option aktiviert, werden Timer nur zu bestimmten Daten "
 "hinzugefügt."
+
+msgid ""
+"By enabling this you will be notified about similar timers added during "
+"automated polling. There is no intelligence involved, so it might bother you "
+"about the same conflict over and over."
+msgstr ""
 
 msgid ""
 "By enabling this you will be notified about timer conflicts found during "
@@ -227,6 +242,11 @@ msgstr ""
 "Diese Einstellung aktivieren um die Übersicht aus dem Erweiterungsmenü "
 "zugänglich zu machen."
 
+msgid ""
+"Enable this to be able to access the AutoTimer Overview from within the "
+"plugin browser."
+msgstr ""
+
 msgid "Enabled"
 msgstr "Eingeschaltet"
 
@@ -277,18 +297,16 @@ msgstr "Erster Tag. Ereignisse vor diesem Datum werden ignoriert."
 #, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
-"%d Timer were added and %d modified, %d conflicts encountered."
+"%d Timer were added and %d modified, \n"
+"%d conflicts encountered, %d similars added."
 msgstr ""
-"Habe insgesamt %d Sendungen gefunden.\n"
-"%d Timer wurden hinzugefügt und %d geändert, %d Konflikte gefunden."
 
 #, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
-"%d Timer were added and %d modified."
+"%d Timer were added and %d modified, %d conflicts encountered, %d similars "
+"added."
 msgstr ""
-"Habe insgesamt %d Sendungen gefunden.\n"
-"%d Timer wurden hinzugefügt und %d geändert."
 
 msgid "Frequently asked questions"
 msgstr ""
@@ -308,11 +326,18 @@ msgstr "Bestimme bestehende Timer anhand Anfang-/Endzeit"
 msgid "Help"
 msgstr ""
 
-#, python-format
+msgid ""
+"If a timer conflict occurs, AutoTimer will search outside the timespan for a "
+"similar event and add it."
+msgstr ""
+
+#, fuzzy, python-format
 msgid ""
 "If this is enabled an existing timer will also be considered recording an "
-"event if it records at least 80% of it."
+"event if it records at least 80%% of the it."
 msgstr ""
+"Ist dies aktiv, so wird wird ab eine Schwelle von 80% ein bestehender Timer "
+"einer Sendung zugeordnet."
 
 msgid "Import AutoTimer"
 msgstr "AutoTimer importieren"
@@ -444,6 +469,9 @@ msgstr "Öffne Kontext-Menü"
 
 msgid "Override found with alternative service"
 msgstr "Service mit alternative ersetzen"
+
+msgid "Parsing Timers..."
+msgstr ""
 
 msgid "Please provide a Text to match"
 msgstr "Bitte zu findenden Text eingeben"
@@ -591,8 +619,14 @@ msgstr ""
 msgid "Show in extension menu"
 msgstr "In Erweiterungsmenü anzeigen"
 
+msgid "Show in plugin browser"
+msgstr ""
+
 msgid "Show notification on conflicts"
 msgstr "Benachrichtigung bei Konflikten anzeigen"
+
+msgid "Show notification on similars"
+msgstr ""
 
 msgid "Sort AutoTimer"
 msgstr "Sortiere AutoTimer"
@@ -1036,41 +1070,3 @@ msgstr "Kann Timer mit id %i nicht finden"
 
 msgid "zap"
 msgstr "umschalten"
-
-#~ msgid "Ammount of recordings left"
-#~ msgstr "Verbleibende Anzahl Aufnahmen"
-
-#~ msgid ""
-#~ "If this is enabled an existing timer will also be considered recording an "
-#~ "event if it records at least 80%% of the it."
-#~ msgstr ""
-#~ "Ist dies aktiv, so wird wird ab eine Schwelle von 80% ein bestehender "
-#~ "Timer einer Sendung zugeordnet."
-
-#~ msgid ""
-#~ "Maximum event duration to match. If an event is longer than this ammount "
-#~ "of time (without offset) it won't be matched."
-#~ msgstr ""
-#~ "Maximale Sendungsdauer eines Treffers. Wenn eine Sendung länger als "
-#~ "dieses Intervall ist wird diese nicht aufgenommen. Vor-/Nachlauf wird "
-#~ "hier nicht eingerechnet."
-
-#~ msgid "Poll Interval (in h)"
-#~ msgstr "Abfrageintervall (in Stunden)"
-
-#~ msgid "Preview"
-#~ msgstr "Vorschau"
-
-#~ msgid ""
-#~ "This is the delay in hours that the AutoTimer will wait after a search to "
-#~ "search the EPG again."
-#~ msgstr ""
-#~ "Das ist die Verzögerung in Stunden die der AutoTimer wartet bis nach "
-#~ "einer erfolgten Suche eine neue gestartet wird."
-
-#~ msgid ""
-#~ "With this option you can restrict the AutoTimer to a certain ammount of "
-#~ "scheduled recordings. Set this to 0 to disable this functionality."
-#~ msgstr ""
-#~ "Mit dieser Einstellung kann die Anzahl der Aufnahmen durch diesen "
-#~ "AutoTimer begrenzt werden. Bei 0 ist diese Funktion inaktiv."

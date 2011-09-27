@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Plugin epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2009-09-27 17:51+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -38,7 +38,15 @@ msgstr "Ne mogu pročitati listu autotajmera: %s"
 msgid "EPG Search"
 msgstr "EPG pretraga"
 
+msgid "EPGSearch"
+msgstr ""
+
 msgid "EPGSearch Setup"
+msgstr ""
+
+msgid ""
+"Enable this to be able to access the EPG-Search from within the plugin "
+"browser."
 msgstr ""
 
 msgid "Enter text to search for"
@@ -79,7 +87,6 @@ msgstr "Sačuvaj pretragu kao autotajmer"
 msgid "Search"
 msgstr "Traženje"
 
-#. TRANSLATORS: description of EPGSearch in PluginBrowser
 msgid "Search EPG"
 msgstr "Pretraga EPG"
 
@@ -92,6 +99,9 @@ msgstr "Izaberi tekst za pretragu"
 msgid "Setup"
 msgstr ""
 
+msgid "Show in plugin browser"
+msgstr ""
+
 msgid "Show search history"
 msgstr ""
 
@@ -102,9 +112,3 @@ msgstr "pretraga EPG"
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 msgid "search EPG..."
 msgstr "pretraga EPG..."
-
-#~ msgid "Export selected as AutoTimer"
-#~ msgstr "Izvezi izabrano kao autotajmer"
-
-#~ msgid "History"
-#~ msgstr "Istorija"

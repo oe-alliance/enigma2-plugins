@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2009-06-23 18:44+0100\n"
 "Last-Translator: Moritz Venn <moritz.venn@freaque.net>\n"
 "Language-Team: none\n"
@@ -31,7 +31,15 @@ msgstr "Liste der AutoTimer konnte nicht abgerufen werden: %s"
 msgid "EPG Search"
 msgstr "EPG Suche"
 
+msgid "EPGSearch"
+msgstr ""
+
 msgid "EPGSearch Setup"
+msgstr ""
+
+msgid ""
+"Enable this to be able to access the EPG-Search from within the plugin "
+"browser."
 msgstr ""
 
 msgid "Enter text to search for"
@@ -72,7 +80,6 @@ msgstr "Suchbegriff als AutoTimer speichern"
 msgid "Search"
 msgstr "Suche"
 
-#. TRANSLATORS: description of EPGSearch in PluginBrowser
 msgid "Search EPG"
 msgstr "Durchsuche EPG"
 
@@ -85,6 +92,9 @@ msgstr "Wähle den zu suchenden Text aus"
 msgid "Setup"
 msgstr ""
 
+msgid "Show in plugin browser"
+msgstr ""
+
 msgid "Show search history"
 msgstr ""
 
@@ -95,9 +105,3 @@ msgstr "Suche in EPG"
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 msgid "search EPG..."
 msgstr "Durchsuche EPG..."
-
-#~ msgid "Export selected as AutoTimer"
-#~ msgstr "Auswahl als AutoTimer exportieren"
-
-#~ msgid "History"
-#~ msgstr "Verlauf"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 EPGSearch plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2009-09-24 20:39+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -33,7 +33,15 @@ msgstr "AutoTimer zamanlayıcı listesi okunamıyor : %s"
 msgid "EPG Search"
 msgstr "EPG Arama"
 
+msgid "EPGSearch"
+msgstr ""
+
 msgid "EPGSearch Setup"
+msgstr ""
+
+msgid ""
+"Enable this to be able to access the EPG-Search from within the plugin "
+"browser."
 msgstr ""
 
 msgid "Enter text to search for"
@@ -74,7 +82,6 @@ msgstr "Aramayı AutoTimer olarak kaydet"
 msgid "Search"
 msgstr "Ara"
 
-#. TRANSLATORS: description of EPGSearch in PluginBrowser
 msgid "Search EPG"
 msgstr "EPG'de ara"
 
@@ -87,6 +94,9 @@ msgstr "Arama metnini seçin"
 msgid "Setup"
 msgstr ""
 
+msgid "Show in plugin browser"
+msgstr ""
+
 msgid "Show search history"
 msgstr ""
 
@@ -97,9 +107,3 @@ msgstr "EPG'de ara"
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (requires the user to select an event to search for)
 msgid "search EPG..."
 msgstr "EPG'de ara..."
-
-#~ msgid "Export selected as AutoTimer"
-#~ msgstr "Seçililenleri AutoTimer olarak dışarı ver"
-
-#~ msgid "History"
-#~ msgstr "Geçmiş"

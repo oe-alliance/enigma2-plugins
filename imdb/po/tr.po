@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 IMDb Plugin Turkish locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 14:32+0100\n"
+"POT-Creation-Date: 2011-09-27 18:11+0100\n"
 "PO-Revision-Date: 2009-09-22 13:17+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -24,6 +24,9 @@ msgstr " : "
 msgid "Ambiguous results"
 msgstr "Muhtemel eşleşen başlıklar"
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Cast: "
 msgstr "Oyuncular: "
 
@@ -40,6 +43,10 @@ msgstr "Detaylar"
 msgid "Downloading Movie Poster: %s..."
 msgstr "%s posteri indiriliyor."
 
+msgid ""
+"Enable this to be able to access the IMDb from within the plugin browser."
+msgstr ""
+
 msgid "Enter search"
 msgstr ""
 
@@ -51,6 +58,9 @@ msgstr "Çıkış"
 
 msgid "Extra Info"
 msgstr "Detay bilgi"
+
+msgid "IMDb Details"
+msgstr "IMDb Ayrıntıları"
 
 msgid "IMDb Details parsed"
 msgstr "IMDb detayları ayrıştırıldı"
@@ -67,6 +77,9 @@ msgstr "IMDb Eklentisi"
 msgid "IMDb Re-Download completed"
 msgstr "IMDb yeniden indirme tamamlandı"
 
+msgid "IMDb Setup"
+msgstr ""
+
 msgid "IMDb query failed!"
 msgstr "IMDb sorgusunda hata oluştu."
 
@@ -82,6 +95,12 @@ msgstr "Oyuncu listesi veritabanında bulunamadı."
 msgid "No details found."
 msgstr "Detay bilgisi bulunamadı."
 
+msgid "OK"
+msgstr ""
+
+msgid "Play Trailer"
+msgstr ""
+
 msgid "Please select the matching entry"
 msgstr "Lütfen aradığınız başlığı seçin"
 
@@ -96,7 +115,16 @@ msgstr "Film detaylarını imdb.com'dan sorgulayın"
 msgid "Re-Query IMDb: %s..."
 msgstr "%s IMDb'de yeniden sorgulanıyor..."
 
+msgid "Search Trailer"
+msgstr ""
+
 msgid "Select from EPG"
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Show in plugin browser"
 msgstr ""
 
 msgid "The Internet Movie Database"
@@ -110,6 +138,3 @@ msgstr "Puan"
 
 msgid "no user rating yet"
 msgstr "puan verilmemiş"
-
-#~ msgid "IMDb Details"
-#~ msgstr "IMDb Ayrıntıları"
