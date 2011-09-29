@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2011-09-28 12:47+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,99 +19,105 @@ msgstr ""
 
 #: ../src/plugin.py:219
 msgid "Ambiguous results"
-msgstr ""
+msgstr "Dubbelzinnige resultaten"
 
 #: ../src/plugin.py:435
 msgid "Cast: "
-msgstr ""
+msgstr "Cast: "
 
 #: ../src/plugin.py:41
 msgid "Channel Selection"
-msgstr ""
+msgstr "Kanaal keuze:"
 
 #: ../src/plugin.py:316
 msgid "Could't get Eventname"
-msgstr ""
+msgstr "Kon de naam van het event niet lezen"
 
-#: ../src/plugin.py:224 ../src/plugin.py:385
+#: ../src/plugin.py:224
+#: ../src/plugin.py:385
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: ../src/plugin.py:444
 #, python-format
 msgid "Downloading Movie Poster: %s..."
-msgstr ""
+msgstr "Bezig met downloaden Movie Poster: %s..."
 
 #: ../src/plugin.py:141
 msgid "Exit"
-msgstr ""
+msgstr "Afsluiten"
 
 #: ../src/plugin.py:70
 msgid "Lookup"
-msgstr ""
+msgstr "Zoekt"
 
-#: ../src/plugin.py:369 ../src/plugin.py:370
+#: ../src/plugin.py:369
+#: ../src/plugin.py:370
 msgid "No OFDb match."
-msgstr ""
+msgstr "Geen OFDb overeenkomst."
 
 #: ../src/plugin.py:437
 msgid "No cast list found in the database."
-msgstr ""
+msgstr "Geen cast gevonden in de database."
 
 #: ../src/plugin.py:383
 msgid "No details found."
-msgstr ""
+msgstr "Geen details gevonden."
 
-#: ../src/plugin.py:386 ../src/plugin.py:455
+#: ../src/plugin.py:386
+#: ../src/plugin.py:455
 msgid "OFDb Details parsed"
-msgstr ""
+msgstr "OFDb Details verwerkt"
 
 #: ../src/plugin.py:347
 msgid "OFDb Download completed"
-msgstr ""
+msgstr "OFDb Download kompleet"
 
 #: ../src/plugin.py:320
 msgid "OFDb Download failed"
-msgstr ""
+msgstr "OFDb Download mislukt"
 
 #: ../src/plugin.py:484
 msgid "OFDb Plugin"
-msgstr ""
+msgstr "OFDb Plugin"
 
 #: ../src/plugin.py:375
 msgid "OFDb Re-Download completed"
-msgstr ""
+msgstr "OFDb Her-Download kompleet"
 
 #: ../src/plugin.py:372
 msgid "OFDb query failed!"
-msgstr ""
+msgstr "OFDb query mislukt!"
 
 #: ../src/plugin.py:220
 msgid "Please select the matching entry"
-msgstr ""
+msgstr "Selecteer de overeenkomende entry"
 
 #: ../src/plugin.py:306
 #, python-format
 msgid "Query OFDb: %s..."
-msgstr ""
+msgstr "Query OFDb: %s..."
 
-#: ../src/plugin.py:496 ../src/plugin.py:501 ../src/plugin.py:508
+#: ../src/plugin.py:496
+#: ../src/plugin.py:501
+#: ../src/plugin.py:508
 msgid "Query details from the Online-Filmdatenbank"
-msgstr ""
+msgstr "Query details van de Online-Filmdatabank"
 
 #: ../src/plugin.py:235
 #, python-format
 msgid "Re-Query OFDb: %s..."
-msgstr ""
+msgstr "Re-Query OFDb: %s..."
 
 #: ../src/plugin.py:132
 msgid "The Online-Filmdatenbank"
-msgstr ""
+msgstr "De Online-Filmdatabank"
 
 #: ../src/plugin.py:223
 msgid "Title Menu"
-msgstr ""
+msgstr "Titel Menu"
 
 #: ../src/plugin.py:416
 msgid "no user rating yet"
-msgstr ""
+msgstr "nog geen gebruikerswaardering"
+

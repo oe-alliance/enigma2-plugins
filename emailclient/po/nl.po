@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2011-09-28 14:36+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,31 +20,31 @@ msgstr ""
 #: ../src/plugin.py:136
 #, python-format
 msgid "%(name)s (%(user)s@%(server)s)"
-msgstr ""
+msgstr "%(name)s (%(user)s@%(server)s)"
 
 #: ../src/plugin.py:986
 msgid "Accounts list"
-msgstr ""
+msgstr "Accounts lijst"
 
 #: ../src/plugin.py:402
 msgid "Attachments"
-msgstr ""
+msgstr "Aanhangesles"
 
 #: ../src/plugin.py:398
 msgid "Bodys"
-msgstr ""
+msgstr "Bodys"
 
 #: ../src/plugin.py:346
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: ../src/plugin.py:1147
 msgid "Email Client"
-msgstr ""
+msgstr "Email Client"
 
 #: ../src/EmailConfig.py:60
 msgid "Email setup"
-msgstr ""
+msgstr "Email instellingen"
 
 #: ../src/plugin.py:182
 #, python-format
@@ -53,18 +53,21 @@ msgid ""
 "\n"
 "%(error)s"
 msgstr ""
+"EmailClient voor %(account)s:\n"
+"\n"
+"%(error)s"
 
 #: ../src/plugin.py:344
 msgid "From"
-msgstr ""
+msgstr "van"
 
 #: ../src/EmailConfig.py:131
 msgid "IMAP Port"
-msgstr ""
+msgstr "IMAP Port"
 
 #: ../src/EmailConfig.py:130
 msgid "IMAP Server"
-msgstr ""
+msgstr "IMAP Server"
 
 #: ../src/plugin.py:582
 #, python-format
@@ -72,88 +75,99 @@ msgid ""
 "New mail arrived for account %s:\n"
 "\n"
 msgstr ""
+"Nieuwe mail in account %s:\n"
+"\n"
 
 #: ../src/plugin.py:1049
 #, python-format
 msgid "Really delete account %s?"
-msgstr ""
+msgstr "Account %s echt verwijderen?"
 
 #: ../src/plugin.py:347
 msgid "Subject"
-msgstr ""
+msgstr "Onderwerp"
 
 #: ../src/plugin.py:852
 #, python-format
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
 "####################################################################################################\n"
-"# If you have problems to log into your imap-server, please send me the "
-"output of the following line\n"
+"# If you have problems to log into your imap-server, please send me the output of the following line\n"
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 msgstr ""
+"[EmailAccount] %(name)s: _cbCapabilities:\n"
+"####################################################################################################\n"
+"# Als u problemen heeft in te loggen op uw imap-server, stuur dan de inhoud van de volgende regel\n"
+"# cbCapabilities: %(capa)s\n"
+"####################################################################################################\n"
 
 #: ../src/plugin.py:1009
 #, python-format
 msgid "account %s is not connected"
-msgstr ""
+msgstr "account %s is niet verbonden"
 
 #: ../src/EmailConfig.py:129
 msgid "account name"
-msgstr ""
+msgstr "account naam"
 
-#: ../src/plugin.py:127 ../src/plugin.py:194 ../src/plugin.py:235
-#: ../src/plugin.py:384 ../src/plugin.py:387 ../src/plugin.py:393
+#: ../src/plugin.py:127
+#: ../src/plugin.py:194
+#: ../src/plugin.py:235
+#: ../src/plugin.py:384
+#: ../src/plugin.py:387
+#: ../src/plugin.py:393
 msgid "account not connected"
-msgstr ""
+msgstr "account iet verbonden"
 
 #: ../src/plugin.py:966
 msgid "add"
-msgstr ""
+msgstr "voeg toe"
 
-#: ../src/EmailConfig.py:39 ../src/EmailConfig.py:102
+#: ../src/EmailConfig.py:39
+#: ../src/EmailConfig.py:102
 msgid "cancel"
-msgstr ""
+msgstr "annuleer"
 
 #: ../src/plugin.py:738
 msgid "cannot access inbox"
-msgstr ""
+msgstr "kan inbox niet bereiken"
 
 #: ../src/plugin.py:815
 msgid "cannot get headers of new messages"
-msgstr ""
+msgstr "kan de headers van nieuwe berichten niet verkrijgen"
 
 #: ../src/plugin.py:745
 msgid "cannot get list of new messages"
-msgstr ""
+msgstr "kan geen lijst met nieuwe berichten verkrijgen"
 
 #: ../src/plugin.py:834
 msgid "connection failed - retrying"
-msgstr ""
+msgstr "verbinden mislukt - probeert opnieuw"
 
 #: ../src/EmailConfig.py:53
 msgid "debug"
-msgstr ""
+msgstr "debug"
 
 #: ../src/plugin.py:355
 msgid "delete"
-msgstr ""
+msgstr "verwijder"
 
 #: ../src/EmailConfig.py:52
 msgid "display connection errors"
-msgstr ""
+msgstr "toon verbindings fouten"
 
 #: ../src/EmailConfig.py:51
 msgid "display timeout (seconds)"
-msgstr ""
+msgstr "toon timeout (seconds)"
 
 #: ../src/plugin.py:967
 msgid "edit"
-msgstr ""
+msgstr "bewerk"
 
 #: ../src/EmailConfig.py:145
 msgid "empty values - retry"
-msgstr ""
+msgstr "lege waardes - probeer opnieuw"
 
 #: ../src/plugin.py:911
 #, python-format
@@ -161,129 +175,136 @@ msgid ""
 "error logging %(who)s in:\n"
 "%(failure)s"
 msgstr ""
+"fout met loggen %(who)s in:\n"
+"%(failure)s"
 
 #: ../src/plugin.py:810
 msgid "failed to load message"
-msgstr ""
+msgstr "kon berichten niet laden"
 
 #: ../src/plugin.py:231
 msgid "getting message ..."
-msgstr ""
+msgstr "verkrijg bericht..."
 
 #: ../src/plugin.py:224
 #, python-format
 msgid "have %d messages"
-msgstr ""
+msgstr "heb %d berichten"
 
 #: ../src/plugin.py:226
 msgid "have no messages"
-msgstr ""
+msgstr "geen berichten"
 
 #: ../src/plugin.py:206
 msgid "headers loaded, now parsing ..."
-msgstr ""
+msgstr "headers gedownload, bezig met samenstellen..."
 
 #: ../src/plugin.py:1091
 #, python-format
 msgid "importing configurations from %s"
-msgstr ""
+msgstr "importeert configuraties van %s"
 
 #: ../src/plugin.py:351
 msgid "leave unread"
-msgstr ""
+msgstr "laat ongelezen"
 
 #: ../src/EmailConfig.py:136
 msgid "list all mailboxes"
-msgstr ""
+msgstr "toon alle mailboxen"
 
 #: ../src/plugin.py:189
 msgid "loading headers ..."
-msgstr ""
+msgstr "laadt headers ..."
 
 #: ../src/EmailConfig.py:134
 msgid "mail check interval (minutes)"
-msgstr ""
+msgstr "mail check interval (minuten)"
 
 #: ../src/EmailConfig.py:135
 msgid "maximum mail size to fetch"
-msgstr ""
+msgstr "maximale mail grootte om binnen te halen"
 
 #: ../src/plugin.py:801
 msgid "message too large"
-msgstr ""
+msgstr "bericht te groot"
 
-#: ../src/plugin.py:1015 ../src/plugin.py:1052
+#: ../src/plugin.py:1015
+#: ../src/plugin.py:1052
 msgid "no account selected"
-msgstr ""
+msgstr "geen account geselecteerd"
 
-#: ../src/plugin.py:346 ../src/plugin.py:604
+#: ../src/plugin.py:346
+#: ../src/plugin.py:604
 msgid "no date"
-msgstr ""
+msgstr "geen datum"
 
 #: ../src/plugin.py:425
 msgid "no filename"
-msgstr ""
+msgstr "geen bestandsnaam"
 
 #: ../src/plugin.py:344
 msgid "no from"
-msgstr ""
+msgstr "niet van"
 
 #: ../src/plugin.py:196
 msgid "no mailbox?!?!"
-msgstr ""
+msgstr "geen mailbox?!?!"
 
 #: ../src/plugin.py:594
 msgid "no sender"
-msgstr ""
+msgstr "geen afzender"
 
-#: ../src/plugin.py:347 ../src/plugin.py:597
+#: ../src/plugin.py:347
+#: ../src/plugin.py:597
 msgid "no subject"
-msgstr ""
+msgstr "geen onderwerp"
 
-#: ../src/EmailConfig.py:40 ../src/EmailConfig.py:103
+#: ../src/EmailConfig.py:40
+#: ../src/EmailConfig.py:103
 msgid "ok"
-msgstr ""
+msgstr "ok"
 
 #: ../src/plugin.py:238
 msgid "parsing message ..."
-msgstr ""
+msgstr "stelt bericht samen..."
 
 #: ../src/EmailConfig.py:133
 msgid "password"
-msgstr ""
+msgstr "wachtwoord"
 
 #: ../src/plugin.py:378
 msgid "really delete mail?"
-msgstr ""
+msgstr "mail echt verwijderen?"
 
 #: ../src/plugin.py:376
 msgid "really undelete mail?"
-msgstr ""
+msgstr "verwijderde mail echt terughalen?"
 
 #: ../src/plugin.py:965
 msgid "remove"
-msgstr ""
+msgstr "verwijder"
 
 #: ../src/plugin.py:427
 msgid "select Attachment"
-msgstr ""
+msgstr "kies aanhangsel"
 
 #: ../src/plugin.py:411
 msgid "select Body"
-msgstr ""
+msgstr "selecteer Body"
 
 #: ../src/EmailConfig.py:50
 msgid "show deleted entries"
-msgstr ""
+msgstr "toon verwijderde entries"
 
 #: ../src/plugin.py:353
 msgid "undelete"
-msgstr ""
+msgstr "verwijderen ongedaan maken"
 
 #: ../src/EmailConfig.py:132
 msgid "user name"
-msgstr ""
+msgstr "gebruikers naam"
 
 #: ../src/plugin.py:1147
 msgid "view Emails via IMAP4"
-msgstr ""
+msgstr "bekijk emails via IMAP4"
+

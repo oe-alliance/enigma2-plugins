@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-08 13:42+0100\n"
-"PO-Revision-Date: 2011-08-08 13:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2011-09-28 14:01+0100\n"
+"Last-Translator: R.L. van der Does\n"
+"Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,20 +19,20 @@ msgstr ""
 
 #: ../src/MovieSelection.py:256
 msgid "All"
-msgstr ""
+msgstr "Allemaal"
 
 #: ../src/SerienFilm.py:65
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 #: ../src/MovieSelection.py:188
 msgid "Delete failed!"
-msgstr ""
+msgstr "Verwijderen mislukt!"
 
 #: ../src/MovieSelection.py:473
 #, python-format
 msgid "Directory %s nonexistent."
-msgstr ""
+msgstr "Map %s bestaat niet."
 
 #: ../src/MovieSelection.py:160
 #, python-format
@@ -40,99 +40,102 @@ msgid ""
 "Do you really want to delete %s\n"
 "%s?"
 msgstr ""
+"Wilt u echt %s verwijderen\n"
+"%s?"
 
 #: ../src/SerienFilm.py:65
 msgid "Edit"
-msgstr ""
+msgstr "Pas aan"
 
 #: ../src/SerienFilm.py:59
 msgid "Exit"
-msgstr ""
+msgstr "Verlaat"
 
 #: ../src/MovieSelection.py:516
 msgid "No tags are set on these movies."
-msgstr ""
+msgstr "Deze opnames hebben geen tag."
 
 #: ../src/MovieSelection.py:513
 msgid "Please select tag to filter..."
-msgstr ""
+msgstr "Kies een tag om te filteren..."
 
 #: ../src/MovieSelection.py:457
 msgid "Please select the movie path..."
-msgstr ""
+msgstr "Selecteer het opnamepad"
 
 #: ../src/MovieSelection.py:231
 msgid "Please wait... Loading list..."
-msgstr ""
+msgstr "Wacht.... lijst wordt geladen"
 
 #: ../src/SerienFilm.py:90
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Echt stoppen zonder de instellingen op te slaan?"
 
 #: ../src/MovieSelection.py:439
 msgid "Recorded files..."
-msgstr ""
+msgstr "Gemaakte opnames..."
 
 #: ../src/SerienFilm.py:65
 msgid "Save"
-msgstr ""
+msgstr "Sla op"
 
 #: ../src/MovieSelection.py:400
 msgid "Tag 1"
-msgstr ""
+msgstr "Tag 1"
 
 #: ../src/MovieSelection.py:405
 msgid "Tag 2"
-msgstr ""
+msgstr "Tag 2"
 
 #: ../src/MovieSelection.py:412
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: ../src/MovieSelection.py:162
 msgid "You cannot delete this!"
-msgstr ""
+msgstr "U kunt dit niet verwijderen!"
 
 #: ../src/MovieSelection.py:68
 msgid "delete..."
-msgstr ""
+msgstr "verwijder..."
 
 #: ../src/MovieSelection.py:286
 msgid "exit movielist"
-msgstr ""
+msgstr "verlaat movielijst"
 
 #: ../src/MovieSelection.py:272
 msgid "menu"
-msgstr ""
+msgstr "menu"
 
 #: ../src/MovieSelection.py:287
 msgid "select movie"
-msgstr ""
+msgstr "selecteer opname"
 
 #: ../src/MovieSelection.py:266
 msgid "select the movie path"
-msgstr ""
+msgstr "selecteer het opname pad"
 
 #: ../src/MovieSelection.py:278
 msgid "show all"
-msgstr ""
+msgstr "toon alle"
 
 #: ../src/MovieSelection.py:273
 msgid "show event details"
-msgstr ""
+msgstr "toon event details"
 
 #: ../src/MovieSelection.py:279
 msgid "show first selected tag"
-msgstr ""
+msgstr "toon eerste geselecteerde tag"
 
 #: ../src/MovieSelection.py:280
 msgid "show second selected tag"
-msgstr ""
+msgstr "toon tweede geselecteerde tag"
 
 #: ../src/MovieSelection.py:281
 msgid "show tag menu"
-msgstr ""
+msgstr "toon tag menu"
 
 #: ../src/MovieSelection.py:144
 msgid "this recording"
-msgstr ""
+msgstr "Deze opname"
+
