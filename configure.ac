@@ -157,6 +157,10 @@ emailclient/meta/Makefile
 emailclient/po/Makefile
 emailclient/src/Makefile
 
+emission/Makefile
+emission/meta/Makefile
+emission/src/Makefile
+
 epgrefresh/Makefile
 epgrefresh/meta/Makefile
 epgrefresh/po/Makefile
