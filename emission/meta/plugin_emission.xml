@@ -1,0 +1,15 @@
+<default>
+	<prerequisites>
+		<tag type="Communication"/>
+	</prerequisites>
+	<info>
+		<author>ritzMo</author>
+		<name>eMission</name>
+		<packagename>enigma2-plugin-extensions-emission</packagename>
+		<shortdescription>Remote-Control for the Transmission BitTorrent client.</shortdescription>
+		<description>Using eMission you can control downloads and settings of a remote (or local) instance of Transmission.</description>
+	</info>
+	<files type="package">
+		<file type="package" name="enigma2-plugin-extensions-emission"/>
+	</files>
+</default>

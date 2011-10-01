@@ -13,6 +13,7 @@ from Tools.HardwareInfo import HardwareInfo
 from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG
 
 from twisted.internet import reactor
+from twisted.internet.error import CannotListenError
 from twisted.web import server, http, util, static, resource
 
 from socket import gethostname as socket_gethostname
@@ -261,10 +262,19 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 		from twisted.internet import ssl
 		from OpenSSL import SSL
 		ctx = ssl.DefaultOpenSSLContextFactory('/etc/enigma2/server.pem', '/etc/enigma2/cacert.pem', sslmethod=SSL.SSLv23_METHOD)
-		d = reactor.listenSSL(port, site, ctx, interface=ipaddress)
+		try:
+			d = reactor.listenSSL(port, site, ctx, interface=ipaddress)			
+		except CannotListenError:
+			print "[Webinterface] FAILED to listen on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
+			return False
 	else:
-		d = reactor.listenTCP(port, site, interface=ipaddress)
-	running_defered.append(d)		
+		try:
+			d = reactor.listenTCP(port, site, interface=ipaddress)
+		except CannotListenError:
+			print "[Webinterface] FAILED to listen on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
+			return False
+	
+	running_defered.append(d)
 	print "[Webinterface] started on %s:%i auth=%s ssl=%s" % (ipaddress, port, useauth, usessl)
 	return True
 	
