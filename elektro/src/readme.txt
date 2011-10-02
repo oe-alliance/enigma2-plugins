@@ -2,6 +2,7 @@
 Elektro Power Save for Dreambox 
 Version 1 & 2 by gutemine
 Version 3 by Morty <morty@gmx.net>
+Profiles, HDD, IP, NAS Mod by joergm6
 ====================================================
 Release infos 
 ====================================================
@@ -46,8 +47,7 @@ Release infos
 3.4.1 Fix: Multi-Language (locale) does not work 
 3.4.2 Enhance user interface (configuration menu)
 3.4.3 2 Profiles; waiting for responding IP addresses
-3.4.4 Use both profiles alternately (allows two time cycles per day)
-
+3.4.5 A NAS/server can be shutdown via Telnet
 
 1) Prerequisites
 ----------------
@@ -164,7 +164,7 @@ Main menu -> Extensions -> Elektro Power Save
    If the box is supposed to enter deep standby
    e.g. monday night at 1 AM, it actually is already
    tuesday. To enable this anyway, differing next day
-   start time can be specified here.   
+   start time can to be specified here.   
    Hopefully the rest is self-explanatory. 
 
 
