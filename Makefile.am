@@ -22,7 +22,6 @@ SUBDIRS = \
 	eibox \
 	elektro \
 	emailclient \
-	emission \
 	epgrefresh \
 	epgsearch \
 	fancontrol2 \
