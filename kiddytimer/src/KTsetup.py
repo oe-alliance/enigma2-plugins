@@ -48,7 +48,7 @@ class KiddyTimerSetup(ConfigListScreen, Screen, ProtectedScreen):
 
         # Lets get a list of elements for the config list
         self.list = [
-            getConfigListEntry(_("xEnabled"), config.plugins.KiddyTimer.enabled),
+            getConfigListEntry(_("Enabled"), config.plugins.KiddyTimer.enabled),
             getConfigListEntry(_("PIN"), config.plugins.KiddyTimer.pin),
             getConfigListEntry(_("Don't monitor TV started before"), config.plugins.KiddyTimer.monitorStartTime ), 
             getConfigListEntry(_("Don't monitor TV started after"), config.plugins.KiddyTimer.monitorEndTime ), 
