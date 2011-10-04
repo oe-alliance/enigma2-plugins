@@ -54,7 +54,7 @@ def leaveStandby():
 def standbyCounterChanged(configElement):
 	if config.startupserviceleavingstandbymode.lastservice.value != "" and config.startupserviceleavingstandbymode.lastroot.value != "":
 		from Screens.Standby import inStandby
-		if inStandby.prev_running_service and inStandby.prev_running_service.getPath() == "":
+		if inStandby.prev_running_service and (inStandby.prev_running_service.getPath() == "" or inStandby.prev_running_service.getPath()[0] != "/"):
 			inStandby.prev_running_service = eServiceReference(config.startupserviceleavingstandbymode.lastservice.value)
 			if config.startupserviceleavingstandbymode.lastmode.value == "tv":
 				config_last = config.tv
