@@ -195,6 +195,12 @@ class RSSPoller:
 						5,
 						NOTIFICATIONID
 					)
+				elif update_notification_value == "ticker":
+					from RSSTickerView import tickerView
+					if not tickerView:
+						print("[SimpleRSS] missing ticker instance, something with my code is wrong :-/")
+					else:
+						tickerView.display(self.newItemFeed)
 			# No new Items
 			else:
 				print("[SimpleRSS] no new items")

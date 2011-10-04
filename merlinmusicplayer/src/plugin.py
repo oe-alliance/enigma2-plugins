@@ -1517,21 +1517,18 @@ class MerlinMusicPlayerLyrics(Screen):
 			audio = ID3(self.currentSong.filename)
 		except:
 			audio = None
-		if audio:
-			text = getEncodedString(self.getLyricsFromID3Tag(audio)).replace("\r\n","\n")
-			text = text.replace("\r","\n")
-			self["lyric_text"].setText(text)
-		else:
-			self["lyric_text"].setText("No lyrics found")
+		text = getEncodedString(self.getLyricsFromID3Tag(audio)).replace("\r\n","\n")
+		text = text.replace("\r","\n")
+		self["lyric_text"].setText(text)
   
 	def getLyricsFromID3Tag(self,tag):
-		for frame in tag.values():
-			if frame.FrameID == "USLT":
-				return frame.text
+		if tag:
+			for frame in tag.values():
+				if frame.FrameID == "USLT":
+					return frame.text
 		url = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=%s&song=%s" % (quote(self.currentSong.artist), quote(self.currentSong.title))
 		sendUrlCommand(url, None,10).addCallback(self.gotLyrics).addErrback(self.urlError)
 		return "No lyrics found in id3-tag, trying api.chartlyrics.com..."
-
 	
 	def urlError(self, error = None):
 		if error is not None:

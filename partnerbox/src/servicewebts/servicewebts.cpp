@@ -210,11 +210,11 @@ int eServiceWebTS::openHttpConnection(std::string url)
 	}
 
 	std::string request = "GET ";
-	request.append(uri).append(" HTTP/1.1\n");
-	request.append("Host: ").append(host).append("\n");
-	request.append("Accept: */*\n");
-	request.append("Connection: close\n");
-	request.append("\n");
+	request.append(uri).append(" HTTP/1.1\r\n");
+	request.append("Host: ").append(host).append("\r\n");
+	request.append("Accept: */*\r\n");
+	request.append("Connection: close\r\n");
+	request.append("\r\n");
 	//eDebug(request.c_str());
 	write(fd, request.c_str(), request.length());
 
@@ -649,6 +649,18 @@ bool eStreamThreadWeb::scanAudioInfo(unsigned char buf[], int len)
 				if (APID == 0)
 					APID =pid;
 			}
+			break;
+		case 0x0f:
+			if (APID == 0)
+				APID =pid;
+			lang = getDescriptor(pmt+b+5, pmt[b+4], LANGUAGE_DESCRIPTOR);
+			ainfo->addAudio(pid, lang, "AAC", eDVBAudio::aAAC);
+			break;
+		case 0x11:
+			if (APID == 0)
+				APID =pid;
+			lang = getDescriptor(pmt+b+5, pmt[b+4], LANGUAGE_DESCRIPTOR);
+			ainfo->addAudio(pid, lang, "AACHE", eDVBAudio::aAACHE);
 			break;
 		}
 		b += 4 + pmt[b+4];

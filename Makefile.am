@@ -16,6 +16,7 @@ SUBDIRS = \
 	dvdbackup \
 	easyinfo \
 	easymedia \
+	ecasa \
 	eibox \
 	emailclient \
 	epgrefresh \

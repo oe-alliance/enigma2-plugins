@@ -100,10 +100,20 @@ class Favorite:
 
 class myHTTPClientFactory(HTTPClientFactory):
 	def __init__(self, url, method='GET', postdata=None, headers=None,
-	agent="SHOUTcast", timeout=0, cookies=None,
-	followRedirect=1, lastModified=None, etag=None):
+			agent="SHOUTcast", timeout=0, cookies=None,
+			followRedirect=1, lastModified=None, etag=None):
 		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
+
+	def clientConnectionLost(self, connector, reason):
+		lostreason=("Connection was closed cleanly" in vars(reason))
+		if lostreason==None:
+			print"[SHOUTcast] Lost connection, reason: %s ,trying to reconnect!" %reason
+			connector.connect()
+
+	def clientConnectionFailed(self, connector, reason):
+		print"[SHOUTcast] connection failed, reason: %s,trying to reconnect!" %reason
+		connector.connect()
 
 def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
 	scheme, host, port, path = client._parse(url)
@@ -749,10 +759,11 @@ class SHOUTcastWidget(Screen, InfoBarSeek):
 				self.oldtitle=sTitle
 				sTitle = sTitle.replace("Title:", "")[:55]
 				if config.plugins.shoutcast.showcover.value:
+					searchpara="album cover art "
 					if sTitle:
-						url = "http://images.google.com/search?tbm=isch&q=%s&biw=%s&bih=%s&ift=jpg" % (quote(sTitle), config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
+						url = "http://images.google.com/search?tbm=isch&q=%s%s&biw=%s&bih=%s&ift=jpg&ift=gif&ift=png" % (quote(searchpara), quote(sTitle), config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
 					else:
-						url = "http://images.google.com/search?tbm=isch&q=notavailable&biw=%s&bih=%s&ift=jpg" % (config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
+						url = "http://images.google.com/search?tbm=isch&q=notavailable&biw=%s&bih=%s&ift=jpg&ift=gif&ift=png" % (config.plugins.shoutcast.coverwidth.value, config.plugins.shoutcast.coverheight.value)
 					print "[Shoutcast] coverurl = %s " % url
 					if self.currentGoogle:
 						self.nextGoogle = url

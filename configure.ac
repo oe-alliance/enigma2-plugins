@@ -1,4 +1,4 @@
-AC_INIT([enigma2-plugins],[3.0.0],[enigma2-devel@lists.elitedvb.net])
+AC_INIT([enigma2-plugins],[3.2.0],[enigma2-devel@lists.elitedvb.net])
 AM_INIT_AUTOMAKE([dist-bzip2 foreign no-define tar-pax])
 AC_CONFIG_HEADERS([enigma2-plugins-config.h])
 
@@ -60,6 +60,7 @@ if test "$with_debug" = "yes"; then
 	DEBUG_CFLAGS="-ggdb3"
 	AC_DEFINE([DEBUG],[1],[Define to 1 to enable debugging code])
 fi
+AC_SUBST(DEBUG_CFLAGS)
 
 AC_ARG_WITH(po,
 	AS_HELP_STRING([--with-po],[enable updating of po files]),
@@ -74,10 +75,6 @@ if test "$with_po" = "yes"; then
 	fi
 fi
 AM_CONDITIONAL(UPDATE_PO, test "$with_po" = "yes")
-
-CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS -include Python.h -include enigma2-plugins-config.h"
-CFLAGS="$CFLAGS $DEBUG_CFLAGS -Wall"
-CXXFLAGS="$CXXFLAGS $DEBUG_CFLAGS -Wall $ENIGMA2_CFLAGS $PTHREAD_CFLAGS"
 
 AC_CONFIG_FILES([
 Makefile
@@ -163,6 +160,10 @@ easymedia/Makefile
 easymedia/meta/Makefile
 easymedia/po/Makefile
 easymedia/src/Makefile
+
+ecasa/Makefile
+ecasa/meta/Makefile
+ecasa/src/Makefile
 
 eibox/Makefile
 eibox/meta/Makefile
