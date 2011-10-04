@@ -4,7 +4,7 @@ from __future__ import print_function
 # for localized messages
 from . import _
 
-from AutoTimerComponent import preferredAutoTimerComponent
+from AutoTimerComponent import preferredAutoTimerComponent, getDefaultEncoding
 from RecordTimer import AFTEREVENT
 from Tools.XMLTools import stringToXML
 from ServiceReference import ServiceReference
@@ -496,6 +496,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 	list = ['<?xml version="1.0" ?>\n<autotimer version="', CURRENT_CONFIG_VERSION, '">\n\n']
 	append = list.append
 	extend = list.extend
+	defaultEncoding = getDefaultEncoding()
 
 	# This gets deleted afterwards if we do not have set any defaults
 	append(' <defaults')
@@ -536,7 +537,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 		extend((' justplay="', str(defaultTimer.getJustplay()), '"'))
 
 	# Only display encoding if != utf-8
-	if defaultTimer.encoding != 'UTF-8' or webif:
+	if defaultTimer.encoding != defaultEncoding or webif:
 		extend((' encoding="', str(defaultTimer.encoding), '"'))
 
 	# Only display searchType if exact
@@ -670,7 +671,7 @@ def buildConfig(defaultTimer, timers, webif = False):
 			extend((' justplay="', str(timer.getJustplay()), '"'))
 
 		# Only display encoding if != utf-8
-		if timer.encoding != 'UTF-8' or webif:
+		if timer.encoding != defaultEncoding or webif:
 			extend((' encoding="', str(timer.encoding), '"'))
 
 		# Only display searchType if exact

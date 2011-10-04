@@ -15,7 +15,6 @@ SUBDIRS = \
 	cdinfo \
 	dreamirc \
 	dreammediathek \
-	dvdbackup \
 	dyndns \
 	easyinfo \
 	easymedia \
@@ -23,6 +22,7 @@ SUBDIRS = \
 	eibox \
 	elektro \
 	emailclient \
+	emission \
 	epgrefresh \
 	epgsearch \
 	fancontrol2 \

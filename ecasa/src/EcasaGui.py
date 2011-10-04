@@ -27,6 +27,9 @@ from Components.config import config
 from .PicasaApi import PicasaApi
 from .TagStrip import strip_readable
 
+#pragma mark Flickr
+from .FlickrApi import FlickrApi
+
 from enigma import ePicLoad, ePythonMessagePump, eTimer, getDesktop
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Notifications import AddPopup
@@ -80,7 +83,10 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		InfoBarNotifications.__init__(self)
 
 		if api is None:
-			self.api = PicasaApi(cache=config.plugins.ecasa.cache.value)
+			if config.plugins.ecasa.last_backend.value == 'picasa':
+				self.api = PicasaApi(cache=config.plugins.ecasa.cache.value)
+			else:
+				self.api = FlickrApi(config.plugins.ecasa.flickr_api_key.value, cache=config.plugins.ecasa.cache.value)
 			try:
 				self.api.setCredentials(
 					config.plugins.ecasa.google_username.value,
@@ -343,7 +349,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 
 	def contextMenu(self):
 		options = [
-			(_("Setup"), lambda: self.session.openWithCallback(self.setupClosed, EcasaSetup)),
+			(_("Setup"), self.openSetup),
 			(_("Search History"), self.openHistory),
 		]
 		self.session.openWithCallback(
@@ -355,6 +361,9 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 	def menuCallback(self, ret=None):
 		if ret:
 			ret[1]()
+
+	def openSetup(self):
+		 self.session.openWithCallback(self.setupClosed, EcasaSetup)
 
 	def openHistory(self):
 		options = [(x, x) for x in config.plugins.ecasa.searchhistory.value]
@@ -378,6 +387,13 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 			self.searchCallback(ret[1])
 
 	def setupClosed(self):
+		if config.plugins.ecasa.last_backend.value == 'picasa':
+			if not isinstance(self.api, PicasaApi):
+				self.api = PicasaApi(cache=config.plugins.ecasa.cache.value)
+		else:
+			if not isinstance(self.api, FlickrApi):
+				self.api = FlickrApi(config.plugins.ecasa.flickr_api_key.value, cache=config.plugins.ecasa.cache.value)
+
 		try:
 			self.api.setCredentials(
 				config.plugins.ecasa.google_username.value,
@@ -402,7 +418,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		our_print("errorPictures", error)
 		self.session.open(
 			MessageBox,
-			_("Error downloading") + ': ' + error.value.message,
+			_("Error downloading") + ': ' + error.value.message.encode('utf-8'),
 			type=MessageBox.TYPE_ERROR,
 			timeout=3
 		)
@@ -418,6 +434,23 @@ class EcasaOverview(EcasaPictureWall):
 		thread.start()
 
 		self.onClose.append(self.__onClose)
+
+	def openSetup(self):
+		 self.session.openWithCallback(self.setupClosed, EcasaSetup, allowApiChange=True)
+
+	def setupClosed(self):
+		api = self.api
+		EcasaPictureWall.setupClosed(self)
+		if api != self.api:
+			self.pictures = ()
+			self["highlight"].hide()
+			for i in xrange(self.PICS_PER_PAGE):
+				self['image%d' % i].instance.setPixmap(None)
+			self["waitingtext"].show()
+
+			thread = EcasaThread(self.api.getFeatured)
+			thread.deferred.addCallbacks(self.gotPictures, self.errorPictures)
+			thread.start()
 
 	def __onClose(self):
 		thread = EcasaThread(lambda: self.api.cleanupCache(config.plugins.ecasa.cachesize.value))
@@ -635,7 +668,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 		print("ebDownload", error)
 		self.session.open(
 			MessageBox,
-			_("Error downloading") + ': ' + error.value.message,
+			_("Error downloading") + ': ' + error.value.message.encode('utf-8'),
 			type=MessageBox.TYPE_ERROR,
 			timeout=3
 		)

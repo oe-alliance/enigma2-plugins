@@ -22,3 +22,15 @@ msgstr "Startservice zurücksetzen"
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr "Wenn diese Nachricht erscheint bitte auf den Kanal schalten, welcher als Startservice gesetzt werden soll, und dann nochmal versuchen."
 
+msgid "set as startup service after booting..."
+msgstr "Als Startservice nach dem Booten setzen..."
+
+msgid "set as startup service after leaving standby mode..."
+msgstr "Als Startservice beim Verlassen des Standby-Modus setzen..."
+
+msgid "reset startup service for booting..."
+msgstr "Startservice nach dem Booten zurücksetzen..."
+
+msgid "reset startup service for leaving standby mode..."
+msgstr "Startservice beim Verlassen des Standby-Modus zurücksetzen..."
+
