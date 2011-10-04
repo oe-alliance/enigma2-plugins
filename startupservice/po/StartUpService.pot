@@ -28,3 +28,14 @@ msgstr ""
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr ""
 
+msgid "set as startup service after booting..."
+msgstr ""
+
+msgid "set as startup service after leaving standby mode..."
+msgstr ""
+
+msgid "reset startup service for booting..."
+msgstr ""
+
+msgid "reset startup service for leaving standby mode..."
+msgstr ""
