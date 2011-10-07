@@ -130,7 +130,7 @@ def editCallback(session):
 		ret = autotimer.parseEPG()
 		session.open(
 			MessageBox,
-			_("Found a total of %d matching Events.\n%d Timer were added and %d modified, %d conflicts encountered, %d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
+			_("Found a total of %d matching Events.\n%d Timer were added and \n%d modified, \n%d conflicts encountered, \n%d similars added.") % (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
 			type = MessageBox.TYPE_INFO,
 			timeout = 10
 		)
