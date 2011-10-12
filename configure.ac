@@ -127,11 +127,6 @@ dreamirc/src/protocols/Makefile
 dreammediathek/Makefile
 dreammediathek/src/Makefile
 
-dvdbackup/Makefile
-dvdbackup/meta/Makefile
-dvdbackup/po/Makefile
-dvdbackup/src/Makefile
-
 dyndns/Makefile
 dyndns/src/Makefile
 dyndns/meta/Makefile
