@@ -84,7 +84,6 @@ SUBDIRS = \
 	webbouqueteditor \
 	webcamviewer \
 	werbezapper \
-	widgets \
 	youtubeplayer \
 	yttrailer \
 	zaphistorybrowser \
