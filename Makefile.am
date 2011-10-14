@@ -14,7 +14,6 @@ SUBDIRS = \
 	cdinfo \
 	dreamirc \
 	dreammediathek \
-	dvdbackup \
 	easyinfo \
 	easymedia \
 	ecasa \
