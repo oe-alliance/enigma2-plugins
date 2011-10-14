@@ -93,7 +93,7 @@ SUBDIRS = \
 	yttrailer \
 	zaphistorybrowser \
 	zapstatistic \
-	zdfmediathek \
+	zdfmediathek 
 
 if DREAMBOX
 SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview genuinedreambox
