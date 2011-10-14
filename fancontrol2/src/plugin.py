@@ -30,7 +30,6 @@ from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Screens.Console import Console
 from Screens import Standby 
-from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 
 # GUI (Components)
@@ -133,7 +132,7 @@ def setPWM(fanid, value):
 config.plugins.FanControl = ConfigSubsection()
 config.plugins.FanControl.Fan = ConfigSelection(choices = [("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin"))], default = "disabled")
 config.plugins.FanControl.StandbyOff = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="false")
-config.plugins.FanControl.minRPM = ConfigSlider(default = 500, increment = 50, limits = (0, 1000))
+config.plugins.FanControl.minRPM = ConfigSlider(default = 600, increment = 50, limits = (0, 1000))
 config.plugins.FanControl.maxRPM = ConfigSlider(default = 3000, increment = 50, limits = (500, 6000))
 config.plugins.FanControl.temp = ConfigSlider(default = 40, increment = 1, limits = (30, 50))
 config.plugins.FanControl.tempmax = ConfigSlider(default = 50, increment = 1, limits = (35, 55))
@@ -158,11 +157,11 @@ def GetFanRPM():
 	f = open("/proc/stb/fp/fan_speed", "r")
 	value = int(f.readline().strip()[:-4])
 	f.close()
-	if value > 0 and value < 12000:
+	value = int(value / int(config.plugins.FanControl.Multi.value))
+	if value > 0 and value < 6000:
 		RPMread = 0
 	else:
 		RPMread += 1
-	value = int(value / int(config.plugins.FanControl.Multi.value))
 	return value
 
 def GetBox():
@@ -420,8 +419,8 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 
 class FanControl2SpezialSetup(Screen, ConfigListScreen):
 	skin = """
-		<screen position="center,center" size="600,350" title="Fan Control 2 - Setup" >
-			<widget name="config" position="10,20" size="580,320" scrollbarMode="showOnDemand" />
+		<screen position="center,center" size="600,380" title="Fan Control 2 - Setup" >
+			<widget name="config" position="10,20" size="580,350" scrollbarMode="showOnDemand" />
 		</screen>"""
 
 	def __init__(self, session, args = None):
@@ -438,6 +437,7 @@ class FanControl2SpezialSetup(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("increases overheating protection to (C)"), config.plugins.FanControl.AddOverheat))
 		self.list.append(getConfigListEntry(_("read HDD-Temperature in HDD-Standby-Mode"), config.plugins.FanControl.CheckHDDTemp))
 		self.list.append(getConfigListEntry(_("disable System FanControl"), config.plugins.FanControl.DisableDMM))
+		self.list.append(getConfigListEntry(_("Show Fan Speed as"), config.plugins.FanControl.Multi))
 		self.list.append(getConfigListEntry(_("Show Plugin in Extension-Menu"), config.plugins.FanControl.FanControlInExtension))
 		self.list.append(getConfigListEntry(_("Show Monitor in Extension-Menu"), config.plugins.FanControl.MonitorInExtension))
 		self.list.append(getConfigListEntry(_("Number of WebIF-Log-Entries"), config.plugins.FanControl.LogCount))
@@ -977,6 +977,8 @@ class FanControl2(Screen):
 				AktRPM = AktRPMtmp
 				AktVLT = AktVLTtmp
 				AktPWM = getPWM(id)
+				if AktVLT > 255:
+					AktVLT = 255
 				FClog("Vlt:%d Pwm:%d Fan:%s  %s" % (AktVLT,AktPWM,self.Fan,FC2systemStatus()))
 				FC2werte[0] = AktTemp
 				FC2werte[1] = AktRPM
@@ -1043,21 +1045,24 @@ class FanControl2(Screen):
 
 def autostart(reason, **kwargs):
 	global session
-	if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/webif.pyo"):
-		from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
-		from FC2webSite import FC2web, FC2webLog, FC2webChart
-		from twisted.web import static
-		root = static.File("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data")
-#		root = FC2web()
-		root.putChild("", FC2web())
-		root.putChild("log", FC2webLog())
-		root.putChild("chart", FC2webChart())
-		addExternalChild( ("fancontrol", root) )
-	if not os.path.exists("/proc/stb/fp/fan_vlt"):
-		Notifications.AddNotification(MessageBox, _("Box has no fancontrol hardware -> FC2 deactivated"), type=MessageBox.TYPE_INFO, timeout=10)
-		FClog("not supported, exit")
-		return
 	if reason == 0 and kwargs.has_key("session"):
+		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/webif.pyo"):
+			from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
+			from FC2webSite import FC2web, FC2webLog, FC2webChart
+			from twisted.web import static
+			root = static.File("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data")
+#			root = FC2web()
+			root.putChild("", FC2web())
+			root.putChild("log", FC2webLog())
+			root.putChild("chart", FC2webChart())
+			if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web/external.xml"):
+				addExternalChild( ("fancontrol", root, "Fan Control 2", Version) )
+			else:
+				addExternalChild( ("fancontrol", root) )
+		if not os.path.exists("/proc/stb/fp/fan_vlt"):
+			Notifications.AddNotification(MessageBox, _("Box has no fancontrol hardware -> FC2 deactivated"), type=MessageBox.TYPE_INFO, timeout=10)
+			FClog("not supported, exit")
+			return
 		session = kwargs["session"]
 		session.open(FanControl2)
           

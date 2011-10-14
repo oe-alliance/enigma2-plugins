@@ -30,10 +30,8 @@ from enigma import eTPM, eTimer, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, gFont
 from os import path as os_path, remove as os_remove
 from twisted.web import client
 
-
-
-etpm = eTPM()
-rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
+# etpm = eTPM()
+# rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
 
 config.plugins.mytube = ConfigSubsection()
 config.plugins.mytube.search = ConfigSubsection()
@@ -230,11 +228,12 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			<widget name="HelpWindow" position="160,255" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>"""
 		
-	def __init__(self, session, l2key):
+# 	def __init__(self, session, l2key):
+	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		self.l2key = l2key
-		self.l3key = None
+# 		self.l2key = l2key
+# 		self.l3key = None
 		self.skin_path = plugin_path
 		self.FeedURL = None
 		self.ytfeed = None
@@ -381,42 +380,58 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if current[1].help_window.instance is not None:
 			current[1].help_window.instance.hide()
 
-		l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
-		if l3cert is None or l3cert is "":
-			self["videoactions"].setEnabled(False)
-			self["searchactions"].setEnabled(False)
-			self["config_actions"].setEnabled(False)
-			self["historyactions"].setEnabled(False)
-			self["statusactions"].setEnabled(True)
-			self.hideSuggestions()
-			self.statuslist = []
-			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
-			self["feedlist"].style = "state"
-			self['feedlist'].setList(self.statuslist)
-			return
+# 		l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+# 		if l3cert is None or l3cert is "":
+# 			self["videoactions"].setEnabled(False)
+# 			self["searchactions"].setEnabled(False)
+# 			self["config_actions"].setEnabled(False)
+# 			self["historyactions"].setEnabled(False)
+# 			self["statusactions"].setEnabled(True)
+# 			self.hideSuggestions()
+# 			self.statuslist = []
+# 			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+# 			self["feedlist"].style = "state"
+# 			self['feedlist'].setList(self.statuslist)
+# 			return
+		self["videoactions"].setEnabled(False)
+		self["searchactions"].setEnabled(False)
+		self["config_actions"].setEnabled(False)
+		self["historyactions"].setEnabled(False)
+		self["statusactions"].setEnabled(True)
+		self.hideSuggestions()
+		self.statuslist = []
+		self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+		self["feedlist"].style = "state"
+		self['feedlist'].setList(self.statuslist)
 
-		self.l3key = validate_cert(l3cert, self.l2key)
-		if self.l3key is None:
-			print "l3cert invalid"
-			return
-		rnd = get_rnd()
-		if rnd is None:
-			print "random error"
-			return
+# 		self.l3key = validate_cert(l3cert, self.l2key)
+# 		if self.l3key is None:
+# 			print "l3cert invalid"
+# 			return
+# 		rnd = get_rnd()
+# 		if rnd is None:
+# 			print "random error"
+# 			return
 
-		val = etpm.challenge(rnd)
-		result = decrypt_block(val, self.l3key)
+# 		val = etpm.challenge(rnd)
+# 		result = decrypt_block(val, self.l3key)
+
+# 		self.statuslist = []
+# 		if result[80:88] == rnd:
+# 			self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+# 			self["feedlist"].style = "state"
+# 			self['feedlist'].setList(self.statuslist)
+# 			self.Timer.start(200)
+# 		else:
+# 			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+# 			self["feedlist"].style = "state"
+# 			self['feedlist'].setList(self.statuslist)		
 
 		self.statuslist = []
-		if result[80:88] == rnd:
-			self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
-			self["feedlist"].style = "state"
-			self['feedlist'].setList(self.statuslist)
-			self.Timer.start(200)
-		else:
-			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
-			self["feedlist"].style = "state"
-			self['feedlist'].setList(self.statuslist)		
+		self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+		self["feedlist"].style = "state"
+		self['feedlist'].setList(self.statuslist)
+		self.Timer.start(200)
 	
 	def TimerFire(self):
 		self.Timer.stop()
@@ -447,49 +462,79 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self["VKeyIcon"].hide()	
 			self.statuslist = []
 			self.hideSuggestions()
-			result = None
-			if self.l3key is not None:
-				rnd = get_rnd()
-				if rnd is None:
-					return
-				val = etpm.challenge(rnd)
-				result = decrypt_block(val, self.l3key)
-			if not result or result[80:88] != rnd:
+# 			result = None
+# 			if self.l3key is not None:
+# 				rnd = get_rnd()
+# 				if rnd is None:
+# 					return
+# 				val = etpm.challenge(rnd)
+# 				result = decrypt_block(val, self.l3key)
+# 			if not result or result[80:88] != rnd:
+# 				self["key_green"].show()
+# 				self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+# 				self["feedlist"].style = "state"
+# 				self['feedlist'].setList(self.statuslist)
+# 			else:
+# 				print "Genuine Dreambox validation passed"
+# 				if self.FirstRun == True:
+# 					self.appendEntries = False
+# 					myTubeService.startService()
+# 				if self.HistoryWindow is not None:
+# 					self.HistoryWindow.deactivate()
+# 					self.HistoryWindow.instance.hide()
+# 				if status == 'getFeed':
+# 					self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+# 				elif status == 'getSearchFeed':
+# 					self.statuslist.append(( _("Fetching search entries"), _("Trying to download the Youtube search results. Please wait..." ) ))
+# 				elif status == 'Error':
+# 					self.statuslist.append(( _("An error occured."), _("There was an error getting the feed entries. Please try again." ) ))
+# 				elif status == 'noVideos':
+# 					self["key_green"].show()
+# 					self.statuslist.append(( _("No videos to display"), _("Please select a standard feed or try searching for videos." ) ))
+# 				elif status == 'byPass':
+# 					self.statuslist.append(( _("Not fetching feed entries"), _("Please enter your search term." ) ))
+# 					self["feedlist"].style = "state"
+# 					self['feedlist'].setList(self.statuslist)
+# 					self.switchToConfigList()
+# 				self["feedlist"].style = "state"
+# 				self['feedlist'].setList(self.statuslist)
+# 				if self.FirstRun == True:
+# 					if config.plugins.mytube.general.loadFeedOnOpen.value:
+# 						if config.plugins.mytube.general.startFeed.value == 'hd':
+# 							self.FeedURL = "http://gdata.youtube.com/feeds/api/videos/-/HD"
+# 						else:
+# 							self.FeedURL = self.BASE_STD_FEEDURL + str(config.plugins.mytube.general.startFeed.value)
+# 						self.getFeed(self.FeedURL, str(config.plugins.mytube.general.startFeed.value))
+
+			if self.FirstRun == True:
+				self.appendEntries = False
+				myTubeService.startService()
+			if self.HistoryWindow is not None:
+				self.HistoryWindow.deactivate()
+				self.HistoryWindow.instance.hide()
+			if status == 'getFeed':
+				self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+			elif status == 'getSearchFeed':
+				self.statuslist.append(( _("Fetching search entries"), _("Trying to download the Youtube search results. Please wait..." ) ))
+			elif status == 'Error':
+				self.statuslist.append(( _("An error occured."), _("There was an error getting the feed entries. Please try again." ) ))
+			elif status == 'noVideos':
 				self["key_green"].show()
-				self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+				self.statuslist.append(( _("No videos to display"), _("Please select a standard feed or try searching for videos." ) ))
+			elif status == 'byPass':
+				self.statuslist.append(( _("Not fetching feed entries"), _("Please enter your search term." ) ))
 				self["feedlist"].style = "state"
 				self['feedlist'].setList(self.statuslist)
-			else:
-				print "Genuine Dreambox validation passed"
-				if self.FirstRun == True:
-					self.appendEntries = False
-					myTubeService.startService()
-				if self.HistoryWindow is not None:
-					self.HistoryWindow.deactivate()
-					self.HistoryWindow.instance.hide()
-				if status == 'getFeed':
-					self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
-				elif status == 'getSearchFeed':
-					self.statuslist.append(( _("Fetching search entries"), _("Trying to download the Youtube search results. Please wait..." ) ))
-				elif status == 'Error':
-					self.statuslist.append(( _("An error occured."), _("There was an error getting the feed entries. Please try again." ) ))
-				elif status == 'noVideos':
-					self["key_green"].show()
-					self.statuslist.append(( _("No videos to display"), _("Please select a standard feed or try searching for videos." ) ))
-				elif status == 'byPass':
-					self.statuslist.append(( _("Not fetching feed entries"), _("Please enter your search term." ) ))
-					self["feedlist"].style = "state"
-					self['feedlist'].setList(self.statuslist)
-					self.switchToConfigList()
-				self["feedlist"].style = "state"
-				self['feedlist'].setList(self.statuslist)
-				if self.FirstRun == True:
-					if config.plugins.mytube.general.loadFeedOnOpen.value:
-						if config.plugins.mytube.general.startFeed.value == 'hd':
-							self.FeedURL = "http://gdata.youtube.com/feeds/api/videos/-/HD"
-						else:
-							self.FeedURL = self.BASE_STD_FEEDURL + str(config.plugins.mytube.general.startFeed.value)
-						self.getFeed(self.FeedURL, str(config.plugins.mytube.general.startFeed.value))
+				self.switchToConfigList()
+			self["feedlist"].style = "state"
+			self['feedlist'].setList(self.statuslist)
+			if self.FirstRun == True:
+				if config.plugins.mytube.general.loadFeedOnOpen.value:
+					if config.plugins.mytube.general.startFeed.value == 'hd':
+						self.FeedURL = "http://gdata.youtube.com/feeds/api/videos/-/HD"
+					else:
+						self.FeedURL = self.BASE_STD_FEEDURL + str(config.plugins.mytube.general.startFeed.value)
+					self.getFeed(self.FeedURL, str(config.plugins.mytube.general.startFeed.value))
 
 
 	def handleHelpWindow(self):
@@ -1789,19 +1834,20 @@ class MyTubePlayer(Screen, InfoBarNotifications):
 
 
 def MyTubeMain(session, **kwargs):
-	l2 = False
-	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
-	if l2cert is None:
-		print "l2cert not found"
-		return
-	
-	l2key = validate_cert(l2cert, rootkey)
-	if l2key is None:
-		print "l2cert invalid"
-		return
-	l2 = True
-	if l2:
-		session.open(MyTubePlayerMainScreen,l2key)
+# 	l2 = False
+# 	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+# 	if l2cert is None:
+# 		print "l2cert not found"
+# 		return
+# 	
+# 	l2key = validate_cert(l2cert, rootkey)
+# 	if l2key is None:
+# 		print "l2cert invalid"
+# 		return
+# 	l2 = True
+# 	if l2:
+# 		session.open(MyTubePlayerMainScreen,l2key)
+	session.open(MyTubePlayerMainScreen)
 
 
 def Plugins(path, **kwargs):

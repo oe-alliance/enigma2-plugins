@@ -10,6 +10,9 @@ from enigma import eServiceReference, eServiceCenter
 # To get preferred component
 from Components.config import config
 
+# Default encoding
+from Components.Language import language
+
 class AutoTimerComponent(object):
 	"""AutoTimer Component which also handles validity checks"""
 
@@ -47,7 +50,7 @@ class AutoTimerComponent(object):
 			afterevent = [], exclude = None, maxduration = None, destination = None, \
 			include = None, matchCount = 0, matchLeft = 0, matchLimit = '', matchFormatString = '', \
 			lastBegin = 0, justplay = False, avoidDuplicateDescription = 0, bouquets = None, \
-			tags = None, encoding = 'UTF-8', searchType = "partial", searchCase = "insensitive", \
+			tags = None, encoding = None, searchType = "partial", searchCase = "insensitive", \
 			overrideAlternatives = False, timeframe = None, vps_enabled = False, \
 			vps_overwrite = False):
 		self.name = name
@@ -70,7 +73,7 @@ class AutoTimerComponent(object):
 		self.avoidDuplicateDescription = avoidDuplicateDescription
 		self.bouquets = bouquets
 		self.tags = tags or []
-		self.encoding = encoding
+		self.encoding = encoding or getDefaultEncoding()
 		self.searchType = searchType
 		self.searchCase = searchCase
 		self.overrideAlternatives = overrideAlternatives
@@ -104,11 +107,11 @@ class AutoTimerComponent(object):
 
 	def setEncoding(self, encoding):
 		if encoding == '(null)':
-			self._encoding = 'UTF-8'
+			self._encoding = getDefaultEncoding()
 		elif encoding:
 			self._encoding = encoding
 		elif not self._encoding:
-			self._encoding = 'UTF-8'
+			self._encoding = getDefaultEncoding()
 
 	encoding = property(lambda self: self._encoding, setEncoding)
 
@@ -700,6 +703,11 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 							else:
 								break
 		return override_service
+
+def getDefaultEncoding():
+	if 'de' in language.getLanguage():
+		return 'ISO8859-15'
+	return 'UTF-8'
 
 # very basic factory ;-)
 preferredAutoTimerComponent = lambda *args, **kwargs: AutoTimerFastscanComponent(*args, **kwargs) if config.plugins.autotimer.fastscan.value else AutoTimerComponent(*args, **kwargs)

@@ -1,7 +1,7 @@
 ﻿#
 # Power Save Plugin by gutemine
 # Rewritten by Morty (morty@gmx.net)
-# Profiles, HDD, IP Mod by joergm6
+# Profiles, HDD, IP, NAS Mod by joergm6
 #
 # Deep standby will be called sleep. Normal standby will be named standby!
 # All calculations are in the local timezone, or in the relative Timezone.
@@ -41,7 +41,7 @@ from Components.Harddisk import harddiskmanager
 from Components.Sources.StaticText import StaticText
 
 # Configuration
-from Components.config import getConfigListEntry, ConfigEnableDisable, \
+from Components.config import configfile, getConfigListEntry, ConfigEnableDisable, \
 	ConfigYesNo, ConfigText, ConfigClock, ConfigNumber, ConfigSelection, \
 	config, ConfigSubsection, ConfigSubList, ConfigSubDict, ConfigIP
 
@@ -53,7 +53,7 @@ import os
 # Timer, etc
 
 #import time
-from time import localtime, asctime, time, gmtime
+from time import localtime, asctime, time, gmtime, sleep
 # import datetime
 # import codecs
 
@@ -72,7 +72,7 @@ pluginPrintname = "[Elektro]"
 debug = False # If set True, plugin will print some additional status info to track logic flow
 session = None
 ElektroWakeUpTime = -1
-elektro_pluginversion = "3.4.4b"
+elektro_pluginversion = "3.4.5"
 elektrostarttime = 60 
 elektrosleeptime = 5
 elektroShutdownThreshold = 60 * 20
@@ -121,6 +121,15 @@ config.plugins.elektro.holiday =  ConfigEnableDisable(default = False)
 config.plugins.elektro.hddsleep =  ConfigYesNo(default = False)
 config.plugins.elektro.IPenable =  ConfigYesNo(default = False)
 
+config.plugins.elektro.NASenable = ConfigSelection(choices = [("false", "no"), ("true", "yes"), ("1", _("yes, Profile 1")), ("2", _("yes, Profile 2"))], default="false")
+#config.plugins.elektro.NASenable =  ConfigYesNo(default = False)
+config.plugins.elektro.NASname = ConfigText(default = "", fixed_size = False, visible_width = 50)
+config.plugins.elektro.NASuser = ConfigText(default = "", fixed_size = False, visible_width = 50)
+config.plugins.elektro.NASpass = ConfigText(default = "", fixed_size = False, visible_width = 50)
+config.plugins.elektro.NAScommand = ConfigText(default = "poweroff", fixed_size = False, visible_width = 50)
+config.plugins.elektro.NASport = ConfigNumber(default = 23)
+config.plugins.elektro.NASwait =  ConfigYesNo(default = False)
+
 weekdays = [
 	_("Monday"),
 	_("Tuesday"),
@@ -134,6 +143,40 @@ weekdays = [
 
 #global ElektroWakeUpTime
 ElektroWakeUpTime = -1
+
+def NASpowerdown(Nname,Nuser,Npass,Ncommand,Nport):
+	from telnetlib import Telnet
+	if Nname == "":
+		return _("no Name")
+	l=_("Connection Error")
+	try:
+		tn = Telnet(Nname, Nport, 5)
+		l=""
+		if Nuser != "":
+			l = l + tn.expect(['ogin:','sername'],10)[2]
+			l = l + tn.read_very_lazy()
+			tn.write('%s\r' % Nuser)
+		if Npass != "":
+			l = l + tn.read_until('assword:',10)
+			l = l + tn.read_very_lazy()
+			tn.write('%s\r' % Npass)
+		l = l + tn.expect(['#',">"],10)[2]
+		l = l + tn.read_very_lazy()
+		tn.write('%s\r' % Ncommand)
+		l = l + tn.expect(['#',">"],20)[2]
+		l = l + tn.read_very_lazy()
+		if config.plugins.elektro.NASwait.value == True:
+			tt = time() + 90
+			l = l + "\n waiting...\n"
+			while tt>time() and ping.doOne(Nname,1) != None:
+				sleep(2)
+		tn.write('exit\r')
+		l = l + tn.expect(['#',">"],5)[2]
+		l = l + tn.read_very_lazy()
+		tn.close()
+	finally:
+		return l
+
 
 def autostart(reason, **kwargs):
 	global session  
@@ -298,6 +341,94 @@ class ElektroIP(ConfigListScreen,Screen):
 			x[1].cancel()
 		self.close(False,self.session)
 
+class ElektroNASrun(ConfigListScreen,Screen):
+	skin = """
+		<screen name="ElektroNASrun" position="center,center" size="600,400" zPosition="1" title="Powerdown...">
+		<widget  source="TextTest" render="Label" position="10,0" size="580,400" font="Regular;20" transparent="1"  />
+		</screen>"""
+
+	def __init__(self, session, args = 0):
+		self.session = session
+		Screen.__init__(self, session)
+		self["TextTest"] = StaticText()
+		self["TextTest"].setText(_("please wait..."))
+		self.timer = eTimer()
+		self.timer.callback.append(self.DoNASrun)
+		self.timer.start(1000, True)
+
+		self["actions"] = ActionMap(["OkCancelActions"], 
+		{
+			"ok": self.cancel,
+			"cancel": self.cancel
+		}, -1)
+
+	def cancel(self):
+		self.close(False,self.session)
+
+	def DoNASrun(self):
+		ret = NASpowerdown(config.plugins.elektro.NASname.value, config.plugins.elektro.NASuser.value, config.plugins.elektro.NASpass.value, config.plugins.elektro.NAScommand.value, config.plugins.elektro.NASport.value)
+		self["TextTest"].setText(ret)
+
+class ElektroNAS(ConfigListScreen,Screen):
+	skin = """
+			<screen name="ElektroNAS" position="center,center" size="600,400" title="Elektro Power Save IP Telnet - Poweroff" >
+			<widget name="config" position="0,0" size="600,360" scrollbarMode="showOnDemand" />
+			
+			<widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
+			<widget name="key_green" position="140,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
+			<widget name="key_yellow" position="280,360" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/>
+			
+			<ePixmap name="red"    position="0,360"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green"  position="140,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="280,360" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" /> 
+		</screen>"""
+		
+	def __init__(self, session, args = 0):
+		self.session = session
+		Screen.__init__(self, session)
+		
+		self.list = []
+		self.list.append(getConfigListEntry(_("NAS/Server Name or IP"), config.plugins.elektro.NASname))
+		self.list.append(getConfigListEntry(_("Username"), config.plugins.elektro.NASuser))
+		self.list.append(getConfigListEntry(_("Password"), config.plugins.elektro.NASpass))
+		self.list.append(getConfigListEntry(_("Command [poweroff, shutdown -h,...]"), config.plugins.elektro.NAScommand))
+		self.list.append(getConfigListEntry(_("Telnet Port"), config.plugins.elektro.NASport))
+		self.list.append(getConfigListEntry(_("Waiting until poweroff"), config.plugins.elektro.NASwait))
+		
+		ConfigListScreen.__init__(self, self.list)
+		
+		self["key_red"] = Button(_("Cancel"))
+		self["key_green"] = Button(_("Ok"))
+		self["key_yellow"] = Button(_("Run"))
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+		{
+			"red": self.cancel,
+			"green": self.save,
+			"yellow": self.run,
+			"save": self.save,
+			"cancel": self.cancel,
+			"ok": self.save,
+		}, -2)
+
+	def run(self):
+		self.session.open(ElektroNASrun)
+#		self.session.open(WaitScreen)
+#		ret = NASpowerdown(config.plugins.elektro.NASname.value, config.plugins.elektro.NASuser.value, config.plugins.elektro.NASpass.value, config.plugins.elektro.NAScommand.value, config.plugins.elektro.NASport.value)
+#		self.session.close(WaitScreen)
+#		self.session.open(MessageBox, ret, MessageBox.TYPE_INFO)
+
+	def save(self):
+		#print "saving"
+		for x in self["config"].list:
+			x[1].save()
+		self.close(False,self.session)
+
+	def cancel(self):
+		#print "cancel"
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close(False,self.session)
+
 class Elektro(ConfigListScreen,Screen):
 	skin = """
 		<screen name ="Elektro" position="center,center" size="630,480" title="Elektro Power Save" >
@@ -345,6 +476,8 @@ class Elektro(ConfigListScreen,Screen):
 				_("Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode.")),
 			getConfigListEntry(_("Check IPs (press OK to edit)"), config.plugins.elektro.IPenable,
 				_("This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping.")),
+			getConfigListEntry(_("NAS Poweroff (press OK to edit)"), config.plugins.elektro.NASenable,
+				_("A NAS/Server can be shut down. Is required activated Telnet.")),
 			getConfigListEntry(_("Don't wake up"), config.plugins.elektro.dontwakeup,
 				_("Do not wake up at the end of next deep standby interval.")),
 			getConfigListEntry(_("Holiday mode (experimental)"), config.plugins.elektro.holiday,
@@ -405,6 +538,8 @@ class Elektro(ConfigListScreen,Screen):
 		sel = self["config"].getCurrent()[1]
 		if sel == config.plugins.elektro.IPenable:
 			self.session.open(ElektroIP)
+		if sel == config.plugins.elektro.NASenable:
+			self.session.open(ElektroNAS)
 
 	def changed(self):
 		for x in self.onChangedEntry:
@@ -691,10 +826,6 @@ class DoElektro(Screen):
 			#self.();
 			try:
 				self.session.openWithCallback(self.DoElektroSleep, MessageBox, _("Go to sleep now?"),type = MessageBox.TYPE_YESNO,timeout = 60)	
-				if config.plugins.elektro.profileShift.value == True:
-					config.plugins.elektro.profile.value = "1" if config.plugins.elektro.profile.value == "2" else "2"
-					config.plugins.elektro.profile.save()
-					self.setNextWakeuptime()
 			except:
 				#reset the timer and try again
 				self.TimerSleep.startLongTimer(elektrostarttime) 
@@ -704,6 +835,11 @@ class DoElektro(Screen):
 
 
 	def DoElektroSleep(self,retval):
+		config_NASenable = True if config.plugins.elektro.NASenable.value == config.plugins.elektro.profile.value else False
+		if config.plugins.elektro.profileShift.value == True:
+			config.plugins.elektro.profile.value = "1" if config.plugins.elektro.profile.value == "2" else "2"
+			config.plugins.elektro.profile.save()
+			self.setNextWakeuptime()
 		if (retval):
 			# os.system("wall 'Powermanagent does Deepsleep now'")
 			#  Notifications.AddNotification(TryQuitMainloop,1)
@@ -711,6 +847,9 @@ class DoElektro(Screen):
 			
 			global inTryQuitMainloop
 			if Standby.inTryQuitMainloop == False:
+				if config.plugins.elektro.NASenable.value == "true" or config_NASenable:
+					ret = NASpowerdown(config.plugins.elektro.NASname.value, config.plugins.elektro.NASuser.value, config.plugins.elektro.NASpass.value, config.plugins.elektro.NAScommand.value, config.plugins.elektro.NASport.value)
+				configfile.save()
 				self.session.open(Standby.TryQuitMainloop, 1) # <- This might not work reliably
 				#quitMainloop(1)
 		else:

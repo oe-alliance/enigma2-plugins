@@ -90,6 +90,10 @@ antiscrollbar/Makefile
 antiscrollbar/meta/Makefile
 antiscrollbar/src/Makefile
 
+ardmediathek/Makefile
+ardmediathek/meta/Makefile
+ardmediathek/src/Makefile
+
 audiosync/Makefile
 audiosync/img/Makefile
 audiosync/meta/Makefile
@@ -101,11 +105,6 @@ automaticcleanup/meta/Makefile
 automaticcleanup/po/Makefile
 automaticcleanup/src/Makefile
 
-automatictimerlistcleanup/Makefile
-automatictimerlistcleanup/meta/Makefile
-automatictimerlistcleanup/po/Makefile
-automatictimerlistcleanup/src/Makefile
-
 automaticvolumeadjustment/Makefile
 automaticvolumeadjustment/meta/Makefile
 automaticvolumeadjustment/po/Makefile
@@ -113,17 +112,18 @@ automaticvolumeadjustment/src/Makefile
 
 autoresolution/Makefile
 autoresolution/meta/Makefile
-autoresolution/src/Makefile
 autoresolution/po/Makefile
+autoresolution/src/Makefile
 
+autotimer/etc/Makefile
 autotimer/Makefile
 autotimer/meta/Makefile
 autotimer/po/Makefile
 autotimer/src/Makefile
 autotimer/src/webinterface/Makefile
 
-babelzapper/Makefile
 babelzapper/etc/Makefile
+babelzapper/Makefile
 babelzapper/meta/Makefile
 babelzapper/src/Makefile
 
@@ -172,10 +172,19 @@ eibox/po/Makefile
 eibox/src/Makefile
 eibox/src/images/Makefile
 
+elektro/Makefile
+elektro/meta/Makefile
+elektro/po/Makefile
+elektro/src/Makefile
+
 emailclient/Makefile
 emailclient/meta/Makefile
 emailclient/po/Makefile
 emailclient/src/Makefile
+
+emission/Makefile
+emission/meta/Makefile
+emission/src/Makefile
 
 epgrefresh/Makefile
 epgrefresh/meta/Makefile
@@ -288,6 +297,10 @@ moviecut/meta/Makefile
 moviecut/src_cc/Makefile
 moviecut/src_py/Makefile
 
+movieepg/Makefile
+movieepg/meta/Makefile
+movieepg/src/Makefile
+
 movielistpreview/Makefile
 movielistpreview/meta/Makefile
 movielistpreview/po/Makefile
@@ -313,10 +326,6 @@ movietagger/meta/Makefile
 movietagger/po/Makefile
 movietagger/src/Makefile
 
-movieepg/Makefile
-movieepg/meta/Makefile
-movieepg/src/Makefile
-
 mphelp/Makefile
 mphelp/meta/Makefile
 mphelp/src/Makefile
@@ -327,12 +336,18 @@ multirc/meta/Makefile
 
 mytube/Makefile
 mytube/meta/Makefile
+mytube/po/Makefile
 mytube/src/Makefile
 
 namezap/Makefile
 namezap/meta/Makefile
 namezap/po/Makefile
 namezap/src/Makefile
+
+ncidclient/Makefile
+ncidclient/meta/Makefile
+ncidclient/po/Makefile
+ncidclient/src/Makefile
 
 netcaster/Makefile
 netcaster/meta/Makefile
@@ -347,11 +362,6 @@ networkbrowser/src/Makefile
 networkbrowser/src/icons/Makefile
 networkbrowser/src/lib/Makefile
 networkbrowser/po/Makefile
-
-ncidclient/Makefile
-ncidclient/meta/Makefile
-ncidclient/po/Makefile
-ncidclient/src/Makefile
 
 ofdb/Makefile
 ofdb/meta/Makefile
@@ -429,12 +439,6 @@ rsdownloader/po/Makefile
 rsdownloader/src/Makefile
 rsdownloader/src/container/Makefile
 
-serienfilm/Makefile
-serienfilm/meta/Makefile
-serienfilm/po/Makefile
-serienfilm/src/Makefile
-serienfilm/src/icons/Makefile
-
 setpasswd/Makefile
 setpasswd/meta/Makefile
 setpasswd/po/Makefile
@@ -487,11 +491,6 @@ valixdcontrol/src/Makefile
 valixdcontrol/src/comp/Makefile
 valixdcontrol/src/data/Makefile
 
-virtualzap/Makefile
-virtualzap/meta/Makefile
-virtualzap/po/Makefile
-virtualzap/src/Makefile
-
 vlcplayer/Makefile
 vlcplayer/meta/Makefile
 vlcplayer/po/Makefile
@@ -510,19 +509,19 @@ weatherplugin/po/Makefile
 weatherplugin/src/Makefile
 weatherplugin/src/icons/Makefile
 
-webcamviewer/Makefile
-webcamviewer/meta/Makefile
-webcamviewer/src/Makefile
-
 webbouqueteditor/Makefile
-webbouqueteditor/src/Makefile
 webbouqueteditor/meta/Makefile
+webbouqueteditor/src/Makefile
 webbouqueteditor/src/web/Makefile
 webbouqueteditor/src/web-data/Makefile
 webbouqueteditor/src/WebChilds/Makefile
 webbouqueteditor/src/WebComponents/Makefile
 webbouqueteditor/src/WebComponents/Sources/Makefile
 webbouqueteditor/src/WebScreens/Makefile
+
+webcamviewer/Makefile
+webcamviewer/meta/Makefile
+webcamviewer/src/Makefile
 
 webinterface/Makefile
 webinterface/meta/Makefile

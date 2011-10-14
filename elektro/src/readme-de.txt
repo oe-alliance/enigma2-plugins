@@ -2,6 +2,7 @@
 Elektro Power Save for Dreambox 
 Version 1 & 2 by gutemine
 Version 3 by Morty <morty@gmx.net>
+Profiles, HDD, IP, NAS Mod by joergm6
 ====================================================
 Release infos 
 ====================================================
@@ -46,8 +47,7 @@ Release infos
 3.4.1 Fix: Multi-Language (locale) does not work 
 3.4.2 Enhance user interface (configuration menu)
 3.4.3 2 Profiles; waiting for responding IP addresses
-3.4.4 Use both profiles alternately (allows two time cycles per day)
-
+3.4.5 A NAS/server can be shutdown via Telnet
 
 1) Voraussetzung
 ----------------
@@ -120,7 +120,7 @@ Hauptmenü -> Erweiterungen -> Elektro Power Save
  - Teste IPs (drücke OK zum Editieren)
    Diese Liste von IP Adressen wird überprüft. Elektro wartet
    solange bis keine Adresse mehr auf Ping antwortet.
-
+   
  - Elektro Power Save aktivieren:
    Aktiviert das Plugin
    

@@ -3,12 +3,15 @@ ACLOCAL_AMFLAGS = -I m4
 SUBDIRS = \
 	aihdcontroler \
 	antiscrollbar \
+	ardmediathek \
 	audiosync \
 	automaticcleanup \
+	automatictimerlistcleanup \
 	automaticvolumeadjustment \
 	autoresolution \
 	autotimer \
 	babelzapper \
+	bitrateviewer \
 	bonjour \
 	cdinfo \
 	dreamirc \
@@ -19,6 +22,7 @@ SUBDIRS = \
 	ecasa \
 	eibox \
 	emailclient \
+	emission \
 	epgrefresh \
 	epgsearch \
 	filebrowser \
@@ -31,17 +35,23 @@ SUBDIRS = \
 	imdb \
 	kiddytimer \
 	lastfm \
+	letterbox \
 	mediadownloader \
+	menusort \
 	merlinepg \
 	merlinmusicplayer \
 	meteoitalia \
 	mosaic \
 	moviecut \
+	movieepg \
+	movielistpreview \
 	movieretitle \
 	moviesearch \
 	movietagger \
 	mphelp \
 	multirc \
+	mytube \
+	namezap \
 	ncidclient \
 	netcaster \
 	networkbrowser \
@@ -51,6 +61,9 @@ SUBDIRS = \
 	partnerbox \
 	passwordchanger \
 	permanentclock \
+	pipzap \
+	pluginhider \
+	pluginsort \
 	podcast \
 	porncenter \
 	quickbutton \
@@ -61,6 +74,7 @@ SUBDIRS = \
 	shoutcast \
 	showclock \
 	simplerss \
+	startupservice \
 	svdrp \
 	tageditor \
 	trafficinfo \
@@ -71,16 +85,18 @@ SUBDIRS = \
 	vlcplayer \
 	vps \
 	weatherplugin \
-	webcamviewer \
 	webbouqueteditor \
+	webcamviewer \
 	werbezapper \
+	widgets \
 	youtubeplayer \
+	yttrailer \
 	zaphistorybrowser \
 	zapstatistic \
-	zdfmediathek 
+	zdfmediathek \
 
 if DREAMBOX
-SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview
+SUBDIRS +=  fancontrol2 letterbox logomanager movielistpreview genuinedreambox
 endif
 
 if VUUNO
