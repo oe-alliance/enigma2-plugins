@@ -5,7 +5,6 @@ SUBDIRS = \
 	antiscrollbar \
 	audiosync \
 	automaticcleanup \
-	automatictimerlistcleanup \
 	automaticvolumeadjustment \
 	autoresolution \
 	autotimer \
