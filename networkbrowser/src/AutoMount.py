@@ -312,7 +312,7 @@ class AutoMount():
 			if sharedata['mountusing'] == 'fstab':
 				if sharedata['mounttype'] == 'nfs':
 					open('/etc/fstab.tmp', 'w').writelines([l for l in open('/etc/fstab').readlines() if sharedata['sharename'] not in l])
-					rename('/etc/fstab.tmp','/etc/fstab')
+					os.rename('/etc/fstab.tmp','/etc/fstab')
 					list.append('<fstab>\n')
 					list.append(' <nfs>\n')
 					list.append('  <mount>\n')
