@@ -227,7 +227,7 @@ class AutoMount():
 # 				print "[AutoMount.py] U/MOUNTCMD--->",self.command
 				self.MountConsole.eBatch(self.command, self.CheckMountPointFinished, [data, callback])
 			else:
-				self.CheckMountPointFinished(None,None, [data, callback])
+				self.CheckMountPointFinished([data, callback])
 
 	def CheckMountPointFinished(self, extra_args):
 # 		print "[AutoMount.py] CheckMountPointFinished"
