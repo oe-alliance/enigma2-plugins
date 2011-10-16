@@ -197,14 +197,13 @@ class EpgCenterList(GUIComponent):
 		offsetRight = self.maxWidth - 5 - 8 # 8 = timer pixmap width, 5 = border
 		secondLineColor = 0x00909090 # grey
 		border = int(config.plugins.merlinEpgCenter.listItemHeight.value) / 2
+		percent = 0
 		
 		if begin != None and duration != None:
 			timeString = strftime("%H:%M", localtime(begin)) + "-" + strftime("%H:%M", localtime(begin + duration))
 			now = int(time())
 			if now > begin:
 				percent = (now - begin) * 100 / duration
-			else:
-				percent = 0
 				
 			if self.mode == MULTI_EPG_NOW:
 				timeValue = (begin + duration - now) / 60 +1
