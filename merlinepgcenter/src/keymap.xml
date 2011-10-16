@@ -1,0 +1,112 @@
+<keymap>
+	<!-- TAB NAVIGATION ACTIONS -->
+	<map context="TabNavigationActions">
+		<key id="KEY_NEXT" mapto="nextTab" flags="m" />
+		<key id="KEY_PREVIOUS" mapto="prevTab" flags="m" />
+		<key id="KEY_1" mapto="1" flags="m" />
+		<key id="KEY_2" mapto="2" flags="m" />
+		<key id="KEY_3" mapto="3" flags="m" />
+		<key id="KEY_4" mapto="4" flags="m" />
+		<key id="KEY_5" mapto="5" flags="m" />
+		<key id="KEY_6" mapto="6" flags="m" />
+	</map>
+	
+	<!-- BASIC EPG ACTIONS -->
+	<map context="EpgTabBaseActions">
+		<key id="KEY_EXIT" mapto="exit" flags="m" />
+		<key id="KEY_UP" mapto="moveUp" flags="mr" />
+		<key id="KEY_DOWN" mapto="moveDown" flags="mr" />
+		<key id="KEY_LEFT" mapto="pageUp" flags="mr" />
+		<key id="KEY_RIGHT" mapto="pageDown" flags="mr" />
+		<key id="KEY_CHANNELUP" mapto="nextBouquet" flags="m" />
+		<key id="KEY_CHANNELDOWN" mapto="prevBouquet" flags="m" />
+		<key id="KEY_RADIO" mapto="showRadio" flags="m" />
+		<key id="KEY_TV" mapto="showTv" flags="m" />
+		<key id="KEY_INFO" mapto="showEventInfo" flags="m" />
+		<key id="KEY_OK" mapto="ok" flags="m" /> <!-- TODO nicht bei EPGSEARCH_RESULT setzen -->
+	</map>
+	
+	<!-- CONFIG LIST ACTIONS (EPGSEARCH_HISTORY / SETTINGS)-->
+	<map context="EpgHistoryActions">
+		<key id="KEY_EXIT" mapto="exit" flags="m" />
+		<key id="KEY_OK" mapto="ok" flags="m" />
+		<key id="KEY_UP" mapto="moveUp" flags="mr" />
+		<key id="KEY_DOWN" mapto="moveDown" flags="mr" />
+		<key id="KEY_LEFT" mapto="pageUp" flags="mr" />
+		<key id="KEY_RIGHT" mapto="pageDown" flags="mr" />
+	</map>
+	
+	<!-- EPGSEARCH MANUAL ACTIONS-->
+	<map context="EpgManualSearchActions">
+		<key id="KEY_EXIT" mapto="exit" flags="m" />
+		<key id="KEY_OK" mapto="ok" flags="m" />
+		<key id="KEY_1" mapto="1" flags="m" />
+		<key id="KEY_2" mapto="2" flags="m" />
+		<key id="KEY_3" mapto="3" flags="m" />
+		<key id="KEY_4" mapto="4" flags="m" />
+		<key id="KEY_5" mapto="5" flags="m" />
+		<key id="KEY_6" mapto="6" flags="m" />
+		<key id="KEY_7" mapto="7" flags="m" />
+		<key id="KEY_8" mapto="8" flags="m" />
+		<key id="KEY_9" mapto="9" flags="m" />
+		<key id="KEY_0" mapto="0" flags="m" />
+		<key id="KEY_LEFT" mapto="left" flags="mr" />
+		<key id="KEY_RIGHT" mapto="right" flags="mr" />
+		<key id="KEY_PREVIOUS" mapto="previous" flags="mr" />
+		<key id="KEY_NEXT" mapto="next" flags="mr" />
+	</map>
+	
+	<!-- TODO KEYBOARD ACTIONS
+			"gotAsciiCode": self.keyGotAscii,
+			"home": self.keyHome,
+			"end": self.keyEnd,
+			"toggleOverwrite": self.keyToggleOW,
+	-->
+	
+	<!-- KEY RED ACTION -->
+	<map context="EpgRedActions">
+		<key id="KEY_RED" mapto="red" flags="m" />
+	</map>
+	
+	<!-- KEY GREEN ACTION -->
+	<map context="EpgGreenActions">
+		<key id="KEY_GREEN" mapto="green" flags="m" />
+	</map>
+	
+	<!-- KEY BLUE ACTION -->
+	<map context="EpgBlueActions">
+		<key id="KEY_BLUE" mapto="blue" flags="m" />
+	</map>
+	
+	<!-- KEY YELLOW ACTION -->
+	<map context="EpgYellowActions">
+		<key id="KEY_YELLOW" mapto="yellow" flags="m" />
+	</map>
+	
+	<!-- SETTINGS ACTIONS -->
+	<map context="SettingsActions">
+		<key id="KEY_NEXT" mapto="nextTab" flags="m" />
+		<key id="KEY_PREVIOUS" mapto="prevTab" flags="m" />
+		<key id="KEY_1" mapto="1" flags="m" />
+		<key id="KEY_2" mapto="2" flags="m" />
+		<key id="KEY_3" mapto="3" flags="m" />
+		<key id="KEY_4" mapto="4" flags="m" />
+		<key id="KEY_5" mapto="5" flags="m" />
+		<key id="KEY_6" mapto="6" flags="m" />
+		<key id="KEY_7" mapto="7" flags="m" />
+		<key id="KEY_8" mapto="8" flags="m" />
+		<key id="KEY_9" mapto="9" flags="m" />
+		<key id="KEY_0" mapto="0" flags="m" />
+		<key id="KEY_EXIT" mapto="exit" flags="m" />
+		<key id="KEY_UP" mapto="moveUp" flags="mr" />
+		<key id="KEY_DOWN" mapto="moveDown" flags="mr" />
+		<key id="KEY_LEFT" mapto="left" flags="mr" />
+		<key id="KEY_RIGHT" mapto="right" flags="mr" />
+	</map>
+	
+	<!-- TOGGLE CONFIG ACTIONS -->
+	<map context="ToggleConfigActions">
+		<key id="KEY_MENU" mapto="toggleConfig" flags="m" />
+	</map>
+</keymap>
+

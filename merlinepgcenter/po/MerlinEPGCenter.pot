@@ -1,0 +1,316 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-10-09 11:05+CEST\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: ConfigTabs.py:70
+msgid "single line style"
+msgstr ""
+
+#: ConfigTabs.py:71
+msgid "with short description"
+msgstr ""
+
+#: ConfigTabs.py:80
+msgid "simple"
+msgstr ""
+
+#: ConfigTabs.py:81
+msgid "gradient"
+msgstr ""
+
+#: ConfigTabs.py:82
+msgid "four parts"
+msgstr ""
+
+#: ConfigTabs.py:127
+msgid "Prime time:"
+msgstr ""
+
+#: ConfigTabs.py:128
+msgid "Remember last tab:"
+msgstr ""
+
+#: ConfigTabs.py:129
+msgid "Select running service on start:"
+msgstr ""
+
+#: ConfigTabs.py:130
+msgid "Replace InfoBar single and multi EPG:"
+msgstr ""
+
+#: ConfigTabs.py:131
+msgid "Show text input help for epg search:"
+msgstr ""
+
+#: ConfigTabs.py:132
+msgid "Use skin:"
+msgstr ""
+
+#: ConfigTabs.py:133
+msgid "Limit search results to bouquet services:"
+msgstr ""
+
+#: ConfigTabs.py:134
+msgid "Exit on TV <-> Radio switch:"
+msgstr ""
+
+#: ConfigTabs.py:135
+msgid "Show timer messages:"
+msgstr ""
+
+#: ConfigTabs.py:148
+msgid "Show list numbers:"
+msgstr ""
+
+#: ConfigTabs.py:149
+msgid "Show picons:"
+msgstr ""
+
+#: ConfigTabs.py:151
+msgid "Use picons (50x30) from:"
+msgstr ""
+
+#: ConfigTabs.py:152
+msgid "Show service name:"
+msgstr ""
+
+#: ConfigTabs.py:153
+msgid "Show duration:"
+msgstr ""
+
+#: ConfigTabs.py:154
+msgid "Show multi colored begin/remain times:"
+msgstr ""
+
+#: ConfigTabs.py:155
+msgid "Increase list item height:"
+msgstr ""
+
+#: ConfigTabs.py:156
+msgid "List style:"
+msgstr ""
+
+#: ConfigTabs.py:157
+msgid "Progress bar style:"
+msgstr ""
+
+#: ConfigTabs.py:158
+msgid "Number of upcoming events to show:"
+msgstr ""
+
+#: ConfigTabs.py:182
+msgid "Show event information:"
+msgstr ""
+
+#: ConfigTabs.py:184
+msgid "Show video picture:"
+msgstr ""
+
+#: ConfigTabs.py:185
+msgid "Show blinking picon for running timers:"
+msgstr ""
+
+#: ConfigTabs.py:186
+msgid "Show short description:"
+msgstr ""
+
+#: EpgCenterList.py:892
+msgid "waiting"
+msgstr ""
+
+#: EpgCenterList.py:895
+msgid "about to start"
+msgstr ""
+
+#: EpgCenterList.py:899
+msgid "zapped"
+msgstr ""
+
+#: EpgCenterList.py:901
+msgid "recording..."
+msgstr ""
+
+#: EpgCenterList.py:904 EpgCenterList.py:910
+msgid "done!"
+msgstr ""
+
+#: EpgCenterList.py:907
+msgid "<unknown>"
+msgstr ""
+
+#: EpgCenterList.py:914
+msgid "disabled"
+msgstr ""
+
+#: HelperFunctions.py:123
+msgid "Today"
+msgstr ""
+
+#: HelperFunctions.py:126
+msgid "Tomorrow"
+msgstr ""
+
+#: HelperFunctions.py:129
+msgid "Friday"
+msgstr ""
+
+#: HelperFunctions.py:129
+msgid "Monday"
+msgstr ""
+
+#: HelperFunctions.py:129
+msgid "Saturday"
+msgstr ""
+
+#: HelperFunctions.py:129
+msgid "Sunday"
+msgstr ""
+
+#: HelperFunctions.py:129
+msgid "Thursday"
+msgstr ""
+
+#: HelperFunctions.py:129
+msgid "Tuesday"
+msgstr ""
+
+#: HelperFunctions.py:129
+msgid "Wednesday"
+msgstr ""
+
+#: HelperFunctions.py:134
+msgid "Unknown date"
+msgstr ""
+
+#: HelperFunctions.py:262
+msgid ""
+"A timer failed to record!\n"
+"Disable TV and try again?\n"
+msgstr ""
+
+#: HelperFunctions.py:266
+msgid ""
+"In order to record a timer, the TV was switched to the recording service!\n"
+msgstr ""
+
+#: HelperFunctions.py:313
+msgid ""
+"A finished record timer wants to set your\n"
+"Dreambox to standby. Do that now?"
+msgstr ""
+
+#: HelperFunctions.py:319
+msgid ""
+"A finished record timer wants to shut down\n"
+"your Dreambox. Shutdown now?"
+msgstr ""
+
+#: MerlinEPGCenter.py:163
+msgid "Search for:"
+msgstr ""
+
+#: MerlinEPGCenter.py:174
+msgid "Now"
+msgstr ""
+
+#: MerlinEPGCenter.py:174
+msgid "Prime Time"
+msgstr ""
+
+#: MerlinEPGCenter.py:174
+msgid "Search"
+msgstr ""
+
+#: MerlinEPGCenter.py:174
+msgid "Single"
+msgstr ""
+
+#: MerlinEPGCenter.py:174
+msgid "Timer"
+msgstr ""
+
+#: MerlinEPGCenter.py:174
+msgid "Upcoming"
+msgstr ""
+
+#: MerlinEPGCenter.py:232
+msgid "Event Info"
+msgstr ""
+
+#: MerlinEPGCenter.py:232
+msgid "General"
+msgstr ""
+
+#: MerlinEPGCenter.py:232
+msgid "Lists"
+msgstr ""
+
+#: MerlinEPGCenter.py:357
+msgid "Similar"
+msgstr ""
+
+#: MerlinEPGCenter.py:818
+msgid "Outdated on"
+msgstr ""
+
+#: MerlinEPGCenter.py:820
+msgid "Outdated off"
+msgstr ""
+
+#: MerlinEPGCenter.py:828
+msgid "Add"
+msgstr ""
+
+#: MerlinEPGCenter.py:830
+msgid "Remove"
+msgstr ""
+
+#: MerlinEPGCenter.py:831
+msgid "OK"
+msgstr ""
+
+#: MerlinEPGCenter.py:832
+msgid "New Search"
+msgstr ""
+
+#: MerlinEPGCenter.py:842
+msgid "Remove timer"
+msgstr ""
+
+#: MerlinEPGCenter.py:845 MerlinEPGCenter.py:853
+msgid "Add timer"
+msgstr ""
+
+#: MerlinEPGCenter.py:1037
+msgid "Edit Off"
+msgstr ""
+
+#: MerlinEPGCenter.py:1041
+msgid "Edit On"
+msgstr ""
+
+#: MerlinEPGCenter.py:1059
+msgid "return"
+msgstr ""
+
+#: MerlinEPGCenter.py:1275
+msgid "Set search term"
+msgstr ""
+
+#: plugin.py:93
+msgid "Control your EPG and more..."
+msgstr ""
+

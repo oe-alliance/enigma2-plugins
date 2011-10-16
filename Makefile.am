@@ -42,6 +42,7 @@ SUBDIRS = \
 	mediadownloader \
 	menusort \
 	merlinepg \
+	merlinepgcenter \
 	merlinmusicplayer \
 	meteoitalia \
 	mosaic \

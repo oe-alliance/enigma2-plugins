@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="Software" />
+	  </prerequisites>
+          <info>
+                    <author>Shaderman</author>
+                    <name>MerlinEPGCenter</name>
+                    <packagename>enigma2-plugin-extensions-merlinepgcenter</packagename>
+                    <shortdescription>more than just an EPG...</shortdescription>
+                    <description>more than just an EPG...</description>
+                    <screenshot/>		    
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-merlinepgcenter" />
+	  </files>
+</default>
