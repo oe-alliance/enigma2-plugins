@@ -270,6 +270,10 @@ class EPGRefreshSettingsResource(resource.Resource):
   <e2settingvalue>%s</e2settingvalue>
  </e2setting>
  <e2setting>
+  <e2settingname>config.plugins.epgrefresh.lastscan</e2settingname>
+  <e2settingvalue>%d</e2settingvalue>
+ </e2setting>
+ <e2setting>
   <!-- deprecated, pending removal -->
   <e2settingname>config.plugins.epgrefresh.background</e2settingname>
   <e2settingvalue>%s</e2settingvalue>
@@ -298,6 +302,7 @@ class EPGRefreshSettingsResource(resource.Resource):
 				config.plugins.epgrefresh.force.value,
 				config.plugins.epgrefresh.wakeup.value,
 				config.plugins.epgrefresh.parse_autotimer.value,
+				config.plugins.epgrefresh.lastscan.value,
 				config.plugins.epgrefresh.adapter.value in ("pip", "pip_hidden"),
 				config.plugins.epgrefresh.adapter.value,
 				canDoBackgroundRefresh,
