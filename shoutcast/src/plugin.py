@@ -781,10 +781,10 @@ class SHOUTcastWidget(Screen):
 				self.summaries.setText(title)
 			else:
 				print "[SHOUTcast] Ignoring useless updated info provided by streamengine!"
-		if ev == 6 or (ev > 8 and ev != 17):
-			print "[SHOUTcast] Abnormal event %s from stream, so stop playing!" % ev
-			self["statustext"].setText(_("Abnormal event from stream, aborting!"))
-			self.session.nav.stopService()
+		#if ev == 6 or (ev > 8 and ev != 17):
+		#	print "[SHOUTcast] Abnormal event %s from stream, so stop playing!" % ev
+		#	self["statustext"].setText(_("Abnormal event from stream, aborting!"))
+		#	self.session.nav.stopService()
 			
 	def playServiceStream(self, url):
 		self.currPlay = None
